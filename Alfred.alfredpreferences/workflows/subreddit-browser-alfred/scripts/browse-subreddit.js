@@ -103,9 +103,36 @@ function getHackernewsPosts() {
 	return hits;
 }
 
+//──────────────────────────────────────────────────────────────────────────────
+
+/** @typedef {object} redditPost
+ * @property {string} kind
+ * @property {object} data
+ * @property {string} data.subreddit
+ * @property {string} data.title
+ * @property {string} data.name
+ * @property {boolean} data.is_reddit_media_domain
+ * @property {string} data.link_flair_text
+ * @property {number} data.score
+ * @property {boolean} data.is_self
+ * @property {string} data.domain
+ * @property {null} data.view_count
+ * @property {boolean} data.archived
+ * @property {boolean} data.over_18
+ * @property {string} data.id
+ * @property {string} data.author
+ * @property {null} data.discussion_type
+ * @property {number} data.num_comments
+ * @property {string} data.permalink
+ * @property {boolean} data.stickied
+ * @property {string} data.url
+ * @property {number} data.num_crossposts
+ * @property {string} data.media.type
+ */
+
 /** @param {string} subredditName */
 function getRedditPosts(subredditName) {
-	// HACK yes, curl is blocked only until you change the user agent, lol
+	// HACK curl is blocked only until you change the user agent, lol
 	const curlCommand = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/new.json"`;
 	const response = JSON.parse(app.doShellScript(curlCommand));
 	if (response.error) {
@@ -117,7 +144,7 @@ function getRedditPosts(subredditName) {
 	if (!fileExists(iconPath)) iconPath = "icon.png"; // not cached
 
 	/** @type AlfredItem[] */
-	const redditPosts = response.data.children.map((/** @type {{ data: any; }} */ data) => {
+	const redditPosts = response.data.children.map((/** @type {redditPost} */ data) => {
 		const item = data.data;
 		const category = item.link_flair_text ? `[${item.link_flair_text}]` : "";
 		const comments = item.num_comments || 0;

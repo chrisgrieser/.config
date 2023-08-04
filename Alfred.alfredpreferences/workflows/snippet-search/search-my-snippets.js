@@ -47,7 +47,7 @@ function run() {
 				let url;
 				if (snipObj.description) {
 					descHasUrl = snipObj.description.match(/https?:\/\/[^" ]+/);
-					url = descHasUrl[0];
+					url = descHasUrl ? descHasUrl[0] : "";
 				}
 
 				return {
@@ -58,8 +58,9 @@ function run() {
 					mods: {
 						alt: { arg: body },
 						cmd: {
-							valid: descHasUrl,
+							valid: Boolean(descHasUrl),
 							arg: url,
+							subtitle: "⌘: Open " + url,
 						},
 					},
 					uid: `${fileName}/${snippet}`,

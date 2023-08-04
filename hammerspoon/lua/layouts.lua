@@ -65,7 +65,6 @@ local function workLayout()
 	closeAllFinderWins()
 
 	-- open
-	u.quitApp("AltTab")
 	local appsToOpen = { "Discord", env.browserApp, env.mailApp, env.tickerApp }
 	if getWeekday() ~= "Sat" and getWeekday() ~= "Sun" then table.insert(appsToOpen, "Slack") end
 	u.openApps(appsToOpen)
@@ -75,12 +74,6 @@ local function workLayout()
 			wu.moveResize(win, wu.pseudoMax)
 		end)
 	end
-	-- FIX duplicate window issues with AltTab
-	LayoutTimer = hs.timer
-		.waitUntil(function() return u.appRunning("Discord") end, function()
-			u.runWithDelays(0.3, function() u.openApps("AltTab") end)
-		end, 0.1)
-		:start()
 
 	-- finish
 	sidenotes.reminderToSidenotes()
