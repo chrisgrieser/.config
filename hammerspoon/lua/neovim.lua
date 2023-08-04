@@ -71,7 +71,7 @@ u.urischeme("neovide-post-startup", function()
 		local size = env.isProjector() and wu.maximized or wu.pseudoMax
 		wu.moveResize(neovideWin, size)
 	end)
-	-- check for: https://github.com/neovide/neovide/issues/1595
+	-- check for too many processes https://github.com/neovide/neovide/issues/1595
 	u.runWithDelays(2, function()
 		local neovideProcs = hs.execute("pgrep -x 'nvim' | wc -l"):match("%d+")
 		if neovideProcs ~= "1" then u.notify(neovideProcs .. " nvim processes running") end

@@ -71,7 +71,7 @@ function run() {
 	let iconPath = `${$.getenv("alfred_workflow_data")}/${subredditName}.png`;
 	if (!fileExists(iconPath)) iconPath = "icon.png"; // not cached
 
-	// GET CACHE
+	// GUARD 1: GET CACHE
 	const subredditCache = `${$.getenv("alfred_workflow_cache")}/${subredditName}.json`;
 	/** @type AlfredItem[] */
 	let redditPosts;
@@ -80,6 +80,14 @@ function run() {
 		return JSON.stringify({ items: redditPosts });
 	}
 
+	// GUARD 2: USE HACKERNEWS
+	if (subredditName === "hackernews") {
+		const hackernewsPosts = getHackernewsPosts();
+		return JSON.stringify({ items: hackernewsPosts });
+	}
+
+	//───────────────────────────────────────────────────────────────────────────
+
 	// LOAD NEW POSTS
 	console.log("Writing new cache for r/" + subredditName);
 
@@ -87,6 +95,7 @@ function run() {
 	const curlCommand = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/new.json"`;
 	const response = JSON.parse(app.doShellScript(curlCommand));
 
+	// GUARD 3: no response from reddit API
 	if (response.error) {
 		return JSON.stringify({ items: [{ title: response.message, subtitle: response.error }] });
 	}

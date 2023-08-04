@@ -9,7 +9,12 @@ next_subreddit=$(echo "$subreddits" |
 
 # if already last subreddit, go back to first subreddit
 if [[ "$next_subreddit" == "$current_subreddit" ]]; then
-	next_subreddit=$(echo "$subreddits" | head -n1)
+	# shellcheck disable=2154
+	if [[ "$add_hackernews" == "1" ]]; then
+		next_subreddit="hackernews"
+	else
+		next_subreddit=$(echo "$subreddits" | head -n1)
+	fi
 fi
 
 # pass to Alfred-loop

@@ -28,34 +28,42 @@ function cacheSubredditIcon(subredditName) {
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const listOfSubreddits = $.getenv("subreddits").split("\n");
-	const addHackernews = $.getenv("add_hackernews") === "1"
-	if (addHackernews) listOfSubreddits.push("hackernews");
-
 	/** @type AlfredItem[] */
-	const subreddits = listOfSubreddits.map((subredditName) => {
-		let subtitle = "";
+	const subreddits = $.getenv("subreddits")
+		.split("\n")
+		.map((subredditName) => {
+			let subtitle = "";
 
-		// cache subreddit image
-		let iconPath = `${$.getenv("alfred_workflow_data")}/${subredditName}.png`;
+			// cache subreddit image
+			let iconPath = `${$.getenv("alfred_workflow_data")}/${subredditName}.png`;
+			if (!fileExists(iconPath)) {
+				const error = cacheSubredditIcon(subredditName);
+				console.log("Error:", error);
+				// if icon cannot be cached, use default icon
+				if (!fileExists(iconPath)) iconPath = "icon.png";
 
-		if (!fileExists(iconPath)) {
-			const error = cacheSubredditIcon(subredditName);
-			console.log("Error:", error);
-			// if icon cannot be cached, use default icon
-			if (!fileExists(iconPath)) iconPath = "icon.png";
+				// only check for subreddit existence on icon caching, to reduce
+				// number of requests
+				if (error === 404) subtitle = "⚠️ subreddit not found";
+			}
 
-			// only check for subreddit existence on icon caching, to reduce
-			// number of requests
-			if (error === 404) subtitle = "⚠️ subreddit not found";
-		}
+			return {
+				title: `r/${subredditName}`,
+				subtitle: subtitle,
+				arg: subredditName,
+				icon: { path: iconPath },
+			};
+		});
 
-		return {
-			title: `r/${subredditName}`,
-			subtitle: subtitle,
-			arg: subredditName,
-			icon: { path: iconPath },
-		};
-	});
+	// add hackernews as pseudo-subreddit
+	const addHackernews = $.getenv("add_hackernews") === "1";
+	if (addHackernews) {
+		subreddits.push({
+			title: "Hackernews",
+			arg: "hackernews",
+			icon: { path: "hackernews.png" },
+		});
+	}
+
 	return JSON.stringify({ items: subreddits });
 }
