@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=./schema/karabiner-mod.json
 # INFO has to come before finder-vim-mode.yaml itself
 rules:
   - description: "Addons for Alfred"

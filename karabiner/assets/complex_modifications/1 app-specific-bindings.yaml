@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=./schema/karabiner-mod.json
 title: "App-specific-Bindings"
 rules:
   - description: "(Apps) Zoom"

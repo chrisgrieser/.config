@@ -22,10 +22,7 @@
                     }
                 }
             },
-            "required": [
-                "rules",
-                "title"
-            ],
+            "required": [],
             "title": "KarabinerModSchema"
         },
         "Anchor": {
@@ -64,18 +61,19 @@
                 "type": {
                     "$ref": "#/definitions/ConditionType"
                 },
-                "name": {
-                    "$ref": "#/definitions/ConditionName"
+
+                "bundle_identifiers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 },
-                "value": {
-                    "type": "boolean"
-                }
+                "name": {
+                    "type": "string"
+                },
+                "value": {}
             },
-            "required": [
-                "name",
-                "type",
-                "value"
-            ],
+            "required": [],
             "title": "AnchorCondition"
         },
         "AnchorManipulator": {
@@ -122,10 +120,7 @@
                     }
                 }
             },
-            "required": [
-                "from",
-                "type"
-            ],
+            "required": [],
             "title": "AnchorManipulator"
         },
         "PurpleCondition": {
@@ -136,7 +131,7 @@
                     "$ref": "#/definitions/ConditionType"
                 },
                 "name": {
-                    "$ref": "#/definitions/ConditionName"
+                    "type": "string"
                 },
                 "value": {
                     "type": "boolean"
@@ -166,9 +161,7 @@
                     }
                 }
             },
-            "required": [
-                "type"
-            ],
+            "required": [],
             "title": "PurpleCondition"
         },
         "Identifier": {
@@ -179,9 +172,7 @@
                     "type": "integer"
                 }
             },
-            "required": [
-                "vendor_id"
-            ],
+            "required": [],
             "title": "Identifier"
         },
         "InputSource": {
@@ -192,9 +183,7 @@
                     "$ref": "#/definitions/Language"
                 }
             },
-            "required": [
-                "language"
-            ],
+            "required": [],
             "title": "InputSource"
         },
         "PurpleFrom": {
@@ -231,9 +220,7 @@
                     }
                 }
             },
-            "required": [
-                "mandatory"
-            ],
+            "required": [],
             "title": "Modifiers"
         },
         "Simultaneous": {
@@ -304,9 +291,7 @@
                     "$ref": "#/definitions/InputSourceID"
                 }
             },
-            "required": [
-                "input_source_id"
-            ],
+            "required": [],
             "title": "SelectInputSource"
         },
         "SetNotificationMessage": {
@@ -320,10 +305,7 @@
                     "$ref": "#/definitions/Text"
                 }
             },
-            "required": [
-                "id",
-                "text"
-            ],
+            "required": [],
             "title": "SetNotificationMessage"
         },
         "SetVariable": {
@@ -337,10 +319,7 @@
                     "type": "boolean"
                 }
             },
-            "required": [
-                "name",
-                "value"
-            ],
+            "required": [],
             "title": "SetVariable"
         },
         "ToAfterKeyUp": {
@@ -351,9 +330,7 @@
                     "$ref": "#/definitions/SelectInputSource"
                 }
             },
-            "required": [
-                "select_input_source"
-            ],
+            "required": [],
             "title": "ToAfterKeyUp"
         },
         "ToIfHeldDown": {
@@ -407,9 +384,7 @@
                     }
                 }
             },
-            "required": [
-                "manipulators"
-            ],
+            "required": [],
             "title": "Rule"
         },
         "RuleManipulator": {
@@ -426,6 +401,11 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/PurpleTo"
+                    }
+                },
+                "parameters": {
+                    "basic.simultaneous_threshold_milliseconds": {
+                        "type": "integer"
                     }
                 },
                 "conditions": {
@@ -447,10 +427,7 @@
                     }
                 }
             },
-            "required": [
-                "from",
-                "type"
-            ],
+            "required": [],
             "title": "RuleManipulator"
         },
         "FluffyCondition": {
@@ -460,39 +437,67 @@
                 "type": {
                     "$ref": "#/definitions/ConditionType"
                 },
+                "input_sources": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/InputSource"
+                    }
+                },
                 "bundle_identifiers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "name": {
+                    "type": "string"
+                },
+                "value": {},
+                "file_paths": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     }
                 }
             },
-            "required": [
-                "bundle_identifiers",
-                "type"
-            ],
+            "required": [],
             "title": "FluffyCondition"
         },
         "FluffyFrom": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
+                "pointing_button": {
+                    "type": "string"
+                },
                 "key_code": {
                     "type": "string"
+                },
+                "simultaneous": {
+                    "key_code": {
+                        "type": "string"
+                    }
                 },
                 "modifiers": {
                     "$ref": "#/definitions/Modifiers"
                 }
             },
-            "required": [
-                "key_code"
-            ],
+            "required": [],
             "title": "FluffyFrom"
         },
         "PurpleTo": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
+                "set_variable": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "value": {}
+                },
+                "set_notification_message": {
+                    "$ref": "#/definitions/SetNotificationMessage"
+                },
                 "key_code": {
                     "type": "string"
                 },
@@ -526,9 +531,7 @@
                     "$ref": "#/definitions/SetMouseCursorPosition"
                 }
             },
-            "required": [
-                "set_mouse_cursor_position"
-            ],
+            "required": [],
             "title": "SoftwareFunction"
         },
         "SetMouseCursorPosition": {
@@ -545,19 +548,40 @@
                     "type": "integer"
                 }
             },
-            "required": [
-                "screen",
-                "x",
-                "y"
-            ],
+            "required": [],
             "title": "SetMouseCursorPosition"
         },
         "ToIf": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
+                "hold_down_milliseconds": {
+                    "type": "integer"
+                },
                 "shell_command": {
                     "type": "string"
+                },
+                "key_code": {
+                    "type": "string"
+                },
+                "set_variable": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "value": {}
+                },
+                "set_notification_message": {
+                    "$ref": "#/definitions/SetNotificationMessage"
+                },
+                "pointing_button": {
+                    "type": "string"
+
+                },
+                "modifiers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Mandatory"
+                    }
                 }
             },
             "required": [],
@@ -602,28 +626,13 @@
             "title": "InputSourceID"
         },
         "ID": {
-            "type": "string",
-            "enum": [
-                "leader-notice"
-            ],
-            "title": "ID"
+            "type": "string"
         },
         "Text": {
-            "type": "string",
-            "enum": [
-                "",
-                "🔺 Leader"
-            ],
-            "title": "Text"
+            "type": "string"
         },
         "SetVariableName": {
-            "type": "string",
-            "enum": [
-                "LEADER_ACTIVE",
-                "FINDER_INSERT_MODE",
-                "FINDER_ALFRED_ACTIVE"
-            ],
-            "title": "SetVariableName"
+            "type": "string"
         },
         "ManipulatorType": {
             "type": "string",

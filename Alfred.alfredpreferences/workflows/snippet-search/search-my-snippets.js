@@ -28,12 +28,14 @@ function run() {
 	const snippetDir = $.getenv("snippetDir");
 
 	/** @type{AlfredItem[]} */
-	const jsonArray = app
+	const snippets = [];
+
+	app
 		.doShellScript(`find "${snippetDir}" -type f -name "*.json"`)
 		.split("\r")
 		.filter((path) => !path.endsWith("package.json"))
 		// iterate through files
-		.map((snippetFile) => {
+		.forEach((snippetFile) => {
 			const fileName = snippetFile.split("/").pop().slice(0, -5);
 			const snippetJson = JSON.parse(readFile(snippetFile));
 
@@ -50,7 +52,7 @@ function run() {
 					url = descHasUrl ? descHasUrl[0] : "";
 				}
 
-				return {
+				snippets.push({
 					title: snippet,
 					subtitle: fileName + (descHasUrl ? " 🔗" : ""),
 					match: alfredMatcher(fileName) + alfredMatcher(snippet),
@@ -64,9 +66,9 @@ function run() {
 						},
 					},
 					uid: `${fileName}/${snippet}`,
-				};
+				})
 			}
 		});
 
-	return JSON.stringify({ items: jsonArray });
+	return JSON.stringify({ items: snippets });
 }
