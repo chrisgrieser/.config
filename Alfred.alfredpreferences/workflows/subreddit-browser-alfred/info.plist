@@ -417,10 +417,10 @@
 	<key>readme</key>
 	<string>## Usage
 - `sub`: Select subreddit.
-- `rr`: Browse the current subreddit
-	- &lt;kbd&gt;⏎&lt;/kbd&gt;: Open.
+- `rr`: Browse the current subreddit.
+	- &lt;kbd&gt;⏎&lt;/kbd&gt;: Open Post.
 	- &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Switch to next subreddit.
-	- &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy URL to clipboard.
+	- &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy URL of post to clipboard.
 
 No reddit account of any sort is needed.
 

@@ -56,6 +56,7 @@ newCommand("Curl", function(ctx)
 	local timeoutSecs = 8
 	local response = fn.system(("curl --silent --max-time %s '%s'"):format(timeoutSecs, url))
 	local lines = vim.split(response, "\n")
+	table.insert(lines, 1, "<!-- " .. url .. " -->")
 	local ft = url:match("%.(%a)$") or "html"
 
 	cmd.enew()
