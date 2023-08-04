@@ -75,23 +75,6 @@ wt.on("gui-startup", function(cmd)
 end)
 
 --------------------------------------------------------------------------------
--- BETTER PASTE
-
-local function autoQuotePastedUrls(window, pane)
-	local pasteCmd = "pbpaste" -- change this if not on macOS
-	local success, clipb, stderr = wt.run_child_process { pasteCmd }
-	if not success then
-		local msg = "pbpaste failed: " .. stderr
-		wt.log_info(msg)
-		window:toast_notification(msg, nil, 4000)
-		return
-	end
-
-	if clipb:find("^https?://") then clipb = '"' .. clipb .. '"' end
-	pane:paste(clipb)
-end
-
---------------------------------------------------------------------------------
 -- KEYBINDINGS
 local keybindings = {
 	-- Actions: https://wezfurlong.org/wezterm/config/lua/keyassignment/index.html#available-key-assignments
@@ -107,7 +90,7 @@ local keybindings = {
 	{ key = "p", mods = "CMD", action = act.ActivateCommandPalette },
 	{ key = "k", mods = "CMD", action = act.ClearScrollback("ScrollbackAndViewport") },
 	{ key = "Enter", mods = "CTRL", action = act.ActivateTabRelative(1) },
-	{ key = "v", mods = "CMD", action = actFun(autoQuotePastedUrls) },
+	{ key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
 	{ key = "PageDown", mods = "", action = act.ScrollByPage(0.8) },
 	{ key = "PageUp", mods = "", action = act.ScrollByPage(-0.8) },
 
