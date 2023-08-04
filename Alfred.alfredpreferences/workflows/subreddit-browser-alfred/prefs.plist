@@ -9,7 +9,8 @@
 	<key>subreddits</key>
 	<string>neovim
 macapps
-commandline</string>
+commandline
+ObsidianMD</string>
 	<key>use_dstill_ai</key>
 	<true/>
 </dict>

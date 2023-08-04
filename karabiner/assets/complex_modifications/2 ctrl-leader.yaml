@@ -293,15 +293,8 @@ rules:
         from: { key_code: r }
         conditions: [*leader-active]
         to:
-          - shell_command: open 'https://www.reddit.com/'
-          - *deactivate-leader
-          - *remove-notice
-      # [u]: hackernews
-      - type: basic
-        from: { key_code: u }
-        conditions: [*leader-active]
-        to:
-          - shell_command: open 'https://dstill.ai/hackernews'
+          - shell_command: |
+              osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "browse" in workflow "de.chris-grieser.reddit-browser"'
           - *deactivate-leader
           - *remove-notice
       # [.]: Emoji Picker
