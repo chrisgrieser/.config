@@ -55,7 +55,7 @@ function cacheIsOutdated(path) {
 // https://hn.algolia.com/api/
 // rate limit: 10k per houer
 function getHackernewsPosts() {
-
+	// alternative "https://hacker-news.firebaseio.com/v0/topstories.json";
 }
 
 //──────────────────────────────────────────────────────────────────────────────
