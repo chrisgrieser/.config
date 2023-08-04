@@ -42,8 +42,8 @@
 		"prefix": "type definition (JSDoc, multi)",
 		"body": [
 			"/** @typedef {Object} ${1:name}",
-			"* @property {${2|number,string,Object,boolean,() => void|}} ${3:prop1}",
-			"* @property {${4|number,string,Object,boolean|}} ${5:prop2}",
+			"* @property {${2|string,number,boolean,() => void|}} ${3:prop1}",
+			"* @property {${4|string,number,boolean|}} ${5:prop2}",
 			"*/"
 		],
 		"description": "https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#typedef-callback-and-param"
