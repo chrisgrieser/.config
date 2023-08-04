@@ -592,8 +592,15 @@ Search, navigate and view information from duden.de. Get QuickLook previews for 
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array/>
+	<key>variables</key>
+	<dict>
+		<key>granted</key>
+		<string>1</string>
+	</dict>
 	<key>variablesdontexport</key>
-	<array/>
+	<array>
+		<string>granted</string>
+	</array>
 	<key>version</key>
 	<string>1.0.0</string>
 	<key>webaddress</key>

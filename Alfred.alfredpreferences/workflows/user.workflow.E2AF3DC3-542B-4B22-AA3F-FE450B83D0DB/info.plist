@@ -1,0 +1,1278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.zeitlings.dictionary</string>
+	<key>category</key>
+	<string>⬇️</string>
+	<key>connections</key>
+	<dict>
+		<key>0C733F1E-31C9-4A60-A9CF-98BCD35AF3CA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B8127770-51C9-4230-82A3-EF92186E9DC5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>_button1</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F85BFC58-34BF-49FE-A76B-F4054FE2A02A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>_button2</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E3E63573-A333-43FB-8E33-FABD2FA9FE04</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>_button3</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>19A6A3A2-D7F2-4346-9016-84DEFBF32B6B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D8081753-25C1-41FB-B17C-7B5259C3B062</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>227696C8-AE20-4548-8E80-D223B4803BEC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6F76CB93-B797-4A4E-B913-EC3AA3BF373B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>2DF0CA09-0227-423F-89A5-039601E4C3C8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>697C52DD-EC8E-4B57-9F12-0A642C60CAC3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>309DE6AE-9CA5-4E24-A3D6-A281B8887FE2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7CA32D4D-B334-4B04-9BF1-9EE2CC5E6135</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>650562F6-FF15-432D-B3BC-4FDC0853EBF6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>331207BF-EF6E-4741-86A1-6EC56C18A4E9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>697C52DD-EC8E-4B57-9F12-0A642C60CAC3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6F76CB93-B797-4A4E-B913-EC3AA3BF373B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>6C2BC75B-9D36-48BF-9891-0CC825919D6B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>19A6A3A2-D7F2-4346-9016-84DEFBF32B6B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>6F76CB93-B797-4A4E-B913-EC3AA3BF373B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>650562F6-FF15-432D-B3BC-4FDC0853EBF6</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>Paste to frontmost Application</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>8DD34BA5-9E52-4691-81DE-1EF554B7B895</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>7612840E-1AC0-4621-ADA7-EB13A028B966</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>227696C8-AE20-4548-8E80-D223B4803BEC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>7CA32D4D-B334-4B04-9BF1-9EE2CC5E6135</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B3676897-D25D-4D14-9C52-C341B3428FC6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>9663EFFC-1AC7-4F0E-805E-10FA9652E4B8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0C733F1E-31C9-4A60-A9CF-98BCD35AF3CA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B4C4DF8E-2A70-4F76-B448-78DA2C929F55</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CCD01C01-E163-4EDD-BD09-65BAE358D2FE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>B8127770-51C9-4230-82A3-EF92186E9DC5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>EB19C18C-F030-4494-8F23-6A91758253E6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>309DE6AE-9CA5-4E24-A3D6-A281B8887FE2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>CCD01C01-E163-4EDD-BD09-65BAE358D2FE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6F76CB93-B797-4A4E-B913-EC3AA3BF373B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>DF464C9D-C0DF-4C1A-A044-F93CDA8DEB65</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6F76CB93-B797-4A4E-B913-EC3AA3BF373B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>EB19C18C-F030-4494-8F23-6A91758253E6</key>
+		<array/>
+	</dict>
+	<key>createdby</key>
+	<string>Patrick Sy</string>
+	<key>description</key>
+	<string>Better Dictionary with Preview</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Define Word</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>if [[ "$alfred_version" &lt; "5.1" ]]; then 
+	echo -n "This feature requires Alfred v5.1 or greater to be installed"
+else
+	open "alfredpreferences://navigateto/workflows&gt;workflow&gt;$alfred_workflow_uid&gt;userconfig&gt;key"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>19A6A3A2-D7F2-4346-9016-84DEFBF32B6B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>:{var:key}</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Open the Workflow Configuration</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>6C2BC75B-9D36-48BF-9891-0CC825919D6B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Precondition</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>D8081753-25C1-41FB-B17C-7B5259C3B062</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<true/>
+				<key>triggerid</key>
+				<string>init</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>DF464C9D-C0DF-4C1A-A044-F93CDA8DEB65</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>7612840E-1AC0-4621-ADA7-EB13A028B966</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>331207BF-EF6E-4741-86A1-6EC56C18A4E9</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>227696C8-AE20-4548-8E80-D223B4803BEC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>matchstring</key>
+				<string>dict://</string>
+				<key>replacestring</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>650562F6-FF15-432D-B3BC-4FDC0853EBF6</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>fixedorder</key>
+				<false/>
+				<key>items</key>
+				<string>[{"title":"Oxford Dictionary of English","arg":"Oxford Dictionary of English","subtitle":""},{"title":"Duden-Wissensnetz deutsche Sprache","arg":"Duden-Wissensnetz deutsche Sprache","subtitle":""},{"title":"New Oxford American Dictionary","arg":"New Oxford American Dictionary","subtitle":""},{"title":"Oxford German Dictionary","arg":"Oxford German Dictionary"},{"title":"Oxford Thesaurus of English","arg":"Oxford Thesaurus of English","subtitle":""},{"title":"Oxford American Writer's Thesaurus","arg":"Oxford American Writer's Thesaurus","subtitle":""},{"title":"Multidictionnaire de la langue française","arg":"Multidictionnaire de la langue française","subtitle":""},{"title":"Dizionario italiano da un affiliato di Oxford University Press","arg":"Dizionario italiano da un affiliato di Oxford University Press","subtitle":""},{"title":"Prisma woordenboek Nederlands","arg":"Prisma woordenboek Nederlands","subtitle":""},{"title":"Apple Dictionary","arg":"Apple Dictionary","subtitle":""},{"title":"スーパー大辞林","arg":"スーパー大辞林","subtitle":""},{"title":"ウィズダム英和辞典 \/ ウィズダム和英辞典","arg":"ウィズダム英和辞典 \/ ウィズダム和英辞典","subtitle":""},{"title":"New Ace Korean Language Dictionary","arg":"New Ace Korean Language Dictionary","subtitle":""},{"title":"New Ace English-Korean Dictionary and New Ace Korean-English Dictionary","arg":"New Ace English-Korean Dictionary and New Ace Korean-English Dictionary","subtitle":""},{"title":"现代汉语规范词典","arg":"现代汉语规范词典","subtitle":""},{"title":"Oxford Chinese Dictionary","arg":"Oxford Chinese Dictionary","subtitle":""},{"title":"Diccionario General de la Lengua Española Vox","arg":"Diccionario General de la Lengua Española Vox","subtitle":""}]</string>
+				<key>keyword</key>
+				<string>sd</string>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Select a Dictionary</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.listfilter</string>
+			<key>uid</key>
+			<string>B4C4DF8E-2A70-4F76-B448-78DA2C929F55</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>8DD34BA5-9E52-4691-81DE-1EF554B7B895</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:key}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>if [[ "${allowed}" -eq 1 ]]; then
+	./DefineWord "$1"
+else 
+	open -b "com.runningwithcrayons.Alfred" alfred://runtrigger/$alfred_workflow_bundleid/polite
+fi
+</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>define.swift</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Define Word...</string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>inputmode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>6F76CB93-B797-4A4E-B913-EC3AA3BF373B</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>checkAll</key>
+					<string>0</string>
+					<key>dict</key>
+					<string>{query}</string>
+					<key>dicts</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>CCD01C01-E163-4EDD-BD09-65BAE358D2FE</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>synd</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Thesaurus</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>2DF0CA09-0227-423F-89A5-039601E4C3C8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>soundname</key>
+				<string>Blow</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>309DE6AE-9CA5-4E24-A3D6-A281B8887FE2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>init</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>B3676897-D25D-4D14-9C52-C341B3428FC6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>xattr -d com.apple.quarantine ./DefineWord
+
+cat &lt;&lt;EOF | osascript
+	tell application id "com.runningwithcrayons.Alfred"
+	 	set theWorkflow to "${alfred_workflow_bundleid}"
+	 	set allowed to "allowed"
+ 		set theValue to "1"
+	 	set configuration allowed to value theValue in workflow theWorkflow
+	 	reload workflow theWorkflow	 end tell
+EOF
+exit 1</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>EB19C18C-F030-4494-8F23-6A91758253E6</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>checkAll</key>
+					<string>0</string>
+					<key>dict</key>
+					<string>Oxford Thesaurus of English</string>
+					<key>dicts</key>
+					<string>Oxford Thesaurus of English, Oxford American Writer’s Thesaurus</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>697C52DD-EC8E-4B57-9F12-0A642C60CAC3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>B8127770-51C9-4230-82A3-EF92186E9DC5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>seconds</key>
+				<string>0.5</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.delay</string>
+			<key>uid</key>
+			<string>7CA32D4D-B334-4B04-9BF1-9EE2CC5E6135</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>50</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string>System Light</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>＿＿＿＿＿＿＿＿＿＿＿   􁌴   ＿＿＿＿＿＿＿＿＿＿＿
+
+Granting permission removes the "quarantined" flag that macOS automatically assigns to all files downloaded from the internet. 
+
+Removing the flag prevents the system from classifying the program as corrupted and allows it to run.
+
+￣￣￣￣￣￣￣￣￣￣￣   􁌴   ￣￣￣￣￣￣￣￣￣￣￣</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>60</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>F85BFC58-34BF-49FE-A76B-F4054FE2A02A</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<true/>
+				<key>triggerid</key>
+				<string>polite</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>9663EFFC-1AC7-4F0E-805E-10FA9652E4B8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>button1</key>
+				<string>Grant Permission</string>
+				<key>button2</key>
+				<string>More Info</string>
+				<key>button3</key>
+				<string>Cancel</string>
+				<key>description</key>
+				<string>To use the Dictionary Workflow, you have to allow it to run.</string>
+				<key>title</key>
+				<string>Permissions Required</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.dialog</string>
+			<key>uid</key>
+			<string>0C733F1E-31C9-4A60-A9CF-98BCD35AF3CA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>soundname</key>
+				<string>Tink</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>E3E63573-A333-43FB-8E33-FABD2FA9FE04</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>![](icon.png)
+
+# Define Word
+
+A customizable dictionary with Quicklook Preview – and Dark Mode.
+
+[Visit on Github](https://github.com/zeitlings/alfred-workflows) | [Visit on Alfred Forum](https://www.alfredforum.com/topic/20029-define-word-a-better-dictionary/)
+
+---
+
+## Usage Note
+
+In the Workflow Configuration field on the left, specify the dictionaries you want to use (see *Dictionary Options*). Make sure that each dictionary is separated by a comma. The `Fallback` specifies the dictionary against which possible misspellings are checked. The workflow can be used as a multilingual spell checker.
+
+- Default keyword: ` def `
+- Default shortcut: **⌥⇧D**
+- Keyword ` sd `: **S**elect a specific **d**ictionary for lookups
+- Keyword ` synd `: Find synonyms by consulting the thesauri only (english)
+- Clear Cache: ` def : `
+
+
+#### Modifiers
+
+- Press **⇧** or **⌘Y** to preview the dictionary entry
+- Press **⌘C** to copy the plain text of the dictionary entry to the clipboard
+- Press **⌘L** to view the plain text as large type
+- Hold **⌃** to see the dictionary associated with the entry
+- Hold **⌘** before returning to paste a word to the frontmost application *(spell checker)*
+
+---
+
+## Dictionary Options
+
+`Oxford Study Indonesian Dictionary - Inggris-Indonesia • Indonesia-Inggris`
+`Oxford PWN Polish-English Dictionary / Wielki słownik polsko-angielski`
+`Oxford Paravia Il Dizionario inglese - italiano/italiano - inglese`
+`Oxford Portuguese Dictionary - Português-Inglês • Inglês-Português`
+`Oxford Turkish Dictionary - Türkçe-İngilizce • İngilizce-Türkçe`
+`Dicionário de Português licenciado para Oxford University Press`
+`Dizionario italiano da un affiliato di Oxford University Press`
+`Oxford Russian Dictionary - Русско-Английский • Англо-Русский`
+`Gran Diccionario Oxford - Español-Inglés • Inglés-Español`
+`Oxford Arabic Dictionary - عربي-إنجليزي • إنجليزي-عربي`
+`Oxford Urdu Dictionaries - اردو۔انگریزی • انگریزی-اردو`
+`Oxford Gujarati Dictionaries - ગુજરાતી-અંગ્રેજી • અંગ્રેજી-ગુજરાતી`
+`Oxford Tamil Dictionaries - தமிழ்-ஆங்கிலம் • ஆங்கிலம்-தமிழ்`
+`พจนานุกรมอังกฤษ-ไทย &amp; ไทย-อังกฤษ ฉบับทันสมัยและสมบูรณ์ที่สุด`
+`Magay Tamás szótár - Magyar-Angol • Angol-Magyar`
+`Oxford Telugu Dictionaries - తెలుగు-ఇంగ్లీష్ • ఇంగ్లీష్-తెలుగు`
+`Velký anglicko-český a česko-anglický slovník`
+`Oxford Bengali Dictionaries - বাংলা-ইংরেজি • ইংরেজি-বাংলা`
+`Diccionario General de la Lengua Española Vox`
+`MOT sanakirja suomi-englanti, englanti-suomi`
+`Oxford Hindi Dictionaries - हिन्दी-अंग्रेज़ी • अंग्रेज़ी-हिन्दी`
+`מילון אבן-שושן מחודש ומותאם לשנות האלפיים`
+`Multidictionnaire de la langue française`
+`PONS Großwörterbuch Französisch Deutsch`
+`Oxford American Writer’s Thesaurus`
+`Duden-Wissensnetz deutsche Sprache`
+`Oxford-Hachette French Dictionary`
+`Толковый словарь русского языка`
+`New Oxford American Dictionary`
+`Prisma Handwoordenboek Engels`
+`Prisma woordenboek Nederlands`
+`Oxford Dictionary of English`
+`พจนานุกรมไทย ฉบับทันสมัยและสมบูรณ์`
+`Oxford Thesaurus of English`
+`Politikens Nudansk Ordbog`
+`Oxford German Dictionary`
+`超級クラウン中日辞典 / クラウン日中辞典`
+`Arkadaş Türkçe Sözlük`
+`뉴에이스 영한사전 / 뉴에이스 한영사전`
+`ウィズダム英和辞典 / ウィズダム和英辞典`
+`Apple Dictionary`
+`Từ điển Lạc Việt`
+`TTY Dictionary`
+`Norsk Ordbok`
+`राजपाल हिन्दी शब्दकोश`
+`商務新詞典（全新版）`
+`NE Ordbok`
+`뉴에이스 국어사전`
+`譯典通英漢雙向字典`
+`现代汉语同义词典`
+`英譯廣東口語詞典`
+`牛津英汉汉英词典`
+`漢英對照成語詞典`
+`现代汉语规范词典`
+`五南國語活用辭典`
+`スーパー大辞林`
+`汉语成语词典`
+
+---
+
+## Change Log
+
+**v1.1.1**
+- Improved dictionary retrieval
+	- Dictionaries previously not found are now found
+	- Incomplete representations are now recognized*
+	- The Short Name is now matched (e.g. `Russian - English`)
+- Added (hidden) environment variable `log_available_dicts` to log available dicts if set to `1`
+- Added internal configuration option to open the workflow's cache (default: `:def`)
+- Fixed raising the workflow configuration (default: `:def`)
+
+ * e.g. `Oxford Russian Dictionary` instead of the full name
+
+**v1.1.0**
+- Changed behavior: By default, all defined dictionaries are used. The previous "Main Dictionary" becomes the default fallback dictionary against which possible misspellings are checked.
+- Added indicators for the dictionary associated with an entry.
+	- They are visible using the `ctrl` modifier and in the title of the Quicklook preview.
+- Added duplication of dictionary entries.
+- Removed `Wikipedia` as an option as it is not functional.
+- The workflow now doubles as a multilingual spell checker: Use the `cmd` modifier to paste the word into the frontmost application.</string>
+	<key>uidata</key>
+	<dict>
+		<key>0C733F1E-31C9-4A60-A9CF-98BCD35AF3CA</key>
+		<dict>
+			<key>xpos</key>
+			<real>245</real>
+			<key>ypos</key>
+			<real>480</real>
+		</dict>
+		<key>19A6A3A2-D7F2-4346-9016-84DEFBF32B6B</key>
+		<dict>
+			<key>xpos</key>
+			<real>540</real>
+			<key>ypos</key>
+			<real>30</real>
+		</dict>
+		<key>227696C8-AE20-4548-8E80-D223B4803BEC</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>245</real>
+			<key>ypos</key>
+			<real>170</real>
+		</dict>
+		<key>2DF0CA09-0227-423F-89A5-039601E4C3C8</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>110</real>
+			<key>ypos</key>
+			<real>360</real>
+		</dict>
+		<key>309DE6AE-9CA5-4E24-A3D6-A281B8887FE2</key>
+		<dict>
+			<key>xpos</key>
+			<real>540</real>
+			<key>ypos</key>
+			<real>365</real>
+		</dict>
+		<key>331207BF-EF6E-4741-86A1-6EC56C18A4E9</key>
+		<dict>
+			<key>xpos</key>
+			<real>720</real>
+			<key>ypos</key>
+			<real>140</real>
+		</dict>
+		<key>650562F6-FF15-432D-B3BC-4FDC0853EBF6</key>
+		<dict>
+			<key>xpos</key>
+			<real>665</real>
+			<key>ypos</key>
+			<real>170</real>
+		</dict>
+		<key>697C52DD-EC8E-4B57-9F12-0A642C60CAC3</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>245</real>
+			<key>ypos</key>
+			<real>390</real>
+		</dict>
+		<key>6C2BC75B-9D36-48BF-9891-0CC825919D6B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>note</key>
+			<string>Open Configuration</string>
+			<key>xpos</key>
+			<real>405</real>
+			<key>ypos</key>
+			<real>30</real>
+		</dict>
+		<key>6F76CB93-B797-4A4E-B913-EC3AA3BF373B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>405</real>
+			<key>ypos</key>
+			<real>250</real>
+		</dict>
+		<key>7612840E-1AC0-4621-ADA7-EB13A028B966</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>110</real>
+			<key>ypos</key>
+			<real>140</real>
+		</dict>
+		<key>7CA32D4D-B334-4B04-9BF1-9EE2CC5E6135</key>
+		<dict>
+			<key>xpos</key>
+			<real>670</real>
+			<key>ypos</key>
+			<real>395</real>
+		</dict>
+		<key>8DD34BA5-9E52-4691-81DE-1EF554B7B895</key>
+		<dict>
+			<key>xpos</key>
+			<real>720</real>
+			<key>ypos</key>
+			<real>250</real>
+		</dict>
+		<key>9663EFFC-1AC7-4F0E-805E-10FA9652E4B8</key>
+		<dict>
+			<key>note</key>
+			<string>Permission Handler</string>
+			<key>xpos</key>
+			<real>110</real>
+			<key>ypos</key>
+			<real>475</real>
+		</dict>
+		<key>B3676897-D25D-4D14-9C52-C341B3428FC6</key>
+		<dict>
+			<key>xpos</key>
+			<real>720</real>
+			<key>ypos</key>
+			<real>365</real>
+		</dict>
+		<key>B4C4DF8E-2A70-4F76-B448-78DA2C929F55</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>110</real>
+			<key>ypos</key>
+			<real>250</real>
+		</dict>
+		<key>B8127770-51C9-4230-82A3-EF92186E9DC5</key>
+		<dict>
+			<key>xpos</key>
+			<real>360</real>
+			<key>ypos</key>
+			<real>395</real>
+		</dict>
+		<key>CCD01C01-E163-4EDD-BD09-65BAE358D2FE</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>245</real>
+			<key>ypos</key>
+			<real>280</real>
+		</dict>
+		<key>D8081753-25C1-41FB-B17C-7B5259C3B062</key>
+		<dict>
+			<key>xpos</key>
+			<real>720</real>
+			<key>ypos</key>
+			<real>30</real>
+		</dict>
+		<key>DF464C9D-C0DF-4C1A-A044-F93CDA8DEB65</key>
+		<dict>
+			<key>xpos</key>
+			<real>120</real>
+			<key>ypos</key>
+			<real>30</real>
+		</dict>
+		<key>E3E63573-A333-43FB-8E33-FABD2FA9FE04</key>
+		<dict>
+			<key>xpos</key>
+			<real>405</real>
+			<key>ypos</key>
+			<real>585</real>
+		</dict>
+		<key>EB19C18C-F030-4494-8F23-6A91758253E6</key>
+		<dict>
+			<key>xpos</key>
+			<real>405</real>
+			<key>ypos</key>
+			<real>365</real>
+		</dict>
+		<key>F85BFC58-34BF-49FE-A76B-F4054FE2A02A</key>
+		<dict>
+			<key>xpos</key>
+			<real>405</real>
+			<key>ypos</key>
+			<real>475</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>def</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>key</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>Oxford Dictionary of English</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>Oxford Dictionary of English</string>
+						<string>Oxford Dictionary of English</string>
+					</array>
+					<array>
+						<string>Duden-Wissensnetz deutsche Sprache</string>
+						<string>Duden-Wissensnetz deutsche Sprache</string>
+					</array>
+					<array>
+						<string>New Oxford American Dictionary</string>
+						<string>New Oxford American Dictionary</string>
+					</array>
+					<array>
+						<string>Oxford Thesaurus of English</string>
+						<string>Oxford Thesaurus of English</string>
+					</array>
+					<array>
+						<string>Oxford American Writer's Thesaurus</string>
+						<string>Oxford American Writer's Thesaurus</string>
+					</array>
+					<array>
+						<string>Oxford German Dictionary</string>
+						<string>Oxford German Dictionary</string>
+					</array>
+					<array>
+						<string>Multidictionnaire de la langue française</string>
+						<string>Multidictionnaire de la langue française</string>
+					</array>
+					<array>
+						<string>Prisma woordenboek Nederlands</string>
+						<string>Prisma woordenboek Nederlands</string>
+					</array>
+					<array>
+						<string>Dizionario italiano da un affiliato di Oxford University Press</string>
+						<string>Dizionario italiano da un affiliato di Oxford University Press</string>
+					</array>
+					<array>
+						<string>Apple Dictionary</string>
+						<string>Apple Dictionary</string>
+					</array>
+					<array>
+						<string>スーパー大辞林</string>
+						<string>スーパー大辞林</string>
+					</array>
+					<array>
+						<string>ウィズダム英和辞典 / ウィズダム和英辞典</string>
+						<string>ウィズダム英和辞典 / ウィズダム和英辞典</string>
+					</array>
+					<array>
+						<string>Diccionario General de la Lengua Española Vox</string>
+						<string>Diccionario General de la Lengua Española Vox</string>
+					</array>
+					<array>
+						<string>New Ace Korean Language Dictionary</string>
+						<string>New Ace Korean Language Dictionary</string>
+					</array>
+					<array>
+						<string>New Ace English-Korean Dictionary and New Ace Korean-English Dictionary</string>
+						<string>New Ace English-Korean Dictionary and New Ace Korean-English Dictionary</string>
+					</array>
+					<array>
+						<string>现代汉语规范词典</string>
+						<string>现代汉语规范词典</string>
+					</array>
+					<array>
+						<string>Oxford Chinese Dictionary</string>
+						<string>Oxford Chinese Dictionary</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Fallback</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>dict</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>New Oxford American Dictionary, 
+Oxford Thesaurus of English,
+Oxford German Dictionary, 
+Duden-Wissensnetz deutsche Sprache</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+				<key>verticalsize</key>
+				<integer>6</integer>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Dictionaries</string>
+			<key>type</key>
+			<string>textarea</string>
+			<key>variable</key>
+			<string>dicts</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>12</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Set the font size of the Quicklook preview</string>
+			<key>label</key>
+			<string>Font Size</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>fontSize</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>Check all available dictionaries</string>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Override</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>checkAll</string>
+		</dict>
+	</array>
+	<key>variables</key>
+	<dict>
+		<key>allowed</key>
+		<string>1</string>
+		<key>log_available_dicts</key>
+		<string>0</string>
+	</dict>
+	<key>variablesdontexport</key>
+	<array>
+		<string>allowed</string>
+	</array>
+	<key>version</key>
+	<string>1.1.1</string>
+	<key>webaddress</key>
+	<string>https://github.com/zeitlings/alfred-workflows</string>
+</dict>
+</plist>

@@ -254,6 +254,7 @@ function M.githubUrl()
 	local filepath = fn.expand("%:p")
 	local gitroot = fn.system("git --no-optional-locks rev-parse --show-toplevel")
 	local pathInRepo = filepath:sub(#gitroot + 1)
+	local pathInRepoEncoded = pathInRepo:gsub("%s+", "%%20")
 	local remote = fn.system("git --no-optional-locks remote -v"):gsub(".*:(.-)%.git.*", "%1")
 	local hash = fn.system("git --no-optional-locks rev-parse HEAD"):gsub("\n$", "")
 
@@ -273,7 +274,7 @@ function M.githubUrl()
 	end
 
 	-- example: https://github.com/chrisgrieser/.config/blob/4cc310490c4492be3fe144d572635012813c7822/nvim/lua/config/textobject-keymaps.lua#L8-L20
-	local url = ("https://github.com/%s/blob/%s/%s%s"):format(remote, hash, pathInRepo, location)
+	local url = ("https://github.com/%s/blob/%s/%s%s"):format(remote, hash, pathInRepoEncoded, location)
 
 	os.execute("open '" .. url .. "'") -- open in browser (macOS cli)
 	fn.setreg("+", url) -- copy to clipboard
