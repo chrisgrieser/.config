@@ -6,14 +6,6 @@ app.includeStandardAdditions = true;
 
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @param {string} path */
-function cacheIsOutdated(path) {
-	const cacheObj = Application("System Events").aliases[path];
-	const cacheAgeMins = (+new Date() - cacheObj.creationDate()) / 1000 / 60;
-	const cacheAgeThreshold = 10;
-	return cacheAgeMins > cacheAgeThreshold;
-}
-
 function ensureCacheFolderExists() {
 	const finder = Application("Finder");
 	const cacheDir = $.getenv("alfred_workflow_cache");
@@ -29,7 +21,15 @@ function ensureCacheFolderExists() {
 	}
 }
 
-const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
+/** @param {string} path */
+function cacheIsOutdated(path) {
+	ensureCacheFolderExists()
+	const cacheObj = Application("System Events").aliases[path];
+	if (!cacheObj.exists()) return true;
+	const cacheAgeMins = (+new Date() - cacheObj.creationDate()) / 1000 / 60;
+	const cacheAgeThreshold = 10;
+	return cacheAgeMins > cacheAgeThreshold;
+}
 
 /** @param {string} path */
 function readFile(path) {
@@ -59,7 +59,7 @@ function run() {
 	const subredditCache = `${$.getenv("alfred_workflow_cache")}/neovim.json`;
 	let response = {}
 
-	if (!fileExists(subredditCache) || cacheIsOutdated(subredditCache)) {
+	if (cacheIsOutdated(subredditCache)) {
 		console.log("Writing new cache for r/neovim.");
 
 		// INFO yes, curl is blocked only until you change the user agent, lol
@@ -69,7 +69,6 @@ function run() {
 		if (response.error) {
 			return JSON.stringify({ items: [{ title: response.message, subtitle: response.error }] });
 		}
-		ensureCacheFolderExists()
 		writeToFile(subredditCache, responseStr);
 	} else {
 		console.log("Using existing cache for r/neovim.");

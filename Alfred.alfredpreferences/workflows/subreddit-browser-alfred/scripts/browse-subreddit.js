@@ -5,6 +5,8 @@ app.includeStandardAdditions = true;
 
 //──────────────────────────────────────────────────────────────────────────────
 // CONFIG
+
+const cacheAgeThreshold = parseInt($.getenv("cache_age_threshold")) || 15;
 const useOldReddit = $.getenv("use_old_reddit") === "1";
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -24,14 +26,6 @@ function writeToFile(filepath, text) {
 	str.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);
 }
 
-/** @param {string} path */
-function cacheIsOutdated(path) {
-	const cacheObj = Application("System Events").aliases[path];
-	const cacheAgeMins = (+new Date() - cacheObj.creationDate()) / 1000 / 60;
-	const cacheAgeThreshold = parseInt($.getenv("cache_age_threshold")) || 15;
-	return cacheAgeMins > cacheAgeThreshold;
-}
-
 function ensureCacheFolderExists() {
 	const finder = Application("Finder");
 	const cacheDir = $.getenv("alfred_workflow_cache");
@@ -47,6 +41,15 @@ function ensureCacheFolderExists() {
 	}
 }
 
+/** @param {string} path */
+function cacheIsOutdated(path) {
+	ensureCacheFolderExists();
+	const cacheObj = Application("System Events").aliases[path];
+	if (!cacheObj.exists()) return true;
+	const cacheAgeMins = (+new Date() - cacheObj.creationDate()) / 1000 / 60;
+	return cacheAgeMins > cacheAgeThreshold;
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 // INFO free API calls restricted to 10 per minute
@@ -55,15 +58,17 @@ function ensureCacheFolderExists() {
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	// search passed subreddit, or if called directly, the top subreddit
-	const topSubreddit = $.getenv("subreddits").split("\n")[0];
-	const subredditName =
-		$.NSProcessInfo.processInfo.environment.objectForKey("selected_subreddit").js || topSubreddit;
+	const topSubreddit = $.getenv("subreddits").split("\n")[0]; // only needed for first run
+	const currentSubreddit = readFile($.getenv("alfred_workflow_cache") + "/current_subreddit" ) 
+	const selectedSubreddit = $.NSProcessInfo.processInfo.environment.objectForKey("selected_subreddit").js
+	const subredditName = selectedSubreddit || currentSubreddit || topSubreddit;
 
-	const subredditCache = `${$.getenv("alfred_workflow_cache") + subredditName}.json`;
+	writeToFile($.getenv("alfred_workflow_cache") + "/current_subreddit", subredditName);
+
+	const subredditCache = `${$.getenv("alfred_workflow_cache")}/${subredditName}.json`;
 	let response = {};
 
-	if (!fileExists(subredditCache) || cacheIsOutdated(subredditCache)) {
+	if (cacheIsOutdated(subredditCache)) {
 		console.log("Writing new cache for r/" + subredditName);
 
 		// INFO yes, curl is blocked only until you change the user agent, lol
@@ -74,7 +79,6 @@ function run() {
 		if (response.error) {
 			return JSON.stringify({ items: [{ title: response.message, subtitle: response.error }] });
 		}
-		ensureCacheFolderExists()
 		writeToFile(subredditCache, responseStr);
 	} else {
 		console.log("Using existing cache for r/" + subredditName);
@@ -90,11 +94,12 @@ function run() {
 		const comments = item.num_comments;
 		const category = item.link_flair_text ? `[${item.link_flair_text}]` : "";
 		const subtitle = `${item.score}↑  ${comments}●  ${category}`;
+		const url = useOldReddit ? item.url.replace("www", "old") : item.url;
 
 		return {
 			title: item.title,
 			subtitle: subtitle,
-			arg: item.url,
+			arg: url,
 			icon: { path: iconPath },
 			mods: {
 				shift: {

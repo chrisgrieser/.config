@@ -67,6 +67,32 @@
 				<false/>
 			</dict>
 		</array>
+		<key>933340EF-3EA1-461F-A680-4D4B22FDFBA3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B8A93391-341E-4C2B-B16D-3E7BFE87E8D9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B8A93391-341E-4C2B-B16D-3E7BFE87E8D9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FA6EC67D-4108-48CB-B9EC-99BB05977E17</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E640FB36-75C7-4B36-A8AC-0F56468145CC</key>
 		<array>
 			<dict>
@@ -146,13 +172,20 @@
 				<key>scriptfile</key>
 				<string>./scripts/browse-subreddit.js</string>
 				<key>subtext</key>
-				<string>Loading r/{var:selected_subreddit}…</string>
+				<string>Loading subreddit…</string>
 				<key>title</key>
 				<string>{const:alfred_workflow_name}</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
 				<false/>
+			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>loop</string>
+				<key>inputmode</key>
+				<integer>1</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
@@ -222,7 +255,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>determine-next-subreddit.sh</string>
+				<string>./scripts/determine-next-subreddit.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -265,11 +298,6 @@
 					<string>{query}</string>
 				</dict>
 			</dict>
-			<key>inboundconfig</key>
-			<dict>
-				<key>externalid</key>
-				<string>loop</string>
-			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
@@ -296,9 +324,78 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>:hyper-seek</string>
+				<key>subtext</key>
+				<string>{const:alfred_workflow_name}</string>
+				<key>text</key>
+				<string>Refresh the cache</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>933340EF-3EA1-461F-A680-4D4B22FDFBA3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>target_path</key>
+					<string>{const:alfred_workflow_cache}</string>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/files-and-folders/path.trash</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>B8A93391-341E-4C2B-B16D-3E7BFE87E8D9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>✅ Cache refreshed</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>FA6EC67D-4108-48CB-B9EC-99BB05977E17</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
-	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<string>## Usage
+- `sub`: Select subreddit
+- `rr`: Browse the current subreddit
+	- &lt;kbd&gt;⏎&lt;/kbd&gt;: Open.
+	- &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Switch to next subreddit.
+	- &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy URL to clipboard.
+
+---
+
+Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>09B3D6D5-85DC-4788-B940-EDFB8EC74EE4</key>
@@ -345,6 +442,26 @@
 			<key>ypos</key>
 			<real>225</real>
 		</dict>
+		<key>933340EF-3EA1-461F-A680-4D4B22FDFBA3</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>refresh cache</string>
+			<key>xpos</key>
+			<real>730</real>
+			<key>ypos</key>
+			<real>660</real>
+		</dict>
+		<key>B8A93391-341E-4C2B-B16D-3E7BFE87E8D9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>880</real>
+			<key>ypos</key>
+			<real>660</real>
+		</dict>
 		<key>E640FB36-75C7-4B36-A8AC-0F56468145CC</key>
 		<dict>
 			<key>note</key>
@@ -353,6 +470,15 @@
 			<real>520</real>
 			<key>ypos</key>
 			<real>225</real>
+		</dict>
+		<key>FA6EC67D-4108-48CB-B9EC-99BB05977E17</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>1030</real>
+			<key>ypos</key>
+			<real>660</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -410,9 +536,9 @@
 				<string>enabled</string>
 			</dict>
 			<key>description</key>
-			<string>redirect to oldreddit</string>
+			<string>redirect to old.reddit.com</string>
 			<key>label</key>
-			<string>use oldreddit</string>
+			<string>use old.reddit</string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>

@@ -13,4 +13,5 @@ if [[ "$next_subreddit" == "$current_subreddit" ]]; then
 fi
 
 # pass to Alfred-loop
-echo -n "$next_subreddit"
+# shellcheck disable=2154
+echo -n "$next_subreddit" > "$alfred_workflow_cache/current_subreddit"
