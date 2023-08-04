@@ -83,24 +83,10 @@ alias -g B='| bat'
 alias -g C='| pbcopy ; echo "Copied."' # copy
 alias -g N='| wc -l | tr -d " "'       # count lines
 
-# get field #n
-for i in {1..9}; do
-	alias -g F"$i"="| awk '{ print \$$i }'"
-done
-
 # highlights for them
-ZSH_HIGHLIGHT_REGEXP+=(" F[1-9]" 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' G$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' G ' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' C$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' B$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' N$' 'fg=magenta,bold')
 
-function json() {
-	if ! command -v fx &>/dev/null; then print "\033[1;33mfx not installed.\033[0m" && return 1; fi
-	if ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then echo "Not using WezTerm." && return 1; fi
-
-	curl --silent "$*" --output "/tmp/fx-curl.json"
-	pane_id=$(wezterm cli spawn -- fx "/tmp/fx-curl.json")
-	wezterm cli set-tab-title --pane-id="$pane_id" "curl-fx"
-}
