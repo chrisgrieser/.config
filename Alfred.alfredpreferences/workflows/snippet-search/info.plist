@@ -12,6 +12,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>D60594A5-78F0-410C-BF4B-A57FA6179545</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Open URL in snippet description</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>0DF1D6A0-6590-4132-9ADD-521CFA7EE92C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -57,6 +67,27 @@
 	<string>Code Snippet Search</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>D60594A5-78F0-410C-BF4B-A57FA6179545</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -160,7 +191,7 @@
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>✅ Copied Snippet</string>
+				<string>📋  Copied Snippet</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -205,6 +236,13 @@
 			<real>410</real>
 			<key>ypos</key>
 			<real>320</real>
+		</dict>
+		<key>D60594A5-78F0-410C-BF4B-A57FA6179545</key>
+		<dict>
+			<key>xpos</key>
+			<real>260</real>
+			<key>ypos</key>
+			<real>40</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
