@@ -48,6 +48,16 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>EB3BD689-69E5-4385-8983-379774F8848E</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: Open Post directly</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>E640FB36-75C7-4B36-A8AC-0F56468145CC</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
@@ -77,7 +87,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 		<key>B8A93391-341E-4C2B-B16D-3E7BFE87E8D9</key>
@@ -92,9 +102,12 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+		</array>
+		<key>E640FB36-75C7-4B36-A8AC-0F56468145CC</key>
+		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>FA6EC67D-4108-48CB-B9EC-99BB05977E17</string>
+				<string>3381D52B-F37A-422A-BB73-2654C0280799</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -103,11 +116,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>E640FB36-75C7-4B36-A8AC-0F56468145CC</key>
+		<key>EB3BD689-69E5-4385-8983-379774F8848E</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>3381D52B-F37A-422A-BB73-2654C0280799</string>
+				<string>7984AFF9-05D8-4F7C-AEE3-C381AA4AD6A0</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -145,6 +158,14 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>7984AFF9-05D8-4F7C-AEE3-C381AA4AD6A0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>EB3BD689-69E5-4385-8983-379774F8848E</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -337,25 +358,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>externaltriggerid</key>
-				<string>loop</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>self</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>D96907E4-B008-4B62-AED9-1958C5D8E9A4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -377,6 +379,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>externaltriggerid</key>
+				<string>loop</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>D96907E4-B008-4B62-AED9-1958C5D8E9A4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>tasksettings</key>
 				<dict>
 					<key>target_path</key>
@@ -392,35 +413,15 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>✅ Cache refreshed</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>FA6EC67D-4108-48CB-B9EC-99BB05977E17</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
 - `sub`: Select subreddit.
 - `rr`: Browse the current subreddit.
-	- &lt;kbd&gt;⏎&lt;/kbd&gt;: Open Post.
+	- &lt;kbd&gt;⏎&lt;/kbd&gt;: Open Post in reddit.
 	- &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Switch to next subreddit.
 	- &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy URL of post to clipboard.
+	- &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Open URL (if external link).
 
 No reddit account of any sort is needed.
 
@@ -495,7 +496,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>refresh cache</string>
 			<key>xpos</key>
-			<real>735</real>
+			<real>730</real>
 			<key>ypos</key>
 			<real>755</real>
 		</dict>
@@ -513,9 +514,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>1035</real>
+			<real>1030</real>
 			<key>ypos</key>
-			<real>640</real>
+			<real>755</real>
 		</dict>
 		<key>E640FB36-75C7-4B36-A8AC-0F56468145CC</key>
 		<dict>
@@ -528,14 +529,14 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>225</real>
 		</dict>
-		<key>FA6EC67D-4108-48CB-B9EC-99BB05977E17</key>
+		<key>EB3BD689-69E5-4385-8983-379774F8848E</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>1035</real>
+			<real>430</real>
 			<key>ypos</key>
-			<real>755</real>
+			<real>135</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -619,6 +620,25 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<string>checkbox</string>
 			<key>variable</key>
 			<string>add_hackernews</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>enabled</string>
+			</dict>
+			<key>description</key>
+			<string>redirect to dstill.ai as hackernews frontend</string>
+			<key>label</key>
+			<string>use dstill.ai</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>use_dstill_ai</string>
 		</dict>
 	</array>
 	<key>version</key>

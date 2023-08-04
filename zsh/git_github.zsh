@@ -64,6 +64,18 @@ function gd() {
 	fi
 }
 
+
+# dynamically change theme 
+# see themes: `delta --show-syntax-themes`
+if defaults read -g AppleInterfaceStyle &>/dev/null; then
+	light="false"
+	theme="Dracula"
+else
+	light="true"
+	theme="OneHalfLight"
+fi
+export DELTA_FEATURE
+
 #───────────────────────────────────────────────────────────────────────────────
 # GIT LOG
 # https://git-scm.com/docs/git-log#_pretty_formats
