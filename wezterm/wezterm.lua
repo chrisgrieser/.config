@@ -268,7 +268,12 @@ local config = {
 	line_height = 1,
 
 	-- Appearance
-	audible_bell = "Disabled",
+	audible_bell = "SystemBeep", -- SystemBeep|Disabled
+	visual_bell = { -- briefly flash cursor on visual bell
+		fade_in_duration_ms = 150,
+		fade_out_duration_ms = 150,
+		target = "CursorColor",
+	},
 	color_scheme = theme.autoScheme(darkTheme, lightTheme),
 	window_background_opacity = theme.autoOpacity(darkOpacity, lightOpacity),
 	bold_brightens_ansi_colors = "BrightAndBold",

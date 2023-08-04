@@ -54,6 +54,9 @@ matches:
   # others
   - trigger: "->>"
     replace: ➡️ # is actually an emoji outside of nvim
+  - trigger: "!dot"
+    replace: "·"
+    label: utf middle dot
   - trigger: "->"
     replace: → # unicode arrow
     word: true
