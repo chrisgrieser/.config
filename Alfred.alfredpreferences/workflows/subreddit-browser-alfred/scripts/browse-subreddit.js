@@ -58,38 +58,41 @@ function cacheIsOutdated(path) {
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
+	// SELECT SUBREDDIT
 	const topSubreddit = $.getenv("subreddits").split("\n")[0]; // only needed for first run
-	const currentSubreddit = readFile($.getenv("alfred_workflow_cache") + "/current_subreddit" ) 
-	const selectedSubreddit = $.NSProcessInfo.processInfo.environment.objectForKey("selected_subreddit").js
+	const currentSubreddit = readFile($.getenv("alfred_workflow_cache") + "/current_subreddit");
+	const selectedSubreddit = $.NSProcessInfo.processInfo.environment.objectForKey("selected_subreddit").js;
 	const subredditName = selectedSubreddit || currentSubreddit || topSubreddit;
-
-	writeToFile($.getenv("alfred_workflow_cache") + "/current_subreddit", subredditName);
-
-	const subredditCache = `${$.getenv("alfred_workflow_cache")}/${subredditName}.json`;
-	let response = {};
-
-	if (cacheIsOutdated(subredditCache)) {
-		console.log("Writing new cache for r/" + subredditName);
-
-		// INFO yes, curl is blocked only until you change the user agent, lol
-		const curlCommand = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/new.json"`;
-		const responseStr = app.doShellScript(curlCommand);
-		response = JSON.parse(responseStr);
-
-		if (response.error) {
-			return JSON.stringify({ items: [{ title: response.message, subtitle: response.error }] });
-		}
-		writeToFile(subredditCache, responseStr);
-	} else {
-		console.log("Using existing cache for r/" + subredditName);
-		response = JSON.parse(readFile(subredditCache));
+	if (subredditName !== currentSubreddit) {
+		writeToFile($.getenv("alfred_workflow_cache") + "/current_subreddit", subredditName);
 	}
 
+	// ICON
 	let iconPath = `${$.getenv("alfred_workflow_data")}/${subredditName}.png`;
 	if (!fileExists(iconPath)) iconPath = "icon.png"; // not cached
 
+	// GET CACHE
+	const subredditCache = `${$.getenv("alfred_workflow_cache")}/${subredditName}.json`;
 	/** @type AlfredItem[] */
-	const redditPosts = response.data.children.map((/** @type {{ data: any; }} */ data) => {
+	let redditPosts;
+	if (!cacheIsOutdated(subredditCache)) {
+		redditPosts = JSON.parse(readFile(subredditCache));
+		return JSON.stringify({ items: redditPosts });
+	}
+
+	// LOAD NEW POSTS
+	console.log("Writing new cache for r/" + subredditName);
+
+	// INFO yes, curl is blocked only until you change the user agent, lol
+	const curlCommand = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/new.json"`;
+	const response = JSON.parse(app.doShellScript(curlCommand));
+
+	if (response.error) {
+		return JSON.stringify({ items: [{ title: response.message, subtitle: response.error }] });
+	}
+
+	/** @type AlfredItem[] */
+	redditPosts = response.data.children.map((/** @type {{ data: any; }} */ data) => {
 		const item = data.data;
 		const comments = item.num_comments;
 		const category = item.link_flair_text ? `[${item.link_flair_text}]` : "";
@@ -110,5 +113,8 @@ function run() {
 			},
 		};
 	});
+
+	writeToFile(subredditCache, JSON.stringify(redditPosts));
+
 	return JSON.stringify({ items: redditPosts });
 }

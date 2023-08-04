@@ -60,6 +60,8 @@ return {
 				local lspWithOutFolding = { "markdown", "bash", "sh", "bash", "zsh", "css" }
 				if vim.tbl_contains(lspWithOutFolding, ft) then
 					return { "treesitter", "indent" }
+				elseif ft == "html" then
+					return { "indent" } -- lsp & treesitter do not provide folds
 				else
 					return { "lsp", "indent" }
 				end

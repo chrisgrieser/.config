@@ -84,6 +84,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>D96907E4-B008-4B62-AED9-1958C5D8E9A4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>FA6EC67D-4108-48CB-B9EC-99BB05977E17</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -327,14 +337,33 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>externaltriggerid</key>
+				<string>loop</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>D96907E4-B008-4B62-AED9-1958C5D8E9A4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>:hyper-seek</string>
+				<string>:reddit</string>
 				<key>subtext</key>
 				<string>{const:alfred_workflow_name}</string>
 				<key>text</key>
-				<string>Refresh the cache</string>
+				<string>Force reload all subreddits</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -387,11 +416,16 @@
 	</array>
 	<key>readme</key>
 	<string>## Usage
-- `sub`: Select subreddit
+- `sub`: Select subreddit.
 - `rr`: Browse the current subreddit
 	- &lt;kbd&gt;⏎&lt;/kbd&gt;: Open.
 	- &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Switch to next subreddit.
 	- &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy URL to clipboard.
+
+No reddit account of any sort is needed.
+
+__Info__
+Run `sub` once to load the subreddit icons.
 
 ---
 
@@ -400,8 +434,10 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<dict>
 		<key>09B3D6D5-85DC-4788-B940-EDFB8EC74EE4</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>note</key>
-			<string>store {query} in var</string>
+			<string>store selection</string>
 			<key>xpos</key>
 			<real>220</real>
 			<key>ypos</key>
@@ -409,6 +445,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>3381D52B-F37A-422A-BB73-2654C0280799</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>680</real>
 			<key>ypos</key>
@@ -416,6 +454,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>5852A551-EFDF-47BB-A256-13A0D3975AA5</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>45</real>
 			<key>ypos</key>
@@ -423,6 +463,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>6887CA13-E491-46B2-9AA3-D36BEC604521</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>520</real>
 			<key>ypos</key>
@@ -430,6 +472,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>7984AFF9-05D8-4F7C-AEE3-C381AA4AD6A0</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>520</real>
 			<key>ypos</key>
@@ -437,6 +481,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>8851C420-3E80-4797-80F1-31999E4C2F54</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>295</real>
 			<key>ypos</key>
@@ -449,21 +495,32 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>refresh cache</string>
 			<key>xpos</key>
-			<real>730</real>
+			<real>735</real>
 			<key>ypos</key>
-			<real>660</real>
+			<real>755</real>
 		</dict>
 		<key>B8A93391-341E-4C2B-B16D-3E7BFE87E8D9</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>880</real>
+			<real>885</real>
 			<key>ypos</key>
-			<real>660</real>
+			<real>755</real>
+		</dict>
+		<key>D96907E4-B008-4B62-AED9-1958C5D8E9A4</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>1035</real>
+			<key>ypos</key>
+			<real>640</real>
 		</dict>
 		<key>E640FB36-75C7-4B36-A8AC-0F56468145CC</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>note</key>
 			<string>determine next subreddit</string>
 			<key>xpos</key>
@@ -476,9 +533,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>1030</real>
+			<real>1035</real>
 			<key>ypos</key>
-			<real>660</real>
+			<real>755</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -496,7 +553,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<integer>9</integer>
 			</dict>
 			<key>description</key>
-			<string>List of subreddits. One per line.</string>
+			<string>List of subreddits, one per line. (Without leading "r/".)</string>
 			<key>label</key>
 			<string>subreddits</string>
 			<key>type</key>
@@ -538,15 +595,34 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>description</key>
 			<string>redirect to old.reddit.com</string>
 			<key>label</key>
-			<string>use old.reddit</string>
+			<string>use old reddit</string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>
 			<string>use_old_reddit</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>enabled</string>
+			</dict>
+			<key>description</key>
+			<string>This makes hackernews appear in the list of subreddits, treating it as if it was another subreddit.</string>
+			<key>label</key>
+			<string>add hackernews</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>add_hackernews</string>
+		</dict>
 	</array>
 	<key>version</key>
-	<string></string>
+	<string>0.9</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
