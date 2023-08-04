@@ -80,8 +80,14 @@ function getHackernewsPosts() {
 			? "https://dstill.ai/hackernews/item/" + item.objectID
 			: "https://news.ycombinator.com/item?id=" + item.objectID;
 
-		let category = item._tags.find((tag) => tag === "show_hn" || tag === "ask_hn");
-		category = category ? `[${category.replace("show_hn", "Show HN").replace("ask_hn", "Ask HN")}]` : "";
+		// filter out jobs
+		if (item._tags.some((tag) => tag === "job")) return {};
+
+		let category = item._tags
+			.find((tag) => tag === "show_hn" || tag === "ask_hn")
+			.replace("show_hn", "Show HN")
+			.replace("ask_hn", "Ask HN");
+		category = category ? `[${category}]` : "";
 		const comments = item.num_comments || 0;
 		const subtitle = `${item.points}↑  ${comments}●  ${category}`;
 
@@ -166,7 +172,7 @@ function getRedditPosts(subredditName) {
 				shift: {
 					valid: !isOnReddit,
 					arg: externalUrl,
-					subtitle: isOnReddit ? "No external link" : "⇧: Open external link"
+					subtitle: isOnReddit ? "No external link" : "⇧: Open external link",
 				},
 			},
 		};

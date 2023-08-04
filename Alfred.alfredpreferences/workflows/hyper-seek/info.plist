@@ -12,7 +12,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>4860DE40-15B2-4518-A205-B3B021266756</string>
+				<string>85410B5C-411D-4939-AF9F-3675EF2B3CA1</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -101,19 +101,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>4860DE40-15B2-4518-A205-B3B021266756</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>78EFB778-9A4C-4C49-8367-93D039DCD765</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>56C25BE3-595F-4D36-A7D7-7F6C9B233A6F</key>
 		<array>
 			<dict>
@@ -166,6 +153,19 @@
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>⌥: Copy URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>85410B5C-411D-4939-AF9F-3675EF2B3CA1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>78EFB778-9A4C-4C49-8367-93D039DCD765</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -402,20 +402,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>tasksettings</key>
-				<dict>
-					<key>target_path</key>
-					<string>{const:alfred_workflow_cache}</string>
-				</dict>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/files-and-folders/path.trash</string>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/clear_cache.sh</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>4860DE40-15B2-4518-A205-B3B021266756</string>
+			<string>85410B5C-411D-4939-AF9F-3675EF2B3CA1</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -883,7 +888,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>refresh cache</string>
 			<key>xpos</key>
-			<real>775</real>
+			<real>780</real>
 			<key>ypos</key>
 			<real>140</real>
 		</dict>
@@ -974,15 +979,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>170</real>
 		</dict>
-		<key>4860DE40-15B2-4518-A205-B3B021266756</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>925</real>
-			<key>ypos</key>
-			<real>140</real>
-		</dict>
 		<key>56C25BE3-595F-4D36-A7D7-7F6C9B233A6F</key>
 		<dict>
 			<key>colorindex</key>
@@ -1022,6 +1018,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>780</real>
 			<key>ypos</key>
 			<real>320</real>
+		</dict>
+		<key>85410B5C-411D-4939-AF9F-3675EF2B3CA1</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>925</real>
+			<key>ypos</key>
+			<real>140</real>
 		</dict>
 		<key>B9CE3F5C-A396-4E8C-8709-A08871B57DE6</key>
 		<dict>
