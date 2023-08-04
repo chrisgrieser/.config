@@ -416,17 +416,14 @@
 	</array>
 	<key>readme</key>
 	<string>## Usage
-- `sub`: Select subreddit.
+- `sub`: Select subreddit to browse.
 - `rr`: Browse the current subreddit.
 	- &lt;kbd&gt;⏎&lt;/kbd&gt;: Open Post in reddit.
 	- &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Switch to next subreddit.
 	- &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy URL of post to clipboard.
 	- &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Open URL (if external link).
 
-No reddit account of any sort is needed.
-
-__Info__
-Run `sub` once to load the subreddit icons.
+No reddit account is needed. Due to smart caching, this workflow should never hit API rate limits under normal usage.
 
 ---
 

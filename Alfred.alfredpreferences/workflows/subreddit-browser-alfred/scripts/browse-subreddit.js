@@ -137,7 +137,7 @@ function getRedditPosts(subredditName) {
 				shift: {
 					valid: !isOnReddit,
 					arg: externalUrl,
-					subttile: isOnReddit ? "No external link" : "⇧: Open external link"
+					subtitle: isOnReddit ? "No external link" : "⇧: Open external link"
 				},
 			},
 		};
