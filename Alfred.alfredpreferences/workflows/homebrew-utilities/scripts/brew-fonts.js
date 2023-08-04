@@ -22,7 +22,6 @@ const workArray = JSON.parse(app.doShellScript(`curl -sL "${githubApiUrl}"`))
 			title: fontname,
 			match: alfredMatcher(fontname),
 			arg: cask,
-			mods: { alt: { arg: fontname } },
 			uid: cask,
 		};
 	});

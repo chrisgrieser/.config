@@ -149,7 +149,7 @@ local keybindings = {
 		key = "u",
 		mods = "CMD",
 		action = act.QuickSelectArgs {
-			patterns = { "https?://\\S+" },
+			patterns = { [[https?://[^\]"]+]] },
 			label = "Open URL",
 			action = actFun(function(window, pane)
 				local url = window:get_selection_text_for_pane(pane)
@@ -157,12 +157,12 @@ local keybindings = {
 			end),
 		},
 	},
-	{ -- cmd+y -> copy full line
+	{ -- cmd+y -> copy full line, useful for pages like `fx`
 		key = "y",
 		mods = "CMD",
 		action = act.QuickSelectArgs { patterns = { "^.*$" }, label = "Copy Full Line" },
 	},
-	{ -- cmd+o -> copy shell option (e.g. to copy stuff from a man page)
+	{ -- cmd+o -> copy shell option, e.g. to copy them from a man page
 		key = "o",
 		mods = "CMD",
 		action = act.QuickSelectArgs {
