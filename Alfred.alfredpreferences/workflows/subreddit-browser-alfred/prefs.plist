@@ -4,6 +4,8 @@
 <dict>
 	<key>add_hackernews</key>
 	<true/>
+	<key>cache_age_threshold</key>
+	<string>10</string>
 	<key>subreddits</key>
 	<string>neovim
 macapps
