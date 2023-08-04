@@ -52,6 +52,14 @@ function cacheIsOutdated(path) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
+// https://hn.algolia.com/api/
+// rate limit: 10k per houer
+function getHackernewsPosts() {
+
+}
+
+//──────────────────────────────────────────────────────────────────────────────
+
 // INFO free API calls restricted to 10 per minute
 // https://support.reddithelp.com/hc/en-us/articles/16160319875092-Reddit-Data-API-Wiki
 
