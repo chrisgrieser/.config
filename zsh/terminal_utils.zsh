@@ -174,13 +174,6 @@ function lr() {
 	echo "Copied."
 }
 
-# copies [v]iewport
-function lv() {
-	if ! command -v wezterm &>/dev/null; then print "\033[1;33mwezterm not installed.\033[0m" && return 1; fi
-	wezterm cli get-text | pbcopy
-	echo "Copied."
-}
-
 # extract
 function ex() {
 	if [[ -f $1 ]]; then

@@ -117,19 +117,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>A1EFFCF5-AED3-4AE3-A9C2-D0874D28CF2E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F38873E7-462C-4F93-9AD6-56BD4578A162</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>CD40AB53-70F2-460D-BF34-1DF77F46FB38</key>
 		<array>
 			<dict>
@@ -139,16 +126,6 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>EB5742BE-90AC-413D-B9D9-FD17A86E999B</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>⌥: Search at Google Fonts</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -311,76 +288,6 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>CD40AB53-70F2-460D-BF34-1DF77F46FB38</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://fonts.google.com/?query={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>EB5742BE-90AC-413D-B9D9-FD17A86E999B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>1</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>bh</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<false/>
-				<key>queuedelaymode</key>
-				<integer>1</integer>
-				<key>queuemode</key>
-				<integer>2</integer>
-				<key>runningsubtext</key>
-				<string>loading...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/build-brew-list.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>&gt; brew home '{query}'</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>A1EFFCF5-AED3-4AE3-A9C2-D0874D28CF2E</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -715,17 +622,6 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>ypos</key>
 			<real>465</real>
 		</dict>
-		<key>A1EFFCF5-AED3-4AE3-A9C2-D0874D28CF2E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>brew home</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>290</real>
-		</dict>
 		<key>A98EAA76-0074-4CAD-9A09-48949FC126DB</key>
 		<dict>
 			<key>colorindex</key>
@@ -744,7 +640,7 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>145</real>
+			<real>150</real>
 		</dict>
 		<key>CE590292-EEA5-4025-A89B-42AE38188503</key>
 		<dict>
@@ -756,15 +652,6 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>450</real>
-		</dict>
-		<key>EB5742BE-90AC-413D-B9D9-FD17A86E999B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>xpos</key>
-			<real>455</real>
-			<key>ypos</key>
-			<real>155</real>
 		</dict>
 		<key>EDA21286-4E28-4304-A9DB-0BA74AB2C370</key>
 		<dict>

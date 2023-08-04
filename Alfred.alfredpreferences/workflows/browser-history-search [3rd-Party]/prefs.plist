@@ -8,6 +8,8 @@
 	<false/>
 	<key>date_format</key>
 	<string>%d.%m </string>
+	<key>history_keyword</key>
+	<string>hh</string>
 	<key>show_favicon</key>
 	<true/>
 </dict>
