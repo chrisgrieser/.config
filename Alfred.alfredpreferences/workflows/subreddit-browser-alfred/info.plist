@@ -214,7 +214,7 @@
 			<key>inboundconfig</key>
 			<dict>
 				<key>externalid</key>
-				<string>loop</string>
+				<string>browse</string>
 				<key>inputmode</key>
 				<integer>1</integer>
 			</dict>
@@ -301,7 +301,7 @@
 			<key>config</key>
 			<dict>
 				<key>externaltriggerid</key>
-				<string>loop</string>
+				<string>browse</string>
 				<key>passinputasargument</key>
 				<true/>
 				<key>passvariables</key>

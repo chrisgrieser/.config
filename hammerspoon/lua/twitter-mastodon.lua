@@ -109,7 +109,7 @@ TickerAppWatcher = aw.new(function(appName, event)
 	elseif appName == env.tickerApp and event == aw.deactivated then
 		if u.isFront("CleanShot X") then return end
 		closeMediaWindow()
-		u.runWithDelays(2.5, scrollUp) -- deferred, so multiple links can be clicked
+		u.runWithDelays(1.5, scrollUp) -- deferred, so multiple links can be clicked
 
 		-- raise twitter when switching window to other app
 	elseif (event == aw.activated or event == aw.launched) and appName ~= env.tickerApp then
