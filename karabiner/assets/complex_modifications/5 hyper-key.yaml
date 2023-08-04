@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=./karabiner-schema.json
+# yaml-language-server: $schema=./schema/karabiner-mod.json
 title: ⇪ Hyper
 rules:
   #─────────────────────────────────────────────────────────────────────────────
