@@ -9,6 +9,7 @@ app.includeStandardAdditions = true;
 const cacheAgeThreshold = parseInt($.getenv("cache_age_threshold")) || 15;
 const oldReddit = $.getenv("use_old_reddit") === "1" ? "old" : "www";
 const useDstillAi = $.getenv("use_dstill_ai") === "1";
+const iconFolder = $.getenv("custom_subreddit_icons") || $.getenv("alfred_workflow_data");
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -83,11 +84,8 @@ function getHackernewsPosts() {
 		// filter out jobs
 		if (item._tags.some((tag) => tag === "job")) return {};
 
-		let category = item._tags
-			.find((tag) => tag === "show_hn" || tag === "ask_hn")
-			.replace("show_hn", "Show HN")
-			.replace("ask_hn", "Ask HN");
-		category = category ? `[${category}]` : "";
+		let category = item._tags.find((tag) => tag === "show_hn" || tag === "ask_hn");
+		category = (category ? `[${category}]` : "").replace("show_hn", "Show HN").replace("ask_hn", "Ask HN");
 		const comments = item.num_comments || 0;
 		const subtitle = `${item.points}↑  ${comments}●  ${category}`;
 
@@ -146,7 +144,7 @@ function getRedditPosts(subredditName) {
 		return;
 	}
 
-	let iconPath = `${$.getenv("alfred_workflow_data")}/${subredditName}.png`;
+	let iconPath = `${iconFolder}/${subredditName}.png`;
 	if (!fileExists(iconPath)) iconPath = "icon.png"; // not cached
 
 	/** @type AlfredItem[] */
