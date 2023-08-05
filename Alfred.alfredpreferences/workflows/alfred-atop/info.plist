@@ -1263,13 +1263,13 @@ JSON.stringify({ 'items': volume_array });
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
-				<true/>
+				<false/>
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>✅ DNS server changed to</string>
+				<string>✅ DNS server: {var:server_name}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -1869,7 +1869,7 @@ Display mounted volumes directly via `vol`.
 		<string> ⟡ </string>
 	</dict>
 	<key>version</key>
-	<string>1.0.11</string>
+	<string>1.1.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

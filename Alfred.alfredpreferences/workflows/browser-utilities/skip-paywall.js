@@ -46,9 +46,10 @@ function run() {
 	// Google to get there via the first link maybe
 	frontmostApp.openLocation("https://www.google.com/search?q=" + encodeURIComponent(title));
 
-	// Paywall skippers
+	// Try various Paywall skippers
 	frontmostApp.openLocation("https://12ft.io/" + url);
 	frontmostApp.openLocation("https://www.spaywall.com/search/" + url);
+	frontmostApp.openLocation("https://archive.li/" + url);
 
 	// Reader Mode, if supported
 	frontmostApp.menuBars[0].menuBarItems.byName("View").menus[0].menuItems.byName("Enter Reader Mode").click();
