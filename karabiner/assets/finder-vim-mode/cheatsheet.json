@@ -54,15 +54,14 @@
     },
     "^",
     {
-      "c": "#74b5fc",
+      "c": "#a6d1ff",
       "f": 1,
       "fa": [
         2
       ]
     },
-    "1\ntoggle tag #1 (mark)",
+    "1\ntoggle tag #1",
     {
-      "c": "#a6d1ff",
       "f": 2
     },
     "2\ntoggle tag #2",
@@ -322,7 +321,10 @@
     },
     "↑\nsort by size",
     {
-      "c": "#a6d1ff"
+      "fa": [
+        3,
+        1
+      ]
     },
     "end\nsort by tags"
   ],
@@ -343,12 +345,12 @@
     },
     "⌘",
     {
-      "c": "#74b5fc",
+      "c": "#fff4a6",
       "a": 5,
       "f": 2,
       "w": 6.25
     },
-    "␣ quick look\n⇧␣: add to selection &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⌥␣: select marked items in window\n\n\n\n\n──────",
+    "␣ quick look\n⇧␣: add to selection\n\n\n\n\n──────",
     {
       "c": "#999999",
       "a": 7,
