@@ -8,8 +8,9 @@ local u = require("lua.utils")
 ---(Apps not in this list will be ignored and never quit automatically).
 Thresholds = {
 	Slack = 20,
+	Obsidian = 100, -- only minimized, so the Obsidian-search-in-google extension still works
 	Mimestream = 5,
-	Highlights = 90,
+	Highlights = 90, -- not left when Steam is one
 	Discord = 180,
 	BusyCal = 2,
 	neovide = 120, -- needs lowercase
@@ -19,8 +20,32 @@ Thresholds = {
 	Finder = 20, -- only closes windows
 }
 
--- INFO Not adding Obsidian here, since it needs to run permanently for the
--- obsidian results in Google Search Results
+---@param app string name of the app
+local function quit(app)
+
+	-- don't leave voice call when gaming
+	if app == "Discord" and u.appRunning("Steam") then return end
+
+	local suffix = ""
+	if app == "Finder" then
+		local finderWins = u.app("Finder"):allWindows()
+		if #finderWins == 0 then return end
+		for _, win in pairs(finderWins) do
+			win:close()	
+		end
+		suffix = " (windows closed)"	
+	elseif app == "Obsidian" then
+		u.app("Obsidian"):mainWindow():minimize()
+		suffix = " (window minimized)"	
+	elseif app == "Hammerspoon" then
+		hs.closeConsole()
+		suffix = " (Console)"	
+	else
+		u.app(app):kill()
+	end
+	print("⏹️ AutoQuitting: " .. app .. suffix)
+	IdleApps[app] = nil
+end
 
 --------------------------------------------------------------------------------
 
@@ -42,32 +67,6 @@ DeactivationWatcher = u.aw.new(function(app, event)
 		IdleApps[app] = nil -- removes active or closed app from table
 	end
 end):start()
-
---------------------------------------------------------------------------------
-
----@param app string name of the app
-local function quit(app)
-
-	-- don't leave voice call when gaming
-	if app == "Discord" and u.appRunning("Steam") then return end
-
-	local suffix = ""
-	if app == "Finder" then
-		local finderWins = u.app("Finder"):allWindows()
-		if #finderWins == 0 then return end
-		for _, win in pairs(finderWins) do
-			win:close()	
-		end
-		suffix = " (windows closed)"	
-	elseif app == "Hammerspoon" then
-		hs.closeConsole()
-		suffix = " (Console)"	
-	else
-		u.app(app):kill()
-	end
-	print("⏹️ AutoQuitting: " .. app .. suffix)
-	IdleApps[app] = nil
-end
 
 --------------------------------------------------------------------------------
 
