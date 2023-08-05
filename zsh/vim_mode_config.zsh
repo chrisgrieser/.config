@@ -54,9 +54,10 @@ function zvm_after_lazy_keybindings() {
 	bindkey -M vicmd 'q' normal-mode-exit      # quicker quitting
 	bindkey -M vicmd 'y' vi-yank-pbcopy        # so it copies to the system clipboard
 
-	# -s flag sends direct keystrokes, to allow for remappings
+	# -s flag sends direct keystrokes and therefore allows for remappings
 	bindkey -M vicmd -s 'Y' 'y$'
 	bindkey -M vicmd -s 'X' 'mz$"_x`z' # Remove last character from line
-	bindkey -M vicmd -s '^S' 'daw'     # HACK set via Karabiner to <S-Space>
+
+	bindkey -M vicmd -s '^[OQ' 'daw'   # HACK ^[OQ = F2, set via Karabiner to <S-Space>
 	bindkey -M vicmd -s ' ' 'ciw'
 }

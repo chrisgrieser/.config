@@ -20,6 +20,7 @@ local lintersAndFormatters = {
 --------------------------------------------------------------------------------
 -- TODO
 -- INFO alternatives for when null-ls is archived
+-- - https://github.com/jay-babu/mason-null-ls.nvim/issues/82
 -- - ensure_installed https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
 -- - https://dotfyle.com/this-week-in-neovim/48#jose-elias-alvarez/null-ls.nvim
 
