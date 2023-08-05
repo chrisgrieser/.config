@@ -25,7 +25,7 @@ function file_or_url() {
 	local tmp="/tmp/temp.json"
 	if [[ -f "$1" ]]; then
 		local filepath="$1"
-		mv -f "$filepath" "$tmp"
+		cp -f "$filepath" "$tmp"
 	else
 		local url="$1"
 		curl --silent "$url" >"$tmp"
@@ -84,7 +84,7 @@ function jsong() {
 		tail -n +2 | # skip full object
 		sed -E 's/^json\.?/./' | # rm "json" prefix, keep dot for yq. Array: `json[0]`, Object: `json.key`
 		fzf --ansi --no-sort --query="$query" --info=inline \
-			--height=60% --preview-window="45%" \
+			--height="80%" --preview-window="45%" \
 			--preview='yq {1} --colors --output-format=json "/tmp/temp.json"')
 
 	[[ -z "$selection" ]] && return 0 # no selection made -> no exit 130

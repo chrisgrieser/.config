@@ -28,14 +28,15 @@ const formulaJson = home + "/Library/Caches/Homebrew/api/formula.jws.json";
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	// if (!(fileExists(formulaTxt) && fileExists(caskTxt))) app.doShellScript("brew update");
+	if (!(fileExists(formulaJson) && fileExists(caskJson))) app.doShellScript("brew update");
 
 	const casksRaw = JSON.parse(readFile(caskJson)).payload;
 
 	/** @type{AlfredItem[]} */
 	const casks = JSON.parse(casksRaw).map((cask) => {
 		const name = cask.token || "unknown";
-		const installedIcon = installedBrews.includes(name) ? " ✅" : "";
+		// const installedIcon = installedBrews.includes(name) ? " ✅" : "";
+		const installedIcon = cask.installed ? " ✅" : "";
 		return {
 			title: name + installedIcon,
 			match: alfredMatcher(name),
@@ -48,12 +49,15 @@ function run() {
 		};
 	});
 
+	//───────────────────────────────────────────────────────────────────────────
+
 	const formulaRaw = JSON.parse(readFile(formulaJson)).payload;
 
 	/** @type{AlfredItem[]} */
 	const formulas = JSON.parse(formulaRaw).map((formula) => {
 		const name = formula.name || "unknown";
-		const installedIcon = installedBrews.includes(name) ? " ✅" : "";
+		// const installedIcon = installedBrews.includes(name) ? " ✅" : "";
+		const installedIcon = formula.installed.length > 0 ? " ✅" : "";
 		return {
 			title: name + installedIcon,
 			match: alfredMatcher(name),
