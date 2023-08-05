@@ -20,17 +20,20 @@ function json2yaml() {
 #───────────────────────────────────────────────────────────────────────────────
 
 # $1: filepath or URL
-# ensures either file or the downloaded url can be accessed at the same path
-function file_or_url() {
-	local tmp="/tmp/temp.json"
-	if [[ -f "$1" ]]; then
-		local filepath="$1"
-		cp -f "$filepath" "$tmp"
-	else
-		local url="$1"
-		curl --silent "$url" >"$tmp"
-	fi
-}
+# no $1: read from stdin
+# ensures either file, downloaded url, or stdin can be accessed at the same path
+# function file_or_url() {
+# 	local tmp="/tmp/temp.json"
+# 	if [[ -z "$1" ]]; then
+# 		echo "$(</dev/stdin)" | tr -d "\n" >"$tmp"
+# 	elif [[ -f "$1" ]]; then
+# 		local filepath="$1"
+# 		cp -f "$filepath" "$tmp"
+# 	else
+# 		local url="$1"
+# 		curl --silent "$url" >"$tmp"
+# 	fi
+# }
 
 # json [s]chema
 function jsons() {
@@ -47,7 +50,7 @@ function jsonx() {
 	if ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then echo "Not using WezTerm." && return 1; fi
 
 	local tmp="/tmp/temp.json"
-	file_or_url "$1"
+	file_url_or_stdin "$1"
 
 	curl --silent "$url" --output "$tmp"
 	pane_id=$(wezterm cli spawn -- fx "$tmp") # open in new wezterm tab
@@ -61,12 +64,21 @@ function jsont() {
 	if ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then echo "Not using WezTerm." && return 1; fi
 
 	local tmp="/tmp/temp.json"
-	file_or_url "$1"
-	quicktype --lang=typescript --just-types "$tmp" >> "/tmp/temp.ts"
+	file_url_or_stdin "$1"
+	quicktype --lang=typescript --just-types "$tmp" >>"/tmp/temp.ts"
 
 	# open in new wezterm tab
 	pane_id=$(wezterm cli spawn -- bat "/tmp/temp.ts")
 	wezterm cli set-tab-title --pane-id="$pane_id" "json types"
+}
+
+function testme() {
+	if [[ -z "$1" ]]; then
+		stdin="$(</dev/stdin)"
+		echo "$stdin"
+	else
+		echo "$1"
+	fi
 }
 
 # json [g]rep
@@ -77,17 +89,11 @@ function jsong() {
 
 	local tmp="/tmp/temp.json"
 	local query="$2"
-	local stdin
-	if [[ $# -eq 0 ]]; then
-		stdin="$(< /dev/stdin)"
-		file_or_url "$1"
-	else
-		echo -e "$stdin" >"$tmp"
-	fi
+	file_url_or_stdin "$1"
 
 	# shellcheck disable=2016
 	selection=$(fastgron --color --no-newline "$tmp" |
-		tail -n +2 | # skip full object
+		tail -n +2 |             # skip full object
 		sed -E 's/^json\.?/./' | # rm "json" prefix, keep dot for yq. Array: `json[0]`, Object: `json.key`
 		fzf --ansi --no-sort --query="$query" --info=inline \
 			--height="80%" --preview-window="45%" \

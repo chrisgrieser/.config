@@ -165,6 +165,21 @@
 		"prefix": "sed (replacement)",
 		"body": "sed -E 's/${1:pattern}/${2:replacement}/g'"
 	},
+	"input (stdin or $1)": {
+		"prefix": "input (stdin or $1)",
+		"body": [
+			"if [[ $# -eq 0 ]]; then",
+			"\tinput=$(< /dev/stdin)",
+			"else",
+			"\tinput=\"$1\"",
+			"fi"
+		],
+		"description": "reads either from STDIN or $1. stdin may have unescaped newlines, which have to be removed, e.g. via `tr -d '\n'`."
+	},
+	"stdin": {
+		"prefix": "stdin",
+		"body": "stdin=\"$(< /dev/stdin)\""
+	},
 	"stderr (pipe)": {
 		"prefix": "stderr (pipe)",
 		"body": "2>&1"
