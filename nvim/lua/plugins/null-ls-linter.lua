@@ -17,6 +17,11 @@ local lintersAndFormatters = {
 	"rome", -- also an LSP; the lsp does diagnostics, the CLI via null-ls does formatting
 	-- stylelint included in mason, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
 }
+--------------------------------------------------------------------------------
+-- TODO
+-- INFO alternatives for when null-ls is archived
+-- - ensure_installed https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
+-- - https://dotfyle.com/this-week-in-neovim/48#jose-elias-alvarez/null-ls.nvim
 
 --------------------------------------------------------------------------------
 local function nullSources()

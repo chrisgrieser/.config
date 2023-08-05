@@ -4,12 +4,12 @@
 alias co="git checkout"
 alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to last directory
 alias gs='git status'
-alias ga="git add"
+alias ga="ct git add"
 alias gm="git add -A && git commit --amend --no-edit" # a[m]end
 alias gM="git commit --amend" # amend + edit commit msg
 alias gc="git commit"
-alias push="git push"
-alias pull="git pull"
+alias push="ct git push"
+alias pull="ct git pull"
 alias gi='gh issue list'
 alias g.='cd "$(git rev-parse --show-toplevel)"' # goto git root
 alias grh='git reset --hard'
