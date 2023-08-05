@@ -2,7 +2,7 @@
 
 # install/update
 export HOMEBREW_CASK_OPTS="--no-quarantine"
-export HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_NO_AUTO_UPDATE=0 # updates now speedier
 export HOMEBREW_DISPLAY_INSTALL_TIMES=1
 
 # cleanup
@@ -12,7 +12,7 @@ export HOMEBREW_CLEANUP_MAX_AGE_DAYS=60
 export HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=30
 
 # misc
-export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_NO_ANALYTICS=0 # they have the server in the EU now, so it's okay
 export HOMEBREW_NO_ENV_HINTS=1
 
 alias bh='brew home'
