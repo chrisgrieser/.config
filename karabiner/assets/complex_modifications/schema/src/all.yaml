@@ -1079,7 +1079,7 @@ anchors:
             - key_code: control
             - key_code: option
         to: [key_code: vk_none]
-        parameters: { basic.simultaneous_threshold_milliseconds: 400 }
+        parameters: { basic.simultaneous_threshold_milliseconds: 600 }
       - type: basic
         from:
           simultaneous:
@@ -1090,7 +1090,7 @@ anchors:
             - key_code: option
             - key_code: period
         to: [key_code: vk_none]
-        parameters: { basic.simultaneous_threshold_milliseconds: 400 }
+        parameters: { basic.simultaneous_threshold_milliseconds: 600 }
   # this basically emulations the "Right-Click Open Link in new Background tab"
   # Chrome extension. Only done for a brief duration, so holding the right mouse
   # button still works for mouse gestues. Also, Rocker Gesture (Left) is

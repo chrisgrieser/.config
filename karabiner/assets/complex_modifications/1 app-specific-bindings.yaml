@@ -191,6 +191,20 @@ rules:
           - { key_code: c, modifiers: [option, command] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
+
+  #─────────────────────────────────────────────────────────────────────────────
+  # imitates browser behavior of having to be held down to quit
+  - description: "(Apps) Obsidian: ⌘Q, not held down → Minimize, instead of quit"
+    manipulators:
+      - type: basic
+        from: { key_code: q, modifiers: { mandatory: [command] } }
+        to_if_alone: 
+          - { key_code: m, modifiers: [command] }
+        to_if_held_down:
+          - { key_code: q, modifiers: [command] }
+        parameters: { basic.to_if_held_down_threshold_milliseconds: 500 }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^md\.obsidian$] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Hammerspoon: ⌘Q → Close instead of Quit, ⌘K → Clear Console, ⌘⇧C → copy last command"
     manipulators:

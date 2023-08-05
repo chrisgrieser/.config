@@ -207,12 +207,19 @@ function appid() {
 function prefs() {
 	if [[ "$PREF_BEFORE" -eq 0 ]]; then
 		defaults read >/tmp/before
-		echo "Saved current defaults state."
 		PREF_BEFORE=1
+
+		echo "Saved current \`defaults\` state."
 	else
 		defaults read >/tmp/after
-		command diff /tmp/before /tmp/after | grep -v "_DKThrottledActivityLast" | grep -E "^(<|>)"
+		local changes
+		changes=$(command diff /tmp/before /tmp/after | grep -v "_DKThrottledActivityLast" | grep -E "^(<|>)")
 		PREF_BEFORE=0
+
+		echo "$changes"
+		# show context, so the domain can be identified
+		separator
+		toGrep=$(echo "$changes" | tail -n1 | sed -e 's/^> *//') 
+		grep -B20 "$toGrep" /tmp/after
 	fi
 }
-
