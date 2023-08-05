@@ -47,7 +47,7 @@ function jsont() {
 	local url="$*"
 
 	# insert URL at top
-	echo -e "// $url\n" >"/tmp/jsont.ts" 
+	echo -e "// $url\n" >"/tmp/jsont.ts"
 
 	# insert types
 	types=$(quicktype "$url" --lang=typescript --just-types)
@@ -66,18 +66,20 @@ function jsong() {
 
 	local url="$1"
 	local query="$2"
-	curl -sL "$url" > "/tmp/jsong.json"
+	curl -sL "$url" >"/tmp/jsong.json"
 
-	# shellcheck disable=2016 
-	selection=$(fastgron --color --no-newline "/tmp/jsong.json" |
+	# shellcheck disable=2016
+	selection=$(fastgron --color |
+		tail -n +2 "/tmp/jsong.json" | 
 		cut -c5- | # #cut the leading "json"
-		fzf --ansi --no-sort --query="$query" --info=inline \
-		--preview-window="45%" --preview='yq {1} --colors "/tmp/jsong.json"')
+		fzf --ansi --no-sort --query="$query" --info=inline --preview-window="45%" \
+			--preview='yq {1} --colors --output-format=json "/tmp/jsong.json"')
 
-	# no selection made -> no exit 130
-	[[ -z "$selection" ]] && return 0 
+	[[ -z "$selection" ]] && return 0 # no selection made -> no exit 130
 
-	# selection made -> copy
-	echo -n "$selection" | pbcopy
+	echo -n "$selection" |
+		cut -d" " -f1 |
+		xargs -I {} yq {} --output-format=json "/tmp/jsong.json" |
+		pbcopy
 	echo "Copied: $selection"
 }
