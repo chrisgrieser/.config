@@ -19,12 +19,14 @@ declare class macAppObj {
 	menuBars: {
 		menuBarItems: {
 			byName(menuName: string): {
-				menuItems: {
-					byName(itemName: string): {
-						click(): void;
+				menus: {
+					menuItems: {
+						byName(itemName: string): {
+							click(): void;
+						};
 					};
-				};
-			}[];
+				}[];
+			};
 		};
 	}[];
 }
@@ -118,16 +120,16 @@ declare const Application: {
 		open(path: PathObj): void;
 		reveal(path: PathObj): void;
 		// accepts arrays only for *files*?! https://github.com/chrisgrieser/finder-vim-mode/issues/3
-		select(path: PathObj | PathObj[]): void; 
+		select(path: PathObj | PathObj[]): void;
 		selection(): PathObj[];
 		finderWindows: { target: finderItem };
 		insertionLocation(): finderItem;
 		// https://medium.com/hackernoon/javascript-for-automation-in-macos-3b499da40da1
 		make(options: {
-			new: "folder"|"file",
-			at: PathObj,
-			withProperties: { name: string; }
-		}):finderItem;
+			new: "folder" | "file";
+			at: PathObj;
+			withProperties: { name: string };
+		}): finderItem;
 	};
 	(name: "SideNotes"): macAppObj & {
 		currentNote(): SideNotesNote;
