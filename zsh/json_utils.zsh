@@ -20,15 +20,15 @@ function json2yaml() {
 #───────────────────────────────────────────────────────────────────────────────
 
 # $1: filepath or URL
-# returns: filepath or path to temp file containing downloaded URL
+# ensures either file or the downloaded url can be accessed at the same path
 function file_or_url() {
+	local tmp="/tmp/temp.json"
 	if [[ -f "$1" ]]; then
-		echo "$1"
+		local filepath="$1"
+		mv -f "$filepath" "$tmp"
 	else
-		local tmp="/tmp/temp.json"
 		local url="$1"
 		curl --silent "$url" >"$tmp"
-		echo "$tmp"
 	fi
 }
 
@@ -46,8 +46,8 @@ function jsonx() {
 	if ! command -v fx &>/dev/null; then print "\033[1;33mfx not installed.\033[0m" && return 1; fi
 	if ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then echo "Not using WezTerm." && return 1; fi
 
-	local tmp
-	tmp=$(file_or_url "$1")
+	local tmp="/tmp/temp.json"
+	file_or_url "$1"
 
 	curl --silent "$url" --output "$tmp"
 	pane_id=$(wezterm cli spawn -- fx "$tmp") # open in new wezterm tab
@@ -60,7 +60,8 @@ function jsont() {
 	if ! command -v bat &>/dev/null; then print "\033[1;33mbat not installed.\033[0m" && return 1; fi
 	if ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then echo "Not using WezTerm." && return 1; fi
 
-	tmp=$(file_or_url "$1")
+	local tmp="/tmp/temp.json"
+	file_or_url "$1"
 	quicktype --lang=typescript --just-types "$tmp" >> "/tmp/temp.ts"
 
 	# open in new wezterm tab
@@ -74,16 +75,17 @@ function jsong() {
 	if ! command -v fzf &>/dev/null; then print "\033[1;33m fzf not installed.\033[0m" && return 1; fi
 	if ! command -v yq &>/dev/null; then print "\033[1;33myq not installed.\033[0m" && return 1; fi
 
-	local tmp
-	tmp=$(file_or_url "$1")
+	local tmp="/tmp/temp.json"
+	file_or_url "$1"
 	local query="$2"
 
 	# shellcheck disable=2016
 	selection=$(fastgron --color --no-newline "$tmp" |
-		tail -n +2 | cut -c1- | # remove first entry, cut the leading "json"
+		tail -n +2 | # skip full object
+		sed -E 's/^json\.?/./' | # rm "json" prefix, keep dot for yq. Array: `json[0]`, Object: `json.key`
 		fzf --ansi --no-sort --query="$query" --info=inline \
 			--height=60% --preview-window="45%" \
-			--preview='yq {1} --colors --output-format=json "$tmp"')
+			--preview='yq {1} --colors --output-format=json "/tmp/temp.json"')
 
 	[[ -z "$selection" ]] && return 0 # no selection made -> no exit 130
 
