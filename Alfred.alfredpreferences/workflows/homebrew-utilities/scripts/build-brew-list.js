@@ -5,11 +5,6 @@ app.includeStandardAdditions = true;
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const caskIcon = "🍺";
-const formulaIcon = "🐚";
-
-//──────────────────────────────────────────────────────────────────────────────
-
 const alfredMatcher = (/** @type {string} */ str) => str.replaceAll("-", " ") + " " + str + " ";
 
 /** @param {string} path */
@@ -37,19 +32,19 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
  * @property {string} homepage
  */
 
+// INFO https://formulae.brew.sh/docs/api/
+// https://docs.brew.sh/Querying-Brew
+// these files contain as payload the API response of casks and formulas; they
+// are updated on each `brew update`. Since they are effectively caches,
+// there is no need create caches on my own
+const caskJson = app.pathTo("home folder") + "/Library/Caches/Homebrew/api/cask.jws.json";
+const formulaJson = app.pathTo("home folder") + "/Library/Caches/Homebrew/api/formula.jws.json";
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	// INFO https://formulae.brew.sh/docs/api/
-	// these files contain as payload the API response of casks and formulas; they
-	// are updated on each `brew update`. Since they are effectively caches,
-	// there is no need create caches on my own
-	const home = app.pathTo("home folder");
-	const caskJson = home + "/Library/Caches/Homebrew/api/cask.jws.json";
-	const formulaJson = home + "/Library/Caches/Homebrew/api/formula.jws.json";
-
 	// PERF `ls` quicker than `brew list`
 	const installedBrews = app
 		.doShellScript("ls -1 /opt/homebrew/Cellar ; ls -1 /opt/homebrew/Caskroom")
@@ -59,6 +54,9 @@ function run() {
 
 	const casksRaw = JSON.parse(readFile(caskJson)).payload;
 	const formulaRaw = JSON.parse(readFile(formulaJson)).payload;
+
+	const caskIcon = "🛢️";
+	const formulaIcon = "🍺";
 
 	//───────────────────────────────────────────────────────────────────────────
 
@@ -86,7 +84,7 @@ function run() {
 	const formulas = JSON.parse(formulaRaw).map((/** @type {Formula} */ formula) => {
 		const name = formula.name;
 		const installedIcon = installedBrews.includes(name) ? " ✅" : "";
-		const dependencies = formula.dependencies.length > 0 ? ` +${formula.dependencies.length} ` : "";
+		const dependencies = formula.dependencies.length > 0 ? ` +${formula.dependencies.length}d ` : "";
 		const caveats = formula.caveats || "";
 		const caveatIcon = caveats ? " ℹ️ " : "";
 		return {

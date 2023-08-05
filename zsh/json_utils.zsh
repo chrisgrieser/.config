@@ -51,7 +51,6 @@ function fx() {
 	local tmp="/tmp/temp.json"
 	file_url_or_stdin "$1"
 
-	curl --silent "$url" --output "$tmp"
 	pane_id=$(wezterm cli spawn -- fx "$tmp") # open in new wezterm tab
 	wezterm cli set-tab-title --pane-id="$pane_id" "json explore"
 }
