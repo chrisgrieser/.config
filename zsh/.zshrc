@@ -14,17 +14,6 @@ CONFIG_FILES=(
 	intro_messages
 )
 
-
-function testme() {
-	if [[ -n "$1" ]]; then
-		stdin="$(</dev/stdin)"
-		echo "$stdin"
-	else
-		echo "$1"
-	fi
-}
-
-
 # shell integration for wezterm
 # https://github.com/wez/wezterm/blob/main/assets/shell-integration/wezterm.sh
 [[ "$TERM_PROGRAM" == "WezTerm" ]] && CONFIG_FILES+=(semantic_prompts)
