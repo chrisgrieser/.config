@@ -31,14 +31,14 @@ rules:
               FRONT_APP=$(osascript -e 'tell application "System Events" to return name of first process whose frontmost is true')
               killall "$FRONT_APP"
 
-              # wait for 5 secs
+              # wait for 2.5 secs
               i=0
               while pgrep -xq "$FRONT_APP"; do 
                 i=$((i+1))
-                sleep 0.05
-                if [[ $i -gt 100 ]]; then 
+                sleep 0.1
+                if [[ $i -gt 25 ]]; then 
                   osascript -e "display notification \"\" with title \"Could not quit $FRONT_APP\""
-                  return 1
+                  exit 1
                 fi
               done
 

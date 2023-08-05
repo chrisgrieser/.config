@@ -82,6 +82,18 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>57B5FE5A-E05E-4ACB-8E19-F11900D15215</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>9F25E19F-344A-4E1F-91E4-6038DC225CFA</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>10CA15B1-4D0A-4969-A5CB-710B56613A61</key>
 		<array>
@@ -124,6 +136,32 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>9C677454-9EBA-42D1-9B49-ABB15200167A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>329C9BD5-CD31-45B7-B732-102981D6418F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8C2E586B-5404-426B-A71C-D71AC8BF3A14</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>57B5FE5A-E05E-4ACB-8E19-F11900D15215</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>329C9BD5-CD31-45B7-B732-102981D6418F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -723,6 +761,20 @@
 						<key>uid</key>
 						<string>29F2A35E-2840-4F29-B519-434CFFBE461E</string>
 					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:mode}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>dns</string>
+						<key>outputlabel</key>
+						<string>dns</string>
+						<key>uid</key>
+						<string>9F25E19F-344A-4E1F-91E4-6038DC225CFA</string>
+					</dict>
 				</array>
 				<key>elselabel</key>
 				<string>else</string>
@@ -786,7 +838,7 @@
 				<key>fixedorder</key>
 				<false/>
 				<key>items</key>
-				<string>[{"imagefile":"78ce0450fe203f6d692a5d576d1da6cc1fe8cdcf.png","title":"Processes","arg":"processes","subtitle":"CPU, Memory, Parent Processes {var:separator} kill processes &amp; restart apps"},{"imagefile":"56f60ed4890c3aadf8b17042498f550f2f86f1b1.png","title":"Network","arg":"network","subtitle":"download, upload"},{"imagefile":"5f6447eb3c6eb47e26123ff2a4f4ee74c71fc9b6.png","title":"Bluetooth","arg":"bluetooth","subtitle":"Battery, RSSI, Connection Status {var:separator} connect &amp; disconnect"},{"imagefile":"f08290a14dddd7ae985e18ea4f069829fbec0622.png","title":"Uptime","arg":"uptime","subtitle":"uptime, last 10 reboots"},{"imagefile":"9e5889c6e9214cf16318b4870dac435013f6f2bc.png","title":"Speedtest","arg":"speedtest","subtitle":"Speed of Internet Connection"},{"imagefile":"9509d3e0105844ea2f6358086d0f275bf0e8555a.png","title":"Removable Volumes","arg":"volumes","subtitle":"Disk Space Usage {var:separator} eject &amp; browse"}]</string>
+				<string>[{"imagefile":"78ce0450fe203f6d692a5d576d1da6cc1fe8cdcf.png","title":"Processes","arg":"processes","subtitle":"CPU, Memory, Parent Processes {var:separator} kill processes &amp; restart apps"},{"imagefile":"56f60ed4890c3aadf8b17042498f550f2f86f1b1.png","title":"Network","arg":"network","subtitle":"download, upload"},{"imagefile":"5f6447eb3c6eb47e26123ff2a4f4ee74c71fc9b6.png","title":"Bluetooth","arg":"bluetooth","subtitle":"Battery, RSSI, Connection Status {var:separator} connect &amp; disconnect"},{"imagefile":"9509d3e0105844ea2f6358086d0f275bf0e8555a.png","title":"Removable Volumes","arg":"volumes","subtitle":"Disk Space Usage {var:separator} eject &amp; browse"},{"imagefile":"f08290a14dddd7ae985e18ea4f069829fbec0622.png","title":"Uptime","arg":"uptime","subtitle":"uptime, last 10 reboots"},{"imagefile":"9e5889c6e9214cf16318b4870dac435013f6f2bc.png","title":"Speedtest","arg":"speedtest","subtitle":"Speed of Internet Connection"},{"imagefile":"19492839cda7d8f0453b3aecf147594fa806a0f1.png","title":"DNS","arg":"dns","subtitle":"See &amp; Change DNS Server"}]</string>
 				<key>keyword</key>
 				<string>atop</string>
 				<key>matchmode</key>
@@ -1156,6 +1208,99 @@ JSON.stringify({ 'items': volume_array });
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>dns</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/select-dns-server.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Select DNS Server</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>57B5FE5A-E05E-4ACB-8E19-F11900D15215</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ DNS server changed to</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>8C2E586B-5404-426B-A71C-D71AC8BF3A14</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/switch-dns.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>329C9BD5-CD31-45B7-B732-102981D6418F</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string># atop
@@ -1197,9 +1342,9 @@ Display mounted volumes directly via `vol`.
 		<key>10CA15B1-4D0A-4969-A5CB-710B56613A61</key>
 		<dict>
 			<key>xpos</key>
-			<real>175</real>
+			<real>170</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>560</real>
 		</dict>
 		<key>1765993C-E2F9-4224-A487-1B3FF0F4B90B</key>
 		<dict>
@@ -1230,6 +1375,15 @@ Display mounted volumes directly via `vol`.
 			<key>ypos</key>
 			<real>130</real>
 		</dict>
+		<key>329C9BD5-CD31-45B7-B732-102981D6418F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>595</real>
+			<key>ypos</key>
+			<real>1360</real>
+		</dict>
 		<key>40C6D3F7-B5AB-4C45-A3ED-7926B186E25F</key>
 		<dict>
 			<key>colorindex</key>
@@ -1258,6 +1412,15 @@ Display mounted volumes directly via `vol`.
 			<real>595</real>
 			<key>ypos</key>
 			<real>1225</real>
+		</dict>
+		<key>57B5FE5A-E05E-4ACB-8E19-F11900D15215</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>390</real>
+			<key>ypos</key>
+			<real>1360</real>
 		</dict>
 		<key>63C34A52-70A0-4CA0-AC29-0B8B16E654C8</key>
 		<dict>
@@ -1308,6 +1471,15 @@ Display mounted volumes directly via `vol`.
 			<key>ypos</key>
 			<real>1090</real>
 		</dict>
+		<key>8C2E586B-5404-426B-A71C-D71AC8BF3A14</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>760</real>
+			<key>ypos</key>
+			<real>1360</real>
+		</dict>
 		<key>91CC8BC3-40C4-4D4B-8B44-919B6865C4A0</key>
 		<dict>
 			<key>colorindex</key>
@@ -1342,7 +1514,7 @@ Display mounted volumes directly via `vol`.
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>515</real>
+			<real>535</real>
 		</dict>
 		<key>B6749459-30C8-484B-BE73-E64557107E37</key>
 		<dict>
