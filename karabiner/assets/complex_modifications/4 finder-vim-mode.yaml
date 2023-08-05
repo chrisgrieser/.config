@@ -64,7 +64,6 @@ anchors:
         set_notification_message:
           id: insert-notice
           text: ""
-      # Find Mode
       - &enter-find-mode
         set_variable:
           name: FINDER_FIND_MODE
@@ -81,7 +80,6 @@ anchors:
         set_notification_message:
           id: find-notice
           text: ""
-      # Move Active
       - &remove-move-notice
         set_notification_message:
           id: move-notice
@@ -106,6 +104,14 @@ anchors:
         set_variable:
           name: FINDER_MENU_ACTIVE
           value: false
+      - &remove-menu-notice
+        set_notification_message:
+          id: menu-notice
+          text: ""
+      - &menu-notice
+        set_notification_message:
+          id: menu-notice
+          text: "👉 Menu Mode"
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
@@ -269,6 +275,7 @@ rules:
           - { key_code: spacebar, modifiers: [command] }
           - *remove-insert-notice
           - *leave-insert-mode
+          - *remove-menu-notice
           - *end-menu
         conditions: [*finder-app]
 
@@ -283,11 +290,12 @@ rules:
           - key_code: escape
           - *remove-insert-notice
           - *leave-insert-mode
+          - *remove-insert-notice
           - *end-menu
-          - *end-move
           - *remove-move-notice
-          - *leave-find-mode
+          - *end-move
           - *remove-find-notice
+          - *leave-find-mode
         # keep hyper binding if not pressed alone
         to:
           - key_code: right_shift
@@ -300,22 +308,26 @@ rules:
           - key_code: escape
           - *remove-insert-notice
           - *leave-insert-mode
-          - *end-move
+          - *remove-insert-notice
+          - *end-menu
           - *remove-move-notice
-          - *leave-find-mode
+          - *end-move
           - *remove-find-notice
+          - *leave-find-mode
         conditions: [*finder-app]
-        # Closing window or quite
+        # Closing window or quit
       - type: basic
         from: { key_code: q, modifiers: { mandatory: [command] } }
         to:
           - { key_code: q, modifiers: [command] }
           - *remove-insert-notice
           - *leave-insert-mode
+          - *remove-insert-notice
           - *end-menu
           - *remove-move-notice
-          - *leave-find-mode
+          - *end-move
           - *remove-find-notice
+          - *leave-find-mode
         conditions: [*finder-app]
       # Q: Restart Finder
       - type: basic
@@ -327,11 +339,12 @@ rules:
               afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/screen_sharing_started.caf" &
           - *remove-insert-notice
           - *leave-insert-mode
+          - *remove-insert-notice
           - *end-menu
-          - *end-move
           - *remove-move-notice
-          - *leave-find-mode
+          - *end-move
           - *remove-find-notice
+          - *leave-find-mode
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # closing win should end insert, menu, and find mode, but not cancel move
       - type: basic
@@ -340,9 +353,10 @@ rules:
           - { key_code: w, modifiers: [command] }
           - *remove-insert-notice
           - *leave-insert-mode
+          - *remove-insert-notice
           - *end-menu
-          - *leave-find-mode
           - *remove-find-notice
+          - *leave-find-mode
         conditions: [*finder-app]
       #─────────────────────────────────────────────────────────────────────────
       # Window & Tabs
@@ -370,6 +384,7 @@ rules:
         to_if_alone:
           - { key_code: grave_accent_and_tilde, modifiers: [command] }
           - *end-menu
+          - *remove-menu-notice
           - *leave-find-mode
           - *remove-find-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
@@ -386,6 +401,7 @@ rules:
           - key_code: up_arrow
           - key_code: right_arrow
           - *start-menu
+          - *menu-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       #─────────────────────────────────────────────────────────────────────────
       # Selections
@@ -411,41 +427,6 @@ rules:
         to:
           - { key_code: down_arrow, modifiers: [shift] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # <M-Space> = select all files in window with tag "vim-mark"
-      - type: basic
-        from: { key_code: spacebar, modifiers: { mandatory: [option] } }
-        to:
-          # WARN this script can only select *files* https://github.com/chrisgrieser/finder-vim-mode/issues/3
-          - shell_command: |
-              osascript -l JavaScript -e 'function run() {
-                const app = Application.currentApplication();
-                app.includeStandardAdditions = true;
-                const finder = Application("Finder");
-                const win = finder.insertionLocation();
-                if (!win) return;
-                const winPath = decodeURIComponent(win.url().slice(7));
-                // filter only files with mdfind
-                const taggedFilesStr = app
-                  .doShellScript (`mdfind -onlyin "${winPath}" "kMDItemUserTags == vim-mark && ! kMDItemContentType == public.folder"`)
-                if (!taggedFilesStr) {
-                  app.displayNotification("(Only non-folders in non-hidden dirs are supported.)", { withTitle: "Finder Vim Mode", subtitle: "No file selected." })
-                  return;
-                }
-                const taggedFiles = taggedFilesStr
-                  .split("\r")
-                  .map(path => Path(path));
-                try {
-                  finder.select(taggedFiles);
-                  // untag the file again
-                  delay(0.3)
-                  finder.activate();
-                  Application("System Events").keystroke("1", { using: "control down" });
-                } catch (error) {
-                  app.displayNotification("", { withTitle: "Finder Vim Mode", subtitle: "Error: " + error })
-                }
-              }
-              run()'
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       # q = right-click / Context Menu
       - type: basic
@@ -465,6 +446,7 @@ rules:
                   tell value of attribute "AXFocusedUIElement" to perform action "AXShowMenu"
                 end tell'
           - *start-menu
+          - *menu-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # close context menu with q
       - type: basic
@@ -472,6 +454,7 @@ rules:
         to_if_alone:
           - key_code: escape
           - *end-menu
+          - *remove-menu-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *menu-is-open]
       # changed navigation in context menu
       - type: basic
@@ -492,6 +475,7 @@ rules:
         to:
           - key_code: return_or_enter
           - *end-menu
+          - *remove-menu-notice
         conditions: [*finder-app, *menu-is-open]
       # INFO: context menu cancellation configured with the insert mode cancellations
       #─────────────────────────────────────────────────────────────────────────

@@ -1,0 +1,74 @@
+#───────────────────────────────────────────────────────────────────────────────
+# https://github.com/hSaria/ChromaTerm#palette
+palette:
+  type-1: "#dc8968"
+  type-2: "#00e0d1"
+  type-3: "#ef2e9f"
+  type-4: "#5698c8"
+  type-5: "#a35a00"
+  type-6: "#df99f0"
+  type-7: "#03d28d"
+  status-1: "#c71800"
+  status-2: "#c96901"
+  status-3: "#ca9102"
+  status-4: "#cab902"
+  status-5: "#a2bc02"
+  status-6: "#79bf02"
+  status-7: "#28c501"
+
+#───────────────────────────────────────────────────────────────────────────────
+# https://github.com/hSaria/ChromaTerm#highlight-rules
+
+rules:
+  - description: Numbers
+    regex: \b(?<!\.)\d+(\.\d+)?(?!\.)\b
+    color: f.type-1
+
+  - description: URL
+    regex: |
+      (?ix)\b
+          ((htt|ft|lda)ps?|telnet|ssh)://  # Scheme
+          ([-%:\w\\/]{1,256}@)?  # User info
+          [-\w]{1,63}(\.[-\w]{1,63}){0,126}(:\d{1,5})?  # Host and port
+          (/[-+=~@%&?#.:;,\w\\/()]*)?  # Path, query, and fragment
+      ((?=[.:;,)])|\b)  # Avoid highlighting trailing path characters by matching them in a lookahead
+    color: f.type-4
+    exclusive: true
+
+  - description: Date
+    regex: |
+      (?ix)\b(
+          (\d{2}|\d{4})(?P<sep1>[-/])(0?[1-9]|1[0-2])(?P=sep1)(3[0-1]|[1-2]\d|0?[1-9])|  # YYYY-MM-DD, YY-MM-DD, YYYY/MM/DD, YY/MM/DD
+          (3[0-1]|[1-2]\d|0?[1-9])(?P<sep2>[-/])(0?[1-9]|1[0-2])(?P=sep2)(\d{2}|\d{4})|  # DD-MM-YYYY, DD-MM-YY, DD/MM/YYYY, DD/MM/YY
+          (0?[1-9]|1[0-2])(?P<sep3>[-/])(3[0-1]|[1-2]\d|0?[1-9])(?P=sep3)(\d{2}|\d{4})|  # MM-DD-YYYY, MM-DD-YY, MM/DD/YYYY, MM/DD/YY
+          (jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\s+(  # MMM
+              (3[0-1]|[1-2]\d|0?[1-9])(\s+\d{4})?|\d{4}  # DD (YYYY)?, YYYY
+          )|(3[0-1]|[1-2]\d|0?[1-9])\s(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)(?!\s+(3[0-1]|[1-2]\d|0?[1-9])([^\w:]|$))(\s+\d{4})?  # DD MMM (YYYY)?
+      )((?=[\WT_])|$)
+    color: b.type-5
+    exclusive: true
+
+  - description: Time
+    regex: |
+      (?ix)(?<![\.:])(\b|(?<=T))
+          (2[0-3]|[0-1]\d):[0-5]\d  # Hours and minutes
+          (:[0-5]\d([\.,]\d{3,6})?)?  # (Seconds (sub-seconds, 3 to 6 decimal places)?)?
+          ([\-\+](\d{2}|\d{4})|Z)?  # (Timezone)?
+      (?![\.:])\b
+    color: b.type-5
+    exclusive: true
+
+  - description: Size, like 123G 123Gb 123Gib 1.23G 123Gbps
+    regex: (?i)\b\d+(\.\d+)?\s?((([KMGTPEZY](i?B)?)|B)(ps)?)\b
+    color:
+      0: f.type-6
+      2: bold
+    exclusive: true
+
+  - description: Generic - Bad
+    regex: (?i)\b(password|abnormal(ly)?|los(t|ing)|err(ors?)?|(den(y|ies|ied)?)|reject(ing|ed)?|drop(ped|s)?|(err\-)?disabled?|(timed?\-?out)|fail(s|ed|iure)?|disconnect(ed)?|unreachable|invalid|bad|notconnect|unusable|blk|inaccessible|wrong|collisions?|unsynchronized|mismatch|runts)\b
+    color: f.status-1
+
+  - description: Generic - Good
+    regex: (?i)\b(ok(ay)?|permit(ed|s)?|accept(s|ed)?|enabled?|online|succe((ss(ful|fully)?)|ed(ed)?)?|connect(ed)?|reachable|valid|forwarding|synchronized)\b
+    color: f.status-7
