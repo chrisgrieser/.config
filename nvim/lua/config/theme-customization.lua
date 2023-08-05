@@ -122,7 +122,7 @@ end
 autocmd("ColorScheme", {
 	callback = function()
 		-- defer needed for some modifications to properly take effect
-		for _, delayMs in pairs { 50, 200, 500 } do
+		for _, delayMs in pairs { 50, 200 } do
 			vim.defer_fn(themeModifications, delayMs)
 			vim.defer_fn(customHighlights, delayMs)
 		end
