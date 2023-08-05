@@ -76,8 +76,14 @@ function jsong() {
 	if ! command -v yq &>/dev/null; then print "\033[1;33myq not installed.\033[0m" && return 1; fi
 
 	local tmp="/tmp/temp.json"
-	file_or_url "$1"
 	local query="$2"
+	local stdin
+	if [[ $# -eq 0 ]]; then
+		stdin="$(< /dev/stdin)"
+		file_or_url "$1"
+	else
+		echo -e "$stdin" >"$tmp"
+	fi
 
 	# shellcheck disable=2016
 	selection=$(fastgron --color --no-newline "$tmp" |
