@@ -12,16 +12,6 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F38873E7-462C-4F93-9AD6-56BD4578A162</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: brew home</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>72B78E7D-69B1-4E83-AB9B-26507DE2C33E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -70,7 +60,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>F38873E7-462C-4F93-9AD6-56BD4578A162</string>
+				<string>2468D124-88C6-438D-B2C6-627ADEEEC31D</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
@@ -129,29 +119,9 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>F38873E7-462C-4F93-9AD6-56BD4578A162</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: brew home</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 		<key>CE590292-EEA5-4025-A89B-42AE38188503</key>
 		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F38873E7-462C-4F93-9AD6-56BD4578A162</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: brew home</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>8E20F8A9-6C70-4ADF-81BA-8BE2BEF4241E</string>
@@ -164,8 +134,6 @@
 			</dict>
 		</array>
 		<key>EDA21286-4E28-4304-A9DB-0BA74AB2C370</key>
-		<array/>
-		<key>F38873E7-462C-4F93-9AD6-56BD4578A162</key>
 		<array/>
 	</dict>
 	<key>createdby</key>
@@ -294,26 +262,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>package=$(echo $1 | cut -d" " -f1) # remove "--cask"
-brew home "$package"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
+				<key>browser</key>
 				<string></string>
-				<key>type</key>
-				<integer>5</integer>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>F38873E7-462C-4F93-9AD6-56BD4578A162</string>
+			<string>2468D124-88C6-438D-B2C6-627ADEEEC31D</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -564,7 +529,7 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>430</real>
 		</dict>
 		<key>0F3F996A-3FC8-4FBD-990C-9D54C43DD642</key>
 		<dict>
@@ -573,7 +538,14 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>455</real>
 			<key>ypos</key>
-			<real>550</real>
+			<real>400</real>
+		</dict>
+		<key>2468D124-88C6-438D-B2C6-627ADEEEC31D</key>
+		<dict>
+			<key>xpos</key>
+			<real>460</real>
+			<key>ypos</key>
+			<real>155</real>
 		</dict>
 		<key>72B78E7D-69B1-4E83-AB9B-26507DE2C33E</key>
 		<dict>
@@ -582,7 +554,7 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>285</real>
 			<key>ypos</key>
-			<real>600</real>
+			<real>450</real>
 		</dict>
 		<key>72D18DBC-72FF-40AA-B367-D4C148AEC3A6</key>
 		<dict>
@@ -602,7 +574,7 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>455</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>565</real>
 		</dict>
 		<key>89F35AB8-AC54-4BB2-B884-9B206671D5AE</key>
 		<dict>
@@ -611,7 +583,7 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>565</real>
 		</dict>
 		<key>8E20F8A9-6C70-4ADF-81BA-8BE2BEF4241E</key>
 		<dict>
@@ -620,7 +592,7 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>340</real>
 			<key>ypos</key>
-			<real>465</real>
+			<real>315</real>
 		</dict>
 		<key>A98EAA76-0074-4CAD-9A09-48949FC126DB</key>
 		<dict>
@@ -629,7 +601,7 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>455</real>
 			<key>ypos</key>
-			<real>435</real>
+			<real>285</real>
 		</dict>
 		<key>CD40AB53-70F2-460D-BF34-1DF77F46FB38</key>
 		<dict>
@@ -651,7 +623,7 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>450</real>
+			<real>300</real>
 		</dict>
 		<key>EDA21286-4E28-4304-A9DB-0BA74AB2C370</key>
 		<dict>
@@ -663,17 +635,6 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<real>455</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>F38873E7-462C-4F93-9AD6-56BD4578A162</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>brew home</string>
-			<key>xpos</key>
-			<real>455</real>
-			<key>ypos</key>
-			<real>290</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
