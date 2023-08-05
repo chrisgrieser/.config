@@ -475,21 +475,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string>/System/Volumes/Data/Applications/AppCleaner.app</string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>802369B2-358A-46C9-9516-940B8E3E7940</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>acceptsmulti</key>
 				<integer>1</integer>
 				<key>filetypes</key>
@@ -506,18 +491,32 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string>/System/Volumes/Data/Applications/AppCleaner.app</string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>802369B2-358A-46C9-9516-940B8E3E7940</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string># Requirements
 - [Homebrew](https://brew.sh/)
 
-# Optional
-- If and [mas-cli](https://github.com/mas-cli/mas/) and [AppCleaner.app](https://freemacsoft.net/appcleaner/) are installed, allows uninstalling App Store apps via `bu` as well by using AppCleaner.
-- If [mackup](https://github.com/lra/mackup) is installed, shows an icon next to an app for which mackup has builtin support.
+# Info: Update
+The list of available formulae and casks is updated whenever you run `brew update` in the terminal. (The update frequency is also controlled via the environment variable `export HOMEBREW_NO_AUTO_UPDATE=0`.) Therefore, the shown list is always in sync with what formulae and casks you can find via local `brew` commands.
 
 ---
 
-created by [Chris Grieser](https://chris-grieser.de/)</string>
+Created by [Chris Grieser](https://chris-grieser.de/)</string>
 	<key>uidata</key>
 	<dict>
 		<key>0BAF56E8-B65A-478A-B848-F09FFE73A12B</key>
@@ -538,7 +537,7 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>455</real>
 			<key>ypos</key>
-			<real>400</real>
+			<real>410</real>
 		</dict>
 		<key>2468D124-88C6-438D-B2C6-627ADEEEC31D</key>
 		<dict>
@@ -590,9 +589,9 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>340</real>
+			<real>285</real>
 			<key>ypos</key>
-			<real>315</real>
+			<real>320</real>
 		</dict>
 		<key>A98EAA76-0074-4CAD-9A09-48949FC126DB</key>
 		<dict>
@@ -638,31 +637,9 @@ created by [Chris Grieser](https://chris-grieser.de/)</string>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>🍏</string>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>Icon to display next to packages for which mackup has builtin support.</string>
-			<key>label</key>
-			<string>Mackup Icon</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>mackup_icon</string>
-		</dict>
-	</array>
+	<array/>
 	<key>version</key>
-	<string>0.9</string>
+	<string>1.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
