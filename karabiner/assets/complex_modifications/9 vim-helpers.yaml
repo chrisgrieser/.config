@@ -13,30 +13,26 @@ rules:
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
               nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>try|wqall|catch|qall|endtry<CR>"
+              # unresponsive server exists with code 2
+              exitcode=$?
 
-              # wait for 3 secs, if nvim is still running then, try to killall
-              i=0
-              while pgrep -xq "nvim" && [[ $i -lt 30 ]]; do 
-                i=$((i+1))
-                sleep 0.1
-              done
-
-              if pgrep -xq "nvim" ; then
+              if [[ $exitcode != 0 ]] ; then
                 osascript -e 'display notification "" with title "⚔️ Force killing nvim…"'
                 killall -9 nvim neovide
               fi
 
-              # wait for 2 seconds and if nvim is *still* running, abort
+              # wait for 2 secs
               i=0
               while pgrep -xq "nvim" ; do 
                 i=$((i+1))
                 sleep 0.1
-                if [[ $i -gt 20 ]]; then
-                  osascript -e 'display notification "" with title "Could not quit Neovide." sound name "Ping"'
-                  return 1
+                if [[ $i -gt 30 ]] ; then
+                  osascript -e 'display notification "" with title "⚔️ Could not kill nvim."'
+                  return
                 fi
               done
 
+              # restart
               # bwipeout necessary due to empty buffer created before jumping to '0
               nohup neovide --notabs --frame=buttonless --geometry=104x33 -- -c "execute \"normal! '0\" | bwipeout #" &
               disown # https://stackoverflow.com/a/20338584/22114136
@@ -49,12 +45,13 @@ rules:
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
               nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>try|wqall|catch|qall|endtry<CR>"
+              # unresponsive server exists with code 2
+              exitcode=$?
 
-              sleep 2
-              if pgrep -xq 'nvim' ; then
+              if [[ $exitcode != 0 ]] ; then
                 osascript -e 'display notification "" with title "⚔️ Force killing nvim…"'
-                killall -9 neovide nvim
-              end
+                killall -9 nvim neovide
+              fi
         conditions:
           - { type: frontmost_application_if, file_paths: ["[Nn]eovide"] }
   #─────────────────────────────────────────────────────────────────────────────
