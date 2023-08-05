@@ -114,21 +114,15 @@ function getHackernewsPosts() {
  * @property {object} data
  * @property {string} data.subreddit
  * @property {string} data.title
- * @property {string} data.name
  * @property {boolean} data.is_reddit_media_domain
  * @property {string} data.link_flair_text
  * @property {number} data.score
  * @property {boolean} data.is_self
  * @property {string} data.domain
- * @property {null} data.view_count
- * @property {boolean} data.archived
  * @property {boolean} data.over_18
- * @property {string} data.id
  * @property {string} data.author
- * @property {null} data.discussion_type
  * @property {number} data.num_comments
  * @property {string} data.permalink
- * @property {boolean} data.stickied
  * @property {string} data.url
  * @property {number} data.num_crossposts
  * @property {string} data.media.type
@@ -150,9 +144,11 @@ function getRedditPosts(subredditName) {
 	/** @type AlfredItem[] */
 	const redditPosts = response.data.children.map((/** @type {redditPost} */ data) => {
 		const item = data.data;
-		const category = item.link_flair_text ? `[${item.link_flair_text}]` : "";
+		let category = item.link_flair_text ? `[${item.link_flair_text}]` : "";
+		if (item.over_18) category += " [NSFW]";
 		const comments = item.num_comments || 0;
-		const subtitle = `${item.score}↑  ${comments}●  ${category}`;
+		const crossposts = item.num_crossposts ? ` ${item.num_crossposts}↗` : "";
+		const subtitle = `${item.score}↑  ${comments}● ${crossposts} ${category}`;
 
 		const commentUrl = `https://${oldReddit}.reddit.com${item.permalink}`;
 		const externalUrl = item.url;
@@ -186,7 +182,7 @@ function getRedditPosts(subredditName) {
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	// SELECT SUBREDDIT
+	// determine subreddit
 	const topSubreddit = $.getenv("subreddits").split("\n")[0]; // only needed for first run
 	const currentSubreddit = readFile($.getenv("alfred_workflow_cache") + "/current_subreddit");
 	const selectedSubreddit = $.NSProcessInfo.processInfo.environment.objectForKey("selected_subreddit").js;
@@ -195,7 +191,7 @@ function run() {
 		writeToFile($.getenv("alfred_workflow_cache") + "/current_subreddit", subredditName);
 	}
 
-	// CACHE
+	// cache
 	const subredditCache = `${$.getenv("alfred_workflow_cache")}/${subredditName}.json`;
 	let posts;
 	if (!cacheIsOutdated(subredditCache)) {
@@ -203,7 +199,7 @@ function run() {
 		return JSON.stringify({ items: posts });
 	}
 
-	// MAIN
+	// main
 	if (subredditName === "hackernews") {
 		console.log("Writing new cache for hackernews");
 		posts = getHackernewsPosts();
