@@ -1,7 +1,7 @@
 return {
 	{ -- simple screensaver, zone.nvim is nicer but often buggy
 		"folke/drop.nvim",
-		enabled = false,
+		enabled = true,
 		event = "VeryLazy",
 		opts = {
 			theme = "summer", -- stars|summer|spring|xmas|snow|leaves
