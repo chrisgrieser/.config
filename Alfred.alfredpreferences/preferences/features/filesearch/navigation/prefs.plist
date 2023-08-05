@@ -11,5 +11,7 @@
 		<key>string</key>
 		<string></string>
 	</dict>
+	<key>previousPathKeyword</key>
+	<string>prev</string>
 </dict>
 </plist>

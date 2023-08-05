@@ -114,15 +114,20 @@ nmap g, u<C-r>
 " Search & replace
 """"""""""""""""""""""
 
+" Another Quick Switcher ripgrep-search
+" somewhat close to Telescope's livegrep
 exmap liveGrep obcommand obsidian-another-quick-switcher:grep
 nmap gl :liveGrep
 
+" Omnisearch
 exmap globalGrep obcommand omnisearch:show-modal
 nmap gL :globalGrep omnisearch:show-modal
 
+" Obsidian builtin Search & replace
 exmap searchReplace obcommand editor:open-search-replace
 nmap ,ff :searchReplace
 
+" Global Search and Replace Plugin
 exmap globalSearchReplace obcommand global-search-and-replace:search-and-replace
 nmap ,v :globalSearchReplace
 

@@ -5,11 +5,16 @@ local aw = require("lua.utils").aw
 
 --------------------------------------------------------------------------------
 
----ensures Obsidian windows are always shown when developing, mostly for developing CSS
+---ensures Obsidian windows are always shown when developing (for CSS live reloads)
 ---@param win hs.window
 local function obsidianThemeDevHelper(win)
 	local obsi = u.app("Obsidian")
-	if not win or not win:application() or not (win:application():name():lower() == "neovide") then
+	if
+		not win
+		or not win:application()
+		or (obsi:mainWindow():isMinimized())
+		or not (win:application():name():lower() == "neovide")
+	then
 		return
 	end
 
