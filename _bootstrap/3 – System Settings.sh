@@ -176,6 +176,8 @@ defaults write com.apple.dock wvous-br-corner -int 0
 defaults write com.apple.dock wvous-tl-corner -int 0
 defaults write com.apple.dock wvous-bl-corner -int 0
 
+defaults write com.apple.dock minimize-to-application -int 1
+
 killall Dock
 
 #───────────────────────────────────────────────────────────────────────────────
