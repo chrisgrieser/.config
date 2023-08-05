@@ -342,3 +342,7 @@ matches:
     replace: brief
     propagate_casing: true
     word: true
+  - trigger: brwoser
+    replace: browser
+    propagate_casing: true
+    word: true
