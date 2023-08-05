@@ -69,8 +69,8 @@ function jsong() {
 	curl -sL "$url" >"/tmp/jsong.json"
 
 	# shellcheck disable=2016
-	selection=$(fastgron --color |
-		tail -n +2 "/tmp/jsong.json" | 
+	selection=$(fastgron --color --no-newline "/tmp/jsong.json" |
+		tail -n +2 | 
 		cut -c5- | # #cut the leading "json"
 		fzf --ansi --no-sort --query="$query" --info=inline --preview-window="45%" \
 			--preview='yq {1} --colors --output-format=json "/tmp/jsong.json"')
