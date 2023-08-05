@@ -7,6 +7,11 @@
 		"prefix": "replace",
 		"body": "replace(/${1:regexp}/, \"$2\")"
 	},
+	"thousand separator": {
+		"prefix": "thousand separator",
+		"body": "replace(/\\B(?=(\\d{3})+(?!\\d))/g, \" \");",
+		"description": "insert thousand separator into a digit string"
+	},
 	"ignore (rome formatter)": {
 		"prefix": "ignore (rome formatter)",
 		"body": "// rome-ignore format: ${1:explanation}",

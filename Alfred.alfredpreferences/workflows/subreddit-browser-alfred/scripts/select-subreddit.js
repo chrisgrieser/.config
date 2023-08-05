@@ -22,18 +22,33 @@ function readFile(path) {
 	return ObjC.unwrap(str);
 }
 
+function ensureCacheFolderExists() {
+	const finder = Application("Finder");
+	const cacheDir = $.getenv("alfred_workflow_cache");
+	if (!finder.exists(Path(cacheDir))) {
+		console.log("Cache Dir does not exist and is created.");
+		const cacheDirBasename = $.getenv("alfred_workflow_bundleid");
+		const cacheDirParent = cacheDir.slice(0, -cacheDirBasename.length);
+		finder.make({
+			new: "folder",
+			at: Path(cacheDirParent),
+			withProperties: { name: cacheDirBasename },
+		});
+	}
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
-/**
+/** gets subreddit icon
  * @param {string} iconPath
  * @param {string} subredditName
  */
-function cacheSubredditData(iconPath, subredditName) {
+function cacheSubredditIcon(iconPath, subredditName) {
 	const redditApiCall = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/about.json"`;
 	const subredditInfo = JSON.parse(app.doShellScript(redditApiCall));
 	if (subredditInfo.error) {
 		console.log(`${subredditInfo.error}: ${subredditInfo.message}`);
-		return subredditInfo.error;
+		return false;
 	}
 
 	// for some subreddits saved as icon_img, for others as community_icon
@@ -43,12 +58,26 @@ function cacheSubredditData(iconPath, subredditName) {
 
 	// cache icon
 	app.doShellScript(`curl -sL "${onlineIcon}" --create-dirs --output "${iconPath}"`);
+	return true;
+}
 
-	// cache subscriber count
-	const subscriberCount = subredditInfo.data.subscribers;
-	const subscriberData = JSON.parse(readFile($.getenv("alfred_workflow_cache") + "/subscriberCount.json") || "{}")
+/** @param {string} subredditName */
+function cacheSubscriberCount(subredditName) {
+	const redditApiCall = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/about.json"`;
+	const subredditInfo = JSON.parse(app.doShellScript(redditApiCall));
+	if (subredditInfo.error) {
+		console.log(`${subredditInfo.error}: ${subredditInfo.message}`);
+		return undefined;
+	}
+
+	ensureCacheFolderExists();
+	const subscriberCount = subredditInfo.data.subscribers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+	const subscriberData = JSON.parse(
+		readFile($.getenv("alfred_workflow_cache") + "/subscriberCount.json") || "{}",
+	);
 	subscriberData[subredditName] = subscriberCount;
-	writeToFile(`${iconFolder}/subscriberCount.json`, JSON.stringify(subscriberData));
+	writeToFile(`${$.getenv("alfred_workflow_cache")}/subscriberCount.json`, JSON.stringify(subscriberData));
+	return subscriberCount; // = no error
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -65,15 +94,24 @@ function run() {
 			// cache subreddit image
 			let iconPath = `${iconFolder}/${subredditName}.png`;
 			if (!fileExists(iconPath)) {
-				const error = cacheSubredditData(iconPath, subredditName);
-				if (error) console.log("Error:", error);
+				const success = cacheSubredditIcon(iconPath, subredditName);
+
 				// if icon cannot be cached, use default icon
 				if (!fileExists(iconPath)) iconPath = "icon.png";
 
-				// only check for subreddit existence on icon caching, to reduce
-				// number of requests
-				if (error === 404) subtitle = "⚠️ subreddit not found";
+				if (!success) subtitle = "⚠️ error or subreddit not found (see debugging log) ";
 			}
+
+			// subscriber count
+			const subscriberData = JSON.parse(
+				readFile($.getenv("alfred_workflow_cache") + "/subscriberCount.json") || "{}",
+			);
+			let subscriberCount = subscriberData[subredditName];
+			if (!subscriberCount) {
+				subscriberCount = cacheSubscriberCount(subredditName);
+				if (!subscriberCount) subtitle = "⚠️ error or subreddit not found (see debugging log) ";
+			} 
+			subtitle += `👥 ${subscriberCount}`;
 
 			return {
 				title: `r/${subredditName}`,
