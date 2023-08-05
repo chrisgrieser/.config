@@ -60,7 +60,6 @@ Wf_neovideMoved = u.wf
 	:subscribe(u.wf.windowMoved, function(movedWin) obsidianThemeDevHelper(movedWin) end)
 
 --------------------------------------------------------------------------------
---------------------------------------------------------------------------------
 
 -- HACK since neovide does not send a launch signal, triggering window resizing
 -- via its URI scheme called on VimEnter
@@ -71,20 +70,4 @@ u.urischeme("neovide-post-startup", function()
 		local size = env.isProjector() and wu.maximized or wu.pseudoMax
 		wu.moveResize(neovideWin, size)
 	end)
-	-- check for too many processes https://github.com/neovide/neovide/issues/1595
-	u.runWithDelays(2, function()
-		local neovideProcs = hs.execute("pgrep -x 'nvim' | wc -l"):match("%d+")
-		if neovideProcs ~= "1" then u.notify(neovideProcs .. " nvim processes running") end
-		local nvimProcs = hs.execute("pgrep -x 'neovide' | wc -l"):match("%d+")
-		if nvimProcs ~= "1" then u.notify(nvimProcs .. " neovide processes running") end
-	end)
 end)
-
--- FIX for too many leftover nvim processes: https://github.com/neovide/neovide/issues/1595
-NeovideWatcher2 = aw.new(function(_, eventType, _)
-	if eventType == aw.terminated then
-		u.runWithDelays({3, 10}, function() hs.execute([[pgrep -xq 'neovide' || killall -9 neovide nvim]]) end)
-	end
-end):start()
-
---------------------------------------------------------------------------------
