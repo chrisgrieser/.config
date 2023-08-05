@@ -66,20 +66,22 @@ function jsong() {
 
 	local url="$1"
 	local query="$2"
-	curl -sL "$url" >"/tmp/jsong.json"
+	local tmp="/tmp/jsong.json"
+	curl -sL "$url" >"$tmp"
 
 	# shellcheck disable=2016
-	selection=$(fastgron --color --no-newline "/tmp/jsong.json" |
+	selection=$(fastgron --color --no-newline "$tmp" |
 		tail -n +2 | cut -c5- | # remove first entry, cut the leading "json"
 		fzf --ansi --no-sort --query="$query" --info=inline \
 			--height=60% --preview-window="45%" \
-			--preview='yq {1} --colors --output-format=json "/tmp/jsong.json"')
+			--preview='yq {1} --colors --output-format=json "$tmp"')
 
 	[[ -z "$selection" ]] && return 0 # no selection made -> no exit 130
 
 	key=$(echo -n "$selection" | cut -d" " -f1)
 
-	# output to the terminal & copy to clipboard
-	yq "$key" --color --output-format=json "/tmp/jsong.json"
-	yq "$key" --output-format=json "/tmp/jsong.json" | pbcopy
+	# output value to the terminal & copy to clipboard
+	echo -n "Copied value: "
+	yq "$key" --color --output-format=json "$tmp"
+	yq "$key" --output-format=json "$tmp" | pbcopy
 }
