@@ -9,13 +9,26 @@ const iconFolder = $.getenv("custom_subreddit_icons") || $.getenv("alfred_workfl
 
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
+/** @param {string} filepath @param {string} text */
+function writeToFile(filepath, text) {
+	const str = $.NSString.alloc.initWithUTF8String(text);
+	str.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);
+}
+
+/** @param {string} path */
+function readFile(path) {
+	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
+	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
+	return ObjC.unwrap(str);
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /**
  * @param {string} iconPath
  * @param {string} subredditName
  */
-function cacheSubredditIcon(iconPath, subredditName) {
+function cacheSubredditData(iconPath, subredditName) {
 	const redditApiCall = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/about.json"`;
 	const subredditInfo = JSON.parse(app.doShellScript(redditApiCall));
 	if (subredditInfo.error) {
@@ -28,7 +41,14 @@ function cacheSubredditIcon(iconPath, subredditName) {
 	if (!onlineIcon) return; // has no icon
 	onlineIcon = onlineIcon.replace(/\?.*$/, ""); // clean url for curl
 
+	// cache icon
 	app.doShellScript(`curl -sL "${onlineIcon}" --create-dirs --output "${iconPath}"`);
+
+	// cache subscriber count
+	const subscriberCount = subredditInfo.data.subscribers;
+	const subscriberData = JSON.parse(readFile($.getenv("alfred_workflow_cache") + "/subscriberCount.json") || "{}")
+	subscriberData[subredditName] = subscriberCount;
+	writeToFile(`${iconFolder}/subscriberCount.json`, JSON.stringify(subscriberData));
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -45,7 +65,7 @@ function run() {
 			// cache subreddit image
 			let iconPath = `${iconFolder}/${subredditName}.png`;
 			if (!fileExists(iconPath)) {
-				const error = cacheSubredditIcon(iconPath, subredditName);
+				const error = cacheSubredditData(iconPath, subredditName);
 				if (error) console.log("Error:", error);
 				// if icon cannot be cached, use default icon
 				if (!fileExists(iconPath)) iconPath = "icon.png";
