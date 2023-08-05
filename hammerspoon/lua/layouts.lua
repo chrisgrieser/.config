@@ -65,7 +65,7 @@ local function workLayout()
 	closeAllFinderWins()
 
 	-- open
-	local appsToOpen = { "Discord", env.browserApp, env.mailApp, env.tickerApp }
+	local appsToOpen = { "Obsidian", "Discord", env.browserApp, env.mailApp, env.tickerApp }
 	if getWeekday() ~= "Sat" and getWeekday() ~= "Sun" then table.insert(appsToOpen, "Slack") end
 	u.openApps(appsToOpen)
 	for _, appName in pairs(appsToOpen) do
