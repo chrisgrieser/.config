@@ -35,7 +35,8 @@ function jsont() {
 # json [g]rep
 function jsong() {
 	if ! command -v fastgron &>/dev/null; then print "\033[1;33m fastgron not installed.\033[0m" && return 1; fi
-	if ! command -v fastgron &>/dev/null; then print "\033[1;33m fastgron not installed.\033[0m" && return 1; fi
+	if ! command -v fzf &>/dev/null; then print "\033[1;33m fzf not installed.\033[0m" && return 1; fi
+	if ! command -v fzf &>/dev/null; then print "\033[1;33m fzf not installed.\033[0m" && return 1; fi
 
 	if [[ $# -ne 2 ]]; then
 		print "\033[1;33mUsage: jsong <search_term> <url>\033[0m"
