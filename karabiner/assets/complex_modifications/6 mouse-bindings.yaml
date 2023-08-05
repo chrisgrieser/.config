@@ -56,7 +56,7 @@ rules:
               - BetterTouchTool
               - Hammerspoon
               - "[Nn]eovide"
-              - "[Mm]industry"
+              - Obsidian
       # prevent accidental quitting
       - type: basic
         from: { pointing_button: button3 }
@@ -65,16 +65,6 @@ rules:
         conditions:
           - type: frontmost_application_if
             file_paths: [BetterTouchTool, Hammerspoon]
-      # neovide: quit
-      - type: basic
-        from: { pointing_button: button3 }
-        to:
-          # so cursor position and changes are saved properly
-          - shell_command: |
-              export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-              nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>wq<CR>"
-        conditions:
-          - { type: frontmost_application_if, file_paths: ["[Nn]eovide"] }
   #─────────────────────────────────────────────────────────────────────────────
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 4 (bottom)"
@@ -151,7 +141,6 @@ rules:
               - ^com\.brave\.Browser$
               - ^com\.vivaldi\.Vivaldi$
               - ^com\.apple\.finder$
-              - ^md\.obsidian$
               - ^com\.mimestream\.Mimestream$
               - ^net\.highlightsapp\.universal$
               - ^org\.hammerspoon\.Hammerspoon$
@@ -181,7 +170,7 @@ rules:
           - { type: frontmost_application_if, bundle_identifiers: [^com\.tapbots\.Ivory$] }
         to_if_held_down:
           - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.hyper-seek"'
-      # Browser & Finder & Obsidian & Hammerspoon: Close Window
+      # Browser & Finder & Hammerspoon: Close Window
       - type: basic
         from: { pointing_button: button5 }
         to_if_alone:
@@ -192,7 +181,6 @@ rules:
               - ^com\.brave\.Browser$
               - ^com\.vivaldi\.Vivaldi$
               - ^com\.apple\.finder$
-              - ^md\.obsidian$
               - ^org\.hammerspoon\.Hammerspoon$
         to_if_held_down:
           - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.hyper-seek"'

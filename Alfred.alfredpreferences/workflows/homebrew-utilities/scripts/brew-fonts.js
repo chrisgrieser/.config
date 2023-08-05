@@ -12,18 +12,17 @@ function alfredMatcher(str) {
 
 const githubApiUrl = "https://api.github.com/repos/Homebrew/homebrew-cask-fonts/git/trees/master?recursive=1";
 
-const workArray = JSON.parse(app.doShellScript(`curl -sL "${githubApiUrl}"`))
+const fonts = JSON.parse(app.doShellScript(`curl -sL "${githubApiUrl}"`))
 	.tree.filter(file => file.path.startsWith("Casks/"))
 	.map(entry => {
-		const fontname = entry.path.slice(11, -3); /* eslint-disable-line no-magic-numbers */
-		const cask = "font-" + fontname;
+		const fontname = entry.path.slice(6, -3);
 
 		return {
 			title: fontname,
 			match: alfredMatcher(fontname),
-			arg: cask,
-			uid: cask,
+			arg: fontname,
+			uid: fontname,
 		};
 	});
 
-JSON.stringify({ items: workArray });
+JSON.stringify({ items: fonts });

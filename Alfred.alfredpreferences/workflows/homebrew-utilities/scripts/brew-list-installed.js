@@ -10,7 +10,7 @@ const alfredMatcher = (/** @type {string} */ str) => str.replaceAll("-", " ") + 
 
 /** @type{AlfredItem[]} */
 const casks = app
-	.doShellScript("export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH; brew list --cask")
+	.doShellScript("ls -1 /opt/homebrew/Caskroom") // quicker than brew list
 	.split("\r")
 	.map((item) => {
 		return {
@@ -23,7 +23,8 @@ const casks = app
 
 /** @type{AlfredItem[]} */
 const formulas = app
-	.doShellScript("export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH; brew leaves --installed-on-request")
+	// slower than `ls -1 /opt/homebrew/Cellar`, but --installed-on-request relevant
+	.doShellScript("brew leaves --installed-on-request")
 	.split("\r")
 	.map((name) => {
 		return {
@@ -39,7 +40,7 @@ const appStoreApps = app
 	.doShellScript("mdfind kMDItemAppStoreHasReceipt=1") // using `mdfind` to not have `mas` as dependency
 	.split("\r")
 	.map((appPath) => {
-		const appName = appPath.split("/")[2];
+		const appName = appPath.split("/")[2].slice(0, -4);
 
 		return {
 			title: appName,
