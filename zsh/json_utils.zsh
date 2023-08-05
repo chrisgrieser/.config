@@ -1,22 +1,31 @@
 # Conversions
 function yaml2json() {
-	file_name=${1%.*} # remove ext. (not using `basename` since it could be yml or yaml)
+	if ! command -v yq &>/dev/null; then print "\033[1;33myq not installed.\033[0m" && return 1; fi
+	local inputfile="$1"
+
+	filename_no_ext=${inputfile%.*} # not using `basename` since it could be yml or yaml
 	# using `explode` to expand anchors & aliases
 	# https://mikefarah.gitbook.io/yq/operators/anchor-and-alias-operators#explode-alias-and-anchor
-	yq --output-format=json 'explode(.)' "$1" >"${file_name}.json"
+	yq --output-format=json 'explode(.)' "$inputfile" >"${filename_no_ext}.json"
 }
 
 function json2yaml() {
-	file_name=$(basename "$1" .json)
-	yq --output-format=yaml '.' "$1" >"$file_name.yaml"
+	if ! command -v yq &>/dev/null; then print "\033[1;33myq not installed.\033[0m" && return 1; fi
+	local inputfile="$1"
+
+	filename_no_ext=$(basename "$inputfile" .json)
+	yq --output-format=yaml '.' "$inputfile" >"$filename_no_ext.yaml"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
 
 # json [s]chema
 function jsons() {
-	file_name=$(basename "$1" .json)
-	quicktype --lang=schema --out="$file_name.json" "$1"
+	if ! command -v quicktype &>/dev/null; then print "\033[1;33mquicktype not installed.\033[0m" && return 1; fi
+	local inputfile="$1"
+
+	filename_no_ext=$(basename "$inputfile" .json)
+	quicktype --lang=schema --out="${filename_no_ext}_schema.json" "$inputfile"
 }
 
 # json e[x]plore (via pager)
@@ -53,12 +62,17 @@ function jsont() {
 function jsong() {
 	if ! command -v fastgron &>/dev/null; then print "\033[1;33m fastgron not installed.\033[0m" && return 1; fi
 	if ! command -v fzf &>/dev/null; then print "\033[1;33m fzf not installed.\033[0m" && return 1; fi
+	if ! command -v yq &>/dev/null; then print "\033[1;33myq not installed.\033[0m" && return 1; fi
 
 	local url="$1"
 	local query="$2"
-	selection=$(fastgron --color --no-newline "$url" |
+	curl -sL "$url" > "/tmp/jsong.json"
+
+	# shellcheck disable=2016 
+	selection=$(fastgron --color --no-newline "/tmp/jsong.json" |
 		cut -c5- | # #cut the leading "json"
-		fzf --ansi --no-sort --exact --query="$query" --info=inline)
+		fzf --ansi --no-sort --query="$query" --info=inline \
+		--preview-window="45%" --preview='yq {1} --colors "/tmp/jsong.json"')
 
 	# no selection made -> no exit 130
 	[[ -z "$selection" ]] && return 0 

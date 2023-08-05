@@ -26,7 +26,7 @@ export YSU_IGNORED_ALIASES=("bi" "bu") # due to homebrew Alfred workflow
 export YSU_MESSAGE_POSITION="after"
 
 export FZF_DEFAULT_COMMAND='fd --hidden'
-export FZF_DEFAULT_OPTS='--color="hl:206" --keep-right --pointer=⟐ --prompt="❱ " --ellipsis=… --scroll-off=3 --cycle --layout=reverse --bind="tab:down,shift-tab:up" --preview-window=border-left --height="90%"'
+export FZF_DEFAULT_OPTS='--color="hl:206" --pointer=⟐ --prompt="❱ " --ellipsis=… --scroll-off=3 --cycle --layout=reverse --bind="tab:down,shift-tab:up" --preview-window=border-left --height="90%"'
 
 # extra spacing needed for WezTerm + Iosevka
 [[ "$TERM_PROGRAM" == "WezTerm" ]] && export EXA_ICON_SPACING=2
