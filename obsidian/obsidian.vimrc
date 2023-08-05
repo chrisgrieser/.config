@@ -114,9 +114,11 @@ nmap g, u<C-r>
 " Search & replace
 """"""""""""""""""""""
 
-" exmap liveGrep obcommand omnisearch:show-modal
 exmap liveGrep obcommand obsidian-another-quick-switcher:grep
 nmap gl :liveGrep
+
+exmap globalGrep obcommand omnisearch:show-modal
+nmap gL :globalGrep omnisearch:show-modal
 
 exmap searchReplace obcommand editor:open-search-replace
 nmap ,ff :searchReplace
@@ -248,7 +250,7 @@ nmap ww :duplicate
 """"""""""""""""""""""
 
 " so VV... in normal mode selects more lines
-vmap V gj
+vmap V j
 
 " so vv goes to visual block mode
 vmap v <C-v>

@@ -108,6 +108,10 @@ local keybindings = {
 	-- but expects another character, so this mapping fixes it
 	{ key = "n", mods = "META", action = act.SendString("~") },
 
+	-- Emulates macOS' cmd-right & cmd-left
+	{ key = "LeftArrow", mods = "CMD", action = act.SendKey { key = "A", mods = "CTRL" },},
+	{ key = "RightArrow", mods = "CMD", action = act.SendKey { key = "E", mods = "CTRL" },},
+
 	{ -- for adding inline code to a commit, hotkey consistent with GitHub's
 		key = "e",
 		mods = "CMD",
