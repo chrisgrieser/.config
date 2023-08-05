@@ -19,52 +19,54 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 
 //──────────────────────────────────────────────────────────────────────────────
 
-// INFO Not using API, since it's too slow and only has the benefit of providing
-// descriptions which I can live without
-// https://formulae.brew.sh/docs/api/
-const caskTxt = home + "/Library/Caches/Homebrew/api/cask_names.txt";
-const formulaTxt = home + "/Library/Caches/Homebrew/api/formula_names.txt";
-const caskJson = home + "/Library/Caches/Homebrew/api/cask.json";
-
-const installedBrews = app
-	.doShellScript("brew list | cat") // piping to cat eliminates decorative lines
-	.split("\r");
+// INFO https://formulae.brew.sh/docs/api/
+const caskJson = home + "/Library/Caches/Homebrew/api/cask.jws.json";
+const formulaJson = home + "/Library/Caches/Homebrew/api/formula.jws.json";
 
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	if (!(fileExists(formulaTxt) && fileExists(caskTxt))) app.doShellScript("brew update");
+	// if (!(fileExists(formulaTxt) && fileExists(caskTxt))) app.doShellScript("brew update");
+
+	const casksRaw = JSON.parse(readFile(caskJson)).payload;
 
 	/** @type{AlfredItem[]} */
-	const casks = readFile(caskTxt)
-		.split("\n")
-		.map((name) => {
-			const installedIcon = installedBrews.includes(name) ? " ✅" : "";
-			return {
-				title: name + installedIcon,
-				match: alfredMatcher(name),
-				subtitle: "cask",
-				arg: `${name} --cask`,
-				uid: name,
-			};
-		});
+	const casks = JSON.parse(casksRaw).map((cask) => {
+		const name = cask.token || "unknown";
+		const installedIcon = installedBrews.includes(name) ? " ✅" : "";
+		return {
+			title: name + installedIcon,
+			match: alfredMatcher(name),
+			subtitle: `💈 ${cask.desc}`,
+			arg: `${name} --cask`,
+			mods: {
+				cmd: { arg: cask.homepage },
+			},
+			uid: name,
+		};
+	});
+
+	const formulaRaw = JSON.parse(readFile(formulaJson)).payload;
 
 	/** @type{AlfredItem[]} */
-	const formula = readFile(formulaTxt)
-		.split("\n")
-		.map((name) => {
-			const installedIcon = installedBrews.includes(name) ? " ✅" : "";
-			return {
-				title: name + installedIcon,
-				match: alfredMatcher(name),
-				subtitle: "formula",
-				arg: `${name} --formula`,
-				uid: name,
-			};
-		});
-	const all = [...casks, ...formula];
+	const formulas = JSON.parse(formulaRaw).map((formula) => {
+		const name = formula.name || "unknown";
+		const installedIcon = installedBrews.includes(name) ? " ✅" : "";
+		return {
+			title: name + installedIcon,
+			match: alfredMatcher(name),
+			subtitle: `🍺 ${formula.desc}`,
+			arg: `${name} --formula`,
+			mods: {
+				cmd: { arg: formula.homepage },
+			},
+			uid: name,
+		};
+	});
+
+	const all = [...casks, ...formulas];
 
 	return JSON.stringify({ items: all });
 }
