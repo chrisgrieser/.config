@@ -70,16 +70,16 @@ function jsong() {
 
 	# shellcheck disable=2016
 	selection=$(fastgron --color --no-newline "/tmp/jsong.json" |
-		tail -n +2 | 
-		cut -c5- | # #cut the leading "json"
-		fzf --ansi --no-sort --query="$query" --info=inline --preview-window="45%" \
+		tail -n +2 | cut -c5- | # remove first entry, cut the leading "json"
+		fzf --ansi --no-sort --query="$query" --info=inline \
+			--height=60% --preview-window="45%" \
 			--preview='yq {1} --colors --output-format=json "/tmp/jsong.json"')
 
 	[[ -z "$selection" ]] && return 0 # no selection made -> no exit 130
 
-	echo -n "$selection" |
-		cut -d" " -f1 |
-		xargs -I {} yq {} --output-format=json "/tmp/jsong.json" |
-		pbcopy
-	echo "Copied: $selection"
+	key=$(echo -n "$selection" | cut -d" " -f1)
+
+	# output to the terminal & copy to clipboard
+	yq "$key" --color --output-format=json "/tmp/jsong.json"
+	yq "$key" --output-format=json "/tmp/jsong.json" | pbcopy
 }
