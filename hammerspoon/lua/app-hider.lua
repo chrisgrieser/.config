@@ -65,11 +65,10 @@ TransBgAppWatcher = aw.new(function(appName, event, appObj)
 	end
 end):start()
 
--- also trigger on window resizing events
-Wf_transBgAppWindowFilter = wf.new(transBgApps):subscribe(
-	wf.windowMoved,
-	function(movedWin) hideOthers(movedWin:application()) end
-)
+-- also trigger on minimization and on window reszing
+Wf_transBgAppWindowFilter = wf.new(transBgApps)
+	:subscribe(wf.windowMoved, function(movedWin) hideOthers(movedWin:application()) end)
+	:subscribe(wf.windowMinimized, unHideAll)
 
 -- extra run for neovide startup necessary, since they do not send a
 -- launch signal and also the `AsSoonAsAppRuns` condition does not work well.
