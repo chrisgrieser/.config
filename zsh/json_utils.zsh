@@ -23,12 +23,28 @@ function jsonx() {
 	wezterm cli set-tab-title --pane-id="$pane_id" "curl-fx"
 }
 
-# json [t]ype (as typescript interfaces)
+# json [t]ype (as typescript)
 function jsont() {
 	if ! command -v quicktype &>/dev/null; then print "\033[1;33mquicktype not installed.\033[0m" && return 1; fi
 	if ! command -v bat &>/dev/null; then print "\033[1;33mbat not installed.\033[0m" && return 1; fi
 	
 	local url="$*"
 	quicktype "$url" --lang=typescript --just-types | bat --language=typescript --style=plain
+}
+
+# json [g]rep
+function jsong() {
+	if ! command -v fastgron &>/dev/null; then print "\033[1;33m fastgron not installed.\033[0m" && return 1; fi
+	if ! command -v fastgron &>/dev/null; then print "\033[1;33m fastgron not installed.\033[0m" && return 1; fi
+
+	if [[ $# -ne 2 ]]; then
+		print "\033[1;33mUsage: jsong <search_term> <url>\033[0m"
+		return 1
+	fi
+
+	local query="$1"
+	local url="$2"
+
+	fastgron --color "$url" | rg --color=never "$query" | fzf --ansi
 }
 

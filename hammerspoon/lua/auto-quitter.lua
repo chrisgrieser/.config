@@ -8,7 +8,6 @@ local u = require("lua.utils")
 ---(Apps not in this list will be ignored and never quit automatically).
 Thresholds = {
 	Slack = 20,
-	Obsidian = 100,
 	Mimestream = 5,
 	Highlights = 90,
 	Discord = 180,
@@ -19,6 +18,9 @@ Thresholds = {
 	["System Settings"] = 2,
 	Finder = 20, -- only closes windows
 }
+
+-- INFO Not adding Obsidian here, since it needs to run permanently for the
+-- obsidian results in Google Search Results
 
 --------------------------------------------------------------------------------
 
