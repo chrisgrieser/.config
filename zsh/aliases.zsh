@@ -36,8 +36,9 @@ alias cp='cp -v'
 # defaults
 alias grep='grep --ignore-case --color'
 alias ls='ls --color'
-alias which='which -a' # show all
-alias mkdir='mkdir -p' # create intermediate directories
+alias which='which -a'           # show all
+alias mkdir='mkdir -p'           # create intermediate directories
+alias curl='curl --progress-bar' # nicer progress bar
 
 # misc
 alias prose='ssh nanotipsforvim@prose.sh'
