@@ -4,5 +4,7 @@
 <dict>
 	<key>list_mac_app_store</key>
 	<true/>
+	<key>use_zap</key>
+	<true/>
 </dict>
 </plist>

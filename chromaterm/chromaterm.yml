@@ -66,8 +66,12 @@ rules:
     exclusive: true
 
   - description: Generic - Bad
-    regex: (?i)\b(password|abnormal(ly)?|los(t|ing)|err(ors?)?|(den(y|ies|ied)?)|reject(ing|ed)?|drop(ped|s)?|(err\-)?disabled?|(timed?\-?out)|fail(s|ed|iure)?|disconnect(ed)?|unreachable|invalid|bad|notconnect|unusable|blk|inaccessible|wrong|collisions?|unsynchronized|mismatch|runts)\b
+    regex: (?i)\b(abnormal(ly)?|los(t|ing)|err(ors?)?|(den(y|ies|ied)?)|reject(ing|ed)?|drop(ped|s)?|(err\-)?disabled?|(timed?\-?out)|fail(s|ed|iure)?|disconnect(ed)?|unreachable|invalid|bad|notconnect|unusable|blk|inaccessible|wrong|collisions?|unsynchronized|mismatch|runts)\b
     color: f.status-1
+
+  - description: Generic - Neutral
+    regex: (?i)\b(password(s)?)\b
+    color: f.status-4
 
   - description: Generic - Good
     regex: (?i)\b(ok(ay)?|permit(ed|s)?|accept(s|ed)?|enabled?|online|succe((ss(ful|fully)?)|ed(ed)?)?|connect(ed)?|reachable|valid|forwarding|synchronized)\b

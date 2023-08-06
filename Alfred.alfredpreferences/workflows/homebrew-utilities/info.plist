@@ -406,15 +406,15 @@
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string>brew info $*</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>brew-info.sh</string>
 				<key>type</key>
-				<integer>11</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -557,7 +557,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>&gt; brew uninstall --zap '{query}'</string>
+				<string>&gt; brew uninstall '{query}'</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -576,7 +576,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
-				<string>brew uninstall --zap {query}</string>
+				<string>brew uninstall {query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.terminalcommand</string>
@@ -798,6 +798,25 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<string>checkbox</string>
 			<key>variable</key>
 			<string>list_mac_app_store</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>use</string>
+			</dict>
+			<key>description</key>
+			<string>When using the uninstallation command on a cask, use `--zap`. (This results in homebrew also cleaning up data and cache files from the app.)</string>
+			<key>label</key>
+			<string>--zap</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>use_zap</string>
 		</dict>
 	</array>
 	<key>version</key>
