@@ -131,12 +131,6 @@ keymap("n", "<leader>lt", cmd.Inspect, { desc = " Treesitter Inspect" })
 -- stylua: ignore end
 
 --------------------------------------------------------------------------------
--- Splitting lines
-
-keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>]], { desc = "󰗈 split around selection" })
-keymap("n", "<leader>S", "gww", { desc = "󰗈 Reflow Line (gww)" })
-
---------------------------------------------------------------------------------
 -- GIT
 
 -- Neogit

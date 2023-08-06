@@ -171,9 +171,9 @@ keymap("x", "<Up>", [[:move '<-2<CR><cmd>normal! gv=gv<CR>]], { desc = "󰜷 Mov
 keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Move selection right" })
 keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "➡️ Move selection left" })
 
--- Merging Lines
+-- Merging
 keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
-keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "󰗈 Merge line down" })
+
 
 -- URL Opening (forward-seeking `gx`)
 keymap("n", "gx", function()
