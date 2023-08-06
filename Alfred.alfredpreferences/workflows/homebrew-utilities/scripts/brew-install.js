@@ -72,7 +72,11 @@ function run() {
 			mods: {
 				// PERF quicker to pass here than to call `brew home` on brew-id
 				cmd: {
-					subtitle: "⌘: " + cask.homepage,
+					subtitle: "⌘: Open " + cask.homepage,
+					arg: cask.homepage,
+				},
+				alt: {
+					subtitle: "⌥: Copy " + cask.homepage,
 					arg: cask.homepage,
 				},
 			},
@@ -97,8 +101,13 @@ function run() {
 				copy: caveats,
 			},
 			mods: {
+				// PERF quicker to pass here than to call `brew home` on brew-id
 				cmd: {
-					subtitle: "⌘: " + formula.homepage,
+					subtitle: "⌘: Open " + formula.homepage,
+					arg: formula.homepage,
+				},
+				alt: {
+					subtitle: "⌥: Copy " + formula.homepage,
 					arg: formula.homepage,
 				},
 			},

@@ -4,15 +4,12 @@
 <dict>
 	<key>add_hackernews</key>
 	<true/>
-	<key>cache_age_threshold</key>
-	<string>10</string>
 	<key>custom_subreddit_icons</key>
 	<string>~/.config/Alfred.alfredpreferences/subreddit_icons</string>
 	<key>subreddits</key>
 	<string>neovim
 macapps
-commandline
-ObsidianMD</string>
+commandline</string>
 	<key>use_dstill_ai</key>
 	<true/>
 </dict>
