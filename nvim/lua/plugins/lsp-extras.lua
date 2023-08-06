@@ -162,8 +162,7 @@ return {
 	},
 	{ -- better LSP variable-rename
 		"smjonas/inc-rename.nvim",
-		-- loading with `cmd = "IncRename` does not work with incremental preview
-		event = "CmdlineEnter",
+		event = "CmdlineEnter", -- loading with `cmd = "IncRename` does not work with incremental preview
 		opts = {
 			-- if more than one file is changed, save all buffers
 			post_hook = function(results)
@@ -171,5 +170,16 @@ return {
 				if filesChanged > 1 then vim.cmd.wall() end
 			end,
 		},
+	},
+	{ -- better code actions
+		"weilbith/nvim-code-action-menu",
+		keys = {
+			{ "<leader>c", vim.cmd.CodeActionMenu, desc = "󰒕 Code Action" },
+		},
+		init = function()
+			vim.g.code_action_menu_window_border = u.borderStyle
+			vim.g.code_action_menu_show_details = false
+			vim.g.code_action_menu_show_action_kind = false
+		end,
 	},
 }
