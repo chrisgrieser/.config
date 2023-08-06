@@ -96,11 +96,6 @@ keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
 keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
 keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
 
--- Append to / delete from EoL
-local trailingKeys = { ",", ";", '"', "'", ")", "}", "]", "\\" }
-for _, key in pairs(trailingKeys) do
-	keymap("n", "<leader>" .. key, "mzA" .. key .. "<Esc>`z", { desc = "which_key_ignore" })
-end
 keymap("n", "X", "mz$x`z", { desc = "Delete last character" })
 
 keymap("n", "~", "~h", { desc = "Toggle Case (w/o moving right)" })
@@ -173,6 +168,8 @@ keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "➡️ Move selection left" }
 
 -- Merging
 keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
+keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "󰗈 Merge line down" })
+keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>]], { desc = "󰗈 split around selection" })
 
 
 -- URL Opening (forward-seeking `gx`)
