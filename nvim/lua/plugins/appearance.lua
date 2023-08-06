@@ -256,6 +256,22 @@ return {
 					min_height = 4,
 					win_options = { winblend = 0 }, -- fix weird shining through
 				},
+				-- code actions use builtin for quicker picking, otherwise use
+				-- telescope
+				get_config = function(opts)
+					if opts.kind == "codeaction" or opts.kind == "simple" then
+						return { backend = "builtin" }
+					elseif opts.kind == "github_issue" then
+						return {
+							backend = "telescope",
+							telescope = {
+								layout_config = {
+									horizontal = { width = 0.99, height = 0.6 },
+								},
+							},
+						}
+					end
+				end,
 			},
 		},
 	},

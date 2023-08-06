@@ -353,9 +353,8 @@ end, { desc = "󰒕  Save & Format" })
 -- uses "v" instead of "x", so signature can be shown during snippet completion
 keymap({ "n", "i", "v" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "󰒕 Signature" })
 
-keymap("n", "gd", function() cmd.Glance("definitions") end, { desc = "󰒕 Definitions" })
-keymap("n", "gf", function() cmd.Glance("references") end, { desc = "󰒕 References" })
-keymap("n", "gD", function() cmd.Glance("type_definitions") end, { desc = "󰒕 Type Definition" })
+keymap("n", "gd", function() cmd.Telescope("definitions") end, { desc = "󰒕 Definitions" })
+keymap("n", "gf", function() cmd.Telescope("references") end, { desc = "󰒕 References" })
 
 autocmd("LspAttach", {
 	callback = function(args)
