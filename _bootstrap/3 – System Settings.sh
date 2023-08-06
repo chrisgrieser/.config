@@ -159,26 +159,21 @@ sudo pmset womp 1          # Wake for network access
 # do not save GPG key in the keychains
 defaults write org.gpgtools.common DisableKeychain -bool yes
 
-# HOT CORNERS
-# Possible values:
-#  0: no-op
-#  2: Mission Control
-#  3: Show application windows
-# 10: Put display to sleep
-# 11: Launchpad
-# 12: Notification Center
-# 13: Lock Screen
-# 14: Quick Notes
+#───────────────────────────────────────────────────────────────────────────────
+# DOCK
+# INFO Dock settings do not need to be saved, since the Dock-Switcher setup also
+# saves them, and therefore syncs them across devices already as soon as
+# Hammerspoon is up and running. Lines here are only kept for reference.
 
-# Top right → Notification Center
-defaults write com.apple.dock wvous-tr-corner -int 12
-defaults write com.apple.dock wvous-br-corner -int 0
-defaults write com.apple.dock wvous-tl-corner -int 0
-defaults write com.apple.dock wvous-bl-corner -int 0
-
-defaults write com.apple.dock minimize-to-application -int 1
-
-killall Dock
+# hot corners
+# defaults write com.apple.dock wvous-tr-corner -int 12 Top right → Notification Center
+# defaults write com.apple.dock wvous-br-corner -int 0
+# defaults write com.apple.dock wvous-tl-corner -int 0
+# defaults write com.apple.dock wvous-bl-corner -int 0
+#
+# defaults write com.apple.dock minimize-to-application -int 1
+#
+# killall Dock
 
 #───────────────────────────────────────────────────────────────────────────────
 # TIME MACHINE
