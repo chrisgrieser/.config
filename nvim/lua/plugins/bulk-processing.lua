@@ -16,15 +16,6 @@ return {
 			}
 		end,
 	},
-	-- TODO switch to multicursor.nvim once it's stable
-	-- {
-	-- 	"smoka7/multicursors.nvim",
-	-- 	event = "VeryLazy",
-	-- 	opts = true,
-	-- 	keys = {
-	-- 		{ "<D-j>", "<cmd>MCstart<CR>", desc = "󰆿 Multi-Select word under the cursor" },
-	-- 	},
-	-- },
 	{ -- structural search & replace, alternative: https://ast-grep.github.io/guide/editor-integration.html
 		"cshuaimin/ssr.nvim",
 		keys = {

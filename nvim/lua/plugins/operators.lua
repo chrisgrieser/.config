@@ -30,7 +30,6 @@ return {
 			{ "qf", function() require("neogen").generate() end, desc = " Comment Function" },
 		},
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		opts = true,
 	},
 	{ -- substitute
 		"gbprod/substitute.nvim",
@@ -38,9 +37,9 @@ return {
 			{ "s", function() require("substitute").operator() end, desc = "Substitute operator" },
 			{ "ss", function() require("substitute").line() end, desc = "Substitute line" },
 			{ "S", function() require("substitute").eol() end, desc = "Substitute to EoL" },
-			{ "sy", function() require("substitute.exchange").operator() end, desc = "Exchange operator" },
-			{ "sY", "sy$", remap = true, desc = "Exchange to EoL" },
-			{ "syy", function() require("substitute.exchange").line() end, desc = "Exchange line" },
+			{ "sx", function() require("substitute.exchange").operator() end, desc = "Exchange operator" },
+			{ "sX", "sx$", remap = true, desc = "Exchange to EoL" },
+			{ "sxx", function() require("substitute.exchange").line() end, desc = "Exchange line" },
 		},
 		opts = { on_substitute = require("yanky.integration").substitute() },
 	},
@@ -92,13 +91,6 @@ return {
 					end
 				end
 
-				-- increment numbered vars
-				local lineHasNumberedVarAssignment, _, num = line:find("(%d+).*=")
-				if lineHasNumberedVarAssignment then
-					local nextNum = tostring(tonumber(num) + 1)
-					line = line:gsub("%d+(.*=)", nextNum .. "%1")
-				end
-
 				-- move cursor position to value
 				local lineNum, colNum = unpack(vim.api.nvim_win_get_cursor(0))
 				local keyPos, valuePos = line:find(".%w+ ?[:=] ?")
@@ -146,6 +138,7 @@ return {
 					insert = false,
 				},
 				surrounds = {
+					invalid_key_behavior = { add = false, find = false, delete = false, change = false },
 					[u.textobjectMaps.doubleSquareBracket] = {
 						find = "%[%[.-%]%]",
 						add = { "[[", "]]" },
@@ -268,12 +261,6 @@ return {
 							vim.notify("No if-surround defined for " .. ft, u.warn)
 							return { { "" }, { "" } }
 						end,
-					},
-					invalid_key_behavior = {
-						add = false,
-						find = false,
-						delete = false,
-						change = false,
 					},
 				},
 			}

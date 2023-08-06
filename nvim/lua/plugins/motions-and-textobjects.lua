@@ -1,5 +1,3 @@
-local u = require("config.utils")
---------------------------------------------------------------------------------
 
 return {
 	{ -- highlights for ftFT
@@ -19,19 +17,6 @@ return {
 		"nacro90/numb.nvim",
 		keys = ":",
 		opts = true,
-	},
-	{ -- better % (highlighting, matches across lines, match quotes)
-		"andymass/vim-matchup",
-		event = "BufReadPre", -- cannot load on key due to highlights
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		init = function()
-			vim.g.matchup_matchparen_offscreen = {} -- empty = disables
-			vim.g.matchup_text_obj_enabled = 0
-
-			vim.keymap.set("n", "m", "<Plug>(matchup-%)", { desc = "Goto Matching Bracket" })
-			-- if using the builtin matchit plugin, `remap = true` would be needed
-			-- to map m to %
-		end,
 	},
 	{ -- CamelCase Motion plus
 		"chrisgrieser/nvim-spider",
@@ -54,41 +39,5 @@ return {
 		"chrisgrieser/nvim-various-textobjs",
 		lazy = true, -- loaded by keymaps
 		dev = true,
-	},
-	{ -- distant textobjects
-		"ggandor/leap-spooky.nvim",
-		keys = { { "x", mode = { "o" }, desc = "󱡔 Load Leap Spooky" } },
-		dependencies = { "ggandor/leap.nvim" },
-		opts = {
-			affixes = {
-				-- magnetic = move to object after operation
-				magnetic = { window = nil, cross_window = nil }, 
-				remote = { window = "x", cross_window = nil },
-			},
-			prefix = true, -- false: `ixw`, true: `xiw`
-			paste_on_remote_yank = true,
-		},
-		init = function()
-			-- key triggering distant textobj, e.g. `yxap` to remote-yank a paragraph
-			-- also used in `keys` and `opts.affixes.remote`
-			local spooky = "x"
-
-			-- applying my textobj remappings to this plugin
-			local textobjRemaps = vim.deepcopy(u.textobjectRemaps)
-			for remap, original in pairs(textobjRemaps) do
-				vim.keymap.set(
-					"o",
-					spooky .. "a" .. remap,
-					spooky .. "a" .. original,
-					{ desc = "󱡔 Distant outer " .. original, remap = true }
-				)
-				vim.keymap.set(
-					"o",
-					spooky .. "i" .. remap,
-					spooky .. "i" .. original,
-					{ desc = "󱡔 Distant inner " .. original, remap = true }
-				)
-			end
-		end,
 	},
 }
