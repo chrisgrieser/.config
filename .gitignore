@@ -1,13 +1,4 @@
 # WARN 
-# don't add "node_modules" here since some Alfred workflows actually rely on it
-
-# in case of accidental saving of such files in the repo
-# (either too bug, or sensitive data)
-*.mp4
-*.mkv
-*.part
-.zsh_history
-.bash_history
 
 # tokens and credentials that some apps annoyingly store in .config 😠
 gh/hosts.yml

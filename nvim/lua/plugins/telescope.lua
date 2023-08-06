@@ -72,6 +72,7 @@ local function telescopeConfig()
 				"%.gif$",
 				"%.icns",
 				"%.zip$",
+				".DS_Store", -- needs to be explicitly added, since unignored in some repos
 				"%-bkp$", -- backup files
 			},
 			mappings = {
