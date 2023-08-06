@@ -13,6 +13,5 @@ delay 0.15
 tell application "System Events"
 	keystroke tab
 	keystroke "v" using {command down}
-	delay 0.3
-	keystroke "w" using {command down}
 end tell
+delay 0.15

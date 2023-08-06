@@ -252,7 +252,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>get-workflow-path.js</string>
+				<string>./scripts/get-workflow-path.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -431,7 +431,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>get-workflow-path.js</string>
+				<string>./scripts/get-workflow-path.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -622,7 +622,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>open-alfred-workflow.js</string>
+				<string>./scripts/open-alfred-workflow.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -680,7 +680,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>back-in-workflow-history.js</string>
+				<string>./scripts/back-in-workflow-history.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -703,7 +703,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>get-workflow-path.js</string>
+				<string>./scripts/get-workflow-path.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -843,7 +843,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>update-alfred-preferences-icon.sh</string>
+				<string>./scripts/update-alfred-preferences-icon.applescript</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
