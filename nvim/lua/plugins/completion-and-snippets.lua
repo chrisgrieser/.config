@@ -185,7 +185,6 @@ local function filetypeCompletionConfig()
 			s.nerdfont, -- add nerdfont for config
 			s.emojis,
 			s.treesitter,
-			s.buffer,
 		},
 	})
 
@@ -195,7 +194,6 @@ local function filetypeCompletionConfig()
 			s.snippets,
 			s.codeium,
 			s.emojis,
-			-- buffer and treesitter too slow on big files
 		},
 	})
 
@@ -215,7 +213,6 @@ local function filetypeCompletionConfig()
 			s.snippets,
 			s.treesitter, -- useful when no schemas
 			s.emojis,
-			s.buffer,
 		},
 	})
 
@@ -233,7 +230,6 @@ local function filetypeCompletionConfig()
 			s.path,
 			s.codeium,
 			s.treesitter,
-			s.buffer,
 			s.nerdfont, -- used for some configs
 			s.emojis,
 		},

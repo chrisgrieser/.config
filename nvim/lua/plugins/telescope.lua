@@ -141,9 +141,25 @@ local function telescopeConfig()
 				trim_text = true,
 				fname_width = 0,
 			},
-			command_history = {
-				prompt_prefix = "󰘳 ",
-				mappings = { i = { ["<D-CR>"] = "edit_command_line" } },
+			lsp_references = {
+				prompt_prefix = "󰈿 ",
+				show_line = false,
+				trim_text = true,
+				include_declaration = false,
+				initial_mode = "normal",
+			},
+			lsp_definitions = {
+				prompt_prefix = "󰈿 ",
+				show_line = false,
+				trim_text = true,
+				initial_mode = "normal",
+				theme = "cursor",
+				layout_config = {
+					cursor = {
+						width = 0.7,
+						preview_cutoff = 30,
+					},
+				},
 			},
 			lsp_document_symbols = {
 				prompt_prefix = "󰒕 ",

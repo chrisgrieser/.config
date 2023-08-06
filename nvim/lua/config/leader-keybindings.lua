@@ -48,10 +48,6 @@ end, { desc = "󰘳 Copy last command" })
 -- as opposed to `@:`, this works across sessions
 keymap("n", "<leader>la", ":<Up><CR>", { desc = "󰘳 Run last command again", silent = true })
 
--- search command history
--- stylua: ignore
-keymap("n", "<leader>lh", function() cmd.Telescope("command_history") end, { desc = "󰘳  Command History" })
-
 -- show current filetype & buftype
 keymap("n", "<leader>lf", function()
 	local icon = require("nvim-web-devicons").get_icon(fn.bufname(), bo.filetype)
@@ -116,6 +112,7 @@ end, { desc = "󰜊 Undo since last open", silent = true })
 --------------------------------------------------------------------------------
 -- LSP
 keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
+keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "󰒕 Code Action" })
 
 --------------------------------------------------------------------------------
 
@@ -151,24 +148,20 @@ keymap("n", "<leader>gc", "<cmd>Neogit commit<CR>", { desc = "󰊢 Commit (Neogi
 
 -- Gitsigns
 keymap("n", "<leader>ga", "<cmd>Gitsigns stage_hunk<CR>", { desc = "󰊢 Add Hunk" })
-keymap("n", "<leader>gA", "<cmd>Gitsigns stage_buffer<CR>", { desc = "󰊢 Add Buffer" })
 keymap("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<CR>", { desc = "󰊢 Preview Hunk Diff" })
 keymap("n", "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", { desc = "󰊢 Reset Hunk" })
-keymap("n", "<leader>gR", "<cmd>Gitsigns reset_buffer<CR>", { desc = "󰊢 Reset Buffer" })
 keymap("n", "<leader>g?", "<cmd>Gitsigns blame_line<CR>", { desc = "󰊢 Blame Line" })
 
 -- Telescope
 -- stylua: ignore start
 keymap("n", "<leader>gs", function() cmd.Telescope("git_status") end, { desc = "󰊢  Status" })
 keymap("n", "<leader>gl", function() cmd.Telescope("git_commits") end, { desc = "󰊢  Log / Commits" })
-keymap("n", "<leader>gL", function() cmd.Telescope("git_bcommits") end, { desc = "󰊢  Buffer Commits" })
-keymap("n", "<leader>gb", function() cmd.Telescope("git_branches") end, { desc = "󰊢  Branches Commits" })
+keymap("n", "<leader>gb", function() cmd.Telescope("git_branches") end, { desc = "󰊢  Branches" })
 
 -- My utils
 keymap({ "n", "x" }, "<leader>gu", function () require("funcs.git-utils").githubUrl() end, { desc = "󰊢 GitHub Link" })
 keymap("n", "<leader>gg", function() require("funcs.git-utils").addCommitPush() end, { desc = "󰊢 Add-Commit-Push" })
 keymap("n", "<leader>gi", function() require("funcs.git-utils").issueSearch("open") end, { desc = "󰊢 Open Issues" })
-keymap("n", "<leader>gI", function() require("funcs.git-utils").issueSearch("closed") end, { desc = "󰊢 Closed Issues" })
 keymap("n", "<leader>gm", function() require("funcs.git-utils").amendNoEditPushForce() end, { desc = "󰊢 Amend-No-Edit & Force Push" })
 keymap("n", "<leader>gM", function() require("funcs.git-utils").amendAndPushForce() end, { desc = "󰊢 Amend & Force Push" })
 -- stylua: ignore end
