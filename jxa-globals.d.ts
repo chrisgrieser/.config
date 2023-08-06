@@ -53,7 +53,7 @@ declare class finderItem {
 	exists(): boolean;
 }
 
-// https://developer.apple.com/library/archive/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html
+// DOCS https://developer.apple.com/library/archive/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html
 declare type PathObj = {
 	toString(): string;
 };
@@ -61,7 +61,7 @@ declare function Path(filepath: string): PathObj;
 
 declare const Application: {
 	currentApplication: () => {
-		doShellScript(script: string): string;
+		doShellScript(script: string): string; // DOCS https://developer.apple.com/library/archive/technotes/tn2065/_index.html
 		includeStandardAdditions: boolean;
 		openLocation(url: string): void;
 		pathTo(what: "home folder"): string;
