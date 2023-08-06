@@ -42,9 +42,6 @@ case $APP in
 "Discord")
 	cp -f "$CUSTOM_ICON_FOLDER/Discord Black.icns" "$APP.app/Contents/Resources/electron.icns"
 	;;
-"Vivaldi")
-	cp -f "$CUSTOM_ICON_FOLDER/Vivaldi.icns" "$APP.app/Contents/Resources/app.icns"
-	;;
 # "Brave Browser")
 # 	cp -f "$CUSTOM_ICON_FOLDER/Brave Safari.icns" "$APP.app/Contents/Resources/app.icns"
 # 	;;
@@ -53,7 +50,7 @@ case $APP in
 			open information window of (\"Alfred 5.app/Contents/Preferences/$APP.app\" as POSIX file as alias)
 			activate
 		end tell
-		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/Alfred 1.icns\""
+		set the clipboard to POSIX file \"$CUSTOM_ICON_FOLDER/Alfred Preferences.icns\""
 	INFO_WINDOW=1
 	;;
 "Microsoft Word")
