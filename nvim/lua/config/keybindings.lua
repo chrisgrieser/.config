@@ -49,6 +49,8 @@ keymap("n", "gh", "<cmd>Gitsigns next_hunk<CR>zv", { desc = "󰊢 Next Hunk" })
 keymap("n", "gH", "<cmd>Gitsigns prev_hunk<CR>zv", { desc = "󰊢 Previous Hunk" })
 keymap("n", "g,", "g;", { desc = "Goto last change" })
 
+keymap("n", "m", "<Plug>(MatchitNormalForward)", { desc = "Goto Matching Bracket" })
+
 --------------------------------------------------------------------------------
 
 -- SEARCH
@@ -86,7 +88,6 @@ keymap("n", "dQ", require("funcs.quickfix").deleteList, { desc = " Empty Quic
 
 -- COMMENTS & ANNOTATIONS
 keymap("n", "qw", require("funcs.comment-divider").commentHr, { desc = " Horizontal Divider" })
-keymap("n", "wq", '"zyy"zpkqqj', { desc = " Duplicate Line as Comment", remap = true })
 
 -- WHITESPACE CONTROL
 keymap("n", "=", "mzO<Esc>`z", { desc = "  blank above" })
@@ -119,7 +120,6 @@ keymap({ "n", "i" }, "<D-o>", function()
 end, { desc = " Open new brace" })
 
 --------------------------------------------------------------------------------
-
 -- SPELLING
 
 -- [z]pelling [l]ist
@@ -170,7 +170,6 @@ keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "➡️ Move selection left" }
 keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
 keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "󰗈 Merge line down" })
 keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>]], { desc = "󰗈 split around selection" })
-
 
 -- URL Opening (forward-seeking `gx`)
 keymap("n", "gx", function()
@@ -281,14 +280,6 @@ keymap("n", "go", function()
 	require("telescope").extensions.file_browser.file_browser { prompt_title = "󰝰 " .. project }
 end, { desc = " Browse in Project" })
 
--- stylua: ignore
-keymap( "n", "gO", function()
-	require("telescope").extensions.file_browser.file_browser {
-		path = expand("%:p:h"),
-		prompt_title = "󰝰 " .. expand("%:p:h:t"),
-	}
-end, { desc = " Browse in Current Folder" })
-
 keymap("n", "gl", function()
 	local project = projectName()
 	if project == "" then
@@ -311,27 +302,12 @@ keymap("n", "ga", "gf", { desc = "Goto File under Cursor" }) -- needed, since `g
 
 -- toggle all toplevel folds
 keymap("n", "zz", function()
-	cmd("%foldclose") -- close toplevel folds
-	-- pcall(u.normal, "zo") -- open fold under cursor
+	cmd("%foldclose") 
 end, { desc = "󰘖 Close toplevel folds" })
 
 -- stylua: ignore
 keymap("n", "zr", function() require("ufo").openFoldsExceptKinds { "comments" } end, { desc = "󰘖 󱃄 Open All Folds except comments" })
 keymap("n", "zm", function() require("ufo").closeAllFolds() end, { desc = "󰘖 󱃄 Close All Folds" })
-
--- set foldlevel via z{n}
-for _, lvl in pairs { 1, 2, 3, 4, 5, 6, 7, 8, 9 } do
-	local desc = lvl < 4 and "󰘖 Set Fold Level" or "which_key_ignore"
-	keymap("n", "z" .. tostring(lvl), function() require("ufo").closeFoldsWith(lvl) end, { desc = desc })
-end
-
---------------------------------------------------------------------------------
--- MESO-LEVEL FOLD COMMANDS
--- affect multiple folds, but not all
-
--- Cycle Folds (f1 = ^ Karabiner Remap)
-keymap({ "c", "i" }, "<f1>", "^", { desc = "HACK for karabiner rebinding" })
-keymap("n", "<f1>", function() require("fold-cycle").close() end, { desc = "󰘖 Cycle Fold" })
 
 ------------------------------------------------------------------------------
 -- LSP KEYBINDINGS
@@ -353,8 +329,8 @@ end, { desc = "󰒕  Save & Format" })
 -- uses "v" instead of "x", so signature can be shown during snippet completion
 keymap({ "n", "i", "v" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "󰒕 Signature" })
 
-keymap("n", "gd", function() cmd.Telescope("definitions") end, { desc = "󰒕 Definitions" })
-keymap("n", "gf", function() cmd.Telescope("references") end, { desc = "󰒕 References" })
+keymap("n", "gd", function() cmd.Telescope("lsp_definitions") end, { desc = "󰒕 Definitions" })
+keymap("n", "gf", function() cmd.Telescope("lsp_references") end, { desc = "󰒕 References" })
 
 autocmd("LspAttach", {
 	callback = function(args)
@@ -388,16 +364,12 @@ autocmd("FileType", {
 	pattern = {
 		"help",
 		"lspinfo",
-		"tsplayground",
-		"PlenaryTestPopup",
 		"qf", -- quickfix
 		"lazy",
 		"httpResult", -- rest.nvim
 		"DressingSelect", -- done here and not as dressing keybinding to be able to set `nowait`
 		"DressingInput",
 		"man",
-		"neoai-input",
-		"neoai-output",
 	},
 	callback = function()
 		local opts = { buffer = true, nowait = true, desc = "close" }

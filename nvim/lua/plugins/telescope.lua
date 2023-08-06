@@ -143,34 +143,30 @@ local function telescopeConfig()
 			},
 			lsp_references = {
 				prompt_prefix = "󰈿 ",
-				show_line = false,
+				show_line = true,
 				trim_text = true,
 				include_declaration = false,
+				include_current_line = false,
 				initial_mode = "normal",
+				fname_width = 12,
 			},
 			lsp_definitions = {
 				prompt_prefix = "󰈿 ",
-				show_line = false,
+				show_line = true,
 				trim_text = true,
 				initial_mode = "normal",
-				theme = "cursor",
-				layout_config = {
-					cursor = {
-						width = 0.7,
-						preview_cutoff = 30,
-					},
-				},
+				fname_width = 12,
 			},
 			lsp_document_symbols = {
 				prompt_prefix = "󰒕 ",
 				-- markdown headings are symbol-type "string", therefore shouldn't be ignored
 				ignore_symbols = { "boolean", "number" },
-				fname_width = 17,
+				fname_width = 12,
 			},
 			lsp_workspace_symbols = {
 				prompt_prefix = "󰒕 ",
 				ignore_symbols = { "string", "boolean", "number" },
-				fname_width = 17,
+				fname_width = 12,
 			},
 			buffers = {
 				prompt_prefix = "󰽙 ",
@@ -218,9 +214,9 @@ local function telescopeConfig()
 				},
 				mappings = {
 					i = {
-						["<cr>"] = require("telescope-undo.actions").yank_additions,
+						["<C-cr>"] = require("telescope-undo.actions").yank_additions,
 						["<S-cr>"] = require("telescope-undo.actions").yank_deletions,
-						["<C-cr>"] = require("telescope-undo.actions").restore,
+						["<cr>"] = require("telescope-undo.actions").restore,
 					},
 				},
 			},
@@ -237,12 +233,8 @@ local function telescopeConfig()
 				mappings = {
 					i = {
 						-- mappings should be consistent with nvim-ghengis mappings
-						["<D-n>"] = require("telescope._extensions.file_browser.actions").create,
 						["<C-r>"] = require("telescope._extensions.file_browser.actions").rename,
 						["<D-BS>"] = require("telescope._extensions.file_browser.actions").remove,
-
-						-- Toggle Files/Folders
-						["<D-b>"] = require("telescope._extensions.file_browser.actions").toggle_browser,
 
 						-- go up
 						["<D-Up>"] = require("telescope._extensions.file_browser.actions").goto_parent_dir,
