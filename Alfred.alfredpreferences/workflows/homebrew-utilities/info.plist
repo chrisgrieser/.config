@@ -361,7 +361,7 @@
 				<key>runningsubtext</key>
 				<string>loading...</string>
 				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/brew-uninstall.js "0"</string>
+				<string>osascript -l JavaScript ./scripts/brew-uninstall.js "no_mac_app_store"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
