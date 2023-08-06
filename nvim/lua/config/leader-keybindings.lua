@@ -119,7 +119,7 @@ keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
 
 --------------------------------------------------------------------------------
 
--- LOGGING & DEBUGGING
+-- LOGGING
 -- stylua: ignore start
 keymap({ "n", "x" }, "<leader>ll", function() require("funcs.quick-log").log() end, { desc = " log variable" })
 keymap({ "n", "x" }, "<leader>lo", function() require("funcs.quick-log").objectlog() end, { desc = " object log variable" })
@@ -129,6 +129,18 @@ keymap("n", "<leader>lr", function() require("funcs.quick-log").removelogs() end
 keymap("n", "<leader>ld", function() require("funcs.quick-log").debuglog() end, { desc = " debugger" })
 keymap("n", "<leader>lt", cmd.Inspect, { desc = " Treesitter Inspect" })
 -- stylua: ignore end
+
+--------------------------------------------------------------------------------
+
+-- Merging & Splitting Lines
+keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "󰗈 Merge line down" })
+keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>]], { desc = "󰗈 split around selection" })
+
+-- Append to / delete from EoL
+local trailingKeys = { ",", '"', ")" }
+for _, key in pairs(trailingKeys) do
+	keymap("n", "<leader>" .. key, "mzA" .. key .. "<Esc>`z", { desc = " Append " .. key .. " to EoL" })
+end
 
 --------------------------------------------------------------------------------
 -- GIT
