@@ -26,13 +26,12 @@ alias bu='brew uninstall --zap'
 # colorize via chromaterm
 if command -v ct &>/dev/null; then
 	# recursive -> affects all brew commands
-	alias brew="ct brew" 
+	alias brew="ct brew"
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
 
 function print-section() {
-	echo
 	echo
 	echo "$*"
 	separator
@@ -80,14 +79,12 @@ function report() {
 	print-section "HOMEBREW"
 	print-section "Taps"
 	brew tap
-	print-section "Doctor"
-	brew doctor
-	print-section "Formula/Leaves (installed on request)"
+	print-section "Leaves (formulas installed-on-request)"
 	brew leaves --installed-on-request
-	print-section "Formula/Leaves (installed as dependency)"
-	brew leaves --installed-as-dependency
 	print-section "Casks"
 	brew list --casks
+	print-section "Doctor"
+	brew doctor
 
 	print-section "MAC APP STORE"
 	mas list
