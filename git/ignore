@@ -1,19 +1,32 @@
 # Mac
 .DS_Store
+*.icloud
 
 # Icon must end with two \r
 Icon
 
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# production stuff / builds requirements
+node_modules
+*.alfredworkflow
+*.dmg
 
 # safety net to prevent sensitive data being accidentally moved
 *.kdb
 *.kdbx
 *.pfx
 *.key
-pw.*
+pw.txt
+pw.md
+.zsh_history
+.bash_history
 
-# partial downloads
+# prevent accidental inclusion of big files or partial downloads
 *.part
+*.crdownload
+*.mp4
+*.mkv
+*.tiff
 
-# created due to sync issues
-*.icloud
