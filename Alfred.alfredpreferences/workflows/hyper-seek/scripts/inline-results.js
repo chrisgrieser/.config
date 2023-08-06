@@ -19,24 +19,6 @@ app.includeStandardAdditions = true;
  */
 
 //──────────────────────────────────────────────────────────────────────────────
-// CONFIG
-
-let resultsToFetch = parseInt($.getenv("inline_results_to_fetch")) || 5;
-if (resultsToFetch < 1) resultsToFetch = 1;
-else if (resultsToFetch > 25) resultsToFetch = 25; // maximum supported by `ddgr`
-
-const minimumQueryLength = parseInt($.getenv("minimum_query_length")) || 3;
-if (minimumQueryLength < 0) resultsToFetch = 0;
-else if (minimumQueryLength > 10) resultsToFetch = 10; // prevent accidental high values
-
-const includeUnsafe = $.getenv("include_unsafe") === "1" ? "--unsafe" : "";
-const ignoreAlfredKeywordsEnabled = $.getenv("ignore_alfred_keywords") === "1";
-const multiSelectIcon = $.getenv("multi_select_icon") || "🔳";
-
-// https://duckduckgo.com/duckduckgo-help-pages/settings/params/
-const searchRegion = $.getenv("region") === "none" ? "" : "--reg=" + $.getenv("region");
-
-//──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} path */
 function readFile(path) {
@@ -181,6 +163,12 @@ function refreshKeywordCache(cachePath) {
 	console.log(`Rebuilt keyword cache (${uniqueKeywords.length} keywords) in ${durationTotalSecs}s`);
 }
 
+function getFavicon(topDomain) {
+	const imageUrl = `https://${topDomain}/apple-touch-icon.png`;
+	
+	return ""; // empty string = not found = use default icon
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -188,6 +176,26 @@ function refreshKeywordCache(cachePath) {
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const timelogStart = +new Date();
+
+	//──────────────────────────────────────────────────────────────────────────────
+	// CONFIG
+
+	let resultsToFetch = parseInt($.getenv("inline_results_to_fetch")) || 5;
+	if (resultsToFetch < 1) resultsToFetch = 1;
+	else if (resultsToFetch > 25) resultsToFetch = 25; // maximum supported by `ddgr`
+
+	const minimumQueryLength = parseInt($.getenv("minimum_query_length")) || 3;
+	if (minimumQueryLength < 0) resultsToFetch = 0;
+	else if (minimumQueryLength > 10) resultsToFetch = 10; // prevent accidental high values
+
+	const includeUnsafe = $.getenv("include_unsafe") === "1" ? "--unsafe" : "";
+	const ignoreAlfredKeywordsEnabled = $.getenv("ignore_alfred_keywords") === "1";
+	const multiSelectIcon = $.getenv("multi_select_icon") || "🔳";
+
+	// https://duckduckgo.com/duckduckgo-help-pages/settings/params/
+	const searchRegion = $.getenv("region") === "none" ? "" : "--reg=" + $.getenv("region");
+
+	//───────────────────────────────────────────────────────────────────────────
 
 	/** @type{"fallback"|"multi-select"|"default"|"rerun"} */
 	let mode = $.NSProcessInfo.processInfo.environment.objectForKey("mode").js || "default";
@@ -297,7 +305,7 @@ function run(argv) {
 		// in restricting the number of results for performance. (Except for 25 being
 		// ddgr's maximum)
 		const escapedQuery = query.replaceAll('"', '\\"');
-		const ddgr = "python3 ./dependencies/ddgr.py"
+		const ddgr = "python3 ./dependencies/ddgr.py";
 		const ddgrCmd = `${ddgr} --json --noua ${includeUnsafe} --num=${resultsToFetch} ${searchRegion} "${escapedQuery}"`;
 		response = JSON.parse(app.doShellScript(ddgrCmd));
 		response.query = query;
@@ -316,13 +324,14 @@ function run(argv) {
 	const newResults = response.results.map((item) => {
 		const isSelected = multiSelectUrls.includes(item.url);
 		const icon = isSelected ? multiSelectIcon + " " : "";
-		const topLevelDomain = item.url.replace(/^https?:\/\/(?:www.)?(.*?)\/.*/, "$1");
+		const topDomain = item.url.split("/")[2];
+		const iconPath = getFavicon(topDomain) || "";
 		return {
 			title: icon + item.title,
-			subtitle: topLevelDomain,
+			subtitle: topDomain,
 			uid: item.url,
 			arg: isSelected ? "" : item.url, // if URL already selected, no need to pass it
-			icon: { path: "icons/1.png" },
+			icon: { path: iconPath},
 			mods: {
 				shift: { subtitle: item.abstract },
 				alt: { subtitle: `⌥: Copy  ➙  ${item.url}` }, // also makes holding alt show the full URL
