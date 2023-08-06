@@ -1,11 +1,12 @@
 # HELPER FUNCTION USED BY OTHERS
 # draws a separator line with terminal width
 function separator() {
+	local sep_char="═"
 	local terminal_width
 	local sep=""
 	terminal_width=$(tput cols)
 	for ((i = 0; i < terminal_width; i++)); do
-		sep="$sep─"
+		sep="$sep$sep_char"
 	done
 	echo "$sep"
 }
@@ -23,7 +24,6 @@ function inspect() {
 	[[ $(tput lines) -gt $disabled_below_term_height ]] || return 0 # don't use in embedded terminals, since too small
 	if ! command -v exa &>/dev/null; then printf "\033[1;33mexa not installed.\033[0m" && return 1; fi
 	if ! command -v git &>/dev/null; then printf "\033[1;33mgit not installed.\033[0m" && return 1; fi
-	if ! which separator &>/dev/null; then printf "\033[1;33mseperator helper function not defined.\033[0m" && return 1; fi
 
 	# GIT LOG & STATUS
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
