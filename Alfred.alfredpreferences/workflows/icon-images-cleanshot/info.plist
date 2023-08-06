@@ -8,19 +8,6 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
-		<key>0B2584E5-EDEE-4BE5-9D80-5098C54BD631</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>D6F7AD54-C4BD-4B8F-8D32-D5680EECB192</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>3014658F-1912-4945-BE42-94D7C52E614B</key>
 		<array>
 			<dict>
@@ -39,19 +26,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>C8B8FDDD-C5E0-4FAB-9460-6DE156051CF5</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>6BE47B31-5477-4429-90B6-3AE77A0233EA</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>0B2584E5-EDEE-4BE5-9D80-5098C54BD631</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -91,19 +65,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>B63198BC-AC4C-4C91-9010-DE88095682EF</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>BAA2ADF7-2FEB-4F9A-AE98-17378171B5CA</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>0B2584E5-EDEE-4BE5-9D80-5098C54BD631</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -155,19 +116,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>D59AEC30-AFEC-48B3-92DE-0719210E8506</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>6BE47B31-5477-4429-90B6-3AE77A0233EA</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -179,27 +127,6 @@
 	<string>Icons &amp; Images</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>alfred-preference app</string>
-				<key>subtext</key>
-				<string>apply custom app icon</string>
-				<key>text</key>
-				<string>⚙️ Alfred Preference.app</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>D59AEC30-AFEC-48B3-92DE-0719210E8506</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -239,23 +166,6 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>AF0E4942-E221-40D4-A68F-897A783A8EE9</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>Alfred Preferences</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>6BE47B31-5477-4429-90B6-3AE77A0233EA</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -319,69 +229,6 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>C35BAC57-E3D9-4FCA-8B09-2C81C2D8D7B9</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>icon-updater.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>0B2584E5-EDEE-4BE5-9D80-5098C54BD631</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<true/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Icon updated</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>D6F7AD54-C4BD-4B8F-8D32-D5680EECB192</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>com.apple.application-bundle</string>
-				</array>
-				<key>name</key>
-				<string>Use Custom Icon</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>BAA2ADF7-2FEB-4F9A-AE98-17378171B5CA</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -592,15 +439,6 @@
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>0B2584E5-EDEE-4BE5-9D80-5098C54BD631</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>740</real>
-			<key>ypos</key>
-			<real>155</real>
-		</dict>
 		<key>3014658F-1912-4945-BE42-94D7C52E614B</key>
 		<dict>
 			<key>colorindex</key>
@@ -627,15 +465,6 @@
 			<real>200</real>
 			<key>ypos</key>
 			<real>500</real>
-		</dict>
-		<key>6BE47B31-5477-4429-90B6-3AE77A0233EA</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>670</real>
-			<key>ypos</key>
-			<real>45</real>
 		</dict>
 		<key>762A6849-97F7-453B-9037-80139ADE2754</key>
 		<dict>
@@ -700,15 +529,6 @@
 			<key>ypos</key>
 			<real>735</real>
 		</dict>
-		<key>BAA2ADF7-2FEB-4F9A-AE98-17378171B5CA</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>535</real>
-			<key>ypos</key>
-			<real>155</real>
-		</dict>
 		<key>BCDE5A63-BF29-4CD2-B482-D2A56CD510A1</key>
 		<dict>
 			<key>colorindex</key>
@@ -735,26 +555,6 @@
 			<real>200</real>
 			<key>ypos</key>
 			<real>245</real>
-		</dict>
-		<key>D59AEC30-AFEC-48B3-92DE-0719210E8506</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>note</key>
-			<string>icon for Alfred prefs</string>
-			<key>xpos</key>
-			<real>535</real>
-			<key>ypos</key>
-			<real>15</real>
-		</dict>
-		<key>D6F7AD54-C4BD-4B8F-8D32-D5680EECB192</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>895</real>
-			<key>ypos</key>
-			<real>155</real>
 		</dict>
 		<key>E4B297D7-3D56-4C37-8D5B-C64BBF44747E</key>
 		<dict>

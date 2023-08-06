@@ -151,6 +151,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>AC7C9D3D-E394-4C9B-B5EE-57E5370DBCA3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>43143E26-0CD1-43FB-B13D-74E8AB0411EF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>C324E172-125B-402B-930D-F7D52CD82CD6</key>
 		<array>
 			<dict>
@@ -797,6 +810,50 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>alfred-preference app</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>⚙️ Update Alfred Preference Icon</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>AC7C9D3D-E394-4C9B-B5EE-57E5370DBCA3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>update-alfred-preferences-icon.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>43143E26-0CD1-43FB-B13D-74E8AB0411EF</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Requires at least Alfred 5.1.
@@ -870,6 +927,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>705</real>
 			<key>ypos</key>
 			<real>415</real>
+		</dict>
+		<key>43143E26-0CD1-43FB-B13D-74E8AB0411EF</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>180</real>
+			<key>ypos</key>
+			<real>630</real>
 		</dict>
 		<key>44FFE9B4-3CB4-46D3-8742-B7656E370346</key>
 		<dict>
@@ -982,6 +1048,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>140</real>
 		</dict>
+		<key>AC7C9D3D-E394-4C9B-B5EE-57E5370DBCA3</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>note</key>
+			<string>set icon for Alfred prefs</string>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>630</real>
+		</dict>
 		<key>C324E172-125B-402B-930D-F7D52CD82CD6</key>
 		<dict>
 			<key>colorindex</key>
@@ -1048,7 +1125,29 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>filtermode</key>
+				<integer>2</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Path for Custom Alfred Preferences Icon</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>custom_pref_icon_path</string>
+		</dict>
+	</array>
 	<key>version</key>
 	<string>0.9</string>
 	<key>webaddress</key>
