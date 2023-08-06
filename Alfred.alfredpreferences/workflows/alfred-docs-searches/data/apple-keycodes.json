@@ -2,206 +2,247 @@
 	"items": [
 		{
 			"title": "⎋ / Escape",
+			"match": "Escape 53",
 			"arg": "53",
 			"subtitle": "53"
 		},
 		{
 			"title": "⌘ / Command",
+			"match": "Command 55",
 			"arg": "55",
 			"subtitle": "55"
 		},
 		{
 			"title": "⌥ / Option / Alt",
+			"match": "Option / Alt 58",
 			"arg": "58",
 			"subtitle": "58 (left) / 61 (right)"
 		},
 		{
 			"title": "⌃ / Control",
+			"match": "Control 59",
 			"arg": "59",
 			"subtitle": "59 (left) / 62 (right)"
 		},
 		{
 			"title": "⇧ / Shift",
+			"match": "Shift 56",
 			"arg": "56",
 			"subtitle": "56 (left) / 60 (right)"
 		},
 		{
 			"title": "⇪ / Caps Lock",
+			"match": "Caps Lock Capslock 57",
 			"arg": "57",
 			"subtitle": "57"
 		},
 		{
 			"title": "⏎ / Return",
+			"match": "Return 36",
 			"arg": "36",
 			"subtitle": "36"
 		},
 		{
 			"title": "⌤ / Enter",
+			"match": "Enter 76",
 			"arg": "76",
 			"subtitle": "76"
 		},
 		{
 			"title": "⇥ / Tab",
+			"match": "Tab 48",
 			"arg": "48",
 			"subtitle": "48"
 		},
 		{
 			"title": "␣ / Space",
+			"match": "Space 49",
 			"arg": "49",
 			"subtitle": "49"
 		},
 		{
 			"title": "⌫ / Delete / Backspace",
+			"match": "Delete Backspace 51",
 			"arg": "51",
 			"subtitle": "51"
 		},
 		{
 			"title": "⌦ / Forward Delete",
+			"match": "Forward Delete 117",
 			"arg": "117",
 			"subtitle": "117"
 		},
 		{
 			"title": "← / Left Arrow",
+			"match": "Left Arrow 123",
 			"arg": "123",
 			"subtitle": "123"
 		},
 		{
 			"title": "→ / Right Arrow",
+			"match": "Right Arrow 124",
 			"arg": "124",
 			"subtitle": "124"
 		},
 		{
 			"title": "↓ / Down Arrow",
+			"match": "Down Arrow 125",
 			"arg": "125",
 			"subtitle": "125"
 		},
 		{
 			"title": "↑ / Up Arrow",
+			"match": "Up Arrow 126",
 			"arg": "126",
 			"subtitle": "126"
 		},
 		{
 			"title": "⇞ / Page Up",
+			"match": "Page Up 116",
 			"arg": "116",
 			"subtitle": "116"
 		},
 		{
 			"title": "⇟ / Page Down",
+			"match": "Page Down 121",
 			"arg": "121",
 			"subtitle": "121"
 		},
 		{
 			"title": "⇱ / Home",
+			"match": "Home 115",
 			"arg": "115",
 			"subtitle": "115"
 		},
 		{
 			"title": "⇲ / End",
+			"match": "End 119",
 			"arg": "119",
 			"subtitle": "119"
 		},
 		{
 			"title": "fn",
+			"match": "fn 63",
 			"arg": "63",
 			"subtitle": "63"
 		},
 		{
 			"title": "F1",
+			"match": "F1 122",
 			"arg": "122",
 			"subtitle": "122"
 		},
 		{
 			"title": "F2",
+			"match": "F2 120",
 			"arg": "120",
 			"subtitle": "120"
 		},
 		{
 			"title": "F3",
+			"match": "F3 99",
 			"arg": "99",
 			"subtitle": "99"
 		},
 		{
 			"title": "F4",
+			"match": "F4 118",
 			"arg": "118",
 			"subtitle": "118"
 		},
 		{
 			"title": "F5",
+			"match": "F5 96",
 			"arg": "96",
 			"subtitle": "96"
 		},
 		{
 			"title": "F6",
+			"match": "F6 97",
 			"arg": "97",
 			"subtitle": "97"
 		},
 		{
 			"title": "F7",
+			"match": "F7 98",
 			"arg": "98",
 			"subtitle": "98"
 		},
 		{
 			"title": "F8",
+			"match": "F8 100",
 			"arg": "100",
 			"subtitle": "100"
 		},
 		{
 			"title": "F9",
+			"match": "F9 101",
 			"arg": "101",
 			"subtitle": "101"
 		},
 		{
 			"title": "F10",
+			"match": "F10 109",
 			"arg": "109",
 			"subtitle": "109"
 		},
 		{
 			"title": "F11",
+			"match": "F11 103",
 			"arg": "103",
 			"subtitle": "103"
 		},
 		{
 			"title": "F12",
+			"match": "F12 111",
 			"arg": "111",
 			"subtitle": "111"
 		},
 		{
 			"title": "F13",
+			"match": "F13 105",
 			"arg": "105",
 			"subtitle": "105"
 		},
 		{
 			"title": "F14",
+			"match": "F14 107",
 			"arg": "107",
 			"subtitle": "107"
 		},
 		{
 			"title": "F15",
+			"match": "F15 113",
 			"arg": "113",
 			"subtitle": "113"
 		},
 		{
 			"title": "F16",
+			"match": "F16 106",
 			"arg": "106",
 			"subtitle": "106"
 		},
 		{
 			"title": "F17",
+			"match": "F17 64",
 			"arg": "64",
 			"subtitle": "64"
 		},
 		{
 			"title": "F18",
+			"match": "F18 79",
 			"arg": "79",
 			"subtitle": "79"
 		},
 		{
 			"title": "F19",
+			"match": "F19 80",
 			"arg": "80",
 			"subtitle": "80"
 		},
 		{
 			"title": "F20",
+			"match": "F20 90",
 			"arg": "90",
 			"subtitle": "90"
 		}

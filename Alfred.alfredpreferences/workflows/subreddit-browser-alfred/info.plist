@@ -388,7 +388,7 @@
 				<key>subtext</key>
 				<string>{const:alfred_workflow_name}</string>
 				<key>text</key>
-				<string>Force reload all subreddits</string>
+				<string>Reload all subreddits on next run</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -427,6 +427,7 @@
 	- &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Switch to next subreddit.
 	- &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy URL of post to clipboard.
 	- &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Open URL (if external link).
+- `:reddit`: Reload all subreddits on next run.
 
 No reddit account is needed. Due to smart caching, this workflow should never hit API rate limits under normal usage.
 

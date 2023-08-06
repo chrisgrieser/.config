@@ -136,6 +136,10 @@ keymap({ "x", "o" }, "ai", "<cmd>lua require('various-textobjs').indentation(fal
 keymap({ "x", "o" }, "ij", "<cmd>lua require('various-textobjs').indentation(false, true)<CR>", { desc = "󱡔 top-border indent textobj" })
 keymap({ "x", "o" }, "aj", "<cmd>lua require('various-textobjs').indentation(false, true)<CR>", { desc = "󱡔 top-border indent textobj" })
 
+-- i./a.: chain-member
+keymap({ "x", "o" }, "i.", "<cmd>lua require('various-textobjs').chainMember(true)<CR>", { desc = "󱡔 inner indent textobj" })
+keymap({ "x", "o" }, "a.", "<cmd>lua require('various-textobjs').chainMember(false)<CR>", { desc = "󱡔 outer indent textobj" })
+
 --------------------------------------------------------------------------------
 
 -- delete surrounding indentation
