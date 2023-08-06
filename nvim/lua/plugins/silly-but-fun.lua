@@ -15,10 +15,10 @@ return {
 			{ "<leader>zd", function() require("duck").hatch("🦆", 5) end, desc = "󰇥 Hatch Duck" },
 			{ "<leader>zc", function() require("duck").cook("💀") end, desc = "󰇥 Cook Duck" },
 		},
-		config = function()
+		init = function()
 			require("which-key").register {
 				mode = { "n" },
-				["<leader>z"] = { name = "󰯉 Zilly Fun Stuff" },
+				["<leader>z"] = { name = " 󰯉 Zilly Fun Stuff" },
 			}
 		end,
 	},

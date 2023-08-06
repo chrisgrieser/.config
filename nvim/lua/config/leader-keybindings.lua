@@ -16,7 +16,7 @@ end, { desc = "⌨️ Edit leader-keybindings.lua" })
 --------------------------------------------------------------------------------
 
 -- Highlights
-keymap("n", "<leader>H", function() cmd.Telescope("highlights") end, { desc = " Highlight Groups" })
+keymap("n", "<leader>pg", function() cmd.Telescope("highlights") end, { desc = " Highlight Groups" })
 
 -- [P]lugins
 keymap("n", "<leader>pp", require("lazy").sync, { desc = " Lazy Update/Sync" })
