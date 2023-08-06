@@ -139,19 +139,19 @@ function M.timelog()
 	elseif ft == "javascript" then
 		-- JXA does not support console.time()
 		logStatement1 = {
-			'console.log("%s timelog start")',
-			"const timelogStart = +new Date()",
+			'console.log("%s timelog start");',
+			"const timelogStart = +new Date();",
 		}
 		logStatement2 = {
-			"const duration = (+new Date() - timelogStart) / 1000",
-			'console.log("%s timelog:", duration, "s")',
+			"const duration = (+new Date() - timelogStart) / 1000;",
+			'console.log("%s timelog:", duration, "s");',
 		}
 	elseif ft == "typescript" then
 		logStatement1 = {
-			'console.time("timelog")',
+			'console.time("timelog");',
 		}
 		logStatement2 = {
-			'console.timeEnd("timelog")',
+			'console.timeEnd("timelog");',
 		}
 	elseif ft == "bash" or ft == "zsh" or ft == "sh" or ft == "fish" then
 		logStatement1 = {

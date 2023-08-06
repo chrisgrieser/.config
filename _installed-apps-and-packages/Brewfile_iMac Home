@@ -11,9 +11,9 @@ brew "aspell"
 brew "bat"
 brew "python@3.9"
 brew "cowsay"
-brew "ddgr"
 brew "duti"
 brew "exa"
+brew "fastgron"
 brew "fd"
 brew "openjpeg"
 brew "leptonica"
@@ -48,6 +48,8 @@ brew "pass"
 brew "poppler"
 brew "pdfgrep"
 brew "pinentry-mac"
+brew "pstree"
+brew "quicktype"
 brew "ripgrep"
 brew "spotify-tui"
 brew "starship"
@@ -108,5 +110,4 @@ mas "lo-rain", id: 6446921886
 mas "Peek", id: 1554235898
 mas "Pixelmator Pro", id: 1289583905
 mas "ReadKit", id: 1615798039
-mas "Twitter", id: 1482454543
 mas "WISO Steuer 2023", id: 1635154215
