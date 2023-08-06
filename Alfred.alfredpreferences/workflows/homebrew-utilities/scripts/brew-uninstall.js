@@ -11,19 +11,24 @@ const alfredMatcher = (/** @type {string} */ str) => str.replaceAll("-", " ") + 
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
-	const isBrewReinstall = Boolean(argv[0]); 
+	const isBrewReinstall = Boolean(argv[0]);
 	const includeMacAppStoreSetting = $.getenv("list_mac_app_store") === "1";
+	const useZap = $.getenv("use_zap") === "1";
 
 	/** @type{AlfredItem[]} */
 	const casks = app
 		.doShellScript("ls -1 /opt/homebrew/Caskroom") // quicker than `brew list`
 		.split("\r")
-		.map((item) => {
+		.map((name) => {
+			const zap = useZap ? "--zap" : "";
 			return {
-				title: item,
-				match: alfredMatcher(item),
+				title: name,
+				match: alfredMatcher(name),
 				subtitle: "cask",
-				arg: item,
+				arg: `--cask ${zap} ${name}`,
+				mods: {
+					shift: { arg: `--cask ${name}` },
+				},
 			};
 		});
 
@@ -37,7 +42,7 @@ function run(argv) {
 				title: name,
 				match: alfredMatcher(name),
 				subtitle: "formula",
-				arg: name,
+				arg: `--formula ${name}`,
 			};
 		});
 
@@ -50,7 +55,7 @@ function run(argv) {
 			.doShellScript("mdfind kMDItemAppStoreHasReceipt=1")
 			.split("\r")
 			.map((appPath) => {
-				const appName = appPath.split("/")[2]
+				const appName = appPath.split("/")[2];
 				const nameNoExt = appName.slice(0, -4);
 
 				return {
