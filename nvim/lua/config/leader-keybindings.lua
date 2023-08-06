@@ -116,7 +116,7 @@ end, { desc = "󰜊 Undo since last open", silent = true })
 --------------------------------------------------------------------------------
 -- LSP
 keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
-keymap("n", "<leader>d", vim.diagnostic.open_float, { desc = "󰒕 Show Diagnostic" })
+keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "󰒕 Code Action" })
 
 --------------------------------------------------------------------------------
 
@@ -168,13 +168,15 @@ keymap("n", "<leader>gM", function() require("funcs.git-utils").amendAndPushForc
 -- stylua: ignore end
 
 -- Diffview
+-- Line History of Selection
 keymap(
 	"x",
 	"<leader>gd",
-	"<cmd>DiffviewFileHistory<CR><C-w>w<C-w>|",
+	":DiffviewFileHistory<CR><C-w>w<C-w>|", -- requires `:` for '<'> marks
 	{ desc = "󰊢 Line History (Diffview)" }
 )
 
+-- Pickaxe Current file for a file
 keymap("n", "<leader>gd", function()
 	vim.ui.input({ prompt = "󰢷 Git Pickaxe (empty = full history)" }, function(pickaxe)
 		if not pickaxe then return end

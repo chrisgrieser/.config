@@ -345,7 +345,6 @@ keymap("n", "ge", function() vim.diagnostic.goto_next { float = true } end, { de
 keymap("n", "gE", function() vim.diagnostic.goto_prev { float = true } end, { desc = "󰒕 Previous Diagnostic" })
 -- stylua: ignore end
 
-keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "󰒕 Code Action" })
 keymap("n", "gs", function() cmd.Telescope("treesitter") end, { desc = " Document Symbols" })
 
 -- Save & Format
