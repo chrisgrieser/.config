@@ -126,6 +126,13 @@ function z() {
 	inspect
 }
 
+# back to last dir
+function zz() {
+	if ! command -v __zoxide_z &>/dev/null; then printf "\033[1;33mzoxide not installed.\033[0m" && return 1; fi
+	__zoxide_z - &>/dev/null # for some reason this is verbose command
+	inspect
+}
+
 function zi() {
 	if ! command -v __zoxide_zi &>/dev/null; then printf "\033[1;33mzoxide not installed.\033[0m" && return 1; fi
 	__zoxide_zi

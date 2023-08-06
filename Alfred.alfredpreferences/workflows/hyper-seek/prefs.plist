@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ignore_extra_words</key>
+	<string>prev</string>
 	<key>include_unsafe</key>
 	<true/>
 	<key>inline_results_to_fetch</key>
