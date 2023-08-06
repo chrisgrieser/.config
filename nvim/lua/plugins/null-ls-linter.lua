@@ -36,7 +36,7 @@ local function nullSources()
 			args = { "--ignore-words", linterConfig .. "/codespell-ignore.txt", "-" },
 		},
 		builtins.formatting.codespell.with {
-			disabled_filetypes = { "css", "bib" },
+			disabled_filetypes = { "css", "bib", "gitignore" },
 			extra_args = { "--ignore-words", linterConfig .. "/codespell-ignore.txt" },
 		},
 		-- builtins.formatting.trim_newlines, -- trim trailing whitespace & newlines

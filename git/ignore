@@ -2,13 +2,12 @@
 .DS_Store
 *.icloud
 
-# Icon must end with two \r
-Icon
-
+# Icon must end with two \r (^M in vim)
+Icon	
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# production stuff / builds requirements
+# production stuff / builds
 node_modules
 *.alfredworkflow
 *.dmg
