@@ -46,11 +46,17 @@ alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in 
 #───────────────────────────────────────────────────────────────────────────────
 
 alias pip="pip3"
-# effectively alias `pip3 update` to `pip3 install --upgrade`
+# effectively alias `pip3 update` to `pip3 install --upgrade` and `pip3
+# uninstall` to `pip-autoremove`
 function pip3() {
 	if [[ "$1" == "update" ]]; then
 		shift
 		set -- install --upgrade "$@"
+	elif [[ "$1" == "uninstall" ]]; then
+		if ! command -v pip-autoremove &>/dev/null; then print "\033[1;33mpip-autoremove not installed.\033[0m" && return 1; fi
+		echo "Using pip-autoremove"
+		shift
+		pip-autoremove "$@"
 	fi
 	command pip3 "$@"
 }
@@ -88,4 +94,3 @@ ZSH_HIGHLIGHT_REGEXP+=(' G ' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' C$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' B$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' N$' 'fg=magenta,bold')
-

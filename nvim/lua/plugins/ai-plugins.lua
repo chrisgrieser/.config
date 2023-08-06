@@ -35,6 +35,7 @@ return {
 	},
 	{ -- AI completions via cmp
 		"jcdickinson/codeium.nvim",
+		commit = "db2be371099d6361b1fcc1967dded5ac1d97b67a",
 		lazy = true, -- loaded by cmp
 		dependencies = { "nvim-lua/plenary.nvim", "hrsh7th/nvim-cmp" },
 		opts = {
