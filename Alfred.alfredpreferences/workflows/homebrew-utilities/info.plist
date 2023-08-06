@@ -475,6 +475,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>openwith</key>
+				<string>/System/Volumes/Data/Applications/AppCleaner.app</string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>802369B2-358A-46C9-9516-940B8E3E7940</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>acceptsmulti</key>
 				<integer>1</integer>
 				<key>filetypes</key>
@@ -490,21 +505,6 @@
 			<string>89F35AB8-AC54-4BB2-B884-9B206671D5AE</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string>/System/Volumes/Data/Applications/AppCleaner.app</string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>802369B2-358A-46C9-9516-940B8E3E7940</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -541,8 +541,10 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 		</dict>
 		<key>2468D124-88C6-438D-B2C6-627ADEEEC31D</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>460</real>
+			<real>455</real>
 			<key>ypos</key>
 			<real>155</real>
 		</dict>
