@@ -35,6 +35,7 @@ function run(argv) {
 	/** @type{AlfredItem[]} */
 	const formulas = app
 		// slower than `ls -1 /opt/homebrew/Cellar`, but --installed-on-request relevant
+		// (homebrew API does have data on `--installed-on-request`, but not on leaves)
 		.doShellScript("brew leaves --installed-on-request")
 		.split("\r")
 		.map((name) => {

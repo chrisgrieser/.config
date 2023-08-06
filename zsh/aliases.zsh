@@ -4,7 +4,6 @@
 
 # z & cd
 # INFO leading space to ignore it in history due to HIST_IGNORE_SPACE
-alias zz=' z -' # back to last dir
 alias ..=" z .."
 alias ...=" z ../.."
 alias ....=" z ../../.."

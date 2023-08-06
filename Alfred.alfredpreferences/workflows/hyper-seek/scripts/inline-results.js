@@ -223,11 +223,11 @@ function run(argv) {
 	}
 
 	// GUARD CLAUSE 2: extra ignore keywords
-	const extraIgnoreWordsStr = $.getenv("extra_ignore_words");
-	if (extraIgnoreWordsStr !== "" && !neverIgnore) {
-		const extraIgnoreWords = extraIgnoreWordsStr.split(/ ?, ?/);
+	const ignoreExtraWordsStr = $.getenv("ignore_extra_words");
+	if (ignoreExtraWordsStr !== "" && !neverIgnore) {
+		const ignoreExtraWords = ignoreExtraWordsStr.split(/ ?, ?/);
 		const queryFirstWord = query.split(" ")[0];
-		if (extraIgnoreWords.includes(queryFirstWord)) {
+		if (ignoreExtraWords.includes(queryFirstWord)) {
 			console.log("Ignored (extra ignore word)");
 			return;
 		}
