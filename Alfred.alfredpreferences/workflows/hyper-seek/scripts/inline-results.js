@@ -181,7 +181,7 @@ function getFavicon(topDomain) {
 	// --fail`, it will exit non-zero instead. However, errors make
 	// `doShellScript` fail, so we need to use `try/catch`
 	try {
-		app.doShellScript(`curl --fail "${imageUrl}" --output "${targetFile}"`);
+		app.doShellScript(`curl --location --fail "${imageUrl}" --output "${targetFile}"`);
 		return targetFile;
 	} catch (_error) {
 		return ""; // = not found -> use default icon

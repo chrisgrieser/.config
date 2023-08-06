@@ -26,7 +26,11 @@ export YSU_IGNORED_ALIASES=("bi" "bu") # due to homebrew Alfred workflow
 export YSU_MESSAGE_POSITION="after"
 
 export FZF_DEFAULT_COMMAND='fd --hidden'
-export FZF_DEFAULT_OPTS='--color="hl:206" --pointer=⟐ --prompt="❱ " --ellipsis=… --scroll-off=5 --cycle --layout=reverse --bind="tab:down,shift-tab:up,shift-down:preview-page-down,shift-up:preview-page-up" --preview-window=border-left --height="90%"'
+export FZF_DEFAULT_OPTS='
+	--color=hl:206 --pointer=⟐ --prompt="❱ " --scrollbar=▐ --ellipsis=… 
+	--scroll-off=5 --cycle --layout=reverse --height=90%
+	--bind=tab:down,shift-tab:up,shift-down:preview-page-down,shift-up:preview-page-up
+	--preview-window=border-left'
 
 # extra spacing needed for WezTerm + Iosevka
 [[ "$TERM_PROGRAM" == "WezTerm" ]] && export EXA_ICON_SPACING=2
@@ -44,7 +48,7 @@ eval "$(zoxide init --no-cmd zsh)" # needs to be placed after compinit
 export FX_THEME=1        # only theme working in light & dark mode https://github.com/antonmedv/fx#themes
 export FX_SHOW_SIZE=true # show sizes of folded arrays
 
-# gh https://cli.github.com/manual/gh_help_environment
+# updates managed via homebrew https://cli.github.com/manual/gh_help_environment
 export GH_NO_UPDATE_NOTIFIER=1
 
 #───────────────────────────────────────────────────────────────────────────────
