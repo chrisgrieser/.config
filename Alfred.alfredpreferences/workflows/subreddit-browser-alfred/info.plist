@@ -81,6 +81,16 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>93464D83-F4C4-44EC-852C-956A903A99C9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>6887CA13-E491-46B2-9AA3-D36BEC604521</string>
 				<key>modifiers</key>
 				<integer>524288</integer>
@@ -101,6 +111,19 @@
 				<string></string>
 				<key>vitoclose</key>
 				<true/>
+			</dict>
+		</array>
+		<key>93464D83-F4C4-44EC-852C-956A903A99C9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E640FB36-75C7-4B36-A8AC-0F56468145CC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
 			</dict>
 		</array>
 		<key>E640FB36-75C7-4B36-A8AC-0F56468145CC</key>
@@ -286,7 +309,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/determine-next-subreddit.sh</string>
+				<string>./scripts/determine-next-prev-subreddit.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -337,6 +360,14 @@
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>93464D83-F4C4-44EC-852C-956A903A99C9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
 				<key>autopaste</key>
@@ -354,6 +385,25 @@
 			<string>6887CA13-E491-46B2-9AA3-D36BEC604521</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>browse</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>D96907E4-B008-4B62-AED9-1958C5D8E9A4</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -396,25 +446,6 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>933340EF-3EA1-461F-A680-4D4B22FDFBA3</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>externaltriggerid</key>
-				<string>browse</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>self</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>D96907E4-B008-4B62-AED9-1958C5D8E9A4</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -461,7 +492,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>680</real>
+			<real>735</real>
 			<key>ypos</key>
 			<real>225</real>
 		</dict>
@@ -479,18 +510,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>520</real>
+			<real>430</real>
 			<key>ypos</key>
-			<real>370</real>
+			<real>440</real>
 		</dict>
 		<key>7984AFF9-05D8-4F7C-AEE3-C381AA4AD6A0</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>520</real>
+			<real>575</real>
 			<key>ypos</key>
-			<real>105</real>
+			<real>60</real>
 		</dict>
 		<key>8851C420-3E80-4797-80F1-31999E4C2F54</key>
 		<dict>
@@ -512,6 +543,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>755</real>
 		</dict>
+		<key>93464D83-F4C4-44EC-852C-956A903A99C9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>485</real>
+			<key>ypos</key>
+			<real>305</real>
+		</dict>
 		<key>D96907E4-B008-4B62-AED9-1958C5D8E9A4</key>
 		<dict>
 			<key>colorindex</key>
@@ -526,9 +566,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>determine next subreddit</string>
+			<string>determine next/prev subreddit</string>
 			<key>xpos</key>
-			<real>520</real>
+			<real>575</real>
 			<key>ypos</key>
 			<real>225</real>
 		</dict>
@@ -537,9 +577,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>430</real>
+			<real>465</real>
 			<key>ypos</key>
-			<real>135</real>
+			<real>90</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

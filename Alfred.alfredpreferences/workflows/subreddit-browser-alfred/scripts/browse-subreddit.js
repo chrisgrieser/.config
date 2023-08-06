@@ -95,11 +95,16 @@ function getHackernewsPosts() {
 			arg: commentUrl,
 			icon: { path: "hackernews.png" },
 			mods: {
-				// pass current subreddit to determine next subreddit
-				cmd: { arg: "hackernews" },
-				shift: {
-					arg: externalUrl,
+				// pass current "subreddit" to determine next/prev subreddit
+				cmd: {
+					arg: "hackernews",
+					variables: { direction: "next" }
 				},
+				["cmd+shift"]: {
+					arg: "hackernews",
+					variables: { direction: "prev" }
+				},
+				shift: { arg: externalUrl },
 			},
 		};
 	});
@@ -161,8 +166,15 @@ function getRedditPosts(subredditName) {
 			arg: commentUrl,
 			icon: { path: iconPath },
 			mods: {
-				// pass current "subreddit" to determine next subreddit
-				cmd: { arg: subredditName },
+				// pass current "subreddit" to determine next/prev subreddit
+				cmd: {
+					arg: subredditName,
+					variables: { direction: "next" }
+				},
+				["cmd+shift"]: {
+					arg: subredditName,
+					variables: { direction: "prev" }
+				},
 				shift: {
 					valid: !isOnReddit,
 					arg: externalUrl,

@@ -185,7 +185,6 @@ local keybindings = {
 --------------------------------------------------------------------------------
 -- TAB TITLE
 
--- TODO tab styling https://wezfurlong.org/wezterm/config/lua/config/tab_bar_style.html
 -- https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
 wt.on("format-tab-title", function(tab)
 	-- prefers the title that was set via `tab:set_title()` or `wezterm cli
@@ -272,7 +271,6 @@ local config = {
 	line_height = 1,
 
 	-- Appearance
-	audible_bell = "Disabled", -- SystemBeep|Disabled
 	visual_bell = { -- briefly flash cursor on visual bell
 		fade_in_duration_ms = 150,
 		fade_out_duration_ms = 150,
@@ -306,7 +304,7 @@ local config = {
 	-- Tabs
 	enable_tab_bar = true,
 	tab_max_width = 40, -- I have few tabs, therefore enough space for more width
-	use_fancy_tab_bar = false, -- `false` makes the tabs bigger
+	use_fancy_tab_bar = false, -- `false` makes the tabs bigger and more in terminal style
 	show_tabs_in_tab_bar = true, -- can show a status line in the tab bar, too
 	show_new_tab_button_in_tab_bar = false,
 	hide_tab_bar_if_only_one_tab = true,
@@ -322,8 +320,8 @@ local config = {
 	},
 
 	-- Keybindings
-	disable_default_key_bindings = true,
 	keys = keybindings,
+	disable_default_key_bindings = true,
 	send_composed_key_when_left_alt_is_pressed = true, -- fix @{}~ etc. on German keyboard
 	send_composed_key_when_right_alt_is_pressed = true,
 }
