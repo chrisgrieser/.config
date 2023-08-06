@@ -70,11 +70,7 @@ function keywordCacheIsOutdated(cachePath) {
 	const webSearchConfigChanges = app.doShellScript(
 		`find ../../preferences/features/websearch -name "prefs.plist" -mtime -${cacheAgeMins}m`,
 	);
-	const contactConfigChanges = app.doShellScript(
-		`find ../../preferences/features/contacts/email -name "prefs.plist" -mtime -${cacheAgeMins}m`,
-	);
-	const configChanges = contactConfigChanges || webSearchConfigChanges || workflowConfigChanges;
-	return configChanges;
+	return webSearchConfigChanges || workflowConfigChanges;
 }
 
 // get the Alfred keywords and write them to the cachePath
@@ -163,14 +159,11 @@ function refreshKeywordCache(cachePath) {
 		});
 	}
 
-	// CASE 7: Contact / Mail Search
-	const mailPrefs = JSON.parse(
-		app.doShellScript(
-			"plutil -convert json ../../preferences/features/contacts/email/prefs.plist -o - || true",
-		) || "{}",
-	);
-	// .keywordEnabled is undefined true, hence need to check for !== false
-	if (mailPrefs.keywordEnabled !== false) keywords.push(mailPrefs.keyword);
+	// CASE 7: Keywords from this workflow
+	// (not covered by earlier cases, since the workflow folder is excluded to
+	// prevent the addition of the pseudo-keywords "a, b, c, …" in the list of
+	// ignored keywords.)
+	keywords.push("today"); 
 
 	// FILTER IRRELEVANT KEYWORDS
 	// - also only the first word of a keyword matters
@@ -198,6 +191,7 @@ function run(argv) {
 
 	/** @type{"fallback"|"multi-select"|"default"|"rerun"} */
 	let mode = $.NSProcessInfo.processInfo.environment.objectForKey("mode").js || "default";
+	const neverIgnore = mode === "fallback" || mode === "multi-select";
 
 	// HACK script filter is triggered with any letter of the roman alphabet, and
 	// then prepended here, to trigger this workflow with any search term
@@ -220,18 +214,29 @@ function run(argv) {
 	}
 
 	// GUARD CLAUSE 1: query is URL or too short
-	if (query.match(/^\w+:/)) {
+	if (query.match(/^\w+:/) && !neverIgnore) {
 		console.log("Ignored (URL)");
 		return;
-	} else if (query.length < minimumQueryLength) {
+	} else if (query.length < minimumQueryLength && !neverIgnore) {
 		console.log("Ignored (Min Query Length)");
 		return;
 	}
 
-	// GUARD CLAUSE 2: first word of query is Alfred keyword
+	// GUARD CLAUSE 2: extra ignore keywords
+	const extraIgnoreWordsStr = $.getenv("extra_ignore_words");
+	if (extraIgnoreWordsStr !== "" && !neverIgnore) {
+		const extraIgnoreWords = extraIgnoreWordsStr.split(/ ?, ?/);
+		const queryFirstWord = query.split(" ")[0];
+		if (extraIgnoreWords.includes(queryFirstWord)) {
+			console.log("Ignored (extra ignore word)");
+			return;
+		}
+	}
+
+	// GUARD CLAUSE 3: first word of query is Alfred keyword
 	// (guard clause is ignored when doing fallback search or multi-select,
 	// since in that case we know we do not need to ignore anything.)
-	if (ignoreAlfredKeywordsEnabled && mode !== "fallback" && mode !== "multi-select") {
+	if (ignoreAlfredKeywordsEnabled && !neverIgnore) {
 		const keywordCachePath = $.getenv("alfred_workflow_cache") + "/alfred_keywords.json";
 		if (keywordCacheIsOutdated(keywordCachePath)) refreshKeywordCache(keywordCachePath);
 		const alfredKeywords = JSON.parse(readFile(keywordCachePath));
@@ -242,7 +247,7 @@ function run(argv) {
 		}
 	}
 
-	// GUARD CLAUSE 3: use old results
+	// GUARD CLAUSE 4: use old results
 	// -> get values from previous run
 	const oldQuery = $.NSProcessInfo.processInfo.environment.objectForKey("oldQuery").js;
 	const oldResults = $.NSProcessInfo.processInfo.environment.objectForKey("oldResults").js || "[]";

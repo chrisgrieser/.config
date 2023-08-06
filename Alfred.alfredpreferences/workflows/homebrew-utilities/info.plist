@@ -12,6 +12,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>3F95A285-6177-405E-B2B0-518A7C0276F2</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: brew info</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>72B78E7D-69B1-4E83-AB9B-26507DE2C33E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -26,6 +36,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>F01BF271-72C7-44BA-9382-E133D8529E6D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>3F95A285-6177-405E-B2B0-518A7C0276F2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7EE5C952-9500-40B4-9700-6694AE5EA469</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -91,6 +114,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>3F95A285-6177-405E-B2B0-518A7C0276F2</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: brew info</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>89F35AB8-AC54-4BB2-B884-9B206671D5AE</key>
 		<array>
@@ -117,9 +150,29 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>3F95A285-6177-405E-B2B0-518A7C0276F2</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: brew info</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>CE590292-EEA5-4025-A89B-42AE38188503</key>
 		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3F95A285-6177-405E-B2B0-518A7C0276F2</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: brew info</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>A98EAA76-0074-4CAD-9A09-48949FC126DB</string>
@@ -317,6 +370,58 @@
 			<string>F01BF271-72C7-44BA-9382-E133D8529E6D</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>7EE5C952-9500-40B4-9700-6694AE5EA469</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>brew info $*</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>3F95A285-6177-405E-B2B0-518A7C0276F2</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -534,7 +639,7 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>675</real>
+			<real>785</real>
 		</dict>
 		<key>0D984FC5-A902-42FB-80F8-A9D0310C86BB</key>
 		<dict>
@@ -552,7 +657,7 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>370</real>
 			<key>ypos</key>
-			<real>690</real>
+			<real>800</real>
 		</dict>
 		<key>2468D124-88C6-438D-B2C6-627ADEEEC31D</key>
 		<dict>
@@ -563,6 +668,17 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>ypos</key>
 			<real>155</real>
 		</dict>
+		<key>3F95A285-6177-405E-B2B0-518A7C0276F2</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>brew info</string>
+			<key>xpos</key>
+			<real>370</real>
+			<key>ypos</key>
+			<real>390</real>
+		</dict>
 		<key>72B78E7D-69B1-4E83-AB9B-26507DE2C33E</key>
 		<dict>
 			<key>colorindex</key>
@@ -570,7 +686,7 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>215</real>
 			<key>ypos</key>
-			<real>695</real>
+			<real>805</real>
 		</dict>
 		<key>72D18DBC-72FF-40AA-B367-D4C148AEC3A6</key>
 		<dict>
@@ -583,6 +699,15 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>7EE5C952-9500-40B4-9700-6694AE5EA469</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>515</real>
+			<key>ypos</key>
+			<real>390</real>
+		</dict>
 		<key>802369B2-358A-46C9-9516-940B8E3E7940</key>
 		<dict>
 			<key>colorindex</key>
@@ -590,7 +715,7 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>370</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>665</real>
 		</dict>
 		<key>89F35AB8-AC54-4BB2-B884-9B206671D5AE</key>
 		<dict>
@@ -599,7 +724,7 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>665</real>
 		</dict>
 		<key>A98EAA76-0074-4CAD-9A09-48949FC126DB</key>
 		<dict>
@@ -608,7 +733,7 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>370</real>
 			<key>ypos</key>
-			<real>425</real>
+			<real>535</real>
 		</dict>
 		<key>CD40AB53-70F2-460D-BF34-1DF77F46FB38</key>
 		<dict>
@@ -630,7 +755,7 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>425</real>
+			<real>535</real>
 		</dict>
 		<key>EDA21286-4E28-4304-A9DB-0BA74AB2C370</key>
 		<dict>
