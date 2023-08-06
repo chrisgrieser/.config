@@ -172,8 +172,8 @@ keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Move selection right" 
 keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "➡️ Move selection left" })
 
 -- Merging Lines
-keymap({ "n", "x" }, "M", "J", { desc = "󰗈 merge line up" })
-keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "󰗈 merge line down" })
+keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
+keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "󰗈 Merge line down" })
 
 -- URL Opening (forward-seeking `gx`)
 keymap("n", "gx", function()
@@ -373,7 +373,7 @@ autocmd("LspAttach", {
 			-- stylua: ignore
 			vim.defer_fn( function() keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename", buffer = true }) end, 1)
 			-- stylua: ignore
-			keymap("n", "<leader>V", function() return ":IncRename " .. expand("<cword>") end, { desc = "󰒕 IncRename cword", buffer = true, expr = true })
+			keymap("n", "<leader>V", function() return ":IncRename " .. expand("<cword>") end, { desc = "󰒕 IncRename (cword)", buffer = true, expr = true })
 		end
 		if capabilities.documentSymbolProvider then
 			-- overwrites treesitter goto-symbol

@@ -83,11 +83,11 @@
 				<key>destinationuid</key>
 				<string>93464D83-F4C4-44EC-852C-956A903A99C9</string>
 				<key>modifiers</key>
-				<integer>0</integer>
+				<integer>1179648</integer>
 				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌘⇧: Browse previous subreddit</string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -456,6 +456,7 @@
 - `rr`: Browse the current subreddit.
 	- &lt;kbd&gt;⏎&lt;/kbd&gt;: Open Post in reddit.
 	- &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Switch to next subreddit.
+	- &lt;kbd&gt;⇧⌘⏎&lt;/kbd&gt;: Switch to previous subreddit.
 	- &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy URL of post to clipboard.
 	- &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Open URL (if external link).
 - `:reddit`: Reload all subreddits on next run.
