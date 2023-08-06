@@ -1258,7 +1258,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>man</string>
+				<string>manp</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -2493,7 +2493,7 @@ Search more than two dozen developer documentation sites via one of the keywords
 - `git`: official docs &amp; the "pro-git" book
 - `py`: python official docs
 - `sh`: cheat.sh
-- `man`: man pages
+- `manp`: man pages
 - `hs`: Hammerspoon reference
 - `sb`: sketchybar docs
 - `ke`: Karabiner Elements docs
@@ -2501,6 +2501,7 @@ Search more than two dozen developer documentation sites via one of the keywords
 - `ep`: espanso docs
 - `wt`: WezTerm docs
 - `awd`: Alfred Workflow docs
+- `yq`
 
 ## Extra Utilities
 - `coco`: conventional commit keywords
