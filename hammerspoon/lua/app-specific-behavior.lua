@@ -184,12 +184,12 @@ Wf_script_editor = wf
 		end
 	end)
 	-- fix copypasting line breaks into other apps
-	-- :subscribe(wf.windowUnfocused, function()
-	-- 	local clipb = hs.pasteboard.getContents()
-	-- 	if not clipb then return end
-	-- 	clipb = clipb:gsub("\r", "\n")
-	-- 	hs.pasteboard.setContents(clipb)
-	-- end)
+	:subscribe(wf.windowUnfocused, function()
+		local clipb = hs.pasteboard.getContents()
+		if not clipb then return end
+		clipb = clipb:gsub("\r", "\n")
+		hs.pasteboard.setContents(clipb)
+	end)
 
 --------------------------------------------------------------------------------
 -- MIMESTREAM

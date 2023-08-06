@@ -177,9 +177,7 @@ function getFavicon(topDomain) {
 	if (fileExists(targetFile)) return targetFile;
 	if (!useFaviconSetting) return "";
 
-	// Normally, `curl` does exit 0 even when the website reports 404. without `curl
-	// --fail`, it will exit non-zero instead. However, errors make
-	// `doShellScript` fail, so we need to use `try/catch`
+	// Normally, `curl` does exit 0 even when the website reports 404. without `curl --fail`, it will exit non-zero instead. However, errors make `doShellScript` fail, so we need to use `try/catch`
 	try {
 		app.doShellScript(`curl --location --fail "${imageUrl}" --output "${targetFile}"`);
 		return targetFile;
