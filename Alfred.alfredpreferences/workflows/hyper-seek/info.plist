@@ -1008,7 +1008,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>OneUpdater</string>
 			<key>xpos</key>
-			<real>780</real>
+			<real>760</real>
 			<key>ypos</key>
 			<real>320</real>
 		</dict>
@@ -1181,7 +1181,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<integer>3</integer>
 			</dict>
 			<key>description</key>
-			<string>Comma-separated list of more keywords to ignore. Use this if the "Ignore Alfred Keywords" is not fine-grained enough for you, or if you want to ignore additional keywords.</string>
+			<string>Comma-separated list of more keywords to ignore. Use this if the "Ignore Alfred Keywords" setting is not fine-grained enough, or to ignore additional keywords.</string>
 			<key>label</key>
 			<string>Ignore extra words</string>
 			<key>type</key>
@@ -1316,7 +1316,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<string>🔳</string>
 	</dict>
 	<key>version</key>
-	<string>1.6.1</string>
+	<string>1.6.2</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

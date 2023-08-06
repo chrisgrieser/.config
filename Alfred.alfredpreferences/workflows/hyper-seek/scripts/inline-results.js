@@ -163,7 +163,7 @@ function refreshKeywordCache(cachePath) {
 	// (not covered by earlier cases, since the workflow folder is excluded to
 	// prevent the addition of the pseudo-keywords "a, b, c, …" in the list of
 	// ignored keywords.)
-	keywords.push("today"); 
+	keywords.push("today");
 
 	// FILTER IRRELEVANT KEYWORDS
 	// - also only the first word of a keyword matters
@@ -252,7 +252,7 @@ function run(argv) {
 	const oldQuery = $.NSProcessInfo.processInfo.environment.objectForKey("oldQuery").js;
 	const oldResults = $.NSProcessInfo.processInfo.environment.objectForKey("oldResults").js || "[]";
 
-	const querySearchUrl = $.getenv("search_site") + encodeURIComponent(query);
+	const querySearchUrl = $.getenv("search_site") + encodeURIComponent(query).replaceAll("'", "%27");
 	/** @type AlfredItem */
 	const searchForQuery = {
 		title: `"${query}"`,
@@ -262,7 +262,7 @@ function run(argv) {
 
 	// PERF & HACK If the user is typing, return early to guarantee the top entry
 	// is the currently typed query. If we waited for `ddgr`, a fast typer would
-	// search for an incomplete query
+	// search for an incomplete query.
 	const userIsTyping = query !== oldQuery;
 	if (userIsTyping) {
 		searchForQuery.subtitle = "Loading Inline Results…";
@@ -296,7 +296,9 @@ function run(argv) {
 		// (less than 40ms difference between 1 and 25 results), so there is no use
 		// in restricting the number of results for performance. (Except for 25 being
 		// ddgr's maximum)
-		const ddgrCmd = `python3 ./dependencies/ddgr.py --json --noua ${includeUnsafe} --num=${resultsToFetch} ${searchRegion} "${query}"`;
+		const escapedQuery = query.replaceAll('"', '\\"');
+		const ddgr = "python3 ./dependencies/ddgr.py"
+		const ddgrCmd = `${ddgr} --json --noua ${includeUnsafe} --num=${resultsToFetch} ${searchRegion} "${escapedQuery}"`;
 		response = JSON.parse(app.doShellScript(ddgrCmd));
 		response.query = query;
 		writeToFile(responseCachePath, JSON.stringify(response));

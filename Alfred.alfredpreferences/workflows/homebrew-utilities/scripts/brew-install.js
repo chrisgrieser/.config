@@ -145,7 +145,7 @@ function run() {
 		const dependencies = formula.dependencies.length > 0 ? `+${formula.dependencies.length}d  ` : "";
 		const caveatText = formula.caveats || "";
 		const caveats = caveatText ? caveatIcon + " " : "";
-		const downloads = formulaDownloads[name] ? `${formulaDownloads[name][0].count}↓  ` : "";
+		const downloads = formulaDownloads[name] ? `${formulaDownloads[name][0].count}↓ ` : "";
 		return {
 			title: name + installedIcon,
 			match: alfredMatcher(name) + formula.desc,
