@@ -17,9 +17,3 @@ pw.*
 
 # created due to sync issues
 *.icloud
-
-# node
-node_modules
-
-# lab.nvim code runner test files
-󰙨 Lab.*

@@ -116,13 +116,15 @@ function run() {
 	/** @type{AlfredItem[]} */
 	const casks = casksData.map((/** @type {Cask} */ cask) => {
 		const name = cask.token;
-		const installedIcon = installedBrews.includes(name) ? " ✅" : "";
+		const isInstalled = installedBrews.includes(name)
+		const installedIcon = isInstalled ? " ✅" : "";
 		const downloads = caskDownloads[name] ? `${caskDownloads[name][0].count}↓ ` : "";
 		return {
 			title: name + installedIcon,
 			match: alfredMatcher(name) + cask.desc,
 			subtitle: `${caskIcon} ${downloads}· ${cask.desc}`,
 			arg: `--cask ${name}`,
+			valid: isInstalled,
 			mods: {
 				// PERF quicker to pass here than to call `brew home` on brew-id
 				cmd: {
@@ -141,7 +143,8 @@ function run() {
 	/** @type{AlfredItem[]} */
 	const formulas = formulaData.map((/** @type {Formula} */ formula) => {
 		const name = formula.name;
-		const installedIcon = installedBrews.includes(name) ? " ✅" : "";
+		const isInstalled = installedBrews.includes(name)
+		const installedIcon = isInstalled ? " ✅" : "";
 		const dependencies = formula.dependencies.length > 0 ? `+${formula.dependencies.length}d  ` : "";
 		const caveatText = formula.caveats || "";
 		const caveats = caveatText ? caveatIcon + " " : "";
@@ -151,6 +154,7 @@ function run() {
 			match: alfredMatcher(name) + formula.desc,
 			subtitle: `${formulaIcon} ${caveats}${dependencies}${downloads}· ${formula.desc}`,
 			arg: `--formula ${name}`,
+			valid: isInstalled,
 			text: {
 				largetype: caveatText,
 				copy: caveatText,
