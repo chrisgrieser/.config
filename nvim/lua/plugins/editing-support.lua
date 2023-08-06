@@ -99,6 +99,16 @@ return {
 			use_default_keymaps = false,
 			cursor_behavior = "start", -- start|end|hold
 			max_join_length = 150,
+			-- pending: https://github.com/Wansmer/treesj/issues/116
+			-- langs = {
+			-- 	comment = {
+			-- 		source = {
+			-- 			both = {
+			-- 				fallback = function(tsn) vim.cmd("normal! gww") end,
+			-- 			},
+			-- 		},
+			-- 	},
+			-- },
 		},
 	},
 	{ -- clipboard history / killring

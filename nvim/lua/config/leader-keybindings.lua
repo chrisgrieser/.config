@@ -116,7 +116,6 @@ end, { desc = "󰜊 Undo since last open", silent = true })
 --------------------------------------------------------------------------------
 -- LSP
 keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
-keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "󰒕 Code Action" })
 
 --------------------------------------------------------------------------------
 
