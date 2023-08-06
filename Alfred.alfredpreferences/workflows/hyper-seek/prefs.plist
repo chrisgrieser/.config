@@ -10,5 +10,7 @@
 	<string>8</string>
 	<key>log_location</key>
 	<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/search-log.log</string>
+	<key>use_favicons</key>
+	<true/>
 </dict>
 </plist>

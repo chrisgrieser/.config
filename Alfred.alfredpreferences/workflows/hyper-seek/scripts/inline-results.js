@@ -171,17 +171,20 @@ function getFavicon(topDomain) {
 	const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 	const imageUrl = `https://${topDomain}/apple-touch-icon.png`;
 	const targetFile = `${$.getenv("alfred_workflow_cache")}/${topDomain}.png`;
+	const useFaviconSetting = $.getenv("use_favicons") === "1";
 
+	// if user temporarily enabled the setting, use already downloaded favicons
 	if (fileExists(targetFile)) return targetFile;
+	if (!useFaviconSetting) return "";
 
 	// Normally, `curl` does exit 0 even when the website reports 404. without `curl
 	// --fail`, it will exit non-zero instead. However, errors make
 	// `doShellScript` fail, so we need to use `try/catch`
 	try {
-		app.doShellScript(`curl --fail "${imageUrl}" --output="${targetFile}"`);
+		app.doShellScript(`curl --fail "${imageUrl}" --output "${targetFile}"`);
 		return targetFile;
 	} catch (_error) {
-		return ""; // empty string = not found = use default icon
+		return ""; // = not found -> use default icon
 	}
 }
 

@@ -216,12 +216,13 @@ function M.removelogs()
 
 	for _, statement in pairs(logStatements) do
 		statement = statement:gsub("%]", "\\]"):gsub("%[", "\\[")
-		cmd(("g/%s/d"):format(statement))
+		cmd(("silent g/%s/d"):format(statement))
 	end
 	cmd.nohlsearch()
 
 	local linesRemoved = numOfLinesBefore - fn.line("$")
-	local msg = ("Removed %s log statement(s)."):format(linesRemoved)
+	local msg = ("Removed %s log statements."):format(linesRemoved)
+	if linesRemoved == 1 then msg = msg:sub(1, -3) .. "." end
 	vim.notify(msg)
 
 	g.timelogCount = 0 -- reset timelog
