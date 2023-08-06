@@ -68,7 +68,7 @@ function run() {
 			title: name + installedIcon,
 			match: alfredMatcher(name) + cask.desc,
 			subtitle: `${caskIcon} · ${cask.desc}`,
-			arg: `${name} --cask`,
+			arg: `--cask ${name}`,
 			mods: {
 				// PERF quicker to pass here than to call `brew home` on brew-id
 				cmd: {
@@ -95,7 +95,7 @@ function run() {
 			title: name + installedIcon,
 			match: alfredMatcher(name) + formula.desc,
 			subtitle: `${formulaIcon}${dependencies}${caveatIcon} · ${formula.desc}`,
-			arg: `${name} --formula`,
+			arg: `--formula ${name}`,
 			text: {
 				largetype: caveats,
 				copy: caveats,
@@ -115,6 +115,6 @@ function run() {
 		};
 	});
 
-	console.log(`${formulas.length} formulas, ${casks.length} casks`);
+	console.log(`Total: ${formulas.length} formulas, ${casks.length} casks`);
 	return JSON.stringify({ items: [...casks, ...formulas] });
 }

@@ -858,6 +858,8 @@ Search for the Power User. Inline Results, *without a keyword*. Multi-select res
 - &lt;kbd&gt;⌥&lt;/kbd&gt; (hold): Show full URL.
 - &lt;kbd&gt;⇧&lt;/kbd&gt; (hold): Show preview text of search result. 
 
+Use the keyword `today` to show a log of today's searches.
+
 **Recommendations**
 - Add this workflow as [fallback search](https://www.alfredapp.com/help/features/default-results/fallback-searches/). 
 - In the [Alfred Advanced Settings](https://www.alfredapp.com/help/advanced/), set &lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; to `Action all visible results`. This allows you to open all search results at once. 
@@ -888,7 +890,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>refresh cache</string>
 			<key>xpos</key>
-			<real>780</real>
+			<real>775</real>
 			<key>ypos</key>
 			<real>140</real>
 		</dict>
@@ -1158,13 +1160,34 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<string>Ignore</string>
 			</dict>
 			<key>description</key>
-			<string>When a keyword from another workflow is shown, this workflow will not be triggered (recommended).</string>
+			<string>When a keyword from another workflow or from a websearch is used, this workflow will not be triggered (recommended).</string>
 			<key>label</key>
 			<string>Alfred Keywords</string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>
 			<string>ignore_alfred_keywords</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+				<key>verticalsize</key>
+				<integer>3</integer>
+			</dict>
+			<key>description</key>
+			<string>comma-separated list of more keywords to ignore. Use this if the "Ignore Alfred Keywords" is not fine-grained enough for you, or if you want to ignore additional keywords.</string>
+			<key>label</key>
+			<string>Ignore extra words</string>
+			<key>type</key>
+			<string>textarea</string>
+			<key>variable</key>
+			<string>ignore_extra_words</string>
 		</dict>
 		<dict>
 			<key>config</key>
