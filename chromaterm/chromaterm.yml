@@ -1,7 +1,9 @@
+# vim: CccHighlighterEnable
+
 #───────────────────────────────────────────────────────────────────────────────
 # https://github.com/hSaria/ChromaTerm#palette
 palette:
-  urls: "#008e85"
+  urls: "#004fb7"
   numbers: "#ef2e9f"
   Date: "#f08c00"
   FileSize: "#5552e6"

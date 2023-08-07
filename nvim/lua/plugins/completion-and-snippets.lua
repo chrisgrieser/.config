@@ -75,11 +75,13 @@ local function cmpconfig()
 			expand = function(args) require("luasnip").lsp_expand(args.body) end,
 		},
 		performance = {
-			-- lower values for lag-free performance
+			-- PERF lower values for lag-free performance
 			-- default values: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L18
-			-- explanations: https://github.com/hrsh7th/nvim-cmp/blob/main/doc/cmp.txt#L403
-			max_view_entries = 100,
-			fetching_timeout = 400,
+			-- explanations: https://github.com/hrsh7th/nvim-cmp/blob/main/doc/cmp.txt#L425
+			throttle = 20,
+			debounce = 30,
+			max_view_entries = 80,
+			fetching_timeout = 300,
 		},
 		window = {
 			completion = {
