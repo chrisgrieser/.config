@@ -215,7 +215,8 @@ function ensureCacheFolder() {
  * @param {string} instantAnswer
  */
 function writeInstantAnswer(bufferPath, instantAnswer) {
-	const answerAsHtml = `<blockquote>${instantAnswer}</blockquote>`
+	const [infoText, source] = instantAnswer.match(/(.*)\s+More at (.*?)$/)
+	const answerAsHtml = `<blockquote>${infoText}</blockquote>`
 	writeToFile(bufferPath, answerAsHtml);
 }
 
@@ -235,9 +236,9 @@ function run(argv) {
 	if (resultsToFetch < 1) resultsToFetch = 1;
 	else if (resultsToFetch > 25) resultsToFetch = 25; // maximum supported by `ddgr`
 
-	const minimumQueryLength = parseInt($.getenv("minimum_query_length")) || 3;
-	if (minimumQueryLength < 0) resultsToFetch = 0;
-	else if (minimumQueryLength > 10) resultsToFetch = 10; // prevent accidental high values
+	let minQueryLength = parseInt($.getenv("minimum_query_length")) || 3;
+	if (minQueryLength < 0) minQueryLength = 0;
+	else if (minQueryLength > 10) minQueryLength = 10; // prevent accidental high values
 
 	const includeUnsafe = $.getenv("include_unsafe") === "1" ? "--unsafe" : "";
 	const ignoreAlfredKeywordsEnabled = $.getenv("ignore_alfred_keywords") === "1";
@@ -263,7 +264,7 @@ function run(argv) {
 	if (query.match(/^\w+:/) && !neverIgnore) {
 		console.log("Ignored (URL)");
 		return;
-	} else if (query.length < minimumQueryLength && !neverIgnore) {
+	} else if (query.length < minQueryLength && !neverIgnore) {
 		console.log("Ignored (Min Query Length)");
 		return;
 	}
@@ -366,7 +367,6 @@ function run(argv) {
 		let { iconPath, faviconMs } = getFavicon(topDomain, noNeedToBuffer);
 		favIconTotalMs += faviconMs;
 		if (!iconPath) iconPath = "icons/fallback_for_no_favicon.png";
-		console.log("[QL] iconPath:", iconPath);
 
 		return {
 			title: icon + item.title,
@@ -392,7 +392,7 @@ function run(argv) {
 
 		// buffer instant answer for quicklook
 		const instantAnswerBuffer = $.getenv("alfred_workflow_cache") + "/instantAnswerBuffer.html";
-		if (!noNeedToBuffer) writeInstantAnswer(response.instant_answer, instantAnswerBuffer);
+		if (!noNeedToBuffer) writeInstantAnswer(instantAnswerBuffer, response.instant_answer);
 		searchForQuery.quicklookurl = instantAnswerBuffer;
 	}
 

@@ -88,6 +88,7 @@ keymap("n", "dQ", require("funcs.quickfix").deleteList, { desc = " Empty Quic
 
 -- COMMENTS & ANNOTATIONS
 keymap("n", "qw", require("funcs.comment-divider").commentHr, { desc = " Horizontal Divider" })
+keymap("n", "wq", '"zyy"zpkqqj', { desc = " Duplicate Line as Comment", remap = true })
 
 -- WHITESPACE CONTROL
 keymap("n", "=", "mzO<Esc>`z", { desc = "  blank above" })
@@ -279,6 +280,14 @@ keymap("n", "go", function()
 	end
 	require("telescope").extensions.file_browser.file_browser { prompt_title = "󰝰 " .. project }
 end, { desc = " Browse in Project" })
+
+-- stylua: ignore
+keymap( "n", "gO", function()
+	require("telescope").extensions.file_browser.file_browser {
+		path = expand("%:p:h"),
+		prompt_title = "󰝰 " .. expand("%:p:h:t"),
+	}
+end, { desc = " Browse in Current Folder" })
 
 keymap("n", "gl", function()
 	local project = projectName()

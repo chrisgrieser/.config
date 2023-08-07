@@ -426,21 +426,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string>brew reinstall {query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.terminalcommand</string>
-			<key>uid</key>
-			<string>A98EAA76-0074-4CAD-9A09-48949FC126DB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -486,6 +471,21 @@
 			<string>CE590292-EEA5-4025-A89B-42AE38188503</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>brew reinstall {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.terminalcommand</string>
+			<key>uid</key>
+			<string>A98EAA76-0074-4CAD-9A09-48949FC126DB</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
