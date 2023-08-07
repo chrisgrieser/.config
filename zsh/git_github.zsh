@@ -6,7 +6,7 @@ alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to
 alias gs='git status'
 alias ga="ct git add"
 alias gm="git add -A && git commit --amend --no-edit" # a[m]end
-alias gM="git commit --amend" # amend + edit commit msg
+alias gM="git commit --amend"                         # amend + edit commit msg
 alias gc="git commit"
 alias push="ct git push"
 alias pull="ct git pull"
@@ -79,17 +79,17 @@ function gitlog() {
 	git log $length --all --color --graph \
 		--format='%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' |
 		sed -e 's/ seconds ago)/s)/' \
-		-e 's/ minutes ago)/m)/' \
-		-e 's/ hours ago)/h)/' \
-		-e 's/ days ago)/d)/' \
-		-e 's/ weeks ago)/w)/' \
-		-e 's/ months ago)/mo)/' \
-		-e 's/grafted/ /' \
-		-e 's/origin\//󰞶  /g' \
-		-e 's/HEAD/󱍀 /g' \
-		-e 's/->/󰔰 /g' \
-		-e 's/tags: / )/' \
-		-e 's/, / · /g'
+			-e 's/ minutes ago)/m)/' \
+			-e 's/ hours ago)/h)/' \
+			-e 's/ days ago)/d)/' \
+			-e 's/ weeks ago)/w)/' \
+			-e 's/ months ago)/mo)/' \
+			-e 's/grafted/ /' \
+			-e 's/origin\//󰞶  /g' \
+			-e 's/HEAD/󱍀 /g' \
+			-e 's/->/󰔰 /g' \
+			-e 's/tags: / )/' \
+			-e 's/, / · /g'
 }
 
 # brief git log (only last 15)
@@ -145,7 +145,7 @@ function gb() {
 	local selected
 
 	selected=$(
-		git branch --all --color | grep -v "HEAD" | 
+		git branch --all --color | grep -v "HEAD" |
 			fzf --ansi --no-info --height=40% \
 				--header-first --header="↵ : Checkout Branch"
 	)
@@ -165,47 +165,14 @@ function gb() {
 #───────────────────────────────────────────────────────────────────────────────
 # GIT ADD, COMMIT, (PULL) & PUSH
 
-# all but last args: files to add
-# last arg: commit msg
-# only one arg: `git add -A` & the one arg as commit msg
+# first arg: commit msg
+# remaining args: files to add (no remaining args = all files)
+# no args: "chore" as commit msg & all files added
 function ac() {
 	if ! command -v ct &>/dev/null; then print "\033[1;33mchromaterm not installed. (\`pip3 install chromaterm\`)\033[0m" && return 1; fi
-
-	local commit_msg
-	if [[ $# -eq 0 ]] ; then
-		commit_msg="chore"
-	else
-		commit_msg="${*:$#}" # last arg https://stackoverflow.com/a/33271194/22114136
-	fi
-
-	if [[ -f "$commit_msg" ]] ; then
-		echo "Commit Message should be the last argument."
-		return 1
-	fi
-	local files="${*:1:$((#-1))}" # all but last arg https://stackoverflow.com/a/1215592/22114136
-
-	# ensure no overlength of commit msg
-	local msg_length=${#commit_msg}
-	if [[ $msg_length -gt 50 ]]; then
-		echo "Commit Message too long ($msg_length chars)."
-		commit_msg=${commit_msg::50}
-		print -z "acp \"$commit_msg\"" # put back into buffer
-		return 1
-	fi
-
-	if [[ -n "$files" ]] ; then
-		ct git add "$files"
-	else
-		ct git add -A
-	fi
-	ct git commit -m "$commit_msg"
-}
-
-function acp() {
-	if ! command -v ct &>/dev/null; then print "\033[1;33mchromaterm not installed. (\`pip3 install chromaterm\`)\033[0m" && return 1; fi
+	local large_files commit_msg msg_length
 
 	# guard: accidental pushing of large files
-	local large_files
 	large_files=$(find . -not -path "**/.git/**" -not -path "**/*.pxd/**" -size +10M)
 	if [[ -n "$large_files" ]]; then
 		print "\033[1;33m$large_files large file(s) detected, aborting."
@@ -213,22 +180,31 @@ function acp() {
 		return 1
 	fi
 
-	local commit_msg="$*" # $* allows to write messages without quotes, since I am lazy
-	[[ -z "$commit_msg" ]] && commit_msg="chore"
-
-	# ensure no overlength of commit msg
-	local msg_length=${#commit_msg}
-	if [[ $msg_length -gt 50 ]]; then
-		echo "Commit Message too long ($msg_length chars)."
-		commit_msg=${commit_msg::50}
-		print -z "acp \"$commit_msg\"" # put back into buffer
-		return 1
+	if [[ $# -eq 0 ]]; then
+		commit_msg="chore"
+		ct git add -A
+	else
+		commit_msg="$1"
+		# ensure no overlength of commit msg
+		msg_length=${#commit_msg}
+		if [[ $msg_length -gt 50 ]]; then
+			echo "Commit Message too long ($msg_length chars)."
+			commit_msg=${commit_msg::50}
+			print -z "acp \"$commit_msg\"" # put back into buffer
+			return 1
+		fi
+		shift
+		ct git add "$@"
 	fi
 
-	ct git add -A && git commit -m "$commit_msg"
-	ct git pull && ct git push
+	ct git commit -m "$commit_msg"
+}
 
-	# update sketchybar if one of respective repos
+# same as ac, just git pull & push
+function acp() {
+	ac "$@" || return 1 # fail if ac fails
+
+	ct git pull && ct git push
 	sketchybar --trigger repo-files-update
 }
 
@@ -241,7 +217,7 @@ function clone() {
 	# turn http into SSH remotes
 	[[ "$url" =~ http ]] && url="$(echo "$1" | sed -E 's/https?:\/\/github.com\//git@github.com:/').git"
 
-	# WARN depth=2 ensures that amending a shallow commit does not result in a 
+	# WARN depth=2 ensures that amending a shallow commit does not result in a
 	# new commit without parent, effectively destroying git history (!!)
 	ct git clone --depth=2 --filter=blob:none "$url"
 
@@ -253,7 +229,7 @@ function clone() {
 
 # delete and re-clone git repo
 function nuke {
-	if ! git rev-parse --is-inside-work-tree &>/dev/null ; then print "\033[1;33mfile is not ins a git repository.\033[0m" && return 1 ; fi
+	if ! git rev-parse --is-inside-work-tree &>/dev/null; then print "\033[1;33mfile is not ins a git repository.\033[0m" && return 1; fi
 	is_submodule=$(git rev-parse --show-superproject-working-tree)
 	if [[ -n "$is_submodule" ]]; then print "\033[1;33mnuke does not support submodules.\033[0m" && return 1; fi
 
@@ -270,9 +246,9 @@ function nuke {
 	echo "Cloning repo again from remote… (with depth 5)"
 	printf "-----------------------------------------------\n\033[0m"
 
-	# WARN depth=2 ensures that amending a shallow commit does not result in a 
+	# WARN depth=2 ensures that amending a shallow commit does not result in a
 	# new commit without parent, effectively destroying git history (!!)
-	git clone --depth=2 "$SSH_REMOTE" "$local_repo_path" && 
+	git clone --depth=2 "$SSH_REMOTE" "$local_repo_path" &&
 		cd "$local_repo_path" || return 1
 	separator
 }
