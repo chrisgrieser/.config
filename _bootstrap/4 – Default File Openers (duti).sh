@@ -25,13 +25,17 @@ duti -s "$videoplayerID" m4a all
 
 # code
 editorID="com.apple.automator.Neovide-Helper"
+duti -s "$editorID" com.apple.traditional-mac-plain-text all
 duti -s "$editorID" public.make-source all
+duti -s "$editorID" public.data all # dotfiles without extension
+duti -s "$editorID" sketchybarrc all
+duti -s "$editorID" txt all
 duti -s "$editorID" conf all
-duti -s "$editorID" fdignore all
-duti -s "$editorID" ignore all
 duti -s "$editorID" ini all
 duti -s "$editorID" cfg all
 duti -s "$editorID" com.apple.property-list all # plist
+duti -s "$editorID" xml all
+duti -s "$editorID" vimrc all
 duti -s "$editorID" vim all
 duti -s "$editorID" csv all
 duti -s "$editorID" log all
@@ -46,17 +50,10 @@ duti -s "$editorID" js all
 duti -s "$editorID" ts all
 duti -s "$editorID" css all
 duti -s "$editorID" scss all
-duti -s "$editorID" txt all
 duti -s "$editorID" applescript all
 duti -s "$editorID" lua all
 duti -s "$editorID" json all
-duti -s "$editorID" yml all
-duti -s "$editorID" yaml all
-duti -s "$editorID" xml all
-duti -s "$editorID" fdignore all
-duti -s "$editorID" public.data all # dotfiles without extension
-duti -s "$editorID" vimrc all
-duti -s "$editorID" sketchybarrc all
+duti -s "$editorID" public.yaml all
 
 # Browser & Mail
 browserID=$(osascript -e "id of app \"$BROWSER_APP\"") # set in zshenv
