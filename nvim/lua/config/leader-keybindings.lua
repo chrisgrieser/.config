@@ -76,7 +76,7 @@ keymap("n", "<leader>f<Tab>", function()
 	bo.expandtab = false
 	bo.tabstop = 3
 	cmd.retab { bang = true }
-	vim.notify("Now using tabs ↹ ")
+	vim.notify("Now using tabs ↹ of width 3")
 end, { desc = "↹ Use Tabs" })
 
 keymap("n", "<leader>f<Space>", function()
