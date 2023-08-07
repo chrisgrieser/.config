@@ -1,11 +1,15 @@
-# https://pandoc.org/MANUAL.html#defaults-files
+# yaml-language-server: $schema=./pandoc-defaults-schema.json
+# schema needs to be reloaded to stop spurious errors https://github.com/jgm/pandoc/issues/8809#issuecomment-1524183838
+#───────────────────────────────────────────────────────────────────────────────
 # INFO $USERDATA set via pandoc option `--data-dir` to this directory
+# DOCS https://pandoc.org/MANUAL.html#defaults-files
 #───────────────────────────────────────────────────────────────────────────────
 
 # PDF-WRITER
 writer: pdf
 template: empty
 
+# DOCS
 # https://pandoc.org/MANUAL.html#variables-for-wkhtmltopdf
 # https://pandoc.org/MANUAL.html#variables-for-html
 pdf-engine: wkhtmltopdf
@@ -18,7 +22,7 @@ variables:
   margin-bottom: 20
   papersize: A4
 
-# suppress irrelevant warning about missing title if file has no h1
+# FIX suppress irrelevant warning about missing title if file has no h1
 metadata: { title: "foobar" } 
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -31,7 +35,7 @@ toc-depth: 3
 resource-path:
   - .
   - ./attachments
-  - ${VAULT_PATH} # Vault path for images
+  - ${VAULT_PATH} # Vault path for images, value in .zshenv
 
 # MARKDOWN-READER
 reader: markdown+lists_without_preceding_blankline+mark+wikilinks_title_after_pipe

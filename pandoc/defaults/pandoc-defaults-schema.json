@@ -1,8 +1,8 @@
 {
     "$schema": "http://json-schema.org/draft-06/schema#",
-    "$ref": "#/definitions/Md2DocxSchema",
+    "$ref": "#/definitions/PandocDefaultsSchema",
     "definitions": {
-        "Md2DocxSchema": {
+        "PandocDefaultsSchema": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -30,6 +30,21 @@
                         "type": "string"
                     }
                 },
+                "pdf-engine": {
+                    "type": "string"
+                },
+                "pdf-engine-opts": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "css": {
+                    "type": "string"
+                },
+                "variables": {
+                    "$ref": "#/definitions/Variables"
+                },
                 "reader": {
                     "type": "string"
                 },
@@ -48,30 +63,68 @@
                 "citeproc": {
                     "type": "boolean"
                 },
+                "metadata": {
+                    "type": "object"
+                },
                 "bibliography": {
                     "type": "string"
                 },
                 "metadata-file": {
                     "type": "string"
+                },
+                "template": {
+                    "type": "string"
+                },
+                "metadata-files": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "default-image-extension": {
+                    "type": "string"
+                },
+                "incremental": {
+                    "type": "boolean"
+                },
+                "slide-level": {
+                    "type": "integer"
+                },
+                "strip-comments": {
+                    "type": "boolean"
+                }
+            },
+            "required": [],
+            "title": "PandocDefaultsSchema"
+        },
+        "Variables": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "margin-left": {
+                    "type": "integer"
+                },
+                "margin-right": {
+                    "type": "integer"
+                },
+                "margin-top": {
+                    "type": "integer"
+                },
+                "margin-bottom": {
+                    "type": "integer"
+                },
+                "papersize": {
+                    "type": "string"
                 }
             },
             "required": [
-                "bibliography",
-                "citeproc",
-                "fail-if-warnings",
-                "filters",
-                "metadata-file",
-                "number-sections",
-                "reader",
-                "reference-doc",
-                "resource-path",
-                "shift-heading-level-by",
-                "table-of-contents",
-                "toc-depth",
-                "verbosity",
-                "writer"
+                "margin-bottom",
+                "margin-left",
+                "margin-right",
+                "margin-top",
+                "papersize"
             ],
-            "title": "Md2DocxSchema"
+            "title": "Variables"
         }
     }
 }
