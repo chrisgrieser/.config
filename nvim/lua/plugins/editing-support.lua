@@ -1,3 +1,6 @@
+local u = require("config.utils")
+--------------------------------------------------------------------------------
+
 return {
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
@@ -129,57 +132,31 @@ return {
 	},
 	{
 		"jokajak/keyseer.nvim",
-		event = "VeryLazy",
+		cmd = "KeySeer",
 		opts = {
 			include_builtin_keymaps = true,
 			include_global_keymaps = true,
 			include_buffer_keymaps = true,
 			include_modified_keypresses = false,
 			ignore_whichkey_conflicts = true,
-		},
-		ui = {
-			border = "double", -- none, single, double, shadow
-			margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
-			winblend = 0, -- value between 0-100 0 for fully opaque and 100 for fully transparent
-			size = {
-				width = 65,
-				height = 10,
+			ui = {
+				border = u.borderStyle,
+				margin = { 1, 0, 1, 0 }, -- [top, right, bottom, left]
+				winblend = 0, -- 100 for fully transparent
+				size = { width = 65, height = 15 },
+				icons = { keyseer = "" },
+				show_header = true,
 			},
-			icons = {
-				keyseer = "",
-			},
-			show_header = true, -- boolean if the header should be shown
-		},
 
-		-- Keyboard options
-		keyboard = {
-			-- Layout of the keycaps
-			---@type string|Keyboard
-			layout = "qwerty",
-			keycap_padding = { 0, 1, 0, 1 }, -- padding around keycap labels [top, right, bottom, left]
-			-- How much padding to highlight around each keycap
-			highlight_padding = { 0, 0, 0, 0 },
-			-- override the label used to display some keys.
-			key_labels = {
-				["Up"] = "↑",
-				["Down"] = "↓",
-				["Left"] = "←",
-				["Right"] = "→",
-				["<F1>"] = "F1",
-				["<F2>"] = "F2",
-				["<F3>"] = "F3",
-				["<F4>"] = "F4",
-				["<F5>"] = "F5",
-				["<F6>"] = "F6",
-				["<F7>"] = "F7",
-				["<F8>"] = "F8",
-				["<F9>"] = "F9",
-				["<F10>"] = "F10",
-
-				-- For example:
-				-- ["<space>"] = "SPC",
-				-- ["<cr>"] = "RET",
-				-- ["<tab>"] = "TAB",
+			-- Keyboard options
+			keyboard = {
+				keycap_padding = { 0, 1, 0, 1 }, -- labels [top, right, bottom, left]
+				highlight_padding = { 0, 0, 0, 0 },
+				key_labels = {
+					["<Space>"] = "␣",
+					["<CR>"] = "⏎",
+					["<Tab>"] = "↹",
+				},
 			},
 		},
 	},
@@ -231,7 +208,7 @@ return {
 			},
 			window = {
 				-- only horizontal border to save space
-				border = { "", require("config.utils").borderHorizontal, "", "" },
+				border = { "", u.borderHorizontal, "", "" },
 				padding = { 0, 0, 0, 0 },
 				margin = { 0, 0, 0, 0 },
 			},
