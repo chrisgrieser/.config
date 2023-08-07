@@ -74,7 +74,7 @@ function getHackernewsPosts() {
 		return;
 	}
 
-	/** @type AlfredItem[] */
+	/** @type{(AlfredItem&{selected:boolean})[]} */
 	const hits = JSON.parse(response).hits.map((/** @type {hackerNewsItem} */ item) => {
 		const externalUrl = item.url;
 		const commentUrl = useDstillAi
@@ -139,7 +139,7 @@ function getRedditPosts(subredditName) {
 	let iconPath = `${iconFolder}/${subredditName}.png`;
 	if (!fileExists(iconPath)) iconPath = "icon.png"; // not cached
 
-	/** @type AlfredItem[] */
+	/** @type{(AlfredItem&{selected:boolean})[]} */
 	const redditPosts = response.data.children.map((/** @type {redditPost} */ data) => {
 		const item = data.data;
 		let category = item.link_flair_text ? `[${item.link_flair_text}]` : "";
