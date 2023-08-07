@@ -1,5 +1,4 @@
 local u = require("config.utils")
-local colorPickerFts = { "css", "scss", "lua", "sh" }
 
 --------------------------------------------------------------------------------
 
@@ -188,12 +187,26 @@ return {
 	},
 	{ -- color previews & color picker
 		"uga-rosa/ccc.nvim",
+		init = function()
+			-- HACK from the vim docs: https://neovim.io/doc/user/options.html#modeline
+			-- setting `# vim-pseudo-modeline: buffer_has_colors` enables the
+			-- highlighter. Normally, this would not be possible since modelines
+			-- only support options set via `set`.
+			vim.api.nvim_create_autocmd("BufReadPost", {
+				callback = function()
+					local firstline = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]
+					if vim.endswith(firstline, "vim-pseudo-modeline: buffer_has_colors") then 
+						vim.cmd.CccHighlighterEnable()
+					end
+				end,
+			})
+		end,
 		cmd = { "CccHighlighterEnable" }, -- enable manually via command
 		keys = {
 			{ "#", vim.cmd.CccPick, desc = " Color Picker" },
 			{ "'", vim.cmd.CccConvert, desc = " Convert Color" }, -- shift-# on German keyboard
 		},
-		ft = colorPickerFts,
+		ft = { "css", "scss", "sh" },
 		config = function()
 			vim.opt.termguicolors = true
 			local ccc = require("ccc")
@@ -203,7 +216,7 @@ return {
 					auto_enable = true,
 					max_byte = 2 * 1024 * 1024, -- 2mb
 					lsp = true,
-					filetypes = colorPickerFts,
+					filetypes = { "css", "scss", "sh" },
 				},
 				pickers = {
 					ccc.picker.hex,
