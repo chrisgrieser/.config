@@ -1,4 +1,5 @@
 local keymap = vim.keymap.set
+local fn = vim.fn
 local expand = vim.fn.expand
 local u = require("config.utils")
 --------------------------------------------------------------------------------
@@ -9,10 +10,25 @@ local u = require("config.utils")
 
 --------------------------------------------------------------------------------
 
--- send to WEZTERM
-keymap("n", "<leader>t", function ()
-	vim.fn.system("wezterm cli send-text" .. expand("%:p:h"))
-end, { desc = " Send to WeZterm", buffer = true})
+-- https://wezfurlong.org/wezterm/cli/cli/send-text
+local function sendToWezTerm()
+	fn.system("pgrep -xq wezterm-gui || (open -a 'WezTerm' && sleep 1)")
+	local command
+
+	if fn.mode() == "n" then
+		local text = vim.api.nvim_get_current_line()
+		command = ("wezterm cli send-text --no-paste '%s\n'"):format(text)
+	elseif fn.mode() == "x" then
+		u.normal('"zy')
+		local selectedText = fn.getreg("z"):gsub("\n$", "")
+		command = ("wezterm cli send-text '%s'"):format(selectedText)
+	end
+
+	fn.system(command)
+end
+
+keymap("n", "<leader>t", sendToWezTerm, { desc = " Send line to WezTerm", buffer = true })
+keymap("x", "<leader>t", sendToWezTerm, { desc = " Send selection to WezTerm", buffer = true })
 
 --------------------------------------------------------------------------------
 
@@ -34,7 +50,7 @@ keymap({ "o", "x" }, "a|", "<cmd>lua require('various-textobjs').shellPipe(false
 keymap("n", "<leader>r", function()
 	vim.cmd("silent update")
 	if expand("%:p:h"):find("sketchybar") then
-		vim.fn.system([[brew services restart sketchybar]])
+		fn.system([[brew services restart sketchybar]])
 	else
 		vim.notify("Not in a sketchybar directory.", u.warn)
 	end

@@ -67,7 +67,7 @@ keymap(
 	{ desc = "󱗘 :s (word under cursor)" }
 )
 keymap("x", "<leader>ff", [["zy:% s/<C-r>z//g<Left><Left>]], { desc = "󱗘 :s (selected text)" })
-keymap("x", "<leader>fs",	": s///g<Left><Left><Left>", { desc = "󱗘 :s (in selection)" })
+keymap("x", "<leader>fs", ": s///g<Left><Left><Left>", { desc = "󱗘 :s (in selection)" })
 
 keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = "󱗘 :delete matching lines" })
 keymap("n", "<leader>fy", ":g//y<Left><Left>", { desc = "󱗘 :yank matching lines" })
@@ -136,7 +136,12 @@ keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>]], { desc = "󰗈 split
 -- Append to / delete from EoL
 local trailingKeys = { ",", '"', ")" }
 for _, key in pairs(trailingKeys) do
-	keymap("n", "<leader>" .. key, "mzA" .. key .. "<Esc>`z", { desc = " Append " .. key .. " to EoL" })
+	keymap(
+		"n",
+		"<leader>" .. key,
+		"mzA" .. key .. "<Esc>`z",
+		{ desc = " Append " .. key .. " to EoL" }
+	)
 end
 
 --------------------------------------------------------------------------------
@@ -186,8 +191,10 @@ keymap("n", "<leader>gd", function()
 		cmd.wincmd("w") -- go directly to file window
 		cmd.wincmd("|") -- maximize it
 
-		-- directly search for the term
-		if pickaxe ~= "" then fn.execute("/" .. pickaxe, "silent!") end
+		if pickaxe ~= "" then
+			fn.execute("/" .. pickaxe, "silent!") -- directly search for the term
+			u.normal("n") -- go to 1st result
+		end
 	end)
 end, { desc = "󰊢 Pickaxe File History (Diffview)" })
 
