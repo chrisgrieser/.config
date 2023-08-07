@@ -172,7 +172,7 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 function getFavicon(topDomain, noNeedToBuffer) {
 	const durationLogStart = +new Date();
 
-	let targetFile = `${$.getenv("alfred_workflow_cache")}/${topDomain}.png`;
+	let targetFile = `${$.getenv("alfred_workflow_cache")}/${topDomain}.ico`;
 	const useFaviconSetting = $.getenv("use_favicons") === "1";
 
 	if (!fileExists(targetFile)) {
@@ -181,7 +181,8 @@ function getFavicon(topDomain, noNeedToBuffer) {
 			// With `curl --fail`, it will exit non-zero instead. However,
 			// errors make `doShellScript` fail, so we need to use `try/catch`
 			try {
-				const imageUrl = `https://${topDomain}/apple-touch-icon.png`;
+				// const imageUrl = `https://${topDomain}/apple-touch-icon.png`;
+				const imageUrl = `https://${topDomain}/favicon.ico`;
 				app.doShellScript(`curl --location --fail "${imageUrl}" --output "${targetFile}"`);
 			} catch (_error) {
 				targetFile = ""; // = not found -> use default icon

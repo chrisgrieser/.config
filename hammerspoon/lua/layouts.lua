@@ -74,6 +74,7 @@ local function workLayout()
 			wu.moveResize(win, wu.pseudoMax)
 		end)
 	end
+	u.app("Obsidian"):mainWindow():minimize()
 
 	-- finish
 	sidenotes.reminderToSidenotes()
