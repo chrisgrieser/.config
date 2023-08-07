@@ -40,7 +40,7 @@ const volumes = app
 if (volumes.length === 0) {
 	volumes.push({
 		title: "No mounted volume recognized.",
-		subtitle: "⎋ to abort",
+		subtitle: "(Scans for volumes every 1s)",
 		valid: false,
 	});
 	rerunSecs = 1; // quicker reruns when no volume found

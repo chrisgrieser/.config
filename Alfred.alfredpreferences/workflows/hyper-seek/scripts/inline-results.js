@@ -163,25 +163,26 @@ function refreshKeywordCache(cachePath) {
 	console.log(`Rebuilt keyword cache (${uniqueKeywords.length} keywords) in ${durationTotalSecs}s`);
 }
 
+
+const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
+
 /**
  * @param {string} topDomain where to get the favicon from
- * @return {string} filepath to cached favicon, empty string if not found
+ * @param {boolean} noNeedToBuffer
  */
-function getFavicon(topDomain) {
+function getFavicon(topDomain, noNeedToBuffer) {
 	const durationLogStart = +new Date();
 
-	const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
-	const imageUrl = `https://${topDomain}/apple-touch-icon.png`;
 	let targetFile = `${$.getenv("alfred_workflow_cache")}/${topDomain}.png`;
 	const useFaviconSetting = $.getenv("use_favicons") === "1";
 
-	if (!fileExists(targetFile))
+	if (!fileExists(targetFile) && !noNeedToBuffer)
 		if (!useFaviconSetting) {
-			// if user temporarily enabled the setting, use already downloaded favicons
 			targetFile = "";
 
 			// Normally, `curl` does exit 0 even when the website reports 404. without `curl --fail`, it will exit non-zero instead. However, errors make `doShellScript` fail, so we need to use `try/catch`
 			try {
+				const imageUrl = `https://${topDomain}/apple-touch-icon.png`;
 				app.doShellScript(`curl --location --fail "${imageUrl}" --output "${targetFile}"`);
 			} catch (_error) {
 				targetFile = ""; // = not found -> use default icon
@@ -189,7 +190,7 @@ function getFavicon(topDomain) {
 		}
 
 	const durationSecs = (+new Date() - durationLogStart) / 1000;
-	return targetFile;
+	return { iconPath: targetFile, faviconSecs: durationSecs };
 }
 
 function ensureCacheFolder() {
@@ -214,7 +215,7 @@ function ensureCacheFolder() {
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const timelogStart = +new Date();
-	const favIconDurationMs = 0;
+	let favIconTotalDurationSecs = 0;
 
 	//──────────────────────────────────────────────────────────────────────────────
 	// CONFIG
@@ -239,6 +240,7 @@ function run(argv) {
 	/** @type{"fallback"|"multi-select"|"default"|"rerun"} */
 	let mode = $.NSProcessInfo.processInfo.environment.objectForKey("mode").js || "default";
 	const neverIgnore = mode === "fallback" || mode === "multi-select";
+	const noNeedToBuffer = mode !== "rerun" && mode !== "multi-select";
 
 	// HACK script filter is triggered with any letter of the roman alphabet, and
 	// then prepended here, to trigger this workflow with any search term
@@ -348,7 +350,11 @@ function run(argv) {
 		const isSelected = multiSelectUrls.includes(item.url);
 		const icon = isSelected ? multiSelectIcon + " " : "";
 		const topDomain = item.url.split("/")[2];
-		const iconPath = getFavicon(topDomain) || "icons/1.png";
+
+		let { iconPath, faviconSecs } = getFavicon(topDomain, noNeedToBuffer);
+		favIconTotalDurationSecs += faviconSecs;
+		if (!iconPath) iconPath = "icons/default_for_no_favicon.png";
+
 		return {
 			title: icon + item.title,
 			subtitle: topDomain,
@@ -373,7 +379,7 @@ function run(argv) {
 
 		// buffer instant answer for quicklook
 		const instantAnswerBuffer = $.getenv("alfred_workflow_cache") + "/instantAnswerBuffer.txt";
-		writeToFile(instantAnswerBuffer, response.instant_answer);
+		if (!noNeedToBuffer) writeToFile(instantAnswerBuffer, response.instant_answer);
 		searchForQuery.quicklookurl = instantAnswerBuffer;
 	}
 
@@ -400,12 +406,14 @@ function run(argv) {
 		items: [searchForQuery].concat(newResults),
 	});
 
-	// logging
+	// LOGGING
+	const useFaviconSetting = $.getenv("use_favicons") === "1";
 	const durationTotalSecs = (+new Date() - timelogStart) / 1000;
-	let log = `${durationTotalSecs}s, "${query}"`;
+	let log = `${durationTotalSecs}s, `;
+	if (useFaviconSetting && !noNeedToBuffer) log += `${favIconTotalDurationSecs}s, `
+	log += `${query}`;
 	if (mode === "default") log = "Total: " + log;
-	// indented to make it easier to read (using `__`, since Alfred removes leading whitespace)
-	else if (mode === "rerun") log = "__" + log;
+	else if (mode === "rerun") log = "__" + log; // indented to make it easier to read (using `__`, since Alfred removes leading whitespace)
 	else log += ` (${mode})`;
 	console.log(log);
 

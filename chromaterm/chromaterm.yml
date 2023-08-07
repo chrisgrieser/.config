@@ -66,7 +66,7 @@ rules:
     exclusive: true
 
   - description: Generic - Bad
-    regex: (?i)\b(abnormal(ly)?|los(t|ing)|err(ors?)?|(den(y|ies|ied)?)|reject(ing|ed)?|drop(ped|s)?|(err\-)?disabled?|(timed?\-?out)|fail(s|ed|iure)?|disconnect(ed)?|unreachable|invalid|bad|notconnect|unusable|blk|inaccessible|wrong|collisions?|unsynchronized|mismatch|runts)\b
+    regex: (?i)\b(abnormal(ly)?|los(t|ing)|err(ors?)?|(den(y|ies|ied))|reject(ing|ed)?|drop(ped|s)?|(err\-)?disabled?|(timed?\-?out)|fail(s|ed|iure)?|disconnect(ed)?|unreachable|invalid|bad|notconnect|unusable|blk|inaccessible|wrong|collisions?|unsynchronized|mismatch|runts)\b
     color: f.status-1
 
   - description: Generic - Neutral
