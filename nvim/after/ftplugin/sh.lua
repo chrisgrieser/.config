@@ -12,7 +12,16 @@ local u = require("config.utils")
 
 -- https://wezfurlong.org/wezterm/cli/cli/send-text
 local function sendToWezTerm()
-	fn.system("pgrep -xq wezterm-gui || (open -a 'WezTerm' && sleep 1)")
+	fn.system([[
+		open -a 'WezTerm' 
+		i=0
+		while ! pgrep -xq wezterm-gui; do 
+			sleep 0.1
+			i=$((i+1))
+			test $i -gt 30 && return
+		done
+		sleep 0.2
+	]])
 	local command
 
 	if fn.mode() == "n" then
