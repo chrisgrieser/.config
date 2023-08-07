@@ -14,8 +14,6 @@ local s = {
 	cmdline = { name = "cmdline" },
 }
 
-
-
 local source_icons = {
 	treesitter = "",
 	buffer = "󰽙",
@@ -112,7 +110,7 @@ local function cmpconfig()
 			["<S-CR>"] = cmp.mapping.abort(), -- accept current text, consistent with Obsidian https://medium.com/obsidian-observer/obsidian-quick-tip-use-shift-enter-to-skip-autocomplete-on-links-8495ea189c4c
 			["<PageUp>"] = cmp.mapping.scroll_docs(-4),
 			["<PageDown>"] = cmp.mapping.scroll_docs(4),
-			["<C-e>"] = cmp.mapping.abort(), 
+			["<C-e>"] = cmp.mapping.abort(),
 
 			-- Next item, or trigger completion, or insert normal tab
 			["<Tab>"] = cmp.mapping(function(fallback)
@@ -345,14 +343,24 @@ return {
 		"L3MON4D3/LuaSnip",
 		event = "InsertEnter",
 		config = function()
+			local types = require("luasnip.util.types")
 			-- https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#api-reference
 			require("luasnip").setup {
 				region_check_events = "CursorMoved", -- prevent <Tab> jumping back to a snippet after it has been left early
 				update_events = "TextChanged,TextChangedI", -- live updating of snippets
 				enable_autosnippets = true, -- for javascript "if ()"
-				ext_opts = { -- https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#ext_opts highlight when at a choice node
-					[require("luasnip.util.types").choiceNode] = {
+				ext_opts = {
+					-- highlight when at a choice node https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#ext_opts
+					[types.choiceNode] = {
 						active = { hl_group = "DiagnosticHint", virt_text = { { "󰊖 ", "DiagnosticHint" } } },
+					},
+					-- highlights $n
+					[types.insertNode] = {
+						unvisited = { virt_text = { { "| :insert", "Conceal" } }},
+					},
+					-- $0
+					[types.exitNode] = {
+						unvisited = { virt_text = { { "|", "Conceal" } }},
 					},
 				},
 			}

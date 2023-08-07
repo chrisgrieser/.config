@@ -5,9 +5,8 @@
 	<key>application</key>
 	<integer>1</integer>
 	<key>custom</key>
-	<string># INFO to be entered in the Alfred Terminal settings
+	<string># INFO to be entered in the Alfred Terminal settings (Kept here just for reference.)
 # alfredpreferences://navigateto/features&gt;terminal
-# (Kept here just for reference.)
 --------------------------------------------------------------------------------
 
 on alfred_script(shellCmd)
@@ -26,7 +25,9 @@ on alfred_script(shellCmd)
 		set shellCmd to shellCmd &amp; " &amp;&amp; clear"
 	end if
 
-	do shell script ("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; echo '" &amp; shellCmd &amp; "' | wezterm cli send-text --no-paste")
+	# DOCS https://wezfurlong.org/wezterm/cli/cli/send-text
+	do shell script ("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ;" ¬
+		&amp; "echo '" &amp; shellCmd &amp; "' | wezterm cli send-text --no-paste")
 end alfred_script</string>
 </dict>
 </plist>

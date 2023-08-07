@@ -265,12 +265,10 @@ local config = {
 	font_size = fontSize,
 	command_palette_font_size = 30,
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
-
-	-- Size
 	adjust_window_size_when_changing_font_size = false,
-	line_height = 1,
 
 	-- Appearance
+	audible_bell = "Disabled", -- SystemBeep|Disabled
 	visual_bell = { -- briefly flash cursor on visual bell
 		fade_in_duration_ms = 150,
 		fade_out_duration_ms = 150,

@@ -5,7 +5,7 @@
 	},
 	"contituation": {
 		"prefix": "contituation",
-		"body": "¬\n",
+		"body": "¬\n$0",
 		"description": "continues applescript on the next line"
 	},
 	"get selection (Finder)": {
