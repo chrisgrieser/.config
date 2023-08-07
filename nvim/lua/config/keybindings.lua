@@ -380,13 +380,14 @@ autocmd("FileType", {
 		"lspinfo",
 		"qf", -- quickfix
 		"lazy",
+		"noice",
 		"httpResult", -- rest.nvim
 		"DressingSelect", -- done here and not as dressing keybinding to be able to set `nowait`
 		"DressingInput",
 		"man",
 	},
 	callback = function()
-		local opts = { buffer = true, nowait = true, desc = "close" }
+		local opts = { buffer = true, nowait = true, desc = " Close" }
 		keymap("n", "<Esc>", cmd.close, opts)
 		keymap("n", "q", cmd.close, opts)
 	end,

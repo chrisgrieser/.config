@@ -15,7 +15,7 @@ return {
 		event = "VeryLazy",
 		init = function()
 			-- Open Log & Scroll to most recent message
-			vim.keymap.set({"n", "x", "i"}, "<D-0>", function()
+			vim.keymap.set({ "n", "x", "i" }, "<D-0>", function()
 				vim.cmd.Noice("history")
 				vim.defer_fn(function()
 					if vim.bo.filetype == "noice" then u.normal("G") end
@@ -26,8 +26,9 @@ return {
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "noice",
 				callback = function()
-					vim.keymap.set("n", "<D-w>", vim.cmd.quit, { buffer = true, desc = " Close" })
-					vim.keymap.set("n", "<D-0>", vim.cmd.quit, { buffer = true, desc = " Close" })
+					pcall(vim.api.nvim_buf_set_name, 0, "Noice History")
+					vim.keymap.set("n", "<D-w>", vim.cmd.bdelete, { buffer = true, desc = " Close" })
+					vim.keymap.set("n", "<D-0>", vim.cmd.bdelete, { buffer = true, desc = " Close" })
 				end,
 			})
 		end,
@@ -100,7 +101,7 @@ return {
 		"rcarriga/nvim-notify",
 		lazy = true, -- loaded by noice
 		-- does not play nice with the terminal
-		cond = function () return vim.fn.has("gui_running") == 1 end,
+		cond = function() return vim.fn.has("gui_running") == 1 end,
 		opts = {
 			render = "minimal", -- minimal|default|compact
 			top_down = false,
@@ -171,6 +172,7 @@ return {
 				-- plugins
 				lazy = { icon = "", name = "Lazy" },
 				mason = { icon = "", name = "Mason" },
+				noice = { icon = "󰎟", name = "Noice" },
 			},
 		},
 	},
