@@ -506,13 +506,17 @@ check if path different from PWD</string>
 		</dict>
 		<key>BB074B96-EC40-4E8B-AFFC-6DFC5F4D95F8</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>190</real>
 			<key>ypos</key>
 			<real>450</real>
 		</dict>
 		<key>EFBDEF53-AB17-4729-8BC2-EFCCB8C7F859</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
