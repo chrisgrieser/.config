@@ -6,7 +6,7 @@ local s = {
 	fuzzybuffer = { name = "fuzzy_buffer", max_item_count = 3 },
 	path = { name = "path" },
 	zsh = { name = "zsh" },
-	codeium = { name = "codeium" },
+	codeium = { name = "codeium", max_item_count = 3 },
 	snippets = { name = "luasnip" },
 	lsp = { name = "nvim_lsp" },
 	treesitter = { name = "treesitter" },

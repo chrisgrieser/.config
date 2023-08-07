@@ -163,7 +163,6 @@ function refreshKeywordCache(cachePath) {
 	console.log(`Rebuilt keyword cache (${uniqueKeywords.length} keywords) in ${durationTotalSecs}s`);
 }
 
-
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
 /**
@@ -176,20 +175,23 @@ function getFavicon(topDomain, noNeedToBuffer) {
 	let targetFile = `${$.getenv("alfred_workflow_cache")}/${topDomain}.png`;
 	const useFaviconSetting = $.getenv("use_favicons") === "1";
 
-	if (!fileExists(targetFile) && !noNeedToBuffer)
-		if (!useFaviconSetting) {
-			targetFile = "";
-
-			// Normally, `curl` does exit 0 even when the website reports 404. without `curl --fail`, it will exit non-zero instead. However, errors make `doShellScript` fail, so we need to use `try/catch`
+	if (!fileExists(targetFile)) {
+		if (useFaviconSetting && !noNeedToBuffer) {
+			// Normally, `curl` does exit 0 even when the website reports 404.
+			// With `curl --fail`, it will exit non-zero instead. However,
+			// errors make `doShellScript` fail, so we need to use `try/catch`
 			try {
 				const imageUrl = `https://${topDomain}/apple-touch-icon.png`;
 				app.doShellScript(`curl --location --fail "${imageUrl}" --output "${targetFile}"`);
 			} catch (_error) {
 				targetFile = ""; // = not found -> use default icon
 			}
+		} else {
+			targetFile = "";
 		}
+	}
 
-	const durationMs = (+new Date() - durationLogStart);
+	const durationMs = +new Date() - durationLogStart;
 	return { iconPath: targetFile, faviconMs: durationMs };
 }
 
@@ -206,6 +208,15 @@ function ensureCacheFolder() {
 			withProperties: { name: cacheDirBasename },
 		});
 	}
+}
+
+/**
+ * @param {string} bufferPath
+ * @param {string} instantAnswer
+ */
+function writeInstantAnswer(bufferPath, instantAnswer) {
+	const answerAsHtml = `<blockquote>${instantAnswer}</blockquote>`
+	writeToFile(bufferPath, answerAsHtml);
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -315,7 +326,6 @@ function run(argv) {
 	// PERF cache `ddgr` response so that re-opening Alfred or using multi-select
 	// does not re-fetch results
 	const responseCachePath = $.getenv("alfred_workflow_cache") + "/reponseCache.json";
-	/** @type{ddgrResponse} */
 	const responseCache = JSON.parse(readFile(responseCachePath) || "{}");
 	/** @type{ddgrResponse} */
 	let response;
@@ -354,7 +364,7 @@ function run(argv) {
 		const topDomain = item.url.split("/")[2];
 
 		let { iconPath, faviconMs } = getFavicon(topDomain, noNeedToBuffer);
-		favIconTotalMs += faviconMs
+		favIconTotalMs += faviconMs;
 		if (!iconPath) iconPath = "icons/fallback_for_no_favicon.png";
 		console.log("[QL] iconPath:", iconPath);
 
@@ -381,8 +391,8 @@ function run(argv) {
 		searchForQuery.subtitle = response.instant_answer;
 
 		// buffer instant answer for quicklook
-		const instantAnswerBuffer = $.getenv("alfred_workflow_cache") + "/instantAnswerBuffer.txt";
-		if (!noNeedToBuffer) writeToFile(instantAnswerBuffer, response.instant_answer);
+		const instantAnswerBuffer = $.getenv("alfred_workflow_cache") + "/instantAnswerBuffer.html";
+		if (!noNeedToBuffer) writeInstantAnswer(response.instant_answer, instantAnswerBuffer);
 		searchForQuery.quicklookurl = instantAnswerBuffer;
 	}
 
@@ -411,16 +421,16 @@ function run(argv) {
 
 	// LOGGING
 	const durationTotalSecs = (+new Date() - timelogStart) / 1000;
-	let log
+	let log;
 	let time = `${durationTotalSecs}s`;
 	const useFaviconSetting = $.getenv("use_favicons") === "1";
-	if (useFaviconSetting && !noNeedToBuffer) time += `, favicons: ${favIconTotalMs / 1000}s`
-	if (mode === "default")  {
+	if (useFaviconSetting && !noNeedToBuffer) time += `, favicons: ${favIconTotalMs / 1000}s`;
+	if (mode === "default") {
 		log = `Total: ${time}, "${query}"`;
 	} else if (mode === "rerun") {
-		log = "____" + time; // indented to make it easier to read 
+		log = "____" + time; // indented to make it easier to read
 	} else {
-		log = `Total: ${time}, "${query}" (${mode})`; 
+		log = `Total: ${time}, "${query}" (${mode})`;
 	}
 
 	console.log(log);
