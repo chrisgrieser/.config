@@ -21,7 +21,7 @@
         "font" : "Lucida Grande",
         "color" : "#FDFDFDFF"
       },
-      "iconPaddingHorizontal" : 12,
+      "iconPaddingHorizontal" : 8,
       "roundness" : 7,
       "paddingVertical" : 7,
       "iconSize" : 56

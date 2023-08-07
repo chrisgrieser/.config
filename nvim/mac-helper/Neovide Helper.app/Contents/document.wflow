@@ -84,7 +84,8 @@ else
 	# INFO LINE must be unquoted to prevent opening empty file
 	nohup neovide --geometry=104x33 --notabs $LINE "$@" &amp;
 	disown # https://stackoverflow.com/a/20338584/22114136
-fi</string>
+fi
+</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
 					<key>inputMethod</key>
@@ -109,7 +110,7 @@ fi</string>
 				<key>Class Name</key>
 				<string>RunShellScriptAction</string>
 				<key>InputUUID</key>
-				<string>A96AEED8-EF1B-4CFD-ACE2-4279175BBA87</string>
+				<string>70B81BAC-386B-4936-A2B5-66064DFF5A7C</string>
 				<key>Keywords</key>
 				<array>
 					<string>Shell</string>
@@ -119,9 +120,9 @@ fi</string>
 					<string>Unix</string>
 				</array>
 				<key>OutputUUID</key>
-				<string>18F740A2-583A-4CCC-9C39-42E6F2D99FA5</string>
+				<string>428D33D2-E840-492E-94C5-98925E45EAEA</string>
 				<key>UUID</key>
-				<string>FEE237A5-EFAA-4FA5-BB0C-6D75353334F5</string>
+				<string>84AF2128-071E-468C-BEB4-D07234E72498</string>
 				<key>UnlocalizedApplications</key>
 				<array>
 					<string>Automator</string>

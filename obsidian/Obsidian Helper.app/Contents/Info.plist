@@ -34,11 +34,11 @@
 	<key>CFBundleIconFile</key>
 	<string>ApplicationStub</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.apple.automator.Neovim</string>
+	<string>com.apple.automator.Obsidian-Helper</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Neovim</string>
+	<string>Obsidian Helper</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
