@@ -21,14 +21,8 @@ function readFile(path) {
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
-	// OPEN
-	// PERF open first do the rest in the background
+	// identify position of selected item in the cache
 	const selectedUrl = argv[0];
-	app.openLocation(selectedUrl);
-
-	//───────────────────────────────────────────────────────────────────────────
-	// SAVE READING POSITION AND MARK AS READ 
-
 	const curSubreddit = readFile($.getenv("alfred_workflow_cache") + "/current_subreddit");
 	const subredditCachePath = `${$.getenv("alfred_workflow_cache")}/${curSubreddit}.json`;
 	/** @type{AlfredItem[]} */
