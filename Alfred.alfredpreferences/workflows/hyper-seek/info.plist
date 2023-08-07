@@ -857,6 +857,7 @@ Search for the Power User. Inline Results, *without a keyword*. Multi-select res
 - &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy URL to clipboard. 
 - &lt;kbd&gt;⌥&lt;/kbd&gt; (hold): Show full URL.
 - &lt;kbd&gt;⇧&lt;/kbd&gt; (hold): Show preview text of search result. 
+- &lt;kbd&gt;⇧&lt;/kbd&gt; or &lt;kbd&gt;⌘Y&lt;/kbd&gt; (on query with): Quick Look of the full instant answer.
 
 Use the keyword `today` to show a log of today's searches.
 
@@ -1335,7 +1336,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<string>🔳</string>
 	</dict>
 	<key>version</key>
-	<string>1.7.1</string>
+	<string>1.8.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

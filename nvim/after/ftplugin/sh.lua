@@ -9,8 +9,16 @@ local u = require("config.utils")
 
 --------------------------------------------------------------------------------
 
-vim.cmd.inoreabbrev("<buffer> // #") -- habit from writing too much js or lua
-vim.cmd.inoreabbrev("<buffer> -- #") -- habit from writing too much js or lua
+-- send to WEZTERM
+keymap("n", "<leader>t", function ()
+	vim.fn.system("wezterm cli send-text" .. expand("%:p:h"))
+end, { desc = " Send to WeZterm", buffer = true})
+
+--------------------------------------------------------------------------------
+
+-- habit from writing too much js or lua
+vim.cmd.inoreabbrev("<buffer> // #")
+vim.cmd.inoreabbrev("<buffer> -- #")
 
 u.applyTemplateIfEmptyFile("zsh")
 

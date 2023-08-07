@@ -318,6 +318,11 @@ end, { desc = "󰘖 Close toplevel folds" })
 keymap("n", "zr", function() require("ufo").openFoldsExceptKinds { "comments" } end, { desc = "󰘖 󱃄 Open All Folds except comments" })
 keymap("n", "zm", function() require("ufo").closeAllFolds() end, { desc = "󰘖 󱃄 Close All Folds" })
 
+--------------------------------------------------------------------------------
+-- HACK for `^` 
+keymap({ "c", "i" }, "<f1>", "^", { desc = "HACK for karabiner rebinding" })
+keymap("n", "<f1>", "^") -- TODO what to map on this
+
 ------------------------------------------------------------------------------
 -- LSP KEYBINDINGS
 

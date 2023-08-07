@@ -10,3 +10,7 @@ bo.softtabstop = 4
 -- fix habits
 vim.cmd.inoreabbrev("<buffer> true True")
 vim.cmd.inoreabbrev("<buffer> false False")
+
+vim.cmd.inoreabbrev("<buffer> // #")
+vim.cmd.inoreabbrev("<buffer> -- #")
+

@@ -62,8 +62,7 @@ rules:
         to:
           - key_code: f2
         conditions:
-          -
-            type: frontmost_application_if
+          - type: frontmost_application_if
             file_paths:
               - "[Nn]eovide"
               - ^/Applications/WezTerm\.app
@@ -82,7 +81,7 @@ rules:
               - ^com\.apptorium\.SideNotes-paddle$
               - ^com\.mimestream\.Mimestream$
   #─────────────────────────────────────────────────────────────────────────────
-  # switching via keyboard layout too laggy
+  # FIX ^ for vim
   - description: "Grave ^ -> f1, and that in turn remapped in the app"
     manipulators:
       - type: basic
@@ -90,9 +89,7 @@ rules:
         conditions:
           - { type: input_source_if, input_sources: [language: ^de$] }
           - type: frontmost_application_if
-            file_paths:
-              - ^/Applications/Obsidian\.app
-              - "[Nn]eovide"
+            file_paths: [^/Applications/Obsidian\.app, "[Nn]eovide"]
         to:
           - { key_code: f1 }
   #─────────────────────────────────────────────────────────────────────────────

@@ -3,6 +3,11 @@
 		"prefix": "shebang",
 		"body": "#!/usr/bin/env osascript"
 	},
+	"contituation": {
+		"prefix": "contituation",
+		"body": "¬\n",
+		"description": "continues applescript on the next line"
+	},
 	"get selection (Finder)": {
 		"prefix": "get selection (Finder)",
 		"body": "tell application \"Finder\" to return POSIX path of (selection as alias)"

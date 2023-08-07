@@ -14,7 +14,7 @@ return {
 				config = {
 					repl_open_cmd = require("iron.view").split.horizontal.belowright(8),
 					repl_definition = {
-						-- using ToggleTerm as REPL for zsh, therefore `sh` not listed here
+						sh = { command = { "zsh" } },
 						lua = { command = { "lua" } },
 						typescript = { command = { "node" } },
 						python = { command = { "python3" } },
@@ -94,28 +94,5 @@ return {
 				},
 			},
 		},
-	},
-	{ -- better embedded terminal
-		"akinsho/toggleterm.nvim",
-		opts = {
-			size = 10,
-			direction = "horizontal",
-			autochdir = true, -- when nvim changes pwd, will also change its pwd
-		},
-		keys = {
-			{ "<leader>t", vim.cmd.ToggleTerm, desc = "  ToggleTerm" },
-		},
-		cmd = { "ToggleTermSendCurrentLine", "ToggleTermSendVisualSelection" },
-		init = function()
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "sh",
-				callback = function()
-					-- stylua: ignore
-					vim.keymap.set("n", "<leader>ii", vim.cmd.ToggleTermSendCurrentLine, { desc = " REPL: Send Line", buffer = true })
-					-- stylua: ignore
-					vim.keymap.set("x", "<leader>ii", vim.cmd.ToggleTermSendVisualSelection, { desc = " REPL: Send Selection", buffer = true })
-				end,
-			})
-		end,
 	},
 }
