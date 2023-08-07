@@ -189,8 +189,8 @@ function getFavicon(topDomain, noNeedToBuffer) {
 			}
 		}
 
-	const durationSecs = (+new Date() - durationLogStart) / 1000;
-	return { iconPath: targetFile, faviconSecs: durationSecs };
+	const durationMs = (+new Date() - durationLogStart);
+	return { iconPath: targetFile, faviconMs: durationMs };
 }
 
 function ensureCacheFolder() {
@@ -215,7 +215,7 @@ function ensureCacheFolder() {
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const timelogStart = +new Date();
-	let favIconTotalDurationSecs = 0;
+	let favIconTotalMs = 0;
 
 	//──────────────────────────────────────────────────────────────────────────────
 	// CONFIG
@@ -240,7 +240,6 @@ function run(argv) {
 	/** @type{"fallback"|"multi-select"|"default"|"rerun"} */
 	let mode = $.NSProcessInfo.processInfo.environment.objectForKey("mode").js || "default";
 	const neverIgnore = mode === "fallback" || mode === "multi-select";
-	const noNeedToBuffer = mode !== "rerun" && mode !== "multi-select";
 
 	// HACK script filter is triggered with any letter of the roman alphabet, and
 	// then prepended here, to trigger this workflow with any search term
@@ -344,6 +343,9 @@ function run(argv) {
 	const multiSelectBufferPath = $.getenv("alfred_workflow_cache") + "/multiSelectBuffer.txt";
 	const multiSelectUrls = readFile(multiSelectBufferPath).split("\n") || [];
 
+	// PERF
+	const noNeedToBuffer = mode === "rerun" || mode === "multi-select";
+
 	// RESULTS
 	/** @type AlfredItem[] */
 	const newResults = response.results.map((item) => {
@@ -351,9 +353,10 @@ function run(argv) {
 		const icon = isSelected ? multiSelectIcon + " " : "";
 		const topDomain = item.url.split("/")[2];
 
-		let { iconPath, faviconSecs } = getFavicon(topDomain, noNeedToBuffer);
-		favIconTotalDurationSecs += faviconSecs;
-		if (!iconPath) iconPath = "icons/default_for_no_favicon.png";
+		let { iconPath, faviconMs } = getFavicon(topDomain, noNeedToBuffer);
+		favIconTotalMs += faviconMs
+		if (!iconPath) iconPath = "icons/fallback_for_no_favicon.png";
+		console.log("[QL] iconPath:", iconPath);
 
 		return {
 			title: icon + item.title,
@@ -407,18 +410,17 @@ function run(argv) {
 	});
 
 	// LOGGING
-	const useFaviconSetting = $.getenv("use_favicons") === "1";
 	const durationTotalSecs = (+new Date() - timelogStart) / 1000;
 	let log
 	let time = `${durationTotalSecs}s`;
-	if (useFaviconSetting && !noNeedToBuffer) time += `, ${favIconTotalDurationSecs}s`
+	const useFaviconSetting = $.getenv("use_favicons") === "1";
+	if (useFaviconSetting && !noNeedToBuffer) time += `, favicons: ${favIconTotalMs / 1000}s`
 	if (mode === "default")  {
-		log = `Total: ${time}, ${query}`;
+		log = `Total: ${time}, "${query}"`;
 	} else if (mode === "rerun") {
 		log = "____" + time; // indented to make it easier to read 
-	} else if (mode === "multi-select") {
-		log = `Total: ${time}, ${query} (${mode})`; 
-	} else if (mode === "fallback") {
+	} else {
+		log = `Total: ${time}, "${query}" (${mode})`; 
 	}
 
 	console.log(log);
