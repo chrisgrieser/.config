@@ -215,8 +215,22 @@ function ensureCacheFolder() {
  * @param {string} instantAnswer
  */
 function writeInstantAnswer(bufferPath, instantAnswer) {
-	const [infoText, source] = instantAnswer.match(/(.*)\s+More at (.*?)$/)
-	const answerAsHtml = `<blockquote>${infoText}</blockquote>`
+	const [, infoText, source] = instantAnswer.match(/(.*)\s+More at (.*?)$/);
+	const answerAsHtml = `
+		<style>
+		:root { font-size: 2em }
+		cite { margin-left: 70% }
+		blockquote p {
+			padding: 1em;
+			background: #eee;
+			border-radius: 5px;
+		}
+		</style>
+		<blockquote>
+		<p>${infoText}</p>
+		<cite>– ${source}</cite>
+		</blockquote>
+	`;
 	writeToFile(bufferPath, answerAsHtml);
 }
 
@@ -388,7 +402,7 @@ function run(argv) {
 
 	// INSTANT ANSWER: searchForQuery
 	if (response.instant_answer) {
-		searchForQuery.subtitle = response.instant_answer;
+		searchForQuery.subtitle = "ℹ️ " + response.instant_answer;
 
 		// buffer instant answer for quicklook
 		const instantAnswerBuffer = $.getenv("alfred_workflow_cache") + "/instantAnswerBuffer.html";

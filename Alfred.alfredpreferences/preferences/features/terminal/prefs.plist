@@ -5,7 +5,12 @@
 	<key>application</key>
 	<integer>1</integer>
 	<key>custom</key>
-	<string>on alfred_script(shellCmd)
+	<string># INFO to be entered in the Alfred Terminal settings
+# alfredpreferences://navigateto/features&gt;terminal
+# (Kept here just for reference.)
+--------------------------------------------------------------------------------
+
+on alfred_script(shellCmd)
 	# Launch Wezterm if needed (Appname is `WezTerm`, processname is `wezterm-gui`)
 	tell application "WezTerm" to activate
 	tell application "System Events"
