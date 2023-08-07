@@ -97,9 +97,9 @@ local function cmpconfig()
 				compare.offset,
 				compare.recently_used, -- higher
 				compare.score,
+				compare.exact, -- lower
 				compare.kind, -- higher (prioritize snippets)
 				compare.locality,
-				compare.exact, -- lower
 				compare.length,
 				compare.order,
 			},
