@@ -172,17 +172,22 @@ function ac() {
 	if ! command -v ct &>/dev/null; then print "\033[1;33mchromaterm not installed. (\`pip3 install chromaterm\`)\033[0m" && return 1; fi
 	local large_files commit_msg msg_length
 
-	# guard: accidental pushing of large files
+	# guard 1: accidental pushing of large files
 	large_files=$(find . -not -path "**/.git/**" -not -path "**/*.pxd/**" -size +10M)
 	if [[ -n "$large_files" ]]; then
 		print "\033[1;33m$large_files large file(s) detected, aborting."
 		print "$large_files\033[0m"
 		return 1
 	fi
+	# guard 2: forgot quotes
+	if [[ $# -gt 1 && ! -f "$2" ]]; then
+		print "\033[1;33m'$2' not a file, aborting.\033[0m"
+		return 1
+	fi
 
+	# commit msg
 	if [[ $# -eq 0 ]]; then
 		commit_msg="chore"
-		ct git add -A
 	else
 		commit_msg="$1"
 		# ensure no overlength of commit msg
@@ -193,8 +198,13 @@ function ac() {
 			print -z "acp \"$commit_msg\"" # put back into buffer
 			return 1
 		fi
+	fi
+	# adding
+	if [[ $# -gt 1 ]]; then
 		shift
 		ct git add "$@"
+	else
+		ct git add -A
 	fi
 
 	ct git commit -m "$commit_msg"
