@@ -1,6 +1,3 @@
-local u = require("config.utils")
---------------------------------------------------------------------------------
-
 return {
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
