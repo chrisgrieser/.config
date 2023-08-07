@@ -356,11 +356,11 @@ return {
 					},
 					-- highlights $n
 					[types.insertNode] = {
-						unvisited = { virt_text = { { "| :insert", "Conceal" } }},
+						unvisited = { virt_text = { { "󰗧", "Conceal" } }},
 					},
 					-- $0
 					[types.exitNode] = {
-						unvisited = { virt_text = { { "|", "Conceal" } }},
+						unvisited = { virt_text = { { "󰗧", "Conceal" } }},
 					},
 				},
 			}

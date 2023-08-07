@@ -25,6 +25,17 @@ function json2schema() {
 	quicktype --lang=schema --out="${filename_no_ext}_schema.json" "$inputfile"
 }
 
+function yaml2schema() {
+	if ! command -v yq &>/dev/null; then print "\033[1;33myq not installed.\033[0m" && return 1; fi
+	if ! command -v quicktype &>/dev/null; then print "\033[1;33mquicktype not installed.\033[0m" && return 1; fi
+	local inputfile="$1"
+
+	filename_no_ext=$(basename "$inputfile" .json)
+	yq --output-format=yaml '.' "$inputfile" >"$filename_no_ext.yaml"
+	quicktype --lang=schema --out="${filename_no_ext}_schema.json" "$inputfile"
+	rm "$filename_no_ext.json"
+}
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # Helper function, ensures either file, downloaded url, or stdin can be accessed

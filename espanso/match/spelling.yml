@@ -346,3 +346,7 @@ matches:
     replace: browser
     propagate_casing: true
     word: true
+  - trigger: srue
+    replace: sure
+    propagate_casing: true
+    word: true

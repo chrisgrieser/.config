@@ -1,0 +1,77 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/Md2DocxSchema",
+    "definitions": {
+        "Md2DocxSchema": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "verbosity": {
+                    "type": "string"
+                },
+                "fail-if-warnings": {
+                    "type": "boolean"
+                },
+                "table-of-contents": {
+                    "type": "boolean"
+                },
+                "toc-depth": {
+                    "type": "integer"
+                },
+                "number-sections": {
+                    "type": "boolean"
+                },
+                "shift-heading-level-by": {
+                    "type": "integer"
+                },
+                "resource-path": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "reader": {
+                    "type": "string"
+                },
+                "writer": {
+                    "type": "string"
+                },
+                "reference-doc": {
+                    "type": "string"
+                },
+                "filters": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "citeproc": {
+                    "type": "boolean"
+                },
+                "bibliography": {
+                    "type": "string"
+                },
+                "metadata-file": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "bibliography",
+                "citeproc",
+                "fail-if-warnings",
+                "filters",
+                "metadata-file",
+                "number-sections",
+                "reader",
+                "reference-doc",
+                "resource-path",
+                "shift-heading-level-by",
+                "table-of-contents",
+                "toc-depth",
+                "verbosity",
+                "writer"
+            ],
+            "title": "Md2DocxSchema"
+        }
+    }
+}
