@@ -153,7 +153,7 @@ format = " [$symbol$ram_pct]($style)"
 [package]
 format = "[$symbol$version]($style)"
 version_format = "$raw"
-symbol = "󰏗 "
+symbol = "󰏗  "
 style = "dimmed 208"
 
 [custom.alfred]

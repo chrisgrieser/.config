@@ -78,10 +78,11 @@ local function cmpconfig()
 			-- PERF lower values for lag-free performance
 			-- default values: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L18
 			-- explanations: https://github.com/hrsh7th/nvim-cmp/blob/main/doc/cmp.txt#L425
-			throttle = 20,
+			throttle = 15,
 			debounce = 30,
 			max_view_entries = 80,
-			fetching_timeout = 300,
+			async_budget = 0.8,
+			fetching_timeout = 250,
 		},
 		window = {
 			completion = {

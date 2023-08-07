@@ -210,5 +210,9 @@ function run() {
 	}
 
 	writeToFile(subredditCache, JSON.stringify(posts));
-	return JSON.stringify({ items: posts });
+	return JSON.stringify({
+		// workflow handles saving order to be able to remember reading positions
+		skipknowledge: true, 
+		items: posts,
+	});
 }
