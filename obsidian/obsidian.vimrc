@@ -175,6 +175,11 @@ exmap aiWrite obcommand obsidian-textgenerator-plugin:insert-generated-text-From
 nmap ,a :aiWrite
 vmap ,a :aiWrite
 
+
+exmap toggleDevtools obcommand obsidian-theme-design-utilities:toggle-devtools
+exmap obsidian-auto-link-title:enhance-url-with-title
+exmap ,c
+
 """"""""""""""""""""""
 " Line-Based Editing
 """"""""""""""""""""""
