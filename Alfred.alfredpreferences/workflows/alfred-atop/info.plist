@@ -1220,7 +1220,7 @@ JSON.stringify({ 'items': volume_array });
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
-				<integer>2</integer>
+				<integer>1</integer>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
@@ -1248,7 +1248,7 @@ JSON.stringify({ 'items': volume_array });
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
@@ -1267,9 +1267,9 @@ JSON.stringify({ 'items': volume_array });
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string>{query}</string>
+				<string>{var:server_name}</string>
 				<key>title</key>
-				<string>✅ DNS server: {var:server_name}</string>
+				<string>✅ DNS server changed</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
