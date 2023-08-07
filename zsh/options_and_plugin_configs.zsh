@@ -33,7 +33,8 @@ export EXA_STRICT=1
 
 export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgrep-config"
 
-export MAGIC_ENTER_GIT_COMMAND=" inspect" # leading space to ignore it in history due to HIST_IGNORE_SPACE
+# leading space to ignore it in history due to HIST_IGNORE_SPACE
+export MAGIC_ENTER_GIT_COMMAND=" inspect" 
 export MAGIC_ENTER_OTHER_COMMAND=" inspect"
 
 # zoxide
