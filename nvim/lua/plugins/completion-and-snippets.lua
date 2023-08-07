@@ -350,17 +350,17 @@ return {
 				update_events = "TextChanged,TextChangedI", -- live updating of snippets
 				enable_autosnippets = true, -- for javascript "if ()"
 				ext_opts = {
-					-- highlight when at a choice node https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#ext_opts
+					-- choice node https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#ext_opts
 					[types.choiceNode] = {
-						active = { hl_group = "DiagnosticHint", virt_text = { { "󰊖 ", "DiagnosticHint" } } },
+						active = { virt_text = { { "󰊖 ", "DiagnosticHint" } } },
 					},
-					-- highlights $n
+					-- $n
 					[types.insertNode] = {
-						unvisited = { virt_text = { { "󰗧", "Conceal" } }},
+						unvisited = { virt_text = { { "", "Conceal" } }},
 					},
 					-- $0
 					[types.exitNode] = {
-						unvisited = { virt_text = { { "󰗧", "Conceal" } }},
+						unvisited = { virt_text = { { "", "Conceal" } }},
 					},
 				},
 			}

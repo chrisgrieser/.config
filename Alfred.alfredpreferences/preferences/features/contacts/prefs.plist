@@ -2,6 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>customFields</key>
+	<array>
+		<dict>
+			<key>action</key>
+			<string>default.urlscheme</string>
+			<key>schemeurl</key>
+			<string>tel:{query}</string>
+			<key>uid</key>
+			<string>alfred.contact.field.phone</string>
+		</dict>
+	</array>
 	<key>mapURL</key>
 	<string>https://maps.google.com/?q={query}</string>
 </dict>
