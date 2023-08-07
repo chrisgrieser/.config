@@ -409,12 +409,18 @@ function run(argv) {
 	// LOGGING
 	const useFaviconSetting = $.getenv("use_favicons") === "1";
 	const durationTotalSecs = (+new Date() - timelogStart) / 1000;
-	let log = `${durationTotalSecs}s, `;
-	if (useFaviconSetting && !noNeedToBuffer) log += `${favIconTotalDurationSecs}s, `
-	log += `${query}`;
-	if (mode === "default") log = "Total: " + log;
-	else if (mode === "rerun") log = "__" + log; // indented to make it easier to read (using `__`, since Alfred removes leading whitespace)
-	else log += ` (${mode})`;
+	let log
+	let time = `${durationTotalSecs}s`;
+	if (useFaviconSetting && !noNeedToBuffer) time += `, ${favIconTotalDurationSecs}s`
+	if (mode === "default")  {
+		log = `Total: ${time}, ${query}`;
+	} else if (mode === "rerun") {
+		log = "____" + time; // indented to make it easier to read 
+	} else if (mode === "multi-select") {
+		log = `Total: ${time}, ${query} (${mode})`; 
+	} else if (mode === "fallback") {
+	}
+
 	console.log(log);
 
 	return alfredInput;
