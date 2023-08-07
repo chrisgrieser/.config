@@ -57,7 +57,7 @@
 	},
 	"set clipboard (string)": {
 		"prefix": "set clipboard (string)",
-		"body": "app.setTheClipboardTo(\"${1:str}\");"
+		"body": "app.setTheClipboardTo(${1:\"str\"});"
 	},
 	"set clipboard (file)": {
 		"prefix": "set clipboard (file)",

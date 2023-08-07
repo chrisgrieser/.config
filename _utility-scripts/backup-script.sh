@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+if ! command -v ct &>/dev/null; then print "\033[1;33mct not installed.\033[0m" && return 1; fi
+
+
 # CONFIG
 LOG_LOCATION="$DATA_DIR/Backups/backups-to-external-drives.log"
 
@@ -40,15 +43,12 @@ echo -n "Backup: $(date '+%Y-%m-%d %H:%M'), $VOLUME_NAME -- " >>"$LOG_LOCATION"
 errors=""
 function backup() {
 	[[ ! -d "$1" ]] && errors="$errors\n$1 does not exist."
-	print -n "\033[1;34m"
-	echo
-	echo "──────────────────────────────────────────────────────"
+	print "\033[1;34m─────────────────────────────────────────────────────────────────────────────"
 	echo "Backing up: $1"
-	echo -n "──────────────────────────────────────────────────────"
-	print "\033[0m"
+	print "─────────────────────────────────────────────────────────────────────────────\033[0m"
 	mkdir -p "$2"
 	# --delete-during the fastest deletion method, --arcive already implies --recursive
-	rsync --archive --delete-during --progress --exclude="*.Trash/*" "$1" "$2"
+	ct rsync --archive --delete-during --progress --human-readable --exclude="*.Trash/*" "$1" "$2"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -68,7 +68,7 @@ backup "$HOME/Library/Mobile Documents/com~apple~CloudDocs/" ./iCloud-Folder
 
 #───────────────────────────────────────────────────────────────────────────────
 echo
-print "\033[1;34m----------------------------------------------------\033[0m"
+print "\033[1;34m─────────────────────────────────────────────────────────────────────────────\033[0m"
 echo
 [[ -n "$errors" ]] && print "\033[1;31m$errors\033[0m"
 
