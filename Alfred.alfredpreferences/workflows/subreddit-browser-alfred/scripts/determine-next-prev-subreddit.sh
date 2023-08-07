@@ -1,7 +1,8 @@
 #!/usr/bin/env zsh
 # shellcheck disable=2154
 
-cur_subreddit="$1"
+direction="$1"
+cur_subreddit=$(cat "$alfred_workflow_cache/current_subreddit")
 
 if [[ "$direction" == "next" ]]; then
 	next_subreddit=$(echo "$subreddits" | grep -A1 "$cur_subreddit" | tail -n1)

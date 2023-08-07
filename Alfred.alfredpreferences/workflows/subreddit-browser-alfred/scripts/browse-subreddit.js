@@ -95,15 +95,8 @@ function getHackernewsPosts() {
 			arg: commentUrl,
 			icon: { path: "hackernews.png" },
 			mods: {
-				// pass current "subreddit" to determine next/prev subreddit
-				cmd: {
-					arg: "hackernews",
-					variables: { direction: "next" }
-				},
-				["cmd+shift"]: {
-					arg: "hackernews",
-					variables: { direction: "prev" }
-				},
+				cmd: { arg: "next" },
+				["cmd+shift"]: { arg: "prev" },
 				shift: { arg: externalUrl },
 			},
 		};
@@ -166,15 +159,8 @@ function getRedditPosts(subredditName) {
 			arg: commentUrl,
 			icon: { path: iconPath },
 			mods: {
-				// pass current "subreddit" to determine next/prev subreddit
-				cmd: {
-					arg: subredditName,
-					variables: { direction: "next" }
-				},
-				["cmd+shift"]: {
-					arg: subredditName,
-					variables: { direction: "prev" }
-				},
+				cmd: { arg: "next" },
+				["cmd+shift"]: { arg: "prev" },
 				shift: {
 					valid: !isOnReddit,
 					arg: externalUrl,
@@ -196,10 +182,10 @@ function getRedditPosts(subredditName) {
 function run() {
 	// determine subreddit
 	const topSubreddit = $.getenv("subreddits").split("\n")[0]; // only needed for first run
-	const currentSubreddit = readFile($.getenv("alfred_workflow_cache") + "/current_subreddit");
+	const curSubreddit = readFile($.getenv("alfred_workflow_cache") + "/current_subreddit");
 	const selectedSubreddit = $.NSProcessInfo.processInfo.environment.objectForKey("selected_subreddit").js;
-	const subredditName = selectedSubreddit || currentSubreddit || topSubreddit;
-	if (subredditName !== currentSubreddit) {
+	const subredditName = selectedSubreddit || curSubreddit || topSubreddit;
+	if (subredditName !== curSubreddit) {
 		writeToFile($.getenv("alfred_workflow_cache") + "/current_subreddit", subredditName);
 	}
 
