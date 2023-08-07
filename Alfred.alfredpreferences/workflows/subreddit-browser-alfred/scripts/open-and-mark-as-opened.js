@@ -25,12 +25,23 @@ function run(argv) {
 	const selectedUrl = argv[0];
 	app.openLocation(selectedUrl);
 
+	//───────────────────────────────────────────────────────────────────────────
+
 	// PERF re-order the cache now, so next run is done quicker
 	// also simplifies code by being able to manage everything in this one file
 	const curSubreddit = readFile($.getenv("alfred_workflow_cache") + "/current_subreddit");
 	const subredditCachePath = `${$.getenv("alfred_workflow_cache")}/${curSubreddit}.json`;
 
-	/** @type{AlfredItem[]} */
+	/** @type{(AlfredItem&{selected:boolean})[]} */
 	const subredditCache = JSON.parse(readFile(subredditCachePath));
-	const selectedItemIdx = subredditCache.findIndex((item) => item.arg === selectedUrl);
+	const selectedItemIdx = subredditCache.findIndex(
+		(item) => item.arg === selectedUrl || item.mods.shift.arg === selectedUrl,
+	);
+	// change the order, so that the part scrolled over goes to the bottom, and
+	// the part not scrolled over gets to the top. 
+	// using `Infinity` to always read till the end of the array. Using `splice`
+	// over `slice` so we also change the original array in-place
+	const unreadCache = subredditCache.splice(selectedItemIdx + 1, Infinity);
+	const reOrderedCache = unreadCache.concat(subredditCache);
+	writeToFile(subredditCachePath, JSON.stringify(reOrderedCache));
 }

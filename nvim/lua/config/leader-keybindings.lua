@@ -74,8 +74,8 @@ keymap("n", "<leader>fy", ":g//y<Left><Left>", { desc = "󱗘 :yank matching lin
 
 keymap("n", "<leader>f<Tab>", function()
 	bo.expandtab = false
+	bo.tabstop = 3
 	cmd.retab { bang = true }
-	bo.tabstop = vim.opt_global.tabstop:get()
 	vim.notify("Now using tabs ↹ ")
 end, { desc = "↹ Use Tabs" })
 

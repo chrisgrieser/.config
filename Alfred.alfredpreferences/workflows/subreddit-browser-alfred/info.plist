@@ -51,7 +51,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>7984AFF9-05D8-4F7C-AEE3-C381AA4AD6A0</string>
+				<string>FF2B7000-6AD9-42B6-825C-E952CD707CFE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -143,7 +143,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>7984AFF9-05D8-4F7C-AEE3-C381AA4AD6A0</string>
+				<string>FF2B7000-6AD9-42B6-825C-E952CD707CFE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -166,23 +166,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
+				<key>concurrently</key>
 				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
 				<string></string>
-				<key>url</key>
-				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/open-and-mark-as-opened.js</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>7984AFF9-05D8-4F7C-AEE3-C381AA4AD6A0</string>
+			<string>FF2B7000-6AD9-42B6-825C-E952CD707CFE</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>type</key>
@@ -338,29 +340,6 @@
 			<string>3381D52B-F37A-422A-BB73-2654C0280799</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/open-and-mark-as-opened.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>FF2B7000-6AD9-42B6-825C-E952CD707CFE</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -538,15 +517,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>440</real>
 		</dict>
-		<key>7984AFF9-05D8-4F7C-AEE3-C381AA4AD6A0</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>575</real>
-			<key>ypos</key>
-			<real>60</real>
-		</dict>
 		<key>8851C420-3E80-4797-80F1-31999E4C2F54</key>
 		<dict>
 			<key>colorindex</key>
@@ -601,16 +571,20 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>465</real>
+			<real>470</real>
 			<key>ypos</key>
-			<real>90</real>
+			<real>70</real>
 		</dict>
 		<key>FF2B7000-6AD9-42B6-825C-E952CD707CFE</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>open URL and re-order subreddit cache</string>
 			<key>xpos</key>
-			<real>985</real>
+			<real>575</real>
 			<key>ypos</key>
-			<real>240</real>
+			<real>40</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
