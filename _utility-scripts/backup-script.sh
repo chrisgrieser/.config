@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-if ! command -v ct &>/dev/null; then print "\033[1;33mct not installed.\033[0m" && return 1; fi
+if ! command -v ct &>/dev/null; then print "\033[1;33mchrometerm not installed.\033[0m" && return 1; fi
 
 
 # CONFIG
@@ -40,15 +40,19 @@ echo -n "Backup: $(date '+%Y-%m-%d %H:%M'), $VOLUME_NAME -- " >>"$LOG_LOCATION"
 #───────────────────────────────────────────────────────────────────────────────
 
 # Helper function
-errors=""
+errors="" # accumulator for errors
 function backup() {
-	[[ ! -d "$1" ]] && errors="$errors\n$1 does not exist."
+	local bkp_from="$1"
+	local bkp_to="$2"
+	[[ ! -d "$bkp_from" ]] && errors="$errors\n$bkp_from does not exist."
+	echo
 	print "\033[1;34m─────────────────────────────────────────────────────────────────────────────"
-	echo "Backing up: $1"
+	echo "Backing up: $bkp_from"
 	print "─────────────────────────────────────────────────────────────────────────────\033[0m"
-	mkdir -p "$2"
+	mkdir -p "$bkp_to"
 	# --delete-during the fastest deletion method, --arcive already implies --recursive
-	ct rsync --archive --delete-during --progress --human-readable --exclude="*.Trash/*" "$1" "$2"
+	ct rsync --archive --delete-during --progress --human-readable \
+		--exclude="*.Trash/*" "$bkp_from" "$bkp_to"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
