@@ -181,6 +181,7 @@ function getFavicon(topDomain, noNeedToBuffer) {
 			// With `curl --fail`, it will exit non-zero instead. However,
 			// errors make `doShellScript` fail, so we need to use `try/catch`
 			try {
+				// PERF use favicon instead of touchicon (also more often available)
 				// const imageUrl = `https://${topDomain}/apple-touch-icon.png`;
 				const imageUrl = `https://${topDomain}/favicon.ico`;
 				app.doShellScript(`curl --location --fail "${imageUrl}" --output "${targetFile}"`);

@@ -21,7 +21,7 @@
         "font" : "Lucida Grande",
         "color" : "#FDFDFDFF"
       },
-      "iconPaddingHorizontal" : 7,
+      "iconPaddingHorizontal" : 12,
       "roundness" : 7,
       "paddingVertical" : 7,
       "iconSize" : 56
@@ -37,18 +37,18 @@
         "color" : "#FDFDFDFF"
       },
       "background" : "#0000007F",
-      "roundness" : 12,
+      "roundness" : 9,
       "paddingVertical" : 6
     },
     "window" : {
       "color" : "#454545FF",
-      "paddingHorizontal" : 10,
+      "paddingHorizontal" : 12,
       "width" : 1024,
-      "borderPadding" : 9,
+      "borderPadding" : 6,
       "borderColor" : "#4141417F",
       "blur" : 0,
-      "roundness" : 9,
-      "paddingVertical" : 11
+      "roundness" : 16,
+      "paddingVertical" : 12
     },
     "credit" : "pseudometa",
     "separator" : {

@@ -395,12 +395,8 @@
 			</dict>
 			<key>inboundconfig</key>
 			<dict>
-				<key>custominputarg</key>
-				<string>{query}</string>
 				<key>externalid</key>
 				<string>fzf-loop</string>
-				<key>usecustominputarg</key>
-				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
@@ -541,7 +537,7 @@
 				<key>externaltriggerid</key>
 				<string>fzf-loop</string>
 				<key>passinputasargument</key>
-				<true/>
+				<false/>
 				<key>passvariables</key>
 				<true/>
 				<key>workflowbundleid</key>
