@@ -175,10 +175,14 @@ exmap aiWrite obcommand obsidian-textgenerator-plugin:insert-generated-text-From
 nmap ,a :aiWrite
 vmap ,a :aiWrite
 
-
+" toggle devtools (binding as will the debugger)
 exmap toggleDevtools obcommand obsidian-theme-design-utilities:toggle-devtools
-exmap obsidian-auto-link-title:enhance-url-with-title
-exmap ,c
+nmap ,b :toggleDevtools
+vmap ,b :toggleDevtools
+
+" code action: enhance URL with title
+exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-title
+nmap ,c :enhanceUrlWithTitle
 
 """"""""""""""""""""""
 " Line-Based Editing

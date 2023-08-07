@@ -1371,10 +1371,12 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>FDF6DA7A-36B0-47DE-8396-66D12C630E60</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
 			<key>note</key>
 			<string>paste</string>
 			<key>xpos</key>
-			<real>545</real>
+			<real>530</real>
 			<key>ypos</key>
 			<real>355</real>
 		</dict>
