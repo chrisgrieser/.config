@@ -116,9 +116,9 @@ local keybindings = {
 		key = "e",
 		mods = "CMD",
 		action = act.Multiple {
-			act.SendString([[\`\`]]),
+			act.SendString("``"),
 			act.SendKey { key = "LeftArrow" },
-			act.SendKey { key = "LeftArrow" },
+			act.SendKey { key = "LeftArrow" }, -- 2nd to move into auto-added backslash
 		},
 	},
 

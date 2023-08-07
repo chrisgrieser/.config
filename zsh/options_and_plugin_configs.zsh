@@ -14,15 +14,10 @@ setopt AUTO_CD              # pure directory = cd into it
 # comments in interactive mode (useful for copypasting)
 setopt INTERACTIVE_COMMENTS
 
-# but when typing hashes, escape them so they aren't turned into comments
-function autoEscapeHash() { LBUFFER+='\#' ; }
-zle -N autoEscapeBacktick
-bindkey -M viins '#' autoEscapeHash
-
 #───────────────────────────────────────────────────────────────────────────────
 # CLI SETTINGS
 
-export YSU_IGNORED_ALIASES=("bi" "bu") # due to homebrew Alfred workflow
+export YSU_IGNORED_ALIASES=("bi") # due to homebrew Alfred workflow
 export YSU_MESSAGE_POSITION="after"
 
 export FZF_DEFAULT_COMMAND='fd --hidden'

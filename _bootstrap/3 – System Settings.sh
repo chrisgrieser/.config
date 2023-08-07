@@ -9,13 +9,20 @@ sudo -v # ask for permissions upfront
 #───────────────────────────────────────────────────────────────────────────────
 # SYSTEM PREFS
 
-# Cloudflare DNS
+# Cloudflare
+dns_address_1="1.1.1.1"
+dns_address_2="1.0.0.1"
+
+# Google
+# dns_address_1="8.8.8.8"
+# dns_address_2="8.8.4.4"
+
+networksetup -listallnetworkservices | # list all
+	tail -n +2 | # skip info text
+	tr -d "*" | # remove "*" markings disabled services
+	xargs -I {} networksetup -setdnsservers {} "$dns_address_1" "$dns_address_2"
 networksetup -setdnsservers Wi-Fi 1.1.1.1 1.0.0.1
 networksetup -setdnsservers Ethernet 1.1.1.1 1.0.0.1
-
-# Google DNS
-# networksetup -setdnsservers Wi-Fi 8.8.8.8 8.8.4.4
-# networksetup -setdnsservers Ethernet 8.8.8.8 8.8.4.4
 
 #───────────────────────────────────────────────────────────────────────────────
 # FINDER
