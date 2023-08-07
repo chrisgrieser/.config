@@ -616,20 +616,60 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<key>default</key>
 				<string>15</string>
 				<key>placeholder</key>
-				<string>10</string>
+				<string>20</string>
 				<key>required</key>
 				<true/>
 				<key>trim</key>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>After this many minutes, the cache will be refreshed.</string>
+			<string>After this many minutes, the cache will be refreshed, and reading positions will be reset.</string>
 			<key>label</key>
-			<string>Cache Age Threshold</string>
+			<string>Refresh Internal</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>cache_age_threshold</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<true/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>enabled</string>
+			</dict>
+			<key>description</key>
+			<string>Upon visiting a link, move the item and all items above it to the bottom.</string>
+			<key>label</key>
+			<string>Save Reading Position</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>save_scroll_position</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+			</dict>
+			<key>description</key>
+			<string>Advanced: Directory where this workflow will save the subreddit icons. You can override the icons in that folder, to customize subreddit icons. (Leave empty to default to Alfred's Workflow Data storage.)</string>
+			<key>label</key>
+			<string>Subreddit Icons Location</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>custom_subreddit_icons</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -687,27 +727,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<string>checkbox</string>
 			<key>variable</key>
 			<string>use_dstill_ai</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string></string>
-				<key>filtermode</key>
-				<integer>1</integer>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
-				<false/>
-			</dict>
-			<key>description</key>
-			<string>Advanced: Directory where this workflow will save the subreddit icons. You can override the icons in that folder, to customize subreddit icons. (Leave empty to default to Alfred's Workflow Data storage.)</string>
-			<key>label</key>
-			<string>Subreddit Icons Location</string>
-			<key>type</key>
-			<string>filepicker</string>
-			<key>variable</key>
-			<string>custom_subreddit_icons</string>
 		</dict>
 	</array>
 	<key>version</key>
