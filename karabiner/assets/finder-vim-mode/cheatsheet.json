@@ -55,15 +55,9 @@
     "^",
     {
       "c": "#a6d1ff",
-      "f": 1,
-      "fa": [
-        2
-      ]
-    },
-    "1\ntoggle tag #1",
-    {
       "f": 2
     },
+    "1\ntoggle tag #1",
     "2\ntoggle tag #2",
     "3\ntoggle tag #3",
     "4\ntoggle tag #4",
@@ -76,7 +70,7 @@
     {
       "c": "#ffb896"
     },
-    "? [de]\n:help",
+    "de: ?\n:help",
     {
       "c": "#CCCCCC",
       "f": 4
@@ -228,11 +222,11 @@
       "f": 1
     },
     "l (L)\nopen file (new win)\n\n\n⌃l forw",
+    "de:&nbspö,&nbspen:&nbsp;;\ntoggle grouping",
     {
       "c": "#CCCCCC",
       "f": 2
     },
-    "ö",
     "ä",
     "#",
     {
@@ -302,7 +296,7 @@
     {
       "c": "#ffb896"
     },
-    "? [en]<br>:help\n-&nbsp;[de]&nbsp;/&nbsp;[en] Search",
+    "en: ?<br>:help\nde:&nbsp–,&nbspen:&nbsp/ Search",
     {
       "c": "#999999",
       "a": 7,

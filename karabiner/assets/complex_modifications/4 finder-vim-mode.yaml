@@ -600,6 +600,14 @@ rules:
                   click menu item "Show Preview Options" of menu "View" of menu bar 1
                 end tell'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      # ö (de) / ; (en) = toggle grouping
+      - type: basic
+        from: { key_code: semicolon } # ö in German 
+        to_if_alone:
+          - { key_code: "0", modifiers: [command, control] }
+        # No keyboard-specific condition needed, since it's the same key
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      - type: basic
       # u = undo
       - type: basic
         from: { key_code: u }
