@@ -290,7 +290,7 @@ rules:
           - key_code: escape
           - *remove-insert-notice
           - *leave-insert-mode
-          - *remove-insert-notice
+          - *remove-menu-notice
           - *end-menu
           - *remove-move-notice
           - *end-move
@@ -308,7 +308,7 @@ rules:
           - key_code: escape
           - *remove-insert-notice
           - *leave-insert-mode
-          - *remove-insert-notice
+          - *remove-menu-notice
           - *end-menu
           - *remove-move-notice
           - *end-move
@@ -322,7 +322,7 @@ rules:
           - { key_code: q, modifiers: [command] }
           - *remove-insert-notice
           - *leave-insert-mode
-          - *remove-insert-notice
+          - *remove-menu-notice
           - *end-menu
           - *remove-move-notice
           - *end-move
@@ -339,7 +339,7 @@ rules:
               afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/screen_sharing_started.caf" &
           - *remove-insert-notice
           - *leave-insert-mode
-          - *remove-insert-notice
+          - *remove-menu-notice
           - *end-menu
           - *remove-move-notice
           - *end-move
@@ -353,7 +353,7 @@ rules:
           - { key_code: w, modifiers: [command] }
           - *remove-insert-notice
           - *leave-insert-mode
-          - *remove-insert-notice
+          - *remove-menu-notice
           - *end-menu
           - *remove-find-notice
           - *leave-find-mode
