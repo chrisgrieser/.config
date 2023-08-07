@@ -187,6 +187,7 @@ return {
 	},
 	{ -- color previews & color picker
 		"uga-rosa/ccc.nvim",
+		cmd = { "CccHighlighterEnable" }, -- enable manually via command
 		keys = {
 			{ "#", vim.cmd.CccPick, desc = " Color Picker" },
 			{ "'", vim.cmd.CccConvert, desc = " Convert Color" }, -- shift-# on German keyboard

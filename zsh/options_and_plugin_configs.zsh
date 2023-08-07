@@ -6,7 +6,7 @@
 # sets English everywhere, so that programs behave predictably
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
-export LC_CTYPE="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8" # fixes encoding issue when copying
 
 # OPTIONS -- https://zsh.sourceforge.io/Doc/Release/Options.html
 setopt AUTO_CD              # pure directory = cd into it
