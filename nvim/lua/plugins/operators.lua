@@ -30,6 +30,7 @@ return {
 			{ "qf", function() require("neogen").generate() end, desc = " Comment Function" },
 		},
 		dependencies = "nvim-treesitter/nvim-treesitter",
+		opts = true,
 	},
 	{ -- substitute
 		"gbprod/substitute.nvim",

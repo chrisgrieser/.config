@@ -133,8 +133,8 @@ function M.timelog()
 			"local timelogStart = os.time()",
 		}
 		logStatement2 = {
-			"local duration = os.difftime(os.time(), timelogStart)",
-			'print("%s timelog:", duration, "s")',
+			"local durationSecs = os.difftime(os.time(), timelogStart)",
+			'print("%s timelog:", durationSecs, "s")',
 		}
 	elseif ft == "javascript" then
 		-- JXA does not support console.time()
@@ -143,8 +143,8 @@ function M.timelog()
 			"const timelogStart = +new Date();",
 		}
 		logStatement2 = {
-			"const duration = (+new Date() - timelogStart) / 1000;",
-			'console.log("%s timelog:", duration, "s");',
+			"const durationSecs = (+new Date() - timelogStart) / 1000;",
+			'console.log("%s timelog:", durationSecs, "s");',
 		}
 	elseif ft == "typescript" then
 		logStatement1 = {
@@ -159,8 +159,8 @@ function M.timelog()
 			'echo "%s time start"',
 		}
 		logStatement2 = {
-			"timelogEnd=$(date +%s) && runtime = $((timelogEnd - timelogStart))",
-			'echo "%s time ${runtime}s"',
+			"timelogEnd=$(date +%s) && durationSecs = $((timelogEnd - timelogStart))",
+			'echo "%s time ${durationSecs}s"',
 		}
 	else
 		vim.notify("Timelog does not support " .. ft .. " yet.", logWarn)
