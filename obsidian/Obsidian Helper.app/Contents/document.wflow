@@ -131,16 +131,16 @@ function run(argv) {
 				<key>Class Name</key>
 				<string>RunJavaScriptAction</string>
 				<key>InputUUID</key>
-				<string>D8574E26-FD24-4198-AEED-F7651D2C97D9</string>
+				<string>10C6C9D4-F2FD-47D8-95CE-F58F9EAA3251</string>
 				<key>Keywords</key>
 				<array>
 					<string>Run</string>
 					<string>JavaScript</string>
 				</array>
 				<key>OutputUUID</key>
-				<string>213A5F58-FB47-4AA5-A818-FEDA8E40AB63</string>
+				<string>B766CD21-A749-4DC7-96E4-D20EF5328643</string>
 				<key>UUID</key>
-				<string>0A67A94D-4E27-406A-93FB-8713B604F730</string>
+				<string>5416CD58-735A-4EA2-BEE6-08C8CD9571BC</string>
 				<key>UnlocalizedApplications</key>
 				<array>
 					<string>Automator</string>
@@ -166,6 +166,8 @@ function run(argv) {
 						<string>0</string>
 					</dict>
 				</dict>
+				<key>conversionLabel</key>
+				<integer>0</integer>
 				<key>isViewVisible</key>
 				<integer>1</integer>
 				<key>location</key>
