@@ -23,11 +23,8 @@ alias bu='brew uninstall --zap'
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# colorize via chromaterm
-if command -v ct &>/dev/null; then
-	# recursive -> affects all brew commands
-	alias brew="ct brew"
-fi
+# colorize via chromaterm (recursive -> affects all brew commands)
+command -v ct &>/dev/null && alias brew="ct brew"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -41,10 +38,9 @@ function dump() {
 	local dump_path="$DOTFILE_FOLDER/_installed-apps-and-packages/"
 	local device_name
 	device_name=$(scutil --get ComputerName | cut -d" " -f2-)
-	brew bundle dump --force --file "$dump_path/Brewfile_$device_name"
-	# INFO `command` to skip my npm alias
-	command npm list --location=global --parseable | sed "1d" | sed -E "s/.*\///" >"$dump_path/NPMfile_$device_name"
-	# pip3 list --not-required | tail -n+3 | cut -d" " -f1 >"$dump_path/Pip3file_$device_name"
+	brew bundle dump --force --file "$dump_path/Brewfile_$device_name.txt"
+	npm list --location=global --parseable | sed "1d" | sed -E "s/.*\///" >"$dump_path/NPMfile_$device_name.txt"
+	pip3 list --not-required | tail -n+3 | cut -d" " -f1 >"$dump_path/Pip3file_$device_name.txt"
 
 	# shellcheck disable=2012
 	command ls "$HOME/Library/Application Support/$BROWSER_DEFAULTS_PATH/Default/Extensions/" |
@@ -63,7 +59,7 @@ function update() {
 	mas upgrade
 
 	print-section "NPM"
-	command npm update --location=global
+	npm update --location=global
 
 	print-section "DUMP INSTALL LISTS"
 	dump
@@ -91,6 +87,9 @@ function report() {
 
 	print-section "NPM"
 	npm list --location=global
+
+	print-section "Pip"
+	pip list --not-required
 
 	print-section "DUMP INSTALLS"
 	dump

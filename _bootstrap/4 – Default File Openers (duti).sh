@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 # https://chainsawonatireswing.com/2012/09/19/changing-default-applications-on-a-mac-using-the-command-line-then-a-shell-script/
-#-------------------------------------------------------------------------------
-if ! command -v duti &>/dev/null; then echo "duti not installed." && return 1; fi
+#───────────────────────────────────────────────────────────────────────────────
+brew install duti
 
 open "$DOTFILE_FOLDER/nvim/mac-helper/Neovim.app" # open once to initialize
 
@@ -74,3 +74,5 @@ duti -s "org.m0k.transmission" torrent all
 duti -s "com.busymac.busycal3" ics all
 duti -s "com.apple.archiveutility" zip all
 duti -s "org.m0k.transmission" magnet
+
+brew uninstall duti

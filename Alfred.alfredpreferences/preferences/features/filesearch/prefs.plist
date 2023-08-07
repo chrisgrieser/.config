@@ -10,5 +10,9 @@
 	<integer>1</integer>
 	<key>runAppleScripts</key>
 	<false/>
+	<key>touchAliases</key>
+	<false/>
+	<key>touchFolders</key>
+	<false/>
 </dict>
 </plist>
