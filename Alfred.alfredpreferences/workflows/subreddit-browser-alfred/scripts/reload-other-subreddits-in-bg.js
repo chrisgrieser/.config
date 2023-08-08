@@ -26,23 +26,29 @@ function writeToFile(filepath, text) {
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	// guard: cache was not updated
-	const cacheWasUpdated = $.getenv("cache_was_updated") === "true";
-	if (!cacheWasUpdated) return;
+	const cachesUpToDate = $.getenv("cache_was_updated") === "false";
+	if (cachesUpToDate) return;
 
 	// import subreddit-loading-functions
 	// HACK read + eval, since JXA knows no import keyword
-	const fileToImport = readFile("./scripts/browse-subreddits.js");
-	console.log("[QL] fileToImport:", fileToImport);
-	eval(fileToImport);
-	if (true) return
+	const fileToImport =(
+		$.getenv("alfred_preferences") +
+			"/workflows/" +
+			$.getenv("alfred_workflow_uid") + // = foldername
+			"/scripts/browse-subreddit.js"
+	);
+	eval(readFile(fileToImport));
 
+	// determine the other subreddits
 	const curSubreddit = readFile($.getenv("alfred_workflow_cache") + "/current_subreddit");
-	const otherSubreddits = $.getenv("subreddits")
-		.split("\n")
-		.filter((subreddit) => subreddit !== curSubreddit);
+	const allSubreddits = $.getenv("subreddits").split("\n")
+	if($.getenv("add_hackernews") === "1") allSubreddits.push("hackernews");
+	const otherSubreddits = allSubreddits.filter((subreddit) => subreddit !== curSubreddit);
 
+	// reload cache for them
 	otherSubreddits.forEach((subredditName) => {
 		const subredditCache = `${$.getenv("alfred_workflow_cache")}/${subredditName}.json`;
+		console.log("Reloading cache for " + subredditName);
 
 		// read old cache
 		const oldUrls = fileExists(subredditCache)

@@ -78,7 +78,7 @@ function getHackernewsPosts(oldUrls) {
 
 	/** @type{AlfredItem[]} */
 	const hits = JSON.parse(response).hits.map((/** @type {hackerNewsItem} */ item) => {
-		const externalUrl = item.url;
+		const externalUrl = item.url || "";
 		const commentUrl = useDstillAi
 			? "https://dstill.ai/hackernews/item/" + item.objectID
 			: "https://news.ycombinator.com/item?id=" + item.objectID;
@@ -158,7 +158,7 @@ function getRedditPosts(subredditName, oldUrls) {
 		const item = data.data;
 
 		const commentUrl = `https://${oldReddit}.reddit.com${item.permalink}`;
-		const externalUrl = item.url;
+		const externalUrl = item.url || "";
 		const isOnReddit = item.domain.includes("redd.it") || item.domain.startsWith("self.");
 		const emoji = isOnReddit ? "" : "🔗 ";
 

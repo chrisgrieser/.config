@@ -16,6 +16,8 @@ function readFile(path) {
 	return ObjC.unwrap(str);
 }
 
+const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -25,11 +27,15 @@ function run(argv) {
 	const selectedUrl = argv[0];
 	const curSubreddit = readFile($.getenv("alfred_workflow_cache") + "/current_subreddit");
 	const subredditCachePath = `${$.getenv("alfred_workflow_cache")}/${curSubreddit}.json`;
+
+	if (!fileExists(subredditCachePath)) return;
+
 	/** @type{AlfredItem[]} */
-	const subredditCache = JSON.parse(readFile(subredditCachePath) || "[]");
+	const subredditCache = JSON.parse(readFile(subredditCachePath));
 	const selectedItemIdx = subredditCache.findIndex(
 		(item) => item.arg === selectedUrl || item.mods.shift.arg === selectedUrl,
 	);
+	console.log("[QL] selectedItemIdx:", selectedItemIdx);
 
 	// mark the selected item as visited such for the next run
 	const visitedIcon = "🟪 ";
@@ -39,6 +45,7 @@ function run(argv) {
 	// the part not scrolled over gets to the top.
 	const reorderItems = $.getenv("save_scroll_position") === "1";
 	if (reorderItems) {
+		console.log("Re-ordering items.");
 		// using `Infinity` to always read till the end of the array. Using `splice`
 		// over `slice` so we also change the original array in-place
 		const unreadCache = subredditCache.splice(selectedItemIdx + 1, Infinity);

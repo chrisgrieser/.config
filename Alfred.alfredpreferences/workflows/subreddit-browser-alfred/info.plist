@@ -656,7 +656,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>background reload caches of other subreddit</string>
+			<string>PERF background reload caches of other subreddit</string>
 			<key>xpos</key>
 			<real>760</real>
 			<key>ypos</key>

@@ -10,6 +10,8 @@
 	<string>20</string>
 	<key>custom_subreddit_icons</key>
 	<string>~/.config/Alfred.alfredpreferences/subreddit_icons</string>
+	<key>save_scroll_position</key>
+	<true/>
 	<key>subreddits</key>
 	<string>neovim
 macapps
