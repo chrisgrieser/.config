@@ -26,7 +26,7 @@ function run(argv) {
 	const curSubreddit = readFile($.getenv("alfred_workflow_cache") + "/current_subreddit");
 	const subredditCachePath = `${$.getenv("alfred_workflow_cache")}/${curSubreddit}.json`;
 	/** @type{AlfredItem[]} */
-	const subredditCache = JSON.parse(readFile(subredditCachePath));
+	const subredditCache = JSON.parse(readFile(subredditCachePath) || "[]");
 	const selectedItemIdx = subredditCache.findIndex(
 		(item) => item.arg === selectedUrl || item.mods.shift.arg === selectedUrl,
 	);

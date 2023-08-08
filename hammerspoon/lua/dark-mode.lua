@@ -30,7 +30,7 @@ local function toggleDarkMode()
 
 	-- neovim
 	-- stylua: ignore
-	local nvimLuaCmd = ([[<cmd>lua require('config.theme-customization').setThemeMode('%s')<CR>]]):format( toMode)
+	local nvimLuaCmd = ([[<cmd>lua require('config.theme-customization').setThemeMode('%s')<CR>]]):format(toMode)
 	local shellCmd1 = ([[nvim --server "/tmp/nvim_server.pipe" --remote-send "%s"]]):format(nvimLuaCmd)
 	hs.execute(u.exportPath .. shellCmd1)
 
