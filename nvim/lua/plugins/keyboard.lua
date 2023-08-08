@@ -10,9 +10,12 @@ return {
 			include_buffer_keymaps = true,
 			include_modified_keypresses = false,
 			ignore_whichkey_conflicts = true,
-			ui = { border = "double" },
+			ui = {
+				border = "double",
+				size = { width = 70, height = 15 },
+			},
 			keyboard = {
-				layout = "iso",
+				layout = "qwertz",
 				keycap_padding = { 0, 1, 0, 1 }, -- [top, right, bottom, left]
 				highlight_padding = { 0, 0, 0, 0 },
 				key_labels = {

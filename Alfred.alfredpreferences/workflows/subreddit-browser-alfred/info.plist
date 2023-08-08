@@ -492,7 +492,7 @@
 				<key>subtext</key>
 				<string>{const:alfred_workflow_name}</string>
 				<key>text</key>
-				<string>Reload all subreddits on next run</string>
+				<string>Delete Cache for all subreddits on next run</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -513,7 +513,6 @@
 	- &lt;kbd&gt;⇧⌘⏎&lt;/kbd&gt;: Switch to previous subreddit.
 	- &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy URL of post to clipboard.
 	- &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Open URL (if external link).
-- `:reddit`: Reload all subreddits on next run.
 
 No reddit account is needed. Due to smart caching, this workflow should never hit API rate limits under normal usage.
 
@@ -705,7 +704,37 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<true/>
+				<string>none</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>none</string>
+						<string>none</string>
+					</array>
+					<array>
+						<string>old posts</string>
+						<string>old</string>
+					</array>
+					<array>
+						<string>new posts</string>
+						<string>new</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>A post is considered old when is was already listed before the refreshing. If it was not listed before refreshing, it is considered new.</string>
+			<key>label</key>
+			<string>Age Icon</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>age_icon</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
 				<key>required</key>
 				<false/>
 				<key>text</key>
@@ -719,6 +748,25 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<string>checkbox</string>
 			<key>variable</key>
 			<string>save_scroll_position</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>enabled</string>
+			</dict>
+			<key>description</key>
+			<string>redirect to old.reddit.com</string>
+			<key>label</key>
+			<string>Use old reddit</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>use_old_reddit</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -752,28 +800,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<string>enabled</string>
 			</dict>
 			<key>description</key>
-			<string>redirect to old.reddit.com</string>
-			<key>label</key>
-			<string>use old reddit</string>
-			<key>type</key>
-			<string>checkbox</string>
-			<key>variable</key>
-			<string>use_old_reddit</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<false/>
-				<key>required</key>
-				<false/>
-				<key>text</key>
-				<string>enabled</string>
-			</dict>
-			<key>description</key>
 			<string>This makes hackernews appear in the list of subreddits, treating it as if it was another subreddit.</string>
 			<key>label</key>
-			<string>add hackernews</string>
+			<string>Add hackernews</string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>
@@ -792,7 +821,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>description</key>
 			<string>redirect to dstill.ai as hackernews frontend</string>
 			<key>label</key>
-			<string>use dstill.ai</string>
+			<string>Use dstill.ai</string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>

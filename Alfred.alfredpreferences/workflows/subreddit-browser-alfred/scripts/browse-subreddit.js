@@ -86,11 +86,17 @@ function getHackernewsPosts(oldUrls) {
 		// filter out jobs
 		if (item._tags.some((tag) => tag === "job")) return {};
 
+		// age icon
+		const postIsOld = oldUrls.includes(commentUrl)
+		let ageIcon = ""
+		if ($.getenv("age_icon") === "old" && postIsOld) ageIcon = "🕓 "
+		if ($.getenv("age_icon") === "new" && !postIsOld) ageIcon = "🆕 "
+
+		// subtitle
 		let category = item._tags.find((tag) => tag === "show_hn" || tag === "ask_hn");
 		category = (category ? `[${category}]` : "").replace("show_hn", "Show HN").replace("ask_hn", "Ask HN");
 		const comments = item.num_comments || 0;
-		const oldIcon = oldUrls.includes(commentUrl) ? "🕓 " : "";
-		const subtitle = `${oldIcon}${item.points}↑  ${comments}●  ${category}`;
+		const subtitle = `${ageIcon}${item.points}↑  ${comments}●  ${category}`;
 
 		/** @type{AlfredItem} */
 		const post = {
@@ -158,12 +164,18 @@ function getRedditPosts(subredditName, oldUrls) {
 		const isOnReddit = item.domain.includes("redd.it") || item.domain.startsWith("self.");
 		const emoji = isOnReddit ? "" : "🔗 ";
 
+		// age icon
+		const postIsOld = oldUrls.includes(commentUrl)
+		let ageIcon = ""
+		if ($.getenv("age_icon") === "old" && postIsOld) ageIcon = "🕓 "
+		if ($.getenv("age_icon") === "new" && !postIsOld) ageIcon = "🆕 "
+
+		// subtitle
 		let category = item.link_flair_text ? `[${item.link_flair_text}]` : "";
 		if (item.over_18) category += " [NSFW]";
 		const comments = item.num_comments || 0;
 		const crossposts = item.num_crossposts ? ` ${item.num_crossposts}↗` : "";
-		const oldIcon = oldUrls.includes(commentUrl) ? "🕓 " : "";
-		const subtitle = `${oldIcon}${item.score}↑  ${comments}● ${crossposts} ${category}`;
+		const subtitle = `${ageIcon}${item.score}↑  ${comments}● ${crossposts} ${category}`;
 
 		/** @type{AlfredItem} */
 		const post = {

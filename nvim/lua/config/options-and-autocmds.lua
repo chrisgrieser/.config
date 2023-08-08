@@ -12,8 +12,9 @@ local api = vim.api
 --------------------------------------------------------------------------------
 -- REMOTE CONTROL / AUTOMATION
 
--- nvim server (RPC) https://neovim.io/doc/user/remote.html
--- done via `neovide --server`
+-- nvim server (RPC) to remote control neovide instances 
+-- https://neovim.io/doc/user/remote.html
+if vim.fn.has("gui_running") == 1 then vim.fn.serverstart("/tmp/nvim_server.pipe") end
 
 -- Set title so external apps like window managers can read the current file path
 opt.title = true

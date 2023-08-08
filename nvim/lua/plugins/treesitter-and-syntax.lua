@@ -28,20 +28,22 @@ local tsConfig = {
 			include_surrounding_whitespace = false,
 			disable = { "markdown" }, -- so `al` can be remapped to link text object
 			keymaps = {
-				["ik"] = "@assignment.lhs", -- inner [k]ey ( INFO: outer defined via various textobjs)
-				["a<CR>"] = "@return.outer", -- <CR>: return (`ar` already = a rectangular bracket)
+				-- inner [k]ey ( INFO: outer defined via various textobjs)
+				["ik"] = "@assignment.lhs",
+				["a<CR>"] = "@return.outer",
 				["i<CR>"] = "@return.inner",
-				["a/"] = "@regex.outer", -- /regex/
+				["a/"] = "@regex.outer",
 				["i/"] = "@regex.inner",
-				["aa"] = "@parameter.outer", -- [a]rgument
+				["aa"] = "@parameter.outer",
 				["ia"] = "@parameter.inner",
-				["iu"] = "@loop.inner", -- loop (mnemonic: luup)
+				-- mnemonic: luup
+				["iu"] = "@loop.inner",
 				["au"] = "@loop.outer",
-				["a" .. u.textobjectMaps["function"]] = "@function.outer", -- [f]unction
+				["a" .. u.textobjectMaps["function"]] = "@function.outer",
 				["i" .. u.textobjectMaps["function"]] = "@function.inner",
-				["a" .. u.textobjectMaps["conditional"]] = "@conditional.outer", -- c[o]nditional (`ac` already = a curly)
+				["a" .. u.textobjectMaps["conditional"]] = "@conditional.outer",
 				["i" .. u.textobjectMaps["conditional"]] = "@conditional.inner",
-				["a" .. u.textobjectMaps["call"]] = "@call.outer", -- cal[l]
+				["a" .. u.textobjectMaps["call"]] = "@call.outer",
 				["i" .. u.textobjectMaps["call"]] = "@call.inner",
 
 				-- INFO later remapped to q only in operator pending mode to avoid conflict
