@@ -29,7 +29,7 @@ function run(argv) {
 		.doShellScript(
 			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; cd "${dotfileFolder}" ;
 			fd --type=file --hidden --absolute-path \\
-			-E "*.icns" -E "*.plist" -E "*.png" -E ".git"`,
+			-E "*.icns" -E "*.plist" -E "*.png" -E ".DS_Store"`,
 		)
 		.split("\r")
 		.map((/** @type {string} */ absPath) => {
@@ -107,7 +107,7 @@ function run(argv) {
 	const folderArray = app
 		.doShellScript(
 			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; cd "${dotfileFolder}" ;
-			fd --absolute-path --type=directory --hidden -E ".git"`,
+			fd --absolute-path --type=directory --hidden`,
 		)
 		.split("\r")
 		.map((/** @type {string} */ absPath) => {
@@ -131,18 +131,29 @@ function run(argv) {
 
 	// password-store (pass-cli)
 	const pwPath = app.pathTo("home folder") + "/.password-store";
-	/** @type{AlfredItem} */
-	const pwFolder = {
-		title: ".password-store",
-		match: alfredMatcher(pwPath) + " folder",
-		icon: { type: "fileicon", path: pwPath },
-		type: "file:skipcheck",
-		uid: pwPath,
-		arg: pwPath,
-	};
+	const repoPath = app.pathTo("home folder") + "/Repos";
+	/** @type{AlfredItem[]} */
+	const extraFolder = [
+		{
+			title: ".password-store",
+			match: alfredMatcher(pwPath) + " folder",
+			icon: { type: "fileicon", path: pwPath },
+			type: "file:skipcheck",
+			uid: pwPath,
+			arg: pwPath,
+		},
+		{
+			title: "Repos",
+			match: alfredMatcher(repoPath) + " folder",
+			icon: { type: "fileicon", path: repoPath },
+			type: "file:skipcheck",
+			uid: repoPath,
+			arg: repoPath,
+		},
+	];
 
 	//──────────────────────────────────────────────────────────────────────────────
 
-	const jsonArray = [...fileArray, ...folderArray, pwFolder];
+	const jsonArray = [...fileArray, ...folderArray, ...extraFolder];
 	return JSON.stringify({ items: jsonArray });
 }

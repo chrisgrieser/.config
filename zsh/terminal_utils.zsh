@@ -68,14 +68,16 @@ function o() {
 
 	# --delimiter and --nth options ensure only file name and parent folder are displayed
 	selected=$(
-		fd --type=file --type=symlink --hidden --color=always | fzf \
+		fd --hidden --color=always | fzf \
 			-0 -1 --ansi --query="$input" --info=inline \
-			--preview 'bat --color=always --style=snip --wrap=never --tabs=2 {}'
+			--preview '[[ -f {} ]] && bat --color=always --style=snip --wrap=never --tabs=2 {} || exa {}'
 	)
 	if [[ -z "$selected" ]]; then # fzf aborted
 		return 0
 	elif [[ -f "$selected" ]]; then
 		open "$selected"
+	elif [[ -d "$selected" ]]; then
+		z "$selected"
 	else
 		return 1
 	fi
