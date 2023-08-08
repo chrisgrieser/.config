@@ -44,6 +44,7 @@ function ensureCacheFolderExists() {
  * @param {string} subredditName
  */
 function cacheSubredditIcon(iconPath, subredditName) {
+	// HACK reddit API does not like curl (lol)
 	const redditApiCall = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/about.json"`;
 	const subredditInfo = JSON.parse(app.doShellScript(redditApiCall));
 	if (subredditInfo.error) {

@@ -45,13 +45,13 @@ end
 --------------------------------------------------------------------------------
 
 -- REMINDERS -> SIDENOTES
--- run as task so it's non-blocking
 function M.reminderToSidenotes()
 	if not u.appRunning("SideNotes") then u.openApps("SideNotes") end
 
 	local script = "./helpers/push-todays-reminders-to-sidenotes.js"
 	if PushRemindersTask and PushRemindersTask:isRunning() then return end
 
+	-- run as task so it's non-blocking
 	PushRemindersTask = hs.task
 		.new(script, function(exitCode, _, stdErr)
 			if exitCode == 0 then
@@ -68,11 +68,12 @@ function M.reminderToSidenotes()
 end
 
 --------------------------------------------------------------------------------
+-- TRIGGERS
 
--- SYSTEMSTART
--- with delay, to avoid importing duplicate reminders due to reminders
--- not being synced yet
+-- 1. Systemstart
 if not u.isReloading() then
+	-- with delay, to avoid importing duplicate reminders due to reminders
+	-- that are not being synced yet
 	u.runWithDelays(15, M.reminderToSidenotes)
 	if env.isAtOffice then u.runWithDelays({ 10, 20, 30, 40 }, moveOfficeNotesToBase) end
 end

@@ -64,11 +64,12 @@ function cacheIsOutdated(path) {
  * @property {string[]} _tags
  */
 
-/** @param {string} oldUrls */
+/** @param {string[]} oldUrls */
 function getHackernewsPosts(oldUrls) {
 	// INFO https://hn.algolia.com/api/
 	// alternative "https://hacker-news.firebaseio.com/v0/topstories.json";
-	const url = "https://hn.algolia.com/api/v1/search_by_date?tags=front_page&hitsPerPage=50";
+	const hitsToRequest = 30;
+	const url = `https://hn.algolia.com/api/v1/search_by_date?tags=front_page&hitsPerPage=${hitsToRequest}`;
 	const response = app.doShellScript(`curl -sL "${url}"`);
 	if (!response) {
 		console.log(`Error: No response from ${url}`);
@@ -88,13 +89,12 @@ function getHackernewsPosts(oldUrls) {
 		let category = item._tags.find((tag) => tag === "show_hn" || tag === "ask_hn");
 		category = (category ? `[${category}]` : "").replace("show_hn", "Show HN").replace("ask_hn", "Ask HN");
 		const comments = item.num_comments || 0;
-		const subtitle = `${item.points}↑  ${comments}●  ${category}`;
-
-		const oldIcon = oldUrls.includes(commentUrl) ? "⬅️ " : "";
+		const oldIcon = oldUrls.includes(commentUrl) ? "🕓 " : "";
+		const subtitle = `${oldIcon}${item.points}↑  ${comments}●  ${category}`;
 
 		/** @type{AlfredItem} */
 		const post = {
-			title: oldIcon + item.title,
+			title: item.title,
 			subtitle: subtitle,
 			arg: commentUrl,
 			icon: { path: "hackernews.png" },
@@ -104,7 +104,7 @@ function getHackernewsPosts(oldUrls) {
 				shift: { arg: externalUrl },
 			},
 		};
-		return post
+		return post;
 	});
 
 	return hits;
@@ -133,13 +133,13 @@ function getHackernewsPosts(oldUrls) {
 
 /**
  * @param {string} subredditName
- * @param {string} oldUrls
+ * @param {string[]} oldUrls
  */
 function getRedditPosts(subredditName, oldUrls) {
 	// INFO free API calls restricted to 10 per minute
 	// https://support.reddithelp.com/hc/en-us/articles/16160319875092-Reddit-Data-API-Wiki
 
-	// HACK curl is blocked only until you change the user agent, lol
+	// HACK reddit API does not like curl (lol)
 	const curlCommand = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/new.json"`;
 	const response = JSON.parse(app.doShellScript(curlCommand));
 	if (response.error) {
@@ -152,21 +152,22 @@ function getRedditPosts(subredditName, oldUrls) {
 
 	const redditPosts = response.data.children.map((/** @type {redditPost} */ data) => {
 		const item = data.data;
-		let category = item.link_flair_text ? `[${item.link_flair_text}]` : "";
-		if (item.over_18) category += " [NSFW]";
-		const comments = item.num_comments || 0;
-		const crossposts = item.num_crossposts ? ` ${item.num_crossposts}↗` : "";
-		const subtitle = `${item.score}↑  ${comments}● ${crossposts} ${category}`;
 
 		const commentUrl = `https://${oldReddit}.reddit.com${item.permalink}`;
 		const externalUrl = item.url;
 		const isOnReddit = item.domain.includes("redd.it") || item.domain.startsWith("self.");
 		const emoji = isOnReddit ? "" : "🔗 ";
-		const oldIcon = oldUrls.includes(commentUrl) ? "⬅️ " : "";
+
+		let category = item.link_flair_text ? `[${item.link_flair_text}]` : "";
+		if (item.over_18) category += " [NSFW]";
+		const comments = item.num_comments || 0;
+		const crossposts = item.num_crossposts ? ` ${item.num_crossposts}↗` : "";
+		const oldIcon = oldUrls.includes(commentUrl) ? "🕓 " : "";
+		const subtitle = `${oldIcon}${item.score}↑  ${comments}● ${crossposts} ${category}`;
 
 		/** @type{AlfredItem} */
 		const post = {
-			title: oldIcon + emoji + item.title,
+			title: emoji + item.title,
 			subtitle: subtitle,
 			arg: commentUrl,
 			icon: { path: iconPath },
@@ -180,7 +181,7 @@ function getRedditPosts(subredditName, oldUrls) {
 				},
 			},
 		};
-		return post
+		return post;
 	});
 	return redditPosts;
 }
@@ -211,9 +212,9 @@ function run() {
 	}
 
 	// marker for old posts
-	const oldUrls =
-		fileExists(subredditCache) &&
-		JSON.parse(readFile(subredditCache)).map((/** @type {AlfredItem} */ item) => item.arg);
+	const oldUrls = fileExists(subredditCache)
+		? JSON.parse(readFile(subredditCache)).map((/** @type {AlfredItem} */ item) => item.arg)
+		: [];
 
 	// request new posts from API
 	if (subredditName === "hackernews") {
