@@ -64,7 +64,8 @@ function cacheIsOutdated(path) {
  * @property {string[]} _tags
  */
 
-function getHackernewsPosts() {
+/** @param {string} oldUrls */
+function getHackernewsPosts(oldUrls) {
 	// INFO https://hn.algolia.com/api/
 	// alternative "https://hacker-news.firebaseio.com/v0/topstories.json";
 	const url = "https://hn.algolia.com/api/v1/search_by_date?tags=front_page&hitsPerPage=50";
@@ -89,8 +90,11 @@ function getHackernewsPosts() {
 		const comments = item.num_comments || 0;
 		const subtitle = `${item.points}↑  ${comments}●  ${category}`;
 
-		return {
-			title: item.title,
+		const oldIcon = oldUrls.includes(commentUrl) ? "⬅️ " : "";
+
+		/** @type{AlfredItem} */
+		const post = {
+			title: oldIcon + item.title,
 			subtitle: subtitle,
 			arg: commentUrl,
 			icon: { path: "hackernews.png" },
@@ -100,6 +104,7 @@ function getHackernewsPosts() {
 				shift: { arg: externalUrl },
 			},
 		};
+		return post
 	});
 
 	return hits;
@@ -126,8 +131,14 @@ function getHackernewsPosts() {
  * @property {string} data.media.type
  */
 
-/** @param {string} subredditName */
-function getRedditPosts(subredditName) {
+/**
+ * @param {string} subredditName
+ * @param {string} oldUrls
+ */
+function getRedditPosts(subredditName, oldUrls) {
+	// INFO free API calls restricted to 10 per minute
+	// https://support.reddithelp.com/hc/en-us/articles/16160319875092-Reddit-Data-API-Wiki
+
 	// HACK curl is blocked only until you change the user agent, lol
 	const curlCommand = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/new.json"`;
 	const response = JSON.parse(app.doShellScript(curlCommand));
@@ -139,7 +150,6 @@ function getRedditPosts(subredditName) {
 	let iconPath = `${iconFolder}/${subredditName}.png`;
 	if (!fileExists(iconPath)) iconPath = "icon.png"; // not cached
 
-	/** @type{AlfredItem[]} */
 	const redditPosts = response.data.children.map((/** @type {redditPost} */ data) => {
 		const item = data.data;
 		let category = item.link_flair_text ? `[${item.link_flair_text}]` : "";
@@ -152,9 +162,11 @@ function getRedditPosts(subredditName) {
 		const externalUrl = item.url;
 		const isOnReddit = item.domain.includes("redd.it") || item.domain.startsWith("self.");
 		const emoji = isOnReddit ? "" : "🔗 ";
+		const oldIcon = oldUrls.includes(commentUrl) ? "⬅️ " : "";
 
-		return {
-			title: emoji + item.title,
+		/** @type{AlfredItem} */
+		const post = {
+			title: oldIcon + emoji + item.title,
 			subtitle: subtitle,
 			arg: commentUrl,
 			icon: { path: iconPath },
@@ -168,14 +180,12 @@ function getRedditPosts(subredditName) {
 				},
 			},
 		};
+		return post
 	});
 	return redditPosts;
 }
 
 //──────────────────────────────────────────────────────────────────────────────
-
-// INFO free API calls restricted to 10 per minute
-// https://support.reddithelp.com/hc/en-us/articles/16160319875092-Reddit-Data-API-Wiki
 
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
@@ -189,30 +199,33 @@ function run() {
 		writeToFile($.getenv("alfred_workflow_cache") + "/current_subreddit", subredditName);
 	}
 
-	// cache
+	// read posts from cache
 	const subredditCache = `${$.getenv("alfred_workflow_cache")}/${subredditName}.json`;
 	let posts;
 	if (!cacheIsOutdated(subredditCache)) {
 		posts = JSON.parse(readFile(subredditCache));
-		return JSON.stringify({ items: posts });
+		return JSON.stringify({
+			skipknowledge: true, // workflow handles order to remember reading positions
+			items: posts,
+		});
 	}
 
-	// main
+	// marker for old posts
+	const oldUrls =
+		fileExists(subredditCache) &&
+		JSON.parse(readFile(subredditCache)).map((/** @type {AlfredItem} */ item) => item.arg);
+
+	// request new posts from API
 	if (subredditName === "hackernews") {
 		console.log("Writing new cache for hackernews");
-		posts = getHackernewsPosts();
+		posts = getHackernewsPosts(oldUrls);
 	} else {
 		console.log("Writing new cache for r/" + subredditName);
-		posts = getRedditPosts(subredditName);
+		posts = getRedditPosts(subredditName, oldUrls);
 		if (!posts) {
 			return JSON.stringify({ items: [{ title: "Error", subtitle: "No response from reddit API" }] });
 		}
 	}
-
 	writeToFile(subredditCache, JSON.stringify(posts));
-	return JSON.stringify({
-		// workflow handles saving order to be able to remember reading positions
-		skipknowledge: true, 
-		items: posts,
-	});
+	return JSON.stringify({ items: posts });
 }
