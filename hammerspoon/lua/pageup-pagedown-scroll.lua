@@ -24,6 +24,7 @@ local perAppSettings = {
 ---@param direction "up" | "down
 local function scroll(direction)
 	local frontApp = hs.application.frontmostApplication()
+	if not frontApp:mainWindow() then return end
 
 	-- cursor needs to be inside main window to scroll the right frame, since on
 	-- macOS the frame below the cursor is scrolled not the focussed one

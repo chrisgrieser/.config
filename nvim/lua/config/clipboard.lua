@@ -7,8 +7,8 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 --- macOS bindings (needed for compatibility with automation apps)
-keymap({"n", "x"}, "<D-c>", "y", { desc = "copy" }) 
-keymap({ "n", "x" }, "<D-v>", "p", { desc = "paste" }) 
+keymap({ "n", "x" }, "<D-c>", "y", { desc = "copy" })
+keymap({ "n", "x" }, "<D-v>", "p", { desc = "paste" })
 keymap("c", "<D-v>", "<C-r>+", { desc = "paste" })
 
 --------------------------------------------------------------------------------
@@ -44,13 +44,12 @@ keymap("n", "gp", function()
 end, { desc = " Paste differently" })
 
 -- always paste characterwise when in insert mode
-keymap("i", "<D-v>", function ()
+keymap("i", "<D-v>", function()
 	local regContent = fn.getreg("+"):gsub("^%s*", ""):gsub("%s*$", "")
 	fn.setreg("+", regContent, "v") ---@diagnostic disable-line: param-type-mismatch
 	-- "<C-g>u" adds undopoint before the paste
 	return "<C-g>u<C-r><C-o>+"
-end, { desc = " Paste charwise", expr = true }) 
-
+end, { desc = " Paste charwise", expr = true })
 
 --------------------------------------------------------------------------------
 
