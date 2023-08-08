@@ -57,17 +57,15 @@ return {
 			local a = vim.api
 			local keymap = vim.keymap.set
 
-			-- stylua: ignore start
-			keymap("n", "<leader>r", "<Plug>RestNvim", { desc = "󰴚 Run Request under cursor", buffer = true })
-			keymap("n", "<leader>la", "<Plug>RestNvimLast", { desc = "󰴚 Re-run the last request", buffer = true })
-			keymap("n", "<leader>e", function() vim.fn.system("open 'https://github.com/rest-nvim/rest.nvim/tree/main/tests'") end, { desc = "󰴚 Show example requests", buffer = true })
-			-- stylua: ignore end
-
 			a.nvim_create_user_command("Rest", function()
 				vim.cmd.tabnew()
 				a.nvim_buf_set_option(0, "filetype", "http")
 				a.nvim_buf_set_option(0, "buftype", "nofile")
 				a.nvim_buf_set_name(0, "HTTP Request")
+
+				keymap("n", "<leader>r", "<Plug>RestNvim", { desc = "󰴚 Run Request under cursor", buffer = true })
+				keymap("n", "<leader>la", "<Plug>RestNvimLast", { desc = "󰴚 Re-run the last request", buffer = true })
+				keymap("n", "<leader>e", function() vim.fn.system("open 'https://github.com/rest-nvim/rest.nvim/tree/main/tests'") end, { desc = "󰴚 Show example requests", buffer = true })
 				vim.notify(
 					[[ BINDINGS
 ,r   run request under cursor

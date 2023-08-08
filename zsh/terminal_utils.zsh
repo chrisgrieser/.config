@@ -1,14 +1,15 @@
 # HELPER FUNCTION USED BY OTHERS
 # draws a separator line with terminal width
 function separator() {
-	local sep_char="═"
+	local sep_char="═" # ─ ═
+	local sep_color="\033[1;30m" # black
 	local terminal_width
 	local sep=""
 	terminal_width=$(tput cols)
 	for ((i = 0; i < terminal_width; i++)); do
 		sep="$sep$sep_char"
 	done
-	echo "$sep"
+	print "$sep_color$sep\033[0m"
 }
 
 #───────────────────────────────────────────────────────────────────────────────

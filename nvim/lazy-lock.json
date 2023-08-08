@@ -80,6 +80,7 @@
   "replacer.nvim": { "branch": "master", "commit": "32e1713230844fa52f7f0598c59295de3c90dc95" },
   "rest.nvim": { "branch": "main", "commit": "22673c848768ff25517154a5aebfebc0c77d0b4f" },
   "satellite.nvim": { "branch": "main", "commit": "5d33376287e384f04b84962a20d90bd10a9dac86" },
+  "scrollEOF.nvim": { "branch": "master", "commit": "08034984164382c7bf8d007a77ec0c0fb2ecb3c3" },
   "sibling-swap.nvim": { "branch": "main", "commit": "58b256f2a7def9b63be275b373c748c012b3a604" },
   "ssr.nvim": { "branch": "chrisgrieser-patch-1", "commit": "fa0c927de92c0b2f5c90d9dafd8c879d6daf6e8c" },
   "substitute.nvim": { "branch": "main", "commit": "89dbe55cccee36bcb5e2be8c2d92ff8716601734" },

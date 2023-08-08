@@ -8,6 +8,11 @@ return {
 		lazy = true, -- loaded by my "vim.on_key" function
 		opts = { nearest_only = true },
 	},
+	{ -- fix scrollOff at end of file
+		"Aasim-A/scrollEOF.nvim",
+		event = "VeryLazy",
+		opts = { insert_mode = true },
+	},
 	{ -- UI overhaul
 		"folke/noice.nvim",
 		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
