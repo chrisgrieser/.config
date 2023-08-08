@@ -78,8 +78,8 @@
 		"prefix": "home (JXA)",
 		"body": "app.pathTo(\"home folder\")"
 	},
-	"exists (file)": {
-		"prefix": "exists (file)",
+	"file exists": {
+		"prefix": "file exists",
 		"body": "const fileExists = (/** @type {string} */ filePath) => Application(\"Finder\").exists(Path(filePath));"
 	},
 	"window path (Finder)": {
