@@ -29,13 +29,13 @@ function run() {
 	const cachesUpToDate = $.getenv("cache_was_updated") === "false";
 	if (cachesUpToDate) return;
 
-	// import subreddit-loading-functions
+	// IMPORT SUBREDDIT-LOADING-FUNCTIONS
 	// HACK read + eval, since JXA knows no import keyword
 	const fileToImport =(
 		$.getenv("alfred_preferences") +
 			"/workflows/" +
 			$.getenv("alfred_workflow_uid") + // = foldername
-			"/scripts/browse-subreddit.js"
+			"/scripts/get-new-posts.js"
 	);
 	eval(readFile(fileToImport));
 
