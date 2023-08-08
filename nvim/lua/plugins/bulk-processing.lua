@@ -8,12 +8,12 @@ return {
 			vim.g.VM_silent_exit = 1
 			-- DOCS https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
 			vim.g.VM_maps = {
-				-- NORMAL/VISUAL -> enter Visual-Multi
+				-- NORMAL/VISUAL_MODE -> enter Visual-Multi
 				["Find Under"] = "<D-j>", -- select word under cursor
 				["Reselect Last"] = "gV",
 				["Visual Add"] = "<D-j>", -- visual: visual-multi with current selection
 
-				-- VISUAL-MULTI
+				-- VISUAL-MULTI-MODE
 				-- add next occurrence
 				["Find Next"] = "n",
 				["Find Prev"] = "N",
@@ -24,16 +24,23 @@ return {
 		end,
 	},
 	{ -- structural search & replace
-		"chrisgrieser/ssr.nvim", 
+		"chrisgrieser/ssr.nvim",
 		branch = "chrisgrieser-patch-1", -- FIX https://github.com/cshuaimin/ssr.nvim/issues/11#issuecomment-1367356598
 		keys = {
 			-- stylua: ignore
 			{ "<leader>fs", function() require("ssr").open() end, mode = { "n", "x" }, desc = "󱗘 Structural S&R" },
 		},
-		init = function()
+		-- needs remap due conflict with commenting keymap
+		config = function()
+			-- FIX conflict with q from commenting plugin
+			-- HACK using `Q` to close works, when later redirecting q to it m(
+			require("ssr").setup { keymaps = { close = "Q" } }
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "ssr",
-				callback = function() vim.opt_local.sidescrolloff = 0 end,
+				callback = function()
+					vim.opt_local.sidescrolloff = 0
+					vim.keymap.set("n", "q", "Q", { desc = "Close", buffer = true, nowait = true, remap = true })
+				end,
 			})
 		end,
 	},
@@ -45,7 +52,7 @@ return {
 			vim.api.nvim_create_autocmd("ColorScheme", {
 				callback = function()
 					-- Terminal does not support underdotted
-					local strokeType = vim.fn.has("gui_running") and "underdotted" or "underline"
+					local strokeType = vim.fn.has("gui_running") == 1 and "underdotted" or "underline"
 					vim.api.nvim_set_hl(0, "TSDefinition", { [strokeType] = true })
 					vim.api.nvim_set_hl(0, "TSDefinitionUsage", { [strokeType] = true })
 				end,
