@@ -217,19 +217,20 @@ keymap({ "n", "x", "i" }, "<D-S-t>", function() require("funcs.alt-alt").reopenB
 keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " 󰽙 Buffers" })
 
 -- stylua: ignore end
-keymap("", "<C-w>h", "<cmd>split<CR>", { desc = " horizontal split" })
-keymap("", "<C-Right>", "<cmd>vertical resize +3<CR>", { desc = " vertical resize (+)" })
-keymap("", "<C-Left>", "<cmd>vertical resize -3<CR>", { desc = " vertical resize (-)" })
-keymap("", "<C-Down>", "<cmd>resize +3<CR>", { desc = " horizontal resize (+)" })
-keymap("", "<C-Up>", "<cmd>resize -3<CR>", { desc = " horizontal resize (-)" })
+keymap("n", "<C-w>h", "<cmd>split<CR>", { desc = " horizontal split" })
+keymap("n", "<C-w>v", "<cmd>vertical split<CR>", { desc = " vertical split" })
+keymap("n", "<C-Right>", "<cmd>vertical resize +3<CR>", { desc = " vertical resize (+)" })
+keymap("n", "<C-Left>", "<cmd>vertical resize -3<CR>", { desc = " vertical resize (-)" })
+keymap("n", "<C-Down>", "<cmd>resize +3<CR>", { desc = " horizontal resize (+)" })
+keymap("n", "<C-Up>", "<cmd>resize -3<CR>", { desc = " horizontal resize (-)" })
 
 ------------------------------------------------------------------------------
 
 -- CMD-KEYBINDINGS
 
 -- stylua: ignore
-keymap("", "<D-l>", function() fn.system("open -R '" .. expand("%:p") .. "'") end, { desc = "󰀶 Reveal in Finder" })
-keymap("", "<D-5>", function()
+keymap({"n", "x"}, "<D-l>", function() fn.system("open -R '" .. expand("%:p") .. "'") end, { desc = "󰀶 Reveal in Finder" })
+keymap({"n", "x"}, "<D-5>", function()
 	local parentFolder = expand("%:p:h")
 	if not parentFolder:find("Alfred%.alfredpreferences") then
 		vim.notify("Not in an Alfred directory.", u.warn)

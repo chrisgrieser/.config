@@ -101,7 +101,7 @@ keymap({ "o", "x" }, "n", "<cmd>lua require('various-textobjs').nearEoL()<CR>", 
 -- m: to next closing bracket
 -- w: to next quotation mark
 keymap({ "o", "x" }, "m", "<cmd>lua require('various-textobjs').toNextClosingBracket()<CR>", { desc = "󱡔 to next closing bracket textobj" })
-keymap("o", "w", "<cmd>lua require('various-textobjs').toNextQuotationMark()<CR>", { desc = "󱡔 to next quotation mark textobj", nowait = true })
+keymap("o", "w", "<cmd>lua require('various-textobjs').toNextQuotationMark()<CR>", { desc = "󱡔 to next quote textobj", nowait = true })
 
 -- o: c[o]lumn textobj
 keymap({"x", "o"}, "O", "<cmd>lua require('various-textobjs').column()<CR>", { desc = "󱡔 column textobj" })

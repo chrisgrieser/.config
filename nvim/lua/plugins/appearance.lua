@@ -8,6 +8,23 @@ return {
 		lazy = true, -- loaded by my "vim.on_key" function
 		opts = { nearest_only = true },
 	},
+	{ -- scrollbar with information
+		"lewis6991/satellite.nvim",
+		commit = "5d33376", -- TODO following versions require nvim 0.10
+		event = "VeryLazy",
+		init = function()
+			if vim.version().major == 0 and vim.version().minor >= 10 then
+				vim.notify("satellite.nvim can now be updated.")
+			end
+		end,
+		opts = {
+			winblend = 60, -- winblend = transparency
+			handlers = {
+				-- FIX mark-related error message
+				marks = { enable = false },
+			},
+		},
+	},
 	{ -- UI overhaul
 		"folke/noice.nvim",
 		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
@@ -122,24 +139,20 @@ return {
 
 			-- copy [l]ast [n]otice
 			vim.keymap.set("n", "<leader>ln", function()
-				local history = require("notify").history {}
-				local lastNotify = history[#history]
-				if not lastNotify then
+				local history = require("notify").history()
+				if #history == 0 then
 					vim.notify("No Notification in this session.", u.warn)
 					return
 				end
-				local msg = ""
-				for _, line in pairs(lastNotify.message) do
-					msg = msg .. line .. "\n"
-				end
+				local msg = history[#history].message
 				vim.fn.setreg("+", msg)
-				vim.notify("Last Notification copied.\n" .. msg, u.trace)
+				vim.notify("Last Notification copied.", u.trace)
 			end, { desc = "󰎟 Copy Last Notification" })
 		end,
 	},
 	{ -- rainbow brackets
 		"https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
-		-- event = "BufEnter",
+		event = "VeryLazy",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
 			-- rainbow brackets without aggressive red
@@ -170,7 +183,6 @@ return {
 				-- plugins
 				lazy = { icon = "", name = "Lazy" },
 				mason = { icon = "", name = "Mason" },
-				noice = { icon = "󰎟", name = "Noice" },
 			},
 		},
 	},
@@ -195,7 +207,7 @@ return {
 			vim.api.nvim_create_autocmd("BufReadPost", {
 				callback = function()
 					local firstline = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]
-					if vim.endswith(firstline, "vim-pseudo-modeline: buffer_has_colors") then 
+					if vim.endswith(firstline, "vim-pseudo-modeline: buffer_has_colors") then
 						vim.cmd.CccHighlighterEnable()
 					end
 				end,
