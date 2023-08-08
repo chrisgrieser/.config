@@ -1,6 +1,5 @@
 local darkmode = require("lua.dark-mode")
 local env = require("lua.environment-vars")
-local sidenotes = require("lua.sidenotes")
 local u = require("lua.utils")
 local visuals = require("lua.visuals")
 local wu = require("lua.window-utils")
@@ -74,10 +73,15 @@ local function workLayout()
 			wu.moveResize(win, wu.pseudoMax)
 		end)
 	end
-	u.app("Obsidian"):mainWindow():minimize()
+
+	hs.timer.waitUntil(
+		function() return u.app("Obsidian") and u.app("Obsidian"):mainWindow() end,
+		function() u.app("Obsidian"):mainWindow():minimize() end,
+		0.1
+	)
 
 	-- finish
-	sidenotes.reminderToSidenotes()
+	require("lua.sidenotes").reminderToSidenotes()
 	u.asSoonAsAppRuns("Discord", function() u.app(env.mailApp):activate() end)
 	print("🔲 WorkLayout: done")
 end

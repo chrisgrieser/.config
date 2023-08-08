@@ -52,7 +52,7 @@ local function backup()
 end
 
 NightlyMaintenanceTimer = hs.timer
-	.doAt("02:00", "01d", function()
+	.doAt("01:00", "01d", function()
 		local weekday = getWeekday()
 		if weekday == "Sun" then hs.loadSpoon("EmmyLua") end
 		if weekday == "Tue" or weekday == "Fri" or weekday == "Sun" then backup() end
