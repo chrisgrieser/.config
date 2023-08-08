@@ -69,46 +69,6 @@ end
 
 --------------------------------------------------------------------------------
 
-local function searchCounter()
-	if vim.v.hlsearch == 0 then return "" end
-	if fn.mode() == "n" then
-		local total = fn.searchcount().total
-		local current = fn.searchcount().current
-		local searchTerm = fn.getreg("/")
-		local isStarSearch = searchTerm:find([[^\<.*\>$]])
-		if isStarSearch then searchTerm = "*" .. searchTerm:sub(3, -3) end
-		if total == 0 then return " 0 " .. searchTerm end
-		return (" %s/%s %s"):format(current, total, searchTerm)
-
-	-- manual method of counting necessary since `fn.searchcount()` does not work
-	-- during the search in the cmdline
-	elseif fn.mode() == "c" and fn.getcmdtype():find("[/?]") then
-		-- for correct count, requires autocmd below refreshing lualine on CmdlineChanged
-		local searchTerm = vim.fn.getcmdline()
-		if searchTerm == "" then return "" end
-
-		local buffer = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, true), "\n")
-
-		-- determine case-sensitive from user's vim settings
-		local ignoreCase = vim.opt.smartcase:get() and (searchTerm:find("%u") == nil)
-			or vim.opt.ignorecase:get()
-
-		-- using `fn.count()` instead of `string.find` since `/` uses vimscript
-		local count = fn.count(buffer, searchTerm, ignoreCase)
-		return (" %s"):format(count)
-	end
-end
-
--- force refreshing for search count, since lualine otherwise lags behind
-vim.api.nvim_create_autocmd("CmdlineChanged", {
-	callback = function()
-		if not fn.getcmdtype():find("[/?]") then return end
-		require("lualine").refresh()
-	end,
-})
-
---------------------------------------------------------------------------------
-
 local function visualMultiCursorCount()
 	---@diagnostic disable: undefined-field -- defined by visual multi plugin
 	if not vim.b.VM_Selection then return "" end
@@ -173,7 +133,6 @@ local lualineConfig = {
 			-- INFO setting different section separators in the same components has
 			-- yanky results, they should have the same separator
 			-- searchcounter at the top, so it work with cmdheight=0
-			{ searchCounter, section_separators = emptySeparators },
 			{ clock, section_separators = emptySeparators },
 			{
 				"tabs",

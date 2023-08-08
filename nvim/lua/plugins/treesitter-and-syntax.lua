@@ -28,27 +28,45 @@ local tsConfig = {
 			include_surrounding_whitespace = false,
 			disable = { "markdown" }, -- so `al` can be remapped to link text object
 			keymaps = {
-				-- inner [k]ey ( INFO: outer defined via various textobjs)
-				["ik"] = "@assignment.lhs",
-				["a<CR>"] = "@return.outer",
-				["i<CR>"] = "@return.inner",
-				["a/"] = "@regex.outer",
-				["i/"] = "@regex.inner",
-				["aa"] = "@parameter.outer",
-				["ia"] = "@parameter.inner",
+				["ik"] = { query = "@assignment.lhs", desc = "󱡔 inner key textobj" },
+				-- INFO: outer key textobj defined via various textobjs
+				["a<CR>"] = { query = "@return.outer", desc = "󱡔 outer return textobj" },
+				["i<CR>"] = { query = "@return.inner", desc = "󱡔 inner return textobj" },
+				["a/"] = { query = "@regex.outer", desc = "󱡔 outer regex textobj" },
+				["i/"] = { query = "@regex.inner", desc = "󱡔 inner regex textobj" },
+				["aa"] = { query = "@parameter.outer", desc = "󱡔 outer parameter textobj" },
+				["ia"] = { query = "@parameter.inner", desc = "󱡔 inner parameter textobj" },
 				-- mnemonic: luup
-				["iu"] = "@loop.inner",
-				["au"] = "@loop.outer",
-				["a" .. u.textobjectMaps["function"]] = "@function.outer",
-				["i" .. u.textobjectMaps["function"]] = "@function.inner",
-				["a" .. u.textobjectMaps["conditional"]] = "@conditional.outer",
-				["i" .. u.textobjectMaps["conditional"]] = "@conditional.inner",
-				["a" .. u.textobjectMaps["call"]] = "@call.outer",
-				["i" .. u.textobjectMaps["call"]] = "@call.inner",
+				["iu"] = { query = "@loop.inner", desc = "󱡔 inner loop textobj" },
+				["au"] = { query = "@loop.outer", desc = "󱡔 outer loop textobj" },
+				["a" .. u.textobjectMaps["function"]] = {
+					query = "@function.outer",
+					desc = "󱡔 outer function textobj",
+				},
+				["i" .. u.textobjectMaps["function"]] = {
+					query = "@function.inner",
+					desc = "󱡔 inner function textobj",
+				},
+				["a" .. u.textobjectMaps["conditional"]] = {
+					query = "@conditional.outer",
+					desc = "󱡔 outer conditional textobj",
+				},
+				["i" .. u.textobjectMaps["conditional"]] = {
+					query = "@conditional.inner",
+					desc = "󱡔 inner conditional textobj",
+				},
+				["a" .. u.textobjectMaps["call"]] = {
+					query = "@call.outer",
+					desc = "󱡔 outer call textobj",
+				},
+				["i" .. u.textobjectMaps["call"]] = {
+					query = "@call.inner",
+					desc = "󱡔 inner call textobj",
+				},
 
 				-- INFO later remapped to q only in operator pending mode to avoid conflict
 				-- @comment.inner not supported yet for most languages
-				["&&&"] = "@comment.outer",
+				["&&&"] = { query = "@comment.outer", desc = "which_key_ignore" },
 			},
 		},
 	},
@@ -84,8 +102,8 @@ return {
 		main = "nvim-treesitter.configs",
 		opts = tsConfig,
 		init = function()
-			-- HACK avoid conflict with visual mode comment from Comments.nvim
-			vim.keymap.set("o", "q", "&&&", { desc = "comment", remap = true })
+			-- only `omap` to avoid conflict with visual mode comment from Comments.nvim
+			vim.keymap.set("o", "q", "&&&", { desc = "󱡔 comment textobj", remap = true })
 		end,
 	},
 
