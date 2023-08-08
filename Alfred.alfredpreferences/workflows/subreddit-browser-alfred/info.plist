@@ -175,6 +175,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>FF2B7000-6AD9-42B6-825C-E952CD707CFE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A567D598-1CEC-4307-A5B7-CA7E5193BA78</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -206,6 +219,29 @@
 			<string>26F00E99-5D45-4FCE-AF6F-EA4A468CDBB9</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/reload-other-subreddits-in-bg.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>A567D598-1CEC-4307-A5B7-CA7E5193BA78</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -492,7 +528,7 @@
 				<key>subtext</key>
 				<string>{const:alfred_workflow_name}</string>
 				<key>text</key>
-				<string>Delete Cache for all subreddits on next run</string>
+				<string>Debugging: Reset cache for all subreddits</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -548,7 +584,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>600</real>
 			<key>ypos</key>
-			<real>25</real>
+			<real>15</real>
 		</dict>
 		<key>3381D52B-F37A-422A-BB73-2654C0280799</key>
 		<dict>
@@ -584,7 +620,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>475</real>
 			<key>ypos</key>
-			<real>170</real>
+			<real>155</real>
 		</dict>
 		<key>8851C420-3E80-4797-80F1-31999E4C2F54</key>
 		<dict>
@@ -600,7 +636,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>note</key>
-			<string>refresh cache</string>
+			<string>internal</string>
 			<key>xpos</key>
 			<real>730</real>
 			<key>ypos</key>
@@ -614,6 +650,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>515</real>
 			<key>ypos</key>
 			<real>360</real>
+		</dict>
+		<key>A567D598-1CEC-4307-A5B7-CA7E5193BA78</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>background reload caches of other subreddit</string>
+			<key>xpos</key>
+			<real>760</real>
+			<key>ypos</key>
+			<real>125</real>
 		</dict>
 		<key>D96907E4-B008-4B62-AED9-1958C5D8E9A4</key>
 		<dict>
@@ -642,7 +689,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>390</real>
 			<key>ypos</key>
-			<real>170</real>
+			<real>155</real>
 		</dict>
 		<key>FF2B7000-6AD9-42B6-825C-E952CD707CFE</key>
 		<dict>
@@ -653,7 +700,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>600</real>
 			<key>ypos</key>
-			<real>140</real>
+			<real>125</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

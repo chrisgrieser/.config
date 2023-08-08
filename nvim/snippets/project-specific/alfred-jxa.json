@@ -26,7 +26,7 @@
 		"body": "const ${1:envVar} = $.getenv(\"${2:envVar}\");"
 	},
 	"Get Alfred Env (Safe)": {
-		"prefix": "Get Alfred Env",
+		"prefix": "Get Alfred Env (Safe)",
 		"body": "const ${1:envVar} = $.NSProcessInfo.processInfo.environment.objectForKey(\"${2:envVar}\").js;"
 	},
 	"AlfredRun": {

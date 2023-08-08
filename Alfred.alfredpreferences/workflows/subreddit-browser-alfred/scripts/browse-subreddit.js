@@ -116,8 +116,6 @@ function getHackernewsPosts(oldUrls) {
 	return hits;
 }
 
-//──────────────────────────────────────────────────────────────────────────────
-
 /** @typedef {object} redditPost
  * @property {string} kind
  * @property {object} data
@@ -145,7 +143,7 @@ function getRedditPosts(subredditName, oldUrls) {
 	// INFO free API calls restricted to 10 per minute
 	// https://support.reddithelp.com/hc/en-us/articles/16160319875092-Reddit-Data-API-Wiki
 
-	// HACK reddit API does not like curl (lol)
+	// HACK changing user agent because reddit API does not like curl (lol)
 	const curlCommand = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/new.json"`;
 	const response = JSON.parse(app.doShellScript(curlCommand));
 	if (response.error) {
@@ -218,6 +216,7 @@ function run() {
 	if (!cacheIsOutdated(subredditCache)) {
 		posts = JSON.parse(readFile(subredditCache));
 		return JSON.stringify({
+			variables: { cache_was_updated: "false" }, // Alfred vars always strings
 			skipknowledge: true, // workflow handles order to remember reading positions
 			items: posts,
 		});
@@ -240,5 +239,8 @@ function run() {
 		}
 	}
 	writeToFile(subredditCache, JSON.stringify(posts));
-	return JSON.stringify({ items: posts });
+	return JSON.stringify({
+		variables: { cache_was_updated: "true" }, // Alfred vars always strings
+		items: posts,
+	});
 }

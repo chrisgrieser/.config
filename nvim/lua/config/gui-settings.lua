@@ -63,7 +63,6 @@ g.neovide_input_macos_alt_is_meta = false -- false, so {@~ etc can be used
 -- Window Appearance
 g.neovide_underline_automatic_scaling = true -- slightly unstable according to docs
 g.neovide_scroll_animation_length = 1
-g.neovide_theme = "auto" -- automatically sets opt.background
 
 --------------------------------------------------------------------------------
 -- CURSOR

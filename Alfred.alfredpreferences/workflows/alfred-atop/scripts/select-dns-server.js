@@ -25,7 +25,8 @@ function run() {
 		},
 	];
 
-	const currentDns = app.doShellScript("networksetup -getdnsservers Ethernet").split("\r")[0];
+	// needs to get 2nd line, since first is default
+	const currentDns = app.doShellScript("networksetup -listallnetworkservices").split("\r")[1];
 	if (currentDns === "8.8.8.8") selectableDns[0].title = "✅ Google";
 	else if (currentDns === "1.1.1.1") selectableDns[1].title = "✅ Cloudflare";
 

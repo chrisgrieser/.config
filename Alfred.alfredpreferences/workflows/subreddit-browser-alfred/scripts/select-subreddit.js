@@ -86,7 +86,6 @@ function cacheSubscriberCount(subredditName) {
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	/** @type AlfredItem[] */
 	const subreddits = $.getenv("subreddits")
 		.split("\n")
 		.map((subredditName) => {
@@ -114,12 +113,14 @@ function run() {
 			} 
 			subtitle += `👥 ${subscriberCount}`;
 
-			return {
+			/** @type AlfredItem */
+			const alfredItem = {
 				title: `r/${subredditName}`,
 				subtitle: subtitle,
 				arg: subredditName,
 				icon: { path: iconPath },
 			};
+			return alfredItem;
 		});
 
 	// add hackernews as pseudo-subreddit
