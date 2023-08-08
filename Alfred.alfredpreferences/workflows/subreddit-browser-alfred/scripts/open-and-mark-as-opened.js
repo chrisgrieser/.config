@@ -28,7 +28,10 @@ function run(argv) {
 	const curSubreddit = readFile($.getenv("alfred_workflow_cache") + "/current_subreddit");
 	const subredditCachePath = `${$.getenv("alfred_workflow_cache")}/${curSubreddit}.json`;
 
-	if (!fileExists(subredditCachePath)) return;
+	if (!fileExists(subredditCachePath)) {
+		console.log("No subreddit cache found");
+		return;
+	}
 
 	/** @type{AlfredItem[]} */
 	const subredditCache = JSON.parse(readFile(subredditCachePath));
@@ -44,15 +47,14 @@ function run(argv) {
 	// the part not scrolled over gets to the top.
 	const reorderItems = $.getenv("save_scroll_position") === "1";
 	if (reorderItems) {
-		console.log("Re-ordering items.");
-		// using `Infinity` to always read till the end of the array. Using `splice`
-		// over `slice` so we also change the original array in-place
-		const unreadCache = subredditCache.splice(selectedItemIdx + 1, Infinity);
-		const readCache = subredditCache.map(item => {
+		// 1. Using `splice` over `slice` so we also change the original array in-place
+		// 2. for the readCache, we also remove the "new" icons
+		// 3. `subredditCache` then represents the unread items, and is therefore kept on top
+		const readCache = subredditCache.splice(0, selectedItemIdx + 1).map((item) => {
 			item.subtitle = item.subtitle.replace("🆕 ", "");
-			return
-		})
-		const reOrderedCache = unreadCache.concat(subredditCache);
+			return item;
+		});
+		const reOrderedCache = subredditCache.concat(readCache);
 		writeToFile(subredditCachePath, JSON.stringify(reOrderedCache));
 	}
 }
