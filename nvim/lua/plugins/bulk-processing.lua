@@ -6,13 +6,20 @@ return {
 			vim.g.VM_set_statusline = 0 -- already using my version via lualine component
 			vim.g.VM_show_warnings = 0
 			vim.g.VM_silent_exit = 1
-			-- https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
+			-- DOCS https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
 			vim.g.VM_maps = {
-				["Find Under"] = "<D-j>", -- select word under cursor & enter visual-multi (normal) / add next occurrence (visual-multi)
-				["Visual Add"] = "<D-j>", -- enter visual-multi (visual)
-				["Skip Region"] = "<D-S-j>", -- skip current selection (visual-multi)
-				["Find Operator"] = "s", -- operator, selects all regions found in the given textobj (visual-multi)
-				["Reselect Last"] = "gV",
+				-- NORMAL/VISUAL -> enter Visual-Multi
+				["Find Under"] = "<D-j>", -- select word under cursor
+				["Reselect Last"] = "gV", 
+				["Visual Add"] = "<D-j>", -- visual: visual-multi with current selection
+
+				-- VISUAL-MULTI
+				-- add next occurrence
+				["Find Next"] = "n",
+				["Find Prev"] = "N",
+				["Skip Region"] = "q", -- skip & find next
+				["Remove Region"] = "Q", -- remove & find previous
+				["Find Operator"] = "s", -- operator, selects all regions found in textobj
 			}
 		end,
 	},
