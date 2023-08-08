@@ -30,6 +30,7 @@ export TICKER_APP="Ivory" # or Twitter/Mastodon
 
 #───────────────────────────────────────────────────────────────────────────────
 # Safe API keys ouotside the dotfile repo
+# shellcheck disable=1091
 [[ -f "$DATA_DIR/private dotfiles/api-keys.sh" ]] && source "$DATA_DIR/private dotfiles/api-keys.sh"
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -37,9 +38,6 @@ export TICKER_APP="Ivory" # or Twitter/Mastodon
 # NEOVIM
 # so linters managed by mason are available to other apps
 export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
-
-export NEOVIDE_FRAME="buttonless"
-export NEOVIDE_IDLE=1
 
 #───────────────────────────────────────────────────────────────────────────────
 # PASS

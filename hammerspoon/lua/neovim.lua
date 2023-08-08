@@ -12,8 +12,9 @@ local function obsidianThemeDevHelper(win)
 	if
 		not win
 		or not win:application()
-		or (obsi:mainWindow():isMinimized())
 		or not (win:application():name():lower() == "neovide")
+		or not obsi:mainWindow()
+		or obsi:mainWindow():isMinimized()
 	then
 		return
 	end

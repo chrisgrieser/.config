@@ -1,16 +1,9 @@
-# https://neovide.dev/config-file.html?highlight=frame#available-settings
-# INFO this config file only in effect with next release (> 0.10.4)
-#───────────────────────────────────────────────────────────────────────────────
-# TODO upon next release, remove neovide config from .zshenv
+# DOCS https://neovide.dev/config-file.html?highlight=frame#available-settings
 #───────────────────────────────────────────────────────────────────────────────
 
-multigrid = false
-maximized = false
-idle = true
+# remove titlebar
+# WARN using "None" prevents window managers from controlling the neovide window
+frame = "Buttonless"
 
-# REMOVE TITLEBAR AND TRAFFIC LIGHTS
-frame = "buttonless" # WARN using "none" prevents window managers from controlling the neovide window
-# "transparent" does not work due to overlaps with lualine: https://github.com/nvim-lualine/lualine.nvim/issues/1067
-
-# NOTE also needs to be set in neovide restart function located in
-# karabiner-hyper-config, since that file does not read from zshenv
+# keeping traffic lights via `frame = "Transparent"` does not work due to
+# overlaps with lualine: https://github.com/nvim-lualine/lualine.nvim/issues/1067

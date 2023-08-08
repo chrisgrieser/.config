@@ -78,6 +78,11 @@ if not u.isReloading() then
 	if env.isAtOffice then u.runWithDelays({ 10, 20, 30, 40 }, moveOfficeNotesToBase) end
 end
 
+-- 2. Every morning (safety redundancy)
+MorningTimerForSidenotes = hs.timer
+	.doAt("07:00", "01d", M.reminderToSidenotes , true)
+	:start()
+
 --------------------------------------------------------------------------------
 
 return M
