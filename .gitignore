@@ -1,8 +1,13 @@
-# WARN 
-
 # tokens and credentials that some apps annoyingly store in .config 😠
 gh/hosts.yml
 spotify-tui/.spotify_token_cache.json
 
-# unignore .DS_Store to sync view settings scross macs
+#───────────────────────────────────────────────────────────────────────────────
+
+# unignore 
+# to sync view settings scross macs
 !.DS_Store
+
+# custom icons (Icon must end with two \r[^M in vim])
+!Icon	
+

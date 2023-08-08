@@ -60,6 +60,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>43143E26-0CD1-43FB-B13D-74E8AB0411EF</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>19C8E66D-6CBD-4ACB-8E2D-14E928BC403C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>6496340C-2FAA-42F9-B626-A6E48D173091</key>
 		<array>
 			<dict>
@@ -813,12 +826,33 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>🎩 Alfred Preferences Icon</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>19C8E66D-6CBD-4ACB-8E2D-14E928BC403C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
 				<string>alfred-preference app</string>
 				<key>subtext</key>
-				<string></string>
+				<string>requires `fileicon`</string>
 				<key>text</key>
 				<string>⚙️ Update Alfred Preference Icon</string>
 				<key>withspace</key>
@@ -843,7 +877,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/update-alfred-preferences-icon.applescript</string>
+				<string>./scripts/update-alfred-preferences-icon.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -878,6 +912,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>875</real>
 			<key>ypos</key>
 			<real>140</real>
+		</dict>
+		<key>19C8E66D-6CBD-4ACB-8E2D-14E928BC403C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>335</real>
+			<key>ypos</key>
+			<real>630</real>
 		</dict>
 		<key>1C54A9EF-33FF-4391-A2AA-B1A21ABA6BE7</key>
 		<dict>
