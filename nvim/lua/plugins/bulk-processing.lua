@@ -10,7 +10,7 @@ return {
 			vim.g.VM_maps = {
 				-- NORMAL/VISUAL -> enter Visual-Multi
 				["Find Under"] = "<D-j>", -- select word under cursor
-				["Reselect Last"] = "gV", 
+				["Reselect Last"] = "gV",
 				["Visual Add"] = "<D-j>", -- visual: visual-multi with current selection
 
 				-- VISUAL-MULTI
@@ -23,14 +23,12 @@ return {
 			}
 		end,
 	},
-	{ -- structural search & replace, alternative: https://ast-grep.github.io/guide/editor-integration.html
-		"cshuaimin/ssr.nvim",
+	{ -- structural search & replace
+		"chrisgrieser/ssr.nvim", 
+		branch = "chrisgrieser-patch-1", -- FIX https://github.com/cshuaimin/ssr.nvim/issues/11#issuecomment-1367356598
 		keys = {
 			-- stylua: ignore
 			{ "<leader>fs", function() require("ssr").open() end, mode = { "n", "x" }, desc = "󱗘 Structural S&R" },
-		},
-		opts = {
-			keymaps = { close = "Q" }, -- needs remap due conflict with commenting keymap
 		},
 		init = function()
 			vim.api.nvim_create_autocmd("FileType", {
