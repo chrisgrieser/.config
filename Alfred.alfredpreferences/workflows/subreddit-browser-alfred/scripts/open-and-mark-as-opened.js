@@ -35,9 +35,8 @@ function run(argv) {
 	const selectedItemIdx = subredditCache.findIndex(
 		(item) => item.arg === selectedUrl || item.mods.shift.arg === selectedUrl,
 	);
-	console.log("[QL] selectedItemIdx:", selectedItemIdx);
 
-	// mark the selected item as visited such for the next run
+	// mark the selected item as visited
 	const visitedIcon = "🟪 ";
 	subredditCache[selectedItemIdx].title = visitedIcon + subredditCache[selectedItemIdx].title;
 
@@ -49,6 +48,10 @@ function run(argv) {
 		// using `Infinity` to always read till the end of the array. Using `splice`
 		// over `slice` so we also change the original array in-place
 		const unreadCache = subredditCache.splice(selectedItemIdx + 1, Infinity);
+		const readCache = subredditCache.map(item => {
+			item.subtitle = item.subtitle.replace("🆕 ", "");
+			return
+		})
 		const reOrderedCache = unreadCache.concat(subredditCache);
 		writeToFile(subredditCachePath, JSON.stringify(reOrderedCache));
 	}
