@@ -154,20 +154,14 @@ return {
 				l = { name = "  Log / Cmdline" },
 				g = { name = " 󰊢 Git" },
 			}, { prefix = "<leader>", mode = "x" })
+
+			-- set by some plugins, obscures whichkey
+			vim.keymap.set("n", "<LeftMouse>", "<Nop>")
 		end,
 		opts = {
 			plugins = {
 				presets = { motions = false, g = false, z = false },
 				spelling = { enabled = false },
-			},
-			triggers_blacklist = {
-				-- FIX "y" needed to fix weird delay occurring when yanking after a change
-				-- n = { "y" },
-				-- FIX very weird bug where insert mode undo points (<C-g>u),
-				-- as well as vim-matchup's <C-g>% binding insert extra `1`s
-				-- after wrapping to the next line in insert mode. The `G` needs
-				-- to be uppercased to affect the right mapping, too.
-				i = { "<C-G>" },
 			},
 			hidden = { "<Plug>", "^:lua ", "<cmd>" },
 			-- INFO to ignore a mapping use the label "which_key_ignore", not the "hidden" setting here
@@ -182,7 +176,7 @@ return {
 			},
 			window = {
 				-- only horizontal border to save space
-				border = { "", u.borderHorizontal, "", "" },
+				border = { "", require("config.utils").borderHorizontal, "", "" },
 				padding = { 0, 0, 0, 0 },
 				margin = { 0, 0, 0, 0 },
 			},
@@ -191,9 +185,9 @@ return {
 				scroll_up = "<PageUp>",
 			},
 			layout = { -- of the columns
-				height = { min = 4, max = 11 },
-				width = { min = 33, max = 35 },
-				spacing = 2,
+				height = { min = 5, max = 15 },
+				width = { min = 31, max = 34 },
+				spacing = 1,
 				align = "center",
 			},
 		},
