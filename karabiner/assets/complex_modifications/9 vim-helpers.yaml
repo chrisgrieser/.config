@@ -12,7 +12,7 @@ rules:
           # INFO Quitting via :wqall instead of cmd+Q so bufferleaving autocmds are triggered
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-              nvim --server="/tmp/nvim_server.pipe" --remote-send "<cmd>try|wqall|catch|qall|endtry<CR>"
+              nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>try|wqall|catch|qall|endtry<CR>"
               # unresponsive server exists with code 2
               exitcode=$?
 

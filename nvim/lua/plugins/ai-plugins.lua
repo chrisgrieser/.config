@@ -11,14 +11,8 @@ return {
 			vim.loop.fs_symlink(symLinkFrom, symLinkTo)
 		end,
 		config = function()
-			-- when cmp completion is loaded, clear the virtual text from codium
-			require("cmp").event:on("menu_opened", function() vim.fn["codeium#Clear"]() end)
-
 			-- ignore filetypes
-			vim.g.codeium_filetypes = {
-				TelescopePrompt = false,
-				DressingInput = false,
-			}
+			vim.g.codeium_filetypes = { TelescopePrompt = false, DressingInput = false }
 
 			-- INFO if cmp visible, will use cmp selection instead.
 			vim.g.codeium_disable_bindings = 1
