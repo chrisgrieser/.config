@@ -13,7 +13,8 @@ local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 --------------------------------------------------------------------------------
 
 -- CONFIG
-local marker = "[QL]"
+local marker = "🪓"
+local beepEmojis = { "🤖", "👽", "👾", "💣" }
 
 --------------------------------------------------------------------------------
 
@@ -37,8 +38,7 @@ local function getVar()
 	return varname
 end
 
----append string below current line, if text is array of strings, append each
----element as separate line
+---append string below current line
 ---@param text string
 local function append(text)
 	local ln = vim.api.nvim_win_get_cursor(0)[1]
@@ -48,21 +48,49 @@ end
 
 --------------------------------------------------------------------------------
 
+function M.messageLog()
+	local ft = bo.filetype
+	local templateStr
+
+	if ft == "lua" then
+		templateStr = 'print("%s")'
+		-- FIX for noice.nvim print-bug: https://github.com/folke/noice.nvim/issues/556
+		if expand("%:p"):find("nvim") then templateStr = 'vim.notify("%s ")' end
+	elseif ft == "python" then
+		templateStr = 'print("%s")'
+	elseif ft == "javascript" or ft == "typescript" then
+		templateStr = 'console.log("%s");'
+	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
+		templateStr = 'echo "%s"'
+	elseif ft == "applescript" then
+		templateStr = 'log "%s"'
+	else
+		vim.notify("🪓 MessageLog does not support " .. ft .. " yet.", logWarn)
+		return
+	end
+
+	local logStatement = templateStr:format(marker + " ")
+	append(logStatement)
+	-- goto insert mode at correct location
+	normal('f";') -- goto second ";"
+	cmd.startinsert()
+end
+
 ---log statement for variable under cursor, similar to the 'turbo console log'
 ---VS Code plugin. Supported: lua, python, js/ts, zsh/bash/fish, and applescript
-function M.log()
+function M.variableLog()
 	local varname = getVar()
 	local templateStr
 	local ft = bo.filetype
 
 	if ft == "lua" then
-		templateStr = 'print("%s %s: ".. %s)'
+		templateStr = 'print("%s%s: ".. %s)'
 		-- FIX for noice.nvim print-bug: https://github.com/folke/noice.nvim/issues/556
 		if expand("%:p"):find("nvim") then templateStr = 'vim.notify("%s %s: ".. %s)' end
 	elseif ft == "python" then
-		templateStr = 'print("%s %s:", %s)'
+		templateStr = 'print("%s%s:", %s)'
 	elseif ft == "javascript" or ft == "typescript" then
-		templateStr = 'console.log("%s %s:", %s);'
+		templateStr = 'console.log("%s%s:", %s);'
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
 		templateStr = 'echo "%s %s: $%s"'
 	elseif ft == "applescript" then
@@ -70,7 +98,7 @@ function M.log()
 	elseif ft == "css" or ft == "scss" then
 		templateStr = "outline: 2px solid red !important;"
 	else
-		vim.notify("Quicklog does not support " .. ft .. " yet.", logWarn)
+		vim.notify("🪓 VariableLog does not support " .. ft .. " yet.", logWarn)
 		return
 	end
 
@@ -78,7 +106,7 @@ function M.log()
 	append(logStatement)
 end
 
-function M.objectlog()
+function M.objectLog()
 	local varname = getVar()
 	local templateStr
 	local ft = bo.filetype
@@ -86,7 +114,7 @@ function M.objectlog()
 	if ft == "javascript" then
 		templateStr = 'console.log("%s %s:", JSON.stringify(%s))'
 	else
-		vim.notify("Objectlog does not support " .. ft .. " yet.", logWarn)
+		vim.notify("🪓 Objectlog does not support " .. ft .. " yet.", logWarn)
 		return
 	end
 
@@ -96,12 +124,11 @@ end
 
 ---adds simple "beep" log statement to check whether conditionals have been
 ---triggered. Supported: lua, python, js/ts, zsh/bash/fish, and applescript
-function M.beeplog()
+function M.beepLog()
 	local templateStr
 	local ft = bo.filetype
 
-	local emojis = { "🤖", "👽", "👾", "💣" }
-	local randomEmoji = emojis[math.random(1, #emojis)]
+	local randomEmoji = beepEmojis[math.random(1, #beepEmojis)]
 
 	if ft == "lua" or ft == "python" then
 		templateStr = 'print("%s %s beep")'
@@ -114,7 +141,7 @@ function M.beeplog()
 	elseif ft == "css" or ft == "scss" then
 		templateStr = "outline: 2px solid red !important;"
 	else
-		vim.notify("Beeplog does not support " .. ft .. " yet.", logWarn)
+		vim.notify("🪓 Beeplog does not support " .. ft .. " yet.", logWarn)
 		return
 	end
 
@@ -122,7 +149,7 @@ function M.beeplog()
 	append(logStatement)
 end
 
-function M.timelog()
+function M.timeLog()
 	if g.timelogStart == nil then g.timelogStart = true end
 	local logStatement1, logStatement2
 	local ft = bo.filetype
@@ -163,24 +190,18 @@ function M.timelog()
 			'echo "%s time ${durationSecs}s"',
 		}
 	else
-		vim.notify("Timelog does not support " .. ft .. " yet.", logWarn)
+		vim.notify("🪓 Timelog does not support " .. ft .. " yet.", logWarn)
 		return
 	end
-	if g.timelogStart then
-		for _, line in pairs(logStatement1) do
-			append(line:format(marker))
-		end
-	else
-		for _, line in pairs(logStatement2) do
-			append(line:format(marker))
-		end
+	local statementToUse = g.timelogStart and logStatement1 or logStatement2
+	for _, line in pairs(statementToUse) do
+		append(line:format(marker))
 	end
-
 	g.timelogStart = not g.timelogStart
 end
 
 -- simple debug statement
-function M.debuglog()
+function M.debugLog()
 	local logStatement
 	local ft = bo.filetype
 
@@ -196,7 +217,7 @@ end
 
 ---Remove all log statements in the current buffer
 ---Supported: lua, python, js/ts, zsh/bash/fish, and applescript
-function M.removelogs()
+function M.removeLogs()
 	local ft = bo.filetype
 	local logStatements
 	local numOfLinesBefore = fn.line("$")
@@ -207,7 +228,6 @@ function M.removelogs()
 		logStatements = { marker, "debugger" }
 	elseif ft == "applescript" then
 		logStatements = { marker, "beep" }
-		print("[QL] logStatements: " .. logStatements)
 	elseif ft == "css" or ft == "scss" then
 		logStatements = { "outline: 2px solid red !important;" }
 	else
@@ -221,7 +241,7 @@ function M.removelogs()
 	cmd.nohlsearch()
 
 	local linesRemoved = numOfLinesBefore - fn.line("$")
-	local msg = ("Removed %s log statements."):format(linesRemoved)
+	local msg = ("🪓 Removed %s log statements."):format(linesRemoved)
 	if linesRemoved == 1 then msg = msg:sub(1, -3) .. "." end
 	vim.notify(msg)
 

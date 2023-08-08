@@ -42,7 +42,7 @@ return {
 		dev = true,
 		event = "VeryLazy",
 		opts = {
-			retirementAgeMins = 25,
+			retirementAgeMins = 20,
 			ignoreUnsavedChangesBufs = false,
 			notificationOnAutoClose = true,
 		},
