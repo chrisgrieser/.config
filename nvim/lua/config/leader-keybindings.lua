@@ -9,8 +9,8 @@ local u = require("config.utils")
 -- META
 
 keymap("n", "<D-;>", function()
-	local thisFilePath = debug.getinfo(1).source:sub(2)
-	vim.cmd.edit(thisFilePath)
+	local pathOfThisFile = debug.getinfo(1).source:sub(2)
+	vim.cmd.edit(pathOfThisFile)
 end, { desc = "⌨️ Edit leader-keybindings.lua" })
 
 --------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ keymap("n", "<leader>pi", require("lazy").install, { desc = " Lazy Install" }
 
 keymap("n", "<leader>pm", cmd.Mason, { desc = " Mason Overview" })
 -- stylua: ignore
-keymap("n", "<leader>pt", cmd.TSUpdate, { desc = " Treesitter Parser Update" })
+keymap("n", "<leader>pt", cmd.TSUpdate, { desc = " Treesitter Update" })
 
 -- Theme Picker
 -- stylua: ignore
@@ -123,6 +123,7 @@ keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "󰒕 Code A
 
 -- LOGGING
 -- stylua: ignore start
+keymap({ "n", "x" }, "<leader>ll", function() require("funcs.lumberjack").messageLog() end, { desc = "󰣈 message log" })
 keymap({ "n", "x" }, "<leader>ll", function() require("funcs.lumberjack").variableLog() end, { desc = "󰣈 variable log" })
 keymap({ "n", "x" }, "<leader>lo", function() require("funcs.lumberjack").objectLog() end, { desc = "󰣈 object log" })
 keymap("n", "<leader>lb", function() require("funcs.lumberjack").beepLog() end, { desc = "󰣈 beep log" })
