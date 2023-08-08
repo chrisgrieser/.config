@@ -20,7 +20,7 @@ autocmd("VimEnter", {
 --------------------------------------------------------------------------------
 -- SIZE & FONT
 -- https://www.programmingfonts.org/#oxygen
-vim.opt.guifont = "JetBrainsMonoNL Nerd Font:h25.2" 
+vim.opt.guifont = "JetBrainsMonoNL Nerd Font:h25.2"
 
 local host = fn.hostname()
 local isAtOffice = (host:find("mini") or host:find("eduroam") or host:find("fak1")) ~= nil
@@ -38,8 +38,16 @@ elseif host:find("iMac") then
 end
 
 local delta = 0.01
-keymap({ "n", "x", "i" }, "<D-+>", function() g.neovide_scale_factor = g.neovide_scale_factor + delta end)
-keymap({ "n", "x", "i" }, "<D-->", function() g.neovide_scale_factor = g.neovide_scale_factor - delta end)
+keymap(
+	{ "n", "x", "i" },
+	"<D-+>",
+	function() g.neovide_scale_factor = g.neovide_scale_factor + delta end
+)
+keymap(
+	{ "n", "x", "i" },
+	"<D-->",
+	function() g.neovide_scale_factor = g.neovide_scale_factor - delta end
+)
 
 --------------------------------------------------------------------------------
 
@@ -55,6 +63,7 @@ g.neovide_input_macos_alt_is_meta = false -- false, so {@~ etc can be used
 -- Window Appearance
 g.neovide_underline_automatic_scaling = true -- slightly unstable according to docs
 g.neovide_scroll_animation_length = 1
+g.neovide_theme = "auto" -- automatically sets opt.background
 
 --------------------------------------------------------------------------------
 -- CURSOR
@@ -77,4 +86,4 @@ g.neovide_cursor_vfx_particle_speed = 40.0
 
 -- only railgun
 g.neovide_cursor_vfx_particle_phase = 1.3
-g.neovide_cursor_vfx_particle_curl = 1.3 
+g.neovide_cursor_vfx_particle_curl = 1.3

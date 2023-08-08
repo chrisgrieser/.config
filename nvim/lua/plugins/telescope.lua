@@ -214,9 +214,9 @@ local function telescopeConfig()
 				},
 				mappings = {
 					i = {
-						["<C-cr>"] = require("telescope-undo.actions").yank_additions,
-						["<S-cr>"] = require("telescope-undo.actions").yank_deletions,
 						["<cr>"] = require("telescope-undo.actions").restore,
+						["<D-S-c>"] = require("telescope-undo.actions").yank_additions,
+						["<D-c>"] = require("telescope-undo.actions").yank_deletions,
 					},
 				},
 			},

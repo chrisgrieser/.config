@@ -4,6 +4,8 @@
 <dict>
 	<key>add_hackernews</key>
 	<true/>
+	<key>age_icon</key>
+	<string>new</string>
 	<key>cache_age_threshold</key>
 	<string>20</string>
 	<key>custom_subreddit_icons</key>

@@ -12,10 +12,10 @@ address="/tmp/nvim_server.pipe"
 
 if pgrep -xq "neovide"; then
 	# https://neovim.io/doc/user/remote.html
-	nvim --server="$address" --remote "$@"
+	nvim --server "$address" --remote "$@"
 
-	# $LINE is set via `open --env=LINE=num` by the caller
-	[[ -n "$LINE" ]] && nvim --server="$address" --remote-send "<cmd>$LINE<CR>"
+	# $LINE is set via `open --env=LINE=n` by the caller
+	[[ -n "$LINE" ]] && nvim --server "$address" --remote-send "<cmd>$LINE<CR>"
 
 	osascript -e 'tell application "Neovide" to activate'
 else

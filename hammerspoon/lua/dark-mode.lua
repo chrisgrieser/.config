@@ -29,10 +29,9 @@ local function toggleDarkMode()
 	end
 
 	-- neovim
-	local nvimLuaCmd = ([[require('config.theme-customization').setThemeMode('%s')]]):format(toMode)
-	local shellCmd1 = ([[nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>lua %s<CR>"]]):format(
-		nvimLuaCmd
-	)
+	-- stylua: ignore
+	local nvimLuaCmd = ([[<cmd>lua require('config.theme-customization').setThemeMode('%s')<CR>]]):format( toMode)
+	local shellCmd1 = ([[nvim --server "/tmp/nvim_server.pipe" --remote-send "%s"]]):format(nvimLuaCmd)
 	hs.execute(u.exportPath .. shellCmd1)
 
 	-- Highlights PDF background
