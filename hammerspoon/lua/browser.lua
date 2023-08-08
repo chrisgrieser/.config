@@ -97,7 +97,7 @@ local function toggleVerticalTabs()
 	then
 		-- alt-9 bound to Vertical Tab Toggling in Brave Settings
 		-- brave://settings/system/shortcuts
-		hs.eventtap.keyStroke({ "alt" }, "9", 0, "Brave Browser")
+		hs.eventtap.keyStroke({ "cmd", "alt", "ctrl" }, "9", 0, "Brave Browser")
 	end
 	PrevTabCount = tabCount
 end

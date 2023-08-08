@@ -2,6 +2,7 @@ return {
 	{ -- fix scrollOff at end of file
 		"Aasim-A/scrollEOF.nvim",
 		event = "WinScrolled", 
+		opts = true,
 	},
 	{ -- automatically set correct indent for file
 		"nmac427/guess-indent.nvim",
