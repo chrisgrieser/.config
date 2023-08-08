@@ -101,7 +101,8 @@ function run() {
 	}
 	writeToFile(subredditCache, JSON.stringify(posts));
 
-	
+	const durationSecs = (+new Date() - timelogStart) / 1000;
+	console.log("Total", durationSecs, "s");
 
 	return JSON.stringify({
 		variables: { cache_was_updated: "true" }, // Alfred vars always strings

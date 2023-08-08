@@ -235,7 +235,7 @@ keymap({ "n", "x", "i" }, "<D-s>", cmd.update, { desc = " Save" })
 
 -- stylua: ignore
 keymap("", "<D-l>", function() fn.system("open -R '" .. expand("%:p") .. "'") end, { desc = "󰀶 Reveal in Finder" })
-keymap("", "<D-S-l>", function()
+keymap("", "<D-5>", function()
 	local parentFolder = expand("%:p:h")
 	if not parentFolder:find("Alfred%.alfredpreferences") then
 		vim.notify("Not in an Alfred directory.", u.warn)

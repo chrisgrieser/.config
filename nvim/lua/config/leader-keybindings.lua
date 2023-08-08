@@ -96,7 +96,12 @@ keymap(
 )
 keymap("n", "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", { desc = "󰕌 󰊢 Undo (Reset) Hunk" })
 keymap("n", "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", { desc = "󰕌 󰊢 Undo (Reset) Buffer" })
-keymap("n", "<leader>ut", function() cmd.Telescope("undo") end, { desc = "󰕌  Undo Telescope", silent = true })
+keymap(
+	"n",
+	"<leader>ut",
+	function() cmd.Telescope("undo") end,
+	{ desc = "󰕌  Undo Telescope", silent = true }
+)
 
 -- save open time for each buffer
 autocmd("BufReadPost", {
@@ -118,12 +123,12 @@ keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "󰒕 Code A
 
 -- LOGGING
 -- stylua: ignore start
-keymap({ "n", "x" }, "<leader>ll", function() require("funcs.quick-log").log() end, { desc = " log variable" })
-keymap({ "n", "x" }, "<leader>lo", function() require("funcs.quick-log").objectlog() end, { desc = " object log variable" })
-keymap("n", "<leader>lb", function() require("funcs.quick-log").beeplog() end, { desc = " beep log" })
-keymap("n", "<leader>l1", function() require("funcs.quick-log").timelog() end, { desc = " time log" })
-keymap("n", "<leader>lr", function() require("funcs.quick-log").removelogs() end, { desc = "  remove log" })
-keymap("n", "<leader>ld", function() require("funcs.quick-log").debuglog() end, { desc = " debugger" })
+keymap({ "n", "x" }, "<leader>ll", function() require("funcs.lumberjack").variableLog() end, { desc = "󰣈 variable log" })
+keymap({ "n", "x" }, "<leader>lo", function() require("funcs.lumberjack").objectLog() end, { desc = "󰣈 object log" })
+keymap("n", "<leader>lb", function() require("funcs.lumberjack").beepLog() end, { desc = "󰣈 beep log" })
+keymap("n", "<leader>l1", function() require("funcs.lumberjack").timeLog() end, { desc = "󰣈 time log" })
+keymap("n", "<leader>lr", function() require("funcs.lumberjack").removeLogs() end, { desc = "󰣈  remove log" })
+keymap("n", "<leader>ld", function() require("funcs.lumberjack").debugLog() end, { desc = "󰣈 debugger log" })
 keymap("n", "<leader>lt", cmd.Inspect, { desc = " Treesitter Inspect" })
 -- stylua: ignore end
 
@@ -193,7 +198,7 @@ keymap("n", "<leader>gd", function()
 
 		if pickaxe ~= "" then
 			fn.execute("/" .. pickaxe, "silent!") -- directly search for the term
-			u.normal("n") -- go to 1st result
+			cmd("silent! normal! n") -- search for first item
 		end
 	end)
 end, { desc = "󰊢 Pickaxe File History (Diffview)" })
@@ -211,7 +216,7 @@ keymap("n", "<leader>od", function()
 	else
 		vim.diagnostic.disable(0)
 	end
-end, { desc = "  Toggle Diagnostics" })
+end, { desc = "  Toggle Diagnostics" })
 
 keymap("n", "<leader>ow", function()
 	local wrapOn = vim.opt_local.wrap:get()
