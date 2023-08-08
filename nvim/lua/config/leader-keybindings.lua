@@ -92,11 +92,11 @@ keymap(
 	"n",
 	"<leader>ur",
 	function() cmd("silent later " .. tostring(vim.opt.undolevels:get())) end,
-	{ desc = "󰛒 Redo All", silent = true }
+	{ desc = "󰛒 Redo All" }
 )
 keymap("n", "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", { desc = "󰕌 󰊢 Undo (Reset) Hunk" })
 keymap("n", "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", { desc = "󰕌 󰊢 Undo (Reset) Buffer" })
-keymap("n", "<leader>ut", function() cmd.Telescope("undo") end, { desc = "󰕌  Undo Telescope" })
+keymap("n", "<leader>ut", function() cmd.Telescope("undo") end, { desc = "󰕌  Undo Telescope", silent = true })
 
 -- save open time for each buffer
 autocmd("BufReadPost", {

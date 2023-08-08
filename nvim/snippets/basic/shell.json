@@ -118,7 +118,7 @@
 		"prefix": "notify (msg)",
 		"body": "osascript -e 'display notification \"\" with title \"${1:msg}\" sound name \"${2|Blow,Basso|}\"'"
 	},
-	"if [[ .. ]]": {
+	"[[ .. ]] && .. ": {
 		"prefix": "if [[ .. ]]",
 		"body": "[[ $1 ]] && $0"
 	},
