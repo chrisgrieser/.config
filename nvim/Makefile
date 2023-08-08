@@ -3,7 +3,7 @@
 
 # prints total length of config
 lines:
-	find . -name "*.lua" | xargs wc -l | tail -n1
+	find . -name "*.lua" | xargs wc -l
 
 # prints remote repo of all installed plugins
 plugins:
