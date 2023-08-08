@@ -2,12 +2,9 @@ local opt_local = vim.opt_local
 local opt = vim.opt
 local bo = vim.bo
 local fn = vim.fn
-local cmd = vim.cmd
 local autocmd = vim.api.nvim_create_autocmd
 local keymap = vim.keymap.set
-local expand = vim.fn.expand
 local u = require("config.utils")
-local api = vim.api
 
 --------------------------------------------------------------------------------
 -- REMOTE CONTROL / AUTOMATION
@@ -33,6 +30,8 @@ opt.titlestring = '%{expand("%:p")}'
 opt.undodir:prepend(u.vimDataDir .. "undo//")
 opt.viewdir = u.vimDataDir .. "view"
 opt.shadafile = u.vimDataDir .. "main.shada"
+
+opt.swapfile = false -- doesn't help and only creates useless files :/
 
 --------------------------------------------------------------------------------
 -- Undo
@@ -132,27 +131,6 @@ autocmd("CmdlineEnter", {
 opt.scrolloff = 13
 opt.sidescrolloff = 13
 
--- FIX scrolloff at EoF
--- https://github.com/Aasim-A/scrollEOF.nvim/blob/master/lua/scrollEOF.lua#L11
--- autocmd("CursorMoved", {
--- 	callback = function()
--- 		if bo.filetype == "DressingSelect" then return end
---
--- 		local win_height = vim.api.nvim_win_get_height(0)
--- 		local win_view = fn.winsaveview()
--- 		local scrolloff = math.min(opt_local.scrolloff:get(), math.floor(win_height / 2))
--- 		local scrolloff_line_count = win_height - (fn.line("w$") - win_view.topline + 1)
--- 		local distance_to_last_line = fn.line("$") - win_view.lnum
--- 		if
--- 			distance_to_last_line < scrolloff
--- 			and scrolloff_line_count + distance_to_last_line < scrolloff
--- 		then
--- 			win_view.topline = win_view.topline + scrolloff - (scrolloff_line_count + distance_to_last_line)
--- 			fn.winrestview(win_view)
--- 		end
--- 	end,
--- })
-
 --------------------------------------------------------------------------------
 
 -- whitespace & indentation
@@ -190,65 +168,6 @@ autocmd("BufReadPost", {
 				opt_local.listchars:append { lead = "·" }
 			end
 		end, 5)
-	end,
-})
-
---------------------------------------------------------------------------------
--- AUTO-SAVING
-
--- save on leaving file
-opt.swapfile = false -- doesn't help and only creates useless files :/
-opt.autowrite = true
-opt.autowriteall = true
-autocmd({ "BufLeave", "BufDelete", "FocusLost" }, {
-	pattern = "?*",
-	callback = function()
-		local filepath = expand("%:p")
-		if
-			filepath ~= ""
-			and (bo.buftype == "" or bo.buftype == "acwrite")
-			and bo.filetype ~= "gitcommit"
-			and opt.write:get()
-			and not bo.readonly
-		then
-			cmd("silent noautocmd update " .. filepath)
-		end
-	end,
-})
-
--- save on changes
-autocmd({ "InsertLeave", "TextChanged" }, {
-	pattern = "?*",
-	callback = function()
-		local debounceDelaySec = 4 -- save at most every x seconds
-
-		-- for hot-reloading css
-		local smallerThanRegularWin = (vim.opt.columns:get() < 65 or vim.opt.lines:get() < 20)
-		if bo.filetype == "css" and smallerThanRegularWin then debounceDelaySec = 1.5 end
-
-		local bufNo = api.nvim_get_current_buf()
-		local filepath = expand("%:p")
-
-		if
-			not vim.b["savingQueued"]
-			and fn.reg_executing() == ""
-			and filepath ~= ""
-			and (bo.buftype == "" or bo.buftype == "acwrite")
-			and bo.filetype ~= "gitcommit"
-			and opt.write:get()
-			and not bo.readonly
-		then
-			api.nvim_buf_set_var(bufNo, "savingQueued", true)
-			vim.defer_fn(function()
-				local closedInMeantime = not api.nvim_buf_is_valid(bufNo)
-				local bufferChangedInMeantime = api.nvim_get_current_buf() ~= bufNo
-				local isInCmdline = vim.fn.getcmdtype():find("[/?]") ~= nil
-				if closedInMeantime or bufferChangedInMeantime or isInCmdline then return end
-
-				cmd("silent noautocmd update " .. filepath)
-				api.nvim_buf_set_var(bufNo, "savingQueued", false)
-			end, 1000 * debounceDelaySec)
-		end
 	end,
 })
 

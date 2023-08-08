@@ -8,11 +8,6 @@ return {
 		lazy = true, -- loaded by my "vim.on_key" function
 		opts = { nearest_only = true },
 	},
-	{ -- fix scrollOff at end of file
-		"Aasim-A/scrollEOF.nvim",
-		event = "VeryLazy",
-		opts = { insert_mode = true },
-	},
 	{ -- UI overhaul
 		"folke/noice.nvim",
 		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
@@ -252,6 +247,42 @@ return {
 				},
 			}
 		end,
+	},
+	{ -- :bnext & :bprevious get visual overview of buffers
+		"ghillb/cybu.nvim",
+		keys = {
+			-- not mapping via <Plug>, since that prevents lazyloading
+			-- functions names from: https://github.com/ghillb/cybu.nvim/blob/c0866ef6735a85f85d4cf77ed6d9bc92046b5a99/plugin/cybu.lua#L38
+			{ "<BS>", function() require("cybu").cycle("next") end, desc = "󰽙 Next Buffer" },
+			{ "<S-BS>", function() require("cybu").cycle("prev") end, desc = "󰽙 Previous Buffer" },
+		},
+		dependencies = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim" },
+		opts = {
+			display_time = 1000,
+			position = {
+				anchor = "bottomcenter",
+				max_win_height = 12,
+				vertical_offset = 3,
+			},
+			style = {
+				border = u.borderStyle,
+				padding = 7,
+				path = "tail",
+				hide_buffer_id = true,
+				highlights = {
+					current_buffer = "CursorLine",
+					adjacent_buffers = "Normal",
+				},
+			},
+			behavior = {
+				mode = {
+					default = {
+						switch = "immediate",
+						view = "paging",
+					},
+				},
+			},
+		},
 	},
 	{ -- Better input/selection fields
 		"stevearc/dressing.nvim",
