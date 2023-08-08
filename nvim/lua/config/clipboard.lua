@@ -27,11 +27,6 @@ keymap("n", "dd", function()
 end, { expr = true })
 
 --------------------------------------------------------------------------------
--- Yanky
-keymap("n", "p", "<Plug>(YankyPutAfter)", { desc = " Paste (Yanky)" })
-keymap("n", "P", "<Plug>(YankyCycleForward)", { desc = " Cycle Yankring" })
-
---------------------------------------------------------------------------------
 
 -- paste charwise reg as linewise & vice versa
 keymap("n", "gp", function()

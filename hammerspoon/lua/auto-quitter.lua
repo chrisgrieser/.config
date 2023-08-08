@@ -40,6 +40,8 @@ local function quit(app)
 		end
 		suffix = " (windows closed)"
 	elseif app == "Obsidian" then
+		local obsiWin = 
+		if 
 		u.app("Obsidian"):mainWindow():minimize()
 		suffix = " (window minimized)"
 	elseif app == "Hammerspoon" then

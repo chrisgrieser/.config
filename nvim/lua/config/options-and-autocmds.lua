@@ -30,7 +30,6 @@ opt.titlestring = '%{expand("%:p")}'
 
 -- DIRECTORIES
 -- move to custom location where they are synced independently from the dotfiles repo
-opt.directory:prepend(u.vimDataDir .. "swap//")
 opt.undodir:prepend(u.vimDataDir .. "undo//")
 opt.viewdir = u.vimDataDir .. "view"
 opt.shadafile = u.vimDataDir .. "main.shada"
@@ -98,7 +97,6 @@ opt.cmdheight = 0
 opt.history = 400 -- reduce noise for command history search
 opt.shortmess:append("s") -- reduce info in :messages
 opt.shortmess:append("S") -- reduce info in :messages
-opt.shortmess:append("A") -- no swap file alerts
 opt.report = 9999 -- disable "x more/fewer lines" messages
 
 -- Character groups
@@ -199,6 +197,7 @@ autocmd("BufReadPost", {
 -- AUTO-SAVING
 
 -- save on leaving file
+opt.swapfile = false -- doesn't help and only creates useless files :/
 opt.autowrite = true
 opt.autowriteall = true
 autocmd({ "BufLeave", "BufDelete", "FocusLost" }, {

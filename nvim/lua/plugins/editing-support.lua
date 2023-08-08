@@ -110,11 +110,14 @@ return {
 			},
 		},
 	},
-	{ -- clipboard history / killring
+	{ -- killring & highlights on `p`
 		"gbprod/yanky.nvim",
-		event = "BufReadPost",
+		keys = {
+			{ "p", "<Plug>(YankyPutAfter)", desc = " Paste (Yanky)" },
+			{ "P", "<Plug>(YankyCycleForward)", desc = " Cycle Yankring" },
+		},
 		opts = {
-			ring = { history_length = 50 },
+			ring = { history_length = 20 },
 			highlight = {
 				on_yank = false, -- using nicer highlights from vim.highlight.on_yank() instead
 				on_put = true,
