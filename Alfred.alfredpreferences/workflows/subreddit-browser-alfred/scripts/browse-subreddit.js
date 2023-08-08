@@ -6,7 +6,6 @@ app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 // CONFIG
 
-const cacheAgeThreshold = parseInt($.getenv("cache_age_threshold")) || 15;
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -42,6 +41,7 @@ function ensureCacheFolderExists() {
 
 /** @param {string} path */
 function cacheIsOutdated(path) {
+	const cacheAgeThreshold = parseInt($.getenv("cache_age_threshold")) || 15;
 	ensureCacheFolderExists();
 	const cacheObj = Application("System Events").aliases[path];
 	if (!cacheObj.exists()) return true;
@@ -49,20 +49,18 @@ function cacheIsOutdated(path) {
 	return cacheAgeMins > cacheAgeThreshold;
 }
 
-
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
+	const timelogStart = +new Date();
 	// determine subreddit
-	const topSubreddit = $.getenv("subreddits").split("\n")[0]; // only needed for first run
-	const curSubreddit = readFile($.getenv("alfred_workflow_cache") + "/current_subreddit");
-	const selectedSubreddit = $.NSProcessInfo.processInfo.environment.objectForKey("selected_subreddit").js;
-	const subredditName = selectedSubreddit || curSubreddit || topSubreddit;
-	if (subredditName !== curSubreddit) {
-		writeToFile($.getenv("alfred_workflow_cache") + "/current_subreddit", subredditName);
-	}
+	const prevRunSubreddit = readFile($.getenv("alfred_workflow_cache") + "/current_subreddit");
+	const selectedWithAlfred = $.NSProcessInfo.processInfo.environment.objectForKey("selected_subreddit").js;
+	const firstSubredditInConfig = $.getenv("subreddits").split("\n")[0]; // only needed for first run
+	const subredditName = selectedWithAlfred || prevRunSubreddit || firstSubredditInConfig;
+	writeToFile($.getenv("alfred_workflow_cache") + "/current_subreddit", subredditName);
 
 	// read posts from cache
 	const subredditCache = `${$.getenv("alfred_workflow_cache")}/${subredditName}.json`;
@@ -78,12 +76,11 @@ function run() {
 
 	// IMPORT SUBREDDIT-LOADING-FUNCTIONS
 	// HACK read + eval, since JXA knows no import keyword
-	const fileToImport =(
+	const fileToImport =
 		$.getenv("alfred_preferences") +
-			"/workflows/" +
-			$.getenv("alfred_workflow_uid") + // = foldername
-			"/scripts/get-new-posts.js"
-	);
+		"/workflows/" +
+		$.getenv("alfred_workflow_uid") + // = foldername
+		"/scripts/get-new-posts.js";
 	eval(readFile(fileToImport));
 
 	// marker for old posts
@@ -103,6 +100,9 @@ function run() {
 		}
 	}
 	writeToFile(subredditCache, JSON.stringify(posts));
+
+	
+
 	return JSON.stringify({
 		variables: { cache_was_updated: "true" }, // Alfred vars always strings
 		items: posts,

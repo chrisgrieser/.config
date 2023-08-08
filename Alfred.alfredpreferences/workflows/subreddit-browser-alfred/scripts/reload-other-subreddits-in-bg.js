@@ -31,12 +31,11 @@ function run() {
 
 	// IMPORT SUBREDDIT-LOADING-FUNCTIONS
 	// HACK read + eval, since JXA knows no import keyword
-	const fileToImport =(
+	const fileToImport =
 		$.getenv("alfred_preferences") +
-			"/workflows/" +
-			$.getenv("alfred_workflow_uid") + // = foldername
-			"/scripts/get-new-posts.js"
-	);
+		"/workflows/" +
+		$.getenv("alfred_workflow_uid") + // = foldername
+		"/scripts/get-new-posts.js";
 	eval(readFile(fileToImport));
 
 	// determine the other subreddits
@@ -44,6 +43,7 @@ function run() {
 	const allSubreddits = $.getenv("subreddits").split("\n")
 	if($.getenv("add_hackernews") === "1") allSubreddits.push("hackernews");
 	const otherSubreddits = allSubreddits.filter((subreddit) => subreddit !== curSubreddit);
+
 
 	// reload cache for them
 	otherSubreddits.forEach((subredditName) => {
