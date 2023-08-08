@@ -1,5 +1,4 @@
 local autocmd = vim.api.nvim_create_autocmd
-local bo = vim.bo
 local cmd = vim.cmd
 local expand = vim.fn.expand
 local fn = vim.fn
@@ -205,10 +204,6 @@ keymap("c", "<C-w>", "<C-r><C-w>") -- add word under cursor
 keymap("x", "V", "j", { desc = "repeated V selects more lines" })
 keymap("x", "v", "<C-v>", { desc = "vv from Normal Mode starts Visual Block Mode" })
 
--- TERMINAL MODE
-keymap("t", "<C-CR>", [[<C-\><C-n><C-w>w]], { desc = " Goto next window" })
-keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste in Terminal Mode" })
-
 --------------------------------------------------------------------------------
 -- BUFFERS & WINDOWS & SPLITS
 
@@ -231,7 +226,6 @@ keymap("", "<C-Up>", "<cmd>resize -3<CR>", { desc = " horizontal resize (-)" 
 ------------------------------------------------------------------------------
 
 -- CMD-KEYBINDINGS
-keymap({ "n", "x", "i" }, "<D-s>", cmd.update, { desc = " Save" })
 
 -- stylua: ignore
 keymap("", "<D-l>", function() fn.system("open -R '" .. expand("%:p") .. "'") end, { desc = "󰀶 Reveal in Finder" })
@@ -264,6 +258,7 @@ keymap("i", "<D-t>", "${}<Left>", { desc = "Template String" })
 --------------------------------------------------------------------------------
 -- FILES
 
+---using this to show the actual directory where I am telescoping
 ---@nodiscard
 ---@return string name of the current project
 local function projectName()
@@ -394,22 +389,6 @@ autocmd("FileType", {
 		local opts = { buffer = true, nowait = true, desc = " Close" }
 		keymap("n", "<Esc>", cmd.close, opts)
 		keymap("n", "q", cmd.close, opts)
-	end,
-})
-
--- just "q" to close special window
--- remove the waiting time from the q, due to conflict with `qq` for comments
-autocmd("FileType", {
-	pattern = { "ssr", "TelescopePrompt" },
-	callback = function()
-		local opts = { buffer = true, nowait = true, remap = true, desc = " Close" }
-		if bo.filetype == "ssr" then
-			keymap("n", "q", "Q", opts)
-		else
-			-- HACK delay ensures it comes later in the autocmd stack and
-			-- overwrites the plugins's autocmds
-			vim.defer_fn(function() keymap("n", "q", "<Esc>", opts) end, 1)
-		end
 	end,
 })
 

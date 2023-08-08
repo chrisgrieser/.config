@@ -6,11 +6,10 @@ local u = require("config.utils")
 
 --------------------------------------------------------------------------------
 
---- macOS bindings
-keymap({ "n", "x" }, "<D-v>", "p", { desc = "paste" }) -- needed for pasting from Alfred clipboard history
+--- macOS bindings (needed for compatibility with automation apps)
+keymap({"n", "x"}, "<D-c>", "y", { desc = "copy" }) 
+keymap({ "n", "x" }, "<D-v>", "p", { desc = "paste" }) 
 keymap("c", "<D-v>", "<C-r>+", { desc = "paste" })
-keymap("i", "<D-v>", "<C-g>u<C-r><C-o>+", { desc = "paste" }) -- "<C-g>u" adds undopoint before the paste
-keymap("x", "<D-c>", "y", { desc = "copy" }) -- needed for compatibility with automation apps
 
 --------------------------------------------------------------------------------
 
@@ -36,9 +35,8 @@ keymap("n", "P", "<Plug>(YankyCycleForward)", { desc = " Cycle Yankring" })
 
 -- paste charwise reg as linewise & vice versa
 keymap("n", "gp", function()
-	local reg = "+"
-	local regContent = fn.getreg(reg)
-	local isLinewise = fn.getregtype(reg) == "V"
+	local regContent = fn.getreg("+")
+	local isLinewise = fn.getregtype("+") == "V"
 
 	local targetRegType = "V"
 	if isLinewise then
@@ -46,10 +44,18 @@ keymap("n", "gp", function()
 		regContent = regContent:gsub("^%s*", ""):gsub("%s*$", "")
 	end
 
-	fn.setreg(reg, regContent, targetRegType) ---@diagnostic disable-line: param-type-mismatch
-	u.normal('"' .. reg .. "p") -- for whatever reason, not naming a register does not work here
-	if targetRegType == "V" then u.normal("==") end
+	fn.setreg("+", regContent, targetRegType) ---@diagnostic disable-line: param-type-mismatch
+	u.normal('"+p')
 end, { desc = " Paste differently" })
+
+-- always paste characterwise when in insert mode
+keymap("i", "<D-v>", function ()
+	local regContent = fn.getreg("+"):gsub("^%s*", ""):gsub("%s*$", "")
+	fn.setreg("+", regContent, "v") ---@diagnostic disable-line: param-type-mismatch
+	-- "<C-g>u" adds undopoint before the paste
+	return "<C-g>u<C-r><C-o>+"
+end, { desc = " Paste charwise", expr = true }) 
+
 
 --------------------------------------------------------------------------------
 
