@@ -50,7 +50,8 @@ function file_url_or_stdin() {
 		local filepath="$1"
 		cp -f "$filepath" "$tmp"
 	else
-		local last_url=$(cat "$tmp")
+		local last_url
+		last_url=$(cat "$tmp")
 		local url="$1"
 		command curl --progress-bar --header "User-Agent: Chrome/115.0.0.0" "$url" >"$tmp"
 	fi
