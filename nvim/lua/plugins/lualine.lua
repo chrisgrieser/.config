@@ -69,12 +69,6 @@ end
 
 --------------------------------------------------------------------------------
 
-local function multiCursorCount()
-	local ok, hydra = pcall(require, 'hydra.statusline')
-	if not (ok and hydra.is_active()) then return "" end
-	return "󰇀 " .. hydra.get_name()
-end
-
 local function clock()
 	-- only show the clock when fullscreen (= it covers the menubar clock)
 	if vim.opt.columns:get() < 110 or vim.opt.lines:get() < 25 then return "" end
@@ -165,14 +159,10 @@ local lualineConfig = {
 			{
 				"filename",
 				file_status = false,
-				fmt = function(str) return str:gsub("%w+;#toggleterm#.*", "Toggleterm") end,
 			},
 		},
 		lualine_b = {
-			{
-				require("funcs.alt-alt").altFileStatusline,
-				component_separators = { right = "", left = " " },
-			},
+			{ require("funcs.alt-alt").altFileStatusline },
 		},
 		lualine_c = {
 			{ require("funcs.quickfix").counter },
@@ -199,7 +189,6 @@ local lualineConfig = {
 			{ "branch", cond = isStandardBranch },
 		},
 		lualine_z = {
-			{ multiCursorCount },
 			{ selectionCount, padding = { left = 0, right = 1 } },
 			"location",
 		},

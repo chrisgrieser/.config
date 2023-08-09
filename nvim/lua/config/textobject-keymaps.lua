@@ -13,8 +13,7 @@ end
 -- QUICK TEXTOBJ OPERATIONS
 keymap("n", "<Space>", '"_ciw', { desc = "󱡔 change word" })
 keymap("x", "<Space>", '"_c', { desc = "󱡔 change selection" })
-keymap("n", "<F2>", '"_daw', { desc = "󱡔 delete word" }) -- HACK since <S-Space> not fully supported, requires karabiner remapping it
-keymap("i", "<F2>", "<Space>") -- FIX accidental triggering in insert mode when typing quickly
+keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" }) 
 
 --------------------------------------------------------------------------------
 -- STICKY COMMENT TEXT OBJECT ACTIONS
