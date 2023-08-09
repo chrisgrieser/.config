@@ -1,39 +1,33 @@
 return {
-	{ -- Multi Cursor
-		"mg979/vim-visual-multi",
-		enabled = false,
-		keys = { { "<D-j>", mode = { "n", "x" }, desc = "󰆿 Multi-Cursor" } },
-		init = function()
-			vim.g.VM_set_statusline = 0 -- already using my version via lualine component
-			vim.g.VM_show_warnings = 0
-			vim.g.VM_silent_exit = 1
-			-- DOCS https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
-			vim.g.VM_maps = {
-				-- NORMAL/VISUAL_MODE -> enter Visual-Multi
-				["Find Under"] = "<D-j>", -- select word under cursor
-				["Reselect Last"] = "gV",
-				["Visual Add"] = "<D-j>", -- visual: visual-multi with current selection
-
-				-- VISUAL-MULTI-MODE
-				-- add next occurrence
-				["Find Next"] = "n",
-				["Find Prev"] = "N",
-				["Skip Region"] = "q", -- skip & find next
-				["Remove Region"] = "Q", -- remove & find previous
-				["Find Operator"] = "s", -- operator, selects all regions found in textobj
-			}
-		end,
-	},
 	{
 		"smoka7/multicursors.nvim",
 		dependencies = { "nvim-treesitter/nvim-treesitter", "smoka7/hydra.nvim" },
-		opts = {
-			hint_config = false,
-		},
-		cmd = { "start", "visual", "clear", "pattern", "MCvisualPattern", "MCunderCursor" },
 		keys = {
-			{ "<D-j>", "<cmd>MCstart<cr>", mode = { "n", "v" }, desc = "󰆿 Multi-Cursor" },
+			-- stylua: ignore
+			{ "<D-j>", function() require("multicursors").start() end, mode = { "n", "v" }, desc = "󰆿 Multi-Cursor" },
 		},
+		config = function()
+			local normal = require("multicursors.normal_mode")
+			local extend = require("multicursors.extend_mode")
+			require("multicursors").setup {
+				hint_config = false,
+				create_commands = false,
+				normal_keys = {
+					-- add next selection by using the same key again
+					["<D-j>"] = { method = normal.find_next, opts = {} },
+					-- use extend-mode-motions in normal mode
+					["e"] = { method = extend.e_method, opts = {} },
+					["b"] = { method = extend.b_method, opts = {} },
+					["h"] = { method = extend.h_method, opts = {} },
+					["l"] = { method = extend.l_method, opts = {} },
+					["j"] = { method = extend.j_method, opts = {} },
+					["k"] = { method = extend.k_method, opts = {} },
+					["o"] = { method = extend.o_method, opts = {} },
+					["H"] = { method = extend.caret_method, opts = {} },
+					["L"] = { method = extend.dollar_method, opts = {} },
+				},
+			}
+		end,
 	},
 	{ -- structural search & replace
 		"cshuaimin/ssr.nvim",
