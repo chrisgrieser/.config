@@ -13,29 +13,23 @@ rules:
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
               nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>try|wqall|catch|qall|endtry<CR>"
-              # unresponsive server exists with code 2
-              exitcode=$?
+              exitcode=$? # unresponsive server exists with code 2
 
               if [[ $exitcode -ne 0 ]] ; then
                 osascript -e 'display notification "" with title "⚔️ Force killing nvim…"'
                 killall -9 nvim neovide
               fi
 
-              # wait for 2 secs
+              # wait until nvim not running anymore
               i=0
               while pgrep -xq "nvim" ; do 
                 i=$((i+1))
                 sleep 0.1
-                if [[ $i -gt 30 ]] ; then
-                  osascript -e 'display notification "" with title "⚔️ Could not kill nvim."'
-                  return
-                fi
+                [[ $i -gt 30 ]] && return
               done
 
-              # restart
-              # bwipeout necessary due to empty buffer created before jumping to '0
-              nohup neovide --geometry=104x33 -- -c "execute \"normal! '0\" | bwipeout #" &
-              disown # https://stackoverflow.com/a/20338584/22114136
+              # Restart (configured to reopen last file if opened without arg)
+              open -a "Neovide"
       # INFO explicitly remapping cmd+q ensures that cursor position and changes
       # are saved. Also, fixing the neovide issue of sometimes having nvim
       # processes left behind.

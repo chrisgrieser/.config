@@ -1,14 +1,27 @@
 {
-	"info (GitHub Callout)": {
-		"prefix": ["info (GitHub Callout)", "note (GitHub Callout)"],
-		"body": ["> __Note__  ", "> $0"]
+	"Note (GitHub Callout)": {
+		"prefix": [
+			"info (Callout)",
+			"note (Callout)"
+		],
+		"body": [
+			"> [!NOTE]  ",
+			"> $0"
+		]
 	},
 	"warning (GitHub Callout)": {
-		"prefix": "warning (GitHub Callout)",
-		"body": ["> __Warning__  ", "> $0"]
+		"prefix": "warning (Callout)",
+		"body": [
+			"> [!WARNING]  ",
+			"> $0"
+		]
 	},
 	"<kbd>": {
-		"prefix": ["kbd", "<kbd>", "key"],
+		"prefix": [
+			"kbd",
+			"<kbd>",
+			"key"
+		],
 		"body": "<kbd>$0</kbd>",
 		"description": "HTML tag for keys"
 	},
@@ -18,8 +31,16 @@
 		"description": "HTML syntax for images used to display images with reduced size"
 	},
 	"details & summary": {
-		"prefix": ["toggle / fold", "details & summary"],
-		"body": ["<details>", "<summary>${1:Text}</summary>", "$0", "</details>"],
+		"prefix": [
+			"toggle / fold",
+			"details & summary"
+		],
+		"body": [
+			"<details>",
+			"<summary>${1:Text}</summary>",
+			"$0",
+			"</details>"
+		],
 		"description": "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details"
 	},
 	"Insert task": {
@@ -33,15 +54,28 @@
 	},
 	"ignore start/end (ltex/vale)": {
 		"prefix": "ignore start/end (ltex/vale)",
-		"body": ["<!-- LTeX: enabled=false --><!-- vale off -->", "<!-- LTeX: enabled=true --><!-- vale on -->"]
+		"body": [
+			"<!-- LTeX: enabled=false --><!-- vale off -->",
+			"<!-- LTeX: enabled=true --><!-- vale on -->"
+		]
 	},
 	"ignore start/end (ltex)": {
 		"prefix": "ignore start/end (ltex)",
-		"body": ["<!-- LTeX: enabled=false -->", "<!-- LTeX: enabled=true -->"]
+		"body": [
+			"<!-- LTeX: enabled=false -->",
+			"<!-- LTeX: enabled=true -->"
+		]
 	},
 	"Markdown Codeblock": {
-		"prefix": [",,", "Codeblock"],
-		"body": ["```${1:lang}", "$0", "```"]
+		"prefix": [
+			",,",
+			"Codeblock"
+		],
+		"body": [
+			"```${1:lang}",
+			"$0",
+			"```"
+		]
 	},
 	"insert table (2x2)": {
 		"prefix": "table (2x2)",
