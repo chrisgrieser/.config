@@ -53,23 +53,23 @@ function M.messageLog()
 	local templateStr
 
 	if ft == "lua" then
-		templateStr = 'print("%s")'
+		templateStr = 'print("%s ")'
 		-- FIX for noice.nvim print-bug: https://github.com/folke/noice.nvim/issues/556
 		if expand("%:p"):find("nvim") then templateStr = 'vim.notify("%s ")' end
 	elseif ft == "python" then
-		templateStr = 'print("%s")'
+		templateStr = 'print("%s ")'
 	elseif ft == "javascript" or ft == "typescript" then
-		templateStr = 'console.log("%s");'
+		templateStr = 'console.log("%s ");'
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
-		templateStr = 'echo "%s"'
+		templateStr = 'echo "%s "'
 	elseif ft == "applescript" then
-		templateStr = 'log "%s"'
+		templateStr = 'log "%s "'
 	else
 		vim.notify("🪓 MessageLog does not support " .. ft .. " yet.", logWarn)
 		return
 	end
 
-	local logStatement = templateStr:format(marker .. " ")
+	local logStatement = templateStr:format(marker)
 	append(logStatement)
 	-- goto insert mode at correct location
 	normal('f";') -- goto second ";"
@@ -84,25 +84,25 @@ function M.variableLog()
 	local ft = bo.filetype
 
 	if ft == "lua" then
-		templateStr = 'print("%s%s: ".. %s)'
+		templateStr = 'print("%s %s: ".. %s)'
 		-- FIX for noice.nvim print-bug: https://github.com/folke/noice.nvim/issues/556
 		if expand("%:p"):find("nvim") then templateStr = 'vim.notify("%s %s: ".. %s)' end
 	elseif ft == "python" then
-		templateStr = 'print("%s%s:", %s)'
+		templateStr = 'print("%s %s:", %s)'
 	elseif ft == "javascript" or ft == "typescript" then
-		templateStr = 'console.log("%s%s:", %s);'
+		templateStr = 'console.log("%s %s:", %s);'
 	elseif ft == "zsh" or ft == "bash" or ft == "fish" or ft == "sh" then
-		templateStr = 'echo "%s%s: $%s"'
+		templateStr = 'echo "%s %s: $%s"'
 	elseif ft == "applescript" then
-		templateStr = 'log "%s%s:" & %s'
+		templateStr = 'log "%s %s:" & %s'
 	elseif ft == "css" or ft == "scss" then
-		templateStr = "outline: 2px solid red !important;"
+		templateStr = "outline: 2px solid red !important; /* %s */"
 	else
 		vim.notify("🪓 VariableLog does not support " .. ft .. " yet.", logWarn)
 		return
 	end
 
-	local logStatement = templateStr:format(marker .. " ", varname, varname)
+	local logStatement = templateStr:format(marker, varname, varname)
 	append(logStatement)
 end
 
@@ -112,13 +112,13 @@ function M.objectLog()
 	local ft = bo.filetype
 
 	if ft == "javascript" then
-		templateStr = 'console.log("%s%s:", JSON.stringify(%s))'
+		templateStr = 'console.log("%s %s:", JSON.stringify(%s))'
 	else
 		vim.notify("🪓 Objectlog does not support " .. ft .. " yet.", logWarn)
 		return
 	end
 
-	local logStatement = templateStr:format(marker .. " ", varname, varname)
+	local logStatement = templateStr:format(marker, varname, varname)
 	append(logStatement)
 end
 
@@ -131,21 +131,21 @@ function M.beepLog()
 	local randomEmoji = beepEmojis[math.random(1, #beepEmojis)]
 
 	if ft == "lua" or ft == "python" then
-		templateStr = 'print("%s%s beep")'
+		templateStr = 'print("%s beep %s")'
 	elseif ft == "javascript" or ft == "typescript" then
-		templateStr = 'console.log("%s%s beep");'
+		templateStr = 'console.log("%s beep %s");'
 	elseif ft == "zsh" or ft == "bash" or ft == "sh" then
-		templateStr = 'echo "%s%s beep"'
+		templateStr = 'echo "%s beep %s"'
 	elseif ft == "applescript" then
 		templateStr = "beep -- %s"
 	elseif ft == "css" or ft == "scss" then
-		templateStr = "outline: 2px solid red !important; /* %s*/"
+		templateStr = "outline: 2px solid red !important; /* %s */"
 	else
 		vim.notify("🪓 Beeplog does not support " .. ft .. " yet.", logWarn)
 		return
 	end
 
-	local logStatement = templateStr:format(marker .. " ", randomEmoji)
+	local logStatement = templateStr:format(marker, randomEmoji)
 	append(logStatement)
 end
 
@@ -156,22 +156,22 @@ function M.timeLog()
 
 	if ft == "lua" then
 		logStatement1 = {
-			'print("%stimelog start")',
+			'print("%s timelog start")',
 			"local timelogStart = os.time() -- %s",
 		}
 		logStatement2 = {
 			"local durationSecs = os.difftime(os.time(), timelogStart) -- %s",
-			'print("%stimelog:", durationSecs, "s")',
+			'print("%s timelog:", durationSecs, "s")',
 		}
 	elseif ft == "javascript" then
 		-- JXA does not support console.time()
 		logStatement1 = {
-			'console.log("%stimelog start");',
+			'console.log("%s timelog start");',
 			"const timelogStart = +new Date(); // %s",
 		}
 		logStatement2 = {
 			"const durationSecs = (+new Date() - timelogStart) / 1000; // %s",
-			'console.log("%stimelog:", durationSecs, "s");',
+			'console.log("%s timelog:", durationSecs, "s");',
 		}
 	elseif ft == "typescript" then
 		logStatement1 = {
@@ -183,11 +183,11 @@ function M.timeLog()
 	elseif ft == "bash" or ft == "zsh" or ft == "sh" or ft == "fish" then
 		logStatement1 = {
 			"timelogStart=$(date +%s) # %s",
-			'echo "%stime start"',
+			'echo "%s time start"',
 		}
 		logStatement2 = {
 			"timelogEnd=$(date +%s) && durationSecs = $((timelogEnd - timelogStart)) # %s",
-			'echo "%stime ${durationSecs}s"',
+			'echo "%s time ${durationSecs}s"',
 		}
 	else
 		vim.notify("🪓 Timelog does not support " .. ft .. " yet.", logWarn)
@@ -195,7 +195,7 @@ function M.timeLog()
 	end
 	local statementToUse = g.timelogStart and logStatement1 or logStatement2
 	for _, line in pairs(statementToUse) do
-		append(line:format(marker .. " "))
+		append(line:format(marker))
 	end
 	g.timelogStart = not g.timelogStart
 end
@@ -212,7 +212,7 @@ function M.debugLog()
 		return
 	end
 
-	append(logStatement:format(marker .. " "))
+	append(logStatement:format(marker))
 end
 
 ---Remove all log statements in the current buffer
@@ -220,7 +220,7 @@ end
 function M.removeLogs()
 	local numOfLinesBefore = fn.line("$")
 
-	-- escape for vim regex
+	-- escape for vim regex, in case `[]` are used in the marker
 	local toRemove = marker:gsub("%]", "\\]"):gsub("%[", "\\[")
 	cmd(("silent g/%s/d"):format(toRemove))
 	cmd.nohlsearch()

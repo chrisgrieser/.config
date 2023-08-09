@@ -1,6 +1,7 @@
 return {
 	{ -- Multi Cursor
 		"mg979/vim-visual-multi",
+		enabled = false,
 		keys = { { "<D-j>", mode = { "n", "x" }, desc = "󰆿 Multi-Cursor" } },
 		init = function()
 			vim.g.VM_set_statusline = 0 -- already using my version via lualine component
@@ -23,6 +24,16 @@ return {
 			}
 		end,
 	},
+	{
+		"smoka7/multicursors.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter", "smoka7/hydra.nvim" },
+		opts = {},
+		cmd = { "MCstart", "MCvisual", "MCclear", "MCpattern", "MCvisualPattern", "MCunderCursor" },
+		keys = {
+			{ "<D-j>", "<cmd>MCstart<cr>", mode = { "n", "v" }, desc = "󰆿 Multi-Cursor" },
+		},
+	},
+
 	{ -- structural search & replace
 		"cshuaimin/ssr.nvim",
 		keys = {
@@ -39,7 +50,12 @@ return {
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "ssr",
 				callback = function()
-					vim.keymap.set("n", "q", "Q", { desc = "Close", buffer = true, nowait = true, remap = true })
+					vim.keymap.set(
+						"n",
+						"q",
+						"Q",
+						{ desc = "Close", buffer = true, nowait = true, remap = true }
+					)
 					vim.opt_local.sidescrolloff = 1
 				end,
 			})

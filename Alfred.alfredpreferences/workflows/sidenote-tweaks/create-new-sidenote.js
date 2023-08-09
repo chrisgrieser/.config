@@ -1,8 +1,9 @@
 #!/usr/bin/env osascript -l JavaScript
 
+ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
-ObjC.import("stdlib");
+
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 const sidenotes = Application("SideNotes");
 
@@ -23,8 +24,9 @@ function run(argv) {
 	});
 
 	// close sidenotes
+	delay(0.1)
 	Application("System Events").keystroke("w", { using: ["command down"] });
 
-	const firstline = input.split("\n").shift();
+	const firstline = input.split("\n")[0];
 	return firstline; // for Alfred notification
 }

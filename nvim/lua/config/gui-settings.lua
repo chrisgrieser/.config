@@ -1,25 +1,9 @@
 local g = vim.g
 local fn = vim.fn
 local keymap = vim.keymap.set
-local autocmd = vim.api.nvim_create_autocmd
 --------------------------------------------------------------------------------
 
--- See hammerspoons `app-hider.lua`
-autocmd("VimEnter", {
-	callback = function()
-		-- HACK hide other apps for the GUI transparency, done this way since
-		-- hammerspoon's app triggers do not correctly pick up neovide
-		fn.system("open -g 'hammerspoon://hide-other-than-neovide'")
-
-		-- HACK to fix neovide sometimes not enlarging the window
-		-- CHECK whether there is the correct number of nvim and neovide processes
-		fn.system("open -g 'hammerspoon://neovide-post-startup'")
-	end,
-})
-
---------------------------------------------------------------------------------
 -- SIZE & FONT
--- https://www.programmingfonts.org/#oxygen
 vim.opt.guifont = "JetBrainsMonoNL Nerd Font:h25.2"
 
 local host = fn.hostname()
@@ -54,7 +38,7 @@ keymap(
 -- Behavior
 g.neovide_confirm_quit = false
 g.neovide_hide_mouse_when_typing = true
-g.neovide_remember_window_size = false -- done via --geometry in `neovide` call, since more reliable
+g.neovide_remember_window_size = true -- done via --geometry in `neovide` call, since more reliable
 
 -- keymaps
 g.neovide_input_use_logo = true -- enable `cmd` key on macOS

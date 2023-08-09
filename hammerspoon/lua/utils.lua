@@ -156,7 +156,13 @@ end
 ---@param appName string (literal & exact match)
 ---@nodiscard
 ---@return hs.application
-function M.app(appName) return hs.application.find(appName, true, true) end
+function M.app(appName)
+	-- FIX neovide via CLI is lowercased, via app capitalized, therefore cannot
+	-- use strict matching in this case
+	if appName:find("[Nn]eovide") then return hs.application.find("[Nn]eovide") end
+
+	return hs.application.find(appName, true, true)
+end
 
 ---@param appNames string|string[] app or apps that should be checked
 ---@nodiscard
@@ -196,16 +202,15 @@ function M.restartApp(appName)
 	)
 end
 
+---@async
 ---@param appName string
 ---@param callbackFn function function to execute when the app is available
----@async
 function M.asSoonAsAppRuns(appName, callbackFn)
 	MyTimers[appName] = hs.timer.waitUntil(function()
 		local app = M.app(appName)
-		local appRuns = app ~= nil
 		local windowAvailable = app and app:mainWindow()
-		return appRuns and windowAvailable
-	end, callbackFn, 0.05)
+		return windowAvailable
+	end, callbackFn, 0.1)
 end
 
 ---@param appNames string|string[]

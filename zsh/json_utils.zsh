@@ -41,7 +41,8 @@ function yaml2schema() {
 
 # Helper function, ensures either file, downloaded url, or stdin can be accessed
 # at the same path
-# $1: filepath or URL; no $1: read from stdin
+# $1: filepath or URL (if url from last time, use cache to reduce API calls)
+# no $1: read from stdin
 function file_url_or_stdin() {
 	local tmp="/tmp/temp.json"
 	if [[ -z "$1" ]]; then
@@ -50,10 +51,15 @@ function file_url_or_stdin() {
 		local filepath="$1"
 		cp -f "$filepath" "$tmp"
 	else
-		local last_url
-		last_url=$(cat "$tmp")
+		local url_temp="/tmp/temp_url.txt"
 		local url="$1"
+		local last_url
+		[[ -f "$url_temp" ]] && last_url=$(cat "$url_temp")
+		[[ "$last_url" == "$url" ]] && return # already cached
+
+		# HACK using chrome as user agent, as some APIs don't like curl
 		command curl --progress-bar --header "User-Agent: Chrome/115.0.0.0" "$url" >"$tmp"
+		echo "$url" > "$url_temp"
 	fi
 }
 

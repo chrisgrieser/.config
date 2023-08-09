@@ -33,12 +33,13 @@ local function hideOthers(appObj)
 		return
 	end
 	local thisWin = appObj:mainWindow()
+	local thisAppName = appObj:name()
 
 	-- only hide when bigger window
 	if not (wu.CheckSize(thisWin, wu.pseudoMax) or wu.CheckSize(thisWin, wu.maximized)) then return end
 
 	local appsNotToHide =
-		{ "IINA", "zoom.us", "CleanShot X", "SideNotes", env.tickerApp, "Alfred", appObj:name() }
+		{ "IINA", "zoom.us", "CleanShot X", "SideNotes", env.tickerApp, "Alfred", thisAppName }
 	for _, w in pairs(thisWin:otherWindowsSameScreen()) do
 		local app = w:application()
 		if
@@ -69,15 +70,6 @@ end):start()
 Wf_transBgAppWindowFilter = wf.new(transBgApps)
 	:subscribe(wf.windowMoved, function(movedWin) hideOthers(movedWin:application()) end)
 	:subscribe(wf.windowMinimized, unHideAll)
-
--- extra run for neovide startup necessary, since they do not send a
--- launch signal and also the `AsSoonAsAppRuns` condition does not work well.
--- in addition, `RunDelayed` also does not work well due to varying startup
--- times. Therefore, this UriScheme is called on neovim startup in
--- config/gui-settings.lua
-u.urischeme("hide-other-than-neovide", function()
-	u.runWithDelays({ 0, 0.1, 0.2 }, function() hideOthers(u.app("neovide")) end)
-end)
 
 -- when currently auto-tiled, hide the app on deactivation so it does not cover sketchybar
 AutoTileAppWatcher = aw.new(function(appName, eventType, appObj)
