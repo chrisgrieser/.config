@@ -42,12 +42,16 @@ function ensureCacheFolderExists() {
 /** @param {string} path */
 function cacheIsOutdated(path) {
 	const cacheAgeThreshold = parseInt($.getenv("cache_age_threshold")) || 15;
-	ensureCacheFolderExists();
 	const cacheObj = Application("System Events").aliases[path];
 	if (!cacheObj.exists()) return true;
 	const cacheAgeMins = (+new Date() - cacheObj.creationDate()) / 1000 / 60;
 	return cacheAgeMins > cacheAgeThreshold;
 }
+
+// line
+// Inter
+
+
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -60,6 +64,8 @@ function run() {
 	const selectedWithAlfred = $.NSProcessInfo.processInfo.environment.objectForKey("selected_subreddit").js;
 	const firstSubredditInConfig = $.getenv("subreddits").split("\n")[0]; // only needed for first run
 	const subredditName = selectedWithAlfred || prevRunSubreddit || firstSubredditInConfig;
+
+	ensureCacheFolderExists();
 	writeToFile($.getenv("alfred_workflow_cache") + "/current_subreddit", subredditName);
 
 	// read posts from cache
