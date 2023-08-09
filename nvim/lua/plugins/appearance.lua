@@ -3,14 +3,20 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{ -- when searching, virtual text appended to cursor with search counts
+	{ -- fix scrollOff at end of file
+	-- TODO: https://github.com/Aasim-A/scrollEOF.nvim/issues/7
+		"Aasim-A/scrollEOF.nvim",
+		event = "WinScrolled", 
+		opts = true,
+	},
+	{ -- when searching, search count is shown next to the cursor
 		"kevinhwang91/nvim-hlslens",
 		lazy = true, -- loaded by my "vim.on_key" function
 		opts = { nearest_only = true },
 	},
 	{ -- scrollbar with information
 		"lewis6991/satellite.nvim",
-		commit = "5d33376", -- TODO following versions require nvim 0.10
+		commit = "5d33376", -- TODO later versions require nvim 0.10
 		event = "VeryLazy",
 		init = function()
 			if vim.version().major == 0 and vim.version().minor >= 10 then
