@@ -34,8 +34,7 @@ rules:
         to_after_key_up:
           - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
 
-            #─────────────────────────────────────────────────────────────────────
-
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "Special Characters: |^\\~[]"
     manipulators:
       - type: basic
@@ -70,8 +69,7 @@ rules:
             input_sources: [{ language: ^de$ }]
         to:
           - { key_code: "6", modifiers: [command] }
-      # "🔘1️⃣ One Stroke ^` (German Layout)"
-      # backtick
+      # One Stroke backtick `
       - type: basic
         from: { key_code: equal_sign, modifiers: { mandatory: [shift] } }
         to:
@@ -80,7 +78,7 @@ rules:
         conditions:
           - type: input_source_if
             input_sources: [{ language: ^de$ }]
-      # the ^
+      # one stroke caret ^
       - type: basic
         from:
           key_code: non_us_backslash
@@ -94,7 +92,7 @@ rules:
             file_paths:
               - ^/Applications/Obsidian\.app
               - "[Nn]eovide"
-      # Tilde ~
+      # Tilde ~ in US layout
       - type: basic
         from: { key_code: "n", modifiers: { mandatory: [option] } }
         conditions:
@@ -106,7 +104,6 @@ rules:
           - { key_code: grave_accent_and_tilde, modifiers: [shift] }
         to_after_key_up:
           - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
-
       #─────────────────────────────────────────────────────────────────────────────
       # ⚒️ ß´ → [] (+ German to US Layout), ⌥+ß → ß
       # ⌥ß → ß
