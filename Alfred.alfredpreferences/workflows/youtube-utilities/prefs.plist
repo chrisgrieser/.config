@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>download_location</key>
-	<string>~/Downloaded</string>
+	<string>~/RomComs/-new</string>
 	<key>fallback_folder</key>
 	<string>~/Library/Mobile Documents/com~apple~CloudDocs/File Hub</string>
 	<key>youtube_link_folder</key>
