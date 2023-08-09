@@ -158,7 +158,7 @@ return {
 	},
 	{ -- rainbow brackets
 		"https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
-		event = "VeryLazy",
+		event = "BufReadPost", -- later and first buffer does not get brackets colored
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
 			-- rainbow brackets without aggressive red

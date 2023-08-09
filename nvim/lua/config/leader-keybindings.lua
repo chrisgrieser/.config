@@ -87,12 +87,19 @@ end, { desc = "󱁐 Use Spaces" })
 
 --------------------------------------------------------------------------------
 
--- Undo
+-- UNDO
 keymap(
 	"n",
 	"<leader>ur",
 	function() cmd("silent later " .. tostring(vim.opt.undolevels:get())) end,
 	{ desc = "󰛒 Redo All" }
+)
+
+keymap(
+	{ "n", "x", "i" },
+	"<leader>uc",
+	function() require("funcs.alt-alt").reopenBuffer() end,
+	{ desc = "󰽙 undo closing buffer" }
 )
 keymap("n", "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", { desc = "󰕌 󰊢 Undo (Reset) Hunk" })
 keymap("n", "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", { desc = "󰕌 󰊢 Undo (Reset) Buffer" })

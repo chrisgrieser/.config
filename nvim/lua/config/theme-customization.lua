@@ -1,3 +1,6 @@
+-- vim-pseudo-modeline: buffer_has_colors
+--------------------------------------------------------------------------------
+
 local autocmd = vim.api.nvim_create_autocmd
 local cmd = vim.cmd
 local fn = vim.fn
