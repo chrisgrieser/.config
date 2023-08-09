@@ -1060,7 +1060,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>525</real>
+			<real>505</real>
 		</dict>
 		<key>04FB2B7F-2F25-443A-98EC-3D62C8EFBF34</key>
 		<dict>
@@ -1069,7 +1069,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>copy url</string>
 			<key>xpos</key>
-			<real>815</real>
+			<real>830</real>
 			<key>ypos</key>
 			<real>580</real>
 		</dict>
@@ -1098,7 +1098,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>805</real>
+			<real>820</real>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
@@ -1138,7 +1138,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>recent files</string>
 			<key>xpos</key>
-			<real>640</real>
+			<real>655</real>
 			<key>ypos</key>
 			<real>315</real>
 		</dict>
@@ -1160,7 +1160,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>(re)create index</string>
 			<key>xpos</key>
-			<real>645</real>
+			<real>660</real>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
@@ -1171,7 +1171,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>reddit search</string>
 			<key>xpos</key>
-			<real>640</real>
+			<real>655</real>
 			<key>ypos</key>
 			<real>455</real>
 		</dict>
@@ -1191,7 +1191,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>810</real>
+			<real>825</real>
 			<key>ypos</key>
 			<real>140</real>
 		</dict>
@@ -1200,7 +1200,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>950</real>
+			<real>965</real>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
@@ -1209,7 +1209,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>1090</real>
+			<real>1105</real>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
@@ -1271,7 +1271,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>815</real>
+			<real>830</real>
 			<key>ypos</key>
 			<real>315</real>
 		</dict>
@@ -1300,7 +1300,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>815</real>
+			<real>830</real>
 			<key>ypos</key>
 			<real>455</real>
 		</dict>

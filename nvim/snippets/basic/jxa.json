@@ -82,6 +82,20 @@
 		"prefix": "file exists",
 		"body": "const fileExists = (/** @type {string} */ filePath) => Application(\"Finder\").exists(Path(filePath));"
 	},
+	"cache (check if outdated)": {
+		"prefix": "cache (check if outdated)",
+		"body": [
+			"/** @param {string} path */",
+			"function cacheIsOutdated(path) {",
+			"\tconst cacheAgeThreshold = ${1:60};",
+			"\tensureCacheFolderExists();",
+			"\tconst cacheObj = Application(\"System Events\").aliases[path];",
+			"\tif (!cacheObj.exists()) return true;",
+			"\tconst cacheAgeMins = (+new Date() - cacheObj.creationDate()) / 1000 / 60;",
+			"\treturn cacheAgeMins > cacheAgeThreshold;",
+			"}"
+		]
+	},
 	"window path (Finder)": {
 		"prefix": "window path (Finder)",
 		"body": [
