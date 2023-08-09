@@ -318,11 +318,6 @@ for _, lvl in pairs { 1, 2, 3, 4, 5 } do
 	keymap("n", "z" .. tostring(lvl), function() require("ufo").closeFoldsWith(lvl) end, { desc = desc })
 end
 
---------------------------------------------------------------------------------
--- HACK for `^`
-keymap({ "c", "i" }, "<f1>", "^", { desc = "HACK for karabiner rebinding" })
-keymap("n", "<f1>", "^") -- TODO what to map on this?
-
 ------------------------------------------------------------------------------
 -- LSP KEYBINDINGS
 

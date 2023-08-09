@@ -124,7 +124,7 @@ return {
 		"gbprod/yanky.nvim",
 		keys = {
 			{ "p", "<Plug>(YankyPutAfter)", desc = " Paste (Yanky)" },
-			{ "P", "<Plug>(YankyCycleForward)", desc = " Cycle Yankring" },
+			{ "P", "<Plug>(YankyCycleForward)", desc = " Cycle Killring" },
 		},
 		opts = {
 			ring = { history_length = 20 },
@@ -164,16 +164,14 @@ return {
 				presets = { motions = false, g = false, z = false },
 				spelling = { enabled = false },
 			},
-			hidden = { "<Plug>", "^:lua ", "<cmd>" },
 			-- INFO to ignore a mapping use the label "which_key_ignore", not the "hidden" setting here
-			key_labels = { -- seems these are not working?
+			hidden = { "<Plug>", "^:lua ", "<cmd>" },
+			key_labels = {
 				["<CR>"] = "↵ ",
 				["<BS>"] = "⌫",
 				["<space>"] = "󱁐",
 				["<Tab>"] = "↹ ",
 				["<Esc>"] = "⎋",
-				["<F1>"] = "^", -- karabiner remapping
-				["<F2>"] = "<S-Space>", -- karabiner remapping
 			},
 			window = {
 				-- only horizontal border to save space

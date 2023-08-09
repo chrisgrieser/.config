@@ -1,5 +1,5 @@
-local u = require("lua.utils")
 local env = require("lua.environment-vars")
+local u = require("lua.utils")
 --------------------------------------------------------------------------------
 -- INFO This is essentially an implementation of the inspired by the macOS app
 -- [quitter](https://marco.org/apps), this module quits any app if long enough idle
@@ -41,7 +41,7 @@ local function quit(app)
 		suffix = " (windows closed)"
 	elseif app == "Obsidian" then
 		local obsiWin = u.app("Obsidian"):mainWindow()
-		if obsiWin:isMinimized() then return end
+		if not obsiWin or obsiWin:isMinimized() then return end
 		obsiWin:minimize()
 		suffix = " (window minimized)"
 	elseif app == "Hammerspoon" then
