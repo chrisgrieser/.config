@@ -7,23 +7,6 @@ local keymap = vim.keymap.set
 local u = require("config.utils")
 
 --------------------------------------------------------------------------------
--- REMOTE CONTROL / AUTOMATION
-
--- nvim server (RPC) to remote control neovide instances 
--- https://neovim.io/doc/user/remote.html
-if vim.fn.has("gui_running") == 1 then -- avoid duplicate server when opening nvim in the terminal as well
-	local removed = pcall(os.remove, "/tmp/nvim_server.pipe") -- FIX server sometimes not properly shut down
-	local delay = removed and 500 or 0
-	vim.defer_fn(function() vim.fn.serverstart("/tmp/nvim_server.pipe") end, delay)
-end
-
-
--- Set title so external apps like window managers can read the current file path
-opt.title = true
-opt.titlelen = 0 -- do not shorten title
-opt.titlestring = '%{expand("%:p")}'
-
---------------------------------------------------------------------------------
 
 -- DIRECTORIES
 -- move to custom location where they are synced independently from the dotfiles repo
@@ -46,6 +29,11 @@ for _, char in pairs(undopointChars) do
 end
 
 --------------------------------------------------------------------------------
+
+-- Set title so current file can be read from automation app via window title
+opt.title = true
+opt.titlelen = 0 -- do not shorten title
+opt.titlestring = '%{expand("%:p")}'
 
 -- Motions & Editing
 opt.startofline = true -- motions like "G" also move to the first char

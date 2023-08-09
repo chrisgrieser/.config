@@ -1,6 +1,41 @@
 # yaml-language-server: $schema=../karabiner-mod-schema.json
 title: Special Characters
 rules:
+  - description: "{} German to US layout for vim"
+    manipulators:
+      # Curly Brace {
+      - type: basic
+        from: { key_code: "8", modifiers: { mandatory: [option] } }
+        conditions:
+          - { type: input_source_if, input_sources: [language: ^de$] }
+          - type: frontmost_application_if
+            file_paths:
+              - ^/Applications/Obsidian\.app
+              - "[Nn]eovide"
+        to:
+          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ }
+          - { key_code: vk_none, hold_down_milliseconds: 20 }
+          - { key_code: open_bracket, modifiers: [shift] }
+        to_after_key_up:
+          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
+      # Curly Brace }
+      - type: basic
+        from: { key_code: "9", modifiers: { mandatory: [option] } }
+        conditions:
+          - { type: input_source_if, input_sources: [language: ^de$] }
+          - type: frontmost_application_if
+            file_paths:
+              - ^/Applications/Obsidian\.app
+              - "[Nn]eovide"
+        to:
+          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ }
+          - { key_code: vk_none, hold_down_milliseconds: 20 }
+          - { key_code: close_bracket, modifiers: [shift] }
+        to_after_key_up:
+          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
+
+            #─────────────────────────────────────────────────────────────────────
+
   - description: "Special Characters: |^\\~[]"
     manipulators:
       - type: basic

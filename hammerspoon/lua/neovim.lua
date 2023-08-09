@@ -1,3 +1,4 @@
+local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
 local aw = require("lua.utils").aw
@@ -64,3 +65,15 @@ Wf_neovideMoved = u.wf
 	.new({ "Neovide", "neovide" })
 	:subscribe(u.wf.windowMoved, function(movedWin) obsidianThemeDevHelper(movedWin) end)
 
+--------------------------------------------------------------------------------
+
+-- HACK since neovide does not send a launch signal, triggering window resizing
+-- via its URI scheme called on VimEnter
+-- (window-movement also triggers hiding other apps via `app-hider`)
+u.urischeme("neovide-post-startup", function()
+	u.asSoonAsAppRuns("neovide", function()
+		local neovideWin = u.app("neovide"):mainWindow()
+		local size = env.isProjector() and wu.maximized or wu.pseudoMax
+		wu.moveResize(neovideWin, size)
+	end)
+end)

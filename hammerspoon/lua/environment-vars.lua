@@ -2,8 +2,8 @@ local M = {}
 --------------------------------------------------------------------------------
 
 -- RETRIEVE ENVIRONMENT VARS FROM ZSHENV
--- HACK cannot be done via os.getenv(), since it does not load properly on system
--- startup, so the values are read manually .zshenv
+-- HACK cannot be done via os.getenv(), since often it does not load properly on
+-- system startup, so the values are read manually .zshenv
 ---@param varname string
 ---@return string
 local function readZshEnv(varname)
