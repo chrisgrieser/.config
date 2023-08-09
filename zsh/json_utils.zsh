@@ -51,7 +51,7 @@ function file_url_or_stdin() {
 		cp -f "$filepath" "$tmp"
 	else
 		local url="$1"
-		curl --silent "$url" >"$tmp"
+		command curl --silent --header --progress-bar "User-Agent: Chrome/115.0.0.0" "$url" >"$tmp"
 	fi
 }
 
