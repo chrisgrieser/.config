@@ -24,8 +24,7 @@ return {
 		end,
 	},
 	{ -- structural search & replace
-		"chrisgrieser/ssr.nvim",
-		branch = "chrisgrieser-patch-1", -- FIX https://github.com/cshuaimin/ssr.nvim/issues/11#issuecomment-1367356598
+		"cshuaimin/ssr.nvim",
 		keys = {
 			-- stylua: ignore
 			{ "<leader>fs", function() require("ssr").open() end, mode = { "n", "x" }, desc = "󱗘 Structural S&R" },

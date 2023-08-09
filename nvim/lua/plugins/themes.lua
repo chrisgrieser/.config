@@ -17,6 +17,7 @@ local lightThemes = {
 }
 
 local darkThemes = {
+	{"ellisonleao/gruvbox.nvim", opts = { bold = false }},
 	"folke/tokyonight.nvim",
 	-- "sainnhe/everforest",
 	-- "rebelot/kanagawa.nvim",
