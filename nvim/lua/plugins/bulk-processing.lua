@@ -31,14 +31,16 @@ return {
 		},
 		-- needs remap due conflict with commenting keymap
 		config = function()
-			-- FIX conflict with q from commenting plugin
-			-- HACK using `Q` to close works, when later redirecting q to it m(
-			require("ssr").setup { keymaps = { close = "Q" } }
+			-- HACK detouring by using `Q` to close without `nowait`
+			require("ssr").setup {
+				border = require("config.utils").borderStyle,
+				keymaps = { close = "Q" }, -- FIX https://github.com/cshuaimin/ssr.nvim/pull/28
+			}
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "ssr",
 				callback = function()
-					vim.opt_local.sidescrolloff = 0
 					vim.keymap.set("n", "q", "Q", { desc = "Close", buffer = true, nowait = true, remap = true })
+					vim.opt_local.sidescrolloff = 1
 				end,
 			})
 		end,

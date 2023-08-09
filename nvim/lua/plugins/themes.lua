@@ -7,17 +7,14 @@ local lightThemes = {
 	-- {
 	-- 	"marko-cerovac/material.nvim",
 	-- 	init = function() vim.g.material_style = "lighter" end,
-	-- 	opts = {
-	-- 		lualine_style = "stealth", -- stealth|default
-	-- 		high_visibility = { lighter = false },
-	-- 	},
+	-- opts = { lualine_style = "stealth", high_visibility = { lighter = false } },
 	-- },
 	-- { "catppuccin/nvim", name = "catppuccin" },
 	-- { "rose-pine/neovim", name = "rose-pine" },
 }
 
 local darkThemes = {
-	{"ellisonleao/gruvbox.nvim", opts = { bold = false }},
+	"sainnhe/gruvbox-material",
 	"folke/tokyonight.nvim",
 	-- "sainnhe/everforest",
 	-- "rebelot/kanagawa.nvim",

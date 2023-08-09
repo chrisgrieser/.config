@@ -58,8 +58,6 @@ local function themeModifications()
 		updateHighlight("GitSignsChange", "guifg=#acaa62")
 		updateHighlight("GitSignsAdd", "guifg=#7fcc82")
 		updateHighlight("ScrollView", "guibg=#5a71b3")
-	elseif theme == "grubbox" then
-		clearHighlight("SignColumn")
 	elseif theme == "material" and mode == "light" then
 		updateHighlight("@property", "guifg=#6c9798")
 		updateHighlight("@field", "guifg=#6c9798")

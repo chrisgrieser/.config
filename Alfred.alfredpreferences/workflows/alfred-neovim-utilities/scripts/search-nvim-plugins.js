@@ -18,6 +18,31 @@ function httpRequest(url) {
 	return requestString;
 }
 
+function ensureCacheFolderExists() {
+	const finder = Application("Finder");
+	const cacheDir = $.getenv("alfred_workflow_cache");
+	if (!finder.exists(Path(cacheDir))) {
+		console.log("Cache Dir does not exist and is created.");
+		const cacheDirBasename = $.getenv("alfred_workflow_bundleid");
+		const cacheDirParent = cacheDir.slice(0, -cacheDirBasename.length);
+		finder.make({
+			new: "folder",
+			at: Path(cacheDirParent),
+			withProperties: { name: cacheDirBasename },
+		});
+	}
+}
+
+/** @param {string} path */
+function cacheIsOutdated(path) {
+	const cacheAgeThreshold = parseInt($.getenv("cache_age_threshold")) || 15;
+	ensureCacheFolderExists();
+	const cacheObj = Application("System Events").aliases[path];
+	if (!cacheObj.exists()) return true;
+	const cacheAgeMins = (+new Date() - cacheObj.creationDate()) / 1000 / 60;
+	return cacheAgeMins > cacheAgeThreshold;
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 // INFO Not searching awesome neovim, neovimscraft scraps them

@@ -21,6 +21,25 @@
 			"}"
 		]
 	},
+	"cache (ensure folder)": {
+		"prefix": "cache (ensure folder)",
+		"body": [
+			"function ensureCacheFolderExists() {",
+			"\tconst finder = Application(\"Finder\");",
+			"\tconst cacheDir = $.getenv(\"alfred_workflow_cache\");",
+			"\tif (!finder.exists(Path(cacheDir))) {",
+			"\t\tconsole.log(\"Cache Dir does not exist and is created.\");",
+			"\t\tconst cacheDirBasename = $.getenv(\"alfred_workflow_bundleid\");",
+			"\t\tconst cacheDirParent = cacheDir.slice(0, -cacheDirBasename.length);",
+			"\t\tfinder.make({",
+			"\t\t\tnew: \"folder\",",
+			"\t\t\tat: Path(cacheDirParent),",
+			"\t\t\twithProperties: { name: cacheDirBasename },",
+			"\t\t});",
+			"\t}",
+			"}"
+		]
+	},
 	"Get Alfred Env": {
 		"prefix": "Get Alfred Env",
 		"body": "const ${1:envVar} = $.getenv(\"${2:envVar}\");"
@@ -30,7 +49,11 @@
 		"body": "const ${1:envVar} = $.NSProcessInfo.processInfo.environment.objectForKey(\"${2:envVar}\").js;"
 	},
 	"AlfredRun": {
-		"prefix": ["run (Alfred)", "AlfredRun", "argv (Alfred)"],
+		"prefix": [
+			"run (Alfred)",
+			"AlfredRun",
+			"argv (Alfred)"
+		],
 		"body": [
 			"/** @type {AlfredRun} */",
 			"// rome-ignore lint/correctness/noUnusedVariables: Alfred run",
