@@ -22,7 +22,6 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
  */
 
 /** @param {AlfredItem[]} oldItems */
-
 // rome-ignore lint/correctness/noUnusedVariables: JXA import HACK
 function getHackernewsPosts(oldItems) {
 	// INFO https://hn.algolia.com/api/
