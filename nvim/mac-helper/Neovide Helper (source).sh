@@ -8,21 +8,26 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 #   anywhere in macOS and it will open in the currently existing Neovide instance
 #───────────────────────────────────────────────────────────────────────────────
 
-address="/tmp/nvim_server.pipe"
-
 if pgrep -xq "neovide"; then
 	# https://neovim.io/doc/user/remote.html
-	nvim --server "$address" --remote "$@"
+	nvim --server "/tmp/nvim_server.pipe" --remote "$@"
+	exitcode=$?
+
+	if [[ $exitcode -ne 0 ]]; then
+		osascript -e 'display notification "⚠️ nvim server unresponsive" with title "Neovide"'
+		exit 1
+	fi
 
 	# $LINE is set via `open --env=LINE=n` by the caller
-	[[ -n "$LINE" ]] && nvim --server "$address" --remote-send "<cmd>$LINE<CR>"
+	[[ -n "$LINE" ]] && nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>$LINE<CR>"
 
 	osascript -e 'tell application "Neovide" to activate'
 else
-	[[ -n "$LINE" ]] && LINE="+$LINE"
-
-	# shellcheck disable=2086 # $LINE must be unquoted to prevent opening empty file
-	nohup neovide --geometry=104x33 $LINE "$@" &
-
-	disown # https://stackoverflow.com/a/20338584/22114136
+	if [[ -z "$LINE" ]] ; then
+		nohup neovide --geometry=104x33 "$@" &
+		disown # https://stackoverflow.com/a/20338584/22114136
+	else
+		nohup neovide --geometry=104x33 "+$LINE" "$@" &
+		disown # https://stackoverflow.com/a/20338584/22114136
+	fi
 fi

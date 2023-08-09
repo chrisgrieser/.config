@@ -15,7 +15,8 @@
 	<key>subreddits</key>
 	<string>neovim
 macapps
-commandline</string>
+commandline
+ProgrammerHumor</string>
 	<key>use_dstill_ai</key>
 	<true/>
 </dict>
