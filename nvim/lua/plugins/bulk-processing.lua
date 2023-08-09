@@ -1,3 +1,7 @@
+local lualineTopSeparators = { left = "", right = "" }
+
+--------------------------------------------------------------------------------
+
 return {
 	{
 		"smoka7/multicursors.nvim",
@@ -26,6 +30,22 @@ return {
 					["H"] = { method = extend.caret_method, opts = {} },
 					["L"] = { method = extend.dollar_method, opts = {} },
 				},
+			}
+
+			-- INFO inserting only on load to ensure lazy-loading of hydra.nvim
+			local lualineZ = require("lualine").get_config().tabline.lualine_z or {}
+			table.insert(lualineZ, {
+				function()
+					local ok, hydra = pcall(require, "hydra.statusline")
+					if not (ok and hydra.is_active()) then return "" end
+					local modeName = hydra.get_name():gsub("MC ", "Multi-")
+					return "󰇀 " .. modeName
+				end,
+				section_separators = lualineTopSeparators,
+			})
+
+			require("lualine").setup {
+				tabline = { lualine_z = lualineZ },
 			}
 		end,
 	},
@@ -112,17 +132,16 @@ return {
 				performanceOpts = { countThreshold = 5 },
 			}
 
-			-- INFO inserting needed to not disrupt existing lualine-segment
-			local topSeparators = { left = "", right = "" }
+			-- INFO inserting only on load to ensure lazy-loading
 			local lualineZ = require("lualine").get_config().tabline.lualine_z or {}
 			local lualineY = require("lualine").get_config().tabline.lualine_y or {}
 			table.insert(lualineZ, {
 				require("recorder").recordingStatus,
-				section_separators = topSeparators,
+				section_separators = lualineTopSeparators,
 			})
 			table.insert(lualineY, {
 				require("recorder").displaySlots,
-				section_separators = topSeparators,
+				section_separators = lualineTopSeparators,
 			})
 
 			require("lualine").setup {

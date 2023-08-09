@@ -58,16 +58,6 @@ rules:
       - type: basic
         from: { key_code: spacebar, modifiers: { mandatory: [shift] } }
         to:
-          - key_code: f2
-        conditions:
-          - type: frontmost_application_if
-            file_paths:
-              - "[Nn]eovide"
-              - ^/Applications/WezTerm\.app
-      # various apps for svim
-      - type: basic
-        from: { key_code: spacebar, modifiers: { mandatory: [shift] } }
-        to:
           - { key_code: s, modifiers: [control] }
         conditions:
           - type: frontmost_application_if
