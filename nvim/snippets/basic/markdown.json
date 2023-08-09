@@ -1,5 +1,5 @@
 {
-	"Note (GitHub callout)": {
+	"note (GitHub callout)": {
 		"prefix": [
 			"info (callout)",
 			"note (callout)"
@@ -7,21 +7,24 @@
 		"body": [
 			"> [!NOTE]  ",
 			"> $0"
-		]
+		],
+		"description": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts"
 	},
-	"Warning (callout)": {
+	"warning (callout)": {
 		"prefix": "warning (callout)",
 		"body": [
 			"> [!WARNING]  ",
 			"> $0"
-		]
+		],
+		"description": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts"
 	},
-	"Important (callout)": {
-		"prefix": "warning (callout)",
+	"important (callout)": {
+		"prefix": "important (callout)",
 		"body": [
-			"> [!WARNING]  ",
+			"> [!IMPORTANT]",
 			"> $0"
-		]
+		],
+		"description": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts"
 	},
 	"<kbd>": {
 		"prefix": [

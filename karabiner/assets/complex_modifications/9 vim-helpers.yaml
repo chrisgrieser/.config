@@ -25,7 +25,11 @@ rules:
               while pgrep -xq "nvim" ; do 
                 i=$((i+1))
                 sleep 0.1
-                [[ $i -gt 30 ]] && return
+                if [[ $i -gt 30 ]] ; then
+                  osascript -e 'display notification "" with title "⚔️ Force killing nvim…"'
+                  killall -9 nvim neovide
+                  break
+                fi
               done
 
               # Restart (configured to reopen last file if opened without arg)

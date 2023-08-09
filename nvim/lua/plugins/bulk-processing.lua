@@ -27,37 +27,25 @@ return {
 	{
 		"smoka7/multicursors.nvim",
 		dependencies = { "nvim-treesitter/nvim-treesitter", "smoka7/hydra.nvim" },
-		opts = {},
-		cmd = { "MCstart", "MCvisual", "MCclear", "MCpattern", "MCvisualPattern", "MCunderCursor" },
+		opts = {
+			hint_config = false,
+		},
+		cmd = { "start", "visual", "clear", "pattern", "MCvisualPattern", "MCunderCursor" },
 		keys = {
 			{ "<D-j>", "<cmd>MCstart<cr>", mode = { "n", "v" }, desc = "󰆿 Multi-Cursor" },
 		},
 	},
-
 	{ -- structural search & replace
 		"cshuaimin/ssr.nvim",
 		keys = {
 			-- stylua: ignore
 			{ "<leader>fs", function() require("ssr").open() end, mode = { "n", "x" }, desc = "󱗘 Structural S&R" },
 		},
-		-- needs remap due conflict with commenting keymap
+		opts = { border = require("config.utils").borderStyle },
 		config = function()
-			-- HACK detouring by using `Q` to close without `nowait`
-			require("ssr").setup {
-				border = require("config.utils").borderStyle,
-				keymaps = { close = "Q" }, -- FIX https://github.com/cshuaimin/ssr.nvim/pull/28
-			}
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "ssr",
-				callback = function()
-					vim.keymap.set(
-						"n",
-						"q",
-						"Q",
-						{ desc = "Close", buffer = true, nowait = true, remap = true }
-					)
-					vim.opt_local.sidescrolloff = 1
-				end,
+				callback = function() vim.opt_local.sidescrolloff = 1 end,
 			})
 		end,
 	},
