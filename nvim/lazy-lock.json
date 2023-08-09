@@ -94,6 +94,7 @@
   "telescope.nvim": { "branch": "master", "commit": "dc192faceb2db64231ead71539761e055df66d73" },
   "text-case.nvim": { "branch": "main", "commit": "cd7cc65a412beb713e68f3b84e45990a939b7b6b" },
   "tokyonight.nvim": { "branch": "main", "commit": "1ee11019f8a81dac989ae1db1a013e3d582e2033" },
+  "tree-setter": { "branch": "master", "commit": "037f62e6f9794bb5f1973a9c8fd4f0d4ffb9b84d" },
   "treesj": { "branch": "main", "commit": "00b382dc81eefaf42ad50a521e368f9057815bfb" },
   "vim-applescript": { "branch": "master", "commit": "a39af8fc7e4caf581366e2917d558f6232e4db36" },
   "vim-css3-syntax": { "branch": "main", "commit": "f933340233bee932d152ea16d551ece96f39ea41" },

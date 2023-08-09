@@ -171,7 +171,7 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
  */
 function getFavicon(topDomain, noNeedToBuffer) {
 	const durationLogStart = +new Date();
-
+   
 	let targetFile = `${$.getenv("alfred_workflow_cache")}/${topDomain}.ico`;
 	const useFaviconSetting = $.getenv("use_favicons") === "1";
 

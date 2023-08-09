@@ -32,6 +32,10 @@ return {
 		ft = { "lua", "bash", "zsh", "sh", "vim", "ruby", "elixir" },
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
+	{ -- auto-insert ;,=:
+		"filNaj/tree-setter",
+		ft = { "c", "java", "javascript", "python" }
+	},
 	{ -- case conversion
 		"johmsalas/text-case.nvim",
 		lazy = true, -- loaded by keymaps

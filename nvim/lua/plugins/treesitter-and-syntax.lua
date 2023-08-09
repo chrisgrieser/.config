@@ -71,14 +71,7 @@ local tsConfig = {
 		},
 	},
 	endwise = { enable = true },
-	context_commentstring = {
-		enable = true,
-	},
-	matchup = {
-		enable = true,
-		enable_quotes = true,
-		disable_virtual_text = true,
-	},
+	tree_setter = { enable = true },
 	refactor = {
 		highlight_definitions = {
 			enable = true,

@@ -212,8 +212,6 @@ keymap("n", "<CR>", function() require("funcs.alt-alt").altBufferWindow() end, {
 keymap("n", "<C-CR>", "<C-w>w", { desc = " Next Window" })
 
 keymap({ "n", "x", "i" }, "<D-w>", function() require("funcs.alt-alt").betterClose() end, { desc = "󰽙 close buffer/window" })
-keymap({ "n", "x", "i" }, "<D-S-t>", function() require("funcs.alt-alt").reopenBuffer() end, { desc = "󰽙 reopen last buffer" })
-
 keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " 󰽙 Buffers" })
 
 -- stylua: ignore end
