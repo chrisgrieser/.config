@@ -50,8 +50,9 @@ function file_url_or_stdin() {
 		local filepath="$1"
 		cp -f "$filepath" "$tmp"
 	else
+		local last_url=$(cat "$tmp")
 		local url="$1"
-		command curl --silent --header --progress-bar "User-Agent: Chrome/115.0.0.0" "$url" >"$tmp"
+		command curl --progress-bar --header "User-Agent: Chrome/115.0.0.0" "$url" >"$tmp"
 	fi
 }
 
@@ -82,15 +83,17 @@ function jx() {
 		tail -n +2 |
 		sed -E 's/^json\.?/./' | # rm "json" prefix, keep dot for yq. Array: `json[0]`, Object: `json.key`
 		fzf --ansi --no-sort --query="$query" --info=inline \
-			--height="80%" --preview-window="45%" \
+			--height="80%" --preview-window="40%" \
 			--preview='yq {1} --colors --output-format=json "/tmp/temp.json"')
 
 	[[ -z "$selection" ]] && return 0 # no selection made -> no exit 130
 
 	key=$(echo -n "$selection" | cut -d" " -f1)
 	value=$(yq "$key" --output-format=json "$tmp")
+	out="$key = $value"
 
 	# output value to the terminal & copy to clipboard
-	echo "Copied"
-	echo -e "$key\n$value" | pbcopy
+	echo "Copied:"
+	echo "$out"
+	echo -n "$out" | pbcopy
 }

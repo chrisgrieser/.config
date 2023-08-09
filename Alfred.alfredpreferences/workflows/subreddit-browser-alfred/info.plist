@@ -549,6 +549,7 @@
 	- &lt;kbd&gt;⇧⌘⏎&lt;/kbd&gt;: Switch to previous subreddit.
 	- &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy URL of post to clipboard.
 	- &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Open URL (if external link).
+	- &lt;kbd&gt;⇧&lt;/kbd&gt; or &lt;kbd&gt;⌘Y&lt;/kbd&gt;: Preview the result. You can use the arrow keys to preview to the next result. Mostly useful for images. 
 
 No reddit account is needed. Due to smart caching, this workflow should never hit API rate limits under normal usage.
 
@@ -876,7 +877,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.9</string>
+	<string>0.12</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
