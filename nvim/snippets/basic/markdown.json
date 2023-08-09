@@ -1,16 +1,23 @@
 {
-	"Note (GitHub Callout)": {
+	"Note (GitHub callout)": {
 		"prefix": [
-			"info (Callout)",
-			"note (Callout)"
+			"info (callout)",
+			"note (callout)"
 		],
 		"body": [
 			"> [!NOTE]  ",
 			"> $0"
 		]
 	},
-	"warning (GitHub Callout)": {
-		"prefix": "warning (Callout)",
+	"Warning (callout)": {
+		"prefix": "warning (callout)",
+		"body": [
+			"> [!WARNING]  ",
+			"> $0"
+		]
+	},
+	"Important (callout)": {
+		"prefix": "warning (callout)",
 		"body": [
 			"> [!WARNING]  ",
 			"> $0"
