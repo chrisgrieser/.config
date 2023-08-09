@@ -24,7 +24,7 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 /** @param {AlfredItem[]} oldItems */
 
 // rome-ignore lint/correctness/noUnusedVariables: JXA import HACK
-function  getHackernewsPosts(oldItems) {
+function getHackernewsPosts(oldItems) {
 	// INFO https://hn.algolia.com/api/
 	// alternative "https://hacker-news.firebaseio.com/v0/topstories.json";
 	const hitsToRequest = 30;
@@ -34,7 +34,6 @@ function  getHackernewsPosts(oldItems) {
 		console.log(`Error: No response from ${url}`);
 		return;
 	}
-
 
 	const oldUrls = oldItems.map((item) => item.arg);
 	const oldTitles = oldItems.map((item) => item.title);
@@ -101,6 +100,7 @@ function  getHackernewsPosts(oldItems) {
  * @property {string} data.permalink
  * @property {string} data.url
  * @property {number} data.num_crossposts
+ * @property {any} data.preview
  * @property {string} data.media.type
  */
 
@@ -131,9 +131,13 @@ function getRedditPosts(subredditName, oldItems) {
 		const item = data.data;
 
 		const commentUrl = `https://${oldReddit}.reddit.com${item.permalink}`;
-		const externalUrl = item.url || "";
 		const isOnReddit = item.domain.includes("redd.it") || item.domain.startsWith("self.");
-		const externalLinkIcon = isOnReddit ? "" : "🔗 ";
+		const externalUrl = isOnReddit ? "" : item.url;
+		const imageUrl = item.preview?.images[0]?.source?.url;
+		let postTypeIcon = ""
+		if (imageUrl) postTypeIcon = "📷 "
+		else if (!isOnReddit) postTypeIcon = "🔗 "
+		const quicklookUrl = imageUrl || externalUrl || commentUrl;
 
 		// age icon
 		const postIsOld = oldUrls.includes(commentUrl);
@@ -148,7 +152,7 @@ function getRedditPosts(subredditName, oldItems) {
 		if (item.over_18) category += " [NSFW]";
 		const comments = item.num_comments || 0;
 		const crossposts = item.num_crossposts ? ` ${item.num_crossposts}↗` : "";
-		const subtitle = `${externalLinkIcon}${ageIcon}${item.score}↑  ${comments}● ${crossposts} ${category}`;
+		const subtitle = `${postTypeIcon}${ageIcon}${item.score}↑  ${comments}● ${crossposts} ${category}`;
 
 		/** @type{AlfredItem} */
 		const post = {
@@ -156,6 +160,7 @@ function getRedditPosts(subredditName, oldItems) {
 			subtitle: subtitle,
 			arg: commentUrl,
 			icon: { path: iconPath },
+			quicklookurl: quicklookUrl,
 			mods: {
 				cmd: { arg: "next" },
 				["cmd+shift"]: { arg: "prev" },
