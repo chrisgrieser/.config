@@ -69,13 +69,10 @@ end
 
 --------------------------------------------------------------------------------
 
-local function visualMultiCursorCount()
-	---@diagnostic disable: undefined-field -- defined by visual multi plugin
-	if not vim.b.VM_Selection then return "" end
-	local cursors = vim.b.VM_Selection.Regions
-	if not cursors then return "" end
-	return "󰇀 " .. tostring(#cursors)
-	---@diagnostic enable: undefined-field
+local function multiCursorCount()
+	local ok, hydra = pcall(require, 'hydra.statusline')
+	if not (ok and hydra.is_active()) then return "" end
+	return "󰇀 " .. hydra.get_name()
 end
 
 local function clock()
@@ -202,7 +199,7 @@ local lualineConfig = {
 			{ "branch", cond = isStandardBranch },
 		},
 		lualine_z = {
-			{ visualMultiCursorCount },
+			{ multiCursorCount },
 			{ selectionCount, padding = { left = 0, right = 1 } },
 			"location",
 		},

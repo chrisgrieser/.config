@@ -1,4 +1,4 @@
---------------------------------------------------------------------------------
+
 local foldIcon = ""
 local hlgroup = "NonText"
 local function foldTextFormatter(virtText, lnum, endLnum, width, truncate)
@@ -36,7 +36,6 @@ return {
 		event = "BufReadPost", -- later will not save folds
 		opts = true, -- needed
 		dev = true,
-		enabled = false,
 	},
 	{
 		"kevinhwang91/nvim-ufo",
