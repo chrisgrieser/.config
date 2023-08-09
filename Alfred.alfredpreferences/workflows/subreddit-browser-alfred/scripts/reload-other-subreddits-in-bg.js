@@ -40,10 +40,9 @@ function run() {
 
 	// determine the other subreddits
 	const curSubreddit = readFile($.getenv("alfred_workflow_cache") + "/current_subreddit");
-	const allSubreddits = $.getenv("subreddits").split("\n")
-	if($.getenv("add_hackernews") === "1") allSubreddits.push("hackernews");
+	const allSubreddits = $.getenv("subreddits").split("\n");
+	if ($.getenv("add_hackernews") === "1") allSubreddits.push("hackernews");
 	const otherSubreddits = allSubreddits.filter((subreddit) => subreddit !== curSubreddit);
-
 
 	// reload cache for them
 	otherSubreddits.forEach((subredditName) => {
@@ -51,13 +50,11 @@ function run() {
 		console.log("Reloading cache for " + subredditName);
 
 		// read old cache
-		const oldUrls = fileExists(subredditCache)
-			? JSON.parse(readFile(subredditCache)).map((/** @type {AlfredItem} */ item) => item.arg)
-			: [];
+		const oldCache = fileExists(subredditCache) ? JSON.parse(readFile(subredditCache)) : [];
 
 		const posts =
 			// rome-ignore lint/correctness/noUndeclaredVariables: import HACK
-			subredditName === "hackernews" ? getHackernewsPosts(oldUrls) : getRedditPosts(subredditName, oldUrls);
+			subredditName === "hackernews" ? getHackernewsPosts(oldCache) : getRedditPosts(subredditName, oldCache);
 
 		writeToFile(subredditCache, JSON.stringify(posts));
 	});
