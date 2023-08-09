@@ -4,10 +4,6 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
 //──────────────────────────────────────────────────────────────────────────────
-// CONFIG
-
-
-//──────────────────────────────────────────────────────────────────────────────
 
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
@@ -41,17 +37,12 @@ function ensureCacheFolderExists() {
 
 /** @param {string} path */
 function cacheIsOutdated(path) {
-	const cacheAgeThreshold = parseInt($.getenv("cache_age_threshold")) || 15;
+	const cacheAgeThreshold = parseFloat($.getenv("cache_age_threshold")) || 15;
 	const cacheObj = Application("System Events").aliases[path];
 	if (!cacheObj.exists()) return true;
 	const cacheAgeMins = (+new Date() - cacheObj.creationDate()) / 1000 / 60;
 	return cacheAgeMins > cacheAgeThreshold;
 }
-
-// line
-// Inter
-
-
 
 //──────────────────────────────────────────────────────────────────────────────
 

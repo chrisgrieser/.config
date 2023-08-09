@@ -7,7 +7,7 @@
 	<key>age_icon</key>
 	<string>new</string>
 	<key>cache_age_threshold</key>
-	<string>20</string>
+	<string>0.2</string>
 	<key>custom_subreddit_icons</key>
 	<string>~/.config/Alfred.alfredpreferences/subreddit_icons</string>
 	<key>save_scroll_position</key>

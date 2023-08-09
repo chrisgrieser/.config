@@ -35,6 +35,7 @@ declare class AlfredItem {
 		fn?: AlfredModifierKey;
 		shift?: AlfredModifierKey;
 		["cmd+shift"]?: AlfredModifierKey;
+		["cmd+alt"]?: AlfredModifierKey;
 	};
 	text?: {
 		copy?: string;
