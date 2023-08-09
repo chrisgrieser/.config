@@ -31,7 +31,7 @@ if host:find("Mother") then
 	g.neovide_refresh_rate = 35
 elseif isAtOffice then
 	g.neovide_scale_factor = 1.06
-	g.neovide_refresh_rate = 50
+	g.neovide_refresh_rate = 45
 elseif host:find("iMac") then
 	g.neovide_scale_factor = 1
 	g.neovide_refresh_rate = 50

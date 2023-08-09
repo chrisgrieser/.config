@@ -3,9 +3,11 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
+//──────────────────────────────────────────────────────────────────────────────
+
 /** @param {string} str */
 function alfredMatcher(str) {
-	const clean = str.replace(/[-_/]/g, " ");
+	const clean = str.replace(/[-_./]/g, " ");
 	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
 	return [clean, camelCaseSeperated, str].join(" ") + " ";
 }
@@ -35,64 +37,87 @@ function ensureCacheFolderExists() {
 
 /** @param {string} path */
 function cacheIsOutdated(path) {
-	const cacheAgeThreshold = parseInt($.getenv("cache_age_threshold")) || 15;
+	const cacheAgeThreshold = 24; // 24h = cache is old
 	ensureCacheFolderExists();
 	const cacheObj = Application("System Events").aliases[path];
 	if (!cacheObj.exists()) return true;
-	const cacheAgeMins = (+new Date() - cacheObj.creationDate()) / 1000 / 60;
-	return cacheAgeMins > cacheAgeThreshold;
+	const cacheAgeHours = (+new Date() - cacheObj.creationDate()) / 1000 / 60 / 60;
+	return cacheAgeHours > cacheAgeThreshold;
+}
+
+/** @param {string} path */
+function readFile(path) {
+	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
+	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
+	return ObjC.unwrap(str);
+}
+
+/** @param {string} filepath @param {string} text */
+function writeToFile(filepath, text) {
+	const str = $.NSString.alloc.initWithUTF8String(text);
+	str.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);
 }
 
 //──────────────────────────────────────────────────────────────────────────────
 
-// INFO Not searching awesome neovim, neovimscraft scraps them
-const neovimcraftURL = "https://nvim.sh/s";
+// INFO Not searching awesome neovim, since neovimscraft already scraps them
+// TODO search dotfyles, when their collection is more thorough
 
-const installedPluginsPath = $.getenv("plugin_installation_path").replace(/^~/, app.pathTo("home folder"));
-const installedPlugins = app
-	.doShellScript(
-		`find "${installedPluginsPath}" -path "*/.git" -type d -maxdepth 3 |
-		while read -r line ; do
-			cd "$line"/..
-			git remote -v | head -n1
-		done`,
-	)
-	.split("\r")
-	.map((/** @type {string} */ remote) => {
-		return remote.slice(26, -12).replaceAll(".git (fetch)", ""); // for lazy.nvim
-	});
+/** @type {AlfredRun} */
+// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+function run() {
+	const neovimcraftURL = "https://nvim.sh/s";
+	const cachePath = $.getenv("alfred_workflow_cache") + "/neovimcraftPlugins.json";
 
-//──────────────────────────────────────────────────────────────────────────────
+	const installedPluginsPath = $.getenv("plugin_installation_path").replace(/^~/, app.pathTo("home folder"));
+	const installedPlugins = app
+		.doShellScript(
+			`cd "${installedPluginsPath}" && grep --only-matching --no-filename --max-count=1 "http.*" ./*/.git/config`,
+		)
+		.split("\r");
 
-const jsonArray = httpRequest(neovimcraftURL)
-	.split("\n")
-	.slice(2)
-	.map((/** @type {string} */ line) => {
-		const parts = line.split(/ {2,}/);
-		const repo = parts[0];
-		const name = repo.split("/")[1];
+	// check cache
+	let pluginsArr = [];
+	if (!cacheIsOutdated(cachePath)) {
+		pluginsArr = JSON.parse(readFile(cachePath));
+		return JSON.stringify({ items: pluginsArr });
+	}
 
-		// subtitles
-		const stars = parts[1];
-		const openIssues = parts[2];
-		const daysAgo = Math.ceil((+new Date() - +new Date(parts[3])) / 1000 / 3600 / 24);
-		let updated = daysAgo < 31 ? daysAgo.toString() + " days ago" : Math.ceil(daysAgo / 30).toString() + " months ago";
-		if (updated.startsWith("1 ")) updated = updated.replace("s ago", " ago"); // remove plural "s"
-		const desc = parts[4] || "";
-		let subtitle = `★ ${stars} – ${updated}`;
-		if (desc) subtitle += " – " + desc;
+	//───────────────────────────────────────────────────────────────────────────
+	// request neovimcraft
 
-		// install icon
-		const installedIcon = installedPlugins.includes(repo) ? " ✅" : "";
+	pluginsArr = httpRequest(neovimcraftURL)
+		.split("\n")
+		.slice(2)
+		.map((/** @type {string} */ line) => {
+			const parts = line.split(/ {2,}/);
+			const repo = parts[0];
+			const name = repo.split("/")[1];
 
-		return {
-			title: name + installedIcon,
-			match: alfredMatcher(repo),
-			subtitle: subtitle,
-			arg: repo,
-			uid: repo,
-			mods: { shift: { subtitle: `⇧: Search Issues (${openIssues} open)` } },
-		};
-	});
+			// subtitles
+			const stars = parts[1];
+			const openIssues = parts[2];
+			const daysAgo = Math.ceil((+new Date() - +new Date(parts[3])) / 1000 / 3600 / 24);
+			let updated =
+				daysAgo < 31 ? daysAgo.toString() + " days ago" : Math.ceil(daysAgo / 30).toString() + " months ago";
+			if (updated.startsWith("1 ")) updated = updated.replace("s ago", " ago"); // remove plural "s"
+			const desc = parts[4] || "";
+			let subtitle = `★ ${stars} – ${updated}`;
+			if (desc) subtitle += " – " + desc;
 
-JSON.stringify({ items: jsonArray });
+			// install icon
+			const installedIcon = installedPlugins.includes(repo) ? " ✅" : "";
+
+			return {
+				title: name + installedIcon,
+				match: alfredMatcher(repo),
+				subtitle: subtitle,
+				arg: repo,
+				uid: repo,
+				mods: { shift: { subtitle: `⇧: Search Issues (${openIssues} open)` } },
+			};
+		});
+	writeToFile(cachePath, JSON.stringify(pluginsArr));
+
+	return JSON.stringify({ items: pluginsArr });
+}
