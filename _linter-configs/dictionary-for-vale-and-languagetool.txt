@@ -148,3 +148,4 @@ DuckDuckGo
 subreddit
 fn⏎
 information on
+NOTE
