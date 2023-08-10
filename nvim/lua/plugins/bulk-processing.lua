@@ -31,7 +31,6 @@ return {
 					["o"] = { method = extend.o_method, opts = {} },
 					["H"] = { method = extend.caret_method, opts = {} },
 					["L"] = { method = extend.dollar_method, opts = {} },
-					-- ["y"] = { method = normal.yank, opts = {} }, -- BUG not working
 					["c"] = { method = normal.change, opts = { nowait = true } },
 					["d"] = { method = normal.delete, opts = { nowait = true } },
 				},
