@@ -54,10 +54,8 @@
 					<string>//──────────────────────────────────────────────────────────────────────────────
 
 // CONFIG: default markdown app, if markdown file is not located in a Vault
-const markdownApp = "Neovim";
+const markdownApp = "Neovide Helper";
 
-//──────────────────────────────────────────────────────────────────────────────
-//──────────────────────────────────────────────────────────────────────────────
 //──────────────────────────────────────────────────────────────────────────────
 
 // DOCS: https://developer.apple.com/library/archive/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html
@@ -166,8 +164,6 @@ function run(argv) {
 						<string>0</string>
 					</dict>
 				</dict>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 				<key>isViewVisible</key>
 				<integer>1</integer>
 				<key>location</key>

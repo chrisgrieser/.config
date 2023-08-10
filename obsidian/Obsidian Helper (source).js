@@ -1,10 +1,8 @@
 //──────────────────────────────────────────────────────────────────────────────
 
 // CONFIG: default markdown app, if markdown file is not located in a Vault
-const markdownApp = "Neovim";
+const markdownApp = "Neovide Helper";
 
-//──────────────────────────────────────────────────────────────────────────────
-//──────────────────────────────────────────────────────────────────────────────
 //──────────────────────────────────────────────────────────────────────────────
 
 // DOCS: https://developer.apple.com/library/archive/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html
