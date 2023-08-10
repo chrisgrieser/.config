@@ -25,8 +25,6 @@ keymap("n", "H", "0^") -- `0` ensures fully scrolling to the left on long indent
 keymap({ "n", "x" }, "L", "$") -- not using "o", since used for link textobj
 keymap({ "n", "x" }, "J", "6gj") -- - work on visual lines instead of logical ones for when wrapping is one
 keymap({ "n", "x" }, "K", "6gk")
-keymap({ "n", "x" }, "j", "gj")
-keymap({ "n", "x" }, "k", "gk")
 
 -- dj = delete 2 lines, dJ = delete 3 lines
 keymap("o", "J", "2j")
@@ -36,13 +34,19 @@ keymap("o", "K", "2k")
 keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
 keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 
+-- visual instead of logcial lines
+keymap({ "n", "x" }, "j", "gj")
+keymap({ "n", "x" }, "k", "gk")
+
 -- Simplified Marks
 -- INFO a custom lualine component shows what is currently marked
+keymap("n", "ä", "'M", { desc = " Goto Mark" })
+
 keymap("n", "Ä", function()
 	u.normal("mM")
 	vim.notify(" Mark set.", u.trace)
 end, { desc = " Set Mark" })
-keymap("n", "ä", "'M", { desc = " Goto Mark" })
+
 keymap("n", "dä", function()
 	vim.api.nvim_del_mark("M")
 	vim.notify(" Mark deleted.", u.trace)
@@ -53,6 +57,7 @@ keymap("n", "gh", "<cmd>Gitsigns next_hunk<CR>zv", { desc = "󰊢 Next Hunk" })
 keymap("n", "gH", "<cmd>Gitsigns prev_hunk<CR>zv", { desc = "󰊢 Previous Hunk" })
 keymap("n", "gc", "g;", { desc = "Goto last change" })
 
+-- Goto brackets
 keymap("n", "m", "<Plug>(MatchitNormalForward)", { desc = "Goto Matching Bracket" })
 
 -- pattern-matching, so not super reliable when it comes to unmatched stuff
@@ -105,15 +110,13 @@ keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
 keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
 keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
 
-keymap("n", "X", "mz$x`z", { desc = "Delete last character" })
+keymap("n", "X", "mz$x`z", { desc = "Delete char at EoL" })
 
-keymap("n", "~", "~h", { desc = "Toggle Case (w/o moving right)" })
+keymap("n", "~", "~h", { desc = "Toggle Case (w/o moving)" })
 
-keymap({ "n", "x" }, "U", "<C-r>", { desc = "󰑎 Redo" }) -- remap for highlight-undo.nvim
-
--- Word Switcher
+-- Word Flipper
 -- stylua: ignore
-keymap( "n", "ö", function() require("funcs.flipper").flipWord() end, { desc = "switch common words / toggle casing" })
+keymap( "n", "ö", function() require("funcs.flipper").flipWord() end, { desc = "flip words / toggle casing" })
 
 -- [O]pen new Scope
 keymap({ "n", "i" }, "<D-o>", function()
@@ -125,7 +128,7 @@ keymap({ "n", "i" }, "<D-o>", function()
 	vim.api.nvim_buf_set_lines(0, ln, ln, false, { indent .. "\t", indent .. "}" })
 	u.setCursor(0, { ln + 1, 1 }) -- go line down
 	cmd.startinsert { bang = true }
-end, { desc = " Open new brace" })
+end, { desc = " Open new scope" })
 
 --------------------------------------------------------------------------------
 -- SPELLING
@@ -210,7 +213,7 @@ keymap("c", "<C-w>", "<C-r><C-w>") -- add word under cursor
 
 -- VISUAL MODE
 keymap("x", "V", "j", { desc = "repeated V selects more lines" })
-keymap("x", "v", "<C-v>", { desc = "vv from Normal Mode starts Visual Block Mode" })
+keymap("x", "v", "<C-v>", { desc = "vv from Normal starts Visual Block" })
 
 --------------------------------------------------------------------------------
 -- BUFFERS & WINDOWS & SPLITS
@@ -225,13 +228,13 @@ keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " 󰽙 Bu
 -- stylua: ignore end
 keymap("n", "<C-w>h", "<cmd>split<CR>", { desc = " horizontal split" })
 keymap("n", "<C-w>v", "<cmd>vertical split<CR>", { desc = " vertical split" })
+
 keymap("n", "<C-Right>", "<cmd>vertical resize +3<CR>", { desc = " vertical resize (+)" })
 keymap("n", "<C-Left>", "<cmd>vertical resize -3<CR>", { desc = " vertical resize (-)" })
-keymap("n", "<C-Down>", "<cmd>resize +3<CR>", { desc = " horizontal resize (+)" })
-keymap("n", "<C-Up>", "<cmd>resize -3<CR>", { desc = " horizontal resize (-)" })
+keymap("n", "<C-Up>", "<cmd>resize +3<CR>", { desc = " horizontal resize (+)" })
+keymap("n", "<C-Down>", "<cmd>resize -3<CR>", { desc = " horizontal resize (-)" })
 
 ------------------------------------------------------------------------------
-
 -- CMD-KEYBINDINGS
 
 -- stylua: ignore
@@ -395,4 +398,3 @@ autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
-

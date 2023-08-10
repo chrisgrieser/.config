@@ -2,7 +2,6 @@ local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
 local wf = require("lua.utils").wf
-local aw = require("lua.utils").aw
 
 --------------------------------------------------------------------------------
 
@@ -25,18 +24,12 @@ Wf_browser = wf.new(env.browserApp)
 
 -- Automatically hide Browser has when no window
 -- requires wider window-filter to not hide PiP windows etc
-Wf_browser_all = wf.new({ env.browserApp })
+Wf_browser_all = wf.new(env.browserApp)
 	:setOverrideFilter({ allowRoles = "AXStandardWindow" })
 	:subscribe(wf.windowDestroyed, function()
 		local app = u.app(env.browserApp)
 		if app and #(app:allWindows()) == 0 then app:hide() end
 	end)
-
--- SAFARI: pseudomaximize
-SafariAppWatcher = aw.new(function(appName, eventType, safari)
-	if not (eventType == aw.launched and appName == "Safari") then return end
-	wu.moveResize(safari:mainWindow(), wu.pseudoMax)
-end):start()
 
 --------------------------------------------------------------------------------
 
@@ -86,23 +79,24 @@ Jk_watcher = u.aw
 if env.browserApp ~= "Brave Browser" then return end
 
 local function toggleVerticalTabs()
+	local threshold = 15 -- CONFIG
+
 	if not PrevTabCount then PrevTabCount = 0 end -- initialize
 	local success, tabCount =
 		hs.osascript.applescript('tell application "Brave Browser" to count tab in first window')
 	if not success then return end
-	local threshold = 9
 	if
 		(tabCount > threshold and PrevTabCount <= threshold)
 		or (tabCount <= threshold and PrevTabCount > threshold)
 	then
-		-- alt-9 bound to Vertical Tab Toggling in Brave Settings
+		-- bound to Vertical Tab Toggling in Brave Settings
 		-- brave://settings/system/shortcuts
 		hs.eventtap.keyStroke({ "cmd", "alt", "ctrl" }, "9", 0, "Brave Browser")
 	end
 	PrevTabCount = tabCount
 end
 
-Wf_braveWindowTitle = wf.new({ "Brave Browser" })
+Wf_braveWindowTitle = wf.new("Brave Browser")
 	:setOverrideFilter({ allowRoles = "AXStandardWindow" })
 	:subscribe(wf.windowTitleChanged, toggleVerticalTabs)
 	:subscribe(wf.windowFocused, toggleVerticalTabs)

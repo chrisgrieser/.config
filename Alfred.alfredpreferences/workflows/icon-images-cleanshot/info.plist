@@ -105,16 +105,6 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>C35BAC57-E3D9-4FCA-8B09-2C81C2D8D7B9</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 	</dict>
 	<key>createdby</key>
@@ -160,7 +150,7 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://www.flaticon.com/search?word={query}</string>
+				<string>https://icon-icons.com/search/icons/?filtro={query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -223,12 +213,12 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://icon-sets.iconify.design/?query={query}</string>
+				<string>https://macosicons.com/#/{query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>C35BAC57-E3D9-4FCA-8B09-2C81C2D8D7B9</string>
+			<string>C8B8FDDD-C5E0-4FAB-9460-6DE156051CF5</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -256,46 +246,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://macosicons.com/#/{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>C8B8FDDD-C5E0-4FAB-9460-6DE156051CF5</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>public.png</string>
-				</array>
-				<key>name</key>
-				<string>Convert png to icns</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>95CF671F-9E2F-4CE9-92A0-BACEF07C97C8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -315,6 +265,25 @@
 			<string>F0335C72-7DC6-4793-ADCD-3909E4CDE001</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>public.png</string>
+				</array>
+				<key>name</key>
+				<string>Convert png to icns</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>95CF671F-9E2F-4CE9-92A0-BACEF07C97C8</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -537,15 +506,6 @@
 			<real>30</real>
 			<key>ypos</key>
 			<real>75</real>
-		</dict>
-		<key>C35BAC57-E3D9-4FCA-8B09-2C81C2D8D7B9</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>12</integer>
-			<key>xpos</key>
-			<real>210</real>
-			<key>ypos</key>
-			<real>130</real>
 		</dict>
 		<key>C8B8FDDD-C5E0-4FAB-9460-6DE156051CF5</key>
 		<dict>
