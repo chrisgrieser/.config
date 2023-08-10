@@ -97,6 +97,7 @@ function refreshKeywordCache(cachePath) {
 						const defaultValue = workflowConfig.find(
 							(/** @type {{ variable: string; }} */ option) => option.variable === varName,
 						).config.default;
+						console.log("🪓 defaultValue:", defaultValue);
 						keywords.push(defaultValue);
 					} catch (_error) {}
 				}
@@ -153,25 +154,26 @@ function refreshKeywordCache(cachePath) {
 			return acc;
 		}, []);
 
+
+	// FILTER IRRELEVANT KEYWORDS
+	// - only the first word of a keyword matters
+	// - only keywords with letter as first char matter
+	// - unique keywords
 	const allKeywords = [
 		...workflowKeywords,
 		...thisWorkflowKeywords,
 		...preinstallKeywords,
 		...userSearchKeywords,
 	];
-
-	// FILTER IRRELEVANT KEYWORDS
-	// - only the first word of a keyword matters
-	// - only keywords with letter as first char matter
-	const relevantKeywords = workflowKeywords.reduce((acc, keyword) => {
+	const relevantKeywords = allKeywords.reduce((acc, keyword) => {
 		const firstWord = keyword.split(" ")[0];
 		if (firstWord.match(/^[a-z]/)) acc.push(firstWord);
 		return acc;
 	}, []);
 	const uniqueKeywords = [...new Set(relevantKeywords)];
-	writeToFile(cachePath, JSON.stringify(uniqueKeywords));
 
-	// LOGGING
+	// WRITING & LOGGING
+	writeToFile(cachePath, JSON.stringify(uniqueKeywords));
 	const durationTotalSecs = (+new Date() - timelogStart) / 1000;
 	console.log(`Rebuilt keyword cache (${uniqueKeywords.length} keywords) in ${durationTotalSecs}s`);
 }

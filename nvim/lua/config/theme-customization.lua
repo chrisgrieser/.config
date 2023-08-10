@@ -37,6 +37,14 @@ local function customHighlights()
 
 	-- MatchParen
 	updateHighlight("MatchParen", "gui=underdotted,bold cterm=underline,bold") -- more visible matchparens
+
+	-- Underlines for Diagnostics
+	local diagnosticTypes = { "Error", "Warn", "Info", "Hint" }
+	for _, type in pairs(diagnosticTypes) do
+		updateHighlight(type .. "Text", "gui=underdouble cterm=underline")
+		updateHighlight("DiagnosticUnderline" .. type, "gui=underdouble cterm=underline")
+	end
+	updateHighlight("DiagnosticUnnecessary", "gui=underdouble cterm=underline")
 end
 
 -- selene: allow(high_cyclomatic_complexity)
@@ -74,10 +82,6 @@ local function themeModifications()
 		-- fix cursor being partially overwritten by the theme
 		vim.opt.guicursor:append("r-cr-o-v:hor10")
 		vim.opt.guicursor:append("a:blinkwait200-blinkoff500-blinkon700")
-
-		for _, type in pairs { "Hint", "Info", "Warn", "Error" } do
-			vim.cmd.highlight("DiagnosticUnderline" .. type .. " gui=underdouble cterm=underline")
-		end
 	elseif theme == "bluloco" then
 		linkHighlight("@text.note.comment", "@text.todo.comment")
 		linkHighlight("@text.warning.comment", "@text.todo.comment")
