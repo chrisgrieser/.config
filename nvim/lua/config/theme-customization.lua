@@ -37,6 +37,16 @@ local function customHighlights()
 
 	-- MatchParen
 	updateHighlight("MatchParen", "gui=underdotted,bold cterm=underline,bold") -- more visible matchparens
+
+	-- proper underlines for diagnostics
+	local types = { "Error", "Warn", "Info", "Hint" }
+	for _, type in pairs(types) do
+		updateHighlight(type .. "Text", "gui=underdouble cterm=underline")
+	end
+	for _, type in pairs(types) do
+		updateHighlight("DiagnosticUnderline" .. type, "gui=underdouble cterm=underline")
+	end
+	updateHighlight("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
 end
 
 -- selene: allow(high_cyclomatic_complexity)
@@ -61,14 +71,6 @@ local function themeModifications()
 		updateHighlight("GitSignsChange", "guifg=#acaa62")
 		updateHighlight("GitSignsAdd", "guifg=#7fcc82")
 		updateHighlight("ScrollView", "guibg=#5a71b3")
-	elseif theme == "gruvbox-material" then
-		updateHighlight("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=#928374")
-		for _, type in pairs { "Hint", "Info", "Warn", "Error" } do
-			updateHighlight(type .. "Text", "gui=underdouble cterm=underline")
-		end
-		for _, type in pairs { "Hint", "Info", "Warn", "Error" } do
-			updateHighlight("DiagnosticUnderline" .. type, "gui=underdouble cterm=underline")
-		end
 	elseif theme == "material" and mode == "light" then
 		updateHighlight("@property", "guifg=#6c9798")
 		updateHighlight("@field", "guifg=#6c9798")

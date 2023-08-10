@@ -244,11 +244,6 @@ local function diagnosticConfig()
 		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 	end
 
-	-- Underlines for Diagnostics
-	for type, _ in pairs(diagnosticTypes) do
-		vim.cmd.highlight("DiagnosticUnderline" .. type .. " gui=underdouble cterm=underline")
-	end
-
 	-- Floats & Virtual Text
 	require("lspconfig.ui.windows").default_options.border = u.borderStyle
 	vim.lsp.handlers["textDocument/hover"] =
