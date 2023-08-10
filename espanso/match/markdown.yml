@@ -5,7 +5,10 @@ matches:
   # `,,lang,,` will create a code block of the respective language and prefill
   # it with the clipboard content, e.g. `,,js,,`
   - regex: ",,(?P<lang>\\w*),,"
-    replace: "```{{lang}}\n{{unindentedCode}}\n```"
+    replace: |
+      ```{{lang}}
+      {{unindentedCode}}
+      ```
     label: Markdown Codeblock
     vars:
       - name: unindentedCode
