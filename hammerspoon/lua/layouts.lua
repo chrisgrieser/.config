@@ -124,6 +124,46 @@ local function selectLayout()
 end
 
 --------------------------------------------------------------------------------
+
+-- Open Apps always at Mouse Screen
+Wf_appsOnMouseScreen = u.wf
+	.new({
+		env.browserApp,
+		env.mailApp,
+		"BetterTouchTool",
+		"Obsidian",
+		"Finder",
+		"ReadKit",
+		"Slack",
+		"IINA",
+		"WezTerm",
+		"Hammerspoon",
+		"System Settings",
+		"Discord",
+		"Neovide",
+		"neovide",
+		"Espanso",
+		"espanso",
+		"BusyCal",
+		"Alfred Preferences",
+		"YouTube",
+		"Netflix",
+		"CrunchyRoll",
+	})
+	:subscribe(u.wf.windowCreated, function(newWin)
+		local mouseScreen = hs.mouse.getCurrentScreen()
+		local app = newWin:application()
+		local screenOfWindow = newWin:screen()
+		if not (mouseScreen and env.isProjector() and app) then return end
+
+		u.runWithDelays({ 0, 0.2, 0.5 }, function()
+			if mouseScreen:name() == screenOfWindow:name() then return end
+			newWin:moveToScreen(mouseScreen)
+			wu.moveResize(newWin, M.maximized)
+		end)
+	end)
+
+--------------------------------------------------------------------------------
 -- WHEN TO SET LAYOUT
 
 -- 1. Change of screen numbers
