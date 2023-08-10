@@ -254,9 +254,6 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
-		-- FIX https://github.com/nvim-telescope/telescope.nvim/issues/2593
-		-- not needed when using noice.nvim
-		-- commit = "9a82b5b",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons", -- add icons
