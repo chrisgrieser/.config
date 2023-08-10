@@ -72,7 +72,7 @@ function fx() {
 	file_url_or_stdin "$1"
 
 	pane_id=$(wezterm cli spawn -- fx "$tmp") # open in new wezterm tab
-	wezterm cli set-tab-title --pane-id="$pane_id" "json explore"
+	wezterm cli set-tab-title --pane-id="$pane_id" "fx"
 }
 
 # [j]son e[x]plore
