@@ -14,6 +14,7 @@ local lightThemes = {
 }
 
 local darkThemes = {
+	"sainnhe/sonokai",
 	"sainnhe/gruvbox-material",
 	"folke/tokyonight.nvim",
 	-- "sainnhe/everforest",
@@ -25,6 +26,11 @@ local darkThemes = {
 
 g.darkTransparency = 0.92
 g.lightTransparency = 0.93
+
+--------------------------------------------------------------------------------
+-- subvariants
+
+vim.g.sonokai_style = 'shusia'
 
 --------------------------------------------------------------------------------
 
