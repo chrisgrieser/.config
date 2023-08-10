@@ -101,8 +101,8 @@
 			"}, ${2:initial_value})"
 		]
 	},
-	".map ( => {} )": {
-		"prefix": ".map ( => {} )",
+	".map ( () => {} )": {
+		"prefix": ".map ( () => {} )",
 		"body": [
 			".map(${1:item} => {",
 			"\t$0",
@@ -114,12 +114,12 @@
 		"prefix": ".map ( => )",
 		"body": ".map(${1:item} => ${1:item}$0)"
 	},
-	"filter (array)": {
-		"prefix": ".filter (array)",
+	"filter ( => )": {
+		"prefix": "filter ( => )",
 		"body": ".filter(${1:item} => ${1:item}$0)"
 	},
-	".sort (array)": {
-		"prefix": ".sort (array)",
+	".sort ( () => {} )": {
+		"prefix": ".sort ( () => {} )",
 		"body": [
 			".sort((a, b) => {",
 			"\treturn ${1:b - a};",

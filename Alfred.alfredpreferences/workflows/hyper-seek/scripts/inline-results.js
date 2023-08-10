@@ -145,11 +145,20 @@ function refreshKeywordCache(cachePath) {
 	// (not covered by earlier cases, since the workflow folder is excluded to
 	// prevent the addition of the pseudo-keywords "a, b, c, …" in the list of
 	// ignored keywords.)
-	keywords.push("today");
+	const thisWorkflowKeywords = app
+		.doShellScript('grep -A1 "<key>keyword" ./info.plist | grep "<string>" || true')
+		.split("\r")
+		.reduce((acc, line) => {
+			const value = line.split(">")[1].split("<")[0];
+			if (value.startsWith(":") || value.startsWith("a||b")) return acc;
+			acc.push(value);
+			return acc;
+		}, []);
+	keywords.push(...thisWorkflowKeywords);
 
 	// FILTER IRRELEVANT KEYWORDS
-	// - also only the first word of a keyword matters
-	// - only keywords with letter as first char are relevant
+	// - only the first word of a keyword matters
+	// - only keywords with letter as first char matter
 	const relevantKeywords = keywords.reduce((acc, keyword) => {
 		const firstWord = keyword.split(" ")[0];
 		if (firstWord.match(/^[a-z]/)) acc.push(firstWord);
@@ -171,7 +180,7 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
  */
 function getFavicon(topDomain, noNeedToBuffer) {
 	const durationLogStart = +new Date();
-   
+
 	let targetFile = `${$.getenv("alfred_workflow_cache")}/${topDomain}.ico`;
 	const useFaviconSetting = $.getenv("use_favicons") === "1";
 

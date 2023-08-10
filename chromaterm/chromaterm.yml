@@ -54,7 +54,7 @@ rules:
     exclusive: true
 
   - description: Size, like 123G 123Gb 123Gib 1.23G 123Gbps
-    regex: (?i)\b\d+(\.\d+)?\s?((([KMGTPEZY](i?B)?)|B)(ps)?)\b
+    regex: (?i)\b\d+(\.\d+)?\s?((([KMGTPEZY](i?B)?)|B)(/s|ps)?)\b
     color:
       0: f.FileSize
       2: bold
