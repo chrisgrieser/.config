@@ -152,14 +152,17 @@ end
 --------------------------------------------------------------------------------
 -- APP UTILS
 
----get appObject
+---get exact appObject, avoiding the impresion of hs.application(appname)
 ---@param appName string (literal & exact match)
----@nodiscard
 ---@return hs.application
+---@nodiscard
 function M.app(appName)
-	-- FIX neovide via CLI is lowercased, via app capitalized, therefore cannot
-	-- use strict matching in this case
-	if appName:find("[Nn]eovide") then return hs.application.find("[Nn]eovide") end
+	-- FIX neovide and wezterm have differing CLI and app names
+	if appName:find("[Nn]eovide") then
+		return hs.application.find("^[Nn]eovide$")
+	elseif appName:find("[wW]ezterm") then
+		return hs.application.find("^[Ww]ezterm%-?g?u?i?$")
+	end
 
 	return hs.application.find(appName, true, true)
 end

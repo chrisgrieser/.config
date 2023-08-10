@@ -74,19 +74,18 @@ function run() {
 	// DOCS https://formulae.brew.sh/docs/api/ & https://docs.brew.sh/Querying-Brew
 	// these files contain as payload the API response of casks and formulas; they
 	// are updated on each `brew update`. Since they are effectively caches,
-	// there is no need create caches on my own
+	// there is no need create caches on our own.
 	const caskJson = app.pathTo("home folder") + "/Library/Caches/Homebrew/api/cask.jws.json";
 	const formulaJson = app.pathTo("home folder") + "/Library/Caches/Homebrew/api/formula.jws.json";
 	if (!fileExists(formulaJson) || !fileExists(caskJson)) app.doShellScript("brew update");
-	// yes, the data must be parsed twice, since that is how the cache is saved
-	// by homebrew
+	// yes, data must be parsed twice, since that is how the cache is saved by homebrew
 	const casksData = JSON.parse(JSON.parse(readFile(caskJson)).payload);
 	const formulaData = JSON.parse(JSON.parse(readFile(formulaJson)).payload);
 
 	// 2. INSTALL DATA (determined live every run)
 	// PERF `ls` quicker than `brew list` or the API
 	const installedBrews = app
-		.doShellScript("ls -1 /opt/homebrew/Cellar ; ls -1 /opt/homebrew/Caskroom")
+		.doShellScript('cd "$(brew --prefix)" ; ls -1 ./Cellar ; ls -1 ./Caskroom')
 		.split("\r");
 
 	// 3. DOWNLOAD COUNTS (cached by me)
@@ -121,7 +120,7 @@ function run() {
 		return {
 			title: name + installedIcon,
 			match: alfredMatcher(name) + cask.desc,
-			subtitle: `${caskIcon} ${downloads}· ${cask.desc}`,
+			subtitle: `${caskIcon} ${downloads} ·  ${cask.desc}`,
 			arg: `--cask ${name}`,
 			mods: {
 				// PERF quicker to pass here than to call `brew home` on brew-id
@@ -134,7 +133,7 @@ function run() {
 					arg: cask.homepage,
 				},
 			},
-			uid: name,
+			uid: name, // remember selections
 		};
 	});
 
@@ -149,7 +148,7 @@ function run() {
 		return {
 			title: name + installedIcon,
 			match: alfredMatcher(name) + formula.desc,
-			subtitle: `${formulaIcon} ${caveats}${dependencies}${downloads}· ${formula.desc}`,
+			subtitle: `${formulaIcon} ${caveats}${dependencies}${downloads} ·  ${formula.desc}`,
 			arg: `--formula ${name}`,
 			text: {
 				largetype: caveatText,
@@ -166,7 +165,7 @@ function run() {
 					arg: formula.homepage,
 				},
 			},
-			uid: name,
+			uid: name, // remember selections
 		};
 	});
 
