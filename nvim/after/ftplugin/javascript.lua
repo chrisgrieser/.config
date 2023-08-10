@@ -1,10 +1,12 @@
 local fn = vim.fn
 local keymap = vim.keymap.set
 local u = require("config.utils")
+local abbr = vim.cmd.inoreabbrev
 --------------------------------------------------------------------------------
 
-vim.cmd.inoreabbrev("<buffer> cosnt const")
-vim.cmd.inoreabbrev("<buffer> -- //") -- habit from writing too much lua
+abbr("<buffer> cosnt const")
+abbr("<buffer> local const") -- habit from writing too much lua
+abbr("<buffer> -- //") -- habit from writing too much lua
 
 u.applyTemplateIfEmptyFile("js")
 
