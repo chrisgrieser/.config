@@ -1,17 +1,14 @@
 # yaml-language-server: $schema=../karabiner-mod-schema.json
 title: Special Characters
 rules:
-  - description: "{} German to US layout for vim"
+  - description: "{}^ German to US layout for vim"
     manipulators:
       # Curly Brace {
       - type: basic
         from: { key_code: "8", modifiers: { mandatory: [option] } }
         conditions:
           - { type: input_source_if, input_sources: [language: ^de$] }
-          - type: frontmost_application_if
-            file_paths:
-              - ^/Applications/Obsidian\.app
-              - "[Nn]eovide"
+          - { type: frontmost_application_if, file_paths: [^/Applications/Obsidian\.app, "[Nn]eovide"] }
         to:
           - select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ }
           - { key_code: vk_none, hold_down_milliseconds: 20 }
@@ -24,18 +21,26 @@ rules:
         conditions:
           - { type: input_source_if, input_sources: [language: ^de$] }
           - type: frontmost_application_if
-            file_paths:
-              - ^/Applications/Obsidian\.app
-              - "[Nn]eovide"
+          - { type: frontmost_application_if, file_paths: [^/Applications/Obsidian\.app, "[Nn]eovide"] }
         to:
           - select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ }
           - { key_code: vk_none, hold_down_milliseconds: 20 }
           - { key_code: close_bracket, modifiers: [shift] }
         to_after_key_up:
           - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
-
+      # caret ^
+      - type: basic
+        from: { key_code: non_us_backslash }
+        conditions:
+          - { type: input_source_if, input_sources: [language: ^de$] }
+        to:
+          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ }
+          - { key_code: vk_none, hold_down_milliseconds: 20 }
+          - { key_code: "6", modifiers: [shift] }
+        to_after_key_up:
+          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "Special Characters: |^\\~[]"
+  - description: "Special Characters: |\\~[]"
     manipulators:
       - type: basic
         from: { key_code: "3", modifiers: { mandatory: [shift] } }
@@ -78,21 +83,7 @@ rules:
         conditions:
           - type: input_source_if
             input_sources: [{ language: ^de$ }]
-      # one stroke caret ^
-      - type: basic
-        from:
-          key_code: non_us_backslash
-        to:
-          - key_code: non_us_backslash
-          - key_code: spacebar
-        conditions:
-          - type: input_source_if
-            input_sources: [{ language: ^de$ }]
-          - type: frontmost_application_unless
-            file_paths:
-              - ^/Applications/Obsidian\.app
-              - "[Nn]eovide"
-      # Tilde ~ in US layout
+      # one stroke tilde ~
       - type: basic
         from: { key_code: "n", modifiers: { mandatory: [option] } }
         conditions:
