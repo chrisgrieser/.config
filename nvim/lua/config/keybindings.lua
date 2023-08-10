@@ -198,7 +198,7 @@ keymap("i", "<C-e>", "<Esc>A") -- EoL
 keymap("i", "<C-a>", "<Esc>I") -- BoL
 -- indent properly when entering insert mode on empty lines
 keymap("n", "i", function()
-	if vim.fn.getline("."):find("^%s*$") then return [["_cc]] end
+	if vim.api.nvim_get_current_line():find("^%s*$") then return [["_cc]] end
 	return "i"
 end, { expr = true, desc = "better i" })
 
