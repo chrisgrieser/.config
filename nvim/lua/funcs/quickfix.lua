@@ -21,12 +21,6 @@ end
 
 -- HELPERS
 
-function M.setup()
-	vim.api.nvim_create_autocmd("QuickFixCmdPost", {
-		callback = function() g.qfCount = 0 end,
-	})
-end
-
 -- statusline component, showing current and total quickfix item
 function M.counter()
 	local totalItems = #vim.fn.getqflist()
@@ -44,7 +38,6 @@ end
 function M.deleteList()
 	if g.qfCount then g.qfCount = nil end -- de-initialize
 	vim.cmd.cexpr("[]")
-	vim.notify("Quickfix List emptied.")
 end
 
 ---goto next quickfix and wrap around

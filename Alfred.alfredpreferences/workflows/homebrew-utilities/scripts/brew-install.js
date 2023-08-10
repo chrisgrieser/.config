@@ -87,7 +87,7 @@ function run() {
 	const installedBrews = app
 		.doShellScript('cd "$(brew --prefix)" ; ls -1 ./Cellar ; ls -1 ./Caskroom')
 		.split("\r");
-
+   
 	// 3. DOWNLOAD COUNTS (cached by me)
 	// DOCS https://formulae.brew.sh/analytics/
 	const cask90d = $.getenv("alfred_workflow_cache") + "/caskDownloads90d.json";
