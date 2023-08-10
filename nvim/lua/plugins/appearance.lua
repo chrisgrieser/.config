@@ -77,8 +77,8 @@ return {
 				{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
 
 				-- redirect long messages to split/mini
-				{ filter = { event = "msg_show", min_height = 12 }, view = "split" },
-				{ filter = { event = "notify", min_width = 50 }, view = "mini" },
+				{ filter = { event = "msg_show", min_height = 7 }, view = "split" },
+				{ filter = { event = "notify", min_width = 60 }, view = "mini" },
 			},
 			cmdline = {
 				-- classic cmdline at the bottom to not obfuscate the buffer, e.g.
