@@ -3,10 +3,8 @@
 mode="$*"
 
 if [[ "$mode" == "killall" ]]; then
-	killall neovide nvim language_server_macos_arm language_server_macos_x86
+	killall neovide nvim language_server_macos_arm language_server_macos_x86 osascript
 	osascript -e 'display notification "" with title "⚔️ Killed nvim & neovide processes."'
-elif [[ "$mode" == "signal" ]]; then
-	nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>echo 'ping'<CR>"
 elif [[ "$mode" == "report" ]]; then
 	# shellcheck disable=2009
 	processes="$(ps cAo 'pid,ppid,state,rss=MEM,command' |

@@ -117,12 +117,12 @@ rules:
           - shell_command: open -a 'zoom.us'
           - *deactivate-leader
           - *remove-notice
-      # [n]ewsreader
+      # [n]eovide
       - type: basic
         from: { key_code: "n" }
         conditions: [*leader-active]
         to:
-          - shell_command: open -a 'ReadKit' || open 'https://www.inoreader.com/all_articles'
+          - shell_command: open -a 'Neovide'
           - *deactivate-leader
           - *remove-notice
       # [S]lack
@@ -296,6 +296,14 @@ rules:
         to:
           - shell_command: |
               osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "browse" in workflow "de.chris-grieser.reddit-browser"'
+          - *deactivate-leader
+          - *remove-notice
+      # u: Readkit (mnemonic: news = nuus)
+      - type: basic
+        from: { key_code: u }
+        conditions: [*leader-active]
+        to:
+          - shell_command: open -a 'ReadKit' || open 'https://www.inoreader.com/all_articles'
           - *deactivate-leader
           - *remove-notice
       # [.]: Emoji Picker

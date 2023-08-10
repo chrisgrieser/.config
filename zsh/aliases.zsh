@@ -1,7 +1,5 @@
 # shellcheck disable=2139
 
-#───────────────────────────────────────────────────────────────────────────────
-
 # z & cd
 # INFO leading space to ignore it in history due to HIST_IGNORE_SPACE
 alias ..=" z .."
@@ -74,13 +72,13 @@ alias treeeee='exa --tree --level=5 --icons --git-ignore'
 # https://www.thorsten-hans.com/5-types-of-zsh-aliases
 
 # SUFFIX Alias
-alias -s {yml,yaml}='yq'
+alias -s {yml,yaml}='yq "."'
 alias -s json='fx'
 alias -s pdf='qlmanage -p'
 alias -s {md,lua,js,ts,css,sh,zsh,applescript,txt,py,plist}='bat'
 
-[[ "$TERM_PROGRAM" == "WezTerm" ]] && viewer="wezterm imgcat" || viewer="qlmanage -p"
-alias -s {gif,png,jpg,jpeg,webp,tiff}="$viewer"
+[[ "$TERM_PROGRAM" == "WezTerm" ]] && image_viewer="wezterm imgcat" || image_viewer="qlmanage -p"
+alias -s {gif,png,jpg,jpeg,webp,tiff}="$image_viewer"
 
 # GLOBAL ALIAS (to be used at the end, mostly)
 alias -g G='| rg'

@@ -1,7 +1,7 @@
 # HELPER FUNCTION USED BY OTHERS
 # draws a separator line with terminal width
 function separator() {
-	local sep_char="═" # ─ ═
+	local sep_char="═"           # ─ ═
 	local sep_color="\033[1;30m" # black
 	local terminal_width
 	local sep=""
@@ -57,6 +57,7 @@ function inspect() {
 function o() {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 	if ! command -v fd &>/dev/null; then echo "fd not installed." && return 1; fi
+	if ! command -v exa &>/dev/null; then print "\033[1;33mexa not installed.\033[0m" && return 1; fi
 
 	local selected
 	local input="$*"
@@ -71,7 +72,7 @@ function o() {
 	selected=$(
 		fd --hidden --color=always | fzf \
 			-0 -1 --ansi --query="$input" --info=inline \
-			--preview '[[ -f {} ]] && bat --color=always --style=snip --wrap=never --tabs=2 {} || exa {}'
+			--preview '[[ -f {} ]] && bat --color=always --style=snip --wrap=never --tabs=2 {} || exa --icons --color=always --group-directories-first {}'
 	)
 	if [[ -z "$selected" ]]; then # fzf aborted
 		return 0
@@ -162,6 +163,7 @@ function eject() {
 		print "\033[1;33mNo volume connected.\033[0m"
 		return 1
 	fi
+
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 	# if one volume, will auto-eject due to `-1`
 	selected=$(echo "$volumes" | fzf -0 -1 --no-info --height=10%)
@@ -219,7 +221,7 @@ function prefs() {
 		defaults read >/tmp/before
 		PREF_BEFORE=1
 
-		echo "Saved current \`defaults\` state."
+		echo "Saved current \`defaults\` state. Make changes and run \`prefs\` again for a diff of the changes."
 	else
 		defaults read >/tmp/after
 		local changes
@@ -229,7 +231,7 @@ function prefs() {
 		echo "$changes"
 		# show context, so the domain can be identified
 		separator
-		toGrep=$(echo "$changes" | tail -n1 | sed -e 's/^> *//') 
+		toGrep=$(echo "$changes" | tail -n1 | sed -e 's/^> *//')
 		grep -B20 "$toGrep" /tmp/after
 	fi
 }
