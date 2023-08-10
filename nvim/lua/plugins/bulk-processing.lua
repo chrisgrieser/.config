@@ -6,7 +6,9 @@ return {
 	-- TODO using vimscript multi-cursors, pending https://github.com/smoka7/multicursors.nvim/issues/31
 	{ -- Multi Cursor
 		"mg979/vim-visual-multi",
-		keys = { { "<D-j>", mode = { "n", "x" }, desc = "󰆿 Multi-Cursor" } },
+		keys = {
+			{ "<D-j>", mode = { "n", "x" }, desc = "󰆿 Multi-Cursor" },
+		},
 		init = function()
 			vim.g.VM_set_statusline = 0 -- already using my version via lualine component
 			vim.g.VM_show_warnings = 0
@@ -23,6 +25,8 @@ return {
 				["Skip Region"] = "q", -- skip & find next
 				["Remove Region"] = "Q", -- remove & find previous
 				["Find Operator"] = "s", -- operator, selects all regions found in textobj
+				["Motion $"] = "L", -- use my HL motions here as well
+				["Motion ^"] = "H",
 			}
 
 			-- INFO inserting only on load to ensure lazy-loading

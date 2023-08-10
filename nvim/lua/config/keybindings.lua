@@ -61,6 +61,7 @@ keymap("n", "gc", "g;", { desc = "Goto last change" })
 keymap("n", "m", "<Plug>(MatchitNormalForward)", { desc = "Goto Matching Bracket" })
 
 -- pattern-matching, so not super reliable when it comes to unmatched stuff
+-- DOCS https://github.com/chrisbra/matchit/blob/master/doc/matchit.txt#L38
 keymap("n", "^", "<Plug>(MatchitNormalMultiForward)", { desc = "Goto Unmatched Bracket" })
 
 --------------------------------------------------------------------------------
