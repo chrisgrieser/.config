@@ -11,9 +11,12 @@ matches:
       - name: unindentedCode
         type: shell
         params:
+          # LC_CTYPE: fix encoding issues
           # awk: remove trailing blank lines
           # python3: remove indentation
-          cmd: 'pbpaste | awk "NF {p=1} p" | python3 -c "import textwrap,sys; print(textwrap.dedent(sys.stdin.read()))"'
+          cmd: |
+            export LC_CTYPE="en_US.UTF-8"
+            pbpaste | awk "NF {p=1} p" | python3 -c "import textwrap,sys; print(textwrap.dedent(sys.stdin.read()))"
   - trigger: LLL
     replace: '[$|$]({{url}})'
     label: Markdown Link
@@ -26,15 +29,7 @@ matches:
   - trigger: TTT
     replace: '- [ ] '
     label: Markdown Task
-  - trigger: EEE
-    replace: '`$|$`'
-    label: Markdown Inline Code
   #─────────────────────────────────────────────────────────────────────────────
-  - trigger: '!references'
-    replace: |
-      ::: {#refs}
-      :::
-    label: Pandoc Reference List
   - trigger: '!table'
     replace: |
       ::: {custom-style="Table Caption"}
