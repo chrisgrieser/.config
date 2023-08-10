@@ -62,7 +62,7 @@ function refreshKeywordCache(cachePath) {
 	console.log("Refreshing keyword cache…");
 	const timelogStart = +new Date();
 
-	const keywords = app
+	const workflowKeywords = app
 		// $alfred_workflow_uid is identical with this workflow's foldername, which
 		// is excluded from the results, since this workflows keywords do not need
 		// to be removed
@@ -70,9 +70,8 @@ function refreshKeywordCache(cachePath) {
 			'grep -A1 "<key>keyword" ../**/info.plist | grep "<string>" | grep -v "$alfred_workflow_uid" || true',
 		)
 		.split("\r")
-		.reduce((acc, line) => {
+		.reduce((keywords, line) => {
 			const value = line.split(">")[1].split("<")[0];
-			const keywords = [];
 
 			// DOCS ALFRED KEYWORDS https://www.alfredapp.com/help/workflows/advanced/keywords/
 			// CASE 1: `{var:alfred_var}` -> configurable keywords
@@ -86,7 +85,7 @@ function refreshKeywordCache(cachePath) {
 					const userKeyword = app.doShellScript(
 						`plutil -extract "${varName}" raw -o - "${workflowPath}/prefs.plist"`,
 					);
-					keywords.push(userKeyword.toLowerCase());
+					keywords.push(userKeyword.toLowerCase()); // in case user enters non-lowercase value
 				} catch (_error) {
 					// CASE 1b: keywords where user kept the default value
 					try {
@@ -98,7 +97,7 @@ function refreshKeywordCache(cachePath) {
 						const defaultValue = workflowConfig.find(
 							(/** @type {{ variable: string; }} */ option) => option.variable === varName,
 						).config.default;
-						keywords.push(defaultValue.tolowerCase());
+						keywords.push(defaultValue);
 					} catch (_error) {}
 				}
 			}
@@ -108,12 +107,9 @@ function refreshKeywordCache(cachePath) {
 				keywords.push(...multiKeyword);
 			}
 			// CASE 3: regular keyword
-			else {
-				keywords.push(value);
-			}
+			keywords.push(value);
 
-			acc.push(...keywords);
-			return acc;
+			return keywords;
 		}, []);
 
 	// CASE 5: Pre-installed Searches
@@ -122,10 +118,11 @@ function refreshKeywordCache(cachePath) {
 			"xargs -I {} grep -A1 '<key>keyword' '{}' | grep '<string>' || true",
 	);
 	// check for the possibility of user having all searches disabled
+	const preinstallKeywords = [];
 	if (preinstalledSearches) {
 		preinstalledSearches.split("\r").forEach((line) => {
 			const searchKeyword = line.split(">")[1].split("<")[0];
-			keywords.push(searchKeyword);
+			preinstallKeywords.push(searchKeyword);
 		});
 	}
 
@@ -134,10 +131,11 @@ function refreshKeywordCache(cachePath) {
 		app.doShellScript("plutil -convert json ../../preferences/features/websearch/prefs.plist -o - || true") ||
 			"{}",
 	).customSites;
+	const userSearchKeywords = [];
 	if (userSearches) {
 		Object.keys(userSearches).forEach((uuid) => {
 			const searchObj = userSearches[uuid];
-			if (searchObj.enabled) keywords.push(searchObj.keyword);
+			if (searchObj.enabled) userSearchKeywords.push(searchObj.keyword);
 		});
 	}
 
@@ -154,12 +152,18 @@ function refreshKeywordCache(cachePath) {
 			acc.push(value);
 			return acc;
 		}, []);
-	keywords.push(...thisWorkflowKeywords);
+
+	const allKeywords = [
+		...workflowKeywords,
+		...thisWorkflowKeywords,
+		...preinstallKeywords,
+		...userSearchKeywords,
+	];
 
 	// FILTER IRRELEVANT KEYWORDS
 	// - only the first word of a keyword matters
 	// - only keywords with letter as first char matter
-	const relevantKeywords = keywords.reduce((acc, keyword) => {
+	const relevantKeywords = workflowKeywords.reduce((acc, keyword) => {
 		const firstWord = keyword.split(" ")[0];
 		if (firstWord.match(/^[a-z]/)) acc.push(firstWord);
 		return acc;

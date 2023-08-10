@@ -65,7 +65,7 @@ return {
 	},
 	{ -- highlight word under cursor & batch renamer
 		"nvim-treesitter/nvim-treesitter-refactor",
-		event = "BufEnter",
+		event = "BufReadPre",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
 			vim.api.nvim_create_autocmd("ColorScheme", {
