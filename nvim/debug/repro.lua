@@ -1,49 +1,30 @@
--- DO NOT change the paths and don't remove the colorscheme
-local root = vim.fn.fnamemodify("./.repro", ":p")
-
--- set stdpaths to use .repro
-for _, name in ipairs({ "config", "data", "state", "cache" }) do
-	vim.env[("XDG_%s_HOME"):format(name:upper())] = root .. "/" .. name
-end
-
--- bootstrap lazy
-local lazypath = root .. "/plugins/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", lazypath })
-end
-vim.opt.runtimepath:prepend(lazypath)
-
--- install plugins with minimal LSP setup
 local plugins = {
-	"folke/tokyonight.nvim",
 	{
-		"folke/noice.nvim",
-		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
-		opts = true,
+		"williamboman/mason-lspconfig.nvim",
+		dependencies = { "williamboman/mason.nvim", opts = {} },
+		opts = { ensure_installed = { "lua_ls" } },
 	},
-	-- {
-	-- 	"williamboman/mason-lspconfig.nvim",
-	-- 	dependencies = { "williamboman/mason.nvim", opts = {} },
-	-- 	opts = { ensure_installed = { "lua_ls" } },
-	-- },
-	-- {
-	-- 	"neovim/nvim-lspconfig",
-	-- 	init = function()
-	-- 		require("lspconfig")["lua_ls"].setup({})
-	-- 	end,
-	-- },
+	{
+		"neovim/nvim-lspconfig",
+		init = function() require("lspconfig")["lua_ls"].setup({}) end,
+	},
 }
 
-require("lazy").setup(plugins, {
-	root = root .. "/plugins",
-})
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+if not vim.uv.fs_stat(lazypath) then
+	 vim.fn.system {
+		  'git',
+		  'clone',
+		  '--depth=1',
+		  '--filter=blob:none',
+		  '--single-branch',
+		  'https://github.com/folke/lazy.nvim.git',
+		  lazypath,
+	 }
+end
+vim.opt.runtimepath:prepend(lazypath)
+require('lazy').setup(plugins)
 
-vim.cmd.colorscheme("tokyonight")
-
---------------------------------------------------------------------------------
-
--- Convenience stuff, not strictly necessary
-vim.g.neovide_scale_factor = 1.8
-vim.fn.system("open -g 'hammerspoon://enlarge-neovide-window'")
+vim.g.neovide_scale_factor = 1.8 -- Convenience stuff, not strictly necessary
 
 --------------------------------------------------------------------------------

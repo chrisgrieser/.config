@@ -5,8 +5,9 @@ local u = require("config.utils")
 return {
 	{ -- fix scrollOff at end of file
 		"Aasim-A/scrollEOF.nvim",
-		event = "WinScrolled", 
+		event = "WinScrolled",
 		opts = true,
+		-- BUG: https://github.com/Aasim-A/scrollEOF.nvim/issues/7
 	},
 	{ -- when searching, search count is shown next to the cursor
 		"kevinhwang91/nvim-hlslens",
@@ -15,7 +16,7 @@ return {
 	},
 	{ -- scrollbar with information
 		"lewis6991/satellite.nvim",
-		commit = "5d33376", -- TODO later versions require nvim 0.10
+		commit = "5d33376", -- TODO following versions require nvim 0.10
 		event = "VeryLazy",
 		init = function()
 			if vim.version().major == 0 and vim.version().minor >= 10 then
@@ -76,9 +77,9 @@ return {
 				{ filter = { event = "msg_show", find = "^?." }, skip = true },
 				{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
 
-				-- redirect long messages to split/mini
-				{ filter = { event = "msg_show", min_height = 7 }, view = "split" },
-				{ filter = { event = "notify", min_width = 60 }, view = "mini" },
+				{ filter = { event = "msg_show", min_height = 12 }, view = "split" },
+				{ filter = { event = "msg_show", min_height = 12 }, view = "split" },
+				{ filter = { event = "notify", min_width = 50 }, view = "mini" },
 			},
 			cmdline = {
 				-- classic cmdline at the bottom to not obfuscate the buffer, e.g.
@@ -157,7 +158,7 @@ return {
 	},
 	{ -- rainbow brackets
 		"https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
-		event = "BufReadPost", -- later and first buffer does not get brackets colored
+		event = "VeryLazy",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
 			-- rainbow brackets without aggressive red
@@ -196,9 +197,15 @@ return {
 		keys = { "u", "U" },
 		opts = {
 			duration = 250,
-			keymaps = {
-				{ "n", "u", "silent undo", { desc = "󰕌 Undo", silent = true } },
-				{ "n", "U", "silent redo", { desc = "󰑎 Redo", silent = true } },
+			undo = {
+				lhs = "u",
+				map = "silent undo",
+				opts = { desc = "󰕌 Undo" },
+			},
+			redo = {
+				lhs = "U",
+				map = "silent redo",
+				opts = { desc = "󰑎 Redo" },
 			},
 		},
 	},
