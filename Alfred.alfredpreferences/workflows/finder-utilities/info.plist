@@ -5,7 +5,7 @@
 	<key>bundleid</key>
 	<string>de.chris-grieser.finder</string>
 	<key>category</key>
-	<string>❇️</string>
+	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
 		<key>0194E157-0701-47CC-996A-E69B0F976319</key>
@@ -302,19 +302,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>E4623760-CBC3-4AA4-BD7B-268C0A2D41AD</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F0B016D7-BD49-4573-9BE1-E72AA4A9F282</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -893,40 +880,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<string>61FD59B0-9B8B-4772-9CC7-FD5C55823BF6</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string>/System/Volumes/Data/Applications/BetterZip.app</string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>F0B016D7-BD49-4573-9BE1-E72AA4A9F282</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>public.zip-archive</string>
-				</array>
-				<key>name</key>
-				<string>Open in Better Zip</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>E4623760-CBC3-4AA4-BD7B-268C0A2D41AD</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1587,13 +1540,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
-		<key>E4623760-CBC3-4AA4-BD7B-268C0A2D41AD</key>
-		<dict>
-			<key>xpos</key>
-			<real>760</real>
-			<key>ypos</key>
-			<real>655</real>
-		</dict>
 		<key>EE44CF5E-3896-4D8B-89C9-B1686A03E42E</key>
 		<dict>
 			<key>note</key>
@@ -1611,13 +1557,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<real>620</real>
 			<key>ypos</key>
 			<real>1025</real>
-		</dict>
-		<key>F0B016D7-BD49-4573-9BE1-E72AA4A9F282</key>
-		<dict>
-			<key>xpos</key>
-			<real>935</real>
-			<key>ypos</key>
-			<real>655</real>
 		</dict>
 		<key>F51A014F-1ABC-49D4-ADA8-0B83A691533F</key>
 		<dict>
@@ -1734,7 +1673,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 				</array>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>This setting is purely aesthetic</string>
 			<key>label</key>
 			<string>Color of the Tag</string>
 			<key>type</key>
