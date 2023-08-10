@@ -1,6 +1,8 @@
 local M = {}
 --------------------------------------------------------------------------------
 
+-- INTERNAL
+
 local g = vim.g
 local cmd = vim.cmd
 
@@ -17,6 +19,14 @@ end
 
 --------------------------------------------------------------------------------
 
+-- HELPERS
+
+function M.setup()
+	vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+		callback = function() g.qfCount = 0 end,
+	})
+end
+
 -- statusline component, showing current and total quickfix item
 function M.counter()
 	local totalItems = #vim.fn.getqflist()
@@ -28,7 +38,7 @@ function M.counter()
 end
 
 --------------------------------------------------------------------------------
--- keymaps
+-- KEYMAPS
 
 ---delete the quickfixlist
 function M.deleteList()
