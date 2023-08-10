@@ -259,11 +259,11 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>Small Utilities for Alfred Workflow Development</string>
+	<string>Small Utilities for Alfred Workflow Developers</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Alfred Dev</string>
+	<string>Workflow Dev Shortcuts</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -808,48 +808,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>🎩 Alfred Preferences Icon</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>19C8E66D-6CBD-4ACB-8E2D-14E928BC403C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>alfred-preference app</string>
-				<key>subtext</key>
-				<string>requires `fileicon`</string>
-				<key>text</key>
-				<string>⚙️ Update Alfred Preference Icon</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>AC7C9D3D-E394-4C9B-B5EE-57E5370DBCA3</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -869,6 +827,48 @@
 			<string>43143E26-0CD1-43FB-B13D-74E8AB0411EF</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>:alfred preference</string>
+				<key>subtext</key>
+				<string>requires `fileicon`</string>
+				<key>text</key>
+				<string>⚙️ Update Alfred Preference Icon</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>AC7C9D3D-E394-4C9B-B5EE-57E5370DBCA3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>🎩 Alfred Preferences Icon</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>19C8E66D-6CBD-4ACB-8E2D-14E928BC403C</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -893,7 +893,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>335</real>
 			<key>ypos</key>
-			<real>630</real>
+			<real>615</real>
 		</dict>
 		<key>1C54A9EF-33FF-4391-A2AA-B1A21ABA6BE7</key>
 		<dict>
@@ -920,7 +920,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>955</real>
+			<real>950</real>
 			<key>ypos</key>
 			<real>65</real>
 		</dict>
@@ -960,7 +960,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>180</real>
 			<key>ypos</key>
-			<real>630</real>
+			<real>615</real>
 		</dict>
 		<key>44FFE9B4-3CB4-46D3-8742-B7656E370346</key>
 		<dict>
@@ -1075,7 +1075,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>630</real>
+			<real>615</real>
 		</dict>
 		<key>C324E172-125B-402B-930D-F7D52CD82CD6</key>
 		<dict>
