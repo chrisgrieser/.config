@@ -50,14 +50,20 @@ rules:
                 end tell'
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Finder"
+  - description: "(Apps) Finder: Sidebar"
     manipulators:
-      # Finder: Sidebars
       - type: basic
         from: { key_code: "1", modifiers: { mandatory: [command] } }
         to:
           - { key_code: s, modifiers: [control, command] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
+  - description: "(Apps) ReadKit: Sidebar"
+    manipulators:
+      - type: basic
+        from: { key_code: "1", modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: s, modifiers: [control, command] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [app\.readkit\.universal] }]
 
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Highlights"
