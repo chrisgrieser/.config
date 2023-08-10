@@ -35,7 +35,6 @@ keymap("n", "g/", function()
 	local regex = fn.getreg("z")
 	local pattern = regex:match("/(.*)/")
 	local flags = regex:match("/.*/(%l*)")
-	---@diagnostic disable-next-line: param-type-mismatch, undefined-field
 	local replacement = vim.api.nvim_get_current_line():match('replace ?%(/.*/.*, ?"(.-)"')
 
 	-- https://github.com/firasdib/Regex101/wiki/FAQ#how-to-prefill-the-fields-on-the-interface-via-url

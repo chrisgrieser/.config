@@ -22,7 +22,7 @@ keymap("n", "<leader>i", function()
 	else
 		lineContent = lineContent:gsub(";", " !important;")
 	end
-	fn.setline(".", lineContent) ---@diagnostic disable-line: param-type-mismatch
+	vim.api.nvim_set_current_line(lineContent) 
 end, { buffer = true, desc = " Toggle !important", nowait = true })
 
 --------------------------------------------------------------------------------
