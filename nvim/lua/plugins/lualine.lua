@@ -67,18 +67,24 @@ local function selectionCount()
 	return " " .. tostring(lines) .. "L " .. tostring(fn.wordcount().visual_chars) .. "C"
 end
 
---------------------------------------------------------------------------------
+-- shows global mark M
+local function markM()
+	local markObj = vim.api.nvim_get_mark("M", {})
+	local markLn = markObj[1]
+	local markBufname = vim.fs.basename(markObj[4])
+	if markBufname == "" then return "" end -- mark not set
+	return " " .. markBufname .. ":" .. markLn
+end
+vim.api.nvim_del_mark("M") -- reset on session start
 
+-- only show the clock when fullscreen (= it covers the menubar clock)
 local function clock()
-	-- only show the clock when fullscreen (= it covers the menubar clock)
 	if vim.opt.columns:get() < 110 or vim.opt.lines:get() < 25 then return "" end
 
 	local time = tostring(os.date()):sub(12, 16)
 	if os.time() % 2 == 1 then time = time:gsub(":", " ") end -- make the `:` blink
 	return time
 end
-
---------------------------------------------------------------------------------
 
 -- return available plugin updates when above a certain threshold
 local function pluginUpdates()
@@ -88,8 +94,6 @@ local function pluginUpdates()
 	if numberOfUpdates < threshold then return "" end
 	return " " .. numberOfUpdates
 end
-
---------------------------------------------------------------------------------
 
 -- wrapper to not require navic directly
 local function navicBreadcrumbs()
@@ -145,7 +149,9 @@ local lualineConfig = {
 		},
 		-- INFO dap and recording status defined in the respective plugin configs
 		-- for lualine_y and lualine_z for their lazy loading
-		lualine_y = {},
+		lualine_y = {
+			{ markM },
+		},
 		lualine_z = {},
 	},
 	sections = {

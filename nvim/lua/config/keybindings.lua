@@ -37,18 +37,26 @@ keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
 keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
 
 -- Simplified Marks
+-- INFO a custom lualine component shows what is currently marked
 keymap("n", "Ä", function()
-	vim.notify(" Mark set.", u.trace)
 	u.normal("mM")
+	vim.notify(" Mark set.", u.trace)
 end, { desc = " Set Mark" })
 keymap("n", "ä", "'M", { desc = " Goto Mark" })
+keymap("n", "dä", function()
+	vim.api.nvim_del_mark("M")
+	vim.notify(" Mark deleted.", u.trace)
+end, { desc = " Delete Mark" })
 
 -- Hunks and Changes
 keymap("n", "gh", "<cmd>Gitsigns next_hunk<CR>zv", { desc = "󰊢 Next Hunk" })
 keymap("n", "gH", "<cmd>Gitsigns prev_hunk<CR>zv", { desc = "󰊢 Previous Hunk" })
-keymap("n", "g,", "g;", { desc = "Goto last change" })
+keymap("n", "gc", "g;", { desc = "Goto last change" })
 
 keymap("n", "m", "<Plug>(MatchitNormalForward)", { desc = "Goto Matching Bracket" })
+
+-- pattern-matching, so not super reliable when it comes to unmatched stuff
+keymap("n", "^", "<Plug>(MatchitNormalMultiForward)", { desc = "Goto Unmatched Bracket" })
 
 --------------------------------------------------------------------------------
 
@@ -387,3 +395,4 @@ autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
+

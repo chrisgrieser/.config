@@ -221,7 +221,7 @@ local function filetypeCompletionConfig()
 		-- disable the annoying `\[` suggestion
 		enabled = function()
 			local col = vim.fn.col(".") - 1
-			local charBefore = vim.fn.getline("."):sub(col, col)
+			local charBefore = vim.api.nvim_get_current_line():sub(col, col)
 			return charBefore ~= "\\"
 		end,
 		sources = cmp.config.sources {

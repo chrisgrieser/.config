@@ -21,7 +21,7 @@ keymap("x", "p", "P", { desc = "Paste without switching register" })
 
 -- do not clutter the register if blank line is deleted
 keymap("n", "dd", function()
-	local isBlankLine = fn.getline("."):find("^%s*$") ---@diagnostic disable-line: param-type-mismatch, undefined-field
+	local isBlankLine = vim.api.nvim_get_current_line():find("^%s*$")
 	local expr = isBlankLine and '"_dd' or "dd"
 	return expr
 end, { expr = true })

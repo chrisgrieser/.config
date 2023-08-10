@@ -16,7 +16,7 @@ keymap({ "o", "x" }, "ax", "<cmd>lua require('various-textobjs').htmlAttribute(f
 
 -- toggle !important
 keymap("n", "<leader>i", function()
-	local lineContent = fn.getline(".")
+	local lineContent = vim.api.nvim_get_current_line()
 	if lineContent:find("!important") then
 		lineContent = lineContent:gsub(" !important", "")
 	else
