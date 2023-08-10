@@ -329,8 +329,8 @@ keymap("n", "gs", function() cmd.Telescope("treesitter") end, { desc = " Docu
 
 -- Save & Format
 keymap({ "n", "x", "i" }, "<D-s>", function()
-	cmd.update()
 	vim.lsp.buf.format()
+	cmd.update()
 end, { desc = "󰒕  Save & Format" })
 
 -- uses "v" instead of "x", so signature can be shown during snippet completion

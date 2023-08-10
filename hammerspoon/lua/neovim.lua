@@ -75,5 +75,6 @@ u.urischeme("neovide-post-startup", function()
 		local neovideWin = u.app("neovide"):mainWindow()
 		local size = env.isProjector() and wu.maximized or wu.pseudoMax
 		wu.moveResize(neovideWin, size)
+		u.app("neovide"):activate()
 	end)
 end)

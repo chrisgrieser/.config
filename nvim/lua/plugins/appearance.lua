@@ -4,7 +4,6 @@ local u = require("config.utils")
 
 return {
 	{ -- fix scrollOff at end of file
-	-- TODO: https://github.com/Aasim-A/scrollEOF.nvim/issues/7
 		"Aasim-A/scrollEOF.nvim",
 		event = "WinScrolled", 
 		opts = true,
