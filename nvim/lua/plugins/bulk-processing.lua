@@ -14,8 +14,10 @@ return {
 			local normal = require("multicursors.normal_mode")
 			local extend = require("multicursors.extend_mode")
 			require("multicursors").setup {
+				nowait = true,
 				hint_config = false,
 				create_commands = false,
+				-- methods listed here https://github.com/smoka7/multicursors.nvim/blob/main/lua/multicursors/config.lua
 				normal_keys = {
 					-- add next selection by using the same key again
 					["<D-j>"] = { method = normal.find_next, opts = {} },
@@ -29,6 +31,9 @@ return {
 					["o"] = { method = extend.o_method, opts = {} },
 					["H"] = { method = extend.caret_method, opts = {} },
 					["L"] = { method = extend.dollar_method, opts = {} },
+					-- ["y"] = { method = normal.yank, opts = {} }, -- BUG not working
+					["c"] = { method = normal.change, opts = { nowait = true } },
+					["d"] = { method = normal.delete, opts = { nowait = true } },
 				},
 			}
 
