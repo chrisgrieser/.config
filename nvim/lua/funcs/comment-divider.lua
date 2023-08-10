@@ -3,7 +3,7 @@ local linechar = "─"
 
 function M.commentHr()
 	---@diagnostic disable: param-type-mismatch
-	local wasOnBlank = vim.fn.getline(".") == ""
+	local wasOnBlank = vim.api.nvim_get_current_line() == ""
 	local indent = vim.fn.indent(".")
 	local textwidth = vim.bo.textwidth
 	local comStr = vim.bo.commentstring
@@ -33,7 +33,7 @@ function M.commentHr()
 		local hrIndent = vim.fn.indent(".")
 
 		-- cannot use simply :sub, since it assumes one-byte-size chars
-		local hrLine = vim.fn.getline(".") ---@diagnostic disable-next-line: assign-type-mismatch, undefined-field
+		local hrLine = vim.api.nvim_get_current_line()
 		hrLine = hrLine:gsub(linechar, "", hrIndent)
 		vim.fn.setline(".", hrLine)
 	else
