@@ -1038,7 +1038,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>wip</string>
+				<string>{var:tag_to_search}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -1699,6 +1699,48 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>tag_to_search</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>🟠</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>🟠 orange</string>
+						<string>🟠</string>
+					</array>
+					<array>
+						<string>🟡 yellow</string>
+						<string>🟡</string>
+					</array>
+					<array>
+						<string>🔵 blue</string>
+						<string>🔵</string>
+					</array>
+					<array>
+						<string>🟢 green</string>
+						<string>🟢</string>
+					</array>
+					<array>
+						<string>🔴 red</string>
+						<string>🔴</string>
+					</array>
+					<array>
+						<string>🟣 purple</string>
+						<string>🟣</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Color of the Tag</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>tag_emoji</string>
 		</dict>
 	</array>
 	<key>version</key>
