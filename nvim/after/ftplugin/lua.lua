@@ -3,9 +3,12 @@ local cmd = vim.cmd
 local keymap = vim.keymap.set
 local expand = vim.fn.expand
 local u = require("config.utils")
+local abbr = vim.cmd.inoreabbrev
 --------------------------------------------------------------------------------
 
-vim.cmd.inoreabbrev("<buffer> // --")-- habit from writing too much js
+-- habits from writing too much js
+abbr("<buffer> // --")
+abbr("<buffer> const local")
 
 --------------------------------------------------------------------------------
 
