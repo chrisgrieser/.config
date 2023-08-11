@@ -89,11 +89,14 @@ function jx() {
 	selection=$(fastgron --color --no-newline "$tmp" |
 		tail -n +2 | # remove header
 		cut -d"=" -f1 | # only key
-		sed $'s/\\[\x1b\\[1;32m[[:digit:]]*/[/g' | # .d[1] -> .d[] to aggregate for yq. `\x1b` escapes the color code https://superuser.com/a/380778
+		# .d[1] -> .d[] to aggregate for yq & also colorize the brackets []
+		# `\x1b` escapes the color code https://superuser.com/a/380778
+		sed $'s/\\[\x1b\\[1;32m[[:digit:]]*\x1b\\[1;34m\\]/\033[1;33m[]/g' | 
 		sort | uniq | # remove duplicates
 		sed -E 's/^json\.?/./' | # rm "json" prefix, keep dot for yq (Array: `json[0]`, Object: `json.key`)
+		sed $'s/\\./\033[1;31m./g' | # colorize dots
 		fzf --ansi --no-sort --query="$query" --info=inline --exact \
-			--height="80%" --preview-window="50%" --keep-right \
+			--height="80%" --preview-window="45%" --keep-right \
 			--preview='yq {} --colors --output-format=json "/tmp/temp.json" | grep -v "null"')
 
 	[[ -z "$selection" ]] && return 0 # no selection made -> no exit 130

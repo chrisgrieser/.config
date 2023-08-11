@@ -87,7 +87,7 @@ function run() {
 	const installedBrews = app
 		.doShellScript('cd "$(brew --prefix)" ; ls -1 ./Cellar ; ls -1 ./Caskroom')
 		.split("\r");
-   
+
 	// 3. DOWNLOAD COUNTS (cached by me)
 	// DOCS https://formulae.brew.sh/analytics/
 	const cask90d = $.getenv("alfred_workflow_cache") + "/caskDownloads90d.json";
@@ -117,9 +117,10 @@ function run() {
 		const name = cask.token;
 		const installedIcon = installedBrews.includes(name) ? " ✅" : "";
 		const downloads = caskDownloads[name] ? `${caskDownloads[name][0].count}↓ ` : "";
+		const desc = cask.desc || ""; // default to empty string instead of "null"
 		return {
 			title: name + installedIcon,
-			match: alfredMatcher(name) + cask.desc,
+			match: alfredMatcher(name) + desc,
 			subtitle: `${caskIcon} ${downloads} ·  ${cask.desc}`,
 			arg: `--cask ${name}`,
 			mods: {
@@ -145,9 +146,11 @@ function run() {
 		const caveatText = formula.caveats || "";
 		const caveats = caveatText ? caveatIcon + " " : "";
 		const downloads = formulaDownloads[name] ? `${formulaDownloads[name][0].count}↓ ` : "";
+		const desc = formula.desc ? "·  " + formula.desc : ""; // no "null" as desc
+
 		return {
 			title: name + installedIcon,
-			match: alfredMatcher(name) + formula.desc,
+			match: alfredMatcher(name) + desc,
 			subtitle: `${formulaIcon} ${caveats}${dependencies}${downloads} ·  ${formula.desc}`,
 			arg: `--formula ${name}`,
 			text: {
