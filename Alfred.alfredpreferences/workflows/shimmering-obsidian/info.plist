@@ -6723,7 +6723,8 @@ fi</string>
 	<key>readme</key>
 	<string>## 1️⃣ REQUIRED Setting up this workflow for the first time
 #### 1. Install the Obsidian plugins [Advanced URI](https://obsidian.md/plugins?id=obsidian-advanced-uri) &amp; [Metadata Extractor](https://obsidian.md/plugins?id=metadata-extractor). Enable both plugins.
-#### 2. Run the Alfred Command `osetup` once. 
+#### 2. Set your vault path in the configuration to the left.
+#### 3. Run the Alfred Command `osetup` once. Obsidian will then restart.
 
 ---
 
@@ -9179,7 +9180,7 @@ DOUBLE CLICK THIS to set Hotkey. Suggested Hotkey: cmd + shift + 1</string>
 		<string>▉</string>
 	</dict>
 	<key>version</key>
-	<string>3.12.8</string>
+	<string>4.0.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
