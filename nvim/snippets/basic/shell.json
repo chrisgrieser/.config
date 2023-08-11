@@ -305,7 +305,7 @@
 		"body": "\\033[1;34m"
 	},
 	"magenta": {
-		"prefix": "magenta",
+		"prefix": ["magenta", "purple"],
 		"body": "\\033[1;35m"
 	},
 	"cyan": {
@@ -337,7 +337,7 @@
 		"body": "\\033[1;44m"
 	},
 	"magenta bg": {
-		"prefix": "magenta bg",
+		"prefix": ["magenta bg", "purple bg"],
 		"body": "\\033[1;45m"
 	},
 	"cyan bg": {
