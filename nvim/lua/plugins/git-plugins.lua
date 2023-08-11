@@ -7,7 +7,42 @@ return {
 			"nvim-telescope/telescope.nvim",
 			"nvim-tree/nvim-web-devicons",
 		},
-		opts = {},
+		init = function()
+			-- autocomplete for @ and #
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "octo",
+				callback = function()
+					vim.keymap.set("i", "@", "@<C-x><C-o>", { silent = true, buffer = true })
+					vim.keymap.set("i", "#", "#<C-x><C-o>", { silent = true, buffer = true })
+				end,
+			})
+		end,
+		opts = {
+			-- https://github.com/pwntester/octo.nvim#%EF%B8%8F-configuration
+			ui = { use_signcolumn = true }, -- show "modified" marks on the sign column
+			mappings = {
+				issue = {
+					close_issue = { lhs = "<leader>ic", desc = " close issue" },
+					reopen_issue = { lhs = "<leader>io", desc = " reopen issue" },
+					list_issues = { lhs = "<leader>gi", desc = " list open issues on same repo" },
+					reload = { lhs = "<D-r>", desc = " reload issue" },
+					open_in_browser = { lhs = "<leader>gu", desc = " open issue in browser" },
+					copy_url = { lhs = "<leader>gU", desc = " copy url to system clipboard" },
+					add_comment = { lhs = "<leader>ca", desc = " add comment" },
+					delete_comment = { lhs = "<leader>cd", desc = " delete comment" },
+					next_comment = { lhs = "gc", desc = " go to next comment" },
+					prev_comment = { lhs = "gC", desc = " go to previous comment" },
+					react_hooray = { lhs = "<leader>rp", desc = " add/remove 🎉 reaction" },
+					react_heart = { lhs = "<leader>rh", desc = " add/remove ❤️ reaction" },
+					react_eyes = { lhs = "<leader>re", desc = " add/remove 👀 reaction" },
+					react_thumbs_up = { lhs = "<leader>r+", desc = " add/remove 👍 reaction" },
+					react_thumbs_down = { lhs = "<leader>r-", desc = " add/remove 👎 reaction" },
+					react_rocket = { lhs = "<leader>rr", desc = " add/remove 🚀 reaction" },
+					react_laugh = { lhs = "<leader>rl", desc = " add/remove 😄 reaction" },
+					react_confused = { lhs = "<leader>rc", desc = " add/remove 😕 reaction" },
+				},
+			},
+		},
 	},
 	{ -- git sign gutter & hunk textobj
 		"lewis6991/gitsigns.nvim",

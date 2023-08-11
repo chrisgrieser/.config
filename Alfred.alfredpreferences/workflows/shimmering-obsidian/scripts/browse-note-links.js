@@ -20,7 +20,11 @@ function parentFolder(filePath) {
 	return filePath.split("/").slice(0, -1).join("/");
 }
 
-const alfredMatcher = (/** @type {string} */ str) => " " + str.replace(/[-()_/:.@]/g, " ") + " " + str + " ";
+/** @param {string} str */
+function alfredMatcher(str) {
+	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
+	return [clean, str].join(" ") + " ";
+}
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
 /** @param {string} appId */
@@ -53,7 +57,6 @@ function run() {
 	let recentJSON = `${vaultPath}/${configFolder}/workspace.json`;
 	if (!fileExists(recentJSON)) recentJSON = recentJSON.slice(0, -5); // Obsidian 0.16 uses workspace.json → https://discord.com/channels/686053708261228577/716028884885307432/1013906018578743478
 	const superIconFile = $.getenv("supercharged_icon_file");
-	const jsonArray = [];
 
 	//───────────────────────────────────────────────────────────────────────────
 	// GUARD: metadata does not exist since user has not run `osetup`
@@ -82,6 +85,7 @@ function run() {
 	//───────────────────────────────────────────────────────────────────────────
 
 	// create input note JSON
+	const jsonArray = [];
 	const inputPath = $.getenv("inputPath");
 
 	const metaJSON = JSON.parse(readFile(metadataJSON));
@@ -149,6 +153,7 @@ function run() {
 				url: url.slice(0, -1),
 			});
 		});
+	console.log("🪓 externalLinkList:", JSON.stringify(externalLinkList))
 
 	// guard clause if no links of any sort (should only occur with "ol" command though)
 	if (!bothLinksList.length && !externalLinkList.length) {
