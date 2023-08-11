@@ -25,7 +25,8 @@ function parentFolder(filePath) {
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const vaultPath = $.getenv("vault_path");
-	const attachmentMetadata = vaultPath + "/.obsidian/plugins/metadata-extractor/allExceptMd.json";
+	const configFolder = $.getenv("config_folder");
+	const attachmentMetadata = `${vaultPath}/${configFolder}/plugins/metadata-extractor/allExceptMd.json`;
 
 	// filter the metadataJSON for the items w/ relativePaths of starred files
 	const attachmentArr = JSON.parse(readFile(attachmentMetadata)).nonMdFiles.map(

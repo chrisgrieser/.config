@@ -1,38 +1,36 @@
 #!/usr/bin/env osascript -l JavaScript
 
+ObjC.import("stdlib");
+ObjC.import("Foundation");
+const app = Application.currentApplication();
+app.includeStandardAdditions = true;
+
+/** @param {string} path */
+function readFile(path) {
+	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
+	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
+	return ObjC.unwrap(str);
+}
+
+/**
+ * @param {string} file
+ * @param {string} text
+ */
+function writeToFile(file, text) {
+	app.doShellScript(`mkdir -p "$(dirname "${file}")" ; touch "${file}"`);
+	const str = $.NSString.alloc.initWithUTF8String(text);
+	str.writeToFileAtomicallyEncodingError(file, true, $.NSUTF8StringEncoding, null);
+}
+
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
-function run(argv) {
-	ObjC.import("stdlib");
-	ObjC.import("Foundation");
-	const app = Application.currentApplication();
-	app.includeStandardAdditions = true;
+function run() {
+	const vaultPath = $.getenv("vault_path");
+	const configFolder = $.getenv("config_folder");
 
-	/** @param {string} path */
-	function readFile(path) {
-		const data = $.NSFileManager.defaultManager.contentsAtPath(path);
-		const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
-		return ObjC.unwrap(str);
-	}
+	let errorMsg = ""; // error message if a plugin is not installed in that vault
 
-	/**
-	 * @param {string} file
-	 * @param {string} text
-	 */
-	function writeToFile(file, text) {
-		app.doShellScript(`mkdir -p "$(dirname "${file}")" ; touch "${file}"`);
-		const str = $.NSString.alloc.initWithUTF8String(text);
-		str.writeToFileAtomicallyEncodingError(file, true, $.NSUTF8StringEncoding, null);
-	}
-
-	//───────────────────────────────────────────────────────────────────────────
-
-	const vaultPath = argv.join("");
-	writeToFile($.getenv("alfred_workflow_data") + "/vaultPath", vaultPath.replace(/\/Users\/.*?\//i, "~/"));
-
-	// error message if a plugin is not installed in that vault
-	let errorMsg = "";
-	const pluginList = readFile(vaultPath + "/.obsidian/community-plugins.json");
+	const pluginList = readFile(`${vaultPath}/${configFolder}/community-plugins.json`);
 	if (pluginList) {
 		const activatedPlugins = JSON.parse(pluginList);
 		if (!activatedPlugins.includes("metadata-extractor"))
@@ -52,21 +50,21 @@ function run(argv) {
 
 	// INFO due to the setting "writeFilesOnLaunch", don't need to dump the
 	// metadata since we restart Obsidian which already triggers that
-	const config = `{ "writingFrequency": "30", "writeFilesOnLaunch": true }`;
-	writeToFile(vaultPath + "/.obsidian/plugins/metadata-extractor/data.json", config);
+	const config = {
+		writingFrequency: "30", // yes, saved as string in metadata extractor settings
+		writeFilesOnLaunch: true,
+	};
+	writeToFile(`${vaultPath}/${configFolder}/plugins/metadata-extractor/data.json`, JSON.stringify(config));
 
 	// restart Obsidian
-	const vaultName = vaultPath.split("/").pop();
-	app.displayNotification("⌛ Restarting Obsidian…", { withTitle: `Selected ${vaultName}` });
+	app.displayNotification("", { withTitle: "⌛ Restarting Obsidian…" });
 
 	const obsidian = Application("Obsidian");
 	obsidian.includeStandardAdditions = true;
 	obsidian.quit();
-	do delay(0.2);
-	while (obsidian.running());
+	while (obsidian.running()) {
+		delay(0.2);
+	}
 	obsidian.activate();
-
-	// delay showing the success notification until Obsidian is actually restarted
-	delay(0.5);
 	return "🥳 Workflow Setup complete";
 }

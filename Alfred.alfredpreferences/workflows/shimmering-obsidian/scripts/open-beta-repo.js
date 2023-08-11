@@ -31,7 +31,8 @@ const alfredMatcher = (/** @type {string} */ str) => str.replace(/[-()_.]/g, " "
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const vaultPath = $.getenv("vault_path");
-	const pluginFolder = vaultPath + "/.obsidian/plugins/";
+	const configFolder = $.getenv("config_folder");
+	const pluginFolder = `${vaultPath}/${configFolder}/plugins/`;
 
 	const betaRepos = JSON.parse(readFile(pluginFolder + "obsidian42-brat/data.json")).pluginList;
 	const betaManifests = betaRepos.map((/** @type {string} */ repoID) => {

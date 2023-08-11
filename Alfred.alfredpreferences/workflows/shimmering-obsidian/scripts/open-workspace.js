@@ -15,17 +15,19 @@ function readFile(path) {
 	return ObjC.unwrap(str);
 }
 
-
-const workspaceToSpellcheck = $.getenv("workspace_to_spellcheck").split(/ ?, ?/);
-const workspaceJSON = JSON.parse(readFile( + "/.obsidian/workspaces.json"));
-const workspaceArray = Object.keys(workspaceJSON.workspaces);
-const currentWorkspace = workspaceJSON.active;
-
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
+	const workspaceToSpellcheck = $.getenv("workspace_to_spellcheck").split(/ ?, ?/);
+	const vaultPath = $.getenv("vault_path");
+	const configFolder = $.getenv("config_folder");
+
+	const workspaceJSON = JSON.parse(readFile(`${vaultPath}/${configFolder}/workspaces.json`));
+	const workspaceArray = Object.keys(workspaceJSON.workspaces);
+	const currentWorkspace = workspaceJSON.active;
+
 	const jsonArray = [];
 	workspaceArray.forEach((workspaceName) => {
 		// icons/emoji
