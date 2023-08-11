@@ -87,10 +87,7 @@ function cacheIsOutdated(path) {
 function run() {
 	// PERF cache results
 	const cachePath = $.getenv("alfred_workflow_cache") + "/plugin-cache.json";
-	if (!cacheIsOutdated(cachePath)) {
-		const pluginsAndThemes = JSON.parse(readFile(cachePath));
-		return JSON.stringify({ items: pluginsAndThemes });
-	}
+	if (!cacheIsOutdated(cachePath)) return readFile(cachePath);
 
 	//───────────────────────────────────────────────────────────────────────────
 
@@ -252,8 +249,9 @@ function run() {
 			};
 		},
 	);
-	const pluginsAndThemes = [...plugins, ...themes];
-	writeToFile(cachePath, JSON.stringify(pluginsAndThemes));
 
-	return JSON.stringify({ items: pluginsAndThemes });
+	const alfredResponse = JSON.stringify({ items: [...plugins, ...themes] });
+	writeToFile(cachePath, alfredResponse);
+
+	return alfredResponse;
 }
