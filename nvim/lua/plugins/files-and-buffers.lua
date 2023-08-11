@@ -49,6 +49,7 @@ return {
 			{"<C-p>", function() require("genghis").copyFilepath() end, desc = " Copy filepath" },
 			{"<C-n>", function() require("genghis").copyFilename() end, desc = " Copy filename" },
 			{"<C-r>", function() require("genghis").renameFile() end, desc = " Rename file" },
+			{"<leader>x", function() require("genghis").chmodx() end, desc = " chmod +x" },
 			{"<C-d>", function() require("genghis").duplicateFile() end, desc = " Duplicate file" },
 			{"<D-BS>", function() require("genghis").trashFile() end, desc = " Move file to trash" },
 			{"<D-n>", function() require("genghis").createNewFile() end, desc = " Create new file" },

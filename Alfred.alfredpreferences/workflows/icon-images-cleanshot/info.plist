@@ -423,10 +423,12 @@
 				<integer>0</integer>
 				<key>filetypes</key>
 				<array>
+					<string>public.jpeg</string>
 					<string>public.png</string>
+					<string>public.tiff</string>
 				</array>
 				<key>name</key>
-				<string>Shrink Image propertionally to 70%</string>
+				<string>Shrink Image to 70%</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.action</string>
@@ -512,6 +514,8 @@
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
+			<key>note</key>
+			<string>png → icns</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -594,7 +598,7 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>200</real>
 			<key>ypos</key>
 			<real>605</real>
 		</dict>
@@ -602,6 +606,8 @@
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
+			<key>note</key>
+			<string>shrink to 70%</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
