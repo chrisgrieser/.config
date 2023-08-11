@@ -1,49 +1,51 @@
 #!/usr/bin/env osascript -l JavaScript
 
+ObjC.import("stdlib");
+ObjC.import("Foundation");
+const app = Application.currentApplication();
+app.includeStandardAdditions = true;
+
+//──────────────────────────────────────────────────────────────────────────────
+
+/** @param {string} path */
+function readFile(path) {
+	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
+	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
+	return ObjC.unwrap(str);
+}
+
+/** @param {string} filePath */
+function parentFolder(filePath) {
+	if (!filePath.includes("/")) return "/";
+	return filePath.split("/").slice(0, -1).join("/");
+}
+
+const alfredMatcher = (/** @type {string} */ str) => " " + str.replace(/[-()_/:.@]/g, " ") + " " + str + " ";
+const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
+
+/** @param {string} appId */
+function SafeApplication(appId) {
+	try {
+		return Application(appId);
+	} catch (_error) {
+		return null;
+	}
+}
+
+const discordReadyLinks = ["Discord", "Discord PTB", "Discord Canary"].some((discordApp) =>
+	SafeApplication(discordApp)?.frontmost(),
+);
+
+//──────────────────────────────────────────────────────────────────────────────
+
+/** @type {AlfredRun} */
+// rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	ObjC.import("stdlib");
-	ObjC.import("Foundation");
-	const app = Application.currentApplication();
-	app.includeStandardAdditions = true;
+	const vaultPath = $.getenv("vault_path");
 	const externalLinkRegex = /\[[^\]]*\]\([^)]+\)/g;
 	const singleExternalLinkRegex = /\[[^\]]*\]\([^)]+\)/;
 
-	function readFile(path) {
-		const data = $.NSFileManager.defaultManager.contentsAtPath(path);
-		const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
-		return ObjC.unwrap(str);
-	}
-
-	function parentFolder(filePath) {
-		if (!filePath.includes("/")) return "/";
-		return filePath.split("/").slice(0, -1).join("/");
-	}
-
-	const alfredMatcher = str => " " + str.replace(/[-()_/:.@]/g, " ") + " " + str + " ";
-	const fileExists = filePath => Application("Finder").exists(Path(filePath));
-
-	function SafeApplication(appId) {
-		try {
-			return Application(appId);
-		} catch (error) {
-			return null;
-		}
-	}
-
-	const discordReadyLinks = ["Discord", "Discord PTB", "Discord Canary"].some(discordApp =>
-		SafeApplication(discordApp)?.frontmost(),
-	);
-	function getVaultPath() {
-		const theApp = Application.currentApplication();
-		theApp.includeStandardAdditions = true;
-		const dataFile = $.NSFileManager.defaultManager.contentsAtPath($.getenv("alfred_workflow_data") + "/vaultPath");
-		const vault = $.NSString.alloc.initWithDataEncoding(dataFile, $.NSUTF8StringEncoding);
-		return ObjC.unwrap(vault).replace(/^~/, theApp.pathTo("home folder"));
-	}
-	//───────────────────────────────────────────────────────────────────────────
-
 	// Import Data
-	const vaultPath = getVaultPath();
 	const metadataJSON = vaultPath + "/.obsidian/plugins/metadata-extractor/metadata.json";
 	const starredJSON = vaultPath + "/.obsidian/starred.json";
 	const bookmarkJSON = vaultPath + "/.obsidian/bookmarks.json";
@@ -57,7 +59,7 @@ function run() {
 	if (superIconFile && fileExists(superIconFile)) {
 		superIconList = readFile(superIconFile)
 			.split("\n")
-			.filter(line => line.length !== 0);
+			.filter((line) => line.length !== 0);
 	}
 	console.log("superIconList length: " + superIconList.length);
 
@@ -68,18 +70,18 @@ function run() {
 	console.log(inputPath);
 
 	const metaJSON = JSON.parse(readFile(metadataJSON));
-	const inputNoteJSON = metaJSON.filter(note => note.relativePath.includes(inputPath))[0];
+	const inputNoteJSON = metaJSON.filter((/** @type {{ relativePath: string}} */ note) => note.relativePath.includes(inputPath))[0];
 
 	// create list of links and backlinks and merge them
 	let bothLinksList = [];
 	let linkList = [];
 	let backlinkList = [];
 	if (inputNoteJSON.links) {
-		linkList = inputNoteJSON.links.filter(line => line.relativePath).map(item => item.relativePath);
+		linkList = inputNoteJSON.links.filter((/** @type {{ relativePath: string; }} */ line) => line.relativePath).map((item) => item.relativePath);
 		bothLinksList.push(...linkList);
 	}
 	if (inputNoteJSON.backlinks) {
-		backlinkList = inputNoteJSON.backlinks.map(item => item.relativePath);
+		backlinkList = inputNoteJSON.backlinks.map((/** @type {{ relativePath: string; }} */ item) => item.relativePath);
 		bothLinksList.push(...backlinkList);
 	}
 	bothLinksList = [...new Set(bothLinksList)]; // only unique items
@@ -90,12 +92,16 @@ function run() {
 	const bookmarks = [];
 	if (fileExists(starredJSON)) {
 		stars = JSON.parse(readFile(starredJSON))
-			.items.filter(item => item.type === "file")
-			.map(item => item.path);
+			.items.filter((/** @type {{ type: string; }} */ item) => item.type === "file")
+			.map((/** @type {{ path: string; }} */ item) => item.path);
 	}
 
+	/**
+	 * @param {any[]} input
+	 * @param {any[]} collector
+	 */
 	function bmFlatten(input, collector) {
-		input.forEach(item => {
+		input.forEach((item) => {
 			if (item.type === "file") collector.push(item.path);
 			if (item.type === "group") bmFlatten(item.items, collector);
 		});
@@ -106,7 +112,6 @@ function run() {
 		bmFlatten(bookm, bookmarks);
 	}
 	const starsAndBookmarks = [...new Set([...stars, ...bookmarks])];
-	console.log("starsAndBookmarks length:", starsAndBookmarks.length);
 
 	//──────────────────────────────────────────────────────────────────────────────
 
@@ -115,7 +120,7 @@ function run() {
 	// get external links
 	let externalLinkList = readFile(vaultPath + "/" + inputPath).match(externalLinkRegex);
 	if (externalLinkList) {
-		externalLinkList = externalLinkList.map(mdlink => [
+		externalLinkList = externalLinkList.map((mdlink) => [
 			mdlink.split("](")[0].slice(1),
 			mdlink.split("](")[1].slice(0, -1),
 		]);
@@ -133,15 +138,15 @@ function run() {
 	//───────────────────────────────────────────────────────────────────────────
 	// create JSON for Script Filter
 
-	const fileArray = metaJSON.filter(item => bothLinksList.includes(item.relativePath));
+	const fileArray = metaJSON.filter((item) => bothLinksList.includes(item.relativePath));
 
-	fileArray.forEach(file => {
+	fileArray.forEach((file) => {
 		const filename = file.fileName;
 		const relativePath = file.relativePath;
 		const absolutePath = vaultPath + "/" + relativePath;
 
 		// check link existence of file
-		let hasLinks = Boolean(file.links?.some(line => line.relativePath) || file.backlinks); // no relativePath => unresolved link
+		let hasLinks = Boolean(file.links?.some((line) => line.relativePath) || file.backlinks); // no relativePath => unresolved link
 		if (!hasLinks) hasLinks = singleExternalLinkRegex.test(readFile(absolutePath)); // readFile only executed when no other links found for performance
 		let linksSubtitle = "⛔️ Note without Outgoing Links or Backlinks";
 		if (hasLinks) linksSubtitle = "⇧: Browse Links in Note";
@@ -163,7 +168,7 @@ function run() {
 		let superchargedIcon = "";
 		let superchargedIcon2 = "";
 		if (superIconList.length > 0 && file.tags) {
-			superIconList.forEach(pair => {
+			superIconList.forEach((pair) => {
 				const tag = pair.split(",")[0].toLowerCase().replaceAll("#", "");
 				const icon = pair.split(",")[1];
 				const icon2 = pair.split(",")[2];
@@ -204,7 +209,7 @@ function run() {
 	});
 
 	// add external Links to Script-Filter JSON
-	externalLinkList.forEach(link => {
+	externalLinkList.forEach((link) => {
 		const title = link[0];
 		const url = link[1];
 
