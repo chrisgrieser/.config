@@ -45,6 +45,17 @@ function cacheIsOutdated(path) {
 	return cacheAgeHours > cacheAgeThresholdHours;
 }
 
+/**
+ * @param {string} firstPath
+ * @param {string} secondPath
+ */
+function olderThan(firstPath, secondPath) {
+	const firstMdate = +Application("System Events").aliases[firstPath].modificationDate();
+	const secondMdate = +Application("System Events").aliases[secondPath].modificationDate();
+	const firstPathOlderThanSecond = firstMdate - secondMdate < 0;
+	return firstPathOlderThanSecond;
+}
+
 /** @param {string} path */
 function readFile(path) {
 	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
@@ -66,24 +77,25 @@ function writeToFile(filepath, text) {
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	// CHECK CACHE
+	// UPDATE CACHE IF OUTDATED OR IF PLUGINS WERE INSTALLED/UNINSTALLED
+	const pluginInstallPath = $.getenv("plugin_installation_path");
 	const cachePath = $.getenv("alfred_workflow_cache") + "/neovimcraftPlugins.json";
-	if (!cacheIsOutdated(cachePath)) return readFile(cachePath)
+	if (!cacheIsOutdated(cachePath) && olderThan(pluginInstallPath, cachePath))
+		return readFile(cachePath);
 
 	//───────────────────────────────────────────────────────────────────────────
 	// REQUEST NEOVIMCRAFT
 
 	const neovimcraftURL = "https://nvim.sh/s";
-	const installedPluginsPath = $.getenv("plugin_installation_path").replace(/^~/, app.pathTo("home folder"));
 	const installedPlugins = app
 		.doShellScript(
-			`cd "${installedPluginsPath}" && grep --only-matching --no-filename --max-count=1 "http.*" ./*/.git/config`,
+			`cd "${pluginInstallPath}" && grep --only-matching --no-filename --max-count=1 "http.*" ./*/.git/config`,
 		)
 		.split("\r")
 		.map((remote) => {
-			const ownerAndName = remote.split("/").slice(3, 5).join("/").slice(0, -4)
-			return ownerAndName
-		})
+			const ownerAndName = remote.split("/").slice(3, 5).join("/").slice(0, -4);
+			return ownerAndName;
+		});
 
 	const pluginsArr = httpRequest(neovimcraftURL)
 		.split("\n")
@@ -119,5 +131,5 @@ function run() {
 
 	const alfredResponse = JSON.stringify({ items: pluginsArr });
 	writeToFile(cachePath, alfredResponse);
-	return alfredResponse
+	return alfredResponse;
 }
