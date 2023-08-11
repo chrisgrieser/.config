@@ -63,7 +63,7 @@ function file_url_or_stdin() {
 	fi
 }
 
-# fx, but in a new tab
+# fx, but in a new wezterm tab
 function fx() {
 	if ! command -v fx &>/dev/null; then print "\033[1;33mfx not installed.\033[0m" && return 1; fi
 	if ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then echo "Not using WezTerm." && return 1; fi
@@ -87,7 +87,8 @@ function jx() {
 
 	# shellcheck disable=2016
 	selection=$(fastgron --color --no-newline "$tmp" |
-		tail -n +2 |
+		tail -n +2 | # remove header
+		sed 's/\[[[:digit:]]\]/[]/g' | # .data[1] -> .data[] to aggregate for yq
 		sed -E 's/^json\.?/./' | # rm "json" prefix, keep dot for yq. Array: `json[0]`, Object: `json.key`
 		fzf --ansi --no-sort --query="$query" --info=inline \
 			--height="80%" --preview-window="40%" \

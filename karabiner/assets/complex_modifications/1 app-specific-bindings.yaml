@@ -179,6 +179,14 @@ rules:
           - shell_command: open 'chrome://extensions/'
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
+      # FIX cmd+q on PWAs should not quit Brave itself
+      - type: basic
+        from: { key_code: q, modifiers: { mandatory: [command] } }
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers: [^com.brave.Browser.app.*] # PWAs
+        to:
+          - { key_code: w, modifiers: [command] }
   #─────────────────────────────────────────────────────────────────────────────
   # DEV TOOLS -> ELEMENT PICKER
   - description: "(Apps) Dev Tools"
