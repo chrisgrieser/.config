@@ -30,6 +30,8 @@
 	<string>~/main-vault/Meta/supercharged-icons.md</string>
 	<key>template_note_path</key>
 	<string>/Meta/Templater/T Basic.md</string>
+	<key>vault_path</key>
+	<string>~/main-vault</string>
 	<key>workspace_1</key>
 	<string>Default</string>
 	<key>workspace_2</key>
