@@ -77,7 +77,7 @@ function fx() {
 
 # [j]son e[x]plore
 function jx() {
-	if ! command -v gron &>/dev/null; then print "\033[1;33mgron not installed.\033[0m" && return 1; fi
+	if ! command -v fastgron &>/dev/null; then print "\033[1;33mfastgron not installed.\033[0m" && return 1; fi
 	if ! command -v fzf &>/dev/null; then print "\033[1;33mfzf not installed.\033[0m" && return 1; fi
 	if ! command -v yq &>/dev/null; then print "\033[1;33myq not installed.\033[0m" && return 1; fi
 
@@ -85,13 +85,11 @@ function jx() {
 	local query="$2"
 	file_url_or_stdin "$1"
 
-
 	# shellcheck disable=2016
-	# fastgron quicker for big json, but gron has slightly better coloring
-	selection=$(gron --colorize "$tmp" |
+	selection=$(fastgron --color --no-newline "$tmp" |
 		tail -n +2 | # remove header
 		cut -d"=" -f1 | # only key
-		sed $'s/\x1b\\[0;31m[[:digit:]]*//g' | # .d[1] -> .d[] to aggregate for yq. `\x1b` escapes the color code https://superuser.com/a/380778
+		sed $'s/\\[\x1b\\[1;32m[[:digit:]]*/[/g' | # .d[1] -> .d[] to aggregate for yq. `\x1b` escapes the color code https://superuser.com/a/380778
 		sort | uniq | # remove duplicates
 		sed -E 's/^json\.?/./' | # rm "json" prefix, keep dot for yq (Array: `json[0]`, Object: `json.key`)
 		fzf --ansi --no-sort --query="$query" --info=inline --exact \
