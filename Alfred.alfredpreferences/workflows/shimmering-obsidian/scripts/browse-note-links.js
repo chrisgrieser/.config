@@ -74,6 +74,10 @@ function run() {
 
 	//───────────────────────────────────────────────────────────────────────────
 
+	// ICONS
+	// Recent Files
+	const recentFiles = fileExists(recentJSON) ? JSON.parse(readFile(recentJSON)).lastOpenFiles : [];
+
 	// Supercharged Icons File
 	let superIconList = [];
 	if (superIconFile && fileExists(superIconFile)) {
@@ -81,6 +85,32 @@ function run() {
 			.split("\n")
 			.filter((line) => line.length !== 0);
 	}
+
+	// bookmarks & stars
+	let stars = [];
+	const bookmarks = [];
+	if (fileExists(starredJSON)) {
+		stars = JSON.parse(readFile(starredJSON))
+			.items.filter((/** @type {{ type: string; }} */ item) => item.type === "file")
+			.map((/** @type {{ path: string; }} */ item) => item.path);
+	}
+
+	/**
+	 * @param {any[]} input
+	 * @param {any[]} collector
+	 */
+	function bmFlatten(input, collector) {
+		input.forEach((item) => {
+			if (item.type === "file") collector.push(item.path);
+			if (item.type === "group") bmFlatten(item.items, collector);
+		});
+	}
+
+	if (fileExists(bookmarkJSON)) {
+		const bookm = JSON.parse(readFile(bookmarkJSON)).items;
+		bmFlatten(bookm, bookmarks);
+	}
+	const starsAndBookmarks = [...new Set([...stars, ...bookmarks])];
 
 	//───────────────────────────────────────────────────────────────────────────
 
@@ -111,58 +141,17 @@ function run() {
 	}
 	bothLinksList = [...new Set(bothLinksList)]; // only unique items
 
-	//──────────────────────────────────────────────────────────────────────────────
-	// BOOKMARKS & STARS
-	let stars = [];
-	const bookmarks = [];
-	if (fileExists(starredJSON)) {
-		stars = JSON.parse(readFile(starredJSON))
-			.items.filter((/** @type {{ type: string; }} */ item) => item.type === "file")
-			.map((/** @type {{ path: string; }} */ item) => item.path);
-	}
-
-	/**
-	 * @param {any[]} input
-	 * @param {any[]} collector
-	 */
-	function bmFlatten(input, collector) {
-		input.forEach((item) => {
-			if (item.type === "file") collector.push(item.path);
-			if (item.type === "group") bmFlatten(item.items, collector);
-		});
-	}
-
-	if (fileExists(bookmarkJSON)) {
-		const bookm = JSON.parse(readFile(bookmarkJSON)).items;
-		bmFlatten(bookm, bookmarks);
-	}
-	const starsAndBookmarks = [...new Set([...stars, ...bookmarks])];
-
-	//──────────────────────────────────────────────────────────────────────────────
-
-	const recentFiles = fileExists(recentJSON) ? JSON.parse(readFile(recentJSON)).lastOpenFiles : [];
-
 	// get external links
-	const externalLinkList = [];
-	readFile(vaultPath + "/" + inputPath)
+	const externalLinkList = readFile(vaultPath + "/" + inputPath)
 		.match(externalLinkRegex)
 		.map((mdlink) => {
 			const [title, url] = mdlink.split("](");
-			externalLinkList.push({
+			return {
 				title: title.slice(1),
 				url: url.slice(0, -1),
-			});
+			};
 		});
-	console.log("🪓 externalLinkList:", JSON.stringify(externalLinkList))
-
-	// guard clause if no links of any sort (should only occur with "ol" command though)
-	if (!bothLinksList.length && !externalLinkList.length) {
-		jsonArray.push({
-			title: "No links recognized in the file.",
-			subtitle: "Press [Esc] to abort.",
-		});
-		return JSON.stringify({ items: jsonArray });
-	}
+	console.log("🪓 externalLinkList:", JSON.stringify(externalLinkList));
 
 	//───────────────────────────────────────────────────────────────────────────
 	// create JSON for Script Filter
@@ -245,19 +234,12 @@ function run() {
 
 	// add external Links to Script-Filter JSON
 	externalLinkList.forEach((link) => {
-		const title = link[0];
-		const url = link[1];
+		const title = link.title;
+		const url = link.url;
 
 		// URLs discord ready
-		let isDiscordReady;
-		let shareURL;
-		if (discordReadyLinks) {
-			shareURL = "<" + url + ">";
-			isDiscordReady = " (discord ready)";
-		} else {
-			isDiscordReady = "";
-			shareURL = url;
-		}
+		const isDiscordReady = discordReadyLinks ? " (discord ready)" : "";
+		const shareURL = discordReadyLinks ? "<" + url + ">" : url;
 
 		const modifierInvalid = {
 			valid: false,

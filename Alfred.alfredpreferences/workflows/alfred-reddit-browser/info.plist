@@ -757,7 +757,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				</array>
 			</dict>
 			<key>description</key>
-			<string>how the results in the subreddits are sorted</string>
+			<string>how the results are sorted</string>
 			<key>label</key>
 			<string>Sorting</string>
 			<key>type</key>
@@ -867,7 +867,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<string>enabled</string>
 			</dict>
 			<key>description</key>
-			<string>redirect to old.reddit.com</string>
+			<string>redirect to old.reddit.com as reddit frontend</string>
 			<key>label</key>
 			<string>Use old reddit</string>
 			<key>type</key>
@@ -888,7 +888,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<false/>
 			</dict>
 			<key>description</key>
-			<string>Advanced: Directory where this workflow will save the subreddit icons. You can override the icons in that folder, to customize subreddit icons. (Leave empty to default to Alfred's Workflow Data storage.)</string>
+			<string>Advanced: Directory where this workflow will save the subreddit icons. You can override the icons in that folder to customize subreddit icons. (Leave empty to use the default subreddit icons.)</string>
 			<key>label</key>
 			<string>Subreddit Icons Location</string>
 			<key>type</key>

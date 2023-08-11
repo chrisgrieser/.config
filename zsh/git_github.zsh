@@ -250,10 +250,10 @@ function nuke {
 	# shellcheck disable=2103
 	cd ..
 
-	rm -rvf "$local_repo_path"
+	command rm -rf "$local_repo_path"
 	printf "\033[1;34m-----------------------------------------------\n"
 	echo "Local repo removed."
-	echo "Cloning repo again from remote… (with depth 5)"
+	echo "Cloning repo again from remote…"
 	printf "-----------------------------------------------\n\033[0m"
 
 	# WARN depth=2 ensures that amending a shallow commit does not result in a
