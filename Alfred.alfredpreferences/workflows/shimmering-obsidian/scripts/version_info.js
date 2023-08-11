@@ -5,30 +5,27 @@ ObjC.import("Foundation");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
+/** @param {string} path */
 function readFile(path) {
 	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
 	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
 	return ObjC.unwrap(str);
 }
-const onlineJSON = url => JSON.parse(app.doShellScript("curl -sL '" + url + "'"));
-const fileExists = filePath => Application("Finder").exists(Path(filePath));
+const onlineJSON = (/** @type {string} */ url) => JSON.parse(app.doShellScript(`curl -sL '${url}'`));
+const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
 let output = "";
+/** @param {string} str */
 function logger(str) {
 	output += str + "\n";
 }
 
 //──────────────────────────────────────────────────────────────────────────────
 
+/** @type {AlfredRun} */
+// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+function run(){
 // input parameters
-function getVaultPath() {
-	const theApp = Application.currentApplication();
-	theApp.includeStandardAdditions = true;
-	const dataFile = $.NSFileManager.defaultManager.contentsAtPath($.getenv("alfred_workflow_data") + "/vaultPath");
-	const vault = $.NSString.alloc.initWithDataEncoding(dataFile, $.NSUTF8StringEncoding);
-	return ObjC.unwrap(vault).replace(/^~/, theApp.pathTo("home folder"));
-}
-const vaultPath = getVaultPath()
 
 const appTempPath = app.pathTo("home folder") + "/Library/Application Support/obsidian/";
 let obsiVer;
@@ -114,4 +111,5 @@ logger("-------------------------------");
 // remove config
 Application("com.runningwithcrayons.Alfred").removeConfiguration("ObRunning", { inWorkflow: $.getenv("alfred_workflow_bundleid") });
 
-output; // JXA direct return
+return output; // JXA direct return
+}

@@ -311,6 +311,15 @@ return {
 	{ -- Better input/selection fields
 		"stevearc/dressing.nvim",
 		event = "VeryLazy",
+		init = function()
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "DressingSelect",
+				callback = function()
+					vim.keymap.set("n", "<Tab>", "j")
+					vim.keymap.set("n", "<S-Tab>", "k")
+				end,
+			})
+		end,
 		opts = {
 			input = {
 				insert_only = false, -- enable normal mode

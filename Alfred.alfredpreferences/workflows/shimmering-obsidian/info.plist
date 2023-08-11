@@ -565,7 +565,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>DF5B66BD-78AD-45F3-B6B5-8E81957741FC</string>
+				<string>16A2C5C4-4D7B-4854-96CF-E21ADE3A612F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -2023,31 +2023,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>560E177F-C4A4-432D-A640-5A15B7048CB8</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>DF5B66BD-78AD-45F3-B6B5-8E81957741FC</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>9E3B9072-3C3B-4C45-A973-426BC0F7E30F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>1E3FD543-3BB6-47AF-8440-406216FA401D</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>16A2C5C4-4D7B-4854-96CF-E21ADE3A612F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -4848,38 +4823,6 @@ Application('com.runningwithcrayons.Alfred').removeConfiguration('ObRunning', {
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>4</integer>
-						<key>matchstring</key>
-						<string>^obsidian</string>
-						<key>outputlabel</key>
-						<string>search</string>
-						<key>uid</key>
-						<string>1E3FD543-3BB6-47AF-8440-406216FA401D</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>file</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>DF5B66BD-78AD-45F3-B6B5-8E81957741FC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>externaltriggerid</key>
 				<string>return-only-action</string>
 				<key>passinputasargument</key>
@@ -4922,19 +4865,19 @@ Application('com.runningwithcrayons.Alfred').removeConfiguration('ObRunning', {
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string></string>
+				<string>loading…</string>
 				<key>script</key>
-				<string></string>
+				<string>osascript -l JavaScript ./scripts/bookmark-or-recent-files.js "bookmarks"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/bookmark-search.js</string>
+				<string></string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>⭐️ Open Bookmarked Files and Searches</string>
+				<string>🔖 Search Bookmarked Files</string>
 				<key>type</key>
-				<integer>8</integer>
+				<integer>11</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -4990,90 +4933,19 @@ Application('com.runningwithcrayons.Alfred').removeConfiguration('ObRunning', {
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string></string>
+				<string>loading…</string>
 				<key>script</key>
-				<string>ObjC.import('stdlib');
-app = Application.currentApplication();
-app.includeStandardAdditions = true;
-
-// Emoji-Regex: https://stackoverflow.com/questions/37089427/javascript-find-emoji-in-string-and-parse
-const emojiRegex = "(?:[\u2700-\u27bf]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff]|[\u0023-\u0039]\ufe0f?\u20e3|\u3299|\u3297|\u303d|\u3030|\u24c2|\ud83c[\udd70-\udd71]|\ud83c[\udd7e-\udd7f]|\ud83c\udd8e|\ud83c[\udd91-\udd9a]|\ud83c[\udde6-\uddff]|[\ud83c[\ude01-\ude02]|\ud83c\ude1a|\ud83c\ude2f|[\ud83c[\ude32-\ude3a]|[\ud83c[\ude50-\ude51]|\u203c|\u2049|[\u25aa-\u25ab]|\u25b6|\u25c0|[\u25fb-\u25fe]|\u00a9|\u00ae|\u2122|\u2139|\ud83c\udc04|[\u2600-\u26FF]|\u2b05|\u2b06|\u2b07|\u2b1b|\u2b1c|\u2b50|\u2b55|\u231a|\u231b|\u2328|\u23cf|[\u23e9-\u23f3]|[\u23f8-\u23fa]|\ud83c\udccf|\u2934|\u2935|[\u2190-\u21ff])";
-/*------------*/
-
-var vault_path = $.getenv('vault_path');
-let homepath = app.pathTo('home folder');
-vault_path = vault_path.replace(/^~/, homepath);
-const vaultPathLength = vault_path.length + 1;
-const vault_name = vault_path.replace (/.*\/(.*)$/,"$1");
-
-let files = app.doShellScript("echo | find '" + vault_path + "' -not -path '*/.obsidian/*' -not -path '*/.trash/*' -not -path '*.DS_Store*' -not -path '*Icon?'");
-
-var file_array = files.split ("\r");
-
-let jsonArray = [];
-file_array.forEach(file =&gt; {
-  // filename extraction
-  let name = file.replace (/.*\/(.*?)$/,"$1");
-  let type = file.replace (/.*\/.*?(\.\w+)?$/,"$1");
-  let relativePath = file.substring(vaultPathLength, (file.length - name.length - 1));
-  let absolutePath = file;
-
-  //icon
-  let icon = "";
-  if (type == ".md"){
-    icon ="📄 ";
-  } else if (type == ".png"){
-    icon ="🏞 ";
-  } else if (type == ".pdf"){
-    icon ="📜 ";
-  } else if (type == ".csv"){
-    icon ="📊 ";
-  } else if (type == ""){
-    icon ="📁 ";
-  }
-
-  //no icon, if emoji at beginning already
-  var emojiFirstRegEx = new RegExp ("^" + emojiRegex)
-  if (name.match(emojiFirstRegEx)) {
-    icon = "";
-  }
-
-//new Note
-    jsonArray.push ({
-        'title': '❇️ New note with title: ',
-        'arg': 'NEW;;',
-	    'uid': 'newobsidian'
-    })
-
-  //push result
-  if (type != ""){
-      jsonArray.push ({
-        'title': icon + name,
-        'subtitle': vault_name + " ▹ " + relativePath,
-        'arg': absolutePath,
-		'type':'file',
-		'uid': absolutePath
-      })
-  } else {
-
-
-  }
-
-});
-
-JSON.stringify({ 'items': jsonArray });
-
-</string>
+				<string>osascript -l JavaScript ./scripts/bookmark-or-recent-files.js "recents"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/recent_searcher.js</string>
+				<string>./scripts/bookmark-or-recent-files.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
 				<string>Search Recent Files</string>
 				<key>type</key>
-				<integer>8</integer>
+				<integer>11</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -8594,15 +8466,6 @@ DOUBLE CLICK THIS to set Hotkey. Suggested Hotkey: cmd + shift + 1</string>
 			<real>900</real>
 			<key>ypos</key>
 			<real>95</real>
-		</dict>
-		<key>DF5B66BD-78AD-45F3-B6B5-8E81957741FC</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>xpos</key>
-			<real>180</real>
-			<key>ypos</key>
-			<real>3030</real>
 		</dict>
 		<key>E24806C9-408F-4504-B601-DED0239F88FD</key>
 		<dict>
