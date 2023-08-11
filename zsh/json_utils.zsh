@@ -88,11 +88,13 @@ function jx() {
 	# shellcheck disable=2016
 	selection=$(fastgron --color --no-newline "$tmp" |
 		tail -n +2 | # remove header
-		sed 's/\[[[:digit:]]\]/[]/g' | # .data[1] -> .data[] to aggregate for yq
-		sed -E 's/^json\.?/./' | # rm "json" prefix, keep dot for yq. Array: `json[0]`, Object: `json.key`
-		fzf --ansi --no-sort --query="$query" --info=inline \
+		# cut -d"=" -f1 | # only key
+		sed $'s/\\[\x1b\\[1;32m[[:digit:]]*/[/g' | # .d[1] -> .d[] to aggregate for yq. `\x1b` escapes the color code https://superuser.com/a/380778
+		sort | uniq -u | # remove duplicates
+		sed -E 's/^json\.?/./' | # rm "json" prefix, keep dot for yq (Array: `json[0]`, Object: `json.key`)
+		fzf --ansi --no-sort --query="$query" --info=inline --exact \
 			--height="80%" --preview-window="40%" \
-			--preview='yq {1} --colors --output-format=json "/tmp/temp.json"')
+			--preview='yq {} --colors --output-format=yaml "/tmp/temp.json"')
 
 	[[ -z "$selection" ]] && return 0 # no selection made -> no exit 130
 
