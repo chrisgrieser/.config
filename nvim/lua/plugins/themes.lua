@@ -14,8 +14,8 @@ local lightThemes = {
 }
 
 local darkThemes = {
+	"sainnhe/gruvbox-material",
 	{ "sainnhe/sonokai", init = function() g.sonokai_style = "shusia" end },
-	-- "sainnhe/gruvbox-material",
 	-- "folke/tokyonight.nvim",
 	-- "sainnhe/everforest",
 	-- "rebelot/kanagawa.nvim",
