@@ -544,7 +544,7 @@
 	<string>## Usage
 - `sub`: Select subreddit to browse.
 - `rr`: Browse the current subreddit.
-	- &lt;kbd&gt;⏎&lt;/kbd&gt;: Open Post in reddit.
+	- &lt;kbd&gt;⏎&lt;/kbd&gt;: Open Post on reddit.
 	- &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Switch to next subreddit.
 	- &lt;kbd&gt;⇧⌘⏎&lt;/kbd&gt;: Switch to previous subreddit.
 	- &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy URL of post to clipboard.
