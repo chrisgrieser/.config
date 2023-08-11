@@ -9,18 +9,7 @@
 	<key>connections</key>
 	<dict>
 		<key>06308645-1484-49FA-8806-537D1A50C1B6</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F07DA284-FCE4-4784-B4B5-6CD6817AEE98</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>0645AAB4-66F5-4149-A92B-C58A80B649C7</key>
 		<array>
 			<dict>
@@ -2178,18 +2167,7 @@
 			</dict>
 		</array>
 		<key>E88AC866-9A2B-4763-914C-EF2BB940DDE2</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F07DA284-FCE4-4784-B4B5-6CD6817AEE98</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>EC424B98-D702-4608-B1EA-07AF49C56048</key>
 		<array>
 			<dict>
@@ -2242,13 +2220,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>F07DA284-FCE4-4784-B4B5-6CD6817AEE98</key>
-		<array/>
 		<key>F43AAA85-F638-4A4C-AE36-FB26D01EDFAA</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F07DA284-FCE4-4784-B4B5-6CD6817AEE98</string>
+				<string>4DF20498-89F0-43F5-929C-1AA8B44880AA</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -6649,9 +6625,9 @@ fi</string>
 				<key>keyword</key>
 				<string>o.obsidian</string>
 				<key>subtext</key>
-				<string></string>
+				<string>{var:config_folder}</string>
 				<key>text</key>
-				<string>⚙️ Open .obsidian</string>
+				<string>⚙️ Open config folder</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -6666,7 +6642,7 @@ fi</string>
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string>.obsidian</string>
+				<string>{var:config_folder}</string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
@@ -6678,29 +6654,6 @@ fi</string>
 			<string>F43AAA85-F638-4A4C-AE36-FB26D01EDFAA</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/open-internal-folder.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>F07DA284-FCE4-4784-B4B5-6CD6817AEE98</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -6722,6 +6675,21 @@ fi</string>
 			<string>38F17F8F-FBE5-422F-B926-A8AFD40D5A4C</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>{var:vault_path}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>4DF20498-89F0-43F5-929C-1AA8B44880AA</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -6829,7 +6797,8 @@ fi</string>
 
 ## 📙 Recent Changes
 - ⚠️ **breaking change**: vault paths are now configured via the setting to the right instead. 
-- new: `oe` [Search all external links in your entire vault.](https://github.com/chrisgrieser/shimmering-obsidian/blob/main/docs/Note-related%20Features.md#search-all-external-links-in-the-entire-vault)
+- 🆕 You can now use vaults even if the config folder is not placed in `.obsidian`.
+- 🆕 `oe` [Search all external links in your entire vault.](https://github.com/chrisgrieser/shimmering-obsidian/blob/main/docs/Note-related%20Features.md#search-all-external-links-in-the-entire-vault)
 - ⭐️ 600 Stars on GitHub! Thank you everyone for your support. (You can also star the plugin at the [GitHub repo](https://github.com/chrisgrieser/shimmering-obsidian) to show your support for it.)
 
 ---
@@ -7399,6 +7368,13 @@ DOUBLE CLICK THIS to set Hotkey. Suggested Hotkey: cmd + shift + 2</string>
 			<real>495</real>
 			<key>ypos</key>
 			<real>5445</real>
+		</dict>
+		<key>4DF20498-89F0-43F5-929C-1AA8B44880AA</key>
+		<dict>
+			<key>xpos</key>
+			<real>335</real>
+			<key>ypos</key>
+			<real>8135</real>
 		</dict>
 		<key>4DFA3143-56A4-4661-8DF9-4103FFA7D703</key>
 		<dict>
@@ -8637,17 +8613,6 @@ DOUBLE CLICK THIS to set Hotkey. Suggested Hotkey: cmd + shift + 1</string>
 			<key>ypos</key>
 			<real>65</real>
 		</dict>
-		<key>F07DA284-FCE4-4784-B4B5-6CD6817AEE98</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>note</key>
-			<string>open folder</string>
-			<key>xpos</key>
-			<real>285</real>
-			<key>ypos</key>
-			<real>8120</real>
-		</dict>
 		<key>F117FF8C-E6E5-4B0E-9FCE-DDB0A6476CAB</key>
 		<dict>
 			<key>colorindex</key>
@@ -8738,6 +8703,27 @@ DOUBLE CLICK THIS to set Hotkey. Suggested Hotkey: cmd + shift + 1</string>
 			<string>filepicker</string>
 			<key>variable</key>
 			<string>vault_path</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>.obsidian</string>
+				<key>placeholder</key>
+				<string>.obsidian</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Advanced users: If you use a different config folder than the default one.</string>
+			<key>label</key>
+			<string>override config folder</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>config_folder</string>
 		</dict>
 		<dict>
 			<key>config</key>

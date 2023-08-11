@@ -61,27 +61,31 @@ function run() {
 			.split("\n")
 			.filter((line) => line.length !== 0);
 	}
-	console.log("superIconList length: " + superIconList.length);
 
 	//───────────────────────────────────────────────────────────────────────────
 
 	// create input note JSON
 	const inputPath = $.getenv("inputPath");
-	console.log(inputPath);
 
 	const metaJSON = JSON.parse(readFile(metadataJSON));
-	const inputNoteJSON = metaJSON.filter((/** @type {{ relativePath: string}} */ note) => note.relativePath.includes(inputPath))[0];
+	const inputNoteJSON = metaJSON.filter((/** @type {{ relativePath: string}} */ note) =>
+		note.relativePath.includes(inputPath),
+	)[0];
 
 	// create list of links and backlinks and merge them
 	let bothLinksList = [];
 	let linkList = [];
 	let backlinkList = [];
 	if (inputNoteJSON.links) {
-		linkList = inputNoteJSON.links.filter((/** @type {{ relativePath: string; }} */ line) => line.relativePath).map((item) => item.relativePath);
+		linkList = inputNoteJSON.links
+			.filter((/** @type {{ relativePath: string; }} */ line) => line.relativePath)
+			.map((/** @type {{ relativePath: string; }} */ item) => item.relativePath);
 		bothLinksList.push(...linkList);
 	}
 	if (inputNoteJSON.backlinks) {
-		backlinkList = inputNoteJSON.backlinks.map((/** @type {{ relativePath: string; }} */ item) => item.relativePath);
+		backlinkList = inputNoteJSON.backlinks.map(
+			(/** @type {{ relativePath: string; }} */ item) => item.relativePath,
+		);
 		bothLinksList.push(...backlinkList);
 	}
 	bothLinksList = [...new Set(bothLinksList)]; // only unique items
@@ -118,13 +122,16 @@ function run() {
 	const recentFiles = fileExists(recentJSON) ? JSON.parse(readFile(recentJSON)).lastOpenFiles : [];
 
 	// get external links
-	let externalLinkList = readFile(vaultPath + "/" + inputPath).match(externalLinkRegex);
-	if (externalLinkList) {
-		externalLinkList = externalLinkList.map((mdlink) => [
-			mdlink.split("](")[0].slice(1),
-			mdlink.split("](")[1].slice(0, -1),
-		]);
-	} else externalLinkList = [];
+	const externalLinkList = [];
+	readFile(vaultPath + "/" + inputPath)
+		.match(externalLinkRegex)
+		.map((mdlink) => {
+			const [title, url] = mdlink.split("](");
+			externalLinkList.push({
+				title: title.slice(1),
+				url: url.slice(0, -1),
+			});
+		});
 
 	// guard clause if no links of any sort (should only occur with "ol" command though)
 	if (!bothLinksList.length && !externalLinkList.length) {
@@ -138,75 +145,77 @@ function run() {
 	//───────────────────────────────────────────────────────────────────────────
 	// create JSON for Script Filter
 
-	const fileArray = metaJSON.filter((item) => bothLinksList.includes(item.relativePath));
+	// file array
+	metaJSON
+		.filter((/** @type {{ relativePath: string; }} */ item) => bothLinksList.includes(item.relativePath))
+		.forEach((/** @type {{ fileName: string; relativePath: string; links: any[]; backlinks: any[]; tags: string[]; frontmatter: { cssclass: string | string[]; }; }} */ file) => {
+			const filename = file.fileName;
+			const relativePath = file.relativePath;
+			const absolutePath = vaultPath + "/" + relativePath;
 
-	fileArray.forEach((file) => {
-		const filename = file.fileName;
-		const relativePath = file.relativePath;
-		const absolutePath = vaultPath + "/" + relativePath;
+			// check link existence of file
+			let hasLinks = Boolean(file.links?.some((line) => line.relativePath) || file.backlinks); // no relativePath => unresolved link
+			if (!hasLinks) hasLinks = singleExternalLinkRegex.test(readFile(absolutePath)); // readFile only executed when no other links found for performance
+			let linksSubtitle = "⛔️ Note without Outgoing Links or Backlinks";
+			if (hasLinks) linksSubtitle = "⇧: Browse Links in Note";
 
-		// check link existence of file
-		let hasLinks = Boolean(file.links?.some((line) => line.relativePath) || file.backlinks); // no relativePath => unresolved link
-		if (!hasLinks) hasLinks = singleExternalLinkRegex.test(readFile(absolutePath)); // readFile only executed when no other links found for performance
-		let linksSubtitle = "⛔️ Note without Outgoing Links or Backlinks";
-		if (hasLinks) linksSubtitle = "⇧: Browse Links in Note";
+			// icon & emojis
+			let iconpath = "icons/note.png";
+			let emoji = "";
+			let additionalMatcher = "";
+			if (starsAndBookmarks.includes(relativePath)) {
+				emoji += "🔖 ";
+				additionalMatcher += "starred bookmark ";
+			}
+			if (recentFiles.includes(relativePath)) {
+				emoji += "🕑 ";
+				additionalMatcher += "recent ";
+			}
+			if ($.getenv("remove_emojis") === "1") emoji = "";
+			if (filename.toLowerCase().includes("kanban")) iconpath = "icons/kanban.png";
 
-		// icon & emojis
-		let iconpath = "icons/note.png";
-		let emoji = "";
-		let additionalMatcher = "";
-		if (starsAndBookmarks.includes(relativePath)) {
-			emoji += "🔖 ";
-			additionalMatcher += "starred bookmark ";
-		}
-		if (recentFiles.includes(relativePath)) {
-			emoji += "🕑 ";
-			additionalMatcher += "recent ";
-		}
-		if (filename.toLowerCase().includes("kanban")) iconpath = "icons/kanban.png";
+			let superchargedIcon = "";
+			let superchargedIcon2 = "";
+			if (superIconList.length > 0 && file.tags) {
+				superIconList.forEach((pair) => {
+					const tag = pair.split(",")[0].toLowerCase().replaceAll("#", "");
+					const icon = pair.split(",")[1];
+					const icon2 = pair.split(",")[2];
+					if (file.tags.includes(tag) && icon) superchargedIcon = icon + " ";
+					else if (file.tags.includes(tag) && icon2) superchargedIcon2 = " " + icon2;
+				});
+			}
 
-		let superchargedIcon = "";
-		let superchargedIcon2 = "";
-		if (superIconList.length > 0 && file.tags) {
-			superIconList.forEach((pair) => {
-				const tag = pair.split(",")[0].toLowerCase().replaceAll("#", "");
-				const icon = pair.split(",")[1];
-				const icon2 = pair.split(",")[2];
-				if (file.tags.includes(tag) && icon) superchargedIcon = icon + " ";
-				else if (file.tags.includes(tag) && icon2) superchargedIcon2 = " " + icon2;
-			});
-		}
+			// emojis dependent on link type
+			let linkIcon = "";
+			if (linkList.includes(relativePath)) linkIcon += "🔗 ";
+			if (backlinkList.includes(relativePath)) linkIcon += "⬅️ ";
 
-		// emojis dependent on link type
-		let linkIcon = "";
-		if (linkList.includes(relativePath)) linkIcon += "🔗 ";
-		if (backlinkList.includes(relativePath)) linkIcon += "⬅️ ";
+			// exclude cssclass: private
+			let displayName = filename;
+			const censorChar = $.getenv("censor_char");
+			const isPrivateNote = file.frontmatter?.cssclass?.includes("private");
+			const privacyModeOn = $.getenv("privacy_mode") === "1";
+			const applyCensoring = isPrivateNote && privacyModeOn;
+			if (applyCensoring) displayName = filename.replace(/./g, censorChar);
 
-		// exclude cssclass: private
-		let displayName = filename;
-		const censorChar = $.getenv("censor_char");
-		const isPrivateNote = file.frontmatter?.cssclass?.includes("private");
-		const privacyModeOn = $.getenv("privacy_mode") === "1";
-		const applyCensoring = isPrivateNote && privacyModeOn;
-		if (applyCensoring) displayName = filename.replace(/./g, censorChar);
-
-		jsonArray.push({
-			title: linkIcon + emoji + superchargedIcon + displayName + superchargedIcon2,
-			match: additionalMatcher + alfredMatcher(filename),
-			subtitle: "▸ " + parentFolder(relativePath),
-			type: "file:skipcheck",
-			quicklookurl: vaultPath + "/" + relativePath,
-			uid: relativePath,
-			arg: relativePath,
-			icon: { path: iconpath },
-			mods: {
-				shift: {
-					valid: hasLinks,
-					subtitle: linksSubtitle,
+			jsonArray.push({
+				title: linkIcon + emoji + superchargedIcon + displayName + superchargedIcon2,
+				match: additionalMatcher + alfredMatcher(filename),
+				subtitle: "▸ " + parentFolder(relativePath),
+				type: "file:skipcheck",
+				quicklookurl: vaultPath + "/" + relativePath,
+				uid: relativePath,
+				arg: relativePath,
+				icon: { path: iconpath },
+				mods: {
+					shift: {
+						valid: hasLinks,
+						subtitle: linksSubtitle,
+					},
 				},
-			},
+			});
 		});
-	});
 
 	// add external Links to Script-Filter JSON
 	externalLinkList.forEach((link) => {
