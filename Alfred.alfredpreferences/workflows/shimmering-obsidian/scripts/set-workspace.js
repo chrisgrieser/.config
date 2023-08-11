@@ -20,6 +20,7 @@ function run(argv) {
 	// get target spellcheck status
 	const workspaceName = argv[0];
 	const vaultPath = $.getenv("vault_path");
+	const configFolder = $.getenv("config_folder");
 	const vaultNameEnc = encodeURIComponent(vaultPath.replace(/.*\//, ""));
 
 	if (workspaceName === "_save-workspace") {
@@ -38,7 +39,7 @@ function run(argv) {
 	// TOGGLE SPELLCHECK
 	const workspacesToSpellcheck = $.getenv("workspace_to_spellcheck").split(/, ?/);
 	const turnSpellCheckOn = workspacesToSpellcheck.includes(workspaceName);
-	const currentSpellCheck = JSON.parse(readFile(vaultPath + "/.obsidian/app.json")).spellcheck;
+	const currentSpellCheck = JSON.parse(readFile(`${vaultPath}/${configFolder}/app.json`)).spellcheck;
 	if (turnSpellCheckOn !== currentSpellCheck)
 		app.openLocation(`obsidian://advanced-uri?vault=${vaultNameEnc}&commandid=editor%253Atoggle-spellcheck`);
 }

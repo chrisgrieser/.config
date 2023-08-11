@@ -66,5 +66,4 @@ function run() {
 		delay(0.2);
 	}
 	obsidian.activate();
-	return "🥳 Workflow Setup complete";
 }

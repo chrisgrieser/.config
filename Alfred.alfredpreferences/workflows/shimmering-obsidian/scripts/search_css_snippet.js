@@ -15,11 +15,10 @@ function alfredMatcher(str) {
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const vaultPath = $.getenv("vault_path");
-	const snippetPath = vaultPath + "/.obsidian/snippets/";
+	const configFolder = $.getenv("config_folder");
 
-	// Input
 	const snippetArr = app
-		.doShellScript("find '" + snippetPath + "' -name '*.css' ")
+		.doShellScript(`find '${vaultPath}/${configFolder}/snippets/' -name '*.css'`)
 		.split("\r")
 		.map((snippetFilePath) => {
 			const filename = snippetFilePath.replace(/.*\/(.*)\..+/, "$1");

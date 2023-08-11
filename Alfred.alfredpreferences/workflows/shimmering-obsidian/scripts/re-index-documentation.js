@@ -17,6 +17,8 @@ function alfredMatcher(str) {
 	return " " + str.replace(/[-()_#+.`]/g, " ") + " " + str + " ";
 }
 
+//──────────────────────────────────────────────────────────────────────────────
+
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
@@ -53,8 +55,7 @@ function run() {
 		});
 	});
 
-	// < HEADINGS of Official Docs
-	// --------------------------------
+	// HEADINGS of Official Docs
 	const documentationHeaders = [];
 	officialDocs.forEach((/** @type {{ path: string; }} */ doc) => {
 		const docURL = rawGitHubURL + encodeURI(doc.path);
