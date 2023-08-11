@@ -3,9 +3,14 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
-const oldReddit = $.getenv("use_old_reddit") === "1" ? "old" : "www";
-const useDstillAi = $.getenv("use_dstill_ai") === "1";
-const iconFolder = $.getenv("custom_subreddit_icons") || $.getenv("alfred_workflow_data");
+function getSettings() {
+	return {
+		useOldReddit: $.getenv("use_old_reddit") === "1" ? "old" : "www",
+		useDstillAi: $.getenv("use_dstill_ai") === "1",
+		minUpvotes: parseInt($.getenv("min_upvotes")) || 0,
+		iconFolder: $.getenv("custom_subreddit_icons") || $.getenv("alfred_workflow_data"),
+	};
+}
 
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
@@ -26,57 +31,63 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 function getHackernewsPosts(oldItems) {
 	// INFO https://hn.algolia.com/api/
 	// alternative "https://hacker-news.firebaseio.com/v0/topstories.json";
-	const hitsToRequest = 30;
+	const hitsToRequest = 25;
 	const url = `https://hn.algolia.com/api/v1/search_by_date?tags=front_page&hitsPerPage=${hitsToRequest}`;
 	const response = app.doShellScript(`curl -sL "${url}"`);
 	if (!response) {
 		console.log(`Error: No response from ${url}`);
 		return;
 	}
+	const opts = getSettings();
 
 	const oldUrls = oldItems.map((item) => item.arg);
 	const oldTitles = oldItems.map((item) => item.title);
 
 	/** @type{AlfredItem[]} */
-	const hits = JSON.parse(response).hits.map((/** @type {hackerNewsItem} */ item) => {
-		const externalUrl = item.url || "";
-		const commentUrl = useDstillAi
-			? "https://dstill.ai/hackernews/item/" + item.objectID
-			: "https://news.ycombinator.com/item?id=" + item.objectID;
+	const hits = JSON.parse(response).hits.reduce(
+		(/** @type {hackerNewsItem} */ item, /** @type {AlfredItem[]} */ acc) => {
+			if (item.points < opts.minUpvotes) return acc;
 
-		// filter out jobs
-		if (item._tags.some((tag) => tag === "job")) return {};
+			const externalUrl = item.url || "";
+			const commentUrl = opts.useDstillAi
+				? "https://dstill.ai/hackernews/item/" + item.objectID
+				: "https://news.ycombinator.com/item?id=" + item.objectID;
 
-		// age & visitation icon
-		const postIsOld = oldUrls.includes(commentUrl);
-		// HACK since visitation status is only stored as icon, the only way to
-		// determine it is via checking for the respective icon
-		const postIsVisited = postIsOld && oldTitles.includes("🟪 " + item.title);
-		let ageIcon = "";
-		if ($.getenv("age_icon") === "old" && postIsOld) ageIcon = "🕓 ";
-		if ($.getenv("age_icon") === "new" && !postIsOld) ageIcon = "🆕 ";
-		const visitationIcon = postIsVisited ? "🟪 " : "";
+			// filter out jobs
+			if (item._tags.some((tag) => tag === "job")) return {};
 
-		// subtitle
-		let category = item._tags.find((tag) => tag === "show_hn" || tag === "ask_hn");
-		category = (category ? `[${category}]` : "").replace("show_hn", "Show HN").replace("ask_hn", "Ask HN");
-		const comments = item.num_comments || 0;
-		const subtitle = `${ageIcon}${item.points}↑  ${comments}●  ${category}`;
+			// age & visitation icon
+			const postIsOld = oldUrls.includes(commentUrl);
+			// HACK since visitation status is only stored as icon, the only way to
+			// determine it is via checking for the respective icon
+			const postIsVisited = postIsOld && oldTitles.includes("🟪 " + item.title);
+			let ageIcon = "";
+			if ($.getenv("age_icon") === "old" && postIsOld) ageIcon = "🕓 ";
+			if ($.getenv("age_icon") === "new" && !postIsOld) ageIcon = "🆕 ";
+			const visitationIcon = postIsVisited ? "🟪 " : "";
 
-		/** @type{AlfredItem} */
-		const post = {
-			title: visitationIcon + item.title,
-			subtitle: subtitle,
-			arg: commentUrl,
-			icon: { path: "hackernews.png" },
-			mods: {
-				cmd: { arg: "next" },
-				["cmd+shift"]: { arg: "prev" },
-				shift: { arg: externalUrl },
-			},
-		};
-		return post;
-	});
+			// subtitle
+			let category = item._tags.find((tag) => tag === "show_hn" || tag === "ask_hn");
+			category = (category ? `[${category}]` : "").replace("show_hn", "Show HN").replace("ask_hn", "Ask HN");
+			const comments = item.num_comments || 0;
+			const subtitle = `${ageIcon}${item.points}↑  ${comments}●  ${category}`;
+
+			/** @type{AlfredItem} */
+			const post = {
+				title: visitationIcon + item.title,
+				subtitle: subtitle,
+				arg: commentUrl,
+				icon: { path: "hackernews.png" },
+				mods: {
+					cmd: { arg: "next" },
+					["cmd+shift"]: { arg: "prev" },
+					shift: { arg: externalUrl },
+				},
+			};
+			return post;
+		},
+		[],
+	);
 
 	return hits;
 }
@@ -103,76 +114,85 @@ function getHackernewsPosts(oldItems) {
  * @property {string} data.media.type
  */
 
+// INFO free API calls restricted to 10 per minute
+// https://support.reddithelp.com/hc/en-us/articles/16160319875092-Reddit-Data-API-Wiki
+
 /**
  * @param {string} subredditName
  * @param {AlfredItem[]} oldItems
  */
 // rome-ignore lint/correctness/noUnusedVariables: JXA import HACK
 function getRedditPosts(subredditName, oldItems) {
-	// INFO free API calls restricted to 10 per minute
-	// https://support.reddithelp.com/hc/en-us/articles/16160319875092-Reddit-Data-API-Wiki
-
 	// HACK changing user agent because reddit API does not like curl (lol)
-	const curlCommand = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/new.json"`;
+	// DOCS https://www.reddit.com/dev/api#GET_new
+	const numOfResults = 25; // PERF higher affects performance negatively
+	const curlCommand = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/new.json?limit=${numOfResults}"`;
 	const response = JSON.parse(app.doShellScript(curlCommand));
 	if (response.error) {
 		console.log(`Error ${response.error}: ${response.message}`);
 		return;
 	}
 
+	const opts = getSettings();
 	const oldUrls = oldItems.map((item) => item.arg);
 	const oldTitles = oldItems.map((item) => item.title);
 
-	let iconPath = `${iconFolder}/${subredditName}.png`;
+	let iconPath = `${opts.iconFolder}/${subredditName}.png`;
 	if (!fileExists(iconPath)) iconPath = "icon.png"; // not cached
 
-	const redditPosts = response.data.children.map((/** @type {redditPost} */ data) => {
-		const item = data.data;
+	/** @type{AlfredItem[]} */
+	const redditPosts = response.data.children.reduce(
+		(/** @type {redditPost} */ data, /** @type {AlfredItem[]} */ acc) => {
+			const item = data.data;
+			if (item.score < opts.minUpvotes) return acc;
 
-		const commentUrl = `https://${oldReddit}.reddit.com${item.permalink}`;
-		const isOnReddit = item.domain.includes("redd.it") || item.domain.startsWith("self.");
-		const externalUrl = isOnReddit ? "" : item.url;
-		const imageUrl = item.preview?.images[0]?.source?.url;
-		let postTypeIcon = ""
-		if (imageUrl) postTypeIcon = "📷 "
-		else if (!isOnReddit) postTypeIcon = "🔗 "
-		const quicklookUrl = imageUrl || externalUrl || commentUrl;
+			const commentUrl = `https://${opts.oldReddit}.reddit.com${item.permalink}`;
+			const isOnReddit = item.domain.includes("redd.it") || item.domain.startsWith("self.");
+			const externalUrl = isOnReddit ? "" : item.url;
+			const imageUrl = item.preview?.images[0]?.source?.url;
+			let postTypeIcon = "";
+			if (imageUrl) postTypeIcon = "📷 ";
+			else if (!isOnReddit) postTypeIcon = "🔗 ";
+			const quicklookUrl = imageUrl || externalUrl || commentUrl;
 
-		// age icon
-		const postIsOld = oldUrls.includes(commentUrl);
-		let ageIcon = "";
-		const postIsVisited = postIsOld && oldTitles.includes("🟪 " + item.title);
-		if ($.getenv("age_icon") === "old" && postIsOld) ageIcon = "🕓 ";
-		if ($.getenv("age_icon") === "new" && !postIsOld) ageIcon = "🆕 ";
-		const visitationIcon = postIsVisited ? "🟪 " : "";
+			// age icon
+			const postIsOld = oldUrls.includes(commentUrl);
+			let ageIcon = "";
+			const postIsVisited = postIsOld && oldTitles.includes("🟪 " + item.title);
+			if ($.getenv("age_icon") === "old" && postIsOld) ageIcon = "🕓 ";
+			if ($.getenv("age_icon") === "new" && !postIsOld) ageIcon = "🆕 ";
+			const visitationIcon = postIsVisited ? "🟪 " : "";
 
-		// subtitle
-		let category = item.link_flair_text ? `[${item.link_flair_text}]` : "";
-		if (item.over_18) category += " [NSFW]";
-		const comments = item.num_comments || 0;
-		const crossposts = item.num_crossposts ? ` ${item.num_crossposts}↗` : "";
-		const subtitle = `${postTypeIcon}${ageIcon}${item.score}↑  ${comments}● ${crossposts} ${category}`;
+			// subtitle
+			let category = item.link_flair_text ? `[${item.link_flair_text}]` : "";
+			if (item.over_18) category += " [NSFW]";
+			const comments = item.num_comments || 0;
+			const crossposts = item.num_crossposts ? ` ${item.num_crossposts}↗` : "";
+			const subtitle = `${postTypeIcon}${ageIcon}${item.score}↑  ${comments}● ${crossposts} ${category}`;
 
-		const cleanTitle = item.title.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
+			const cleanTitle = item.title.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
 
-		/** @type{AlfredItem} */
-		const post = {
-			title: visitationIcon + cleanTitle,
-			subtitle: subtitle,
-			arg: commentUrl,
-			icon: { path: iconPath },
-			quicklookurl: quicklookUrl,
-			mods: {
-				cmd: { arg: "next" },
-				["cmd+shift"]: { arg: "prev" },
-				shift: {
-					valid: !isOnReddit,
-					arg: externalUrl,
-					subtitle: isOnReddit ? "No external link" : "⇧: Open external link",
+			/** @type{AlfredItem} */
+			const post = {
+				title: visitationIcon + cleanTitle,
+				subtitle: subtitle,
+				arg: commentUrl,
+				icon: { path: iconPath },
+				quicklookurl: quicklookUrl,
+				mods: {
+					cmd: { arg: "next" },
+					["cmd+shift"]: { arg: "prev" },
+					shift: {
+						valid: !isOnReddit,
+						arg: externalUrl,
+						subtitle: isOnReddit ? "No external link" : "⇧: Open external link",
+					},
 				},
-			},
-		};
-		return post;
-	});
+			};
+			acc.push(post);
+			return acc;
+		},
+		[],
+	);
 	return redditPosts;
 }
