@@ -161,7 +161,7 @@ vim.filetype.add {
 -- https://valentjn.github.io/ltex/settings.html
 
 -- disable for bibtex and text files
-lspFiletypes.ltex = { "gitcommit", "markdown" }
+lspFiletypes.ltex = { "gitcommit", "markdown", "octo" }
 
 -- HACK since reading external file with the method described in the ltex docs
 -- does not work

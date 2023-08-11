@@ -117,11 +117,11 @@ function run() {
 		const name = cask.token;
 		const installedIcon = installedBrews.includes(name) ? " ✅" : "";
 		const downloads = caskDownloads[name] ? `${caskDownloads[name][0].count}↓ ` : "";
-		const desc = cask.desc || ""; // default to empty string instead of "null"
+		const desc = cask.desc ? "·  " + cask.desc : ""; // default to empty string instead of "null"
 		return {
 			title: name + installedIcon,
 			match: alfredMatcher(name) + desc,
-			subtitle: `${caskIcon} ${downloads} ·  ${cask.desc}`,
+			subtitle: `${caskIcon} ${downloads} ${desc}`,
 			arg: `--cask ${name}`,
 			mods: {
 				// PERF quicker to pass here than to call `brew home` on brew-id
@@ -151,7 +151,7 @@ function run() {
 		return {
 			title: name + installedIcon,
 			match: alfredMatcher(name) + desc,
-			subtitle: `${formulaIcon} ${caveats}${dependencies}${downloads} ·  ${formula.desc}`,
+			subtitle: `${formulaIcon} ${caveats}${dependencies}${downloads} ${desc}`,
 			arg: `--formula ${name}`,
 			text: {
 				largetype: caveatText,
