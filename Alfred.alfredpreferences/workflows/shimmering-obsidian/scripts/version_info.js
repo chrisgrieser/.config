@@ -25,8 +25,9 @@ function logger(str) {
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	// input parameters
+	const vaultPath = $.getenv("vault_path");
 
+	// input parameters
 	const appTempPath = app.pathTo("home folder") + "/Library/Application Support/obsidian/";
 	let obsiVer;
 	try {
@@ -69,11 +70,16 @@ function run() {
 	const workspaceData15 = fileExists(vaultPath + "/.obsidian/workspace");
 	const workspaceData16 = fileExists(vaultPath + "/.obsidian/workspace.json");
 
-	const numberOfJSONS = app.doShellScript(
-		"ls '" +
-			vaultPath +
-			'/.obsidian/plugins/metadata-extractor/\' | grep ".json" | grep -v "manifest" | grep -v "^data" | wc -l | tr -d " "',
-	);
+	let numberOfJSONS;
+	try {
+		numberOfJSONS = parseInt(app.doShellScript(
+			"ls '" +
+				vaultPath +
+				'/.obsidian/plugins/metadata-extractor/\' | grep ".json" | grep -v "manifest" | grep -v "^data" | wc -l | tr -d " "',
+		))
+	} catch (_error) {
+		numberOfJSONS = 0;
+	}
 	const metadataJSON = vaultPath + "/.obsidian/plugins/metadata-extractor/metadata.json";
 	const metadataStrLen = fileExists(metadataJSON) ? readFile(metadataJSON).length : "no metadata.json";
 
@@ -84,7 +90,7 @@ function run() {
 	logger("INTERNAL WORKFLOW CONFIGURATION");
 	logger("Vault Path: " + vaultPath);
 	logger(".obsidian: " + dotObsidian);
-	logger("Metadata JSONs: " + numberOfJSONS + "/4");
+	logger(`Metadata JSONs: ${numberOfJSONS}/4`);
 	if (numberOfJSONS < 4) logger("Not all metadata not found. Please run `osetup` and retry.");
 	logger("metadata.json String Length: " + metadataStrLen);
 	logger("-------------------------------");
@@ -109,11 +115,6 @@ function run() {
 	logger("Advanced URI Plugin: " + advancedUriVerOnline);
 	logger("Metadata Extractor: " + metadataExVerOnline);
 	logger("-------------------------------");
-
-	// remove config
-	Application("com.runningwithcrayons.Alfred").removeConfiguration("ObRunning", {
-		inWorkflow: $.getenv("alfred_workflow_bundleid"),
-	});
 
 	return output; // JXA direct return
 }
