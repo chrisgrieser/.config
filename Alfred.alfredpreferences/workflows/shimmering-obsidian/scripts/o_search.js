@@ -34,27 +34,27 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const vaultPath = $.getenv("vault_path");
+	console.log("🪓 vaultPath:", vaultPath);
+	const configFolder = $.getenv("config_folder");
 	const externalLinkRegex = /\[[^\]]*\]\([^)]+\)/;
-	const metadataJSON = vaultPath + "/.obsidian/plugins/metadata-extractor/metadata.json";
-	const canvasJSON = vaultPath + "/.obsidian/plugins/metadata-extractor/canvas.json";
-	const starredJSON = vaultPath + "/.obsidian/starred.json";
-	const bookmarkJSON = vaultPath + "/.obsidian/bookmarks.json";
-	const excludeFilterJSON = vaultPath + "/.obsidian/app.json";
+
+	const metadataJSON = `${vaultPath}/${configFolder}/plugins/metadata-extractor/metadata.json`;
+	const canvasJSON = `${vaultPath}/${configFolder}/plugins/metadata-extractor/canvas.json`;
+	const starredJSON = `${vaultPath}/${configFolder}/starred.json`;
+	const bookmarkJSON = `${vaultPath}/${configFolder}/bookmarks.json`;
+	const excludeFilterJSON = `${vaultPath}/${configFolder}/app.json`;
 	const superIconFile = $.getenv("supercharged_icon_file");
 
-	let recentJSON = vaultPath + "/.obsidian/workspace.json";
+	let recentJSON = `${vaultPath}/${configFolder}/workspace.json`;
 	if (!fileExists(recentJSON)) recentJSON = recentJSON.slice(0, -5); // Obsidian 0.16 uses workspace.json → https://discord.com/channels/686053708261228577/716028884885307432/1013906018578743478
 
 	const excludeFilter = fileExists(excludeFilterJSON)
 		? JSON.parse(readFile(excludeFilterJSON)).userIgnoreFilters
 		: [];
-	console.log("excludeFilter: " + excludeFilter);
 
 	const recentFiles = fileExists(recentJSON) ? JSON.parse(readFile(recentJSON)).lastOpenFiles : [];
-	console.log("recentFiles length: " + recentFiles.length);
 
 	let canvasArray = fileExists(canvasJSON) ? JSON.parse(readFile(canvasJSON)) : [];
-	console.log("canvasArray length: " + canvasArray.length);
 
 	//──────────────────────────────────────────────────────────────────────────────
 	// BOOKMARKS & STARS

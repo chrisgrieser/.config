@@ -27,9 +27,10 @@ function alfredMatcher(str) {
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const vaultPath = $.getenv("vault_path");
+	const configFolder = $.getenv("config_folder");
 	const vaultNameEnc = encodeURIComponent(vaultPath.replace(/.*\//, ""));
 
-	const tagsJSON = vaultPath + "/.obsidian/plugins/metadata-extractor/tags.json";
+	const tagsJSON = `${vaultPath}/${configFolder}/plugins/metadata-extractor/tags.json`;
 	const mergeNestedTags = $.getenv("merge_nested_tags") === "1";
 	const superIconFile = $.getenv("supercharged_icon_file");
 

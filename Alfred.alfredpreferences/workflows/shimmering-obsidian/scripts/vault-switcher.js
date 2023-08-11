@@ -44,6 +44,11 @@ function run() {
 			subtitle: shortPath,
 			arg: vaultURI,
 			mods: {
+				// info message for transition period
+				shift: {
+					valid: false,
+					subtitle: "⛔️ Vaults control is now switched via workflow configuration.",
+				},
 				alt: { arg: vaultPath },
 				cmd: { arg: vaultPath },
 				ctrl: { arg: vaultPath },
