@@ -151,3 +151,6 @@ information on
 NOTE
 note
 Note
+subreddits
+hackernews
+⌘Y
