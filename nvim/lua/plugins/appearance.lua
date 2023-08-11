@@ -315,8 +315,8 @@ return {
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "DressingSelect",
 				callback = function()
-					vim.keymap.set("n", "<Tab>", "j")
-					vim.keymap.set("n", "<S-Tab>", "k")
+					vim.keymap.set("n", "<Tab>", "j", { buffer = true })
+					vim.keymap.set("n", "<S-Tab>", "k", { buffer = true })
 				end,
 			})
 		end,
