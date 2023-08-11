@@ -1,11 +1,8 @@
 #!/bin/zsh
 # shellcheck disable=2154
 
-if [[ "$screenshot_path" == "" ]]; then
-	screenshot_path="$vault_path/screenshots"
-else
-	screenshot_path="${screenshot_path/#\~/$HOME}"
-fi
+[[ "$screenshot_path" == "" ]] && screenshot_path="$vault_path/screenshots"
+
 mkdir -p "$screenshot_path"
 imageFileName="Screenshot $(date '+%Y-%m-%d %H-%M-%S').png"
 

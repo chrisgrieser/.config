@@ -20,24 +20,21 @@ function readFile(path) {
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const vaultPath = $.getenv("vault_path");
+	const configFolder = $.getenv("config_folder");
 	const vaultNameEnc = encodeURIComponent(vaultPath.replace(/.*\//, ""));
 
 	const uriStart = "obsidian://advanced-uri?vault=" + vaultNameEnc;
 
 	const standardSettings = JSON.parse(readFile("./data/settings-database.json"));
 
-	const installedPlugins = app.doShellScript('ls -1 "' + vaultPath + '""/.obsidian/plugins/"').split("\r");
-	const enabledComPlugins = JSON.parse(readFile(vaultPath + "/.obsidian/community-plugins.json"));
+	const installedPlugins = app.doShellScript(`ls -1 "${vaultPath}/${configFolder}/plugins/"`).split("\r");
+	const enabledComPlugins = JSON.parse(readFile(`${vaultPath}/${configFolder}/community-plugins.json`));
 
 	const corePluginsWithSettings = JSON.parse(readFile("./data/core-plugins-with-settings-database.json"));
-	const enabledCorePlugins = JSON.parse(readFile(vaultPath + "/.obsidian/core-plugins.json"));
+	const enabledCorePlugins = JSON.parse(readFile(`${vaultPath}/${configFolder}/core-plugins.json`));
 
-	const deprecatedJSON = JSON.parse(readFile("./data/deprecated-plugins.json"));
-	const deprecatedPlugins = [
-		...deprecatedJSON.sherlocked,
-		...deprecatedJSON.dysfunct,
-		...deprecatedJSON.deprecated,
-	];
+	const deprecated = JSON.parse(readFile("./data/deprecated-plugins.json"));
+	const deprecatedPlugins = [...deprecated.sherlocked, ...deprecated.dysfunct, ...deprecated.deprecated];
 
 	//──────────────────────────────────────────────────────────────────────────────
 	const settings = [];
@@ -91,7 +88,7 @@ function run() {
 	});
 
 	installedPlugins.forEach((pluginFolder) => {
-		const pluginFolderPath = vaultPath + "/.obsidian/plugins/" + pluginFolder;
+		const pluginFolderPath = `${vaultPath}/${configFolder}/plugins/${pluginFolder}`;
 
 		let manifest = {};
 		try {

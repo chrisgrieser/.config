@@ -9,7 +9,18 @@
 	<key>connections</key>
 	<dict>
 		<key>06308645-1484-49FA-8806-537D1A50C1B6</key>
-		<array/>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4DF20498-89F0-43F5-929C-1AA8B44880AA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>0645AAB4-66F5-4149-A92B-C58A80B649C7</key>
 		<array>
 			<dict>
@@ -2167,7 +2178,18 @@
 			</dict>
 		</array>
 		<key>E88AC866-9A2B-4763-914C-EF2BB940DDE2</key>
-		<array/>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4DF20498-89F0-43F5-929C-1AA8B44880AA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>EC424B98-D702-4608-B1EA-07AF49C56048</key>
 		<array>
 			<dict>
@@ -6658,6 +6680,21 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>{var:vault_path}/{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>4DF20498-89F0-43F5-929C-1AA8B44880AA</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -6675,21 +6712,6 @@ fi</string>
 			<string>38F17F8F-FBE5-422F-B926-A8AFD40D5A4C</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>{var:vault_path}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>4DF20498-89F0-43F5-929C-1AA8B44880AA</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -7371,10 +7393,12 @@ DOUBLE CLICK THIS to set Hotkey. Suggested Hotkey: cmd + shift + 2</string>
 		</dict>
 		<key>4DF20498-89F0-43F5-929C-1AA8B44880AA</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>335</real>
+			<real>280</real>
 			<key>ypos</key>
-			<real>8135</real>
+			<real>8120</real>
 		</dict>
 		<key>4DFA3143-56A4-4661-8DF9-4103FFA7D703</key>
 		<dict>
@@ -8520,7 +8544,7 @@ DOUBLE CLICK THIS to set Hotkey. Suggested Hotkey: cmd + shift + 1</string>
 		<key>E844180D-E691-40D1-9EB1-6A06F69C73B9</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>9</integer>
+			<integer>3</integer>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
