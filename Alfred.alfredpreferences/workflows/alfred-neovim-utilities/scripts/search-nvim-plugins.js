@@ -37,12 +37,12 @@ function ensureCacheFolderExists() {
 
 /** @param {string} path */
 function cacheIsOutdated(path) {
-	const cacheAgeThreshold = 24; // 24h = cache is old
+	const cacheAgeThresholdHours = 24; // 24h = cache is old
 	ensureCacheFolderExists();
 	const cacheObj = Application("System Events").aliases[path];
 	if (!cacheObj.exists()) return true;
 	const cacheAgeHours = (+new Date() - cacheObj.creationDate()) / 1000 / 60 / 60;
-	return cacheAgeHours > cacheAgeThreshold;
+	return cacheAgeHours > cacheAgeThresholdHours;
 }
 
 /** @param {string} path */
@@ -66,27 +66,26 @@ function writeToFile(filepath, text) {
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const neovimcraftURL = "https://nvim.sh/s";
+	// CHECK CACHE
 	const cachePath = $.getenv("alfred_workflow_cache") + "/neovimcraftPlugins.json";
+	if (!cacheIsOutdated(cachePath)) return readFile(cachePath)
 
+	//───────────────────────────────────────────────────────────────────────────
+	// REQUEST NEOVIMCRAFT
+
+	const neovimcraftURL = "https://nvim.sh/s";
 	const installedPluginsPath = $.getenv("plugin_installation_path").replace(/^~/, app.pathTo("home folder"));
 	const installedPlugins = app
 		.doShellScript(
 			`cd "${installedPluginsPath}" && grep --only-matching --no-filename --max-count=1 "http.*" ./*/.git/config`,
 		)
-		.split("\r");
+		.split("\r")
+		.map((remote) => {
+			const ownerAndName = remote.split("/").slice(3, 5).join("/").slice(0, -4)
+			return ownerAndName
+		})
 
-	// check cache
-	let pluginsArr = [];
-	if (!cacheIsOutdated(cachePath)) {
-		pluginsArr = JSON.parse(readFile(cachePath));
-		return JSON.stringify({ items: pluginsArr });
-	}
-
-	//───────────────────────────────────────────────────────────────────────────
-	// request neovimcraft
-
-	pluginsArr = httpRequest(neovimcraftURL)
+	const pluginsArr = httpRequest(neovimcraftURL)
 		.split("\n")
 		.slice(2)
 		.map((/** @type {string} */ line) => {
@@ -117,7 +116,8 @@ function run() {
 				mods: { shift: { subtitle: `⇧: Search Issues (${openIssues} open)` } },
 			};
 		});
-	writeToFile(cachePath, JSON.stringify(pluginsArr));
 
-	return JSON.stringify({ items: pluginsArr });
+	const alfredResponse = JSON.stringify({ items: pluginsArr });
+	writeToFile(cachePath, alfredResponse);
+	return alfredResponse
 }

@@ -313,8 +313,7 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>Search neovim plugins and online :help via Alfred
-Search neovim plugins and online :help via Alfred</string>
+	<string>Search neovim plugins and online :help</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -1444,7 +1443,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.4.0</string>
+	<string>1.4.2</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

@@ -37,11 +37,12 @@ function ensureCacheFolderExists() {
 
 /** @param {string} path */
 function cacheIsOutdated(path) {
-	const cacheAgeThreshold = parseFloat($.getenv("cache_age_threshold")) || 15;
+	let cacheAgeThresholdMins = parseInt($.getenv("cache_age_threshold")) || 15;
+	if (cacheAgeThresholdMins < 1) cacheAgeThresholdMins = 1; // prevent 0 or negative numbers
 	const cacheObj = Application("System Events").aliases[path];
 	if (!cacheObj.exists()) return true;
 	const cacheAgeMins = (+new Date() - cacheObj.creationDate()) / 1000 / 60;
-	return cacheAgeMins > cacheAgeThreshold;
+	return cacheAgeMins > cacheAgeThresholdMins;
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -50,6 +51,7 @@ function cacheIsOutdated(path) {
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const timelogStart = +new Date();
+
 	// determine subreddit
 	const prevRunSubreddit = readFile($.getenv("alfred_workflow_cache") + "/current_subreddit");
 	const selectedWithAlfred = $.NSProcessInfo.processInfo.environment.objectForKey("selected_subreddit").js;
