@@ -96,6 +96,8 @@ function run() {
 		posts = getRedditPosts(subredditName, oldItems);
 		if (!posts) {
 			return JSON.stringify({ items: [{ title: "Error", subtitle: "No response from reddit API" }] });
+		} else if (posts.length === 0) {
+			return JSON.stringify({ items: [{ title: "No Posts", subtitle: "No response from reddit API" }] });
 		}
 	}
 	writeToFile(subredditCache, JSON.stringify(posts));

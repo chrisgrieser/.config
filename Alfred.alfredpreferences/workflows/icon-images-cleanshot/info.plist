@@ -401,7 +401,7 @@
 			<key>config</key>
 			<dict>
 				<key>acceptsmulti</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>filetypes</key>
 				<array>
 					<string>public.png</string>
