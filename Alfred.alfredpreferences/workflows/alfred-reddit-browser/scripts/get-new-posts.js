@@ -153,9 +153,11 @@ function getRedditPosts(subredditName, oldItems) {
 		const crossposts = item.num_crossposts ? ` ${item.num_crossposts}↗` : "";
 		const subtitle = `${postTypeIcon}${ageIcon}${item.score}↑  ${comments}● ${crossposts} ${category}`;
 
+		const cleanTitle = item.title.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
+
 		/** @type{AlfredItem} */
 		const post = {
-			title: visitationIcon + item.title,
+			title: visitationIcon + cleanTitle,
 			subtitle: subtitle,
 			arg: commentUrl,
 			icon: { path: iconPath },
