@@ -1,6 +1,5 @@
 #!/bin/zsh
-
-vault_path="$(cat "$alfred_workflow_data/vaultPath")" && vault_path="${vault_path/#\~/$HOME}"
+# shellcheck disable=2154
 
 if [[ "$screenshot_path" == "" ]]; then
 	screenshot_path="$vault_path/screenshots"

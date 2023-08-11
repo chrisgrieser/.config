@@ -5,32 +5,13 @@ ObjC.import("Foundation");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
+/** @param {string} path */
 function readFile(path) {
 	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
 	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
 	return ObjC.unwrap(str);
 }
-function getVaultPath() {
-	const theApp = Application.currentApplication();
-	theApp.includeStandardAdditions = true;
-	const dataFile = $.NSFileManager.defaultManager.contentsAtPath(
-		$.getenv("alfred_workflow_data") + "/vaultPath",
-	);
-	const vault = $.NSString.alloc.initWithDataEncoding(dataFile, $.NSUTF8StringEncoding);
-	return ObjC.unwrap(vault).replace(/^~/, theApp.pathTo("home folder"));
-}
-const vaultPath = getVaultPath();
-function getVaultNameEncoded() {
-	const theApp = Application.currentApplication();
-	theApp.includeStandardAdditions = true;
-	const dataFile = $.NSFileManager.defaultManager.contentsAtPath(
-		$.getenv("alfred_workflow_data") + "/vaultPath",
-	);
-	const vault = $.NSString.alloc.initWithDataEncoding(dataFile, $.NSUTF8StringEncoding);
-	const theVaultPath = ObjC.unwrap(vault);
-	const vaultName = theVaultPath.replace(/.*\//, "");
-	return encodeURIComponent(vaultName);
-}
+
 //───────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -38,7 +19,8 @@ function getVaultNameEncoded() {
 function run(argv) {
 	// get target spellcheck status
 	const workspaceName = argv[0];
-	const vaultNameEnc = getVaultNameEncoded();
+	const vaultPath = $.getenv("vault_path");
+	const vaultNameEnc = encodeURIComponent(vaultPath.replace(/.*\//, ""));
 
 	if (workspaceName === "_save-workspace") {
 		app.openLocation(`obsidian://advanced-uri?vault=${vaultNameEnc}&saveworkspace=true`);
@@ -58,7 +40,5 @@ function run(argv) {
 	const turnSpellCheckOn = workspacesToSpellcheck.includes(workspaceName);
 	const currentSpellCheck = JSON.parse(readFile(vaultPath + "/.obsidian/app.json")).spellcheck;
 	if (turnSpellCheckOn !== currentSpellCheck)
-		app.openLocation(
-			"obsidian://advanced-uri?vault=" + getVaultNameEncoded() + "&commandid=editor%253Atoggle-spellcheck",
-		);
+		app.openLocation(`obsidian://advanced-uri?vault=${vaultNameEnc}&commandid=editor%253Atoggle-spellcheck`);
 }

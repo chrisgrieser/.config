@@ -49,35 +49,13 @@ const discordReadyLinks = ["Discord", "Discord PTB", "Discord Canary"].some((dis
 	SafeApplication(discordApp)?.frontmost(),
 );
 
-function getVaultPath() {
-	const theApp = Application.currentApplication();
-	theApp.includeStandardAdditions = true;
-	const dataFile = $.NSFileManager.defaultManager.contentsAtPath(
-		$.getenv("alfred_workflow_data") + "/vaultPath",
-	);
-	const vault = $.NSString.alloc.initWithDataEncoding(dataFile, $.NSUTF8StringEncoding);
-	return ObjC.unwrap(vault).replace(/^~/, theApp.pathTo("home folder"));
-}
-
-function getVaultNameEncoded() {
-	const theApp = Application.currentApplication();
-	theApp.includeStandardAdditions = true;
-	const dataFile = $.NSFileManager.defaultManager.contentsAtPath(
-		$.getenv("alfred_workflow_data") + "/vaultPath",
-	);
-	const vault = $.NSString.alloc.initWithDataEncoding(dataFile, $.NSUTF8StringEncoding);
-	const theVaultPath = ObjC.unwrap(vault);
-	const vaultName = theVaultPath.replace(/.*\//, "");
-	return encodeURIComponent(vaultName);
-}
-
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const vaultPath = getVaultPath();
-	const vaultNameEnc = getVaultNameEncoded();
+	const vaultPath = $.getenv("vault_path");
+	const vaultNameEnc = encodeURIComponent(vaultPath.replace(/.*\//, ""));
 
 	/** @type{AlfredItem[]} */
 	const jsonArray = [];
