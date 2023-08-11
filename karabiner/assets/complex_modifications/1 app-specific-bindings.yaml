@@ -472,11 +472,6 @@ rules:
           - shell_command: |
               osascript -e 'display notification "" with title "OCR Screenshot"'
               open -g "cleanshot://capture-text"
-      # screenshot button + bulb-button
-      - type: basic
-        from: { key_code: "f13", modifiers: { mandatory: [shift, command] } }
-        to:
-          - shell_command: open -g "cleanshot://record-screen"
   # INFO using Shottr at mother device, since no 3rd license for CleanShot
   # make hotkeys consistent with CleanShot though (cmd+s -> cmd+shift+c)
   - description: "(Apps) Shottr"

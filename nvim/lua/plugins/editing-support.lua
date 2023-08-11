@@ -34,7 +34,8 @@ return {
 	},
 	{ -- auto-insert ;,=:
 		"filNaj/tree-setter",
-		ft = { "c", "java", "javascript", "python" }
+		-- list of supported languages: https://github.com/filNaj/tree-setter/tree/master/queries
+		ft = { "c", "cpp", "java", "javascript", "typescript", "python", "rust", "go" }
 	},
 	{ -- case conversion
 		"johmsalas/text-case.nvim",

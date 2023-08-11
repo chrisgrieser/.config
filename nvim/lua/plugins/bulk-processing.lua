@@ -13,14 +13,29 @@ return {
 		config = function()
 			local normal = require("multicursors.normal_mode")
 			local extend = require("multicursors.extend_mode")
+
 			require("multicursors").setup {
 				hint_config = false,
 				create_commands = false,
 				-- methods listed here https://github.com/smoka7/multicursors.nvim/blob/main/lua/multicursors/config.lua
+				insert_keys = {
+					["<D-v>"] = { method = normal.paste_after, opts = {} },
+				},
 				normal_keys = {
 					-- add next selection by using the same key again
 					["<D-j>"] = { method = normal.find_next, opts = {} },
-					["d"] = { method = normal.delete, opts = { nowait = true } },
+
+					-- remove waiting time
+					["d"] = { method = normal.delete, opts = { nowait = true } }, 
+
+					-- replace selection
+					["p"] = {
+						method = function()
+							normal.delete()
+							normal.paste_after()
+						end,
+						opts = {},
+					},
 
 					-- use extend-mode-motions in normal mode
 					["e"] = { method = extend.e_method, opts = {} },

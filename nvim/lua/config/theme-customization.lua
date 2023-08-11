@@ -46,7 +46,6 @@ local function customHighlights()
 	for _, type in pairs(types) do
 		updateHighlight("DiagnosticUnderline" .. type, "gui=underdouble cterm=underline")
 	end
-	updateHighlight("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
 end
 
 -- selene: allow(high_cyclomatic_complexity)
@@ -71,6 +70,9 @@ local function themeModifications()
 		updateHighlight("GitSignsChange", "guifg=#acaa62")
 		updateHighlight("GitSignsAdd", "guifg=#7fcc82")
 		updateHighlight("ScrollView", "guibg=#5a71b3")
+	elseif theme == "gruvbox-material" or theme == "sonokai" then
+		local commentColor = u.getHighlightValue("Comment", "fg")
+		updateHighlight("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
 	elseif theme == "material" and mode == "light" then
 		updateHighlight("@property", "guifg=#6c9798")
 		updateHighlight("@field", "guifg=#6c9798")
