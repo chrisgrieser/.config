@@ -34,7 +34,6 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const vaultPath = $.getenv("vault_path");
-	console.log("🪓 vaultPath:", vaultPath);
 	const configFolder = $.getenv("config_folder");
 	const externalLinkRegex = /\[[^\]]*\]\([^)]+\)/;
 
@@ -55,6 +54,20 @@ function run() {
 	const recentFiles = fileExists(recentJSON) ? JSON.parse(readFile(recentJSON)).lastOpenFiles : [];
 
 	let canvasArray = fileExists(canvasJSON) ? JSON.parse(readFile(canvasJSON)) : [];
+
+	//───────────────────────────────────────────────────────────────────────────
+	// GUARD: metadata does not exist since user has not run `osetup`
+	if (!fileExists(metadataJSON)) {
+		return JSON.stringify({
+			items: [
+				{
+					title: "⚠️ No vault metadata found.",
+					subtitle: "Please run the Alfred command `osetup` first. This only has to be done once.",
+					valid: false,
+				},
+			],
+		});
+	}
 
 	//──────────────────────────────────────────────────────────────────────────────
 	// BOOKMARKS & STARS
@@ -153,7 +166,7 @@ function run() {
 		// folderarray does not need to be filtered, since already filtered on creation
 	}
 
-	// IGNORED HEADINGS
+	// ignored headings
 	const hLVLignore = $.getenv("h_lvl_ignore");
 	const headingIgnore = [true];
 	for (let i = 1; i < 7; i++) {
@@ -351,7 +364,7 @@ function run() {
 		});
 	});
 
-	// Additional options when browsing a folder
+	// ADDITIONAL OPTIONS WHEN BROWSING A FOLDER
 	if (pathToCheck !== vaultPath) {
 		// New File in Folder
 		jsonArray.push({

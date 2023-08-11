@@ -149,3 +149,5 @@ subreddit
 fn⏎
 information on
 NOTE
+note
+Note

@@ -4,16 +4,13 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
+//──────────────────────────────────────────────────────────────────────────────
+
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const absolutePath = argv[0];
 	const vaultPath = $.getenv("vault_path");
-
-	if (!vaultPath) {
-		app.displayNotification("", { withTitle: "Shimmering Obsidian", subtitle: "⚠️ No vault path found." });
-	}
-
 	const relativePath = absolutePath.slice(vaultPath.length);
 	return relativePath;
 }
