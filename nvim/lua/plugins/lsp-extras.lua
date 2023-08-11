@@ -46,7 +46,7 @@ return {
 			lsp = { auto_attach = true },
 			icons = { Object = "󰆧 " },
 			separator = "  ",
-			depth_limit = 8,
+			depth_limit = 7,
 			depth_limit_indicator = "…",
 		},
 	},
