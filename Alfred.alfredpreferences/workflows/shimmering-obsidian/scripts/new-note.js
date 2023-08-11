@@ -52,7 +52,7 @@ function run(argv) {
 
 	let newNoteContent = "";
 	if (templateRelPath) {
-		let templateAbsPath = vaultPath + "/" + templateRelPath;
+		let templateAbsPath = `${vaultPath}/${templateRelPath}`;
 		if (!templateAbsPath.endsWith(".md")) templateAbsPath += ".md";
 		newNoteContent = readFile(templateAbsPath).replace("{{title}}", fileName); // insert title
 	}
