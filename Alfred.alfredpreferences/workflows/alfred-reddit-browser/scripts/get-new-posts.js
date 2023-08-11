@@ -128,10 +128,10 @@ function getHackernewsPosts(oldItems) {
 function getRedditPosts(subredditName, oldItems) {
 	const opts = getSettings();
 
-	// HACK changing user agent because reddit API does not like curl (lol)
 	// DOCS https://www.reddit.com/dev/api#GET_new
 	const numOfResults = 25; // PERF higher affects performance negatively
 	const sortType = opts.sortType; // new|hot|top|controversial
+	// HACK changing user agent because reddit API does not like curl (lol)
 	const curlCommand = `curl -sL -H "User-Agent: Chrome/115.0.0.0" \\
 		"https://www.reddit.com/r/${subredditName}/${sortType}.json?limit=${numOfResults}"`;
 	const response = JSON.parse(app.doShellScript(curlCommand));

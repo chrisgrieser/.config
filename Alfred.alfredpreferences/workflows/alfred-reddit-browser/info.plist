@@ -554,7 +554,7 @@
 
 ## Info
 - No reddit account is needed. 
-- Due to smart caching, this workflow should never hit API rate limits under normal usage.
+- Due to smart caching, this workflow should not hit API rate limits under normal usage.
 - Some settings only take affect after refreshing. You can manually force refreshing all subreddits via `:reddit`, but doing so will also clear all visitation icons, reading positions, and new/old marks.
 
 ---
@@ -936,7 +936,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.2</string>
+	<string>1.1.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
