@@ -94,12 +94,15 @@ function run() {
 		console.log("Writing new cache for r/" + subredditName);
 		// rome-ignore lint/correctness/noUndeclaredVariables: JXA import HACK
 		posts = getRedditPosts(subredditName, oldItems);
-		if (!posts) {
-			return JSON.stringify({ items: [{ title: "Error", subtitle: "No response from reddit API" }] });
-		} else if (posts.length === 0) {
-			return JSON.stringify({ items: [{ title: "No Posts", subtitle: "No response from reddit API" }] });
-		}
 	}
+
+	// GUARDS: no API response or no posts left after filtering for min upvote count
+	if (!posts) {
+		return JSON.stringify({ items: [{ title: "Error", subtitle: "No response from API." }] });
+	} else if (posts.length === 0) {
+		return JSON.stringify({ items: [{ title: "No Posts higher than minimum upvote count" }] });
+	}
+
 	writeToFile(subredditCache, JSON.stringify(posts));
 
 	const durationSecs = (+new Date() - timelogStart) / 1000;

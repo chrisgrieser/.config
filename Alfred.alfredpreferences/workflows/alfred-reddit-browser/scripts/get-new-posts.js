@@ -4,11 +4,13 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
 function getSettings() {
+	const minUpvotesSetting = parseInt($.getenv("min_upvotes")) || 0;
 	return {
+		minUpvotes: Math.max(minUpvotesSetting, 0), // minimum of 0
 		useOldReddit: $.getenv("use_old_reddit") === "1" ? "old" : "www",
 		useDstillAi: $.getenv("use_dstill_ai") === "1",
-		minUpvotes: parseInt($.getenv("min_upvotes")) || 0,
 		iconFolder: $.getenv("custom_subreddit_icons") || $.getenv("alfred_workflow_data"),
+		sortType: $.getenv("sort_type") || "hot",
 	};
 }
 
@@ -45,7 +47,7 @@ function getHackernewsPosts(oldItems) {
 
 	/** @type{AlfredItem[]} */
 	const hits = JSON.parse(response).hits.reduce(
-		(/** @type {hackerNewsItem} */ item, /** @type {AlfredItem[]} */ acc) => {
+		(/** @type {AlfredItem[]} */ acc, /** @type {hackerNewsItem} */ item) => {
 			if (item.points < opts.minUpvotes) return acc;
 
 			const externalUrl = item.url || "";
@@ -84,7 +86,8 @@ function getHackernewsPosts(oldItems) {
 					shift: { arg: externalUrl },
 				},
 			};
-			return post;
+			acc.push(post);
+			return acc;
 		},
 		[],
 	);
@@ -123,17 +126,20 @@ function getHackernewsPosts(oldItems) {
  */
 // rome-ignore lint/correctness/noUnusedVariables: JXA import HACK
 function getRedditPosts(subredditName, oldItems) {
+	const opts = getSettings();
+
 	// HACK changing user agent because reddit API does not like curl (lol)
 	// DOCS https://www.reddit.com/dev/api#GET_new
 	const numOfResults = 25; // PERF higher affects performance negatively
-	const curlCommand = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/new.json?limit=${numOfResults}"`;
+	const sortType = opts.sortType; // new|hot|top|controversial
+	const curlCommand = `curl -sL -H "User-Agent: Chrome/115.0.0.0" \\
+		"https://www.reddit.com/r/${subredditName}/${sortType}.json?limit=${numOfResults}"`;
 	const response = JSON.parse(app.doShellScript(curlCommand));
 	if (response.error) {
 		console.log(`Error ${response.error}: ${response.message}`);
 		return;
 	}
 
-	const opts = getSettings();
 	const oldUrls = oldItems.map((item) => item.arg);
 	const oldTitles = oldItems.map((item) => item.title);
 
@@ -142,11 +148,11 @@ function getRedditPosts(subredditName, oldItems) {
 
 	/** @type{AlfredItem[]} */
 	const redditPosts = response.data.children.reduce(
-		(/** @type {redditPost} */ data, /** @type {AlfredItem[]} */ acc) => {
+		(/** @type {AlfredItem[]} */ acc, /** @type {redditPost} */ data) => {
 			const item = data.data;
 			if (item.score < opts.minUpvotes) return acc;
 
-			const commentUrl = `https://${opts.oldReddit}.reddit.com${item.permalink}`;
+			const commentUrl = `https://${opts.useOldReddit}.reddit.com${item.permalink}`;
 			const isOnReddit = item.domain.includes("redd.it") || item.domain.startsWith("self.");
 			const externalUrl = isOnReddit ? "" : item.url;
 			const imageUrl = item.preview?.images[0]?.source?.url;

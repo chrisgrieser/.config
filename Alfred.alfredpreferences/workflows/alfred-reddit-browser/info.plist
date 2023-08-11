@@ -551,7 +551,11 @@
 	- &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Open URL (if external link).
 	- &lt;kbd&gt;⇧&lt;/kbd&gt; or &lt;kbd&gt;⌘Y&lt;/kbd&gt;: Preview the result. You can use the arrow keys to preview to the next result. Mostly useful for images. 
 
-No reddit account is needed. Due to smart caching, this workflow should never hit API rate limits under normal usage.
+
+## Info
+- No reddit account is needed. 
+- Due to smart caching, this workflow should never hit API rate limits under normal usage.
+- Some settings only take affect after refreshing. You can manually force refreshing all subreddits via `:reddit`, but doing so will also clear all visitation icons, reading positions, and new/old marks.
 
 ---
 
@@ -719,7 +723,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<integer>9</integer>
 			</dict>
 			<key>description</key>
-			<string>List of subreddits, one per line. (Without leading "r/".)</string>
+			<string>List of subreddits, one per line (without the "r/" in front).</string>
 			<key>label</key>
 			<string>subreddits</string>
 			<key>type</key>
@@ -731,22 +735,56 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>15</string>
+				<string>hot</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>hot</string>
+						<string>hot</string>
+					</array>
+					<array>
+						<string>top</string>
+						<string>top</string>
+					</array>
+					<array>
+						<string>new</string>
+						<string>new</string>
+					</array>
+					<array>
+						<string>controversial</string>
+						<string>controversial</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>how the results in the subreddits are sorted</string>
+			<key>label</key>
+			<string>Sorting</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>sort_type</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>0</string>
 				<key>placeholder</key>
-				<string>20</string>
+				<string></string>
 				<key>required</key>
-				<true/>
+				<false/>
 				<key>trim</key>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>After this many minutes, the cache will be refreshed, and reading positions will be reset.</string>
+			<string>Minimum score of posts to display, posts with a score below that number are not shown.</string>
 			<key>label</key>
-			<string>Refresh Internal</string>
+			<string>Minimum Upvotes</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
-			<string>cache_age_threshold</string>
+			<string>min_upvotes</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -796,6 +834,27 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<string>checkbox</string>
 			<key>variable</key>
 			<string>save_scroll_position</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>15</string>
+				<key>placeholder</key>
+				<string>20</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>After this many minutes, the cache will be refreshed, and reading positions will be reset.</string>
+			<key>label</key>
+			<string>Refresh Internal</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>cache_age_threshold</string>
 		</dict>
 		<dict>
 			<key>config</key>
