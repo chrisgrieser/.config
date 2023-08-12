@@ -56,7 +56,7 @@ function getHackernewsPosts(oldItems) {
 				: "https://news.ycombinator.com/item?id=" + item.objectID;
 
 			// filter out jobs
-			if (item._tags.some((tag) => tag === "job")) return {};
+			if (item._tags.some((tag) => tag === "job")) return acc;
 
 			// age & visitation icon
 			const postIsOld = oldUrls.includes(commentUrl);
