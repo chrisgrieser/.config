@@ -1,23 +1,31 @@
-# ALIASES 
+# ALIASES
+
+# git
 alias co="git checkout"
 alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to last directory
 alias gs='git status'
 alias ga="ct git add"
-alias gm="git add -A && git commit --amend --no-edit" # a[m]end
-alias gM="git commit --amend"                         # amend + edit commit msg
+alias gM="git commit --amend" # amend + edit commit msg
 alias gc="git commit"
 alias push="ct git push"
 alias pull="ct git pull"
 alias g.='cd "$(git rev-parse --show-toplevel)"' # goto git root
 alias grh='git reset --hard'
 
+# github
 alias pr='gh pr create --web --fill'
 alias gi='gh issue list'                # open issues
 alias gI='gh issue list --state=closed' # closed issues
-
 alias rel='ct make --silent release'
 
 #───────────────────────────────────────────────────────────────────────────────
+
+# amend no-edit
+function gm() {
+	ct git add -A && git commit --amend --no-edit
+	separator
+	gitlog 4
+}
 
 # Github Url: open & copy url
 function gu() {
@@ -245,16 +253,16 @@ function nuke {
 	cd ..
 
 	command rm -rf "$local_repo_path"
-	printf "\033[1;34m-----------------------------------------------\n"
-	echo "Local repo removed."
-	echo "Cloning repo again from remote…"
-	printf "-----------------------------------------------\n\033[0m"
+	printf "\033[1;34mLocal repo removed."
+	printf "Cloning repo again from remote…\033[0m"
+	separator
 
-	# WARN depth=2 ensures that amending a shallow commit does not result in a
+	# WARN depth > 1 ensures that amending a shallow commit does not result in a
 	# new commit without parent, effectively destroying git history (!!)
-	git clone --depth=2 "$SSH_REMOTE" "$local_repo_path" &&
+	git clone --depth=5 "$SSH_REMOTE" "$local_repo_path" &&
 		cd "$local_repo_path" || return 1
 	separator
+	inspect
 }
 
 #───────────────────────────────────────────────────────────────────────────────

@@ -96,7 +96,7 @@ style = 'fg:yellow bg:black'
 [git_commit]
 style = "fg:purple bg:black"
 only_detached = true
-format = "[$hash]($style) "
+format = "[󰘬 $hash]($style) "
 
 # branch
 [git_branch]

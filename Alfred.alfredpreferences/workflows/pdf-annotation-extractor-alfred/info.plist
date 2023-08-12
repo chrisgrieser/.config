@@ -169,7 +169,7 @@ fi</string>
 				<key>scriptfile</key>
 				<string></string>
 				<key>type</key>
-				<integer>0</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -429,7 +429,7 @@ Extract Annotations as Markdown, insert Pandoc Citations with correct page numbe
 		<key>3069BB02-5E48-40CF-9DD8-337C5FA9F054</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>3</integer>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
@@ -438,7 +438,7 @@ Extract Annotations as Markdown, insert Pandoc Citations with correct page numbe
 		<key>546351AD-A982-43F7-9869-97C07EC801A3</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>7</integer>
 			<key>note</key>
 			<string>OneUpdater</string>
 			<key>xpos</key>
@@ -480,7 +480,7 @@ Extract Annotations as Markdown, insert Pandoc Citations with correct page numbe
 		<key>CD293D43-2356-49DB-AD4F-DBA5FDE026C5</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>3</integer>
 			<key>note</key>
 			<string>cheatsheet for PDF Annotation Extractor</string>
 			<key>xpos</key>
@@ -582,7 +582,7 @@ Extract Annotations as Markdown, insert Pandoc Citations with correct page numbe
 		</dict>
 	</array>
 	<key>version</key>
-	<string>8.8.0</string>
+	<string>8.8.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/chrisgrieser/pdf-annotation-extractor-alfred</string>
 </dict>

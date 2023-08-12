@@ -2,10 +2,11 @@
 # shellcheck disable=2154,2155
 
 # THESE VARIABLES MUST BE SET. SEE THE ONEUPDATER README FOR AN EXPLANATION OF EACH.
-readonly remote_info_plist='https://raw.githubusercontent.com/chrisgrieser/hyper-seek/main/info.plist'
-readonly workflow_url='https://github.com/chrisgrieser/hyper-seek/releases/latest/download/hyper-seek.alfredworkflow'
-readonly download_type='direct'
-readonly frequency_check='1'
+readonly repo_name=$(basename "$(git rev-parse --show-toplevel)")
+readonly remote_info_plist="https://raw.githubusercontent.com/chrisgrieser/$repo_name/main/info.plist"
+readonly workflow_url="https://github.com/chrisgrieser/$repo_name/releases/latest/download/$repo_name.alfredworkflow"
+readonly download_type="direct"
+readonly frequency_check="1"
 
 #───────────────────────────────────────────────────────────────────────────────
 
