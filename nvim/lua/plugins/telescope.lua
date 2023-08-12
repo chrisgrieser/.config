@@ -206,13 +206,6 @@ local function telescopeConfig()
 			},
 		},
 		extensions = {
-			issues = {
-				layout_config = {
-					horizontal = {
-						height = 0.9,
-					},
-				},
-			},
 			undo = {
 				entry_format = "#$ID ($STAT) $TIME",
 				layout_config = {
