@@ -55,8 +55,8 @@ return {
 		end,
 		opts = {
 			-- can be used to filter/redirect stuff
-			-- https://www.reddit.com/r/neovim/comments/12lf0ke/comment/jg6idvr/?utm_source=share&utm_medium=web2x&context=3
-			-- https://github.com/folke/noice.nvim#-routes
+			-- https://www.reddit.com/r/neovim/comments/12lf0ke/comment/jg6idvr/
+			-- DOCS https://github.com/folke/noice.nvim#-routes
 			routes = {
 				-- redirect stuff to the more subtle "mini"
 				{ filter = { event = "msg_show", find = "B written$" }, view = "mini" },
@@ -77,9 +77,7 @@ return {
 				{ filter = { event = "msg_show", find = "^?." }, skip = true },
 				{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
 
-				{ filter = { event = "msg_show", min_height = 12 }, view = "split" },
-				{ filter = { event = "msg_show", min_height = 12 }, view = "split" },
-				{ filter = { event = "notify", min_width = 50 }, view = "mini" },
+				{ filter = { event = "msg_show", min_height = 10 }, view = "split" },
 			},
 			cmdline = {
 				-- classic cmdline at the bottom to not obfuscate the buffer, e.g.
