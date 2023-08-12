@@ -154,3 +154,4 @@ Note
 subreddits
 hackernews
 ⌘Y
+addon
