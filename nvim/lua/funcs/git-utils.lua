@@ -160,19 +160,39 @@ function M.amendAndPushForce(prefillMsg)
 end
 
 ---@param prefillMsg? string
-function M.addCommitPush(prefillMsg)
+function M.commit(prefillMsg)
 	output = {}
-	vim.cmd.update()
+	vim.cmd("silent update")
 	if not isInGitRepo() then return end
 	if not prefillMsg then prefillMsg = "" end
 	hlTooLongCommitMsgs(true)
 
 	vim.ui.input({ prompt = " 󰊢 Commit Message", default = prefillMsg }, function(commitMsg)
 		hlTooLongCommitMsgs(false) -- early, so also done on cancellation
-
 		if not commitMsg then return end -- aborted input modal
 		local validMsg, newMsg = processCommitMsg(commitMsg)
+		if not validMsg then -- if msg invalid, run again to fix the msg
+			M.addCommitPush(newMsg)
+			return
+		end
 
+		vim.notify('󰊢 git commit\n"' .. newMsg .. '"')
+		fn.system("git commit -m '" .. newMsg .. "'")
+	end)
+end
+
+---@param prefillMsg? string
+function M.addCommitPush(prefillMsg)
+	output = {}
+	vim.cmd("silent update")
+	if not isInGitRepo() then return end
+	if not prefillMsg then prefillMsg = "" end
+	hlTooLongCommitMsgs(true)
+
+	vim.ui.input({ prompt = " 󰊢 Commit Message", default = prefillMsg }, function(commitMsg)
+		hlTooLongCommitMsgs(false) -- early, so also done on cancellation
+		if not commitMsg then return end -- aborted input modal
+		local validMsg, newMsg = processCommitMsg(commitMsg)
 		if not validMsg then -- if msg invalid, run again to fix the msg
 			M.addCommitPush(newMsg)
 			return

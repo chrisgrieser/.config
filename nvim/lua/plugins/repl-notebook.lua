@@ -7,7 +7,7 @@ return {
 			{ "<leader>ii", desc = "󱠤 REPL: Send Line" },
 		},
 		init = function()
-			require("which-key").register { mode = { "n" }, ["<leader>i"] = { name = " 󱠤 Iron-REPL" } }
+			require("which-key").register { ["<leader>i"] = { name = " 󱠤 Iron-REPL" } }
 		end,
 		config = function()
 			require("iron.core").setup {
