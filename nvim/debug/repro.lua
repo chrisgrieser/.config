@@ -1,13 +1,8 @@
 local plugins = {
-	-- {
-	-- 	"williamboman/mason-lspconfig.nvim",
-	-- 	dependencies = { "williamboman/mason.nvim", opts = true },
-	-- 	opts = { ensure_installed = { "lua_ls" } },
-	-- },
-	-- {
-	-- 	"neovim/nvim-lspconfig",
-	-- 	init = function() require("lspconfig")["lua_ls"].setup{} end,
-	-- },
+	{
+		"Mofiqul/trld.nvim",
+		config = true,
+	},
 }
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

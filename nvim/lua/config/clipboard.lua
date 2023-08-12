@@ -55,19 +55,19 @@ end, { desc = " Paste charwise", expr = true })
 
 -- yanking without moving the cursor
 autocmd({ "CursorMoved", "VimEnter" }, {
-	callback = function() vim.g.cursorPreYank = u.getCursor(0) end,
+	callback = function() g.cursorPreYank = u.getCursor(0) end,
 })
 
 -- - sticky yanking (without moving the cursor)
 -- - highlighted yank
-autocmd("TextYankPost", {
-	callback = function()
-		-- highlighted yank
-		vim.highlight.on_yank { timeout = 1500 }
-
-		if fn.reg_recording() ~= "" or fn.reg_executing() ~= "" then return end
-
-		-- sticky cursor
-		if vim.v.event.operator == "y" then u.setCursor(0, g.cursorPreYank) end
-	end,
-})
+-- autocmd("TextYankPost", {
+-- 	callback = function()
+-- 		-- highlighted yank
+-- 		vim.highlight.on_yank { timeout = 1500 }
+--
+-- 		if fn.reg_recording() ~= "" or fn.reg_executing() ~= "" then return end
+--
+-- 		-- sticky cursor
+-- 		-- if vim.v.event.operator == "y" then u.setCursor(0, g.cursorPreYank) end
+-- 	end,
+-- })
