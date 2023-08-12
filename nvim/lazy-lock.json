@@ -96,7 +96,6 @@
   "text-case.nvim": { "branch": "main", "commit": "cd7cc65a412beb713e68f3b84e45990a939b7b6b" },
   "tree-setter": { "branch": "master", "commit": "ec4132e58866041e76dba7a34288b27076855de1" },
   "treesj": { "branch": "main", "commit": "00b382dc81eefaf42ad50a521e368f9057815bfb" },
-  "trld.nvim": { "branch": "main", "commit": "f9955514afd0af8cbbf81506265adbcb56b953fa" },
   "vim-applescript": { "branch": "master", "commit": "a39af8fc7e4caf581366e2917d558f6232e4db36" },
   "vim-css3-syntax": { "branch": "main", "commit": "f933340233bee932d152ea16d551ece96f39ea41" },
   "vim-log-highlighting": { "branch": "master", "commit": "1037e26f3120e6a6a2c0c33b14a84336dee2a78f" },

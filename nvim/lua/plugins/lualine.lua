@@ -129,23 +129,25 @@ vim.api.nvim_create_autocmd("FileType", {
 ---@nodiscard
 local function currentFile()
 	local maxLen = 25
+
+	local ext = fn.expand("%:e")
+	local ft = bo.filetype
 	local name = fn.expand("%:t")
 	-- prefix `#` for octo buffers
-	if bo.filetype == "octo" and name:find("^%d$") then
+	if ft == "octo" and name:find("^%d$") then
 		name = "#" .. name
-	elseif bo.filetype == "TelescopePrompt" then
+	elseif ft == "TelescopePrompt" then
 		name = "Telescope"
 	end
 
 	local deviconsInstalled, devicons = pcall(require, "nvim-web-devicons")
-	local icon = deviconsInstalled and devicons.get_icon(name, bo.filetype) or ""
+	require("nvim-web-devicons").get_icon("bla.js", "js")
+	local ftOrExt = ext ~= "" and ext or ft
+	local icon = deviconsInstalled and devicons.get_icon(name, ftOrExt) or ""
 
 	-- truncate
 	local nameNoExt = name:gsub("%.%w+$", "")
-	if #nameNoExt > maxLen then
-		local ext = name:match("%.%w+$")
-		name = nameNoExt:sub(1, maxLen) .. "…" .. ext
-	end
+	if #nameNoExt > maxLen then name = nameNoExt:sub(1, maxLen) .. "…" .. ext end
 
 	return icon .. " " .. name
 end
