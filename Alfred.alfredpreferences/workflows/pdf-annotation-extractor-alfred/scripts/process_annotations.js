@@ -449,9 +449,9 @@ function writeNote(annos, metad, outputPath, tagsForYaml) {
 
 	// yaml frontmatter
 	const yamlKeys = [
-		`aliases: "${metad.title}"`,
+		`aliaseses: "${metad.title}"`,
 		`tags: [literature-note, ${tagsForYaml}]`,
-		"cssclass: pdf-annotations",
+		"cssclasses: pdf-annotations",
 		`citekey: ${metad.citekey}`,
 		`year: ${metad.year.toString()}`,
 		`author: ${authorStr}`,
@@ -463,7 +463,7 @@ function writeNote(annos, metad, outputPath, tagsForYaml) {
 	if (metad.doi) yamlKeys.push(`doi: ${metad.doi}`);
 
 	const isoToday = new Date().toISOString().slice(0, 10);
-	yamlKeys.push(`extractionDate: ${isoToday}`);
+	yamlKeys.push(`cdate: ${isoToday}`);
 
 	// write note
 	const noteContent = `---
