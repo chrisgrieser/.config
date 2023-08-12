@@ -131,7 +131,11 @@ local function currentFile()
 	local maxLen = 25
 	local name = fn.expand("%:t")
 	-- prefix `#` for octo buffers
-	if bo.filetype == "octo" and name:find("^%d$") then name = "#" .. name end
+	if bo.filetype == "octo" and name:find("^%d$") then
+		name = "#" .. name
+	elseif bo.filetype == "TelescopePrompt" then
+		name = "Telescope"
+	end
 
 	local deviconsInstalled, devicons = pcall(require, "nvim-web-devicons")
 	local icon = deviconsInstalled and devicons.get_icon(name, bo.filetype) or ""
@@ -190,16 +194,6 @@ local lualineConfig = {
 	sections = {
 		lualine_a = {
 			{ currentFile },
-			-- {
-			-- 	"filetype",
-			-- 	colored = false,
-			-- 	padding = { left = 1, right = 0 },
-			-- 	icon_only = true,
-			-- },
-			-- {
-			-- 	"filename",
-			-- 	file_status = false,
-			-- },
 		},
 		lualine_b = {
 			{ require("funcs.alt-alt").altFileStatusline },
@@ -236,7 +230,6 @@ local lualineConfig = {
 	options = {
 		refresh = { statusline = 1000 },
 		ignore_focus = {
-			"TelescopePrompt",
 			"DressingInput",
 			"DressingSelect",
 			"ccc-ui",

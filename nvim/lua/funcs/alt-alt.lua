@@ -67,6 +67,9 @@ function M.altFileStatusline()
 		local deviconsInstalled, devicons = pcall(require, "nvim-web-devicons")
 		icon = deviconsInstalled and devicons.get_icon(altFile, altBufFt) or "#"
 
+		-- prefix `#` for octo buffers
+		if altBufFt == "octo" and name:find("^%d$") then name = "#" .. name end
+
 		-- same name, different file: append parent of altfile
 		if curFile == altFile then
 			local altParent = fn.expand("#:p:h:t")

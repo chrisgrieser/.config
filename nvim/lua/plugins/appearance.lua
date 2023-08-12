@@ -188,6 +188,7 @@ return {
 				lazy = { icon = "󰒲", name = "lazy.nvim" },
 				mason = { icon = "", name = "mason.nvim" },
 				octo = { icon = "", name = "octo.nvim" },
+				TelescopePrompt = { icon = "", name = "Telescope" },
 			},
 		},
 	},
