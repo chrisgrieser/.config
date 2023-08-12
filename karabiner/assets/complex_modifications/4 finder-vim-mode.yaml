@@ -669,15 +669,25 @@ rules:
           # path of the target, while "selection as text" returns the path of
           # the symlink (which is desired here)
           - shell_command: |
-              selection=$(osascript -e 'tell application "Finder" to return POSIX path of (item 1 of (get selection) as text)' | sed 's|/$||' )
-              lastFourChars=$(echo "$selection" | rev | cut -c-4 | rev) # bash expansion does not work in karabiner
-              if [[ "$lastFourChars" == "-bkp" ]]; then
-                newName=$(echo "$selection" | rev | cut -c5- | rev)
-              else
-                newName="${selection}-bkp"
-              fi
-              mv -n "$selection" "$newName"
-              open -R "$newName"
+              selectedFiles=$(osascript -e '
+                tell application "Finder" to set selectedFiles to (every item of (get selection))
+                set out to ""
+                repeat with theFile in selectedFiles
+                  set out to out & (POSIX path of (theFile as text)) & linefeed
+                end repeat
+                return out
+              ')
+              [[ -z "$selectedFiles" ]] && return 1
+
+              echo "$selectedFiles" | sed -e 's|/$||' -e '/^$/d' | while read -r file; do
+                lastFourChars=$(echo "$file" | rev | cut -c-4 | rev) # bash expansion does not work in karabiner
+                if [[ "$lastFourChars" == "-bkp" ]]; then
+                  newName=$(echo "$file" | rev | cut -c5- | rev)
+                else
+                  newName="${file}-bkp"
+                fi
+                mv -n "$file" "$newName"
+              done
               afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/begin_record.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # s = Create Symlink
