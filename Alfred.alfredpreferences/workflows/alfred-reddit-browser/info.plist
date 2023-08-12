@@ -926,7 +926,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<string>enabled</string>
 			</dict>
 			<key>description</key>
-			<string>This makes hackernews appear in the list of subreddits, treating it as if it was another subreddit.</string>
+			<string>This makes hackernews appear in the list of subreddits, treating it as if it was another subreddit. The reddit-specific settings are apply to the hackernews feed.</string>
 			<key>label</key>
 			<string>Add hackernews</string>
 			<key>type</key>
