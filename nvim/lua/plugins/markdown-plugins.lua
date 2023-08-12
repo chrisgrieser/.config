@@ -21,7 +21,7 @@ return {
 		build = "cd app && npm install",
 		init = function()
 			vim.g.mkdp_preview_options = {
-				disable_sync_scroll = 1,
+				disable_sync_scroll = 0,
 			}
 		end,
 	},
