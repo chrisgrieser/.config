@@ -17,7 +17,7 @@ alias pr='gh pr create --web --fill'
 alias gi='gh issue list'                # open issues
 alias gI='gh issue list --state=closed' # closed issues
 
-alias rel='ct make release'
+alias rel='ct make --silent release'
 
 #───────────────────────────────────────────────────────────────────────────────
 
