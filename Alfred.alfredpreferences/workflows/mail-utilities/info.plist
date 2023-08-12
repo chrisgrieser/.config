@@ -21,26 +21,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>5C8886D1-2795-4EFC-8DE6-360FD2F1AF29</key>
-		<array/>
 		<key>5F4417F9-1E15-4514-8C37-FEBEE68D292A</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>95028977-E511-4F96-8A31-8A1EA3939515</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>8E378CEC-2381-4945-B509-8F91DBB1D22C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>5C8886D1-2795-4EFC-8DE6-360FD2F1AF29</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -89,6 +74,50 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>919C67AD-F9F2-4691-A835-0E3807CABF9F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>tell application "Brave Browser"	set tabUrl to URL of active tab of front window	set tabTitle to title of active tab of front windowend tellset tabSelection to "{query}"set mailto_command to "?subject=FYI: " &amp; tabTitle &amp; "&amp;body="if (tabSelection is not "") then set mailto_command to mailto_command &amp; "\"" &amp; tabSelection &amp; "\"" &amp; "\n\n"return mailto_command &amp; tabUrl</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>send-mail.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>F48BFF3F-8FB4-4AB7-898D-6636EC60112C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -125,50 +154,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>tell application "Brave Browser"	set tabUrl to URL of active tab of front window	set tabTitle to title of active tab of front windowend tellset tabSelection to "{query}"set mailto_command to "?subject=FYI: " &amp; tabTitle &amp; "&amp;body="if (tabSelection is not "") then set mailto_command to mailto_command &amp; "\"" &amp; tabSelection &amp; "\"" &amp; "\n\n"return mailto_command &amp; tabUrl</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>send-mail.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>F48BFF3F-8FB4-4AB7-898D-6636EC60112C</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>919C67AD-F9F2-4691-A835-0E3807CABF9F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>matchmode</key>
 				<integer>1</integer>
 				<key>matchstring</key>
@@ -186,6 +171,30 @@
 			<string>F1646853-4BE7-44BE-985F-9282246BAFCA</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>mailto:?body=
+
+Viele Grüße
+Chris</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>95028977-E511-4F96-8A31-8A1EA3939515</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -223,74 +232,6 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>mailto:?body=
-
-Viele Grüße
-Chris</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>95028977-E511-4F96-8A31-8A1EA3939515</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>temp-mail.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>5C8886D1-2795-4EFC-8DE6-360FD2F1AF29</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>temp||mail</string>
-				<key>subtext</key>
-				<string>Copies random mail &amp; password</string>
-				<key>text</key>
-				<string>Temporary Email</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>8E378CEC-2381-4945-B509-8F91DBB1D22C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -307,15 +248,6 @@ Chris</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
-		<key>5C8886D1-2795-4EFC-8DE6-360FD2F1AF29</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>185</real>
-			<key>ypos</key>
-			<real>325</real>
-		</dict>
 		<key>5F4417F9-1E15-4514-8C37-FEBEE68D292A</key>
 		<dict>
 			<key>colorindex</key>
@@ -326,15 +258,6 @@ Chris</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>165</real>
-		</dict>
-		<key>8E378CEC-2381-4945-B509-8F91DBB1D22C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>325</real>
 		</dict>
 		<key>919C67AD-F9F2-4691-A835-0E3807CABF9F</key>
 		<dict>
