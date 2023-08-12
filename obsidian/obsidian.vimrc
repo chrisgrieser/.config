@@ -19,6 +19,7 @@ nmap Y y$
 " HACK to avoid recursion since Obsidian vimrc does not support noremap
 nmap x "_dl
 nmap C "_d$a
+nmap cc "_ddO
 
 """"""""""""""""""""""
 " Search

@@ -8,12 +8,6 @@ local plugins = {
 	-- 	"neovim/nvim-lspconfig",
 	-- 	init = function() require("lspconfig")["lua_ls"].setup{} end,
 	-- },
-	{
-		"chrisgrieser/nvim-various-textobjs",
-		lazy = false,
-		dev = true,
-		opts = { useDefaultKeymaps = true },
-	},
 }
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
