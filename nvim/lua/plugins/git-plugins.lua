@@ -10,7 +10,7 @@ return {
 		init = function()
 			-- autocomplete for @ and #
 			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "octo",
+				pattern = { "octo", "NeogitCommitMessage" },
 				callback = function()
 					vim.keymap.set("i", "@", "@<C-x><C-o>", { silent = true, buffer = true })
 					vim.keymap.set("i", "#", "#<C-x><C-o>", { silent = true, buffer = true })
@@ -61,6 +61,7 @@ return {
 			signs = {
 				section = { "", "" },
 				item = { "", "" },
+				hunk = { "", "" },
 			},
 			mappings = {
 				status = { ["<D-w>"] = "Close" },
