@@ -233,8 +233,8 @@ keymap("n", "<leader>ow", function()
 	if wrapOn then
 		vim.opt_local.wrap = false
 		vim.opt_local.colorcolumn = vim.opt.colorcolumn:get()
-		vim.keymap.del("n", "A", { buffer = true })
-		vim.keymap.del("n", "I", { buffer = true })
+		pcall(vim.keymap.del, "n", "A", { buffer = true })
+		pcall(vim.keymap.del, "n", "I", { buffer = true })
 	else
 		vim.opt_local.wrap = true
 		vim.opt_local.colorcolumn = ""

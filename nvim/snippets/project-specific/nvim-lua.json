@@ -7,7 +7,7 @@
 		"prefix": "utils (require)",
 		"body": "local u = require(\"config.utils\")"
 	},
-	"keymap (multi mode)": {
+	"keymap (multi-mode)": {
 		"prefix": "keymap (multi-mode)",
 		"body": "keymap({ \"n\", \"x\" }, \"${1:LHS}\", ${2:\"RHS\"}, { desc = \"$3\" })"
 	},
@@ -69,7 +69,7 @@
 	"autocmd (FileType)": {
 		"prefix": "autocmd (FileType)",
 		"body": [
-			"autocmd(\"FileType\", {",
+			"vim.api.nvim_create_autocmd(\"FileType\", {",
 			"\tpattern = \"${2:ft}\",",
 			"\tcallback = function()",
 			"\t\t$3",

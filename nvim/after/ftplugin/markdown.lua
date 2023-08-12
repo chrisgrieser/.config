@@ -1,10 +1,8 @@
 local keymap = vim.keymap.set
 local fn = vim.fn
-local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 -- Enable wrapping lines
--- needs to be wrapped in a condition, probably due to some recursion thing
 vim.opt_local.wrap = true
 vim.opt_local.colorcolumn = ""
 keymap("n", "A", "g$a", { buffer = true })
@@ -22,7 +20,7 @@ vim.opt_local.conceallevel = 2
 --------------------------------------------------------------------------------
 
 -- Open in Obsidian
-keymap("n", "<D-S-l>", function()
+keymap("n", "<D-5>", function()
 	local filepath = fn.expand("%:p")
 	local isInMainVault = vim.startswith(filepath, vim.env.VAULT_PATH)
 	if not isInMainVault then
@@ -47,7 +45,7 @@ keymap({ "o", "x" }, "iE", "<cmd>lua require('various-textobjs').mdFencedCodeBlo
 keymap({ "o", "x" }, "aE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock(false)<CR>", { desc = "outer md code block textobj", buffer = true })
 
 -- Format Table
-keymap("n", "<leader>q", "vip:!pandoc -t commonmark_x<CR><CR>", { desc = "  Format Table", buffer = true })
+keymap("n", "<leader>q", "vip:!pandoc -t commonmark_x<CR><CR>", { desc = "  Format Table under Cursor", buffer = true })
 
 -- Heading jump to next/prev heading
 keymap({ "n", "x" }, "<C-j>", [[/^#\+ <CR><cmd>nohl<CR>]], { desc = " # Next Heading", buffer = true })

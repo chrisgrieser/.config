@@ -54,16 +54,16 @@ return {
 		dependencies = "nvim-lua/plenary.nvim",
 		cmd = "Neogit",
 		opts = {
-			disable_insert_on_commit = false, -- false = start commit msgs in insert mode
+			disable_insert_on_commit = "auto", -- insert only if commit msg empty
 			disable_commit_confirmation = true,
 			disable_builtin_notifications = true,
-			integrations = { diffview = true },
+			remember_settings = true,
 			signs = {
 				section = { "", "" },
 				item = { "", "" },
 			},
 			mappings = {
-				status = { ["<D-w>"] = "close" },
+				-- status = { ["<D-w>"] = "Close" },
 			},
 		},
 	},
