@@ -41,12 +41,8 @@ return {
 
 			-- Toggle Log
 			vim.keymap.set({ "n", "x", "i" }, "<D-0>", function()
-				if vim.bo.filetype ~= "noice" then
-					vim.cmd.Noice("dismiss")
-					vim.cmd.Noice("history")
-				else
-					vim.cmd.close()
-				end
+				vim.cmd.Noice("dismiss")
+				vim.cmd.Noice("history")
 			end, { desc = "󰎟 Notification Log" })
 		end,
 		opts = {
@@ -89,17 +85,17 @@ return {
 			-- https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua
 			view = {
 				mini = { timeout = 3000 },
-				split = {
-					size = "30%",
-					close = { keys = { "q", "<D-w>", "<D-0>" } },
-				},
 			},
 			commands = {
 				-- options for `:Noice history`
 				history = {
 					view = "split",
-					opts = { enter = true },
 					filter_opts = { reverse = true }, -- show newest entries first
+					opts = {
+						enter = true,
+						size = "30%",
+						close = { keys = { "q", "<D-w>", "<D-0>" } },
+					},
 				},
 			},
 
