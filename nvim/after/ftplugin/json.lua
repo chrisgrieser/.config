@@ -6,10 +6,15 @@ local u = require("config.utils")
 -- hides quotes, making it more readable
 vim.opt_local.conceallevel = 2 
 
+local function leaveVisualMode()
+	local escKey = vim.api.nvim_replace_termcodes("<Esc>", false, true, true)
+	vim.api.nvim_feedkeys(escKey, "nx", false)
+end
+
 -- escape stuff properly for VS Code Style snippet
 keymap("n", "<leader>q", function()
 	u.normal("'[v']") -- select last paste
-	u.leaveVisualMode() -- -> sets '<,'> marks
+	leaveVisualMode() -- -> sets '<,'> marks
 	cmd([['<,'>s/\\/\\\\/ge]]) -- escape the escaping backslashes
 	cmd([['<,'>s/"/\\"/ge]]) -- escape the double quotes
 	cmd([['<,'>s/^\(\s*\)\(.*\)/\1"\2",/e]]) -- surround non-whitespace with quotes and comma

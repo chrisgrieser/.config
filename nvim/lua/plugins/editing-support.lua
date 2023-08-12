@@ -129,7 +129,7 @@ return {
 		},
 		opts = {
 			ring = { history_length = 20 },
-			highlight = { timer = 500 },
+			highlight = { timer = 1000 },
 		},
 		-- IncSearch is the default highlight group for post-yank highlights
 		init = function()
