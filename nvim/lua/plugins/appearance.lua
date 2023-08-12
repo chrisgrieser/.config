@@ -94,7 +94,7 @@ return {
 				-- options for `:Noice history`
 				history = {
 					view = "split",
-					opts = { enter = false }, -- do not enter on entry
+					opts = { enter = true },
 					filter_opts = { reverse = true }, -- show newest entries first
 				},
 			},
