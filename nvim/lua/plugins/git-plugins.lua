@@ -10,36 +10,47 @@ return {
 		init = function()
 			-- autocomplete for @ and #
 			vim.api.nvim_create_autocmd("FileType", {
-				pattern = { "octo", "NeogitCommitMessage" },
+				pattern = "octo",
 				callback = function()
 					vim.keymap.set("i", "@", "@<C-x><C-o>", { silent = true, buffer = true })
 					vim.keymap.set("i", "#", "#<C-x><C-o>", { silent = true, buffer = true })
+					vim.opt_local.signcolumn = "yes:5" -- more readable
 				end,
 			})
+
+			require("which-key").register {
+				["<leader>ö"] = { name = "  Octo" },
+				["<leader>ör"] = { name = "  React" },
+			}
 		end,
 		opts = {
 			-- https://github.com/pwntester/octo.nvim#%EF%B8%8F-configuration
-			ui = { use_signcolumn = true }, -- show "modified" marks on the sign column
+			ui = { use_signcolumn = true }, -- pending: https://github.com/pwntester/octo.nvim/issues/80
+			issues = { order_by = { field = "UPDATED_AT" } }, -- COMMENTS|CREATED_AT|UPDATED_AT
+			pull_requests = { order_by = { field = "UPDATED_AT" } },
+
 			mappings = {
 				issue = {
-					close_issue = { lhs = "<leader>ic", desc = " close issue" },
-					reopen_issue = { lhs = "<leader>io", desc = " reopen issue" },
-					list_issues = { lhs = "<leader>gi", desc = " list open issues on same repo" },
-					reload = { lhs = "<D-r>", desc = " reload issue" },
-					open_in_browser = { lhs = "<leader>gu", desc = " open issue in browser" },
-					copy_url = { lhs = "<leader>gU", desc = " copy url to system clipboard" },
-					add_comment = { lhs = "<leader>ca", desc = " add comment" },
-					delete_comment = { lhs = "<leader>cd", desc = " delete comment" },
-					next_comment = { lhs = "gc", desc = " go to next comment" },
-					prev_comment = { lhs = "gC", desc = " go to previous comment" },
-					react_hooray = { lhs = "<leader>rp", desc = " add/remove 🎉 reaction" },
-					react_heart = { lhs = "<leader>rh", desc = " add/remove ❤️ reaction" },
-					react_eyes = { lhs = "<leader>re", desc = " add/remove 👀 reaction" },
-					react_thumbs_up = { lhs = "<leader>r+", desc = " add/remove 👍 reaction" },
-					react_thumbs_down = { lhs = "<leader>r-", desc = " add/remove 👎 reaction" },
-					react_rocket = { lhs = "<leader>rr", desc = " add/remove 🚀 reaction" },
-					react_laugh = { lhs = "<leader>rl", desc = " add/remove 😄 reaction" },
-					react_confused = { lhs = "<leader>rc", desc = " add/remove 😕 reaction" },
+					close_issue = { lhs = "<leader>öc", desc = " Close issue" },
+					reopen_issue = { lhs = "<leader>öo", desc = " Reopen issue" },
+					reload = { lhs = "<leader>öi", desc = " Reload issue" },
+					open_in_browser = { lhs = "<leader>öu", desc = " Open in browser" },
+					copy_url = { lhs = "<leader>öU", desc = " Copy URL" },
+					add_comment = { lhs = "<leader>öc", desc = " Add comment" },
+					delete_comment = { lhs = "<leader>öC", desc = " Delete comment" },
+					next_comment = { lhs = "gc", desc = " Goto next comment" },
+					prev_comment = { lhs = "gC", desc = " Goto prev comment" },
+					add_label = { lhs = "<space>öl", desc = " Add label" },
+					remove_label = { lhs = "<space>öL", desc = " Remove label" },
+
+					react_hooray = { lhs = "<leader>örp", desc = " Toggle 🎉" },
+					react_heart = { lhs = "<leader>örh", desc = " Toggle ❤️" },
+					react_eyes = { lhs = "<leader>öre", desc = " Toggle 👀" },
+					react_thumbs_up = { lhs = "<leader>ör+", desc = " Toggle 👍" },
+					react_thumbs_down = { lhs = "<leader>ör-", desc = " Toggle 👎" },
+					react_rocket = { lhs = "<leader>örr", desc = " Toggle 🚀" },
+					react_laugh = { lhs = "<leader>örl", desc = " Toggle 😄" },
+					react_confused = { lhs = "<leader>örc", desc = " Toggle 😕" },
 				},
 			},
 		},

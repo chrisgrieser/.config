@@ -341,7 +341,7 @@ keymap("n", "gs", function() cmd.Telescope("treesitter") end, { desc = " Docu
 
 -- Save & Format
 keymap({ "n", "x", "i" }, "<D-s>", function()
-	vim.lsp.buf.format()
+	if vim.bo.buftype == "" then vim.lsp.buf.format() end
 	cmd.update()
 end, { desc = "󰒕  Save & Format" })
 

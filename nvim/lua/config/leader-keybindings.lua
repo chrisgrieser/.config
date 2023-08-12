@@ -162,7 +162,6 @@ end
 
 -- Neogit
 keymap("n", "<leader>gn", cmd.Neogit, { desc = "󰊢 Neogit Menu" })
-keymap("n", "<leader>gc", "<cmd>Neogit commit<CR>", { desc = "󰊢 Commit (Neogit)" })
 
 -- Gitsigns
 keymap("n", "<leader>ga", "<cmd>Gitsigns stage_hunk<CR>", { desc = "󰊢 Add Hunk" })
@@ -178,12 +177,14 @@ keymap("n", "<leader>gb", function() cmd.Telescope("git_branches") end, { desc =
 
 -- My utils
 keymap({ "n", "x" }, "<leader>gu", function () require("funcs.git-utils").githubUrl() end, { desc = "󰊢 GitHub Link (file)" })
+keymap("n", "<leader>gc", function() require("funcs.git-utils").commit() end, { desc = "󰊢 Commit" })
 keymap("n", "<leader>gg", function() require("funcs.git-utils").addCommitPush() end, { desc = "󰊢 Add-Commit-Push" })
+keymap("n", "<leader>gm", function() require("funcs.git-utils").amendNoEditPushForce() end, { desc = "󰊢 Amend-No-Edit & Force Push" })
+keymap("n", "<leader>gM", function() require("funcs.git-utils").amendAndPushForce() end, { desc = "󰊢 Amend & Force Push" })
+
 keymap("n", "<leader>gi", function() cmd.Octo({"issue", "list"}) end, { desc = " Open Issues" })
 keymap("n", "<leader>gI", function() cmd.Octo({"issue", "list", "states=CLOSED"}) end, { desc = " Closed Issues" })
 keymap("n", "<leader>gp", function() cmd.Octo({"pr", "list"}) end, { desc = " Open PRs" })
-keymap("n", "<leader>gm", function() require("funcs.git-utils").amendNoEditPushForce() end, { desc = "󰊢 Amend-No-Edit & Force Push" })
-keymap("n", "<leader>gM", function() require("funcs.git-utils").amendAndPushForce() end, { desc = "󰊢 Amend & Force Push" })
 -- stylua: ignore end
 
 -- Diffview
