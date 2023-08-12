@@ -49,7 +49,7 @@
 	"autocmd": {
 		"prefix": "autocmd (short)",
 		"body": [
-			"autocmd(\"${1|BufReadPost,ColorScheme,VeryLazy|}\", {",
+			"autocmd(\"${1|BufReadPost,ColorScheme|}\", {",
 			"\tcallback = function()",
 			"\t\t$0",
 			"\tend,",
@@ -59,7 +59,7 @@
 	"autocmd (unabbr)": {
 		"prefix": "autocmd (unabbr)",
 		"body": [
-			"vim.api.nvim_create_autocmd(\"${1|BufReadPost,VimEnter,UIEnter,BufReadPre,CmdlineEnter,LspAttach,WinEnter,FocusGained,FocusLost,WinLeave,BufLeave,BufWritePre,BufWritePost|}\", {",
+			"autocmd(\"${1|BufReadPost,ColorScheme|}\", {",
 			"\tcallback = function()",
 			"\t\t$0",
 			"\tend,",

@@ -5,7 +5,9 @@ return {
 	{ -- diagnostics in the top instead of virtual lines. More stable than diagflow
 		"Mofiqul/trld.nvim",
 		event = "LspAttach",
-		init = function() vim.diagnostic.config { virtual_text = false } end,
+		init = function()
+			vim.defer_fn(function() vim.diagnostic.config { virtual_text = false } end, 1)
+		end,
 		opts = {
 			highlights = {
 				error = "DiagnosticVirtualTextError",
@@ -17,7 +19,7 @@ return {
 				local padRight = 3
 				local hlBySeverity = require("trld.utils").get_hl_by_serverity
 				local fmt_line = u.diagnosticFmt(diag)
-				local lines = { { { fmt_line .. (" "):rep(padRight), hlBySeverity(diag.severity) } } }
+				local lines = { { { " " .. fmt_line .. (" "):rep(padRight), hlBySeverity(diag.severity) } } }
 				return lines
 			end,
 		},

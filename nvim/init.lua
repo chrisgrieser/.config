@@ -28,7 +28,6 @@ safeRequire("config.options-and-autocmds")
 safeRequire("config.keybindings")
 safeRequire("config.leader-keybindings")
 safeRequire("config.textobject-keymaps")
-safeRequire("config.clipboard")
 
 safeRequire("config.user-commands")
 safeRequire("config.abbreviations")

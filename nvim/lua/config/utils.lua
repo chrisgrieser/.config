@@ -15,26 +15,6 @@ M.setCursor = vim.api.nvim_win_set_cursor
 ---@param cmdStr string
 function M.normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
-function M.leaveVisualMode()
-	local escKey = vim.api.nvim_replace_termcodes("<Esc>", false, true, true)
-	vim.api.nvim_feedkeys(escKey, "nx", false)
-end
-
----reads the full file
----@param filePath string
----@nodiscard
----@return string|nil file content or nil when not reading no successful
-function M.readFile(filePath)
-	local file, err = io.open(filePath, "r")
-	if not file then
-		vim.notify_once("Could not read: " .. err, vim.log.levels.ERROR)
-		return
-	end
-	local content = file:read("*a")
-	file:close()
-	return content
-end
-
 ---@param str string
 ---@param filePath string line(s) to add
 ---@nodiscard
@@ -114,7 +94,6 @@ end
 M.textobjectRemaps = {
 	c = "}", -- [c]urly brace
 	r = "]", -- [r]ectangular bracket
-	b = ")", -- [b]racket
 	m = "W", -- [m]assive word
 	q = '"', -- [q]uote
 	z = "'", -- [z]ingle quote
