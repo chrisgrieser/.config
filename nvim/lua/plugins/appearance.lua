@@ -38,6 +38,7 @@ return {
 		init = function()
 			-- Open Log & Scroll to most recent message
 			vim.keymap.set({ "n", "x", "i" }, "<D-0>", function()
+				require("notify").dismiss()
 				vim.cmd.Noice("history")
 				vim.defer_fn(function() u.normal("G") end, 1)
 			end, { desc = "󰎟 Notification Log" })
@@ -47,7 +48,6 @@ return {
 				pattern = "noice",
 				callback = function()
 					pcall(vim.api.nvim_buf_set_name, 0, "Noice History")
-					vim.opt_local.list = false
 					vim.keymap.set("n", "<D-w>", vim.cmd.bdelete, { buffer = true, desc = " Close" })
 					vim.keymap.set("n", "<D-0>", vim.cmd.bdelete, { buffer = true, desc = " Close" })
 				end,

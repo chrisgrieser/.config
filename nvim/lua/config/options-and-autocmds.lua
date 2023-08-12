@@ -131,10 +131,7 @@ opt.smartindent = true
 
 -- invisible chars
 opt.list = true
-opt.fillchars = {
-	eob = " ",
-	fold = " ",
-}
+opt.fillchars = { eob = " ", fold = " " }
 opt.listchars = {
 	nbsp = "󰚌",
 	precedes = "…",
@@ -144,19 +141,27 @@ opt.listchars = {
 	lead = "·",
 }
 
+-- no list chars in special buffers
+autocmd("BufNew", {
+	callback = function()
+		if bo.buftype ~= "" then opt_local.list = false end
+	end,
+})
+
 autocmd("BufReadPost", {
 	callback = function()
-		-- run delayed, to ensure it runs after `:GuessIndent`
 		vim.defer_fn(function()
 			opt_local.listchars = vim.opt_global.listchars:get() -- copy the global
-			if bo.expandtab then
+			if bo.buftype == "nofile" then 
+				opt_local.list = false -- no list chars in special buffers
+			elseif bo.expandtab then
 				opt_local.listchars:append { tab = "↹ " }
 				opt_local.listchars:append { lead = " " }
 			else
 				opt_local.listchars:append { tab = "  " }
 				opt_local.listchars:append { lead = "·" }
 			end
-		end, 5)
+		end, 5) -- delayed to ensure it runs after `:GuessIndent`
 	end,
 })
 
@@ -170,13 +175,3 @@ autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
-
--- Add missing buffer names, e.g. for status bar
-autocmd("FileType", {
-	pattern = { "lazy", "mason" },
-	callback = function()
-		local name = vim.fn.expand("<amatch>")
-		name = name:sub(1, 1):upper() .. name:sub(2) -- capitalize
-		vim.api.nvim_buf_set_name(0, name)
-	end,
-})

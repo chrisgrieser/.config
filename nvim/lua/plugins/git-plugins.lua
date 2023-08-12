@@ -63,7 +63,7 @@ return {
 				item = { "", "" },
 			},
 			mappings = {
-				-- status = { ["<D-w>"] = "Close" },
+				status = { ["<D-w>"] = "Close" },
 			},
 		},
 	},

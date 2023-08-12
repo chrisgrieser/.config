@@ -115,6 +115,18 @@ end
 
 --------------------------------------------------------------------------------
 
+-- Add missing buffer names current file component
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "lazy", "mason" },
+	callback = function()
+		local name = vim.fn.expand("<amatch>")
+		name = name:sub(1, 1):upper() .. name:sub(2) -- capitalize
+		vim.api.nvim_buf_set_name(0, name)
+	end,
+})
+
+--------------------------------------------------------------------------------
+
 -- nerdfont: powerline icons have the prefix 'ple-'
 local bottomSeparators = { left = "", right = "" }
 local topSeparators = { left = "", right = "" }

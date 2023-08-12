@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.vitorgalvao.alfred.temporaryemail</string>
+	<key>category</key>
+	<string>⬇️</string>
+	<key>connections</key>
+	<dict>
+		<key>1BFF14FC-DF72-4BC9-807B-3D38432CF08D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>736622BA-E278-42DF-8121-265EDBBADFBA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>9066A3FA-E9D2-44AF-BB72-A54ABBEB3A3D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A62BDC1B-6EF0-4884-8225-DED4378FC038</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A62BDC1B-6EF0-4884-8225-DED4378FC038</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E9B13513-9247-4498-8320-6E24CF7DBDB5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>8174851A-74D2-4634-B71B-9BCC7064C9F5</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>1BFF14FC-DF72-4BC9-807B-3D38432CF08D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E9B13513-9247-4498-8320-6E24CF7DBDB5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1BFF14FC-DF72-4BC9-807B-3D38432CF08D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Vítor Galvão</string>
+	<key>description</key>
+	<string>Generate disposable email inboxes</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Temporary Email</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>function notification {
+  ./notificator --message "${1}" --title "${alfred_workflow_name}"
+}
+
+readonly email_name="${1//[^[:alnum:]]}"
+readonly email="${email_name}@${email_service}"
+
+if [[ "${email_service}" == 'maildrop.cc' ]]; then
+  readonly url="https://${email_service}/inbox/?mailbox=${email_name}"
+else
+  readonly url="https://${email_service}/inbox/${email_name}"
+fi
+
+echo -n "${email}"
+notification 'Temporary email address copied to clipboard'
+
+# Use AppleScript instead of JXA because the latter cannot create tabs at specific indexes
+# Call it via the shell because otherwise the code is complicated by "using terms from"
+# which requires a specific browser to be installed
+readonly front_browser="$(osascript -e 'tell application "System Events" to return name of first process whose frontmost is true')"
+
+if [[ "${front_browser}" == 'Safari'* || "${front_browser}" == 'Webkit'* ]]; then
+  osascript -e "
+    tell application \"${front_browser}\" to tell front window
+      set tabIndex to index of current tab      make new tab at after tab tabIndex with properties {URL:\"${url}\"}
+    end tell
+  " &gt; /dev/null # Ignore stdout, otherwise tab info is printed
+elif [[ "${front_browser}" == 'Google Chrome'* || "${front_browser}" == 'Chromium'* || "${front_browser}" == 'Opera'* || "${front_browser}" == 'Vivaldi'* || "${front_browser}" == 'Brave Browser'* || "${front_browser}" == 'Microsoft Edge'* ]]; then
+  osascript -e "
+    tell application \"${front_browser}\" to tell front window
+      set tabIndex to active tab index
+      make new tab at after tab tabIndex with properties {URL:\"${url}\"}
+      set active tab index to tabIndex
+    end tell
+  "
+# As of Orion 0.99.124.1 and Arc 0.105.3, neither exposes tab indexes via AppleScript
+elif [[ "${front_browser}" == 'Orion' || "${front_browser}" == 'Arc' ]]; then
+  osascript -e "
+    tell application \"${front_browser}\" to tell front window
+      make new tab with properties {URL:\"${url}\"}
+    end tell
+  " &gt; /dev/null # Ignore stdout, otherwise tab info is printed
+# Browser without AppleScript support, such as Firefox
+else
+  open "${url}"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>1BFF14FC-DF72-4BC9-807B-3D38432CF08D</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>736622BA-E278-42DF-8121-265EDBBADFBA</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>{var:email_keyword}</string>
+				<key>subtext</key>
+				<string>Instant disposable email</string>
+				<key>text</key>
+				<string>Temporary Email</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>9066A3FA-E9D2-44AF-BB72-A54ABBEB3A3D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.random</string>
+			<key>uid</key>
+			<string>E9B13513-9247-4498-8320-6E24CF7DBDB5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string></string>
+						<key>outputlabel</key>
+						<string>Random</string>
+						<key>uid</key>
+						<string>8174851A-74D2-4634-B71B-9BCC7064C9F5</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>Specific</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>A62BDC1B-6EF0-4884-8225-DED4378FC038</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>## Usage
+
+Create a temporary email address via the `tmpmail` keyword. A random inbox name is used unless you type one.
+
+![Creating a temporary email](images/about/tmpmail.png)
+
+On supported web browsers, the email inbox will open in a background tab and the address pasted to the current input field.</string>
+	<key>uidata</key>
+	<dict>
+		<key>1BFF14FC-DF72-4BC9-807B-3D38432CF08D</key>
+		<dict>
+			<key>xpos</key>
+			<real>390</real>
+			<key>ypos</key>
+			<real>25</real>
+		</dict>
+		<key>736622BA-E278-42DF-8121-265EDBBADFBA</key>
+		<dict>
+			<key>xpos</key>
+			<real>565</real>
+			<key>ypos</key>
+			<real>25</real>
+		</dict>
+		<key>9066A3FA-E9D2-44AF-BB72-A54ABBEB3A3D</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>25</real>
+		</dict>
+		<key>A62BDC1B-6EF0-4884-8225-DED4378FC038</key>
+		<dict>
+			<key>xpos</key>
+			<real>185</real>
+			<key>ypos</key>
+			<real>45</real>
+		</dict>
+		<key>E9B13513-9247-4498-8320-6E24CF7DBDB5</key>
+		<dict>
+			<key>xpos</key>
+			<real>295</real>
+			<key>ypos</key>
+			<real>25</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>tmpmail</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Email Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>email_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>guerrillamail.com</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>Guerilla Mail</string>
+						<string>guerrillamail.com</string>
+					</array>
+					<array>
+						<string>Harakirimail</string>
+						<string>harakirimail.com</string>
+					</array>
+					<array>
+						<string>Maildrop</string>
+						<string>maildrop.cc</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Email Service</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>email_service</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string>2023.3</string>
+	<key>webaddress</key>
+	<string>https://github.com/vitorgalvao/temporary-email-workflow/</string>
+</dict>
+</plist>
