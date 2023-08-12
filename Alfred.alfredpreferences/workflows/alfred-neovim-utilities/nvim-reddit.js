@@ -55,8 +55,7 @@ const curlCommand = 'curl -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-
-	const subredditCache = `${$.getenv("alfred_workflow_cache")}/neovim.json`;
+	const subredditCache = `${$.getenv("alfred_workflow_cache")}/neovim-reddit.json`;
 	let response = {}
 
 	if (cacheIsOutdated(subredditCache)) {

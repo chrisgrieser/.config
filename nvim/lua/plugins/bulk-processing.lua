@@ -7,8 +7,11 @@ return {
 		"smoka7/multicursors.nvim",
 		dependencies = { "nvim-treesitter/nvim-treesitter", "smoka7/hydra.nvim" },
 		keys = {
-			-- stylua: ignore
-			{ "<D-j>", function() require("multicursors").start() end, mode = { "n", "v" }, desc = "󰆿 Multi-Cursor" },
+			-- stylua: ignore start
+			{ "<D-j>", function() require("multicursors").start() end, desc = "󰆿 Multi-Cursor" },
+			{ "<D-j>", function() require("multicursors").search_visual() end, mode = "x", desc = "󰆿 Multi-Cursor" },
+			{ "<D-a>", function() require("multicursors").new_pattern() end, desc = "󰆿 Multi-Cursor (Search)" },
+			-- stylua: ignore end
 		},
 		config = function()
 			local normal = require("multicursors.normal_mode")
@@ -18,15 +21,13 @@ return {
 				hint_config = false,
 				create_commands = false,
 				-- methods listed here https://github.com/smoka7/multicursors.nvim/blob/main/lua/multicursors/config.lua
-				insert_keys = {
-					["<D-v>"] = { method = normal.paste_after, opts = {} },
-				},
 				normal_keys = {
 					-- add next selection by using the same key again
 					["<D-j>"] = { method = normal.find_next, opts = {} },
 
-					-- remove waiting time
+					-- remove waiting time & also do on x
 					["d"] = { method = normal.delete, opts = { nowait = true } }, 
+					["x"] = { method = normal.delete, opts = { nowait = true } }, 
 
 					-- replace selection
 					["p"] = {
@@ -37,7 +38,13 @@ return {
 						opts = {},
 					},
 
+					-- special
+					["<down>"] = { method = normal.create_down, opts = {} },
+					["<up>"] = { method = normal.create_down, opts = {} },
+					["z"] = { method = normal.align_selections_before, opts = {} },
+
 					-- use extend-mode-motions in normal mode
+					["t"] = { method = extend.node_parent, opts = {} },
 					["e"] = { method = extend.e_method, opts = {} },
 					["b"] = { method = extend.b_method, opts = {} },
 					["h"] = { method = extend.h_method, opts = {} },
@@ -48,6 +55,9 @@ return {
 					-- add my HL movements
 					["H"] = { method = extend.caret_method, opts = {} },
 					["L"] = { method = extend.dollar_method, opts = {} },
+				},
+				insert_keys = {
+					["<D-v>"] = { method = normal.paste_after, opts = {} },
 				},
 			}
 
