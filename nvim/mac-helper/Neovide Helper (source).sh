@@ -25,9 +25,9 @@ if pgrep -xq "neovide"; then
 else
 	if [[ -z "$LINE" ]] ; then
 		nohup neovide --geometry=104x33 "$@" &
-		disown # https://stackoverflow.com/a/20338584/22114136
+		disown # has to come directly after
 	else
 		nohup neovide --geometry=104x33 "+$LINE" "$@" &
-		disown # https://stackoverflow.com/a/20338584/22114136
+		disown # has to come directly after
 	fi
 fi

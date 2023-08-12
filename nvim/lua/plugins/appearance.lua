@@ -24,10 +24,7 @@ return {
 		end,
 		opts = {
 			winblend = 60, -- winblend = transparency
-			handlers = {
-				-- FIX mark-related error message
-				marks = { enable = false },
-			},
+			handlers = { marks = { enable = false } }, -- FIX mark-related error message
 		},
 	},
 	{ -- UI overhaul
@@ -35,22 +32,18 @@ return {
 		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
 		event = "VeryLazy",
 		init = function()
-			-- Open Log & Scroll to most recent message
-			vim.keymap.set({ "n", "x", "i" }, "<D-0>", function()
-				require("notify").dismiss()
-				vim.cmd.Noice("history")
-				vim.defer_fn(function() u.normal("G") end, 1)
-			end, { desc = "󰎟 Notification Log" })
+			vim.keymap.set(
+				"n",
+				"<Esc>",
+				function() vim.cmd.Noice("dismiss") end,
+				{ desc = "󰎟 Clear Notifications" }
+			)
 
-			-- set some keybindings for the Noice buffer
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "noice",
-				callback = function()
-					pcall(vim.api.nvim_buf_set_name, 0, "Noice History")
-					vim.keymap.set("n", "<D-w>", vim.cmd.bdelete, { buffer = true, desc = " Close" })
-					vim.keymap.set("n", "<D-0>", vim.cmd.bdelete, { buffer = true, desc = " Close" })
-				end,
-			})
+			-- Open Log
+			vim.keymap.set({ "n", "x", "i" }, "<D-0>", function()
+				vim.cmd.Noice("dismiss")
+				vim.cmd.Noice("history")
+			end, { desc = "󰎟 Notification Log" })
 		end,
 		opts = {
 			-- can be used to filter/redirect stuff
@@ -92,6 +85,18 @@ return {
 			-- https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua
 			view = {
 				mini = { timeout = 3000 },
+				split = {
+					size = "30%",
+					close = { keys = { "q", "<D-w>", "<D-0>" } },
+				},
+			},
+			commands = {
+				-- options for `:Noice history`
+				history = {
+					view = "split",
+					opts = { enter = false }, -- do not enter on entry
+					filter_opts = { reverse = true }, -- show newest entries first
+				},
 			},
 
 			-- DISABLED, since conflicts with existing plugins I prefer to use
@@ -109,9 +114,8 @@ return {
 				},
 			},
 			presets = {
-				long_message_to_split = true,
 				inc_rename = true,
-				lsp_doc_border = true,
+				lsp_doc_border = false,
 			},
 		},
 	},
@@ -135,11 +139,6 @@ return {
 			end,
 		},
 		init = function()
-			vim.keymap.set("n", "<Esc>", function()
-				local clearPending = require("notify").pending() > 10
-				require("notify").dismiss { pending = clearPending }
-			end, { desc = "󰎟 Clear Notifications" })
-
 			-- copy [l]ast [n]otice
 			vim.keymap.set("n", "<leader>ln", function()
 				local history = require("notify").history()
