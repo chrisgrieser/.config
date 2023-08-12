@@ -8,13 +8,14 @@ return {
 			"nvim-tree/nvim-web-devicons",
 		},
 		init = function()
-			-- autocomplete for @ and #
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "octo",
 				callback = function()
+					-- autocomplete for @ and #
 					vim.keymap.set("i", "@", "@<C-x><C-o>", { silent = true, buffer = true })
 					vim.keymap.set("i", "#", "#<C-x><C-o>", { silent = true, buffer = true })
-					vim.opt_local.signcolumn = "yes:5" -- more readable
+					-- more readable
+					vim.opt_local.signcolumn = "yes:5" 
 				end,
 			})
 

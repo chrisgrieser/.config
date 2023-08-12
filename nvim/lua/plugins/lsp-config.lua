@@ -278,6 +278,7 @@ return {
 		opts = {
 			ui = {
 				border = u.borderStyle,
+				height = 0.8,
 				icons = { package_installed = "✓", package_pending = "󰔟", package_uninstalled = "✗" },
 			},
 		},
