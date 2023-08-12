@@ -125,6 +125,27 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+---improves upon the default statusline components by having properly working icons
+---@nodiscard
+local function currentFile()
+	local maxLen = 25
+	local name = fn.expand("%:t")
+	-- prefix `#` for octo buffers
+	if bo.filetype == "octo" and name:find("^%d$") then name = "#" .. name end
+
+	local deviconsInstalled, devicons = pcall(require, "nvim-web-devicons")
+	local icon = deviconsInstalled and devicons.get_icon(name, bo.filetype) or ""
+
+	-- truncate
+	local nameNoExt = name:gsub("%.%w+$", "")
+	if #nameNoExt > maxLen then
+		local ext = name:match("%.%w+$")
+		name = nameNoExt:sub(1, maxLen) .. "…" .. ext
+	end
+
+	return icon .. " " .. name
+end
+
 --------------------------------------------------------------------------------
 
 -- nerdfont: powerline icons have the prefix 'ple-'
@@ -168,16 +189,17 @@ local lualineConfig = {
 	},
 	sections = {
 		lualine_a = {
-			{
-				"filetype",
-				colored = false,
-				padding = { left = 1, right = 0 },
-				icon_only = true,
-			},
-			{
-				"filename",
-				file_status = false,
-			},
+			{ currentFile },
+			-- {
+			-- 	"filetype",
+			-- 	colored = false,
+			-- 	padding = { left = 1, right = 0 },
+			-- 	icon_only = true,
+			-- },
+			-- {
+			-- 	"filename",
+			-- 	file_status = false,
+			-- },
 		},
 		lualine_b = {
 			{ require("funcs.alt-alt").altFileStatusline },
@@ -230,6 +252,5 @@ local lualineConfig = {
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = "nvim-tree/nvim-web-devicons",
-	lazy = false, -- so there is less flickering of the UI on startup
 	opts = lualineConfig,
 }

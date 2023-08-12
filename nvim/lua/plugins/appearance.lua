@@ -185,8 +185,9 @@ return {
 				bib = { icon = "", color = "#6e9b2a", name = "BibTeX" },
 				http = { icon = "󰴚", name = "HTTP request" },
 				-- plugins
-				lazy = { icon = "", name = "Lazy" },
-				mason = { icon = "", name = "Mason" },
+				lazy = { icon = "󰒲", name = "lazy.nvim" },
+				mason = { icon = "", name = "mason.nvim" },
+				octo = { icon = "", name = "octo.nvim" },
 			},
 		},
 	},
