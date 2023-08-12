@@ -39,10 +39,14 @@ return {
 				{ desc = "󰎟 Clear Notifications" }
 			)
 
-			-- Open Log
+			-- Toggle Log
 			vim.keymap.set({ "n", "x", "i" }, "<D-0>", function()
-				vim.cmd.Noice("dismiss")
-				vim.cmd.Noice("history")
+				if vim.bo.filetype ~= "noice" then
+					vim.cmd.Noice("dismiss")
+					vim.cmd.Noice("history")
+				else
+					vim.cmd.close()
+				end
 			end, { desc = "󰎟 Notification Log" })
 		end,
 		opts = {

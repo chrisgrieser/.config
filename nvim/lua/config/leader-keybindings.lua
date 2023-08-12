@@ -96,7 +96,7 @@ keymap(
 )
 
 keymap(
-	{ "n", "x", "i" },
+	{ "n", "x" },
 	"<leader>uc",
 	function() require("funcs.alt-alt").reopenBuffer() end,
 	{ desc = "󰽙 undo closing buffer" }

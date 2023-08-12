@@ -45,6 +45,14 @@ anchors:
         type: variable_unless
         name: FINDER_MENU_ACTIVE
         value: true
+      - &is-spotlight-mode
+        type: variable_if
+        name: FINDER_SPOTLIGHT_MODE
+        value: true
+      - &not-spotlight-mode
+        type: variable_unless
+        name: FINDER_SPOTLIGHT_MODE
+        value: true
   #─────────────────────────────────────────────────────────────────────────────
   - to:
       # Insert Mode
@@ -96,6 +104,22 @@ anchors:
         set_variable:
           name: FINDER_MOVE_ACTIVE
           value: false
+      - &enter-spotlight-mode
+        set_variable:
+          name: FINDER_SPOTLIGHT_MODE
+          value: true
+      - &leave-spotlight-mode
+        set_variable:
+          name: FINDER_SPOTLIGHT_MODE
+          value: false
+      - &remove-spotlight-notice
+        set_notification_message:
+          id: spotlight-notice
+          text: ""
+      - &spotlight-notice
+        set_notification_message:
+          id: spotlight-notice
+          text: "🔦 Spotlight Mode"
       - &start-menu
         set_variable:
           name: FINDER_MENU_ACTIVE
@@ -267,6 +291,7 @@ rules:
           - *remove-insert-notice
           - *leave-insert-mode
         conditions: [*finder-app, *is-insert-mode]
+      # SPOTLIGHT
       # Opening Alfred/Raycast/Spotlight cancels renaming and context menu,
       # so the respective modes have to be aborter here as well
       - type: basic
@@ -277,7 +302,45 @@ rules:
           - *leave-insert-mode
           - *remove-menu-notice
           - *end-menu
-        conditions: [*finder-app]
+          - *spotlight-notice
+          - *leave-find-mode
+          - *remove-find-notice
+          - *enter-spotlight-mode # enter spotlight
+          - *enter-insert-mode
+        conditions: [*finder-app, *not-spotlight-mode]
+      # leave spotlight mode
+      - type: basic
+        from: { key_code: spacebar, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: spacebar, modifiers: [command] }
+          - *remove-spotlight-notice
+          - *leave-spotlight-mode
+          - *leave-insert-mode
+        conditions: [*is-spotlight-mode]
+      - type: basic
+        from: { key_code: escape }
+        to:
+          - { key_code: escape }
+          - *remove-spotlight-notice
+          - *leave-spotlight-mode
+          - *leave-insert-mode
+        conditions: [*is-spotlight-mode]
+      - type: basic
+        from: { key_code: caps_lock }
+        to:
+          - { key_code: escape }
+          - *remove-spotlight-notice
+          - *leave-spotlight-mode
+          - *leave-insert-mode
+        conditions: [*is-spotlight-mode]
+      - type: basic
+        from: { key_code: return_or_enter, modifiers: { optional: [command, shift, option, control] } }
+        to:
+          - { key_code: return_or_enter }
+          - *remove-spotlight-notice
+          - *leave-spotlight-mode
+          - *leave-insert-mode
+        conditions: [*is-spotlight-mode]
 
       #─────────────────────────────────────────────────────────────────────────
       #─────────────────────────────────────────────────────────────────────────
