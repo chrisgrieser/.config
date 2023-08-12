@@ -15,7 +15,7 @@
 	<key>save_scroll_position</key>
 	<true/>
 	<key>sort_type</key>
-	<string>controversial</string>
+	<string>top</string>
 	<key>subreddits</key>
 	<string>neovim
 macapps
