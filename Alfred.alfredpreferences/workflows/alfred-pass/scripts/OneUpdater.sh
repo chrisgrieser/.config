@@ -2,9 +2,8 @@
 # shellcheck disable=2154,2155
 
 # THESE VARIABLES MUST BE SET. SEE THE ONEUPDATER README FOR AN EXPLANATION OF EACH.
-readonly repo_name=$(basename "$(git rev-parse --show-toplevel)")
-readonly remote_info_plist="https://raw.githubusercontent.com/chrisgrieser/$repo_name/main/info.plist"
-readonly workflow_url="https://github.com/chrisgrieser/$repo_name/releases/latest/download/$repo_name.alfredworkflow"
+readonly remote_info_plist="https://raw.githubusercontent.com/chrisgrieser/alfred-pass/main/info.plist"
+readonly workflow_url="https://github.com/chrisgrieser/alfred-pass/releases/latest/download/alfred-pass.alfredworkflow"
 readonly download_type="direct"
 readonly frequency_check="1"
 

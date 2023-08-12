@@ -127,8 +127,8 @@ return {
 		opts = {
 			render = "minimal", -- minimal|default|compact
 			top_down = false,
-			max_height = 20,
-			max_width = 50,
+			max_width = 70,
+			max_height = 15,
 			minimum_width = 15,
 			level = 0, -- minimum severity level to display (0 = display all)
 			timeout = 7500,
@@ -328,7 +328,7 @@ return {
 				win_options = { winblend = 0 }, -- weird shining through
 			},
 			select = {
-				backend = { "telescope", "builtin" }, -- Priority list of vim.select implementations
+				backend = { "builtin" },
 				trim_prompt = true, -- Trim trailing `:` from prompt
 				builtin = {
 					border = u.borderStyle,
@@ -339,22 +339,6 @@ return {
 					min_height = 4,
 					win_options = { winblend = 0 }, -- fix weird shining through
 				},
-				-- code actions use builtin for quicker picking, otherwise use
-				-- telescope
-				get_config = function(opts)
-					if opts.kind == "codeaction" or opts.kind == "simple" then
-						return { backend = "builtin" }
-					elseif opts.kind == "github_issue" then
-						return {
-							backend = "telescope",
-							telescope = {
-								layout_config = {
-									horizontal = { width = 0.99, height = 0.6 },
-								},
-							},
-						}
-					end
-				end,
 			},
 		},
 	},

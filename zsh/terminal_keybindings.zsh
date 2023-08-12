@@ -15,7 +15,9 @@ function copy-location() {
 zle -N copy-location
 
 # kills complete line, instead of just to beginning (^U) or end of a line (^K)
+# and copies to system clipboard
 function kill-full-line() {
+	printf "%s" "$BUFFER" | pbcopy
 	zle end-of-line || true
 	zle vi-kill-line
 }
@@ -62,10 +64,6 @@ bindkey -M viins "^X" autosuggest-execute
 #───────────────────────────────────────────────────────────────────────────────
 
 # but when typing hashes or backticks, escape them
-function autoEscapeHash() { LBUFFER+='\#' ; }
-zle -N autoEscapeHash
-bindkey -M viins '#' autoEscapeHash
-
 function autoEscapeBackTick() { LBUFFER+='\`' ; }
 zle -N autoEscapeBackTick
 bindkey -M viins '`' autoEscapeBackTick
