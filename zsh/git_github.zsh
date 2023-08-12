@@ -22,7 +22,7 @@ alias rel='ct make --silent release'
 
 # amend no-edit
 function gm() {
-	git add -A && ct git commit --amend --no-edit
+	git add -A && git commit --amend --no-edit
 	separator
 	gitlog 4
 }
