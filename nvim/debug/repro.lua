@@ -11,6 +11,7 @@ local plugins = {
 	{
 		"chrisgrieser/nvim-various-textobjs",
 		lazy = false,
+		dev = true,
 		opts = { useDefaultKeymaps = true },
 	},
 }
@@ -21,7 +22,12 @@ if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system { "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath }
 end
 vim.opt.runtimepath:prepend(lazypath)
-require("lazy").setup(plugins)
+require("lazy").setup(plugins, {
+	dev = {
+		path = os.getenv("HOME") .. "/Repos",
+		fallback = true, -- use remote repo when local repo doesn't exist
+	},
+})
 
 -- Convenience stuff, not strictly necessary
 vim.g.neovide_scale_factor = 1.8
