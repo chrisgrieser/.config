@@ -1,7 +1,7 @@
 -- DEMO FUNCTIONS
 --------------------------------------------------------------------------------
 
-print("foo")
+print("foobarbaz")
 print("bar")
 
 -- vim.notify("foo")
