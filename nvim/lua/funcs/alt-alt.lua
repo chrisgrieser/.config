@@ -63,9 +63,11 @@ function M.altFileStatusline()
 
 	-- no oldfile and after start
 	if hasAltFile and (altPath ~= curPath) then
+		local ext = fn.expand("#:e")
 		local altBufFt = vim.api.nvim_buf_get_option(fn.bufnr("#"), "filetype") ---@diagnostic disable-line: param-type-mismatch
+		local ftOrExt = ext ~= "" and ext or altBufFt
 		local deviconsInstalled, devicons = pcall(require, "nvim-web-devicons")
-		icon = deviconsInstalled and devicons.get_icon(altFile, altBufFt) or "#"
+		icon = deviconsInstalled and devicons.get_icon(altFile, ftOrExt) or "#"
 
 		-- prefix `#` for octo buffers
 		if altBufFt == "octo" and name:find("^%d$") then name = "#" .. name end

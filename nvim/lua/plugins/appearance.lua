@@ -7,7 +7,6 @@ return {
 		"Aasim-A/scrollEOF.nvim",
 		event = "WinScrolled",
 		opts = true,
-		-- BUG: https://github.com/Aasim-A/scrollEOF.nvim/issues/7
 	},
 	{ -- when searching, search count is shown next to the cursor
 		"kevinhwang91/nvim-hlslens",
@@ -185,6 +184,7 @@ return {
 				bib = { icon = "", color = "#6e9b2a", name = "BibTeX" },
 				http = { icon = "󰴚", name = "HTTP request" },
 				-- plugins
+				noice = { icon = "󰎟", name = "noice.nvim" },
 				lazy = { icon = "󰒲", name = "lazy.nvim" },
 				mason = { icon = "", name = "mason.nvim" },
 				octo = { icon = "", name = "octo.nvim" },
