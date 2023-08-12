@@ -81,11 +81,14 @@ FileHubWatcher = pw(env.fileHub, function(paths, _)
 		local fileName = filep:gsub(".*/", "")
 		local ext = fileName:gsub(".*%.", "")
 
+		-- isDownloaded ensures files created on my own are not affected
+		-- trick works as only downloaded files get quarantined
+		local fileExists, msg = pcall(hs.fs.xattr.get, filep, "com.apple.quarantine")
+		local isDownloaded = fileExists and msg ~= nil
+		if not isDownloaded then return end
+
 		-- alfredworkflows
 		if ext == "alfredworkflow" then
-			-- download condition ensures my own workflows aren't deleted
-			local fileExists, msg = pcall(hs.fs.xattr.get, filep, "com.apple.quarantine")
-			local isDownloaded = fileExists and msg ~= nil
 			if isDownloaded then u.runWithDelays(3, function() os.remove(filep) end) end
 
 		-- ics (iCal)
