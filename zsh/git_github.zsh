@@ -4,7 +4,7 @@
 alias co="git checkout"
 alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to last directory
 alias gs='git status'
-alias ga="ct git add"
+alias ga="git add"
 alias gM="git commit --amend" # amend + edit commit msg
 alias gc="git commit"
 alias push="ct git push"
@@ -22,7 +22,7 @@ alias rel='ct make --silent release'
 
 # amend no-edit
 function gm() {
-	ct git add -A && git commit --amend --no-edit
+	git add -A && ct git commit --amend --no-edit
 	separator
 	gitlog 4
 }
