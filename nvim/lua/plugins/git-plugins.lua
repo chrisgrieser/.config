@@ -8,14 +8,12 @@ return {
 			"nvim-tree/nvim-web-devicons",
 		},
 		init = function()
+			-- autocomplete for @ and #
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "octo",
 				callback = function()
-					-- autocomplete for @ and #
 					vim.keymap.set("i", "@", "@<C-x><C-o>", { silent = true, buffer = true })
 					vim.keymap.set("i", "#", "#<C-x><C-o>", { silent = true, buffer = true })
-					-- more readable
-					vim.opt_local.signcolumn = "yes:5" 
 				end,
 			})
 
@@ -69,7 +67,6 @@ return {
 			disable_insert_on_commit = "auto", -- insert only if commit msg empty
 			disable_commit_confirmation = true,
 			disable_builtin_notifications = true,
-			remember_settings = true,
 			signs = {
 				section = { "", "" },
 				item = { "", "" },

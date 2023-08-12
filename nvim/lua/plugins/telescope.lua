@@ -8,7 +8,7 @@ local keymappings = {
 	["<PageUp>"] = "preview_scrolling_up",
 	["<C-h>"] = "cycle_history_prev",
 	["<C-l>"] = "cycle_history_next",
-	["<D-s>"] = function (prompt_bufnr) -- sends selected, or if none selected, sends all
+	["<D-s>"] = function(prompt_bufnr) -- sends selected, or if none selected, sends all
 		require("funcs.quickfix").deleteList() -- delete current list
 		require("telescope.actions").smart_send_to_qflist(prompt_bufnr)
 	end,
@@ -206,6 +206,13 @@ local function telescopeConfig()
 			},
 		},
 		extensions = {
+			issues = {
+				layout_config = {
+					horizontal = {
+						height = 0.9,
+					},
+				},
+			},
 			undo = {
 				entry_format = "#$ID ($STAT) $TIME",
 				layout_config = {
