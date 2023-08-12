@@ -1,6 +1,4 @@
-# shellcheck disable=SC2164
-
-# ALIASES AND SMALLER UTILS
+# ALIASES 
 alias co="git checkout"
 alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to last directory
 alias gs='git status'
@@ -62,6 +60,7 @@ function gd() {
 	fi
 }
 
+# make delta theme aware
 function delta() {
 	if defaults read -g AppleInterfaceStyle &>/dev/null; then
 		command delta --dark "$@"
@@ -114,13 +113,9 @@ function gli() {
 	local hash key_pressed selected
 	selected=$(
 		git log --all --color=always --pretty=format:'%h %s %C(green)%ch %C(red)%D%C(reset)' |
-			fzf -0 \
-				--query="$1" \
-				--ansi \
-				--nth=2.. \
-				--with-nth=2.. \
-				--no-sort \
-				--no-info \
+			fzf -0 --query="$1" \
+				--ansi --no-sort --no-info \
+				--nth=2.. --with-nth=2.. \
 				--header-first --header="↵ : Checkout  ^H: Copy [H]ash  ^R: [R]eset Hard" \
 				--expect="ctrl-h,ctrl-r" \
 				--preview="git --no-optional-locks show {1} --name-only --color=always --pretty=format:'%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s %n%C(reset)%n---%n%C(magenta)'"
@@ -148,8 +143,7 @@ function gb() {
 
 	selected=$(
 		git branch --all --color | grep -v "HEAD" |
-			fzf --ansi --no-info --height=40% \
-				--header-first --header="↵ : Checkout Branch"
+			fzf --ansi --no-info --height=40% --header-first --header="↵ : Checkout Branch"
 	)
 	[[ -z "$selected" ]] && return 0
 	selected=$(echo "$selected" | tr -d "* ")
@@ -247,7 +241,7 @@ function nuke {
 
 	SSH_REMOTE=$(git remote -v | head -n1 | cut -d" " -f1 | cut -d$'	' -f2)
 	# go to git repo root
-	cd "$(git rev-parse --show-toplevel)"
+	cd "$(git rev-parse --show-toplevel)" || return 1
 	local_repo_path=$(pwd)
 	# shellcheck disable=2103
 	cd ..
@@ -274,10 +268,10 @@ function gdf() {
 	if [[ $# -eq 0 ]]; then echo "No search query provided." && return 1; fi
 
 	local deleted_path deletion_commit
-	cd "$(git rev-parse --show-toplevel)"
+	cd "$(git rev-parse --show-toplevel)" || return 1
 
 	# alternative method: `git rev-list -n 1 HEAD -- "**/*$1*"` to get the commit of a deleted file
-	deleted_path=$(git log --diff-filter=D --summary | grep delete | grep -i "$*" | cut -d" " -f5-)
+	deleted_path=$(git log --diff-filter=D --summary | grep "delete" | grep -i "$*" | cut -d" " -f5-)
 
 	if [[ -z "$deleted_path" ]]; then
 		print "🔍\033[1;33m No deleted file found."
