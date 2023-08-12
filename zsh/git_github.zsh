@@ -58,7 +58,7 @@ function gd() {
 	fi
 }
 
-# make delta theme aware
+# make delta theme-aware
 function delta() {
 	if defaults read -g AppleInterfaceStyle &>/dev/null; then
 		command delta --dark "$@"
@@ -69,9 +69,9 @@ function delta() {
 
 #───────────────────────────────────────────────────────────────────────────────
 # GIT LOG
-# https://git-scm.com/docs/git-log#_pretty_formats
 
 function gitlog() {
+	# DOCS https://git-scm.com/docs/git-log#_pretty_formats
 	local length
 	[[ -n "$1" ]] && length="-n $1"
 	# shellcheck disable=2086
