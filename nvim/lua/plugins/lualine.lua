@@ -115,13 +115,13 @@ end
 
 --------------------------------------------------------------------------------
 
--- Add missing buffer names current file component
+-- FIX Add missing buffer names for current file component
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "lazy", "mason" },
+	pattern = { "lazy", "mason", "TelescopePrompt", "noice" },
 	callback = function()
 		local name = vim.fn.expand("<amatch>")
 		name = name:sub(1, 1):upper() .. name:sub(2) -- capitalize
-		vim.api.nvim_buf_set_name(0, name)
+		pcall(vim.api.nvim_buf_set_name, 0, name)
 	end,
 })
 
@@ -149,6 +149,7 @@ local function currentFile()
 	local nameNoExt = name:gsub("%.%w+$", "")
 	if #nameNoExt > maxLen then name = nameNoExt:sub(1, maxLen) .. "…" .. ext end
 
+	if icon == "" then return name end
 	return icon .. " " .. name
 end
 

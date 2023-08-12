@@ -12,10 +12,7 @@ rules:
           # INFO Quitting via :wqall instead of cmd+Q so bufferleaving autocmds are triggered
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-              nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>try|wqall|catch|qall|endtry<CR>"
-              exitcode=$? # unresponsive server exists with code 2
-
-              if [[ $exitcode -ne 0 ]] ; then
+              if ! nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>try|wqall|catch|qall|endtry<CR>" ; then
                 osascript -e 'display notification "" with title "⚔️ Force killing nvim…"'
                 killall -9 nvim neovide
               fi
@@ -32,7 +29,7 @@ rules:
                 fi
               done
 
-              # Restart (configured to reopen last file if opened without arg)
+              # Restart (config reopens last file if no arg)
               open -a "Neovide"
       # INFO explicitly remapping cmd+q ensures that cursor position and changes
       # are saved. Also, fixing the neovide issue of sometimes having nvim
@@ -42,11 +39,7 @@ rules:
         to:
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-              nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>try|wqall|catch|qall|endtry<CR>"
-              # unresponsive server exists with code 2
-              exitcode=$?
-
-              if [[ $exitcode -ne 0 ]] ; then
+              if ! nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>try|wqall|catch|qall|endtry<CR>" ; then
                 osascript -e 'display notification "" with title "⚔️ Force killing nvim…"'
                 killall -9 nvim neovide
               fi

@@ -8,7 +8,7 @@ if [[ "$mode" == "killall" ]]; then
 elif [[ "$mode" == "report" ]]; then
 	# shellcheck disable=2009
 	processes="$(ps cAo 'pid,ppid,state,rss=MEM,command' |
-		grep -E "COMMAND|osascript|neovide|nvim|language.server|rome$|node" | 
+		grep -E "COMMAND|osascript|neovide|nvim|language.server|rome$|node" |
 		sed '/^$/d')"
 	if [[ $(echo -n "$processes" | wc -l) -gt 1 ]]; then
 		echo -n "$processes" # send to alfred large type

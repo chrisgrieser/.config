@@ -226,7 +226,7 @@ function M.removeLogs()
 	cmd.nohlsearch()
 
 	local linesRemoved = numOfLinesBefore - fn.line("$")
-	local msg = ("🪓 Removed %s log statements."):format(linesRemoved)
+	local msg = ("󰣈  Removed %s log statements."):format(linesRemoved)
 	if linesRemoved == 1 then msg = msg:sub(1, -3) .. "." end
 	vim.notify(msg)
 
