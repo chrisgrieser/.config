@@ -18,7 +18,7 @@ function separator() {
 function inspect() {
 	# config
 	local max_gitlog_lines=5
-	local max_files_lines=10
+	local max_files_lines=7
 	local disabled_below_term_height=20
 
 	# guard clauses

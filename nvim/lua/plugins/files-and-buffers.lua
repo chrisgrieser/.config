@@ -11,6 +11,7 @@ return {
 			condition = function(buf)
 				local ignoredFts = { "NeogitStatus" }
 				if vim.tbl_contains(ignoredFts, vim.bo[buf].filetype) then return false end
+				return true
 			end,
 		},
 	},

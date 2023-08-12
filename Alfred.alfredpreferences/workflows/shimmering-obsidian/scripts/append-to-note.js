@@ -93,12 +93,12 @@ function run(argv) {
 		if (isHeading(line)) break;
 		else if (!isEmpty(line)) lastNonEmptyLineNo = i;
 	}
-	if (lastNonEmptyLineNo > 0) {
-		lines.splice(lastNonEmptyLineNo + 1, 0, toAppend);
-	} else {
+	if (lastNonEmptyLineNo === -1) {
 		ensureEmptyLineAt(lines, headingLineNo + 1);
 		lines.splice(headingLineNo + 2, 0, toAppend);
 		ensureEmptyLineAt(lines, headingLineNo + 3);
+	} else {
+		lines.splice(lastNonEmptyLineNo + 1, 0, toAppend);
 	}
 	const content = lines.join("\n");
 	writeToFile(absolutePath, content);

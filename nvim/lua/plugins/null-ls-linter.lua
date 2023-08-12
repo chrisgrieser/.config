@@ -23,6 +23,7 @@ local lintersAndFormatters = {
 -- - https://github.com/jay-babu/mason-null-ls.nvim/issues/82
 -- - ensure_installed https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
 -- - https://dotfyle.com/this-week-in-neovim/48#jose-elias-alvarez/null-ls.nvim
+-- https://www.reddit.com/r/neovim/comments/15oue2o/finally_a_robust_autoformatting_solution/
 
 --------------------------------------------------------------------------------
 local function nullSources()

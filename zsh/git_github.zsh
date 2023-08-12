@@ -10,12 +10,14 @@ alias gM="git commit --amend"                         # amend + edit commit msg
 alias gc="git commit"
 alias push="ct git push"
 alias pull="ct git pull"
-alias gi='gh issue list'
 alias g.='cd "$(git rev-parse --show-toplevel)"' # goto git root
 alias grh='git reset --hard'
 
-alias rel='make release'
 alias pr='gh pr create --web --fill'
+alias gi='gh issue list'                # open issues
+alias gI='gh issue list --state=closed' # closed issues
+
+alias rel='ct make release'
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -43,7 +45,7 @@ function unshallow() {
 
 # use delta for small diffs and diff2html for big diffs
 function gd() {
-	local threshold_lines=50
+	local threshold_lines=80
 	if [[ $(git diff | wc -l) -gt $threshold_lines ]]; then
 		if ! command -v diff2html &>/dev/null; then echo "diff2html not installed (\`npm -g install diff2html\`)." && return 1; fi
 		diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"

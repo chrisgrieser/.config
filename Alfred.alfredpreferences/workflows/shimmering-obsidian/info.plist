@@ -5492,6 +5492,27 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>oupdate</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>🔁 Manually Refresh Metadata</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>4F356F57-A6AA-4277-B742-27DC8EE84450</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -5532,27 +5553,6 @@ fi</string>
 			<string>EC424B98-D702-4608-B1EA-07AF49C56048</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>oupdate</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>🔁 Manually Refresh Metadata</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>4F356F57-A6AA-4277-B742-27DC8EE84450</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -8489,7 +8489,7 @@ DOUBLE CLICK THIS to set Hotkey. Suggested Hotkey: cmd + shift + 1</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>Path to the vault that you want to control with this Alfred workflow.</string>
 			<key>label</key>
 			<string>Vault Path</string>
 			<key>type</key>
@@ -8785,7 +8785,7 @@ DOUBLE CLICK THIS to set Hotkey. Suggested Hotkey: cmd + shift + 1</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>vault-relative path to your Scratchpad Note. When you append `#foobar`, the text will be added below the heading "foobar" located in that note.</string>
+			<string>Vault-relative path to your Scratchpad Note. When you append `#foobar`, the text will be appended to the section with the heading "foobar".</string>
 			<key>label</key>
 			<string>Scratchpad Note Path</string>
 			<key>type</key>
@@ -9050,7 +9050,7 @@ DOUBLE CLICK THIS to set Hotkey. Suggested Hotkey: cmd + shift + 1</string>
 		<string>▉</string>
 	</dict>
 	<key>version</key>
-	<string>4.0.3</string>
+	<string>4.0.4</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
