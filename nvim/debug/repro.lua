@@ -1,30 +1,31 @@
 local plugins = {
+	-- {
+	-- 	"williamboman/mason-lspconfig.nvim",
+	-- 	dependencies = { "williamboman/mason.nvim", opts = true },
+	-- 	opts = { ensure_installed = { "lua_ls" } },
+	-- },
+	-- {
+	-- 	"neovim/nvim-lspconfig",
+	-- 	init = function() require("lspconfig")["lua_ls"].setup{} end,
+	-- },
 	{
-		"williamboman/mason-lspconfig.nvim",
-		dependencies = { "williamboman/mason.nvim", opts = {} },
-		opts = { ensure_installed = { "lua_ls" } },
-	},
-	{
-		"neovim/nvim-lspconfig",
-		init = function() require("lspconfig")["lua_ls"].setup({}) end,
+		"chrisgrieser/nvim-various-textobjs",
+		lazy = false,
+		opts = { useDefaultKeymaps = true },
 	},
 }
 
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-if not vim.uv.fs_stat(lazypath) then
-	 vim.fn.system {
-		  'git',
-		  'clone',
-		  '--depth=1',
-		  '--filter=blob:none',
-		  '--single-branch',
-		  'https://github.com/folke/lazy.nvim.git',
-		  lazypath,
-	 }
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	-- stylua: ignore
+	vim.fn.system { "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath }
 end
 vim.opt.runtimepath:prepend(lazypath)
-require('lazy').setup(plugins)
+require("lazy").setup(plugins)
 
-vim.g.neovide_scale_factor = 1.8 -- Convenience stuff, not strictly necessary
+-- Convenience stuff, not strictly necessary
+vim.g.neovide_scale_factor = 1.8
+vim.cmd.colorscheme("habamax")
+vim.opt.signcolumn = "yes:2"
 
 --------------------------------------------------------------------------------
