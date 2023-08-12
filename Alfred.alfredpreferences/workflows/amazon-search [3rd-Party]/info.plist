@@ -90,12 +90,14 @@ marketplaceIDs = {
   "cn": "AAHKV2X7AFYLW",
   "fr": "A13V1IB3VIYZZH",
   "de": "A1PA6795UKMFR9",
+  "eg": "ARBP9OOSHTCHU",
   "in": "A21TJRUUN4KGV",
   "it": "APJ6JRA9NG5V4",
   "co.jp": "A1VC38T7YXB528",
   "com.mx": "A1AM78C64UM0Y8",
   "nl": "A1805IZSGTT6HS",
   "pl": "A1C3SOZRARQ6R3",
+  "sa": "A17E79C6D8DWNP",
   "sg": "A19VAU5U5O7RUS",
   "es": "A1RKKUPIHCS9HS",
   "se": "A2NODRKZP88ZB9",
@@ -270,6 +272,10 @@ Set a specific Amazon store to search in the [Workflow’s Configuration](https:
 						<string>cn</string>
 					</array>
 					<array>
+						<string>Egypt</string>
+						<string>eg</string>
+					</array>
+					<array>
 						<string>France</string>
 						<string>fr</string>
 					</array>
@@ -300,6 +306,10 @@ Set a specific Amazon store to search in the [Workflow’s Configuration](https:
 					<array>
 						<string>Poland</string>
 						<string>pl</string>
+					</array>
+					<array>
+						<string>Saudi Arabia</string>
+						<string>sa</string>
 					</array>
 					<array>
 						<string>Singapore</string>
@@ -338,7 +348,7 @@ Set a specific Amazon store to search in the [Workflow’s Configuration](https:
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2023.3</string>
+	<string>2023.4</string>
 	<key>webaddress</key>
 	<string>https://github.com/alfredapp/amazon-suggest-workflow/</string>
 </dict>

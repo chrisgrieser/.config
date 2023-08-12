@@ -757,13 +757,32 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				</array>
 			</dict>
 			<key>description</key>
-			<string>how the results are sorted. Note that "top" filters out a lot of posts.</string>
+			<string>How the results are sorted. Note that "top" filters out a lot of posts.</string>
 			<key>label</key>
 			<string>Sorting</string>
 			<key>type</key>
 			<string>popupbutton</string>
 			<key>variable</key>
 			<string>sort_type</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>enabled</string>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Hide Stickied Posts</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>hide_stickied</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -936,7 +955,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.1.1</string>
+	<string>1.2.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

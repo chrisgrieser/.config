@@ -4,13 +4,14 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
 function getSettings() {
-	const minUpvotesSetting = parseInt($.getenv("min_upvotes")) || 0;
+	const minUpvotesSetting = parseInt($.getenv("min_upvotes")) ?? 0;
 	return {
 		minUpvotes: Math.max(minUpvotesSetting, 0), // minimum of 0
 		useOldReddit: $.getenv("use_old_reddit") === "1" ? "old" : "www",
 		useDstillAi: $.getenv("use_dstill_ai") === "1",
-		iconFolder: $.getenv("custom_subreddit_icons") || $.getenv("alfred_workflow_data"),
-		sortType: $.getenv("sort_type") || "hot",
+		iconFolder: $.getenv("custom_subreddit_icons") ?? $.getenv("alfred_workflow_data"),
+		sortType: $.getenv("sort_type") ?? "hot",
+		hideStickied: $.getenv("hide_stickied") === "1",
 	};
 }
 
@@ -112,6 +113,7 @@ function getHackernewsPosts(oldItems) {
  * @property {number} data.num_comments
  * @property {string} data.permalink
  * @property {string} data.url
+ * @property {boolean} data.stickied
  * @property {number} data.num_crossposts
  * @property {any} data.preview
  * @property {string} data.media.type
@@ -151,6 +153,7 @@ function getRedditPosts(subredditName, oldItems) {
 		(/** @type {AlfredItem[]} */ acc, /** @type {redditPost} */ data) => {
 			const item = data.data;
 			if (item.score < opts.minUpvotes) return acc;
+			if (item.stickied && opts.hideStickied) return acc;
 
 			const commentUrl = `https://${opts.useOldReddit}.reddit.com${item.permalink}`;
 			const isOnReddit = item.domain.includes("redd.it") || item.domain.startsWith("self.");
@@ -161,26 +164,27 @@ function getRedditPosts(subredditName, oldItems) {
 			else if (!isOnReddit) postTypeIcon = "🔗 ";
 			const quicklookUrl = imageUrl || externalUrl || commentUrl;
 
-			// age icon
+			// age & visited icon
 			const postIsOld = oldUrls.includes(commentUrl);
 			let ageIcon = "";
 			const postIsVisited = postIsOld && oldTitles.includes("🟪 " + item.title);
 			if ($.getenv("age_icon") === "old" && postIsOld) ageIcon = "🕓 ";
 			if ($.getenv("age_icon") === "new" && !postIsOld) ageIcon = "🆕 ";
-			const visitationIcon = postIsVisited ? "🟪 " : "";
+			const visitedIcon = postIsVisited ? "🟪 " : "";
 
 			// subtitle
+			const stickyIcon = item.stickied ? "📌 " : "";
 			let category = item.link_flair_text ? `[${item.link_flair_text}]` : "";
 			if (item.over_18) category += " [NSFW]";
-			const comments = item.num_comments || 0;
+			const comments = item.num_comments ?? 0;
 			const crossposts = item.num_crossposts ? ` ${item.num_crossposts}↗` : "";
-			const subtitle = `${postTypeIcon}${ageIcon}${item.score}↑  ${comments}● ${crossposts} ${category}`;
+			const subtitle = `${stickyIcon}${postTypeIcon}${ageIcon}${item.score}↑  ${comments}● ${crossposts} ${category}`;
 
-			const cleanTitle = item.title.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
+			const cleanTitle = item.title.replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&amp;", "&");
 
 			/** @type{AlfredItem} */
 			const post = {
-				title: visitationIcon + cleanTitle,
+				title: visitedIcon + cleanTitle,
 				subtitle: subtitle,
 				arg: commentUrl,
 				icon: { path: iconPath },
