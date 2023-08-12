@@ -43,15 +43,13 @@ function unshallow() {
 
 # use delta for small diffs and diff2html for big diffs
 function gd() {
+	if ! command -v diff2html &>/dev/null; then echo "diff2html not installed (\`npm -g install diff2html\`)." && return 1; fi
+	if ! command -v delta &>/dev/null; then echo "delta not installed (\`brew install git-delta\`)" && return 1; fi
+
 	local threshold_lines=80
 	if [[ $(git diff | wc -l) -gt $threshold_lines ]]; then
-		if ! command -v diff2html &>/dev/null; then echo "diff2html not installed (\`npm -g install diff2html\`)." && return 1; fi
 		diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"
 	else
-		# uses git delta (configured so in gitconfig)
-		if ! command -v delta &>/dev/null; then echo "delta not installed (\`brew install git-delta\`)" && return 1; fi
-
-		git diff
 		if defaults read -g AppleInterfaceStyle &>/dev/null; then
 			git -c delta.dark=true diff
 		else
