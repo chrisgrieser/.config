@@ -49,7 +49,7 @@
 	"autocmd": {
 		"prefix": "autocmd (short)",
 		"body": [
-			"autocmd(\"${1|BufReadPost,VimEnter,UIEnter,BufReadPre,VeryLazy,LspAttach,WinEnter,FocusGained,FocusLost,WinLeave,BufLeave,BufWritePre,BufWritePost|}\", {",
+			"autocmd(\"${1|BufReadPost,ColorScheme,VeryLazy|}\", {",
 			"\tcallback = function()",
 			"\t\t$0",
 			"\tend,",

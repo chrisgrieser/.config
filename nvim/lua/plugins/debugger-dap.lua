@@ -94,7 +94,8 @@ return {
 			end
 			require("osv").run_this()
 		end, { desc = "  Start nvim-lua debugger" })
-		require("which-key").register { ["<leader>b"] = { name = "  Debugger" } }
+		local ok, whichKey = pcall(require, "which-key")
+		if ok then whichKey.register { ["<leader>b"] = { name = "  Debugger" } } end
 	end,
 	config = function()
 		dapConfig()

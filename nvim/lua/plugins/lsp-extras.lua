@@ -2,6 +2,26 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
+	{ -- diagnostics in the top instead of virtual lines. More stable than diagflow
+		"Mofiqul/trld.nvim",
+		event = "LspAttach",
+		init = function() vim.diagnostic.config { virtual_text = false } end,
+		opts = {
+			highlights = {
+				error = "DiagnosticVirtualTextError",
+				warn = "DiagnosticVirtualTextWarn",
+				info = "DiagnosticVirtualTextInfo",
+				hint = "DiagnosticVirtualTextHint",
+			},
+			formatter = function(diag)
+				local padRight = 3
+				local hlBySeverity = require("trld.utils").get_hl_by_serverity
+				local fmt_line = u.diagnosticFmt(diag)
+				local lines = { { { fmt_line .. (" "):rep(padRight), hlBySeverity(diag.severity) } } }
+				return lines
+			end,
+		},
+	},
 	{ -- lsp definitions & references count in the status line
 		"chrisgrieser/nvim-dr-lsp",
 		lazy = true, -- loaded by lualine

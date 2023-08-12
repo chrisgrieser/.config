@@ -7,7 +7,8 @@ return {
 			{ "<leader>ii", desc = "󱠤 REPL: Send Line" },
 		},
 		init = function()
-			require("which-key").register { ["<leader>i"] = { name = " 󱠤 Iron-REPL" } }
+			local ok, whichKey = pcall(require, "which-key")
+			if ok then whichKey.register { ["<leader>i"] = { name = " 󱠤 Iron-REPL" } } end
 		end,
 		config = function()
 			require("iron.core").setup {

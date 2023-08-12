@@ -17,10 +17,13 @@ return {
 				end,
 			})
 
-			require("which-key").register {
-				["<leader>ö"] = { name = "  Octo" },
-				["<leader>ör"] = { name = "  React" },
-			}
+			local ok, whichKey = pcall(require, "which-key")
+			if ok then
+				whichKey.register {
+					["<leader>ö"] = { name = "  Octo" },
+					["<leader>ör"] = { name = "  React" },
+				}
+			end
 		end,
 		opts = {
 			-- https://github.com/pwntester/octo.nvim#%EF%B8%8F-configuration

@@ -35,7 +35,7 @@ return {
 	{ -- auto-insert ;,=:
 		"filNaj/tree-setter",
 		-- list of supported languages: https://github.com/filNaj/tree-setter/tree/master/queries
-		ft = { "c", "cpp", "java", "javascript", "typescript", "python", "rust", "go" }
+		ft = { "c", "cpp", "java", "javascript", "typescript", "python", "rust", "go" },
 	},
 	{ -- case conversion
 		"johmsalas/text-case.nvim",
@@ -125,15 +125,20 @@ return {
 		keys = {
 			{ "p", "<Plug>(YankyPutAfter)", desc = " Paste (Yanky)" },
 			{ "P", "<Plug>(YankyCycleForward)", desc = " Cycle Killring" },
+			{ "y", "<Plug>(YankyYank)", desc = " Sticky Yank" },
 		},
 		opts = {
 			ring = { history_length = 20 },
-			highlight = {
-				on_yank = false, -- using nicer highlights from vim.highlight.on_yank() instead
-				on_put = true,
-				timer = 500,
-			},
+			highlight = { timer = 500 },
 		},
+		-- IncSearch is the default highlight group for post-yank highlights
+		init = function()
+			vim.api.nvim_create_autocmd("ColorScheme", {
+				callback = function()
+					vim.api.nvim_set_hl(0, "YankyYanked", { link = "IncSearch", default = true })
+				end,
+			})
+		end,
 	},
 	{
 		"folke/which-key.nvim",
