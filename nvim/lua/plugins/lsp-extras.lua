@@ -7,6 +7,7 @@ return {
 		event = "LspAttach",
 		init = function()
 			vim.defer_fn(function() vim.diagnostic.config { virtual_text = false } end, 1)
+			vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "󰒕 Diagnostic" })
 		end,
 		opts = {
 			highlights = {
@@ -16,7 +17,7 @@ return {
 				hint = "DiagnosticVirtualTextHint",
 			},
 			formatter = function(diag)
-				local padRight = 3
+				local padRight = 3 -- due to scrollbar
 				local hlBySeverity = require("trld.utils").get_hl_by_serverity
 				local fmt_line = u.diagnosticFmt(diag)
 				local lines = { { { " " .. fmt_line .. (" "):rep(padRight), hlBySeverity(diag.severity) } } }

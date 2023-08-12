@@ -14,20 +14,22 @@ return {
 				callback = function()
 					vim.keymap.set("i", "@", "@<C-x><C-o>", { silent = true, buffer = true })
 					vim.keymap.set("i", "#", "#<C-x><C-o>", { silent = true, buffer = true })
+					vim.keymap.set(
+						"n",
+						"<leader>gu",
+						"<leader>öu",
+						{ silent = true, buffer = true, remap = true, desc = " Open in browser" }
+					)
 				end,
 			})
 
 			local ok, whichKey = pcall(require, "which-key")
-			if ok then
-				whichKey.register {
-					["<leader>ö"] = { name = "  Octo" },
-					["<leader>ör"] = { name = "  React" },
-				}
-			end
+			if ok then whichKey.register { ["<leader>ö"] = { name = "  Octo" } } end
 		end,
 		opts = {
 			-- https://github.com/pwntester/octo.nvim#%EF%B8%8F-configuration
 			ui = { use_signcolumn = true }, -- pending: https://github.com/pwntester/octo.nvim/issues/80
+
 			issues = { order_by = { field = "UPDATED_AT" } }, -- COMMENTS|CREATED_AT|UPDATED_AT
 			pull_requests = { order_by = { field = "UPDATED_AT" } },
 
