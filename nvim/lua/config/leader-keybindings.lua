@@ -173,11 +173,12 @@ keymap("n", "<leader>g?", "<cmd>Gitsigns blame_line<CR>", { desc = "󰊢 Blame L
 -- Telescope
 -- stylua: ignore start
 keymap("n", "<leader>gs", function() cmd.Telescope("git_status") end, { desc = "󰊢  Status" })
-keymap("n", "<leader>gl", function() cmd.Telescope("git_commits") end, { desc = "󰊢  Log / Commits" })
+keymap("n", "<leader>gl", function() cmd.Telescope("git_commits") end, { desc = "󰊢  Log" })
+keymap("n", "<leader>gL", function() cmd.Telescope("git_bcommits") end, { desc = "󰊢  Log (Buffer)" })
 keymap("n", "<leader>gb", function() cmd.Telescope("git_branches") end, { desc = "󰊢  Branches" })
 
 -- My utils
-keymap({ "n", "x" }, "<leader>gu", function () require("funcs.git-utils").githubUrl() end, { desc = "󰊢 GitHub Link (file)" })
+keymap({ "n", "x" }, "<leader>gu", function () require("funcs.git-utils").githubUrl() end, { desc = "󰊢 GitHub Link" })
 keymap("n", "<leader>gc", function() require("funcs.git-utils").commit() end, { desc = "󰊢 Commit" })
 keymap("n", "<leader>gg", function() require("funcs.git-utils").addCommitPush() end, { desc = "󰊢 Add-Commit-Push" })
 keymap("n", "<leader>gm", function() require("funcs.git-utils").amendNoEditPushForce() end, { desc = "󰊢 Amend-No-Edit & Force Push" })
@@ -213,7 +214,7 @@ keymap("n", "<leader>gd", function()
 			cmd("silent! normal! n") -- search for first item
 		end
 	end)
-end, { desc = "󰊢 Pickaxe File History (Diffview)" })
+end, { desc = "󰊢 Pickaxe File History" })
 
 --------------------------------------------------------------------------------
 -- OPTION TOGGLING
