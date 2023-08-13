@@ -167,19 +167,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>A085B3C2-31CE-4786-BC74-B21EC8BDDCB1</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>16D2C4F3-A099-4D2C-A0C8-03E587C8968A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>A2960A81-02AB-485E-AF91-AEF7B502D533</key>
 		<array>
 			<dict>
@@ -208,19 +195,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>AF2E709C-56BA-4D78-AD00-074FC6326079</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>A825DF3F-79FD-44B3-8972-AF3EFC059CCB</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A085B3C2-31CE-4786-BC74-B21EC8BDDCB1</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -321,128 +295,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/restart-hammerspoon.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>4F748E27-E0FA-42A5-9B83-B58EF498DC15</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>win</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Display Window Properties</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>A825DF3F-79FD-44B3-8972-AF3EFC059CCB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>16D2C4F3-A099-4D2C-A0C8-03E587C8968A</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>hs</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>❗️Restart Hammerspoon</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>E8066503-E298-4023-9E9F-3FBA20E03748</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>tell application "System Events" to set frontAppProcess to first application process whose frontmost is true# Tell the *process* to count its windows and return its front window's name.tell frontAppProcess	if (count of windows) &gt; 0 then		set window_name to name of front window	end ifend tell
-
-set the clipboard to window_name
-
-# direct return for displaying in Alfred
-window_name</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/get-window-title.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>A085B3C2-31CE-4786-BC74-B21EC8BDDCB1</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -501,23 +353,46 @@ window_name</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>hs</string>
+				<key>subtext</key>
 				<string></string>
-				<key>skipqueryencode</key>
+				<key>text</key>
+				<string>❗️Restart Hammerspoon</string>
+				<key>withspace</key>
 				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>hammerspoon://sync-repos</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>318E19F4-2DB1-4B3E-B1E2-F288DF9FF244</string>
+			<string>E8066503-E298-4023-9E9F-3FBA20E03748</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/restart-hammerspoon.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>4F748E27-E0FA-42A5-9B83-B58EF498DC15</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -537,6 +412,27 @@ window_name</string>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>E9FF31BC-709C-4387-975A-0B1410418161</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>hammerspoon://sync-repos</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>318E19F4-2DB1-4B3E-B1E2-F288DF9FF244</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -583,6 +479,247 @@ window_name</string>
 			<string>496D4848-5FF5-4521-AD62-DA66D955EF60</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>report</string>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>18</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>1</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>69582200-3B13-4747-BCAD-1292B8BF99FD</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<false/>
+				<key>acceptsurls</key>
+				<true/>
+				<key>name</key>
+				<string>Add Feed to Innoreader</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>9C8E2CFD-649D-4005-8762-41497D453FEF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/neovim-debugger.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>87FA7BC2-6B86-4232-BC62-918EC5651BA7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}
+
+S  Marks a process that is sleeping for less than about 20 seconds.
+R  Marks a runnable process.
+Z  Marks a dead process (a “zombie”).
+s  The process is a session leader.
+N  The process has reduced CPU scheduling priority (see setpriority(2)).</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>90</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>221EDD07-BD53-4BD8-B302-CD0040D3FE51</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>1</integer>
+						<key>matchstring</key>
+						<string></string>
+						<key>outputlabel</key>
+						<string>empty</string>
+						<key>uid</key>
+						<string>1DC85A94-2184-4548-B095-E64011250D55</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>content</string>
+				<key>hideelse</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>911BB1AD-FF93-4FDC-9490-1A34EF5F7D92</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>killall</string>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>19</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>2</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>2A58464F-69A0-434A-A54B-5814B905DEC6</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/add-to-espanso-spellings.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>C120F733-C46F-44AC-ADAA-504E11D52028</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>spell</string>
+				<key>subtext</key>
+				<string>$1: Misspelling $2: Correct Spelling</string>
+				<key>text</key>
+				<string>Spelling: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>A2960A81-02AB-485E-AF91-AEF7B502D533</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>open</key>
+					<string>false</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>0DF397E6-7179-4A9B-A07A-B32165613998</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -658,146 +795,6 @@ end tell</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<false/>
-				<key>acceptsurls</key>
-				<true/>
-				<key>name</key>
-				<string>Add Feed to Innoreader</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>9C8E2CFD-649D-4005-8762-41497D453FEF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/add-to-espanso-spellings.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>C120F733-C46F-44AC-ADAA-504E11D52028</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>spell</string>
-				<key>subtext</key>
-				<string>$1: Misspelling $2: Correct Spelling</string>
-				<key>text</key>
-				<string>Spelling: {query}</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>A2960A81-02AB-485E-AF91-AEF7B502D533</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>zz</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>🔓 Zoom Login</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>0CB1384E-FC0D-46E5-8142-2590BB7CE8BD</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>tell application "zoom.us" to activate
-delay 1
-tell application "System Events" 
-	keystroke tab
-	keystroke space
-	delay 0.2
-	keystroke tab
-	keystroke tab
-	keystroke tab
-	keystroke tab
-	keystroke space
-end tell</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/zoom-login-automation.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>DE6D43CB-FDC8-4501-B0BC-6EDCECD2043A</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<true/>
-				<key>variables</key>
-				<dict>
-					<key>open</key>
-					<string>false</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>0DF397E6-7179-4A9B-A07A-B32165613998</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -823,21 +820,6 @@ end tell</string>
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>BA7E00FB-F43B-4DDF-869D-A9DB23200405</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>command</key>
-				<integer>8</integer>
-				<key>confirm</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.systemcommand</string>
-			<key>uid</key>
-			<string>FDD33DE5-9EF6-4054-97BE-CD907ADEC73E</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -1169,6 +1151,120 @@ end tell</string>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
+				<string>zz</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>🔓 Zoom Login</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>0CB1384E-FC0D-46E5-8142-2590BB7CE8BD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>tell application "zoom.us" to activate
+delay 1
+tell application "System Events" 
+	keystroke tab
+	keystroke space
+	delay 0.2
+	keystroke tab
+	keystroke tab
+	keystroke tab
+	keystroke tab
+	keystroke space
+end tell</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/zoom-login-automation.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>DE6D43CB-FDC8-4501-B0BC-6EDCECD2043A</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/toggle-rain.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>AF2E709C-56BA-4D78-AD00-074FC6326079</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>rain</string>
+				<key>subtext</key>
+				<string>lo-rain</string>
+				<key>text</key>
+				<string>Toggle Rain</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>A495CCCB-F21B-41F1-B7AA-E4A511EC63C4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>command</key>
+				<integer>8</integer>
+				<key>confirm</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.systemcommand</string>
+			<key>uid</key>
+			<string>FDD33DE5-9EF6-4054-97BE-CD907ADEC73E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
 				<string>shutdown</string>
 				<key>subtext</key>
 				<string>run dotfiles &amp; vault sync before</string>
@@ -1266,206 +1362,6 @@ fi</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/toggle-rain.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>AF2E709C-56BA-4D78-AD00-074FC6326079</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>rain</string>
-				<key>subtext</key>
-				<string>lo-rain</string>
-				<key>text</key>
-				<string>Toggle Rain</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>A495CCCB-F21B-41F1-B7AA-E4A511EC63C4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>3</integer>
-				<key>argumenttext</key>
-				<string>report</string>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>18</integer>
-				<key>hotmod</key>
-				<integer>1966080</integer>
-				<key>hotstring</key>
-				<string>1</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>69582200-3B13-4747-BCAD-1292B8BF99FD</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/neovim-debugger.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>87FA7BC2-6B86-4232-BC62-918EC5651BA7</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>largetypetext</key>
-				<string>{query}
-
-S  Marks a process that is sleeping for less than about 20 seconds.
-R  Marks a runnable process.
-Z  Marks a dead process (a “zombie”).
-s  The process is a session leader.
-N  The process has reduced CPU scheduling priority (see setpriority(2)).</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>90</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>221EDD07-BD53-4BD8-B302-CD0040D3FE51</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>1</integer>
-						<key>matchstring</key>
-						<string></string>
-						<key>outputlabel</key>
-						<string>empty</string>
-						<key>uid</key>
-						<string>1DC85A94-2184-4548-B095-E64011250D55</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>content</string>
-				<key>hideelse</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>911BB1AD-FF93-4FDC-9490-1A34EF5F7D92</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>3</integer>
-				<key>argumenttext</key>
-				<string>killall</string>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>19</integer>
-				<key>hotmod</key>
-				<integer>1966080</integer>
-				<key>hotstring</key>
-				<string>2</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>2A58464F-69A0-434A-A54B-5814B905DEC6</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -1478,9 +1374,9 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>note</key>
 			<string>Zoom Quicker Login</string>
 			<key>xpos</key>
-			<real>540</real>
+			<real>465</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>665</real>
 		</dict>
 		<key>0DF397E6-7179-4A9B-A07A-B32165613998</key>
 		<dict>
@@ -1489,30 +1385,21 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>640</real>
-		</dict>
-		<key>16D2C4F3-A099-4D2C-A0C8-03E587C8968A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>335</real>
-			<key>ypos</key>
-			<real>20</real>
+			<real>500</real>
 		</dict>
 		<key>221EDD07-BD53-4BD8-B302-CD0040D3FE51</key>
 		<dict>
 			<key>xpos</key>
-			<real>460</real>
+			<real>895</real>
 			<key>ypos</key>
-			<real>1060</real>
+			<real>325</real>
 		</dict>
 		<key>2A58464F-69A0-434A-A54B-5814B905DEC6</key>
 		<dict>
 			<key>xpos</key>
-			<real>30</real>
+			<real>465</real>
 			<key>ypos</key>
-			<real>1135</real>
+			<real>400</real>
 		</dict>
 		<key>318E19F4-2DB1-4B3E-B1E2-F288DF9FF244</key>
 		<dict>
@@ -1528,9 +1415,9 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>880</real>
+			<real>805</real>
 			<key>ypos</key>
-			<real>750</real>
+			<real>830</real>
 		</dict>
 		<key>433B5526-5138-4622-BD58-0DE98F3C79F5</key>
 		<dict>
@@ -1539,9 +1426,9 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>note</key>
 			<string>ensuring git repos synced before</string>
 			<key>xpos</key>
-			<real>545</real>
+			<real>470</real>
 			<key>ypos</key>
-			<real>730</real>
+			<real>810</real>
 		</dict>
 		<key>496D4848-5FF5-4521-AD62-DA66D955EF60</key>
 		<dict>
@@ -1550,7 +1437,7 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>315</real>
+			<real>175</real>
 		</dict>
 		<key>4F748E27-E0FA-42A5-9B83-B58EF498DC15</key>
 		<dict>
@@ -1570,14 +1457,14 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>315</real>
+			<real>175</real>
 		</dict>
 		<key>69582200-3B13-4747-BCAD-1292B8BF99FD</key>
 		<dict>
 			<key>xpos</key>
-			<real>30</real>
+			<real>465</real>
 			<key>ypos</key>
-			<real>1025</real>
+			<real>290</real>
 		</dict>
 		<key>7F470F6C-F1DD-4F6C-A598-CA405EA0B456</key>
 		<dict>
@@ -1588,23 +1475,25 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>155</real>
+			<real>15</real>
 		</dict>
 		<key>87FA7BC2-6B86-4232-BC62-918EC5651BA7</key>
 		<dict>
+			<key>note</key>
+			<string>neovim debugger</string>
 			<key>xpos</key>
-			<real>210</real>
+			<real>645</real>
 			<key>ypos</key>
-			<real>1060</real>
+			<real>325</real>
 		</dict>
 		<key>911BB1AD-FF93-4FDC-9490-1A34EF5F7D92</key>
 		<dict>
 			<key>note</key>
 			<string>non-empty</string>
 			<key>xpos</key>
-			<real>375</real>
+			<real>810</real>
 			<key>ypos</key>
-			<real>1090</real>
+			<real>355</real>
 		</dict>
 		<key>9734FC1B-0242-4229-B9BF-4A809F59C81E</key>
 		<dict>
@@ -1613,7 +1502,7 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>155</real>
+			<real>15</real>
 		</dict>
 		<key>9C8E2CFD-649D-4005-8762-41497D453FEF</key>
 		<dict>
@@ -1622,16 +1511,7 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>445</real>
-		</dict>
-		<key>A085B3C2-31CE-4786-BC74-B21EC8BDDCB1</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>190</real>
-			<key>ypos</key>
-			<real>20</real>
+			<real>305</real>
 		</dict>
 		<key>A2960A81-02AB-485E-AF91-AEF7B502D533</key>
 		<dict>
@@ -1642,7 +1522,7 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>565</real>
+			<real>425</real>
 		</dict>
 		<key>A495CCCB-F21B-41F1-B7AA-E4A511EC63C4</key>
 		<dict>
@@ -1653,27 +1533,16 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>865</real>
-		</dict>
-		<key>A825DF3F-79FD-44B3-8972-AF3EFC059CCB</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>front window</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>20</real>
+			<real>725</real>
 		</dict>
 		<key>AB25652B-F29C-467C-A234-8DD5F700B047</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>700</real>
+			<real>625</real>
 			<key>ypos</key>
-			<real>730</real>
+			<real>810</real>
 		</dict>
 		<key>AF2E709C-56BA-4D78-AD00-074FC6326079</key>
 		<dict>
@@ -1682,7 +1551,7 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>865</real>
+			<real>725</real>
 		</dict>
 		<key>BA7E00FB-F43B-4DDF-869D-A9DB23200405</key>
 		<dict>
@@ -1693,7 +1562,7 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>575</real>
 		</dict>
 		<key>C120F733-C46F-44AC-ADAA-504E11D52028</key>
 		<dict>
@@ -1702,7 +1571,7 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>xpos</key>
 			<real>270</real>
 			<key>ypos</key>
-			<real>565</real>
+			<real>425</real>
 		</dict>
 		<key>C98CBF71-E7E2-41B1-9C53-9A50774B67D4</key>
 		<dict>
@@ -1711,27 +1580,27 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>note</key>
 			<string>keep on top</string>
 			<key>xpos</key>
-			<real>700</real>
+			<real>625</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>525</real>
 		</dict>
 		<key>CC649DDD-3F1D-47F4-A2BA-EA57ADBA8E06</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>540</real>
+			<real>465</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>525</real>
 		</dict>
 		<key>CD7F4A8F-7638-4D94-96DD-C7B2405D837C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>995</real>
+			<real>920</real>
 			<key>ypos</key>
-			<real>850</real>
+			<real>930</real>
 		</dict>
 		<key>DE6D43CB-FDC8-4501-B0BC-6EDCECD2043A</key>
 		<dict>
@@ -1740,9 +1609,9 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>note</key>
 			<string>login script</string>
 			<key>xpos</key>
-			<real>700</real>
+			<real>625</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>665</real>
 		</dict>
 		<key>E8066503-E298-4023-9E9F-3FBA20E03748</key>
 		<dict>
@@ -1753,7 +1622,7 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>xpos</key>
 			<real>470</real>
 			<key>ypos</key>
-			<real>20</real>
+			<real>15</real>
 		</dict>
 		<key>E9FF31BC-709C-4387-975A-0B1410418161</key>
 		<dict>
@@ -1764,7 +1633,7 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>xpos</key>
 			<real>470</real>
 			<key>ypos</key>
-			<real>160</real>
+			<real>155</real>
 		</dict>
 		<key>F34FCF8E-937F-468A-8727-48A458BF4FA9</key>
 		<dict>
@@ -1773,7 +1642,7 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>575</real>
 		</dict>
 		<key>FDD33DE5-9EF6-4054-97BE-CD907ADEC73E</key>
 		<dict>
@@ -1782,9 +1651,9 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>note</key>
 			<string>will ask for confirmation</string>
 			<key>xpos</key>
-			<real>995</real>
+			<real>920</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>795</real>
 		</dict>
 		<key>FFE40428-4486-4B45-AD59-024B6311D2D8</key>
 		<dict>
@@ -1793,9 +1662,9 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>note</key>
 			<string>move to bottom left</string>
 			<key>xpos</key>
-			<real>860</real>
+			<real>785</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>525</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
