@@ -76,14 +76,14 @@ keymap("n", "<leader>f<Tab>", function()
 	bo.expandtab = false
 	bo.tabstop = 3
 	cmd.retab { bang = true }
-	vim.notify("Now using tabs ↹ (with width 3)")
-end, { desc = "↹ Use Tabs" })
+	vim.notify("Now using 󰌒 (width 3)")
+end, { desc = "󰌒 Use Tabs" })
 
 keymap("n", "<leader>f<Space>", function()
 	bo.tabstop = 2
 	bo.expandtab = true
 	cmd.retab { bang = true }
-	vim.notify("Now using 2 spaces 󱁐")
+	vim.notify("Now using 2󱁐")
 end, { desc = "󱁐 Use Spaces" })
 
 --------------------------------------------------------------------------------

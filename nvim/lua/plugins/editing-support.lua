@@ -123,8 +123,10 @@ return {
 	{ -- killring & highlights on `p`
 		"gbprod/yanky.nvim",
 		keys = {
-			{ "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" }, desc = " Paste (Yanky)" },
-			{ "P", "<Plug>(YankyCycleForward)", mode = { "n", "x" }, desc = " Cycle Killring" },
+			-- INFO not binding p/P in visual mode, since I prefer my switch of
+			-- "p" and "P" to be in visual mode for not replacing stuff
+			{ "p", "<Plug>(YankyPutAfter)", desc = " Paste (Yanky)" },
+			{ "P", "<Plug>(YankyCycleForward)", desc = " Cycle Killring" },
 			{ "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = " Sticky Yank" },
 			{ "Y" }, -- is already sticky, but needs to load Yanky for the highlight settings
 		},
