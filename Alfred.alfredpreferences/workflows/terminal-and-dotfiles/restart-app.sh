@@ -32,7 +32,7 @@ nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>try|wqall|catch|qall|e
 
 # wait until dead
 i=0
-while pgrep -xq "neovide"; do
+while pgrep -xq "neovide" || pgrep -xq "nvim"; do
 	i=$((i + 1))
 	sleep 0.1
 	if [[ $i -gt 30 ]]; then
@@ -41,6 +41,7 @@ while pgrep -xq "neovide"; do
 		break
 	fi
 done
+rm -f "/tmp/nvim_server.pipe" # FIX server sometimes not shut down
 
 # Restart (config reopens last file if no arg)
 open -a "Neovide"

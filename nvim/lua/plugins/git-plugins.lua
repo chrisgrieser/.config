@@ -64,24 +64,6 @@ return {
 		event = "VeryLazy",
 		opts = { max_file_length = 7500 },
 	},
-	{ -- git client
-		"NeogitOrg/neogit",
-		dependencies = "nvim-lua/plenary.nvim",
-		cmd = "Neogit",
-		opts = {
-			disable_insert_on_commit = "auto", -- insert only if commit msg empty
-			disable_commit_confirmation = true,
-			disable_builtin_notifications = true,
-			signs = {
-				section = { "", "" },
-				item = { "", "" },
-				hunk = { "", "" },
-			},
-			mappings = {
-				status = { ["<D-w>"] = "Close" },
-			},
-		},
-	},
 	{ -- diff / merge
 		"sindrets/diffview.nvim",
 		dependencies = "nvim-lua/plenary.nvim",
