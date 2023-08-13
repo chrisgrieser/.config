@@ -98,7 +98,8 @@ local function telescopeConfig()
 				results_title = "git log",
 				previewer = deltaPreviewer,
 				layout_config = { horizontal = { height = 0.9 } },
-				git_command = { "git", "log", "--all", "--pretty=%h %s (%cr)", "--", "." },
+				-- add commit time (%cr)
+				git_command = { "git", "log", "--pretty=%h %s (%cr)", "--", "." },
 			},
 			git_bcommits = {
 				prompt_prefix = "󰊢 ",
@@ -106,6 +107,8 @@ local function telescopeConfig()
 				results_title = "git log (buffer)",
 				previewer = deltaPreviewer,
 				layout_config = { horizontal = { height = 0.9 } },
+				-- add commit time (%cr)
+				git_command = { "git", "log", "--pretty=%h %s (%cr)", "--", "." },
 			},
 			git_branches = {
 				prompt_prefix = "󰊢 ",
