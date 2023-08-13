@@ -29,14 +29,14 @@ return {
 			}
 		end,
 		config = function()
-			-- INFO inserting only on load to ensure lazy-loading
+			-- INFO inserting to not override the existing lualine segments
 			local lualineZ = require("lualine").get_config().tabline.lualine_z or {}
 			table.insert(lualineZ, {
 				function()
 					if not vim.b.VM_Selection then return "" end ---@diagnostic disable-line: undefined-field
 					local cursors = vim.b.VM_Selection.Regions
 					if not cursors then return "" end
-					return "󰇀 " .. tostring(#cursors)
+					return "󰇀 Visual-Multi (" .. tostring(#cursors) .. ")"
 				end,
 				section_separators = lualineTopSeparators,
 			})

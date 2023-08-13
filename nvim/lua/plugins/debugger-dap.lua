@@ -94,6 +94,7 @@ return {
 			end
 			require("osv").run_this()
 		end, { desc = "  Start nvim-lua debugger" })
+
 		local ok, whichKey = pcall(require, "which-key")
 		if ok then whichKey.register { ["<leader>b"] = { name = "  Debugger" } } end
 	end,
