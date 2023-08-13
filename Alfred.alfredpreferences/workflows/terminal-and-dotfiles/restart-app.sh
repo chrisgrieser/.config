@@ -32,7 +32,7 @@ nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>try|wqall|catch|qall|e
 
 # wait until dead
 i=0
-while pgrep -xq "nvim"; do
+while pgrep -xq "neovide"; do
 	i=$((i + 1))
 	sleep 0.1
 	if [[ $i -gt 30 ]]; then

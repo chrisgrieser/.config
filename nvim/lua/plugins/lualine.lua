@@ -68,9 +68,8 @@ end
 ---@nodiscard
 ---@return boolean
 local function isStandardBranch()
-	local curBuf = vim.api.nvim_get_current_buf()
 	-- checking via lualine API, to not call git outself
-	local curBranch = require("lualine.components.branch.git_branch").get_branch(curBuf)
+	local curBranch = require("lualine.components.branch.git_branch").get_branch()
 	local notMainBranch = curBranch ~= "main" and curBranch ~= "master"
 	local validFiletype = bo.filetype ~= "help" -- vim help files are located in a git repo
 	local notSpecialBuffer = bo.buftype == ""

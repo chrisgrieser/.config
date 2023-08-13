@@ -414,7 +414,7 @@ zsh "$dock_switcher_path" --save "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>restart-app.sh</string>
+				<string>restart-special-app.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>

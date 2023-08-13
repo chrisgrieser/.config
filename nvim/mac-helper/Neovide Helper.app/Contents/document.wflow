@@ -79,14 +79,13 @@ if pgrep -xq "neovide"; then
 	osascript -e 'tell application "Neovide" to activate'
 else
 	if [[ -z "$LINE" ]] ; then
-		nohup neovide "$@" &amp;
-		disown # has to be directly below https://stackoverflow.com/a/20338584/22114136
+		nohup neovide --geometry=104x33 "$@" &amp;
+		disown # https://stackoverflow.com/a/20338584/22114136
 	else
-		nohup neovide "+$LINE" "$@" &amp;
+		nohup neovide --geometry=104x33 "+$LINE" "$@" &amp;
 		disown
 	fi
-fi
-</string>
+fi</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
 					<key>inputMethod</key>
@@ -199,7 +198,7 @@ fi
 				<key>isViewVisible</key>
 				<integer>1</integer>
 				<key>location</key>
-				<string>251.500000:432.000000</string>
+				<string>251.500000:252.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>

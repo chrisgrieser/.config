@@ -18,10 +18,10 @@ if pgrep -xq "neovide"; then
 	osascript -e 'tell application "Neovide" to activate'
 else
 	if [[ -z "$LINE" ]] ; then
-		nohup neovide "$@" &
-		disown # has to be directly below https://stackoverflow.com/a/20338584/22114136
+		nohup neovide --geometry=104x33 "$@" &
+		disown # https://stackoverflow.com/a/20338584/22114136
 	else
-		nohup neovide "+$LINE" "$@" &
+		nohup neovide --geometry=104x33 "+$LINE" "$@" &
 		disown
 	fi
 fi
