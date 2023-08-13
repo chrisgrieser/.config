@@ -25,35 +25,51 @@ return {
 			end,
 		},
 	},
+	{
+		"roobert/action-hints.nvim",
+		enabled = false,
+		config = function()
+			require("action-hints").setup {
+				template = {
+					{ " ⊛", "ActionHintsDefinition" },
+					{ " ↱%s", "ActionHintsReferences" },
+				},
+				use_virtual_text = true,
+				definition_color = "#add8e6",
+				reference_color = "#ff6666",
+			}
+
+			local lualineC = require("lualine").get_config().sections.lualine_c or {}
+			table.insert(lualineC, { require("action-hints").statusline })
+			require("lualine").setup {
+				sections = { lualine_c = lualineC },
+			}
+		end,
+	},
 	{ -- lsp definitions & references count in the status line
 		"chrisgrieser/nvim-dr-lsp",
 		event = "LspAttach",
 		dev = true,
 		config = function()
-
 			-- INFO inserting to not override the existing lualine segments
-			local lualineC = require("lualine").get_config().section.lualine_c or {}
+			local lualineX = require("lualine").get_config().sections.lualine_x or {}
+			table.insert(lualineX, { require("dr-lsp").lspProgress })
+			local lualineC = require("lualine").get_config().sections.lualine_c or {}
 			table.insert(lualineC, {
-				function()
-					if not vim.b.VM_Selection then return "" end ---@diagnostic disable-line: undefined-field
-					local cursors = vim.b.VM_Selection.Regions
-					if not cursors then return "" end
-					return "󰇀 Visual-Multi (" .. tostring(#cursors) .. ")"
-				end,
-			})
-
-			require("lualine").setup {
-				tabline = { lualine_z = lualineZ },
-			}
-			{ require("dr-lsp").lspProgress },
-			{
 				require("dr-lsp").lspCount,
 				-- needs the highlight value, since setting the hlgroup directly
 				-- results in bg color being inherited from main editor
 				color = function() return { fg = u.getHighlightValue("Comment", "fg") } end,
 				fmt = function(str) return str:gsub("R", ""):gsub("D", " 󰄾"):gsub("LSP:", "󰈿") end,
-			},
-		end
+			})
+
+			require("lualine").setup {
+				sections = {
+					lualine_c = lualineC,
+					lualine_x = lualineX,
+				},
+			}
+		end,
 	},
 	{ -- breadcrumbs for winbar
 		"SmiteshP/nvim-navic",
