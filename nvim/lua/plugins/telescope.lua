@@ -96,7 +96,6 @@ local function telescopeConfig()
 				prompt_prefix = "󰊢 ",
 				initial_mode = "normal",
 				results_title = "git log",
-				-- git_command = { "git", "log", "--all", "--pretty=%h %s (%cr)", "--", "." },
 				previewer = deltaPreviewer,
 				layout_config = { horizontal = { height = 0.9 } },
 			},
@@ -105,12 +104,12 @@ local function telescopeConfig()
 				initial_mode = "normal",
 				results_title = "git log (buffer)",
 				previewer = deltaPreviewer,
-				-- git_command = { "git", "log", "--all", "--pretty=%h %s (%cr)", "--", "." },
 				layout_config = { horizontal = { height = 0.9 } },
 			},
 			git_branches = {
 				prompt_prefix = "󰊢 ",
 				initial_mode = "normal",
+				layout_config = { horizontal = { height = 0.9 } },
 			},
 			keymaps = {
 				prompt_prefix = " ",

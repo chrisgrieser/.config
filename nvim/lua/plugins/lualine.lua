@@ -63,17 +63,14 @@ end
 
 --------------------------------------------------------------------------------
 
--- show branch info only when *not* on main/master
-vim.api.nvim_create_autocmd({ "BufReadPost", "FocusGained", "UiEnter" }, {
-	callback = function()
-		vim.b.cur_branch = fn.system("git --no-optional-locks branch --show-current"):gsub("\n$", "")
-	end,
-})
-
+--- https://github.com/nvim-lualine/lualine.nvim/blob/master/lua/lualine/components/branch/git_branch.lua#L118
 ---@nodiscard
 ---@return boolean
-local function isStandardBranch() -- not checking for branch here, since running the condition check too often results in lock files and also makes the cursor glitch for whatever reason…
-	local notMainBranch = vim.b.cur_branch ~= "main" and vim.b.cur_branch ~= "master"
+local function isStandardBranch()
+	local curBuf = vim.api.nvim_get_current_buf()
+	-- checking via lualine API, to not call git outself
+	local curBranch = require("lualine.components.branch.git_branch").get_branch(curBuf)
+	local notMainBranch = curBranch ~= "main" and curBranch ~= "master"
 	local validFiletype = bo.filetype ~= "help" -- vim help files are located in a git repo
 	local notSpecialBuffer = not (bo.buftype ~= "") -- statusline already shows branch
 	return notMainBranch and validFiletype and notSpecialBuffer
