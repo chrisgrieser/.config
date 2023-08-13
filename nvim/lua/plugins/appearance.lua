@@ -177,6 +177,7 @@ return {
 		"nvim-tree/nvim-web-devicons",
 		lazy = true, -- loaded by Telescope & Lualine
 		opts = {
+			default = true; -- use default icon as fallback
 			override = {
 				-- filetypes
 				applescript = { icon = "", color = "#7f7f7f", name = "Applescript" },

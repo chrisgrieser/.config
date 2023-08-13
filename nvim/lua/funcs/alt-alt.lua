@@ -66,6 +66,9 @@ function M.altFileStatusline()
 		local ext = fn.expand("#:e")
 		local altBufFt = vim.api.nvim_buf_get_option(fn.bufnr("#"), "filetype") ---@diagnostic disable-line: param-type-mismatch
 		local ftOrExt = ext ~= "" and ext or altBufFt
+		if ftOrExt == "javascript" then ftOrExt = "js" end
+		if ftOrExt == "typescript" then ftOrExt = "ts" end
+		if ftOrExt == "markdown" then ftOrExt = "md" end
 		local deviconsInstalled, devicons = pcall(require, "nvim-web-devicons")
 		icon = deviconsInstalled and devicons.get_icon(altFile, ftOrExt) or "#"
 
@@ -115,7 +118,8 @@ end
 ---Close window/buffer, preserving alt-file
 function M.betterClose()
 	if vim.bo.buftype ~= "" then
-		pcall(cmd.bwipeout, { bang = true })
+		local success = pcall(cmd.bwipeout, { bang = true })
+		if not success then vim.notify("Could not delete buffer.", vim.log.levels.WARN) end
 		return
 	end
 

@@ -110,7 +110,6 @@ local function newlineChars()
 	elseif bo.fileformat == "dos" then
 		return "󰌑 "
 	end
-	return "󰌑 ?"
 end
 
 --------------------------------------------------------------------------------
@@ -133,7 +132,6 @@ local function currentFile()
 	local ext = fn.expand("%:e")
 	local ft = bo.filetype
 	local name = fn.expand("%:t")
-	-- prefix `#` for octo buffers
 	if ft == "octo" and name:find("^%d$") then
 		name = "#" .. name
 	elseif ft == "TelescopePrompt" then
@@ -143,6 +141,9 @@ local function currentFile()
 	local deviconsInstalled, devicons = pcall(require, "nvim-web-devicons")
 	require("nvim-web-devicons").get_icon("bla.js", "js")
 	local ftOrExt = ext ~= "" and ext or ft
+	if ftOrExt == "javascript" then ftOrExt = "js" end
+	if ftOrExt == "typescript" then ftOrExt = "ts" end
+	if ftOrExt == "markdown" then ftOrExt = "md" end
 	local icon = deviconsInstalled and devicons.get_icon(name, ftOrExt) or ""
 
 	-- truncate
