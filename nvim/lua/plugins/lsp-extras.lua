@@ -27,8 +27,33 @@ return {
 	},
 	{ -- lsp definitions & references count in the status line
 		"chrisgrieser/nvim-dr-lsp",
-		lazy = true, -- loaded by lualine
+		event = "LspAttach",
 		dev = true,
+		config = function()
+
+			-- INFO inserting to not override the existing lualine segments
+			local lualineC = require("lualine").get_config().section.lualine_c or {}
+			table.insert(lualineC, {
+				function()
+					if not vim.b.VM_Selection then return "" end ---@diagnostic disable-line: undefined-field
+					local cursors = vim.b.VM_Selection.Regions
+					if not cursors then return "" end
+					return "󰇀 Visual-Multi (" .. tostring(#cursors) .. ")"
+				end,
+			})
+
+			require("lualine").setup {
+				tabline = { lualine_z = lualineZ },
+			}
+			{ require("dr-lsp").lspProgress },
+			{
+				require("dr-lsp").lspCount,
+				-- needs the highlight value, since setting the hlgroup directly
+				-- results in bg color being inherited from main editor
+				color = function() return { fg = u.getHighlightValue("Comment", "fg") } end,
+				fmt = function(str) return str:gsub("R", ""):gsub("D", " 󰄾"):gsub("LSP:", "󰈿") end,
+			},
+		end
 	},
 	{ -- breadcrumbs for winbar
 		"SmiteshP/nvim-navic",

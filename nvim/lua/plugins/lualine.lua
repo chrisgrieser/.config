@@ -214,14 +214,6 @@ local lualineConfig = {
 		},
 		lualine_c = {
 			{ require("funcs.quickfix").counter },
-			{
-				require("dr-lsp").lspCount,
-				cond = function() return vim.v.hlsearch == 0 end,
-				-- needs the highlight value, since setting the hlgroup directly
-				-- results in bg color being inherited from main editor
-				color = function() return { fg = u.getHighlightValue("Comment", "fg") } end,
-				fmt = function(str) return str:gsub("R", ""):gsub("D", " 󰄾"):gsub("LSP:", "󰈿") end,
-			},
 		},
 		lualine_x = {
 			{
@@ -229,7 +221,6 @@ local lualineConfig = {
 				symbols = { error = "󰅚 ", warn = " ", info = "󰋽 ", hint = "󰘥 " },
 			},
 			{ irregularWhitespace },
-			{ require("dr-lsp").lspProgress },
 		},
 		lualine_y = {
 			"diff",
