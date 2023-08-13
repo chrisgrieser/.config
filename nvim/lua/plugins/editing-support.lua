@@ -128,7 +128,7 @@ return {
 			{ "p", "<Plug>(YankyPutAfter)", desc = " Paste (Yanky)" },
 			{ "P", "<Plug>(YankyCycleForward)", desc = " Cycle Killring" },
 			{ "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = " Sticky Yank" },
-			{ "Y" }, -- is already sticky, but needs to load Yanky for the highlight settings
+			{ "Y", "y$" }, -- is already sticky, but to be set to load Yanky for lazy loading
 		},
 		opts = {
 			ring = { history_length = 50 },
