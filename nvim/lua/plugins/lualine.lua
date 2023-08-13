@@ -4,23 +4,27 @@ local u = require("config.utils")
 
 --------------------------------------------------------------------------------
 
-local function indentation()
-	local out = ""
-	local usesSpaces = bo.expandtab
-	local usesTabs = not bo.expandtab
-	local ft = bo.filetype
-	local tabwidth = bo.tabstop
+-- display irregular indentation and linebreaks
+local function indentationAndLinebreaks()
+	-- config
 	local spaceFiletypes = { "python", "yaml" }
 	local ignoredFiletypes = { "css", "markdown", "gitcommit" }
+	local linebreakType = "unix" ---@type "unix" | "mac" | "dos"
+
+	-- vars & guard
+	local usesSpaces = bo.expandtab
+	local usesTabs = not bo.expandtab
+	local brUsed = bo.fileformat
+	local ft = bo.filetype
+	local tabwidth = bo.tabstop
 	if vim.tbl_contains(ignoredFiletypes, ft) or fn.mode() ~= "n" or bo.buftype ~= "" then return "" end
 
 	-- non-default indentation (e.g. changed via indent-o-matic)
+	local nonDefault = ""
 	if usesSpaces and not vim.tbl_contains(spaceFiletypes, ft) then
-		out = out .. tostring(tabwidth) .. "󱁐"
+		nonDefault = " " .. tostring(tabwidth) .. "󱁐 "
 	elseif usesTabs and vim.tbl_contains(spaceFiletypes, ft) then
-		out = out .. "↹ (" .. tostring(tabwidth) .. ")"
-	elseif usesTabs and vim.opt_global.tabstop:get() ~= tabwidth then
-		out = out .. " ↹ " .. tostring(tabwidth)
+		nonDefault = " 󰌒 (" .. tostring(tabwidth) .. ") "
 	end
 
 	-- mixed indentation
@@ -28,14 +32,23 @@ local function indentation()
 	local hasSpaces = fn.search("^ ", "nw") > 0
 	-- jsdocs: space not followed by "*"
 	if bo.filetype == "javascript" then hasSpaces = fn.search([[^ \(\*\)\@!]], "nw") > 0 end
+	local mixedIndent = ""
+	if (usesTabs and hasSpaces) or (usesSpaces and hasTabs) then mixedIndent = " 󱁐 󰌒 " end
 
-	if usesTabs and hasSpaces then
-		out = out .. " 󱁐"
-	elseif usesSpaces and hasTabs then
-		out = out .. " ↹ "
+	-- line breaks
+	local linebreaks = ""
+   if and brUsed ~= linebreakType then
+
+   end
+	if brUsed == "unix" and brUsed ~= linebreakType then
+		linebreaks = ""
+	elseif brUsed == "mac" and brUsed ~= linebreakType then
+		linebreaks = "󰌑 "
+	elseif brUsed == "dos" and brUsed ~= linebreakType then
+		linebreaks = "󰌑 "
 	end
-	if out ~= "" then out = "󰉶 " .. out end
-	return out
+
+	return nonDefault .. mixedIndent .. linebreaks
 end
 
 --------------------------------------------------------------------------------
@@ -99,17 +112,6 @@ end
 local function navicBreadcrumbs()
 	if bo.filetype == "css" or not require("nvim-navic").is_available() then return "" end
 	return require("nvim-navic").get_location()
-end
-
--- show newlineChar, when it is *not* unix
-local function newlineChars()
-	if bo.fileformat == "unix" then
-		return ""
-	elseif bo.fileformat == "mac" then
-		return "󰌑 "
-	elseif bo.fileformat == "dos" then
-		return "󰌑 "
-	end
 end
 
 --------------------------------------------------------------------------------
@@ -218,8 +220,7 @@ local lualineConfig = {
 				"diagnostics",
 				symbols = { error = "󰅚 ", warn = " ", info = "󰋽 ", hint = "󰘥 " },
 			},
-			{ indentation },
-			{ newlineChars },
+			{ indentationAndLinebreaks },
 			{ require("dr-lsp").lspProgress },
 		},
 		lualine_y = {

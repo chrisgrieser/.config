@@ -2624,7 +2624,7 @@ Search more than two dozen developer documentation sites via one of the keywords
 - `sc`: shellcheck Wiki
 - `pandoc`: Pandoc User Manual
 - `git`: official docs &amp; the "pro-git" book
-- `py`: python official docs
+- `py`: python official docs*
 - `sh`: cheat.sh
 - `manp`: man pages
 - `hs`: Hammerspoon reference
@@ -2634,12 +2634,17 @@ Search more than two dozen developer documentation sites via one of the keywords
 - `ep`: espanso docs
 - `wt`: WezTerm docs
 - `awd`: Alfred Workflow docs
-- `yq`
+- `yq`*
+
+
+ * These documentation searches do not cover all sub-sites. Contributions to improve them are welcome.
+
 
 ## Extra Utilities
 - `coco`: conventional commit keywords
 - `keycode`: macOS keycodes
 - `appid`: app-id of installed macOS apps
+- `win`: window information for the frontmost app
 - `code`: Code search on GitHub and SourceGraph
 - `http`: HTTP status codes
 - `uri`: URI schemes available on the device
@@ -3181,7 +3186,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.3.2</string>
+	<string>1.4.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
