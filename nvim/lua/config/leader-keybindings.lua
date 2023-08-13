@@ -219,8 +219,10 @@ end, { desc = "󰊢 Pickaxe File History (Diffview)" })
 -- OPTION TOGGLING
 
 -- stylua: ignore
-keymap("n", "<leader>or", "<cmd>set relativenumber!<CR>", { desc = "  Toggle Relative Line Numbers" })
-keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = "  Toggle Line Numbers" })
+keymap("n", "<leader>or", "<cmd>set relativenumber!<CR>", { desc = "  Relative Line Numbers" })
+keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = "  Line Numbers" })
+
+keymap("n", "<leader>ol", "<cmd>LspRestart<CR>", { desc = " 󰒕 LspRestart" })
 
 keymap("n", "<leader>od", function()
 	if vim.diagnostic.is_disabled(0) then
@@ -228,7 +230,7 @@ keymap("n", "<leader>od", function()
 	else
 		vim.diagnostic.disable(0)
 	end
-end, { desc = "  Toggle Diagnostics" })
+end, { desc = "  Diagnostics" })
 
 keymap("n", "<leader>ow", function()
 	local wrapOn = vim.opt_local.wrap:get()
@@ -243,7 +245,7 @@ keymap("n", "<leader>ow", function()
 		keymap("n", "A", "g$a", { buffer = true })
 		keymap("n", "I", "g^i", { buffer = true })
 	end
-end, { desc = " 󰖶 Toggle Wrap" })
+end, { desc = " 󰖶 Wrap" })
 
 -- FIX scrolloff and folding sometimes broken
 keymap("n", "<leader>of", function()

@@ -128,7 +128,7 @@ return {
 			{ "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = " Sticky Yank" },
 		},
 		opts = {
-			ring = { history_length = 20 },
+			ring = { history_length = 50 },
 			highlight = { timer = 1000 },
 		},
 		-- IncSearch is the default highlight group for post-yank highlights
@@ -161,7 +161,7 @@ return {
 				g = { name = " 󰊢 Git" },
 			}, { prefix = "<leader>", mode = "x" })
 
-			-- set by some plugins, obscures whichkey
+			-- set by some plugins and  obscures whichkey
 			vim.keymap.set("n", "<LeftMouse>", "<Nop>")
 		end,
 		opts = {
