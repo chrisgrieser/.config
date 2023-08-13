@@ -11,17 +11,13 @@ return {
 			vim.loop.fs_symlink(symLinkFrom, symLinkTo)
 		end,
 		config = function()
-			-- ignore filetypes
+			-- vim.g.codeium_idle_delay = 75 -- default 500, minimum 75
 			vim.g.codeium_filetypes = { TelescopePrompt = false, DressingInput = false }
 
 			-- INFO if cmp visible, will use cmp selection instead.
 			vim.g.codeium_disable_bindings = 1
-			vim.keymap.set(
-				"i",
-				"<Tab>",
-				function() return vim.fn["codeium#Accept"]() end,
-				{ expr = true, desc = "󰚩 Accept Suggestion", silent = true }
-			)
+			vim.keymap.set("i", "<Tab>", function() return vim.fn["codeium#Accept"]() end, { expr = true, desc = "󰚩 Accept Suggestion", silent = true })
+			vim.keymap.set("i", "<D-s>", function() return vim.fn["codeium#Accept"]() end, { expr = true, desc = "󰚩 Accept Suggestion", silent = true })
 		end,
 	},
 	{ -- AI completions via cmp

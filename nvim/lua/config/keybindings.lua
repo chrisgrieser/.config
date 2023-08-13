@@ -384,7 +384,7 @@ keymap("n", "gE", function() vim.diagnostic.goto_prev { float = false } end, { d
 keymap("n", "gs", function() cmd.Telescope("treesitter") end, { desc = " Document Symbols" })
 
 -- Save & Format
-keymap({ "n", "x", "i" }, "<D-s>", function()
+keymap({ "n", "x" }, "<D-s>", function()
 	vim.lsp.buf.format()
 	cmd.update()
 end, { desc = "󰒕  Save & Format" })
