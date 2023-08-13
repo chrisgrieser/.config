@@ -12,6 +12,8 @@
 	<string>~/.config/Alfred.alfredpreferences/subreddit_icons</string>
 	<key>hide_stickied</key>
 	<true/>
+	<key>min_upvotes</key>
+	<string>1</string>
 	<key>save_scroll_position</key>
 	<true/>
 	<key>subreddits</key>

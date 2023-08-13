@@ -11,7 +11,7 @@ return {
 			vim.loop.fs_symlink(symLinkFrom, symLinkTo)
 		end,
 		config = function()
-			-- vim.g.codeium_idle_delay = 75 -- default 500, minimum 75
+			vim.g.codeium_idle_delay = 75 -- minimum 75
 			vim.g.codeium_filetypes = { TelescopePrompt = false, DressingInput = false }
 
 			-- INFO if cmp visible, will use cmp selection instead.
