@@ -21,6 +21,9 @@ end, { nargs = "+" })
 -- inspect capabilities of current lsp
 newCommand("LspCapabilities", function()
 	local curBuf = vim.api.nvim_get_current_buf()
+	if vim.version().major == 0 and vim.version().minor >= 10 then
+		vim.notify("switch to vim.lsp.get_client")
+	end
 	local clients = vim.lsp.get_active_clients { bufnr = curBuf }
 
 	for _, client in pairs(clients) do
@@ -57,29 +60,33 @@ newCommand("Curl", function(ctx)
 	local response = fn.system(("curl --silent --max-time %s '%s'"):format(timeoutSecs, url))
 	local lines = vim.split(response, "\n")
 
-	local bufId = a.nvim_create_buf(true, true)
+	local bufId = a.nvim_create_buf(true, false)
 	cmd.buffer(bufId)
 
 	local ft = url:match("%.(%a)$") or "html" -- could be html, json
 	a.nvim_buf_set_option(bufId, "filetype", ft)
-	table.insert(lines, 1, vim.bo.commentstring:format(url))
+	table.insert(lines, 1, vim.bo.commentstring:format(" " .. url .. " "))
 
 	a.nvim_buf_set_name(bufId, "curl")
 	a.nvim_buf_set_lines(bufId, 0, -1, false, lines)
-	vim.lsp.buf.format {}
+
+	a.nvim_buf_set_option(bufId, "buftype", "nowrite") -- no-write allows lsp to attach
+	vim.lsp.buf.format()
 end, { nargs = 1 })
 
 newCommand("Scratch", function()
 	local a = vim.api
 
-	local bufId = a.nvim_create_buf(true, true)
+	local bufId = a.nvim_create_buf(true, false)
 	a.nvim_buf_set_name(bufId, "Scratchpad")
 	cmd.buffer(bufId)
-	local filetypes = { "text", "sh", "markdown", "javascript", "json" }
-	vim.ui.select(filetypes, { prompt = "Select Filetype" }, function (choice)
-		if not choice then return end
-		a.nvim_buf_set_option(bufId, "filetype", choice)
-		vim.lsp.buf.format {}
-	end)
 
+	local filetypes = { "text", "sh", "markdown", "javascript", "json" }
+	vim.ui.select(filetypes, { prompt = "Select Filetype" }, function(choice)
+		if not choice then return end
+
+		a.nvim_buf_set_option(bufId, "filetype", choice)
+		a.nvim_buf_set_option(bufId, "buftype", "nowrite") -- no-write allows lsp to attach
+		vim.lsp.buf.format()
+	end)
 end, {})
