@@ -25,7 +25,7 @@ return {
 			end,
 		},
 	},
-	{
+	{-- lsp definitions & references count as virtual text
 		"roobert/action-hints.nvim",
 		enabled = false,
 		config = function()

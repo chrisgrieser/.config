@@ -40,6 +40,7 @@ opt.startofline = true -- motions like "G" also move to the first char
 opt.foldopen:remove("hor") -- don't open folds when moving into them
 opt.virtualedit = "block" -- visual-block mode can select more
 opt.mouse = "" -- disable mouse completely
+opt.inccommand = "split" -- :substitute uses a small preview window
 
 -- Search
 opt.ignorecase = true
