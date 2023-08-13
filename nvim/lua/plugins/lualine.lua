@@ -210,6 +210,7 @@ local lualineConfig = {
 	sections = {
 		lualine_a = {
 			{ currentFile },
+			{ "branch", cond = isStandardBranch },
 		},
 		lualine_b = {
 			{ require("funcs.alt-alt").altFileStatusline },
@@ -235,7 +236,6 @@ local lualineConfig = {
 		},
 		lualine_y = {
 			"diff",
-			{ "branch", cond = isStandardBranch },
 		},
 		lualine_z = {
 			{ selectionCount, padding = { left = 0, right = 1 } },
