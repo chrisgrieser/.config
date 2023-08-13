@@ -48,8 +48,7 @@ end, {})
 -- `:PluginDir` opens the nvim data path, where mason and lazy install their stuff
 newCommand("PluginDir", function(_) fn.system('open "' .. fn.stdpath("data") .. '"') end, {})
 
--- shorthand for `.!curl -s`
--- which also creates a new html buffer for syntax highlighting
+-- shorthand for `.!curl -s` which also creates a new html buffer for syntax highlighting
 newCommand("Curl", function(ctx)
 	local url = ctx.args
 	local a = vim.api
@@ -67,3 +66,14 @@ newCommand("Curl", function(ctx)
 	a.nvim_buf_set_lines(0, 0, -1, false, lines)
 	vim.lsp.buf.format {}
 end, { nargs = 1 })
+
+newCommand("Scratch", function()
+	local a = vim.api
+
+	cmd.enew()
+	a.nvim_buf_set_option(0, "buftype", "nowrite")
+	a.nvim_buf_set_name(0, "Scratchpad")
+	-- a.nvim_buf_set_option(0, "filetype", ft)
+
+	-- vim.lsp.buf.format {}
+end, {})
