@@ -7,20 +7,23 @@ return {
 		"mg979/vim-visual-multi",
 		keys = {
 			{ "<D-j>", mode = { "n", "x" }, desc = "󰆿 Multi-Cursor" },
+			{ "<D-a>", mode = { "n", "x" }, desc = "󰆿 Multi-Cursor" },
 		},
 		init = function()
 			vim.g.VM_set_statusline = 0 -- already using my version via lualine component
 			vim.g.VM_show_warnings = 0
 			vim.g.VM_silent_exit = 1
+			vim.g.VM_quit_after_leaving_insert_mode = 1 -- can use "reselect last" to restore
 			-- DOCS https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
 			vim.g.VM_maps = {
 				-- Enter Visual-Multi-Mode
 				["Find Under"] = "<D-j>", -- select word under cursor
 				["Reselect Last"] = "gV",
 				["Visual Add"] = "<D-j>",
+				["Select All"] = "<D-a>",
+				["Visual All"] = "<D-a>",
 
 				-- Visual-Multi-Mode Mappings
-				["Select All"] = "<D-a>",
 				["Skip Region"] = "q", -- skip & find next
 				["Remove Region"] = "Q", -- remove & find previous
 				["Find Operator"] = "s", -- operator, selects all regions found in textobj

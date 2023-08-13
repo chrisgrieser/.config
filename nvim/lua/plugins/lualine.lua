@@ -7,8 +7,9 @@ local u = require("config.utils")
 -- displays irregular indentation and linebreaks, displays nothing when all is good
 -- selene: allow(high_cyclomatic_complexity)
 local function irregularWhitespace()
-	-- user config
-	local spaceFiletypes = { python = 4, yaml = 2 }
+	-- USER CONFIG
+	-- filetypes and the number of spaces they use. Omit or set to nil to use tabs for that filetype.
+	local spaceFiletypes = { python = 4, yaml = 2 } 
 	local ignoredFiletypes = { "css", "markdown", "gitcommit" }
 	local linebreakType = "unix" ---@type "unix" | "mac" | "dos"
 
@@ -72,7 +73,7 @@ local function isStandardBranch()
 	local curBranch = require("lualine.components.branch.git_branch").get_branch(curBuf)
 	local notMainBranch = curBranch ~= "main" and curBranch ~= "master"
 	local validFiletype = bo.filetype ~= "help" -- vim help files are located in a git repo
-	local notSpecialBuffer = not (bo.buftype ~= "") -- statusline already shows branch
+	local notSpecialBuffer = bo.buftype == ""
 	return notMainBranch and validFiletype and notSpecialBuffer
 end
 
@@ -88,6 +89,7 @@ local function selectionCount()
 end
 
 -- shows global mark M
+vim.api.nvim_del_mark("M") -- reset on session start
 local function markM()
 	local markObj = vim.api.nvim_get_mark("M", {})
 	local markLn = markObj[1]
@@ -95,7 +97,6 @@ local function markM()
 	if markBufname == "" then return "" end -- mark not set
 	return " " .. markBufname .. ":" .. markLn
 end
-vim.api.nvim_del_mark("M") -- reset on session start
 
 -- only show the clock when fullscreen (= it covers the menubar clock)
 local function clock()
@@ -256,6 +257,7 @@ local lualineConfig = {
 
 return {
 	"nvim-lualine/lualine.nvim",
+	lazy = false, -- load at once so there is no flickering
 	dependencies = "nvim-tree/nvim-web-devicons",
 	opts = lualineConfig,
 }

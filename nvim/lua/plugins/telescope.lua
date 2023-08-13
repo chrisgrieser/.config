@@ -98,6 +98,7 @@ local function telescopeConfig()
 				results_title = "git log",
 				previewer = deltaPreviewer,
 				layout_config = { horizontal = { height = 0.9 } },
+				git_command = { "git", "log", "--all", "--pretty=%h %s (%cr)", "--", "." },
 			},
 			git_bcommits = {
 				prompt_prefix = "󰊢 ",
