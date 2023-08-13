@@ -8,17 +8,20 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 #   anywhere in macOS and it will open in the currently existing Neovide instance
 #───────────────────────────────────────────────────────────────────────────────
 
-# ensure neovide is open and active
-if ! pgrep -xq "neovide"; then
-	open -a "Neovide"
-	while ! pgrep -xq "neovide"; do sleep 0.1; done
-else
+if pgrep -xq "neovide"; then
+	# https://neovim.io/doc/user/remote.html
+	nvim --server "/tmp/nvim_server.pipe" --remote "$@"
+
+	# $LINE is set via `open --env=LINE=n` by the caller
+	[[ -n "$LINE" ]] && nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>$LINE<CR>"
+
 	osascript -e 'tell application "Neovide" to activate'
+else
+	if [[ -z "$LINE" ]] ; then
+		nohup neovide "$@" &
+		disown # has to be directly below https://stackoverflow.com/a/20338584/22114136
+	else
+		nohup neovide "+$LINE" "$@" &
+		disown
+	fi
 fi
-
-# open file -- https://neovim.io/doc/user/remote.html
-nvim --server "/tmp/nvim_server.pipe" --remote "$@"
-
-# goto line -- $LINE is set via `open --env=LINE=n` by the caller
-[[ -n "$LINE" ]] && nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>$LINE<CR>"
-

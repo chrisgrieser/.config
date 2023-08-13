@@ -14,10 +14,10 @@ Most people tell me they find the following configurations useful:
 <img width=60% alt="starship prompt" src="https://user-images.githubusercontent.com/73286100/229211019-e763d775-d89f-43da-99ef-06c57fd1e485.png">
 
 ## Blog on Neovim
-I also have a [blog for intermediary-advanced neovim tips](https://nanotipsforvim.prose.sh/).
 
 ## What are "dotfiles?"
 - Read this [primer what dotfiles are](https://www.freecodecamp.org/news/dotfiles-what-is-a-dot-file-and-how-to-create-it-in-mac-and-linux/).
+I also have a [blog for intermediary-advanced neovim tips](https://nanotipsforvim.prose.sh/).
 - Here is an interesting [report on common contents of dotfiles](https://github.com/Kharacternyk/dotcommon).
 
 ## About me
