@@ -52,28 +52,34 @@ newCommand("PluginDir", function(_) fn.system('open "' .. fn.stdpath("data") .. 
 newCommand("Curl", function(ctx)
 	local url = ctx.args
 	local a = vim.api
+
 	local timeoutSecs = 8
 	local response = fn.system(("curl --silent --max-time %s '%s'"):format(timeoutSecs, url))
 	local lines = vim.split(response, "\n")
-	table.insert(lines, 1, "<!-- " .. url .. " -->")
 
-	cmd.enew()
-	local ft = url:match("%.(%a)$") or "html" -- could be html, json or other
-	a.nvim_buf_set_option(0, "filetype", ft)
+	local bufId = a.nvim_create_buf(true, true)
+	cmd.buffer(bufId)
 
-	a.nvim_buf_set_option(0, "buftype", "nowrite")
-	a.nvim_buf_set_name(0, "curl")
-	a.nvim_buf_set_lines(0, 0, -1, false, lines)
+	local ft = url:match("%.(%a)$") or "html" -- could be html, json
+	a.nvim_buf_set_option(bufId, "filetype", ft)
+	table.insert(lines, 1, vim.bo.commentstring:format(url))
+
+	a.nvim_buf_set_name(bufId, "curl")
+	a.nvim_buf_set_lines(bufId, 0, -1, false, lines)
 	vim.lsp.buf.format {}
 end, { nargs = 1 })
 
 newCommand("Scratch", function()
 	local a = vim.api
 
-	cmd.enew()
-	a.nvim_buf_set_option(0, "buftype", "nowrite")
-	a.nvim_buf_set_name(0, "Scratchpad")
-	-- a.nvim_buf_set_option(0, "filetype", ft)
+	local bufId = a.nvim_create_buf(true, true)
+	a.nvim_buf_set_name(bufId, "Scratchpad")
+	cmd.buffer(bufId)
+	local filetypes = { "text", "sh", "markdown", "javascript", "json" }
+	vim.ui.select(filetypes, { prompt = "Select Filetype" }, function (choice)
+		if not choice then return end
+		a.nvim_buf_set_option(bufId, "filetype", choice)
+		vim.lsp.buf.format {}
+	end)
 
-	-- vim.lsp.buf.format {}
 end, {})
