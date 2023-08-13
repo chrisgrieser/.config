@@ -209,8 +209,8 @@ local lualineConfig = {
 	},
 	sections = {
 		lualine_a = {
-			{ currentFile },
 			{ "branch", cond = isStandardBranch },
+			{ currentFile },
 		},
 		lualine_b = {
 			{ require("funcs.alt-alt").altFileStatusline },
