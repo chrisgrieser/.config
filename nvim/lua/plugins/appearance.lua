@@ -5,7 +5,7 @@ local u = require("config.utils")
 return {
 	{ -- fix scrollOff at end of file
 		"Aasim-A/scrollEOF.nvim",
-		event = "WinScrolled",
+		event = "CursorMoved",
 		opts = true,
 	},
 	{ -- when searching, search count is shown next to the cursor
@@ -177,13 +177,13 @@ return {
 		"nvim-tree/nvim-web-devicons",
 		lazy = true, -- loaded by Telescope & Lualine
 		opts = {
-			default = true; -- use default icon as fallback
+			default = true, -- use default icon as fallback
 			override = {
 				-- filetypes
 				applescript = { icon = "", color = "#7f7f7f", name = "Applescript" },
 				bib = { icon = "", color = "#6e9b2a", name = "BibTeX" },
-				http = { icon = "󰴚", name = "HTTP request" },
-				-- plugins
+				http = { icon = "󰴚", name = "HTTP request" }, -- for rest.nvim
+				-- give plugins icons for my status line components
 				noice = { icon = "󰎟", name = "noice.nvim" },
 				lazy = { icon = "󰒲", name = "lazy.nvim" },
 				mason = { icon = "", name = "mason.nvim" },
