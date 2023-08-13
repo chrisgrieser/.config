@@ -28,23 +28,17 @@
 			"\t.slice(0, 50);"
 		]
 	},
-	"ignore (TypeScript)": {
-		"prefix": [
-			"ignore (TypeScript)",
-			"ts-ignore"
-		],
-		"body": "// @ts-ignore"
-	},
 	"split by \\n": {
 		"prefix": ".split by \\n",
 		"body": ".split(\"\\n\")"
 	},
 	"split by \\r": {
 		"prefix": ".split by \\r",
-		"body": ".split(\"\\r\")"
+		"body": ".split(\"\\r\")",
+		"description": "required for output from app.doShellScript()"
 	},
-	"type definition (JSDoc, multi)": {
-		"prefix": "type definition (JSDoc, multi)",
+	"type definition (JSDoc)": {
+		"prefix": "type definition (JSDoc)",
 		"body": [
 			"/** @typedef {Object} ${1:name}",
 			"* @property {${2|string,number,boolean,() => void|}} ${3:prop1}",
@@ -53,8 +47,8 @@
 		],
 		"description": "https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#typedef-callback-and-param"
 	},
-	"type definition (JSDoc, single)": {
-		"prefix": "type definition (JSDoc, single)",
+	"type implement (JSDoc)": {
+		"prefix": "type implement (JSDoc)",
 		"body": "/** @type{$0} */"
 	},
 	"don't check file (TypeScript)": {
@@ -65,6 +59,13 @@
 		],
 		"body": "// @ts-nocheck",
 		"description": "instructs TypeScript to ignore the whole file"
+	},
+	"ignore (TypeScript)": {
+		"prefix": [
+			"ignore (TypeScript)",
+			"ts-ignore"
+		],
+		"body": "// @ts-ignore"
 	},
 	"for (i++)": {
 		"prefix": "for (i++)",
