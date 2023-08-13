@@ -123,9 +123,9 @@ return {
 	{ -- killring & highlights on `p`
 		"gbprod/yanky.nvim",
 		keys = {
-			{ "p", "<Plug>(YankyPutAfter)", desc = " Paste (Yanky)" },
-			{ "P", "<Plug>(YankyCycleForward)", desc = " Cycle Killring" },
-			{ "y", "<Plug>(YankyYank)", desc = " Sticky Yank" },
+			{ "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" }, desc = " Paste (Yanky)" },
+			{ "P", "<Plug>(YankyCycleForward)", mode = { "n", "x" }, desc = " Cycle Killring" },
+			{ "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = " Sticky Yank" },
 		},
 		opts = {
 			ring = { history_length = 20 },

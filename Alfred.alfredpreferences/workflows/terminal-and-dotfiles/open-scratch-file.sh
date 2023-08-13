@@ -3,13 +3,10 @@
 if pgrep -xq "neovide"; then
 	osascript -e 'tell application "Neovide" to activate'
 else
-	neovide --geometry=104x33 &
-	disown # https://stackoverflow.com/a/20338584/22114136
+	open -a "Neovide"
 	while ! pgrep -xq "neovide"; do sleep 0.1; done
-	sleep 0.7
+	sleep 0.7 # ensure everything is loaded
 fi
 
-# https://neovim.io/doc/user/remote.html#remote.txt
-# new file, nowrite-file, paste from system clipboard
-nvim --server "/tmp/nvim_server.pipe" \
-	--remote-send '<cmd>enew | set buftype=nowrite | lua vim.api.nvim_buf_set_name(0, "Scratchpad")<CR>"+p'
+# INFO using my custom `:Scratch` user command
+nvim --server "/tmp/nvim_server.pipe" --remote-send '<cmd>Scratch<CR>'
