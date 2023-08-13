@@ -162,7 +162,7 @@ end
 -- GIT
 
 -- Neogit
-keymap("n", "<leader>gn", cmd.Neogit, { desc = "󰊢 Neogit Menu" })
+keymap("n", "<leader>gn", cmd.Neogit, { desc = "󰊢 Neogit" })
 
 -- Gitsigns
 keymap("n", "<leader>ga", "<cmd>Gitsigns stage_hunk<CR>", { desc = "󰊢 Add Hunk" })
