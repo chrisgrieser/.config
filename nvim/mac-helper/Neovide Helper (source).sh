@@ -8,26 +8,17 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 #   anywhere in macOS and it will open in the currently existing Neovide instance
 #───────────────────────────────────────────────────────────────────────────────
 
-if pgrep -xq "neovide"; then
-	# https://neovim.io/doc/user/remote.html
-	nvim --server "/tmp/nvim_server.pipe" --remote "$@"
-	exitcode=$?
-
-	if [[ $exitcode -ne 0 ]]; then
-		osascript -e 'display notification "⚠️ nvim server unresponsive" with title "Neovide"'
-		exit 1
-	fi
-
-	# $LINE is set via `open --env=LINE=n` by the caller
-	[[ -n "$LINE" ]] && nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>$LINE<CR>"
-
-	osascript -e 'tell application "Neovide" to activate'
+# ensure neovide is open and active
+if ! pgrep -xq "neovide"; then
+	open -a "Neovide"
+	while ! pgrep -xq "neovide"; do sleep 0.1; done
 else
-	if [[ -z "$LINE" ]] ; then
-		nohup neovide --geometry=104x33 "$@" &
-		disown # has to come directly after
-	else
-		nohup neovide --geometry=104x33 "+$LINE" "$@" &
-		disown # has to come directly after
-	fi
+	osascript -e 'tell application "Neovide" to activate'
 fi
+
+# open file -- https://neovim.io/doc/user/remote.html
+nvim --server "/tmp/nvim_server.pipe" --remote "$@"
+
+# goto line -- $LINE is set via `open --env=LINE=n` by the caller
+[[ -n "$LINE" ]] && nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>$LINE<CR>"
+

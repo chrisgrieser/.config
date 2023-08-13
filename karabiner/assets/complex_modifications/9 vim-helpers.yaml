@@ -3,34 +3,6 @@ title: vim helpers
 rules:
   - description: "Neovide: ⇪R to restart, ⌘Q to Quit"
     manipulators:
-      - type: basic
-        from: { key_code: r, modifiers: { mandatory: [command, control, shift, option] } }
-        conditions:
-          - { type: frontmost_application_if, file_paths: ["[Nn]eovide"] }
-        to:
-          # INFO not done via Alfred because of https://github.com/neovide/neovide/issues/1604
-          # INFO Quitting via :wqall instead of cmd+Q so bufferleaving autocmds are triggered
-          - shell_command: |
-              export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-              if ! nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>try|wqall|catch|qall|endtry<CR>" ; then
-                osascript -e 'display notification "" with title "⚔️ Force killing nvim…"'
-                killall -9 nvim neovide
-              fi
-
-              # wait until nvim not running anymore
-              i=0
-              while pgrep -xq "nvim" ; do 
-                i=$((i+1))
-                sleep 0.1
-                if [[ $i -gt 30 ]] ; then
-                  osascript -e 'display notification "" with title "⚔️ Force killing nvim…"'
-                  killall -9 nvim neovide
-                  break
-                fi
-              done
-
-              # Restart (config reopens last file if no arg)
-              open -a "Neovide"
       # INFO explicitly remapping cmd+q ensures that cursor position and changes
       # are saved. Also, fixing the neovide issue of sometimes having nvim
       # processes left behind.
