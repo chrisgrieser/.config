@@ -221,6 +221,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>5A2D4239-FC30-482F-831B-D2E261B44B7F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D13B43E8-0DC2-4E8C-AE56-365D8620A0FA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>5B4488F5-41D3-4E76-A00D-E7878BC0BC40</key>
 		<array>
 			<dict>
@@ -581,6 +594,29 @@
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>⌥: Copy URL to Clipboard</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D13B43E8-0DC2-4E8C-AE56-365D8620A0FA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B886D589-EE74-45B0-AD7C-B73DAE7C88F3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>DD866690-B895-469A-936D-2A018AA4D25E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1974,42 +2010,78 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
 				<string></string>
-				<key>skipqueryencode</key>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
 				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
 				<string></string>
-				<key>url</key>
-				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.output.largetype</string>
 			<key>uid</key>
-			<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
+			<string>B886D589-EE74-45B0-AD7C-B73DAE7C88F3</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>concurrently</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Copied</string>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>tell application "System Events" to set frontAppProcess to first application process whose frontmost is true# Tell the *process* to count its windows and return its front window's name.tell frontAppProcess	if (count of windows) &gt; 0 then		set window_name to name of front window	end ifend tell
+
+set the clipboard to window_name
+
+# direct return for displaying in Alfred
+window_name</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/get-window-information.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>147B74A7-0701-400F-9336-3E942E809AB8</string>
+			<string>D13B43E8-0DC2-4E8C-AE56-365D8620A0FA</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>win</string>
+				<key>subtext</key>
+				<string>of frontmost app</string>
+				<key>text</key>
+				<string>Window Information</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>5A2D4239-FC30-482F-831B-D2E261B44B7F</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2028,7 +2100,7 @@
 			<key>type</key>
 			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
+			<string>DD866690-B895-469A-936D-2A018AA4D25E</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -2084,6 +2156,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -2127,6 +2220,46 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>CD59A071-70BC-40FB-87C9-D8467973F461</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>147B74A7-0701-400F-9336-3E942E809AB8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -2553,9 +2686,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>780</real>
+			<real>635</real>
 			<key>ypos</key>
-			<real>1510</real>
+			<real>1735</real>
 		</dict>
 		<key>1708D3C1-D2AD-4E95-8F06-EB02D580A1B7</key>
 		<dict>
@@ -2666,6 +2799,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>2145</real>
 		</dict>
+		<key>5A2D4239-FC30-482F-831B-D2E261B44B7F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>note</key>
+			<string>window information</string>
+			<key>xpos</key>
+			<real>545</real>
+			<key>ypos</key>
+			<real>1375</real>
+		</dict>
 		<key>5B4488F5-41D3-4E76-A00D-E7878BC0BC40</key>
 		<dict>
 			<key>colorindex</key>
@@ -2709,9 +2853,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>630</real>
+			<real>485</real>
 			<key>ypos</key>
-			<real>1510</real>
+			<real>1735</real>
 		</dict>
 		<key>71F9A459-55CC-41D5-A1FA-4424B696D4E3</key>
 		<dict>
@@ -2781,9 +2925,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>630</real>
+			<real>485</real>
 			<key>ypos</key>
-			<real>1400</real>
+			<real>1625</real>
 		</dict>
 		<key>A89D07AD-BB4E-4D63-B7B7-DDB763334AEC</key>
 		<dict>
@@ -2804,6 +2948,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>540</real>
 			<key>ypos</key>
 			<real>65</real>
+		</dict>
+		<key>B886D589-EE74-45B0-AD7C-B73DAE7C88F3</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>860</real>
+			<key>ypos</key>
+			<real>1375</real>
 		</dict>
 		<key>BC47E2C7-23EE-41BE-A060-FDA17224E6C0</key>
 		<dict>
@@ -2881,6 +3034,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>610</real>
 		</dict>
+		<key>D13B43E8-0DC2-4E8C-AE56-365D8620A0FA</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>710</real>
+			<key>ypos</key>
+			<real>1375</real>
+		</dict>
 		<key>D9352E3E-3278-4AE4-AC3C-1BF34C3FF494</key>
 		<dict>
 			<key>colorindex</key>
@@ -2902,6 +3064,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>1515</real>
+		</dict>
+		<key>DD866690-B895-469A-936D-2A018AA4D25E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>860</real>
+			<key>ypos</key>
+			<real>1500</real>
 		</dict>
 		<key>E489F965-C095-477B-8922-AC21993EA238</key>
 		<dict>

@@ -448,8 +448,6 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
-			<key>note</key>
-			<string>open scratch file</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
