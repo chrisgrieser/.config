@@ -235,7 +235,6 @@ keymap("n", "<C-Left>", "<cmd>vertical resize -3<CR>", { desc = " vertical re
 keymap("n", "<C-Up>", "<cmd>resize +3<CR>", { desc = " horizontal resize (+)" })
 keymap("n", "<C-Down>", "<cmd>resize -3<CR>", { desc = " horizontal resize (-)" })
 
-
 --------------------------------------------------------------------------------
 -- CLIPBOARD
 
@@ -386,7 +385,7 @@ keymap("n", "gs", function() cmd.Telescope("treesitter") end, { desc = " Docu
 
 -- Save & Format
 keymap({ "n", "x", "i" }, "<D-s>", function()
-	if vim.bo.buftype == "" then vim.lsp.buf.format() end
+	vim.lsp.buf.format()
 	cmd.update()
 end, { desc = "󰒕  Save & Format" })
 
