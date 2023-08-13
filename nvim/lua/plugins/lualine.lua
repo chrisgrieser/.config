@@ -4,8 +4,7 @@ local u = require("config.utils")
 
 --------------------------------------------------------------------------------
 
--- displays irregular indentation and linebreaks, displays nothing when all is good
--- selene: allow(high_cyclomatic_complexity)
+-- display irregular indentation and linebreaks
 local function irregularWhitespace()
 	-- user config
 	local spaceFiletypes = { python = 4, yaml = 2 }
@@ -17,22 +16,22 @@ local function irregularWhitespace()
 	local usesTabs = not bo.expandtab
 	local brUsed = bo.fileformat
 	local ft = bo.filetype
-	local width = bo.tabstop
+	local tabwidth = bo.tabstop
 	if vim.tbl_contains(ignoredFiletypes, ft) or fn.mode() ~= "n" or bo.buftype ~= "" then return "" end
 
 	-- non-default indentation setting (e.g. changed via indent-o-matic)
 	local nonDefaultSetting = ""
 	local spaceFtsOnly = vim.tbl_keys(spaceFiletypes)
-	if (usesSpaces and not vim.tbl_contains(spaceFtsOnly, ft)) or (usesSpaces and width ~= spaceFiletypes[ft]) then
-		nonDefaultSetting = "  " .. tostring(width) .. "󱁐  "
+	if (usesSpaces and not vim.tbl_contains(spaceFtsOnly, ft)) or (usesSpaces and tabwidth ~= spaceFiletypes[ft]) then
+		nonDefaultSetting = "  " .. tostring(tabwidth) .. "󱁐  "
 	elseif usesTabs and vim.tbl_contains(spaceFtsOnly, ft) then
-		nonDefaultSetting = "  󰌒 " .. tostring(width)(" ")
+		nonDefaultSetting = "  󰌒 " .. tostring(tabwidth)(" ")
 	end
 
 	-- wrong or mixed indentation
 	local hasTabs = fn.search("^\t", "nw") > 0
 	local hasSpaces = fn.search("^ ", "nw") > 0
-	-- exception, jsdocs: space not followed by "*"
+	-- jsdocs: space not followed by "*"
 	if bo.filetype == "javascript" then hasSpaces = fn.search([[^ \(\*\)\@!]], "nw") > 0 end
 	local wrongIndent = ""
 	if usesTabs and hasSpaces then

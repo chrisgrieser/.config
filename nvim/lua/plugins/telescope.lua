@@ -34,19 +34,12 @@ local keymappings = {
 
 local function telescopeConfig()
 	-- https://github.com/nvim-telescope/telescope.nvim/issues/605
+	-- command for git_commits and git_bcommits
 	local deltaPreviewer = require("telescope.previewers").new_termopen_previewer {
 		get_command = function(entry)
-			-- note we can't use pipes
-			-- this command is for git_commits and git_bcommits
-			return {
-				"git",
-				"-c",
-				"core.pager=delta",
-				"-c",
-				"delta.side-by-side=false",
-				"diff",
-				entry.value .. "^!",
-			}
+			-- we can't use pipes
+			-- stylua: ignore
+			return { "git", "-c", "core.pager=delta", "-c", "delta.side-by-side=false", "diff", entry.value .. "^!" }
 		end,
 	}
 
@@ -107,6 +100,9 @@ local function telescopeConfig()
 				git_command = { "git", "log", "--all", "--pretty=%h %s (%cr)", "--", "." },
 				results_title = "git log (current buffer)",
 				previewer = deltaPreviewer,
+				layout_config = {
+					horizontal = { height = 0.9 },
+				},
 			},
 			git_bcommits = {
 				prompt_prefix = "󰊢 ",
@@ -115,6 +111,9 @@ local function telescopeConfig()
 				git_command = { "git", "log", "--all", "--pretty=%h %s (%cr)" },
 				results_title = "git log",
 				previewer = deltaPreviewer,
+				layout_config = {
+					horizontal = { height = 0.9 },
+				},
 			},
 			git_branches = {
 				prompt_prefix = "󰊢 ",
