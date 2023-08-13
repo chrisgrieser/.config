@@ -38,9 +38,9 @@ opt.titlestring = '%{expand("%:p")}'
 -- Motions & Editing
 opt.startofline = true -- motions like "G" also move to the first char
 opt.foldopen:remove("hor") -- don't open folds when moving into them
-opt.virtualedit = "block" -- visual-block mode can select more
-opt.mouse = "" -- disable mouse completely
+opt.virtualedit = "block" -- visual-block mode can select beyond end of line
 opt.inccommand = "split" -- :substitute uses a small preview window
+opt.mouse = "" -- disable mouse completely
 
 -- Search
 opt.ignorecase = true
