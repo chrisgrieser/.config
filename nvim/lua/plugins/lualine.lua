@@ -5,9 +5,9 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 -- display irregular indentation and linebreaks
-local function indentationAndLinebreaks()
-	-- config
-	local spaceFiletypes = { "python", "yaml" }
+local function irregularWhitespace()
+	-- user config
+	local spaceFiletypes = { python = 4, yaml = 2 }
 	local ignoredFiletypes = { "css", "markdown", "gitcommit" }
 	local linebreakType = "unix" ---@type "unix" | "mac" | "dos"
 
@@ -19,36 +19,42 @@ local function indentationAndLinebreaks()
 	local tabwidth = bo.tabstop
 	if vim.tbl_contains(ignoredFiletypes, ft) or fn.mode() ~= "n" or bo.buftype ~= "" then return "" end
 
-	-- non-default indentation (e.g. changed via indent-o-matic)
-	local nonDefault = ""
-	if usesSpaces and not vim.tbl_contains(spaceFiletypes, ft) then
-		nonDefault = " " .. tostring(tabwidth) .. "󱁐 "
-	elseif usesTabs and vim.tbl_contains(spaceFiletypes, ft) then
-		nonDefault = " 󰌒 (" .. tostring(tabwidth) .. ") "
+	-- non-default indentation setting (e.g. changed via indent-o-matic)
+	local nonDefaultSetting = ""
+	local spaceFtsOnly = vim.tbl_keys(spaceFiletypes)
+	if (usesSpaces and not vim.tbl_contains(spaceFtsOnly, ft)) or (usesSpaces and tabwidth ~= spaceFiletypes[ft]) then
+		nonDefaultSetting = "  " .. tostring(tabwidth) .. "󱁐  "
+	elseif usesTabs and vim.tbl_contains(spaceFtsOnly, ft) then
+		nonDefaultSetting = "  󰌒 " .. tostring(tabwidth)(" ")
 	end
 
-	-- mixed indentation
+	-- wrong or mixed indentation
 	local hasTabs = fn.search("^\t", "nw") > 0
 	local hasSpaces = fn.search("^ ", "nw") > 0
 	-- jsdocs: space not followed by "*"
 	if bo.filetype == "javascript" then hasSpaces = fn.search([[^ \(\*\)\@!]], "nw") > 0 end
-	local mixedIndent = ""
-	if (usesTabs and hasSpaces) or (usesSpaces and hasTabs) then mixedIndent = " 󱁐 󰌒 " end
-
-	-- line breaks
-	local linebreaks = ""
-   if and brUsed ~= linebreakType then
-
-   end
-	if brUsed == "unix" and brUsed ~= linebreakType then
-		linebreaks = ""
-	elseif brUsed == "mac" and brUsed ~= linebreakType then
-		linebreaks = "󰌑 "
-	elseif brUsed == "dos" and brUsed ~= linebreakType then
-		linebreaks = "󰌑 "
+	local wrongIndent = ""
+	if usesTabs and hasSpaces then
+		wrongIndent = " 󱁐 "
+	elseif usesSpaces and hasTabs then
+		wrongIndent = " 󰌒 "
+	elseif hasTabs and hasSpaces then
+		wrongIndent = " 󱁐 + 󰌒 "
 	end
 
-	return nonDefault .. mixedIndent .. linebreaks
+	-- line breaks
+	local linebreakIcon = ""
+	if brUsed ~= linebreakType then
+		if brUsed == "unix" then
+			linebreakIcon = "  󰌑 "
+		elseif brUsed == "mac" then
+			linebreakIcon = "  󰌑 "
+		elseif brUsed == "dos" then
+			linebreakIcon = "  󰌑 "
+		end
+	end
+
+	return nonDefaultSetting .. wrongIndent .. linebreakIcon
 end
 
 --------------------------------------------------------------------------------
@@ -220,7 +226,7 @@ local lualineConfig = {
 				"diagnostics",
 				symbols = { error = "󰅚 ", warn = " ", info = "󰋽 ", hint = "󰘥 " },
 			},
-			{ indentationAndLinebreaks },
+			{ irregularWhitespace },
 			{ require("dr-lsp").lspProgress },
 		},
 		lualine_y = {

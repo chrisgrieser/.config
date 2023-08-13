@@ -3,72 +3,40 @@ local lualineTopSeparators = { left = "", right = "" }
 --------------------------------------------------------------------------------
 
 return {
-	{
-		"smoka7/multicursors.nvim",
-		dependencies = { "nvim-treesitter/nvim-treesitter", "smoka7/hydra.nvim" },
+	{ -- Multi Cursor
+		"mg979/vim-visual-multi",
 		keys = {
-			-- stylua: ignore start
-			{ "<D-j>", function() require("multicursors").start() end, desc = "󰆿 Multi-Cursor" },
-			{ "<D-j>", function() require("multicursors").search_visual() end, mode = "x", desc = "󰆿 Multi-Cursor" },
-			{ "<D-a>", function() require("multicursors").new_pattern() end, desc = "󰆿 Multi-Cursor (Search)" },
-			-- stylua: ignore end
+			{ "<D-j>", mode = { "n", "x" }, desc = "󰆿 Multi-Cursor" },
 		},
-		config = function()
-			local normal = require("multicursors.normal_mode")
-			local extend = require("multicursors.extend_mode")
+		init = function()
+			vim.g.VM_set_statusline = 0 -- already using my version via lualine component
+			vim.g.VM_show_warnings = 0
+			vim.g.VM_silent_exit = 1
+			-- DOCS https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
+			vim.g.VM_maps = {
+				-- Enter Visual-Multi-Mode
+				["Find Under"] = "<D-j>", -- select word under cursor
+				["Reselect Last"] = "gV",
+				["Visual Add"] = "<D-j>",
 
-			require("multicursors").setup {
-				hint_config = false,
-				create_commands = false,
-				-- methods listed here https://github.com/smoka7/multicursors.nvim/blob/main/lua/multicursors/config.lua
-				normal_keys = {
-					-- add next selection by using the same key again
-					["<D-j>"] = { method = normal.find_next, opts = {} },
-
-					-- remove waiting time & also do on x
-					["d"] = { method = normal.delete, opts = { nowait = true } }, 
-					["x"] = { method = normal.delete, opts = { nowait = true } }, 
-
-					-- replace selection
-					["p"] = {
-						method = function()
-							normal.delete()
-							normal.paste_after()
-						end,
-						opts = {},
-					},
-
-					-- special
-					["<down>"] = { method = normal.create_down, opts = {} },
-					["<up>"] = { method = normal.create_down, opts = {} },
-					["z"] = { method = normal.align_selections_before, opts = {} },
-
-					-- use extend-mode-motions in normal mode
-					["t"] = { method = extend.node_parent, opts = {} },
-					["e"] = { method = extend.e_method, opts = {} },
-					["b"] = { method = extend.b_method, opts = {} },
-					["h"] = { method = extend.h_method, opts = {} },
-					["l"] = { method = extend.l_method, opts = {} },
-					["j"] = { method = extend.j_method, opts = {} },
-					["k"] = { method = extend.k_method, opts = {} },
-					["o"] = { method = extend.o_method, opts = {} },
-					-- add my HL movements
-					["H"] = { method = extend.caret_method, opts = {} },
-					["L"] = { method = extend.dollar_method, opts = {} },
-				},
-				insert_keys = {
-					["<D-v>"] = { method = normal.paste_after, opts = {} },
-				},
+				-- Visual-Multi-Mode Mappings
+				["Select All"] = "<D-a>",
+				["Skip Region"] = "q", -- skip & find next
+				["Remove Region"] = "Q", -- remove & find previous
+				["Find Operator"] = "s", -- operator, selects all regions found in textobj
+				["Motion $"] = "L", -- use my HL motions here as well
+				["Motion ^"] = "H",
 			}
-
-			-- INFO inserting only on load to ensure lazy-loading of hydra.nvim
+		end,
+		config = function()
+			-- INFO inserting only on load to ensure lazy-loading
 			local lualineZ = require("lualine").get_config().tabline.lualine_z or {}
 			table.insert(lualineZ, {
 				function()
-					local ok, hydra = pcall(require, "hydra.statusline")
-					if not (ok and hydra.is_active()) then return "" end
-					local modeName = hydra.get_name():gsub("MC ", "Multi-")
-					return "󰇀 " .. modeName
+					if not vim.b.VM_Selection then return "" end ---@diagnostic disable-line: undefined-field
+					local cursors = vim.b.VM_Selection.Regions
+					if not cursors then return "" end
+					return "󰇀 " .. tostring(#cursors)
 				end,
 				section_separators = lualineTopSeparators,
 			})
