@@ -24,7 +24,7 @@ return {
 			max_lines = 3,
 			trim_scope = "outer", -- context lines to discard if `max_lines` exceeded: 'inner', 'outer'
 			min_window_height = 20,
-			line_numbers = false,
+			line_numbers = true,
 			multiline_threshold = 20, -- Maximum number of lines to collapse for a single context line
 			-- Separator between context and content. Should be a single character string, like '-'.
 			-- When separator is set, the context will only show up when there are at least 2 lines above cursorline.

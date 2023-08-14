@@ -13,12 +13,18 @@ alias g.='cd "$(git rev-parse --show-toplevel)"' # goto git root
 alias grh='git reset --hard'
 
 # github
-alias pr='gh pr create --web --fill'
 alias gi='gh issue list'                # open issues
 alias gI='gh issue list --state=closed' # closed issues
 alias rel='ct make --silent release'
 
 #───────────────────────────────────────────────────────────────────────────────
+
+function pr() {
+	# sset default remote, if it lacks one
+	[[ -z "$(gh repo set-default --view)" ]] && gh repo set-default
+
+	gh pr create --web --fill
+}
 
 # amend no-edit
 function gm() {
