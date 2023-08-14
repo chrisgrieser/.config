@@ -1,10 +1,14 @@
--- use new install dir
-local root = vim.fn.fnamemodify("./repro-root", ":p")
-for _, name in ipairs({ "config", "data", "state", "cache" }) do
-  vim.env[("XDG_%s_HOME"):format(name:upper())] = root .. "/" .. name
-end
+-- use new install dir 
+-- (not needed when debugging regular plugins in most cases not needed)
 
+-- local root = vim.fn.fnamemodify("./debug/install-root", ":p")
+-- for _, name in ipairs { "config", "data", "state", "cache" } do
+-- 	vim.env[("XDG_%s_HOME"):format(name:upper())] = root .. "/" .. name
+-- end
 
+--------------------------------------------------------------------------------
+
+-- plugins to debug
 local plugins = {
 	{
 		"williamboman/mason-lspconfig.nvim",
@@ -13,9 +17,9 @@ local plugins = {
 	},
 	{
 		"neovim/nvim-lspconfig",
-		init = function() require("lspconfig")["lua_ls"].setup({}) end,
+		init = function() require("lspconfig")["lua_ls"].setup {} end,
 	},
-	{-- lsp definitions & references count as virtual text
+	{ -- lsp definitions & references count as virtual text
 		"roobert/action-hints.nvim",
 		config = function()
 			require("action-hints").setup {
@@ -31,22 +35,24 @@ local plugins = {
 	},
 }
 
+-- bootstrap
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-	-- stylua: ignore
-	vim.fn.system { "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath }
+	vim.fn.system {
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable",
+		lazypath,
+	}
 end
 vim.opt.runtimepath:prepend(lazypath)
-require("lazy").setup(plugins, {
-	dev = {
-		path = os.getenv("HOME") .. "/Repos",
-		fallback = true, -- use remote repo when local repo doesn't exist
-	},
-})
+require("lazy").setup(plugins)
 
--- base appearance to not make me crazy
+-- basic appearance settings to not make me crazy blsf fsslfs fslfs fslfs flsf
 vim.cmd.colorscheme("habamax")
 vim.opt.guifont = "JetBrainsMonoNL Nerd Font:h25.2"
-vim.opt.signcolumn = "yes:2"
+vim.opt.signcolumn = "yes:1"
 
 --------------------------------------------------------------------------------
