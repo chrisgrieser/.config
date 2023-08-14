@@ -66,7 +66,7 @@ function M.moveResize(win, pos)
 	end
 
 	-- resize with safety redundancy
-	u.runWithDelays({ 0, 0.3, 0.6, 0.9, 1.2 }, function()
+	u.runWithDelays({ 0, 0.4, 0.8 }, function()
 		if M.CheckSize(win, pos) then return end
 		win:moveToUnit(pos)
 	end)
@@ -89,6 +89,8 @@ end
 ---the appObj instead in those cases
 -- selene: allow(high_cyclomatic_complexity)
 function M.autoTile(winSrc)
+	local isMultiscreen = #(hs.screen.allScreens()) > 1
+	if isMultiscreen then return end
 	if AutoTileInProgress then return end
 
 	local wins = {}
@@ -234,7 +236,7 @@ end
 local function verticalSplit()
 	if u.app("neovide"):isFrontmost() then
 		local msg = "Neovide does not support macOS window options."
-			.. "\n\nStart the split from a different app."
+			.. "\n\nStart the split the other different app."
 		hs.alert.show(msg)
 		return
 	end
