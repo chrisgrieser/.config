@@ -4,28 +4,28 @@ local g = vim.g
 -- INFO only the first theme will be used
 local lightThemes = {
 	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
+	-- { "rose-pine/neovim", name = "rose-pine" },
 	-- {
 	-- 	"marko-cerovac/material.nvim",
 	-- 	init = function() vim.g.material_style = "lighter" end,
 	-- 	opts = { lualine_style = "stealth", high_visibility = { lighter = false } },
 	-- },
 	-- { "catppuccin/nvim", name = "catppuccin" },
-	-- { "rose-pine/neovim", name = "rose-pine" },
 }
 
 local darkThemes = {
-	"sainnhe/gruvbox-material",
-	{ "sainnhe/sonokai", init = function() g.sonokai_style = "shusia" end },
+	"rebelot/kanagawa.nvim",
+	-- "sainnhe/gruvbox-material",
+	-- { "sainnhe/sonokai", init = function() g.sonokai_style = "shusia" end },
 	-- "folke/tokyonight.nvim",
 	-- "sainnhe/everforest",
-	-- "rebelot/kanagawa.nvim",
 	-- "nvimdev/zephyr-nvim",
 	-- "kvrohit/mellow.nvim",
 	-- "nyoom-engineering/oxocarbon.nvim",
 }
 
-g.darkTransparency = 0.92
-g.lightTransparency = 0.93
+g.darkOpacity = 0.92
+g.lightOpacity = 0.94
 
 --------------------------------------------------------------------------------
 

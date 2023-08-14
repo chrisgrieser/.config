@@ -1,5 +1,6 @@
 -- vim-pseudo-modeline: buffer_has_colors
 --------------------------------------------------------------------------------
+local M = {}
 
 local autocmd = vim.api.nvim_create_autocmd
 local cmd = vim.cmd
@@ -7,7 +8,6 @@ local fn = vim.fn
 local g = vim.g
 local u = require("config.utils")
 
-local M = {}
 --------------------------------------------------------------------------------
 
 ---@param hlgroupfrom string
@@ -36,7 +36,7 @@ local function customHighlights()
 	)
 
 	-- MatchParen
-	-- updateHighlight("MatchParen", "gui=underdotted,bold,reverse cterm=underline,bold") -- more visible matchparens
+	updateHighlight("MatchParen", "gui=underdotted,bold cterm=underline,bold")
 
 	-- proper underlines for diagnostics
 	local types = { "Error", "Warn", "Info", "Hint" }
@@ -51,7 +51,6 @@ end
 -- selene: allow(high_cyclomatic_complexity)
 local function themeModifications()
 	local mode = vim.opt.background:get()
-
 	-- some themes do not set g.colors_name
 	local theme = g.colors_name
 	if not theme then theme = mode == "light" and g.lightTheme or g.darkTheme end
@@ -116,10 +115,12 @@ local function themeModifications()
 		updateHighlight("IncSearch", "guifg=#FFFFFF")
 		linkHighlight("TabLineSel", "lualine_a_normal")
 		linkHighlight("TabLineFill", "lualine_c_normal")
+	-----------------------------------------------------------------------------
+	-- light themes
 	elseif theme == "dawnfox" then
-		updateHighlight("TreesitterContext", "guibg=#e8dcce")
-		updateHighlight("IndentBlanklineChar", "guifg=#e3d4c4")
 		updateHighlight("ScrollView", "guibg=#303050")
+		updateHighlight("TreesitterContext", "guibg=#e5d7c7")
+		updateHighlight("IndentBlanklineChar", "guifg=#e3d4c4")
 		updateHighlight("ColorColumn", "guibg=#ebe1d5")
 		updateHighlight("VertSplit", "guifg=#b29b84")
 		for _, v in pairs(vimModes) do
@@ -151,7 +152,7 @@ autocmd("ColorScheme", {
 ---@param mode "dark"|"light"
 function M.setThemeMode(mode)
 	vim.opt.background = mode
-	g.neovide_transparency = mode == "dark" and g.darkTransparency or g.lightTransparency
+	g.neovide_transparency = mode == "dark" and g.darkOpacity or g.lightOpacity
 	local targetTheme = mode == "dark" and g.darkTheme or g.lightTheme
 	cmd.highlight("clear") -- needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
 	cmd.colorscheme(targetTheme)
