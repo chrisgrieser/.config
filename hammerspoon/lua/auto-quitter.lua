@@ -17,7 +17,7 @@ Thresholds = {
 	Hammerspoon = 3, -- affects the console, not hammerspoon itself
 	["Alfred Preferences"] = 20,
 	["System Settings"] = 2,
-	Finder = 20, -- only closes windows
+	Finder = 20, -- only closes windows when not on projector
 
 	-- INFO only minimized since the "Search Obsidian in Google" plugin requires
 	-- Obsidian being open to work. Not hidden, so there is no interference with
@@ -33,6 +33,7 @@ local function quit(app)
 	if app == "Discord" and u.appRunning("Steam") then return end
 
 	if app == "Finder" then
+		if env.isProjector() then return end
 		local finderWins = u.app("Finder"):allWindows()
 		if #finderWins == 0 then return end
 		for _, win in pairs(finderWins) do
