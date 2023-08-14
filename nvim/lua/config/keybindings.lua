@@ -57,13 +57,6 @@ keymap("n", "gh", "<cmd>Gitsigns next_hunk<CR>zv", { desc = "󰊢 Next Hunk" })
 keymap("n", "gH", "<cmd>Gitsigns prev_hunk<CR>zv", { desc = "󰊢 Previous Hunk" })
 keymap("n", "gc", "g;", { desc = "Goto last change" })
 
--- Goto brackets
-keymap("n", "m", "<Plug>(MatchitNormalForward)", { desc = "Goto Matching Bracket" })
-
--- pattern-matching, so not super reliable when it comes to unmatched stuff
--- DOCS https://github.com/chrisbra/matchit/blob/master/doc/matchit.txt#L38
-keymap("n", "^", "<Plug>(MatchitNormalMultiForward)", { desc = "Goto Unmatched Bracket" })
-
 --------------------------------------------------------------------------------
 
 -- SEARCH

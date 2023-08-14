@@ -13,6 +13,17 @@ return {
 			})
 		end,
 	},
+	{ -- better % (highlighting, matches across lines, match quotes)
+		"andymass/vim-matchup",
+		event = "BufReadPre", -- cannot load on key due to highlights
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		init = function()
+			vim.g.matchup_matchparen_offscreen = {} -- empty = disables
+			vim.g.matchup_text_obj_enabled = 0
+
+			vim.keymap.set("n", "m", "<Plug>(matchup-%)", { desc = "Goto Matching Bracket" })
+		end,
+	},
 	{ -- display line numbers when using `:` to go to a line with
 		"nacro90/numb.nvim",
 		keys = ":",

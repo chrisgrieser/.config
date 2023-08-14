@@ -35,8 +35,9 @@ local function customHighlights()
 		("guisp=%s guifg=%s gui=underline term=underline"):format(commentColor, commentColor)
 	)
 
-	-- MatchParen
-	updateHighlight("MatchParen", "gui=underdotted,bold cterm=underline,bold")
+	-- make MatchParen stand out more (orange to close to rainbow brackets)
+	vim.api.nvim_set_hl(0, "MatchParen", { bold = true, underline = true, fg = "#4a8cc9" })
+	-- updateHighlight("MatchParen", "gui=underdotted,bold cterm=underline,bold")
 
 	-- proper underlines for diagnostics
 	local types = { "Error", "Warn", "Info", "Hint" }
@@ -119,7 +120,7 @@ local function themeModifications()
 	-- light themes
 	elseif theme == "dawnfox" then
 		updateHighlight("ScrollView", "guibg=#303050")
-		updateHighlight("TreesitterContext", "guibg=#e5d7c7")
+		updateHighlight("TreesitterContext", "guibg=#eaded1")
 		updateHighlight("IndentBlanklineChar", "guifg=#e3d4c4")
 		updateHighlight("ColorColumn", "guibg=#ebe1d5")
 		updateHighlight("VertSplit", "guifg=#b29b84")
