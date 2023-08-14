@@ -2,27 +2,6 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	-- {-- lsp definitions & references count as virtual text
-	-- 	"roobert/action-hints.nvim",
-	-- 	lazy = false,
-	-- 	config = function()
-	-- 		require("action-hints").setup {
-	-- 			template = {
-	-- 				{ " ⊛", "ActionHintsDefinition" },
-	-- 				{ " ↱%s", "ActionHintsReferences" },
-	-- 			},
-	-- 			use_virtual_text = true,
-	-- 			definition_color = "#add8e6",
-	-- 			reference_color = "#ff6666",
-	-- 		}
-	--
-	-- 		local lualineC = require("lualine").get_config().sections.lualine_c or {}
-	-- 		table.insert(lualineC, { require("action-hints").statusline })
-	-- 		require("lualine").setup {
-	-- 			sections = { lualine_c = lualineC },
-	-- 		}
-	-- 	end,
-	-- },
 	{ -- diagnostics in the top instead of virtual lines. More stable than diagflow
 		"Mofiqul/trld.nvim",
 		event = "LspAttach",
@@ -130,17 +109,16 @@ return {
 		opts = {
 			inlay_hints = {
 				parameter_hints = {
-					show = true,
-					prefix = "󰁍 ",
+					prefix = " ",
 					remove_colon_start = true,
 					remove_colon_end = true,
 				},
 				type_hints = {
-					show = true,
-					prefix = " 󰧞 ",
+					prefix = " ",
 					remove_colon_start = true,
 					remove_colon_end = true,
 				},
+				labels_separator = ":",
 				only_current_line = false,
 				highlight = "NonText", -- highlight group
 			},

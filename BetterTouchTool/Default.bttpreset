@@ -159,7 +159,7 @@
     "BTTNotchBarNotchMenubarModeHideRightScrollable" : true,
     "BSTSnapAreaDefaultPictoDistanceFromLeft" : 0.10000000149011612
   },
-  "BTTPresetUUID" : "FB0B681A-2E2E-4BB0-949B-B88F2765F63C",
+  "BTTPresetUUID" : "0433F93F-DBEB-4FB4-AB63-24910FA1A948",
   "BTTPresetContent" : [
     {
       "BTTAppBundleIdentifier" : "com.brave.Browser.app.eppojlglocelodeimnohnlnionkobfln",
@@ -288,14 +288,14 @@
           "BTTGestureNotes" : "done here instead of the macOS Trackpad settings, so it can be overriden by specific apps (e.g. Browser apps to open in background)"
         },
         {
-          "BTTLastUpdatedAt" : 1692047301.0117199,
+          "BTTLastUpdatedAt" : 1692052276.2892609,
           "BTTTriggerType" : 183,
           "BTTTriggerTypeDescription" : "Corner Click Top Right",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-          "BTTLayoutIndependentActionChar" : "RIGHT",
+          "BTTLayoutIndependentActionChar" : "LEFT",
           "BTTAutoAdaptActionToKeyboardLayout" : true,
           "BTTGenericActionConfig" : "autoAdapt",
-          "BTTShortcutToSend" : "124",
+          "BTTShortcutToSend" : "123",
           "BTTUUID" : "E3233F8C-FCD0-4989-A29F-A1A3372115FC",
           "BTTEnabled" : 1,
           "BTTEnabled2" : 1,
@@ -322,14 +322,14 @@
           "BTTGestureNotes" : "Volume Down"
         },
         {
-          "BTTLastUpdatedAt" : 1692047297.1216788,
+          "BTTLastUpdatedAt" : 1692052280.894695,
           "BTTTriggerType" : 158,
           "BTTTriggerTypeDescription" : "Corner Click Bottom Right",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-          "BTTLayoutIndependentActionChar" : "LEFT",
+          "BTTLayoutIndependentActionChar" : "RIGHT",
           "BTTAutoAdaptActionToKeyboardLayout" : true,
           "BTTGenericActionConfig" : "autoAdapt",
-          "BTTShortcutToSend" : "123",
+          "BTTShortcutToSend" : "124",
           "BTTUUID" : "D392FC2B-3213-4224-A166-8A0C880CF5AE",
           "BTTEnabled" : 1,
           "BTTEnabled2" : 1,

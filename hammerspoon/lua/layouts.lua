@@ -97,7 +97,6 @@ local function movieLayout()
 	u.openApps("YouTube")
 	u.quitApp {
 		"neovide",
-		"lo-rain",
 		"Slack",
 		"Discord",
 		"BusyCal",
@@ -156,7 +155,7 @@ Wf_appsOnMouseScreen = u.wf
 		local screenOfWindow = newWin:screen()
 		if not (mouseScreen and env.isProjector() and app) then return end
 
-		u.runWithDelays({ 0, 0.2, 0.5 }, function()
+		u.runWithDelays({ 0, 0.3 }, function()
 			if mouseScreen:name() == screenOfWindow:name() then return end
 			newWin:moveToScreen(mouseScreen)
 			wu.moveResize(newWin, wu.maximized)

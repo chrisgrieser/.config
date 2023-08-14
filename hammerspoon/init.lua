@@ -27,6 +27,7 @@ require("lua.repo-auto-sync")
 require("lua.auto-quitter")
 require("lua.hardware-periphery")
 require("lua.pageup-pagedown-scroll")
+-- require("lua.weather-reminder")
 
 -- app-specific
 require("lua.app-specific-behavior")
@@ -35,11 +36,6 @@ require("lua.twitter-mastodon")
 require("lua.neovim")
 require("lua.sidenotes")
 
--- other
-local month = tostring(os.date()):sub(5, 8)
-if month == "Jun" or month == "Jul" or month == "Aug" or month == "Sep" then
-	require("lua.weather-reminder")
-end
 
 -- reload function (should come last)
 require("lua.reload")
