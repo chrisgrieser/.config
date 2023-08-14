@@ -37,7 +37,6 @@ safeRequire("config.abbreviations")
 if vim.fn.argc() == 0 then
 	vim.defer_fn(function()
 		vim.cmd("normal! '0")
-		vim.cmd.bwipeout("#") -- to not leave empty file
+		pcall(vim.cmd.bwipeout, "#") -- to not leave empty file
 	end, 1)
 end
-
