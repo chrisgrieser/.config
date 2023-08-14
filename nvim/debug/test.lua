@@ -1,9 +1,12 @@
--- DEMO FUNCTIONS
---------------------------------------------------------------------------------
 
-print("foobarbaz")
-print("bar")
 
--- vim.notify("foo")
--- vim.notify("bar")
 
+
+
+
+
+local foobar = "hello world"
+
+print (foobar)
+
+print(vim.inspect(require("action-hints").supports_method("referencesProvider")))
