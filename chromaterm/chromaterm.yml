@@ -20,7 +20,7 @@ rules:
     color: f.numbers
 
   - description: Git Hash 
-    regex: \b[0-9a-f]{5,40}\b
+    regex: \b[0-9a-f]{6,40}\b
     color: f.gitHash
 
   - description: URL

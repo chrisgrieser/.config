@@ -1,8 +1,8 @@
 # ALIASES
 
 # git
-alias co="git checkout"
-alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to last directory
+alias co="ct git checkout"
+alias gg="ct git checkout -" # go to previous branch/commit, like `zz` switching to last directory
 alias gs='git status'
 alias ga="git add"
 alias gM="git commit --amend" # amend + edit commit msg
@@ -10,7 +10,7 @@ alias gc="git commit"
 alias push="ct git push"
 alias pull="ct git pull"
 alias g.='cd "$(git rev-parse --show-toplevel)"' # goto git root
-alias grh='git reset --hard'
+alias grh='ct git reset --hard'
 
 # github
 alias gi='gh issue list'                # open issues
@@ -121,6 +121,7 @@ function gll() {
 # interactive
 function gli() {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
+	if ! command -v ct &>/dev/null; then print "\033[1;33mchromaterm not installed. (\`pip3 install chromaterm\`)\033[0m" && return 1; fi
 
 	local hash key_pressed selected
 	selected=$(
@@ -140,9 +141,9 @@ function gli() {
 		echo "$hash" | pbcopy
 		echo "'$hash' copied."
 	elif [[ "$key_pressed" == "ctrl-r" ]]; then
-		git reset --hard "$hash"
+		ct git reset --hard "$hash"
 	else # pressed return
-		git checkout "$hash"
+		ct git checkout "$hash"
 	fi
 }
 
@@ -151,6 +152,7 @@ function gli() {
 
 function gb() {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
+	if ! command -v ct &>/dev/null; then print "\033[1;33mchromaterm not installed. (\`pip3 install chromaterm\`)\033[0m" && return 1; fi
 	local selected
 
 	selected=$(
@@ -164,10 +166,10 @@ function gb() {
 
 	if [[ $selected == remotes/* ]]; then
 		remote=$(echo "$selected" | cut -d/ -f2-)
-		git checkout "$remote"
+		ct git checkout "$remote"
 		selected=$(echo "$selected" | cut -d/ -f3)
 	fi
-	git checkout "$selected"
+	ct git checkout "$selected"
 }
 
 #───────────────────────────────────────────────────────────────────────────────

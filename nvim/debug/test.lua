@@ -3,8 +3,6 @@
 
 
 
-
-
 local foobar = "hello world"
 
 print (foobar)

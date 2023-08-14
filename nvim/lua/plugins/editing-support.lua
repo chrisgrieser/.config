@@ -167,6 +167,13 @@ return {
 			vim.keymap.set("n", "<LeftMouse>", "<Nop>")
 		end,
 		opts = {
+			triggers_blacklist = {
+				-- FIX very weird bug where insert mode undo points (<C-g>u),
+				-- as well as vim-matchup's `<C-G>%` binding insert extra `1`s
+				-- after wrapping to the next line in insert mode. The `G` needs
+				-- to be d to affect the right mapping.
+				i = { "<C-G>" },
+			},
 			plugins = {
 				presets = { motions = false, g = false, z = false },
 				spelling = { enabled = false },
