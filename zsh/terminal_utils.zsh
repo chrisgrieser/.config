@@ -31,7 +31,8 @@ function inspect() {
 		gitlog $max_gitlog_lines
 		separator
 		if [[ -n "$(git status --short --porcelain)" ]]; then
-			git status --short # run again for color
+			# run again for color and restructure
+			git -c color.status="always" status --short | rs 2 0
 			separator
 		fi
 	fi
