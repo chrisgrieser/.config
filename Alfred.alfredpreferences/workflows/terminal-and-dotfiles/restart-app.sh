@@ -46,3 +46,11 @@ sleep 0.1
 
 # Restart (config reopens last file if no arg)
 open -a "Neovide"
+
+# check if server is responsive
+sleep 0.1
+# HACK sleep for 1ms = effectively pinging nvim server
+if ! nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>sleep 1m<CR>" ; then
+	osascript -e 'display notification "" with title "⚔️ Force killing nvim…"'
+	killall -9 nvim neovide
+fi
