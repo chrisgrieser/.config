@@ -193,7 +193,6 @@ local function filetypeCompletionConfig()
 		sources = cmp.config.sources {
 			s.lsp,
 			s.snippets,
-			s.codeium,
 			s.emojis,
 		},
 	})
