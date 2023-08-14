@@ -115,11 +115,11 @@ return {
 				},
 				type_hints = {
 					show = true,
-					prefix = "   ",
+					prefix = " 󰧞 ",
 					remove_colon_start = true,
 					remove_colon_end = true,
 				},
-				only_current_line = true,
+				only_current_line = false,
 				highlight = "NonText", -- highlight group
 			},
 		},
