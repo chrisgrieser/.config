@@ -28,9 +28,9 @@ local function irregularWhitespace()
 		(usesSpaces and not vim.tbl_contains(spaceFtsOnly, ft))
 		or (usesSpaces and width ~= spaceFiletypes[ft])
 	then
-		nonDefaultSetting = "  " .. tostring(width) .. "󱁐  "
+		nonDefaultSetting = " " .. tostring(width) .. "󱁐  "
 	elseif usesTabs and vim.tbl_contains(spaceFtsOnly, ft) then
-		nonDefaultSetting = "  󰌒 " .. tostring(width)(" ")
+		nonDefaultSetting = " 󰌒 " .. tostring(width)(" ")
 	end
 
 	-- wrong or mixed indentation

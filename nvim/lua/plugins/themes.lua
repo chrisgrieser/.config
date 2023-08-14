@@ -57,4 +57,5 @@ for _, theme in pairs(lightThemes) do
 	table.insert(allThemes, theme)
 end
 
+
 return allThemes
