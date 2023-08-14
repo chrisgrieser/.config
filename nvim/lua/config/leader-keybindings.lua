@@ -48,6 +48,10 @@ end, { desc = "󰘳 Copy last command" })
 -- as opposed to `@:`, this works across sessions
 keymap("n", "<leader>la", ":<Up><CR>", { desc = "󰘳 Run last command again", silent = true })
 
+-- search command history
+-- stylua: ignore
+keymap("n", "<leader>lh", function() cmd.Telescope("command_history") end, { desc = "󰘳  Command History" })
+
 -- show current filetype & buftype
 keymap("n", "<leader>lf", function()
 	local icon = require("nvim-web-devicons").get_icon(fn.bufname(), bo.filetype)
