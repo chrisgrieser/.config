@@ -174,7 +174,7 @@ end
 -- INFO path to java runtime engine (the builtin from ltex does not seem to work)
 -- here: using `openjdk`, w/ default M1 mac installation path (`brew install openjdk`)
 -- HACK set need to set $JAVA_HOME, since `ltex.java.path` does not seem to work
-local brewPrefix = vim.fn.system("brew --prefix"):gsub("\n", "")
+local brewPrefix = vim.fn.system("brew --prefix"):gsub("\n$", "")
 vim.env.JAVA_HOME = brewPrefix .. "/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
 
 lspSettings.ltex = {

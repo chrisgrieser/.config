@@ -1,13 +1,34 @@
+-- use new install dir
+local root = vim.fn.fnamemodify("./repro-root", ":p")
+for _, name in ipairs({ "config", "data", "state", "cache" }) do
+  vim.env[("XDG_%s_HOME"):format(name:upper())] = root .. "/" .. name
+end
+
+
 local plugins = {
-	-- {
-	-- 	"williamboman/mason-lspconfig.nvim",
-	-- 	dependencies = { "williamboman/mason.nvim", opts = true },
-	-- 	opts = { ensure_installed = { "lua_ls" } },
-	-- },
-	-- {
-	-- 	"neovim/nvim-lspconfig",
-	-- 	init = function() require("lspconfig")["lua_ls"].setup{} end,
-	-- },
+	{
+		"williamboman/mason-lspconfig.nvim",
+		dependencies = { "williamboman/mason.nvim", opts = true },
+		opts = { ensure_installed = { "lua_ls" } },
+	},
+	{
+		"neovim/nvim-lspconfig",
+		init = function() require("lspconfig")["lua_ls"].setup({}) end,
+	},
+	{-- lsp definitions & references count as virtual text
+		"roobert/action-hints.nvim",
+		config = function()
+			require("action-hints").setup {
+				template = {
+					{ " ⊛", "ActionHintsDefinition" },
+					{ " ↱%s", "ActionHintsReferences" },
+				},
+				use_virtual_text = true,
+				definition_color = "#add8e6",
+				reference_color = "#ff6666",
+			}
+		end,
+	},
 }
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -23,9 +44,9 @@ require("lazy").setup(plugins, {
 	},
 })
 
--- Convenience stuff, not strictly necessary
-vim.g.neovide_scale_factor = 1.8
+-- base appearance to not make me crazy
 vim.cmd.colorscheme("habamax")
+vim.opt.guifont = "JetBrainsMonoNL Nerd Font:h25.2"
 vim.opt.signcolumn = "yes:2"
 
 --------------------------------------------------------------------------------
