@@ -64,13 +64,13 @@ return {
 						},
 					},
 					substitute = {
-						pattern = "^:s ",
+						pattern = {"^:%%? ?s"},
 						icon = " ",
 						conceal = true,
 						opts = {
 							border = { style = u.borderStyle },
 							relative = "cursor",
-							size = { width = 30 }, -- `max_width` does not work, so fixed value
+							size = { width = 40 }, -- `max_width` does not work, so fixed value
 							position = { row = -3, col = 0 },
 						},
 					},

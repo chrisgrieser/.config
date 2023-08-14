@@ -19,6 +19,7 @@ nnoremap Y y$
 " nnoremap c "_c " BUG not working
 nnoremap C "_c$
 " nnoremap x "_dl
+nnoremap x "_x
 
 
 """"""""""""""""""""""
