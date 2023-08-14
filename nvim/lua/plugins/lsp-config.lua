@@ -274,7 +274,6 @@ end
 return {
 	{ -- package manager
 		"williamboman/mason.nvim",
-		lazy = true,
 		opts = {
 			ui = {
 				border = u.borderStyle,

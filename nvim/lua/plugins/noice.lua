@@ -114,4 +114,36 @@ return {
 			},
 		},
 	},
+	{ -- Notifications
+		"rcarriga/nvim-notify",
+		-- does not play nice with the terminal
+		cond = function() return vim.fn.has("gui_running") == 1 end,
+		opts = {
+			render = "minimal", -- minimal|default|compact
+			top_down = false,
+			max_width = 70,
+			max_height = 15,
+			minimum_width = 15,
+			level = 0, -- minimum severity level to display (0 = display all)
+			timeout = 7500,
+			stages = "slide",
+			on_open = function(win)
+				if not vim.api.nvim_win_is_valid(win) then return end
+				vim.api.nvim_win_set_config(win, { border = u.borderStyle })
+			end,
+		},
+		init = function()
+			-- copy [l]ast [n]otice
+			vim.keymap.set("n", "<leader>ln", function()
+				local history = require("notify").history()
+				if #history == 0 then
+					vim.notify("No Notification in this session.", u.warn)
+					return
+				end
+				local msg = history[#history].message
+				vim.fn.setreg("+", msg)
+				vim.notify("Last Notification copied.", u.trace)
+			end, { desc = "󰎟 Copy Last Notification" })
+		end,
+	},
 }
