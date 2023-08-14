@@ -36,7 +36,7 @@ local function customHighlights()
 	)
 
 	-- MatchParen
-	updateHighlight("MatchParen", "gui=underdotted,bold cterm=underline,bold") -- more visible matchparens
+	-- updateHighlight("MatchParen", "gui=underdotted,bold,reverse cterm=underline,bold") -- more visible matchparens
 
 	-- proper underlines for diagnostics
 	local types = { "Error", "Warn", "Info", "Hint" }
@@ -117,6 +117,7 @@ local function themeModifications()
 		linkHighlight("TabLineSel", "lualine_a_normal")
 		linkHighlight("TabLineFill", "lualine_c_normal")
 	elseif theme == "dawnfox" then
+		updateHighlight("TreesitterContext", "guibg=#e8dcce")
 		updateHighlight("IndentBlanklineChar", "guifg=#e3d4c4")
 		updateHighlight("ScrollView", "guibg=#303050")
 		updateHighlight("ColorColumn", "guibg=#ebe1d5")

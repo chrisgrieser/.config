@@ -8,6 +8,37 @@ return {
 		event = "CursorMoved",
 		opts = true,
 	},
+	{ -- context lines
+		"nvim-treesitter/nvim-treesitter-context",
+		event = "BufReadPost",
+		keys = {
+			{
+				"gk",
+				function() require("treesitter-context").go_to_context() end,
+				desc = " Goto context",
+			},
+		},
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		opts = {
+			max_lines = 5,
+			trim_scope = "outer", -- context lines to discard if `max_lines` exceeded: 'inner', 'outer'
+			min_window_height = 10,
+			line_numbers = false,
+			multiline_threshold = 20, -- Maximum number of lines to collapse for a single context line
+			-- Separator between context and content. Should be a single character string, like '-'.
+			-- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
+			separator = nil,
+		},
+	},
+	{ -- better matchparents
+		"utilyre/sentiment.nvim",
+		event = "VeryLazy", -- keep for lazy loading
+		opts = {
+			-- config
+		},
+		-- `matchparen.vim` needs to be disabled manually in case of lazy loading
+		init = function() vim.g.loaded_matchparen = 1 end,
+	},
 	{ -- when searching, search count is shown next to the cursor
 		"kevinhwang91/nvim-hlslens",
 		lazy = true, -- loaded by my "vim.on_key" function
@@ -154,7 +185,7 @@ return {
 	},
 	{ -- rainbow brackets
 		"https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
-		event = "VeryLazy",
+		event = "BufReadPost",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
 			-- rainbow brackets without aggressive red
