@@ -4,9 +4,10 @@ local u = require("config.utils")
 
 return {
 	{ -- fix scrollOff at end of file
-		"Aasim-A/scrollEOF.nvim",
+		"chrisgrieser/scrollEOF.nvim",
 		event = "CursorMoved",
 		opts = true,
+		dev = true,
 	},
 	{ -- context lines
 		"nvim-treesitter/nvim-treesitter-context",
@@ -20,9 +21,9 @@ return {
 		},
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		opts = {
-			max_lines = 5,
+			max_lines = 3,
 			trim_scope = "outer", -- context lines to discard if `max_lines` exceeded: 'inner', 'outer'
-			min_window_height = 10,
+			min_window_height = 20,
 			line_numbers = false,
 			multiline_threshold = 20, -- Maximum number of lines to collapse for a single context line
 			-- Separator between context and content. Should be a single character string, like '-'.
@@ -30,13 +31,7 @@ return {
 			separator = nil,
 		},
 	},
-	{
-		"haringsrob/nvim_context_vt",
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		-- event = "VeryLazy",
-		-- opts = true,
-	},
-	{ -- better matchparents
+	{ -- always show matchparents
 		"utilyre/sentiment.nvim",
 		event = "VeryLazy",
 		opts = true,

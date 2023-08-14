@@ -36,35 +36,18 @@ local tsConfig = {
 				["i/"] = { query = "@regex.inner", desc = "󱡔 inner regex textobj" },
 				["aa"] = { query = "@parameter.outer", desc = "󱡔 outer parameter textobj" },
 				["ia"] = { query = "@parameter.inner", desc = "󱡔 inner parameter textobj" },
-				-- mnemonic: luup
-				["iu"] = { query = "@loop.inner", desc = "󱡔 inner loop textobj" },
+				-- stylua: ignore start
+				["iu"] = { query = "@loop.inner", desc = "󱡔 inner loop textobj" }, -- mnemonic: luup
 				["au"] = { query = "@loop.outer", desc = "󱡔 outer loop textobj" },
-				["a" .. u.textobjectMaps["function"]] = {
-					query = "@function.outer",
-					desc = "󱡔 outer function textobj",
-				},
-				["i" .. u.textobjectMaps["function"]] = {
-					query = "@function.inner",
-					desc = "󱡔 inner function textobj",
-				},
-				["a" .. u.textobjectMaps["conditional"]] = {
-					query = "@conditional.outer",
-					desc = "󱡔 outer conditional textobj",
-				},
-				["i" .. u.textobjectMaps["conditional"]] = {
-					query = "@conditional.inner",
-					desc = "󱡔 inner conditional textobj",
-				},
-				["a" .. u.textobjectMaps["call"]] = {
-					query = "@call.outer",
-					desc = "󱡔 outer call textobj",
-				},
-				["i" .. u.textobjectMaps["call"]] = {
-					query = "@call.inner",
-					desc = "󱡔 inner call textobj",
-				},
+				["a" .. u.textobjectMaps["function"]] = { query = "@function.outer", desc = "󱡔 outer function textobj" },
+				["i" .. u.textobjectMaps["function"]] = { query = "@function.inner", desc = "󱡔 inner function textobj" },
+				["a" .. u.textobjectMaps["conditional"]] = { query = "@conditional.outer", desc = "󱡔 outer conditional textobj" },
+				["i" .. u.textobjectMaps["conditional"]] = { query = "@conditional.inner", desc = "󱡔 inner conditional textobj" },
+				["a" .. u.textobjectMaps["call"]] = { query = "@call.outer", desc = "󱡔 outer call textobj" },
+				["i" .. u.textobjectMaps["call"]] = { query = "@call.inner", desc = "󱡔 inner call textobj" },
+				-- stylua: ignore end
 
-				-- INFO later remapped to q only in operator pending mode to avoid conflict
+				-- HACK later remapped to q only in operator pending mode to avoid conflict
 				-- @comment.inner not supported yet for most languages
 				["&&&"] = { query = "@comment.outer", desc = "which_key_ignore" },
 			},

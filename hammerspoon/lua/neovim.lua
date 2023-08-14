@@ -9,15 +9,9 @@ local aw = require("lua.utils").aw
 ---@param win hs.window
 local function obsidianThemeDevHelper(win)
 	local obsi = u.app("Obsidian")
-	if
-		not win
-		or not win:application()
-		or not (win:application():name():lower() == "neovide")
-		or not obsi:mainWindow()
-		or obsi:mainWindow():isMinimized()
-	then
-		return
-	end
+	local isNeovideWin = win and win:application() and (win:application():name():lower() == "neovide")
+	local obsiMinimized = obsi and obsi:mainWindow() and not (obsi:mainWindow():isMinimized())
+	if not isNeovideWin or not obsiMinimized then return end
 
 	-- delay to avoid conflict with `app-hider.lua`
 	u.runWithDelays(0.1, function()
@@ -33,11 +27,8 @@ end
 
 -- Add dots when copypasting from dev tools
 local function addCssSelectorLeadingDot()
-	if
-		not u.appRunning("neovide")
-		or not u.app("neovide"):mainWindow()
-		or not u.app("neovide"):mainWindow():title():find("%.css$")
-	then
+	local neovide = u.app("neovide")
+	if not (neovide and neovide:mainWindow() and neovide:mainWindow():title():find("%.css$")) then
 		return
 	end
 
