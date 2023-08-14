@@ -20,7 +20,9 @@ return {
 				local padRight = 3 -- due to scrollbar
 				local hlBySeverity = require("trld.utils").get_hl_by_serverity
 				local fmt_line = u.diagnosticFmt(diag)
-				local lines = { { { " " .. fmt_line .. (" "):rep(padRight), hlBySeverity(diag.severity) } } }
+				local lines = {
+					{ { " " .. fmt_line .. (" "):rep(padRight), hlBySeverity(diag.severity) } },
+				}
 				return lines
 			end,
 		},
@@ -92,7 +94,6 @@ return {
 	},
 	{ -- display inlay hints from LSP
 		"lvimuser/lsp-inlayhints.nvim", -- INFO only temporarily needed, until https://github.com/neovim/neovim/issues/18086
-		lazy = true, -- required in attach function
 		init = function()
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(args)

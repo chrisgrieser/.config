@@ -48,7 +48,6 @@ return {
 	},
 	{ -- tons of text objects
 		"chrisgrieser/nvim-various-textobjs",
-		lazy = true, -- loaded by keymaps
 		dev = true,
 	},
 }
