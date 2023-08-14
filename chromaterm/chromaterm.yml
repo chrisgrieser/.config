@@ -9,6 +9,7 @@ palette:
   FileSize: "#5552e6"
   Bad: "#e93045"
   Neutral: "#fde63a"
+  gitHash: "#fde63a"
   Good: "#03d28d"
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -18,6 +19,10 @@ rules:
   - description: Numbers
     regex: \b(?<!\.)\d+(\.\d+)?(?!\.)\b
     color: f.numbers
+
+  - description: Git Hash 
+    regex: \b[a-z0-9]{6,20}\b
+    color: f.gitHash
 
   - description: URL
     regex: |

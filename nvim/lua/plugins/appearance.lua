@@ -1,3 +1,4 @@
+-- vim-pseudo-modeline: buffer_has_colors
 local u = require("config.utils")
 
 --------------------------------------------------------------------------------
@@ -11,16 +12,12 @@ return {
 	},
 	{ -- context lines
 		"nvim-treesitter/nvim-treesitter-context",
-		enabled = false,
-		event = "VeryLazy",
-		keys = {
-			{
-				"gk",
-				function() require("treesitter-context").go_to_context() end,
-				desc = " Goto context",
-			},
-		},
 		dependencies = "nvim-treesitter/nvim-treesitter",
+		event = "VeryLazy",
+		init = function()
+			-- stylua: ignore
+			vim.keymap.set("n", "^", function() require("treesitter-context").go_to_context() end, { desc = " Goto context" })
+		end,
 		opts = {
 			max_lines = 3,
 			trim_scope = "outer", -- context lines to discard if `max_lines` exceeded: 'inner', 'outer'
@@ -149,7 +146,7 @@ return {
 			},
 		},
 	},
-	{
+	{ -- Notifications
 		"rcarriga/nvim-notify",
 		lazy = true, -- loaded by noice
 		-- does not play nice with the terminal
@@ -187,8 +184,8 @@ return {
 		event = "BufReadPost", -- later does not load on first buffer
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
-			-- rainbow brackets without aggressive red
 			vim.api.nvim_create_autocmd("ColorScheme", {
+				-- red too aggressive
 				callback = function() vim.api.nvim_set_hl(0, "RainbowDelimiterRed", { fg = "#7e8a95" }) end,
 			})
 		end,
