@@ -42,6 +42,7 @@ while pgrep -xq "neovide" || pgrep -xq "nvim"; do
 	fi
 done
 rm -f "/tmp/nvim_server.pipe" # FIX server sometimes not shut down
+sleep 0.1
 
 # Restart (config reopens last file if no arg)
 open -a "Neovide"
