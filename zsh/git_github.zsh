@@ -163,7 +163,6 @@ function gb() {
 	selected=$(echo "$selected" | tr -d "* ")
 
 	# how to checkout remote branches: https://stackoverflow.com/questions/67699/how-do-i-clone-all-remote-branches
-
 	if [[ $selected == remotes/* ]]; then
 		remote=$(echo "$selected" | cut -d/ -f2-)
 		ct git checkout "$remote"
