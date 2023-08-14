@@ -3,12 +3,12 @@
 #───────────────────────────────────────────────────────────────────────────────
 # https://github.com/hSaria/ChromaTerm#palette
 palette:
-  urls: "#006efe"
-  numbers: "#ef2e9f"
+  numbers: "#006efe"
+  urls: "#ed1694"
   Date: "#f08c00"
   FileSize: "#5552e6"
   Bad: "#e93045"
-  gitHash: "#edd102"
+  gitHash: "#bfa902"
   Good: "#03d28d"
 
 #───────────────────────────────────────────────────────────────────────────────
