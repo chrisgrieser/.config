@@ -16,16 +16,16 @@ set clipboard=unnamed
 nmap Y y$
 
 " don't pollute the register
-" HACK to avoid recursion since Obsidian vimrc does not support noremap
-nmap x "_dl
-nmap C "_d$a
-nmap cc "_ddO
+" nnoremap c "_c " BUG not working
+nnoremap C "_c$
+nnoremap x "_x
+
 
 """"""""""""""""""""""
 " Search
 """"""""""""""""""""""
 " no modifier key for jumping to next word
-nmap + *
+nnoremap + *
 
 " Find Mode (by mirroring American keyboard layout on German keyboard layout)
 nmap - /
@@ -159,6 +159,10 @@ nmap ,gc :gitCommit
 " undo consistently on one key
 nmap U <C-r>
 
+" split line
+vmap ,s gq
+nmap ,s gqq
+
 " Case Switch via Smarter MD Hotkeys Plugin
 exmap caseSwitch obcommand obsidian-smarter-md-hotkeys:smarter-upper-lower
 nmap ö :caseSwitch
@@ -171,7 +175,6 @@ nmap ~ ~h
 nmap ü "zdawel"zph
 nmap Ü "zdawbh"zph
 
-exmap aiWrite obcommand obsidian-textgenerator-plugin:generate-text
 exmap aiWrite obcommand obsidian-textgenerator-plugin:insert-generated-text-From-template
 nmap ,a :aiWrite
 vmap ,a :aiWrite
