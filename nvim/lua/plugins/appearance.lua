@@ -104,13 +104,27 @@ return {
 					cmdline = { icon = " " },
 					-- syntax highlighting for `:I`, (see config/user-commands.lua)
 					inspect = { pattern = "^:I ", icon = " ", ft = "lua" },
+
+					IncRename = {
+						pattern = "^:%s*IncRename%s+",
+						icon = " ",
+						conceal = true,
+						opts = {
+							border = { style = u.borderStyle },
+							relative = "cursor",
+							size = { width = 30 }, -- `max_width` does not work, so setting fixed
+							position = { row = -3, col = 0 },
+						},
+					},
 				},
 			},
 			-- https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua
-			view = {
+			views = {
 				mini = { timeout = 3000 },
 				hover = {
 					border = { style = u.borderStyle },
+					size = { max_width = 80 },
+					win_options = { scrolloff = 5 }
 				},
 			},
 			commands = {
@@ -139,9 +153,6 @@ return {
 					["vim.lsp.util.stylize_markdown"] = true,
 					["cmp.entry.get_documentation"] = true,
 				},
-			},
-			presets = {
-				inc_rename = true,
 			},
 		},
 	},
