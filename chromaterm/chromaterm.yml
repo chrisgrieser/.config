@@ -8,8 +8,7 @@ palette:
   Date: "#f08c00"
   FileSize: "#5552e6"
   Bad: "#e93045"
-  Neutral: "#fde63a"
-  gitHash: "#fde63a"
+  gitHash: "#edd102"
   Good: "#03d28d"
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -21,7 +20,7 @@ rules:
     color: f.numbers
 
   - description: Git Hash 
-    regex: \b[a-z0-9]{6,20}\b
+    regex: \b[0-9a-f]{5,40}\b
     color: f.gitHash
 
   - description: URL
@@ -68,10 +67,6 @@ rules:
   - description: Generic - Bad
     regex: (?i)\b(abnormal(ly)?|los(t|ing)|err(ors?)?|(den(y|ies|ied))|reject(ing|ed)?|drop(ped|s)?|(err\-)?disabled?|(timed?\-?out)|fail(s|ed|iure)?|disconnect(ed)?|unreachable|invalid|bad|notconnect|unusable|blk|inaccessible|wrong|collisions?|unsynchronized|mismatch|runts)\b
     color: f.Bad
-
-  - description: Generic - Neutral
-    regex: (?i)\b(password(s)?)\b
-    color: f.Neutral
 
   - description: Generic - Good
     regex: (?i)\b(ok(ay)?|permit(ed|s)?|accept(s|ed)?|enabled?|online|succe((ss(ful|fully)?)|ed(ed)?)?|connect(ed)?|reachable|valid|forwarding|synchronized)\b
