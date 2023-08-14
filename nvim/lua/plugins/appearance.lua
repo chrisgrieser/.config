@@ -11,6 +11,7 @@ return {
 	},
 	{ -- context lines
 		"nvim-treesitter/nvim-treesitter-context",
+		enabled = false,
 		event = "VeryLazy",
 		keys = {
 			{

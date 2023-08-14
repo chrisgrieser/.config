@@ -166,7 +166,7 @@ keymap("n", "<leader>gn", cmd.Neogit, { desc = "󰊢 Neogit" })
 
 -- Gitsigns
 keymap("n", "<leader>ga", "<cmd>Gitsigns stage_hunk<CR>", { desc = "󰊢 Add Hunk" })
-keymap("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<CR>", { desc = "󰊢 Preview Hunk Diff" })
+keymap("n", "<leader>gv", "<cmd>Gitsigns preview_hunk<CR>", { desc = "󰊢 Preview Hunk Diff" })
 keymap("n", "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", { desc = "󰊢 Reset Hunk" })
 keymap("n", "<leader>g?", "<cmd>Gitsigns blame_line<CR>", { desc = "󰊢 Blame Line" })
 
