@@ -13,8 +13,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 --------------------------------------------------------------------------------
--- config https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
+-- DOCS https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
 require("lazy").setup("plugins", {
+	defaults = { lazy = true },
 	dev = {
 		path = os.getenv("HOME") .. "/Repos",
 		fallback = true, -- use remote repo when local repo doesn't exist

@@ -333,7 +333,6 @@ return {
 	},
 	{ -- for fuzzy searching the buffer via /
 		"tzachar/cmp-fuzzy-buffer",
-		lazy = true, -- loaded by cmp
 		dependencies = {
 			"hrsh7th/nvim-cmp",
 			{

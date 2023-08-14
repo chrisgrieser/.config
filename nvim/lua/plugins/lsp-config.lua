@@ -72,7 +72,7 @@ lspSettings.cssls = {
 			duplicateProperties = "ignore",
 			emptyRules = "warning",
 		},
-		colorDecorators = { enable = false }, -- not supported yet
+		colorDecorators = { enable = true }, -- not supported yet
 	},
 }
 
@@ -112,8 +112,8 @@ lspSettings.tsserver = {
 	},
 }
 
+-- disable formatting, since taken care of by rome https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts#neovim-08
 lspOnAttach.tsserver = function(client, _)
-	-- disable formatting, since taken care of by rome https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts#neovim-08
 	client.server_capabilities.documentFormattingProvider = false
 	client.server_capabilities.documentRangeFormattingProvider = false
 end
@@ -274,7 +274,6 @@ end
 return {
 	{ -- package manager
 		"williamboman/mason.nvim",
-		lazy = true,
 		opts = {
 			ui = {
 				border = u.borderStyle,

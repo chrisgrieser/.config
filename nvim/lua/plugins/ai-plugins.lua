@@ -22,7 +22,6 @@ return {
 	},
 	{ -- AI completions via cmp
 		"jcdickinson/codeium.nvim",
-		lazy = true, -- loaded by cmp
 		dependencies = { "nvim-lua/plenary.nvim", "hrsh7th/nvim-cmp" },
 		opts = {
 			config_path = vim.env.DATA_DIR .. "/private dotfiles/codium-api-key.json",

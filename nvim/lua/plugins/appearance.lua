@@ -34,8 +34,16 @@ return {
 	},
 	{ -- when searching, search count is shown next to the cursor
 		"kevinhwang91/nvim-hlslens",
-		lazy = true, -- loaded by my "vim.on_key" function
-		opts = { nearest_only = true },
+		opts = {
+			nearest_only = true,
+			-- format virtual text
+			override_lens = function(render, posList, nearest, idx, _)
+				local lnum, col = unpack(posList[idx])
+				local text = (" %d/%d "):format(idx, #posList)
+				local chunks = { { " ", "Ignore" }, { text, "HlSearchLensNear" } }
+				render.setVirt(0, lnum - 1, col - 1, chunks, nearest)
+			end,
+		},
 	},
 	{ -- scrollbar with information
 		"lewis6991/satellite.nvim",
@@ -51,114 +59,8 @@ return {
 			handlers = { marks = { enable = false } }, -- FIX mark-related error message
 		},
 	},
-	{ -- UI overhaul
-		"folke/noice.nvim",
-		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
-		event = "VeryLazy",
-		init = function()
-			vim.keymap.set(
-				"n",
-				"<Esc>",
-				function() vim.cmd.Noice("dismiss") end,
-				{ desc = "󰎟 Clear Notifications" }
-			)
-
-			-- Toggle Log
-			vim.keymap.set({ "n", "x", "i" }, "<D-0>", function()
-				vim.cmd.Noice("dismiss")
-				vim.cmd.Noice("history")
-			end, { desc = "󰎟 Notification Log" })
-		end,
-		opts = {
-			-- can be used to filter/redirect stuff
-			-- https://www.reddit.com/r/neovim/comments/12lf0ke/comment/jg6idvr/
-			-- DOCS https://github.com/folke/noice.nvim#-routes
-			routes = {
-				-- redirect stuff to the more subtle "mini"
-				{ filter = { event = "msg_show", find = "B written$" }, view = "mini" },
-				-- nvim-early-retirement
-				{ filter = { event = "notify", find = "^Auto%-Closing Buffer:" }, view = "mini" },
-				-- nvim-treesitter
-				{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
-				-- Mason
-				{ filter = { event = "notify", find = "successfully u?n?installed.$" }, view = "mini" },
-				{ filter = { event = "notify", find = "^%[mason%-" }, view = "mini" },
-				-- Codeium.nvim
-				{ filter = { event = "notify", find = "^Codeium.nvim:" }, view = "mini" },
-				{ filter = { event = "notify", find = "downloading server" }, view = "mini" },
-				{ filter = { event = "notify", find = "unpacking server" }, view = "mini" },
-
-				-- unneeded info on search patterns
-				{ filter = { event = "msg_show", find = "^/." }, skip = true },
-				{ filter = { event = "msg_show", find = "^?." }, skip = true },
-				{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
-
-				{ filter = { event = "msg_show", min_height = 10 }, view = "split" },
-			},
-			cmdline = {
-				-- classic cmdline at the bottom to not obfuscate the buffer, e.g.
-				-- for :substitute or numb.vnim
-				view = "cmdline",
-				format = {
-					search_down = { icon = "  " },
-					cmdline = { icon = " " },
-					-- syntax highlighting for `:I`, (see config/user-commands.lua)
-					inspect = { pattern = "^:I ", icon = " ", ft = "lua" },
-
-					IncRename = {
-						pattern = "^:%s*IncRename%s+",
-						icon = " ",
-						conceal = true,
-						opts = {
-							border = { style = u.borderStyle },
-							relative = "cursor",
-							size = { width = 30 }, -- `max_width` does not work, so setting fixed
-							position = { row = -3, col = 0 },
-						},
-					},
-				},
-			},
-			-- https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua
-			views = {
-				mini = { timeout = 3000 },
-				hover = {
-					border = { style = u.borderStyle },
-					size = { max_width = 80 },
-					win_options = { scrolloff = 5 }
-				},
-			},
-			commands = {
-				-- options for `:Noice history`
-				history = {
-					view = "split",
-					filter_opts = { reverse = true }, -- show newest entries first
-					opts = {
-						enter = true,
-						size = "30%",
-						close = { keys = { "q", "<D-w>", "<D-0>" } },
-					},
-				},
-			},
-
-			-- DISABLED, since conflicts with existing plugins I prefer to use
-			popupmenu = { backend = "cmp" }, -- replace with nvim-cmp, since more sources
-			messages = { view_search = false }, -- replaced by nvim-hlslens
-			lsp = {
-				progress = { enabled = false }, -- replaced with nvim-dr-lsp, since this one cannot filter null-ls
-				signature = { enabled = false }, -- replaced with lsp_signature.nvim
-
-				-- ENABLED features
-				override = {
-					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-					["vim.lsp.util.stylize_markdown"] = true,
-					["cmp.entry.get_documentation"] = true,
-				},
-			},
-		},
-	},
 	{ -- Notifications
 		"rcarriga/nvim-notify",
-		lazy = true, -- loaded by noice
 		-- does not play nice with the terminal
 		cond = function() return vim.fn.has("gui_running") == 1 end,
 		opts = {
@@ -212,7 +114,6 @@ return {
 	},
 	{ -- Nerdfont filetype icons
 		"nvim-tree/nvim-web-devicons",
-		lazy = true, -- loaded by Telescope & Lualine
 		opts = {
 			default = true, -- use default icon as fallback
 			override = {

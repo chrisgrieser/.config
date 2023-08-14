@@ -39,7 +39,6 @@ return {
 	},
 	{ -- case conversion
 		"johmsalas/text-case.nvim",
-		lazy = true, -- loaded by keymaps
 		init = function()
 			local casings = {
 				{ char = "u", arg = "upper", desc = "UPPER CASE" },
