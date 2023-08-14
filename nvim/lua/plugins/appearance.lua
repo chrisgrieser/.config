@@ -109,6 +109,9 @@ return {
 			-- https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua
 			view = {
 				mini = { timeout = 3000 },
+				hover = {
+					border = { style = u.borderStyle },
+				},
 			},
 			commands = {
 				-- options for `:Noice history`
@@ -139,7 +142,6 @@ return {
 			},
 			presets = {
 				inc_rename = true,
-				lsp_doc_border = false,
 			},
 		},
 	},
