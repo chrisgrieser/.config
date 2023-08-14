@@ -25,27 +25,6 @@ return {
 			end,
 		},
 	},
-	{-- lsp definitions & references count as virtual text
-		"roobert/action-hints.nvim",
-		enabled = false,
-		config = function()
-			require("action-hints").setup {
-				template = {
-					{ " ⊛", "ActionHintsDefinition" },
-					{ " ↱%s", "ActionHintsReferences" },
-				},
-				use_virtual_text = true,
-				definition_color = "#add8e6",
-				reference_color = "#ff6666",
-			}
-
-			local lualineC = require("lualine").get_config().sections.lualine_c or {}
-			table.insert(lualineC, { require("action-hints").statusline })
-			require("lualine").setup {
-				sections = { lualine_c = lualineC },
-			}
-		end,
-	},
 	{ -- lsp definitions & references count in the status line
 		"chrisgrieser/nvim-dr-lsp",
 		event = "LspAttach",

@@ -10,7 +10,7 @@ return {
 	},
 	{ -- context lines
 		"nvim-treesitter/nvim-treesitter-context",
-		event = "BufReadPost",
+		event = "VeryLazy",
 		keys = {
 			{
 				"gk",
@@ -30,14 +30,17 @@ return {
 			separator = nil,
 		},
 	},
+	{
+		"haringsrob/nvim_context_vt",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		-- event = "VeryLazy",
+		-- opts = true,
+	},
 	{ -- better matchparents
 		"utilyre/sentiment.nvim",
-		event = "VeryLazy", -- keep for lazy loading
-		opts = {
-			-- config
-		},
-		-- `matchparen.vim` needs to be disabled manually in case of lazy loading
-		init = function() vim.g.loaded_matchparen = 1 end,
+		event = "VeryLazy",
+		opts = true,
+		init = function() vim.g.loaded_matchparen = 1 end, -- needed when lazy-loaded
 	},
 	{ -- when searching, search count is shown next to the cursor
 		"kevinhwang91/nvim-hlslens",
@@ -185,7 +188,7 @@ return {
 	},
 	{ -- rainbow brackets
 		"https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
-		event = "BufReadPost",
+		event = "BufReadPost", -- later does not load on first buffer
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
 			-- rainbow brackets without aggressive red
