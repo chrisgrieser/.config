@@ -94,6 +94,7 @@ return {
 	},
 	{ -- display inlay hints from LSP
 		"lvimuser/lsp-inlayhints.nvim", -- INFO only temporarily needed, until https://github.com/neovim/neovim/issues/18086
+		lazy = true,
 		init = function()
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(args)

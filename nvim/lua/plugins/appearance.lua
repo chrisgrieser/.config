@@ -34,6 +34,7 @@ return {
 	},
 	{ -- when searching, search count is shown next to the cursor
 		"kevinhwang91/nvim-hlslens",
+		lazy = true,
 		opts = {
 			nearest_only = true,
 			-- format virtual text
@@ -61,6 +62,7 @@ return {
 	},
 	{ -- Notifications
 		"rcarriga/nvim-notify",
+		lazy = true,
 		-- does not play nice with the terminal
 		cond = function() return vim.fn.has("gui_running") == 1 end,
 		opts = {
@@ -114,6 +116,7 @@ return {
 	},
 	{ -- Nerdfont filetype icons
 		"nvim-tree/nvim-web-devicons",
+		lazy = true,
 		opts = {
 			default = true, -- use default icon as fallback
 			override = {

@@ -47,7 +47,7 @@ local tsConfig = {
 				["i" .. u.textobjectMaps["call"]] = { query = "@call.inner", desc = "󱡔 inner call textobj" },
 				-- stylua: ignore end
 
-				-- HACK later remapped to q only in operator pending mode to avoid conflict
+				-- INFO later remapped to q only in operator pending mode to avoid conflict
 				-- @comment.inner not supported yet for most languages
 				["&&&"] = { query = "@comment.outer", desc = "which_key_ignore" },
 			},
@@ -73,7 +73,7 @@ local tsConfig = {
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		event = "UIEnter",
+		event = "VeryLazy",
 		build = function() require("nvim-treesitter.install").update { with_sync = true } end,
 		main = "nvim-treesitter.configs",
 		opts = tsConfig,

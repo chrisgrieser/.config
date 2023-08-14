@@ -148,7 +148,6 @@ local function currentFile()
 	end
 
 	local deviconsInstalled, devicons = pcall(require, "nvim-web-devicons")
-	require("nvim-web-devicons").get_icon("bla.js", "js")
 	local ftOrExt = ext ~= "" and ext or ft
 	if ftOrExt == "javascript" then ftOrExt = "js" end
 	if ftOrExt == "typescript" then ftOrExt = "ts" end

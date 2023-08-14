@@ -48,6 +48,7 @@ return {
 	},
 	{ -- tons of text objects
 		"chrisgrieser/nvim-various-textobjs",
+		lazy = true,
 		dev = true,
 	},
 }
