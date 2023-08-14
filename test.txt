@@ -1,0 +1,7 @@
+ [31mM[m nvim/lua/config/lazy.lua
+ [31mM[m nvim/lua/plugins/appearance.lua
+ [31mM[m nvim/lua/plugins/lsp-config.lua
+ [31mM[m nvim/lua/plugins/lsp-extras.lua
+ [31mM[m nvim/lua/plugins/noice.lua
+ [31mM[m nvim/lua/plugins/null-ls-linter.lua
+[31m??[m test.txt
