@@ -159,7 +159,7 @@ Wf_appsOnMouseScreen = u.wf
 		u.runWithDelays({ 0, 0.2, 0.5 }, function()
 			if mouseScreen:name() == screenOfWindow:name() then return end
 			newWin:moveToScreen(mouseScreen)
-			wu.moveResize(newWin, M.maximized)
+			wu.moveResize(newWin, wu.maximized)
 		end)
 	end)
 
