@@ -27,8 +27,10 @@ fi
 #───────────────────────────────────────────────────────────────────────────────
 # SPECIAL RESTART FOR NEOVIDE/NVIM
 
+server="/tmp/nvim_server.pipe"
+
 # kill
-nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>try|wqall|catch|qall|endtry<CR>"
+nvim --server "$server" --remote-send "<cmd>try|wqall|catch|qall|endtry<CR>"
 
 # wait until dead
 i=0
@@ -37,8 +39,8 @@ while pgrep -xq "neovide" || pgrep -xq "nvim"; do
 	i=$((i + 1))
 	[[ $i -gt 30 ]] && return 1
 done
-rm -f "/tmp/nvim_server.pipe" # FIX server sometimes not shut down
-sleep 0.1
+
+[[ -f "$server" ]] && rm -f "$server" # FIX server sometimes not shut down
 
 # Restart (config reopens last file if no arg)
 open -a "Neovide"
@@ -49,8 +51,8 @@ open -a "Neovide"
 sleep 1 # wait for server
 
 # HACK sleep for 1ms = effectively pinging nvim server
-if ! nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>sleep 1m<CR>"; then
-	osascript -e 'display notification "" with title "Server unresponsive."'
+if ! nvim --server "$server" --remote-send "<cmd>sleep 1m<CR>"; then
+	osascript -e 'display notification "⚔️ Force killing Neovide…" with title "Server unresponsive."'
 	killall -9 nvim neovide
 	sleep 0.5
 	open -a "Neovide"

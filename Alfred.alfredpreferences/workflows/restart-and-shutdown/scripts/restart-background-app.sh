@@ -3,7 +3,7 @@
 app="$*"
 
 case "$app" in
-"AltTab")
+"AltTab"|"Hammerspoon")
 	killall "$app"
 	while pgrep -xq "$app"; do sleep 0.1; done
 	open -a "$app"
@@ -16,4 +16,4 @@ case "$app" in
 	;;
 esac
 
-echo -n "Restarted $app" # Alfred notification
+echo -n "🔁 Restarted $app" # Alfred notification
