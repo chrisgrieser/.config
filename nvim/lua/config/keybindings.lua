@@ -436,3 +436,25 @@ autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
+---@param direction "up"|"down"
+local function scrollHoverWin(direction)
+	local scrollCmd = (direction == "down" and "<C-e>" or "<C-y>")
+
+	local a = vim.api
+	local winIds = vim.api.nvim_tabpage_list_wins(0)
+	-- local curWinId = vim.api.nvim_get_current_win()
+	for _, winId in ipairs(winIds) do
+		local isHover = vim.api.nvim_win_get_config(winId).relative ~= ""
+			and vim.api.nvim_win_get_config(winId).focusable
+		if isHover then
+			a.nvim_set_current_win(winId)
+			u.normal("4" .. scrollCmd)
+			-- a.nvim_set_current_win(curWinId) -- would close window
+			return
+		end
+	end
+	vim.notify("No floating windows found. ", u.warn)
+end
+
+keymap("n", "<PageDown>", function() scrollHoverWin("down") end, { desc = "Scroll down hover" })
+keymap("n", "<PageUp>", function() scrollHoverWin("up") end, { desc = "Scroll up hover" })
