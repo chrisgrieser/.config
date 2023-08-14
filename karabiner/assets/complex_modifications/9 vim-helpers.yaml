@@ -11,7 +11,7 @@ rules:
         to:
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-              if ! nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>try|wqall|catch|qall|endtry<CR>" ; then
+              if ! nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>wq!<CR>" ; then
                 osascript -e 'display notification "" with title "⚔️ Force killing nvim…"'
                 killall -9 nvim neovide
               fi
