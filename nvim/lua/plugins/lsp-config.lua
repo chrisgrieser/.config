@@ -290,7 +290,8 @@ return {
 	},
 	{ -- configure LSPs
 		"neovim/nvim-lspconfig",
-		lazy = false, -- should setup lsps as soon as possible
+
+		-- lazy = false, -- should setup lsps as soon as possible
 		dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config
 		init = setupAllLsps,
 		config = diagnosticConfig,
