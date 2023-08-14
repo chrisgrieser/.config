@@ -35,7 +35,7 @@ i=0
 while pgrep -xq "neovide" || pgrep -xq "nvim"; do
 	sleep 0.1
 	i=$((i + 1))
-	[[ $i -gt 30 ]] && break
+	[[ $i -gt 30 ]] && return 1
 done
 rm -f "/tmp/nvim_server.pipe" # FIX server sometimes not shut down
 sleep 0.1
@@ -51,7 +51,7 @@ sleep 1 # wait for server
 # HACK sleep for 1ms = effectively pinging nvim server
 if ! nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>sleep 1m<CR>"; then
 	osascript -e 'display notification "" with title "Server unresponsive."'
-	# killall -9 nvim neovide
-	# sleep 0.5
-	# open -a "Neovide"
+	killall -9 nvim neovide
+	sleep 0.5
+	open -a "Neovide"
 fi
