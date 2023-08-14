@@ -34,6 +34,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>5B93B41A-F5A7-4C5F-AC89-7EA2F5284F83</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>ECF8457A-8061-4F7D-8269-5315D566CDE6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>64E7E716-0427-41F0-844C-90D39ACC9152</key>
 		<array>
 			<dict>
@@ -219,7 +232,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>skip-paywall.js</string>
+				<string>./scripts/skip-paywall.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -280,7 +293,7 @@
 				<string>loading…</string>
 				<key>script</key>
 				<string>source ~/.zshenv
-osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PATH"</string>
+osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFAULTS_PATH"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -334,7 +347,7 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>check-if-page-is-down.js</string>
+				<string>./scripts/check-if-page-is-down.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -423,7 +436,7 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 				<key>runningsubtext</key>
 				<string>loading…</string>
 				<key>script</key>
-				<string>cat ./chrome-internal-pages.json</string>
+				<string>cat ./scripts/chrome-internal-pages.json</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -443,6 +456,50 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 			<string>C65CD77E-C2B3-4063-B045-C1954E7FE033</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>rss</string>
+				<key>subtext</key>
+				<string>to Inoreader (leave empty to add current browser tab)</string>
+				<key>text</key>
+				<string>Add RSS Feed</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>5B93B41A-F5A7-4C5F-AC89-7EA2F5284F83</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/add-feed-to-inoreader.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>ECF8457A-8061-4F7D-8269-5315D566CDE6</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -582,7 +639,7 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>open-tab-in-safari.js</string>
+				<string>./scripts/open-tab-in-safari.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -626,7 +683,7 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>bibitnow-trigger.applescript</string>
+				<string>./scripts/bibitnow-trigger.applescript</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -651,7 +708,7 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 				<key>hotkey</key>
 				<integer>6</integer>
 				<key>hotmod</key>
-				<integer>917504</integer>
+				<integer>524288</integer>
 				<key>hotstring</key>
 				<string>Y</string>
 				<key>leftcursor</key>
@@ -704,9 +761,9 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>710</real>
+			<real>905</real>
 			<key>ypos</key>
-			<real>425</real>
+			<real>575</real>
 		</dict>
 		<key>3F6D1856-6639-4F2D-B0F7-35E5ED4CE866</key>
 		<dict>
@@ -716,6 +773,17 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 			<real>305</real>
 			<key>ypos</key>
 			<real>270</real>
+		</dict>
+		<key>5B93B41A-F5A7-4C5F-AC89-7EA2F5284F83</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>add rss feed</string>
+			<key>xpos</key>
+			<real>460</real>
+			<key>ypos</key>
+			<real>295</real>
 		</dict>
 		<key>64E7E716-0427-41F0-844C-90D39ACC9152</key>
 		<dict>
@@ -769,7 +837,7 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 		<key>97E52210-B26B-49B3-AC6D-65A1235A88C9</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>625</real>
 			<key>ypos</key>
@@ -785,9 +853,9 @@ osascript -l JavaScript ./installed-browser-extensions.js "$BROWSER_DEFAULTS_PAT
 BACKUP
 for when browser history search workflow updates</string>
 			<key>xpos</key>
-			<real>560</real>
+			<real>755</real>
 			<key>ypos</key>
-			<real>425</real>
+			<real>575</real>
 		</dict>
 		<key>AADFC524-047E-4638-ABAA-646CEC90599D</key>
 		<dict>
@@ -803,7 +871,7 @@ for when browser history search workflow updates</string>
 		<key>B420E59A-1B4A-418D-B29E-35104387F051</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>try to skip paywall</string>
 			<key>xpos</key>
@@ -860,14 +928,23 @@ for when browser history search workflow updates</string>
 			<key>ypos</key>
 			<real>420</real>
 		</dict>
+		<key>ECF8457A-8061-4F7D-8269-5315D566CDE6</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>625</real>
+			<key>ypos</key>
+			<real>295</real>
+		</dict>
 		<key>EF862FA4-82AA-45A8-9EE8-565A0225BDEB</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>870</real>
+			<real>1065</real>
 			<key>ypos</key>
-			<real>425</real>
+			<real>575</real>
 		</dict>
 		<key>FCE409B4-6AF4-4E92-AAAE-97E55636E8AE</key>
 		<dict>
