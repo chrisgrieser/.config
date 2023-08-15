@@ -36,7 +36,10 @@ i=0
 while pgrep -xq "neovide" || pgrep -xq "nvim"; do
 	sleep 0.1
 	i=$((i + 1))
-	[[ $i -gt 25 ]] && exit 1
+	if [[ $i -gt 25 ]]; then
+		osascript -e 'display notification "⚔️ Force killing Neovide…" with title "Could not quit."'
+		killall -9 neovide nvim || exit 1
+	fi
 done
 
 # Restart

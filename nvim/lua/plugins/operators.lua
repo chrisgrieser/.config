@@ -24,78 +24,32 @@ return {
 			},
 		},
 	},
-	{ -- substitute
-		"gbprod/substitute.nvim",
+	{ -- substitute, evaluate, exchange, sort, duplicate
+		"echasnovski/mini.operators",
 		keys = {
-			{ "s", function() require("substitute").operator() end, desc = " Substitute operator" },
-			{ "ss", function() require("substitute").line() end, desc = " Substitute line" },
-			{ "S", function() require("substitute").eol() end, desc = " Substitute to EoL" },
-			{ "sx", function() require("substitute.exchange").operator() end, desc = " Exchange operator" },
-			{ "sX", "sx$", remap = true, desc = " Exchange to EoL" },
-			{ "sxx", function() require("substitute.exchange").line() end, desc = " Exchange line" },
+			{ "s", mode = { "n", "x" }, desc = "󰅪 Substitute Operator" },
+			{ "w", mode = { "n", "x" }, desc = "󰅪 Multiply Operator" },
+			{ "#", mode = { "n", "x" }, desc = "󰅪 Evaluate Operator" },
+			{ "sy", mode = { "n", "x" }, desc = "󰅪 Sort Operator" },
+			{ "sx", mode = { "n", "x" }, desc = "󰅪 Exchange Operator" },
+			{ "S", "s$", desc = "󰅪 Substitute to EoL", remap = true },
+			{ "W", "w$", desc = "󰅪 Multiply to EoL", remap = true },
+			{ "'", "#$", desc = "󰅪 Evaluate to EoL", remap = true },
+			{ "sX", "sx$", desc = "󰅪 Exchange to EoL", remap = true },
+			{ "sY", "sy$", desc = "󰅪 Sort to EoL", remap = true },
 		},
-		opts = { on_substitute = require("yanky.integration").substitute() },
-	},
-	{ -- duplicate
-		"smjonas/duplicate.nvim",
-		keys = {
-			{ "w", mode = { "n", "x" }, desc = "󰆑 Duplicate Operator" },
-		},
-		init = function() vim.keymap.set("n", "W", "w$", { remap = true, desc = "󰆑 Duplicate to EoL" }) end,
 		opts = {
-			operator = {
-				normal_mode = "w",
-				visual_mode = "w",
-				line = "ww",
+			replace = { prefix = "s", reindent_linewise = true },
+			multiply = { prefix = "w" },
+			exchange = { prefix = "sx", reindent_linewise = true },
+			evaluate = {
+				prefix = "#",
+				func = nil, -- Function which does the evaluation
 			},
-			-- selene: allow(high_cyclomatic_complexity)
-			transform = function(lines)
-				-- transformations only for single line duplication
-				if #lines > 1 then return lines end
-
-				local line = lines[1]
-				local ft = vim.bo.filetype
-
-				-- smart switching of conditionals
-				if ft == "lua" and line:find("^%s*if.+then%s*$") then
-					line = line:gsub("^(%s*)if", "%1elseif")
-				elseif (ft == "bash" or ft == "zsh" or ft == "sh") and line:find("^%s*if.+then$") then
-					line = line:gsub("^(%s*)if", "%1elif")
-				elseif (ft == "javascript" or ft == "typescript") and line:find("^%s*if.+{$") then
-					line = line:gsub("^(%s*)if", "%1} else if")
-					-- smart switching of css words
-				elseif ft == "css" then
-					if line:find("top") then
-						line = line:gsub("top", "bottom")
-					elseif line:find("bottom") then
-						line = line:gsub("bottom", "top")
-					elseif line:find("right") then
-						line = line:gsub("right", "left")
-					elseif line:find("left") then
-						line = line:gsub("left", "right")
-					elseif line:find("%sheight") then -- %s condition to avoid matching line-height etc
-						line = line:gsub("(%s)height", "%1width")
-					elseif line:find("%swidth") then -- %s condition to avoid matching border-width etc
-						line = line:gsub("(%s)width", "%1height")
-					elseif line:find("dark") then
-						line = line:gsub("dark", "light")
-					elseif line:find("light") then
-						line = line:gsub("light", "dark")
-					end
-				end
-
-				-- move cursor position to value
-				local lineNum, colNum = unpack(vim.api.nvim_win_get_cursor(0))
-				local keyPos, valuePos = line:find(".%w+ ?[:=] ?")
-				if valuePos and not (ft == "css") then
-					colNum = valuePos
-				elseif keyPos and ft == "css" then
-					colNum = keyPos
-				end
-				vim.api.nvim_win_set_cursor(0, { lineNum, colNum })
-
-				return { line } -- return as array, since that's what the plugin expects
-			end,
+			sort = {
+				prefix = "sy",
+				func = nil, -- Function which does the sort
+			},
 		},
 	},
 	{ -- surround

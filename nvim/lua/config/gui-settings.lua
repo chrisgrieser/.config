@@ -4,8 +4,11 @@ local keymap = vim.keymap.set
 --------------------------------------------------------------------------------
 
 -- REMOTE CONTROL
--- nvim server (RPC) to remote control neovide instances https://neovim.io/doc/user/remote.html
-vim.fn.serverstart("/tmp/nvim_server.pipe")
+-- nvim server (RPC) to remote control neovide instances
+-- https://neovim.io/doc/user/remote.html
+local removed, _ = pcall(os.remove, "/tmp/nvim_server.pipe") -- FIX server sometimes not properly shut down
+local delay = removed and 500 or 0
+vim.defer_fn(function() vim.fn.serverstart("/tmp/nvim_server.pipe") end, delay)
 
 --------------------------------------------------------------------------------
 
