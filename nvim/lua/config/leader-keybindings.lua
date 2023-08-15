@@ -152,14 +152,8 @@ keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "󰗈 Merge line down" })
 keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>]], { desc = "󰗈 split around selection" })
 
 -- Append to / delete from EoL
-local trailingKeys = { ",", '"', ")" }
-for _, key in pairs(trailingKeys) do
-	keymap(
-		"n",
-		"<leader>" .. key,
-		"mzA" .. key .. "<Esc>`z",
-		{ desc = " Append " .. key .. " to EoL" }
-	)
+for _, key in pairs({ ",", ")" }) do
+	keymap("n", "<leader>" .. key, "mzA" .. key .. "<Esc>`z", { desc = " Append " .. key .. " to EoL" })
 end
 
 --------------------------------------------------------------------------------
