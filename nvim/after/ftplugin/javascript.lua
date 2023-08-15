@@ -7,16 +7,16 @@ local abbr = vim.cmd.inoreabbrev
 -- https://github.com/echasnovski/mini.operators/blob/main/doc/mini-operators.txt#L214
 vim.b.minioperators_config = {
 	evaluate = {
-		func = function (content)
-			local lines = content.lines
-			local evaluatedLines = {}
-			for _, line in ipairs(lines) do
-				local jsCmd = "eval(console.log(" .. line .. "))"
-				local shellCmd = "node -e '" .. jsCmd .. "'"
-				local result = vim.fn.system(shellCmd):gsub("\n$", "")
-				table.insert(evaluatedLines, result)
-			end
-			return evaluatedLines
+		-- TODO this only works for linewise textobjs, not yet charwise.
+		-- also, there might still be an issue will all the escpaing 🙈
+		func = function(content)
+			local lastLine = table.remove(content.lines)
+			local restAsString = table.concat(content.lines, "\n")
+			local allLines = restAsString .. "; console.log(" .. lastLine .. ")"
+			local jsCmd = "eval('" .. allLines:gsub("'", "\\'") .. "')"
+			local shellCmd = 'osascript -l JavaScript -e "' .. jsCmd:gsub('"', '\\"') .. '"'
+			local evaluatedOut = vim.fn.system(shellCmd):gsub("\n$", "")
+			return evaluatedOut
 		end,
 	},
 }
