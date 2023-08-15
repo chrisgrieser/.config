@@ -28,14 +28,13 @@ cow_maxwidth=70
 width=$(($(tput cols) - 10))
 [[ $width -gt $cow_maxwidth ]] && width=$cow_maxwidth
 
-# shellcheck disable=SC2248
-
-	# M.borderChars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+# turn the speech bubble into nicer box drawing characters, restore the cow to
+# the traditional the characters there have been affected
 fortune -n270 -s | cowsay -W$width "$random_emotion" |
-	sed -E -e 's/^ _/ ╭/' -E -e 's/^ -/ ╰/' -E -e 's/_ $/──╮/' -E -e 's/_\s*$/──╯/' \
-	# -E -e 's,[|/\\>]$,│,g' -E -e 's,^[|/\\<], │,g' -E -e 's/[_-]/─/g'
-
-
+	sed -E -e 's/^ _/ ╭/' -E -e 's/^ -/ ╰/' -E -e 's/_ $/──╮/' -E -e 's/- $/──╯/' \
+	-E -e 's,[|/\\>]$,│,g' -E -e 's,^[|/\\<], │,g' -E -e 's/[_-]/─/g' \
+	-e 's/\^──\^/^__^/' -e 's/\(──\)/(--)/' -e 's/\\───────/\\_______/' \
+	-e 's/\|\|────w │/||----w |/' -e 's,\\/│,\\/\\,' -e 's/\|│/||/'
 
 #───────────────────────────────────────────────────────────────────────────────
 # show files in current directory
