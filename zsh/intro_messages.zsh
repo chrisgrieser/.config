@@ -28,12 +28,13 @@ cow_maxwidth=70
 width=$(($(tput cols) - 10))
 [[ $width -gt $cow_maxwidth ]] && width=$cow_maxwidth
 
-[[ $((RANDOM % 2)) == 1 ]] && say_or_think="cowsay" || say_or_think="cowthink"
-
 # shellcheck disable=SC2248
-fortune -n270 -s | 
-	sed 's/--/\n--/g' | 
-	$say_or_think -W$width "$random_emotion" |
+
+	# M.borderChars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+fortune -n270 -s | cowsay -W$width "$random_emotion" |
+	sed -E -e 's/^ _/ ╭/' -E -e 's/^ -/ ╰/' -E -e 's/_ $/──╮/' -E -e 's/_\s*$/──╯/' \
+	# -E -e 's,[|/\\>]$,│,g' -E -e 's,^[|/\\<], │,g' -E -e 's/[_-]/─/g'
+
 
 
 #───────────────────────────────────────────────────────────────────────────────
