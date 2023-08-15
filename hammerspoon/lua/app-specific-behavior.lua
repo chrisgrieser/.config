@@ -116,7 +116,7 @@ end)
 
 --------------------------------------------------------------------------------
 
--- HIGHLIGHTS
+-- HIGHLIGHTS / PDF READER
 -- - Sync Dark & Light Mode
 -- - Start with Highlight Tool enabled
 HighlightsAppWatcher = aw.new(function(appName, eventType, highlights)
@@ -131,14 +131,13 @@ HighlightsAppWatcher = aw.new(function(appName, eventType, highlights)
 	highlights:selectMenuItem { "View", "Hide Toolbar" }
 end):start()
 
--- window filter, so any new window created and not only on app on launch
--- becomes pseudo-maximized
+-- open all windows pseudo-maximized
 Wf_pdfReader = wf.new({ "Preview", "Highlights", "PDF Expert" })
 	:subscribe(wf.windowCreated, function(newWin) wu.moveResize(newWin, wu.pseudoMax) end)
 
 --------------------------------------------------------------------------------
 
--- TRANSMISSION / TWITTER
+-- TRANSMISSION / TWITTER / MASTODON
 -- Fallthrough: prevent unintended focussing after qutting another app
 -- unintended focussing via alt+tab is prevented via alt+tab settings
 TransmissionWatcher = aw.new(function(appName, event)
@@ -187,7 +186,7 @@ Wf_script_editor = wf
 	:subscribe(wf.windowUnfocused, function()
 		local clipb = hs.pasteboard.getContents()
 		if not clipb then return end
-		clipb = clipb:gsub("\r", "\n")
+		clipb = clipb:gsub("\r+", " \n") -- HACK to prevent treesitter parser issue
 		hs.pasteboard.setContents(clipb)
 	end)
 
@@ -205,8 +204,7 @@ Wf_mimestream = wf.new("Mimestream"):subscribe(wf.windowCreated, function(newWin
 	if not isComposeWin then return end
 	u.runWithDelays(0.3, function()
 		u.keystroke({ "cmd" }, "a")
-		-- default is size 13, four increases -> size 17
-		u.keystroke({ "cmd" }, "+")
+		-- default is size 13, four increases -> size 16
 		u.keystroke({ "cmd" }, "+")
 		u.keystroke({ "cmd" }, "+")
 		u.keystroke({ "cmd" }, "+")

@@ -53,6 +53,11 @@ local tsConfig = {
 			},
 		},
 	},
+	matchup = {
+		enable = true,
+		enable_quotes = true,
+		disable_virtual_text = true,
+	},
 	endwise = { enable = true },
 	tree_setter = { enable = true },
 	refactor = {
