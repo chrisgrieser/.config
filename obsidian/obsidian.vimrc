@@ -18,8 +18,8 @@ nnoremap Y y$
 " don't pollute the register
 " nnoremap c "_c " BUG not working
 nnoremap C "_c$
-" nnoremap x "_dl
-nnoremap x "_x
+nnoremap x "_dl
+" nnoremap x "_x
 
 
 """"""""""""""""""""""
@@ -427,7 +427,7 @@ nnoremap zR :unfoldall
 
 " Link Jump (similar to Vimium's f)
 " exmap linkjump obcommand mrj-jump-to-link:activate-jump-to-link
-" nnoremap ,l :linkjump
+" nnoremap ,ö :linkjump
 
 """"""""""""""""""""""
 " Move selection to new file (nvim-genghis)

@@ -152,6 +152,7 @@ local function currentFile()
 	if ftOrExt == "javascript" then ftOrExt = "js" end
 	if ftOrExt == "typescript" then ftOrExt = "ts" end
 	if ftOrExt == "markdown" then ftOrExt = "md" end
+	if ftOrExt == "vimrc" then ftOrExt = "vim" end
 	local icon = deviconsInstalled and devicons.get_icon(name, ftOrExt) or ""
 
 	-- truncate
