@@ -31,7 +31,10 @@ width=$(($(tput cols) - 10))
 [[ $((RANDOM % 2)) == 1 ]] && say_or_think="cowsay" || say_or_think="cowthink"
 
 # shellcheck disable=SC2248
-fortune -n270 -s | sed 's/--/\n--/g' | $say_or_think -W$width "$random_emotion"
+fortune -n270 -s | 
+	sed 's/--/\n--/g' | 
+	$say_or_think -W$width "$random_emotion" |
+
 
 #───────────────────────────────────────────────────────────────────────────────
 # show files in current directory

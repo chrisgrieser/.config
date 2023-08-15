@@ -2,6 +2,7 @@ local keymap = vim.keymap.set
 local fn = vim.fn
 local expand = vim.fn.expand
 local u = require("config.utils")
+local abbr = vim.cmd.inoreabbrev
 --------------------------------------------------------------------------------
 
 -- TODO: explainshell Docker Image
@@ -38,6 +39,17 @@ end
 
 keymap("n", "<leader>t", sendToWezTerm, { desc = " Send line to WezTerm", buffer = true })
 keymap("x", "<leader>t", sendToWezTerm, { desc = " Send selection to WezTerm", buffer = true })
+
+--------------------------------------------------------------------------------
+
+for _, key in pairs { "|", "\\" } do
+	keymap(
+		"n",
+		"<leader>" .. key,
+		"mzA" .. key .. "<Esc>`z",
+		{ desc = " Append " .. key .. " to EoL", buffer = true }
+	)
+end
 
 --------------------------------------------------------------------------------
 

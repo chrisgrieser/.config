@@ -74,8 +74,8 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 
 [custom.folder_number]
 description = "Number of files (and folders) in the current working directory"
-command = "find . -mindepth 1 -maxdepth 1 -not -name '.git' -not -name '.DS_Store' | wc -l"
-when = "true"
+command = "find . -depth 1 -not -name '.git' -not -name '.DS_Store' -not -name 'Icon?' | wc -l"
+when = "true" # always show
 symbol = " "
 format = '[$symbol$output]($style) '
 style = "fg:yellow bg:black bold"

@@ -42,7 +42,8 @@ function inspect() {
 	local exa_output terminal_width
 	terminal_width=$(tput cols)
 	exa_output=$(export COLUMNS=$terminal_width && exa --all --grid --color=always \
-		--icons --git-ignore --ignore-glob=.DS_Store --sort=name --group-directories-first)
+		--icons --git-ignore --ignore-glob=".DS_Store|Icon?" --sort=name \
+		--group-directories-first)
 	if [[ $(echo "$exa_output" | wc -l) -gt $max_files_lines ]]; then
 		echo "$exa_output" | head -n$max_files_lines
 		print "\033[1;34m(…)\033[0m" # blue = exa's default folder color
