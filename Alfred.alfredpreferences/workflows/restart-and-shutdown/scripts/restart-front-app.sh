@@ -39,9 +39,6 @@ while pgrep -xq "neovide" || pgrep -xq "nvim"; do
 	[[ $i -gt 25 ]] && exit 1
 done
 
-# FIX server sometimes not shut down
-[[ -f "$server" ]] && rm -f "$server"
-
 # Restart
 open -a "Neovide" # config reopens last file if no arg
 

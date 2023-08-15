@@ -16,12 +16,13 @@ return {
 			require("nvim-autopairs").add_rules {
 				rule("<", ">", "lua"):with_pair(isNodeType("string")), -- keymaps
 				rule("<", ">", "vim"):with_pair(), -- keymaps
-				rule('\\"', '\\"', "json"):with_pair(), -- escaped double quotes
-				rule('\\"', '\\"', "sh"):with_pair(), -- escaped double quotes
+				rule('\\"', '\\"', {"sh", "json"}):with_pair(), -- escaped double quotes
 				rule("*", "*", "markdown"):with_pair(), -- italics
 				rule("__", "__", "markdown"):with_pair(), -- bold
-				rule("$", "{}", "javascript"):with_pair(isNodeType("string")), -- quicker template string
-				rule("$", "{}", "json"):with_pair(isNodeType("string")),
+				-- quicker template string
+				rule("$", "{}", {"javascript", "json"})
+					:with_pair(isNodeType("string"))
+					:set_end_pair_length(1), -- only move one char to the side
 			}
 
 			-- add brackets to cmp completions, e.g. "function" -> "function()"

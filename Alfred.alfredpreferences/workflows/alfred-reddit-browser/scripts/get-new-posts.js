@@ -17,13 +17,6 @@ function getSettings() {
 
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
-$
-$$
-$
-const b= `bla ${}`
-const b= `fffff ${}`
-const a= `ffff ${}`
-
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @typedef {Object} hackerNewsItem

@@ -114,3 +114,8 @@ newCommand("Scratch", function()
 		vim.lsp.buf.format()
 	end)
 end, {})
+
+newCommand("Server", function ()
+	local myServer = vim.fn.serverlist()[2]
+	vim.notify(myServer)
+end,{})

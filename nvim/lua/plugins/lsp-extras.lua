@@ -2,30 +2,25 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{ -- diagnostics in the top instead of virtual lines. More stable than diagflow
-		"Mofiqul/trld.nvim",
-		event = "LspAttach",
-		init = function()
-			vim.defer_fn(function() vim.diagnostic.config { virtual_text = false } end, 1)
-			vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "󰒕 Diagnostic" })
+	{ -- lsp definitions & references count as virtual text
+		"roobert/action-hints.nvim",
+		enabled = false,
+		lazy = false,
+		config = function()
+			require("action-hints").setup {
+				template = {
+					definition = { text = " ⊛", color = "#add8e6" },
+					references = { text = " ↱%s", color = "#ff6666" },
+				},
+				use_virtual_text = true,
+			}
+
+			local lualineC = require("lualine").get_config().sections.lualine_c or {}
+			table.insert(lualineC, { require("action-hints").statusline })
+			require("lualine").setup {
+				sections = { lualine_c = lualineC },
+			}
 		end,
-		opts = {
-			highlights = {
-				error = "DiagnosticVirtualTextError",
-				warn = "DiagnosticVirtualTextWarn",
-				info = "DiagnosticVirtualTextInfo",
-				hint = "DiagnosticVirtualTextHint",
-			},
-			formatter = function(diag)
-				local padRight = 3 -- due to scrollbar
-				local hlBySeverity = require("trld.utils").get_hl_by_serverity
-				local fmt_line = u.diagnosticFmt(diag)
-				local lines = {
-					{ { " " .. fmt_line .. (" "):rep(padRight), hlBySeverity(diag.severity) } },
-				}
-				return lines
-			end,
-		},
 	},
 	{ -- lsp definitions & references count in the status line
 		"chrisgrieser/nvim-dr-lsp",
@@ -51,6 +46,31 @@ return {
 				},
 			}
 		end,
+	},
+	{ -- diagnostics in the top instead of virtual lines. More stable than diagflow
+		"Mofiqul/trld.nvim",
+		event = "LspAttach",
+		init = function()
+			vim.defer_fn(function() vim.diagnostic.config { virtual_text = false } end, 1)
+			vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "󰒕 Diagnostic" })
+		end,
+		opts = {
+			highlights = {
+				error = "DiagnosticVirtualTextError",
+				warn = "DiagnosticVirtualTextWarn",
+				info = "DiagnosticVirtualTextInfo",
+				hint = "DiagnosticVirtualTextHint",
+			},
+			formatter = function(diag)
+				local padRight = 3 -- due to scrollbar
+				local hlBySeverity = require("trld.utils").get_hl_by_serverity
+				local fmt_line = u.diagnosticFmt(diag)
+				local lines = {
+					{ { " " .. fmt_line .. (" "):rep(padRight), hlBySeverity(diag.severity) } },
+				}
+				return lines
+			end,
+		},
 	},
 	{ -- breadcrumbs for winbar
 		"SmiteshP/nvim-navic",
