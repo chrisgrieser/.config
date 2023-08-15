@@ -8,9 +8,9 @@ local abbr = vim.cmd.inoreabbrev
 vim.b.minioperators_config = {
 	evaluate = {
 		-- TODO this only works for linewise textobjs, not yet charwise.
-		-- also, there might still be an issue will all the escpaing 🙈
 		func = function(content)
 			local lines = table.concat(content.lines, "\n")
+			-- INFO osascript evaluates the last line as if it were wrapped in `console.log`
 			local shellCmd = 'osascript -l JavaScript -e "' .. lines:gsub('"', '\\"') .. '"'
 			local evaluatedOut = vim.fn.system(shellCmd):gsub("\n$", "")
 			return evaluatedOut
