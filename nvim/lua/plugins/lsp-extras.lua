@@ -96,6 +96,10 @@ return {
 	{ -- display inlay hints from LSP
 		"lvimuser/lsp-inlayhints.nvim", -- INFO only temporarily needed, until https://github.com/neovim/neovim/issues/18086
 		init = function()
+			if vim.version().major == 0 and vim.version().minor >= 10 then
+				vim.notify("lsp-inlayhints.nvim is now obsolete.")
+			end
+
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(args)
 					local bufnr = args.buf

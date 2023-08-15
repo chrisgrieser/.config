@@ -16,10 +16,10 @@ set clipboard=unnamed
 nnoremap Y y$
 
 " don't pollute the register
-" nnoremap c "_c " BUG not working
+" nnoremap c "_c " BUG with vimrc, not working
+" nnoremap x "_x
 nnoremap C "_c$
 nnoremap x "_dl
-" nnoremap x "_x
 
 
 """"""""""""""""""""""
@@ -89,7 +89,7 @@ nnoremap <Left> dlhhp
 
 " [m]atch parenthesis
 " mappings https://github.com/replit/codemirror-vim/blob/master/src/vim.js#L765
-noremap m %
+nnoremap m %
 
 " [g]oto [s]ymbol
 " requires Another Quick Switcher Plugin
@@ -313,7 +313,9 @@ vnoremap rg G
 onoremap rp }
 vnoremap rp }
 onoremap m t]
+vnoremap m t]
 onoremap w t"
+vnoremap w t"
 
 """"""""""""""""""""""
 " Surround
