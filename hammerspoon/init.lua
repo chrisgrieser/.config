@@ -1,4 +1,14 @@
+---try to require the module, and do not error when one of them cannot be
+---loaded, but do notify if there was an error.
+---@param module string module to load
+local function safeRequire(module)
+	local success, _ = pcall(require, module)
+	if not success then hs.alert("Error loading " .. module) end
+end
+
+--------------------------------------------------------------------------------
 -- HAMMERPOON SETTINGS
+
 hs.autoLaunch(true)
 hs.menuIcon(false)
 hs.allowAppleScript(true) -- allow external control
@@ -9,33 +19,33 @@ hs.hotkey.setLogLevel(0) ---@diagnostic disable-line: undefined-field – suppre
 hs.application.enableSpotlightForNameSearches(false) -- suppress log messages
 
 --------------------------------------------------------------------------------
+-- LOAD MODULES
 
 -- appearance
-require("lua.visuals")
-require("lua.dark-mode")
+safeRequire("lua.visuals")
+safeRequire("lua.dark-mode")
 
 -- window management
-require("lua.window-utils")
-require("lua.layouts")
-require("lua.app-hider")
+safeRequire("lua.window-utils")
+safeRequire("lua.layouts")
+safeRequire("lua.app-hider")
 
 -- system
-require("lua.console")
-require("lua.cronjobs")
-require("lua.filesystem-watchers")
-require("lua.repo-auto-sync")
-require("lua.auto-quitter")
-require("lua.hardware-periphery")
-require("lua.pageup-pagedown-scroll")
--- require("lua.weather-reminder")
+safeRequire("lua.console")
+safeRequire("lua.cronjobs")
+safeRequire("lua.filesystem-watchers")
+safeRequire("lua.repo-auto-sync")
+safeRequire("lua.auto-quitter")
+safeRequire("lua.hardware-periphery")
+safeRequire("lua.pageup-pagedown-scroll")
+safeRequire("lua.weather-reminder") -- <-- disable when not needed
 
 -- app-specific
-require("lua.app-specific-behavior")
-require("lua.browser")
-require("lua.twitter-mastodon")
-require("lua.neovim")
-require("lua.sidenotes")
-
+safeRequire("lua.app-specific-behavior")
+safeRequire("lua.browser")
+safeRequire("lua.twitter-mastodon")
+safeRequire("lua.neovim")
+safeRequire("lua.sidenotes")
 
 -- reload function (should come last)
-require("lua.reload")
+safeRequire("lua.reload")
