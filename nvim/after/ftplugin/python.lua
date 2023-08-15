@@ -17,6 +17,7 @@ vim.cmd.inoreabbrev("<buffer> -- #")
 --------------------------------------------------------------------------------
 
 -- auto-convert string to f-string when typing `{..}`
+-- TODO better using treesitter: https://www.reddit.com/r/neovim/comments/tge2ty/python_toggle_fstring_using_treesitter/
 vim.api.nvim_create_autocmd("InsertLeave", {
 	buffer = 0,
 	callback = function()

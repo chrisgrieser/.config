@@ -17,10 +17,12 @@ local generalWords = {
 
 	-- opposites
 	{ "show", "hide" },
+	{ "top", "bottom" },
+	{ "up", "down" },
 	{ "above", "below" },
 	{ "vertical", "horizontal" },
 	{ "width", "height" },
-	{ "min", "max" }, -- this means that "min" won't cycle to "sec"
+	{ "min", "max" }, 
 	{ "minimum", "maximum" },
 	{ "increase", "decrease" },
 	{ "increased", "decreased" },
@@ -36,16 +38,12 @@ local generalWords = {
 	{ "dark", "light" },
 	{ "odd", "even" },
 	{ "first", "last" },
-	{ "up", "down" },
 	{ "right", "left" },
 	{ "black", "white" },
 	{ "start", "end" },
-	{ "more", "less", false },
-	{ "less", "fewer", false },
-	{ "fewer", "more", false },
 
 	-- commonly switched between
-	{ "red", "blue" }, -- e.g. when designs testing
+	{ "red", "blue" }, -- e.g. when design-testing
 	{ "read", "write" },
 	{ "warn", "error" },
 	{ "and", "or" },
@@ -61,22 +59,6 @@ local generalWords = {
 	{ "*", "/" },
 	{ "<", ">" },
 	{ "<=", ">=" },
-
-	-- units
-	{ "mins", "secs" }, -- not min, since conflict with min-max
-	{ "years", "months", false },
-	{ "months", "weeks", false },
-	{ "weeks", "days", false },
-	{ "days", "hours", false },
-	{ "hours", "minutes", false },
-	{ "minutes", "seconds", false },
-	{ "seconds", "milliseconds", false },
-	{ "milliseconds", "years", false },
-
-	{ "GB", "MB", false },
-	{ "MB", "KB", false },
-	{ "KB", "B", false },
-	{ "B", "GB", false },
 }
 
 -- INFO
@@ -94,7 +76,6 @@ local filetypeSpecificWords = {
 	css = {
 		-- many common css terms already included in general words
 		{ "padding", "margin" },
-		{ "top", "bottom" },
 		{ "relative", "absolute" },
 		{ "border", "outline" },
 		{ "span", "div" },
@@ -103,14 +84,11 @@ local filetypeSpecificWords = {
 		{ "==", "~=" },
 		{ "nil", "{}" },
 		{ "lower", "upper" }, -- str:lower(), str:upper()
-		{ "..", "+", false }, -- for type mixup (one-way so + and - can still be swapped)
-		{ "if", "elseif", false },
-		{ "elseif", "else", false },
-		{ "else", "if", false },
+		{ "if", "elseif" },
 		{ "pairs", "ipairs" },
 		{ "find", "match" }, -- string.find and string.match
 		{ "break", "return" }, -- javascript knows no `continue`
-		{ "function", "local function", false }, -- cannot toggle back, since not word under cursor
+		{ "function", "local function", false }, -- cannot switch back multi-word
 		{ "print", "assert" },
 	},
 	python = {
@@ -121,8 +99,7 @@ local filetypeSpecificWords = {
 	},
 	javascript = {
 		{ "null", "undefined" },
-		{ "if", "else if", false },
-		{ "else", "else if", false },
+		{ "if", "else if", false }, -- cannot switch back multi-word
 		{ "var", "const", false }, -- don't switch back to var, since const/let are preferred
 		{ "const", "let" },
 		{ "parseInt", "parseFloat" },
@@ -133,34 +110,20 @@ local filetypeSpecificWords = {
 		{ "===", "!==" },
 		{ "&&", "||" },
 		{ "continue", "break" },
-		{ "default", "case" }, -- switch-case statements
-		{ "debug", "trace", false }, -- console.log -> console.warn -> etc.
-		{ "trace", "info", false },
-		{ "info", "log", false },
-		{ "log", "warn", false },
-		{ "warn", "error", false },
-		{ "error", "debug", false },
+		{ "default", "case" }, 
 	},
 	sh = {
 		{ "lt", "gt" }, -- the leading `-` is ignored
 		{ "eq", "nq" },
 		{ "&&", "||" },
 		{ ">", ">>" }, -- append/overwrite
-		{ "if", "elif", false },
-		{ "elif", "else", false },
-		{ "else", "if", false },
+		{ "if", "elif" },
 		{ "echo", "print" },
 		{ "exit", "return" },
 		{ "head", "tail" },
 		{ "bash", "zsh" }, -- e.g. for shebangs
 	},
 }
-
----runs when no word to switch can be found under the cursor
-local function fallbackFn()
-	-- toggle capital/lowercase of word
-	vim.cmd.normal { "mzlb~`z", bang = true }
-end
 
 --------------------------------------------------------------------------------
 -- HELPERS
@@ -248,7 +211,7 @@ function M.flipWord()
 		vim.fn.setreg("z", newWord)
 		vim.cmd.normal { 'viw"zP', bang = true }
 	else
-		fallbackFn()
+		vim.notify("No matching word found", vim.log.levels.WARN)
 	end
 
 	vim.opt.iskeyword = iskeywBefore -- restore
