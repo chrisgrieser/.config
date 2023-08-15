@@ -73,6 +73,14 @@ end):start()
 --------------------------------------------------------------------------------
 -- FROM FILE HUB
 
+---HACK works as only downloaded files get quarantined
+---@param filep string
+---@return boolean whether the file exists
+local function fileIsDownloaded(filep)
+	local fileExists, msg = pcall(hs.fs.xattr.get, filep, "com.apple.quarantine")
+	return fileExists and msg ~= nil
+end
+
 local browserSettings = env.dotfilesFolder .. "/_browser-extension-configs/"
 -- selene: allow(high_cyclomatic_complexity)
 FileHubWatcher = pw(env.fileHub, function(paths, _)
@@ -82,33 +90,26 @@ FileHubWatcher = pw(env.fileHub, function(paths, _)
 		local ext = fileName:gsub(".*%.", "")
 
 		-- isDownloaded ensures files created on my own are not affected
-		-- trick works as only downloaded files get quarantined
-		local fileExists, msg = pcall(hs.fs.xattr.get, filep, "com.apple.quarantine")
-		local isDownloaded = fileExists and msg ~= nil
-		if not isDownloaded then return end
+		local isDownloaded = fileIsDownloaded(filep)
 
-		-- alfredworkflows
-		if ext == "alfredworkflow" then
-			if isDownloaded then u.runWithDelays(3, function() os.remove(filep) end) end
-
-		-- ics (iCal)
-		elseif ext == "ics" then
-			u.runWithDelays(3, function() os.remove(filep) end)
+		-- alfredworkflows or iCal
+		if (ext == "alfredworkflow" or ext == "ics") and isDownloaded then
+			 u.runWithDelays(3, function() os.remove(filep) end)
 
 		-- dmg (cannot be auto-opened via Browser)
-		elseif ext == "dmg" then
+		elseif ext == "dmg" and isDownloaded then
 			if not (fileName == "Stats.dmg") then hs.open(filep) end
 			u.runWithDelays(3, function() os.remove(filep) end)
 
 		-- zip: unzip
-		elseif ext == "zip" and fileName ~= "violentmonkey.zip" then
+		elseif ext == "zip" and fileName ~= "violentmonkey.zip" and isDownloaded then
 			-- done via hammerspoon to differentiate between zips to auto-open and
 			-- zips to archive (like violentmonkey)
 			hs.open(filep)
 			u.runWithDelays(3, function() os.remove(filep) end)
 
 		-- bib: save to library
-		elseif ext == "bib" then
+		elseif ext == "bib" and isDownloaded then
 			local libraryPath = env.dotfilesFolder .. "/pandoc/main-bibliography.bib"
 			local bibEntry = u.readFile(filep)
 			if not bibEntry then return end

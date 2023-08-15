@@ -10,7 +10,7 @@ abbr("<buffer> cosnt const")
 abbr("<buffer> local const") -- habit from writing too much lua
 abbr("<buffer> -- //") -- habit from writing too much lua
 
--- auto-convert to string to template string when typing `${..}`
+-- auto-convert string to template string when typing `${..}`
 vim.api.nvim_create_autocmd("InsertLeave", {
 	buffer = 0,
 	callback = function()

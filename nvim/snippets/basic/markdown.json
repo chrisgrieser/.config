@@ -5,7 +5,7 @@
 			"note (callout)"
 		],
 		"body": [
-			"> [!NOTE]  ",
+			"> [!NOTE]",
 			"> $0"
 		],
 		"description": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts"
@@ -13,7 +13,7 @@
 	"warning (callout)": {
 		"prefix": "warning (callout)",
 		"body": [
-			"> [!WARNING]  ",
+			"> [!WARNING]",
 			"> $0"
 		],
 		"description": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts"

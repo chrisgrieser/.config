@@ -268,8 +268,7 @@ end, { desc = " Paste differently" })
 keymap("i", "<D-v>", function()
 	local regContent = fn.getreg("+"):gsub("^%s*", ""):gsub("%s*$", "")
 	fn.setreg("+", regContent, "v") ---@diagnostic disable-line: param-type-mismatch
-	-- "<C-g>u" adds undopoint before the paste
-	return "<C-g>u<C-r><C-o>+"
+	return "<C-g>u<C-r><C-o>+" -- "<C-g>u" adds undopoint before the paste
 end, { desc = " Paste charwise", expr = true })
 
 ------------------------------------------------------------------------------
@@ -297,11 +296,6 @@ end, { desc = "󰮤 Reveal Workflow in Alfred" })
 keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = "  Inline Code" }) -- no selection = word under cursor
 keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = "  Inline Code" })
 keymap("i", "<D-e>", "``<Left>", { desc = "  Inline Code" })
-
--- cmd+t: template string
-keymap("n", "<D-t>", "bi${<Esc>ea}<Esc>b", { desc = "Template String" }) -- no selection = word under cursor
-keymap("x", "<D-t>", "<Esc>${<i}<Esc>${>la}<Esc>b", { desc = "Template String" })
-keymap("i", "<D-t>", "${}<Left>", { desc = "Template String" })
 
 --------------------------------------------------------------------------------
 -- FILES

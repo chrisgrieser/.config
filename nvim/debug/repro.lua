@@ -1,4 +1,4 @@
--- use new install dir 
+-- use new install dir
 -- (not needed when debugging regular plugins in most cases not needed)
 
 -- local root = vim.fn.fnamemodify("./debug/install-root", ":p")
@@ -24,12 +24,10 @@ local plugins = {
 		config = function()
 			require("action-hints").setup {
 				template = {
-					{ " ⊛", "ActionHintsDefinition" },
-					{ " ↱%s", "ActionHintsReferences" },
+					definition = { text = " ⊛", color = "#add8e6" },
+					references = { text = " ↱%s", color = "#ff6666" },
 				},
 				use_virtual_text = true,
-				definition_color = "#add8e6",
-				reference_color = "#ff6666",
 			}
 		end,
 	},

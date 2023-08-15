@@ -12,7 +12,7 @@ u.applyTemplateIfEmptyFile("js")
 
 --------------------------------------------------------------------------------
 
--- auto-convert to string to template string when typing `${..}`
+-- auto-convert string to template string when typing `${..}`
 vim.api.nvim_create_autocmd("InsertLeave", {
 	buffer = 0,
 	callback = function() 
