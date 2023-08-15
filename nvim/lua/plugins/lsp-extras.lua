@@ -2,26 +2,6 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{ -- lsp definitions & references count as virtual text
-		"roobert/action-hints.nvim",
-		enabled = false,
-		lazy = false,
-		config = function()
-			require("action-hints").setup {
-				template = {
-					definition = { text = " ⊛", color = "#add8e6" },
-					references = { text = " ↱%s", color = "#ff6666" },
-				},
-				use_virtual_text = true,
-			}
-
-			local lualineC = require("lualine").get_config().sections.lualine_c or {}
-			table.insert(lualineC, { require("action-hints").statusline })
-			require("lualine").setup {
-				sections = { lualine_c = lualineC },
-			}
-		end,
-	},
 	{ -- lsp definitions & references count in the status line
 		"chrisgrieser/nvim-dr-lsp",
 		event = "LspAttach",
@@ -55,6 +35,7 @@ return {
 			vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "󰒕 Diagnostic" })
 		end,
 		opts = {
+			position = "bottom", -- top|bottom
 			highlights = {
 				error = "DiagnosticVirtualTextError",
 				warn = "DiagnosticVirtualTextWarn",
