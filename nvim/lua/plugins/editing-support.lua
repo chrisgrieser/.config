@@ -20,6 +20,8 @@ return {
 				rule('\\"', '\\"', "sh"):with_pair(), -- escaped double quotes
 				rule("*", "*", "markdown"):with_pair(), -- italics
 				rule("__", "__", "markdown"):with_pair(), -- bold
+				rule("$", "{}", "javascript"):with_pair(isNodeType("string")), -- quicker template string
+				rule("$", "{}", "json"):with_pair(isNodeType("string")),
 			}
 
 			-- add brackets to cmp completions, e.g. "function" -> "function()"

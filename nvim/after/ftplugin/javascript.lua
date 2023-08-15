@@ -12,6 +12,20 @@ u.applyTemplateIfEmptyFile("js")
 
 --------------------------------------------------------------------------------
 
+-- auto-convert to string to template string when typing `${..}`
+vim.api.nvim_create_autocmd("InsertLeave", {
+	buffer = 0,
+	callback = function() 
+		local curLine = vim.api.nvim_get_current_line()
+		local correctedLine = curLine
+			:gsub([["(.*${.-}.*)"]], "`%1`")
+			:gsub([['(.*${.-}.*)']], "`%1`")
+		vim.api.nvim_set_current_line(correctedLine)
+	end,
+})
+
+--------------------------------------------------------------------------------
+
 keymap("n", "<leader>r", function()
 	local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
 	local allLines = ""
