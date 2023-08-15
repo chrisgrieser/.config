@@ -54,9 +54,7 @@ keymap("n", "<leader>lh", function() cmd.Telescope("command_history") end, { des
 
 -- show current filetype & buftype
 keymap("n", "<leader>lf", function()
-	local icon = require("nvim-web-devicons").get_icon(fn.bufname(), bo.filetype)
-	icon = not icon and "" or icon .. " "
-	local out = ("filetype: %s%s"):format(icon, bo.filetype)
+	local out = "filetype" .. bo.filetype
 	if bo.buftype ~= "" then out = out .. "\nbuftype: " .. bo.buftype end
 	vim.notify(out, u.trace)
 end, { desc = "󰽘 Inspect FileType & BufType" })
@@ -152,15 +150,11 @@ keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "󰗈 Merge line down" })
 keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>]], { desc = "󰗈 split around selection" })
 
 -- Append to / delete from EoL
-for _, key in pairs({ ",", ")" }) do
-	keymap("n", "<leader>" .. key, "mzA" .. key .. "<Esc>`z", { desc = " Append " .. key .. " to EoL" })
-end
+keymap("n", "<leader>,", "mzA,<Esc>`z", { desc = " Append , to EoL" })
+keymap("n", "<leader>)", "mzA)<Esc>`z", { desc = " Append ) to EoL" })
 
 --------------------------------------------------------------------------------
 -- GIT
-
--- Neogit
-keymap("n", "<leader>gn", cmd.Neogit, { desc = "󰊢 Neogit" })
 
 -- Gitsigns
 keymap("n", "<leader>ga", "<cmd>Gitsigns stage_hunk<CR>", { desc = "󰊢 Add Hunk" })
