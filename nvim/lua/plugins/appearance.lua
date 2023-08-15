@@ -133,8 +133,7 @@ return {
 		end,
 		cmd = { "CccHighlighterEnable" }, -- enable manually via command
 		keys = {
-			{ "#", vim.cmd.CccPick, desc = " Color Picker" },
-			{ "'", vim.cmd.CccConvert, desc = " Convert Color" }, -- shift-# on German keyboard
+			{ "g#", vim.cmd.CccPick, desc = " Color Picker" }, -- shift-# on german keyboard
 		},
 		ft = { "css", "scss", "sh" },
 		config = function()
