@@ -3,25 +3,22 @@ local cmd = vim.cmd
 local fn = vim.fn
 local keymap = vim.keymap.set
 local u = require("config.utils")
+local abbr = vim.cmd.inoreabbrev
 --------------------------------------------------------------------------------
 
 abbr("<buffer> cosnt const")
 abbr("<buffer> local const") -- habit from writing too much lua
 abbr("<buffer> -- //") -- habit from writing too much lua
 
-
 -- auto-convert to string to template string when typing `${..}`
 vim.api.nvim_create_autocmd("InsertLeave", {
 	buffer = 0,
-	callback = function() 
+	callback = function()
 		local curLine = vim.api.nvim_get_current_line()
-		local correctedLine = curLine
-			:gsub([["(.*${.-}.*)"]], "`%1`")
-			:gsub([['(.*${.-}.*)']], "`%1`")
+		local correctedLine = curLine:gsub([["(.*${.-}.*)"]], "`%1`"):gsub([['(.*${.-}.*)']], "`%1`")
 		vim.api.nvim_set_current_line(correctedLine)
 	end,
 })
-
 
 --------------------------------------------------------------------------------
 -- BUILD
@@ -41,7 +38,6 @@ keymap("n", "<leader>r", function()
 end, { buffer = true, desc = " npm run build" })
 
 --------------------------------------------------------------------------------
-
 
 -- Open regex in regex101
 keymap("n", "g/", function()
