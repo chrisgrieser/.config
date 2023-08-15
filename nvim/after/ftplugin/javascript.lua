@@ -10,11 +10,8 @@ vim.b.minioperators_config = {
 		-- TODO this only works for linewise textobjs, not yet charwise.
 		-- also, there might still be an issue will all the escpaing 🙈
 		func = function(content)
-			local lastLine = table.remove(content.lines)
-			local restAsString = table.concat(content.lines, "\n")
-			local allLines = restAsString .. "; console.log(" .. lastLine .. ")"
-			local jsCmd = "eval('" .. allLines:gsub("'", "\\'") .. "')"
-			local shellCmd = 'osascript -l JavaScript -e "' .. jsCmd:gsub('"', '\\"') .. '"'
+			local lines = table.concat(content.lines, "\n")
+			local shellCmd = 'osascript -l JavaScript -e "' .. lines:gsub('"', '\\"') .. '"'
 			local evaluatedOut = vim.fn.system(shellCmd):gsub("\n$", "")
 			return evaluatedOut
 		end,
