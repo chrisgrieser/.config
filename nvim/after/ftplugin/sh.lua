@@ -5,9 +5,8 @@ local u = require("config.utils")
 local abbr = vim.cmd.inoreabbrev
 --------------------------------------------------------------------------------
 
--- TODO: explainshell Docker Image
--- https://github.com/bash-lsp/bash-language-server/tree/main/vscode-client#configuration
--- https://github.com/bash-lsp/bash-language-server/issues/180
+-- function for evaluation operator
+-- vim.b.minioperators_config = { evaluate = { func = "zsh" } }
 
 --------------------------------------------------------------------------------
 
@@ -42,7 +41,7 @@ keymap({ "n", "x" }, "<leader>t", sendToWezTerm, { desc = " Send to WezTerm",
 --------------------------------------------------------------------------------
 
 -- extra trailing chars
-keymap("n", "<leader>|", "mzA|<Esc>`z", { desc = " Append | to EoL", buffer= true })
+keymap("n", "<leader>|", "mzA|<Esc>`z", { desc = " Append | to EoL", buffer = true })
 keymap("n", "<leader>\\", "mzA\\<Esc>`z", { desc = " Append \\ to EoL", buffer = true })
 
 --------------------------------------------------------------------------------
@@ -70,3 +69,4 @@ keymap("n", "<leader>r", function()
 		vim.notify("Not in a sketchybar directory.", u.warn)
 	end
 end, { buffer = true, desc = "  Reload sketchybar" })
+

@@ -42,13 +42,10 @@ return {
 			replace = { prefix = "s", reindent_linewise = true },
 			multiply = { prefix = "w" },
 			exchange = { prefix = "sx", reindent_linewise = true },
+			sort = { prefix = "sy", func = nil },
 			evaluate = {
 				prefix = "#",
 				func = nil, -- Function which does the evaluation
-			},
-			sort = {
-				prefix = "sy",
-				func = nil, -- Function which does the sort
 			},
 		},
 	},

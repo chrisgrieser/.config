@@ -4,27 +4,22 @@ local u = require("config.utils")
 local abbr = vim.cmd.inoreabbrev
 --------------------------------------------------------------------------------
 
-abbr("<buffer> cosnt const")
-abbr("<buffer> local const") -- habit from writing too much lua
-abbr("<buffer> -- //") -- habit from writing too much lua
-
-u.applyTemplateIfEmptyFile("js")
-
---------------------------------------------------------------------------------
-
--- auto-convert string to template string when typing `${..}`
-vim.api.nvim_create_autocmd("InsertLeave", {
-	buffer = 0,
-	callback = function() 
-		local curLine = vim.api.nvim_get_current_line()
-		local correctedLine = curLine
-			:gsub([["(.*${.-}.*)"]], "`%1`")
-			:gsub([['(.*${.-}.*)']], "`%1`")
-		vim.api.nvim_set_current_line(correctedLine)
-	end,
-})
-
---------------------------------------------------------------------------------
+-- https://github.com/echasnovski/mini.operators/blob/main/doc/mini-operators.txt#L214
+vim.b.minioperators_config = {
+	evaluate = {
+		func = function (content)
+			local lines = content.lines
+			local evaluatedLines = {}
+			for _, line in ipairs(lines) do
+				local jsCmd = "eval(console.log(" .. line .. "))"
+				local shellCmd = "node -e '" .. jsCmd .. "'"
+				local result = vim.fn.system(shellCmd):gsub("\n$", "")
+				table.insert(evaluatedLines, result)
+			end
+			return evaluatedLines
+		end,
+	},
+}
 
 keymap("n", "<leader>r", function()
 	local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
@@ -37,6 +32,26 @@ keymap("n", "<leader>r", function()
 	output = output:gsub("\n$", "")
 	vim.notify(output)
 end, { desc = " Run JXA file", buffer = true })
+
+--------------------------------------------------------------------------------
+
+abbr("<buffer> cosnt const")
+abbr("<buffer> local const") -- habit from writing too much lua
+abbr("<buffer> -- //") -- habit from writing too much lua
+
+u.applyTemplateIfEmptyFile("js")
+
+--------------------------------------------------------------------------------
+
+-- auto-convert string to template string when typing `${..}`
+vim.api.nvim_create_autocmd("InsertLeave", {
+	buffer = 0,
+	callback = function()
+		local curLine = vim.api.nvim_get_current_line()
+		local correctedLine = curLine:gsub([["(.*${.-}.*)"]], "`%1`"):gsub([['(.*${.-}.*)']], "`%1`")
+		vim.api.nvim_set_current_line(correctedLine)
+	end,
+})
 
 --------------------------------------------------------------------------------
 
