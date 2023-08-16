@@ -78,7 +78,7 @@ local tsConfig = {
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		commit = "b223402ba9a69a5993e25e3e7effac5621fbb0e1",
+		commit = "294f753ed3597d7e221352efe8080a8951d740b4", -- https://github.com/nvim-treesitter/nvim-treesitter/issues/5262
 		event = "VeryLazy",
 		build = function() require("nvim-treesitter.install").update { with_sync = true } end,
 		main = "nvim-treesitter.configs",
