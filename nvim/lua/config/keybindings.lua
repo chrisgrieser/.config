@@ -145,7 +145,7 @@ keymap({ "n", "x" }, "zg", function()
 	end
 	local filepath = u.linterConfigFolder .. "/dictionary-for-vale-and-languagetool.txt"
 	local error = u.writeToFile(filepath, word, "a")
-	local msg = error and "󰓆 Error: " ..error or "󰓆 Added: " .. word
+	local msg = error and "󰓆 Error: " .. error or "󰓆 Added: " .. word
 	vim.notify(msg)
 end, { desc = "󰓆 Accept Word" })
 
@@ -274,8 +274,12 @@ end, { desc = " Paste charwise", expr = true })
 ------------------------------------------------------------------------------
 -- CMD-KEYBINDINGS
 
--- stylua: ignore
-keymap({"n", "x"}, "<D-l>", function() fn.system("open -R '" .. expand("%:p") .. "'") end, { desc = "󰀶 Reveal in Finder" })
+keymap(
+	{ "n", "x" },
+	"<D-l>",
+	function() fn.system { "open", "-R", expand("%:p") } end,
+	{ desc = "󰀶 Reveal in Finder" }
+)
 keymap({ "n", "x" }, "<D-5>", function()
 	local parentFolder = expand("%:p:h")
 	if not parentFolder:find("Alfred%.alfredpreferences") then
@@ -284,12 +288,10 @@ keymap({ "n", "x" }, "<D-5>", function()
 	end
 	-- URI seems more reliable than JXA when called via nvim https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
 	local workflowId = parentFolder:match("Alfred%.alfredpreferences/workflows/([^/]+)")
-	local shellCmd = ("open 'alfredpreferences://navigateto/workflows>workflow>%s'"):format(workflowId)
-	fn.system(shellCmd)
-
+	fn.system { "open", "alfredpreferences://navigateto/workflows>workflow>" .. workflowId }
 	-- in case the right workflow is already open, Alfred is not focussed.
 	-- Therefore manually focussing in addition to that here as well.
-	fn.system("open -a 'Alfred Preferences'")
+	fn.system { "open", "-a", "Alfred Preferences" }
 end, { desc = "󰮤 Reveal Workflow in Alfred" })
 
 -- cmd+e: inline code

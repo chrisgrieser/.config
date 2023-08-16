@@ -38,9 +38,9 @@ local function inspect(str)
 	local parentDir = expand("%:p:h")
 
 	if parentDir:find("hammerspoon") then
-		local hsApplescript =
-			string.format('tell application "Hammerspoon" to execute lua code "hs.alert(%s)"', str)
-		fn.system("osascript -e '" .. hsApplescript .. "'")
+		-- stylua: ignore
+		local hsApplescript = ('tell application "Hammerspoon" to execute lua code "hs.alert(%s)"'):format(str)
+		fn.system({ "osascript", "-e", hsApplescript })
 	elseif parentDir:find("nvim") then
 		if vim.startswith(str, "fn") or vim.startswith(str, "bo") then str = "vim." .. str end
 		local output = vim.inspect(fn.luaeval(str))

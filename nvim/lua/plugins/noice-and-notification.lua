@@ -64,7 +64,7 @@ return {
 						},
 					},
 					substitute = {
-						pattern = {"^:%%? ?s"},
+						pattern = { "^:%%? ?s" },
 						icon = " ",
 						conceal = true,
 						opts = {
@@ -82,7 +82,12 @@ return {
 				hover = {
 					border = { style = u.borderStyle },
 					size = { max_width = 80 },
-					win_options = { scrolloff = 5 },
+					win_options = { scrolloff = 4 },
+				},
+				split = {
+					enter = true,
+					size = "30%",
+					close = { keys = { "q", "<D-w>", "<D-0>" } },
 				},
 			},
 			commands = {
@@ -90,11 +95,7 @@ return {
 				history = {
 					view = "split",
 					filter_opts = { reverse = true }, -- show newest entries first
-					opts = {
-						enter = true,
-						size = "30%",
-						close = { keys = { "q", "<D-w>", "<D-0>" } },
-					},
+					opts = { enter = true },
 				},
 			},
 
