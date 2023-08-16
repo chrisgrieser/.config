@@ -26,14 +26,14 @@ return {
 				-- nvim-early-retirement
 				{ filter = { event = "notify", find = "^Auto%-Closing Buffer:" }, view = "mini" },
 				-- nvim-treesitter
-				-- { filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
+				{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
 				-- Mason
 				{ filter = { event = "notify", find = "successfully u?n?installed.$" }, view = "mini" },
 				{ filter = { event = "notify", find = "^%[mason%-" }, view = "mini" },
 				-- Codeium.nvim
-				-- { filter = { event = "notify", find = "^Codeium.nvim:" }, view = "mini" },
-				-- { filter = { event = "notify", find = "downloading server" }, view = "mini" },
-				-- { filter = { event = "notify", find = "unpacking server" }, view = "mini" },
+				{ filter = { event = "notify", find = "^Codeium.nvim:" }, view = "mini" },
+				{ filter = { event = "notify", find = "downloading server" }, view = "mini" },
+				{ filter = { event = "notify", find = "unpacking server" }, view = "mini" },
 
 				-- unneeded info on search patterns
 				{ filter = { event = "msg_show", find = "^/." }, skip = true },

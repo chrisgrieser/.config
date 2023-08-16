@@ -10,22 +10,6 @@ return {
 		opts = true,
 		dev = true,
 	},
-	{ -- context lines
-		"nvim-treesitter/nvim-treesitter-context",
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		event = "VeryLazy",
-		init = function()
-			-- stylua: ignore
-			vim.keymap.set("n", "^", function() require("treesitter-context").go_to_context() end, { desc = " Goto context" })
-		end,
-		opts = {
-			max_lines = 3,
-			trim_scope = "outer", -- context lines to discard if `max_lines` exceeded: 'inner', 'outer'
-			-- Separator between context and content. Should be a single character string, like '-'.
-			-- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
-			-- separator = u.borderHorizontal,
-		},
-	},
 	{ -- always show matchparents
 		"utilyre/sentiment.nvim",
 		event = "VeryLazy",
