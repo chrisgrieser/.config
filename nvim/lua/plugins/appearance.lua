@@ -10,6 +10,16 @@ return {
 		opts = true,
 		dev = true,
 	},
+	{ -- highlights for relative jumps
+		"scheisa/relpointers.nvim",
+		event = "VeryLazy",
+		opts = {
+			amount = 2,
+			distance = 6, -- matches my `nmap J 6j` and `nmap K 6k`
+			hl_properties = { link = "ColorColumn" },
+			white_space_rendering = ("\t"):rep(20),
+		},
+	},
 	{ -- when searching, search count is shown next to the cursor
 		"kevinhwang91/nvim-hlslens",
 		opts = {
@@ -42,8 +52,8 @@ return {
 		event = "BufReadPost", -- later does not load on first buffer
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
+			-- red too aggressive
 			vim.api.nvim_create_autocmd("ColorScheme", {
-				-- red too aggressive
 				callback = function() vim.api.nvim_set_hl(0, "RainbowDelimiterRed", { fg = "#7e8a95" }) end,
 			})
 		end,
