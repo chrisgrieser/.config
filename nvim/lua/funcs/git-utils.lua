@@ -9,11 +9,9 @@ local fn = vim.fn
 ---@return boolean
 local function isInGitRepo()
 	fn.system("git rev-parse --is-inside-work-tree")
-	if vim.v.shell_error ~= 0 then
-		vim.notify("Not a GitHub Repo.", vim.log.levels.WARN)
-		return false
-	end
-	return true
+	local inGitRepo = vim.v.shell_error == 0
+	if not inGitRepo then vim.notify("Not a GitHub Repo.", vim.log.levels.WARN) end
+	return inGitRepo
 end
 
 --NOTE this requires an outer-scope output variable which needs to be emptied
@@ -36,7 +34,7 @@ local gitShellOpts = {
 		os.execute("sketchybar --trigger repo-files-update") -- specific to my setup
 
 		if #output == 0 then return end
-		local out = table.concat(output, " \n "):gsub("%s*$", ""):gsub("\r", "\n")
+		local out = table.concat(output, " \n ")
 
 		local logLevel
 		if out:lower():find("error") then
