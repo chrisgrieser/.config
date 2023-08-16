@@ -29,5 +29,7 @@ on alfred_script(shellCmd)
 	do shell script ("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ;" ¬
 		&amp; "echo '" &amp; shellCmd &amp; "' | wezterm cli send-text --no-paste")
 end alfred_script</string>
+	<key>prefix</key>
+	<integer>1</integer>
 </dict>
 </plist>

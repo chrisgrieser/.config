@@ -27,7 +27,7 @@ return {
 	{ -- substitute, evaluate, exchange, sort, duplicate
 		"echasnovski/mini.operators",
 		init = function()
-			local ftClis = {
+			local cmds = {
 				sh = "zsh -c",
 				python = "python3 -c",
 				applescript = "osascript -l AppleScript -e",
@@ -38,11 +38,10 @@ return {
 				pattern = { "javascript", "typescript", "sh", "python", "applescript" },
 				callback = function(ctx)
 					local ft = ctx.match
-					local cli = ftClis[ft]
 
 					local evalFunc = function(content)
 						local lines = table.concat(content.lines, "\n")
-						local shellCmd = cli .. " '" .. lines:gsub("'", "\\'") .. "'"
+						local shellCmd = cmds[ft] .. " '" .. lines:gsub("'", "\\'") .. "'"
 						local evaluatedOut = vim.fn.system(shellCmd):gsub("\n$", "")
 						return evaluatedOut
 					end
