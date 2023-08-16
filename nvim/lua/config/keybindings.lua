@@ -30,6 +30,10 @@ keymap({ "n", "x" }, "K", "6gk")
 keymap("o", "J", "2j")
 keymap("o", "K", "2k")
 
+-- paragraph-wise movement
+keymap({ "n", "x" }, "gk", "{gk") 
+keymap({ "n", "x" }, "gj", "}gj")
+
 -- Jump history
 keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
 keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
@@ -55,7 +59,8 @@ end, { desc = " Delete Mark" })
 -- Hunks and Changes
 keymap("n", "gh", "<cmd>Gitsigns next_hunk<CR>zv", { desc = "󰊢 Next Hunk" })
 keymap("n", "gH", "<cmd>Gitsigns prev_hunk<CR>zv", { desc = "󰊢 Previous Hunk" })
-keymap("n", "gc", "g;", { desc = "Goto last change" })
+keymap("n", "gc", "g;", { desc = "Goto older change" })
+keymap("n", "gC", "g,", { desc = "Goto newer change" })
 
 --------------------------------------------------------------------------------
 
@@ -67,20 +72,21 @@ keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "* Visual Star" 
 
 -- auto-nohl -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
 vim.on_key(function(char)
-	if vim.g.scrollview_refreshing then return end -- FIX: https://github.com/dstein64/nvim-scrollview/issues/88#issuecomment-1570400161
 	local searchKeys = { "n", "N", "*", "#" }
 	local searchConfirmed = (fn.keytrans(char) == "<CR>" and fn.getcmdtype():find("[/?]") ~= nil)
 	if searchConfirmed or (fn.mode() == "n") then
 		local searchKeyUsed = searchConfirmed or (vim.tbl_contains(searchKeys, fn.keytrans(char)))
-		if searchKeyUsed or searchConfirmed then require("hlslens").start() end
-		---@diagnostic disable-next-line: param-type-mismatch
 		if vim.opt.hlsearch:get() ~= searchKeyUsed then vim.opt.hlsearch = searchKeyUsed end
+		if searchKeyUsed or searchConfirmed then require("hlslens").start() end
 	end
 end, vim.api.nvim_create_namespace("auto_nohl"))
 
 autocmd("CmdlineEnter", {
 	callback = function()
-		if fn.getcmdtype():find("[/?]") then vim.opt.hlsearch = true end
+		if fn.getcmdtype():find("[/?]") then
+			require("hlslens").start()
+			vim.opt.hlsearch = true
+		end
 	end,
 })
 
