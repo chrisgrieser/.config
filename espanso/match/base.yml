@@ -77,9 +77,10 @@ matches:
   - trigger: "!nversion"
     replace: |
       ```
-      neovim {{neovimVersion}} (homebrew)
-      neovide {{neovideVersion}} (homebrew)
-      macOS {{OSversion}} (M1)
+      {{neovimVersion}}
+
+      neovide {{neovideVersion}}
+      macOS {{OSversion}}
       ```
     vars:
       - name: OSversion
@@ -89,7 +90,7 @@ matches:
       - name: neovimVersion
         type: shell
         params:
-          cmd: "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; nvim --version | head -n1 | cut -dv -f2"
+          cmd: "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; nvim --version | head -n3"
       - name: neovideVersion
         type: shell
         params:

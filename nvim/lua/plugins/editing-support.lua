@@ -4,6 +4,12 @@ return {
 		event = "BufReadPre",
 		opts = { override_editorconfig = false },
 	},
+	-- TODO update when more stable
+	-- list of supported languages: https://github.com/filNaj/tree-setter/tree/master/queries
+	-- { -- auto-insert ;,=:
+	-- 	"filNaj/tree-setter",
+	-- 	ft = { "c", "cpp", "java", "javascript", "typescript", "python", "rust", "go" },
+	-- },
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
