@@ -5,11 +5,6 @@ local u = require("config.utils")
 local abbr = vim.cmd.inoreabbrev
 --------------------------------------------------------------------------------
 
--- function for evaluation operator
--- vim.b.minioperators_config = { evaluate = { func = "zsh" } }
-
---------------------------------------------------------------------------------
-
 -- https://wezfurlong.org/wezterm/cli/cli/send-text
 local function sendToWezTerm()
 	fn.system([[

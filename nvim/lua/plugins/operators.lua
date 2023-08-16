@@ -26,6 +26,32 @@ return {
 	},
 	{ -- substitute, evaluate, exchange, sort, duplicate
 		"echasnovski/mini.operators",
+		init = function()
+			local ftClis = {
+				sh = "zsh -c",
+				python = "python3 -c",
+				applescript = "osascript -l AppleScript -e",
+				javascript = "osascript -l JavaScript -e", -- JXA
+				typescript = "node -e",
+			}
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = { "javascript", "typescript", "sh", "python", "applescript" },
+				callback = function(ctx)
+					local ft = ctx.match
+					local cli = ftClis[ft]
+
+					local evalFunc = function(content)
+						local lines = table.concat(content.lines, "\n")
+						local shellCmd = cli .. " '" .. lines:gsub("'", "\\'") .. "'"
+						local evaluatedOut = vim.fn.system(shellCmd):gsub("\n$", "")
+						return evaluatedOut
+					end
+
+					-- DOCS https://github.com/echasnovski/mini.operators/blob/main/doc/mini-operators.txt#L214
+					vim.b.minioperators_config = { evaluate = { func = evalFunc } }
+				end,
+			})
+		end,
 		keys = {
 			{ "s", mode = { "n", "x" }, desc = "󰅪 Substitute Operator" },
 			{ "w", mode = { "n", "x" }, desc = "󰅪 Multiply Operator" },
@@ -42,11 +68,9 @@ return {
 			replace = { prefix = "s", reindent_linewise = true },
 			multiply = { prefix = "w" },
 			exchange = { prefix = "sx", reindent_linewise = true },
-			sort = { prefix = "sy", func = nil },
-			evaluate = {
-				prefix = "#",
-				func = nil, -- Function which does the evaluation
-			},
+			sort = { prefix = "sy" },
+			-- INFO use vim.b.minioperators_config to set language-specific eval funcs
+			evaluate = { prefix = "#" },
 		},
 	},
 	{ -- surround
