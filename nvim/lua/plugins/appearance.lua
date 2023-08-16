@@ -10,12 +10,12 @@ return {
 		opts = true,
 		dev = true,
 	},
-	{ -- always show matchparents
-		"utilyre/sentiment.nvim",
-		event = "VeryLazy",
-		opts = true,
-		init = function() vim.g.loaded_matchparen = 1 end, -- needed when lazy-loaded
-	},
+	-- { -- always show matchparents
+	-- 	"utilyre/sentiment.nvim",
+	-- 	event = "VeryLazy",
+	-- 	opts = true,
+	-- 	init = function() vim.g.loaded_matchparen = 1 end, -- needed when lazy-loaded
+	-- },
 	{ -- when searching, search count is shown next to the cursor
 		"kevinhwang91/nvim-hlslens",
 		opts = {

@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=../karabiner-mod-schema.json
+# yaml-language-server: $schema=./schema/karabiner-mod-schema.json
 title: "Finder Vim Controls"
 homepage: https://github.com/chrisgrieser/finder-vim-mode
 maintainers: [pseudometa (chrisgrieser)]
