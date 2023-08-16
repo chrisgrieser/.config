@@ -115,7 +115,7 @@ function gl() {
 
 # full git log
 function gll() {
-	gitlog
+	gitlog | less
 }
 
 # interactive
