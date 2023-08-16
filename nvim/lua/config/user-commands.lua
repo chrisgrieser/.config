@@ -101,7 +101,7 @@ newCommand("Scratch", function()
 	cmd.buffer(bufId)
 
 	-- prompt for filetype
-	local filetypes = { "text", "sh", "markdown", "javascript", "json", "lua" }
+	local filetypes = { "text", "sh", "markdown", "javascript", "json", "lua", "python" }
 	vim.ui.select(filetypes, { prompt = "Select Filetype" }, function(choice)
 		if not choice then return end
 		a.nvim_buf_set_option(bufId, "filetype", choice)
