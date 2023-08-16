@@ -72,7 +72,7 @@ function M.messageLog()
 	local logStatement = templateStr:format(marker)
 	append(logStatement)
 	-- goto insert mode at correct location
-	normal('f";') -- goto second ";"
+	normal('f";') -- goto second `"`
 	cmd.startinsert()
 end
 
@@ -111,7 +111,9 @@ function M.objectLog()
 	local templateStr
 	local ft = bo.filetype
 
-	if ft == "javascript" then
+	if ft == "lua" and expand("%:p"):find("nvim") then
+		 templateStr = 'vim.notify("%s %s: " .. vim.inspect(%s))'
+	elseif ft == "javascript" then
 		templateStr = 'console.log("%s %s:", JSON.stringify(%s))'
 	else
 		vim.notify("🪓 Objectlog does not support " .. ft .. " yet.", logWarn)
