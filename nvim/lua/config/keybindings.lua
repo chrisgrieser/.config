@@ -83,10 +83,7 @@ end, vim.api.nvim_create_namespace("auto_nohl"))
 
 autocmd("CmdlineEnter", {
 	callback = function()
-		if fn.getcmdtype():find("[/?]") then
-			require("hlslens").start()
-			vim.opt.hlsearch = true
-		end
+		if fn.getcmdtype():find("[/?]") then vim.opt.hlsearch = true end
 	end,
 })
 

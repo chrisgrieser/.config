@@ -77,7 +77,6 @@
   "promise-async": { "branch": "main", "commit": "e94f35161b8c5d4a4ca3b6ff93dd073eb9214c0e" },
   "rainbow-delimiters.nvim": { "branch": "master", "commit": "b5bb251e057d099ee8186d2521f865cd98c51ead" },
   "refactoring.nvim": { "branch": "master", "commit": "5359e74291164fcaeaaecdea9ba753ad54eb53d0" },
-  "relpointers.nvim": { "branch": "main", "commit": "ad392be1408188afec1f3e6601affaa82de6ef85" },
   "replacer.nvim": { "branch": "master", "commit": "32e1713230844fa52f7f0598c59295de3c90dc95" },
   "rest.nvim": { "branch": "main", "commit": "22673c848768ff25517154a5aebfebc0c77d0b4f" },
   "satellite.nvim": { "branch": "main", "commit": "5d33376287e384f04b84962a20d90bd10a9dac86" },
