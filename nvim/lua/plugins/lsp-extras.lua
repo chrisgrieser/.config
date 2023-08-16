@@ -35,7 +35,7 @@ return {
 			vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "󰒕 Diagnostic" })
 		end,
 		opts = {
-			position = "bottom", -- top|bottom
+			position = "top", -- top|bottom
 			highlights = {
 				error = "DiagnosticVirtualTextError",
 				warn = "DiagnosticVirtualTextWarn",
