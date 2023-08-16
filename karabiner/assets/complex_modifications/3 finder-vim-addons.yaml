@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=../karabiner-mod-schema.json
+# yaml-language-server: $schema=./schema/karabiner-mod-schema.json
 #───────────────────────────────────────────────────────────────────────────────
 # INFO this file has to come before finder-vim-mode.yaml itself
 #───────────────────────────────────────────────────────────────────────────────

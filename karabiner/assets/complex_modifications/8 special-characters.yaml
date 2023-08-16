@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=../karabiner-mod-schema.json
+# yaml-language-server: $schema=./schema/karabiner-mod-schema.json
 title: Special Characters
 rules:
   - description: "{}^ German to US layout for vim"
