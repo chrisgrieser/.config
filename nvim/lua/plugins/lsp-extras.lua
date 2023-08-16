@@ -59,7 +59,22 @@ return {
 		init = function()
 			vim.g.navic_silence = true -- suppress notifications on errors
 
-			-- copy breadcrumbs (nvim navic)
+			vim.keymap.set("n", "^", function()
+				if not require("nvim-navic").is_available() then
+					vim.notify("Navic is not available.")
+					return
+				end
+				local symbolPath = require("nvim-navic").get_data()
+				local parent = symbolPath[#symbolPath - 1]
+				if not parent then
+					vim.notify("Already at highest parent.")
+					return
+				end
+				local parentPos = parent.scope.start
+				u.setCursor(0, { parentPos.line, parentPos.character })
+			end, { desc = "󰒕 Go Up to Parent" })
+
+			-- copy breadcrumbs
 			vim.keymap.set("n", "<D-b>", function()
 				local rawdata = require("nvim-navic").get_data()
 				if not rawdata then

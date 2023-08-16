@@ -37,14 +37,11 @@ local function customHighlights()
 
 	-- make MatchParen stand out more (orange to close to rainbow brackets)
 	vim.api.nvim_set_hl(0, "MatchParen", { bold = true, underline = true, fg = "#4a8cc9" })
-	-- updateHighlight("MatchParen", "gui=underdotted,bold cterm=underline,bold")
 
 	-- proper underlines for diagnostics
 	local types = { "Error", "Warn", "Info", "Hint" }
 	for _, type in pairs(types) do
 		updateHighlight(type .. "Text", "gui=underdouble cterm=underline")
-	end
-	for _, type in pairs(types) do
 		updateHighlight("DiagnosticUnderline" .. type, "gui=underdouble cterm=underline")
 	end
 end

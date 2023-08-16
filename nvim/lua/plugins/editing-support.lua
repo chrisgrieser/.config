@@ -20,7 +20,7 @@ return {
 				rule("*", "*", "markdown"):with_pair(), -- italics
 				rule("__", "__", "markdown"):with_pair(), -- bold
 				-- quicker template string
-				rule("$", "{}", {"javascript", "json"})
+				rule("$", "{}", {"javascript", "typescript", "json"})
 					:with_pair(isNodeType("string"))
 					:set_end_pair_length(1), -- only move one char to the side
 			}
@@ -34,11 +34,6 @@ return {
 		"RRethy/nvim-treesitter-endwise",
 		ft = { "lua", "bash", "zsh", "sh", "vim", "ruby", "elixir" },
 		dependencies = "nvim-treesitter/nvim-treesitter",
-	},
-	{ -- auto-insert ;,=:
-		"filNaj/tree-setter",
-		-- list of supported languages: https://github.com/filNaj/tree-setter/tree/master/queries
-		ft = { "c", "cpp", "java", "javascript", "typescript", "python", "rust", "go" },
 	},
 	{ -- case conversion
 		"johmsalas/text-case.nvim",
