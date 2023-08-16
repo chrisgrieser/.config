@@ -122,7 +122,7 @@ return {
 			render = "minimal", -- minimal|default|compact
 			top_down = false,
 			max_width = 70,
-			max_height = 15,
+			max_height = 10,
 			minimum_width = 15,
 			level = 0, -- minimum severity level to display (0 = display all)
 			timeout = 7500,

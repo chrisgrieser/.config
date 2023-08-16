@@ -144,9 +144,9 @@ keymap({ "n", "x" }, "zg", function()
 		word = fn.getreg("z")
 	end
 	local filepath = u.linterConfigFolder .. "/dictionary-for-vale-and-languagetool.txt"
-	local success = u.appendToFile(filepath, word)
-	if not success then return end -- error message already by AppendToFile
-	vim.notify(('󰓆 Now accepting:\n"%s"'):format(word))
+	local error = u.writeToFile(filepath, word, "a")
+	local msg = error and "󰓆 Error: " ..error or "󰓆 Added: " .. word
+	vim.notify(msg)
 end, { desc = "󰓆 Accept Word" })
 
 --------------------------------------------------------------------------------
@@ -452,4 +452,3 @@ keymap("n", "<PageDown>", function() scrollHoverWin("down") end, { desc = "Scrol
 keymap("n", "<PageUp>", function() scrollHoverWin("up") end, { desc = "Scroll up hover" })
 
 --------------------------------------------------------------------------------
-

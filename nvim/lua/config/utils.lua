@@ -15,19 +15,16 @@ M.setCursor = vim.api.nvim_win_set_cursor
 ---@param cmdStr string
 function M.normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
+---@nodiscard
 ---@param str string
 ---@param filePath string line(s) to add
----@nodiscard
----@return boolean whether the writing was successful
-function M.appendToFile(filePath, str)
-	local file, err = io.open(filePath, "a")
-	if not file then
-		vim.notify("Could not append: " .. err, vim.log.levels.ERROR)
-		return false
-	end
+---@param mode "w"|"a" -- write or append
+---@return string|nil error 
+function M.writeToFile(filePath, str, mode)
+	local file, error = io.open(filePath, mode)
+	if not file then return error end 
 	file:write(str .. "\n")
 	file:close()
-	return true
 end
 
 ---https://www.reddit.com/r/neovim/comments/oxddk9/comment/h7maerh/
