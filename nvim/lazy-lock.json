@@ -81,7 +81,6 @@
   "rest.nvim": { "branch": "main", "commit": "22673c848768ff25517154a5aebfebc0c77d0b4f" },
   "satellite.nvim": { "branch": "main", "commit": "5d33376287e384f04b84962a20d90bd10a9dac86" },
   "scrollEOF.nvim": { "branch": "master", "commit": "0a8e00a6a2a8e32ff716d25b0c84da7dc5ae9bcd" },
-  "sentiment.nvim": { "branch": "main", "commit": "ecde8d877881bb78fdb90060c0991e76770dbdbc" },
   "sibling-swap.nvim": { "branch": "main", "commit": "58b256f2a7def9b63be275b373c748c012b3a604" },
   "ssr.nvim": { "branch": "main", "commit": "027a89f84283a9051427d4f319720336535c2e82" },
   "telescope-file-browser.nvim": { "branch": "master", "commit": "ad7b637c72549713b9aaed7c4f9c79c62bcbdff0" },

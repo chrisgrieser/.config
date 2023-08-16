@@ -26,9 +26,9 @@ require("lazy").setup("plugins", {
 		size = { width = 1, height = 0.92 }, -- full sized, except statusline
 	},
 	checker = {
-		enabled = true, -- automatically check for plugin updates, required for statusline
-		notify = false, -- no notice when updates are found, since done via statusline
-		frequency = 86400, -- only check for updates every 24 hours
+		enabled = true, -- automatically check for plugin updates
+		notify = true,
+		frequency = 60 * 60 * 24 * 7, -- = 1 week
 	},
 	git = { timeout = 60 }, -- 1min timeout for tasks
 	diff = { cmd = "browser" }, -- view diffs with "d" in the browser
@@ -37,6 +37,8 @@ require("lazy").setup("plugins", {
 	performance = {
 		rtp = {
 			disabled_plugins = { -- disable unused builtin plugins from neovim
+				"matchparen",
+				"matchit",
 				"netrw",
 				"netrwPlugin",
 				"gzip",

@@ -106,15 +106,6 @@ local function clock()
 	return time
 end
 
--- return available plugin updates when above a certain threshold
-local function pluginUpdates()
-	local threshold = 20
-	if not require("lazy.status").has_updates() then return "" end
-	local numberOfUpdates = require("lazy.status").updates()
-	if numberOfUpdates < threshold then return "" end
-	return " " .. numberOfUpdates
-end
-
 -- wrapper to not require navic directly
 local function navicBreadcrumbs()
 	if bo.filetype == "css" or not require("nvim-navic").is_available() then return "" end
@@ -191,12 +182,7 @@ local lualineConfig = {
 			{ navicBreadcrumbs, section_separators = topSeparators },
 		},
 		lualine_c = {},
-		lualine_x = {
-			{
-				pluginUpdates,
-				color = function() return { fg = u.getHighlightValue("NonText", "fg") } end,
-			},
-		},
+		lualine_x = {},
 		-- INFO dap and recording status defined in the respective plugin configs
 		-- for lualine_y and lualine_z for their lazy loading
 		lualine_y = {
