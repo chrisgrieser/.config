@@ -151,6 +151,7 @@ keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>]], { desc = "󰗈 split
 
 -- Append to / delete from EoL
 keymap("n", "<leader>,", "mzA,<Esc>`z", { desc = " , to EoL" })
+keymap("n", '<leader>"', 'mzA"<Esc>`z', { desc = ' " to EoL' })
 keymap("n", "<leader>)", "mzA)<Esc>`z", { desc = " ) to EoL" })
 
 --------------------------------------------------------------------------------
