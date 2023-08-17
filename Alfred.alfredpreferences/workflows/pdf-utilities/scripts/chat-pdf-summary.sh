@@ -6,7 +6,7 @@
 # shellcheck disable=1091
 source "$HOME/.zshenv" && api_key="$CHATPDF_API_KEY"
 file_path="$1"
-the_prompt="Summarize the pdf in 10 bullet points."
+the_prompt="Summarize the pdf in 10 bullet points. Ground your summary in the facts of the paper."
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -19,7 +19,7 @@ sourceId=$(curl -X POST "https://api.chatpdf.com/v1/sources/add-file" \
 
 osascript -e 'display notification "" with title "🤖 Requesting Summary…"'
 
-# INFO do not use `$prompt`, since it's a zsh builtin var
+# INFO do not use `$prompt`, since it's a reserved zsh variable
 content=$(curl -X POST "https://api.chatpdf.com/v1/chats/message" \
 	-H "x-api-key: $api_key" \
 	-H "Content-Type: application/json" \
