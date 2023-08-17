@@ -27,32 +27,6 @@ return {
 			}
 		end,
 	},
-	{ -- diagnostics in the top instead of virtual lines. More stable than diagflow
-		"Mofiqul/trld.nvim",
-		event = "LspAttach",
-		init = function()
-			vim.defer_fn(function() vim.diagnostic.config { virtual_text = false } end, 1)
-			vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "󰒕 Diagnostic" })
-		end,
-		opts = {
-			position = "top", -- top|bottom
-			highlights = {
-				error = "DiagnosticVirtualTextError",
-				warn = "DiagnosticVirtualTextWarn",
-				info = "DiagnosticVirtualTextInfo",
-				hint = "DiagnosticVirtualTextHint",
-			},
-			formatter = function(diag)
-				local padRight = 3 -- due to scrollbar
-				local hlBySeverity = require("trld.utils").get_hl_by_serverity
-				local fmt_line = u.diagnosticFmt(diag)
-				local lines = {
-					{ { " " .. fmt_line .. (" "):rep(padRight), hlBySeverity(diag.severity) } },
-				}
-				return lines
-			end,
-		},
-	},
 	{ -- breadcrumbs for winbar
 		"SmiteshP/nvim-navic",
 		event = "LspAttach", -- loading on `require` ignores the config, so loading on LspAttach
@@ -139,8 +113,8 @@ return {
 					remove_colon_end = true,
 				},
 				labels_separator = ":",
-				only_current_line = false,
-				highlight = "NonText", -- highlight group
+				only_current_line = true,
+				highlight = "NonText",
 			},
 		},
 	},
