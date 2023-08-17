@@ -31,8 +31,9 @@ local function setHigherBrightnessDuringDay()
 		target = 0.8
 	elseif ambient > 15 then
 		target = 0.7
+	elseif ambient > 5 then
 	else
-		target = 0.6
+		target = 0.5
 	end
 	wu.iMacDisplay:setBrightness(target)
 end
@@ -74,8 +75,9 @@ local function workLayout()
 		end)
 	end
 
+	-- minimize Obsidian
 	hs.timer.waitUntil(
-		function() return u.app("Obsidian") and u.app("Obsidian"):mainWindow() end,
+		function() return (u.app("Obsidian") and u.app("Obsidian"):mainWindow()) end,
 		function() u.app("Obsidian"):mainWindow():minimize() end,
 		0.1
 	)
@@ -171,9 +173,10 @@ DisplayCountWatcher = hs.screen.watcher
 		local delay = env.isAtMother and 1.5 or 0 -- TV at mother needs small delay
 		u.runWithDelays(delay, selectLayout)
 
-		-- put iMac display to sleep at night. Essentially triggers when display
-		-- projector is turned off
-		if u.betweenTime(0, 7) and not env.isProjector() then hs.execute("pmset displaysleepnow") end
+		-- if at night switching back to one display, put iMac display to sleep at
+		-- night. i.e., this triggers when the projector is turned off before
+		-- going to sleep
+		if u.betweenTime(22, 7) and not env.isProjector() then hs.execute("pmset displaysleepnow") end
 	end)
 	:start()
 
