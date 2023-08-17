@@ -34,6 +34,14 @@ require("lazy").setup("plugins", {
 	diff = { cmd = "browser" }, -- view diffs with "d" in the browser
 	change_detection = { notify = false },
 	readme = { enabled = false },
+	custom_keys = {
+		["K"] = function(plugin)
+			u.normal("6k")
+        require("lazy.util").float_term({ "lazygit", "log" }, {
+          cwd = plugin.dir,
+        })
+      end,
+	},
 	performance = {
 		rtp = {
 			disabled_plugins = { -- disable unused builtin plugins from neovim
