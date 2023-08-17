@@ -88,7 +88,7 @@ function ai() {
 	if [[ -z "$OPENAI_API_KEY" ]]; then echo "\$OPENAI_API_KEY not found." && return 1; fi
 
 	local query="$*"
-	# WARN do not use "$prompt" as a variable in zsh, since it's a reserved keyword
+	# INFO do not use `$prompt`, since it's a reserved zsh variable
 	local the_prompt="The following request is concerned with shell scripting. If your response includes codeblocks, do add 'bash' as language label to it. Here is the request: $query"
 	# https://platform.openai.com/docs/api-reference/making-requests
 	curl "https://api.openai.com/v1/chat/completions" \
