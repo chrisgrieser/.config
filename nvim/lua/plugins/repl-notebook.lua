@@ -4,7 +4,9 @@ return {
 		keys = {
 			{ "<leader>it", vim.cmd.IronRepl, desc = "󱠤 Toggle REPL" },
 			{ "<leader>ir", vim.cmd.IronRestart, desc = "󱠤 Restart REPL" },
-			{ "<leader>ii", desc = "󱠤 REPL: Send Line" },
+			{ "<leader>ii", desc = "󱠤 Send Line" },
+			{ "<leader>ii", mode = "x", desc = "󱠤 Send Selection" },
+			{ "<leader>i#", desc = "󱠤 Send Operator" },
 		},
 		init = function()
 			local ok, whichKey = pcall(require, "which-key")
@@ -20,12 +22,13 @@ return {
 						typescript = { command = { "node" } },
 						python = { command = { "python3" } },
 						javascript = { command = { "osascript", "-i", "-l", "JavaScript" } },
-						applescript = { command = { "osascript", "-i" } },
+						applescript = { command = { "osascript", "-i", "-l", "AppleScript" } },
 					},
 				},
 				keymaps = {
 					send_line = "<leader>ii",
 					visual_send = "<leader>ii",
+					send_motion = "<leader>i#",
 				},
 			}
 		end,

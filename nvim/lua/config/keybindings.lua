@@ -31,7 +31,7 @@ keymap("o", "J", "2j")
 keymap("o", "K", "2k")
 
 -- paragraph-wise movement
-keymap({ "n", "x" }, "gk", "{gk") 
+keymap({ "n", "x" }, "gk", "{gk")
 keymap({ "n", "x" }, "gj", "}gj")
 
 -- Jump history
@@ -77,7 +77,10 @@ vim.on_key(function(char)
 	if searchConfirmed or (fn.mode() == "n") then
 		local searchKeyUsed = searchConfirmed or (vim.tbl_contains(searchKeys, fn.keytrans(char)))
 		if vim.opt.hlsearch:get() ~= searchKeyUsed then vim.opt.hlsearch = searchKeyUsed end
-		if searchKeyUsed or searchConfirmed then require("hlslens").start() end
+		if searchKeyUsed or searchConfirmed then
+			local ok, hlslens = pcall(require, "hlslens")
+			if ok then hlslens.start() end
+		end
 	end
 end, vim.api.nvim_create_namespace("auto_nohl"))
 
