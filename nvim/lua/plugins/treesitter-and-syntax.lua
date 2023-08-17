@@ -1,7 +1,9 @@
 local u = require("config.utils")
 
+
 local tsConfig = {
-	-- easier than keeping track of new parsers, especially the special ones (luap, luadocs)
+	-- easier than keeping track of new parsers, especially the special ones, which 
+	-- are not auto-installed (luap, luadocs)
 	ensure_installed = "all",
 
 	highlight = {

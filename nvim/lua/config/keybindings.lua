@@ -372,8 +372,8 @@ end
 
 -- INFO some LSP bindings done globally, so they can be used by null-ls as well
 -- stylua: ignore start
-keymap("n", "ge", function() vim.diagnostic.goto_next { float = false } end, { desc = "󰒕 Next Diagnostic" })
-keymap("n", "gE", function() vim.diagnostic.goto_prev { float = false } end, { desc = "󰒕 Previous Diagnostic" })
+keymap("n", "ge", function() vim.diagnostic.goto_next { float = true } end, { desc = "󰒕 Next Diagnostic" })
+keymap("n", "gE", function() vim.diagnostic.goto_prev { float = true } end, { desc = "󰒕 Previous Diagnostic" })
 -- stylua: ignore end
 
 keymap("n", "gs", function() cmd.Telescope("treesitter") end, { desc = " Document Symbols" })
