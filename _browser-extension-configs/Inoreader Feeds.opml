@@ -57,7 +57,6 @@
       <outline text="New stuff" title="New stuff" type="rss" xmlUrl="https://loup-vaillant.fr/updates.xml" htmlUrl="http://loup-vaillant.fr/"/>
       <outline text="Normal Mode" title="Normal Mode" type="rss" xmlUrl="https://normalmo.de/index.xml" htmlUrl="https://normalmo.de/"/>
       <outline text="nvim-cmp: Recent Wiki Updates" title="nvim-cmp: Recent Wiki Updates" type="rss" xmlUrl="https://github.com/hrsh7th/nvim-cmp/wiki.atom" htmlUrl="https://github.com/hrsh7th/nvim-cmp/wiki"/>
-      <outline text="nvim-treesitter: Recent Wiki Updates" title="nvim-treesitter: Recent Wiki Updates" type="rss" xmlUrl="https://github.com/nvim-treesitter/nvim-treesitter/wiki.atom" htmlUrl="https://github.com/nvim-treesitter/nvim-treesitter/wiki"/>
       <outline text="Obsidian Blog" title="Obsidian Blog" type="rss" xmlUrl="https://obsidian.md/feed.xml" htmlUrl="https://obsidian.md/"/>
       <outline text="Obsidian Changelog" title="Obsidian Changelog" type="rss" xmlUrl="https://obsidian.md/changelog.xml" htmlUrl="https://obsidian.md/"/>
       <outline text="Obsidian Observer - Medium" title="Obsidian Observer - Medium" type="rss" xmlUrl="https://medium.com/feed/obsidian-observer" htmlUrl="https://medium.com/obsidian-observer?source=rss----dc0a52745260---4"/>
@@ -69,7 +68,6 @@
       <outline text="Scripting OS X" title="Scripting OS X" type="rss" xmlUrl="https://scriptingosx.com/feed/" htmlUrl="https://scriptingosx.com/"/>
       <outline text="Stephan Ango" title="Stephan Ango" type="rss" xmlUrl="https://stephanango.com/feed.xml" htmlUrl="https://stephanango.com/"/>
       <outline text="Stratechery (Ben Thompson)" title="Stratechery (Ben Thompson)" type="rss" xmlUrl="https://stratechery.com/feed/" htmlUrl="https://stratechery.com/"/>
-      <outline text="The Eclectic Light Company" title="The Eclectic Light Company" type="rss" xmlUrl="https://eclecticlight.co/feed/" htmlUrl="https://eclecticlight.co/"/>
       <outline text="The Overflow – Stack Overflow Blog" title="The Overflow – Stack Overflow Blog" type="rss" xmlUrl="https://stackoverflow.blog/newsletter/feed/" htmlUrl="https://stackoverflow.blog/"/>
       <outline text="The Pragmatic Engineer" title="The Pragmatic Engineer" type="rss" xmlUrl="https://feeds.feedburner.com/ThePragmaticEngineer" htmlUrl="https://blog.pragmaticengineer.com/"/>
       <outline text="The Setup" title="The Setup" type="rss" xmlUrl="https://usesthis.com/feed.atom" htmlUrl="http://usesthis.com/"/>
