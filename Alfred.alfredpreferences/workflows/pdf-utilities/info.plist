@@ -9,18 +9,7 @@
 	<key>connections</key>
 	<dict>
 		<key>0E4A0733-E898-4FB7-BC62-446FBD10A76E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>44BAA3FF-5D2F-40FF-B764-1F2A06710EF4</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>20603C68-58B3-433A-AEE0-62CAF6C85E0A</key>
 		<array>
 			<dict>
@@ -110,8 +99,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>44BAA3FF-5D2F-40FF-B764-1F2A06710EF4</key>
-		<array/>
 		<key>4D63817E-E093-44ED-99F7-2762E817BB90</key>
 		<array>
 			<dict>
@@ -231,16 +218,6 @@
 		</array>
 		<key>960D6BB0-26F8-46E0-8A9C-2D5387E82C5D</key>
 		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>CC1BF79A-460C-4600-8A1E-78B05DC00FCE</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>0E4A0733-E898-4FB7-BC62-446FBD10A76E</string>
@@ -994,27 +971,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>⏳ running OCR...</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>CC1BF79A-460C-4600-8A1E-78B05DC00FCE</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -1059,6 +1015,30 @@
 			<string>698B1D06-326B-43D2-8ABB-DE676CE3661A</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
+{query}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/run-ocrmypdf.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>0E4A0733-E898-4FB7-BC62-446FBD10A76E</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1115,51 +1095,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
-{query}</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/run-ocrmypdf.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>0E4A0733-E898-4FB7-BC62-446FBD10A76E</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ OCR complete</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>44BAA3FF-5D2F-40FF-B764-1F2A06710EF4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).
@@ -1183,9 +1118,9 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>note</key>
 			<string>run ocrmypdf</string>
 			<key>xpos</key>
-			<real>245</real>
+			<real>410</real>
 			<key>ypos</key>
-			<real>815</real>
+			<real>680</real>
 		</dict>
 		<key>20603C68-58B3-433A-AEE0-62CAF6C85E0A</key>
 		<dict>
@@ -1239,15 +1174,6 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>ypos</key>
 			<real>135</real>
 		</dict>
-		<key>44BAA3FF-5D2F-40FF-B764-1F2A06710EF4</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>410</real>
-			<key>ypos</key>
-			<real>815</real>
-		</dict>
 		<key>4D63817E-E093-44ED-99F7-2762E817BB90</key>
 		<dict>
 			<key>colorindex</key>
@@ -1255,7 +1181,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>note</key>
 			<string>md → docx</string>
 			<key>xpos</key>
-			<real>560</real>
+			<real>555</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -1275,7 +1201,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>note</key>
 			<string>md → pdf</string>
 			<key>xpos</key>
-			<real>560</real>
+			<real>555</real>
 			<key>ypos</key>
 			<real>145</real>
 		</dict>
@@ -1428,15 +1354,6 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<real>35</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>CC1BF79A-460C-4600-8A1E-78B05DC00FCE</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>410</real>
-			<key>ypos</key>
-			<real>680</real>
 		</dict>
 		<key>DD9298C2-7174-4FD4-ADE0-9F77408B1B9E</key>
 		<dict>
