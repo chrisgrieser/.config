@@ -39,5 +39,5 @@ resource-path:
 
 # MARKDOWN-READER
 reader: markdown+lists_without_preceding_blankline+mark+wikilinks_title_after_pipe
-number-sections: true
+number-sections: false
 shift-heading-level-by: -1
