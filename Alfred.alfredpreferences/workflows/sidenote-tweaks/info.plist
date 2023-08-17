@@ -872,7 +872,7 @@ sketchybar --trigger update-sidenotes-count</string>
 				<key>queuedelayimmediatelyinitially</key>
 				<true/>
 				<key>queuedelaymode</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>queuemode</key>
 				<integer>2</integer>
 				<key>runningsubtext</key>

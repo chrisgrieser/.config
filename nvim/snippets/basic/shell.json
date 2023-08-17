@@ -116,7 +116,7 @@
 	},
 	"notify (msg)": {
 		"prefix": "notify (msg)",
-		"body": "osascript -e 'display notification \"\" with title \"${1:msg}\" sound name \"${2|Blow,Basso|}\"'"
+		"body": "osascript -e 'display notification \"\" with title \"${1:msg}\""
 	},
 	"[[ .. ]] && .. ": {
 		"prefix": "[[ .. ]] && .. ",
