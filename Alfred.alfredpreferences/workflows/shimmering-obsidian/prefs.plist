@@ -16,8 +16,6 @@
 	<true/>
 	<key>new_note_location</key>
 	<string>Knowledge Base</string>
-	<key>ocr_languages</key>
-	<string>eng+deu</string>
 	<key>open_after_appending</key>
 	<false/>
 	<key>scratchpad_append_prefix</key>
