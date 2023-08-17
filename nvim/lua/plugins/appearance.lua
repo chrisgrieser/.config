@@ -22,14 +22,28 @@ return {
 	},
 	{ -- when searching, search count is shown next to the cursor
 		"kevinhwang91/nvim-hlslens",
+		init = function()
+			vim.api.nvim_create_autocmd("ColorScheme", {
+				callback = function()
+					-- INFO HLSearch links to IncSearch, which is set from the
+					-- beginning, so linking to that
+					local reversed = u.getHighlightValue("IncSearch", "bg")
+					vim.api.nvim_set_hl(0, "HLSearchReversed", { fg = reversed })
+				end,
+			})
+		end,
 		opts = {
 			nearest_only = true,
 			-- format virtual text
 			override_lens = function(render, posList, nearest, idx, _)
 				local lnum, col = unpack(posList[idx])
-				local text = (" %d/%d "):format(idx, #posList)
-				local inc
-				local chunks = { { " ", "Ignore" }, { text, "HlSearchLensNear" } }
+				local text = ("%d/%d"):format(idx, #posList)
+				local chunks = {
+					{ " ", "Ignore" }, -- = padding
+					{ "", "HLSearchReversed" },
+					{ text, "HlSearchLensNear" },
+					{ "", "HLSearchReversed" },
+				}
 				render.setVirt(0, lnum - 1, col - 1, chunks, nearest)
 			end,
 		},
