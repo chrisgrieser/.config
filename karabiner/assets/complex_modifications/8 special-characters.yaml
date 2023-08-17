@@ -102,12 +102,6 @@ rules:
         from: { key_code: hyphen, modifiers: { mandatory: [option] } }
         conditions:
           - { type: input_source_if, input_sources: [language: ^de$] }
-          - type: frontmost_application_unless
-            bundle_identifiers:
-              - ^com\.tinyspeck\.slackmacgap$
-              - ^com\.microsoft\.Word$
-              - ^com\.apptorium\.SideNotes-paddle$
-              - ^net\.highlightsapp\.universal$
         to:
           - key_code: hyphen
       # ß to [
@@ -120,6 +114,7 @@ rules:
               - ^com\.tinyspeck\.slackmacgap$
               - ^com\.microsoft\.Word$
               - ^com\.apptorium\.SideNotes-paddle$
+              - ^net\.highlightsapp\.universal$
         to:
           - { select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ } }
           - { key_code: vk_none, hold_down_milliseconds: 20 }
