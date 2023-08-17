@@ -10,16 +10,6 @@ return {
 		opts = true,
 		dev = true,
 	},
-	{
-		"haringsrob/nvim_context_vt",
-		event = "VeryLazy",
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		opts = {
-			prefix = " 󱞷",
-			highlight = "NonText",
-			min_rows = 3,
-		},
-	},
 	{ -- when searching, search count is shown next to the cursor
 		"kevinhwang91/nvim-hlslens",
 		init = function()

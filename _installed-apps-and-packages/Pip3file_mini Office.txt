@@ -1,0 +1,6 @@
+chromaterm
+pdfannots
+pip
+setuptools
+six
+wheel

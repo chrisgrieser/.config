@@ -22,11 +22,11 @@ return {
 			require("nvim-autopairs").add_rules {
 				rule("<", ">", "lua"):with_pair(isNodeType("string")), -- keymaps
 				rule("<", ">", "vim"):with_pair(), -- keymaps
-				rule('\\"', '\\"', {"sh", "json"}):with_pair(), -- escaped double quotes
+				rule('\\"', '\\"', { "sh", "json" }):with_pair(), -- escaped double quotes
 				rule("*", "*", "markdown"):with_pair(), -- italics
 				rule("__", "__", "markdown"):with_pair(), -- bold
 				-- quicker template string
-				rule("$", "{}", {"javascript", "typescript", "json"})
+				rule("$", "{}", { "javascript", "typescript", "json" })
 					:with_pair(isNodeType("string"))
 					:set_end_pair_length(1), -- only move one char to the side
 			}
@@ -101,6 +101,19 @@ return {
 				end,
 			})
 		end,
+	},
+	{
+		"haringsrob/nvim_context_vt",
+		event = "VeryLazy",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		opts = {
+			prefix = " 󱞷",
+			highlight = "NonText",
+			min_rows = 6,
+			-- Disable display of virtual text below blocks for indentation based
+			-- languages like Python
+			disable_virtual_lines_ft = { "yaml" },
+		},
 	},
 	{ -- split-join lines
 		"Wansmer/treesj",

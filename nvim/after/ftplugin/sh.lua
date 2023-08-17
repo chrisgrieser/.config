@@ -36,8 +36,8 @@ keymap({ "n", "x" }, "<leader>t", sendToWezTerm, { desc = " Send to WezTerm",
 --------------------------------------------------------------------------------
 
 -- extra trailing chars
-keymap("n", "<leader>|", "mzA|<Esc>`z", { desc = " Append | to EoL", buffer = true })
-keymap("n", "<leader>\\", "mzA\\<Esc>`z", { desc = " Append \\ to EoL", buffer = true })
+keymap("n", "<leader>|", "mzA |<Esc>`z", { desc = " | to EoL", buffer = true })
+keymap("n", "<leader>\\", "mzA \\<Esc>`z", { desc = " \\ to EoL", buffer = true })
 
 --------------------------------------------------------------------------------
 
