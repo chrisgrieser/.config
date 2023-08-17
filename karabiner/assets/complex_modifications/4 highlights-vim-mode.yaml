@@ -32,12 +32,22 @@ anchors:
           text: ✏️ Highlights Insert Mode
 #───────────────────────────────────────────────────────────────────────────────
 rules:
-  - description: "✏️ Highlights Vim Mode: Triggers"
+  - description: "✏️ Highlights Vim Mode: Triggers/Toggles"
     manipulators:
       # Enter Insert Mode
       # INFO can't be done on left click, since that initially block dragging
       - type: basic
         from: { key_code: caps_lock }
+        to_if_alone:
+          - *enter-insert-mode
+          - *set-notice
+        to:
+          - { key_code: right_shift, modifiers: [control, option, command] }
+        conditions:
+          - *highlights-app
+          - *highlights-normal-mode
+      - type: basic
+        from: { key_code: i }
         to_if_alone:
           - *enter-insert-mode
           - *set-notice
