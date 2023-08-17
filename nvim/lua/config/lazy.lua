@@ -27,21 +27,13 @@ require("lazy").setup("plugins", {
 	},
 	checker = {
 		enabled = true, -- automatically check for plugin updates
-		notify = true,
-		frequency = 60 * 60 * 24 * 7, -- = 1 week
+		notify = false, -- done on my own to with minimum condition for less noise
+		frequency = 60 * 60 * 24, -- = 1 day
 	},
 	git = { timeout = 60 }, -- 1min timeout for tasks
 	diff = { cmd = "browser" }, -- view diffs with "d" in the browser
 	change_detection = { notify = false },
 	readme = { enabled = false },
-	custom_keys = {
-		["K"] = function(plugin)
-			u.normal("6k")
-        require("lazy.util").float_term({ "lazygit", "log" }, {
-          cwd = plugin.dir,
-        })
-      end,
-	},
 	performance = {
 		rtp = {
 			disabled_plugins = { -- disable unused builtin plugins from neovim
@@ -70,3 +62,13 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.defer_fn(function() vim.keymap.set("n", "K", "6k", { buffer = true }) end, 1)
 	end,
 })
+
+--------------------------------------------------------------------------------
+-- 5s after startup, notify if there are more update
+vim.defer_fn(function()
+	if not require("lazy.status").has_updates() then return end
+	local threshold = 10
+	local numberOfUpdates = require("lazy.status").updates()
+	if numberOfUpdates < threshold then return "" end
+	vim.notify(("󱧕 %s plugin updates"):format(numberOfUpdates))
+end, 5000)
