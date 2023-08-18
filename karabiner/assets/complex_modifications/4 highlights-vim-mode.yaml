@@ -325,3 +325,9 @@ rules:
         from: { key_code: z, modifiers: { mandatory: [shift] } }
         to: [{key_code: z, modifiers: [shift]}, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
+        #───────────────────────────────────────────────────────────────────────
+      - type: basic # hashtag #
+        from: { key_code: non_us_pound}
+        to: [{key_code: non_us_pound}, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+

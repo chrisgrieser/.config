@@ -21,10 +21,6 @@ return {
 			vim.g.matchup_matchparen_offscreen = {} -- empty = disables
 			vim.g.matchup_text_obj_enabled = 0
 
-			-- show surrounding matchups, basically sentiment.nvim
-			vim.g.matchup_matchparen_deferred = 1
-			vim.g.matchup_matchparen_hi_surround_always = 1
-
 			vim.keymap.set("n", "m", "<Plug>(matchup-%)", { desc = "Goto Matching Bracket" })
 		end,
 	},
