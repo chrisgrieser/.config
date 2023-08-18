@@ -177,19 +177,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>70DE99C8-6635-4C0A-A7CE-56B9B9F06359</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>BFBA3630-CF2C-447D-8B6D-EF6C09A728E6</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>84C07023-C7E9-4DAD-8EF8-0700B1CB05E3</key>
 		<array>
 			<dict>
@@ -299,19 +286,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>7A3622A0-DE0C-4DCE-92F3-C4ADD2279EBB</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>BFBA3630-CF2C-447D-8B6D-EF6C09A728E6</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>099DBF9C-A40D-460B-9ED7-C1E04C65E98B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1121,77 +1095,6 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/chat-pdf-summary.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>BFBA3630-CF2C-447D-8B6D-EF6C09A728E6</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>com.adobe.pdf</string>
-				</array>
-				<key>name</key>
-				<string>ChatPDF: Summary</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>70DE99C8-6635-4C0A-A7CE-56B9B9F06359</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>099DBF9C-A40D-460B-9ED7-C1E04C65E98B</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).
@@ -1208,15 +1111,6 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 - ocrmypdf</string>
 	<key>uidata</key>
 	<dict>
-		<key>099DBF9C-A40D-460B-9ED7-C1E04C65E98B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>375</real>
-			<key>ypos</key>
-			<real>760</real>
-		</dict>
 		<key>0E4A0733-E898-4FB7-BC62-446FBD10A76E</key>
 		<dict>
 			<key>colorindex</key>
@@ -1349,15 +1243,6 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>ypos</key>
 			<real>620</real>
 		</dict>
-		<key>70DE99C8-6635-4C0A-A7CE-56B9B9F06359</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>760</real>
-		</dict>
 		<key>73E6C367-5696-402A-936C-96472BFB71BE</key>
 		<dict>
 			<key>colorindex</key>
@@ -1469,15 +1354,6 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<real>35</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>BFBA3630-CF2C-447D-8B6D-EF6C09A728E6</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>205</real>
-			<key>ypos</key>
-			<real>760</real>
 		</dict>
 		<key>DD9298C2-7174-4FD4-ADE0-9F77408B1B9E</key>
 		<dict>

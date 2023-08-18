@@ -19,21 +19,12 @@ vim.opt_local.conceallevel = 2
 
 --------------------------------------------------------------------------------
 
--- Open in Obsidian
-keymap("n", "<D-5>", function()
-	local filepath = fn.expand("%:p")
-	local isInMainVault = vim.startswith(filepath, vim.env.VAULT_PATH)
-	if not isInMainVault then
-		vim.notify("Not in Obsidian vault", vim.log.levels.WARN)
-		return
-	end
-	-- assumes being on mac and the Obsidian-opener.app set as default app for markdown files
-	fn.system("open -a Obsidian", filepath)
-end, { desc = " Open in Obsidian", buffer = true })
-
 -- Build / Preview
-keymap("n", "<D-r>", "<Plug>MarkdownPreview", { desc = "  Preview", buffer = true })
-keymap("n", "<leader>r", "<Plug>MarkdownPreview", { desc = "  Preview", buffer = true })
+keymap("n", "<D-r>", "<Plug>MarkdownPreview", { desc = " Preview", buffer = true })
+keymap("n", "<localleader><localleader>", "<Plug>MarkdownPreview", { desc = " Preview", buffer = true })
+
+-- Format Table
+keymap("n", "<localleader>f", "vip:!pandoc -t commonmark_x<CR><CR>", { desc = "  Format Table under Cursor", buffer = true })
 
 -- stylua: ignore start
 -- link textobj
@@ -43,9 +34,6 @@ keymap({ "o", "x" }, "al", "<cmd>lua require('various-textobjs').mdlink(false)<C
 -- iE/aE: code block textobj
 keymap({ "o", "x" }, "iE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock(true)<CR>", { desc = "inner md code block textobj", buffer = true })
 keymap({ "o", "x" }, "aE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock(false)<CR>", { desc = "outer md code block textobj", buffer = true })
-
--- Format Table
-keymap("n", "<leader>q", "vip:!pandoc -t commonmark_x<CR><CR>", { desc = "  Format Table under Cursor", buffer = true })
 
 -- Heading jump to next/prev heading
 keymap({ "n", "x" }, "<C-j>", [[/^#\+ <CR><cmd>nohl<CR>]], { desc = " # Next Heading", buffer = true })

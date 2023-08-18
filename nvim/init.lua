@@ -21,6 +21,7 @@ end
 --------------------------------------------------------------------------------
 
 vim.g.mapleader = ","
+vim.g.maplocalleader = "ö"
 vim.loader.enable() -- TODO will be nvim default in later versions
 
 safeRequire("config.lazy")

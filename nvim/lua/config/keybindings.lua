@@ -116,7 +116,7 @@ keymap("n", "~", "~h", { desc = "Toggle Case (w/o moving)" })
 
 -- Word Flipper
 -- stylua: ignore
-keymap( "n", "ö", function() require("funcs.flipper").flipWord() end, { desc = "flip words / toggle casing" })
+keymap( "n", "Ö", function() require("funcs.flipper").flipWord() end, { desc = "flip words / toggle casing" })
 
 -- [O]pen new Scope
 keymap({ "n", "i" }, "<D-o>", function()
