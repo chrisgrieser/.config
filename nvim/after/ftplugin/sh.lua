@@ -23,18 +23,16 @@ local function sendToWezTerm()
 		done
 		sleep 0.2
 	]])
-	local command
 
+	local text
 	if fn.mode() == "n" then
-		local text = vim.api.nvim_get_current_line()
-		command = ("wezterm cli send-text --no-paste '%s\n'"):format(text)
-	elseif fn.mode() == "x" then
+		text = vim.api.nvim_get_current_line() .. "\n"
+	elseif fn.mode():find("[Vv]") then
 		u.normal('"zy')
-		local selectedText = fn.getreg("z"):gsub("\n$", "")
-		command = ("wezterm cli send-text '%s'"):format(selectedText)
+		text = fn.getreg("z"):gsub("\n$", "")
 	end
+	fn.system({"wezterm", "send-text", "--no-paste", text})
 
-	fn.system(command)
 end
 
 keymap({ "n", "x" }, "<localleader>t", sendToWezTerm, { desc = " Send to WezTerm", buffer = true })

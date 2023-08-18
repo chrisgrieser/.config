@@ -836,15 +836,24 @@ rules:
         to:
           - shell_command: |
               selectedFiles=$(osascript -e '
-                tell application "Finder" to set selectedFiles to (every item of (get selection))
-                set out to ""
-                repeat with theFile in selectedFiles
-                  set out to out & (POSIX path of (theFile as text)) & linefeed
-                end repeat
-                return out
+              	tell application "Finder" to set selectedFiles to (every item of (get selection))
+              	set out to ""
+              	repeat with theFile in selectedFiles
+              		set out to out & (POSIX path of (theFile as text)) & linefeed
+              	end repeat
+              	return out
               ')
               [[ -z "$selectedFiles" ]] && return 1
-              [[ -d "$selectedFiles" ]] && return 1
+
+              parent_dir=$(dirname "$(echo "$selectedFiles" | head -n1)")
+
+              echo "$selectedFiles" | while read -r item; do
+              	[[ ! -d "$item" ]] && continue
+              	find "$item" -mindepth 1 -print0 -not -type d | 
+              		xargs -0 -I {} mv "{}" "$parent_dir"
+              	rm -r "$item"
+              done
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/Volume Mount.aif" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # One-Char-Searches
       #─────────────────────────────────────────────────────────────────────────

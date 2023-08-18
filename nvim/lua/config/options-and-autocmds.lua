@@ -156,7 +156,7 @@ autocmd("BufReadPost", {
 			if bo.buftype == "nofile" then 
 				opt_local.list = false -- no list chars in special buffers
 			elseif bo.expandtab then
-				opt_local.listchars:append { tab = "↹ " }
+				opt_local.listchars:append { tab = "󰌒 " }
 				opt_local.listchars:append { lead = " " }
 			else
 				opt_local.listchars:append { tab = "  " }
