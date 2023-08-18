@@ -5,6 +5,12 @@ local u = require("config.utils")
 local abbr = vim.cmd.inoreabbrev
 --------------------------------------------------------------------------------
 
+-- TODO: explainshell Docker Image
+-- https://github.com/bash-lsp/bash-language-server/tree/main/vscode-client#configuration
+-- https://github.com/bash-lsp/bash-language-server/issues/180
+
+--------------------------------------------------------------------------------
+
 -- https://wezfurlong.org/wezterm/cli/cli/send-text
 local function sendToWezTerm()
 	fn.system([[
@@ -31,15 +37,11 @@ local function sendToWezTerm()
 	fn.system(command)
 end
 
-keymap({ "n", "x" }, "<leader>t", sendToWezTerm, { desc = " Send to WezTerm", buffer = true })
-
---------------------------------------------------------------------------------
+keymap({ "n", "x" }, "<localleader>t", sendToWezTerm, { desc = " Send to WezTerm", buffer = true })
 
 -- extra trailing chars
 keymap("n", "<leader>|", "mzA |<Esc>`z", { desc = " | to EoL", buffer = true })
 keymap("n", "<leader>\\", "mzA \\<Esc>`z", { desc = " \\ to EoL", buffer = true })
-
---------------------------------------------------------------------------------
 
 -- habit from writing too much js or lua
 abbr("<buffer> // #")
@@ -56,7 +58,7 @@ keymap({ "o", "x" }, "a|", "<cmd>lua require('various-textobjs').shellPipe(false
 --------------------------------------------------------------------------------
 
 -- Reload Sketchybar
-keymap("n", "<leader>r", function()
+keymap("n", "<localleader><localleader>", function()
 	vim.cmd("silent update")
 	if expand("%:p:h"):find("sketchybar") then
 		fn.system([[brew services restart sketchybar]])

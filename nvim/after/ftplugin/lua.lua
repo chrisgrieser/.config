@@ -13,7 +13,7 @@ abbr("<buffer> const local")
 --------------------------------------------------------------------------------
 
 -- Build / Reload Config
-keymap("n", "<leader>r", function()
+keymap("n", "<localleader><localleader>", function()
 	cmd("silent update")
 	local pwd = vim.loop.cwd() or ""
 	if pwd:find("nvim") then
@@ -28,7 +28,7 @@ keymap("n", "<leader>r", function()
 	else
 		vim.notify("Neither in nvim nor in hammerspoon directory.", u.warn)
 	end
-end, { buffer = true, desc = " Reload" })
+end, { buffer = true, desc = " Reload" })
 
 --------------------------------------------------------------------------------
 -- INSPECT NVIM OR HAMMERSPOON OBJECTS

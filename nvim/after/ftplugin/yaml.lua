@@ -9,7 +9,7 @@ vim.bo.expandtab = true
 --------------------------------------------------------------------------------
 
 -- convert to json
-vim.keymap.set("n", "<leader>j", function()
+vim.keymap.set("n", "<localleader>j", function()
 	vim.cmd("silent update")
 	local filename = vim.fn.expand("%")
 	local nameAsJson = vim.fn.expand("%:r") .. ".json"

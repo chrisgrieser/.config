@@ -159,10 +159,51 @@ return {
 			})
 		end,
 	},
-	{
+	{ -- which-key
 		"folke/which-key.nvim",
-		event = "VimEnter",
-		init = function()
+		event = "VeryLazy",
+		config = function()
+			require("which-key").setup {
+				triggers_blacklist = {
+					-- FIX very weird bug where insert mode undo points (<C-g>u),
+					-- as well as vim-matchup's `<C-G>%` binding insert extra `1`s
+					-- after wrapping to the next line in insert mode. The `G` needs
+					-- to be d to affect the right mapping.
+					i = { "<C-G>" },
+				},
+				plugins = {
+					presets = { motions = false, g = false, z = false },
+					spelling = { enabled = false },
+				},
+				-- INFO to ignore a mapping use the label "which_key_ignore", not the "hidden" setting here
+				hidden = { "<Plug>", "^:lua ", "<cmd>" },
+				key_labels = {
+					["<CR>"] = "↵ ",
+					["<BS>"] = "⌫",
+					["<space>"] = "󱁐",
+					["<Tab>"] = "↹ ",
+					["<Esc>"] = "⎋",
+				},
+				window = {
+					-- only horizontal border to save space
+					border = { "", require("config.utils").borderHorizontal, "", "" },
+					padding = { 0, 0, 0, 0 },
+					margin = { 0, 0, 0, 0 },
+				},
+				popup_mappings = {
+					scroll_down = "<PageDown>",
+					scroll_up = "<PageUp>",
+				},
+				layout = { -- of the columns
+					height = { min = 5, max = 15 },
+					width = { min = 31, max = 34 },
+					spacing = 1,
+					align = "center",
+				},
+			}
+
+			-----------------------------------------------------------------------
+
 			-- leader prefixes normal mode
 			require("which-key").register({
 				f = { name = " 󱗘 Refactor" },
@@ -180,46 +221,11 @@ return {
 				g = { name = " 󰊢 Git" },
 			}, { prefix = "<leader>", mode = "x" })
 
+			-- needed so localleader prefixes work with whichkey
+			require("which-key").register { ["<localleader>"] = { name = "<local leader>" } }
+
 			-- set by some plugins and  obscures whichkey
 			vim.keymap.set("n", "<LeftMouse>", "<Nop>")
 		end,
-		opts = {
-			triggers_blacklist = {
-				-- FIX very weird bug where insert mode undo points (<C-g>u),
-				-- as well as vim-matchup's `<C-G>%` binding insert extra `1`s
-				-- after wrapping to the next line in insert mode. The `G` needs
-				-- to be d to affect the right mapping.
-				i = { "<C-G>" },
-			},
-			plugins = {
-				presets = { motions = false, g = false, z = false },
-				spelling = { enabled = false },
-			},
-			-- INFO to ignore a mapping use the label "which_key_ignore", not the "hidden" setting here
-			hidden = { "<Plug>", "^:lua ", "<cmd>" },
-			key_labels = {
-				["<CR>"] = "↵ ",
-				["<BS>"] = "⌫",
-				["<space>"] = "󱁐",
-				["<Tab>"] = "↹ ",
-				["<Esc>"] = "⎋",
-			},
-			window = {
-				-- only horizontal border to save space
-				border = { "", require("config.utils").borderHorizontal, "", "" },
-				padding = { 0, 0, 0, 0 },
-				margin = { 0, 0, 0, 0 },
-			},
-			popup_mappings = {
-				scroll_down = "<PageDown>",
-				scroll_up = "<PageUp>",
-			},
-			layout = { -- of the columns
-				height = { min = 5, max = 15 },
-				width = { min = 31, max = 34 },
-				spacing = 1,
-				align = "center",
-			},
-		},
 	},
 }
