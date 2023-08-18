@@ -4,6 +4,14 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
+	{
+		"xiyaowong/virtcolumn.nvim",
+		event = "VeryLazy",
+		init = function()
+			vim.g.virtcolumn_char = '⎸' -- char to display the line
+			vim.g.virtcolumn_priority = 10 -- priority of extmark
+		end,
+	},
 	{ -- when searching, search count is shown next to the cursor
 		"kevinhwang91/nvim-hlslens",
 		init = function()

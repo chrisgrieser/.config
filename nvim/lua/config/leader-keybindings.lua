@@ -24,8 +24,6 @@ keymap("n", "<leader>ph", require("lazy").home, { desc = " Lazy Overview" })
 keymap("n", "<leader>pi", require("lazy").install, { desc = " Lazy Install" })
 
 keymap("n", "<leader>pm", cmd.Mason, { desc = " Mason Overview" })
--- stylua: ignore
-keymap("n", "<leader>pt", cmd.TSUpdate, { desc = " Treesitter Update" })
 
 -- Theme Picker
 -- stylua: ignore

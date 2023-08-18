@@ -125,19 +125,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>89F35AB8-AC54-4BB2-B884-9B206671D5AE</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>802369B2-358A-46C9-9516-940B8E3E7940</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>CD40AB53-70F2-460D-BF34-1DF77F46FB38</key>
 		<array>
 			<dict>
@@ -490,25 +477,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsmulti</key>
-				<integer>1</integer>
-				<key>filetypes</key>
-				<array>
-					<string>com.apple.application-bundle</string>
-				</array>
-				<key>name</key>
-				<string>Uninstall with AppCleaner</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>89F35AB8-AC54-4BB2-B884-9B206671D5AE</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>openwith</key>
 				<string>/System/Volumes/Data/Applications/AppCleaner.app</string>
 				<key>sourcefile</key>
@@ -714,15 +682,6 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<integer>1</integer>
 			<key>xpos</key>
 			<real>370</real>
-			<key>ypos</key>
-			<real>665</real>
-		</dict>
-		<key>89F35AB8-AC54-4BB2-B884-9B206671D5AE</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>xpos</key>
-			<real>30</real>
 			<key>ypos</key>
 			<real>665</real>
 		</dict>
