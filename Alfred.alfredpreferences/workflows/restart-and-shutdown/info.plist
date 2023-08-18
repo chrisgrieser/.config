@@ -411,6 +411,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argument</key>
+				<string>svim</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>8EE81B67-A488-4981-8275-68B5BF497600</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -476,23 +493,6 @@ fi</string>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>C8BAA286-8178-4777-B3D8-B9958B57D2DD</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>svim</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>8EE81B67-A488-4981-8275-68B5BF497600</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -669,6 +669,27 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>espanso restart</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>❗Restart Espanso</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>B676CE46-BEC5-4201-9170-768499351B3D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alignment</key>
 				<integer>0</integer>
 				<key>backgroundcolor</key>
@@ -699,27 +720,6 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<string>A4A07123-BCBD-4104-9258-2B8F6F7B60EE</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>espanso restart</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>❗Restart Espanso</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>B676CE46-BEC5-4201-9170-768499351B3D</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -862,9 +862,9 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>900</real>
+			<real>750</real>
 			<key>ypos</key>
-			<real>515</real>
+			<real>510</real>
 		</dict>
 		<key>29260450-9968-4FA4-89C5-9D47EDA72C72</key>
 		<dict>
@@ -889,9 +889,9 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>735</real>
+			<real>605</real>
 			<key>ypos</key>
-			<real>485</real>
+			<real>480</real>
 		</dict>
 		<key>6594A058-1046-48E9-82E3-FE0574D679D5</key>
 		<dict>
@@ -918,36 +918,36 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>900</real>
+			<real>750</real>
 			<key>ypos</key>
-			<real>60</real>
+			<real>55</real>
 		</dict>
 		<key>8574A104-BD32-4D6F-992A-3AAD422C1665</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>735</real>
+			<real>605</real>
 			<key>ypos</key>
-			<real>30</real>
+			<real>25</real>
 		</dict>
 		<key>85AAD0B0-CB42-4F82-B1E4-232C79E46F04</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>735</real>
+			<real>605</real>
 			<key>ypos</key>
-			<real>250</real>
+			<real>245</real>
 		</dict>
 		<key>8EE81B67-A488-4981-8275-68B5BF497600</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>900</real>
+			<real>750</real>
 			<key>ypos</key>
-			<real>170</real>
+			<real>165</real>
 		</dict>
 		<key>96BEB152-706D-407E-882B-113E7E4821F5</key>
 		<dict>
@@ -974,18 +974,18 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>735</real>
+			<real>605</real>
 			<key>ypos</key>
-			<real>365</real>
+			<real>360</real>
 		</dict>
 		<key>BE446117-D29C-4B5C-BE3A-2AA51D8611CF</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>900</real>
+			<real>750</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>275</real>
 		</dict>
 		<key>BEBB5348-0298-4CF9-BD79-F074521E6E21</key>
 		<dict>
@@ -1012,9 +1012,9 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>900</real>
+			<real>750</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>390</real>
 		</dict>
 		<key>C8BAA286-8178-4777-B3D8-B9958B57D2DD</key>
 		<dict>
@@ -1043,9 +1043,9 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>note</key>
 			<string>restart</string>
 			<key>xpos</key>
-			<real>1065</real>
+			<real>850</real>
 			<key>ypos</key>
-			<real>250</real>
+			<real>245</real>
 		</dict>
 		<key>DE7F6025-CE45-4501-953B-1EE1F498066D</key>
 		<dict>
@@ -1061,18 +1061,18 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>735</real>
+			<real>605</real>
 			<key>ypos</key>
-			<real>140</real>
+			<real>135</real>
 		</dict>
 		<key>FC350FC9-C6D2-45FA-BC34-7B415C787DE3</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>1225</real>
+			<real>1010</real>
 			<key>ypos</key>
-			<real>250</real>
+			<real>245</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
