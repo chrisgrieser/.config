@@ -43,7 +43,8 @@ return {
 						local lines = table.concat(content.lines, "\n")
 						local shellCmd = cmds[ft] .. " '" .. lines:gsub("'", "\\'") .. "'"
 						local evaluatedOut = vim.fn.system(shellCmd):gsub("\n$", "")
-						return evaluatedOut
+						vim.notify(evaluatedOut)
+						return lines -- to not modify original lines
 					end
 
 					-- DOCS https://github.com/echasnovski/mini.operators/blob/main/doc/mini-operators.txt#L214
@@ -63,14 +64,27 @@ return {
 			{ "sX", "sx$", desc = "󰅪 Exchange to EoL", remap = true },
 			{ "sY", "sy$", desc = "󰅪 Sort to EoL", remap = true },
 		},
-		opts = {
-			replace = { prefix = "s", reindent_linewise = true },
-			multiply = { prefix = "w" },
-			exchange = { prefix = "sx", reindent_linewise = true },
-			sort = { prefix = "sy" },
-			-- INFO use vim.b.minioperators_config to set language-specific eval funcs
-			evaluate = { prefix = "#" },
-		},
+		config = function()
+			local MiniOperators = require("mini.operators")
+			MiniOperators.setup {
+				replace = { prefix = "s", reindent_linewise = true },
+				multiply = { prefix = "w" },
+				exchange = { prefix = "sx", reindent_linewise = true },
+				sort = { prefix = "sy" },
+				-- INFO use vim.b.minioperators_config to set language-specific eval funcs
+				evaluate = {
+					prefix = "#",
+					func = function(content)
+						-- https://github.com/echasnovski/mini.nvim/issues/439#issuecomment-1683665986
+						-- Currently needed as `content` is modified, which it shouldn't
+						local input_lines = vim.deepcopy(content.lines)
+						local output = MiniOperators.default_evaluate_func(content)
+						vim.notify(table.concat(output, "\n"))
+						return input_lines
+					end,
+				},
+			}
+		end,
 	},
 	{ -- surround
 		"kylechui/nvim-surround",
