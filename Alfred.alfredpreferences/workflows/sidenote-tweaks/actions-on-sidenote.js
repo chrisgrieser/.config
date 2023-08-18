@@ -28,14 +28,18 @@ const exportFolder = $.getenv("export_folder").replace(/^~/, app.pathTo("home fo
 function getNoteObj(noteId) {
 	const sidenotes = Application("SideNotes");
 	const folders = sidenotes.folders;
+	let noteObj;
 	for (let i = 0; i < folders.length; i++) {
 		const notesInFolder = folders[i].notes;
 		for (let j = 0; j < notesInFolder.length; j++) {
 			const note = notesInFolder[j];
-			if (note.id() === noteId) return note;
+			if (note.id() === noteId) {
+				noteObj = note;
+				break;
+			}
 		}
 	}
-	return false;
+	return noteObj;
 }
 
 function closeSideNotes() {
@@ -46,8 +50,8 @@ function closeSideNotes() {
 
 /**
  * Delete Note, but keep copy in archive folder instead of irreversibly removing it
- * @param {{safeTitle: any;text: () => string;delete: () => void;}} noteObj
  * @param {string} safeTitle
+ * @param {SideNotesNote} noteObj
  */
 function archiveNote(noteObj, safeTitle) {
 	const content = noteObj.text().trim();
@@ -102,9 +106,13 @@ function run(argv) {
 
 	if (doArchive) archiveNote(noteObj, safeTitle);
 
-	if (doCopy) app.setTheClipboardTo(content);
+	if (doCopy) {
+		app.setTheClipboardTo(content);
+		if (id === "current") closeSideNotes();
+	}
 
 	if (doExport) {
+		if (id === "current") closeSideNotes();
 		// ensure line breaks before headings
 		// (sometimes skipped since SideNotes UI makes it not apparent)
 		const exportContent = content.replace(/\n+(?=#+ )/g, "\n\n");
@@ -114,7 +122,6 @@ function run(argv) {
 		app.doShellScript(`open -R "${exportPath}"`);
 	}
 
-	if (doCopy && id === "current") closeSideNotes();
 
 	// returns are used for the notification
 	if (doArchive && doOpenUrl) return "🔗 Opened & Archived";

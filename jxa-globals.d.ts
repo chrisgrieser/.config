@@ -39,6 +39,7 @@ declare class SideNotesNote {
 	title(): string;
 	delete(): void;
 	text(): string;
+	id(): string;
 }
 
 declare class finderItem {
@@ -142,7 +143,7 @@ declare const Application: {
 		open(noteOrFolder: SideNotesNote | SideNotesFolder): void;
 		folders: {
 			byName(folderName: string): SideNotesFolder;
-		};
+		}&SideNotesFolder[];
 	};
 	(name: "Alfred" | "com.runningwithcrayons.Alfred"): macAppObj & {
 		setConfiguration(envVar: string, options: Object): void;

@@ -109,7 +109,7 @@ return {
 		opts = {
 			prefix = " 󱞷",
 			highlight = "NonText",
-			min_rows = 6,
+			min_rows = 8,
 			-- Disable display of virtual text below blocks for indentation based
 			-- languages like Python
 			disable_virtual_lines_ft = { "yaml" },
