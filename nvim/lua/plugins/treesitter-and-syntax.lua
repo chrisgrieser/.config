@@ -80,13 +80,7 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		event = "VeryLazy",
-		build = function()
-			-- build later, to ensure update went through correctly
-			vim.defer_fn(
-				function() require("nvim-treesitter.install").update { with_sync = true } end,
-				5000
-			)
-		end,
+		build = ":TSUpdate",
 		main = "nvim-treesitter.configs",
 		opts = tsConfig,
 		init = function()
