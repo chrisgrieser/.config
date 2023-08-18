@@ -13,10 +13,6 @@ sudo -v # ask for permissions upfront
 dns_address_1="1.1.1.1"
 dns_address_2="1.0.0.1"
 
-# Google
-# dns_address_1="8.8.8.8"
-# dns_address_2="8.8.4.4"
-
 networksetup -listallnetworkservices | # list all
 	tail -n +2 | # skip info text
 	tr -d "*" | # remove "*" markings disabled services
@@ -92,8 +88,8 @@ killall Finder
 # mouse speed: 3 = max speed from System Preferences
 # https://mac-os-key-repeat.vercel.app/
 defaults write -g com.apple.mouse.scaling 4.0
-defaults write -g InitialKeyRepeat -int 13 # normal minimum: 15 (225ms)
-defaults write -g KeyRepeat -int 2         # normal minimum: 2 (30ms)
+defaults write -g InitialKeyRepeat -int 10 # normal minimum: 15 (225ms)
+defaults write -g KeyRepeat -int 1         # normal minimum: 2 (30ms)
 # Disable press-and-hold for keys in favor of key repeat
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
