@@ -15,7 +15,16 @@ local tsConfig = {
 	--------------------------------------------------------------------------
 	-- TREESITTER PLUGINS
 
-	textobjects = { -- textobj plugin
+	textobjects = {
+		lsp_interop = {
+			enable = true,
+			border = u.borderStyle,
+			floating_preview_opts = {},
+			peek_definition_code = {
+				["<leader>H"] = { query = "@function.outer", desc = "󰒕 Peek Definition (outer function)" },
+			},
+		},
+
 		move = { -- move to next comment / function
 			enable = true,
 			set_jumps = true,
