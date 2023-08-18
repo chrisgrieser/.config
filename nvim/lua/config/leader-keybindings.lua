@@ -165,18 +165,19 @@ keymap("n", "<leader>g?", "<cmd>Gitsigns blame_line<CR>", { desc = "󰊢 Blame L
 
 -- Telescope
 -- stylua: ignore start
-keymap("n", "<leader>gs", function() cmd.Telescope("git_status") end, { desc = "󰊢  Status" })
-keymap("n", "<leader>gl", function() cmd.Telescope("git_commits") end, { desc = "󰊢  Log" })
-keymap("n", "<leader>gL", function() cmd.Telescope("git_bcommits") end, { desc = "󰊢  Log (Buffer)" })
-keymap("n", "<leader>gb", function() cmd.Telescope("git_branches") end, { desc = "󰊢  Branches" })
+keymap("n", "<leader>gs", function() cmd.Telescope("git_status") end, { desc = " Status" })
+keymap("n", "<leader>gl", function() cmd.Telescope("git_commits") end, { desc = " Log" })
+keymap("n", "<leader>gL", function() cmd.Telescope("git_bcommits") end, { desc = " Log (Buffer)" })
+keymap("n", "<leader>gb", function() cmd.Telescope("git_branches") end, { desc = " Branches" })
 
 -- My utils
-keymap({ "n", "x" }, "<leader>gu", function () require("funcs.git-utils").githubUrl() end, { desc = "󰊢 GitHub Link" })
 keymap("n", "<leader>gc", function() require("funcs.git-utils").commit() end, { desc = "󰊢 Commit" })
 keymap("n", "<leader>gg", function() require("funcs.git-utils").addCommitPush() end, { desc = "󰊢 Add-Commit-Push" })
 keymap("n", "<leader>gm", function() require("funcs.git-utils").amendNoEditPushForce() end, { desc = "󰊢 Amend-No-Edit & Force Push" })
 keymap("n", "<leader>gM", function() require("funcs.git-utils").amendAndPushForce() end, { desc = "󰊢 Amend & Force Push" })
+keymap({ "n", "x" }, "<leader>gu", function () require("funcs.git-utils").githubUrl() end, { desc = " GitHub Link" })
 
+-- Octo
 keymap("n", "<leader>gi", function() cmd.Octo({"issue", "list"}) end, { desc = " Open Issues" })
 keymap("n", "<leader>gI", function() cmd.Octo({"issue", "list", "states=CLOSED"}) end, { desc = " Closed Issues" })
 keymap("n", "<leader>gp", function() cmd.Octo({"pr", "list"}) end, { desc = " Open PRs" })

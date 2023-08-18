@@ -97,13 +97,6 @@ rules:
           - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
       #─────────────────────────────────────────────────────────────────────────────
       # ⚒️ ß´ → [] (+ German to US Layout), ⌥+ß → ß
-      # ⌥ß → ß
-      - type: basic
-        from: { key_code: hyphen, modifiers: { mandatory: [option] } }
-        conditions:
-          - { type: input_source_if, input_sources: [language: ^de$] }
-        to:
-          - key_code: hyphen
       # ß to [
       - type: basic
         from: { key_code: hyphen }
@@ -115,12 +108,20 @@ rules:
               - ^com\.microsoft\.Word$
               - ^com\.apptorium\.SideNotes-paddle$
               - ^net\.highlightsapp\.universal$
+              - ^com\.mimestream\.Mimestream$
         to:
           - { select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ } }
           - { key_code: vk_none, hold_down_milliseconds: 20 }
           - key_code: open_bracket
         to_after_key_up:
           - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
+      # ⌥ß → ß
+      - type: basic
+        from: { key_code: hyphen, modifiers: { mandatory: [option] } }
+        conditions:
+          - { type: input_source_if, input_sources: [language: ^de$] }
+        to:
+          - key_code: hyphen
 
       # forward tick to ]
       - type: basic
