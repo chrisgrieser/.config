@@ -116,7 +116,7 @@
 	},
 	"notify (msg)": {
 		"prefix": "notify (msg)",
-		"body": "osascript -e 'display notification \"\" with title \"${1:msg}\""
+		"body": "osascript -e 'display notification \"\" with title \"${1:msg}\"'"
 	},
 	"[[ .. ]] && .. ": {
 		"prefix": "[[ .. ]] && .. ",

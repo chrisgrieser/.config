@@ -51,7 +51,7 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>Get Summaries of your PDFs via ChatPDF</string>
+	<string>Get summaries of your PDFs via ChatPDF</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -180,7 +180,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>105</real>
+			<real>40</real>
 		</dict>
 		<key>5CC96E33-CF43-44D2-8FC0-3EB4D7101FFD</key>
 		<dict>
@@ -189,7 +189,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>235</real>
+			<real>170</real>
 		</dict>
 		<key>AFC82776-97B5-46CE-9205-DF67E1780996</key>
 		<dict>
@@ -198,7 +198,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>105</real>
+			<real>40</real>
 		</dict>
 		<key>D361B88F-34F2-4AA4-8855-EF65D1040682</key>
 		<dict>
@@ -207,7 +207,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>375</real>
 			<key>ypos</key>
-			<real>105</real>
+			<real>40</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -220,39 +220,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>
-				<false/>
+				<true/>
 				<key>trim</key>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Leave empty, and the workflow will get the API key from your .zshenv file.</string>
+			<string>Advanced: enter ".zshenv" to use an api key exported as "CHATPDF_API_KEY" in your ".zshenv".</string>
 			<key>label</key>
 			<string>ChatPDF API Key</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>CHATPDF_API_KEY</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>Summarize the PDF in 5 bullet points. Ground your summary in the facts of the paper.</string>
-				<key>required</key>
-				<true/>
-				<key>trim</key>
-				<true/>
-				<key>verticalsize</key>
-				<integer>3</integer>
-			</dict>
-			<key>description</key>
-			<string></string>
-			<key>label</key>
-			<string>Prompt</string>
-			<key>type</key>
-			<string>textarea</string>
-			<key>variable</key>
-			<string>the_prompt</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -303,13 +282,34 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<string>Save as file</string>
 			</dict>
 			<key>description</key>
-			<string>The file will be saved in the same directory as the input file.</string>
+			<string>The file will be saved in the same directory as the input PDF.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>
 			<string>save_as_file</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>Summarize the PDF in 5 bullet points. Ground your summary in the facts of the paper.</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+				<key>verticalsize</key>
+				<integer>9</integer>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Prompt</string>
+			<key>type</key>
+			<string>textarea</string>
+			<key>variable</key>
+			<string>the_prompt</string>
 		</dict>
 	</array>
 	<key>version</key>

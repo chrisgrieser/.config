@@ -3,12 +3,6 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 # GUARDS
-if [[ ! -f "$HOME/.zshenv" && -z "$CHATPDF_API_KEY" ]]; then
-	echo -n ".zshenv does not exist, and no ChatPDF API key has been provided. 
-	One of the two is required for this workflow to work."
-	return 1
-fi
-
 file_path="$1"
 if [[ ! -f "$file_path" ]]; then
 	echo "No file selected."
@@ -21,13 +15,11 @@ elif [[ ! "$file_path" =~ \.pdf$ ]]; then
 	return 1
 fi
 
-if [[ -z "$CHATPDF_API_KEY" ]]; then
+if [[ "$CHATPDF_API_KEY" == ".zshenv" ]]; then
 	# shellcheck disable=1091
 	source "$HOME/.zshenv"
-	api_key="$CHATPDF_API_KEY"
-	if [[ -z "$api_key" ]]; then
-		echo -n ".zshenv does not exist, and no ChatPDF API key has been provided. 
-	One of the two is required for this workflow to work."
+	if [[ -z "$CHATPDF_API_KEY" ]]; then
+		echo -n "There is no ChatPDF API key in the .zshenv"
 		return 1
 	fi
 fi
@@ -39,15 +31,18 @@ fi
 osascript -e 'display notification "" with title "🔼 Uploading pdf…"'
 
 sourceId=$(curl -X POST "https://api.chatpdf.com/v1/sources/add-file" \
-	-H "x-api-key: $api_key" \
+	-H "x-api-key: $CHATPDF_API_KEY" \
 	-F "file=@$file_path" |
 	cut -d'"' -f4)
 
 osascript -e 'display notification "" with title "🤖 Requesting Summary…"'
 
+# make prompt safe for JSON
+the_prompt="$(echo -n "$the_prompt" | tr -d '\n' | sed 's/"/\\"/g')"
+
 # INFO do not use `$prompt`, since it's a reserved zsh variable
 content=$(curl -X POST "https://api.chatpdf.com/v1/chats/message" \
-	-H "x-api-key: $api_key" \
+	-H "x-api-key: $CHATPDF_API_KEY" \
 	-H "Content-Type: application/json" \
 	-d "{\"sourceId\": \"$sourceId\", \"messages\": [{\"role\": \"user\", \"content\": \"$the_prompt\"}]}" |
 	cut -d'"' -f4)
@@ -58,8 +53,18 @@ content=$(curl -X POST "https://api.chatpdf.com/v1/chats/message" \
 if [[ "$save_as_file" == "1" ]]; then
 	output_file="${file_path%.*}.md"
 	echo "$content" >"$output_file"
-elif [[ "$copy_to_clipboard" == "1" ]]; then
+	open -R "$output_file"
+fi
+
+if [[ "$copy_to_clipboard" == "1" ]]; then
 	echo -n "$content" | pbcopy
-elif [[ "$alfred_large_type" == "1" ]]; then
+	# if *only* clipboard is used as output method, there is no implicit indication
+	# that we are done, so sending an notification
+	if [[ "$alfred_large_type" != "1" && "$save_as_file" != "1" ]]; then
+		osascript -e 'display notification "" with title "📋 Copied to clipboard."'
+	fi
+fi
+
+if [[ "$alfred_large_type" == "1" ]]; then
 	echo -n "$content"
 fi
