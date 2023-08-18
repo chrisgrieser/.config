@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>alfred_large_type</key>
+	<true/>
+	<key>copy_to_clipboard</key>
+	<true/>
 	<key>the_prompt</key>
 	<string>Summarize the pdf in 10 bullet points. Ground your summary in the facts of the paper, and reference specific pages in the paper.</string>
 </dict>
