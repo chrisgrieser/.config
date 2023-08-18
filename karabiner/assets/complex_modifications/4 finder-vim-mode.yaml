@@ -857,9 +857,11 @@ rules:
 
               echo "$selectedFiles" | while read -r item; do
               	[[ ! -d "$item" ]] && continue
+                # `mv -n` ensures no file is overwritten, and `rmdir` ensures
+                # only empty directories are removed
               	find "$item" -mindepth 1 -print0 -not -type d | 
-              		xargs -0 -I {} mv "{}" "$parent_dir"
-              	mv "$item" "$HOME/.Trash"
+              		xargs -0 -I {} mv -n "{}" "$parent_dir"
+              	find "$item" -print0 -type d | xargs -0 rmdir
               done
 
               current_vol=$(osascript -e 'output volume of (get volume settings)')
