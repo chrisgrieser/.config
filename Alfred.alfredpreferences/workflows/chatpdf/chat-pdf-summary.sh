@@ -1,18 +1,36 @@
 #!/usr/bin/env zsh
 # shellcheck disable=2154 # alfred vars
+#───────────────────────────────────────────────────────────────────────────────
 
+# GUARDS
 if [[ ! -f "$HOME/.zshenv" && -z "$CHATPDF_API_KEY" ]]; then
 	echo -n ".zshenv does not exist, and no ChatPDF API key has been provided. 
 	One of the two is required for this workflow to work."
 	return 1
-elif [[ -z "$CHATPDF_API_KEY" ]]; then
-	# shellcheck disable=1091
-	source "$HOME/.zshenv" 
-	api_key="$CHATPDF_API_KEY"
 fi
 
 file_path="$1"
-the_prompt="Summarize the pdf in 10 bullet points. Ground your summary in the facts of the paper."
+if [[ ! -f "$file_path" ]]; then
+	echo "No file selected."
+	return 1
+elif [[ $# -gt 1 ]]; then
+	echo "Only one file can be processed at a time."
+	return 1
+elif [[ ! "$file_path" =~ \.pdf$ ]]; then
+	echo "Selected file not a PDF."
+	return 1
+fi
+
+if [[ -z "$CHATPDF_API_KEY" ]]; then
+	# shellcheck disable=1091
+	source "$HOME/.zshenv"
+	api_key="$CHATPDF_API_KEY"
+	if [[ -z "$api_key" ]]; then
+		echo -n ".zshenv does not exist, and no ChatPDF API key has been provided. 
+	One of the two is required for this workflow to work."
+		return 1
+	fi
+fi
 
 #───────────────────────────────────────────────────────────────────────────────
 # chatpdf API request
@@ -39,7 +57,7 @@ content=$(curl -X POST "https://api.chatpdf.com/v1/chats/message" \
 
 if [[ "$save_as_file" == "1" ]]; then
 	output_file="${file_path%.*}.md"
-	echo "$content" > "$output_file"
+	echo "$content" >"$output_file"
 elif [[ "$copy_to_clipboard" == "1" ]]; then
 	echo -n "$content" | pbcopy
 elif [[ "$alfred_large_type" == "1" ]]; then
