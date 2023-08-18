@@ -5,20 +5,6 @@ local newCommand = vim.api.nvim_create_user_command
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
--- :I inspect lua code
--- as opposed to `:lua = `, this shows the result in a notification and with
--- syntax highlighting
-newCommand("I", function(ctx)
-	local output = vim.inspect(fn.luaeval(ctx.args))
-	vim.notify(output, u.trace, {
-		timeout = 6000, -- ms
-		on_open = function(win) -- enable treesitter highlighting in the notification
-			local buf = vim.api.nvim_win_get_buf(win)
-			vim.api.nvim_buf_set_option(buf, "filetype", "lua")
-		end,
-	})
-end, { nargs = "+" })
-
 -- inspect capabilities of current lsp
 newCommand("LspCapabilities", function()
 	local curBuf = vim.api.nvim_get_current_buf()

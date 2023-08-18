@@ -121,6 +121,7 @@ local function themeModifications()
 		updateHighlight("IndentBlanklineChar", "guifg=#e3d4c4")
 		updateHighlight("ColorColumn", "guibg=#ebe1d5")
 		updateHighlight("VertSplit", "guifg=#b29b84")
+		updateHighlight("VirtColumn", "guifg=#dcd1c6")
 		for _, v in pairs(vimModes) do
 			updateHighlight("lualine_y_diff_modified_" .. v, "guifg=#b3880a")
 		end
