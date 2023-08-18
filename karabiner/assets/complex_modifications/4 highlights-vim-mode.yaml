@@ -38,37 +38,21 @@ rules:
       # INFO can't be done on left click, since that initially block dragging
       - type: basic
         from: { key_code: caps_lock }
-        to_if_alone:
-          - *enter-insert-mode
-          - *set-notice
+        to_if_alone: [*set-notice, *enter-insert-mode]
         to:
           - { key_code: right_shift, modifiers: [control, option, command] }
-        conditions:
-          - *highlights-app
-          - *highlights-normal-mode
-      - type: basic
-        from: { key_code: i }
-        to_if_alone:
-          - *enter-insert-mode
-          - *set-notice
-        to:
-          - { key_code: right_shift, modifiers: [control, option, command] }
-        conditions:
-          - *highlights-app
-          - *highlights-normal-mode
+        conditions: [*highlights-app, *highlights-normal-mode]
       # Enter Normal Mode
       # INFO done on capslock/escape, since that also exists writing an annotation
       - type: basic
         from: { key_code: caps_lock }
         to_if_alone:
           - key_code: escape
-          - *enter-normal-mode
           - *remove-notice
+          - *enter-normal-mode
         to:
           - { key_code: right_shift, modifiers: [control, option, command] }
-        conditions:
-          - *highlights-app
-          - *highlights-insert-mode
+        conditions: [*highlights-app, *highlights-insert-mode]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "✏️ Highlights Vim Mode: Actions"
     manipulators:
@@ -88,9 +72,7 @@ rules:
           - key_code: down_arrow
           - key_code: down_arrow
           - key_code: down_arrow
-        conditions:
-          - *highlights-app
-          - *highlights-normal-mode
+        conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: k }
         to: # 12x up
@@ -106,42 +88,32 @@ rules:
           - key_code: up_arrow
           - key_code: up_arrow
           - key_code: up_arrow
-        conditions:
-          - *highlights-app
-          - *highlights-normal-mode
+        conditions: [*highlights-app, *highlights-normal-mode]
       # J/K: page up/down
       - type: basic
         from: { key_code: j, modifiers: { mandatory: [shift] } }
         to:
           - key_code: page_down
-        conditions:
-          - *highlights-app
-          - *highlights-normal-mode
+        conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: k, modifiers: { mandatory: [shift] } }
         to:
           - key_code: page_up
-        conditions:
-          - *highlights-app
-          - *highlights-normal-mode
+        conditions: [*highlights-app, *highlights-normal-mode]
       # g/G fully down/up
       - type: basic
         from: { key_code: g }
         to:
           - { key_code: up_arrow, modifiers: [command] }
-        conditions:
-          - *highlights-app
-          - *highlights-normal-mode
+        conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: g, modifiers: { mandatory: [shift] } }
         to:
           - { key_code: up_down, modifiers: [command] }
-        conditions:
-          - *highlights-app
-          - *highlights-normal-mode
+        conditions: [*highlights-app, *highlights-normal-mode]
       # h/l: back/forth in jump history
       - type: basic
-        from: { key_code: h }
+        from: { key_code: h, modifiers: { mandatory: [control] } }
         to:
           - shell_command: |
               osascript -e '
@@ -151,11 +123,9 @@ rules:
                     click menu item "Back" of menu "Go" of menu bar 1
                   end tell
                 end tell'
-        conditions:
-          - *highlights-app
-          - *highlights-normal-mode
+        conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
-        from: { key_code: l }
+        from: { key_code: l, modifiers: { mandatory: [control] } }
         to:
           - shell_command: |
               osascript -e '
@@ -165,6 +135,193 @@ rules:
                     click menu item "Forward" of menu "Go" of menu bar 1
                   end tell
                 end tell'
-        conditions:
-          - *highlights-app
-          - *highlights-normal-mode
+        conditions: [*highlights-app, *highlights-normal-mode]
+
+      #─────────────────────────────────────────────────────────────────────────
+      # INFO ALL OTHER KEYS: ENTER INSERT MODE
+      - type: basic
+        from: { key_code: a }
+        to: [{ key_code: a }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: b }
+        to: [{ key_code: b }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: c }
+        to: [{ key_code: c }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: d }
+        to: [{ key_code: d }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: e }
+        to: [{ key_code: e }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: f }
+        to: [{ key_code: f }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: h }
+        to: [{ key_code: h }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: i }
+        to: [{ key_code: i }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: l }
+        to: [{ key_code: l }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: m }
+        to: [{ key_code: m }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: n }
+        to: [{ key_code: n }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: o }
+        to: [{ key_code: o }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: p }
+        to: [{ key_code: p }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: q }
+        to: [{ key_code: q }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: r }
+        to: [{ key_code: r }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: s }
+        to: [{ key_code: s }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: t }
+        to: [{ key_code: t }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: u }
+        to: [{ key_code: u }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: v }
+        to: [{ key_code: v }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: w }
+        to: [{ key_code: w }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: x }
+        to: [{ key_code: x }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: y }
+        to: [{ key_code: y }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: z }
+        to: [{ key_code: z }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+
+      #───────────────────────────────────────────────────────────────────────
+      - type: basic
+        from: { key_code: a, modifiers: { mandatory: [shift] } }
+        to: [{key_code: a, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: b, modifiers: { mandatory: [shift] } }
+        to: [{key_code: b, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: c, modifiers: { mandatory: [shift] } }
+        to: [{key_code: c, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: d, modifiers: { mandatory: [shift] } }
+        to: [{key_code: d, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: e, modifiers: { mandatory: [shift] } }
+        to: [{key_code: e, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: f, modifiers: { mandatory: [shift] } }
+        to: [{key_code: f, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: h, modifiers: { mandatory: [shift] } }
+        to: [{key_code: h, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: i, modifiers: { mandatory: [shift] } }
+        to: [{key_code: i, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: l, modifiers: { mandatory: [shift] } }
+        to: [{key_code: l, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: m, modifiers: { mandatory: [shift] } }
+        to: [{key_code: m, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: n, modifiers: { mandatory: [shift] } }
+        to: [{key_code: n, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: o, modifiers: { mandatory: [shift] } }
+        to: [{key_code: o, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: p, modifiers: { mandatory: [shift] } }
+        to: [{key_code: p, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: q, modifiers: { mandatory: [shift] } }
+        to: [{key_code: q, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: r, modifiers: { mandatory: [shift] } }
+        to: [{key_code: r, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: s, modifiers: { mandatory: [shift] } }
+        to: [{key_code: s, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: t, modifiers: { mandatory: [shift] } }
+        to: [{key_code: t, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: u, modifiers: { mandatory: [shift] } }
+        to: [{key_code: u, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: v, modifiers: { mandatory: [shift] } }
+        to: [{key_code: v, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: w, modifiers: { mandatory: [shift] } }
+        to: [{key_code: w, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: x, modifiers: { mandatory: [shift] } }
+        to: [{key_code: x, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: y, modifiers: { mandatory: [shift] } }
+        to: [{key_code: y, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]
+      - type: basic
+        from: { key_code: z, modifiers: { mandatory: [shift] } }
+        to: [{key_code: z, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode]

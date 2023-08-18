@@ -7,6 +7,6 @@
 	<key>copy_to_clipboard</key>
 	<true/>
 	<key>the_prompt</key>
-	<string>Summarize the pdf in 10 bullet points. Ground your summary in the facts of the paper, and reference specific pages in the paper.</string>
+	<string>Summarize the PDF in 10 bullet points. Ground your summary in the facts of the paper, and include references to specific pages in the paper.</string>
 </dict>
 </plist>
