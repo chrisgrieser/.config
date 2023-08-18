@@ -12,7 +12,7 @@ end
 local function reOpen()
 	if vim.fn.argc() == 0 then
 		vim.defer_fn(function()
-			vim.cmd("normal! '0")
+			pcall(vim.cmd.normal, { "`0", bang = true })
 			pcall(vim.cmd.bwipeout, "#") -- to not leave empty file
 		end, 1)
 	end

@@ -29,7 +29,7 @@ fi
 
 # kill
 server="/tmp/nvim_server.pipe"
-nvim --server "$server" --remote-send "<cmd>wq!<CR>"
+nvim --server "$server" --remote-send "<cmd>try|wqall|catch|qall|endtry<CR>"
 
 # wait until dead
 i=0

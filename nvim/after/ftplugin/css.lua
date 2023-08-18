@@ -22,7 +22,7 @@ keymap("n", "<leader>i", function()
 	else
 		lineContent = lineContent:gsub(";", " !important;")
 	end
-	vim.api.nvim_set_current_line(lineContent) 
+	vim.api.nvim_set_current_line(lineContent)
 end, { buffer = true, desc = " Toggle !important", nowait = true })
 
 --------------------------------------------------------------------------------
@@ -84,5 +84,5 @@ elseif expand("%:t") == "source.css" then
 	-- various other solutions are described here: https://github.com/vim/vim/issues/2790
 	-- using treesitter, this is less of an issue, but treesitter css
 	-- highlighting isn't good yet, so…
-	keymap("n", "zz", ":syntax sync fromstart<CR>", { buffer = true })
+	keymap("n", "ös", ":syntax sync fromstart<CR>",{ buffer = true })
 end

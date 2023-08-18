@@ -228,9 +228,12 @@ return {
 			}, { prefix = "<leader>", mode = "x" })
 
 			-- needed so localleader prefixes work with whichkey
-			require("which-key").register { ["<localleader>"] = { name = "<localleader>" } }
+			require("which-key").register {
+				["<localleader>"] = { name = "<localleader>" },
+				{ mode = { "n", "x" } },
+			}
 
-			-- set by some plugins and  obscures whichkey
+			-- set by some plugins and unnecessarily clobbers whichkey
 			vim.keymap.set("n", "<LeftMouse>", "<Nop>")
 		end,
 	},
