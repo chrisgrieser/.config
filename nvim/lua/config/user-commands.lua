@@ -1,4 +1,3 @@
-local expand = vim.fn.expand
 local fn = vim.fn
 local cmd = vim.cmd
 local newCommand = vim.api.nvim_create_user_command
@@ -28,15 +27,6 @@ newCommand("LspCapabilities", function()
 		end
 	end
 end, {})
-
--- `:ViewDir` opens the nvim view directory
-newCommand("ViewDir", function(_)
-	local viewdir = expand(vim.opt.viewdir:get())
-	fn.system('open "' .. viewdir .. '"')
-end, {})
-
--- `:PluginDir` opens the nvim data path, where mason and lazy install their stuff
-newCommand("PluginDir", function(_) fn.system('open "' .. fn.stdpath("data") .. '"') end, {})
 
 --------------------------------------------------------------------------------
 
