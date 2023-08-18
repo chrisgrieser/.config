@@ -122,6 +122,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>E99EAF40-8819-42A3-BBED-A3BC465A0D66</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D9D1017F-1F5D-4562-8B69-0232E40032C5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E9FF31BC-709C-4387-975A-0B1410418161</key>
 		<array>
 			<dict>
@@ -149,24 +162,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>tasksettings</key>
-				<dict>
-					<key>height</key>
-					<string>480</string>
-					<key>width</key>
-					<string>370</string>
-					<key>x</key>
-					<string>0</string>
-					<key>y</key>
-					<string>600</string>
-				</dict>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/window-management/windows.current.bounds.set.custom</string>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>pip</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Picture-in-Picture: Zoom</string>
+				<key>withspace</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>FFE40428-4486-4B45-AD59-024B6311D2D8</string>
+			<string>CC649DDD-3F1D-47F4-A2BA-EA57ADBA8E06</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -220,21 +230,24 @@ end tell</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>pip</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Picture-in-Picture: Zoom</string>
-				<key>withspace</key>
-				<false/>
+				<key>tasksettings</key>
+				<dict>
+					<key>height</key>
+					<string>480</string>
+					<key>width</key>
+					<string>370</string>
+					<key>x</key>
+					<string>0</string>
+					<key>y</key>
+					<string>600</string>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/window-management/windows.current.bounds.set.custom</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.automation.task</string>
 			<key>uid</key>
-			<string>CC649DDD-3F1D-47F4-A2BA-EA57ADBA8E06</string>
+			<string>FFE40428-4486-4B45-AD59-024B6311D2D8</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -311,37 +324,6 @@ end tell</string>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>DE6D43CB-FDC8-4501-B0BC-6EDCECD2043A</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>25</integer>
-				<key>hotmod</key>
-				<integer>1966080</integer>
-				<key>hotstring</key>
-				<string>9</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>BA7E00FB-F43B-4DDF-869D-A9DB23200405</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -670,6 +652,37 @@ end tell</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>25</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>9</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>BA7E00FB-F43B-4DDF-869D-A9DB23200405</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -782,6 +795,29 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>tell application "Karabiner-EventViewer" to if it is running then quit</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>9734FC1B-0242-4229-B9BF-4A809F59C81E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -817,25 +853,36 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>tell application "Karabiner-EventViewer" to if it is running then quit</string>
-				<key>scriptargtype</key>
+				<key>acceptsmulti</key>
 				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
+				<key>filetypes</key>
+				<array>
+					<string>com.apple.application-bundle</string>
+				</array>
+				<key>name</key>
+				<string>Uninstall with AppCleaner</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.trigger.action</string>
 			<key>uid</key>
-			<string>9734FC1B-0242-4229-B9BF-4A809F59C81E</string>
+			<string>E99EAF40-8819-42A3-BBED-A3BC465A0D66</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string>/System/Volumes/Data/Applications/AppCleaner.app</string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>D9D1017F-1F5D-4562-8B69-0232E40032C5</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -962,6 +1009,15 @@ fi</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>D9D1017F-1F5D-4562-8B69-0232E40032C5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>610</real>
+			<key>ypos</key>
+			<real>455</real>
+		</dict>
 		<key>DE6D43CB-FDC8-4501-B0BC-6EDCECD2043A</key>
 		<dict>
 			<key>colorindex</key>
@@ -972,6 +1028,15 @@ fi</string>
 			<real>525</real>
 			<key>ypos</key>
 			<real>145</real>
+		</dict>
+		<key>E99EAF40-8819-42A3-BBED-A3BC465A0D66</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>370</real>
+			<key>ypos</key>
+			<real>455</real>
 		</dict>
 		<key>E9FF31BC-709C-4387-975A-0B1410418161</key>
 		<dict>
