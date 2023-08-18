@@ -44,14 +44,6 @@ return {
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		event = "BufReadPre", -- not later to ensure it loads in time properly
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		init = function()
-			local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
-			local next_hunk_repeat, prev_hunk_repeat =
-				ts_repeat_move.make_repeatable_move_pair(, gs.prev_hunk)
-
-			vim.keymap.set({ "n", "x", "o" }, "]h", next_hunk_repeat)
-			vim.keymap.set({ "n", "x", "o" }, "[h", prev_hunk_repeat)
-		end,
 	},
 	{ -- tons of text objects
 		"chrisgrieser/nvim-various-textobjs",
