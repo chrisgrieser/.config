@@ -64,7 +64,7 @@ return {
 						},
 					},
 					substitute = {
-						pattern = { "^:%%? ?s" },
+						pattern = { "^:%%? ?s " },
 						icon = " ",
 						conceal = true,
 						opts = {
