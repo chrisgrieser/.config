@@ -110,7 +110,7 @@ anchors:
       - &menu-notice
         set_notification_message:
           id: menu-notice
-          text: "👉 Menu Mode"
+          text: "➡️ Menu Mode"
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
@@ -148,7 +148,7 @@ rules:
         to_if_alone:
           - { key_code: up_arrow, modifiers: [command, control] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
-      # L: open; if folder in new window
+      # L: open & if folder in new window
       - type: basic
         from: { key_code: l, modifiers: { mandatory: [shift] } }
         to_if_alone:
@@ -202,14 +202,14 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       # :help
+      # "?" on German keyboard
       - type: basic
-        # "?" on German keyboard
         from: { key_code: hyphen, modifiers: { mandatory: [shift] } }
         to:
           - shell_command: qlmanage -p "$HOME/.config/karabiner/assets/finder-vim-mode/cheatsheet.png"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *is-German-keyboard]
+      # "?" on American keyboard
       - type: basic
-        # "?" on American keyboard
         from: { key_code: slash, modifiers: { mandatory: [shift] } }
         to:
           - shell_command: qlmanage -p "$HOME/.config/karabiner/assets/finder-vim-mode/cheatsheet.png"
@@ -456,19 +456,27 @@ rules:
           - *end-menu
           - *remove-menu-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *menu-is-open]
-      # changed navigation in context menu
+      # changed navigation in menu mode
       - type: basic
         from: { key_code: l }
         to_if_alone:
-          - key_code: right_arrow
-            modifiers: [command]
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *menu-is-open]
+          - { key_code: right_arrow }
+        conditions: [*finder-app, *menu-is-open]
       - type: basic
         from: { key_code: h }
         to_if_alone:
-          - key_code: left_arrow
-            modifiers: [command]
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *menu-is-open]
+          - { key_code: left_arrow }
+        conditions: [*finder-app, *menu-is-open]
+      - type: basic
+        from: { key_code: tab }
+        to_if_alone:
+          - { key_code: down_arrow }
+        conditions: [*finder-app, *menu-is-open]
+      - type: basic
+        from: { key_code: tab, modifiers: { mandatory: [shift] } } # y = z in German Keyboard
+        to_if_alone:
+          - { key_code: up_arrow }
+        conditions: [*finder-app, *menu-is-open]
       # Confirm Menu Selection
       - type: basic
         from: { key_code: return_or_enter }
