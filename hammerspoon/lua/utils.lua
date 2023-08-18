@@ -20,9 +20,6 @@ M.hyper = { "cmd", "alt", "ctrl", "shift" }
 -- add path for `hs.execute()`
 M.exportPath = [[export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; ]]
 
--- global to inspect tables in the console more quickly
-I = hs.inspect
-
 --------------------------------------------------------------------------------
 
 ---@nodiscard
