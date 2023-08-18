@@ -19,6 +19,10 @@ end, { desc = "⌨️ Edit keybindings.lua" })
 --------------------------------------------------------------------------------
 -- NAVIGATION
 
+-- visual instead of logcial lines
+keymap({ "n", "x" }, "j", "gj")
+keymap({ "n", "x" }, "k", "gk")
+
 -- - HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
 keymap({ "o", "x" }, "H", "^")
 keymap("n", "H", "0^") -- `0` ensures fully scrolling to the left on long indented lines
@@ -37,10 +41,6 @@ keymap({ "n", "x" }, "gj", "}gj")
 -- Jump history
 keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
 keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
-
--- visual instead of logcial lines
-keymap({ "n", "x" }, "j", "gj")
-keymap({ "n", "x" }, "k", "gk")
 
 -- Simplified Marks
 -- INFO a custom lualine component shows what is currently marked

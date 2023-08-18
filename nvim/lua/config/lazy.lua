@@ -68,7 +68,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.defer_fn(function()
 	if not require("lazy.status").has_updates() then return end
 	local threshold = 10
-	local numberOfUpdates = require("lazy.status").updates():match("%d+")
-	if numberOfUpdates < threshold then return "" end
+	local numberOfUpdates = tonumber(require("lazy.status").updates():match("%d+"))
+	if numberOfUpdates < threshold then return end
 	vim.notify(("󱧕 %s plugin updates"):format(numberOfUpdates))
 end, 5000)

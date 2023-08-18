@@ -115,6 +115,12 @@ return {
 			disable_virtual_lines_ft = { "yaml" },
 		},
 	},
+	{ -- fixes scrolloff at end of file
+		"chrisgrieser/scrollEOF.nvim",
+		event = "CursorMoved",
+		opts = true,
+		dev = true,
+	},
 	{ -- split-join lines
 		"Wansmer/treesj",
 		dependencies = "nvim-treesitter/nvim-treesitter",
@@ -222,7 +228,7 @@ return {
 			}, { prefix = "<leader>", mode = "x" })
 
 			-- needed so localleader prefixes work with whichkey
-			require("which-key").register { ["<localleader>"] = { name = "<local leader>" } }
+			require("which-key").register { ["<localleader>"] = { name = "<localleader>" } }
 
 			-- set by some plugins and  obscures whichkey
 			vim.keymap.set("n", "<LeftMouse>", "<Nop>")

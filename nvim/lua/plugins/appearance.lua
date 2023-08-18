@@ -4,12 +4,6 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{ -- fixes scrolloff at end of file
-		"chrisgrieser/scrollEOF.nvim",
-		event = "CursorMoved",
-		opts = true,
-		dev = true,
-	},
 	{ -- when searching, search count is shown next to the cursor
 		"kevinhwang91/nvim-hlslens",
 		init = function()
