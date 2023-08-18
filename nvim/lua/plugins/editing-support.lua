@@ -229,8 +229,7 @@ return {
 
 			-- needed so localleader prefixes work with whichkey
 			require("which-key").register {
-				["<localleader>"] = { name = "<localleader>" },
-				{ mode = { "n", "x" } },
+				["<localleader>"] = { name = "<localleader>", mode = { "n", "x" } },
 			}
 
 			-- set by some plugins and unnecessarily clobbers whichkey

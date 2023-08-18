@@ -45,7 +45,7 @@ nnoremap <Esc> &c&&n&
 nnoremap j gj
 nnoremap k gk
 nnoremap I g0i
-nnoremap A g$i
+nnoremap A g$a
 
 " HJKL behaves like hjkl, but bigger distance
 noremap H g0
