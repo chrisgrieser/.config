@@ -517,11 +517,19 @@ rules:
               cat "$selection" | pbcopy
               osascript -e 'display notification "✅ File content copied" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *not-German-keyboard]
-      # p = paste
+      # p = paste file
       - type: basic
         from: { key_code: p }
         to_if_alone:
           - { key_code: v, modifiers: [command] }
+        conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode]
+      # P = paste text onto name
+      - type: basic
+        from: { key_code: p, modifiers: { mandatory: [shift] } }
+        to_if_alone:
+          - { key_code: return_or_enter }
+          - { key_code: v, modifiers: [command] }
+          - { key_code: return_or_enter }
         conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode]
       # r = replicate (duplicate)
       - type: basic
@@ -603,7 +611,7 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # ö (de) / ; (en) = toggle grouping
       - type: basic
-        from: { key_code: semicolon } # ö in German 
+        from: { key_code: semicolon } # ö in German
         to_if_alone:
           - { key_code: "0", modifiers: [command, control] }
         # No keyboard-specific condition needed, since it's the same key
@@ -822,6 +830,23 @@ rules:
                   click menu item "Forward" of menu "Go" of menu bar 1
                 end tell'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      # F = Flatten directories
+      - type: basic
+        from: { key_code: f, modifiers: { mandatory: [shift] } }
+        to:
+          - shell_command: |
+              selectedFiles=$(osascript -e '
+                tell application "Finder" to set selectedFiles to (every item of (get selection))
+                set out to ""
+                repeat with theFile in selectedFiles
+                  set out to out & (POSIX path of (theFile as text)) & linefeed
+                end repeat
+                return out
+              ')
+              [[ -z "$selectedFiles" ]] && return 1
+              [[ -d "$selectedFiles" ]] && return 1
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      # One-Char-Searches
       #─────────────────────────────────────────────────────────────────────────
       # FIND MODE
       # Enter/Exit

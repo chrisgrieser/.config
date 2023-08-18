@@ -185,7 +185,7 @@ keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>]], { desc = "󰗈 split
 -- URL Opening (forward-seeking `gx`)
 keymap("n", "gx", function()
 	require("various-textobjs").url()
-	-- various textobjs only switch to visual if obj found
+	-- various textobjs only switches to visual if obj found
 	local foundURL = fn.mode():find("v")
 	if foundURL then
 		u.normal('"zy')

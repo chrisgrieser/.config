@@ -145,7 +145,7 @@
     {
       "f": 2
     },
-    "p\npaste\n\n\n⌃p path",
+    "p (P)\npaste (name)\n\n\n⌃p path",
     {
       "c": "#CCCCCC"
     },
@@ -194,9 +194,16 @@
     },
     "d\ntrash file",
     {
+      "f": 1,
+      "fa": [
+        2
+      ],
       "n": true
     },
-    "f\nfind mode",
+    "f (F)\nfind mode (flatten dirs)",
+    {
+      "f": 2
+    },
     "gg (G)\nto top (bottom)\n\n\n^g gith.",
     {
       "sm": "cherry",
