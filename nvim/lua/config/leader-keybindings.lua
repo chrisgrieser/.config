@@ -85,7 +85,7 @@ keymap("n", "<leader>f<Space>", function()
 	bo.tabstop = 2
 	bo.expandtab = true
 	cmd.retab { bang = true }
-	vim.notify("Now using 2󱁐")
+	vim.notify("Now using 󱁐 (2)")
 end, { desc = "󱁐 Use Spaces" })
 
 --------------------------------------------------------------------------------
@@ -199,10 +199,8 @@ keymap("n", "<leader>gd", function()
 
 		local query = pickaxe ~= "" and (" -G'%s'"):format(pickaxe) or ""
 		cmd("DiffviewFileHistory %" .. query)
-
 		cmd.wincmd("w") -- go directly to file window
 		cmd.wincmd("|") -- maximize it
-
 		if pickaxe ~= "" then
 			fn.execute("/" .. pickaxe, "silent!") -- directly search for the term
 			cmd("silent! normal! n") -- search for first item
@@ -247,5 +245,18 @@ keymap("n", "<leader>of", function()
 	vim.opt.scrolloff = 13
 	vim.opt_local.foldlevel = 99
 end, { desc = " 󰘖 Fix Folding/Scrolloff" })
+
+-- make <C-a>/<C-x> work on letters. Useful for macros
+keymap("n", "<leader>oa", function()
+	local nrformats = vim.opt.nrformats
+	local hasAlpha = vim.tbl_contains(nrformats:get(), "alpha")
+	if hasAlpha then
+		nrformats:remove { "alpha" }
+		vim.notify(" 󰀫 alpha disabled")
+	else
+		nrformats:append("alpha")
+		vim.notify(" 󰀫 alpha enabled")
+	end
+end, { desc = " 󰀫 Toggle nrformats alpha" })
 
 --------------------------------------------------------------------------------

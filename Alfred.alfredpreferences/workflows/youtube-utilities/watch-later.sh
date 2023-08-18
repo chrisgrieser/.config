@@ -8,8 +8,8 @@ YOUTUBE_ID=$(echo "$URL" | cut -d "=" -f2)
 TITLE=$(curl -s "$URL" | grep -o "<title>[^<]*" | cut -d'>' -f2- | tr "/:" "--" | sed -e 's/ - YouTube//' | sed -e 's/amp;//g')
 IMAGE_URL="https://img.youtube.com/vi/$YOUTUBE_ID/0.jpg"
 
-[[ ! -d "$youtube_link_folder" ]] && 
-	destination="$youtube_link_folder" || 
+[[ -d "$youtube_link_folder" ]] &&
+	destination="$youtube_link_folder" ||
 	destination="$fallback_folder"
 
 #───────────────────────────────────────────────────────────────────────────────
