@@ -29,7 +29,7 @@ end, { buffer = true, desc = " Convert to JSON" })
 --------------------------------------------------------------------------------
 
 -- Compile Karabiner Config
-vim.keymap.set("n", "<leader>r", function()
+vim.keymap.set("n", "<localleader><localleader>", function()
 	vim.cmd("silent update")
 	local parentFolder = vim.fn.expand("%:p:h")
 	if parentFolder:find("/karabiner") then
