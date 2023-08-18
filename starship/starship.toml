@@ -53,7 +53,7 @@ command = '[[ "$PWD" =~ "$HOME/Repos" ]] && echo "󰔽"'
 # conditional, so no output does not leave the extra space from `format`. And the
 # space from format is needed, as the output from `command` is trimmed.
 when = '[[ "$PWD" =~ "$HOME/Repos" ]]'
-format = '[$output ]($style)' # extra space for proper nerdfont sizing
+format = '[ $output  ]($style)' # extra space for proper nerdfont sizing
 style = "fg:bright-blue bg:black bold"
 
 [directory]
