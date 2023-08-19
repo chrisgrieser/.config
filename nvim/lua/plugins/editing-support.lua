@@ -30,21 +30,20 @@ return {
 			require("nvim-autopairs").add_rules {
 				rule("<", ">", "lua"):with_pair(isNodeType("string")), -- keymaps
 				rule("<", ">", "vim"):with_pair(), -- keymaps
-				rule('\\"', '\\"', { "sh", "json" }):with_pair(), -- escaped double quotes
+				rule('\\"', '\\"', { "sh", "json" }):with_pair(isNodeType("string")), -- escaped double quotes
 				rule("*", "*", "markdown"):with_pair(), -- italics
 				rule("__", "__", "markdown"):with_pair(), -- bold
-				-- javascript/typescript
+				-- if / else in js/ts
 				rule("^%s*if $", "()", { "javascript", "typescript" })
-					:use_regex(true)
+					:use_regex(true) -- regex ensures "if" in strings or comments isn't affected
 					:set_end_pair_length(1), -- only move one char to the side
 				rule("^%s*}? ?else if $", "()", { "javascript", "typescript" })
 					:use_regex(true)
-					:set_end_pair_length(1), -- only move one char to the side
+					:set_end_pair_length(1),
+				-- quicker template string
 				rule("$", "{}", { "javascript", "typescript", "json" })
 					:with_pair(isNodeType("string"))
 					:set_end_pair_length(1),
-				rule(" =>", " {  }", { "typescript", "javascript" })
-					:set_end_pair_length(2),
 			}
 
 			-- add brackets to cmp completions, e.g. "function" -> "function()"
