@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 # shellcheck disable=2154
 
-CURRENT_TAB=$(osascript -l JavaScript "./get-url-from-browser.js" &)
+CURRENT_TAB=$(osascript -l JavaScript "./scripts/get-url-from-browser.js" &)
 
 if [[ -z "$CURRENT_TAB" ]] ; then
 	echo -n "❌ Tab could not be retrieved."
@@ -22,5 +22,6 @@ elif ! [[ "$(yt-dlp -U)" =~ "up to date" ]]; then
 	echo -n "ℹ️ yt-dlp not up to date."
 	echo -n "brew update && brew upgrade yt-dlp" | pbcopy
 else
+	afplay "/System/Library/Sounds/Basso.aiff" &
 	echo -n "❌ $msg"
 fi
