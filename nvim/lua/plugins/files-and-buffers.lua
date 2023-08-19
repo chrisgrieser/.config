@@ -6,8 +6,8 @@ return {
 		event = { "InsertLeave", "TextChanged" }, -- only needs to be loaded on files changes
 		opts = {
 			execution_message = { enabled = false },
-			noautocmd = true, -- no autocmds = better for performance
-			debounce_delay = 3000, -- save at most every 3 seconds
+			noautocmd = false, -- needed for nvim-lint
+			debounce_delay = 2000, -- save at most this many ms
 			condition = function(buf)
 				local ignoredFts = { "NeogitStatus" }
 				if vim.tbl_contains(ignoredFts, vim.bo[buf].filetype) then return false end
