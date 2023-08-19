@@ -39,14 +39,14 @@ local gitShellOpts = {
 		local logLevel
 		if out:lower():find("error") then
 			logLevel = vim.log.levels.ERROR
-			fn.system { "afplay", "/System/Library/Sounds/Basso.aiff" }
+			fn.system { "afplay", "/System/Library/Sounds/Basso.aiff", "&" }
 		elseif out:lower():find("warning") then
 			logLevel = vim.log.levels.WARN
-			fn.system { "afplay", "/System/Library/Sounds/Basso.aiff" }
+			fn.system { "afplay", "/System/Library/Sounds/Basso.aiff", "&" }
 		else
 			logLevel = vim.log.levels.INFO
 			-- stylua: ignore
-			fn.system { "afplay", "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf" }
+			fn.system { "afplay", "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf", "&" }
 		end
 		vim.notify(out, logLevel)
 

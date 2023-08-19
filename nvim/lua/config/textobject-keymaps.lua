@@ -109,8 +109,8 @@ keymap({"x", "o"}, "O", "<cmd>lua require('various-textobjs').column()<CR>", { d
 keymap({"x", "o"}, "in", "<cmd>lua require('various-textobjs').number(true)<CR>", { desc = "󱡔 inner number textobj" })
 keymap({"x", "o"}, "an", "<cmd>lua require('various-textobjs').number(false)<CR>", { desc = "󱡔 outer number textobj" })
 
--- ag: entire buffer textobj
-keymap({ "x", "o" }, "ag", "<cmd>lua require('various-textobjs').entireBuffer()<CR>", { desc = "󱡔 entire buffer textobj" })
+-- gg: entire buffer textobj
+keymap({ "x", "o" }, "gg", "<cmd>lua require('various-textobjs').entireBuffer()<CR>", { desc = "󱡔 entire buffer textobj" })
 
 -- v: viewport
 keymap("o" , "v", "<cmd>lua require('various-textobjs').visibleInWindow()<CR>", { desc = "󱡔 visible in window textobj" })
@@ -134,8 +134,8 @@ keymap({ "x", "o" }, "ii", "<cmd>lua require('various-textobjs').indentation(tru
 keymap({ "x", "o" }, "ai", "<cmd>lua require('various-textobjs').indentation(false, false)<CR>", { desc = "󱡔 outer indent textobj" })
 keymap({ "x", "o" }, "ij", "<cmd>lua require('various-textobjs').indentation(false, true)<CR>", { desc = "󱡔 top-border indent textobj" })
 keymap({ "x", "o" }, "aj", "<cmd>lua require('various-textobjs').indentation(false, true)<CR>", { desc = "󱡔 top-border indent textobj" })
-keymap({ "x", "o" }, "ig", "<cmd>lua require('various-textobjs').greedyOuterIndentation(true)<CR>", { desc = "󱡔 outer greedy indent" })
-keymap({ "x", "o" }, "ag", "<cmd>lua require('various-textobjs').greedyOuterIndentation(false)<CR>", { desc = "󱡔 inner greedy indent" })
+keymap({ "x", "o" }, "ig", "<cmd>lua require('various-textobjs').greedyOuterIndentation(true)<CR>", { desc = "󱡔 inner greedy indent" })
+keymap({ "x", "o" }, "ag", "<cmd>lua require('various-textobjs').greedyOuterIndentation(false)<CR>", { desc = "󱡔 outer greedy indent" })
 
 -- i./a.: chain-member
 keymap({ "x", "o" }, "i.", "<cmd>lua require('various-textobjs').chainMember(true)<CR>", { desc = "󱡔 inner indent textobj" })
