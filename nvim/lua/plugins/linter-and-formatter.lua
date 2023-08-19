@@ -36,10 +36,15 @@ local function linterConfigs()
 	}
 
 	-- "BufWritePost" relevant due to nvim-autosave
-	vim.api.nvim_create_autocmd(
-		{ "BufEnter", "BufReadPost", "BufWritePost", "InsertLeave", "TextChanged" },
-		{ callback = function() lint.try_lint() end }
-	)
+	vim.api.nvim_create_autocmd({ "BufEnter", "BufReadPost", "BufWritePost", "InsertLeave", "TextChanged" }, {
+		pattern = "*",
+		callback = function(ctx)
+			-- FIX weird error message for shellcheck
+			if vim.bo.filetype == "sh" and (ctx.event == "TextChanged" or ctx.event == "BufEnter") then return end
+
+			lint.try_lint()
+		end,
+	})
 
 	-- Linter configs
 	-- https://github.com/mfussenegger/nvim-lint/tree/master/lua/lint/linters
@@ -53,10 +58,8 @@ local function linterConfigs()
 		linterConfig .. "/vale/vale.ini",
 	}
 	lint.linters.shellcheck.args = {
-		"--shell",
-		"bash", -- force to work with zsh
-		"--format",
-		"json",
+		"--shell=bash", -- force to work with zsh
+		"--format=json",
 		"-",
 	}
 	lint.linters.yamllint.args = {
@@ -81,13 +84,13 @@ end
 --------------------------------------------------------------------------------
 
 local function formatterConfigs()
-	local function romeConfig(ext)
-		return {
-			exe = "rome",
-			stdin = true,
-			args = { "format", "--stdin-file-path", "dummy." .. ext },
-		}
-	end
+	-- using the stdin formatting of rome bugs with emojis
+	local util = require("formatter.util")
+	local romeConfig = {
+		exe = "rome",
+		stdin = false,
+		args = { "format", "--write", util.escape_path(util.get_current_buffer_file_path()) },
+	}
 
 	-- https://github.com/mhartington/formatter.nvim/tree/master/lua/formatter/filetypes
 	-- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
@@ -99,9 +102,9 @@ local function formatterConfigs()
 			python = { require("formatter.filetypes.python").black },
 			html = { require("formatter.filetypes.html").prettier },
 			yaml = { require("formatter.filetypes.yaml").prettier },
-			javascript = { romeConfig("js") },
-			typescript = { romeConfig("ts") },
-			json = { romeConfig("json") },
+			javascript = { romeConfig },
+			typescript = { romeConfig },
+			json = { romeConfig },
 		},
 	}
 end
@@ -123,7 +126,7 @@ return {
 	},
 	{
 		"mfussenegger/nvim-lint",
-		event = "VeryLazy",
+		event = "BufReadPost", -- earlier to work on first buffer
 		config = linterConfigs,
 	},
 	{
@@ -134,10 +137,3 @@ return {
 		config = formatterConfigs,
 	},
 }
-
--- TODO
--- INFO alternatives for when null-ls is archived
--- - https://github.com/jay-babu/mason-null-ls.nvim/issues/82
--- - ensure_installed https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
--- - https://dotfyle.com/this-week-in-neovim/48#jose-elias-alvarez/null-ls.nvim
--- https://www.reddit.com/r/neovim/comments/15oue2o/finally_a_robust_autoformatting_solution/

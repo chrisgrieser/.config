@@ -29,9 +29,9 @@ while true; do
 	icon=$(
 		echo "$weather" | yq ".icon" |
 			sed -e 's/partly-cloudy-day//' -e 's/partly-cloudy-night//' -e 's/rain//' \
-			-e 's/cloudy//' -e 's/wind//' -e 's/fog/󰖑/' -e 's/hail/󰖒/' \
-			-e 's/snow//' -e 's/clear-day//' -e 's/clear-night//' \
-			-e 's/thunderstorm//'
+				-e 's/cloudy//' -e 's/wind//' -e 's/fog/󰖑/' -e 's/hail/󰖒/' \
+				-e 's/snow//' -e 's/clear-day//' -e 's/clear-night//' \
+				-e 's/thunderstorm//'
 	)
 	[[ -n "$icon" && "$icon" != "null" || $i -gt 10 ]] && break
 	i=$((i + 1))
@@ -40,7 +40,7 @@ done
 
 #───────────────────────────────────────────────────────────────────────────────
 
-if [[ "$temperature" == "null" ]] ; then
+if [[ "$temperature" == "null" ]]; then
 	icon=""
 	temperature="–"
 fi
