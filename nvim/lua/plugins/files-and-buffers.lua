@@ -7,12 +7,7 @@ return {
 		opts = {
 			execution_message = { enabled = false },
 			noautocmd = false, -- needed for nvim-lint
-			debounce_delay = 2000, -- save at most this many ms
-			condition = function(buf)
-				local ignoredFts = { "NeogitStatus" }
-				if vim.tbl_contains(ignoredFts, vim.bo[buf].filetype) then return false end
-				return true
-			end,
+			debounce_delay = 1200, -- save at most this many ms
 		},
 	},
 	{ -- auto-close inactive buffers

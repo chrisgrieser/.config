@@ -2,7 +2,7 @@
 
 -- only run in the summer
 local month = tostring(os.date("%B")):sub(1, 3)
-if month ~= "Aug" or month ~= "Jul" or month ~= "Sep" then return end
+if not (month == "Aug" or month == "Jul" or month == "Sep") then return end
 
 --------------------------------------------------------------------------------
 
@@ -19,6 +19,7 @@ local checkIntervalMins = 30
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 
+-- DOCS: https://brightsky.dev/docs/#get-/current_weather
 local callUrl = ("https://api.brightsky.dev/current_weather?lat=%s&lon=%s"):format(latitude, longitude)
 PrevOutTemp = nil -- no value on first run
 

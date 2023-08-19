@@ -41,6 +41,7 @@ while pgrep -xq "neovide" || pgrep -xq "nvim"; do
 		killall -9 neovide nvim || exit 1
 	fi
 done
+sleep 0.2
 
 # Restart
 open -a "Neovide" # config reopens last file if no arg
