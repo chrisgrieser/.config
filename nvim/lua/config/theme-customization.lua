@@ -59,14 +59,15 @@ local function themeModifications()
 		updateHighlight("lualine_a_" .. v, "gui=bold")
 	end
 
+
+
+
 	if theme == "tokyonight" then
 		for _, v in pairs(vimModes) do
 			updateHighlight("lualine_y_diff_modified_" .. v, "guifg=#acaa62")
-			updateHighlight("lualine_y_diff_added_" .. v, "guifg=#8cbf8e")
+			updateHighlight("lualine_y_diff_added_" .. v, "guifg=#328f8b")
 		end
 		updateHighlight("GitSignsChange", "guifg=#acaa62")
-		updateHighlight("GitSignsAdd", "guifg=#7fcc82")
-		updateHighlight("ScrollView", "guibg=#5a71b3")
 	elseif theme == "gruvbox-material" or theme == "sonokai" then
 		local commentColor = u.getHighlightValue("Comment", "fg")
 		updateHighlight("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
@@ -75,7 +76,6 @@ local function themeModifications()
 		updateHighlight("@field", "guifg=#6c9798")
 		updateHighlight("Comment", "guifg=#9cb4b5")
 		updateHighlight("NonText", "guifg=#9cb4b5")
-		linkHighlight("ScrollView", "Substitute")
 		updateHighlight("NotifyINFOTitle", "guifg=#4eb400")
 		updateHighlight("NotifyINFOIcon", "guifg=#4eb400")
 		linkHighlight("@text.warning.comment", "WarningMsg")
@@ -91,24 +91,15 @@ local function themeModifications()
 		linkHighlight("@text.note.comment", "@text.todo.comment")
 		linkHighlight("@text.warning.comment", "@text.todo.comment")
 		linkHighlight("@text.danger.comment", "@text.todo.comment")
-		clearHighlight("MatchParen")
 		vim.opt.guicursor:append("i-ci-c:ver25")
 		vim.opt.guicursor:append("o-v:hor10")
 		if mode == "dark" then
-			updateHighlight("ScrollView", "guibg=#303d50")
 			updateHighlight("ColorColumn", "guibg=#2e3742")
 		end
 	elseif theme == "kanagawa" then
-		updateHighlight("ScrollView", "guibg=#303050")
-		updateHighlight("VirtColumn", "guifg=#323036")
 		clearHighlight("SignColumn")
 		linkHighlight("MoreMsg", "Folded") -- FIX for https://github.com/rebelot/kanagawa.nvim/issues/89
 
-		-- stylua: ignore
-		local noBackground = { "GitSignsAdd", "GitSignsDelete", "GitSignsChange", "DiagnosticSignHint", "DiagnosticSignInfo", "DiagnosticSignWarn", "DiagnosticSignError" }
-		for _, hlGroup in pairs(noBackground) do
-			updateHighlight(hlGroup, "guibg=NONE")
-		end
 	elseif theme == "zephyr" then
 		updateHighlight("IncSearch", "guifg=#FFFFFF")
 		linkHighlight("TabLineSel", "lualine_a_normal")
@@ -116,18 +107,14 @@ local function themeModifications()
 	-----------------------------------------------------------------------------
 	-- light themes
 	elseif theme == "dawnfox" then
-		updateHighlight("ScrollView", "guibg=#303050")
-		updateHighlight("TreesitterContext", "guibg=#eaded1")
 		updateHighlight("IndentBlanklineChar", "guifg=#e3d4c4")
-		updateHighlight("ColorColumn", "guibg=#ebe1d5")
+		updateHighlight("ColorColumn", "guibg=#eee6dc")
 		updateHighlight("VertSplit", "guifg=#b29b84")
-		updateHighlight("VirtColumn", "guifg=#dcd1c6")
 		for _, v in pairs(vimModes) do
 			updateHighlight("lualine_y_diff_modified_" .. v, "guifg=#b3880a")
 		end
 	elseif theme == "rose-pine" and mode == "light" then
 		updateHighlight("IndentBlanklineChar", "guifg=#e3d4c4")
-		updateHighlight("ScrollView", "guibg=#505030")
 		updateHighlight("ColorColumn", "guibg=#eee6dc")
 		updateHighlight("Headline", "gui=bold guibg=#ebe1d5")
 	end

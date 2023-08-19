@@ -4,14 +4,6 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{
-		"xiyaowong/virtcolumn.nvim",
-		event = "VeryLazy",
-		init = function()
-			vim.g.virtcolumn_char = '▕'
-			vim.g.virtcolumn_priority = 10 -- priority of extmark
-		end,
-	},
 	{ -- when searching, search count is shown next to the cursor
 		"kevinhwang91/nvim-hlslens",
 		init = function()
@@ -50,7 +42,7 @@ return {
 			end
 		end,
 		opts = {
-			winblend = 60, -- winblend = transparency
+			winblend = 0, -- no transparency, hard to see in many themes
 			handlers = { marks = { enable = false } }, -- FIX mark-related error message
 		},
 	},
