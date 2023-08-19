@@ -4,6 +4,10 @@ local newCommand = vim.api.nvim_create_user_command
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
+vim.cmd.cnoreabbrev("i", "lua=")
+
+--------------------------------------------------------------------------------
+
 -- inspect capabilities of current lsp
 newCommand("LspCapabilities", function()
 	local curBuf = vim.api.nvim_get_current_buf()
