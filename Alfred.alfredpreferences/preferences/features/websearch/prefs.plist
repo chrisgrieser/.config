@@ -4,17 +4,6 @@
 <dict>
 	<key>customSites</key>
 	<dict>
-		<key>12683550-A2EA-40B6-B861-FB40A6E7603B</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>pb</string>
-			<key>text</key>
-			<string>Search Piratebay for '{query}'</string>
-			<key>url</key>
-			<string>https://thepiratebay.org/search.php?q={query}</string>
-		</dict>
 		<key>247D826F-9C0B-4405-A61B-AA64E1C4F8A6</key>
 		<dict>
 			<key>enabled</key>
@@ -117,17 +106,6 @@
 			<string>User Scripts: '{query}'</string>
 			<key>url</key>
 			<string>https://www.userscript.zone/search?q={query}</string>
-		</dict>
-		<key>D9B8CA93-B344-4C87-818C-ADC9BE350C9E</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>gif</string>
-			<key>text</key>
-			<string>Giphy</string>
-			<key>url</key>
-			<string>http://giphy.com/search/{query}</string>
 		</dict>
 		<key>E6EBE234-58DF-42AE-B019-B2941D2B424F</key>
 		<dict>
