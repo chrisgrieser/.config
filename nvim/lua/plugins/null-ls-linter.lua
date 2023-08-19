@@ -18,32 +18,16 @@ local lintersAndFormatters = {
 	-- stylelint included in mason, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
 }
 --------------------------------------------------------------------------------
--- TODO
--- INFO alternatives for when null-ls is archived
--- - https://github.com/jay-babu/mason-null-ls.nvim/issues/82
--- - ensure_installed https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
--- - https://dotfyle.com/this-week-in-neovim/48#jose-elias-alvarez/null-ls.nvim
--- https://www.reddit.com/r/neovim/comments/15oue2o/finally_a_robust_autoformatting_solution/
 
 --------------------------------------------------------------------------------
 local function nullSources()
 	local builtins = require("null-ls").builtins
-
 	return {
 		-- GLOBAL
-		builtins.diagnostics.codespell.with {
-			disabled_filetypes = { "css", "bib", "log" }, -- base64-encoded fonts cause a lot of errors
-			-- can't use `--skip`, since it null-ls reads from stdin and not from file
-			args = { "--ignore-words", linterConfig .. "/codespell-ignore.txt", "-" },
-		},
 		builtins.formatting.codespell.with {
 			disabled_filetypes = { "css", "bib", "gitignore" },
 			extra_args = { "--ignore-words", linterConfig .. "/codespell-ignore.txt" },
 		},
-		-- builtins.formatting.trim_newlines, -- trim trailing whitespace & newlines
-		-- builtins.formatting.trim_whitespace.with {
-		-- 	disabled_filetypes = { "markdown" }, -- do not remove spaces due to two-space-rule
-		-- },
 
 		-- PYTHON
 		builtins.formatting.black,
@@ -51,14 +35,6 @@ local function nullSources()
 		-- SHELL
 		builtins.formatting.shfmt.with {
 			extra_filetypes = { "zsh" },
-		},
-		builtins.diagnostics.shellcheck.with {
-			extra_args = { "--shell", "bash" },
-			filetypes = { "sh", "zsh" },
-		},
-		builtins.code_actions.shellcheck.with {
-			extra_args = { "--shell", "bash" },
-			filetypes = { "sh", "zsh" },
 		},
 
 		-- JS/TS/JSON
@@ -71,21 +47,9 @@ local function nullSources()
 			extra_args = { "--config", linterConfig .. "/stylelintrc-formatting.yml" },
 			timeout = 15000, -- longer timeout for large css files
 		},
-		builtins.diagnostics.stylelint.with { -- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
-			extra_args = {
-				"--quiet", -- only errors, no warnings
-				"--config",
-				linterConfig .. "/stylelintrc.yml",
-			},
-		},
 
 		-- LUA
 		builtins.formatting.stylua,
-		builtins.diagnostics.selene.with {
-			-- INFO not dynamically determining config file, since that breaks
-			-- selene when switching workspaces
-			extra_args = { "--config", linterConfig .. "/selene.toml" },
-		},
 
 		-- PRETTIER: YAML/HTML
 		-- INFO use only for yaml/html, since rome handles the rest
@@ -93,32 +57,21 @@ local function nullSources()
 			filetypes = { "yaml", "html" },
 		},
 
-		-- YAML
-		builtins.diagnostics.yamllint.with {
-			extra_args = { "--config-file", linterConfig .. "/yamllint.yaml" },
-		},
-
 		-- MARKDOWN & PROSE
-		builtins.diagnostics.vale.with {
-			extra_args = { "--config", linterConfig .. "/vale/vale.ini" },
-		},
 		builtins.formatting.markdownlint.with {
-			extra_args = { "--config", linterConfig .. "/markdownlintrc" },
-		},
-		builtins.diagnostics.markdownlint.with {
-			-- disabling rules that are autofixed already
-			-- stylua: ignore
 			extra_args = { "--config", linterConfig .. "/markdownlintrc" },
 		},
 	}
 end
 --------------------------------------------------------------------------------
 
-local function nvim_lint_config()
-	require("lint").linters_by_ft = {
+local function linterConfigs()
+	local lint = require("lint")
+	lint.linters_by_ft = {
 		lua = { "selene", "codespell" },
 		css = { "stylelint", "codespell" },
 		sh = { "shellcheck", "codespell" },
+		zsh = { "shellcheck", "codespell" },
 		markdown = { "vale", "markdownlint", "codespell" },
 		yaml = { "yamllint", "codespell" },
 		json = { "codespell" },
@@ -130,36 +83,98 @@ local function nvim_lint_config()
 	}
 	-- "BufWritePost" relevant due to nvim-autosave
 	vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "InsertLeave", "TextChanged" }, {
-		callback = function() require("lint").try_lint() end,
+		callback = function() lint.try_lint() end,
 	})
 
+	local function get_cur_file_extension(bufnr)
+		bufnr = bufnr or 0
+		return "." .. vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ':e')
+	end
+
 	-- Linter configs
-	require("lint").linters.codespell.args = { "--ignore-words", linterConfig .. "/codespell-ignore.txt" }
-	require("lint").linters.codespell.args = { "--ignore-words", linterConfig .. "/codespell-ignore.txt" }
+	-- https://github.com/mfussenegger/nvim-lint/tree/master/lua/lint/linters
+	lint.linters.codespell.args = { "--ignore-words", linterConfig .. "/codespell-ignore.txt" }
+	lint.linters.markdownlint.args = { "--config", linterConfig .. "/markdownlintrc" }
+	lint.linters.vale.args = {
+		'--no-exit',
+		'--output', 'JSON',
+		'--ext', get_cur_file_extension
+		"--config",
+		linterConfig .. "/vale/vale.ini",
+	}
+	lint.linters.shellcheck.args = {
+		"--shell", "bash", -- force to work with zsh
+		'--format', 'json',
+		'-',
+	}
+	lint.linters.yamllint.args = {
+		"--config-file",
+		linterConfig .. "/yamllint.yaml",
+		'--format', 
+		'parsable', 
+		'-'
+	}
+	lint.linters.stylelint.args = {
+		"-f",
+		"json",
+		"--quiet",
+		-- "--config",
+		-- linterConfig .. "/stylelintrc.yml",
+		"--stdin",
+		"--stdin-filename",
+		function() return vim.fn.expand("%:p") end,
+	} 
 end
+
+
+local function formatterConfigs() 
+		-- https://github.com/mhartington/formatter.nvim/tree/master/lua/formatter/filetypes
+	-- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
+	require("formatter").setup {
+	filetype = {
+		-- Formatter configurations for filetype "lua" go here
+		-- and will be executed in order
+		lua = {
+			require("formatter.filetypes.lua").stylua,
+		},
+		sh = {
+			require("formatter.filetypes.sh").stylua,
+		},
+	}
+	}
+end
+	
 
 --------------------------------------------------------------------------------
 
 return {
 	{
-		"jose-elias-alvarez/null-ls.nvim",
-		enabled = false,
-		event = "VeryLazy",
-		dependencies = { "nvim-lua/plenary.nvim", "jayp0521/mason-null-ls.nvim" },
-		config = function()
-			require("null-ls").setup {
-				border = require("config.utils").borderStyle,
-				sources = nullSources(),
-			}
-		end,
-	},
-	{
 		"jayp0521/mason-null-ls.nvim",
+		enabled = false,
 		opts = { ensure_installed = lintersAndFormatters },
 	},
 	{
 		"mfussenegger/nvim-lint",
 		event = "VeryLazy",
-		config = nvim_lint_config,
+		config = linterConfigs,
+	},
+	{
+		"mhartington/formatter.nvim",
+		cmd = {"Format", "FormatWrite", "FormatLock", "FormatWriteLock"},
+		init = function ()
+			vim.keymap.set({"n", "x"}, "<D-s>", function()
+				vim.cmd.FormatWrite()
+				vim.cmd.update()
+			end, { desc = "󰒕  Save & Format" })
+		end,
+		config = formatterConfigs,
 	},
 }
+
+-- TODO
+-- INFO alternatives for when null-ls is archived
+-- - https://github.com/jay-babu/mason-null-ls.nvim/issues/82
+-- - ensure_installed https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
+-- - https://dotfyle.com/this-week-in-neovim/48#jose-elias-alvarez/null-ls.nvim
+-- https://www.reddit.com/r/neovim/comments/15oue2o/finally_a_robust_autoformatting_solution/
+
