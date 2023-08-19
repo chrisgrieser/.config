@@ -129,11 +129,13 @@ keymap({ "x", "o" }, "ge", "<cmd>lua require('various-textobjs').diagnostic()<CR
 keymap( { "x", "o" }, "i"..u.textobjectMaps["doubleSquareBracket"], "<cmd>lua require('various-textobjs').doubleSquareBrackets(true)<CR>", { desc = "󱡔 inner double square bracket" })
 keymap( { "x", "o" }, "a"..u.textobjectMaps["doubleSquareBracket"], "<cmd>lua require('various-textobjs').doubleSquareBrackets(false)<CR>", { desc = "󱡔 outer double square bracket" })
 
--- ii/ai: indentation textobj
+-- ai/ag/aj: indentation textobjs
 keymap({ "x", "o" }, "ii", "<cmd>lua require('various-textobjs').indentation(true, true)<CR>", { desc = "󱡔 inner indent textobj" })
 keymap({ "x", "o" }, "ai", "<cmd>lua require('various-textobjs').indentation(false, false)<CR>", { desc = "󱡔 outer indent textobj" })
 keymap({ "x", "o" }, "ij", "<cmd>lua require('various-textobjs').indentation(false, true)<CR>", { desc = "󱡔 top-border indent textobj" })
 keymap({ "x", "o" }, "aj", "<cmd>lua require('various-textobjs').indentation(false, true)<CR>", { desc = "󱡔 top-border indent textobj" })
+keymap({ "x", "o" }, "ig", "<cmd>lua require('various-textobjs').greedyOuterIndentation(true)<CR>", { desc = "󱡔 outer greedy indent" })
+keymap({ "x", "o" }, "ag", "<cmd>lua require('various-textobjs').greedyOuterIndentation(false)<CR>", { desc = "󱡔 inner greedy indent" })
 
 -- i./a.: chain-member
 keymap({ "x", "o" }, "i.", "<cmd>lua require('various-textobjs').chainMember(true)<CR>", { desc = "󱡔 inner indent textobj" })
