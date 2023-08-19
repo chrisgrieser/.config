@@ -1,7 +1,6 @@
 local opt_local = vim.opt_local
 local opt = vim.opt
 local bo = vim.bo
-local fn = vim.fn
 local autocmd = vim.api.nvim_create_autocmd
 local keymap = vim.keymap.set
 local u = require("config.utils")
@@ -100,20 +99,8 @@ opt.timeoutlen = 666 -- also affects duration until which-key is shown
 --------------------------------------------------------------------------------
 
 -- Popups & Cmdline
-opt.pumheight = 15
-
-autocmd({ "CmdlineLeave", "VimEnter" }, {
-	-- min width popup menu
-	callback = function() opt.pumwidth = 15 end,
-})
-
--- do not obfuscate the buffer when searching
-autocmd("CmdlineEnter", {
-	callback = function()
-		if not fn.getcmdtype():find("[/?]") then return end
-		opt.pumwidth = 8
-	end,
-})
+opt.pumwidth = 15 -- min width
+opt.pumheight = 12 -- max height
 
 --------------------------------------------------------------------------------
 
