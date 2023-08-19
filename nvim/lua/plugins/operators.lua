@@ -28,23 +28,38 @@ return {
 		"echasnovski/mini.operators",
 		init = function()
 			local cmds = {
-				sh = "zsh -c",
-				python = "python3 -c",
-				applescript = "osascript -l AppleScript -e",
-				javascript = "osascript -l JavaScript -e", -- JXA
-				typescript = "node -e",
+				sh = { repl = "zsh -c" },
+				python = { repl = "python3 -c", outputter = "print(%s)" },
+				applescript = { repl = "osascript -l AppleScript -e" },
+				javascript = { repl = "osascript -l JavaScript -e" }, -- JXA
+				typescript = { repl = "node -e", outputter = "console.log(%s)" },
 			}
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = { "javascript", "typescript", "sh", "python", "applescript" },
 				callback = function(ctx)
 					local ft = ctx.match
+					local repl = cmds[ft].repl
+					local outputter = cmds[ft].outputter
 
 					local evalFunc = function(content)
-						local lines = table.concat(content.lines, "\n")
-						local shellCmd = cmds[ft] .. " '" .. lines:gsub("'", "\\'") .. "'"
+						local inputLines = vim.deepcopy(content.lines)
+
+						local lastLine = ""
+						if outputter then
+							lastLine = table.remove(content.lines)
+							local outputterFirstWord = outputter:split()[1]
+							if lastLine:find("^") then
+								lastLine = ""
+							else
+								lastLine = "\n" .. outputter:format(lastLine)
+							end
+						end
+						local lines = table.concat(content.lines, "\n") .. lastLine
+
+						local shellCmd = repl .. " '" .. lines:gsub("'", "\\'") .. "'"
 						local evaluatedOut = vim.fn.system(shellCmd):gsub("\n$", "")
 						vim.notify(evaluatedOut)
-						return lines -- to not modify original lines
+						return inputLines -- do not modify original lines
 					end
 
 					-- DOCS https://github.com/echasnovski/mini.operators/blob/main/doc/mini-operators.txt#L214
