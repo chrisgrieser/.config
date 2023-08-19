@@ -49,14 +49,14 @@ local function nullSources()
 		builtins.formatting.black,
 
 		-- SHELL
-		builtins.formatting.shfmt.with{
-			extra_filetypes = {  "zsh" },
+		builtins.formatting.shfmt.with {
+			extra_filetypes = { "zsh" },
 		},
 		builtins.diagnostics.shellcheck.with {
 			extra_args = { "--shell", "bash" },
 			filetypes = { "sh", "zsh" },
 		},
-		builtins.code_actions.shellcheck.with{
+		builtins.code_actions.shellcheck.with {
 			extra_args = { "--shell", "bash" },
 			filetypes = { "sh", "zsh" },
 		},
@@ -120,6 +120,7 @@ end
 return {
 	{
 		"jose-elias-alvarez/null-ls.nvim",
+		enabled = false,
 		event = "VeryLazy",
 		dependencies = { "nvim-lua/plenary.nvim", "jayp0521/mason-null-ls.nvim" },
 		config = function()
@@ -132,5 +133,15 @@ return {
 	{
 		"jayp0521/mason-null-ls.nvim",
 		opts = { ensure_installed = lintersAndFormatters },
+	},
+	{
+		"mfussenegger/nvim-lint",
+		event = "VeryLazy",
+		config = function()
+			require("lint").linters_by_ft = {
+				lua = { "selene" },
+				css = { "stylelint" },
+			}
+		end,
 	},
 }
