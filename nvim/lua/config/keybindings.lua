@@ -377,12 +377,6 @@ keymap("n", "gE", function() vim.diagnostic.goto_prev { float = true } end, { de
 
 keymap("n", "gs", function() cmd.Telescope("treesitter") end, { desc = " Document Symbols" })
 
--- Save & Format
-keymap({ "n", "x" }, "<D-s>", function()
-	vim.lsp.buf.format()
-	cmd.update()
-end, { desc = "󰒕  Save & Format" })
-
 -- uses "v" instead of "x", so signature can be shown during snippet completion
 keymap({ "n", "i", "v" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "󰒕 Signature" })
 

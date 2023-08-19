@@ -355,14 +355,6 @@ return {
 					[types.choiceNode] = {
 						active = { virt_text = { { "󰊖 ", "DiagnosticHint" } } },
 					},
-					-- $n
-					[types.insertNode] = {
-						unvisited = { virt_text = { { "⏽", "NonText" } } },
-					},
-					-- $0
-					[types.exitNode] = {
-						unvisited = { virt_text = { { "⏽", "NonText" } } },
-					},
 				},
 			}
 
