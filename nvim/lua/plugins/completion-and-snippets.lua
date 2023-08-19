@@ -344,15 +344,13 @@ return {
 		"L3MON4D3/LuaSnip",
 		event = "InsertEnter",
 		config = function()
-			local types = require("luasnip.util.types")
-			-- https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#api-reference
+			-- DOCS https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#api-reference
 			require("luasnip").setup {
 				region_check_events = "CursorMoved", -- prevent <Tab> jumping back to a snippet after it has been left early
-				update_events = "TextChanged,TextChangedI", -- live updating of snippets
-				enable_autosnippets = true, -- for javascript "if ()"
+				update_events = { "TextChanged", "TextChangedI" }, -- live updating of snippets
 				ext_opts = {
 					-- choice node https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#ext_opts
-					[types.choiceNode] = {
+					[require("luasnip.util.types").choiceNode] = {
 						active = { virt_text = { { "󰊖 ", "DiagnosticHint" } } },
 					},
 				},
