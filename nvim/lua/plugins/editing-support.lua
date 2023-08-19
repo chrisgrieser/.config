@@ -6,7 +6,7 @@ return {
 		opts = {
 			prefix = " 󱞷",
 			highlight = "NonText",
-			min_rows = 6,
+			min_rows = 7,
 			-- Disable display of virtual text below blocks for indentation based
 			-- languages like Python
 			disable_virtual_lines_ft = { "yaml" },
@@ -21,11 +21,12 @@ return {
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
-		dependencies = { "hrsh7th/nvim-cmp", "nvim-treesitter/nvim-treesitter" },
+		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function()
 			require("nvim-autopairs").setup { check_ts = true } -- use treesitter
 			local rule = require("nvim-autopairs.rule")
 			local isNodeType = require("nvim-autopairs.ts-conds").is_ts_node
+			local isNotNodeType = require("nvim-autopairs.ts-conds").is_not_ts_node
 
 			require("nvim-autopairs").add_rules {
 				rule("<", ">", "lua"):with_pair(isNodeType("string")), -- keymaps
@@ -33,7 +34,10 @@ return {
 				rule('\\"', '\\"', { "sh", "json" }):with_pair(), -- escaped double quotes
 				rule("*", "*", "markdown"):with_pair(), -- italics
 				rule("__", "__", "markdown"):with_pair(), -- bold
-				-- quicker template string
+				rule("if ", "()", { "javascript", "typescript" })
+					:with_pair(isNotNodeType({ "string", "comment" }))
+					:set_end_pair_length(1), -- only move one char to the side
+				-- quicker template string <>
 				rule("$", "{}", { "javascript", "typescript", "json" })
 					:with_pair(isNodeType("string"))
 					:set_end_pair_length(1), -- only move one char to the side
@@ -124,7 +128,7 @@ return {
 		"Wansmer/treesj",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		keys = {
-			{ "<leader>s", function() require("treesj").toggle() end, desc = "󰗈 Split/join lines" },
+			{ "<leader>s", function() require("treesj").toggle() end, desc = "󰗈 Split-join lines" },
 		},
 		opts = {
 			use_default_keymaps = false,

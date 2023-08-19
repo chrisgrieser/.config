@@ -24,6 +24,10 @@ local function updateHighlight(hlgroup, changes) cmd.highlight(hlgroup .. " " ..
 ---@param hlgroup string
 local function clearHighlight(hlgroup) vim.api.nvim_set_hl(0, hlgroup, {}) end
 
+---@param hlgroup string
+---@param changes table
+local function overwriteHighlight(hlgroup, changes) vim.api.nvim_set_hl(0, hlgroup, changes) end
+
 --------------------------------------------------------------------------------
 
 local function customHighlights()
@@ -37,7 +41,8 @@ local function customHighlights()
 
 	-- make MatchParen stand out more (orange to close to rainbow brackets)
 	-- vim.api.nvim_set_hl(0, "MatchParen", { bold = true, underline = true, fg = "#4a8cc9" })
-	vim.api.nvim_set_hl(0, "MatchParen", { reverse = true })
+	overwriteHighlight("MatchParen", { reverse = true })
+	overwriteHighlight("MatchParenCur", { reverse = true, underline = true })
 
 	-- proper underlines for diagnostics
 	local types = { "Error", "Warn", "Info", "Hint" }
