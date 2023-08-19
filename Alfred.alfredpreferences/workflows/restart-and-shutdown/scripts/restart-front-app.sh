@@ -51,3 +51,5 @@ sleep 1 # wait for server
 if ! nvim --server "$server" --remote-send "<cmd>sleep 1m<CR>"; then
 	osascript -e 'display notification "" with title "Server unresponsive."'
 fi
+
+#───────────────────────────────────────────────────────────────────────────────
