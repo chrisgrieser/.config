@@ -26,7 +26,6 @@ return {
 			require("nvim-autopairs").setup { check_ts = true } -- use treesitter
 			local rule = require("nvim-autopairs.rule")
 			local isNodeType = require("nvim-autopairs.ts-conds").is_ts_node
-			local isNotNodeType = require("nvim-autopairs.ts-conds").is_not_ts_node
 
 			require("nvim-autopairs").add_rules {
 				rule("<", ">", "lua"):with_pair(isNodeType("string")), -- keymaps
@@ -34,13 +33,18 @@ return {
 				rule('\\"', '\\"', { "sh", "json" }):with_pair(), -- escaped double quotes
 				rule("*", "*", "markdown"):with_pair(), -- italics
 				rule("__", "__", "markdown"):with_pair(), -- bold
-				rule("if ", "()", { "javascript", "typescript" })
-					:with_pair(isNotNodeType({ "string", "comment" }))
+				-- javascript/typescript
+				rule("^%s*if $", "()", { "javascript", "typescript" })
+					:use_regex(true)
 					:set_end_pair_length(1), -- only move one char to the side
-				-- quicker template string <>
+				rule("^%s*}? ?else if $", "()", { "javascript", "typescript" })
+					:use_regex(true)
+					:set_end_pair_length(1), -- only move one char to the side
 				rule("$", "{}", { "javascript", "typescript", "json" })
 					:with_pair(isNodeType("string"))
-					:set_end_pair_length(1), -- only move one char to the side
+					:set_end_pair_length(1),
+				rule(" =>", " {  }", { "typescript", "javascript" })
+					:set_end_pair_length(2),
 			}
 
 			-- add brackets to cmp completions, e.g. "function" -> "function()"
