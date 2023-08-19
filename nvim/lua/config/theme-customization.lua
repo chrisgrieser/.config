@@ -36,7 +36,8 @@ local function customHighlights()
 	)
 
 	-- make MatchParen stand out more (orange to close to rainbow brackets)
-	vim.api.nvim_set_hl(0, "MatchParen", { bold = true, underline = true, fg = "#4a8cc9" })
+	-- vim.api.nvim_set_hl(0, "MatchParen", { bold = true, underline = true, fg = "#4a8cc9" })
+	vim.api.nvim_set_hl(0, "MatchParen", { reverse = true })
 
 	-- proper underlines for diagnostics
 	local types = { "Error", "Warn", "Info", "Hint" }
@@ -58,9 +59,6 @@ local function themeModifications()
 	for _, v in pairs(vimModes) do
 		updateHighlight("lualine_a_" .. v, "gui=bold")
 	end
-
-
-
 
 	if theme == "tokyonight" then
 		for _, v in pairs(vimModes) do
@@ -93,13 +91,10 @@ local function themeModifications()
 		linkHighlight("@text.danger.comment", "@text.todo.comment")
 		vim.opt.guicursor:append("i-ci-c:ver25")
 		vim.opt.guicursor:append("o-v:hor10")
-		if mode == "dark" then
-			updateHighlight("ColorColumn", "guibg=#2e3742")
-		end
+		if mode == "dark" then updateHighlight("ColorColumn", "guibg=#2e3742") end
 	elseif theme == "kanagawa" then
 		clearHighlight("SignColumn")
 		linkHighlight("MoreMsg", "Folded") -- FIX for https://github.com/rebelot/kanagawa.nvim/issues/89
-
 	elseif theme == "zephyr" then
 		updateHighlight("IncSearch", "guifg=#FFFFFF")
 		linkHighlight("TabLineSel", "lualine_a_normal")
