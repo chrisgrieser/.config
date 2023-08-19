@@ -21,19 +21,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>0D4AFCC3-ACC0-43C4-B09F-11036F3CDCC0</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>D96907E4-B008-4B62-AED9-1958C5D8E9A4</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>5852A551-EFDF-47BB-A256-13A0D3975AA5</key>
 		<array>
 			<dict>
@@ -121,19 +108,6 @@
 				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
-			</dict>
-		</array>
-		<key>933340EF-3EA1-461F-A680-4D4B22FDFBA3</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>0D4AFCC3-ACC0-43C4-B09F-11036F3CDCC0</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<true/>
 			</dict>
 		</array>
 		<key>93464D83-F4C4-44EC-852C-956A903A99C9</key>
@@ -586,69 +560,6 @@ fi</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>externaltriggerid</key>
-				<string>browse</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>self</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>D96907E4-B008-4B62-AED9-1958C5D8E9A4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/clear_cache.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>0D4AFCC3-ACC0-43C4-B09F-11036F3CDCC0</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>:reddit</string>
-				<key>subtext</key>
-				<string>{const:alfred_workflow_name}</string>
-				<key>text</key>
-				<string>Debugging: Reset cache for all subreddits</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>933340EF-3EA1-461F-A680-4D4B22FDFBA3</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
@@ -665,7 +576,6 @@ fi</string>
 ## Info
 - No reddit account is needed. 
 - Due to smart caching, this workflow should not hit API rate limits under normal usage.
-- Some settings only take affect after refreshing. You can manually force refreshing all subreddits via `:reddit`, but doing so will also clear all visitation icons, reading positions, and new/old marks.
 
 ---
 
@@ -682,15 +592,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>220</real>
 			<key>ypos</key>
 			<real>310</real>
-		</dict>
-		<key>0D4AFCC3-ACC0-43C4-B09F-11036F3CDCC0</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>890</real>
-			<key>ypos</key>
-			<real>755</real>
 		</dict>
 		<key>26F00E99-5D45-4FCE-AF6F-EA4A468CDBB9</key>
 		<dict>
@@ -757,17 +658,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>280</real>
 		</dict>
-		<key>933340EF-3EA1-461F-A680-4D4B22FDFBA3</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>internal</string>
-			<key>xpos</key>
-			<real>730</real>
-			<key>ypos</key>
-			<real>755</real>
-		</dict>
 		<key>93464D83-F4C4-44EC-852C-956A903A99C9</key>
 		<dict>
 			<key>colorindex</key>
@@ -787,15 +677,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>760</real>
 			<key>ypos</key>
 			<real>125</real>
-		</dict>
-		<key>D96907E4-B008-4B62-AED9-1958C5D8E9A4</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>1045</real>
-			<key>ypos</key>
-			<real>755</real>
 		</dict>
 		<key>E640FB36-75C7-4B36-A8AC-0F56468145CC</key>
 		<dict>
@@ -1076,7 +957,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.2.4</string>
+	<string>1.2.5</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

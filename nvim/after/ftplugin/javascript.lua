@@ -25,7 +25,7 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 --------------------------------------------------------------------------------
 
 -- Open regex in regex101 and regexper (railroad diagram)
-keymap("n", "g/", function()
+keymap("n", "<localleader>r", function()
 	-- keymaps assume a/ and i/ mapped as regex textobj via treesitter textobj
 	vim.cmd.normal { '"zya/', bang = false } -- yank outer regex
 	vim.cmd.normal { "vi/", bang = false } -- select inner regex for easy replacement

@@ -209,7 +209,7 @@ wt.on("format-tab-title", function(tab)
 end)
 
 -- WINDOW TITLE
--- set to pwd
+-- set to pwd basename
 -- https://wezfurlong.org/wezterm/config/lua/window-events/format-window-title
 wt.on("format-window-title", function(_, pane)
 	local pwd = pane.current_working_dir:gsub("^file://[^/]+", ""):gsub("%%20", " ")

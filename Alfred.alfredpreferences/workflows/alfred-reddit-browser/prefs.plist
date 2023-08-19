@@ -13,7 +13,7 @@
 	<key>hide_stickied</key>
 	<true/>
 	<key>min_upvotes</key>
-	<string>1</string>
+	<string>2</string>
 	<key>save_scroll_position</key>
 	<true/>
 	<key>subreddits</key>
