@@ -38,7 +38,7 @@ safeRequire("lua.repo-auto-sync")
 safeRequire("lua.auto-quitter")
 safeRequire("lua.hardware-periphery")
 safeRequire("lua.pageup-pagedown-scroll")
-safeRequire("lua.weather-reminder") -- <-- disable when not needed
+safeRequire("lua.weather-reminder")
 
 -- app-specific
 safeRequire("lua.app-specific-behavior")

@@ -1,7 +1,9 @@
--- Checks when the outside temperature passes the inside temperature or vice
--- versa.
-local env = require("lua.environment-vars")
-local u = require("lua.utils")
+-- Checks when the outside temperature passes the inside temperature or vice versa.
+
+-- only run in the summer
+local month = tostring(os.date("%B")):sub(1, 3)
+if month ~= "Aug" or month ~= "Jul" or month ~= "Sep" then return end
+
 --------------------------------------------------------------------------------
 
 -- CONFIG
@@ -9,10 +11,13 @@ local u = require("lua.utils")
 -- roughly Berlin-Tegel (no precise location due to pricacy)
 local latitude = 52
 local longitude = 13
-local inTemp = 24
+local inTemp = 24.5
 local checkIntervalMins = 30
 
 --------------------------------------------------------------------------------
+
+local env = require("lua.environment-vars")
+local u = require("lua.utils")
 
 local callUrl = ("https://api.brightsky.dev/current_weather?lat=%s&lon=%s"):format(latitude, longitude)
 PrevOutTemp = nil -- no value on first run
