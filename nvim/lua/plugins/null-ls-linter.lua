@@ -102,9 +102,6 @@ local function nullSources()
 		builtins.diagnostics.vale.with {
 			extra_args = { "--config", linterConfig .. "/vale/vale.ini" },
 		},
-		builtins.formatting.cbfmt.with { -- code blocks
-			extra_args = { "--config", linterConfig .. "/cbfmt.toml" },
-		},
 		builtins.formatting.markdownlint.with {
 			extra_args = { "--config", linterConfig .. "/markdownlintrc" },
 		},
@@ -115,6 +112,32 @@ local function nullSources()
 		},
 	}
 end
+--------------------------------------------------------------------------------
+
+local function nvim_lint_config()
+	require("lint").linters_by_ft = {
+		lua = { "selene", "codespell" },
+		css = { "stylelint", "codespell" },
+		sh = { "shellcheck", "codespell" },
+		markdown = { "vale", "markdownlint", "codespell" },
+		yaml = { "yamllint", "codespell" },
+		json = { "codespell" },
+		javascript = { "codespell" },
+		typescript = { "codespell" },
+		gitcommit = { "codespell" },
+		toml = { "codespell" },
+		python = { "codespell" },
+	}
+	-- "BufWritePost" relevant due to nvim-autosave
+	vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "InsertLeave", "TextChanged" }, {
+		callback = function() require("lint").try_lint() end,
+	})
+
+	-- Linter configs
+	require("lint").linters.codespell.args = { "--ignore-words", linterConfig .. "/codespell-ignore.txt" }
+	require("lint").linters.codespell.args = { "--ignore-words", linterConfig .. "/codespell-ignore.txt" }
+end
+
 --------------------------------------------------------------------------------
 
 return {
@@ -137,11 +160,6 @@ return {
 	{
 		"mfussenegger/nvim-lint",
 		event = "VeryLazy",
-		config = function()
-			require("lint").linters_by_ft = {
-				lua = { "selene" },
-				css = { "stylelint" },
-			}
-		end,
+		config = nvim_lint_config,
 	},
 }
