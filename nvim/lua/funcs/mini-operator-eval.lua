@@ -1,17 +1,21 @@
--- used for mini.operators
+-- used solely for mini.operators
 local M = {}
 --------------------------------------------------------------------------------
 
+-- INFO some repl-cmds automatically print the last line, so they do not
+-- require a printer command
+local cmds = {
+	sh = { repl = "zsh -c" },
+	python = { repl = "python3 -c", printer = "print(%s)" },
+	applescript = { repl = "osascript -l AppleScript -e" },
+	javascript = { repl = "osascript -l JavaScript -e" }, -- Apple's JXA
+	typescript = { repl = "node -e", printer = "console.log(%s)" },
+}
+
+-- run as `init` for mini.operators
 function M.filetypeSpecificEval()
-	local cmds = {
-		sh = { repl = "zsh -c" },
-		python = { repl = "python3 -c", printer = "print(%s)" },
-		applescript = { repl = "osascript -l AppleScript -e" },
-		javascript = { repl = "osascript -l JavaScript -e" }, -- JXA
-		typescript = { repl = "node -e", printer = "console.log(%s)" },
-	}
 	vim.api.nvim_create_autocmd("FileType", {
-		pattern = { "javascript", "typescript", "sh", "python", "applescript" },
+		pattern = vim.tbl_keys(cmds),
 		callback = function(ctx)
 			local ft = ctx.match
 			local repl = cmds[ft].repl
@@ -45,7 +49,7 @@ end
 
 ---@param content object
 ---@return string[] lines
-function M.luaEvalFunc(content)
+function M.luaEval(content)
 	local input_lines = vim.deepcopy(content.lines) -- Currently needed as `content` is modified, which it shouldn't
 	local parentDir = vim.fn.expand("%:p:h")
 	local MiniOperators = require("mini.operators")

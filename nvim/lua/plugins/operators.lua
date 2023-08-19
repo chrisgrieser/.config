@@ -16,7 +16,6 @@ return {
 	},
 	{ -- substitute, evaluate, exchange, sort, duplicate
 		"echasnovski/mini.operators",
-		init = require("config.eval-funcs").filetypeSpecificEval,
 		keys = {
 			{ "s", mode = { "n", "x" }, desc = "󰅪 Substitute Operator" },
 			{ "w", mode = { "n", "x" }, desc = "󰅪 Multiply Operator" },
@@ -34,8 +33,9 @@ return {
 			multiply = { prefix = "w" },
 			exchange = { prefix = "sx", reindent_linewise = true },
 			sort = { prefix = "sy" },
-			evaluate = { prefix = "#", func = require("config.eval-funcs").luaEvalFunc },
+			evaluate = { prefix = "#", func = require("funcs.mini-operator-eval").luaEval },
 		},
+		init = require("funcs.mini-operator-eval").filetypeSpecificEval,
 	},
 	{ -- surround
 		"kylechui/nvim-surround",
