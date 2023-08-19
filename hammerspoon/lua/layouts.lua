@@ -74,13 +74,7 @@ local function workLayout()
 			wu.moveResize(win, wu.pseudoMax)
 		end)
 	end
-
-	-- minimize Obsidian
-	hs.timer.waitUntil(
-		function() return (u.app("Obsidian") and u.app("Obsidian"):mainWindow()) end,
-		function() u.app("Obsidian"):mainWindow():minimize() end,
-		0.1
-	)
+	u.app("Obsidian"):mainWindow():minimize()
 
 	-- finish
 	require("lua.sidenotes").reminderToSidenotes()

@@ -27,7 +27,7 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 bo.makeprg = "npm run build"
 bo.errorformat = " > %f:%l:%c: %trror: %m" .. ",%-G%.%#" -- = ignore remaining lines
 
-keymap("n", "<leader>r", function()
+keymap("n", "<localleader><localleader>", function()
 	cmd.update()
 	cmd.redir("@z")
 	cmd([[silent make]]) -- silent, to not show up message (redirection still works)
@@ -40,7 +40,7 @@ end, { buffer = true, desc = " npm run build" })
 --------------------------------------------------------------------------------
 
 -- Open regex in regex101
-keymap("n", "g/", function()
+keymap("n", "<localleader>r", function()
 	-- keymaps assume a/ and i/ mapped as regex textobj via treesitter textobj
 	vim.cmd.normal { '"zya/', bang = false } -- yank outer regex
 	vim.cmd.normal { "vi/", bang = false } -- select inner regex for easy replacement

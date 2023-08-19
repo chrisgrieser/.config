@@ -48,6 +48,7 @@ function cacheIsOutdated(path) {
 /**
  * @param {string} firstPath
  * @param {string} secondPath
+ * @returns {boolean} firstPathOlderThanSecond
  */
 function olderThan(firstPath, secondPath) {
 	const firstMdate = +Application("System Events").aliases[firstPath].modificationDate();

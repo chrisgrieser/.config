@@ -129,6 +129,18 @@ function multiplyFuncs.javascript(lines)
 	return { line }
 end
 
+
+---@param lines string[]
+---@return string[]
+function multiplyFuncs.python(lines)
+	if #lines ~= 1 then return lines end
+	local line = lines[1]
+
+	if line:find("^%s*if.+:$") then line = line:gsub("^(%s*)if", "%1elif") end
+
+	return { line }
+end
+
 ---@param lines string[]
 ---@return string[]
 function multiplyFuncs.typescript(lines) return multiplyFuncs.javascript(lines) end

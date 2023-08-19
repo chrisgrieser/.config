@@ -45,6 +45,18 @@ function cacheIsOutdated(path) {
 	return cacheAgeMins > cacheAgeThresholdMins;
 }
 
+/**
+ * @param {string} firstPath
+ * @param {string} secondPath
+ * @returns {boolean} firstPathOlderThanSecond
+ */
+function olderThan(firstPath, secondPath) {
+	const firstMdate = +Application("System Events").aliases[firstPath].modificationDate();
+	const secondMdate = +Application("System Events").aliases[secondPath].modificationDate();
+	const firstPathOlderThanSecond = firstMdate - secondMdate < 0;
+	return firstPathOlderThanSecond;
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -57,14 +69,16 @@ function run() {
 	const selectedWithAlfred = $.NSProcessInfo.processInfo.environment.objectForKey("selected_subreddit").js;
 	const firstSubredditInConfig = $.getenv("subreddits").split("\n")[0]; // only needed for first run
 	const subredditName = selectedWithAlfred || prevRunSubreddit || firstSubredditInConfig;
+	const pathOfThisWorkflow = `${$.getenv("alfred_preferences")}/workflows/${$.getenv("alfred_workflow_uid")}`;
 
 	ensureCacheFolderExists();
 	writeToFile($.getenv("alfred_workflow_cache") + "/current_subreddit", subredditName);
 
 	// read posts from cache
 	const subredditCache = `${$.getenv("alfred_workflow_cache")}/${subredditName}.json`;
+
 	let posts;
-	if (!cacheIsOutdated(subredditCache)) {
+	if (!cacheIsOutdated(subredditCache) && olderThan(`${pathOfThisWorkflow}/prefs.plist`, subredditCache)) {
 		posts = JSON.parse(readFile(subredditCache));
 		return JSON.stringify({
 			variables: { cache_was_updated: "false" }, // Alfred vars always strings
@@ -75,12 +89,7 @@ function run() {
 
 	// IMPORT SUBREDDIT-LOADING-FUNCTIONS
 	// HACK read + eval, since JXA knows no import keyword
-	const fileToImport =
-		$.getenv("alfred_preferences") +
-		"/workflows/" +
-		$.getenv("alfred_workflow_uid") + // = foldername
-		"/scripts/get-new-posts.js";
-	eval(readFile(fileToImport));
+	eval(readFile(`${pathOfThisWorkflow}/scripts/get-new-posts.js`));
 
 	// marker for old posts
 	const oldItems = fileExists(subredditCache) ? JSON.parse(readFile(subredditCache)) : [];

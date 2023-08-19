@@ -8,19 +8,6 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
-		<key>0C8B99CA-B7BE-4D88-A242-34082B5A5CDB</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>85410B5C-411D-4939-AF9F-3675EF2B3CA1</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>203119B0-F56B-4EDE-BE71-21B68645EB6B</key>
 		<array/>
 		<key>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</key>
@@ -132,19 +119,6 @@
 				<string>⌘: Select URL</string>
 				<key>vitoclose</key>
 				<true/>
-			</dict>
-		</array>
-		<key>85410B5C-411D-4939-AF9F-3675EF2B3CA1</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>78EFB778-9A4C-4C49-8367-93D039DCD765</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
 			</dict>
 		</array>
 		<key>B9CE3F5C-A396-4E8C-8709-A08871B57DE6</key>
@@ -377,71 +351,6 @@
 			<string>393BA661-A566-4A4C-872F-3385CC07DDB9</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>✅ Cache refreshed</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>78EFB778-9A4C-4C49-8367-93D039DCD765</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/clear_cache.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>85410B5C-411D-4939-AF9F-3675EF2B3CA1</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>:hyper-seek</string>
-				<key>subtext</key>
-				<string>{const:alfred_workflow_name}</string>
-				<key>text</key>
-				<string>Refresh the cache</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>0C8B99CA-B7BE-4D88-A242-34082B5A5CDB</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -884,17 +793,6 @@ Due to the nature of this workflow, it will not be submitted to the Alfred Galle
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>0C8B99CA-B7BE-4D88-A242-34082B5A5CDB</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>refresh cache</string>
-			<key>xpos</key>
-			<real>705</real>
-			<key>ypos</key>
-			<real>135</real>
-		</dict>
 		<key>203119B0-F56B-4EDE-BE71-21B68645EB6B</key>
 		<dict>
 			<key>colorindex</key>
@@ -993,15 +891,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>430</real>
 		</dict>
-		<key>78EFB778-9A4C-4C49-8367-93D039DCD765</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>1000</real>
-			<key>ypos</key>
-			<real>135</real>
-		</dict>
 		<key>841BD8BB-2E10-4E6A-89DC-2C5DAA070D75</key>
 		<dict>
 			<key>colorindex</key>
@@ -1012,15 +901,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>760</real>
 			<key>ypos</key>
 			<real>320</real>
-		</dict>
-		<key>85410B5C-411D-4939-AF9F-3675EF2B3CA1</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>855</real>
-			<key>ypos</key>
-			<real>135</real>
 		</dict>
 		<key>B9CE3F5C-A396-4E8C-8709-A08871B57DE6</key>
 		<dict>
