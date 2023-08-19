@@ -7,7 +7,6 @@ local lintersAndFormatters = {
 	"shellcheck", -- needed for bash-lsp
 	"shfmt", -- shell
 	"markdownlint",
-	"cbfmt", -- use other linters to format codeblocks in markdown
 	"black", -- python formatter
 	"vale", -- natural language
 	"codespell", -- superset of `misspell`, therefore only using codespell
@@ -110,12 +109,16 @@ end
 --------------------------------------------------------------------------------
 
 return {
-	{
+	{ -- auto-install missing linters & formatters
+		-- INFO auto-install of lsp servers done via `mason-lspconfig.nvim`
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		event = "VimEnter", -- later does not trigger run_on_start properly
+		dependencies = "williamboman/mason.nvim",
 		opts = {
 			ensure_installed = lintersAndFormatters,
 			auto_update = false,
 			run_on_start = true,
+			start_delay = 1000,
 		},
 	},
 	{
