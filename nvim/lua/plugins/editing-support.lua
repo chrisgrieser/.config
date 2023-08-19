@@ -1,15 +1,23 @@
 return {
-	{ -- automatically set correct indent for file
-		"nmac427/guess-indent.nvim",
-		event = "BufReadPre",
-		opts = { override_editorconfig = false },
+	{
+		"haringsrob/nvim_context_vt",
+		event = "VeryLazy",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		opts = {
+			prefix = " 󱞷",
+			highlight = "NonText",
+			min_rows = 6,
+			-- Disable display of virtual text below blocks for indentation based
+			-- languages like Python
+			disable_virtual_lines_ft = { "yaml" },
+		},
 	},
 	-- TODO update when more stable
 	-- list of supported languages: https://github.com/filNaj/tree-setter/tree/master/queries
-	-- { -- auto-insert ;,=:
-	-- 	"filNaj/tree-setter",
-	-- 	ft = { "c", "cpp", "java", "javascript", "typescript", "python", "rust", "go" },
-	-- },
+	{ -- auto-insert ;,=:
+		"filNaj/tree-setter",
+		event = "InsertEnter",
+	},
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
@@ -36,9 +44,14 @@ return {
 			require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
 	},
+	{ -- automatically set correct indent for file
+		"nmac427/guess-indent.nvim",
+		event = "BufReadPre",
+		opts = { override_editorconfig = false },
+	},
 	{ -- basically autopair, but for keywords
 		"RRethy/nvim-treesitter-endwise",
-		ft = { "lua", "bash", "zsh", "sh", "vim", "ruby", "elixir" },
+		event = "InsertEnter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
 	{ -- case conversion
@@ -81,7 +94,7 @@ return {
 			allowed_separators = { "..", "*" }, -- add multiplication & lua string concatenation
 			highlight_node_at_cursor = true,
 			ignore_injected_langs = true,
-			allow_interline_swaps = false,
+			allow_interline_swaps = true,
 			interline_swaps_witout_separator = false,
 		},
 		keys = {
@@ -102,24 +115,10 @@ return {
 			})
 		end,
 	},
-	{
-		"haringsrob/nvim_context_vt",
-		event = "VeryLazy",
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		opts = {
-			prefix = " 󱞷",
-			highlight = "NonText",
-			min_rows = 8,
-			-- Disable display of virtual text below blocks for indentation based
-			-- languages like Python
-			disable_virtual_lines_ft = { "yaml" },
-		},
-	},
 	{ -- fixes scrolloff at end of file
-		"chrisgrieser/scrollEOF.nvim",
+		"Aasim-A/scrollEOF.nvim",
 		event = "CursorMoved",
 		opts = true,
-		dev = true,
 	},
 	{ -- split-join lines
 		"Wansmer/treesj",
@@ -229,7 +228,7 @@ return {
 
 			-- needed so localleader prefixes work with whichkey
 			require("which-key").register {
-				["<localleader>"] = { name = "<localleader>", mode = { "n", "x" } },
+				["<localleader>"] = { name = "filetype-specific", mode = { "n", "x" } },
 			}
 
 			-- set by some plugins and unnecessarily clobbers whichkey

@@ -185,8 +185,7 @@ keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>]], { desc = "󰗈 split
 -- URL Opening (forward-seeking `gx`)
 keymap("n", "gx", function()
 	require("various-textobjs").url()
-	-- various textobjs only switches to visual if obj found
-	local foundURL = fn.mode():find("v")
+	local foundURL = fn.mode():find("v") -- various textobjs only switches to visual if obj found
 	if foundURL then
 		u.normal('"zy')
 		local url = fn.getreg("z")
@@ -312,9 +311,9 @@ keymap("i", "<D-e>", "``<Left>", { desc = "  Inline Code" })
 ---@nodiscard
 ---@return string name of the current project
 local function projectName()
-	local pwd = vim.loop.cwd() or ""
-	local name = pwd:gsub(".*/", "")
-	return name
+	local pwd = vim.loop.cwd()
+	if not pwd then return "" end
+	return vim.fs.basename(pwd)
 end
 
 keymap("n", "go", function()
@@ -346,7 +345,7 @@ end, { desc = " Live Grep in Project" })
 -- stylua: ignore
 keymap({ "n", "x" }, "gL", function() cmd.Telescope("grep_string") end, { desc = " Grep cword in Project" })
 -- stylua: ignore
-keymap("n", "gr", [[<cmd>lua require('telescope').extensions.recent_files.pick()<CR>]], { desc = " Recent Files" })
+keymap("n", "gr", "<cmd>lua require('telescope').extensions.recent_files.pick()<CR>", { desc = " Recent Files" })
 
 keymap("n", "g.", function() cmd.Telescope("resume") end, { desc = "  Continue" })
 keymap("n", "ga", "gf", { desc = "Goto File under Cursor" }) -- needed, since `gf` remapped
@@ -396,22 +395,18 @@ autocmd("LspAttach", {
 		local capabilities = client.server_capabilities
 
 		-- overrides treesitter-refactor's rename
+		-- stylua: ignore start
 		if capabilities.renameProvider then
-			-- cannot run `cmd.IncRename` since the plugin *has* to use the
-			-- command line; needs defer to not be overwritten by treesitter-
-			-- refactor's smart-rename
-			-- stylua: ignore
+			-- needs defer to not be overwritten by treesitter-refactor's smart-rename
 			vim.defer_fn( function() keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename", buffer = true }) end, 1)
-			-- stylua: ignore
 			keymap("n", "<leader>V", function() return ":IncRename " .. expand("<cword>") end, { desc = "󰒕 IncRename (cword)", buffer = true, expr = true })
 		end
 		if capabilities.documentSymbolProvider then
 			-- overwrites treesitter goto-symbol
-			-- stylua: ignore start
 			keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Symbols", buffer = true })
 			keymap("n", "gw", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true })
-			-- stylua: ignore end
 		end
+		-- stylua: ignore end
 	end,
 })
 
