@@ -46,6 +46,7 @@ local tsConfig = {
 				["i/"] = { query = "@regex.inner", desc = "󱡔 inner regex textobj" },
 				["aa"] = { query = "@parameter.outer", desc = "󱡔 outer parameter textobj" },
 				["ia"] = { query = "@parameter.inner", desc = "󱡔 inner parameter textobj" },
+
 				-- stylua: ignore start
 				["iu"] = { query = "@loop.inner", desc = "󱡔 inner loop textobj" }, -- mnemonic: luup
 				["au"] = { query = "@loop.outer", desc = "󱡔 outer loop textobj" },
