@@ -19,52 +19,6 @@ local lintersAndFormatters = {
 }
 --------------------------------------------------------------------------------
 
---------------------------------------------------------------------------------
-local function nullSources()
-	local builtins = require("null-ls").builtins
-	return {
-		-- GLOBAL
-		builtins.formatting.codespell.with {
-			disabled_filetypes = { "css", "bib", "gitignore" },
-			extra_args = { "--ignore-words", linterConfig .. "/codespell-ignore.txt" },
-		},
-
-		-- PYTHON
-		builtins.formatting.black,
-
-		-- SHELL
-		builtins.formatting.shfmt.with {
-			extra_filetypes = { "zsh" },
-		},
-
-		-- JS/TS/JSON
-		builtins.formatting.rome, -- not available via LSP yet
-
-		-- CSS
-		builtins.formatting.stylelint.with {
-			-- using config without ordering, since automatic re-ordering can be
-			-- confusing. Config with stylelint-order is only run on build.
-			extra_args = { "--config", linterConfig .. "/stylelintrc-formatting.yml" },
-			timeout = 15000, -- longer timeout for large css files
-		},
-
-		-- LUA
-		builtins.formatting.stylua,
-
-		-- PRETTIER: YAML/HTML
-		-- INFO use only for yaml/html, since rome handles the rest
-		builtins.formatting.prettier.with {
-			filetypes = { "yaml", "html" },
-		},
-
-		-- MARKDOWN & PROSE
-		builtins.formatting.markdownlint.with {
-			extra_args = { "--config", linterConfig .. "/markdownlintrc" },
-		},
-	}
-end
---------------------------------------------------------------------------------
-
 local function linterConfigs()
 	local lint = require("lint")
 	lint.linters_by_ft = {
@@ -81,38 +35,37 @@ local function linterConfigs()
 		toml = { "codespell" },
 		python = { "codespell" },
 	}
-	-- "BufWritePost" relevant due to nvim-autosave
-	vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "InsertLeave", "TextChanged" }, {
-		callback = function() lint.try_lint() end,
-	})
 
-	local function get_cur_file_extension(bufnr)
-		bufnr = bufnr or 0
-		return "." .. vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ':e')
-	end
+	-- "BufWritePost" relevant due to nvim-autosave
+	vim.api.nvim_create_autocmd(
+		{ "BufEnter", "BufReadPost", "BufWritePost", "InsertLeave", "TextChanged" },
+		{ callback = function() lint.try_lint() end }
+	)
 
 	-- Linter configs
 	-- https://github.com/mfussenegger/nvim-lint/tree/master/lua/lint/linters
 	lint.linters.codespell.args = { "--ignore-words", linterConfig .. "/codespell-ignore.txt" }
 	lint.linters.markdownlint.args = { "--config", linterConfig .. "/markdownlintrc" }
 	lint.linters.vale.args = {
-		'--no-exit',
-		'--output', 'JSON',
-		'--ext', get_cur_file_extension
+		"--no-exit",
+		"--output",
+		"JSON",
 		"--config",
 		linterConfig .. "/vale/vale.ini",
 	}
 	lint.linters.shellcheck.args = {
-		"--shell", "bash", -- force to work with zsh
-		'--format', 'json',
-		'-',
+		"--shell",
+		"bash", -- force to work with zsh
+		"--format",
+		"json",
+		"-",
 	}
 	lint.linters.yamllint.args = {
 		"--config-file",
 		linterConfig .. "/yamllint.yaml",
-		'--format', 
-		'parsable', 
-		'-'
+		"--format",
+		"parsable",
+		"-",
 	}
 	lint.linters.stylelint.args = {
 		"-f",
@@ -123,35 +76,47 @@ local function linterConfigs()
 		"--stdin",
 		"--stdin-filename",
 		function() return vim.fn.expand("%:p") end,
-	} 
+	}
 end
 
+--------------------------------------------------------------------------------
 
-local function formatterConfigs() 
-		-- https://github.com/mhartington/formatter.nvim/tree/master/lua/formatter/filetypes
+local function formatterConfigs()
+	local function romeConfig(ext)
+		return {
+			exe = "rome",
+			stdin = true,
+			args = { "format", "--stdin-file-path", "dummy." .. ext },
+		}
+	end
+
+	-- https://github.com/mhartington/formatter.nvim/tree/master/lua/formatter/filetypes
 	-- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
 	require("formatter").setup {
-	filetype = {
-		-- Formatter configurations for filetype "lua" go here
-		-- and will be executed in order
-		lua = {
-			require("formatter.filetypes.lua").stylua,
+		filetype = {
+			lua = { require("formatter.filetypes.lua").stylua },
+			sh = { require("formatter.filetypes.sh").shfmt },
+			zsh = { require("formatter.filetypes.sh").shfmt },
+			python = { require("formatter.filetypes.python").black },
+			html = { require("formatter.filetypes.html").prettier },
+			yaml = { require("formatter.filetypes.yaml").prettier },
+			javascript = { romeConfig("js") },
+			typescript = { romeConfig("ts") },
+			json = { romeConfig("json") },
 		},
-		sh = {
-			require("formatter.filetypes.sh").stylua,
-		},
-	}
 	}
 end
-	
 
 --------------------------------------------------------------------------------
 
 return {
 	{
-		"jayp0521/mason-null-ls.nvim",
-		enabled = false,
-		opts = { ensure_installed = lintersAndFormatters },
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		opts = {
+			ensure_installed = lintersAndFormatters,
+			auto_update = false,
+			run_on_start = true,
+		},
 	},
 	{
 		"mfussenegger/nvim-lint",
@@ -160,13 +125,9 @@ return {
 	},
 	{
 		"mhartington/formatter.nvim",
-		cmd = {"Format", "FormatWrite", "FormatLock", "FormatWriteLock"},
-		init = function ()
-			vim.keymap.set({"n", "x"}, "<D-s>", function()
-				vim.cmd.FormatWrite()
-				vim.cmd.update()
-			end, { desc = "󰒕  Save & Format" })
-		end,
+		keys = {
+			{ "<D-s>", "<cmd>FormatWrite<CR>", desc = "󰒕  Save & Format" },
+		},
 		config = formatterConfigs,
 	},
 }
@@ -177,4 +138,3 @@ return {
 -- - ensure_installed https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
 -- - https://dotfyle.com/this-week-in-neovim/48#jose-elias-alvarez/null-ls.nvim
 -- https://www.reddit.com/r/neovim/comments/15oue2o/finally_a_robust_autoformatting_solution/
-

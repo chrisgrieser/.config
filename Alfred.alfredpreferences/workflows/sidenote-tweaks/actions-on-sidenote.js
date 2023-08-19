@@ -89,7 +89,7 @@ function run(argv) {
 		.replace(/[\\$€§*#?!:;.,`'’‘"„“”«»’{}]/g, "")
 		.replaceAll("&", "and")
 		.replace(/ {2,}/g, " ")
-		.slice(0, 50)
+		.slice(0, 50);
 
 	//───────────────────────────────────────────────────────────────────────────
 
@@ -100,7 +100,7 @@ function run(argv) {
 		urls.forEach((/** @type {string} */ url) => app.openLocation(url));
 
 		// dynamically decide whether to delete note
-		const numberOfLines = details.split("\n").length
+		const numberOfLines = details.split("\n").length;
 		if (numberOfLines <= 2 && urls.length === 1) archiveNote(noteObj, safeTitle);
 	}
 
@@ -121,7 +121,6 @@ function run(argv) {
 		writeToFile(exportPath, exportContent);
 		app.doShellScript(`open -R "${exportPath}"`);
 	}
-
 
 	// returns are used for the notification
 	if (doArchive && doOpenUrl) return "🔗 Opened & Archived";
