@@ -83,63 +83,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>B7AFEBAA-711C-43CE-A76F-EDA5FA3D2983</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>D77061AE-DBD8-4581-8519-A7B7A7103FC6</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>BA7E00FB-F43B-4DDF-869D-A9DB23200405</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>F34FCF8E-937F-468A-8727-48A458BF4FA9</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>C98CBF71-E7E2-41B1-9C53-9A50774B67D4</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>FFE40428-4486-4B45-AD59-024B6311D2D8</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>CC649DDD-3F1D-47F4-A2BA-EA57ADBA8E06</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C98CBF71-E7E2-41B1-9C53-9A50774B67D4</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>D77061AE-DBD8-4581-8519-A7B7A7103FC6</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>FFE40428-4486-4B45-AD59-024B6311D2D8</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -182,7 +130,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Automation Utilities</string>
+	<string>Misc Utilities</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -279,51 +227,6 @@ end tell</string>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>318E19F4-2DB1-4B3E-B1E2-F288DF9FF244</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict>
-					<key>height</key>
-					<string>600</string>
-					<key>width</key>
-					<string>500</string>
-					<key>x</key>
-					<string>0</string>
-					<key>y</key>
-					<string>800</string>
-				</dict>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/window-management/windows.current.bounds.set.custom</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>FFE40428-4486-4B45-AD59-024B6311D2D8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>pip zoom</string>
-				<key>subtext</key>
-				<string>Zoom</string>
-				<key>text</key>
-				<string>Picture-in-Picture</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>CC649DDD-3F1D-47F4-A2BA-EA57ADBA8E06</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -686,189 +589,6 @@ end tell</string>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>tell application "System Events" to tell process "zoom.us"
-	set frontmost to true
-	click menu item "Keep on Top" of menu "Meeting" of menu bar 1
-end tell</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>C98CBF71-E7E2-41B1-9C53-9A50774B67D4</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>tell application "System Events" to tell process "IINA" 
-	set frontmost to true 
-	try 
-		click menu item "Exit Full Screen" of menu "Video" of menu bar 1
-		delay 0.4 
-	end try 
-	click menu item "Float on Top" of menu "Video" of menu bar 1 
-end tell</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>D77061AE-DBD8-4581-8519-A7B7A7103FC6</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>pip iina</string>
-				<key>subtext</key>
-				<string>IINA</string>
-				<key>text</key>
-				<string>Picture-in-Picture</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>B7AFEBAA-711C-43CE-A76F-EDA5FA3D2983</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>if pgrep -xq "lo-rain" ; then
-	killall "lo-rain"
-else
-	open -a "lo-rain"
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>11</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>AF2E709C-56BA-4D78-AD00-074FC6326079</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>rain</string>
-				<key>subtext</key>
-				<string>lo-rain</string>
-				<key>text</key>
-				<string>Toggle Rain</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>A495CCCB-F21B-41F1-B7AA-E4A511EC63C4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>12</integer>
-				<key>hotmod</key>
-				<integer>262144</integer>
-				<key>hotstring</key>
-				<string>Q</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>org.pqrs.Karabiner-EventViewer</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>7F470F6C-F1DD-4F6C-A598-CA405EA0B456</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>tell application "Karabiner-EventViewer" to if it is running then quit</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>9734FC1B-0242-4229-B9BF-4A809F59C81E</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
 				<string></string>
@@ -930,6 +650,54 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>if pgrep -xq "lo-rain" ; then
+	killall "lo-rain"
+else
+	open -a "lo-rain"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>AF2E709C-56BA-4D78-AD00-074FC6326079</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>rain</string>
+				<key>subtext</key>
+				<string>lo-rain</string>
+				<key>text</key>
+				<string>Toggle Rain</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>A495CCCB-F21B-41F1-B7AA-E4A511EC63C4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>acceptsmulti</key>
 				<integer>1</integer>
 				<key>filetypes</key>
@@ -961,6 +729,64 @@ fi</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>12</integer>
+				<key>hotmod</key>
+				<integer>262144</integer>
+				<key>hotstring</key>
+				<string>Q</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>org.pqrs.Karabiner-EventViewer</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>7F470F6C-F1DD-4F6C-A598-CA405EA0B456</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>tell application "Karabiner-EventViewer" to if it is running then quit</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>9734FC1B-0242-4229-B9BF-4A809F59C81E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -982,9 +808,9 @@ fi</string>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>530</real>
+			<real>525</real>
 			<key>ypos</key>
-			<real>540</real>
+			<real>245</real>
 		</dict>
 		<key>318E19F4-2DB1-4B3E-B1E2-F288DF9FF244</key>
 		<dict>
@@ -1002,7 +828,7 @@ fi</string>
 			<key>note</key>
 			<string>quit Karabiner-EventViewer</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
 			<real>445</real>
 		</dict>
@@ -1022,9 +848,9 @@ fi</string>
 			<key>note</key>
 			<string>Add Spelling correction to espanso</string>
 			<key>xpos</key>
-			<real>365</real>
+			<real>360</real>
 			<key>ypos</key>
-			<real>465</real>
+			<real>170</real>
 		</dict>
 		<key>A495CCCB-F21B-41F1-B7AA-E4A511EC63C4</key>
 		<dict>
@@ -1046,15 +872,6 @@ fi</string>
 			<key>ypos</key>
 			<real>310</real>
 		</dict>
-		<key>B7AFEBAA-711C-43CE-A76F-EDA5FA3D2983</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>360</real>
-			<key>ypos</key>
-			<real>295</real>
-		</dict>
 		<key>BA7E00FB-F43B-4DDF-869D-A9DB23200405</key>
 		<dict>
 			<key>colorindex</key>
@@ -1071,49 +888,18 @@ fi</string>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>610</real>
+			<real>605</real>
 			<key>ypos</key>
-			<real>465</real>
-		</dict>
-		<key>C98CBF71-E7E2-41B1-9C53-9A50774B67D4</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>keep on top</string>
-			<key>xpos</key>
-			<real>520</real>
-			<key>ypos</key>
-			<real>165</real>
-		</dict>
-		<key>CC649DDD-3F1D-47F4-A2BA-EA57ADBA8E06</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>360</real>
-			<key>ypos</key>
-			<real>165</real>
-		</dict>
-		<key>D77061AE-DBD8-4581-8519-A7B7A7103FC6</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>keep on top &amp; exit fullscreen</string>
-			<key>xpos</key>
-			<real>520</real>
-			<key>ypos</key>
-			<real>295</real>
+			<real>170</real>
 		</dict>
 		<key>D9D1017F-1F5D-4562-8B69-0232E40032C5</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>610</real>
+			<real>605</real>
 			<key>ypos</key>
-			<real>625</real>
+			<real>330</real>
 		</dict>
 		<key>DE6D43CB-FDC8-4501-B0BC-6EDCECD2043A</key>
 		<dict>
@@ -1131,9 +917,9 @@ fi</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>365</real>
+			<real>360</real>
 			<key>ypos</key>
-			<real>625</real>
+			<real>330</real>
 		</dict>
 		<key>E9FF31BC-709C-4387-975A-0B1410418161</key>
 		<dict>
@@ -1152,17 +938,6 @@ fi</string>
 			<integer>11</integer>
 			<key>xpos</key>
 			<real>190</real>
-			<key>ypos</key>
-			<real>165</real>
-		</dict>
-		<key>FFE40428-4486-4B45-AD59-024B6311D2D8</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>move to bottom left</string>
-			<key>xpos</key>
-			<real>680</real>
 			<key>ypos</key>
 			<real>165</real>
 		</dict>
