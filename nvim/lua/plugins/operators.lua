@@ -33,9 +33,12 @@ return {
 			multiply = { prefix = "w" },
 			exchange = { prefix = "sx", reindent_linewise = true },
 			sort = { prefix = "sy" },
-			evaluate = { prefix = "#", func = require("funcs.mini-operator-eval").luaEval },
+			evaluate = { prefix = "#", func = require("funcs.mini-operator-extras").luaEval },
 		},
-		init = require("funcs.mini-operator-eval").filetypeSpecificEval,
+		init = function ()
+			require("funcs.mini-operator-extras").filetypeSpecificEval()
+			require("funcs.mini-operator-extras").filetypeSpecificMultiply()
+		end
 	},
 	{ -- surround
 		"kylechui/nvim-surround",

@@ -1,5 +1,6 @@
 -- used solely for mini.operators
 local M = {}
+local autocmd = vim.api.nvim_create_autocmd
 --------------------------------------------------------------------------------
 
 -- INFO some repl-cmds automatically print the last line, so they do not
@@ -14,7 +15,7 @@ local cmds = {
 
 -- run as `init` for mini.operators
 function M.filetypeSpecificEval()
-	vim.api.nvim_create_autocmd("FileType", {
+	autocmd("FileType", {
 		pattern = vim.tbl_keys(cmds),
 		callback = function(ctx)
 			local ft = ctx.match
@@ -47,6 +48,8 @@ end
 --------------------------------------------------------------------------------
 -- https://github.com/echasnovski/mini.nvim/issues/439#issuecomment-1683665986
 
+-- 1. output lines as notification instead of back into the buffer
+-- 2. if in hammerspoon repo, evaluate hammerspoon-lua instead
 ---@param content object
 ---@return string[] lines
 function M.luaEval(content)
@@ -66,5 +69,83 @@ function M.luaEval(content)
 
 	return input_lines
 end
+
+--------------------------------------------------------------------------------
+-- filetype-specific multiply-transformations
+
+local multiplyFuncs = {}
+
+---@param lines string[]
+---@return string[]
+function multiplyFuncs.css(lines)
+	if #lines ~= 1 then return lines end
+	local line = lines[1]
+
+	if line:find("top:") then line = line:gsub("top:", "bottom:") end
+	if line:find("bottom:") then line = line:gsub("bottom:", "top:") end
+	if line:find("right:") then line = line:gsub("right:", "left:") end
+	if line:find("left:") then line = line:gsub("left:", "right:") end
+	if line:find("dark:") then line = line:gsub("dark:", "light:") end
+	if line:find("light:") then line = line:gsub("light:", "dark:") end
+	-- %s condition to avoid matching line-height, border-width, etc
+	if line:find("%sheight:") then line = line:gsub("height:", "width:") end
+	if line:find("%swidth:") then line = line:gsub("width:", "height:") end
+	if line:find("margin:") then line = line:gsub("margin:", "padding:") end
+	if line:find("padding:") then line = line:gsub("padding:", "margin:") end
+
+	return { line }
+end
+
+---@param lines string[]
+---@return string[]
+function multiplyFuncs.lua(lines)
+	if #lines ~= 1 then return lines end
+	local line = lines[1]
+
+	if line:find("^%s*if.+then%s*$") then line = line:gsub("^(%s*)if", "%1elseif") end
+
+	return { line }
+end
+
+---@param lines string[]
+---@return string[]
+function multiplyFuncs.sh(lines)
+	if #lines ~= 1 then return lines end
+	local line = lines[1]
+
+	if line:find("^%s*if.+then$") then line = line:gsub("^(%s*)if", "%1elif") end
+
+	return { line }
+end
+
+---@param lines string[]
+---@return string[]
+function multiplyFuncs.javascript(lines)
+	if #lines ~= 1 then return lines end
+	local line = lines[1]
+
+	if line:find("^%s*if.+{$") then line = line:gsub("^(%s*)if", "%1} else if") end
+
+	return { line }
+end
+
+---@param lines string[]
+---@return string[]
+function multiplyFuncs.typescript(lines) return multiplyFuncs.javascript(lines) end
+
+function M.filetypeSpecificMultiply()
+	autocmd("FileType", {
+		pattern = vim.tbl_keys(multiplyFuncs),
+		callback = function(ctx)
+			local ft = ctx.match
+			vim.b.minioperators_config = {
+				multiply = {
+					func = function(content) return multiplyFuncs[ft](content.lines) end,
+				},
+			}
+		end,
+	})
+end
+
 --------------------------------------------------------------------------------
 return M
