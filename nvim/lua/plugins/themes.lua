@@ -14,10 +14,10 @@ local lightThemes = {
 }
 
 local darkThemes = {
+	"folke/tokyonight.nvim",
 	-- "sainnhe/gruvbox-material",
 	-- "rebelot/kanagawa.nvim",
 	-- { "sainnhe/sonokai", init = function() g.sonokai_style = "shusia" end },
-	"folke/tokyonight.nvim",
 	-- "sainnhe/everforest",
 	-- "nvimdev/zephyr-nvim",
 	-- "kvrohit/mellow.nvim",

@@ -4,6 +4,20 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
+	{ -- scrollbar with information
+		"lewis6991/satellite.nvim",
+		commit = "5d33376", -- TODO following versions require nvim 0.10
+		event = "VeryLazy",
+		init = function()
+			if vim.version().major == 0 and vim.version().minor >= 10 then
+				vim.notify("satellite.nvim can now be updated.")
+			end
+		end,
+		opts = {
+			winblend = 0, -- no transparency, hard to see in many themes otherwise
+			handlers = { marks = { enable = false } }, -- FIX mark-related error message
+		},
+	},
 	{ -- when searching, search count is shown next to the cursor
 		"kevinhwang91/nvim-hlslens",
 		init = function()
@@ -30,20 +44,6 @@ return {
 				}
 				render.setVirt(0, lnum - 1, col - 1, chunks, nearest)
 			end,
-		},
-	},
-	{ -- scrollbar with information
-		"lewis6991/satellite.nvim",
-		commit = "5d33376", -- TODO following versions require nvim 0.10
-		event = "VeryLazy",
-		init = function()
-			if vim.version().major == 0 and vim.version().minor >= 10 then
-				vim.notify("satellite.nvim can now be updated.")
-			end
-		end,
-		opts = {
-			winblend = 0, -- no transparency, hard to see in many themes
-			handlers = { marks = { enable = false } }, -- FIX mark-related error message
 		},
 	},
 	{ -- rainbow brackets
