@@ -36,11 +36,11 @@ local function linterConfigs()
 	}
 
 	-- "BufWritePost" relevant due to nvim-autosave
-	vim.api.nvim_create_autocmd({ "BufEnter", "BufReadPost", "BufWritePost", "InsertLeave", "TextChanged" }, {
+	vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "InsertLeave", "TextChanged" }, {
 		pattern = "*",
 		callback = function(ctx)
 			-- FIX weird error message for shellcheck
-			if vim.bo.filetype == "sh" and (ctx.event == "TextChanged" or ctx.event == "BufEnter") then return end
+			if vim.bo.filetype == "sh" and (ctx.event == "TextChanged" or ctx.event == "BufReadPost") then return end
 
 			lint.try_lint()
 		end,

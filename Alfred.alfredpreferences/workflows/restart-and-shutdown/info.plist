@@ -85,21 +85,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>67DC318B-4DC0-4878-BA8C-4A5217DA10DB</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A4A07123-BCBD-4104-9258-2B8F6F7B60EE</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>1DC85A94-2184-4548-B095-E64011250D55</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>74016E1F-4C66-4A71-A468-9E03AD56BE1C</key>
 		<array>
 			<dict>
@@ -179,31 +164,7 @@
 			</dict>
 		</array>
 		<key>BEBB5348-0298-4CF9-BD79-F074521E6E21</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>67DC318B-4DC0-4878-BA8C-4A5217DA10DB</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>C4AF647A-7532-48AF-9907-EB3187CAD642</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>BEBB5348-0298-4CF9-BD79-F074521E6E21</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>C5467250-ED54-4905-BDBB-5B6EA35BC1F1</key>
 		<array>
 			<dict>
@@ -613,62 +574,6 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>3</integer>
-				<key>argumenttext</key>
-				<string>report</string>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>18</integer>
-				<key>hotmod</key>
-				<integer>1966080</integer>
-				<key>hotstring</key>
-				<string>1</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>C4AF647A-7532-48AF-9907-EB3187CAD642</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/neovim-debugger.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>BEBB5348-0298-4CF9-BD79-F074521E6E21</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -690,85 +595,25 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
+				<key>concurrently</key>
 				<false/>
-				<key>largetypetext</key>
-				<string>{query}
-
-S  Marks a process that is sleeping for less than about 20 seconds.
-R  Marks a runnable process.
-s  The process is a session leader.
-N  The process has reduced CPU scheduling priority (see setpriority(2)).</string>
-				<key>textcolor</key>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
 				<string></string>
-				<key>wrapat</key>
-				<integer>90</integer>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/neovim-hard-restart.sh</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>A4A07123-BCBD-4104-9258-2B8F6F7B60EE</string>
+			<string>BEBB5348-0298-4CF9-BD79-F074521E6E21</string>
 			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>1</integer>
-						<key>matchstring</key>
-						<string></string>
-						<key>outputlabel</key>
-						<string>empty</string>
-						<key>uid</key>
-						<string>1DC85A94-2184-4548-B095-E64011250D55</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>content</string>
-				<key>hideelse</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>67DC318B-4DC0-4878-BA8C-4A5217DA10DB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>Espanso</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>C5467250-ED54-4905-BDBB-5B6EA35BC1F1</string>
-			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -777,8 +622,6 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 				<integer>0</integer>
 				<key>argument</key>
 				<integer>3</integer>
-				<key>argumenttext</key>
-				<string>killall</string>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
@@ -802,6 +645,23 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<string>D0E2A9F7-34AB-4DFC-AC0E-519F820118B4</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>Espanso</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>C5467250-ED54-4905-BDBB-5B6EA35BC1F1</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -902,17 +762,6 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>ypos</key>
 			<real>170</real>
 		</dict>
-		<key>67DC318B-4DC0-4878-BA8C-4A5217DA10DB</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>non-empty</string>
-			<key>xpos</key>
-			<real>345</real>
-			<key>ypos</key>
-			<real>390</real>
-		</dict>
 		<key>74016E1F-4C66-4A71-A468-9E03AD56BE1C</key>
 		<dict>
 			<key>colorindex</key>
@@ -960,15 +809,6 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 			<key>ypos</key>
 			<real>30</real>
 		</dict>
-		<key>A4A07123-BCBD-4104-9258-2B8F6F7B60EE</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>435</real>
-			<key>ypos</key>
-			<real>360</real>
-		</dict>
 		<key>B676CE46-BEC5-4201-9170-768499351B3D</key>
 		<dict>
 			<key>colorindex</key>
@@ -991,21 +831,10 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
-			<key>note</key>
-			<string>neovim debugger</string>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>360</real>
-		</dict>
-		<key>C4AF647A-7532-48AF-9907-EB3187CAD642</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>325</real>
+			<real>365</real>
 		</dict>
 		<key>C5467250-ED54-4905-BDBB-5B6EA35BC1F1</key>
 		<dict>
@@ -1031,10 +860,12 @@ N  The process has reduced CPU scheduling priority (see setpriority(2)).</string
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
+			<key>note</key>
+			<string>nvim hard restart</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>435</real>
+			<real>365</real>
 		</dict>
 		<key>D133933A-08B7-4B72-A53E-B49EEFA0C063</key>
 		<dict>
