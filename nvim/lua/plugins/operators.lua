@@ -3,70 +3,20 @@ return {
 		"numToStr/Comment.nvim",
 		keys = {
 			-- mnemonic: [q]uiet text
-			{ "Q", desc = " Append Comment at EoL" },
 			{ "q", mode = { "n", "x" }, desc = " Comment Operator" },
+			{ "Q", desc = " Append Comment at EoL" },
 			{ "qo", desc = " Comment below" },
 			{ "qO", desc = " Comment above" },
 		},
 		opts = {
-			opleader = {
-				line = "q",
-				block = "<Nop>",
-			},
-			toggler = {
-				line = "qq",
-				block = "<Nop>",
-			},
-			extra = {
-				eol = "Q",
-				above = "qO",
-				below = "qo",
-			},
+			opleader = { line = "q", block = "<Nop>" },
+			toggler = { line = "qq", block = "<Nop>" },
+			extra = { eol = "Q", above = "qO", below = "qo" },
 		},
 	},
 	{ -- substitute, evaluate, exchange, sort, duplicate
 		"echasnovski/mini.operators",
-		init = function()
-			local cmds = {
-				sh = { repl = "zsh -c" },
-				python = { repl = "python3 -c", outputter = "print(%s)" },
-				applescript = { repl = "osascript -l AppleScript -e" },
-				javascript = { repl = "osascript -l JavaScript -e" }, -- JXA
-				typescript = { repl = "node -e", outputter = "console.log(%s)" },
-			}
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = { "javascript", "typescript", "sh", "python", "applescript" },
-				callback = function(ctx)
-					local ft = ctx.match
-					local repl = cmds[ft].repl
-					local outputter = cmds[ft].outputter
-
-					local evalFunc = function(content)
-						local inputLines = vim.deepcopy(content.lines)
-
-						local lastLine = ""
-						if outputter then
-							lastLine = table.remove(content.lines)
-							local outputterFirstWord = outputter:split()[1]
-							if lastLine:find("^") then
-								lastLine = ""
-							else
-								lastLine = "\n" .. outputter:format(lastLine)
-							end
-						end
-						local lines = table.concat(content.lines, "\n") .. lastLine
-
-						local shellCmd = repl .. " '" .. lines:gsub("'", "\\'") .. "'"
-						local evaluatedOut = vim.fn.system(shellCmd):gsub("\n$", "")
-						vim.notify(evaluatedOut)
-						return inputLines -- do not modify original lines
-					end
-
-					-- DOCS https://github.com/echasnovski/mini.operators/blob/main/doc/mini-operators.txt#L214
-					vim.b.minioperators_config = { evaluate = { func = evalFunc } }
-				end,
-			})
-		end,
+		init = require("config.eval-funcs").filetypeSpecificEval,
 		keys = {
 			{ "s", mode = { "n", "x" }, desc = "󰅪 Substitute Operator" },
 			{ "w", mode = { "n", "x" }, desc = "󰅪 Multiply Operator" },
@@ -79,27 +29,13 @@ return {
 			{ "sX", "sx$", desc = "󰅪 Exchange to EoL", remap = true },
 			{ "sY", "sy$", desc = "󰅪 Sort to EoL", remap = true },
 		},
-		config = function()
-			local MiniOperators = require("mini.operators")
-			MiniOperators.setup {
-				replace = { prefix = "s", reindent_linewise = true },
-				multiply = { prefix = "w" },
-				exchange = { prefix = "sx", reindent_linewise = true },
-				sort = { prefix = "sy" },
-				-- INFO use vim.b.minioperators_config to set language-specific eval funcs
-				evaluate = {
-					prefix = "#",
-					func = function(content)
-						-- https://github.com/echasnovski/mini.nvim/issues/439#issuecomment-1683665986
-						-- Currently needed as `content` is modified, which it shouldn't
-						local input_lines = vim.deepcopy(content.lines)
-						local output = MiniOperators.default_evaluate_func(content)
-						vim.notify(table.concat(output, "\n"))
-						return input_lines
-					end,
-				},
-			}
-		end,
+		opts = {
+			replace = { prefix = "s", reindent_linewise = true },
+			multiply = { prefix = "w" },
+			exchange = { prefix = "sx", reindent_linewise = true },
+			sort = { prefix = "sy" },
+			evaluate = { prefix = "#", func = require("config.eval-funcs").luaEvalFunc },
+		},
 	},
 	{ -- surround
 		"kylechui/nvim-surround",
