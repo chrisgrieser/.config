@@ -15,7 +15,6 @@ local lintersAndFormatters = {
 	"prettier", -- only used for yaml and html https://github.com/mikefarah/yq/issues/515
 	"rome", -- also an LSP; the lsp does diagnostics, the CLI via null-ls does formatting
 	-- stylelint included in mason, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
-	"actionlint", -- TODO this is just a test
 }
 --------------------------------------------------------------------------------
 
@@ -39,27 +38,6 @@ local function linterConfigs()
 	for ft, _ in pairs(lint.linters_by_ft) do
 		table.insert(lint.linters_by_ft[ft], "codespell")
 	end
-
-	-- "BufWritePost" relevant due to nvim-autosave
-	vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "InsertLeave", "TextChanged" }, {
-		pattern = "*",
-		callback = function(ctx)
-			local ft = vim.bo.filetype
-			local event = ctx.event
-			-- FIX weird error message for shellcheck
-			if ft == "sh" and (event == "TextChanged" or event == "BufReadPost") then
-				return
-			end
-
-			-- FIX some spurious lints on first enter for selene
-			if ft == "lua" and event == "BufReadPost" then
-				vim.defer_fn(lint.try_lint, 200)
-				return
-			end
-
-			lint.try_lint()
-		end,
-	})
 
 	-- https://github.com/mfussenegger/nvim-lint/tree/master/lua/lint/linters
 	-- only changed severity for the parser
@@ -101,6 +79,54 @@ local function linterConfigs()
 		"--stdin-filename",
 		function() return vim.fn.expand("%:p") end,
 	}
+
+	-- FIX auto-save.nvim creating spurious errors for some reason. therefore
+	-- removing stylelint-error from it
+	lint.linters.stylelint.parser = function(output)
+		local status, decoded = pcall(vim.json.decode, output)
+		if not status or not decoded then return {} end
+		decoded = decoded[1]
+		local severities = {
+			warning = vim.diagnostic.severity.WARN,
+			error = vim.diagnostic.severity.ERROR,
+		}
+		local diagnostics = {}
+		if decoded.errored then
+			for _, message in ipairs(decoded.warnings) do
+				table.insert(diagnostics, {
+					lnum = message.line - 1,
+					col = message.column - 1,
+					end_lnum = message.line - 1,
+					end_col = message.column - 1,
+					message = message.text,
+					code = message.rule,
+					user_data = { lsp = { code = message.rule } },
+					severity = severities[message.severity],
+					source = "stylelint",
+				})
+			end
+		end
+		return diagnostics
+	end
+
+	-- "BufWritePost" relevant due to nvim-autosave
+	vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "InsertLeave", "TextChanged" }, {
+		pattern = "*",
+		callback = function(ctx)
+			local ft = vim.bo.filetype
+			local event = ctx.event
+			-- FIX weird error message for shellcheck
+			if ft == "sh" and (event == "TextChanged" or event == "BufReadPost") then return end
+
+			-- FIX some spurious lints on first enter for selene
+			if ft == "lua" and event == "BufReadPost" then
+				vim.defer_fn(lint.try_lint, 200)
+				return
+			end
+
+			lint.try_lint()
+		end,
+	})
 
 	lint.try_lint() -- run on first buffer once this plugin is initialized
 end
@@ -185,14 +211,13 @@ end
 
 return {
 	{ -- auto-install missing linters & formatters
+	-- (auto-install of lsp servers done via `mason-lspconfig.nvim`)
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		event = "VeryLazy",
 		dependencies = "williamboman/mason.nvim",
 		config = function()
-			-- needs to trigger myself, since `run_on_start`, does not work well
-			-- with lazy-loading
+			-- triggered myself, since `run_on_start`, does not work w/ lazy-loading
 			require("mason-tool-installer").setup {
-				-- auto-install of lsp servers done via `mason-lspconfig.nvim`
 				ensure_installed = lintersAndFormatters,
 				run_on_start = false,
 			}

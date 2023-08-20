@@ -7,7 +7,7 @@ return {
 		opts = {
 			execution_message = { enabled = false },
 			noautocmd = false, -- needed for nvim-lint
-			debounce_delay = 1200, -- save at most this many ms
+			debounce_delay = 1000, -- save at most this many millisecs
 		},
 	},
 	{ -- auto-close inactive buffers
