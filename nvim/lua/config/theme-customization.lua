@@ -40,7 +40,6 @@ local function customHighlights()
 	)
 
 	-- make MatchParen stand out more (orange to close to rainbow brackets)
-	-- vim.api.nvim_set_hl(0, "MatchParen", { bold = true, underline = true, fg = "#4a8cc9" })
 	overwriteHighlight("MatchParen", { reverse = true })
 	overwriteHighlight("MatchParenCur", { reverse = true, bold = true })
 
@@ -61,14 +60,12 @@ local function themeModifications()
 
 	-- FIX lualine_a not getting bold in many themes
 	local vimModes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
-	for _, v in pairs(vimModes) do
-		updateHighlight("lualine_a_" .. v, "gui=bold")
-	end
 
 	if theme == "tokyonight" then
 		for _, v in pairs(vimModes) do
 			updateHighlight("lualine_y_diff_modified_" .. v, "guifg=#acaa62")
-			updateHighlight("lualine_y_diff_added_" .. v, "guifg=#328f8b")
+			updateHighlight("lualine_y_diff_added_" .. v, "guifg=#369a96")
+			updateHighlight("lualine_a_" .. v, "gui=bold")
 		end
 		updateHighlight("GitSignsChange", "guifg=#acaa62")
 	elseif theme == "gruvbox-material" or theme == "sonokai" then
