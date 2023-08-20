@@ -2,11 +2,13 @@
 # explicitly setting schema required, since using non-standard filename
 #───────────────────────────────────────────────────────────────────────────────
 # https://prettier.io/docs/en/options.html
-# INFO only used for yaml and html files: https://github.com/mikefarah/yq/issues/515
+# INFO only used for yaml, css, and html files: https://github.com/mikefarah/yq/issues/515
 #───────────────────────────────────────────────────────────────────────────────
 
 printWidth: 120
 quoteProps: consistent
+tabWidth: 3
+useTabs: true
 
 # filetype-spefic overrides
 overrides:
@@ -14,7 +16,3 @@ overrides:
     options:
       tabWidth: 2
       useTabs: false
-  - files: ["*.html"]
-    options:
-      tabWidth: 3
-      useTabs: true

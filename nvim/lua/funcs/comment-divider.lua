@@ -19,9 +19,17 @@ function M.commentHr()
 	if comStr:find("-") then linechar = "-" end
 
 	local linelength = textwidth - indent - comStrLength
-	local fullLine = string.rep(linechar, linelength)
+	local fullLine = linechar:rep(linelength)
+
+	-- due to https://stylelint.io/user-guide/rules/comment-whitespace-inside/
+	if ft == "css" then fullLine = " " .. linechar:rep(linelength - 2) .. " " end
+
+	-----------------------------------------------------------------------------
+	-- set HR
 	local hr = comStr:gsub(" ?%%s ?", fullLine)
 	if ft == "markdown" then hr = "---" end
+
+	-----------------------------------------------------------------------------
 
 	local linesToAppend = { "", hr, "" }
 	if wasOnBlank then linesToAppend = { hr, "" } end
@@ -41,7 +49,6 @@ function M.commentHr()
 	else
 		vim.cmd.normal { "jj==", bang = true }
 	end
-	---@diagnostic enable: param-type-mismatch
 end
 
 --------------------------------------------------------------------------------

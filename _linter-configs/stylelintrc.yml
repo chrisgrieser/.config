@@ -11,10 +11,12 @@ reportInvalidScopeDisables: [true, {severity: error}]
 #───────────────────────────────────────────────────────────────────────────────
 rules:
   # deactivated rules
-  # font-family-no-missing-generic-family-keyword: null
+  font-family-no-missing-generic-family-keyword: null
   no-descending-specificity: null
-  # no-empty-source: null
+  no-empty-source: null
   selector-class-pattern: null
+  declaration-empty-line-before: null
+  property-no-vendor-prefix: null
 
   # plugin rules
   plugin/declaration-block-no-ignored-properties: true

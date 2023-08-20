@@ -28,8 +28,11 @@ end
 
 -- auto-apply str:format() to string when typing `%s` inside string
 local function luaFormatStr()
-	if currentLine():find(":format") then return end -- avoid re-applying to already formatted string
-	local correctedLine = currentLine():gsub([[(["'].*%%s.*["'])]], "(%1):format()")
+	local curLine = currentLine()
+	-- avoid re-applying to already formatted string or to `%s` as lua pattern
+	if curLine:find("format") or curLine:find("find") or curLine:find("sub") then return end
+
+	local correctedLine = curLine:gsub([[(["'].*%%s.*["'])]], "(%1):format()")
 	local changed = setIfChanges(correctedLine)
 
 	if not changed then return end
