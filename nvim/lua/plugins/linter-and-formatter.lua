@@ -65,7 +65,8 @@ local function linterConfigs()
 	lint.linters.vale.args = {
 		"--no-exit",
 		"--output=JSON",
-		"--config=" .. linterConfig .. "/vale/vale.ini",
+		"--config",
+		linterConfig .. "/vale/vale.ini",
 	}
 	lint.linters.shellcheck.args = {
 		"--shell=bash", -- force to work with zsh
@@ -73,7 +74,8 @@ local function linterConfigs()
 		"-",
 	}
 	lint.linters.yamllint.args = {
-		"--config-file=" .. linterConfig .. "/yamllint.yaml",
+		"--config-file",
+		linterConfig .. "/yamllint.yaml",
 		"--format=parsable",
 		"-",
 	}
@@ -82,7 +84,8 @@ local function linterConfigs()
 	lint.linters.stylelint.args = {
 		"--formatter=json",
 		"--quiet",
-		"--config=" .. linterConfig .. "/stylelintrc.yml",
+		"--config",
+		linterConfig .. "/stylelintrc.yml",
 		"--stdin",
 		"--stdin-filename",
 		function() return vim.fn.expand("%:p") end,
@@ -94,11 +97,10 @@ end
 --------------------------------------------------------------------------------
 
 local function formatterConfigs()
-	-- using the stdin formatting of rome bugs with emojis
 	local util = require("formatter.util")
 	local rome = {
 		exe = "rome",
-		stdin = false,
+		stdin = false, -- using the stdin formatting of rome bugs with emojis
 		args = { "format", "--write", util.escape_path(util.get_current_buffer_file_path()) },
 	}
 	local stylelint = {
@@ -107,24 +109,12 @@ local function formatterConfigs()
 		args = {
 			-- using config without ordering, since automatic re-ordering can be
 			-- confusing. Config with stylelint-order is only run on build.
-			"--config="
-				.. linterConfig
-				.. "/stylelintrc-formatting.yml",
+			"--config",
+			linterConfig .. "/stylelintrc-formatting.yml",
 			"--fix",
 			"--stdin",
 			"--stdin-filename",
 			util.escape_path(util.get_current_buffer_file_path()),
-		},
-	}
-
-	local codespell = {
-		exe = "codespell",
-		stdin = true,
-		args = {
-			"--ignore-words=" .. linterConfig .. "/codespell-ignore.txt",
-			"--skip='*.css,*.bib'", -- filetypes to ignore
-			"--check-hidden",
-			"--check-hidden",
 		},
 	}
 
@@ -143,7 +133,6 @@ local function formatterConfigs()
 			json = { rome },
 			css = { stylelint },
 			scss = { stylelint },
-			all = { codespell },
 		},
 	}
 end

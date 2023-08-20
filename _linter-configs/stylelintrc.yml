@@ -200,9 +200,7 @@ rules:
   shorthand-property-no-redundant-values: true
   declaration-block-no-redundant-longhand-properties: true
   declaration-block-no-shorthand-property-overrides: true
-  color-hex-case: [upper, {severity: warning}]
   property-case: [lower, {severity: warning}]
-  at-rule-name-case: [lower, {severity: warning}]
   function-name-case: [lower, {severity: warning}]
   selector-pseudo-class-case: [lower, {severity: warning}]
   selector-pseudo-element-case: [lower, {severity: warning}]
@@ -226,20 +224,9 @@ rules:
   function-url-quotes: always
   selector-attribute-quotes: always
   no-extra-semicolons: [true, {severity: warning}]
-  at-rule-name-space-after: always-single-line
-  at-rule-semicolon-newline-after: always
-  block-closing-brace-empty-line-before: [never, {severity: warning}]
-  block-closing-brace-newline-after: [always, {severity: warning}]
-  block-closing-brace-newline-before: [always-multi-line, {severity: warning}]
-  block-closing-brace-space-before: [always-single-line, {severity: warning}]
-  block-opening-brace-newline-after: [always-multi-line, {severity: warning}]
-  block-opening-brace-space-after: [always-single-line, {severity: warning}]
-  block-opening-brace-space-before: [always, {severity: warning}]
   custom-property-pattern:
     - ^([a-z][a-z0-9]*)(-[a-z0-9]+)*$
     - message: Expected custom property name to be kebab-case (custom-property-pattern)
-  declaration-bang-space-after: never
-  declaration-bang-space-before: always
   declaration-block-semicolon-newline-after: always-multi-line
   declaration-block-semicolon-space-after: always-single-line
   declaration-block-semicolon-space-before: [never, {severity: warning}]
