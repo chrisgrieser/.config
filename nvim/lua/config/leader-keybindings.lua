@@ -134,13 +134,13 @@ keymap({ "n", "x" }, "<leader>c", vim.lsp.buf.code_action, { desc = "󰒕 Code A
 
 -- LOGGING
 -- stylua: ignore start
-keymap({ "n", "x" }, "<leader>ll", function() require("funcs.lumberjack").messageLog() end, { desc = "󰣈 message log" })
-keymap({ "n", "x" }, "<leader>ll", function() require("funcs.lumberjack").variableLog() end, { desc = "󰣈 variable log" })
-keymap({ "n", "x" }, "<leader>lo", function() require("funcs.lumberjack").objectLog() end, { desc = "󰣈 object log" })
-keymap("n", "<leader>lb", function() require("funcs.lumberjack").beepLog() end, { desc = "󰣈 beep log" })
-keymap("n", "<leader>l1", function() require("funcs.lumberjack").timeLog() end, { desc = "󰣈 time log" })
-keymap("n", "<leader>lr", function() require("funcs.lumberjack").removeLogs() end, { desc = "󰣈  remove log" })
-keymap("n", "<leader>ld", function() require("funcs.lumberjack").debugLog() end, { desc = "󰣈 debugger log" })
+keymap({ "n", "x" }, "<leader>ll", function() require("funcs.sawmill").messageLog() end, { desc = "󰸢 message log" })
+keymap({ "n", "x" }, "<leader>ll", function() require("funcs.sawmill").variableLog() end, { desc = "󰸢 variable log" })
+keymap({ "n", "x" }, "<leader>lo", function() require("funcs.sawmill").objectLog() end, { desc = "󰸢 object log" })
+keymap("n", "<leader>lb", function() require("funcs.sawmill").beepLog() end, { desc = "󰸢 beep log" })
+keymap("n", "<leader>l1", function() require("funcs.sawmill").timeLog() end, { desc = "󰸢 time log" })
+keymap("n", "<leader>lr", function() require("funcs.sawmill").removeLogs() end, { desc = "󰸢  remove log" })
+keymap("n", "<leader>ld", function() require("funcs.sawmill").debugLog() end, { desc = "󰸢 debugger log" })
 keymap("n", "<leader>li", cmd.Inspect, { desc = " :Inspect" })
 keymap("n", "<leader>lt", cmd.InspectTree, { desc = " :InspectTree" })
 -- stylua: ignore end

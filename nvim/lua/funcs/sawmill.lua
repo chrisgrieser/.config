@@ -13,7 +13,7 @@ local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 --------------------------------------------------------------------------------
 
 -- CONFIG
-local marker = "🪓"
+local marker = "🪚"
 local beepEmojis = { "🤖", "👽", "👾", "💣" }
 
 --------------------------------------------------------------------------------
@@ -65,7 +65,7 @@ function M.messageLog()
 	elseif ft == "applescript" then
 		templateStr = 'log "%s "'
 	else
-		vim.notify("🪓 MessageLog does not support " .. ft .. " yet.", logWarn)
+		vim.notify("󰸢 MessageLog does not support " .. ft .. " yet.", logWarn)
 		return
 	end
 
@@ -98,7 +98,7 @@ function M.variableLog()
 	elseif ft == "css" or ft == "scss" then
 		templateStr = "outline: 2px solid red !important; /* %s */"
 	else
-		vim.notify("🪓 VariableLog does not support " .. ft .. " yet.", logWarn)
+		vim.notify("󰸢 VariableLog does not support " .. ft .. " yet.", logWarn)
 		return
 	end
 
@@ -112,11 +112,11 @@ function M.objectLog()
 	local ft = bo.filetype
 
 	if ft == "lua" and expand("%:p"):find("nvim") then
-		 templateStr = 'vim.notify("%s %s: " .. vim.inspect(%s))'
+		templateStr = 'vim.notify("%s %s: " .. vim.inspect(%s))'
 	elseif ft == "javascript" then
 		templateStr = 'console.log("%s %s:", JSON.stringify(%s))'
 	else
-		vim.notify("🪓 Objectlog does not support " .. ft .. " yet.", logWarn)
+		vim.notify("󰸢 Objectlog does not support " .. ft .. " yet.", logWarn)
 		return
 	end
 
@@ -145,7 +145,7 @@ function M.beepLog()
 	elseif ft == "css" or ft == "scss" then
 		templateStr = "outline: 2px solid red !important; /* %s */"
 	else
-		vim.notify("🪓 Beeplog does not support " .. ft .. " yet.", logWarn)
+		vim.notify("󰸢 Beeplog does not support " .. ft .. " yet.", logWarn)
 		return
 	end
 
@@ -194,7 +194,7 @@ function M.timeLog()
 			'echo "%s time ${durationSecs}s"',
 		}
 	else
-		vim.notify("🪓 Timelog does not support " .. ft .. " yet.", logWarn)
+		vim.notify("󰸢 Timelog does not support " .. ft .. " yet.", logWarn)
 		return
 	end
 	local statementToUse = g.timelogStart and logStatement1 or logStatement2
@@ -212,7 +212,7 @@ function M.debugLog()
 	if ft == "javascript" or ft == "typescript" then
 		logStatement = "debugger // %s"
 	else
-		vim.notify("Debuglog does not support " .. ft .. " yet.", logWarn)
+		vim.notify("󰸢 Debuglog does not support " .. ft .. " yet.", logWarn)
 		return
 	end
 
@@ -230,7 +230,7 @@ function M.removeLogs()
 	cmd.nohlsearch()
 
 	local linesRemoved = numOfLinesBefore - fn.line("$")
-	local msg = ("󰣈  Removed %s log statements."):format(linesRemoved)
+	local msg = ("󰸢 Removed %s log statements."):format(linesRemoved)
 	if linesRemoved == 1 then msg = msg:sub(1, -3) .. "." end
 	vim.notify(msg)
 
