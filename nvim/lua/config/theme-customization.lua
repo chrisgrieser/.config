@@ -41,7 +41,7 @@ local function customHighlights()
 
 	-- make MatchParen stand out more (orange to close to rainbow brackets)
 	overwriteHighlight("MatchParen", { reverse = true })
-	overwriteHighlight("MatchParenCur", { reverse = true, bold = true })
+	-- overwriteHighlight("MatchParenCur", { reverse = true, bold = true })
 
 	-- proper underlines for diagnostics
 	local types = { "Error", "Warn", "Info", "Hint" }

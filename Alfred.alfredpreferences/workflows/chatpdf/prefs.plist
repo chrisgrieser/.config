@@ -9,9 +9,9 @@
 	<key>copy_to_clipboard</key>
 	<true/>
 	<key>the_prompt</key>
-	<string>Summarize the PDF in 10 bullet points. Strive for variety.
+	<string>You are a researcher in sociology. 
 
-Ground your summary in the facts of the paper, and include references to specific pages in the paper. 
+Summarize the PDF in 10 bullet points. Strive for variety. Ground your summary in the facts of the paper, and include references to specific pages in the paper. 
 
 Immediately start the summary, do not write anything else.</string>
 </dict>
