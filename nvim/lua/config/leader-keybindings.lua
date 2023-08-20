@@ -138,14 +138,15 @@ keymap("n", "<leader>lb", function() require("funcs.lumberjack").beepLog() end, 
 keymap("n", "<leader>l1", function() require("funcs.lumberjack").timeLog() end, { desc = "󰣈 time log" })
 keymap("n", "<leader>lr", function() require("funcs.lumberjack").removeLogs() end, { desc = "󰣈  remove log" })
 keymap("n", "<leader>ld", function() require("funcs.lumberjack").debugLog() end, { desc = "󰣈 debugger log" })
-keymap("n", "<leader>lt", cmd.Inspect, { desc = " Treesitter Inspect" })
+keymap("n", "<leader>li", cmd.Inspect, { desc = " :Inspect" })
+keymap("n", "<leader>lt", cmd.InspectTree, { desc = " :InspectTree" })
 -- stylua: ignore end
 
 --------------------------------------------------------------------------------
 
 -- Merging & Splitting Lines
 keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "󰗈 Merge line down" })
-keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>]], { desc = "󰗈 split around selection" })
+keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>]], { desc = "󰗈 Split around selection" })
 
 -- Append to / delete from EoL
 keymap("n", "<leader>,", "mzA,<Esc>`z", { desc = " , to EoL" })
