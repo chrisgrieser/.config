@@ -44,8 +44,16 @@ local function linterConfigs()
 	vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "InsertLeave", "TextChanged" }, {
 		pattern = "*",
 		callback = function(ctx)
+			local ft = vim.bo.filetype
+			local event = ctx.event
 			-- FIX weird error message for shellcheck
-			if vim.bo.filetype == "sh" and (ctx.event == "TextChanged" or ctx.event == "BufReadPost") then
+			if ft == "sh" and (event == "TextChanged" or event == "BufReadPost") then
+				return
+			end
+
+			-- FIX some spurious lints on first enter for selene
+			if ft == "lua" and event == "BufReadPost" then
+				vim.defer_fn(lint.try_lint, 200)
 				return
 			end
 
@@ -60,8 +68,7 @@ local function linterConfigs()
 		{ severity = vim.diagnostic.severity.WARN, source = "codespell" }
 	)
 	lint.linters.codespell.args = {
-		"--skip",
-		"*.css,*.bib", -- filetypes/-names to ignore
+		"--skip='*.css,*.bib'", -- filetypes/-names to ignore
 		"--ignore-words",
 		linterConfig .. "/codespell-ignore.txt",
 	}
@@ -88,7 +95,6 @@ local function linterConfigs()
 	-- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
 	lint.linters.stylelint.args = {
 		"--formatter=json",
-		"--quiet",
 		"--config",
 		linterConfig .. "/stylelintrc.yml",
 		"--stdin",
@@ -149,8 +155,7 @@ local function formatterConfigs()
 		args = {
 			"--ignore-words",
 			linterConfig .. "/codespell-ignore.txt",
-			"--skip",
-			"*.css,*.bib", -- filetypes/-names to ignore
+			"--skip='*.css,*.bib'", -- filetypes/-names to ignore
 			"--check-hidden",
 			"--write-changes",
 		},
