@@ -101,11 +101,13 @@ local function formatterConfigs()
 	local rome = {
 		exe = "rome",
 		stdin = false, -- using the stdin formatting of rome bugs with emojis
+		try_node_modules = true,
 		args = { "format", "--write", util.escape_path(util.get_current_buffer_file_path()) },
 	}
 	local stylelint = {
 		exe = "stylelint",
 		stdin = true,
+		try_node_modules = true,
 		args = {
 			-- using config without ordering, since automatic re-ordering can be
 			-- confusing. Config with stylelint-order is only run on build.
@@ -117,11 +119,34 @@ local function formatterConfigs()
 			util.escape_path(util.get_current_buffer_file_path()),
 		},
 	}
+	local prettierCss = {
+		exe = "prettier",
+		stdin = true,
+		try_node_modules = true,
+		args = {
+			"--stdin-filepath",
+			util.escape_path(util.get_current_buffer_file_path()),
+			"--parser=css",
+		},
+	}
+
+	local codespell = {
+		exe = "codespell",
+		stdin = false,
+		tempfile_dir = "/tmp", -- codespell requires a tmp dir
+		args = {
+			"--ignore-words=" .. linterConfig .. "/codespell-ignore.txt",
+			"--skip='*.css,*.bib'", -- filetypes to ignore
+			"--check-hidden",
+			"--write-changes",
+		},
+	}
 
 	-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
 	-- https://github.com/mhartington/formatter.nvim/tree/master/lua/formatter/filetypes
 	require("formatter").setup {
 		filetype = {
+			["*"] = { codespell },
 			lua = { require("formatter.filetypes.lua").stylua },
 			sh = { require("formatter.filetypes.sh").shfmt },
 			zsh = { require("formatter.filetypes.sh").shfmt },
@@ -131,7 +156,7 @@ local function formatterConfigs()
 			javascript = { rome },
 			typescript = { rome },
 			json = { rome },
-			css = { stylelint },
+			css = { stylelint, prettierCss },
 			scss = { stylelint },
 		},
 	}
