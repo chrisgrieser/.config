@@ -1,5 +1,3 @@
-local autocmd = vim.api.nvim_create_autocmd
-
 ---@return string
 local function currentLine() return vim.api.nvim_get_current_line() end
 
@@ -19,22 +17,25 @@ local function fStr()
 	vim.api.nvim_set_current_line(correctedLine)
 end
 
-
 -- auto-apply str:format() to string when typing `%s` inside string
 local function luaFormatStr()
-	local correctedLine = currentLine():gsub([[(["'].*%%s.*["'])]], "(%1):format()")
+	local curLine = currentLine()
+	if curLine:find(":format") then return end -- avoid re-applying to already formatted string
+	local correctedLine = curLine:gsub([[(["'].*%%s.*["'])]], "(%1):format()")
 	vim.api.nvim_set_current_line(correctedLine)
 end
 
-autocmd("FileType", {
-	pattern = { "python", "javascript", "typescript" },
+--------------------------------------------------------------------------------
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "python", "javascript", "typescript", "lua" },
 	callback = function(ctx)
 		local ft = ctx.match
 		local func
 		if ft == "lua" then func = luaFormatStr end
 		if ft == "python" then func = fStr end
 		if ft == "javascript" or ft == "typescript" then func = templateStr end
-		autocmd("InsertLeave", {
+		vim.api.nvim_create_autocmd("InsertLeave", {
 			buffer = 0,
 			callback = func,
 		})

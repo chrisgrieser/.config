@@ -24,17 +24,25 @@ return {
 
 			require("nvim-autopairs").add_rules {
 				rule("<", ">", "lua"):with_pair(isNodeType("string")), -- keymaps
-				rule("<", ">", "vim"):with_pair(), -- keymaps
-				rule('\\"', '\\"', { "sh", "json" }):with_pair(isNodeType("string")), -- escaped double quotes
-				rule("*", "*", "markdown"):with_pair(), -- italics
-				rule("__", "__", "markdown"):with_pair(), -- bold
+				rule("<", ">", "vim"), -- keymaps
+				rule('\\"', '\\"', { "sh", "json" }):with_pair(isNodeType("string")), -- escaped quotes
+				rule("*", "*", "markdown"), -- italics
+				rule("__", "__", "markdown"), -- bold
+				rule('=$', '()', "sh"):set_end_pair_length(1), -- variables in shell
+
+				-- lua comma to tables
+				rule("{", "},", "lua" ):with_pair(isNodeType("table_constructor")),
+
 				-- if / else in js/ts
 				rule("^%s*if $", "()", { "javascript", "typescript" })
-					:use_regex(true) -- regex ensures "if" in strings or comments isn't affected
+					:use_regex(true) 
 					:set_end_pair_length(1), -- only move one char to the side
-				rule("^%s*}? ?else if $", "()", { "javascript", "typescript" })
+				rule("^%s*else if $", "()", { "javascript", "typescript" })
 					:use_regex(true)
 					:set_end_pair_length(1),
+				rule("^%s*} ?else if $", "() {", { "javascript", "typescript" })
+					:use_regex(true)
+					:set_end_pair_length(3),
 				-- quicker template string
 				rule("$", "{}", { "javascript", "typescript", "json" })
 					:with_pair(isNodeType("string"))
