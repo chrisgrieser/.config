@@ -103,6 +103,7 @@ local function formatterConfigs()
 	}
 	local stylelint = {
 		exe = "stylelint",
+		stdin = true,
 		args = {
 			-- using config without ordering, since automatic re-ordering can be
 			-- confusing. Config with stylelint-order is only run on build.
@@ -114,11 +115,21 @@ local function formatterConfigs()
 			"--stdin-filename",
 			util.escape_path(util.get_current_buffer_file_path()),
 		},
-		stdin = true,
 	}
 
+	local codespell = {
+		exe = "codespell",
+		stdin = true,
+		args = {
+			"--ignore-words=" .. linterConfig .. "/codespell-ignore.txt",
+			"--skip='*.css,*.bib'", -- filetypes to ignore
+			"--check-hidden",
+			"--check-hidden",
+		},
+	}
+
+	-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
 	-- https://github.com/mhartington/formatter.nvim/tree/master/lua/formatter/filetypes
-	-- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
 	require("formatter").setup {
 		filetype = {
 			lua = { require("formatter.filetypes.lua").stylua },
@@ -132,6 +143,7 @@ local function formatterConfigs()
 			json = { rome },
 			css = { stylelint },
 			scss = { stylelint },
+			all = { codespell },
 		},
 	}
 end

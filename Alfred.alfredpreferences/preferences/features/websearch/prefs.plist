@@ -85,6 +85,17 @@
 			<key>url</key>
 			<string>https://www.linguee.com/english-german/search?query={query}</string>
 		</dict>
+		<key>9C559005-40A5-4E14-82ED-65A6FB744713</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>ai</string>
+			<key>text</key>
+			<string>Perplexity.ai</string>
+			<key>url</key>
+			<string>https://www.perplexity.ai/search?s=o&amp;q={query}</string>
+		</dict>
 		<key>CB53E08B-32B8-4062-98CC-5A36E97438A4</key>
 		<dict>
 			<key>enabled</key>
@@ -119,5 +130,7 @@
 			<string>https://store.steampowered.com/search/?term={query}</string>
 		</dict>
 	</dict>
+	<key>onlyShowEnabledInPrefs</key>
+	<true/>
 </dict>
 </plist>
