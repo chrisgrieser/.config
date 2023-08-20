@@ -154,7 +154,6 @@ function refreshKeywordCache(cachePath) {
 			return acc;
 		}, []);
 
-
 	// FILTER IRRELEVANT KEYWORDS
 	// - only the first word of a keyword matters
 	// - only keywords with letter as first char matter
