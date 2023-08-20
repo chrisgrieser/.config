@@ -59,7 +59,12 @@ local function linterConfigs()
 		"%f:%l:%m",
 		{ severity = vim.diagnostic.severity.WARN, source = "codespell" }
 	)
-	lint.linters.codespell.args = { "--ignore-words", linterConfig .. "/codespell-ignore.txt" }
+	lint.linters.codespell.args = {
+		"--skip",
+		"*.css,*.bib", -- filetypes/-names to ignore
+		"--ignore-words",
+		linterConfig .. "/codespell-ignore.txt",
+	}
 
 	lint.linters.markdownlint.args = { "--config", linterConfig .. "/markdownlintrc" }
 	lint.linters.vale.args = {
@@ -98,12 +103,14 @@ end
 
 local function formatterConfigs()
 	local util = require("formatter.util")
+
 	local rome = {
 		exe = "rome",
 		stdin = false, -- using the stdin formatting of rome bugs with emojis
 		try_node_modules = true,
 		args = { "format", "--write", util.escape_path(util.get_current_buffer_file_path()) },
 	}
+
 	local stylelint = {
 		exe = "stylelint",
 		stdin = true,
@@ -119,24 +126,31 @@ local function formatterConfigs()
 			util.escape_path(util.get_current_buffer_file_path()),
 		},
 	}
-	local prettierCss = {
-		exe = "prettier",
-		stdin = true,
-		try_node_modules = true,
-		args = {
-			"--stdin-filepath",
-			util.escape_path(util.get_current_buffer_file_path()),
-			"--parser=css",
-		},
-	}
+
+	local prettier = function(parser)
+		return {
+			exe = "prettier",
+			stdin = true,
+			try_node_modules = true,
+			args = {
+				"--config",
+				linterConfig .. "/prettierrc.yml",
+				"--stdin-filepath",
+				util.escape_path(util.get_current_buffer_file_path()),
+				"--parser=" .. parser,
+			},
+		}
+	end
 
 	local codespell = {
 		exe = "codespell",
 		stdin = false,
 		tempfile_dir = "/tmp", -- codespell requires a tmp dir
 		args = {
-			"--ignore-words=" .. linterConfig .. "/codespell-ignore.txt",
-			"--skip='*.css,*.bib'", -- filetypes to ignore
+			"--ignore-words",
+			linterConfig .. "/codespell-ignore.txt",
+			"--skip",
+			"*.css,*.bib", -- filetypes/-names to ignore
 			"--check-hidden",
 			"--write-changes",
 		},
@@ -146,17 +160,17 @@ local function formatterConfigs()
 	-- https://github.com/mhartington/formatter.nvim/tree/master/lua/formatter/filetypes
 	require("formatter").setup {
 		filetype = {
-			["*"] = { codespell },
+			["*"] = { codespell }, -- filetype-exceptions defined in codespell config
 			lua = { require("formatter.filetypes.lua").stylua },
 			sh = { require("formatter.filetypes.sh").shfmt },
 			zsh = { require("formatter.filetypes.sh").shfmt },
 			python = { require("formatter.filetypes.python").black },
-			html = { require("formatter.filetypes.html").prettier },
-			yaml = { require("formatter.filetypes.yaml").prettier },
+			html = { prettier("html") },
+			yaml = { prettier("yaml") },
 			javascript = { rome },
 			typescript = { rome },
 			json = { rome },
-			css = { stylelint, prettierCss },
+			css = { stylelint, prettier("css") },
 			scss = { stylelint },
 		},
 	}
