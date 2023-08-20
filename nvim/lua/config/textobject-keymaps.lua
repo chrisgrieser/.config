@@ -77,22 +77,22 @@ keymap({ "x", "o" }, "gh", ":Gitsigns select_hunk<CR>", { desc = "󱡔 󰊢 hunk
 
 -- stylua: ignore start
 -- space: subword
-keymap("o", "<Space>", "<cmd>lua require('various-textobjs').subword(true)<CR>", { desc = "󱡔 inner subword textobj" })
-keymap({"o", "x"}, "i<Space>", "<cmd>lua require('various-textobjs').subword(true)<CR>", { desc = "󱡔 inner subword textobj" })
-keymap({"o", "x"}, "a<Space>", "<cmd>lua require('various-textobjs').subword(false)<CR>", { desc = "󱡔 outer subword textobj" })
+keymap("o", "<Space>", "<cmd>lua require('various-textobjs').subword('inner')<CR>", { desc = "󱡔 inner subword textobj" })
+keymap({"o", "x"}, "i<Space>", "<cmd>lua require('various-textobjs').subword('inner')<CR>", { desc = "󱡔 inner subword textobj" })
+keymap({"o", "x"}, "a<Space>", "<cmd>lua require('various-textobjs').subword('outer')<CR>", { desc = "󱡔 outer subword textobj" })
 
 -- L: link
 keymap("o", "L", "<cmd>lua require('various-textobjs').url()<CR>", { desc = "󱡔 link textobj" })
 
 -- iv/av: value textobj
-keymap({ "x", "o" }, "iv", "<cmd>lua require('various-textobjs').value(true)<CR>", { desc = "󱡔 inner value textobj" })
-keymap({ "x", "o" }, "av", "<cmd>lua require('various-textobjs').value(false)<CR>", { desc = "󱡔 outer value textobj" })
+keymap({ "x", "o" }, "iv", "<cmd>lua require('various-textobjs').value('inner')<CR>", { desc = "󱡔 inner value textobj" })
+keymap({ "x", "o" }, "av", "<cmd>lua require('various-textobjs').value('outer')<CR>", { desc = "󱡔 outer value textobj" })
 
 -- ak: outer key textobj
 -- INFO `ik` defined via treesitter to exclude `local` and `let`
 -- INFO mapping the *inner* obj to `ak`, since it includes `local` and `let`
 -- (various textobjs' outer key includes the "=" and ":" as well)
-keymap({ "x", "o" }, "ak", "<cmd>lua require('various-textobjs').key(true)<CR>", { desc = "󱡔 outer key textobj" })
+keymap({ "x", "o" }, "ak", "<cmd>lua require('various-textobjs').key('inner')<CR>", { desc = "󱡔 outer key textobj" })
 
 -- n: [n]ear end of the line
 keymap({ "o", "x" }, "n", "<cmd>lua require('various-textobjs').nearEoL()<CR>", { desc = "󱡔 near EoL textobj" })
@@ -106,8 +106,8 @@ keymap("o", "w", "<cmd>lua require('various-textobjs').toNextQuotationMark()<CR>
 keymap({"x", "o"}, "O", "<cmd>lua require('various-textobjs').column()<CR>", { desc = "󱡔 column textobj" })
 
 -- an/in: number
-keymap({"x", "o"}, "in", "<cmd>lua require('various-textobjs').number(true)<CR>", { desc = "󱡔 inner number textobj" })
-keymap({"x", "o"}, "an", "<cmd>lua require('various-textobjs').number(false)<CR>", { desc = "󱡔 outer number textobj" })
+keymap({"x", "o"}, "in", "<cmd>lua require('various-textobjs').number('inner')<CR>", { desc = "󱡔 inner number textobj" })
+keymap({"x", "o"}, "an", "<cmd>lua require('various-textobjs').number('outer')<CR>", { desc = "󱡔 outer number textobj" })
 
 -- gg: entire buffer textobj
 keymap({ "x", "o" }, "gg", "<cmd>lua require('various-textobjs').entireBuffer()<CR>", { desc = "󱡔 entire buffer textobj" })
@@ -126,20 +126,20 @@ keymap("o", "rg", "G", { desc = "󱡔 rest of buffer textobj" })
 keymap({ "x", "o" }, "ge", "<cmd>lua require('various-textobjs').diagnostic()<CR>", { desc = "󱡔 diagnostic textobj" })
 
 -- iR/aR: double square brackets
-keymap( { "x", "o" }, "i"..u.textobjectMaps["doubleSquareBracket"], "<cmd>lua require('various-textobjs').doubleSquareBrackets(true)<CR>", { desc = "󱡔 inner double square bracket" })
-keymap( { "x", "o" }, "a"..u.textobjectMaps["doubleSquareBracket"], "<cmd>lua require('various-textobjs').doubleSquareBrackets(false)<CR>", { desc = "󱡔 outer double square bracket" })
+keymap( { "x", "o" }, "i"..u.textobjectMaps["doubleSquareBracket"], "<cmd>lua require('various-textobjs').doubleSquareBrackets('inner')<CR>", { desc = "󱡔 inner double square bracket" })
+keymap( { "x", "o" }, "a"..u.textobjectMaps["doubleSquareBracket"], "<cmd>lua require('various-textobjs').doubleSquareBrackets('outer')<CR>", { desc = "󱡔 outer double square bracket" })
 
 -- ai/ag/aj: indentation textobjs
-keymap({ "x", "o" }, "ii", "<cmd>lua require('various-textobjs').indentation(true, true)<CR>", { desc = "󱡔 inner indent textobj" })
-keymap({ "x", "o" }, "ai", "<cmd>lua require('various-textobjs').indentation(false, false)<CR>", { desc = "󱡔 outer indent textobj" })
-keymap({ "x", "o" }, "ij", "<cmd>lua require('various-textobjs').indentation(false, true)<CR>", { desc = "󱡔 top-border indent textobj" })
-keymap({ "x", "o" }, "aj", "<cmd>lua require('various-textobjs').indentation(false, true)<CR>", { desc = "󱡔 top-border indent textobj" })
-keymap({ "x", "o" }, "ig", "<cmd>lua require('various-textobjs').greedyOuterIndentation(true)<CR>", { desc = "󱡔 inner greedy indent" })
-keymap({ "x", "o" }, "ag", "<cmd>lua require('various-textobjs').greedyOuterIndentation(false)<CR>", { desc = "󱡔 outer greedy indent" })
+keymap({ "x", "o" }, "ii", "<cmd>lua require('various-textobjs').indentation('inner', 'inner')<CR>", { desc = "󱡔 inner indent textobj" })
+keymap({ "x", "o" }, "ai", "<cmd>lua require('various-textobjs').indentation('outer', 'outer')<CR>", { desc = "󱡔 outer indent textobj" })
+keymap({ "x", "o" }, "ij", "<cmd>lua require('various-textobjs').indentation('outer', 'inner')<CR>", { desc = "󱡔 top-border indent textobj" })
+keymap({ "x", "o" }, "aj", "<cmd>lua require('various-textobjs').indentation('outer', 'inner')<CR>", { desc = "󱡔 top-border indent textobj" })
+keymap({ "x", "o" }, "ig", "<cmd>lua require('various-textobjs').greedyOuterIndentation('inner')<CR>", { desc = "󱡔 inner greedy indent" })
+keymap({ "x", "o" }, "ag", "<cmd>lua require('various-textobjs').greedyOuterIndentation('outer')<CR>", { desc = "󱡔 outer greedy indent" })
 
 -- i./a.: chain-member
-keymap({ "x", "o" }, "i.", "<cmd>lua require('various-textobjs').chainMember(true)<CR>", { desc = "󱡔 inner indent textobj" })
-keymap({ "x", "o" }, "a.", "<cmd>lua require('various-textobjs').chainMember(false)<CR>", { desc = "󱡔 outer indent textobj" })
+keymap({ "x", "o" }, "i.", "<cmd>lua require('various-textobjs').chainMember('inner')<CR>", { desc = "󱡔 inner indent textobj" })
+keymap({ "x", "o" }, "a.", "<cmd>lua require('various-textobjs').chainMember('outer')<CR>", { desc = "󱡔 outer indent textobj" })
 
 --------------------------------------------------------------------------------
 
