@@ -1,5 +1,61 @@
 return {
-	-- TODO checkout when more table https://github.com/filNaj/tree-setter/
+	{ -- autopair brackets/quotes
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		config = function()
+			-- add brackets to cmp completions, e.g. "function" -> "function()"
+			local ok, cmp = pcall(require, "cmp")
+			if ok then
+				local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+				cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+			end
+
+			-- custom rules
+			require("nvim-autopairs").setup { check_ts = true } -- use treesitter
+			local rule = require("nvim-autopairs.rule")
+			local isNodeType = require("nvim-autopairs.ts-conds").is_ts_node
+
+			require("nvim-autopairs").add_rules {
+				rule("<", ">", "lua"):with_pair(isNodeType("string")), -- keymaps
+				rule("<", ">", "vim"), -- keymaps
+				rule('\\"', '\\"', { "sh", "json" }):with_pair(isNodeType("string")), -- escaped quotes
+				rule("*", "*", "markdown"), -- italics
+				rule("__", "__", "markdown"), -- bold
+				rule("=$", "()", "sh"):set_end_pair_length(1), -- variable definitions
+
+				-- auto-add trailing comma inside tables/objects
+				rule("=", " ,", "lua")
+					:with_pair(isNodeType("table_constructor")) -- called this way in lua
+					:set_end_pair_length(1),
+				rule(":", " ,", { "javascript", "typescript" })
+					:with_pair(isNodeType("object"))
+					:set_end_pair_length(1),
+				rule("", ",") -- automatically move past commas
+					:with_move(function(opts) return opts.char == "," end)
+					:with_pair(function() return false end)
+					:with_del(function() return false end)
+					:with_cr(function() return false end)
+					:use_key(","),
+
+				-- add brackets to if/else in js/ts
+				rule("^%s*if $", "()", { "javascript", "typescript" })
+					:use_regex(true)
+					:set_end_pair_length(1), -- only move one char to the side
+				rule("^%s*else if $", "()", { "javascript", "typescript" })
+					:use_regex(true)
+					:set_end_pair_length(1),
+				rule("^%s*} ?else if $", "() {", { "javascript", "typescript" })
+					:use_regex(true)
+					:set_end_pair_length(3),
+
+				-- quicker template string
+				rule("$", "{}", { "javascript", "typescript", "json" })
+					:with_pair(isNodeType("string"))
+					:set_end_pair_length(1),
+			}
+		end,
+	},
 	{
 		"haringsrob/nvim_context_vt",
 		event = "VeryLazy",
@@ -12,47 +68,6 @@ return {
 			-- languages like Python
 			disable_virtual_lines_ft = { "yaml" },
 		},
-	},
-	{ -- autopair brackets/quotes
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		config = function()
-			require("nvim-autopairs").setup { check_ts = true } -- use treesitter
-			local rule = require("nvim-autopairs.rule")
-			local isNodeType = require("nvim-autopairs.ts-conds").is_ts_node
-
-			require("nvim-autopairs").add_rules {
-				rule("<", ">", "lua"):with_pair(isNodeType("string")), -- keymaps
-				rule("<", ">", "vim"), -- keymaps
-				rule('\\"', '\\"', { "sh", "json" }):with_pair(isNodeType("string")), -- escaped quotes
-				rule("*", "*", "markdown"), -- italics
-				rule("__", "__", "markdown"), -- bold
-				rule('=$', '()', "sh"):set_end_pair_length(1), -- variables in shell
-
-				-- lua comma to tables
-				rule("{", "},", "lua" ):with_pair(isNodeType("table_constructor")),
-
-				-- if / else in js/ts
-				rule("^%s*if $", "()", { "javascript", "typescript" })
-					:use_regex(true) 
-					:set_end_pair_length(1), -- only move one char to the side
-				rule("^%s*else if $", "()", { "javascript", "typescript" })
-					:use_regex(true)
-					:set_end_pair_length(1),
-				rule("^%s*} ?else if $", "() {", { "javascript", "typescript" })
-					:use_regex(true)
-					:set_end_pair_length(3),
-				-- quicker template string
-				rule("$", "{}", { "javascript", "typescript", "json" })
-					:with_pair(isNodeType("string"))
-					:set_end_pair_length(1),
-			}
-
-			-- add brackets to cmp completions, e.g. "function" -> "function()"
-			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-			require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
-		end,
 	},
 	{ -- automatically set correct indent for file
 		"nmac427/guess-indent.nvim",

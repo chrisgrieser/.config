@@ -40,7 +40,9 @@ local function linterConfigs()
 		pattern = "*",
 		callback = function(ctx)
 			-- FIX weird error message for shellcheck
-			if vim.bo.filetype == "sh" and (ctx.event == "TextChanged" or ctx.event == "BufReadPost") then return end
+			if vim.bo.filetype == "sh" and (ctx.event == "TextChanged" or ctx.event == "BufReadPost") then
+				return
+			end
 
 			lint.try_lint()
 		end,
@@ -52,10 +54,8 @@ local function linterConfigs()
 	lint.linters.markdownlint.args = { "--config", linterConfig .. "/markdownlintrc" }
 	lint.linters.vale.args = {
 		"--no-exit",
-		"--output",
-		"JSON",
-		"--config",
-		linterConfig .. "/vale/vale.ini",
+		"--output=JSON",
+		"--config=" .. linterConfig .. "/vale/vale.ini",
 	}
 	lint.linters.shellcheck.args = {
 		"--shell=bash", -- force to work with zsh
@@ -63,18 +63,14 @@ local function linterConfigs()
 		"-",
 	}
 	lint.linters.yamllint.args = {
-		"--config-file",
-		linterConfig .. "/yamllint.yaml",
-		"--format",
-		"parsable",
+		"--config-file=" .. linterConfig .. "/yamllint.yaml",
+		"--format=parsable",
 		"-",
 	}
 	lint.linters.stylelint.args = {
-		"-f",
-		"json",
+		"-f=json",
 		"--quiet",
-		-- "--config",
-		-- linterConfig .. "/stylelintrc.yml",
+		"--config=" .. linterConfig .. "/stylelintrc.yml",
 		"--stdin",
 		"--stdin-filename",
 		function() return vim.fn.expand("%:p") end,
@@ -86,10 +82,19 @@ end
 local function formatterConfigs()
 	-- using the stdin formatting of rome bugs with emojis
 	local util = require("formatter.util")
-	local romeConfig = {
+	local rome = {
 		exe = "rome",
 		stdin = false,
 		args = { "format", "--write", util.escape_path(util.get_current_buffer_file_path()) },
+	}
+	local stylelint = {
+		exe = "stylelint",
+		args = {
+			"--fix",
+			"--stdin",
+			util.escape_path(util.get_current_buffer_file_path()),
+		},
+		stdin = false,
 	}
 
 	-- https://github.com/mhartington/formatter.nvim/tree/master/lua/formatter/filetypes
@@ -102,9 +107,11 @@ local function formatterConfigs()
 			python = { require("formatter.filetypes.python").black },
 			html = { require("formatter.filetypes.html").prettier },
 			yaml = { require("formatter.filetypes.yaml").prettier },
-			javascript = { romeConfig },
-			typescript = { romeConfig },
-			json = { romeConfig },
+			javascript = { rome },
+			typescript = { rome },
+			json = { rome },
+			css = { stylelint },
+			scss = { stylelint },
 		},
 	}
 end

@@ -68,6 +68,7 @@ local function themeModifications()
 			updateHighlight("lualine_a_" .. v, "gui=bold")
 		end
 		updateHighlight("GitSignsChange", "guifg=#acaa62")
+		updateHighlight("GitSignsAdd", "guifg=#369a96")
 	elseif theme == "gruvbox-material" or theme == "sonokai" then
 		local commentColor = u.getHighlightValue("Comment", "fg")
 		updateHighlight("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
