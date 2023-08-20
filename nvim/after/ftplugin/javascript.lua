@@ -12,18 +12,6 @@ u.applyTemplateIfEmptyFile("js")
 
 --------------------------------------------------------------------------------
 
--- auto-convert string to template string when typing `${..}`
-vim.api.nvim_create_autocmd("InsertLeave", {
-	buffer = 0,
-	callback = function()
-		local curLine = vim.api.nvim_get_current_line()
-		local correctedLine = curLine:gsub([["(.*${.-}.*)"]], "`%1`"):gsub([['(.*${.-}.*)']], "`%1`")
-		vim.api.nvim_set_current_line(correctedLine)
-	end,
-})
-
---------------------------------------------------------------------------------
-
 -- Open regex in regex101 and regexper (railroad diagram)
 keymap("n", "<localleader>r", function()
 	-- keymaps assume a/ and i/ mapped as regex textobj via treesitter textobj

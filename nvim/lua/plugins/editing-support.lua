@@ -1,4 +1,5 @@
 return {
+	-- TODO checkout when more table https://github.com/filNaj/tree-setter/
 	{
 		"haringsrob/nvim_context_vt",
 		event = "VeryLazy",
@@ -11,12 +12,6 @@ return {
 			-- languages like Python
 			disable_virtual_lines_ft = { "yaml" },
 		},
-	},
-	-- TODO update when more stable
-	-- list of supported languages: https://github.com/filNaj/tree-setter/tree/master/queries
-	{ -- auto-insert ;,=:
-		"filNaj/tree-setter",
-		event = "InsertEnter",
 	},
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",

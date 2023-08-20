@@ -42,7 +42,7 @@ local function customHighlights()
 	-- make MatchParen stand out more (orange to close to rainbow brackets)
 	-- vim.api.nvim_set_hl(0, "MatchParen", { bold = true, underline = true, fg = "#4a8cc9" })
 	overwriteHighlight("MatchParen", { reverse = true })
-	overwriteHighlight("MatchParenCur", { reverse = true, underline = true })
+	overwriteHighlight("MatchParenCur", { reverse = true, bold = true })
 
 	-- proper underlines for diagnostics
 	local types = { "Error", "Warn", "Info", "Hint" }
