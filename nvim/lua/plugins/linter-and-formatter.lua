@@ -15,25 +15,30 @@ local lintersAndFormatters = {
 	"prettier", -- only used for yaml and html https://github.com/mikefarah/yq/issues/515
 	"rome", -- also an LSP; the lsp does diagnostics, the CLI via null-ls does formatting
 	-- stylelint included in mason, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
+	"actionlint", -- TODO this is just a test
 }
 --------------------------------------------------------------------------------
 
 local function linterConfigs()
 	local lint = require("lint")
 	lint.linters_by_ft = {
-		lua = { "selene", "codespell" },
-		css = { "stylelint", "codespell" },
-		sh = { "shellcheck", "codespell" },
-		zsh = { "shellcheck", "codespell" },
-		markdown = { "vale", "markdownlint", "codespell" },
-		yaml = { "yamllint", "codespell" },
-		json = { "codespell" },
-		javascript = { "codespell" },
-		typescript = { "codespell" },
-		gitcommit = { "codespell" },
-		toml = { "codespell" },
-		python = { "codespell" },
+		lua = { "selene" },
+		css = { "stylelint" },
+		sh = { "shellcheck" },
+		zsh = { "shellcheck" },
+		markdown = { "vale", "markdownlint" },
+		yaml = { "yamllint" },
+		json = {},
+		javascript = {},
+		typescript = {},
+		gitcommit = {},
+		toml = {},
+		python = {},
 	}
+	-- use for codespell for all
+	for ft, _ in pairs(lint.linters_by_ft) do
+		table.insert(lint.linters_by_ft[ft], "codespell")
+	end
 
 	-- "BufWritePost" relevant due to nvim-autosave
 	vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "InsertLeave", "TextChanged" }, {
@@ -48,9 +53,14 @@ local function linterConfigs()
 		end,
 	})
 
-	-- Linter configs
 	-- https://github.com/mfussenegger/nvim-lint/tree/master/lua/lint/linters
+	-- only changed severity for the parser
+	lint.linters.codespell.parser = require("lint.parser").from_errorformat(
+		"%f:%l:%m",
+		{ severity = vim.diagnostic.severity.WARN, source = "codespell" }
+	)
 	lint.linters.codespell.args = { "--ignore-words", linterConfig .. "/codespell-ignore.txt" }
+
 	lint.linters.markdownlint.args = { "--config", linterConfig .. "/markdownlintrc" }
 	lint.linters.vale.args = {
 		"--no-exit",
@@ -67,14 +77,18 @@ local function linterConfigs()
 		"--format=parsable",
 		"-",
 	}
+
+	-- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
 	lint.linters.stylelint.args = {
-		"-f=json",
+		"--formatter=json",
 		"--quiet",
 		"--config=" .. linterConfig .. "/stylelintrc.yml",
 		"--stdin",
 		"--stdin-filename",
 		function() return vim.fn.expand("%:p") end,
 	}
+
+	lint.try_lint() -- run on first buffer once this plugin is initialized
 end
 
 --------------------------------------------------------------------------------
@@ -90,11 +104,17 @@ local function formatterConfigs()
 	local stylelint = {
 		exe = "stylelint",
 		args = {
+			-- using config without ordering, since automatic re-ordering can be
+			-- confusing. Config with stylelint-order is only run on build.
+			"--config="
+				.. linterConfig
+				.. "/stylelintrc-formatting.yml",
 			"--fix",
 			"--stdin",
+			"--stdin-filename",
 			util.escape_path(util.get_current_buffer_file_path()),
 		},
-		stdin = false,
+		stdin = true,
 	}
 
 	-- https://github.com/mhartington/formatter.nvim/tree/master/lua/formatter/filetypes
@@ -120,20 +140,23 @@ end
 
 return {
 	{ -- auto-install missing linters & formatters
-		-- INFO auto-install of lsp servers done via `mason-lspconfig.nvim`
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		event = "VimEnter", -- later does not trigger run_on_start properly
+		event = "VeryLazy",
 		dependencies = "williamboman/mason.nvim",
-		opts = {
-			ensure_installed = lintersAndFormatters,
-			auto_update = false,
-			run_on_start = true,
-			start_delay = 1000,
-		},
+		config = function()
+			-- needs to trigger myself, since `run_on_start`, does not work well
+			-- with lazy-loading
+			require("mason-tool-installer").setup {
+				-- auto-install of lsp servers done via `mason-lspconfig.nvim`
+				ensure_installed = lintersAndFormatters,
+				run_on_start = false,
+			}
+			vim.defer_fn(vim.cmd.MasonToolsInstall, 1000)
+		end,
 	},
 	{
 		"mfussenegger/nvim-lint",
-		event = "BufReadPost", -- earlier to work on first buffer
+		event = "VeryLazy",
 		config = linterConfigs,
 	},
 	{
