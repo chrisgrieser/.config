@@ -12,32 +12,36 @@ function alfredMatcher(str) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const docsURL = "https://api.github.com/repos/rome/tools/git/trees/main?recursive=1";
-const baseURL = "https://docs.rome.tools/";
-const docPathRegex = /^website\/src\/pages\/(.*)\.mdx?$/i;
+/** @type {AlfredRun} */
+// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+function run() {
+	const docsURL = "https://api.github.com/repos/rome/tools/git/trees/main?recursive=1";
+	const baseURL = "https://docs.rome.tools/";
+	const docPathRegex = /^website\/src\/pages\/(.*)\.mdx?$/i;
 
-const workArray = JSON.parse(app.doShellScript(`curl -sL "${docsURL}"`))
-	.tree.filter((/** @type {{ path: string; }} */ file) => docPathRegex.test(file.path))
-	.map((/** @type {{ path: string; }} */ entry) => {
-		const subsite = entry.path.replace(docPathRegex, "$1");
-		const parts = subsite.split("/");
-		let displayTitle = parts.pop();
-		let category = parts.join("/");
-		let url = `${baseURL}/${subsite}`;
+	const workArray = JSON.parse(app.doShellScript(`curl -sL "${docsURL}"`))
+		.tree.filter((/** @type {{ path: string; }} */ file) => docPathRegex.test(file.path))
+		.map((/** @type {{ path: string; }} */ entry) => {
+			const subsite = entry.path.replace(docPathRegex, "$1");
+			const parts = subsite.split("/");
+			let displayTitle = parts.pop();
+			let category = parts.join("/");
+			let url = `${baseURL}/${subsite}`;
 
-		if (subsite.endsWith("index")) {
-			displayTitle = category;
-			category = "";
-			url = `${baseURL}/${subsite.slice(0, -5)}`;
-		}
+			if (subsite.endsWith("index")) {
+				displayTitle = category;
+				category = "";
+				url = `${baseURL}/${subsite.slice(0, -5)}`;
+			}
 
-		return {
-			title: displayTitle,
-			subtitle: category,
-			match: alfredMatcher(subsite),
-			arg: url,
-			uid: subsite,
-		};
-	});
+			return {
+				title: displayTitle,
+				subtitle: category,
+				match: alfredMatcher(subsite),
+				arg: url,
+				uid: subsite,
+			};
+		});
 
-JSON.stringify({ items: workArray });
+	return JSON.stringify({ items: workArray });
+}
