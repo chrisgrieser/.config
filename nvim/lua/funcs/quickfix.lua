@@ -46,6 +46,7 @@ function M.next()
 	local wentToNext = pcall(function() cmd("silent cnext") end)
 	if wentToNext then
 		g.qfCount = g.qfCount + 1
+		vim.cmd.normal{"zv", bang = true} -- open fold(s) under cursor
 	else
 		cmd("silent cfirst")
 		g.qfCount = 1
@@ -61,6 +62,7 @@ function M.previous()
 	local wentToPrevious = pcall(function() cmd("silent cprevious") end)
 	if wentToPrevious then
 		g.qfCount = g.qfCount - 1
+		vim.cmd.normal{"zv", bang = true} -- open fold(s) under cursor
 	else
 		cmd("silent clast")
 		g.qfCount = #(vim.fn.getqflist())

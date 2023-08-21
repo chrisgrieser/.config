@@ -14,7 +14,9 @@ end
 
 -- auto-convert string to template string when typing `${..}` inside string
 local function templateStr()
-	local correctedLine = currentLine():gsub("[\"'](.*${.-}.*)[\"']", "`%1`")
+	local curLine = currentLine()
+	if curLine:find("`.*`") then return end -- already template string
+	local correctedLine = curLine:gsub("[\"'](.*${.-}.*)[\"']", "`%1`")
 	setIfChanges(correctedLine)
 end
 

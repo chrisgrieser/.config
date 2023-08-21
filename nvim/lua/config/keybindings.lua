@@ -101,13 +101,19 @@ end, vim.api.nvim_create_namespace("auto_nohl"))
 
 -- QUICKFIX
 keymap("n", "n", function()
-	if #vim.fn.getqflist() == 0 then return "n" end
-	require("funcs.quickfix").next()
-end, { desc = "  Next Quickfix/Search", expr = true })
+	if #vim.fn.getqflist() == 0 then
+		u.normal("n")
+	else
+		require("funcs.quickfix").next()
+	end
+end, { desc = "  Next Quickfix/Search" })
 keymap("n", "N", function()
-	if #vim.fn.getqflist() == 0 then return "N" end
-	require("funcs.quickfix").prev()
-end, { desc = "  Prev Quickfix/Search", expr = true })
+	if #vim.fn.getqflist() == 0 then
+		u.normal("N")
+	else
+		require("funcs.quickfix").prev()
+	end
+end, { desc = "  Prev Quickfix/Search" })
 keymap("n", "dQ", require("funcs.quickfix").deleteList, { desc = " Empty Quickfix List" })
 
 -- COMMENTS & ANNOTATIONS
