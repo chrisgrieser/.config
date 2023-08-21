@@ -208,14 +208,14 @@ return {
 					-- FIX very weird bug where insert mode undo points (<C-g>u),
 					-- as well as vim-matchup's `<C-G>%` binding insert extra `1`s
 					-- after wrapping to the next line in insert mode. The `G` needs
-					-- to be d to affect the right mapping.
+					-- to be uppercased to affect the right mapping.
 					i = { "<C-G>" },
 				},
 				plugins = {
 					presets = { motions = false, g = false, z = false },
 					spelling = { enabled = false },
 				},
-				-- INFO to ignore a mapping use the label "which_key_ignore", not the "hidden" setting here
+				-- INFO ignore a mapping with desc "which_key_ignore", with this "hidden" setting
 				hidden = { "<Plug>", "^:lua ", "<cmd>" },
 				key_labels = {
 					["<CR>"] = "↵ ",

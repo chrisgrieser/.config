@@ -67,7 +67,7 @@ local tsConfig = {
 	matchup = {
 		enable = true,
 		enable_quotes = false,
-		disable_virtual_text = true,
+		-- disable_virtual_text = true,
 	},
 	endwise = { enable = true },
 	tree_setter = { enable = true },
