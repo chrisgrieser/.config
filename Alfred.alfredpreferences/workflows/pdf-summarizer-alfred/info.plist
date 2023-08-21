@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>de.chris-grieser.chatPDF</string>
+	<string>de.chris-grieser.pdf-summarizer</string>
 	<key>category</key>
 	<string>⭐️</string>
 	<key>connections</key>
@@ -13,6 +13,16 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>D361B88F-34F2-4AA4-8855-EF65D1040682</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>46ABCD1A-5D62-42C4-AFC1-EB8308C9A08E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -51,11 +61,11 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>Get summaries of your PDFs via ChatPDF</string>
+	<string>Get summaries of your PDFs via ChatPDF.</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>ChatPDF</string>
+	<string>PDF Summarizer</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -70,7 +80,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./chat-pdf-summary.sh</string>
+				<string>./scripts/chat-pdf-summary.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -274,7 +284,7 @@ fi</string>
 ---
 
 **Advanced Users**
-Instead of entering the API key directly, you can also enter ".zshenv" into the API key field. The workflow will then use the key exported as `CHATPDF_API_KEY` in your "`.zshenv`.
+Instead of entering the API key directly, you can also enter ".zshenv" into the API key field. The workflow will then use the key exported as `CHATPDF_API_KEY` in your " `.zshenv`.
 
 ---
 
@@ -413,7 +423,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>Summarize the PDF in 5 bullet points. Ground your summary in the facts of the paper.</string>
+				<string>Summarize the PDF in 5 bullet points. Strive for variety. Ground your summary in the facts of the paper, and include references to specific pages in the paper. 
+
+Immediately start the summary, do not write anything else.</string>
 				<key>required</key>
 				<true/>
 				<key>trim</key>
@@ -432,7 +444,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.9</string>
+	<string>1.0.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

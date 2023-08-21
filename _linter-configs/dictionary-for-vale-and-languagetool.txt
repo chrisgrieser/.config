@@ -155,3 +155,4 @@ subreddits
 hackernews
 ⌘Y
 addon
+ChatPDF

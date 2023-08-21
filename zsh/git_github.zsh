@@ -260,8 +260,8 @@ function nuke {
 	cd ..
 
 	command rm -rf "$local_repo_path"
-	printf "\033[1;34mLocal repo removed."
-	printf "Cloning repo again from remote…\033[0m"
+	print "\033[1;34mLocal repo removed."
+	print "Cloning repo again from remote…\033[0m"
 	separator
 
 	# WARN depth > 1 ensures that amending a shallow commit does not result in a
