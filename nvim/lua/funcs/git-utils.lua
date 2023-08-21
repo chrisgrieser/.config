@@ -176,6 +176,7 @@ function M.commit(prefillMsg)
 
 		vim.notify('󰊢 git commit\n"' .. newMsg .. '"')
 		fn.system { "git", "commit", "-m", newMsg }
+		if vim.v.shell_error ~= 0 then vim.notify("Nothing to commit", vim.log.levels.WARN) end
 	end)
 end
 
