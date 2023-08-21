@@ -27,7 +27,7 @@ return {
 				-- auto-add trailing comma inside tables/objects
 				rule("=", " ,", "lua")
 					:with_pair(isNodeType("table_constructor")) 
-					:with_pair(notAfterRegex(" }")) -- sub
+					:with_pair(notAfterRegex("%s*}")) -- sub
 					:set_end_pair_length(1),
 				rule(":", " ,", { "javascript", "typescript" })
 					:with_pair(isNodeType("object"))
