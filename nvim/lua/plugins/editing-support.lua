@@ -11,16 +11,19 @@ return {
 				cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 			end
 
+			require("nvim-autopairs").setup {
+				check_ts = true, -- use treesitter
+			}
+
 			-- CUSTOM RULES
-			require("nvim-autopairs").setup { check_ts = true } -- use treesitter
 			local rule = require("nvim-autopairs.rule")
 			local isNodeType = require("nvim-autopairs.ts-conds").is_ts_node
 			local notAfterText = require("nvim-autopairs.conds").not_after_text
 
 			require("nvim-autopairs").add_rules {
 				rule("<", ">", "lua"):with_pair(isNodeType("string")), -- keymaps
-				rule("<", ">", "vim"), -- keymaps
-				rule('\\"', '\\"', { "sh", "json" }):with_pair(isNodeType("string")), -- escaped quotes
+				rule("<", ">", { "vim", "html" }), -- keymaps & tags
+				rule('\\"', '\\"', { "sh", "json" }), -- escaped quotes
 				rule("*", "*", "markdown"), -- italics
 				rule("__", "__", "markdown"), -- bold
 				rule("![", "]()", "markdown"):set_end_pair_length(1), -- images
@@ -57,12 +60,12 @@ return {
 
 				-- quicker template string
 				rule("$", "{}", { "javascript", "typescript", "json" })
-					:with_pair(isNodeType("string"))
+					:with_pair(isNodeType { "string", "template_string", "string_fragment" })
 					:set_end_pair_length(1),
 			}
 		end,
 	},
-	{
+	{ -- virtual text context at the end of a scope
 		"haringsrob/nvim_context_vt",
 		event = "VeryLazy",
 		dependencies = "nvim-treesitter/nvim-treesitter",
