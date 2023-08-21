@@ -1,6 +1,7 @@
 local opt_local = vim.opt_local
 local opt = vim.opt
 local bo = vim.bo
+local fn = vim.fn
 local autocmd = vim.api.nvim_create_autocmd
 local keymap = vim.keymap.set
 local u = require("config.utils")
@@ -12,8 +13,7 @@ local u = require("config.utils")
 opt.undodir:prepend(u.vimDataDir .. "undo//")
 opt.viewdir = u.vimDataDir .. "view"
 opt.shadafile = u.vimDataDir .. "main.shada"
-
-opt.swapfile = false -- doesn't help and only creates useless files :/
+opt.swapfile = false -- doesn't help and only creates useless files
 
 --------------------------------------------------------------------------------
 -- Undo
@@ -82,9 +82,9 @@ autocmd({ "VimEnter", "VimResized" }, { -- the "WinResized" autocmd event does n
 opt.cmdheight = 0
 opt.history = 400 -- reduce noise for command history search
 opt.shortmess:append("s") -- reduce info in :messages
-opt.shortmess:append("S") 
+opt.shortmess:append("S")
 opt.shortmess:append("I")
-opt.report = 9999 -- disable "x more/fewer lines" messages
+opt.report = 9001 -- disable "x more/fewer lines" messages
 
 -- Character groups
 opt.iskeyword:append("-") -- don't treat "-" as word boundary, e.g. for kebab-case
@@ -101,13 +101,9 @@ opt.timeoutlen = 666 -- also affects duration until which-key is shown
 opt.pumwidth = 15 -- min width
 opt.pumheight = 12 -- max height
 
---------------------------------------------------------------------------------
-
--- SCROLLING
+-- scrolling
 opt.scrolloff = 13
 opt.sidescrolloff = 13
-
---------------------------------------------------------------------------------
 
 -- whitespace & indentation
 opt.tabstop = 3
@@ -139,7 +135,7 @@ autocmd("BufReadPost", {
 	callback = function()
 		vim.defer_fn(function()
 			opt_local.listchars = vim.opt_global.listchars:get() -- copy the global
-			if bo.buftype == "nofile" then 
+			if bo.buftype == "nofile" then
 				opt_local.list = false -- no list chars in special buffers
 			elseif bo.expandtab then
 				opt_local.listchars:append { tab = "󰌒 " }
@@ -162,3 +158,12 @@ autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
+
+-- notify when coming back to a file that does not exist anymore
+autocmd("FocusGained", {
+	callback = function()
+		if not fn.filereadable(fn.expand("%:p")) then
+			vim.notify("File does not exist anymore.", u.warn)
+		end
+	end,
+})

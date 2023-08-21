@@ -17,7 +17,7 @@ return {
 		event = "BufReadPre", -- cannot load on key due to highlights
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
-			-- vim.g.matchup_matchparen_offscreen = {} -- empty = disables
+			vim.g.matchup_matchparen_offscreen = { method = "popup" } -- empty list to disable
 			vim.g.matchup_text_obj_enabled = 0
 
 			vim.keymap.set("n", "m", "<Plug>(matchup-%)", { desc = "Goto Matching Bracket" })
