@@ -149,31 +149,6 @@ keymap({ "n", "i" }, "<D-o>", function()
 end, { desc = " Open new scope" })
 
 --------------------------------------------------------------------------------
--- SPELLING
-
--- [z]pelling [l]ist
-keymap("n", "zl", function() cmd.Telescope("spell_suggest") end, { desc = "󰓆 Spell Suggest" })
-keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
-
----add word under cursor to vale/languagetool dictionary
-keymap({ "n", "x" }, "zg", function()
-	local word
-	if fn.mode() == "n" then
-		local iskeywBefore = vim.opt_local.iskeyword:get() -- remove word-delimiters for <cword>
-		vim.opt_local.iskeyword:remove { "_", "-", "." }
-		word = expand("<cword>")
-		vim.opt_local.iskeyword = iskeywBefore
-	else
-		u.normal('"zy')
-		word = fn.getreg("z")
-	end
-	local filepath = u.linterConfigFolder .. "/dictionary-for-vale-and-languagetool.txt"
-	local error = u.writeToFile(filepath, word, "a")
-	local msg = error and "󰓆 Error: " .. error or "󰓆 Added: " .. word
-	vim.notify(msg)
-end, { desc = "󰓆 Accept Word" })
-
---------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
 
 keymap("n", "<Down>", [[<cmd>. move +1<CR>==]], { desc = "󰜮 Move Line Down", silent = true })

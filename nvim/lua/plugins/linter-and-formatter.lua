@@ -132,7 +132,7 @@ local function formatterConfigs()
 
 	local rome = {
 		exe = "rome",
-		stdin = false, -- using the stdin formatting of rome bugs with emojis
+		stdin = false, -- using the stdin formatting of rome has bugs with emojis
 		try_node_modules = true,
 		args = { "format", "--write", util.escape_path(util.get_current_buffer_file_path()) },
 	}
@@ -156,7 +156,6 @@ local function formatterConfigs()
 		args = {
 			"--ignore-words",
 			linterConfig .. "/codespell-ignore.txt",
-			"--skip='*.css,*.bib'", -- needs to be one arg for formatter.nvim
 			"--check-hidden",
 			"--write-changes",
 		},
@@ -174,8 +173,14 @@ local function formatterConfigs()
 		json = { rome },
 		css = { stylelint, require("formatter.filetypes.css").prettier },
 		scss = { stylelint },
+		gitcommit = {},
+		toml = {},
 	}
 
+	-- use for codespell for all except bib and css
+	for ft, _ in pairs(filetypes) do
+		if ft ~= "bib" and ft ~= "css" then table.insert(filetypes[ft], codespell) end
+	end
 
 	-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
 	-- https://github.com/mhartington/formatter.nvim/tree/master/lua/formatter/filetypes

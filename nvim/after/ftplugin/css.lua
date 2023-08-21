@@ -7,11 +7,11 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 -- stylua: ignore start
-keymap({ "o", "x" }, "is", "<cmd>lua require('various-textobjs').cssSelector(true)<CR>", { desc = "inner CSS Selector textobj", buffer = true })
-keymap({ "o", "x" }, "as", "<cmd>lua require('various-textobjs').cssSelector(false)<CR>", { desc = "outer CSS Selector textobj", buffer = true })
+keymap({ "o", "x" }, "is", "<cmd>lua require('various-textobjs').cssSelector('inner')<CR>", { desc = "󱡔 inner CSS Selector textobj", buffer = true })
+keymap({ "o", "x" }, "as", "<cmd>lua require('various-textobjs').cssSelector('outer')<CR>", { desc = "󱡔 outer CSS Selector textobj", buffer = true })
 
-keymap({ "o", "x" }, "ix", "<cmd>lua require('various-textobjs').htmlAttribute(true)<CR>", { desc = "inner HTML Attribute textobj", buffer = true })
-keymap({ "o", "x" }, "ax", "<cmd>lua require('various-textobjs').htmlAttribute(false)<CR>", { desc = "outer HTML Attribute textobj", buffer = true })
+keymap({ "o", "x" }, "ix", "<cmd>lua require('various-textobjs').htmlAttribute('inner')<CR>", { desc = "󱡔 inner HTML Attribute textobj", buffer = true })
+keymap({ "o", "x" }, "ax", "<cmd>lua require('various-textobjs').htmlAttribute('outer')<CR>", { desc = "󱡔 outer HTML Attribute textobj", buffer = true })
 -- stylua: ignore end
 
 -- toggle !important

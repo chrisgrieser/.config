@@ -1,4 +1,6 @@
 local keymap = vim.keymap.set
+local fn = vim.fn
+local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 -- Enable wrapping lines
@@ -28,23 +30,61 @@ keymap("n", "<localleader>f", "vip:!pandoc -t commonmark_x<CR><CR>", { desc = "�
 -- convert md image to html image
 keymap("n", "<localleader>i", function ()
 	local line = vim.api.nvim_get_current_line()
-	local htmlImage = line:gsub("!%[(.-)%]%((.-)%)", '<img src="%2" alt="%1" width=50%%>')
+	local htmlImage = line:gsub("!%[(.-)%]%((.-)%)", '<img src="%2" alt="%1" width=70%%>')
 	vim.api.nvim_set_current_line(htmlImage)
-end, { desc = "  MD image to html image", buffer = true })
+end, { desc = "  MD image to <img>", buffer = true })
 
 -- stylua: ignore start
 -- link textobj
-keymap({ "o", "x" }, "il", "<cmd>lua require('various-textobjs').mdlink(true)<CR>", { desc = "inner md link textobj", buffer = true })
-keymap({ "o", "x" }, "al", "<cmd>lua require('various-textobjs').mdlink(false)<CR>", { desc = "outer md link textobj", buffer = true })
+keymap({ "o", "x" }, "il", "<cmd>lua require('various-textobjs').mdlink('inner')<CR>", { desc = "󱡔 inner md link", buffer = true })
+keymap({ "o", "x" }, "al", "<cmd>lua require('various-textobjs').mdlink('outer')<CR>", { desc = "󱡔 outer md link", buffer = true })
 
 -- iE/aE: code block textobj
-keymap({ "o", "x" }, "iE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock(true)<CR>", { desc = "inner md code block textobj", buffer = true })
-keymap({ "o", "x" }, "aE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock(false)<CR>", { desc = "outer md code block textobj", buffer = true })
+keymap({ "o", "x" }, "iE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock('inner')<CR>", { desc = "󱡔 inner code block", buffer = true })
+keymap({ "o", "x" }, "aE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock('outer')<CR>", { desc = "󱡔 outer code block", buffer = true })
 
 -- Heading jump to next/prev heading
 keymap({ "n", "x" }, "<C-j>", [[/^#\+ <CR><cmd>nohl<CR>]], { desc = " # Next Heading", buffer = true })
 keymap({ "n", "x" }, "<C-k>", [[?^#\+ <CR><cmd>nohl<CR>]], { desc = " # Prev Heading", buffer = true })
 -- stylua: ignore end
+
+--------------------------------------------------------------------------------
+-- SPELLING
+
+-- [z]pelling [l]ist
+keymap("n", "zl", function() vim.cmd.Telescope("spell_suggest") end, { desc = "󰓆 Spell Suggest" })
+keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
+
+---add word under cursor to vale/languagetool dictionary
+keymap({ "n", "x" }, "zg", function()
+	local word
+	if fn.mode() == "n" then
+		local iskeywBefore = vim.opt_local.iskeyword:get() -- remove word-delimiters for <cword>
+		vim.opt_local.iskeyword:remove { "_", "-", "." }
+		word = fn.expand("<cword>")
+		vim.opt_local.iskeyword = iskeywBefore
+	else
+		u.normal('"zy')
+		word = fn.getreg("z")
+	end
+	local filepath = u.linterConfigFolder .. "/dictionary-for-vale-and-languagetool.txt"
+	local error = u.writeToFile(filepath, word, "a")
+	local msg = error and "󰓆 Error: " .. error or "󰓆 Added: " .. word
+	vim.notify(msg)
+end, { desc = "󰓆 Accept Word", buffer = true })
+
+local lang = "de-DE"
+keymap("n", "zd", function()
+	local clients = vim.lsp.buf_get_clients(0)
+	for _, client in ipairs(clients) do
+		if client.name == "ltex" then
+			vim.notify("󰓆 ltex language set to " .. lang)
+			client.config.settings.ltex.language = lang
+			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = client.config.settings })
+			return
+		end
+	end
+end, { desc = "󰓆 Set ltex language to " .. lang, buffer = true })
 
 --------------------------------------------------------------------------------
 -- GUI KEYBINDINGS

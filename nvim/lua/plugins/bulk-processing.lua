@@ -24,8 +24,8 @@ return {
 				["Visual All"] = "<D-a>",
 
 				-- Visual-Multi-Mode Mappings
-				["Skip Region"] = "q", -- skip & find next
-				["Remove Region"] = "Q", -- remove & find previous
+				["Find Next"] = "y", -- [y]es & find next
+				["Skip Region"] = "n", -- [n]o & find next
 				["Find Operator"] = "s", -- operator, selects all regions found in textobj
 				["Motion $"] = "L", -- use my HL motions here as well
 				["Motion ^"] = "H",
