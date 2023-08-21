@@ -70,7 +70,7 @@ local function linterConfigs()
 	-- FIX auto-save.nvim creating spurious errors for some reason. therefore
 	-- removing stylelint-error from it. Also, suppress warnings
 	lint.linters.stylelint.args = {
-		"--quiet", -- suppresses warnings (needed for stylelint-order stuff too noisy)
+		"--quiet", -- suppresses warnings (since stylelint-order stuff too noisy)
 		"--formatter=json",
 		"--stdin",
 		"--stdin-filename",
