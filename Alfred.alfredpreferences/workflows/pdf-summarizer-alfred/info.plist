@@ -273,7 +273,9 @@ fi</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Get a ChatPDF API key: 
+	<string>## Get ChatPDF API key
+The ChatPDF API key is (currently) free for 5000 PDF pages / 500 requests per month.
+
 1. Go to https://www.chatpdf.com/
 2. Scroll to the very bottom of the page.
 3. In the footer, click `My Account`. You will be prompted to create an account if you do not have one yet.
@@ -444,7 +446,7 @@ Immediately start the summary, do not write anything else.</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.1</string>
+	<string>1.0.2</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
