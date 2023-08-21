@@ -562,7 +562,7 @@
 				<key>acceptsurls</key>
 				<false/>
 				<key>name</key>
-				<string>Markdown Image Link → &lt;img&gt;</string>
+				<string>MD Image Link → &lt;img&gt;</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.universalaction</string>

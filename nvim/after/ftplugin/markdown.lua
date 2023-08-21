@@ -1,5 +1,4 @@
 local keymap = vim.keymap.set
-local fn = vim.fn
 --------------------------------------------------------------------------------
 
 -- Enable wrapping lines
@@ -18,13 +17,20 @@ vim.opt_local.formatoptions:remove({"t", "c"})
 vim.opt_local.conceallevel = 2 
 
 --------------------------------------------------------------------------------
+-- MARKDOWN-SPECIFIC KEYMAPS
 
 -- Build / Preview
-keymap("n", "<D-r>", "<Plug>MarkdownPreview", { desc = " Preview", buffer = true })
 keymap("n", "<localleader><localleader>", "<Plug>MarkdownPreview", { desc = " Preview", buffer = true })
 
 -- Format Table
 keymap("n", "<localleader>f", "vip:!pandoc -t commonmark_x<CR><CR>", { desc = "  Format Table under Cursor", buffer = true })
+
+-- convert md image to html image
+keymap("n", "<localleader>i", function ()
+	local line = vim.api.nvim_get_current_line()
+	local htmlImage = line:gsub("!%[(.-)%]%((.-)%)", '<img src="%2" alt="%1" width=50%%>')
+	vim.api.nvim_set_current_line(htmlImage)
+end, { desc = "  MD image to html image", buffer = true })
 
 -- stylua: ignore start
 -- link textobj
