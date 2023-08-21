@@ -72,30 +72,42 @@ keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "* Visual Star" 
 
 -- auto-nohl -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
 vim.on_key(function(char)
-	local searchKeys = { "n", "N", "*", "#" }
-	local searchConfirmed = (fn.keytrans(char) == "<CR>" and fn.getcmdtype():find("[/?]") ~= nil)
-	if searchConfirmed or (fn.mode() == "n") then
-		local searchKeyUsed = searchConfirmed or (vim.tbl_contains(searchKeys, fn.keytrans(char)))
-		if vim.opt.hlsearch:get() ~= searchKeyUsed then vim.opt.hlsearch = searchKeyUsed end
-		if searchKeyUsed or searchConfirmed then
-			local ok, hlslens = pcall(require, "hlslens")
-			if ok then hlslens.start() end
-		end
+	local key = fn.keytrans(char)
+	local isCmdlineSearch = fn.getcmdtype():find("[/?]") ~= nil
+	local searchMvKeys = { "n", "N", "*", "#" } -- works for RHS, therefore no need to consider remaps
+
+	local searchStarted = (key == "/" or key == "?" and isCmdlineSearch)
+	local searchConfirmed = (key == "<CR>" and isCmdlineSearch)
+	local searchCancelled = (key == "<Esc>" and isCmdlineSearch)
+	if not (searchStarted or searchConfirmed or searchCancelled or fn.mode() == "n") then return end
+	local searchMovement = vim.tbl_contains(searchMvKeys, key)
+	local hlSearchOn = vim.opt.hlsearch:get()
+
+	if (searchMovement or searchConfirmed or searchStarted) and not hlSearchOn then
+		vim.opt.hlsearch = true
+	elseif (searchCancelled or not searchMovement) and hlSearchOn and not searchConfirmed then
+		vim.opt.hlsearch = false
+	end
+
+	-- nvim-hlslens plugin
+	if searchConfirmed or searchMovement then
+		local ok, hlslens = pcall(require, "hlslens")
+		if ok then hlslens.start() end
 	end
 end, vim.api.nvim_create_namespace("auto_nohl"))
-
-autocmd("CmdlineEnter", {
-	callback = function()
-		if fn.getcmdtype():find("[/?]") then vim.opt.hlsearch = true end
-	end,
-})
 
 --------------------------------------------------------------------------------
 -- EDITING
 
 -- QUICKFIX
-keymap("n", "gq", require("funcs.quickfix").next, { desc = " Next Quickfix" })
-keymap("n", "gQ", require("funcs.quickfix").previous, { desc = " Previous Quickfix" })
+keymap("n", "n", function()
+	if #vim.fn.getqflist() == 0 then return "n" end
+	require("funcs.quickfix").next()
+end, { desc = "  Next Quickfix/Search", expr = true })
+keymap("n", "N", function()
+	if #vim.fn.getqflist() == 0 then return "N" end
+	require("funcs.quickfix").prev()
+end, { desc = "  Prev Quickfix/Search", expr = true })
 keymap("n", "dQ", require("funcs.quickfix").deleteList, { desc = " Empty Quickfix List" })
 
 -- COMMENTS & ANNOTATIONS
@@ -449,4 +461,3 @@ keymap("n", "<PageDown>", function() scrollHoverWin("down") end, { desc = "Scrol
 keymap("n", "<PageUp>", function() scrollHoverWin("up") end, { desc = "Scroll up hover" })
 
 --------------------------------------------------------------------------------
-

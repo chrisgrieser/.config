@@ -5,10 +5,10 @@
 	<key>bluetooth_keyword</key>
 	<string>bbb</string>
 	<key>network_keyword</key>
-	<string>nnn</string>
+	<string>nn</string>
 	<key>process_keyword</key>
 	<string>ppp</string>
 	<key>volume_keyword</key>
-	<string>vvv</string>
+	<string>vv</string>
 </dict>
 </plist>
