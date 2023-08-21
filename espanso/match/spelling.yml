@@ -350,3 +350,6 @@ matches:
     replace: sure
     propagate_casing: true
     word: true
+  - trigger: brwose
+    replace: browse
+    propagate_casing: true

@@ -59,7 +59,7 @@ fi
 if [[ "$copy_to_clipboard" == "1" ]]; then
 	echo -n "$content" | pbcopy
 	# if *only* clipboard is used as output method, there is no implicit indication
-	# that we are done, so sending an notification
+	# that we are done, so we should send a notification
 	if [[ "$alfred_large_type" != "1" && "$save_as_file" != "1" ]]; then
 		osascript -e 'display notification "" with title "📋 Copied to clipboard."'
 	fi

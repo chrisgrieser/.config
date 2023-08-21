@@ -11,7 +11,7 @@ return {
 				cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 			end
 
-			-- custom rules
+			-- CUSTOM RULES
 			require("nvim-autopairs").setup { check_ts = true } -- use treesitter
 			local rule = require("nvim-autopairs.rule")
 			local isNodeType = require("nvim-autopairs.ts-conds").is_ts_node
@@ -24,12 +24,16 @@ return {
 				rule("*", "*", "markdown"), -- italics
 				rule("__", "__", "markdown"), -- bold
 				rule("=$", "()", "sh"):set_end_pair_length(1), -- variable definitions
+
 				-- auto-add trailing comma inside tables/objects
 				rule("=", " ,", "lua")
+					:with_pair(notAfterText("}")) -- negative conditions have to come first
+					:with_pair(notAfterText(" }")) 
 					:with_pair(isNodeType("table_constructor")) 
-					:with_pair(notAfterRegex("%s*}")) -- sub
 					:set_end_pair_length(1),
 				rule(":", " ,", { "javascript", "typescript" })
+					:with_pair(notAfterText("}")) -- negative conditions have to come first
+					:with_pair(notAfterText(" }")) 
 					:with_pair(isNodeType("object"))
 					:set_end_pair_length(1),
 				rule("", ",") -- automatically move past commas

@@ -92,7 +92,7 @@
 			<key>keyword</key>
 			<string>ai</string>
 			<key>text</key>
-			<string>Perplexity.ai</string>
+			<string>Perplexity.ai: {query}</string>
 			<key>url</key>
 			<string>https://www.perplexity.ai/search?s=o&amp;q={query}</string>
 		</dict>
