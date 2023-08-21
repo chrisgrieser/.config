@@ -109,26 +109,30 @@ local function linterConfigs()
 		return diagnostics
 	end
 
-	-- "BufWritePost" relevant due to nvim-autosave
-	vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "InsertLeave", "TextChanged" }, {
-		pattern = "*",
-		callback = function(ctx)
-			local ft = vim.bo.filetype
-			local event = ctx.event
-			-- FIX weird error message for shellcheck
-			if ft == "sh" and (event == "TextChanged" or event == "BufReadPost") then return end
-
-			-- FIX some spurious lints on first enter for selene
-			if ft == "lua" and event == "BufReadPost" then
-				vim.defer_fn(lint.try_lint, 200)
-				return
-			end
-
-			lint.try_lint()
-		end,
-	})
-
+	-- SETUP LINTING AUTOCMD
 	lint.try_lint() -- run on first buffer once this plugin is initialized
+
+	-- "BufWritePost" relevant due to nvim-autosave
+	vim.api.nvim_create_autocmd(
+		{ "BufReadPost", "BufWritePost", "InsertLeave", "TextChanged", "FocusGained" },
+		{
+			pattern = "*",
+			callback = function(ctx)
+				local ft = vim.bo.filetype
+				local event = ctx.event
+				-- FIX weird error message for shellcheck
+				if ft == "sh" and (event == "TextChanged" or event == "BufReadPost") then return end
+
+				-- FIX spurious lints on first enter for selene
+				if ft == "lua" and event == "BufReadPost" then
+					vim.defer_fn(lint.try_lint, 100)
+					return
+				end
+
+				lint.try_lint()
+			end,
+		}
+	)
 end
 
 --------------------------------------------------------------------------------
@@ -196,7 +200,7 @@ end
 
 return {
 	{ -- auto-install missing linters & formatters
-	-- (auto-install of lsp servers done via `mason-lspconfig.nvim`)
+		-- (auto-install of lsp servers done via `mason-lspconfig.nvim`)
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		event = "VeryLazy",
 		dependencies = "williamboman/mason.nvim",

@@ -26,7 +26,7 @@ return {
 				-- nvim-early-retirement
 				{ filter = { event = "notify", find = "^Auto%-Closing Buffer:" }, view = "mini" },
 				-- nvim-treesitter
-				{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
+				-- { filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
 
 				-- Mason
 				{ filter = { event = "notify", find = "successfully u?n?installed.$" }, view = "mini" },
@@ -41,6 +41,7 @@ return {
 				{ filter = { event = "msg_show", find = "^?." }, skip = true },
 				{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
 
+				-- redirect to split
 				{ filter = { event = "msg_show", min_height = 10 }, view = "split" },
 			},
 			cmdline = {
@@ -85,7 +86,7 @@ return {
 				},
 				split = {
 					enter = true,
-					size = "30%",
+					size = "35%",
 					close = { keys = { "q", "<D-w>", "<D-0>" } },
 				},
 			},

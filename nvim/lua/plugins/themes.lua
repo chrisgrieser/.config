@@ -1,6 +1,3 @@
-local g = vim.g
---------------------------------------------------------------------------------
-
 -- INFO only the first theme will be used
 local lightThemes = {
 	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
@@ -24,8 +21,8 @@ local darkThemes = {
 	-- "nyoom-engineering/oxocarbon.nvim",
 }
 
-g.darkOpacity = 0.92
-g.lightOpacity = 0.94
+vim.g.darkOpacity = 0.92
+vim.g.lightOpacity = 0.93
 
 --------------------------------------------------------------------------------
 
@@ -43,12 +40,12 @@ local function getName(repo)
 	return name
 end
 
-g.lightTheme = getName(lightThemes[1])
-g.darkTheme = getName(darkThemes[1])
+vim.g.lightTheme = getName(lightThemes[1])
+vim.g.darkTheme = getName(darkThemes[1])
 
 --------------------------------------------------------------------------------
 
--- merge tables & insert priority
+-- merge tables & return for lazy.nvim
 local allThemes = {}
 for _, theme in pairs(darkThemes) do
 	table.insert(allThemes, theme)
@@ -56,6 +53,5 @@ end
 for _, theme in pairs(lightThemes) do
 	table.insert(allThemes, theme)
 end
-
 
 return allThemes

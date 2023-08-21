@@ -11,7 +11,7 @@ if not (month == "Aug" or month == "Jul" or month == "Sep") then return end
 -- roughly Berlin-Tegel (no precise location due to pricacy)
 local latitude = 52
 local longitude = 13
-local inTemp = 24.5
+local inTemp = 25
 local checkIntervalMins = 30
 
 --------------------------------------------------------------------------------
@@ -21,7 +21,6 @@ local u = require("lua.utils")
 
 -- DOCS: https://brightsky.dev/docs/#get-/current_weather
 local callUrl = ("https://api.brightsky.dev/current_weather?lat=%s&lon=%s"):format(latitude, longitude)
-PrevOutTemp = nil -- no value on first run
 
 local function getOutsideTemp()
 	if not (u.betweenTime(18, 1) or u.betweenTime(8, 13)) then return end

@@ -15,6 +15,7 @@ return {
 			require("nvim-autopairs").setup { check_ts = true } -- use treesitter
 			local rule = require("nvim-autopairs.rule")
 			local isNodeType = require("nvim-autopairs.ts-conds").is_ts_node
+			local notAfterText = require("nvim-autopairs.conds").not_after_text
 
 			require("nvim-autopairs").add_rules {
 				rule("<", ">", "lua"):with_pair(isNodeType("string")), -- keymaps
@@ -23,10 +24,10 @@ return {
 				rule("*", "*", "markdown"), -- italics
 				rule("__", "__", "markdown"), -- bold
 				rule("=$", "()", "sh"):set_end_pair_length(1), -- variable definitions
-
 				-- auto-add trailing comma inside tables/objects
 				rule("=", " ,", "lua")
-					:with_pair(isNodeType("table_constructor")) -- called this way in lua
+					:with_pair(isNodeType("table_constructor")) 
+					:with_pair(notAfterRegex(" }")) -- sub
 					:set_end_pair_length(1),
 				rule(":", " ,", { "javascript", "typescript" })
 					:with_pair(isNodeType("object"))
