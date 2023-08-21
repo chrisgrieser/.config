@@ -314,9 +314,9 @@ rules:
           - { key_code: spacebar, modifiers: [control, command] }
           - *deactivate-leader
           - *remove-notice
-      # [⬇️]: Transmission
+      # [i]: Transm[i]ssion
       - type: basic
-        from: { key_code: down_arrow }
+        from: { key_code: i }
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'Transmission'
