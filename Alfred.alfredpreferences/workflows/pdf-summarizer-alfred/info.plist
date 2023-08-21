@@ -61,7 +61,7 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>Get summaries of your PDFs via ChatPDF.</string>
+	<string>Get summaries of your PDFs via ChatPDF with just one hotkey.</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
