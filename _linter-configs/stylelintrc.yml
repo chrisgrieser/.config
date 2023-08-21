@@ -2,13 +2,23 @@
 # explicitly setting schema since using non-standard filename
 #───────────────────────────────────────────────────────────────────────────────
 extends: [stylelint-config-standard]
-plugins:
-  - stylelint-order
-  - stylelint-declaration-block-no-ignored-properties
+plugins: [stylelint-order]
 reportInvalidScopeDisables: [true, { severity: error }]
 reportNeedlessDisables: [false, { severity: warning }]
 #───────────────────────────────────────────────────────────────────────────────
+# CORE RULES
 rules:
+  declaration-empty-line-before: null # conflicts with stylelint-order spacing
+  color-named: never
+  color-no-hex: true
+  declaration-no-important: true
+  font-family-no-missing-generic-family-keyword: null
+  font-weight-notation: [numeric, { severity: warning }]
+  selector-class-pattern: null
+  time-min-milliseconds: 200
+  comment-empty-line-before: null
+  #────────────────────────────────────────────────────────────────────────────
+  # PLUGIN RULES
   order/properties-order:
     - - groupName: Content & Display
         emptyLineBefore: threshold
@@ -150,67 +160,3 @@ rules:
       emptyLineMinimumPropertyThreshold: 6
       severity: warning
       unspecified: bottom
-  #────────────────────────────────────────────────────────────────────────────
-  # block-no-empty:
-  #   - true
-  #   - ignore: [comments]
-  #     severity: warning
-  color-function-notation: [modern, { severity: warning }]
-  color-hex-length: [short, { severity: warning }]
-  color-named: never
-  color-no-hex: true
-  comment-empty-line-before:
-    - always
-    - except: [first-nested]
-      ignore: [after-comment, stylelint-commands]
-      ignoreComments: ["/: .*;/"]
-      severity: warning
-
-  # comment-no-empty: [true, { severity: warning }]
-  comment-whitespace-inside: [always, { severity: warning }]
-  custom-property-no-missing-var-function: true
-  custom-property-pattern:
-    - ^([a-z][a-z0-9]*)(-[a-z0-9]+)*$
-    - message: Expected custom property name to be kebab-case (custom-property-pattern)
-  declaration-block-no-redundant-longhand-properties: true
-  declaration-block-no-shorthand-property-overrides: true
-  declaration-block-single-line-max-declarations: 1
-  declaration-empty-line-before: null
-  #─────────────────────────────────────────────────────────────────────────────
-  # Main Rules
-  declaration-no-important: true
-  font-family-name-quotes: always-unless-keyword
-  # deactivated rules
-  font-family-no-missing-generic-family-keyword: null
-  font-weight-notation: [numeric, { severity: warning }]
-  function-name-case: [lower, { severity: warning }]
-  function-url-quotes: always
-  hue-degree-notation: [number, { severity: warning }]
-  length-zero-no-unit:
-    - true
-    - ignore: [custom-properties]
-      severity: warning
-  no-descending-specificity: null
-  number-max-precision:
-    - 2
-    - ignoreProperties: [letter-spacing]
-      ignoreUnits: [em, rem]
-  # https://github.com/hudochenkov/stylelint-order/blob/master/rules/properties-order/README.md#emptylineminimumpropertythreshold
-  # plugin rules
-  plugin/declaration-block-no-ignored-properties: true
-  property-no-vendor-prefix: null
-  rule-empty-line-before:
-    - always-multi-line
-    - ignore: [after-comment, inside-block]
-      severity: warning
-  selector-attribute-quotes: always
-  selector-class-pattern: null
-  selector-max-id: 1
-  selector-pseudo-element-colon-notation: double
-  selector-type-case: [lower, { severity: warning }]
-  shorthand-property-no-redundant-values: true
-  time-min-milliseconds: [200, { severity: warning }]
-  value-keyword-case:
-    - lower
-    - ignoreKeywords: [geometricPrecision]
-      severity: warning
