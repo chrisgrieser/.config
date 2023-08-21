@@ -46,9 +46,10 @@ local function linterConfigs()
 		{ severity = vim.diagnostic.severity.WARN, source = "codespell" }
 	)
 	lint.linters.codespell.args = {
-		"--skip='*.css,*.bib'", -- filetypes/-names to ignore
 		"--ignore-words",
 		linterConfig .. "/codespell-ignore.txt",
+		"--skip", -- needs to be two args for nvim-lint
+		"*.css,*.bib", -- filetypes/-names to ignore
 	}
 
 	lint.linters.markdownlint.args = { "--config", linterConfig .. "/markdownlintrc" }
@@ -71,15 +72,18 @@ local function linterConfigs()
 	}
 
 	-- FIX auto-save.nvim creating spurious errors for some reason. therefore
-	-- removing stylelint-error from it
+	-- removing stylelint-error from it. Also, suppress warnings
+	lint.linters.stylelint.args = {
+		"--quiet", -- suppresses warnings (needed for stylelint-order stuff too noisy)
+		"--formatter=json",
+		"--stdin",
+		"--stdin-filename",
+		function() return vim.fn.expand("%:p") end,
+	}
 	lint.linters.stylelint.parser = function(output)
 		local status, decoded = pcall(vim.json.decode, output)
 		if not status or not decoded then return {} end
 		decoded = decoded[1]
-		local severities = {
-			warning = vim.diagnostic.severity.WARN,
-			error = vim.diagnostic.severity.ERROR,
-		}
 		local diagnostics = {}
 		if decoded.errored then
 			for _, message in ipairs(decoded.warnings) do
@@ -91,7 +95,7 @@ local function linterConfigs()
 					message = message.text,
 					code = message.rule,
 					user_data = { lsp = { code = message.rule } },
-					severity = severities[message.severity],
+					severity = vim.diagnostic.severity.ERROR,
 					source = "stylelint",
 				})
 			end
@@ -156,7 +160,7 @@ local function formatterConfigs()
 		args = {
 			"--ignore-words",
 			linterConfig .. "/codespell-ignore.txt",
-			"--skip='*.css,*.bib'", -- filetypes/-names to ignore
+			"--skip='*.css,*.bib'", -- needs to be one arg for formatter.nvim
 			"--check-hidden",
 			"--write-changes",
 		},
