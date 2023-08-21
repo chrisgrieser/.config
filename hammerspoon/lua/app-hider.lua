@@ -62,7 +62,7 @@ TransBgAppWatcher = aw.new(function(appName, event, appObj)
 	if event == aw.terminated then
 		unHideAll()
 	elseif event == aw.activated and u.tbl_contains(transBgApps, appName) then
-		u.asSoonAsAppRuns(appName, function() hideOthers(appObj) end)
+		u.whenAppWinAvailable(appName, function() hideOthers(appObj) end)
 	end
 end):start()
 

@@ -450,4 +450,3 @@ keymap("n", "<PageUp>", function() scrollHoverWin("up") end, { desc = "Scroll up
 
 --------------------------------------------------------------------------------
 
--- If you have slected CamelCase in CamelCaseMotion, can you select CamelCaseMotion by w and Camel by b?

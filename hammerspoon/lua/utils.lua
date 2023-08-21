@@ -204,12 +204,21 @@ end
 
 ---@async
 ---@param appName string
----@param callbackFn function function to execute when the app is available
-function M.asSoonAsAppRuns(appName, callbackFn)
-	MyTimers[appName] = hs.timer.waitUntil(function()
+---@param callbackFn function function to execute when a window of the app is available
+function M.whenAppWinAvailable(appName, callbackFn)
+	MyTimers[appName.."WinAvailable"] = hs.timer.waitUntil(function()
 		local app = M.app(appName)
 		local windowAvailable = app and app:mainWindow()
 		return windowAvailable
+	end, callbackFn, 0.1)
+end
+
+---@async
+---@param appName string
+---@param callbackFn function function to execute when the app is available
+function M.whenAppRuns(appName, callbackFn)
+	MyTimers[appName.."AppRun"] = hs.timer.waitUntil(function()
+		return M.app(appName) ~= nil
 	end, callbackFn, 0.1)
 end
 

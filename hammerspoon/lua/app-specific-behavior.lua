@@ -44,7 +44,7 @@ end):start()
 -- PIXELMATOR: open maximized
 PixelmatorWatcher = aw.new(function(appName, eventType, pixelmator)
 	if appName == "Pixelmator" and eventType == aw.launched then
-		u.asSoonAsAppRuns(appName, function() wu.moveResize(pixelmator, wu.maximized) end)
+		u.whenAppWinAvailable(appName, function() wu.moveResize(pixelmator, wu.maximized) end)
 	end
 end):start()
 
