@@ -70,16 +70,6 @@ local function linterConfigs()
 		"-",
 	}
 
-	-- not using stylelint-lsp due to: https://github.com/bmatcuk/stylelint-lsp/issues/36
-	lint.linters.stylelint.args = {
-		"--formatter=json",
-		"--config",
-		linterConfig .. "/stylelintrc.yml",
-		"--stdin",
-		"--stdin-filename",
-		function() return vim.fn.expand("%:p") end,
-	}
-
 	-- FIX auto-save.nvim creating spurious errors for some reason. therefore
 	-- removing stylelint-error from it
 	lint.linters.stylelint.parser = function(output)
@@ -152,10 +142,6 @@ local function formatterConfigs()
 		stdin = true,
 		try_node_modules = true,
 		args = {
-			-- using config without ordering, since automatic re-ordering can be
-			-- confusing. Config with stylelint-order is only run on build.
-			"--config",
-			linterConfig .. "/stylelintrc-formatting.yml",
 			"--fix",
 			"--stdin",
 			"--stdin-filename",

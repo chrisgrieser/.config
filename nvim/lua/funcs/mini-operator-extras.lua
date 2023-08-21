@@ -81,17 +81,17 @@ function multiplyFuncs.css(lines)
 	if #lines ~= 1 then return lines end
 	local line = lines[1]
 
-	if line:find("top:") then line = line:gsub("top:", "bottom:") end
-	if line:find("bottom:") then line = line:gsub("bottom:", "top:") end
-	if line:find("right:") then line = line:gsub("right:", "left:") end
-	if line:find("left:") then line = line:gsub("left:", "right:") end
-	if line:find("dark:") then line = line:gsub("dark:", "light:") end
-	if line:find("light:") then line = line:gsub("light:", "dark:") end
+	if line:find("top:") then line = line:gsub("top:", "bottom:")
+	elseif line:find("bottom:") then line = line:gsub("bottom:", "top:") end
+	if line:find("right:") then line = line:gsub("right:", "left:")
+	elseif line:find("left:") then line = line:gsub("left:", "right:") end
+	if line:find("dark:") then line = line:gsub("dark:", "light:")
+	elseif line:find("light:") then line = line:gsub("light:", "dark:") end
 	-- %s condition to avoid matching line-height, border-width, etc
-	if line:find("%sheight:") then line = line:gsub("height:", "width:") end
-	if line:find("%swidth:") then line = line:gsub("width:", "height:") end
-	if line:find("margin:") then line = line:gsub("margin:", "padding:") end
-	if line:find("padding:") then line = line:gsub("padding:", "margin:") end
+	if line:find("%sheight:") then line = line:gsub("height:", "width:")
+	elseif line:find("%swidth:") then line = line:gsub("width:", "height:") end
+	if line:find("margin:") then line = line:gsub("margin:", "padding:")
+	elseif line:find("padding:") then line = line:gsub("padding:", "margin:") end
 
 	return { line }
 end
