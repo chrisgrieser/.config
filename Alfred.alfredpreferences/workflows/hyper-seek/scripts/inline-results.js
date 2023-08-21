@@ -259,7 +259,7 @@ function run(argv) {
 	const timelogStart = +new Date();
 	let favIconTotalMs = 0;
 
-	//──────────────────────────────────────────────────────────────────────────────
+	//───────────────────────────────────────────────────────────────────────────
 	// CONFIG
 
 	let resultsToFetch = parseInt($.getenv("inline_results_to_fetch")) || 5;
