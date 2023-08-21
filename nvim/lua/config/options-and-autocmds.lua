@@ -63,18 +63,20 @@ opt.signcolumn = "yes:1"
 
 -- Wrapping
 opt.textwidth = 80 -- in some languages overridden by .editorconfig
-opt.colorcolumn = { "81" }
+opt.colorcolumn = { 81 } -- not relative to textwidth to it is static
 opt.wrapmargin = 4 -- extra space since using a scrollbar plugin
 opt.wrap = false
 opt.breakindent = false
 opt.linebreak = true -- do not break up full words on wrap
 
 -- Color Column: textwidth + guiding line for `gm`
-autocmd({ "VimEnter", "VimResized" }, { -- the "WinResized" autocmd event does not seem to work currently
+-- BUG the "WinResized" autocmd event does not seem to work currently (nvim 0.9.1)
+autocmd({ "VimEnter", "VimResized" }, {
 	callback = function()
 		if opt_local.wrap:get() then return end
 		local gmColumn = math.floor(vim.api.nvim_win_get_width(0) / 2)
-		opt.colorcolumn = { "+1", gmColumn }
+		local global = opt.colorcolumn:get()[1]
+		opt.colorcolumn = { global, gmColumn }
 	end,
 })
 

@@ -136,6 +136,7 @@ local function formatterConfigs()
 
 	local rome = {
 		exe = "rome",
+		tempfile_dir = "/tmp",
 		stdin = false, -- using the stdin formatting of rome has bugs with emojis
 		try_node_modules = true,
 		args = { "format", "--write", util.escape_path(util.get_current_buffer_file_path()) },
