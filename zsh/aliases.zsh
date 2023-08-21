@@ -35,6 +35,7 @@ alias cp='cp -v'
 alias grep='grep --ignore-case --color'
 alias ls='ls --color'
 alias which='which -a'           # show all
+alias which='type -a'            # show all
 alias mkdir='mkdir -p'           # create intermediate directories
 alias curl='curl --progress-bar' # nicer progress bar
 
