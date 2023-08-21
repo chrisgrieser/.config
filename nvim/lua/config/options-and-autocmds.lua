@@ -37,7 +37,6 @@ opt.titlestring = '%{expand("%:p")}'
 -- Motions & Editing
 opt.startofline = true -- motions like "G" also move to the first char
 opt.virtualedit = "block" -- visual-block mode can select beyond end of line
-opt.mouse = "" -- disable mouse completely
 
 -- Search
 opt.ignorecase = true
