@@ -2692,6 +2692,7 @@ Search more than two dozen developer documentation sites via one of the keywords
 - `jxa`: JavaScript for Automation Cookbook
 - `lua`
 - `eslint`
+- `style`: stylelint rules
 - `rome`
 - `sc`: shellcheck Wiki
 - `pandoc`: Pandoc User Manual
@@ -3269,7 +3270,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.4.0</string>
+	<string>1.6.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

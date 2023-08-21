@@ -156,3 +156,4 @@ hackernews
 ⌘Y
 addon
 ChatPDF
+stylelint
