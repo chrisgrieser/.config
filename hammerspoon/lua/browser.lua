@@ -8,7 +8,6 @@ local wf = require("lua.utils").wf
 Wf_browser = wf.new(env.browserApp)
 	:setOverrideFilter({
 		rejectTitles = {
-			" %(Private%)$", -- incognito windows
 			"^Picture in Picture$",
 			"^Task Manager$",
 			"^Developer Tools", -- when inspecting websites
