@@ -10,6 +10,17 @@ local u = require("config.utils")
 
 -- search keymaps
 keymap("n", "?", function() cmd.Telescope("keymaps") end, { desc = "⌨️  Search Keymaps" })
+keymap("n", "g?", function() 
+	vim.ui.input({ prompt = "⌨️ Goto Keymap: " }, function(map)
+		if map == "" then return end
+
+		cmd.redir("@z")
+		vim.cmd.map(map)
+		cmd.redir("END")
+		local location = fn.getreg("z"):match("<Lua.->")
+		vim.notify("🪚 location: ".. location)
+	end)
+end, { desc = "⌨️ Goto Keymap" })
 
 keymap("n", "<D-,>", function()
 	local thisFilePath = debug.getinfo(1).source:sub(2)

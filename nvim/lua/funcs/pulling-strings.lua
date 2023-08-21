@@ -32,7 +32,7 @@ end
 local function luaFormatStr()
 	local curLine = currentLine()
 	-- avoid re-applying to already formatted string or to `%s` as lua pattern
-	if curLine:find("format") or curLine:find("find") or curLine:find("sub") then return end
+	if curLine:find("format") or curLine:find("match") or curLine:find("find") or curLine:find("sub") then return end
 
 	local correctedLine = curLine:gsub([[(["'].*%%s.*["'])]], "(%1):format()")
 	local changed = setIfChanges(correctedLine)
