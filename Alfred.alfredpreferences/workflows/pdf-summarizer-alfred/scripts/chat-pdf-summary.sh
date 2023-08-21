@@ -28,14 +28,14 @@ fi
 # chatpdf API request
 # DOCS https://www.chatpdf.com/docs/api/backend
 
-osascript -e 'display notification "" with title "🔼 Uploading pdf…"'
+osascript -e 'display notification "🔼 Uploading pdf…" with title "PDF Summarizer"'
 
 sourceId=$(curl -X POST "https://api.chatpdf.com/v1/sources/add-file" \
 	-H "x-api-key: $CHATPDF_API_KEY" \
 	-F "file=@$file_path" |
 	cut -d'"' -f4)
 
-osascript -e 'display notification "" with title "🤖 Requesting Summary…"'
+osascript -e 'display notification "🤖 Requesting Summary…" with title "PDF Summarizer"'
 
 # make prompt safe for JSON
 the_prompt="$(echo -n "$the_prompt" | tr -d '\n' | sed 's/"/\\"/g')"
@@ -61,7 +61,7 @@ if [[ "$copy_to_clipboard" == "1" ]]; then
 	# if *only* clipboard is used as output method, there is no implicit indication
 	# that we are done, so we should send a notification
 	if [[ "$alfred_large_type" != "1" && "$save_as_file" != "1" ]]; then
-		osascript -e 'display notification "" with title "📋 Copied to clipboard."'
+		osascript -e 'display notification "📋 Copied to clipboard." with title "PDF Summarizer"'
 	fi
 fi
 
