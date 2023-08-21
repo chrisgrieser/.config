@@ -19,7 +19,7 @@ end, { desc = "⌨️ Edit leader-keybindings.lua" })
 keymap("n", "<leader>pg", function() cmd.Telescope("highlights") end, { desc = " Highlight Groups" })
 
 -- [P]lugins
-keymap("n", "<leader>pp", function ()
+keymap("n", "<leader>pp", function()
 	require("lazy").sync()
 	vim.cmd.MasonToolsUpdate()
 end, { desc = " Lazy/Mason Update" })
@@ -36,8 +36,8 @@ keymap("n", "<leader>pc", function() cmd.Telescope("colorscheme") end, { desc = 
 
 -- copy [l]ast ex[c]ommand
 keymap("n", "<leader>lc", function()
-	local lastCommand = fn.getreg(":"):gsub("^I ", "")
-	if #lastCommand == 0 then
+	local lastCommand = fn.getreg(":")
+	if lastCommand == "" then
 		vim.notify("No last command available", u.warn)
 		return
 	end
@@ -46,7 +46,7 @@ keymap("n", "<leader>lc", function()
 end, { desc = "󰘳 Copy last command" })
 
 -- [l]ast command [a]gain
--- as opposed to `@:`, this works across sessions
+-- as opposed to `@:`, `:<Up><CR>` works across sessions
 keymap("n", "<leader>la", ":<Up><CR>", { desc = "󰘳 Run last command again", silent = true })
 
 -- search command history
