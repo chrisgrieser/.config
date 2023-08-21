@@ -42,7 +42,7 @@ newCommand("Curl", function(ctx)
 	-- create scratch buffer
 	local bufId = a.nvim_create_buf(true, false)
 	local success = pcall(a.nvim_buf_set_name, bufId, "Curl")
-	if not success then 
+	if not success then
 		vim.notify("Curl Buffer already exists. ", u.warn)
 		cmd.buffer("Curl")
 		return
@@ -62,7 +62,7 @@ newCommand("Curl", function(ctx)
 
 	-- format
 	a.nvim_buf_set_option(bufId, "buftype", "nowrite") -- no-write allows lsp to attach
-	vim.defer_fn(function() vim.lsp.buf.format() end, 100)
+	vim.defer_fn(function() vim.cmd.Format() end, 100) -- formatter.nvim
 end, { nargs = 1 })
 
 -- Scratchpad Buffer
@@ -72,7 +72,7 @@ newCommand("Scratch", function()
 	-- screate buffer
 	local bufId = a.nvim_create_buf(true, false)
 	local success = pcall(a.nvim_buf_set_name, bufId, "Scratchpad")
-	if not success then 
+	if not success then
 		vim.notify("Scratchpad already exists. ", u.warn)
 		cmd.buffer("Scratchpad")
 		return
@@ -91,21 +91,21 @@ newCommand("Scratch", function()
 		if not clipb or clipb == "" then return end
 		local lines = vim.split(clipb, "\n")
 		a.nvim_buf_set_lines(bufId, 0, -1, false, lines)
-		vim.lsp.buf.format()
+		vim.cmd.Format() -- formatter.nvim
 	end)
 end, {})
 
 --------------------------------------------------------------------------------
 
-newCommand("Server", function ()
+newCommand("Server", function()
 	local myServer = vim.fn.serverlist()[2]
 	vim.notify(myServer)
-end,{})
+end, {})
 
 --------------------------------------------------------------------------------
 
-newCommand("Debug", function ()
+newCommand("Debug", function()
 	local pathExport = "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$$PATH ; "
 	local shellCmd = pathExport .. "neovide ./debug/test.lua -- -u ./debug/repro.lua"
 	vim.fn.system(shellCmd)
-end,{})
+end, {})

@@ -92,7 +92,7 @@ TickerAppWatcher = aw.new(function(appName, event)
 
 	-- move twitter and scroll up
 	if appName == env.tickerApp and (event == aw.launched or event == aw.activated) then
-		u.asSoonAsAppRuns(env.tickerApp, function()
+		u.whenAppWinAvailable(env.tickerApp, function()
 			winToTheSide()
 			scrollUp()
 			wu.bringAllWinsToFront()

@@ -69,18 +69,18 @@ local function workLayout()
 	if getWeekday() ~= "Sat" and getWeekday() ~= "Sun" then table.insert(appsToOpen, "Slack") end
 	u.openApps(appsToOpen)
 	for _, appName in pairs(appsToOpen) do
-		u.asSoonAsAppRuns(appName, function()
+		u.whenAppWinAvailable(appName, function()
 			local win = u.app(appName):mainWindow()
 			wu.moveResize(win, wu.pseudoMax)
 		end)
 	end
-	u.asSoonAsAppRuns("Obsidian", function()
-		if u.app("Obsidian"):mainWindow() then u.app("Obsidian"):mainWindow():minimize() end
-	end)
+
+	-- minimize Obsidian
+	u.whenAppRuns("Obsidian", function() u.app("Obsidian"):mainWindow():minimize() end)
 
 	-- finish
 	require("lua.sidenotes").reminderToSidenotes()
-	u.asSoonAsAppRuns("Discord", function() u.app(env.mailApp):activate() end)
+	u.whenAppWinAvailable("Discord", function() u.app(env.mailApp):activate() end)
 	print("🔲 WorkLayout: done")
 end
 

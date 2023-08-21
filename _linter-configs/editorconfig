@@ -1,3 +1,7 @@
+# vim: filetype=editorconfig
+# needed caused saved with non-standard name
+# ──────────────────────────────────────────────────────────────────────────────
+
 root = true
 
 [*]
@@ -16,5 +20,10 @@ indent_size = 2
 indent_style = space
 indent_size = 4
 
+[*.md]
+indent_style = tab
+tab_width = 4
+
 [Makefile]
 indent_style = tab
+tab_width = 3

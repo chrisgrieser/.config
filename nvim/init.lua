@@ -9,13 +9,13 @@ local function safeRequire(module)
 end
 
 -- if opened without argument, re-open the last file
-local function reOpen()
-	if vim.fn.argc() == 0 then
-		vim.defer_fn(function()
-			pcall(vim.cmd.normal, { "`0", bang = true })
-			pcall(vim.cmd.bwipeout, "#") -- to not leave empty file
-		end, 1)
-	end
+local function reOpenLastFile()
+	if vim.fn.argc() ~= 0 then return end
+	vim.defer_fn(function()
+		if vim.bo.filetype == "lazy" then return end -- lazy auto-installs
+		pcall(vim.cmd.normal, { "`0", bang = true })
+		pcall(vim.cmd.bwipeout, "#") -- to not leave empty file
+	end, 1)
 end
 
 --------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ if vim.fn.has("gui_running") == 1 then safeRequire("config.gui-settings") end
 safeRequire("config.theme-customization")
 safeRequire("config.options-and-autocmds")
 
-reOpen()
+reOpenLastFile()
 
 safeRequire("config.keybindings")
 safeRequire("config.leader-keybindings")

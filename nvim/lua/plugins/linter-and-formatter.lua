@@ -159,21 +159,6 @@ local function formatterConfigs()
 		},
 	}
 
-	local prettier = function(parser)
-		return {
-			exe = "prettier",
-			stdin = true,
-			try_node_modules = true,
-			args = {
-				"--config",
-				linterConfig .. "/prettierrc.yml",
-				"--stdin-filepath",
-				util.escape_path(util.get_current_buffer_file_path()),
-				"--parser=" .. parser,
-			},
-		}
-	end
-
 	local codespell = {
 		exe = "codespell",
 		stdin = false,
@@ -196,12 +181,12 @@ local function formatterConfigs()
 			sh = { require("formatter.filetypes.sh").shfmt },
 			zsh = { require("formatter.filetypes.sh").shfmt },
 			python = { require("formatter.filetypes.python").black },
-			html = { prettier("html") },
-			yaml = { prettier("yaml") },
+			html = { require("formatter.filetypes.html").prettier },
+			yaml = { require("formatter.filetypes.yaml").prettier },
 			javascript = { rome },
 			typescript = { rome },
 			json = { rome },
-			css = { stylelint, prettier("css") },
+			css = { stylelint, require("formatter.filetypes.css").prettier },
 			scss = { stylelint },
 		},
 	}
