@@ -12,6 +12,7 @@ rules:
   trailing-spaces: disable # automatically taken care of by formatter
   empty-lines: disable # automatically taken care of by formatter
   braces: disable
+  brackets: disable # automatically taken care of by formatter
   new-line-at-end-of-file: disable
   comments-indentation: disable
 
@@ -19,6 +20,5 @@ rules:
     min-spaces-from-content: 1
     require-starting-space: false
 
-  brackets: { level: warning }
   commas: { level: warning }
   hyphens: { level: warning }
