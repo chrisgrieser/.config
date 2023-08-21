@@ -26,7 +26,7 @@ return {
 				-- nvim-early-retirement
 				{ filter = { event = "notify", find = "^Auto%-Closing Buffer:" }, view = "mini" },
 				-- nvim-treesitter
-				-- { filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
+				{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
 
 				-- Mason
 				{ filter = { event = "notify", find = "successfully u?n?installed.$" }, view = "mini" },

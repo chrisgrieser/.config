@@ -108,7 +108,10 @@ local function linterConfigs()
 		{
 			pattern = "*",
 			callback = function(ctx)
-				if not vim.fn.filereadable(vim.fn.expand("%:p")) then return end
+				local fileDoesNotExist = vim.fn.filereadable(vim.fn.expand("%")) == 0
+				local isScratchpad = vim.bo.buftype == "nowrite"
+				if fileDoesNotExist and not isScratchpad then return end
+
 				local ft = vim.bo.filetype
 				local event = ctx.event
 				-- FIX weird error message for shellcheck

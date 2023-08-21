@@ -1,7 +1,6 @@
 local opt_local = vim.opt_local
 local opt = vim.opt
 local bo = vim.bo
-local fn = vim.fn
 local autocmd = vim.api.nvim_create_autocmd
 local keymap = vim.keymap.set
 local u = require("config.utils")
@@ -162,8 +161,10 @@ autocmd("FileType", {
 -- notify when coming back to a file that does not exist anymore
 autocmd("FocusGained", {
 	callback = function()
-		if not fn.filereadable(fn.expand("%:p")) then
-			vim.notify("File does not exist anymore.", u.warn)
+		local fileDoesNotExist = vim.fn.filereadable(vim.fn.expand("%")) == 0
+		local isScratchpad = vim.bo.buftype == "nowrite"
+		if fileDoesNotExist and not isScratchpad then
+			vim.notify("File does not exist anymore.", u.warn, { timeout = 20000 })
 		end
 	end,
 })
