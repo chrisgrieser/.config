@@ -3,6 +3,9 @@ local fn = vim.fn
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
+-- less nesting in md
+vim.opt_local.tabstop = 4
+
 -- Enable wrapping lines
 vim.opt_local.wrap = true
 vim.opt_local.colorcolumn = ""
