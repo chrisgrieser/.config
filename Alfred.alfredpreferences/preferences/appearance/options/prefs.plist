@@ -13,6 +13,6 @@
 	<key>scrollbarmode</key>
 	<integer>1</integer>
 	<key>showOnScreen</key>
-	<integer>2</integer>
+	<integer>1</integer>
 </dict>
 </plist>
