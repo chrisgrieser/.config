@@ -3,20 +3,18 @@
 #───────────────────────────────────────────────────────────────────────────────
 extends: [stylelint-config-standard]
 plugins: [stylelint-order]
-reportInvalidScopeDisables: [true, { severity: error }]
-reportNeedlessDisables: [false, { severity: warning }]
+reportInvalidScopeDisables: true
+reportNeedlessDisables: true
 #───────────────────────────────────────────────────────────────────────────────
 # CORE RULES
 rules:
-  declaration-empty-line-before: null # conflicts with stylelint-order spacing
   color-named: never
   color-no-hex: true
-  declaration-no-important: true
-  font-family-no-missing-generic-family-keyword: null
-  font-weight-notation: [numeric, { severity: warning }]
-  selector-class-pattern: null
-  time-min-milliseconds: 200
   comment-empty-line-before: null
+  declaration-empty-line-before: null # conflicts with stylelint-order spacing
+  declaration-no-important: true
+  font-weight-notation: [numeric, { severity: warning }]
+  time-min-milliseconds: 100
   #────────────────────────────────────────────────────────────────────────────
   # PLUGIN RULES
   order/properties-order:
