@@ -1,6 +1,3 @@
--- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md
---------------------------------------------------------------------------------
-
 local linterConfig = require("config.utils").linterConfigFolder
 local lintersAndFormatters = {
 	"yamllint", -- only for diagnostics, not for formatting
@@ -34,9 +31,10 @@ local function linterConfigs()
 		toml = {},
 		python = {},
 	}
-	-- use for codespell for all
+
+	-- use for codespell for all except bib and css
 	for ft, _ in pairs(lint.linters_by_ft) do
-		table.insert(lint.linters_by_ft[ft], "codespell")
+		if ft ~= "bib" and ft ~= "css" then table.insert(lint.linters_by_ft[ft], "codespell") end
 	end
 
 	-- https://github.com/mfussenegger/nvim-lint/tree/master/lua/lint/linters
@@ -48,8 +46,6 @@ local function linterConfigs()
 	lint.linters.codespell.args = {
 		"--ignore-words",
 		linterConfig .. "/codespell-ignore.txt",
-		"--skip", -- needs to be two args for nvim-lint
-		"*.css,*.bib", -- filetypes/-names to ignore
 	}
 
 	lint.linters.markdownlint.args = { "--config", linterConfig .. "/markdownlintrc" }
@@ -166,23 +162,25 @@ local function formatterConfigs()
 		},
 	}
 
+	local filetypes = {
+		lua = { require("formatter.filetypes.lua").stylua },
+		sh = { require("formatter.filetypes.sh").shfmt },
+		zsh = { require("formatter.filetypes.sh").shfmt },
+		python = { require("formatter.filetypes.python").black },
+		html = { require("formatter.filetypes.html").prettier },
+		yaml = { require("formatter.filetypes.yaml").prettier },
+		javascript = { rome },
+		typescript = { rome },
+		json = { rome },
+		css = { stylelint, require("formatter.filetypes.css").prettier },
+		scss = { stylelint },
+	}
+
+
 	-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
 	-- https://github.com/mhartington/formatter.nvim/tree/master/lua/formatter/filetypes
 	require("formatter").setup {
-		filetype = {
-			["*"] = { codespell }, -- filetype-exceptions defined in codespell config
-			lua = { require("formatter.filetypes.lua").stylua },
-			sh = { require("formatter.filetypes.sh").shfmt },
-			zsh = { require("formatter.filetypes.sh").shfmt },
-			python = { require("formatter.filetypes.python").black },
-			html = { require("formatter.filetypes.html").prettier },
-			yaml = { require("formatter.filetypes.yaml").prettier },
-			javascript = { rome },
-			typescript = { rome },
-			json = { rome },
-			css = { stylelint, require("formatter.filetypes.css").prettier },
-			scss = { stylelint },
-		},
+		filetype = filetypes,
 	}
 end
 
