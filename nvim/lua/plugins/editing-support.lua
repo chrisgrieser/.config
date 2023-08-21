@@ -23,6 +23,7 @@ return {
 				rule('\\"', '\\"', { "sh", "json" }):with_pair(isNodeType("string")), -- escaped quotes
 				rule("*", "*", "markdown"), -- italics
 				rule("__", "__", "markdown"), -- bold
+				rule("![", "]()", "markdown"):set_end_pair_length(1), -- images
 				rule("=$", "()", "sh"):set_end_pair_length(1), -- variable definitions
 
 				-- auto-add trailing comma inside tables/objects
