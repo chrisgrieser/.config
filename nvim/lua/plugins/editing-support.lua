@@ -29,12 +29,12 @@ return {
 				-- auto-add trailing comma inside tables/objects
 				rule("=", " ,", "lua")
 					:with_pair(notAfterText("}")) -- negative conditions have to come first
-					:with_pair(notAfterText(" }")) 
-					:with_pair(isNodeType("table_constructor")) 
+					:with_pair(notAfterText(" }"))
+					:with_pair(isNodeType("table_constructor"))
 					:set_end_pair_length(1),
 				rule(":", " ,", { "javascript", "typescript" })
 					:with_pair(notAfterText("}")) -- negative conditions have to come first
-					:with_pair(notAfterText(" }")) 
+					:with_pair(notAfterText(" }"))
 					:with_pair(isNodeType("object"))
 					:set_end_pair_length(1),
 				rule("", ",") -- automatically move past commas
@@ -70,6 +70,7 @@ return {
 			prefix = " 󱞷",
 			highlight = "NonText",
 			min_rows = 7,
+			disable_ft = { "markdown", "css" },
 			-- Disable display of virtual text below blocks for indentation based
 			-- languages like Python
 			disable_virtual_lines_ft = { "yaml" },
