@@ -7,7 +7,7 @@ return {
 		opts = {
 			execution_message = { enabled = false },
 			noautocmd = false, -- needed for nvim-lint
-			debounce_delay = 1200, -- save at most this many ms
+			debounce_delay = 1000, -- save at most this many ms
 			condition = function(buf)
 				local isRegularBuffer = vim.api.nvim_buf_get_option(buf, "buftype") == ""
 				return isRegularBuffer
@@ -21,7 +21,7 @@ return {
 		opts = {
 			retirementAgeMins = 20,
 			ignoreUnsavedChangesBufs = false,
-			notificationOnAutoClose = true,
+			notificationOnAutoClose = false,
 		},
 	},
 	{ -- change cwd per project
@@ -36,6 +36,7 @@ return {
 				".git",
 				"Makefile",
 				"manifest.json", -- node
+				"package.json", -- node
 				"info.plist", -- Alfred
 				".luarc.json", -- lua
 				".project-root", -- manually marked

@@ -1,6 +1,6 @@
 local linterConfig = require("config.utils").linterConfigFolder
 local lintersAndFormatters = {
-	"yamllint", -- only for diagnostics, not for formatting
+	"yamllint", -- only for diagnostics
 	"shellcheck", -- needed for bash-lsp
 	"shfmt", -- shell
 	"markdownlint",
@@ -100,11 +100,11 @@ local function linterConfigs()
 	end
 
 	-- SETUP LINTING AUTOCMD
-	lint.try_lint() -- run on first buffer once this plugin is initialized
+	lint.try_lint() -- run on buffer once this plugin is initialized
 
 	-- "BufWritePost" relevant due to nvim-autosave
 	vim.api.nvim_create_autocmd(
-		{ "BufReadPost", "AutoSaveWritePost", "InsertLeave", "TextChanged", "FocusGained" },
+		{ "BufReadPost", "BufWritePost", "InsertLeave", "TextChanged", "FocusGained" },
 		{
 			pattern = "*",
 			callback = function(ctx)
