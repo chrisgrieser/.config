@@ -3316,7 +3316,7 @@ to set a hotkey for adding DOI/ISBN</string>
 				<false/>
 			</dict>
 			<key>description</key>
-			<string>Folder containing your PDFs. Only required for indicating PDFs via icons, opening them via `Hyper↵`, or auto-filing PDFs via  with `fn↵`.</string>
+			<string>Folder containing your PDFs. Only required for indicating PDFs via icons, opening them via `Hyper↵`, or auto-filing PDFs via  with `fn↵`. When left empty, `Hyper↵` tries to fall back to the PDF listed in the bibtex file under the key `file`.</string>
 			<key>label</key>
 			<string>PDF Folder</string>
 			<key>type</key>
@@ -3501,7 +3501,7 @@ to set a hotkey for adding DOI/ISBN</string>
 		<string>50</string>
 	</dict>
 	<key>version</key>
-	<string>11.7.6</string>
+	<string>11.8.0</string>
 	<key>webaddress</key>
 	<string>https://github.com/chrisgrieser/alfred-bibtex-citation-picker</string>
 </dict>
