@@ -165,8 +165,8 @@ autocmd("FileType", {
 autocmd("FocusGained", {
 	callback = function()
 		local fileDoesNotExist = vim.fn.filereadable(vim.fn.expand("%")) == 0
-		local isScratchpad = vim.bo.buftype == "nowrite"
-		if fileDoesNotExist and not isScratchpad then
+		local specialBuffer = vim.bo.buftype ~= ""
+		if fileDoesNotExist and not specialBuffer then
 			vim.notify("File does not exist anymore.", u.warn, { timeout = 20000 })
 		end
 	end,

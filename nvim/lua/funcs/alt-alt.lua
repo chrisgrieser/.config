@@ -60,7 +60,7 @@ function M.altFileStatusline()
 	local altOld = altOldfile()
 	local name, icon = "", ""
 	local altBufNr = vim.fn.bufnr("#")---@diagnostic disable-line: param-type-mismatch
-	local specialFile = vim.api.nvim_buf_get_option(vim.fn.bufnr("#"), "buftype") 
+	local specialFile = altBufNr > -1 and vim.api.nvim_buf_get_option(altBufNr, "buftype") or false
 	local fileExists = fn.filereadable(altPath) ~= 0
 	local hasAltFile = altFile ~= "" and altPath ~= curPath and (fileExists or specialFile)
 
@@ -102,9 +102,12 @@ end
 ---switch to alternate buffer/oldfile (in that priority)
 function M.altBufferWindow()
 	local altFile = fn.expand("#:t")
-	local hasAltFile = altFile ~= "" -- and fn.filereadable(altFile) ~= 0
 	local altPath = fn.expand("#:p")
 	local curPath = fn.expand("%:p")
+	local altBufNr = vim.fn.bufnr("#")---@diagnostic disable-line: param-type-mismatch
+	local specialFile = altBufNr > -1 and vim.api.nvim_buf_get_option(altBufNr, "buftype") or false
+	local fileExists = fn.filereadable(altPath) ~= 0
+	local hasAltFile = altFile ~= "" and altPath ~= curPath and (fileExists or specialFile)
 
 	if hasAltFile and (altPath ~= curPath) then
 		cmd.buffer("#")
