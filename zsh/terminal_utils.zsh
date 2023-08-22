@@ -131,10 +131,21 @@ function z() {
 	inspect
 }
 
+function w {
+	if ! command -v walk &>/dev/null; then print "\033[1;33mwalk not installed.\033[0m" && return 1; fi
+	export WALK_EDITOR="open" # macos default app
+
+	if command -v __zoxide_z &>/dev/null; then 
+		__zoxide_z "$(walk --icons "$@")"
+	else
+		cd "$(walk --icons "$@")" || return 1
+	fi
+}
+
 # back to last dir
 function zz() {
 	if ! command -v __zoxide_z &>/dev/null; then printf "\033[1;33mzoxide not installed.\033[0m" && return 1; fi
-	__zoxide_z - &>/dev/null # for some reason this is verbose command
+	__zoxide_z - &>/dev/null # since this is verbose command
 	inspect
 }
 
