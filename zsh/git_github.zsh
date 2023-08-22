@@ -256,7 +256,6 @@ function nuke {
 	# go to git repo root
 	cd "$(git rev-parse --show-toplevel)" || return 1
 	local_repo_path=$(pwd)
-	# shellcheck disable=2103
 	cd ..
 
 	command rm -rf "$local_repo_path"

@@ -272,10 +272,10 @@ nnoremap ww :duplicate
 """"""""""""""""""""""
 
 " so VV... in normal mode selects more lines
-vnoremap V j
+vmap V j
 
 " so vv goes to visual block mode
-vnoremap v <C-v>
+vmap v <C-v>
 
 """"""""""""""""""""""
 " Text Objects

@@ -218,7 +218,7 @@ return {
 	{
 		"mhartington/formatter.nvim",
 		keys = {
-			{ "<D-s>", "<cmd>FormatWrite<CR>", desc = "󰒕  Save & Format" },
+			{ "<D-s>", "<cmd>FormatWriteLock<CR>", desc = "󰒕  Save & Format" },
 		},
 		config = formatterConfigs,
 	},
