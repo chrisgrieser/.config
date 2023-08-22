@@ -58,8 +58,9 @@ function M.altFileStatusline()
 	local altPath = fn.expand("#:p")
 	local curPath = fn.expand("%:p")
 	local altOld = altOldfile()
-	local name, icon
-	local specialFile = altPath:find("://") -- e.g. octo
+	local name, icon = "", ""
+	local altBufNr = vim.fn.bufnr("#")---@diagnostic disable-line: param-type-mismatch
+	local specialFile = vim.api.nvim_buf_get_option(vim.fn.bufnr("#"), "buftype") 
 	local fileExists = fn.filereadable(altPath) ~= 0
 	local hasAltFile = altFile ~= "" and altPath ~= curPath and (fileExists or specialFile)
 
@@ -74,11 +75,8 @@ function M.altFileStatusline()
 		local deviconsInstalled, devicons = pcall(require, "nvim-web-devicons")
 		icon = deviconsInstalled and devicons.get_icon(altFile, ftOrExt) or "#"
 
-		-- prefix `#` for octo buffers
-		if altBufFt == "octo" and name:find("^%d$") then name = "#" .. name end
-
-		-- same name, different file: append parent of altfile
 		if curFile == altFile then
+			-- append parent of altfile
 			local altParent = fn.expand("#:p:h:t")
 			name = altParent .. "/" .. altFile
 		else
@@ -88,7 +86,7 @@ function M.altFileStatusline()
 		icon = "󰋚"
 		name = vim.fs.basename(altOld)
 	else
-		return ""
+		return "??"
 	end
 
 	-- truncate
@@ -104,7 +102,7 @@ end
 ---switch to alternate buffer/oldfile (in that priority)
 function M.altBufferWindow()
 	local altFile = fn.expand("#:t")
-	local hasAltFile = altFile ~= "" and fn.filereadable(altFile) ~= 0
+	local hasAltFile = altFile ~= "" -- and fn.filereadable(altFile) ~= 0
 	local altPath = fn.expand("#:p")
 	local curPath = fn.expand("%:p")
 
