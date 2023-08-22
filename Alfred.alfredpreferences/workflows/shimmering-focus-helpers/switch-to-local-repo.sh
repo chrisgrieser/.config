@@ -12,3 +12,7 @@ cd "$LOCAL_REPOS"
 git clone --depth=1 --filter="blob:none" "$remote_ssh"
 ln -sf "$LOCAL_REPOS/shimmering-focus/source.css" "$theme_folder/theme.css"
 
+# run in background, since dependencies can be run in the background 
+cd "$LOCAL_REPOS/shimmering-focus/" || return 1
+npm install --production &
+
