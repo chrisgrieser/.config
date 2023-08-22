@@ -123,17 +123,9 @@ nnoremap g, u<C-r>
 exmap liveGrep obcommand obsidian-another-quick-switcher:grep
 nnoremap gl :liveGrep
 
-" Omnisearch
-exmap globalGrep obcommand omnisearch:show-modal
-nnoremap gL :globalGrep omnisearch:show-modal
-
 " Obsidian builtin Search & replace
 exmap searchReplace obcommand editor:open-search-replace
 nnoremap ,ff :searchReplace
-
-" Global Search and Replace Plugin
-exmap globalSearchReplace obcommand global-search-and-replace:search-and-replace
-nnoremap ,v :globalSearchReplace
 
 """"""""""""""""""""""
 " Diffview, Git, Undo
@@ -142,10 +134,6 @@ nnoremap ,v :globalSearchReplace
 " Version history plugin
 exmap diffview obcommand obsidian-version-history-diff:open-git-diff-view
 nnoremap ,gd :diffview
-
-" Edit History Plugin
-exmap undohistory obcommand edit-history:open-edit-history
-nnoremap ,ut :undohistory
 
 " Git Plugin
 exmap gitAdd obcommand obsidian-git:stage-current-file

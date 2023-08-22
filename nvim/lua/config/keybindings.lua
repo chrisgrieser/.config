@@ -12,7 +12,7 @@ local u = require("config.utils")
 keymap("n", "?", function() cmd.Telescope("keymaps") end, { desc = "⌨️  Search Keymaps" })
 keymap("n", "g?", function()
 	vim.ui.input({ prompt = "⌨️ Goto Keymap Definition: " }, function(input)
-		if input == "" then return end
+		if not input or input == "" then return end
 		cmd.redir("@z")
 		vim.cmd("silent map " .. input)
 		cmd.redir("END")
@@ -131,9 +131,9 @@ keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
 keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
 keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
 
-keymap("n", "X", "mz$x`z", { desc = "Delete char at EoL" })
+keymap("n", "X", "mz$x`z", { desc = "󱎘 Delete char at EoL" })
 
-keymap("n", "~", "~h", { desc = "Toggle Case (w/o moving)" })
+keymap("n", "~", "~h", { desc = "~ without moving)" })
 
 -- Word Flipper
 -- stylua: ignore

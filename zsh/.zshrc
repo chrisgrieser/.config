@@ -12,6 +12,7 @@ CONFIG_FILES=(
 	json_utils
 	homebrew
 	node-npm
+	python-pip
 	intro_messages
 )
 
