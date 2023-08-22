@@ -86,7 +86,7 @@ function M.variableLog()
 	if ft == "lua" then
 		templateStr = 'print("%s %s: ".. %s)'
 		-- FIX for noice.nvim print-bug: https://github.com/folke/noice.nvim/issues/556
-		if expand("%:p"):find("nvim") then templateStr = 'vim.notify("%s %s: ".. %s)' end
+		if expand("%:p"):find("nvim") then templateStr = 'vim.notify("%s %s: " .. %s)' end
 	elseif ft == "python" then
 		templateStr = 'print("%s %s:", %s)'
 	elseif ft == "javascript" or ft == "typescript" then
