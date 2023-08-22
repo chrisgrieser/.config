@@ -262,3 +262,5 @@ keymap("n", "<leader>oa", function()
 end, { desc = " 󰀫 Toggle nrformats alpha" })
 
 --------------------------------------------------------------------------------
+
+local b=20
