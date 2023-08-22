@@ -3,11 +3,13 @@ local M = {}
 --------------------------------------------------------------------------------
 -- CONFIG
 local linechar = "─"
+local width = tostring(vim.opt_local.colorcolumn:get()[1]) - 1
+
+--------------------------------------------------------------------------------
 
 function M.commentHr()
 	local wasOnBlank = vim.api.nvim_get_current_line() == ""
 	local indent = vim.fn.indent(".") ---@diagnostic disable-line: param-type-mismatch
-	local textwidth = vim.bo.textwidth
 	local comStr = vim.bo.commentstring
 	local ft = vim.bo.filetype
 	local comStrLength = #(comStr:gsub(" ?%%s ?", ""))
@@ -18,7 +20,7 @@ function M.commentHr()
 	end
 	if comStr:find("-") then linechar = "-" end
 
-	local linelength = textwidth - indent - comStrLength
+	local linelength = width - indent - comStrLength
 	local fullLine = linechar:rep(linelength)
 
 	-- due to https://stylelint.io/user-guide/rules/comment-whitespace-inside/

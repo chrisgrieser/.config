@@ -5,5 +5,4 @@ theme_folder="$VAULT_PATH/.obsidian/themes/Shimmering Focus/"
 ln -sf "$theme_folder/fallback.css" "$theme_folder/theme.css"
 
 # delete local folder
-# shellcheck disable=2154
-rm -r "$LOCAL_REPOS/shimmering-focus"
+rm -rf "$LOCAL_REPOS/shimmering-focus"

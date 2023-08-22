@@ -30,16 +30,14 @@ return {
 				rule("=$", "()", "sh"):set_end_pair_length(1), -- variable definitions
 
 				-- auto-add trailing comma inside tables/objects
-				rule("=", " ,", "lua")
+				rule("=", ",", "lua")
 					:with_pair(notAfterText("}")) -- negative conditions have to come first
 					:with_pair(notAfterText(" }"))
-					:with_pair(isNodeType("table_constructor"))
-					:set_end_pair_length(1),
-				rule(":", " ,", { "javascript", "typescript" })
+					:with_pair(isNodeType("table_constructor")),
+				rule(":", ",", { "javascript", "typescript" })
 					:with_pair(notAfterText("}")) -- negative conditions have to come first
 					:with_pair(notAfterText(" }"))
-					:with_pair(isNodeType("object"))
-					:set_end_pair_length(1),
+					:with_pair(isNodeType("object")),
 				rule("", ",") -- automatically move past commas
 					:with_move(function(opts) return opts.char == "," end)
 					:with_pair(function() return false end)
