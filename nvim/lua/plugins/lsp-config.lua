@@ -58,19 +58,29 @@ lspFiletypes.emmet_ls = { "css", "html" }
 
 --------------------------------------------------------------------------------
 -- CSS
--- https://github.com/sublimelsp/LSP-css/blob/master/LSP-css.sublime-settings
-
+-- https://github.com/microsoft/vscode-css-languageservice/blob/main/src/services/lintRules.ts
 lspSettings.cssls = {
 	css = {
 		lint = {
-			propertyIgnoredDueToDisplay = "error",
+			compatibleVendorPrefixes = "ignore", 
 			vendorPrefix = "ignore",
-			universalSelector = "ignore",
-			float = "ignore",
-			boxModel = "ignore",
-			-- since these would be duplication with stylelint
-			duplicateProperties = "ignore",
+			unknownVendorSpecificProperties = "ignore",
+
+			duplicateProperties = "warning",
 			emptyRules = "warning",
+			importStatement = "warning",
+			universalSelector = "ignore",
+			zeroUnits = "warning",
+			fontFaceProperties = "warning",
+			hexColorLength = "warning",
+			argumentsInColorFunction = "warning",
+			unknownProperties = "warning",
+			unknownAtRules = "warning",
+			ieHack = "error",
+			propertyIgnoredDueToDisplay = "error",
+			important = "ignore",
+			float = "ignore",
+			idSelector = "warning",
 		},
 		colorDecorators = { enable = true }, -- not supported yet
 	},

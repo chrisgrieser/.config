@@ -78,7 +78,7 @@ local function linterConfigs()
 	}
 	lint.linters.stylelint.parser = function(output)
 		local status, decoded = pcall(vim.json.decode, output)
-		if not status or not decoded then return {} end
+		if not status or not decoded or vim.tbl_isempty(decoded) then return {} end
 		decoded = decoded[1]
 		local diagnostics = {}
 		if decoded.errored then
@@ -144,10 +144,13 @@ local function formatterConfigs()
 
 	local stylelint = {
 		exe = "stylelint",
-		tempfile_dir = "/tmp",
-		stdin = false,
 		try_node_modules = true,
-		args = { "--fix", util.escape_path(util.get_current_buffer_file_path()) },
+		args = {
+			"--fix",
+			"--stdin",
+			"--stdin-filename",
+			util.escape_path(util.get_current_buffer_file_path()),
+		},
 	}
 
 	local codespell = {
