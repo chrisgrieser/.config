@@ -11,11 +11,11 @@ CONFIG_FILES=(
 	git_github
 	json_utils
 	homebrew
+	node-npm
 	intro_messages
 )
 
-# shell integration for wezterm
-# https://github.com/wez/wezterm/blob/main/assets/shell-integration/wezterm.sh
+# shell integration for wezterm -- https://github.com/wez/wezterm/blob/main/assets/shell-integration/wezterm.sh
 [[ "$TERM_PROGRAM" == "WezTerm" ]] && CONFIG_FILES+=(semantic_prompts)
 
 #───────────────────────────────────────────────────────────────────────────────

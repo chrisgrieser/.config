@@ -369,7 +369,7 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<key>xpos</key>
 			<real>325</real>
 			<key>ypos</key>
-			<real>315</real>
+			<real>295</real>
 		</dict>
 		<key>769DBB7A-060F-4CCA-A806-0AAA1149D60B</key>
 		<dict>
