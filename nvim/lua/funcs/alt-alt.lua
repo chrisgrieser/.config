@@ -59,10 +59,11 @@ function M.altFileStatusline()
 	local curPath = fn.expand("%:p")
 	local altOld = altOldfile()
 	local name, icon
-	local hasAltFile = altFile ~= "" and fn.filereadable(altFile)
+	local specialFile = altPath:find("://") -- e.g. octo
+	local fileExists = fn.filereadable(altPath) ~= 0
+	local hasAltFile = altFile ~= "" and altPath ~= curPath and (fileExists or specialFile)
 
-	-- no oldfile and after start
-	if hasAltFile and (altPath ~= curPath) then
+	if hasAltFile then
 		local ext = fn.expand("#:e")
 		local altBufFt = vim.api.nvim_buf_get_option(fn.bufnr("#"), "filetype") ---@diagnostic disable-line: param-type-mismatch
 		local ftOrExt = ext ~= "" and ext or altBufFt
@@ -103,7 +104,7 @@ end
 ---switch to alternate buffer/oldfile (in that priority)
 function M.altBufferWindow()
 	local altFile = fn.expand("#:t")
-	local hasAltFile = altFile ~= "" and fn.filereadable(altFile)
+	local hasAltFile = altFile ~= "" and fn.filereadable(altFile) ~= 0
 	local altPath = fn.expand("#:p")
 	local curPath = fn.expand("%:p")
 
