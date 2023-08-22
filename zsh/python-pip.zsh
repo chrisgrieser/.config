@@ -1,8 +1,6 @@
 #!/usr/bin/env zsh
 
-# Don't clutter home directory with useless `.python_history`
-export PYTHONSTARTUP=~/.config/python/pythonrc
-
+export PYTHONSTARTUP="$HOME/.config/python/pythonrc.py"
 
 #───────────────────────────────────────────────────────────────────────────────
 
