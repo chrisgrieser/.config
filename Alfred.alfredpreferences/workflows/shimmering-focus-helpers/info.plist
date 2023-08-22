@@ -8,29 +8,6 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
-		<key>1CDBED31-119F-44EB-B938-9101FAE29043</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>769DBB7A-060F-4CCA-A806-0AAA1149D60B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>D430A6F9-293F-49FE-9E66-A091FB56677B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>2D3B42A9-52F1-4193-8FE5-EBD2D2606DBD</key>
 		<array>
 			<dict>
@@ -56,16 +33,6 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>B233BBCD-C970-4D2D-AF82-1696F6E558F7</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 		<key>7F5B9DEA-0CE4-4402-804D-7E24157C08B1</key>
 		<array>
@@ -83,7 +50,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>1CDBED31-119F-44EB-B938-9101FAE29043</string>
+				<string>D430A6F9-293F-49FE-9E66-A091FB56677B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -109,6 +76,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>2D3B42A9-52F1-4193-8FE5-EBD2D2606DBD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D430A6F9-293F-49FE-9E66-A091FB56677B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>769DBB7A-060F-4CCA-A806-0AAA1149D60B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -307,6 +287,27 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⏳Cloning…</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>D430A6F9-293F-49FE-9E66-A091FB56677B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
@@ -351,58 +352,6 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>1CDBED31-119F-44EB-B938-9101FAE29043</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>⏳Cloning…</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>D430A6F9-293F-49FE-9E66-A091FB56677B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>install-dependencies.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>B233BBCD-C970-4D2D-AF82-1696F6E558F7</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
 			<key>config</key>
 			<dict>
 				<key>concurrently</key>
@@ -430,15 +379,6 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>1CDBED31-119F-44EB-B938-9101FAE29043</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>310</real>
-			<key>ypos</key>
-			<real>195</real>
-		</dict>
 		<key>2D3B42A9-52F1-4193-8FE5-EBD2D2606DBD</key>
 		<dict>
 			<key>colorindex</key>
@@ -446,7 +386,7 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<key>note</key>
 			<string>switch to fallback &amp; delete local repo</string>
 			<key>xpos</key>
-			<real>395</real>
+			<real>325</real>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
@@ -457,16 +397,16 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<key>note</key>
 			<string>open at line</string>
 			<key>xpos</key>
-			<real>395</real>
+			<real>325</real>
 			<key>ypos</key>
-			<real>420</real>
+			<real>315</real>
 		</dict>
 		<key>68B4C56F-DA10-42C4-955D-D4A5FA7AEB53</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>565</real>
+			<real>615</real>
 			<key>ypos</key>
 			<real>165</real>
 		</dict>
@@ -477,7 +417,7 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<key>note</key>
 			<string>clone &amp; switch to local repo</string>
 			<key>xpos</key>
-			<real>395</real>
+			<real>470</real>
 			<key>ypos</key>
 			<real>165</real>
 		</dict>
@@ -504,29 +444,18 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>565</real>
+			<real>470</real>
 			<key>ypos</key>
 			<real>20</real>
-		</dict>
-		<key>B233BBCD-C970-4D2D-AF82-1696F6E558F7</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>install dependencies</string>
-			<key>xpos</key>
-			<real>565</real>
-			<key>ypos</key>
-			<real>310</real>
 		</dict>
 		<key>D430A6F9-293F-49FE-9E66-A091FB56677B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>395</real>
+			<real>325</real>
 			<key>ypos</key>
-			<real>305</real>
+			<real>165</real>
 		</dict>
 		<key>F9CA8CAA-C6EB-499B-9049-AA32687CAAFC</key>
 		<dict>
