@@ -144,14 +144,10 @@ local function formatterConfigs()
 
 	local stylelint = {
 		exe = "stylelint",
-		stdin = true,
+		tempfile_dir = "/tmp",
+		stdin = false,
 		try_node_modules = true,
-		args = {
-			"--fix",
-			"--stdin",
-			"--stdin-filename",
-			util.escape_path(util.get_current_buffer_file_path()),
-		},
+		args = { "--fix", util.escape_path(util.get_current_buffer_file_path()) },
 	}
 
 	local codespell = {
