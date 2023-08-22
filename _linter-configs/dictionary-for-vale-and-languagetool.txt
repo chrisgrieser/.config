@@ -157,3 +157,7 @@ hackernews
 addon
 ChatPDF
 stylelint
+⌘L
+⌘fn
+⌘C
+⌘fn⏎
