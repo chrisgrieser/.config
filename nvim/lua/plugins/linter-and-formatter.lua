@@ -104,13 +104,13 @@ local function linterConfigs()
 
 	-- "BufWritePost" relevant due to nvim-autosave
 	vim.api.nvim_create_autocmd(
-		{ "BufReadPost", "BufWritePost", "InsertLeave", "TextChanged", "FocusGained" },
+		{ "BufReadPost", "AutoSaveWritePost", "InsertLeave", "TextChanged", "FocusGained" },
 		{
 			pattern = "*",
 			callback = function(ctx)
 				local fileDoesNotExist = vim.fn.filereadable(vim.fn.expand("%")) == 0
-				local isScratchpad = vim.bo.buftype == "nowrite"
-				if fileDoesNotExist and not isScratchpad then return end
+				local specialBuffer = vim.bo.buftype ~= ""
+				if fileDoesNotExist and not specialBuffer then return end
 
 				local ft = vim.bo.filetype
 				local event = ctx.event
