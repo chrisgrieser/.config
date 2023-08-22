@@ -55,7 +55,7 @@ keymap("n", "<leader>lh", function() cmd.Telescope("command_history") end, { des
 
 -- show current filetype & buftype
 keymap("n", "<leader>lf", function()
-	local out = "filetype" .. bo.filetype
+	local out = "filetype: " .. bo.filetype
 	if bo.buftype ~= "" then out = out .. "\nbuftype: " .. bo.buftype end
 	vim.notify(out, u.trace)
 end, { desc = "󰽘 Inspect FileType & BufType" })
@@ -262,5 +262,3 @@ keymap("n", "<leader>oa", function()
 end, { desc = " 󰀫 Toggle nrformats alpha" })
 
 --------------------------------------------------------------------------------
-
-local b=20
