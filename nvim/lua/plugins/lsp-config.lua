@@ -66,6 +66,8 @@ lspSettings.cssls = {
 			vendorPrefix = "ignore",
 			unknownVendorSpecificProperties = "ignore",
 
+			unknownProperties = "ignore", -- duplicate with stylelint
+
 			duplicateProperties = "warning",
 			emptyRules = "warning",
 			importStatement = "warning",
@@ -73,10 +75,9 @@ lspSettings.cssls = {
 			fontFaceProperties = "warning",
 			hexColorLength = "warning",
 			argumentsInColorFunction = "warning",
-			unknownProperties = "warning",
 			unknownAtRules = "warning",
-			ieHack = "error",
-			propertyIgnoredDueToDisplay = "error",
+			ieHack = "warning",
+			propertyIgnoredDueToDisplay = "warning",
 		},
 		colorDecorators = { enable = true }, -- not supported yet
 	},

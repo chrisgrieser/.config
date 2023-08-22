@@ -152,9 +152,9 @@ keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "󰗈 Merge line down" })
 keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>]], { desc = "󰗈 Split around selection" })
 
 -- Append to / delete from EoL
-keymap("n", "<leader>,", "mzA,<Esc>`z", { desc = " , to EoL" })
-keymap("n", '<leader>"', 'mzA"<Esc>`z', { desc = ' " to EoL' })
-keymap("n", "<leader>)", "mzA)<Esc>`z", { desc = " ) to EoL" })
+for _, key in pairs { ",", ";", ")", '"' } do
+	keymap("n", "<leader>" .. key, "mzA" .. key .. "<Esc>`z", { desc = " " .. key .. " to EoL" })
+end
 
 --------------------------------------------------------------------------------
 -- GIT

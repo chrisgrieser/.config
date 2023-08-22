@@ -45,7 +45,7 @@ local generalWords = {
 	-- commonly switched between
 	{ "red", "blue" }, -- e.g. when design-testing
 	{ "read", "write" },
-	{ "warn", "error" },
+	{ "warning", "error" },
 	{ "and", "or" },
 
 	-- comparisons and operators

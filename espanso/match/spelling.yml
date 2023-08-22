@@ -1,5 +1,3 @@
-# https://espanso.org/docs/
-# ------------------------------------------
 matches:
   - trigger: "I#d"
     replace: "I'd"
@@ -342,10 +340,6 @@ matches:
     replace: brief
     propagate_casing: true
     word: true
-  - trigger: brwoser
-    replace: browser
-    propagate_casing: true
-    word: true
   - trigger: srue
     replace: sure
     propagate_casing: true
@@ -353,3 +347,7 @@ matches:
   - trigger: brwose
     replace: browse
     propagate_casing: true
+  - trigger: ti
+    replace: it
+    propagate_casing: true
+    word: true
