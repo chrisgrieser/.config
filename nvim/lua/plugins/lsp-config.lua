@@ -69,7 +69,6 @@ lspSettings.cssls = {
 			duplicateProperties = "warning",
 			emptyRules = "warning",
 			importStatement = "warning",
-			universalSelector = "ignore",
 			zeroUnits = "warning",
 			fontFaceProperties = "warning",
 			hexColorLength = "warning",
@@ -78,9 +77,6 @@ lspSettings.cssls = {
 			unknownAtRules = "warning",
 			ieHack = "error",
 			propertyIgnoredDueToDisplay = "error",
-			important = "ignore",
-			float = "ignore",
-			idSelector = "warning",
 		},
 		colorDecorators = { enable = true }, -- not supported yet
 	},
