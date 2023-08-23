@@ -62,7 +62,7 @@ local function linterConfigs()
 	}
 
 	-----------------------------------------------------------------------------
-
+	-- pending: https://github.com/mfussenegger/nvim-lint/pull/350
 	local severities = {
 		error = vim.diagnostic.severity.ERROR,
 		warning = vim.diagnostic.severity.WARN,
@@ -139,14 +139,11 @@ end
 
 local function lintTriggers()
 	vim.api.nvim_create_autocmd({ "BufReadPost", "InsertLeave", "TextChanged", "FocusGained" }, {
-		callback = function()
-			-- FIX spurious lints on first enter
-			vim.defer_fn(require("lint").try_lint, 1)
-		end,
+		callback = function() vim.defer_fn(require("lint").try_lint, 1) end,
 	})
 
 	-- due to auto-save.nvim, we need the custom event "AutoSaveWritePost"
-	-- instead of "BufWritePost" to trigger linting
+	-- instead of "BufWritePost" to trigger linting to prevent race conditions
 	vim.api.nvim_create_autocmd("User", {
 		pattern = "AutoSaveWritePost",
 		callback = function() require("lint").try_lint() end,
@@ -156,31 +153,22 @@ end
 --------------------------------------------------------------------------------
 
 local function formatterConfigs()
-	local util = require("formatter.util")
-
+	-- TODO add formatters? https://github.com/mhartington/formatter.nvim/pulls
 	local rome = {
 		exe = "rome",
-		tempfile_dir = "/tmp",
 		stdin = false, -- using the stdin formatting of rome has bugs with emojis
-		try_node_modules = true,
-		args = { "format", "--write", util.escape_path(util.get_current_buffer_file_path()) },
+		args = { "format", "--write" },
 	}
 
 	local stylelint = {
 		exe = "stylelint",
-		try_node_modules = true,
-		args = {
-			"--fix",
-			"--stdin",
-			"--stdin-filename",
-			util.escape_path(util.get_current_buffer_file_path()),
-		},
+		stdin = true,
+		args = { "--fix", "--stdin", "--stdin-filename" },
 	}
 
 	local codespell = {
 		exe = "codespell",
 		stdin = false,
-		tempfile_dir = "/tmp", -- codespell requires a tmp dir
 		args = {
 			"--ignore-words",
 			linterConfig .. "/codespell-ignore.txt",
@@ -231,7 +219,7 @@ return {
 				ensure_installed = lintersAndFormatters,
 				run_on_start = false,
 			}
-			vim.defer_fn(vim.cmd.MasonToolsInstall, 1000)
+			vim.defer_fn(vim.cmd.MasonToolsInstall, 500)
 		end,
 	},
 	{
