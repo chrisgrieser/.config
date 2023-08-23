@@ -33,7 +33,7 @@ $memory_usage\
 """
 
 [character]
-success_symbol = " [󰀘 ](bold green)"
+success_symbol = " [ ](bold green)" # 󰀘
 error_symbol = " [󰇷 ](bold red)"
 vimcmd_symbol = " [ ](bold 206)" # 206: magenta
 
