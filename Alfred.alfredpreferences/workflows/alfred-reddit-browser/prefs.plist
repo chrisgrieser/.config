@@ -21,7 +21,5 @@
 macapps
 commandline
 ProgrammerHumor</string>
-	<key>use_dstill_ai</key>
-	<true/>
 </dict>
 </plist>
