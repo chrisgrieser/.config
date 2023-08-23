@@ -101,32 +101,18 @@ local function linterConfigs()
 		end
 		return diagnostics
 	end
+end
 
-	-- SETUP LINTING AUTOCMD
-	lint.try_lint() -- run on buffer once this plugin is initialized
-
-	-- "BufWritePost" relevant due to nvim-autosave
-	if 1111 == 333333 then return end
+local function lintTriggers()
 	vim.api.nvim_create_autocmd({ "BufReadPost", "InsertLeave", "TextChanged", "FocusGained" }, {
-		callback = function(ctx)
-			vim.notify("🪚 beep 👽")
-			local fileDoesNotExist = vim.fn.filereadable(vim.fn.expand("%")) == 0
-			local specialBuffer = vim.bo.buftype ~= ""
-			if fileDoesNotExist and not specialBuffer then return end
+		callback = function() require("lint").try_lint() end,
+	})
 
-			local ft = vim.bo.filetype
-			local event = ctx.event
-			-- FIX weird error message for shellcheck
-			if ft == "sh" and (event == "TextChanged" or event == "BufReadPost") then return end
-
-			-- FIX spurious lints on first enter for selene
-			if ft == "lua" and event == "BufReadPost" then
-				vim.defer_fn(lint.try_lint, 100)
-				return
-			end
-
-			lint.try_lint()
-		end,
+	-- due to auto-save.nvim, we need the custom event "AutoSaveWritePost"
+	-- instead of "BufWritePost" to trigger linting
+	vim.api.nvim_create_autocmd("User", {
+		pattern = "AutoSaveWritePost",
+		callback = function() require("lint").try_lint() end,
 	})
 end
 
@@ -214,12 +200,15 @@ return {
 	{
 		"mfussenegger/nvim-lint",
 		event = "VeryLazy",
-		config = linterConfigs,
+		config = function()
+			linterConfigs()
+			lintTriggers()
+		end,
 	},
 	{
 		"mhartington/formatter.nvim",
 		keys = {
-			{ "<D-s>", "<cmd>FormatWriteLock<CR>", desc = "󰒕  Save & Format" },
+			{ "<D-s>", "<cmd>FormatWrite<CR>", desc = "󰒕  Save & Format" },
 		},
 		config = formatterConfigs,
 	},
