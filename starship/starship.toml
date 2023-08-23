@@ -1,3 +1,8 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+# BUG does not work reliably: https://www.reddit.com/r/neovim/comments/15xsx3t/schema_validation_for_toml_files/
+
+#───────────────────────────────────────────────────────────────────────────────
 # INFO
 # - https://starship.rs/config/ 
 # - https://github.com/toml-lang/toml
