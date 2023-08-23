@@ -54,7 +54,7 @@ nnoremap J 6gj
 nnoremap K 6gk
 
 onoremap J 2j
-onoremap K 2j
+onoremap K 2k
 
 " sentence navigation
 noremap [ (
@@ -260,10 +260,10 @@ nnoremap ww :duplicate
 """"""""""""""""""""""
 
 " so VV... in normal mode selects more lines
-vmap V j
+vnoremap V j
 
 " so vv goes to visual block mode
-vmap v <C-v>
+vnoremap v <C-v>
 
 """"""""""""""""""""""
 " Text Objects
