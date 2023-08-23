@@ -7,10 +7,12 @@ VIDEO_DIR="$HOME/Downloaded"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-cd "$VIDEO_DIR" || return 1
-
 # Check requirements
-command -v transmission-remote &>/dev/null || touch "./WARN transmission-remote not installed"
+if ! command -v transmission-remote &>/dev/null; then
+	touch "./WARN transmission-remote not installed"
+fi
+
+cd "$VIDEO_DIR" || return 1
 
 # delete clutter
 find . \( -name '*.txt' -or -name '*.nfo' -or -name '*.exe' -or -name '*.md' \
