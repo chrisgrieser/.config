@@ -31,5 +31,5 @@ rules:
     - declarations
   order/properties-order:
     - [] # empty array required, since option are only valid in second element
-    - unspecified: bottomAlphabetical
+    - unspecified: bottom
       severity: warning
