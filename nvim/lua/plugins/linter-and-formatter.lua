@@ -78,19 +78,22 @@ local function linterConfigs()
 	}
 	lint.linters.stylelint.parser = function(output)
 		local status, decoded = pcall(vim.json.decode, output)
-		if not status or not decoded or vim.tbl_isempty(decoded) then return {} end
+		if not status or not decoded then return {} end
 		decoded = decoded[1]
+		if not decoded.errored then return {} end
 		local diagnostics = {}
-		if decoded.errored then
-			for _, message in ipairs(decoded.warnings) do
+		for _, diag in ipairs(decoded.warnings) do
+			-- filtering order-violations, since they are auto-fixed and and would
+			-- only add noise
+			if diag.rule ~= "order/properties-order" then
 				table.insert(diagnostics, {
-					lnum = message.line - 1,
-					col = message.column - 1,
-					end_lnum = message.line - 1,
-					end_col = message.column - 1,
-					message = message.text,
-					code = message.rule,
-					user_data = { lsp = { code = message.rule } },
+					lnum = diag.line - 1,
+					col = diag.column - 1,
+					end_lnum = diag.line - 1,
+					end_col = diag.column - 1,
+					message = diag.text:gsub("%b()", ""),
+					code = diag.rule,
+					user_data = { lsp = { code = diag.rule } },
 					severity = vim.diagnostic.severity.ERROR,
 					source = "stylelint",
 				})
@@ -103,30 +106,28 @@ local function linterConfigs()
 	lint.try_lint() -- run on buffer once this plugin is initialized
 
 	-- "BufWritePost" relevant due to nvim-autosave
-	vim.api.nvim_create_autocmd(
-		{ "BufReadPost", "BufWritePost", "InsertLeave", "TextChanged", "FocusGained" },
-		{
-			pattern = "*",
-			callback = function(ctx)
-				local fileDoesNotExist = vim.fn.filereadable(vim.fn.expand("%")) == 0
-				local specialBuffer = vim.bo.buftype ~= ""
-				if fileDoesNotExist and not specialBuffer then return end
+	if 1111 == 333333 then return end
+	vim.api.nvim_create_autocmd({ "BufReadPost", "InsertLeave", "TextChanged", "FocusGained" }, {
+		callback = function(ctx)
+			vim.notify("🪚 beep 👽")
+			local fileDoesNotExist = vim.fn.filereadable(vim.fn.expand("%")) == 0
+			local specialBuffer = vim.bo.buftype ~= ""
+			if fileDoesNotExist and not specialBuffer then return end
 
-				local ft = vim.bo.filetype
-				local event = ctx.event
-				-- FIX weird error message for shellcheck
-				if ft == "sh" and (event == "TextChanged" or event == "BufReadPost") then return end
+			local ft = vim.bo.filetype
+			local event = ctx.event
+			-- FIX weird error message for shellcheck
+			if ft == "sh" and (event == "TextChanged" or event == "BufReadPost") then return end
 
-				-- FIX spurious lints on first enter for selene
-				if ft == "lua" and event == "BufReadPost" then
-					vim.defer_fn(lint.try_lint, 100)
-					return
-				end
+			-- FIX spurious lints on first enter for selene
+			if ft == "lua" and event == "BufReadPost" then
+				vim.defer_fn(lint.try_lint, 100)
+				return
+			end
 
-				lint.try_lint()
-			end,
-		}
-	)
+			lint.try_lint()
+		end,
+	})
 end
 
 --------------------------------------------------------------------------------

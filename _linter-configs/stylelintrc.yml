@@ -25,11 +25,7 @@ rules:
   declaration-empty-line-before: [never, { severity: warning }]
   custom-property-empty-line-before: [never, { severity: warning }]
   max-nesting-depth: 3
-  #────────────────────────────────────────────────────────────────────────────
+
   order/order:
     - custom-properties
     - declarations
-  order/properties-order:
-    - [] # empty array required, since option are only valid in second element
-    - unspecified: bottom
-      severity: warning
