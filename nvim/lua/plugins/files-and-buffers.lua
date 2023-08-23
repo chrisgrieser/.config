@@ -6,7 +6,7 @@ return {
 		event = { "InsertLeave", "TextChanged" }, -- only needs to be loaded on files changes
 		opts = {
 			execution_message = { enabled = false },
-			noautocmd = true, -- needed for nvim-lint
+			noautocmd = true, -- false would be buggy with :FormatWrite
 			debounce_delay = 1000, -- save at most this many ms
 			condition = function(buf)
 				local isRegularBuffer = vim.api.nvim_buf_get_option(buf, "buftype") == ""

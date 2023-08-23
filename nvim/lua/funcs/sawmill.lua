@@ -132,9 +132,10 @@ function M.beepLog()
 
 	local randomEmoji = beepEmojis[math.random(1, #beepEmojis)]
 
-	if ft == "lua" or ft == "python" then
+	if expand("%:p"):find("nvim") and ft == "lua" then
 		-- FIX for noice.nvim print-bug: https://github.com/folke/noice.nvim/issues/556
-		if expand("%:p"):find("nvim") and ft == "lua" then templateStr = 'vim.notify("%s %s: ".. %s)' end
+		templateStr = 'vim.notify("%s beep %s")'
+	elseif ft == "lua" or ft == "python" then
 		templateStr = 'print("%s beep %s")'
 	elseif ft == "javascript" or ft == "typescript" then
 		templateStr = 'console.log("%s beep %s");'
