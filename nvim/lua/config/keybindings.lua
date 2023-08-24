@@ -242,6 +242,7 @@ keymap("n", "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
 keymap("n", "C", '"_C')
 keymap("x", "p", "P", { desc = "Paste without switching register" })
+keymap("n", "<leader>d", '"_d', { desc = "Delete w/o register" })
 
 -- do not clutter the register if blank line is deleted
 keymap("n", "dd", function()
@@ -249,6 +250,7 @@ keymap("n", "dd", function()
 	local expr = isBlankLine and '"_dd' or "dd"
 	return expr
 end, { expr = true })
+
 
 -- paste charwise reg as linewise & vice versa
 keymap("n", "gp", function()
