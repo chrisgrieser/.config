@@ -75,6 +75,9 @@ function M.altFileStatusline()
 		local deviconsInstalled, devicons = pcall(require, "nvim-web-devicons")
 		icon = deviconsInstalled and devicons.get_icon(altFile, ftOrExt) or "#"
 
+		-- add sourcegraph icon for clarity
+		if fn.expand("#"):find("^sg") then icon = "󰓁 " .. icon end
+
 		if curFile == altFile then
 			-- append parent of altfile
 			local altParent = fn.expand("#:p:h:t")

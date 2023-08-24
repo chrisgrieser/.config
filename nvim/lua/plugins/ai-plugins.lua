@@ -6,19 +6,23 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
 		keys = {
 			{
-				"<leader>S",
+				"<leader>qq",
 				function() require("sg.extensions.telescope").fuzzy_search_results() end,
 				desc = "󰓁 SourceGraph Search",
 			},
-			{
-				"<leader>S",
-				function() require("sg.extensions.telescope").fuzzy_search_results() end,
-				desc = "󰓁 SourceGraph Search",
-			},
+			{ "<leader>qu", "<cmd>SourcegraphLink<CR>", desc = "󰓁 Copy SourceGraph URL" },
+		},
+		opts = {
+			on_attach = function ()
+				-- stylua: ignore
+				vim.keymap.set("n", "gd", function() vim.cmd.Telescope("lsp_definitions") end, { desc = "󰒕 Definitions" })
+				-- stylua: ignore
+				vim.keymap.set("n", "gf", function() vim.cmd.Telescope("lsp_references") end, { desc = "󰒕 References" })
+			end,
 		},
 		init = function()
 			local ok, whichKey = pcall(require, "which-key")
-			if ok then whichKey.register { ["<leader>"] = { name = "  Debugger" } } end
+			if ok then whichKey.register { ["<leader>q"] = { name = " 󰓁 SourceGraph" } } end
 		end,
 	},
 	{ -- AI Ghost Text Suggestions
