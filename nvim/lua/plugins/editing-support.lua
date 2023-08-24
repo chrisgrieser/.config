@@ -19,7 +19,7 @@ return {
 			local rule = require("nvim-autopairs.rule")
 			local isNodeType = require("nvim-autopairs.ts-conds").is_ts_node
 			local notAfterText = require("nvim-autopairs.conds").not_after_text
-			local notBeforeText = require("nvim-autopairs.conds").not_before_text
+			local notAfterRegex = require("nvim-autopairs.conds").not_after_regex
 
 			require("nvim-autopairs").add_rules {
 				rule("<", ">", "lua"):with_pair(isNodeType("string")), -- keymaps
@@ -28,11 +28,10 @@ return {
 				rule("*", "*", "markdown"), -- italics
 				rule("__", "__", "markdown"), -- bold
 				rule("![", "]()", "markdown"):set_end_pair_length(1), -- images
-				rule("=$", "()", "sh"):set_end_pair_length(1), -- variable definitions
-				rule("/*", "  */", { "css", "javascript", "typescript" }):set_end_pair_length(3),
 
-				-- auto-add trailing semicolon, if it's not for a pseudo-class
-				rule(":", ";", "css"):with_pair(notBeforeText(")")):with_pair(notBeforeText(" ")),
+				-- auto-add trailing semicolon, but only for declarations (which are
+				-- at the end of the line and have not text afterwards)
+				rule(":", ";", "css"):with_pair(notAfterRegex(".")),
 
 				-- auto-add trailing comma inside tables/objects
 				rule("=", ",", "lua")

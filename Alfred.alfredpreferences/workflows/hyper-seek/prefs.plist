@@ -7,7 +7,7 @@
 	<key>include_unsafe</key>
 	<true/>
 	<key>inline_results_to_fetch</key>
-	<string>6</string>
+	<string>4</string>
 	<key>log_location</key>
 	<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/search-log.log</string>
 	<key>region</key>

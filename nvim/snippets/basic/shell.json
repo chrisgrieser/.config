@@ -191,7 +191,7 @@
 	},
 	"urlEncode": {
 		"prefix": "urlEncode",
-		"body": "osascript -l JavaScript -e \"encodeURIComponent('$SEL')\""
+		"body": "osascript -l JavaScript -e \"encodeURIComponent('${1:text}')\""
 	},
 	"plist: extract key": {
 		"prefix": "plist: extract key",
