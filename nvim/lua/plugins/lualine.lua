@@ -1,6 +1,5 @@
 local bo = vim.bo
 local fn = vim.fn
-local u = require("config.utils")
 
 --------------------------------------------------------------------------------
 
@@ -114,16 +113,6 @@ end
 
 --------------------------------------------------------------------------------
 
--- FIX Add missing buffer names for current file component
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "lazy", "mason", "TelescopePrompt", "noice" },
-	callback = function()
-		local name = vim.fn.expand("<amatch>")
-		name = name:sub(1, 1):upper() .. name:sub(2) -- capitalize
-		pcall(vim.api.nvim_buf_set_name, 0, name)
-	end,
-})
-
 ---improves upon the default statusline components by having properly working icons
 ---@nodiscard
 local function currentFile()
@@ -145,6 +134,8 @@ local function currentFile()
 	if ftOrExt == "markdown" then ftOrExt = "md" end
 	if ftOrExt == "vimrc" then ftOrExt = "vim" end
 	local icon = deviconsInstalled and devicons.get_icon(name, ftOrExt) or ""
+	-- add sourcegraph icon for clarity
+	if fn.expand("%"):find("^sg") then icon = "󰓁 " .. icon end
 
 	-- truncate
 	local nameNoExt = name:gsub("%.%w+$", "")
@@ -155,6 +146,17 @@ local function currentFile()
 end
 
 --------------------------------------------------------------------------------
+
+-- FIX Add missing buffer names for current file component
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "lazy", "mason", "TelescopePrompt", "noice" },
+	callback = function()
+		local name = vim.fn.expand("<amatch>")
+		name = name:sub(1, 1):upper() .. name:sub(2) -- capitalize
+		pcall(vim.api.nvim_buf_set_name, 0, name)
+	end,
+})
+
 
 -- nerdfont: powerline icons have the prefix 'ple-'
 local bottomSeparators = { left = "", right = "" }
