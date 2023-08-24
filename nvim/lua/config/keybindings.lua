@@ -373,6 +373,7 @@ keymap("n", "ge", function() vim.diagnostic.goto_next { float = true } end, { de
 keymap("n", "gE", function() vim.diagnostic.goto_prev { float = true } end, { desc = "󰒕 Previous Diagnostic" })
 -- stylua: ignore end
 
+-- for filetyes where the LSP has no symbol support
 keymap("n", "gs", function() cmd.Telescope("treesitter") end, { desc = " Document Symbols" })
 
 -- uses "v" instead of "x", so signature can be shown during snippet completion
