@@ -16,10 +16,10 @@ return {
 			}
 
 			-- CUSTOM RULES
+			-- DOCS https://github.com/windwp/nvim-autopairs/wiki/Rules-API
 			local rule = require("nvim-autopairs.rule")
 			local isNodeType = require("nvim-autopairs.ts-conds").is_ts_node
-			local notAfterText = require("nvim-autopairs.conds").not_after_text
-			local notAfterRegex = require("nvim-autopairs.conds").not_after_regex
+			local negLookahead = require("nvim-autopairs.conds").not_after_regex
 
 			require("nvim-autopairs").add_rules {
 				rule("<", ">", "lua"):with_pair(isNodeType("string")), -- keymaps
@@ -29,18 +29,16 @@ return {
 				rule("__", "__", "markdown"), -- bold
 				rule("![", "]()", "markdown"):set_end_pair_length(1), -- images
 
-				-- auto-add trailing semicolon, but only for declarations (which are
-				-- at the end of the line and have not text afterwards)
-				rule(":", ";", "css"):with_pair(notAfterRegex(".")),
+				-- auto-add trailing semicolon, but only for declarations 
+				-- (which are at the end of the line and have no text afterwards)
+				rule(":", ";", "css"):with_pair(negLookahead(".")),
 
 				-- auto-add trailing comma inside tables/objects
 				rule("=", ",", "lua")
-					:with_pair(notAfterText("}")) -- negative conditions have to come first
-					:with_pair(notAfterText(" }"))
+					:with_pair(negLookahead(" ?}")) -- negative conditions have to come first
 					:with_pair(isNodeType("table_constructor")),
 				rule(":", ",", { "javascript", "typescript" })
-					:with_pair(notAfterText("}")) -- negative conditions have to come first
-					:with_pair(notAfterText(" }"))
+					:with_pair(negLookahead(" ?}")) -- negative conditions have to come first
 					:with_pair(isNodeType("object")),
 				rule("", ",") -- automatically move past commas
 					:with_move(function(opts) return opts.char == "," end)
@@ -99,11 +97,9 @@ return {
 				{ char = "l", arg = "lower", desc = "lower case" },
 				{ char = "t", arg = "title", desc = "Title case" },
 				{ char = "c", arg = "camel", desc = "camelCase" },
-				{ char = "p", arg = "pascal", desc = "PascalCase" },
 				{ char = "s", arg = "snake", desc = "snake_case" },
 				{ char = "k", arg = "dash", desc = "kebab-case" },
 				{ char = "/", arg = "path", desc = "path/case" },
-				{ char = ".", arg = "dot", desc = "dot.case" },
 				{ char = "_", arg = "constant", desc = "SCREAMING_SNAKE_CASE" },
 			}
 

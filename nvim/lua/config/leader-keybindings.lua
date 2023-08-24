@@ -180,6 +180,7 @@ keymap("n", "<leader>gM", function() require("funcs.git-utils").amendAndPushForc
 keymap({ "n", "x" }, "<leader>gu", function () require("funcs.git-utils").githubUrl() end, { desc = " GitHub Link" })
 
 -- Octo
+-- customize octo layout: https://github.com/pwntester/octo.nvim/discussions/416#discussioncomment-6812002
 keymap("n", "<leader>gi", function() cmd.Octo({"issue", "list"}) end, { desc = " Open Issues" })
 keymap("n", "<leader>gI", function() cmd.Octo({"issue", "list", "states=CLOSED"}) end, { desc = " Closed Issues" })
 keymap("n", "<leader>gp", function() cmd.Octo({"pr", "list"}) end, { desc = " Open PRs" })

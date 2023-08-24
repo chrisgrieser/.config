@@ -1,6 +1,5 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
-# BUG does not work reliably: https://www.reddit.com/r/neovim/comments/15xsx3t/schema_validation_for_toml_files/
 
 #───────────────────────────────────────────────────────────────────────────────
 # INFO
@@ -10,7 +9,7 @@
 # - some nerd font requires a space after them to be properly sized
 #───────────────────────────────────────────────────────────────────────────────
 
-add_newline = false
+add_newline = true
 continuation_prompt = "↪️ "
 format = """[\
 ${custom.location_indicator}\
@@ -49,8 +48,8 @@ format = "[$symbol]($style)"
 disabled = false
 
 [cmd_duration]
-min_time = 2500
-format = " [󰔟 $duration](bold cyan)"
+min_time = 2000
+format = " [󰔟 $duration](bold cyan) "
 
 [custom.location_indicator]
 description = "Indicate if in my local repo folder"
