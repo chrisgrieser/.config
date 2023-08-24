@@ -153,6 +153,18 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>27C718FF-91BB-4C68-B44E-75CC9EBBE46A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>BFFF841C-EC59-4F59-A44E-EF1E5C706DAC</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>6B6ADED7-8983-46EA-8C7D-2BCEB5043EE7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -1167,6 +1179,27 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>tagged with '{var:tag_to_search}'</string>
+				<key>title</key>
+				<string>🏷️ No file</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>27C718FF-91BB-4C68-B44E-75CC9EBBE46A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>tasksettings</key>
 				<dict>
 					<key>new_tags</key>
@@ -1183,6 +1216,29 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<string>20E0075C-3017-466B-9CF0-FB04449C0CB1</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>echo -n "$(mdfind "kMDItemUserTags == $tag_to_search")"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>count-tagged-files.sh</string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>2839F7DC-68C1-483F-BC90-1A0A504CF70C</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1257,29 +1313,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>echo -n "$(mdfind "kMDItemUserTags == $tag_to_search")"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>count-tagged-files.sh</string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>2839F7DC-68C1-483F-BC90-1A0A504CF70C</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -1311,25 +1344,22 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>6B6ADED7-8983-46EA-8C7D-2BCEB5043EE7</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>conditions</key>
 				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string></string>
+						<key>outputlabel</key>
+						<string>0 files</string>
+						<key>uid</key>
+						<string>BFFF841C-EC59-4F59-A44E-EF1E5C706DAC</string>
+					</dict>
 					<dict>
 						<key>inputstring</key>
 						<string></string>
@@ -1340,7 +1370,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 						<key>matchstring</key>
 						<string>\n</string>
 						<key>outputlabel</key>
-						<string>!= 1 file</string>
+						<string>&gt; 1 file</string>
 						<key>uid</key>
 						<string>70015088-5212-422C-A0F2-805D7517A52D</string>
 					</dict>
@@ -1354,6 +1384,23 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>36C13B5A-F503-434E-B676-6E5A37D6C96D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>6B6ADED7-8983-46EA-8C7D-2BCEB5043EE7</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1397,7 +1444,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>480</real>
 			<key>ypos</key>
-			<real>1035</real>
+			<real>1100</real>
 		</dict>
 		<key>06732C2D-88EF-48DF-81E5-A21235C6E96A</key>
 		<dict>
@@ -1406,7 +1453,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>675</real>
 			<key>ypos</key>
-			<real>1160</real>
+			<real>1225</real>
 		</dict>
 		<key>08389D62-E55B-43D3-80A1-D99149535F3C</key>
 		<dict>
@@ -1464,7 +1511,16 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>675</real>
 			<key>ypos</key>
-			<real>1035</real>
+			<real>1100</real>
+		</dict>
+		<key>27C718FF-91BB-4C68-B44E-75CC9EBBE46A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>485</real>
+			<key>ypos</key>
+			<real>990</real>
 		</dict>
 		<key>2839F7DC-68C1-483F-BC90-1A0A504CF70C</key>
 		<dict>
@@ -1475,7 +1531,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>175</real>
 			<key>ypos</key>
-			<real>1050</real>
+			<real>1100</real>
 		</dict>
 		<key>2B2CC8D8-AB33-455A-BDF2-333C1C7C656F</key>
 		<dict>
@@ -1502,9 +1558,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>320</real>
+			<real>325</real>
 			<key>ypos</key>
-			<real>1070</real>
+			<real>1105</real>
 		</dict>
 		<key>47245CFC-B3E9-4FD6-A021-06D0B87D637C</key>
 		<dict>
@@ -1569,7 +1625,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>415</real>
 			<key>ypos</key>
-			<real>1065</real>
+			<real>1130</real>
 		</dict>
 		<key>75EB64A7-C7B8-455C-A6E7-28745AF96CB9</key>
 		<dict>
@@ -1618,7 +1674,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1050</real>
+			<real>1100</real>
 		</dict>
 		<key>91F1901A-DC76-40BB-A629-0A37A7CDABD7</key>
 		<dict>
@@ -1705,7 +1761,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>480</real>
 			<key>ypos</key>
-			<real>1160</real>
+			<real>1225</real>
 		</dict>
 		<key>DC23B294-25E4-4CEA-841A-71546D15BD89</key>
 		<dict>
@@ -1770,7 +1826,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>825</real>
 			<key>ypos</key>
-			<real>1035</real>
+			<real>1100</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
