@@ -1,5 +1,4 @@
 ## Config structure
-
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img src="https://dotfyle.com/chrisgrieser/config-nvim/badges/plugins?style=flat" /></a>
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img src="https://dotfyle.com/chrisgrieser/config-nvim/badges/leaderkey?style=flat" /></a>
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img src="https://dotfyle.com/chrisgrieser/config-nvim/badges/plugin-manager?style=flat" /></a>
@@ -18,7 +17,7 @@
 └── templates
 ```
 
-Tree *generated* using <https://tree.nathanfriend.io/>
+Tree was *generated* using <https://tree.nathanfriend.io/>
 
 ## All Installed Plugins
 - [bullets.vim](https://github.com/dkarter/bullets.vim)
