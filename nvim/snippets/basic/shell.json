@@ -114,6 +114,10 @@
 		"prefix": "notify (var)",
 		"body": "osascript -e \"display notification \\\"\\\" with title \\\"$${1:var}\\\"\""
 	},
+	"trim whitespace": {
+		"prefix": "trim whitespace",
+		"body": "${1:text}=$(echo -n \"$${1:text}\" | sed -e 's/^ *//' -e 's/ *$//')"
+	},
 	"notify (msg)": {
 		"prefix": "notify (msg)",
 		"body": "osascript -e 'display notification \"\" with title \"${1:msg}\"'"
