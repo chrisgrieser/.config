@@ -7,6 +7,7 @@ local s = {
 	path = { name = "path" },
 	zsh = { name = "zsh" },
 	codeium = { name = "codeium", max_item_count = 3 },
+	snippets = { name = "luasnip" },
 	lsp = { name = "nvim_lsp" },
 	treesitter = { name = "treesitter" },
 	cmdline_history = { name = "cmdline_history", keyword_length = 2 },

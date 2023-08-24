@@ -448,6 +448,3 @@ keymap("n", "<PageDown>", function() scrollHoverWin("down") end, { desc = "Scrol
 keymap("n", "<PageUp>", function() scrollHoverWin("up") end, { desc = "Scroll up hover" })
 
 --------------------------------------------------------------------------------
-
-local b = 1 == 1
-assert(b, "b should be true")

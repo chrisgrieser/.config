@@ -1,4 +1,15 @@
 return {
+	{
+		"sourcegraph/sg.nvim",
+		dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+		keys = {
+			{
+				"<leader>q",
+				"<cmd>lua require('sg.extensions.telescope').fuzzy_search_results()<CR>",
+				desc = "󰓁 SourceGraph Search",
+			},
+		},
+	},
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
@@ -29,7 +40,7 @@ return {
 				rule("__", "__", "markdown"), -- bold
 				rule("![", "]()", "markdown"):set_end_pair_length(1), -- images
 
-				-- auto-add trailing semicolon, but only for declarations 
+				-- auto-add trailing semicolon, but only for declarations
 				-- (which are at the end of the line and have no text afterwards)
 				rule(":", ";", "css"):with_pair(negLookahead(".")),
 
