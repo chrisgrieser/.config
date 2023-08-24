@@ -50,12 +50,12 @@ function M.applyTemplateIfEmptyFile(ext)
 
 	vim.defer_fn(function()
 		local filename = vim.fn.expand("%")
-		local fileExists = vim.fn.filereadable(filename) ~= 0
+		local fileExists = vim.loop.fs_stat(filename) ~= nil
 		if not fileExists then return end
 
 		local skeletonFile = vim.fn.stdpath("config") .. "/templates/skeleton." .. ext
-		local skeletionExists = vim.fn.filereadable(skeletonFile) ~= 0
-		if not skeletionExists then
+		local skeletonExists = vim.loop.fs_stat(skeletonFile) ~= nil
+		if not skeletonExists then
 			vim.notify("Skeleton file not found.", vim.log.levels.ERROR)
 			return
 		end

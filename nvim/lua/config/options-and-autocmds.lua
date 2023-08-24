@@ -164,9 +164,9 @@ autocmd("FileType", {
 -- notify when coming back to a file that does not exist anymore
 autocmd("FocusGained", {
 	callback = function()
-		local fileDoesNotExist = vim.fn.filereadable(vim.fn.expand("%")) == 0
+		local fileExists = vim.loop.fs_stat(vim.fn.expand("%")) ~= nil
 		local specialBuffer = vim.bo.buftype ~= ""
-		if fileDoesNotExist and not specialBuffer then
+		if not fileExists and not specialBuffer then
 			vim.notify("File does not exist anymore.", u.warn, { timeout = 20000 })
 		end
 	end,

@@ -1,14 +1,38 @@
 return {
+	{ -- code search
+		-- requires access tokens: https://github.com/sourcegraph/sg.nvim#setup
+		-- which in my case are set in .zshenv (private dotfiles)
+		"sourcegraph/sg.nvim",
+		dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+		keys = {
+			{
+				"<leader>S",
+				function() require("sg.extensions.telescope").fuzzy_search_results() end,
+				desc = "󰓁 SourceGraph Search",
+			},
+			{
+				"<leader>S",
+				function() require("sg.extensions.telescope").fuzzy_search_results() end,
+				desc = "󰓁 SourceGraph Search",
+			},
+		},
+		init = function()
+			local ok, whichKey = pcall(require, "which-key")
+			if ok then whichKey.register { ["<leader>"] = { name = "  Debugger" } } end
+		end,
+	},
 	{ -- AI Ghost Text Suggestions
 		"Exafunction/codeium.vim",
 		event = "InsertEnter",
 		build = function()
-			-- HACK enable	syncing of API key
+			-- symlink to enable syncing of API key
 			local symLinkFrom = vim.env.DATA_DIR .. "/private dotfiles/codium-api-key.json"
-			local symLinkTo = vim.env.HOME .. "/.codeium/config.json"
-			pcall(vim.fn.mkdir, vim.fs.dirname(symLinkTo))
-			os.remove(symLinkTo)
-			vim.loop.fs_symlink(symLinkFrom, symLinkTo)
+			local symLinkTo = os.getenv("HOME") .. "/.codeium/config.json"
+			local fileExists = vim.loop.fs_stat(symLinkTo) ~= nil
+			if not fileExists then
+				pcall(vim.fn.mkdir, vim.fs.dirname(symLinkTo))
+				vim.loop.fs_symlink(symLinkFrom, symLinkTo)
+			end
 		end,
 		config = function()
 			vim.g.codeium_idle_delay = 75 -- minimum 75
@@ -16,8 +40,10 @@ return {
 
 			-- INFO if cmp visible, will use cmp selection instead.
 			vim.g.codeium_disable_bindings = 1
+			-- stylua: ignore start
 			vim.keymap.set("i", "<Tab>", function() return vim.fn["codeium#Accept"]() end, { expr = true, desc = "󰚩 Accept Suggestion", silent = true })
 			vim.keymap.set("i", "<D-s>", function() return vim.fn["codeium#Accept"]() end, { expr = true, desc = "󰚩 Accept Suggestion", silent = true })
+			-- stylua: ignore end
 		end,
 	},
 	{ -- AI completions via cmp

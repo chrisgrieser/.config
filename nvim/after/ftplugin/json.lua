@@ -14,7 +14,7 @@ local function leaveVisualMode()
 end
 
 -- escape stuff properly for VS Code Style snippet
-keymap("n", "<localleader>f", function()
+keymap("n", "<localleader>e", function()
 	u.normal("'[v']") -- select last paste
 	leaveVisualMode() -- -> sets '<,'> marks
 	cmd([['<,'>s/\\/\\\\/ge]]) -- escape the escaping backslashes
