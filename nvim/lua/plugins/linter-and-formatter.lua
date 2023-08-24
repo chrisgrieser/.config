@@ -1,7 +1,7 @@
 local linterConfig = require("config.utils").linterConfigFolder
 local lintersAndFormatters = {
 	"yamllint", -- only for diagnostics
-	"shellcheck", -- needed for bash-lsp
+	"shellcheck",
 	"shfmt", -- shell
 	"markdownlint",
 	"black", -- python formatter
@@ -132,6 +132,11 @@ local function formatterConfigs()
 		stdin = true,
 		args = { "--fix", "--stdin", "--stdin-filename" },
 	}
+	local shellharden = {
+		exe = "shellharden",
+		stdin = false,
+		args = { "--replace" },
+	}
 
 	local codespell = {
 		exe = "codespell",
@@ -146,8 +151,8 @@ local function formatterConfigs()
 
 	local filetypes = {
 		lua = { require("formatter.filetypes.lua").stylua },
-		sh = { require("formatter.filetypes.sh").shfmt },
-		zsh = { require("formatter.filetypes.sh").shfmt },
+		sh = { require("formatter.filetypes.sh").shfmt, shellharden },
+		zsh = { require("formatter.filetypes.sh").shfmt, },
 		python = { require("formatter.filetypes.python").black },
 		html = { require("formatter.filetypes.html").prettier },
 		yaml = { require("formatter.filetypes.yaml").prettier },
@@ -186,7 +191,7 @@ return {
 				ensure_installed = lintersAndFormatters,
 				run_on_start = false,
 			}
-			vim.defer_fn(vim.cmd.MasonToolsInstall, 500)
+			vim.defer_fn(vim.cmd.MasonToolsInstall, 1000)
 		end,
 	},
 	{
