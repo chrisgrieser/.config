@@ -11,6 +11,14 @@ local abbr = vim.cmd.inoreabbrev
 
 --------------------------------------------------------------------------------
 
+-- bash-lsp has no symbol support, so using treesitter instead
+keymap(
+	"n",
+	"gs",
+	function() vim.cmd.Telescope("treesitter") end,
+	{ desc = " Document Symbols", buffer = true }
+)
+
 -- https://wezfurlong.org/wezterm/cli/cli/send-text
 local function sendToWezTerm()
 	fn.system([[
@@ -31,8 +39,7 @@ local function sendToWezTerm()
 		u.normal('"zy')
 		text = fn.getreg("z"):gsub("\n$", "")
 	end
-	fn.system({"wezterm", "send-text", "--no-paste", text})
-
+	fn.system { "wezterm", "send-text", "--no-paste", text }
 end
 
 keymap({ "n", "x" }, "<localleader>t", sendToWezTerm, { desc = " Send to WezTerm", buffer = true })
@@ -64,4 +71,3 @@ keymap("n", "<localleader><localleader>", function()
 		vim.notify("Not in a sketchybar directory.", u.warn)
 	end
 end, { buffer = true, desc = "  Reload sketchybar" })
-
