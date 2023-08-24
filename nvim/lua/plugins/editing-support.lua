@@ -1,15 +1,4 @@
 return {
-	{
-		"sourcegraph/sg.nvim",
-		dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
-		keys = {
-			{
-				"<leader>q",
-				"<cmd>lua require('sg.extensions.telescope').fuzzy_search_results()<CR>",
-				desc = "󰓁 SourceGraph Search",
-			},
-		},
-	},
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
@@ -48,7 +37,7 @@ return {
 				rule("=", ",", "lua")
 					:with_pair(negLookahead(" ?}")) -- negative conditions have to come first
 					:with_pair(isNodeType("table_constructor")),
-				rule(":", ",", { "javascript", "typescript" })
+				rule(":", ",", { "javascript", "typescript", "json" })
 					:with_pair(negLookahead(" ?}")) -- negative conditions have to come first
 					:with_pair(isNodeType("object")),
 				rule("", ",") -- automatically move past commas

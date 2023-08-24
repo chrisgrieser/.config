@@ -116,7 +116,7 @@ end, vim.api.nvim_create_namespace("auto_nohl"))
 
 -- QUICKFIX
 keymap("n", "gq", function() require("funcs.quickfix").next() end, { desc = " Next Quickfix" })
-keymap("n", "gQ", function() require("funcs.quickfix").prev() end, { desc = " Prev Quickfix" })
+keymap("n", "gQ", function() require("funcs.quickfix").previous() end, { desc = " Prev Quickfix" })
 keymap("n", "dQ", require("funcs.quickfix").deleteList, { desc = " Empty Quickfix List" })
 
 -- COMMENTS & ANNOTATIONS

@@ -7,6 +7,10 @@
 		"prefix": "utils (require)",
 		"body": "local u = require(\"config.utils\")"
 	},
+	"check if file exists": {
+		"prefix": "check if file exists",
+		"body": "local fileExists = vim.loop.fs_stat(\"${1:filepath}\") ~= nil"
+	},
 	"keymap (multi-mode)": {
 		"prefix": "keymap (multi-mode)",
 		"body": "keymap({ \"n\", \"x\" }, \"${1:LHS}\", ${2:\"RHS\"}, { desc = \"$3\" })"
@@ -36,30 +40,10 @@
 			"end)"
 		]
 	},
-	"select (vim.ui)": {
-		"prefix": "select (vim.ui)",
-		"body": [
-			"local ${1:list} = {}",
-			"vim.ui.select(${1:list}, { prompt = \"${2:prompt_msg}\" }, function (choice)",
-			"\tif not choice then return end",
-			"\t$3",
-			"end)"
-		]
-	},
 	"autocmd": {
-		"prefix": "autocmd (short)",
+		"prefix": "autocmd",
 		"body": [
-			"autocmd(\"${1|BufReadPost,ColorScheme|}\", {",
-			"\tcallback = function()",
-			"\t\t$0",
-			"\tend,",
-			"})"
-		]
-	},
-	"autocmd (unabbr)": {
-		"prefix": "autocmd (unabbr)",
-		"body": [
-			"autocmd(\"${1|BufReadPost,ColorScheme|}\", {",
+			"vim.api.nvim_create_autocmd(\"${1|BufReadPost,ColorScheme|}\", {",
 			"\tcallback = function()",
 			"\t\t$0",
 			"\tend,",

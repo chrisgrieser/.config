@@ -41,7 +41,7 @@ local function altOldfile()
 		i = i + 1
 		if i > #vim.v.oldfiles then return nil end
 		oldfile = vim.v.oldfiles[i]
-		local fileExists = fn.filereadable(oldfile) == 1
+		local fileExists = vim.loop.fs_stat(oldfile) ~= nil
 		local isCurrentFile = oldfile == fn.expand("%:p")
 		local commitMsg = oldfile:find("COMMIT_EDITMSG$")
 		local harpoonMenu = oldfile:find("harpoon%-menu$")
@@ -61,7 +61,7 @@ function M.altFileStatusline()
 	local name, icon = "", ""
 	local altBufNr = vim.fn.bufnr("#")---@diagnostic disable-line: param-type-mismatch
 	local specialFile = altBufNr > -1 and vim.api.nvim_buf_get_option(altBufNr, "buftype") or false
-	local fileExists = fn.filereadable(altPath) ~= 0
+	local fileExists = vim.loop.fs_stat(altPath) ~= nil
 	local hasAltFile = altFile ~= "" and altPath ~= curPath and (fileExists or specialFile)
 
 	if hasAltFile then
@@ -106,7 +106,7 @@ function M.altBufferWindow()
 	local curPath = fn.expand("%:p")
 	local altBufNr = vim.fn.bufnr("#")---@diagnostic disable-line: param-type-mismatch
 	local specialFile = altBufNr > -1 and vim.api.nvim_buf_get_option(altBufNr, "buftype") or false
-	local fileExists = fn.filereadable(altPath) ~= 0
+	local fileExists = vim.loop.fs_stat(altPath) ~= nil
 	local hasAltFile = altFile ~= "" and altPath ~= curPath and (fileExists or specialFile)
 
 	if hasAltFile and (altPath ~= curPath) then
@@ -127,7 +127,7 @@ function M.betterClose()
 	end
 
 	local absPath = fn.expand("%:p")
-	local fileExists = vim.fn.filereadable(absPath) ~= 0
+	local fileExists = vim.loop.fs_stat(absPath) ~= nil
 	if vim.bo.modifiable and absPath and fileExists then cmd("silent update " .. absPath) end
 
 	-- close window
