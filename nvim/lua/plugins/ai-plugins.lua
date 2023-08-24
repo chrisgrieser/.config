@@ -7,7 +7,10 @@ return {
 		keys = {
 			{
 				"<leader>qq",
-				function() require("sg.extensions.telescope").fuzzy_search_results() end,
+				function()
+					require("sg.extensions.telescope").fuzzy_search_results()
+					vim.cmd.bwipeout("#") -- remov temp buffer created in meantime
+				end,
 				desc = "󰓁 SourceGraph Search",
 			},
 			{ "<leader>qu", "<cmd>SourcegraphLink<CR>", desc = "󰓁 Copy SourceGraph URL" },
