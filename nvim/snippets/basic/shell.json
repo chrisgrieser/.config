@@ -22,7 +22,7 @@
 	},
 	"ls → find": {
 		"prefix": "ls → find",
-		"body": "find . -maxdepth 1",
+		"body": "find . -maxdepth 1 -mindepth 1",
 		"description": "shellcheck recommends using find instead of ls for most cases (SC2045)."
 	},
 	"default arg value": {
