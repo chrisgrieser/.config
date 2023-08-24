@@ -45,6 +45,11 @@ function unlock() {
 	echo "Lock file removed."
 }
 
+bla="333 ff"
+if [ $bla == "aa" ]; then
+	echo "bla is 12"
+fi
+
 # https://stackoverflow.com/a/17937889
 function unshallow() {
 	git fetch --unshallow

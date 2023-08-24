@@ -119,19 +119,6 @@ end
 
 --------------------------------------------------------------------------------
 
-vim.api.nvim_create_autocmd("BufWritePost", {
-	callback = function()
-		if not vim.bo.filetype == "sh" then return end
-		local filepath = vim.fn.expand("%:p")
-		vim.notify("🪚 beep 👽")
-		-- https://github.com/koalaman/shellcheck/issues/1220#issuecomment-594811243
-		local shellCmd = "shellcheck --shell=bash --format=diff '" .. filepath .. "' | git apply"
-		local output = vim.fn.system(shellCmd)
-		vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(output, "\n"))
-		vim.cmd.checktime()
-	end,
-})
-
 local function formatterConfigs()
 	-- TODO add formatters? https://github.com/mhartington/formatter.nvim/pulls
 	local rome = {
@@ -157,10 +144,16 @@ local function formatterConfigs()
 		},
 	}
 
+	local shellharden = {
+		exe = "shellharden",
+		stdin = false, -- using `--transform` and stdin does not seem to work
+		args = { "--replace" },
+	}
+
 	local filetypes = {
 		lua = { require("formatter.filetypes.lua").stylua },
-		sh = { require("formatter.filetypes.sh").shfmt },
-		zsh = { require("formatter.filetypes.sh").shfmt },
+		sh = { require("formatter.filetypes.sh").shfmt, shellharden },
+		zsh = { require("formatter.filetypes.sh").shfmt, shellharden },
 		python = { require("formatter.filetypes.python").black },
 		html = { require("formatter.filetypes.html").prettier },
 		yaml = { require("formatter.filetypes.yaml").prettier },
