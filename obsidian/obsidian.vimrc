@@ -111,6 +111,10 @@ exmap quickSwitcher obcommand obsidian-another-quick-switcher:search-command_rec
 nnoremap go :quickSwitcher
 nnoremap gr :quickSwitcher
 
+" 2-step links, roughly si ilar to LSP references
+exmap linkedSearch obcommand obsidian-another-quick-switcher:search-command_2-step-link-search
+nnoremap gf :linkedSearch
+
 " go to last change (HACK, only works to jump to the last location)
 nnoremap g, u<C-r>
 
@@ -195,11 +199,11 @@ nnoremap M :mergeLines
 " - cannot use `nnoremap` for whatever reason
 exmap blankAbove obcommand obsidian-editor-shortcuts:insertLineAbove
 nmap &a& :blankAbove
-nmap O &a&i
+nnoremap O &a&i
 
 exmap blankBelow obcommand obsidian-editor-shortcuts:insertLineBelow
 nmap &b& :blankBelow
-nmap o &b&i
+nnoremap o &b&i
 
 " Add Blank Line above/below
 " HACK not using mz...`z since m remapped
@@ -223,8 +227,8 @@ nnoremap ,y 3ggA
 
 " [g]oto [f]ootnotes
 " requires Footnotes Shortcut Plugin
-exmap gotoFootnoteDefinition obcommand obsidian-footnotes:insert-autonumbered-footnote
-nnoremap gf :gotoFootnoteDefinition
+exmap gotoFootnote obcommand obsidian-footnotes:insert-autonumbered-footnote
+nnoremap ,f :gotoFootnote
 
 " Blockquote
 exmap toggleBlockquote obcommand editor:toggle-blockquote
