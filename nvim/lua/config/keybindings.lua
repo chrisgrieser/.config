@@ -242,7 +242,7 @@ keymap("n", "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
 keymap("n", "C", '"_C')
 keymap("x", "p", "P", { desc = "Paste without switching register" })
-keymap("n", "<leader>d", '"_d', { desc = "Delete w/o register" })
+keymap("n", "<leader>d", '"_d', { desc = "󱎘 Delete w/o register" })
 
 -- do not clutter the register if blank line is deleted
 keymap("n", "dd", function()
