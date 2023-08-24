@@ -418,7 +418,7 @@ autocmd("FileType", {
 		"man",
 	},
 	callback = function()
-		local opts = { buffer = true, nowait = true, desc = " Close" }
+		local opts = { buffer = true, nowait = true, desc = "󱎘 Close" }
 		keymap("n", "<Esc>", cmd.close, opts)
 		keymap("n", "q", cmd.close, opts)
 	end,
