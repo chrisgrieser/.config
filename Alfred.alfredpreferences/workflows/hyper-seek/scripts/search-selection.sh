@@ -24,8 +24,8 @@ if [[ -z "$SEL" ]]; then
 fi
 
 # clean up
-SEL=$(echo -n "$SEL" | sed 's/^[[:space:]]*//') # trims whitespace
-SEL="${SEL/#\~/$HOME}"                          # resolve ~
+SEL=$(echo -n "$SEL" | sed -e 's/^ *//' -e 's/ *$//') # trims whitespace
+SEL="${SEL/#\~/$HOME}"                                # resolve ~
 
 # openers
 if [[ -f "$SEL" ]]; then # file

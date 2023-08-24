@@ -38,7 +38,7 @@ sourceId=$(curl -X POST "https://api.chatpdf.com/v1/sources/add-file" \
 osascript -e 'display notification "🤖 Requesting Summary…" with title "PDF Summarizer"'
 
 # make prompt safe for JSON
-the_prompt="$(echo -n "$the_prompt" | tr -d '\n' | sed 's/"/\\"/g')"
+the_prompt="$(echo -n "$the_prompt" | tr "\n" " " | sed 's/"/\\"/g')"
 
 # INFO do not use `$prompt`, since it's a reserved zsh variable
 content=$(curl -X POST "https://api.chatpdf.com/v1/chats/message" \
