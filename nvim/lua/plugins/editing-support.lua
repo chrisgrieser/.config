@@ -35,10 +35,10 @@ return {
 
 				-- auto-add trailing comma inside tables/objects
 				rule("=", ",", "lua")
-					:with_pair(negLookahead(" ?}")) -- negative conditions have to come first
+					:with_pair(negLookahead(" ?}", 3)) -- not in one-liner
 					:with_pair(isNodeType("table_constructor")),
 				rule(":", ",", { "javascript", "typescript", "json" })
-					:with_pair(negLookahead(" ?}")) -- negative conditions have to come first
+					:with_pair(negLookahead(" ?}", 3)) -- not in one-liner
 					:with_pair(isNodeType("object")),
 				rule("", ",") -- automatically move past commas
 					:with_move(function(opts) return opts.char == "," end)

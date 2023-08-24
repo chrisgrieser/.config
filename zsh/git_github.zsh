@@ -299,9 +299,9 @@ function gdf() {
 	deletion_commit=$(git log --format='%h' --follow -- "$deleted_path" | head -n1)
 	last_commit=$(git show --format='%h' "$deletion_commit^" | head -n1)
 	if [[ -z "$selection" ]]; then
-		print "🔍\033[1;32m One file found:"
+		print "🔍\033[1;32m One file found:\033[0m"
 	else
-		print "🔍\033[1;32m Selected file:"
+		print "🔍\033[1;32m Selected file:\033[0m"
 	fi
 
 	# decision on how to act on file
