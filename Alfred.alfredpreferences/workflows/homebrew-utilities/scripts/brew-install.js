@@ -51,7 +51,6 @@ function cacheIsOutdated(path) {
 // MAIN DATA
 /** @typedef {object} Formula
  * @property {string} name
- * @property {string[]} dependencies
  * @property {string} caveats
  * @property {string} desc
  * @property {string} homepage
@@ -142,7 +141,6 @@ function run() {
 	const formulas = formulaData.map((/** @type {Formula} */ formula) => {
 		const name = formula.name;
 		const installedIcon = installedBrews.includes(name) ? " ✅" : "";
-		const dependencies = formula.dependencies.length > 0 ? `+${formula.dependencies.length}d  ` : "";
 		const caveatText = formula.caveats || "";
 		const caveats = caveatText ? caveatIcon + " " : "";
 		const downloads = formulaDownloads[name] ? `${formulaDownloads[name][0].count}↓ ` : "";
@@ -151,7 +149,7 @@ function run() {
 		return {
 			title: name + installedIcon,
 			match: alfredMatcher(name) + desc,
-			subtitle: `${formulaIcon} ${caveats}${dependencies}${downloads} ${desc}`,
+			subtitle: `${formulaIcon} ${caveats}${downloads} ${desc}`,
 			arg: `--formula ${name}`,
 			text: {
 				largetype: caveatText,

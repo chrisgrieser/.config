@@ -1,6 +1,6 @@
 #───────────────────────────────────────────────────────────────────────────────
 # https://www.soberkoder.com/better-zsh-history/
-export HISTSIZE=4000
+export HISTSIZE=50000
 export SAVEHIST=$HISTSIZE
 export HISTFILE="$DATA_DIR/zsh_history"
 

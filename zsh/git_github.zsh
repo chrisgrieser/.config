@@ -88,7 +88,6 @@ function gitlog() {
 	# DOCS https://git-scm.com/docs/git-log#_pretty_formats
 	local length
 	[[ -n "$1" ]] && length="-n $1"
-	# shellcheck disable=2086
 	git log $length --all --color --graph \
 		--format='%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' |
 		sed -e 's/ seconds ago)/s)/' \
@@ -255,7 +254,7 @@ function nuke {
 	SSH_REMOTE=$(git remote -v | head -n1 | cut -d" " -f1 | cut -d$'	' -f2)
 	# go to git repo root
 	cd "$(git rev-parse --show-toplevel)" || return 1
-	local_repo_path=$(pwd)
+	local_repo_path=$PWD
 	cd ..
 
 	command rm -rf "$local_repo_path"
