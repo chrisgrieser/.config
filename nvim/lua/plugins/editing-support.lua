@@ -36,7 +36,7 @@ return {
 				-- auto-add trailing comma inside tables/objects
 				rule("=", ",", "lua")
 					:with_pair(negLookahead(" ?}", 3)) -- not in one-liner
-					:with_pair(isNodeType("table_constructor")),
+					:with_pair(isNodeType { "table_constructor", "field" }),
 				rule(":", ",", { "javascript", "typescript", "json" })
 					:with_pair(negLookahead(" ?}", 3)) -- not in one-liner
 					:with_pair(isNodeType("object")),

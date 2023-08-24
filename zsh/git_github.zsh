@@ -45,6 +45,11 @@ function unlock() {
 	echo "Lock file removed."
 }
 
+bla="333 ff"
+if [ $bla == "aa" ]; then
+	echo "bla is 12"
+fi
+
 # https://stackoverflow.com/a/17937889
 function unshallow() {
 	git fetch --unshallow
@@ -86,9 +91,9 @@ function delta() {
 
 function gitlog() {
 	# DOCS https://git-scm.com/docs/git-log#_pretty_formats
-	local length
-	[[ -n "$1" ]] && length="-n $1"
-	git log $length --all --color --graph \
+	local length=()
+	[[ -n "$1" ]] && length=(-n "$1")
+	git log "${length[@]}" --all --color --graph \
 		--format='%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' |
 		sed -e 's/ seconds ago)/s)/' \
 			-e 's/ minutes ago)/m)/' \
@@ -195,9 +200,9 @@ function ac() {
 
 	# commit msg
 	if [[ $# -eq 0 ]]; then
-		commit_msg="chore"
+		commit_msg=chore
 	else
-		commit_msg="$1"
+		commit_msg=$1
 		# ensure no overlength of commit msg
 		msg_length=${#commit_msg}
 		if [[ $msg_length -gt 50 ]]; then
