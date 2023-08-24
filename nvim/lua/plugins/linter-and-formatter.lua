@@ -153,7 +153,6 @@ local function formatterConfigs()
 	local filetypes = {
 		lua = { require("formatter.filetypes.lua").stylua },
 		sh = { require("formatter.filetypes.sh").shfmt, shellharden },
-		zsh = { require("formatter.filetypes.sh").shfmt, shellharden },
 		python = { require("formatter.filetypes.python").black },
 		html = { require("formatter.filetypes.html").prettier },
 		yaml = { require("formatter.filetypes.yaml").prettier },
@@ -192,7 +191,7 @@ return {
 				ensure_installed = lintersAndFormatters,
 				run_on_start = false,
 			}
-			vim.defer_fn(vim.cmd.MasonToolsInstall, 1000)
+			vim.defer_fn(vim.cmd.MasonToolsInstall, 500)
 		end,
 	},
 	{
