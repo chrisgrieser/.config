@@ -18,7 +18,6 @@ return {
 					repl_open_cmd = require("iron.view").split.horizontal.belowright(8),
 					repl_definition = {
 						sh = { command = { "zsh" } },
-						lua = { command = { "lua" } },
 						typescript = { command = { "node" } },
 						python = { command = { "python3" } },
 						javascript = { command = { "osascript", "-i", "-l", "JavaScript" } },
@@ -71,20 +70,21 @@ return {
 			local keymap = vim.keymap.set
 
 			a.nvim_create_user_command("Rest", function()
+				local ll = vim.g.maplocalleader
 				vim.cmd.tabnew()
 				a.nvim_buf_set_option(0, "filetype", "http")
 				a.nvim_buf_set_option(0, "buftype", "nofile")
 				a.nvim_buf_set_name(0, "HTTP Request")
 				-- stylua: ignore start
-				keymap("n", "<leader>r", "<Plug>RestNvim", { desc = "󰴚 Run Request under cursor", buffer = true })
-				keymap("n", "<leader>la", "<Plug>RestNvimLast", { desc = "󰴚 Re-run the last request", buffer = true })
-				keymap( "n", "<leader>e", function() 
+				keymap("n", "<localleader>r", "<Plug>RestNvim", { desc = "󰴚 Run Request under cursor", buffer = true })
+				keymap("n", "<localleader>la", "<Plug>RestNvimLast", { desc = "󰴚 Re-run the last request", buffer = true })
+				keymap( "n", "<localleader>e", function() 
 					vim.fn.system { "open", "https://github.com/rest-nvim/rest.nvim/tree/main/tests" }
 				end, { desc = "󰴚 Show example requests", buffer = true })
-				vim.notify([[ BINDINGS
-,r   run request under cursor
-,la  run last request again
-,e   show examples for syntax]],
+				vim.notify(([[ BINDINGS
+%sr   run request under cursor
+%s%s  run last request again
+%se   show examples for syntax]]):format(ll, ll, ll),
 					vim.log.levels.INFO, { timeout = 10000 })
 				-- stylua: ignore end
 			end, {})
@@ -98,7 +98,7 @@ return {
 				show_headers = false,
 				formatters = {
 					json = function(body)
-						return vim.fn.system { "rome", "format", "--stdin-file-path", "foo.json", body }
+						return vim.fn.system { "rome", "format", "--stdin", "--stdin-file-path", "foo.json", body }
 					end,
 					-- prettier already needed since it's the only proper yaml formatter
 					html = function(body) return vim.fn.system { "prettier", "--parser=html", body } end,
