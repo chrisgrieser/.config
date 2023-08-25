@@ -2,8 +2,8 @@ return {
 	{
 		"chrisgrieser/regex.nvim",
 		cmd = "RegexHelper",
-		-- SIC `setup` must be uppercased
-		config = function() require("regex-nvim").Setup() end, 
+		dev = true,
+		opts = true,
 	},
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
