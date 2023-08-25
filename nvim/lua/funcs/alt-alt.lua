@@ -124,8 +124,7 @@ end
 ---Close window/buffer, preserving alt-file
 function M.betterClose()
 	if vim.bo.buftype ~= "" then
-		local success = pcall(cmd.bwipeout, { bang = true })
-		if not success then vim.notify("Could not delete buffer.", vim.log.levels.WARN) end
+		pcall(cmd.bwipeout, { bang = true })
 		return
 	end
 
