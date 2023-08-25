@@ -9,7 +9,7 @@ return {
 				"<leader>qq",
 				function()
 					require("sg.extensions.telescope").fuzzy_search_results()
-					vim.cmd.bwipeout("#") -- remov temp buffer created in meantime
+					vim.cmd.bwipeout("#") -- remove temp buffer temporarily created
 				end,
 				desc = "󰓁 SourceGraph Search",
 			},
