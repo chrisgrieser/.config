@@ -18,10 +18,6 @@ local beepEmojis = { "🤖", "👽", "👾", "💣" }
 
 --------------------------------------------------------------------------------
 
-local function tes()
-	vim.blubb = 1
-end
-
 ---in normal mode, returns word under cursor, in visual mode, returns selection
 ---@return string?
 local function getVar()
@@ -29,7 +25,10 @@ local function getVar()
 	if fn.mode() == "n" then
 		local node = vim.treesitter.get_node()
 		if not node then return "" end
-		varname = vim.treesitter.get_node_text(node, 0):gsub("[\n\r].*", "")
+		if node:type() == "identifier" and node:parent():type() ~= "expression_list" then
+			node = node:parent()
+		end
+		varname = vim.treesitter.get_node_text(node, 0)
 	elseif fn.mode():find("[Vv]") then
 		local prevReg = fn.getreg("z")
 		normal('"zy')
