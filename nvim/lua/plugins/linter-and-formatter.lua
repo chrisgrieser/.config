@@ -205,7 +205,11 @@ return {
 	{
 		"mhartington/formatter.nvim",
 		keys = {
-			{ "<D-s>", "<cmd>FormatWrite<CR>", desc = "󰒕  Save & Format" },
+			{ "<D-s>", function()
+				vim.cmd.mkview(9) -- to save folds when formatting
+				vim.cmd.FormatWrite()
+				vim.defer_fn(function() vim.cmd.loadview(9) end, 200)
+			end, desc = "󰒕  Save & Format", },
 		},
 		config = formatterConfigs,
 	},

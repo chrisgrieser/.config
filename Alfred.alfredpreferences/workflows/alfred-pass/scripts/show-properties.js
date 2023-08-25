@@ -19,18 +19,17 @@ function run(argv) {
 		.filter(line => line !== "")
 		.map(property => {
 			const valid = property.includes(":");
-			const key = valid ? property.split(":")[0].trim() : "[no key]";
-			const value = valid ? property.slice(property.indexOf(":") + 1).trim() : property;
+			const key = valid ? property.split(":")[0].trim() : "";
+			const value = valid ? property.slice(property.indexOf(":") + 1).trim() : property.toUpperCase();
 			return {
 				title: value,
 				match: property,
 				subtitle: key,
 				arg: value,
+				valid: valid,
 			};
 		})
 	
 
-	return JSON.stringify({
-		items: properties,
-	});
+	return JSON.stringify({ items: properties });
 }
