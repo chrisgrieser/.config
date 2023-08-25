@@ -29,6 +29,8 @@ end, { buffer = true, desc = " npm run build" })
 
 --------------------------------------------------------------------------------
 
+keymap("n", "<localleader>R", vim.cmd.RegexHelper, { desc = " RegexHelper", buffer = true })
+
 -- Open regex in regex101
 keymap("n", "<localleader>r", function()
 	-- keymaps assume a/ and i/ mapped as regex textobj via treesitter textobj

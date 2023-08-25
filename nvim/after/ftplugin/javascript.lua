@@ -12,6 +12,8 @@ u.applyTemplateIfEmptyFile("js")
 
 --------------------------------------------------------------------------------
 
+keymap("n", "<localleader>R", vim.cmd.RegexHelper, { desc = " RegexHelper", buffer = true })
+
 -- Open regex in regex101 and regexper (railroad diagram)
 keymap("n", "<localleader>r", function()
 	-- keymaps assume a/ and i/ mapped as regex textobj via treesitter textobj

@@ -88,6 +88,7 @@ return {
 					enter = true,
 					size = "40%",
 					close = { keys = { "q", "<D-w>", "<D-0>" } },
+					win_options = { scrolloff = 2 },
 				},
 			},
 			commands = {

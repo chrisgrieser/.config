@@ -1,8 +1,9 @@
 return {
 	{
-		"Djancyp/regex.nvim",
-		ft = { "javascript", "typescript" },
-		config = function() require("regex-nvim").Setup() end,
+		"chrisgrieser/regex.nvim",
+		cmd = "RegexHelper",
+		-- SIC `setup` must be uppercased
+		config = function() require("regex-nvim").Setup() end, 
 	},
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
