@@ -61,6 +61,17 @@
 			<key>url</key>
 			<string>https://chrome.google.com/webstore/search/{query}</string>
 		</dict>
+		<key>860C690D-E5AC-44B5-B046-4D5927A12946</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>npm</string>
+			<key>text</key>
+			<string>NPM Packages: {query}</string>
+			<key>url</key>
+			<string>https://www.npmjs.com/search?q={query}</string>
+		</dict>
 		<key>9672465E-E164-4221-9824-0E164A40E39B</key>
 		<dict>
 			<key>enabled</key>

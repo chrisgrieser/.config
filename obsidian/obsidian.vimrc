@@ -194,16 +194,14 @@ exmap mergeLines obcommand obsidian-editor-shortcuts:joinLines
 exmap mergeLines obcommand obsidian-editor-shortcuts:joinLines
 nnoremap M :mergeLines
 
-" Make o and O respect context
-" - requires Code Editor Shortcuts Plugin
-" - cannot use `nnoremap` for whatever reason
+" Make o and O respect context (requires Code Editor Shortcuts Plugin)
 exmap blankAbove obcommand obsidian-editor-shortcuts:insertLineAbove
 nmap &a& :blankAbove
-nnoremap O &a&i
+nmap O &a&i
 
 exmap blankBelow obcommand obsidian-editor-shortcuts:insertLineBelow
 nmap &b& :blankBelow
-nnoremap o &b&i
+nmap o &b&i
 
 " Add Blank Line above/below
 " HACK not using mz...`z since m remapped

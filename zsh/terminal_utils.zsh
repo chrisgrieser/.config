@@ -28,7 +28,7 @@ function inspect() {
 
 	# GIT LOG & STATUS
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
-		gitlog $max_gitlog_lines
+		gitlog "$max_gitlog_lines"
 		separator
 		if [[ -n "$(git status --short --porcelain)" ]]; then
 			git -c color.status="always" status --short | rs -e -w"$(tput cols)"
@@ -45,7 +45,7 @@ function inspect() {
 		--icons --git-ignore --ignore-glob=".DS_Store|Icon?" --sort=name \
 		--group-directories-first)
 	if [[ $(echo "$exa_output" | wc -l) -gt $max_files_lines ]]; then
-		echo "$exa_output" | head -n$max_files_lines
+		echo "$exa_output" | head -n"$max_files_lines"
 		print "\033[1;34m(…)\033[0m" # blue = exa's default folder color
 	else
 		# not using `[[ -n ]] &&` as that results in exit code 1
@@ -135,7 +135,7 @@ function w {
 	if ! command -v walk &>/dev/null; then print "\033[1;33mwalk not installed.\033[0m" && return 1; fi
 	export WALK_EDITOR="open" # macos default app
 
-	if command -v __zoxide_z &>/dev/null; then 
+	if command -v __zoxide_z &>/dev/null; then
 		__zoxide_z "$(walk --icons "$@")"
 	else
 		cd "$(walk --icons "$@")" || return 1
