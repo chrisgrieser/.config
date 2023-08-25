@@ -85,7 +85,7 @@ local function linterConfigs()
 		local diagnostics = {}
 		for _, diag in ipairs(decoded.warnings) do
 			-- filtering order-violations, since they are auto-fixed and and would
-			-- only add noise
+			-- only add noise.
 			if diag.rule ~= "order/properties-order" then
 				table.insert(diagnostics, {
 					lnum = diag.line - 1,
@@ -95,7 +95,7 @@ local function linterConfigs()
 					message = diag.text:gsub("%b()", ""),
 					code = diag.rule,
 					user_data = { lsp = { code = diag.rule } },
-					severity = vim.diagnostic.severity.ERROR,
+					severity = vim.diagnostic.severity.WARN, -- output all as warnings
 					source = "stylelint",
 				})
 			end
