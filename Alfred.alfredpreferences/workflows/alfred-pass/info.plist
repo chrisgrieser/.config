@@ -845,7 +845,7 @@ fi</string>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
-				<string>pass edit "{query}" &amp;&amp; pass git push</string>
+				<string>pass edit "{query}" &amp;&amp; sleep 0.5 ; pass git push</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.terminalcommand</string>

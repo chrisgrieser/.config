@@ -1,4 +1,9 @@
 return {
+	{
+		"Djancyp/regex.nvim",
+		ft = { "javascript", "typescript" },
+		config = function() require("regex-nvim").Setup() end,
+	},
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",

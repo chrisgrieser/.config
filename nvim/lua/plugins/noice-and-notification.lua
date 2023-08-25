@@ -86,7 +86,7 @@ return {
 				},
 				split = {
 					enter = true,
-					size = "35%",
+					size = "40%",
 					close = { keys = { "q", "<D-w>", "<D-0>" } },
 				},
 			},
