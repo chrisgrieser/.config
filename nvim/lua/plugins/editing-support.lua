@@ -1,7 +1,7 @@
 return {
-	{
+	{ -- pending: https://github.com/Djancyp/regex.nvim/pull/2
 		"chrisgrieser/regex.nvim",
-		cmd = "RegexHelper",
+		cmd = "RegexHelper", -- called in javascript & typescript ftplugins
 		dev = true,
 		opts = true,
 	},
@@ -138,18 +138,18 @@ return {
 		},
 		keys = {
 			-- stylua: ignore
-			{ "ü", function() require("sibling-swap").swap_with_right() end, desc = "󰑃 Move Node Right" },
+			{ "ü", function() require("sibling-swap").swap_with_right() end, desc = "󰔰 Move Node Right" },
 			-- stylua: ignore
-			{ "Ü", function() require("sibling-swap").swap_with_left() end, desc = "󰑃 Move Node Left" },
+			{ "Ü", function() require("sibling-swap").swap_with_left() end, desc = "󰶢 Move Node Left" },
 		},
 		init = function()
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = { "markdown", "text", "gitcommit" },
 				callback = function()
 					-- stylua: ignore
-					vim.keymap.set("n", "ü", '"zdawel"zph', { desc = "➡️ Move Word Right", buffer = true })
+					vim.keymap.set("n", "ü", '"zdawel"zph', { desc = "󰔰 Move Word Right", buffer = true })
 					-- stylua: ignore
-					vim.keymap.set("n", "Ü", '"zdawbh"zph', { desc = "⬅️ Move Word Left", buffer = true })
+					vim.keymap.set("n", "Ü", '"zdawbh"zph', { desc = "󰶢 Move Word Left", buffer = true })
 				end,
 			})
 		end,
