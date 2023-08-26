@@ -409,7 +409,6 @@ autocmd("FileType", {
 
 --------------------------------------------------------------------------------
 
----@param direction "up"|"down"
 local function scrollHoverWin(direction)
 	local a = vim.api
 	local scrollCmd = (direction == "down" and "5j" or "5k")

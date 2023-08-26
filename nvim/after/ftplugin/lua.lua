@@ -5,9 +5,10 @@ local u = require("config.utils")
 local abbr = vim.cmd.inoreabbrev
 --------------------------------------------------------------------------------
 
--- habits from writing too much js
+-- habits from writing too much in other languages
 abbr("<buffer> // --")
 abbr("<buffer> const local")
+abbr("<buffer> fi end")
 
 --------------------------------------------------------------------------------
 
