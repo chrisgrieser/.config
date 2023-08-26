@@ -25,9 +25,6 @@ local function getVar()
 	if fn.mode() == "n" then
 		local node = vim.treesitter.get_node()
 		if not node then return "" end
-		if node:type() == "identifier" and node:parent():type() ~= "expression_list" then
-			node = node:parent()
-		end
 		varname = vim.treesitter.get_node_text(node, 0)
 	elseif fn.mode():find("[Vv]") then
 		local prevReg = fn.getreg("z")
@@ -41,9 +38,10 @@ end
 ---append string below current line
 ---@param text string
 local function append(text)
+	local indent = vim.api.nvim_get_current_line():match("^%s*")
+	text = indent .. text
 	local ln = vim.api.nvim_win_get_cursor(0)[1]
 	vim.api.nvim_buf_set_lines(0, ln, ln, false, { text })
-	normal("j==")
 end
 
 --------------------------------------------------------------------------------

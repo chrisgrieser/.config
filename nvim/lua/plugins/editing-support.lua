@@ -43,9 +43,9 @@ return {
 				rule("=", ",", "lua")
 					:with_pair(negLookahead(" ?}", 3)) -- not in one-liner
 					:with_pair(isNodeType { "table_constructor", "field" }),
-				rule(":", ",", { "javascript", "typescript", "json" })
+				rule(":", ",", { "javascript", "typescript", "json", "python" })
 					:with_pair(negLookahead(" ?}", 3)) -- not in one-liner
-					:with_pair(isNodeType("object")),
+					:with_pair(isNodeType{"object", "dictionary"}),
 				rule("", ",") -- automatically move past commas
 					:with_move(function(opts) return opts.char == "," end)
 					:with_pair(function() return false end)

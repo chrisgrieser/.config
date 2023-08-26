@@ -7,8 +7,10 @@ local wu = require("lua.window-utils")
 --------------------------------------------------------------------------------
 -- HELPERS
 
----@return string three chars representing the day of the week (English)
-local function getWeekday() return tostring(os.date()):sub(1, 3) end
+local function isWeekend()
+	local weekday = tostring(os.date()):sub(1, 3)
+	return weekday == "Sat" or weekday == "Sun"
+end
 
 ---@param targetMode string
 local function dockSwitcher(targetMode)
@@ -66,7 +68,7 @@ local function workLayout()
 
 	-- open
 	local appsToOpen = { "Obsidian", "Discord", env.browserApp, env.mailApp, env.tickerApp }
-	if getWeekday() ~= "Sat" and getWeekday() ~= "Sun" then table.insert(appsToOpen, "Slack") end
+	if not isWeekend() then table.insert(appsToOpen, "Slack") end
 	u.openApps(appsToOpen)
 	for _, appName in pairs(appsToOpen) do
 		u.whenAppWinAvailable(appName, function()
@@ -77,6 +79,7 @@ local function workLayout()
 
 	-- minimize Obsidian
 	u.whenAppRuns("Obsidian", function() u.app("Obsidian"):mainWindow():minimize() end)
+	u.restartApp("AltTab")
 
 	-- finish
 	require("lua.sidenotes").reminderToSidenotes()
