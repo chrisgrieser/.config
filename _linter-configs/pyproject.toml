@@ -18,11 +18,12 @@ ignore = [
 	"S311", # requires cryptographically secure random number generators
 	"W", # pycodestyle warnings which are autofixed by black
 
-	# duplicaton with pyright (unused vars)
-	"F841",
-	"ARG001"
+	# duplicaton with pyright 
+	"F841", # unused var
+	"F401", # unused import
+	"ARG001" # unused arg
 ]
 
 
 [tool.ruff.pydocstyle]
-convention = "pep257"  # Accepts: "google", "numpy", or "pep257".
+convention = "pep257" # Accepts: "google", "numpy", or "pep257"
