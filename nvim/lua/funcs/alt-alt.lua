@@ -103,7 +103,7 @@ function M.altFileStatusline()
 end
 
 ---switch to alternate buffer/oldfile (in that priority)
-function M.altBufferWindow()
+function M.altBuffer()
 	local altFile = fn.expand("#:t")
 	local altPath = fn.expand("#:p")
 	local curPath = fn.expand("%:p")
