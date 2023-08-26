@@ -1,4 +1,9 @@
 {
+	"def / function": {
+		"prefix": ["def", "function"],
+		"body": ["def ${1:name}(${2:arg}) -> ${3|None|str|int|dict}:", "\t\"\"\"${4:docstring}\"\"\"", "\t"],
+		"description": "function with docstring"
+	},
 	"ternary operator": {
 		"prefix": "ternary operator",
 		"body": "${1:value1} if ${2:condition} else ${3:value2}"
@@ -43,13 +48,8 @@
 		"body": ["while ${1:expression}:", "\t${2:pass}", "else:", "\t${3:pass}"],
 		"description": "Code snippet for a while loop with else"
 	},
-	"__magic__": {
-		"prefix": "__",
-		"body": "__${1:init}__$0",
-		"description": "Code snippet to create magic methods."
-	},
 	"if __name__ == \"__main__\"": {
-		"prefix": "ifmain",
+		"prefix": ["__main__", "ifmain"],
 		"body": "if __name__ == \"__main__\":\n\t${1:main()}$0",
 		"description": "Create implicitly all the code at the top level using the __name__ special variable."
 	},
@@ -58,30 +58,10 @@
 		"body": "[${1:value} for ${2:value} in ${3:iterable}]$0",
 		"description": "List comprehension for creating a list based on existing lists."
 	},
-	"def(class method)": {
-		"prefix": "def class method",
-		"body": ["def ${1:funcname}(self, ${2:parameter_list}):", "\t${3:pass}"],
-		"description": "Code snippet for a class method"
-	},
-	"def(static class method)": {
-		"prefix": "def static class method",
-		"body": ["@staticmethod", "def ${1:funcname}(${2:parameter_list}):", "\t${3:pass}"],
-		"description": "Code snippet for a static class method"
-	},
-	"def(abstract class method)": {
-		"prefix": "def abstract class method",
-		"body": ["def ${1:funcname}(self, ${2:parameter_list}):", "\traise NotImplementedError"],
-		"description": "Code snippet for an abstract class method"
-	},
 	"lambda": {
 		"prefix": "lambda",
 		"body": ["lambda ${1:parameter_list}: ${2:expression}"],
-		"description": "Code snippet for a lambda statement"
-	},
-	"if(main)": {
-		"prefix": "__main__",
-		"body": ["if __name__ == \"__main__\":", "    ${1:pass}"],
-		"description": "Code snippet for a `if __name__ == \"__main__\": ...` block"
+		"description": "'lambda' is an anonymous function in python."
 	},
 	"async/def": {
 		"prefix": "async/def",
