@@ -1,4 +1,8 @@
 {
+	"ternary operator": {
+		"prefix": "ternary operator",
+		"body": "${1:value1} if ${2:condition} else ${3:value2}"
+	},
 	"if": {
 		"prefix": "if",
 		"body": "if ${1:condition}:\n\t${2:pass}$0",
