@@ -161,3 +161,4 @@ stylelint
 ⌘fn
 ⌘C
 ⌘fn⏎
+Axelrod
