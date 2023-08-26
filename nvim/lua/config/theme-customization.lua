@@ -41,7 +41,6 @@ local function customHighlights()
 
 	-- make MatchParen stand out more (orange to close to rainbow brackets)
 	overwriteHighlight("MatchParen", { reverse = true })
-	-- overwriteHighlight("MatchParenCur", { reverse = true, bold = true })
 
 	-- proper underlines for diagnostics
 	local types = { "Error", "Warn", "Info", "Hint" }
@@ -111,6 +110,9 @@ local function themeModifications()
 		for _, v in pairs(vimModes) do
 			updateHighlight("lualine_y_diff_modified_" .. v, "guifg=#b3880a")
 		end
+		-- python docstrings should be distinguished from regular strings
+		linkHighlight("@parameter", "Typedef")
+		linkHighlight("@string.documentation", "Typedef")
 	elseif theme == "rose-pine" and mode == "light" then
 		updateHighlight("IndentBlanklineChar", "guifg=#e3d4c4")
 		updateHighlight("ColorColumn", "guibg=#eee6dc")
