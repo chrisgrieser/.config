@@ -4,6 +4,8 @@ local lintersAndFormatters = {
 	"shellcheck",
 	"shfmt", -- shell
 	"markdownlint",
+	"pylint", -- python
+	"isort", -- python imports
 	"black", -- python formatter
 	"vale", -- natural language
 	"codespell", -- superset of `misspell`, therefore only using codespell
@@ -24,12 +26,12 @@ local function linterConfigs()
 		zsh = { "shellcheck" },
 		markdown = { "vale", "markdownlint" },
 		yaml = { "yamllint" },
+		python = { "pylint" },
 		json = {},
 		javascript = {},
 		typescript = {},
 		gitcommit = {},
 		toml = {},
-		python = {},
 	}
 
 	-- use for codespell for all except bib and css
@@ -153,7 +155,7 @@ local function formatterConfigs()
 	local filetypes = {
 		lua = { require("formatter.filetypes.lua").stylua },
 		sh = { require("formatter.filetypes.sh").shfmt, shellharden },
-		python = { require("formatter.filetypes.python").black },
+		python = { require("formatter.filetypes.python").black, require("formatter.filetypes.python").isort },
 		html = { require("formatter.filetypes.html").prettier },
 		yaml = { require("formatter.filetypes.yaml").prettier },
 		javascript = { rome },

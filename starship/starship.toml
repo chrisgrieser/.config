@@ -39,7 +39,7 @@ $memory_usage\
 [character]
 success_symbol = "[ ](bold green)" # 󰀘
 error_symbol = " [󰇷 ](bold red)"
-vimcmd_symbol = " [ ](bold 206)" # 206: magenta
+vimcmd_symbol = " [ ](bold 206)"   # 206: magenta
 
 [sudo]
 style = 'fg:green bg:black'
@@ -57,7 +57,7 @@ command = '[[ "$PWD" =~ "$HOME/Repos" ]] && echo "󰔽"'
 # conditional, so no output does not leave the extra space from `format`. And the
 # space from format is needed, as the output from `command` is trimmed.
 when = '[[ "$PWD" =~ "$HOME/Repos" ]]'
-format = '[ $output  ]($style)' # extra space for proper nerdfont sizing
+format = '[ $output  ]($style)'        # extra space for proper nerdfont sizing
 style = "fg:bright-blue bg:black bold"
 
 [directory]
@@ -79,7 +79,7 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 [custom.folder_number]
 description = "Number of files (and folders) in the current working directory"
 command = "find . -mindepth 1 -maxdepth 1 -not -name '.git' -not -name '.DS_Store' -not -name 'Icon?' | wc -l"
-when = "true" # always show
+when = "true"                                                                                                  # always show
 symbol = " "
 format = '[$symbol$output]($style) '
 style = "fg:yellow bg:black bold"
@@ -105,7 +105,7 @@ format = "[󰘬 $hash]($style) "
 # branch
 [git_branch]
 only_attached = true
-symbol = "󰘬 " # 
+symbol = "󰘬 "                        # 
 style = "fg:purple bg:black bold"
 format = "[$symbol$branch]($style) "
 ignore_branches = ["main"]
@@ -158,7 +158,7 @@ format = " [$symbol$ram_pct]($style)"
 format = "[$symbol$version]($style)"
 version_format = "$raw"
 symbol = "󰏗  "
-style = "dimmed 208"
+style = "bold 208"
 
 [custom.alfred]
 description = "Version number of Alfred Workflow"
@@ -166,17 +166,17 @@ when = "[[ -f info.plist ]] || [[ -f ../info.plist ]]"
 command = "if [[ -f ../info.plist ]] ; then ; plist=$(plutil -extract version xml1 -o - ../info.plist) ; else ; plist=$(plutil -extract version xml1 -o - info.plist) ; fi ; echo \"$plist\" | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1"
 os = "macos"
 format = '[󰮤 ](purple) [󰏗  $output]($style)'
-style = "dimmed cyan"
+style = "bold cyan"
 
 [nodejs]
 format = " [$symbol $version]($style)"
 version_format = "$major"
-style = "dimmed cyan"
-detect_extensions = ["ts"]            # dont trigger for JXA
+style = "bold cyan"
+detect_extensions = ["ts"]             # dont trigger for JXA
 
 [python]
+style = "bold cyan"
 format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 version_format = "$major.$minor"
-style = "dimmed cyan"
 python_binary = ["python3"]
 symbol = "  "
