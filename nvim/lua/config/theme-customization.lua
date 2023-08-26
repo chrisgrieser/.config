@@ -111,8 +111,8 @@ local function themeModifications()
 			updateHighlight("lualine_y_diff_modified_" .. v, "guifg=#b3880a")
 		end
 		-- python docstrings should be distinguished from regular strings
-		linkHighlight("@parameter", "Typedef")
-		linkHighlight("@string.documentation", "Typedef")
+		linkHighlight("@type.builtin.python", "Typedef")
+		linkHighlight("@string.documentation.python", "Typedef")
 	elseif theme == "rose-pine" and mode == "light" then
 		updateHighlight("IndentBlanklineChar", "guifg=#e3d4c4")
 		updateHighlight("ColorColumn", "guibg=#eee6dc")

@@ -11,6 +11,10 @@ ignore = [
 	"T201", # print statements
 	"S311", # requires cryptographically secure random number generators
 	"W", # pycodestyle warnings which are autofixed by black
+
+	# duplicaton with pyright (unused vars)
+	"F841",
+	"ARG001"
 ]
 
 [tool.ruff.pydocstyle]
