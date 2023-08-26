@@ -1,10 +1,14 @@
 local u = require("config.utils")
+local bo = vim.bo
 --------------------------------------------------------------------------------
 
-vim.bo.shiftwidth = 2
-vim.bo.tabstop = 2
-vim.bo.softtabstop = 2
-vim.bo.expandtab = true
+bo.shiftwidth = 2
+bo.tabstop = 2
+bo.softtabstop = 2
+bo.expandtab = true
+
+vim.opt_local.listchars:append { tab = "󰌒 " } 
+vim.opt_local.listchars:append { lead = " " } 
 
 --------------------------------------------------------------------------------
 
