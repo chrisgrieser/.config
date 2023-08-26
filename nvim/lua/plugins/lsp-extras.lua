@@ -39,11 +39,8 @@ return {
 					return
 				end
 				local symbolPath = require("nvim-navic").get_data()
-				local parent = symbolPath[#symbolPath - 1]
-				if not parent then
-					vim.notify("Already at highest parent.")
-					return
-				end
+				if #symbolPath == 0 then return end
+				local parent = #symbolPath > 1 and symbolPath[#symbolPath - 1] or symbolPath[1]
 				local parentPos = parent.scope.start
 				u.setCursor(0, { parentPos.line, parentPos.character })
 			end, { desc = "󰒕 Go Up to Parent" })
