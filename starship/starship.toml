@@ -6,6 +6,7 @@
 # - some nerd font requires a space after them to be properly sized
 #───────────────────────────────────────────────────────────────────────────────
 
+add_newline = false
 continuation_prompt = "↪️ "
 format = """[\
 ${custom.location_indicator}\

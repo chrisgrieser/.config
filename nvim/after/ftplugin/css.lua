@@ -27,62 +27,49 @@ end, { buffer = true, desc = " Toggle !important", nowait = true })
 
 --------------------------------------------------------------------------------
 -- SHIMMERING FOCUS SPECIFIC
+if expand("%:t") ~= "source.css" then return end
 
-if expand("%:t") == "fallback.css" then
-	vim.notify(" Editing Fallback.css", u.warn)
-elseif expand("%:t") == "source.css" then
-	-- goto comment marks (deferred, to override lsp-gotosymbol)
-	vim.defer_fn(function()
-		bo.grepprg = "rg --vimgrep --no-column" -- remove columns for readability
-		keymap("n", "gs", function()
-			cmd([[silent! lgrep "^(\# <<\|/\* <)" %]]) -- riggrep-search for navigaton markers in SF
-			require("telescope.builtin").loclist {
-				prompt_title = "Navigation Markers",
-			}
-		end, { desc = "Search Navigation Markers", buffer = true })
-		-- search only for variables
-		keymap("n", "gS", function()
-			cmd([[silent! lgrep "^\s*--" %]]) -- riggrep-search for css variables
-			require("telescope.builtin").loclist {
-				prompt_title = "CSS Variables",
-				prompt_prefix = "󰀫 ",
-			}
-		end, { desc = "Search CSS Variables", buffer = true })
-	end, 500)
-
-	-- next/prev comment marks
-	keymap(
-		{ "n", "x" },
-		"<C-j>",
-		[[/^\/\* <<CR>:nohl<CR>]],
-		{ buffer = true, desc = "next comment mark" }
-	)
-	keymap(
-		{ "n", "x" },
-		"<C-k>",
-		[[?^\/\* <<CR>:nohl<CR>]],
-		{ buffer = true, desc = "prev comment mark" }
-	)
-
-	-- create comment mark
-	keymap("n", "qw", function()
-		local hr = {
-			"/* ───────────────────────────────────────────────── */",
-			"/* << ",
-			"──────────────────────────────────────────────────── */",
-			"",
-			"",
+-- goto comment marks (deferred, to override lsp-gotosymbol)
+vim.defer_fn(function()
+	bo.grepprg = "rg --vimgrep --no-column" -- remove columns for readability
+	keymap("n", "gs", function()
+		cmd([[silent! lgrep "^(\# <<\|/\* <)" %]]) -- riggrep-search for navigaton markers in SF
+		require("telescope.builtin").loclist {
+			prompt_title = "Navigation Markers",
 		}
-		fn.append(".", hr) ---@diagnostic disable-line undefined-field, param-type-mismatch
-		local lineNum = u.getCursor(0)[1] + 2
-		local colNum = #hr[2] + 2
-		u.setCursor(0, { lineNum, colNum })
-		cmd.startinsert { bang = true }
-	end, { buffer = true })
+	end, { desc = "Search Navigation Markers", buffer = true })
+	-- search only for variables
+	keymap("n", "gS", function()
+		cmd([[silent! lgrep "^\s*--" %]]) -- riggrep-search for css variables
+		require("telescope.builtin").loclist {
+			prompt_title = "CSS Variables",
+			prompt_prefix = "󰀫 ",
+		}
+	end, { desc = "Search CSS Variables", buffer = true })
+end, 500)
 
-	-- INFO: fix syntax highlighting
-	-- various other solutions are described here: https://github.com/vim/vim/issues/2790
-	-- using treesitter, this is less of an issue, but treesitter css
-	-- highlighting isn't good yet, so…
-	keymap("n", "ös", ":syntax sync fromstart<CR>",{ buffer = true })
-end
+-- next/prev comment marks
+keymap({ "n", "x" }, "<C-j>", [[/^\/\* <<CR>:nohl<CR>]], { buffer = true, desc = "next comment mark" })
+keymap({ "n", "x" }, "<C-k>", [[?^\/\* <<CR>:nohl<CR>]], { buffer = true, desc = "prev comment mark" })
+
+-- create comment mark
+keymap("n", "qw", function()
+	local hr = {
+		"/* ───────────────────────────────────────────────── */",
+		"/* << ",
+		"──────────────────────────────────────────────────── */",
+		"",
+		"",
+	}
+	fn.append(".", hr) ---@diagnostic disable-line undefined-field, param-type-mismatch
+	local lineNum = u.getCursor(0)[1] + 2
+	local colNum = #hr[2] + 2
+	u.setCursor(0, { lineNum, colNum })
+	cmd.startinsert { bang = true }
+end, { buffer = true })
+
+-- INFO: fix syntax highlighting
+-- various other solutions are described here: https://github.com/vim/vim/issues/2790
+-- using treesitter, this is less of an issue, but treesitter css
+-- highlighting isn't good yet, so…
+keymap("n", "ös", ":syntax sync fromstart<CR>", { buffer = true })
