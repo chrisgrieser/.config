@@ -46,7 +46,7 @@ function unlock() {
 }
 
 function rebase() {
-	git rebase "$@"
+	git rebase head
 }
 
 # https://stackoverflow.com/a/17937889
