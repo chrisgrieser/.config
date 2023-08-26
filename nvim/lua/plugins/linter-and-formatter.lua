@@ -222,10 +222,25 @@ return {
 		end,
 	},
 	{
+
 		"mhartington/formatter.nvim",
 		config = formatterConfigs,
+		cmd = { "Format", "FormatWrite" },
 		keys = {
-			{ "<D-s>", vim.cmd.FormatWrite, desc = "󰒕  Save & Format" },
+			{
+				"<D-s>",
+				function()
+					-- FIX: https://github.com/mhartington/formatter.nvim/issues/275
+					vim.cmd.mkview(9)
+					vim.cmd.FormatWrite()
+					vim.defer_fn(function()
+						-- to get rainbow colors back https://github.com/HiPhish/rainbow-delimiters.nvim/issues/28
+						vim.cmd.edit()
+						vim.cmd.loadview(9)
+					end, 200)
+				end,
+				desc = "󰒕  Save & Format",
+			},
 		},
 	},
 }
