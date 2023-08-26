@@ -45,8 +45,15 @@ function unlock() {
 	echo "Lock file removed."
 }
 
+# rebase last x commits
 function rebase() {
-	git rebase head
+	local num="$1"
+	if grep -qE '^[0-9]+$'; then
+		git rebase -i HEAD~"$num"
+		gitlog $((num + 1))
+	else
+		print "\033[1;33mUsage: rebase <number of commits>"
+	fi
 }
 
 # https://stackoverflow.com/a/17937889

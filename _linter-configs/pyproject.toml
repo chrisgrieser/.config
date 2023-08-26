@@ -1,6 +1,12 @@
 # DOCS https://beta.ruff.rs/docs/rules/
 #───────────────────────────────────────────────────────────────────────────────
 
+[tool.pyright]
+# https://microsoft.github.io/pyright/#/configuration?id=type-check-diagnostics-settings
+strictListInference = true
+strictDictionaryInference = true
+strictSetInference = true
+
 [tool.black]
 line-length = 100
 
@@ -16,6 +22,7 @@ ignore = [
 	"F841",
 	"ARG001"
 ]
+
 
 [tool.ruff.pydocstyle]
 convention = "pep257"  # Accepts: "google", "numpy", or "pep257".
