@@ -3,7 +3,10 @@
 
 [tool.ruff]
 select = [ "ALL" ]
-ignore = []
+ignore = [
+	"T201", # print statements
+	"S311", # requires cryptographically secure random number generators
+]
 
 [tool.ruff.pydocstyle]
-convention = "google"  # Accepts: "google", "numpy", or "pep257".
+convention = "pep257"  # Accepts: "google", "numpy", or "pep257".
