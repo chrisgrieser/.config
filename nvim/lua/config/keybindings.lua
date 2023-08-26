@@ -181,7 +181,7 @@ keymap("i", "<C-e>", "<Esc>A") -- EoL
 keymap("i", "<C-a>", "<Esc>I") -- BoL
 -- indent properly when entering insert mode on empty lines
 keymap("n", "i", function()
-	if vim.api.nvim_get_current_line():find("^%s*$") then return [["_cc]] end
+	if vim.api.nvim_get_current_line():find("^%s*$") and vim.bo.ft ~= "python" then return [["_cc]] end
 	return "i"
 end, { expr = true, desc = "better i" })
 
@@ -235,7 +235,6 @@ keymap("n", "dd", function()
 	local expr = isBlankLine and '"_dd' or "dd"
 	return expr
 end, { expr = true })
-
 
 -- paste charwise reg as linewise & vice versa
 keymap("n", "gp", function()
@@ -429,4 +428,3 @@ keymap("n", "<PageDown>", function() scrollHoverWin("down") end, { desc = "Scrol
 keymap("n", "<PageUp>", function() scrollHoverWin("up") end, { desc = "Scroll up hover" })
 
 --------------------------------------------------------------------------------
-
