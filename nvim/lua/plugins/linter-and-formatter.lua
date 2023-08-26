@@ -4,14 +4,14 @@ local lintersAndFormatters = {
 	"shellcheck",
 	"shfmt", -- shell
 	"markdownlint",
-	"isort", -- python imports
+	"ruff", -- python linter/formatter, the lsp does diagnostics, the CLI does formatting
 	"black", -- python formatter
 	"vale", -- natural language
 	"codespell", -- superset of `misspell`, therefore only using codespell
 	"selene", -- lua
 	"stylua", -- lua
 	"prettier", -- only used for yaml and html https://github.com/mikefarah/yq/issues/515
-	"rome", -- also an LSP; the lsp does diagnostics, the CLI via null-ls does formatting
+	"rome", -- also an LSP; the lsp does diagnostics, the CLI does formatting
 	-- stylelint included in mason, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
 }
 --------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ local function linterConfigs()
 		zsh = { "shellcheck" },
 		markdown = { "vale", "markdownlint" },
 		yaml = { "yamllint" },
-		python = { },
+		python = {},
 		json = {},
 		javascript = {},
 		typescript = {},
@@ -105,7 +105,6 @@ local function linterConfigs()
 	end
 
 	-----------------------------------------------------------------------------
-
 end
 
 local function lintTriggers()
@@ -123,22 +122,38 @@ end
 
 --------------------------------------------------------------------------------
 
+-- TODO add formatters when there are some PRs merged?
+-- https://github.com/mhartington/formatter.nvim/pulls
 local function formatterConfigs()
-	-- TODO add formatters? https://github.com/mhartington/formatter.nvim/pulls
+	local util = require("formatter.util")
 	local rome = {
 		exe = "rome",
 		stdin = false, -- using the stdin formatting of rome has bugs with emojis
 		args = { "format", "--write" },
 	}
 
+	local ruff = {
+		exe = "ruff",
+		stdin = true,
+		args = {
+			"--fix",
+			"--exit-zero",
+			"--no-cache",
+			"--stdin-filename",
+			util.escape_path(util.get_current_buffer_file_path()),
+		},
+	}
+
 	local stylelint = {
 		exe = "stylelint",
 		stdin = true,
-		args = { "--fix", "--stdin", "--stdin-filename" },
+		args = { "--fix", "--stdin" },
 	}
 
+	-- defined
 	local codespell = {
 		exe = "codespell",
+		tmpdir = "/tmp",
 		stdin = false,
 		args = {
 			"--ignore-words",
@@ -157,10 +172,7 @@ local function formatterConfigs()
 	local filetypes = {
 		lua = { require("formatter.filetypes.lua").stylua },
 		sh = { require("formatter.filetypes.sh").shfmt, shellharden },
-		python = {
-			require("formatter.filetypes.python").black,
-			require("formatter.filetypes.python").isort,
-		},
+		python = { require("formatter.filetypes.python").black, ruff },
 		html = { require("formatter.filetypes.html").prettier },
 		yaml = { require("formatter.filetypes.yaml").prettier },
 		javascript = { rome },
