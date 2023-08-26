@@ -680,6 +680,29 @@
 				<false/>
 			</dict>
 		</array>
+		<key>E0497D01-2949-468B-B5C6-D6837344A30B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy URL to Clipboard</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E489F965-C095-477B-8922-AC21993EA238</key>
 		<array>
 			<dict>
@@ -2449,6 +2472,55 @@ window_name</string>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
+				<string>ruff</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/ruff-rules.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>ruff rules search...</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>E0497D01-2949-468B-B5C6-D6837344A30B</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
 				<string>style</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
@@ -2817,7 +2889,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>2155</real>
+			<real>2265</real>
 		</dict>
 		<key>2CDD4E20-23DF-4ABB-AE2F-416CD7F1E82D</key>
 		<dict>
@@ -2886,7 +2958,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>2285</real>
+			<real>2395</real>
 		</dict>
 		<key>5A2D4239-FC30-482F-831B-D2E261B44B7F</key>
 		<dict>
@@ -2998,7 +3070,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>2650</real>
+			<real>2760</real>
 		</dict>
 		<key>A3408036-87B4-4BA4-8D1F-10A05C30BA35</key>
 		<dict>
@@ -3063,7 +3135,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>2415</real>
+			<real>2525</real>
 		</dict>
 		<key>C4E99850-BA50-4D06-A11F-D09AEC8481A0</key>
 		<dict>
@@ -3081,7 +3153,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>2530</real>
+			<real>2640</real>
 		</dict>
 		<key>CB7395BA-6A3E-4E50-9FFA-130BFCA9053A</key>
 		<dict>
@@ -3162,6 +3234,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>860</real>
 			<key>ypos</key>
 			<real>1500</real>
+		</dict>
+		<key>E0497D01-2949-468B-B5C6-D6837344A30B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>2145</real>
 		</dict>
 		<key>E489F965-C095-477B-8922-AC21993EA238</key>
 		<dict>

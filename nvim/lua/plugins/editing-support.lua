@@ -70,6 +70,7 @@ return {
 
 				-- quicker template string
 				rule("$", "{}", { "javascript", "typescript", "json" })
+					:with_pair(negLookahead("{", 1)) 
 					:with_pair(isNodeType { "string", "template_string", "string_fragment" })
 					:set_end_pair_length(1),
 			}

@@ -40,11 +40,13 @@ newCommand("Curl", function(ctx)
 	local a = vim.api
 
 	-- create scratch buffer
+	local ft = url:match("%.(%a)$") or "html" -- could be html or json
 	local bufId = a.nvim_create_buf(true, false)
-	local success = pcall(a.nvim_buf_set_name, bufId, "Curl")
+	local bufName = "Curl." .. ft
+	local success = pcall(a.nvim_buf_set_name, bufId, bufName)
 	if not success then
 		vim.notify("Curl Buffer already exists. ", u.warn)
-		cmd.buffer("Curl")
+		cmd.buffer(bufName)
 		return
 	end
 	cmd.buffer(bufId)
@@ -54,10 +56,8 @@ newCommand("Curl", function(ctx)
 	local response = fn.system(("curl --silent --max-time %s '%s'"):format(timeoutSecs, url))
 	local lines = vim.split(response, "\n")
 
-	-- insert response as line
-	local ft = url:match("%.(%a)$") or "html" -- could be html, json
+	-- insert response as lines
 	a.nvim_buf_set_option(bufId, "filetype", ft)
-	table.insert(lines, 1, vim.bo.commentstring:format(" " .. url .. " "))
 	a.nvim_buf_set_lines(bufId, 0, -1, false, lines)
 
 	-- format
