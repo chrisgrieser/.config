@@ -1,7 +1,10 @@
 local u = require("config.utils")
-local lspSettings = {}
-local lspOnAttach = {}
-local lspFiletypes = {}
+local conf = {
+	settings = {},
+	on_attach = {},
+	filetypes = {},
+	init_options = {},
+}
 
 --------------------------------------------------------------------------------
 
@@ -28,7 +31,7 @@ local lsp_servers = {
 -- https://github.com/LuaLS/lua-language-server/wiki/Annotations#annotations
 -- https://github.com/LuaLS/lua-language-server/wiki/Settings
 
-lspSettings.lua_ls = {
+conf.settings.lua_ls = {
 	Lua = {
 		completion = {
 			callSnippet = "Replace",
@@ -53,17 +56,28 @@ lspSettings.lua_ls = {
 }
 
 --------------------------------------------------------------------------------
+-- PYTHON
+-- https://github.com/astral-sh/ruff-lsp#settings
+-- disable global code actions, since they are done via the ruff-cli-formatting already
+conf.init_options.ruff_lsp = {
+	settings = { organizeImports = false, fixAll = false },
+}
+
+-- Disable hover in favor of Pyright
+conf.on_attach.ruff_lsp = function(client, _) client.server_capabilities.hoverProvider = false end
+
+--------------------------------------------------------------------------------
 -- EMMET
 -- don't pollute completions for js and ts with stuff I don't need
-lspFiletypes.emmet_ls = { "css", "html" }
+conf.filetypes.emmet_ls = { "css", "html" }
 
 --------------------------------------------------------------------------------
 -- CSS
 -- https://github.com/microsoft/vscode-css-languageservice/blob/main/src/services/lintRules.ts
-lspSettings.cssls = {
+conf.settings.cssls = {
 	css = {
 		lint = {
-			compatibleVendorPrefixes = "ignore", 
+			compatibleVendorPrefixes = "ignore",
 			vendorPrefix = "ignore",
 			unknownVendorSpecificProperties = "ignore",
 
@@ -88,7 +102,7 @@ lspSettings.cssls = {
 -- TSSERVER
 -- https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
 
-lspSettings.tsserver = {
+conf.settings.tsserver = {
 	completions = { completeFunctionCalls = true },
 	diagnostics = {
 		-- "cannot redeclare block-scoped variable" -> useless when applied to JXA
@@ -121,7 +135,7 @@ lspSettings.tsserver = {
 }
 
 -- disable formatting, since taken care of by rome https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts#neovim-08
-lspOnAttach.tsserver = function(client, _)
+conf.on_attach.tsserver = function(client, _)
 	client.server_capabilities.documentFormattingProvider = false
 	client.server_capabilities.documentRangeFormattingProvider = false
 end
@@ -129,14 +143,14 @@ end
 --------------------------------------------------------------------------------
 -- JSON
 -- https://github.com/sublimelsp/LSP-json/blob/master/LSP-json.sublime-settings
-lspSettings.jsonls = {
+conf.settings.jsonls = {
 	json = { format = { enable = false } }, -- taken care of by rome
 }
 
 --------------------------------------------------------------------------------
 -- XML/PLIST
 -- https://github.com/eclipse/lemminx/blob/main/docs/Configuration.md#all-formatting-options
-lspSettings.lemminx = {
+conf.settings.lemminx = {
 	xml = {
 		-- disabled, since it messes up some formatting of Alfred .plist files
 		format = { enabled = false },
@@ -158,7 +172,7 @@ vim.filetype.add {
 	},
 }
 
--- CAVEAT: various attempts of setting shellcheck args for bashls does not work,
+-- CAVEAT: various attempts of setting shellcheck args for bashls do not work,
 -- apparently because bash-ls blocks them due to the zsh-shebang, regardless of
 -- filetype defined by nvim.
 -- Therefore using shellcheck via null-ls, since there enforcing the shell via
@@ -169,7 +183,7 @@ vim.filetype.add {
 -- https://valentjn.github.io/ltex/settings.html
 
 -- disable for bibtex and text files
-lspFiletypes.ltex = { "gitcommit", "markdown", "octo" }
+conf.filetypes.ltex = { "gitcommit", "markdown", "octo" }
 
 -- HACK since reading external file with the method described in the ltex docs
 -- does not work
@@ -185,7 +199,7 @@ end
 local brewPrefix = vim.fn.system("brew --prefix"):gsub("\n$", "")
 vim.env.JAVA_HOME = brewPrefix .. "/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
 
-lspSettings.ltex = {
+conf.settings.ltex = {
 	ltex = {
 		completionEnabled = false,
 		language = "en-US", -- default language, can be set per-file via markdown yaml header
@@ -230,15 +244,13 @@ local function setupAllLsps()
 	require("neodev").setup { library = { plugins = false } }
 
 	for _, lsp in pairs(lsp_servers) do
-		local config = {
+		require("lspconfig")[lsp].setup {
 			capabilities = lspCapabilities,
-			-- INFO if no settings, will assign nil and therefore do nothing
-			settings = lspSettings[lsp],
-			on_attach = lspOnAttach[lsp],
-			filetypes = lspFiletypes[lsp],
+			settings = conf.settings[lsp], -- if no settings, will assign nil and therefore do nothing
+			on_attach = conf.on_attach[lsp],
+			filetypes = conf.filetypes[lsp],
+			init_options = conf.init_options[lsp],
 		}
-
-		require("lspconfig")[lsp].setup(config)
 	end
 end
 
