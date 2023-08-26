@@ -28,7 +28,7 @@ return {
 			local negLookahead = require("nvim-autopairs.conds").not_after_regex
 
 			require("nvim-autopairs").add_rules {
-				rule("<", ">", "lua"):with_pair(isNodeType("string")), -- keymaps
+				rule("<", ">", "lua"):with_pair(isNodeType { "string", "string_content" }),
 				rule("<", ">", { "vim", "html", "xml" }), -- keymaps & tags
 				rule('\\"', '\\"', { "sh", "json" }), -- escaped quotes
 				rule("*", "*", "markdown"), -- italics
