@@ -17,11 +17,11 @@ function run() {
 
 	const sectionsArr = app
 		.doShellScript(`curl -s "${ruffRulesUrl}" | grep -A1 "<td id="`)
-		.split("--") // grep delimiter
+		.split("\r--\r") // grep delimiter
 		.map((ruleInfo) => {
-			let [id, name] = ruleInfo.split("\n");
+			let [id, name] = ruleInfo.split("\r");
 			id = id.match(/id="(.*?)"/)[1];
-			name = name.includes("href") ? name.match(/href="(.*?)"/)[1] : "??";
+			name = name.includes("href") ? name.match(/href="(.*?)\/"/)[1] : name.match(/>(.*?)<.*/)[1];
 			const displayName = name.replace(/-/g, " ");
 
 			const url = ruffRulesUrl + name;
