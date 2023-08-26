@@ -4,7 +4,6 @@ local lintersAndFormatters = {
 	"shellcheck",
 	"shfmt", -- shell
 	"markdownlint",
-	"pylint", -- python
 	"isort", -- python imports
 	"black", -- python formatter
 	"vale", -- natural language
@@ -26,7 +25,7 @@ local function linterConfigs()
 		zsh = { "shellcheck" },
 		markdown = { "vale", "markdownlint" },
 		yaml = { "yamllint" },
-		python = { "pylint" },
+		python = { },
 		json = {},
 		javascript = {},
 		typescript = {},
@@ -104,6 +103,9 @@ local function linterConfigs()
 		end
 		return diagnostics
 	end
+
+	-----------------------------------------------------------------------------
+
 end
 
 local function lintTriggers()
@@ -155,7 +157,10 @@ local function formatterConfigs()
 	local filetypes = {
 		lua = { require("formatter.filetypes.lua").stylua },
 		sh = { require("formatter.filetypes.sh").shfmt, shellharden },
-		python = { require("formatter.filetypes.python").black, require("formatter.filetypes.python").isort },
+		python = {
+			require("formatter.filetypes.python").black,
+			require("formatter.filetypes.python").isort,
+		},
 		html = { require("formatter.filetypes.html").prettier },
 		yaml = { require("formatter.filetypes.yaml").prettier },
 		javascript = { rome },
@@ -206,9 +211,23 @@ return {
 	},
 	{
 		"mhartington/formatter.nvim",
+		config = formatterConfigs,
 		keys = {
 			{ "<D-s>", vim.cmd.FormatWrite, desc = "󰒕  Save & Format" },
 		},
-		config = formatterConfigs,
+		-- exception: toml uses lsp-formatting from taplo
+		init = function()
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "toml",
+				callback = function()
+					vim.keymap.set(
+						"n",
+						"<leader>ft",
+						vim.lsp.buf.format(),
+						{ desc = "󰒕  Save & Format", buffer = true }
+					)
+				end,
+			})
+		end,
 	},
 }
