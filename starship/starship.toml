@@ -179,4 +179,4 @@ format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 version_format = "$major.$minor"
 style = "dimmed cyan"
 python_binary = ["python3"]
-symbol = " "
+symbol = "  "

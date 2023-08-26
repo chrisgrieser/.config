@@ -21,10 +21,16 @@ function M.commentHr()
 	if comStr:find("-") then linechar = "-" end
 
 	local linelength = width - indent - comStrLength
-	local fullLine = linechar:rep(linelength)
 
-	-- due to https://stylelint.io/user-guide/rules/comment-whitespace-inside/
-	if ft == "css" then fullLine = " " .. linechar:rep(linelength - 2) .. " " end
+	-- the common formatters (black and stylelint) demand extra spaces
+	local fullLine
+	if ft == "css" then
+		fullLine = " " .. linechar:rep(linelength - 2) .. " "
+	elseif ft == "python" then
+		fullLine = " " .. linechar:rep(linelength - 1)
+	else
+		fullLine = linechar:rep(linelength)
+	end
 
 	-----------------------------------------------------------------------------
 	-- set HR
