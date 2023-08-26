@@ -45,6 +45,10 @@ function unlock() {
 	echo "Lock file removed."
 }
 
+function rebase() {
+	git rebase "$@"
+}
+
 # https://stackoverflow.com/a/17937889
 function unshallow() {
 	git fetch --unshallow

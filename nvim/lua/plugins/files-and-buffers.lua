@@ -30,11 +30,13 @@ return {
 		main = "project_nvim", -- main module name needed
 		opts = {
 			detection_methods = { "pattern", "lsp" }, -- prioty: pattern, then lsp root
-			exclude_dirs = { "node_modules", "build", "dist" },
+			exclude_dirs = { "node_modules", "build", "dist", "venv" },
 			datapath = u.vimDataDir,
 			patterns = {
 				".git",
 				"Makefile",
+				"pyproject.toml", -- python
+				"requirements.txt", -- python
 				"manifest.json", -- node
 				"package.json", -- node
 				"info.plist", -- Alfred
