@@ -12,6 +12,7 @@ local lsp_servers = {
 	"cssls",
 	"emmet_ls", -- css & html completion
 	"pyright", -- python
+	"ruff_lsp", -- python
 	"marksman", -- markdown
 	"tsserver", -- ts/js
 	"bashls", -- also used for zsh
