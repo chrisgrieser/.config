@@ -82,7 +82,7 @@ return {
 			disable_ft = { "markdown", "css" },
 			-- Disable display of virtual text below blocks for indentation based
 			-- languages like Python
-			disable_virtual_lines_ft = { "yaml" },
+			disable_virtual_lines_ft = { "yaml", "python" },
 		},
 	},
 	{ -- automatically set correct indent for file
