@@ -237,7 +237,7 @@ return {
 						-- to get rainbow colors back https://github.com/HiPhish/rainbow-delimiters.nvim/issues/28
 						vim.cmd.edit()
 						vim.cmd.loadview(9)
-					end, 200)
+					end, 300)
 				end,
 				desc = "󰒕  Save & Format",
 			},

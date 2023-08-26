@@ -1,13 +1,20 @@
 # DOCS https://beta.ruff.rs/docs/rules/
 #───────────────────────────────────────────────────────────────────────────────
 
+[tool.black]
+line-length = 100
+
 [tool.ruff]
+line-length = 100
 select = [ "ALL" ]
 ignore = [
 	"T201", # print statements
 	"S311", # requires cryptographically secure random number generators
 	"W", # pycodestyle warnings which are autofixed by black anyway
 ]
+
+fixable = ["ALL"] # Allow autofix for all enabled rules (when `--fix`) is provided.
+
 
 [tool.ruff.pydocstyle]
 convention = "pep257"  # Accepts: "google", "numpy", or "pep257".

@@ -136,7 +136,7 @@ autocmd("BufNew", {
 autocmd("BufReadPost", {
 	callback = function()
 		vim.defer_fn(function()
-			opt_local.listchars = vim.opt_global.listchars:get() -- copy the global
+			opt_local.listchars = vim.opt.listchars:get() -- copy the global
 			if bo.buftype == "nofile" then
 				opt_local.list = false -- no list chars in special buffers
 			elseif bo.expandtab then
