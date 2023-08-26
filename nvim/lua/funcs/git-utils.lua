@@ -48,6 +48,7 @@ local gitShellOpts = {
 			-- stylua: ignore
 			fn.system("afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf' &")
 		end
+		require("notify").dismiss() -- clear the previous notification
 		vim.notify(out, logLevel)
 
 		output = {} -- empty for next run
