@@ -41,7 +41,7 @@ return {
 
 				-- auto-add trailing semicolon, but only for declarations
 				-- (which are at the end of the line and have no text afterwards)
-				rule(":", ";", "css"):with_pair(negLookahead(".")),
+				rule(":", ";", "css"):with_pair(negLookahead(".+")),
 
 				-- auto-add trailing comma inside tables/objects
 				rule("=", ",", "lua")
