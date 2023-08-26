@@ -136,8 +136,8 @@ local function formatterConfigs()
 		exe = "ruff",
 		stdin = true,
 		args = {
-			"--fix",
-			"--exit-zero",
+			"check",
+			"--fix-only",
 			"--no-cache",
 			"--stdin-filename",
 			util.escape_path(util.get_current_buffer_file_path()),
@@ -222,7 +222,6 @@ return {
 		end,
 	},
 	{
-
 		"mhartington/formatter.nvim",
 		config = formatterConfigs,
 		cmd = { "Format", "FormatWrite" },
