@@ -215,19 +215,5 @@ return {
 		keys = {
 			{ "<D-s>", vim.cmd.FormatWrite, desc = "󰒕  Save & Format" },
 		},
-		-- exception: toml uses lsp-formatting from taplo
-		init = function()
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "toml",
-				callback = function()
-					vim.keymap.set(
-						"n",
-						"<leader>ft",
-						vim.lsp.buf.format(),
-						{ desc = "󰒕  Save & Format", buffer = true }
-					)
-				end,
-			})
-		end,
 	},
 }
