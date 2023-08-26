@@ -17,5 +17,6 @@ abbr("<buffer> true True")
 abbr("<buffer> false False")
 abbr("<buffer> // #")
 abbr("<buffer> -- #")
+abbr("<buffer> else else:")
 
 --------------------------------------------------------------------------------

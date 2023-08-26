@@ -93,6 +93,7 @@ local filetypeSpecificWords = {
 	},
 	python = {
 		{ "print", "assert" },
+		{ "if", "elif" },
 	},
 	markdown = {
 		{ "Note", "Warning" }, -- github callouts
