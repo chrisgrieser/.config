@@ -124,6 +124,7 @@ return {
 		opts = {
 			-- if more than one file is changed, save all buffers
 			post_hook = function(results)
+				if not results.changes then return end
 				local filesChanged = #vim.tbl_keys(results.changes)
 				if filesChanged > 1 then vim.cmd.wall() end
 			end,
