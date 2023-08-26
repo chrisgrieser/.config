@@ -21,9 +21,8 @@ return {
 				cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 			end
 
-			require("nvim-autopairs").setup {
-				check_ts = true, -- use treesitter
-			}
+			-- use treesitter
+			require("nvim-autopairs").setup { check_ts = true }
 
 			-- CUSTOM RULES
 			-- DOCS https://github.com/windwp/nvim-autopairs/wiki/Rules-API
@@ -84,10 +83,12 @@ return {
 			prefix = " 󱞷",
 			highlight = "NonText",
 			min_rows = 7,
-			disable_ft = { "markdown", "css" },
-			-- Disable display of virtual text below blocks for indentation based
-			-- languages like Python
-			disable_virtual_lines_ft = { "yaml", "python" },
+			disable_ft = { "markdown" },
+			min_rows_ft = {
+				python = 15,
+				yaml = 15,
+				css = 20,
+			},
 		},
 	},
 	{ -- automatically set correct indent for file
