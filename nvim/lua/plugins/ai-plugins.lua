@@ -7,13 +7,12 @@ return {
 		keys = {
 			{
 				"<leader>qq",
-				function()
-					require("sg.extensions.telescope").fuzzy_search_results()
-					vim.cmd.bwipeout("#") -- remove temp buffer temporarily created
-				end,
+				function() require("sg.extensions.telescope").fuzzy_search_results() end,
 				desc = "󰓁 SourceGraph Search",
 			},
 			{ "<leader>qu", "<cmd>SourcegraphLink<CR>", desc = "󰓁 Copy SourceGraph URL" },
+			{ "<leader>qa", "<cmd>CodyAsk<CR>", desc = "󰓁 CodyAsk" },
+			{ "<leader>qd", "<cmd>CodyDo<CR>", desc = "󰓁 CodyDo" },
 		},
 		opts = {
 			on_attach = function ()

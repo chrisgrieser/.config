@@ -13,25 +13,36 @@ keymap("n", "A", "g$a", { buffer = true })
 keymap("n", "I", "g^i", { buffer = true })
 
 -- decrease line length without zen mode plugins
-vim.opt_local.signcolumn = "yes:9"
+-- filetype condition ensure ssub-filtypes like "markdown.cody_history" are not affected
+if vim.bo.ft == "markdown" then vim.opt_local.signcolumn = "yes:9" end
 
 -- do not auto-wrap text
-vim.opt_local.formatoptions:remove({"t", "c"})
+vim.opt_local.formatoptions:remove { "t", "c" }
 
 -- hide links and some markup (similar to Obsidian's live preview)
-vim.opt_local.conceallevel = 2 
+vim.opt_local.conceallevel = 2
 
 --------------------------------------------------------------------------------
 -- MARKDOWN-SPECIFIC KEYMAPS
 
 -- Build / Preview
-keymap("n", "<localleader><localleader>", "<Plug>MarkdownPreview", { desc = " Preview", buffer = true })
+keymap(
+	"n",
+	"<localleader><localleader>",
+	"<Plug>MarkdownPreview",
+	{ desc = " Preview", buffer = true }
+)
 
 -- Format Table
-keymap("n", "<localleader>f", "vip:!pandoc -t commonmark_x<CR><CR>", { desc = "  Format Table under Cursor", buffer = true })
+keymap(
+	"n",
+	"<localleader>f",
+	"vip:!pandoc -t commonmark_x<CR><CR>",
+	{ desc = "  Format Table under Cursor", buffer = true }
+)
 
 -- convert md image to html image
-keymap("n", "<localleader>i", function ()
+keymap("n", "<localleader>i", function()
 	local line = vim.api.nvim_get_current_line()
 	local htmlImage = line:gsub("!%[(.-)%]%((.-)%)", '<img src="%2" alt="%1" width=70%%>')
 	vim.api.nvim_set_current_line(htmlImage)
