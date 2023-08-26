@@ -14,6 +14,9 @@ local function isInGitRepo()
 	return inGitRepo
 end
 
+---@param soundFilepath any
+local function playSoundMacOS(soundFilepath) fn.system(("afplay '%s' &"):format(soundFilepath)) end
+
 --NOTE this requires an outer-scope output variable which needs to be emptied
 --before the run
 local output = {}
@@ -39,16 +42,18 @@ local gitShellOpts = {
 		local logLevel
 		if out:lower():find("error") then
 			logLevel = vim.log.levels.ERROR
-			fn.system("afplay '/System/Library/Sounds/Basso.aiff' &")
+			playSoundMacOS("/System/Library/Sounds/Basso.aiff")
 		elseif out:lower():find("warning") then
 			logLevel = vim.log.levels.WARN
-			fn.system("afplay '/System/Library/Sounds/Basso.aiff' &")
+			playSoundMacOS("/System/Library/Sounds/Basso.aiff")
 		else
 			logLevel = vim.log.levels.INFO
-			-- stylua: ignore
-			fn.system("afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf' &")
+			playSoundMacOS(
+				"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf"
+			)
 		end
-		require("notify").dismiss() -- clear the previous notification
+		local ok, notify = pcall(require, "notify")
+		if ok then notify.dismiss() end
 		vim.notify(out, logLevel)
 
 		output = {} -- empty for next run
