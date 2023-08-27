@@ -48,7 +48,7 @@ return {
 					:with_pair(isNodeType { "table_constructor", "field" }),
 				rule(":", ",", { "javascript", "typescript", "json", "python" })
 					:with_pair(negLookahead(" ?}", 3)) -- not in one-liner
-					:with_pair(isNodeType{"object", "dictionary"}),
+					:with_pair(isNodeType { "object", "dictionary" }),
 				rule("", ",") -- automatically move past commas
 					:with_move(function(opts) return opts.char == "," end)
 					:with_pair(function() return false end)
@@ -67,9 +67,20 @@ return {
 					:use_regex(true)
 					:set_end_pair_length(3),
 
+				-- add colon to if/else in python
+				rule("^%s*e?l?if$", ":", "python"):use_regex(true),
+				rule("^%selse$", ":", "python"):use_regex(true),
+				rule("", ":", "python") -- automatically move past colons
+					:with_move(function(opts) return opts.char == ":" end)
+					:with_pair(function() return false end)
+					:with_del(function() return false end)
+					:with_cr(function() return false end)
+					:use_key(":"),
+
+
 				-- quicker template string
 				rule("$", "{}", { "javascript", "typescript", "json" })
-					:with_pair(negLookahead("{", 1)) 
+					:with_pair(negLookahead("{", 1))
 					:with_pair(isNodeType { "string", "template_string", "string_fragment" })
 					:set_end_pair_length(1),
 			}

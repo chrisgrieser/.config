@@ -24,7 +24,7 @@ function run() {
 			name = name.includes("href") ? name.match(/href="(.*?)\/"/)[1] : name.match(/>(.*?)<.*/)[1];
 			const displayName = name.replace(/-/g, " ");
 
-			const url = ruffRulesUrl + name;
+			const url = ruffRulesUrl + name + "/";
 			return {
 				title: displayName,
 				subtitle: id,

@@ -17,6 +17,7 @@ ignore = [
 	"T201", # print statements
 	"S311", # requires cryptographically secure random number generators
 	"W", # pycodestyle warnings which are autofixed by black
+	"RET504", # unnecessary assign for return (makes stuff less verbose)
 
 	# duplicaton with pyright 
 	"F841", # unused var
