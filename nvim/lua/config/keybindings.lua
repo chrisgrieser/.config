@@ -111,10 +111,12 @@ keymap("n", "wq", '"zyy"zpkqqj', { desc = " Duplicate Line as Comment", remap
 -- WHITESPACE CONTROL
 keymap("n", "=", "mzO<Esc>`z", { desc = "  blank above" })
 keymap("n", "_", "mzo<Esc>`z", { desc = "  blank below" })
-keymap("n", "<Tab>", ">>", { desc = "󰉶 indent" })
-keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
-keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
-keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
+keymap("n", "<Tab>", ">>", { desc = "󰉶 indent line" })
+keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent line" })
+keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent selection" })
+keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent selection" })
+keymap("n", "]", ">", { desc = "󰉶 indent operator" })
+keymap("n", "[", "<", { desc = "󰉵 outdent operator" })
 
 keymap("n", "X", "mz$x`z", { desc = "󱎘 Delete char at EoL" })
 
