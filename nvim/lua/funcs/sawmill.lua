@@ -158,36 +158,29 @@ function M.timeLog()
 	local ft = bo.filetype
 
 	if ft == "lua" then
-		logStatement1 = {
-			'print("%s timelog start")',
-			"local timelogStart = os.time() -- %s",
-		}
+		logStatement1 = { "local timelogStart = os.time() -- %s" }
 		logStatement2 = {
 			"local durationSecs = os.difftime(os.time(), timelogStart) -- %s",
 			'print("%s timelog:", durationSecs, "s")',
 		}
+	elseif ft == "python" then
+		logStatement1 = { "timelogStart = time.perf_counter() # %s" }
+		logStatement2 = {
+			"durationSecs = round(time.perf_counter() - timelogStart, 3) # %s",
+			'print("%s timelog:", durationSecs, "s")',
+		}
 	elseif ft == "javascript" then
 		-- JXA does not support console.time()
-		logStatement1 = {
-			'console.log("%s timelog start");',
-			"const timelogStart = +new Date(); // %s",
-		}
+		logStatement1 = { "const timelogStart = +new Date(); // %s" }
 		logStatement2 = {
 			"const durationSecs = (+new Date() - timelogStart) / 1000; // %s",
 			'console.log("%s timelog:", durationSecs, "s");',
 		}
 	elseif ft == "typescript" then
-		logStatement1 = {
-			'console.time("timelog");',
-		}
-		logStatement2 = {
-			'console.timeEnd("timelog");',
-		}
+		logStatement1 = { 'console.time("timelog");' }
+		logStatement2 = { 'console.timeEnd("timelog");' }
 	elseif ft == "bash" or ft == "zsh" or ft == "sh" or ft == "fish" then
-		logStatement1 = {
-			"timelogStart=$(date +%s) # %s",
-			'echo "%s time start"',
-		}
+		logStatement1 = { "timelogStart=$(date +%s) # %s" }
 		logStatement2 = {
 			"timelogEnd=$(date +%s) && durationSecs = $((timelogEnd - timelogStart)) # %s",
 			'echo "%s time ${durationSecs}s"',

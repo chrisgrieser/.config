@@ -121,8 +121,19 @@ keymap("n", "X", "mz$x`z", { desc = "󱎘 Delete char at EoL" })
 keymap("n", "~", function ()
 	local col = vim.fn.col(".") -- fn.col correctly considers tab-indentation
 	local charUnderCursor = vim.api.nvim_get_current_line():sub(col, col)
-	vim.notify("🪚 charUnderCursor: " .. charUnderCursor)
-end, { desc = "~ without moving)" })
+	local isLetter = charUnderCursor:find("^%a$")
+	if isLetter then return "~h" end
+	local brackets = {
+		 ["("]= ")" ,
+		 ["["]= "]" ,
+		 ["{"]= "}" ,
+		 ["<"]= ">" ,
+	}
+	for openBracket, closeBracket in pairs(brackets) do
+		if charUnderCursor == openBracket then return "r" .. closeBracket end
+		if charUnderCursor == closeBracket then return "r" .. openBracket end
+	end
+end, { desc = "~ for letters and characters", expr = true })
 
 -- Word Flipper
 -- stylua: ignore
