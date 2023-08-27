@@ -118,7 +118,11 @@ keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
 
 keymap("n", "X", "mz$x`z", { desc = "󱎘 Delete char at EoL" })
 
-keymap("n", "~", "~h", { desc = "~ without moving)" })
+keymap("n", "~", function ()
+	local col = vim.fn.col(".") -- fn.col correctly considers tab-indentation
+	local charUnderCursor = vim.api.nvim_get_current_line():sub(col, col)
+	vim.notify("🪚 charUnderCursor: " .. charUnderCursor)
+end, { desc = "~ without moving)" })
 
 -- Word Flipper
 -- stylua: ignore
@@ -221,6 +225,8 @@ keymap("n", "<C-Down>", "<cmd>resize -3<CR>", { desc = " horizontal resize (-
 keymap({ "n", "x" }, "<D-c>", "y", { desc = "copy" })
 keymap({ "n", "x" }, "<D-v>", "p", { desc = "paste" })
 keymap("c", "<D-v>", "<C-r>+", { desc = "paste" })
+
+keymap("n", "gP", "`[v`]", { desc = "Select last paste" })
 
 -- keep the register clean
 keymap("n", "x", '"_x')
