@@ -69,7 +69,7 @@ return {
 
 				-- add colon to if/else in python
 				rule("^%s*e?l?if$", ":", "python"):use_regex(true),
-				rule("^%selse$", ":", "python"):use_regex(true),
+				rule("^%s*else$", ":", "python"):use_regex(true),
 				rule("", ":", "python") -- automatically move past colons
 					:with_move(function(opts) return opts.char == ":" end)
 					:with_pair(function() return false end)

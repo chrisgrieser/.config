@@ -1,4 +1,4 @@
-.PHONY: lines, plugins, debug
+.PHONY: lines plugins debug
 #───────────────────────────────────────────────────────────────────────────────
 
 # prints total length of config
