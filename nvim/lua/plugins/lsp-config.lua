@@ -14,7 +14,7 @@ local lsp_servers = {
 	"jsonls",
 	"cssls",
 	"emmet_ls", -- css & html completion
-	"pyright", -- python LSP
+	-- "pyright", -- python LSP
 	"pylsp", -- python LSP
 	"ruff_lsp", -- python linter, formatting capability needs to be provided via cli
 	"marksman", -- markdown
@@ -64,17 +64,23 @@ conf.init_options.ruff_lsp = {
 	settings = { organizeImports = false, fixAll = false },
 }
 
--- Disable hover in favor of Pyright
+-- Disable hover in favor of Pylsp
 conf.on_attach.ruff_lsp = function(client, _) client.server_capabilities.hoverProvider = false end
 
 conf.on_attach.pyright = function(client, _)
+	-- pylsp has better hover, esp. the basic stuff for learning (e.g. "range()")
 	client.server_capabilities.hoverProvider = false
-end
-
-conf.on_attach.pylsp = function(client, _)
-	client.server_capabilities.rename = false
 	client.server_capabilities.signature_help = false
 end
+
+conf.settings.pylsp = {
+	-- jedi_completion = { enabled = false },
+	-- rope_completion = { enabled = false },
+	-- taken care of by ruff
+	flake8 = { enabled = false },
+	pyflakes = { enabled = false },
+	pycodestyle = { enabled = false },
+}
 
 --------------------------------------------------------------------------------
 -- EMMET
