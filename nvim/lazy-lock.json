@@ -73,6 +73,7 @@
   "nvim_context_vt": { "branch": "master", "commit": "44e34d85238e5d964848854ba8b30f986a00ea21" },
   "octo.nvim": { "branch": "master", "commit": "3d749d3f2466870bae996c0a2d44f7517b1da2b0" },
   "one-small-step-for-vimkind": { "branch": "main", "commit": "aa1c4a876c3a4e14614cd0dd55794d00f810dae9" },
+  "other.nvim": { "branch": "main", "commit": "cba4e5feb0c0a703acc9b78bc64422ac1469c468" },
   "plenary.nvim": { "branch": "master", "commit": "0dbe561ae023f02c2fb772b879e905055b939ce3" },
   "project.nvim": { "branch": "main", "commit": "8c6bad7d22eef1b71144b401c9f74ed01526a4fb" },
   "promise-async": { "branch": "main", "commit": "e94f35161b8c5d4a4ca3b6ff93dd073eb9214c0e" },

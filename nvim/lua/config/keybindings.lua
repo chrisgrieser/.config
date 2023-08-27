@@ -120,16 +120,16 @@ keymap("n", "[", "<", { desc = "󰉵 outdent operator" })
 
 keymap("n", "X", "mz$x`z", { desc = "󱎘 Delete char at EoL" })
 
-keymap("n", "~", function ()
+keymap("n", "~", function()
 	local col = vim.fn.col(".") -- fn.col correctly considers tab-indentation
 	local charUnderCursor = vim.api.nvim_get_current_line():sub(col, col)
 	local isLetter = charUnderCursor:find("^%a$")
 	if isLetter then return "~h" end
 	local brackets = {
-		 ["("]= ")" ,
-		 ["["]= "]" ,
-		 ["{"]= "}" ,
-		 ["<"]= ">" ,
+		["("] = ")",
+		["["] = "]",
+		["{"] = "}",
+		["<"] = ">",
 	}
 	for openBracket, closeBracket in pairs(brackets) do
 		if charUnderCursor == openBracket then return "r" .. closeBracket end
@@ -141,14 +141,15 @@ end, { desc = "~ for letters and characters", expr = true })
 -- stylua: ignore
 keymap( "n", "Ö", function() require("funcs.flipper").flipWord() end, { desc = "flip words / toggle casing" })
 
--- [O]pen new Scope
+-- [O]pen new scope / brace
 keymap({ "n", "i" }, "<D-o>", function()
 	local line = vim.api.nvim_get_current_line()
-	line = line:gsub(" $", "") .. " {" -- only appends space if there is none already
+	local trailingComma = line:match(",?$")
+	line = line:gsub(",? ?$", "") .. " {" -- edit current line
 	vim.api.nvim_set_current_line(line)
 	local ln = u.getCursor(0)[1]
 	local indent = line:match("^%s*")
-	vim.api.nvim_buf_set_lines(0, ln, ln, false, { indent .. "\t", indent .. "}" })
+	vim.api.nvim_buf_set_lines(0, ln, ln, false, { indent .. "\t", indent .. "}" .. trailingComma })
 	u.setCursor(0, { ln + 1, 1 }) -- go line down
 	cmd.startinsert { bang = true }
 end, { desc = " Open new scope" })
