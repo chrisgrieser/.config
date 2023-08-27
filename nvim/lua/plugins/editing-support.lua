@@ -202,7 +202,7 @@ return {
 		keys = {
 			-- INFO not binding p/P in visual mode, since I prefer my switch of
 			-- "p" and "P" to be in visual mode for not replacing stuff
-			{ "p", "<Plug>(YankyPutAfter)", desc = " Paste (Yanky)" },
+			{ "p", "<Plug>(YankyPutIndentAfter)", desc = " Paste (Yanky)" },
 			{ "P", "<Plug>(YankyCycleForward)", desc = " Cycle Killring" },
 			{ "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = " Sticky Yank" },
 			{ "Y", "y$" }, -- is already sticky, but to be set to load Yanky for lazy loading

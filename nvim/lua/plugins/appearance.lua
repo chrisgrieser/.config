@@ -143,9 +143,8 @@ return {
 					ccc.picker.hex,
 					ccc.picker.css_rgb,
 					ccc.picker.css_hsl,
-					ccc.picker.ansi_escape {
-						meaning1 = "bright", -- whether the 1 means bright or yellow
-					},
+					-- whether the 1 means bright or yellow
+					ccc.picker.ansi_escape { meaning1 = "bright" },
 				},
 				alpha_show = "hide", -- needed when highlighter.lsp is set to true
 				recognize = { output = true }, -- automatically recognize color format under cursor
@@ -165,6 +164,7 @@ return {
 					["q"] = ccc.mapping.quit,
 					["L"] = ccc.mapping.increase10,
 					["H"] = ccc.mapping.decrease10,
+					["o"] = ccc.mapping.toggle_output_mode,
 				},
 			}
 		end,
