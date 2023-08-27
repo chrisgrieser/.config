@@ -8,9 +8,12 @@ local u = require("lua.utils")
 -- - This spoon is somewhat equivalent to https://github.com/dexterleng/KeyboardScroller.docs
 
 -- CONFIG
--- distance or false to ignore app
+-- - distance to scroll per app. Needed, since scrolling translates into
+--   different distances in different apps
+-- - false to ignore app
 local perAppSettings = {
-	defaultScrollDistance = 40,
+	defaultScrollDistance = 30,
+	Obsidian = 20,
 	Discord = 20,
 	Highlights = 50,
 	Neovide = false,

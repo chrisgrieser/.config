@@ -20,25 +20,23 @@
 		"prefix": "elif",
 		"body": ["elif ${1:expression}:", "\t${2:pass}"]
 	},
+	"for each (list)": {
+		"prefix": "for each (list)",
+		"body": ["for ${1:var} in ${2:list}:", "\t${3:pass}"],
+		"description": "desc"
+	},
+	"for each (key/value)": {
+		"prefix": "for each (key/value)",
+		"body": ["for ${1:key}, ${2:value} in enumerate(${3:list}):", "\t${3:pass}"],
+		"description": "desc"
+	},
 	"else": {
 		"prefix": "else",
 		"body": ["else:", "\t${1:pass}"]
 	},
-	"for": {
-		"prefix": "for",
-		"body": "for ${1:value} in ${2:iterable}:\n\t${3:pass}$0"
-	},
-	"for/else": {
-		"prefix": "for/else",
-		"body": ["for ${1:target_list} in ${2:expression_list}:", "\t${3:pass}", "else:", "\t${4:pass}"]
-	},
 	"while": {
 		"prefix": "while",
 		"body": "while ${1:condition}:\n\t${2:pass}$0"
-	},
-	"while/else": {
-		"prefix": "while/else",
-		"body": ["while ${1:expression}:", "\t${2:pass}", "else:", "\t${3:pass}"]
 	},
 	"if __name__ == \"__main__\"": {
 		"prefix": ["__main__", "ifmain"],
@@ -46,13 +44,13 @@
 		"description": "Create implicitly all the code at the top level using the __name__ special variable."
 	},
 	"List comprehension": {
-		"prefix": "lc",
-		"body": "[${1:value} for ${2:value} in ${3:iterable}]$0",
+		"prefix": ["lc", "list comprehension"],
+		"body": "list(${1:value} for ${2:value} in ${3:iterable})$0",
 		"description": "List comprehension for creating a list based on existing lists."
 	},
 	"lambda": {
 		"prefix": "lambda",
-		"body": ["lambda ${1:parameter_list}: ${2:expression}"],
+		"body": ["lambda ${1:parameter, list}: ${2:expression}"],
 		"description": "Creates a lambda function, an anonymous function in python."
 	},
 	"async/def": {
