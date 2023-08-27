@@ -155,6 +155,7 @@ local function formatterConfigs()
 		exe = "codespell",
 		tmpdir = "/tmp",
 		stdin = false,
+		ignore_exitcode = true,
 		args = {
 			"--ignore-words",
 			linterConfig .. "/codespell-ignore.txt",
