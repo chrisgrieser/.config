@@ -15,17 +15,6 @@
 			<key>url</key>
 			<string>https://sentencestack.com/q/{query}</string>
 		</dict>
-		<key>4F2F551A-542F-4250-8D21-9157C89034A2</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>pip</string>
-			<key>text</key>
-			<string>PyPI Packages:</string>
-			<key>url</key>
-			<string>https://pypi.org/search/?q={query}</string>
-		</dict>
 		<key>4F836420-CA34-42AE-B54D-DDFCA37F005D</key>
 		<dict>
 			<key>enabled</key>
