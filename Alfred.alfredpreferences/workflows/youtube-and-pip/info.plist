@@ -328,7 +328,7 @@ echo -n "$title"</string>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>pip browser</string>
+				<string>pic browser</string>
 				<key>subtext</key>
 				<string>Browser Tab</string>
 				<key>text</key>
@@ -381,7 +381,7 @@ echo -n "$title"</string>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>pip zoom</string>
+				<string>pic zoom</string>
 				<key>subtext</key>
 				<string>Zoom</string>
 				<key>text</key>
@@ -482,7 +482,7 @@ end tell</string>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>pip iina</string>
+				<string>pic iina</string>
 				<key>subtext</key>
 				<string>IINA</string>
 				<key>text</key>

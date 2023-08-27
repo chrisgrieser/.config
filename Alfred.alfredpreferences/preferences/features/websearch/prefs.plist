@@ -4,6 +4,17 @@
 <dict>
 	<key>customSites</key>
 	<dict>
+		<key>1998F491-445C-4284-906F-E7C2A11CF9C9</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>pip</string>
+			<key>text</key>
+			<string>PyPI: '{query}'</string>
+			<key>url</key>
+			<string>https://pypi.org/search/?q={query}</string>
+		</dict>
 		<key>247D826F-9C0B-4405-A61B-AA64E1C4F8A6</key>
 		<dict>
 			<key>enabled</key>

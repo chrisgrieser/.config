@@ -14,16 +14,17 @@ local lsp_servers = {
 	"jsonls",
 	"cssls",
 	"emmet_ls", -- css & html completion
-	"pyright", -- python
-	"ruff_lsp", -- python
+	"pyright", -- python LSP
+	"pylsp", -- python LSP
+	"ruff_lsp", -- python linter, formatting capability needs to be provided via cli
 	"marksman", -- markdown
+	"rome", -- js/ts/json – formatting capability needs to be provided via cli
 	"tsserver", -- ts/js
 	"bashls", -- also used for zsh
 	"taplo", -- toml
 	"lemminx", -- xml/plist
 	"html",
 	"ltex", -- latex/languagetool (requires `openjdk`)
-	"rome", -- js/ts/json – formatting capability needs to be provided via null-ls
 }
 
 --------------------------------------------------------------------------------
@@ -65,6 +66,15 @@ conf.init_options.ruff_lsp = {
 
 -- Disable hover in favor of Pyright
 conf.on_attach.ruff_lsp = function(client, _) client.server_capabilities.hoverProvider = false end
+
+conf.on_attach.pyright = function(client, _)
+	client.server_capabilities.hoverProvider = false
+end
+
+conf.on_attach.pylsp = function(client, _)
+	client.server_capabilities.rename = false
+	client.server_capabilities.signature_help = false
+end
 
 --------------------------------------------------------------------------------
 -- EMMET
