@@ -8,10 +8,7 @@ local keymappings = {
 	["<PageUp>"] = "preview_scrolling_up",
 	["<C-h>"] = "cycle_history_prev",
 	["<C-l>"] = "cycle_history_next",
-	["<D-s>"] = function(prompt_bufnr) -- sends selected, or if none selected, sends all
-		require("funcs.quickfix").deleteList() -- delete current list
-		require("telescope.actions").smart_send_to_qflist(prompt_bufnr)
-	end,
+	["<D-s>"] = "smart_send_to_qflist", -- sends selected, or if none selected, sends all
 	["<Tab>"] = "move_selection_worse",
 	["<S-Tab>"] = "move_selection_better",
 	["?"] = "which_key",
@@ -173,9 +170,14 @@ local function telescopeConfig()
 				sort_mru = true,
 				prompt_title = false,
 				results_title = false,
-				theme = "cursor",
 				previewer = false,
-				layout_config = { cursor = { width = 0.5, height = 0.4 } },
+				layout_config = {
+					horizontal = {
+						anchor = "SW",
+						width = 0.4,
+						height = 0.6,
+					},
+				},
 			},
 			spell_suggest = {
 				initial_mode = "normal",
@@ -240,6 +242,16 @@ local function telescopeConfig()
 						["<bs>"] = false,
 						-- disable to prevent interference with setting undopoints via `<C-g>u`
 						["<C-g>"] = false,
+					},
+				},
+			},
+			recent_files = {
+				previewer = false,
+				layout_config = {
+					horizontal = {
+						anchor = "SW",
+						width = 0.4,
+						height = 0.6,
 					},
 				},
 			},
