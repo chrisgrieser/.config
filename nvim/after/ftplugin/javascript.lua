@@ -8,7 +8,7 @@ abbr("<buffer> cosnt const")
 abbr("<buffer> local const") -- habit from writing too much lua
 abbr("<buffer> -- //") -- habit from writing too much lua
 
-u.applyTemplateIfEmptyFile("js")
+u.applyTemplateIfEmptyFile("jxa")
 
 --------------------------------------------------------------------------------
 
