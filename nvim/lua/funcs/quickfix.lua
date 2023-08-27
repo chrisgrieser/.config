@@ -32,12 +32,6 @@ end
 --------------------------------------------------------------------------------
 -- KEYMAPS
 
-vim.api.nvim_create_autocmd("QuickFixCmdPost", {
-	callback = function()
-		vim.notify(" Quickfix List updated. (Post)")
-	end,
-})
-
 ---delete the quickfixlist
 function M.deleteList()
 	if g.qfCount then g.qfCount = nil end -- de-initialize
