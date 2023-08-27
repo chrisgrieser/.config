@@ -14,39 +14,21 @@ return {
 			end,
 		},
 	},
-	{
+	{ -- open core files
 		"rgroli/other.nvim",
+		main = "other-nvim",
 		keys = {
 			{ "<D-CR>", "<cmd>Other<cr>", desc = "󰁔  Open Other File" },
 		},
-		main = "other-nvim",
 		opts = {
 			mappings = {
-				{
-					context = " lua main module",
-					pattern = ".*.lua$",
-					target = ".*/init.lua",
-				},
-				{
-					context = " python main module",
-					pattern = ".*.py$",
-					target = ".*main.*.py",
-				},
+				-- context uses lua pattern, target uses glob pattern, and needs to
+				-- escape patterns with `\\` https://github.com/rgroli/other.nvim#mappings
+				{ context = " lua main module", pattern = ".*.lua$", target = ".*/init.lua" },
+				{ context = " python main module", pattern = ".*.py$", target = "*main*.py" },
 			},
-
-			-- When a mapping requires an initial selection of the other file, this setting controls,
-			-- whether the selection should be remembered for the current user session.
-			-- When this option is set to false reference between the two buffers are never saved.
-			-- Existing references can be removed on the buffer with :OtherClear
-			rememberBuffers = false,
+			rememberBuffers = false, -- saves connection between two files instead only going one-way
 			showMissingFiles = false,
-			style = {
-				border = u.borderStyle,
-				separator = "║",
-				newFileIndicator = "󰎔 ", -- for showMissingFiles = true
-				width = 0.5,
-				minHeight = 3,
-			},
 		},
 	},
 	{ -- auto-close inactive buffers
@@ -62,7 +44,7 @@ return {
 	{ -- change cwd per project
 		"ahmedkhalf/project.nvim",
 		event = "VimEnter",
-		main = "project_nvim", -- main module name needed
+		main = "project_nvim", 
 		opts = {
 			detection_methods = { "pattern", "lsp" }, -- prioty: pattern, then lsp root
 			exclude_dirs = { "node_modules", "build", "dist", "venv" },
