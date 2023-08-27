@@ -1,28 +1,68 @@
----set the current line to `line`, if it is different
----@param line string
----@return boolean whether line has been changed
-local function setIfChanges(line)
-	if line == vim.api.nvim_get_current_line() then return false end
-	vim.api.nvim_set_current_line(line)
-	return true
-end
-
+local ts = vim.treesitter
 --------------------------------------------------------------------------------
 
 -- auto-convert string to template string when typing `${..}` inside string
 local function templateStr()
-	local curLine = vim.api.nvim_get_current_line()
-	if curLine:find("`.*`") then return end -- already template string
-	local correctedLine = curLine:gsub("[\"'](.*${.-}.*)[\"']", "`%1`")
-	setIfChanges(correctedLine)
+	local node = ts.get_node()
+	if not node then return end
+	local strNode
+	local type
+	if node:type() == "string" then
+		strNode = node
+		type = "string"
+	elseif node:type() == "string_fragment" or node:type() == "escape_sequence" then
+		strNode = node:parent()
+		type = "string"
+	else
+		return
+	end
+	local text = ts.get_node_text(strNode, 0)
+
+	local isTemplateStr = text:find("${.-}")
+	local hasBraces = text:find("${.-}")
+	if (isTemplateStr and hasBraces) or (not isTemplateStr and not hasBraces) then
+		return
+	elseif not isTemplateStr and hasBraces then
+		text = "f" .. text
+	elseif isTemplateStr and not hasBraces then
+		text = text:sub(2)
+	end
+
+	local startRow, startCol, endRow, endCol = strNode:range()
+	local lines = vim.split(text, "\n")
+	vim.api.nvim_buf_set_text(0, startRow, startCol, endRow, endCol, lines)
 end
 
 -- auto-convert string to f-string when typing `{..}` inside string
 -- TODO better using treesitter: https://www.reddit.com/r/neovim/comments/tge2ty/python_toggle_fstring_using_treesitter/
 local function pythonFStr()
-	-- first capture group is non-f character to not re-apply to f-string itself
-	local correctedLine = vim.api.nvim_get_current_line():gsub([[([^f])(["'].*{.-}.*["'])]], "%1f%2")
-	setIfChanges(correctedLine)
+	local node = ts.get_node()
+	if not node then return end
+	local strNode
+	if node:type() == "string" then
+		strNode = node
+	elseif node:type():find("^string_") then
+		strNode = node:parent()
+	elseif node:type() == "escape_sequence" then
+		strNode = node:parent():parent()
+	else
+		return
+	end
+	local text = ts.get_node_text(strNode, 0)
+
+	local isFString = text:find("^f")
+	local hasBraces = text:find("{.-}")
+	if (isFString and hasBraces) or (not isFString and not hasBraces) then
+		return
+	elseif not isFString and hasBraces then
+		text = "f" .. text
+	elseif isFString and not hasBraces then
+		text = text:sub(2)
+	end
+
+	local startRow, startCol, endRow, endCol = strNode:range()
+	local lines = vim.split(text, "\n")
+	vim.api.nvim_buf_set_text(0, startRow, startCol, endRow, endCol, lines)
 end
 
 --------------------------------------------------------------------------------
