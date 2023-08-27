@@ -55,19 +55,11 @@ local function telescopeConfig()
 			borderchars = u.borderChars,
 			history = { path = u.vimDataDir .. "telescope_history" }, -- sync the history
 			file_ignore_patterns = {
-				"%.git/",
-				"%.git$", -- git dir in submodules
-				"node_modules/", -- node
-				"venv/", -- python
-				"%.app/", -- internals of mac apps
-				"%.pxd", -- Pixelmator
 				"%.plist$", -- Alfred
-				"%.project-root$", -- harpoon/projects
 				"%.png$",
 				"%.gif$",
 				"%.icns",
 				"%.zip$",
-				".DS_Store", -- needs to be explicitly added, since unignored in some repos
 				"%-bkp$", -- backup files
 			},
 			mappings = {
