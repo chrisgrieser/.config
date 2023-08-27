@@ -17,18 +17,20 @@ newCommand("LspCapabilities", function()
 	local clients = vim.lsp.get_active_clients { bufnr = curBuf }
 
 	for _, client in pairs(clients) do
-		if client.name ~= "null-ls" then
-			local capAsList = {}
-			for key, value in pairs(client.server_capabilities) do
-				if value and key:find("Provider") then
-					local capability = key:gsub("Provider$", "")
-					table.insert(capAsList, "- " .. capability)
-				end
-			end
-			table.sort(capAsList) -- sorts alphabetically
-			local msg = client.name .. "\n" .. table.concat(capAsList, "\n")
-			vim.notify(msg, u.trace, { timeout = 14000 })
+		local out = { client.name:upper() }
+
+		table.insert(out, "\n.server_capabilities")
+		for key, _ in pairs(client.server_capabilities) do
+			local capability = key:gsub("Provider$", "")
+			table.insert(out, "- " .. capability)
 		end
+
+		table.insert(out, "\n.config.capabilities.textDocument")
+		for key, _ in pairs(client.config.capabilities.textDocument) do
+			table.insert(out, "- " .. key)
+		end
+
+		vim.notify(table.concat(out, "\n"), u.trace, { timeout = 14000 })
 	end
 end, {})
 

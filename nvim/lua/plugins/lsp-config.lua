@@ -14,7 +14,7 @@ local lsp_servers = {
 	"jsonls",
 	"cssls",
 	"emmet_ls", -- css & html completion
-	-- "pyright", -- python LSP
+	"pyright", -- python LSP
 	"pylsp", -- python LSP
 	"ruff_lsp", -- python linter, formatting capability needs to be provided via cli
 	"marksman", -- markdown
@@ -73,13 +73,20 @@ conf.on_attach.pyright = function(client, _)
 	client.server_capabilities.signature_help = false
 end
 
+conf.on_attach.pylsp = function(client, _)
+	client.server_capabilities.signature_help = false
+end
+
+-- pylsp has better hover
 conf.settings.pylsp = {
-	-- jedi_completion = { enabled = false },
-	-- rope_completion = { enabled = false },
-	-- taken care of by ruff
-	flake8 = { enabled = false },
-	pyflakes = { enabled = false },
-	pycodestyle = { enabled = false },
+	pylsp = {
+		plugins = {
+			-- taken care of by ruff
+			flake8 = { enabled = false },
+			pyflakes = { enabled = false },
+			pycodestyle = { enabled = false },
+		}
+	},
 }
 
 --------------------------------------------------------------------------------
