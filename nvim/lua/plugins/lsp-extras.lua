@@ -31,7 +31,7 @@ return {
 		"SmiteshP/nvim-navic",
 		event = "LspAttach", -- loading on `require` ignores the config, so loading on LspAttach
 		init = function()
-			vim.g.navic_silence = true -- suppress notifications on errors
+			-- vim.g.navic_silence = true -- suppress notifications on errors
 
 			vim.keymap.set("n", "^", function()
 				if not require("nvim-navic").is_available() then
@@ -62,7 +62,10 @@ return {
 			end, { desc = "󰒕 Copy Breadcrumbs" })
 		end,
 		opts = {
-			lsp = { auto_attach = true },
+			lsp = {
+				auto_attach = true,
+				preference = { "pyright", "pylsp" }
+			},
 			icons = { Object = "󰆧 " },
 			separator = "  ",
 			depth_limit = 7,
