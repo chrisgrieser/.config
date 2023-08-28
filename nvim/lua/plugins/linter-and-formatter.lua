@@ -1,13 +1,15 @@
 local linterConfig = require("config.utils").linterConfigFolder
 local lintersAndFormatters = {
-	"yamllint", -- only for diagnostics
+	"codespell",
+	"cspell",
+	"yamllint",
 	"shellcheck",
 	"shfmt", -- shell
 	"markdownlint",
 	"ruff", -- python linter/formatter, the lsp does diagnostics, the CLI does formatting
+	"vulture", -- unused code linter
 	"black", -- python formatter
 	"vale", -- natural language
-	"codespell", -- superset of `misspell`, therefore only using codespell
 	"selene", -- lua
 	"stylua", -- lua
 	"prettier", -- only used for yaml and html https://github.com/mikefarah/yq/issues/515
@@ -25,7 +27,7 @@ local function linterConfigs()
 		zsh = { "shellcheck" },
 		markdown = { "vale", "markdownlint" },
 		yaml = { "yamllint" },
-		python = {},
+		python = { "vulture" },
 		json = {},
 		javascript = {},
 		typescript = {},

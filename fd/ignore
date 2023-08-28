@@ -21,3 +21,6 @@ LICENSE
 requirements.txt
 package.json
 package-lock.json
+
+# vim spell file cache
+*.add.spl

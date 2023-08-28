@@ -73,9 +73,7 @@ conf.on_attach.pyright = function(client, _)
 	client.server_capabilities.signature_help = false
 end
 
-conf.on_attach.pylsp = function(client, _)
-	client.server_capabilities.signature_help = false
-end
+conf.on_attach.pylsp = function(client, _) client.server_capabilities.signature_help = false end
 
 -- pylsp has better hover
 conf.settings.pylsp = {
@@ -85,7 +83,7 @@ conf.settings.pylsp = {
 			flake8 = { enabled = false },
 			pyflakes = { enabled = false },
 			pycodestyle = { enabled = false },
-		}
+		},
 	},
 }
 
@@ -211,9 +209,12 @@ conf.filetypes.ltex = { "gitcommit", "markdown", "octo" }
 -- HACK since reading external file with the method described in the ltex docs
 -- does not work
 local dictfile = u.linterConfigFolder .. "/dictionary-for-vale-and-languagetool.txt"
+local fileExists = vim.loop.fs_stat(dictfile) ~= nil
 local words = {}
-for word in io.open(dictfile, "r"):lines() do
-	table.insert(words, word)
+if fileExists then
+	for word in io.open(dictfile, "r"):lines() do
+		table.insert(words, word)
+	end
 end
 
 -- INFO path to java runtime engine (the builtin from ltex does not seem to work)

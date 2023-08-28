@@ -21,12 +21,12 @@ return {
 			-- https://www.reddit.com/r/neovim/comments/12lf0ke/comment/jg6idvr/
 			-- DOCS https://github.com/folke/noice.nvim#-routes
 			routes = {
-				-- redirect stuff to the more subtle "mini"
+				-- REDIRECT STUFF TO THE MORE SUBTLE "MINI"
+				-- write messages
 				{ filter = { event = "msg_show", find = "B written$" }, view = "mini" },
-				-- nvim-early-retirement
-				{ filter = { event = "notify", find = "^Auto%-Closing Buffer:" }, view = "mini" },
 				-- nvim-treesitter
 				{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
+				{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
 
 				-- Mason
 				{ filter = { event = "notify", find = "successfully u?n?installed.$" }, view = "mini" },
@@ -46,7 +46,7 @@ return {
 			},
 			cmdline = {
 				-- classic cmdline at the bottom to not obfuscate the buffer, e.g.
-				-- for :substitute or numb.vnim
+				-- for :substitute or numb.nvim
 				view = "cmdline",
 				format = {
 					search_down = { icon = "  " },
@@ -134,7 +134,6 @@ return {
 			end,
 		},
 		init = function()
-			-- copy [l]ast [n]otice
 			vim.keymap.set("n", "<leader>ln", function()
 				local history = require("notify").history()
 				if #history == 0 then

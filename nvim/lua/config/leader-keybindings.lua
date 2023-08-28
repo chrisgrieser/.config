@@ -218,6 +218,7 @@ end, { desc = "󰊢 Pickaxe File History" })
 -- stylua: ignore
 keymap("n", "<leader>or", "<cmd>set relativenumber!<CR>", { desc = "  Relative Line Numbers" })
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = "  Line Numbers" })
+keymap("n", "<leader>os", "<cmd>set spell<CR>", { desc = " 󰓆 Toggle spellcheck" })
 
 keymap("n", "<leader>ol", "<cmd>LspRestart<CR>", { desc = " 󰒕 LspRestart" })
 

@@ -19,7 +19,7 @@ end, { desc = "⌨️ Edit keybindings.lua" })
 --------------------------------------------------------------------------------
 -- NAVIGATION
 
--- visual instead of logcial lines
+-- visual instead of logical lines
 keymap({ "n", "x" }, "j", "gj")
 keymap({ "n", "x" }, "k", "gk")
 
@@ -156,13 +156,12 @@ end, { desc = " Open new scope" })
 
 --------------------------------------------------------------------------------
 -- SPELLING
-keymap("n", "z=", "z=", { desc = " Toggle spellcheck" })
-keymap("n", "ze", "z=", { desc = " Toggle spellcheck" })
 
 -- [z]pelling [l]ist
 keymap("n", "zl", function() vim.cmd.Telescope("spell_suggest") end, { desc = "󰓆 Spell Suggest" })
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
-
+keymap("n", "gz", "]s", { desc = "󰓆 Next Misspelling" })
+keymap("n", "gZ", "[s", { desc = "󰓆 Previous Misspelling" })
 
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
@@ -306,8 +305,8 @@ keymap({ "n", "x" }, "<D-5>", function()
 	-- URI seems more reliable than JXA when called via nvim https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
 	local workflowId = parentFolder:match("Alfred%.alfredpreferences/workflows/([^/]+)")
 	fn.system { "open", "alfredpreferences://navigateto/workflows>workflow>" .. workflowId }
-	-- in case the right workflow is already open, Alfred is not focussed.
-	-- Therefore manually focussing in addition to that here as well.
+	-- in case the right workflow is already open, Alfred is not focused.
+	-- Therefore manually focusing in addition to that here as well.
 	fn.system { "open", "-a", "Alfred Preferences" }
 end, { desc = "󰮤 Reveal Workflow in Alfred" })
 
@@ -365,14 +364,14 @@ keymap("n", "ga", "gf", { desc = "Goto File under Cursor" }) -- needed, since `g
 --------------------------------------------------------------------------------
 -- FOLDING
 
--- toggle all toplevel folds
+-- toggle all top-level folds
 keymap("n", "zz", function() cmd("%foldclose") end, { desc = "󰘖 Close toplevel folds" })
 
 -- stylua: ignore
 keymap("n", "zr", function() require("ufo").openFoldsExceptKinds { "comments" } end, { desc = "󰘖 󱃄 Open All Folds except comments" })
 keymap("n", "zm", function() require("ufo").closeAllFolds() end, { desc = "󰘖 󱃄 Close All Folds" })
 
--- set foldlevel via z{n}
+-- set fold-level via z{n}
 for _, lvl in pairs { 1, 2, 3, 4, 5 } do
 	local desc = lvl < 4 and "󰘖 Set Fold Level" or "which_key_ignore"
 	keymap("n", "z" .. tostring(lvl), function() require("ufo").closeFoldsWith(lvl) end, { desc = desc })
@@ -398,10 +397,10 @@ autocmd("LspAttach", {
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
 		local capabilities = client.server_capabilities
 
-		-- overrides treesitter-refactor's rename
+		-- overrides treesitter-refactor rename
 		-- stylua: ignore start
 		if capabilities.renameProvider then
-			-- needs defer to not be overwritten by treesitter-refactor's smart-rename
+			-- needs defer to not be overwritten by treesitter-refactor smart-rename
 			vim.defer_fn( function() keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename", buffer = true }) end, 1)
 			keymap("n", "<leader>V", function() return ":IncRename " .. expand("<cword>") end, { desc = "󰒕 IncRename (cword)", buffer = true, expr = true })
 		end
