@@ -54,6 +54,7 @@ return {
 	},
 	{ -- AI completions via cmp
 		"jcdickinson/codeium.nvim",
+		commit = "d0733aa69cedbf6e3acca79957bbb02b0ccd2b1c",
 		dependencies = { "nvim-lua/plenary.nvim", "hrsh7th/nvim-cmp" },
 		opts = {
 			config_path = vim.env.DATA_DIR .. "/private dotfiles/codium-api-key.json",
