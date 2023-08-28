@@ -150,7 +150,7 @@ keymap("n", "<leader>lt", cmd.InspectTree, { desc = " :InspectTree" })
 
 -- Merging & Splitting Lines
 keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "󰗈 Merge line down" })
-keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>]], { desc = "󰗈 Split around selection" })
+keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>=j]], { desc = "󰗈 Split around selection" })
 
 -- Append to / delete from EoL
 for _, key in pairs { ",", ";", ")", '"' } do

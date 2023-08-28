@@ -8,7 +8,10 @@ local function venvLualine()
 			if vim.bo.ft ~= "python" then return "" end
 			local venv = require("venv-selector").get_active_venv()
 			if venv == "" then return "" end
-			return "󱥒 " .. vim.fs.basename(venv)
+			venv = vim.fs.basename(venv)
+			-- only add venv name, if non-default
+			venv = venv:find("^%.?venv$") and "" or " " .. venv
+			return "󱥒" .. venv
 		end,
 		section_separators = topSeparators,
 	})

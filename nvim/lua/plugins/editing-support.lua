@@ -24,12 +24,13 @@ return {
 			-- DOCS https://github.com/windwp/nvim-autopairs/wiki/Rules-API
 			local rule = require("nvim-autopairs.rule")
 			local isNodeType = require("nvim-autopairs.ts-conds").is_ts_node
+			local isNotNodeType = require("nvim-autopairs.ts-conds").is_not_ts_node
 			local negLookahead = require("nvim-autopairs.conds").not_after_regex
 
 			require("nvim-autopairs").add_rules {
 				rule("<", ">", "lua"):with_pair(isNodeType { "string", "string_content" }),
 				rule("<", ">", { "vim", "html", "xml" }), -- keymaps & tags
-				rule('\\"', '\\"', {"json", "sh"}), -- escaped quotes
+				rule('\\"', '\\"', { "json", "sh" }), -- escaped quotes
 				rule("*", "*", "markdown"), -- italics
 				rule("__", "__", "markdown"), -- bold
 				rule("![", "]()", "markdown"):set_end_pair_length(1), -- images
@@ -45,7 +46,7 @@ return {
 					:with_pair(isNodeType { "table_constructor", "field", "object", "dictionary" })
 					:with_del(function() return false end)
 					:with_cr(function() return false end),
-					-- :with_move(function(opts) return opts.char == "," end),
+				-- :with_move(function(opts) return opts.char == "," end),
 
 				-- add brackets to if/else in js/ts
 				rule("^%s*if $", "()", { "javascript", "typescript" })
@@ -59,8 +60,12 @@ return {
 					:set_end_pair_length(3),
 
 				-- add colon to if/else in python
-				rule("^%s*e?l?if$", ":", "python"):use_regex(true),
-				rule("^%s*else$", ":", "python"):use_regex(true),
+				rule("^%s*e?l?if$", ":", "python")
+					:use_regex(true)
+					:with_pair(isNotNodeType("string_content")), -- no docstrings
+				rule("^%s*else$", ":", "python")
+					:use_regex(true)
+					:with_pair(isNotNodeType("string_content")), -- no docstrings
 				rule("", ":", "python") -- automatically move past colons
 					:with_move(function(opts) return opts.char == ":" end)
 					:with_pair(function() return false end)
