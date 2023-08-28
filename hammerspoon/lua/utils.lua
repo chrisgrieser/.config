@@ -149,7 +149,7 @@ end
 --------------------------------------------------------------------------------
 -- APP UTILS
 
----get exact appObject, avoiding the impresion of hs.application(appname)
+---get exact appObject, avoiding the imprecision of hs.application(appname)
 ---@param appName string (literal & exact match)
 ---@return hs.application
 ---@nodiscard
@@ -206,7 +206,7 @@ end
 ---@param appName string
 ---@param callbackFn function function to execute when a window of the app is available
 function M.whenAppWinAvailable(appName, callbackFn)
-	MyTimers[appName.."WinAvailable"] = hs.timer.waitUntil(function()
+	MyTimers[appName .. "WinAvailable"] = hs.timer.waitUntil(function()
 		local app = M.app(appName)
 		local windowAvailable = app and app:mainWindow()
 		return windowAvailable
@@ -217,9 +217,11 @@ end
 ---@param appName string
 ---@param callbackFn function function to execute when the app is available
 function M.whenAppRuns(appName, callbackFn)
-	MyTimers[appName.."AppRun"] = hs.timer.waitUntil(function()
-		return M.app(appName) ~= nil
-	end, callbackFn, 0.1)
+	MyTimers[appName .. "AppRun"] = hs.timer.waitUntil(
+		function() return M.app(appName) ~= nil end,
+		callbackFn,
+		0.1
+	)
 end
 
 ---@param appNames string|string[]

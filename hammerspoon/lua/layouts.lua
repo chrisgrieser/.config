@@ -77,6 +77,7 @@ local function workLayout()
 		end)
 	end
 
+	hs.application("Obsidian")
 	-- minimize Obsidian
 	u.whenAppRuns("Obsidian", function() u.app("Obsidian"):mainWindow():minimize() end)
 	u.restartApp("AltTab")
@@ -173,7 +174,7 @@ DisplayCountWatcher = hs.screen.watcher
 		u.runWithDelays(delay, selectLayout)
 
 		-- if at night switching back to one display, put iMac display to sleep at
-		-- night. i.e., this triggers when the projector is turned off before
+		-- night, i.e., this triggers when the projector is turned off before
 		-- going to sleep
 		if u.betweenTime(22, 7) and not env.isProjector() then hs.execute("pmset displaysleepnow") end
 	end)
