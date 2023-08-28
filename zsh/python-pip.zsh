@@ -1,10 +1,11 @@
 #!/usr/bin/env zsh
 
 export PYTHONSTARTUP="$HOME/.config/python/pythonrc.py"
+export IPYTHONDIR="$HOME.config/ipython"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-alias py="python3"
+alias ip="ipython"
 alias pu="pip uninstall"
 alias pi="pip install"
 alias pl="pip list"
