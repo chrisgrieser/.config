@@ -1,6 +1,36 @@
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
+-- https://www.reddit.com/r/neovim/comments/12lf0ke/comment/jg6idvr/
+-- DOCS https://github.com/folke/noice.nvim#-routes
+local routes = {
+	-- write messages
+	{ filter = { event = "msg_show", find = "B written$" }, view = "mini" },
+	-- nvim-treesitter
+	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
+	{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
+
+	-- Mason
+	{ filter = { event = "notify", find = "successfully u?n?installed.$" }, view = "mini" },
+	{ filter = { event = "notify", find = "^%[mason%-" }, view = "mini" },
+
+	-- Codeium.nvim
+	{ filter = { event = "notify", find = "^Codeium.nvim:" }, view = "mini" },
+	{ filter = { event = "notify", find = "downloading server" }, view = "mini" },
+	{ filter = { event = "notify", find = "unpacking server" }, view = "mini" },
+
+	-- unneeded info on search patterns
+	{ filter = { event = "msg_show", find = "^/." }, skip = true },
+	{ filter = { event = "msg_show", find = "^?." }, skip = true },
+	{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
+
+	-- redirect to split
+	{ filter = { event = "msg_show", min_height = 15 }, view = "split" },
+	{ filter = { event = "notify", min_height = 15 }, view = "split" },
+}
+
+--------------------------------------------------------------------------------
+
 return {
 	{
 		"folke/noice.nvim",
@@ -17,33 +47,7 @@ return {
 			end, { desc = "󰎟 Notification Log" })
 		end,
 		opts = {
-			-- can be used to filter/redirect stuff
-			-- https://www.reddit.com/r/neovim/comments/12lf0ke/comment/jg6idvr/
-			-- DOCS https://github.com/folke/noice.nvim#-routes
-			routes = {
-				-- REDIRECT STUFF TO THE MORE SUBTLE "MINI"
-				-- write messages
-				{ filter = { event = "msg_show", find = "B written$" }, view = "mini" },
-				-- nvim-treesitter
-				{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
-				{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
-
-				-- Mason
-				{ filter = { event = "notify", find = "successfully u?n?installed.$" }, view = "mini" },
-				{ filter = { event = "notify", find = "^%[mason%-" }, view = "mini" },
-				-- Codeium.nvim
-				{ filter = { event = "notify", find = "^Codeium.nvim:" }, view = "mini" },
-				{ filter = { event = "notify", find = "downloading server" }, view = "mini" },
-				{ filter = { event = "notify", find = "unpacking server" }, view = "mini" },
-
-				-- unneeded info on search patterns
-				{ filter = { event = "msg_show", find = "^/." }, skip = true },
-				{ filter = { event = "msg_show", find = "^?." }, skip = true },
-				{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
-
-				-- redirect to split
-				{ filter = { min_height = 15 }, view = "split" },
-			},
+			routes = routes,
 			cmdline = {
 				-- classic cmdline at the bottom to not obfuscate the buffer, e.g.
 				-- for :substitute or numb.nvim
