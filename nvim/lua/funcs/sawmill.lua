@@ -38,10 +38,18 @@ end
 ---append string below current line
 ---@param text string
 local function append(text)
-	local indent = vim.api.nvim_get_current_line():match("^%s*")
-	text = indent .. text
+	local movementCmd = "j"
+	if vim.bo.ft == "python" then
+		local indent = vim.api.nvim_get_current_line():match("^%s*")
+		text = indent .. text
+		movementCmd = "j=="
+	end
 	local ln = vim.api.nvim_win_get_cursor(0)[1]
 	vim.api.nvim_buf_set_lines(0, ln, ln, false, { text })
+
+	if vim.bo.ft ~= "python" then
+		vim.cmd.normal { movementCmd, bang = true }
+	end
 end
 
 --------------------------------------------------------------------------------
@@ -202,7 +210,7 @@ function M.debugLog()
 	local ft = bo.filetype
 
 	if ft == "javascript" or ft == "typescript" then
-		logStatement = { "debugger // %s"}
+		logStatement = { "debugger // %s" }
 	elseif ft == "python" then
 		logStatement = {
 			"from IPython import embed # %s",

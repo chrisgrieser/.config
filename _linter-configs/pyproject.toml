@@ -1,8 +1,8 @@
 # DOCS https://beta.ruff.rs/docs/rules/
 #───────────────────────────────────────────────────────────────────────────────
 
-[tool.pyright]
 # https://microsoft.github.io/pyright/#/configuration?id=type-check-diagnostics-settings
+[tool.pyright]
 strictListInference = true
 strictDictionaryInference = true
 strictSetInference = true

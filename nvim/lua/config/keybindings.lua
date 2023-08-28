@@ -253,7 +253,8 @@ keymap("c", "<D-v>", "<C-r>+", { desc = "paste" })
 keymap("n", "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
 keymap("n", "C", '"_C')
-keymap("x", "p", "P", { desc = "Paste without switching register" })
+keymap("x", "p", "P", { desc = " Paste w/o switching register" })
+keymap("n", "gP", "`[v`]", { desc = " Select last paste" })
 
 -- do not clutter the register if blank line is deleted
 keymap("n", "dd", function()
