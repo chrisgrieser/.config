@@ -82,5 +82,15 @@
 	"home": {
 		"prefix": "home",
 		"body": "POSIX path of (path to home folder as string)"
+	},
+	"wait until browser tab is loaded": {
+		"prefix": "wait until browser tab is loaded",
+		"body": [
+			"tell application \"Brave Browser\"",
+			"\trepeat until (loading of active tab of front window is false)",
+			"\t\tdelay 0.1",
+			"\tend repeat",
+			"end tell"
+		]
 	}
 }

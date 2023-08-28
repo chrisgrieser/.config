@@ -125,12 +125,7 @@ keymap("n", "~", function()
 	local charUnderCursor = vim.api.nvim_get_current_line():sub(col, col)
 	local isLetter = charUnderCursor:find("^%a$")
 	if isLetter then return "~h" end
-	local brackets = {
-		["("] = ")",
-		["["] = "]",
-		["{"] = "}",
-		["<"] = ">",
-	}
+	local brackets = { ["("] = ")", ["["] = "]", ["{"] = "}", ["<"] = ">" }
 	for openBracket, closeBracket in pairs(brackets) do
 		if charUnderCursor == openBracket then return "r" .. closeBracket end
 		if charUnderCursor == closeBracket then return "r" .. openBracket end
@@ -254,19 +249,6 @@ keymap("n", "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
 keymap("n", "C", '"_C')
 keymap("x", "p", "P", { desc = " Paste w/o switching register" })
-keymap("n", "gP", "`[v`]", { desc = " Select last paste" })
-keymap("n", "gP", "`[v`]", { desc = " Select last paste" })
-keymap("n", "gP", "`[v`]", { desc = " Select last paste" })
-keymap("n", "gP", "`[v`]", { desc = " Select last paste" })
-keymap("n", "gP", "`[v`]", { desc = " Select last paste" })
-keymap("n", "gP", "`[v`]", { desc = " Select last paste" })
-keymap("n", "gP", "`[v`]", { desc = " Select last paste" })
-keymap("n", "gP", "`[v`]", { desc = " Select last paste" })
-keymap("n", "gP", "`[v`]", { desc = " Select last paste" })
-keymap("n", "gP", "`[v`]", { desc = " Select last paste" })
-keymap("n", "gP", "`[v`]", { desc = " Select last paste" })
-keymap("n", "gP", "`[v`]", { desc = " Select last paste" })
-keymap("n", "gP", "`[v`]", { desc = " Select last paste" })
 
 -- do not clutter the register if blank line is deleted
 keymap("n", "dd", function()
