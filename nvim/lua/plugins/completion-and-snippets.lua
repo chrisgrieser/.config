@@ -6,7 +6,6 @@ local s = {
 	fuzzybuffer = { name = "fuzzy_buffer", max_item_count = 3 },
 	path = { name = "path" },
 	zsh = { name = "zsh" },
-	codeium = { name = "codeium" },
 	snippets = { name = "luasnip" },
 	lsp = { name = "nvim_lsp" },
 	treesitter = { name = "treesitter" },
@@ -20,7 +19,6 @@ local source_icons = {
 	fuzzy_buffer = "f",
 	zsh = "",
 	nvim_lsp = "󰒕",
-	codeium = "󰚩",
 	luasnip = "󰞘",
 	emoji = "󰇵",
 	nerdfont = "󰇳",
@@ -30,7 +28,6 @@ local source_icons = {
 }
 local defaultSources = {
 	s.snippets,
-	s.codeium,
 	s.lsp,
 	s.emojis,
 	s.treesitter,
@@ -73,16 +70,6 @@ local function cmpconfig()
 	cmp.setup {
 		snippet = {
 			expand = function(args) require("luasnip").lsp_expand(args.body) end,
-		},
-		performance = {
-			-- PERF lower values for lag-free performance
-			-- default values: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L18
-			-- explanations: https://github.com/hrsh7th/nvim-cmp/blob/main/doc/cmp.txt#L425
-			-- throttle = 15,
-			-- debounce = 30,
-			-- max_view_entries = 80,
-			-- async_budget = 0.8,
-			-- fetching_timeout = 250,
 		},
 		window = {
 			completion = {
@@ -180,7 +167,6 @@ local function filetypeCompletionConfig()
 			return not (line:find("%s%-%-?$") or line:find("^%-%-?$"))
 		end,
 		sources = cmp.config.sources {
-			s.codeium,
 			s.snippets,
 			s.lsp,
 			s.nerdfont, -- add nerdfont for config
@@ -228,7 +214,6 @@ local function filetypeCompletionConfig()
 			s.zsh, -- completion from zsh itself
 			s.lsp,
 			s.path,
-			s.codeium,
 			s.treesitter,
 			s.nerdfont, -- used for some configs
 			s.emojis,
@@ -248,7 +233,6 @@ local function filetypeCompletionConfig()
 		sources = cmp.config.sources {
 			s.snippets,
 			s.path,
-			s.codeium,
 			s.buffer,
 		},
 	})
@@ -258,7 +242,6 @@ local function filetypeCompletionConfig()
 		sources = cmp.config.sources {
 			s.snippets,
 			s.treesitter,
-			s.codeium,
 			s.buffer,
 		},
 	})
@@ -269,7 +252,6 @@ local function filetypeCompletionConfig()
 			s.snippets,
 			s.buffer,
 			s.emojis,
-			s.codeium,
 		},
 	})
 end
@@ -323,7 +305,6 @@ return {
 			"hrsh7th/cmp-emoji",
 			{ "chrisgrieser/cmp-nerdfont", dev = true },
 			"tamago324/cmp-zsh", -- some shell completions
-			"jcdickinson/codeium.nvim", -- AI completions
 			"ray-x/cmp-treesitter",
 			"hrsh7th/cmp-nvim-lsp", -- LSP input
 			"L3MON4D3/LuaSnip", -- snippet engine

@@ -458,6 +458,3 @@ keymap("n", "<PageUp>", function() scrollHoverWin("up") end, { desc = "Scroll up
 
 --------------------------------------------------------------------------------
 
-function appp()
-	-- vim.notif
-end

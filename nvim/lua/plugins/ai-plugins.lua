@@ -41,38 +41,15 @@ return {
 			end
 		end,
 		config = function()
-			vim.g.codeium_idle_delay = 75 -- minimum 75
-			vim.g.codeium_filetypes = { TelescopePrompt = false, DressingInput = false }
+			vim.g.codeium_filetypes = { TelescopePrompt = false }
 
 			-- INFO if cmp visible, will use cmp selection instead.
 			vim.g.codeium_disable_bindings = 1
 			-- stylua: ignore start
 			vim.keymap.set("i", "<Tab>", function() return vim.fn["codeium#Accept"]() end, { expr = true, desc = "󰚩 Accept Suggestion", silent = true })
 			vim.keymap.set("i", "<D-s>", function() return vim.fn["codeium#Accept"]() end, { expr = true, desc = "󰚩 Accept Suggestion", silent = true })
+			vim.keymap.set("i", "<D-g>", function() return vim.fn["codeium#CycleCompletions"](1) end, { expr = true, desc = "󰚩 Accept Suggestion", silent = true })
 			-- stylua: ignore end
 		end,
-	},
-	{ -- AI completions via cmp
-		"jcdickinson/codeium.nvim",
-		commit = "3368831",
-		appply,
-		dependencies = { "nvim-lua/plenary.nvim", "hrsh7th/nvim-cmp" },
-		opts = {
-			config_path = vim.env.DATA_DIR .. "/private dotfiles/codium-api-key.json",
-			bin_path = vim.fn.stdpath("data") .. "/codeium",
-		},
-		-- FIX https://github.com/jcdickinson/codeium.nvim/issues/58
-		-- build = function()
-		-- 	local bin_path = vim.fn.stdpath("data") .. "/codeium"
-		-- 	local oldBinaries = vim.fs.find(
-		-- 		function() return true end,
-		-- 		{ type = "file", limit = math.huge, path = bin_path }
-		-- 	)
-		-- 	table.remove(oldBinaries) -- remove last item (= most up to date binary) from list
-		-- 	for _, binaryPath in pairs(oldBinaries) do
-		-- 		os.remove(binaryPath)
-		-- 		os.remove(vim.fs.dirname(binaryPath))
-		-- 	end
-		-- end,
 	},
 }
