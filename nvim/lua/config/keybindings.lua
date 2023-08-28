@@ -319,7 +319,7 @@ keymap( "n", "gO", function()
 		prompt_title = expand("%:p:h:t"),
 		path = expand("%:p:h"),
 	}
-end, { desc = " Browse in Current Folder" })
+end, { desc = " Browse in current Folder" })
 
 keymap("n", "gl", function()
 	local project = projectName()
