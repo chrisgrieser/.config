@@ -26,6 +26,8 @@ ignore = [
 	"TD002", # author for TODO
 	"TD003", # issue link for TODO
 	"FIX002", # complain about TODO in general
+	"S607", # shell command without full path
+	"S605", # shell instead of subshell
 
 	# duplicaton with pyright 
 	"F841", # unused var
