@@ -115,6 +115,7 @@ function ..d() {
 	cd ..
 	trash "$current_dir" || return 1
 	inspect
+	auto_venv
 
 	# add nicer trash sound
 	current_vol=$(osascript -e 'output volume of (get volume settings)') # afplay play with 100% volume by default
@@ -129,6 +130,7 @@ function z() {
 	if ! command -v __zoxide_z &>/dev/null; then printf "\033[1;33mzoxide not installed.\033[0m" && return 1; fi
 	__zoxide_z "$1"
 	inspect
+	auto_venv
 }
 
 function w {
@@ -136,7 +138,7 @@ function w {
 	export WALK_EDITOR="open" # macos default app
 
 	if command -v __zoxide_z &>/dev/null; then
-		__zoxide_z "$(walk --icons "$@")"
+		z "$(walk --icons "$@")"
 	else
 		cd "$(walk --icons "$@")" || return 1
 	fi
@@ -147,12 +149,14 @@ function zz() {
 	if ! command -v __zoxide_z &>/dev/null; then printf "\033[1;33mzoxide not installed.\033[0m" && return 1; fi
 	__zoxide_z - &>/dev/null # since this is verbose command
 	inspect
+	auto_venv
 }
 
 function zi() {
 	if ! command -v __zoxide_zi &>/dev/null; then printf "\033[1;33mzoxide not installed.\033[0m" && return 1; fi
 	__zoxide_zi
 	inspect
+	auto_venv
 }
 
 # cd to pwd from last session. Requires setup in `.zlogout`
@@ -163,8 +167,7 @@ function ld() {
 		return 1
 	fi
 	last_pwd=$(cat "$DOTFILE_FOLDER/zsh/.last_pwd")
-	__zoxide_z "$last_pwd"
-	inspect
+	z "$last_pwd"
 }
 
 # select an external volume to eject

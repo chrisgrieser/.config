@@ -19,7 +19,7 @@ return {
 					repl_definition = {
 						sh = { command = { "zsh" } },
 						typescript = { command = { "node" } },
-						python = { command = { "python3" } },
+						python = { command = { "ipython" } },
 						javascript = { command = { "osascript", "-i", "-l", "JavaScript" } },
 						applescript = { command = { "osascript", "-i", "-l", "AppleScript" } },
 					},
