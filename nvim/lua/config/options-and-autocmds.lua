@@ -50,8 +50,9 @@ opt.matchtime = 1 -- deci-seconds (higher amount feels laggy)
 opt.clipboard = "unnamedplus"
 
 -- Spelling
-opt.spell = false -- off, since using vale & ltex for the lsp-integration
-opt.spelllang = "en_us" -- still used for `z=` and `1z=`
+opt.spell = true
+opt.spelllang = "en_us"
+opt.spelloptions = "camel" -- also check camelcase
 
 -- Split
 opt.splitright = true -- vsplit right instead of left

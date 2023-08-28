@@ -42,7 +42,7 @@ return {
 				{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
 
 				-- redirect to split
-				{ filter = { event = "msg_show", min_height = 10 }, view = "split" },
+				{ filter = { min_height = 15 }, view = "split" },
 			},
 			cmdline = {
 				-- classic cmdline at the bottom to not obfuscate the buffer, e.g.
@@ -124,7 +124,6 @@ return {
 			render = "minimal", -- minimal|default|compact
 			top_down = false,
 			max_width = 70,
-			max_height = 10,
 			minimum_width = 15,
 			level = 0, -- minimum severity level to display (0 = display all)
 			timeout = 7500,
