@@ -109,7 +109,7 @@ local function themeModifications()
 		updateHighlight("ColorColumn", "guibg=#eee6dc")
 		updateHighlight("VertSplit", "guifg=#b29b84")
 		for _, v in pairs(vimModes) do
-			updateHighlight("lualine_y_diff_modified_" .. v, "guifg=#b3880a")
+			updateHighlight("lualine_y_diff_modified_" .. v, "guifg=#a9810a")
 		end
 		updateHighlight("Operator", "guifg=#8c6b1b")
 		-- FIX python highlighting issues

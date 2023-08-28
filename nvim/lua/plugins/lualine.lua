@@ -157,7 +157,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
-
 -- nerdfont: powerline icons have the prefix 'ple-'
 local bottomSeparators = { left = "", right = "" }
 local topSeparators = { left = "", right = "" }
@@ -170,13 +169,12 @@ local lualineConfig = {
 		lualine_a = {
 			-- INFO setting different section separators in the same components has
 			-- yanky results, they should have the same separator
-			-- searchcounter at the top, so it work with cmdheight=0
-			{ clock, section_separators = emptySeparators },
+			{ clock, section_separators = topSeparators },
 			{
 				"tabs",
 				mode = 1,
 				max_length = vim.o.columns * 0.7,
-				section_separators = emptySeparators,
+				section_separators = topSeparators,
 				cond = function() return fn.tabpagenr("$") > 1 end,
 			},
 		},

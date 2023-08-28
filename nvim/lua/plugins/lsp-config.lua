@@ -73,19 +73,6 @@ conf.on_attach.pyright = function(client, _)
 	client.server_capabilities.signature_help = false
 end
 
-conf.settings.pyright = {
-	python = {
-		venvPath = "venv",
-		venv = "env367",
-		analysis = {
-			autoImportCompletions = true,
-			typeCheckingMode = "off",
-			autoSearchPaths = true,
-			useLibraryCodeForTypes = true,
-		},
-	},
-}
-
 conf.on_attach.pylsp = function(client, _) client.server_capabilities.signature_help = false end
 
 -- pylsp has better hover

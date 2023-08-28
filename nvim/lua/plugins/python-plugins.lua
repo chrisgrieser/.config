@@ -1,12 +1,34 @@
+local function venvLualine()
+	local topSeparators = { left = "", right = "" }
+
+	-- INFO inserting to not override the existing lualine segments
+	local section = require("lualine").get_config().tabline.lualine_a or {}
+	table.insert(section, {
+		function()
+			if vim.bo.ft ~= "python" then return "" end
+			local venv = require("venv-selector").get_active_venv()
+			if venv == "" then return "" end
+			return "󱥒 " .. vim.fs.basename(venv)
+		end,
+		section_separators = topSeparators,
+	})
+
+	require("lualine").setup { tabline = { lualine_a = section } }
+end
+
 return {
 	{
 		"linux-cultist/venv-selector.nvim",
 		dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
 		cmd = { "VenvSelect", "VenvSelectCached" },
-		opts = {
-			name = { "venv", ".venv" },
-			auto_refresh = true,
-		},
+		config = function()
+			require("venv-selector").setup {
+				name = { "venv", ".venv" },
+				auto_refresh = true,
+				notify_user_on_activate = false,
+			}
+			venvLualine()
+		end,
 		-- auto-select venv on entering python buffer -- https://github.com/linux-cultist/venv-selector.nvim#-automate
 		init = function()
 			vim.api.nvim_create_autocmd("BufReadPost", {
