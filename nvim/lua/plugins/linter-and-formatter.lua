@@ -6,7 +6,6 @@ local lintersAndFormatters = {
 	"shfmt", -- shell
 	"markdownlint",
 	"ruff", -- python linter/formatter, the lsp does diagnostics, the CLI does formatting
-	"vulture", -- unused code linter
 	"black", -- python formatter
 	"vale", -- natural language
 	"selene", -- lua
@@ -26,7 +25,7 @@ local function linterConfigs()
 		zsh = { "shellcheck" },
 		markdown = { "vale", "markdownlint" },
 		yaml = { "yamllint" },
-		python = { "vulture" },
+		python = {},
 		json = {},
 		javascript = {},
 		typescript = {},

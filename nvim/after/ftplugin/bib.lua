@@ -8,6 +8,9 @@ bo.formatoptions = bo.formatoptions:gsub("t", "")
 -- do have comments?
 bo.commentstring = "% %s"
 
+-- off, since too many false negatives
+vim.opt_local.spell = false
+
 --------------------------------------------------------------------------------
 
 ---checks a .bib file for duplicate citekeys and reports them via `vim.notify`
