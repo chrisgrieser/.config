@@ -19,7 +19,14 @@ local function venvLualine()
 	require("lualine").setup { tabline = { lualine_a = section } }
 end
 
+--------------------------------------------------------------------------------
+
 return {
+	{
+		"stsewd/sphinx.nvim",
+		ft = "python",
+		build = ":UpdateRemotePlugins",
+	},
 	{
 		"linux-cultist/venv-selector.nvim",
 		dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
