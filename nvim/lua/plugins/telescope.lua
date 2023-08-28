@@ -55,6 +55,7 @@ local function telescopeConfig()
 			borderchars = u.borderChars,
 			history = { path = u.vimDataDir .. "telescope_history" }, -- sync the history
 			file_ignore_patterns = {
+				"%.DS_Store$", -- since unignored in some repos
 				"%.plist$", -- Alfred
 				"%.png$",
 				"%.gif$",
@@ -168,7 +169,7 @@ local function telescopeConfig()
 				previewer = false,
 				layout_config = {
 					horizontal = {
-						anchor = "SW",
+						anchor = "S",
 						width = 0.4,
 						height = 0.6,
 					},
@@ -244,7 +245,7 @@ local function telescopeConfig()
 				previewer = false,
 				layout_config = {
 					horizontal = {
-						anchor = "SW",
+						anchor = "S",
 						width = 0.4,
 						height = 0.6,
 					},

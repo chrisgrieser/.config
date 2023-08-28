@@ -19,6 +19,9 @@ ignore = [
 	"W", # pycodestyle warnings which are autofixed by black
 	"RET504", # unnecessary assign for return (makes stuff less verbose)
 	"ERA001", # commented out code
+	"TD002", # author for TODO
+	"TD003", # issue link for TODO
+	"FIX002", # complain about TODO in general
 
 	# duplicaton with pyright 
 	"F841", # unused var
