@@ -6,7 +6,7 @@ local s = {
 	fuzzybuffer = { name = "fuzzy_buffer", max_item_count = 3 },
 	path = { name = "path" },
 	zsh = { name = "zsh" },
-	codeium = { name = "codeium", max_item_count = 3 },
+	codeium = { name = "codeium" },
 	snippets = { name = "luasnip" },
 	lsp = { name = "nvim_lsp" },
 	treesitter = { name = "treesitter" },
@@ -78,11 +78,11 @@ local function cmpconfig()
 			-- PERF lower values for lag-free performance
 			-- default values: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L18
 			-- explanations: https://github.com/hrsh7th/nvim-cmp/blob/main/doc/cmp.txt#L425
-			throttle = 15,
-			debounce = 30,
-			max_view_entries = 80,
-			async_budget = 0.8,
-			fetching_timeout = 250,
+			-- throttle = 15,
+			-- debounce = 30,
+			-- max_view_entries = 80,
+			-- async_budget = 0.8,
+			-- fetching_timeout = 250,
 		},
 		window = {
 			completion = {

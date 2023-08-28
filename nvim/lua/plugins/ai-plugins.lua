@@ -54,24 +54,25 @@ return {
 	},
 	{ -- AI completions via cmp
 		"jcdickinson/codeium.nvim",
-		commit = "d0733aa69cedbf6e3acca79957bbb02b0ccd2b1c",
+		commit = "3368831",
+		appply,
 		dependencies = { "nvim-lua/plenary.nvim", "hrsh7th/nvim-cmp" },
 		opts = {
 			config_path = vim.env.DATA_DIR .. "/private dotfiles/codium-api-key.json",
 			bin_path = vim.fn.stdpath("data") .. "/codeium",
 		},
 		-- FIX https://github.com/jcdickinson/codeium.nvim/issues/58
-		build = function()
-			local bin_path = vim.fn.stdpath("data") .. "/codeium"
-			local oldBinaries = vim.fs.find(
-				function() return true end,
-				{ type = "file", limit = math.huge, path = bin_path }
-			)
-			table.remove(oldBinaries) -- remove last item (= most up to date binary) from list
-			for _, binaryPath in pairs(oldBinaries) do
-				os.remove(binaryPath)
-				os.remove(vim.fs.dirname(binaryPath))
-			end
-		end,
+		-- build = function()
+		-- 	local bin_path = vim.fn.stdpath("data") .. "/codeium"
+		-- 	local oldBinaries = vim.fs.find(
+		-- 		function() return true end,
+		-- 		{ type = "file", limit = math.huge, path = bin_path }
+		-- 	)
+		-- 	table.remove(oldBinaries) -- remove last item (= most up to date binary) from list
+		-- 	for _, binaryPath in pairs(oldBinaries) do
+		-- 		os.remove(binaryPath)
+		-- 		os.remove(vim.fs.dirname(binaryPath))
+		-- 	end
+		-- end,
 	},
 }

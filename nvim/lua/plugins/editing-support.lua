@@ -42,24 +42,18 @@ return {
 				-- (which are at the end of the line and have no text afterwards)
 				rule(":", ";", "css"):with_pair(negLookahead(".+")),
 
-				-- auto-add trailing comma inside tables/objects
-				rule("=", ",", "lua")
-					:with_pair(negLookahead(" ?}", 3)) -- not in one-liner
-					:with_pair(isNodeType { "table_constructor", "field" }),
-				rule(":", ",", { "javascript", "typescript", "json", "python" })
-					:with_pair(negLookahead(" ?}", 3)) -- not in one-liner
-					:with_pair(isNodeType { "object", "dictionary" }),
-				rule("", ",") -- automatically move past commas
-					:with_move(function(opts) return opts.char == "," end)
-					:with_pair(function() return false end)
+				-- auto-add trailing comma inside objects/arrays, if it's a new line
+				rule("^%s*.$", ",")
+					:use_regex(true)
+					:with_pair(negLookahead(".+")) -- neg. cond has to come first
+					:with_pair(isNodeType { "table_constructor", "field", "object", "dictionary" })
 					:with_del(function() return false end)
 					:with_cr(function() return false end)
-					:use_key(","),
-
-				-- add colon to new elements in array
-				rule("^%s*if $", "()", { "javascript", "typescript", "python", 2l })
-					:use_regex(true)
-					:set_end_pair_length(1), -- only move one char to the side
+					:with_move(function(opts) return opts.char == "," end),
+				-- rule("", ",") -- automatically move past commas
+				-- 	:with_pair(function() return false end)
+				-- 	:with_del(function() return false end)
+				-- 	:use_key(","),
 
 				-- add brackets to if/else in js/ts
 				rule("^%s*if $", "()", { "javascript", "typescript" })
