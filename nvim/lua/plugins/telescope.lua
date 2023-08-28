@@ -55,14 +55,17 @@ local function telescopeConfig()
 			borderchars = u.borderChars,
 			history = { path = u.vimDataDir .. "telescope_history" }, -- sync the history
 			file_ignore_patterns = {
-				"%.DS_Store$", -- since unignored in some repos
-				"Icon?", -- since unignored in some repos, (doesn't need ^M^M here)
-				"%.plist$", -- Alfred
 				"%.png$",
 				"%.gif$",
-				"%.icns",
+				"%.icns$",
 				"%.zip$",
 				"%-bkp$", -- backup files
+				-- FIX files from global fd ignore not being ignored
+				"requirements.txt",
+				"package.json",
+				"package-lock.json",
+				"LICENSE",
+				".git/",
 			},
 			mappings = {
 				i = keymappings,
@@ -76,7 +79,7 @@ local function telescopeConfig()
 					height = 0.75,
 					width = 0.99,
 					preview_cutoff = 70,
-					preview_width = { 0.50, min = 30 },
+					preview_width = { 0.55, min = 30 },
 				},
 			},
 		},
@@ -126,6 +129,7 @@ local function telescopeConfig()
 				prompt_prefix = "󰝰 ",
 				follow = true,
 				hidden = true,
+				ignore = true,
 			},
 			live_grep = { prompt_prefix = " ", disable_coordinates = true },
 			grep_string = { prompt_prefix = " ", disable_coordinates = true },

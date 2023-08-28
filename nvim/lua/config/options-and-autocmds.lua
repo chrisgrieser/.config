@@ -5,6 +5,24 @@ local autocmd = vim.api.nvim_create_autocmd
 local keymap = vim.keymap.set
 local u = require("config.utils")
 
+
+--------------------------------------------------------------------------------
+-- FILETYPES
+
+-- make zsh files recognized as sh for bash-ls & treesitter
+vim.filetype.add {
+	extension = {
+		zsh = "sh",
+		sh = "sh", -- so .sh files with zsh-shebang still get sh filetype
+	},
+	filename = {
+		[".zshrc"] = "sh",
+		[".zshenv"] = "sh",
+		[".ignore"] = "gitignore", -- fd ignore files
+		["ignore"] = "gitignore", -- fd ignore files
+	},
+}
+
 --------------------------------------------------------------------------------
 
 -- DIRECTORIES
@@ -52,7 +70,13 @@ opt.clipboard = "unnamedplus"
 -- Spelling
 opt.spell = true
 opt.spelllang = "en_us"
-opt.spelloptions = "camel" -- also check camelcase
+opt.spelloptions = "camel"
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	callback = function()
+		if vim.fn.buftype ~= "" then opt_local.spell = false end
+	end,
+})
 
 -- Split
 opt.splitright = true -- vsplit right instead of left
