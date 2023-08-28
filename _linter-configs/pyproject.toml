@@ -6,6 +6,9 @@
 strictListInference = true
 strictDictionaryInference = true
 strictSetInference = true
+typeCheckingMode = "strict"
+useLibraryCodeForTypes = true
+pythonPlatform = "Darwin" # macOS
 
 [tool.black]
 line-length = 100
