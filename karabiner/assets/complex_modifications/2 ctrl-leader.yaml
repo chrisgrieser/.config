@@ -314,6 +314,14 @@ rules:
           - { key_code: spacebar, modifiers: [control, command] }
           - *deactivate-leader
           - *remove-notice
+      # [x]: ipython
+      - type: basic
+        from: { key_code: x }
+        conditions: [*leader-active]
+        to:
+          - shell_command: wezterm -e ipython
+          - *deactivate-leader
+          - *remove-notice
       # [i]: Transm[i]ssion
       - type: basic
         from: { key_code: i }
