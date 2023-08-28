@@ -457,3 +457,7 @@ keymap("n", "<PageDown>", function() scrollHoverWin("down") end, { desc = "Scrol
 keymap("n", "<PageUp>", function() scrollHoverWin("up") end, { desc = "Scroll up hover" })
 
 --------------------------------------------------------------------------------
+
+function appp()
+	-- vim.notif
+end

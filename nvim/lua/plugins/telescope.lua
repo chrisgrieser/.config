@@ -3,6 +3,7 @@ local u = require("config.utils")
 
 -- default mappings: https://github.com/nvim-telescope/telescope.nvim/blob/942fe5faef47b21241e970551eba407bc10d9547/lua/telescope/mappings.lua#L133
 local keymappings = {
+	["<CR>"] = "select_default",
 	["<Esc>"] = "close",
 	["<PageDown>"] = "preview_scrolling_down",
 	["<PageUp>"] = "preview_scrolling_up",
@@ -213,7 +214,11 @@ local function telescopeConfig()
 				prompt_prefix = "󰋚 ",
 				previewer = false,
 				layout_config = {
-					horizontal = { width = 0.5, height = 0.6 },
+					horizontal = {
+						anchor = "W",
+						width = 0.45,
+						height = 0.6,
+					},
 				},
 			},
 		},
