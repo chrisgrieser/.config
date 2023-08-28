@@ -20,14 +20,14 @@ function v() {
 	fi
 }
 
-# 1. alias `pip update` to `pip3 install --upgrade` 
+# 1. alias `pip update` to `pip3 install --upgrade`
 # 2. alias `pip uninstall` to `pip-autoremove`
 # 3. other commands work as usual
 function pip() {
 	if [[ "$1" == "update" ]]; then
 		shift
 		command pip3 install --upgrade "$@"
-	elif [[ "$1" == "uninstall" ]]; then
+	elif [[ "$1" == "uninstall" ]] && [[ -z "$VIRTUAL_ENV" ]]; then
 		if ! command -v pip-autoremove &>/dev/null; then print "\033[1;33mpip-autoremove not installed.\033[0m" && return 1; fi
 		print "\033[1;34mUsing pip-autoremove\033[0m"
 		shift
