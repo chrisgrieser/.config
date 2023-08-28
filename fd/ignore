@@ -1,18 +1,13 @@
 # vim: filetype=gitignore
 #───────────────────────────────────────────────────────────────────────────────
 # Mac Stuff
-.DS_Store
 .Trash
-
-# Icon must end with two \r
-Icon
-
 
 # useless stuff inside pseudo-apps
 **/*.app/*
 **/*.pxd/*
 
-# git isn't ignored by default
+# git isn't ignored by default?!
 .git
 
 # custom markers
@@ -20,13 +15,9 @@ Icon
 
 # INFO files
 *INFO*
-*_INFO*
 
 # project boilerplate info files – not gitignored, but not used manually as well
 LICENSE
 requirements.txt
 package.json
 package-lock.json
-
-# needs to be explicitly added, since unignored in some repos
-".DS_Store"
