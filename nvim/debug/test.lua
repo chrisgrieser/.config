@@ -1,6 +1,8 @@
 
 
 
+local foobar = "hello world"
+local foobar = "hello world"
 
 
 local foobar = "hello world"

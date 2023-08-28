@@ -4,17 +4,6 @@
 <dict>
 	<key>customSites</key>
 	<dict>
-		<key>1998F491-445C-4284-906F-E7C2A11CF9C9</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>pip</string>
-			<key>text</key>
-			<string>PyPI: '{query}'</string>
-			<key>url</key>
-			<string>https://pypi.org/search/?q={query}</string>
-		</dict>
 		<key>247D826F-9C0B-4405-A61B-AA64E1C4F8A6</key>
 		<dict>
 			<key>enabled</key>
@@ -26,30 +15,6 @@
 			<key>url</key>
 			<string>https://sentencestack.com/q/{query}</string>
 		</dict>
-		<key>4F836420-CA34-42AE-B54D-DDFCA37F005D</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>ai</string>
-			<key>text</key>
-			<string>phind: {query}</string>
-			<key>url</key>
-			<string>https://www.phind.com/search?q={query}</string>
-		</dict>
-		<key>5E85686A-D841-453C-9974-E22F5241FA40</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>xkcd</string>
-			<key>text</key>
-			<string>xkcd: '{query}'</string>
-			<key>url</key>
-			<string>https://findxkcd.com/?xkcd%5Bquery%5D={query}</string>
-			<key>utf8</key>
-			<true/>
-		</dict>
 		<key>5EEA999D-F78D-4F89-BB24-9557712FEE77</key>
 		<dict>
 			<key>enabled</key>
@@ -60,28 +25,6 @@
 			<string>🖥 Steam (App)</string>
 			<key>url</key>
 			<string>steam://openurl/https://store.steampowered.com/search/?term={query}</string>
-		</dict>
-		<key>627B0197-448D-44B9-A7D0-937AF6872376</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>ch</string>
-			<key>text</key>
-			<string>Chrome Extensions: '{query}'</string>
-			<key>url</key>
-			<string>https://chrome.google.com/webstore/search/{query}</string>
-		</dict>
-		<key>860C690D-E5AC-44B5-B046-4D5927A12946</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>npm</string>
-			<key>text</key>
-			<string>NPM Packages: {query}</string>
-			<key>url</key>
-			<string>https://www.npmjs.com/search?q={query}</string>
 		</dict>
 		<key>9672465E-E164-4221-9824-0E164A40E39B</key>
 		<dict>
@@ -107,17 +50,6 @@
 			<key>url</key>
 			<string>https://www.linguee.com/english-german/search?query={query}</string>
 		</dict>
-		<key>9C559005-40A5-4E14-82ED-65A6FB744713</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>ai</string>
-			<key>text</key>
-			<string>Perplexity.ai: {query}</string>
-			<key>url</key>
-			<string>https://www.perplexity.ai/search?s=o&amp;q={query}</string>
-		</dict>
 		<key>CB53E08B-32B8-4062-98CC-5A36E97438A4</key>
 		<dict>
 			<key>enabled</key>
@@ -128,17 +60,6 @@
 			<string>Call with Facetime</string>
 			<key>url</key>
 			<string>tel://{query}</string>
-		</dict>
-		<key>CFD350B4-6201-41ED-93FE-EE2199EC6FAC</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>us</string>
-			<key>text</key>
-			<string>User Scripts: '{query}'</string>
-			<key>url</key>
-			<string>https://www.userscript.zone/search?q={query}</string>
 		</dict>
 		<key>E6EBE234-58DF-42AE-B019-B2941D2B424F</key>
 		<dict>

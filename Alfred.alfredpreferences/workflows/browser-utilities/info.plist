@@ -90,6 +90,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>686A2639-0766-4B57-8970-8BE989DCBDDB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7F2AABA0-1B43-43AB-8A4D-8EA5695680BF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>692B8788-C546-49E7-B8EC-A569E3DD97B0</key>
 		<array>
 			<dict>
@@ -186,6 +199,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>FCE409B4-6AF4-4E92-AAAE-97E55636E8AE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>DAB9CB52-6F51-4F04-8D44-5A6E614E1D23</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CEB33852-35D5-460C-9635-820734885B4C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -313,6 +339,48 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 			<string>64E7E716-0427-41F0-844C-90D39ACC9152</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>us</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Search User Scripts: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>686A2639-0766-4B57-8970-8BE989DCBDDB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://www.userscript.zone/search?q={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>7F2AABA0-1B43-43AB-8A4D-8EA5695680BF</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -505,20 +573,20 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>2</integer>
+				<integer>0</integer>
 				<key>keyword</key>
-				<string>user rules</string>
+				<string>ch</string>
 				<key>subtext</key>
-				<string>Adguard</string>
+				<string></string>
 				<key>text</key>
-				<string>User Rules</string>
+				<string>Search Chrome Store: {query}</string>
 				<key>withspace</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>AADFC524-047E-4638-ABAA-646CEC90599D</string>
+			<string>DAB9CB52-6F51-4F04-8D44-5A6E614E1D23</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -534,12 +602,12 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>chrome-extension://bgnkhhnnamicmpeenaelnjfhikgbkllg/pages/options.html#user-filter</string>
+				<string>https://chrome.google.com/webstore/search/{query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>D909DE7E-1D08-42B3-B048-039BDE823F44</string>
+			<string>CEB33852-35D5-460C-9635-820734885B4C</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -603,6 +671,48 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 			<string>alfred.workflow.trigger.external</string>
 			<key>uid</key>
 			<string>A2BFEBF8-7A2E-4CFD-BA3A-81E700DE84ED</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>user rules</string>
+				<key>subtext</key>
+				<string>Adguard</string>
+				<key>text</key>
+				<string>User Rules</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>AADFC524-047E-4638-ABAA-646CEC90599D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>chrome-extension://bgnkhhnnamicmpeenaelnjfhikgbkllg/pages/options.html#user-filter</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>D909DE7E-1D08-42B3-B048-039BDE823F44</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -743,7 +853,7 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>720</real>
+			<real>890</real>
 		</dict>
 		<key>1F170814-90DD-485E-A861-757A4FD92606</key>
 		<dict>
@@ -754,7 +864,7 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>750</real>
 		</dict>
 		<key>2C5107E7-5DCF-4F55-AEA9-5EC828CEFB91</key>
 		<dict>
@@ -796,6 +906,17 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 			<key>ypos</key>
 			<real>30</real>
 		</dict>
+		<key>686A2639-0766-4B57-8970-8BE989DCBDDB</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>search user scripts</string>
+			<key>xpos</key>
+			<real>790</real>
+			<key>ypos</key>
+			<real>35</real>
+		</dict>
 		<key>692B8788-C546-49E7-B8EC-A569E3DD97B0</key>
 		<dict>
 			<key>colorindex</key>
@@ -812,7 +933,7 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>750</real>
 		</dict>
 		<key>73794C72-64EA-441F-BE9A-67FB5F1A885C</key>
 		<dict>
@@ -823,6 +944,15 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 			<key>ypos</key>
 			<real>30</real>
 		</dict>
+		<key>7F2AABA0-1B43-43AB-8A4D-8EA5695680BF</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>970</real>
+			<key>ypos</key>
+			<real>35</real>
+		</dict>
 		<key>9377EF23-556F-4273-A2A5-3714CA46B546</key>
 		<dict>
 			<key>colorindex</key>
@@ -832,7 +962,7 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>720</real>
+			<real>890</real>
 		</dict>
 		<key>97E52210-B26B-49B3-AC6D-65A1235A88C9</key>
 		<dict>
@@ -866,7 +996,7 @@ for when browser history search workflow updates</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>420</real>
+			<real>590</real>
 		</dict>
 		<key>B420E59A-1B4A-418D-B29E-35104387F051</key>
 		<dict>
@@ -895,7 +1025,7 @@ for when browser history search workflow updates</string>
 			<key>xpos</key>
 			<real>335</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>750</real>
 		</dict>
 		<key>C65CD77E-C2B3-4063-B045-C1954E7FE033</key>
 		<dict>
@@ -907,6 +1037,15 @@ for when browser history search workflow updates</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>270</real>
+		</dict>
+		<key>CEB33852-35D5-460C-9635-820734885B4C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>305</real>
+			<key>ypos</key>
+			<real>415</real>
 		</dict>
 		<key>D08A57FD-FECC-413A-8C0C-9000B0B56F6A</key>
 		<dict>
@@ -926,7 +1065,18 @@ for when browser history search workflow updates</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>420</real>
+			<real>590</real>
+		</dict>
+		<key>DAB9CB52-6F51-4F04-8D44-5A6E614E1D23</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>search store</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>415</real>
 		</dict>
 		<key>ECF8457A-8061-4F7D-8269-5315D566CDE6</key>
 		<dict>

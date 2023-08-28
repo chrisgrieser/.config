@@ -39,7 +39,7 @@ return {
 				rule(":", ";", "css"):with_pair(negLookahead(".+")),
 
 				-- auto-add trailing comma inside objects/arrays, if it's a new line
-				rule([[^%s*[:=%a"']$]], ",")
+				rule([[^%s*[:=%a"']$]], ",", { "javascript", "typescript", "lua", "json", "python" })
 					:use_regex(true)
 					:with_pair(negLookahead(".+")) -- neg. cond has to come first
 					:with_pair(isNodeType { "table_constructor", "field", "object", "dictionary" })
@@ -193,7 +193,7 @@ return {
 			-- https://github.com/gbprod/yanky.nvim#%EF%B8%8F-special-put
 			-- INFO not binding p/P in visual mode, since I prefer my switch of
 			-- "p" and "P" to be in visual mode for not replacing stuff
-			{ "p", "<Plug>(YankyPutAfterFilter)", desc = " Paste & Re-indent" },
+			{ "p", "<Plug>(YankyPutAfterFilter)", desc = " Linewise Paste & Re-indent" },
 			{ "gp", "<Plug>(YankyPutIndentAfterCharwise)", desc = " Charwise Paste" },
 			{ "P", "<Plug>(YankyCycleForward)", desc = " Cycle Killring" },
 			{ "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = " Sticky Yank" },
