@@ -193,7 +193,7 @@ return {
 			-- https://github.com/gbprod/yanky.nvim#%EF%B8%8F-special-put
 			-- INFO not binding p/P in visual mode, since I prefer my switch of
 			-- "p" and "P" to be in visual mode for not replacing stuff
-			{ "p", "<Plug>(YankyPutAfterFilter)", desc = " Linewise Paste & Re-indent" },
+			{ "p", "<Plug>(YankyPutIndentAfter)", desc = " Paste & Re-indent" },
 			{ "gp", "<Plug>(YankyPutIndentAfterCharwise)", desc = " Charwise Paste" },
 			{ "P", "<Plug>(YankyCycleForward)", desc = " Cycle Killring" },
 			{ "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = " Sticky Yank" },

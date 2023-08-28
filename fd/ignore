@@ -16,6 +16,5 @@
 
 # project boilerplate info files – not gitignored, but not used manually as well
 LICENSE
-requirements.txt
 package.json
 package-lock.json

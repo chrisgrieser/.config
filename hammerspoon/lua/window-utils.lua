@@ -234,14 +234,17 @@ local function moveAllWinsToProjectorScreen()
 end
 
 local function verticalSplit()
-	if u.app("neovide"):isFrontmost() then
+	-- since not using spaces for anything else, using its number to detect
+	-- whether there is a split or not
+	local noSplit = #hs.spaces.spacesForScreen(hs.mouse.getCurrentScreen()) == 1
+	local tryingToStartSplitFromNeovide = u.app("neovide"):isFrontmost() and noSplit
+
+	if tryingToStartSplitFromNeovide then
 		local msg = "Neovide does not support macOS window options."
 			.. "\n\nStart the split the other different app."
 		hs.alert.show(msg)
 		return
 	end
-	-- since not using spaces for anything else
-	local noSplit = #hs.spaces.spacesForScreen(hs.mouse.getCurrentScreen()) == 1
 
 	if noSplit then
 		-- unhide all windows, so they are displayed as selection for the second window

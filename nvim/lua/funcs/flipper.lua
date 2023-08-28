@@ -92,8 +92,8 @@ local filetypeSpecificWords = {
 		{ "print", "assert" },
 	},
 	python = {
-		{ "print", "assert" },
 		{ "if", "elif" },
+		{ "from", "import" },
 	},
 	markdown = {
 		{ "Note", "Warning" }, -- github callouts
