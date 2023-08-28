@@ -29,7 +29,7 @@ return {
 			require("nvim-autopairs").add_rules {
 				rule("<", ">", "lua"):with_pair(isNodeType { "string", "string_content" }),
 				rule("<", ">", { "vim", "html", "xml" }), -- keymaps & tags
-				rule('\\"', '\\"'), -- escaped quotes
+				rule('\\"', '\\"', {"json", "sh"}), -- escaped quotes
 				rule("*", "*", "markdown"), -- italics
 				rule("__", "__", "markdown"), -- bold
 				rule("![", "]()", "markdown"):set_end_pair_length(1), -- images
@@ -39,13 +39,13 @@ return {
 				rule(":", ";", "css"):with_pair(negLookahead(".+")),
 
 				-- auto-add trailing comma inside objects/arrays, if it's a new line
-				rule([[^%s*[:=%a"']$]], ",", { "javascript", "typescript", "lua", "python" })
+				rule([[^%s*[:=%a]$]], ",", { "javascript", "typescript", "lua", "python" })
 					:use_regex(true)
 					:with_pair(negLookahead(".+")) -- neg. cond has to come first
 					:with_pair(isNodeType { "table_constructor", "field", "object", "dictionary" })
 					:with_del(function() return false end)
-					:with_cr(function() return false end)
-					:with_move(function(opts) return opts.char == "," end),
+					:with_cr(function() return false end),
+					-- :with_move(function(opts) return opts.char == "," end),
 
 				-- add brackets to if/else in js/ts
 				rule("^%s*if $", "()", { "javascript", "typescript" })
