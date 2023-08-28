@@ -39,18 +39,19 @@ local function customHighlights()
 		("guisp=%s guifg=%s gui=underline term=underline"):format(commentColor, commentColor)
 	)
 
-	-- make MatchParen stand out more (orange to close to rainbow brackets)
+	-- make `MatchParen` stand out more (orange to close to rainbow brackets)
 	overwriteHighlight("MatchParen", { reverse = true })
 
-	-- proper underlines for diagnostics
-	local types = { "Error", "Warn", "Info", "Hint" }
-	for _, type in pairs(types) do
+	-- proper underlines for diagnostics and spelling
+	for _, type in pairs { "Error", "Warn", "Info", "Hint" } do
 		updateHighlight(type .. "Text", "gui=underdouble cterm=underline")
 		updateHighlight("DiagnosticUnderline" .. type, "gui=underdouble cterm=underline")
 	end
+	for _, type in pairs { "Bad", "Cap", "Rare", "Local" } do
+		updateHighlight("Spell" .. type, "gui=underdouble cterm=underline")
+	end
 end
 
--- selene: allow(high_cyclomatic_complexity)
 local function themeModifications()
 	local mode = vim.opt.background:get()
 	-- some themes do not set g.colors_name

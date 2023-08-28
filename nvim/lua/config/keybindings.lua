@@ -155,6 +155,16 @@ keymap({ "n", "i" }, "<D-o>", function()
 end, { desc = " Open new scope" })
 
 --------------------------------------------------------------------------------
+-- SPELLING
+keymap("n", "z=", "z=", { desc = " Toggle spellcheck" })
+keymap("n", "ze", "z=", { desc = " Toggle spellcheck" })
+
+-- [z]pelling [l]ist
+keymap("n", "zl", function() vim.cmd.Telescope("spell_suggest") end, { desc = "󰓆 Spell Suggest" })
+keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
+
+
+--------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
 
 keymap("n", "<Down>", [[<cmd>. move +1<CR>==]], { desc = "󰜮 Move Line Down", silent = true })

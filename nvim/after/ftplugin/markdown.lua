@@ -1,26 +1,29 @@
 local keymap = vim.keymap.set
 local fn = vim.fn
 local u = require("config.utils")
+local optl = vim.opt_local
 --------------------------------------------------------------------------------
 
 -- less nesting in md
-vim.opt_local.tabstop = 4
+optl.tabstop = 4
 
 -- Enable wrapping lines
-vim.opt_local.wrap = true
-vim.opt_local.colorcolumn = ""
+optl.wrap = true
+optl.colorcolumn = ""
 keymap("n", "A", "g$a", { buffer = true })
 keymap("n", "I", "g^i", { buffer = true })
 
 -- decrease line length without zen mode plugins
 -- filetype condition ensure ssub-filtypes like "markdown.cody_history" are not affected
-if vim.bo.ft == "markdown" then vim.opt_local.signcolumn = "yes:9" end
+if vim.bo.ft == "markdown" then optl.signcolumn = "yes:9" end
 
 -- do not auto-wrap text
-vim.opt_local.formatoptions:remove { "t", "c" }
+optl.formatoptions:remove { "t", "c" }
 
 -- hide links and some markup (similar to Obsidian's live preview)
-vim.opt_local.conceallevel = 2
+optl.conceallevel = 2
+
+optl.spell = false -- off, since using vale & ltex here
 
 --------------------------------------------------------------------------------
 -- MARKDOWN-SPECIFIC KEYMAPS
@@ -64,28 +67,6 @@ keymap({ "n", "x" }, "<C-k>", [[?^#\+ <CR><cmd>nohl<CR>]], { desc = " # Prev 
 
 --------------------------------------------------------------------------------
 -- SPELLING
-
--- [z]pelling [l]ist
-keymap("n", "zl", function() vim.cmd.Telescope("spell_suggest") end, { desc = "󰓆 Spell Suggest" })
-keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
-
----add word under cursor to vale/languagetool dictionary
-keymap({ "n", "x" }, "zg", function()
-	local word
-	if fn.mode() == "n" then
-		local iskeywBefore = vim.opt_local.iskeyword:get() -- remove word-delimiters for <cword>
-		vim.opt_local.iskeyword:remove { "_", "-", "." }
-		word = fn.expand("<cword>")
-		vim.opt_local.iskeyword = iskeywBefore
-	else
-		u.normal('"zy')
-		word = fn.getreg("z")
-	end
-	local filepath = u.linterConfigFolder .. "/dictionary-for-vale-and-languagetool.txt"
-	local error = u.writeToFile(filepath, word, "a")
-	local msg = error and "󰓆 Error: " .. error or "󰓆 Added: " .. word
-	vim.notify(msg)
-end, { desc = "󰓆 Accept Word", buffer = true })
 
 local lang = "de-DE"
 keymap("n", "zd", function()
