@@ -5,6 +5,9 @@
 **/*.app/*
 **/*.pxd/*
 
+# git isn't ignored by default?!
+.git/*
+
 # custom markers
 .project-root
 

@@ -33,7 +33,7 @@ return {
 			require("nvim-autopairs").add_rules {
 				rule("<", ">", "lua"):with_pair(isNodeType { "string", "string_content" }),
 				rule("<", ">", { "vim", "html", "xml" }), -- keymaps & tags
-				rule('\\"', '\\"', { "sh", "json" }), -- escaped quotes
+				rule('\\"', '\\"'), -- escaped quotes
 				rule("*", "*", "markdown"), -- italics
 				rule("__", "__", "markdown"), -- bold
 				rule("![", "]()", "markdown"):set_end_pair_length(1), -- images
@@ -56,6 +56,11 @@ return {
 					:with_cr(function() return false end)
 					:use_key(","),
 
+				-- add colon to new elements in array
+				rule("^%s*if $", "()", { "javascript", "typescript", "python", 2l })
+					:use_regex(true)
+					:set_end_pair_length(1), -- only move one char to the side
+
 				-- add brackets to if/else in js/ts
 				rule("^%s*if $", "()", { "javascript", "typescript" })
 					:use_regex(true)
@@ -76,7 +81,6 @@ return {
 					:with_del(function() return false end)
 					:with_cr(function() return false end)
 					:use_key(":"),
-
 
 				-- quicker template string
 				rule("$", "{}", { "javascript", "typescript", "json" })

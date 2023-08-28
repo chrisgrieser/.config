@@ -1,6 +1,3 @@
-local function dapConfig()
-end
-
 local function dapLualine()
 	local topSeparators = { left = "", right = "" }
 
@@ -49,14 +46,16 @@ return {
 		{ "<leader>bc", function() require("dap").run_to_cursor() end, desc = " Run to Cursor" },
 		{ "<leader>br", function() require("dap").clear_breakpoints() end, desc = "  Remove Breakpoints" },
 		{ "<leader>bq", function() require("dap").list_breakpoints() end, desc = "  Breakpoints to QuickFix" },
-		{ "<leader>bt", function() require("dap").list_breakpoints() end, desc = "  Breakpoints to QuickFix" },
-
-vim.keymap.set("n", "<leader>bt", function()
-	vim.opt_local.number = false
-	require("dapui").close()
-	require("dap").terminate()
-end, { desc = "  Terminate" })
 		-- stylua: ignore end
+		{
+			"<leader>bt",
+			function()
+				vim.opt_local.number = false
+				require("dapui").close()
+				require("dap").terminate()
+			end,
+			desc = "  Terminate",
+		},
 	},
 	dependencies = {
 		{ "jayp0521/mason-nvim-dap.nvim", config = true },
@@ -64,7 +63,6 @@ end, { desc = "  Terminate" })
 		{ "rcarriga/nvim-dap-ui", config = true },
 	},
 	init = function()
-
 		local ok, whichKey = pcall(require, "which-key")
 		if ok then whichKey.register { ["<leader>b"] = { name = "  Debugger" } } end
 	end,

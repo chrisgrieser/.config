@@ -19,6 +19,12 @@ local keymappings = {
 		require("telescope.actions").toggle_selection(prompt_bufnr)
 		require("telescope.actions").move_selection_worse(prompt_bufnr)
 	end,
+	["<D-l>"] = function(prompt_bufnr)
+		-- Reveal File in macOS Finder
+		local path = require("telescope.actions.state").get_selected_entry().value
+		require("telescope.actions").close(prompt_bufnr)
+		vim.fn.system { "open", "-R", path }
+	end,
 	["<C-p>"] = function(prompt_bufnr)
 		-- Copy path of file -- https://github.com/nvim-telescope/telescope-file-browser.nvim/issues/191
 		local path = require("telescope.actions.state").get_selected_entry().value
@@ -54,23 +60,7 @@ local function telescopeConfig()
 			path_display = { "tail" },
 			borderchars = u.borderChars,
 			history = { path = u.vimDataDir .. "telescope_history" }, -- sync the history
-			file_ignore_patterns = {
-				"%.png$",
-				"%.gif$",
-				"%.icns$",
-				"%.zip$",
-				"%-bkp$", -- backup files
-				-- FIX files from global fd ignore not being ignored
-				"requirements.txt",
-				"package.json",
-				"package-lock.json",
-				"LICENSE",
-				".git/",
-			},
-			mappings = {
-				i = keymappings,
-				n = keymappings,
-			},
+			default_mappings = { i = keymappings, n = keymappings },
 			sorting_strategy = "ascending", -- so layout is correctly orientated with prompt_position "top"
 			layout_strategy = "horizontal",
 			layout_config = {
@@ -127,9 +117,9 @@ local function telescopeConfig()
 			},
 			find_files = {
 				prompt_prefix = "󰝰 ",
-				follow = true,
-				hidden = true,
-				ignore = true,
+				-- using the default find command from telescope is somewhat buggy,
+				-- e.g. not respecting fd/ignore
+				find_command = { "fd", "--hidden", "--follow", "--type=file", "--type=symlink" },
 			},
 			live_grep = { prompt_prefix = " ", disable_coordinates = true },
 			grep_string = { prompt_prefix = " ", disable_coordinates = true },
@@ -175,7 +165,7 @@ local function telescopeConfig()
 				results_title = false,
 				previewer = false,
 				layout_config = {
-					horizontal = { width = 0.4, height = 0.6 },
+					horizontal = { width = 0.4, height = 0.5 },
 				},
 			},
 			spell_suggest = {
@@ -223,7 +213,7 @@ local function telescopeConfig()
 				prompt_prefix = "󰋚 ",
 				previewer = false,
 				layout_config = {
-					horizontal = { width = 0.4, height = 0.6 },
+					horizontal = { width = 0.5, height = 0.6 },
 				},
 			},
 		},
