@@ -25,6 +25,7 @@ duti -s "$videoplayerID" m4a all
 
 # code
 editorID="com.apple.automator.Neovide-Helper"
+duti -s "$editorID" add all # vim spell file
 duti -s "$editorID" com.apple.traditional-mac-plain-text all
 duti -s "$editorID" public.make-source all
 duti -s "$editorID" public.data all # dotfiles without extension

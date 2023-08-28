@@ -1,1 +1,1 @@
-../../../../dictionary-for-vale-and-languagetool.txt
+../../../../spellfile-vim-vale-ltex.add
