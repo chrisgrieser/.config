@@ -1,7 +1,3 @@
-# vim spell files
-*.spl
-*.add
-
 # Automator App Internals (ignoring the folder does not work?)
 mac-helper/*.app
 *INFO*

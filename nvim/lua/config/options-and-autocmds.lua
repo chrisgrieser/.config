@@ -14,6 +14,7 @@ vim.filetype.add {
 	extension = {
 		zsh = "sh",
 		sh = "sh", -- so .sh files with zsh-shebang still get sh filetype
+		add = "text", -- vim spell files
 	},
 	filename = {
 		[".zshrc"] = "sh",
@@ -71,6 +72,7 @@ opt.clipboard = "unnamedplus"
 opt.spell = true
 opt.spelllang = "en_us"
 opt.spelloptions = "camel"
+opt.spellfile = u.linterConfigFolder .. "/spellfile-vim-vale-ltex.add" -- has to be .add
 
 vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function()
