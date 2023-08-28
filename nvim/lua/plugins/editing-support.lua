@@ -189,6 +189,7 @@ return {
 	},
 	{ -- killring & highlights on `p`
 		"gbprod/yanky.nvim",
+		enabled = false,
 		keys = {
 			-- https://github.com/gbprod/yanky.nvim#%EF%B8%8F-special-put
 			-- INFO not binding p/P in visual mode, since I prefer my switch of
