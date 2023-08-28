@@ -249,14 +249,11 @@ keymap({ "n", "x" }, "<D-c>", "y", { desc = "copy" })
 keymap({ "n", "x" }, "<D-v>", "p", { desc = "paste" })
 keymap("c", "<D-v>", "<C-r>+", { desc = "paste" })
 
-keymap("n", "gP", "`[v`]", { desc = "Select last paste" })
-
 -- keep the register clean
 keymap("n", "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
 keymap("n", "C", '"_C')
 keymap("x", "p", "P", { desc = "Paste without switching register" })
-keymap("n", "<leader>d", '"_d', { desc = "󱎘 Delete w/o register" })
 
 -- do not clutter the register if blank line is deleted
 keymap("n", "dd", function()
@@ -264,21 +261,6 @@ keymap("n", "dd", function()
 	local expr = isBlankLine and '"_dd' or "dd"
 	return expr
 end, { expr = true })
-
--- paste charwise reg as linewise & vice versa
-keymap("n", "gp", function()
-	local regContent = fn.getreg("+")
-	local isLinewise = fn.getregtype("+") == "V"
-
-	local targetRegType = "V"
-	if isLinewise then
-		targetRegType = "v"
-		regContent = regContent:gsub("^%s*", ""):gsub("%s*$", "")
-	end
-
-	fn.setreg("+", regContent, targetRegType) ---@diagnostic disable-line: param-type-mismatch
-	u.normal('"+p')
-end, { desc = " Paste differently" })
 
 -- always paste characterwise when in insert mode
 keymap("i", "<D-v>", function()

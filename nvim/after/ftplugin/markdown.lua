@@ -1,6 +1,4 @@
 local keymap = vim.keymap.set
-local fn = vim.fn
-local u = require("config.utils")
 local optl = vim.opt_local
 --------------------------------------------------------------------------------
 
@@ -23,7 +21,8 @@ optl.formatoptions:remove { "t", "c" }
 -- hide links and some markup (similar to Obsidian's live preview)
 optl.conceallevel = 2
 
-optl.spell = false -- off, since using vale & ltex here
+-- off, since using vale & ltex here
+optl.spell = false
 
 --------------------------------------------------------------------------------
 -- MARKDOWN-SPECIFIC KEYMAPS
