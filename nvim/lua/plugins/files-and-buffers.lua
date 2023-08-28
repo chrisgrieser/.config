@@ -3,20 +3,14 @@ local u = require("config.utils")
 return {
 	{ -- auto-save buffers
 		"okuuva/auto-save.nvim",
-		enabled = false,
 		event = { "InsertLeave", "TextChanged" }, -- only needs to be loaded on files changes
 		opts = {
 			execution_message = { enabled = false },
 			noautocmd = true, -- false would be buggy with :FormatWrite
 			debounce_delay = 1000, -- save at most this many ms
 			condition = function(buf)
-				local ok, yanky = pcall(require, "yanky")
-				local lastActionWasPut = nil -- unknown without yanky
-				if not ok then lastActionWasPut = yanky.ring.state ~= nil end
-
 				local isRegularBuffer = vim.api.nvim_buf_get_option(buf, "buftype") == ""
-				local shouldAutosave = isRegularBuffer and not lastActionWasPut
-				return shouldAutosave
+				return isRegularBuffer
 			end,
 		},
 	},

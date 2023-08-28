@@ -2,26 +2,33 @@
 
 -- start zoom & trigger SSO Login
 tell application "zoom.us" to activate
-delay 1.5
+delay 1
 tell application "zoom.us" to activate # in case window switched
 
 tell application "System Events"
 	keystroke tab
 	keystroke tab
 	keystroke space
-	delay 0.2
+	delay 0.3
 	keystroke tab
+	delay 0.05
 	keystroke tab
+	delay 0.05
 	keystroke tab
+	delay 0.05
 	keystroke tab
+	delay 0.3
 	keystroke space
+	delay 0.3
 
-	-- this part only works on vivaldi, since it fills the forms properly
-	set frontApp to (name of first process where it is frontmost)
-	if frontApp is not "Vivaldi" then return
-	delay 0.7
-	keystroke tab
-	keystroke tab
-	keystroke tab
-	keystroke space
+	# tell application "Brave Browser"
+	# 	repeat until (loading of active tab of front window is false)
+	# 		delay 0.1
+	# 	end repeat
+	# end tell
+	# delay 0.7
+	# keystroke tab
+	# key code 125 # down
+	# key code 36 # return
+	# key code 36 # return
 end tell
