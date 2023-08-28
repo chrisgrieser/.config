@@ -56,6 +56,7 @@ local function telescopeConfig()
 			history = { path = u.vimDataDir .. "telescope_history" }, -- sync the history
 			file_ignore_patterns = {
 				"%.DS_Store$", -- since unignored in some repos
+				"Icon?", -- since unignored in some repos, (doesn't need ^M^M here)
 				"%.plist$", -- Alfred
 				"%.png$",
 				"%.gif$",
@@ -124,7 +125,7 @@ local function telescopeConfig()
 			find_files = {
 				prompt_prefix = "󰝰 ",
 				follow = true,
-				-- hidden = true,
+				hidden = true,
 			},
 			live_grep = { prompt_prefix = " ", disable_coordinates = true },
 			grep_string = { prompt_prefix = " ", disable_coordinates = true },

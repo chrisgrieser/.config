@@ -212,3 +212,6 @@ docstrings
 diffview
 repos
 unignored
+symlinked
+dotfile
+gitignored
