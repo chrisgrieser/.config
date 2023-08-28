@@ -115,14 +115,16 @@ local function telescopeConfig()
 			},
 			diagnostics = { prompt_prefix = "󰒕 ", no_sign = true },
 			treesitter = { prompt_prefix = " ", show_line = false },
-			oldfiles = { prompt_prefix = "󰋚 " },
 			highlights = {
 				prompt_prefix = " ",
 				layout_config = {
-					horizontal = {
-						preview_width = { 0.7, min = 30 },
-					},
+					horizontal = { preview_width = { 0.7, min = 30 } },
 				},
+			},
+			find_files = {
+				prompt_prefix = "󰝰 ",
+				follow = true,
+				-- hidden = true,
 			},
 			live_grep = { prompt_prefix = " ", disable_coordinates = true },
 			grep_string = { prompt_prefix = " ", disable_coordinates = true },
@@ -168,11 +170,7 @@ local function telescopeConfig()
 				results_title = false,
 				previewer = false,
 				layout_config = {
-					horizontal = {
-						anchor = "S",
-						width = 0.4,
-						height = 0.6,
-					},
+					horizontal = { width = 0.4, height = 0.6 },
 				},
 			},
 			spell_suggest = {
@@ -199,6 +197,7 @@ local function telescopeConfig()
 		},
 		extensions = {
 			undo = {
+				prompt_prefix = "󰕌 ",
 				entry_format = "#$ID ($STAT) $TIME",
 				layout_config = {
 					-- more space for diffview useful here
@@ -215,40 +214,11 @@ local function telescopeConfig()
 					},
 				},
 			},
-			file_browser = {
-				prompt_prefix = " ",
-				depth = 2, -- initial depth (1 = only current folder)
-				auto_depth = true, -- unlimited depth as soon as prompt is non-empty
-				hidden = true,
-				display_stat = false,
-				git_status = true, -- seems to be buggy sometimes
-				group = true,
-				hide_parent_dir = true, -- "../"
-				select_buffer = false,
-				mappings = {
-					i = {
-						-- mappings should be consistent with nvim-ghengis mappings
-						["<C-r>"] = require("telescope._extensions.file_browser.actions").rename,
-						["<D-BS>"] = require("telescope._extensions.file_browser.actions").remove,
-
-						-- go up
-						["<D-Up>"] = require("telescope._extensions.file_browser.actions").goto_parent_dir,
-
-						-- unmap <BS> on empty prompt going up; requires lowercase key
-						["<bs>"] = false,
-						-- disable to prevent interference with setting undopoints via `<C-g>u`
-						["<C-g>"] = false,
-					},
-				},
-			},
 			recent_files = {
+				prompt_prefix = "󰋚 ",
 				previewer = false,
 				layout_config = {
-					horizontal = {
-						anchor = "S",
-						width = 0.4,
-						height = 0.6,
-					},
+					horizontal = { width = 0.4, height = 0.6 },
 				},
 			},
 		},
@@ -262,7 +232,6 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons", -- add icons
-			"nvim-telescope/telescope-file-browser.nvim", -- search folders
 			"smartpde/telescope-recent-files", -- better oldfiles
 			"debugloop/telescope-undo.nvim", -- undotree
 
@@ -273,7 +242,6 @@ return {
 
 		config = function()
 			telescopeConfig()
-			require("telescope").load_extension("file_browser")
 			require("telescope").load_extension("recent_files")
 			require("telescope").load_extension("undo")
 

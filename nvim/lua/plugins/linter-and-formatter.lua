@@ -1,7 +1,6 @@
 local linterConfig = require("config.utils").linterConfigFolder
 local lintersAndFormatters = {
 	"codespell",
-	"cspell",
 	"yamllint",
 	"shellcheck",
 	"shfmt", -- shell
@@ -35,9 +34,11 @@ local function linterConfigs()
 		toml = {},
 	}
 
-	-- use for codespell for all except bib and css
+	-- use for codespell/cspell for all except bib and css
 	for ft, _ in pairs(lint.linters_by_ft) do
-		if ft ~= "bib" and ft ~= "css" then table.insert(lint.linters_by_ft[ft], "codespell") end
+		if ft ~= "bib" and ft ~= "css" then
+			table.insert(lint.linters_by_ft[ft], "codespell")
+		end
 	end
 
 	-- https://github.com/mfussenegger/nvim-lint/tree/master/lua/lint/linters
@@ -71,7 +72,7 @@ local function linterConfigs()
 		"-",
 	}
 
-	-- FIX auto-save.nvim creating spurious errors for some reason. therefore
+	-- FIX auto-save.nvim creating spurious errors for some reason. Therefore
 	-- removing stylelint-error from it. Also, suppress warnings
 	lint.linters.stylelint.args = {
 		"--quiet", -- suppresses warnings (since stylelint-order stuff too noisy)
@@ -87,7 +88,7 @@ local function linterConfigs()
 		if not decoded.errored then return {} end
 		local diagnostics = {}
 		for _, diag in ipairs(decoded.warnings) do
-			-- filtering order-violations, since they are auto-fixed and and would
+			-- filtering order-violations, since they are auto-fixed and would
 			-- only add noise.
 			if diag.rule ~= "order/properties-order" then
 				table.insert(diagnostics, {

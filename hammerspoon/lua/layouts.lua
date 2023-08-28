@@ -77,10 +77,13 @@ local function workLayout()
 		end)
 	end
 
-	hs.application("Obsidian")
 	-- minimize Obsidian
-	u.whenAppRuns("Obsidian", function() u.app("Obsidian"):mainWindow():minimize() end)
-	u.restartApp("AltTab")
+	hs.timer.waitUntil(
+		function() return u.app("Obsidian"):mainWindow() end,
+		function() u.app("Obsidian"):mainWindow():minimize() end
+	)
+
+	u.restartApp("AltTab") -- FIX missing apps
 
 	-- finish
 	require("lua.sidenotes").reminderToSidenotes()
