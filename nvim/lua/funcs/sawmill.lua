@@ -38,11 +38,11 @@ end
 ---append string below current line
 ---@param text string
 local function append(text)
-	local movementCmd = "j"
+	local movementCmd = "j=="
 	if vim.bo.ft == "python" then
 		local indent = vim.api.nvim_get_current_line():match("^%s*")
 		text = indent .. text
-		movementCmd = "j=="
+		movementCmd = "j"
 	end
 	local ln = vim.api.nvim_win_get_cursor(0)[1]
 	vim.api.nvim_buf_set_lines(0, ln, ln, false, { text })
