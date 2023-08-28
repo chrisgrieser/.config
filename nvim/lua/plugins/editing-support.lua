@@ -5,10 +5,6 @@ return {
 		dev = true,
 		opts = true,
 	},
-	{ -- fix indentation issues in python https://www.reddit.com/r/neovim/comments/wyx4e4/q_auto_indentation_for_python_files/
-		"Vimjas/vim-python-pep8-indent",
-		ft = "python",
-	},
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",

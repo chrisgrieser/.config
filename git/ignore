@@ -10,6 +10,7 @@ Icon
 # production stuff / builds
 node_modules
 venv
+.venv
 __pycache__
 *.alfredworkflow
 *.dmg

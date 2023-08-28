@@ -16,7 +16,7 @@ function v() {
 		deactivate
 	else
 		# shellcheck disable=1091
-		source venv/bin/activate
+		source ./.venv/bin/activate
 	fi
 }
 

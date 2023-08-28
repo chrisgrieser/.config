@@ -74,9 +74,14 @@ conf.on_attach.pyright = function(client, _)
 end
 
 conf.settings.pyright = {
-	settings = {
-		python = {
-			venvPath = "venv",
+	python = {
+		venvPath = "venv",
+		venv = "env367",
+		analysis = {
+			autoImportCompletions = true,
+			typeCheckingMode = "off",
+			autoSearchPaths = true,
+			useLibraryCodeForTypes = true,
 		},
 	},
 }

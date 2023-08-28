@@ -202,13 +202,20 @@ function M.debugLog()
 	local ft = bo.filetype
 
 	if ft == "javascript" or ft == "typescript" then
-		logStatement = "debugger // %s"
+		logStatement = { "debugger // %s"}
+	elseif ft == "python" then
+		logStatement = {
+			"from IPython import embed # %s",
+			"embed() # %s",
+		}
 	else
 		vim.notify("󰸢 Debuglog does not support " .. ft .. " yet.", logWarn)
 		return
 	end
 
-	append(logStatement:format(marker))
+	for _, line in pairs(logStatement) do
+		append(line:format(marker))
+	end
 end
 
 ---Remove all log statements in the current buffer
