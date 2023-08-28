@@ -1,7 +1,11 @@
 {
-	"require": {
-		"prefix": "require(string)",
-		"body": "require(\"$0\")"
+	"safe require": {
+		"prefix": "safe require",
+		"body": [
+			"local ok, ${1:module} = require(\"${1:module}\")",
+			"if not ok then return end",
+			"${1:module}"
+		]
 	},
 	"block comment": {
 		"prefix": "block comment",

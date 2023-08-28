@@ -41,6 +41,7 @@ keymap("n", "<leader>lc", function()
 		vim.notify("No last command available", u.warn)
 		return
 	end
+	lastCommand = lastCommand:gsub("^i ", ""):gsub("^lua ?=? ", "")
 	fn.setreg("+", lastCommand)
 	vim.notify("COPIED\n" .. lastCommand)
 end, { desc = "󰘳 Copy last command" })
