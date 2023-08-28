@@ -8,7 +8,7 @@ vim.keymap.set("n", "<localleader><localleader>", function()
 	vim.cmd.update()
 	local output = vim.fn.system { "python3", vim.fn.expand("%"), "--debug" }
 	if vim.v.shell_error ~= 0 then
-		vim.notify(output, vim.log.levels.ERROR)
+		vim.notify("Error:" .. output, vim.log.levels.ERROR)
 		return
 	end
 	vim.notify(output)

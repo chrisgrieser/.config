@@ -26,6 +26,7 @@ ignore = [
 	"TD002", # author for TODO
 	"TD003", # issue link for TODO
 	"FIX002", # complain about TODO in general
+	"FIX004", # complain about HACK
 	"S607", # shell command without full path
 	"S605", # shell instead of subshell
 
