@@ -13,9 +13,10 @@ return {
 			if ok then whichKey.register { ["<leader>i"] = { name = " 󱠤 Iron-REPL" } } end
 		end,
 		config = function()
+			local height = 10
 			require("iron.core").setup {
 				config = {
-					repl_open_cmd = require("iron.view").split.horizontal.belowright(8),
+					repl_open_cmd = require("iron.view").split.horizontal.belowright(height),
 					repl_definition = {
 						sh = { command = { "zsh" } },
 						typescript = { command = { "node" } },
