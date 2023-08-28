@@ -7,7 +7,7 @@ local function safeRequire(module)
 end
 
 --------------------------------------------------------------------------------
--- HAMMERPOON SETTINGS
+-- HAMMERSPOON SETTINGS
 
 hs.autoLaunch(true)
 hs.menuIcon(false)

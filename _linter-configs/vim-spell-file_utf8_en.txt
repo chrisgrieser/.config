@@ -206,3 +206,9 @@ neovide
 wezterm
 hs
 boolean
+PWAs
+cspell
+docstrings
+diffview
+repos
+unignored

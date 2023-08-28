@@ -333,14 +333,14 @@ keymap("n", "go", function()
 		vim.notify("No pwd available", u.error)
 		return
 	end
-	require("telescope").extensions.file_browser.file_browser { prompt_title = "󰝰 " .. project }
+	require("telescope.builtin").find_files { prompt_title = project }
 end, { desc = " Browse in Project" })
 
 -- stylua: ignore
 keymap( "n", "gO", function()
-	require("telescope").extensions.file_browser.file_browser {
+	require("telescope.builtin").find_files {
+		prompt_title = expand("%:p:h:t"),
 		path = expand("%:p:h"),
-		prompt_title = "󰝰 " .. expand("%:p:h:t"),
 	}
 end, { desc = " Browse in Current Folder" })
 
