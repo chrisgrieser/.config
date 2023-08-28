@@ -6,7 +6,8 @@ app.includeStandardAdditions = true;
 /** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[<_-]/g, " ");
-	return [clean, str].join(" ") + " ";
+	const numberSeparated = str.replace(/(\d+)/g, " $1");
+	return [clean, str, numberSeparated].join(" ") + " ";
 }
 
 //──────────────────────────────────────────────────────────────────────────────
