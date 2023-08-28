@@ -60,7 +60,6 @@ alias treeeee='exa --tree --level=5 --icons --git-ignore'
 alias -s {yml,yaml}='yq "."'
 alias -s json='fx'
 alias -s pdf='qlmanage -p'
-alias -s {md,lua,js,ts,css,sh,zsh,applescript,txt,py,plist}='bat'
 
 [[ "$TERM_PROGRAM" == "WezTerm" ]] && image_viewer="wezterm imgcat" || image_viewer="qlmanage -p"
 alias -s {gif,png,jpg,jpeg,webp,tiff}="$image_viewer"
