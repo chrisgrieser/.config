@@ -111,7 +111,7 @@ local function themeModifications()
 		for _, v in pairs(vimModes) do
 			updateHighlight("lualine_y_diff_modified_" .. v, "guifg=#a9810a")
 		end
-		updateHighlight("Operator", "guifg=#8c6b1b")
+		updateHighlight("Operator", "guifg=#846a52")
 		-- FIX python highlighting issues
 		linkHighlight("@type.builtin.python", "Typedef")
 		linkHighlight("@string.documentation.python", "Typedef")
