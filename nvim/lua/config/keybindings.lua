@@ -62,6 +62,10 @@ keymap("n", "gH", "<cmd>Gitsigns prev_hunk<CR>zv", { desc = "󰊢 Previous Hunk"
 keymap("n", "gc", "g;", { desc = "Goto older change" })
 keymap("n", "gC", "g,", { desc = "Goto newer change" })
 
+-- Sentence Movement without shift
+keymap("n", "]", ")")
+keymap("n", "[", "(")
+
 --------------------------------------------------------------------------------
 
 -- SEARCH
@@ -99,6 +103,10 @@ end, vim.api.nvim_create_namespace("auto_nohl"))
 --------------------------------------------------------------------------------
 -- EDITING
 
+-- Delete trailing stuff 
+-- (wrapping in normal avoid temporaryl scrolling to the side)
+keymap("n", "X", "<cmd>normal!mz$x`z<CR>", { desc = "󱎘 Delete char at EoL" })
+
 -- QUICKFIX
 keymap("n", "gq", function() require("funcs.quickfix").next() end, { desc = " Next Quickfix" })
 keymap("n", "gQ", function() require("funcs.quickfix").previous() end, { desc = " Prev Quickfix" })
@@ -115,10 +123,7 @@ keymap("n", "<Tab>", ">>", { desc = "󰉶 indent line" })
 keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent line" })
 keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent selection" })
 keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent selection" })
-keymap("n", "]", ">", { desc = "󰉶 indent operator" })
-keymap("n", "[", "<", { desc = "󰉵 outdent operator" })
 
-keymap("n", "X", "mz$x`z", { desc = "󱎘 Delete char at EoL" })
 
 keymap("n", "~", function()
 	local col = vim.fn.col(".") -- fn.col correctly considers tab-indentation

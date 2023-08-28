@@ -37,6 +37,7 @@ require("lazy").setup("plugins", {
 	performance = {
 		rtp = {
 			disabled_plugins = { -- disable unused builtin plugins from neovim
+				"man",
 				"matchparen",
 				"matchit",
 				"netrw",

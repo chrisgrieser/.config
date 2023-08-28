@@ -91,9 +91,9 @@ return {
 			min_rows = 7,
 			disable_ft = { "markdown" },
 			min_rows_ft = {
-				python = 15,
+				python = 10,
 				yaml = 15,
-				css = 20,
+				css = 15,
 			},
 		},
 	},
@@ -198,11 +198,12 @@ return {
 			-- https://github.com/gbprod/yanky.nvim#%EF%B8%8F-special-put
 			-- INFO not binding p/P in visual mode, since I prefer my switch of
 			-- "p" and "P" to be in visual mode for not replacing stuff
-			{ "p", "<Plug>(YankyPutIndentAfter)", desc = " Paste & Re-indent" },
+			{ "p", "<Plug>(YankyPutIndentAfter)", desc = " Paste at Indentation" },
+			{ "P", "<Plug>(YankyPutIndentAfterShiftRight)", desc = " Paste & Indent" },
 			{ "gp", "<Plug>(YankyPutIndentAfterCharwise)", desc = " Charwise Paste" },
-			{ "P", "<Plug>(YankyCycleForward)", desc = " Cycle Killring" },
+			{ "<M-p>", "<Plug>(YankyCycleForward)", desc = " Cycle Killring" },
 			{ "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = " Sticky Yank" },
-			{ "Y", "y$" }, -- is already sticky, but to be set to load Yanky for lazy loading
+			{ "Y", "y$" }, -- is already sticky, but to be set to lazy-load Yanky
 		},
 		opts = {
 			ring = { history_length = 50 },
