@@ -54,6 +54,17 @@ local function telescopeConfig()
 			selection_caret = "󰜋 ",
 			prompt_prefix = "❱ ",
 			multi_icon = "󰒆 ",
+
+			-- other ignores are defined via .gitignore, .ignore, or fd/ignore
+			file_ignore_patterns = {
+				"%.png$",
+				"%.gif$",
+				"%.jpe?g$",
+				"%.icns$",
+				"%.zip$",
+				"%.pxd$",
+				"%.plist$",
+			},
 			preview = {
 				timeout = 100, -- ms
 				filesize_limit = 0.3, -- in MB, do not preview big files for performance
