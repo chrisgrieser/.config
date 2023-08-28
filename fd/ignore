@@ -1,14 +1,9 @@
-# vim: filetype=gitignore
-#───────────────────────────────────────────────────────────────────────────────
 # Mac Stuff
 .Trash
 
 # useless stuff inside pseudo-apps
 **/*.app/*
 **/*.pxd/*
-
-# git isn't ignored by default?!
-.git
 
 # custom markers
 .project-root
@@ -21,6 +16,3 @@ LICENSE
 requirements.txt
 package.json
 package-lock.json
-
-# vim spell file cache
-*.add.spl

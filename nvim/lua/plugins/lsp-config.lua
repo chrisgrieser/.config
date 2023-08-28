@@ -179,27 +179,6 @@ conf.settings.lemminx = {
 }
 
 --------------------------------------------------------------------------------
--- BASH / ZSH
-
--- HACK make zsh files recognized as sh for bash-ls & treesitter
-vim.filetype.add {
-	extension = {
-		zsh = "sh",
-		sh = "sh", -- so .sh files with zsh-shebang still get sh filetype
-	},
-	filename = {
-		[".zshrc"] = "sh",
-		[".zshenv"] = "sh",
-	},
-}
-
--- CAVEAT: various attempts of setting shellcheck args for bashls do not work,
--- apparently because bash-ls blocks them due to the zsh-shebang, regardless of
--- filetype defined by nvim.
--- Therefore using shellcheck via null-ls, since there enforcing the shell via
--- `--shell=bash` does work.
-
---------------------------------------------------------------------------------
 -- LTEX
 -- https://valentjn.github.io/ltex/settings.html
 

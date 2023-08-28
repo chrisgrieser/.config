@@ -215,3 +215,16 @@ unignored
 symlinked
 dotfile
 gitignored
+Pixelmator
+Automator
+FILETYPES
+fd
+laggy
+deci
+Workspace
+scrollbar
+editorconfig
+textwidth
+autocmd
+Resized
+vsplit
