@@ -14,7 +14,19 @@ alias pl="pip list"
 function v() {
 	if [[ -n "$VIRTUAL_ENV" ]]; then
 		deactivate
-	else
+	elif [[ -z "$VIRTUAL_ENV" && -d ".venv" ]] ; then
+		# shellcheck disable=1091
+		source ./.venv/bin/activate
+	elif [[ -z "$VIRTUAL_ENV" && ! -d ".venv" ]] ; then
+		print "\033[1;33mNo virtual environment found.\033[0m"
+	fi
+}
+
+# utility function, used by all terminal movement commands
+function auto_venv() {
+	if [[ -n "$VIRTUAL_ENV" && ! -d ".venv" ]] ; then
+		deactivate
+	elif [[ -z "$VIRTUAL_ENV" && -d ".venv" ]] ; then
 		# shellcheck disable=1091
 		source ./.venv/bin/activate
 	fi

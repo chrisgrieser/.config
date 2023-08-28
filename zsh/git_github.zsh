@@ -192,7 +192,7 @@ function ac() {
 	local large_files commit_msg msg_length
 
 	# guard 1: accidental pushing of large files
-	large_files=$(find . -not -path "**/.git/**" -not -path "**/*.pxd/**" -not -path "**/node_modules/**" -size +10M)
+	large_files=$(find . -not -path "**/.git/**" -not -path "**/*.pxd/**" -not -path "**/node_modules/**" -not -path "**/*venv*/**" -size +10M)
 	if [[ -n "$large_files" ]]; then
 		print "\033[1;33mLarge file(s) detected, aborting."
 		print "$large_files\033[0m"

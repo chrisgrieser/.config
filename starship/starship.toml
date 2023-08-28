@@ -173,7 +173,7 @@ detect_extensions = ["ts"]             # dont trigger for JXA
 
 [python]
 style = "bold cyan"
-format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+format = '[${symbol}${pyenv_prefix}(${version} )󱥒  ($virtualenv)]($style)'
 version_format = "$major.$minor"
 python_binary = ["python3"]
 symbol = "  "
