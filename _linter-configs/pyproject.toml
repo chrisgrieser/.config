@@ -10,6 +10,8 @@ strictSetInference = true
 [tool.black]
 line-length = 100
 
+#───────────────────────────────────────────────────────────────────────────────
+
 [tool.ruff]
 line-length = 100
 select = [ "ALL" ]
@@ -28,7 +30,6 @@ ignore = [
 	"F401", # unused import
 	"ARG001" # unused arg
 ]
-
 
 [tool.ruff.pydocstyle]
 convention = "pep257" # Accepts: "google", "numpy", or "pep257"
