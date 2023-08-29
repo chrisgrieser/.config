@@ -20,18 +20,21 @@ local setupEfmConfig = function()
 	local black = require("efmls-configs.formatters.black")
 	local prettier = require("efmls-configs.formatters.prettier")
 	local shfmt = require("efmls-configs.formatters.shfmt")
-	local stylelint = require("efmls-configs.linters.stylelint")
+	local stylelintLint = require("efmls-configs.linters.stylelint")
 	local stylua = require("efmls-configs.formatters.stylua")
-	local vale = require("efmls-configs.linters.vale")
 	local shellcheck = require("efmls-configs.linters.shellcheck")
+	local selene = require("efmls-configs.linters.selene")
+
+	local vale = require("efmls-configs.linters.vale")
+
 	local ruff = require("my-efm.formatters.ruff")
 	local rome = require("my-efm.formatters.rome")
-	local codespell = require("my-efm.linters.codespell")
-	local selene = require("my-efm.linters.selene")
+	local markdownlint = require("my-efm.linters.markdownlint")
+	local codespellLint = require("my-efm.linters.codespell")
+	local stylelintFormat = require("my-efm.formatters.stylelint")
 
 	-- TODO
-	-- markdownlint
-	-- stylelint (as formatter)
+	-- codespell formatting
 
 	local languages = {
 		javascript = { rome },
@@ -39,7 +42,7 @@ local setupEfmConfig = function()
 		json = { rome },
 		lua = { stylua, selene },
 		python = { black, ruff },
-		css = { prettier, stylelint },
+		css = { prettier, stylelintLint, stylelintFormat },
 		sh = { shfmt, shellcheck },
 		markdown = { vale },
 		gitcommit = {},
@@ -48,7 +51,7 @@ local setupEfmConfig = function()
 
 	-- use for codespell for all except bib and css
 	for ft, _ in pairs(languages) do
-		if ft ~= "bib" and ft ~= "css" then table.insert(languages[ft], codespell) end
+		if ft ~= "bib" and ft ~= "css" then table.insert(languages[ft], codespellLint) end
 	end
 
 	-- INFO efm has to be installed via brew, since mason only installs it via go.
@@ -84,7 +87,6 @@ return {
 	{
 		"creativenull/efmls-configs-nvim",
 		lazy = false, -- must be loaded at once
-		version = 'v1.x.x',
 		keys = {
 			{
 				"<D-s>",
