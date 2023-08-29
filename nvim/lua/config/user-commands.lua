@@ -4,7 +4,7 @@ local newCommand = vim.api.nvim_create_user_command
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
-vim.cmd.cnoreabbrev("i", "lua = ")
+vim.cmd.cnoreabbrev("i", "lua =")
 
 --------------------------------------------------------------------------------
 

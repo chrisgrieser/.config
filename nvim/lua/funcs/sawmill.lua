@@ -161,7 +161,8 @@ function M.beepLog()
 end
 
 function M.timeLog()
-	if g.timelogStart == nil then g.timelogStart = true end
+	---@diagnostic disable-next-line: inject-field
+	if vim.b.timelogStart == nil then vim.b.timelogStart = true end
 	local logStatement1, logStatement2
 	local ft = bo.filetype
 
@@ -238,11 +239,11 @@ function M.removeLogs()
 
 	local linesRemoved = numOfLinesBefore - vim.api.nvim_buf_line_count(0)
 	local msg = ("󰸢 Removed %s log statements."):format(linesRemoved)
-	if linesRemoved == 1 then msg = msg:sub(1, -3) .. "." end
+	if linesRemoved == 1 then msg = msg:sub(1, -3) .. "." end -- 1 = singular
 	vim.notify(msg)
 
 	---@diagnostic disable-next-line: inject-field
-	vim.b.timelogCount = 0 -- reset timelog
+	vim.b.timelogStart = false -- reset timelog
 end
 
 --------------------------------------------------------------------------------

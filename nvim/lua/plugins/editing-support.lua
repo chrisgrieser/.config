@@ -45,8 +45,8 @@ return {
 					:with_pair(negLookahead(".+")) -- neg. cond has to come first
 					:with_pair(isNodeType { "table_constructor", "field", "object", "dictionary" })
 					:with_del(function() return false end)
-					:with_cr(function() return false end),
-				-- :with_move(function(opts) return opts.char == "," end),
+					:with_cr(function() return false end)
+					:with_move(function(opts) return opts.char == "," end),
 
 				-- add brackets to if/else in js/ts
 				rule("^%s*if $", "()", { "javascript", "typescript" })
