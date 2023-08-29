@@ -33,10 +33,6 @@ local setupEfmConfig = function()
 	-- local codespellFormat = require("my-efm.formatters.codespell")
 	local stylelintFormat = require("my-efm.formatters.stylelint")
 
-	-- TODO 
-	-- - codespell formatting
-	-- - stylelint severity bla
-
 	local languages = {
 		javascript = { rome },
 		typescript = { rome },

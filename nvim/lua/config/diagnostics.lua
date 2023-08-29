@@ -26,10 +26,16 @@ local function diagnosticFmt(diag, type)
 	local msg = diag.message
 
 	if diag.source == "Ruff" and type == "virtual_text" then return diag.code .. ": " .. msg end
-	if diag.source == "stylelint" then diag.severity = vim.diagnostic.severity.WARN end
 
-	-- for efm, which prepends source
-	msg = msg:gsub("^%[%a+%] ", "")
+	if msg:find("^%[stylelint%]") or msg:find("^%[markdownlint%]") then
+		diag.severity = vim.diagnostic.severity.WARN
+	end
+
+	local efmSource = msg:match("^%[(%a+)%] ")
+	if efmSource then
+		msg = msg:gsub("^%[%a+%] ", "")
+		diag.source = efmSource
+	end
 
 	local source = diag.source and " (" .. diag.source:gsub("%.$", "") .. ")" or ""
 
