@@ -67,13 +67,8 @@ conf.init_options.ruff_lsp = {
 -- Disable hover in favor of Pylsp
 conf.on_attach.ruff_lsp = function(client, _) client.server_capabilities.hoverProvider = false end
 
-conf.on_attach.pyright = function(client, _)
-	-- pylsp has better hover, esp. the basic stuff for learning (e.g. "range()")
-	client.server_capabilities.hoverProvider = false
-	client.server_capabilities.signature_help = false
-end
-
-conf.on_attach.pylsp = function(client, _) client.server_capabilities.signature_help = false end
+-- pylsp has better hover, esp. the basic stuff for learning (e.g. "range()")
+conf.on_attach.pyright = function(client, _) client.server_capabilities.hoverProvider = false end
 
 -- pylsp has better hover
 conf.settings.pylsp = {

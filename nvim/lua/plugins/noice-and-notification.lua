@@ -55,11 +55,13 @@ return {
 				format = {
 					search_down = { icon = "  ", view = "cmdline" }, -- FIX needed to be set explicitly
 					cmdline = { view = "cmdline_popup" },
-					lua = { pattern = { "^:%s*lua%s+" } }, -- show the `=`
+					lua = { pattern = { "^:%s*lua%s+" }, view = "cmdline_popup"  }, -- show the `=`
 					IncRename = {
+						-- show at cursor
 						pattern = "^:IncRename ",
 						icon = " ",
 						conceal = true,
+						view = "cmdline_popup" ,
 						opts = {
 							border = { style = u.borderStyle },
 							relative = "cursor",
@@ -68,6 +70,7 @@ return {
 						},
 					},
 					substitute = {
+						view = "cmdline_popup" ,
 						pattern = { "^:%%? ?s " },
 						icon = " ",
 						conceal = true,
