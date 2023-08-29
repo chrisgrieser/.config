@@ -1,19 +1,4 @@
 local linterConfig = require("config.utils").linterConfigFolder
-local lintersAndFormatters = {
-	"codespell",
-	"yamllint",
-	"shellcheck",
-	"shfmt", -- shell
-	"markdownlint",
-	"ruff", -- python linter/formatter, the lsp does diagnostics, the CLI does formatting
-	"black", -- python formatter
-	"vale", -- natural language
-	"selene", -- lua
-	"stylua", -- lua
-	"prettier", -- only used for yaml and html https://github.com/mikefarah/yq/issues/515
-	"rome", -- also an LSP; the lsp does diagnostics, the CLI does formatting
-	-- stylelint included in mason, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
-}
 --------------------------------------------------------------------------------
 
 local function linterConfigs()
@@ -200,20 +185,6 @@ end
 --------------------------------------------------------------------------------
 
 return {
-	{ -- auto-install missing linters & formatters
-		-- (auto-install of lsp servers done via `mason-lspconfig.nvim`)
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		event = "VeryLazy",
-		dependencies = "williamboman/mason.nvim",
-		config = function()
-			-- triggered myself, since `run_on_start`, does not work w/ lazy-loading
-			require("mason-tool-installer").setup {
-				ensure_installed = lintersAndFormatters,
-				run_on_start = false,
-			}
-			vim.defer_fn(vim.cmd.MasonToolsInstall, 500)
-		end,
-	},
 	{
 		"mfussenegger/nvim-lint",
 		enabled = false,
@@ -222,11 +193,6 @@ return {
 			linterConfigs()
 			lintTriggers()
 		end,
-	},
-	{
-		"creativenull/efmls-configs-nvim",
-		event = "LSPAttach",
-		dependencies = "neovim/nvim-lspconfig",
 	},
 	{
 		"mhartington/formatter.nvim",

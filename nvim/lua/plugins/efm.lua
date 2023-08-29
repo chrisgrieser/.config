@@ -18,7 +18,6 @@ local lintersAndFormatters = {
 --------------------------------------------------------------------------------
 
 local setupEfmConfig = function()
-	-- Register linters and formatters per language
 	local black = require("efmls-configs.formatters.black")
 	local prettier = require("efmls-configs.formatters.prettier")
 	local shfmt = require("efmls-configs.formatters.shfmt")
@@ -26,25 +25,23 @@ local setupEfmConfig = function()
 	local stylua = require("efmls-configs.formatters.stylua")
 	local vale = require("efmls-configs.linters.vale")
 	local selene = require("efmls-configs.linters.selene")
+	local shellcheck = require("efmls-configs.linters.shellcheck")
+	local ruff = require("my-efm.formatters.ruff")
 
-	-- NOT PRE-CONFIGURED (= TODO)
+	-- TODO
 	-- markdownlint
-	-- ruff
 	-- codespell
 	-- rome
 
 	local languages = {
 		lua = { stylua, selene },
-		python = { black },
+		python = { black, ruff },
 		css = { prettier, stylelint },
-		sh = { shfmt },
+		sh = { shfmt, shellcheck },
 		markdown = { vale },
 		gitcommit = { vale },
 		octo = { vale },
 	}
-
-
-
 
 	-- INFO efm has to be installed via brew, since mason only installs it via go.
 	require("lspconfig").efm.setup {
@@ -60,7 +57,6 @@ local setupEfmConfig = function()
 	}
 end
 --------------------------------------------------------------------------------
-
 
 return {
 	{ -- auto-install missing linters & formatters
@@ -79,16 +75,16 @@ return {
 	},
 	{
 		"creativenull/efmls-configs-nvim",
-		enabled = false,
-		-- event = "LSPAttach",
+		lazy = false, -- must be loaded at once
 		keys = {
-			{ "<D-s>", function ()
-				vim.lsp.buf.format()
-
-
-
-				vim.cmd.update()
-			end, desc = "󰒕 Format & Save" },
+			{
+				"<D-s>",
+				function()
+					vim.lsp.buf.format()
+					vim.cmd.update()
+				end,
+				desc = "󰒕 Format & Save",
+			},
 		},
 		dependencies = "neovim/nvim-lspconfig",
 		config = setupEfmConfig,
