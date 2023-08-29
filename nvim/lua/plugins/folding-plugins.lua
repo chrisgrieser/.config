@@ -46,11 +46,11 @@ return {
 				function() require("ufo").openFoldsExceptKinds { "comment" } end,
 				desc = "󰘖 󱃄 Open All Folds except comments",
 			},
-			{ "zm", function() require("ufo").closeAllFolds(0) end, desc = "󰘖 󱃄 Close All Folds" },
-			{ "z1", function() require("ufo").closeAllFolds(1) end, desc = "󰘖 󱃄 Close Level 1 Folds" },
-			{ "z2", function() require("ufo").closeAllFolds(2) end, desc = "󰘖 󱃄 Close Level 2 Folds" },
-			{ "z3", function() require("ufo").closeAllFolds(3) end, desc = "󰘖 󱃄 Close Level 3 Folds" },
-			{ "z4", function() require("ufo").closeAllFolds(4) end, desc = "󰘖 󱃄 Close Level 4 Folds" },
+			{ "zm", function() require("ufo").closeAllFolds() end, desc = "󰘖 󱃄 Close All Folds" },
+			{ "z1", function() require("ufo").closeFoldsWith(1) end, desc = "󰘖 󱃄 Close Level 1 Folds" },
+			{ "z2", function() require("ufo").closeFoldsWith(2) end, desc = "󰘖 󱃄 Close Level 2 Folds" },
+			{ "z3", function() require("ufo").closeFoldsWith(3) end, desc = "󰘖 󱃄 Close Level 3 Folds" },
+			{ "z4", function() require("ufo").closeFoldsWith(4) end, desc = "󰘖 󱃄 Close Level 4 Folds" },
 		},
 		init = function()
 			-- INFO fold commands usually change the foldlevel, which fixes folds, e.g.

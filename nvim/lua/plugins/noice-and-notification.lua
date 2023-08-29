@@ -49,13 +49,11 @@ return {
 		opts = {
 			routes = routes,
 			cmdline = {
-				-- classic cmdline at the bottom to not obfuscate the buffer, e.g.
-				-- for :substitute or numb.nvim
-				view = "cmdline",
+				view = "cmdline_popup", -- cmdline|cmdline_popup
 				format = {
-					search_down = { icon = "  " },
+					search_down = { icon = "  ", view = "cmdline" },
 					cmdline = { icon = " " },
-
+					lua = { pattern = { "^:%s*lua%s+" }, icon = "", lang = "lua" },
 					IncRename = {
 						pattern = "^:IncRename ",
 						icon = " ",
@@ -82,6 +80,9 @@ return {
 			},
 			-- https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua
 			views = {
+				cmdline_popup = {
+					border = { style = u.borderStyle },
+				},
 				mini = { timeout = 3000 },
 				hover = {
 					border = { style = u.borderStyle },
@@ -101,11 +102,19 @@ return {
 					view = "split",
 					filter_opts = { reverse = true }, -- show newest entries first
 					opts = { enter = true },
+					filter = {
+						any = {
+							{ event = "notify" },
+							{ error = true },
+							{ warning = true },
+							{ event = "msg_show" },
+							{ event = "lsp" },
+						},
+					},
 				},
 			},
 
 			-- DISABLED, since conflicts with existing plugins I prefer to use
-			popupmenu = { backend = "cmp" }, -- replace with nvim-cmp, since more sources
 			messages = { view_search = false }, -- replaced by nvim-hlslens
 			lsp = {
 				progress = { enabled = false }, -- replaced with nvim-dr-lsp, since this one cannot filter null-ls
