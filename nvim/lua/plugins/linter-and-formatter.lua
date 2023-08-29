@@ -223,7 +223,14 @@ return {
 		end,
 	},
 	{
+		"creativenull/efmls-configs-nvim",
+		-- event = "LSPAttach",
+		version = "v1.x.x",
+		dependencies = "neovim/nvim-lspconfig",
+	},
+	{
 		"mhartington/formatter.nvim",
+		enabled = false,
 		config = formatterConfigs,
 		cmd = { "Format", "FormatWrite" },
 		keys = {
