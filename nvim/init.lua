@@ -4,7 +4,7 @@
 local function safeRequire(module)
 	local success, _ = pcall(require, module)
 	if not success then
-		vim.cmd(('echohl Error | echo "Error loading %s" | echohl None'):format(module))
+		vim.cmd(('echohl Error | echomsg "Error loading %s" | echohl None'):format(module))
 	end
 end
 
@@ -39,4 +39,3 @@ safeRequire("config.user-commands")
 safeRequire("config.abbreviations")
 
 safeRequire("funcs.pulling-strings")
-safeRequire("config.efm")

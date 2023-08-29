@@ -36,7 +36,6 @@ local routes = {
 return {
 	{
 		"folke/noice.nvim",
-		enabled = true,
 		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
 		event = "VeryLazy",
 		init = function()
