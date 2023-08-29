@@ -9,16 +9,10 @@ return {
 			-- additional_instructions = "Start the reply with 'OH HAI THERE'",
 		},
 		keys = {
-			{
-				"<leader>d",
-				function() require("wtf").search() end,
-				desc = " Search diagnostic with Google",
-			},
-			{
-				"<leader>D",
-				function() require("wtf").ai() end,
-				desc = " Debug diagnostic with AI",
-			},
+			-- stylua: ignore
+			{ "<leader>d", function() require("wtf").search() end, desc = " Search diagnostic with Google" },
+			-- stylua: ignore
+			{ "<leader>D", function() require("wtf").ai() end, desc = " Debug diagnostic with AI" },
 		},
 	},
 	{ -- code search
