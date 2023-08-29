@@ -353,16 +353,6 @@ keymap("n", "ga", "gf", { desc = "Goto File under Cursor" }) -- needed, since `g
 -- toggle all top-level folds
 keymap("n", "zz", function() cmd("%foldclose") end, { desc = "󰘖 Close toplevel folds" })
 
--- stylua: ignore
-keymap("n", "zr", function() require("ufo").openFoldsExceptKinds { "comments" } end, { desc = "󰘖 󱃄 Open All Folds except comments" })
-keymap("n", "zm", function() require("ufo").closeAllFolds() end, { desc = "󰘖 󱃄 Close All Folds" })
-
--- set fold-level via z{n}
-for _, lvl in pairs { 1, 2, 3, 4, 5 } do
-	local desc = lvl < 4 and "󰘖 Set Fold Level" or "which_key_ignore"
-	keymap("n", "z" .. tostring(lvl), function() require("ufo").closeFoldsWith(lvl) end, { desc = desc })
-end
-
 ------------------------------------------------------------------------------
 -- LSP KEYBINDINGS
 

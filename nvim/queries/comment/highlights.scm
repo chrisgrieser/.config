@@ -33,28 +33,28 @@
   (name) @text.note @nospell
   ("(" @punctuation.bracket (user) @constant ")" @punctuation.bracket)?
   ":" @punctuation.delimiter)
-  (#any-of? @text.note "NOTE" "XXX" "INFO" "DOCS" "PERF" "TEST"))
+  (#any-of? @text.note "NOTE" "INFO" "DOCS" "PERF" "TEST"))
 
 ("text" @text.note @nospell
- (#any-of? @text.note "NOTE" "XXX" "INFO" "DOCS" "PERF" "TEST"))
+ (#any-of? @text.note "NOTE" "INFO" "DOCS" "PERF" "TEST"))
 
 ((tag
   (name) @text.warning @nospell
   ("(" @punctuation.bracket (user) @constant ")" @punctuation.bracket)?
   ":" @punctuation.delimiter)
-  (#any-of? @text.warning "HACK" "WARNING" "WARN" "FIX"))
+  (#any-of? @text.warning "HACK" "WARN" "FIX"))
 
 ("text" @text.warning @nospell
- (#any-of? @text.warning "HACK" "WARNING" "WARN" "FIX"))
+ (#any-of? @text.warning "HACK" "WARN" "FIX"))
 
 ((tag
   (name) @text.danger @nospell
   ("(" @punctuation.bracket (user) @constant ")" @punctuation.bracket)?
   ":" @punctuation.delimiter)
-  (#any-of? @text.danger "FIXME" "BUG" "ERROR"))
+  (#any-of? @text.danger "BUG" "ERROR"))
 
 ("text" @text.danger @nospell
- (#any-of? @text.danger "FIXME" "BUG" "ERROR"))
+ (#any-of? @text.danger "BUG" "ERROR"))
 
 ; Issue number (#123)
 ("text" @number

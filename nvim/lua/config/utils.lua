@@ -15,11 +15,11 @@ M.setCursor = vim.api.nvim_win_set_cursor
 ---@param cmdStr string
 function M.normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
----@nodiscard
 ---@param str string
 ---@param filePath string line(s) to add
 ---@param mode "w"|"a" -- write or append
 ---@return string|nil error
+---@nodiscard
 function M.writeToFile(filePath, str, mode)
 	local file, error = io.open(filePath, mode)
 	if not file then return error end
