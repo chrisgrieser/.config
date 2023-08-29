@@ -67,6 +67,7 @@ alias -s {gif,png,jpg,jpeg,webp,tiff}="$image_viewer"
 # GLOBAL ALIAS (to be used at the end, mostly)
 alias -g G='| rg'
 alias -g B='| bat'
+alias -g L='| less'
 alias -g C='| pbcopy ; echo "Copied."' # copy
 alias -g N='| wc -l | tr -d " "'       # count lines
 
@@ -76,5 +77,6 @@ ZSH_HIGHLIGHT_REGEXP+=(' G ' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' C$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' B$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' N$' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=(' L$' 'fg=magenta,bold')
 
 #───────────────────────────────────────────────────────────────────────────────
