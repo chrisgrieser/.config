@@ -30,7 +30,7 @@ local function templateStr()
 	end
 	local text = ts.get_node_text(strNode, 0)
 
-	local hasBraces = text:find("${.-}")
+	local hasBraces = text:find("${%w.-}")
 	if (isTemplateStr and hasBraces) or (not isTemplateStr and not hasBraces) then
 		return
 	elseif not isTemplateStr and hasBraces then
@@ -59,7 +59,7 @@ local function pythonFStr()
 	local text = ts.get_node_text(strNode, 0)
 
 	local isFString = text:find("^f")
-	local hasBraces = text:find("{.-}")
+	local hasBraces = text:find("{%w.-}")
 	if (isFString and hasBraces) or (not isFString and not hasBraces) then
 		return
 	elseif not isFString and hasBraces then

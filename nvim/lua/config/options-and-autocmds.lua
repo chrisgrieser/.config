@@ -5,7 +5,6 @@ local autocmd = vim.api.nvim_create_autocmd
 local keymap = vim.keymap.set
 local u = require("config.utils")
 
-
 --------------------------------------------------------------------------------
 -- FILETYPES
 
@@ -198,3 +197,41 @@ autocmd("FocusGained", {
 		end
 	end,
 })
+
+--------------------------------------------------------------------------------
+
+-- format on save asynchronously, see M.format_document
+local Methods = vim.lsp.protocol.Methods
+
+vim.lsp.handlers[Methods.textDocument_formatting] = function(err, result, ctx)
+	if err ~= nil then
+		-- efm uses table messages
+		if type(err) == "table" then
+			if err.message then
+				err = err.message
+			else
+				err = vim.inspect(err)
+			end
+		end
+		vim.api.nvim_err_write(err)
+		return
+	end
+
+	if result == nil then return end
+
+	if
+		vim.api.nvim_buf_get_var(ctx.bufnr, "format_changedtick")
+		== vim.api.nvim_buf_get_var(ctx.bufnr, "changedtick")
+	then
+		local view = vim.fn.winsaveview()
+		vim.lsp.util.apply_text_edits(result, ctx.bufnr, "utf-16")
+		if view then vim.fn.winrestview(view) end
+		if ctx.bufnr == vim.api.nvim_get_current_buf() then
+			---@diagnostic disable-next-line: inject-field
+			vim.b.format_saving = true
+			vim.cmd.noautocmd("update")
+			---@diagnostic disable-next-line: inject-field
+			vim.b.format_saving = false
+		end
+	end
+end

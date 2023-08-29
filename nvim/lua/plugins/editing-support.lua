@@ -180,13 +180,17 @@ return {
 		opts = {
 			use_default_keymaps = false,
 			cursor_behavior = "start", -- start|end|hold
-			max_join_length = 150,
+			max_join_length = 140,
 			langs = {
+				-- python docstrings
+				python = {
+					string_content = {
+						both = { fallback = function() vim.cmd("normal! gww") end },
+					},
+				},
 				comment = {
 					source = {
-						both = {
-							fallback = function() vim.cmd("normal! gww") end,
-						},
+						both = { fallback = function() vim.cmd("normal! gww") end },
 					},
 				},
 			},
