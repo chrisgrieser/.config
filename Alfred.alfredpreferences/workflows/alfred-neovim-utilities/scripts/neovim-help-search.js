@@ -3,13 +3,15 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
+/** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
 	return [clean, str].join(" ") + " ";
 }
 
-const fileExists = filePath => Application("Finder").exists(Path(filePath));
+const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
+/** @param {string} path */
 function readFile(path) {
 	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
 	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
@@ -17,6 +19,8 @@ function readFile(path) {
 }
 
 //──────────────────────────────────────────────────────────────────────────────
+/** @type {AlfredRun} */
+// rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const jsonArray = []
 

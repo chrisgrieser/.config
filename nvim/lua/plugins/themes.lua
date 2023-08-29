@@ -45,13 +45,16 @@ vim.g.darkTheme = getName(darkThemes[1])
 
 --------------------------------------------------------------------------------
 
--- merge tables & return for lazy.nvim
-local allThemes = {}
-for _, theme in pairs(darkThemes) do
-	table.insert(allThemes, theme)
-end
-for _, theme in pairs(lightThemes) do
-	table.insert(allThemes, theme)
-end
+-- merge first elements of table
+local allThemes = { lightThemes[1], darkThemes[1] }
 
+-- ensure themes are never lazyloaded
+allThemes = vim.tbl_map(function(theme)
+	local themeObj = type(theme) == "string" and { theme } or theme
+	themeObj.lazy = false
+	themeObj.priority = 1000
+	return themeObj
+end, allThemes)
+
+-- return for lazy
 return allThemes

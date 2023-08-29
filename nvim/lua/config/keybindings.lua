@@ -71,8 +71,7 @@ keymap("n", "[", "(")
 -- SEARCH
 keymap("n", "-", "/", { desc = "Search word under cursor" })
 keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
-keymap("n", "+", "*", { desc = "Search word under cursor" })
-keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "* Visual Star" })
+keymap("x", "*", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "* Visual Star" })
 
 -- auto-nohl -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
 vim.on_key(function(char)
@@ -103,7 +102,7 @@ end, vim.api.nvim_create_namespace("auto_nohl"))
 --------------------------------------------------------------------------------
 -- EDITING
 
--- Delete trailing stuff 
+-- Delete trailing stuff
 -- (wrapping in normal avoid temporaryl scrolling to the side)
 keymap("n", "X", "<cmd>normal!mz$x`z<CR>", { desc = "󱎘 Delete char at EoL" })
 
@@ -123,7 +122,6 @@ keymap("n", "<Tab>", ">>", { desc = "󰉶 indent line" })
 keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent line" })
 keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent selection" })
 keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent selection" })
-
 
 keymap("n", "~", function()
 	local col = vim.fn.col(".") -- fn.col correctly considers tab-indentation
@@ -445,4 +443,3 @@ keymap("n", "<PageDown>", function() scrollHoverWin("down") end, { desc = "Scrol
 keymap("n", "<PageUp>", function() scrollHoverWin("up") end, { desc = "Scroll up hover" })
 
 --------------------------------------------------------------------------------
-
