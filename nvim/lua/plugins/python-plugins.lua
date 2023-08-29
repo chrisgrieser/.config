@@ -23,7 +23,8 @@ end
 
 return {
 	{
-		"chrisgrieser/venv-selector.nvim",
+		"linux-cultist/venv-selector.nvim",
+		enabled = true,
 		dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
 		cmd = { "VenvSelect", "VenvSelectCached" },
 		config = function()
