@@ -14,6 +14,13 @@ vim.keymap.set("n", "<localleader><localleader>", function()
 	vim.notify(output)
 end, { buffer = true, desc = "  Run File" })
 
+vim.keymap.set(
+	"n",
+	"<localleader>v",
+	"<cmd>VenvSelect<CR>",
+	{ buffer = true, desc = "󱥒  VenvSelect" }
+)
+
 --------------------------------------------------------------------------------
 
 -- python standard
