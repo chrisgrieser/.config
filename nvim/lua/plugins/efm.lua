@@ -23,8 +23,8 @@ local setupEfmConfig = function()
 	local selene = require("efmls-configs.linters.selene")
 
 	local shellcheck = require("my-efm.linters.shellcheck")
+	local shellcheckApply = require("my-efm.formatters.shellcheck")
 	local ruff = require("my-efm.formatters.ruff")
-	local shellharden = require("my-efm.formatters.shellharden")
 	local rome = require("my-efm.formatters.rome")
 	local markdownlint = require("my-efm.linters.markdownlint")
 	local yamllint = require("my-efm.linters.yamllint")
@@ -41,7 +41,7 @@ local setupEfmConfig = function()
 		python = { black, ruff },
 		css = { prettier, stylelintLint, stylelintFormat },
 		html = { prettier },
-		sh = { shfmt, shellcheck, shellharden },
+		sh = { shfmt, shellcheck, shellcheckApply },
 		yaml = { yamllint, prettier },
 		markdown = { markdownlint },
 		gitcommit = {},
@@ -57,16 +57,14 @@ local setupEfmConfig = function()
 	end
 
 	-- INFO efm has to be installed via brew, since mason only installs it via go.
+	-- https://github.com/williamboman/mason.nvim/issues/1481
 	require("lspconfig").efm.setup {
 		filetypes = vim.tbl_keys(languages),
 		settings = {
 			rootMarkers = { ".git/" },
 			languages = languages,
 		},
-		init_options = {
-			documentFormatting = true,
-			documentRangeFormatting = true,
-		},
+		init_options = { documentFormatting = true },
 	}
 end
 --------------------------------------------------------------------------------
