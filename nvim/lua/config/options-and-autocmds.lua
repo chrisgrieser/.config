@@ -71,7 +71,7 @@ opt.clipboard = "unnamedplus"
 opt.spell = true
 opt.spelllang = "en_us"
 opt.spelloptions = "camel"
-opt.spellfile = u.linterConfigFolder .. "/spellfile-vim-vale-ltex.add" -- has to be .add
+opt.spellfile = u.linterConfigFolder .. "/spellfile-vim-ltex.add" -- has to be `.add`
 
 vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function()
