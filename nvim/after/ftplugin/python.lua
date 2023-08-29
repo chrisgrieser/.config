@@ -7,8 +7,9 @@ require("config.utils").applyTemplateIfEmptyFile("py")
 vim.keymap.set("n", "<localleader><localleader>", function()
 	vim.cmd.update()
 	local output = vim.fn.system { "python3", vim.fn.expand("%"), "--debug" }
+	if output == "" then output = "(No output)" end
 	if vim.v.shell_error ~= 0 then
-		vim.notify("Error:" .. output, vim.log.levels.ERROR)
+		vim.notify("Error: " .. output, vim.log.levels.ERROR)
 		return
 	end
 	vim.notify(output)
@@ -44,3 +45,4 @@ abbr("<buffer> // #")
 abbr("<buffer> -- #")
 abbr("<buffer> null None")
 abbr("<buffer> nil None")
+abbr("<buffer> none None")
