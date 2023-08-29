@@ -2,4 +2,5 @@
 .DS_Store
 
 # empty folder which gets constantly recreated by efm
+# https://github.com/mattn/efm-langserver/issues/259
 efm-langserver

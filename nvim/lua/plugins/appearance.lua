@@ -82,6 +82,7 @@ return {
 				bib = { icon = "", color = "#6e9b2a", name = "BibTeX" },
 				http = { icon = "󰴚", name = "HTTP request" }, -- for rest.nvim
 				-- give plugins icons for my status line components
+				checkhealth = { icon = "󰩂", name = ":checkhealth" },
 				noice = { icon = "󰎟", name = "noice.nvim" },
 				lazy = { icon = "󰒲", name = "lazy.nvim" },
 				mason = { icon = "", name = "mason.nvim" },
@@ -164,7 +165,7 @@ return {
 					["q"] = ccc.mapping.quit,
 					["L"] = ccc.mapping.increase10,
 					["H"] = ccc.mapping.decrease10,
-					["o"] = ccc.mapping.toggle_output_mode,
+					["o"] = ccc.mapping.toggle_output_mode, -- = convert color
 				},
 			}
 		end,
