@@ -8,7 +8,7 @@ local lintersAndFormatters = {
 	"black", -- python formatter
 	"selene", -- lua
 	"stylua", -- lua
-	"prettier", -- only used for yaml and html https://github.com/mikefarah/yq/issues/515
+	"prettier", -- only yaml formatter preserving blank lines https://github.com/mikefarah/yq/issues/515
 	"rome", -- also an LSP; the lsp does diagnostics, the CLI does formatting
 	-- stylelint included in mason, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
 }
@@ -24,6 +24,7 @@ local setupEfmConfig = function()
 
 	local shellcheck = require("my-efm.linters.shellcheck")
 	local ruff = require("my-efm.formatters.ruff")
+	local shellharden = require("my-efm.formatters.shellharden")
 	local rome = require("my-efm.formatters.rome")
 	local markdownlint = require("my-efm.linters.markdownlint")
 	local yamllint = require("my-efm.linters.yamllint")
@@ -40,7 +41,7 @@ local setupEfmConfig = function()
 		python = { black, ruff },
 		css = { prettier, stylelintLint, stylelintFormat },
 		html = { prettier },
-		sh = { shfmt, shellcheck },
+		sh = { shfmt, shellcheck, shellharden },
 		yaml = { yamllint, prettier },
 		markdown = { markdownlint },
 		gitcommit = {},

@@ -22,4 +22,4 @@ keymap("n", "<localleader>e", function()
 	cmd([['<,'>s/^\(\s*\)\(.*\)/\1"\2",/e]]) -- surround non-whitespace with quotes and comma
 	cmd([['>s/,$//e]]) -- remove trailing comma at last line
 	u.normal("gv=") -- auto-indent everything
-end, { desc = " JSON: Escape Code Snippet", buffer = true })
+end, { desc = " Escape Code Snippet", buffer = true })
