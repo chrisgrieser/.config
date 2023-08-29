@@ -47,7 +47,7 @@ return {
 		main = "project_nvim",
 		opts = {
 			detection_methods = { "pattern", "lsp" }, -- prioty: pattern, then lsp root
-			exclude_dirs = { "node_modules", "build", "dist", "venv" },
+			exclude_dirs = { "node_modules", "build", "dist", ".venv", "venv" },
 			datapath = u.vimDataDir,
 			patterns = {
 				".git",
@@ -58,6 +58,8 @@ return {
 				"package.json", -- node
 				"info.plist", -- Alfred
 				".luarc.json", -- lua
+				"selene.toml", -- lua
+				"stylua.toml", -- lua
 				".project-root", -- manually marked
 				">com~apple~CloudDocs", -- = all subfolders of the iCloud folders
 			},
