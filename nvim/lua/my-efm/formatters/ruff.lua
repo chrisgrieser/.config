@@ -7,5 +7,5 @@ local command = string.format("%s %s", fs.executable(formatter), args)
 return {
 	formatCommand = command,
 	formatStdin = true,
-	-- rootMarkers = { "pyproject.toml", "setup.py", "requirements.txt" },
+	rootMarkers = { "pyproject.toml", "setup.py", "requirements.txt" },
 }
