@@ -36,8 +36,8 @@ return {
 			evaluate = { prefix = "#", func = require("funcs.mini-operator-extras").luaEval },
 		},
 		init = function ()
-			require("funcs.mini-operator-extras").filetypeSpecificEval()
 			require("funcs.mini-operator-extras").filetypeSpecificMultiply()
+			require("funcs.mini-operator-extras").filetypeSpecificEval()
 		end
 	},
 	{ -- surround

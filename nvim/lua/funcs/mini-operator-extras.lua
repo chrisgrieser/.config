@@ -1,3 +1,4 @@
+---@diagnostic disable: inject-field
 -- used solely for mini.operators
 local M = {}
 local autocmd = vim.api.nvim_create_autocmd
@@ -31,6 +32,15 @@ function M.filetypeSpecificEval()
 					if not (vim.startswith(lastLine, printCmd)) then lastLine = printer:format(lastLine) end
 					table.insert(content.lines, lastLine)
 				end
+
+				-- fix python not being able to read unindented lines
+				if ft == "python" then 
+					content.lines = vim.tbl_map(function (line)
+						local unindentedLines = line:gsub("^%s*", "")
+						return unindentedLines
+					end, content.lines)
+				end
+
 				local lines = table.concat(content.lines, "\n")
 
 				local shellCmd = repl .. " '" .. lines:gsub("'", "\\'") .. "'"
@@ -40,14 +50,10 @@ function M.filetypeSpecificEval()
 			end
 
 			-- DOCS https://github.com/echasnovski/mini.operators/blob/main/doc/mini-operators.txt#L214
-			local conf = {
-				evaluate = { func = evalFunc },
-			}
-			---@diagnostic disable: inject-field
-			vim.b.minioperators_config = vim.tbl_deep_extend("force", conf, vim.b.minioperators_config)
+			local conf = { evaluate = { func = evalFunc } }
+			vim.b.minioperators_config = vim.b.minioperators_config
 					and vim.tbl_deep_extend("force", conf, vim.b.minioperators_config)
 				or conf
-			---@diagnostic enable: inject-field
 		end,
 	})
 end
@@ -171,12 +177,15 @@ function M.filetypeSpecificMultiply()
 		pattern = vim.tbl_keys(multiplyFuncs),
 		callback = function(ctx)
 			local ft = ctx.match
-			---@diagnostic disable-next-line: inject-field
-			vim.b.minioperators_config = {
+
+			local conf = {
 				multiply = {
 					func = function(content) return multiplyFuncs[ft](content.lines) end,
 				},
 			}
+			vim.b.minioperators_config = vim.b.minioperators_config
+					and vim.tbl_deep_extend("force", conf, vim.b.minioperators_config)
+				or conf
 		end,
 	})
 end

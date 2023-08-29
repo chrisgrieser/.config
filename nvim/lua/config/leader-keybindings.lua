@@ -246,11 +246,11 @@ keymap("n", "<leader>ow", function()
 	end
 end, { desc = " 󰖶 Wrap" })
 
--- FIX scrolloff and folding sometimes broken
+-- FIX scrolloff and theme sometimes broken
 keymap("n", "<leader>of", function()
 	vim.opt.scrolloff = 13
-	vim.opt_local.foldlevel = 99
-end, { desc = " 󰘖 Fix Folding/Scrolloff" })
+	require("config.theme-customization").setThemeMode(vim.opt.background:get())
+end, { desc = " 󰘖 Fix Theme/Folding/Scrolloff" })
 
 -- make <C-a>/<C-x> work on letters. Useful for macros
 keymap("n", "<leader>oa", function()
