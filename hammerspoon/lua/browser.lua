@@ -70,32 +70,3 @@ Jk_watcher = u.aw
 		end
 	end)
 	:start()
-
---------------------------------------------------------------------------------
--- AUTOMATICALLY SWITCH BETWEEN VERTICAL AND HORIZONTAL TABS (IN BRAVE)
--- Caveat: does not work when opening tabs in the background though, since the
--- window title does not change then 🙈
-if env.browserApp ~= "Brave Browser" then return end
-
-local function toggleVerticalTabs()
-	local threshold = 15 -- CONFIG
-
-	if not PrevTabCount then PrevTabCount = 0 end -- initialize
-	local success, tabCount =
-		hs.osascript.applescript('tell application "Brave Browser" to count tab in first window')
-	if not success then return end
-	if
-		(tabCount > threshold and PrevTabCount <= threshold)
-		or (tabCount <= threshold and PrevTabCount > threshold)
-	then
-		-- bound to Vertical Tab Toggling in Brave Settings
-		-- brave://settings/system/shortcuts
-		hs.eventtap.keyStroke({ "cmd", "alt", "ctrl" }, "9", 0, "Brave Browser")
-	end
-	PrevTabCount = tabCount
-end
-
-Wf_braveWindowTitle = wf.new("Brave Browser")
-	:setOverrideFilter({ allowRoles = "AXStandardWindow" })
-	:subscribe(wf.windowTitleChanged, toggleVerticalTabs)
-	:subscribe(wf.windowFocused, toggleVerticalTabs)

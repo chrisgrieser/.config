@@ -19,10 +19,10 @@ function M.normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 ---@param str string
 ---@param filePath string line(s) to add
 ---@param mode "w"|"a" -- write or append
----@return string|nil error 
+---@return string|nil error
 function M.writeToFile(filePath, str, mode)
 	local file, error = io.open(filePath, mode)
-	if not file then return error end 
+	if not file then return error end
 	file:write(str .. "\n")
 	file:close()
 end
@@ -46,7 +46,7 @@ end
 function M.applyTemplateIfEmptyFile(ext)
 	-- prevent buggy duplicate application of template
 	if vim.b.templateWasApplied then return end
-	vim.b.templateWasApplied = true
+	vim.b.templateWasApplied = true ---@diagnostic disable-line: inject-field
 
 	vim.defer_fn(function()
 		local filename = vim.fn.expand("%")
@@ -103,14 +103,6 @@ M.textobjectMaps = {
 	["call"] = "l",
 	["doubleSquareBracket"] = "R",
 }
-
----@param diag object https://neovim.io/doc/user/diagnostic.html#diagnostic-structure
----@return string
-function M.diagnosticFmt(diag)
-	local source = diag.source and " (" .. diag.source:gsub("%.$", "") .. ")" or ""
-	local out = diag.message .. source
-	return out
-end
 
 --------------------------------------------------------------------------------
 
