@@ -129,7 +129,6 @@ end, { desc = "󰜊 Undo since last open", silent = true })
 
 --------------------------------------------------------------------------------
 -- LSP
--- fsfs
 keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
 keymap({ "n", "x" }, "<leader>c", function()
 	vim.lsp.buf.code_action {
@@ -137,7 +136,9 @@ keymap({ "n", "x" }, "<leader>c", function()
 			local lua_ls_1 = action.title:find("^Disable diagnostics in the workspace") == nil
 			local lua_ls_2 = action.title:find("^Disable diagnostics in this file") == nil
 			local lua_ls_3 = action.title:find("^Mark `.-` as defined global") == nil
-			local lua_action_filter = (lua_ls_1 and lua_ls_2 and lua_ls_3) or vim.bo.ft ~= "lua"
+			local lua_ls_4 = action.title:find("^Change to parameter %d of") == nil
+			local lua_action_filter = (lua_ls_1 and lua_ls_2 and lua_ls_3 and lua_ls_4)
+				or vim.bo.ft ~= "lua"
 			return lua_action_filter
 		end,
 	}

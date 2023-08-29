@@ -7,6 +7,7 @@
 
 local spellfixes = {
 	teh = "the",
+	markdwon = "markdown",
 	keybaord = "keyboard",
 	sicne = "since",
 	nto = "not",

@@ -205,7 +205,7 @@ return {
 			{ "p", "<Plug>(YankyPutIndentAfter)", desc = " Paste at Indentation" },
 			{ "P", "<Plug>(YankyPutIndentAfterShiftRight)", desc = " Paste & Indent" },
 			{ "gp", "<Plug>(YankyPutIndentAfterCharwise)", desc = " Charwise Paste" },
-			{ "<M-p>", "<Plug>(YankyCycleForward)", desc = " Cycle Killring" },
+			{ "<D-p>", "<Plug>(YankyCycleForward)", desc = " Cycle Killring" },
 			{ "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = " Sticky Yank" },
 			{ "Y", "y$" }, -- is already sticky, but to be set to lazy-load Yanky
 		},
