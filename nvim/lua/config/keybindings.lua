@@ -128,8 +128,15 @@ keymap("n", "~", function()
 	local charUnderCursor = vim.api.nvim_get_current_line():sub(col, col)
 	local isLetter = charUnderCursor:find("^%a$")
 	if isLetter then return "~h" end
-	local brackets = { ["("] = ")", ["["] = "]", ["{"] = "}", ["<"] = ">" }
-	for openBracket, closeBracket in pairs(brackets) do
+	local signs = {
+		["("] = ")",
+		["/"] = "*",
+		["+"] = "-",
+		["["] = "]",
+		["{"] = "}",
+		["<"] = ">",
+	}
+	for openBracket, closeBracket in pairs(signs) do
 		if charUnderCursor == openBracket then return "r" .. closeBracket end
 		if charUnderCursor == closeBracket then return "r" .. openBracket end
 	end
