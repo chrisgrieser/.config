@@ -10,6 +10,8 @@ alias pu="pip uninstall"
 alias pi="pip install"
 alias pl="pip list"
 
+#───────────────────────────────────────────────────────────────────────────────
+
 # toggle virtual environment
 function v() {
 	if [[ -n "$VIRTUAL_ENV" ]]; then
@@ -31,6 +33,13 @@ function auto_venv() {
 		source ./.venv/bin/activate
 	fi
 }
+
+function cd() {
+	builtin cd "$@" || return 1
+	auto_venv
+}
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # 1. alias `pip update` to `pip3 install --upgrade`
 # 2. alias `pip uninstall` to `pip-autoremove`

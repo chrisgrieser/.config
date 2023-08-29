@@ -2,7 +2,7 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{
+	{ -- lightbulb for available lsp actions
 		"kosayoda/nvim-lightbulb",
 		event = "LspAttach",
 		opts = {
@@ -10,7 +10,11 @@ return {
 				enabled = true,
 				updatetime = -1, -- set by myself in the options
 			},
-			sign = { text = "" },
+			sign = { enabled = false },
+			status_text = {
+				enabled = true,
+				text = " " ,
+			},
 			ignore = {
 				clients = { "lua_ls", "marksman" },
 			},

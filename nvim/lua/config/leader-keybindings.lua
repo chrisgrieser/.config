@@ -106,8 +106,8 @@ keymap(
 	function() require("funcs.alt-alt").reopenBuffer() end,
 	{ desc = "󰽙 undo closing buffer" }
 )
-keymap("n", "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", { desc = "󰕌 󰊢 Undo (Reset) Hunk" })
-keymap("n", "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", { desc = "󰕌 󰊢 Undo (Reset) Buffer" })
+keymap("n", "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", { desc = "󰕌 󰊢 Reset Hunk" })
+keymap("n", "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", { desc = "󰕌 󰊢 Reset Buffer" })
 keymap(
 	"n",
 	"<leader>ut",
@@ -117,6 +117,7 @@ keymap(
 
 -- save open time for each buffer
 autocmd("BufReadPost", {
+	---@diagnostic disable-next-line: inject-field
 	callback = function() vim.b.timeOpened = os.time() end,
 })
 
@@ -164,7 +165,6 @@ end
 keymap("n", "<leader>ga", "<cmd>Gitsigns stage_hunk<CR>", { desc = "󰊢 Add Hunk" })
 keymap("n", "<leader>gA", "<cmd>Gitsigns stage_buffer<CR>", { desc = "󰊢 Add Buffer" })
 keymap("n", "<leader>gv", "<cmd>Gitsigns preview_hunk<CR>", { desc = "󰊢 Preview Hunk Diff" })
-keymap("n", "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", { desc = "󰊢 Reset Hunk" })
 keymap("n", "<leader>g?", "<cmd>Gitsigns blame_line<CR>", { desc = "󰊢 Blame Line" })
 
 -- Telescope

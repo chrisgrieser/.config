@@ -105,10 +105,14 @@ local function clock()
 	return time
 end
 
--- wrapper to not require navic directly
+-- wrapper to not require navic/lightbulb directly
 local function navicBreadcrumbs()
 	if bo.filetype == "css" or not require("nvim-navic").is_available() then return "" end
 	return require("nvim-navic").get_location()
+end
+
+local function lspActionLightbulb()
+	return require("nvim-lightbulb").get_status_text()
 end
 
 --------------------------------------------------------------------------------
@@ -160,7 +164,6 @@ vim.api.nvim_create_autocmd("FileType", {
 -- nerdfont: powerline icons have the prefix 'ple-'
 local bottomSeparators = { left = "", right = "" }
 local topSeparators = { left = "", right = "" }
-local emptySeparators = { left = "", right = "" }
 
 local lualineConfig = {
 	-- INFO using the tabline will override vim's default tabline, so the tabline
@@ -202,6 +205,7 @@ local lualineConfig = {
 			{ require("funcs.quickfix").counter },
 		},
 		lualine_x = {
+			{ lspActionLightbulb },
 			{
 				"diagnostics",
 				symbols = { error = "󰅚 ", warn = " ", info = "󰋽 ", hint = "󰘥 " },
