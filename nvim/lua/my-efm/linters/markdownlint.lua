@@ -13,5 +13,5 @@ return {
 	lintCommand = command,
 	lintIgnoreExitCode = true,
 	lintStdin = true,
-	lintFormats = { "%f:%l:%c %m", "%f:%l %m" },
+	lintFormats = { "%f:%l:%c %m", "%f:%l %m", "%f: %l: %m" },
 }

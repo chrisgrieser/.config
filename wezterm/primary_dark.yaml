@@ -3,21 +3,22 @@
 
 colors:
   primary:
-    background: '#231E1A'
-    foreground: '#E5CFB3'
+    background: "#231E1A"
+    foreground: "#E5CFB3"
   normal:
-    black:  '#000000'
-    red:    '#F54E42'
-    green:  '#38B27D'
-    yellow: '#EBC400'
-    blue:   '#4DADD5'
-    magenta: '#9F78DD'
-    cyan:    '#3399C1'
-    white:   '#F6E7D5'
+    black: "#000000"
+    red: "#F54E42"
+    green: "#38B27D"
+    yellow: "#EBC400"
+    blue: "#4DADD5"
+    magenta: "#9F78DD"
+    cyan: "#3399C1"
+    white: "#F6E7D5"
   bright:
-    black:  '#000000'
-    yellow: '#F8D668'
-    red:    '#FF675C'
-    green:  '#38D687'
-    magenta: '#A993E6'
-    white:   '#F6E7D5'
+    black: "#000000"
+    yellow: "#F8D668"
+    red: "#FF675C"
+    green: "#38D687"
+    magenta: "#A993E6"
+    white: "#F6E7D5"
+

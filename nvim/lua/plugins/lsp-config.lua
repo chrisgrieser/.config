@@ -267,8 +267,16 @@ local function diagnosticConfig()
 	-- 	vim.lsp.with(vim.lsp.handlers.signature_help, { border = u.borderStyle })
 
 	-- https://neovim.io/doc/user/diagnostic.html#diagnostic-structure
-	local function diagnosticFmt(diag)
-		if diag.source == "Ruff" then return diag.message .. " [" .. diag.code .. "]" end
+	-- defiend
+	local function diagnosticFmt(diag, type)
+		if diag.source == "Ruff" and type == "virtual_text" then
+			return diag.message .. " [" .. diag.code .. "]"
+		end
+
+		-- for efm
+
+
+
 		local source = diag.source and " (" .. diag.source:gsub("%.$", "") .. ")" or ""
 		return diag.message .. source
 	end
@@ -277,11 +285,11 @@ local function diagnosticConfig()
 		virtual_text = {
 			severity = { min = vim.diagnostic.severity.WARN }, -- no text for hints
 			source = false, -- already handled by format function
-			format = function(diag) return diagnosticFmt(diag) end,
+			format = function(diag) return diagnosticFmt(diag, "virtual_text") end,
 			spacing = 1,
 		},
 		float = {
-			format = function(diag) return diagnosticFmt(diag) end,
+			format = function(diag) return diagnosticFmt(diag, "float") end,
 			focusable = true,
 			border = u.borderStyle,
 			max_width = 70,

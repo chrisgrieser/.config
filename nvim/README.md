@@ -3,9 +3,12 @@
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img src="https://dotfyle.com/chrisgrieser/config-nvim/badges/leaderkey?style=flat" /></a>
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img src="https://dotfyle.com/chrisgrieser/config-nvim/badges/plugin-manager?style=flat" /></a>
 
-I **want** to say this.fsf
-I __will__ do that.
--- teh
+I **want** to say this.
+- Two
+    - one
+- three
+
+
 
 ```text
 ├── lua
@@ -23,7 +26,7 @@ I __will__ do that.
 └── templates
 ```
 
-Tree was *generated* using <https://tree.nathanfriend.io/>
+Tree was generated using <https://tree.nathanfriend.io/>
 
 ## All Installed Plugins
 - [Aasim-A/scrollEOF.nvim](https://github.com/Aasim-A/scrollEOF.nvim)
