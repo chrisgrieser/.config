@@ -2,11 +2,6 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{
-		"Fildo7525/pretty_hover",
-		event = "LspAttach",
-		opts = {},
-	},
 	{ -- lsp definitions & references count in the status line
 		"chrisgrieser/nvim-dr-lsp",
 		event = "LspAttach",
