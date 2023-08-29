@@ -29,24 +29,24 @@ return {
 		cmd = { "VenvSelect", "VenvSelectCached" },
 		config = function()
 			require("venv-selector").setup {
-				name = { "venv", ".venv" },
+				name = { ".venv" },
 				auto_refresh = true,
-				notify_user_on_activate = false,
+				notify_user_on_activate = true,
 			}
 			venvLualine()
 		end,
 		-- auto-select venv on entering python buffer -- https://github.com/linux-cultist/venv-selector.nvim#-automate
-		init = function()
-			vim.api.nvim_create_autocmd("BufReadPost", {
-				callback = function()
-					if vim.bo.ft ~= "python" then return end
-					vim.defer_fn(function()
-						local venv = vim.fn.findfile("pyproject.toml", vim.fn.getcwd() .. ";")
-						if venv ~= "" then require("venv-selector").retrieve_from_cache() end
-					end, 200)
-				end,
-			})
-		end,
+		-- init = function()
+		-- 	vim.api.nvim_create_autocmd("BufReadPost", {
+		-- 		callback = function()
+		-- 			if vim.bo.ft ~= "python" then return end
+		-- 			vim.defer_fn(function()
+		-- 				local venv = vim.fn.findfile("pyproject.toml", vim.fn.getcwd() .. ";")
+		-- 				if venv ~= "" then require("venv-selector").retrieve_from_cache() end
+		-- 			end, 200)
+		-- 		end,
+		-- 	})
+		-- end,
 	},
 	{ -- fix indentation issues in python https://www.reddit.com/r/neovim/comments/wyx4e4/q_auto_indentation_for_python_files/
 		"Vimjas/vim-python-pep8-indent",

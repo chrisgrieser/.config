@@ -67,10 +67,12 @@ function unshallow() {
 
 # use delta for small diffs and diff2html for big diffs
 function gd() {
+	# CONFIG
+	local threshold_lines=100
+
 	if ! command -v diff2html &>/dev/null; then echo "diff2html not installed (\`npm -g install diff2html\`)." && return 1; fi
 	if ! command -v delta &>/dev/null; then echo "delta not installed (\`brew install git-delta\`)" && return 1; fi
 
-	local threshold_lines=80
 	if [[ $(git diff | wc -l) -gt $threshold_lines ]]; then
 		diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"
 	else
