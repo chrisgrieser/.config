@@ -15,6 +15,7 @@ local lsp_servers = {
 	"cssls",
 	"emmet_ls", -- css & html completion
 	"pyright", -- python LSP
+	-- "jedi_language_server", -- python
 	"pylsp", -- python LSP
 	"ruff_lsp", -- python linter, formatting capability needs to be provided via cli
 	"marksman", -- markdown
@@ -68,6 +69,7 @@ conf.init_options.ruff_lsp = {
 conf.on_attach.ruff_lsp = function(client, _) client.server_capabilities.hoverProvider = false end
 
 -- pylsp has better hover, esp. the basic stuff for learning (e.g. "range()")
+-- BUG ignored due to https://github.com/linux-cultist/venv-selector.nvim/issues/58
 conf.on_attach.pyright = function(client, _) client.server_capabilities.hoverProvider = false end
 
 -- pylsp has better hover
