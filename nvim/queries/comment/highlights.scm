@@ -13,7 +13,7 @@
 
 ; FOOBAR TEST ERROR
 ; NOTE XXX PERF
-; BUG
+; BUG CONFIG
 ; TODO HACK
 
 ;───────────────────────────────────────────────────────────────────────────────
@@ -33,10 +33,10 @@
   (name) @text.note @nospell
   ("(" @punctuation.bracket (user) @constant ")" @punctuation.bracket)?
   ":" @punctuation.delimiter)
-  (#any-of? @text.note "NOTE" "INFO" "DOCS" "PERF" "TEST"))
+  (#any-of? @text.note "NOTE" "INFO" "DOCS" "PERF" "TEST" "CONFIG"))
 
 ("text" @text.note @nospell
- (#any-of? @text.note "NOTE" "INFO" "DOCS" "PERF" "TEST"))
+ (#any-of? @text.note "NOTE" "INFO" "DOCS" "PERF" "TEST" "CONFIG"))
 
 ((tag
   (name) @text.warning @nospell

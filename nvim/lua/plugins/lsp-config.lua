@@ -258,6 +258,7 @@ local function setupAllLsps()
 end
 
 --------------------------------------------------------------------------------
+
 -- DIAGNOSTICS
 local function diagnosticConfig()
 	-- Sign Icons

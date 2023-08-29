@@ -6,8 +6,11 @@ local u = require("config.utils")
 local routes = {
 	-- write messages
 	{ filter = { event = "msg_show", find = "B written$" }, view = "mini" },
+
 	-- nvim-treesitter
 	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
+
+	-- Word added to spellfile via `zg`
 	{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
 
 	-- Mason
@@ -20,13 +23,12 @@ local routes = {
 	{ filter = { event = "notify", find = "unpacking server" }, view = "mini" },
 
 	-- unneeded info on search patterns
-	{ filter = { event = "msg_show", find = "^/." }, skip = true },
-	{ filter = { event = "msg_show", find = "^?." }, skip = true },
+	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
 	{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
 
 	-- redirect to split
-	{ filter = { event = "msg_show", min_height = 15 }, view = "split" },
-	{ filter = { event = "notify", min_height = 15 }, view = "split" },
+	{ filter = { event = "msg_show", min_height = 15 }, view = "popup" },
+	{ filter = { event = "notify", min_height = 15 }, view = "popup" },
 }
 
 --------------------------------------------------------------------------------
@@ -49,11 +51,11 @@ return {
 		opts = {
 			routes = routes,
 			cmdline = {
-				view = "cmdline_popup", -- cmdline|cmdline_popup
+				view = "cmdline", -- cmdline|cmdline_popup
 				format = {
-					search_down = { icon = "  ", view = "cmdline" },
-					cmdline = { icon = " " },
-					lua = { pattern = { "^:%s*lua%s+" }, icon = "", lang = "lua" },
+					search_down = { icon = "  ", view = "cmdline" }, -- FIX needed to be set explicitly
+					cmdline = { view = "cmdline_popup" },
+					lua = { pattern = { "^:%s*lua%s+" } }, -- show the `=`
 					IncRename = {
 						pattern = "^:IncRename ",
 						icon = " ",
@@ -69,12 +71,6 @@ return {
 						pattern = { "^:%%? ?s " },
 						icon = " ",
 						conceal = true,
-						opts = {
-							border = { style = u.borderStyle },
-							relative = "cursor",
-							size = { width = 40 }, -- `max_width` does not work, so fixed value
-							position = { row = -3, col = 0 },
-						},
 					},
 				},
 			},
@@ -87,6 +83,11 @@ return {
 				hover = {
 					border = { style = u.borderStyle },
 					size = { max_width = 80 },
+					win_options = { scrolloff = 4 },
+				},
+				popup = {
+					border = { style = u.borderStyle },
+					size = { width = 80 },
 					win_options = { scrolloff = 4 },
 				},
 				split = {
@@ -102,17 +103,11 @@ return {
 					view = "split",
 					filter_opts = { reverse = true }, -- show newest entries first
 					opts = { enter = true },
-					filter = {
-						any = {
-							{ event = "notify" },
-							{ error = true },
-							{ warning = true },
-							{ event = "msg_show" },
-							{ event = "lsp" },
-						},
-					},
+					filter = {}, -- empty list = deactivate filter = include everything
 				},
 			},
+
+			-- popupmenu = { backend = "nui" }, -- replace with nvim-cmp, since more sources
 
 			-- DISABLED, since conflicts with existing plugins I prefer to use
 			messages = { view_search = false }, -- replaced by nvim-hlslens
