@@ -30,12 +30,12 @@ local setupEfmConfig = function()
 	local markdownlint = require("my-efm.linters.markdownlint")
 	local yamllint = require("my-efm.linters.yamllint")
 	local codespellLint = require("my-efm.linters.codespell")
+	-- local codespellFormat = require("my-efm.formatters.codespell")
 	local stylelintFormat = require("my-efm.formatters.stylelint")
 
 	-- TODO 
 	-- - codespell formatting
 	-- - stylelint severity bla
-	-- - diagnostic format
 
 	local languages = {
 		javascript = { rome },
@@ -54,7 +54,10 @@ local setupEfmConfig = function()
 
 	-- use for codespell for all except bib and css
 	for ft, _ in pairs(languages) do
-		if ft ~= "bib" and ft ~= "css" then table.insert(languages[ft], codespellLint) end
+		if ft ~= "bib" and ft ~= "css" then
+			table.insert(languages[ft], codespellLint)
+			-- table.insert(languages[ft], codespellFormat)
+		end
 	end
 
 	-- INFO efm has to be installed via brew, since mason only installs it via go.
