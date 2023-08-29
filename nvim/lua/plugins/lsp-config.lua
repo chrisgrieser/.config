@@ -15,8 +15,7 @@ local lsp_servers = {
 	"cssls",
 	"emmet_ls", -- css & html completion
 	"pyright", -- python LSP
-	-- "jedi_language_server", -- python
-	"pylsp", -- python LSP
+	"jedi_language_server", -- python (has refactor code actions & better hovers)
 	"ruff_lsp", -- python linter, formatting capability needs to be provided via cli
 	"marksman", -- markdown
 	"rome", -- js/ts/json – formatting capability needs to be provided via cli
@@ -65,23 +64,16 @@ conf.init_options.ruff_lsp = {
 	settings = { organizeImports = false, fixAll = false },
 }
 
--- Disable hover in favor of Pylsp
+-- Disable hover in favor of jedi/pyright
 conf.on_attach.ruff_lsp = function(client, _) client.server_capabilities.hoverProvider = false end
 
 -- pylsp has better hover, esp. the basic stuff for learning (e.g. "range()")
 -- BUG ignored due to https://github.com/linux-cultist/venv-selector.nvim/issues/58
 conf.on_attach.pyright = function(client, _) client.server_capabilities.hoverProvider = false end
 
--- pylsp has better hover
-conf.settings.pylsp = {
-	pylsp = {
-		plugins = {
-			-- taken care of by ruff
-			flake8 = { enabled = false },
-			pyflakes = { enabled = false },
-			pycodestyle = { enabled = false },
-		},
-	},
+-- the docs say it's "initializationOptions", but it's actually "init_options"
+conf.init_options.jedi_language_server = {
+	diagnostics = { enable = true },
 }
 
 --------------------------------------------------------------------------------
