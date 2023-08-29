@@ -35,9 +35,7 @@ local function linterConfigs()
 
 	-- use for codespell/cspell for all except bib and css
 	for ft, _ in pairs(lint.linters_by_ft) do
-		if ft ~= "bib" and ft ~= "css" then
-			table.insert(lint.linters_by_ft[ft], "codespell")
-		end
+		if ft ~= "bib" and ft ~= "css" then table.insert(lint.linters_by_ft[ft], "codespell") end
 	end
 
 	-- https://github.com/mfussenegger/nvim-lint/tree/master/lua/lint/linters
@@ -229,7 +227,23 @@ return {
 		config = formatterConfigs,
 		cmd = { "Format", "FormatWrite" },
 		keys = {
-			{ "<D-s>", vim.cmd.FormatWrite, desc = "󰒕  Save & Format" },
+			{
+				"<D-s>",
+				function()
+					-- HACK to preserve folds: https://github.com/mhartington/formatter.nvim/issues/275
+					-- but only if the number of lines has not changed, since
+					-- otherwise folds are distorted
+					local linesBefore = vim.api.nvim_buf_line_count(0)
+					vim.cmd.mkview(9)
+					vim.cmd.FormatWrite()
+					vim.defer_fn(function()
+						local linesAfter = vim.api.nvim_buf_line_count(0)
+						if linesAfter ~= linesBefore then return end
+						pcall(vim.cmd.loadview, 9)
+					end, 200)
+				end,
+				desc = "󰒕  Save & Format",
+			},
 		},
 	},
 }

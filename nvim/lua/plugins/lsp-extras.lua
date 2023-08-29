@@ -2,6 +2,20 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
+	{
+		"kosayoda/nvim-lightbulb",
+		event = "LspAttach",
+		opts = {
+			autocmd = {
+				enabled = true,
+				updatetime = -1, -- set by myself in the options
+			},
+			sign = { text = "" },
+			ignore = {
+				clients = { "lua_ls", "marksman" },
+			},
+		},
+	},
 	{ -- lsp definitions & references count in the status line
 		"chrisgrieser/nvim-dr-lsp",
 		event = "LspAttach",
