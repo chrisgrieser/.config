@@ -216,6 +216,7 @@ return {
 	},
 	{
 		"mfussenegger/nvim-lint",
+		enabled = false,
 		event = "VeryLazy",
 		config = function()
 			linterConfigs()
@@ -224,8 +225,7 @@ return {
 	},
 	{
 		"creativenull/efmls-configs-nvim",
-		-- event = "LSPAttach",
-		version = "v1.x.x",
+		event = "LSPAttach",
 		dependencies = "neovim/nvim-lspconfig",
 	},
 	{
