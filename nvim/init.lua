@@ -39,3 +39,4 @@ safeRequire("config.user-commands")
 safeRequire("config.abbreviations")
 
 safeRequire("funcs.pulling-strings")
+safeRequire("config.efm")

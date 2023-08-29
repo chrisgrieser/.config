@@ -77,6 +77,7 @@ return {
 			{"<C-d>", function() require("genghis").duplicateFile() end, desc = " Duplicate file" },
 			{"<D-BS>", function() require("genghis").trashFile() end, desc = " Move file to trash" },
 			{"<D-n>", function() require("genghis").createNewFile() end, desc = " Create new file" },
+			{"<D-m>", function() require("genghis").moveAndRenameFile() end, desc = " Move & rename file" },
 			{"X", function() require("genghis").moveSelectionToNewFile() end, mode = "x", desc = " Selection to new file" },
 			-- stylua: ignore end
 		},
