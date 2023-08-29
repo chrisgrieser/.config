@@ -23,11 +23,6 @@ end
 
 return {
 	{
-		"stsewd/sphinx.nvim",
-		ft = "python",
-		build = ":UpdateRemotePlugins",
-	},
-	{
 		"linux-cultist/venv-selector.nvim",
 		dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
 		cmd = { "VenvSelect", "VenvSelectCached" },
@@ -36,6 +31,11 @@ return {
 				name = { "venv", ".venv" },
 				auto_refresh = true,
 				notify_user_on_activate = false,
+				hooks = {
+					changed_venv_hooks = {
+						
+					}
+				},
 			}
 			venvLualine()
 		end,
