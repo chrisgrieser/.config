@@ -1,17 +1,18 @@
 -- INFO only the first theme will be used
 local lightThemes = {
 	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
+	-- { "catppuccin/nvim", name = "catppuccin" },
 	-- { "rose-pine/neovim", name = "rose-pine" },
 	-- {
 	-- 	"marko-cerovac/material.nvim",
 	-- 	init = function() vim.g.material_style = "lighter" end,
 	-- 	opts = { lualine_style = "stealth", high_visibility = { lighter = false } },
 	-- },
-	-- { "catppuccin/nvim", name = "catppuccin" },
 }
 
 local darkThemes = {
-	"folke/tokyonight.nvim",
+	{"folke/tokyonight.nvim", opts = { style = "moon" }},
+	-- { "catppuccin/nvim", name = "catppuccin" },
 	-- "sainnhe/gruvbox-material",
 	-- "rebelot/kanagawa.nvim",
 	-- { "sainnhe/sonokai", init = function() g.sonokai_style = "shusia" end },
@@ -26,7 +27,6 @@ vim.g.lightOpacity = 0.93
 
 --------------------------------------------------------------------------------
 
--- DOCS
 -- The purpose of this is not having to manage two lists, one with themes
 -- to install and one for determining light/dark theme
 
@@ -45,10 +45,12 @@ vim.g.darkTheme = getName(darkThemes[1])
 
 --------------------------------------------------------------------------------
 
--- merge first elements of table
-local allThemes = { lightThemes[1], darkThemes[1] }
+-- merge tables
+local allThemes = {}
+vim.list_extend(allThemes, lightThemes)
+vim.list_extend(allThemes, darkThemes)
 
--- ensure themes are never lazyloaded
+-- ensure themes are never lazy-loaded https://github.com/folke/lazy.nvim#-colorschemes
 allThemes = vim.tbl_map(function(theme)
 	local themeObj = type(theme) == "string" and { theme } or theme
 	themeObj.lazy = false
