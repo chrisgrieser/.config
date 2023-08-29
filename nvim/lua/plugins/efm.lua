@@ -6,7 +6,6 @@ local lintersAndFormatters = {
 	"markdownlint",
 	"ruff", -- python linter/formatter, the lsp does diagnostics, the CLI does formatting
 	"black", -- python formatter
-	"vale", -- natural language
 	"selene", -- lua
 	"stylua", -- lua
 	"prettier", -- only used for yaml and html https://github.com/mikefarah/yq/issues/515
@@ -20,7 +19,6 @@ local setupEfmConfig = function()
 	local black = require("efmls-configs.formatters.black")
 	local prettier = require("efmls-configs.formatters.prettier")
 	local shfmt = require("efmls-configs.formatters.shfmt")
-	local stylelintLint = require("efmls-configs.linters.stylelint")
 	local stylua = require("efmls-configs.formatters.stylua")
 	local selene = require("efmls-configs.linters.selene")
 
@@ -31,6 +29,7 @@ local setupEfmConfig = function()
 	local yamllint = require("my-efm.linters.yamllint")
 	local codespellLint = require("my-efm.linters.codespell")
 	-- local codespellFormat = require("my-efm.formatters.codespell")
+	local stylelintLint = require("my-efm.linters.stylelint")
 	local stylelintFormat = require("my-efm.formatters.stylelint")
 
 	local languages = {
@@ -93,8 +92,8 @@ return {
 			{
 				"<D-s>",
 				function()
-					vim.lsp.buf.format()
 					vim.cmd.update()
+					vim.lsp.buf.format { name = "efm", async = true }
 				end,
 				desc = "󰒕 Format & Save",
 			},
