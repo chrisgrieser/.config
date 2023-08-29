@@ -34,12 +34,15 @@ local function dapLualine()
 end
 --------------------------------------------------------------------------------
 
+-- TODO https://github.com/mfussenegger/nvim-dap-python
+--------------------------------------------------------------------------------
+
 return {
 	"mfussenegger/nvim-dap",
 	keys = {
 		-- stylua: ignore start
 		-- INFO toggling breakpoints done via nvim-recorder
-		{ "<leader>b" .. "u", function() require("dapui").toggle() end, desc = " Toggle DAP-UI" },
+		{ "<leader>bu", function() require("dapui").toggle() end, desc = " Toggle DAP-UI" },
 		{ "<leader>bv", function() require("dap").step_over() end, desc = " Step Over" },
 		{ "<leader>bo", function() require("dap").step_out() end, desc = " Step Out" },
 		{ "<leader>bi", function() require("dap").step_into() end, desc = " Step Into" },
@@ -58,9 +61,13 @@ return {
 		},
 	},
 	dependencies = {
-		{ "jayp0521/mason-nvim-dap.nvim", config = true },
-		{ "theHamsta/nvim-dap-virtual-text", config = true },
-		{ "rcarriga/nvim-dap-ui", config = true },
+		{
+			"jayp0521/mason-nvim-dap.nvim",
+			opts = { ensure_installed = { "python" } }, -- installed `debugypy`
+		},
+		{ "mfussenegger/nvim-dap-python" },
+		{ "theHamsta/nvim-dap-virtual-text", opts = true },
+		{ "rcarriga/nvim-dap-ui", opts = true },
 	},
 	init = function()
 		local ok, whichKey = pcall(require, "which-key")
