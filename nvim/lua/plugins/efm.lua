@@ -23,15 +23,16 @@ local setupEfmConfig = function()
 	local selene = require("efmls-configs.linters.selene")
 
 	local shellcheck = require("my-efm.linters.shellcheck")
-	local shellcheckApply = require("my-efm.formatters.shellcheck")
+	local shellharden = require("my-efm.formatters.shellharden")
 	local ruff = require("my-efm.formatters.ruff")
 	local rome = require("my-efm.formatters.rome")
 	local markdownlint = require("my-efm.linters.markdownlint")
 	local yamllint = require("my-efm.linters.yamllint")
 	local codespellLint = require("my-efm.linters.codespell")
-	-- local codespellFormat = require("my-efm.formatters.codespell")
 	local stylelintLint = require("my-efm.linters.stylelint")
 	local stylelintFormat = require("my-efm.formatters.stylelint")
+	-- local shellcheckApply = require("my-efm.formatters.shellcheck")
+	-- local codespellFormat = require("my-efm.formatters.codespell")
 
 	local languages = {
 		javascript = { rome },
@@ -41,7 +42,7 @@ local setupEfmConfig = function()
 		python = { black, ruff },
 		css = { prettier, stylelintLint, stylelintFormat },
 		html = { prettier },
-		sh = { shfmt, shellcheck, shellcheckApply },
+		sh = { shfmt, shellcheck, shellharden },
 		yaml = { yamllint, prettier },
 		markdown = { markdownlint },
 		gitcommit = {},
