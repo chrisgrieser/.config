@@ -229,19 +229,20 @@ end
 ---Remove all log statements in the current buffer
 ---Supported: lua, python, js/ts, zsh/bash/fish, and applescript
 function M.removeLogs()
-	local numOfLinesBefore = fn.line("$")
+	local numOfLinesBefore = vim.api.nvim_buf_line_count(0)
 
 	-- escape for vim regex, in case `[]` are used in the marker
 	local toRemove = marker:gsub("%]", "\\]"):gsub("%[", "\\[")
 	cmd(("silent g/%s/d"):format(toRemove))
 	cmd.nohlsearch()
 
-	local linesRemoved = numOfLinesBefore - fn.line("$")
+	local linesRemoved = numOfLinesBefore - vim.api.nvim_buf_line_count(0)
 	local msg = ("󰸢 Removed %s log statements."):format(linesRemoved)
 	if linesRemoved == 1 then msg = msg:sub(1, -3) .. "." end
 	vim.notify(msg)
 
-	g.timelogCount = 0 -- reset timelog
+	---@diagnostic disable-next-line: inject-field
+	vim.b.timelogCount = 0 -- reset timelog
 end
 
 --------------------------------------------------------------------------------
