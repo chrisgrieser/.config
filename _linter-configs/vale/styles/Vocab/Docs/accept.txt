@@ -1,1 +1,0 @@
-../../../../spellfile-vim-vale-ltex.add

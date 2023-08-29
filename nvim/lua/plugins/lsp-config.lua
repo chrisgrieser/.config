@@ -176,7 +176,7 @@ conf.filetypes.ltex = { "gitcommit", "markdown", "octo" }
 
 -- HACK since reading external file with the method described in the ltex docs
 -- does not work
-local dictfile = u.linterConfigFolder .. "/spellfile-vim-vale-ltex.add"
+local dictfile = u.linterConfigFolder .. "/spellfile-vim-ltex.add"
 local fileExists = vim.loop.fs_stat(dictfile) ~= nil
 local words = {}
 if fileExists then

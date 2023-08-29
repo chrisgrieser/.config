@@ -25,11 +25,10 @@ local setupEfmConfig = function()
 	local shellcheck = require("efmls-configs.linters.shellcheck")
 	local selene = require("efmls-configs.linters.selene")
 
-	local vale = require("efmls-configs.linters.vale")
-
 	local ruff = require("my-efm.formatters.ruff")
 	local rome = require("my-efm.formatters.rome")
 	local markdownlint = require("my-efm.linters.markdownlint")
+	local yamllint = require("my-efm.linters.yamllint")
 	local codespellLint = require("my-efm.linters.codespell")
 	local stylelintFormat = require("my-efm.formatters.stylelint")
 
@@ -44,7 +43,8 @@ local setupEfmConfig = function()
 		python = { black, ruff },
 		css = { prettier, stylelintLint, stylelintFormat },
 		sh = { shfmt, shellcheck },
-		markdown = { vale },
+		yaml = { yamllint },
+		markdown = { markdownlint },
 		gitcommit = {},
 		toml = {},
 	}
