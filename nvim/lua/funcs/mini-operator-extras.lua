@@ -5,7 +5,7 @@ local autocmd = vim.api.nvim_create_autocmd
 
 -- INFO some repl-cmds automatically print the last line, so they do not
 -- require a printer command
-local cmds = {
+local evalCmds = {
 	sh = { repl = "zsh -c" },
 	python = { repl = "python3 -c", printer = "print(%s)" },
 	applescript = { repl = "osascript -l AppleScript -e" },
@@ -16,11 +16,11 @@ local cmds = {
 -- run as `init` for mini.operators
 function M.filetypeSpecificEval()
 	autocmd("FileType", {
-		pattern = vim.tbl_keys(cmds),
+		pattern = vim.tbl_keys(evalCmds),
 		callback = function(ctx)
 			local ft = ctx.match
-			local repl = cmds[ft].repl
-			local printer = cmds[ft].printer
+			local repl = evalCmds[ft].repl
+			local printer = evalCmds[ft].printer
 
 			local evalFunc = function(content)
 				local inputLines = vim.deepcopy(content.lines)
@@ -40,7 +40,14 @@ function M.filetypeSpecificEval()
 			end
 
 			-- DOCS https://github.com/echasnovski/mini.operators/blob/main/doc/mini-operators.txt#L214
-			vim.b.minioperators_config = { evaluate = { func = evalFunc } }
+			local conf = {
+				evaluate = { func = evalFunc },
+			}
+			---@diagnostic disable: inject-field
+			vim.b.minioperators_config = vim.tbl_deep_extend("force", conf, vim.b.minioperators_config)
+					and vim.tbl_deep_extend("force", conf, vim.b.minioperators_config)
+				or conf
+			---@diagnostic enable: inject-field
 		end,
 	})
 end
@@ -81,17 +88,32 @@ function multiplyFuncs.css(lines)
 	if #lines ~= 1 then return lines end
 	local line = lines[1]
 
-	if line:find("top:") then line = line:gsub("top:", "bottom:")
-	elseif line:find("bottom:") then line = line:gsub("bottom:", "top:") end
-	if line:find("right:") then line = line:gsub("right:", "left:")
-	elseif line:find("left:") then line = line:gsub("left:", "right:") end
-	if line:find("dark:") then line = line:gsub("dark:", "light:")
-	elseif line:find("light:") then line = line:gsub("light:", "dark:") end
+	if line:find("top:") then
+		line = line:gsub("top:", "bottom:")
+	elseif line:find("bottom:") then
+		line = line:gsub("bottom:", "top:")
+	end
+	if line:find("right:") then
+		line = line:gsub("right:", "left:")
+	elseif line:find("left:") then
+		line = line:gsub("left:", "right:")
+	end
+	if line:find("dark:") then
+		line = line:gsub("dark:", "light:")
+	elseif line:find("light:") then
+		line = line:gsub("light:", "dark:")
+	end
 	-- %s condition to avoid matching line-height, border-width, etc
-	if line:find("%sheight:") then line = line:gsub("height:", "width:")
-	elseif line:find("%swidth:") then line = line:gsub("width:", "height:") end
-	if line:find("margin:") then line = line:gsub("margin:", "padding:")
-	elseif line:find("padding:") then line = line:gsub("padding:", "margin:") end
+	if line:find("%sheight:") then
+		line = line:gsub("height:", "width:")
+	elseif line:find("%swidth:") then
+		line = line:gsub("width:", "height:")
+	end
+	if line:find("margin:") then
+		line = line:gsub("margin:", "padding:")
+	elseif line:find("padding:") then
+		line = line:gsub("padding:", "margin:")
+	end
 
 	return { line }
 end
@@ -129,7 +151,6 @@ function multiplyFuncs.javascript(lines)
 	return { line }
 end
 
-
 ---@param lines string[]
 ---@return string[]
 function multiplyFuncs.python(lines)
@@ -150,6 +171,7 @@ function M.filetypeSpecificMultiply()
 		pattern = vim.tbl_keys(multiplyFuncs),
 		callback = function(ctx)
 			local ft = ctx.match
+			---@diagnostic disable-next-line: inject-field
 			vim.b.minioperators_config = {
 				multiply = {
 					func = function(content) return multiplyFuncs[ft](content.lines) end,
