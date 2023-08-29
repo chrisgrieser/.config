@@ -23,7 +23,7 @@ end
 
 return {
 	{
-		"linux-cultist/venv-selector.nvim",
+		"chrisgrieser/venv-selector.nvim",
 		dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
 		cmd = { "VenvSelect", "VenvSelectCached" },
 		config = function()
@@ -31,11 +31,6 @@ return {
 				name = { "venv", ".venv" },
 				auto_refresh = true,
 				notify_user_on_activate = false,
-				hooks = {
-					changed_venv_hooks = {
-						
-					}
-				},
 			}
 			venvLualine()
 		end,
