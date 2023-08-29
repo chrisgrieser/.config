@@ -3,13 +3,6 @@
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img src="https://dotfyle.com/chrisgrieser/config-nvim/badges/leaderkey?style=flat" /></a>
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img src="https://dotfyle.com/chrisgrieser/config-nvim/badges/plugin-manager?style=flat" /></a>
 
-I **want** to say this.
-- Two
-    - one
-- three
-
-
-
 ```text
 ├── lua
 │  ├── config # keybindings, options, …

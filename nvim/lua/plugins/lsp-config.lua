@@ -248,57 +248,6 @@ end
 
 --------------------------------------------------------------------------------
 
--- DIAGNOSTICS
-local function diagnosticConfig()
-	-- Sign Icons
-	local diagnosticTypes = { Error = "", Warn = "▲", Info = "", Hint = "" }
-	for type, icon in pairs(diagnosticTypes) do
-		local hl = "DiagnosticSign" .. type
-		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-	end
-
-	-- Borders for Floats & Virtual Text
-	require("lspconfig.ui.windows").default_options.border = u.borderStyle
-	vim.lsp.handlers["textDocument/hover"] =
-		vim.lsp.with(vim.lsp.handlers.hover, { border = u.borderStyle })
-
-	-- WARN this needs to be disabled due to noice.nvim
-	-- vim.lsp.handlers["textDocument/signatureHelp"] =
-	-- 	vim.lsp.with(vim.lsp.handlers.signature_help, { border = u.borderStyle })
-
-	-- https://neovim.io/doc/user/diagnostic.html#diagnostic-structure
-	-- defiend
-	local function diagnosticFmt(diag, type)
-		if diag.source == "Ruff" and type == "virtual_text" then
-			return diag.message .. " [" .. diag.code .. "]"
-		end
-
-		-- for efm
-
-
-
-		local source = diag.source and " (" .. diag.source:gsub("%.$", "") .. ")" or ""
-		return diag.message .. source
-	end
-
-	vim.diagnostic.config {
-		virtual_text = {
-			severity = { min = vim.diagnostic.severity.WARN }, -- no text for hints
-			source = false, -- already handled by format function
-			format = function(diag) return diagnosticFmt(diag, "virtual_text") end,
-			spacing = 1,
-		},
-		float = {
-			format = function(diag) return diagnosticFmt(diag, "float") end,
-			focusable = true,
-			border = u.borderStyle,
-			max_width = 70,
-			header = "", -- remove "Diagnostics:" heading
-		},
-	}
-end
---------------------------------------------------------------------------------
-
 return {
 	{ -- package manager
 		"williamboman/mason.nvim",
@@ -320,6 +269,5 @@ return {
 		"neovim/nvim-lspconfig",
 		dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config
 		init = setupAllLsps,
-		config = diagnosticConfig,
 	},
 }

@@ -26,13 +26,16 @@ function run() {
 			const displayName = name.replace(/-/g, " ");
 
 			const url = ruffRulesUrl + name + "/";
-			return {
+
+			/** @type{AlfredItem} */
+			const item = {
 				title: displayName,
 				subtitle: id,
 				match: alfredMatcher(id) + alfredMatcher(name),
 				arg: url,
 				uid: url,
 			};
+			return item
 		});
 
 	return JSON.stringify({ items: sectionsArr });

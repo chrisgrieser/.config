@@ -28,6 +28,7 @@ safeRequire("config.lazy")
 if vim.fn.has("gui_running") == 1 then safeRequire("config.gui-settings") end
 safeRequire("config.theme-customization")
 safeRequire("config.options-and-autocmds")
+safeRequire("config.diagnostics")
 
 reOpenLastFile()
 
