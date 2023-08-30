@@ -12,10 +12,10 @@
 		"body": "replace(/\\B(?=(\\d{3})+(?!\\d))/g, \" \");",
 		"description": "insert thousand separator into a digit string"
 	},
-	"ignore (rome formatter)": {
-		"prefix": "ignore (rome formatter)",
+	"ignore (biome formatter)": {
+		"prefix": "ignore (biome formatter)",
 		"body": "// rome-ignore format: ${1:explanation}",
-		"description": "Ignores the next block of code."
+		"description": "Ignores the next block of code. TODO: switch to biome once it works"
 	},
 	"safe title": {
 		"prefix": "safe title",
@@ -232,7 +232,7 @@
 			"\t",
 			"}"
 		],
-		"description": "leading underscore so the variable is ignored by rome when not used."
+		"description": "leading underscore so the variable is ignored by biome when not used."
 	},
 	"Set Timeout Function": {
 		"prefix": [

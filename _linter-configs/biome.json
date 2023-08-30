@@ -22,12 +22,7 @@
 	"linter": {
 		"rules": {
 			"all": true,
-			"nursery": {
-				"all": false
-			},
-			"complexity": {
-				"noExtraSemicolon": "warn"
-			},
+			"nursery": { "all": false },
 			"style": {
 				"useBlockStatements": "off",
 				"useConst": "warn",

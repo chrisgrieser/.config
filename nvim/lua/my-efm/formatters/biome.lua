@@ -1,11 +1,11 @@
 local fs = require('efmls-configs.fs')
 
-local formatter = "rome"
+local formatter = "biome"
 local args = "format --stdin-file-path ${INPUT}"
 local command = string.format('%s %s', fs.executable(formatter, fs.Scope.NODE), args)
 
 return {
 	formatCommand = command,
 	formatStdin = true,
-	rootMarkers = { "rome.json" },
+	rootMarkers = { "rome.json", "biome.json" },
 }

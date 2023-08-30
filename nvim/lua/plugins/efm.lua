@@ -9,7 +9,7 @@ local lintersAndFormatters = {
 	"selene", -- lua
 	"stylua", -- lua
 	"prettier", -- only yaml formatter preserving blank lines https://github.com/mikefarah/yq/issues/515
-	"rome", -- also an LSP; the lsp does diagnostics, the CLI does formatting
+	-- "biome", -- TODO pending: https://github.com/williamboman/mason.nvim/issues/1482
 	-- stylelint included in mason, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
 }
 
@@ -25,7 +25,7 @@ local setupEfmConfig = function()
 	local shellcheck = require("my-efm.linters.shellcheck")
 	local shellharden = require("my-efm.formatters.shellharden")
 	local ruff = require("my-efm.formatters.ruff")
-	local rome = require("my-efm.formatters.rome")
+	local biome = require("my-efm.formatters.biome")
 	local markdownlint = require("my-efm.linters.markdownlint")
 	local yamllint = require("my-efm.linters.yamllint")
 	local codespell_L = require("my-efm.linters.codespell")
@@ -37,9 +37,9 @@ local setupEfmConfig = function()
 	-- local codespell_F = require("my-efm.formatters.codespell")
 
 	local languages = {
-		javascript = { rome },
-		typescript = { rome },
-		json = { rome },
+		javascript = { biome },
+		typescript = { biome },
+		json = { biome },
 		lua = { stylua, selene },
 		python = { black, ruff },
 		css = { prettier, stylelint_L, stylelint_F },
