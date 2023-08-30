@@ -8,7 +8,7 @@ extends: default
 
 rules:
   line-length: disable
-  document-start: {  present: false  }
+  document-start: disable # allow "---" at start of a line
   trailing-spaces: disable # automatically taken care of by formatter
   empty-lines: disable # automatically taken care of by formatter
   braces: disable
