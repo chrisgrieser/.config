@@ -222,6 +222,10 @@ keymap("c", "<C-a>", "<Home>")
 keymap("c", "<C-e>", "<End>")
 keymap("c", "<C-u>", "<C-e><C-u>") -- clear full line
 keymap("c", "<C-w>", "<C-r><C-w>") -- add word under cursor
+keymap("c", "<BS>", function ()
+	local cmdlineEmpty = vim.fn.getcmdline():find("^$")
+	if not cmdlineEmpty then return "<BS>" end
+end, { desc = "backspace", expr = true })
 
 -- VISUAL MODE
 keymap("x", "V", "j", { desc = "repeated V selects more lines" })
