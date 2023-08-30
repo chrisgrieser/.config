@@ -4,7 +4,6 @@ local conf = {
 	on_attach = {},
 	filetypes = {},
 	init_options = {},
-	commands = {},
 }
 
 --------------------------------------------------------------------------------
@@ -60,32 +59,21 @@ conf.settings.lua_ls = {
 --------------------------------------------------------------------------------
 -- PYTHON
 -- https://github.com/astral-sh/ruff-lsp#settings
--- disable global code actions, since they are done via the command
+-- disable, since already included in FixAll when ruff-rules include "I"
 conf.init_options.ruff_lsp = {
-	-- settings = { organizeImports = false, fixAll = false },
+	settings = { organizeImports = false },
 }
 
 -- add fix-all code actions to formatting
 -- https://github.com/astral-sh/ruff-lsp/issues/119#issuecomment-1595628355
-conf.commands.ruff_lsp = {
-	RuffAutofix = {
-		function()
-			vim.lsp.buf.execute_command {
-				command = "ruff.applyAutofix",
-				arguments = { { uri = vim.uri_from_bufnr(0) } },
-			}
-		end,
-	},
-}
-
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "python",
 	callback = function()
-		vim.keymap.set("n", "<leader>rf", function()
+		vim.keymap.set("n", "<D-s>", function()
 			vim.cmd.update()
 			vim.lsp.buf.format { name = "efm" }
-			vim.cmd.RuffAutofix()
-		end, { buffer = true, desc = "󰒕 Format & Save" })
+			vim.lsp.buf.code_action { apply = true, context = { only = { "source.fixAll.ruff" } } }
+		end, { buffer = true, desc = "󰒕 Format & RuffFixAll & Save" })
 	end,
 })
 
@@ -265,7 +253,6 @@ local function setupAllLsps()
 			on_attach = conf.on_attach[lsp],
 			filetypes = conf.filetypes[lsp],
 			init_options = conf.init_options[lsp],
-			commands = conf.commands[lsp],
 		}
 	end
 end
@@ -286,8 +273,8 @@ return {
 	{ -- auto-install lsp servers
 		"williamboman/mason-lspconfig.nvim",
 		event = "VeryLazy",
-		-- dependencies = "williamboman/mason.nvim",
-		-- opts = { ensure_installed = lsp_servers },
+		dependencies = "williamboman/mason.nvim",
+		opts = { ensure_installed = lsp_servers },
 	},
 	{ -- configure LSPs
 		"chrisgrieser/nvim-lspconfig",

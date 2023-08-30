@@ -5,6 +5,13 @@ return {
 	{ -- lightbulb for available lsp actions
 		"kosayoda/nvim-lightbulb",
 		event = "LspAttach",
+		keys = {
+			{
+				"<leader>C",
+				"<cmd>lua require('nvim-lightbulb').debug()<CR>",
+				desc = "󰒕 Code Action Info",
+			},
+		},
 		opts = {
 			autocmd = {
 				enabled = true,
@@ -13,10 +20,15 @@ return {
 			sign = { enabled = false },
 			status_text = {
 				enabled = true,
-				text = " " ,
+				text = " ",
 			},
+			action_kinds = { "refactor" },
 			ignore = {
-				clients = { "lua_ls", "marksman" },
+				clients = {
+					-- "lua_ls", -- spams parameter refactoring
+					"marksman", -- spams ToC update everywhere
+					-- "ruff_lsp", -- spams fixAll everywhere
+				},
 			},
 		},
 	},
