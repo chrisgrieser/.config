@@ -29,6 +29,7 @@ return {
 		cmd = { "VenvSelect", "VenvSelectCached" },
 		config = function()
 			require("venv-selector").setup {
+				-- enable_debug_output = true,
 				name = { ".venv" },
 				auto_refresh = true,
 				notify_user_on_activate = false,
