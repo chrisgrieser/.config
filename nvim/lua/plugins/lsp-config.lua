@@ -61,7 +61,7 @@ conf.settings.lua_ls = {
 -- https://github.com/astral-sh/ruff-lsp#settings
 -- disable global code actions, since they are done via the ruff-cli-formatting already
 conf.init_options.ruff_lsp = {
-	settings = { organizeImports = false, fixAll = false },
+	-- settings = { organizeImports = false, fixAll = false },
 }
 
 -- Disable hover in favor of jedi/pyright
