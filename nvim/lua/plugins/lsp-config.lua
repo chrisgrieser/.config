@@ -244,11 +244,6 @@ local function setupAllLsps()
 			init_options = conf.init_options[lsp],
 		}
 	end
-
-	-- TODO remove this once available in lspconfig/mason
-	require("lspconfig").biome.setup {
-		capabilities = lspCapabilities,
-	}
 end
 
 --------------------------------------------------------------------------------
@@ -267,12 +262,21 @@ return {
 	{ -- auto-install lsp servers
 		"williamboman/mason-lspconfig.nvim",
 		event = "VeryLazy",
-		dependencies = "williamboman/mason.nvim",
-		opts = { ensure_installed = lsp_servers },
+		-- dependencies = "williamboman/mason.nvim",
+		-- opts = { ensure_installed = lsp_servers },
 	},
 	{ -- configure LSPs
-		"neovim/nvim-lspconfig",
+		"chrisgrieser/nvim-lspconfig",
+		dev = true,
 		dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config
-		init = setupAllLsps,
+		init = function()
+			setupAllLsps()
+			-- TODO remove this once available in lspconfig/mason
+			-- TODO also change the dependency-repo name for other plugins.
+			-- pending: https://github.com/neovim/nvim-lspconfig/pull/2790
+			require("lspconfig").biome.setup {
+				capabilities = lspCapabilities,
+			}
+		end,
 	},
 }

@@ -22,19 +22,19 @@ local setupEfmConfig = function()
 	local stylua = require("efmls-configs.formatters.stylua")
 	local selene = require("efmls-configs.linters.selene")
 
-	local shellcheck = require("my-efm.linters.shellcheck")
-	local shellharden = require("my-efm.formatters.shellharden")
-	local ruff = require("my-efm.formatters.ruff")
-	local biome = require("my-efm.formatters.biome")
-	local markdownlint = require("my-efm.linters.markdownlint")
-	local yamllint = require("my-efm.linters.yamllint")
-	local codespell_L = require("my-efm.linters.codespell")
-	local stylelint_L = require("my-efm.linters.stylelint")
-	local stylelint_F = require("my-efm.formatters.stylelint")
+	local shellcheck = require("tool-config.linters.shellcheck")
+	local shellharden = require("tool-config.formatters.shellharden")
+	local ruff = require("tool-config.formatters.ruff")
+	local biome = require("tool-config.formatters.biome")
+	local markdownlint = require("tool-config.linters.markdownlint")
+	local yamllint = require("tool-config.linters.yamllint")
+	local codespell_L = require("tool-config.linters.codespell")
+	local stylelint_L = require("tool-config.linters.stylelint")
+	local stylelint_F = require("tool-config.formatters.stylelint")
 
 	-- pending: https://github.com/creativenull/efmls-configs-nvim/issues/64
-	-- local shellcheckApply = require("my-efm.formatters.shellcheck")
-	-- local codespell_F = require("my-efm.formatters.codespell")
+	-- local shellcheckApply = require("tool-config.formatters.shellcheck")
+	-- local codespell_F = require("tool-config.formatters.codespell")
 
 	local languages = {
 		javascript = { biome },
@@ -102,7 +102,7 @@ return {
 				desc = "󰒕 Format & Save",
 			},
 		},
-		dependencies = "neovim/nvim-lspconfig",
+		dependencies = "chrisgrieser/nvim-lspconfig",
 		config = setupEfmConfig,
 	},
 }
