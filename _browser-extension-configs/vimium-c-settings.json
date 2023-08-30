@@ -1,11 +1,11 @@
 {
 	"name": "Vimium C",
-	"@time": "7/26/2023, 1:00:04 AM",
-	"time": 1690326004186,
+	"@time": "30/08/2023, 09:02:13",
+	"time": 1693378933157,
 	"environment": {
 		"extension": "1.99.994",
 		"platform": "mac",
-		"chromium": 115
+		"chromium": 116
 	},
 	"allBrowserUrls": true,
 	"exclusionListenHash": false,
@@ -15,7 +15,7 @@
 			"pattern": "^https:\\/\\/www\\.google(?:.(?!&tbm=isch))*$"
 		},
 		{
-			"passKeys": "? ",
+			"passKeys": "/ ? ",
 			"pattern": ":https://github.com/"
 		},
 		{
@@ -37,6 +37,10 @@
 		{
 			"passKeys": "0 1 2 3 4 5 6 7 8 9 ? j k l ",
 			"pattern": ":https://www.youtube.com/"
+		},
+		{
+			"passKeys": "",
+			"pattern": ":https://eproofing.springer.com/"
 		}
 	],
 	"extAllowList": [

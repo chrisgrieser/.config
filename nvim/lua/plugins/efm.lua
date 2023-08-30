@@ -31,10 +31,10 @@ local setupEfmConfig = function()
 	local codespell_L = require("my-efm.linters.codespell")
 	local stylelint_L = require("my-efm.linters.stylelint")
 	local stylelint_F = require("my-efm.formatters.stylelint")
+
+	-- pending: https://github.com/creativenull/efmls-configs-nvim/issues/64
 	-- local shellcheckApply = require("my-efm.formatters.shellcheck")
-	-- local misspell_F = require("my-efm.formatters.misspell")
-	local misspell_L = require("my-efm.linters.misspell")
-	-- local codespellFormat = require("my-efm.formatters.codespell")
+	-- local codespell_F = require("my-efm.formatters.codespell")
 
 	local languages = {
 		javascript = { rome },
@@ -55,8 +55,7 @@ local setupEfmConfig = function()
 	for ft, _ in pairs(languages) do
 		if ft ~= "bib" and ft ~= "css" then
 			table.insert(languages[ft], codespell_L)
-			table.insert(languages[ft], misspell_L)
-			-- table.insert(languages[ft], misspell_F)
+			-- table.insert(languages[ft], codespell_F)
 		end
 	end
 

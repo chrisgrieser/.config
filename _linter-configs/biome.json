@@ -1,9 +1,7 @@
 {
-	"$schema": "https://raw.githubusercontent.com/rome/tools/main/npm/rome/configuration_schema.json",
+	"$schema": "https://raw.githubusercontent.com/biomejs/biome/main/editors/vscode/configuration_schema.json",
 	"files": {
-		"ignore": [
-			"node_modules/**"
-		]
+		"ignore": ["node_modules/**"]
 	},
 	"formatter": {
 		"lineWidth": 110,
@@ -16,13 +14,7 @@
 		"clientKind": "git"
 	},
 	"javascript": {
-		"globals": [
-			"ObjC",
-			"Application",
-			"delay",
-			"Path",
-			"$"
-		]
+		"globals": ["ObjC", "Application", "delay", "Path", "$"]
 	},
 	"organizeImports": {
 		"enabled": true
@@ -47,4 +39,3 @@
 		}
 	}
 }
-
