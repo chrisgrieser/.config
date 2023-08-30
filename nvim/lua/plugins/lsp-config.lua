@@ -4,6 +4,7 @@ local conf = {
 	on_attach = {},
 	filetypes = {},
 	init_options = {},
+	commands = {},
 }
 
 --------------------------------------------------------------------------------
@@ -59,10 +60,34 @@ conf.settings.lua_ls = {
 --------------------------------------------------------------------------------
 -- PYTHON
 -- https://github.com/astral-sh/ruff-lsp#settings
--- disable global code actions, since they are done via the ruff-cli-formatting already
+-- disable global code actions, since they are done via the command
 conf.init_options.ruff_lsp = {
 	-- settings = { organizeImports = false, fixAll = false },
 }
+
+-- add fix-all code actions to formatting
+-- https://github.com/astral-sh/ruff-lsp/issues/119#issuecomment-1595628355
+conf.commands.ruff_lsp = {
+	RuffAutofix = {
+		function()
+			vim.lsp.buf.execute_command {
+				command = "ruff.applyAutofix",
+				arguments = { { uri = vim.uri_from_bufnr(0) } },
+			}
+		end,
+	},
+}
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "python",
+	callback = function()
+		vim.keymap.set("n", "<leader>rf", function()
+			vim.cmd.update()
+			vim.lsp.buf.format { name = "efm" }
+			vim.cmd.RuffAutofix()
+		end, { buffer = true, desc = "󰒕 Format & Save" })
+	end,
+})
 
 -- Disable hover in favor of jedi/pyright
 conf.on_attach.ruff_lsp = function(client, _) client.server_capabilities.hoverProvider = false end
@@ -160,11 +185,9 @@ conf.settings.jsonls = {
 --------------------------------------------------------------------------------
 -- XML/PLIST
 -- https://github.com/eclipse/lemminx/blob/main/docs/Configuration.md#all-formatting-options
+-- disabled, since it messes up some formatting of Alfred .plist files
 conf.settings.lemminx = {
-	xml = {
-		-- disabled, since it messes up some formatting of Alfred .plist files
-		format = { enabled = false },
-	},
+	xml = { format = { enabled = false } },
 }
 
 --------------------------------------------------------------------------------
@@ -242,6 +265,7 @@ local function setupAllLsps()
 			on_attach = conf.on_attach[lsp],
 			filetypes = conf.filetypes[lsp],
 			init_options = conf.init_options[lsp],
+			commands = conf.commands[lsp],
 		}
 	end
 end
@@ -271,6 +295,7 @@ return {
 		dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config
 		init = function()
 			setupAllLsps()
+
 			-- TODO remove this once available in lspconfig/mason
 			-- TODO also change the dependency-repo name for other plugins.
 			-- pending: https://github.com/neovim/nvim-lspconfig/pull/2790
