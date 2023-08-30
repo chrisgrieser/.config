@@ -9,8 +9,12 @@ local lintersAndFormatters = {
 	"selene", -- lua
 	"stylua", -- lua
 	"prettier", -- only yaml formatter preserving blank lines https://github.com/mikefarah/yq/issues/515
-	-- "biome", -- TODO pending: https://github.com/williamboman/mason.nvim/issues/1482
 	-- stylelint included in mason, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
+
+	-- INFO
+	-- pending: https://github.com/williamboman/mason.nvim/issues/1482
+	-- cannot use LSP for formatting: https://github.com/biomejs/biome/discussions/87
+	-- "biome",
 }
 
 --------------------------------------------------------------------------------
@@ -40,6 +44,7 @@ local setupEfmConfig = function()
 		javascript = { biome },
 		typescript = { biome },
 		json = { biome },
+		jsonc = { biome },
 		lua = { stylua, selene },
 		python = { black, ruff },
 		css = { prettier, stylelint_L, stylelint_F },

@@ -35,7 +35,7 @@ function run() {
 				arg: url,
 				uid: url,
 			};
-			return item
+			return item;
 		});
 
 	return JSON.stringify({ items: sectionsArr });
