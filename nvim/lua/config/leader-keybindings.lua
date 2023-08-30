@@ -133,12 +133,14 @@ end, { desc = "󰜊 Undo since last open", silent = true })
 ---@param action object CodeAction Object https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#codeAction
 ---@return boolean
 local function codeActionFilter(action)
-	local lua_ls_1 = action.title:find("^Disable diagnostics in the workspace") == nil
-	local lua_ls_2 = action.title:find("^Disable diagnostics in this file") == nil
-	local lua_ls_3 = action.title:find("^Mark `.-` as defined global") == nil
-	local lua_ls_4 = action.title:find("^Change to parameter %d of") == nil
-	local lua_action_filter = (lua_ls_1 and lua_ls_2 and lua_ls_3 and lua_ls_4) or vim.bo.ft ~= "lua"
-	return lua_action_filter
+	-- in lua, keep only "on this line" quickfixes or non-parameter rewrites
+	local lua_action_filter = action.title:find("on this line")
+		or (action.kind ~= "quickfix" and action.kind ~= "refactor.rewrite")
+		or vim.bo.ft ~= "lua"
+	local python_action_filter = true
+
+		or vim.bo.ft ~= "python"
+	return lua_action_filter and python_action_filter
 end
 
 keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
