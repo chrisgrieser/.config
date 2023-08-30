@@ -228,3 +228,15 @@ textwidth
 autocmd
 Resized
 vsplit
+Workspace
+undos
+autocommand
+ftplugins
+whitespace
+Popups
+Octo
+utils
+Gitsigns
+quickfixes
+Pickaxe
+scrolloff
