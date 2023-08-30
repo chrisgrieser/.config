@@ -9,28 +9,39 @@ vim.cmd.cnoreabbrev("i", "lua =")
 --------------------------------------------------------------------------------
 
 -- inspect capabilities of current lsp
-newCommand("LspCapabilities", function()
-	local curBuf = vim.api.nvim_get_current_buf()
-	if vim.version().major == 0 and vim.version().minor >= 10 then
-		vim.notify("switch to vim.lsp.get_client")
-	end
-	local clients = vim.lsp.get_active_clients { bufnr = curBuf }
+-- no arg: all LSPs attached to current buffer
+-- one arg: name of the LSP
+newCommand("LspCapabilities", function(ctx)
+	local selected = ctx.args
+	local clients = require("lspconfig.util").get_managed_clients()
 
 	local out = {}
 	for _, client in pairs(clients) do
-		local capAsList = {}
-		for key, value in pairs(client.server_capabilities) do
-			local capability = key
-			-- indicate manually deactivated capabilities
-			if value == false then capability = capability .. " (false)" end
-			table.insert(capAsList, "- " .. capability)
+		if client.name == selected or selected == "" then
+			local capAsList = {}
+			for key, value in pairs(client.server_capabilities) do
+				local capability = key
+				-- indicate manually deactivated capabilities
+				if value == false then capability = capability .. " (false)" end
+				table.insert(capAsList, "- " .. capability)
+			end
+			table.sort(capAsList) -- sorts alphabetically
+			local msg = client.name:upper() .. "\n" .. table.concat(capAsList, "\n")
+			table.insert(out, msg)
 		end
-		table.sort(capAsList) -- sorts alphabetically
-		local msg = client.name:upper() .. "\n" .. table.concat(capAsList, "\n")
-		table.insert(out, msg)
 	end
 	vim.notify(table.concat(out, "\n\n"), u.trace, { timeout = 14000 })
-end, {})
+end, {
+	nargs = "?",
+	complete = function()
+		local clients = vim.tbl_map(
+			function(client) return client.name end,
+			require("lspconfig.util").get_managed_clients()
+		)
+		table.sort(clients)
+		return clients
+	end,
+})
 
 --------------------------------------------------------------------------------
 

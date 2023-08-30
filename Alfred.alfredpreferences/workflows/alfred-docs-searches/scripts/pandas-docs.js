@@ -23,21 +23,22 @@ function run() {
 	const docsUrl = "https://api.github.com/repos/pandas-dev/pandas/git/trees/main?recursive=1";
 	const baseUrl = "https://pandas.pydata.org/docs";
 
-	const idRegex = new RegExp("doc/source/(.*)\\.rst");
+	const idRegex = new RegExp("doc/source/(.*)\\.rst$");
 
 	const workArray = JSON.parse(app.doShellScript(`curl -s "${docsUrl}"`))
 		.tree.filter((/** @type {{ path: string; }} */ file) => {
 			return (
 				idRegex.test(file.path) &&
 				!file.path.includes("what" + "snew") &&
-				!file.path.includes("ndex.template")
+				!file.path.includes("comparison/includes/") // not real files, automated integration into comparisons
 			);
 		})
 		.map((/** @type {{ path: string }} */ entry) => {
 			const subsite = entry.path.replace(idRegex, "$1");
-			const category = subsite.split("/")[0].replace(/_/g, " ");
+			const parts = subsite.split("/");
 
-			const displayTitle = subsite.split("/").slice(1).join("/").replace(/_/g, " ");
+			const displayTitle = parts.pop().replace(/_/g, " ");
+			const category = parts.join(" – ").replace(/_/g, " ");
 			const url = `${baseUrl}/${subsite}.html`;
 
 			return {
