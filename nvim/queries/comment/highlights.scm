@@ -11,10 +11,13 @@
 ; 
 ;───────────────────────────────────────────────────────────────────────────────
 
+; added by me: 
+; CONFIG SIC
+
+; test for this file to work
 ; FOOBAR TEST ERROR
 ; NOTE XXX PERF
-; BUG CONFIG
-; TODO HACK
+; BUG TODO HACK
 
 ;───────────────────────────────────────────────────────────────────────────────
 
@@ -42,10 +45,10 @@
   (name) @text.warning @nospell
   ("(" @punctuation.bracket (user) @constant ")" @punctuation.bracket)?
   ":" @punctuation.delimiter)
-  (#any-of? @text.warning "HACK" "WARN" "FIX"))
+  (#any-of? @text.warning "HACK" "WARN" "FIX" "SIC"))
 
 ("text" @text.warning @nospell
- (#any-of? @text.warning "HACK" "WARN" "FIX"))
+ (#any-of? @text.warning "HACK" "WARN" "FIX" "SIC"))
 
 ((tag
   (name) @text.danger @nospell

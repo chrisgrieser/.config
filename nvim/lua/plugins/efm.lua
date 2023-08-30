@@ -4,7 +4,6 @@ local lintersAndFormatters = {
 	"shellcheck",
 	"shfmt", -- shell
 	"markdownlint",
-	"ruff", -- python linter/formatter, the lsp does diagnostics, the CLI does formatting
 	"black", -- python formatter
 	"selene", -- lua
 	"stylua", -- lua
@@ -28,7 +27,6 @@ local setupEfmConfig = function()
 
 	local shellcheck = require("tool-configs.linters.shellcheck")
 	local shellharden = require("tool-configs.formatters.shellharden")
-	local ruff = require("tool-configs.formatters.ruff")
 	local biome = require("tool-configs.formatters.biome")
 	local markdownlint = require("tool-configs.linters.markdownlint")
 	local yamllint = require("tool-configs.linters.yamllint")
@@ -46,7 +44,7 @@ local setupEfmConfig = function()
 		json = { biome },
 		jsonc = { biome },
 		lua = { stylua, selene },
-		python = { black, ruff },
+		python = { black },
 		css = { prettier, stylelint_L, stylelint_F },
 		html = { prettier },
 		sh = { shfmt, shellcheck, shellharden },
