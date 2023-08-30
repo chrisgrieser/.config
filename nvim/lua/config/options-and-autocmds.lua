@@ -71,6 +71,8 @@ opt.clipboard = "unnamedplus"
 opt.spell = true
 opt.spelllang = "en_us"
 opt.spelloptions = "camel"
+opt.spelloptions = {"camel", "noplainbuffer"}
+opt.spellcapcheck = "" -- disable checking for capital letters
 opt.spellfile = u.linterConfigFolder .. "/spellfile-vim-ltex.add" -- has to be `.add`
 
 vim.api.nvim_create_autocmd("BufReadPost", {

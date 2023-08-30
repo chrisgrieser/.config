@@ -217,10 +217,11 @@ keymap("n", "<leader>gb", function() cmd.Telescope("git_branches") end, { desc =
 
 -- My utils
 keymap("n", "<leader>gc", function() require("funcs.git-utils").commit() end, { desc = "󰊢 Commit" })
+keymap("n", "<leader>gC", function() require("funcs.git-utils").addCommit() end, { desc = "󰊢 Add-Commit" })
 keymap("n", "<leader>gg", function() require("funcs.git-utils").addCommitPush() end, { desc = "󰊢 Add-Commit-Push" })
 keymap("n", "<leader>gm", function() require("funcs.git-utils").amendNoEditPushForce() end, { desc = "󰊢 Amend-No-Edit & Force Push" })
 keymap("n", "<leader>gM", function() require("funcs.git-utils").amendAndPushForce() end, { desc = "󰊢 Amend & Force Push" })
-keymap({ "n", "x" }, "<leader>gu", function () require("funcs.git-utils").githubUrl() end, { desc = " GitHub Link" })
+keymap({ "n", "x" }, "<leader>gu", function () require("funcs.git-utils").githubUrl() end, { desc = "󰊢 GitHub Link" })
 
 -- Octo
 -- customize Octo layout: https://github.com/pwntester/octo.nvim/discussions/416#discussioncomment-6812002

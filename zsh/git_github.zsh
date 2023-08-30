@@ -22,7 +22,7 @@ alias rel='ct make --silent release'
 function pr() {
 	# set default remote, if it lacks one
 	[[ -z "$(gh repo set-default --view)" ]] && gh repo set-default
-	gh pr create --web
+	gh pr create --web --fill
 }
 
 # amend no-edit

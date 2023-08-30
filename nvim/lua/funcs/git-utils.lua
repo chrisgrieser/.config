@@ -117,7 +117,7 @@ end
 ---@param commitMsg string
 local function shimmeringFocusBuild(commitMsg)
 	-- accessing build file directly, since passing arguments (the commit msg)
-	-- via makefile is unnecessarily cumbersome
+	-- via Makefile is unnecessarily cumbersome
 	local buildscriptLocation = vim.env.LOCAL_REPOS .. "/shimmering-focus/build.sh"
 	vim.notify('󰊢 Building theme…\n"' .. commitMsg .. '"')
 	output = {}
@@ -181,9 +181,16 @@ function M.commit(prefillMsg)
 		end
 
 		vim.notify('󰊢 git commit\n"' .. newMsg .. '"')
-		fn.system { "git", "commit", "-m", newMsg }
-		if vim.v.shell_error ~= 0 then vim.notify("Nothing to commit", vim.log.levels.WARN) end
+		local stdout = fn.system { "git", "commit", "-m", newMsg }
+		if vim.v.shell_error ~= 0 then vim.notify("Error: " .. stdout, vim.log.levels.WARN) end
 	end)
+end
+
+---@param prefillMsg? string
+function M.addCommit(prefillMsg)
+	local stdout = fn.system { "git", "add", "-A" }
+	if vim.v.shell_error ~= 0 then vim.notify("Error: " .. stdout, vim.log.levels.WARN) end
+	M.commit(prefillMsg)
 end
 
 ---@param prefillMsg? string
