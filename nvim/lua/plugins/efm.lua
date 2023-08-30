@@ -61,12 +61,14 @@ local setupEfmConfig = function()
 	-- https://github.com/williamboman/mason.nvim/issues/1481
 	require("lspconfig").efm.setup {
 		filetypes = vim.tbl_keys(languages),
+		init_options = { documentFormatting = true },
 		settings = {
 			rootMarkers = { ".git/" },
 			languages = languages,
 		},
-		init_options = { documentFormatting = true },
 	}
+
+	vim.api.nvim_create_user_command("EfmStatus", "checkhealth efmsls-configs", {})
 end
 --------------------------------------------------------------------------------
 

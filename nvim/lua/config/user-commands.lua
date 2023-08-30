@@ -6,10 +6,6 @@ local u = require("config.utils")
 
 vim.cmd.cnoreabbrev("i", "lua =")
 
-
-newCommand("LspCapabilities", function()
-	"EfmStatus", "checkhealth efmls-configs")
-
 --------------------------------------------------------------------------------
 
 -- inspect capabilities of current lsp
