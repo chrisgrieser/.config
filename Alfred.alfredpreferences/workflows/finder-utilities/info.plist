@@ -188,6 +188,19 @@
 		</array>
 		<key>47245CFC-B3E9-4FD6-A021-06D0B87D637C</key>
 		<array/>
+		<key>4B567C2C-667C-4052-9432-9180CDC519F6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F1D55862-6DBA-467E-ADC2-C57091BD0065</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>51903BB3-AE69-45A7-8492-CC712BB612A4</key>
 		<array>
 			<dict>
@@ -1004,6 +1017,38 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array/>
+				<key>name</key>
+				<string>Open with TextEdit…</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>4B567C2C-667C-4052-9432-9180CDC519F6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>F1D55862-6DBA-467E-ADC2-C57091BD0065</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1571,6 +1616,13 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>ypos</key>
 			<real>665</real>
 		</dict>
+		<key>4B567C2C-667C-4052-9432-9180CDC519F6</key>
+		<dict>
+			<key>xpos</key>
+			<real>765</real>
+			<key>ypos</key>
+			<real>645</real>
+		</dict>
 		<key>51903BB3-AE69-45A7-8492-CC712BB612A4</key>
 		<dict>
 			<key>colorindex</key>
@@ -1791,6 +1843,13 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<real>975</real>
 			<key>ypos</key>
 			<real>975</real>
+		</dict>
+		<key>F1D55862-6DBA-467E-ADC2-C57091BD0065</key>
+		<dict>
+			<key>xpos</key>
+			<real>925</real>
+			<key>ypos</key>
+			<real>645</real>
 		</dict>
 		<key>F51A014F-1ABC-49D4-ADA8-0B83A691533F</key>
 		<dict>

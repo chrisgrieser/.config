@@ -24,8 +24,17 @@ return {
 			mappings = {
 				-- context uses lua pattern, target uses glob pattern, and needs to
 				-- escape patterns with `\\` https://github.com/rgroli/other.nvim#mappings
-				{ context = " lua main module", pattern = ".*.lua$", target = ".*/init.lua" },
 				{ context = " python main module", pattern = ".*.py$", target = "*main*.py" },
+				{
+					context = " lua main module",
+					pattern = ".*.lua$",
+					target = ".*/init.lua",
+				},
+				{
+					context = " file of same name, but in different directory",
+					pattern = ".*/(.-)$",
+					target = "*/%1",
+				},
 			},
 			rememberBuffers = false, -- saves connection between two files instead only going one-way
 			showMissingFiles = false,

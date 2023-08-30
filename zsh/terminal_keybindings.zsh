@@ -66,3 +66,7 @@ function autoEscapeBackTick() { LBUFFER+='\`' ; }
 zle -N autoEscapeBackTick
 bindkey -M viins '`' autoEscapeBackTick
 
+function autoEscapeBang { LBUFFER+='\!' ; }
+zle -N autoEscapeBang
+bindkey -M viins '!' autoEscapeBang
+
