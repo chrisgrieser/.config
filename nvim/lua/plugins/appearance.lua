@@ -82,6 +82,7 @@ return {
 				bib = { icon = "", color = "#6e9b2a", name = "BibTeX" },
 				http = { icon = "󰴚", name = "HTTP request" }, -- for rest.nvim
 				-- give plugins icons for my status line components
+				gitignore = { icon = "", name = "gitignore" },
 				checkhealth = { icon = "󰩂", name = ":checkhealth" },
 				noice = { icon = "󰎟", name = "noice.nvim" },
 				lazy = { icon = "󰒲", name = "lazy.nvim" },
