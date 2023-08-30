@@ -57,7 +57,7 @@ textobject
 treesitter
 tweaker
 using
-vim
+#im
 Wikilink
 Zotero
 zshrc
@@ -283,3 +283,7 @@ formatters
 efm
 lspconfig
 efmls
+gx
+nohl
+RHS
+formatoptions

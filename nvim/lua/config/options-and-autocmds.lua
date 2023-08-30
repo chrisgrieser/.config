@@ -34,12 +34,12 @@ opt.swapfile = false -- doesn't help and only creates useless files
 
 --------------------------------------------------------------------------------
 -- Undo
-opt.undofile = true -- enable persistent undo history
+opt.undofile = true -- enables persistent undo history
 
 -- extra undo-points (= more fine-grained undos)
 -- WARN requires `remap = true`, since it otherwise prevents vim abbreviations
 -- with those chars from working
-local undopointChars = { ".", ",", ";", '"', ":", "<Space>" }
+local undopointChars = { ".", ",", ";", '"', ":", "'", "<Space>" }
 for _, char in pairs(undopointChars) do
 	keymap("i", char, char .. "<C-g>u", { desc = "extra undopoint for " .. char, remap = true })
 end
@@ -54,7 +54,6 @@ opt.titlestring = '%{expand("%:p")}'
 -- Motions & Editing
 opt.startofline = true -- motions like "G" also move to the first char
 opt.virtualedit = "block" -- visual-block mode can select beyond end of line
-opt.mouse = "" -- disable mouse completely
 
 -- Search
 opt.ignorecase = true
@@ -62,7 +61,7 @@ opt.smartcase = true
 
 -- when closing a bracket, briefly flash the matching one
 opt.showmatch = true
-opt.matchtime = 1 -- deci-seconds (higher amount feels laggy)
+opt.matchtime = 1 -- deci-seconds
 
 -- Clipboard
 opt.clipboard = "unnamedplus"
@@ -70,12 +69,11 @@ opt.clipboard = "unnamedplus"
 -- Spelling
 opt.spell = true
 opt.spelllang = "en_us"
-opt.spelloptions = "camel"
-opt.spelloptions = {"camel", "noplainbuffer"}
-opt.spellcapcheck = "" -- disable checking for capital letters
+opt.spelloptions = { "camel", "noplainbuffer" }
+opt.spellcapcheck = "" 
 opt.spellfile = u.linterConfigFolder .. "/spellfile-vim-ltex.add" -- has to be `.add`
 
-vim.api.nvim_create_autocmd("BufReadPost", {
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
 	callback = function()
 		local specialBuffer = vim.bo.buftype ~= ""
 		if specialBuffer then opt_local.spell = false end
