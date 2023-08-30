@@ -2404,7 +2404,7 @@ window_name</string>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>rome</string>
+				<string>bio</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -2420,11 +2420,11 @@ window_name</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/rome-docs-search.js</string>
+				<string>./scripts/biome-docs-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>rome docs search...</string>
+				<string>biome docs search...</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -2795,7 +2795,7 @@ Search more than two dozen developer documentation sites via one of the keywords
 - `lua`
 - `eslint`
 - `style`: stylelint rules
-- `rome`
+- `biome` (`rome` successor)
 - `sc`: shellcheck Wiki
 - `pandoc`: Pandoc User Manual
 - `git`: official docs &amp; the "pro-git" book

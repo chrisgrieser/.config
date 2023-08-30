@@ -129,20 +129,43 @@ end, { desc = "󰜊 Undo since last open", silent = true })
 
 --------------------------------------------------------------------------------
 -- LSP
+
+---@param action object CodeAction Object https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#codeAction
+---@return boolean
+local function codeActionFilter(action)
+	local lua_ls_1 = action.title:find("^Disable diagnostics in the workspace") == nil
+	local lua_ls_2 = action.title:find("^Disable diagnostics in this file") == nil
+	local lua_ls_3 = action.title:find("^Mark `.-` as defined global") == nil
+	local lua_ls_4 = action.title:find("^Change to parameter %d of") == nil
+	local lua_action_filter = (lua_ls_1 and lua_ls_2 and lua_ls_3 and lua_ls_4) or vim.bo.ft ~= "lua"
+	return lua_action_filter
+end
+
 keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
-keymap({ "n", "x" }, "<leader>c", function()
-	vim.lsp.buf.code_action {
-		filter = function(action)
-			local lua_ls_1 = action.title:find("^Disable diagnostics in the workspace") == nil
-			local lua_ls_2 = action.title:find("^Disable diagnostics in this file") == nil
-			local lua_ls_3 = action.title:find("^Mark `.-` as defined global") == nil
-			local lua_ls_4 = action.title:find("^Change to parameter %d of") == nil
-			local lua_action_filter = (lua_ls_1 and lua_ls_2 and lua_ls_3 and lua_ls_4)
-				or vim.bo.ft ~= "lua"
-			return lua_action_filter
-		end,
-	}
-end, { desc = "󰒕 Code Action" })
+keymap(
+	{ "n", "x" },
+	"<leader>c",
+	function() vim.lsp.buf.code_action { filter = codeActionFilter } end,
+	{ desc = "󰒕 Code Action" }
+)
+
+-- ducky search for all diagnostics on the current line
+keymap("n", "<leader>d", function()
+	local lnum = vim.fn.line(".") - 1
+	local diags = vim.diagnostic.get(0, { lnum = lnum })
+	if vim.tbl_isempty(diags) then
+		vim.notify("No diagnostics found", u.warn)
+		return
+	end
+	for _, diag in ipairs(diags) do
+		if diag.code and diag.source then
+			local query = (diag.code .. " " .. diag.source)
+			fn.setreg("+", query)
+			local url = ("https://duckduckgo.com/?q=%s+%%21ducky&kl=en-us"):format(query:gsub(" ", "+"))
+			vim.fn.system { "open", url }
+		end
+	end
+end, { desc = "󰒕 Copy Diagnostic Rule ID" })
 
 --------------------------------------------------------------------------------
 
