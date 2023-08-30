@@ -1,20 +1,4 @@
 return {
-	{
-		"piersolenski/wtf.nvim",
-		dependencies = "MunifTanjim/nui.nvim",
-		opts = {
-			popup_type = "popup", -- | "horizontal" | "vertical",
-			openai_model_id = "gpt-3.5-turbo",
-			search_engine = "google", -- | "duck_duck_go" | "stack_overflow" | "github",
-			-- additional_instructions = "Start the reply with 'OH HAI THERE'",
-		},
-		keys = {
-			-- stylua: ignore
-			{ "<leader>d", function() require("wtf").search() end, desc = " Search diagnostic with Google" },
-			-- stylua: ignore
-			{ "<leader>D", function() require("wtf").ai() end, desc = " Debug diagnostic with AI" },
-		},
-	},
 	{ -- code search
 		-- requires access tokens: https://github.com/sourcegraph/sg.nvim#setup
 		-- which in my case are set in .zshenv (private dotfiles)
