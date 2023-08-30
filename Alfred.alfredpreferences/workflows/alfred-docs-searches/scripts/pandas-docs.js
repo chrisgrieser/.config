@@ -10,26 +10,39 @@ function alfredMatcher(str) {
 	return [clean, camelCaseSeperated, str].join(" ");
 }
 
+/** @param {string} str */
+function capitalize(str) {
+	return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const pythonVersion = $.getenv("python_version");
-	const docsUrl = "https://api.github.com/repos/python/cpython/git/trees/main?recursive=1";
-	const baseUrl = `https://docs.python.org/${pythonVersion}`;
+	const docsUrl = "https://api.github.com/repos/pandas-dev/pandas/git/trees/main?recursive=1";
+	const baseUrl = "https://pandas.pydata.org/docs";
+
+	const idRegex = new RegExp("doc/source/(.*)\\.rst");
 
 	const workArray = JSON.parse(app.doShellScript(`curl -s "${docsUrl}"`))
-		.tree.filter((/** @type {{ path: string; }} */ file) => /^Doc\/.*\.rst$/.test(file.path))
+		.tree.filter((/** @type {{ path: string; }} */ file) => {
+			return (
+				idRegex.test(file.path) &&
+				!file.path.includes("what" + "snew") &&
+				!file.path.includes("ndex.template")
+			);
+		})
 		.map((/** @type {{ path: string }} */ entry) => {
-			const subsite = entry.path.slice(4, -4);
-			const category = subsite.split("/")[0];
-			const displayTitle = subsite.split("/")[1];
+			const subsite = entry.path.replace(idRegex, "$1");
+			const category = subsite.split("/")[0].replace(/_/g, " ");
+
+			const displayTitle = subsite.split("/").slice(1).join("/").replace(/_/g, " ");
 			const url = `${baseUrl}/${subsite}.html`;
 
 			return {
-				title: displayTitle,
-				subtitle: category,
+				title: capitalize(displayTitle),
+				subtitle: capitalize(category),
 				match: alfredMatcher(subsite),
 				arg: url,
 				uid: subsite,

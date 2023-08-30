@@ -30,11 +30,12 @@ return {
 					pattern = ".*.lua$",
 					target = ".*/init.lua",
 				},
-				{
-					context = " file of same name, but in different directory",
-					pattern = ".*/(.-)$",
-					target = "*/%1",
-				},
+				-- pending: https://github.com/rgroli/other.nvim/issues/37
+				-- {
+				-- 	context = " file of same name, but in different directory",
+				-- 	pattern = ".*/(.-)$",
+				-- 	target = "*/%1",
+				-- },
 			},
 			rememberBuffers = false, -- saves connection between two files instead only going one-way
 			showMissingFiles = false,
