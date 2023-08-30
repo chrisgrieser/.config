@@ -18,13 +18,13 @@ local lsp_servers = {
 	"jedi_language_server", -- python (has refactor code actions & better hovers)
 	"ruff_lsp", -- python linter, formatting capability needs to be provided via cli
 	"marksman", -- markdown
-	"rome", -- js/ts/json – formatting capability needs to be provided via cli
 	"tsserver", -- ts/js
 	"bashls", -- also used for zsh
 	"taplo", -- toml
 	"lemminx", -- xml/plist
 	"html",
 	"ltex", -- latex/languagetool (requires `openjdk`)
+	-- "biome", -- TODO pending: https://github.com/williamboman/mason.nvim/issues/1482
 }
 
 --------------------------------------------------------------------------------
@@ -67,7 +67,7 @@ conf.init_options.ruff_lsp = {
 -- Disable hover in favor of jedi/pyright
 conf.on_attach.ruff_lsp = function(client, _) client.server_capabilities.hoverProvider = false end
 
--- pylsp has better hover, esp. the basic stuff for learning (e.g. "range()")
+-- jedi has better hover, esp. the basic stuff for learning (e.g. "range()")
 -- BUG ignored due to https://github.com/linux-cultist/venv-selector.nvim/issues/58
 conf.on_attach.pyright = function(client, _) client.server_capabilities.hoverProvider = false end
 
@@ -144,7 +144,7 @@ conf.settings.tsserver = {
 	},
 }
 
--- disable formatting, since taken care of by rome https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts#neovim-08
+-- disable formatting, since taken care of by biome https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts#neovim-08
 conf.on_attach.tsserver = function(client, _)
 	client.server_capabilities.documentFormattingProvider = false
 	client.server_capabilities.documentRangeFormattingProvider = false
@@ -154,7 +154,7 @@ end
 -- JSON
 -- https://github.com/sublimelsp/LSP-json/blob/master/LSP-json.sublime-settings
 conf.settings.jsonls = {
-	json = { format = { enable = false } }, -- taken care of by rome
+	json = { format = { enable = false } }, -- taken care of by biome
 }
 
 --------------------------------------------------------------------------------
@@ -244,6 +244,11 @@ local function setupAllLsps()
 			init_options = conf.init_options[lsp],
 		}
 	end
+
+	-- TODO remove this once available in lspconfig/mason
+	require("lspconfig").biome.setup {
+		capabilities = lspCapabilities,
+	}
 end
 
 --------------------------------------------------------------------------------

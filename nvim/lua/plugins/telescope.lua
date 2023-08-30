@@ -2,7 +2,7 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 -- default mappings: https://github.com/nvim-telescope/telescope.nvim/blob/942fe5faef47b21241e970551eba407bc10d9547/lua/telescope/mappings.lua#L133
-local keymappings = {
+local keymappings_I = {
 	["<CR>"] = "select_default",
 	["<Esc>"] = "close",
 	["<PageDown>"] = "preview_scrolling_down",
@@ -15,6 +15,8 @@ local keymappings = {
 	end,
 	["<Tab>"] = "move_selection_worse",
 	["<S-Tab>"] = "move_selection_better",
+	["<Down>"] = "move_selection_worse",
+	["<Up>"] = "move_selection_better",
 	["?"] = "which_key",
 	["<D-CR>"] = function(prompt_bufnr)
 		require("telescope.actions").toggle_selection(prompt_bufnr)
@@ -30,7 +32,6 @@ local keymappings = {
 		-- Copy path of file -- https://github.com/nvim-telescope/telescope-file-browser.nvim/issues/191
 		local path = require("telescope.actions.state").get_selected_entry().value
 		require("telescope.actions").close(prompt_bufnr)
-
 		local clipboardOpt = vim.opt.clipboard:get()
 		local useSystemClipb = #clipboardOpt > 0 and clipboardOpt[1]:find("unnamed")
 		local reg = useSystemClipb and "+" or '"'
@@ -38,6 +39,12 @@ local keymappings = {
 		vim.notify("COPIED \n" .. path)
 	end,
 }
+
+local keymappings_N = vim.deepcopy(keymappings_I)
+keymappings_N["j"] = "move_selection_worse"
+keymappings_N["k"] = "move_selection_better"
+
+--------------------------------------------------------------------------------
 
 local function telescopeConfig()
 	-- https://github.com/nvim-telescope/telescope.nvim/issues/605
@@ -72,7 +79,7 @@ local function telescopeConfig()
 			path_display = { "tail" },
 			borderchars = u.borderChars,
 			history = { path = u.vimDataDir .. "telescope_history" }, -- sync the history
-			default_mappings = { i = keymappings, n = keymappings },
+			default_mappings = { i = keymappings_I, n = keymappings_N },
 			sorting_strategy = "ascending", -- so layout is correctly orientated with prompt_position "top"
 			layout_strategy = "horizontal",
 			layout_config = {
