@@ -9,20 +9,20 @@
 		"indentSize": 3,
 		"formatWithErrors": true
 	},
-	"vcs": {
-		"enabled": true,
-		"clientKind": "git"
+	"organizeImports": { "enabled": true },
+	"vcs": { "enabled": true, "clientKind": "git" },
+	"json": {
+		"parser": { "allowComments": true }
 	},
 	"javascript": {
 		"globals": ["ObjC", "Application", "delay", "Path", "$"]
 	},
-	"organizeImports": {
-		"enabled": true
-	},
 	"linter": {
 		"rules": {
 			"all": true,
-			"nursery": { "all": false },
+			"suspicious": {
+				"noConsoleLog": "off"
+			},
 			"style": {
 				"useBlockStatements": "off",
 				"useConst": "warn",
