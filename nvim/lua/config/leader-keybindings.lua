@@ -135,24 +135,25 @@ end, { desc = "󰜊 Undo since last open", silent = true })
 local function codeActionFilter(action)
 	local title, kind, ft = action.title, action.kind, vim.bo.ft
 
-	-- in lua, keep only "on this line" quickfixes or non-parameter rewrites
-	local luaFilter = title:find("on this line")
-		or (kind ~= "quickfix" and kind ~= "refactor.rewrite")
-		or ft ~= "lua"
+	-- in lua, ignore all quickfixes except line disables and all rewrites
+	local ignoreInLua = ft == "lua"
+		and not (title:find("on this line"))
+		and (kind == "quickfix" or kind == "refactor.rewrite")
 
-	-- for ruff, keep only line fixes
-	local pythonFilter = not ((title:find("^Ruff")) and not (title:find("Disable for this line$")))
-		or ft ~= "python"
-	return luaFilter and pythonFilter
+	-- in python, ignore ruff actions except for line disables
+	local ignoreInPython = ft == "python"
+		and title:find("^Ruff")
+		and not (title:find("Disable for this line$"))
+	return not (ignoreInLua or ignoreInPython)
 end
 
-keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
 keymap(
 	{ "n", "x" },
 	"<leader>c",
 	function() vim.lsp.buf.code_action { filter = codeActionFilter } end,
 	{ desc = "󰒕 Code Action" }
 )
+keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
 
 -- ducky search for all diagnostics on the current line
 keymap("n", "<leader>d", function()
@@ -222,7 +223,7 @@ keymap("n", "<leader>gM", function() require("funcs.git-utils").amendAndPushForc
 keymap({ "n", "x" }, "<leader>gu", function () require("funcs.git-utils").githubUrl() end, { desc = " GitHub Link" })
 
 -- Octo
--- customize octo layout: https://github.com/pwntester/octo.nvim/discussions/416#discussioncomment-6812002
+-- customize Octo layout: https://github.com/pwntester/octo.nvim/discussions/416#discussioncomment-6812002
 keymap("n", "<leader>gi", function() cmd.Octo({"issue", "list"}) end, { desc = " Open Issues" })
 keymap("n", "<leader>gI", function() cmd.Octo({"issue", "list", "states=CLOSED"}) end, { desc = " Closed Issues" })
 keymap("n", "<leader>gp", function() cmd.Octo({"pr", "list"}) end, { desc = " Open PRs" })
@@ -259,8 +260,7 @@ end, { desc = "󰊢 Pickaxe File History" })
 -- stylua: ignore
 keymap("n", "<leader>or", "<cmd>set relativenumber!<CR>", { desc = "  Relative Line Numbers" })
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = "  Line Numbers" })
-keymap("n", "<leader>os", "<cmd>set spell!<CR>", { desc = " 󰓆 Toggle spellcheck" })
-
+keymap("n", "<leader>os", "<cmd>set spell!<CR>", { desc = " 󰓆 spellcheck" })
 keymap("n", "<leader>ol", "<cmd>LspRestart<CR>", { desc = " 󰒕 LspRestart" })
 
 keymap("n", "<leader>od", function()

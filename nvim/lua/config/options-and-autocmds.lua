@@ -36,7 +36,7 @@ opt.swapfile = false -- doesn't help and only creates useless files
 -- Undo
 opt.undofile = true -- enable persistent undo history
 
--- extra undopoints (= more fine-grained undos)
+-- extra undo-points (= more fine-grained undos)
 -- WARN requires `remap = true`, since it otherwise prevents vim abbreviations
 -- with those chars from working
 local undopointChars = { ".", ",", ";", '"', ":", "<Space>" }
@@ -67,15 +67,16 @@ opt.matchtime = 1 -- deci-seconds (higher amount feels laggy)
 -- Clipboard
 opt.clipboard = "unnamedplus"
 
--- Spelling tete
+-- Spelling
 opt.spell = true
 opt.spelllang = "en_us"
 opt.spelloptions = "camel"
 opt.spellfile = u.linterConfigFolder .. "/spellfile-vim-ltex.add" -- has to be `.add`
 
-vim.api.nvim_create_autocmd("BufEnter", {
+vim.api.nvim_create_autocmd("BufReadPost", {
 	callback = function()
-		if vim.fn.buftype ~= "" then opt_local.spell = false end
+		local specialBuffer = vim.bo.buftype ~= ""
+		if specialBuffer then opt_local.spell = false end
 	end,
 })
 
@@ -89,7 +90,7 @@ opt.signcolumn = "yes:1"
 
 -- Wrapping
 opt.textwidth = 80 -- in some languages overridden by .editorconfig
-opt.colorcolumn = { 81 } -- not relative to textwidth to it is static
+opt.colorcolumn = { 81 } -- not relative to textwidth, as it is sometimes changed via .editorconfig
 opt.wrapmargin = 4 -- extra space since using a scrollbar plugin
 opt.wrap = false
 opt.breakindent = false
@@ -115,12 +116,12 @@ opt.shortmess:append("I")
 opt.report = 9001 -- disable "x more/fewer lines" messages
 
 -- Character groups
-opt.iskeyword:append("-") -- don't treat "-" as word boundary, e.g. for kebab-case
+opt.iskeyword:append("-") -- don't treat "-" as word boundary, e.g., for kebab-case
 opt.nrformats:append("unsigned") -- make <C-a>/<C-x> ignore negative numbers
 opt.nrformats:remove { "bin", "hex" } -- remove ambiguity, since I don't use them anyway
 
 -- Timeouts
-opt.updatetime = 250 -- also affects current symbol highlight (treesitter-refactor) and currentline lsp-hints
+opt.updatetime = 250 -- also affects current symbol highlight (treesitter-refactor) and current line lsp-hints
 opt.timeoutlen = 666 -- also affects duration until which-key is shown
 
 --------------------------------------------------------------------------------
@@ -179,7 +180,7 @@ autocmd("BufReadPost", {
 --------------------------------------------------------------------------------
 
 -- Formatting `vim.opt.formatoptions:remove{"o"}` would not work, since it's
--- overwritten by the ftplugins having the `o` option. therefore needs to be set
+-- overwritten by the ftplugins having the `o` option. Therefore needs to be set
 -- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
 autocmd("FileType", {
 	callback = function() opt_local.formatoptions:remove("o") end,
