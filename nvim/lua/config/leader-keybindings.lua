@@ -133,14 +133,17 @@ end, { desc = "󰜊 Undo since last open", silent = true })
 ---@param action object CodeAction Object https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#codeAction
 ---@return boolean
 local function codeActionFilter(action)
-	-- in lua, keep only "on this line" quickfixes or non-parameter rewrites
-	local lua_action_filter = action.title:find("on this line")
-		or (action.kind ~= "quickfix" and action.kind ~= "refactor.rewrite")
-		or vim.bo.ft ~= "lua"
-	local python_action_filter = action.title:find("on this line")
+	local title, kind, ft = action.title, action.kind, vim.bo.ft
 
-		or vim.bo.ft ~= "python"
-	return lua_action_filter and python_action_filter
+	-- in lua, keep only "on this line" quickfixes or non-parameter rewrites
+	local luaFilter = title:find("on this line")
+		or (kind ~= "quickfix" and kind ~= "refactor.rewrite")
+		or ft ~= "lua"
+
+	-- for ruff, keep only line fixes
+	local pythonFilter = not ((title:find("^Ruff")) and not (title:find("Disable for this line$")))
+		or ft ~= "python"
+	return luaFilter and pythonFilter
 end
 
 keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
@@ -256,7 +259,7 @@ end, { desc = "󰊢 Pickaxe File History" })
 -- stylua: ignore
 keymap("n", "<leader>or", "<cmd>set relativenumber!<CR>", { desc = "  Relative Line Numbers" })
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = "  Line Numbers" })
-keymap("n", "<leader>os", "<cmd>set spell<CR>", { desc = " 󰓆 Toggle spellcheck" })
+keymap("n", "<leader>os", "<cmd>set spell!<CR>", { desc = " 󰓆 Toggle spellcheck" })
 
 keymap("n", "<leader>ol", "<cmd>LspRestart<CR>", { desc = " 󰒕 LspRestart" })
 
