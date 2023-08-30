@@ -2873,6 +2873,7 @@ Search more than two dozen developer documentation sites via one of the keywords
 - `git`: official docs &amp; the "pro-git" book
 - `py`: python official docs*
 - `ruff`: ruff rules
+- `pd`: pandas docs
 - `sh`: cheat.sh
 - `manp`: man pages
 - `hs`: Hammerspoon reference
@@ -3472,7 +3473,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.8.0</string>
+	<string>1.8.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
