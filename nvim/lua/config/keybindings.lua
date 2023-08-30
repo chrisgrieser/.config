@@ -103,7 +103,7 @@ end, vim.api.nvim_create_namespace("auto_nohl"))
 -- EDITING
 
 -- Delete trailing stuff
--- (wrapping in normal avoid temporaryl scrolling to the side)
+-- (wrapping in normal avoid temporarily scrolling to the side)
 keymap("n", "X", "<cmd>normal!mz$x`z<CR>", { desc = "󱎘 Delete char at EoL" })
 
 -- QUICKFIX
@@ -162,7 +162,6 @@ end, { desc = " Open new scope" })
 --------------------------------------------------------------------------------
 -- SPELLING
 
--- [z]pelling [l]ist
 keymap("n", "zl", function() vim.cmd.Telescope("spell_suggest") end, { desc = "󰓆 Spell Suggest" })
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
 keymap("n", "gz", "]s", { desc = "󰓆 Next Misspelling" })
@@ -224,13 +223,14 @@ keymap("c", "<C-u>", "<C-e><C-u>") -- clear full line
 keymap("c", "<C-w>", "<C-r><C-w>") -- add word under cursor
 keymap("c", "<BS>", function ()
 	local cmdlineEmpty = vim.fn.getcmdline():find("^$")
-	local isIncRename = vim.fn.getcmdline():find("^$")
-	if not cmdlineEmpty then return "<BS>" end
-end, { desc = "backspace", expr = true })
+	local isIncRename = vim.fn.getcmdline():find("^IncRename $")
+	if cmdlineEmpty or isIncRename then return end
+	return "<BS>"
+end, { desc = "Restricted <BS>", expr = true })
 
 -- VISUAL MODE
 keymap("x", "V", "j", { desc = "repeated V selects more lines" })
-keymap("x", "v", "<C-v>", { desc = "vv from Normal starts Visual Block" })
+keymap("x", "v", "<C-v>", { desc = "`vv` from Normal starts Visual Block" })
 
 -- TERMINAL MODE
 -- also relevant for iron.nvim
@@ -357,7 +357,7 @@ keymap({ "n", "x" }, "gL", function() cmd.Telescope("grep_string") end, { desc =
 keymap("n", "gr", "<cmd>lua require('telescope').extensions.recent_files.pick()<CR>", { desc = " Recent Files" })
 
 keymap("n", "g.", function() cmd.Telescope("resume") end, { desc = "  Continue" })
-keymap("n", "ga", "gf", { desc = "Goto File under Cursor" }) -- needed, since `gf` remapped
+keymap("n", "ga", "gf", { desc = "Goto File under Cursor" }) -- needed, since remapped
 
 --------------------------------------------------------------------------------
 -- FOLDING
