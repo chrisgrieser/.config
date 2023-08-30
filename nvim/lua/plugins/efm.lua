@@ -2,11 +2,11 @@ local lintersAndFormatters = {
 	"codespell",
 	"yamllint",
 	"shellcheck",
-	"shfmt", -- shell
+	"shfmt",
 	"markdownlint",
-	"black", -- python formatter
-	"selene", -- lua
-	"stylua", -- lua
+	"black",
+	"selene",
+	"stylua",
 	"prettier", -- only yaml formatter preserving blank lines https://github.com/mikefarah/yq/issues/515
 	-- stylelint included in mason, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
 
@@ -24,11 +24,12 @@ local setupEfmConfig = function()
 	local shfmt = require("efmls-configs.formatters.shfmt")
 	local stylua = require("efmls-configs.formatters.stylua")
 	local selene = require("efmls-configs.linters.selene")
+	local biome = require("efmls-configs.formatters.biome")
+	local shellharden = require("efmls-configs.formatters.shellharden")
 
-	local shellcheck = require("tool-configs.linters.shellcheck")
-	local shellharden = require("tool-configs.formatters.shellharden")
-	local biome = require("tool-configs.formatters.biome")
+	-- using my own, due to custom configs
 	local markdownlint = require("tool-configs.linters.markdownlint")
+	local shellcheck = require("tool-configs.linters.shellcheck")
 	local yamllint = require("tool-configs.linters.yamllint")
 	local codespell_L = require("tool-configs.linters.codespell")
 	local stylelint_L = require("tool-configs.linters.stylelint")
@@ -67,10 +68,7 @@ local setupEfmConfig = function()
 	require("lspconfig").efm.setup {
 		filetypes = vim.tbl_keys(languages),
 		init_options = { documentFormatting = true },
-		settings = {
-			rootMarkers = { ".git/" },
-			languages = languages,
-		},
+		settings = { rootMarkers = { ".git/" }, languages = languages },
 	}
 
 	vim.api.nvim_create_user_command("EfmStatus", "checkhealth efmls-configs", {})
