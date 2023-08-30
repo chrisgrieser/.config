@@ -5,10 +5,10 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 vim.cmd.cnoreabbrev("i", "lua =")
-vim.cmd.cnoreabbrev("EfmStatus", "checkhealth efmls-configs")
 
 
 newCommand("LspCapabilities", function()
+	"EfmStatus", "checkhealth efmls-configs")
 
 --------------------------------------------------------------------------------
 
