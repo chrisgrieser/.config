@@ -137,7 +137,7 @@ local function codeActionFilter(action)
 	local lua_action_filter = action.title:find("on this line")
 		or (action.kind ~= "quickfix" and action.kind ~= "refactor.rewrite")
 		or vim.bo.ft ~= "lua"
-	local python_action_filter = true
+	local python_action_filter = action.title:find("on this line")
 
 		or vim.bo.ft ~= "python"
 	return lua_action_filter and python_action_filter
