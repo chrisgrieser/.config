@@ -6,8 +6,8 @@ local fs = require("efmls-configs.fs")
 
 local linter = "codespell"
 
--- HACK to change severity
-local command = string.format("%s --ignore-words %q ${INPUT} | sed 's/^/w /'", fs.executable(linter), linterConfig)
+local command =
+	string.format("%s --ignore-words %q ${INPUT} | sed 's/^/w /'", fs.executable(linter), linterConfig)
 
 return {
 	prefix = linter,

@@ -28,10 +28,12 @@ local setupEfmConfig = function()
 	local rome = require("my-efm.formatters.rome")
 	local markdownlint = require("my-efm.linters.markdownlint")
 	local yamllint = require("my-efm.linters.yamllint")
-	local codespellLint = require("my-efm.linters.codespell")
-	local stylelintLint = require("my-efm.linters.stylelint")
-	local stylelintFormat = require("my-efm.formatters.stylelint")
+	local codespell_L = require("my-efm.linters.codespell")
+	local stylelint_L = require("my-efm.linters.stylelint")
+	local stylelint_F = require("my-efm.formatters.stylelint")
 	-- local shellcheckApply = require("my-efm.formatters.shellcheck")
+	-- local misspell_F = require("my-efm.formatters.misspell")
+	local misspell_L = require("my-efm.linters.misspell")
 	-- local codespellFormat = require("my-efm.formatters.codespell")
 
 	local languages = {
@@ -40,7 +42,7 @@ local setupEfmConfig = function()
 		json = { rome },
 		lua = { stylua, selene },
 		python = { black, ruff },
-		css = { prettier, stylelintLint, stylelintFormat },
+		css = { prettier, stylelint_L, stylelint_F },
 		html = { prettier },
 		sh = { shfmt, shellcheck, shellharden },
 		yaml = { yamllint, prettier },
@@ -52,8 +54,9 @@ local setupEfmConfig = function()
 	-- use for codespell for all except bib and css
 	for ft, _ in pairs(languages) do
 		if ft ~= "bib" and ft ~= "css" then
-			table.insert(languages[ft], codespellLint)
-			-- table.insert(languages[ft], codespellFormat)
+			table.insert(languages[ft], codespell_L)
+			table.insert(languages[ft], misspell_L)
+			-- table.insert(languages[ft], misspell_F)
 		end
 	end
 
@@ -68,7 +71,7 @@ local setupEfmConfig = function()
 		},
 	}
 
-	vim.api.nvim_create_user_command("EfmStatus", "checkhealth efmsls-configs", {})
+	vim.api.nvim_create_user_command("EfmStatus", "checkhealth efmls-configs", {})
 end
 --------------------------------------------------------------------------------
 
@@ -89,13 +92,13 @@ return {
 	},
 	{
 		"creativenull/efmls-configs-nvim",
-		lazy = false, -- must be loaded at once
+		event = "BufReadPre", -- later would not become active on first buffer
 		keys = {
 			{
 				"<D-s>",
 				function()
+					vim.lsp.buf.format { name = "efm" }
 					vim.cmd.update()
-					vim.lsp.buf.format { name = "efm", async = true }
 				end,
 				desc = "󰒕 Format & Save",
 			},
