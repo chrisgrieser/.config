@@ -67,7 +67,7 @@ opt.matchtime = 1 -- deci-seconds (higher amount feels laggy)
 -- Clipboard
 opt.clipboard = "unnamedplus"
 
--- Spelling
+-- Spelling tete
 opt.spell = true
 opt.spelllang = "en_us"
 opt.spelloptions = "camel"

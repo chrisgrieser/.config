@@ -13,21 +13,16 @@ return {
 			},
 		},
 		opts = {
-			autocmd = {
-				enabled = true,
-				updatetime = -1, -- set by myself in the options
-			},
+			-- -1 = updatetime set by myself
+			autocmd = { enabled = true, updatetime = -1 },
 			sign = { enabled = false },
-			status_text = {
-				enabled = true,
-				text = " ",
-			},
+			status_text = { enabled = true, text = " " },
 			action_kinds = { "refactor" },
 			ignore = {
 				clients = {
-					-- "lua_ls", -- spams parameter refactoring
+					"lua_ls", -- spams parameter refactoring
 					"marksman", -- spams ToC update everywhere
-					-- "ruff_lsp", -- spams fixAll everywhere
+					"ruff_lsp", -- spams fixAll everywhere
 				},
 			},
 		},
