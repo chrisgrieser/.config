@@ -278,3 +278,8 @@ rebase
 Metadata
 sed
 scss
+biome
+formatters
+efm
+lspconfig
+efmls

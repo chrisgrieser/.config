@@ -224,6 +224,7 @@ keymap("c", "<C-u>", "<C-e><C-u>") -- clear full line
 keymap("c", "<C-w>", "<C-r><C-w>") -- add word under cursor
 keymap("c", "<BS>", function ()
 	local cmdlineEmpty = vim.fn.getcmdline():find("^$")
+	local isIncRename = vim.fn.getcmdline():find("^$")
 	if not cmdlineEmpty then return "<BS>" end
 end, { desc = "backspace", expr = true })
 
