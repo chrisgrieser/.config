@@ -22,14 +22,8 @@ require("lspconfig.ui.windows").default_options.border = u.borderStyle
 --------------------------------------------------------------------------------
 
 -- https://neovim.io/doc/user/diagnostic.html#diagnostic-structure
-local function diagnosticFmt(diag, type)
+local function diagnosticFmt(diag)
 	local msg = diag.message
-
-	if diag.source == "Ruff" and type == "virtual_text" then return diag.code .. ": " .. msg end
-
-	if msg:find("^%[stylelint%]") or msg:find("^%[markdownlint%]") then
-		diag.severity = vim.diagnostic.severity.WARN
-	end
 
 	local efmSource = msg:match("^%[(%a+)%] ")
 	if efmSource then
@@ -44,13 +38,13 @@ end
 
 vim.diagnostic.config {
 	virtual_text = {
+		format = diagnosticFmt,
 		severity = { min = vim.diagnostic.severity.WARN }, -- no text for hints
 		source = false, -- already handled by format function
-		format = function(diag) return diagnosticFmt(diag, "virtual_text") end,
 		spacing = 1,
 	},
 	float = {
-		format = function(diag) return diagnosticFmt(diag, "float") end,
+		format = diagnosticFmt,
 		focusable = true,
 		border = u.borderStyle,
 		max_width = 75,

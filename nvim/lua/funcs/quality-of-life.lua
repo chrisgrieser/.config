@@ -133,6 +133,17 @@ function M.scrollHoverWin(direction)
 	vim.notify("No floating windows found. ", vim.log.levels.WARN)
 end
 
+function M.gotoNextIndentChange()
+	local lineNum, colNum = unpack(vim.api.nvim_win_get_cursor(0))
+	local currentIndent = vim.fn.indent(lineNum)
+	local lastLineNum = vim.api.nvim_buf_line_count(0)
+	for i = lineNum, lastLineNum, 1 do
+		local indent = vim.fn.indent(i)
+		if indent ~= currentIndent then
+			vim.api.nvim_win_set_cursor(0, { i, colNum })
+		end
+	end
+end
 
 --------------------------------------------------------------------------------
 

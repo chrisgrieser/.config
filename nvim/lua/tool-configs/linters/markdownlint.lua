@@ -13,5 +13,6 @@ return {
 	lintCommand = command,
 	lintIgnoreExitCode = true,
 	lintStdin = true,
+	lintSeverity = vim.diagnostic.severity.WARN,
 	lintFormats = { "%f:%l:%c %m", "%f:%l %m", "%f: %l: %m" },
 }
