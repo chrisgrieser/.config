@@ -41,9 +41,6 @@ export MAGIC_ENTER_OTHER_COMMAND=" inspect"
 export _ZO_DATA_DIR="$DATA_DIR/zoxide/"
 eval "$(zoxide init --no-cmd zsh)" # needs to be placed after compinit
 
-export FX_THEME=1        # only theme working in light & dark mode https://github.com/antonmedv/fx#themes
-export FX_SHOW_SIZE=true # show sizes of folded arrays
-
 # updates managed via homebrew https://cli.github.com/manual/gh_help_environment
 export GH_NO_UPDATE_NOTIFIER=1
 

@@ -45,7 +45,8 @@ content=$(curl -X POST "https://api.chatpdf.com/v1/chats/message" \
 	-H "x-api-key: $CHATPDF_API_KEY" \
 	-H "Content-Type: application/json" \
 	-d "{\"sourceId\": \"$sourceId\", \"messages\": [{\"role\": \"user\", \"content\": \"$the_prompt\"}]}" |
-	cut -d'"' -f4)
+	cut -d'"' -f4 |
+	sed 's/^$//')
 
 #───────────────────────────────────────────────────────────────────────────────
 # OUTPUT

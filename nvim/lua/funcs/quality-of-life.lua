@@ -7,6 +7,7 @@ local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
 local commentChar = "─"
 local commentWidth = tostring(vim.opt_local.colorcolumn:get()[1]) - 1
 local toggleSigns = {
+	["|"] = '&',
 	[","] = ';',
 	["'"] = '"',
 	["^"] = "$",
