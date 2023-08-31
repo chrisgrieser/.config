@@ -43,6 +43,7 @@ local setupEfmConfig = function()
 	-- BUG pending: https://github.com/mattn/efm-langserver/issues/258
 	-- local shellcheckApply = require("tool-configs.formatters.shellcheck")
 	-- local codespell_F = require("tool-configs.formatters.codespell")
+	-- markdownlint as well
 
 	local languages = {
 		javascript = { biome },
