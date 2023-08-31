@@ -156,24 +156,12 @@ keymap(
 keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
 
 -- ducky search for all diagnostics on the current line
-keymap("n", "<leader>d", function()
-	local lnum = vim.fn.line(".") - 1
-	local diags = vim.diagnostic.get(0, { lnum = lnum })
-	if vim.tbl_isempty(diags) then
-		vim.notify("No diagnostics found", u.warn)
-		return
-	end
-	for _, diag in ipairs(diags) do
-		---@diagnostic disable-next-line: undefined-field
-		if diag.code and diag.source then
-		---@diagnostic disable-next-line: undefined-field
-			local query = (diag.code .. " " .. diag.source)
-			fn.setreg("+", query)
-			local url = ("https://duckduckgo.com/?q=%s+%%21ducky&kl=en-us"):format(query:gsub(" ", "+"))
-			vim.fn.system { "open", url }
-		end
-	end
-end, { desc = "󰒕 Copy Diagnostic Rule ID" })
+keymap(
+	"n",
+	"<leader>d",
+	function() require("funcs.quality-of-life").ruleSearch() end,
+	{ desc = "󰒕 Copy Diagnostic Rule ID" }
+)
 
 --------------------------------------------------------------------------------
 

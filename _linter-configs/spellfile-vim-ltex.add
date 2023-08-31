@@ -366,3 +366,10 @@ bindkey
 keybinds
 backticks
 substring
+pip3
+autoremove
+npm
+npmrc
+#seless
+repl
+ln

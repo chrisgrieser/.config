@@ -7,6 +7,9 @@ local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
 local commentChar = "─"
 local commentWidth = tostring(vim.opt_local.colorcolumn:get()[1]) - 1
 local toggleSigns = {
+	[","] = ';',
+	["'"] = '"',
+	["^"] = "$",
 	["/"] = "*",
 	["+"] = "-",
 	["("] = ")",
@@ -94,6 +97,24 @@ function M.openNewScope()
 	vim.cmd.startinsert { bang = true }
 end
 
+function M.ruleSearch()
+	local lnum = vim.fn.line(".") - 1
+	local diags = vim.diagnostic.get(0, { lnum = lnum })
+	if vim.tbl_isempty(diags) then
+		vim.notify("No diagnostics found", vim.log.levels.WARN)
+		return
+	end
+	for _, diag in ipairs(diags) do
+		---@diagnostic disable-next-line: undefined-field
+		if diag.code and diag.source then
+		---@diagnostic disable-next-line: undefined-field
+			local query = (diag.code .. " " .. diag.source)
+			vim.fn.setreg("+", query)
+			local url = ("https://duckduckgo.com/?q=%s+%%21ducky&kl=en-us"):format(query:gsub(" ", "+"))
+			vim.fn.system { "open", url }
+		end
+	end
+end
 
 function M.scrollHoverWin(direction)
 	local a = vim.api
