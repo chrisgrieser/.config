@@ -237,9 +237,9 @@ local function telescopeConfig()
 				previewer = false,
 				layout_config = {
 					horizontal = {
-						-- anchor = "W",
+						anchor = "W",
 						width = 0.45,
-						height = 0.5,
+						height = 0.55,
 					},
 				},
 			},

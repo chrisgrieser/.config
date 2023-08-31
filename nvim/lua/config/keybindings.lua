@@ -34,9 +34,9 @@ keymap({ "n", "x" }, "K", "6gk")
 keymap("o", "J", "2j")
 keymap("o", "K", "2k")
 
--- paragraph-wise movement
-keymap({ "n", "x" }, "gk", "{gk")
-keymap({ "n", "x" }, "gj", "}gj")
+-- indent-wise movement
+keymap({ "n", "x" }, "gj", function() require("funcs.quality-of-life").gotoNextIndentChange("down") end)
+keymap({ "n", "x" }, "gk", function() require("funcs.quality-of-life").gotoNextIndentChange("up") end)
 
 -- Jump history
 keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
