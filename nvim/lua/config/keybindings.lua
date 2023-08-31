@@ -69,7 +69,7 @@ keymap("n", "[", "(")
 --------------------------------------------------------------------------------
 
 -- SEARCH
-keymap("n", "-", "/", { desc = "Search word under cursor" })
+keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
 keymap("x", "*", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "* Visual Star" })
 
@@ -112,7 +112,8 @@ keymap("n", "gQ", function() require("funcs.quickfix").previous() end, { desc = 
 keymap("n", "dQ", require("funcs.quickfix").deleteList, { desc = " Empty Quickfix List" })
 
 -- COMMENTS & ANNOTATIONS
-keymap("n", "qw", require("funcs.comment-divider").commentHr, { desc = " Horizontal Divider" })
+-- stylua: ignore
+keymap("n", "qw", function () require("funcs.quality-of-life").commentHr() end, { desc = " Horizontal Divider" })
 keymap("n", "wq", '"zyy"zpkqqj', { desc = " Duplicate Line as Comment", remap = true })
 
 -- WHITESPACE CONTROL
@@ -123,41 +124,19 @@ keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent line" })
 keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent selection" })
 keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent selection" })
 
-keymap("n", "~", function()
-	local col = vim.fn.col(".") -- fn.col correctly considers tab-indentation
-	local charUnderCursor = vim.api.nvim_get_current_line():sub(col, col)
-	local isLetter = charUnderCursor:find("^%a$")
-	if isLetter then return "~h" end
-	local signs = {
-		["("] = ")",
-		["/"] = "*",
-		["+"] = "-",
-		["["] = "]",
-		["{"] = "}",
-		["<"] = ">",
-	}
-	for openBracket, closeBracket in pairs(signs) do
-		if charUnderCursor == openBracket then return "r" .. closeBracket end
-		if charUnderCursor == closeBracket then return "r" .. openBracket end
-	end
-end, { desc = "~ for letters and characters", expr = true })
+keymap("n", "~", function() require("funcs.quality-of-life").toggleCase() end, { desc = "better ~" })
 
 -- Word Flipper
 -- stylua: ignore
 keymap( "n", "Ö", function() require("funcs.flipper").flipWord() end, { desc = "flip words / toggle casing" })
 
 -- [O]pen new scope / brace
-keymap({ "n", "i" }, "<D-o>", function()
-	local line = vim.api.nvim_get_current_line()
-	local trailingComma = line:match(",?$")
-	line = line:gsub("[, ]+$", "") .. " {" -- edit current line
-	vim.api.nvim_set_current_line(line)
-	local ln = u.getCursor(0)[1]
-	local indent = line:match("^%s*")
-	vim.api.nvim_buf_set_lines(0, ln, ln, false, { indent .. "\t", indent .. "}" .. trailingComma })
-	u.setCursor(0, { ln + 1, 1 }) -- go line down
-	cmd.startinsert { bang = true }
-end, { desc = " Open new scope" })
+keymap(
+	{ "n", "i" },
+	"<D-o>",
+	function() require("funcs.quality-of-life").openNewScope() end,
+	{ desc = " Open new scope" }
+)
 
 --------------------------------------------------------------------------------
 -- SPELLING
@@ -221,10 +200,12 @@ keymap("c", "<C-a>", "<Home>")
 keymap("c", "<C-e>", "<End>")
 keymap("c", "<C-u>", "<C-e><C-u>") -- clear full line
 keymap("c", "<C-w>", "<C-r><C-w>") -- add word under cursor
-keymap("c", "<BS>", function ()
-	local cmdlineEmpty = vim.fn.getcmdline():find("^$")
-	local isIncRename = vim.fn.getcmdline():find("^IncRename $")
-	if cmdlineEmpty or isIncRename then return end
+keymap("c", "<BS>", function()
+	local cmdLine = vim.fn.getcmdline()
+	local cmdlineEmpty = cmdLine:find("^$")
+	local isIncRename = cmdLine:find("^IncRename $")
+	local isSubstitue = cmdLine:find("^s $")
+	if cmdlineEmpty or isIncRename or isSubstitue then return end
 	return "<BS>"
 end, { desc = "Restricted <BS>", expr = true })
 
@@ -402,6 +383,12 @@ autocmd("LspAttach", {
 })
 
 --------------------------------------------------------------------------------
+-- stylua: ignore
+keymap("n", "<PageDown>", function() require("funcs.quality-of-life").scrollHoverWin("down") end, { desc = "󰮷 Scroll hover down" })
+-- stylua: ignore
+keymap("n", "<PageUp>", function() require("funcs.quality-of-life").scrollHoverWin("up") end, { desc = "󰮽 Scroll hover up" })
+
+--------------------------------------------------------------------------------
 -- Q / ESC TO CLOSE SPECIAL WINDOWS
 
 autocmd("FileType", {
@@ -422,26 +409,5 @@ autocmd("FileType", {
 		keymap("n", "q", cmd.close, opts)
 	end,
 })
-
---------------------------------------------------------------------------------
-
-local function scrollHoverWin(direction)
-	local a = vim.api
-	local scrollCmd = (direction == "down" and "5j" or "5k")
-	local winIds = a.nvim_tabpage_list_wins(0)
-	for _, winId in ipairs(winIds) do
-		local isHover = a.nvim_win_get_config(winId).relative ~= ""
-			and a.nvim_win_get_config(winId).focusable
-		if isHover then
-			a.nvim_set_current_win(winId)
-			u.normal(scrollCmd)
-			return
-		end
-	end
-	vim.notify("No floating windows found. ", u.warn)
-end
-
-keymap("n", "<PageDown>", function() scrollHoverWin("down") end, { desc = "Scroll down hover" })
-keymap("n", "<PageUp>", function() scrollHoverWin("up") end, { desc = "Scroll up hover" })
 
 --------------------------------------------------------------------------------
