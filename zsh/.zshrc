@@ -13,8 +13,8 @@ CONFIG_FILES=(
 	git_github
 	json_utils
 	homebrew
-	node-npm
-	python-pip
+	node_npm
+	python_pip
 	intro_messages
 )
 

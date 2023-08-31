@@ -77,8 +77,8 @@ done
 ln -sf "$DOTFILE_FOLDER/zsh/.zshenv" ~
 
 # Fig
-ln -sf "$DOTFILE_FOLDER/fig/settings.json" ~/.fig/settings.json
-fig install --input-method
+# ln -sf "$DOTFILE_FOLDER/fig/settings.json" ~/.fig/settings.json
+# fig install --input-method
 
 # Espanso
 ESPANSO_DIR=~"/Library/Application Support/espanso"
