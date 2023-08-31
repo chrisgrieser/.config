@@ -35,10 +35,9 @@ keymap(
 	{ desc = " Preview", buffer = true }
 )
 
+-- do not ignore type "string" in md, since that's what headings in markdown are
 -- stylua: ignore
 keymap("n", "gs", function ()
-	-- do not ignore type "string" in md, since that's what headings in markdown
-	-- are
 	require("telescope.builtin").lsp_document_symbols { ignore_symbols = {}, }
 end, { desc = "󰒕 Symbols", buffer = true })
 
