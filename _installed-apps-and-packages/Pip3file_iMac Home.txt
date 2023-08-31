@@ -1,12 +1,4 @@
 chromaterm
-greenlet
-msgpack
-pdfminer.six
-Pillow
 pip-autoremove
-pybind11
-pyobjc-framework-Cocoa
-ruamel.yaml
-six
-typed-argument-parser
+Pygments
 wheel

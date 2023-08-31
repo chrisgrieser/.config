@@ -12,19 +12,15 @@ local visuals = require("lua.visuals")
 -- - Hammerspoon Console
 -- - SideNotes
 local function toggleDarkMode()
-	local sketchyFg, sketchyBg, toMode, pdfBg, sidenotesTheme
+	local toMode, pdfBg, sidenotesTheme 
 
 	if u.isDarkMode() then
 		toMode = "light"
 		pdfBg = "Default"
-		sketchyBg = "0xffcdcdcd"
-		sketchyFg = "0xff000000"
 		sidenotesTheme = "Marshmallow"
 	else
 		toMode = "dark"
 		pdfBg = "Night"
-		sketchyBg = "0xff333333"
-		sketchyFg = "0xffffffff"
 		sidenotesTheme = "Grapes and Berries"
 	end
 
@@ -40,9 +36,9 @@ local function toggleDarkMode()
 	end
 
 	-- System
-	u.applescript([[
-		tell application "System Events" to tell appearance preferences to set dark mode to not dark mode
-	]])
+	u.applescript(
+		'tell application "System Events" to tell appearance preferences to set dark mode to not dark mode'
+	)
 	visuals.holeCover() -- must come after OS color change
 
 	-- hammerspoon console
@@ -50,16 +46,7 @@ local function toggleDarkMode()
 
 	-- sketchybar
 	-- stylua: ignore
-	hs.execute((u.exportPath .. [[
-		BG_COLOR='%s'
-		FONT_COLOR='%s'
-		sketchybar --bar color="$BG_COLOR" \
-		--set sync-indicator icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
-		--set sidenotes-count icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
-		--set clock icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
-		--set weather icon.color="$FONT_COLOR" label.color="$FONT_COLOR" \
-		--update
-	]]):format(sketchyBg, sketchyFg))
+	hs.execute(u.exportPath .. 'sketchybar --reload')
 
 	-- SideNotes
 	-- stylua: ignore
