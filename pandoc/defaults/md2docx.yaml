@@ -23,7 +23,7 @@ resource-path:
   - ${VAULT_PATH}
 
 # Markdown-Reader
-reader: markdown+lists_without_preceding_blankline+mark+wikilinks_title_after_pipe
+reader: markdown+lists_without_preceding_blankline+mark+wikilinks_title_after_pipe+rebase_relative_paths
 
 # Word-Writer
 writer: docx+native_numbering

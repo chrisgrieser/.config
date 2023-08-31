@@ -3,11 +3,6 @@ local fn = vim.fn
 local expand = vim.fn.expand
 local u = require("config.utils")
 local abbr = vim.cmd.inoreabbrev
---------------------------------------------------------------------------------
-
--- TODO: explainshell Docker Image
--- https://github.com/bash-lsp/bash-language-server/tree/main/vscode-client#configuration
--- https://github.com/bash-lsp/bash-language-server/issues/180
 
 --------------------------------------------------------------------------------
 
@@ -35,10 +30,10 @@ keymap({ "o", "x" }, "a|", "<cmd>lua require('various-textobjs').shellPipe(false
 
 -- Reload Sketchybar
 keymap("n", "<localleader><localleader>", function()
-	vim.cmd("silent update")
-	if expand("%:p:h"):find("sketchybar") then
-		fn.system([[brew services restart sketchybar]])
-	else
+	vim.cmd.update()
+	if not expand("%:p:h"):find("sketchybar") then
 		vim.notify("Not in a sketchybar directory.", u.warn)
+		return
 	end
+	fn.system { "sketchybar", "--reload" }
 end, { buffer = true, desc = "  Reload sketchybar" })
