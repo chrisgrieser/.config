@@ -6,11 +6,8 @@ local fs = require("efmls-configs.fs")
 
 local linter = "codespell"
 
-local command = string.format(
-	"%s --disable-colors --ignore-words %q ${INPUT} | sed 's/^/w /'",
-	fs.executable(linter),
-	linterConfig
-)
+local command =
+	string.format("%s --disable-colors --ignore-words %q ${INPUT}", fs.executable(linter), linterConfig)
 
 return {
 	prefix = linter,
@@ -18,6 +15,7 @@ return {
 	lintCommand = command,
 	lintIgnoreExitCode = true,
 	lintStdin = false,
-	lintFormats = { "%t %f:%l:%m" },
+	lintFormats = { "%f:%l:%m" },
 	lintSeverity = vim.diagnostic.severity.INFO,
 }
+

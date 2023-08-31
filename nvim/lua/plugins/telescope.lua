@@ -45,11 +45,9 @@ local keymappings_I = {
 	end,
 	["<D-up>"] = function(prompt_bufnr)
 		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-		local currentPathObj = current_picker.finder.path
-		local currentPath = require("plenary.path"):new(currentPathObj):parent():absolute()
-		vim.notify("🪚 currentPath: " .. currentPath)
+		if not current_picker.cwd then return end
+		local currentPath = tostring(current_picker.cwd)
 		local parent_dir = vim.fs.dirname(currentPath)
-		vim.notify("🪚 parent_dir: " .. parent_dir)
 
 		require("telescope.actions").close(prompt_bufnr)
 		require("telescope.builtin").find_files {
