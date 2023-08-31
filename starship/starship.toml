@@ -1,4 +1,3 @@
-#───────────────────────────────────────────────────────────────────────────────
 # INFO
 # - https://starship.rs/config/ 
 # - https://github.com/toml-lang/toml
@@ -169,7 +168,7 @@ style = "bold cyan"
 format = " [$symbol $version]($style)"
 version_format = "$major"
 style = "bold cyan"
-detect_extensions = ["ts"]             # dont trigger for JXA
+detect_extensions = ["ts"]             # don't trigger for JXA
 
 [python]
 style = "bold cyan"

@@ -1,19 +1,11 @@
 {
 	"safe require": {
 		"prefix": "safe require",
-		"body": [
-			"local ok, ${1:module} = require(\"${1:module}\")",
-			"if not ok then return end",
-			"${1:module}"
-		]
+		"body": ["local ok, ${1:module} = require(\"${1:module}\")", "if not ok then return end", "${1:module}"]
 	},
 	"block comment": {
 		"prefix": "block comment",
-		"body": [
-			"--[[",
-			"$0",
-			"--]]"
-		]
+		"body": ["--[[", "$0", "--]]"]
 	},
 	"export module": {
 		"prefix": "export module",
@@ -47,10 +39,7 @@
 	},
 	"ignore start/end (stylua)": {
 		"prefix": "ignore start/end (stylua)",
-		"body": [
-			"-- stylua: ignore start",
-			"-- stylua: ignore end"
-		]
+		"body": ["-- stylua: ignore start", "-- stylua: ignore end"]
 	},
 	"ignore (stylua)": {
 		"prefix": "ignore (stylua)",
@@ -62,13 +51,7 @@
 	},
 	"if .. then .. else": {
 		"prefix": "if .. then .. else",
-		"body": [
-			"if ${1:true} then",
-			"\t$2",
-			"else",
-			"\t$0",
-			"end"
-		]
+		"body": ["if ${1:true} then", "\t$2", "else", "\t$0", "end"]
 	},
 	"return end": {
 		"prefix": ["return end", "re"],
@@ -87,40 +70,19 @@
 		"body": "os.getenv(\"HOME\")"
 	},
 	"try": {
-		"prefix": [
-			"try",
-			"pcall"
-		],
-		"body": [
-			"local success = pcall(${1:func})",
-			"if not success then",
-			"\t$0",
-			"\treturn",
-			"end"
-		]
+		"prefix": ["try", "pcall"],
+		"body": ["local success = pcall(${1:func})", "if not success then", "\t$0", "\treturn", "end"]
 	},
 	"for each (list)": {
 		"prefix": "for each (list)",
-		"body": [
-			"for _, ${1:v} in pairs(${2:table}) do",
-			"\t$0",
-			"end"
-		]
+		"body": ["for _, ${1:v} in pairs(${2:table}) do", "\t$0", "end"]
 	},
 	"for each line (file)": {
 		"prefix": "for each line (file)",
-		"body": [
-			"for line in io.open(${1:filepath}):lines() do",
-			"\t$0",
-			"end"
-		]
+		"body": ["for line in io.open(${1:filepath}):lines() do", "\t$0", "end"]
 	},
 	"gmatch (loop)": {
 		"prefix": "gmatch (loop)",
-		"body": [
-			"for capture in ${1:str}:gmatch($2) do",
-			"\t${3:print(capture)}",
-			"end"
-		]
+		"body": ["for capture in ${1:str}:gmatch($2) do", "\t${3:print(capture)}", "end"]
 	}
 }

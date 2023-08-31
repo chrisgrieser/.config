@@ -1,3 +1,6 @@
+-- DOCS https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+-- Default configs: https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
+
 local u = require("config.utils")
 local conf = {
 	settings = {},
@@ -45,14 +48,13 @@ conf.settings.lua_ls = {
 				["return-type-mismatch"] = "Error",
 			},
 		},
-		hint = { -- LSP inlayhints
+		hint = {
 			enable = true,
 			setType = true,
 			arrayIndex = "Disable",
 		},
 		workspace = { checkThirdParty = false }, -- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
-		format = { enable = false }, -- using stylua instead. Also, sumneko-lsp-formatting has this weird bug where all folds are opened
-		telemetry = { enable = false },
+		format = { enable = false }, -- using stylua instead
 	},
 }
 
@@ -128,7 +130,7 @@ conf.settings.cssls = {
 conf.settings.tsserver = {
 	completions = { completeFunctionCalls = true },
 	diagnostics = {
-		-- "cannot redeclare block-scoped variable" -> useless when applied to JXA
+		-- "cannot redeclare block-scoped variable" -> not useful when applied to JXA
 		ignoredCodes = { 2451 },
 	},
 	typescript = {
@@ -165,12 +167,18 @@ end
 
 --------------------------------------------------------------------------------
 -- JSON
--- https://github.com/sublimelsp/LSP-json/blob/master/LSP-json.sublime-settings
-conf.settings.jsonls = {
-	json = { format = { enable = false } }, -- taken care of by biome
+-- https://github.com/Microsoft/vscode/tree/main/extensions/json-language-features/server#configuration
+conf.init_options.jsonls = {
+	provideFormatter = false, -- use `biome` instead
 }
 
---------------------------------------------------------------------------------
+-- YAML
+conf.settings.yamlls = {
+	yaml = {
+		format = { enable = false },
+	},
+}
+
 -- XML/PLIST
 -- https://github.com/eclipse/lemminx/blob/main/docs/Configuration.md#all-formatting-options
 -- disabled, since it messes up some formatting of Alfred .plist files
@@ -279,7 +287,6 @@ return {
 	{ -- configure LSPs
 		"chrisgrieser/nvim-lspconfig",
 		dev = true,
-		dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config
 		init = function()
 			setupAllLsps()
 
@@ -290,5 +297,6 @@ return {
 				capabilities = lspCapabilities,
 			}
 		end,
+		dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config
 	},
 }
