@@ -27,7 +27,11 @@ local lsp_servers = {
 	"lemminx", -- xml/plist
 	"html",
 	"ltex", -- latex/languagetool (requires `openjdk`)
-	-- "biome", -- TODO pending: https://github.com/williamboman/mason.nvim/issues/1482
+
+	-- TODO
+	-- pending: https://github.com/williamboman/mason.nvim/issues/1482
+	-- cannot use LSP for formatting: https://github.com/biomejs/biome/discussions/87
+	-- "biome",
 }
 
 --------------------------------------------------------------------------------
