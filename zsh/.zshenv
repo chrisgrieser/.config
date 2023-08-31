@@ -29,7 +29,7 @@ export MAIL_APP="Mimestream"
 export TICKER_APP="Ivory" # or Twitter/Mastodon
 
 #───────────────────────────────────────────────────────────────────────────────
-# Safe API keys ouotside the dotfile repo
+# Safe API keys outside the dotfile repo
 # shellcheck disable=1091
 [[ -f "$DATA_DIR/private dotfiles/api-keys.sh" ]] && source "$DATA_DIR/private dotfiles/api-keys.sh"
 

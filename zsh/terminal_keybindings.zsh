@@ -34,6 +34,8 @@ function grappling-hook() {
 		to_open="$WD"
 	fi
 	cd "$to_open" || return 1
+
+	wezterm set-working-directory # so wezterm knows we are in a new directory
 	zle reset-prompt
 }
 zle -N grappling-hook

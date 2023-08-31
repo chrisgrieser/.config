@@ -144,7 +144,7 @@ function w {
 	fi
 }
 
-# back to last dir
+# back to last directory
 function zz() {
 	if ! command -v __zoxide_z &>/dev/null; then printf "\033[1;33mzoxide not installed.\033[0m" && return 1; fi
 	__zoxide_z - &>/dev/null # since this is verbose command
@@ -186,14 +186,14 @@ function eject() {
 	diskutil eject "$selected"
 }
 
-# copies [l]ast [c]ommand(s)
+# copies last command(s)
 function lc() {
 	num=${1-"1"} # default= 1 -> just last command
 	history | tail -n"$num" | cut -c8- | sed 's/"/\"/g' | sed "s/'/\'/g" | sed -E '/^$/d' | pbcopy
 	echo "Copied."
 }
 
-# copies [r]esult of [l]ast command(s)
+# copies result of last command(s)
 function lr() {
 	num=${1-"1"} # default= 1 -> just last command
 	last_command=$(history | tail -n"$num" | cut -c 8-)
@@ -222,7 +222,7 @@ function ex() {
 	fi
 }
 
-# appid of macOS apps
+# app-id of macOS apps
 function appid() {
 	local id
 	id=$(osascript -e "id of app \"$1\"")
