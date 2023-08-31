@@ -41,7 +41,6 @@ keymap("n", "gs", function ()
 	require("telescope.builtin").lsp_document_symbols { ignore_symbols = {}, }
 end, { desc = "󰒕 Symbols", buffer = true })
 
-
 -- Format Table
 keymap(
 	"n",
