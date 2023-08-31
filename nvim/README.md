@@ -1,4 +1,5 @@
 ## Config structure
+
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img src="https://dotfyle.com/chrisgrieser/config-nvim/badges/plugins?style=flat" /></a>
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img src="https://dotfyle.com/chrisgrieser/config-nvim/badges/leaderkey?style=flat" /></a>
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img src="https://dotfyle.com/chrisgrieser/config-nvim/badges/plugin-manager?style=flat" /></a>
@@ -22,6 +23,7 @@
 The tree was generated using <https://tree.nathanfriend.io/>
 
 ## All Installed Plugins
+
 - [Aasim-A/scrollEOF.nvim](https://github.com/Aasim-A/scrollEOF.nvim)
 - [EdenEast/nightfox.nvim](https://github.com/EdenEast/nightfox.nvim)
 - [Exafunction/codeium.vim](https://github.com/Exafunction/codeium.vim)
