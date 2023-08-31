@@ -1,8 +1,12 @@
+-- Builtin Configs: https://github.com/creativenull/efmls-configs-nvim/blob/main/doc/SUPPORTED_LIST.md
+--------------------------------------------------------------------------------
+
 local lintersAndFormatters = {
 	"codespell",
 	"yamllint",
 	"shellcheck",
 	"shfmt",
+	"mdformat",
 	"markdownlint",
 	"black",
 	"selene",
@@ -28,6 +32,7 @@ local setupEfmConfig = function()
 	local shellharden = require("efmls-configs.formatters.shellharden")
 
 	-- using my own, due to custom configs
+	local mdformat = require("tool-configs.formatters.mdformat")
 	local markdownlint = require("tool-configs.linters.markdownlint")
 	local shellcheck = require("tool-configs.linters.shellcheck")
 	local yamllint = require("tool-configs.linters.yamllint")
@@ -50,7 +55,7 @@ local setupEfmConfig = function()
 		html = { prettier },
 		sh = { shfmt, shellcheck, shellharden },
 		yaml = { yamllint, prettier },
-		markdown = { markdownlint },
+		markdown = { markdownlint, mdformat },
 		gitcommit = {},
 		toml = {},
 	}
@@ -95,7 +100,7 @@ return {
 			{
 				"<D-s>",
 				function()
-					vim.lsp.buf.format { name = "efm" }
+					vim.lsp.buf.format()
 					vim.cmd.update()
 				end,
 				desc = "󰒕 Format & Save",
