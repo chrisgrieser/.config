@@ -41,7 +41,7 @@ return {
 			end
 		end,
 		config = function()
-			vim.g.codeium_filetypes = { TelescopePrompt = false }
+			vim.g.codeium_filetypes = { TelescopePrompt = false, DressingInput = false }
 
 			-- INFO if cmp visible, will use cmp selection instead.
 			vim.g.codeium_disable_bindings = 1

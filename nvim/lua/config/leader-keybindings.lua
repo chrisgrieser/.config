@@ -15,10 +15,10 @@ end, { desc = "⌨️ Edit leader-keybindings.lua" })
 
 --------------------------------------------------------------------------------
 
--- Highlights
+-- highlight groups
 keymap("n", "<leader>pg", function() cmd.Telescope("highlights") end, { desc = " Highlight Groups" })
 
--- [P]lugins
+-- Plugins
 keymap("n", "<leader>pp", function()
 	require("lazy").sync()
 	vim.cmd.MasonToolsUpdate()
@@ -34,7 +34,7 @@ keymap("n", "<leader>pc", function() cmd.Telescope("colorscheme") end, { desc = 
 
 --------------------------------------------------------------------------------
 
--- copy [l]ast ex[c]ommand
+-- copy Last Command
 keymap("n", "<leader>lc", function()
 	local lastCommand = fn.getreg(":")
 	if lastCommand == "" then
@@ -46,7 +46,7 @@ keymap("n", "<leader>lc", function()
 	vim.notify("COPIED\n" .. lastCommand)
 end, { desc = "󰘳 Copy last command" })
 
--- [l]ast command [a]gain
+-- Last command again
 -- as opposed to `@:`, `:<Up><CR>` works across sessions
 keymap("n", "<leader>la", ":<Up><CR>", { desc = "󰘳 Run last command again", silent = true })
 
@@ -117,7 +117,6 @@ keymap(
 
 -- save open time for each buffer
 autocmd("BufReadPost", {
-	---@diagnostic disable-next-line: inject-field
 	callback = function() vim.b.timeOpened = os.time() end,
 })
 
