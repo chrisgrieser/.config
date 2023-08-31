@@ -30,9 +30,9 @@ local setupEfmConfig = function()
 	local selene = require("efmls-configs.linters.selene")
 	local biome = require("efmls-configs.formatters.biome")
 	local shellharden = require("efmls-configs.formatters.shellharden")
+	local mdformat = require("efmls-configs.formatters.mdformat")
 
 	-- using my own, due to custom configs
-	local mdformat = require("tool-configs.formatters.mdformat")
 	local markdownlint = require("tool-configs.linters.markdownlint")
 	local shellcheck = require("tool-configs.linters.shellcheck")
 	local yamllint = require("tool-configs.linters.yamllint")
