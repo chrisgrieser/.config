@@ -180,7 +180,7 @@ keymap("n", "gx", function()
 	if foundURL then
 		u.normal('"zy')
 		local url = fn.getreg("z")
-		os.execute("open '" .. url .. "'")
+		vim.fn.system { "open", url }
 	end
 end, { desc = "󰌹 Smart URL Opener" })
 
@@ -204,8 +204,8 @@ keymap("c", "<BS>", function()
 	local cmdLine = vim.fn.getcmdline()
 	local cmdlineEmpty = cmdLine:find("^$")
 	local isIncRename = cmdLine:find("^IncRename $")
-	local isSubstitue = cmdLine:find("^s $")
-	if cmdlineEmpty or isIncRename or isSubstitue then return end
+	local isSubstitute = cmdLine:find("^s $")
+	if cmdlineEmpty or isIncRename or isSubstitute then return end
 	return "<BS>"
 end, { desc = "Restricted <BS>", expr = true })
 

@@ -63,15 +63,13 @@ local setupEfmConfig = function()
 		end
 	end
 
-	-- INFO efm has to be installed via brew, since mason only installs it via go.
+	-- INFO efm has to be installed via `brew`, since mason only installs it via go.
 	-- https://github.com/williamboman/mason.nvim/issues/1481
 	require("lspconfig").efm.setup {
 		filetypes = vim.tbl_keys(languages),
 		init_options = { documentFormatting = true },
 		settings = { rootMarkers = { ".git/" }, languages = languages },
 	}
-
-	vim.api.nvim_create_user_command("EfmStatus", "checkhealth efmls-configs", {})
 end
 --------------------------------------------------------------------------------
 
@@ -92,7 +90,7 @@ return {
 	},
 	{
 		"creativenull/efmls-configs-nvim",
-		event = "BufReadPre", -- later would not become active on first buffer
+		event = "BufReadPre", -- later does not attach first opened buffer
 		keys = {
 			{
 				"<D-s>",
