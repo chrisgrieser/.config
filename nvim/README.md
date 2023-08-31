@@ -11,13 +11,15 @@
 │  └── plugins # plugins & their configs
 ├── after
 │  └── ftplugin # filetype-specific configs
-├── queries
-│  └── ... # modifications of treesitter queries
+├── queries # modifications of treesitter queries
 ├── mac-helper # opener for neovide users on macOS
 ├── snippets
 │  ├── basic
 │  └── project-specific
-└── templates
+├── templates # skeleton files
+└── tool-configs # custom configs for linters & formatters 
+   ├── formatters
+   └── linters
 ```
 
 The tree was generated using <https://tree.nathanfriend.io/>

@@ -5,15 +5,15 @@ local optl = vim.opt_local
 -- less nesting in md
 optl.tabstop = 4
 
--- Enable wrapping lines
+-- Enable wrapping lines at start
 optl.wrap = true
 optl.colorcolumn = ""
 keymap("n", "A", "g$a", { buffer = true })
 keymap("n", "I", "g^i", { buffer = true })
 
 -- decrease line length without zen mode plugins
--- filetype condition ensure ssub-filtypes like "markdown.cody_history" are not affected
-if vim.bo.ft == "markdown" then optl.signcolumn = "yes:9" end
+-- filetype condition ensure sub-filtypes like "markdown.cody_history" are not affected
+vim.defer_fn(function() optl.signcolumn = "yes:9" end, 1)
 
 -- do not auto-wrap text
 optl.formatoptions:remove { "t", "c" }
@@ -39,7 +39,7 @@ keymap(
 -- stylua: ignore
 keymap("n", "gs", function ()
 	require("telescope.builtin").lsp_document_symbols { ignore_symbols = {}, }
-end, { desc = "󰒕 Symbols", buffer = true })
+end, { desc = "󰒕 Markdown Headings", buffer = true })
 
 -- Format Table
 keymap(
