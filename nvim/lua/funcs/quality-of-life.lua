@@ -7,8 +7,8 @@ local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
 local commentChar = "─"
 local commentWidth = tostring(vim.opt_local.colorcolumn:get()[1]) - 1
 local toggleSigns = {
-	["|"] = '&',
-	[","] = ';',
+	["|"] = "&",
+	[","] = ";",
 	["'"] = '"',
 	["^"] = "$",
 	["/"] = "*",
@@ -108,7 +108,7 @@ function M.ruleSearch()
 	for _, diag in ipairs(diags) do
 		---@diagnostic disable-next-line: undefined-field
 		if diag.code and diag.source then
-		---@diagnostic disable-next-line: undefined-field
+			---@diagnostic disable-next-line: undefined-field
 			local query = (diag.code .. " " .. diag.source)
 			vim.fn.setreg("+", query)
 			local url = ("https://duckduckgo.com/?q=%s+%%21ducky&kl=en-us"):format(query:gsub(" ", "+"))
@@ -133,16 +133,31 @@ function M.scrollHoverWin(direction)
 	vim.notify("No floating windows found. ", vim.log.levels.WARN)
 end
 
-function M.gotoNextIndentChange()
-	local lineNum, colNum = unpack(vim.api.nvim_win_get_cursor(0))
-	local currentIndent = vim.fn.indent(lineNum)
+---@param direction "up"|"down"
+function M.gotoNextIndentChange(direction)
+	local isBlankLine = function(lnum) return vim.fn.getline(lnum):find("^%s*$") end
+
 	local lastLineNum = vim.api.nvim_buf_line_count(0)
-	for i = lineNum, lastLineNum, 1 do
-		local indent = vim.fn.indent(i)
-		if indent ~= currentIndent then
-			vim.api.nvim_win_set_cursor(0, { i, colNum })
-		end
+	local increment = direction == "up" and -1 or 1
+	local stopAtLine = direction == "up" and 1 or lastLineNum
+	local lineNum, colNum = unpack(vim.api.nvim_win_get_cursor(0))
+
+	-- blank lines always have indent 0, so we go to the next non-blank to
+	-- determine the "true" indent
+	local currentIndent
+	while true do
+		currentIndent = vim.fn.indent(lineNum)
+		if not isBlankLine(lineNum) then break end
+		lineNum = lineNum + increment
 	end
+
+	local targetLineNum
+	for i = lineNum, stopAtLine, increment do
+		targetLineNum = i
+		local indent = vim.fn.indent(i)
+		if indent ~= currentIndent and not isBlankLine(i) then break end
+	end
+	vim.api.nvim_win_set_cursor(0, { targetLineNum, colNum })
 end
 
 --------------------------------------------------------------------------------
