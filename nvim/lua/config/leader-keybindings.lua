@@ -117,6 +117,7 @@ keymap(
 
 -- save open time for each buffer
 autocmd("BufReadPost", {
+	---@diagnostic disable-next-line: inject-field
 	callback = function() vim.b.timeOpened = os.time() end,
 })
 
@@ -163,7 +164,9 @@ keymap("n", "<leader>d", function()
 		return
 	end
 	for _, diag in ipairs(diags) do
+		---@diagnostic disable-next-line: undefined-field
 		if diag.code and diag.source then
+		---@diagnostic disable-next-line: undefined-field
 			local query = (diag.code .. " " .. diag.source)
 			fn.setreg("+", query)
 			local url = ("https://duckduckgo.com/?q=%s+%%21ducky&kl=en-us"):format(query:gsub(" ", "+"))
@@ -221,6 +224,7 @@ keymap("n", "<leader>gg", function() require("funcs.git-utils").addCommitPush() 
 keymap("n", "<leader>gm", function() require("funcs.git-utils").amendNoEditPushForce() end, { desc = "󰊢 Amend-No-Edit & Force Push" })
 keymap("n", "<leader>gM", function() require("funcs.git-utils").amendAndPushForce() end, { desc = "󰊢 Amend & Force Push" })
 keymap({ "n", "x" }, "<leader>gu", function () require("funcs.git-utils").githubUrl() end, { desc = "󰊢 GitHub Link" })
+keymap("n", "<leader>gU", function () require("funcs.git-utils").githubUrl("repo") end, { desc = "󰊢 Open GitHub Repo" })
 
 -- Octo
 -- customize Octo layout: https://github.com/pwntester/octo.nvim/discussions/416#discussioncomment-6812002

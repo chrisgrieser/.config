@@ -227,35 +227,42 @@ end
 ---opens current buffer in the browser & copies the link to the clipboard
 ---normal mode: link to file
 ---visual mode: link to selected lines
-function M.githubUrl()
+---@param justOpenRepo any
+function M.githubUrl(justOpenRepo)
 	if not isInGitRepo() then return end
 
 	local filepath = fn.expand("%:p")
 	local gitroot = fn.system("git --no-optional-locks rev-parse --show-toplevel")
 	local pathInRepo = filepath:sub(#gitroot + 1)
+
 	local pathInRepoEncoded = pathInRepo:gsub("%s+", "%%20")
 	local remote = fn.system("git --no-optional-locks remote -v"):gsub(".*:(.-)%.git.*", "%1")
 	local hash = fn.system("git --no-optional-locks rev-parse HEAD"):gsub("\n$", "")
+	local branch = fn.system("git --no-optional-locks branch --show-current"):gsub("\n$", "")
 
 	local selStart = fn.line("v")
 	local selEnd = fn.line(".")
 	local isVisualMode = fn.mode():find("[Vv]")
+	local isNormalMode = fn.mode() == "n"
+	local url = "https://github.com/" .. remote
 
-	local location
-	if not isVisualMode then
-		location = "" -- link just the file itself
-	elseif selStart == selEnd then -- one-line-selection
-		location = "#L" .. tostring(selStart)
-	elseif selStart < selEnd then
-		location = "#L" .. tostring(selStart) .. "-L" .. tostring(selEnd)
-	else
-		location = "#L" .. tostring(selEnd) .. "-L" .. tostring(selStart)
+	if not justOpenRepo and isNormalMode then
+		url = url .. ("/blob/%s/%s"):format(branch, pathInRepoEncoded)
+	elseif not justOpenRepo and isVisualMode then
+		local location
+		if selStart == selEnd then -- one-line-selection
+			location = "#L" .. tostring(selStart)
+		elseif selStart < selEnd then
+			location = "#L" .. tostring(selStart) .. "-L" .. tostring(selEnd)
+		else
+			location = "#L" .. tostring(selEnd) .. "-L" .. tostring(selStart)
+		end
+
+		-- example: https://github.com/chrisgrieser/.config/blob/4cc310490c4492be3fe144d572635012813c7822/nvim/lua/config/textobject-keymaps.lua#L8-L20
+		url = url .. ("/blob/%s/%s%s"):format(hash, pathInRepoEncoded, location)
 	end
 
-	-- example: https://github.com/chrisgrieser/.config/blob/4cc310490c4492be3fe144d572635012813c7822/nvim/lua/config/textobject-keymaps.lua#L8-L20
-	local url = ("https://github.com/%s/blob/%s/%s%s"):format(remote, hash, pathInRepoEncoded, location)
-
-	os.execute("open '" .. url .. "'") -- open in browser (macOS cli)
+	vim.fn.system { "open", url } -- macOS cli
 	fn.setreg("+", url) -- copy to clipboard
 end
 

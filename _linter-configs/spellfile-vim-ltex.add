@@ -319,3 +319,5 @@ TSSERVER
 redeclare
 statusline
 LSPs
+mdformat
+cli
