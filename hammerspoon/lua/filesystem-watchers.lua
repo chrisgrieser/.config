@@ -65,7 +65,7 @@ SystemDlFolderWatcher = pw(systemDownloadFolder, function(files)
 		u.runWithDelays(1, function() os.rename(filePath, home .. "/.Trash/Stats.dmg") end)
 	end
 
-	-- otherwise move to filehub
+	-- otherwise move to file hub
 	os.execute("mv '" .. systemDownloadFolder .. "'/* '" .. env.fileHub .. "'")
 	print("➡️ Download moved to File Hub.")
 end):start()
@@ -74,10 +74,10 @@ end):start()
 -- FROM FILE HUB
 
 ---HACK works as only downloaded files get quarantined
----@param filep string
+---@param filepath string
 ---@return boolean whether the file exists
-local function fileIsDownloaded(filep)
-	local fileExists, msg = pcall(hs.fs.xattr.get, filep, "com.apple.quarantine")
+local function fileIsDownloaded(filepath)
+	local fileExists, msg = pcall(hs.fs.xattr.get, filepath, "com.apple.quarantine")
 	return fileExists and msg ~= nil
 end
 

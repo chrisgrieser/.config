@@ -73,10 +73,10 @@ local function telescopeConfig()
 				"%.plist$",
 			},
 			preview = {
-				timeout = 100, -- ms
+				timeout = 200, -- ms
 				filesize_limit = 0.3, -- in MB, do not preview big files for performance
 			},
-			path_display = { "tail" },
+			path_display = { "smart" },
 			borderchars = u.borderChars,
 			history = { path = u.vimDataDir .. "telescope_history" }, -- sync the history
 			default_mappings = { i = keymappings_I, n = keymappings_N },
@@ -165,8 +165,7 @@ local function telescopeConfig()
 			},
 			lsp_document_symbols = {
 				prompt_prefix = "󰒕 ",
-				-- markdown headings are symbol-type "string", therefore shouldn't be ignored
-				ignore_symbols = { "boolean", "number" },
+				ignore_symbols = { "boolean", "number", "string" },
 				fname_width = 12,
 			},
 			lsp_workspace_symbols = {
@@ -233,9 +232,9 @@ local function telescopeConfig()
 				previewer = false,
 				layout_config = {
 					horizontal = {
-						anchor = "W",
-						width = 0.45,
-						height = 0.6,
+						-- anchor = "W",
+						width = 0.5,
+						height = 0.55,
 					},
 				},
 			},
