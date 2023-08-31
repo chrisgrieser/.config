@@ -317,9 +317,10 @@ end, { desc = " Browse in Project" })
 
 -- stylua: ignore
 keymap( "n", "gO", function()
+	local parentFolder = expand("%:p:h")
 	require("telescope.builtin").find_files {
-		prompt_title = expand("%:p:h:t"),
-		path = expand("%:p:h"),
+		prompt_title = vim.fs.basename(parentFolder),
+		cwd = parentFolder,
 	}
 end, { desc = " Browse in current Folder" })
 

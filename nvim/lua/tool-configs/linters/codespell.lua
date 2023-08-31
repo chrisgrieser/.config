@@ -19,4 +19,5 @@ return {
 	lintIgnoreExitCode = true,
 	lintStdin = false,
 	lintFormats = { "%t %f:%l:%m" },
+	lintSeverity = vim.diagnostic.severity.INFO,
 }
