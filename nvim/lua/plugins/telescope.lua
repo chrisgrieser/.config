@@ -32,14 +32,34 @@ local keymappings_I = {
 		-- Copy path of file -- https://github.com/nvim-telescope/telescope-file-browser.nvim/issues/191
 		local path = require("telescope.actions.state").get_selected_entry().value
 		require("telescope.actions").close(prompt_bufnr)
-		local clipboardOpt = vim.opt.clipboard:get()
-		local useSystemClipb = #clipboardOpt > 0 and clipboardOpt[1]:find("unnamed")
-		local reg = useSystemClipb and "+" or '"'
-		vim.fn.setreg(reg, path)
+		vim.fn.setreg("+", path)
 		vim.notify("COPIED \n" .. path)
+	end,
+	["<C-n>"] = function(prompt_bufnr)
+		-- Copy name of file -- https://github.com/nvim-telescope/telescope-file-browser.nvim/issues/191
+		local path = require("telescope.actions.state").get_selected_entry().value
+		local name = vim.fs.basename(path)
+		require("telescope.actions").close(prompt_bufnr)
+		vim.fn.setreg("+", name)
+		vim.notify("COPIED \n" .. name)
+	end,
+	["<D-up>"] = function(prompt_bufnr)
+		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+		local currentPathObj = current_picker.finder.path
+		local currentPath = require("plenary.path"):new(currentPathObj):parent():absolute()
+		vim.notify("🪚 currentPath: " .. currentPath)
+		local parent_dir = vim.fs.dirname(currentPath)
+		vim.notify("🪚 parent_dir: " .. parent_dir)
+
+		require("telescope.actions").close(prompt_bufnr)
+		require("telescope.builtin").find_files {
+			prompt_title = vim.fs.basename(parent_dir),
+			cwd = parent_dir,
+		}
 	end,
 }
 
+-- add j/k to mappings if normal mode
 local keymappings_N = vim.deepcopy(keymappings_I)
 keymappings_N["j"] = "move_selection_worse"
 keymappings_N["k"] = "move_selection_better"
@@ -50,7 +70,6 @@ local function telescopeConfig()
 	-- https://github.com/nvim-telescope/telescope.nvim/issues/605
 	local deltaPreviewer = require("telescope.previewers").new_termopen_previewer {
 		get_command = function(entry)
-			-- we can't use pipes
 			-- stylua: ignore
 			return { "git", "-c", "core.pager=delta", "-c", "delta.side-by-side=false", "diff", entry.value .. "^!" }
 		end,
