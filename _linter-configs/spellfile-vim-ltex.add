@@ -337,3 +337,6 @@ gitignore
 cr
 prev
 md
+filtypes
+cody
+markdownlint

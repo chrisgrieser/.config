@@ -76,7 +76,12 @@ local function telescopeConfig()
 				timeout = 200, -- ms
 				filesize_limit = 0.3, -- in MB, do not preview big files for performance
 			},
-			path_display = { "smart" },
+			path_display = function(_, path)
+				local tail = vim.fs.basename(path)
+				local parent = vim.fs.basename(vim.fs.dirname(path))
+				if parent == "." then return tail end
+				return string.format("%s  (%s)", tail, parent)
+			end,
 			borderchars = u.borderChars,
 			history = { path = u.vimDataDir .. "telescope_history" }, -- sync the history
 			default_mappings = { i = keymappings_I, n = keymappings_N },
@@ -233,8 +238,8 @@ local function telescopeConfig()
 				layout_config = {
 					horizontal = {
 						-- anchor = "W",
-						width = 0.5,
-						height = 0.55,
+						width = 0.45,
+						height = 0.5,
 					},
 				},
 			},
