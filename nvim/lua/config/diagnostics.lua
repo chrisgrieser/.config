@@ -39,8 +39,8 @@ end
 vim.diagnostic.config {
 	virtual_text = {
 		format = diagnosticFmt,
-		severity = { min = vim.diagnostic.severity.WARN }, -- no text for hints
-		source = false, -- already handled by format function
+		severity = { min = vim.diagnostic.severity.INFO },
+		source = false, -- handled by my format function
 		spacing = 1,
 	},
 	float = {
