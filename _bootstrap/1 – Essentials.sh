@@ -76,6 +76,10 @@ done
 # zsh (ZDOTDIR set in .zshenv for the remaining config)
 ln -sf "$DOTFILE_FOLDER/zsh/.zshenv" ~
 
+# Fig
+ln -sf "$DOTFILE_FOLDER/fig/settings.json" ~/.fig/settings.json
+fig install --input-method
+
 # Espanso
 ESPANSO_DIR=~"/Library/Application Support/espanso"
 [[ -e "$ESPANSO_DIR" ]] && rm -rf "$ESPANSO_DIR"
