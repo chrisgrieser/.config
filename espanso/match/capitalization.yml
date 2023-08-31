@@ -1,8 +1,9 @@
 matches:
-  # INFO 
-  # not considering "s" as third letter to not trigger, e.g. "FRs"
-  # not considering "Z" as second letter to avoid trigger from using "ZZ" in vim
-  - regex: "\\b(?P<one>[A-Z])(?P<two>[A-Y])(?P<three>[a-prt-z])"
+  # INFO ignoring
+  # "s" as 3rd letter to not trigger, e.g. "FRs"
+  # "Z" as 2nd letter to avoid trigger from using "ZZ" in vim
+  # "J" and "K" as 2nd letter to not trigger in Obsidian Normal Mode
+  - regex: "\\b(?P<one>[A-Z])(?P<two>[A-IL-Y])(?P<three>[a-rt-z])"
     replace: "{{CapitalCased}}"
     vars:
       - name: CapitalCased
