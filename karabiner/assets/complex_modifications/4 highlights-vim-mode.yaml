@@ -109,11 +109,11 @@ rules:
       - type: basic
         from: { key_code: g, modifiers: { mandatory: [shift] } }
         to:
-          - { key_code: up_down, modifiers: [command] }
+          - { key_code: down_arrow, modifiers: [command] }
         conditions: [*highlights-app, *highlights-normal-mode]
       # h/l: back/forth in jump history
       - type: basic
-        from: { key_code: h, modifiers: { mandatory: [control] } }
+        from: { key_code: h }
         to:
           - shell_command: |
               osascript -e '
@@ -125,7 +125,7 @@ rules:
                 end tell'
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
-        from: { key_code: l, modifiers: { mandatory: [control] } }
+        from: { key_code: l }
         to:
           - shell_command: |
               osascript -e '
@@ -164,16 +164,8 @@ rules:
         to: [{ key_code: f }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
-        from: { key_code: h }
-        to: [{ key_code: h }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
-      - type: basic
         from: { key_code: i }
         to: [{ key_code: i }, *set-notice, *enter-insert-mode]
-        conditions: [*highlights-app, *highlights-normal-mode]
-      - type: basic
-        from: { key_code: l }
-        to: [{ key_code: l }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: m }
