@@ -261,10 +261,10 @@ nnoremap ww :duplicate
 " Visual Mode
 """"""""""""""""""""""
 
-" so VV... in normal mode selects more lines
+" so repeated "V" selects more lines
 vnoremap V j
 
-" so vv goes to visual block mode
+" so 2x v goes to visual block mode
 vnoremap v <C-v>
 
 """"""""""""""""""""""
