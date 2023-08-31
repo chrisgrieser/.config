@@ -9,8 +9,9 @@ local routes = {
 
 	-- nvim-treesitter
 	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
+	{ filter = { event = "msg_show", find = "All parsers are up-to-date!" }, view = "mini" },
 
-	-- Word added to spellfile via `zg`
+	-- Word added to spellfile via
 	{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
 
 	-- Mason

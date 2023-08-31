@@ -4,6 +4,7 @@
 local lintersAndFormatters = {
 	"codespell",
 	"yamllint",
+	"actionlint",
 	"shellcheck",
 	"shfmt",
 	"mdformat",
@@ -11,9 +12,11 @@ local lintersAndFormatters = {
 	"black",
 	"selene",
 	"stylua",
-	"actionlint",
 	"prettier", -- only yaml formatter preserving blank lines https://github.com/mikefarah/yq/issues/515
 	-- stylelint included in mason, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
+
+	-- TODO installing via MasonTools instead of mason-lspconfig, pending https://github.com/neovim/nvim-lspconfig/pull/2790
+	"biome",
 }
 
 --------------------------------------------------------------------------------
@@ -26,7 +29,7 @@ local setupEfmConfig = function()
 	local selene = require("efmls-configs.linters.selene")
 	local biome = require("efmls-configs.formatters.biome")
 	local shellharden = require("efmls-configs.formatters.shellharden")
-	local actionlint = require('efmls-configs.linters.actionlint')
+	local actionlint = require("efmls-configs.linters.actionlint")
 	local mdformat = require("efmls-configs.formatters.mdformat")
 
 	-- using my own, due to custom configs
@@ -98,7 +101,7 @@ return {
 			{
 				"<D-s>",
 				function()
-					vim.lsp.buf.format()
+					vim.lsp.buf.format() -- unwanted LSP-formatting already disabled in lsp-config.lua
 					vim.cmd.update()
 				end,
 				desc = "󰒕 Format & Save",

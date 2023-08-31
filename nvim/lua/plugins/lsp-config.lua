@@ -19,7 +19,7 @@ local lsp_servers = {
 	"emmet_ls", -- css & html completion
 	"pyright", -- python LSP
 	"jedi_language_server", -- python (has refactor code actions & better hovers)
-	"ruff_lsp", -- python linter, formatting capability needs to be provided via cli
+	"ruff_lsp", -- python
 	"marksman", -- markdown
 	"tsserver", -- ts/js
 	"bashls", -- also used for zsh
@@ -28,10 +28,8 @@ local lsp_servers = {
 	"html",
 	"ltex", -- latex/languagetool (requires `openjdk`)
 
-	-- TODO
-	-- pending: https://github.com/williamboman/mason.nvim/issues/1482
-	-- cannot use LSP for formatting: https://github.com/biomejs/biome/discussions/87
-	-- "biome",
+	-- TODO pending: https://github.com/neovim/nvim-lspconfig/pull/2790
+	-- "biome", -- ts/js/json, cannot use LSP for formatting, https://github.com/biomejs/biome/discussions/87
 }
 
 --------------------------------------------------------------------------------
@@ -289,18 +287,10 @@ return {
 		opts = { ensure_installed = lsp_servers },
 	},
 	{ -- configure LSPs
+	-- TODO using my fork until biome config is merged: https://github.com/neovim/nvim-lspconfig/pull/2790
 		"chrisgrieser/nvim-lspconfig",
-		dev = true,
-		init = function()
-			setupAllLsps()
-
-			-- TODO remove this once available in lspconfig/mason
-			-- TODO also change the dependency-repo name for other plugins.
-			-- pending: https://github.com/neovim/nvim-lspconfig/pull/2790
-			require("lspconfig").biome.setup {
-				capabilities = lspCapabilities,
-			}
-		end,
 		dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config
+		dev = true,
+		init = setupAllLsps,
 	},
 }
