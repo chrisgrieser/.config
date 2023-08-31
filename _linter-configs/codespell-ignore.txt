@@ -9,6 +9,7 @@ termine
 # too many false positives
 bu
 caf
+tre
 
 # vim command
 enew
