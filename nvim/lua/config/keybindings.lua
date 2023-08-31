@@ -204,7 +204,7 @@ keymap("c", "<BS>", function()
 	local cmdLine = vim.fn.getcmdline()
 	local cmdlineEmpty = cmdLine:find("^$")
 	local isIncRename = cmdLine:find("^IncRename $")
-	local isSubstitute = cmdLine:find("^s $")
+	local isSubstitute = cmdLine:find("^%%? ?s ?/$")
 	if cmdlineEmpty or isIncRename or isSubstitute then return end
 	return "<BS>"
 end, { desc = "Restricted <BS>", expr = true })

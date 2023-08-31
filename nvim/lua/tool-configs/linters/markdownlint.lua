@@ -1,4 +1,4 @@
-local linterConfig = require("config.utils").linterConfigFolder .. "/markdownlintrc"
+local linterConfig = require("config.utils").linterConfigFolder .. "/markdownlint.yaml"
 
 --------------------------------------------------------------------------------
 

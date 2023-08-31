@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 CONFIG_FILES=(
 	load_plugins
 	options_and_plugin_configs
@@ -35,3 +37,6 @@ done
 # remove last login message that some terminals leave
 # https://stackoverflow.com/a/69915614 
 [[ "$TERM_PROGRAM" == "WezTerm" ]] || printf '\33c\e[3J'
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
