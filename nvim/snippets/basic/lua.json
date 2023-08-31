@@ -71,15 +71,15 @@
 		]
 	},
 	"return end": {
-		"prefix": "return end",
+		"prefix": ["return end", "re"],
 		"body": "return end"
 	},
 	"then return end": {
-		"prefix": "then return end",
+		"prefix": ["then return end", "tre"],
 		"body": "then return end"
 	},
-	"string format": {
-		"prefix": "string format",
+	"format": {
+		"prefix": "format",
 		"body": "(\"$0%s\"):format(${1:var})"
 	},
 	"home": {
