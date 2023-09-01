@@ -67,11 +67,9 @@ opt.matchtime = 1 -- deci-seconds
 opt.clipboard = "unnamedplus"
 
 -- Spelling
-opt.spell = false
+opt.spell = false -- just using spellfile to quickly add words for ltex
 opt.spellfile = u.linterConfigFolder .. "/spellfile-vim-ltex.add" -- has to be `.add`
-opt.spelllang = "en_us"
-opt.spelloptions = { "camel", "noplainbuffer" }
-opt.spellcapcheck = "" 
+opt.spelllang = "en_us" -- still relevant for `z=`
 
 vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
 	callback = function()

@@ -111,7 +111,7 @@ exmap quickSwitcher obcommand obsidian-another-quick-switcher:search-command_rec
 nnoremap go :quickSwitcher
 nnoremap gr :quickSwitcher
 
-" 2-step links, roughly si ilar to LSP references
+" 2-step links, roughly similar to LSP references
 exmap linkedSearch obcommand obsidian-another-quick-switcher:search-command_2-step-link-search
 nnoremap gf :linkedSearch
 
