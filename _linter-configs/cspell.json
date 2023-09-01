@@ -1,0 +1,14 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words":
+    [
+      "mkdirp",
+      "tsmerge",
+      "githubusercontent",
+      "streetsidesoftware",
+      "vsmarketplacebadge",
+      "visualstudio"
+    ],
+  "flagWords": ["hte"]
+}

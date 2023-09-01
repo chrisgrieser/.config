@@ -205,14 +205,18 @@ local function telescopeConfig()
 				results_title = false,
 				previewer = false,
 				layout_config = {
-					horizontal = { width = 0.4, height = 0.5 },
+					horizontal = {
+						anchor = "W",
+						width = 0.4,
+						height = 0.5,
+					},
 				},
 			},
 			spell_suggest = {
 				initial_mode = "normal",
 				prompt_prefix = "󰓆",
-				theme = "cursor",
 				previewer = false,
+				theme = "cursor",
 				layout_config = { cursor = { width = 0.3 } },
 			},
 			colorscheme = {

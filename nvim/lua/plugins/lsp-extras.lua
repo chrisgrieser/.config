@@ -56,8 +56,6 @@ return {
 		"SmiteshP/nvim-navic",
 		event = "LspAttach", -- loading on `require` ignores the config, so loading on LspAttach
 		init = function()
-			-- vim.g.navic_silence = true -- suppress notifications on errors
-
 			vim.keymap.set("n", "^", function()
 				if not require("nvim-navic").is_available() then
 					vim.notify("Navic is not available.")
@@ -150,8 +148,12 @@ return {
 			-- if more than one file is changed, save all buffers
 			post_hook = function(results)
 				if not results.changes then return end
-				local filesChanged = #vim.tbl_keys(results.changes)
-				if filesChanged > 1 then vim.cmd.wall() end
+
+				local filesChang = #vim.tbl_keys(results.changes)
+				if filesChang > 1 then vim.cmd.wall() end
+
+				-- FIX making the cmdline-history not navigable, pending: https://github.com/smjonas/inc-rename.nvim/issues/40
+				vim.fn.histdel("cmd", "^IncRename ")
 			end,
 		},
 	},
