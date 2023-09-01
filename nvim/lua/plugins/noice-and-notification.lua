@@ -54,11 +54,11 @@ return {
 			cmdline = {
 				view = "cmdline", -- cmdline|cmdline_popup
 				format = {
-					search_down = { icon = "  ", view = "cmdline" }, -- FIX needed to be set explicitly
 					cmdline = { view = "cmdline_popup" },
+					search_down = { icon = "  ", view = "cmdline" }, -- FIX needed to be set explicitly
 					lua = { pattern = { "^:%s*lua%s+" }, view = "cmdline_popup"  }, -- show the `=`
+					help = { view = "cmdline_popup" },
 					IncRename = {
-						-- show at cursor
 						pattern = "^:IncRename ",
 						icon = " ",
 						conceal = true,

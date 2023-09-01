@@ -371,11 +371,10 @@ autocmd("LspAttach", {
 		-- stylua: ignore start
 		if capabilities.renameProvider then
 			-- needs defer to not be overwritten by treesitter-refactor smart-rename
-			vim.defer_fn( function() keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename", buffer = true }) end, 1)
+			keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename", buffer = true })
 			keymap("n", "<leader>V", function() return ":IncRename " .. expand("<cword>") end, { desc = "󰒕 IncRename (cword)", buffer = true, expr = true })
 		end
 		if capabilities.documentSymbolProvider then
-			-- overwrites treesitter goto-symbol
 			keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Symbols", buffer = true })
 			keymap("n", "gw", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true })
 		end
