@@ -58,19 +58,15 @@ return {
 	{
 		"mfussenegger/nvim-dap",
 		keys = {
-			-- INFO toggling breakpoints and "Continue" command also done via nvim-recorder
+			-- INFO toggling breakpoints and "Continue" command done via nvim-recorder
 			-- stylua: ignore start
-			{ "<leader>bb", function() require("dap").continue() end, desc = " Continue" },
 			{ "<leader>bc", function() require("dap").run_to_cursor() end, desc = " Run to Cursor" },
 			{ "<leader>bd", function() require("dap").clear_breakpoints() end, desc = "  Remove Breakpoints" },
 			{ "<leader>br", function() require("dap").restart() end, desc = " Restart" },
 			{ "<leader>bt", function() require("dap").terminate({}, {}, terminateCallback) end, desc = "  Terminate" },
 			-- stylua: ignore end
 		},
-		dependencies = {
-			"theHamsta/nvim-dap-virtual-text",
-			"jayp0521/mason-nvim-dap.nvim",
-		},
+		dependencies = { "theHamsta/nvim-dap-virtual-text", "jayp0521/mason-nvim-dap.nvim" },
 		init = function()
 			local ok, whichKey = pcall(require, "which-key")
 			if ok then whichKey.register { ["<leader>b"] = { name = "  Debugger" } } end
@@ -82,10 +78,7 @@ return {
 	},
 	{
 		"theHamsta/nvim-dap-virtual-text",
-		keys = {
-			{ "<leader>bv", function() vim.cmd.DapVirtualTextToggle() end, desc = " Toggle Virtual Text" },
-		},
-		opts = { only_first_definition = false },
+		opts = { only_first_definition = true },
 		init = function()
 			vim.api.nvim_create_autocmd("ColorScheme", {
 				callback = function()
@@ -94,11 +87,17 @@ return {
 			})
 		end,
 	},
-	{ "mfussenegger/nvim-dap-python" },
 	{
 		"rcarriga/nvim-dap-ui",
 		keys = {
 			{ "<leader>bu", function() require("dapui").toggle() end, desc = " Toggle DAP-UI" },
+			{ "<leader>bl", function() require("dapui").float_element("breakpoints") end, desc = " List Breakpoints" },
+			{
+				"<leader>bb",
+				function() require("dapui").eval() end,
+				mode = { "n", "x" },
+				desc = " Eval Expression",
+			},
 		},
 		opts = {
 			controls = { enabled = false },
@@ -106,16 +105,20 @@ return {
 			layouts = {
 				{
 					position = "right",
-					size = 40,
+					size = 35,
 					elements = {
-						{ id = "scopes", size = 0.5 },
-						{ id = "watches", size = 0.3 },
+						{ id = "scopes", size = 0.6 },
 						{ id = "stacks", size = 0.2 },
+						{ id = "repl", size = 0.2 },
 					},
 				},
 			},
 		},
 	},
+
+	-----------------------------------------------------------------------------
+
+	{ "mfussenegger/nvim-dap-python" },
 	{
 		"jbyuki/one-small-step-for-vimkind",
 		dependencies = "mfussenegger/nvim-dap",

@@ -1,4 +1,3 @@
-
 local numbers = { 1, 2, 3, 4, 5, 6 }
 local usedNumbers = {}
 local sum = 10
@@ -11,4 +10,5 @@ for _, v in ipairs(numbers) do
 
 	temp = vim.inspect(usedNumbers)
 	print(temp)
+	print("hi" .. tostring(v))
 end

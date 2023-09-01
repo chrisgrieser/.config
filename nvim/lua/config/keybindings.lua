@@ -232,6 +232,8 @@ keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " 󰽙 Bu
 -- stylua: ignore end
 keymap("n", "<C-w>h", "<cmd>split<CR>", { desc = " horizontal split" })
 keymap("n", "<C-w>v", "<cmd>vertical split<CR>", { desc = " vertical split" })
+keymap("n", "<C-w><C-h>", "<cmd>split<CR>", { desc = " horizontal split" })
+keymap("n", "<D-t>", "<cmd>tabedit %<CR>", { desc = "󰓩 New Tab" })
 
 keymap("n", "<C-Right>", "<cmd>vertical resize +3<CR>", { desc = " vertical resize (+)" })
 keymap("n", "<C-Left>", "<cmd>vertical resize -3<CR>", { desc = " vertical resize (-)" })
