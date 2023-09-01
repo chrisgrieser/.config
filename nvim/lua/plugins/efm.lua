@@ -9,7 +9,6 @@ local lintersAndFormatters = {
 	"black",
 	"selene",
 	"stylua",
-	"cspell",
 	"prettier", -- only yaml formatter preserving blank lines https://github.com/mikefarah/yq/issues/515
 	-- stylelint included in mason, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
 
@@ -32,7 +31,6 @@ local setupEfmConfig = function()
 	local mdformat = require("efmls-configs.formatters.mdformat")
 
 	-- using my own, due to custom configs
-	local cspell = require("tool-configs.linters.cspell")
 	local markdownlint = require("tool-configs.linters.markdownlint")
 	local shellcheck = require("tool-configs.linters.shellcheck")
 	local yamllint = require("tool-configs.linters.yamllint")
@@ -60,7 +58,6 @@ local setupEfmConfig = function()
 	for ft, _ in pairs(languages) do
 		if ft ~= "bib" and ft ~= "css" then
 			table.insert(languages[ft], codespell)
-			table.insert(languages[ft], cspell)
 		end
 	end
 

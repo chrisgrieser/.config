@@ -1035,7 +1035,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>config</key>
 			<dict>
 				<key>openwith</key>
-				<string></string>
+				<string>/System/Applications/TextEdit.app</string>
 				<key>sourcefile</key>
 				<string></string>
 			</dict>
