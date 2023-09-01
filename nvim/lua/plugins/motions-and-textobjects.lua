@@ -14,7 +14,7 @@ return {
 	},
 	{ -- better % (highlighting, matches across lines, match quotes)
 		"andymass/vim-matchup",
-		event = "BufReadPre", -- cannot load on key due to highlights
+		event = "UIEnter", -- cannot load on key due to highlights
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
 			vim.g.matchup_matchparen_offscreen = { method = "popup" } -- empty list to disable

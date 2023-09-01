@@ -97,7 +97,8 @@ local function telescopeConfig()
 				local tail = vim.fs.basename(path)
 				local parent = vim.fs.basename(vim.fs.dirname(path))
 				if parent == "." then return tail end
-				return string.format("%s  (%s)", tail, parent)
+				-- return string.format("%s  %s", tail, u.smallCaps(parent))
+				return string.format("%s  %s", tail, parent)
 			end,
 			borderchars = u.borderChars,
 			history = { path = u.vimDataDir .. "telescope_history" }, -- sync the history

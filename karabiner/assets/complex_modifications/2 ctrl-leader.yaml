@@ -92,7 +92,7 @@ rules:
           - shell_command: open -a 'System Preferences'
           - *deactivate-leader
           - *remove-notice
-      # [O]bsidian
+      # [O] Obsidian
       - type: basic
         from: { key_code: o }
         conditions: [*leader-active]
@@ -100,7 +100,7 @@ rules:
           - shell_command: open -a 'Obsidian'
           - *deactivate-leader
           - *remove-notice
-      # [D]iscord
+      # [D] Discord
       - type: basic
         from: { key_code: d }
         conditions: [*leader-active]
@@ -108,7 +108,7 @@ rules:
           - shell_command: open -a 'Discord'
           - *deactivate-leader
           - *remove-notice
-      # [Z]oom
+      # [z] Zoom
       - type: basic
         # switched y and z due to German Keyboard
         from: { key_code: "y" }
@@ -117,12 +117,12 @@ rules:
           - shell_command: open -a 'zoom.us'
           - *deactivate-leader
           - *remove-notice
-      # [n]eovide
+      # [n] Neovide
       - type: basic
         from: { key_code: "n" }
         conditions: [*leader-active]
         to:
-          - shell_command: open -a 'Neovide'
+          - shell_command: osascript -e 'tell application "Neovide" to activate'
           - *deactivate-leader
           - *remove-notice
       # [S]lack
@@ -141,7 +141,7 @@ rules:
           - shell_command: open -a 'Script Editor'
           - *deactivate-leader
           - *remove-notice
-      # [m]imestream
+      # [m] Mail
       - type: basic
         from: { key_code: m }
         conditions: [*leader-active]
@@ -149,7 +149,7 @@ rules:
           - shell_command: source $HOME/.zshenv && open -a "$MAIL_APP"
           - *deactivate-leader
           - *remove-notice
-      # [b]rowser
+      # [b] Browser
       - type: basic
         from: { key_code: b }
         conditions: [*leader-active]
@@ -157,7 +157,7 @@ rules:
           - shell_command: source $HOME/.zshenv && open -a "$BROWSER_APP"
           - *deactivate-leader
           - *remove-notice
-      # [B]rowser & re-open last tab (shift)
+      # [B] Browser & re-open last tab (shift)
       - type: basic
         from: { key_code: b, modifiers: { mandatory: [shift] } }
         conditions: [*leader-active]
@@ -322,7 +322,7 @@ rules:
           - shell_command: wezterm -e ipython
           - *deactivate-leader
           - *remove-notice
-      # [i]: Transm[i]ssion
+      # [i]: Transmission
       - type: basic
         from: { key_code: i }
         conditions: [*leader-active]
