@@ -49,13 +49,14 @@ return {
 			require("lualine").setup {
 				tabline = { lualine_z = lualineZ },
 			}
+			require("config.theme-customization").reloadTheming()
 		end,
 	},
 	{ -- structural search & replace
 		"cshuaimin/ssr.nvim",
 		keys = {
 			-- stylua: ignore
-			{ "<leader>fs", function() require("ssr").open() end, mode = { "n", "x" }, desc = "󱗘 Structural S&R" },
+			{ "<leader>fs", function() require("ssr").open() end, mode = { "n", "x" }, desc = "󰔶 Structural Replace" },
 		},
 		opts = { border = require("config.utils").borderStyle },
 		config = function()
@@ -69,7 +70,7 @@ return {
 		"gabrielpoca/replacer.nvim",
 		opts = { rename_files = false },
 		keys = {
-			{ "<leader>fq", function() require("replacer").run() end, desc = "󱗘  replacer.nvim" },
+			{ "<leader>fq", function() require("replacer").run() end, desc = " replacer" },
 		},
 		init = function()
 			vim.api.nvim_create_autocmd("FileType", {
@@ -90,8 +91,8 @@ return {
 		keys = {
 			-- stylua: ignore start
 			{"<leader>fi", function() require("refactoring").refactor("Inline Variable") end, mode = {"n", "x"}, desc = "󱗘 Inline Var" },
-			{"<leader>fe", function() require("refactoring").refactor("Extract Variable") end, mode = {"x"}, desc = "󱗘 Extract Var" },
-			{"<leader>fu", function() require("refactoring").refactor("Extract Function") end, mode = {"x"}, desc = "󱗘 Extract Func" },
+			{"<leader>fe", function() require("refactoring").refactor("Extract Variable") end, mode = "x", desc = "󱗘 Extract Var" },
+			{"<leader>fu", function() require("refactoring").refactor("Extract Function") end, mode = "x", desc = "󱗘 Extract Func" },
 			-- stylua: ignore end
 		},
 	},
@@ -132,11 +133,9 @@ return {
 			})
 
 			require("lualine").setup {
-				tabline = {
-					lualine_y = lualineY,
-					lualine_z = lualineZ,
-				},
+				tabline = { lualine_y = lualineY, lualine_z = lualineZ },
 			}
+			require("config.theme-customization").reloadTheming()
 		end,
 	},
 }

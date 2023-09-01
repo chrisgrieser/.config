@@ -28,6 +28,7 @@ local function dapLualine()
 	require("lualine").setup {
 		tabline = { lualine_y = lualineY, lualine_z = lualineZ },
 	}
+	require("config.theme-customization").reloadTheming()
 end
 
 local function dapSigns()
@@ -51,7 +52,7 @@ end
 --------------------------------------------------------------------------------
 
 -- TODO https://github.com/mfussenegger/nvim-dap-python
-
+-- { "mfussenegger/nvim-dap-python" },
 --------------------------------------------------------------------------------
 
 return {
@@ -129,7 +130,6 @@ return {
 
 	-----------------------------------------------------------------------------
 
-	{ "mfussenegger/nvim-dap-python" },
 	{
 		"jbyuki/one-small-step-for-vimkind",
 		dependencies = "mfussenegger/nvim-dap",
