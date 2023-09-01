@@ -35,12 +35,23 @@ end
 
 local function dapSigns()
 	local sign = vim.fn.sign_define
-	sign("DapBreakpoint", { text = "", texthl = "DiagnosticHint" })
-	sign("DapBreakpointCondition", { text = "", texthl = "DiagnosticHint" })
-	sign("DapLogPoint", { text = "󰍨", texthl = "DiagnosticHint" })
-	sign("DapStopped", { text = "", texthl = "DiagnosticInfo" })
+	sign("DapBreakpoint", { text = "", texthl = "DiagnosticInfo" })
+	sign("DapBreakpointCondition", { text = "", texthl = "DiagnosticInfo" })
+	sign("DapLogPoint", { text = "󰍨", texthl = "DiagnosticInfo" })
+	sign("DapStopped", { text = "", texthl = "DiagnosticHint" })
 	sign("DapBreakpointRejected", { text = "", texthl = "DiagnosticError" })
 end
+
+local function setupAdapters()
+	local dap = require("dap")
+	dap.configurations.lua = {
+		{ type = "nlua", request = "attach", name = "Attach to running Neovim instance" },
+	}
+	dap.adapters.nlua = function(callback, config)
+		callback { type = "server", host = config.host or "127.0.0.1", port = config.port or 8086 }
+	end
+end
+
 --------------------------------------------------------------------------------
 
 -- TODO https://github.com/mfussenegger/nvim-dap-python
@@ -51,50 +62,45 @@ return {
 	{
 		"mfussenegger/nvim-dap",
 		keys = {
-			-- INFO toggling breakpoints and "Continue" command done via nvim-recorder
+			-- INFO toggling breakpoints and "Continue" command also done via nvim-recorder
+			-- stylua: ignore start
 			{ "<leader>bu", function() require("dapui").toggle() end, desc = " Toggle DAP-UI" },
 			{ "<leader>bb", function() require("dapui").continue() end, desc = " Continue" },
-			{ "<leader>bv", function() require("dap").step_over() end, desc = " Step Over" },
-			{ "<leader>bo", function() require("dap").step_out() end, desc = " Step Out" },
-			{ "<leader>bi", function() require("dap").step_into() end, desc = " Step Into" },
-			{ "<leader>bc", function() require("dap").run_to_cursor() end, desc = " Run to Cursor" },
-			{
-				"<leader>br",
-				function() require("dap").clear_breakpoints() end,
-				desc = "  Remove Breakpoints",
-			},
-			{
-				"<leader>bq",
-				function() require("dap").list_breakpoints() end,
-				desc = "  Breakpoints to QuickFix",
-			},
-			{
-				"<leader>bt",
-				function()
-					vim.opt_local.number = false
-					require("dapui").close()
-					require("dap").terminate()
-				end,
-				desc = "  Terminate",
-			},
+			{ "<leader>bd", function() require("dap").clear_breakpoints() end, desc = "  Remove Breakpoints" },
+			{ "<leader>br", function() require("dap").restart() end, desc = " Restart" },
+			{ "<leader>bt", function() require("dap").terminate() end, desc = "  Terminate" },
+			-- stylua: ignore end
 		},
 		dependencies = {
-			{
-				"jayp0521/mason-nvim-dap.nvim",
-				opts = { ensure_installed = { "python" } }, -- installs `debugypy`
-			},
-			{ "mfussenegger/nvim-dap-python" },
-			{ "theHamsta/nvim-dap-virtual-text", opts = true },
-			{ "rcarriga/nvim-dap-ui", opts = true },
+			"jayp0521/mason-nvim-dap.nvim",
+			"mfussenegger/nvim-dap-python",
+			"theHamsta/nvim-dap-virtual-text",
+			"rcarriga/nvim-dap-ui",
 		},
 		init = function()
 			local ok, whichKey = pcall(require, "which-key")
 			if ok then whichKey.register { ["<leader>b"] = { name = "  Debugger" } } end
 		end,
 		config = function()
+			setupAdapters()
 			dapLualine()
 			dapSigns()
 		end,
+	},
+	{
+		"theHamsta/nvim-dap-virtual-text",
+		opts = { only_first_definition = false },
+		init = function()
+			vim.api.nvim_create_autocmd("ColorScheme", {
+				callback = function()
+					vim.api.nvim_set_hl(0, "NvimDapVirtualText", { link = "DiagnosticVirtualTextInfo" })
+				end,
+			})
+		end,
+	},
+	{
+		"rcarriga/nvim-dap-ui",
+		opts = true,
 	},
 	{
 		"jbyuki/one-small-step-for-vimkind",
@@ -111,17 +117,8 @@ return {
 					end
 					require("osv").run_this()
 				end,
-				desc = "  Start nvim-lua debugger",
+				desc = "  nvim-lua debugger",
 			},
 		},
-		config = function()
-			local dap = require("dap")
-			dap.configurations.lua = {
-				{ type = "nlua", request = "attach", name = "Attach to running Neovim instance" },
-			}
-			dap.adapters.nlua = function(callback, config)
-				callback { type = "server", host = config.host or "127.0.0.1", port = config.port or 8086 }
-			end
-		end,
 	},
 }

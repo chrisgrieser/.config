@@ -89,8 +89,6 @@ function M.toggleCase()
 	end
 end
 
-M.toggleCase()
-
 function M.openNewScope()
 	local line = vim.api.nvim_get_current_line()
 	local trailComma = line:match(",?$")
