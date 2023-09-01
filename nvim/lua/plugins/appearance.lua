@@ -6,8 +6,23 @@ local u = require("config.utils")
 return {
 	{ -- always show matchparens
 		"utilyre/sentiment.nvim",
-		event = "VeryLazy",
+		event = "CursorMoved",
 		opts = true,
+	},
+	{
+		"tzachar/local-highlight.nvim",
+		event = "BufReadPost", -- later would not affect first buffer
+		opts = true,
+		init = function()
+			vim.api.nvim_create_autocmd("ColorScheme", {
+				callback = function() vim.api.nvim_set_hl(0, "LocalHighlight", { underdotted = true }) end,
+			})
+		end,
+	},
+	{
+		"sunjon/shade.nvim",
+		event = "VeryLazy",
+		opts = { overlayOcacity = 50 },
 	},
 	{ -- scrollbar with information
 		"lewis6991/satellite.nvim",

@@ -5,10 +5,11 @@ local wf = require("lua.utils").wf
 local aw = require("lua.utils").aw
 --------------------------------------------------------------------------------
 
----play/pause spotify with Spotify
+---play/pause spotify
 ---@param toStatus string pause|play
 local function spotifyDo(toStatus)
 	-- stylua: ignore start
+	---@diagnostic disable-next-line: undefined-field
 	local currentStatus = hs.execute(u.exportPath .. "spt playback --status --format=%s"):gsub("\n$", "")
 	if
 		(currentStatus == "▶️" and toStatus == "pause")
@@ -67,20 +68,18 @@ end)
 
 Wf_finder = wf.new("Finder")
 	:setOverrideFilter({
-		rejectTitles = {
-			"^Move$",
-			"^Copy$",
-			"^Delete$",
-			"^Finder Settings$",
-			" Info$", -- Info window *end* with "Info"
-			"^Alfred$", -- Alfred Compatibility Mode
-		},
+		-- Info windows *end* with "Info"
+		rejectTitles = { "^Move$", "^Copy$", "^Delete$", "^Finder Settings$", " Info$" },
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
 	:subscribe(wf.windowCreated, function(win)
-		if not (win:isMaximizable() and win:isStandard() and u.app("Finder"):isFrontmost()) then return end
-		u.runWithDelays(0.05, function() wu.autoTile(Wf_finder) end)
+		local winOnMainScreen = win:screen():id() == hs.screen.mainScreen():id()
+		if env.isProjector() and winOnMainScreen then
+			wu.moveResize(win, wu.maximized)
+		elseif win:isMaximizable() and win:isStandard() and u.app("Finder"):isFrontmost() then
+			u.runWithDelays(0.05, function() wu.autoTile(Wf_finder) end)
+		end
 	end)
 	:subscribe(wf.windowDestroyed, function()
 		-- no conditions, since destroyed windows do not have those properties
@@ -109,7 +108,7 @@ Wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function()
 		local zoom = u.app("zoom.us")
 		if not zoom or zoom:findWindow("Update") then return end
 		local secondWin = zoom:findWindow("^Zoom$") or zoom:findWindow("^Login$")
-		-- zoom always has an invisible, titleless third window running, therefore
+		-- zoom always has an invisible, title-less third window running, therefore
 		-- three
 		if not secondWin or #Wf_zoom:getWindows() < 3 then return end
 		secondWin:close()
@@ -151,6 +150,7 @@ TransmissionWatcher = aw.new(function(appName, event)
 		local visibleWins = hs.window:orderedWindows()
 		local nextWin
 		for _, win in pairs(visibleWins) do
+			---@diagnostic disable-next-line: undefined-field
 			local name = win:application():name()
 			if not (u.tbl_contains(fallThroughApps, name)) then
 				nextWin = win

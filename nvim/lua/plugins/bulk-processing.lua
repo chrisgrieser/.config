@@ -63,21 +63,6 @@ return {
 			})
 		end,
 	},
-	{ -- highlight word under cursor & batch renamer
-		"nvim-treesitter/nvim-treesitter-refactor",
-		event = "BufReadPre",
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		init = function()
-			vim.api.nvim_create_autocmd("ColorScheme", {
-				callback = function()
-					-- Terminal does not support underdotted
-					local strokeType = vim.fn.has("gui_running") == 1 and "underdotted" or "underline"
-					vim.api.nvim_set_hl(0, "TSDefinition", { [strokeType] = true })
-					vim.api.nvim_set_hl(0, "TSDefinitionUsage", { [strokeType] = true })
-				end,
-			})
-		end,
-	},
 	{ -- editable quickfix list
 		"gabrielpoca/replacer.nvim",
 		opts = { rename_files = false },

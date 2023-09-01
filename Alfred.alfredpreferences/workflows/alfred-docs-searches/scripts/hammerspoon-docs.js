@@ -28,13 +28,14 @@ function readFile(path) {
 function run() {
 	// run `hs.docstrings_json_file` in hammerspoon console to get the docs path
 	const hammerspoonDocsJson = "/Applications/Hammerspoon.app/Contents/Resources/docs.json";
-	const workArray = [];
+	const sites = [];
+
 	const categoryArr = JSON.parse(readFile(hammerspoonDocsJson));
 
 	categoryArr.forEach((/** @type {{ items: any[]; name: string; desc: string; }} */ category) => {
 		const children = category.items.length;
 		// categories
-		workArray.push({
+		sites.push({
 			title: category.name,
 			subtitle: `${children} ▪︎ ${category.desc}`,
 			match: alfredMatcher(category.name),
@@ -45,7 +46,7 @@ function run() {
 		// category items
 		category.items.forEach((catItem) => {
 			const shortdef = catItem.def.split("->")[0].trim();
-			workArray.push({
+			sites.push({
 				title: catItem.def,
 				subtitle: catItem.desc,
 				match: alfredMatcher(shortdef),
@@ -54,14 +55,12 @@ function run() {
 			});
 		});
 	});
-	workArray.push({
+	sites.push({
 		title: "Getting Started",
 		match: "getting started examples",
 		arg: "https://www.hammerspoon.org/go/",
 		uid: "getting-started",
 	});
 
-	workArray.reverse(); // so main categories are ranked further above
-
-	return JSON.stringify({ items: workArray });
+	return JSON.stringify({ items: sites });
 }
