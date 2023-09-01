@@ -99,7 +99,7 @@ local function hlTooLongCommitMsgs(on)
 			group = "tooLongCommitMsg",
 			pattern = "DressingInput",
 			callback = function()
-				vim.g.matchid = fn.matchadd("commitmsg", [[.\{50}\zs.*\ze]])
+				vim.g.hlTooLongMatchId = fn.matchadd("commitmsg", [[.\{50}\zs.*\ze]])
 				vim.opt_local.colorcolumn = "50"
 				vim.cmd.highlight("commitmsg", "guibg=#E06C75")
 			end,
@@ -108,7 +108,7 @@ local function hlTooLongCommitMsgs(on)
 		-- clear the previously setup hl again, so other Input fields are not affected
 		-- also done early, so the highlight is even deleted on aborting the input
 		vim.api.nvim_del_augroup_by_name("tooLongCommitMsg")
-		pcall(function() fn.matchdelete(vim.g.matchid) end)
+		pcall(function() fn.matchdelete(vim.g.hlTooLongMatchId) end)
 	end
 end
 

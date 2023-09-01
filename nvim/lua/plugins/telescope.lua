@@ -73,8 +73,25 @@ local function telescopeConfig()
 		end,
 	}
 
+	-- color parent differently
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = "TelescopeResults",
+		callback = function()
+			vim.fn.matchadd("TelescopeParent", "   .*$")
+			vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
+		end,
+	})
+
 	require("telescope").setup {
 		defaults = {
+			path_display = function(_, path)
+				-- "filename   parentBase"
+				-- parent is colored as a comment via autocmd further above
+				local tail = vim.fs.basename(path)
+				local parentBase = vim.fs.basename(vim.fs.dirname(path))
+				if parentBase == "." then return tail end
+				return string.format("%s   %s", tail, parentBase)
+			end,
 			selection_caret = "󰜋 ",
 			prompt_prefix = "❱ ",
 			multi_icon = "󰒆 ",
@@ -93,13 +110,6 @@ local function telescopeConfig()
 				timeout = 200, -- ms
 				filesize_limit = 0.3, -- in MB, do not preview big files for performance
 			},
-			path_display = function(_, path)
-				local tail = vim.fs.basename(path)
-				local parent = vim.fs.basename(vim.fs.dirname(path))
-				if parent == "." then return tail end
-				-- return string.format("%s  %s", tail, u.smallCaps(parent))
-				return string.format("%s  %s", tail, parent)
-			end,
 			borderchars = u.borderChars,
 			history = { path = u.vimDataDir .. "telescope_history" }, -- sync the history
 			default_mappings = { i = keymappings_I, n = keymappings_N },

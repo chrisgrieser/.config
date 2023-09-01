@@ -62,7 +62,7 @@ local setupEfmConfig = function()
 	for ft, _ in pairs(languages) do
 		if ft ~= "bib" and ft ~= "css" then
 			table.insert(languages[ft], codespell)
-			-- table.insert(languages[ft], cspell)
+			table.insert(languages[ft], cspell)
 		end
 	end
 
