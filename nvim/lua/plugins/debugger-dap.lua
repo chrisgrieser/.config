@@ -53,6 +53,7 @@ return {
 		keys = {
 			-- INFO toggling breakpoints and "Continue" command done via nvim-recorder
 			{ "<leader>bu", function() require("dapui").toggle() end, desc = " Toggle DAP-UI" },
+			{ "<leader>bb", function() require("dapui").continue() end, desc = " Continue" },
 			{ "<leader>bv", function() require("dap").step_over() end, desc = " Step Over" },
 			{ "<leader>bo", function() require("dap").step_out() end, desc = " Step Out" },
 			{ "<leader>bi", function() require("dap").step_into() end, desc = " Step Into" },
