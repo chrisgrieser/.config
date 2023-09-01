@@ -62,7 +62,9 @@ local function themeModifications()
 		for _, v in pairs(vimModes) do
 			updateHighlight("lualine_y_diff_modified_" .. v, "guifg=#acaa62")
 			updateHighlight("lualine_y_diff_added_" .. v, "guifg=#369a96")
+			updateHighlight("lualine_a_" .. v, "gui=bold")
 			vim.defer_fn(function() updateHighlight("lualine_a_" .. v, "gui=bold") end, 100)
+			vim.defer_fn(function() updateHighlight("lualine_a_" .. v, "gui=bold") end, 400)
 		end
 		updateHighlight("GitSignsChange", "guifg=#acaa62")
 		updateHighlight("GitSignsAdd", "guifg=#369a96")

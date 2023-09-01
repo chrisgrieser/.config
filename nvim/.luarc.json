@@ -7,6 +7,5 @@
 		"/Users/chrisgrieser/.config/nvim/lua",
 		"/Users/chrisgrieser/.local/share/nvim/mason/packages/lua-language-server/libexec/meta/5c38dea0"
 	],
-	"workspace.checkThirdParty": false,
-	"diagnostics.disable": ["trailing-space"]
+	"workspace.checkThirdParty": false
 }

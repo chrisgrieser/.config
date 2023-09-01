@@ -81,13 +81,15 @@ function M.toggleCase()
 	local isLetter = charUnderCursor:find("^%a$")
 	if isLetter then
 		normal("~h")
-	else
-		for left, right in pairs(toggleSigns) do
-			if charUnderCursor == left then normal("r" .. right) end
-			if charUnderCursor == right then normal("r" .. left) end
-		end
+		return
+	end
+	for left, right in pairs(toggleSigns) do
+		if charUnderCursor == left then normal("r" .. right) end
+		if charUnderCursor == right then normal("r" .. left) end
 	end
 end
+
+M.toggleCase()
 
 function M.openNewScope()
 	local line = vim.api.nvim_get_current_line()
