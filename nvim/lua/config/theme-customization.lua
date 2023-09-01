@@ -47,9 +47,6 @@ local function customHighlights()
 		updateHighlight(type .. "Text", "gui=underdouble cterm=underline")
 		updateHighlight("DiagnosticUnderline" .. type, "gui=underdouble cterm=underline")
 	end
-	for _, type in pairs { "Bad", "Cap", "Rare", "Local" } do
-		updateHighlight("Spell" .. type, "gui=underdouble cterm=underline")
-	end
 end
 
 local function themeModifications()
@@ -65,7 +62,7 @@ local function themeModifications()
 		for _, v in pairs(vimModes) do
 			updateHighlight("lualine_y_diff_modified_" .. v, "guifg=#acaa62")
 			updateHighlight("lualine_y_diff_added_" .. v, "guifg=#369a96")
-			updateHighlight("lualine_a_" .. v, "gui=bold")
+			vim.defer_fn(function() updateHighlight("lualine_a_" .. v, "gui=bold") end, 100)
 		end
 		updateHighlight("GitSignsChange", "guifg=#acaa62")
 		updateHighlight("GitSignsAdd", "guifg=#369a96")
@@ -128,10 +125,8 @@ end
 autocmd("ColorScheme", {
 	callback = function()
 		-- defer needed for some modifications to properly take effect
-		for _, delayMs in pairs { 50, 400 } do
-			vim.defer_fn(themeModifications, delayMs)
-			vim.defer_fn(customHighlights, delayMs)
-		end
+		themeModifications()
+		customHighlights()
 	end,
 })
 
