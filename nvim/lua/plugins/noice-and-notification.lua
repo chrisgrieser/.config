@@ -72,7 +72,7 @@ return {
 					},
 					substitute = {
 						view = "cmdline_popup" ,
-						pattern = { "^:%%? ?s" },
+						pattern = { "^:%%? ?s ", "^:'<,'> ?s " },
 						icon = " ",
 						conceal = true,
 					},

@@ -6,8 +6,9 @@ return {
 	{ -- Multi Cursor
 		"mg979/vim-visual-multi",
 		keys = {
-			{ "<D-j>", mode = { "n", "x" }, desc = "󰆿 Multi-Cursor" },
-			{ "<D-a>", mode = { "n", "x" }, desc = "󰆿 Multi-Cursor" },
+			{ "<D-j>", mode = { "n", "x" }, desc = "󰆿 Multi-Cursor (Cursor Word)" },
+			{ "<D-a>", mode = { "n", "x" }, desc = "󰆿 Multi-Cursor (All)" },
+			{ "<D-down>", desc = "󰆿 Multi-Cursor (Down)" },
 		},
 		init = function()
 			vim.g.VM_set_statusline = 0 -- already using my version via lualine component
@@ -22,6 +23,7 @@ return {
 				["Visual Add"] = "<D-j>",
 				["Select All"] = "<D-a>",
 				["Visual All"] = "<D-a>",
+				["Add Cursor Down"] = "<D-down>",
 
 				-- Visual-Multi-Mode Mappings
 				["Find Next"] = "y", -- [y]es & find next

@@ -68,6 +68,41 @@ function M.applyTemplateIfEmptyFile(ext)
 	end, 1)
 end
 
+-- turns string into unicode smallcaps
+function M.smallCaps(str)
+	local smallCapsMap = {
+		ᴀ = "a",
+		ʙ = "b",
+		ᴄ = "c",
+		ᴅ = "d",
+		ᴇ = "e",
+		ғ = "f",
+		ɢ = "g",
+		ʜ = "h",
+		ɪ = "i",
+		ᴊ = "j",
+		ᴋ = "k",
+		ʟ = "l",
+		ᴍ = "m",
+		ɴ = "n",
+		ᴏ = "o",
+		ᴘ = "p",
+		ǫ = "q",
+		ʀ = "r",
+		s = "s",
+		ᴛ = "t",
+		ᴜ = "u",
+		ᴠ = "v",
+		ᴡ = "w",
+		x = "x",
+		ʏ = "y",
+		ᴢ = "z",
+	}
+	for i = 1, 10, 1 do
+		
+	end
+end
+
 --------------------------------------------------------------------------------
 
 ---Sets the global BorderStyle variable and the matching BorderChars Variable.
@@ -88,13 +123,15 @@ elseif M.borderStyle == "rounded" then
 	M.borderHorizontal = "─"
 end
 
+--------------------------------------------------------------------------------
+
 M.textobjectRemaps = {
-	c = "}", -- [c]urly brace
-	r = "]", -- [r]ectangular bracket
-	m = "W", -- [m]assive word
-	q = '"', -- [q]uote
-	z = "'", -- [z]ingle quote
-	e = "`", -- t[e]mplate string / inline cod[e]
+	c = "}", -- curly brace
+	r = "]", -- rectangular bracket
+	m = "W", -- massive word
+	q = '"', -- quote
+	z = "'", -- single quote
+	e = "`", -- template string / inline cod[e]
 }
 
 M.textobjectMaps = {
