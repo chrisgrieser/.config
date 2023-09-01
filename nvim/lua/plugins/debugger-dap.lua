@@ -51,7 +51,7 @@ return {
 	{
 		"mfussenegger/nvim-dap",
 		keys = {
-			-- INFO toggling breakpoints done via nvim-recorder
+			-- INFO toggling breakpoints and "Continue" command done via nvim-recorder
 			{ "<leader>bu", function() require("dapui").toggle() end, desc = " Toggle DAP-UI" },
 			{ "<leader>bv", function() require("dap").step_over() end, desc = " Step Over" },
 			{ "<leader>bo", function() require("dap").step_out() end, desc = " Step Out" },
@@ -110,7 +110,7 @@ return {
 					end
 					require("osv").run_this()
 				end,
-				{ desc = "  Start nvim-lua debugger" },
+				desc = "  Start nvim-lua debugger",
 			},
 		},
 		config = function()

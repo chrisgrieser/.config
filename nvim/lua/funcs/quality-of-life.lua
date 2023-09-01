@@ -72,6 +72,9 @@ function M.commentHr()
 	end
 end
 
+-- Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum
+-- sint consectetur cupidatat.
+
 function M.toggleCase()
 	local col = vim.fn.col(".") -- fn.col correctly considers tab-indentation
 	local charUnderCursor = vim.api.nvim_get_current_line():sub(col, col)
