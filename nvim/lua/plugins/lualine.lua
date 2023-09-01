@@ -189,7 +189,7 @@ local lualineConfig = {
 		-- INFO dap and recording status defined in the respective plugin configs
 		-- for lualine_y and lualine_z for their lazy loading
 		lualine_y = {
-			{ markM },
+			{ markM, section_separators = topSeparators },
 		},
 		lualine_z = {},
 	},
