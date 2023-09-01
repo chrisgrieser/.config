@@ -6,7 +6,7 @@ local u = require("config.utils")
 return {
 	{ -- always show matchparens
 		"utilyre/sentiment.nvim",
-		event = "CursorMoved",
+		event = "VeryLazy",
 		opts = true,
 	},
 	{ -- highlight word under cursor & batch renamer
