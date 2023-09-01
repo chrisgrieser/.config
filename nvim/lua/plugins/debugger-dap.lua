@@ -6,30 +6,27 @@ local function dapLualine()
 	local lualineZ = require("lualine").get_config().tabline.lualine_z or {}
 	table.insert(lualineY, {
 		function()
-			local breakpoints = require("dap.breakpoints").get()
-			local breakpointSum = 0
-			for buf, _ in pairs(breakpoints) do
-				breakpointSum = breakpointSum + #breakpoints[buf]
-			end
-			if breakpointSum == 0 then return "" end
-			return "   " .. tostring(breakpointSum)
-		end,
-		section_separators = topSeparators,
-	})
-	table.insert(lualineZ, {
-		function()
 			local dapStatus = require("dap").status()
 			if dapStatus ~= "" then dapStatus = "  " .. dapStatus end
 			return dapStatus
 		end,
 		section_separators = topSeparators,
 	})
+	table.insert(lualineZ, {
+		function()
+			local breakpoints = require("dap.breakpoints").get()
+			local breakpointSum = 0
+			for buf, _ in pairs(breakpoints) do
+				breakpointSum = breakpointSum + #breakpoints[buf]
+			end
+			if breakpointSum == 0 then return "" end
+			return " " .. tostring(breakpointSum)
+		end,
+		section_separators = topSeparators,
+	})
 
 	require("lualine").setup {
-		tabline = {
-			lualine_y = lualineY,
-			lualine_z = lualineZ,
-		},
+		tabline = { lualine_y = lualineY, lualine_z = lualineZ },
 	}
 end
 
@@ -38,14 +35,17 @@ local function dapSigns()
 	sign("DapBreakpoint", { text = "", texthl = "DiagnosticInfo" })
 	sign("DapBreakpointCondition", { text = "", texthl = "DiagnosticInfo" })
 	sign("DapLogPoint", { text = "󰍨", texthl = "DiagnosticInfo" })
-	sign("DapStopped", { text = "", texthl = "DiagnosticHint" })
+	sign("DapStopped", { text = "󰏧", texthl = "DiagnosticHint" })
 	sign("DapBreakpointRejected", { text = "", texthl = "DiagnosticError" })
 end
 
-local function terminateCallback()
-	vim.opt.number = false
-	pcall(require("dapui").close)
-	vim.cmd.DapVirtualTextDisable() -- BUG not working
+local function terminateCallback() require("dapui").close() end
+
+local function setupDapHooks()
+	local dap = require("dap")
+	dap.listeners.after.event_initialized["dapui_config"] = function() require("dapui").open() end
+	dap.listeners.before.event_terminated["dapui_config"] = terminateCallback
+	dap.listeners.before.event_exited["dapui_config"] = terminateCallback
 end
 
 --------------------------------------------------------------------------------
@@ -60,10 +60,11 @@ return {
 		keys = {
 			-- INFO toggling breakpoints and "Continue" command done via nvim-recorder
 			-- stylua: ignore start
-			{ "<leader>bc", function() require("dap").run_to_cursor() end, desc = " Run to Cursor" },
-			{ "<leader>bd", function() require("dap").clear_breakpoints() end, desc = "  Remove Breakpoints" },
-			{ "<leader>br", function() require("dap").restart() end, desc = " Restart" },
-			{ "<leader>bt", function() require("dap").terminate({}, {}, terminateCallback) end, desc = "  Terminate" },
+			{ "<leader>bc", function() require("dap").run_to_cursor() end, desc = "󰇀 Run to Cursor" },
+			{ "<leader>bd", function() require("dap").clear_breakpoints() end, desc = " Remove Breakpoints" },
+			{ "<leader>br", function() require("dap").restart() end, desc = " Restart" },
+			{ "<leader>bt", function() require("dap").terminate({}, {}, terminateCallback) end, desc = " Terminate" },
+			{ "<leader>bq", function() require("dap").list_breakpoints() end, desc = " Breakpoints to QuickFix"},
 			-- stylua: ignore end
 		},
 		dependencies = { "theHamsta/nvim-dap-virtual-text", "jayp0521/mason-nvim-dap.nvim" },
@@ -74,11 +75,12 @@ return {
 		config = function()
 			dapLualine()
 			dapSigns()
+			setupDapHooks()
 		end,
 	},
 	{
 		"theHamsta/nvim-dap-virtual-text",
-		opts = { only_first_definition = true },
+		opts = {only_first_definition = true},
 		init = function()
 			vim.api.nvim_create_autocmd("ColorScheme", {
 				callback = function()
@@ -90,13 +92,23 @@ return {
 	{
 		"rcarriga/nvim-dap-ui",
 		keys = {
-			{ "<leader>bu", function() require("dapui").toggle() end, desc = " Toggle DAP-UI" },
-			{ "<leader>bl", function() require("dapui").float_element("breakpoints") end, desc = " List Breakpoints" },
+			{ "<leader>bu", function() require("dapui").toggle() end, desc = "󱂬 Toggle DAP-UI" },
+			{
+				"<leader>bl",
+				function() require("dapui").float_element("breakpoints") end,
+				desc = " List Breakpoints",
+			},
+			{
+				"<leader>bi",
+				function() require("dapui").float_element("repl") end,
+				mode = { "n", "x" },
+				desc = " REPL",
+			},
 			{
 				"<leader>bb",
 				function() require("dapui").eval() end,
 				mode = { "n", "x" },
-				desc = " Eval Expression",
+				desc = " Eval",
 			},
 		},
 		opts = {
@@ -107,9 +119,8 @@ return {
 					position = "right",
 					size = 35,
 					elements = {
-						{ id = "scopes", size = 0.6 },
+						{ id = "scopes", size = 0.8 },
 						{ id = "stacks", size = 0.2 },
-						{ id = "repl", size = 0.2 },
 					},
 				},
 			},
