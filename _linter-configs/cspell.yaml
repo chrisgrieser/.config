@@ -15,8 +15,18 @@ dictionaryDefinitions:
 
 #───────────────────────────────────────────────────────────────────────────────
 
-ignoreRegExpList: 
-  - comment
+includeRegExpList:
+  - comment-hash
+  - comment-js
+  - comment-lua
+  - string
+
 patterns:
-  - name: comment
+  - name: comment-hash
     pattern: ^#.*$
+  - name: comment-js
+    pattern: ^//.*$
+  - name: comment-lua
+    pattern: ^--.*$
+  - name: string
+    pattern: ^["'].*['"]$
