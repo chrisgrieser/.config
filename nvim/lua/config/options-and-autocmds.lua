@@ -67,11 +67,11 @@ opt.matchtime = 1 -- deci-seconds
 opt.clipboard = "unnamedplus"
 
 -- Spelling
-opt.spell = true
+opt.spell = false
+opt.spellfile = u.linterConfigFolder .. "/spellfile-vim-ltex.add" -- has to be `.add`
 opt.spelllang = "en_us"
 opt.spelloptions = { "camel", "noplainbuffer" }
 opt.spellcapcheck = "" 
-opt.spellfile = u.linterConfigFolder .. "/spellfile-vim-ltex.add" -- has to be `.add`
 
 vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
 	callback = function()

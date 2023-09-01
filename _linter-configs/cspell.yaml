@@ -5,14 +5,13 @@ language: en-US
 allowCompoundWords: true
 #───────────────────────────────────────────────────────────────────────────────
 
-# TODO use include regex to only check string/comments? 🤔
-
-
 dictionaries: 
   - vim-spellfile
+
+# only accepts .txt
 dictionaryDefinitions:
   - name: vim-spellfile
-    path: "./spellfile-vim-ltex.add"
+    path: "/Users/chrisgrieser/.config/_linter-configs/spellfile-vim-ltex.txt" 
 
 #───────────────────────────────────────────────────────────────────────────────
 

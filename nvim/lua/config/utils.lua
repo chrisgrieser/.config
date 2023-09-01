@@ -70,37 +70,39 @@ end
 
 -- turns string into unicode smallcaps
 function M.smallCaps(str)
+	str = str:lower()
 	local smallCapsMap = {
-		ᴀ = "a",
-		ʙ = "b",
-		ᴄ = "c",
-		ᴅ = "d",
-		ᴇ = "e",
-		ғ = "f",
-		ɢ = "g",
-		ʜ = "h",
-		ɪ = "i",
-		ᴊ = "j",
-		ᴋ = "k",
-		ʟ = "l",
-		ᴍ = "m",
-		ɴ = "n",
-		ᴏ = "o",
-		ᴘ = "p",
-		ǫ = "q",
-		ʀ = "r",
+		a = "ᴀ",
+		b = "ʙ",
+		c = "ᴄ",
+		d = "ᴅ",
+		e = "ᴇ",
+		f = "ғ",
+		g = "ɢ",
+		h = "ʜ",
+		i = "ɪ",
+		j = "ᴊ",
+		k = "ᴋ",
+		l = "ʟ",
+		m = "ᴍ",
+		n = "ɴ",
+		o = "ᴏ",
+		p = "ᴘ",
+		q = "ǫ",
+		r = "ʀ",
 		s = "s",
-		ᴛ = "t",
-		ᴜ = "u",
-		ᴠ = "v",
-		ᴡ = "w",
+		t = "ᴛ",
+		u = "ᴜ",
+		v = "ᴠ",
+		w = "ᴡ",
 		x = "x",
-		ʏ = "y",
-		ᴢ = "z",
+		y = "ʏ",
+		z = "ᴢ",
 	}
-	for i = 1, 10, 1 do
-		
+	for letter, smallcap in pairs(smallCapsMap) do
+		str = str:gsub(letter, smallcap)
 	end
+	return str
 end
 
 --------------------------------------------------------------------------------
