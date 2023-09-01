@@ -64,12 +64,7 @@ end, { desc = "󰽘 Inspect FileType & BufType" })
 --------------------------------------------------------------------------------
 -- REFACTORING
 
-keymap(
-	"n",
-	"<leader>ff",
-	":% s/<C-r><C-w>//g<Left><Left><Left>",
-	{ desc = " :s (cursor word)" }
-)
+keymap("n", "<leader>ff", ":% s/<C-r><C-w>//g<Left><Left><Left>", { desc = " :s (cursor word)" })
 keymap("x", "<leader>ff", [["zy:%s /<C-r>z//g<Left><Left>]], { desc = " :s (selection)" })
 keymap("x", "<leader>fs", ":s ///g<Left><Left><Left>", { desc = " :s (inside selection)" })
 
@@ -278,11 +273,8 @@ keymap("n", "<leader>ow", function()
 	end
 end, { desc = " 󰖶 Wrap" })
 
--- FIX scrolloff and theme sometimes broken
-keymap("n", "<leader>of", function()
-	vim.opt.scrolloff = 13
-	require("config.theme-customization").reloadTheming()
-end, { desc = " 󰘖 Fix Theme/Folding/Scrolloff" })
+-- FIX scrolloff
+keymap("n", "<leader>of", function() vim.opt.scrolloff = 13 end, { desc = " 󰘖 Fix Scrolloff" })
 
 -- make <C-a>/<C-x> work on letters. Useful for macros
 keymap("n", "<leader>oa", function()
