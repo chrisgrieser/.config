@@ -9,20 +9,15 @@ return {
 		event = "CursorMoved",
 		opts = true,
 	},
-	{
-		"tzachar/local-highlight.nvim",
-		event = "BufReadPost", -- later would not affect first buffer
-		opts = true,
+	{ -- highlight word under cursor & batch renamer
+		"nvim-treesitter/nvim-treesitter-refactor",
+		event = "BufReadPre",
+		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
 			vim.api.nvim_create_autocmd("ColorScheme", {
-				callback = function() vim.api.nvim_set_hl(0, "LocalHighlight", { underdotted = true }) end,
+				callback = function() vim.api.nvim_set_hl(0, "TSDefinitionUsage", { underdotted = true }) end,
 			})
 		end,
-	},
-	{
-		"sunjon/shade.nvim",
-		event = "VeryLazy",
-		opts = { overlayOcacity = 50 },
 	},
 	{ -- scrollbar with information
 		"lewis6991/satellite.nvim",

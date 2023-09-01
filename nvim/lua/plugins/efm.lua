@@ -1,6 +1,3 @@
--- Builtin Configs: https://github.com/creativenull/efmls-configs-nvim/blob/main/doc/SUPPORTED_LIST.md
---------------------------------------------------------------------------------
-
 local lintersAndFormatters = {
 	"codespell",
 	"yamllint",
@@ -12,6 +9,7 @@ local lintersAndFormatters = {
 	"black",
 	"selene",
 	"stylua",
+	"cspell",
 	"prettier", -- only yaml formatter preserving blank lines https://github.com/mikefarah/yq/issues/515
 	-- stylelint included in mason, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
 
@@ -22,6 +20,7 @@ local lintersAndFormatters = {
 --------------------------------------------------------------------------------
 
 local setupEfmConfig = function()
+	-- DOCS Builtin Configs: https://github.com/creativenull/efmls-configs-nvim/blob/main/doc/SUPPORTED_LIST.md
 	local black = require("efmls-configs.formatters.black")
 	local prettier = require("efmls-configs.formatters.prettier")
 	local shfmt = require("efmls-configs.formatters.shfmt")
@@ -32,18 +31,16 @@ local setupEfmConfig = function()
 	local actionlint = require("efmls-configs.linters.actionlint")
 	local mdformat = require("efmls-configs.formatters.mdformat")
 
+	-- TODO
+	local cspell = require("efmls-configs.linters.cspell")
+
 	-- using my own, due to custom configs
 	local markdownlint = require("tool-configs.linters.markdownlint")
 	local shellcheck = require("tool-configs.linters.shellcheck")
 	local yamllint = require("tool-configs.linters.yamllint")
-	local codespell_L = require("tool-configs.linters.codespell")
+	local codespell = require("tool-configs.linters.codespell")
 	local stylelint_L = require("tool-configs.linters.stylelint")
 	local stylelint_F = require("tool-configs.formatters.stylelint")
-
-	-- BUG pending: https://github.com/mattn/efm-langserver/issues/258
-	-- local shellcheckApply = require("tool-configs.formatters.shellcheck")
-	-- local codespell_F = require("tool-configs.formatters.codespell")
-	-- markdownlint as well
 
 	local languages = {
 		javascript = { biome },
@@ -64,8 +61,8 @@ local setupEfmConfig = function()
 	-- use for codespell for all except bib and css
 	for ft, _ in pairs(languages) do
 		if ft ~= "bib" and ft ~= "css" then
-			table.insert(languages[ft], codespell_L)
-			-- table.insert(languages[ft], codespell_F)
+			table.insert(languages[ft], codespell)
+			-- table.insert(languages[ft], cspell)
 		end
 	end
 

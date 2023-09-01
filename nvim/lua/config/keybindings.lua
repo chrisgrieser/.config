@@ -371,7 +371,7 @@ autocmd("LspAttach", {
 		-- stylua: ignore start
 		if capabilities.renameProvider then
 			-- needs defer to not be overwritten by treesitter-refactor smart-rename
-			keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename", buffer = true })
+			vim.defer_fn( function() keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename", buffer = true }) end, 1)
 			keymap("n", "<leader>V", function() return ":IncRename " .. expand("<cword>") end, { desc = "󰒕 IncRename (cword)", buffer = true, expr = true })
 		end
 		if capabilities.documentSymbolProvider then
