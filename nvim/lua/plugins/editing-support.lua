@@ -63,9 +63,7 @@ return {
 				rule("^%s*e?l?if$", ":", "python")
 					:use_regex(true)
 					:with_pair(isNotNodeType("string_content")), -- no docstrings
-				rule("^%s*else$", ":", "python")
-					:use_regex(true)
-					:with_pair(isNotNodeType("string_content")), -- no docstrings
+				rule("^%s*else$", ":", "python"):use_regex(true):with_pair(isNotNodeType("string_content")), -- no docstrings
 				rule("", ":", "python") -- automatically move past colons
 					:with_move(function(opts) return opts.char == ":" end)
 					:with_pair(function() return false end)
@@ -207,7 +205,9 @@ return {
 			{ "gp", "<Plug>(YankyPutIndentAfterCharwise)", desc = " Charwise Paste" },
 			{ "<D-p>", "<Plug>(YankyCycleForward)", desc = " Cycle Killring" },
 			{ "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = " Sticky Yank" },
-			{ "Y", "y$" }, -- is already sticky, but to be set to lazy-load Yanky
+			"d", -- so it loads the killring in time
+			"D",
+			"Y",
 		},
 		opts = {
 			ring = { history_length = 50 },
