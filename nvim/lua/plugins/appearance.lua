@@ -15,7 +15,10 @@ return {
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
 			vim.api.nvim_create_autocmd("ColorScheme", {
-				callback = function() vim.api.nvim_set_hl(0, "TSDefinitionUsage", { underdotted = true }) end,
+				callback = function()
+					vim.api.nvim_set_hl(0, "TSDefinition", { underdashed = true })
+					vim.api.nvim_set_hl(0, "TSDefinitionUsage", { underdotted = true })
+				end,
 			})
 		end,
 	},
