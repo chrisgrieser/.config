@@ -31,10 +31,8 @@ local setupEfmConfig = function()
 	local actionlint = require("efmls-configs.linters.actionlint")
 	local mdformat = require("efmls-configs.formatters.mdformat")
 
-	-- TODO
-	local cspell = require("efmls-configs.linters.cspell")
-
 	-- using my own, due to custom configs
+	local cspell = require("tool-configs.linters.cspell")
 	local markdownlint = require("tool-configs.linters.markdownlint")
 	local shellcheck = require("tool-configs.linters.shellcheck")
 	local yamllint = require("tool-configs.linters.yamllint")
@@ -73,6 +71,8 @@ local setupEfmConfig = function()
 		init_options = { documentFormatting = true },
 		settings = { rootMarkers = { ".git/" }, languages = languages },
 	}
+
+	vim.api.nvim_create_user_command("EfmStatus", "checkhealth efmls-configs", {})
 end
 --------------------------------------------------------------------------------
 
