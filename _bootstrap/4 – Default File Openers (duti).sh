@@ -60,6 +60,7 @@ duti -s "$editorID" public.yaml all
 
 # Browser & Mail
 browserID=$(osascript -e "id of app \"$BROWSER_APP\"") # set in zshenv
+duti -s "$browserID" svg all
 duti -s "$browserID" chrome-extension
 duti -s "$browserID" chrome
 duti -s "$browserID" webloc all # link files
@@ -71,8 +72,8 @@ duti -s "$mailID" mailto # = default mail client
 # Misc
 duti -s "net.highlightsapp.universal" pdf all
 duti -s "org.m0k.transmission" torrent all
+duti -s "org.m0k.transmission" magnet
 duti -s "com.busymac.busycal3" ics all
 duti -s "com.apple.archiveutility" zip all
-duti -s "org.m0k.transmission" magnet
 
 brew uninstall duti

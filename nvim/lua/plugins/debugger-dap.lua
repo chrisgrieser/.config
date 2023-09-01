@@ -32,56 +32,95 @@ local function dapLualine()
 		},
 	}
 end
+
+local function dapSigns()
+	local sign = vim.fn.sign_define
+	sign("DapBreakpoint", { text = "", texthl = "DiagnosticHint" })
+	sign("DapBreakpointCondition", { text = "", texthl = "DiagnosticHint" })
+	sign("DapLogPoint", { text = "󰍨", texthl = "DiagnosticHint" })
+	sign("DapStopped", { text = "", texthl = "DiagnosticInfo" })
+	sign("DapBreakpointRejected", { text = "", texthl = "DiagnosticError" })
+end
 --------------------------------------------------------------------------------
 
 -- TODO https://github.com/mfussenegger/nvim-dap-python
+
 --------------------------------------------------------------------------------
 
 return {
-	"mfussenegger/nvim-dap",
-	keys = {
-		-- stylua: ignore start
-		-- INFO toggling breakpoints done via nvim-recorder
-		{ "<leader>bu", function() require("dapui").toggle() end, desc = " Toggle DAP-UI" },
-		{ "<leader>bv", function() require("dap").step_over() end, desc = " Step Over" },
-		{ "<leader>bo", function() require("dap").step_out() end, desc = " Step Out" },
-		{ "<leader>bi", function() require("dap").step_into() end, desc = " Step Into" },
-		{ "<leader>bc", function() require("dap").run_to_cursor() end, desc = " Run to Cursor" },
-		{ "<leader>br", function() require("dap").clear_breakpoints() end, desc = "  Remove Breakpoints" },
-		{ "<leader>bq", function() require("dap").list_breakpoints() end, desc = "  Breakpoints to QuickFix" },
-		-- stylua: ignore end
-		{
-			"<leader>bt",
-			function()
-				vim.opt_local.number = false
-				require("dapui").close()
-				require("dap").terminate()
-			end,
-			desc = "  Terminate",
+	{
+		"mfussenegger/nvim-dap",
+		keys = {
+			-- INFO toggling breakpoints done via nvim-recorder
+			{ "<leader>bu", function() require("dapui").toggle() end, desc = " Toggle DAP-UI" },
+			{ "<leader>bv", function() require("dap").step_over() end, desc = " Step Over" },
+			{ "<leader>bo", function() require("dap").step_out() end, desc = " Step Out" },
+			{ "<leader>bi", function() require("dap").step_into() end, desc = " Step Into" },
+			{ "<leader>bc", function() require("dap").run_to_cursor() end, desc = " Run to Cursor" },
+			{
+				"<leader>br",
+				function() require("dap").clear_breakpoints() end,
+				desc = "  Remove Breakpoints",
+			},
+			{
+				"<leader>bq",
+				function() require("dap").list_breakpoints() end,
+				desc = "  Breakpoints to QuickFix",
+			},
+			{
+				"<leader>bt",
+				function()
+					vim.opt_local.number = false
+					require("dapui").close()
+					require("dap").terminate()
+				end,
+				desc = "  Terminate",
+			},
 		},
-	},
-	dependencies = {
-		{
-			"jayp0521/mason-nvim-dap.nvim",
-			opts = { ensure_installed = { "python" } }, -- installed `debugypy`
+		dependencies = {
+			{
+				"jayp0521/mason-nvim-dap.nvim",
+				opts = { ensure_installed = { "python" } }, -- installs `debugypy`
+			},
+			{ "mfussenegger/nvim-dap-python" },
+			{ "theHamsta/nvim-dap-virtual-text", opts = true },
+			{ "rcarriga/nvim-dap-ui", opts = true },
 		},
-		{ "mfussenegger/nvim-dap-python" },
-		{ "theHamsta/nvim-dap-virtual-text", opts = true },
-		{ "rcarriga/nvim-dap-ui", opts = true },
+		init = function()
+			local ok, whichKey = pcall(require, "which-key")
+			if ok then whichKey.register { ["<leader>b"] = { name = "  Debugger" } } end
+		end,
+		config = function()
+			dapLualine()
+			dapSigns()
+		end,
 	},
-	init = function()
-		local ok, whichKey = pcall(require, "which-key")
-		if ok then whichKey.register { ["<leader>b"] = { name = "  Debugger" } } end
-	end,
-	config = function()
-		dapLualine()
-
-		-- SIGN-COLUMN ICONS
-		local sign = vim.fn.sign_define
-		sign("DapBreakpoint", { text = "", texthl = "DiagnosticHint" })
-		sign("DapBreakpointCondition", { text = "", texthl = "DiagnosticHint" })
-		sign("DapLogPoint", { text = "󰍨", texthl = "DiagnosticHint" })
-		sign("DapStopped", { text = "", texthl = "DiagnosticInfo" })
-		sign("DapBreakpointRejected", { text = "", texthl = "DiagnosticError" })
-	end,
+	{
+		"jbyuki/one-small-step-for-vimkind",
+		dependencies = "mfussenegger/nvim-dap",
+		keys = {
+			{
+				"<leader>bn",
+				function()
+					-- INFO is the only one that needs manual starting, other debuggers
+					-- start with `continue` by themselves
+					if not vim.bo.filetype == "lua" then
+						vim.notify("Not a lua file.", vim.log.levels.WARN)
+						return
+					end
+					require("osv").run_this()
+				end,
+				{ desc = "  Start nvim-lua debugger" },
+			},
+		},
+		config = function()
+			local dap = require("dap")
+			dap.configurations.lua = {
+				{ type = "nlua", request = "attach", name = "Attach to running Neovim instance" },
+			}
+			dap.adapters.nlua = function(callback, config)
+				callback { type = "server", host = config.host or "127.0.0.1", port = config.port or 8086 }
+			end
+		end,
+	},
 }
