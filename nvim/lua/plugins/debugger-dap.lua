@@ -52,6 +52,12 @@ local function setupAdapters()
 	end
 end
 
+local function terminateCallback()
+	vim.opt_global.numbers = false
+	require("dapui").close()
+	vim.cmd.DapVirtualTextDisable()
+end
+
 --------------------------------------------------------------------------------
 
 -- TODO https://github.com/mfussenegger/nvim-dap-python
@@ -64,16 +70,15 @@ return {
 		keys = {
 			-- INFO toggling breakpoints and "Continue" command also done via nvim-recorder
 			-- stylua: ignore start
-			{ "<leader>bu", function() require("dapui").toggle() end, desc = " Toggle DAP-UI" },
 			{ "<leader>bb", function() require("dapui").continue() end, desc = " Continue" },
+			{ "<leader>bc", function() require("dap").run_to_cursor() end, desc = " Run to Cursor" },
 			{ "<leader>bd", function() require("dap").clear_breakpoints() end, desc = "  Remove Breakpoints" },
 			{ "<leader>br", function() require("dap").restart() end, desc = " Restart" },
-			{ "<leader>bt", function() require("dap").terminate() end, desc = "  Terminate" },
+			{ "<leader>bt", function() require("dap").terminate({}, {}, terminateCallback) end, desc = "  Terminate" },
 			-- stylua: ignore end
 		},
 		dependencies = {
 			"jayp0521/mason-nvim-dap.nvim",
-			"mfussenegger/nvim-dap-python",
 			"theHamsta/nvim-dap-virtual-text",
 			"rcarriga/nvim-dap-ui",
 		},
@@ -82,13 +87,15 @@ return {
 			if ok then whichKey.register { ["<leader>b"] = { name = "  Debugger" } } end
 		end,
 		config = function()
-			setupAdapters()
 			dapLualine()
 			dapSigns()
 		end,
 	},
 	{
 		"theHamsta/nvim-dap-virtual-text",
+		keys = {
+			{ "<leader>bv", function()  end, desc = " Toggle Virtual Text" },
+		},
 		opts = { only_first_definition = false },
 		init = function()
 			vim.api.nvim_create_autocmd("ColorScheme", {
@@ -99,12 +106,20 @@ return {
 		end,
 	},
 	{
+		"mfussenegger/nvim-dap-python",
+		opts = {},
+	},
+	{
 		"rcarriga/nvim-dap-ui",
+		keys = {
+			{ "<leader>bu", function() require("dapui").toggle() end, desc = " Toggle DAP-UI" },
+		},
 		opts = true,
 	},
 	{
 		"jbyuki/one-small-step-for-vimkind",
 		dependencies = "mfussenegger/nvim-dap",
+		config = setupAdapters,
 		keys = {
 			{
 				"<leader>bn",
