@@ -68,13 +68,13 @@ keymap(
 	"n",
 	"<leader>ff",
 	":% s/<C-r><C-w>//g<Left><Left><Left>",
-	{ desc = "󱗘 :s (word under cursor)" }
+	{ desc = " :s (cursor word)" }
 )
-keymap("x", "<leader>ff", [["zy:%s /<C-r>z//g<Left><Left>]], { desc = "󱗘 :s (selected text)" })
-keymap("x", "<leader>fs", ":s ///g<Left><Left><Left>", { desc = "󱗘 :s (in selection)" })
+keymap("x", "<leader>ff", [["zy:%s /<C-r>z//g<Left><Left>]], { desc = " :s (selection)" })
+keymap("x", "<leader>fs", ":s ///g<Left><Left><Left>", { desc = " :s (inside selection)" })
 
-keymap("n", "<leader>fd", ":g //d<Left><Left>", { desc = "󱗘 :delete matching lines" })
-keymap("n", "<leader>fy", ":g //y<Left><Left>", { desc = "󱗘 :yank matching lines" })
+keymap("n", "<leader>fd", ":g //d<Left><Left>", { desc = " delete matching" })
+keymap("n", "<leader>fy", ":g //y<Left><Left>", { desc = " yank matching" })
 
 keymap("n", "<leader>f<Tab>", function()
 	bo.expandtab = false
@@ -104,7 +104,7 @@ keymap(
 	{ "n", "x" },
 	"<leader>uc",
 	function() require("funcs.alt-alt").reopenBuffer() end,
-	{ desc = "󰽙 undo closing buffer" }
+	{ desc = "󰽙 Undo buffer closing" }
 )
 keymap("n", "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", { desc = "󰕌 󰊢 Reset Hunk" })
 keymap("n", "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", { desc = "󰕌 󰊢 Reset Buffer" })
@@ -112,7 +112,7 @@ keymap(
 	"n",
 	"<leader>ut",
 	function() cmd.Telescope("undo") end,
-	{ desc = "󰕌  Undo Telescope", silent = true }
+	{ desc = " Undo Telescope", silent = true }
 )
 
 -- save open time for each buffer
@@ -281,7 +281,7 @@ end, { desc = " 󰖶 Wrap" })
 -- FIX scrolloff and theme sometimes broken
 keymap("n", "<leader>of", function()
 	vim.opt.scrolloff = 13
-	require("config.theme-customization").setThemeMode(vim.opt.background:get())
+	require("config.theme-customization").reloadTheming()
 end, { desc = " 󰘖 Fix Theme/Folding/Scrolloff" })
 
 -- make <C-a>/<C-x> work on letters. Useful for macros

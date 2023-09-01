@@ -64,7 +64,6 @@ local function themeModifications()
 			updateHighlight("lualine_y_diff_added_" .. v, "guifg=#369a96")
 			updateHighlight("lualine_a_" .. v, "gui=bold")
 			vim.defer_fn(function() updateHighlight("lualine_a_" .. v, "gui=bold") end, 100)
-			vim.defer_fn(function() updateHighlight("lualine_a_" .. v, "gui=bold") end, 400)
 		end
 		updateHighlight("GitSignsChange", "guifg=#acaa62")
 		updateHighlight("GitSignsAdd", "guifg=#369a96")
@@ -143,6 +142,11 @@ function M.setThemeMode(mode)
 	cmd.highlight("clear") -- needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
 	cmd.colorscheme(targetTheme)
 end
+
+-- INFO on adding new lualine elements, the lualine highlights are set again,
+-- resulting in a loss of its styling. Therefore, the theme customizations have
+-- to be applied again.
+function M.reloadTheming() themeModifications() end
 
 -- initialize theme on startup
 local isDarkMode = fn.system([[defaults read -g AppleInterfaceStyle]]):find("Dark")
