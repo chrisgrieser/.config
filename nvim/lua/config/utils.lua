@@ -90,8 +90,8 @@ end
 
 ---Adds a component to the lualine after lualine was already set up. Useful for
 ---lazyloading.
----@param component function|table
----@param location "tabline"|"sections"
+---@param component function|table the component forming the lualine
+---@param location "tabline"|"sections" tabline = top, sections = bottom
 ---@param section "lualine_a"|"lualine_b"|"lualine_c"|"lualine_x"|"lualine_y"|"lualine_z"
 function M.addToLuaLine(location, section, component)
 	local topSeparators = { left = "", right = "" }
@@ -103,8 +103,11 @@ function M.addToLuaLine(location, section, component)
 	local componentObj = type(component) == "table" and component or { component }
 	if location == "tabline" then componentObj.section_separators = topSeparators end
 	table.insert(sectionConfig, componentObj)
+	lualine.setup {
+		[location] = { [section] = sectionConfig },
+	}
 
-	-- Fix theming of the lualine
+	-- Theming needs to be re-applied, since the lualine-styling can change
 	require("config.theme-customization").reloadTheming()
 end
 

@@ -3,7 +3,6 @@ local cmd = vim.cmd
 local expand = vim.fn.expand
 local fn = vim.fn
 local keymap = vim.keymap.set
-local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 -- stylua: ignore start
@@ -20,7 +19,7 @@ keymap("n", "<leader>i", function()
 	if lineContent:find("!important") then
 		lineContent = lineContent:gsub(" !important", "")
 	else
-		lineContent = lineContent:gsub(";", " !important;")
+		lineContent = lineContent:gsub(";?$", " !important;")
 	end
 	vim.api.nvim_set_current_line(lineContent)
 end, { buffer = true, desc = " Toggle !important", nowait = true })
@@ -34,12 +33,10 @@ vim.defer_fn(function()
 	bo.grepprg = "rg --vimgrep --no-column" -- remove columns for readability
 	keymap("n", "gs", function()
 		cmd([[silent! lgrep "^(\# <<\|/\* <)" %]]) -- riggrep-search for navigaton markers in SF
-		require("telescope.builtin").loclist {
-			prompt_title = "Navigation Markers",
-		}
+		require("telescope.builtin").loclist { prompt_title = "Navigation Markers" }
 	end, { desc = "Search Navigation Markers", buffer = true })
 	-- search only for variables
-	keymap("n", "gS", function()
+	keymap("n", "gw", function()
 		cmd([[silent! lgrep "^\s*--" %]]) -- riggrep-search for css variables
 		require("telescope.builtin").loclist {
 			prompt_title = "CSS Variables",
@@ -72,4 +69,4 @@ end, { buffer = true })
 -- various other solutions are described here: https://github.com/vim/vim/issues/2790
 -- using treesitter, this is less of an issue, but treesitter css
 -- highlighting isn't good yet, so…
-keymap("n", "ös", ":syntax sync fromstart<CR>", { buffer = true })
+keymap("n", "<localleader>s", ":syntax sync fromstart<CR>", { buffer = true })
