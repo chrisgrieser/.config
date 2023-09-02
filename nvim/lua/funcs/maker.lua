@@ -18,13 +18,17 @@ end
 ---@param recipe? string execute named recipe. without recipe, runs make without arg, executing first recipe by default.
 function M.make(recipe)
 	if not checkForMakefile() then return end
-	local output = vim.fn.system { "make", "--silent", recipe }
-	if vim.v.shell_error ~= 0 then
-		local title = recipe and recipe or "Error"
-		vim.notify(title .."\n" .. output, vim.log.levels.ERROR)
-	elseif output ~= "" then
-		local title = recipe and recipe or "Make"
-		vim.notify(title .. ":\n" .. output)
+
+	local output = vim.fn.system({ "make", "--silent", recipe }):gsub("%s+$", "")
+	local title = recipe and recipe .. ": " or ""
+	local success = vim.v.shell_error == 0
+	if output:find("[\n\r]") then title = title .. "\n" end -- format multi-line-output
+
+	if success then
+		if output == "" then output = "Done." end
+		vim.notify(title .. output)
+	else
+		vim.notify("Error " .. title .. output, vim.log.levels.ERROR)
 	end
 end
 

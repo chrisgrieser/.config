@@ -76,7 +76,10 @@ return {
 			end, { desc = "󰒕 Copy Breadcrumbs" })
 		end,
 		opts = {
-			lsp = { auto_attach = true },
+			lsp = {
+				auto_attach = true,
+				preference = { "pyright" },
+			},
 			icons = { Object = "󰆧 " },
 			separator = "  ",
 			depth_limit = 7,
