@@ -1,3 +1,7 @@
+local u = require("config.utils")
+
+--------------------------------------------------------------------------------
+
 local function dapLualine()
 	local topSeparators = { left = "", right = "" }
 
@@ -69,10 +73,7 @@ return {
 			-- stylua: ignore end
 		},
 		dependencies = { "theHamsta/nvim-dap-virtual-text", "jayp0521/mason-nvim-dap.nvim" },
-		init = function()
-			local ok, whichKey = pcall(require, "which-key")
-			if ok then whichKey.register { ["<leader>b"] = { name = "  Debugger" } } end
-		end,
+		init = function() u.leaderSubkey("b", " Debugger") end,
 		config = function()
 			dapLualine()
 			dapSigns()
@@ -81,14 +82,8 @@ return {
 	},
 	{
 		"theHamsta/nvim-dap-virtual-text",
-		opts = {only_first_definition = true},
-		init = function()
-			vim.api.nvim_create_autocmd("ColorScheme", {
-				callback = function()
-					vim.api.nvim_set_hl(0, "NvimDapVirtualText", { link = "DiagnosticVirtualTextInfo" })
-				end,
-			})
-		end,
+		opts = { only_first_definition = true },
+		init = function() u.colorschemeMod("NvimDapVirtualText", { link = "DiagnosticVirtualTextInfo" }) end,
 	},
 	{
 		"rcarriga/nvim-dap-ui",

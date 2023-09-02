@@ -27,19 +27,6 @@ function M.writeToFile(filePath, str, mode)
 	file:close()
 end
 
----https://www.reddit.com/r/neovim/comments/oxddk9/comment/h7maerh/
----@param name string name of highlight group
----@param key "fg"|"bg"
----@nodiscard
----@return string|nil the value, or nil if hlgroup or key is not available
-function M.getHighlightValue(name, key)
-	local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = name })
-	if not ok then return end
-	local value = hl[key]
-	if not value then return end
-	return string.format("#%06x", value)
-end
-
 ---reads a template to apply if the file is empty. Add to a filetype config to
 ---activate templates for it
 ---@param ext string extension of the skeleton
@@ -68,43 +55,40 @@ function M.applyTemplateIfEmptyFile(ext)
 	end, 1)
 end
 
--- turns string into unicode smallcaps
-function M.smallCaps(str)
-	str = str:lower()
-	local smallCapsMap = {
-		a = "ᴀ",
-		b = "ʙ",
-		c = "ᴄ",
-		d = "ᴅ",
-		e = "ᴇ",
-		f = "ғ",
-		g = "ɢ",
-		h = "ʜ",
-		i = "ɪ",
-		j = "ᴊ",
-		k = "ᴋ",
-		l = "ʟ",
-		m = "ᴍ",
-		n = "ɴ",
-		o = "ᴏ",
-		p = "ᴘ",
-		q = "ǫ",
-		r = "ʀ",
-		s = "s",
-		t = "ᴛ",
-		u = "ᴜ",
-		v = "ᴠ",
-		w = "ᴡ",
-		x = "x",
-		y = "ʏ",
-		z = "ᴢ",
-	}
-	for letter, smallcap in pairs(smallCapsMap) do
-		str = str:gsub(letter, smallcap)
-	end
-	return str
+--------------------------------------------------------------------------------
+
+---https://www.reddit.com/r/neovim/comments/oxddk9/comment/h7maerh/
+---@param name string name of highlight group
+---@param key "fg"|"bg"
+---@nodiscard
+---@return string|nil the value, or nil if hlgroup or key is not available
+function M.getHighlightValue(name, key)
+	local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = name })
+	if not ok then return end
+	local value = hl[key]
+	if not value then return end
+	return string.format("#%06x", value)
 end
 
+---Creates autocommand triggered by Colorscheme change, that modifies a
+---highlight group. Mostly useful for setting up colorscheme modifications
+---specific to plugins, that should persist across colorscheme changes triggered
+---by switching between dark and light mode.
+---@param hlgroup string
+---@param modification string|object
+function M.colorSchemeMod(hlgroup, modification)
+	vim.api.nvim_create_autocmd("ColorScheme", {
+		callback = function() vim.api.nvim_set_hl(0, hlgroup, modification) end,
+	})
+end
+
+---set up subkey for the <leader> key (if whichkey is loaded)
+---@param key string
+---@param label string
+function M.leaderSubkey(key, label)
+	local ok, whichKey = pcall(require, "which-key")
+	if ok then whichKey.register { ["<leader>" .. key] = { name = " " .. label } } end
+end
 --------------------------------------------------------------------------------
 
 ---Sets the global BorderStyle variable and the matching BorderChars Variable.
