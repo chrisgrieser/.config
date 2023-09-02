@@ -27,13 +27,3 @@ keymap({ "o", "x" }, "i|", "<cmd>lua require('various-textobjs').shellPipe(true)
 keymap({ "o", "x" }, "a|", "<cmd>lua require('various-textobjs').shellPipe(false)<CR>", { desc = "󱡔 outer shellPipe textobj", buffer = true })
 
 --------------------------------------------------------------------------------
-
--- Reload Sketchybar
-keymap("n", "<localleader><localleader>", function()
-	vim.cmd.update()
-	if not expand("%:p:h"):find("sketchybar") then
-		vim.notify("Not in a sketchybar directory.", u.warn)
-		return
-	end
-	fn.system { "sketchybar", "--reload" }
-end, { buffer = true, desc = "  Reload sketchybar" })

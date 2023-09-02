@@ -25,6 +25,7 @@ duti -s "$videoplayerID" m4a all
 
 # code
 editorID="com.apple.automator.Neovide-Helper"
+duti -s "$editorID" public.unix-executable all 
 duti -s "$editorID" org.n8gray.scheme-source all # treesitter
 duti -s "$editorID" scm all # treesitter
 duti -s "$editorID" add all # vim spell file
