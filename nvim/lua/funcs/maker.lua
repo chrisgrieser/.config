@@ -51,15 +51,15 @@ function M.selectMake()
 
 	local recipes = {}
 	for line in io.lines(makefile) do
-		if line:find("^%w+") then
-			line = line:gsub(":", "")
+		if line:find("^[%w_]+") then
+			line = line:gsub(":", "", 1) -- remove first colon
 			table.insert(recipes, line)
 		end
 	end
 
 	vim.ui.select(recipes, { prompt = " Select recipe:" }, function(recipe)
 		if recipe == nil then return end
-		recipe = recipe:match("^%w+") -- remove comment and ":"
+		recipe = recipe:match("^[%w_]+") -- remove comment and ":"
 		M.make(recipe)
 	end)
 end

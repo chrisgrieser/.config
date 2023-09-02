@@ -2,7 +2,6 @@ local fn = vim.fn
 local cmd = vim.cmd
 local newCommand = vim.api.nvim_create_user_command
 local u = require("config.utils")
---------------------------------------------------------------------------------
 
 vim.cmd.cnoreabbrev("i", "lua =")
 
@@ -111,17 +110,3 @@ newCommand("Scratch", function()
 	end)
 end, {})
 
---------------------------------------------------------------------------------
-
-newCommand("Server", function()
-	local myServer = vim.fn.serverlist()[2]
-	vim.notify(myServer)
-end, {})
-
---------------------------------------------------------------------------------
-
-newCommand("Debug", function()
-	local pathExport = "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$$PATH ; "
-	local shellCmd = pathExport .. "neovide ./debug/test.lua -- -u ./debug/repro.lua"
-	vim.fn.system(shellCmd)
-end, {})

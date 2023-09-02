@@ -216,7 +216,7 @@ conf.settings.ltex = {
 	ltex = {
 		completionEnabled = false,
 		language = "en-US", -- default language, can be set per-file via markdown yaml header
-		dictionary = { ["en-US"] = words, ["de-DE"] = words },
+		dictionary = { ["en-US"] = words },
 		disabledRules = {
 			["en-US"] = {
 				"EN_QUOTES", -- don't expect smart quotes
