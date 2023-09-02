@@ -185,6 +185,11 @@ for _, key in pairs { ",", ";", ")", '"' } do
 end
 
 --------------------------------------------------------------------------------
+
+keymap("n", "<leader>r", function() require("funcs.quality-of-life").make() end, { desc = " Make" })
+keymap("n", "<leader>R", function() require("funcs.quality-of-life").selectMake() end, { desc = " Select Make" })
+
+--------------------------------------------------------------------------------
 -- GIT
 
 -- Gitsigns
