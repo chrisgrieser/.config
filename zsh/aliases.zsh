@@ -9,7 +9,7 @@ alias ....=" z ../../.."
 # MAKE
 # add a pseudo-flag `--list|-l` which lists all recipes
 function make() {
-	if [[ "$1" == "--list" || "$1" == "-l" ]] ; then
+	if [[ "$1" == "--list" || "$1" == "-l" ]]; then
 		grep '^[^#[:space:]].*' ./?akefile | tr -d ":" | grep -v ".PHONY"
 	else
 		command make --silent "$@"
