@@ -4,7 +4,7 @@ local u = require("config.utils")
 return {
 	{ -- REPL
 		"Vigemus/iron.nvim",
-		init = function() u.leaderSubkey("i", " 󱠤 REPL") end,
+		init = function() u.leaderSubkey("i", "󱠤 REPL") end,
 		keys = {
 			{ "<leader>it", vim.cmd.IronRepl, desc = "󱠤 Toggle REPL" },
 			{ "<leader>ir", vim.cmd.IronRestart, desc = "󱠤 Restart REPL" },

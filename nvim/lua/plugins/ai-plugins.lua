@@ -25,7 +25,7 @@ return {
 				vim.keymap.set("n", "gf", function() vim.cmd.Telescope("lsp_references") end, { desc = "󰒕 References" })
 			end,
 		},
-		init = function() u.leaderSubkey("q", " 󰓁 SourceGraph") end,
+		init = function() u.leaderSubkey("q", "󰓁 SourceGraph") end,
 	},
 	{ -- AI Ghost Text Suggestions
 		"Exafunction/codeium.vim",
