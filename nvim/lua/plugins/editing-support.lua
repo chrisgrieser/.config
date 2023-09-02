@@ -11,13 +11,18 @@ return {
 	},
 	{
 		"altermo/ultimate-autopair.nvim",
+		enabled = false,
 		event = { "InsertEnter", "CmdlineEnter" },
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		opts = {},
+		branch = "v0.6",
+		config = function()
+			require("ultimate-autopair").setup {
+				profile = "default",
+			}
+		end,
 	},
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
-		enabled = false,
 		event = "InsertEnter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function()
