@@ -91,7 +91,7 @@ end
 ---Adds a component to the lualine after lualine was already set up. Useful for
 ---lazyloading.
 ---@param component function|table
----@param location "tabline"|"section"
+---@param location "tabline"|"sections"
 ---@param section "lualine_a"|"lualine_b"|"lualine_c"|"lualine_x"|"lualine_y"|"lualine_z"
 function M.addToLuaLine(location, section, component)
 	local topSeparators = { left = "", right = "" }

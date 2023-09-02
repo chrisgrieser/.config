@@ -2,14 +2,15 @@
 # aggregates stackoverflow, tl;dr and many other help pages
 # https://cht.sh/:help
 function h() {
-	local style query pane_id
+	local style pane_id
+	local query="$*"
 
 	# curl cht.sh/:styles-demo
 	local lightstyle="trac"
 	local darkstyle="monokai"
 	defaults read -g AppleInterfaceStyle &>/dev/null && style="$darkstyle" || style="$lightstyle"
 
-	query=$(echo "$*" | tr " " "-") # dash as separator for subcommands, e.g. git-rebase
+	query=${query// /-} # dash as separator for subcommands, e.g. git-rebase
 	if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
 		curl -s "https://cht.sh/$query?style=$style" >"/tmp/$query"
 		pane_id=$(wezterm cli spawn -- less "/tmp/$query")
@@ -24,9 +25,13 @@ function h() {
 # COLORIZED HELP
 # `--` ensures dash can be used in the alias name
 # `--help` and `-h` offer help pages of different length for some commands, e.g. fd
-alias -g -- -h='-h | bat --language=help --style=plain --wrap=character'
-alias -g -- --help='--help | bat --language=help --style=plain --wrap=character'
-alias -g H='--help | bat --language=help --style=plain --wrap=character'
+batpipe="| bat --language=help --style=plain --wrap=character"
+# shellcheck disable=2139
+alias -g -- -h="-h 2>&1 $batpipe"
+# shellcheck disable=2139
+alias -g -- --help="--help 2>&1 $batpipe"
+# shellcheck disable=2139
+alias -g H="--help 2>&1 $batpipe"
 ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
 
 #───────────────────────────────────────────────────────────────────────────────

@@ -32,9 +32,9 @@ return {
 		event = "LspAttach",
 		dev = true,
 		config = function()
-			u.addToLuaLine("section", "lualine_c", require("dr-lsp").lspProgress)
+			u.addToLuaLine("sections", "lualine_x", require("dr-lsp").lspProgress)
 
-			u.addToLuaLine("section", "lualine_c", {
+			u.addToLuaLine("sections", "lualine_c", {
 				require("dr-lsp").lspCount,
 				-- needs the highlight value, since setting the hlgroup directly
 				-- results in bg color being inherited from main editor
