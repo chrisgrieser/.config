@@ -72,9 +72,6 @@ function M.commentHr()
 	end
 end
 
--- Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum
--- sint consectetur cupidatat.
-
 function M.toggleCase()
 	local col = vim.fn.col(".") -- fn.col correctly considers tab-indentation
 	local charUnderCursor = vim.api.nvim_get_current_line():sub(col, col)
@@ -161,6 +158,26 @@ function M.gotoNextIndentChange(direction)
 		if indent ~= currentIndent and not isBlankLine(i) then break end
 	end
 	vim.api.nvim_win_set_cursor(0, { targetLineNum, colNum })
+end
+
+--------------------------------------------------------------------------------
+
+---Runs make, same as `:make` but does not fill the quickfix list. Useful make
+--is only used as task runner
+function M.make()
+	local output = vim.fn.system { "make" }
+	local logLevel = vim.v.shell_error and vim.log.levels.ERROR or vim.log.levels.INFO
+	vim.notify(output, logLevel)
+end
+
+function M.selectMake()
+	local items = {}
+	vim.ui.select(items, { prompt = " Select make command:" }, function(selected)
+		if selected == nil then return end
+		local output = vim.fn.system { "make", "--silent", selected }
+		local logLevel = vim.v.shell_error and vim.log.levels.ERROR or vim.log.levels.INFO
+		vim.notify(output, logLevel)
+	end)
 end
 
 --------------------------------------------------------------------------------
