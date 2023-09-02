@@ -3,6 +3,10 @@
 		"prefix": "shebang",
 		"body": "#!/usr/bin/env zsh"
 	},
+	"ignore (shellcheck)": {
+		"prefix": "ignore (shellcheck)",
+		"body": "# shellcheck disable=${rule_id}"
+	},
 	"global variable": {
 		"prefix": "global (shellcheck)",
 		"body": "\\${${1:global_var}:?}",
