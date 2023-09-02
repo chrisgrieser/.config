@@ -2,8 +2,7 @@ local plugins = {
 	{
 		"altermo/ultimate-autopair.nvim",
 		event = { "InsertEnter", "CmdlineEnter" },
-		-- dependencies = "nvim-treesitter/nvim-treesitter",
-		opts = {},
+		config = function() require("ultimate-autopair").setup() end,
 	},
 }
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
