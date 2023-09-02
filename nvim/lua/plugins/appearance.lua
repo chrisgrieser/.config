@@ -14,8 +14,8 @@ return {
 		event = "BufReadPre",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
-			u.colorSchemeMod("TSDefinition", { underdashed = true })
-			u.colorSchemeMod("TSDefinitionUsage", { underdotted = true })
+			u.colorschemeMod("TSDefinition", { underdashed = true })
+			u.colorschemeMod("TSDefinitionUsage", { underdotted = true })
 		end,
 	},
 	{ -- scrollbar with information
@@ -36,7 +36,7 @@ return {
 		"kevinhwang91/nvim-hlslens",
 		init = function()
 			local reversedCol = u.getHighlightValue("IncSearch", "bg")
-			u.colorSchemeMod("IncSearch", { bg = reversedCol })
+			u.colorschemeMod("IncSearch", { bg = reversedCol })
 		end,
 		opts = {
 			nearest_only = true,
@@ -59,7 +59,7 @@ return {
 		event = "BufReadPost", -- later does not load on first buffer
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		-- red too aggressive
-		init = function() u.colorSchemeMod("RainbowDelimiterRed", { fg = "#7e8a95" }) end,
+		init = function() u.colorschemeMod("RainbowDelimiterRed", { fg = "#7e8a95" }) end,
 	},
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",

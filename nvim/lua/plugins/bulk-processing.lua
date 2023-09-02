@@ -1,4 +1,4 @@
-local lualineTopSeparators = { left = "", right = "" }
+local u = require("config.utils")
 
 --------------------------------------------------------------------------------
 
@@ -34,22 +34,12 @@ return {
 			}
 		end,
 		config = function()
-			-- INFO inserting to not override the existing lualine segments
-			local lualineZ = require("lualine").get_config().tabline.lualine_z or {}
-			table.insert(lualineZ, {
-				function()
-					if not vim.b.VM_Selection then return "" end ---@diagnostic disable-line: undefined-field
-					local cursors = vim.b.VM_Selection.Regions
-					if not cursors then return "" end
-					return "󰇀 Visual-Multi (" .. tostring(#cursors) .. ")"
-				end,
-				section_separators = lualineTopSeparators,
-			})
-
-			require("lualine").setup {
-				tabline = { lualine_z = lualineZ },
-			}
-			require("config.theme-customization").reloadTheming()
+			u.addToLuaLine("tabline", "lualine_z", function()
+				if not vim.b.VM_Selection then return "" end ---@diagnostic disable-line: undefined-field
+				local cursors = vim.b.VM_Selection.Regions
+				if not cursors then return "" end
+				return "󰇀 Visual-Multi (" .. tostring(#cursors) .. ")"
+			end)
 		end,
 	},
 	{ -- structural search & replace
@@ -117,25 +107,10 @@ return {
 					addBreakPoint = "8",
 				},
 				dapSharedKeymaps = true,
-				performanceOpts = { countThreshold = 5 },
+				performanceOpts = { countThreshold = 10 },
 			}
-
-			-- INFO inserting only on load to ensure lazy-loading
-			local lualineZ = require("lualine").get_config().tabline.lualine_z or {}
-			local lualineY = require("lualine").get_config().tabline.lualine_y or {}
-			table.insert(lualineZ, {
-				require("recorder").recordingStatus,
-				section_separators = lualineTopSeparators,
-			})
-			table.insert(lualineY, {
-				require("recorder").displaySlots,
-				section_separators = lualineTopSeparators,
-			})
-
-			require("lualine").setup {
-				tabline = { lualine_y = lualineY, lualine_z = lualineZ },
-			}
-			require("config.theme-customization").reloadTheming()
+			u.addToLuaLine("tabline", "lualine_z", require("recorder").recordingStatus)
+			u.addToLuaLine("tabline", "lualine_y", require("recorder").displaySlots)
 		end,
 	},
 }

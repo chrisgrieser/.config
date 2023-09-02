@@ -62,9 +62,9 @@ keymap("n", "qw", function()
 		"",
 	}
 	fn.append(".", hr) ---@diagnostic disable-line undefined-field, param-type-mismatch
-	local lineNum = u.getCursor(0)[1] + 2
+	local lineNum = vim.api.nvim_win_get_cursor(0)[1] + 2
 	local colNum = #hr[2] + 2
-	u.setCursor(0, { lineNum, colNum })
+	vim.api.nvim_win_set_cursor(0, { lineNum, colNum })
 	cmd.startinsert { bang = true }
 end, { buffer = true })
 

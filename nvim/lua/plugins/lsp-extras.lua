@@ -32,24 +32,15 @@ return {
 		event = "LspAttach",
 		dev = true,
 		config = function()
-			-- INFO inserting to not override the existing lualine segments
-			local lualineX = require("lualine").get_config().sections.lualine_x or {}
-			table.insert(lualineX, { require("dr-lsp").lspProgress })
-			local lualineC = require("lualine").get_config().sections.lualine_c or {}
-			table.insert(lualineC, {
+			u.addToLuaLine("section", "lualine_c", require("dr-lsp").lspProgress)
+
+			u.addToLuaLine("section", "lualine_c", {
 				require("dr-lsp").lspCount,
 				-- needs the highlight value, since setting the hlgroup directly
 				-- results in bg color being inherited from main editor
 				color = function() return { fg = u.getHighlightValue("Comment", "fg") } end,
 				fmt = function(str) return str:gsub("R", ""):gsub("D", " 󰄾"):gsub("LSP:", "󰈿") end,
 			})
-
-			require("lualine").setup {
-				sections = {
-					lualine_c = lualineC,
-					lualine_x = lualineX,
-				},
-			}
 		end,
 	},
 	{ -- breadcrumbs for winbar
@@ -65,7 +56,7 @@ return {
 				if #symbolPath == 0 then return end
 				local parent = #symbolPath > 1 and symbolPath[#symbolPath - 1] or symbolPath[1]
 				local parentPos = parent.scope.start
-				u.setCursor(0, { parentPos.line, parentPos.character })
+				vim.api.nvim_win_set_cursor(0, { parentPos.line, parentPos.character })
 			end, { desc = "󰒕 Go Up to Parent" })
 
 			-- copy breadcrumbs
@@ -85,10 +76,7 @@ return {
 			end, { desc = "󰒕 Copy Breadcrumbs" })
 		end,
 		opts = {
-			lsp = {
-				auto_attach = true,
-				preference = { "pyright", "pylsp" },
-			},
+			lsp = { auto_attach = true },
 			icons = { Object = "󰆧 " },
 			separator = "  ",
 			depth_limit = 7,
@@ -145,10 +133,10 @@ return {
 		"smjonas/inc-rename.nvim",
 		event = "CmdlineEnter", -- loading with `cmd = "IncRename` does not work with incremental preview
 		opts = {
-			-- if more than one file is changed, save all buffers
 			post_hook = function(results)
 				if not results.changes then return end
 
+				-- if more than one file is changed, save all buffers
 				local filesChang = #vim.tbl_keys(results.changes)
 				if filesChang > 1 then vim.cmd.wall() end
 

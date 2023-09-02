@@ -8,8 +8,6 @@ M.linterConfigFolder = vim.env.DOTFILE_FOLDER .. "/_linter-configs/"
 M.error = vim.log.levels.ERROR
 M.warn = vim.log.levels.WARN
 M.trace = vim.log.levels.TRACE
-M.getCursor = vim.api.nvim_win_get_cursor
-M.setCursor = vim.api.nvim_win_set_cursor
 
 ---runs :normal natively with bang
 ---@param cmdStr string
@@ -76,7 +74,7 @@ end
 ---by switching between dark and light mode.
 ---@param hlgroup string
 ---@param modification string|object
-function M.colorSchemeMod(hlgroup, modification)
+function M.colorschemeMod(hlgroup, modification)
 	vim.api.nvim_create_autocmd("ColorScheme", {
 		callback = function() vim.api.nvim_set_hl(0, hlgroup, modification) end,
 	})
@@ -89,6 +87,27 @@ function M.leaderSubkey(key, label)
 	local ok, whichKey = pcall(require, "which-key")
 	if ok then whichKey.register { ["<leader>" .. key] = { name = " " .. label } } end
 end
+
+---Adds a component to the lualine after lualine was already set up. Useful for
+---lazyloading.
+---@param component function|table
+---@param location "tabline"|"section"
+---@param section "lualine_a"|"lualine_b"|"lualine_c"|"lualine_x"|"lualine_y"|"lualine_z"
+function M.addToLuaLine(location, section, component)
+	local topSeparators = { left = "", right = "" }
+
+	local ok, lualine = pcall(require, "lualine")
+	if not ok then return end
+	local sectionConfig = lualine.get_config()[location][section] or {}
+
+	local componentObj = type(component) == "table" and component or { component }
+	componentObj.section_separators = topSeparators
+	table.insert(sectionConfig, componentObj)
+
+	-- Fix theming of the lualine
+	require("config.theme-customization").reloadTheming()
+end
+
 --------------------------------------------------------------------------------
 
 ---Sets the global BorderStyle variable and the matching BorderChars Variable.

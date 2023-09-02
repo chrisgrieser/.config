@@ -22,9 +22,9 @@ keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
 -- method here also has the advantage of making it possible to preserve cursor
 -- position.
 keymap("n", "dq", function()
-	local prevCursor = u.getCursor(0)
+	local prevCursor = vim.api.nvim_win_get_cursor(0)
 	cmd.normal { "d&&&" } -- without bang for remapping of COM
-	u.setCursor(0, prevCursor)
+	vim.api.nvim_win_set_cursor(0, prevCursor)
 end, { remap = true, desc = " Delete Comment" })
 
 -- manually changed cq to preserve the commentstring
