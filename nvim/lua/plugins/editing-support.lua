@@ -11,9 +11,9 @@ return {
 	},
 	{
 		"altermo/ultimate-autopair.nvim",
-		enabled = false,
+		commit = "667d2304e8eb9ddbfa7f962528cfce0a5edcc163",
 		event = { "InsertEnter", "CmdlineEnter" },
-		config = function() require("ultimate-autopair").setup {} end,
+		opts = {},
 	},
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
@@ -27,8 +27,12 @@ return {
 				cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 			end
 
-			-- use treesitter
-			require("nvim-autopairs").setup { check_ts = true }
+			require("nvim-autopairs").setup { -- use treesitter
+				check_ts = true, -- use treesitter
+				-- disable all the filetypes to avoid conflict with
+				-- ultilmate-autopairs, but keep my custom rules
+				disable_filetype = { "lua", "javascript", "python", "sh", "typescript", "css", "make" },
+			}
 
 			-- CUSTOM RULES
 			-- DOCS https://github.com/windwp/nvim-autopairs/wiki/Rules-API

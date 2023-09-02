@@ -186,7 +186,12 @@ end
 
 --------------------------------------------------------------------------------
 
-keymap("n", "<leader>r", function() require("funcs.maker").make("runFirst") end, { desc = " Make First" })
+keymap(
+	"n",
+	"<leader>r",
+	function() require("funcs.maker").make("runFirst") end,
+	{ desc = " Make First" }
+)
 keymap("n", "<leader>R", function() require("funcs.maker").make() end, { desc = " Select Make" })
 
 --------------------------------------------------------------------------------
@@ -241,7 +246,7 @@ keymap("n", "<leader>gd", function()
 		cmd.wincmd("|") -- maximize it
 		if pickaxe ~= "" then
 			fn.execute("/" .. pickaxe, "silent!") -- directly search for the term
-			cmd("silent! normal! n") -- search for first item
+			vim.defer_fn(function() cmd("silent! normal! n") end, 200) -- goto first item
 		end
 	end)
 end, { desc = "󰊢 Pickaxe File History" })
