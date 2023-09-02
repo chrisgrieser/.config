@@ -89,6 +89,8 @@ local function processCommitMsg(commitMsg)
 	return true, commitMsg
 end
 
+-- Uses ColorColumn of 50 to indicate max length of commit messages, and
+-- additionally colors commit messages that are too long in red.
 local function hlTooLongCommitMsgs()
 	vim.api.nvim_create_autocmd("FileType", {
 		pattern = "DressingInput",
@@ -96,10 +98,10 @@ local function hlTooLongCommitMsgs()
 		callback = function()
 			local winNs = 1
 			vim.api.nvim_win_set_hl_ns(0, winNs)
-			fn.matchadd("commitmsg", [[.\{50}\zs.*\ze]])
+			fn.matchadd("commitmsg", [[.\{49}\zs.*\ze]])
 
 			vim.opt_local.colorcolumn = "50"
-			vim.api.nvim_set_hl(winNs, "commitmsg", { bg = "#E06C75" })
+			vim.api.nvim_set_hl(winNs, "ColorColumn", { link = "DiagnosticVirtualTextInfo" })
 			vim.api.nvim_set_hl(winNs, "commitmsg", { bg = "#E06C75" })
 		end,
 	})

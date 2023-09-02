@@ -167,7 +167,7 @@ end
 function M.make()
 	local output = vim.fn.system { "make", "--silent" }
 	local logLevel = vim.v.shell_error == 0 and vim.log.levels.INFO or vim.log.levels.ERROR
-	vim.notify(output, logLevel)
+	vim.notify("Make:\n" .. output, logLevel)
 end
 
 function M.selectMake()
@@ -192,8 +192,7 @@ function M.selectMake()
 
 	local recipes = {}
 	for line in io.lines(makefile) do
-		local commentIndentOrBlank = line:find("^[%s#.]") or line:find("^%s*$")
-		if not commentIndentOrBlank then table.insert(recipes, line) end
+		if line:find("^%w+") then table.insert(recipes, line) end
 	end
 
 	vim.ui.select(recipes, { prompt = " Select recipe:" }, function(recipe)
@@ -201,7 +200,7 @@ function M.selectMake()
 		recipe = recipe:match("^%w+") -- remove comment and ":"
 		local output = vim.fn.system { "make", "--silent", recipe }
 		local logLevel = vim.v.shell_error == 0 and vim.log.levels.INFO or vim.log.levels.ERROR
-		vim.notify(output, logLevel)
+		vim.notify(recipe .. ":\n" .. output, logLevel)
 	end)
 end
 

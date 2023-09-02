@@ -91,7 +91,7 @@ return {
 				},
 				popup = {
 					border = { style = u.borderStyle },
-					size = { width = 80 },
+					size = { width = 90, height = 25 },
 					win_options = { scrolloff = 4 },
 				},
 				split = {

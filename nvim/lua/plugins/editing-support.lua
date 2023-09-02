@@ -9,9 +9,19 @@ return {
 		dev = true,
 		opts = true,
 	},
+	{
+		"altermo/ultimate-autopair.nvim",
+		event = { "InsertEnter", "CmdlineEnter" },
+		dependencies = { "nvim-treesitter/nvim-treesitter", "windwp/nvim-autopairs" },
+		config = function()
+			-- https://github.com/altermo/ultimate-autopair.nvim/blob/v0.6/doc/ultimate-autopair.txt#L540
+			for _, i in ipairs(require("nvim-autopairs").config.rules) do
+				i.key_map = nil
+			end
+		end,
+	},
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
-		event = "InsertEnter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function()
 			-- add brackets to cmp completions, e.g. "function" -> "function()"
