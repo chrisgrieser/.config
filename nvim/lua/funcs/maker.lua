@@ -15,13 +15,13 @@ end
 
 ---Runs make, same as `:make` but does not fill the quickfix list. Useful make
 --is only used as task runner
----@param recipe? string execute named recipe. without recipe, runs make without arg, executing first recipe by default.
-function M.make(recipe)
+---@param recipe string execute named recipe. without recipe, runs make without arg, executing first recipe by default.
+local function runMake(recipe)
 	if not checkForMakefile() then return end
 
 	local output = vim.fn.system({ "make", "--silent", recipe }):gsub("%s+$", "")
-	local title = recipe and recipe .. ": " or ""
 	local success = vim.v.shell_error == 0
+	local title = recipe .. ": "
 	if output:find("[\n\r]") then title = title .. "\n" end -- format multi-line-output
 
 	if success then
@@ -33,9 +33,23 @@ function M.make(recipe)
 end
 
 ---Select a recipe from the makefile
-function M.selectMake()
+---@param useFirst? any use the first recipe, like running `make` without argument
+function M.selectMake(useFirst)
 	local makefile = vim.loop.cwd() .. "/Makefile"
 	if not checkForMakefile() then return end
+
+	local recipes = {}
+	for line in io.lines(makefile) do
+		if line:find("^[%w_]+") then
+			line = line:gsub(":", "", 1) -- remove first colon
+			table.insert(recipes, line)
+		end
+	end
+
+	if useFirst then
+		runMake(recipes[1])
+		return
+	end
 
 	-- color make comment
 	vim.api.nvim_create_autocmd("FileType", {
@@ -49,18 +63,10 @@ function M.selectMake()
 		end,
 	})
 
-	local recipes = {}
-	for line in io.lines(makefile) do
-		if line:find("^[%w_]+") then
-			line = line:gsub(":", "", 1) -- remove first colon
-			table.insert(recipes, line)
-		end
-	end
-
 	vim.ui.select(recipes, { prompt = " Select recipe:" }, function(recipe)
 		if recipe == nil then return end
 		recipe = recipe:match("^[%w_]+") -- remove comment and ":"
-		M.make(recipe)
+		runMake(recipe)
 	end)
 end
 
