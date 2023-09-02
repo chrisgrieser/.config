@@ -58,6 +58,11 @@ return {
 					search_down = { icon = "  ", view = "cmdline" }, -- FIX needed to be set explicitly
 					lua = { pattern = { "^:%s*lua%s+" }, view = "cmdline_popup"  }, -- show the `=`
 					help = { view = "cmdline_popup" },
+					numb = {
+						pattern = "^:%d+$",
+						view = "cmdline" ,
+						conceal = false,
+					},
 					IncRename = {
 						pattern = "^:IncRename ",
 						icon = " ",
