@@ -65,7 +65,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
--- 5s after startup, notify if there are more update
+-- 5s after startup, notify if there are more than 10 plugin updates
 vim.defer_fn(function()
 	if not require("lazy.status").has_updates() then return end
 	local threshold = 10

@@ -101,14 +101,13 @@ local function hlTooLongCommitMsgs(on)
 			callback = function()
 				vim.g.hlTooLongMatchId = fn.matchadd("commitmsg", [[.\{50}\zs.*\ze]])
 				vim.opt_local.colorcolumn = "50"
-				vim.cmd.highlight("commitmsg", "guibg=#E06C75")
+				vim.api.nvim_set_hl(0, "MakeComment", { link = "Comment" })
 			end,
 		})
 	else
 		-- clear the previously setup hl again, so other Input fields are not affected
 		-- also done early, so the highlight is even deleted on aborting the input
 		vim.api.nvim_del_augroup_by_name("tooLongCommitMsg")
-		pcall(function() fn.matchdelete(vim.g.hlTooLongMatchId) end)
 	end
 end
 
