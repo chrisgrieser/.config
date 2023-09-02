@@ -51,19 +51,47 @@ keymap("n", "<localleader>i", function()
 	vim.api.nvim_set_current_line(htmlImage)
 end, { desc = "  MD image to <img>", buffer = true })
 
--- stylua: ignore start
 -- link textobj
-keymap({ "o", "x" }, "il", "<cmd>lua require('various-textobjs').mdlink('inner')<CR>", { desc = "󱡔 inner md link", buffer = true })
-keymap({ "o", "x" }, "al", "<cmd>lua require('various-textobjs').mdlink('outer')<CR>", { desc = "󱡔 outer md link", buffer = true })
+keymap(
+	{ "o", "x" },
+	"il",
+	"<cmd>lua require('various-textobjs').mdlink('inner')<CR>",
+	{ desc = "󱡔 inner md link", buffer = true }
+)
+keymap(
+	{ "o", "x" },
+	"al",
+	"<cmd>lua require('various-textobjs').mdlink('outer')<CR>",
+	{ desc = "󱡔 outer md link", buffer = true }
+)
 
 -- iE/aE: code block textobj
-keymap({ "o", "x" }, "iE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock('inner')<CR>", { desc = "󱡔 inner code block", buffer = true })
-keymap({ "o", "x" }, "aE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock('outer')<CR>", { desc = "󱡔 outer code block", buffer = true })
+keymap(
+	{ "o", "x" },
+	"iE",
+	"<cmd>lua require('various-textobjs').mdFencedCodeBlock('inner')<CR>",
+	{ desc = "󱡔 inner code block", buffer = true }
+)
+keymap(
+	{ "o", "x" },
+	"aE",
+	"<cmd>lua require('various-textobjs').mdFencedCodeBlock('outer')<CR>",
+	{ desc = "󱡔 outer code block", buffer = true }
+)
 
 -- Heading jump to next/prev heading
-keymap({ "n", "x" }, "<C-j>", [[/^#\+ <CR><cmd>nohl<CR>]], { desc = " # Next Heading", buffer = true })
-keymap({ "n", "x" }, "<C-k>", [[?^#\+ <CR><cmd>nohl<CR>]], { desc = " # Prev Heading", buffer = true })
--- stylua: ignore end
+keymap(
+	{ "n", "x" },
+	"<C-j>",
+	[[/^#\+ <CR><cmd>nohl<CR>]],
+	{ desc = " # Next Heading", buffer = true }
+)
+keymap(
+	{ "n", "x" },
+	"<C-k>",
+	[[?^#\+ <CR><cmd>nohl<CR>]],
+	{ desc = " # Prev Heading", buffer = true }
+)
 
 --------------------------------------------------------------------------------
 -- SPELLING
@@ -79,7 +107,7 @@ keymap("n", "<localleader>d", function()
 			return
 		end
 	end
-end, { desc = "󰓆 Set ltex language to " .. lang, buffer = true })
+end, { desc = ("󰓆 ltex lang to %q"):format(lang), buffer = true })
 
 keymap("n", "zg", function()
 	local clients = vim.lsp.buf_get_clients(0)
