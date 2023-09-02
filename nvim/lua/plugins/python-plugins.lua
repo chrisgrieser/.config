@@ -17,8 +17,7 @@ return {
 				local venv = require("venv-selector").get_active_venv()
 				if venv == "" then return "" end
 				venv = vim.fs.basename(venv)
-				-- only add venv name, if non-default
-				venv = venv:find("^%.?venv$") and "" or " " .. venv
+				venv = venv:find("^%.?venv$") and "" or " " .. venv -- only add venv-name, if non-default
 				return "󱥒" .. venv
 			end)
 		end,
