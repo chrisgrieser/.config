@@ -14,12 +14,8 @@ return {
 		event = "BufReadPre",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
-			vim.api.nvim_create_autocmd("ColorScheme", {
-				callback = function()
-					vim.api.nvim_set_hl(0, "TSDefinition", { underdashed = true })
-					vim.api.nvim_set_hl(0, "TSDefinitionUsage", { underdotted = true })
-				end,
-			})
+			u.colorSchemeMod("TSDefinition", { underdashed = true })
+			u.colorSchemeMod("TSDefinitionUsage", { underdotted = true })
 		end,
 	},
 	{ -- scrollbar with information
@@ -39,14 +35,8 @@ return {
 	{ -- when searching, search count is shown next to the cursor
 		"kevinhwang91/nvim-hlslens",
 		init = function()
-			vim.api.nvim_create_autocmd("ColorScheme", {
-				callback = function()
-					-- INFO HLSearch links to IncSearch, which is set from the
-					-- beginning, so linking to that
-					local reversed = u.getHighlightValue("IncSearch", "bg")
-					vim.api.nvim_set_hl(0, "HLSearchReversed", { fg = reversed })
-				end,
-			})
+			local reversedCol = u.getHighlightValue("IncSearch", "bg")
+			u.colorSchemeMod("IncSearch", { bg = reversedCol })
 		end,
 		opts = {
 			nearest_only = true,
@@ -68,12 +58,8 @@ return {
 		"https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
 		event = "BufReadPost", -- later does not load on first buffer
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		init = function()
-			-- red too aggressive
-			vim.api.nvim_create_autocmd("ColorScheme", {
-				callback = function() vim.api.nvim_set_hl(0, "RainbowDelimiterRed", { fg = "#7e8a95" }) end,
-			})
-		end,
+		-- red too aggressive
+		init = function() u.colorSchemeMod("RainbowDelimiterRed", { fg = "#7e8a95" }) end,
 	},
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",

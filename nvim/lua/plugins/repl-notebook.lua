@@ -1,3 +1,5 @@
+
+
 return {
 	{ -- REPL
 		"Vigemus/iron.nvim",
@@ -8,10 +10,7 @@ return {
 			{ "<leader>ii", mode = "x", desc = "󱠤 Send Selection" },
 			{ "<leader>i#", desc = "󱠤 Send Operator" },
 		},
-		init = function()
-			local ok, whichKey = pcall(require, "which-key")
-			if ok then whichKey.register { ["<leader>i"] = { name = " 󱠤 Iron-REPL" } } end
-		end,
+		init = function() u.leaderSubkey("i", " 󱠤 REPL") end,
 		config = function()
 			local height = 10
 			require("iron.core").setup {
@@ -99,7 +98,14 @@ return {
 				show_headers = false,
 				formatters = {
 					json = function(body)
-						return vim.fn.system { "rome", "format", "--stdin", "--stdin-file-path", "foo.json", body }
+						return vim.fn.system {
+							"rome",
+							"format",
+							"--stdin",
+							"--stdin-file-path",
+							"foo.json",
+							body,
+						}
 					end,
 					-- prettier already needed since it's the only proper yaml formatter
 					html = function(body) return vim.fn.system { "prettier", "--parser=html", body } end,

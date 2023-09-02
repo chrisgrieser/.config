@@ -1,3 +1,7 @@
+local u = require("config.utils")
+
+--------------------------------------------------------------------------------
+
 return {
 	{ -- pending: https://github.com/Djancyp/regex.nvim/pull/2
 		"chrisgrieser/regex.nvim",
@@ -214,13 +218,7 @@ return {
 			highlight = { timer = 1000 },
 		},
 		-- IncSearch is the default highlight group for post-yank highlights
-		init = function()
-			vim.api.nvim_create_autocmd("ColorScheme", {
-				callback = function()
-					vim.api.nvim_set_hl(0, "YankyYanked", { link = "IncSearch", default = true })
-				end,
-			})
-		end,
+		init = function() u.colorschemeMod("YankyYanked", { link = "IncSearch" }) end,
 	},
 	{ -- which-key
 		"folke/which-key.nvim",
