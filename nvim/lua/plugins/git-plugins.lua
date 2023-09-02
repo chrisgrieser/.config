@@ -1,3 +1,6 @@
+local u = require("config.utils")
+--------------------------------------------------------------------------------
+
 return {
 	{
 		"pwntester/octo.nvim",
@@ -8,6 +11,8 @@ return {
 			"nvim-tree/nvim-web-devicons",
 		},
 		init = function()
+			u.leaderSubkey("o", "  Octo")
+
 			-- autocomplete for @ and #
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "octo",
@@ -22,9 +27,6 @@ return {
 					)
 				end,
 			})
-
-			local ok, whichKey = pcall(require, "which-key")
-			if ok then whichKey.register { ["<leader>ö"] = { name = "  Octo" } } end
 		end,
 		opts = {
 			-- https://github.com/pwntester/octo.nvim#%EF%B8%8F-configuration

@@ -3,35 +3,21 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 local function dapLualine()
-	local topSeparators = { left = "", right = "" }
+	u.addToLuaLine("tabline", "lualine_y", function ()
+		local dapStatus = require("dap").status()
+		if dapStatus ~= "" then dapStatus = "  " .. dapStatus end
+		return dapStatus
+	end)
+	u.addToLuaLine("tabline", "lualine_z", function ()
+		local breakpoints = require("dap.breakpoints").get()
+		local breakpointSum = 0
+		for buf, _ in pairs(breakpoints) do
+			breakpointSum = breakpointSum + #breakpoints[buf]
+		end
+		if breakpointSum == 0 then return "" end
+		return " " .. tostring(breakpointSum)
+	end)
 
-	-- INFO inserting needed, to not disrupt existing lualine-segment set by nvim-recorder
-	local lualineY = require("lualine").get_config().tabline.lualine_y or {}
-	local lualineZ = require("lualine").get_config().tabline.lualine_z or {}
-	table.insert(lualineY, {
-		function()
-			local dapStatus = require("dap").status()
-			if dapStatus ~= "" then dapStatus = "  " .. dapStatus end
-			return dapStatus
-		end,
-		section_separators = topSeparators,
-	})
-	table.insert(lualineZ, {
-		function()
-			local breakpoints = require("dap.breakpoints").get()
-			local breakpointSum = 0
-			for buf, _ in pairs(breakpoints) do
-				breakpointSum = breakpointSum + #breakpoints[buf]
-			end
-			if breakpointSum == 0 then return "" end
-			return " " .. tostring(breakpointSum)
-		end,
-		section_separators = topSeparators,
-	})
-
-	require("lualine").setup {
-		tabline = { lualine_y = lualineY, lualine_z = lualineZ },
-	}
 	require("config.theme-customization").reloadTheming()
 end
 
@@ -46,11 +32,11 @@ end
 
 local function terminateCallback() require("dapui").close() end
 
-local function setupDapHooks()
-	local dap = require("dap")
-	dap.listeners.after.event_initialized["dapui_config"] = function() require("dapui").open() end
-	dap.listeners.before.event_terminated["dapui_config"] = terminateCallback
-	dap.listeners.before.event_exited["dapui_config"] = terminateCallback
+local function setupDapListeners()
+	local listener = require("dap").listeners
+	listener.after.event_initialized["dapui_config"] = function() require("dapui").open() end
+	listener.before.event_terminated["dapui_config"] = terminateCallback
+	listener.before.event_exited["dapui_config"] = terminateCallback
 end
 
 --------------------------------------------------------------------------------
@@ -77,7 +63,7 @@ return {
 		config = function()
 			dapLualine()
 			dapSigns()
-			setupDapHooks()
+			setupDapListeners()
 		end,
 	},
 	{

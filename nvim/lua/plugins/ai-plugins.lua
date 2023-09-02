@@ -1,3 +1,6 @@
+local u = require("config.utils")
+--------------------------------------------------------------------------------
+
 return {
 	{ -- code search
 		-- requires access tokens: https://github.com/sourcegraph/sg.nvim#setup
@@ -22,10 +25,7 @@ return {
 				vim.keymap.set("n", "gf", function() vim.cmd.Telescope("lsp_references") end, { desc = "󰒕 References" })
 			end,
 		},
-		init = function()
-			local ok, whichKey = pcall(require, "which-key")
-			if ok then whichKey.register { ["<leader>q"] = { name = " 󰓁 SourceGraph" } } end
-		end,
+		init = function() u.leaderSubkey("q", " 󰓁 SourceGraph") end,
 	},
 	{ -- AI Ghost Text Suggestions
 		"Exafunction/codeium.vim",

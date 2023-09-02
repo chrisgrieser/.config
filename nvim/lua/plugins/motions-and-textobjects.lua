@@ -8,8 +8,8 @@ return {
 		keys = { "f", "F", "t", "T" },
 		opts = { highlight_on_key = true, dim = false },
 		init = function()
-			u.colorSchemeMod("EyelinerPrimary", { reverse = true })
-			u.colorSchemeMod("EyelinerSecondary", { underline = true })
+			u.colorschemeMod("EyelinerPrimary", { reverse = true })
+			u.colorschemeMod("EyelinerSecondary", { underline = true })
 		end,
 	},
 	{ -- better % (highlighting, matches across lines, match quotes)
