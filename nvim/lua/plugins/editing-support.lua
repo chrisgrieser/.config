@@ -9,8 +9,15 @@ return {
 		dev = true,
 		opts = true,
 	},
+	{
+		"altermo/ultimate-autopair.nvim",
+		event = { "InsertEnter", "CmdlineEnter" },
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		opts = {},
+	},
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
+		enabled = false,
 		event = "InsertEnter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function()
