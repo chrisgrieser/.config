@@ -11,8 +11,8 @@ local abbr = vim.cmd.inoreabbrev
 keymap("n", "gs", function() vim.cmd.Telescope("treesitter") end, { desc = " Document Symbols", buffer = true })
 
 -- extra trailing chars
-keymap("n", "<leader>|", "mzA |<Esc>`z", { desc = " | to EoL", buffer = true })
-keymap("n", "<leader>\\", "mzA \\<Esc>`z", { desc = " \\ to EoL", buffer = true })
+keymap("n", "<leader>|", "mzA |<Esc>`z", { desc = "which_key_ignore", buffer = true })
+keymap("n", "<leader>\\", "mzA \\<Esc>`z", { desc = "which_key_ignore", buffer = true })
 
 -- habit from writing too much js or lua
 abbr("<buffer> // #")

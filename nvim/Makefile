@@ -15,4 +15,4 @@ plugins: # prints remote repo of all installed plugins as markdown links
 
 debug: # runs minimal config for debugging purposes
 	export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$$PATH ; \
-	neovide ./debug/test.lua -- -u ./debug/debug.lua
+	neovide ./debug/test.lua -- -u ./debug/repro.lua

@@ -142,6 +142,7 @@ local function codeActionFilter(action)
 	return not (ignoreInLua or ignoreInPython)
 end
 
+-- INFO use `lua require('nvim-lightbulb').debug()` to inspect code action kinds
 keymap(
 	{ "n", "x" },
 	"<leader>c",
@@ -155,7 +156,7 @@ keymap(
 	"n",
 	"<leader>d",
 	function() require("funcs.quality-of-life").ruleSearch() end,
-	{ desc = "󰒕 Copy Diagnostic Rule ID" }
+	{ desc = "󰒕 Lookup Diagnostic Rule" }
 )
 
 --------------------------------------------------------------------------------
@@ -181,7 +182,7 @@ keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>=j]], { desc = "󰗈 Spl
 
 -- Append to / delete from EoL
 for _, key in pairs { ",", ";", ")", '"' } do
-	keymap("n", "<leader>" .. key, "mzA" .. key .. "<Esc>`z", { desc = " " .. key .. " to EoL" })
+	keymap("n", "<leader>" .. key, "mzA" .. key .. "<Esc>`z", { desc = "which_key_ignore" })
 end
 
 --------------------------------------------------------------------------------

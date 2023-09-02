@@ -101,7 +101,7 @@ function M.addToLuaLine(location, section, component)
 	local sectionConfig = lualine.get_config()[location][section] or {}
 
 	local componentObj = type(component) == "table" and component or { component }
-	componentObj.section_separators = topSeparators
+	if location == "tabline" then componentObj.section_separators = topSeparators end
 	table.insert(sectionConfig, componentObj)
 
 	-- Fix theming of the lualine

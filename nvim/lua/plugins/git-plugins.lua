@@ -11,7 +11,7 @@ return {
 			"nvim-tree/nvim-web-devicons",
 		},
 		init = function()
-			u.leaderSubkey("o", "  Octo")
+			u.leaderSubkey("o", " Octo")
 
 			-- autocomplete for @ and #
 			vim.api.nvim_create_autocmd("FileType", {

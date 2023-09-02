@@ -5,16 +5,8 @@ return {
 	{ -- lightbulb for available lsp actions
 		"kosayoda/nvim-lightbulb",
 		event = "LspAttach",
-		keys = {
-			{
-				"<leader>C",
-				"<cmd>lua require('nvim-lightbulb').debug()<CR>",
-				desc = "󰒕 Code Action Info",
-			},
-		},
 		opts = {
-			-- -1 = updatetime set by myself
-			autocmd = { enabled = true, updatetime = -1 },
+			autocmd = { enabled = true, updatetime = -1 }, -- -1 = updatetime set by myself
 			sign = { enabled = false },
 			status_text = { enabled = true, text = " " },
 			action_kinds = { "refactor" },
@@ -33,7 +25,6 @@ return {
 		dev = true,
 		config = function()
 			u.addToLuaLine("sections", "lualine_x", require("dr-lsp").lspProgress)
-
 			u.addToLuaLine("sections", "lualine_c", {
 				require("dr-lsp").lspCount,
 				-- needs the highlight value, since setting the hlgroup directly
@@ -94,42 +85,6 @@ return {
 			floating_window = false,
 			hint_prefix = "󰘎 ",
 			hint_scheme = "NonText", -- = highlight group
-		},
-	},
-	{ -- display inlay hints from LSP
-		"lvimuser/lsp-inlayhints.nvim", -- INFO only temporarily needed, until https://github.com/neovim/neovim/issues/18086
-		init = function()
-			if vim.version().major == 0 and vim.version().minor >= 10 then
-				vim.notify("lsp-inlayhints.nvim is now obsolete.")
-			end
-
-			vim.api.nvim_create_autocmd("LspAttach", {
-				callback = function(args)
-					local bufnr = args.buf
-					local client = vim.lsp.get_client_by_id(args.data.client_id)
-					local capabilities = client.server_capabilities
-					if capabilities.inlayHintProvider then
-						require("lsp-inlayhints").on_attach(client, bufnr, false)
-					end
-				end,
-			})
-		end,
-		opts = {
-			inlay_hints = {
-				parameter_hints = {
-					prefix = " ",
-					remove_colon_start = true,
-					remove_colon_end = true,
-				},
-				type_hints = {
-					prefix = " ",
-					remove_colon_start = true,
-					remove_colon_end = true,
-				},
-				labels_separator = ":",
-				only_current_line = true,
-				highlight = "NonText",
-			},
 		},
 	},
 	{ -- better LSP variable-rename
