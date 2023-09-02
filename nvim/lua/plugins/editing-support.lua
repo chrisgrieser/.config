@@ -11,17 +11,15 @@ return {
 	},
 	{
 		"altermo/ultimate-autopair.nvim",
+		enabled = false,
 		event = { "InsertEnter", "CmdlineEnter" },
-		dependencies = { "nvim-treesitter/nvim-treesitter", "windwp/nvim-autopairs" },
-		config = function()
-			-- https://github.com/altermo/ultimate-autopair.nvim/blob/v0.6/doc/ultimate-autopair.txt#L540
-			for _, i in ipairs(require("nvim-autopairs").config.rules) do
-				i.key_map = nil
-			end
-		end,
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		opts = {},
 	},
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
+		enabled = false,
+		event = "InsertEnter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function()
 			-- add brackets to cmp completions, e.g. "function" -> "function()"
@@ -33,6 +31,12 @@ return {
 
 			-- use treesitter
 			require("nvim-autopairs").setup { check_ts = true }
+
+			-- disable regular autopairs to avoid conflict with ultimate automairs
+			-- https://github.com/altermo/ultimate-autopair.nvim/blob/v0.6/doc/ultimate-autopair.txt#L540
+			for _, i in ipairs(require("nvim-autopairs").config.rules) do
+				i.key_map = nil
+			end
 
 			-- CUSTOM RULES
 			-- DOCS https://github.com/windwp/nvim-autopairs/wiki/Rules-API

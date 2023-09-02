@@ -141,7 +141,7 @@ Wf_pdfReader = wf.new({ "Preview", "Highlights", "PDF Expert" })
 -- TRANSMISSION / TWITTER / MASTODON
 -- Fallthrough: prevent unintended focussing after qutting another app
 -- unintended focussing via alt+tab is prevented via alt+tab settings
-TransmissionWatcher = aw.new(function(appName, event)
+FallthroughWatcher = aw.new(function(appName, event)
 	local fallThroughApps = { "Transmission", env.tickerApp }
 	if event ~= aw.terminated or u.tbl_contains(fallThroughApps, appName) then return end
 
@@ -150,6 +150,7 @@ TransmissionWatcher = aw.new(function(appName, event)
 		local visibleWins = hs.window:orderedWindows()
 		local nextWin
 		for _, win in pairs(visibleWins) do
+			if not win:application() then break end
 			---@diagnostic disable-next-line: undefined-field
 			local name = win:application():name()
 			if not (u.tbl_contains(fallThroughApps, name)) then
