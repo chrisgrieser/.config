@@ -165,17 +165,39 @@ end
 ---Runs make, same as `:make` but does not fill the quickfix list. Useful make
 --is only used as task runner
 function M.make()
-	local output = vim.fn.system { "make" }
-	local logLevel = vim.v.shell_error and vim.log.levels.ERROR or vim.log.levels.INFO
+	local output = vim.fn.system { "make", "--silent" }
+	local logLevel = vim.v.shell_error == 0 and vim.log.levels.INFO or vim.log.levels.ERROR
 	vim.notify(output, logLevel)
 end
 
 function M.selectMake()
-	local items = {}
-	vim.ui.select(items, { prompt = " Select make command:" }, function(selected)
-		if selected == nil then return end
-		local output = vim.fn.system { "make", "--silent", selected }
-		local logLevel = vim.v.shell_error and vim.log.levels.ERROR or vim.log.levels.INFO
+	local makefile = vim.loop.cwd() .. "/Makefile"
+	local fileExists = vim.loop.fs_stat(makefile) ~= nil
+	if not fileExists then
+		vim.notify("Makefile not found.", vim.log.levels.WARN)
+		return
+	end
+
+	-- color comment
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = "DressingSelect",
+		once = true, -- to not affect other dressing selections
+		callback = function()
+			vim.fn.matchadd("MakeComment", "#.*$")
+			vim.api.nvim_set_hl(0, "MakeComment", { link = "Comment" })
+		end,
+	})
+
+	local recipes = {}
+	for line in io.lines(makefile) do
+		local commentIndentOrBlank = line:find("^[%s#.]") or line:find("^%s*$")
+		if not commentIndentOrBlank then table.insert(recipes, line) end
+	end
+
+	vim.ui.select(recipes, { prompt = " Select recipe:" }, function(recipe)
+		if recipe == nil then return end
+		local output = vim.fn.system { "make", "--silent", recipe }
+		local logLevel = vim.v.shell_error == 0 and vim.log.levels.INFO or vim.log.levels.ERROR
 		vim.notify(output, logLevel)
 	end)
 end

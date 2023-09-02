@@ -77,9 +77,9 @@
 		"prefix": "for each (list)",
 		"body": ["for _, ${1:v} in pairs(${2:table}) do", "\t$0", "end"]
 	},
-	"for each line (file)": {
-		"prefix": "for each line (file)",
-		"body": ["for line in io.open(${1:filepath}):lines() do", "\t$0", "end"]
+	"for each line (of file)": {
+		"prefix": ["for each line (file)", "read file (as lines)"],
+		"body": ["for line in io.lines(${1:filepath}) do", "\t$0", "end"]
 	},
 	"gmatch (loop)": {
 		"prefix": "gmatch (loop)",

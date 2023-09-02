@@ -201,7 +201,7 @@ local dictfile = u.linterConfigFolder .. "/spellfile-vim-ltex.add"
 local fileExists = vim.loop.fs_stat(dictfile) ~= nil
 local words = {}
 if fileExists then
-	for word in io.open(dictfile, "r"):lines() do
+	for word in io.lines(dictfile) do
 		table.insert(words, word)
 	end
 end

@@ -67,7 +67,7 @@ local tsConfig = {
 	},
 	matchup = {
 		enable = true,
-		enable_quotes = false,
+		enable_quotes = true,
 		disable_virtual_text = true, -- nvim-context-vt is better here
 	},
 	endwise = { enable = true },
