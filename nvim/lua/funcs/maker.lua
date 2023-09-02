@@ -21,33 +21,35 @@ local function runMake(recipe)
 
 	local output = vim.fn.system({ "make", "--silent", recipe }):gsub("%s+$", "")
 	local success = vim.v.shell_error == 0
-	local title = recipe .. ": "
-	if output:find("[\n\r]") then title = title .. "\n" end -- format multi-line-output
+	local appendix = output:find("[\n\r]") and "\n" or ": "
+	local title = recipe:upper() .. appendix
 
 	if success then
 		if output == "" then output = "Done." end
 		vim.notify(title .. output)
 	else
-		vim.notify("Error " .. title .. output, vim.log.levels.ERROR)
+		vim.notify("ERROR " .. title .. output, vim.log.levels.ERROR)
 	end
 end
 
 ---Select a recipe from the makefile
 ---@param useFirst? any use the first recipe, like running `make` without argument
-function M.selectMake(useFirst)
+function M.make(useFirst)
 	local makefile = vim.loop.cwd() .. "/Makefile"
 	if not checkForMakefile() then return end
 
+	local function getName(line) return line:match("^[%w_]+") end
+
 	local recipes = {}
 	for line in io.lines(makefile) do
-		if line:find("^[%w_]+") then
+		if getName(line) then
 			line = line:gsub(":", "", 1) -- remove first colon
 			table.insert(recipes, line)
 		end
 	end
 
 	if useFirst then
-		runMake(recipes[1])
+		runMake(getName(recipes[1]))
 		return
 	end
 
@@ -65,8 +67,7 @@ function M.selectMake(useFirst)
 
 	vim.ui.select(recipes, { prompt = " Select recipe:" }, function(recipe)
 		if recipe == nil then return end
-		recipe = recipe:match("^[%w_]+") -- remove comment and ":"
-		runMake(recipe)
+		runMake(getName(recipe))
 	end)
 end
 
