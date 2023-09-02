@@ -13,13 +13,7 @@ return {
 		"altermo/ultimate-autopair.nvim",
 		enabled = false,
 		event = { "InsertEnter", "CmdlineEnter" },
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		branch = "v0.6",
-		config = function()
-			require("ultimate-autopair").setup {
-				profile = "default",
-			}
-		end,
+		config = function() require("ultimate-autopair").setup {} end,
 	},
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
@@ -300,7 +294,7 @@ return {
 			}
 
 			-- set by some plugins and unnecessarily clobbers whichkey
-			vim.keymap.set("n", "<LeftMouse>", "<Nop>")
+			vim.keymap.set("o", "<LeftMouse>", "<Nop>")
 		end,
 	},
 }
