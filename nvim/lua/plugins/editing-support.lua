@@ -31,10 +31,6 @@ return {
 			-- use treesitter
 			require("nvim-autopairs").setup { check_ts = true }
 
-			local b = {
-				'fsf'
-			}
-
 			-- CUSTOM RULES
 			-- DOCS https://github.com/windwp/nvim-autopairs/wiki/Rules-API
 			local rule = require("nvim-autopairs.rule")
@@ -61,12 +57,6 @@ return {
 					:with_pair(isNodeType { "table_constructor", "field", "object", "dictionary" })
 					:with_del(function() return false end)
 					:with_move(function(opts) return opts.char == "," end),
-
-				rule("", ",", { "javascript", "typescript", "lua", "python" })
-
-					:with_pair(isNodeType { "table_constructor", "field", "object", "dictionary" })
-					:with_move(function(opts) return opts.char == "," end),
-
 
 				-- add brackets to if/else in js/ts
 				rule("^%s*if $", "()", { "javascript", "typescript" })
