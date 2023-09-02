@@ -9,12 +9,13 @@ return {
 		dev = true,
 		opts = true,
 	},
-	{
-		"altermo/ultimate-autopair.nvim",
-		commit = "667d2304e8eb9ddbfa7f962528cfce0a5edcc163",
-		event = { "InsertEnter", "CmdlineEnter" },
-		opts = {},
-	},
+	-- TODO check out again later
+	-- {
+	-- 	"altermo/ultimate-autopair.nvim",
+	-- 	commit = "667d2304e8eb9ddbfa7f962528cfce0a5edcc163",
+	-- 	event = { "InsertEnter", "CmdlineEnter" },
+	-- 	opts = {},
+	-- },
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
@@ -27,11 +28,11 @@ return {
 				cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 			end
 
-			require("nvim-autopairs").setup { -- use treesitter
-				check_ts = true, -- use treesitter
-				-- disable all the filetypes to avoid conflict with
-				-- ultilmate-autopairs, but keep my custom rules
-				disable_filetype = { "lua", "javascript", "python", "sh", "typescript", "css", "make" },
+			-- use treesitter
+			require("nvim-autopairs").setup { check_ts = true }
+
+			local b = {
+				'fsf'
 			}
 
 			-- CUSTOM RULES
@@ -53,14 +54,19 @@ return {
 				-- (which are at the end of the line and have no text afterwards)
 				rule(":", ";", "css"):with_pair(negLookahead(".+")),
 
-				-- auto-add trailing comma inside objects/arrays, if it's a new line
-				rule([[^%s*[:=%a]$]], ",", { "javascript", "typescript", "lua", "python" })
+				-- auto-add trailing comma inside objects/arrays
+				rule([[^%s*[:=%w]$]], ",", { "javascript", "typescript", "lua", "python" })
 					:use_regex(true)
 					:with_pair(negLookahead(".+")) -- neg. cond has to come first
 					:with_pair(isNodeType { "table_constructor", "field", "object", "dictionary" })
 					:with_del(function() return false end)
-					:with_cr(function() return false end)
 					:with_move(function(opts) return opts.char == "," end),
+
+				rule("", ",", { "javascript", "typescript", "lua", "python" })
+
+					:with_pair(isNodeType { "table_constructor", "field", "object", "dictionary" })
+					:with_move(function(opts) return opts.char == "," end),
+
 
 				-- add brackets to if/else in js/ts
 				rule("^%s*if $", "()", { "javascript", "typescript" })
