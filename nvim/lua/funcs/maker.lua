@@ -38,22 +38,22 @@ function M.make(useFirst)
 	local makefile = vim.loop.cwd() .. "/Makefile"
 	if not checkForMakefile() then return end
 
-	local function getName(line) return line:match("^[%w_]+") end
+	local function getRecipe(line) return line:match("^[%w_]+") end
 
 	local recipes = {}
 	for line in io.lines(makefile) do
-		if getName(line) then
+		if getRecipe(line) then
 			line = line:gsub(":", "", 1) -- remove first colon
 			table.insert(recipes, line)
 		end
 	end
 
 	if useFirst then
-		runMake(getName(recipes[1]))
+		runMake(getRecipe(recipes[1]))
 		return
 	end
 
-	-- color make comment
+	-- colorize make comments in the same line
 	vim.api.nvim_create_autocmd("FileType", {
 		pattern = "DressingSelect",
 		once = true, -- do not affect other dressing selections
@@ -65,9 +65,9 @@ function M.make(useFirst)
 		end,
 	})
 
-	vim.ui.select(recipes, { prompt = " Select recipe:" }, function(recipe)
-		if recipe == nil then return end
-		runMake(getName(recipe))
+	vim.ui.select(recipes, { prompt = " Select recipe:", kind = "make" }, function(selection)
+		if not selection then return end
+		runMake(getRecipe(selection))
 	end)
 end
 

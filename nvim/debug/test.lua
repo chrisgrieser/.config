@@ -4,7 +4,8 @@
 local foobar = "hello world"
 local foobar = "hello world"
 
-
+bla ()
+bla (
 local foobar = "hello world"
 
 print (foobar)
