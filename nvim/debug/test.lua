@@ -1,4 +1,2 @@
+require("foobar").supports_method("foobar")
 
-
-
-require("action-hints").supports_method("referencesProvider")
