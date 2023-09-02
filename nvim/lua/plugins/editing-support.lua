@@ -209,9 +209,9 @@ return {
 			{ "gp", "<Plug>(YankyPutIndentAfterCharwise)", desc = " Charwise Paste" },
 			{ "<D-p>", "<Plug>(YankyCycleForward)", desc = " Cycle Killring" },
 			{ "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = " Sticky Yank" },
-			"d", -- so it loads the killring in time
+			{ "Y", "y$" }, -- so it loads the killring in time
+			"d",
 			"D",
-			"Y",
 		},
 		opts = {
 			ring = { history_length = 50 },

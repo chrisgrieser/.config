@@ -54,9 +54,7 @@ local setupEfmConfig = function()
 
 	-- use for codespell for all except bib and css
 	for ft, _ in pairs(languages) do
-		if ft ~= "bib" and ft ~= "css" then
-			table.insert(languages[ft], codespell)
-		end
+		if ft ~= "bib" and ft ~= "css" then table.insert(languages[ft], codespell) end
 	end
 
 	-- INFO efm has to be installed via `brew`, since mason only installs it via go.
@@ -93,7 +91,8 @@ return {
 			{
 				"<D-s>",
 				function()
-					vim.lsp.buf.format() -- unwanted LSP-formatting already disabled in lsp-config.lua
+					local attachedLsps = vim.lsp.buf_get_clients(0)
+					if #attachedLsps > 0 then vim.lsp.buf.format() end
 					vim.cmd.update()
 				end,
 				desc = "󰒕 Format & Save",

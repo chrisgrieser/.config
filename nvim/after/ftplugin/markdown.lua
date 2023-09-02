@@ -28,12 +28,7 @@ optl.spell = false
 -- MARKDOWN-SPECIFIC KEYMAPS
 
 -- Build / Preview
-keymap(
-	"n",
-	"<localleader><localleader>",
-	"<Plug>MarkdownPreview",
-	{ desc = " Preview", buffer = true }
-)
+keymap("n", "<localleader>p", "<Plug>MarkdownPreview", { desc = " Preview", buffer = true })
 
 -- do not ignore type "string" in md, since that's what headings in markdown are
 -- stylua: ignore
@@ -74,7 +69,7 @@ keymap({ "n", "x" }, "<C-k>", [[?^#\+ <CR><cmd>nohl<CR>]], { desc = " # Prev 
 -- SPELLING
 
 local lang = "de-DE"
-keymap("n", "zd", function()
+keymap("n", "<localleader>d", function()
 	local clients = vim.lsp.buf_get_clients(0)
 	for _, client in ipairs(clients) do
 		if client.name == "ltex" then
@@ -85,6 +80,19 @@ keymap("n", "zd", function()
 		end
 	end
 end, { desc = "󰓆 Set ltex language to " .. lang, buffer = true })
+
+keymap("n", "zg", function()
+	local clients = vim.lsp.buf_get_clients(0)
+	for _, client in ipairs(clients) do
+		if client.name == "ltex" then
+			local word = vim.fn.expand("<cword>")
+			table.insert(client.config.settings.ltex.dictionary["en-US"], word)
+			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = client.config.settings })
+			return
+		end
+	end
+	return "zg" -- regular "zg" run via expr = true
+end, { desc = "󰓆 Add Word", buffer = true, expr = true })
 
 --------------------------------------------------------------------------------
 -- GUI KEYBINDINGS
