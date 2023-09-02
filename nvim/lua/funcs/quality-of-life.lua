@@ -178,13 +178,15 @@ function M.selectMake()
 		return
 	end
 
-	-- color comment
+	-- color make comment
 	vim.api.nvim_create_autocmd("FileType", {
 		pattern = "DressingSelect",
-		once = true, -- to not affect other dressing selections
+		once = true, -- do not affect other dressing selections
 		callback = function()
+			local winNs = 1
+			vim.api.nvim_win_set_hl_ns(0, winNs)
 			vim.fn.matchadd("MakeComment", "#.*$")
-			vim.api.nvim_set_hl(0, "MakeComment", { link = "Comment" })
+			vim.api.nvim_set_hl(winNs, "MakeComment", { link = "Comment" })
 		end,
 	})
 
@@ -196,6 +198,7 @@ function M.selectMake()
 
 	vim.ui.select(recipes, { prompt = " Select recipe:" }, function(recipe)
 		if recipe == nil then return end
+		recipe = recipe:match("^%w+") -- remove comment and ":"
 		local output = vim.fn.system { "make", "--silent", recipe }
 		local logLevel = vim.v.shell_error == 0 and vim.log.levels.INFO or vim.log.levels.ERROR
 		vim.notify(output, logLevel)
