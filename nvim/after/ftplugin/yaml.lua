@@ -28,20 +28,6 @@ vim.keymap.set("n", "<localleader>j", function()
 		return
 	end
 	vim.fn.system { "open", "-R", nameAsJson }
-end, { buffer = true, desc = " Convert to JSON" })
+end, { buffer = true, desc = " Convert to JSON" })
 
 --------------------------------------------------------------------------------
-
--- Compile Karabiner Config
-vim.keymap.set("n", "<localleader><localleader>", function()
-	vim.cmd("silent update")
-	local parentFolder = vim.fn.expand("%:p:h")
-	if parentFolder:find("/karabiner") then
-		local karabinerBuildScp = vim.env.DOTFILE_FOLDER .. "/karabiner/build-karabiner-config.js"
-		local result = vim.fn.system { "osascript", "-l", "JavaScript", karabinerBuildScp }
-		result = result:gsub("\n$", "")
-		vim.notify(result)
-	else
-		vim.notify("Not in Karabiner Directory.", vim.log.levels.WARN)
-	end
-end, { buffer = true, desc = " Compile Karabiner Config" })

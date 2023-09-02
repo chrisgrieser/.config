@@ -33,7 +33,7 @@ return {
 				name = { ".venv" },
 				auto_refresh = true,
 				notify_user_on_activate = false,
-				dap_enabled = true, -- requires: nvim-dap-python, debugpy, nvim-dap
+				dap_enabled = false, -- requires: nvim-dap-python, debugpy, nvim-dap
 				parents = 0, -- no need to search upwards, since projects.nvim sets pwd to the correct root already
 			}
 			venvLualine()

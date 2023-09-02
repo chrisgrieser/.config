@@ -68,9 +68,8 @@ function main() {
 			`"/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli" --lint-complex-modifications "${karabinerJSON}"`,
 		)
 		.trim();
-	const msg = lintStatus === "ok" ? "✅ Build Success" : "🛑 Config Invalid";
-
-	return `Karabiner Config:\n${msg}`;
+	const msg = lintStatus === "ok" ? "✅ Build Success." : "🛑 Config Invalid.";
+	return msg
 }
 
 main();
