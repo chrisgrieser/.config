@@ -186,8 +186,8 @@ end
 
 --------------------------------------------------------------------------------
 
-keymap("n", "<leader>r", function() require("funcs.maker").make() end, { desc = " Make" })
-keymap("n", "<leader>R", function() require("funcs.maker").selectMake() end, { desc = " Select Make" })
+keymap("n", "<leader>r", function() require("funcs.maker").make("runFirst") end, { desc = " Make First" })
+keymap("n", "<leader>R", function() require("funcs.maker").make() end, { desc = " Select Make" })
 
 --------------------------------------------------------------------------------
 -- GIT
