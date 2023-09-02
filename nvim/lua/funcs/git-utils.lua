@@ -72,8 +72,6 @@ local function processCommitMsg(commitMsg)
 		vim.notify("Commit Message too long.", vim.log.levels.WARN)
 		local shortenedMsg = commitMsg:sub(1, 50)
 		return false, shortenedMsg
-
-	-- no commitMsg -> prefill just "chore"
 	elseif commitMsg == "" then
 		return true, "chore"
 	end
@@ -91,24 +89,20 @@ local function processCommitMsg(commitMsg)
 	return true, commitMsg
 end
 
----@param on boolean true = highlights on, false = highlights off
-local function hlTooLongCommitMsgs(on)
-	if on then
-		vim.api.nvim_create_augroup("tooLongCommitMsg", {})
-		vim.api.nvim_create_autocmd("FileType", {
-			group = "tooLongCommitMsg",
-			pattern = "DressingInput",
-			callback = function()
-				vim.g.hlTooLongMatchId = fn.matchadd("commitmsg", [[.\{50}\zs.*\ze]])
-				vim.opt_local.colorcolumn = "50"
-				vim.api.nvim_set_hl(0, "MakeComment", { link = "Comment" })
-			end,
-		})
-	else
-		-- clear the previously setup hl again, so other Input fields are not affected
-		-- also done early, so the highlight is even deleted on aborting the input
-		vim.api.nvim_del_augroup_by_name("tooLongCommitMsg")
-	end
+local function hlTooLongCommitMsgs()
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = "DressingInput",
+		once = true, -- do not affect other dressing inputs
+		callback = function()
+			local winNs = 1
+			vim.api.nvim_win_set_hl_ns(0, winNs)
+			fn.matchadd("commitmsg", [[.\{50}\zs.*\ze]])
+
+			vim.opt_local.colorcolumn = "50"
+			vim.api.nvim_set_hl(winNs, "commitmsg", { bg = "#E06C75" })
+			vim.api.nvim_set_hl(winNs, "commitmsg", { bg = "#E06C75" })
+		end,
+	})
 end
 
 --------------------------------------------------------------------------------
@@ -142,10 +136,9 @@ function M.amendAndPushForce(prefillMsg)
 		local lastCommitMsg = fn.system("git log -1 --pretty=%B"):gsub("%s+$", "")
 		prefillMsg = lastCommitMsg
 	end
-	hlTooLongCommitMsgs(true)
+	hlTooLongCommitMsgs()
 
 	vim.ui.input({ prompt = " 󰊢 Amend", default = prefillMsg }, function(commitMsg)
-		hlTooLongCommitMsgs(false) -- early, so also done on cancellation
 		if not commitMsg then return end -- aborted input modal
 		local validMsg, newMsg = processCommitMsg(commitMsg)
 
@@ -168,10 +161,9 @@ function M.commit(prefillMsg)
 	vim.cmd("silent update")
 	if not isInGitRepo() then return end
 	if not prefillMsg then prefillMsg = "" end
-	hlTooLongCommitMsgs(true)
+	hlTooLongCommitMsgs()
 
 	vim.ui.input({ prompt = " 󰊢 Commit Message", default = prefillMsg }, function(commitMsg)
-		hlTooLongCommitMsgs(false) -- early, so also done on cancellation
 		if not commitMsg then return end -- aborted input modal
 		local validMsg, newMsg = processCommitMsg(commitMsg)
 		if not validMsg then -- if msg invalid, run again to fix the msg
@@ -198,10 +190,9 @@ function M.addCommitPush(prefillMsg)
 	vim.cmd("silent update")
 	if not isInGitRepo() then return end
 	if not prefillMsg then prefillMsg = "" end
-	hlTooLongCommitMsgs(true)
+	hlTooLongCommitMsgs()
 
 	vim.ui.input({ prompt = " 󰊢 Commit Message", default = prefillMsg }, function(commitMsg)
-		hlTooLongCommitMsgs(false) -- early, so also done on cancellation
 		if not commitMsg then return end -- aborted input modal
 		local validMsg, newMsg = processCommitMsg(commitMsg)
 		if not validMsg then -- if msg invalid, run again to fix the msg
