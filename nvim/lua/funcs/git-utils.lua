@@ -14,49 +14,32 @@ local function isInGitRepo()
 	return inGitRepo
 end
 
----@param soundFilepath any
-local function playSoundMacOS(soundFilepath) fn.system(("afplay '%s' &"):format(soundFilepath)) end
-
 --NOTE this requires an outer-scope output variable which needs to be emptied
 --before the run
-local output = {}
 local gitShellOpts = {
 	stdout_buffered = true,
 	stderr_buffered = true,
 	detach = true, -- run even when quitting nvim
 	on_stdout = function(_, data)
-		if not (data[1] == "") then table.insert(output, data[1]) end
+		if data[1] == "" and #data == 1 then return end
+		local output = table.concat(data, "\n")
+
+		-- prevent double notifications
+		local ok, notify = pcall(require, "notify")
+		if ok then notify.dismiss() end
+
+		vim.notify(output)
+
 	end,
 	on_stderr = function(_, data)
-		if not (data[1] == "") then table.insert(output, data[1]) end
+		if data[1] == "" and #data == 1 then return end
+		local output = table.concat(data, "\n")
+		vim.notify(output, vim.log.levels.ERROR)
 	end,
 	on_exit = function()
 		-- reload buffer if changed, e.g., due to linters or pandocvim
 		-- (also requires opt.autoread being enabled)
 		vim.cmd("silent checktime")
-		os.execute("sketchybar --trigger repo-files-update") -- specific to my setup
-
-		if #output == 0 then return end
-		local out = table.concat(output, " \n ")
-
-		local logLevel
-		if out:lower():find("error") then
-			logLevel = vim.log.levels.ERROR
-			playSoundMacOS("/System/Library/Sounds/Basso.aiff")
-		elseif out:lower():find("warning") then
-			logLevel = vim.log.levels.WARN
-			playSoundMacOS("/System/Library/Sounds/Basso.aiff")
-		else
-			logLevel = vim.log.levels.INFO
-			playSoundMacOS(
-				"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf"
-			)
-		end
-		local ok, notify = pcall(require, "notify")
-		if ok then notify.dismiss() end
-		vim.notify(out, logLevel)
-
-		output = {} -- empty for next run
 	end,
 }
 
@@ -91,7 +74,7 @@ end
 
 -- Uses ColorColumn of 50 to indicate max length of commit messages, and
 -- additionally colors commit messages that are too long in red.
-local function hlTooLongCommitMsgs()
+local function setGitCommitAppearance()
 	vim.api.nvim_create_autocmd("FileType", {
 		pattern = "DressingInput",
 		once = true, -- do not affect other dressing inputs
@@ -99,6 +82,9 @@ local function hlTooLongCommitMsgs()
 			local winNs = 1
 			vim.api.nvim_win_set_hl_ns(0, winNs)
 			fn.matchadd("commitmsg", [[.\{49}\zs.*\ze]])
+
+			vim.bo.filetype = "gitcommit" -- for treesitter highlighting
+			vim.api.nvim_set_hl(winNs, "Title", { link = "Normal" })
 
 			vim.opt_local.colorcolumn = "50"
 			vim.api.nvim_set_hl(winNs, "ColorColumn", { link = "DiagnosticVirtualTextInfo" })
@@ -127,7 +113,7 @@ function M.amendAndPushForce(prefillMsg)
 		local lastCommitMsg = fn.system("git log -1 --pretty=%B"):gsub("%s+$", "")
 		prefillMsg = lastCommitMsg
 	end
-	hlTooLongCommitMsgs()
+	setGitCommitAppearance()
 
 	vim.ui.input({ prompt = " 󰊢 Amend", default = prefillMsg }, function(commitMsg)
 		if not commitMsg then return end -- aborted input modal
@@ -152,7 +138,7 @@ function M.commit(prefillMsg)
 	vim.cmd("silent update")
 	if not isInGitRepo() then return end
 	if not prefillMsg then prefillMsg = "" end
-	hlTooLongCommitMsgs()
+	setGitCommitAppearance()
 
 	vim.ui.input({ prompt = " 󰊢 Commit Message", default = prefillMsg }, function(commitMsg)
 		if not commitMsg then return end -- aborted input modal
@@ -171,7 +157,10 @@ end
 ---@param prefillMsg? string
 function M.addCommit(prefillMsg)
 	local stdout = fn.system { "git", "add", "-A" }
-	if vim.v.shell_error ~= 0 then vim.notify("Error: " .. stdout, vim.log.levels.WARN) end
+	if vim.v.shell_error ~= 0 then
+		vim.notify("Error: " .. stdout, vim.log.levels.WARN)
+		return
+	end
 	M.commit(prefillMsg)
 end
 
@@ -181,7 +170,7 @@ function M.addCommitPush(prefillMsg)
 	vim.cmd("silent update")
 	if not isInGitRepo() then return end
 	if not prefillMsg then prefillMsg = "" end
-	hlTooLongCommitMsgs()
+	setGitCommitAppearance()
 
 	vim.ui.input({ prompt = " 󰊢 Commit Message", default = prefillMsg }, function(commitMsg)
 		if not commitMsg then return end -- aborted input modal

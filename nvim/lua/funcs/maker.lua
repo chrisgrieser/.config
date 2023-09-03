@@ -19,17 +19,32 @@ end
 local function runMake(recipe)
 	if not checkForMakefile() then return end
 
-	local output = vim.fn.system({ "make", "--silent", recipe }):gsub("%s+$", "")
-	local success = vim.v.shell_error == 0
-	local appendix = output:find("[\n\r]") and "\n" or ": "
-	local title = recipe:upper() .. appendix
+	-- local output = vim.fn.system({ "make", "--silent", recipe }):gsub("%s+$", "")
 
-	if success then
-		if output == "" then output = "Done." end
-		vim.notify(title .. output)
-	else
-		vim.notify("ERROR " .. title .. output, vim.log.levels.ERROR)
+	local function formatTitle(output)
+		local appendix = output:find("[\n\r]") and "\n" or ": "
+		return recipe:upper() .. appendix
 	end
+
+	-- using async jobstart in case of a slow recipe
+	vim.fn.jobstart({ "make", "--silent", recipe }, {
+		stdout_buffered = true,
+		stderr_buffered = true,
+		detach = true, -- run even when quitting nvim
+		on_stdout = function(_, data)
+			if data[1] == "" and #data == 1 then return end
+			local output = table.concat(data, "\n")
+			local title = formatTitle(output)
+			vim.notify(title .. output)
+		end,
+		on_stderr = function(_, data)
+			if data[1] == "" and #data == 1 then return end
+			local output = table.concat(data, "\n")
+			local title = formatTitle(output)
+			vim.notify("ERROR " .. title .. output, vim.log.levels.ERROR)
+		end,
+	})
+
 end
 
 ---Select a recipe from the makefile
