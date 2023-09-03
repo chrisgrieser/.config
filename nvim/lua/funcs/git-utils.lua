@@ -101,6 +101,8 @@ local function setGitCommitAppearance()
 			fn.matchadd("commitmsg", [[.\{49}\zs.*\ze]])
 
 			vim.bo.filetype = "gitcommit" -- for treesitter highlighting
+			vim.api.nvim_buf_set_name(0, "COMMIT_EDITMSG") -- for statusline
+
 			vim.api.nvim_set_hl(winNs, "Title", { link = "Normal" })
 
 			vim.opt_local.colorcolumn = "50"
@@ -197,7 +199,6 @@ function M.addCommitPush(prefillMsg)
 	if not prefillMsg then prefillMsg = "" end
 	setGitCommitAppearance()
 
-	-- test
 	vim.ui.input({ prompt = " 󰊢 Commit Message", default = prefillMsg }, function(commitMsg)
 		if not commitMsg then return end -- aborted input modal
 		local validMsg, newMsg = processCommitMsg(commitMsg)
