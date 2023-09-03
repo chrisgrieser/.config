@@ -46,19 +46,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>0D8928D6-5087-4D58-B121-45D4C8D4D57A</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>020D9F57-BA78-4524-B525-C298807E62F4</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<array>
 			<dict>
@@ -333,50 +320,6 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>scratch</string>
-				<key>subtext</key>
-				<string>in neovide, from clipboard</string>
-				<key>text</key>
-				<string>Scratch File</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>0D8928D6-5087-4D58-B121-45D4C8D4D57A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>open-scratch-file.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>020D9F57-BA78-4524-B525-C298807E62F4</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
@@ -415,15 +358,6 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>020D9F57-BA78-4524-B525-C298807E62F4</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>190</real>
-			<key>ypos</key>
-			<real>310</real>
-		</dict>
 		<key>022D7D2B-3AAA-4479-88EA-37950B786C70</key>
 		<dict>
 			<key>colorindex</key>
@@ -443,15 +377,6 @@ osascript -l JavaScript "./open-dot-file.js" "$DOTFILE_FOLDER"</string>
 			<real>520</real>
 			<key>ypos</key>
 			<real>40</real>
-		</dict>
-		<key>0D8928D6-5087-4D58-B121-45D4C8D4D57A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>310</real>
 		</dict>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<dict>
@@ -509,7 +434,7 @@ check if path different from PWD</string>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>450</real>
+			<real>315</real>
 		</dict>
 		<key>EFBDEF53-AB17-4729-8BC2-EFCCB8C7F859</key>
 		<dict>
@@ -518,7 +443,7 @@ check if path different from PWD</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>450</real>
+			<real>315</real>
 		</dict>
 		<key>F146B53A-B75E-4B95-8AC5-9AB4944913F4</key>
 		<dict>

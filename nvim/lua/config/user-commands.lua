@@ -79,34 +79,3 @@ newCommand("Curl", function(ctx)
 	a.nvim_buf_set_option(bufId, "buftype", "nowrite") -- no-write allows lsp to attach
 	vim.defer_fn(function() vim.cmd.Format() end, 100) -- formatter.nvim
 end, { nargs = 1 })
-
--- Scratchpad Buffer
-newCommand("Scratch", function()
-	local a = vim.api
-
-	-- screate buffer
-	local bufId = a.nvim_create_buf(true, false)
-	local success = pcall(a.nvim_buf_set_name, bufId, "Scratchpad")
-	if not success then
-		vim.notify("Scratchpad already exists. ", u.warn)
-		cmd.buffer("Scratchpad")
-		return
-	end
-	a.nvim_buf_set_option(bufId, "buftype", "nowrite") -- no-write allows lsp to attach
-	cmd.buffer(bufId)
-
-	-- prompt for filetype
-	local filetypes = { "text", "sh", "markdown", "javascript", "json", "lua", "python" }
-	vim.ui.select(filetypes, { prompt = "Select Filetype" }, function(choice)
-		if not choice then return end
-		a.nvim_buf_set_option(bufId, "filetype", choice)
-
-		-- set content from clipboard & format
-		local clipb = vim.fn.getreg("+")
-		if not clipb or clipb == "" then return end
-		local lines = vim.split(clipb, "\n")
-		a.nvim_buf_set_lines(bufId, 0, -1, false, lines)
-		vim.cmd.Format() -- formatter.nvim
-	end)
-end, {})
-
