@@ -76,7 +76,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set("n", "<D-s>", function()
 			vim.cmd.update()
 			vim.lsp.buf.format { name = "efm" }
-			vim.cmd[[silent! lua vim.lsp.buf.code_action { apply = true, context = { only = { "source.fixAll.ruff" } } } ]]
+			vim.lsp.buf.code_action { apply = true, context = { only = { "source.fixAll.ruff" } } }
 		end, { buffer = true, desc = "󰒕 Format & RuffFixAll & Save" })
 	end,
 })
