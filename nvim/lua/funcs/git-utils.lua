@@ -110,7 +110,14 @@ function M.amendNoEditPushForce()
 
 	local lastCommitMsg = fn.system("git log -1 --pretty=%B"):gsub("%s+$", "")
 	vim.notify('󰊢 Amend-No-Edit & Force Push…\n"' .. lastCommitMsg .. '"')
-	fn.jobstart("git add -A && git commit --amend --no-edit ; git push -f", gitShellOpts)
+
+	local stderr = fn.system("git add -A && git commit --amend --no-edit")
+	if vim.v.shell_error ~= 0 then
+		vim.notify("Error: " .. stderr, vim.log.levels.WARN)
+		return
+	end
+
+	fn.jobstart("git push --force", gitShellOpts)
 end
 
 ---@param prefillMsg? string
@@ -134,10 +141,13 @@ function M.amendAndPushForce(prefillMsg)
 		end
 
 		vim.notify('󰊢 Amend & Force Push…\n"' .. newMsg .. '"')
-		fn.jobstart(
-			"git add -A && git commit --amend -m '" .. newMsg .. "' ; git push --force",
-			gitShellOpts
-		)
+		local stderr = fn.system("git add -A && git commit --amend -m '" .. newMsg .. "'")
+		if vim.v.shell_error ~= 0 then
+			vim.notify("Error: " .. stderr, vim.log.levels.WARN)
+			return
+		end
+
+		fn.jobstart("git push --force", gitShellOpts)
 	end)
 end
 
@@ -188,10 +198,14 @@ function M.addCommitPush(prefillMsg)
 		end
 
 		vim.notify('󰊢 git add-commit-push\n"' .. newMsg .. '"')
-		fn.jobstart(
-			"git add -A && git commit -m '" .. newMsg .. "' ; git pull ; git push --force",
-			gitShellOpts
-		)
+
+		local stderr = fn.system("git add -A && git commit --amend -m '" .. newMsg .. "'")
+		if vim.v.shell_error ~= 0 then
+			vim.notify("Error: " .. stderr, vim.log.levels.WARN)
+			return
+		end
+
+		fn.jobstart("git pull ; git push", gitShellOpts)
 	end)
 end
 
