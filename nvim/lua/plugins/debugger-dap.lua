@@ -41,16 +41,15 @@ end
 
 --------------------------------------------------------------------------------
 
---------------------------------------------------------------------------------
-
 return {
-	-- TODO https://github.com/mfussenegger/nvim-dap-python
 	{
 		"mfussenegger/nvim-dap-python",
-		lazy = false,
+		ft = "python",
 		config = function()
-			-- mason-location
-			require("dap-python").setup("/Users/chrisgrieser/.local/share/nvim/mason/packages/debugpy/venv/bin/python3")
+			local debugpyPath = vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python3"
+			require("dap-python").setup(debugpyPath, {
+				console = nil, -- don't open the console by default
+			})
 		end,
 	},
 	{
@@ -65,12 +64,13 @@ return {
 			{ "<leader>bq", function() require("dap").list_breakpoints() end, desc = " Breakpoints to QuickFix"},
 			-- stylua: ignore end
 		},
-		dependencies = { "theHamsta/nvim-dap-virtual-text", "jayp0521/mason-nvim-dap.nvim" },
+		dependencies = { "theHamsta/nvim-dap-virtual-text" },
 		init = function() u.leaderSubkey("b", " Debugger") end,
 		config = function()
 			dapLualine()
 			dapSigns()
 			setupDapListeners()
+			-- setupDebugppy()
 		end,
 	},
 	{
@@ -111,8 +111,9 @@ return {
 					position = "right",
 					size = 35,
 					elements = {
-						{ id = "scopes", size = 0.8 },
+						{ id = "scopes", size = 0.6 },
 						{ id = "stacks", size = 0.2 },
+						{ id = "watches", size = 0.2 },
 					},
 				},
 			},

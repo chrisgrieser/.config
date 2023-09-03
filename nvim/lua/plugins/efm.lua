@@ -1,4 +1,5 @@
-local lintersAndFormatters = {
+local toolsToAutoinstall = {
+	"debugpy", -- just here to install ensure auto-install
 	"codespell",
 	"yamllint",
 	"shellcheck",
@@ -80,7 +81,7 @@ return {
 		config = function()
 			-- triggered myself, since `run_on_start`, does not work w/ lazy-loading
 			require("mason-tool-installer").setup {
-				ensure_installed = lintersAndFormatters,
+				ensure_installed = toolsToAutoinstall,
 				run_on_start = false,
 			}
 			vim.defer_fn(vim.cmd.MasonToolsInstall, 500)
