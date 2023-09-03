@@ -71,6 +71,16 @@ local function cmpconfig()
 		snippet = {
 			expand = function(args) require("luasnip").lsp_expand(args.body) end,
 		},
+		performance = {
+			-- PERF lower values for lag-free performance
+			-- default values: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L18
+			-- explanations: https://github.com/hrsh7th/nvim-cmp/blob/main/doc/cmp.txt#L425
+			debounce = 30,
+			throttle = 20,
+			fetching_timeout = 250,
+			async_budget = 0.8,
+			max_view_entries = 100,
+		},
 		window = {
 			completion = {
 				side_padding = 0,
@@ -217,6 +227,13 @@ local function filetypeCompletionConfig()
 			s.treesitter,
 			s.nerdfont, -- used for some configs
 			s.emojis,
+		},
+	})
+
+	cmp.setup.filetype("make", {
+		sources = cmp.config.sources {
+			s.path,
+			s.zsh,
 		},
 	})
 

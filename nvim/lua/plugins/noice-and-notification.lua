@@ -31,6 +31,9 @@ local routes = {
 	-- is triggered on every format
 	{ filter = { event = "notify", find = "^No code actions available$" }, skip = true },
 
+	-- DAP
+	{ filter = { event = "notify", find = "^Session terminated$" }, view = "mini" },
+
 	-- redirect to split
 	{ filter = { event = "msg_show", min_height = 15 }, view = "popup" },
 	{ filter = { event = "notify", min_height = 15 }, view = "popup" },

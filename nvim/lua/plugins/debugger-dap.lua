@@ -16,7 +16,7 @@ local function dapLualine()
 		end
 		if breakpointSum == 0 then return "" end
 		local breakpointIcon = vim.fn.sign_getdefined("DapBreakpoint")[1].text
-		return breakpointIcon .. " " .. tostring(breakpointSum)
+		return breakpointIcon .. tostring(breakpointSum)
 	end)
 
 	require("config.theme-customization").reloadTheming()
@@ -24,11 +24,15 @@ end
 
 local function dapSigns()
 	local sign = vim.fn.sign_define
-	sign("DapBreakpoint", { text = "", texthl = "DiagnosticInfo" })
-	sign("DapBreakpointCondition", { text = "󰇽", texthl = "DiagnosticInfo" })
-	sign("DapLogPoint", { text = "󰍨", texthl = "DiagnosticInfo" })
-	sign("DapStopped", { text = "󰏧", texthl = "DiagnosticHint" })
-	sign("DapBreakpointRejected", { text = "󰅜", texthl = "DiagnosticError" })
+	sign("DapBreakpoint", { text = "", texthl = "DiagnosticInfo" })
+	sign("DapStopped", { text = "➡️", texthl = "DiagnosticHint" })
+	sign("DapBreakpointCondition", { text = "", texthl = "DiagnosticInfo" })
+	sign("DapLogPoint", { text = "", texthl = "DiagnosticInfo" })
+	sign("DapBreakpointRejected", { text = "", texthl = "DiagnosticError" })
+
+	-- current line
+	u.getHighlightValue("DapBreakpoint", "bg")
+	u.colorschemeMod("DebugPC", { bg = "LineNr" })
 end
 
 local function terminateCallback() require("dapui").close() end
@@ -52,7 +56,6 @@ return {
 			{ "<leader>bd", function() require("dap").clear_breakpoints() end, desc = " Remove Breakpoints" },
 			{ "<leader>br", function() require("dap").restart() end, desc = " Restart" },
 			{ "<leader>bt", function() require("dap").terminate({}, {}, terminateCallback) end, desc = " Terminate" },
-			{ "<leader>bq", function() require("dap").list_breakpoints() end, desc = " Breakpoints to QuickFix"},
 			-- stylua: ignore end
 		},
 		dependencies = { "theHamsta/nvim-dap-virtual-text" },
@@ -61,7 +64,6 @@ return {
 			dapSigns()
 			dapLualine()
 			setupDapListeners()
-			-- setupDebugppy()
 		end,
 	},
 	{
@@ -111,7 +113,6 @@ return {
 	-----------------------------------------------------------------------------
 	-- language-specific debugger plugins
 	{
-		-- TODO replace with custom config? https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#python
 		"mfussenegger/nvim-dap-python",
 		ft = "python",
 		config = function()
