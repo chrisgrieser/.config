@@ -28,6 +28,7 @@ function pr() {
 function fixup() {
 	local target
 	target=$(git log --oneline | fzf | cut -d" " -f1)
+	[[ -z "$target" ]] && return 0
 	git commit --fixup="$target"
 
 	# HACK to make non-interactive rebase work with --autosquash: https://www.reddit.com/r/git/comments/uzh2no/what_is_the_utility_of_noninteractive_rebase/
