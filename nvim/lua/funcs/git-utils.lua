@@ -17,7 +17,6 @@ end
 ---@param soundFilepath any
 local function playSoundMacOS(soundFilepath) fn.system(("afplay %q &"):format(soundFilepath)) end
 
-
 --NOTE this requires an outer-scope output variable which needs to be emptied
 --before the run
 local gitShellOpts = {
@@ -28,11 +27,6 @@ local gitShellOpts = {
 		if data[1] == "" and #data == 1 then return end
 		local output = table.concat(data, "\n"):gsub("%s*$", "")
 
-		-- prevent double notifications
-		require("notify").dismiss()
-		local ok, notify = pcall(require, "notify")
-		if ok then notify.dismiss() end
-
 		vim.notify(output)
 		playSoundMacOS(
 			"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf"
@@ -41,8 +35,21 @@ local gitShellOpts = {
 	on_stderr = function(_, data)
 		if data[1] == "" and #data == 1 then return end
 		local output = table.concat(data, "\n"):gsub("%s*$", "")
-		vim.notify(output, vim.log.levels.ERROR)
-		playSoundMacOS("/System/Library/Sounds/Basso.aiff")
+
+		-- git often puts non-errors into STDERR, therefore checking here again
+		-- whether it is actually an error or not
+		local logLevel = vim.log.levels.INFO
+		local sound = "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf"
+		if output:lower():find("error") then
+			logLevel = vim.log.levels.ERROR
+			sound = "/System/Library/Sounds/Basso.aiff"
+		elseif output:lower():find("warning") then
+			logLevel = vim.log.levels.WARN
+			sound = "/System/Library/Sounds/Basso.aiff"
+		end
+
+		vim.notify(output, logLevel)
+		playSoundMacOS(sound)
 	end,
 	on_exit = function()
 		-- reload buffer if changed, e.g., due to linters or pandocvim
