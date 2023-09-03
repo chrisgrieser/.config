@@ -25,14 +25,21 @@ end
 local function dapSigns()
 	local sign = vim.fn.sign_define
 	sign("DapBreakpoint", { text = "", texthl = "DiagnosticInfo" })
-	sign("DapStopped", { text = "➡️", texthl = "DiagnosticHint" })
+	sign("DapStopped", { text = "", texthl = "DiagnosticHint" })
 	sign("DapBreakpointCondition", { text = "", texthl = "DiagnosticInfo" })
 	sign("DapLogPoint", { text = "", texthl = "DiagnosticInfo" })
 	sign("DapBreakpointRejected", { text = "", texthl = "DiagnosticError" })
 
-	-- current line
-	u.getHighlightValue("DapBreakpoint", "bg")
-	u.colorschemeMod("DebugPC", { bg = "LineNr" })
+	-- current line: apply only background of hints
+	local function currentDapLineHl()
+		local hintBg = u.getHighlightValue("DiagnosticVirtualTextHint", "bg")
+		vim.api.nvim_set_hl(0, "DebugPC", { bg = hintBg })
+	end
+
+	vim.api.nvim_create_autocmd("ColorScheme", {
+		callback = currentDapLineHl,
+	})
+	currentDapLineHl() -- initialize
 end
 
 local function terminateCallback() require("dapui").close() end
