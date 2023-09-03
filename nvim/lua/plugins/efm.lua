@@ -35,6 +35,7 @@ local setupEfmConfig = function()
 	local codespell = require("tool-configs.linters.codespell")
 	local stylelint_L = require("tool-configs.linters.stylelint")
 	local stylelint_F = require("tool-configs.formatters.stylelint")
+	local bibtexTidy = require("tool-configs.formatters.bibtex-tidy")
 
 	local languages = {
 		javascript = { biome },
@@ -48,6 +49,7 @@ local setupEfmConfig = function()
 		sh = { shfmt, shellcheck, shellharden },
 		yaml = { yamllint, prettier },
 		markdown = { markdownlint, mdformat },
+		bib = { bibtexTidy },
 		gitcommit = {},
 		toml = {},
 	}
@@ -61,7 +63,7 @@ local setupEfmConfig = function()
 	-- https://github.com/williamboman/mason.nvim/issues/1481
 	require("lspconfig").efm.setup {
 		filetypes = vim.tbl_keys(languages),
-		init_options = { documentFormatting = true },
+		init_options = { documentFormatting = true, documentRangeFormatting = true },
 		settings = { rootMarkers = { ".git/" }, languages = languages },
 	}
 
@@ -95,6 +97,7 @@ return {
 					if #attachedLsps > 0 then vim.lsp.buf.format() end
 					vim.cmd.update()
 				end,
+				mode = {"n", "x"},
 				desc = "󰒕 Format & Save",
 			},
 		},
