@@ -14,8 +14,13 @@ local evalCmds = {
 	typescript = { repl = "node -e", printer = "console.log(%s)" },
 }
 
-local function dedent()
-	
+---@param lines string[]
+---@return string[] dedentedLines
+local function dedent(lines)
+	local indentAmounts = vim.tbl_map(function(line) return #(line:match("^%s*")) end, lines)
+	local smallestIndent = math.min(unpack(indentAmounts))
+	local dedentedLines = vim.tbl_map(function(line) return line:sub(smallestIndent + 1) end, lines)
+	return dedentedLines
 end
 
 -- run as `init` for mini.operators
@@ -28,29 +33,22 @@ function M.filetypeSpecificEval()
 			local printer = evalCmds[ft].printer
 
 			local evalFunc = function(content)
+				local originalLines = vim.deepcopy(content.lines)
 				local inputLines = vim.deepcopy(content.lines)
+				if ft == "python" then inputLines = dedent(inputLines) end
 
 				if printer then
-					local lastLine = table.remove(content.lines)
+					local lastLine = table.remove(inputLines)
 					local printCmd = printer:match("^%w+")
 					if not (vim.startswith(lastLine, printCmd)) then lastLine = printer:format(lastLine) end
-					table.insert(content.lines, lastLine)
+					table.insert(inputLines, lastLine)
 				end
 
-				-- fix python not being able to read unindented lines
-				if ft == "python" then 
-					content.lines = vim.tbl_map(function (line)
-						local unindentedLines = line:gsub("^%s*", "")
-						return unindentedLines
-					end, content.lines)
-				end
-
-				local lines = table.concat(content.lines, "\n")
-
+				local lines = table.concat(inputLines, "\n")
 				local shellCmd = repl .. " '" .. lines:gsub("'", "\\'") .. "'"
 				local evaluatedOut = vim.fn.system(shellCmd):gsub("\n$", "")
 				vim.notify(evaluatedOut)
-				return inputLines -- do not modify original lines
+				return originalLines -- do not modify original lines
 			end
 
 			-- DOCS https://github.com/echasnovski/mini.operators/blob/main/doc/mini-operators.txt#L214
