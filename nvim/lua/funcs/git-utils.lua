@@ -17,6 +17,8 @@ end
 ---@param soundFilepath any
 local function playSoundMacOS(soundFilepath) fn.system(("afplay %q &"):format(soundFilepath)) end
 
+-- some comment
+
 --NOTE this requires an outer-scope output variable which needs to be emptied
 --before the run
 local gitShellOpts = {
@@ -205,7 +207,7 @@ function M.addCommitPush(prefillMsg)
 
 		vim.notify('󰊢 git add-commit-push\n"' .. newMsg .. '"')
 
-		local stderr = fn.system("git add -A && git commit --amend -m '" .. newMsg .. "'")
+		local stderr = fn.system("git add -A && git commit -m '" .. newMsg .. "'")
 		if vim.v.shell_error ~= 0 then
 			vim.notify("Error: " .. stderr, vim.log.levels.WARN)
 			return
