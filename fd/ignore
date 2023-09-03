@@ -18,3 +18,4 @@
 LICENSE
 package.json
 package-lock.json
+__init__.py
