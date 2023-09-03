@@ -68,15 +68,13 @@ function M.make(useFirst)
 		return
 	end
 
-	-- colorize make comments in the same line
+	-- colorize, e.g. comments in the same line
 	vim.api.nvim_create_autocmd("FileType", {
 		pattern = "DressingSelect",
 		once = true, -- do not affect other dressing selections
 		callback = function()
-			local winNs = 1
-			vim.api.nvim_win_set_hl_ns(0, winNs)
-			vim.fn.matchadd("MakeComment", "#.*$")
-			vim.api.nvim_set_hl(winNs, "MakeComment", { link = "Comment" })
+			vim.api.nvim_buf_set_name(0, "Makefile") -- for statusline plugins
+			vim.bo.filetype = "make"
 		end,
 	})
 
