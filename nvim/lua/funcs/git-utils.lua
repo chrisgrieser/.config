@@ -1,6 +1,16 @@
 local M = {}
 local fn = vim.fn
 
+
+---send notification
+---@param msg string
+---@param level? "info"|"trace"|"debug"|"warn"|"error"
+local function notify(msg, level)
+	if not level then level = "info" end
+	local pluginName = "Mini Git"
+	vim.notify(msg, vim.log.levels[level:upper()], { title = pluginName })
+end
+
 --------------------------------------------------------------------------------
 -- HELPERS
 
@@ -10,7 +20,7 @@ local fn = vim.fn
 local function isInGitRepo()
 	fn.system("git rev-parse --is-inside-work-tree")
 	local inGitRepo = vim.v.shell_error == 0
-	if not inGitRepo then vim.notify("Not a GitHub Repo.", vim.log.levels.WARN, { title = "Mini Git" }) end
+	if not inGitRepo then notify("Not in Git Repo.", "warn") end
 	return inGitRepo
 end
 
@@ -31,7 +41,7 @@ local gitShellOpts = {
 		if data[1] == "" and #data == 1 then return end
 		local output = table.concat(data, "\n"):gsub("%s*$", "")
 
-		vim.notify(output)
+		notify(output)
 		playSoundMacOS(
 			"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf"
 		)
@@ -42,18 +52,18 @@ local gitShellOpts = {
 
 		-- git often puts non-errors into STDERR, therefore checking here again
 		-- whether it is actually an error or not
-		local logLevel = vim.log.levels.INFO
+		local logLevel = "info"
 		local sound =
 			"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf"
 		if output:lower():find("error") then
-			logLevel = vim.log.levels.ERROR
+			logLevel = "error"
 			sound = "/System/Library/Sounds/Basso.aiff"
 		elseif output:lower():find("warning") then
-			logLevel = vim.log.levels.WARN
+			logLevel = "warn"
 			sound = "/System/Library/Sounds/Basso.aiff"
 		end
 
-		vim.notify(output, logLevel)
+		notify(output, logLevel)
 		playSoundMacOS(sound)
 	end,
 	on_exit = function()
@@ -72,7 +82,7 @@ local gitShellOpts = {
 local function processCommitMsg(commitMsg)
 	-- ensure max 50 chars
 	if #commitMsg > 50 then
-		vim.notify("Commit Message too long.", vim.log.levels.WARN)
+		notify("Commit Message too long.", "warn")
 		local shortenedMsg = commitMsg:sub(1, 50)
 		return false, shortenedMsg
 	elseif commitMsg == "" then
@@ -84,7 +94,7 @@ local function processCommitMsg(commitMsg)
 	local conventionalCommits = { "chore", "build", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs", "improv", "break" }
 	local firstWord = commitMsg:match("^%w+")
 	if not vim.tbl_contains(conventionalCommits, firstWord) then
-		vim.notify("Not using a Conventional Commits keyword.", vim.log.levels.WARN)
+		notify("Not using a Conventional Commits keyword.", "warn")
 		return false, commitMsg
 	end
 
@@ -122,7 +132,7 @@ function M.amendNoEditPushForce()
 	if not isInGitRepo() then return end
 
 	local lastCommitMsg = fn.system("git log -1 --pretty=%B"):gsub("%s+$", "")
-	vim.notify('󰊢 Amend-No-Edit & Force Push…\n"' .. lastCommitMsg .. '"')
+	notify('󰊢 Amend-No-Edit & Force Push…\n"' .. lastCommitMsg .. '"')
 
 	local stderr = fn.system("git add -A && git commit --amend --no-edit")
 	if vim.v.shell_error ~= 0 then
@@ -153,10 +163,10 @@ function M.amendAndPushForce(prefillMsg)
 			return
 		end
 
-		vim.notify('󰊢 Amend & Force Push…\n"' .. newMsg .. '"')
+		notify('󰊢 Amend & Force Push…\n"' .. newMsg .. '"')
 		local stderr = fn.system("git add -A && git commit --amend -m '" .. newMsg .. "'")
 		if vim.v.shell_error ~= 0 then
-			vim.notify("Error: " .. stderr, vim.log.levels.WARN)
+			notify(stderr, "warn")
 			return
 		end
 
@@ -179,17 +189,17 @@ function M.commit(prefillMsg)
 			return
 		end
 
-		vim.notify('󰊢 git commit\n"' .. newMsg .. '"')
-		local stdout = fn.system { "git", "commit", "-m", newMsg }
-		if vim.v.shell_error ~= 0 then vim.notify("Error: " .. stdout, vim.log.levels.WARN) end
+		notify('󰊢 git commit\n"' .. newMsg .. '"')
+		local stderr = fn.system { "git", "commit", "-m", newMsg }
+		if vim.v.shell_error ~= 0 then notify(stderr, "warn") end
 	end)
 end
 
 ---@param prefillMsg? string
 function M.addCommit(prefillMsg)
-	local stdout = fn.system { "git", "add", "-A" }
+	local stderr = fn.system { "git", "add", "-A" }
 	if vim.v.shell_error ~= 0 then
-		vim.notify("Error: " .. stdout, vim.log.levels.WARN)
+		notify(stderr, "warn")
 		return
 	end
 	M.commit(prefillMsg)
@@ -210,12 +220,12 @@ function M.addCommitPush(prefillMsg)
 			return
 		end
 
-		vim.notify('󰊢 git add-commit-push\n"' .. newMsg .. '"')
+		notify('󰊢 git add-commit-push\n"' .. newMsg .. '"')
 
 		local stderr = fn.system("git add -A && git commit -m '" .. newMsg .. "'")
 		if vim.v.shell_error ~= 0 then
 			stderr = stderr:gsub("%s*$", "")
-			vim.notify(stderr, vim.log.levels.WARN)
+			notify(stderr, "warn")
 			return
 		end
 

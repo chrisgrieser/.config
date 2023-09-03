@@ -2,6 +2,7 @@ local cmd = vim.cmd
 local keymap = vim.keymap.set
 local expand = vim.fn.expand
 local abbr = vim.cmd.inoreabbrev
+local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 -- habits from writing too much in other languages
@@ -24,5 +25,5 @@ keymap("n", "<leader>r", function()
 	local packageName = expand("%:r"):gsub("lua/", ""):gsub("/", ".")
 	package.loaded[packageName] = nil
 	cmd.source()
-	vim.notify("re-sourced:\n" .. expand("%:r"))
+	u.notice("Re-sourced", expand("%:r"))
 end, { buffer = true, desc = "  Reload/Make" })

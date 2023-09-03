@@ -4,7 +4,6 @@ local expand = vim.fn.expand
 local fn = vim.fn
 local keymap = vim.keymap.set
 local u = require("config.utils")
-
 --------------------------------------------------------------------------------
 -- META
 
@@ -48,12 +47,12 @@ keymap("n", "ä", "'M", { desc = " Goto Mark" })
 
 keymap("n", "Ä", function()
 	u.normal("mM")
-	u.notice("", "Mark set.", "trace")
+	u.notice("", " Mark set.", "trace")
 end, { desc = " Set Mark" })
 
 keymap("n", "dä", function()
 	vim.api.nvim_del_mark("M")
-	u.notice("", "Mark deleted.", "trace")
+	u.notice("", " Mark deleted.", "trace")
 end, { desc = " Delete Mark" })
 
 -- Hunks and Changes
