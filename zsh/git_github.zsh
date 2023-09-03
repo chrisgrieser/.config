@@ -19,6 +19,9 @@ alias rel='ct make --silent release'
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# my color format used for git log
+gitlog_format="format:%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)"
+
 function pr() {
 	# set default remote, if it lacks one
 	[[ -z "$(gh repo set-default --view)" ]] && gh repo set-default
@@ -27,7 +30,9 @@ function pr() {
 
 function fixup() {
 	local target
-	target=$(git log --oneline | fzf | cut -d" " -f1)
+	target=$(git log -n 15 --color=always --format="$gitlog_format" |
+		fzf --ansi --no-sort --info=inline | 
+		cut -d" " -f1)
 	[[ -z "$target" ]] && return 0
 	git commit --fixup="$target"
 
@@ -118,8 +123,7 @@ function gitlog() {
 		length=("$@") # other expression, e.g. `hash..` to list until specific commit
 	fi
 
-	git log "${length[@]}" --all --color --graph \
-		--format='%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' |
+	git log "${length[@]}" --all --color --graph --format="$gitlog_format" |
 		sed -e 's/ seconds ago)/s)/' \
 			-e 's/ minutes ago)/m)/' \
 			-e 's/ hours ago)/h)/' \
@@ -153,7 +157,7 @@ function gli() {
 
 	local hash key_pressed selected
 	selected=$(
-		git log --all --color=always --pretty=format:'%h %s %C(green)%ch %C(red)%D%C(reset)' |
+		git log --all --color=always  --format="$gitlog_format" |
 			fzf -0 --query="$1" \
 				--ansi --no-sort --no-info \
 				--nth=2.. --with-nth=2.. \
