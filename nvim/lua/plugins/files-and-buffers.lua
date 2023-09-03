@@ -14,37 +14,6 @@ return {
 			end,
 		},
 	},
-	{ -- open core files
-		"rgroli/other.nvim",
-		main = "other-nvim",
-		keys = {
-			{ "<D-CR>", "<cmd>Other<cr>", desc = "󰁔  Open Other File" },
-		},
-		opts = {
-			mappings = {
-				-- context uses lua pattern, target uses glob pattern, and needs to
-				-- escape patterns with `\\` https://github.com/rgroli/other.nvim#mappings
-				{
-					context = " python main module",
-					pattern = ".*.py$",
-					target = ".*/main.py",
-				},
-				{
-					context = " lua main module",
-					pattern = ".*.lua$",
-					target = ".*/init.lua",
-				},
-				-- pending: https://github.com/rgroli/other.nvim/issues/37
-				-- {
-				-- 	context = " file of same name, but in different directory",
-				-- 	pattern = ".*/(.-)$",
-				-- 	target = "*/%1",
-				-- },
-			},
-			rememberBuffers = false, -- saves connection between two files instead only going one-way
-			showMissingFiles = false,
-		},
-	},
 	{ -- auto-close inactive buffers
 		"chrisgrieser/nvim-early-retirement",
 		dev = true,
