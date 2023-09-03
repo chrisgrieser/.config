@@ -14,6 +14,10 @@ local function isInGitRepo()
 	return inGitRepo
 end
 
+---@param soundFilepath any
+local function playSoundMacOS(soundFilepath) fn.system(("afplay %q &"):format(soundFilepath)) end
+
+
 --NOTE this requires an outer-scope output variable which needs to be emptied
 --before the run
 local gitShellOpts = {
@@ -30,20 +34,15 @@ local gitShellOpts = {
 		if ok then notify.dismiss() end
 
 		vim.notify(output)
+		playSoundMacOS(
+			"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf"
+		)
 	end,
 	on_stderr = function(_, data)
 		if data[1] == "" and #data == 1 then return end
 		local output = table.concat(data, "\n"):gsub("%s*$", "")
-
-		-- git puts non-errors into STDERR?
-		local logLevel = vim.log.levels.INFO
-		if output:lower():find("error") then
-			logLevel = vim.log.levels.ERROR
-		elseif output:lower():find("warning") then
-			logLevel = vim.log.levels.WARN
-		end
-
-		vim.notify(output, logLevel)
+		vim.notify(output, vim.log.levels.ERROR)
+		playSoundMacOS("/System/Library/Sounds/Basso.aiff")
 	end,
 	on_exit = function()
 		-- reload buffer if changed, e.g., due to linters or pandocvim
