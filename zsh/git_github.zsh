@@ -30,13 +30,11 @@ function fixup() {
 	target=$(git log --oneline | fzf | cut -d" " -f1)
 	git commit --fixup="$target"
 
-	# HACK to make non-interactive rebase work with --autosquash: https://www.reddit.com/r/git/comments/uzh2no/comment/iac347m/?context=3&share_id=_MJndLfgb0JlGk6nDJF-h
-	# shellcheck disable=2034
-	GIT_SEQUENCE_EDITOR=true
-	git rebase --interactive --autosquash "$target"^
+	# HACK to make non-interactive rebase work with --autosquash: https://www.reddit.com/r/git/comments/uzh2no/what_is_the_utility_of_noninteractive_rebase/
+	git -c sequence.editor=: rebase --interactive --autosquash "$target"~1
 
 	separator
-	gitlog 5
+	gitlog "$target"~2..
 }
 
 # amend no-edit
@@ -113,7 +111,12 @@ function delta() {
 function gitlog() {
 	# DOCS https://git-scm.com/docs/git-log#_pretty_formats
 	local length=()
-	[[ -n "$1" ]] && length=(-n "$1")
+	if [[ $1 =~ ^[0-9]+$ ]];then
+		length=(-n "$1") # number of commits
+	elif [[ -n "$1" ]] ; then
+		length=("$@") # other expression, e.g. `hash..` to list until specific commit
+	fi
+
 	git log "${length[@]}" --all --color --graph \
 		--format='%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' |
 		sed -e 's/ seconds ago)/s)/' \
@@ -126,8 +129,7 @@ function gitlog() {
 			-e 's/origin\//󰞶  /g' \
 			-e 's/HEAD/󱍀 /g' \
 			-e 's/->/󰔰 /g' \
-			-e 's/tags: / )/' \
-			-e 's/, / · /g'
+			-e 's/tags: / )/'
 }
 
 # brief git log (only last 15)
