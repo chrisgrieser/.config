@@ -294,11 +294,10 @@ keymap("n", "<leader>oa", function()
 	local hasAlpha = vim.tbl_contains(nrformats:get(), "alpha")
 	if hasAlpha then
 		nrformats:remove { "alpha" }
-		u.notice("Indent", "Now using 󱁐 (2)")
-		vim.notify(" 󰀫 alpha disabled")
+		u.notice("Option", "󰀫 alpha disabled")
 	else
 		nrformats:append("alpha")
-		vim.notify(" 󰀫 alpha enabled")
+		u.notice("Option", "󰀫 alpha enabled")
 	end
 end, { desc = " 󰀫 Toggle nrformats alpha" })
 
