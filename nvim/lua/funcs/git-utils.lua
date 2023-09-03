@@ -197,6 +197,7 @@ function M.addCommitPush(prefillMsg)
 	if not prefillMsg then prefillMsg = "" end
 	setGitCommitAppearance()
 
+	-- test
 	vim.ui.input({ prompt = " 󰊢 Commit Message", default = prefillMsg }, function(commitMsg)
 		if not commitMsg then return end -- aborted input modal
 		local validMsg, newMsg = processCommitMsg(commitMsg)
