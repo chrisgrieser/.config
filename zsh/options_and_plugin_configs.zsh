@@ -17,7 +17,7 @@ setopt INTERACTIVE_COMMENTS
 #───────────────────────────────────────────────────────────────────────────────
 # CLI SETTINGS
 
-export YSU_IGNORED_ALIASES=("bi,pi") # often copypasted without alias
+export YSU_IGNORED_ALIASES=("bi" "pi") # often copypasted without alias
 export YSU_MESSAGE_POSITION="after"
 
 export FZF_DEFAULT_COMMAND='fd --hidden'
