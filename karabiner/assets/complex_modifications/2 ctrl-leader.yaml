@@ -92,7 +92,7 @@ rules:
           - shell_command: open -a 'System Preferences'
           - *deactivate-leader
           - *remove-notice
-      # [O] Obsidian
+      # [O]bsidian
       - type: basic
         from: { key_code: o }
         conditions: [*leader-active]
@@ -100,7 +100,7 @@ rules:
           - shell_command: open -a 'Obsidian'
           - *deactivate-leader
           - *remove-notice
-      # [D] Discord
+      # [D]iscord
       - type: basic
         from: { key_code: d }
         conditions: [*leader-active]
@@ -108,7 +108,7 @@ rules:
           - shell_command: open -a 'Discord'
           - *deactivate-leader
           - *remove-notice
-      # [z] Zoom
+      # [Z]oom
       - type: basic
         # switched y and z due to German Keyboard
         from: { key_code: "y" }
@@ -117,7 +117,7 @@ rules:
           - shell_command: open -a 'zoom.us'
           - *deactivate-leader
           - *remove-notice
-      # [n] Neovide
+      # [N]eovide
       - type: basic
         from: { key_code: "n" }
         conditions: [*leader-active]
@@ -141,7 +141,7 @@ rules:
           - shell_command: open -a 'Script Editor'
           - *deactivate-leader
           - *remove-notice
-      # [m] Mail
+      # [M]ail
       - type: basic
         from: { key_code: m }
         conditions: [*leader-active]
@@ -149,7 +149,7 @@ rules:
           - shell_command: source $HOME/.zshenv && open -a "$MAIL_APP"
           - *deactivate-leader
           - *remove-notice
-      # [b] Browser
+      # [b]rowser
       - type: basic
         from: { key_code: b }
         conditions: [*leader-active]
@@ -157,7 +157,7 @@ rules:
           - shell_command: source $HOME/.zshenv && open -a "$BROWSER_APP"
           - *deactivate-leader
           - *remove-notice
-      # [B] Browser & re-open last tab (shift)
+      # [B]rowser & re-open last tab (shift)
       - type: basic
         from: { key_code: b, modifiers: { mandatory: [shift] } }
         conditions: [*leader-active]
@@ -165,7 +165,7 @@ rules:
           - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "re-open-last-tab" in workflow "com.apple.alfred.workflow.chromium-hist"'
           - *deactivate-leader
           - *remove-notice
-      # [f]: Finder
+      # [f]inder
       - type: basic
         from: { key_code: f }
         conditions: [*leader-active]
@@ -314,17 +314,17 @@ rules:
           - { key_code: spacebar, modifiers: [control, command] }
           - *deactivate-leader
           - *remove-notice
-      # [x]: ipython
+      # [i]: ipython
       - type: basic
-        from: { key_code: x }
+        from: { key_code: i }
         conditions: [*leader-active]
         to:
           - shell_command: wezterm -e ipython
           - *deactivate-leader
           - *remove-notice
-      # [i]: Transmission
+      # [T]ransmission
       - type: basic
-        from: { key_code: i }
+        from: { key_code: t, modifiers: { mandatory: [shift] } }
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'Transmission'

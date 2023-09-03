@@ -48,12 +48,12 @@ keymap("n", "ä", "'M", { desc = " Goto Mark" })
 
 keymap("n", "Ä", function()
 	u.normal("mM")
-	vim.notify(" Mark set.", u.trace)
+	u.notice("", "Mark set.", "trace")
 end, { desc = " Set Mark" })
 
 keymap("n", "dä", function()
 	vim.api.nvim_del_mark("M")
-	vim.notify(" Mark deleted.", u.trace)
+	u.notice("", "Mark deleted.", "trace")
 end, { desc = " Delete Mark" })
 
 -- Hunks and Changes
@@ -278,7 +278,7 @@ keymap(
 keymap({ "n", "x" }, "<D-5>", function()
 	local parentFolder = expand("%:p:h")
 	if not parentFolder:find("Alfred%.alfredpreferences") then
-		vim.notify("Not in an Alfred directory.", u.warn)
+		u.notice("", "Not in an Alfred directory.", "warn")
 		return
 	end
 	-- URI seems more reliable than JXA when called via nvim https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
@@ -309,7 +309,7 @@ end
 keymap("n", "go", function()
 	local project = projectName()
 	if project == "" then
-		vim.notify("No pwd available", u.error)
+		u.notice("", "No pwd available.", "error")
 		return
 	end
 	require("telescope.builtin").find_files { prompt_title = project }
@@ -327,7 +327,7 @@ end, { desc = " Browse in current Folder" })
 keymap("n", "gl", function()
 	local project = projectName()
 	if project == "" then
-		vim.notify("No pwd available", u.error)
+		u.notice("", "No pwd available.", "error")
 		return
 	end
 	require("telescope.builtin").live_grep { prompt_title = "Live Grep: " .. projectName() }

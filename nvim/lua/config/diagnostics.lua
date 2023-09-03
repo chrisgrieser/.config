@@ -6,7 +6,7 @@ local diagnosticTypes = {
 	Error = "",
 	Warn = "▲",
 	Info = "",
-	Hint = "♦️",
+	Hint = "",
 }
 for type, icon in pairs(diagnosticTypes) do
 	local hl = "DiagnosticSign" .. type
