@@ -209,7 +209,8 @@ function M.addCommitPush(prefillMsg)
 
 		local stderr = fn.system("git add -A && git commit -m '" .. newMsg .. "'")
 		if vim.v.shell_error ~= 0 then
-			vim.notify("Error: " .. stderr, vim.log.levels.WARN)
+			stderr = stderr:gsub("%s*$", "")
+			vim.notify(stderr, vim.log.levels.WARN)
 			return
 		end
 
