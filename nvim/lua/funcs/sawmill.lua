@@ -47,9 +47,7 @@ local function append(text)
 	local ln = vim.api.nvim_win_get_cursor(0)[1]
 	vim.api.nvim_buf_set_lines(0, ln, ln, false, { text })
 
-	if vim.bo.ft ~= "python" then
-		vim.cmd.normal { movementCmd, bang = true }
-	end
+	if vim.bo.ft ~= "python" then vim.cmd.normal { movementCmd, bang = true } end
 end
 
 --------------------------------------------------------------------------------
@@ -110,6 +108,18 @@ function M.variableLog()
 
 	local logStatement = templateStr:format(marker, varname, varname)
 	append(logStatement)
+end
+
+function M.assertLog()
+	local templateStr
+	local varname = getVar()
+
+	local ft = bo.filetype
+	if ft == "lua" then templateStr = 'assert(%s, "%s %s")' end
+
+	local logStatement = templateStr:format(varname, marker, varname)
+	append(logStatement)
+	normal('f,') -- goto `,` to edit condition
 end
 
 function M.objectLog()

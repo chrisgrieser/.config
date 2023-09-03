@@ -46,9 +46,9 @@ keymap("n", "<leader>lc", function()
 	vim.notify("COPIED\n" .. lastCommand)
 end, { desc = "󰘳 Copy last command" })
 
--- Last command again
+-- [l]ast command a[g]ain
 -- as opposed to `@:`, `:<Up><CR>` works across sessions
-keymap("n", "<leader>la", ":<Up><CR>", { desc = "󰘳 Run last command again", silent = true })
+keymap("n", "<leader>lg", ":<Up><CR>", { desc = "󰘳 Run last command again", silent = true })
 
 -- search command history
 -- stylua: ignore
@@ -170,6 +170,7 @@ keymap("n", "<leader>lb", function() require("funcs.sawmill").beepLog() end, { d
 keymap("n", "<leader>l1", function() require("funcs.sawmill").timeLog() end, { desc = "󰸢 time log" })
 keymap("n", "<leader>lr", function() require("funcs.sawmill").removeLogs() end, { desc = "󰸢  remove log" })
 keymap("n", "<leader>ld", function() require("funcs.sawmill").debugLog() end, { desc = "󰸢 debugger log" })
+keymap("n", "<leader>la", function() require("funcs.sawmill").assertLog() end, { desc = "󰸢 assert log" })
 keymap("n", "<leader>li", cmd.Inspect, { desc = " :Inspect" })
 keymap("n", "<leader>lt", cmd.InspectTree, { desc = " :InspectTree" })
 -- stylua: ignore end

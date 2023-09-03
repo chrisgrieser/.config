@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # ALIASES
 
 # git
@@ -19,13 +20,13 @@ alias rel='ct make --silent release'
 
 #───────────────────────────────────────────────────────────────────────────────
 
-function pr() {
+function pr {
 	# set default remote, if it lacks one
 	[[ -z "$(gh repo set-default --view)" ]] && gh repo set-default
 	gh pr create --web --fill || gh pr create --web
 }
 
-function fixup() {
+function fixup {
 	local cutoff=15 # CONFIG
 
 	local target
@@ -43,26 +44,27 @@ function fixup() {
 }
 
 # amend no-edit
-function gm() {
+function gm {
 	git add -A && git commit --amend --no-edit
 	separator
 	gitlog -n 4
 }
 
 # Github Url: open & copy url
-function gu() {
-	url=$(git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e 's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//')
+function gu {
+	url=$(git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 |
+		sed -e 's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//')
 	echo "$url" | pbcopy
 	open "$url"
 }
 
-function unlock() {
+function unlock {
 	rm "$(git rev-parse --git-dir)/index.lock"
 	echo "Lock file removed."
 }
 
 # rebase last x commits
-function rebase() {
+function rebase {
 	local num="$1"
 	if grep -qE '^[0-9]+$'; then
 		git rebase -i HEAD~"$num"
@@ -73,7 +75,7 @@ function rebase() {
 }
 
 # https://stackoverflow.com/a/17937889
-function unshallow() {
+function unshallow {
 	git fetch --unshallow
 	git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 	git fetch origin
@@ -83,7 +85,7 @@ function unshallow() {
 # GIT DIFF & DELTA
 
 # use delta for small diffs and diff2html for big diffs
-function gd() {
+function gd {
 	# CONFIG
 	local threshold_lines=100
 
@@ -102,7 +104,7 @@ function gd() {
 }
 
 # make delta theme-aware
-function delta() {
+function delta {
 	if defaults read -g AppleInterfaceStyle &>/dev/null; then
 		command delta --dark "$@"
 	else
@@ -113,7 +115,7 @@ function delta() {
 #───────────────────────────────────────────────────────────────────────────────
 # GIT LOG
 
-function gitlog() {
+function gitlog {
 
 	# my color format used for git log
 	gitlog_format="format:%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)"
@@ -134,7 +136,7 @@ function gitlog() {
 }
 
 # brief git log (only last 15)
-function gl() {
+function gl {
 	local cutoff=15 # CONFIG
 	gitlog -n "$cutoff"
 	# add `(…)` if commits were shortened
@@ -142,11 +144,12 @@ function gl() {
 }
 
 # interactive
-function gli() {
+function gli {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 	if ! command -v ct &>/dev/null; then print "\033[1;33mchromaterm not installed. (\`pip3 install chromaterm\`)\033[0m" && return 1; fi
 
 	local hash key_pressed selected
+	local format="%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s %n%C(reset)%n---%n%C(magenta)"
 	selected=$(
 		gitlog --color=always |
 			fzf -0 --query="$1" \
@@ -154,7 +157,7 @@ function gli() {
 				--header-first --header="↵ : Checkout   ^H: Copy [H]ash" \
 				--expect="ctrl-h" \
 				--preview-window=40% \
-				--preview="git show {1} --name-only --color=always --format='%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s %n%C(reset)%n---%n%C(magenta)'"
+				--preview="git show {1} --name-only --color=always --format='$format'"
 	)
 	[[ -z "$selected" ]] && return 0
 	key_pressed=$(echo "$selected" | head -n1)
@@ -171,7 +174,7 @@ function gli() {
 #───────────────────────────────────────────────────────────────────────────────
 # SELECT BRANCH
 
-function gb() {
+function gb {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 	if ! command -v ct &>/dev/null; then print "\033[1;33mchromaterm not installed. (\`pip3 install chromaterm\`)\033[0m" && return 1; fi
 	local selected
@@ -203,7 +206,8 @@ function ac() {
 	local large_files commit_msg msg_length
 
 	# guard 1: accidental pushing of large files
-	large_files=$(find . -not -path "**/.git/**" -not -path "**/*.pxd/**" -not -path "**/node_modules/**" -not -path "**/*venv*/**" -size +10M)
+	large_files=$(find . -not -path "**/.git/**" -not -path "**/*.pxd/**" \
+		-not -path "**/node_modules/**" -not -path "**/*venv*/**" -size +10M)
 	if [[ -n "$large_files" ]]; then
 		print "\033[1;33mLarge file(s) detected, aborting."
 		print "$large_files\033[0m"
@@ -241,7 +245,7 @@ function ac() {
 }
 
 # same as ac, just git pull & push
-function acp() {
+function acp {
 	ac "$@" || return 1 # fail if ac fails
 
 	ct git pull && ct git push
@@ -295,7 +299,7 @@ function nuke {
 #───────────────────────────────────────────────────────────────────────────────
 
 # search for [g]it [d]eleted [f]ile
-function gdf() {
+function gdf {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 	if ! command -v bat &>/dev/null; then echo "bat not installed." && return 1; fi
 	if [[ $# -eq 0 ]]; then echo "No search query provided." && return 1; fi
