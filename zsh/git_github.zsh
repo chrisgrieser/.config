@@ -29,9 +29,11 @@ function pr() {
 }
 
 function fixup() {
+	local cutoff=15 # CONFIG
+
 	local target
-	target=$(git log -n 15 --color=always --format="$gitlog_format" |
-		fzf --ansi --no-sort --info=inline | 
+	target=$(gitlog -n "$cutoff" |
+		fzf --ansi --no-sort --no-info | 
 		cut -d" " -f1)
 	[[ -z "$target" ]] && return 0
 	git commit --fixup="$target"
@@ -47,7 +49,7 @@ function fixup() {
 function gm() {
 	git add -A && git commit --amend --no-edit
 	separator
-	gitlog 4
+	gitlog -n 4
 }
 
 # Github Url: open & copy url
@@ -67,7 +69,7 @@ function rebase() {
 	local num="$1"
 	if grep -qE '^[0-9]+$'; then
 		git rebase -i HEAD~"$num"
-		gitlog $((num + 1))
+		gitlog -n $((num + 1))
 	else
 		print "\033[1;33mUsage: rebase <number of commits>"
 	fi
@@ -115,15 +117,7 @@ function delta() {
 # GIT LOG
 
 function gitlog() {
-	# DOCS https://git-scm.com/docs/git-log#_pretty_formats
-	local length=()
-	if [[ $1 =~ ^[0-9]+$ ]];then
-		length=(-n "$1") # number of commits
-	elif [[ -n "$1" ]] ; then
-		length=("$@") # other expression, e.g. `hash..` to list until specific commit
-	fi
-
-	git log "${length[@]}" --all --color --graph --format="$gitlog_format" |
+	git log --all --color --graph --format="$gitlog_format" "$@" |
 		sed -e 's/ seconds ago)/s)/' \
 			-e 's/ minutes ago)/m)/' \
 			-e 's/ hours ago)/h)/' \
@@ -135,19 +129,15 @@ function gitlog() {
 			-e 's/HEAD/󱍀 /g' \
 			-e 's/->/󰔰 /g' \
 			-e 's/tags: / )/'
+	echo
 }
 
 # brief git log (only last 15)
 function gl() {
-	local cutoff=15
-	gitlog 15
+	local cutoff=15 # CONFIG
+	gitlog -n "$cutoff"
 	# add `(…)` if commits were shortened
 	[[ $(git log --oneline | wc -l) -gt $cutoff ]] && echo "(…)"
-}
-
-# full git log
-function gll() {
-	gitlog | less
 }
 
 # interactive
@@ -157,13 +147,13 @@ function gli() {
 
 	local hash key_pressed selected
 	selected=$(
-		git log --all --color=always  --format="$gitlog_format" |
+		gitlog --color=always |
 			fzf -0 --query="$1" \
 				--ansi --no-sort --no-info \
-				--nth=2.. --with-nth=2.. \
-				--header-first --header="↵ : Checkout  ^H: Copy [H]ash  ^R: [R]eset Hard" \
-				--expect="ctrl-h,ctrl-r" \
-				--preview="git --no-optional-locks show {1} --name-only --color=always --pretty=format:'%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s %n%C(reset)%n---%n%C(magenta)'"
+				--header-first --header="↵ : Checkout   ^H: Copy [H]ash" \
+				--expect="ctrl-h" \
+				--preview-window=40% \
+				--preview="git show {1} --name-only --color=always --format='%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s %n%C(reset)%n---%n%C(magenta)'"
 	)
 	[[ -z "$selected" ]] && return 0
 	key_pressed=$(echo "$selected" | head -n1)
@@ -172,8 +162,6 @@ function gli() {
 	if [[ "$key_pressed" == "ctrl-h" ]]; then
 		echo "$hash" | pbcopy
 		echo "'$hash' copied."
-	elif [[ "$key_pressed" == "ctrl-r" ]]; then
-		ct git reset --hard "$hash"
 	else # pressed return
 		ct git checkout "$hash"
 	fi

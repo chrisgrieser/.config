@@ -28,7 +28,7 @@ function inspect() {
 
 	# GIT LOG & STATUS
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
-		gitlog "$max_gitlog_lines"
+		gitlog -n "$max_gitlog_lines"
 		separator
 		if [[ -n "$(git status --short --porcelain)" ]]; then
 			git -c color.status="always" status --short | rs -e -w"$(tput cols)"
