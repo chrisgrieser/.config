@@ -10,7 +10,7 @@ local fn = vim.fn
 local function isInGitRepo()
 	fn.system("git rev-parse --is-inside-work-tree")
 	local inGitRepo = vim.v.shell_error == 0
-	if not inGitRepo then vim.notify("Not a GitHub Repo.", vim.log.levels.WARN) end
+	if not inGitRepo then vim.notify("Not a GitHub Repo.", vim.log.levels.WARN, { title = "Mini Git" }) end
 	return inGitRepo
 end
 

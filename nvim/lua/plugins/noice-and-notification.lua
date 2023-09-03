@@ -145,7 +145,7 @@ return {
 		-- does not play nice with the terminal
 		cond = function() return vim.fn.has("gui_running") == 1 end,
 		opts = {
-			render = "minimal", -- minimal|default|compact
+			render = "compact", -- minimal|default|compact|simple
 			top_down = false,
 			max_width = 70,
 			minimum_width = 15,

@@ -21,11 +21,6 @@ local function runMake(recipe)
 
 	-- local output = vim.fn.system({ "make", "--silent", recipe }):gsub("%s+$", "")
 
-	local function formatTitle(output)
-		local appendix = output:find("[\n\r]") and "\n" or ": "
-		return recipe:upper() .. appendix
-	end
-
 	-- using async jobstart in case of a slow recipe
 	vim.fn.jobstart({ "make", "--silent", recipe }, {
 		stdout_buffered = true,
@@ -34,14 +29,12 @@ local function runMake(recipe)
 		on_stdout = function(_, data)
 			if data[1] == "" and #data == 1 then return end
 			local output = table.concat(data, "\n"):gsub("%s*$", "")
-			local title = formatTitle(output)
-			vim.notify(title .. output)
+			vim.notify(output, vim.log.levels.INFO, { title = recipe })
 		end,
 		on_stderr = function(_, data)
 			if data[1] == "" and #data == 1 then return end
 			local output = table.concat(data, "\n"):gsub("%s*$", "")
-			local title = formatTitle(output)
-			vim.notify("ERROR " .. title .. output, vim.log.levels.ERROR)
+			vim.notify(output, vim.log.levels.ERROR, { title = "ERROR " .. recipe })
 		end,
 	})
 

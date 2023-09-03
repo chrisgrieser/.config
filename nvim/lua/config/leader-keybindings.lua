@@ -75,14 +75,14 @@ keymap("n", "<leader>f<Tab>", function()
 	bo.expandtab = false
 	bo.tabstop = 3
 	cmd.retab { bang = true }
-	vim.notify("Now using 󰌒 (width 3)")
+	u.notice("Indent", "Now using 󰌒 (width 3)")
 end, { desc = "󰌒 Use Tabs" })
 
 keymap("n", "<leader>f<Space>", function()
 	bo.tabstop = 2
 	bo.expandtab = true
 	cmd.retab { bang = true }
-	vim.notify("Now using 󱁐 (2)")
+	u.notice("Indent", "Now using 󱁐 (2)")
 end, { desc = "󱁐 Use Spaces" })
 
 --------------------------------------------------------------------------------
@@ -294,6 +294,7 @@ keymap("n", "<leader>oa", function()
 	local hasAlpha = vim.tbl_contains(nrformats:get(), "alpha")
 	if hasAlpha then
 		nrformats:remove { "alpha" }
+		u.notice("Indent", "Now using 󱁐 (2)")
 		vim.notify(" 󰀫 alpha disabled")
 	else
 		nrformats:append("alpha")

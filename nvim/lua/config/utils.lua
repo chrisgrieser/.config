@@ -5,10 +5,6 @@ local M = {}
 M.vimDataDir = vim.env.DATA_DIR .. "/vim-data/"
 M.linterConfigFolder = vim.env.DOTFILE_FOLDER .. "/_linter-configs/"
 
-M.error = vim.log.levels.ERROR
-M.warn = vim.log.levels.WARN
-M.trace = vim.log.levels.TRACE
-
 ---runs :normal natively with bang
 ---@param cmdStr string
 function M.normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
@@ -23,6 +19,15 @@ function M.writeToFile(filePath, str, mode)
 	if not file then return error end
 	file:write(str .. "\n")
 	file:close()
+end
+
+---send notification
+---@param msg string
+---@param title string
+---@param level? "info"|"trace"|"debug"|"warn"|"error"
+function M.notice(title, msg, level)
+	if not level then level = "info" end
+	vim.notify(msg, vim.log.levels[level:upper()], { title = title })
 end
 
 ---reads a template to apply if the file is empty. Add to a filetype config to
