@@ -109,17 +109,6 @@ end
 
 --------------------------------------------------------------------------------
 
----@param commitMsg string
-local function shimmeringFocusBuild(commitMsg)
-	-- accessing build file directly, since passing arguments (the commit msg)
-	-- via Makefile is unnecessarily cumbersome
-	local buildscriptLocation = vim.env.LOCAL_REPOS .. "/shimmering-focus/build.sh"
-	vim.notify('󰊢 Building theme…\n"' .. commitMsg .. '"')
-	output = {}
-	local command = string.format("zsh '%s' '%s'", buildscriptLocation, commitMsg)
-	fn.jobstart(command, gitShellOpts)
-end
-
 function M.amendNoEditPushForce()
 	vim.cmd("silent update")
 	if not isInGitRepo() then return end
@@ -199,12 +188,6 @@ function M.addCommitPush(prefillMsg)
 		local validMsg, newMsg = processCommitMsg(commitMsg)
 		if not validMsg then -- if msg invalid, run again to fix the msg
 			M.addCommitPush(newMsg)
-			return
-		end
-
-		-- run Shimmering Focus specific actions instead
-		if fn.expand("%") == "source.css" then
-			shimmeringFocusBuild(newMsg)
 			return
 		end
 

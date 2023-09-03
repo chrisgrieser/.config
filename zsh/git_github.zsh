@@ -22,7 +22,21 @@ alias rel='ct make --silent release'
 function pr() {
 	# set default remote, if it lacks one
 	[[ -z "$(gh repo set-default --view)" ]] && gh repo set-default
-	gh pr create --web --fill
+	gh pr create --web --fill || gh pr create --web
+}
+
+function fixup() {
+	local target
+	target=$(git log --oneline | fzf | cut -d" " -f1)
+	git commit --fixup="$target"
+
+	# HACK to make non-interactive rebase work with --autosquash: https://www.reddit.com/r/git/comments/uzh2no/comment/iac347m/?context=3&share_id=_MJndLfgb0JlGk6nDJF-h
+	# shellcheck disable=2034
+	GIT_SEQUENCE_EDITOR=true
+	git rebase --interactive --autosquash "$target"^
+
+	separator
+	gitlog 5
 }
 
 # amend no-edit
