@@ -36,7 +36,6 @@ local setupEfmConfig = function()
 	local stylelint_L = require("tool-configs.linters.stylelint")
 	local stylelint_F = require("tool-configs.formatters.stylelint")
 	local bibtexTidy = require("tool-configs.formatters.bibtex-tidy")
-	local bashate = require("tools-configs.linters.bashate")
 
 	local languages = {
 		javascript = { biome },
@@ -47,7 +46,7 @@ local setupEfmConfig = function()
 		python = { black },
 		css = { prettier, stylelint_L, stylelint_F },
 		html = { prettier },
-		sh = { shfmt, shellcheck, shellharden, bashate },
+		sh = { shfmt, shellcheck, shellharden },
 		yaml = { yamllint, prettier },
 		markdown = { markdownlint, mdformat },
 		bib = { bibtexTidy },
@@ -64,7 +63,7 @@ local setupEfmConfig = function()
 	-- https://github.com/williamboman/mason.nvim/issues/1481
 	require("lspconfig").efm.setup {
 		filetypes = vim.tbl_keys(languages),
-		init_options = { documentFormatting = true, documentRangeFormatting = true },
+		init_options = { documentFormatting = true },
 		settings = { rootMarkers = { ".git/" }, languages = languages },
 	}
 
