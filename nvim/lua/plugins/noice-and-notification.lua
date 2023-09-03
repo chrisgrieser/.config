@@ -27,6 +27,10 @@ local routes = {
 	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
 	{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
 
+	-- code actions, especially annoying with ruff where the fixall code action
+	-- is triggered on every format
+	{ filter = { event = "notify", find = "^No code actions available$" }, skip = true },
+
 	-- redirect to split
 	{ filter = { event = "msg_show", min_height = 15 }, view = "popup" },
 	{ filter = { event = "notify", min_height = 15 }, view = "popup" },

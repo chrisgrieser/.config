@@ -24,7 +24,11 @@ return {
 			mappings = {
 				-- context uses lua pattern, target uses glob pattern, and needs to
 				-- escape patterns with `\\` https://github.com/rgroli/other.nvim#mappings
-				{ context = " python main module", pattern = ".*.py$", target = "*main*.py" },
+				{
+					context = " python main module",
+					pattern = ".*.py$",
+					target = ".*/main.py",
+				},
 				{
 					context = " lua main module",
 					pattern = ".*.lua$",
