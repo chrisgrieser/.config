@@ -19,9 +19,6 @@ alias rel='ct make --silent release'
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# my color format used for git log
-gitlog_format="format:%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)"
-
 function pr() {
 	# set default remote, if it lacks one
 	[[ -z "$(gh repo set-default --view)" ]] && gh repo set-default
@@ -33,7 +30,7 @@ function fixup() {
 
 	local target
 	target=$(gitlog -n "$cutoff" |
-		fzf --ansi --no-sort --no-info | 
+		fzf --ansi --no-sort --no-info |
 		cut -d" " -f1)
 	[[ -z "$target" ]] && return 0
 	git commit --fixup="$target"
@@ -117,6 +114,10 @@ function delta() {
 # GIT LOG
 
 function gitlog() {
+
+	# my color format used for git log
+	gitlog_format="format:%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)"
+
 	git log --all --color --graph --format="$gitlog_format" "$@" |
 		sed -e 's/ seconds ago)/s)/' \
 			-e 's/ minutes ago)/m)/' \

@@ -15,7 +15,9 @@ local function isInGitRepo()
 end
 
 ---@param soundFilepath any
-local function playSoundMacOS(soundFilepath) fn.system(("afplay %q &"):format(soundFilepath)) end
+local function playSoundMacOS(soundFilepath)
+	if vim.fn.has("macunix") == 1 then fn.system(("afplay %q &"):format(soundFilepath)) end
+end
 
 -- some comment
 
@@ -41,7 +43,8 @@ local gitShellOpts = {
 		-- git often puts non-errors into STDERR, therefore checking here again
 		-- whether it is actually an error or not
 		local logLevel = vim.log.levels.INFO
-		local sound = "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf"
+		local sound =
+			"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf"
 		if output:lower():find("error") then
 			logLevel = vim.log.levels.ERROR
 			sound = "/System/Library/Sounds/Basso.aiff"
