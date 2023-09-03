@@ -15,7 +15,8 @@ local function dapLualine()
 			breakpointSum = breakpointSum + #breakpoints[buf]
 		end
 		if breakpointSum == 0 then return "" end
-		return " " .. tostring(breakpointSum)
+		local breakpointIcon = vim.fn.sign_getdefined("DapBreakpoint")[1].text
+		return breakpointIcon .. " " .. tostring(breakpointSum)
 	end)
 
 	require("config.theme-customization").reloadTheming()
@@ -24,10 +25,10 @@ end
 local function dapSigns()
 	local sign = vim.fn.sign_define
 	sign("DapBreakpoint", { text = "", texthl = "DiagnosticInfo" })
-	sign("DapBreakpointCondition", { text = "", texthl = "DiagnosticInfo" })
+	sign("DapBreakpointCondition", { text = "󰇽", texthl = "DiagnosticInfo" })
 	sign("DapLogPoint", { text = "󰍨", texthl = "DiagnosticInfo" })
 	sign("DapStopped", { text = "󰏧", texthl = "DiagnosticHint" })
-	sign("DapBreakpointRejected", { text = "", texthl = "DiagnosticError" })
+	sign("DapBreakpointRejected", { text = "󰅜", texthl = "DiagnosticError" })
 end
 
 local function terminateCallback() require("dapui").close() end
@@ -43,16 +44,6 @@ end
 
 return {
 	{
-		"mfussenegger/nvim-dap-python",
-		ft = "python",
-		config = function()
-			local debugpyPath = vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python3"
-			require("dap-python").setup(debugpyPath, {
-				console = nil, -- don't open the console by default
-			})
-		end,
-	},
-	{
 		"mfussenegger/nvim-dap",
 		keys = {
 			-- INFO toggling breakpoints and "Continue" command done via nvim-recorder
@@ -67,8 +58,8 @@ return {
 		dependencies = { "theHamsta/nvim-dap-virtual-text" },
 		init = function() u.leaderSubkey("b", " Debugger") end,
 		config = function()
-			dapLualine()
 			dapSigns()
+			dapLualine()
 			setupDapListeners()
 			-- setupDebugppy()
 		end,
@@ -101,19 +92,16 @@ return {
 			},
 		},
 		opts = {
-			controls = {
-				enabled = true,
-				element = "scopes",
-			},
+			controls = { enabled = false, element = "scopes" },
 			floating = { border = require("config.utils").borderStyle },
 			layouts = {
 				{
 					position = "right",
-					size = 35,
+					size = 40,
 					elements = {
-						{ id = "scopes", size = 0.6 },
-						{ id = "stacks", size = 0.2 },
-						{ id = "watches", size = 0.2 },
+						{ id = "scopes", size = 0.7 },
+						{ id = "stacks", size = 0.15 },
+						{ id = "watches", size = 0.15 },
 					},
 				},
 			},
@@ -121,7 +109,19 @@ return {
 	},
 
 	-----------------------------------------------------------------------------
-
+	-- language-specific debugger plugins
+	{
+		-- TODO replace with custom config? https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#python
+		"mfussenegger/nvim-dap-python",
+		ft = "python",
+		config = function()
+			-- 1. use the debugypy installation by mason
+			-- 2. deactivate the annoying auto-opening the console by redirecting
+			-- to the internal console
+			local debugpyPath = vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python3"
+			require("dap-python").setup(debugpyPath, { console = "internalConsole" })
+		end,
+	},
 	{
 		"jbyuki/one-small-step-for-vimkind",
 		dependencies = "mfussenegger/nvim-dap",
