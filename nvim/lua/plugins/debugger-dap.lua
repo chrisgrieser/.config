@@ -41,11 +41,18 @@ end
 
 --------------------------------------------------------------------------------
 
--- TODO https://github.com/mfussenegger/nvim-dap-python
--- { "mfussenegger/nvim-dap-python" },
 --------------------------------------------------------------------------------
 
 return {
+	-- TODO https://github.com/mfussenegger/nvim-dap-python
+	{
+		"mfussenegger/nvim-dap-python",
+		lazy = false,
+		config = function()
+			-- mason-location
+			require("dap-python").setup("/Users/chrisgrieser/.local/share/nvim/mason/packages/debugpy/venv/bin/python3")
+		end,
+	},
 	{
 		"mfussenegger/nvim-dap",
 		keys = {
