@@ -33,13 +33,13 @@ local function runMake(recipe)
 		detach = true, -- run even when quitting nvim
 		on_stdout = function(_, data)
 			if data[1] == "" and #data == 1 then return end
-			local output = table.concat(data, "\n")
+			local output = table.concat(data, "\n"):gsub("%s*$", "")
 			local title = formatTitle(output)
 			vim.notify(title .. output)
 		end,
 		on_stderr = function(_, data)
 			if data[1] == "" and #data == 1 then return end
-			local output = table.concat(data, "\n")
+			local output = table.concat(data, "\n"):gsub("%s*$", "")
 			local title = formatTitle(output)
 			vim.notify("ERROR " .. title .. output, vim.log.levels.ERROR)
 		end,

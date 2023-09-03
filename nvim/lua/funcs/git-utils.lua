@@ -22,9 +22,10 @@ local gitShellOpts = {
 	detach = true, -- run even when quitting nvim
 	on_stdout = function(_, data)
 		if data[1] == "" and #data == 1 then return end
-		local output = table.concat(data, "\n")
+		local output = table.concat(data, "\n"):gsub("%s*$", "")
 
 		-- prevent double notifications
+		require("notify").dismiss()
 		local ok, notify = pcall(require, "notify")
 		if ok then notify.dismiss() end
 
@@ -32,7 +33,7 @@ local gitShellOpts = {
 	end,
 	on_stderr = function(_, data)
 		if data[1] == "" and #data == 1 then return end
-		local output = table.concat(data, "\n")
+		local output = table.concat(data, "\n"):gsub("%s*$", "")
 
 		-- git puts non-errors into STDERR?
 		local logLevel = vim.log.levels.INFO
