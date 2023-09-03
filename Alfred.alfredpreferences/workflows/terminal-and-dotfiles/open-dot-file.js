@@ -54,7 +54,7 @@ function run(argv) {
 			else type = name.split(".").pop() || ""; // default: extension
 
 			if (type === "yml") type = "yaml";
-			else if (type === "mjs") type = "js";
+			else if (type === "mjs" || type === "jxa") type = "js";
 			else if (type === "zsh") type = "sh";
 			else if (type === "conf" || type === "cfg" || type === "ini") type = "config";
 			else if (type.endsWith("-bkp")) type = "other";
