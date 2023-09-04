@@ -7,13 +7,14 @@ local conf = {
 	on_attach = {},
 	filetypes = {},
 	init_options = {},
+	root_dir = {},
 }
 
 --------------------------------------------------------------------------------
 
 local lsp_servers = {
 	"lua_ls",
-	"vale_ls",
+	"vale_ls", -- also requires the vale cli (installed via mason-tools-updater)
 	"yamlls",
 	"jsonls",
 	"cssls",
@@ -238,6 +239,11 @@ conf.settings.ltex = {
 	},
 }
 
+-- vale https://vale.sh/docs/topics/config#search-process
+vim.env.VALE_CONFIG_PATH = u.linterConfigFolder .. "/vale/vale.ini"
+
+conf.root_dir.vale = require("lspconfig.util").root_pattern("Makefile", ".git")
+
 --------------------------------------------------------------------------------
 -- SETUP ALL LSP
 -- enable capabilities for plugins
@@ -264,6 +270,7 @@ local function setupAllLsps()
 			on_attach = conf.on_attach[lsp],
 			filetypes = conf.filetypes[lsp],
 			init_options = conf.init_options[lsp],
+			root_dir = conf.root_dir[lsp],
 		}
 	end
 end

@@ -1,5 +1,6 @@
 local toolsToAutoinstall = {
 	"debugpy", -- just here to install ensure auto-install
+	"vale", -- needed for vale-ls
 	"codespell",
 	"yamllint",
 	"shellcheck",

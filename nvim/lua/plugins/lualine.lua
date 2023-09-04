@@ -153,7 +153,7 @@ end
 
 -- FIX Add missing buffer names for current file component
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "lazy", "mason", "TelescopePrompt", "noice", "checkhealth" },
+	pattern = { "lazy", "mason", "TelescopePrompt", "noice", "checkhealth", "lspinfo" },
 	callback = function()
 		local name = vim.fn.expand("<amatch>")
 		name = name:sub(1, 1):upper() .. name:sub(2) -- capitalize
