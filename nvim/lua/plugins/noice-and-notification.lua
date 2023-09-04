@@ -25,8 +25,13 @@ local routes = {
 	{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
 
 	-- Mason
-	{ filter = { event = "notify", find = "successfully u?n?installed.$" }, view = "mini" },
-	{ filter = { event = "notify", find = "^%[mason%-" }, view = "mini" },
+	{
+		filter = {
+			event = "notify",
+			cond = function(msg) return msg.opts and (msg.opts.title == "mason.*.nvim") end,
+		},
+		view = "mini",
+	},
 
 	-- Codeium.nvim
 	{ filter = { event = "notify", find = "^Codeium.nvim:" }, view = "mini" },

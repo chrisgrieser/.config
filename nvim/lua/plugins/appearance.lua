@@ -7,7 +7,7 @@ return {
 	{ -- dim unused windows
 		"levouh/tint.nvim",
 		event = "VeryLazy",
-		opts = { tint = 80, saturation = 0.3 },
+		opts = { tint = 80, saturation = 0.5 },
 	},
 	{ -- always show matchparens
 		"utilyre/sentiment.nvim",
