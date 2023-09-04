@@ -49,6 +49,50 @@ local routes = {
 	{ filter = { event = "notify", min_height = 15 }, view = "popup" },
 }
 
+---alternative compact renderer for nvim-notify. Modified version of https://github.com/rcarriga/nvim-notify/blob/master/lua/notify/render/compact.lua
+---@param bufnr number
+---@param notif object
+---@param highlights object
+---@param _ object plugin configObj
+local function altCompactRender(bufnr, notif, highlights, _)
+	local base = require("notify.render.base")
+	local namespace = base.namespace()
+	local icon = notif.icon
+	local title = notif.title[1]
+	local prefix
+
+	local hasTitle = type(title) == "string" and #title > 0
+	if hasTitle then
+		-- has title = icon + title as header row
+		prefix = string.format("%s %s", icon, title)
+		table.insert(notif.message, 1, prefix)
+	else
+		-- no title = prefix the icon
+		prefix = string.format("%s ", icon)
+		notif.message[1] = string.format("%s %s", prefix, notif.message[1])
+	end
+
+	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, notif.message)
+
+	local icon_length = vim.str_utfindex(icon)
+	local prefix_length = vim.str_utfindex(prefix) + 1
+
+	vim.api.nvim_buf_set_extmark(bufnr, namespace, 0, 0, {
+		hl_group = highlights.icon,
+		end_col = icon_length + 1,
+		priority = 50,
+	})
+	vim.api.nvim_buf_set_extmark(bufnr, namespace, 0, icon_length + 1, {
+		hl_group = highlights.title,
+		end_col = prefix_length + 1,
+		priority = 50,
+	})
+	vim.api.nvim_buf_set_extmark(bufnr, namespace, 0, prefix_length + 1, {
+		hl_group = highlights.body,
+		end_line = #notif.message,
+		priority = 50,
+	})
+end
 --------------------------------------------------------------------------------
 
 return {
@@ -155,7 +199,7 @@ return {
 		-- does not play nice with the terminal
 		cond = function() return vim.fn.has("gui_running") == 1 end,
 		opts = {
-			render = "compact", -- minimal|default|compact|simple
+			render = altCompactRender, -- minimal|default|compact|simple|custom function
 			top_down = false,
 			max_width = 70,
 			minimum_width = 15,
