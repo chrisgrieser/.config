@@ -30,31 +30,23 @@ function search_venv_path() {
 function v() {
 	if [[ -n "$VIRTUAL_ENV" ]]; then
 		deactivate
-	elif [[ -z "$VIRTUAL_ENV" ]] ; then
-		while true; do
-			if [[ -d ".venv" ]]; then
-		done
-		# shellcheck disable=1091
-		source ./.venv/bin/activate
-	elif [[ -z "$VIRTUAL_ENV" && ! -d ".venv" ]] ; then
-		print "\033[1;33mNo virtual environment found.\033[0m"
+	else
+		local venv_path
+		venv_path=$(search_venv_path)
+		if [[ -n "$venv_path" ]]; then
+			# shellcheck disable=1091
+			source ./.venv/bin/activate
+		else
+			print "\033[1;33mNo virtual environment found.\033[0m"
+		fi
 	fi
 }
 
 # Utility function, intended terminal movement commands. Automatically enables
 # venv if current dir or a parent has a `.venv` dir. Disables venv if not.
 function auto_venv() {
-	dir_to_check=$PWD
-	while true; do
-		if [[ -d "$dir_to_check/.venv" ]]; then
-			local venv_path="$dir_to_check/.venv"
-			break
-		elif [[ "$dir_to_check" == "/" ]]; then
-			break
-		fi
-		dir_to_check=$(dirname "$dir_to_check")
-	done
-	echo "$venv_path"
+	local venv_path
+	venv_path=$(search_venv_path)
 
 	if [[ -n "$VIRTUAL_ENV" && -z "$venv_path" ]] ; then
 		deactivate
