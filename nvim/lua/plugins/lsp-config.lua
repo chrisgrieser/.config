@@ -287,10 +287,11 @@ return {
 		opts = { ensure_installed = lsp_servers },
 	},
 	{ -- configure LSPs
-	-- TODO using my fork until biome config is merged: https://github.com/neovim/nvim-lspconfig/pull/2790
+		-- TODO using my fork until biome config is merged: https://github.com/neovim/nvim-lspconfig/pull/2790
 		"chrisgrieser/nvim-lspconfig",
 		dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config
 		dev = true,
 		init = setupAllLsps,
+		config = function() require("lspconfig.ui.windows").default_options.border = u.borderStyle end,
 	},
 }

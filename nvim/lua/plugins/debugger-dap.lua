@@ -24,8 +24,9 @@ end
 
 local function dapSigns()
 	local sign = vim.fn.sign_define
-	sign("DapBreakpoint", { text = "", texthl = "DiagnosticInfo" })
-	sign("DapStopped", { text = "", texthl = "DiagnosticHint" })
+
+	sign("DapBreakpoint", { text = "", texthl = "DiagnosticSignInfo", numhl = "DiagnosticSignInfo" })
+	sign("DapStopped", { text = "", texthl = "DiagnosticHint", numhl = "DiagnosticSignHint" })
 	sign("DapBreakpointCondition", { text = "", texthl = "DiagnosticInfo" })
 	sign("DapLogPoint", { text = "", texthl = "DiagnosticInfo" })
 	sign("DapBreakpointRejected", { text = "", texthl = "DiagnosticError" })
@@ -36,10 +37,8 @@ local function dapSigns()
 		vim.api.nvim_set_hl(0, "DebugPC", { bg = hintBg })
 	end
 
-	vim.api.nvim_create_autocmd("ColorScheme", {
-		callback = currentDapLineHl,
-	})
-	currentDapLineHl() -- initialize
+	currentDapLineHl()
+	vim.api.nvim_create_autocmd("ColorScheme", { callback = currentDapLineHl })
 end
 
 local function terminateCallback() require("dapui").close() end
@@ -149,7 +148,11 @@ return {
 					-- INFO is the only one that needs manual starting, other debuggers
 					-- start with `continue` by themselves
 					if not vim.bo.filetype == "lua" then
-						vim.notify("Not a lua file.", vim.log.levels.WARN, { title = "one-small-step-for-vimkind" })
+						vim.notify(
+							"Not a lua file.",
+							vim.log.levels.WARN,
+							{ title = "one-small-step-for-vimkind" }
+						)
 						return
 					end
 					require("osv").run_this()

@@ -4,6 +4,9 @@
 # Mac Stuff
 .Trash
 
+# gitignored, but should be findable
+!Untitled.*
+
 # useless stuff inside pseudo-apps
 **/*.app/*
 **/*.pxd/*
