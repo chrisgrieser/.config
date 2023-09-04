@@ -11,7 +11,7 @@ local lightThemes = {
 }
 
 local darkThemes = {
-	{"folke/tokyonight.nvim", opts = { style = "moon" }},
+	{ "folke/tokyonight.nvim", opts = { style = "moon" } },
 	-- { "catppuccin/nvim", name = "catppuccin" },
 	-- "sainnhe/gruvbox-material",
 	-- "rebelot/kanagawa.nvim",

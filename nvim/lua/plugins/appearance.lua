@@ -4,6 +4,14 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
+	{
+		"levouh/tint.nvim",
+		event = "VeryLazy",
+		opts = {
+			tint = 0,
+			saturation = 0.6
+		},
+	},
 	{ -- always show matchparens
 		"utilyre/sentiment.nvim",
 		event = "VeryLazy",
