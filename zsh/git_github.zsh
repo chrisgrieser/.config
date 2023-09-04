@@ -23,6 +23,12 @@ alias rel='ct make --silent release'
 function pr {
 	# set default remote, if it lacks one
 	[[ -z "$(gh repo set-default --view)" ]] && gh repo set-default
+
+	# set remote to my fork
+	local reponame
+	reponame=$(basename "$PWD")
+	git remote set-url origin "git@github.com:chrisgrieser/$reponame.git"
+
 	gh pr create --web --fill || gh pr create --web
 }
 
