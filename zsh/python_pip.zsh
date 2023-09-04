@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-export PYTHONSTARTUP="$DOTFILE_FOLDER/python/pythonrc.py"
+# export PYTHONSTARTUP="$DOTFILE_FOLDER/python/pythonrc.py"
 export IPYTHONDIR="$DOTFILE_FOLDER/ipython"
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -8,7 +8,7 @@ export IPYTHONDIR="$DOTFILE_FOLDER/ipython"
 alias ip="ipython"
 alias pu="pip uninstall"
 alias pi="pip install"
-alias pl="pip list"
+alias pl="pip list --not-required"
 
 #───────────────────────────────────────────────────────────────────────────────
 
