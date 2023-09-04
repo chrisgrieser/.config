@@ -1,5 +1,5 @@
 
-vim.notify(" Foobar", vim.log.levels.WARN, { title = "Sawmill" })
+vim.notify("Foobar", vim.log.levels.INFO, { title = "" })
 
 
 --------------------------------------------------------------------------------
