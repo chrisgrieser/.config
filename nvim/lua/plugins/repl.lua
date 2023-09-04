@@ -17,13 +17,14 @@ return {
 				send_motion = "+",
 			},
 			config = {
-				repl_open_cmd = "horizontal botright 10 split",
+				repl_open_cmd = "horizontal bot 10 split",
 				repl_definition = {
 					sh = { command = { "zsh" } },
 					typescript = { command = { "node" } },
-					python = { command = { "ipython" } },
 					javascript = { command = { "osascript", "-i", "-l", "JavaScript" } },
 					applescript = { command = { "osascript", "-i", "-l", "AppleScript" } },
+					-- automatically uses the ipython from the virtual env, if one is active
+					python = { command = { "ipython" } },
 				},
 			},
 		},
