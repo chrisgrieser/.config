@@ -13,6 +13,7 @@ local conf = {
 
 local lsp_servers = {
 	"lua_ls",
+	"vale_ls",
 	"yamlls",
 	"jsonls",
 	"cssls",
