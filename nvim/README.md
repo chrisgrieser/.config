@@ -7,17 +7,17 @@
 ```text
 ├── lua
 │  ├── config # keybindings, options, …
-│  ├── funcs # utility functions
+│  ├── funcs # utility functions / private plugins
 │  └── plugins # plugins & their configs
 ├── after
 │  └── ftplugin # filetype-specific configs
 ├── queries # modifications of treesitter queries
-├── mac-helper # opener for neovide users on macOS
-├── snippets
+├── mac-helper # opener for neovide on macOS
+├── snippets # VS Code Style for portability
 │  ├── basic
 │  └── project-specific
 ├── templates # skeleton files
-└── tool-configs # custom configs for linters & formatters 
+└── tool-configs # custom configs for efm
    ├── formatters
    └── linters
 ```
