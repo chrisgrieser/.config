@@ -19,9 +19,9 @@ return {
 		dev = true,
 		event = "VeryLazy",
 		opts = {
-			retirementAgeMins = 20,
+			retirementAgeMins = 0.1,
 			ignoreUnsavedChangesBufs = false,
-			notificationOnAutoClose = false,
+			notificationOnAutoClose = true,
 		},
 	},
 	{ -- change cwd per project

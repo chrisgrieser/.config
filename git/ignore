@@ -7,6 +7,9 @@ Icon
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# Scratchpads / Accidents
+Untitled.*
+
 # production stuff / builds
 node_modules
 venv

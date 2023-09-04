@@ -34,7 +34,7 @@ newCommand("LspCapabilities", function(ctx)
 		local msg = client.name:upper() .. "\n" .. table.concat(capAsList, "\n")
 		table.insert(out, msg)
 	end
-	vim.notify(table.concat(out, "\n\n"), u.trace, { timeout = 14000 })
+	vim.notify(table.concat(out, "\n\n"), vim.log.levels.TRACE, { timeout = 14000 })
 end, {
 	nargs = "?",
 	complete = function()
@@ -60,7 +60,7 @@ newCommand("Curl", function(ctx)
 	local bufName = "Curl." .. ft
 	local success = pcall(a.nvim_buf_set_name, bufId, bufName)
 	if not success then
-		vim.notify("Curl Buffer already exists. ", u.warn)
+		u.notify("", "Curl Buffer already exists. ", "warn")
 		cmd.buffer(bufName)
 		return
 	end

@@ -1,4 +1,7 @@
--- WORD DATABASE
+local M = {}
+
+
+--------------------------------------------------------------------------------
 
 -- INFO
 -- 1) these words are checked for lowercase, Capitalcase, and UPPERCASE
@@ -151,8 +154,6 @@ end
 
 --------------------------------------------------------------------------------
 
-local M = {}
-
 ---switches words under the cursor to their opposite, e.g. `true` to `false`
 function M.flipWord()
 	-- determine word to check
@@ -212,7 +213,7 @@ function M.flipWord()
 		vim.fn.setreg("z", newWord)
 		vim.cmd.normal { 'viw"zP', bang = true }
 	else
-		vim.notify("No matching word found", vim.log.levels.WARN)
+		vim.notify("No matching word found.", vim.log.levels.WARN)
 	end
 
 	vim.opt.iskeyword = iskeywBefore -- restore

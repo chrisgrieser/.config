@@ -1,4 +1,5 @@
 local M = {}
+local u = require("config.utils")
 
 local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
 
@@ -28,7 +29,7 @@ function M.commentHr()
 	local comStrLength = #(comStr:gsub(" ?%%s ?", ""))
 
 	if comStr == "" then
-		vim.notify(" No commentstring for this filetype available.", vim.log.levels.WARN)
+		u.notify("No commentstring for this filetype available.", "warn")
 		return
 	end
 	if comStr:find("-") then commentChar = "-" end
@@ -102,7 +103,7 @@ function M.ruleSearch()
 	local lnum = vim.fn.line(".") - 1
 	local diags = vim.diagnostic.get(0, { lnum = lnum })
 	if vim.tbl_isempty(diags) then
-		vim.notify("No diagnostics found", vim.log.levels.WARN)
+		u.notify("No diagnostics found", "warn")
 		return
 	end
 	for _, diag in ipairs(diags) do
@@ -130,7 +131,7 @@ function M.scrollHoverWin(direction)
 			return
 		end
 	end
-	vim.notify("No floating windows found. ", vim.log.levels.WARN)
+	u.notify("No floating windows found. ", "warn")
 end
 
 ---@param direction "up"|"down"

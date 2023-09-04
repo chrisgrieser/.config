@@ -7,7 +7,7 @@ local function checkForMakefile()
 	local makefile = vim.loop.cwd() .. "/Makefile"
 	local fileExists = vim.loop.fs_stat(makefile) ~= nil
 	if not fileExists then
-		vim.notify("Makefile not found.", vim.log.levels.WARN)
+		vim.notify("Makefile not found.", vim.log.levels.WARN, { title = "maker.nvim" })
 		return false
 	end
 	return true

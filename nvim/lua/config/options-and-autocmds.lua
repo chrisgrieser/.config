@@ -19,7 +19,6 @@ vim.filetype.add {
 		[".zshrc"] = "sh",
 		[".zshenv"] = "sh",
 		[".ignore"] = "gitignore", -- fd ignore files
-		["ignore"] = "gitignore", -- fd ignore files
 	},
 }
 
@@ -192,7 +191,7 @@ autocmd("FocusGained", {
 		local fileExists = vim.loop.fs_stat(vim.fn.expand("%")) ~= nil
 		local specialBuffer = vim.bo.buftype ~= ""
 		if not fileExists and not specialBuffer then
-			vim.notify("File does not exist anymore.", u.warn, { timeout = 20000 })
+			u.notify("", "File does not exist anymore.", "warn")
 		end
 	end,
 })

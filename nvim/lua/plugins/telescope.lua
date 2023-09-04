@@ -18,6 +18,7 @@ local keymappings_I = {
 	["<Down>"] = "move_selection_worse",
 	["<Up>"] = "move_selection_better",
 	["?"] = "which_key",
+	["<D-a>"] = "select_all",
 	["<D-CR>"] = function(prompt_bufnr)
 		require("telescope.actions").toggle_selection(prompt_bufnr)
 		require("telescope.actions").move_selection_worse(prompt_bufnr)
@@ -33,7 +34,7 @@ local keymappings_I = {
 		local path = require("telescope.actions.state").get_selected_entry().value
 		require("telescope.actions").close(prompt_bufnr)
 		vim.fn.setreg("+", path)
-		vim.notify("COPIED \n" .. path)
+		u.notify("Copied", path)
 	end,
 	["<C-n>"] = function(prompt_bufnr)
 		-- Copy name of file -- https://github.com/nvim-telescope/telescope-file-browser.nvim/issues/191
@@ -41,7 +42,7 @@ local keymappings_I = {
 		local name = vim.fs.basename(path)
 		require("telescope.actions").close(prompt_bufnr)
 		vim.fn.setreg("+", name)
-		vim.notify("COPIED \n" .. name)
+		u.notify("Copied", name)
 	end,
 	["<D-up>"] = function(prompt_bufnr)
 		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)

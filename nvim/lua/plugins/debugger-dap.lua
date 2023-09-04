@@ -149,7 +149,7 @@ return {
 					-- INFO is the only one that needs manual starting, other debuggers
 					-- start with `continue` by themselves
 					if not vim.bo.filetype == "lua" then
-						vim.notify("Not a lua file.", vim.log.levels.WARN)
+						vim.notify("Not a lua file.", vim.log.levels.WARN, { title = "one-small-step-for-vimkind" })
 						return
 					end
 					require("osv").run_this()

@@ -25,7 +25,7 @@ end
 ---@param msg string
 ---@param title string
 ---@param level? "info"|"trace"|"debug"|"warn"|"error"
-function M.notice(title, msg, level)
+function M.notify(title, msg, level)
 	if not level then level = "info" end
 	vim.notify(msg, vim.log.levels[level:upper()], { title = title })
 end

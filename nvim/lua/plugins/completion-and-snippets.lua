@@ -137,7 +137,7 @@ local function cmpconfig()
 				if require("luasnip").locally_jumpable(1) then
 					require("luasnip").jump(1)
 				else
-					vim.notify("No more jumps.")
+					vim.notify("No more jumps.", vim.log.levels.WARN, { title = "Luasnip" })
 				end
 			end, { "i", "s" }),
 		},

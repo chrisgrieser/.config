@@ -2,6 +2,7 @@
 -- used solely for mini.operators
 local M = {}
 local autocmd = vim.api.nvim_create_autocmd
+local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 -- INFO some repl-cmds automatically print the last line, so they do not
@@ -47,7 +48,7 @@ function M.filetypeSpecificEval()
 				local lines = table.concat(inputLines, "\n")
 				local shellCmd = repl .. " '" .. lines:gsub("'", "\\'") .. "'"
 				local evaluatedOut = vim.fn.system(shellCmd):gsub("\n$", "")
-				vim.notify(evaluatedOut)
+				u.notify("Eval", evaluatedOut)
 				return originalLines -- do not modify original lines
 			end
 
@@ -79,7 +80,7 @@ function M.luaEval(content)
 		vim.fn.system { "osascript", "-e", hsApplescript }
 	else
 		local output = MiniOperators.default_evaluate_func(content)
-		vim.notify(table.concat(output, "\n"))
+		u.notify("Eval", table.concat(output, "\n"))
 	end
 
 	return input_lines

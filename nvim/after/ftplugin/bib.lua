@@ -1,4 +1,5 @@
 local bo = vim.bo
+local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 -- do not autowrap
@@ -35,12 +36,8 @@ local function checkForDuplicateCitekeys(bufnr)
 	end
 	if duplCitekeys == "" then return end
 
-	vim.notify("# Duplicate Citkeys" .. duplCitekeys, vim.log.levels.WARN, {
-		on_open = function(win)
-			local buf = vim.api.nvim_win_get_buf(win)
-			vim.api.nvim_buf_set_option(buf, "filetype", "markdown")
-		end,
-	})
+		
+	u.notify("Duplicate Citkeys", duplCitekeys, "warn")
 end
 
 -- run on entering a bibtex buffer
