@@ -49,8 +49,8 @@ local gitShellOpts = {
 		if data[1] == "" and #data == 1 then return end
 		local output = table.concat(data, "\n"):gsub("%s*$", "")
 
-		-- no need to notify that pull was unnecessary
-		if output == "Current branch main is up to date." then return end
+		-- no need to notify that the pull in `git pull ; git push` yielded no update
+		if output:find("Current branch %w+ is up to date.") then return end
 
 		-- git often puts non-errors into STDERR, therefore checking here again
 		-- whether it is actually an error or not

@@ -2,23 +2,6 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{ -- lightbulb for available lsp actions
-		"kosayoda/nvim-lightbulb",
-		event = "LspAttach",
-		opts = {
-			autocmd = { enabled = true, updatetime = -1 }, -- -1 = updatetime set by myself
-			sign = { enabled = false },
-			status_text = { enabled = true, text = " " },
-			action_kinds = { "refactor" },
-			ignore = {
-				clients = {
-					"lua_ls", -- spams parameter refactoring
-					"marksman", -- spams ToC update everywhere
-					"ruff_lsp", -- spams fixAll everywhere
-				},
-			},
-		},
-	},
 	{ -- lsp definitions & references count in the status line
 		"chrisgrieser/nvim-dr-lsp",
 		event = "LspAttach",
