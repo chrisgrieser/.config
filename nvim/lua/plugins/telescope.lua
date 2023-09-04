@@ -74,11 +74,11 @@ local function telescopeConfig()
 		end,
 	}
 
-	-- color parent differently
+	-- color parent as Comment
 	vim.api.nvim_create_autocmd("FileType", {
 		pattern = "TelescopeResults",
 		callback = function()
-			vim.fn.matchadd("TelescopeParent", "   .*$")
+			vim.fn.matchadd("TelescopeParent", "\t .*$")
 			vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
 		end,
 	})
@@ -86,16 +86,16 @@ local function telescopeConfig()
 	require("telescope").setup {
 		defaults = {
 			path_display = function(_, path)
-				-- "filename   parentBase"
 				-- parent is colored as a comment via autocmd further above
 				local tail = vim.fs.basename(path)
 				local parentBase = vim.fs.basename(vim.fs.dirname(path))
 				if parentBase == "." then return tail end
-				return string.format("%s   %s", tail, parentBase)
+				return string.format("%s\t %s", tail, parentBase)
 			end,
 			selection_caret = "󰜋 ",
 			prompt_prefix = "❱ ",
 			multi_icon = "󰒆 ",
+			selection_strategy = - "reset" (default) - "follow" - "row" - "closest" - "none"
 
 			-- other ignores are defined via .gitignore, .ignore, or fd/ignore
 			file_ignore_patterns = {
