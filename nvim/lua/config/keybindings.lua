@@ -47,7 +47,7 @@ keymap("n", "ä", "'M", { desc = " Goto Mark" })
 
 keymap("n", "Ä", function()
 	u.normal("mM")
-	u.notify("", " Mark set.", "trace")
+	u.notify("", " Mark set.", "trace")
 end, { desc = " Set Mark" })
 
 keymap("n", "dä", function()

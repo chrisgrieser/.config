@@ -49,20 +49,51 @@ local routes = {
 	{ filter = { event = "notify", min_height = 15 }, view = "popup" },
 }
 
+-- HACK requires custom wrapping setup https://github.com/rcarriga/nvim-notify/issues/129
+-- replaces vim.notify = require("notify")
+local function customWrap(lines, max_width)
+
+	local function split_length(line, width)
+		local text = {}
+		local next_line
+		while true do
+			if #line == 0 then return text end
+			next_line, line = line:sub(1, width), line:sub(width)
+			text[#text + 1] = next_line
+		end
+	end
+
+	local wrappedLines = {}
+	for _, line in pairs(lines) do
+		local new_lines = split_length(line, max_width)
+		new_lines = new_lines
+		for _, nl in ipairs(new_lines) do
+			nl = nl:gsub("^%s*", ""):gsub("%s*$", "")
+			table.insert(wrappedLines, " " .. nl .. " ")
+		end
+	end
+
+	return wrappedLines
+end
+
 ---alternative compact renderer for nvim-notify. Modified version of https://github.com/rcarriga/nvim-notify/blob/master/lua/notify/render/compact.lua
 ---@param bufnr number
 ---@param notif object
 ---@param highlights object
----@param _ object plugin configObj
-local function altCompactRender(bufnr, notif, highlights, _)
+---@param config object plugin configObj
+local function compactWrapRender(bufnr, notif, highlights, config)
 	local base = require("notify.render.base")
 	local namespace = base.namespace()
 	local icon = notif.icon
 	local title = notif.title[1]
 	local prefix
+	local max_width = config.max_width
 
-	local hasTitle = type(title) == "string" and #title > 0
-	if hasTitle then
+	local defaultTitles = { "Error", "Warning", "Notify" }
+	local hasValidManualTitle = type(title) == "string"
+		and #title > 0
+		and not vim.tbl_contains(defaultTitles, title)
+	if hasValidManualTitle then
 		-- has title = icon + title as header row
 		prefix = string.format("%s %s", icon, title)
 		table.insert(notif.message, 1, prefix)
@@ -199,13 +230,13 @@ return {
 		-- does not play nice with the terminal
 		cond = function() return vim.fn.has("gui_running") == 1 end,
 		opts = {
-			render = altCompactRender, -- minimal|default|compact|simple|custom function
+			render = compactWrapRender, -- minimal|default|compact|simple|custom function
 			top_down = false,
-			max_width = 70,
+			max_width = 40,
 			minimum_width = 15,
 			level = 0, -- minimum severity level to display (0 = display all)
 			timeout = 7500,
-			stages = "slide",
+			stages = "fade", -- slide|fade
 			icons = { DEBUG = "", ERROR = "", INFO = "", TRACE = "", WARN = "" },
 			on_open = function(win)
 				if not vim.api.nvim_win_is_valid(win) then return end
