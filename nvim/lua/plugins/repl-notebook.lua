@@ -6,11 +6,11 @@ return {
 		"Vigemus/iron.nvim",
 		init = function() u.leaderSubkey("i", "󱠤 REPL") end,
 		keys = {
-			{ "<leader>it", vim.cmd.IronRepl, desc = "󱠤 Toggle REPL" },
-			{ "<leader>ir", vim.cmd.IronRestart, desc = "󱠤 Restart REPL" },
-			{ "<leader>ii", desc = "󱠤 Send Line" },
-			{ "<leader>ii", mode = "x", desc = "󱠤 Send Selection" },
-			{ "<leader>i#", desc = "󱠤 Send Operator" },
+			{ "g+", vim.cmd.IronRepl, desc = "󱠤 Toggle REPL" },
+			{ "<leader>+", vim.cmd.IronRestart, desc = "󱠤 Restart REPL" },
+			{ "++", desc = "󱠤 Send Line" },
+			{ "+", mode = "x", desc = "󱠤 Send Selection" },
+			{ "+", desc = "󱠤 Send Operator" },
 		},
 		opts = {
 			config = {
@@ -24,9 +24,9 @@ return {
 				},
 			},
 			keymaps = {
-				send_line = "<leader>ii",
-				visual_send = "<leader>ii",
-				send_motion = "<leader>i#",
+				send_line = "++",
+				visual_send = "+",
+				send_motion = "+",
 			},
 		},
 	},
