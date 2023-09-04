@@ -1,4 +1,9 @@
 local u = require("config.utils")
+
+---https://github.com/folke/noice.nvim/discussions/481#discussioncomment-6014368
+---@param msg object
+---@return boolean
+local function filter4Title(msg) return msg.opts and msg.opts.title == msg end
 --------------------------------------------------------------------------------
 
 -- https://www.reddit.com/r/neovim/comments/12lf0ke/comment/jg6idvr/
@@ -6,6 +11,15 @@ local u = require("config.utils")
 local routes = {
 	-- write messages
 	{ filter = { event = "msg_show", find = "B written$" }, view = "mini" },
+
+	-- nvim-early-retirement
+	{
+		filter = {
+			event = "notify",
+			cond = function(message) return message.opts and message.opts.title == "DAP" end,
+		},
+		view = "mini",
+	},
 
 	-- nvim-treesitter
 	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
@@ -63,18 +77,18 @@ return {
 				format = {
 					cmdline = { view = "cmdline_popup" },
 					search_down = { icon = "  ", view = "cmdline" }, -- FIX needed to be set explicitly
-					lua = { pattern = { "^:%s*lua%s+" }, view = "cmdline_popup"  }, -- show the `=`
+					lua = { pattern = { "^:%s*lua%s+" }, view = "cmdline_popup" }, -- show the `=`
 					help = { view = "cmdline_popup" },
 					numb = {
 						pattern = "^:%d+$",
-						view = "cmdline" ,
+						view = "cmdline",
 						conceal = false,
 					},
 					IncRename = {
 						pattern = "^:IncRename ",
 						icon = " ",
 						conceal = true,
-						view = "cmdline_popup" ,
+						view = "cmdline_popup",
 						opts = {
 							border = { style = u.borderStyle },
 							relative = "cursor",
@@ -83,7 +97,7 @@ return {
 						},
 					},
 					substitute = {
-						view = "cmdline_popup" ,
+						view = "cmdline_popup",
 						pattern = { "^:%%? ?s ", "^:'<,'> ?s " },
 						icon = " ",
 						conceal = true,
@@ -152,6 +166,7 @@ return {
 			level = 0, -- minimum severity level to display (0 = display all)
 			timeout = 7500,
 			stages = "slide",
+			icons = { DEBUG = "", ERROR = "", INFO = "", TRACE = "", WARN = "" },
 			on_open = function(win)
 				if not vim.api.nvim_win_is_valid(win) then return end
 				vim.api.nvim_win_set_config(win, { border = u.borderStyle })
@@ -161,12 +176,16 @@ return {
 			vim.keymap.set("n", "<leader>ln", function()
 				local history = require("notify").history()
 				if #history == 0 then
-					vim.notify("No Notification in this session.", u.warn)
+					vim.notify(
+						"No Notification in this session.",
+						vim.log.levels.TRACE,
+						{ title = "nvim-notify" }
+					)
 					return
 				end
 				local msg = history[#history].message
 				vim.fn.setreg("+", msg)
-				vim.notify("Last Notification copied.", u.trace)
+				vim.notify("Last Notification copied.", vim.log.levels.TRACE, { title = "nvim-notify" })
 			end, { desc = "󰎟 Copy Last Notification" })
 		end,
 	},

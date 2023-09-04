@@ -1,4 +1,5 @@
 local M = {}
+
 --------------------------------------------------------------------------------
 
 local g = vim.g
@@ -50,7 +51,6 @@ function M.next()
 	else
 		cmd("silent cfirst")
 		g.qfCount = 1
-		vim.notify("Wrapping to the beginning.")
 	end
 end
 
@@ -66,7 +66,6 @@ function M.previous()
 	else
 		cmd("silent clast")
 		g.qfCount = #(vim.fn.getqflist())
-		vim.notify("Wrapping to the end.")
 	end
 end
 

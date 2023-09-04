@@ -38,12 +38,12 @@ keymap("n", "<leader>pc", function() cmd.Telescope("colorscheme") end, { desc = 
 keymap("n", "<leader>lc", function()
 	local lastCommand = fn.getreg(":")
 	if lastCommand == "" then
-		vim.notify("No last command available", u.warn)
+		u.notify("", "No last command available", "warn")
 		return
 	end
 	lastCommand = lastCommand:gsub("^i ", ""):gsub("^lua ?=? ", "")
 	fn.setreg("+", lastCommand)
-	vim.notify("COPIED\n" .. lastCommand)
+	u.notify("Copied", lastCommand)
 end, { desc = "󰘳 Copy last command" })
 
 -- [l]ast command a[g]ain
@@ -58,7 +58,7 @@ keymap("n", "<leader>lh", function() cmd.Telescope("command_history") end, { des
 keymap("n", "<leader>lf", function()
 	local out = "filetype: " .. bo.filetype
 	if bo.buftype ~= "" then out = out .. "\nbuftype: " .. bo.buftype end
-	vim.notify(out, u.trace)
+	u.notify("", out, "trace")
 end, { desc = "󰽘 Inspect FileType & BufType" })
 
 --------------------------------------------------------------------------------
@@ -75,14 +75,14 @@ keymap("n", "<leader>f<Tab>", function()
 	bo.expandtab = false
 	bo.tabstop = 3
 	cmd.retab { bang = true }
-	u.notice("Indent", "Now using 󰌒 (width 3)")
+	u.notify("Indent", "Now using 󰌒 (width 3)")
 end, { desc = "󰌒 Use Tabs" })
 
 keymap("n", "<leader>f<Space>", function()
 	bo.tabstop = 2
 	bo.expandtab = true
 	cmd.retab { bang = true }
-	u.notice("Indent", "Now using 󱁐 (2)")
+	u.notify("Indent", "Now using 󱁐 (2)")
 end, { desc = "󱁐 Use Spaces" })
 
 --------------------------------------------------------------------------------
@@ -213,13 +213,13 @@ keymap("n", "<leader>gL", function() cmd.Telescope("git_bcommits") end, { desc =
 keymap("n", "<leader>gb", function() cmd.Telescope("git_branches") end, { desc = " Branches" })
 
 -- My utils
-keymap("n", "<leader>gc", function() require("funcs.git-utils").commit() end, { desc = "󰊢 Commit" })
-keymap("n", "<leader>gC", function() require("funcs.git-utils").addCommit() end, { desc = "󰊢 Add-Commit" })
-keymap("n", "<leader>gg", function() require("funcs.git-utils").addCommitPush() end, { desc = "󰊢 Add-Commit-Push" })
-keymap("n", "<leader>gm", function() require("funcs.git-utils").amendNoEditPushForce() end, { desc = "󰊢 Amend-No-Edit & Force Push" })
-keymap("n", "<leader>gM", function() require("funcs.git-utils").amendAndPushForce() end, { desc = "󰊢 Amend & Force Push" })
-keymap({ "n", "x" }, "<leader>gu", function () require("funcs.git-utils").githubUrl() end, { desc = "󰊢 GitHub Link" })
-keymap("n", "<leader>gU", function () require("funcs.git-utils").githubUrl("repo") end, { desc = "󰊢 Open GitHub Repo" })
+keymap("n", "<leader>gc", function() require("funcs.mini-git").commit() end, { desc = "󰊢 Commit" })
+keymap("n", "<leader>gC", function() require("funcs.mini-git").addCommit() end, { desc = "󰊢 Add-Commit" })
+keymap("n", "<leader>gg", function() require("funcs.mini-git").addCommitPush() end, { desc = "󰊢 Add-Commit-Push" })
+keymap("n", "<leader>gm", function() require("funcs.mini-git").amendNoEditPushForce() end, { desc = "󰊢 Amend-No-Edit & Force Push" })
+keymap("n", "<leader>gM", function() require("funcs.mini-git").amendAndPushForce() end, { desc = "󰊢 Amend & Force Push" })
+keymap({ "n", "x" }, "<leader>gu", function () require("funcs.mini-git").githubUrl() end, { desc = "󰊢 GitHub Link" })
+keymap("n", "<leader>gU", function () require("funcs.mini-git").githubUrl("repo") end, { desc = "󰊢 Open GitHub Repo" })
 
 -- Octo
 -- customize Octo layout: https://github.com/pwntester/octo.nvim/discussions/416#discussioncomment-6812002
@@ -294,10 +294,10 @@ keymap("n", "<leader>oa", function()
 	local hasAlpha = vim.tbl_contains(nrformats:get(), "alpha")
 	if hasAlpha then
 		nrformats:remove { "alpha" }
-		u.notice("Option", "󰀫 alpha disabled")
+		u.notify("Option", "󰀫 alpha disabled")
 	else
 		nrformats:append("alpha")
-		u.notice("Option", "󰀫 alpha enabled")
+		u.notify("Option", "󰀫 alpha enabled")
 	end
 end, { desc = " 󰀫 Toggle nrformats alpha" })
 

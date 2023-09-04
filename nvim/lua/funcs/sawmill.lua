@@ -10,6 +10,15 @@ local warn = vim.log.levels.WARN
 ---runs :normal natively with bang
 local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
+---send notification
+---@param msg string
+---@param level? "info"|"trace"|"debug"|"warn"|"error"
+local function notify(msg, level)
+	if not level then level = "info" end
+	local pluginName = "Sawmill"
+	vim.notify(msg, vim.log.levels[level:upper()], { title = pluginName })
+end
+
 --------------------------------------------------------------------------------
 
 -- CONFIG
@@ -69,7 +78,7 @@ function M.messageLog()
 	elseif ft == "applescript" then
 		templateStr = 'log "%s "'
 	else
-		vim.notify("󰸢 MessageLog does not support " .. ft .. " yet.", warn)
+		notify("Message Log does not support " .. ft .. " yet.", "warn")
 		return
 	end
 
@@ -120,7 +129,7 @@ function M.assertLog()
 	elseif ft == "python" then
 		templateStr = 'assert %s, "%s %s"'
 	else
-		vim.notify("󰸢 assertLog does not support " .. ft .. " yet.", warn)
+		notify("Assert Log does not support " .. ft .. " yet.", "warn")
 		return
 	end
 
@@ -139,7 +148,7 @@ function M.objectLog()
 	elseif ft == "javascript" then
 		templateStr = 'console.log("%s %s:", JSON.stringify(%s))'
 	else
-		vim.notify("󰸢 Objectlog does not support " .. ft .. " yet.", warn)
+		notify("Object Log does not support " .. ft .. " yet.", "warn")
 		return
 	end
 
@@ -169,7 +178,7 @@ function M.beepLog()
 	elseif ft == "css" or ft == "scss" then
 		templateStr = "outline: 2px solid red !important; /* %s */"
 	else
-		vim.notify("󰸢 Beeplog does not support " .. ft .. " yet.", warn)
+		notify("Beep Log does not support " .. ft .. " yet.", "warn")
 		return
 	end
 
@@ -212,7 +221,7 @@ function M.timeLog()
 			'echo "%s time ${durationSecs}s"',
 		}
 	else
-		vim.notify("󰸢 Timelog does not support " .. ft .. " yet.", warn)
+		notify("Time log does not support " .. ft .. " yet.", "warn")
 		return
 	end
 	local statementToUse = g.timelogStart and logStatement1 or logStatement2
@@ -235,7 +244,7 @@ function M.debugLog()
 			"embed() # %s",
 		}
 	else
-		vim.notify("󰸢 Debuglog does not support " .. ft .. " yet.", warn)
+		notify("Debug Log does not support " .. ft .. " yet.", "warn")
 		return
 	end
 
@@ -255,9 +264,9 @@ function M.removeLogs()
 	cmd.nohlsearch()
 
 	local linesRemoved = numOfLinesBefore - vim.api.nvim_buf_line_count(0)
-	local msg = ("󰸢 Removed %s log statements."):format(linesRemoved)
+	local msg = ("Removed %s log statements."):format(linesRemoved)
 	if linesRemoved == 1 then msg = msg:sub(1, -3) .. "." end -- 1 = singular
-	vim.notify(msg)
+	notify(msg)
 
 	---@diagnostic disable-next-line: inject-field
 	vim.b.timelogStart = false -- reset timelog

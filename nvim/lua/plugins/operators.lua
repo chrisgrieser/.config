@@ -124,7 +124,7 @@ return {
 							then
 								patt = "^(.-function.-%b() ?{)().*(})()$"
 							else
-								vim.notify("No function-surround defined for " .. ft, u.warn)
+								u.notify("Surround", "No function-surround defined for " .. ft)
 								patt = "()()()()"
 							end
 							return config.get_selections {
@@ -150,7 +150,7 @@ return {
 									{ "", "}" },
 								}
 							end
-							vim.notify("No function-surround defined for " .. ft, u.warn)
+							u.notify("Surround", "No function-surround defined for " .. ft)
 							return { { "" }, { "" } }
 						end,
 					},
@@ -172,7 +172,7 @@ return {
 							elseif ft == "javascript" or ft == "typescript" then
 								patt = "^(if %b() ?{?)().-( ?}?)()$"
 							else
-								vim.notify("No conditional-surround defined for " .. ft, u.warn)
+								u.notify("Surround", "No conditional-surround defined for " .. ft)
 								patt = "()()()()"
 							end
 							return config.get_selections {
@@ -193,7 +193,7 @@ return {
 									{ "", "}" },
 								}
 							end
-							vim.notify("No if-surround defined for " .. ft, u.warn)
+							u.notify("Surround", "No if-surround defined for " .. ft)
 							return { { "" }, { "" } }
 						end,
 					},

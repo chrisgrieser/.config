@@ -1,5 +1,6 @@
 local keymap = vim.keymap.set
 local optl = vim.opt_local
+local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 -- less nesting in md
@@ -101,7 +102,7 @@ keymap("n", "<localleader>d", function()
 	local clients = vim.lsp.buf_get_clients(0)
 	for _, client in ipairs(clients) do
 		if client.name == "ltex" then
-			vim.notify("󰓆 ltex language set to " .. lang)
+			u.notify("ltex lang", lang)
 			client.config.settings.ltex.language = lang
 			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = client.config.settings })
 			return

@@ -71,5 +71,9 @@ vim.defer_fn(function()
 	local threshold = 10
 	local numberOfUpdates = tonumber(require("lazy.status").updates():match("%d+"))
 	if numberOfUpdates < threshold then return end
-	vim.notify(("󱧕 %s plugin updates"):format(numberOfUpdates))
+	vim.notify(
+		("󱧕 %s plugin updates"):format(numberOfUpdates),
+		vim.log.levels.INFO,
+		{ title = "Lazy" }
+	)
 end, 5000)

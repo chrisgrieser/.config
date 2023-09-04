@@ -34,12 +34,12 @@ vim.keymap.set("n", "<localleader>y", function()
 	local nameAsYaml = vim.fn.expand("%:r") .. ".yaml"
 	local yaml = vim.fn.system { "yq", "--output-format=yaml", filename }
 	if vim.v.shell_error ~= 0 then
-		vim.notify(yaml, vim.log.levels.ERROR)
+		u.notify("Error", yaml)
 		return
 	end
 	local error = u.writeToFile(nameAsYaml, yaml, "w")
 	if error then
-		vim.notify(error, vim.log.levels.ERROR)
+		u.notify("Error", error)
 		return
 	end
 	vim.fn.system { "open", "-R", nameAsYaml }

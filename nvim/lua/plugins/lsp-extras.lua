@@ -40,7 +40,7 @@ return {
 		init = function()
 			vim.keymap.set("n", "^", function()
 				if not require("nvim-navic").is_available() then
-					vim.notify("Navic is not available.")
+					u.notify("", "Navic is not available.")
 					return
 				end
 				local symbolPath = require("nvim-navic").get_data()
@@ -54,7 +54,7 @@ return {
 			vim.keymap.set("n", "<D-b>", function()
 				local rawdata = require("nvim-navic").get_data()
 				if not rawdata then
-					vim.notify("No Breadcrumbs available", u.warn)
+					u.notify("Navic", "No breadcrumbs available.")
 					return
 				end
 				local breadcrumbs = ""
@@ -63,7 +63,7 @@ return {
 				end
 				breadcrumbs = breadcrumbs:sub(1, -2)
 				vim.fn.setreg("+", breadcrumbs)
-				vim.notify("COPIED\n" .. breadcrumbs)
+				u.notify("Copied", breadcrumbs)
 			end, { desc = "󰒕 Copy Breadcrumbs" })
 		end,
 		opts = {

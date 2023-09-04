@@ -1,31 +1,11 @@
-local bo = vim.bo
-local cmd = vim.cmd
 local fn = vim.fn
 local keymap = vim.keymap.set
-local u = require("config.utils")
 local abbr = vim.cmd.inoreabbrev
 --------------------------------------------------------------------------------
 
 abbr("<buffer> cosnt const")
 abbr("<buffer> local const") -- habit from writing too much lua
 abbr("<buffer> -- //") -- habit from writing too much lua
-
---------------------------------------------------------------------------------
--- BUILD
-
--- setup quickfix list for npm, see also: https://vonheikemen.github.io/devlog/tools/vim-and-the-quickfix-list/
-bo.makeprg = "npm run build"
-bo.errorformat = " > %f:%l:%c: %trror: %m" .. ",%-G%.%#" -- = ignore remaining lines
-
-keymap("n", "<localleader><localleader>", function()
-	cmd.update()
-	cmd.redir("@z")
-	cmd([[silent make]]) -- silent, to not show up message (redirection still works)
-	local output = fn.getreg("z"):gsub(".-\r", "") -- remove first line
-	local logLevel = output:find("error") and u.error or u.trace
-	vim.notify(output, logLevel)
-	cmd.redir("END")
-end, { buffer = true, desc = " npm run build" })
 
 --------------------------------------------------------------------------------
 

@@ -1,7 +1,6 @@
 local M = {}
 local fn = vim.fn
 
-
 ---send notification
 ---@param msg string
 ---@param level? "info"|"trace"|"debug"|"warn"|"error"
@@ -50,6 +49,9 @@ local gitShellOpts = {
 		if data[1] == "" and #data == 1 then return end
 		local output = table.concat(data, "\n"):gsub("%s*$", "")
 
+		-- no need to notify that pull was unnecessary
+		if output == "Current branch main is up to date." then return end
+
 		-- git often puts non-errors into STDERR, therefore checking here again
 		-- whether it is actually an error or not
 		local logLevel = "info"
@@ -65,11 +67,6 @@ local gitShellOpts = {
 
 		notify(output, logLevel)
 		playSoundMacOS(sound)
-	end,
-	on_exit = function()
-		-- reload buffer if changed, e.g., due to linters or pandocvim
-		-- (also requires opt.autoread being enabled)
-		vim.cmd("silent checktime")
 	end,
 }
 
@@ -189,7 +186,7 @@ function M.commit(prefillMsg)
 			return
 		end
 
-		notify('󰊢 git commit\n"' .. newMsg .. '"')
+		notify('󰊢 Commit\n"' .. newMsg .. '"')
 		local stderr = fn.system { "git", "commit", "-m", newMsg }
 		if vim.v.shell_error ~= 0 then notify(stderr, "warn") end
 	end)
@@ -220,7 +217,7 @@ function M.addCommitPush(prefillMsg)
 			return
 		end
 
-		notify('󰊢 git add-commit-push\n"' .. newMsg .. '"')
+		notify('󰊢 Add-Commit-Push\n"' .. newMsg .. '"')
 
 		local stderr = fn.system("git add -A && git commit -m '" .. newMsg .. "'")
 		if vim.v.shell_error ~= 0 then

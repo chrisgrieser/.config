@@ -25,5 +25,5 @@ keymap("n", "<leader>r", function()
 	local packageName = expand("%:r"):gsub("lua/", ""):gsub("/", ".")
 	package.loaded[packageName] = nil
 	cmd.source()
-	u.notice("Re-sourced", expand("%:r"))
+	u.notify("Re-sourced", expand("%:r"))
 end, { buffer = true, desc = "  Reload/Make" })

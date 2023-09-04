@@ -4,6 +4,15 @@ local fn = vim.fn
 local api = vim.api
 local cmd = vim.cmd
 
+---send notification
+---@param msg string
+---@param level? "info"|"trace"|"debug"|"warn"|"error"
+local function notify(msg, level)
+	if not level then level = "info" end
+	local pluginName = "alt-alt"
+	vim.notify(msg, vim.log.levels[level:upper()], { title = pluginName })
+end
+
 --------------------------------------------------------------------------------
 
 ---count number of windows, excluding various special windows (scrollbars,
@@ -117,7 +126,7 @@ function M.altBuffer()
 	elseif altOldfile() then
 		cmd.edit(altOldfile())
 	else
-		vim.notify("Nothing to switch to.", vim.log.levels.WARN)
+		notify("Nothing to switch to.", "warn")
 	end
 end
 
@@ -141,7 +150,7 @@ function M.betterClose()
 	-- close buffers
 	local openBuffers = vim.fn.getbufinfo { buflisted = 1 }
 	if #openBuffers == 1 then
-		vim.notify("Only one buffer open.", vim.log.levels.TRACE)
+		notify("Only one buffer open.", "trace")
 		return
 	end
 
@@ -155,7 +164,7 @@ function M.betterClose()
 
 	couldDelete = pcall(cmd.bdelete)
 	if not couldDelete then
-		vim.notify("Could not delete buffer.", vim.log.levels.WARN)
+		notify("Could not delete buffer.", "warn")
 		return
 	end
 
