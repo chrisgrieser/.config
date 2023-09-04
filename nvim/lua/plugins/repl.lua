@@ -6,12 +6,13 @@ return {
 		"Vigemus/iron.nvim",
 		init = function() u.leaderSubkey("i", "󱠤 REPL") end,
 		keys = {
-			{ "g+", vim.cmd.IronRepl, desc = "󱠤 Toggle REPL" },
-			{ "<leader>+", vim.cmd.IronRestart, desc = "󱠤 Restart REPL" },
+			{ "<leader>+", vim.cmd.IronRepl, desc = "󱠤 Toggle REPL" },
+			{ "g+", vim.cmd.IronRestart, desc = "󱠤 Restart REPL" },
 			{ "++", desc = "󱠤 Send Line" },
 			{ "+", mode = "x", desc = "󱠤 Send Selection" },
 			{ "+", desc = "󱠤 Send Operator" },
 		},
+		main = "iron.core",
 		opts = {
 			config = {
 				repl_open_cmd = "vertical botright 10 split",
