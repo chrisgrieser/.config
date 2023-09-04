@@ -1,21 +1,23 @@
-local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
 	{ -- REPL
 		"Vigemus/iron.nvim",
-		init = function() u.leaderSubkey("i", "󱠤 REPL") end,
 		keys = {
-			{ "<leader>+", vim.cmd.IronRepl, desc = "󱠤 Toggle REPL" },
-			{ "g+", vim.cmd.IronRestart, desc = "󱠤 Restart REPL" },
-			{ "++", desc = "󱠤 Send Line" },
-			{ "+", mode = "x", desc = "󱠤 Send Selection" },
-			{ "+", desc = "󱠤 Send Operator" },
+			{ "<leader>i", vim.cmd.IronRepl, desc = "󱠤 Toggle REPL" },
+			{ "<leader>I", vim.cmd.IronRestart, desc = "󱠤 Restart REPL" },
+			{ "++", desc = "󱠤 Send Line to REPL" },
+			{ "+", mode = { "n", "x" }, desc = "󱠤 Send-to-REPL Operator" },
 		},
 		main = "iron.core",
 		opts = {
+			keymaps = {
+				send_line = "++",
+				visual_send = "+",
+				send_motion = "+",
+			},
 			config = {
-				repl_open_cmd = "vertical botright 10 split",
+				repl_open_cmd = "horizontal botright 10 split",
 				repl_definition = {
 					sh = { command = { "zsh" } },
 					typescript = { command = { "node" } },
@@ -23,11 +25,6 @@ return {
 					javascript = { command = { "osascript", "-i", "-l", "JavaScript" } },
 					applescript = { command = { "osascript", "-i", "-l", "AppleScript" } },
 				},
-			},
-			keymaps = {
-				send_line = "++",
-				visual_send = "+",
-				send_motion = "+",
 			},
 		},
 	},

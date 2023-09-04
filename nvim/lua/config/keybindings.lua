@@ -219,14 +219,19 @@ keymap("t", "<Esc>", "<C-\\><C-n>", { desc = " Esc Terminal Mode" })
 --------------------------------------------------------------------------------
 -- BUFFERS & WINDOWS & SPLITS
 
--- stylua: ignore start
-keymap("n", "<CR>", function() require("funcs.alt-alt").altBuffer() end, { desc = "󰽙 Alt Buffer" })
-keymap({"n", "x", "i"}, "<C-CR>", "<C-w>w", { desc = " Next Window" })
+keymap("n", "<CR>", function()
+	if vim.bo.buftype == "terminal" then
+		u.normal("a") -- enter terminal mode
+	else
+		require("funcs.alt-alt").altBuffer()
+	end
+end, { desc = "󰽙 Alt Buffer" })
+keymap({ "n", "x", "i" }, "<C-CR>", "<C-w>w", { desc = " Next Window" })
 
+-- stylua: ignore
 keymap({"n", "x", "i"}, "<D-w>", function() require("funcs.alt-alt").betterClose() end, { desc = "󰽙 close buffer/window" })
 keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " 󰽙 Buffers" })
 
--- stylua: ignore end
 keymap("n", "<C-w>h", "<cmd>split<CR>", { desc = " horizontal split" })
 keymap("n", "<C-w>v", "<cmd>vertical split<CR>", { desc = " vertical split" })
 keymap("n", "<C-w><C-h>", "<cmd>split<CR>", { desc = " horizontal split" })

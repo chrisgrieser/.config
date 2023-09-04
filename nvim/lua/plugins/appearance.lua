@@ -87,6 +87,7 @@ return {
 				http = { icon = "󰴚", name = "HTTP request" }, -- for rest.nvim
 				-- give plugins icons for my status line components
 				gitignore = { icon = "", name = "gitignore" },
+				ipython = { icon = "󰌠", name = "ipython" },
 				checkhealth = { icon = "󰩂", name = ":checkhealth" },
 				noice = { icon = "󰎟", name = "noice.nvim" },
 				lazy = { icon = "󰒲", name = "lazy.nvim" },
