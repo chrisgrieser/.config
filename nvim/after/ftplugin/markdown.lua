@@ -29,7 +29,12 @@ optl.spell = false
 -- MARKDOWN-SPECIFIC KEYMAPS
 
 -- Build / Preview
-keymap("n", "<localleader>p", "<Plug>MarkdownPreview", { desc = " Preview", buffer = true })
+keymap(
+	"n",
+	"<localleader><localleader>",
+	"<Plug>MarkdownPreview",
+	{ desc = " Preview", buffer = true }
+)
 
 -- do not ignore type "string" in md, since that's what headings in markdown are
 -- stylua: ignore
