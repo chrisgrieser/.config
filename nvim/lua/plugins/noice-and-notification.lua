@@ -52,9 +52,9 @@ local routes = {
 --------------------------------------------------------------------------------
 
 return {
-	{
+	{ -- Message & Command System Overhaul
 		"folke/noice.nvim",
-		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
+		dependencies = { "MunifTanjim/nui.nvim", "chrisgrieser/nvim-notify" },
 		event = "VeryLazy",
 		init = function()
 			-- stylua: ignore
@@ -151,9 +151,10 @@ return {
 		},
 	},
 	{ -- Notifications
-		"rcarriga/nvim-notify",
+		"chrisgrieser/nvim-notify",
+		dev = true,
 		opts = {
-			render = require("funcs.notify-wrapped-compact"),
+			render = "wrapped-compact",
 			top_down = false,
 			max_width = 40,
 			minimum_width = 15,

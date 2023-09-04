@@ -1,5 +1,5 @@
 
-vim.notify("Hello World. Lorem ipsum dolor sit amet qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.", vim.log.levels.INFO, {title = "My Plugin"})
+vim.notify("Hello World. Lorem ipsum dolor sit amet qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.", vim.log.levels.INFO)
 
 --------------------------------------------------------------------------------
 
