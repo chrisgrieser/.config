@@ -1,6 +1,5 @@
 local toolsToAutoinstall = {
 	"debugpy", -- just here to install ensure auto-install
-	"vale", -- needed for vale-ls
 	"codespell",
 	"yamllint",
 	"shellcheck",
@@ -10,6 +9,7 @@ local toolsToAutoinstall = {
 	"black",
 	"selene",
 	"stylua",
+	"proselint",
 	"prettier", -- only yaml formatter preserving blank lines https://github.com/mikefarah/yq/issues/515
 	-- stylelint included in mason, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
 
@@ -31,6 +31,7 @@ local setupEfmConfig = function()
 	local mdformat = require("efmls-configs.formatters.mdformat")
 
 	-- using my own, due to custom configs
+	local proselint = require("tool-configs.linters.proselint")
 	local markdownlint = require("tool-configs.linters.markdownlint")
 	local shellcheck = require("tool-configs.linters.shellcheck")
 	local yamllint = require("tool-configs.linters.yamllint")
@@ -38,6 +39,9 @@ local setupEfmConfig = function()
 	local stylelint_L = require("tool-configs.linters.stylelint")
 	local stylelint_F = require("tool-configs.formatters.stylelint")
 	local bibtexTidy = require("tool-configs.formatters.bibtex-tidy")
+
+	-- https://vale.sh/docs/topics/config#search-process
+	-- vim.env.VALE_CONFIG_PATH = require("config.utils").linterConfigFolder .. "/vale/vale.ini"
 
 	local languages = {
 		javascript = { biome },
@@ -50,7 +54,7 @@ local setupEfmConfig = function()
 		html = { prettier },
 		sh = { shfmt, shellcheck, shellharden },
 		yaml = { yamllint, prettier },
-		markdown = { markdownlint, mdformat },
+		markdown = { markdownlint, mdformat, proselint },
 		bib = { bibtexTidy },
 		gitcommit = {},
 		toml = {},

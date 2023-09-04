@@ -7,14 +7,12 @@ local conf = {
 	on_attach = {},
 	filetypes = {},
 	init_options = {},
-	root_dir = {},
 }
 
 --------------------------------------------------------------------------------
 
 local lsp_servers = {
 	"lua_ls",
-	"vale_ls", -- also requires the vale cli (installed via mason-tools-updater)
 	"yamlls",
 	"jsonls",
 	"cssls",
@@ -240,15 +238,6 @@ conf.settings.ltex = {
 }
 
 --------------------------------------------------------------------------------
--- VALE
-
--- https://vale.sh/docs/topics/config#search-process
-vim.env.VALE_CONFIG_PATH = u.linterConfigFolder .. "/vale/vale.ini"
-
--- just needs any root directory to work
-conf.root_dir.vale_ls = function() return os.getenv("HOME") end
-
---------------------------------------------------------------------------------
 -- SETUP ALL LSP
 -- enable capabilities for plugins
 local lspCapabilities = vim.lsp.protocol.make_client_capabilities()
@@ -274,14 +263,11 @@ local function setupAllLsps()
 			on_attach = conf.on_attach[lsp],
 			filetypes = conf.filetypes[lsp],
 			init_options = conf.init_options[lsp],
-			root_dir = conf.root_dir[lsp],
 		}
 	end
 
 	-- TODO remove this once available in lspconfig, pending: https://github.com/neovim/nvim-lspconfig/pull/2790
-	require("lspconfig").biome.setup {
-		capabilities = lspCapabilities,
-	}
+	require("lspconfig").biome.setup { capabilities = lspCapabilities }
 end
 
 --------------------------------------------------------------------------------

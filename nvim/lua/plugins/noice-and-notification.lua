@@ -25,6 +25,7 @@ local routes = {
 	{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
 
 	-- Mason
+	{ filter = { event = "notify", find = "%[mason%-tool%-installer%]" }, view = "mini" },
 	{
 		filter = {
 			event = "notify",
