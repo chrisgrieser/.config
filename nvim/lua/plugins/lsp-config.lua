@@ -239,10 +239,14 @@ conf.settings.ltex = {
 	},
 }
 
--- vale https://vale.sh/docs/topics/config#search-process
+--------------------------------------------------------------------------------
+-- VALE
+
+-- https://vale.sh/docs/topics/config#search-process
 vim.env.VALE_CONFIG_PATH = u.linterConfigFolder .. "/vale/vale.ini"
 
-conf.root_dir.vale = require("lspconfig.util").root_pattern("Makefile", ".git")
+-- just needs any root directory to work
+conf.root_dir.vale_ls = function() return os.getenv("HOME") end
 
 --------------------------------------------------------------------------------
 -- SETUP ALL LSP
@@ -273,6 +277,11 @@ local function setupAllLsps()
 			root_dir = conf.root_dir[lsp],
 		}
 	end
+
+	-- TODO remove this once available in lspconfig, pending: https://github.com/neovim/nvim-lspconfig/pull/2790
+	require("lspconfig").biome.setup {
+		capabilities = lspCapabilities,
+	}
 end
 
 --------------------------------------------------------------------------------

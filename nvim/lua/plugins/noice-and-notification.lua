@@ -28,7 +28,7 @@ local routes = {
 	{
 		filter = {
 			event = "notify",
-			cond = function(msg) return msg.opts and msg.opts.title:find ("mason.*.nvim") end,
+			cond = function(msg) return msg.opts and msg.opts.title and msg.opts.title:find("mason.*.nvim") end,
 		},
 		view = "mini",
 	},

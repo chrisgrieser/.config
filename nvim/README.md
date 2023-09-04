@@ -24,8 +24,7 @@
 
 The tree was generated using <https://tree.nathanfriend.io/>
 
-tessst.
-I hope you like it.
+fsfsf
 
 ## All Installed Plugins
 
@@ -136,4 +135,4 @@ I hope you like it.
 - [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim)
 - [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)
 
-This list has been auto-generated [with this small shell script.](https://nanotipsforvim.prose.sh/list-all-your-installed-plugins). Also, you can check out [the nvim plugins I authored myself](https://github.com/chrisgrieser?tab=repositories&q=nvim&type=source&language=&sort=stargazers).
+This list was auto-generated [with this small shell script.](https://nanotipsforvim.prose.sh/list-all-your-installed-plugins). Also, you can check out [the nvim plugins I authored myself](https://github.com/chrisgrieser?tab=repositories&q=nvim&type=source&language=&sort=stargazers).
