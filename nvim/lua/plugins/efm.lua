@@ -99,7 +99,7 @@ return {
 					if #attachedLsps > 0 then vim.lsp.buf.format() end
 					vim.cmd.update()
 				end,
-				mode = {"n", "x"},
+				mode = { "n", "x" },
 				desc = "󰒕 Format & Save",
 			},
 		},
