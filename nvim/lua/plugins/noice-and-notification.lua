@@ -1,9 +1,5 @@
 local u = require("config.utils")
 
----https://github.com/folke/noice.nvim/discussions/481#discussioncomment-6014368
----@param msg object
----@return boolean
-local function filter4Title(msg) return msg.opts and msg.opts.title == msg end
 --------------------------------------------------------------------------------
 
 -- https://www.reddit.com/r/neovim/comments/12lf0ke/comment/jg6idvr/
@@ -16,7 +12,7 @@ local routes = {
 	{
 		filter = {
 			event = "notify",
-			cond = function(message) return message.opts and message.opts.title == "DAP" end,
+			cond = function(msg) return msg.opts and msg.opts.title == "Auto-Closing Buffer" end,
 		},
 		view = "mini",
 	},
