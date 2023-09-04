@@ -16,7 +16,6 @@ end
 --------------------------------------------------------------------------------
 
 -- Borders for Floats & Virtual Text
-require("lspconfig.ui.windows").default_options.border = u.borderStyle
 
 -- INFO this needs to be disabled for noice.nvim
 -- vim.lsp.handlers["textDocument/signatureHelp"] =

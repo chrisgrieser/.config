@@ -9,8 +9,9 @@ local keymappings_I = {
 	["<PageUp>"] = "preview_scrolling_up",
 	["<C-h>"] = "cycle_history_prev",
 	["<C-l>"] = "cycle_history_next",
-	["<D-s>"] = function(prompt_bufnr) -- sends selected, or if none selected, sends all
+	["<D-s>"] = function(prompt_bufnr)
 		require("funcs.quickfix").deleteList() -- delete current list
+		-- smart send = sends selected, or if none selected, sends all
 		require("telescope.actions").smart_send_to_qflist(prompt_bufnr)
 	end,
 	["<Tab>"] = "move_selection_worse",
@@ -46,9 +47,9 @@ local keymappings_I = {
 	end,
 	["<D-up>"] = function(prompt_bufnr)
 		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-		if not current_picker.cwd then return end
-		local currentPath = tostring(current_picker.cwd)
-		local parent_dir = vim.fs.dirname(currentPath)
+		-- cwd is only set if passed as telescope option
+		local cwd = current_picker.cwd and tostring(current_picker.cwd) or vim.loop.cwd()
+		local parent_dir = vim.fs.dirname(cwd)
 
 		require("telescope.actions").close(prompt_bufnr)
 		require("telescope.builtin").find_files {
@@ -95,7 +96,6 @@ local function telescopeConfig()
 			selection_caret = "󰜋 ",
 			prompt_prefix = "❱ ",
 			multi_icon = "󰒆 ",
-			selection_strategy = - "reset" (default) - "follow" - "row" - "closest" - "none"
 
 			-- other ignores are defined via .gitignore, .ignore, or fd/ignore
 			file_ignore_patterns = {
@@ -105,7 +105,7 @@ local function telescopeConfig()
 				"%.icns$",
 				"%.zip$",
 				"%.pxd$",
-				"%.plist$",
+				"%.plist$", -- mostly Alfred files
 			},
 			preview = {
 				timeout = 200, -- ms
