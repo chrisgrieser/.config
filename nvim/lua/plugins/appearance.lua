@@ -4,13 +4,10 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{
+	{ -- dim unused windows
 		"levouh/tint.nvim",
 		event = "VeryLazy",
-		opts = {
-			tint = 0,
-			saturation = 0.6
-		},
+		opts = { tint = 80, saturation = 0.3 },
 	},
 	{ -- always show matchparens
 		"utilyre/sentiment.nvim",
