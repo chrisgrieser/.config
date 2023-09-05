@@ -15,15 +15,25 @@ abbr("<buffer> fi end")
 
 -- if in nvim dir, reload file, otherwise run `make`
 keymap("n", "<leader>r", function()
+	cmd("silent update")
 	---@diagnostic disable-next-line: undefined-field
-	local pwd = vim.loop.cwd() or ""
-	if not pwd:find("nvim") then
+	local isNvimConfig = vim.loop.cwd() == vim.fn.stdpath("config")
+	local filepath = vim.fn.expand("%:p")
+
+	if not isNvimConfig then
 		require("funcs.maker").make()
 		return
-	end
-	cmd("silent update")
-
-	if pwd:find("nvim/lua/plugins/") then 
+	elseif filepath:find("nvim/after/ftplugin/") then
+		u.notify("", "ftplugins cannot be reloaded.", "warn")
+	elseif filepath:find("nvim/lua/plugins/") then
+		-- experimental reload of plugin-specs via lazy.nvim
+		local packageName = vim.fn.expand("%:t:r")
+		local pluginSpecs = require("plugins." .. packageName)
+		local pluginNames = vim.tbl_map(function(spec)
+			local name = spec[1]:gsub(".*/", "")
+			return name
+		end, pluginSpecs)
+		vim.cmd.Lazy("reload " .. table.concat(pluginNames, " "))
 	else
 		-- unload from lua cache (assuming that the pwd is ~/.config/nvim)
 		local packageName = expand("%:r"):gsub("lua/", ""):gsub("/", ".")
