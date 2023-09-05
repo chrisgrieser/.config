@@ -236,7 +236,7 @@ return {
 			},
 			select = {
 				backend = { "builtin" },
-				trim_prompt = true, -- Trim trailing `:`
+				trim_prompt = true, -- trailing `:`
 				builtin = {
 					show_numbers = false,
 					border = u.borderStyle,
