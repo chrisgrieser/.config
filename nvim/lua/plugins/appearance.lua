@@ -230,20 +230,22 @@ return {
 				insert_only = false, -- enable normal mode
 				border = u.borderStyle,
 				relative = "editor",
-				min_width = { 0.5, 60 },
-				win_options = { winblend = 0 }, -- weird shining through
+				title_pos = "left",
+				min_width = { 0.4, 55 },
+				win_options = { winblend = 0 },
 			},
 			select = {
 				backend = { "builtin" },
-				trim_prompt = true, -- Trim trailing `:` from prompt
+				trim_prompt = true, -- Trim trailing `:`
 				builtin = {
+					show_numbers = false,
 					border = u.borderStyle,
 					relative = "cursor",
 					max_width = 80,
 					min_width = 20,
 					max_height = 20,
-					min_height = 4,
-					win_options = { winblend = 0 }, -- fix weird shining through
+					min_height = 3,
+					win_options = { winblend = 0 },
 				},
 			},
 		},
