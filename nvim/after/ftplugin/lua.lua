@@ -15,15 +15,20 @@ abbr("<buffer> fi end")
 
 -- if in nvim dir, reload file, otherwise run `make`
 keymap("n", "<leader>r", function()
+	---@diagnostic disable-next-line: undefined-field
 	local pwd = vim.loop.cwd() or ""
 	if not pwd:find("nvim") then
 		require("funcs.maker").make()
 		return
 	end
 	cmd("silent update")
-	-- unload from lua cache (assuming that the pwd is ~/.config/nvim)
-	local packageName = expand("%:r"):gsub("lua/", ""):gsub("/", ".")
-	package.loaded[packageName] = nil
-	cmd.source()
-	u.notify("Re-sourced", expand("%:r"))
+
+	if pwd:find("nvim/lua/plugins/") then 
+	else
+		-- unload from lua cache (assuming that the pwd is ~/.config/nvim)
+		local packageName = expand("%:r"):gsub("lua/", ""):gsub("/", ".")
+		package.loaded[packageName] = nil
+		cmd.source()
+		u.notify("Re-sourced", expand("%:r"))
+	end
 end, { buffer = true, desc = "  Reload/Make" })
