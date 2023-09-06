@@ -21,7 +21,7 @@ keymap("n", "<leader>r", function()
 	local filepath = vim.fn.expand("%:p")
 
 	if not isNvimConfig then
-		require("funcs.maker").make()
+		require("funcs.maker").make("useFirst")
 		return
 	elseif filepath:find("nvim/after/ftplugin/") then
 		u.notify("", "ftplugins cannot be reloaded.", "warn")
@@ -41,4 +41,4 @@ keymap("n", "<leader>r", function()
 		cmd.source()
 		u.notify("Re-sourced", packageName)
 	end
-end, { buffer = true, desc = " Reload /  Make" })
+end, { buffer = true, desc = " Reload /  Make" })

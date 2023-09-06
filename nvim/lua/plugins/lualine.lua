@@ -125,11 +125,6 @@ local function currentFile()
 	local ext = fn.expand("%:e")
 	local ft = bo.filetype
 	local name = fn.expand("%:t")
-	if ft == "octo" and name:find("^%d$") then
-		name = "#" .. name
-	elseif ft == "TelescopePrompt" then
-		name = "Telescope"
-	end
 
 	local deviconsInstalled, devicons = pcall(require, "nvim-web-devicons")
 	local ftOrExt = ext ~= "" and ext or ft
