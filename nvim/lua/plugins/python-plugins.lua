@@ -5,14 +5,25 @@ return {
 		cmd = { "VenvSelect", "VenvSelectCached" },
 		config = function()
 			require("venv-selector").setup {
-				-- enable_debug_output = true,
 				name = { ".venv" },
 				auto_refresh = true,
 				notify_user_on_activate = false,
 				dap_enabled = true, -- requires: nvim-dap-python, debugpy, nvim-dap
 				parents = 0, -- no need to search upwards, since projects.nvim sets pwd to the correct root already
+				changed_venv_hooks = {
+					function(_, venv_python)
+						require("venv-selector.hooks").execute_for_client("pyright", function(pyright)
+							pyright.config.settings = vim.tbl_deep_extend(
+								"force",
+								pyright.config.settings,
+								{ python = { pythonPath = venv_python } }
+							)
+							pyright.notify("workspace/didChangeConfiguration", { settings = nil })
+						end)
+					end,
+				},
 			}
-			require("config.utils").addToLuaLine("tabline", "lualine_a", function ()
+			require("config.utils").addToLuaLine("tabline", "lualine_a", function()
 				if vim.bo.ft ~= "python" then return "" end
 				local venv = require("venv-selector").get_active_venv()
 				if venv == "" then return "" end
