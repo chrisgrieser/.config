@@ -84,8 +84,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Disable hover in favor of jedi/pyright
 conf.on_attach.ruff_lsp = function(client, _) client.server_capabilities.hoverProvider = false end
 
--- jedi has better hover, esp. the basic stuff for learning (e.g. "range()")
--- BUG ignored due to https://github.com/linux-cultist/venv-selector.nvim/issues/58
+-- jedi has far better hover information
 conf.on_attach.pyright = function(client, _) client.server_capabilities.hoverProvider = false end
 
 -- the docs say it's "initializationOptions", but it's actually "init_options"
