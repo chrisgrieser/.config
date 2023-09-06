@@ -185,18 +185,15 @@ return {
 		},
 		init = function()
 			vim.keymap.set("n", "<leader>ln", function()
+				local trace = vim.log.levels.TRACE
 				local history = require("notify").history()
 				if #history == 0 then
-					vim.notify(
-						"No Notification in this session.",
-						vim.log.levels.TRACE,
-						{ title = "nvim-notify" }
-					)
+					vim.notify("No Notification in this session.", trace, { title = "nvim-notify" })
 					return
 				end
 				local msg = history[#history].message
 				vim.fn.setreg("+", msg)
-				vim.notify("Last Notification copied.", vim.log.levels.TRACE, { title = "nvim-notify" })
+				vim.notify("Last Notification copied.", trace, { title = "nvim-notify" })
 			end, { desc = "󰎟 Copy Last Notification" })
 		end,
 	},

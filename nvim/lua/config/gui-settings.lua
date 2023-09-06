@@ -1,5 +1,4 @@
 local g = vim.g
-local fn = vim.fn
 local keymap = vim.keymap.set
 --------------------------------------------------------------------------------
 
@@ -7,7 +6,7 @@ local keymap = vim.keymap.set
 -- nvim server (RPC) to remote control neovide instances
 -- https://neovim.io/doc/user/remote.html
 local removed, _ = pcall(os.remove, "/tmp/nvim_server.pipe") -- FIX server sometimes not properly shut down
-local delay = removed and 500 or 0
+local delay = removed and 400 or 0
 vim.defer_fn(function() vim.fn.serverstart("/tmp/nvim_server.pipe") end, delay)
 
 --------------------------------------------------------------------------------
@@ -15,33 +14,33 @@ vim.defer_fn(function() vim.fn.serverstart("/tmp/nvim_server.pipe") end, delay)
 -- SIZE & FONT
 vim.opt.guifont = "JetBrainsMonoNL Nerd Font:h25.2"
 
--- default
--- INFO: Transparency set in theme-config.lua
-g.neovide_scale_factor = 1
-g.neovide_refresh_rate = 50
-
-local host = fn.hostname()
+local host = vim.fn.hostname()
 local isAtOffice = (host:find("mini") or host:find("eduroam") or host:find("fak1")) ~= nil
 if host:find("Mother") then
 	g.neovide_scale_factor = 0.88
 	g.neovide_refresh_rate = 35
 elseif isAtOffice then
-	g.neovide_scale_factor = 1.06
+	g.neovide_scale_factor = 1.09
 	g.neovide_refresh_rate = 45
+else
+	g.neovide_scale_factor = 1
+	g.neovide_refresh_rate = 50
 end
 
-local delta = 0.01
--- stylua: ignore
-keymap({ "n", "x", "i" }, "<D-+>", function() g.neovide_scale_factor = g.neovide_scale_factor + delta end)
--- stylua: ignore
-keymap({ "n", "x", "i" }, "<D-->", function() g.neovide_scale_factor = g.neovide_scale_factor - delta end)
+local function setNeovideScaleFactor(delta)
+	g.neovide_scale_factor = g.neovide_scale_factor + delta
+	require("config.utils").notify("Neovide", "Scale Factor: " .. g.neovide_scale_factor)
+end
+
+keymap({ "n", "x", "i" }, "<D-+>", function() setNeovideScaleFactor(0.01) end)
+keymap({ "n", "x", "i" }, "<D-->", function() setNeovideScaleFactor(-0.01) end)
 
 --------------------------------------------------------------------------------
 
 -- window size
 g.neovide_remember_window_size = true
 -- HACK fix window size sometimes not being remembered
-fn.system("open -g 'hammerspoon://neovide-post-startup'")
+vim.fn.system { "open", "-g", "hammerspoon://neovide-post-startup" }
 
 -- keymaps
 g.neovide_input_use_logo = true -- enable `cmd` key on macOS
