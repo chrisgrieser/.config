@@ -101,7 +101,6 @@ SleepAutoVideoOffTimer = hs.timer
 			u.quitApp { "YouTube", "Twitch", "CrunchyRoll", "Netflix", "Tagesschau" }
 			u.closeTabsContaining("youtu")
 			closeFullscreenSpaces()
-
 		end)
 	end)
 	:start()
