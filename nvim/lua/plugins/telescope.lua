@@ -48,7 +48,6 @@ local keymappings_I = {
 	["<D-up>"] = function(prompt_bufnr)
 		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
 		-- cwd is only set if passed as telescope option
-		---@diagnostic disable-next-line: undefined-field
 		local cwd = current_picker.cwd and tostring(current_picker.cwd) or vim.loop.cwd()
 		local parent_dir = vim.fs.dirname(cwd)
 

@@ -1,5 +1,6 @@
 .PHONY: reload
 
-reload:
+reload: # sketchybarrc
 	sketchybar --reload
+	echo "✅ sketchybar config"
 
