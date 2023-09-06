@@ -1,14 +1,14 @@
 ---try to require the module, and do not error out when one of them cannot be
----loaded, but do notify if there was an error.
+---loaded, but do notify if there was an error. 
 ---@param module string module to load
 local function safeRequire(module)
 	local success, _ = pcall(require, module)
-	if not success then
-		vim.cmd(('echohl Error | echomsg "Error loading %s" | echohl None'):format(module))
-	end
+	if success then return end
+	-- as opposed to `echo`, `echomsg` makes the error retrieveable via `:messages`
+	vim.cmd.echomsg(("'Error loading %s'"):format(module))
 end
 
--- if opened without argument, re-open the last file
+-- if nvim was opened w/o argument, re-open the last file
 local function reOpenLastFile()
 	if vim.fn.argc() ~= 0 then return end
 	vim.defer_fn(function()
@@ -22,7 +22,6 @@ end
 
 vim.g.mapleader = ","
 vim.g.maplocalleader = "ö"
-vim.loader.enable() -- TODO will be nvim default in later versions
 
 safeRequire("config.lazy")
 if vim.fn.has("gui_running") == 1 then safeRequire("config.gui-settings") end

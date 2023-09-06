@@ -10,6 +10,8 @@ return {
 				notify_user_on_activate = false,
 				dap_enabled = true, -- requires: nvim-dap-python, debugpy, nvim-dap
 				parents = 0, -- no need to search upwards, since projects.nvim sets pwd to the correct root already
+
+				-- FIX change of pyright capabilities: https://github.com/linux-cultist/venv-selector.nvim/issues/58#issuecomment-1707835221
 				changed_venv_hooks = {
 					function(_, venv_python)
 						require("venv-selector.hooks").execute_for_client("pyright", function(pyright)
