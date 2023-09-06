@@ -151,19 +151,24 @@ opt.listchars = {
 }
 
 -- no list chars in special buffers
-autocmd("BufNew", {
+autocmd({ "BufNew", "BufReadPost" }, {
 	callback = function()
 		if bo.buftype ~= "" then opt_local.list = false end
 	end,
+})
+
+-- Formatting `vim.opt.formatoptions:remove{"o"}` would not work, since it's
+-- overwritten by the ftplugins having the `o` option. Therefore needs to be set
+-- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
+autocmd("FileType", {
+	callback = function() opt_local.formatoptions:remove("o") end,
 })
 
 autocmd("BufReadPost", {
 	callback = function()
 		vim.defer_fn(function()
 			opt_local.listchars = vim.opt.listchars:get() -- copy the global
-			if bo.buftype == "nofile" then
-				opt_local.list = false -- no list chars in special buffers
-			elseif bo.expandtab then
+			if bo.expandtab then
 				opt_local.listchars:append { tab = "󰌒 " }
 				opt_local.listchars:append { lead = " " }
 			else
@@ -174,26 +179,15 @@ autocmd("BufReadPost", {
 	end,
 })
 
---------------------------------------------------------------------------------
-
--- Formatting `vim.opt.formatoptions:remove{"o"}` would not work, since it's
--- overwritten by the ftplugins having the `o` option. Therefore needs to be set
--- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
-autocmd("FileType", {
-	callback = function() opt_local.formatoptions:remove("o") end,
-})
-
---------------------------------------------------------------------------------
-
 -- notify when coming back to a file that does not exist anymore
-autocmd("FocusGained", {
-	callback = function()
-		local fileExists = vim.loop.fs_stat(vim.fn.expand("%")) ~= nil
-		local specialBuffer = vim.bo.buftype ~= ""
-		if not fileExists and not specialBuffer then
-			u.notify("", "File does not exist anymore.", "warn")
-		end
-	end,
-})
+-- autocmd("FocusGained", {
+-- 	callback = function()
+-- 		local fileExists = vim.loop.fs_stat(vim.fn.expand("%")) ~= nil
+-- 		local specialBuffer = vim.bo.buftype ~= ""
+-- 		if not fileExists and not specialBuffer then
+-- 			u.notify("", "File does not exist anymore.", "warn")
+-- 		end
+-- 	end,
+-- })
 
 --------------------------------------------------------------------------------
