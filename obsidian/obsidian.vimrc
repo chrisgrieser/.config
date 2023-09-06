@@ -262,7 +262,7 @@ nnoremap ww :duplicate
 """"""""""""""""""""""
 
 " so repeated "V" selects more lines
-vnoremap V j
+vnoremap V gj
 
 " so 2x v goes to visual block mode
 vnoremap v <C-v>
