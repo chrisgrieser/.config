@@ -69,4 +69,4 @@ end, { buffer = true })
 -- various other solutions are described here: https://github.com/vim/vim/issues/2790
 -- using treesitter, this is less of an issue, but treesitter css
 -- highlighting isn't good yet, so…
-keymap("n", "<localleader>s", ":syntax sync fromstart<CR>", { buffer = true })
+keymap("n", "<localleader>s", "<cmd>syntax sync fromstart<CR>", { buffer = true })
