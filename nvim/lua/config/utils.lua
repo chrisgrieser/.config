@@ -79,6 +79,7 @@ end
 ---by switching between dark and light mode.
 ---@param hlgroup string
 ---@param modification string|object
+---@return nil
 function M.colorschemeMod(hlgroup, modification)
 	vim.api.nvim_create_autocmd("ColorScheme", {
 		callback = function() vim.api.nvim_set_hl(0, hlgroup, modification) end,
@@ -139,12 +140,12 @@ end
 --------------------------------------------------------------------------------
 
 M.textobjectRemaps = {
-	c = "}", -- curly brace
-	r = "]", -- rectangular bracket
-	m = "W", -- massive word
-	q = '"', -- quote
-	z = "'", -- single quote
-	e = "`", -- template string / inline cod[e]
+	c = "}", -- [c]urly brace
+	r = "]", -- [r]ectangular bracket
+	m = "W", -- [m]assive word
+	q = '"', -- [q]uote
+	z = "'", -- [z]ingle quote
+	e = "`", -- t[e]mplate string / inline cod[e]
 }
 
 M.textobjectMaps = {

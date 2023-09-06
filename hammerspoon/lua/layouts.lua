@@ -67,7 +67,7 @@ local function workLayout()
 	closeAllFinderWins()
 
 	-- open
-	local appsToOpen = { "Obsidian", "Discord", env.browserApp, env.mailApp, env.tickerApp }
+	local appsToOpen = { "Discord", env.browserApp, env.mailApp, env.tickerApp }
 	if not isWeekend() then table.insert(appsToOpen, "Slack") end
 	u.openApps(appsToOpen)
 	for _, appName in pairs(appsToOpen) do
@@ -172,7 +172,7 @@ DisplayCountWatcher = hs.screen.watcher
 		-- if at night switching back to one display, put iMac display to sleep at
 		-- night, i.e., this triggers when the projector is turned off before
 		-- going to sleep
-		if u.betweenTime(22, 7) and not env.isProjector() then hs.execute("pmset displaysleepnow") end
+		if u.betweenTime(22, 7) and not env.isProjector() then hs.caffeinate.systemSleep() end
 	end)
 	:start()
 
