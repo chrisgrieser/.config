@@ -180,14 +180,14 @@ autocmd("BufReadPost", {
 })
 
 -- notify when coming back to a file that does not exist anymore
--- autocmd("FocusGained", {
--- 	callback = function()
--- 		local fileExists = vim.loop.fs_stat(vim.fn.expand("%")) ~= nil
--- 		local specialBuffer = vim.bo.buftype ~= ""
--- 		if not fileExists and not specialBuffer then
--- 			u.notify("", "File does not exist anymore.", "warn")
--- 		end
--- 	end,
--- })
+autocmd("FocusGained", {
+	callback = function()
+		local fileExists = vim.loop.fs_stat(vim.fn.expand("%")) ~= nil
+		local specialBuffer = vim.bo.buftype ~= ""
+		if not fileExists and not specialBuffer then
+			u.notify("", "File does not exist anymore.", "warn")
+		end
+	end,
+})
 
 --------------------------------------------------------------------------------

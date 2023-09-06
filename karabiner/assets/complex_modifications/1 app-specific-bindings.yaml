@@ -205,38 +205,6 @@ rules:
           - { key_code: c, modifiers: [option, command] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
-
-  #─────────────────────────────────────────────────────────────────────────────
-  # OBSIDIAN: imitates browser behavior of having to be held down to quit
-  # INFO only minimized since the "Search Obsidian in Google" plugin requires
-  # Obsidian being open to work. Not hidden, so there is no interference with
-  # the app-hiding from Hammerspoon
-  - description: "(Apps) Obsidian: ⌘Q, not held down → Minimize, instead of quit"
-    manipulators:
-      - type: basic
-        from: { key_code: q, modifiers: { mandatory: [command] } }
-        to_if_alone: 
-          - shell_command: |
-              osascript -e 'tell application "System Events" to tell process "Obsidian"
-                click menu item "Minimize" of menu "Window" of menu bar 1
-              end tell'
-        to_if_held_down:
-          - { key_code: q, modifiers: [command] }
-        parameters: { basic.to_if_held_down_threshold_milliseconds: 500 }
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^md\.obsidian$] }
-      - type: basic
-        from: { pointing_button: button3 }
-        to_if_alone: 
-          - shell_command: |
-              osascript -e 'tell application "System Events" to tell process "Obsidian"
-                click menu item "Minimize" of menu "Window" of menu bar 1
-              end tell'
-        to_if_held_down:
-          - { key_code: q, modifiers: [command] }
-        parameters: { basic.to_if_held_down_threshold_milliseconds: 500 }
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^md\.obsidian$] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Hammerspoon: ⌘Q → Close instead of Quit, ⌘K → Clear Console, ⌘⇧C → copy last command"
     manipulators:
@@ -488,7 +456,7 @@ rules:
         from: { key_code: s, modifiers: { mandatory: [command] } }
         to:
           - { key_code: c, modifiers: [command, shift] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^pl\.maketheweb\.cleanshotx$] }]
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^cc\.ffitch\.shottr$] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Pixelmator"
     manipulators:

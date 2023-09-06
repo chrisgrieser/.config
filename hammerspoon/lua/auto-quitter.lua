@@ -18,10 +18,6 @@ Thresholds = {
 	["Alfred Preferences"] = 20,
 	["System Settings"] = 2,
 	Finder = 20, -- only closes windows when not on projector
-
-	-- INFO only minimized since the "Search Obsidian in Google" plugin requires
-	-- Obsidian being open to work. Not hidden, so there is no interference with
-	-- the app-hiding from Hammerspoon
 	Obsidian = 100,
 }
 
@@ -40,11 +36,6 @@ local function quit(app)
 			win:close()
 		end
 		suffix = " (windows closed)"
-	elseif app == "Obsidian" then
-		local obsiWin = u.app("Obsidian"):mainWindow()
-		if not obsiWin or obsiWin:isMinimized() then return end
-		obsiWin:minimize()
-		suffix = " (window minimized)"
 	elseif app == "Hammerspoon" then
 		hs.closeConsole()
 		suffix = " (Console)"

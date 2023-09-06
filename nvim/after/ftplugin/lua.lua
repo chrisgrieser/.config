@@ -13,7 +13,7 @@ abbr("<buffer> fi end")
 
 --------------------------------------------------------------------------------
 
--- if in nvim dir, reload file, otherwise run `make`
+-- if in nvim dir, reload file/plugin, otherwise run `make`
 keymap("n", "<leader>r", function()
 	cmd("silent update")
 	---@diagnostic disable-next-line: undefined-field
@@ -39,6 +39,6 @@ keymap("n", "<leader>r", function()
 		local packageName = expand("%:r"):gsub("lua/", ""):gsub("/", ".")
 		package.loaded[packageName] = nil
 		cmd.source()
-		u.notify("Re-sourced", expand("%:r"))
+		u.notify("Re-sourced", packageName)
 	end
-end, { buffer = true, desc = "  Reload/Make" })
+end, { buffer = true, desc = " Reload /  Make" })

@@ -179,7 +179,7 @@ exmap toggleDevtools obcommand obsidian-theme-design-utilities:toggle-devtools
 nnoremap ,b :toggleDevtools
 vnoremap ,b :toggleDevtools
 
-" code action: enhance URL with title
+" "code action"": enhance URL with title
 exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-title
 nnoremap ,c :enhanceUrlWithTitle
 
@@ -425,7 +425,7 @@ nnoremap zr :unfoldall
 """"""""""""""""""""""
 " Move selection to new file (nvim-genghis)
 """"""""""""""""""""""
-exmap selectionToNewFile obcomamnd templater-obsidian:Meta/Templater/>_Create_Related_Note.md
+exmap selectionToNewFile obcommand templater-obsidian:Meta/Templater/>_Create_Related_Note.md
 vnoremap X :selectionToNewFile
 
 """"""""""""""""""""""
