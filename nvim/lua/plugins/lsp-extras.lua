@@ -2,6 +2,43 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
+	{ -- display inlay hints from LSP
+		"lvimuser/lsp-inlayhints.nvim",
+		init = function()
+			if vim.version().major == 0 and vim.version().minor >= 10 then
+			-- INFO only temporarily needed, until https://github.com/neovim/neovim/issues/18086
+				vim.notify("lsp-inlayhints.nvim is now obsolete.")
+			end
+
+			vim.api.nvim_create_autocmd("LspAttach", {
+				callback = function(args)
+					local bufnr = args.buf
+					local client = vim.lsp.get_client_by_id(args.data.client_id)
+					local capabilities = client.server_capabilities
+					if capabilities.inlayHintProvider then
+						require("lsp-inlayhints").on_attach(client, bufnr, false)
+					end
+				end,
+			})
+		end,
+		opts = {
+			inlay_hints = {
+				parameter_hints = {
+					prefix = "  ",
+					remove_colon_start = true,
+					remove_colon_end = true,
+				},
+				type_hints = {
+					prefix = " ",
+					remove_colon_start = true,
+					remove_colon_end = true,
+				},
+				labels_separator = ":",
+				only_current_line = false,
+				highlight = "NonText",
+			},
+		},
+	},
 	{ -- lsp definitions & references count in the status line
 		"chrisgrieser/nvim-dr-lsp",
 		event = "LspAttach",

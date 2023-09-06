@@ -6,10 +6,6 @@ local abbr = vim.cmd.inoreabbrev
 
 --------------------------------------------------------------------------------
 
--- bash-lsp has no symbol support, so using treesitter instead
--- stylua: ignore
-keymap("n", "gs", function() vim.cmd.Telescope("treesitter") end, { desc = " Document Symbols", buffer = true })
-
 -- extra trailing chars
 keymap("n", "<leader>|", "mzA |<Esc>`z", { desc = "which_key_ignore", buffer = true })
 keymap("n", "<leader>\\", "mzA \\<Esc>`z", { desc = "which_key_ignore", buffer = true })

@@ -169,9 +169,8 @@ DisplayCountWatcher = hs.screen.watcher
 		local delay = env.isAtMother and 1.5 or 0 -- TV at mother needs small delay
 		u.runWithDelays(delay, selectLayout)
 
-		-- if at night switching back to one display, put iMac display to sleep at
-		-- night, i.e., this triggers when the projector is turned off before
-		-- going to sleep
+		-- If at night switching back to one display, put iMac display to sleep
+		-- (this triggers when the projector is turned off before going to sleep)
 		if u.betweenTime(22, 7) and not env.isProjector() then hs.caffeinate.systemSleep() end
 	end)
 	:start()

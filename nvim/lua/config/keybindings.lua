@@ -342,7 +342,7 @@ keymap({ "n", "x" }, "gL", function() cmd.Telescope("grep_string") end, { desc =
 -- stylua: ignore
 keymap("n", "gr", "<cmd>lua require('telescope').extensions.recent_files.pick()<CR>", { desc = " Recent Files" })
 
-keymap("n", "g.", function() cmd.Telescope("resume") end, { desc = "  Continue" })
+keymap("n", "g.", function() cmd.Telescope("resume") end, { desc = " Continue" })
 keymap("n", "ga", "gf", { desc = "Goto File under Cursor" }) -- needed, since remapped
 
 --------------------------------------------------------------------------------
@@ -365,6 +365,9 @@ keymap({ "n", "i", "v" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "󰒕 Si
 
 keymap("n", "gd", function() cmd.Telescope("lsp_definitions") end, { desc = "󰒕 Definitions" })
 keymap("n", "gf", function() cmd.Telescope("lsp_references") end, { desc = "󰒕 References" })
+
+-- overridden with inc-rename, if attaching LSP with renaming capabilities
+keymap("n", "gs", function() cmd.Telescope("treesitter") end, { desc = " Document Symbols" })
 
 autocmd("LspAttach", {
 	callback = function(args)

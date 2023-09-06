@@ -101,8 +101,8 @@ keymap(
 	function() require("funcs.alt-alt").reopenBuffer() end,
 	{ desc = "󰽙 Undo buffer closing" }
 )
-keymap("n", "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", { desc = "󰕌 󰊢 Reset Hunk" })
-keymap("n", "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", { desc = "󰕌 󰊢 Reset Buffer" })
+keymap("n", "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", { desc = "󰊢 Reset Hunk" })
+keymap("n", "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", { desc = "󰊢 Reset Buffer" })
 keymap(
 	"n",
 	"<leader>ut",
@@ -192,9 +192,9 @@ keymap(
 	"n",
 	"<leader>r",
 	function() require("funcs.maker").make("runFirst") end,
-	{ desc = " Make First" }
+	{ desc = " Make First" }
 )
-keymap("n", "<leader>R", function() require("funcs.maker").make() end, { desc = " Select Make" })
+keymap("n", "<leader>R", function() require("funcs.maker").make() end, { desc = " Select Make" })
 
 --------------------------------------------------------------------------------
 -- GIT
@@ -218,15 +218,8 @@ keymap("n", "<leader>gC", function() require("funcs.mini-git").addCommit() end, 
 keymap("n", "<leader>gg", function() require("funcs.mini-git").addCommitPush() end, { desc = "󰊢 Add-Commit-Push" })
 keymap("n", "<leader>gm", function() require("funcs.mini-git").amendNoEditPushForce() end, { desc = "󰊢 Amend-No-Edit & Force Push" })
 keymap("n", "<leader>gM", function() require("funcs.mini-git").amendAndPushForce() end, { desc = "󰊢 Amend & Force Push" })
-keymap({ "n", "x" }, "<leader>gu", function () require("funcs.mini-git").githubUrl() end, { desc = "󰊢 GitHub Link" })
-keymap("n", "<leader>gU", function () require("funcs.mini-git").githubUrl("repo") end, { desc = "󰊢 Open GitHub Repo" })
-
--- Octo
--- customize Octo layout: https://github.com/pwntester/octo.nvim/discussions/416#discussioncomment-6812002
-keymap("n", "<leader>gi", function() cmd.Octo({"issue", "list"}) end, { desc = " Open Issues" })
-keymap("n", "<leader>gI", function() cmd.Octo({"issue", "list", "states=CLOSED"}) end, { desc = " Closed Issues" })
-keymap("n", "<leader>gp", function() cmd.Octo({"pr", "list"}) end, { desc = " Open PRs" })
--- stylua: ignore end
+keymap({ "n", "x" }, "<leader>gu", function () require("funcs.mini-git").githubUrl() end, { desc = " GitHub Link" })
+keymap("n", "<leader>gU", function () require("funcs.mini-git").githubUrl("repo") end, { desc = " Open GitHub Repo" })
 
 -- Diffview
 -- Line History of Selection
@@ -257,10 +250,10 @@ end, { desc = "󰊢 Pickaxe File History" })
 -- OPTION TOGGLING
 
 -- stylua: ignore
-keymap("n", "<leader>or", "<cmd>set relativenumber!<CR>", { desc = "  Relative Line Numbers" })
-keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = "  Line Numbers" })
-keymap("n", "<leader>os", "<cmd>set spell!<CR>", { desc = " 󰓆 spellcheck" })
-keymap("n", "<leader>ol", "<cmd>LspRestart<CR>", { desc = " 󰒕 LspRestart" })
+keymap("n", "<leader>or", "<cmd>set relativenumber!<CR>", { desc = " Relative Line Numbers" })
+keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line Numbers" })
+keymap("n", "<leader>os", "<cmd>set spell!<CR>", { desc = "󰓆 spellcheck" })
+keymap("n", "<leader>ol", "<cmd>LspRestart<CR>", { desc = "󰒕 LspRestart" })
 
 keymap("n", "<leader>od", function()
 	if vim.diagnostic.is_disabled(0) then
@@ -268,7 +261,7 @@ keymap("n", "<leader>od", function()
 	else
 		vim.diagnostic.disable(0)
 	end
-end, { desc = "  Diagnostics" })
+end, { desc = " Diagnostics" })
 
 keymap("n", "<leader>ow", function()
 	local wrapOn = vim.opt_local.wrap:get()
@@ -283,10 +276,10 @@ keymap("n", "<leader>ow", function()
 		keymap("n", "A", "g$a", { buffer = true })
 		keymap("n", "I", "g^i", { buffer = true })
 	end
-end, { desc = " 󰖶 Wrap" })
+end, { desc = "󰖶 Wrap" })
 
 -- FIX scrolloff
-keymap("n", "<leader>of", function() vim.opt.scrolloff = 13 end, { desc = " 󰘖 Fix Scrolloff" })
+keymap("n", "<leader>of", function() vim.opt.scrolloff = 13 end, { desc = "󰘖 Fix Scrolloff" })
 
 -- make <C-a>/<C-x> work on letters. Useful for macros
 keymap("n", "<leader>oa", function()
@@ -299,6 +292,6 @@ keymap("n", "<leader>oa", function()
 		nrformats:append("alpha")
 		u.notify("Option", "󰀫 alpha enabled")
 	end
-end, { desc = " 󰀫 Toggle nrformats alpha" })
+end, { desc = "󰀫 Toggle nrformats alpha" })
 
 --------------------------------------------------------------------------------

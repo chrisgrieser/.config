@@ -71,7 +71,7 @@ function M.make(useFirst)
 		end,
 	})
 
-	vim.ui.select(recipes, { prompt = " Select recipe:", kind = "make" }, function(selection)
+	vim.ui.select(recipes, { prompt = " Select recipe:", kind = "make" }, function(selection)
 		if not selection then return end
 		runMake(getRecipe(selection))
 	end)

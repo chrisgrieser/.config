@@ -192,7 +192,7 @@ conf.settings.lemminx = {
 -- https://valentjn.github.io/ltex/settings.html
 
 -- disable for bibtex and text files
-conf.filetypes.ltex = { "gitcommit", "markdown", "octo" }
+conf.filetypes.ltex = { "gitcommit", "markdown" }
 
 -- HACK since reading external file with the method described in the ltex docs
 -- does not work

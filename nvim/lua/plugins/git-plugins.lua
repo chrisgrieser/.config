@@ -1,70 +1,11 @@
-local u = require("config.utils")
---------------------------------------------------------------------------------
-
 return {
-	{
-		"pwntester/octo.nvim",
-		cmd = "Octo",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
-			"nvim-tree/nvim-web-devicons",
-		},
-		init = function()
-			u.leaderSubkey("o", " Octo")
-
-			-- autocomplete for @ and #
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "octo",
-				callback = function()
-					vim.keymap.set("i", "@", "@<C-x><C-o>", { silent = true, buffer = true })
-					vim.keymap.set("i", "#", "#<C-x><C-o>", { silent = true, buffer = true })
-					vim.keymap.set(
-						"n",
-						"<leader>gu",
-						"<leader>öu",
-						{ silent = true, buffer = true, remap = true, desc = " Open in browser" }
-					)
-				end,
-			})
-		end,
-		opts = {
-			-- https://github.com/pwntester/octo.nvim#%EF%B8%8F-configuration
-			ui = { use_signcolumn = true }, -- pending: https://github.com/pwntester/octo.nvim/issues/80
-
-			issues = { order_by = { field = "UPDATED_AT" } }, -- COMMENTS|CREATED_AT|UPDATED_AT
-			pull_requests = { order_by = { field = "UPDATED_AT" } },
-
-			mappings = {
-				issue = {
-					close_issue = { lhs = "<leader>öc", desc = " Close issue" },
-					reopen_issue = { lhs = "<leader>öo", desc = " Reopen issue" },
-					reload = { lhs = "<leader>ör", desc = " Reload issue" },
-					open_in_browser = { lhs = "<leader>öu", desc = " Open in browser" },
-					copy_url = { lhs = "<leader>öU", desc = " Copy URL" },
-					add_comment = { lhs = "<leader>öa", desc = " Add comment" },
-					delete_comment = { lhs = "<leader>öd", desc = " Delete comment" },
-					next_comment = { lhs = "gc", desc = " Goto next comment" },
-					prev_comment = { lhs = "gC", desc = " Goto prev comment" },
-					add_label = { lhs = "<leader>öl", desc = " Add label" },
-					remove_label = { lhs = "<leader>öL", desc = " Remove label" },
-
-					react_hooray = { lhs = "<leader>örp", desc = " Toggle 🎉" },
-					react_heart = { lhs = "<leader>örh", desc = " Toggle ❤️" },
-					react_eyes = { lhs = "<leader>öre", desc = " Toggle 👀" },
-					react_thumbs_up = { lhs = "<leader>ör+", desc = " Toggle 👍" },
-					react_thumbs_down = { lhs = "<leader>ör-", desc = " Toggle 👎" },
-					react_rocket = { lhs = "<leader>örr", desc = " Toggle 🚀" },
-					react_laugh = { lhs = "<leader>örl", desc = " Toggle 😄" },
-					react_confused = { lhs = "<leader>örc", desc = " Toggle 😕" },
-				},
-			},
-		},
-	},
 	{ -- git sign gutter & hunk textobj
 		"lewis6991/gitsigns.nvim",
 		event = "VeryLazy",
-		opts = { max_file_length = 7500 },
+		opts = {
+			max_file_length = 10000,
+			preview_config = { border = require("config.utils").borderStyle },
+		},
 	},
 	{ -- diff / merge
 		"sindrets/diffview.nvim",
