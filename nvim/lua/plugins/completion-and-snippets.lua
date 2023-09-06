@@ -234,6 +234,7 @@ local function filetypeCompletionConfig()
 		sources = cmp.config.sources {
 			s.path,
 			s.zsh,
+			s.emojis,
 		},
 	})
 

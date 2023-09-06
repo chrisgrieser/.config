@@ -126,8 +126,8 @@ function M.screenIsUnlocked()
 	return success == true -- convert to Boolean
 end
 
----Send Notification, accepting any number of arguments of any type. Converts
----everything into strings, concatenates them, and then sends it.
+---Send system Notification, accepting any number of arguments of any type. 
+---Converts everything into strings, concatenates them, and then sends it.
 function M.notify(...)
 	local args = hs.fnutils.map({ ... }, function(arg)
 		local safeArg = (type(arg) == "table") and hs.inspect(arg) or tostring(arg)
@@ -142,6 +142,7 @@ end
 ---@param soundName string
 function M.sound(soundName)
 	if Soundfile and Soundfile:isPlaying() then return end
+	---@diagnostic disable-next-line: undefined-field
 	Soundfile = hs.sound.getByName(soundName):play()
 	Soundfile = nil
 end
