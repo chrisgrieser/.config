@@ -76,13 +76,6 @@ local function workLayout()
 			wu.moveResize(win, wu.pseudoMax)
 		end)
 	end
-
-	-- minimize Obsidian
-	hs.timer.waitUntil(
-		function() return u.app("Obsidian"):mainWindow() end,
-		function() u.app("Obsidian"):mainWindow():minimize() end
-	)
-
 	u.restartApp("AltTab") -- FIX missing apps
 
 	-- finish
