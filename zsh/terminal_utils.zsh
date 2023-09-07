@@ -42,12 +42,12 @@ function inspect() {
 	local eza_output terminal_width
 	terminal_width=$(tput cols)
 
+	eza_output=$(export COLUMNS=$terminal_width &&
+		eza --all --grid --color=always --icons \
+			--git-ignore --ignore-glob=".DS_Store|Icon?" \
+			--sort=name --git --long --group-directories-first \
+			--no-user --no-permissions --no-filesize --no-time)
 
-	eza --all --grid --color=always --icons \
-		--git-ignore --ignore-glob=".DS_Store|Icon?" --sort=name --git --long --group-directories-first --no-user --no-permissions --no-filesize --no-time
-
-	eza_output=$(export COLUMNS=$terminal_width && \
-		eza --all --grid --color=always --icons --git-ignore --ignore-glob=".DS_Store|Icon?" --sort=name --git --long --group-directories-first)
 	if [[ $(echo "$eza_output" | wc -l) -gt $max_files_lines ]]; then
 		echo "$eza_output" | head -n"$max_files_lines"
 		print "\033[1;34m(…)\033[0m" # blue = eza's default folder color
