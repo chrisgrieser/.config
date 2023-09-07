@@ -21,7 +21,6 @@ nnoremap Y y$
 nnoremap C "_c$
 nnoremap x "_dl
 
-
 """"""""""""""""""""""
 " Search
 """"""""""""""""""""""
@@ -33,9 +32,9 @@ nnoremap - /
 
 " <Esc> clears notices & highlights (:nohl)
 exmap clearNotices obcommand obsidian-smarter-md-hotkeys:hide-notice
-nnoremap &c& :clearNotices
-nnoremap &n& :nohl
-nnoremap <Esc> &c&&n&
+nmap &c& :clearNotices
+nmap &n& :nohl
+nmap <Esc> &c&&n&
 
 """"""""""""""""""""""
 " Navigation

@@ -24,7 +24,7 @@ return {
 		opts = {
 			inlay_hints = {
 				parameter_hints = {
-					prefix = "  ",
+					prefix = " 󰁍 ",
 					remove_colon_start = true,
 					remove_colon_end = true,
 				},
@@ -34,7 +34,7 @@ return {
 					remove_colon_end = true,
 				},
 				labels_separator = ":",
-				only_current_line = false,
+				only_current_line = true,
 				highlight = "NonText",
 			},
 		},

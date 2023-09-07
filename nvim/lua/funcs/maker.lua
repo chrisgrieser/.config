@@ -34,7 +34,7 @@ local function runMake(recipe)
 		on_stderr = function(_, data)
 			if data[1] == "" and #data == 1 then return end
 			local output = table.concat(data, "\n"):gsub("%s*$", "")
-			vim.notify(output, vim.log.levels.ERROR, { title = "ERROR " .. recipe })
+			vim.notify(output, vim.log.levels.WARN, { title = recipe })
 		end,
 	})
 
