@@ -42,12 +42,11 @@ alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in 
 
 alias bkp='zsh "$DOTFILE_FOLDER/_utility-scripts/backup-script.sh"'
 
-alias l='exa --all --long --no-user --header --icons --git --group-directories-first --sort=name'
-alias x='command exa --all --icons --group-directories-first --sort=name'
-alias tree='exa --tree --level=2 --icons --git-ignore'
-alias treee='exa --tree --level=3 --icons --git-ignore'
-alias treeee='exa --tree --level=4 --icons --git-ignore'
-alias treeeee='exa --tree --level=5 --icons --git-ignore'
+alias l='command eza --all --long --time-style=relative --no-user --header --icons --git --group-directories-first --sort=name'
+alias tree='command eza --tree --level=2 --icons --git-ignore'
+alias treee='command eza --tree --level=3 --icons --git-ignore'
+alias treeee='command eza --tree --level=4 --icons --git-ignore'
+alias treeeee='command eza --tree --level=5 --icons --git-ignore'
 
 #───────────────────────────────────────────────────────────────────────────────
 # https://www.thorsten-hans.com/5-types-of-zsh-aliases
