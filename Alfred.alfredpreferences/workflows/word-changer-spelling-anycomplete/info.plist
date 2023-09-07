@@ -227,56 +227,6 @@ end run</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>33</integer>
-				<key>hotmod</key>
-				<integer>1048576</integer>
-				<key>hotstring</key>
-				<string>Ü</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>437A1C55-721B-4E6C-9FC3-61772290A3C7</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>07067962-C5C6-4B45-84D2-E12B587B394A</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -343,6 +293,56 @@ end run</string>
 			<string>C9508516-6B1E-480E-9584-B560F1C8568E</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>07067962-C5C6-4B45-84D2-E12B587B394A</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>33</integer>
+				<key>hotmod</key>
+				<integer>1048576</integer>
+				<key>hotstring</key>
+				<string>Ü</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>437A1C55-721B-4E6C-9FC3-61772290A3C7</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>

@@ -46,6 +46,9 @@ nnoremap k gk
 nnoremap I g0i
 nnoremap A g$a
 
+nnoremap gj }j
+nnoremap gk {k
+
 " HJKL behaves like hjkl, but bigger distance
 noremap H g0
 noremap L g$
