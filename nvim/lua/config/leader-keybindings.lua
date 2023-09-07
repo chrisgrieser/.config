@@ -20,8 +20,8 @@ keymap("n", "<leader>pg", function() cmd.Telescope("highlights") end, { desc = "
 
 -- Plugins
 keymap("n", "<leader>pp", function()
-	require("lazy").sync()
 	vim.cmd.MasonToolsUpdate()
+	require("lazy").sync()
 end, { desc = " Lazy/Mason Update" })
 keymap("n", "<leader>ph", require("lazy").home, { desc = " Lazy Overview" })
 keymap("n", "<leader>pi", require("lazy").install, { desc = " Lazy Install" })

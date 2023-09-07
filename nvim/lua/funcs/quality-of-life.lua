@@ -102,14 +102,12 @@ end
 function M.ruleSearch()
 	local lnum = vim.fn.line(".") - 1
 	local diags = vim.diagnostic.get(0, { lnum = lnum })
-	if vim.tbl_isempty(diags) then
-		u.notify("No diagnostics found", "warn")
+	if #diags == 0 then
+		u.notify("", "No diagnostics found", "warn")
 		return
 	end
 	for _, diag in ipairs(diags) do
-		---@diagnostic disable-next-line: undefined-field
 		if diag.code and diag.source then
-			---@diagnostic disable-next-line: undefined-field
 			local query = (diag.code .. " " .. diag.source)
 			vim.fn.setreg("+", query)
 			local url = ("https://duckduckgo.com/?q=%s+%%21ducky&kl=en-us"):format(query:gsub(" ", "+"))
