@@ -212,10 +212,6 @@ nnoremap _ o<Esc>0"_d$k
 " Markdown/Obsidian specific
 """"""""""""""""""""""""""""
 
-" [a]i completion
-exmap aiComplete obcommand obsidian-textgenerator-plugin:generate-text
-nnoremap ,a :aiComplete
-
 " [l]og commands in console
 nnoremap ,l :obcommand
 
