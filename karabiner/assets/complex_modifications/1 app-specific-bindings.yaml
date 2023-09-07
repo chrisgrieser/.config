@@ -279,18 +279,6 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Discord"
     manipulators:
-      # HACK ctrl-h & ctrl-l to go back / forward a channel cannot be mapped
-      # directly in Discord, since they seem to capture things.
-      - type: basic
-        from: { key_code: h, modifiers: { mandatory: [control] } }
-        to:
-          - { key_code: left_arrow, modifiers: [control] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$] }]
-      - type: basic
-        from: { key_code: l, modifiers: { mandatory: [control] } }
-        to:
-          - { key_code: right_arrow, modifiers: [control] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$] }]
       # go to next [u]nread
       - type: basic
         from: { key_code: u, modifiers: { mandatory: [command] } }

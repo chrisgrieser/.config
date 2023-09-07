@@ -56,7 +56,6 @@ rules:
               - BetterTouchTool
               - Hammerspoon
               - "[Nn]eovide"
-              - Obsidian
       # prevent accidental quitting
       - type: basic
         from: { pointing_button: button3 }
