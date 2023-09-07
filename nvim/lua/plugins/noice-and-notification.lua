@@ -34,16 +34,6 @@ local routes = {
 		view = "mini",
 	},
 
-	-- lazy.nvim reload
-	{
-		filter = {
-			event = "notify",
-			find = "^Reloading",
-			cond = function(msg) return msg.opts and msg.opts.title == "lazy.nvim" end,
-		},
-		view = "mini",
-	},
-
 	-- Codeium.nvim
 	{ filter = { event = "notify", find = "^Codeium.nvim:" }, view = "mini" },
 	{ filter = { event = "notify", find = "downloading server" }, view = "mini" },
