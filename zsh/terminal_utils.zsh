@@ -23,7 +23,7 @@ function inspect() {
 
 	# guard clauses
 	[[ $(tput lines) -gt $disabled_below_term_height ]] || return 0 # don't use in embedded terminals, since too small
-	if ! command -v exa &>/dev/null; then printf "\033[1;33mexa not installed.\033[0m" && return 1; fi
+	if ! command -v eza &>/dev/null; then printf "\033[1;33meza not installed.\033[0m" && return 1; fi
 	if ! command -v git &>/dev/null; then printf "\033[1;33mgit not installed.\033[0m" && return 1; fi
 
 	# GIT LOG & STATUS
@@ -37,19 +37,22 @@ function inspect() {
 	fi
 
 	# FILES
-	# columns needs to be set, since exa print as `--oneline` if piped
+	# columns needs to be set, since eza print as `--oneline` if piped
 	# https://github.com/ogham/exa/issues/522
-	local exa_output terminal_width
+	local eza_output terminal_width
 	terminal_width=$(tput cols)
-	exa_output=$(export COLUMNS=$terminal_width && exa --all --grid --color=always \
-		--icons --git-ignore --ignore-glob=".DS_Store|Icon?" --sort=name \
-		--group-directories-first)
-	if [[ $(echo "$exa_output" | wc -l) -gt $max_files_lines ]]; then
-		echo "$exa_output" | head -n"$max_files_lines"
-		print "\033[1;34m(…)\033[0m" # blue = exa's default folder color
+
+
+	eza --all --grid --color=always --icons --git-ignore --ignore-glob=".DS_Store|Icon?" --sort=name --git --long --group-directories-first --no-user --no-permissions --no-filesize --no-time
+
+	eza_output=$(export COLUMNS=$terminal_width && \
+		eza --all --grid --color=always --icons --git-ignore --ignore-glob=".DS_Store|Icon?" --sort=name --git --long --group-directories-first)
+	if [[ $(echo "$eza_output" | wc -l) -gt $max_files_lines ]]; then
+		echo "$eza_output" | head -n"$max_files_lines"
+		print "\033[1;34m(…)\033[0m" # blue = eza's default folder color
 	else
 		# not using `[[ -n ]] &&` as that results in exit code 1
-		[[ -z "$exa_output" ]] || echo "$exa_output"
+		[[ -z "$eza_output" ]] || echo "$eza_output"
 		echo
 	fi
 }
@@ -58,7 +61,7 @@ function inspect() {
 function o() {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 	if ! command -v fd &>/dev/null; then echo "fd not installed." && return 1; fi
-	if ! command -v exa &>/dev/null; then print "\033[1;33mexa not installed.\033[0m" && return 1; fi
+	if ! command -v eza &>/dev/null; then print "\033[1;33meza not installed.\033[0m" && return 1; fi
 
 	local selected
 	local input="$*"
@@ -73,7 +76,7 @@ function o() {
 	selected=$(
 		fd --hidden --color=always | fzf \
 			-0 -1 --ansi --query="$input" --info=inline \
-			--preview '[[ -f {} ]] && bat --color=always --style=snip --wrap=never --tabs=2 {} || exa --icons --color=always --group-directories-first {}'
+			--preview '[[ -f {} ]] && bat --color=always --style=snip --wrap=never --tabs=2 {} || eza --icons --color=always --group-directories-first {}'
 	)
 	if [[ -z "$selected" ]]; then # fzf aborted
 		return 0
@@ -125,7 +128,7 @@ function ..d() {
 }
 
 # smarter z/cd
-# after entering new folder, inspect it (exa, git log, git status, etc.)
+# after entering new folder, inspect it (eza, git log, git status, etc.)
 function z() {
 	if ! command -v __zoxide_z &>/dev/null; then printf "\033[1;33mzoxide not installed.\033[0m" && return 1; fi
 	__zoxide_z "$1"

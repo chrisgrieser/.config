@@ -1,6 +1,4 @@
 chromaterm
-pdfannots
-pip
-setuptools
+pip-autoremove
 six
 wheel
