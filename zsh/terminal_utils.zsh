@@ -43,7 +43,8 @@ function inspect() {
 	terminal_width=$(tput cols)
 
 
-	eza --all --grid --color=always --icons --git-ignore --ignore-glob=".DS_Store|Icon?" --sort=name --git --long --group-directories-first --no-user --no-permissions --no-filesize --no-time
+	eza --all --grid --color=always --icons \
+		--git-ignore --ignore-glob=".DS_Store|Icon?" --sort=name --git --long --group-directories-first --no-user --no-permissions --no-filesize --no-time
 
 	eza_output=$(export COLUMNS=$terminal_width && \
 		eza --all --grid --color=always --icons --git-ignore --ignore-glob=".DS_Store|Icon?" --sort=name --git --long --group-directories-first)
