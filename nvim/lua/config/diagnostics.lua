@@ -25,15 +25,39 @@ end
 
 --------------------------------------------------------------------------------
 
--- https://neovim.io/doc/user/diagnostic.html#diagnostic-structure
-local function diagnosticFmt(diag)
-	local msg = diag.message
+---@class diagnostic nvim diagnostic https://neovim.io/doc/user/diagnostic.html#diagnostic-structure
+---@field message string
+---@field source string
+---@field code string
+---@field bufnr number
 
-	local efmSource = msg:match("^%[(%a+)%] ")
-	if efmSource then
-		msg = msg:gsub("^%[%a+%] ", "")
-		diag.source = efmSource
-	end
+---@param diag diagnostic
+---@return diagnostic
+---@nodiscard
+local function parseEfmDiagnostic(diag)
+	-- EXAMPLES
+	-- [shellcheck] Useless echo? Instead of 'cmd $(echo foo)', just use 'cmd foo'. [SC2116]
+	-- [selene] [parenthese_conditions]: lua does not require parentheses around conditions
+
+	local efmSource = diag.message:match("^%[(%a+)%] ")
+	diag.message = diag.message:gsub("^%[%a+%] ", "")
+	diag.source = efmSource
+
+	if not efmSource then return diag end
+
+	local efmCode = diag.message:match(" ?%[(%a+)%]:? ?")
+	diag.message = diag.message:gsub(" ?%[(%a+)%]:? ?", "")
+	diag.code = efmCode
+
+	return diag
+end
+
+---@nodiscard
+---@param diag diagnostic
+---@return string text to display
+local function diagnosticFmt(diag)
+	diag = parseEfmDiagnostic(diag)
+	local msg = diag.message
 
 	local source = diag.source and " (" .. diag.source:gsub("%.$", "") .. ")" or ""
 
@@ -55,3 +79,39 @@ vim.diagnostic.config {
 		header = "", -- remove "Diagnostics:" heading
 	},
 }
+
+--------------------------------------------------------------------------------
+
+---@param diag diagnostic
+local function searchForTheRule(diag)
+	if not diag then return end
+	diag = parseEfmDiagnostic(diag)
+	if not (diag.code and diag.source) then
+		u.notify("", "diagnostic without code or source", "warn")
+		return
+	end
+	local query = (diag.code .. " " .. diag.source)
+	vim.fn.setreg("+", query)
+	local url = ("https://duckduckgo.com/?q=%s+%%21ducky&kl=en-us"):format(query:gsub(" ", "+"))
+	vim.fn.system { "open", url }
+end
+
+if (1 == 2) then print "hi" end
+
+local M = {}
+function M.ruleSearch()
+	local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
+	local diags = vim.diagnostic.get(0, { lnum = lnum })
+	if #diags == 0 then
+		u.notify("", "No diagnostics found", "warn")
+		return
+	elseif #diags == 1 then
+		searchForTheRule(diags[1])
+	else
+		vim.ui.select(diags, {
+			prompt = "Select Rule to search:",
+			format_item = function(diag) return diag.message end,
+		}, function(diag) searchForTheRule(diag) end)
+	end
+end
+return M
