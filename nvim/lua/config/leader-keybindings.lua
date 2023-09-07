@@ -103,12 +103,6 @@ keymap(
 )
 keymap("n", "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", { desc = "󰊢 Reset Hunk" })
 keymap("n", "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", { desc = "󰊢 Reset Buffer" })
-keymap(
-	"n",
-	"<leader>ut",
-	function() cmd.Telescope("undo") end,
-	{ desc = " Undo Telescope", silent = true }
-)
 
 -- save open time for each buffer
 autocmd("BufReadPost", {
