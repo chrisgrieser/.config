@@ -8,8 +8,6 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
-		<key>203119B0-F56B-4EDE-BE71-21B68645EB6B</key>
-		<array/>
 		<key>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</key>
 		<array>
 			<dict>
@@ -110,29 +108,6 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>E8767AD0-3753-4494-83FD-A7FBCECF700E</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Select URL</string>
-				<key>vitoclose</key>
-				<true/>
-			</dict>
-		</array>
-		<key>B9CE3F5C-A396-4E8C-8709-A08871B57DE6</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>29480781-3450-43E9-A61B-AB3222D73835</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 		<key>BAD2BCE8-96CD-4FF0-9445-860265918045</key>
 		<array>
@@ -165,29 +140,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>841BD8BB-2E10-4E6A-89DC-2C5DAA070D75</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>E8767AD0-3753-4494-83FD-A7FBCECF700E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>203119B0-F56B-4EDE-BE71-21B68645EB6B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>B9CE3F5C-A396-4E8C-8709-A08871B57DE6</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -658,58 +610,6 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<true/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/write-url-to-buffer.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>203119B0-F56B-4EDE-BE71-21B68645EB6B</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>E8767AD0-3753-4494-83FD-A7FBCECF700E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>↓</string>
-				<key>keycode</key>
-				<integer>125</integer>
-				<key>keymod</key>
-				<integer>10485760</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>29480781-3450-43E9-A61B-AB3222D73835</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>subtext</key>
 				<string>{query}</string>
 				<key>text</key>
@@ -719,19 +619,6 @@ fi</string>
 			<string>alfred.workflow.trigger.fallback</string>
 			<key>uid</key>
 			<string>C950FDC3-9DD1-427D-82D5-2FC76BE7858E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>seconds</key>
-				<string>.2</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.delay</string>
-			<key>uid</key>
-			<string>B9CE3F5C-A396-4E8C-8709-A08871B57DE6</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -762,7 +649,6 @@ Search for the Power User. Inline Results, *without a keyword*. Multi-select res
 
 ## Inline results (without a keyword!)
 - &lt;kbd&gt;⏎&lt;/kbd&gt;: Search for the query term, or open result.
-- &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Multi-Select: (de)select the URL. The next &lt;kbd&gt;⏎&lt;/kbd&gt; will open the selected result as well as all previously marked URLs. 
 - &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy URL to clipboard. 
 - &lt;kbd&gt;⌥&lt;/kbd&gt; (hold): Show full URL.
 - &lt;kbd&gt;⇧&lt;/kbd&gt; (hold): Show preview text of search result. 
@@ -793,25 +679,14 @@ Due to the nature of this workflow, it will not be submitted to the Alfred Galle
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>203119B0-F56B-4EDE-BE71-21B68645EB6B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>save URL for multi-select</string>
-			<key>xpos</key>
-			<real>560</real>
-			<key>ypos</key>
-			<real>590</real>
-		</dict>
 		<key>23B4E13F-A2E8-4FBE-83B8-4C4E4288C8B1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>420</real>
+			<real>260</real>
 			<key>ypos</key>
-			<real>470</real>
+			<real>480</real>
 		</dict>
 		<key>25810527-3725-4BAA-91DA-7B4E6FCCCBB7</key>
 		<dict>
@@ -823,17 +698,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>170</real>
-		</dict>
-		<key>29480781-3450-43E9-A61B-AB3222D73835</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>select next result</string>
-			<key>xpos</key>
-			<real>560</real>
-			<key>ypos</key>
-			<real>735</real>
 		</dict>
 		<key>37823B3A-8211-49F5-BC98-118E47141CB4</key>
 		<dict>
@@ -898,18 +762,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>OneUpdater</string>
 			<key>xpos</key>
-			<real>760</real>
+			<real>405</real>
 			<key>ypos</key>
-			<real>320</real>
-		</dict>
-		<key>B9CE3F5C-A396-4E8C-8709-A08871B57DE6</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>500</real>
-			<key>ypos</key>
-			<real>765</real>
+			<real>335</real>
 		</dict>
 		<key>BAD2BCE8-96CD-4FF0-9445-860265918045</key>
 		<dict>
@@ -949,27 +804,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>open URL(s) &amp; log queries</string>
 			<key>xpos</key>
-			<real>560</real>
+			<real>260</real>
 			<key>ypos</key>
-			<real>320</real>
-		</dict>
-		<key>E8767AD0-3753-4494-83FD-A7FBCECF700E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>425</real>
-			<key>ypos</key>
-			<real>695</real>
+			<real>335</real>
 		</dict>
 		<key>F6591673-575D-4105-B38F-59AD1457EF23</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>560</real>
+			<real>400</real>
 			<key>ypos</key>
-			<real>470</real>
+			<real>480</real>
 		</dict>
 		<key>FB5D42B1-CF89-4DD7-B57A-1995FE9A1BF9</key>
 		<dict>

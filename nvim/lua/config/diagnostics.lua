@@ -1,7 +1,7 @@
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
--- Sign Icons
+-- SIGN ICONS
 local diagnosticTypes = {
 	Error = "",
 	Warn = "▲",
@@ -13,10 +13,7 @@ for type, icon in pairs(diagnosticTypes) do
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
---------------------------------------------------------------------------------
-
--- Borders for Floats & Virtual Text
-
+-- BORDERS FOR FLOATS & VIRTUAL TEXT
 -- INFO this needs to be disabled for noice.nvim
 -- vim.lsp.handlers["textDocument/signatureHelp"] =
 -- 	vim.lsp.with(vim.lsp.handlers.signature_help, { border = u.borderStyle })
@@ -31,22 +28,25 @@ end
 ---@field code string
 ---@field bufnr number
 
+---This function fixes that efm does not separate code & source, but puts them
+---together into the diagnostic message
 ---@param diag diagnostic
 ---@return diagnostic
 ---@nodiscard
 local function parseEfmDiagnostic(diag)
-	-- EXAMPLES
-	-- [shellcheck] Useless echo? Instead of 'cmd $(echo foo)', just use 'cmd foo'. [SC2116]
-	-- [selene] [parenthese_conditions]: lua does not require parentheses around conditions
+	-- EXAMPLES: source at the beginning, rule location variable
+	-- "[shellcheck] Useless echo? Instead of 'cmd $(echo foo)', just use 'cmd foo'. [SC2116]"
+	-- "[selene] [parenthese_conditions]: lua does not require parentheses around conditions"
 
 	local efmSource = diag.message:match("^%[(%a+)%] ")
+	-- prevent false positives or multiple efm diagnostic parsings
+	if not efmSource then return diag end
+
 	diag.message = diag.message:gsub("^%[%a+%] ", "")
 	diag.source = efmSource
 
-	if not efmSource then return diag end
-
-	local efmCode = diag.message:match(" ?%[(%a+)%]:? ?")
-	diag.message = diag.message:gsub(" ?%[(%a+)%]:? ?", "")
+	local efmCode = diag.message:match(" ?%[([%w_-]+)%]:? ?")
+	diag.message = diag.message:gsub(" ?%[[%w_-]+%]:? ?", "")
 	diag.code = efmCode
 
 	return diag
@@ -57,11 +57,9 @@ end
 ---@return string text to display
 local function diagnosticFmt(diag)
 	diag = parseEfmDiagnostic(diag)
-	local msg = diag.message
-
 	local source = diag.source and " (" .. diag.source:gsub("%.$", "") .. ")" or ""
 
-	return msg .. source
+	return diag.message .. source
 end
 
 vim.diagnostic.config {
@@ -84,7 +82,6 @@ vim.diagnostic.config {
 
 ---@param diag diagnostic
 local function searchForTheRule(diag)
-	if not diag then return end
 	diag = parseEfmDiagnostic(diag)
 	if not (diag.code and diag.source) then
 		u.notify("", "diagnostic without code or source", "warn")
@@ -96,9 +93,10 @@ local function searchForTheRule(diag)
 	vim.fn.system { "open", url }
 end
 
-if (1 == 2) then print "hi" end
-
 local M = {}
+
+---Select from rules on the same line as the cursor, if more than one, uses
+---vim.ui.select to choose from them.
 function M.ruleSearch()
 	local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
 	local diags = vim.diagnostic.get(0, { lnum = lnum })
@@ -111,7 +109,10 @@ function M.ruleSearch()
 		vim.ui.select(diags, {
 			prompt = "Select Rule to search:",
 			format_item = function(diag) return diag.message end,
-		}, function(diag) searchForTheRule(diag) end)
+		}, function(diag)
+			if not diag then return end -- aborted input
+			searchForTheRule(diag)
+		end)
 	end
 end
 return M

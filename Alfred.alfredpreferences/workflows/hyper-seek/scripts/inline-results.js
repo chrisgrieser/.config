@@ -179,18 +179,15 @@ function refreshKeywordCache(cachePath) {
 
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
-/**
- * @param {string} topDomain where to get the favicon from
- * @param {boolean} noNeedToBuffer
- */
-function getFavicon(topDomain, noNeedToBuffer) {
+/** @param {string} topDomain where to get the favicon from */
+function getFavicon(topDomain) {
 	const durationLogStart = +new Date();
 
 	let targetFile = `${$.getenv("alfred_workflow_cache")}/${topDomain}.ico`;
 	const useFaviconSetting = $.getenv("use_favicons") === "1";
 
 	if (!fileExists(targetFile)) {
-		if (useFaviconSetting && !noNeedToBuffer) {
+		if (useFaviconSetting) {
 			// Normally, `curl` does exit 0 even when the website reports 404.
 			// With `curl --fail`, it will exit non-zero instead. However,
 			// errors make `doShellScript` fail, so we need to use `try/catch`
@@ -255,7 +252,8 @@ function writeInstantAnswer(bufferPath, instantAnswer) {
 
 /** @type {AlfredRun} */
 // rome-ignore lint/correctness/noUnusedVariables: Alfred run
-function run(argv) {
+// rome-ignore lint/nursery/noExcessiveComplexity: <explanation>
+function  run(argv) {
 	const timelogStart = +new Date();
 	let favIconTotalMs = 0;
 
@@ -272,16 +270,15 @@ function run(argv) {
 
 	const includeUnsafe = $.getenv("include_unsafe") === "1" ? "--unsafe" : "";
 	const ignoreAlfredKeywordsEnabled = $.getenv("ignore_alfred_keywords") === "1";
-	const multiSelectIcon = $.getenv("multi_select_icon") || "🔳";
 
 	// https://duckduckgo.com/duckduckgo-help-pages/settings/params/
 	const searchRegion = $.getenv("region") === "none" ? "" : "--reg=" + $.getenv("region");
 
 	//───────────────────────────────────────────────────────────────────────────
 
-	/** @type{"fallback"|"multi-select"|"default"|"rerun"} */
+	/** @type{"fallback"|"default"} */
 	let mode = $.NSProcessInfo.processInfo.environment.objectForKey("mode").js || "default";
-	const neverIgnore = mode === "fallback" || mode === "multi-select";
+	const neverIgnore = mode === "fallback";
 
 	// HACK script filter is triggered with any letter of the roman alphabet, and
 	// then prepended here, to trigger this workflow with any search term
@@ -311,7 +308,7 @@ function run(argv) {
 	}
 
 	// GUARD CLAUSE 3: first word of query is Alfred keyword
-	// (guard clause is ignored when doing fallback search or multi-select,
+	// (guard clause is ignored when doing fallback search
 	// since in that case we know we do not need to ignore anything.)
 	if (ignoreAlfredKeywordsEnabled && !neverIgnore) {
 		const keywordCachePath = $.getenv("alfred_workflow_cache") + "/alfred_keywords.json";
@@ -354,8 +351,7 @@ function run(argv) {
 	//───────────────────────────────────────────────────────────────────────────
 	// MAIN: request NEW results
 
-	// PERF cache `ddgr` response so that re-opening Alfred or using multi-select
-	// does not re-fetch results
+	// PERF cache `ddgr` response so that re-opening Alfred does not re-fetch results
 	const responseCachePath = $.getenv("alfred_workflow_cache") + "/reponseCache.json";
 	const responseCache = JSON.parse(readFile(responseCachePath) || "{}");
 	/** @type{ddgrResponse} */
@@ -363,7 +359,6 @@ function run(argv) {
 
 	if (responseCache.query === query) {
 		response = responseCache;
-		mode = "rerun";
 	} else {
 		// NOTE using a fork of ddgr which includes the instant_answer when using `--json`
 		// https://github.com/kometenstaub
@@ -380,38 +375,24 @@ function run(argv) {
 		writeToFile(responseCachePath, JSON.stringify(response));
 	}
 
-	// determine multi-select items
-	const multiSelectBufferPath = $.getenv("alfred_workflow_cache") + "/multiSelectBuffer.txt";
-	const multiSelectUrls = readFile(multiSelectBufferPath).split("\n") || [];
-
-	// PERF
-	const noNeedToBuffer = mode === "rerun" || mode === "multi-select";
-
 	// RESULTS
 	/** @type AlfredItem[] */
 	const newResults = response.results.map((item) => {
-		const isSelected = multiSelectUrls.includes(item.url);
-		const icon = isSelected ? multiSelectIcon + " " : "";
 		const topDomain = item.url.split("/")[2];
 
-		let { iconPath, faviconMs } = getFavicon(topDomain, noNeedToBuffer);
+		let { iconPath, faviconMs } = getFavicon(topDomain);
 		favIconTotalMs += faviconMs;
 		if (!iconPath) iconPath = "icons/fallback_for_no_favicon.png";
 
 		return {
-			title: icon + item.title,
+			title: item.title,
 			subtitle: topDomain,
 			uid: item.url,
-			arg: isSelected ? "" : item.url, // if URL already selected, no need to pass it
+			arg: item.url,
 			icon: { path: iconPath },
 			mods: {
 				shift: { subtitle: item.abstract },
 				alt: { subtitle: `⌥: Copy  ➙  ${item.url}` }, // also makes holding alt show the full URL
-				cmd: {
-					arg: item.url, // has to be set, since main arg can be ""
-					variables: { mode: "multi-select" },
-					subtitle: isSelected ? "⌘: Deselect URL" : "⌘: Select URL",
-				},
 			},
 		};
 	});
@@ -422,29 +403,14 @@ function run(argv) {
 
 		// buffer instant answer for quicklook
 		const instantAnswerBuffer = $.getenv("alfred_workflow_cache") + "/instantAnswerBuffer.html";
-		if (!noNeedToBuffer) writeInstantAnswer(instantAnswerBuffer, response.instant_answer);
+		writeInstantAnswer(instantAnswerBuffer, response.instant_answer);
 		searchForQuery.quicklookurl = instantAnswerBuffer;
-	}
-
-	// MULTI-SLECT: searchForQuery
-	if (multiSelectUrls.includes(querySearchUrl)) {
-		searchForQuery.title = multiSelectIcon + " " + searchForQuery.title;
-		searchForQuery.mods = {
-			cmd: {
-				arg: querySearchUrl, // has to be set again, since main arg can be ""
-				variables: { mode: "multi-select" },
-				subtitle: "⌘: Deselect URL",
-			},
-		};
-		searchForQuery.arg = ""; // if URL already selected, no need to pass it
 	}
 
 	//───────────────────────────────────────────────────────────────────────────
 
 	// Pass to Alfred
 	const alfredInput = JSON.stringify({
-		rerun: 0.1, // HACK has to permanently rerun to pick up changes from multi-select
-		skipknowledge: true, // so Alfred does not change result order for multi-select
 		variables: { oldResults: JSON.stringify(newResults), oldQuery: query },
 		items: [searchForQuery].concat(newResults),
 	});
@@ -454,11 +420,9 @@ function run(argv) {
 	let log;
 	let time = `${durationTotalSecs}s`;
 	const useFaviconSetting = $.getenv("use_favicons") === "1";
-	if (useFaviconSetting && !noNeedToBuffer) time += `, favicons: ${favIconTotalMs / 1000}s`;
+	if (useFaviconSetting) time += `, favicons: ${favIconTotalMs / 1000}s`;
 	if (mode === "default") {
 		log = `Total: ${time}, "${query}"`;
-	} else if (mode === "rerun") {
-		log = "____" + time; // indented to make it easier to read
 	} else {
 		log = `Total: ${time}, "${query}" (${mode})`;
 	}
