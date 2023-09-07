@@ -32,6 +32,8 @@ function pr {
 	gh pr create --web --fill || gh pr create --web
 }
 
+# b=$(echo "$PWD")
+
 function fixup {
 	local cutoff=15 # CONFIG
 

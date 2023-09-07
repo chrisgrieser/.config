@@ -99,22 +99,7 @@ function M.openNewScope()
 	vim.cmd.startinsert { bang = true }
 end
 
-function M.ruleSearch()
-	local lnum = vim.fn.line(".") - 1
-	local diags = vim.diagnostic.get(0, { lnum = lnum })
-	if #diags == 0 then
-		u.notify("", "No diagnostics found", "warn")
-		return
-	end
-	for _, diag in ipairs(diags) do
-		if diag.code and diag.source then
-			local query = (diag.code .. " " .. diag.source)
-			vim.fn.setreg("+", query)
-			local url = ("https://duckduckgo.com/?q=%s+%%21ducky&kl=en-us"):format(query:gsub(" ", "+"))
-			vim.fn.system { "open", url }
-		end
-	end
-end
+--------------------------------------------------------------------------------
 
 function M.scrollHoverWin(direction)
 	local a = vim.api

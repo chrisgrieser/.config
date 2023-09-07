@@ -151,11 +151,10 @@ keymap(
 )
 keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
 
--- ducky search for all diagnostics on the current line
 keymap(
 	"n",
 	"<leader>d",
-	function() require("funcs.quality-of-life").ruleSearch() end,
+	function() require("config.diagnostics").ruleSearch() end,
 	{ desc = "󰒕 Lookup Diagnostic Rule" }
 )
 
