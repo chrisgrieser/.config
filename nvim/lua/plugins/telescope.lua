@@ -106,6 +106,7 @@ local function telescopeConfig()
 				"%.zip$",
 				"%.pxd$",
 				"%.plist$", -- mostly Alfred files
+				".DS_Store", -- cause it is unignored in certain repos
 			},
 			preview = {
 				timeout = 200, -- ms
