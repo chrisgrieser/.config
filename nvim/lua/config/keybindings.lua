@@ -111,7 +111,7 @@ keymap("n", "gq", function() require("funcs.quickfix").next() end, { desc = "
 keymap("n", "gQ", function() require("funcs.quickfix").previous() end, { desc = " Prev Quickfix" })
 keymap("n", "dQ", require("funcs.quickfix").deleteList, { desc = " Empty Quickfix List" })
 
--- COMMENTS & ANNOTATIONS
+-- COMMENTS
 -- stylua: ignore
 keymap("n", "qw", function () require("funcs.quality-of-life").commentHr() end, { desc = " Horizontal Divider" })
 keymap("n", "wq", '"zyy"zpkqqj', { desc = " Duplicate Line as Comment", remap = true })
@@ -126,7 +126,7 @@ keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent selection" })
 
 keymap("n", "~", function() require("funcs.quality-of-life").toggleCase() end, { desc = "better ~" })
 
--- Word Flipper
+-- WORD FLIPPER
 -- stylua: ignore
 keymap( "n", "Ö", function() require("funcs.flipper").flipWord() end, { desc = "flip words / toggle casing" })
 
@@ -138,9 +138,7 @@ keymap(
 	{ desc = " Open new scope" }
 )
 
---------------------------------------------------------------------------------
 -- SPELLING
-
 keymap("n", "zl", function() vim.cmd.Telescope("spell_suggest") end, { desc = "󰓆 Spell Suggest" })
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
 keymap("n", "gz", "]s", { desc = "󰓆 Next Misspelling" })
@@ -163,8 +161,8 @@ end, { desc = "Move Char Left", expr = true })
 -- stylua: ignore start
 keymap("x", "<Down>", [[:move '>+1<CR><cmd>normal! gv=gv<CR>]], { desc = "󰜮 Move selection down", silent = true })
 keymap("x", "<Up>", [[:move '<-2<CR><cmd>normal! gv=gv<CR>]], { desc = "󰜷 Move selection up", silent = true })
-
 -- stylua: ignore end
+
 keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Move selection right" })
 keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "➡️ Move selection left" })
 
