@@ -56,7 +56,7 @@
   "nvim-lspconfig": { "branch": "add-biome", "commit": "1c9cf902922d10b8f10af7d217b209c3adeff4d5" },
   "nvim-navic": { "branch": "master", "commit": "9c89730da6a05acfeb6a197e212dfadf5aa60ca0" },
   "nvim-notify": { "branch": "master", "commit": "a3e186fc22049c92092ed4d21748ca7def3681af" },
-  "nvim-origami": { "branch": "main", "commit": "1e91e59e399d78afff7bd325575c681442a2896a" },
+  "nvim-origami": { "branch": "main", "commit": "0051815e67919378242b927118d3d162b7545ff6" },
   "nvim-recorder": { "branch": "main", "commit": "e6ecc8ba0b950df9ac0ef7507dc95cb0037bead1" },
   "nvim-spider": { "branch": "main", "commit": "2762267825b575bcd27a50560e1098679f120007" },
   "nvim-surround": { "branch": "main", "commit": "1c2ef599abeeb98e40706830bcd27e90e259367a" },
