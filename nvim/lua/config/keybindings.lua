@@ -70,7 +70,8 @@ keymap("n", "[", "(")
 -- SEARCH
 keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
-keymap("x", "*", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "* Visual Star" })
+keymap("n", "+", "*")
+keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "* Visual Star" })
 
 -- auto-nohl -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
 vim.on_key(function(char)
@@ -78,7 +79,7 @@ vim.on_key(function(char)
 	local isCmdlineSearch = fn.getcmdtype():find("[/?]") ~= nil
 	local searchMvKeys = { "n", "N", "*", "#" } -- works for RHS, therefore no need to consider remaps
 
-	local searchStarted = (key == "/" or key == "?") and isCmdlineSearch
+	local searchStarted = (key == "/" or key == "?") and fn.mode() == "n"
 	local searchConfirmed = (key == "<CR>" and isCmdlineSearch)
 	local searchCancelled = (key == "<Esc>" and isCmdlineSearch)
 	if not (searchStarted or searchConfirmed or searchCancelled or fn.mode() == "n") then return end
