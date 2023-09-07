@@ -228,7 +228,12 @@ function ensureCacheFolder() {
  * @param {string} instantAnswer
  */
 function writeInstantAnswer(bufferPath, instantAnswer) {
-	const [, infoText, source] = instantAnswer.match(/(.*)\s+More at (.*?)$/);
+	let infoText, source;
+	try {
+		[, infoText, source] = instantAnswer.match(/(.*)\s+More at (.*?)$/);
+	} catch (_error) {
+		infoText = instantAnswer;
+	}
 	const answerAsHtml = `
 		<style>
 		:root { font-size: 2em }
@@ -259,7 +264,6 @@ function  run(argv) {
 
 	//───────────────────────────────────────────────────────────────────────────
 	// CONFIG
-
 	let resultsToFetch = parseInt($.getenv("inline_results_to_fetch")) || 5;
 	if (resultsToFetch < 1) resultsToFetch = 1;
 	else if (resultsToFetch > 25) resultsToFetch = 25; // maximum supported by `ddgr`
@@ -278,7 +282,6 @@ function  run(argv) {
 
 	/** @type{"fallback"|"default"} */
 	let mode = $.NSProcessInfo.processInfo.environment.objectForKey("mode").js || "default";
-	const neverIgnore = mode === "fallback";
 
 	// HACK script filter is triggered with any letter of the roman alphabet, and
 	// then prepended here, to trigger this workflow with any search term
@@ -288,17 +291,17 @@ function  run(argv) {
 	ensureCacheFolder();
 
 	// GUARD CLAUSE 1: query is URL or too short
-	if (query.match(/^\w+:/) && !neverIgnore) {
+	if (query.match(/^\w+:/) && mode !== "fallback") {
 		console.log("Ignored (URL)");
 		return;
-	} else if (query.length < minQueryLength && !neverIgnore) {
+	} else if (query.length < minQueryLength && mode !== "fallback") {
 		console.log("Ignored (Min Query Length)");
 		return;
 	}
 
 	// GUARD CLAUSE 2: extra ignore keywords
 	const ignoreExtraWordsStr = $.getenv("ignore_extra_words");
-	if (ignoreExtraWordsStr !== "" && !neverIgnore) {
+	if (ignoreExtraWordsStr !== "" && mode !== "fallback") {
 		const ignoreExtraWords = ignoreExtraWordsStr.split(/ ?, ?/);
 		const queryFirstWord = query.split(" ")[0];
 		if (ignoreExtraWords.includes(queryFirstWord)) {
@@ -310,7 +313,7 @@ function  run(argv) {
 	// GUARD CLAUSE 3: first word of query is Alfred keyword
 	// (guard clause is ignored when doing fallback search
 	// since in that case we know we do not need to ignore anything.)
-	if (ignoreAlfredKeywordsEnabled && !neverIgnore) {
+	if (ignoreAlfredKeywordsEnabled && mode !== "fallback") {
 		const keywordCachePath = $.getenv("alfred_workflow_cache") + "/alfred_keywords.json";
 		if (keywordCacheIsOutdated(keywordCachePath)) refreshKeywordCache(keywordCachePath);
 		const alfredKeywords = JSON.parse(readFile(keywordCachePath));
