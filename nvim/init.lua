@@ -17,6 +17,7 @@ local function reOpenLastFile()
 		pcall(vim.cmd.bwipeout, "#") -- do not leave empty file
 	end, 1)
 end
+reOpenLastFile()
 
 --------------------------------------------------------------------------------
 
@@ -29,13 +30,9 @@ safeRequire("config.theme-customization")
 safeRequire("config.options-and-autocmds")
 safeRequire("config.diagnostics")
 
-reOpenLastFile()
-
 safeRequire("config.keybindings")
 safeRequire("config.leader-keybindings")
 safeRequire("config.textobject-keymaps")
 
 safeRequire("config.user-commands")
 safeRequire("config.abbreviations")
-
-safeRequire("funcs.pulling-strings")

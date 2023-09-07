@@ -71,14 +71,12 @@ function generateCitekey(authors, year) {
 	const lastNameArr = [];
 	if (!authors) lastNameArr.push("NoAuthor");
 	else {
-		authors
-			.split(" and ") // "and" used as delimiter in bibtex for names
-			.forEach((name) => {
-				// doi.org returns "first last", isbn mostly "last, first"
-				const isLastFirst = name.includes(",");
-				const lastName = isLastFirst ? name.split(",")[0].trim() : name.split(" ").pop();
-				lastNameArr.push(lastName);
-			});
+		const author = authors.split(" and "); // "and" used as delimiter in bibtex for names
+		for (const name of author) {
+			const isLastFirst = name.includes(","); // doi.org returns "first last", isbn mostly "last, first"
+			const lastName = isLastFirst ? name.split(",")[0].trim() : name.split(" ").pop();
+			lastNameArr.push(lastName);
+		}
 	}
 	const authorStr = (lastNameArr.length < 3 ? lastNameArr.join("") : lastNameArr[0] + "EtAl")
 		// strip diacritics https://stackoverflow.com/a/37511463

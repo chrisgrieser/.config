@@ -3,19 +3,33 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{ -- pending: https://github.com/Djancyp/regex.nvim/pull/2
-		"chrisgrieser/regex.nvim",
-		cmd = "RegexHelper", -- called in javascript & typescript ftplugins
-		dev = true,
-		opts = true,
+	{ -- undo history
+		"mbbill/undotree",
+		keys = {
+			{ "<leader>ut", vim.cmd.UndotreeToggle, desc = "󰕌  Undotree" },
+		},
+		init = function()
+			vim.g.undotree_WindowLayout = 3
+			vim.g.undotree_DiffpanelHeight = 10
+			vim.g.undotree_ShortIndicators = 1
+			vim.g.undotree_SplitWidth = 30
+			vim.g.undotree_DiffAutoOpen = 0
+			vim.g.undotree_SetFocusWhenToggle = 1
+			vim.g.undotree_HelpLine = 1
+
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "undotree",
+				callback = function()
+					vim.opt_local.list = false
+					vim.keymap.set("n", "<D-w>", vim.cmd.UndotreeToggle, { buffer = true })
+					vim.defer_fn(function()
+						vim.keymap.set("n", "J", "6j", { buffer = true })
+						vim.keymap.set("n", "K", "6k", { buffer = true })
+					end, 1)
+				end,
+			})
+		end,
 	},
-	-- TODO check out again later
-	-- {
-	-- 	"altermo/ultimate-autopair.nvim",
-	-- 	commit = "667d2304e8eb9ddbfa7f962528cfce0a5edcc163",
-	-- 	event = { "InsertEnter", "CmdlineEnter" },
-	-- 	opts = {},
-	-- },
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
@@ -89,6 +103,12 @@ return {
 			}
 		end,
 	},
+	{ -- pending: https://github.com/Djancyp/regex.nvim/pull/2
+		"chrisgrieser/regex.nvim",
+		cmd = "RegexHelper", -- called in javascript & typescript ftplugins
+		dev = true,
+		opts = true,
+	},
 	{ -- virtual text context at the end of a scope
 		"haringsrob/nvim_context_vt",
 		event = "VeryLazy",
@@ -98,11 +118,7 @@ return {
 			highlight = "NonText",
 			min_rows = 7,
 			disable_ft = { "markdown" },
-			min_rows_ft = {
-				python = 10,
-				yaml = 15,
-				css = 15,
-			},
+			min_rows_ft = { python = 10, yaml = 15, css = 15 },
 		},
 	},
 	{ -- automatically set correct indent for file

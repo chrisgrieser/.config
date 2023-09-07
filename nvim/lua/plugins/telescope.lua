@@ -218,11 +218,7 @@ local function telescopeConfig()
 				results_title = false,
 				previewer = false,
 				layout_config = {
-					horizontal = {
-						anchor = "W",
-						width = 0.4,
-						height = 0.5,
-					},
+					horizontal = { anchor = "W", width = 0.4, height = 0.5 },
 				},
 			},
 			spell_suggest = {
@@ -248,33 +244,11 @@ local function telescopeConfig()
 			},
 		},
 		extensions = {
-			undo = {
-				prompt_prefix = "󰕌 ",
-				entry_format = "#$ID ($STAT) $TIME",
-				layout_config = {
-					-- more space for diffview useful here
-					horizontal = {
-						height = 0.8,
-						preview_width = { 0.70, min = 30 },
-					},
-				},
-				mappings = {
-					i = {
-						["<cr>"] = require("telescope-undo.actions").restore,
-						["<D-S-c>"] = require("telescope-undo.actions").yank_additions,
-						["<D-c>"] = require("telescope-undo.actions").yank_deletions,
-					},
-				},
-			},
 			recent_files = {
 				prompt_prefix = "󰋚 ",
 				previewer = false,
 				layout_config = {
-					horizontal = {
-						anchor = "W",
-						width = 0.45,
-						height = 0.55,
-					},
+					horizontal = { anchor = "W", width = 0.45, height = 0.55 },
 				},
 			},
 		},
@@ -289,7 +263,6 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons", -- add icons
 			"smartpde/telescope-recent-files", -- better oldfiles
-			"debugloop/telescope-undo.nvim", -- undotree
 
 			-- also listed here as dependency, so it can be used by telescope
 			-- before cmp is loaded
@@ -299,7 +272,6 @@ return {
 		config = function()
 			telescopeConfig()
 			require("telescope").load_extension("recent_files")
-			require("telescope").load_extension("undo")
 
 			-- INFO since used for cmp-fuzzy-buffer already, might as well add it
 			-- here as well. Even though performance-wise vanilla telescope is fine
