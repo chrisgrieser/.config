@@ -25,11 +25,16 @@ export FZF_DEFAULT_OPTS='
 	--color=hl:206 --pointer=⟐ --prompt="❱ " --scrollbar=▐ --ellipsis=… 
 	--scroll-off=5 --cycle --layout=reverse --height=90%
 	--bind=tab:down,shift-tab:up,shift-down:preview-page-down,shift-up:preview-page-up
-	--preview-window=border-left'
+	--preview-window=border-left
+'
 
 # extra spacing needed for WezTerm + Iosevka
-[[ "$TERM_PROGRAM" == "WezTerm" ]] && export EZA_ICON_SPACING=2
+if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then 
+	export EZA_ICON_SPACING=2
+	export EXA_ICON_SPACING=2
+fi
 export EZA_STRICT=1
+export EXA_STRICT=1
 
 export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgrep-config"
 
