@@ -2,31 +2,6 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{ -- Diagnostic Virtual Text at the top right, not at EoL
-		"dgagn/diagflow.nvim",
-		event = "LspAttach",
-		opts = {
-			max_width = 40,
-			max_height = 6,
-			scope = "cursor", -- cursor|line
-			placement = "top", -- top|inline
-			text_align = "left", -- left|right
-			gap_size = 1,
-			padding_top = 0,
-			padding_right = 2, -- for scrollbar
-			toggle_event = { "InsertEnter" },
-			render_event = { "CursorMoved" },
-			update_event = { "DiagnosticChanged", "BufReadPost" },
-			show_sign = false,
-			severity_colors = { -- virtual text hlgroups have background in most themes
-				error = "DiagnosticVirtualTextError",
-				warning = "DiagnosticVirtualTextWarning",
-				info = "DiagnosticVirtualTextInfo",
-				hint = "DiagnosticVirtualTextHint",
-			},
-			format = function(diag) return require("config.diagnostics").diagnosticFmt(diag) end,
-		},
-	},
 	{ -- display inlay hints from LSP
 		"lvimuser/lsp-inlayhints.nvim",
 		init = function()

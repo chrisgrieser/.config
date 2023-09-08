@@ -1,6 +1,4 @@
-local M = {}
 local u = require("config.utils")
-
 --------------------------------------------------------------------------------
 
 -- SIGN ICONS
@@ -39,6 +37,13 @@ local function parseEfmDiagnostic(diag)
 	-- EXAMPLES: source at the beginning, rule location variable
 	-- "[shellcheck] Useless echo? Instead of 'cmd $(echo foo)', just use 'cmd foo'. [SC2116]"
 	-- "[selene] [parenthese_conditions]: lua does not require parentheses around conditions"
+	-- "Too many local variables (16/15) (too-many-locals)", source: pylint
+
+	if diag.source == "pylint" then
+		diag.code = diag.message:match(" ?%(([%w-]+)%)$")
+		diag.message = diag.message:gsub(" ?%([%w-]+%)$", "")
+		return diag
+	end
 
 	local efmSource = diag.message:match("^%[(%a+)%] ")
 	-- prevent false positives or multiple efm diagnostic parsings
@@ -57,7 +62,7 @@ end
 ---@nodiscard
 ---@param diag diagnostic
 ---@return string text to display
-function M.diagnosticFmt(diag)
+local function diagnosticFmt(diag)
 	diag = parseEfmDiagnostic(diag)
 	local source = diag.source and " (" .. diag.source:gsub("%.$", "") .. ")" or ""
 
@@ -66,13 +71,13 @@ end
 
 vim.diagnostic.config {
 	virtual_text = {
-		format = M.diagnosticFmt,
+		format = diagnosticFmt,
 		severity = { min = vim.diagnostic.severity.INFO },
 		source = false, -- handled by my format function
 		spacing = 1,
 	},
 	float = {
-		format = M.diagnosticFmt,
+		format = diagnosticFmt,
 		focusable = true,
 		border = u.borderStyle,
 		max_width = 75,
@@ -95,6 +100,7 @@ local function searchForTheRule(diag)
 	vim.fn.system { "open", url }
 end
 
+local M = {}
 
 ---Select from rules on the same line as the cursor, if more than one, uses
 ---vim.ui.select to choose from them.
