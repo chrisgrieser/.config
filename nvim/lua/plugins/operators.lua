@@ -16,6 +16,7 @@ return {
 	},
 	{ -- add docstrings / annotation comments
 		"chrisgrieser/neogen",
+		dev = true,
 		lazy = false,
 		opts = true,
 		keys = {
@@ -25,7 +26,7 @@ return {
 				desc = " Function Annotations",
 			},
 			{
-				"qf",
+				"qF",
 				function() require("neogen").generate { type = "file" } end,
 				desc = " File Annotations",
 			},

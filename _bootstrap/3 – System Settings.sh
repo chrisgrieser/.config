@@ -191,3 +191,8 @@ defaults write com.apple.Safari IncludeDevelopMenu -bool true            # Enabl
 defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true # full URL in address bar
 defaults write com.apple.Safari HomePage -string "about:blank"           # faster loading
 defaults write com.apple.Safari DownloadsPath -string "$WD"              # Download path
+
+
+#───────────────────────────────────────────────────────────────────────────────
+# APP STORE
+defaults write com.apple.appstore InAppReviewEnabled -bool false
