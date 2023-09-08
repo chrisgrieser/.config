@@ -13,9 +13,6 @@ return {
 	{
 		"AckslD/nvim-FeMaco.lua",
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		keys = {
-			{ "<localleader>c", function() require('femaco.edit').edit_code_block() end, desc = " Edit Code Block" },
-		},
 		opts = {},
 	},
 	{ -- auto-bullets for markdown-like filetypes

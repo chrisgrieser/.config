@@ -42,6 +42,13 @@ keymap("n", "gs", function ()
 	require("telescope.builtin").lsp_document_symbols { ignore_symbols = {}, }
 end, { desc = "󰒕 Markdown Headings", buffer = true })
 
+keymap(
+	"n",
+	"<localleader>c",
+	function() require("femaco.edit").edit_code_block() end,
+	{ desc = " Edit Code Block", buffer = true }
+)
+
 -- Format Table
 keymap(
 	"n",

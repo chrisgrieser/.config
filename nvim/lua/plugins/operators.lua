@@ -14,6 +14,36 @@ return {
 			extra = { eol = "Q", above = "qO", below = "qo" },
 		},
 	},
+	{
+		"heavenshell/vim-pydocstring",
+		lazy = false,
+		build = "make install",
+		cmd = "Pydocstring",
+		keys = {
+			{ "<localleader>d", "<cmd>Pydocstring<CR>", desc = "󱪝 Python docstring" },
+		},
+		init = function() vim.g.pydocstring_formatter = "numpy" end,
+	},
+	{ -- add docstrings / annotation comments
+		"danymat/neogen",
+		keys = {
+			{
+				"qf",
+				function() require("neogen").generate { type = "func" } end,
+				desc = " Generate Annotations",
+			},
+		},
+		opts = {
+			languages = {
+				-- https://github.com/danymat/neogen#supported-languages
+				python = {
+					template = {
+						annotation_convention = "reST",
+					},
+				},
+			},
+		},
+	},
 	{ -- substitute, evaluate, exchange, sort, duplicate
 		"echasnovski/mini.operators",
 		keys = {
@@ -35,10 +65,10 @@ return {
 			sort = { prefix = "sy" },
 			evaluate = { prefix = "#", func = require("funcs.mini-operator-extras").luaEval },
 		},
-		init = function ()
+		init = function()
 			require("funcs.mini-operator-extras").filetypeSpecificMultiply()
 			require("funcs.mini-operator-extras").filetypeSpecificEval()
-		end
+		end,
 	},
 	{ -- surround
 		"kylechui/nvim-surround",
