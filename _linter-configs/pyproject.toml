@@ -37,4 +37,4 @@ ignore = [
 ]
 
 [tool.ruff.pydocstyle]
-convention = "pep257" # Accepts: "google", "numpy", or "pep257"
+convention = "google" # Accepts: "google", "numpy", or "pep257"
