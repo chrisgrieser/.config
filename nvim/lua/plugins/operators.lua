@@ -14,33 +14,25 @@ return {
 			extra = { eol = "Q", above = "qO", below = "qo" },
 		},
 	},
-	{
-		"heavenshell/vim-pydocstring",
-		lazy = false,
-		build = "make install",
-		cmd = "Pydocstring",
-		keys = {
-			{ "<localleader>d", "<cmd>Pydocstring<CR>", desc = "󱪝 Python docstring" },
-		},
-		init = function() vim.g.pydocstring_formatter = "numpy" end,
-	},
 	{ -- add docstrings / annotation comments
 		"danymat/neogen",
+		lazy = false,
+		opts = true,
 		keys = {
 			{
 				"qf",
 				function() require("neogen").generate { type = "func" } end,
-				desc = " Generate Annotations",
+				desc = " Function Annotations",
 			},
-		},
-		opts = {
-			languages = {
-				-- https://github.com/danymat/neogen#supported-languages
-				python = {
-					template = {
-						annotation_convention = "reST",
-					},
-				},
+			{
+				"qf",
+				function() require("neogen").generate { type = "file" } end,
+				desc = " File Annotations",
+			},
+			{
+				"qt",
+				function() require("neogen").generate { type = "type" } end,
+				desc = " Type Annotations",
 			},
 		},
 	},
