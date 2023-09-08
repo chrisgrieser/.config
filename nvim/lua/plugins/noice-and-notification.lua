@@ -73,6 +73,9 @@ return {
 			end, { desc = "󰎟 Notification Log" })
 		end,
 		opts = {
+			-- format = {
+			-- 	date = { format = "" },
+			-- },
 			routes = routes,
 			cmdline = {
 				view = "cmdline", -- cmdline|cmdline_popup
@@ -134,8 +137,12 @@ return {
 				history = {
 					view = "split",
 					filter_opts = { reverse = true }, -- show newest entries first
-					opts = { enter = true },
 					filter = {}, -- empty list = deactivate filter = include everything
+					opts = {
+						enter = true,
+						-- https://github.com/folke/noice.nvim#-formatting
+						format = { "{title} ", "{cmdline} ", "{message}" },
+					},
 				},
 			},
 
