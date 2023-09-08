@@ -17,7 +17,14 @@ Wf_browser = wf.new(env.browserApp)
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
-	:subscribe(wf.windowCreated, function() wu.autoTile(Wf_browser) end)
+	:subscribe(wf.windowCreated, function(win)
+		local winOnMainScreen = win:screen():id() == hs.screen.mainScreen():id()
+		if env.isProjector() and winOnMainScreen then
+			wu.moveResize(win, wu.maximized)
+		else
+			wu.autoTile(Wf_browser)
+		end
+	end)
 	:subscribe(wf.windowDestroyed, function() wu.autoTile(Wf_browser) end)
 	:subscribe(wf.windowFocused, wu.bringAllWinsToFront)
 

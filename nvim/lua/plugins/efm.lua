@@ -9,6 +9,7 @@ local toolsToAutoinstall = {
 	"black",
 	"selene",
 	"stylua",
+	"pylint",
 	"proselint",
 	"bibtex-tidy",
 	"prettier", -- only yaml formatter preserving blank lines https://github.com/mikefarah/yq/issues/515
@@ -30,6 +31,7 @@ local setupEfmConfig = function()
 	local biome = require("efmls-configs.formatters.biome")
 	local shellharden = require("efmls-configs.formatters.shellharden")
 	local mdformat = require("efmls-configs.formatters.mdformat")
+	local pylint = require("efmls-configs.linters.pylint")
 
 	-- using my own, due to custom configs
 	local proselint = require("tool-configs.linters.proselint")
@@ -50,7 +52,7 @@ local setupEfmConfig = function()
 		json = { biome },
 		jsonc = { biome },
 		lua = { stylua, selene },
-		python = { black },
+		python = { black, pylint },
 		css = { prettier, stylelint_L, stylelint_F },
 		html = { prettier },
 		sh = { shfmt, shellcheck, shellharden },

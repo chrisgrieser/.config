@@ -1,4 +1,6 @@
+local M = {}
 local u = require("config.utils")
+
 --------------------------------------------------------------------------------
 
 -- SIGN ICONS
@@ -55,7 +57,7 @@ end
 ---@nodiscard
 ---@param diag diagnostic
 ---@return string text to display
-local function diagnosticFmt(diag)
+function M.diagnosticFmt(diag)
 	diag = parseEfmDiagnostic(diag)
 	local source = diag.source and " (" .. diag.source:gsub("%.$", "") .. ")" or ""
 
@@ -64,13 +66,13 @@ end
 
 vim.diagnostic.config {
 	virtual_text = {
-		format = diagnosticFmt,
+		format = M.diagnosticFmt,
 		severity = { min = vim.diagnostic.severity.INFO },
 		source = false, -- handled by my format function
 		spacing = 1,
 	},
 	float = {
-		format = diagnosticFmt,
+		format = M.diagnosticFmt,
 		focusable = true,
 		border = u.borderStyle,
 		max_width = 75,
@@ -93,7 +95,6 @@ local function searchForTheRule(diag)
 	vim.fn.system { "open", url }
 end
 
-local M = {}
 
 ---Select from rules on the same line as the cursor, if more than one, uses
 ---vim.ui.select to choose from them.
