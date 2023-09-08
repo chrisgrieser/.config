@@ -6,7 +6,7 @@ local fn = vim.fn
 ---@param level? "info"|"trace"|"debug"|"warn"|"error"
 local function notify(msg, level)
 	if not level then level = "info" end
-	local pluginName = "Mini Git"
+	local pluginName = "Small Git"
 	vim.notify(msg, vim.log.levels[level:upper()], { title = pluginName })
 end
 
@@ -270,6 +270,58 @@ function M.githubUrl(justOpenRepo)
 
 	vim.fn.system { "open", url } -- macOS cli
 	fn.setreg("+", url) -- copy to clipboard
+end
+
+---Choose a GitHub issues from the current repo to open in the browser. Due to
+---GitHub API liminations, only the last 100 issues are shown.
+---@param state "open"|"closed"|"all"
+function M.issueSearch(state)
+	if not isInGitRepo() then return end
+
+	local repo = fn.system("git remote -v | head -n1"):match(":.*%."):sub(2, -2)
+
+	-- TODO figure out how to make a proper http request in nvim
+	local rawJSON = fn.system(
+		([[curl -sL "https://api.github.com/repos/%s/issues?per_page=100&state=%s"]]):format(repo, state)
+	)
+	local issues = vim.json.decode(rawJSON)
+
+	if not issues or #issues == 0 then
+		local type = state == "all" and "" or state .. " "
+		notify(("There are no %sissues or PRs for this repo."):format(type), "warn")
+		return
+	end
+
+	local function formatter(issue)
+		local isPR = issue.pull_request ~= nil
+		local merged = isPR and issue.pull_request.merged_at ~= nil
+
+		local icon
+		if issue.state == "open" and isPR then
+			icon = "🟦 "
+		elseif issue.state == "closed" and isPR and merged then
+			icon = "🟨 "
+		elseif issue.state == "closed" and isPR and not merged then
+			icon = "🟥 "
+		elseif issue.state == "closed" and not isPR then
+			icon = "🟣 "
+		elseif issue.state == "open" and not isPR then
+			icon = "🟢 "
+		end
+		if issue.title:lower():find("request") or issue.title:find("FR") then icon = icon .. "🙏 " end
+		if issue.title:lower():find("bug") then icon = icon .. "🪲 " end
+
+		return icon .. "#" .. issue.number .. " " .. issue.title
+	end
+
+	vim.ui.select(
+		issues,
+		{ prompt = "Select Issue:", kind = "github_issue", format_item = formatter },
+		function(choice)
+			if not choice then return end
+			fn.system { "open", choice.html_url }
+		end
+	)
 end
 
 --------------------------------------------------------------------------------

@@ -206,13 +206,15 @@ keymap("n", "<leader>gL", function() cmd.Telescope("git_bcommits") end, { desc =
 keymap("n", "<leader>gb", function() cmd.Telescope("git_branches") end, { desc = " Branches" })
 
 -- My utils
-keymap("n", "<leader>gc", function() require("funcs.mini-git").commit() end, { desc = "󰊢 Commit" })
-keymap("n", "<leader>gC", function() require("funcs.mini-git").addCommit() end, { desc = "󰊢 Add-Commit" })
-keymap("n", "<leader>gg", function() require("funcs.mini-git").addCommitPush() end, { desc = "󰊢 Add-Commit-Push" })
-keymap("n", "<leader>gm", function() require("funcs.mini-git").amendNoEditPushForce() end, { desc = "󰊢 Amend-No-Edit & Force Push" })
-keymap("n", "<leader>gM", function() require("funcs.mini-git").amendAndPushForce() end, { desc = "󰊢 Amend & Force Push" })
-keymap({ "n", "x" }, "<leader>gu", function () require("funcs.mini-git").githubUrl() end, { desc = " GitHub Link" })
-keymap("n", "<leader>gU", function () require("funcs.mini-git").githubUrl("repo") end, { desc = " Open GitHub Repo" })
+keymap("n", "<leader>gc", function() require("funcs.small-git").commit() end, { desc = "󰊢 Commit" })
+keymap("n", "<leader>gC", function() require("funcs.small-git").addCommit() end, { desc = "󰊢 Add-Commit" })
+keymap("n", "<leader>gg", function() require("funcs.small-git").addCommitPush() end, { desc = "󰊢 Add-Commit-Push" })
+keymap("n", "<leader>gm", function() require("funcs.small-git").amendNoEditPushForce() end, { desc = "󰊢 Amend-No-Edit & Force Push" })
+keymap("n", "<leader>gM", function() require("funcs.small-git").amendAndPushForce() end, { desc = "󰊢 Amend & Force Push" })
+keymap({ "n", "x" }, "<leader>gu", function () require("funcs.small-git").githubUrl() end, { desc = " GitHub Link" })
+keymap("n", "<leader>gU", function () require("funcs.small-git").githubUrl("repo") end, { desc = " Goto Repo" })
+keymap("n", "<leader>gi", function () require("funcs.small-git").issueSearch("open") end, { desc = " Open Issues" })
+keymap("n", "<leader>gI", function () require("funcs.small-git").issueSearch("closed") end, { desc = " Closed Issues" })
 
 -- Diffview
 -- Line History of Selection
