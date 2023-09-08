@@ -214,8 +214,18 @@ return {
 	},
 	{ -- Better input/selection fields
 		"stevearc/dressing.nvim",
-		event = "VeryLazy",
 		init = function()
+			-- lazy load triggers
+			vim.ui.select = function(...)
+				require("lazy").load { plugins = { "dressing.nvim" } }
+				return vim.ui.select(...)
+			end
+			vim.ui.input = function(...)
+				require("lazy").load { plugins = { "dressing.nvim" } }
+				return vim.ui.input(...)
+			end
+
+			-- extra keybindings
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "DressingSelect",
 				callback = function()
@@ -246,7 +256,19 @@ return {
 					min_height = 3,
 					win_options = { winblend = 0 },
 				},
+				telescope = {
+					layout_config = {
+						horizontal = { width = 0.99, height = 0.6 },
+					},
+				},
 			},
+			get_config = function(opts)
+				if opts.kind == "codeaction" or opts.kind == "simple" then
+					return { backend = "builtin" }
+				elseif opts.kind == "github_issue" then
+					return { backend = "telescope" }
+				end
+			end,
 		},
 	},
 }
