@@ -90,7 +90,7 @@ return {
 				ensure_installed = toolsToAutoinstall,
 				run_on_start = false,
 			}
-			vim.defer_fn(vim.cmd.MasonToolsInstall, 500)
+			vim.defer_fn(vim.cmd.MasonToolsInstall, 2000)
 		end,
 	},
 	{

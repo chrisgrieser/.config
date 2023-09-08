@@ -161,7 +161,7 @@ vnoremap ,s gq
 nnoremap ,s gqq
 
 " Case Switch via Smarter MD Hotkeys Plugin
-exmap caseSwitch obcommand obsidian-smarter-md-hotkeys:smarter-upper-lower
+exmap caseSwitch obcommand obsidian-editor-shortcuts:toggleCase
 nnoremap ö :caseSwitch
 vnoremap ö :caseSwitch
 
@@ -176,7 +176,7 @@ exmap aiWrite obcommand obsidian-textgenerator-plugin:insert-generated-text-From
 nnoremap ,a :aiWrite
 vnoremap ,a :aiWrite
 
-" toggle devtools (binding as will the debugger)
+" toggle devtools (binding as with the debugger)
 exmap toggleDevtools obcommand obsidian-theme-design-utilities:toggle-devtools
 nnoremap ,b :toggleDevtools
 vnoremap ,b :toggleDevtools
