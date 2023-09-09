@@ -286,7 +286,6 @@ return {
 	{ -- configure LSPs
 		"neovim/nvim-lspconfig",
 		dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config
-		dev = true,
 		init = setupAllLsps,
 		config = function() require("lspconfig.ui.windows").default_options.border = u.borderStyle end,
 	},
