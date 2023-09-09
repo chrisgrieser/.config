@@ -73,10 +73,6 @@ return {
 		config = function()
 			local u = require("config.utils")
 
-			local textobjRemaps = vim.deepcopy(require("config.utils").textobjectRemaps)
-			textobjRemaps.a = "*" -- markdown italics
-			textobjRemaps.u = "__" -- markdown bold
-
 			-- requires unmapping yS from normal_line below
 			vim.keymap.set("n", "yS", "ys$", { desc = "󰅪 Surround to EoL", remap = true })
 
@@ -84,7 +80,7 @@ return {
 			local config = require("nvim-surround.config")
 			require("nvim-surround").setup {
 				move_cursor = false,
-				aliases = textobjRemaps,
+				aliases = u.textobjectRemaps,
 				keymaps = {
 					visual = "s",
 					normal_line = false,
@@ -95,20 +91,12 @@ return {
 				},
 				surrounds = {
 					invalid_key_behavior = { add = false, find = false, delete = false, change = false },
-					[u.textobjectMaps.doubleSquareBracket] = {
+					[u.textobjectMaps["doubleSquareBracket"]] = {
 						find = "%[%[.-%]%]",
 						add = { "[[", "]]" },
 						delete = "(%[%[)().-(%]%])()",
 						change = {
 							target = "(%[%[)().-(%]%])()",
-						},
-					},
-					["__"] = {
-						find = "__.-__",
-						add = { "__", "__" },
-						delete = "(__)().-(__)()",
-						change = {
-							target = "(__)().-(__)()",
 						},
 					},
 					["/"] = {
@@ -117,14 +105,6 @@ return {
 						delete = "(/)().-(/)()",
 						change = {
 							target = "(/)().-(/)()",
-						},
-					},
-					["*"] = {
-						find = "%*.-%*",
-						add = { "*", "*" },
-						delete = "(%*)().-(%*)()",
-						change = {
-							target = "(%*)().-(%*)()",
 						},
 					},
 					[u.textobjectMaps["function"]] = {

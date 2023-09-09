@@ -17,17 +17,16 @@ local lsp_servers = {
 	"jsonls",
 	"cssls",
 	"emmet_ls", -- css & html completion
+	"biome", -- ts/js/json, cannot use LSP for formatting, https://github.com/biomejs/biome/discussions/87
 	"pyright", -- python LSP
 	"jedi_language_server", -- python (has refactor code actions & better hovers)
 	"ruff_lsp", -- python
 	"marksman", -- markdown
 	"tsserver", -- ts/js
-	"bashls", -- also used for zsh
+	"bashls", -- used for zsh
 	"taplo", -- toml
-	"lemminx", -- xml/plist
 	"html",
 	"ltex", -- latex/languagetool (requires `openjdk`)
-	"biome", -- ts/js/json, cannot use LSP for formatting, https://github.com/biomejs/biome/discussions/87
 }
 
 --------------------------------------------------------------------------------
@@ -173,16 +172,7 @@ conf.init_options.jsonls = {
 
 -- YAML
 conf.settings.yamlls = {
-	yaml = {
-		format = { enable = false },
-	},
-}
-
--- XML/PLIST
--- https://github.com/eclipse/lemminx/blob/main/docs/Configuration.md#all-formatting-options
--- disabled, since it messes up some formatting of Alfred .plist files
-conf.settings.lemminx = {
-	xml = { format = { enabled = false } },
+	yaml = { format = { enable = false } },
 }
 
 --------------------------------------------------------------------------------
@@ -278,7 +268,7 @@ return {
 		},
 	},
 	{ -- auto-install lsp servers
-		"chrisgrieser/mason-lspconfig.nvim",
+		"williamboman/mason-lspconfig.nvim",
 		event = "VeryLazy",
 		dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
 		opts = { ensure_installed = lsp_servers },
