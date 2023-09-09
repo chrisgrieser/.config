@@ -136,13 +136,17 @@ function M.gotoNextIndentChange(direction)
 		lineNum = lineNum + increment
 	end
 
+	-- having the current indent, we jump to the next non-blank
 	local targetLineNum
 	for i = lineNum, stopAtLine, increment do
 		targetLineNum = i
 		local indent = vim.fn.indent(i)
 		if indent ~= currentIndent and not isBlankLine(i) then break end
 	end
+
+	-- set cursor
 	vim.api.nvim_win_set_cursor(0, { targetLineNum, colNum })
+	normal("^")
 end
 
 --------------------------------------------------------------------------------
