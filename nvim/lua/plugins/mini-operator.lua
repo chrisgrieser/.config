@@ -1,6 +1,3 @@
----@diagnostic disable: inject-field
--- used solely for mini.operators
-local M = {}
 local autocmd = vim.api.nvim_create_autocmd
 local u = require("config.utils")
 --------------------------------------------------------------------------------
@@ -25,7 +22,7 @@ local function dedent(lines)
 end
 
 -- run as `init` for mini.operators
-function M.filetypeSpecificEval()
+local function filetypeSpecificEval()
 	autocmd("FileType", {
 		pattern = vim.tbl_keys(evalCmds),
 		callback = function(ctx)
@@ -54,6 +51,7 @@ function M.filetypeSpecificEval()
 
 			-- DOCS https://github.com/echasnovski/mini.operators/blob/main/doc/mini-operators.txt#L214
 			local conf = { evaluate = { func = evalFunc } }
+			---@diagnostic disable-next-line: inject-field
 			vim.b.minioperators_config = vim.b.minioperators_config
 					and vim.tbl_deep_extend("force", conf, vim.b.minioperators_config)
 				or conf
@@ -61,14 +59,11 @@ function M.filetypeSpecificEval()
 	})
 end
 
---------------------------------------------------------------------------------
--- https://github.com/echasnovski/mini.nvim/issues/439#issuecomment-1683665986
-
 -- 1. output lines as notification instead of back into the buffer
 -- 2. if in hammerspoon repo, evaluate hammerspoon-lua instead
 ---@param content object
 ---@return string[] lines
-function M.luaEval(content)
+local function luaEval(content)
 	local input_lines = vim.deepcopy(content.lines) -- Currently needed as `content` is modified, which it shouldn't
 	local parentDir = vim.fn.expand("%:p:h")
 	local MiniOperators = require("mini.operators")
@@ -175,7 +170,7 @@ end
 ---@return string[]
 function multiplyFuncs.typescript(lines) return multiplyFuncs.javascript(lines) end
 
-function M.filetypeSpecificMultiply()
+local function filetypeSpecificMultiply()
 	autocmd("FileType", {
 		pattern = vim.tbl_keys(multiplyFuncs),
 		callback = function(ctx)
@@ -186,6 +181,7 @@ function M.filetypeSpecificMultiply()
 					func = function(content) return multiplyFuncs[ft](content.lines) end,
 				},
 			}
+			---@diagnostic disable-next-line: inject-field
 			vim.b.minioperators_config = vim.b.minioperators_config
 					and vim.tbl_deep_extend("force", conf, vim.b.minioperators_config)
 				or conf
@@ -194,4 +190,31 @@ function M.filetypeSpecificMultiply()
 end
 
 --------------------------------------------------------------------------------
-return M
+return {
+	{
+		"echasnovski/mini.operators",
+		keys = {
+			{ "s", mode = { "n", "x" }, desc = "󰅪 Substitute Operator" },
+			{ "w", mode = { "n", "x" }, desc = "󰅪 Multiply Operator" },
+			{ "#", mode = { "n", "x" }, desc = "󰅪 Evaluate Operator" },
+			{ "sy", mode = { "n", "x" }, desc = "󰅪 Sort Operator" },
+			{ "sx", mode = { "n", "x" }, desc = "󰅪 Exchange Operator" },
+			{ "S", "s$", desc = "󰅪 Substitute to EoL", remap = true },
+			{ "W", "w$", desc = "󰅪 Multiply to EoL", remap = true },
+			{ "'", "#$", desc = "󰅪 Evaluate to EoL", remap = true },
+			{ "sX", "sx$", desc = "󰅪 Exchange to EoL", remap = true },
+			{ "sY", "sy$", desc = "󰅪 Sort to EoL", remap = true },
+		},
+		opts = {
+			replace = { prefix = "s", reindent_linewise = true },
+			multiply = { prefix = "w" },
+			exchange = { prefix = "sx", reindent_linewise = true },
+			sort = { prefix = "sy" },
+			evaluate = { prefix = "#", func = luaEval },
+		},
+		init = function()
+			filetypeSpecificMultiply()
+			filetypeSpecificEval()
+		end,
+	},
+}
