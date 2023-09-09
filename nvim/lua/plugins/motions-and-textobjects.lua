@@ -15,12 +15,13 @@ return {
 	{ -- better % (highlighting, matches across lines, match quotes)
 		"andymass/vim-matchup",
 		event = "UIEnter", -- cannot load on key due to highlights
+		keys = {
+			{ "m", "<Plug>(matchup-%)", desc = "Goto Matching Bracket" },
+		},
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
 			vim.g.matchup_matchparen_offscreen = { method = "popup" } -- empty list to disable
 			vim.g.matchup_text_obj_enabled = 0
-
-			vim.keymap.set("n", "m", "<Plug>(matchup-%)", { desc = "Goto Matching Bracket" })
 		end,
 	},
 	{ -- display line numbers when using `:` to go to a line with
@@ -33,10 +34,10 @@ return {
 		dev = true,
 		opts = { skipInsignificantPunctuation = true },
 		keys = {
-			-- stylua: ignore
-			{"e", "<cmd>lua require('spider').motion('e')<CR>", mode = { "n", "o", "x" }, desc = "󱇫 Spider e" },
-			-- stylua: ignore
-			{"b", "<cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" }, desc = "󱇫 Spider b" },
+			-- stylua: ignore,
+			{ "e", function() require("spider").motion("e") end, mode = { "n", "o", "x" }, desc = "󱇫 Spider e" },
+			-- stylua: ignore,
+			{ "b", function() require("spider").motion("b") end, mode = { "n", "o", "x" }, desc = "󱇫 Spider b" },
 		},
 	},
 	-----------------------------------------------------------------------------
