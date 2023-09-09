@@ -121,10 +121,10 @@ function refreshKeywordCache(cachePath) {
 	// check for the possibility of user having all searches disabled
 	const preinstallKeywords = [];
 	if (preinstalledSearches) {
-		preinstalledSearches.split("\r").forEach((line) => {
+		for (const line of preinstalledSearches.split("\r")) {
 			const searchKeyword = line.split(">")[1].split("<")[0];
 			preinstallKeywords.push(searchKeyword);
-		});
+		}
 	}
 
 	// CASE 6: User Searches
@@ -134,10 +134,10 @@ function refreshKeywordCache(cachePath) {
 	).customSites;
 	const userSearchKeywords = [];
 	if (userSearches) {
-		Object.keys(userSearches).forEach((uuid) => {
+		for (const uuid in Object.keys(userSearches)) {
 			const searchObj = userSearches[uuid];
 			if (searchObj.enabled) userSearchKeywords.push(searchObj.keyword);
-		});
+		}	
 	}
 
 	// CASE 7: Keywords from this workflow
@@ -256,9 +256,8 @@ function writeInstantAnswer(bufferPath, instantAnswer) {
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
-// rome-ignore lint/nursery/noExcessiveComplexity: <explanation>
-function  run(argv) {
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
+function run(argv) {
 	const timelogStart = +new Date();
 	let favIconTotalMs = 0;
 
@@ -281,7 +280,7 @@ function  run(argv) {
 	//───────────────────────────────────────────────────────────────────────────
 
 	/** @type{"fallback"|"default"} */
-	let mode = $.NSProcessInfo.processInfo.environment.objectForKey("mode").js || "default";
+	const mode = $.NSProcessInfo.processInfo.environment.objectForKey("mode").js || "default";
 
 	// HACK script filter is triggered with any letter of the roman alphabet, and
 	// then prepended here, to trigger this workflow with any search term

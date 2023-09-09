@@ -1,7 +1,7 @@
 return {
 	{
 		"linux-cultist/venv-selector.nvim",
-		dependencies = { "chrisgrieser/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
+		dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
 		cmd = { "VenvSelect", "VenvSelectCached" },
 		config = function()
 			require("venv-selector").setup {
