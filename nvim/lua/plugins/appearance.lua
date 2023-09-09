@@ -77,6 +77,7 @@ return {
 		},
 	},
 	{ -- Nerdfont filetype icons
+	-- https://www.reddit.com/r/neovim/comments/12lf0ke/comment/jg6idvr/
 		"nvim-tree/nvim-web-devicons",
 		opts = {
 			default = true, -- use default icon as fallback
@@ -179,8 +180,6 @@ return {
 	{ -- :bnext & :bprevious get visual overview of buffers
 		"ghillb/cybu.nvim",
 		keys = {
-			-- not mapping via <Plug>, since that prevents lazyloading
-			-- functions names from: https://github.com/ghillb/cybu.nvim/blob/c0866ef6735a85f85d4cf77ed6d9bc92046b5a99/plugin/cybu.lua#L38
 			{ "<BS>", function() require("cybu").cycle("next") end, desc = "󰽙 Next Buffer" },
 			{ "<S-BS>", function() require("cybu").cycle("prev") end, desc = "󰽙 Previous Buffer" },
 		},
@@ -204,10 +203,7 @@ return {
 			},
 			behavior = {
 				mode = {
-					default = {
-						switch = "immediate",
-						view = "paging",
-					},
+					default = { switch = "immediate", view = "paging" },
 				},
 			},
 		},

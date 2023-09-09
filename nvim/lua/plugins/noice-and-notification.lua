@@ -2,7 +2,6 @@ local u = require("config.utils")
 
 --------------------------------------------------------------------------------
 
--- https://www.reddit.com/r/neovim/comments/12lf0ke/comment/jg6idvr/
 -- DOCS https://github.com/folke/noice.nvim#-routes
 local routes = {
 	-- write messages
@@ -19,7 +18,7 @@ local routes = {
 
 	-- nvim-treesitter
 	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
-	{ filter = { event = "msg_show", find = "All parsers are up-to-date!" }, view = "mini" },
+	{ filter = { event = "msg_show", find = "^All parsers are up%-to%-date" }, view = "mini" },
 
 	-- Word added to spellfile via
 	{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
@@ -33,11 +32,6 @@ local routes = {
 		},
 		view = "mini",
 	},
-
-	-- Codeium.nvim
-	{ filter = { event = "notify", find = "^Codeium.nvim:" }, view = "mini" },
-	{ filter = { event = "notify", find = "downloading server" }, view = "mini" },
-	{ filter = { event = "notify", find = "unpacking server" }, view = "mini" },
 
 	-- unneeded info on search patterns
 	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
