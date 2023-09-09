@@ -28,26 +28,12 @@ optl.spell = false
 --------------------------------------------------------------------------------
 -- MARKDOWN-SPECIFIC KEYMAPS
 
--- Build / Preview
-keymap(
-	"n",
-	"<localleader><localleader>",
-	"<Plug>MarkdownPreview",
-	{ desc = " Preview", buffer = true }
-)
-
 -- do not ignore type "string" in md, since that's what headings in markdown are
 -- stylua: ignore
 keymap("n", "gs", function ()
 	require("telescope.builtin").lsp_document_symbols { ignore_symbols = {}, }
 end, { desc = "󰒕 Markdown Headings", buffer = true })
 
-keymap(
-	"n",
-	"<localleader>c",
-	function() require("femaco.edit").edit_code_block() end,
-	{ desc = " Edit Code Block", buffer = true }
-)
 
 -- Format Table
 keymap(
@@ -144,9 +130,9 @@ keymap("x", "<D-k>", "<Esc>`<i[<Esc>`>la]()<Esc>hp", { desc = "  Link", bu
 keymap("i", "<D-k>", "[]()<Left><Left><Left>", { desc = "  Link", buffer = true })
 
 -- cmd+b: bold
-keymap("n", "<D-b>", "bi__<Esc>ea__<Esc>", { desc = "  Bold", buffer = true })
-keymap("x", "<D-b>", "<Esc>`<i__<Esc>`>lla__<Esc>", { desc = "  Bold", buffer = true })
-keymap("i", "<D-b>", "____<Left><Left>", { desc = "  Bold", buffer = true })
+keymap("n", "<D-b>", "bi__<Esc>ea**<Esc>", { desc = "  Bold", buffer = true })
+keymap("x", "<D-b>", "<Esc>`<i**<Esc>`>lla**<Esc>", { desc = "  Bold", buffer = true })
+keymap("i", "<D-b>", "****<Left><Left>", { desc = "  Bold", buffer = true })
 
 -- cmd+i: italics
 keymap("n", "<D-i>", "bi*<Esc>ea*<Esc>", { desc = "  Italics", buffer = true })
