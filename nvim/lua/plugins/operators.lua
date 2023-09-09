@@ -2,7 +2,6 @@ return {
 	{ -- comment
 		"numToStr/Comment.nvim",
 		keys = {
-			-- mnemonic: [q]uiet text
 			{ "q", mode = { "n", "x" }, desc = " Comment Operator" },
 			{ "Q", desc = " Append Comment at EoL" },
 			{ "qo", desc = " Comment below" },
@@ -14,25 +13,15 @@ return {
 			extra = { eol = "Q", above = "qO", below = "qo" },
 		},
 	},
-	{ -- add docstrings / annotation comments
+	{ -- docstrings / annotation comments
 		"danymat/neogen",
 		opts = true,
 		keys = {
-			{
-				"qf",
-				function() require("neogen").generate { type = "func" } end,
-				desc = " Function Annotations",
-			},
-			{
-				"qF",
-				function() require("neogen").generate { type = "file" } end,
-				desc = " File Annotations",
-			},
-			{
-				"qt",
-				function() require("neogen").generate { type = "type" } end,
-				desc = " Type Annotations",
-			},
+			-- stylua: ignore start
+			{ "qf", function() require("neogen").generate { type = "func" } end, desc = " Function Annotation" },
+			{ "qF", function() require("neogen").generate { type = "file" } end, desc = " File Annotation" },
+			{ "qt", function() require("neogen").generate { type = "type" } end, desc = " Type Annotation" },
+			-- stylua: ignore end,
 		},
 	},
 	{ -- substitute, evaluate, exchange, sort, duplicate
@@ -65,16 +54,15 @@ return {
 		"kylechui/nvim-surround",
 		keys = {
 			{ "ys", desc = "󰅪 Add Surround Operator" },
-			{ "yS", desc = "󰅪 Surround to EoL" },
+			{ "s", mode = "x", desc = "󰅪 Add Surround Operator" },
+			{ "yS", "ys$", desc = "󰅪 Surround to EoL", remap = true },
 			{ "ds", desc = "󰅪 Delete Surround Operator" },
 			{ "cs", desc = "󰅪 Change Surround Operator" },
-			{ "s", mode = "x", desc = "󰅪 Add Surround Operator" },
 		},
 		config = function()
 			local u = require("config.utils")
 
 			-- requires unmapping yS from normal_line below
-			vim.keymap.set("n", "yS", "ys$", { desc = "󰅪 Surround to EoL", remap = true })
 
 			-- https://github.com/kylechui/nvim-surround/blob/main/doc/nvim-surround.txt#L483
 			local config = require("nvim-surround.config")
