@@ -34,8 +34,16 @@ return {
 				return "󱥒" .. venv
 			end)
 		end,
-		-- auto-select venv on entering python buffer -- https://github.com/linux-cultist/venv-selector.nvim#-automate
 		init = function()
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "markdown",
+				callback = function()
+					-- stylua: ignore
+					vim.keymap.set("n", "<localleader>v", "<cmd>VenvSelect<CR>", { desc = "󱥒 VenvSelect", buffer = true })
+				end,
+			})
+
+			-- auto-select venv on entering python buffer -- https://github.com/linux-cultist/venv-selector.nvim#-automate
 			vim.api.nvim_create_autocmd("BufReadPost", {
 				callback = function()
 					if vim.bo.ft ~= "python" then return end
