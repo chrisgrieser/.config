@@ -28,7 +28,7 @@ local lsp_servers = {
 	"html",
 	"ltex", -- latex/languagetool (requires `openjdk`)
 
-	-- TODO pending: https://github.com/neovim/nvim-lspconfig/pull/2790
+	-- TODO 
 	-- "biome", -- ts/js/json, cannot use LSP for formatting, https://github.com/biomejs/biome/discussions/87
 }
 
@@ -289,8 +289,7 @@ return {
 		opts = { ensure_installed = lsp_servers },
 	},
 	{ -- configure LSPs
-		-- TODO using my fork until biome config is merged: https://github.com/neovim/nvim-lspconfig/pull/2790
-		"chrisgrieser/nvim-lspconfig",
+		"neovim/nvim-lspconfig",
 		dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config
 		dev = true,
 		init = setupAllLsps,

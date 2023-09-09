@@ -14,8 +14,8 @@
 	},
 	"ignore (biome formatter)": {
 		"prefix": "ignore (biome formatter)",
-		"body": "// rome-ignore format: ${1:explanation}",
-		"description": "Ignores the next block of code. TODO: switch to biome once it works"
+		"body": "// biome-ignore format: ${1:explanation}",
+		"description": "Ignores the next block of code."
 	},
 	"safe title": {
 		"prefix": "safe title",

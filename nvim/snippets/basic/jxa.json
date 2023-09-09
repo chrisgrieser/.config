@@ -169,7 +169,7 @@
 			"\t.applicationProcesses.where({ frontmost: true })",
 			"\t.name()[0];",
 			"\tconst frontmostApp = Application(frontmostAppName);",
-			"\t// rome-ignore format: long",
+			"\t// biome-ignore format: long",
 			"\tconst chromiumVariants = [ \"Google Chrome\", \"Chromium\", \"Opera\", \"Vivaldi\", \"Brave Browser\", \"Microsoft Edge\", \"Arc\" ];",
 			"\tconst webkitVariants = [\"Safari\", \"Webkit\"];",
 			"\tlet title, url;",
