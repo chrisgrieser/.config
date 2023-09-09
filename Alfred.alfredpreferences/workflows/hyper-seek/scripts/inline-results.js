@@ -97,7 +97,6 @@ function refreshKeywordCache(cachePath) {
 						const defaultValue = workflowConfig.find(
 							(/** @type {{ variable: string; }} */ option) => option.variable === varName,
 						).config.default;
-						console.log("🪓 defaultValue:", defaultValue);
 						keywords.push(defaultValue);
 					} catch (_error) {}
 				}
@@ -136,7 +135,7 @@ function refreshKeywordCache(cachePath) {
 	if (userSearches) {
 		for (const uuid in Object.keys(userSearches)) {
 			const searchObj = userSearches[uuid];
-			if (searchObj.enabled) userSearchKeywords.push(searchObj.keyword);
+			if (searchObj?.enabled) userSearchKeywords.push(searchObj.keyword);
 		}	
 	}
 
