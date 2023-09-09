@@ -15,9 +15,7 @@ return {
 		},
 	},
 	{ -- add docstrings / annotation comments
-		"chrisgrieser/neogen",
-		dev = true,
-		lazy = false,
+		"danymat/neogen",
 		opts = true,
 		keys = {
 			{
