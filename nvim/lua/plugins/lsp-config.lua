@@ -27,9 +27,7 @@ local lsp_servers = {
 	"lemminx", -- xml/plist
 	"html",
 	"ltex", -- latex/languagetool (requires `openjdk`)
-
-	-- TODO 
-	-- "biome", -- ts/js/json, cannot use LSP for formatting, https://github.com/biomejs/biome/discussions/87
+	"biome", -- ts/js/json, cannot use LSP for formatting, https://github.com/biomejs/biome/discussions/87
 }
 
 --------------------------------------------------------------------------------
@@ -264,9 +262,6 @@ local function setupAllLsps()
 			init_options = conf.init_options[lsp],
 		}
 	end
-
-	-- TODO remove this once available in lspconfig, pending: https://github.com/neovim/nvim-lspconfig/pull/2790
-	require("lspconfig").biome.setup { capabilities = lspCapabilities }
 end
 
 --------------------------------------------------------------------------------
@@ -283,9 +278,9 @@ return {
 		},
 	},
 	{ -- auto-install lsp servers
-		"williamboman/mason-lspconfig.nvim",
+		"chrisgrieser/mason-lspconfig.nvim",
 		event = "VeryLazy",
-		dependencies = "williamboman/mason.nvim",
+		dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
 		opts = { ensure_installed = lsp_servers },
 	},
 	{ -- configure LSPs
