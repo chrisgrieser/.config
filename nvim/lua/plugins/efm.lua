@@ -13,10 +13,8 @@ local toolsToAutoinstall = {
 	"proselint",
 	"bibtex-tidy",
 	"prettier", -- only yaml formatter preserving blank lines https://github.com/mikefarah/yq/issues/515
-	-- INFO stylelint included in mason, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
 
-	-- TODO installing via MasonTools instead of mason-lspconfig
-	"biome",
+	-- INFO stylelint included in mason, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
 }
 
 --------------------------------------------------------------------------------
