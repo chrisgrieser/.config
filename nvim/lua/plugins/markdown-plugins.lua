@@ -35,17 +35,13 @@ return {
 		build = "cd app && npm install",
 		init = function()
 			vim.g.mkdp_preview_options = { disable_sync_scroll = 0 }
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "markdown",
-				callback = function()
-					vim.keymap.set(
-						"n",
-						"<localleader><localleader>",
-						"<Plug>MarkdownPreview",
-						{ desc = " Preview", buffer = true }
-					)
-				end,
-			})
+			u.setupFiletypeKeymap(
+				"markdown",
+				"n",
+				"<localleader><localleader>",
+				"<Plug>MarkdownPreview",
+				{ desc = " Preview" }
+			)
 		end,
 	},
 }

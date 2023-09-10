@@ -96,11 +96,11 @@ end
 
 ---@param filetype string|string[]
 function M.setupFiletypeKeymap(filetype, ...)
-	local args = { ... }
-	args[4].buffer = true
+	local mode, lhs, rhs, opts = unpack({ ... })
+	opts.buffer = true
 	vim.api.nvim_create_autocmd("FileType", {
 		pattern = filetype,
-		callback = function() vim.keymap.set(args) end,
+		callback = function() vim.keymap.set(mode, lhs, rhs, opts) end,
 	})
 end
 
