@@ -1,33 +1,49 @@
 local M = {}
 
---------------------------------------------------------------------------------
-
 local g = vim.g
 local cmd = vim.cmd
+
+---@param msg string
+---@param level? "info"|"trace"|"debug"|"warn"|"error"
+local function notify(msg, level)
+	if not level then level = "info" end
+	local pluginName = "Quickfix"
+	vim.notify(msg, vim.log.levels[level:upper()], { title = pluginName })
+end
 
 ---checks whether quickfixlist is empty and notifies if it is
 ---@nodiscard
 ---@return boolean
 local function quickFixIsEmpty()
-	if #vim.fn.getqflist() == 0 then
-		vim.notify(" Quickfix List empty.", vim.log.levels.WARN)
-		return true
-	end
-	return false
+	local isEmpty = #vim.fn.getqflist() == 0
+	if isEmpty then notify("Quickfix list is empty.", "warn") end
+	return isEmpty
 end
+
+---@return integer
+local function countCurQuickfix() return #vim.fn.getqflist() end
+
+local function openFoldUnderCursor() cmd.normal { "zv", bang = true } end
 
 --------------------------------------------------------------------------------
 
--- HELPERS
-
--- statusline component, showing current and total quickfix item
+-- STATUSLINE COMPONENT
 function M.counter()
-	local totalItems = #vim.fn.getqflist()
+	local totalItems = countCurQuickfix()
 	if totalItems == 0 then return "" end
 	local out = " "
 	if g.qfCount then out = out .. tostring(g.qfCount) .. "/" end
 	out = out .. tostring(totalItems)
 	return out
+end
+
+--------------------------------------------------------------------------------
+
+-- when user updates quickfixlist, also works with Telescope
+function M.setup()
+	vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+		callback = function() g.qfCount = nil end,
+	})
 end
 
 --------------------------------------------------------------------------------
@@ -47,25 +63,27 @@ function M.next()
 	local wentToNext = pcall(function() cmd("silent cnext") end)
 	if wentToNext then
 		g.qfCount = g.qfCount + 1
-		vim.cmd.normal{"zv", bang = true} -- open fold(s) under cursor
+		openFoldUnderCursor()
 	else
 		cmd("silent cfirst")
 		g.qfCount = 1
+		notify("Wrapped to beginning", "trace")
 	end
 end
 
 ---goto previous quickfix and wrap around
 function M.previous()
 	if quickFixIsEmpty() then return end
-	if not g.qfCount then g.qfCount = #(vim.fn.getqflist()) end -- initialize counter
+	if not g.qfCount then g.qfCount = countCurQuickfix() end -- initialize counter
 
 	local wentToPrevious = pcall(function() cmd("silent cprevious") end)
 	if wentToPrevious then
 		g.qfCount = g.qfCount - 1
-		vim.cmd.normal{"zv", bang = true} -- open fold(s) under cursor
+		openFoldUnderCursor()
 	else
 		cmd("silent clast")
-		g.qfCount = #(vim.fn.getqflist())
+		g.qfCount = countCurQuickfix()
+		notify("Wrapped to end", "trace")
 	end
 end
 

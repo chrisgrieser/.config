@@ -9,11 +9,7 @@ local keymappings_I = {
 	["<PageUp>"] = "preview_scrolling_up",
 	["<C-h>"] = "cycle_history_prev",
 	["<C-l>"] = "cycle_history_next",
-	["<D-s>"] = function(prompt_bufnr)
-		require("funcs.quickfix").deleteList() -- delete current list
-		-- smart send = sends selected, or if none selected, sends all
-		require("telescope.actions").smart_send_to_qflist(prompt_bufnr)
-	end,
+	["<D-s>"] = "smart_send_to_qflist", -- sends selected, or if none selected, sends all
 	["<Tab>"] = "move_selection_worse",
 	["<S-Tab>"] = "move_selection_better",
 	["<Down>"] = "move_selection_worse",
