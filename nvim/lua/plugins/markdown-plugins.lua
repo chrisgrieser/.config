@@ -1,3 +1,6 @@
+local u = require("config.utils")
+--------------------------------------------------------------------------------
+
 return {
 	{ -- emphasized headers & code blocks
 		"lukas-reineke/headlines.nvim",
@@ -12,17 +15,13 @@ return {
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		opts = {},
 		init = function()
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "markdown",
-				callback = function()
-					vim.keymap.set(
-						"n",
-						"<localleader>c",
-						function() require("femaco.edit").edit_code_block() end,
-						{ desc = " Edit Code Block", buffer = true }
-					)
-				end,
-			})
+			u.setupFiletypeKeymap(
+				"markdown",
+				"n",
+				"<localleader>c",
+				function() require("femaco.edit").edit_code_block() end,
+				{ desc = " Edit Code Block" }
+			)
 		end,
 	},
 	{ -- auto-bullets for markdown-like filetypes

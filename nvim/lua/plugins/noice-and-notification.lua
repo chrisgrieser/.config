@@ -54,22 +54,21 @@ local routes = {
 return {
 	{ -- Message & Command System Overhaul
 		"folke/noice.nvim",
-		dependencies = { "MunifTanjim/nui.nvim", "chrisgrieser/nvim-notify" },
-		event = "VeryLazy",
-		init = function()
-			-- stylua: ignore
-			vim.keymap.set("n", "<Esc>", function() vim.cmd.Noice("dismiss") end, { desc = "󰎟 Clear Notifications" })
-
-			-- Toggle Log
-			vim.keymap.set({ "n", "x", "i" }, "<D-0>", function()
-				vim.cmd.Noice("dismiss")
-				vim.cmd.Noice("history")
-			end, { desc = "󰎟 Notification Log" })
-		end,
+		event = "UIEnter",
+		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
+		keys = {
+			{ "<Esc>", function() vim.cmd.Noice("dismiss") end, desc = "󰎟 Clear Notifications" },
+			{
+				"<D-0>",
+				function()
+					vim.cmd.Noice("dismiss")
+					vim.cmd.Noice("history")
+				end,
+				mode = { "n", "x", "i" },
+				desc = "󰎟 Notification Log",
+			},
+		},
 		opts = {
-			-- format = {
-			-- 	date = { format = "" },
-			-- },
 			routes = routes,
 			cmdline = {
 				view = "cmdline", -- cmdline|cmdline_popup
@@ -158,34 +157,38 @@ return {
 		},
 	},
 	{ -- Notifications
-		"chrisgrieser/nvim-notify",
-		dev = true,
+		"rcarriga/nvim-notify",
+		keys = {
+			{
+				"<leader>ln",
+				function()
+					local trace = vim.log.levels.TRACE
+					local history = require("notify").history()
+					if #history == 0 then
+						vim.notify("No Notification in this session.", trace, { title = "nvim-notify" })
+						return
+					end
+					local msg = history[#history].message
+					vim.fn.setreg("+", msg)
+					vim.notify("Last Notification copied.", trace, { title = "nvim-notify" })
+				end,
+				desc = "󰎟 Copy Last Notification",
+			},
+		},
 		opts = {
 			render = "wrapped-compact",
 			top_down = false,
-			max_width = 40,
+			max_width = 45,
 			minimum_width = 15,
 			level = 0, -- minimum severity level to display (0 = display all)
 			timeout = 7500,
 			stages = "slide", -- slide|fade
 			icons = { DEBUG = "", ERROR = "", INFO = "", TRACE = "󱖔", WARN = "" },
 			on_open = function(win)
+				-- set borderstyle
 				if not vim.api.nvim_win_is_valid(win) then return end
 				vim.api.nvim_win_set_config(win, { border = u.borderStyle })
 			end,
 		},
-		init = function()
-			vim.keymap.set("n", "<leader>ln", function()
-				local trace = vim.log.levels.TRACE
-				local history = require("notify").history()
-				if #history == 0 then
-					vim.notify("No Notification in this session.", trace, { title = "nvim-notify" })
-					return
-				end
-				local msg = history[#history].message
-				vim.fn.setreg("+", msg)
-				vim.notify("Last Notification copied.", trace, { title = "nvim-notify" })
-			end, { desc = "󰎟 Copy Last Notification" })
-		end,
 	},
 }
