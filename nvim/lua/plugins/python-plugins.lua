@@ -1,3 +1,6 @@
+local u = require("config.utils")
+--------------------------------------------------------------------------------
+
 return {
 	{
 		"linux-cultist/venv-selector.nvim",
@@ -25,7 +28,7 @@ return {
 					end,
 				},
 			}
-			require("config.utils").addToLuaLine("tabline", "lualine_a", function()
+			u.addToLuaLine("tabline", "lualine_a", function()
 				if vim.bo.ft ~= "python" then return "" end
 				local venv = require("venv-selector").get_active_venv()
 				if venv == "" then return "" end
@@ -35,18 +38,18 @@ return {
 			end)
 		end,
 		init = function()
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "markdown",
-				callback = function()
-					-- stylua: ignore
-					vim.keymap.set("n", "<localleader>v", "<cmd>VenvSelect<CR>", { desc = "󱥒 VenvSelect", buffer = true })
-				end,
-			})
+			u.setupFiletypeKeymap(
+				"python",
+				"n",
+				"<localleader>v",
+				"<cmd>VenvSelect<CR>",
+				{ desc = "󱥒 VenvSelect"}
+			)
 
 			-- auto-select venv on entering python buffer -- https://github.com/linux-cultist/venv-selector.nvim#-automate
-			vim.api.nvim_create_autocmd("BufReadPost", {
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "python",
 				callback = function()
-					if vim.bo.ft ~= "python" then return end
 					vim.defer_fn(function()
 						local venv = vim.fn.findfile("pyproject.toml", vim.fn.getcwd() .. ";")
 						if venv ~= "" then require("venv-selector").retrieve_from_cache() end
