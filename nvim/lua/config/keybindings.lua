@@ -107,8 +107,9 @@ end, vim.api.nvim_create_namespace("auto_nohl"))
 keymap("n", "X", "<cmd>normal!mz$x`z<CR>", { desc = "󱎘 Delete char at EoL" })
 
 -- QUICKFIX
-keymap("n", "gq", function() require("funcs.quickfix").next() end, { desc = " Next Quickfix" })
-keymap("n", "gQ", function() require("funcs.quickfix").previous() end, { desc = " Prev Quickfix" })
+require("funcs.quickfix").setup()
+keymap("n", "gq", require("funcs.quickfix").next, { desc = " Next Quickfix" })
+keymap("n", "gQ", require("funcs.quickfix").previous, { desc = " Prev Quickfix" })
 keymap("n", "dQ", require("funcs.quickfix").deleteList, { desc = " Empty Quickfix List" })
 
 -- COMMENTS
