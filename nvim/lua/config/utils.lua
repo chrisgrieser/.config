@@ -94,6 +94,16 @@ function M.leaderSubkey(key, label)
 	if ok then whichKey.register { ["<leader>" .. key] = { name = " " .. label } } end
 end
 
+---@param filetype string|string[]
+function M.setupFiletypeKeymap(filetype, ...)
+	local args = { ... }
+	args[4].buffer = true
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = filetype,
+		callback = function() vim.keymap.set(args) end,
+	})
+end
+
 ---Adds a component to the lualine after lualine was already set up. Useful for
 ---lazyloading.
 ---@param component function|table the component forming the lualine
