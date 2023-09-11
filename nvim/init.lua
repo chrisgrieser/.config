@@ -36,3 +36,5 @@ safeRequire("config.textobject-keymaps")
 
 safeRequire("config.user-commands")
 safeRequire("config.abbreviations")
+
+safeRequire("funcs.pulling-strings")
