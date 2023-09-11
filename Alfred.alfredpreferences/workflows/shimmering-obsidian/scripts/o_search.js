@@ -187,21 +187,24 @@ function run() {
 		const filename = file.fileName;
 		const relativePath = file.relativePath;
 		const absolutePath = vaultPath + "/" + relativePath;
+		const isBookmarked = starsAndBookmarks.includes(relativePath);
+		const isRecent = recentFiles.includes(relativePath);
 
+		// matching for Alfred
 		const tagMatcher = file.tags ? " #" + file.tags.join(" #") : "";
+		let additionalMatcher = "";
+		if (isRecent) additionalMatcher += "recent ";
+		if (isBookmarked) additionalMatcher += "starred bookmarked ";
+
+		// pprioritization of sorting
+		const prioritzedSorting = isRecent || isBookmarked;
+		const insertVia = prioritzedSorting ? "unshift" : "push";
 
 		// icon & emojis
 		let iconpath = "icons/note.png";
 		let emoji = "";
-		let additionalMatcher = "";
-		if (starsAndBookmarks.includes(relativePath)) {
-			emoji += "🔖 ";
-			additionalMatcher += "starred bookmarked ";
-		}
-		if (recentFiles.includes(relativePath)) {
-			emoji += "🕑 ";
-			additionalMatcher += "recent ";
-		}
+		if (isBookmarked) emoji += "🔖 ";
+		if (isRecent) emoji += "🕑 ";
 		if (filename.toLowerCase().includes("kanban")) iconpath = "icons/kanban.png";
 		if ($.getenv("remove_emojis") === "1") emoji = "";
 
@@ -222,7 +225,9 @@ function run() {
 				file.backlinks,
 		); // no relativePath => unresolved link
 		if (!hasLinks) hasLinks = externalLinkRegex.test(readFile(absolutePath)); // readFile only executed when no other links found for performance
-		const linksSubtitle = hasLinks ? "⇧: Browse Links in Note" : "⛔ Note without Outgoing Links or Backlinks";
+		const linksSubtitle = hasLinks
+			? "⇧: Browse Links in Note"
+			: "⛔ Note without Outgoing Links or Backlinks";
 
 		// censor note?
 		const isPrivateNote = file.frontmatter?.cssclass?.includes("private");
@@ -230,7 +235,7 @@ function run() {
 		const displayName = applyCensoring ? filename.replace(/./g, censorChar) : filename;
 
 		// Notes (file names)
-		resultsArr.push({
+		resultsArr[insertVia]({
 			title: emoji + superchargedIcon + displayName + superchargedIcon2,
 			match: alfredMatcher(filename) + tagMatcher + " filename name title",
 			subtitle: "▸ " + parentFolder(relativePath),
@@ -247,9 +252,9 @@ function run() {
 		// Aliases
 		if (file.aliases) {
 			for (const alias of file.aliases) {
-				const displayAlias = (applyCensoring) ? alias.replace(/./g, censorChar) : alias;
-				resultsArr.push({
-					title: superchargedIcon + displayAlias + superchargedIcon2,
+				const displayAlias = applyCensoring ? alias.replace(/./g, censorChar) : alias;
+				resultsArr[insertVia]({
+					title: emoji + superchargedIcon + displayAlias + superchargedIcon2,
 					match: additionalMatcher + "alias " + alfredMatcher(alias),
 					subtitle: "↪ " + displayName,
 					arg: relativePath,
@@ -269,19 +274,19 @@ function run() {
 		for (const heading of file.headings) {
 			const hName = heading.heading;
 			const hLevel = heading.level;
-			if (headingIgnore[hLevel]) return; // skips iteration if heading has been configured as ignore
-			iconpath = "icons/headings/h" + hLevel.toString() + ".png";
+			if (headingIgnore[hLevel]) continue; // skips iteration if heading has been configured as ignore
+			const headingIconpath = `icons/headings/h${hLevel}.png`;
 			const matchStr = [`h${hLevel}`, alfredMatcher(hName), alfredMatcher(filename)].join(" ");
 			const displayHeading = applyCensoring ? hName.replace(/./g, censorChar) : hName;
 
-			resultsArr.push({
+			resultsArr[insertVia]({
 				title: displayHeading,
 				match: matchStr,
 				subtitle: "➣ " + displayName,
 				arg: relativePath + "#" + hName,
 				uid: relativePath + "#" + hName,
 				quicklookurl: absolutePath,
-				icon: { path: iconpath },
+				icon: { path: headingIconpath },
 				mods: {
 					alt: { arg: relativePath },
 					shift: {
@@ -299,8 +304,19 @@ function run() {
 		const name = file.basename;
 		const relativePath = file.relativePath;
 		const denyForCanvas = { valid: false, subtitle: "⛔ Cannot do that with a canvas." };
+		const isBookmarked = starsAndBookmarks.includes(relativePath);
+		const isRecent = recentFiles.includes(relativePath);
 
-		resultsArr.push({
+		// matching for Alfred
+		let additionalMatcher = "";
+		if (isRecent) additionalMatcher += "recent ";
+		if (isBookmarked) additionalMatcher += "starred bookmarked ";
+
+		// pprioritization of sorting
+		const prioritzedSorting = isRecent || isBookmarked;
+		const insertVia = prioritzedSorting ? "unshift" : "push";
+
+		resultsArr[insertVia]({
 			title: name,
 			match: alfredMatcher(name) + " canvas",
 			subtitle: "▸ " + parentFolder(relativePath),
