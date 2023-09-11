@@ -61,7 +61,7 @@ function run() {
 		return JSON.stringify({
 			items: [
 				{
-					title: "!� No vault metadata found.",
+					title: "🚫 No vault metadata found.",
 					subtitle: "Please run the Alfred command `osetup` first. This only has to be done once.",
 					valid: false,
 				},
@@ -168,12 +168,11 @@ function run() {
 
 	// ignored headings
 	const hLVLignore = $.getenv("h_lvl_ignore");
-	const headingIgnore = [true];
+	const headingIgnore = [];
 	for (let i = 1; i < 7; i++) {
-		if (hLVLignore.includes(i.toString())) headingIgnore.push(true);
-		else headingIgnore.push(false);
+		const shouldIgnore = hLVLignore.includes(i.toString());
+		headingIgnore[i] = shouldIgnore;
 	}
-
 
 	// exclude cssclass: private
 	const censorChar = $.getenv("censor_char");
@@ -183,13 +182,13 @@ function run() {
 	// CONSTRUCTION OF JSON FOR ALFRED
 
 	// FILES
-	for (const file of fileArray) {
+	// biome-ignore lint/complexity/noForEach: breaks workflow?
+	fileArray.forEach((file) => {
 		const filename = file.fileName;
 		const relativePath = file.relativePath;
 		const absolutePath = vaultPath + "/" + relativePath;
 
-		let tagMatcher = "";
-		if (file.tags) tagMatcher = " #" + file.tags.join(" #");
+		const tagMatcher = file.tags ? " #" + file.tags.join(" #") : "";
 
 		// icon & emojis
 		let iconpath = "icons/note.png";
@@ -210,9 +209,8 @@ function run() {
 		let superchargedIcon2 = "";
 		if (superIconList.length > 0 && file.tags) {
 			for (const pair of superIconList) {
-				const tag = pair.split(",")[0].toLowerCase().replaceAll("#", "");
-				const icon = pair.split(",")[1];
-				const icon2 = pair.split(",")[2];
+				let [tag, icon, icon2] = pair.split(",");
+				tag = tag.toLowerCase().replaceAll("#", "");
 				if (file.tags.includes(tag) && icon) superchargedIcon = icon + " ";
 				else if (file.tags.includes(tag) && icon2) superchargedIcon2 = " " + icon2;
 			}
@@ -226,9 +224,9 @@ function run() {
 		if (!hasLinks) hasLinks = externalLinkRegex.test(readFile(absolutePath)); // readFile only executed when no other links found for performance
 		const linksSubtitle = hasLinks ? "⇧: Browse Links in Note" : "⛔ Note without Outgoing Links or Backlinks";
 
+		// censor note?
 		const isPrivateNote = file.frontmatter?.cssclass?.includes("private");
 		const applyCensoring = isPrivateNote && privacyModeOn;
-
 		const displayName = applyCensoring ? filename.replace(/./g, censorChar) : filename;
 
 		// Notes (file names)
@@ -242,17 +240,14 @@ function run() {
 			uid: relativePath,
 			icon: { path: iconpath },
 			mods: {
-				shift: {
-					valid: hasLinks,
-					subtitle: linksSubtitle,
-				},
+				shift: { valid: hasLinks, subtitle: linksSubtitle },
 			},
 		});
 
 		// Aliases
 		if (file.aliases) {
 			for (const alias of file.aliases) {
-				const displayAlias = applyCensoring ? alias.replace(/./g, censorChar) : alias;
+				const displayAlias = (applyCensoring) ? alias.replace(/./g, censorChar) : alias;
 				resultsArr.push({
 					title: superchargedIcon + displayAlias + superchargedIcon2,
 					match: additionalMatcher + "alias " + alfredMatcher(alias),
@@ -263,10 +258,7 @@ function run() {
 					uid: alias + "_" + relativePath,
 					icon: { path: "icons/alias.png" },
 					mods: {
-						shift: {
-							valid: hasLinks,
-							subtitle: linksSubtitle,
-						},
+						shift: { valid: hasLinks, subtitle: linksSubtitle },
 					},
 				});
 			}
@@ -278,8 +270,8 @@ function run() {
 			const hName = heading.heading;
 			const hLevel = heading.level;
 			if (headingIgnore[hLevel]) return; // skips iteration if heading has been configured as ignore
-			const headingIcon = "icons/headings/h" + hLevel.toString() + ".png";
-			const matchStr = ["h${hLevel}", alfredMatcher(hName), alfredMatcher(filename)].join(" ");
+			iconpath = "icons/headings/h" + hLevel.toString() + ".png";
+			const matchStr = [`h${hLevel}`, alfredMatcher(hName), alfredMatcher(filename)].join(" ");
 			const displayHeading = applyCensoring ? hName.replace(/./g, censorChar) : hName;
 
 			resultsArr.push({
@@ -287,20 +279,20 @@ function run() {
 				match: matchStr,
 				subtitle: "➣ " + displayName,
 				arg: relativePath + "#" + hName,
-				quicklookurl: absolutePath,
 				uid: relativePath + "#" + hName,
-				icon: { path: headingIcon },
+				quicklookurl: absolutePath,
+				icon: { path: iconpath },
 				mods: {
+					alt: { arg: relativePath },
 					shift: {
 						valid: hasLinks,
 						subtitle: linksSubtitle,
 						arg: relativePath,
 					},
-					alt: { arg: relativePath },
 				},
 			});
 		}
-	}
+	});
 
 	// CANVASES
 	for (const file of canvasArray) {
