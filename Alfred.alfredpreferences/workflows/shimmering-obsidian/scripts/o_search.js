@@ -1,5 +1,4 @@
 #!/usr/bin/env osascript -l JavaScript
-
 ObjC.import("stdlib");
 ObjC.import("Foundation");
 const app = Application.currentApplication();
@@ -115,19 +114,20 @@ function run() {
 	//──────────────────────────────────────────────────────────────────────────────
 	// DETERMINE PATH TO SEARCH
 	let currentFolder;
-	let pathToCheck;
+	let pathToSearch;
 	// either searches the vault, or a subfolder of the vault
 	try {
 		currentFolder = $.getenv("browse_folder");
-		pathToCheck = vaultPath + "/" + currentFolder;
-		if (pathToCheck.endsWith("//")) pathToCheck = vaultPath; // when going back up from child of vault root
+		pathToSearch = vaultPath + "/" + currentFolder;
+		if (pathToSearch.endsWith("//")) pathToSearch = vaultPath; // when going back up from child of vault root
 	} catch (_error) {
-		pathToCheck = vaultPath;
+		pathToSearch = vaultPath;
 	}
+	const isInSubfolder = pathToSearch !== vaultPath;
 
 	// returns *absolute* paths
 	let folderArray = app
-		.doShellScript(`find "${pathToCheck}" -type d -mindepth 1 -not -path "*/.*"`)
+		.doShellScript(`find "${pathToSearch}" -type d -mindepth 1 -not -path "*/.*"`)
 		.split("\r");
 	if (!folderArray) folderArray = [];
 
@@ -158,7 +158,7 @@ function run() {
 	fileArray = applyExcludeFilter(fileArray, false);
 
 	// if in subfolder, filter files outside subfolder
-	if (pathToCheck !== vaultPath) {
+	if (isInSubfolder) {
 		fileArray = fileArray.filter((file) => file.relativePath.startsWith(currentFolder));
 		canvasArray = canvasArray.filter((/** @type {{ relativePath: string; }} */ file) =>
 			file.relativePath.startsWith(currentFolder),
@@ -356,7 +356,7 @@ function run() {
 	}
 
 	// ADDITIONAL OPTIONS WHEN BROWSING A FOLDER
-	if (pathToCheck !== vaultPath) {
+	if (isInSubfolder) {
 		// New File in Folder
 		resultsArr.push({
 			title: "Create new note in this folder",
@@ -367,7 +367,7 @@ function run() {
 
 		// go up to parent folder
 		resultsArr.push({
-			title: "⬆� Up to Parent Folder",
+			title: "⬆ Up to Parent Folder",
 			match: "up back parent folder directory browse .. cd",
 			subtitle: "▸ " + parentFolder(currentFolder),
 			arg: parentFolder(currentFolder),
