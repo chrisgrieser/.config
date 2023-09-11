@@ -75,19 +75,26 @@ return {
 				-- add brackets to if/else in js/ts
 				rule("^%s*if $", "()", { "javascript", "typescript" })
 					:use_regex(true)
+					:with_del(function() return false end)
 					:set_end_pair_length(1), -- only move one char to the side
 				rule("^%s*else if $", "()", { "javascript", "typescript" })
 					:use_regex(true)
+					:with_del(function() return false end)
 					:set_end_pair_length(1),
 				rule("^%s*} ?else if $", "() {", { "javascript", "typescript" })
 					:use_regex(true)
+					:with_del(function() return false end)
 					:set_end_pair_length(3),
 
 				-- add colon to if/else in python
 				rule("^%s*e?l?if$", ":", "python")
 					:use_regex(true)
+					:with_del(function() return false end)
 					:with_pair(isNotNodeType("string_content")), -- no docstrings
-				rule("^%s*else$", ":", "python"):use_regex(true):with_pair(isNotNodeType("string_content")), -- no docstrings
+				rule("^%s*else$", ":", "python")
+					:use_regex(true)
+					:with_del(function() return false end)
+					:with_pair(isNotNodeType("string_content")), -- no docstrings
 				rule("", ":", "python") -- automatically move past colons
 					:with_move(function(opts) return opts.char == ":" end)
 					:with_pair(function() return false end)
