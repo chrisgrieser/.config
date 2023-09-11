@@ -31,7 +31,7 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 // Read and Parse data
 
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const vaultPath = $.getenv("vault_path");
 	const configFolder = $.getenv("config_folder");
@@ -61,7 +61,7 @@ function run() {
 		return JSON.stringify({
 			items: [
 				{
-					title: "⚠️ No vault metadata found.",
+					title: "!� No vault metadata found.",
 					subtitle: "Please run the Alfred command `osetup` first. This only has to be done once.",
 					valid: false,
 				},
@@ -85,10 +85,10 @@ function run() {
 	 * @param {any[]} collector
 	 */
 	function bmFlatten(input, collector) {
-		input.forEach((item) => {
+		for (const item of input) {
 			if (item.type === "file") collector.push(item.path);
 			if (item.type === "group") bmFlatten(item.items, collector);
-		});
+		}
 	}
 
 	if (fileExists(bookmarkJSON)) {
@@ -110,7 +110,7 @@ function run() {
 	if (fileExists(metadataJSON)) fileArray = JSON.parse(readFile(metadataJSON));
 	else console.log("metadata.json missing.");
 
-	const jsonArray = [];
+	const resultsArr = [];
 
 	//──────────────────────────────────────────────────────────────────────────────
 	// DETERMINE PATH TO SEARCH
@@ -143,12 +143,12 @@ function run() {
 		return array.filter((item) => {
 			let include = true;
 			if (isFolder) item += "/";
-			excludeFilter.forEach((/** @type {string} */ filter) => {
+			for (const filter of excludeFilter) {
 				const isRegexFilter = filter.startsWith("/");
 				const relPath = isFolder ? item.slice(vaultPath.length + 1) : item.relativePath;
 				if (isRegexFilter && relPath.includes(filter)) include = false;
 				if (!isRegexFilter && relPath.startsWith(filter)) include = false;
-			});
+			}
 			return include;
 		});
 	}
@@ -174,11 +174,16 @@ function run() {
 		else headingIgnore.push(false);
 	}
 
+
+	// exclude cssclass: private
+	const censorChar = $.getenv("censor_char");
+	const privacyModeOn = $.getenv("privacy_mode") === "1";
+
 	//──────────────────────────────────────────────────────────────────────────────
 	// CONSTRUCTION OF JSON FOR ALFRED
 
 	// FILES
-	fileArray.forEach((file) => {
+	for (const file of fileArray) {
 		const filename = file.fileName;
 		const relativePath = file.relativePath;
 		const absolutePath = vaultPath + "/" + relativePath;
@@ -204,13 +209,13 @@ function run() {
 		let superchargedIcon = "";
 		let superchargedIcon2 = "";
 		if (superIconList.length > 0 && file.tags) {
-			superIconList.forEach((pair) => {
+			for (const pair of superIconList) {
 				const tag = pair.split(",")[0].toLowerCase().replaceAll("#", "");
 				const icon = pair.split(",")[1];
 				const icon2 = pair.split(",")[2];
 				if (file.tags.includes(tag) && icon) superchargedIcon = icon + " ";
 				else if (file.tags.includes(tag) && icon2) superchargedIcon2 = " " + icon2;
-			});
+			}
 		}
 
 		// check link existence of file
@@ -219,19 +224,15 @@ function run() {
 				file.backlinks,
 		); // no relativePath => unresolved link
 		if (!hasLinks) hasLinks = externalLinkRegex.test(readFile(absolutePath)); // readFile only executed when no other links found for performance
-		let linksSubtitle = "⛔️ Note without Outgoing Links or Backlinks";
-		if (hasLinks) linksSubtitle = "⇧: Browse Links in Note";
+		const linksSubtitle = hasLinks ? "⇧: Browse Links in Note" : "⛔ Note without Outgoing Links or Backlinks";
 
-		// exclude cssclass: private
-		let displayName = filename;
-		const censorChar = $.getenv("censor_char");
 		const isPrivateNote = file.frontmatter?.cssclass?.includes("private");
-		const privacyModeOn = $.getenv("privacy_mode") === "1";
 		const applyCensoring = isPrivateNote && privacyModeOn;
-		if (applyCensoring) displayName = filename.replace(/./g, censorChar);
+
+		const displayName = applyCensoring ? filename.replace(/./g, censorChar) : filename;
 
 		// Notes (file names)
-		jsonArray.push({
+		resultsArr.push({
 			title: emoji + superchargedIcon + displayName + superchargedIcon2,
 			match: alfredMatcher(filename) + tagMatcher + " filename name title",
 			subtitle: "▸ " + parentFolder(relativePath),
@@ -250,10 +251,9 @@ function run() {
 
 		// Aliases
 		if (file.aliases) {
-			file.aliases.forEach((/** @type {string} */ alias) => {
-				let displayAlias = alias;
-				if (applyCensoring) displayAlias = displayAlias.replace(/./g, censorChar);
-				jsonArray.push({
+			for (const alias of file.aliases) {
+				const displayAlias = applyCensoring ? alias.replace(/./g, censorChar) : alias;
+				resultsArr.push({
 					title: superchargedIcon + displayAlias + superchargedIcon2,
 					match: additionalMatcher + "alias " + alfredMatcher(alias),
 					subtitle: "↪ " + displayName,
@@ -269,29 +269,27 @@ function run() {
 						},
 					},
 				});
-			});
+			}
 		}
 
 		// Headings
 		if (!file.headings) return; // skips iteration if no heading
-		file.headings.forEach((/** @type {{ heading: string; level: number; }} */ heading) => {
+		for (const heading of file.headings) {
 			const hName = heading.heading;
 			const hLevel = heading.level;
 			if (headingIgnore[hLevel]) return; // skips iteration if heading has been configured as ignore
-			iconpath = "icons/headings/h" + hLevel.toString() + ".png";
-			const matchStr = "h" + hLevel.toString() + " " + alfredMatcher(hName) + " ";
-			let displayHeading = hName;
-			if (applyCensoring) displayHeading = displayHeading.replace(/./g, censorChar);
+			const headingIcon = "icons/headings/h" + hLevel.toString() + ".png";
+			const matchStr = ["h${hLevel}", alfredMatcher(hName), alfredMatcher(filename)].join(" ");
+			const displayHeading = applyCensoring ? hName.replace(/./g, censorChar) : hName;
 
-			jsonArray.push({
+			resultsArr.push({
 				title: displayHeading,
 				match: matchStr,
 				subtitle: "➣ " + displayName,
 				arg: relativePath + "#" + hName,
 				quicklookurl: absolutePath,
-				type: "file:skipcheck",
-				uid: hName + "_" + relativePath,
-				icon: { path: iconpath },
+				uid: relativePath + "#" + hName,
+				icon: { path: headingIcon },
 				mods: {
 					shift: {
 						valid: hasLinks,
@@ -301,19 +299,16 @@ function run() {
 					alt: { arg: relativePath },
 				},
 			});
-		});
-	});
+		}
+	}
 
 	// CANVASES
-	canvasArray.forEach((/** @type {{ basename: string; relativePath: string; }} */ file) => {
+	for (const file of canvasArray) {
 		const name = file.basename;
 		const relativePath = file.relativePath;
-		const denyForCanvas = {
-			valid: false,
-			subtitle: "⛔ Cannot do that with a canvas.",
-		};
+		const denyForCanvas = { valid: false, subtitle: "⛔ Cannot do that with a canvas." };
 
-		jsonArray.push({
+		resultsArr.push({
 			title: name,
 			match: alfredMatcher(name) + " canvas",
 			subtitle: "▸ " + parentFolder(relativePath),
@@ -326,15 +321,15 @@ function run() {
 				fn: denyForCanvas,
 			},
 		});
-	});
+	}
 
 	// FOLDERS
-	folderArray.forEach((absolutePath) => {
+	for (const absolutePath of folderArray) {
 		const name = absolutePath.split("/").pop();
 		const relativePath = absolutePath.slice(vaultPath.length + 1);
 		if (!name) return; // root on 2 level deep folder search
 
-		jsonArray.push({
+		resultsArr.push({
 			title: name,
 			match: alfredMatcher(name) + " folder",
 			subtitle: "▸ " + parentFolder(relativePath) + "   [↵: Browse]",
@@ -344,30 +339,18 @@ function run() {
 			icon: { path: "icons/folder.png" },
 			mods: {
 				alt: { subtitle: "⌥: Open Folder in Finder" },
-				cmd: {
-					valid: false,
-					subtitle: "⛔️ Cannot open folders",
-				},
-				shift: {
-					valid: false,
-					subtitle: "⛔️ Folders have no links.",
-				},
-				ctrl: {
-					valid: false,
-					subtitle: "⛔️ Linking not possible for folders",
-				},
-				fn: {
-					valid: false,
-					subtitle: "⛔️ Cannot append to folders.",
-				},
+				cmd: { valid: false, subtitle: "⛔ Cannot open folders" },
+				shift: { valid: false, subtitle: "⛔ Folders have no links." },
+				ctrl: { valid: false, subtitle: "⛔ Linking not possible for folders" },
+				fn: { valid: false, subtitle: "⛔ Cannot append to folders." },
 			},
 		});
-	});
+	}
 
 	// ADDITIONAL OPTIONS WHEN BROWSING A FOLDER
 	if (pathToCheck !== vaultPath) {
 		// New File in Folder
-		jsonArray.push({
+		resultsArr.push({
 			title: "Create new note in this folder",
 			subtitle: "▸ " + currentFolder,
 			arg: "new",
@@ -375,8 +358,8 @@ function run() {
 		});
 
 		// go up to parent folder
-		jsonArray.push({
-			title: "⬆️ Up to Parent Folder",
+		resultsArr.push({
+			title: "⬆� Up to Parent Folder",
 			match: "up back parent folder directory browse .. cd",
 			subtitle: "▸ " + parentFolder(currentFolder),
 			arg: parentFolder(currentFolder),
@@ -384,5 +367,5 @@ function run() {
 		});
 	}
 
-	return JSON.stringify({ items: jsonArray });
+	return JSON.stringify({ items: resultsArr });
 }

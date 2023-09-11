@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-killall neovide nvim language_server_macos_arm language_server_macos_x86 osascript
+killall neovide nvim language_server_macos_arm language_server_macos_x86 osascript efm-langserver
 osascript -e '
 	display notification "" with title "⚔️ Killed nvim & neovide processes."
 	delay 0.5

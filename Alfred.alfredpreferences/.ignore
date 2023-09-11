@@ -1,5 +1,4 @@
 # ignore file for `fd`
-# INFO for telescope.nvim, cannot be named `.fdignore` and must be named `.ignore`
 
 # Alfred config
 preferences
@@ -7,10 +6,6 @@ remote
 resources
 themes
 workflowextras
-
-# my workflows
-workflows/shimmering-obsidian
-# workflows/alfred-bibtex-citation-picker
 
 # workflows developed by others, marked with `[ext]` at the end of the folder name
 workflows/*\[3rd-Party\]
