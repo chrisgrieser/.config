@@ -103,7 +103,7 @@ end, vim.api.nvim_create_namespace("auto_nohl"))
 -- EDITING
 
 -- Delete trailing stuff
--- (wrapping in normal avoid temporarily scrolling to the side)
+-- (wrapping in normal avoids temporarily scrolling to the side)
 keymap("n", "X", "<cmd>normal!mz$x`z<CR>", { desc = "󱎘 Delete char at EoL" })
 
 -- QUICKFIX
@@ -124,6 +124,8 @@ keymap("n", "<Tab>", ">>", { desc = "󰉶 indent line" })
 keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent line" })
 keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent selection" })
 keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent selection" })
+keymap("n", "[", "<", { desc = "outdent" })
+keymap("n", "]", ">", { desc = "indent" })
 
 keymap("n", "~", function() require("funcs.quality-of-life").toggleCase() end, { desc = "better ~" })
 
@@ -142,8 +144,6 @@ keymap(
 -- SPELLING
 keymap("n", "zl", function() vim.cmd.Telescope("spell_suggest") end, { desc = "󰓆 Spell Suggest" })
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
-keymap("n", "gz", "]s", { desc = "󰓆 Next Misspelling" })
-keymap("n", "gZ", "[s", { desc = "󰓆 Previous Misspelling" })
 
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
