@@ -403,23 +403,6 @@ nnoremap zc :togglefold
 nnoremap zm :foldall
 nnoremap zr :unfoldall
 
-""""""""""""""""""""""""""""
-" Sneak / Hop / Lightspeed
-""""""""""""""""""""""""""""
-" emulate various vim motion plugins
-
-" Hop
-" exmap hop obcommand mrj-jump-to-link:activate-jump-to-anywhere
-" nnoremap ö :hop
-
-" Lightspeed
-" exmap lightspeed obcommand mrj-jump-to-link:activate-lightspeed-jump
-" nnoremap ö :lightspeed
-
-" Link Jump (similar to Vimium's f)
-" exmap linkjump obcommand mrj-jump-to-link:activate-jump-to-link
-" nnoremap ,ö :linkjump
-
 """"""""""""""""""""""
 " Move selection to new file (nvim-genghis)
 """"""""""""""""""""""
@@ -430,17 +413,9 @@ vnoremap X :selectionToNewFile
 " Option Toggling
 """"""""""""""""""""""
 
-" [O]ption: line [n]umbers
-exmap number obcommand obsidian-smarter-md-hotkeys:toggle-line-numbers
-nnoremap ,on :number
-
 " [O]ption: [s]pellcheck
 exmap spellcheck obcommand editor:toggle-spellcheck
 nnoremap ,os :spellcheck
-
-" [O]ption: [w]rap
-exmap readableLineLength obcommand obsidian-smarter-md-hotkeys:toggle-readable-line-length
-nnoremap ,ow :readableLineLength
 
 " [O]ption: [d]iagnostics (language tool check)
 exmap enableDiagnostics obcommand obsidian-languagetool-plugin:ltcheck-text

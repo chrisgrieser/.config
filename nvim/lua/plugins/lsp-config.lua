@@ -21,8 +21,8 @@ local lsp_servers = {
 	"jedi_language_server", -- python (has refactor code actions & better hovers)
 	"ruff_lsp", -- python
 	"marksman", -- markdown
-	-- "biome", -- ts/js/json, cannot use LSP for formatting, https://github.com/biomejs/biome/discussions/87
-	-- "tsserver", -- ts/js
+	"biome", -- ts/js/json, cannot use LSP for formatting, https://github.com/biomejs/biome/discussions/87
+	"tsserver", -- ts/js
 	"bashls", -- used for zsh
 	"taplo", -- toml
 	"html",
