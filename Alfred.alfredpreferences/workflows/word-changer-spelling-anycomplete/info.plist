@@ -8,52 +8,11 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
-		<key>07067962-C5C6-4B45-84D2-E12B587B394A</key>
-		<array/>
 		<key>15C5CEF9-52E9-4682-8DE4-0E5332D17D18</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>812123A0-13FF-4E57-A76C-6EB0EDF2A55D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>3C4BA326-F122-4D88-AF7F-18DD180CEF3E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>88575279-2CDE-460A-96E7-6D1B72F15E67</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>437A1C55-721B-4E6C-9FC3-61772290A3C7</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>3C4BA326-F122-4D88-AF7F-18DD180CEF3E</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>88575279-2CDE-460A-96E7-6D1B72F15E67</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C9508516-6B1E-480E-9584-B560F1C8568E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -75,19 +34,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>C9508516-6B1E-480E-9584-B560F1C8568E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>07067962-C5C6-4B45-84D2-E12B587B394A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -96,7 +42,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Spelling &amp; Synonyms</string>
+	<string>Spelling Fixer</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -224,149 +170,6 @@ end run</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>syn</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>synonym.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Synonym Search…</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>C9508516-6B1E-480E-9584-B560F1C8568E</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>select-word_.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>3C4BA326-F122-4D88-AF7F-18DD180CEF3E</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>07067962-C5C6-4B45-84D2-E12B587B394A</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>33</integer>
-				<key>hotmod</key>
-				<integer>1048576</integer>
-				<key>hotstring</key>
-				<string>Ü</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>437A1C55-721B-4E6C-9FC3-61772290A3C7</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>\n$</string>
-				<key>regexcaseinsensitive</key>
-				<false/>
-				<key>regexmultiline</key>
-				<false/>
-				<key>replacestring</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
-			<key>uid</key>
-			<string>88575279-2CDE-460A-96E7-6D1B72F15E67</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Spell-fixing requires "aspell" to be installed on the system. (`brew install aspell`)
@@ -374,17 +177,6 @@ end run</string>
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>07067962-C5C6-4B45-84D2-E12B587B394A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>Paste</string>
-			<key>xpos</key>
-			<real>585</real>
-			<key>ypos</key>
-			<real>315</real>
-		</dict>
 		<key>15C5CEF9-52E9-4682-8DE4-0E5332D17D18</key>
 		<dict>
 			<key>colorindex</key>
@@ -396,28 +188,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>150</real>
 		</dict>
-		<key>3C4BA326-F122-4D88-AF7F-18DD180CEF3E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>get word under cursor</string>
-			<key>xpos</key>
-			<real>180</real>
-			<key>ypos</key>
-			<real>315</real>
-		</dict>
-		<key>437A1C55-721B-4E6C-9FC3-61772290A3C7</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>synonyms for word under cursor</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>315</real>
-		</dict>
 		<key>812123A0-13FF-4E57-A76C-6EB0EDF2A55D</key>
 		<dict>
 			<key>colorindex</key>
@@ -426,17 +196,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>180</real>
 			<key>ypos</key>
 			<real>80</real>
-		</dict>
-		<key>88575279-2CDE-460A-96E7-6D1B72F15E67</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>remove \n</string>
-			<key>xpos</key>
-			<real>335</real>
-			<key>ypos</key>
-			<real>345</real>
 		</dict>
 		<key>A79508C6-9D50-47FC-8E75-B8142611461C</key>
 		<dict>
@@ -448,15 +207,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>25</real>
-		</dict>
-		<key>C9508516-6B1E-480E-9584-B560F1C8568E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>425</real>
-			<key>ypos</key>
-			<real>315</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
