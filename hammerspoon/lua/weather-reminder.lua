@@ -1,4 +1,11 @@
 -- Checks when the outside temperature passes the inside temperature or vice versa.
+--------------------------------------------------------------------------------
+local env = require("lua.environment-vars")
+local u = require("lua.utils")
+
+--------------------------------------------------------------------------------
+-- only run at home
+if not env.isAtHome then return end
 
 -- only run in the summer
 local month = tostring(os.date("%B")):sub(1, 3)
@@ -16,9 +23,6 @@ local checkIntervalMins = 30
 
 --------------------------------------------------------------------------------
 
-local env = require("lua.environment-vars")
-local u = require("lua.utils")
-
 -- DOCS: https://brightsky.dev/docs/#get-/current_weather
 local callUrl = ("https://api.brightsky.dev/current_weather?lat=%s&lon=%s"):format(latitude, longitude)
 
@@ -29,6 +33,7 @@ local function getOutsideTemp()
 			print("Could not get weather data: " .. status)
 			return
 		end
+		---@diagnostic disable-next-line: undefined-field
 		local outTemp = hs.json.decode(body).weather.temperature
 		if not outTemp then return end
 

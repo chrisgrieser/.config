@@ -6,7 +6,7 @@ return {
 		"lvimuser/lsp-inlayhints.nvim",
 		init = function()
 			if vim.version().major == 0 and vim.version().minor >= 10 then
-			-- INFO only temporarily needed, until https://github.com/neovim/neovim/issues/18086
+				-- INFO only temporarily needed, until https://github.com/neovim/neovim/issues/18086
 				vim.notify("lsp-inlayhints.nvim is now obsolete.")
 			end
 
@@ -57,35 +57,26 @@ return {
 	{ -- breadcrumbs for winbar
 		"SmiteshP/nvim-navic",
 		event = "LspAttach", -- loading on `require` ignores the config, so loading on LspAttach
-		init = function()
-			vim.keymap.set("n", "^", function()
-				if not require("nvim-navic").is_available() then
-					u.notify("", "Navic is not available.")
-					return
-				end
-				local symbolPath = require("nvim-navic").get_data()
-				if #symbolPath == 0 then return end
-				local parent = #symbolPath > 1 and symbolPath[#symbolPath - 1] or symbolPath[1]
-				local parentPos = parent.scope.start
-				vim.api.nvim_win_set_cursor(0, { parentPos.line, parentPos.character })
-			end, { desc = "󰒕 Go Up to Parent" })
-
-			-- copy breadcrumbs
-			vim.keymap.set("n", "<D-b>", function()
-				local rawdata = require("nvim-navic").get_data()
-				if not rawdata then
-					u.notify("Navic", "No breadcrumbs available.")
-					return
-				end
-				local breadcrumbs = ""
-				for _, v in pairs(rawdata) do
-					breadcrumbs = breadcrumbs .. v.name .. "."
-				end
-				breadcrumbs = breadcrumbs:sub(1, -2)
-				vim.fn.setreg("+", breadcrumbs)
-				u.notify("Copied", breadcrumbs)
-			end, { desc = "󰒕 Copy Breadcrumbs" })
-		end,
+		keys = {
+			{
+				"<D-b>",
+				function()
+					local rawdata = require("nvim-navic").get_data()
+					if not rawdata then
+						u.notify("Navic", "No breadcrumbs available.")
+						return
+					end
+					local breadcrumbs = ""
+					for _, v in pairs(rawdata) do
+						breadcrumbs = breadcrumbs .. v.name .. "."
+					end
+					breadcrumbs = breadcrumbs:sub(1, -2)
+					vim.fn.setreg("+", breadcrumbs)
+					u.notify("Copied", breadcrumbs)
+				end,
+				desc = "󰒕 Copy Breadcrumbs",
+			},
+		},
 		opts = {
 			lsp = {
 				auto_attach = true,

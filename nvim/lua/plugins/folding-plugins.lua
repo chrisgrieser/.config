@@ -39,8 +39,8 @@ return {
 	{
 		"jghauser/fold-cycle.nvim",
 		keys = {
-			{ "^", function () require('fold-cycle').open() end, desc = "󰘖 Cycle-Open Folds" },
-			{ "\\", function () require('fold-cycle').close() end, desc = "󰘖 Cycle-Close Folds" },
+			{ "^", function() require("fold-cycle").close() end, desc = " Cycle-Close Folds" },
+			{ "\\", function() require("fold-cycle").open() end, desc = " Cycle-Open Folds" },
 		},
 	},
 	{
@@ -48,14 +48,16 @@ return {
 		dependencies = "kevinhwang91/promise-async",
 		event = "BufReadPost", -- needed for folds to load properly
 		keys = {
-			-- stylua: ignore start
-			{ "zr", function() require("ufo").openFoldsExceptKinds { "comment" } end, desc = "󰘖 󱃄 Open All Folds except comments" },
-			{ "zm", function() require("ufo").closeAllFolds() end, desc = "󰘖 󱃄 Close All Folds" },
-			{ "z1", function() require("ufo").closeFoldsWith(1) end, desc = "󰘖 󱃄 Close Level 1 Folds" },
-			{ "z2", function() require("ufo").closeFoldsWith(2) end, desc = "󰘖 󱃄 Close Level 2 Folds" },
-			{ "z3", function() require("ufo").closeFoldsWith(3) end, desc = "󰘖 󱃄 Close Level 3 Folds" },
-			{ "z4", function() require("ufo").closeFoldsWith(4) end, desc = "󰘖 󱃄 Close Level 4 Folds" },
-			-- stylua: ignore end
+			{
+				"zr",
+				function() require("ufo").openFoldsExceptKinds { "comment" } end,
+				desc = " 󱃄 Open All Folds except comments",
+			},
+			{ "zm", function() require("ufo").closeAllFolds() end, desc = " 󱃄 Close All Folds" },
+			{ "z1", function() require("ufo").closeFoldsWith(1) end, desc = " 󱃄 Close L1 Folds" },
+			{ "z2", function() require("ufo").closeFoldsWith(2) end, desc = " 󱃄 Close L2 Folds" },
+			{ "z3", function() require("ufo").closeFoldsWith(3) end, desc = " 󱃄 Close L3 Folds" },
+			{ "z4", function() require("ufo").closeFoldsWith(4) end, desc = " 󱃄 Close L4 Folds" },
 		},
 		init = function()
 			-- INFO fold commands usually change the foldlevel, which fixes folds, e.g.
@@ -75,9 +77,8 @@ return {
 					{ "markdown", "bash", "sh", "bash", "zsh", "css", "html", "python" }
 				if vim.tbl_contains(lspWithOutFolding, ft) then
 					return { "treesitter", "indent" }
-				else
-					return { "lsp", "indent" }
 				end
+				return { "lsp", "indent" }
 			end,
 			-- open opening the buffer, close these fold kinds
 			-- use `:UfoInspect` to get available fold kinds from the LSP
