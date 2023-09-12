@@ -21,6 +21,58 @@
 				<false/>
 			</dict>
 		</array>
+		<key>322E5C7E-0088-48C7-8510-ABB6F13FAF6B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>95A2B22E-F276-42DF-9C10-1B7D3F5D48AF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>3D656B72-508C-472A-89A5-17C81D76BE04</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B34DBBCE-C220-4020-BDB7-DFAB47719F7A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>527810E3-7675-48C8-ABF2-D21274E22579</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>322E5C7E-0088-48C7-8510-ABB6F13FAF6B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>95A2B22E-F276-42DF-9C10-1B7D3F5D48AF</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3D656B72-508C-472A-89A5-17C81D76BE04</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A79508C6-9D50-47FC-8E75-B8142611461C</key>
 		<array>
 			<dict>
@@ -38,11 +90,11 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>Spell-Fixing, Capitalization, synonyms, or completion for word under cursor</string>
+	<string></string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Spelling Fixer</string>
+	<string>Spelling &amp; Synonyms</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -122,7 +174,7 @@ end run</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>fix-word-under-cursor.applescript</string>
+				<string>./scripts/fix-word-under-cursor.applescript</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -170,6 +222,145 @@ end run</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>B34DBBCE-C220-4020-BDB7-DFAB47719F7A</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>33</integer>
+				<key>hotmod</key>
+				<integer>1048576</integer>
+				<key>hotstring</key>
+				<string>Ü</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>527810E3-7675-48C8-ABF2-D21274E22579</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>syn</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/synonym.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>{const:alfred_workflow_name}</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>3D656B72-508C-472A-89A5-17C81D76BE04</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/select-word.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>322E5C7E-0088-48C7-8510-ABB6F13FAF6B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>95A2B22E-F276-42DF-9C10-1B7D3F5D48AF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Spell-fixing requires "aspell" to be installed on the system. (`brew install aspell`)
@@ -188,6 +379,27 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>150</real>
 		</dict>
+		<key>322E5C7E-0088-48C7-8510-ABB6F13FAF6B</key>
+		<dict>
+			<key>xpos</key>
+			<real>180</real>
+			<key>ypos</key>
+			<real>350</real>
+		</dict>
+		<key>3D656B72-508C-472A-89A5-17C81D76BE04</key>
+		<dict>
+			<key>xpos</key>
+			<real>400</real>
+			<key>ypos</key>
+			<real>350</real>
+		</dict>
+		<key>527810E3-7675-48C8-ABF2-D21274E22579</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>350</real>
+		</dict>
 		<key>812123A0-13FF-4E57-A76C-6EB0EDF2A55D</key>
 		<dict>
 			<key>colorindex</key>
@@ -196,6 +408,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>180</real>
 			<key>ypos</key>
 			<real>80</real>
+		</dict>
+		<key>95A2B22E-F276-42DF-9C10-1B7D3F5D48AF</key>
+		<dict>
+			<key>xpos</key>
+			<real>325</real>
+			<key>ypos</key>
+			<real>380</real>
 		</dict>
 		<key>A79508C6-9D50-47FC-8E75-B8142611461C</key>
 		<dict>
@@ -207,6 +426,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>25</real>
+		</dict>
+		<key>B34DBBCE-C220-4020-BDB7-DFAB47719F7A</key>
+		<dict>
+			<key>note</key>
+			<string>paste</string>
+			<key>xpos</key>
+			<real>550</real>
+			<key>ypos</key>
+			<real>345</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
