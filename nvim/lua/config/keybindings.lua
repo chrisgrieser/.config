@@ -1,3 +1,4 @@
+local api = vim.api
 local autocmd = vim.api.nvim_create_autocmd
 local cmd = vim.cmd
 local expand = vim.fn.expand
@@ -12,7 +13,7 @@ keymap("n", "?", function() cmd.Telescope("keymaps") end, { desc = "⌨️  S
 
 keymap("n", "<D-,>", function()
 	local thisFilePath = debug.getinfo(1).source:sub(2)
-	vim.cmd.edit(thisFilePath)
+	cmd.edit(thisFilePath)
 end, { desc = "⌨️ Edit keybindings.lua" })
 
 --------------------------------------------------------------------------------
@@ -51,7 +52,7 @@ keymap("n", "Ä", function()
 end, { desc = " Set Mark" })
 
 keymap("n", "dä", function()
-	vim.api.nvim_del_mark("M")
+	api.nvim_del_mark("M")
 	u.notify("", " Mark deleted.", "trace")
 end, { desc = " Delete Mark" })
 
@@ -97,7 +98,7 @@ vim.on_key(function(char)
 		local ok, hlslens = pcall(require, "hlslens")
 		if ok then hlslens.start() end
 	end
-end, vim.api.nvim_create_namespace("auto_nohl"))
+end, api.nvim_create_namespace("auto_nohl"))
 
 --------------------------------------------------------------------------------
 -- EDITING
@@ -148,14 +149,20 @@ keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
 
-keymap("n", "<Down>", [[<cmd>. move +1<CR>==]], { desc = "󰜮 Move Line Down", silent = true })
-keymap("n", "<Up>", [[<cmd>. move -2<CR>==]], { desc = "󰜷 Move Line Up", silent = true })
+keymap("n", "<Down>", function()
+	if vim.api.nvim_win_get_cursor(0)[1] == fn.line("$") then return end
+	return [[<cmd>. move +1<CR>==]]
+end, { desc = "󰜮 Move Line Down", expr = true })
+keymap("n", "<Up>", function()
+	if api.nvim_win_get_cursor(0)[1] == 1 then return end
+	return [[<cmd>. move -2<CR>==]]
+end, { desc = "󰜷 Move Line Up", expr = true })
 keymap("n", "<Right>", function()
-	if vim.fn.col(".") >= vim.fn.col("$") - 1 then return end
+	if fn.col(".") >= fn.col("$") - 1 then return end
 	return [["zx"zp]]
 end, { desc = "Move Char Right", expr = true })
 keymap("n", "<Left>", function()
-	if vim.fn.col(".") == 1 then return end
+	if fn.col(".") == 1 then return end
 	return [["zdh"zph]]
 end, { desc = "Move Char Left", expr = true })
 
@@ -188,7 +195,7 @@ keymap("i", "<C-e>", "<Esc>A") -- EoL
 keymap("i", "<C-a>", "<Esc>I") -- BoL
 -- indent properly when entering insert mode on empty lines
 keymap("n", "i", function()
-	if vim.api.nvim_get_current_line():find("^%s*$") then return [["_cc]] end
+	if api.nvim_get_current_line():find("^%s*$") then return [["_cc]] end
 	return "i"
 end, { expr = true, desc = "better i" })
 
@@ -258,7 +265,7 @@ keymap("x", "p", "P", { desc = " Paste w/o switching register" })
 
 -- do not clutter the register if blank line is deleted
 keymap("n", "dd", function()
-	local isBlankLine = vim.api.nvim_get_current_line():find("^%s*$")
+	local isBlankLine = api.nvim_get_current_line():find("^%s*$")
 	local expr = isBlankLine and '"_dd' or "dd"
 	return expr
 end, { expr = true })
@@ -418,4 +425,3 @@ autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
-

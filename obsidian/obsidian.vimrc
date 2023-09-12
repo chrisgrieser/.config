@@ -16,8 +16,7 @@ set clipboard=unnamed
 nnoremap Y y$
 
 " don't pollute the register
-" nnoremap c "_c " BUG with vimrc, not working
-" nnoremap x "_x
+" nnoremap c "_c " BUG not working with vimrc plugin
 nnoremap C "_c$
 nnoremap x "_dl
 
@@ -80,8 +79,7 @@ nnoremap <C-k> :prevHeading
 " nnoremap <C-h> :back
 " nnoremap <C-l> :forward
 
-" line/character movement
-" (INFO don't work in visual mode)
+" line/character movement (INFO don't work in visual mode)
 exmap lineUp obcommand editor:swap-line-up
 exmap lineDown obcommand editor:swap-line-down
 nnoremap <Up> :lineUp
@@ -90,7 +88,6 @@ nnoremap <Right> dlp
 nnoremap <Left> dlhhp
 
 " [m]atch parenthesis
-" mappings https://github.com/replit/codemirror-vim/blob/master/src/vim.js#L765
 nnoremap m %
 
 " [g]oto [s]ymbol
@@ -112,10 +109,6 @@ nnoremap gd :followNextLink
 exmap quickSwitcher obcommand obsidian-another-quick-switcher:search-command_recent-search
 nnoremap go :quickSwitcher
 nnoremap gr :quickSwitcher
-
-" 2-step links, roughly similar to LSP references
-exmap linkedSearch obcommand obsidian-another-quick-switcher:search-command_2-step-link-search
-nnoremap gf :linkedSearch
 
 " go to last change (HACK, only works to jump to the last location)
 nnoremap g, u<C-r>
@@ -218,13 +211,10 @@ nnoremap _ o<Esc>0"_d$k
 " [l]og commands in console
 nnoremap ,l :obcommand
 
-" append to [y]aml (line 3 = tags)
-nnoremap ,y 3ggA
-
 " [g]oto [f]ootnotes
 " requires Footnotes Shortcut Plugin
 exmap gotoFootnote obcommand obsidian-footnotes:insert-autonumbered-footnote
-nnoremap ,f :gotoFootnote
+nnoremap gf :gotoFootnote
 
 " Blockquote
 exmap toggleBlockquote obcommand editor:toggle-blockquote
@@ -233,7 +223,6 @@ nnoremap ,> :toggleBlockquote
 
 exmap checkList obcommand editor:toggle-checklist-status
 nnoremap ,x :checkList
-vnoremap ,x :checkList
 
 """"""""""""""""""""""
 " Indentation
