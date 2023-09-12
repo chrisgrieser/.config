@@ -395,12 +395,12 @@ exmap foldall obcommand editor:fold-all
 exmap foldless obcommand editor:fold-less
 exmap foldmore obcommand editor:fold-more
 
+nnoremap ^ :foldmore
+nnoremap \ :foldless
 nnoremap za :togglefold
 nnoremap zo :togglefold
 nnoremap zc :togglefold
-nnoremap z+ :foldmore
 nnoremap zm :foldall
-nnoremap z- :foldless
 nnoremap zr :unfoldall
 
 """"""""""""""""""""""""""""
