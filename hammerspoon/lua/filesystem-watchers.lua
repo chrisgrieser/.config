@@ -99,7 +99,7 @@ FileHubWatcher = pw(env.fileHub, function(paths, _)
 		-- dmg (cannot be auto-opened via Browser)
 		elseif ext == "dmg" and isDownloaded then
 			if not (fileName == "Stats.dmg") then hs.open(filep) end
-			u.runWithDelays(3, function() os.remove(filep) end)
+			u.runWithDelays(5, function() os.remove(filep) end)
 
 		-- zip: unzip
 		elseif ext == "zip" and fileName ~= "violentmonkey.zip" and isDownloaded then

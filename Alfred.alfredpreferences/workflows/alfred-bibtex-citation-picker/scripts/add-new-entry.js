@@ -18,7 +18,6 @@ function appendToFile(text, absPath) {
 }
 
 /** @param {string} path */
-// @ts-ignore
 function readFile(path) {
 	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
 	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
@@ -94,11 +93,13 @@ function generateCitekey(authors, year) {
 /** @param {string} input */
 function inputToEntryData(input) {
 	const entry = {};
+
 	const doiRegex = /\b10.\d{4,9}\/[-._;()/:A-Z0-9]+(?=$|[?/ ])/i; // https://www.crossref.org/blog/dois-and-matching-regular-expressions/
 	const isbnRegex = /^[\d-]{9,}$/;
 	const isDOI = doiRegex.test(input);
 	const isISBN = isbnRegex.test(input);
 	const mode = $.getenv("mode");
+
 	if (!(isDOI || isISBN || mode === "parse")) return { error: "input invalid" };
 
 	// DOI
@@ -221,8 +222,6 @@ function inputToEntryData(input) {
 		} else if (entry.type === "incollection") {
 			entry.booktitle = data["container-title"];
 		}
-	} else {
-		return { error: "No DOI or ISBN in selected text" };
 	}
 
 	return entry;
@@ -255,14 +254,11 @@ function run(argv) {
 	for (const key in entry) {
 		if (key === "type") continue; // already inserted in first line
 		let value = entry[key];
-		// escape bibtex values
-		if (typeof value === "string") {
-			value = value.replace(/([A-Z]\S*)/g, "{$1}"); // uppercase in string
-			value = "{" + value + "}"; // full string
-		}
+		const hasUppercase = typeof value === "string" && value.match(/[A-Z]/);
+		if (hasUppercase) value = "{{" + value + "}}"; // escape bibtex values
 		propertyLines.push(`\t${key} = ${value},`);
 	}
-	propertyLines.sort();
+	propertyLines.sort(); // sorts alphabetically by key
 	// remove comma from last entry
 	propertyLines[propertyLines.length - 1] = propertyLines[propertyLines.length - 1].slice(0, -1);
 
