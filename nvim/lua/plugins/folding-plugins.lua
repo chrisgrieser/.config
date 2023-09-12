@@ -37,36 +37,25 @@ return {
 		dev = true,
 	},
 	{
+		"jghauser/fold-cycle.nvim",
+		keys = {
+			{ "^", function () require('fold-cycle').open() end, desc = "󰘖 Cycle-Open Folds" },
+			{ "\\", function () require('fold-cycle').close() end, desc = "󰘖 Cycle-Close Folds" },
+		},
+	},
+	{
 		"kevinhwang91/nvim-ufo",
 		dependencies = "kevinhwang91/promise-async",
 		event = "BufReadPost", -- needed for folds to load properly
 		keys = {
-			{
-				"zr",
-				function() require("ufo").openFoldsExceptKinds { "comment" } end,
-				desc = "󰘖 󱃄 Open All Folds except comments",
-			},
+			-- stylua: ignore start
+			{ "zr", function() require("ufo").openFoldsExceptKinds { "comment" } end, desc = "󰘖 󱃄 Open All Folds except comments" },
 			{ "zm", function() require("ufo").closeAllFolds() end, desc = "󰘖 󱃄 Close All Folds" },
-			{
-				"z1",
-				function() require("ufo").closeFoldsWith(1) end,
-				desc = "󰘖 󱃄 Close Level 1 Folds",
-			},
-			{
-				"z2",
-				function() require("ufo").closeFoldsWith(2) end,
-				desc = "󰘖 󱃄 Close Level 2 Folds",
-			},
-			{
-				"z3",
-				function() require("ufo").closeFoldsWith(3) end,
-				desc = "󰘖 󱃄 Close Level 3 Folds",
-			},
-			{
-				"z4",
-				function() require("ufo").closeFoldsWith(4) end,
-				desc = "󰘖 󱃄 Close Level 4 Folds",
-			},
+			{ "z1", function() require("ufo").closeFoldsWith(1) end, desc = "󰘖 󱃄 Close Level 1 Folds" },
+			{ "z2", function() require("ufo").closeFoldsWith(2) end, desc = "󰘖 󱃄 Close Level 2 Folds" },
+			{ "z3", function() require("ufo").closeFoldsWith(3) end, desc = "󰘖 󱃄 Close Level 3 Folds" },
+			{ "z4", function() require("ufo").closeFoldsWith(4) end, desc = "󰘖 󱃄 Close Level 4 Folds" },
+			-- stylua: ignore end
 		},
 		init = function()
 			-- INFO fold commands usually change the foldlevel, which fixes folds, e.g.
