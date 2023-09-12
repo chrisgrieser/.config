@@ -17,12 +17,12 @@ local lsp_servers = {
 	"jsonls",
 	"cssls",
 	"emmet_ls", -- css & html completion
-	"biome", -- ts/js/json, cannot use LSP for formatting, https://github.com/biomejs/biome/discussions/87
 	"pyright", -- python LSP
 	"jedi_language_server", -- python (has refactor code actions & better hovers)
 	"ruff_lsp", -- python
 	"marksman", -- markdown
-	"tsserver", -- ts/js
+	-- "biome", -- ts/js/json, cannot use LSP for formatting, https://github.com/biomejs/biome/discussions/87
+	-- "tsserver", -- ts/js
 	"bashls", -- used for zsh
 	"taplo", -- toml
 	"html",
