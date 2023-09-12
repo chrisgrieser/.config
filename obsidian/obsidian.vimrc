@@ -165,6 +165,13 @@ exmap caseSwitch obcommand obsidian-editor-shortcuts:toggleCase
 nnoremap ö :caseSwitch
 vnoremap ö :caseSwitch
 
+" Switch to synonym
+exmap synonym obcommand obsidian-wordy:wordy-syn
+vnoremap Ö :synonym
+" HACK to select word under cursor https://github.com/nqthqn/obsidian-wordy/issues/4
+nmap &y& :synonym
+nmap Ö viw&y&
+
 " do not move to the right on toggling case of a character
 nnoremap ~ ~h
 
