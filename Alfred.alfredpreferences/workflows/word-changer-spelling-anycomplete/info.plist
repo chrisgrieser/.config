@@ -25,7 +25,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>95A2B22E-F276-42DF-9C10-1B7D3F5D48AF</string>
+				<string>3D656B72-508C-472A-89A5-17C81D76BE04</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -52,19 +52,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>322E5C7E-0088-48C7-8510-ABB6F13FAF6B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>95A2B22E-F276-42DF-9C10-1B7D3F5D48AF</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>3D656B72-508C-472A-89A5-17C81D76BE04</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -225,25 +212,6 @@ end run</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>B34DBBCE-C220-4020-BDB7-DFAB47719F7A</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -296,7 +264,7 @@ end run</string>
 				<key>queuedelaymode</key>
 				<integer>0</integer>
 				<key>queuemode</key>
-				<integer>1</integer>
+				<integer>2</integer>
 				<key>runningsubtext</key>
 				<string>loading…</string>
 				<key>script</key>
@@ -324,6 +292,25 @@ end run</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>B34DBBCE-C220-4020-BDB7-DFAB47719F7A</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -343,23 +330,6 @@ end run</string>
 			<string>322E5C7E-0088-48C7-8510-ABB6F13FAF6B</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>{query}</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>95A2B22E-F276-42DF-9C10-1B7D3F5D48AF</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -381,6 +351,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>322E5C7E-0088-48C7-8510-ABB6F13FAF6B</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
 			<key>xpos</key>
 			<real>180</real>
 			<key>ypos</key>
@@ -388,13 +360,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>3D656B72-508C-472A-89A5-17C81D76BE04</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
 			<key>xpos</key>
-			<real>400</real>
+			<real>350</real>
 			<key>ypos</key>
 			<real>350</real>
 		</dict>
 		<key>527810E3-7675-48C8-ABF2-D21274E22579</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -409,13 +385,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>80</real>
 		</dict>
-		<key>95A2B22E-F276-42DF-9C10-1B7D3F5D48AF</key>
-		<dict>
-			<key>xpos</key>
-			<real>325</real>
-			<key>ypos</key>
-			<real>380</real>
-		</dict>
 		<key>A79508C6-9D50-47FC-8E75-B8142611461C</key>
 		<dict>
 			<key>colorindex</key>
@@ -429,12 +398,14 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>B34DBBCE-C220-4020-BDB7-DFAB47719F7A</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
 			<key>note</key>
 			<string>paste</string>
 			<key>xpos</key>
-			<real>550</real>
+			<real>500</real>
 			<key>ypos</key>
-			<real>345</real>
+			<real>350</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
