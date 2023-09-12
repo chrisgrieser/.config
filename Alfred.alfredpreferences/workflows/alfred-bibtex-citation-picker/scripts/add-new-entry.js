@@ -254,8 +254,10 @@ function run(argv) {
 	for (const key in entry) {
 		if (key === "type") continue; // already inserted in first line
 		let value = entry[key];
-		const hasUppercase = typeof value === "string" && value.match(/[A-Z]/);
-		if (hasUppercase) value = "{{" + value + "}}"; // escape bibtex values
+		if (typeof value === "string") { // escape bibtex values
+			value = "{" + value + "}";
+			if (value.match(/[A-Z]/)) value = "{" + value + "}";
+		}
 		propertyLines.push(`\t${key} = ${value},`);
 	}
 	propertyLines.sort(); // sorts alphabetically by key
