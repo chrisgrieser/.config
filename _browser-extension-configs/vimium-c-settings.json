@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "30/08/2023, 09:02:13",
-	"time": 1693378933157,
+	"@time": "12/09/2023, 09:50:21",
+	"time": 1694505021291,
 	"environment": {
 		"extension": "1.99.994",
 		"platform": "mac",
@@ -77,7 +77,7 @@
 		"map <esc> reset",
 		"map i passNextKey",
 		"map I enterInsertMode",
-		"map gi focusInput keep select=\"end\"",
+		"map gi focusInput select=\"end\"",
 		"\" this is similar to WezTerm's QuickSelect mode",
 		"map v LinkHints.activateSelect",
 		"",
