@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>delay_ms</key>
-	<string>90</string>
+	<string>100</string>
 </dict>
 </plist>

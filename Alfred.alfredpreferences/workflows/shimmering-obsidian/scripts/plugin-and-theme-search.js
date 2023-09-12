@@ -76,8 +76,8 @@ function cacheIsOutdated(path) {
 	ensureCacheFolderExists();
 	const cacheObj = Application("System Events").aliases[path];
 	if (!cacheObj.exists()) return true;
-	const cacheAgeMins = (+new Date() - cacheObj.creationDate()) / 1000 / 60 / 60;
-	return cacheAgeMins > cacheAgeThresholdHours;
+	const cacheAgeHours = (+new Date() - cacheObj.creationDate()) / 1000 / 60 / 60;
+	return cacheAgeHours > cacheAgeThresholdHours;
 }
 
 //──────────────────────────────────────────────────────────────────────────────
