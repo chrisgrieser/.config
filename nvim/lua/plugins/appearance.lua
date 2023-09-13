@@ -22,11 +22,6 @@ return {
 		"lewis6991/satellite.nvim",
 		commit = "5d33376", -- TODO following versions require nvim 0.10
 		event = "VeryLazy",
-		init = function()
-			if vim.version().major == 0 and vim.version().minor >= 10 then
-				vim.notify("satellite.nvim can now be updated.")
-			end
-		end,
 		opts = {
 			winblend = 0, -- no transparency, hard to see in many themes otherwise
 			handlers = { marks = { enable = false } }, -- FIX mark-related error message

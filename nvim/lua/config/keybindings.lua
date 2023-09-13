@@ -3,12 +3,24 @@ local autocmd = vim.api.nvim_create_autocmd
 local cmd = vim.cmd
 local expand = vim.fn.expand
 local fn = vim.fn
-local keymap = vim.keymap.set
 local u = require("config.utils")
+
+---ensures unique keymaps
+---@param modes string|string[]
+---@param lhs string
+---@param rhs string|function
+---@param opts object
+local function keymap (modes, lhs, rhs, opts)
+	if not opts then opts = {} end
+	opts.unique = true -- https://neovim.io/doc/user/map.html#%3Amap-unique
+	vim.keymap.set(modes, lhs, rhs, opts)
+end
+
 --------------------------------------------------------------------------------
 -- META
 
 -- search keymaps
+keymap("n", "?", function() cmd.Telescope("keymaps") end, { desc = "⌨️  Search Keymaps" })
 keymap("n", "?", function() cmd.Telescope("keymaps") end, { desc = "⌨️  Search Keymaps" })
 
 keymap("n", "<D-,>", function()
@@ -425,3 +437,4 @@ autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
+

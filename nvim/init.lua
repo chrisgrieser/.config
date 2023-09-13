@@ -38,3 +38,16 @@ safeRequire("config.user-commands")
 safeRequire("config.abbreviations")
 
 safeRequire("funcs.pulling-strings")
+
+
+if vim.version.major == 0 and vim.version().minor >= 10 then
+	local todo = {
+		"TODO for 0.10",
+		"- satellite.nvim can now be updated.",
+		"- biome lspconfig https://github.com/neovim/nvim-lspconfig/issues/2807",
+		"- vim.system",
+		"- vim.lsp.getclient",
+		"- vim.uv instead of vim.loop",
+	}
+	vim.notify(table.concat(todo, "\n"))
+end
