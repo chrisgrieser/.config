@@ -1,4 +1,4 @@
-local keymap = vim.keymap.set
+local keymap = require("config.utils").uniqueKeymap
 local cmd = vim.cmd
 local u = require("config.utils")
 --------------------------------------------------------------------------------

@@ -127,6 +127,18 @@ function M.addToLuaLine(location, section, component)
 	require("config.theme-customization").reloadTheming()
 end
 
+---ensures unique keymaps, see https://neovim.io/doc/user/map.html#%3Amap-unique
+---@param modes "n"|"v"|"x"|"i"|"o"|"c"|"t"|string[]
+---@param lhs string
+---@param rhs string|function
+---@param opts object
+function M.uniqueKeymap (modes, lhs, rhs, opts)
+	if not opts then opts = {} end
+	opts.unique = true
+	vim.keymap.set(modes, lhs, rhs, opts)
+end
+
+
 --------------------------------------------------------------------------------
 
 ---Sets the global BorderStyle variable and the matching BorderChars Variable.

@@ -2,8 +2,8 @@ local autocmd = vim.api.nvim_create_autocmd
 local bo = vim.bo
 local cmd = vim.cmd
 local fn = vim.fn
-local keymap = vim.keymap.set
 local u = require("config.utils")
+local keymap = require("config.utils").uniqueKeymap
 
 --------------------------------------------------------------------------------
 -- META
@@ -66,7 +66,7 @@ end, { desc = "󰽘 Inspect FileType & BufType" })
 
 keymap("n", "<leader>ff", ":% s/<C-r><C-w>//g<Left><Left><Left>", { desc = " :s (cursor word)" })
 keymap("x", "<leader>ff", [["zy:%s /<C-r>z//g<Left><Left>]], { desc = " :s (selection)" })
-keymap("x", "<leader>fs", ":s ///g<Left><Left><Left>", { desc = " :s (inside selection)" })
+keymap("x", "<leader>fv", ":s ///g<Left><Left><Left>", { desc = " :s (inside visual)" })
 
 keymap("n", "<leader>fd", ":g //d<Left><Left>", { desc = " delete matching" })
 keymap("n", "<leader>fy", ":g //y<Left><Left>", { desc = " yank matching" })
@@ -156,7 +156,7 @@ keymap(
 
 -- LOGGING
 -- stylua: ignore start
-keymap({ "n", "x" }, "<leader>ll", function() require("funcs.sawmill").messageLog() end, { desc = "󰸢 message log" })
+keymap({ "n", "x" }, "<leader>lm", function() require("funcs.sawmill").messageLog() end, { desc = "󰸢 message log" })
 keymap({ "n", "x" }, "<leader>ll", function() require("funcs.sawmill").variableLog() end, { desc = "󰸢 variable log" })
 keymap({ "n", "x" }, "<leader>lo", function() require("funcs.sawmill").objectLog() end, { desc = "󰸢 object log" })
 keymap("n", "<leader>lb", function() require("funcs.sawmill").beepLog() end, { desc = "󰸢 beep log" })
