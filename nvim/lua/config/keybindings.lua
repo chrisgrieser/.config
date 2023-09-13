@@ -40,7 +40,7 @@ keymap({ "n", "x" }, "gk", function() require("funcs.quality-of-life").gotoNextI
 
 -- Jump history
 keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
-vim.keymap.set("n", "<C-l>", "<C-i>", { desc = "Jump forward" }) -- overwrites nvim default: https://neovim.io/doc/user/vim_diff.html#default-mappings
+keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward", unique = false }) -- overwrites nvim default: https://neovim.io/doc/user/vim_diff.html#default-mappings
 
 -- Simplified Marks
 -- INFO a custom lualine component shows what is currently marked
@@ -375,16 +375,17 @@ autocmd("LspAttach", {
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
 		local capabilities = client.server_capabilities
 
-		-- overrides treesitter-refactor rename
 		-- stylua: ignore start
 		if capabilities.renameProvider then
 			-- needs defer to not be overwritten by treesitter-refactor smart-rename
-			vim.defer_fn(function() vim.keymap.set("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename", buffer = true }) end, 1)
-			vim.keymap.set("n", "<leader>V", function() return ":IncRename " .. expand("<cword>") end, { desc = "󰒕 IncRename (cword)", buffer = true, expr = true })
+			vim.defer_fn(function() 
+				keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename", buffer = true, unique = false }) end
+			, 1)
+			keymap("n", "<leader>V", ":IncRename <C-r><C-w>", { desc = "󰒕 IncRename (cword)", buffer = true, unique = false })
 		end
 		if capabilities.documentSymbolProvider then
-			vim.keymap.set("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Symbols", buffer = true })
-			vim.keymap.set("n", "gw", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true })
+			keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Symbols", buffer = true, unique = false })
+			keymap("n", "gw", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true, unique = false })
 		end
 		-- stylua: ignore end
 	end,
@@ -412,9 +413,8 @@ autocmd("FileType", {
 		"man",
 	},
 	callback = function()
-		local opts = { buffer = true, nowait = true, desc = "󱎘 Close" }
-		vim.keymap.set("n", "<Esc>", cmd.close, opts)
-		vim.keymap.set("n", "q", cmd.close, opts)
+		local opts = { buffer = true, nowait = true, desc = "󱎘 Close", unique = false }
+		keymap("n", "<Esc>", cmd.close, opts)
+		keymap("n", "q", cmd.close, opts)
 	end,
 })
-
