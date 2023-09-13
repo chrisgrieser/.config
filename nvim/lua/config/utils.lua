@@ -129,10 +129,10 @@ end
 ---@param modes "n"|"v"|"x"|"i"|"o"|"c"|"t"|string[]
 ---@param lhs string
 ---@param rhs string|function
----@param opts? object
+---@param opts? object -- if unique is nil, defaults to true
 function M.uniqueKeymap(modes, lhs, rhs, opts)
 	if not opts then opts = {} end
-	opts.unique = true
+	if opts.unique == nil then opts.unique = true end
 	vim.keymap.set(modes, lhs, rhs, opts)
 end
 
