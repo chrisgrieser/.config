@@ -96,7 +96,7 @@ end
 
 ---@param filetype string|string[]
 function M.setupFiletypeKeymap(filetype, ...)
-	local mode, lhs, rhs, opts = unpack({ ... })
+	local mode, lhs, rhs, opts = unpack { ... }
 	opts.buffer = true
 	vim.api.nvim_create_autocmd("FileType", {
 		pattern = filetype,
@@ -119,25 +119,22 @@ function M.addToLuaLine(location, section, component)
 	local componentObj = type(component) == "table" and component or { component }
 	if location == "tabline" then componentObj.section_separators = topSeparators end
 	table.insert(sectionConfig, componentObj)
-	lualine.setup {
-		[location] = { [section] = sectionConfig },
-	}
+	lualine.setup { [location] = { [section] = sectionConfig } }
 
 	-- Theming needs to be re-applied, since the lualine-styling can change
 	require("config.theme-customization").reloadTheming()
 end
 
----ensures unique keymaps, see https://neovim.io/doc/user/map.html#%3Amap-unique
+---ensures unique keymaps https://www.reddit.com/r/neovim/comments/16h2lla/can_you_make_neovim_warn_you_if_your_config_maps/
 ---@param modes "n"|"v"|"x"|"i"|"o"|"c"|"t"|string[]
 ---@param lhs string
 ---@param rhs string|function
----@param opts object
-function M.uniqueKeymap (modes, lhs, rhs, opts)
+---@param opts? object
+function M.uniqueKeymap(modes, lhs, rhs, opts)
 	if not opts then opts = {} end
 	opts.unique = true
 	vim.keymap.set(modes, lhs, rhs, opts)
 end
-
 
 --------------------------------------------------------------------------------
 

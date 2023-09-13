@@ -1,5 +1,5 @@
 local g = vim.g
-local keymap = vim.keymap.set
+local keymap = require("config.utils").uniqueKeymap
 --------------------------------------------------------------------------------
 
 -- REMOTE CONTROL
