@@ -4,23 +4,11 @@ local cmd = vim.cmd
 local expand = vim.fn.expand
 local fn = vim.fn
 local u = require("config.utils")
-
----ensures unique keymaps
----@param modes string|string[]
----@param lhs string
----@param rhs string|function
----@param opts object
-local function keymap (modes, lhs, rhs, opts)
-	if not opts then opts = {} end
-	opts.unique = true -- https://neovim.io/doc/user/map.html#%3Amap-unique
-	vim.keymap.set(modes, lhs, rhs, opts)
-end
-
+local keymap = require("config.utils").uniqueKeymap
 --------------------------------------------------------------------------------
 -- META
 
 -- search keymaps
-keymap("n", "?", function() cmd.Telescope("keymaps") end, { desc = "⌨️  Search Keymaps" })
 keymap("n", "?", function() cmd.Telescope("keymaps") end, { desc = "⌨️  Search Keymaps" })
 
 keymap("n", "<D-,>", function()
@@ -52,7 +40,7 @@ keymap({ "n", "x" }, "gk", function() require("funcs.quality-of-life").gotoNextI
 
 -- Jump history
 keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
-keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward" })
+vim.keymap.set("n", "<C-l>", "<C-i>", { desc = "Jump forward" }) -- overwrites nvim default: https://neovim.io/doc/user/vim_diff.html#default-mappings
 
 -- Simplified Marks
 -- INFO a custom lualine component shows what is currently marked
@@ -74,17 +62,11 @@ keymap("n", "gH", "<cmd>Gitsigns prev_hunk<CR>zv", { desc = "󰊢 Previous Hunk"
 keymap("n", "gc", "g;", { desc = "Goto older change" })
 keymap("n", "gC", "g,", { desc = "Goto newer change" })
 
--- Sentence Movement without shift
-keymap("n", "]", ")")
-keymap("n", "[", "(")
-
 --------------------------------------------------------------------------------
 
 -- SEARCH
 keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
-keymap("n", "+", "*")
-keymap("x", "+", [["zy/\V<C-R>=getreg("@z")<CR><CR>]], { desc = "* Visual Star" })
 
 -- auto-nohl -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
 vim.on_key(function(char)
@@ -397,12 +379,12 @@ autocmd("LspAttach", {
 		-- stylua: ignore start
 		if capabilities.renameProvider then
 			-- needs defer to not be overwritten by treesitter-refactor smart-rename
-			vim.defer_fn( function() keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename", buffer = true }) end, 1)
-			keymap("n", "<leader>V", function() return ":IncRename " .. expand("<cword>") end, { desc = "󰒕 IncRename (cword)", buffer = true, expr = true })
+			vim.defer_fn(function() vim.keymap.set("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename", buffer = true }) end, 1)
+			vim.keymap.set("n", "<leader>V", function() return ":IncRename " .. expand("<cword>") end, { desc = "󰒕 IncRename (cword)", buffer = true, expr = true })
 		end
 		if capabilities.documentSymbolProvider then
-			keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Symbols", buffer = true })
-			keymap("n", "gw", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true })
+			vim.keymap.set("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Symbols", buffer = true })
+			vim.keymap.set("n", "gw", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true })
 		end
 		-- stylua: ignore end
 	end,
@@ -431,10 +413,10 @@ autocmd("FileType", {
 	},
 	callback = function()
 		local opts = { buffer = true, nowait = true, desc = "󱎘 Close" }
-		keymap("n", "<Esc>", cmd.close, opts)
-		keymap("n", "q", cmd.close, opts)
+		vim.keymap.set("n", "<Esc>", cmd.close, opts)
+		vim.keymap.set("n", "q", cmd.close, opts)
 	end,
 })
 
 --------------------------------------------------------------------------------
-
+keymap("n", "j", "j")
