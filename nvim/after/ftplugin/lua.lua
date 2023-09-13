@@ -25,6 +25,8 @@ keymap("n", "<leader>r", function()
 		return
 	elseif filepath:find("nvim/after/ftplugin/") then
 		u.notify("", "ftplugins cannot be reloaded.", "warn")
+	elseif filepath:find("nvim/lua/config/.*keymap") or filepath:find("nvim/lua/config/.*keybinding") then
+		u.notify("", "keymaps cannot be reloaded due to `mapunique`", "warn")
 	elseif filepath:find("nvim/lua/plugins/") then
 		-- experimental reload of plugin-specs via lazy.nvim
 		local packageName = vim.fn.expand("%:t:r")
