@@ -124,6 +124,7 @@ end
 --------------------------------------------------------------------------------
 
 local formatterConfig = {
+	log_level = vim.log.levels.DEBUG,
 	formatters_by_ft = {
 		lua = { "stylua" },
 		python = { "black" },
@@ -142,17 +143,17 @@ local formatterConfig = {
 		-- stylelint = {},
 		codespell = {
 			command = "codespell",
+			stdin = false,
 			args = {
 				"$FILENAME",
 				"--write-changes",
 				"--quiet-level=16",
-				-- "--ignore-words",
-				-- linterConfig .. "/codespell-ignore.txt",
+				"--ignore-words",
+				linterConfig .. "/codespell-ignore.txt",
 			},
-			stdin = false,
-			-- condition = function(ctx)
-			-- 	return not (ctx.filename:find("%.css$") or ctx.filename:find("%.bib$"))
-			-- end,
+			condition = function(ctx)
+				return not (ctx.filename:find("%.css$") or ctx.filename:find("%.bib$"))
+			end,
 		},
 		markdownlint = {
 			command = "markdownlint",
