@@ -14,7 +14,7 @@ local toolsToAutoinstall = {
 	"stylua",
 	"pylint",
 	"bibtex-tidy",
-	"prettier", -- only yaml formatter preserving blank lines https://github.com/mikefarah/yq/issues/515
+	"prettier", -- only yaml formatter that preserves blank lines https://github.com/mikefarah/yq/issues/515
 	-- INFO stylelint included in mason, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
 }
 
@@ -23,6 +23,7 @@ local toolsToAutoinstall = {
 local function linterConfigs()
 	local lint = require("lint")
 	local linters = require("lint").linters
+
 	lint.linters_by_ft = {
 		lua = { "selene" },
 		css = { "stylelint" },
