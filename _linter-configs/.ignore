@@ -1,2 +1,5 @@
 # vim spell files
 *.add.spl
+
+# vale styles
+vale/styles
