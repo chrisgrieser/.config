@@ -28,42 +28,10 @@ end
 ---@field code string
 ---@field bufnr number
 
----This function fixes that efm does not separate code & source, but puts them
----together into the diagnostic message
----@param diag diagnostic
----@return diagnostic
----@nodiscard
-local function parseEfmDiagnostic(diag)
-	-- EXAMPLES: source at the beginning, rule location variable
-	-- "[shellcheck] Useless echo? Instead of 'cmd $(echo foo)', just use 'cmd foo'. [SC2116]"
-	-- "[selene] [parenthese_conditions]: lua does not require parentheses around conditions"
-	-- "Too many local variables (16/15) (too-many-locals)", source: pylint
-
-	if diag.source == "pylint" then
-		diag.code = diag.message:match(" ?%(([%w-]+)%)$")
-		diag.message = diag.message:gsub(" ?%([%w-]+%)$", "")
-		return diag
-	end
-
-	local efmSource = diag.message:match("^%[(%a+)%] ")
-	-- prevent false positives or multiple efm diagnostic parsings
-	if not efmSource then return diag end
-
-	diag.message = diag.message:gsub("^%[%a+%] ", "")
-	diag.source = efmSource
-
-	local efmCode = diag.message:match(" ?%[([%w_-]+)%]:? ?")
-	diag.message = diag.message:gsub(" ?%[[%w_-]+%]:? ?", "")
-	diag.code = efmCode
-
-	return diag
-end
-
 ---@nodiscard
 ---@param diag diagnostic
 ---@return string text to display
 local function diagnosticFmt(diag)
-	diag = parseEfmDiagnostic(diag)
 	local source = diag.source and " (" .. diag.source:gsub("%.$", "") .. ")" or ""
 
 	return diag.message .. source
@@ -89,7 +57,6 @@ vim.diagnostic.config {
 
 ---@param diag diagnostic
 local function searchForTheRule(diag)
-	diag = parseEfmDiagnostic(diag)
 	if not (diag.code and diag.source) then
 		u.notify("", "diagnostic without code or source", "warn")
 		return

@@ -19,10 +19,7 @@ end, { desc = "⌨️ Edit leader-keybindings.lua" })
 keymap("n", "<leader>pg", function() cmd.Telescope("highlights") end, { desc = " Highlight Groups" })
 
 -- Plugins
-keymap("n", "<leader>pp", function()
-	vim.cmd.MasonToolsUpdate()
-	require("lazy").sync()
-end, { desc = " Lazy/Mason Update" })
+keymap("n", "<leader>pp", require("lazy").sync, { desc = " Lazy Update" })
 keymap("n", "<leader>ph", require("lazy").home, { desc = " Lazy Overview" })
 keymap("n", "<leader>pi", require("lazy").install, { desc = " Lazy Install" })
 
