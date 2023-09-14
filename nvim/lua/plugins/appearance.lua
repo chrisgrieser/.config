@@ -40,8 +40,8 @@ return {
 		end,
 		opts = {
 			nearest_only = true,
-			-- format virtual text
 			override_lens = function(render, posList, nearest, idx, _)
+				-- formats virtual text
 				local lnum, col = unpack(posList[idx])
 				local text = ("%d/%d"):format(idx, #posList)
 				local chunks = {
@@ -67,7 +67,7 @@ return {
 		opts = {
 			use_treesitter = true,
 			show_current_context = true, -- color active indent differently
-			context_highlight_list = { "Comment" }, -- highlight group
+			context_highlight_list = { "Comment" }, 
 			filetype_exclude = { "undotree", "help", "man", "lspinfo", "" },
 		},
 	},

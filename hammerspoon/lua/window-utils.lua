@@ -58,7 +58,9 @@ function M.moveResize(win, pos)
 	if
 		not win
 		or not (win:application())
+		---@diagnostic disable-next-line: undefined-field
 		or u.tbl_contains(appsToIgnore, win:application():name())
+		---@diagnostic disable-next-line: undefined-field
 		or not (win:isMaximizable() or win:application():name() == "SideNotes")
 		or not (win:isStandard())
 	then

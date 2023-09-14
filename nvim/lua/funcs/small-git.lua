@@ -16,7 +16,6 @@ local function notify(msg, level)
 	vim.notify(msg, vim.log.levels[level:upper()], { title = pluginName })
 end
 
-
 ---also notifies if not in git repo
 ---@nodiscard
 ---@return boolean
@@ -27,9 +26,11 @@ local function isInGitRepo()
 	return inGitRepo
 end
 
----@param soundFilepath any
+---if on mac, play a sound
+---@param soundFilepath string
 local function playSoundMacOS(soundFilepath)
-	if vim.fn.has("macunix") == 1 then fn.system(("afplay %q &"):format(soundFilepath)) end
+	if vim.fn.has("macunix") ~= 1 then return end
+	fn.system(("afplay %q &"):format(soundFilepath))
 end
 
 -- some comment
@@ -81,6 +82,7 @@ local gitShellOpts = {
 ---@return boolean is the commit message valid?
 ---@return string the (modified) commit message
 local function processCommitMsg(commitMsg)
+	commitMsg = vim.trim(commitMsg)
 	if #commitMsg > commitMsgMaxLength then
 		notify("Commit Message too long.", "warn")
 		local shortenedMsg = commitMsg:sub(1, commitMsgMaxLength)
@@ -121,11 +123,6 @@ local function setGitCommitAppearance()
 			vim.opt_local.colorcolumn = { 50, commitMsgMaxLength } -- https://stackoverflow.com/questions/2290016/git-commit-messages-50-72-formatting
 			vim.api.nvim_set_hl(winNs, "ColorColumn", { link = "DiagnosticVirtualTextInfo" })
 			vim.api.nvim_set_hl(winNs, "commitmsg", { bg = "#E06C75" })
-
-			-- configure diagnostics for linters like gitlint
-			vim.diagnostic.config({
-				signs = false,
-			}, winNs)
 		end,
 	})
 end
@@ -241,7 +238,7 @@ end
 ---opens current buffer in the browser & copies the link to the clipboard
 ---normal mode: link to file
 ---visual mode: link to selected lines
----@param justOpenRepo any
+---@param justOpenRepo any -- don't link to file with a specific commit, just link to repo
 function M.githubUrl(justOpenRepo)
 	if not isInGitRepo() then return end
 
