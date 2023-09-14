@@ -22,6 +22,7 @@ local toolsToAutoinstall = {
 
 local function linterConfigs()
 	local lint = require("lint")
+	local linters = require("lint").linters
 	lint.linters_by_ft = {
 		lua = { "selene" },
 		css = { "stylelint" },
@@ -42,68 +43,30 @@ local function linterConfigs()
 		if ft ~= "bib" and ft ~= "css" then table.insert(lint.linters_by_ft[ft], "codespell") end
 	end
 
-	-- https://github.com/mfussenegger/nvim-lint/tree/master/lua/lint/linters
-	-- only changed severity for the parser
-	lint.linters.codespell.args = {
+	linters.codespell.args = {
 		"--ignore-words",
 		linterConfig .. "/codespell-ignore.txt",
+		"--builtin=rare,clear,informal,code,names,en-GB_to_en-US",
 	}
 
-	lint.linters.shellcheck.args = {
+	linters.shellcheck.args = {
 		"--shell=bash", -- force to work with zsh
 		"--format=json",
 		"-",
 	}
 
-	lint.linters.yamllint.args = {
+	linters.yamllint.args = {
 		"--config-file",
 		linterConfig .. "/yamllint.yaml",
 		"--format=parsable",
 		"-",
 	}
 
-	lint.linters.markdownlint.args = {
+	linters.markdownlint.args = {
 		"--disable=no-trailing-spaces", -- not disabled in config, so it's enabled for formatting
 		"--disable=no-multiple-blanks",
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
 	}
-
-	-- FIX auto-save.nvim creating spurious errors for some reason. Therefore
-	-- removing stylelint-error from it. Also, suppress warnings
-	-- lint.linters.stylelint.args = {
-	-- 	"--quiet", -- suppresses warnings (since stylelint-order stuff too noisy)
-	-- 	"--formatter=json",
-	-- 	"--stdin",
-	-- 	"--stdin-filename",
-	-- 	function() return vim.fn.expand("%:p") end,
-	-- }
-	-- lint.linters.stylelint.parser = function(output)
-	-- 	local status, decoded = pcall(vim.json.decode, output)
-	-- 	if not status or not decoded then return {} end
-	-- 	decoded = decoded[1]
-	-- 	if not decoded.errored then return {} end
-	-- 	local diagnostics = {}
-	-- 	for _, diag in ipairs(decoded.warnings) do
-	-- 		-- filtering order-violations, since they are auto-fixed and would
-	-- 		-- only add noise.
-	-- 		if diag.rule ~= "order/properties-order" then
-	-- 			table.insert(diagnostics, {
-	-- 				lnum = diag.line - 1,
-	-- 				col = diag.column - 1,
-	-- 				end_lnum = diag.line - 1,
-	-- 				end_col = diag.column - 1,
-	-- 				message = diag.text:gsub("%b()", ""),
-	-- 				code = diag.rule,
-	-- 				user_data = { lsp = { code = diag.rule } },
-	-- 				severity = vim.diagnostic.severity.WARN, -- output all as warnings
-	-- 				source = "stylelint",
-	-- 			})
-	-- 		end
-	-- 	end
-	-- 	return diagnostics
-	-- end
-
-	-----------------------------------------------------------------------------
 end
 
 local function lintTriggers()
@@ -132,22 +95,32 @@ local formatterConfig = {
 		html = { "prettier" },
 		markdown = { "markdownlint" },
 		css = { "stylelint", "prettier" },
-		sh = { "shfmt", "shellharden" },
+		sh = { "shfmt", "shellcheck" },
 		bib = { "bibtex_tidy" },
 		["*"] = { "codespell" },
 	},
-	-- teh
 
 	-- custom formatters
 	formatters = {
-		-- stylelint = {},
+		shellcheck = {
+			command = "shellcheck",
+			-- Using `git apply` is the officially recommended way for auto-fixing
+			-- https://github.com/koalaman/shellcheck/issues/1220#issuecomment-594811243
+			args = { "--shell=bash --format=diff $FILENAME | git apply" },
+			stdin = false,
+		},
+		stylelint = {
+			command = "stylelint",
+			args = { "--stdin", "--fix" },
+			stdin = true,
+		},
 		codespell = {
 			command = "codespell",
 			stdin = false,
 			args = {
 				"$FILENAME",
 				"--write-changes",
-				"--builtin=rare,clear",
+				"--builtin=rare,clear,informal,code,names,en-GB_to_en-US",
 				"--check-hidden", -- conform temp file is hidden
 				"--ignore-words",
 				linterConfig .. "/codespell-ignore.txt",

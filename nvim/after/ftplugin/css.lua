@@ -16,7 +16,7 @@ keymap("n", "<leader>i", function()
 	if lineContent:find("!important") then
 		lineContent = lineContent:gsub(" !important", "")
 	else
-		lineContent = lineContent:gsub(";?$", " !important;")
+		lineContent = lineContent:gsub(";?$", " !important;", 1)
 	end
 	vim.api.nvim_set_current_line(lineContent)
 end, { buffer = true, desc = " Toggle !important", nowait = true })
