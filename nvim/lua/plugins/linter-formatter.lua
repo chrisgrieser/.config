@@ -117,6 +117,8 @@ local function lintTriggers()
 		pattern = "AutoSaveWritePost",
 		callback = function() require("lint").try_lint() end,
 	})
+	-- run once on start
+	require("lint").try_lint()
 end
 
 --------------------------------------------------------------------------------
@@ -147,6 +149,9 @@ local formatterConfig = {
 				-- linterConfig .. "/codespell-ignore.txt",
 			},
 			stdin = false,
+			-- condition = function(ctx)
+			-- 	return not (ctx.filename:find("%.css$") or ctx.filename:find("%.bib$"))
+			-- end,
 		},
 		markdownlint = {
 			command = "markdownlint",
@@ -208,7 +213,7 @@ return {
 			{
 				"<D-s>",
 				function()
-					require("conform").format()
+					require("conform").format { lsp_fallback = true }
 					vim.cmd.update()
 				end,
 				mode = { "n", "x" },
