@@ -233,7 +233,7 @@ return {
 				border = u.borderStyle,
 				relative = "editor",
 				title_pos = "left",
-				min_width = { 0.4, 55 },
+				min_width = { 0.4, 60 },
 				win_options = { winblend = 0 },
 			},
 			select = {

@@ -47,6 +47,7 @@ local function linterConfigs()
 
 	linters.gitlint = {
 		cmd = "gitlint",
+		args = { "--config", linterConfig .. "/gitlint.ini" },
 		stdin = true,
 		stream = "stderr",
 		ignore_exitcode = true,

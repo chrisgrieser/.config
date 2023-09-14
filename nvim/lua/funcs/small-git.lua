@@ -1,6 +1,12 @@
 local M = {}
 local fn = vim.fn
 
+--------------------------------------------------------------------------------
+-- CONFIG
+local commitMsgMaxLength = 72
+
+--------------------------------------------------------------------------------
+-- HELPERS
 ---send notification
 ---@param msg string
 ---@param level? "info"|"trace"|"debug"|"warn"|"error"
@@ -10,8 +16,6 @@ local function notify(msg, level)
 	vim.notify(msg, vim.log.levels[level:upper()], { title = pluginName })
 end
 
---------------------------------------------------------------------------------
--- HELPERS
 
 ---also notifies if not in git repo
 ---@nodiscard
@@ -77,10 +81,9 @@ local gitShellOpts = {
 ---@return boolean is the commit message valid?
 ---@return string the (modified) commit message
 local function processCommitMsg(commitMsg)
-	-- ensure max 50 chars
-	if #commitMsg > 50 then
+	if #commitMsg > commitMsgMaxLength then
 		notify("Commit Message too long.", "warn")
-		local shortenedMsg = commitMsg:sub(1, 50)
+		local shortenedMsg = commitMsg:sub(1, commitMsgMaxLength)
 		return false, shortenedMsg
 	elseif commitMsg == "" then
 		return true, "chore"
@@ -106,18 +109,23 @@ local function setGitCommitAppearance()
 		pattern = "DressingInput",
 		once = true, -- do not affect other dressing inputs
 		callback = function()
-			local winNs = 1
+			local winNs = 2
 			vim.api.nvim_win_set_hl_ns(0, winNs)
-			fn.matchadd("commitmsg", [[.\{49}\zs.*\ze]])
+			fn.matchadd("commitmsg", ([[.\{%s}\zs.*\ze]]):format(commitMsgMaxLength - 1))
 
 			vim.bo.filetype = "gitcommit" -- for treesitter highlighting
 			vim.api.nvim_buf_set_name(0, "COMMIT_EDITMSG") -- for statusline
 
 			vim.api.nvim_set_hl(winNs, "Title", { link = "Normal" })
 
-			vim.opt_local.colorcolumn = "50"
+			vim.opt_local.colorcolumn = { 50, commitMsgMaxLength } -- https://stackoverflow.com/questions/2290016/git-commit-messages-50-72-formatting
 			vim.api.nvim_set_hl(winNs, "ColorColumn", { link = "DiagnosticVirtualTextInfo" })
 			vim.api.nvim_set_hl(winNs, "commitmsg", { bg = "#E06C75" })
+
+			-- configure diagnostics for linters like gitlint
+			vim.diagnostic.config({
+				signs = false,
+			}, winNs)
 		end,
 	})
 end
