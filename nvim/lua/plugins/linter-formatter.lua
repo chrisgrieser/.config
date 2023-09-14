@@ -145,6 +145,7 @@ local formatterConfig = {
 			args = {
 				"$FILENAME",
 				"--write-changes",
+				"--quiet-level=16",
 				-- "--ignore-words",
 				-- linterConfig .. "/codespell-ignore.txt",
 			},
