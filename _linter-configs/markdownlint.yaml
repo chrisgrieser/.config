@@ -1,10 +1,6 @@
 # Default config: https://github.com/DavidAnson/markdownlint/blob/main/schema/.markdownlint.yaml
 #───────────────────────────────────────────────────────────────────────────────
 
-# taken care of by formatter
-# no-multiple-blanks: false 
-# single-trailing-newline: false
-# no-trailing-spaces: false
 blanks-around-headings: { lines_below: 0 }
 blanks-around-lists: false
 

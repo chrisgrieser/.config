@@ -49,7 +49,6 @@ local function linterConfigs()
 		linterConfig .. "/codespell-ignore.txt",
 	}
 
-	lint.linters.markdownlint.args = { "--config", linterConfig .. "/markdownlint.yaml" }
 	lint.linters.shellcheck.args = {
 		"--shell=bash", -- force to work with zsh
 		"--format=json",
@@ -61,6 +60,12 @@ local function linterConfigs()
 		linterConfig .. "/yamllint.yaml",
 		"--format=parsable",
 		"-",
+	}
+
+	lint.linters.markdownlint.args = {
+		"--disable=no-trailing-spaces", -- not disabled in config, so it's enabled for formatting
+		"--disable=no-multiple-blanks",
+		"--config=" .. linterConfig .. "/markdownlint.yaml",
 	}
 
 	-- FIX auto-save.nvim creating spurious errors for some reason. Therefore
@@ -117,21 +122,7 @@ end
 --------------------------------------------------------------------------------
 
 local formatterConfig = {
-	formatters = {
-		markdownlint = {
-			command = "markdownlint",
-			args = { "--fix", "--config", linterConfig .. "/markdownlint.yaml", "$FILENAME" },
-			stdin = false,
-			-- cwd = function() return require("conform.util").root_file { ".editorconfig", "package.json" } end,
-		},
-		["bibtex-tidy"] = {
-			command = "bibtex-tidy",
-			args = { "--fix", "--config", linterConfig .. "/markdownlint.yaml", "$FILENAME" },
-			stdin = false,
-		},
-	},
 	formatters_by_ft = {
-		-- TODO codespell
 		lua = { "stylua" },
 		python = { "black" },
 		yaml = { "prettier" },
@@ -139,7 +130,49 @@ local formatterConfig = {
 		markdown = { "markdownlint" },
 		css = { "stylelint", "prettier" },
 		sh = { "shfmt", "shellharden" },
-		bib = { "bibtex-tidy" },
+		bib = { "bibtex_tidy" },
+		["*"] = { "codespell" },
+	},
+	-- teh
+
+	-- custom formatters
+	formatters = {
+		-- stylelint = {},
+		codespell = {
+			command = "codespell",
+			args = {
+				"$FILENAME",
+				"--write-changes",
+				-- "--ignore-words",
+				-- linterConfig .. "/codespell-ignore.txt",
+			},
+			stdin = false,
+		},
+		markdownlint = {
+			command = "markdownlint",
+			args = { "--fix", "--config", linterConfig .. "/markdownlint.yaml", "$FILENAME" },
+			stdin = false,
+		},
+		bibtex_tidy = {
+			command = "bibtex-tidy",
+			args = {
+				"--quiet",
+				"--tab",
+				"--curly",
+				"--strip-enclosing-braces",
+				"--enclosing-braces=title,journal,booktitle",
+				"--numeric",
+				"--months",
+				"--no-align",
+				"--encode-urls",
+				"--duplicates",
+				"--drop-all-caps",
+				"--sort-fields",
+				"--remove-empty-fields",
+				"--no-wrap",
+			},
+			stdin = true,
+		},
 	},
 }
 
