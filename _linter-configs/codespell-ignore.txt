@@ -16,3 +16,8 @@ enew
 
 # actually a plugin name :S
 noice
+
+# prefer British English over American English here
+acknowledgement
+acknowledgements
+aesthetics
