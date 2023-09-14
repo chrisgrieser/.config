@@ -122,6 +122,8 @@ local formatterConfig = {
 		-- 	stdin = false,
 		-- },
 		-- PENDING https://github.com/stevearc/conform.nvim/pull/45
+
+
 		biome = {
 			command = "biome",
 			stdin = true,
