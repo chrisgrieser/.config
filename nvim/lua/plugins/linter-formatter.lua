@@ -8,6 +8,7 @@ local toolsToAutoinstall = {
 	"shellcheck",
 	"shfmt",
 	"markdownlint",
+	"vale",
 	"black",
 	"selene",
 	"stylua",
@@ -28,7 +29,7 @@ local function linterConfigs()
 		css = { "stylelint" },
 		sh = { "shellcheck" },
 		zsh = { "shellcheck" },
-		markdown = { "proselint", "markdownlint" },
+		markdown = { "markdownlint", "vale" },
 		yaml = { "yamllint" },
 		python = { "pylint" },
 		json = {},
@@ -42,6 +43,15 @@ local function linterConfigs()
 	for ft, _ in pairs(lint.linters_by_ft) do
 		if ft ~= "bib" and ft ~= "css" then table.insert(lint.linters_by_ft[ft], "codespell") end
 	end
+
+	linters.vale.args = {
+		"--no-exit",
+		"--output=JSON",
+		"--ext=md",
+		"--config",
+		linterConfig .. "/vale/vale.ini",
+	}
+	linters.vale.stdin = false
 
 	linters.codespell.args = {
 		"--ignore-words",
