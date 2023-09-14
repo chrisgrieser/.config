@@ -95,25 +95,33 @@ local formatterConfig = {
 		html = { "prettier" },
 		markdown = { "markdownlint" },
 		css = { "stylelint", "prettier" },
-		sh = { "shfmt", "shellcheck" },
+		sh = { "shfmt", "shellharden" },
 		bib = { "bibtex_tidy" },
 		["*"] = { "codespell" },
 	},
 
 	-- custom formatters
 	formatters = {
-		shellcheck = {
-			command = "shellcheck",
-			-- Using `git apply` is the officially recommended way for auto-fixing
-			-- https://github.com/koalaman/shellcheck/issues/1220#issuecomment-594811243
-			args = { "--shell=bash --format=diff $FILENAME | git apply" },
-			stdin = false,
-		},
+		-- PENDING https://github.com/stevearc/conform.nvim/issues/44
+		-- shellcheck = {
+		-- 	command = "shellcheck",
+		-- 	-- Using `git apply` is the officially recommended way for auto-fixing
+		-- 	-- https://github.com/koalaman/shellcheck/issues/1220#issuecomment-594811243
+		-- 	arg = "--shell=bash --format=diff '$FILENAME' | git apply",
+		-- 	stdin = false,
+		-- },
+		-- PENDING https://github.com/stevearc/conform.nvim/pull/45
 		stylelint = {
 			command = "stylelint",
 			args = { "--stdin", "--fix" },
 			stdin = true,
 		},
+		markdownlint = {
+			command = "markdownlint",
+			stdin = false,
+			args = { "--fix", "--config", linterConfig .. "/markdownlint.yaml", "$FILENAME" },
+		},
+		--------------------------------------------------------------------------
 		codespell = {
 			command = "codespell",
 			stdin = false,
@@ -130,13 +138,9 @@ local formatterConfig = {
 				return not (ctx.filename:find("%.css$") or ctx.filename:find("%.bib$"))
 			end,
 		},
-		markdownlint = {
-			command = "markdownlint",
-			args = { "--fix", "--config", linterConfig .. "/markdownlint.yaml", "$FILENAME" },
-			stdin = false,
-		},
 		bibtex_tidy = {
 			command = "bibtex-tidy",
+			stdin = true,
 			args = {
 				"--quiet",
 				"--tab",
@@ -153,7 +157,6 @@ local formatterConfig = {
 				"--remove-empty-fields",
 				"--no-wrap",
 			},
-			stdin = true,
 		},
 	},
 }

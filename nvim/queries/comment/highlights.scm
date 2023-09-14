@@ -12,7 +12,7 @@
 ;───────────────────────────────────────────────────────────────────────────────
 
 ; added by me: 
-; CONFIG SIC
+; CONFIG SIC PENDING
 
 ; test for this file to work
 ; FOOBAR TEST ERROR
@@ -27,10 +27,10 @@
   (name) @text.todo @nospell
   ("(" @punctuation.bracket (user) @constant ")" @punctuation.bracket)?
   ":" @punctuation.delimiter)
-  (#any-of? @text.todo "TODO" "WIP"))
+  (#any-of? @text.todo "TODO" "WIP" "PENDING"))
 
 ("text" @text.todo @nospell
- (#any-of? @text.todo "TODO" "WIP"))
+ (#any-of? @text.todo "TODO" "WIP" "PENDING"))
 
 ((tag
   (name) @text.note @nospell

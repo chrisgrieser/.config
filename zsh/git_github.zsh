@@ -32,8 +32,6 @@ function pr {
 	git remote set-url origin "git@github.com:chrisgrieser/$reponame.git"
 }
 
-echo $SHELL
-
 function fixup {
 	local cutoff=15 # CONFIG
 
