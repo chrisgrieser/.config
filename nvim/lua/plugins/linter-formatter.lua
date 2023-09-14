@@ -13,7 +13,6 @@ local toolsToAutoinstall = {
 	"selene",
 	"stylua",
 	"pylint",
-	"proselint",
 	"bibtex-tidy",
 	"prettier", -- only yaml formatter preserving blank lines https://github.com/mikefarah/yq/issues/515
 	-- INFO stylelint included in mason, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
@@ -45,13 +44,11 @@ local function linterConfigs()
 	end
 
 	linters.vale.args = {
-		"--no-exit",
 		"--output=JSON",
-		"--ext=md",
+		"--ext=.md",
 		"--config",
 		linterConfig .. "/vale/vale.ini",
 	}
-	linters.vale.stdin = false
 
 	linters.codespell.args = {
 		"--ignore-words",
@@ -99,6 +96,10 @@ end
 local formatterConfig = {
 	log_level = vim.log.levels.DEBUG,
 	formatters_by_ft = {
+		javascript = { "biome" },
+		typescript = { "biome" },
+		json = { "biome" },
+		jsonc = { "biome" },
 		lua = { "stylua" },
 		python = { "black" },
 		yaml = { "prettier" },
@@ -121,6 +122,11 @@ local formatterConfig = {
 		-- 	stdin = false,
 		-- },
 		-- PENDING https://github.com/stevearc/conform.nvim/pull/45
+		biome = {
+			command = "biome",
+			stdin = true,
+			args = { "format", "--stdin-file-path", "$FILENAME" },
+		},
 		stylelint = {
 			command = "stylelint",
 			args = { "--stdin", "--fix" },
@@ -199,6 +205,7 @@ return {
 	{
 		"stevearc/conform.nvim",
 		opts = formatterConfig,
+		cmd = "ConformInfo",
 		keys = {
 			{
 				"<D-s>",

@@ -228,7 +228,7 @@ function inputToEntryData(input) {
 }
 
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const libraryPath = $.getenv("bibtex_library_path");
 	const input = argv[0].trim();
