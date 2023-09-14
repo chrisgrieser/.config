@@ -1,8 +1,29 @@
 local linterConfig = require("config.utils").linterConfigFolder
 --------------------------------------------------------------------------------
 
-local linters = {
-	lua = { "selene" },
+local toolsToAutoinstall = {
+	"debugpy", -- just here to install ensure auto-install
+	"codespell",
+	"yamllint",
+	"shellcheck",
+	"shfmt",
+	"markdownlint",
+	"black",
+	"selene",
+	"stylua",
+	"pylint",
+	"proselint",
+	"bibtex-tidy",
+	"prettier", -- only yaml formatter preserving blank lines https://github.com/mikefarah/yq/issues/515
+	-- INFO stylelint included in mason, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
+}
+
+--------------------------------------------------------------------------------
+
+local function linterConfigs()
+	local lint = require("lint")
+	lint.linters_by_ft = {
+		lua = { "selene" },
 		css = { "stylelint" },
 		sh = { "shellcheck" },
 		zsh = { "shellcheck" },
@@ -14,28 +35,10 @@ local linters = {
 		typescript = {},
 		gitcommit = {},
 		toml = {},
-}
-
-local formatters = {
-	lua = { "stylua" },
-	python = { "black" },
-	yaml = { "prettier" },
-	html = { "prettier" },
-	markdown = { "markdownlint" },
-	css = { "stylelint", "prettier" },
-	sh = { "shfmt", "shellharden" },
-	-- bib = { bibtexTidy },
-}
-
-
---------------------------------------------------------------------------------
-
-local function linterConfigs()
-	local lint = require("lint")
-	lint.linters_by_ft = linters
+	}
 
 	-- use for codespell/cspell for all except bib and css
-	for ft, _ in pairs(linters) do
+	for ft, _ in pairs(lint.linters_by_ft) do
 		if ft ~= "bib" and ft ~= "css" then table.insert(lint.linters_by_ft[ft], "codespell") end
 	end
 
@@ -113,6 +116,35 @@ end
 
 --------------------------------------------------------------------------------
 
+local formatterConfig = {
+	formatters = {
+		markdownlint = {
+			command = "markdownlint",
+			args = { "--fix", "--config", linterConfig .. "/markdownlint.yaml", "$FILENAME" },
+			stdin = false,
+			-- cwd = function() return require("conform.util").root_file { ".editorconfig", "package.json" } end,
+		},
+		["bibtex-tidy"] = {
+			command = "bibtex-tidy",
+			args = { "--fix", "--config", linterConfig .. "/markdownlint.yaml", "$FILENAME" },
+			stdin = false,
+		},
+	},
+	formatters_by_ft = {
+		-- TODO codespell
+		lua = { "stylua" },
+		python = { "black" },
+		yaml = { "prettier" },
+		html = { "prettier" },
+		markdown = { "markdownlint" },
+		css = { "stylelint", "prettier" },
+		sh = { "shfmt", "shellharden" },
+		bib = { "bibtex-tidy" },
+	},
+}
+
+--------------------------------------------------------------------------------
+
 return {
 	{ -- auto-install missing linters & formatters
 		-- (auto-install of lsp servers done via `mason-lspconfig.nvim`)
@@ -120,13 +152,6 @@ return {
 		event = "VeryLazy",
 		dependencies = "williamboman/mason.nvim",
 		config = function()
-			local toolsToAutoinstall = {}
-			for _, linterObj in pairs(linters) do
-				local linterStr = vim.tbl_flatten(linterObj)
-				table.insert(toolsToAutoinstall, linterStr)
-			end
-
-
 			-- triggered myself, since `run_on_start`, does not work w/ lazy-loading
 			require("mason-tool-installer").setup {
 				ensure_installed = toolsToAutoinstall,
@@ -145,7 +170,7 @@ return {
 	},
 	{
 		"stevearc/conform.nvim",
-		opts = { formatters_by_ft = formatters },
+		opts = formatterConfig,
 		keys = {
 			{
 				"<D-s>",
