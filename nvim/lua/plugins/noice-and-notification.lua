@@ -183,7 +183,7 @@ return {
 			level = 0, -- minimum severity level to display (0 = display all)
 			timeout = 7500,
 			stages = "slide", -- slide|fade
-			icons = { DEBUG = "", ERROR = "", INFO = "", TRACE = "󰛁", WARN = "" },
+			icons = { DEBUG = "", ERROR = "", INFO = "", TRACE = "", WARN = "" },
 			on_open = function(win)
 				-- set borderstyle
 				if not vim.api.nvim_win_is_valid(win) then return end
