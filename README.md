@@ -1,6 +1,6 @@
+<!-- vale Google.FirstPerson = NO -->
 <!-- LTeX: enabled=false -->
 # pseudometa's dotfiles <!-- LTeX: enabled=true -->
-<!-- vale Google.FirstPerson = NO -->
 
 ## Configurations of Interest
 Most people tell me they find the following configurations useful:
@@ -28,6 +28,7 @@ In my day job, I am a sociologist studying the social mechanisms underlying the 
 __Profiles__
 - [Discord](https://discordapp.com/users/462774483044794368/)
 - [Academic Website](https://chris-grieser.de/)
+- [Mastodon](https://pkm.social/@pseudometa)
 - [GitHub](https://github.com/chrisgrieser/)
 - [Twitter](https://twitter.com/pseudo_meta)
 - [ResearchGate](https://www.researchgate.net/profile/Christopher-Grieser)

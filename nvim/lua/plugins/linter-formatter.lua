@@ -95,7 +95,6 @@ end
 --------------------------------------------------------------------------------
 
 local formatterConfig = {
-	log_level = vim.log.levels.DEBUG,
 	formatters_by_ft = {
 		javascript = { "biome" },
 		typescript = { "biome" },
@@ -108,7 +107,7 @@ local formatterConfig = {
 		markdown = { "markdownlint" },
 		css = { "stylelint", "prettier" },
 		sh = { "shfmt", "shellharden" },
-		bib = { "bibtex_tidy" },
+		bib = { "trim_whitespace", "trim_newlines", "bibtex_tidy" },
 		dosini = { "trim_whitespace", "trim_newlines" },
 		text = { "trim_whitespace", "trim_newlines" },
 		applescript = { "trim_whitespace", "trim_newlines" },
@@ -116,7 +115,6 @@ local formatterConfig = {
 		["*"] = { "codespell" },
 	},
 
-	-- custom formatters
 	formatters = {
 		-- PENDING https://github.com/stevearc/conform.nvim/issues/44
 		-- shellcheck = {
@@ -166,6 +164,8 @@ local formatterConfig = {
 				"--remove-empty-fields",
 				"--no-wrap",
 			},
+			-- main bibliography too big
+			condition = function(ctx) return vim.fs.basename(ctx.filename) ~= "main-bibliography.bib" end,
 		},
 	},
 }
@@ -184,7 +184,7 @@ return {
 				ensure_installed = toolsToAutoinstall,
 				run_on_start = false,
 			}
-			vim.defer_fn(vim.cmd.MasonToolsInstall, 2000)
+			vim.defer_fn(vim.cmd.MasonToolsInstall, 1000)
 		end,
 	},
 	{
