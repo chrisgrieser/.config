@@ -23,6 +23,8 @@
 
 The tree was generated using <https://tree.nathanfriend.io/>
 
+Acknowledgements
+
 ## All Installed Plugins
 - [Aasim-A/scrollEOF.nvim](https://github.com/Aasim-A/scrollEOF.nvim)
 - [AckslD/nvim-FeMaco.lua](https://github.com/AckslD/nvim-FeMaco.lua)
