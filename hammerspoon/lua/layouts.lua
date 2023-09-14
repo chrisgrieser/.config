@@ -34,6 +34,7 @@ local function setHigherBrightnessDuringDay()
 	elseif ambient > 15 then
 		target = 0.7
 	elseif ambient > 5 then
+		target = 0.6
 	else
 		target = 0.5
 	end

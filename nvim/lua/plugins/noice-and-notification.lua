@@ -18,7 +18,7 @@ local routes = {
 
 	-- nvim-treesitter
 	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
-	{ filter = { event = "msg_show", find = "^All parsers are up%-to%-date" }, view = "mini" },
+	{ filter = { event = "notify", find = "All parsers are up%-to%-date" }, view = "mini" },
 
 	-- Word added to spellfile via
 	{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
@@ -54,7 +54,7 @@ local routes = {
 return {
 	{ -- Message & Command System Overhaul
 		"folke/noice.nvim",
-		lazy = false,
+		event = "VeryLazy",
 		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
 		keys = {
 			{ "<Esc>", function() vim.cmd.Noice("dismiss") end, desc = "󰎟 Clear Notifications" },
