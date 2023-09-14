@@ -36,6 +36,7 @@ local function linterConfigs()
 		typescript = {},
 		gitcommit = {},
 		toml = {},
+		text = {},
 	}
 
 	-- use for codespell/cspell for all except bib and css
