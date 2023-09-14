@@ -32,18 +32,29 @@ local function linterConfigs()
 		markdown = { "markdownlint", "vale" },
 		yaml = { "yamllint" },
 		python = { "pylint" },
+		gitcommit = { "gitlint" },
 		json = {},
 		javascript = {},
 		typescript = {},
-		gitcommit = {},
 		toml = {},
 		text = {},
 	}
 
-	-- use for codespell/cspell for all except bib and css
+	-- use for codespell for all except bib and css
 	for ft, _ in pairs(lint.linters_by_ft) do
 		if ft ~= "bib" and ft ~= "css" then table.insert(lint.linters_by_ft[ft], "codespell") end
 	end
+
+	linters.gitlint = {
+		cmd = "gitlint",
+		stdin = true,
+		stream = "stderr",
+		ignore_exitcode = true,
+		parser = require("lint.parser").from_errorformat("%l: %m", {
+			source = "gitlint",
+			severity = vim.diagnostic.severity.WARN,
+		}),
+	}
 
 	linters.vale.args = {
 		"--output=JSON",
