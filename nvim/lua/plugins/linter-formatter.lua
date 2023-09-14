@@ -122,23 +122,11 @@ local formatterConfig = {
 		-- 	arg = "--shell=bash --format=diff '$FILENAME' | git apply",
 		-- 	stdin = false,
 		-- },
-		-- PENDING https://github.com/stevearc/conform.nvim/pull/45
-		biome = {
-			command = "biome",
-			stdin = true,
-			args = { "format", "--stdin-file-path", "$FILENAME" },
-		},
-		stylelint = {
-			command = "stylelint",
-			args = { "--stdin", "--fix" },
-			stdin = true,
-		},
 		markdownlint = {
 			command = "markdownlint",
 			stdin = false,
 			args = { "--fix", "--config", linterConfig .. "/markdownlint.yaml", "$FILENAME" },
 		},
-		--------------------------------------------------------------------------
 		codespell = {
 			command = "codespell",
 			stdin = false,
