@@ -178,7 +178,7 @@ return {
 		opts = {
 			render = "wrapped-compact",
 			top_down = false,
-			max_width = 45,
+			max_width = 50,
 			minimum_width = 15,
 			level = 0, -- minimum severity level to display (0 = display all)
 			timeout = 7500,

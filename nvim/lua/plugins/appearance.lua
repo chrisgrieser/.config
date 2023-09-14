@@ -72,7 +72,7 @@ return {
 		},
 	},
 	{ -- Nerdfont filetype icons
-	-- https://www.reddit.com/r/neovim/comments/12lf0ke/comment/jg6idvr/
+		-- https://www.reddit.com/r/neovim/comments/12lf0ke/comment/jg6idvr/
 		"nvim-tree/nvim-web-devicons",
 		opts = {
 			default = true, -- use default icon as fallback
@@ -251,17 +251,13 @@ return {
 				},
 				telescope = {
 					layout_config = {
-						horizontal = { width = 0.99, height = 0.6 },
+						horizontal = { width = 0.8, height = 0.6 },
 					},
 				},
+				get_config = function(opts)
+					if opts.kind == "github_issue" then return { backend = "telescope" } end
+				end,
 			},
-			get_config = function(opts)
-				if opts.kind == "codeaction" or opts.kind == "simple" then
-					return { backend = "builtin" }
-				elseif opts.kind == "github_issue" then
-					return { backend = "telescope" }
-				end
-			end,
 		},
 	},
 }
