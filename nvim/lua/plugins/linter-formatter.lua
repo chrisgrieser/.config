@@ -147,10 +147,12 @@ local formatterConfig = {
 			args = {
 				"$FILENAME",
 				"--write-changes",
-				"--quiet-level=16",
+				"--builtin=rare,clear",
+				"--check-hidden", -- conform temp file is hidden
 				"--ignore-words",
 				linterConfig .. "/codespell-ignore.txt",
 			},
+			-- don't run on css or bib files
 			condition = function(ctx)
 				return not (ctx.filename:find("%.css$") or ctx.filename:find("%.bib$"))
 			end,
