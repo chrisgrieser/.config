@@ -12,3 +12,4 @@ ul-indent: false
 # disabled
 first-line-heading: false
 no-inline-html: false
+no-emphasis-as-heading: false

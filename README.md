@@ -1,4 +1,5 @@
-# pseudometa's dotfiles
+<!-- LTeX: enabled=false -->
+# pseudometa's dotfiles <!-- LTeX: enabled=true -->
 <!-- vale Google.FirstPerson = NO -->
 
 ## Configurations of Interest
@@ -13,7 +14,8 @@ Most people tell me they find the following configurations useful:
 
 <img width=60% alt="starship prompt" src="https://user-images.githubusercontent.com/73286100/229211019-e763d775-d89f-43da-99ef-06c57fd1e485.png">
 
-## Blog on Neovim
+## My Blog on Neovim
+- [Nanotips for Vim](https://nanotipsforvim.prose.sh/)
 
 ## What are "dotfiles?"
 - Read this [primer what dotfiles are](https://www.freecodecamp.org/news/dotfiles-what-is-a-dot-file-and-how-to-create-it-in-mac-and-linux/).
@@ -30,4 +32,3 @@ __Profiles__
 - [Twitter](https://twitter.com/pseudo_meta)
 - [ResearchGate](https://www.researchgate.net/profile/Christopher-Grieser)
 - [LinkedIn](https://www.linkedin.com/in/christopher-grieser-ba693b17a/)
-

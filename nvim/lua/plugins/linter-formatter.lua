@@ -109,6 +109,10 @@ local formatterConfig = {
 		css = { "stylelint", "prettier" },
 		sh = { "shfmt", "shellharden" },
 		bib = { "bibtex_tidy" },
+		dosini = { "trim_whitespace", "trim_newlines" },
+		text = { "trim_whitespace", "trim_newlines" },
+		applescript = { "trim_whitespace", "trim_newlines" },
+		conf = { "trim_whitespace", "trim_newlines" },
 		["*"] = { "codespell" },
 	},
 
