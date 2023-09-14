@@ -122,8 +122,6 @@ local formatterConfig = {
 		-- 	stdin = false,
 		-- },
 		-- PENDING https://github.com/stevearc/conform.nvim/pull/45
-
-
 		biome = {
 			command = "biome",
 			stdin = true,
@@ -212,7 +210,7 @@ return {
 			{
 				"<D-s>",
 				function()
-					require("conform").format { lsp_fallback = true }
+					require("conform").format { lsp_fallback = "always" }
 					vim.cmd.update()
 				end,
 				mode = { "n", "x" },
