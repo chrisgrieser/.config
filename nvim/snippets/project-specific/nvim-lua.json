@@ -3,6 +3,10 @@
 		"prefix": "keymap",
 		"body": "keymap(\"n\", \"${1:LHS}\", ${2:\"RHS\"}, { desc = \"$3\" })"
 	},
+	"defer_fn": {
+		"prefix": "defer_fn",
+		"body": "vim.defer_fn(function() $0 end, ${2:1})"
+	},
 	"nvim-utils (require)": {
 		"prefix": "utils (require)",
 		"body": "local u = require(\"config.utils\")"
