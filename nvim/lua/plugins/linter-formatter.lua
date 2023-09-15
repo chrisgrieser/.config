@@ -29,10 +29,10 @@ local formatters = {
 	jsonc = { "biome" },
 	lua = { "stylua" },
 	python = { "black" },
-	yaml = { "prettier" },
-	html = { "prettier" },
+	yaml = { "prettierd" },
+	html = { "prettierd" },
 	markdown = { "markdownlint" },
-	css = { "stylelint", "prettier" },
+	css = { "stylelint", "prettierd" },
 	sh = { "shellcheck" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
 	applescript = { "trim_whitespace", "trim_newlines" },
@@ -60,15 +60,34 @@ local dontInstall = {
 ---@nodiscard
 local function toolsToAutoinstall(myLinters, myFormatters, myDebuggers, ignoreTools)
 	-- get all linters, formatters, & debuggers and merge them into one list
-	-- (contains duplicates, but that is not an issue for MasonToolInstaller)
 	local linterList = vim.tbl_flatten(vim.tbl_values(myLinters))
 	local formatterList = vim.tbl_flatten(vim.tbl_values(myFormatters))
 	local tools = vim.list_extend(linterList, formatterList)
 	vim.list_extend(tools, myDebuggers)
 
+	-- only unique tools
+	table.sort(tools)
+	tools = vim.fn.uniq(tools)
+
 	-- remove exceptions not to install
 	tools = vim.tbl_filter(function(tool) return not vim.tbl_contains(ignoreTools, tool) end, tools)
 	return tools
+end
+
+local function toolsUninstall(toolsToKeep)
+	local installedTools = require("mason-registry").get_installed_packages()
+	local nonLspInstalled = vim.tbl_filter(
+		function(t) return not vim.tbl_contains(t.spec.categories, "LSP") end,
+		installedTools
+	)
+	local nonLspNames = vim.tbl_map(function(t) return t.name end, nonLspInstalled)
+	local toUninstall = vim.tbl_filter(
+		function(t) return not vim.tbl_contains(toolsToKeep, t) end,
+		nonLspNames
+	)
+	for _, tool in ipairs(toUninstall) do
+		vim.cmd.MasonUninstall(tool)
+	end
 end
 
 --------------------------------------------------------------------------------
@@ -193,8 +212,14 @@ return {
 			local myTools = toolsToAutoinstall(linters, formatters, debuggers, dontInstall)
 
 			-- triggered myself, since `run_on_start`, does not work w/ lazy-loading
-			require("mason-tool-installer").setup { ensure_installed = myTools, run_on_start = false }
-			vim.defer_fn(vim.cmd.MasonToolsInstall, 1000)
+			require("mason-tool-installer").setup {
+				ensure_installed = myTools,
+				run_on_start = false,
+			}
+			vim.defer_fn(function()
+				vim.cmd.MasonToolsInstall()
+				toolsUninstall(myTools)
+			end, 1000)
 		end,
 	},
 	{
