@@ -6,6 +6,8 @@
 check-hidden = ""
 builtin = "rare,clear,informal,code,names,usage,en-GB_to_en-US"
 
+#───────────────────────────────────────────────────────────────────────────────
+
 # IGNORE
 
 # needs ** to match independent of pwd
@@ -16,11 +18,12 @@ skip = """\
 **/*abbreviations.lua,\
 """
 
-ignore-regex = "base64,\\S{500,}" # ignore base64-encoded content, e.g. in css files
+# ignore base64-encoded content, e.g. in css files
+# ignore lines ending with "codespell-ignore" https://github.com/codespell-project/codespell/issues/1212#issuecomment-1721152455
+ignore-regex = "base64,\\S{500,}|.*codespell-ignore$"
 
 uri-ignore-words-list = "*" # ignore all misspellings in URLs/mail-adresses
 
 ignore-words-list = """\
-noice,\
-acknowledgements,aesthetics,\
+noice,acknowledgements,aesthetics,\
 """
