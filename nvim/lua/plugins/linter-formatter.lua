@@ -33,7 +33,7 @@ local formatters = {
 	html = { "prettier" },
 	markdown = { "markdownlint" },
 	css = { "stylelint", "prettier" },
-	sh = { "shfmt", "shellharden" },
+	sh = { "shfmt", "shellcheck" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
 	applescript = { "trim_whitespace", "trim_newlines" },
 	["*"] = { "codespell" }, -- ignores .bib and .css via codespell config
@@ -133,13 +133,13 @@ local formatterConfig = {
 
 	formatters = {
 		-- PENDING https://github.com/stevearc/conform.nvim/issues/44
-		-- shellcheck = {
-		-- 	command = "shellcheck",
-		-- 	-- Using `git apply` is the officially recommended way for auto-fixing
-		-- 	-- https://github.com/koalaman/shellcheck/issues/1220#issuecomment-594811243
-		-- 	arg = "--shell=bash --format=diff '$FILENAME' | git apply",
-		-- 	stdin = false,
-		-- },
+		shellcheck = {
+			command = "shellcheck",
+			-- https://github.com/koalaman/shellcheck/issues/1220#issuecomment-594811243
+			-- args = [[{echo "--- a/$FILENAME" ; echo "+++ b/$FILENAME" ; cat $FILENAME | shellcheck - --shell=bash --format=diff | tail -n+3 } | git apply]],
+			args = [[{echo "--- a/$FILENAME" ; echo "+++ b/$FILENAME" ; cat $FILENAME | shellcheck - --shell=bash --format=diff | tail -n+3 } | git apply]],
+			stdin = true,
+		},
 		markdownlint = {
 			command = "markdownlint",
 			stdin = false,
@@ -208,6 +208,7 @@ return {
 	},
 	{
 		"stevearc/conform.nvim",
+		branch = "stevearc-run-with-tty",
 		opts = formatterConfig,
 		cmd = "ConformInfo",
 		keys = {
