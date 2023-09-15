@@ -543,7 +543,7 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://github.com/{query}</string>
+				<string></string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -692,7 +692,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>nvim-reddit.js</string>
+				<string>scripts/nvim-reddit.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -1146,7 +1146,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>installed plugin search</string>
+			<string>installed plugins and mason tools search</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
@@ -1328,9 +1328,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>opens Neovim Docs</string>
+			<string>For searching the official neovim documentation (online, not inside nvim).</string>
 			<key>label</key>
-			<string>Keyword for online :help search</string>
+			<string>Keyword: online :help</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -1370,9 +1370,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>:help oldfiles</string>
+			<string>For searching recent files (:help oldfiles).</string>
 			<key>label</key>
-			<string>Keyword for searching old files</string>
+			<string>Keyword: oldfiles</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -1391,9 +1391,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>For latest posts in the neovim subreddit.</string>
 			<key>label</key>
-			<string>Keyword for latest posts in neovim subreddit</string>
+			<string>Keyword: neovim subreddit</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -1412,9 +1412,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>For searching installed plugins &amp; mason tools.</string>
 			<key>label</key>
-			<string>Keyword for searching installed plugins &amp; mason tools</string>
+			<string>Keyword: installed plugins</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
