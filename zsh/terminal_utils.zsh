@@ -174,9 +174,8 @@ function ld() {
 	z "$last_pwd"
 }
 
-# select an external volume to eject
-alias e="eject"
-function eject() {
+# eject
+function e() {
 	volumes=$(df -h | grep -io "\s/Volumes/.*" | cut -c2-)
 	if [[ -z "$volumes" ]]; then
 		print "\033[1;33mNo volume connected.\033[0m"
@@ -246,8 +245,8 @@ function prefs() {
 		local changes
 		changes=$(command diff /tmp/before /tmp/after | grep -v "_DKThrottledActivityLast" | grep -E "^(<|>)")
 		PREF_BEFORE=0
-
 		echo "$changes"
+
 		# show context, so the domain can be identified
 		separator
 		toGrep=$(echo "$changes" | tail -n1 | sed -e 's/^> *//')
