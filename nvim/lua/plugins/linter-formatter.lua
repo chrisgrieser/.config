@@ -78,7 +78,7 @@ end
 
 ---uninstalls non-LSP tools
 ---@param toolsToKeep string[]
-local function toolsUninstall(toolsToKeep)
+local function autoUninstall(toolsToKeep)
 	local installedTools = require("mason-registry").get_installed_packages()
 	local toUninstall = vim.tbl_filter(function(t)
 		local toKeep = vim.tbl_contains(toolsToKeep, t.name)
@@ -220,7 +220,7 @@ return {
 			}
 			vim.defer_fn(function()
 				vim.cmd.MasonToolsInstall()
-				toolsUninstall(myTools)
+				autoUninstall(myTools)
 			end, 1000)
 		end,
 	},
