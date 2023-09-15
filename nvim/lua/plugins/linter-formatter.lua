@@ -85,7 +85,6 @@ local function linterConfigs()
 		linterConfig .. "/vale/vale.ini",
 	}
 
-	-- defined
 	lint.linters.codespell.args = {
 		"--toml",
 		linterConfig .. "/codespell.toml",
@@ -149,6 +148,7 @@ local formatterConfig = {
 				"--toml",
 				linterConfig .. "/codespell.toml",
 			},
+			exit_codes = { 0, 65 },
 		},
 		["bibtex-tidy"] = {
 			command = "bibtex-tidy",
