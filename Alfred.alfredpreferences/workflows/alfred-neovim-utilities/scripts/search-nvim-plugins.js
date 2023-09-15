@@ -124,7 +124,7 @@ function run() {
 				title: name + installedIcon,
 				match: alfredMatcher(repo),
 				subtitle: subtitle,
-				arg: repo,
+				arg: "https://github.com/" + repo,
 				uid: repo,
 				mods: { shift: { subtitle: `⇧: Search Issues (${openIssues} open)` } },
 			};
