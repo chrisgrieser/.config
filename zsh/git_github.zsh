@@ -1,7 +1,5 @@
 #!/usr/bin/env zsh
-# ALIASES
 
-# git
 alias co="ct git checkout"
 alias gg="ct git checkout -" # go to previous branch/commit, like `zz` switching to last directory
 alias gs='git status'
@@ -13,9 +11,8 @@ alias pull="ct git pull"
 alias g.='cd "$(git rev-parse --show-toplevel)"' # goto git root
 alias grh='ct git reset --hard'
 
-# github
-alias gi='gh issue list'                # open issues
-alias gI='gh issue list --state=closed' # closed issues
+alias gi='gh issue list --state=open'
+alias gI='gh issue list --state=closed'
 alias rel='ct make --silent release'
 
 #───────────────────────────────────────────────────────────────────────────────
