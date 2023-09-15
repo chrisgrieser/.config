@@ -1,21 +1,25 @@
 local linterConfig = require("config.utils").linterConfigFolder
 
 local linters = {
-	lua = { "selene", "codespell" },
+	lua = { "selene" },
 	css = { "stylelint" },
-	sh = { "shellcheck", "codespell" },
+	sh = { "shellcheck" },
 	markdown = { "markdownlint", "vale" },
-	yaml = { "yamllint", "codespell" },
-	python = { "pylint", "codespell" },
-	gitcommit = { "codespell" },
-	json = { "codespell" },
-	javascript = { "codespell" },
-	typescript = { "codespell" },
-	toml = { "codespell" },
-	text = { "codespell" },
-	applescript = { "codespell" },
+	yaml = { "yamllint" },
+	python = { "pylint" },
+	gitcommit = {},
+	json = {},
+	javascript = {},
+	typescript = {},
+	toml = {},
+	text = {},
+	applescript = {},
 }
--- teh
+
+for ft, _ in pairs(linters) do
+	-- PENDING https://github.com/mfussenegger/nvim-lint/issues/355
+	table.insert(linters[ft], "codespell")
+end
 
 local formatters = {
 	javascript = { "biome" },
@@ -34,9 +38,7 @@ local formatters = {
 	["*"] = { "codespell" }, -- ignores .bib and .css via codespell config
 }
 
-local debuggers = {
-	"debugpy",
-}
+local debuggers = { "debugpy" }
 
 local dontInstall = {
 	"shellharden", -- cannot be installed via mason: https://github.com/williamboman/mason.nvim/issues/1481
@@ -84,10 +86,8 @@ local function linterConfigs()
 	}
 
 	lint.linters.codespell.args = {
-		"--ignore-words",
-		"--check-hidden",
-		linterConfig .. "/codespell-ignore.txt",
-		"--builtin=rare,clear,informal,code,names,en-GB_to_en-US",
+		"--toml",
+		linterConfig .. "/codespell.toml",
 	}
 
 	lint.linters.shellcheck.args = {
@@ -150,22 +150,17 @@ local formatterConfig = {
 			args = {
 				"$FILENAME",
 				"--write-changes",
-				"--builtin=rare,clear,informal,code,names,en-GB_to_en-US",
 				"--check-hidden", -- conform.nvim's temp file is hidden
-				"--ignore-words",
-				linterConfig .. "/codespell-ignore.txt",
+				"--toml",
+				linterConfig .. "/codespell.toml",
 			},
-			-- don't run on css or bib files
-			condition = function(ctx)
-				local name = ctx.filename
-				return not (vim.endswith(name, ".css") or vim.endswith(name, ".bib"))	
-			end,
 		},
 		["bibtex-tidy"] = {
 			command = "bibtex-tidy",
 			stdin = true,
 			args = {
 				"--quiet",
+				"--omit=month,issn,abstract",
 				"--tab",
 				"--curly",
 				"--strip-enclosing-braces",

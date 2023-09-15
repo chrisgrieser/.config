@@ -1,0 +1,12 @@
+# DOCS https://github.com/codespell-project/codespell#using-a-config-file
+#───────────────────────────────────────────────────────────────────────────────
+
+[tool.codespell]
+skip = 'main-bibliography.bib,source.css'
+check-hidden = "" # SIC needs to be empty string instead of `true`
+builtin = "rare,clear,informal,code,names,en-GB_to_en-US"
+ignore-words-list = """
+als,ist,interaktion,technik,termine, \
+bu,caf,tre,enew,noice, \
+acknowledgements,aesthetics \
+"""
