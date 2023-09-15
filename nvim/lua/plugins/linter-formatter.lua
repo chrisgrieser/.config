@@ -200,7 +200,7 @@ return {
 		end,
 	},
 	{
-		"chrisgrieser/conform.nvim",
+		"stevearc/conform.nvim",
 		opts = formatterConfig,
 		cmd = "ConformInfo",
 		keys = {
