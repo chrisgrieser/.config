@@ -48,7 +48,7 @@ matches:
     replace: nicht
   - trigger: ncoh
     replace: noch
-  - regex: 'n[#Ä]t '
+  - regex: "n[#Ä]t "
     replace: "n't "
   - trigger: "isnt"
     replace: "isn't"
@@ -253,8 +253,7 @@ matches:
   - trigger: seperate
     replace: separate
     propagate_casing: true
-  # https://espanso.org/docs/matches/regex-triggers#arguments
-  - regex: "\\Bsich "
+  - regex: "\\Bsich " # https://espanso.org/docs/matches/regex-triggers#arguments
     replace: "isch "
   - trigger: Youtube # only fix when capitalized, so stuff like urls is unaffected
     replace: YouTube

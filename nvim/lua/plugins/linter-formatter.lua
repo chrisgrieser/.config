@@ -85,6 +85,7 @@ local function linterConfigs()
 		linterConfig .. "/vale/vale.ini",
 	}
 
+	-- defined
 	lint.linters.codespell.args = {
 		"--toml",
 		linterConfig .. "/codespell.toml",
