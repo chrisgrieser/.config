@@ -1,5 +1,5 @@
 matches:
-  # cencorship for carl (lol)
+  # cencorship for carl
   - trigger: "roadmap"
     replace: "r0admap (carl, no!)"
   - trigger: "legacy editor"
@@ -34,12 +34,12 @@ matches:
       - $|$
 
       ↗️ __Improvements__
-      -
+      - 
 
       🐞 __Bug Fixes__
-      -
+      - 
 
       ⚠️ __Breaking Changes__
-      -
+      - 
 
       ➡️ <https://github.com/chrisgrieser/shimmering-focus>
