@@ -1,31 +1,25 @@
 local linterConfig = require("config.utils").linterConfigFolder
 --------------------------------------------------------------------------------
 
-local toolsToAutoinstall = {
-	"debugpy", -- just here to install ensure auto-install
-	"codespell",
-	"yamllint",
-	"shellcheck",
-	"shfmt",
-	"markdownlint",
-	"vale",
-	"black",
-	"selene",
-	"stylua",
-	"pylint",
-	"bibtex-tidy",
-	"prettier", -- only yaml formatter that preserves blank lines https://github.com/mikefarah/yq/issues/515
-	-- INFO stylelint included in mason, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
-}
+-- local toolsToAutoinstall = {
+-- 	"debugpy", -- just here to install ensure auto-install
+-- 	"codespell",
+-- 	"yamllint",
+-- 	"shellcheck",
+-- 	"shfmt",
+-- 	"markdownlint",
+-- 	"vale",
+-- 	"black",
+-- 	"selene",
+-- 	"stylua",
+-- 	"pylint",
+-- 	"bibtex-tidy",
+-- 	"prettier", -- only yaml formatter that preserves blank lines https://github.com/mikefarah/yq/issues/515
+-- 	-- INFO stylelint included in mason, but not its plugins, which then cannot be found https://github.com/williamboman/mason.nvim/issues/695
+-- }
 
---------------------------------------------------------------------------------
-
-local function linterConfigs()
-	local lint = require("lint")
-	local linters = require("lint").linters
-
-	lint.linters_by_ft = {
-		lua = { "selene" },
+local linterList = {
+	lua = { "selene" },
 		css = { "stylelint" },
 		sh = { "shellcheck" },
 		markdown = { "markdownlint", "vale" },
@@ -37,7 +31,35 @@ local function linterConfigs()
 		typescript = {},
 		toml = {},
 		text = {},
-	}
+} 
+
+local formatterList = {
+	javascript = { "biome" },
+	typescript = { "biome" },
+	json = { "biome" },
+	jsonc = { "biome" },
+	lua = { "stylua" },
+	python = { "black" },
+	yaml = { "prettier" },
+	html = { "prettier" },
+	markdown = { "markdownlint" },
+	css = { "stylelint", "prettier" },
+	sh = { "shfmt", "shellharden" },
+	bib = { "trim_whitespace", "trim_newlines", "bibtex_tidy" },
+	dosini = { "trim_whitespace", "trim_newlines" },
+	text = { "trim_whitespace", "trim_newlines" },
+	applescript = { "trim_whitespace", "trim_newlines" },
+	conf = { "trim_whitespace", "trim_newlines" },
+	["*"] = { "codespell" },
+} 
+
+--------------------------------------------------------------------------------
+
+local function linterConfigs()
+	local lint = require("lint")
+	local linters = require("lint").linters
+
+	lint.linters_by_ft = linterList
 
 	-- use for codespell for all except bib and css
 	for ft, _ in pairs(lint.linters_by_ft) do
@@ -95,25 +117,7 @@ end
 --------------------------------------------------------------------------------
 
 local formatterConfig = {
-	formatters_by_ft = {
-		javascript = { "biome" },
-		typescript = { "biome" },
-		json = { "biome" },
-		jsonc = { "biome" },
-		lua = { "stylua" },
-		python = { "black" },
-		yaml = { "prettier" },
-		html = { "prettier" },
-		markdown = { "markdownlint" },
-		css = { "stylelint", "prettier" },
-		sh = { "shfmt", "shellharden" },
-		bib = { "trim_whitespace", "trim_newlines", "bibtex_tidy" },
-		dosini = { "trim_whitespace", "trim_newlines" },
-		text = { "trim_whitespace", "trim_newlines" },
-		applescript = { "trim_whitespace", "trim_newlines" },
-		conf = { "trim_whitespace", "trim_newlines" },
-		["*"] = { "codespell" },
-	},
+	formatters_by_ft = formatterList,
 
 	formatters = {
 		-- PENDING https://github.com/stevearc/conform.nvim/issues/44
@@ -179,6 +183,23 @@ return {
 		event = "VeryLazy",
 		dependencies = "williamboman/mason.nvim",
 		config = function()
+			local myLinters = vim.tbl_flatten(vim.tbl_values(linterList))
+			local myformatters = vim.tbl_flatten(vim.tbl_values(formatterList))
+			local toolsToAutoinstall = vim.list_extend(myLinters, myformatters)
+			toolsToAutoinstall = vim.fn.uniq(toolsToAutoinstall)
+			vim.notify("🪚 toolsToAutoinstall: " .. vim.inspect(toolsToAutoinstall))
+			-- for _, linter in pairs(myLinters) do
+			-- 	if not vim.list_contains(toolsToAutoinstall, linter) then
+			-- 		table.insert(toolsToAutoinstall, linter)
+			-- 	end
+			-- end
+			-- for _, formatter in pairs(myformatters) do
+			-- 	if not vim.list_contains(toolsToAutoinstall, formatter) and not(formatter:find("^trim")) then
+			-- 		table.insert(toolsToAutoinstall, formatter)
+			-- 	end
+			-- end
+
+
 			-- triggered myself, since `run_on_start`, does not work w/ lazy-loading
 			require("mason-tool-installer").setup {
 				ensure_installed = toolsToAutoinstall,
