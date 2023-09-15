@@ -1,4 +1,6 @@
+local u = require("config.utils")
 local linterConfig = require("config.utils").linterConfigFolder
+--------------------------------------------------------------------------------
 
 local linters = {
 	lua = { "selene" },
@@ -74,19 +76,19 @@ local function toolsToAutoinstall(myLinters, myFormatters, myDebuggers, ignoreTo
 	return tools
 end
 
+---uninstalls non-LSP tools
+---@param toolsToKeep string[]
 local function toolsUninstall(toolsToKeep)
 	local installedTools = require("mason-registry").get_installed_packages()
-	local nonLspInstalled = vim.tbl_filter(
-		function(t) return not vim.tbl_contains(t.spec.categories, "LSP") end,
-		installedTools
-	)
-	local nonLspNames = vim.tbl_map(function(t) return t.name end, nonLspInstalled)
-	local toUninstall = vim.tbl_filter(
-		function(t) return not vim.tbl_contains(toolsToKeep, t) end,
-		nonLspNames
-	)
+	local toUninstall = vim.tbl_filter(function(t)
+		local toKeep = vim.tbl_contains(toolsToKeep, t.name)
+		local isLsp = vim.tbl_contains(t.spec.categories, "LSP")
+		return not (toKeep or isLsp)
+	end, installedTools)
+
 	for _, tool in ipairs(toUninstall) do
-		vim.cmd.MasonUninstall(tool)
+		u.notify("mason.nvim", "Cleaning up: " .. tool.name)
+		tool:uninstall()
 	end
 end
 
