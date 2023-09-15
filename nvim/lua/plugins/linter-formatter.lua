@@ -14,6 +14,7 @@ local linters = {
 	toml = {},
 	text = {},
 	applescript = {},
+	bib = {},
 }
 
 for ft, _ in pairs(linters) do

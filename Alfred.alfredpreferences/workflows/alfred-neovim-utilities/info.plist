@@ -1414,7 +1414,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>description</key>
 			<string></string>
 			<key>label</key>
-			<string>Keyword for searching installed plugins</string>
+			<string>Keyword for searching installed plugins &amp; mason tools</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -1440,6 +1440,27 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<string>filepicker</string>
 			<key>variable</key>
 			<string>plugin_installation_path</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>~/.local/share/nvim/mason</string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>placeholder</key>
+				<string>~/.local/share/nvim/mason</string>
+				<key>required</key>
+				<false/>
+			</dict>
+			<key>description</key>
+			<string>Path where mason.nvim installs its tools. Default value is the default path for mason.nvim. (Leave empty to not list mason tools.)</string>
+			<key>label</key>
+			<string>Mason Installation Path</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>mason_installation_path</string>
 		</dict>
 	</array>
 	<key>version</key>
