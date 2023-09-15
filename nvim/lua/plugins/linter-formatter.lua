@@ -33,7 +33,7 @@ local formatters = {
 	html = { "prettier" },
 	markdown = { "markdownlint" },
 	css = { "stylelint", "prettier" },
-	sh = { "shfmt", "shellcheck" },
+	sh = { "shfmt", "shellharden" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
 	applescript = { "trim_whitespace", "trim_newlines" },
 	["*"] = { "codespell" }, -- ignores .bib and .css via codespell config
@@ -51,6 +51,8 @@ local dontInstall = {
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+---given the linter- and formatter-list of nvim-lint and conform.nvim, extract a
+---list of all tools that need to be auto-installed
 ---@param myLinters object[]
 ---@param myFormatters object[]
 ---@param myDebuggers string[]
@@ -58,15 +60,12 @@ local dontInstall = {
 ---@return string[] tools
 ---@nodiscard
 local function toolsToAutoinstall(myLinters, myFormatters, myDebuggers, ignoreTools)
-	-- get all linters & formatters
+	-- get all linters, formatters, & debuggers and merge them into one list
+	-- (contains duplicates, but that is not an issue for MasonToolInstaller)
 	local linterList = vim.tbl_flatten(vim.tbl_values(myLinters))
 	local formatterList = vim.tbl_flatten(vim.tbl_values(myFormatters))
 	local tools = vim.list_extend(linterList, formatterList)
 	vim.list_extend(tools, myDebuggers)
-
-	-- only unique tools
-	table.sort(tools)
-	tools = vim.fn.uniq(tools)
 
 	-- remove exceptions not to install
 	tools = vim.tbl_filter(function(tool) return not vim.tbl_contains(ignoreTools, tool) end, tools)
@@ -122,6 +121,7 @@ local function lintTriggers()
 		pattern = "AutoSaveWritePost",
 		callback = function() require("lint").try_lint() end,
 	})
+
 	-- run once on initialization
 	require("lint").try_lint()
 end
@@ -133,13 +133,11 @@ local formatterConfig = {
 
 	formatters = {
 		-- PENDING https://github.com/stevearc/conform.nvim/issues/44
-		shellcheck = {
-			command = "shellcheck",
-			-- https://github.com/koalaman/shellcheck/issues/1220#issuecomment-594811243
-			-- args = [[{echo "--- a/$FILENAME" ; echo "+++ b/$FILENAME" ; cat $FILENAME | shellcheck - --shell=bash --format=diff | tail -n+3 } | git apply]],
-			args = [[{echo "--- a/$FILENAME" ; echo "+++ b/$FILENAME" ; cat $FILENAME | shellcheck - --shell=bash --format=diff | tail -n+3 } | git apply]],
-			stdin = true,
-		},
+		-- shellcheck = {
+		-- 	command = "shellcheck",
+		-- 	args = "shellcheck $FILENAME --shell=bash --format=diff | git apply", -- https://github.com/koalaman/shellcheck/issues/1220#issuecomment-594811243
+		-- 	stdin = false,
+		-- },
 		markdownlint = {
 			command = "markdownlint",
 			stdin = false,
