@@ -46,9 +46,7 @@ vim.g.darkTheme = getName(darkThemes[1])
 --------------------------------------------------------------------------------
 
 -- merge tables
-local allThemes = {}
-vim.list_extend(allThemes, lightThemes)
-vim.list_extend(allThemes, darkThemes)
+local allThemes = vim.list_extend(darkThemes, lightThemes)
 
 -- ensure themes are never lazy-loaded https://github.com/folke/lazy.nvim#-colorschemes
 allThemes = vim.tbl_map(function(theme)
