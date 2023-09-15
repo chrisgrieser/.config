@@ -1,19 +1,21 @@
 local linterConfig = require("config.utils").linterConfigFolder
 
 local linters = {
-	lua = { "selene" },
+	lua = { "selene", "codespell" },
 	css = { "stylelint" },
-	sh = { "shellcheck" },
+	sh = { "shellcheck", "codespell" },
 	markdown = { "markdownlint", "vale" },
-	yaml = { "yamllint" },
-	python = { "pylint" },
-	gitcommit = {},
-	json = {},
-	javascript = {},
-	typescript = {},
-	toml = {},
-	text = {},
+	yaml = { "yamllint", "codespell" },
+	python = { "pylint", "codespell" },
+	gitcommit = { "codespell" },
+	json = { "codespell" },
+	javascript = { "codespell" },
+	typescript = { "codespell" },
+	toml = { "codespell" },
+	text = { "codespell" },
+	applescript = { "codespell" },
 }
+-- teh
 
 local formatters = {
 	javascript = { "biome" },
@@ -27,12 +29,9 @@ local formatters = {
 	markdown = { "markdownlint" },
 	css = { "stylelint", "prettier" },
 	sh = { "shfmt", "shellharden" },
-	bib = { "trim_whitespace", "trim_newlines", "bibtex-tidy" },
-	dosini = { "trim_whitespace", "trim_newlines" },
-	text = { "trim_whitespace", "trim_newlines" },
+	bib = { "trim_whitespace", "bibtex-tidy" },
 	applescript = { "trim_whitespace", "trim_newlines" },
-	conf = { "trim_whitespace", "trim_newlines" },
-	["*"] = { "codespell" },
+	["*"] = { "codespell" }, -- ignores .bib and .css via codespell config
 }
 
 local debuggers = {
@@ -77,38 +76,34 @@ local function linterConfigs()
 	local lint = require("lint")
 	lint.linters_by_ft = linters
 
-	-- use for codespell for all except bib and css
-	for ft, _ in pairs(lint.linters_by_ft) do
-		if ft ~= "bib" and ft ~= "css" then table.insert(lint.linters_by_ft[ft], "codespell") end
-	end
-
-	require("lint").linters.vale.args = {
+	lint.linters.vale.args = {
 		"--output=JSON",
 		"--ext=.md",
 		"--config",
 		linterConfig .. "/vale/vale.ini",
 	}
 
-	require("lint").linters.codespell.args = {
+	lint.linters.codespell.args = {
 		"--ignore-words",
+		"--check-hidden",
 		linterConfig .. "/codespell-ignore.txt",
 		"--builtin=rare,clear,informal,code,names,en-GB_to_en-US",
 	}
 
-	require("lint").linters.shellcheck.args = {
+	lint.linters.shellcheck.args = {
 		"--shell=bash", -- force to work with zsh
 		"--format=json",
 		"-",
 	}
 
-	require("lint").linters.yamllint.args = {
+	lint.linters.yamllint.args = {
 		"--config-file",
 		linterConfig .. "/yamllint.yaml",
 		"--format=parsable",
 		"-",
 	}
 
-	require("lint").linters.markdownlint.args = {
+	lint.linters.markdownlint.args = {
 		"--disable=no-trailing-spaces", -- not disabled in config, so it's enabled for formatting
 		"--disable=no-multiple-blanks",
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
@@ -126,7 +121,7 @@ local function lintTriggers()
 		pattern = "AutoSaveWritePost",
 		callback = function() require("lint").try_lint() end,
 	})
-	-- run once on start
+	-- run once on initialization
 	require("lint").try_lint()
 end
 
@@ -156,13 +151,14 @@ local formatterConfig = {
 				"$FILENAME",
 				"--write-changes",
 				"--builtin=rare,clear,informal,code,names,en-GB_to_en-US",
-				"--check-hidden", -- conform temp file is hidden
+				"--check-hidden", -- conform.nvim's temp file is hidden
 				"--ignore-words",
 				linterConfig .. "/codespell-ignore.txt",
 			},
 			-- don't run on css or bib files
 			condition = function(ctx)
-				return not (ctx.filename:find("%.css$") or ctx.filename:find("%.bib$"))
+				local name = ctx.filename
+				return not (vim.endswith(name, ".css") or vim.endswith(name, ".bib"))	
 			end,
 		},
 		["bibtex-tidy"] = {
