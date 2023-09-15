@@ -8,7 +8,7 @@ builtin = "rare,clear,informal,code,names,usage,en-GB_to_en-US"
 
 # ignore
 skip = "**/main-bibliography.bib"
-ignore-regex = "base64,.*" # ignore base64-encoded content, e.g. in css files
+ignore-regex = "base64,\\S{500,}" # ignore base64-encoded content, e.g. in css files
 uri-ignore-words-list="*" # ignore all misspellings in URLs/mail-adresses
 ignore-words-list = """
 bu,caf,tre,enew,noice, \

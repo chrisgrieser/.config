@@ -17,8 +17,8 @@ local linters = {
 	bib = {},
 }
 
+-- PENDING https://github.com/mfussenegger/nvim-lint/issues/355
 for ft, _ in pairs(linters) do
-	-- PENDING https://github.com/mfussenegger/nvim-lint/issues/355
 	table.insert(linters[ft], "codespell")
 end
 
@@ -129,15 +129,10 @@ end
 --------------------------------------------------------------------------------
 
 local formatterConfig = {
+	log_level = vim.log.levels.DEBUG,
 	formatters_by_ft = formatters,
 
 	formatters = {
-		-- PENDING https://github.com/stevearc/conform.nvim/issues/44
-		-- shellcheck = {
-		-- 	command = "shellcheck",
-		-- 	args = "shellcheck $FILENAME --shell=bash --format=diff | git apply", -- https://github.com/koalaman/shellcheck/issues/1220#issuecomment-594811243
-		-- 	stdin = false,
-		-- },
 		markdownlint = {
 			command = "markdownlint",
 			stdin = false,
