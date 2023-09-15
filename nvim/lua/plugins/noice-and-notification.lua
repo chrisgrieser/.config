@@ -7,8 +7,7 @@ local routes = {
 	-- write messages
 	{ filter = { event = "msg_show", find = "B written$" }, view = "mini" },
 
-	-- nvim-early-retirement
-	{
+	{ -- nvim-early-retirement
 		filter = {
 			event = "notify",
 			cond = function(msg) return msg.opts and msg.opts.title == "Auto-Closing Buffer" end,
