@@ -33,7 +33,7 @@ local formatters = {
 	html = { "prettier" },
 	markdown = { "markdownlint" },
 	css = { "stylelint", "prettier" },
-	sh = { "shfmt", "shellharden" },
+	sh = { "shellcheck" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
 	applescript = { "trim_whitespace", "trim_newlines" },
 	["*"] = { "codespell" }, -- ignores .bib and .css via codespell config
@@ -42,7 +42,6 @@ local formatters = {
 local debuggers = { "debugpy" }
 
 local dontInstall = {
-	"shellharden", -- cannot be installed via mason: https://github.com/williamboman/mason.nvim/issues/1481
 	"stylelint", -- stylelint included in mason, but not its plugins: https://github.com/williamboman/mason.nvim/issues/695
 	"trim_whitespace", -- not a real formatter
 	"trim_newlines", -- not a real formatter
@@ -111,19 +110,21 @@ local function linterConfigs()
 end
 
 local function lintTriggers()
+	local function doLint() vim.defer_fn(require("lint").try_lint, 1) end
+
 	vim.api.nvim_create_autocmd({ "BufReadPost", "InsertLeave", "TextChanged", "FocusGained" }, {
-		callback = function() vim.defer_fn(require("lint").try_lint, 1) end,
+		callback = doLint,
 	})
 
 	-- due to auto-save.nvim, we need the custom event "AutoSaveWritePost"
 	-- instead of "BufWritePost" to trigger linting to prevent race conditions
 	vim.api.nvim_create_autocmd("User", {
 		pattern = "AutoSaveWritePost",
-		callback = function() require("lint").try_lint() end,
+		callback = doLint,
 	})
 
 	-- run once on initialization
-	require("lint").try_lint()
+	doLint()
 end
 
 --------------------------------------------------------------------------------
@@ -133,6 +134,11 @@ local formatterConfig = {
 	formatters_by_ft = formatters,
 
 	formatters = {
+		shellcheck = {
+			command = "shellcheck",
+			args = "$FILENAME --shell=bash --format=diff | patch -p1 $FILENAME",
+			stdin = false,
+		},
 		markdownlint = {
 			command = "markdownlint",
 			stdin = false,
@@ -201,6 +207,7 @@ return {
 	},
 	{
 		"stevearc/conform.nvim",
+		branch = "stevearc-run-with-tty",
 		opts = formatterConfig,
 		cmd = "ConformInfo",
 		keys = {
