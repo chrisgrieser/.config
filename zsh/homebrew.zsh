@@ -19,7 +19,7 @@ alias bh='brew home'
 alias bl='brew list'
 alias bi='brew install'
 alias br='brew reinstall'
-alias bu='brew uninstall --zap'
+alias bu='brew uninstall --zap' # codespell-ignore
 
 #───────────────────────────────────────────────────────────────────────────────
 
