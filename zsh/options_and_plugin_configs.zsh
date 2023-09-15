@@ -56,11 +56,9 @@ export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets regexp root)
 
 # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/regexp.md
 typeset -A ZSH_HIGHLIGHT_REGEXP
-# commit msgs too long
-ZSH_HIGHLIGHT_REGEXP+=('^(acp?|git commit -m) ".{51,}"' 'fg=white,bold,bg=red')
-# dangerous stuff
-ZSH_HIGHLIGHT_REGEXP+=('(rm -rf?) .*' 'fg=white,bold,bg=red')
-# NOTE: There are also some custom highlights for global aliases int eh aliases.zsh
+ZSH_HIGHLIGHT_REGEXP+=('^(acp?|git commit -m) ".{71,}"' 'fg=white,bold,bg=red') # commit msgs too long
+
+# NOTE: There are also some custom highlights for global aliases in aliases.zsh
 
 export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)" # ignores long history items
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)

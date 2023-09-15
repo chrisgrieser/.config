@@ -148,7 +148,6 @@ local formatterConfig = {
 				"--toml",
 				linterConfig .. "/codespell.toml",
 			},
-			exit_codes = { 0, 65 },
 		},
 		["bibtex-tidy"] = {
 			command = "bibtex-tidy",
@@ -201,8 +200,7 @@ return {
 		end,
 	},
 	{
-		"stevearc/conform.nvim",
-		branch = "stevearc-run-with-tty",
+		"chrisgrieser/conform.nvim",
 		opts = formatterConfig,
 		cmd = "ConformInfo",
 		keys = {
