@@ -256,6 +256,26 @@ end
 
 --------------------------------------------------------------------------------
 
+local function lspHighlights()
+	vim.api.nvim_create_autocmd("LspAttach", {
+		callback = function(args)
+			local client = vim.lsp.get_client_by_id(args.data.client_id)
+			vim.notify("🪚 beep 👽")
+
+			if client.server_capabilities.document_highlight then
+				vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+					callback = vim.lsp.buf.document_highlight,
+				})
+				vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+					callback = vim.lsp.buf.clear_references,
+				})
+			end
+		end,
+	})
+end
+
+--------------------------------------------------------------------------------
+
 return {
 	{ -- package manager
 		"williamboman/mason.nvim",
@@ -276,7 +296,10 @@ return {
 	{ -- configure LSPs
 		"neovim/nvim-lspconfig",
 		dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config
-		init = setupAllLsps,
+		init = function()
+			setupAllLsps()
+			lspHighlights()
+		end,
 		config = function() require("lspconfig.ui.windows").default_options.border = u.borderStyle end,
 	},
 }
