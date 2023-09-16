@@ -256,20 +256,24 @@ end
 
 --------------------------------------------------------------------------------
 
-local function lspHighlights()
+local function lspCurrentTokenHighlight()
+	u.colorschemeMod("LspReferenceWrite", { underdashed = true }) -- i.e. definition
+	u.colorschemeMod("LspReferenceRead", { underdotted = true }) -- i.e. reference
+	u.colorschemeMod("LspReferenceText", {}) -- too much noise, as is underlines e.g. strings
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(args)
-			local client = vim.lsp.get_client_by_id(args.data.client_id)
-			vim.notify("🪚 beep 👽")
+			local bufnr = args.buf
+			local capabilities = vim.lsp.get_client_by_id(args.data.client_id).server_capabilities
+			if not capabilities.documentHighlightProvider then return end
 
-			if client.server_capabilities.document_highlight then
-				vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-					callback = vim.lsp.buf.document_highlight,
-				})
-				vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-					callback = vim.lsp.buf.clear_references,
-				})
-			end
+			vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+				callback = vim.lsp.buf.document_highlight,
+				buffer = bufnr,
+			})
+			vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+				callback = vim.lsp.buf.clear_references,
+				buffer = bufnr,
+			})
 		end,
 	})
 end
@@ -298,7 +302,7 @@ return {
 		dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config
 		init = function()
 			setupAllLsps()
-			lspHighlights()
+			lspCurrentTokenHighlight()
 		end,
 		config = function() require("lspconfig.ui.windows").default_options.border = u.borderStyle end,
 	},

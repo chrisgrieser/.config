@@ -372,20 +372,16 @@ keymap("n", "gs", function() cmd.Telescope("treesitter") end, { desc = " Docu
 
 autocmd("LspAttach", {
 	callback = function(args)
-		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		local capabilities = client.server_capabilities
+		local capabilities = vim.lsp.get_client_by_id(args.data.client_id).server_capabilities
 
 		-- stylua: ignore start
 		if capabilities.renameProvider then
-			-- needs defer to not be overwritten by treesitter-refactor smart-rename
-			vim.defer_fn(function() 
-				keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename", buffer = true, unique = false }) end
-			, 1)
+			keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename", buffer = true, unique = false })
 			keymap("n", "<leader>V", ":IncRename <C-r><C-w>", { desc = "󰒕 IncRename (cword)", buffer = true, unique = false })
 		end
 		if capabilities.documentSymbolProvider then
 			keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Symbols", buffer = true, unique = false })
-			keymap("n", "gw", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true, unique = false })
+			keymap("n", "gw", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true })
 		end
 		-- stylua: ignore end
 	end,
