@@ -29,11 +29,8 @@ nnoremap + *
 " Find Mode (by mirroring American keyboard layout on German keyboard layout)
 nnoremap - /
 
-" <Esc> clears notices & highlights (:nohl)
-exmap clearNotices obcommand obsidian-smarter-md-hotkeys:hide-notice
-nmap &c& :clearNotices
-nmap &n& :nohl
-nmap <Esc> &c&&n&
+" <Esc> clears highlights
+nnoremap <Esc> :nohl
 
 """"""""""""""""""""""
 " Navigation
@@ -45,6 +42,7 @@ nnoremap k gk
 nnoremap I g0i
 nnoremap A g$a
 
+" navigate paragraphs
 nnoremap gj }j
 nnoremap gk {k
 
@@ -69,7 +67,7 @@ nnoremap zl :contextMenu
 exmap nextSuggestion obcommand obsidian-languagetool-plugin:ltjump-to-next-suggestion
 nnoremap ge :nextSuggestion
 
-" INFO don't work in reading mode: https://github.com/timhor/obsidian-editor-shortcuts/issues/67
+" INFO don't work in reading mode: https://github.com/timhor/obsidian-editor-shortcuts/issues/20
 exmap nextHeading obcommand obsidian-editor-shortcuts:goToNextHeading
 exmap prevHeading obcommand obsidian-editor-shortcuts:goToPrevHeading
 nnoremap <C-j> :nextHeading
@@ -167,20 +165,26 @@ nnoremap Ü "zdawbh"zph
 
 exmap aiWrite obcommand obsidian-textgenerator-plugin:insert-generated-text-From-template
 nnoremap ,a :aiWrite
-vnoremap ,a :aiWrite
 
 " toggle devtools (binding as with the debugger)
 exmap toggleDevtools obcommand obsidian-theme-design-utilities:toggle-devtools
 nnoremap ,b :toggleDevtools
 vnoremap ,b :toggleDevtools
 
-" "code action"": enhance URL with title
+" pseudo-code-action: enhance URL with title
 exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-title
 nnoremap ,c :enhanceUrlWithTitle
 
-""""""""""""""""""""""
-" Line-Based Editing
-""""""""""""""""""""""
+" Change Word/Selection
+nnoremap <Space> "_ciw
+
+" Delete Word/Selection
+nnoremap <S-Space> "_daw
+
+" [R]eplicate (duplicate)
+exmap duplicate obcommand obsidian-editor-shortcuts:duplicateLine
+unmap w
+nnoremap ww :duplicate
 
 " [M]erge Lines
 " can't remap to J, cause there is no noremap; also the merge from Code Editor
@@ -221,6 +225,11 @@ exmap toggleBlockquote obcommand editor:toggle-blockquote
 nnoremap ,< :toggleBlockquote
 nnoremap ,> :toggleBlockquote
 
+" list
+exmap toggleList obcommand editor:toggle-bullet-list
+nnoremap ,- :toggleList
+
+" markdown tasks
 exmap checkList obcommand editor:toggle-checklist-status
 nnoremap ,x :checkList
 
@@ -228,21 +237,6 @@ nnoremap ,x :checkList
 " Indentation
 """"""""""""""""""""""
 " <Tab> as indentation is already implemented in Obsidian
-
-""""""""""""""""""""""
-" Text Objects
-""""""""""""""""""""""
-
-" Change Word/Selection
-nnoremap <Space> "_ciw
-
-" Delete Word/Selection
-nnoremap <S-Space> "_daw
-
-" [R]eplicate (duplicate)
-exmap duplicate obcommand obsidian-editor-shortcuts:duplicateLine
-unmap w
-nnoremap ww :duplicate
 
 """"""""""""""""""""""
 " Visual Mode
