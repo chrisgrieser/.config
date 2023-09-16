@@ -42,17 +42,16 @@ local function customHighlights()
 	-- make `MatchParen` stand out more (orange to close to rainbow brackets)
 	overwriteHighlight("MatchParen", { reverse = true })
 
-	-- proper underlines for diagnostics and spelling
+	-- proper underlines for diagnostics
 	for _, type in pairs { "Error", "Warn", "Info", "Hint" } do
-		updateHighlight(type .. "Text", "gui=underdouble cterm=underline")
 		updateHighlight("DiagnosticUnderline" .. type, "gui=underdouble cterm=underline")
 	end
 end
 
+-- selene: allow(high_cyclomatic_complexity)
 local function themeModifications()
 	local mode = vim.opt.background:get()
-	-- some themes do not set g.colors_name
-	local theme = g.colors_name
+	local theme = g.colors_name -- some themes do not set g.colors_name
 	if not theme then theme = mode == "light" and g.lightTheme or g.darkTheme end
 
 	-- FIX lualine_a not getting bold in many themes
@@ -63,7 +62,6 @@ local function themeModifications()
 			updateHighlight("lualine_y_diff_modified_" .. v, "guifg=#acaa62")
 			updateHighlight("lualine_y_diff_added_" .. v, "guifg=#369a96")
 			updateHighlight("lualine_a_" .. v, "gui=bold")
-			vim.defer_fn(function() updateHighlight("lualine_a_" .. v, "gui=bold") end, 100)
 		end
 		updateHighlight("GitSignsChange", "guifg=#acaa62")
 		updateHighlight("GitSignsAdd", "guifg=#369a96")
@@ -94,7 +92,20 @@ local function themeModifications()
 		vim.opt.guicursor:append("o-v:hor10")
 		if mode == "dark" then updateHighlight("ColorColumn", "guibg=#2e3742") end
 	elseif theme == "kanagawa" then
+		-- transparent sign column
 		clearHighlight("SignColumn")
+		updateHighlight("GitSignsAdd", "guibg=none")
+		updateHighlight("GitSignsChange", "guibg=none")
+		updateHighlight("GitSignsDelete", "guibg=none")
+		for _, type in pairs { "Hint", "Info", "Warn", "Error" } do
+			updateHighlight("DiagnosticSign" .. type, "guibg=none")
+		end
+
+		-- bold lualine
+		for _, v in pairs(vimModes) do
+			updateHighlight("lualine_a_" .. v, "gui=bold")
+		end
+
 		linkHighlight("MoreMsg", "Folded") -- FIX for https://github.com/rebelot/kanagawa.nvim/issues/89
 	elseif theme == "zephyr" then
 		updateHighlight("IncSearch", "guifg=#FFFFFF")
@@ -125,7 +136,6 @@ end
 
 autocmd("ColorScheme", {
 	callback = function()
-		-- defer needed for some modifications to properly take effect
 		themeModifications()
 		customHighlights()
 	end,

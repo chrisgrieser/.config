@@ -260,8 +260,8 @@ keymap("x", "p", "P", { desc = " Paste w/o switching register" })
 -- do not clutter the register if blank line is deleted
 keymap("n", "dd", function()
 	local isBlankLine = api.nvim_get_current_line():find("^%s*$")
-	local expr = isBlankLine and '"_dd' or "dd"
-	return expr
+	if isBlankLine then return '"_dd' end
+	return "dd"
 end, { expr = true })
 
 -- always paste characterwise when in insert mode
@@ -367,25 +367,10 @@ keymap({ "n", "i", "v" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "󰒕 Si
 keymap("n", "gd", function() cmd.Telescope("lsp_definitions") end, { desc = "󰒕 Definitions" })
 keymap("n", "gf", function() cmd.Telescope("lsp_references") end, { desc = "󰒕 References" })
 
--- overridden with inc-rename, if attaching LSP with renaming capabilities
-keymap("n", "gs", function() cmd.Telescope("treesitter") end, { desc = " Document Symbols" })
-
-autocmd("LspAttach", {
-	callback = function(args)
-		local capabilities = vim.lsp.get_client_by_id(args.data.client_id).server_capabilities
-
-		-- stylua: ignore start
-		if capabilities.renameProvider then
-			keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename", buffer = true })
-			keymap("n", "<leader>V", ":IncRename <C-r><C-w>", { desc = "󰒕 IncRename (cword)", buffer = true })
-		end
-		if capabilities.documentSymbolProvider then
-			keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Symbols", buffer = true, unique = false })
-			keymap("n", "gw", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols", buffer = true })
-		end
-		-- stylua: ignore end
-	end,
-})
+keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename" })
+keymap("n", "<leader>V", ":IncRename <C-r><C-w>", { desc = "󰒕 IncRename (cword)" })
+keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Symbols", unique = false })
+keymap("n", "gw", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols" })
 
 --------------------------------------------------------------------------------
 -- stylua: ignore
