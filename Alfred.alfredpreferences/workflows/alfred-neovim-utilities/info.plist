@@ -188,7 +188,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy GitHub URL</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -271,6 +271,29 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C906BF1E-7CF4-4407-9B97-53532876DCC0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6BBC3DF6-1094-4623-B790-2B5EF7C16EEE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>D6E5E105-38E3-4BC1-90E3-52BEE556349D</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1274,8 +1297,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>C906BF1E-7CF4-4407-9B97-53532876DCC0</key>
 		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
 			<key>note</key>
 			<string>installed plugins and mason tools search</string>
 			<key>xpos</key>
@@ -1545,7 +1566,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.5.0</string>
+	<string>1.6.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

@@ -58,8 +58,8 @@ function run() {
 		const notForMason = { valid : false, subtitle : "🚫 Not for Mason Tool" };
 
 		masonArray = masonRegistry
-			.filter((/** @type {{ name: string; }} */ tool) => installedTools.includes(tool.name))
-			.map((/** @type {{ categories: string[]; name: string; homepage: string; }} */ tool) => {
+			.filter((/** @type {MasonPackage} */ tool) => installedTools.includes(tool.name))
+			.map((/** @type {MasonPackage} */ tool) => {
 				const categoryList = tool.categories.join(", ");
 				return {
 					title: tool.name,

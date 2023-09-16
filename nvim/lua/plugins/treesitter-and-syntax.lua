@@ -7,11 +7,9 @@ local tsConfig = {
 
 	highlight = {
 		enable = true,
-		-- pending https://github.com/tree-sitter/tree-sitter-css/issues/34
-		disable = { "css" },
+		disable = { "css" }, -- PENDING https://github.com/tree-sitter/tree-sitter-css/issues/34
 	},
-	-- use treesitter for autoindent with `=`
-	indentation = { enable = true },
+	indentation = { enable = true }, -- use treesitter for autoindent with `=`
 
 	--------------------------------------------------------------------------
 	-- TREESITTER PLUGINS

@@ -12,6 +12,7 @@ return {
 	{ -- highlight word under cursor & batch renamer
 		"nvim-treesitter/nvim-treesitter-refactor",
 		event = "BufReadPre",
+		enabled = false,
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
 			u.colorschemeMod("TSDefinition", { underdashed = true })
