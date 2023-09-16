@@ -9,16 +9,6 @@ return {
 		event = "VeryLazy",
 		opts = true,
 	},
-	{ -- highlight word under cursor & batch renamer
-		"nvim-treesitter/nvim-treesitter-refactor",
-		event = "BufReadPre",
-		enabled = false,
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		init = function()
-			u.colorschemeMod("TSDefinition", { underdashed = true })
-			u.colorschemeMod("TSDefinitionUsage", { underdotted = true })
-		end,
-	},
 	{ -- scrollbar with information
 		"lewis6991/satellite.nvim",
 		commit = "5d33376", -- TODO following versions require nvim 0.10

@@ -81,6 +81,7 @@ function run() {
 	}
 	const metadataJSON = `${vaultPath}/${configFolder}/plugins/metadata-extractor/metadata.json`;
 	const metadataStrLen = fileExists(metadataJSON) ? readFile(metadataJSON).length : "no metadata.json";
+	const metadataExtractorConfig = readFile(`${vaultPath}/${configFolder}/plugins/metadata-extractor/data.json`);
 
 	//──────────────────────────────────────────────────────────────────────────────
 
@@ -92,6 +93,9 @@ function run() {
 	log(`Metadata JSONs: ${numberOfJSONS}/4`);
 	if (numberOfJSONS < 4) log("Not all metadata found. Please run `osetup` and retry.");
 	log("metadata.json String Length: " + metadataStrLen);
+	log("-------------------------------");
+	log("METADATA EXTRACTOR CONFIG");
+	log(metadataExtractorConfig)
 	log("-------------------------------");
 	log("WORKSPACE DATA");
 	if (workspaceData15) log("'workspace' exists");
