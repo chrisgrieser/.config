@@ -76,7 +76,8 @@ end)
 
 ---@param toDark boolean true = dark, false = light
 function M.set(toDark)
-	if (not (u.isDarkMode()) and toDark) or (u.isDarkMode() and not toDark) then toggleDarkMode() end
+	if ((u.isDarkMode()) and toDark) or (not u.isDarkMode() and not toDark) then return end
+	toggleDarkMode()
 end
 
 -- autoswitch dark mode and light mode
