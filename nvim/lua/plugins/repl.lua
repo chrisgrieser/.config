@@ -23,8 +23,7 @@ return {
 					typescript = { command = { "node" } },
 					javascript = { command = { "osascript", "-i", "-l", "JavaScript" } },
 					applescript = { command = { "osascript", "-i", "-l", "AppleScript" } },
-					-- automatically uses the ipython from the virtual env, if one is active
-					python = { command = { "ipython" } },
+					python = { command = { "ipython" } }, -- automatically uses the ipython from the virtual env
 				},
 			},
 		},
@@ -43,7 +42,7 @@ return {
 				a.nvim_buf_set_option(0, "buftype", "nofile")
 				a.nvim_buf_set_name(0, "HTTP Request")
 				-- stylua: ignore start
-				keymap("n", "<localleader>r", "<Plug>RestNvim", { desc = "󰴚 Run Request under cursor", buffer = true })
+				keymap("n", "<localleader><localleader>", "<Plug>RestNvim", { desc = "󰴚 Run Request under cursor", buffer = true })
 				keymap("n", "<localleader>a", "<Plug>RestNvimLast", { desc = "󰴚 Re-run the last request", buffer = true })
 				keymap( "n", "<localleader>e", function() 
 					vim.fn.system { "open", "https://github.com/rest-nvim/rest.nvim/tree/main/tests" }
@@ -63,8 +62,6 @@ return {
 						-- stylua: ignore
 						return vim.fn.system { "biome", "format", "--stdin", "--stdin-file-path", "foo.json", body }
 					end,
-					-- prettier already needed since it's the only proper yaml formatter
-					html = function(body) return vim.fn.system { "prettier", "--parser=html", body } end,
 				},
 			},
 		},
