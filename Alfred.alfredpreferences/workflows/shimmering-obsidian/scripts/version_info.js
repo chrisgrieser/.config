@@ -27,6 +27,7 @@ function log(str) {
 function run() {
 	const vaultPath = $.getenv("vault_path");
 	const configFolder = $.getenv("config_folder");
+	// const vaultConfig = 
 
 	// input parameters
 	const appSupportPath = app.pathTo("home folder") + "/Library/Application Support/obsidian/";
