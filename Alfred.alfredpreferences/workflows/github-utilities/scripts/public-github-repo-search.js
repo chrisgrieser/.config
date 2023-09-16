@@ -23,13 +23,13 @@ function run(argv) {
 	if (!query) return;
 	const apiURL = `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}`;
 
-	const jsonArray = JSON.parse(httpRequest(apiURL))
+	const repos = JSON.parse(httpRequest(apiURL))
 		.items.filter((/** @type {{ fork: boolean; archived: boolean; }} */ repo) => !(repo.fork || repo.archived))
-		.map((/** @type {{ full_name: string; updated_at: string | number | Date; stargazers_count: any; description: string; html_url: any; open_issues: any; }} */ repo) => {
+		.map((/** @type {{ full_name: string; pushed_at: string | number | Date; stargazers_count: any; description: string; html_url: any; open_issues: any; }} */ repo) => {
 			const name = repo.full_name.split("/")[1];
 
 			// calculate relative date
-			const daysAgo = Math.ceil((+new Date() - +new Date(repo.updated_at)) / 1000 / 3600 / 24);
+			const daysAgo = Math.ceil((+new Date() - +new Date(repo.pushed_at)) / 1000 / 3600 / 24);
 			let updated =
 				daysAgo < 31 ? daysAgo.toString() + " days ago" : Math.ceil(daysAgo / 30).toString() + " months ago";
 			if (updated.startsWith("1 ")) updated = updated.replace("s ago", " ago");
@@ -50,5 +50,13 @@ function run(argv) {
 				},
 			};
 		});
-	return JSON.stringify({ items: jsonArray });
+
+	if (repos.length === 0) {
+		repos.push({
+			title: "🚫 No results",
+			subtitle: `No results found for '${query}'`,
+			valid: false,
+		})
+	};
+	return JSON.stringify({ items: repos });
 }
