@@ -376,8 +376,8 @@ autocmd("LspAttach", {
 
 		-- stylua: ignore start
 		if capabilities.renameProvider then
-			keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename", buffer = true, unique = false })
-			keymap("n", "<leader>V", ":IncRename <C-r><C-w>", { desc = "󰒕 IncRename (cword)", buffer = true, unique = false })
+			keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename", buffer = true })
+			keymap("n", "<leader>V", ":IncRename <C-r><C-w>", { desc = "󰒕 IncRename (cword)", buffer = true })
 		end
 		if capabilities.documentSymbolProvider then
 			keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Symbols", buffer = true, unique = false })

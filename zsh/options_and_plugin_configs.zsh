@@ -56,7 +56,9 @@ export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets regexp root)
 
 # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/regexp.md
 typeset -A ZSH_HIGHLIGHT_REGEXP
-ZSH_HIGHLIGHT_REGEXP+=('^(acp?|git commit -m) ".{71,}"' 'fg=white,bold,bg=red') # commit msgs too long
+# commit messages longer than 50 chars: yellow, longer than 72 chars: red
+ZSH_HIGHLIGHT_REGEXP+=('^(acp?|gc -m|git commit -m) ".{72,}"' 'fg=white,bold,bg=red')
+ZSH_HIGHLIGHT_REGEXP+=('^(acp?|gc -m|git commit -m) ".{51,71}"' 'fg=white,bold,bg=yellow') 
 
 # NOTE: There are also some custom highlights for global aliases in aliases.zsh
 
