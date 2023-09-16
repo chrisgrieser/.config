@@ -91,6 +91,7 @@ keymap(
 	function() cmd("silent later " .. tostring(vim.opt.undolevels:get())) end,
 	{ desc = "󰛒 Redo All" }
 )
+keymap("n", "<leader>ul", "U", { desc = "– Undo line" })
 
 keymap(
 	{ "n", "x" },
@@ -247,7 +248,7 @@ keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line Numbers" })
 keymap("n", "<leader>os", "<cmd>set spell!<CR>", { desc = "󰓆 spellcheck" })
 keymap("n", "<leader>ol", "<cmd>LspRestart<CR>", { desc = "󰒕 LspRestart" })
 
-keymap("n", "<leader>od", function()
+keymap("n", "<leader>od", function() -- codespell-ignore
 	if vim.diagnostic.is_disabled(0) then
 		vim.diagnostic.enable(0)
 	else
