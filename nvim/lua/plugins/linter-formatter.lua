@@ -37,7 +37,7 @@ local formatters = {
 	css = { "stylelint", "prettierd" },
 	sh = { "shellcheck" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
-	applescript = { "trim_whitespace", "trim_newlines" },
+	["_"] = { "trim_whitespace", "trim_newlines" },
 	["*"] = { "codespell" }, -- ignores .bib and .css via codespell config
 }
 
@@ -150,57 +150,53 @@ end
 
 --------------------------------------------------------------------------------
 
-local formatterConfig = {
-	log_level = vim.log.levels.DEBUG,
-	formatters_by_ft = formatters,
+local function formatterConfig() 
+	require("conform").setup {
+		log_level = vim.log.levels.DEBUG,
+		formatters_by_ft = formatters,
 
-	formatters = {
-		shellcheck = {
-			command = "shellcheck",
-			args = "$FILENAME --shell=bash --format=diff | patch -p1 $FILENAME",
-			stdin = false,
-		},
-		markdownlint = {
-			command = "markdownlint",
-			stdin = false,
-			args = { "--fix", "--config", linterConfig .. "/markdownlint.yaml", "$FILENAME" },
-		},
-		codespell = {
-			command = "codespell",
-			stdin = false,
-			args = {
-				"$FILENAME",
-				"--write-changes",
-				"--check-hidden", -- conform.nvim's temp file is hidden
-				"--toml",
-				linterConfig .. "/codespell.toml",
+		formatters = {
+			["bibtex-tidy"] = {
+				command = "bibtex-tidy",
+				stdin = true,
+				args = {
+					"--quiet",
+					"--omit=month,issn,abstract",
+					"--tab",
+					"--curly",
+					"--strip-enclosing-braces",
+					"--enclosing-braces=title,journal,booktitle",
+					"--numeric",
+					"--months",
+					"--no-align",
+					"--encode-urls",
+					"--duplicates",
+					"--drop-all-caps",
+					"--sort-fields",
+					"--remove-empty-fields",
+					"--no-wrap",
+				},
+				-- main bibliography too big
+				condition = function(ctx) return vim.fs.basename(ctx.filename) ~= "main-bibliography.bib" end,
 			},
-		},
-		["bibtex-tidy"] = {
-			command = "bibtex-tidy",
-			stdin = true,
-			args = {
-				"--quiet",
-				"--omit=month,issn,abstract",
-				"--tab",
-				"--curly",
-				"--strip-enclosing-braces",
-				"--enclosing-braces=title,journal,booktitle",
-				"--numeric",
-				"--months",
-				"--no-align",
-				"--encode-urls",
-				"--duplicates",
-				"--drop-all-caps",
-				"--sort-fields",
-				"--remove-empty-fields",
-				"--no-wrap",
-			},
-			-- main bibliography too big
-			condition = function(ctx) return vim.fs.basename(ctx.filename) ~= "main-bibliography.bib" end,
-		},
-	},
-}
+		}
+	}
+
+	-- DOCS https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md#add-extra-arguments-to-a-formatter-command
+	require("conform.formatters.markdownlint").args = {
+		"--fix",
+		"--config",
+		linterConfig .. "/markdownlint.yaml",
+		"$FILENAME",
+	}
+	require("conform.formatters.codespell").args = {
+		"$FILENAME",
+		"--write-changes",
+		"--check-hidden", -- conform.nvim's temp file is hidden
+		"--toml",
+		linterConfig .. "/codespell.toml",
+	}
+end
 
 --------------------------------------------------------------------------------
 
@@ -234,8 +230,7 @@ return {
 	},
 	{
 		"stevearc/conform.nvim",
-		branch = "stevearc-run-with-tty",
-		opts = formatterConfig,
+		config = formatterConfig,
 		cmd = "ConformInfo",
 		keys = {
 			{

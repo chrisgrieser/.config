@@ -733,6 +733,55 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:plugin_search}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/search-nvim-plugins.js</string>
+				<key>subtext</key>
+				<string>Loading...</string>
+				<key>title</key>
+				<string>Search Neovim Plugin</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>02145BDB-6F80-437E-A4FE-880FDA77AC47</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -801,55 +850,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>{var:plugin_search}</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/search-nvim-plugins.js</string>
-				<key>subtext</key>
-				<string>Loading...</string>
-				<key>title</key>
-				<string>Search Neovim Plugin</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>02145BDB-6F80-437E-A4FE-880FDA77AC47</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argument</key>
 				<string></string>
 				<key>passthroughargument</key>
@@ -883,6 +883,55 @@
 			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
 			<string>04FB2B7F-2F25-443A-98EC-3D62C8EFBF34</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:mason_tool_search}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/search-mason-tools.js</string>
+				<key>subtext</key>
+				<string>Loading...</string>
+				<key>title</key>
+				<string>Search Mason Tools Plugin</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>C906BF1E-7CF4-4407-9B97-53532876DCC0</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -981,7 +1030,7 @@
 				<key>autopaste</key>
 				<false/>
 				<key>clipboardtext</key>
-				<string>https://github.com/{query}</string>
+				<string>{query}</string>
 				<key>ignoredynamicplaceholders</key>
 				<false/>
 				<key>transient</key>
@@ -1059,7 +1108,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>505</real>
+			<real>475</real>
 		</dict>
 		<key>04FB2B7F-2F25-443A-98EC-3D62C8EFBF34</key>
 		<dict>
@@ -1223,6 +1272,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>640</real>
 		</dict>
+		<key>C906BF1E-7CF4-4407-9B97-53532876DCC0</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>installed plugins and mason tools search</string>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>615</real>
+		</dict>
 		<key>D6E5E105-38E3-4BC1-90E3-52BEE556349D</key>
 		<dict>
 			<key>colorindex</key>
@@ -1330,7 +1390,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>description</key>
 			<string>For searching the official neovim documentation (online, not inside nvim).</string>
 			<key>label</key>
-			<string>Keyword: online :help</string>
+			<string>Keyword – online :help</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -1351,7 +1411,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>description</key>
 			<string>using Neovimcraft</string>
 			<key>label</key>
-			<string>Keyword for Plugin Search</string>
+			<string>Keyword – Plugin Search</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -1372,7 +1432,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>description</key>
 			<string>For searching recent files (:help oldfiles).</string>
 			<key>label</key>
-			<string>Keyword: oldfiles</string>
+			<string>Keyword – oldfiles</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -1393,7 +1453,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>description</key>
 			<string>For latest posts in the neovim subreddit.</string>
 			<key>label</key>
-			<string>Keyword: neovim subreddit</string>
+			<string>Keyword –neovim subreddit</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -1414,11 +1474,32 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>description</key>
 			<string>For searching installed plugins &amp; mason tools.</string>
 			<key>label</key>
-			<string>Keyword: installed plugins</string>
+			<string>Keyword – nstalled plugins</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>installed_plugin_search</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>mason</string>
+				<key>placeholder</key>
+				<string>mason</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>For searching all tools available via mason.</string>
+			<key>label</key>
+			<string>Keyword – mason tools</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>mason_tool_search</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1454,7 +1535,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<false/>
 			</dict>
 			<key>description</key>
-			<string>Path where mason.nvim installs its tools. Default value is the default path for mason.nvim. (Leave empty to not list mason tools.)</string>
+			<string>Path where mason.nvim installs its tools. Default value is the default path for mason.nvim. Required for any mason-related feature of this plugin.</string>
 			<key>label</key>
 			<string>Mason Installation Path</string>
 			<key>type</key>
