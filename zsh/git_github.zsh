@@ -124,12 +124,12 @@ function gitlog {
 	gitlog_format="format:%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)"
 
 	git log --all --color --graph --format="$gitlog_format" "$@" |
-		sed -e 's/ seconds ago)/s)/' \
-			-e 's/ minutes ago)/m)/' \
-			-e 's/ hours ago)/h)/' \
-			-e 's/ days ago)/d)/' \
-			-e 's/ weeks ago)/w)/' \
-			-e 's/ months ago)/mo)/' \
+		sed -e 's/ seconds* ago)/s)/' \
+			-e 's/ minutes* ago)/m)/' \
+			-e 's/ hours* ago)/h)/' \
+			-e 's/ days* ago)/d)/' \
+			-e 's/ weeks* ago)/w)/' \
+			-e 's/ months* ago)/mo)/' \
 			-e 's/grafted/ /' \
 			-e 's/origin\//󰞶  /g' \
 			-e 's/HEAD/󱍀 /g' \
