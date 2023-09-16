@@ -103,15 +103,15 @@ declare const Application: {
 		aliases: finderItem[]; // hashmap of all paths, e.g. .aliases["/some/path/file.txt"]
 		keystroke(key: string, modifiers?: { using: string[] });
 		keyCode(keycode: number, modifiers?: { using: string[] });
-		// rome-ignore lint/suspicious/noExplicitAny: later
+		// biome-ignore lint/suspicious/noExplicitAny: later
 		applicationProcesses: any;
-		// rome-ignore lint/suspicious/noExplicitAny: later
+		// biome-ignore lint/suspicious/noExplicitAny: later
 		processes: any;
 	};
 	(name: "Reminders"): macAppObj & {
 		defaultList(): {
 			make(any);
-			// rome-ignore lint/suspicious/noExplicitAny: later
+			// biome-ignore lint/suspicious/noExplicitAny: later
 			reminders: any;
 		};
 	};
@@ -171,27 +171,27 @@ declare function delay(seconds: number): void;
 
 declare const $: {
 	// requires `ObjC.import("AppKit")`
-	// rome-ignore lint/suspicious/noExplicitAny: too long
+	// biome-ignore lint/suspicious/noExplicitAny: too long
 	NSPasteboard: any;
-	// rome-ignore lint/suspicious/noExplicitAny: too long
+	// biome-ignore lint/suspicious/noExplicitAny: too long
 	NSFilenamesPboardType: any;
-	// rome-ignore lint/suspicious/noExplicitAny: too long
+	// biome-ignore lint/suspicious/noExplicitAny: too long
 	(paths: string[]): any;
 
 	// requires `ObjC.import("stdlib")`
 	getenv: (envVar: string) => string;
-	// rome-ignore lint/suspicious/noExplicitAny: too long
+	// biome-ignore lint/suspicious/noExplicitAny: too long
 	NSFileManager: any;
-	// rome-ignore lint/suspicious/noExplicitAny: too long
+	// biome-ignore lint/suspicious/noExplicitAny: too long
 	NSUTF8StringEncoding: any;
-	// rome-ignore lint/suspicious/noExplicitAny: too long
+	// biome-ignore lint/suspicious/noExplicitAny: too long
 	NSFileModificationDate: any;
-	// rome-ignore lint/suspicious/noExplicitAny: too long
+	// biome-ignore lint/suspicious/noExplicitAny: too long
 	NSProcessInfo: any;
-	// rome-ignore lint/suspicious/noExplicitAny: too long
+	// biome-ignore lint/suspicious/noExplicitAny: too long
 	NSURL: any;
-	// rome-ignore lint/suspicious/noExplicitAny: too long
+	// biome-ignore lint/suspicious/noExplicitAny: too long
 	NSString: any;
-	// rome-ignore lint/suspicious/noExplicitAny: too long
+	// biome-ignore lint/suspicious/noExplicitAny: too long
 	NSData: any;
 };
