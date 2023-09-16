@@ -29,6 +29,8 @@ function run(argv) {
 			const name = repo.full_name.split("/")[1];
 
 			// calculate relative date
+			// INFO pushed_at refers to commits only https://github.com/orgs/community/discussions/24442
+			// CAVEAT pushed_at apparently also includes pushes via PR :(
 			const daysAgo = Math.ceil((+new Date() - +new Date(repo.pushed_at)) / 1000 / 3600 / 24);
 			let updated =
 				daysAgo < 31 ? daysAgo.toString() + " days ago" : Math.ceil(daysAgo / 30).toString() + " months ago";

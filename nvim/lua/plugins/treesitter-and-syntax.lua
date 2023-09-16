@@ -9,7 +9,7 @@ local tsConfig = {
 		enable = true,
 		disable = { "css" }, -- PENDING https://github.com/tree-sitter/tree-sitter-css/issues/34
 	},
-	indentation = { enable = true }, -- use treesitter for autoindent with `=`
+	indentation = { enable = true }, -- autoindent with `=`
 
 	--------------------------------------------------------------------------
 	-- TREESITTER PLUGINS
@@ -66,21 +66,9 @@ local tsConfig = {
 	matchup = {
 		enable = true,
 		enable_quotes = true,
-		disable_virtual_text = true, -- nvim-context-vt is better here
+		disable_virtual_text = true, -- nvim-context-vt is better
 	},
 	endwise = { enable = true },
-	tree_setter = { enable = true },
-	refactor = {
-		highlight_definitions = {
-			enable = true,
-			clear_on_cursor_move = false, -- set to true with a very low updatetime
-		},
-		highlight_current_scope = { enable = false },
-		smart_rename = {
-			enable = true,
-			keymaps = { smart_rename = "<leader>v" }, -- in LSP filetypes overwritten by LSP rename
-		},
-	},
 }
 
 --------------------------------------------------------------------------------
@@ -88,14 +76,14 @@ local tsConfig = {
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
+		keys = {
+			-- HACK avoid conflict with visual mode comment from Comments.nvim
+			{ "q", "&&&", mode = "o", desc = "󱡔 comment textobj", remap = true },
+		},
 		event = "VeryLazy",
 		build = ":TSUpdate",
 		main = "nvim-treesitter.configs",
 		opts = tsConfig,
-		init = function()
-			-- only `omap` to avoid conflict with visual mode comment from Comments.nvim
-			vim.keymap.set("o", "q", "&&&", { desc = "󱡔 comment textobj", remap = true })
-		end,
 	},
 
 	-- Syntax Highlighting Plugins

@@ -1,4 +1,4 @@
-; Modification of the original highlights to add more common tags
+; MODIFICATION OF THE ORIGINAL HIGHLIGHTS TO ADD MORE COMMON TAGS
 
 ; DOCS 
 ; Supposedly, this adding this file to the after directory should be enough to
@@ -12,7 +12,7 @@
 ;───────────────────────────────────────────────────────────────────────────────
 
 ; added by me: 
-; CONFIG SIC PENDING
+; CONFIG SIC PENDING CAVEAT
 
 ; test for this file to work
 ; FOOBAR TEST ERROR
@@ -45,10 +45,10 @@
   (name) @text.warning @nospell
   ("(" @punctuation.bracket (user) @constant ")" @punctuation.bracket)?
   ":" @punctuation.delimiter)
-  (#any-of? @text.warning "HACK" "WARN" "FIX" "SIC"))
+  (#any-of? @text.warning "HACK" "WARN" "FIX" "SIC" "CAVEAT"))
 
 ("text" @text.warning @nospell
- (#any-of? @text.warning "HACK" "WARN" "FIX" "SIC"))
+ (#any-of? @text.warning "HACK" "WARN" "FIX" "SIC" "CAVEAT"))
 
 ((tag
   (name) @text.danger @nospell
