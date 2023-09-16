@@ -83,7 +83,7 @@ function cacheIsOutdated(path) {
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	// PERF cache results
 	const cachePath = $.getenv("alfred_workflow_cache") + "/plugin-cache.json";

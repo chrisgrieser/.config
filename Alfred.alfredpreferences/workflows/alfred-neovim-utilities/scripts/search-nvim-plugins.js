@@ -76,7 +76,7 @@ function writeToFile(filepath, text) {
 // TODO search dotfyles, when their collection is more thorough
 
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	// UPDATE CACHE IF OUTDATED OR IF PLUGINS WERE INSTALLED/UNINSTALLED
 	const pluginInstallPath = $.getenv("plugin_installation_path");

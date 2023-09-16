@@ -10,7 +10,7 @@ const sidenotes = Application("SideNotes");
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string[]} argv */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred
+// biome-ignore lint/correctness/noUnusedVariables: Alfred
 function run(argv) {
 	const input = argv[0];
 	const baseFolder = sidenotes.folders.byName($.getenv("base_folder"));

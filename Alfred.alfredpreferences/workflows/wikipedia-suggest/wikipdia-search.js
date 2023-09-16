@@ -12,7 +12,7 @@ function httpRequest(url) {
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const query = argv[0];
 	if (!query) return;

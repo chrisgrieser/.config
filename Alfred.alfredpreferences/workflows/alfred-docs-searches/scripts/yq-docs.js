@@ -6,7 +6,7 @@ app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const docsURL = "https://api.github.com/repos/mikefarah/yq/git/trees/master?recursive=1";
 	const baseURL = "https://mikefarah.gitbook.io/yq";

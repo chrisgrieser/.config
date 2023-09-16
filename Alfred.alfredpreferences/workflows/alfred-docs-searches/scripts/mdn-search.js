@@ -22,7 +22,7 @@ function httpRequest(url) {
 //───────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const lang = argv[0];
 	const query = argv.slice(1).join("");

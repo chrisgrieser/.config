@@ -14,7 +14,7 @@ function alfredMatcher(str) {
 //──────────────────────────────────────────────────────────────────────────────
 // using `fd` over `find` for speed and gitignoring
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: <explanation>
+// biome-ignore lint/correctness/noUnusedVariables: <explanation>
 function run(argv) {
 	const dotfileFolder = argv[0];
 

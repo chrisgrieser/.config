@@ -11,7 +11,7 @@ function alfredMatcher(str) {
 
 //──────────────────────────────────────────────────────────────────────────────
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	let breadcrumbs = [];
 	const pandocDocsUrl = "https://pandoc.org/MANUAL.html";
@@ -20,7 +20,7 @@ function run() {
 		.doShellScript(`curl -s "${pandocDocsUrl}"`)
 		.split(">") // INFO split by tags, not lines, since html formatting breaks up some tags across lines
 		.filter(
-			// rome-ignore format: off
+			// biome-ignore format: off
 			(htmlTag) => (htmlTag.includes("<span id=") || htmlTag.includes("<section id=")) && !htmlTag.includes('id="cb'),
 		)
 		.map((htmlTag) => {

@@ -10,7 +10,7 @@ function browserTab() {
 		.applicationProcesses.where({ frontmost: true })
 		.name()[0];
 	const frontmostApp = Application(frontmostAppName);
-	// rome-ignore format: long
+	// biome-ignore format: long
 	const chromiumVariants = [ "Google Chrome", "Chromium", "Opera", "Vivaldi", "Brave Browser", "Microsoft Edge", "Arc" ];
 	const webkitVariants = ["Safari", "Webkit"];
 	let title, url;
@@ -33,7 +33,7 @@ function browserTab() {
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 
 	// get selection

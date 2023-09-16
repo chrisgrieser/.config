@@ -9,7 +9,7 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string[]} argv */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const passwords = [];
 	let passwordStore = argv[0];

@@ -352,9 +352,9 @@ function extractMetadata(citekey, rawEntry) {
 	let bibtexEntry = "@" + rawEntry.split("@")[1]; // cut following citekeys
 
 	// Decode Bibtex
-	// rome-ignore format: more compact
+	// biome-ignore format: more compact
 	const germanChars = ['{\\"u};ü', '{\\"a};ä', '{\\"o};ö', '{\\"U};Ü', '{\\"A};Ä', '{\\"O};Ö', '\\"u;ü', '\\"a;ä', '\\"o;ö', '\\"U;Ü', '\\"A;Ä', '\\"O;Ö', "\\ss;ß", "{\\ss};ß"];
-	// rome-ignore format: more compact
+	// biome-ignore format: more compact
 	const otherChars = ["{\\~n};ñ", "{\\'a};á", "{\\'e};é", "{\\v c};č", "\\c{c};ç", "\\o{};ø", "\\^{i};î", '\\"{i};î', '\\"{i};ï', "{\\'c};ć", '\\"e;ë'];
 	const specialChars = ["\\&;&", '``;"', "`;'", "\\textendash{};—", "---;—", "--;—"];
 	[...germanChars, ...otherChars, ...specialChars].forEach((pair) => {
@@ -498,7 +498,7 @@ ${annos}
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: AlfredRun
+// biome-ignore lint/correctness/noUnusedVariables: AlfredRun
 function run(argv) {
 	const [citekey, rawAnnotations, entry, outPath, engine] = argv;
 	const usePdfannots = engine === "pdfannots";

@@ -43,7 +43,7 @@ const urlRegex =
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string[]} argv */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred
+// biome-ignore lint/correctness/noUnusedVariables: Alfred
 function run(argv) {
 	const query = argv[0].match(/^\s*$/) ? "" : argv[0];
 	const sidenotes = Application("SideNotes");

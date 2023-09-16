@@ -12,7 +12,7 @@ const excludedDevices = ($.getenv("excluded_devices") || "").split(",").map((t) 
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	let deviceArr = [];
 	const allDevices = JSON.parse(app.doShellScript("system_profiler -json SPBluetoothDataType"))

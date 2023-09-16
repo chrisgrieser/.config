@@ -11,7 +11,7 @@ function alfredMatcher(str) {
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const uriSchemes = app
 		.doShellScript(

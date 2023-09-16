@@ -1,5 +1,5 @@
 #!/usr/bin/env osascript -l JavaScript
-// rome-ignore lint/correctness/noUnusedVariables: alfred_run
+// biome-ignore lint/correctness/noUnusedVariables: alfred_run
 function run() {
 	ObjC.import("stdlib");
 	const app = Application.currentApplication();

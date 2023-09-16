@@ -13,7 +13,7 @@ function alfredMatcher(str) {
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const pythonVersion = $.getenv("python_version");
 	const docsUrl = "https://api.github.com/repos/python/cpython/git/trees/main?recursive=1";

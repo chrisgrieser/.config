@@ -1,7 +1,7 @@
 #!/usr/bin/env osascript -l JavaScript
 
 /** @param {string[]} argv */
-	// rome-ignore lint/correctness/noUnusedVariables: <explanation>
+	// biome-ignore lint/correctness/noUnusedVariables: <explanation>
 function run(argv) {
 	ObjC.import("stdlib");
 	ObjC.import("Foundation");

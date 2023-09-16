@@ -66,7 +66,7 @@ function archiveNote(noteObj, safeTitle) {
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string[]} argv */
-// rome-ignore lint/correctness/noUnusedVariables: argv
+// biome-ignore lint/correctness/noUnusedVariables: argv
 function run(argv) {
 	const sidenotes = Application("SideNotes");
 

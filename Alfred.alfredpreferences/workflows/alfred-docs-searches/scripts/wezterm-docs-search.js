@@ -14,7 +14,7 @@ function alfredMatcher(str) {
 
 //──────────────────────────────────────────────────────────────────────────────
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const docsURL = "https://api.github.com/repos/wez/wezterm/git/trees/main?recursive=1";
 	const baseURL = "https://wezfurlong.org/wezterm";

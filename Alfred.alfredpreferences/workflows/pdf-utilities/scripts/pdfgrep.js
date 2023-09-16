@@ -6,7 +6,7 @@ app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const pattern = argv[0] || "";
 
