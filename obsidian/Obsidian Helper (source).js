@@ -13,7 +13,7 @@ const markdownApp = "Neovide Helper";
 /** based on https://forum.obsidian.md/t/make-obsidian-a-default-app-for-markdown-files-on-macos/22260
  * @param {PathObject[]} argv input for automator is an array of macOS path objects.
  */
-// rome-ignore lint/correctness/noUnusedVariables: run
+// biome-ignore lint/correctness/noUnusedVariables: run
 function run(argv) {
 	const app = Application.currentApplication();
 	app.includeStandardAdditions = true;

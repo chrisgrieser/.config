@@ -12,7 +12,7 @@ function alfredMatcher(str) {
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const githubApi = "https://api.github.com/repos/stylelint/stylelint/git/trees/main?recursive=1";
 	const baseUrlRules = "https://stylelint.io/user-guide";

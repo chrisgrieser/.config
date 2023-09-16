@@ -17,7 +17,7 @@ function setFormat(envVar, newValue) {
 }
 
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const citationFormat = argv[0];
 	switch (citationFormat) {

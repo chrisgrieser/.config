@@ -9,7 +9,7 @@ const alfredMatcher = (/** @type {string} */ str) => str.replace(/[-()_./]/g, " 
 
 //──────────────────────────────────────────────────────────────────────────────
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const githubApi =
 		"https://api.github.com/repos/pqrs-org/gh-pages-karabiner-elements.pqrs.org/git/trees/main?recursive=1";

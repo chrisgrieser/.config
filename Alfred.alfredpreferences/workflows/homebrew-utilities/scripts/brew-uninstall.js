@@ -9,7 +9,7 @@ const alfredMatcher = (/** @type {string} */ str) => str.replaceAll("-", " ") + 
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const isBrewReinstall = Boolean(argv[0]);
 	const includeMacAppStoreSetting = $.getenv("list_mac_app_store") === "1";

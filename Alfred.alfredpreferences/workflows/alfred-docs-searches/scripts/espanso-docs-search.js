@@ -8,7 +8,7 @@ const alfredMatcher = (/** @type {string} */ str) => str.replace(/[-()_./]/g, " 
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const workArray = JSON.parse(
 		app.doShellScript('curl -s "https://api.github.com/repos/espanso/website/git/trees/main?recursive=1"'),

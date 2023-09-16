@@ -288,7 +288,7 @@ const entryArray = bibtexParse(rawBibtex)
 	.reverse() // reverse, so recent entries come first
 	.map((entry) => {
 	const emojis = [];
-	// rome-ignore format: too long
+	// biome-ignore format: too long
 	const { title, url, citekey, keywords, icon, journal, volume, issue, booktitle, author, editor, year, abstract, primaryNamesEtAlString, primaryNames } = entry;
 
 	// Shorten Title (for display in Alfred)

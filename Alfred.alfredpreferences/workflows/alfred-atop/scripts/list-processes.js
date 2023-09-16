@@ -56,7 +56,7 @@ const apps = app
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	// cache parent processes names, to reduce parentname searches
 	const parentProcs = {};

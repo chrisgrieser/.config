@@ -15,7 +15,7 @@ function alfredMatcher(str) {
 // test for terminal: curl https://github.com/JXA-Cookbook/JXA-Cookbook/wiki | grep 'href="/JXA-Cookbook/JXA-Cookbook/wiki/'
 
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const wikiURL = "https://github.com/JXA-Cookbook/JXA-Cookbook/wiki";
 	const baseURL = "https://github.com";

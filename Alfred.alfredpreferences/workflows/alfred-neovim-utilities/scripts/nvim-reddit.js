@@ -53,7 +53,7 @@ function writeToFile(filepath, text) {
 const curlCommand = 'curl -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/neovim/new.json"';
 
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const subredditCache = `${$.getenv("alfred_workflow_cache")}/neovim-reddit.json`;
 	let response = {}

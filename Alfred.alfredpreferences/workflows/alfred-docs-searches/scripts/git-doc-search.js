@@ -6,7 +6,7 @@ app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const progitBookURL = "https://git-scm.com/book/en/v2"; // cannot use book's git repo since files do not match URLs
 	const referenceDocsURL = "https://git-scm.com/docs";

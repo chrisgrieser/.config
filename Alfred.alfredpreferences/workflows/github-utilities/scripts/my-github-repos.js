@@ -27,7 +27,7 @@ const apiURL = `https://api.github.com/users/${username}/repos?per_page=100`;
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string[]} argv */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	// local repos
 	const repoFolder = argv[0]; // local repo path passed from .zshenv

@@ -24,7 +24,7 @@ function readFile(path) {
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	// run `hs.docstrings_json_file` in hammerspoon console to get the docs path
 	const hammerspoonDocsJson = "/Applications/Hammerspoon.app/Contents/Resources/docs.json";

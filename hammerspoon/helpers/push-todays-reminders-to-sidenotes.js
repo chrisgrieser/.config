@@ -6,7 +6,7 @@ const toFolder = "Base"
 
 //──────────────────────────────────────────────────────────────────────────────
 
-// rome-ignore lint/correctness/noUnusedVariables: run
+// biome-ignore lint/correctness/noUnusedVariables: run
 function run() {
 	const sidenotes = Application("SideNotes");
 	const reminders = Application("Reminders");

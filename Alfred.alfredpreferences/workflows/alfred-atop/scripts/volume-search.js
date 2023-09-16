@@ -1,7 +1,7 @@
 #!/usr/bin/env osascript -l JavaScript
 
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const app = Application.currentApplication();
 	app.includeStandardAdditions = true;
