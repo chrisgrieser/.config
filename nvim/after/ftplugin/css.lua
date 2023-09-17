@@ -10,6 +10,9 @@ keymap({ "o", "x" }, "ix", "<cmd>lua require('various-textobjs').htmlAttribute('
 keymap({ "o", "x" }, "ax", "<cmd>lua require('various-textobjs').htmlAttribute('outer')<CR>", { desc = "󱡔 outer HTML Attribute textobj", buffer = true })
 -- stylua: ignore end
 
+-- extra trailing chars
+keymap("n", "<leader>{", "mzA {<Esc>`z", { desc = "which_key_ignore", buffer = true })
+
 -- toggle !important
 keymap("n", "<leader>i", function()
 	local lineContent = vim.api.nvim_get_current_line()
