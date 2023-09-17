@@ -38,18 +38,9 @@ elif [[ -n "$SEL" ]]; then
 	SEL=${SEL/\'/\\\'}
 	URL_ENCODED_SEL=$(osascript -l JavaScript -e "encodeURIComponent('$SEL')")
 	# shellcheck disable=2154
-	URL_2="$search_site$URL_ENCODED_SEL"
+	URL_2="https://www.google.com/search?q=$URL_ENCODED_SEL"
 	# shellcheck disable=2154
 	URL_1="https://duckduckgo.com/?q=$URL_ENCODED_SEL+!ducky&kl=$region"
-
-	#────────────────────────────────────────────────────────────────────────────
-	# LOGGING
-
-	# shellcheck disable=2154 # Alfred variable
-	if [[ -f "$log_location" ]]; then # only log if it is set
-		date_time_stamp=$(date +"%Y-%m-%d %H:%M")
-		echo -e "$date_time_stamp – $SEL\n$(cat "$log_location")" >"$log_location"
-	fi
 
 	#────────────────────────────────────────────────────────────────────────────
 	# OPEN FIRST URL

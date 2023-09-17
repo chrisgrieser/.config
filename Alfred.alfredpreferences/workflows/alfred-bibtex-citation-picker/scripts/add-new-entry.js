@@ -228,7 +228,7 @@ function inputToEntryData(input) {
 }
 
 /** @type {AlfredRun} */
-// biome-ignore lint/correctness/noUnusedVariables: Alfred run
+// rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const libraryPath = $.getenv("bibtex_library_path");
 	const input = argv[0].trim();
@@ -241,7 +241,6 @@ function run(argv) {
 	// cleanup
 	if (entry.publisher) entry.publisher = entry.publisher.replace(/gmbh|ltd|publications?|llc/i, "").trim();
 	if (entry.pages) entry.pages = entry.pages.replace(/(\d+)[^\d]+?(\d+)/, "$1--$2"); // double-dash
-	if (entry.type) entry.type = entry.type.toLowerCase.replace(/-/g, ""); // dashes not allowed for pandoc
 
 	// citekey
 	let citekey = generateCitekey(entry.author, entry.year);
@@ -255,8 +254,7 @@ function run(argv) {
 	for (const key in entry) {
 		if (key === "type") continue; // already inserted in first line
 		let value = entry[key];
-		if (typeof value === "string") {
-			// escape bibtex values
+		if (typeof value === "string") { // escape bibtex values
 			value = "{" + value + "}";
 			if (value.match(/[A-Z]/)) value = "{" + value + "}";
 		}
