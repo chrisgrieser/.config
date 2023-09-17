@@ -1,6 +1,4 @@
 local keymap = vim.keymap.set
-local fn = vim.fn
-local expand = vim.fn.expand
 local u = require("config.utils")
 local abbr = vim.cmd.inoreabbrev
 
