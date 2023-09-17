@@ -60,10 +60,10 @@ local function workLayout()
 	visuals.holeCover()
 	dockSwitcher("work")
 	setHigherBrightnessDuringDay()
-	hs.execute(u.exportPath .. "sketchybar --set clock popup.drawing=true")
+	-- hs.execute(u.exportPath .. "sketchybar --set clock popup.drawing=true")
 
 	-- close
-	u.quitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "lo-rain", "Tagesschau", "Steam" }
+	u.quitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "Tagesschau" }
 	require("lua.private").closer()
 	closeAllFinderWins()
 
@@ -105,6 +105,7 @@ local function movieLayout()
 		"Highlights",
 		env.tickerApp,
 		"Obsidian",
+		"lo-rain",
 	}
 	print("🔲 MovieModeLayout: done")
 end
