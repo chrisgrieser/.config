@@ -1,651 +1,652 @@
 {
-    "$schema": "http://json-schema.org/draft-06/schema#",
-    "$ref": "#/definitions/KarabinerModSchema",
-    "definitions": {
-        "KarabinerModSchema": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "homepage": {
-                    "type": "string"
-                },
-                "rules": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Rule"
-                    }
-                },
-                "maintainers": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "anchors": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Anchor"
-                    }
-                }
-            },
-            "required": [],
-            "title": "KarabinerModSchema"
-        },
-        "Anchor": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "conditions": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/AnchorCondition"
-                    }
-                },
-                "to": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/AnchorTo"
-                    }
-                },
-                "description": {
-                    "type": "string"
-                },
-                "manipulators": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/AnchorManipulator"
-                    }
-                }
-            },
-            "required": [],
-            "title": "Anchor"
-        },
-        "AnchorCondition": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "$ref": "#/definitions/ConditionType"
-                },
-                "bundle_identifiers": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "input_sources": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/InputSource"
-                    }
-                },
-                "name": {
-                    "type": "string"
-                },
-                "value": {}
-            },
-            "required": [],
-            "title": "AnchorCondition"
-        },
-        "AnchorManipulator": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "$ref": "#/definitions/ManipulatorType"
-                },
-                "from": {
-                    "$ref": "#/definitions/PurpleFrom"
-                },
-                "to": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ToIfAloneElement"
-                    }
-                },
-                "conditions": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/PurpleCondition"
-                    }
-                },
-                "to_if_alone": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ToIfAloneElement"
-                    }
-                },
-                "to_if_held_down": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ToIfHeldDown"
-                    }
-                },
-                "parameters": {
-                    "$ref": "#/definitions/Parameters"
-                },
-                "to_after_key_up": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ToAfterKeyUp"
-                    }
-                }
-            },
-            "required": [],
-            "title": "AnchorManipulator"
-        },
-        "PurpleCondition": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "$ref": "#/definitions/ConditionType"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "value": {
-                    "type": "boolean"
-                },
-                "input_sources": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/InputSource"
-                    }
-                },
-                "bundle_identifiers": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "file_paths": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "identifiers": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Identifier"
-                    }
-                }
-            },
-            "required": [],
-            "title": "PurpleCondition"
-        },
-        "Identifier": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "vendor_id": {
-                    "type": "integer"
-                }
-            },
-            "required": [],
-            "title": "Identifier"
-        },
-        "InputSource": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "language": {
-                    "$ref": "#/definitions/Language"
-                }
-            },
-            "required": [],
-            "title": "InputSource"
-        },
-        "PurpleFrom": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "key_code": {
-                    "type": "string"
-                },
-                "modifiers": {
-                    "$ref": "#/definitions/Modifiers"
-                },
-                "simultaneous": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Simultaneous"
-                    }
-                },
-                "pointing_button": {
-                    "type": "string"
-                }
-            },
-            "required": [],
-            "title": "PurpleFrom"
-        },
-        "Modifiers": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "mandatory": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Mandatory"
-                    }
-                },
-                "optional": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Mandatory"
-                    }
-                }
-            },
-            "required": [],
-            "title": "Modifiers"
-        },
-        "Simultaneous": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "key_code": {
-                    "type": "string"
-                },
-                "pointing_button": {
-                    "type": "string"
-                }
-            },
-            "required": [],
-            "title": "Simultaneous"
-        },
-        "Parameters": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "basic.simultaneous_threshold_milliseconds": {
-                    "type": "integer"
-                }
-            },
-            "required": [],
-            "title": "Parameters"
-        },
-        "ToIfAloneElement": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "key_code": {
-                    "type": "string"
-                },
-                "shell_command": {
-                    "type": "string"
-                },
-                "set_variable": {
-                    "$ref": "#/definitions/SetVariable"
-                },
-                "set_notification_message": {
-                    "$ref": "#/definitions/SetNotificationMessage"
-                },
-                "modifiers": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Mandatory"
-                    }
-                },
-                "pointing_button": {
-                    "type": "string"
-                },
-                "hold_down_milliseconds": {
-                    "type": "integer"
-                },
-                "select_input_source": {
-                    "$ref": "#/definitions/SelectInputSource"
-                }
-            },
-            "required": [],
-            "title": "ToIfAloneElement"
-        },
-        "SelectInputSource": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "input_source_id": {
-                    "$ref": "#/definitions/InputSourceID"
-                }
-            },
-            "required": [],
-            "title": "SelectInputSource"
-        },
-        "SetNotificationMessage": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "id": {
-                    "$ref": "#/definitions/ID"
-                },
-                "text": {
-                    "$ref": "#/definitions/Text"
-                }
-            },
-            "required": [],
-            "title": "SetNotificationMessage"
-        },
-        "SetVariable": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "name": {
-                    "$ref": "#/definitions/SetVariableName"
-                },
-                "value": {
-                    "type": "boolean"
-                }
-            },
-            "required": [],
-            "title": "SetVariable"
-        },
-        "ToAfterKeyUp": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "select_input_source": {
-                    "$ref": "#/definitions/SelectInputSource"
-                }
-            },
-            "required": [],
-            "title": "ToAfterKeyUp"
-        },
-        "ToIfHeldDown": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "shell_command": {
-                    "type": "string"
-                },
-                "pointing_button": {
-                    "type": "string"
-                },
-                "key_code": {
-                    "type": "string"
-                },
-                "modifiers": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Mandatory"
-                    }
-                }
-            },
-            "required": [],
-            "title": "ToIfHeldDown"
-        },
-        "AnchorTo": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "set_variable": {
-                    "$ref": "#/definitions/SetVariable"
-                },
-                "set_notification_message": {
-                    "$ref": "#/definitions/SetNotificationMessage"
-                }
-            },
-            "required": [],
-            "title": "AnchorTo"
-        },
-        "Rule": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "description": {
-                    "type": "string"
-                },
-                "manipulators": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/RuleManipulator"
-                    }
-                }
-            },
-            "required": [],
-            "title": "Rule"
-        },
-        "RuleManipulator": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "$ref": "#/definitions/ManipulatorType"
-                },
-                "from": {
-                    "$ref": "#/definitions/FluffyFrom"
-                },
-                "to": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/PurpleTo"
-                    }
-                },
-                "parameters": {
-                    "basic.simultaneous_threshold_milliseconds": {
-                        "type": "integer"
-                    }
-                },
-                "conditions": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/FluffyCondition"
-                    }
-                },
-                "to_if_alone": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/PurpleTo"
-                    }
-                },
-                "to_after_key_up": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/PurpleTo"
-                    }
-                },
-                "to_if_held_down": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/PurpleTo"
-                    }
-                }
-            },
-            "required": [],
-            "title": "RuleManipulator"
-        },
-        "FluffyCondition": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "$ref": "#/definitions/ConditionType"
-                },
-                "input_sources": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/InputSource"
-                    }
-                },
-                "bundle_identifiers": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "name": {
-                    "type": "string"
-                },
-                "identifiers": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "additionalProperties": false,
-                        "properties": {
-                            "vendor_id": {
-                                "type": "integer"
-                            }
-                        }
-                    }
-                },
-                "value": {},
-                "file_paths": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            },
-            "required": [],
-            "title": "FluffyCondition"
-        },
-        "FluffyFrom": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "pointing_button": {
-                    "type": "string"
-                },
-                "key_code": {
-                    "type": "string"
-                },
-                "simultaneous": {
-                    "key_code": {
-                        "type": "string"
-                    }
-                },
-                "modifiers": {
-                    "$ref": "#/definitions/Modifiers"
-                }
-            },
-            "required": [],
-            "title": "FluffyFrom"
-        },
-        "PurpleTo": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "select_input_source": {
-                    "$ref": "#/definitions/SelectInputSource"
-                },
-                "set_variable": {
-                    "name": {
-                        "type": "string"
-                    },
-                    "value": {}
-                },
-                "set_notification_message": {
-                    "$ref": "#/definitions/SetNotificationMessage"
-                },
-                "key_code": {
-                    "type": "string"
-                },
-                "modifiers": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Mandatory"
-                    }
-                },
-                "shell_command": {
-                    "type": "string"
-                },
-                "software_function": {
-                    "$ref": "#/definitions/SoftwareFunction"
-                },
-                "pointing_button": {
-                    "type": "string"
-                },
-                "hold_down_milliseconds": {
-                    "type": "integer"
-                }
-            },
-            "required": [],
-            "title": "PurpleTo"
-        },
-        "SoftwareFunction": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "set_mouse_cursor_position": {
-                    "$ref": "#/definitions/SetMouseCursorPosition"
-                }
-            },
-            "required": [],
-            "title": "SoftwareFunction"
-        },
-        "SetMouseCursorPosition": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "x": {
-                    "type": "string"
-                },
-                "y": {
-                    "type": "string"
-                },
-                "screen": {
-                    "type": "integer"
-                }
-            },
-            "required": [],
-            "title": "SetMouseCursorPosition"
-        },
-        "ConditionType": {
-            "type": "string",
-            "enum": [
-                "variable_unless",
-                "input_source_unless",
-                "variable_if",
-                "input_source_if",
-                "frontmost_application_if",
-                "frontmost_application_unless",
-                "device_if"
-            ],
-            "title": "ConditionType"
-        },
-        "Language": {
-            "type": "string",
-            "enum": [
-                "^de$"
-            ],
-            "title": "Language"
-        },
-        "Mandatory": {
-            "type": "string",
-            "enum": [
-                "shift",
-                "command",
-                "control",
-                "option",
-                "fn"
-            ],
-            "title": "Mandatory"
-        },
-        "InputSourceID": {
-            "type": "string",
-            "enum": [
-                "^com\\.apple\\.keylayout\\.US$",
-                "^com\\.apple\\.keylayout\\.ABC-QWERTZ$"
-            ],
-            "title": "InputSourceID"
-        },
-        "ID": {
-            "type": "string"
-        },
-        "Text": {
-            "type": "string"
-        },
-        "SetVariableName": {
-            "type": "string"
-        },
-        "ManipulatorType": {
-            "type": "string",
-            "enum": [
-                "basic"
-            ],
-            "title": "ManipulatorType"
-        }
-    }
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"$ref": "#/definitions/KarabinerModSchema",
+	"definitions": {
+		"KarabinerModSchema": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"homepage": {
+					"type": "string"
+				},
+				"rules": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Rule"
+					}
+				},
+				"maintainers": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"anchors": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Anchor"
+					}
+				}
+			},
+			"required": [],
+			"title": "KarabinerModSchema"
+		},
+		"Anchor": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"conditions": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/AnchorCondition"
+					}
+				},
+				"to": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/AnchorTo"
+					}
+				},
+				"description": {
+					"type": "string"
+				},
+				"manipulators": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/AnchorManipulator"
+					}
+				}
+			},
+			"required": [],
+			"title": "Anchor"
+		},
+		"AnchorCondition": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"type": {
+					"$ref": "#/definitions/ConditionType"
+				},
+				"bundle_identifiers": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"input_sources": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/InputSource"
+					}
+				},
+				"name": {
+					"type": "string"
+				},
+				"value": {}
+			},
+			"required": [],
+			"title": "AnchorCondition"
+		},
+		"AnchorManipulator": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"type": {
+					"$ref": "#/definitions/ManipulatorType"
+				},
+				"from": {
+					"$ref": "#/definitions/PurpleFrom"
+				},
+				"to": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ToIfAloneElement"
+					}
+				},
+				"conditions": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/PurpleCondition"
+					}
+				},
+				"to_if_alone": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ToIfAloneElement"
+					}
+				},
+				"to_if_held_down": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ToIfHeldDown"
+					}
+				},
+				"parameters": {
+					"$ref": "#/definitions/Parameters"
+				},
+				"to_after_key_up": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ToAfterKeyUp"
+					}
+				}
+			},
+			"required": [],
+			"title": "AnchorManipulator"
+		},
+		"PurpleCondition": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"type": {
+					"$ref": "#/definitions/ConditionType"
+				},
+				"name": {
+					"type": "string"
+				},
+				"value": {
+					"type": "boolean"
+				},
+				"input_sources": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/InputSource"
+					}
+				},
+				"bundle_identifiers": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"file_paths": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"identifiers": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Identifier"
+					}
+				}
+			},
+			"required": [],
+			"title": "PurpleCondition"
+		},
+		"Identifier": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"vendor_id": {
+					"type": "integer"
+				}
+			},
+			"required": [],
+			"title": "Identifier"
+		},
+		"InputSource": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"language": {
+					"$ref": "#/definitions/Language"
+				}
+			},
+			"required": [],
+			"title": "InputSource"
+		},
+		"PurpleFrom": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"key_code": {
+					"type": "string"
+				},
+				"modifiers": {
+					"$ref": "#/definitions/Modifiers"
+				},
+				"simultaneous": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Simultaneous"
+					}
+				},
+				"pointing_button": {
+					"type": "string"
+				}
+			},
+			"required": [],
+			"title": "PurpleFrom"
+		},
+		"Modifiers": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"mandatory": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Mandatory"
+					}
+				},
+				"optional": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Mandatory"
+					}
+				}
+			},
+			"required": [],
+			"title": "Modifiers"
+		},
+		"Simultaneous": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"key_code": {
+					"type": "string"
+				},
+				"pointing_button": {
+					"type": "string"
+				}
+			},
+			"required": [],
+			"title": "Simultaneous"
+		},
+		"Parameters": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"basic.simultaneous_threshold_milliseconds": {
+					"type": "integer"
+				}
+			},
+			"required": [],
+			"title": "Parameters"
+		},
+		"ToIfAloneElement": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"key_code": {
+					"type": "string"
+				},
+				"shell_command": {
+					"type": "string"
+				},
+				"set_variable": {
+					"$ref": "#/definitions/SetVariable"
+				},
+				"set_notification_message": {
+					"$ref": "#/definitions/SetNotificationMessage"
+				},
+				"modifiers": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Mandatory"
+					}
+				},
+				"pointing_button": {
+					"type": "string"
+				},
+				"hold_down_milliseconds": {
+					"type": "integer"
+				},
+				"select_input_source": {
+					"$ref": "#/definitions/SelectInputSource"
+				}
+			},
+			"required": [],
+			"title": "ToIfAloneElement"
+		},
+		"SelectInputSource": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"input_source_id": {
+					"$ref": "#/definitions/InputSourceID"
+				}
+			},
+			"required": [],
+			"title": "SelectInputSource"
+		},
+		"SetNotificationMessage": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"id": {
+					"$ref": "#/definitions/ID"
+				},
+				"text": {
+					"$ref": "#/definitions/Text"
+				}
+			},
+			"required": [],
+			"title": "SetNotificationMessage"
+		},
+		"SetVariable": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"name": {
+					"$ref": "#/definitions/SetVariableName"
+				},
+				"value": {
+					"type": "boolean"
+				}
+			},
+			"required": [],
+			"title": "SetVariable"
+		},
+		"ToAfterKeyUp": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"select_input_source": {
+					"$ref": "#/definitions/SelectInputSource"
+				}
+			},
+			"required": [],
+			"title": "ToAfterKeyUp"
+		},
+		"ToIfHeldDown": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"shell_command": {
+					"type": "string"
+				},
+				"pointing_button": {
+					"type": "string"
+				},
+				"key_code": {
+					"type": "string"
+				},
+				"modifiers": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Mandatory"
+					}
+				}
+			},
+			"required": [],
+			"title": "ToIfHeldDown"
+		},
+		"AnchorTo": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"set_variable": {
+					"$ref": "#/definitions/SetVariable"
+				},
+				"set_notification_message": {
+					"$ref": "#/definitions/SetNotificationMessage"
+				}
+			},
+			"required": [],
+			"title": "AnchorTo"
+		},
+		"Rule": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"description": {
+					"type": "string"
+				},
+				"manipulators": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/RuleManipulator"
+					}
+				}
+			},
+			"required": [],
+			"title": "Rule"
+		},
+		"RuleManipulator": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"type": {
+					"$ref": "#/definitions/ManipulatorType"
+				},
+				"from": {
+					"$ref": "#/definitions/FluffyFrom"
+				},
+				"to": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/PurpleTo"
+					}
+				},
+				"parameters": {
+					"basic.simultaneous_threshold_milliseconds": {
+						"type": "integer"
+					}
+				},
+				"conditions": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/FluffyCondition"
+					}
+				},
+				"to_if_alone": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/PurpleTo"
+					}
+				},
+				"to_after_key_up": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/PurpleTo"
+					}
+				},
+				"to_if_held_down": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/PurpleTo"
+					}
+				}
+			},
+			"required": [],
+			"title": "RuleManipulator"
+		},
+		"FluffyCondition": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"type": {
+					"$ref": "#/definitions/ConditionType"
+				},
+				"input_sources": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/InputSource"
+					}
+				},
+				"bundle_identifiers": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"name": {
+					"type": "string"
+				},
+				"identifiers": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"additionalProperties": false,
+						"properties": {
+							"vendor_id": {
+								"type": "integer"
+							}
+						}
+					}
+				},
+				"value": {},
+				"file_paths": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				}
+			},
+			"required": [],
+			"title": "FluffyCondition"
+		},
+		"FluffyFrom": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"pointing_button": {
+					"type": "string"
+				},
+				"key_code": {
+					"type": "string"
+				},
+				"simultaneous": {
+					"key_code": {
+						"type": "string"
+					}
+				},
+				"modifiers": {
+					"$ref": "#/definitions/Modifiers"
+				}
+			},
+			"required": [],
+			"title": "FluffyFrom"
+		},
+		"PurpleTo": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"select_input_source": {
+					"$ref": "#/definitions/SelectInputSource"
+				},
+				"set_variable": {
+					"name": {
+						"type": "string"
+					},
+					"value": {}
+				},
+				"set_notification_message": {
+					"$ref": "#/definitions/SetNotificationMessage"
+				},
+				"key_code": {
+					"type": "string"
+				},
+				"modifiers": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Mandatory"
+					}
+				},
+				"shell_command": {
+					"type": "string"
+				},
+				"software_function": {
+					"$ref": "#/definitions/SoftwareFunction"
+				},
+				"pointing_button": {
+					"type": "string"
+				},
+				"hold_down_milliseconds": {
+					"type": "integer"
+				}
+			},
+			"required": [],
+			"title": "PurpleTo"
+		},
+		"SoftwareFunction": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"set_mouse_cursor_position": {
+					"$ref": "#/definitions/SetMouseCursorPosition"
+				}
+			},
+			"required": [],
+			"title": "SoftwareFunction"
+		},
+		"SetMouseCursorPosition": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"x": {
+					"type": "string"
+				},
+				"y": {
+					"type": "string"
+				},
+				"screen": {
+					"type": "integer"
+				}
+			},
+			"required": [],
+			"title": "SetMouseCursorPosition"
+		},
+		"ConditionType": {
+			"type": "string",
+			"enum": [
+				"variable_unless",
+				"input_source_unless",
+				"variable_if",
+				"input_source_if",
+				"frontmost_application_if",
+				"frontmost_application_unless",
+				"device_if"
+			],
+			"title": "ConditionType"
+		},
+		"Language": {
+			"type": "string",
+			"enum": ["^de$"],
+			"title": "Language"
+		},
+		"Mandatory": {
+			"type": "string",
+			"enum": [
+				"shift",
+				"right_shift",
+				"left_shift",
+				"command",
+				"left_command",
+				"right_command",
+				"option",
+				"left_option",
+				"right_option",
+				"control",
+				"left_control",
+				"right_control",
+				"fn"
+			],
+			"title": "Mandatory"
+		},
+		"InputSourceID": {
+			"type": "string",
+			"enum": ["^com\\.apple\\.keylayout\\.US$", "^com\\.apple\\.keylayout\\.ABC-QWERTZ$"],
+			"title": "InputSourceID"
+		},
+		"ID": {
+			"type": "string"
+		},
+		"Text": {
+			"type": "string"
+		},
+		"SetVariableName": {
+			"type": "string"
+		},
+		"ManipulatorType": {
+			"type": "string",
+			"enum": ["basic"],
+			"title": "ManipulatorType"
+		}
+	}
 }

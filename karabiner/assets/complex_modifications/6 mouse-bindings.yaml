@@ -56,6 +56,7 @@ rules:
               - BetterTouchTool
               - Hammerspoon
               - "[Nn]eovide"
+              - "[Ff]actorio"
       # prevent accidental quitting
       - type: basic
         from: { pointing_button: button3 }
@@ -144,6 +145,7 @@ rules:
               - ^net\.highlightsapp\.universal$
               - ^org\.hammerspoon\.Hammerspoon$
               - ^com\.tapbots\.Ivory$
+              - ^com\.factorio$
         to_if_held_down:
           - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.hyper-seek"'
       # Ivory: Close Media Window and tab away
