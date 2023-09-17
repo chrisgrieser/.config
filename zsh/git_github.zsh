@@ -229,9 +229,9 @@ function ac() {
 		commit_msg=$1
 		# ensure no overlength of commit msg
 		msg_length=${#commit_msg}
-		if [[ $msg_length -gt 50 ]]; then
+		if [[ $msg_length -gt 72 ]]; then
 			echo "Commit Message too long ($msg_length chars)."
-			commit_msg=${commit_msg::50}
+			commit_msg=${commit_msg::72}
 			print -z "acp \"$commit_msg\"" # put back into buffer
 			return 1
 		fi

@@ -15,9 +15,17 @@ abbr("<buffer> -- #")
 u.applyTemplateIfEmptyFile("zsh")
 
 -- pipe textobj
---stylua: ignore
-keymap({ "o", "x" }, "i|", "<cmd>lua require('various-textobjs').shellPipe(true)<CR>", { desc = "󱡔 inner shellPipe textobj", buffer = true })
---stylua: ignore
-keymap({ "o", "x" }, "a|", "<cmd>lua require('various-textobjs').shellPipe(false)<CR>", { desc = "󱡔 outer shellPipe textobj", buffer = true })
+keymap(
+	{ "o", "x" },
+	"i|",
+	"<cmd>lua require('various-textobjs').shellPipe(true)<CR>",
+	{ desc = "󱡔 inner shellPipe textobj", buffer = true }
+)
+keymap(
+	{ "o", "x" },
+	"a|",
+	"<cmd>lua require('various-textobjs').shellPipe(false)<CR>",
+	{ desc = "󱡔 outer shellPipe textobj", buffer = true }
+)
 
 --------------------------------------------------------------------------------
