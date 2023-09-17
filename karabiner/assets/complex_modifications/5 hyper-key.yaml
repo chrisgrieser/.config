@@ -9,7 +9,7 @@ rules:
         to_if_alone:
           - key_code: escape
         to:
-          - { key_code: right_shift, modifiers: [control, option, command] }
+          - { key_code: right_shift, modifiers: [control, right_option, command] }
       # Map Esc to F18 (clipboard / screenshot history)
       - type: basic
         from: { key_code: escape }

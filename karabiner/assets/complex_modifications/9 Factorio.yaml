@@ -1,0 +1,25 @@
+title: Factorio
+rules:
+  - description: Factorio
+    manipulators:
+      # top mouse: control-leftclick
+      - type: basic
+        from: { pointing_button: button5 }
+        to:
+          - { pointing_button: button1, modifiers: [control] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^com\.factorio$] }
+      # bottom mouse: shift-leftclick
+      - type: basic
+        from: { pointing_button: button4 }
+        to:
+          - { pointing_button: button1, modifiers: [shift] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^com\.factorio$] }
+      # toggle minimap (minimap-autohide-mode)
+      - type: basic
+        from: { key_code: tab }
+        to:
+          - { key_code: m, modifiers: [control] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^com\.factorio$] }
