@@ -61,9 +61,11 @@ function run() {
 			.filter((/** @type {MasonPackage} */ tool) => installedTools.includes(tool.name))
 			.map((/** @type {MasonPackage} */ tool) => {
 				const categoryList = tool.categories.join(", ");
+				const languages = tool.languages.length > 0 ? tool.languages.join(", ") : "";
+
 				return {
 					title: tool.name,
-					subtitle: categoryList,
+					subtitle: categoryList + "  ·  " + languages,
 					match: alfredMatcher(tool.name) + categoryList,
 					icon: { path: masonIcon },
 					arg: tool.homepage,

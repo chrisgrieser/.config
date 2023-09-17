@@ -1104,7 +1104,8 @@ Run `:nvim` once to create the local cache for the `:h` search.
 	- &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Copy repo name for plugin managers.
 	- &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the GitHub URL to the clipboard.
 	- &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Open the `:help` page of the plugin at GitHub.
-	- &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Search GitHub issues of the plugin.[^1]
+	- &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Search GitHub issues of the plugin.
+- `mason`: Search for tools available via [mason.nvim](https://github.com/williamboman/mason.nvim).
 - `ip`: Search for plugins (and mason tools) installed locally on your device. Mnemonic: `[i]installed [p]lugins`. The modifiers (&lt;kbd&gt;⌘⌥⌃⇧&lt;/kbd&gt;) from the plugin-search also apply for this command. In addition:
 	- &lt;kbd&gt;fn⏎&lt;/kbd&gt;: Open the local directory of the plugin in Finder.
 - `nvr`: Shows the latest posts from the neovim subreddit. 
@@ -1297,6 +1298,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>C906BF1E-7CF4-4407-9B97-53532876DCC0</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
 			<key>note</key>
 			<string>installed plugins and mason tools search</string>
 			<key>xpos</key>
