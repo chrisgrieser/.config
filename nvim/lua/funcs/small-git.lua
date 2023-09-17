@@ -7,6 +7,7 @@ local commitMsgMaxLength = 72
 
 --------------------------------------------------------------------------------
 -- HELPERS
+
 ---send notification
 ---@param msg string
 ---@param level? "info"|"trace"|"debug"|"warn"|"error"
@@ -33,8 +34,6 @@ local function playSoundMacOS(soundFilepath)
 	fn.system(("afplay %q &"):format(soundFilepath))
 end
 
--- some comment
-
 --NOTE this requires an outer-scope output variable which needs to be emptied
 --before the run
 local gitShellOpts = {
@@ -50,7 +49,7 @@ local gitShellOpts = {
 
 		notify(output)
 		playSoundMacOS(
-			"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf"
+			"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf" -- codespell-ignore
 		)
 	end,
 	on_stderr = function(_, data)
@@ -61,7 +60,7 @@ local gitShellOpts = {
 		-- whether it is actually an error or not
 		local logLevel = "info"
 		local sound =
-			"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf"
+			"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/siri/jbl_confirm.caf" -- codespell-ignore
 		if output:lower():find("error") then
 			logLevel = "error"
 			sound = "/System/Library/Sounds/Basso.aiff"
@@ -121,7 +120,6 @@ local function setGitCommitAppearance()
 			vim.api.nvim_set_hl(winNs, "Title", { link = "Normal" })
 
 			vim.opt_local.colorcolumn = { 50, commitMsgMaxLength } -- https://stackoverflow.com/questions/2290016/git-commit-messages-50-72-formatting
-			vim.api.nvim_set_hl(winNs, "ColorColumn", { link = "DiagnosticVirtualTextInfo" })
 			vim.api.nvim_set_hl(winNs, "commitmsg", { bg = "#E06C75" })
 		end,
 	})
