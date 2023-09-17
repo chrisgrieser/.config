@@ -142,7 +142,7 @@ fi</string>
 				<key>scriptfile</key>
 				<string></string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>11</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -338,7 +338,7 @@ On supported web browsers, the email inbox will open in a background tab and the
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2023.3</string>
+	<string>2023.4</string>
 	<key>webaddress</key>
 	<string>https://github.com/vitorgalvao/temporary-email-workflow/</string>
 </dict>
