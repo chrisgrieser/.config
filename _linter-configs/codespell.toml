@@ -26,4 +26,5 @@ uri-ignore-words-list = "*" # ignore all misspellings in URLs/mail-adresses
 
 ignore-words-list = """\
 noice,acknowledgements,aesthetics,\
+master,\
 """

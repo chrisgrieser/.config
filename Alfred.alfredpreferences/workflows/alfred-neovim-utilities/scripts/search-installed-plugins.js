@@ -46,6 +46,9 @@ function run() {
 					subtitle: owner,
 					match: alfredMatcher(repo) + "plugin",
 					arg: "https://github.com/" + repo,
+					mods: {
+						cmd: { arg: repo },
+					},
 					uid: repo,
 				};
 			});

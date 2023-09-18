@@ -37,7 +37,7 @@ local formatters = {
 	css = { "stylelint", "prettierd" },
 	sh = { "shellcheck", "shfmt" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
-	["_"] = { "trim_whitespace", "trim_newlines" },
+	["_"] = { "trim_whitespace", "trim_newlines", "squeeze_blanks" },
 	["*"] = { "codespell" }, -- ignores .bib and .css via codespell config
 }
 
@@ -46,7 +46,8 @@ local debuggers = { "debugpy" }
 local dontInstall = {
 	"stylelint", -- installed externally due to its plugins: https://github.com/williamboman/mason.nvim/issues/695
 	"trim_whitespace", -- not a real formatter
-	"trim_newlines", -- not a real formatter
+	"trim_newlines",
+	"squeeze_blanks",
 }
 
 --------------------------------------------------------------------------------
@@ -149,12 +150,18 @@ end
 
 --------------------------------------------------------------------------------
 
-local function formatterConfig() 
+local function formatterConfig()
 	require("conform").setup {
 		log_level = vim.log.levels.DEBUG,
 		formatters_by_ft = formatters,
 
 		formatters = {
+			-- PENDING https://github.com/stevearc/conform.nvim/pull/62
+			["squeeze_blanks"] = {
+				command = "cat",
+				args = { "-s" },
+				stdin = true,
+			},
 			["bibtex-tidy"] = {
 				command = "bibtex-tidy",
 				stdin = true,
@@ -178,7 +185,7 @@ local function formatterConfig()
 				-- main bibliography too big
 				condition = function(ctx) return vim.fs.basename(ctx.filename) ~= "main-bibliography.bib" end,
 			},
-		}
+		},
 	}
 
 	-- DOCS https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md#add-extra-arguments-to-a-formatter-command
