@@ -23,10 +23,10 @@ end, { desc = "⌨️ Edit keybindings.lua" })
 keymap({ "n", "x" }, "j", "gj")
 keymap({ "n", "x" }, "k", "gk")
 
--- - HJKL behaves like hjkl, but bigger distance (best used with scroll offset)
-keymap({ "o", "x" }, "H", "^")
-keymap("n", "H", "0^") -- `0` ensures fully scrolling to the left on long indented lines
-keymap({ "n", "x" }, "L", "$") -- not using "o", since used for link textobj
+-- - HJKL behaves like hjkl, but bigger distance and also on visual lines
+keymap({ "o", "x" }, "H", "g^")
+keymap("n", "H", "0g^") -- `0` ensures fully scrolling to the left on long indented lines
+keymap({ "n", "x" }, "L", "g$") -- not using "o", since used for link textobj
 keymap({ "n", "x" }, "J", "6gj") -- - work on visual lines instead of logical ones for when wrapping is one
 keymap({ "n", "x" }, "K", "6gk")
 
