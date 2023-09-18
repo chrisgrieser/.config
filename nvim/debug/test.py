@@ -11,4 +11,9 @@ for numb in numbers:
 
 print(sum)
 
-a = "foobar fff"
+a = "foobar sum fff"
+b = """
+foobar 
+hello world
+sum
+"""

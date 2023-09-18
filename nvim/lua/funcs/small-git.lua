@@ -114,10 +114,14 @@ local function setGitCommitAppearance()
 			vim.api.nvim_win_set_hl_ns(0, winNs)
 			fn.matchadd("commitmsg", ([[.\{%s}\zs.*\ze]]):format(commitMsgMaxLength - 1))
 
-			vim.bo.filetype = "gitcommit" -- for treesitter highlighting
-			vim.api.nvim_buf_set_name(0, "COMMIT_EDITMSG") -- for statusline
-
+			-- for treesitter highlighting
+			vim.bo.filetype = "gitcommit"
 			vim.api.nvim_set_hl(winNs, "Title", { link = "Normal" })
+
+			-- fix confirming input field (not working in insert mode due to filetype change)
+			vim.keymap.set("i", "<CR>", "<Esc><CR>", { buffer = true })
+
+			vim.api.nvim_buf_set_name(0, "COMMIT_EDITMSG") -- for statusline
 
 			vim.opt_local.colorcolumn = { 50, commitMsgMaxLength } -- https://stackoverflow.com/questions/2290016/git-commit-messages-50-72-formatting
 			vim.api.nvim_set_hl(winNs, "commitmsg", { bg = "#E06C75" })
