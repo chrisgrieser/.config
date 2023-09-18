@@ -4,6 +4,10 @@
 		"prefix": ["tFile", "active file", "current"],
 		"body": "const ${1:activeFile} = this.app.workspace.getActiveFile();"
 	},
+	"vim mode": {
+		"prefix": "vim mode",
+		"body": "app.workspace.activeEditor.editor.cm.cm.state.vim.mode"
+	},
 	"get Tfile of active leaf": {
 		"description": "Obsidian: Get the TFile of a leaf, checking if the active leaf is a markdown file.",
 		"prefix": "tFile of leaf",
