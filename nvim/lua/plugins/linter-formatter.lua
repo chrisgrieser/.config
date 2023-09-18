@@ -43,12 +43,8 @@ local formatters = {
 
 local debuggers = { "debugpy" }
 
-local dontInstall = {
-	"stylelint", -- installed externally due to its plugins: https://github.com/williamboman/mason.nvim/issues/695
-	"trim_whitespace", -- not a real formatter
-	"trim_newlines",
-	"squeeze_blanks",
-}
+-- installed externally due to its plugins: https://github.com/williamboman/mason.nvim/issues/695
+local dontInstall = { "stylelint" }
 
 --------------------------------------------------------------------------------
 
@@ -72,7 +68,13 @@ local function toolsToAutoinstall(myLinters, myFormatters, myDebuggers, ignoreTo
 	tools = vim.fn.uniq(tools)
 
 	-- remove exceptions not to install
-	tools = vim.tbl_filter(function(tool) return not vim.tbl_contains(ignoreTools, tool) end, tools)
+	tools = vim.tbl_filter(function(tool)
+		-- ignore non-Mason packages, e.g. "trim_whitespace"
+		local allMasonPackages = require("mason-registry").get_all_package_names()
+		local isMasonPackage = vim.tbl_contains(allMasonPackages, tool)
+		local ignoreTool = vim.tbl_contains(ignoreTools, tool)
+		return (not ignoreTool) and isMasonPackage
+	end, tools)
 	return tools
 end
 

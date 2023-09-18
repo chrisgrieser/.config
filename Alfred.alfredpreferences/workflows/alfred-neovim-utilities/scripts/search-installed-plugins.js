@@ -4,6 +4,8 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
+//──────────────────────────────────────────────────────────────────────────────
+
 /** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
@@ -76,7 +78,6 @@ function run() {
 					mods: {
 						cmd: notForMason,
 						shift: notForMason,
-						ctrl: notForMason,
 						fn: notForMason,
 					},
 				};
