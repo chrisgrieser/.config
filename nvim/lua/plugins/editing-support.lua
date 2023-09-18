@@ -118,6 +118,7 @@ return {
 	},
 	{ -- auto-convert string and f/template string
 		"chrisgrieser/nvim-puppeteer",
+		dependencies = "nvim-treesitter/nvim-treesitter",
 		ft = { "python", "javascript", "typescript" },
 		dev = true,
 	},
