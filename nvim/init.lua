@@ -1,5 +1,5 @@
 ---try to require the module, and do not error out when one of them cannot be
----loaded, but do notify if there was an error. 
+---loaded, but do notify if there was an error.
 ---@param module string module to load
 local function safeRequire(module)
 	local success, _ = pcall(require, module)
@@ -36,9 +36,6 @@ safeRequire("config.textobject-keymaps")
 safeRequire("config.diagnostics")
 safeRequire("config.user-commands")
 safeRequire("config.abbreviations")
-
-safeRequire("funcs.puppeteer")
-
 
 --------------------------------------------------------------------------------
 
