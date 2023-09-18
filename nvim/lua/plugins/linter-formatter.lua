@@ -205,9 +205,10 @@ return {
 		config = function()
 			local myTools = toolsToAutoinstall(linters, formatters, debuggers, dontInstall)
 
-			-- triggered myself, since `run_on_start`, does not work w/ lazy-loading
 			require("mason-tool-installer").setup {
 				ensure_installed = myTools,
+				auto_update = true,
+				-- triggered myself, since `run_on_start`, does not work w/ lazy-loading
 				run_on_start = false,
 			}
 			vim.cmd.MasonToolsInstall()
@@ -230,10 +231,8 @@ return {
 			{
 				"<D-s>",
 				function()
-					require("conform").format {
-						lsp_fallback = "always",
-						callback = vim.cmd.update,
-					}
+					require("conform").format { lsp_fallback = "always" }
+					vim.cmd.update()
 				end,
 				mode = { "n", "x" },
 				desc = "󰒕 Format & Save",

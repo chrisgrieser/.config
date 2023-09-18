@@ -23,8 +23,7 @@ ignore = [
 	"W", # pycodestyle warnings are already autofixed by black
 	"RET504", # unnecessary assign for return (makes stuff less verbose)
 	"ERA001", # commented out code
-	"TD002", # author for TODO
-	"TD003", # issue link for TODO
+	"TD", # allow TODO
 	"FIX002", # complain about TODO in general
 	"FIX004", # complain about HACK
 	"S607", # shell command without full path
@@ -41,6 +40,8 @@ convention = "google" # Accepts: "google", "numpy", or "pep257"
 
 [tool.pylint."MESSAGES CONTROL"]
 disable = [
+	"fixme", # allow TODO
 	"import-error", # already checked by other tools
 	"too-many-locals",
+	"invalid-name", # demands uppercasing for constants
 ]
