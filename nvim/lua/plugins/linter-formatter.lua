@@ -44,12 +44,11 @@ local formatters = {
 local debuggers = { "debugpy" }
 
 local dontInstall = {
-	"stylelint", -- stylelint included in mason, but not its plugins: https://github.com/williamboman/mason.nvim/issues/695
+	"stylelint", -- installed externally due to its plugins: https://github.com/williamboman/mason.nvim/issues/695
 	"trim_whitespace", -- not a real formatter
 	"trim_newlines", -- not a real formatter
 }
 
---------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
 ---given the linter- and formatter-list of nvim-lint and conform.nvim, extract a
@@ -76,7 +75,7 @@ local function toolsToAutoinstall(myLinters, myFormatters, myDebuggers, ignoreTo
 	return tools
 end
 
----uninstalls non-LSP tools
+---uninstalls unneeded non-LSP tools
 ---@param toolsToKeep string[]
 local function autoUninstall(toolsToKeep)
 	local installedTools = require("mason-registry").get_installed_packages()
@@ -214,10 +213,8 @@ return {
 				ensure_installed = myTools,
 				run_on_start = false,
 			}
-			vim.defer_fn(function()
-				vim.cmd.MasonToolsInstall()
-				autoUninstall(myTools)
-			end, 1000)
+			vim.cmd.MasonToolsInstall()
+			autoUninstall(myTools)
 		end,
 	},
 	{
