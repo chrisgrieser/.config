@@ -4,7 +4,6 @@ local u = require("config.utils")
 return {
 	{
 		"linux-cultist/venv-selector.nvim",
-		enabled = false,
 		dependencies = {
 			"neovim/nvim-lspconfig",
 			"nvim-telescope/telescope.nvim",
