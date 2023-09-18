@@ -21,9 +21,16 @@ return {
 				repl_definition = {
 					sh = { command = { "zsh" } },
 					typescript = { command = { "node" } },
+					-- osascript is mac-specific
 					javascript = { command = { "osascript", "-i", "-l", "JavaScript" } },
 					applescript = { command = { "osascript", "-i", "-l", "AppleScript" } },
-					python = { command = { "ipython" } }, -- automatically uses the ipython from the virtual env
+					python = {
+						command = function ()
+							local ipythonAvailable = vim.fn.executable("ipython") == 1
+							local binary = ipythonAvailable and "ipython" or "python3"
+							return { binary }
+						end
+					},
 				},
 			},
 		},
