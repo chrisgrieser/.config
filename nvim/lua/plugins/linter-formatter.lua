@@ -230,8 +230,10 @@ return {
 			{
 				"<D-s>",
 				function()
-					require("conform").format { lsp_fallback = "always" }
-					vim.cmd.update()
+					require("conform").format {
+						lsp_fallback = "always",
+						callback = vim.cmd.update,
+					}
 				end,
 				mode = { "n", "x" },
 				desc = "󰒕 Format & Save",
