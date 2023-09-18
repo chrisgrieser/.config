@@ -27,8 +27,6 @@ nnoremap x "_dl
 " navigate visual lines rather than logical ones
 nnoremap j gj
 nnoremap k gk
-vnoremap j gj
-vnoremap k gk
 nnoremap I g0i
 nnoremap A g$a
 
@@ -379,13 +377,6 @@ nnoremap zm :foldall
 nnoremap zr :unfoldall
 nnoremap ^ :foldmore
 nnoremap \ :foldless
-
-""""""""""""""""""""""
-" Move selection to new file
-""""""""""""""""""""""
-" emulate the command from nvim-genghis
-exmap selectionToNewFile obcommand templater-obsidian:Meta/Templater/>_Create_Related_Note.md
-vnoremap X :selectionToNewFile
 
 """"""""""""""""""""""
 " Option Toggling
