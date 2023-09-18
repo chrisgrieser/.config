@@ -119,7 +119,7 @@ local function setGitCommitAppearance()
 			vim.api.nvim_set_hl(winNs, "Title", { link = "Normal" })
 
 			-- fix confirming input field (not working in insert mode due to filetype change)
-			vim.keymap.set("i", "<CR>", "<Esc><CR>", { buffer = true })
+			vim.keymap.set("i", "<CR>", "<Esc><CR>", { buffer = true, remap = true })
 
 			vim.api.nvim_buf_set_name(0, "COMMIT_EDITMSG") -- for statusline
 
