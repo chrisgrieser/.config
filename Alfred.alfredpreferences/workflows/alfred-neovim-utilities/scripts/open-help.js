@@ -26,16 +26,16 @@ function run(argv) {
 		branch = "master";
 	}
 
+	// find the doc file
 	const docFiles = repoFiles.tree.filter((/** @type {{ path: string; }} */ file) => {
-		const isDoc = file.path.startsWith("doc/");
+		const isDoc = file.path.startsWith("doc/") && file.path.endsWith(".txt");
 		const isChangelog = file.path.includes("change");
 		const otherCruff = file.path.includes("secret"); // e.g. telescope
 		return isDoc && !isChangelog && !otherCruff;
 	});
+	if (docFiles.length === 0) return "No :help found for this repo.";
 
-	if (docFiles.length === 0) return "No :help found."; (
-
-	const docURL = `https://github.com/${repo}/blob/${branch}/${docFiles[0].path}`;
-
+	const firstDocfile = docFiles[0].path
+	const docURL = `https://github.com/${repo}/blob/${branch}/${firstDocfile}`;
 	app.openLocation(docURL);
 }
