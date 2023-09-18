@@ -25,6 +25,6 @@ ignore-regex = "base64,\\S{500,}|.*codespell-ignore$"
 uri-ignore-words-list = "*" # ignore all misspellings in URLs/mail-adresses
 
 ignore-words-list = """\
-noice,acknowledgements,aesthetics,\
+noice,acknowledgements,aesthetics,bu,\
 master,\
 """

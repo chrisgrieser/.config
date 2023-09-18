@@ -58,11 +58,13 @@ local function themeModifications()
 	local vimModes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
 
 	if theme == "tokyonight" then
-		for _, v in pairs(vimModes) do
-			updateHighlight("lualine_y_diff_modified_" .. v, "guifg=#acaa62")
-			updateHighlight("lualine_y_diff_added_" .. v, "guifg=#369a96")
-			updateHighlight("lualine_a_" .. v, "gui=bold")
-		end
+		vim.defer_fn(function()
+			for _, v in pairs(vimModes) do
+				updateHighlight("lualine_y_diff_modified_" .. v, "guifg=#acaa62")
+				updateHighlight("lualine_y_diff_added_" .. v, "guifg=#369a96")
+				updateHighlight("lualine_a_" .. v, "gui=bold")
+			end
+		end, 100)
 		updateHighlight("GitSignsChange", "guifg=#acaa62")
 		updateHighlight("GitSignsAdd", "guifg=#369a96")
 	elseif theme == "gruvbox-material" or theme == "sonokai" then
@@ -97,13 +99,14 @@ local function themeModifications()
 		updateHighlight("GitSignsAdd", "guibg=none")
 		updateHighlight("GitSignsChange", "guibg=none")
 		updateHighlight("GitSignsDelete", "guibg=none")
+		-- bold lualine
+		vim.defer_fn(function()
+			for _, v in pairs(vimModes) do
+				updateHighlight("lualine_a_" .. v, "gui=bold")
+			end
+		end, 100)
 		for _, type in pairs { "Hint", "Info", "Warn", "Error" } do
 			updateHighlight("DiagnosticSign" .. type, "guibg=none")
-		end
-
-		-- bold lualine
-		for _, v in pairs(vimModes) do
-			updateHighlight("lualine_a_" .. v, "gui=bold")
 		end
 
 		linkHighlight("MoreMsg", "Folded") -- FIX for https://github.com/rebelot/kanagawa.nvim/issues/89

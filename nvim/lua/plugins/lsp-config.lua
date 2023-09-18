@@ -283,6 +283,9 @@ end
 return {
 	{ -- package manager
 		"williamboman/mason.nvim",
+		keys = {
+			{ "<leader>pm", vim.cmd.Mason, desc = " Mason Overview" },
+		},
 		opts = {
 			ui = {
 				border = u.borderStyle,

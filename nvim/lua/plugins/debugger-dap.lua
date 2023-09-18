@@ -79,8 +79,9 @@ return {
 	},
 	{
 		"rcarriga/nvim-dap-ui",
+		dependencies = "mfussenegger/nvim-dap",
 		keys = {
-			{ "<leader>bu", function() require("dapui").toggle() end, desc = "󱂬 Toggle DAP-UI" },
+			{ "<leader>bu", function() require("dapui").toggle() end, desc = "󱂬 Toggle DAP-UI" }, -- codespell-ignore
 			{
 				"<leader>bl",
 				function() require("dapui").float_element("breakpoints") end,
