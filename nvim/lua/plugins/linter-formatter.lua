@@ -103,13 +103,11 @@ local function linterConfigs()
 	lint.linters.vale.args = {
 		"--output=JSON",
 		"--ext=.md",
-		"--config",
-		linterConfig .. "/vale/vale.ini",
+		"--config=" .. linterConfig .. "/vale/vale.ini",
 	}
 
 	lint.linters.codespell.args = {
-		"--toml",
-		linterConfig .. "/codespell.toml",
+		"--toml=" .. linterConfig .. "/codespell.toml",
 	}
 
 	lint.linters.shellcheck.args = {
@@ -119,8 +117,7 @@ local function linterConfigs()
 	}
 
 	lint.linters.yamllint.args = {
-		"--config-file",
-		linterConfig .. "/yamllint.yaml",
+		"--config-file=" .. linterConfig .. "/yamllint.yaml",
 		"--format=parsable",
 		"-",
 	}
@@ -156,14 +153,7 @@ local function formatterConfig()
 	require("conform").setup {
 		log_level = vim.log.levels.DEBUG,
 		formatters_by_ft = formatters,
-
 		formatters = {
-			-- PENDING https://github.com/stevearc/conform.nvim/pull/62
-			["squeeze_blanks"] = {
-				command = "cat",
-				args = { "-s" },
-				stdin = true,
-			},
 			["bibtex-tidy"] = {
 				command = "bibtex-tidy",
 				stdin = true,
@@ -193,16 +183,14 @@ local function formatterConfig()
 	-- DOCS https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md#add-extra-arguments-to-a-formatter-command
 	require("conform.formatters.markdownlint").args = {
 		"--fix",
-		"--config",
-		linterConfig .. "/markdownlint.yaml",
+		"--config=" .. linterConfig .. "/markdownlint.yaml",
 		"$FILENAME",
 	}
 	require("conform.formatters.codespell").args = {
 		"$FILENAME",
 		"--write-changes",
 		"--check-hidden", -- conform.nvim's temp file is hidden
-		"--toml",
-		linterConfig .. "/codespell.toml",
+		"--toml=" .. linterConfig .. "/codespell.toml",
 	}
 end
 
