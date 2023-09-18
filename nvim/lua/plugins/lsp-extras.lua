@@ -39,6 +39,24 @@ return {
 			},
 		},
 	},
+	{
+		"Wansmer/symbol-usage.nvim",
+		event = "BufReadPre", -- TODO need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
+		opts = {
+			hl = { link = "Comment" },
+			vt_position = "end_of_line",
+			references = { enabled = true, include_declaration = false },
+			definition = { enabled = true },
+			implementation = { enabled = false },
+			-- see `lsp.SymbolKind`
+			kinds = { vim.lsp.protocol.SymbolKind.Function, vim.lsp.protocol.SymbolKind.Method },
+			text_format = function(symbol)
+				local refs = symbol.references or ""
+				local defs = symbol.definition or ""
+				return ("󰈿 %s 󰄾 %s"):format(defs, refs)
+			end,
+		},
+	},
 	{ -- lsp definitions & references count in the status line
 		"chrisgrieser/nvim-dr-lsp",
 		event = "LspAttach",

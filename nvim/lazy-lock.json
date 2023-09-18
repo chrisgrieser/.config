@@ -87,6 +87,7 @@
   "sg.nvim": { "branch": "master", "commit": "a6a677225bffd66bc98e03ed77438cde93a6fd31" },
   "sibling-swap.nvim": { "branch": "main", "commit": "58b256f2a7def9b63be275b373c748c012b3a604" },
   "ssr.nvim": { "branch": "main", "commit": "b2f35df231c6b090f6eb023ddf2ad0cb88d90eb4" },
+  "symbol-usage.nvim": { "branch": "main", "commit": "f57aa6f031317877adeece6ddf8fb8d92aada900" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "6c921ca12321edaa773e324ef64ea301a1d0da62" },
   "telescope-recent-files": { "branch": "main", "commit": "6893cda11625254cc7dc2ea76e0a100c7deeb028" },
   "telescope.nvim": { "branch": "master", "commit": "b543aaa2c9cf8123ed2fe7dbb6c211a9cd415124" },
