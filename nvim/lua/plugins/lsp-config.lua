@@ -78,15 +78,22 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- Disable hover in favor of jedi/pyright
+-- Disable hover in favor of jedi
 conf.on_attach.ruff_lsp = function(client, _) client.server_capabilities.hoverProvider = false end
-
--- jedi has far better hover information
 conf.on_attach.pyright = function(client, _) client.server_capabilities.hoverProvider = false end
 
 -- the docs say it's "initializationOptions", but it's actually "init_options"
 conf.init_options.jedi_language_server = {
 	diagnostics = { enable = true },
+}
+
+conf.settings.pyright = {
+	-- DOCS https://microsoft.github.io/pyright/#/configuration
+	python = {
+		analysis = {
+			diagnosticMode = "workspace",
+		},
+	},
 }
 
 --------------------------------------------------------------------------------

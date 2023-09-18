@@ -5,15 +5,11 @@ used_numbers = []
 
 THE_SUM = 0
 for numb in numbers:
+    hello = 2
     THE_SUM += numb
     THE_SUM = THE_SUM / 2
     used_numbers.append(numb)
 
 print(sum)
 
-a = "foobar sum fff"
-b = """
-foobar 
-hello world
-sum
-"""
+A = "foobar sum fff"
