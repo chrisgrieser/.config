@@ -1,15 +1,20 @@
 """This is a test file."""
 
-numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-used_numbers = []
 
-THE_SUM = 0
-for numb in numbers:
-    hello = 2
-    THE_SUM += numb
-    THE_SUM = THE_SUM / 2
-    used_numbers.append(numb)
+def hello() -> None:
+    """Test."""
+    numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    used_numbers = []
 
-print(sum)
+    print("hello world")
 
-A = "foobar sum fff"
+    the_sum = 0
+    for numb in numbers:
+        the_sum += numb
+        the_sum = the_sum / 2
+        used_numbers.append(numb)
+
+    print(the_sum)
+
+
+hello()

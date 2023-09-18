@@ -43,5 +43,5 @@ disable = [
 	"fixme", # allow TODO
 	"import-error", # already checked by other tools
 	"too-many-locals",
-	"invalid-name", # demands uppercasing for constants
+	"unused-variable" # already checked by LSP
 ]

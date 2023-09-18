@@ -71,9 +71,9 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "python",
 	callback = function()
 		vim.keymap.set("n", "<D-s>", function()
-			vim.cmd.update()
-			vim.lsp.buf.format { name = "efm" }
+			require("conform").format()
 			vim.lsp.buf.code_action { apply = true, context = { only = { "source.fixAll.ruff" } } }
+			vim.cmd.update()
 		end, { buffer = true, desc = "󰒕 Format & RuffFixAll & Save" })
 	end,
 })
