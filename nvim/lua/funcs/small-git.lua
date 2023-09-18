@@ -103,7 +103,7 @@ local function processCommitMsg(commitMsg)
 	return true, commitMsg
 end
 
--- Uses ColorColumn of 50 to indicate max length of commit messages, and
+-- Uses ColorColumn to indicate max length of commit messages, and
 -- additionally colors commit messages that are too long in red.
 local function setGitCommitAppearance()
 	vim.api.nvim_create_autocmd("FileType", {
