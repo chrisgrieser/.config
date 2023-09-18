@@ -15,22 +15,10 @@ set clipboard=unnamed
 " Y consistent with D and C to the end of line
 nnoremap Y y$
 
-" don't pollute the register
-" nnoremap c "_c " BUG not working with vimrc plugin
+" don't pollute the register (HACK since we can't map to `"_x` or `"_C`)
 nnoremap C "_c$
 nnoremap x "_dl
-
-""""""""""""""""""""""
-" Search
-""""""""""""""""""""""
-" no modifier key for jumping to next word
-nnoremap + *
-
-" Find Mode (by mirroring American keyboard layout on German keyboard layout)
-nnoremap - /
-
-" <Esc> clears highlights
-nnoremap <Esc> :nohl
+" nnoremap c "_c " BUG not working with vimrc plugin
 
 """"""""""""""""""""""
 " Navigation
@@ -67,7 +55,7 @@ nnoremap zl :contextMenu
 exmap nextSuggestion obcommand obsidian-languagetool-plugin:ltjump-to-next-suggestion
 nnoremap ge :nextSuggestion
 
-" INFO don't work in reading mode: https://github.com/timhor/obsidian-editor-shortcuts/issues/20
+" INFO doesn't work in reading mode: https://github.com/timhor/obsidian-editor-shortcuts/issues/20
 exmap nextHeading obcommand obsidian-editor-shortcuts:goToNextHeading
 exmap prevHeading obcommand obsidian-editor-shortcuts:goToPrevHeading
 nnoremap <C-j> :nextHeading
@@ -77,7 +65,7 @@ nnoremap <C-k> :prevHeading
 " nnoremap <C-h> :back
 " nnoremap <C-l> :forward
 
-" line/character movement (INFO don't work in visual mode)
+" INFO doesn't work in visual mode
 exmap lineUp obcommand editor:swap-line-up
 exmap lineDown obcommand editor:swap-line-down
 nnoremap <Up> :lineUp
@@ -88,8 +76,7 @@ nnoremap <Left> dlhhp
 " [m]atch parenthesis
 nnoremap m %
 
-" [g]oto [s]ymbol
-" requires Another Quick Switcher Plugin
+" [g]oto [s]ymbol via "Another Quick Switcher" Plugin
 exmap gotoHeading obcommand obsidian-another-quick-switcher:header-floating-search-in-file
 nnoremap gs :gotoHeading
 
@@ -112,8 +99,16 @@ nnoremap gr :quickSwitcher
 nnoremap g, u<C-r>
 
 """"""""""""""""""""""
-" Search & replace
+" Search
 """"""""""""""""""""""
+" no modifier key for jumping to next word
+nnoremap + *
+
+" Find Mode (by mirroring American keyboard layout on German keyboard layout)
+nnoremap - /
+
+" <Esc> clears highlights
+nnoremap <Esc> :nohl
 
 " Another Quick Switcher ripgrep-search
 " somewhat close to Telescope's livegrep
@@ -125,10 +120,10 @@ exmap searchReplace obcommand editor:open-search-replace
 nnoremap ,ff :searchReplace
 
 """"""""""""""""""""""
-" Diffview, Git, Undo
+" Diffview & Git
 """"""""""""""""""""""
 
-" Version history plugin
+" Diffview
 exmap diffview obcommand obsidian-version-history-diff:open-git-diff-view
 nnoremap ,gd :diffview
 
@@ -151,7 +146,7 @@ nnoremap U <C-r>
 vnoremap ,s gq
 nnoremap ,s gqq
 
-" Case Switch via Smarter MD Hotkeys Plugin
+" Case Switch via Code Editor Shortcuts Plugin
 exmap caseSwitch obcommand obsidian-editor-shortcuts:toggleCase
 nnoremap ö :caseSwitch
 vnoremap ö :caseSwitch
@@ -166,7 +161,6 @@ nnoremap Ü "zdawbh"zph
 exmap aiWrite obcommand obsidian-textgenerator-plugin:insert-generated-text-From-template
 nnoremap ,a :aiWrite
 
-" toggle devtools (binding as with the debugger)
 exmap toggleDevtools obcommand obsidian-theme-design-utilities:toggle-devtools
 nnoremap ,b :toggleDevtools
 vnoremap ,b :toggleDevtools
@@ -187,9 +181,8 @@ unmap w
 nnoremap ww :duplicate
 
 " [M]erge Lines
-" can't remap to J, cause there is no noremap; also the merge from Code Editor
-" Shortcuts plugin is smarter since it removes list prefixes
-exmap mergeLines obcommand obsidian-editor-shortcuts:joinLines
+" the merge from Code Editor Shortcuts plugin is smarter than just using `J`
+" since it removes stuff like list prefixes
 exmap mergeLines obcommand obsidian-editor-shortcuts:joinLines
 nnoremap M :mergeLines
 
@@ -203,8 +196,7 @@ nmap &b& :blankBelow
 nmap o &b&i
 
 " Add Blank Line above/below
-" HACK not using mz...`z since m remapped
-" HACK adding in 0d$ to clear the line from list markers from the o/O remapping above
+" INFO adding in 0d$ to clear the line from list markers from the o/O remapping above
 nnoremap = O<Esc>0"_d$j
 nnoremap _ o<Esc>0"_d$k
 
@@ -378,17 +370,18 @@ exmap foldall obcommand editor:fold-all
 exmap foldless obcommand editor:fold-less
 exmap foldmore obcommand editor:fold-more
 
-nnoremap ^ :foldmore
-nnoremap \ :foldless
 nnoremap za :togglefold
 nnoremap zo :togglefold
 nnoremap zc :togglefold
 nnoremap zm :foldall
 nnoremap zr :unfoldall
+nnoremap ^ :foldmore
+nnoremap \ :foldless
 
 """"""""""""""""""""""
-" Move selection to new file (nvim-genghis)
+" Move selection to new file
 """"""""""""""""""""""
+" emulate the command from nvim-genghis
 exmap selectionToNewFile obcommand templater-obsidian:Meta/Templater/>_Create_Related_Note.md
 vnoremap X :selectionToNewFile
 
@@ -400,6 +393,6 @@ vnoremap X :selectionToNewFile
 exmap spellcheck obcommand editor:toggle-spellcheck
 nnoremap ,os :spellcheck
 
-" [O]ption: [d]iagnostics (language tool check)
+" [O]ption: [d]iagnostics
 exmap enableDiagnostics obcommand obsidian-languagetool-plugin:ltcheck-text
 nnoremap ,od :enableDiagnostics

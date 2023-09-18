@@ -13,7 +13,6 @@ vim.filetype.add {
 	extension = {
 		zsh = "sh",
 		sh = "sh", -- so .sh files with zsh-shebang still get sh filetype
-		add = "text", -- vim spell files
 	},
 	filename = {
 		[".zshrc"] = "sh",
@@ -89,7 +88,7 @@ opt.signcolumn = "yes:1"
 -- Wrapping
 opt.textwidth = 80 -- in some languages overridden by .editorconfig
 opt.colorcolumn = { 81 } -- not relative to textwidth, as it is sometimes changed via .editorconfig
-opt.wrapmargin = 4 -- extra space since using a scrollbar plugin
+opt.wrapmargin = 3 -- extra space since using a scrollbar plugin
 opt.wrap = false
 opt.breakindent = false
 opt.linebreak = true -- do not break up full words on wrap
