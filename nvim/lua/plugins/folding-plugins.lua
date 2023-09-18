@@ -75,9 +75,7 @@ return {
 				-- therefore making this function necessary :/
 				local lspWithOutFolding =
 					{ "markdown", "bash", "sh", "bash", "zsh", "css", "html", "python" }
-				if vim.tbl_contains(lspWithOutFolding, ft) then
-					return { "treesitter", "indent" }
-				end
+				if vim.tbl_contains(lspWithOutFolding, ft) then return { "treesitter", "indent" } end
 				return { "lsp", "indent" }
 			end,
 			-- open opening the buffer, close these fold kinds

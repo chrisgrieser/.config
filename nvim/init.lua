@@ -37,14 +37,15 @@ safeRequire("config.diagnostics")
 safeRequire("config.user-commands")
 safeRequire("config.abbreviations")
 
-safeRequire("funcs.pulling-strings")
+safeRequire("funcs.puppeteer")
 
+
+--------------------------------------------------------------------------------
 
 if vim.version.major == 0 and vim.version().minor >= 10 then
 	local todo = {
 		"TODO for 0.10",
 		"- satellite.nvim can now be updated.",
-		"- remove lsp-inlayhint",
 		"- change event trigger for symbols-usage",
 		"- biome lspconfig https://github.com/neovim/nvim-lspconfig/issues/2807",
 		"- vim.system",
