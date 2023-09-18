@@ -24,9 +24,9 @@
 				<key>destinationuid</key>
 				<string>26EB4BCF-56A8-43E4-AED6-0C121B00D55E</string>
 				<key>modifiers</key>
-				<integer>262144</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌃: Open :help at GitHub</string>
+				<string>⌘: Open :help at GitHub</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -39,16 +39,6 @@
 				<string>⇧: Search issues</string>
 				<key>vitoclose</key>
 				<true/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>E1D760CD-9BD9-45A0-B293-3E0E79347EC4</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Copy Repo Name for Plugin Managers</string>
-				<key>vitoclose</key>
-				<false/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -156,9 +146,9 @@
 				<key>destinationuid</key>
 				<string>26EB4BCF-56A8-43E4-AED6-0C121B00D55E</string>
 				<key>modifiers</key>
-				<integer>262144</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌃: Open :help at GitHub</string>
+				<string>⌘: Open :help at GitHub</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -171,16 +161,6 @@
 				<string>⇧: Search issues</string>
 				<key>vitoclose</key>
 				<true/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>E1D760CD-9BD9-45A0-B293-3E0E79347EC4</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Copy Repo Name for Plugin Managers</string>
-				<key>vitoclose</key>
-				<false/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -305,19 +285,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>79F25308-2C64-400B-AC1D-C1FD5FC840DF</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>E1D760CD-9BD9-45A0-B293-3E0E79347EC4</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>9552C60A-4AD9-4038-BB96-EDB2C60D13C6</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -961,31 +928,10 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>9552C60A-4AD9-4038-BB96-EDB2C60D13C6</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>autopaste</key>
 				<false/>
 				<key>clipboardtext</key>
-				<string>"{query}",</string>
+				<string>{query}</string>
 				<key>ignoredynamicplaceholders</key>
 				<false/>
 				<key>transient</key>
@@ -994,7 +940,7 @@
 			<key>type</key>
 			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>E1D760CD-9BD9-45A0-B293-3E0E79347EC4</string>
+			<string>D6E5E105-38E3-4BC1-90E3-52BEE556349D</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -1050,25 +996,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>D6E5E105-38E3-4BC1-90E3-52BEE556349D</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1101,9 +1028,8 @@ Run `:nvim` once to create the local cache for the `:h` search.
 	- &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the help URL to the clipboard.
 - `vp`: Searches [neovimcraft](https://neovimcraft.com/) for neovim plugins. Mnemonic: `[v]im [p]lugins`.
 	- &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the GitHub repo.
-	- &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Copy repo name for plugin managers.
+	- &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the `:help` page of the plugin at GitHub.
 	- &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the GitHub URL to the clipboard.
-	- &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Open the `:help` page of the plugin at GitHub.
 	- &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Search GitHub issues of the plugin.
 - `mason`: Search for tools available via [mason.nvim](https://github.com/williamboman/mason.nvim).
 - `ip`: Search for plugins (and mason tools) installed locally on your device. Mnemonic: `[i]installed [p]lugins`. The modifiers (&lt;kbd&gt;⌘⌥⌃⇧&lt;/kbd&gt;) from the plugin-search also apply for this command. In addition:
@@ -1285,17 +1211,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
-		<key>9552C60A-4AD9-4038-BB96-EDB2C60D13C6</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>no default branch</string>
-			<key>xpos</key>
-			<real>480</real>
-			<key>ypos</key>
-			<real>640</real>
-		</dict>
 		<key>C906BF1E-7CF4-4407-9B97-53532876DCC0</key>
 		<dict>
 			<key>colorindex</key>
@@ -1314,9 +1229,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>copy url</string>
 			<key>xpos</key>
-			<real>330</real>
+			<real>335</real>
 			<key>ypos</key>
-			<real>780</real>
+			<real>645</real>
 		</dict>
 		<key>D818D50E-55A9-45FB-AC92-10FCF4BC8B60</key>
 		<dict>
@@ -1325,9 +1240,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>open local folder</string>
 			<key>xpos</key>
-			<real>325</real>
+			<real>335</real>
 			<key>ypos</key>
-			<real>925</real>
+			<real>780</real>
 		</dict>
 		<key>D9E07FDE-1870-42B0-B6D4-AA209906679E</key>
 		<dict>
@@ -1337,17 +1252,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>270</real>
 			<key>ypos</key>
 			<real>535</real>
-		</dict>
-		<key>E1D760CD-9BD9-45A0-B293-3E0E79347EC4</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>copy repo name for plugin managers</string>
-			<key>xpos</key>
-			<real>330</real>
-			<key>ypos</key>
-			<real>640</real>
 		</dict>
 		<key>F178F3ED-E855-4DC9-A178-D839E9C2C48D</key>
 		<dict>
