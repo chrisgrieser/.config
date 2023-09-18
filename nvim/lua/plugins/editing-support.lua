@@ -110,7 +110,7 @@ return {
 			}
 		end,
 	},
-	{ -- pending: https://github.com/Djancyp/regex.nvim/pull/2
+	{ -- PENDING: https://github.com/Djancyp/regex.nvim/pull/2
 		"chrisgrieser/regex.nvim",
 		cmd = "RegexHelper", -- called in javascript & typescript ftplugins
 		dev = true,
