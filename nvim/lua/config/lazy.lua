@@ -1,6 +1,7 @@
 -- Bootstrap Lazy.nvim plugin manager https://github.com/folke/lazy.nvim#-installation
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+local lazyIsInstalled = vim.loop.fs_stat(lazypath)
+if not lazyIsInstalled then
 	vim.fn.system {
 		"git",
 		"clone",
@@ -10,7 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 		lazypath,
 	}
 end
-vim.opt.rtp:prepend(lazypath)
+vim.opt.runtimepath:prepend(lazypath)
 
 --------------------------------------------------------------------------------
 -- DOCS https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration

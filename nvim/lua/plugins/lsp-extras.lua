@@ -6,7 +6,7 @@ return {
 		"Wansmer/symbol-usage.nvim",
 		event = "BufReadPre", -- TODO need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
 		opts = {
-			hl = { link = "Comment" },
+			hl = { link = "NonText" },
 			vt_position = "end_of_line",
 			references = { enabled = true, include_declaration = false },
 			definition = { enabled = false },

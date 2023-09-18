@@ -23,8 +23,6 @@ keymap("n", "<leader>pp", require("lazy").sync, { desc = " Lazy Update" })
 keymap("n", "<leader>ph", require("lazy").home, { desc = " Lazy Overview" })
 keymap("n", "<leader>pi", require("lazy").install, { desc = " Lazy Install" })
 
-keymap("n", "<leader>pm", cmd.Mason, { desc = " Mason Overview" })
-
 -- Theme Picker
 -- stylua: ignore
 keymap("n", "<leader>pc", function() cmd.Telescope("colorscheme") end, { desc = "  Change Colorschemes" })

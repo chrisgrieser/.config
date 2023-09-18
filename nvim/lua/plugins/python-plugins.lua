@@ -4,7 +4,11 @@ local u = require("config.utils")
 return {
 	{
 		"linux-cultist/venv-selector.nvim",
-		dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
+		dependencies = {
+			"neovim/nvim-lspconfig",
+			"nvim-telescope/telescope.nvim",
+			"mfussenegger/nvim-dap-python"
+		},
 		cmd = { "VenvSelect", "VenvSelectCached" },
 		config = function()
 			require("venv-selector").setup {
