@@ -147,7 +147,7 @@ rules:
               - ^com\.tapbots\.Ivory$
               - ^com\.factorio$
         to_if_held_down:
-          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.hyper-seek"'
+          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.ddgr"'
       # Ivory: Close Media Window and tab away
       - type: basic
         from: { pointing_button: button5 }
@@ -170,7 +170,7 @@ rules:
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com\.tapbots\.Ivory$] }
         to_if_held_down:
-          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.hyper-seek"'
+          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.ddgr"'
       # Browser & Finder & Hammerspoon: Close Window
       - type: basic
         from: { pointing_button: button5 }
@@ -184,7 +184,7 @@ rules:
               - ^com\.apple\.finder$
               - ^org\.hammerspoon\.Hammerspoon$
         to_if_held_down:
-          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.hyper-seek"'
+          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.ddgr"'
       # Highlights: Yellow Highlight
       - type: basic
         from: { pointing_button: button5 }
@@ -195,7 +195,7 @@ rules:
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }
         to_if_held_down:
-          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.hyper-seek"'
+          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.ddgr"'
       # Archive in Mimestream
       - type: basic
         from: { pointing_button: button5 }
@@ -204,7 +204,7 @@ rules:
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }
         to_if_held_down:
-          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.hyper-seek"'
+          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.ddgr"'
   #─────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 1+2 (simultaneously): Dictionary Lookup"
     manipulators:
