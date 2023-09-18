@@ -10,3 +10,5 @@ for numb in numbers:
     used_numbers.append(numb)
 
 print(sum)
+
+a = "foobar fff"

@@ -116,6 +116,11 @@ return {
 		dev = true,
 		opts = true,
 	},
+	{ -- auto-convert string and f/template string
+		"chrisgrieser/nvim-puppeteer",
+		ft = { "python", "javascript", "typescript" },
+		dev = true,
+	},
 	{ -- virtual text context at the end of a scope
 		"haringsrob/nvim_context_vt",
 		event = "VeryLazy",
