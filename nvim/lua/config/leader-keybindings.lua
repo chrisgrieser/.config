@@ -197,15 +197,14 @@ keymap("n", "<leader>g?", "<cmd>Gitsigns blame_line<CR>", { desc = "󰊢 Blame L
 -- Telescope
 keymap("n", "<leader>gs", function() cmd.Telescope("git_status") end, { desc = " Status" })
 keymap("n", "<leader>gl", function() cmd.Telescope("git_commits") end, { desc = " Log" })
-keymap("n", "<leader>gL", function() cmd.Telescope("git_bcommits") end, { desc = " Log (Buffer)" })
-keymap("n", "<leader>gb", function() cmd.Telescope("git_branches") end, { desc = " Branches" })
 
 -- Small Git
 -- stylua: ignore start
-keymap("n", "<leader>gc", function() require("funcs.small-git").smartCommit() end, { desc = "󰊢 SmartCommit" })
+keymap("n", "<leader>gc", function() require("funcs.small-git").smartCommit() end, { desc = "󰊢 Smart-Commit" })
 keymap("n", "<leader>gg", function() require("funcs.small-git").smartCommit { push = true } end, { desc = "󰊢 Smart-Commit-Push" })
 keymap("n", "<leader>gm", function() require("funcs.small-git").amendNoEdit { forcePush = true } end, { desc = "󰊢 Amend-No-Edit & Push" })
 keymap("n", "<leader>gM", function() require("funcs.small-git").amend { forcePush = true } end, { desc = "󰊢 Amend & Push" })
+keymap("n", "<leader>gp", function() require("funcs.small-git").push()  end, { desc = "󰊢 Push" })
 keymap({ "n", "x" }, "<leader>gu", function() require("funcs.small-git").githubUrl() end, { desc = " GitHub Link" })
 keymap("n", "<leader>gU", function() require("funcs.small-git").githubUrl("repo") end, { desc = " Goto Repo" })
 keymap("n", "<leader>gi", function() require("funcs.small-git").issuesAndPrs("open") end, { desc = " Open Issues" })

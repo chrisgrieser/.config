@@ -3,17 +3,22 @@ local fn = vim.fn
 
 --------------------------------------------------------------------------------
 -- CONFIG
--- https://stackoverflow.com/questions/2290016/git-commit-messages-50-72-formatting
-local commitMaxLen = 72
-local smallCommitMaxLen = 50
-local useSoundOnMacOs = true
-local issueIcons = {
-	closedIssue = "🟣",
-	openIssue = "🟢",
-	openPR = "🟦",
-	mergedPR = "🟨",
-	closedPR = "🟥",
+local defaultConfig = {
+	commitMaxLen = 72, -- https://stackoverflow.com/questions/2290016/git-commit-messages-50-72-formatting
+	smallCommitMaxLen = 50,
+	useSoundOnMacOs = true,
+	issueIcons = {
+		closedIssue = "🟣",
+		openIssue = "🟢",
+		openPR = "🟦",
+		mergedPR = "🟨",
+		closedPR = "🟥",
+	},
 }
+
+local config = defaultConfig -- set values if setup call is not run
+
+function M.setup(userConf) config = vim.tbl_extend("force", defaultConfig, userConf) end
 
 --------------------------------------------------------------------------------
 -- HELPERS
@@ -37,8 +42,8 @@ end
 ---@param msg string
 ---@param level? "info"|"trace"|"debug"|"warn"|"error"
 local function notify(msg, level)
-	if not level then level = "info" end
 	local pluginName = "Small Git"
+	if not level then level = "info" end
 	vim.notify(vim.trim(msg), vim.log.levels[level:upper()], { title = pluginName })
 end
 
@@ -47,8 +52,9 @@ end
 ---@return boolean
 ---@param errorMsg string
 local function nonZeroExit(errorMsg)
-	notify("Error: " .. vim.trim(errorMsg), "warn")
-	return vim.v.shell_error ~= 0
+	local exitCode = vim.v.shell_error
+	if exitCode ~= 0 then notify(vim.trim(errorMsg), "warn") end
+	return exitCode ~= 0
 end
 
 ---also notifies if not in git repo
@@ -64,12 +70,10 @@ end
 ---@param soundFilepath string
 local function playSoundMacOS(soundFilepath)
 	local onMacOs = fn.has("macunix") == 1
-	if not onMacOs or not useSoundOnMacOs then return end
+	if not onMacOs or not config.useSoundOnMacOs then return end
 	fn.system(("afplay %q &"):format(soundFilepath))
 end
 
---NOTE this requires an outer-scope output variable which needs to be emptied
---before the run
 local gitShellOpts = {
 	stdout_buffered = true,
 	stderr_buffered = true,
@@ -115,9 +119,9 @@ local gitShellOpts = {
 ---@return string the (modified) commit message
 local function processCommitMsg(commitMsg)
 	commitMsg = vim.trim(commitMsg)
-	if #commitMsg > commitMaxLen then
+	if #commitMsg > config.commitMaxLen then
 		notify("Commit Message too long.", "warn")
-		local shortenedMsg = commitMsg:sub(1, commitMaxLen)
+		local shortenedMsg = commitMsg:sub(1, config.commitMaxLen)
 		return false, shortenedMsg
 	elseif commitMsg == "" then
 		return true, "chore"
@@ -145,7 +149,7 @@ local function setGitCommitAppearance()
 		callback = function()
 			local winNs = 2
 			vim.api.nvim_win_set_hl_ns(0, winNs)
-			fn.matchadd("commitmsg", ([[.\{%s}\zs.*\ze]]):format(commitMaxLen - 1))
+			fn.matchadd("commitmsg", ([[.\{%s}\zs.*\ze]]):format(config.commitMaxLen - 1))
 
 			-- for treesitter highlighting
 			vim.bo.filetype = "gitcommit"
@@ -156,7 +160,7 @@ local function setGitCommitAppearance()
 
 			vim.api.nvim_buf_set_name(0, "COMMIT_EDITMSG") -- for statusline
 
-			vim.opt_local.colorcolumn = { smallCommitMaxLen, commitMaxLen }
+			vim.opt_local.colorcolumn = { config.smallCommitMaxLen, config.commitMaxLen }
 			vim.api.nvim_set_hl(winNs, "commitmsg", { bg = "#E06C75" })
 		end,
 	})
@@ -165,12 +169,12 @@ end
 --------------------------------------------------------------------------------
 
 ---@param opts? object
-function M.amendNoEditPushForce(opts)
+function M.amendNoEdit(opts)
 	if not opts then opts = {} end
 	vim.cmd("silent update")
 	if notInGitRepo() then return end
 
-	local lastCommitMsg = fn.system("git log -1 --pretty=%B")
+	local lastCommitMsg = vim.trim(fn.system("git log -1 --pretty=%B"))
 	notify('󰊢 Amend-No-Edit & Force Push…\n"' .. lastCommitMsg .. '"')
 
 	local stderr = fn.system("git add -A && git commit --amend --no-edit")
@@ -179,15 +183,15 @@ function M.amendNoEditPushForce(opts)
 	if opts.forcePush then fn.jobstart("git push --force", gitShellOpts) end
 end
 
----@param prefillMsg? string
 ---@param opts? object
-function M.amendAndPushForce(opts, prefillMsg)
+---@param prefillMsg? string
+function M.amend(opts, prefillMsg)
 	if not opts then opts = {} end
 	vim.cmd("silent update")
 	if notInGitRepo() then return end
 
 	if not prefillMsg then
-		local lastCommitMsg = fn.system("git log -1 --pretty=%B"):gsub("%s+$", "")
+		local lastCommitMsg = vim.trim(fn.system("git log -1 --pretty=%B"))
 		prefillMsg = lastCommitMsg
 	end
 	setGitCommitAppearance()
@@ -195,9 +199,8 @@ function M.amendAndPushForce(opts, prefillMsg)
 	vim.ui.input({ prompt = "󰊢 Amend", default = prefillMsg }, function(commitMsg)
 		if not commitMsg then return end -- aborted input modal
 		local validMsg, newMsg = processCommitMsg(commitMsg)
-
 		if not validMsg then -- if msg invalid, run again to fix the msg
-			M.amendAndPushForce(newMsg)
+			M.amend(newMsg)
 			return
 		end
 
@@ -239,9 +242,14 @@ function M.smartCommit(opts, prefillMsg)
 		local stderr = fn.system { "git", "commit", "-m", newMsg }
 		if nonZeroExit(stderr) then return end
 
-		if opts.push then fn.jobstart("git pull ; git push", gitShellOpts) end
+		if opts.push then M.push() end
 	end)
 end
+
+-- pull before to avoid conflicts
+function M.push() fn.jobstart("git pull ; git push", gitShellOpts) end
+
+--------------------------------------------------------------------------------
 
 ---opens current buffer in the browser & copies the link to the clipboard
 ---normal mode: link to file
@@ -256,8 +264,8 @@ function M.githubUrl(justRepo)
 
 	local pathInRepoEncoded = pathInRepo:gsub("%s+", "%%20")
 	local remote = fn.system("git --no-optional-locks remote -v"):gsub(".*:(.-)%.git.*", "%1")
-	local hash = fn.system("git --no-optional-locks rev-parse HEAD"):gsub("\n$", "")
-	local branch = fn.system("git --no-optional-locks branch --show-current"):gsub("\n$", "")
+	local hash = vim.trim(fn.system("git --no-optional-locks rev-parse HEAD"))
+	local branch = vim.trim(fn.system("git --no-optional-locks branch --show-current"))
 
 	local selStart = fn.line("v")
 	local selEnd = fn.line(".")
@@ -312,15 +320,15 @@ function M.issuesAndPrs(state)
 
 		local icon
 		if issue.state == "open" and isPR then
-			icon = issueIcons.openPR
+			icon = config.issueIcons.openPR
 		elseif issue.state == "closed" and isPR and merged then
-			icon = issueIcons.mergedPR
+			icon = config.issueIcons.mergedPR
 		elseif issue.state == "closed" and isPR and not merged then
-			icon = issueIcons.closedPR
+			icon = config.issueIcons.closedPR
 		elseif issue.state == "closed" and not isPR then
-			icon = issueIcons.closedIssue
+			icon = config.issueIcons.closedIssue
 		elseif issue.state == "open" and not isPR then
-			icon = issueIcons.openIssue
+			icon = config.issueIcons.openIssue
 		end
 
 		return icon .. " #" .. issue.number .. " " .. issue.title
