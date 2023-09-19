@@ -1,7 +1,7 @@
 """This is a test file."""
 
 
-def hello() -> None:
+def hEllo() -> None:
     """Test."""
     numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     used_numbers = []

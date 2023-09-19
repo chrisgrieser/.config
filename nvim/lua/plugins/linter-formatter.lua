@@ -103,6 +103,7 @@ local function linterConfigs()
 	lint.linters.vale.args = {
 		"--output=JSON",
 		"--ext=.md",
+		"--no-exit",
 		"--config=" .. linterConfig .. "/vale/vale.ini",
 	}
 
