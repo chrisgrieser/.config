@@ -170,7 +170,7 @@ function M.amendNoEditPushForce(opts)
 	vim.cmd("silent update")
 	if notInGitRepo() then return end
 
-	local lastCommitMsg = fn.system("git log -1 --pretty=%B"):gsub("%s+$", "")
+	local lastCommitMsg = fn.system("git log -1 --pretty=%B")
 	notify('󰊢 Amend-No-Edit & Force Push…\n"' .. lastCommitMsg .. '"')
 
 	local stderr = fn.system("git add -A && git commit --amend --no-edit")
