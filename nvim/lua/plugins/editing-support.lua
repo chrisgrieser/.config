@@ -129,9 +129,9 @@ return {
 		opts = {
 			prefix = " 󱞷",
 			highlight = "NonText",
-			min_rows = 7,
-			disable_ft = { "markdown" },
-			min_rows_ft = { python = 10, yaml = 15, css = 15 },
+			min_rows = 6,
+			disable_ft = { "markdown", "yaml", "css" },
+			min_rows_ft = { python = 10 },
 		},
 	},
 	{ -- automatically set correct indent for file

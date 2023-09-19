@@ -3,7 +3,9 @@ local fn = vim.fn
 
 --------------------------------------------------------------------------------
 -- CONFIG
-local commitMsgMaxLength = 72
+-- https://stackoverflow.com/questions/2290016/git-commit-messages-50-72-formatting
+local commitMaxLen = 72
+local smallCommitMaxLen = 50
 
 --------------------------------------------------------------------------------
 -- HELPERS
@@ -74,17 +76,16 @@ local gitShellOpts = {
 	end,
 }
 
----process a commit message: less than 50 chars, not empty, adheres to
----conventional commits
+---process a commit message: length, not empty, adheres to conventional commits
 ---@param commitMsg string
 ---@nodiscard
 ---@return boolean is the commit message valid?
 ---@return string the (modified) commit message
 local function processCommitMsg(commitMsg)
 	commitMsg = vim.trim(commitMsg)
-	if #commitMsg > commitMsgMaxLength then
+	if #commitMsg > commitMaxLen then
 		notify("Commit Message too long.", "warn")
-		local shortenedMsg = commitMsg:sub(1, commitMsgMaxLength)
+		local shortenedMsg = commitMsg:sub(1, commitMaxLen)
 		return false, shortenedMsg
 	elseif commitMsg == "" then
 		return true, "chore"
@@ -112,7 +113,7 @@ local function setGitCommitAppearance()
 		callback = function()
 			local winNs = 2
 			vim.api.nvim_win_set_hl_ns(0, winNs)
-			fn.matchadd("commitmsg", ([[.\{%s}\zs.*\ze]]):format(commitMsgMaxLength - 1))
+			fn.matchadd("commitmsg", ([[.\{%s}\zs.*\ze]]):format(commitMaxLen - 1))
 
 			-- for treesitter highlighting
 			vim.bo.filetype = "gitcommit"
@@ -123,7 +124,7 @@ local function setGitCommitAppearance()
 
 			vim.api.nvim_buf_set_name(0, "COMMIT_EDITMSG") -- for statusline
 
-			vim.opt_local.colorcolumn = { 50, commitMsgMaxLength } -- https://stackoverflow.com/questions/2290016/git-commit-messages-50-72-formatting
+			vim.opt_local.colorcolumn = { smallCommitMaxLen, commitMaxLen } 
 			vim.api.nvim_set_hl(winNs, "commitmsg", { bg = "#E06C75" })
 		end,
 	})
@@ -179,7 +180,7 @@ function M.amendAndPushForce(prefillMsg)
 end
 
 ---@param prefillMsg? string
-function M.commit(prefillMsg)
+function M.smartCommit(prefillMsg)
 	vim.cmd("silent update")
 	if not isInGitRepo() then return end
 	if not prefillMsg then prefillMsg = "" end
@@ -206,7 +207,7 @@ function M.addCommit(prefillMsg)
 		notify(stderr, "warn")
 		return
 	end
-	M.commit(prefillMsg)
+	M.smartCommit(prefillMsg)
 end
 
 ---@param prefillMsg? string
