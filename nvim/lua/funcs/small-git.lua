@@ -6,6 +6,7 @@ local fn = vim.fn
 -- https://stackoverflow.com/questions/2290016/git-commit-messages-50-72-formatting
 local commitMaxLen = 72
 local smallCommitMaxLen = 50
+local useSoundOnMacOs = true
 
 --------------------------------------------------------------------------------
 -- HELPERS
@@ -19,20 +20,30 @@ local function notify(msg, level)
 	vim.notify(msg, vim.log.levels[level:upper()], { title = pluginName })
 end
 
+---checks if last command was successful, if not, notify
+---@nodiscard
+---@return boolean
+---@param errorMsg string
+local function nonZeroExit(errorMsg)
+	errorMsg = errorMsg:gsub("%s+$", "")
+	notify("Error: " .. errorMsg, "warn")
+	return vim.v.shell_error ~= 0
+end
+
 ---also notifies if not in git repo
 ---@nodiscard
 ---@return boolean
-local function isInGitRepo()
+local function notInGitRepo()
 	fn.system("git rev-parse --is-inside-work-tree")
-	local inGitRepo = vim.v.shell_error == 0
-	if not inGitRepo then notify("Not in Git Repo.", "warn") end
-	return inGitRepo
+	local notInRepo = nonZeroExit("Not in Git Repo.")
+	return notInRepo
 end
 
 ---if on mac, play a sound
 ---@param soundFilepath string
 local function playSoundMacOS(soundFilepath)
-	if vim.fn.has("macunix") ~= 1 then return end
+	local onMacOs = fn.has("macunix") == 1
+	if not onMacOs or not useSoundOnMacOs then return end
 	fn.system(("afplay %q &"):format(soundFilepath))
 end
 
@@ -124,7 +135,7 @@ local function setGitCommitAppearance()
 
 			vim.api.nvim_buf_set_name(0, "COMMIT_EDITMSG") -- for statusline
 
-			vim.opt_local.colorcolumn = { smallCommitMaxLen, commitMaxLen } 
+			vim.opt_local.colorcolumn = { smallCommitMaxLen, commitMaxLen }
 			vim.api.nvim_set_hl(winNs, "commitmsg", { bg = "#E06C75" })
 		end,
 	})
@@ -134,24 +145,21 @@ end
 
 function M.amendNoEditPushForce()
 	vim.cmd("silent update")
-	if not isInGitRepo() then return end
+	if notInGitRepo() then return end
 
 	local lastCommitMsg = fn.system("git log -1 --pretty=%B"):gsub("%s+$", "")
 	notify('󰊢 Amend-No-Edit & Force Push…\n"' .. lastCommitMsg .. '"')
 
 	local stderr = fn.system("git add -A && git commit --amend --no-edit")
-	if vim.v.shell_error ~= 0 then
-		vim.notify("Error: " .. stderr, vim.log.levels.WARN)
-		return
-	end
+	if nonZeroExit(stderr) then return end
 
 	fn.jobstart("git push --force", gitShellOpts)
 end
 
 ---@param prefillMsg? string
 function M.amendAndPushForce(prefillMsg)
-	vim.cmd.update()
-	if not isInGitRepo() then return end
+	vim.cmd("silent update")
+	if notInGitRepo() then return end
 
 	if not prefillMsg then
 		local lastCommitMsg = fn.system("git log -1 --pretty=%B"):gsub("%s+$", "")
@@ -159,7 +167,7 @@ function M.amendAndPushForce(prefillMsg)
 	end
 	setGitCommitAppearance()
 
-	vim.ui.input({ prompt = " 󰊢 Amend", default = prefillMsg }, function(commitMsg)
+	vim.ui.input({ prompt = "󰊢 Amend", default = prefillMsg }, function(commitMsg)
 		if not commitMsg then return end -- aborted input modal
 		local validMsg, newMsg = processCommitMsg(commitMsg)
 
@@ -170,71 +178,43 @@ function M.amendAndPushForce(prefillMsg)
 
 		notify('󰊢 Amend & Force Push…\n"' .. newMsg .. '"')
 		local stderr = fn.system("git add -A && git commit --amend -m '" .. newMsg .. "'")
-		if vim.v.shell_error ~= 0 then
-			notify(stderr, "warn")
-			return
-		end
+		if nonZeroExit(stderr) then return end
 
 		fn.jobstart("git push --force", gitShellOpts)
 	end)
 end
 
+---If there are staged changes, commit them.
+---If there aren't, add all changes (`git add -A`) and then commit.
 ---@param prefillMsg? string
-function M.smartCommit(prefillMsg)
-	vim.cmd("silent update")
-	if not isInGitRepo() then return end
-	if not prefillMsg then prefillMsg = "" end
-	setGitCommitAppearance()
+---@param opts? object
+function M.smartCommit(opts, prefillMsg)
+	if notInGitRepo() then return end
 
-	vim.ui.input({ prompt = " 󰊢 Commit Message:", default = prefillMsg }, function(commitMsg)
+	vim.cmd("silent update")
+	if not opts then opts = {} end
+	if not prefillMsg then prefillMsg = "" end
+
+	setGitCommitAppearance()
+	vim.ui.input({ prompt = "󰊢 Commit Message:", default = prefillMsg }, function(commitMsg)
 		if not commitMsg then return end -- aborted input modal
 		local validMsg, newMsg = processCommitMsg(commitMsg)
 		if not validMsg then -- if msg invalid, run again to fix the msg
-			M.addCommitPush(newMsg)
+			M.smartCommitPush(newMsg)
 			return
 		end
 
-		notify('󰊢 Commit\n"' .. newMsg .. '"')
+		local hasStagedChanges = fn.system("git diff --staged --quiet || echo -n 'yes'") == "yes"
+		if not hasStagedChanges then
+			local stderr = fn.system { "git", "add", "-A" }
+			if nonZeroExit(stderr) then return end
+		end
+		notify('󰊢 Smart Commit…\n"' .. newMsg .. '"')
+
 		local stderr = fn.system { "git", "commit", "-m", newMsg }
-		if vim.v.shell_error ~= 0 then notify(stderr, "warn") end
-	end)
-end
+		if nonZeroExit(stderr) then return end
 
----@param prefillMsg? string
-function M.addCommit(prefillMsg)
-	local stderr = fn.system { "git", "add", "-A" }
-	if vim.v.shell_error ~= 0 then
-		notify(stderr, "warn")
-		return
-	end
-	M.smartCommit(prefillMsg)
-end
-
----@param prefillMsg? string
-function M.addCommitPush(prefillMsg)
-	vim.cmd("silent update")
-	if not isInGitRepo() then return end
-	if not prefillMsg then prefillMsg = "" end
-	setGitCommitAppearance()
-
-	vim.ui.input({ prompt = " 󰊢 Commit Message", default = prefillMsg }, function(commitMsg)
-		if not commitMsg then return end -- aborted input modal
-		local validMsg, newMsg = processCommitMsg(commitMsg)
-		if not validMsg then -- if msg invalid, run again to fix the msg
-			M.addCommitPush(newMsg)
-			return
-		end
-
-		notify('󰊢 Add-Commit-Push\n"' .. newMsg .. '"')
-
-		local stderr = fn.system("git add -A && git commit -m '" .. newMsg .. "'")
-		if vim.v.shell_error ~= 0 then
-			stderr = stderr:gsub("%s*$", "")
-			notify(stderr, "warn")
-			return
-		end
-
-		fn.jobstart("git pull ; git push", gitShellOpts)
+		if opts.push then fn.jobstart("git pull ; git push", gitShellOpts) end
 	end)
 end
 
@@ -243,10 +223,10 @@ end
 ---visual mode: link to selected lines
 ---@param justOpenRepo any -- don't link to file with a specific commit, just link to repo
 function M.githubUrl(justOpenRepo)
-	if not isInGitRepo() then return end
+	if notInGitRepo() then return end
 
 	local filepath = fn.expand("%:p")
-	local gitroot = fn.system("git --no-optional-locks rev-parse --show-toplevel")
+	local gitroot = vim.fn.system("git --no-optional-locks rev-parse --show-toplevel")
 	local pathInRepo = filepath:sub(#gitroot + 1)
 
 	local pathInRepoEncoded = pathInRepo:gsub("%s+", "%%20")
@@ -284,7 +264,7 @@ end
 ---GitHub API liminations, only the last 100 issues are shown.
 ---@param state "open"|"closed"|"all"
 function M.issueSearch(state)
-	if not isInGitRepo() then return end
+	if notInGitRepo() then return end
 
 	local repo = fn.system("git remote -v | head -n1"):match(":.*%."):sub(2, -2)
 
@@ -324,9 +304,10 @@ function M.issueSearch(state)
 
 	vim.ui.select(
 		issues,
-		{ prompt = "Select Issue:", kind = "github_issue", format_item = formatter },
+		{ prompt = " Select Issue:", kind = "github_issue", format_item = formatter },
 		function(choice)
 			if not choice then return end
+			-- TODO non-Mac opener
 			fn.system { "open", choice.html_url }
 		end
 	)
