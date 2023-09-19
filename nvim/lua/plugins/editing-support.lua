@@ -119,7 +119,7 @@ return {
 	{ -- auto-convert string and f/template string
 		"chrisgrieser/nvim-puppeteer",
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		ft = { "python", "javascript", "typescript" },
+		lazy = false, -- plugin lazy-loads itself
 		dev = true,
 	},
 	{ -- virtual text context at the end of a scope
