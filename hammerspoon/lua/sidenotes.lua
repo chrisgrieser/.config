@@ -1,5 +1,4 @@
 local M = {}
---------------------------------------------------------------------------------
 
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
@@ -12,11 +11,20 @@ local function updateCounter() hs.execute(u.exportPath .. "sketchybar --trigger 
 -- update counter in sketchybar
 -- enlarge on startup
 SidenotesWatcher = u.aw
-	.new(function(appName, event, sidenotes)
-		if appName ~= "SideNotes" then return end
+	.new(function(appName, event, app)
+		-- i.e., run on any event related to sidenotes
+		if appName == "SideNotes" then updateCounter() end
 
-		updateCounter() -- i.e., run on any event related to sidenotes
-		if event == u.aw.launched then wu.moveResize(sidenotes:mainWindow(), wu.sideNotesWide) end
+		-- FIX sidenotes always starting with a narrow width.
+		-- HACK Cannot use launch event as trigger for this, since SideNotes
+		-- launches in its special hidden mode
+		if appName == "SideNotes" and event == u.aw.activated then
+			local win = app:mainWindow()
+			local relWidth = win:frame().w / win:screen():frame().w
+			-- on startup, SideNotes gets a width of ~18%, while sidenotesNarrow is ~20%
+			local isStartUp = relWidth < wu.sidenotesNarrow.w
+			if isStartUp then wu.moveResize(win, wu.sideNotesWide) end
+		end
 	end)
 	:start()
 
@@ -79,9 +87,7 @@ if not u.isReloading() then
 end
 
 -- 2. Every morning (safety redundancy)
-MorningTimerForSidenotes = hs.timer
-	.doAt("07:00", "01d", M.reminderToSidenotes , true)
-	:start()
+MorningTimerForSidenotes = hs.timer.doAt("07:00", "01d", M.reminderToSidenotes, true):start()
 
 --------------------------------------------------------------------------------
 

@@ -110,10 +110,3 @@ matches:
         type: shell
         params:
           cmd: 'ls ~"/Library/Application Support/obsidian/"*".asar" | xargs -I {} basename {} | cut -d"." -f1-3 | cut -d"-" -f2'
-  - trigger: "!resolution"
-    replace: "{{resolution}}"
-    vars:
-      - name: resolution
-        type: shell
-        params:
-          cmd: 'osascript -e ''tell application "Finder" to get bounds of window of desktop'' | cut -d '' '' -f 3,4'
