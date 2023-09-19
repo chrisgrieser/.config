@@ -202,7 +202,7 @@ keymap("n", "<leader>gL", function() cmd.Telescope("git_bcommits") end, { desc =
 keymap("n", "<leader>gb", function() cmd.Telescope("git_branches") end, { desc = " Branches" })
 
 -- My utils
-keymap("n", "<leader>gc", function() require("funcs.small-git").commit() end, { desc = "󰊢 Commit" })
+keymap("n", "<leader>gc", function() require("funcs.small-git").smartCommit() end, { desc = "󰊢 Commit" })
 keymap("n", "<leader>gC", function() require("funcs.small-git").addCommit() end, { desc = "󰊢 Add-Commit" })
 keymap("n", "<leader>gg", function() require("funcs.small-git").addCommitPush() end, { desc = "󰊢 Add-Commit-Push" })
 keymap("n", "<leader>gm", function() require("funcs.small-git").amendNoEditPushForce() end, { desc = "󰊢 Amend-No-Edit & Force Push" })
