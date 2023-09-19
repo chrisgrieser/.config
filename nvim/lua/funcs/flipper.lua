@@ -19,6 +19,8 @@ local generalWords = {
 	{ "true", "false" },
 
 	-- opposites
+	{ "closed", "open" },
+	{ "close", "open" },
 	{ "show", "hide" },
 	{ "top", "bottom" },
 	{ "up", "down" },

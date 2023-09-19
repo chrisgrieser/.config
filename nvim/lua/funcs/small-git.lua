@@ -7,9 +7,31 @@ local fn = vim.fn
 local commitMaxLen = 72
 local smallCommitMaxLen = 50
 local useSoundOnMacOs = true
+local issueIcons = {
+	closedIssue = "🟣",
+	openIssue = "🟢",
+	openPR = "🟦",
+	mergedPR = "🟨",
+	closedPR = "🟥",
+}
 
 --------------------------------------------------------------------------------
 -- HELPERS
+
+-- open with the OS-specific shell command
+---@param url string
+local function openUrl(url)
+	local opener
+	if fn.has("macunix") == 1 then
+		opener = "open"
+	elseif fn.has("linux") == 1 then
+		opener = "xdg-open"
+	elseif fn.has("win64") == 1 or fn.has("win32") == 1 then
+		opener = "start"
+	end
+	local openCommand = string.format("%s '%s' >/dev/null 2>&1", opener, url)
+	fn.system(openCommand)
+end
 
 ---send notification
 ---@param msg string
@@ -17,7 +39,7 @@ local useSoundOnMacOs = true
 local function notify(msg, level)
 	if not level then level = "info" end
 	local pluginName = "Small Git"
-	vim.notify(msg, vim.log.levels[level:upper()], { title = pluginName })
+	vim.notify(vim.trim(msg), vim.log.levels[level:upper()], { title = pluginName })
 end
 
 ---checks if last command was successful, if not, notify
@@ -25,8 +47,7 @@ end
 ---@return boolean
 ---@param errorMsg string
 local function nonZeroExit(errorMsg)
-	errorMsg = errorMsg:gsub("%s+$", "")
-	notify("Error: " .. errorMsg, "warn")
+	notify("Error: " .. vim.trim(errorMsg), "warn")
 	return vim.v.shell_error ~= 0
 end
 
@@ -52,10 +73,10 @@ end
 local gitShellOpts = {
 	stdout_buffered = true,
 	stderr_buffered = true,
-	detach = true, -- run even when quitting nvim
+	detach = true, -- finish even when quitting nvim
 	on_stdout = function(_, data)
 		if data[1] == "" and #data == 1 then return end
-		local output = table.concat(data, "\n"):gsub("%s*$", "")
+		local output = vim.trim(table.concat(data, "\n"))
 
 		-- no need to notify that the pull in `git pull ; git push` yielded no update
 		if output:find("Current branch .* is up to date") then return end
@@ -67,7 +88,7 @@ local gitShellOpts = {
 	end,
 	on_stderr = function(_, data)
 		if data[1] == "" and #data == 1 then return end
-		local output = table.concat(data, "\n"):gsub("%s*$", "")
+		local output = vim.trim(table.concat(data, "\n"))
 
 		-- git often puts non-errors into STDERR, therefore checking here again
 		-- whether it is actually an error or not
@@ -143,7 +164,9 @@ end
 
 --------------------------------------------------------------------------------
 
-function M.amendNoEditPushForce()
+---@param opts? object
+function M.amendNoEditPushForce(opts)
+	if not opts then opts = {} end
 	vim.cmd("silent update")
 	if notInGitRepo() then return end
 
@@ -153,11 +176,13 @@ function M.amendNoEditPushForce()
 	local stderr = fn.system("git add -A && git commit --amend --no-edit")
 	if nonZeroExit(stderr) then return end
 
-	fn.jobstart("git push --force", gitShellOpts)
+	if opts.forcePush then fn.jobstart("git push --force", gitShellOpts) end
 end
 
 ---@param prefillMsg? string
-function M.amendAndPushForce(prefillMsg)
+---@param opts? object
+function M.amendAndPushForce(opts, prefillMsg)
+	if not opts then opts = {} end
 	vim.cmd("silent update")
 	if notInGitRepo() then return end
 
@@ -176,11 +201,11 @@ function M.amendAndPushForce(prefillMsg)
 			return
 		end
 
-		notify('󰊢 Amend & Force Push…\n"' .. newMsg .. '"')
+		notify('󰊢 Amend\n"' .. newMsg .. '"')
 		local stderr = fn.system("git add -A && git commit --amend -m '" .. newMsg .. "'")
 		if nonZeroExit(stderr) then return end
 
-		fn.jobstart("git push --force", gitShellOpts)
+		if opts.forcePush then fn.jobstart("git push --force", gitShellOpts) end
 	end)
 end
 
@@ -221,11 +246,11 @@ end
 ---opens current buffer in the browser & copies the link to the clipboard
 ---normal mode: link to file
 ---visual mode: link to selected lines
----@param justOpenRepo any -- don't link to file with a specific commit, just link to repo
-function M.githubUrl(justOpenRepo)
+---@param justRepo any -- don't link to file with a specific commit, just link to repo
+function M.githubUrl(justRepo)
 	if notInGitRepo() then return end
 
-	local filepath = fn.expand("%:p")
+	local filepath = vim.fn.expand("%:p")
 	local gitroot = vim.fn.system("git --no-optional-locks rev-parse --show-toplevel")
 	local pathInRepo = filepath:sub(#gitroot + 1)
 
@@ -240,9 +265,9 @@ function M.githubUrl(justOpenRepo)
 	local isNormalMode = fn.mode() == "n"
 	local url = "https://github.com/" .. remote
 
-	if not justOpenRepo and isNormalMode then
+	if not justRepo and isNormalMode then
 		url = url .. ("/blob/%s/%s"):format(branch, pathInRepoEncoded)
-	elseif not justOpenRepo and isVisualMode then
+	elseif not justRepo and isVisualMode then
 		local location
 		if selStart == selEnd then -- one-line-selection
 			location = "#L" .. tostring(selStart)
@@ -251,27 +276,28 @@ function M.githubUrl(justOpenRepo)
 		else
 			location = "#L" .. tostring(selEnd) .. "-L" .. tostring(selStart)
 		end
-
-		-- example: https://github.com/chrisgrieser/.config/blob/4cc310490c4492be3fe144d572635012813c7822/nvim/lua/config/textobject-keymaps.lua#L8-L20
 		url = url .. ("/blob/%s/%s%s"):format(hash, pathInRepoEncoded, location)
 	end
 
-	vim.fn.system { "open", url } -- macOS cli
+	openUrl(url)
 	fn.setreg("+", url) -- copy to clipboard
 end
 
----Choose a GitHub issues from the current repo to open in the browser. Due to
----GitHub API liminations, only the last 100 issues are shown.
----@param state "open"|"closed"|"all"
-function M.issueSearch(state)
+---Choose a GitHub issue/PR from the current repo to open in the browser.
+---(Due to -GitHub API liminations, only the last 100 issues are shown.)
+---@param state? "open"|"closed"|"all" default "all"
+function M.issuesAndPrs(state)
 	if notInGitRepo() then return end
+	if not state then state = "all" end
 
 	local repo = fn.system("git remote -v | head -n1"):match(":.*%."):sub(2, -2)
 
 	-- TODO figure out how to make a proper http request in nvim
-	local rawJSON = fn.system(
-		([[curl -sL "https://api.github.com/repos/%s/issues?per_page=100&state=%s"]]):format(repo, state)
+	local rawJsonUrl = ("https://api.github.com/repos/%s/issues?per_page=100&state=%s"):format(
+		repo,
+		state
 	)
+	local rawJSON = fn.system { "curl", "-sL", rawJsonUrl }
 	local issues = vim.json.decode(rawJSON)
 
 	if not issues or #issues == 0 then
@@ -280,35 +306,32 @@ function M.issueSearch(state)
 		return
 	end
 
-	local function formatter(issue)
+	local function issueListFormatter(issue)
 		local isPR = issue.pull_request ~= nil
 		local merged = isPR and issue.pull_request.merged_at ~= nil
 
 		local icon
 		if issue.state == "open" and isPR then
-			icon = "🟦 "
+			icon = issueIcons.openPR
 		elseif issue.state == "closed" and isPR and merged then
-			icon = "🟨 "
+			icon = issueIcons.mergedPR
 		elseif issue.state == "closed" and isPR and not merged then
-			icon = "🟥 "
+			icon = issueIcons.closedPR
 		elseif issue.state == "closed" and not isPR then
-			icon = "🟣 "
+			icon = issueIcons.closedIssue
 		elseif issue.state == "open" and not isPR then
-			icon = "🟢 "
+			icon = issueIcons.openIssue
 		end
-		if issue.title:lower():find("request") or issue.title:find("FR") then icon = icon .. "🙏 " end
-		if issue.title:lower():find("bug") then icon = icon .. "🪲 " end
 
-		return icon .. "#" .. issue.number .. " " .. issue.title
+		return icon .. " #" .. issue.number .. " " .. issue.title
 	end
 
 	vim.ui.select(
 		issues,
-		{ prompt = " Select Issue:", kind = "github_issue", format_item = formatter },
+		{ prompt = " Select Issue:", kind = "github_issue", format_item = issueListFormatter },
 		function(choice)
 			if not choice then return end
-			-- TODO non-Mac opener
-			fn.system { "open", choice.html_url }
+			openUrl(choice.html_url)
 		end
 	)
 end
