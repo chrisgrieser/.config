@@ -5,6 +5,7 @@ def hello() -> None:
     """Test."""
     numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     used_numbers = []
+    test = f"he{l}lo"
 
     print("hello world")
 
