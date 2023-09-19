@@ -125,8 +125,12 @@ keymap("n", "]", ">", { desc = "indent" })
 keymap("n", "~", function() require("funcs.quality-of-life").toggleCase() end, { desc = "better ~" })
 
 -- WORD FLIPPER
--- stylua: ignore
-keymap( "n", "Ö", function() require("funcs.flipper").flipWord() end, { desc = "flip words / toggle casing" })
+keymap(
+	"n",
+	"Ö",
+	function() require("funcs.flipper").flipWord() end,
+	{ desc = "󱀽 flip words / toggle casing" }
+)
 
 -- [O]pen new scope / brace
 keymap(
@@ -144,7 +148,7 @@ keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
 -- LINE & CHARACTER MOVEMENT
 
 keymap("n", "<Down>", function()
-	if vim.api.nvim_win_get_cursor(0)[1] == fn.line("$") then return end
+	if api.nvim_win_get_cursor(0)[1] == fn.line("$") then return end
 	return [[<cmd>. move +1<CR>==]]
 end, { desc = "󰜮 Move Line Down", expr = true })
 keymap("n", "<Up>", function()
@@ -307,7 +311,6 @@ keymap("i", "<D-e>", "``<Left>", { desc = "  Inline Code" })
 ---@return string name of the current project
 local function projectName()
 	local pwd = vim.loop.cwd()
-	if not pwd then return "" end
 	return vim.fs.basename(pwd)
 end
 
@@ -369,8 +372,18 @@ keymap("n", "gf", function() cmd.Telescope("lsp_references") end, { desc = "󰒕
 
 keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename" })
 keymap("n", "<leader>V", ":IncRename <C-r><C-w>", { desc = "󰒕 IncRename (cword)" })
-keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Symbols", unique = false })
-keymap("n", "gw", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols" })
+keymap(
+	"n",
+	"gs",
+	function() cmd.Telescope("lsp_document_symbols") end,
+	{ desc = "󰒕 Symbols", unique = false }
+)
+keymap(
+	"n",
+	"gw",
+	function() cmd.Telescope("lsp_workspace_symbols") end,
+	{ desc = "󰒕 Workspace Symbols" }
+)
 
 --------------------------------------------------------------------------------
 -- stylua: ignore
