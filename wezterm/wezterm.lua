@@ -1,7 +1,8 @@
 --------------------------------------------------------------------------------
 -- THEME SETTINGS
 
--- the first theme in the list is used
+-- INFO the first theme in the list is used
+-- rest are themes I already tried and also like
 local darkThemes = {
 	"SynthWave (Gogh)",
 	"cyberpunk",
@@ -107,8 +108,8 @@ local keybindings = {
 	{ key = "n", mods = "META", action = act.SendString("~") },
 
 	-- Emulates macOS' cmd-right & cmd-left
-	{ key = "LeftArrow", mods = "CMD", action = act.SendKey { key = "A", mods = "CTRL" },},
-	{ key = "RightArrow", mods = "CMD", action = act.SendKey { key = "E", mods = "CTRL" },},
+	{ key = "LeftArrow", mods = "CMD", action = act.SendKey { key = "A", mods = "CTRL" } },
+	{ key = "RightArrow", mods = "CMD", action = act.SendKey { key = "E", mods = "CTRL" } },
 
 	{ -- for adding inline code to a commit, hotkey consistent with GitHub
 		key = "e",
