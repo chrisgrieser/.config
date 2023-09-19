@@ -55,10 +55,6 @@ nnoremap zl :contextMenu
 exmap nextSuggestion obcommand obsidian-languagetool-plugin:ltjump-to-next-suggestion
 nnoremap ge :nextSuggestion
 
-" accept suggestion
-exmap acceptSuggestion obcommand obsidian-languagetool-plugin:ltaccept-suggestion-1
-nnoremap z. :acceptSuggestion
-
 " INFO doesn't work in reading mode: https://github.com/timhor/obsidian-editor-shortcuts/issues/20
 exmap nextHeading obcommand obsidian-editor-shortcuts:goToNextHeading
 exmap prevHeading obcommand obsidian-editor-shortcuts:goToPrevHeading

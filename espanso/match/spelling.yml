@@ -350,3 +350,7 @@ matches:
     replace: it
     propagate_casing: true
     word: true
+  - trigger: oru
+    replace: our
+    propagate_casing: true
+    word: true
