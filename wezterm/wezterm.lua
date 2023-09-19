@@ -1,43 +1,39 @@
 --------------------------------------------------------------------------------
 -- THEME SETTINGS
 
-local lightOpacity = 0.94
-local darkOpacity = 0.91
-
-local darkTheme = "cyberpunk"
-local lightTheme = "Atelier Cave Light (base16)"
-
--- okay-ish themes
----@diagnostic disable: unused-local
+-- the first theme in the list is used
 local darkThemes = {
+	"SynthWave (Gogh)",
+	"cyberpunk",
 	"Paraiso Dark",
 	"Afterglow (Gogh)",
 	"Tinacious Design (Dark)",
-	"SynthWave (Gogh)",
 	"duckbones",
 	"MaterialDesignColors",
 	"Kanagawa (Gogh)",
 	"TokyoNight (Gogh)",
 	"ChallengerDeep",
-	"cyberpunk",
 }
 local lightThemes = {
-	"OneHalfLight",
-	"Google Light (Gogh)",
-	"Paraiso (light) (terminal.sexy)",
-	"seoulbones_light",
-	"BlulocoLight (Gogh)",
 	"Edge Light (base16)",
+	"seoulbones_light",
+	"Google Light (Gogh)",
+	"OneHalfLight",
+	"Atelier Cave Light (base16)",
+	"Paraiso (light) (terminal.sexy)",
+	"BlulocoLight (Gogh)",
 	"Atelierdune (light) (terminal.sexy)",
 	"Atelier Lakeside Light (base16)",
 	"Cupcake (base16)",
 	"Ivory Light (terminal.sexy)",
 	"Sakura (base16)",
 	"Solar Flare Light (base16)",
-	"Atelier Cave Light (base16)",
 	"Silk Light (base16)",
 }
----@diagnostic enable: unused-local
+
+local lightOpacity = 0.94
+local darkOpacity = 0.91
+
 --------------------------------------------------------------------------------
 -- UTILS
 
@@ -54,7 +50,7 @@ local fontSize = 28
 if isAtMother then
 	fontSize = 26
 elseif isAtOffice then
-	fontSize = 31
+	fontSize = 30
 end
 
 --------------------------------------------------------------------------------
@@ -114,7 +110,7 @@ local keybindings = {
 	{ key = "LeftArrow", mods = "CMD", action = act.SendKey { key = "A", mods = "CTRL" },},
 	{ key = "RightArrow", mods = "CMD", action = act.SendKey { key = "E", mods = "CTRL" },},
 
-	{ -- for adding inline code to a commit, hotkey consistent with GitHub's
+	{ -- for adding inline code to a commit, hotkey consistent with GitHub
 		key = "e",
 		mods = "CMD",
 		action = act.Multiple {
@@ -276,7 +272,7 @@ local config = {
 		fade_out_duration_ms = 150,
 		target = "CursorColor",
 	},
-	color_scheme = theme.autoScheme(darkTheme, lightTheme),
+	color_scheme = theme.autoScheme(darkThemes[1], lightThemes[1]),
 	window_background_opacity = theme.autoOpacity(darkOpacity, lightOpacity),
 	bold_brightens_ansi_colors = "BrightAndBold",
 	max_fps = isAtMother and 40 or 60,
