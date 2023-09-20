@@ -4,8 +4,7 @@
 <dict>
 	<key>fallbacks</key>
 	<array>
-		<string>features.websearch.google.fallback</string>
-		<string>hyper-seek.C950FDC3-9DD1-427D-82D5-2FC76BE7858E</string>
+		<string>user.workflow.CF354046-C536-4644-9807-2D44D9AC7516.C16E37C8-CCD7-4E12-8580-F48FEE5112C0</string>
 	</array>
 	<key>showContacts</key>
 	<false/>

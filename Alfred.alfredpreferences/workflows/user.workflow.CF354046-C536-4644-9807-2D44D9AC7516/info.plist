@@ -47,6 +47,29 @@
 				<false/>
 			</dict>
 		</array>
+		<key>C16E37C8-CCD7-4E12-8580-F48FEE5112C0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E0294F25-25E9-4D75-A042-047FE2AF1D91</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>FCCFADF4-51AA-4D3C-A46C-96B5B1379397</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Ducky Search</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>EC1B0B5F-26D6-43F4-BEE2-52834356253E</key>
 		<array>
 			<dict>
@@ -71,34 +94,6 @@
 	<string>DDGR</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./search-selection.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>inboundconfig</key>
-			<dict>
-				<key>externalid</key>
-				<string>search-selection</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>DD75F164-F04B-4A1C-84BD-49B4068C8E88</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -142,35 +137,21 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./search-for-link.sh</string>
+				<string>./search-selection.sh</string>
 				<key>type</key>
 				<integer>8</integer>
+			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>search-selection</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>10797BFB-ECCC-404B-9A55-B91951068BC9</string>
+			<string>DD75F164-F04B-4A1C-84BD-49B4068C8E88</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>E6BFAD6E-029F-480F-AD49-21705DD25C3D</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -224,6 +205,97 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>E6BFAD6E-029F-480F-AD49-21705DD25C3D</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./search-for-link.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>10797BFB-ECCC-404B-9A55-B91951068BC9</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>text</key>
+				<string>Google: {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.fallback</string>
+			<key>uid</key>
+			<string>C16E37C8-CCD7-4E12-8580-F48FEE5112C0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>searcher</key>
+				<integer>1635215215</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.systemwebsearch</string>
+			<key>uid</key>
+			<string>E0294F25-25E9-4D75-A042-047FE2AF1D91</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://duckduckgo.com/?q={query}+!ducky&amp;kl=$region</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>FCCFADF4-51AA-4D3C-A46C-96B5B1379397</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -258,6 +330,13 @@
 			<key>ypos</key>
 			<real>190</real>
 		</dict>
+		<key>C16E37C8-CCD7-4E12-8580-F48FEE5112C0</key>
+		<dict>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>400</real>
+		</dict>
 		<key>DD75F164-F04B-4A1C-84BD-49B4068C8E88</key>
 		<dict>
 			<key>colorindex</key>
@@ -266,6 +345,13 @@
 			<real>185</real>
 			<key>ypos</key>
 			<real>35</real>
+		</dict>
+		<key>E0294F25-25E9-4D75-A042-047FE2AF1D91</key>
+		<dict>
+			<key>xpos</key>
+			<real>250</real>
+			<key>ypos</key>
+			<real>400</real>
 		</dict>
 		<key>E6BFAD6E-029F-480F-AD49-21705DD25C3D</key>
 		<dict>
@@ -288,6 +374,15 @@
 			<real>30</real>
 			<key>ypos</key>
 			<real>35</real>
+		</dict>
+		<key>FCCFADF4-51AA-4D3C-A46C-96B5B1379397</key>
+		<dict>
+			<key>note</key>
+			<string>ducky search</string>
+			<key>xpos</key>
+			<real>250</real>
+			<key>ypos</key>
+			<real>515</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

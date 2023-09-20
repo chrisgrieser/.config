@@ -200,10 +200,7 @@ keymap("n", "<leader>or", "<cmd>set relativenumber!<CR>", { desc = " Relative
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line Numbers" })
 keymap("n", "<leader>os", "<cmd>set spell!<CR>", { desc = "󰓆 spellcheck" })
 keymap("n", "<leader>ol", "<cmd>LspRestart<CR>", { desc = "󰒕 LspRestart" })
-keymap("n", "<leader>ol", function ()
-	vim.lsp.inlay_hint(0, nil)
-end, { desc = "󰒕 Inlay Hint" })
-
+keymap("n", "<leader>oh", function() vim.lsp.inlay_hint(0, nil) end, { desc = "󰒕 Inlay Hint" })
 
 keymap("n", "<leader>od", function() -- codespell-ignore
 	if vim.diagnostic.is_disabled(0) then
@@ -213,24 +210,8 @@ keymap("n", "<leader>od", function() -- codespell-ignore
 	end
 end, { desc = " Diagnostics" })
 
-keymap("n", "<leader>ow", function()
-	local wrapOn = vim.opt_local.wrap:get()
-	if wrapOn then
-		vim.opt_local.wrap = false
-		vim.opt_local.colorcolumn = vim.opt.colorcolumn:get()
-		pcall(vim.keymap.del, "n", "A", { buffer = true })
-		pcall(vim.keymap.del, "n", "I", { buffer = true })
-		pcall(vim.keymap.del, "n", "H", { buffer = true })
-		pcall(vim.keymap.del, "n", "L", { buffer = true })
-	else
-		vim.opt_local.wrap = true
-		vim.opt_local.colorcolumn = ""
-		keymap("n", "A", "g$a", { buffer = true })
-		keymap("n", "I", "g^i", { buffer = true })
-		keymap("n", "H", "g^", { buffer = true, unique = false })
-		keymap("n", "L", "g$", { buffer = true, unique = false })
-	end
-end, { desc = "󰖶 Wrap" })
+-- stylua: ignore
+keymap("n", "<leader>ow", function () require("funcs.quality-of-life").toggleWrapping() end, { desc = "󰖶 Wrap" })
 
 -- FIX scrolloff
 keymap("n", "<leader>of", function() vim.opt.scrolloff = 13 end, { desc = "󰘖 Fix Scrolloff" })

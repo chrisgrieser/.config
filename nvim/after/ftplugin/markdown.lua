@@ -1,18 +1,14 @@
 local keymap = vim.keymap.set
 local optl = vim.opt_local
 local u = require("config.utils")
+local fn = vim.fn
 --------------------------------------------------------------------------------
 
 -- less nesting in md
 optl.tabstop = 4
 
 -- Enable wrapping lines at start
-optl.wrap = true
-optl.colorcolumn = ""
-keymap("n", "A", "g$a", { buffer = true })
-keymap("n", "I", "g^i", { buffer = true })
-keymap("n", "H", "g^", { buffer = true })
-keymap("n", "L", "g$", { buffer = true })
+vim.defer_fn(function() require("funcs.quality-of-life").toggleWrapping() end, 1)
 
 -- decrease line length without zen mode plugins
 -- filetype condition ensure sub-filtypes like "markdown.cody_history" are not affected
@@ -36,7 +32,6 @@ keymap("n", "gs", function ()
 	require("telescope.builtin").lsp_document_symbols { ignore_symbols = {}, }
 end, { desc = "󰒕 Markdown Headings", buffer = true })
 
-
 -- Format Table
 keymap(
 	"n",
@@ -51,6 +46,24 @@ keymap("n", "<localleader>i", function()
 	local htmlImage = line:gsub("!%[(.-)%]%((.-)%)", '<img src="%2" alt="%1" width=70%%>')
 	vim.api.nvim_set_current_line(htmlImage)
 end, { desc = "  MD image to <img>", buffer = true })
+
+-- searchlink
+keymap({ "n", "x" }, "<localleader>k", function()
+	local query
+	if fn.mode() == "n" then
+		u.normal([["zciw]])
+	else
+		u.normal([["zc]])
+	end
+	query = fn.getreg("z")
+	local jsonResponse = fn.system(("ddgr --num=1 --json '%s'"):format(query))
+	local link = vim.json.decode(jsonResponse)[1].url
+	local mdlink = ("[%s](%s)"):format(query, link)
+	fn.setreg("z", mdlink)
+	u.normal([["zp]])
+end, { desc = " SearchLink (ddgr)", buffer = true })
+
+--------------------------------------------------------------------------------
 
 -- link textobj
 keymap(
