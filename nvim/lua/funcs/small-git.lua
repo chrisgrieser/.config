@@ -7,7 +7,11 @@ local defaultConfig = {
 	commitMaxLen = 72, -- https://stackoverflow.com/questions/2290016/git-commit-messages-50-72-formatting
 	smallCommitMaxLen = 50,
 	useSoundOnMacOs = true,
-	enforceConventionalCommits = true,
+	enforceConventionalCommits = {
+		enabled = true,
+		-- stylua: ignore
+		keywords = { "chore", "build", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs", "improv", "break" },
+	},
 	issueIcons = {
 		closedIssue = "🟣",
 		openIssue = "🟢",
@@ -129,10 +133,9 @@ local function processCommitMsg(commitMsg)
 	end
 
 	if config.enforceConventionalCommits then
-	-- stylua: ignore
-	local conventionalCommits = { "chore", "build", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs", "improv", "break" }
+		-- stylua: ignore
 		local firstWord = commitMsg:match("^%w+")
-		if not vim.tbl_contains(conventionalCommits, firstWord) then
+		if not vim.tbl_contains(config.enforceConventionalCommits.keywords, firstWord) then
 			notify("Not using a Conventional Commits keyword.", "warn")
 			return false, commitMsg
 		end
@@ -151,12 +154,20 @@ local function setGitCommitAppearance()
 		callback = function()
 			local winNs = 1
 			vim.api.nvim_win_set_hl_ns(0, winNs)
-			fn.matchadd("tooLong", ([[.\{%s}\zs.*\ze]]):format(config.commitMaxLen - 1))
-			vim.api.nvim_set_hl(winNs, "tooLong", { link = "#E06C75" })
+
+			-- \zs = start of match
+			-- \ze = end of match
 			fn.matchadd(
 				"almostLong",
-				([[.\{%s,%s}\zs.*\ze]]):format(config.smallCommitMaxLen, config.commitMaxLen - 2)
+				([[.\{%s}\zs.\{1,%s}\ze]]):format(
+					config.smallCommitMaxLen - 1,
+					config.commitMaxLen - config.smallCommitMaxLen
+				)
 			)
+			vim.api.nvim_set_hl(winNs, "almostLong", { link = "WarningMsg" })
+
+			fn.matchadd("tooLong", ([[.\{%s}\zs.*\ze]]):format(config.commitMaxLen - 1))
+			vim.api.nvim_set_hl(winNs, "tooLong", { link = "ErrorMsg" })
 
 			-- for treesitter highlighting
 			vim.bo.filetype = "gitcommit"
