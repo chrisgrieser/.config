@@ -14,13 +14,13 @@ return {
 			},
 			{
 				"<leader>gm",
-				function() require("tinygit").amend { forcePush = true, noEdit = true } end,
+				function() require("tinygit").amendNoEdit { forcePush = true } end,
 				desc = "󰊢 Amend-No-Edit & Push",
 			},
 			{
 				"<leader>gM",
-				function() require("tinygit").amend { forcePush = true } end,
-				desc = "󰊢 Amend & Push",
+				function() require("tinygit").amendOnlyMsg { forcePush = true } end,
+				desc = "󰊢 Amend Only Msg & Push",
 			},
 			{
 				"<leader>gi",
