@@ -7,22 +7,34 @@ local lspsToAutoinstall = {
 	"yamlls",
 	"jsonls",
 	"cssls",
-	"emmet_ls",           -- css & html completion
-	"pyright",            -- python LSP
+	"emmet_ls", -- css & html completion
+	"pyright", -- python LSP
 	"jedi_language_server", -- python (has refactor code actions & better hovers)
-	"ruff_lsp",           -- python
-	"marksman",           -- markdown
-	"biome",              -- ts/js/json
-	"tsserver",           -- ts/js
-	"bashls",             -- used for zsh
-	"taplo",              -- toml
+	"ruff_lsp", -- python
+	"marksman", -- markdown
+	"biome", -- ts/js/json
+	"tsserver", -- ts/js
+	"bashls", -- used for zsh
+	"taplo", -- toml
 	"html",
-	"ltex",               -- latex/languagetool (requires `openjdk`)
+	"ltex", -- latex/languagetool (requires `openjdk`)
 }
 
 --------------------------------------------------------------------------------
 
+---@class lspConfiguration see :h lspconfig-setup
+---@field settings? table <string, table>
+---@field root_dir? function(filename, bufnr)
+---@field filetypes? string[]
+---@field init_options? table <string, string|table|boolean>
+---@field on_attach? function(client, bufnr)
+---@field capabilities? table <string, string|table|boolean|function>
+---@field cmd? string[]
+---@field autostart? boolean
+
+---@type table<string, lspConfiguration>
 local lspServers = {}
+
 for _, lsp in pairs(lspsToAutoinstall) do
 	lspServers[lsp] = {}
 end
@@ -41,7 +53,7 @@ lspServers.lua_ls = {
 			},
 			diagnostics = {
 				disable = { "trailing-space" }, -- formatter already does that
-				severity = {            -- https://github.com/LuaLS/lua-language-server/wiki/Settings#diagnosticsseverity
+				severity = { -- https://github.com/LuaLS/lua-language-server/wiki/Settings#diagnosticsseverity
 					["return-type-mismatch"] = "Error",
 				},
 			},
@@ -51,7 +63,7 @@ lspServers.lua_ls = {
 				arrayIndex = "Disable",
 			},
 			workspace = { checkThirdParty = false }, -- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
-			format = { enable = false },       -- using stylua instead
+			format = { enable = false }, -- using stylua instead
 		},
 	},
 }
@@ -66,7 +78,7 @@ lspServers.ruff_lsp = {
 		settings = { organizeImports = false },
 	},
 	-- Disable hover in favor of jedi
-	on_attach = function(client, _) client.server_capabilities.hoverProvider = false end,
+	on_attach = function(client) client.server_capabilities.hoverProvider = false end,
 }
 
 -- add fix-all code actions to formatting
@@ -90,7 +102,7 @@ lspServers.pyright = {
 		},
 	},
 	-- Disable hover in favor of jedi
-	on_attach = function(client, _) client.server_capabilities.hoverProvider = false end,
+	on_attach = function(client) client.server_capabilities.hoverProvider = false end,
 }
 
 lspServers.jedi_language_server = {
@@ -167,7 +179,7 @@ lspServers.tsserver = {
 		},
 	},
 	-- disable formatting, since taken care of by biome
-	on_attach = function(client, _)
+	on_attach = function(client)
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
 	end,
@@ -203,6 +215,7 @@ local function getDictWords(dictfile)
 	for word in io.lines(dictfile) do
 		table.insert(words, word)
 	end
+	return words
 end
 
 -- INFO path to java runtime engine (the builtin from ltex does not seem to work)
@@ -221,7 +234,7 @@ lspServers.ltex = {
 			dictionary = { ["en-US"] = getDictWords(u.linterConfigFolder .. "/spellfile-vim-ltex.add") },
 			disabledRules = {
 				["en-US"] = {
-					"EN_QUOTES",       -- don't expect smart quotes
+					"EN_QUOTES", -- don't expect smart quotes
 					"WHITESPACE_RULE", -- too many false positives
 					"PUNCTUATION_PARAGRAPH_END", -- too many false positives
 					"CURRENCY",
@@ -257,7 +270,7 @@ end
 local function lspCurrentTokenHighlight()
 	u.colorschemeMod("LspReferenceWrite", { underdashed = true }) -- i.e. definition
 	u.colorschemeMod("LspReferenceRead", { underdotted = true }) -- i.e. reference
-	u.colorschemeMod("LspReferenceText", {})                    -- too much noise, as is underlines e.g. strings
+	u.colorschemeMod("LspReferenceText", {}) -- too much noise, as is underlines e.g. strings
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(args)
 			local bufnr = args.buf
@@ -300,10 +313,7 @@ return {
 	},
 	{ -- configure LSPs
 		"neovim/nvim-lspconfig",
-		dependencies = {
-			"folke/neodev.nvim",
-			opts = { library = { plugins = false } }, -- PERF too slow
-		},
+		dependencies = "folke/neodev.nvim",
 		init = function()
 			setupAllLsps()
 			lspCurrentTokenHighlight()
