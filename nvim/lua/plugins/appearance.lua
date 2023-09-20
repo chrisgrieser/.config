@@ -85,8 +85,7 @@ return {
 		},
 	},
 	{ -- emphasized undo/redos
-		"chrisgrieser/highlight-undo.nvim",
-		-- my fork, PENDING https://github.com/tzachar/highlight-undo.nvim/pull/19
+		"tzachar/highlight-undo.nvim",
 		keys = { "u", "U" },
 		opts = {
 			duration = 250,
