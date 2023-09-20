@@ -3,40 +3,11 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{ -- undo history
-		"mbbill/undotree",
-		keys = {
-			{ "<leader>ut", vim.cmd.UndotreeToggle, desc = "󰕌  Undotree" },
-		},
-		init = function()
-			vim.g.undotree_WindowLayout = 3
-			vim.g.undotree_DiffpanelHeight = 10
-			vim.g.undotree_ShortIndicators = 1
-			vim.g.undotree_SplitWidth = 30
-			vim.g.undotree_DiffAutoOpen = 0
-			vim.g.undotree_SetFocusWhenToggle = 1
-			vim.g.undotree_HelpLine = 1
-
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "undotree",
-				callback = function()
-					vim.opt_local.list = false
-					vim.keymap.set("n", "<D-w>", vim.cmd.UndotreeToggle, { buffer = true })
-					vim.defer_fn(function()
-						vim.keymap.set("n", "J", "6j", { buffer = true })
-						vim.keymap.set("n", "K", "6k", { buffer = true })
-					end, 1)
-				end,
-			})
-		end,
-	},
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function()
-			local foo = {}
-
 			-- add brackets to cmp completions, e.g. "function" -> "function()"
 			local ok, cmp = pcall(require, "cmp")
 			if ok then
@@ -112,6 +83,33 @@ return {
 			}
 		end,
 	},
+	{ -- undo history
+		"mbbill/undotree",
+		keys = {
+			{ "<leader>ut", vim.cmd.UndotreeToggle, desc = "󰕌  Undotree" },
+		},
+		init = function()
+			vim.g.undotree_WindowLayout = 3
+			vim.g.undotree_DiffpanelHeight = 10
+			vim.g.undotree_ShortIndicators = 1
+			vim.g.undotree_SplitWidth = 30
+			vim.g.undotree_DiffAutoOpen = 0
+			vim.g.undotree_SetFocusWhenToggle = 1
+			vim.g.undotree_HelpLine = 1
+
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "undotree",
+				callback = function()
+					vim.opt_local.list = false
+					vim.keymap.set("n", "<D-w>", vim.cmd.UndotreeToggle, { buffer = true })
+					vim.defer_fn(function()
+						vim.keymap.set("n", "J", "6j", { buffer = true })
+						vim.keymap.set("n", "K", "6k", { buffer = true })
+					end, 1)
+				end,
+			})
+		end,
+	},
 	{ -- PENDING: https://github.com/Djancyp/regex.nvim/pull/2
 		"chrisgrieser/regex.nvim",
 		cmd = "RegexHelper", -- called in javascript & typescript ftplugins
@@ -126,7 +124,6 @@ return {
 	},
 	{ -- virtual text context at the end of a scope
 		"haringsrob/nvim_context_vt",
-		enabled = false,
 		event = "VeryLazy",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		opts = {
@@ -144,7 +141,6 @@ return {
 	},
 	{ -- basically autopair, but for keywords
 		"RRethy/nvim-treesitter-endwise",
-		enabled = false,
 		event = "InsertEnter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
@@ -209,7 +205,6 @@ return {
 	},
 	{ -- fixes scrolloff at end of file
 		"Aasim-A/scrollEOF.nvim",
-		enabled = false,
 		event = "CursorMoved",
 		opts = true,
 	},
@@ -240,7 +235,6 @@ return {
 	},
 	{ -- killring & highlights on `p`
 		"gbprod/yanky.nvim",
-		enabled = false,
 		keys = {
 			-- https://github.com/gbprod/yanky.nvim#%EF%B8%8F-special-put
 			-- INFO not binding p/P in visual mode, since I prefer my switch of
@@ -263,7 +257,6 @@ return {
 	},
 	{ -- which-key
 		"folke/which-key.nvim",
-		enabled = false,
 		event = "VeryLazy",
 		config = function()
 			require("which-key").setup {

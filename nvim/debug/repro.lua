@@ -1,5 +1,3 @@
--- DO NOT change the paths and don't remove the colorscheme
-
 local root = vim.fn.fnamemodify("./.repro", ":p")
 for _, name in ipairs { "config", "data", "state", "cache" } do
 	vim.env[("XDG_%s_HOME"):format(name:upper())] = root .. "/" .. name
@@ -8,11 +6,10 @@ end
 --------------------------------------------------------------------------------
 
 local plugins = {
-	{
-		"windwp/nvim-autopairs",
-		opts = true,
-	}
+	{ "windwp/nvim-autopairs", opts = true }
 }
+
+vim.keymap.set("n", "=", "jjjjjjj")
 
 --------------------------------------------------------------------------------
 

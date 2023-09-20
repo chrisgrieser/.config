@@ -48,6 +48,9 @@ return {
 			{ "<leader>gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Add Buffer" },
 			{ "<leader>gv", "<cmd>Gitsigns preview_hunk<CR>", desc = "󰊢 Preview Hunk Diff" },
 			{ "<leader>g?", "<cmd>Gitsigns blame_line<CR>", desc = "󰊢 Blame Line" },
+			{ "gh", "<cmd>Gitsigns next_hunk<CR>", desc = "󰊢 Next Hunk" },
+			{ "gH", "<cmd>Gitsigns prev_hunk<CR>", desc = "󰊢 Prev Hunk" },
+			{ "gh", "<cmd>Gitsigns select_hunk<CR>", mode = { "o", "x" }, desc = "󱡔 󰊢 hunk textobj" },
 		},
 		opts = {
 			max_file_length = 10000,

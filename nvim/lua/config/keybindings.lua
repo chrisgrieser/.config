@@ -56,9 +56,7 @@ keymap("n", "dä", function()
 	u.notify("", " Mark deleted.", "trace")
 end, { desc = " Delete Mark" })
 
--- Hunks and Changes
-keymap("n", "gh", "<cmd>Gitsigns next_hunk<CR>zv", { desc = "󰊢 Next Hunk" })
-keymap("n", "gH", "<cmd>Gitsigns prev_hunk<CR>zv", { desc = "󰊢 Previous Hunk" })
+-- Changes
 keymap("n", "gc", "g;", { desc = "Goto older change" })
 keymap("n", "gC", "g,", { desc = "Goto newer change" })
 
@@ -111,6 +109,7 @@ keymap("n", "dQ", require("funcs.quickfix").deleteList, { desc = " Empty Quic
 -- stylua: ignore
 keymap("n", "qw", function () require("funcs.quality-of-life").commentHr() end, { desc = " Horizontal Divider" })
 keymap("n", "wq", '"zyy"zpkqqj', { desc = " Duplicate Line as Comment", remap = true })
+
 
 -- WHITESPACE CONTROL
 keymap("n", "=", "mzO<Esc>`z", { desc = "  blank above" })
