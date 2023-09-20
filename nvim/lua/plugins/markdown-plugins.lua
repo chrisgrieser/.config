@@ -10,20 +10,6 @@ return {
 			markdown = { fat_headlines = false },
 		},
 	},
-	{
-		"AckslD/nvim-FeMaco.lua",
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		opts = {},
-		init = function()
-			u.setupFiletypeKeymap(
-				"markdown",
-				"n",
-				"<localleader>c",
-				function() require("femaco.edit").edit_code_block() end,
-				{ desc = " Edit Code Block" }
-			)
-		end,
-	},
 	{ -- auto-bullets for markdown-like filetypes
 		"dkarter/bullets.vim",
 		ft = "markdown",

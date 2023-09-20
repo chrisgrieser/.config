@@ -111,12 +111,6 @@ return {
 			})
 		end,
 	},
-	{ -- PENDING: https://github.com/Djancyp/regex.nvim/pull/2
-		"chrisgrieser/regex.nvim",
-		cmd = "RegexHelper", -- called in javascript & typescript ftplugins
-		dev = true,
-		opts = true,
-	},
 	{ -- auto-convert string and f/template string
 		"chrisgrieser/nvim-puppeteer",
 		dependencies = "nvim-treesitter/nvim-treesitter",
