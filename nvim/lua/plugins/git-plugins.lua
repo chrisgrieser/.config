@@ -14,7 +14,7 @@ return {
 			},
 			{
 				"<leader>gm",
-				function() require("tinygit").amend { forcePush = true, noedit = true } end,
+				function() require("tinygit").amend { forcePush = true, noEdit = true } end,
 				desc = "󰊢 Amend-No-Edit & Push",
 			},
 			{
