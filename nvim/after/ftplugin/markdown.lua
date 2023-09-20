@@ -12,7 +12,7 @@ optl.colorcolumn = ""
 keymap("n", "A", "g$a", { buffer = true })
 keymap("n", "I", "g^i", { buffer = true })
 keymap("n", "H", "g^", { buffer = true })
-keymap("n", "I", "g$", { buffer = true })
+keymap("n", "L", "g$", { buffer = true })
 
 -- decrease line length without zen mode plugins
 -- filetype condition ensure sub-filtypes like "markdown.cody_history" are not affected
