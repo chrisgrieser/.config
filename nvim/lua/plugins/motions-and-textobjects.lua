@@ -17,7 +17,7 @@ return {
 		event = "UIEnter", -- cannot load on key due to highlights
 		keys = {
 			{ "m", "<Plug>(matchup-%)", desc = "Goto Matching Bracket" },
-			{ "k", "<Plug>(matchup-i%)", mode = { "o", "x" }, desc = "󱡔 Any Block textobj" },
+			{ "k", "<Plug>(matchup-i%)", mode = "o", desc = "󱡔 Any Block textobj" },
 		},
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
