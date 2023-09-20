@@ -39,6 +39,11 @@ local function customHighlights()
 		("guisp=%s guifg=%s gui=underline term=underline"):format(commentColor, commentColor)
 	)
 
+
+	overwriteHighlight("LspReferenceWrite", { underdashed = true }) -- i.e. definition
+	overwriteHighlight("LspReferenceRead", { underdotted = true }) -- i.e. reference
+	overwriteHighlight("LspReferenceText", {}) -- too much noise, as is underlines e.g. strings
+
 	-- make `MatchParen` stand out more (orange to close to rainbow brackets)
 	overwriteHighlight("MatchParen", { reverse = true })
 
