@@ -1,42 +1,37 @@
--- DOCS https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
--- Default configs: https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
-
 local u = require("config.utils")
 
 --------------------------------------------------------------------------------
 
-local lsp_servers = {
+local lspsToAutoinstall = {
 	"lua_ls",
 	"yamlls",
 	"jsonls",
 	"cssls",
-	"emmet_ls", -- css & html completion
-	"pyright", -- python LSP
+	"emmet_ls",           -- css & html completion
+	"pyright",            -- python LSP
 	"jedi_language_server", -- python (has refactor code actions & better hovers)
-	"ruff_lsp", -- python
-	"marksman", -- markdown
-	"biome", -- ts/js/json
-	"tsserver", -- ts/js
-	"bashls", -- used for zsh
-	"taplo", -- toml
+	"ruff_lsp",           -- python
+	"marksman",           -- markdown
+	"biome",              -- ts/js/json
+	"tsserver",           -- ts/js
+	"bashls",             -- used for zsh
+	"taplo",              -- toml
 	"html",
-	"ltex", -- latex/languagetool (requires `openjdk`)
+	"ltex",               -- latex/languagetool (requires `openjdk`)
 }
 
 --------------------------------------------------------------------------------
 
-local servers = {}
-for _, lsp in pairs(lsp_servers) do
-	servers[lsp] = {}
+local lspServers = {}
+for _, lsp in pairs(lspsToAutoinstall) do
+	lspServers[lsp] = {}
 end
 
 --------------------------------------------------------------------------------
 -- LUA
 
-servers.lua_ls = {
-	-- DOCS 
-	-- https://github.com/LuaLS/lua-language-server/wiki/Annotations#annotations
-	-- https://github.com/LuaLS/lua-language-server/wiki/Settings
+lspServers.lua_ls = {
+	-- DOCS https://github.com/LuaLS/lua-language-server/wiki/Settings
 	settings = {
 		Lua = {
 			completion = {
@@ -46,7 +41,7 @@ servers.lua_ls = {
 			},
 			diagnostics = {
 				disable = { "trailing-space" }, -- formatter already does that
-				severity = { -- https://github.com/LuaLS/lua-language-server/wiki/Settings#diagnosticsseverity
+				severity = {            -- https://github.com/LuaLS/lua-language-server/wiki/Settings#diagnosticsseverity
 					["return-type-mismatch"] = "Error",
 				},
 			},
@@ -56,17 +51,22 @@ servers.lua_ls = {
 				arrayIndex = "Disable",
 			},
 			workspace = { checkThirdParty = false }, -- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
-			format = { enable = false }, -- using stylua instead
+			format = { enable = false },       -- using stylua instead
 		},
 	},
 }
 
 --------------------------------------------------------------------------------
 -- PYTHON
--- https://github.com/astral-sh/ruff-lsp#settings
--- disable, since already included in FixAll when ruff-rules include "I"
-conf.init_options.ruff_lsp = {
-	settings = { organizeImports = false },
+
+lspServers.ruff_lsp = {
+	-- DOCS https://github.com/astral-sh/ruff-lsp#settings
+	init_options = {
+		-- disable, since already included in FixAll when ruff-rules include "I"
+		settings = { organizeImports = false },
+	},
+	-- Disable hover in favor of jedi
+	on_attach = function(client, _) client.server_capabilities.hoverProvider = false end,
 }
 
 -- add fix-all code actions to formatting
@@ -82,123 +82,124 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- Disable hover in favor of jedi
-conf.on_attach.ruff_lsp = function(client, _) client.server_capabilities.hoverProvider = false end
-conf.on_attach.pyright = function(client, _) client.server_capabilities.hoverProvider = false end
-
--- the docs say it's "initializationOptions", but it's actually "init_options"
-conf.init_options.jedi_language_server = {
-	diagnostics = { enable = true },
+lspServers.pyright = {
+	-- DOCS https://github.com/microsoft/pyright/blob/main/docs/configuration.md
+	settings = {
+		python = {
+			analysis = { diagnosticMode = "workspace" },
+		},
+	},
+	-- Disable hover in favor of jedi
+	on_attach = function(client, _) client.server_capabilities.hoverProvider = false end,
 }
 
-conf.settings.pyright = {
-	-- DOCS https://microsoft.github.io/pyright/#/configuration
-	python = {
-		analysis = {
-			diagnosticMode = "workspace",
-		},
+lspServers.jedi_language_server = {
+	init_options = {
+		diagnostics = { enable = true },
 	},
 }
 
 --------------------------------------------------------------------------------
--- EMMET
--- don't pollute completions for js and ts with stuff I don't need
-conf.filetypes.emmet_ls = { "css", "html" }
+-- JS/TS/CSS
 
---------------------------------------------------------------------------------
--- CSS
--- https://github.com/microsoft/vscode-css-languageservice/blob/main/src/services/lintRules.ts
-conf.settings.cssls = {
-	css = {
-		lint = {
-			compatibleVendorPrefixes = "ignore",
-			vendorPrefix = "ignore",
-			unknownVendorSpecificProperties = "ignore",
+lspServers.emmet_ls = {
+	-- don't pollute completions for js and ts with stuff I don't need
+	filetypes = { "html", "css" },
+}
 
-			unknownProperties = "ignore", -- duplicate with stylelint
+-- DOCS https://github.com/microsoft/vscode-css-languageservice/blob/main/src/services/lintRules.ts
+lspServers.cssls = {
+	settings = {
+		css = {
+			colorDecorators = { enable = true }, -- not supported yet
+			lint = {
+				compatibleVendorPrefixes = "ignore",
+				vendorPrefix = "ignore",
+				unknownVendorSpecificProperties = "ignore",
 
-			duplicateProperties = "warning",
-			emptyRules = "warning",
-			importStatement = "warning",
-			zeroUnits = "warning",
-			fontFaceProperties = "warning",
-			hexColorLength = "warning",
-			argumentsInColorFunction = "warning",
-			unknownAtRules = "warning",
-			ieHack = "warning",
-			propertyIgnoredDueToDisplay = "warning",
+				unknownProperties = "ignore", -- duplicate with stylelint
+
+				duplicateProperties = "warning",
+				emptyRules = "warning",
+				importStatement = "warning",
+				zeroUnits = "warning",
+				fontFaceProperties = "warning",
+				hexColorLength = "warning",
+				argumentsInColorFunction = "warning",
+				unknownAtRules = "warning",
+				ieHack = "warning",
+				propertyIgnoredDueToDisplay = "warning",
+			},
 		},
-		colorDecorators = { enable = true }, -- not supported yet
 	},
 }
 
---------------------------------------------------------------------------------
--- TSSERVER
--- https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
-
-conf.settings.tsserver = {
-	completions = { completeFunctionCalls = true },
-	diagnostics = {
+lspServers.tsserver = {
+	-- DOCS https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
+	settings = {
+		completions = { completeFunctionCalls = true },
 		-- "cannot redeclare block-scoped variable" -> not useful when applied to JXA
-		ignoredCodes = { 2451 },
-	},
-	typescript = {
-		inlayHints = {
-			includeInlayEnumMemberValueHints = true,
-			includeInlayFunctionLikeReturnTypeHints = true,
-			includeInlayFunctionParameterTypeHints = true,
-			includeInlayParameterNameHints = "all",
-			includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-			includeInlayPropertyDeclarationTypeHints = true,
-			includeInlayVariableTypeHints = true,
-			includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+		diagnostics = { ignoredCodes = { 2451 } },
+		-- enable all the inlay hints
+		typescript = {
+			inlayHints = {
+				includeInlayEnumMemberValueHints = true,
+				includeInlayFunctionLikeReturnTypeHints = true,
+				includeInlayFunctionParameterTypeHints = true,
+				includeInlayParameterNameHints = "all",
+				includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+				includeInlayPropertyDeclarationTypeHints = true,
+				includeInlayVariableTypeHints = true,
+				includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+			},
+		},
+		javascript = {
+			inlayHints = {
+				includeInlayEnumMemberValueHints = true,
+				includeInlayFunctionLikeReturnTypeHints = true,
+				includeInlayFunctionParameterTypeHints = true,
+				includeInlayParameterNameHints = "all",
+				includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+				includeInlayPropertyDeclarationTypeHints = true,
+				includeInlayVariableTypeHints = true,
+				includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+			},
 		},
 	},
-	javascript = {
-		inlayHints = {
-			includeInlayEnumMemberValueHints = true,
-			includeInlayFunctionLikeReturnTypeHints = true,
-			includeInlayFunctionParameterTypeHints = true,
-			includeInlayParameterNameHints = "all",
-			includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-			includeInlayPropertyDeclarationTypeHints = true,
-			includeInlayVariableTypeHints = true,
-			includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-		},
-	},
+	-- disable formatting, since taken care of by biome
+	on_attach = function(client, _)
+		client.server_capabilities.documentFormattingProvider = false
+		client.server_capabilities.documentRangeFormattingProvider = false
+	end,
 }
-
--- disable formatting, since taken care of by biome https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts#neovim-08
-conf.on_attach.tsserver = function(client, _)
-	client.server_capabilities.documentFormattingProvider = false
-	client.server_capabilities.documentRangeFormattingProvider = false
-end
 
 --------------------------------------------------------------------------------
--- JSON
--- https://github.com/Microsoft/vscode/tree/main/extensions/json-language-features/server#configuration
-conf.init_options.jsonls = {
-	provideFormatter = false, -- use `biome` instead
+-- JSON/YAML
+
+lspServers.jsonls = {
+	-- DOCS https://github.com/Microsoft/vscode/tree/main/extensions/json-language-features/server#configuration
+	init_options = {
+		-- disable formatting, since taken care of by biome
+		provideFormatter = false,
+	},
 }
 
--- YAML
-conf.settings.yamlls = {
-	yaml = { format = { enable = false } },
+lspServers.yamlls = {
+	settings = {
+		-- disable formatting, since taken care of by prettier
+		yaml = { format = { enable = false } },
+	},
 }
 
 --------------------------------------------------------------------------------
 -- LTEX
--- https://valentjn.github.io/ltex/settings.html
-
--- disable for bibtex and text files
-conf.filetypes.ltex = { "gitcommit", "markdown" }
 
 -- HACK since reading external file with the method described in the ltex docs
 -- does not work
-local dictfile = u.linterConfigFolder .. "/spellfile-vim-ltex.add"
-local fileExists = vim.loop.fs_stat(dictfile) ~= nil
-local words = {}
-if fileExists then
+local function getDictWords(dictfile)
+	local fileDoesNotExist = vim.loop.fs_stat(dictfile) == nil
+	if fileDoesNotExist then return {} end
+	local words = {}
 	for word in io.lines(dictfile) do
 		table.insert(words, word)
 	end
@@ -207,70 +208,56 @@ end
 -- INFO path to java runtime engine (the builtin from ltex does not seem to work)
 -- here: using `openjdk`, w/ default M1 mac installation path (`brew install openjdk`)
 -- HACK set need to set $JAVA_HOME, since `ltex.java.path` does not seem to work
-local brewPrefix = vim.fn.system("brew --prefix"):gsub("\n$", "")
+local brewPrefix = vim.trim(vim.fn.system("brew --prefix"))
 vim.env.JAVA_HOME = brewPrefix .. "/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
 
-conf.settings.ltex = {
-	ltex = {
-		completionEnabled = false,
-		language = "en-US", -- default language, can be set per-file via markdown yaml header
-		dictionary = { ["en-US"] = words },
-		disabledRules = {
-			["en-US"] = {
-				"EN_QUOTES", -- don't expect smart quotes
-				"WHITESPACE_RULE", -- too many false positives
-				"PUNCTUATION_PARAGRAPH_END", -- too many false positives
-				"CURRENCY",
+lspServers.ltex = {
+	-- DOCS https://valentjn.github.io/ltex/settings.html
+	filetypes = { "gitcommit", "markdown" }, -- disable for bibtex and text files
+	settings = {
+		ltex = {
+			completionEnabled = false,
+			language = "en-US", -- default language, can be set per-file via markdown yaml header
+			dictionary = { ["en-US"] = getDictWords(u.linterConfigFolder .. "/spellfile-vim-ltex.add") },
+			disabledRules = {
+				["en-US"] = {
+					"EN_QUOTES",       -- don't expect smart quotes
+					"WHITESPACE_RULE", -- too many false positives
+					"PUNCTUATION_PARAGRAPH_END", -- too many false positives
+					"CURRENCY",
+				},
 			},
-		},
-		diagnosticSeverity = {
-			default = "hint",
-			MORFOLOGIK_RULE_EN_US = "warning", -- spelling
-		},
-		additionalRules = { enablePickyRules = true },
-		markdown = {
-			-- ignore links https://valentjn.github.io/ltex/settings.html#ltexmarkdownnodes
-			nodes = { Link = "dummy" },
+			diagnosticSeverity = {
+				default = "hint",
+				MORFOLOGIK_RULE_EN_US = "warning", -- spelling
+			},
+			additionalRules = { enablePickyRules = true },
+			markdown = {
+				-- ignore links https://valentjn.github.io/ltex/settings.html#ltexmarkdownnodes
+				nodes = { Link = "dummy" },
+			},
 		},
 	},
 }
 
 --------------------------------------------------------------------------------
--- SETUP ALL LSP
--- enable capabilities for plugins
-local lspCapabilities = vim.lsp.protocol.make_client_capabilities()
-
--- Enable snippets-completion (for nvim_cmp)
-lspCapabilities.textDocument.completion.completionItem.snippetSupport = true
-
--- Enable folding (for nvim-ufo)
-lspCapabilities.textDocument.foldingRange = {
-	dynamicRegistration = false,
-	lineFoldingOnly = true,
-}
 
 local function setupAllLsps()
-	-- INFO must be before the lsp-config setup of lua-ls
-	-- plugins are helpful e.g. for plenary, but slow down lsp loading
-	require("neodev").setup { library = { plugins = false } }
+	-- Enable snippets-completion (nvim_cmp) and folding (nvim-ufo)
+	local lspCapabilities = vim.lsp.protocol.make_client_capabilities()
+	lspCapabilities.textDocument.completion.completionItem.snippetSupport = true
+	lspCapabilities.textDocument.foldingRange = { dynamicRegistration = false, lineFoldingOnly = true }
 
-	for _, lsp in pairs(lsp_servers) do
-		require("lspconfig")[lsp].setup {
-			capabilities = lspCapabilities,
-			settings = conf.settings[lsp], -- if no settings, will assign nil and therefore do nothing
-			on_attach = conf.on_attach[lsp],
-			filetypes = conf.filetypes[lsp],
-			init_options = conf.init_options[lsp],
-		}
+	for lsp, config in pairs(lspServers) do
+		config.capabilities = lspCapabilities
+		require("lspconfig")[lsp].setup(config)
 	end
 end
-
---------------------------------------------------------------------------------
 
 local function lspCurrentTokenHighlight()
 	u.colorschemeMod("LspReferenceWrite", { underdashed = true }) -- i.e. definition
 	u.colorschemeMod("LspReferenceRead", { underdotted = true }) -- i.e. reference
-	u.colorschemeMod("LspReferenceText", {}) -- too much noise, as is underlines e.g. strings
+	u.colorschemeMod("LspReferenceText", {})                    -- too much noise, as is underlines e.g. strings
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(args)
 			local bufnr = args.buf
@@ -309,11 +296,14 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		event = "VeryLazy",
 		dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
-		opts = { ensure_installed = lsp_servers },
+		opts = { ensure_installed = lspsToAutoinstall },
 	},
 	{ -- configure LSPs
 		"neovim/nvim-lspconfig",
-		dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config
+		dependencies = {
+			"folke/neodev.nvim",
+			opts = { library = { plugins = false } }, -- PERF too slow
+		},
 		init = function()
 			setupAllLsps()
 			lspCurrentTokenHighlight()
