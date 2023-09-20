@@ -4,7 +4,6 @@ alias co="ct git checkout"
 alias gg="ct git checkout -" # go to previous branch/commit, like `zz` switching to last directory
 alias gs='git status'
 alias ga="git add"
-alias gM="git commit --amend" # amend + edit commit msg
 alias push="ct git push"
 alias pull="ct git pull"
 alias g.='cd "$(git rev-parse --show-toplevel)"' # goto git root
@@ -69,6 +68,13 @@ function fixup {
 # amend no-edit
 function gm {
 	git add -A && git commit --amend --no-edit
+	separator
+	gitlog -n 4
+}
+
+# amend message only
+function gM() {
+	git commit --amend
 	separator
 	gitlog -n 4
 }
@@ -221,14 +227,15 @@ function gb {
 #───────────────────────────────────────────────────────────────────────────────
 # GIT ADD, COMMIT, (PULL) & PUSH
 
-# first arg: commit msg
-# remaining args: files to add (no remaining args = all files)
-# no args: "chore" as commit msg & all files added
+# smart commit: 
+# - if there are staged changes, commit them
+# - if there are no changes, stage all changes (`git add -A`) and then commit
+# - if commit message is empty use `chore` as default message
 function ac() {
 	if ! command -v ct &>/dev/null; then print "\033[1;33mchromaterm not installed. (\`pip3 install chromaterm\`)\033[0m" && return 1; fi
 	local large_files commit_msg msg_length
 
-	# guard 1: accidental pushing of large files
+	# guard: accidental pushing of large files
 	large_files=$(find . -not -path "**/.git/**" -not -path "**/*.pxd/**" \
 		-not -path "**/node_modules/**" -not -path "**/*venv*/**" -size +10M)
 	if [[ -n "$large_files" ]]; then
@@ -236,26 +243,20 @@ function ac() {
 		print "$large_files\033[0m"
 		return 1
 	fi
-	# guard 2: forgot quotes
-	if [[ $# -gt 1 && ! -f "$2" ]]; then
-		print "\033[1;33m'$2' not a file, aborting.\033[0m"
+
+	# fill in empty commit msg
+	[[ $# -eq 0 ]] && commit_msg=chore
+	commit_msg=$1
+
+	# ensure no overlength of commit msg
+	msg_length=${#commit_msg}
+	if [[ $msg_length -gt 72 ]]; then
+		echo "Commit Message too long ($msg_length chars)."
+		commit_msg=${commit_msg::72}
+		print -z "acp \"$commit_msg\"" # put back into buffer
 		return 1
 	fi
 
-	# commit msg
-	if [[ $# -eq 0 ]]; then
-		commit_msg=chore
-	else
-		commit_msg=$1
-		# ensure no overlength of commit msg
-		msg_length=${#commit_msg}
-		if [[ $msg_length -gt 72 ]]; then
-			echo "Commit Message too long ($msg_length chars)."
-			commit_msg=${commit_msg::72}
-			print -z "acp \"$commit_msg\"" # put back into buffer
-			return 1
-		fi
-	fi
 	# adding
 	if [[ $# -gt 1 ]]; then
 		shift
