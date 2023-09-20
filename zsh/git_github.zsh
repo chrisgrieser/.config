@@ -19,25 +19,41 @@ alias rel='ct make --silent release'
 
 # commit messages longer than 50 chars: yellow, longer than 72 chars: red
 ZSH_HIGHLIGHT_REGEXP+=('^(acp?|gc -m|git commit -m) ".{72,}"' 'fg=white,bold,bg=red')
-ZSH_HIGHLIGHT_REGEXP+=('^(acp?|gc -m|git commit -m) ".{51,71}"' 'fg=black,bg=yellow') 
+ZSH_HIGHLIGHT_REGEXP+=('^(acp?|gc -m|git commit -m) ".{51,71}"' 'fg=black,bg=yellow')
 
 # highlight conventional commits
-ZSH_HIGHLIGHT_REGEXP+=('(feat|fix|test|perf|build|ci|revert|refactor|chore|docs|break|improv):' 'fg=blue,bold') 
+ZSH_HIGHLIGHT_REGEXP+=('(feat|fix|test|perf|build|ci|revert|refactor|chore|docs|break|improv):' 'fg=blue,bold')
 
 #───────────────────────────────────────────────────────────────────────────────
 
 function pr {
+	if ! command -v gh &>/dev/null; then print "\033[1;33mgh not installed.\033[0m" && return 1; fi
+	
 	# set default remote, if it lacks one
 	[[ -z "$(gh repo set-default --view)" ]] && gh repo set-default
 
-	gh pr create --web --fill || gh pr create --web
+	gh pr create --web --fill || gh pr create --web || return 1
 
-	# set remote to my fork for subsequent additions
+	# set remote to my fork for subsequent additions, if the fork was created successfully
 	local reponame
 	reponame=$(basename "$PWD")
 	git remote set-url origin "git@github.com:chrisgrieser/$reponame.git"
 }
 
+# select a fork repo to delete
+function deletefork() {
+	if ! command -v gh &>/dev/null; then print "\033[1;33mgh not installed.\033[0m" && return 1; fi
+	if ! command -v fzf &>/dev/null; then print "\033[1;33mfzf not installed.\033[0m" && return 1; fi
+	
+	to_delete=$(gh repo list --fork | 
+		fzf --no-sort |
+		cut -d" " -f1)
+	[[ -z "$to_delete" ]] && return 0
+
+	gh repo delete "$to_delete"
+}
+
+# select a recent commit to fixup
 function fixup {
 	local cutoff=15 # CONFIG
 

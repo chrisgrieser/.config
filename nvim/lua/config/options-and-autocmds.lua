@@ -53,6 +53,7 @@ opt.titlestring = '%{expand("%:p")}'
 opt.startofline = true -- motions like "G" also move to the first char
 opt.virtualedit = "block" -- visual-block mode can select beyond end of line
 opt.mouse = "" -- disable mouse completely
+opt.jumpoptions = "stack" -- https://www.reddit.com/r/neovim/comments/16nead7/can_someone_explain_set_jumpoptionsstack/
 
 -- Search
 opt.ignorecase = true
