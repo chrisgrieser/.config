@@ -42,20 +42,6 @@ return {
 			end)
 		end,
 	},
-	{ -- structural search & replace
-		"cshuaimin/ssr.nvim",
-		keys = {
-			-- stylua: ignore
-			{ "<leader>fs", function() require("ssr").open() end, mode = { "n", "x" }, desc = "󰔶 Structural Replace" },
-		},
-		opts = { border = require("config.utils").borderStyle },
-		config = function()
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "ssr",
-				callback = function() vim.opt_local.sidescrolloff = 1 end,
-			})
-		end,
-	},
 	{ -- editable quickfix list
 		"gabrielpoca/replacer.nvim",
 		opts = { rename_files = false },

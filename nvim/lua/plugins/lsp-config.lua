@@ -2,22 +2,22 @@ local u = require("config.utils")
 
 --------------------------------------------------------------------------------
 
-local lspsToAutoinstall = {
+local lsps = {
 	"lua_ls",
 	"yamlls",
 	"jsonls",
 	"cssls",
-	"emmet_ls", -- css & html completion
+	"emmet_ls", -- css/html completion
 	"pyright", -- python LSP
 	"jedi_language_server", -- python (has refactor code actions & better hovers)
-	"ruff_lsp", -- python
+	"ruff_lsp", -- python linter
 	"marksman", -- markdown
-	"biome", -- ts/js/json
+	"biome", -- ts/js/json linter/formatter
 	"tsserver", -- ts/js
 	"bashls", -- used for zsh
 	"taplo", -- toml
 	"html",
-	"ltex", -- latex/languagetool (requires `openjdk`)
+	"ltex", -- languagetool (requires `openjdk`)
 }
 
 --------------------------------------------------------------------------------
@@ -33,16 +33,16 @@ local lspsToAutoinstall = {
 ---@field autostart? boolean
 
 ---@type table<string, lspConfiguration>
-local lspServers = {}
+local serverConfigs = {}
 
-for _, lsp in pairs(lspsToAutoinstall) do
-	lspServers[lsp] = {}
+for _, lsp in pairs(lsps) do
+	serverConfigs[lsp] = {}
 end
 
 --------------------------------------------------------------------------------
 -- LUA
 
-lspServers.lua_ls = {
+serverConfigs.lua_ls = {
 	-- DOCS https://github.com/LuaLS/lua-language-server/wiki/Settings
 	settings = {
 		Lua = {
@@ -72,7 +72,7 @@ lspServers.lua_ls = {
 -- PYTHON
 
 -- DOCS https://github.com/astral-sh/ruff-lsp#settings
-lspServers.ruff_lsp = {
+serverConfigs.ruff_lsp = {
 	init_options = {
 		-- disable, since already included in FixAll when ruff-rules include "I"
 		settings = { organizeImports = false },
@@ -92,7 +92,7 @@ lspServers.ruff_lsp = {
 }
 
 -- DOCS https://github.com/microsoft/pyright/blob/main/docs/configuration.md
-lspServers.pyright = {
+serverConfigs.pyright = {
 	settings = {
 		python = {
 			analysis = { diagnosticMode = "workspace" },
@@ -102,7 +102,7 @@ lspServers.pyright = {
 	on_attach = function(client) client.server_capabilities.hoverProvider = false end,
 }
 
-lspServers.jedi_language_server = {
+serverConfigs.jedi_language_server = {
 	init_options = {
 		diagnostics = { enable = true },
 	},
@@ -111,13 +111,13 @@ lspServers.jedi_language_server = {
 --------------------------------------------------------------------------------
 -- JS/TS/CSS
 
-lspServers.emmet_ls = {
+serverConfigs.emmet_ls = {
 	-- don't pollute completions for js and ts with stuff I don't need
 	filetypes = { "html", "css" },
 }
 
 -- DOCS https://github.com/microsoft/vscode-css-languageservice/blob/main/src/services/lintRules.ts
-lspServers.cssls = {
+serverConfigs.cssls = {
 	settings = {
 		css = {
 			colorDecorators = { enable = true }, -- not supported yet
@@ -144,7 +144,7 @@ lspServers.cssls = {
 }
 
 -- DOCS https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
-lspServers.tsserver = {
+serverConfigs.tsserver = {
 	settings = {
 		completions = { completeFunctionCalls = true },
 		-- "cannot redeclare block-scoped variable" -> not useful when applied to JXA
@@ -186,14 +186,14 @@ lspServers.tsserver = {
 -- JSON/YAML
 
 -- DOCS https://github.com/Microsoft/vscode/tree/main/extensions/json-language-features/server#configuration
-lspServers.jsonls = {
+serverConfigs.jsonls = {
 	init_options = {
 		-- disable formatting, since taken care of by biome
 		provideFormatter = false,
 	},
 }
 
-lspServers.yamlls = {
+serverConfigs.yamlls = {
 	settings = {
 		-- disable formatting, since taken care of by prettier
 		yaml = { format = { enable = false } },
@@ -220,7 +220,7 @@ local brewPrefix = vim.trim(vim.fn.system("brew --prefix"))
 vim.env.JAVA_HOME = brewPrefix .. "/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
 
 -- DOCS https://valentjn.github.io/ltex/settings.html
-lspServers.ltex = {
+serverConfigs.ltex = {
 	filetypes = { "gitcommit", "markdown" }, -- disable for bibtex and text files
 	settings = {
 		ltex = {
@@ -256,26 +256,25 @@ local function setupAllLsps()
 	lspCapabilities.textDocument.completion.completionItem.snippetSupport = true
 	lspCapabilities.textDocument.foldingRange = { dynamicRegistration = false, lineFoldingOnly = true }
 
-	for lsp, config in pairs(lspServers) do
-		config.capabilities = lspCapabilities
-		require("lspconfig")[lsp].setup(config)
+	for lsp, serverConfig in pairs(serverConfigs) do
+		serverConfig.capabilities = lspCapabilities
+		require("lspconfig")[lsp].setup(serverConfig)
 	end
 end
 
 local function lspCurrentTokenHighlight()
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(args)
-			local bufnr = args.buf
 			local capabilities = vim.lsp.get_client_by_id(args.data.client_id).server_capabilities
 			if not capabilities.documentHighlightProvider then return end
 
 			vim.api.nvim_create_autocmd("CursorHold", {
 				callback = vim.lsp.buf.document_highlight,
-				buffer = bufnr,
+				buffer = args.buf,
 			})
 			vim.api.nvim_create_autocmd("CursorMoved", {
 				callback = vim.lsp.buf.clear_references,
-				buffer = bufnr,
+				buffer = args.buf,
 			})
 		end,
 	})
@@ -301,7 +300,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		event = "VeryLazy",
 		dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
-		opts = { ensure_installed = lspsToAutoinstall },
+		opts = { ensure_installed = lsps },
 	},
 	{ -- configure LSPs
 		"neovim/nvim-lspconfig",
