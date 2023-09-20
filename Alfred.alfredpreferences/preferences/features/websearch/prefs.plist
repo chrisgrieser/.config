@@ -73,7 +73,5 @@
 			<string>https://store.steampowered.com/search/?term={query}</string>
 		</dict>
 	</dict>
-	<key>onlyShowEnabledInPrefs</key>
-	<true/>
 </dict>
 </plist>
