@@ -192,20 +192,6 @@ keymap("n", "<leader>R", function() require("funcs.maker").make() end, { desc = 
 keymap("n", "<leader>gs", function() cmd.Telescope("git_status") end, { desc = " Status" })
 keymap("n", "<leader>gl", function() cmd.Telescope("git_commits") end, { desc = " Log" })
 
--- Small Git
--- stylua: ignore start
--- keymap("n", "<leader>gc", function() require("funcs.tinygit").smartCommit() end, { desc = "󰊢 Smart-Commit" })
--- keymap("n", "<leader>gg", function() require("funcs.tinygit").smartCommit { push = true } end, { desc = "󰊢 Smart-Commit-Push" })
--- keymap("n", "<leader>gm", function() require("funcs.tinygit").amendNoEdit { forcePush = true } end, { desc = "󰊢 Amend-No-Edit & Push" })
--- keymap("n", "<leader>gM", function() require("funcs.tinygit").amend { forcePush = true } end, { desc = "󰊢 Amend & Push" })
--- keymap("n", "<leader>gp", function() require("funcs.tinygit").push()  end, { desc = "󰊢 Push" })
--- keymap({ "n", "x" }, "<leader>gu", function() require("funcs.tinygit").githubUrl() end, { desc = " GitHub Link" })
--- keymap("n", "<leader>gU", function() require("funcs.tinygit").githubUrl("repo") end, { desc = " Goto Repo" })
--- keymap("n", "<leader>gi", function() require("funcs.tinygit").issuesAndPrs("open") end, { desc = " Open Issues" })
--- keymap("n", "<leader>gI", function() require("funcs.tinygit").issuesAndPrs("closed") end, { desc = " Closed Issues" })
--- stylua: ignore end
-
-
 --------------------------------------------------------------------------------
 -- OPTION TOGGLING
 
@@ -214,6 +200,10 @@ keymap("n", "<leader>or", "<cmd>set relativenumber!<CR>", { desc = " Relative
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line Numbers" })
 keymap("n", "<leader>os", "<cmd>set spell!<CR>", { desc = "󰓆 spellcheck" })
 keymap("n", "<leader>ol", "<cmd>LspRestart<CR>", { desc = "󰒕 LspRestart" })
+keymap("n", "<leader>ol", function ()
+	
+end, { desc = "󰒕 Inlay Hint" })
+
 
 keymap("n", "<leader>od", function() -- codespell-ignore
 	if vim.diagnostic.is_disabled(0) then
