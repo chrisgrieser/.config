@@ -2,12 +2,6 @@
 -- Default configs: https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
 
 local u = require("config.utils")
-local conf = {
-	settings = {},
-	on_attach = {},
-	filetypes = {},
-	init_options = {},
-}
 
 --------------------------------------------------------------------------------
 
@@ -30,30 +24,40 @@ local lsp_servers = {
 }
 
 --------------------------------------------------------------------------------
--- LUA
--- https://github.com/LuaLS/lua-language-server/wiki/Annotations#annotations
--- https://github.com/LuaLS/lua-language-server/wiki/Settings
 
-conf.settings.lua_ls = {
-	Lua = {
-		completion = {
-			callSnippet = "Replace",
-			keywordSnippet = "Replace",
-			postfix = ".", -- useful for `table.insert` and the like
-		},
-		diagnostics = {
-			disable = { "trailing-space" }, -- formatter already does that
-			severity = { -- https://github.com/LuaLS/lua-language-server/wiki/Settings#diagnosticsseverity
-				["return-type-mismatch"] = "Error",
+local servers = {}
+for _, lsp in pairs(lsp_servers) do
+	servers[lsp] = {}
+end
+
+--------------------------------------------------------------------------------
+-- LUA
+
+servers.lua_ls = {
+	-- DOCS 
+	-- https://github.com/LuaLS/lua-language-server/wiki/Annotations#annotations
+	-- https://github.com/LuaLS/lua-language-server/wiki/Settings
+	settings = {
+		Lua = {
+			completion = {
+				callSnippet = "Replace",
+				keywordSnippet = "Replace",
+				postfix = ".", -- useful for `table.insert` and the like
 			},
+			diagnostics = {
+				disable = { "trailing-space" }, -- formatter already does that
+				severity = { -- https://github.com/LuaLS/lua-language-server/wiki/Settings#diagnosticsseverity
+					["return-type-mismatch"] = "Error",
+				},
+			},
+			hint = {
+				enable = true,
+				setType = true,
+				arrayIndex = "Disable",
+			},
+			workspace = { checkThirdParty = false }, -- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
+			format = { enable = false }, -- using stylua instead
 		},
-		hint = {
-			enable = true,
-			setType = true,
-			arrayIndex = "Disable",
-		},
-		workspace = { checkThirdParty = false }, -- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
-		format = { enable = false }, -- using stylua instead
 	},
 }
 

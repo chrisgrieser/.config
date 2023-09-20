@@ -233,7 +233,7 @@ function gb {
 # - if commit message is empty use `chore` as default message
 function ac() {
 	if ! command -v ct &>/dev/null; then print "\033[1;33mchromaterm not installed. (\`pip3 install chromaterm\`)\033[0m" && return 1; fi
-	local large_files commit_msg msg_length
+	local large_files commit_msg msg_length 
 
 	# guard: accidental pushing of large files
 	large_files=$(find . -not -path "**/.git/**" -not -path "**/*.pxd/**" \
@@ -257,13 +257,8 @@ function ac() {
 		return 1
 	fi
 
-	# adding
-	if [[ $# -gt 1 ]]; then
-		shift
-		ct git add "$@"
-	else
-		ct git add -A
-	fi
+	# if no staged changes, stage all
+	git diff --staged --quiet && git add -A
 
 	ct git commit -m "$commit_msg"
 }
