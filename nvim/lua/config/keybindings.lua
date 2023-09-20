@@ -23,12 +23,11 @@ end, { desc = "⌨️ Edit keybindings.lua" })
 keymap({ "n", "x" }, "j", "gj")
 keymap({ "n", "x" }, "k", "gk")
 
--- - HJKL behaves like hjkl, but bigger distance 
--- - J/K use visual lines instead of logical ones
-keymap({ "o", "x" }, "H", "^")
+-- HJKL behaves like hjkl, but bigger distance
+keymap({ "o", "x" }, "H", "^") -- `zv` opens folds when navigating a horizontal lines
 keymap("n", "H", "0^") -- `0` ensures fully scrolling to the left on long unwrapped lines
-keymap({ "n", "x" }, "L", "$") -- not using "o", since used for link textobj
-keymap({ "n", "x" }, "J", "6gj")
+keymap({ "n", "x" }, "L", "$zv") -- not using "o", since used for link textobj
+keymap({ "n", "x" }, "J", "6gj") -- use visual lines instead of logical ones
 keymap({ "n", "x" }, "K", "6gk")
 
 -- dj = delete 2 lines, dJ = delete 3 lines
@@ -41,7 +40,8 @@ keymap({ "n", "x" }, "gk", function() require("funcs.quality-of-life").gotoNextI
 
 -- Jump history
 keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
-keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward", unique = false }) -- overwrites nvim default: https://neovim.io/doc/user/vim_diff.html#default-mappings
+-- overwrites nvim default: https://neovim.io/doc/user/vim_diff.html#default-mappings
+keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward", unique = false })
 
 -- Simplified Marks
 -- INFO a custom lualine component shows what is currently marked
@@ -110,7 +110,6 @@ keymap("n", "dQ", require("funcs.quickfix").deleteList, { desc = " Empty Quic
 -- stylua: ignore
 keymap("n", "qw", function () require("funcs.quality-of-life").commentHr() end, { desc = " Horizontal Divider" })
 keymap("n", "wq", '"zyy"zpkqqj', { desc = " Duplicate Line as Comment", remap = true })
-
 
 -- WHITESPACE CONTROL
 keymap("n", "=", "mzO<Esc>`z", { desc = "  blank above" })
@@ -414,4 +413,3 @@ autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
-

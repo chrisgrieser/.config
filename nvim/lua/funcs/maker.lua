@@ -37,7 +37,6 @@ local function runMake(recipe)
 			vim.notify(output, vim.log.levels.WARN, { title = recipe })
 		end,
 	})
-
 end
 
 ---Select a recipe from the makefile
@@ -66,7 +65,7 @@ function M.make(useFirst)
 		pattern = "DressingSelect",
 		once = true, -- do not affect other dressing selections
 		callback = function()
-			vim.api.nvim_buf_set_name(0, "Makefile") -- for statusline plugins
+			pcall(vim.api.nvim_buf_set_name, 0, "Makefile") -- for statusline plugins
 			vim.bo.filetype = "make"
 		end,
 	})
