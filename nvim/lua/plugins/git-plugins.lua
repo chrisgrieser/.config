@@ -2,6 +2,12 @@ return {
 	{ -- git sign gutter & hunk textobj
 		"lewis6991/gitsigns.nvim",
 		event = "VeryLazy",
+		keys = {
+			{"<leader>ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 Add Hunk" },
+			{"<leader>gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Add Buffer" },
+			{"<leader>gv", "<cmd>Gitsigns preview_hunk<CR>", desc = "󰊢 Preview Hunk Diff" },
+			{"<leader>g?", "<cmd>Gitsigns blame_line<CR>", desc = "󰊢 Blame Line" },
+		},
 		opts = {
 			max_file_length = 10000,
 			preview_config = { border = require("config.utils").borderStyle },
@@ -10,7 +16,31 @@ return {
 	{ -- diff / merge
 		"sindrets/diffview.nvim",
 		dependencies = "nvim-lua/plenary.nvim",
-		cmd = { "DiffviewFileHistory", "DiffviewOpen" },
+		keys = {
+			{
+				"<leader>gd",
+				function()
+					vim.ui.input({ prompt = "󰢷 Git Pickaxe (empty = full history)" }, function(pickaxe)
+						if not pickaxe then return end
+
+						local query = pickaxe ~= "" and (" -G'%s'"):format(pickaxe) or ""
+						vim.cmd("DiffviewFileHistory %" .. query)
+						vim.cmd.wincmd("w") -- go directly to file window
+						vim.cmd.wincmd("|") -- maximize it
+
+						-- directly search for the term
+						if pickaxe ~= "" then vim.fn.execute("/" .. pickaxe, "silent!") end
+					end)
+				end,
+				desc = "󰊢 Pickaxe File History",
+			},
+			{
+				"<leader>gd",
+				":DiffviewFileHistory<CR><C-w>w<C-w>|", -- requires `:` for '<'> marks
+				mode = "x",
+				desc = "󰊢 Line History (Diffview)",
+			},
+		},
 		config = function() -- needs config, for access to diffview.actions in mappings
 			require("diffview").setup {
 				-- https://github.com/sindrets/diffview.nvim#configuration

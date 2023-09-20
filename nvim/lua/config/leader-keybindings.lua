@@ -188,12 +188,6 @@ keymap("n", "<leader>R", function() require("funcs.maker").make() end, { desc = 
 --------------------------------------------------------------------------------
 -- GIT
 
--- Gitsigns
-keymap("n", "<leader>ga", "<cmd>Gitsigns stage_hunk<CR>", { desc = "󰊢 Add Hunk" })
-keymap("n", "<leader>gA", "<cmd>Gitsigns stage_buffer<CR>", { desc = "󰊢 Add Buffer" })
-keymap("n", "<leader>gv", "<cmd>Gitsigns preview_hunk<CR>", { desc = "󰊢 Preview Hunk Diff" })
-keymap("n", "<leader>g?", "<cmd>Gitsigns blame_line<CR>", { desc = "󰊢 Blame Line" })
-
 -- Telescope
 keymap("n", "<leader>gs", function() cmd.Telescope("git_status") end, { desc = " Status" })
 keymap("n", "<leader>gl", function() cmd.Telescope("git_commits") end, { desc = " Log" })
@@ -211,30 +205,6 @@ keymap("n", "<leader>gi", function() require("funcs.small-git").issuesAndPrs("op
 keymap("n", "<leader>gI", function() require("funcs.small-git").issuesAndPrs("closed") end, { desc = " Closed Issues" })
 -- stylua: ignore end
 
--- Diffview
--- Line History of Selection
-keymap(
-	"x",
-	"<leader>gd",
-	":DiffviewFileHistory<CR><C-w>w<C-w>|", -- requires `:` for '<'> marks
-	{ desc = "󰊢 Line History (Diffview)" }
-)
-
--- Pickaxe Current file for a file
-keymap("n", "<leader>gd", function()
-	vim.ui.input({ prompt = "󰢷 Git Pickaxe (empty = full history)" }, function(pickaxe)
-		if not pickaxe then return end
-
-		local query = pickaxe ~= "" and (" -G'%s'"):format(pickaxe) or ""
-		cmd("DiffviewFileHistory %" .. query)
-		cmd.wincmd("w") -- go directly to file window
-		cmd.wincmd("|") -- maximize it
-		if pickaxe ~= "" then
-			fn.execute("/" .. pickaxe, "silent!") -- directly search for the term
-			vim.defer_fn(function() cmd("silent! normal! n") end, 200) -- goto first item
-		end
-	end)
-end, { desc = "󰊢 Pickaxe File History" })
 
 --------------------------------------------------------------------------------
 -- OPTION TOGGLING

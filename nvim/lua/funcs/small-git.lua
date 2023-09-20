@@ -7,6 +7,7 @@ local defaultConfig = {
 	commitMaxLen = 72, -- https://stackoverflow.com/questions/2290016/git-commit-messages-50-72-formatting
 	smallCommitMaxLen = 50,
 	useSoundOnMacOs = true,
+	enforceConventionalCommits = true,
 	issueIcons = {
 		closedIssue = "🟣",
 		openIssue = "🟢",
@@ -127,13 +128,14 @@ local function processCommitMsg(commitMsg)
 		return true, "chore"
 	end
 
-	-- ensure conventional commits
+	if config.enforceConventionalCommits then
 	-- stylua: ignore
 	local conventionalCommits = { "chore", "build", "test", "fix", "feat", "refactor", "perf", "style", "revert", "ci", "docs", "improv", "break" }
-	local firstWord = commitMsg:match("^%w+")
-	if not vim.tbl_contains(conventionalCommits, firstWord) then
-		notify("Not using a Conventional Commits keyword.", "warn")
-		return false, commitMsg
+		local firstWord = commitMsg:match("^%w+")
+		if not vim.tbl_contains(conventionalCommits, firstWord) then
+			notify("Not using a Conventional Commits keyword.", "warn")
+			return false, commitMsg
+		end
 	end
 
 	-- message ok
@@ -145,11 +147,16 @@ end
 local function setGitCommitAppearance()
 	vim.api.nvim_create_autocmd("FileType", {
 		pattern = "DressingInput",
-		once = true, -- do not affect other dressing inputs
+		once = true, -- do not affect other DressingInputs
 		callback = function()
-			local winNs = 2
+			local winNs = 1
 			vim.api.nvim_win_set_hl_ns(0, winNs)
-			fn.matchadd("commitmsg", ([[.\{%s}\zs.*\ze]]):format(config.commitMaxLen - 1))
+			fn.matchadd("tooLong", ([[.\{%s}\zs.*\ze]]):format(config.commitMaxLen - 1))
+			vim.api.nvim_set_hl(winNs, "tooLong", { link = "#E06C75" })
+			fn.matchadd(
+				"almostLong",
+				([[.\{%s,%s}\zs.*\ze]]):format(config.smallCommitMaxLen, config.commitMaxLen - 2)
+			)
 
 			-- for treesitter highlighting
 			vim.bo.filetype = "gitcommit"
@@ -158,10 +165,9 @@ local function setGitCommitAppearance()
 			-- fix confirming input field (not working in insert mode due to filetype change)
 			vim.keymap.set("i", "<CR>", "<Esc><CR>", { buffer = true, remap = true })
 
-			vim.api.nvim_buf_set_name(0, "COMMIT_EDITMSG") -- for statusline
+			vim.api.nvim_buf_set_name(0, "COMMIT_EDITMSG") -- for statusline plugins
 
 			vim.opt_local.colorcolumn = { config.smallCommitMaxLen, config.commitMaxLen }
-			vim.api.nvim_set_hl(winNs, "commitmsg", { bg = "#E06C75" })
 		end,
 	})
 end
