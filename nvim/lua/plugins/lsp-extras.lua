@@ -57,7 +57,7 @@ return {
 		opts = {
 			lsp = {
 				auto_attach = true,
-				preference = { "pyright" },
+				preference = { "pyright", "tsserver" },
 			},
 			icons = { Object = "󰆧 " },
 			separator = "  ",
@@ -83,10 +83,11 @@ return {
 				if not results.changes then return end
 
 				-- if more than one file is changed, save all buffers
-				local filesChang = #vim.tbl_keys(results.changes)
-				if filesChang > 1 then vim.cmd.wall() end
+				local filesChanged = #vim.tbl_keys(results.changes)
+				if filesChanged > 1 then vim.cmd("silent wall") end
 
-				-- FIX making the cmdline-history not navigable, pending: https://github.com/smjonas/inc-rename.nvim/issues/40
+				-- FIX making the cmdline-history not navigable
+				-- PENDING: https://github.com/smjonas/inc-rename.nvim/issues/40
 				vim.fn.histdel("cmd", "^IncRename ")
 			end,
 		},

@@ -3,28 +3,51 @@ return {
 		"chrisgrieser/nvim-tinygit",
 		dev = true,
 		dependencies = "stevearc/dressing.nvim",
-		keys ={
-			-- stylua: ignore start
-			{"<leader>gc", function() require("tinygit").smartCommit() end, desc = "󰊢 Smart-Commit" },
-			{"<leader>gg", function() require("tinygit").smartCommit { push = true } end, desc = "󰊢 Smart-Commit-Push" },
-			{"<leader>gm", function() require("tinygit").amend { forcePush = true, noedit = true } end, desc = "󰊢 Amend-No-Edit & Push" },
-			{"<leader>gM", function() require("tinygit").amend { forcePush = true } end, desc = "󰊢 Amend & Push" },
-			{"<leader>gp", function() require("tinygit").push() end, desc = "󰊢 Push" },
-			{"<leader>gi", function() require("tinygit").issuesAndPrs("open") end, desc = " Open Issues" },
-			{"<leader>gI", function() require("tinygit").issuesAndPrs("closed") end, desc = " Closed Issues" },
-			{"<leader>gU", function() require("tinygit").githubUrl("repo") end, desc = " Goto Repo" },
-			{"<leader>gu", function() require("tinygit").githubUrl() end, mode = {"n", "x"}, desc = " GitHub Link" },
-			-- stylua: ignore end
+		keys = {
+			{ "<leader>gc", function() require("tinygit").smartCommit() end, desc = "󰊢 Smart-Commit" },
+			{ "<leader>gp", function() require("tinygit").push() end, desc = "󰊢 Push" },
+			{ "<leader>gU", function() require("tinygit").githubUrl("repo") end, desc = " Goto Repo" },
+			{
+				"<leader>gg",
+				function() require("tinygit").smartCommit { push = true } end,
+				desc = "󰊢 Smart-Commit-Push",
+			},
+			{
+				"<leader>gm",
+				function() require("tinygit").amend { forcePush = true, noedit = true } end,
+				desc = "󰊢 Amend-No-Edit & Push",
+			},
+			{
+				"<leader>gM",
+				function() require("tinygit").amend { forcePush = true } end,
+				desc = "󰊢 Amend & Push",
+			},
+			{
+				"<leader>gi",
+				function() require("tinygit").issuesAndPrs { state = "open", type = "issue" } end,
+				desc = " Open Issues",
+			},
+			{
+				"<leader>gI",
+				function() require("tinygit").issuesAndPrs { state = "closed" } end,
+				desc = " Closed Issues",
+			},
+			{
+				"<leader>gu",
+				function() require("tinygit").githubUrl() end,
+				mode = { "n", "x" },
+				desc = " GitHub Link",
+			},
 		},
 	},
 	{ -- git sign gutter & hunk textobj
 		"lewis6991/gitsigns.nvim",
 		event = "VeryLazy",
 		keys = {
-			{"<leader>ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 Add Hunk" },
-			{"<leader>gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Add Buffer" },
-			{"<leader>gv", "<cmd>Gitsigns preview_hunk<CR>", desc = "󰊢 Preview Hunk Diff" },
-			{"<leader>g?", "<cmd>Gitsigns blame_line<CR>", desc = "󰊢 Blame Line" },
+			{ "<leader>ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 Add Hunk" },
+			{ "<leader>gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Add Buffer" },
+			{ "<leader>gv", "<cmd>Gitsigns preview_hunk<CR>", desc = "󰊢 Preview Hunk Diff" },
+			{ "<leader>g?", "<cmd>Gitsigns blame_line<CR>", desc = "󰊢 Blame Line" },
 		},
 		opts = {
 			max_file_length = 10000,
