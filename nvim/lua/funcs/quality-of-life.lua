@@ -91,7 +91,7 @@ end
 function M.openNewScope()
 	local line = vim.api.nvim_get_current_line()
 	local trailChar = line:match(",? *$")
-	line = line:gsub(" *,? *$", "") .. " {" -- edit current line
+	line = line:gsub(" *,? *$", "") .. "{" -- edit current line
 	vim.api.nvim_set_current_line(line)
 	local ln = vim.api.nvim_win_get_cursor(0)[1]
 	local indent = line:match("^%s*")

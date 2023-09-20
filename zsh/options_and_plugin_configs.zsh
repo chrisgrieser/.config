@@ -55,10 +55,8 @@ export GH_NO_UPDATE_NOTIFIER=1
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets regexp root)
 
 # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/regexp.md
+# shellcheck disable=2034 # used in other files
 typeset -A ZSH_HIGHLIGHT_REGEXP
-# commit messages longer than 50 chars: yellow, longer than 72 chars: red
-ZSH_HIGHLIGHT_REGEXP+=('^(acp?|gc -m|git commit -m) ".{72,}"' 'fg=white,bold,bg=red')
-ZSH_HIGHLIGHT_REGEXP+=('^(acp?|gc -m|git commit -m) ".{51,71}"' 'fg=black,bg=yellow') 
 
 # NOTE: There are also some custom highlights for global aliases in aliases.zsh
 

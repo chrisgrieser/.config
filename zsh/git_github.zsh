@@ -17,6 +17,15 @@ alias rel='ct make --silent release'
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# commit messages longer than 50 chars: yellow, longer than 72 chars: red
+ZSH_HIGHLIGHT_REGEXP+=('^(acp?|gc -m|git commit -m) ".{72,}"' 'fg=white,bold,bg=red')
+ZSH_HIGHLIGHT_REGEXP+=('^(acp?|gc -m|git commit -m) ".{51,71}"' 'fg=black,bg=yellow') 
+
+# highlight conventional commits
+ZSH_HIGHLIGHT_REGEXP+=('(feat|fix|test|perf|build|ci|revert|refactor|chore|docs|improv):' 'fg=blue,bold') 
+
+#───────────────────────────────────────────────────────────────────────────────
+
 function pr {
 	# set default remote, if it lacks one
 	[[ -z "$(gh repo set-default --view)" ]] && gh repo set-default

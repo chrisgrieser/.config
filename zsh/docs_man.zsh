@@ -25,13 +25,13 @@ function h() {
 # COLORIZED HELP
 # `--` ensures dash can be used in the alias name
 # `--help` and `-h` offer help pages of different length for some commands, e.g. fd
-batpipe="| bat --language=help --style=plain --wrap=character"
+batpipe="2>&1 | bat --language=help --style=plain --wrap=character"
 # shellcheck disable=2139
-alias -g -- -h="-h 2>&1 $batpipe"
+alias -g -- -h="-h $batpipe"
 # shellcheck disable=2139
-alias -g -- --help="--help 2>&1 $batpipe"
+alias -g -- --help="--help $batpipe"
 # shellcheck disable=2139
-alias -g H="--help 2>&1 $batpipe"
+alias -g H="--help $batpipe"
 ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
 
 #───────────────────────────────────────────────────────────────────────────────
