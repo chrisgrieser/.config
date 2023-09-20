@@ -17,11 +17,11 @@ return {
 		event = "UIEnter", -- cannot load on key due to highlights
 		keys = {
 			{ "m", "<Plug>(matchup-%)", desc = "Goto Matching Bracket" },
+			{ "k", "<Plug>(matchup-i%)", mode = { "o", "x" }, desc = "󱡔 Any Block textobj" },
 		},
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
 			vim.g.matchup_matchparen_offscreen = { method = "popup" } -- empty list to disable
-			vim.g.matchup_text_obj_enabled = 0
 		end,
 	},
 	{ -- display line numbers when using `:` to go to a line with

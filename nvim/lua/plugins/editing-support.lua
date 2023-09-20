@@ -6,6 +6,7 @@ return {
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
+		commit = "3b664e8", -- PENDING https://github.com/windwp/nvim-autopairs/issues/395
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function()
 			-- add brackets to cmp completions, e.g. "function" -> "function()"
