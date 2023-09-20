@@ -5,3 +5,6 @@ local nonLspInstalled = vim.tbl_filter(
 )
 
 nonLspInstalled[1]:uninstall()
+bla = {
+
+}
