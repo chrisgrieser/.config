@@ -71,31 +71,28 @@ lspServers.lua_ls = {
 --------------------------------------------------------------------------------
 -- PYTHON
 
+-- DOCS https://github.com/astral-sh/ruff-lsp#settings
 lspServers.ruff_lsp = {
-	-- DOCS https://github.com/astral-sh/ruff-lsp#settings
 	init_options = {
 		-- disable, since already included in FixAll when ruff-rules include "I"
 		settings = { organizeImports = false },
 	},
-	-- Disable hover in favor of jedi
-	on_attach = function(client) client.server_capabilities.hoverProvider = false end,
+	on_attach = function(client)
+		-- Disable hover in favor of jedi
+		client.server_capabilities.hoverProvider = false
+
+		-- add fix-all code actions to formatting
+		-- https://github.com/astral-sh/ruff-lsp/issues/119#issuecomment-1595628355
+		vim.keymap.set("n", "<D-s>", function()
+			vim.lsp.buf.code_action { apply = true, context = { only = { "source.fixAll.ruff" } } }
+			require("conform").format()
+			vim.cmd.update()
+		end, { buffer = true, desc = "󰒕 RuffFixAll & Format & Save" })
+	end,
 }
 
--- add fix-all code actions to formatting
--- https://github.com/astral-sh/ruff-lsp/issues/119#issuecomment-1595628355
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "python",
-	callback = function()
-		vim.keymap.set("n", "<D-s>", function()
-			require("conform").format()
-			vim.lsp.buf.code_action { apply = true, context = { only = { "source.fixAll.ruff" } } }
-			vim.cmd.update()
-		end, { buffer = true, desc = "󰒕 Format & RuffFixAll & Save" })
-	end,
-})
-
+-- DOCS https://github.com/microsoft/pyright/blob/main/docs/configuration.md
 lspServers.pyright = {
-	-- DOCS https://github.com/microsoft/pyright/blob/main/docs/configuration.md
 	settings = {
 		python = {
 			analysis = { diagnosticMode = "workspace" },
@@ -146,8 +143,8 @@ lspServers.cssls = {
 	},
 }
 
+-- DOCS https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
 lspServers.tsserver = {
-	-- DOCS https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
 	settings = {
 		completions = { completeFunctionCalls = true },
 		-- "cannot redeclare block-scoped variable" -> not useful when applied to JXA
@@ -188,8 +185,8 @@ lspServers.tsserver = {
 --------------------------------------------------------------------------------
 -- JSON/YAML
 
+-- DOCS https://github.com/Microsoft/vscode/tree/main/extensions/json-language-features/server#configuration
 lspServers.jsonls = {
-	-- DOCS https://github.com/Microsoft/vscode/tree/main/extensions/json-language-features/server#configuration
 	init_options = {
 		-- disable formatting, since taken care of by biome
 		provideFormatter = false,
@@ -204,11 +201,11 @@ lspServers.yamlls = {
 }
 
 --------------------------------------------------------------------------------
--- LTEX
+-- LTEX (LanguageTool LSP)
 
--- HACK since reading external file with the method described in the ltex docs
--- does not work
-local function getDictWords(dictfile)
+-- HACK since reading external file with the method described in docs does not work
+local function getDictWords()
+	local dictfile = u.linterConfigFolder .. "/spellfile-vim-ltex.add"
 	local fileDoesNotExist = vim.loop.fs_stat(dictfile) == nil
 	if fileDoesNotExist then return {} end
 	local words = {}
@@ -218,20 +215,18 @@ local function getDictWords(dictfile)
 	return words
 end
 
--- INFO path to java runtime engine (the builtin from ltex does not seem to work)
--- here: using `openjdk`, w/ default M1 mac installation path (`brew install openjdk`)
--- HACK set need to set $JAVA_HOME, since `ltex.java.path` does not seem to work
+-- HACK need to set $JAVA_HOME, since `ltex.java.path` does not to work
 local brewPrefix = vim.trim(vim.fn.system("brew --prefix"))
 vim.env.JAVA_HOME = brewPrefix .. "/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
 
+-- DOCS https://valentjn.github.io/ltex/settings.html
 lspServers.ltex = {
-	-- DOCS https://valentjn.github.io/ltex/settings.html
 	filetypes = { "gitcommit", "markdown" }, -- disable for bibtex and text files
 	settings = {
 		ltex = {
 			completionEnabled = false,
 			language = "en-US", -- default language, can be set per-file via markdown yaml header
-			dictionary = { ["en-US"] = getDictWords(u.linterConfigFolder .. "/spellfile-vim-ltex.add") },
+			dictionary = { ["en-US"] = getDictWords() },
 			disabledRules = {
 				["en-US"] = {
 					"EN_QUOTES", -- don't expect smart quotes
@@ -268,20 +263,17 @@ local function setupAllLsps()
 end
 
 local function lspCurrentTokenHighlight()
-	u.colorschemeMod("LspReferenceWrite", { underdashed = true }) -- i.e. definition
-	u.colorschemeMod("LspReferenceRead", { underdotted = true }) -- i.e. reference
-	u.colorschemeMod("LspReferenceText", {}) -- too much noise, as is underlines e.g. strings
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(args)
 			local bufnr = args.buf
 			local capabilities = vim.lsp.get_client_by_id(args.data.client_id).server_capabilities
 			if not capabilities.documentHighlightProvider then return end
 
-			vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+			vim.api.nvim_create_autocmd("CursorHold", {
 				callback = vim.lsp.buf.document_highlight,
 				buffer = bufnr,
 			})
-			vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+			vim.api.nvim_create_autocmd("CursorMoved", {
 				callback = vim.lsp.buf.clear_references,
 				buffer = bufnr,
 			})
@@ -313,7 +305,7 @@ return {
 	},
 	{ -- configure LSPs
 		"neovim/nvim-lspconfig",
-		dependencies = "folke/neodev.nvim",
+		dependencies = "folke/neodev.nvim", -- nvim-lua types
 		init = function()
 			setupAllLsps()
 			lspCurrentTokenHighlight()
