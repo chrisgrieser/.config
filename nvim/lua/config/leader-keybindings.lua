@@ -201,7 +201,7 @@ keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line Numbers" })
 keymap("n", "<leader>os", "<cmd>set spell!<CR>", { desc = "󰓆 spellcheck" })
 keymap("n", "<leader>ol", "<cmd>LspRestart<CR>", { desc = "󰒕 LspRestart" })
 keymap("n", "<leader>ol", function ()
-	
+	vim.lsp.inlay_hint(0, nil)
 end, { desc = "󰒕 Inlay Hint" })
 
 
