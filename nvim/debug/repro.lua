@@ -1,15 +1,22 @@
 -- DO NOT change the paths and don't remove the colorscheme
--- local root = vim.fn.fnamemodify("./.repro", ":p")
 
--- set stdpaths to use .repro
--- for _, name in ipairs { "config", "data", "state", "cache" } do
--- 	vim.env[("XDG_%s_HOME"):format(name:upper())] = root .. "/" .. name
--- end
+local root = vim.fn.fnamemodify("./.repro", ":p")
+for _, name in ipairs { "config", "data", "state", "cache" } do
+	vim.env[("XDG_%s_HOME"):format(name:upper())] = root .. "/" .. name
+end
 
 --------------------------------------------------------------------------------
 
 local plugins = {
+	{
+		"windwp/nvim-autopairs",
+		opts = true,
+	}
 }
+
+--------------------------------------------------------------------------------
+
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system {

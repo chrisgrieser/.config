@@ -5,7 +5,6 @@ alias gg="ct git checkout -" # go to previous branch/commit, like `zz` switching
 alias gs='git status'
 alias ga="git add"
 alias gM="git commit --amend" # amend + edit commit msg
-alias gc="git commit"
 alias push="ct git push"
 alias pull="ct git pull"
 alias g.='cd "$(git rev-parse --show-toplevel)"' # goto git root
@@ -34,7 +33,7 @@ function pr {
 
 	gh pr create --web --fill || gh pr create --web || return 1
 
-	# set remote to my fork for subsequent additions, if the fork was created successfully
+	# set remote to my fork for subsequent additions
 	local reponame
 	reponame=$(basename "$PWD")
 	git remote set-url origin "git@github.com:chrisgrieser/$reponame.git"
@@ -45,9 +44,7 @@ function deletefork() {
 	if ! command -v gh &>/dev/null; then print "\033[1;33mgh not installed.\033[0m" && return 1; fi
 	if ! command -v fzf &>/dev/null; then print "\033[1;33mfzf not installed.\033[0m" && return 1; fi
 	
-	to_delete=$(gh repo list --fork | 
-		fzf --no-sort |
-		cut -d" " -f1)
+	to_delete=$(gh repo list --fork | fzf --with-nth=1 --info=inline | cut -f1) 
 	[[ -z "$to_delete" ]] && return 0
 
 	gh repo delete "$to_delete"
@@ -58,9 +55,7 @@ function fixup {
 	local cutoff=15 # CONFIG
 
 	local target
-	target=$(gitlog -n "$cutoff" |
-		fzf --ansi --no-sort --no-info |
-		cut -d" " -f1)
+	target=$(gitlog -n "$cutoff" | fzf --ansi --no-sort --no-info | cut -d" " -f1)
 	[[ -z "$target" ]] && return 0
 	git commit --fixup="$target"
 

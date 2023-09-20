@@ -35,6 +35,8 @@ return {
 		event = "InsertEnter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function()
+			local foo = {}
+
 			-- add brackets to cmp completions, e.g. "function" -> "function()"
 			local ok, cmp = pcall(require, "cmp")
 			if ok then
@@ -124,6 +126,7 @@ return {
 	},
 	{ -- virtual text context at the end of a scope
 		"haringsrob/nvim_context_vt",
+		enabled = false,
 		event = "VeryLazy",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		opts = {
@@ -141,6 +144,7 @@ return {
 	},
 	{ -- basically autopair, but for keywords
 		"RRethy/nvim-treesitter-endwise",
+		enabled = false,
 		event = "InsertEnter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
@@ -205,6 +209,7 @@ return {
 	},
 	{ -- fixes scrolloff at end of file
 		"Aasim-A/scrollEOF.nvim",
+		enabled = false,
 		event = "CursorMoved",
 		opts = true,
 	},
@@ -235,6 +240,7 @@ return {
 	},
 	{ -- killring & highlights on `p`
 		"gbprod/yanky.nvim",
+		enabled = false,
 		keys = {
 			-- https://github.com/gbprod/yanky.nvim#%EF%B8%8F-special-put
 			-- INFO not binding p/P in visual mode, since I prefer my switch of
@@ -257,6 +263,7 @@ return {
 	},
 	{ -- which-key
 		"folke/which-key.nvim",
+		enabled = false,
 		event = "VeryLazy",
 		config = function()
 			require("which-key").setup {
