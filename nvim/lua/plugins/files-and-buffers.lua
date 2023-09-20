@@ -29,7 +29,7 @@ return {
 		event = "VimEnter",
 		main = "project_nvim",
 		opts = {
-			detection_methods = { "pattern", "lsp" }, -- prioty: pattern, then lsp root
+			detection_methods = { "pattern", "lsp" }, -- priority: pattern, then lsp-root
 			exclude_dirs = { "node_modules", "build", "dist", ".venv", "venv" },
 			datapath = u.vimDataDir,
 			patterns = {
