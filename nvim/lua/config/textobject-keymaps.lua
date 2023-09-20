@@ -68,9 +68,6 @@ end
 
 keymap("o", "u", commented_lines_textobject, { desc = "󱡔  Big Comment textobj" })
 
--- Git Hunks
-keymap({ "x", "o" }, "gh", ":Gitsigns select_hunk<CR>", { desc = "󱡔 󰊢 hunk textobj" })
-
 --------------------------------------------------------------------------------
 
 -- VARIOUS TEXTOBJS KEYMAPS
