@@ -415,7 +415,7 @@ rules:
           - { key_code: g, modifiers: [command, control] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Cleanshot"
+  - description: "(Apps) Cleanshot/Shottr"
     manipulators:
       # INFO https://cleanshot.com/docs/api
       # ⌘⇧4 (screenshot button): tap to screenshot, hold for OCR
@@ -509,4 +509,3 @@ rules:
         to:
           - { key_code: m, modifiers: [command] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.apptorium\.SideNotes-paddle$] }]
-

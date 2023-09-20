@@ -194,15 +194,15 @@ keymap("n", "<leader>gl", function() cmd.Telescope("git_commits") end, { desc = 
 
 -- Small Git
 -- stylua: ignore start
-keymap("n", "<leader>gc", function() require("funcs.small-git").smartCommit() end, { desc = "󰊢 Smart-Commit" })
-keymap("n", "<leader>gg", function() require("funcs.small-git").smartCommit { push = true } end, { desc = "󰊢 Smart-Commit-Push" })
-keymap("n", "<leader>gm", function() require("funcs.small-git").amendNoEdit { forcePush = true } end, { desc = "󰊢 Amend-No-Edit & Push" })
-keymap("n", "<leader>gM", function() require("funcs.small-git").amend { forcePush = true } end, { desc = "󰊢 Amend & Push" })
-keymap("n", "<leader>gp", function() require("funcs.small-git").push()  end, { desc = "󰊢 Push" })
-keymap({ "n", "x" }, "<leader>gu", function() require("funcs.small-git").githubUrl() end, { desc = " GitHub Link" })
-keymap("n", "<leader>gU", function() require("funcs.small-git").githubUrl("repo") end, { desc = " Goto Repo" })
-keymap("n", "<leader>gi", function() require("funcs.small-git").issuesAndPrs("open") end, { desc = " Open Issues" })
-keymap("n", "<leader>gI", function() require("funcs.small-git").issuesAndPrs("closed") end, { desc = " Closed Issues" })
+-- keymap("n", "<leader>gc", function() require("funcs.tinygit").smartCommit() end, { desc = "󰊢 Smart-Commit" })
+-- keymap("n", "<leader>gg", function() require("funcs.tinygit").smartCommit { push = true } end, { desc = "󰊢 Smart-Commit-Push" })
+-- keymap("n", "<leader>gm", function() require("funcs.tinygit").amendNoEdit { forcePush = true } end, { desc = "󰊢 Amend-No-Edit & Push" })
+-- keymap("n", "<leader>gM", function() require("funcs.tinygit").amend { forcePush = true } end, { desc = "󰊢 Amend & Push" })
+-- keymap("n", "<leader>gp", function() require("funcs.tinygit").push()  end, { desc = "󰊢 Push" })
+-- keymap({ "n", "x" }, "<leader>gu", function() require("funcs.tinygit").githubUrl() end, { desc = " GitHub Link" })
+-- keymap("n", "<leader>gU", function() require("funcs.tinygit").githubUrl("repo") end, { desc = " Goto Repo" })
+-- keymap("n", "<leader>gi", function() require("funcs.tinygit").issuesAndPrs("open") end, { desc = " Open Issues" })
+-- keymap("n", "<leader>gI", function() require("funcs.tinygit").issuesAndPrs("closed") end, { desc = " Closed Issues" })
 -- stylua: ignore end
 
 
