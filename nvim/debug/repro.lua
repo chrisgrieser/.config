@@ -9,7 +9,7 @@ local plugins = {
 	{ "windwp/nvim-autopairs", opts = true }
 }
 
-vim.keymap.set("n", "=", "jjjjjjj")
+vim.keymap.set("n", "=", "kkk")
 
 --------------------------------------------------------------------------------
 
