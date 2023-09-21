@@ -1,6 +1,5 @@
 """This is a test file."""
 
-fsfs
 def hello() -> None:
     """Test."""
     numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -8,7 +7,7 @@ def hello() -> None:
 
     print("hello world")
 
-    the_sum = 0
+    THE_SUM = 0
     for numb in numbers:
         the_sum += numb
         the_sum = the_sum / 2
