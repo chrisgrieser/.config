@@ -7,11 +7,10 @@ local fn = vim.fn
 -- less nesting in md
 optl.tabstop = 4
 
--- Enable wrapping lines at start
-vim.defer_fn(function() require("funcs.quality-of-life").toggleWrapping() end, 1)
+-- Enable wrapping lines
+require("funcs.quality-of-life").wrap("on")
 
 -- decrease line length without zen mode plugins
--- filetype condition ensure sub-filtypes like "markdown.cody_history" are not affected
 vim.defer_fn(function() optl.signcolumn = "yes:9" end, 1)
 
 -- do not auto-wrap text
