@@ -12,6 +12,7 @@ local spellfixes = {
 	reponse = "response",
 	fodler = "folder",
 	woudl = "would",
+	cleitn = "client",
 	fiel = "file",
 	shwo = "show",
 	retrun = "return",
