@@ -9,7 +9,7 @@ def hello() -> None:
 
     THE_SUM = 0
     for numb in numbers:
-        the_sum += numb
+        the_sum += numb # pyright: ignore reportUnboundVariable
         the_sum = the_sum / 2
         used_numbers.append(numb)
 
