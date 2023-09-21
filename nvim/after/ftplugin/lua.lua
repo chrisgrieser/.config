@@ -10,6 +10,8 @@ abbr("<buffer> // --")
 abbr("<buffer> # --")
 abbr("<buffer> const local")
 abbr("<buffer> fi end")
+abbr("<buffer> != ~=")
+abbr("<buffer> !== ~=")
 
 --------------------------------------------------------------------------------
 

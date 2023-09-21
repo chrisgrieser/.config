@@ -54,6 +54,9 @@ function run() {
 
 	//───────────────────────────────────────────────────────────────────────────
 	// Main Metadata
+	if (canvasArray == 2) { };; 	// eslint-disable-line eqeqeq
+
+
 	if (!fileExists(metadataJSON)) {
 		return JSON.stringify({
 			items: [
