@@ -1,5 +1,4 @@
 #!/usr/bin/env osascript -l JavaScript
-
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
@@ -21,129 +20,136 @@ function httpRequest(url) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const username = $.getenv("github_username");
-const apiURL = `https://api.github.com/users/${username}/repos?per_page=100`;
+/** @typedef {Object} gitRepo
+ * @property {boolean} fork
+ * @property {boolean} private
+ * @property {boolean} archived
+ * @property {boolean} is_template
+ * @property {string} name
+ * @property {string} full_name
+ * @property {string} html_url
+ * @property {string} description
+ * @property {number} stargazers_count
+ * @property {number} open_issues_count
+ * @property {number} forks_count
+ */
 
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string[]} argv */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
+	// CONFIG
+	const username = $.getenv("github_username");
+	// const includeArchived = $.getenv("include_archived") === 1;
+	const includeArchived = false;
+
 	// local repos
 	const repoFolder = argv[0]; // local repo path passed from .zshenv
-	const obsiPlugins = $.getenv("extra_folder_1").replace(/^~/, app.pathTo("home folder"));
-	const locations = `"${repoFolder}" "${obsiPlugins}"`;
+	const extraFolder = $.getenv("extra_folder_1").replace(/^~/, app.pathTo("home folder"));
+	const locations = `"${repoFolder}" "${extraFolder}"`;
 	app.doShellScript(`mkdir -p ${locations}`);
 
 	const localRepos = {};
-	app
-		.doShellScript(`find ${locations} -type d -maxdepth 2 -name ".git"`)
-		.split("\r")
-		.forEach((/** @type {string} */ gitFolderPath) => {
-			const localRepo = {};
-			localRepo.path = gitFolderPath.replace(/\.git\/?$/, "");
-			const name = localRepo.path.replace(/.*\/(.*)\/$/, "$1");
-			try {
-				localRepo.dirty = app.doShellScript(`cd "${localRepo.path}" && git status --porcelain`) !== "";
-			} catch (_error) {
-				// error occurs with iCloud sync issues
-				localRepo.dirty = undefined;
-			}
-			localRepos[name] = localRepo;
-		});
+	const localRepoPaths = app.doShellScript(`find ${locations} -type d -maxdepth 2 -name ".git"`).split("\r");
+	for (const gitFolderPath of localRepoPaths) {
+		const localRepo = {};
+		localRepo.path = gitFolderPath.replace(/\.git\/?$/, "");
+		const name = localRepo.path.replace(/.*\/(.*)\/$/, "$1");
+		try {
+			localRepo.dirty = app.doShellScript(`cd "${localRepo.path}" && git status --porcelain`) !== "";
+		} catch (_error) {
+			// error can occur with cloud sync issues
+			localRepo.dirty = undefined;
+		}
+		localRepos[name] = localRepo;
+	}
 
 	//───────────────────────────────────────────────────────────────────────────
 	// fetch remote repos
 
+	// DOCS https://docs.github.com/en/free-pro-team@latest/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
+	const apiURL = `https://api.github.com/users/${username}/repos?per_page=100`;
 	const scriptFilterArr = JSON.parse(httpRequest(apiURL))
-		// sort local to the top, archived and forks to the bottom, then by stars
-		.sort(
-			(
-				/** @type {{ isLocal: any; name: string | number; fork: any; archived: any; stargazers_count: number; }} */ a,
-				/** @type {{ isLocal: any; name: string | number; fork: any; archived: any; stargazers_count: number; }} */ b,
-			) => {
-				a.isLocal = localRepos[a.name];
-				b.isLocal = localRepos[b.name];
-				if (a.isLocal && !b.isLocal) return -1;
-				else if (!a.isLocal && b.isLocal) return 1;
-				else if (a.fork && !b.fork) return 1;
-				else if (!a.fork && b.fork) return -1;
-				else if (a.archived && !b.archived) return 1;
-				else if (!a.archived && b.archived) return -1;
-				return b.stargazers_count - a.stargazers_count;
-			},
-		)
-		.map(
-			(
-				/** @type {{ name: string; local: { path: any; }; html_url: any; archived: any; fork: any; is_template: any; stargazers_count: number; open_issues_count: number; forks_count: number; open_issues: number; full_name: any; }} */ repo,
-			) => {
-				let matcher = alfredMatcher(repo.name);
-				let type = "";
+		.filter((/** @type {gitRepo} */ repo) => includeArchived || !repo.archived)
+		.sort((/** @type {gitRepo&{isLocal: boolean}} */ a, /** @type {gitRepo&{isLocal: boolean}} */ b) => {
+			a.isLocal = localRepos[a.name];
+			b.isLocal = localRepos[b.name];
+			if (a.isLocal && !b.isLocal) return -1;
+			else if (!a.isLocal && b.isLocal) return 1;
+			else if (a.fork && !b.fork) return 1;
+			else if (!a.fork && b.fork) return -1;
+			else if (a.archived && !b.archived) return 1;
+			else if (!a.archived && b.archived) return -1;
+			return b.stargazers_count - a.stargazers_count;
+		})
+		.map((/** @type {gitRepo&{local: {path: string}}} */ repo) => {
+			let matcher = alfredMatcher(repo.name);
+			let type = "";
 
-				// additions when repo is local
-				repo.local = localRepos[repo.name];
-				const mainArg = repo.local?.path || repo.html_url;
-				const terminalActionDesc = repo.local ? "Open in Terminal" : "Shallow Clone to Local Repo Folder";
-				// open in terminal when local, clone when not
-				const terminalArg = repo.local?.path || repo.html_url; 
-				if (repo.local) {
-					if (localRepos[repo.name].dirty) type += "🔄 ";
-					type += "📂 ";
-					matcher += "local ";
-				}
+			// changes when repo is local
+			repo.local = localRepos[repo.name];
+			const mainArg = repo.local?.path || repo.html_url;
+			const terminalActionDesc = repo.local ? "Open in Terminal" : "Shallow Clone to Local Repo Folder";
+			// open in terminal when local, clone when not
+			const terminalArg = repo.local?.path || repo.html_url;
+			if (repo.local) {
+				if (localRepos[repo.name].dirty) type += "🔄 ";
+				type += "📂 ";
+				matcher += "local ";
+			}
 
-				// extra info
-				if (repo.archived) {
-					type += "🗄️ ";
-					matcher += "archived ";
-				}
-				if (repo.fork) {
-					type += "🍴 ";
-					matcher += "fork ";
-				}
-				if (repo.is_template) {
-					type += "📄 ";
-					matcher += "template ";
-				}
-				let subtitle = "";
-				if (repo.stargazers_count > 0) subtitle += `⭐ ${repo.stargazers_count}  `;
-				if (repo.open_issues_count > 0) subtitle += `🟢 ${repo.open_issues_count}  `;
-				if (repo.forks_count > 0) subtitle += `🍴 ${repo.forks_count}  `;
-				if (repo.name === username) {
-					repo.name = "My GitHub Profile";
-					matcher += "my github profile ";
-				}
+			// extra info
+			if (repo.archived) {
+				type += "🗄 ";
+				matcher += "archived ";
+			}
+			if (repo.fork) {
+				type += "🍴 ";
+				matcher += "fork ";
+			}
+			if (repo.is_template) {
+				type += "📄 ";
+				matcher += "template ";
+			}
+			if (repo.private) {
+				type += "🔒 ";
+				matcher += "private ";
+			}
+			let subtitle = "";
+			if (repo.stargazers_count > 0) subtitle += `⭐ ${repo.stargazers_count}  `;
+			if (repo.open_issues_count > 0) subtitle += `🟢 ${repo.open_issues_count}  `;
+			if (repo.forks_count > 0) subtitle += `🍴 ${repo.forks_count}  `;
 
-				return {
-					title: `${type}${repo.name}`,
-					subtitle: subtitle,
-					match: matcher,
-					arg: mainArg,
-					mods: {
-						fn: {
-							subtitle: "fn: Delete Local Repo",
-							valid: Boolean(repo.local),
-						},
-						ctrl: {
-							subtitle: `⌃: ${terminalActionDesc}`,
-							arg: terminalArg,
-						},
-						alt: {
-							subtitle: "⌥: Copy GitHub URL",
-							arg: repo.html_url,
-						},
-						cmd: {
-							subtitle: "⌘: Open at GitHub",
-							arg: repo.html_url,
-						},
-						shift: {
-							subtitle: `⇧: Search Issues (${repo.open_issues} open)`,
-							arg: repo.full_name,
-							valid: repo.open_issues > 0,
-						},
+			return {
+				title: `${type}${repo.name}`,
+				subtitle: subtitle,
+				match: matcher,
+				arg: mainArg,
+				mods: {
+					fn: {
+						subtitle: "fn: Delete Local Repo",
+						valid: Boolean(repo.local),
 					},
-				};
-			},
-		);
+					ctrl: {
+						subtitle: `⌃: ${terminalActionDesc}`,
+						arg: terminalArg,
+					},
+					alt: {
+						subtitle: "⌥: Copy GitHub URL",
+						arg: repo.html_url,
+					},
+					cmd: {
+						subtitle: "⌘: Open at GitHub",
+						arg: repo.html_url,
+					},
+					shift: {
+						subtitle: `⇧: Search Issues (${repo.open_issues_count} open)`,
+						arg: repo.full_name,
+						valid: repo.open_issues_count > 0,
+					},
+				},
+			};
+		});
 	return JSON.stringify({ items: scriptFilterArr });
 }
