@@ -4,7 +4,7 @@
 
 ## Configurations of Interest
 Most people tell me they find the following configurations useful:
-- [neovim config](/nvim) (~6500 LoC)
+- [neovim config](/nvim) (~7000 LoC)
 - [hammerspoon config](/hammerspoon) (~2500 LoC)
 - [zshrc](/zsh) (~1500 LoC)
 - [Pandoc configs & pointers on how to use pandoc](/pandoc)
