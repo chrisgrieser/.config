@@ -8,8 +8,6 @@ def hello() -> None:
     print("hello world")
 
 
-
-
     THE_SUM = 0
     for numb in numbers:
         the_sum += numb # pyright: ignore reportUnboundVariable
