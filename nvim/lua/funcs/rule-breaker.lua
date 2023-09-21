@@ -1,30 +1,31 @@
 local M = {}
+local fn = vim.fn
 --------------------------------------------------------------------------------
 
 ---@class ruleIgnoreConfig
----@field ignore string|string[] with %s for the rule id
+---@field comment string|string[] with %s for the rule id
 ---@field type "sameLine"|"nextLine"|"enclose"
 
 ---@type table<string, ruleIgnoreConfig>
 local ignoreRuleData = {
 	shellcheck = {
-		ignore = "# shellcheck disable=%s",
+		comment = "# shellcheck disable=%s",
 		type = "nextLine",
 	},
 	selene = {
-		ignore = "-- selene: allow(%s)",
+		comment = "-- selene: allow(%s)",
 		type = "nextLine",
 	},
 	vale = {
-		ignore = { "<!-- vale %s = NO -->", "<!-- vale %s = YES -->" },
+		comment = { "<!-- vale %s = NO -->", "<!-- vale %s = YES -->" },
 		type = "enclose",
 	},
 	yamllint = {
-		ignore = "# yamllint disable-line rule:%s",
+		comment = "# yamllint disable-line rule:%s",
 		type = "nextLine",
 	},
 	stylelint = {
-		ignore = "/* stylelint-disable-next-line %s */",
+		comment = "/* stylelint-disable-next-line %s */",
 		type = "nextLine",
 	},
 }
@@ -85,11 +86,23 @@ end
 local function searchForTheRule(diag)
 	if not validDiagObj(diag) then return end
 	local query = (diag.code .. " " .. diag.source)
+	local escapedQuery = query:gsub(" ", "+") -- valid escaping for DuckDuckGo
 
-	vim.fn.setreg("+", query)
+	fn.setreg("+", query)
 
-	local url = ("https://duckduckgo.com/?q=%s+%%21ducky&kl=en-us"):format(query:gsub(" ", "+"))
-	vim.fn.system { "open", url }
+	local url = ("https://duckduckgo.com/?q=%s+%%21ducky&kl=en-us"):format(escapedQuery)
+
+	-- open with the OS-specific shell command
+	local opener
+	if fn.has("macunix") == 1 then
+		opener = "open"
+	elseif fn.has("linux") == 1 then
+		opener = "xdg-open"
+	elseif fn.has("win64") == 1 or fn.has("win32") == 1 then
+		opener = "start"
+	end
+	local openCommand = string.format("%s '%s' >/dev/null 2>&1", opener, url)
+	fn.system(openCommand)
 end
 
 ---@param diag diagnostic
@@ -98,10 +111,33 @@ local function addIgnoreComment(diag)
 	if not ignoreRuleData[diag.source] then
 		notify(
 			("There is no ignore rule configuration for %s %s."):format(diag.source, diag.code)
-				.. "\nPlease make a PR to the nvim-rule-break repo.",
+				.. "\nPlease make a PR to add support for it.",
 			"warn"
 		)
 		return
+	end
+
+	-- insert rule id and indentation into comment
+	local currentIndent = vim.api.nvim_get_current_line():match("^%s*")
+	local ignoreComment = ignoreRuleData[diag.source].comment
+	if type(ignoreComment) == "string" then ignoreComment = { ignoreComment } end
+	for i = 1, #ignoreComment, 1 do
+		ignoreComment[i] = currentIndent .. ignoreComment[i]:format(diag.code)
+	end
+
+	-- add comment
+	local ignoreType = ignoreRuleData[diag.source].type
+	if ignoreType == "nextLine" then
+		local prevLineNum = vim.api.nvim_win_get_cursor(0)[1] - 1
+		vim.api.nvim_buf_set_lines(0, prevLineNum, prevLineNum, false, ignoreComment)
+	elseif ignoreType == "sameLine" then
+		local currentLine = vim.api.nvim_get_current_line():gsub("%s+$", "")
+		vim.api.nvim_set_current_line(currentLine .. " " .. ignoreComment[1])
+	elseif ignoreType == "enclose" then
+		local prevLineNum = vim.api.nvim_win_get_cursor(0)[1]
+		local nextLineNum = vim.api.nvim_win_get_cursor(0)[1]
+		vim.api.nvim_buf_set_lines(0, nextLineNum, nextLineNum, false, {ignoreComment[2]})
+		vim.api.nvim_buf_set_lines(0, prevLineNum, prevLineNum, false, {ignoreComment[1]})
 	end
 end
 

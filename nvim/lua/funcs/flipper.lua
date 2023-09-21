@@ -27,7 +27,7 @@ local generalWords = {
 	{ "above", "below" },
 	{ "vertical", "horizontal" },
 	{ "width", "height" },
-	{ "min", "max" }, 
+	{ "min", "max" },
 	{ "minimum", "maximum" },
 	{ "increase", "decrease" },
 	{ "increased", "decreased" },
@@ -36,6 +36,7 @@ local generalWords = {
 	{ "external", "internal" },
 	{ "forwards", "backwards" },
 	{ "next", "previous" },
+	{ "prev", "next" },
 	{ "inner", "outer" },
 	{ "input", "output" },
 	{ "before", "after" },
@@ -116,7 +117,7 @@ local filetypeSpecificWords = {
 		{ "===", "!==" },
 		{ "&&", "||" },
 		{ "continue", "break" },
-		{ "default", "case" }, 
+		{ "default", "case" },
 	},
 	sh = {
 		{ "lt", "gt" }, -- the leading `-` is ignored
