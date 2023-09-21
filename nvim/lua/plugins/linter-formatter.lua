@@ -244,8 +244,8 @@ return {
 		"chrisgrieser/nvim-rulebook",
 		dev = true,
 		keys = {
-			{ "<leader>C", function() require("rule-breaker").ignoreRule() end, desc = "󰒕 Ignore Rule" },
-			{ "<leader>d", function() require("rule-breaker").lookupRule() end, desc = "󰒕 Lookup Rule" },
+			{ "<leader>C", function() require("rulebook").ignoreRule() end, desc = "󰒕 Ignore Rule" },
+			{ "<leader>d", function() require("rulebook").lookupRule() end, desc = "󰒕 Lookup Rule" },
 		},
 		opts = {
 			Pyright = {
