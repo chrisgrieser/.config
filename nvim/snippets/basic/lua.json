@@ -37,12 +37,13 @@
 		"body": "\"${1:value1}\"|\"${2:value2}\"",
 		"description": "Luadoc Custom Parameter Type for a function. https://github.com/LuaLS/lua-language-server/wiki/Annotations#param"
 	},
-	"define class": {
-		"prefix": "define class",
+	"class definition": {
+		"prefix": ["class definition", "type definition"],
 		"body": [
 			"---@class ${1:class_name} ${2:class_description}",
 			"---@field ${3:field_name} string"
-		]
+		],
+		"description": "https://github.com/LuaLS/lua-language-server/wiki/Annotations#class"
 	},
 	"ignore start/end (stylua)": {
 		"prefix": "ignore start/end (stylua)",
@@ -65,7 +66,7 @@
 		"body": "return end"
 	},
 	"then return end": {
-		"prefix": ["then return end", "tre"],
+		"prefix": ["then return end", "tr"],
 		"body": "then return end"
 	},
 	"format": {

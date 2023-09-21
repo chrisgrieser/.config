@@ -7,7 +7,10 @@ return {
 		ft = "markdown", -- can work in other fts, but I only use it in markdown
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		opts = {
-			markdown = { fat_headlines = false },
+			markdown = {
+				fat_headlines = false,
+				dash_string = "─",
+			},
 		},
 	},
 	{ -- auto-bullets for markdown-like filetypes

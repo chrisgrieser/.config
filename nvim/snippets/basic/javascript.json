@@ -38,7 +38,7 @@
 		"description": "required for output from app.doShellScript()"
 	},
 	"type definition (JSDoc)": {
-		"prefix": "type definition (JSDoc)",
+		"prefix": ["type definition (JSDoc)", "class definition (JSDoc)"],
 		"body": [
 			"/** @typedef {Object} ${1:name}",
 			"* @property {${2|string,number,boolean,() => void|}} ${3:prop1}",

@@ -43,7 +43,7 @@ function deletefork() {
 	if ! command -v gh &>/dev/null; then print "\033[1;33mgh not installed.\033[0m" && return 1; fi
 	if ! command -v fzf &>/dev/null; then print "\033[1;33mfzf not installed.\033[0m" && return 1; fi
 	
-	to_delete=$(gh repo list --fork | fzf --with-nth=1 --info=inline | cut -f1) 
+	to_delete=$(gh repo list --fork | fzf --multi --with-nth=1 --info=inline | cut -f1) 
 	[[ -z "$to_delete" ]] && return 0
 
 	gh repo delete "$to_delete"
