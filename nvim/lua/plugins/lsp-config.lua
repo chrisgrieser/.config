@@ -225,7 +225,7 @@ serverConfigs.ltex = {
 	settings = {
 		ltex = {
 			completionEnabled = false,
-			language = "en-US", -- default language, can be set per-file via markdown yaml header
+			language = "en-US", -- de-DE; default language, can be set per-file via markdown yaml header
 			dictionary = { ["en-US"] = getDictWords() },
 			disabledRules = {
 				["en-US"] = {
@@ -236,8 +236,8 @@ serverConfigs.ltex = {
 				},
 			},
 			diagnosticSeverity = {
-				default = "hint",
-				MORFOLOGIK_RULE_EN_US = "warning", -- spelling
+				default = "info",
+				MORFOLOGIK_RULE_EN_US = "hint", -- spelling
 			},
 			additionalRules = { enablePickyRules = true },
 			markdown = {

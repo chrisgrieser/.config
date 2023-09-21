@@ -48,8 +48,11 @@ function deletefork() {
 	if [[ $(echo "$to_delete" | wc -l) -eq 1 ]]; then
 		gh repo delete "$to_delete"
 	else
-		echo "Copied"
-		echo "$to_delete" | pbcopy
+		# INFO `gh repo delete` disallows multiple deletions at once
+		# shellcheck disable=2001
+		cmd=$(echo "$to_delete" | sed 's/^/gh repo delete --yes /')
+		echo "Copied command to batch deleted forks."
+		echo "$cmd" | pbcopy
 	fi
 }
 
