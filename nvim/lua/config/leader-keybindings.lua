@@ -144,8 +144,14 @@ keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
 keymap(
 	"n",
 	"<leader>d",
-	function() require("config.diagnostics").ruleSearch() end,
-	{ desc = "󰒕 Lookup Diagnostic Rule" }
+	function() require("funcs.rule-breaker").lookupRule() end,
+	{ desc = "󰒕 Lookup Diagnostic" }
+)
+keymap(
+	"n",
+	"<leader>D",
+	function() require("funcs.rule-breaker").ignoreRule() end,
+	{ desc = "󰒕 Ignore Rule" }
 )
 
 --------------------------------------------------------------------------------
