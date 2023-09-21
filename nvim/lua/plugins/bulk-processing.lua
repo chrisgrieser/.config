@@ -26,7 +26,7 @@ return {
 				["Add Cursor Down"] = "<D-down>",
 
 				-- Visual-Multi-Mode Mappings
-				["Find Next"] = "y", -- [y]es & find next
+				["Find Next"] = "<D-j>",
 				["Skip Region"] = "n", -- [n]o & find next
 				["Find Operator"] = "s", -- operator, selects all regions found in textobj
 				["Motion $"] = "L", -- use my HL motions here as well
