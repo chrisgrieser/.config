@@ -241,7 +241,7 @@ return {
 		},
 	},
 	{
-		"chrisgrieser/nvim-rule-breaker",
+		"chrisgrieser/nvim-rulebook",
 		dev = true,
 		keys = {
 			{ "<leader>C", function() require("rule-breaker").ignoreRule() end, desc = "󰒕 Ignore Rule" },
