@@ -11,7 +11,7 @@ local linters = {
 	python = { "pylint" },
 	gitcommit = {},
 	json = {},
-	javascript = { "eslint"},
+	javascript = {},
 	typescript = {},
 	toml = {},
 	text = {},
@@ -244,8 +244,8 @@ return {
 		"chrisgrieser/nvim-rulebook",
 		dev = true,
 		keys = {
-			{ "<leader>C", function() require("rulebook").ignoreRule() end, desc = "󰒕 Ignore Rule" },
 			{ "<leader>d", function() require("rulebook").lookupRule() end, desc = "󰒕 Lookup Rule" },
+			{ "<leader>C", function() require("rulebook").ignoreRule() end, desc = "󰒕 Ignore Rule" },
 		},
 	},
 }
