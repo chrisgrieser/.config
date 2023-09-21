@@ -10,7 +10,7 @@ return {
 			{
 				"<leader>gg",
 				function() require("tinygit").smartCommit { push = true } end,
-				desc = "󰊢 Smart-Commit-Push",
+				desc = "󰊢 Smart-Commit & Push",
 			},
 			{
 				"<leader>gm",
