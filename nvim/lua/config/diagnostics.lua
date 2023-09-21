@@ -22,12 +22,6 @@ end
 
 --------------------------------------------------------------------------------
 
----@class diagnostic nvim diagnostic https://neovim.io/doc/user/diagnostic.html#diagnostic-structure
----@field message string
----@field source string
----@field code string
----@field bufnr number
-
 ---@nodiscard
 ---@param diag diagnostic
 ---@return string text to display
@@ -53,40 +47,3 @@ vim.diagnostic.config {
 	},
 }
 
---------------------------------------------------------------------------------
-
----@param diag diagnostic
-local function searchForTheRule(diag)
-	if not (diag.code and diag.source) then
-		u.notify("", "diagnostic without code or source", "warn")
-		return
-	end
-	local query = (diag.code .. " " .. diag.source)
-	vim.fn.setreg("+", query)
-	local url = ("https://duckduckgo.com/?q=%s+%%21ducky&kl=en-us"):format(query:gsub(" ", "+"))
-	vim.fn.system { "open", url }
-end
-
-local M = {}
-
----Select from rules on the same line as the cursor, if more than one, uses
----vim.ui.select to choose from them.
-function M.ruleSearch()
-	local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
-	local diags = vim.diagnostic.get(0, { lnum = lnum })
-	if #diags == 0 then
-		u.notify("", "No diagnostics found", "warn")
-		return
-	elseif #diags == 1 then
-		searchForTheRule(diags[1])
-	else
-		vim.ui.select(diags, {
-			prompt = "Select Rule to search:",
-			format_item = function(diag) return diag.message end,
-		}, function(diag)
-			if not diag then return end -- aborted input
-			searchForTheRule(diag)
-		end)
-	end
-end
-return M

@@ -12,7 +12,7 @@
 ;───────────────────────────────────────────────────────────────────────────────
 
 ; added by me: 
-; CONFIG SIC PENDING CAVEAT
+; CONFIG SIC PENDING CAVEAT DATA
 
 ; test for this file to work
 ; FOOBAR TEST ERROR
@@ -36,10 +36,10 @@
   (name) @text.note @nospell
   ("(" @punctuation.bracket (user) @constant ")" @punctuation.bracket)?
   ":" @punctuation.delimiter)
-  (#any-of? @text.note "NOTE" "INFO" "DOCS" "PERF" "TEST" "CONFIG"))
+  (#any-of? @text.note "NOTE" "INFO" "DOCS" "PERF" "TEST" "CONFIG" "DATA"))
 
 ("text" @text.note @nospell
- (#any-of? @text.note "NOTE" "INFO" "DOCS" "PERF" "TEST" "CONFIG"))
+ (#any-of? @text.note "NOTE" "INFO" "DOCS" "PERF" "TEST" "CONFIG" "DATA"))
 
 ((tag
   (name) @text.warning @nospell
