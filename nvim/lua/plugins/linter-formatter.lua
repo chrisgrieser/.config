@@ -240,4 +240,20 @@ return {
 			},
 		},
 	},
+	{
+		"chrisgrieser/nvim-rule-breaker",
+		dev = true,
+		keys = {
+			{
+				"<leader>C",
+				function() require("rule-breaker").ignoreRule() end,
+				desc = "󰒕 Ignore Rule",
+			},
+			{
+				"<leader>d",
+				function() require("rule-breaker").lookupRule() end,
+				desc = "󰒕 Lookup Diagnostic",
+			},
+		},
+	},
 }
