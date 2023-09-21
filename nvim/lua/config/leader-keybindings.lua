@@ -210,8 +210,12 @@ keymap("n", "<leader>od", function() -- codespell-ignore
 	end
 end, { desc = " Diagnostics" })
 
--- stylua: ignore
-keymap("n", "<leader>ow", function () require("funcs.quality-of-life").toggleWrapping() end, { desc = "󰖶 Wrap" })
+keymap(
+	"n",
+	"<leader>ow",
+	function() require("funcs.quality-of-life").wrap("toggle") end,
+	{ desc = "󰖶 Wrap" }
+)
 
 -- FIX scrolloff
 keymap("n", "<leader>of", function() vim.opt.scrolloff = 13 end, { desc = "󰘖 Fix Scrolloff" })

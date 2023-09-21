@@ -103,22 +103,25 @@ end
 
 --------------------------------------------------------------------------------
 
-function M.toggleWrapping()
-	local wrapOn = vim.opt_local.wrap:get()
-	if wrapOn then
-		vim.opt_local.wrap = false
-		vim.opt_local.colorcolumn = vim.opt.colorcolumn:get()
-		pcall(vim.keymap.del, "n", "A", { buffer = true })
-		pcall(vim.keymap.del, "n", "I", { buffer = true })
-		pcall(vim.keymap.del, "n", "H", { buffer = true })
-		pcall(vim.keymap.del, "n", "L", { buffer = true })
-	else
+---@param toMode "on"|"off"|"toggle"
+function M.wrap(toMode)
+	local turnOn = (toMode == "toggle" and not vim.opt_local.wrap:get()) or toMode == "on"
+	local turnOff = (toMode == "toggle" and vim.opt_local.wrap:get()) or toMode == "off"
+
+	if turnOn then
 		vim.opt_local.wrap = true
 		vim.opt_local.colorcolumn = ""
 		vim.keymap.set("n", "A", "g$a", { buffer = true })
 		vim.keymap.set("n", "I", "g^i", { buffer = true })
 		vim.keymap.set("n", "H", "g^", { buffer = true })
 		vim.keymap.set("n", "L", "g$", { buffer = true })
+	elseif turnOff then
+		vim.opt_local.wrap = false
+		vim.opt_local.colorcolumn = vim.opt.colorcolumn:get()
+		pcall(vim.keymap.del, "n", "A", { buffer = true })
+		pcall(vim.keymap.del, "n", "I", { buffer = true })
+		pcall(vim.keymap.del, "n", "H", { buffer = true })
+		pcall(vim.keymap.del, "n", "L", { buffer = true })
 	end
 end
 
