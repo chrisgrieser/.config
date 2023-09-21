@@ -26,7 +26,7 @@ ZSH_HIGHLIGHT_REGEXP+=('(feat|fix|test|perf|build|ci|revert|refactor|chore|docs|
 
 function pr {
 	if ! command -v gh &>/dev/null; then print "\033[1;33mgh not installed.\033[0m" && return 1; fi
-	
+
 	# set default remote, if it lacks one
 	[[ -z "$(gh repo set-default --view)" ]] && gh repo set-default
 
@@ -38,15 +38,19 @@ function pr {
 	git remote set-url origin "git@github.com:chrisgrieser/$reponame.git"
 }
 
-# select a fork repo to delete
+# select a fork or multiple forks to delete
 function deletefork() {
 	if ! command -v gh &>/dev/null; then print "\033[1;33mgh not installed.\033[0m" && return 1; fi
 	if ! command -v fzf &>/dev/null; then print "\033[1;33mfzf not installed.\033[0m" && return 1; fi
-	
-	to_delete=$(gh repo list --fork | fzf --multi --with-nth=1 --info=inline | cut -f1) 
-	[[ -z "$to_delete" ]] && return 0
 
-	gh repo delete "$to_delete"
+	to_delete=$(gh repo list --fork | fzf --multi --with-nth=1 --info=inline | cut -f1)
+	[[ -z "$to_delete" ]] && return 0
+	if [[ $(echo "$to_delete" | wc -l) -eq 1 ]]; then
+		gh repo delete "$to_delete"
+	else
+		echo "Copied"
+		echo "$to_delete" | pbcopy
+	fi
 }
 
 # select a recent commit to fixup
@@ -227,13 +231,13 @@ function gb {
 #───────────────────────────────────────────────────────────────────────────────
 # GIT ADD, COMMIT, (PULL) & PUSH
 
-# smart commit: 
+# smart commit:
 # - if there are staged changes, commit them
 # - if there are no changes, stage all changes (`git add -A`) and then commit
 # - if commit message is empty use `chore` as default message
 function ac() {
 	if ! command -v ct &>/dev/null; then print "\033[1;33mchromaterm not installed. (\`pip3 install chromaterm\`)\033[0m" && return 1; fi
-	local large_files commit_msg msg_length 
+	local large_files commit_msg msg_length
 
 	# guard: accidental pushing of large files
 	large_files=$(find . -not -path "**/.git/**" -not -path "**/*.pxd/**" \

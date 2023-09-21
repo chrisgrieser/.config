@@ -22,10 +22,11 @@ export YSU_MESSAGE_POSITION="after"
 
 export FZF_DEFAULT_COMMAND='fd --hidden'
 export FZF_DEFAULT_OPTS='
-	--color=hl:206 --pointer=⟐ --prompt="❱ " --scrollbar=▐ --ellipsis=…  --
-	--scroll-off=5 --cycle --layout=reverse --height=90%
-	--bind=tab:down,shift-tab:up,shift-down:preview-page-down,shift-up:preview-page-up
-	--preview-window=border-left
+	--color=hl:206 --pointer=⟐ --prompt="❱ " --scrollbar=▐ --ellipsis=…  --marker=" +"
+	--scroll-off=5 --cycle --layout=reverse --height=90% --preview-window=border-left
+	--bind=tab:down,shift-tab:up
+	--bind=shift-down:preview-page-down,shift-up:preview-page-up
+	--bind=ctrl-s:select+down,ctrl-a:select-all
 '
 
 # extra spacing needed for WezTerm + Iosevka
