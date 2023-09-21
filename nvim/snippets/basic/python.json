@@ -1,8 +1,4 @@
 {
-	"ignore (pyright)": {
-		"prefix": "ignore (pyright)",
-		"body": "# type: ignore"
-	},
 	"def / function": {
 		"prefix": ["def", "function"],
 		"body": ["def ${1:name}($2) -> ${3|None,str,int,dict|}:", "\t\"\"\"${4:Insert docstring.}\"\"\"", "$0"],

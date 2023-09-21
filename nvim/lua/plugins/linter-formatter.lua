@@ -247,5 +247,11 @@ return {
 			{ "<leader>C", function() require("rule-breaker").ignoreRule() end, desc = "󰒕 Ignore Rule" },
 			{ "<leader>d", function() require("rule-breaker").lookupRule() end, desc = "󰒕 Lookup Rule" },
 		},
+		opts = {
+			Pyright = {
+				comment = "# type: ignore",
+				location = "sameLine",
+			},
+		},
 	},
 }

@@ -3,10 +3,6 @@
 		"prefix": "outline (debug)",
 		"body": "outline: 2px solid red !important;"
 	},
-	"ignore (stylelint)": {
-		"prefix": "ignore (stylelint)",
-		"body": "/* stylelint-disable-line ${1:declaration-no-important} */"
-	},
 	"ignore range (stylelint)": {
 		"prefix": "ignore range (stylelint)",
 		"body": [

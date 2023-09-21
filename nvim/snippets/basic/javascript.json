@@ -60,13 +60,6 @@
 		"body": "// @ts-nocheck",
 		"description": "instructs TypeScript to ignore the whole file"
 	},
-	"ignore (TypeScript)": {
-		"prefix": [
-			"ignore (TypeScript)",
-			"ts-ignore"
-		],
-		"body": "// @ts-ignore"
-	},
 	"for (i++)": {
 		"prefix": "for (i++)",
 		"body": [

@@ -58,24 +58,6 @@
 		"body": "- [ ] $0",
 		"description": "Insert task"
 	},
-	"ignore (vale)": {
-		"prefix": "ignore (vale)",
-		"body": "<!-- vale ${1|Vale.Spelling,Google.FirstPerson,Google.Will|} = NO -->"
-	},
-	"ignore start/end (ltex/vale)": {
-		"prefix": "ignore start/end (ltex/vale)",
-		"body": [
-			"<!-- LTeX: enabled=false --><!-- vale off -->",
-			"<!-- LTeX: enabled=true --><!-- vale on -->"
-		]
-	},
-	"ignore start/end (ltex)": {
-		"prefix": "ignore start/end (ltex)",
-		"body": [
-			"<!-- LTeX: enabled=false -->",
-			"<!-- LTeX: enabled=true -->"
-		]
-	},
 	"Markdown Codeblock": {
 		"prefix": [
 			",,",

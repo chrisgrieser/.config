@@ -5,7 +5,8 @@ local u = require("config.utils")
 -- DOCS https://github.com/folke/noice.nvim#-routes
 local routes = {
 	-- write messages
-	{ filter = { event = "msg_show", find = "B written$" }, view = "mini" },
+	{ filter = { event = "msg_show", find = "%d+B written$" }, view = "mini" },
+	{ filter = { event = "msg_show", find = "%d+L, %d+B$" }, view = "mini" },
 
 	{ -- nvim-early-retirement
 		filter = {

@@ -3,9 +3,5 @@
 		"prefix": "schema (modeline)",
 		"body": "# yaml-language-server: $$schema=${1:url}",
 		"description": "https://github.com/redhat-developer/yaml-language-server#using-inlined-schema"
-	},
-	"ignore (yamllint)": {
-		"prefix": "ignore (yamllint)",
-		"body": "# yamllint disable-line rule:${1:truthy}"
 	}
 }
