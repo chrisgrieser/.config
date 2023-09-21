@@ -74,7 +74,7 @@ function update() {
 	osascript -e 'display notification "" with title "🍺 Homebrew finished." sound name "Blow"'
 }
 
-function report() {
+function listall() {
 	print-section "HOMEBREW"
 	print-section "Taps"
 	brew tap
