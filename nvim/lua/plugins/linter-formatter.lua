@@ -11,7 +11,7 @@ local linters = {
 	python = { "pylint" },
 	gitcommit = {},
 	json = {},
-	javascript = {},
+	javascript = { "eslint"},
 	typescript = {},
 	toml = {},
 	text = {},
@@ -246,12 +246,6 @@ return {
 		keys = {
 			{ "<leader>C", function() require("rulebook").ignoreRule() end, desc = "󰒕 Ignore Rule" },
 			{ "<leader>d", function() require("rulebook").lookupRule() end, desc = "󰒕 Lookup Rule" },
-		},
-		opts = {
-			Pyright = {
-				comment = "# type: ignore",
-				location = "sameLine",
-			},
 		},
 	},
 }

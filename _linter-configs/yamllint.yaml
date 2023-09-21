@@ -11,9 +11,9 @@ rules:
   document-start: disable # allow "---" at start of a line
   trailing-spaces: disable # automatically taken care of by formatter
   empty-lines: disable # automatically taken care of by formatter
-  # truthy: disable # false positives when using `on` in github actions
+  truthy: disable # false positives when using `on` in github actions
   braces: disable
-  brackets: disable #     automatically taken care of by formatter
+  brackets: disable # automatically taken care of by formatter
   new-line-at-end-of-file: disable
   comments-indentation: disable
 

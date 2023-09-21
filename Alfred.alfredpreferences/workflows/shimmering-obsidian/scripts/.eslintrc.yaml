@@ -1,0 +1,10 @@
+env:
+  es6: true
+
+parserOptions:
+  ecmaVersion: latest
+
+rules:
+  # Override default settings
+  eqeqeq: warn
+  strict: off
