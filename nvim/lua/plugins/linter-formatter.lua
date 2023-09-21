@@ -243,6 +243,11 @@ return {
 	{
 		"chrisgrieser/nvim-rule-breaker",
 		dev = true,
+		opts = {
+			ignoreRuleComments = {
+				selene = { comment = "bla %s" },
+			},
+		},
 		keys = {
 			{
 				"<leader>C",
