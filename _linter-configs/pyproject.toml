@@ -1,7 +1,4 @@
-# DOCS https://beta.ruff.rs/docs/rules/
-#───────────────────────────────────────────────────────────────────────────────
-
-# https://microsoft.github.io/pyright/#/configuration?id=type-check-diagnostics-settings
+# DOCS https://microsoft.github.io/pyright/#/configuration?id=type-check-diagnostics-settings
 [tool.pyright]
 strictListInference = true
 strictDictionaryInference = true
@@ -9,39 +6,45 @@ strictSetInference = true
 typeCheckingMode = "basic"
 useLibraryCodeForTypes = true
 
+#───────────────────────────────────────────────────────────────────────────────
+
 [tool.black]
 line-length = 100
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# DOCS https://beta.ruff.rs/docs/rules/
 [tool.ruff]
 line-length = 100
-select = [ "ALL" ]
+select = ["ALL"]
 ignore = [
-	"T201", # print statements
-	"S311", # requires cryptographically secure random number generators
-	"W", # pycodestyle warnings are already autofixed by black
+	"T201",   # print statements
+	"S311",   # requires cryptographically secure random number generators
+	"W",      # pycodestyle warnings are already autofixed by black
 	"RET504", # unnecessary assign for return (makes stuff less verbose)
 	"ERA001", # commented out code
-	"TD", # allow TODO
+	"TD",     # allow TODO
 	"FIX002", # complain about TODO in general
 	"FIX004", # complain about HACK
-	"S607", # shell command without full path
-	"S605", # shell instead of subshell
+	"S607",   # shell command without full path
+	"S605",   # shell instead of subshell
 
-	# duplicaton with pyright 
-	"F841", # unused var
-	"F401", # unused import
-	"ARG001" # unused arg
+	# DUPLICATON WITH PYRIGHT
+	"F841",   # unused var
+	"F401",   # unused import
+	"ARG001", # unused arg
 ]
 
 [tool.ruff.pydocstyle]
-convention = "google" # Accepts: "google", "numpy", or "pep257"
+convention = "google" # "google"|"numpy"|"pep257"
+
+#───────────────────────────────────────────────────────────────────────────────
 
 [tool.pylint."MESSAGES CONTROL"]
+enable = ["useless-suppression"]
 disable = [
-	"fixme", # allow TODO
-	"import-error", # already checked by other tools
+	"fixme",           # allow TODO
+	"import-error",    # already checked by other tools
 	"too-many-locals",
-	"unused-variable" # already checked by LSP
+	"unused-variable", # already checked by LSP
 ]
