@@ -11,7 +11,6 @@ local lightThemes = {
 }
 
 local darkThemes = {
-	"rebelot/kanagawa.nvim",
 	{ "folke/tokyonight.nvim", opts = { style = "moon" } },
 	-- { "sainnhe/sonokai", init = function() vim.g.sonokai_style = "shusia" end },
 	-- { "catppuccin/nvim", name = "catppuccin" },
