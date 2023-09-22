@@ -1,6 +1,7 @@
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
+
 return {
 	{
 		"Wansmer/symbol-usage.nvim",
