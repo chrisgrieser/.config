@@ -20,7 +20,7 @@ ZSH_HIGHLIGHT_REGEXP+=('^(acp?|gc -m|git commit -m) ".{72,}"' 'fg=white,bold,bg=
 ZSH_HIGHLIGHT_REGEXP+=('^(acp?|gc -m|git commit -m) ".{51,71}"' 'fg=black,bg=yellow')
 
 # highlight conventional commits
-ZSH_HIGHLIGHT_REGEXP+=('(feat|fix|test|perf|build|ci|revert|refactor|chore|docs|break|improv):' 'fg=blue,bold')
+ZSH_HIGHLIGHT_REGEXP+=('(feat|fix|test|perf|build|ci|revert|refactor|chore|docs|break|improv)(\(.+\)|!)?:' 'fg=blue,bold')
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -154,7 +154,7 @@ function delta {
 function gitlog {
 
 	# my color format used for git log
-	gitlog_format="format:%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)"
+	local gitlog_format="format:%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)"
 
 	git log --all --color --graph --format="$gitlog_format" "$@" |
 		sed -e 's/ seconds* ago)/s)/' \
@@ -167,7 +167,9 @@ function gitlog {
 			-e 's/origin\//󰞶  /g' \
 			-e 's/HEAD/󱍀 /g' \
 			-e 's/->/󰔰 /g' \
-			-e 's/tags: / )/'
+			-e 's/tags: / )/' \
+			-Ee $'s/ (improv|fix|refactor|build|ci|docs|feat|test|perf|chore|revert|break)(\\(.+\\)|!)?:/ \033[1;35m\\1\033[0;34m\\2\033[1;30m:\033[0m/'
+	# INFO inserting ansi colors via sed requires leading $
 	echo
 }
 
