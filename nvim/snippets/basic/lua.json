@@ -3,10 +3,6 @@
 		"prefix": "safe require",
 		"body": ["local ok, ${1:module} = require(\"${1:module}\")", "if not ok then return end", "${1:module}"]
 	},
-	"block comment": {
-		"prefix": "block comment",
-		"body": ["--[[", "$0", "--]]"]
-	},
 	"export module": {
 		"prefix": "export module",
 		"body": [
@@ -39,10 +35,7 @@
 	},
 	"class definition": {
 		"prefix": ["class definition", "type definition"],
-		"body": [
-			"---@class ${1:class_name} ${2:class_description}",
-			"---@field ${3:field_name} string"
-		],
+		"body": ["---@class ${1:class_name} ${2:class_description}", "---@field ${3:field_name} string"],
 		"description": "https://github.com/LuaLS/lua-language-server/wiki/Annotations#class"
 	},
 	"ignore start/end (stylua)": {
@@ -85,8 +78,42 @@
 		"prefix": ["for each line (file)", "read file (as lines)"],
 		"body": ["for line in io.lines(${1:filepath}) do", "\t$0", "end"]
 	},
-	"gmatch (loop)": {
-		"prefix": "gmatch (loop)",
-		"body": ["for capture in ${1:str}:gmatch($2) do", "\t${3:print(capture)}", "end"]
+	"split (gmatch)": {
+		"prefix": "split (gmatch)",
+		"body": [
+			"local acc = {}",
+			"for part in ${1:str}:gmatch(\"(.-)\" .. ${2:delimiter}) do",
+			"\ttable.insert(acc, part)",
+			"end"
+		]
+	},
+	"write file": {
+		"prefix": "write file",
+		"body": [
+			"---@param str string",
+			"---@param filePath string line(s) to add",
+			"---@return string|nil nil on error",
+			"local function writeToFile(filePath, str)",
+			"\tlocal file, _ = io.open(filePath, \"w\")",
+			"\tif not file then return end",
+			"\tfile:write(str .. \"\n\")",
+			"\tfile:close()",
+			"end"
+		],
+		"description": "Overwriting file, for appending use `a` instead of `w`."
+	},
+	"read file": {
+		"prefix": "read file",
+		"body": [
+			"---read the full file",
+			"---@param filePath string",
+			"---@return string|nil nil on error",
+			"local function writeToFile(filePath, str)",
+			"\tlocal content, _ = io.open(filePath, \"r\")",
+			"\tif not content then return end",
+			"\tfile:close()",
+			"\treturn content",
+			"end"
+		]
 	}
 }
