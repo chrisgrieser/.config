@@ -1,5 +1,14 @@
 """This is a test file."""
 
+
+import os
+from random import seed
+
+
+def myfun(one: int, two: int) -> int:
+    """Test."""
+    return one * three     # pyright: ignore reportUndefinedVariable
+
 def hello() -> None:
     """Test."""
     numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -8,7 +17,7 @@ def hello() -> None:
     print("hello world")
 
 
-    THE_SUM = 0
+    the_sum = 0
     for numb in numbers:
         the_sum += numb # pyright: ignore reportUnboundVariable
         the_sum = the_sum / 2

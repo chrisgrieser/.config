@@ -33,6 +33,7 @@ ignore = [
 	"F841",   # unused var
 	"F401",   # unused import
 	"ARG001", # unused arg
+	"F821",   # undefined variable
 ]
 
 [tool.ruff.pydocstyle]
@@ -43,8 +44,13 @@ convention = "google" # "google"|"numpy"|"pep257"
 [tool.pylint."MESSAGES CONTROL"]
 enable = ["useless-suppression"]
 disable = [
-	"fixme",           # allow TODO
-	"import-error",    # already checked by other tools
+	"fixme",        # allow TODO
+	"import-error",
+
+	# DUPLICATON WITH PYRIGHT/RUFF
 	"too-many-locals",
-	"unused-variable", # already checked by LSP
+	"unused-variable",
+	"undefined-variable",
+	"unused-argument",
+	"unused-import",
 ]
