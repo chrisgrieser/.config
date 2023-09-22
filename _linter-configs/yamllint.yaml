@@ -6,6 +6,9 @@
 
 extends: default
 
+
+
+
 rules:
   line-length: disable
   document-start: disable # allow "---" at start of a line

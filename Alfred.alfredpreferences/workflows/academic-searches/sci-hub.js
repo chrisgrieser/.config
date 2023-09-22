@@ -25,6 +25,7 @@ function browserTab() {
 	return { url: url, title: title };
 }
 
+
 //──────────────────────────────────────────────────────────────────────────────
 
 const url = browserTab().url;

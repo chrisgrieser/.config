@@ -196,7 +196,7 @@ serverConfigs.jsonls = {
 -- disable formatting, since taken care of by prettier
 serverConfigs.yamlls = {
 	settings = {
-		yaml = { format = { enable = false } },
+		yaml = { format = { enable = true } },
 	},
 }
 

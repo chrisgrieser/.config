@@ -126,8 +126,9 @@ return {
 			-- 1. use the debugypy installation by mason
 			-- 2. deactivate the annoying auto-opening the console by redirecting
 			-- to the internal console
-			local debugpyPath = vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python3"
-			require("dap-python").setup(debugpyPath, { console = "internalConsole" })
+			local debugpyPythonPath = require("mason-registry").get_package("debugpy"):get_install_path()
+				.. "/venv/bin/python3"
+			require("dap-python").setup(debugpyPythonPath, { console = "internalConsole" })
 		end,
 	},
 	{
