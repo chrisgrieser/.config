@@ -20,10 +20,11 @@ else
 fi
 
 # add preview of note to status bar (similar to the OneThing app)
-if [[ $(echo "$current_note" | wc -l) -eq 1 ]]; then
+if [[ -n "$current_note" ]]; then
 	preview="$(echo -n "$current_note" |
 		sed -e 's/\[ ] //' -e 's/- //' |
-		cut -c-$preview_cutoff_chars)…"
+		cut -c-$preview_cutoff_chars)"
+	[[ -n "$preview" ]] && preview="$preview…"
 	label="$label $preview"
 fi
 
