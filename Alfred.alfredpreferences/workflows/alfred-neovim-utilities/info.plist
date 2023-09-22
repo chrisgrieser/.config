@@ -996,26 +996,15 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>repo=$(echo $* | cut -d"/" -f2)
-find "$plugin_installation_path" -path "*/$repo" -type d | xargs open</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
+				<key>path</key>
 				<string></string>
-				<key>type</key>
-				<integer>5</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.action.revealfile</string>
 			<key>uid</key>
 			<string>D818D50E-55A9-45FB-AC92-10FCF4BC8B60</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -1242,7 +1231,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>335</real>
 			<key>ypos</key>
-			<real>780</real>
+			<real>790</real>
 		</dict>
 		<key>D9E07FDE-1870-42B0-B6D4-AA209906679E</key>
 		<dict>

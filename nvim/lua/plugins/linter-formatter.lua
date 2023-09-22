@@ -22,6 +22,7 @@ local linters = {
 -- PENDING https://github.com/mfussenegger/nvim-lint/issues/355
 for ft, _ in pairs(linters) do
 	table.insert(linters[ft], "codespell")
+	table.insert(linters[ft], "editorconfig-checker")
 end
 
 local formatters = {
@@ -131,7 +132,12 @@ local function linterConfigs()
 end
 
 local function lintTriggers()
-	local function doLint() vim.defer_fn(require("lint").try_lint, 1) end
+	local function doLint()
+		-- https://github.com/mfussenegger/nvim-lint/issues/370#issuecomment-1729671151
+		local hasNoSeleneConfig = vim.loop.fs_stat(vim.loop.cwd() .. "/selene.toml")
+		if hasNoSeleneConfig and vim.bo.filetype == "lua" then return end
+		vim.defer_fn(require("lint").try_lint, 1)
+	end
 
 	vim.api.nvim_create_autocmd({ "BufReadPost", "InsertLeave", "TextChanged", "FocusGained" }, {
 		callback = doLint,

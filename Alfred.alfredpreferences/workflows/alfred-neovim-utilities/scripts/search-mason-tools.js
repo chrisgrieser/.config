@@ -20,11 +20,11 @@ function readFile(path) {
 }
 
 /** @typedef {Object} MasonPackage
-* @property {string} homepage
-* @property {string} name
-* @property {string[]} categories
-* @property {string[]} languages
-*/
+ * @property {string} homepage
+ * @property {string} name
+ * @property {string[]} categories
+ * @property {string[]} languages
+ */
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -57,19 +57,20 @@ function run() {
 	const masonIcon = "./mason-logo.png";
 
 	/** @type AlfredItem[] */
-	const availableTools = masonRegistry
-		.map((/** @type {MasonPackage} */ tool) => {
-			const installedIcon = installedTools.includes(tool.name) ? "✅ " : "";
-			const categoryList = tool.categories.join(", ");
-			const languages = tool.languages.length > 0 ? tool.languages.join(", ") : "";
+	const availableTools = masonRegistry.map((/** @type {MasonPackage} */ tool) => {
+		const installedIcon = installedTools.includes(tool.name) ? "✅ " : "";
+		const categoryList = tool.categories.join(", ");
+		const languages = tool.languages.length > 0 ? tool.languages.join(", ") : "";
+		const separator = languages && categoryList ? "  ·  " : "";
+		const subtitle = categoryList + separator + languages;
 
-			return {
-				title: installedIcon + tool.name,
-				subtitle: categoryList + "  ·  " + languages,
-				match: alfredMatcher(tool.name) + categoryList + " " + languages,
-				arg: tool.homepage,
-				icon: { path: masonIcon },
-			};
-		});
+		return {
+			title: installedIcon + tool.name,
+			subtitle: subtitle,
+			match: alfredMatcher(tool.name) + categoryList + " " + languages,
+			arg: tool.homepage,
+			icon: { path: masonIcon },
+		};
+	});
 	return JSON.stringify({ items: availableTools });
 }

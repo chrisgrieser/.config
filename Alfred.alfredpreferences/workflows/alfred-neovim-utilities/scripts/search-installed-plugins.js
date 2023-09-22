@@ -43,6 +43,8 @@ function run() {
 				const owner = remote.split("/")[3];
 				const name = remote.split("/")[4].slice(0, -4); // remove ".git"
 				const repo = `${owner}/${name}`;
+				const installPath = $.getenv("plugin_installation_path") + "/" + name;
+
 				return {
 					title: name,
 					subtitle: owner,
@@ -50,6 +52,7 @@ function run() {
 					arg: "https://github.com/" + repo,
 					mods: {
 						cmd: { arg: repo },
+						fn: { arg: installPath },
 					},
 					uid: repo,
 				};
@@ -60,25 +63,27 @@ function run() {
 		const masonRegistry = JSON.parse(readFile(masonRegistryPath));
 		const installedTools = app.doShellScript(`cd "${masonLocation}/bin" && ls -1`).split("\r");
 		const masonIcon = "./mason-logo.png";
-		const notForMason = { valid : false, subtitle : "🚫 Not for Mason Tool" };
 
 		masonArray = masonRegistry
 			.filter((/** @type {MasonPackage} */ tool) => installedTools.includes(tool.name))
 			.map((/** @type {MasonPackage} */ tool) => {
 				const categoryList = tool.categories.join(", ");
 				const languages = tool.languages.length > 0 ? tool.languages.join(", ") : "";
+				const separator = languages && categoryList ? "  ·  " : "";
+				const subtitle = categoryList + separator + languages;
+				const installPath = masonLocation + "/packages/" + tool.name;
 
 				return {
 					title: tool.name,
-					subtitle: categoryList + "  ·  " + languages,
+					subtitle: subtitle,
 					match: alfredMatcher(tool.name) + categoryList,
 					icon: { path: masonIcon },
 					arg: tool.homepage,
 					uid: tool.name,
 					mods: {
-						cmd: notForMason,
-						shift: notForMason,
-						fn: notForMason,
+						cmd: { valid: false, subtitle: "🚫 Not for Mason Tool" },
+						shift: { valid: false, subtitle: "🚫 Not for Mason Tool" },
+						fn: { arg: installPath },
 					},
 				};
 			});
