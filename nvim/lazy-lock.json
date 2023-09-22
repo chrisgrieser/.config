@@ -81,7 +81,6 @@
   "replacer.nvim": { "branch": "master", "commit": "32e1713230844fa52f7f0598c59295de3c90dc95" },
   "satellite.nvim": { "branch": "main", "commit": "5d33376287e384f04b84962a20d90bd10a9dac86" },
   "scrollEOF.nvim": { "branch": "master", "commit": "3fb4c699fc42b42cced466d09f38315b5d524253" },
-  "semshi": { "branch": "master", "commit": "dbb08610644a902665a343b899457877981099b8" },
   "sentiment.nvim": { "branch": "main", "commit": "ecde8d877881bb78fdb90060c0991e76770dbdbc" },
   "sg.nvim": { "branch": "master", "commit": "a6a677225bffd66bc98e03ed77438cde93a6fd31" },
   "sibling-swap.nvim": { "branch": "main", "commit": "58b256f2a7def9b63be275b373c748c012b3a604" },

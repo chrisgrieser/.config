@@ -21,6 +21,7 @@ function make() {
 # INFO leading space to ignore it in history due to HIST_IGNORE_SPACE
 alias r=' exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
 alias q=' exit'
+alias c='command'
 
 # added verbosity
 alias mv='mv -v'
@@ -31,7 +32,6 @@ alias cp='cp -v'
 alias grep='grep --ignore-case --color'
 alias ls='ls --color'
 alias which='which -a'           # show all
-alias which='type -a'            # show all
 alias mkdir='mkdir -p'           # create intermediate directories
 alias curl='curl --progress-bar' # nicer progress bar
 
