@@ -55,6 +55,10 @@ function update() {
 	brew upgrade
 	brew cleanup
 
+	# manually update, cause brew won't update as it is in theory self-upgrading
+	echo "Updating Obsidian Installer"
+	brew upgrade obsidian
+
 	print-section "MAC APP STORE"
 	mas upgrade
 

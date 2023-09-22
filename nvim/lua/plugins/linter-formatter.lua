@@ -204,8 +204,7 @@ return {
 		end,
 	},
 	{
-		"chrisgrieser/conform.nvim",
-		dev = true, -- PENDING https://github.com/stevearc/conform.nvim/pull/69
+		"stevearc/conform.nvim",
 		config = formatterConfig,
 		cmd = "ConformInfo",
 		keys = {

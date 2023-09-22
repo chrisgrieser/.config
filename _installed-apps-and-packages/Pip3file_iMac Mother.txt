@@ -1,0 +1,3 @@
+chromaterm
+pip-autoremove
+wheel

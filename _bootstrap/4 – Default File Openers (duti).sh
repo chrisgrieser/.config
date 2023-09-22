@@ -1,7 +1,9 @@
 #!/usr/bin/env zsh
 # https://chainsawonatireswing.com/2012/09/19/changing-default-applications-on-a-mac-using-the-command-line-then-a-shell-script/
 #───────────────────────────────────────────────────────────────────────────────
-brew install duti
+
+# install duti if needed
+command -v duti &>/dev/null || brew install duti
 
 # open once to initialize
 open "$DOTFILE_FOLDER/nvim/mac-helper/Neovide Helper.app" 
