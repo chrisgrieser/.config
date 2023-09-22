@@ -75,10 +75,10 @@ sketchybar \
 	script="$PLUGIN_DIR/weather.sh" \
 	icon.y_offset=-1 \
 	\
-	--add item sidenotes-count $first_row \
-	--set sidenotes-count \
-	script="$PLUGIN_DIR/sidenotes-count.sh" \
-	--add event update-sidenotes-count \
+	--add item sidenotes $first_row \
+	--set sidenotes \
+	script="$PLUGIN_DIR/sidenotes.sh" \
+	--add event update-sidenotes \
 	--subscribe sidenotes-count update-sidenotes-count \
 	\
 	--add alias "$stats" $second_row \
