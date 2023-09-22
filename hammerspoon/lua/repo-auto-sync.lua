@@ -82,7 +82,7 @@ local function syncAllGitRepos(notify)
 		.waitUntil(noSyncInProgress, function()
 			if notify then u.notify("🔁 Sync finished") end
 			u.runWithDelays(
-				{ 0, 5 },
+				5,
 				function() hs.execute(u.exportPath .. "sketchybar --trigger repo-files-update") end
 			)
 		end)
