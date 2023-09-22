@@ -33,7 +33,7 @@ ignore = [
 	"F841",   # unused var
 	"F401",   # unused import
 	"ARG001", # unused arg
-	"F821",   # undefined variable
+	# "F821",   # undefined variable
 ]
 
 [tool.ruff.pydocstyle]

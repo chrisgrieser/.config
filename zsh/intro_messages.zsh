@@ -31,8 +31,8 @@ width=$(($(tput cols) - 10))
 # turn the speech bubble into nicer box drawing characters, restore the cow to
 # the traditional the characters there have been affected
 fortune -n270 -s | cowsay -W$width "$random_emotion" |
-	sed -E -e 's/^ _/ ╭/' -E -e 's/^ -/ ╰/' -E -e 's/_ $/──╮/' -E -e 's/- $/──╯/' \
-	-E -e 's,[|/\\>]$,│,g' -E -e 's,^[|/\\<], │,g' -E -e 's/[_-]/─/g' \
+	sed -Ee 's/^ _/ ╭/' -Ee 's/^ -/ ╰/' -Ee 's/_ $/──╮/' -Ee 's/- $/──╯/' \
+	-Ee 's,[|/\\>]$,│,g' -Ee 's,^[|/\\<], │,g' -Ee 's/[_-]/─/g' \
 	-e 's/\^──\^/^__^/' -e 's/\(──\)/(--)/' -e 's/\\───────/\\_______/' \
 	-e 's/\|\|────w │/||----w |/' -e 's,\\/│,\\/\\,' -e 's/\|│/||/' \
 	-e 's,  \\  ,    ,g'
