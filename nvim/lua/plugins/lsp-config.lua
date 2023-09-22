@@ -183,7 +183,7 @@ serverConfigs.tsserver = {
 }
 
 --------------------------------------------------------------------------------
--- JSON/YAML
+-- JSON/YAML/TOML
 
 -- DOCS https://github.com/Microsoft/vscode/tree/main/extensions/json-language-features/server#configuration
 serverConfigs.jsonls = {
@@ -193,11 +193,22 @@ serverConfigs.jsonls = {
 	},
 }
 
+-- disable formatting, since taken care of by prettier
 serverConfigs.yamlls = {
 	settings = {
-		-- disable formatting, since taken care of by prettier
 		yaml = { format = { enable = false } },
 	},
+}
+
+-- use lsp for formatting
+serverConfigs.taplo = {
+	on_attach = function()
+		vim.keymap.set("n", "<D-s>", function()
+			vim.lsp.buf.format()
+			vim.notify("🪚 beep 🤖")
+			vim.cmd.update()
+		end, { buffer = true, desc = "󰒕 Taplo Format & Save" })
+	end,
 }
 
 --------------------------------------------------------------------------------

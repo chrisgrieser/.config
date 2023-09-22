@@ -1,7 +1,6 @@
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
-
 return {
 	{
 		"Wansmer/symbol-usage.nvim",
@@ -68,9 +67,9 @@ return {
 	},
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",
-		-- event = "LspAttach", -- loading on `require` or InsertEnter ignores the config, so loading on LspAttach
+		event = "BufReadPre", -- TODO need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
 		opts = {
-			floating_window = true,
+			floating_window = false,
 			always_trigger = true,
 			hint_prefix = "󰘎 ",
 			hint_scheme = "NonText", -- = highlight group

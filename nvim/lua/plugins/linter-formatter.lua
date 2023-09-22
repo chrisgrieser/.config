@@ -204,15 +204,15 @@ return {
 		end,
 	},
 	{
-		"stevearc/conform.nvim",
-		dev = true,
+		"chrisgrieser/conform.nvim",
+		dev = true, -- PENDING https://github.com/stevearc/conform.nvim/pull/69
 		config = formatterConfig,
 		cmd = "ConformInfo",
 		keys = {
 			{
 				"<D-s>",
 				function()
-					require("conform").format { lsp_fallback = "always" }
+					require("conform").format()
 					vim.cmd.update()
 				end,
 				mode = { "n", "x" },
