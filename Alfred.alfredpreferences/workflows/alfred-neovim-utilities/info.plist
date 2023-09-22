@@ -996,15 +996,17 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>path</key>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
 				<string></string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.revealfile</string>
+			<string>alfred.workflow.action.openfile</string>
 			<key>uid</key>
 			<string>D818D50E-55A9-45FB-AC92-10FCF4BC8B60</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -1231,7 +1233,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>335</real>
 			<key>ypos</key>
-			<real>785</real>
+			<real>780</real>
 		</dict>
 		<key>D9E07FDE-1870-42B0-B6D4-AA209906679E</key>
 		<dict>
@@ -1462,7 +1464,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.6.2</string>
+	<string>1.6.3</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
