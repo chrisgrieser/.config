@@ -36,6 +36,8 @@ function pr {
 	local reponame
 	reponame=$(basename "$PWD")
 	git remote set-url origin "git@github.com:chrisgrieser/$reponame.git"
+
+
 }
 
 # select a fork or multiple forks to delete
