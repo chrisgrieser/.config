@@ -112,25 +112,16 @@ local function linterConfigs()
 		"--disable=no-multiple-blanks",
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
 	}
-
-	local pattern = "^%s*(%d+)%s+%-%s+(.+)$"
-	local groups = {"lnum", "message"}
-	lint.linters["editorconfig-checker"] = {
-		cmd = "editorconfig-checker",
-		stdin = false,
-		ignore_exitcode = true,
-		args = {},
-		-- args = {
-		-- 	"-disable-max-line-length", -- only rule of thumb
-		-- 	"-disable-trim-trailing-whitespace", -- will be formatted anyway
-		-- },
-		parser = require("lint.parser").from_pattern(pattern, groups, {}, { ["source"] = "editorconfig-checker" }),
+	lint.linters["editorconfig-checker"].args = {
+		"-no-color",
+		"-disable-max-line-length", -- only rule of thumb
+		"-disable-trim-trailing-whitespace", -- will be formatted anyway
 	}
 end
 
 local function lintTriggers()
 	local function doLint()
-		-- https://github.com/mfussenegger/nvim-lint/issues/370#issuecomment-1729671151
+		-- condition when to lint https://github.com/mfussenegger/nvim-lint/issues/370#issuecomment-1729671151
 		local hasNoSeleneConfig = vim.loop.fs_stat(vim.loop.cwd() .. "/selene.toml") == nil
 		if hasNoSeleneConfig and vim.bo.filetype == "lua" then return end
 		vim.defer_fn(require("lint").try_lint, 1)
@@ -221,6 +212,7 @@ return {
 	},
 	{
 		"mfussenegger/nvim-lint",
+		dev = true,
 		event = "VeryLazy",
 		config = function()
 			linterConfigs()

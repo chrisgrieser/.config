@@ -35,6 +35,7 @@ return {
 			patterns = {
 				".git",
 				"Makefile",
+				".editorconfig",
 				"pyproject.toml", -- python
 				"requirements.txt", -- python
 				"manifest.json", -- node
@@ -44,7 +45,8 @@ return {
 				"selene.toml", -- lua
 				"stylua.toml", -- lua
 				".project-root", -- manually marked
-				">com~apple~CloudDocs", -- = all subfolders of the iCloud folders
+				">com~apple~CloudDocs", -- = all subfolders of the iCloud drive
+				">Repos", -- = all subfolders of the Repos folder
 			},
 		},
 	},
