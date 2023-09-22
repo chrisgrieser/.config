@@ -61,6 +61,7 @@
   "nvim-origami": { "branch": "main", "commit": "12a79de05347ba5c29cde6effb41bc3477c844fc" },
   "nvim-puppeteer": { "branch": "main", "commit": "c1d7c4960e35f0318f41c90f067265d18f90db40" },
   "nvim-recorder": { "branch": "main", "commit": "e6ecc8ba0b950df9ac0ef7507dc95cb0037bead1" },
+  "nvim-rulebook": { "branch": "main", "commit": "09e98c17ae88010321735b3970c21c6b25144405" },
   "nvim-spider": { "branch": "main", "commit": "be7273858d75673a0ae594552742eb8769f35d6a" },
   "nvim-surround": { "branch": "main", "commit": "1c2ef599abeeb98e40706830bcd27e90e259367a" },
   "nvim-tinygit": { "branch": "main", "commit": "201c25c553d66b75b05bc3461528fbb885dd5c43" },
