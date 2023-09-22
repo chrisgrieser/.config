@@ -67,10 +67,10 @@ return {
 	},
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",
-		-- loading on `require` or InsertEnter ignores the config, so loading on LspAttach
-		event = "LspAttach",
+		-- event = "LspAttach", -- loading on `require` or InsertEnter ignores the config, so loading on LspAttach
 		opts = {
-			floating_window = false,
+			floating_window = true,
+			always_trigger = true,
 			hint_prefix = "󰘎 ",
 			hint_scheme = "NonText", -- = highlight group
 		},

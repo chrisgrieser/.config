@@ -145,37 +145,21 @@ end
 --------------------------------------------------------------------------------
 
 local function formatterConfig()
-	require("conform").setup {
-		log_level = vim.log.levels.DEBUG,
-		formatters_by_ft = formatters,
-		formatters = {
-			["bibtex-tidy"] = {
-				command = "bibtex-tidy",
-				stdin = true,
-				args = {
-					"--quiet",
-					"--omit=month,issn,abstract",
-					"--tab",
-					"--curly",
-					"--strip-enclosing-braces",
-					"--enclosing-braces=title,journal,booktitle",
-					"--numeric",
-					"--months",
-					"--no-align",
-					"--encode-urls",
-					"--duplicates",
-					"--drop-all-caps",
-					"--sort-fields",
-					"--remove-empty-fields",
-					"--no-wrap",
-				},
-				-- main bibliography too big
-				condition = function(ctx) return vim.fs.basename(ctx.filename) ~= "main-bibliography.bib" end,
-			},
-		},
-	}
+	require("conform").setup { formatters_by_ft = formatters }
 
-	-- DOCS https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md#add-extra-arguments-to-a-formatter-command
+	-- stylua: ignore
+	require("conform.formatters.bibtex-tidy").args = {
+		"--quiet",
+		"--tab", "--curly", "--strip-enclosing-braces", "--no-align", "--no-wrap",
+		"--enclosing-braces=title,journal,booktitle", "--drop-all-caps",
+		"--numeric", "--months", "--encode-urls",
+		"--duplicates", "--sort-fields", "--remove-empty-fields", "--omit=month,issn,abstract",
+	}
+	require("conform.formatters.bibtex-tidy").condition = function(ctx)
+		local ignore = vim.fs.basename(ctx.filename) == "main-bibliography.bib"
+		if ignore then u.notify("conform.nvim", "Ignoring main-bibliography.bib") end
+		return not ignore
+	end
 	require("conform.formatters.markdownlint").args = {
 		"--fix",
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
@@ -211,8 +195,8 @@ return {
 		end,
 	},
 	{
-		"mfussenegger/nvim-lint",
-		dev = true,
+		"chrisgrieser/nvim-lint",
+		dev = true, -- PENDING https://github.com/mfussenegger/nvim-lint/pull/377
 		event = "VeryLazy",
 		config = function()
 			linterConfigs()
@@ -221,6 +205,7 @@ return {
 	},
 	{
 		"stevearc/conform.nvim",
+		dev = true,
 		config = formatterConfig,
 		cmd = "ConformInfo",
 		keys = {
