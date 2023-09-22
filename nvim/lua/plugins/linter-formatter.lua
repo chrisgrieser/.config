@@ -101,40 +101,37 @@ local function linterConfigs()
 	local lint = require("lint")
 	lint.linters_by_ft = linters
 
-	lint.linters.vale.args = {
-		"--output=JSON",
-		"--ext=.md",
-		"--no-exit",
-		"--config=" .. linterConfig .. "/vale/vale.ini",
-	}
-
-	lint.linters.codespell.args = {
-		"--toml=" .. linterConfig .. "/codespell.toml",
-	}
-
-	lint.linters.shellcheck.args = {
-		"--shell=bash", -- force to work with zsh
-		"--format=json",
-		"-",
-	}
-
-	lint.linters.yamllint.args = {
-		"--config-file=" .. linterConfig .. "/yamllint.yaml",
-		"--format=parsable",
-		"-",
-	}
-
+	lint.linters.codespell.args = { "--toml=" .. linterConfig .. "/codespell.toml" }
+	lint.linters.shellcheck.args = { "--shell=bash", "--format=json", "-" }
+	lint.linters.yamllint.args =
+		{ "--config-file=" .. linterConfig .. "/yamllint.yaml", "--format=parsable", "-" }
+	lint.linters.vale.args =
+		{ "--output=JSON", "--ext=.md", "--no-exit", "--config=" .. linterConfig .. "/vale/vale.ini" }
 	lint.linters.markdownlint.args = {
 		"--disable=no-trailing-spaces", -- not disabled in config, so it's enabled for formatting
 		"--disable=no-multiple-blanks",
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
+	}
+
+	local pattern = "^%s*(%d+)%s+%-%s+(.+)$"
+	local groups = {"lnum", "message"}
+	lint.linters["editorconfig-checker"] = {
+		cmd = "editorconfig-checker",
+		stdin = false,
+		ignore_exitcode = true,
+		args = {},
+		-- args = {
+		-- 	"-disable-max-line-length", -- only rule of thumb
+		-- 	"-disable-trim-trailing-whitespace", -- will be formatted anyway
+		-- },
+		parser = require("lint.parser").from_pattern(pattern, groups, {}, { ["source"] = "editorconfig-checker" }),
 	}
 end
 
 local function lintTriggers()
 	local function doLint()
 		-- https://github.com/mfussenegger/nvim-lint/issues/370#issuecomment-1729671151
-		local hasNoSeleneConfig = vim.loop.fs_stat(vim.loop.cwd() .. "/selene.toml")
+		local hasNoSeleneConfig = vim.loop.fs_stat(vim.loop.cwd() .. "/selene.toml") == nil
 		if hasNoSeleneConfig and vim.bo.filetype == "lua" then return end
 		vim.defer_fn(require("lint").try_lint, 1)
 	end
