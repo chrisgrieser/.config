@@ -1,6 +1,8 @@
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
+-- more potential tools: https://www.reddit.com/r/neovim/comments/16p7um2/comment/k1qaqir/?context=3
+
 return {
 	{
 		"linux-cultist/venv-selector.nvim",
