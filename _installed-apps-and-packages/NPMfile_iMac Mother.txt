@@ -1,7 +1,5 @@
-eslint
 npm
-postcss
+stylelint-config-recess-order
 stylelint-config-recommended
-stylelint-declaration-block-no-ignored-properties
 stylelint-order
 stylelint

@@ -205,7 +205,6 @@ serverConfigs.taplo = {
 	on_attach = function()
 		vim.keymap.set("n", "<D-s>", function()
 			vim.lsp.buf.format()
-			vim.notify("🪚 beep 🤖")
 			vim.cmd.update()
 		end, { buffer = true, desc = "󰒕 Taplo Format & Save" })
 	end,

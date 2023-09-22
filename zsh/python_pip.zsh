@@ -67,7 +67,7 @@ function cd() {
 # 2. alias `pip uninstall` to `pip-autoremove`
 # 3. other commands work as usual
 function pip() {
-	if ! command -v ct &>/dev/null; then print "\033[1;33mct not installed.\033[0m" && return 1; fi
+	if ! command -v ct &>/dev/null; then print "\033[1;33mchromaterm not installed.\033[0m" && return 1; fi
 	
 	if [[ "$1" == "update" ]]; then
 		shift
