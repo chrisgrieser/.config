@@ -19,8 +19,6 @@ end
 local function runMake(recipe)
 	if not checkForMakefile() then return end
 
-	-- local output = vim.fn.system({ "make", "--silent", recipe }):gsub("%s+$", "")
-
 	-- using async jobstart in case of a slow recipe
 	vim.fn.jobstart({ "make", "--silent", recipe }, {
 		stdout_buffered = true,
@@ -29,12 +27,12 @@ local function runMake(recipe)
 		on_stdout = function(_, data)
 			if data[1] == "" and #data == 1 then return end
 			local output = table.concat(data, "\n"):gsub("%s*$", "")
-			vim.notify(output, vim.log.levels.INFO, { title = recipe })
+			vim.notify(output, vim.log.levels.INFO, { title = "make " .. recipe })
 		end,
 		on_stderr = function(_, data)
 			if data[1] == "" and #data == 1 then return end
 			local output = table.concat(data, "\n"):gsub("%s*$", "")
-			vim.notify(output, vim.log.levels.WARN, { title = recipe })
+			vim.notify(output, vim.log.levels.WARN, { title = "make " .. recipe })
 		end,
 	})
 end
