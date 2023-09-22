@@ -20,7 +20,7 @@ ZSH_HIGHLIGHT_REGEXP+=('^(acp?|gc -m|git commit -m) ".{72,}"' 'fg=white,bold,bg=
 ZSH_HIGHLIGHT_REGEXP+=('^(acp?|gc -m|git commit -m) ".{51,71}"' 'fg=black,bg=yellow')
 
 # highlight conventional commits
-ZSH_HIGHLIGHT_REGEXP+=('(feat|fix|test|perf|build|ci|revert|refactor|chore|docs|break|improv)(\(.+\)|!)?:' 'fg=blue,bold')
+ZSH_HIGHLIGHT_REGEXP+=('(feat|fix|test|perf|build|ci|revert|refactor|chore|docs|break|improv)(\(.+\)|\\!)?:' 'fg=magenta,bold')
 
 #───────────────────────────────────────────────────────────────────────────────
 

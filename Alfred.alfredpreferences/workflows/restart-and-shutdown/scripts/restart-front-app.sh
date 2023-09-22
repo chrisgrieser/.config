@@ -47,7 +47,7 @@ sleep 0.1
 open -a "Neovide" # config reopens last file if no arg
 
 # server responsive?
-sleep 1 # wait for server
+sleep 2 # wait for server
 # HACK sleep for 1ms = effectively pinging nvim server
 if ! nvim --server "$server" --remote-send "<cmd>sleep 1m<CR>"; then
 	osascript -e 'display notification "" with title "Server unresponsive."'
