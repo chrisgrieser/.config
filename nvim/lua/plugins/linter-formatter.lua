@@ -168,7 +168,7 @@ return {
 		-- (auto-install of lsp servers done via `mason-lspconfig.nvim`)
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		event = "VeryLazy",
-		dependencies = {"williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim"},
+		dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
 		config = function()
 			local myTools = toolsToAutoinstall(linters, formatters, debuggers, dontInstall)
 			vim.list_extend(myTools, vim.g.myLsps)
