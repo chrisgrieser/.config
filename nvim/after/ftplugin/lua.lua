@@ -7,7 +7,6 @@ local u = require("config.utils")
 
 -- habits from writing too much in other languages
 abbr("<buffer> // --")
-abbr("<buffer> # --")
 abbr("<buffer> const local")
 abbr("<buffer> fi end")
 abbr("<buffer> != ~=")
