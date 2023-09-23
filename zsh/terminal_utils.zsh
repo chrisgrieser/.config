@@ -31,6 +31,7 @@ function inspect() {
 		gitlog -n "$max_gitlog_lines"
 		separator
 		if [[ -n "$(git status --short --porcelain)" ]]; then
+			# spread across multiple lines
 			git -c color.status="always" status --short | rs -e -w"$(tput cols)"
 			separator
 		fi
@@ -58,7 +59,7 @@ function inspect() {
 	fi
 }
 
-# Quick Open File/Folder
+# Quick Open File
 function o() {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 	if ! command -v fd &>/dev/null; then echo "fd not installed." && return 1; fi
@@ -75,7 +76,7 @@ function o() {
 
 	# --delimiter and --nth options ensure only file name and parent folder are displayed
 	selected=$(
-		fd --hidden --color=always | fzf \
+		fd --hidden --color=always --type=file | fzf \
 			-0 -1 --ansi --query="$input" --info=inline \
 			--preview '[[ -f {} ]] && bat --color=always --style=snip --wrap=never --tabs=2 {} || eza --icons --color=always --group-directories-first {}'
 	)
