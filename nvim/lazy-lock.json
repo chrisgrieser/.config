@@ -64,6 +64,7 @@
   "nvim-rulebook": { "branch": "main", "commit": "14f7174e25d97f97787cb22487106bf5bfa20397" },
   "nvim-spider": { "branch": "main", "commit": "be7273858d75673a0ae594552742eb8769f35d6a" },
   "nvim-surround": { "branch": "main", "commit": "1c2ef599abeeb98e40706830bcd27e90e259367a" },
+  "nvim-tinygit": { "branch": "main", "commit": "75c2c153839851aa5754a4d94310119b8c66d3f1" },
   "nvim-treesitter": { "branch": "master", "commit": "af6b3ecea9b3cff18b9244027e23e7f2c34ebdd5" },
   "nvim-treesitter-endwise": { "branch": "master", "commit": "9298b3ac8fd6d0d8f9e321194c6d3fd37e417cf9" },
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "bd103502252027434ec42f628d2dbf54821d4ce6" },
