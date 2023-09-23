@@ -175,9 +175,11 @@ return {
 				ensure_installed = myTools,
 				run_on_start = false, -- triggered manually, since not working with lazy-loading
 			}
-			vim.cmd.MasonToolsClean() -- clean unused
-			vim.cmd.MasonToolsInstall() -- install missing
-			vim.cmd.MasonToolsUpdate()
+			vim.defer_fn(function()
+				vim.cmd.MasonToolsClean() -- clean unused
+				vim.cmd.MasonToolsInstall() -- install missing
+				vim.cmd.MasonToolsUpdate()
+			end, 500)
 		end,
 	},
 	{
