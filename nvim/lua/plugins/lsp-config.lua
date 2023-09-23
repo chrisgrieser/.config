@@ -2,7 +2,7 @@ local u = require("config.utils")
 
 --------------------------------------------------------------------------------
 
-local lsps = {
+vim.g.myLsps = {
 	"lua_ls",
 	"yamlls",
 	"jsonls",
@@ -35,7 +35,7 @@ local lsps = {
 ---@type table<string, lspConfiguration>
 local serverConfigs = {}
 
-for _, lsp in pairs(lsps) do
+for _, lsp in pairs(vim.g.myLsps) do
 	serverConfigs[lsp] = {}
 end
 
@@ -295,12 +295,6 @@ return {
 				icons = { package_installed = "✓", package_pending = "󰔟", package_uninstalled = "✗" },
 			},
 		},
-	},
-	{ -- auto-install lsp servers
-		"williamboman/mason-lspconfig.nvim",
-		event = "VeryLazy",
-		dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
-		opts = { ensure_installed = lsps },
 	},
 	{ -- configure LSPs
 		"neovim/nvim-lspconfig",

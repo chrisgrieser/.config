@@ -79,22 +79,6 @@ local function toolsToAutoinstall(myLinters, myFormatters, myDebuggers, ignoreTo
 	return tools
 end
 
----uninstalls unneeded non-LSP tools
----@param toolsToKeep string[]
-local function autoUninstall(toolsToKeep)
-	local installedTools = require("mason-registry").get_installed_packages()
-	local toUninstall = vim.tbl_filter(function(t)
-		local toKeep = vim.tbl_contains(toolsToKeep, t.name)
-		local isLsp = vim.tbl_contains(t.spec.categories, "LSP")
-		return not (toKeep or isLsp)
-	end, installedTools)
-
-	for _, tool in ipairs(toUninstall) do
-		u.notify("mason.nvim", "Cleaning up: " .. tool.name)
-		tool:uninstall()
-	end
-end
-
 --------------------------------------------------------------------------------
 
 local function linterConfigs()
@@ -184,18 +168,18 @@ return {
 		-- (auto-install of lsp servers done via `mason-lspconfig.nvim`)
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		event = "VeryLazy",
-		dependencies = "williamboman/mason.nvim",
+		dependencies = {"williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim"},
 		config = function()
 			local myTools = toolsToAutoinstall(linters, formatters, debuggers, dontInstall)
+			vim.list_extend(myTools, vim.g.myLsps)
 
 			require("mason-tool-installer").setup {
 				ensure_installed = myTools,
 				auto_update = true,
-				-- triggered myself, since `run_on_start`, does not work w/ lazy-loading
-				run_on_start = false,
+				run_on_start = false, -- triggered manually, since not working with lazy-loading
 			}
 			vim.cmd.MasonToolsInstall()
-			autoUninstall(myTools)
+			vim.cmd.MasonToolsClean()
 		end,
 	},
 	{
