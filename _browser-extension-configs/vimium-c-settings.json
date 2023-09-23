@@ -1,11 +1,11 @@
 {
 	"name": "Vimium C",
-	"@time": "12/09/2023, 09:50:21",
-	"time": 1694505021291,
+	"@time": "9/23/2023, 5:01:56 PM",
+	"time": 1695481316498,
 	"environment": {
 		"extension": "1.99.994",
 		"platform": "mac",
-		"chromium": 116
+		"chromium": 117
 	},
 	"allBrowserUrls": true,
 	"exclusionListenHash": false,
@@ -163,6 +163,8 @@
 		"map yg copyCurrentUrl sed=\"s=https?://github.com/(.+?/.[^/]+).*=$1=\"",
 		"\" copy links of all tabs",
 		"map yw copyWindowInfo format=\"${url}\"",
+		"\" copy link as markdown",
+		"map ym copyCurrentUrl format=\"[${title}](${url})\"",
 		"",
 		"\" Help",
 		"map ? showHelp",
