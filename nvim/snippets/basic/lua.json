@@ -55,7 +55,7 @@
 		"body": "return end"
 	},
 	"then return end": {
-		"prefix": ["then return end", "tr"],
+		"prefix": ["then return end", "tree"],
 		"body": "then return end"
 	},
 	"format": {

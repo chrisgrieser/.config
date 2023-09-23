@@ -270,11 +270,11 @@ function ac() {
 	ct git commit -m "$commit_msg"
 }
 
-# same as ac, just git pull & push
+# same as ac, just followed by git push
 function acp {
-	ac "$@" || return 1 # fail if ac fails
+	ac "$@" || return 1 
 
-	ct git pull && ct git push
+	ct git push
 	sketchybar --trigger repo-files-update
 }
 
