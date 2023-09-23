@@ -196,18 +196,8 @@ serverConfigs.jsonls = {
 -- disable formatting, since taken care of by prettier
 serverConfigs.yamlls = {
 	settings = {
-		yaml = { format = { enable = true } },
+		yaml = { format = { enable = false } },
 	},
-}
-
--- use lsp for formatting
-serverConfigs.taplo = {
-	on_attach = function()
-		vim.keymap.set("n", "<D-s>", function()
-			vim.lsp.buf.format()
-			vim.cmd.update()
-		end, { buffer = true, desc = "󰒕 Taplo Format & Save" })
-	end,
 }
 
 --------------------------------------------------------------------------------
