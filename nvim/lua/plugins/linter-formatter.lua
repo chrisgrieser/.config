@@ -39,13 +39,19 @@ local formatters = {
 	sh = { "shellcheck", "shfmt" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
 	["_"] = { "trim_whitespace", "trim_newlines", "squeeze_blanks" },
-	["*"] = { "codespell" }, -- ignores .bib and .css via codespell config
+	["*"] = { "codespell" },
 }
 
 local debuggers = { "debugpy" }
 
--- installed externally due to its plugins: https://github.com/williamboman/mason.nvim/issues/695
-local dontInstall = { "stylelint" }
+local dontInstall = {
+	-- installed externally due to its plugins: https://github.com/williamboman/mason.nvim/issues/695
+	"stylelint",
+	-- not real formatters
+	"trim_whitespace",
+	"trim_newlines",
+	"squeeze_blanks",
+}
 
 --------------------------------------------------------------------------------
 
@@ -69,13 +75,7 @@ local function toolsToAutoinstall(myLinters, myFormatters, myDebuggers, ignoreTo
 	tools = vim.fn.uniq(tools)
 
 	-- remove exceptions not to install
-	tools = vim.tbl_filter(function(tool)
-		-- ignore non-Mason packages, e.g. "trim_whitespace"
-		local allMasonPackages = require("mason-registry").get_all_package_names()
-		local isMasonPackage = vim.tbl_contains(allMasonPackages, tool)
-		local ignoreTool = vim.tbl_contains(ignoreTools, tool)
-		return (not ignoreTool) and isMasonPackage
-	end, tools)
+	tools = vim.tbl_filter(function(tool) return not vim.tbl_contains(ignoreTools, tool) end, tools)
 	return tools
 end
 
@@ -122,9 +122,13 @@ end
 local function lintTriggers()
 	local function doLint()
 		-- condition when to lint https://github.com/mfussenegger/nvim-lint/issues/370#issuecomment-1729671151
+		local lintersToUse = require("lint").linters_by_ft[vim.bo.filetype]
 		local hasNoSeleneConfig = vim.loop.fs_stat(vim.loop.cwd() .. "/selene.toml") == nil
-		if hasNoSeleneConfig and vim.bo.filetype == "lua" then return end
-		vim.defer_fn(require("lint").try_lint, 1)
+		if hasNoSeleneConfig and vim.bo.filetype == "lua" then
+			lintersToUse = vim.tbl_filter(function(l) return l ~= "selene" end, lintersToUse)
+		end
+
+		vim.defer_fn(function() require("lint").try_lint(lintersToUse) end, 1)
 	end
 
 	vim.api.nvim_create_autocmd({ "BufReadPost", "InsertLeave", "TextChanged", "FocusGained" }, {
@@ -211,7 +215,7 @@ return {
 			{
 				"<D-s>",
 				function()
-					require("conform").format()
+					require("conform").format { lsp_fallback = "always" }
 					vim.cmd.update()
 				end,
 				mode = { "n", "x" },
