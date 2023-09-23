@@ -60,10 +60,9 @@ local function workLayout()
 	visuals.holeCover()
 	dockSwitcher("work")
 	setHigherBrightnessDuringDay()
-	-- hs.execute(u.exportPath .. "sketchybar --set clock popup.drawing=true")
 
 	-- close
-	u.quitApp { "YouTube", "Netflix", "CrunchyRoll", "IINA", "Twitch", "Tagesschau" }
+	u.quitApp { "YouTube", "Netflix", "CrunchyRoll", "Crunchyroll", "IINA", "Twitch", "Tagesschau" }
 	require("lua.private").closer()
 	closeAllFinderWins()
 
