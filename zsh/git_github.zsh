@@ -122,15 +122,13 @@ function unshallow {
 
 # use delta for small diffs and diff2html for big diffs
 function gd {
-	# CONFIG
-	local threshold_lines=100
-
-	if ! command -v diff2html &>/dev/null; then echo "diff2html not installed (\`npm -g install diff2html\`)." && return 1; fi
-	if ! command -v delta &>/dev/null; then echo "delta not installed (\`brew install git-delta\`)" && return 1; fi
+	local threshold_lines=100 # CONFIG
 
 	if [[ $(git diff | wc -l) -gt $threshold_lines ]]; then
+		if ! command -v diff2html &>/dev/null; then echo "diff2html not installed (\`npm -g install diff2html\`)." && return 1; fi
 		diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"
 	else
+		if ! command -v delta &>/dev/null; then echo "delta not installed (\`brew install git-delta\`)" && return 1; fi
 		if defaults read -g AppleInterfaceStyle &>/dev/null; then
 			git -c delta.dark=true diff
 		else
@@ -152,7 +150,6 @@ function delta {
 # GIT LOG
 
 function gitlog {
-
 	# my color format used for git log
 	local gitlog_format="format:%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)"
 

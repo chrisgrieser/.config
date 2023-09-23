@@ -14,7 +14,6 @@ local linters = {
 	javascript = {},
 	typescript = {},
 	toml = {},
-	text = {},
 	applescript = {},
 	bib = {},
 }
@@ -52,8 +51,6 @@ local dontInstall = {
 	"trim_newlines",
 	"squeeze_blanks",
 }
-
---------------------------------------------------------------------------------
 
 ---given the linter- and formatter-list of nvim-lint and conform.nvim, extract a
 ---list of all tools that need to be auto-installed
@@ -148,6 +145,7 @@ local function formatterConfig()
 		if ignore then u.notify("conform.nvim", "Ignoring main-bibliography.bib") end
 		return not ignore
 	end
+
 	require("conform.formatters.markdownlint").args = {
 		"--fix",
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
@@ -175,11 +173,11 @@ return {
 
 			require("mason-tool-installer").setup {
 				ensure_installed = myTools,
-				auto_update = true,
 				run_on_start = false, -- triggered manually, since not working with lazy-loading
 			}
-			vim.cmd.MasonToolsInstall()
-			vim.cmd.MasonToolsClean()
+			vim.cmd.MasonToolsClean() -- clean unused
+			vim.cmd.MasonToolsInstall() -- install missing
+			vim.cmd.MasonToolsUpdate()
 		end,
 	},
 	{
