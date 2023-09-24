@@ -20,9 +20,7 @@ function alfredMatcher(str) {
 
 /** @param {string} noteId */
 function getNoteObjAndFolder(noteId) {
-	const sidenotes = Application("SideNotes");
-	// @ts-ignore
-	const folders = sidenotes.folders;
+	const folders = Application("SideNotes").folders;
 	for (let i = 0; i < folders.length; i++) {
 		const notesInFolder = folders[i].notes;
 		for (let j = 0; j < notesInFolder.length; j++) {

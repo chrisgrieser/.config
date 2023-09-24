@@ -1,7 +1,6 @@
 return {
 	{
 		"chrisgrieser/nvim-tinygit",
-		dev = true,
 		dependencies = "stevearc/dressing.nvim",
 		keys = {
 			{ "<leader>gc", function() require("tinygit").smartCommit() end, desc = "󰊢 Smart-Commit" },

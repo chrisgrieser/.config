@@ -34,7 +34,6 @@ return {
 		"chrisgrieser/nvim-origami",
 		event = "BufReadPost", -- later will not save folds
 		opts = true,
-		dev = true,
 	},
 	{
 		"jghauser/fold-cycle.nvim",

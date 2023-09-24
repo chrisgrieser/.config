@@ -321,7 +321,7 @@ return {
 			"hrsh7th/cmp-cmdline",
 			"dmitmel/cmp-cmdline-history",
 			"hrsh7th/cmp-emoji",
-			{ "chrisgrieser/cmp-nerdfont", dev = true },
+			"chrisgrieser/cmp-nerdfont",
 			"tamago324/cmp-zsh", -- some shell completions
 			"ray-x/cmp-treesitter",
 			"hrsh7th/cmp-nvim-lsp", -- LSP input

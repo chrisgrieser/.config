@@ -197,7 +197,10 @@ local lualineConfig = {
 			{ require("funcs.alt-alt").altFileStatusline },
 		},
 		lualine_c = {
-			{ require("funcs.quickfix").counter },
+			{
+				function () require("funcs.quickfix").counter() end,
+				cond = function () return #vim.fn.getqflist() > 0 end,
+			},
 		},
 		lualine_x = {
 			{ lspActionLightbulb },

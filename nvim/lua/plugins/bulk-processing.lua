@@ -74,7 +74,6 @@ return {
 	},
 	{ -- better macros
 		"chrisgrieser/nvim-recorder",
-		dev = true,
 		keys = {
 			{ "0", desc = " Start/Stop Recording" },
 			{ "9", desc = "/ Continue/Play" },

@@ -95,9 +95,11 @@ function run(argv) {
 
 	if (doOpenUrl) {
 		const urls = content.match(urlRegex);
-		if (!urls) return "⚠️ No URL found."; // notification
+		if (!urls) return "!� No URL found."; // notification
 		closeSideNotes(); // needs to close before opening URL due to focus loss
-		urls.forEach((/** @type {string} */ url) => app.openLocation(url));
+		for (const url of urls) {
+			app.openLocation(url);
+		}
 
 		// dynamically decide whether to delete note
 		const numberOfLines = details.split("\n").length;
