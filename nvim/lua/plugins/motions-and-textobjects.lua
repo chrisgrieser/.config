@@ -75,8 +75,8 @@ return {
 			{ "w", "<cmd>lua require('various-textobjs').toNextQuotationMark()<CR>", mode = "o", desc = "󱡔 to next quote textobj", nowait = true },
 			{ "in", "<cmd>lua require('various-textobjs').number('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner number textobj" },
 			{ "an", "<cmd>lua require('various-textobjs').number('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer number textobj" },
-			{ "i" .. u.textobjectMaps["doubleSquareBracket"], "<cmd>lua require('various-textobjs').doubleSquareBrackets('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner double square bracket" },
-			{ "a" .. u.textobjectMaps["doubleSquareBracket"], "<cmd>lua require('various-textobjs').doubleSquareBrackets('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer double square bracket" },
+			{ "i" .. u.textobjMaps["doubleSquareBracket"], "<cmd>lua require('various-textobjs').doubleSquareBrackets('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner double square bracket" },
+			{ "a" .. u.textobjMaps["doubleSquareBracket"], "<cmd>lua require('various-textobjs').doubleSquareBrackets('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer double square bracket" },
 
 			-- INFO not setting in visual mode, to keep visual block mode replace
 			{ "rv", "<cmd>lua require('various-textobjs').restOfWindow()<CR>", mode = "o", desc = "󱡔 rest of viewport textobj" },

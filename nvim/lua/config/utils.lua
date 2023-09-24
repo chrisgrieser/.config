@@ -58,8 +58,6 @@ function M.applyTemplateIfEmptyFile(ext)
 	end, 1)
 end
 
---------------------------------------------------------------------------------
-
 ---https://www.reddit.com/r/neovim/comments/oxddk9/comment/h7maerh/
 ---@param name string name of highlight group
 ---@param key "fg"|"bg"
@@ -72,6 +70,8 @@ function M.getHighlightValue(name, key)
 	if not value then return end
 	return string.format("#%06x", value)
 end
+
+--------------------------------------------------------------------------------
 
 ---Creates autocommand triggered by Colorscheme change, that modifies a
 ---highlight group. Mostly useful for setting up colorscheme modifications
@@ -161,7 +161,7 @@ end
 
 --------------------------------------------------------------------------------
 
-M.textobjectRemaps = {
+M.textobjRemaps = {
 	c = "}", -- [c]urly brace
 	r = "]", -- [r]ectangular bracket
 	m = "W", -- [m]assive word
@@ -170,7 +170,7 @@ M.textobjectRemaps = {
 	e = "`", -- t[e]mplate string / inline cod[e]
 }
 
-M.textobjectMaps = {
+M.textobjMaps = {
 	["function"] = "f",
 	["conditional"] = "o",
 	["call"] = "l",
