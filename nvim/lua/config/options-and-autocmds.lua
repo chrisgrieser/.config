@@ -2,7 +2,6 @@ local opt_local = vim.opt_local
 local opt = vim.opt
 local bo = vim.bo
 local autocmd = vim.api.nvim_create_autocmd
-local keymap = vim.keymap.set
 local u = require("config.utils")
 
 --------------------------------------------------------------------------------
@@ -39,7 +38,7 @@ opt.undofile = true -- enables persistent undo history
 -- with those chars from working
 local undopointChars = { ".", ",", ";", '"', ":", "'", "<Space>" }
 for _, char in pairs(undopointChars) do
-	keymap("i", char, char .. "<C-g>u", { desc = "extra undopoint for " .. char, remap = true })
+	vim.keymap.set("i", char, char .. "<C-g>u", { desc = "extra undopoint for " .. char, remap = true })
 end
 
 --------------------------------------------------------------------------------
@@ -179,6 +178,35 @@ autocmd("BufReadPost", {
 		end, 5) -- delayed to ensure it runs after `:GuessIndent`
 	end,
 })
+
+
+-- auto-nohl -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
+vim.on_key(function(char)
+	local key = vim.fn.keytrans(char)
+	local isCmdlineSearch = vim.fn.getcmdtype():find("[/?]") ~= nil
+	local searchMvKeys = { "n", "N", "*", "#" } -- works for RHS, therefore no need to consider remaps
+
+	local searchStarted = (key == "/" or key == "?") and vim.fn.mode() == "n"
+	local searchConfirmed = (key == "<CR>" and isCmdlineSearch)
+	local searchCancelled = (key == "<Esc>" and isCmdlineSearch)
+	if not (searchStarted or searchConfirmed or searchCancelled or vim.fn.mode() == "n") then return end
+	local searchMovement = vim.tbl_contains(searchMvKeys, key)
+	local hlSearchOn = vim.opt.hlsearch:get()
+
+	if (searchMovement or searchConfirmed or searchStarted) and not hlSearchOn then
+		vim.opt.hlsearch = true
+	elseif (searchCancelled or not searchMovement) and hlSearchOn and not searchConfirmed then
+		vim.opt.hlsearch = false
+	end
+
+	-- nvim-hlslens plugin
+	if searchConfirmed or searchMovement then
+		local ok, hlslens = pcall(require, "hlslens")
+		if ok then hlslens.start() end
+	end
+end, vim.api.nvim_create_namespace("auto_nohl"))
+
+--------------------------------------------------------------------------------
 
 -- notify when coming back to a file that does not exist anymore
 autocmd("FocusGained", {

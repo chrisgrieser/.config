@@ -64,34 +64,6 @@ end, { desc = " SearchLink (ddgr)", buffer = true })
 
 --------------------------------------------------------------------------------
 
--- link textobj
-keymap(
-	{ "o", "x" },
-	"il",
-	"<cmd>lua require('various-textobjs').mdlink('inner')<CR>",
-	{ desc = "󱡔 inner md link", buffer = true }
-)
-keymap(
-	{ "o", "x" },
-	"al",
-	"<cmd>lua require('various-textobjs').mdlink('outer')<CR>",
-	{ desc = "󱡔 outer md link", buffer = true }
-)
-
--- iE/aE: code block textobj
-keymap(
-	{ "o", "x" },
-	"iE",
-	"<cmd>lua require('various-textobjs').mdFencedCodeBlock('inner')<CR>",
-	{ desc = "󱡔 inner code block", buffer = true }
-)
-keymap(
-	{ "o", "x" },
-	"aE",
-	"<cmd>lua require('various-textobjs').mdFencedCodeBlock('outer')<CR>",
-	{ desc = "󱡔 outer code block", buffer = true }
-)
-
 -- Heading jump to next/prev heading
 keymap(
 	{ "n", "x" },

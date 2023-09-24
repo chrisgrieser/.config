@@ -1,11 +1,10 @@
 local M = {}
 local u = require("config.utils")
-
 local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
 
 --------------------------------------------------------------------------------
 -- CONFIG
-local commentChar = "─"
+local commentHrChar = "─"
 local commentWidth = tostring(vim.opt_local.colorcolumn:get()[1]) - 1
 local toggleSigns = {
 	["="] = "!",
@@ -20,9 +19,9 @@ local toggleSigns = {
 	["{"] = "}",
 	["<"] = ">",
 }
+
 --------------------------------------------------------------------------------
 
--- TEXTOBJECT FOR ADJACENT COMMENTED LINES
 -- https://github.com/numToStr/Comment.nvim/issues/22#issuecomment-1272569139
 function M.commented_lines_textobject()
 	local U = require("Comment.utils")
@@ -61,26 +60,23 @@ function M.commentHr()
 		u.notify("No commentstring for this filetype available.", "warn")
 		return
 	end
-	if comStr:find("-") then commentChar = "-" end
+	if comStr:find("-") then commentHrChar = "-" end
 
 	local linelength = commentWidth - indent - comStrLength
 
 	-- the common formatters (black and stylelint) demand extra spaces
 	local fullLine
 	if ft == "css" then
-		fullLine = " " .. commentChar:rep(linelength - 2) .. " "
+		fullLine = " " .. commentHrChar:rep(linelength - 2) .. " "
 	elseif ft == "python" then
-		fullLine = " " .. commentChar:rep(linelength - 1)
+		fullLine = " " .. commentHrChar:rep(linelength - 1)
 	else
-		fullLine = commentChar:rep(linelength)
+		fullLine = commentHrChar:rep(linelength)
 	end
 
-	-----------------------------------------------------------------------------
 	-- set HR
 	local hr = comStr:gsub(" ?%%s ?", fullLine)
 	if ft == "markdown" then hr = "---" end
-
-	-----------------------------------------------------------------------------
 
 	local linesToAppend = { "", hr, "" }
 	if wasOnBlank then linesToAppend = { hr, "" } end
@@ -90,16 +86,33 @@ function M.commentHr()
 	-- shorten if it was on blank line, since fn.indent() does not return indent
 	-- line would have if it has content
 	if wasOnBlank then
-		vim.cmd.normal { "j==", bang = true }
+		normal("j==")
 		local hrIndent = vim.fn.indent(".") ---@diagnostic disable-line: param-type-mismatch
 
 		-- cannot use simply :sub, since it assumes one-byte-size chars
 		local hrLine = vim.api.nvim_get_current_line()
-		hrLine = hrLine:gsub(commentChar, "", hrIndent)
+		hrLine = hrLine:gsub(commentHrChar, "", hrIndent)
 		vim.api.nvim_set_current_line(hrLine)
 	else
-		vim.cmd.normal { "jj==", bang = true }
+		normal("jj==")
 	end
+end
+
+--------------------------------------------------------------------------------
+
+function M.openAlfredPref()
+	local parentFolder = vim.fn.expand("%:p:h")
+	if not parentFolder:find("Alfred%.alfredpreferences") then
+		u.notify("", "Not in an Alfred directory.", "warn")
+		return
+	end
+	-- URI seems more reliable than JXA when called via nvim https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
+	local workflowId = parentFolder:match("Alfred%.alfredpreferences/workflows/([^/]+)")
+	vim.fn.system { "open", "alfredpreferences://navigateto/workflows>workflow>" .. workflowId }
+	-- in case the right workflow is already open, Alfred is not focused.
+	-- Therefore manually focusing in addition to that here as well.
+	vim.fn.system { "open", "-a", "Alfred Preferences" }
+
 end
 
 function M.toggleCase()
@@ -155,6 +168,7 @@ end
 
 --------------------------------------------------------------------------------
 
+---@param direction "up"|"down"
 function M.scrollHoverWin(direction)
 	local a = vim.api
 	local scrollCmd = (direction == "down" and "5j" or "5k")

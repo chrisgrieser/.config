@@ -44,7 +44,7 @@ return {
 			end)
 		end,
 		init = function()
-			u.setupFiletypeKeymap(
+			u.ftKeymap(
 				"python",
 				"n",
 				"<localleader>v",

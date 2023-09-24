@@ -1,20 +1,8 @@
-local expand = vim.fn.expand
-local keymap = vim.keymap.set
---------------------------------------------------------------------------------
-
--- stylua: ignore start
-keymap({ "o", "x" }, "is", "<cmd>lua require('various-textobjs').cssSelector('inner')<CR>", { desc = "󱡔 inner CSS Selector textobj", buffer = true })
-keymap({ "o", "x" }, "as", "<cmd>lua require('various-textobjs').cssSelector('outer')<CR>", { desc = "󱡔 outer CSS Selector textobj", buffer = true })
-
-keymap({ "o", "x" }, "ix", "<cmd>lua require('various-textobjs').htmlAttribute('inner')<CR>", { desc = "󱡔 inner HTML Attribute textobj", buffer = true })
-keymap({ "o", "x" }, "ax", "<cmd>lua require('various-textobjs').htmlAttribute('outer')<CR>", { desc = "󱡔 outer HTML Attribute textobj", buffer = true })
--- stylua: ignore end
-
--- extra trailing chars
-keymap("n", "<leader>{", "mzA {<Esc>`z", { desc = "which_key_ignore", buffer = true })
+-- extra trailing char
+vim.keymap.set("n", "<leader>{", "mzA {<Esc>`z", { desc = "which_key_ignore", buffer = true })
 
 -- toggle !important
-keymap("n", "<leader>i", function()
+vim.keymap.set("n", "<leader>i", function()
 	local lineContent = vim.api.nvim_get_current_line()
 	if lineContent:find("!important") then
 		lineContent = lineContent:gsub(" !important", "")
@@ -25,4 +13,4 @@ keymap("n", "<leader>i", function()
 end, { buffer = true, desc = " Toggle !important", nowait = true })
 
 -- SHIMMERING FOCUS SPECIFIC
-if expand("%:t") == "source.css" then require("funcs.shimmering-focus") end
+if vim.fn.expand("%:t") == "source.css" then require("funcs.shimmering-focus") end
