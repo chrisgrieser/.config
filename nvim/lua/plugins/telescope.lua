@@ -137,15 +137,6 @@ local function telescopeConfig()
 				-- add commit time (%cr)
 				git_command = { "git", "log", "--pretty=%h %s (%cr)", "--", "." },
 			},
-			git_bcommits = {
-				prompt_prefix = "󰊢 ",
-				initial_mode = "normal",
-				results_title = "git log (buffer)",
-				previewer = deltaPreviewer,
-				layout_config = { horizontal = { height = 0.9 } },
-				-- add commit time (%cr)
-				git_command = { "git", "log", "--pretty=%h %s (%cr)", "--", "." },
-			},
 			git_branches = {
 				prompt_prefix = "󰊢 ",
 				initial_mode = "normal",
@@ -157,8 +148,6 @@ local function telescopeConfig()
 				show_plug = false, -- do not show mappings with "<Plug>"
 				lhs_filter = function(lhs) return not lhs:find("Þ") end, -- remove which-key mappings
 			},
-			diagnostics = { prompt_prefix = "󰒕 ", no_sign = true },
-			treesitter = { prompt_prefix = " ", show_line = false },
 			highlights = {
 				prompt_prefix = " ",
 				layout_config = {
@@ -169,7 +158,13 @@ local function telescopeConfig()
 				prompt_prefix = "󰝰 ",
 				-- using the default find command from telescope is somewhat buggy,
 				-- e.g. not respecting fd/ignore
-				find_command = { "fd", "--hidden", "--follow", "--type=file", "--type=symlink" },
+				find_command = { "fd", "--type=file", "--type=symlink" },
+				follow = true,
+				hidden = false,
+				prompt_title = function ()
+					local pwd = vim.loop.cwd()
+					return vim.fs.basename(pwd)
+				end,
 			},
 			live_grep = { prompt_prefix = " ", disable_coordinates = true },
 			grep_string = { prompt_prefix = " ", disable_coordinates = true },
