@@ -33,6 +33,9 @@ local routes = {
 		view = "mini",
 	},
 
+	-- tinygit
+	{ filter = { event = "notify", find = "Staged all changes" }, view = "mini" },
+
 	-- unneeded info on search patterns
 	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
 	{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
