@@ -79,7 +79,7 @@ sketchybar \
 	--set sidenotes \
 	script="$PLUGIN_DIR/sidenotes.sh" \
 	--add event update-sidenotes-count \
-	--subscribe sidenotes-count update-sidenotes-count \
+	--subscribe sidenotes update-sidenotes-count \
 	\
 	--add alias "$stats" $second_row \
 	--set "$stats" width="$stats_width" \

@@ -26,8 +26,8 @@ keymap({ "n", "x" }, "k", "gk")
 -- HJKL behaves like hjkl, but bigger distance
 keymap({ "o", "x" }, "H", "^") -- `zv` opens folds when navigating a horizontal lines
 keymap("n", "H", "0^") -- `0` ensures fully scrolling to the left on long unwrapped lines
-keymap({ "n", "x" }, "L", "$zv") -- not using "o", since used for link textobj
-keymap({ "n", "x" }, "J", "6gj") -- use visual lines instead of logical ones
+keymap({ "n", "x" }, "L", "$zv")
+keymap({ "n", "x" }, "J", "6gj")
 keymap({ "n", "x" }, "K", "6gk")
 
 -- dj = delete 2 lines, dJ = delete 3 lines
@@ -59,6 +59,10 @@ end, { desc = " Delete Mark" })
 -- Changes
 keymap("n", "gc", "g;", { desc = "Goto older change" })
 keymap("n", "gC", "g,", { desc = "Goto newer change" })
+
+-- SEARCH
+keymap("n", "-", "/")
+keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
 
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS
@@ -100,13 +104,6 @@ keymap(
 	function() require("funcs.quality-of-life").commented_lines_textobject() end,
 	{ desc = "󱡔  Big Comment textobj" }
 )
-
---------------------------------------------------------------------------------
-
--- SEARCH
-keymap("n", "-", "/")
-keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
-
 
 --------------------------------------------------------------------------------
 -- EDITING
@@ -342,8 +339,6 @@ end, { desc = " Live Grep in Project" })
 
 -- stylua: ignore
 keymap({ "n", "x" }, "gL", function() cmd.Telescope("grep_string") end, { desc = " Grep cword in Project" })
--- stylua: ignore
-keymap("n", "gr", "<cmd>lua require('telescope').extensions.recent_files.pick()<CR>", { desc = " Recent Files" })
 
 keymap("n", "g.", function() cmd.Telescope("resume") end, { desc = " Continue" })
 keymap("n", "ga", "gf", { desc = "Goto File under Cursor" }) -- needed, since remapped

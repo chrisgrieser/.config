@@ -257,12 +257,14 @@ return {
 		cmd = "Telescope",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons", -- add icons
-			"smartpde/telescope-recent-files", -- better oldfiles
-
-			-- also listed here as dependency, so it can be used by telescope
-			-- before cmp is loaded
-			"nvim-telescope/telescope-fzf-native.nvim", -- better fuzzy finder
+			"nvim-tree/nvim-web-devicons",
+			"nvim-telescope/telescope-fzf-native.nvim", 
+			{
+				"smartpde/telescope-recent-files",
+				keys = {
+					{ "gr", function() require("telescope").extensions.recent_files.pick() end, desc = " Recent Files" },
+				},
+			},
 		},
 
 		config = function()
