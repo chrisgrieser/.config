@@ -94,19 +94,6 @@ function M.leaderSubkey(key, label)
 	if ok then whichKey.register { ["<leader>" .. key] = { name = " " .. label } } end
 end
 
----@param filetype string|string[]
----@param mode string|string[]
----@param lhs string|function
----@param rhs string|function
----@param opts object
-function M.ftKeymap(filetype, mode, lhs, rhs, opts)
-	opts.buffer = true
-	vim.api.nvim_create_autocmd("FileType", {
-		pattern = filetype,
-		callback = function() vim.keymap.set(mode, lhs, rhs, opts) end,
-	})
-end
-
 ---Adds a component to the lualine after lualine was already set up. Useful for
 ---lazyloading.
 ---@param component function|table the component forming the lualine
@@ -132,11 +119,25 @@ end
 ---@param modes "n"|"v"|"x"|"i"|"o"|"c"|"t"|string[]
 ---@param lhs string
 ---@param rhs string|function
----@param opts? object -- if unique is nil, defaults to true
+---@param opts? { unique: boolean, desc: string, buffer: boolean, nowait: boolean, remap: boolean }
 function M.uniqueKeymap(modes, lhs, rhs, opts)
 	if not opts then opts = {} end
 	if opts.unique == nil then opts.unique = true end
 	vim.keymap.set(modes, lhs, rhs, opts)
+end
+
+---@param filetype string|string[]
+---@param modes "n"|"v"|"x"|"i"|"o"|"c"|"t"|string[]
+---@param lhs string|function
+---@param rhs string|function
+---@param opts? { desc: string, buffer: boolean, nowait: boolean, remap: boolean }
+function M.ftKeymap(filetype, modes, lhs, rhs, opts)
+	if not opts then opts = {} end
+	opts.buffer = true
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = filetype,
+		callback = function() vim.keymap.set(modes, lhs, rhs, opts) end,
+	})
 end
 
 --------------------------------------------------------------------------------
