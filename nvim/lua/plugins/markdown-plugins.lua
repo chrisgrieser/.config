@@ -24,7 +24,7 @@ return {
 		build = "cd app && npm install",
 		init = function()
 			vim.g.mkdp_preview_options = { disable_sync_scroll = 0 }
-			u.setupFiletypeKeymap(
+			u.ftKeymap(
 				"markdown",
 				"n",
 				"<localleader><localleader>",

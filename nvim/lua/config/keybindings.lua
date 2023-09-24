@@ -60,7 +60,6 @@ end, { desc = " Delete Mark" })
 keymap("n", "gc", "g;", { desc = "Goto older change" })
 keymap("n", "gC", "g,", { desc = "Goto newer change" })
 
-
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS
 
@@ -108,31 +107,6 @@ keymap(
 keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
 
--- auto-nohl -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
-vim.on_key(function(char)
-	local key = fn.keytrans(char)
-	local isCmdlineSearch = fn.getcmdtype():find("[/?]") ~= nil
-	local searchMvKeys = { "n", "N", "*", "#" } -- works for RHS, therefore no need to consider remaps
-
-	local searchStarted = (key == "/" or key == "?") and fn.mode() == "n"
-	local searchConfirmed = (key == "<CR>" and isCmdlineSearch)
-	local searchCancelled = (key == "<Esc>" and isCmdlineSearch)
-	if not (searchStarted or searchConfirmed or searchCancelled or fn.mode() == "n") then return end
-	local searchMovement = vim.tbl_contains(searchMvKeys, key)
-	local hlSearchOn = vim.opt.hlsearch:get()
-
-	if (searchMovement or searchConfirmed or searchStarted) and not hlSearchOn then
-		vim.opt.hlsearch = true
-	elseif (searchCancelled or not searchMovement) and hlSearchOn and not searchConfirmed then
-		vim.opt.hlsearch = false
-	end
-
-	-- nvim-hlslens plugin
-	if searchConfirmed or searchMovement then
-		local ok, hlslens = pcall(require, "hlslens")
-		if ok then hlslens.start() end
-	end
-end, api.nvim_create_namespace("auto_nohl"))
 
 --------------------------------------------------------------------------------
 -- EDITING
@@ -162,7 +136,8 @@ keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent selection" })
 keymap("n", "[", "<", { desc = "outdent" })
 keymap("n", "]", ">", { desc = "indent" })
 
-keymap("n", "~", function() require("funcs.quality-of-life").toggleCase() end, { desc = "better ~" })
+-- toggle all top-level folds
+keymap("n", "zz", function() cmd("%foldclose") end, { desc = "󰘖 Close toplevel folds" })
 
 -- WORD FLIPPER
 keymap(
@@ -171,6 +146,7 @@ keymap(
 	function() require("funcs.flipper").flipWord() end,
 	{ desc = "󱀽 flip words / toggle casing" }
 )
+keymap("n", "~", function() require("funcs.quality-of-life").toggleCase() end, { desc = "better ~" })
 
 -- [O]pen new scope / brace
 keymap(
@@ -181,6 +157,7 @@ keymap(
 )
 
 -- SPELLING
+-- these work even with `spell=false`
 keymap("n", "zl", function() vim.cmd.Telescope("spell_suggest") end, { desc = "󰓆 Spell Suggest" })
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
 
@@ -214,17 +191,6 @@ keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "➡️ Move selection left" }
 
 -- Merging
 keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
-
--- URL Opening (forward-seeking `gx`)
-keymap("n", "gx", function()
-	require("various-textobjs").url()
-	local foundURL = fn.mode():find("v") -- various textobjs only switches to visual if obj found
-	if foundURL then
-		u.normal('"zy')
-		local url = fn.getreg("z")
-		vim.fn.system { "open", url }
-	end
-end, { desc = "󰌹 Smart URL Opener" })
 
 --------------------------------------------------------------------------------
 
@@ -324,19 +290,12 @@ keymap(
 	function() fn.system { "open", "-R", expand("%:p") } end,
 	{ desc = "󰀶 Reveal in Finder" }
 )
-keymap({ "n", "x" }, "<D-5>", function()
-	local parentFolder = expand("%:p:h")
-	if not parentFolder:find("Alfred%.alfredpreferences") then
-		u.notify("", "Not in an Alfred directory.", "warn")
-		return
-	end
-	-- URI seems more reliable than JXA when called via nvim https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
-	local workflowId = parentFolder:match("Alfred%.alfredpreferences/workflows/([^/]+)")
-	fn.system { "open", "alfredpreferences://navigateto/workflows>workflow>" .. workflowId }
-	-- in case the right workflow is already open, Alfred is not focused.
-	-- Therefore manually focusing in addition to that here as well.
-	fn.system { "open", "-a", "Alfred Preferences" }
-end, { desc = "󰮤 Reveal Workflow in Alfred" })
+keymap(
+	{ "n", "x" },
+	"<D-5>",
+	function() require("funcs.quality-of-life").openAlfredPref() end,
+	{ desc = "󰮤 Reveal Workflow in Alfred" }
+)
 
 -- cmd+e: inline code
 keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = "  Inline Code" }) -- no selection = word under cursor
@@ -389,47 +348,25 @@ keymap("n", "gr", "<cmd>lua require('telescope').extensions.recent_files.pick()<
 keymap("n", "g.", function() cmd.Telescope("resume") end, { desc = " Continue" })
 keymap("n", "ga", "gf", { desc = "Goto File under Cursor" }) -- needed, since remapped
 
---------------------------------------------------------------------------------
--- FOLDING
-
--- toggle all top-level folds
-keymap("n", "zz", function() cmd("%foldclose") end, { desc = "󰘖 Close toplevel folds" })
-
 ------------------------------------------------------------------------------
 -- LSP KEYBINDINGS
 
--- INFO some LSP bindings done globally, so they can be used by null-ls as well
 -- stylua: ignore start
 keymap("n", "ge", function() vim.diagnostic.goto_next { float = true } end, { desc = "󰒕 Next Diagnostic" })
 keymap("n", "gE", function() vim.diagnostic.goto_prev { float = true } end, { desc = "󰒕 Previous Diagnostic" })
+keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Symbols" })
+keymap("n", "gw", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols" })
+keymap("n", "<PageDown>", function() require("funcs.quality-of-life").scrollHoverWin("down") end, { desc = "󰮷 Scroll hover down" })
+keymap("n", "<PageUp>", function() require("funcs.quality-of-life").scrollHoverWin("up") end, { desc = "󰮽 Scroll hover up" })
 -- stylua: ignore end
-
--- uses "v" instead of "x", so signature can be shown during snippet completion
-keymap({ "n", "i", "v" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "󰒕 Signature" })
 
 keymap("n", "gd", function() cmd.Telescope("lsp_definitions") end, { desc = "󰒕 Definitions" })
 keymap("n", "gf", function() cmd.Telescope("lsp_references") end, { desc = "󰒕 References" })
-
 keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename" })
 keymap("n", "<leader>V", ":IncRename <C-r><C-w>", { desc = "󰒕 IncRename (cword)" })
-keymap(
-	"n",
-	"gs",
-	function() cmd.Telescope("lsp_document_symbols") end,
-	{ desc = "󰒕 Symbols", unique = false }
-)
-keymap(
-	"n",
-	"gw",
-	function() cmd.Telescope("lsp_workspace_symbols") end,
-	{ desc = "󰒕 Workspace Symbols" }
-)
 
---------------------------------------------------------------------------------
--- stylua: ignore
-keymap("n", "<PageDown>", function() require("funcs.quality-of-life").scrollHoverWin("down") end, { desc = "󰮷 Scroll hover down" })
--- stylua: ignore
-keymap("n", "<PageUp>", function() require("funcs.quality-of-life").scrollHoverWin("up") end, { desc = "󰮽 Scroll hover up" })
+-- "v" instead of "x", so signature can be shown during snippet completion
+keymap({ "n", "i", "v" }, "<C-s>", vim.lsp.buf.signature_help, { desc = "󰒕 Signature" })
 
 --------------------------------------------------------------------------------
 -- Q / ESC TO CLOSE SPECIAL WINDOWS
@@ -438,13 +375,10 @@ autocmd("FileType", {
 	pattern = {
 		"help",
 		"lspinfo",
-		"qf", -- quickfix
 		"lazy",
 		"noice",
-		"httpResult", -- rest.nvim
 		"DressingSelect", -- done here and not as dressing keybinding to be able to set `nowait`
 		"DressingInput",
-		"man",
 	},
 	callback = function()
 		local opts = { buffer = true, nowait = true, desc = "󱎘 Close", unique = false }

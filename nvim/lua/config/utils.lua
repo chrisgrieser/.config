@@ -95,8 +95,11 @@ function M.leaderSubkey(key, label)
 end
 
 ---@param filetype string|string[]
-function M.setupFiletypeKeymap(filetype, ...)
-	local mode, lhs, rhs, opts = unpack { ... }
+---@param mode string|string[]
+---@param lhs string|function
+---@param rhs string|function
+---@param opts object
+function M.ftKeymap(filetype, mode, lhs, rhs, opts)
 	opts.buffer = true
 	vim.api.nvim_create_autocmd("FileType", {
 		pattern = filetype,
