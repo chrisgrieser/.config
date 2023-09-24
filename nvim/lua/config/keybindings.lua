@@ -60,6 +60,48 @@ end, { desc = " Delete Mark" })
 keymap("n", "gc", "g;", { desc = "Goto older change" })
 keymap("n", "gC", "g,", { desc = "Goto newer change" })
 
+
+--------------------------------------------------------------------------------
+-- TEXTOBJECTS
+
+-- REMAPPING OF BUILTIN TEXT OBJECTS
+for remap, original in pairs(u.textobjectRemaps) do
+	keymap({ "o", "x" }, "i" .. remap, "i" .. original, { desc = "󱡔 inner " .. original })
+	keymap({ "o", "x" }, "a" .. remap, "a" .. original, { desc = "󱡔 outer " .. original })
+end
+
+-- QUICK TEXTOBJ OPERATIONS
+keymap("n", "<Space>", '"_ciw', { desc = "󱡔 change word" })
+keymap("x", "<Space>", '"_c', { desc = "󱡔 change selection" })
+keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
+
+-- STICKY COMMENT TEXT OBJECT ACTIONS
+-- HACK effectively creating "q" as comment textobj, can't map directly to q since
+-- overlap in visual mode where q can be object and operator. However, this
+-- method here also has the advantage of making it possible to preserve cursor
+-- position.
+keymap("n", "dq", function()
+	local prevCursor = vim.api.nvim_win_get_cursor(0)
+	cmd.normal { "d&&&" } -- without bang for remapping of COM
+	vim.api.nvim_win_set_cursor(0, prevCursor)
+end, { remap = true, desc = " Delete Comment" })
+
+-- manually changed cq to preserve the commentstring
+keymap("n", "cq", function()
+	cmd.normal { "d&&&" } -- without bang for remapping
+	cmd.normal { "x" }
+	cmd.normal { "Q" }
+	cmd.startinsert { bang = true }
+end, { desc = " Change Comment" })
+-- INFO omap q &&& is done is treesitter config, takes care of other operators like `y`
+
+keymap(
+	"o",
+	"u",
+	function() require("funcs.quality-of-life").commented_lines_textobject() end,
+	{ desc = "󱡔  Big Comment textobj" }
+)
+
 --------------------------------------------------------------------------------
 
 -- SEARCH

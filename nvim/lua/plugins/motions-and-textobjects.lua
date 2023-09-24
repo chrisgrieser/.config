@@ -36,9 +36,19 @@ return {
 		opts = { skipInsignificantPunctuation = true },
 		keys = {
 			-- stylua: ignore,
-			{ "e", function() require("spider").motion("e") end, mode = { "n", "o", "x" }, desc = "󱇫 Spider e" },
+			{
+				"e",
+				function() require("spider").motion("e") end,
+				mode = { "n", "o", "x" },
+				desc = "󱇫 Spider e",
+			},
 			-- stylua: ignore,
-			{ "b", function() require("spider").motion("b") end, mode = { "n", "o", "x" }, desc = "󱇫 Spider b" },
+			{
+				"b",
+				function() require("spider").motion("b") end,
+				mode = { "n", "o", "x" },
+				desc = "󱇫 Spider b",
+			},
 		},
 	},
 	-----------------------------------------------------------------------------
@@ -49,7 +59,67 @@ return {
 	},
 	{ -- tons of text objects
 		"chrisgrieser/nvim-various-textobjs",
-		lazy = true,
 		dev = true,
+		keys = {
+			-- stylua: ignore start
+			{ "<Space>", "<cmd>lua require('various-textobjs').subword('inner')<CR>", mode = "o", desc = "󱡔 inner subword textobj" },
+			{ "i<Space>", "<cmd>lua require('various-textobjs').subword('inner')<CR>", mode = { "o", "x" }, desc = "󱡔 inner subword textobj" },
+			{ "a<Space>", "<cmd>lua require('various-textobjs').subword('outer')<CR>", mode = { "o", "x" }, desc = "󱡔 outer subword textobj" },
+			{ "L", "<cmd>lua require('various-textobjs').url()<CR>", mode = "o", desc = "󱡔 link textobj" },
+			{ "iv", "<cmd>lua require('various-textobjs').value('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner value textobj" },
+			{ "av", "<cmd>lua require('various-textobjs').value('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer value textobj" },
+			-- INFO `ik` defined via treesitter to exclude `local` and `let`; mapping the *inner* obj to `ak`, since it includes `local` and `let`
+			{ "ak", "<cmd>lua require('various-textobjs').key('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 outer key textobj" },
+			{ "n", "<cmd>lua require('various-textobjs').nearEoL()<CR>", mode = { "o", "x" }, desc = "󱡔 near EoL textobj" },
+			{ "m", "<cmd>lua require('various-textobjs').toNextClosingBracket()<CR>", mode = { "o", "x" }, desc = "󱡔 to next closing bracket textobj" },
+			{ "w", "<cmd>lua require('various-textobjs').toNextQuotationMark()<CR>", mode = "o", desc = "󱡔 to next quote textobj", nowait = true },
+			{ "o", "<cmd>lua require('various-textobjs').column()<CR>", mode = "o", desc = "󱡔 column textobj" },
+			{ "in", "<cmd>lua require('various-textobjs').number('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner number textobj" },
+			{ "an", "<cmd>lua require('various-textobjs').number('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer number textobj" },
+			{ "gg", "<cmd>lua require('various-textobjs').entireBuffer()<CR>", mode = { "x", "o" }, desc = "󱡔 entire buffer textobj" },
+			-- INFO not setting in visual mode, to keep visual block mode replace
+			{ "rv", "<cmd>lua require('various-textobjs').restOfWindow()<CR>", mode = "o", desc = "󱡔 rest of viewport textobj" },
+			{ "rp", "<cmd>lua require('various-textobjs').restOfParagraph()<CR>", mode = "o", desc = "󱡔 rest of paragraph textobj" },
+			{ "ri", "<cmd>lua require('various-textobjs').restOfIndentation()<CR>", mode = "o", desc = "󱡔 rest of indentation textobj" },
+			{ "rg", "G", mode = "o", desc = "󱡔 rest of buffer textobj" },
+			{ "ge", "<cmd>lua require('various-textobjs').diagnostic()<CR>", mode = { "x", "o" }, desc = "󱡔 diagnostic textobj" },
+			{ "i" .. u.textobjectMaps["doubleSquareBracket"], "<cmd>lua require('various-textobjs').doubleSquareBrackets('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner double square bracket" },
+			{ "a" .. u.textobjectMaps["doubleSquareBracket"], "<cmd>lua require('various-textobjs').doubleSquareBrackets('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer double square bracket" },
+			{ "ii", "<cmd>lua require('various-textobjs').indentation('inner', 'inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner indent textobj" },
+			{ "ai", "<cmd>lua require('various-textobjs').indentation('outer', 'outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer indent textobj" },
+			{ "ij", "<cmd>lua require('various-textobjs').indentation('outer', 'inner')<CR>", mode = { "x", "o" }, desc = "󱡔 top-border indent textobj" },
+			{ "aj", "<cmd>lua require('various-textobjs').indentation('outer', 'inner')<CR>", mode = { "x", "o" }, desc = "󱡔 top-border indent textobj" },
+			{ "ig", "<cmd>lua require('various-textobjs').greedyOuterIndentation('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner greedy indent" },
+			{ "ag", "<cmd>lua require('various-textobjs').greedyOuterIndentation('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer greedy indent" },
+			{ "i.", "<cmd>lua require('various-textobjs').chainMember('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner indent textobj" },
+			{ "a.", "<cmd>lua require('various-textobjs').chainMember('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer indent textobj" },
+			-- stylua: ignore end,
+			{
+				"dsi",
+				function ()
+					require("various-textobjs").indentation(true, true)
+					local notOnIndentedLine = vim.fn.mode():find("V") == nil -- when textobj is found, will switch to visual line mode
+					if notOnIndentedLine then return end
+					u.normal("<") -- dedent indentation
+					local endBorderLn = vim.api.nvim_buf_get_mark(0, ">")[1] + 1
+					local startBorderLn = vim.api.nvim_buf_get_mark(0, "<")[1] - 1
+					vim.cmd(tostring(endBorderLn) .. " delete") -- delete end first so line index is not shifted
+					vim.cmd(tostring(startBorderLn) .. " delete")
+				end,
+				desc = "Delete surrounding indentation",
+			},
+			{
+				"gx",
+				function ()
+					require("various-textobjs").url()
+					local foundURL = vim.fn.mode():find("v") -- various textobjs only switches to visual if obj found
+					if foundURL then
+						u.normal('"zy')
+						local url = vim.fn.getreg("z")
+						vim.fn.system { "open", url }
+					end
+				end,
+			}
+		},
 	},
 }
