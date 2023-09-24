@@ -16,7 +16,11 @@ return {
 	{ -- auto-bullets for markdown-like filetypes
 		"dkarter/bullets.vim",
 		ft = "markdown",
-		init = function() vim.g.bullets_delete_last_bullet_if_empty = 1 end,
+		init = function()
+			vim.g.bullets_delete_last_bullet_if_empty = 1
+			vim.g.bullets_set_mappings = 0
+			u.ftKeymap("markdown", "n", "o", "<Plug>(bullets-newline)")
+		end,
 	},
 	{ -- preview markdown
 		"iamcco/markdown-preview.nvim",

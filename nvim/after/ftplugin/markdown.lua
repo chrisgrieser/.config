@@ -31,6 +31,9 @@ keymap("n", "gs", function ()
 	require("telescope.builtin").lsp_document_symbols { ignore_symbols = {}, }
 end, { desc = "󰒕 Markdown Headings", buffer = true })
 
+keymap("n", "<leader>x", "mzI- [ ] <Esc>`z", { desc = " Add Task", buffer = true })
+keymap("n", "<leader>-", "mzI- <Esc>`z", { desc = " Add List", buffer = true })
+
 -- Format Table
 keymap(
 	"n",
