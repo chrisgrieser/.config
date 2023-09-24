@@ -310,32 +310,27 @@ local function projectName()
 	return vim.fs.basename(pwd)
 end
 
-keymap("n", "go", function()
-	local project = projectName()
-	if project == "" then
-		u.notify("", "No pwd available.", "error")
-		return
-	end
-	require("telescope.builtin").find_files { prompt_title = project }
-end, { desc = " Browse in Project" })
+keymap(
+	"n",
+	"go",
+	function() require("telescope.builtin").find_files { prompt_title = projectName() } end,
+	{ desc = " Browse in Project" }
+)
 
 -- stylua: ignore
 keymap( "n", "gO", function()
-	local parentFolder = expand("%:p:h")
 	require("telescope.builtin").find_files {
-		prompt_title = vim.fs.basename(parentFolder),
-		cwd = parentFolder,
+		prompt_title = projectName(),
+		hidden = true,
 	}
-end, { desc = " Browse in current Folder" })
+end, { desc = " Browse in Project (+ hidden)" })
 
-keymap("n", "gl", function()
-	local project = projectName()
-	if project == "" then
-		u.notify("", "No pwd available.", "error")
-		return
-	end
-	require("telescope.builtin").live_grep { prompt_title = "Live Grep: " .. projectName() }
-end, { desc = " Live Grep in Project" })
+keymap(
+	"n",
+	"gl",
+	function() require("telescope.builtin").live_grep { prompt_title = "Live Grep: " .. projectName() } end,
+	{ desc = " Live Grep in Project" }
+)
 
 -- stylua: ignore
 keymap({ "n", "x" }, "gL", function() cmd.Telescope("grep_string") end, { desc = " Grep cword in Project" })
