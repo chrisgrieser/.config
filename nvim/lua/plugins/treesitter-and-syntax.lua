@@ -49,12 +49,12 @@ local tsConfig = {
 				-- stylua: ignore start
 				["iu"] = { query = "@loop.inner", desc = "󱡔 inner loop textobj" }, -- mnemonic: luup
 				["au"] = { query = "@loop.outer", desc = "󱡔 outer loop textobj" },
-				["a" .. u.textobjectMaps["function"]] = { query = "@function.outer", desc = "󱡔 outer function textobj" },
-				["i" .. u.textobjectMaps["function"]] = { query = "@function.inner", desc = "󱡔 inner function textobj" },
-				["a" .. u.textobjectMaps["conditional"]] = { query = "@conditional.outer", desc = "󱡔 outer conditional textobj" },
-				["i" .. u.textobjectMaps["conditional"]] = { query = "@conditional.inner", desc = "󱡔 inner conditional textobj" },
-				["a" .. u.textobjectMaps["call"]] = { query = "@call.outer", desc = "󱡔 outer call textobj" },
-				["i" .. u.textobjectMaps["call"]] = { query = "@call.inner", desc = "󱡔 inner call textobj" },
+				["a" .. u.textobjMaps["function"]] = { query = "@function.outer", desc = "󱡔 outer function textobj" },
+				["i" .. u.textobjMaps["function"]] = { query = "@function.inner", desc = "󱡔 inner function textobj" },
+				["a" .. u.textobjMaps["conditional"]] = { query = "@conditional.outer", desc = "󱡔 outer conditional textobj" },
+				["i" .. u.textobjMaps["conditional"]] = { query = "@conditional.inner", desc = "󱡔 inner conditional textobj" },
+				["a" .. u.textobjMaps["call"]] = { query = "@call.outer", desc = "󱡔 outer call textobj" },
+				["i" .. u.textobjMaps["call"]] = { query = "@call.inner", desc = "󱡔 inner call textobj" },
 				-- stylua: ignore end
 
 				-- INFO later remapped to q only in operator pending mode to avoid conflict

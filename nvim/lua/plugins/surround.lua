@@ -3,8 +3,8 @@
 
 local function surroundConfig()
 	local u = require("config.utils")
-	local textobjectRemaps = require("config.utils").textobjectRemaps
-	local maps = require("config.utils").textobjectMaps
+	local textobjectRemaps = require("config.utils").textobjRemaps
+	local maps = require("config.utils").textobjMaps
 
 	-- requires unmapping yS from normal_line below
 

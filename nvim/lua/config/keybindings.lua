@@ -64,7 +64,7 @@ keymap("n", "gC", "g,", { desc = "Goto newer change" })
 -- TEXTOBJECTS
 
 -- REMAPPING OF BUILTIN TEXT OBJECTS
-for remap, original in pairs(u.textobjectRemaps) do
+for remap, original in pairs(u.textobjRemaps) do
 	keymap({ "o", "x" }, "i" .. remap, "i" .. original, { desc = "󱡔 inner " .. original })
 	keymap({ "o", "x" }, "a" .. remap, "a" .. original, { desc = "󱡔 outer " .. original })
 end
