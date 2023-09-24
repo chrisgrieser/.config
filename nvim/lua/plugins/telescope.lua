@@ -160,7 +160,6 @@ local function telescopeConfig()
 				-- e.g. not respecting fd/ignore
 				find_command = { "fd", "--type=file", "--type=symlink" },
 				follow = true,
-				hidden = false,
 				prompt_title = function ()
 					local pwd = vim.loop.cwd()
 					return vim.fs.basename(pwd)

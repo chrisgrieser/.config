@@ -332,11 +332,14 @@ keymap(
 	{ desc = " Live Grep in Project" }
 )
 
--- stylua: ignore
-keymap({ "n", "x" }, "gL", function() cmd.Telescope("grep_string") end, { desc = " Grep cword in Project" })
+keymap(
+	{ "n", "x" },
+	"gL",
+	function() cmd.Telescope("grep_string") end,
+	{ desc = " Grep cword in Project" }
+)
 
 keymap("n", "g.", function() cmd.Telescope("resume") end, { desc = " Continue" })
-keymap("n", "ga", "gf", { desc = "Goto File under Cursor" }) -- needed, since remapped
 
 ------------------------------------------------------------------------------
 -- LSP KEYBINDINGS
