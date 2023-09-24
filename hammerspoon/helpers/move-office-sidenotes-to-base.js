@@ -16,7 +16,7 @@ const hasNotesToMove = notesToMove.length > 0;
 // creating and deleting note since there does not seem to be a moving function
 for (let i = notesToMove.length - 1; i >= 0; i--) {
 	const note = notesToMove[i];
-	if (!note || !note.text()) continue;
+	if (!note?.text()) continue;
 
 	sidenotes.createNote({
 		folder: destination,

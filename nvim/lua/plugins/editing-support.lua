@@ -114,7 +114,6 @@ return {
 		"chrisgrieser/nvim-puppeteer",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		ft = { "python", "javascript", "typescript" },
-		dev = true,
 	},
 	{ -- virtual text context at the end of a scope
 		"haringsrob/nvim_context_vt",

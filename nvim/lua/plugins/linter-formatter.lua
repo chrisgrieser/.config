@@ -181,9 +181,8 @@ return {
 			vim.defer_fn(vim.cmd.MasonToolsInstall, 500)
 		end,
 	},
-	{
+	{ -- PENDING https://github.com/mfussenegger/nvim-lint/pull/377
 		"chrisgrieser/nvim-lint",
-		dev = true, -- PENDING https://github.com/mfussenegger/nvim-lint/pull/377
 		event = "VeryLazy",
 		config = function()
 			linterConfigs()
@@ -208,7 +207,6 @@ return {
 	},
 	{
 		"chrisgrieser/nvim-rulebook",
-		dev = true,
 		keys = {
 			{ "<leader>d", function() require("rulebook").lookupRule() end, desc = "󰒕 Lookup Rule" },
 			{ "<leader>C", function() require("rulebook").ignoreRule() end, desc = "󰒕 Ignore Rule" },

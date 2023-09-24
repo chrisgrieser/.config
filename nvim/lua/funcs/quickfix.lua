@@ -3,6 +3,8 @@ local M = {}
 local g = vim.g
 local cmd = vim.cmd
 
+local function normal(theCmd) vim.cmd.normal { theCmd, bang = true } end
+
 ---@param msg string
 ---@param level? "info"|"trace"|"debug"|"warn"|"error"
 local function notify(msg, level)
@@ -10,6 +12,8 @@ local function notify(msg, level)
 	local pluginName = "Quickfix"
 	vim.notify(msg, vim.log.levels[level:upper()], { title = pluginName })
 end
+
+--------------------------------------------------------------------------------
 
 ---checks whether quickfixlist is empty and notifies if it is
 ---@nodiscard
@@ -69,6 +73,7 @@ function M.next()
 		g.qfCount = 1
 		notify("Wrapped to beginning", "trace")
 	end
+	normal("zv") -- open folder under cursor
 end
 
 ---goto previous quickfix and wrap around
@@ -85,6 +90,7 @@ function M.previous()
 		g.qfCount = countCurQuickfix()
 		notify("Wrapped to end", "trace")
 	end
+	normal("zv") -- open folder under cursor
 end
 
 --------------------------------------------------------------------------------

@@ -1,4 +1,6 @@
 local u = require("config.utils")
+--------------------------------------------------------------------------------
+
 
 return {
 	{ -- auto-save buffers
@@ -16,7 +18,6 @@ return {
 	},
 	{ -- auto-close inactive buffers
 		"chrisgrieser/nvim-early-retirement",
-		dev = true,
 		event = "VeryLazy",
 		opts = {
 			retirementAgeMins = 15,
@@ -52,7 +53,6 @@ return {
 	},
 	{ -- convenience file operations
 		"chrisgrieser/nvim-genghis",
-		dev = true,
 		dependencies = "stevearc/dressing.nvim",
 		init = function() vim.g.genghis_disable_commands = true end,
 		keys = {

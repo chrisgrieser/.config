@@ -17,9 +17,10 @@ vim.opt.runtimepath:prepend(lazypath)
 -- DOCS https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
 require("lazy").setup("plugins", {
 	defaults = { lazy = true },
-	dev = {
+	dev = { -- use remote repo when local repo doesn't exist
 		path = os.getenv("HOME") .. "/Repos",
-		fallback = true, -- use remote repo when local repo doesn't exist
+		patterns = { "chrisgrieser" }, -- set `dev = true` for all my repos
+		fallback = true,
 	},
 	ui = {
 		wrap = true,
@@ -66,10 +67,10 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
--- 5s after startup, notify if there are more than 10 plugin updates
+-- 5s after startup, notify if there many plugin updates
 vim.defer_fn(function()
 	if not require("lazy.status").has_updates() then return end
-	local threshold = 10
+	local threshold = 15
 	local numberOfUpdates = tonumber(require("lazy.status").updates():match("%d+"))
 	if numberOfUpdates < threshold then return end
 	vim.notify(

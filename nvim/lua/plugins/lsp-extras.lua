@@ -19,7 +19,6 @@ return {
 	{ -- lsp definitions & references count in the status line
 		"chrisgrieser/nvim-dr-lsp",
 		event = "LspAttach",
-		dev = true,
 		config = function()
 			u.addToLuaLine("sections", "lualine_x", require("dr-lsp").lspProgress)
 			u.addToLuaLine("sections", "lualine_c", {

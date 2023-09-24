@@ -32,7 +32,6 @@ return {
 	},
 	{ -- CamelCase Motion plus
 		"chrisgrieser/nvim-spider",
-		dev = true,
 		opts = { skipInsignificantPunctuation = true },
 		keys = {
 			-- stylua: ignore,
@@ -59,7 +58,6 @@ return {
 	},
 	{ -- tons of text objects
 		"chrisgrieser/nvim-various-textobjs",
-		dev = true,
 		keys = {
 			-- stylua: ignore start
 			{ "<Space>", "<cmd>lua require('various-textobjs').subword('inner')<CR>", mode = "o", desc = "󱡔 inner subword textobj" },
