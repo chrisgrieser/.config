@@ -16,6 +16,12 @@ function separator() {
 
 # show files + git status + brief git log
 function inspect() {
+	if ! test -d "$PWD"; then
+		local dirname ; dirname=$(basename "$PWD")
+		printf '\033[1;33m"%s" has been moved or deleted.\033[0m' "$dirname"
+		return 1
+	fi
+
 	# config
 	local max_gitlog_lines=5
 	local max_files_lines=7
