@@ -52,13 +52,12 @@ serverConfigs.lua_ls = {
 				postfix = ".", -- useful for `table.insert` and the like
 			},
 			diagnostics = {
+				globals = { "vim" }, -- when contributing to nvim plugins missing a .luarc.json
 				disable = { "trailing-space" }, -- formatter already does that
-				severity = { -- https://github.com/LuaLS/lua-language-server/wiki/Settings#diagnosticsseverity
-					["return-type-mismatch"] = "Error",
-				},
+				severity = { ["return-type-mismatch"] = "Error" }, -- https://github.com/LuaLS/lua-language-server/wiki/Settings#diagnosticsseverity
 			},
 			hint = {
-				enable = true,
+				enable = true, -- enabled inlay hints
 				setType = true,
 				arrayIndex = "Disable",
 			},
@@ -111,8 +110,8 @@ serverConfigs.jedi_language_server = {
 --------------------------------------------------------------------------------
 -- JS/TS/CSS
 
+-- don't pollute completions for js and ts with stuff I don't need
 serverConfigs.emmet_ls = {
-	-- don't pollute completions for js and ts with stuff I don't need
 	filetypes = { "html", "css" },
 }
 
@@ -120,14 +119,12 @@ serverConfigs.emmet_ls = {
 serverConfigs.cssls = {
 	settings = {
 		css = {
-			colorDecorators = { enable = true }, -- not supported yet
+			colorDecorators = { enable = true }, -- color inlay hints
 			lint = {
 				compatibleVendorPrefixes = "ignore",
 				vendorPrefix = "ignore",
 				unknownVendorSpecificProperties = "ignore",
-
 				unknownProperties = "ignore", -- duplicate with stylelint
-
 				duplicateProperties = "warning",
 				emptyRules = "warning",
 				importStatement = "warning",
@@ -146,10 +143,19 @@ serverConfigs.cssls = {
 -- DOCS https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
 serverConfigs.tsserver = {
 	settings = {
+		-- enable checking javascript without a `jsconfig.json`
+		implicitProjectConfiguration = {
+			checkJs = true,
+			-- JXA is compliant with most of ECMAScript: https://github.com/JXA-Cookbook/JXA-Cookbook/wiki/ES6-Features-in-JXA
+			-- ES2022: .at(), ES2021: `.replaceAll()`, `new Set`
+			target = "ES2022", 
+		},
+		diagnostics = {
+			ignoredCodes = {
+				2451, -- "cannot redeclare block-scoped variable" -> not useful for JXA
+			},
+		},
 		completions = { completeFunctionCalls = true },
-		-- "cannot redeclare block-scoped variable" -> not useful when applied to JXA
-		diagnostics = { ignoredCodes = { 2451 } },
-		-- enable all the inlay hints
 		typescript = {
 			inlayHints = {
 				includeInlayEnumMemberValueHints = true,
@@ -186,9 +192,9 @@ serverConfigs.tsserver = {
 -- JSON/YAML/TOML
 
 -- DOCS https://github.com/Microsoft/vscode/tree/main/extensions/json-language-features/server#configuration
+-- disable formatting, since taken care of by biome
 serverConfigs.jsonls = {
 	init_options = {
-		-- disable formatting, since taken care of by biome
 		provideFormatter = false,
 	},
 }
