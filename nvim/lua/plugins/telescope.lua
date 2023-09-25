@@ -68,7 +68,7 @@ local findFileMappings = {
 		}
 	end,
 	-- toggle `--no-ignore`
-	["<C-i>"] = function(prompt_bufnr)
+	["<C-g>"] = function(prompt_bufnr)
 		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
 		-- cwd is only set if passed as telescope option
 		local cwd = current_picker.cwd and tostring(current_picker.cwd) or vim.loop.cwd()

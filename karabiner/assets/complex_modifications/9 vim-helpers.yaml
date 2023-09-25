@@ -16,7 +16,7 @@ rules:
               fi
         conditions:
           - { type: frontmost_application_if, file_paths: ["[Nn]eovide"] }
-      # hard restart
+      # ⇪2: Hard restart
       - type: basic
         from: { key_code: "2", modifiers: { mandatory: [command, shift, control, option] } }
         to:

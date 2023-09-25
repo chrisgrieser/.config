@@ -87,15 +87,18 @@ function o() {
 	selected=$(
 		fd --type=file --type=symlink --color=always | fzf \
 			-0 -1 --ansi --query="$input" --info=inline \
-			--header="^H --hidden  ^I --no-ignore" \
+			--header="^H hidden   ^G no-ignore   ^D dirs" \
 			--bind="ctrl-h:reload(fd --hidden --type=file --type=symlink --color=always)" \
-			--bind="ctrl-i:reload(fd --no-ignore --type=file --type=symlink --color=always)" \
+			--bind="ctrl-g:reload(fd --no-ignore --type=file --type=symlink --color=always)" \
+			--bind="ctrl-d:reload(fd --type=directory --color=always)" \
 			--preview '[[ -f {} ]] && bat --color=always --style=snip --wrap=never --tabs=2 {} || eza --icons --color=always --group-directories-first {}'
 	)
 	if [[ -z "$selected" ]]; then # fzf aborted
 		return 0
 	elif [[ -f "$selected" ]]; then
 		open "$selected"
+	elif [[ -d "$selected" ]]; then
+		z "$selected"
 	else
 		return 1
 	fi
