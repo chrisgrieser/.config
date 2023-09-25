@@ -68,24 +68,12 @@ function inspect() {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# Quick Open File (+ hidden)
-function oh() {
-	filesearch --hidden "$*"
-}
-
-function o() {
-	filesearch --no-hidden "$*"
-}
-
 # Quick Open File
-function filesearch() {
+function o() {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 	if ! command -v fd &>/dev/null; then echo "fd not installed." && return 1; fi
 	if ! command -v eza &>/dev/null; then print "\033[1;33meza not installed.\033[0m" && return 1; fi
 
-	local selected
-	local mode="$1" # --hidden or --no-hidden
-	shift
 	local input="$*"
 
 	# skip `fzf` if file is fully named, e.g. through tab completion
@@ -95,9 +83,13 @@ function filesearch() {
 	fi
 
 	# --delimiter and --nth options ensure only file name and parent folder are displayed
+	local selected
 	selected=$(
-		fd "$mode" --type=file --type=symlink --color=always | fzf \
+		fd --type=file --type=symlink --color=always | fzf \
 			-0 -1 --ansi --query="$input" --info=inline \
+			--header="^H --hidden  ^I --no-ignore" \
+			--bind="ctrl-h:reload(fd --hidden --type=file --type=symlink --color=always)" \
+			--bind="ctrl-i:reload(fd --no-ignore --type=file --type=symlink --color=always)" \
 			--preview '[[ -f {} ]] && bat --color=always --style=snip --wrap=never --tabs=2 {} || eza --icons --color=always --group-directories-first {}'
 	)
 	if [[ -z "$selected" ]]; then # fzf aborted
