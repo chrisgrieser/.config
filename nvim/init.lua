@@ -4,19 +4,29 @@
 local function safeRequire(module)
 	local success, _ = pcall(require, module)
 	if success then return end
-	-- as opposed to `echo`, `echomsg` makes the error retrieveable via `:messages`
 	vim.cmd.echomsg(("'Error loading %s'"):format(module))
 end
 
 -- if nvim was opened w/o argument, re-open the last file
+-- if that files does not exist, open last existing oldfile
 local function reOpenLastFile()
 	if vim.fn.argc() ~= 0 then return end
-	vim.defer_fn(function()
+	local lastFileExist = vim.loop.fs_stat(vim.api.nvim_get_mark("0", {})[4]) ~= nil
+	if lastFileExist then
 		vim.cmd.normal { "'0", bang = true }
-		pcall(vim.cmd.bwipeout, "#") -- do not leave empty file
-	end, 1)
+		return
+	end
+
+	local i = 0
+	local oldfile
+	repeat
+		i = i + 1
+		if i > #vim.v.oldfiles then return end
+		oldfile = vim.v.oldfiles[i]
+		local fileExists = vim.loop.fs_stat(oldfile) ~= nil
+	until fileExists
+	vim.cmd.edit(oldfile)
 end
-reOpenLastFile()
 
 --------------------------------------------------------------------------------
 
@@ -27,6 +37,7 @@ safeRequire("config.lazy")
 if vim.fn.has("gui_running") == 1 then safeRequire("config.gui-settings") end
 safeRequire("config.theme-customization")
 safeRequire("config.options-and-autocmds")
+vim.defer_fn(reOpenLastFile, 1) -- after options, so correct shada file is read
 
 safeRequire("config.keybindings")
 safeRequire("config.leader-keybindings")

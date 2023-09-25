@@ -53,8 +53,7 @@ local function altOldfile()
 		local fileExists = vim.loop.fs_stat(oldfile) ~= nil
 		local isCurrentFile = oldfile == fn.expand("%:p")
 		local commitMsg = oldfile:find("COMMIT_EDITMSG$")
-		local harpoonMenu = oldfile:find("harpoon%-menu$")
-	until fileExists and not commitMsg and not isCurrentFile and not harpoonMenu
+	until fileExists and not commitMsg and not isCurrentFile
 	return oldfile
 end
 

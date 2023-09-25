@@ -92,11 +92,18 @@ if not u.isReloading() then
 	-- with delay, to avoid importing duplicate reminders due to reminders
 	-- that are not being synced yet
 	u.runWithDelays(15, M.reminderToSidenotes)
-	if env.isAtOffice then u.runWithDelays({ 10, 20, 30, 40 }, moveOfficeNotesToBase) end
+	if env.isAtOffice then u.runWithDelays({ 10, 30 }, moveOfficeNotesToBase) end
 end
 
 -- 2. Every morning (safety redundancy)
 MorningTimerForSidenotes = hs.timer.doAt("07:00", "01d", M.reminderToSidenotes, true):start()
+
+-- 3. On wake, update Sidenotes Counter
+local c = hs.caffeinate.watcher
+WakeSideNotes = c.new(function(event)
+	local hasWoken = event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock
+	if hasWoken then updateCounter() end
+end):start()
 
 --------------------------------------------------------------------------------
 
