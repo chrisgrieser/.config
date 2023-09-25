@@ -14,6 +14,7 @@ local function reOpenLastFile()
 	local lastFileExist = vim.loop.fs_stat(vim.api.nvim_get_mark("0", {})[4]) ~= nil
 	if lastFileExist then
 		vim.cmd.normal { "'0", bang = true }
+		pcall(vim.cmd.bwipeout, "#") -- remove leftover new buffer
 		return
 	end
 
