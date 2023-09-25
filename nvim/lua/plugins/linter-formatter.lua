@@ -170,8 +170,8 @@ return {
 			lintTriggers()
 		end,
 	},
-	{ -- PENDING https://github.com/stevearc/conform.nvim/pull/75
-		"chrisgrieser/conform.nvim",
+	{
+		"stevearc/conform.nvim",
 		config = formatterConfig,
 		cmd = "ConformInfo",
 		keys = {
