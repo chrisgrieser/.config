@@ -12,8 +12,7 @@ end
 local function reOpenLastFile()
 	if vim.fn.argc() ~= 0 then return end
 	vim.defer_fn(function()
-		if vim.bo.filetype == "lazy" then return end -- lazy auto-installs
-		pcall(vim.cmd.normal, { "'0", bang = true })
+		vim.cmd.normal { "'0", bang = true }
 		pcall(vim.cmd.bwipeout, "#") -- do not leave empty file
 	end, 1)
 end
