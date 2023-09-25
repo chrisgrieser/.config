@@ -17,7 +17,8 @@ function separator() {
 # show files + git status + brief git log
 function inspect() {
 	if ! test -d "$PWD"; then
-		local dirname ; dirname=$(basename "$PWD")
+		local dirname
+		dirname=$(basename "$PWD")
 		printf '\033[1;33m"%s" has been moved or deleted.\033[0m' "$dirname"
 		return 1
 	fi
@@ -65,19 +66,26 @@ function inspect() {
 	fi
 }
 
-# Quick Open File
+#───────────────────────────────────────────────────────────────────────────────
+
+# Quick Open File (+ hidden)
 function oh() {
-	
+	filesearch --hidden "$*"
 }
 
+function o() {
+	filesearch --no-hidden "$*"
+}
 
 # Quick Open File
-function o() {
+function filesearch() {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 	if ! command -v fd &>/dev/null; then echo "fd not installed." && return 1; fi
 	if ! command -v eza &>/dev/null; then print "\033[1;33meza not installed.\033[0m" && return 1; fi
 
 	local selected
+	local mode="$1" # --hidden or --no-hidden
+	shift
 	local input="$*"
 
 	# skip `fzf` if file is fully named, e.g. through tab completion
@@ -88,7 +96,7 @@ function o() {
 
 	# --delimiter and --nth options ensure only file name and parent folder are displayed
 	selected=$(
-		fd --color=always --type=file --type=symlink | fzf \
+		fd "$mode" --type=file --type=symlink --color=always | fzf \
 			-0 -1 --ansi --query="$input" --info=inline \
 			--preview '[[ -f {} ]] && bat --color=always --style=snip --wrap=never --tabs=2 {} || eza --icons --color=always --group-directories-first {}'
 	)
@@ -100,6 +108,8 @@ function o() {
 		return 1
 	fi
 }
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # safer removal
 # - moves to macOS trash instead of irreversibly deleting with `rm`

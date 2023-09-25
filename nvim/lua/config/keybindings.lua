@@ -317,14 +317,6 @@ keymap(
 	{ desc = " Browse in Project" }
 )
 
--- stylua: ignore
-keymap( "n", "gO", function()
-	require("telescope.builtin").find_files {
-		prompt_title = projectName(),
-		hidden = true,
-	}
-end, { desc = " Browse in Project (+ hidden)" })
-
 keymap(
 	"n",
 	"gl",

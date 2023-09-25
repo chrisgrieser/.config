@@ -3,6 +3,7 @@ local u = require("config.utils")
 
 -- default mappings: https://github.com/nvim-telescope/telescope.nvim/blob/942fe5faef47b21241e970551eba407bc10d9547/lua/telescope/mappings.lua#L133
 local keymappings_I = {
+	["?"] = "which_key",
 	["<CR>"] = "select_default",
 	["<Esc>"] = "close",
 	["<PageDown>"] = "preview_scrolling_down",
@@ -14,8 +15,7 @@ local keymappings_I = {
 	["<S-Tab>"] = "move_selection_better",
 	["<Down>"] = "move_selection_worse",
 	["<Up>"] = "move_selection_better",
-	["?"] = "which_key",
-	["<D-a>"] = "select_all",
+	["<D-a>"] = "toggle_all",
 	["<D-CR>"] = function(prompt_bufnr)
 		require("telescope.actions").toggle_selection(prompt_bufnr)
 		require("telescope.actions").move_selection_worse(prompt_bufnr)
@@ -41,6 +41,10 @@ local keymappings_I = {
 		vim.fn.setreg("+", name)
 		u.notify("Copied", name)
 	end,
+}
+
+local findFileMappings = {
+	-- search directory up
 	["<D-up>"] = function(prompt_bufnr)
 		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
 		-- cwd is only set if passed as telescope option
@@ -51,6 +55,19 @@ local keymappings_I = {
 		require("telescope.builtin").find_files {
 			prompt_title = vim.fs.basename(parent_dir),
 			cwd = parent_dir,
+		}
+	end,
+	-- toggle `--hidden`
+	["<C-.>"] = function(prompt_bufnr)
+		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+		-- cwd is only set if passed as telescope option
+		local cwd = current_picker.cwd and tostring(current_picker.cwd) or vim.loop.cwd()
+
+		require("telescope.actions").close(prompt_bufnr)
+		require("telescope.builtin").find_files {
+			prompt_title = vim.fs.basename(cwd),
+			hidden = true,
+			cwd = cwd,
 		}
 	end,
 }
@@ -124,6 +141,18 @@ local function telescopeConfig()
 			},
 		},
 		pickers = {
+			find_files = {
+				prompt_prefix = "󰝰 ",
+				-- using the default find command from telescope is somewhat buggy,
+				-- e.g. not respecting fd/ignore
+				-- find_command = { "fd", "--type=file", "--type=symlink" },
+				follow = true,
+				hidden = false,
+				no_ignore = false,
+				mappings = { i = findFileMappings },
+			},
+			live_grep = { prompt_prefix = " ", disable_coordinates = true },
+			grep_string = { prompt_prefix = " ", disable_coordinates = true },
 			git_status = {
 				prompt_prefix = "󰊢 ",
 				show_untracked = true,
@@ -137,11 +166,6 @@ local function telescopeConfig()
 				-- add commit time (%cr)
 				git_command = { "git", "log", "--pretty=%h %s (%cr)", "--", "." },
 			},
-			git_branches = {
-				prompt_prefix = "󰊢 ",
-				initial_mode = "normal",
-				layout_config = { horizontal = { height = 0.9 } },
-			},
 			keymaps = {
 				prompt_prefix = " ",
 				modes = { "n", "i", "c", "x", "o", "t" },
@@ -154,19 +178,6 @@ local function telescopeConfig()
 					horizontal = { preview_width = { 0.7, min = 30 } },
 				},
 			},
-			find_files = {
-				prompt_prefix = "󰝰 ",
-				-- using the default find command from telescope is somewhat buggy,
-				-- e.g. not respecting fd/ignore
-				find_command = { "fd", "--type=file", "--type=symlink" },
-				follow = true,
-				prompt_title = function ()
-					local pwd = vim.loop.cwd()
-					return vim.fs.basename(pwd)
-				end,
-			},
-			live_grep = { prompt_prefix = " ", disable_coordinates = true },
-			grep_string = { prompt_prefix = " ", disable_coordinates = true },
 			loclist = {
 				prompt_prefix = " ",
 				trim_text = true,
@@ -252,11 +263,15 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
-			"nvim-telescope/telescope-fzf-native.nvim", 
+			"nvim-telescope/telescope-fzf-native.nvim",
 			{
 				"smartpde/telescope-recent-files",
 				keys = {
-					{ "gr", function() require("telescope").extensions.recent_files.pick() end, desc = " Recent Files" },
+					{
+						"gr",
+						function() require("telescope").extensions.recent_files.pick() end,
+						desc = " Recent Files",
+					},
 				},
 			},
 		},
