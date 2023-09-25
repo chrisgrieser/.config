@@ -66,6 +66,12 @@ function inspect() {
 }
 
 # Quick Open File
+function oh() {
+	
+}
+
+
+# Quick Open File
 function o() {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 	if ! command -v fd &>/dev/null; then echo "fd not installed." && return 1; fi
@@ -82,7 +88,7 @@ function o() {
 
 	# --delimiter and --nth options ensure only file name and parent folder are displayed
 	selected=$(
-		fd --hidden --color=always --type=file | fzf \
+		fd --color=always --type=file --type=symlink | fzf \
 			-0 -1 --ansi --query="$input" --info=inline \
 			--preview '[[ -f {} ]] && bat --color=always --style=snip --wrap=never --tabs=2 {} || eza --icons --color=always --group-directories-first {}'
 	)
@@ -90,8 +96,6 @@ function o() {
 		return 0
 	elif [[ -f "$selected" ]]; then
 		open "$selected"
-	elif [[ -d "$selected" ]]; then
-		z "$selected"
 	else
 		return 1
 	fi
