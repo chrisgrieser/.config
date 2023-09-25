@@ -151,9 +151,9 @@ function delta {
 
 function gitlog {
 	# my color format used for git log
-	local gitlog_format="format:%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)"
+	local format="format:%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)"
 
-	git log --all --color --graph --format="$gitlog_format" "$@" |
+	git log --all --color --graph --format="$format" "$@" |
 		sed -e 's/ seconds* ago)/s)/' \
 			-e 's/ minutes* ago)/m)/' \
 			-e 's/ hours* ago)/h)/' \
@@ -165,7 +165,7 @@ function gitlog {
 			-e 's/HEAD/󱍀 /g' \
 			-e 's/->/󰔰 /g' \
 			-e 's/tags: / )/' \
-			-Ee $'s/ (improv|fix|refactor|build|ci|docs|feat|test|perf|chore|revert|break)(\\(.+\\)|!)?:/ \033[1;35m\\1\033[0;34m\\2\033[1;30m:\033[0m/' \
+			-Ee $'s/ (improv|fix|refactor|build|ci|docs|feat|test|perf|chore|revert|break)(\\(.+\\)|!)?:/ \033[1;35m\\1\033[0;34m\\2\033[0m:/' \
 			-Ee $'s/(#[0-9]+)/\033[1;31m\\1\033[0m/' # issue numbers
 	# INFO inserting ansi colors via sed requires leading $
 	echo
