@@ -150,11 +150,8 @@ serverConfigs.tsserver = {
 			-- ES2022: .at(), ES2021: `.replaceAll()`, `new Set`
 			target = "ES2022", 
 		},
-		diagnostics = {
-			ignoredCodes = {
-				2451, -- "cannot redeclare block-scoped variable" -> not useful for JXA
-			},
-		},
+		-- "cannot redeclare block-scoped variable" -> not useful for JXA
+		diagnostics = { ignoredCodes = { 2451 } },
 		completions = { completeFunctionCalls = true },
 		typescript = {
 			inlayHints = {
@@ -292,7 +289,7 @@ return {
 	{ -- package manager
 		"williamboman/mason.nvim",
 		keys = {
-			{ "<leader>pm", vim.cmd.Mason, desc = " Mason Overview" },
+			{ "<leader>pm", vim.cmd.Mason, desc = " Mason Home" },
 		},
 		opts = {
 			ui = {
