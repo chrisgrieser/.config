@@ -5,7 +5,8 @@ local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
 --------------------------------------------------------------------------------
 -- CONFIG
 local commentHrChar = "─"
-local commentWidth = tostring(vim.opt_local.colorcolumn:get()[1]) - 1
+local commentWidth = vim.opt_local.colorcolumn:get() and tostring(vim.opt_local.colorcolumn:get()[1] - 1)
+	or 80
 local toggleSigns = {
 	["="] = "!",
 	["|"] = "&",
@@ -47,7 +48,6 @@ function M.commented_lines_textobject()
 	re = re - 1
 	vim.fn.execute("normal! " .. rs .. "GV" .. re .. "G")
 end
-
 
 function M.commentHr()
 	local wasOnBlank = vim.api.nvim_get_current_line() == ""
@@ -112,7 +112,6 @@ function M.openAlfredPref()
 	-- in case the right workflow is already open, Alfred is not focused.
 	-- Therefore manually focusing in addition to that here as well.
 	vim.fn.system { "open", "-a", "Alfred Preferences" }
-
 end
 
 function M.toggleCase()
@@ -140,7 +139,6 @@ function M.openNewScope()
 	vim.api.nvim_win_set_cursor(0, { ln + 1, 1 }) -- go line down
 	vim.cmd.startinsert { bang = true }
 end
-
 
 --------------------------------------------------------------------------------
 

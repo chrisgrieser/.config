@@ -1,11 +1,10 @@
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
 title: vim helpers
 rules:
-  - description: "Neovide: ⇪R to restart, ⌘Q to Quit"
+  - description: "Neovide Helpers"
     manipulators:
-      # INFO explicitly remapping cmd+q ensures that cursor position and changes
-      # are saved. Also, fixing the neovide issue of sometimes having nvim
-      # processes left behind.
+      # "Neovide: ⇪R to restart, ⌘Q to Quit"
+      # INFO explicitly remapping cmd+q ensures that cursor position and changes are saved. 
       - type: basic
         from: { key_code: q, modifiers: { mandatory: [command] } }
         to:
@@ -17,9 +16,19 @@ rules:
               fi
         conditions:
           - { type: frontmost_application_if, file_paths: ["[Nn]eovide"] }
-  #─────────────────────────────────────────────────────────────────────────────
-  - description: "HACK svim-apps: <S-Space> to f2"
-    manipulators:
+      # hard restart
+      - type: basic
+        from: { key_code: "2", modifiers: { mandatory: [command, shift, control, option] } }
+        to:
+          - shell_command: |
+              killall -9 neovide nvim language_server_macos_arm language_server_macos_x86 osascript
+              osascript -e 'display notification "" with title "⚔️ Killed nvim & neovide processes."'
+              sleep 0.5
+              osascript -e 'tell application "Neovide" to activate' # "open -a" does not focus Neovide
+        conditions:
+          - { type: frontmost_application_if, file_paths: ["[Nn]eovide"] }
+      #─────────────────────────────────────────────────────────────────────────────
+      # HACK svim-apps: <S-Space> to f2
       - type: basic
         from: { key_code: spacebar, modifiers: { mandatory: [shift] } }
         to:
