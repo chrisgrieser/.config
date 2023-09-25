@@ -6,7 +6,7 @@ local linters = {
 	lua = { "selene" },
 	css = { "stylelint" },
 	sh = { "shellcheck" },
-	markdown = { "markdownlint", "vale", "doctoc" },
+	markdown = { "markdownlint", "vale" },
 	yaml = { "yamllint" },
 	python = { "pylint" },
 	gitcommit = {},
@@ -33,7 +33,7 @@ local formatters = {
 	python = { "black" },
 	yaml = { "prettierd" },
 	html = { "prettierd" },
-	markdown = { "markdownlint" },
+	markdown = { "markdownlint", "markdown-toc" },
 	css = { "stylelint", "prettierd" },
 	sh = { "shellcheck", "shfmt" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
@@ -130,7 +130,16 @@ end
 --------------------------------------------------------------------------------
 
 local function formatterConfig()
-	require("conform").setup { formatters_by_ft = formatters }
+	require("conform").setup {
+		formatters_by_ft = formatters,
+		formatters = {
+			["markdown-toc"] ={
+				cmd = "markdown-toc",
+				stdin = false,
+				args = { "--stdin-from-filename", "$FILENAME" },
+			} 
+		},
+	}
 
 	-- stylua: ignore
 	require("conform.formatters.bibtex-tidy").args = {
