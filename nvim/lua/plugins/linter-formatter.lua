@@ -33,7 +33,7 @@ local formatters = {
 	python = { "black" },
 	yaml = { "prettierd" },
 	html = { "prettierd" },
-	markdown = { "markdownlint", "markdown-toc" },
+	markdown = { "markdown-toc", "markdownlint" },
 	css = { "stylelint", "prettierd" },
 	sh = { "shellcheck", "shfmt" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
@@ -130,16 +130,7 @@ end
 --------------------------------------------------------------------------------
 
 local function formatterConfig()
-	require("conform").setup {
-		formatters_by_ft = formatters,
-		formatters = {
-			["markdown-toc"] ={
-				cmd = "markdown-toc",
-				stdin = false,
-				args = { "--stdin-from-filename", "$FILENAME" },
-			} 
-		},
-	}
+	require("conform").setup { formatters_by_ft = formatters }
 
 	-- stylua: ignore
 	require("conform.formatters.bibtex-tidy").args = {
@@ -171,6 +162,30 @@ end
 --------------------------------------------------------------------------------
 
 return {
+	{ -- PENDING https://github.com/mfussenegger/nvim-lint/pull/377
+		"chrisgrieser/nvim-lint",
+		event = "VeryLazy",
+		config = function()
+			linterConfigs()
+			lintTriggers()
+		end,
+	},
+	{
+		"chrisgrieser/conform.nvim", -- PENDING https://github.com/stevearc/conform.nvim/pull/75
+		config = formatterConfig,
+		cmd = "ConformInfo",
+		keys = {
+			{
+				"<D-s>",
+				function()
+					require("conform").format { lsp_fallback = "always" }
+					vim.cmd.update()
+				end,
+				mode = { "n", "x" },
+				desc = "󰒕 Format & Save",
+			},
+		},
+	},
 	{ -- auto-install missing linters & formatters
 		-- (auto-install of lsp servers done via `mason-lspconfig.nvim`)
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -189,33 +204,9 @@ return {
 			}
 
 			-- clean unused & install missing
-			vim.defer_fn(vim.cmd.MasonToolsClean, 500)
 			vim.defer_fn(vim.cmd.MasonToolsInstall, 500)
+			vim.defer_fn(vim.cmd.MasonToolsClean, 1000)
 		end,
-	},
-	{ -- PENDING https://github.com/mfussenegger/nvim-lint/pull/377
-		"chrisgrieser/nvim-lint",
-		event = "VeryLazy",
-		config = function()
-			linterConfigs()
-			lintTriggers()
-		end,
-	},
-	{
-		"stevearc/conform.nvim",
-		config = formatterConfig,
-		cmd = "ConformInfo",
-		keys = {
-			{
-				"<D-s>",
-				function()
-					require("conform").format { lsp_fallback = "always" }
-					vim.cmd.update()
-				end,
-				mode = { "n", "x" },
-				desc = "󰒕 Format & Save",
-			},
-		},
 	},
 	{
 		"chrisgrieser/nvim-rulebook",
