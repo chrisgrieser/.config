@@ -1,0 +1,5 @@
+# DEFAULTS https://github.com/artempyanykh/marksman/blob/main/Tests/default.marksman.toml
+#───────────────────────────────────────────────────────────────────────────────
+
+[code_action]
+toc.enable = false # using `markdown-toc` instead, since more configurable
