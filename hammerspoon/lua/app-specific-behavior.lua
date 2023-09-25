@@ -168,7 +168,7 @@ end):start()
 Wf_script_editor = wf
 	.new("Script Editor")
 	:subscribe(wf.windowCreated, function(newWin)
-		-- skip new file creation dialogue
+		-- skip new file creation dialog
 		if newWin:title() == "Open" then
 			u.applescript('tell application "Script Editor" to make new document')
 		-- auto-paste and lint content; resize window
@@ -189,31 +189,16 @@ Wf_script_editor = wf
 	:subscribe(wf.windowUnfocused, function()
 		local clipb = hs.pasteboard.getContents()
 		if not clipb then return end
-		clipb = clipb:gsub("\r+", " \n") -- HACK to prevent treesitter parser issue
+		clipb = clipb:gsub("\r", " \n")
 		hs.pasteboard.setContents(clipb)
 	end)
 
 --------------------------------------------------------------------------------
 -- MIMESTREAM
 
-Wf_mimestream = wf.new("Mimestream"):subscribe(wf.windowCreated, function(newWin)
-	-- move new window
-	wu.moveResize(newWin, wu.pseudoMax)
-
-	-- increase font size when composing messages
-	-- (can't check for "New Message", since not able to go back to "TO" field
-	-- via keyboard shortcut)
-	local isComposeWin = newWin:title():find("^Re") or newWin:title():find("^Fwd")
-	if not isComposeWin then return end
-	u.runWithDelays(0.3, function()
-		u.keystroke({ "cmd" }, "a")
-		-- default is size 13, four increases -> size 16
-		u.keystroke({ "cmd" }, "+")
-		u.keystroke({ "cmd" }, "+")
-		u.keystroke({ "cmd" }, "+")
-		u.keystroke({}, "left") -- deselect
-	end)
-end)
+-- move new window
+Wf_mimestream = wf.new("Mimestream")
+	:subscribe(wf.windowCreated, function(newWin) wu.moveResize(newWin, wu.pseudoMax) end)
 
 --------------------------------------------------------------------------------
 

@@ -16,7 +16,7 @@ end, { desc = "⌨️ Edit leader-keybindings.lua" })
 --------------------------------------------------------------------------------
 
 -- highlight groups
-keymap("n", "<leader>pg", function() cmd.Telescope("highlights") end, { desc = " Highlight Groups" })
+keymap("n", "<leader>pg", function() cmd.Telescope("highlights") end, { desc = " Highlight Groups" })
 
 -- Plugins
 keymap("n", "<leader>pp", require("lazy").sync, { desc = " Lazy Update" })
@@ -25,7 +25,7 @@ keymap("n", "<leader>pi", require("lazy").install, { desc = " Lazy Install" }
 
 -- Theme Picker
 -- stylua: ignore
-keymap("n", "<leader>pc", function() cmd.Telescope("colorscheme") end, { desc = "  Change Colorschemes" })
+keymap("n", "<leader>pc", function() cmd.Telescope("colorscheme") end, { desc = " Change Colorschemes" })
 
 --------------------------------------------------------------------------------
 
