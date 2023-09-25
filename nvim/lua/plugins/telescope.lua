@@ -8,13 +8,11 @@ local keymappings_I = {
 	["<Esc>"] = "close",
 	["<PageDown>"] = "preview_scrolling_down",
 	["<PageUp>"] = "preview_scrolling_up",
-	["<C-h>"] = "cycle_history_prev",
-	["<C-l>"] = "cycle_history_next",
+	["<Up>"] = "cycle_history_prev",
+	["<Down>"] = "cycle_history_next",
 	["<D-s>"] = "smart_send_to_qflist", -- sends selected, or if none selected, sends all
 	["<Tab>"] = "move_selection_worse",
 	["<S-Tab>"] = "move_selection_better",
-	["<Down>"] = "move_selection_worse",
-	["<Up>"] = "move_selection_better",
 	["<D-a>"] = "toggle_all",
 	["<D-CR>"] = function(prompt_bufnr)
 		require("telescope.actions").toggle_selection(prompt_bufnr)
@@ -58,15 +56,28 @@ local findFileMappings = {
 		}
 	end,
 	-- toggle `--hidden`
-	["<C-.>"] = function(prompt_bufnr)
+	["<C-h>"] = function(prompt_bufnr)
 		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
 		-- cwd is only set if passed as telescope option
 		local cwd = current_picker.cwd and tostring(current_picker.cwd) or vim.loop.cwd()
 
 		require("telescope.actions").close(prompt_bufnr)
 		require("telescope.builtin").find_files {
-			prompt_title = vim.fs.basename(cwd),
+			prompt_title = vim.fs.basename(cwd) .. " (--hidden)",
 			hidden = true,
+			cwd = cwd,
+		}
+	end,
+	-- toggle `--no-ignore`
+	["<C-i>"] = function(prompt_bufnr)
+		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+		-- cwd is only set if passed as telescope option
+		local cwd = current_picker.cwd and tostring(current_picker.cwd) or vim.loop.cwd()
+
+		require("telescope.actions").close(prompt_bufnr)
+		require("telescope.builtin").find_files {
+			prompt_title = vim.fs.basename(cwd) .. " (--no-ignore)",
+			no_ignore = true,
 			cwd = cwd,
 		}
 	end,
@@ -145,10 +156,9 @@ local function telescopeConfig()
 				prompt_prefix = "󰝰 ",
 				-- using the default find command from telescope is somewhat buggy,
 				-- e.g. not respecting fd/ignore
-				-- find_command = { "fd", "--type=file", "--type=symlink" },
+				find_command = { "fd", "--type=file", "--type=symlink" },
 				follow = true,
 				hidden = false,
-				no_ignore = false,
 				mappings = { i = findFileMappings },
 			},
 			live_grep = { prompt_prefix = " ", disable_coordinates = true },

@@ -30,9 +30,8 @@ function hs {
 	selected=$(
 		history -t "$HIST_DATE_FORMAT" 1 | cut -c8- | fzf \
 			--tac --no-sort \
-			--no-info \
+			--no-info --height=60% \
 			--query "$*" \
-			--height=60%
 	)
 	[[ -z "$selected" ]] && return 0
 	command=$(echo "$selected" | cut -c"$to_cut"-)
