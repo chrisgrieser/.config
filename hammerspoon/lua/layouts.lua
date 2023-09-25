@@ -167,7 +167,7 @@ Wf_appsOnMouseScreen = u.wf
 -- 1. Change of screen numbers
 DisplayCountWatcher = hs.screen.watcher
 	.new(function()
-		local delay = env.isAtMother and 1.5 or 0 -- TV at mother needs small delay
+		local delay = env.isAtMother and 1 or 0 -- TV at mother needs small delay
 		u.runWithDelays(delay, selectLayout)
 
 		-- If at night switching back to one display, put iMac display to sleep

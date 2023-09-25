@@ -9,6 +9,7 @@ local aw = require("lua.utils").aw
 ---@param win hs.window
 local function obsidianThemeDevHelper(win)
 	local obsi = u.app("Obsidian")
+	---@diagnostic disable-next-line: undefined-field
 	local isNeovideWin = win and win:application() and (win:application():name():lower() == "neovide")
 	local obsiMinimized = obsi and obsi:mainWindow() and not (obsi:mainWindow():isMinimized())
 	if not isNeovideWin or not obsiMinimized then return end
