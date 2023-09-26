@@ -136,7 +136,14 @@ end):start()
 Wf_pdfReader = wf.new({ "Preview", "Highlights", "PDF Expert" })
 	:subscribe(wf.windowCreated, function(newWin) wu.moveResize(newWin, wu.pseudoMax) end)
 
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+
+-- FIX window position not being remembered
+Wf_readkit = wf.new("ReadKit"):subscribe(wf.windowCreated, function(newWin)
+	u.runWithDelays({ 0, 0.1, 0.3 }, function() wu.moveResize(newWin, wu.pseudoMax) end)
+end)
+
+------------------------------------------------------------------------------
 
 -- TRANSMISSION / TWITTER / MASTODON
 -- Fallthrough: prevent unintended focussing after qutting another app
@@ -202,7 +209,7 @@ Wf_mimestream = wf.new("Mimestream")
 
 --------------------------------------------------------------------------------
 -- Textpal
--- FIX window opening on System start
+-- FIX window opening on System-start
 if not u.isReloading() then
 	local textpal = u.app("TextPal")
 	if textpal and textpal:mainWindow() then textpal:mainWindow():close() end
