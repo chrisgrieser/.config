@@ -31,10 +31,10 @@ local formatters = {
 	jsonc = { "biome" },
 	lua = { "stylua" },
 	python = { "black" },
-	yaml = { "prettierd" },
-	html = { "prettierd" },
+	yaml = { "prettier" },
+	html = { "prettier" },
 	markdown = { "markdown-toc", "markdownlint" },
-	css = { "stylelint", "prettierd" },
+	css = { "stylelint", "prettier" },
 	sh = { "shellcheck", "shfmt" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
 	["_"] = { "trim_whitespace", "trim_newlines", "squeeze_blanks" },
@@ -132,6 +132,14 @@ end
 local function formatterConfig()
 	require("conform").setup { formatters_by_ft = formatters }
 
+	require("conform.formatters.prettier").args = {
+		-- .editorconfig uses value of 80 since it sets vim's textwidth, but I
+		-- prefer 105 for formatting
+		"--print-width=105",
+		"--stdin-filepath",
+		"$FILENAME",
+	}
+
 	-- stylua: ignore
 	require("conform.formatters.bibtex-tidy").args = {
 		"--quiet",
@@ -162,15 +170,15 @@ end
 --------------------------------------------------------------------------------
 
 return {
-	{ -- PENDING https://github.com/mfussenegger/nvim-lint/pull/377
-		"chrisgrieser/nvim-lint",
+	{ -- Linter integration
+		"chrisgrieser/nvim-lint", -- PENDING https://github.com/mfussenegger/nvim-lint/pull/377
 		event = "VeryLazy",
 		config = function()
 			linterConfigs()
 			lintTriggers()
 		end,
 	},
-	{
+	{ -- Formatter integration
 		"stevearc/conform.nvim",
 		config = formatterConfig,
 		cmd = "ConformInfo",
@@ -187,7 +195,6 @@ return {
 		},
 	},
 	{ -- auto-install missing linters & formatters
-		-- (auto-install of lsp servers done via `mason-lspconfig.nvim`)
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		event = "VeryLazy",
 		keys = {
@@ -204,11 +211,11 @@ return {
 			}
 
 			-- clean unused & install missing
-			vim.defer_fn(vim.cmd.MasonToolsInstall, 500)
-			vim.defer_fn(vim.cmd.MasonToolsClean, 1000)
+			vim.defer_fn(vim.cmd.MasonToolsClean, 300) 
+			vim.defer_fn(vim.cmd.MasonToolsClean, 1000) -- delayed, so noice.nvim is loaded before
 		end,
 	},
-	{
+	{ -- add ignore-comments & lookup rules
 		"chrisgrieser/nvim-rulebook",
 		keys = {
 			{ "<leader>d", function() require("rulebook").lookupRule() end, desc = "󰒕 Lookup Rule" },
