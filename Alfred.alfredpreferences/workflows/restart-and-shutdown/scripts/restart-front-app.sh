@@ -36,8 +36,7 @@ i=0
 while pgrep -xq "neovide" || pgrep -xq "nvim"; do
 	sleep 0.1
 	i=$((i + 1))
-	if [[ $i -gt 25 ]]; then
-		osascript -e 'display notification "⚔️ Force killing Neovide…" with title "Could not quit."'
+	if [[ $i -gt 15 ]]; then
 		killall -9 neovide nvim || exit 1
 	fi
 done
@@ -45,12 +44,3 @@ sleep 0.1
 
 # Restart
 open -a "Neovide" # config reopens last file if no arg
-
-# server responsive?
-sleep 2 # wait for server
-# HACK sleep for 1ms = effectively pinging nvim server
-if ! nvim --server "$server" --remote-send "<cmd>sleep 1m<CR>"; then
-	osascript -e 'display notification "" with title "Server unresponsive."'
-fi
-
-#───────────────────────────────────────────────────────────────────────────────

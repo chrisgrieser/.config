@@ -128,7 +128,7 @@ end
 
 ---@param filetype string|string[]
 ---@param modes "n"|"v"|"x"|"i"|"o"|"c"|"t"|string[]
----@param lhs string|function
+---@param lhs string
 ---@param rhs string|function
 ---@param opts? { desc: string, buffer: boolean, nowait: boolean, remap: boolean }
 function M.ftKeymap(filetype, modes, lhs, rhs, opts)

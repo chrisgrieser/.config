@@ -1,8 +1,8 @@
 -- INFO only the first theme will be used
 local lightThemes = {
-	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
+	-- { "EdenEast/nightfox.nvim", name = "dawnfox" },
 	-- { "catppuccin/nvim", name = "catppuccin" },
-	-- { "rose-pine/neovim", name = "rose-pine" },
+	{ "rose-pine/neovim", name = "rose-pine" },
 	-- {
 	-- 	"marko-cerovac/material.nvim",
 	-- 	init = function() vim.g.material_style = "lighter" end,
@@ -18,7 +18,6 @@ local darkThemes = {
 	-- "sainnhe/everforest",
 	-- "nvimdev/zephyr-nvim",
 	-- "kvrohit/mellow.nvim",
-	-- "nyoom-engineering/oxocarbon.nvim",
 }
 
 vim.g.darkOpacity = 0.92
@@ -26,7 +25,7 @@ vim.g.lightOpacity = 0.93
 
 --------------------------------------------------------------------------------
 
--- The purpose of this is not having to manage two lists, one with themes
+-- INFO The purpose of this is not having to manage two lists, one with themes
 -- to install and one for determining light/dark theme
 
 ---convert lazy.nvim-plugin-spec or github-repo into theme name

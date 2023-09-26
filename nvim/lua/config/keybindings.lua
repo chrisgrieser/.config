@@ -306,7 +306,7 @@ keymap("i", "<D-e>", "``<Left>", { desc = "  Inline Code" })
 ---@nodiscard
 ---@return string name of the current project
 local function projectName()
-	local pwd = vim.loop.cwd()
+	local pwd = vim.loop.cwd() or ""
 	return vim.fs.basename(pwd)
 end
 
