@@ -148,7 +148,7 @@ serverConfigs.tsserver = {
 			checkJs = true,
 			-- JXA is compliant with most of ECMAScript: https://github.com/JXA-Cookbook/JXA-Cookbook/wiki/ES6-Features-in-JXA
 			-- ES2022: .at(), ES2021: `.replaceAll()`, `new Set`
-			target = "ES2022", 
+			target = "ES2022",
 		},
 		-- "cannot redeclare block-scoped variable" -> not useful for JXA
 		diagnostics = { ignoredCodes = { 2451 } },
@@ -299,9 +299,15 @@ return {
 			},
 		},
 	},
+	{ -- nvim-lua-types
+		"folke/neodev.nvim",
+		opts = {
+			library = { plugins = false }, -- too slow with all my plugins
+		},
+	},
 	{ -- configure LSPs
 		"neovim/nvim-lspconfig",
-		dependencies = "folke/neodev.nvim", -- nvim-lua types
+		dependencies = "folke/neodev.nvim", -- ensures it's loaded before lua_ls
 		init = function()
 			setupAllLsps()
 			lspCurrentTokenHighlight()
