@@ -1,8 +1,8 @@
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
-local wf = require("lua.utils").wf
-local aw = require("lua.utils").aw
+local aw = hs.application.watcher
+local wf = hs.window.filter
 --------------------------------------------------------------------------------
 
 ---play/pause spotify
@@ -55,7 +55,8 @@ end):start()
 ---half -> hide right sidebar
 ---pseudo-maximized -> show right sidebar
 ---max -> hide right sidebars (assuming split)
-Wf_ObsidanMoved = u.wf.new("Obsidian"):subscribe(u.wf.windowMoved, function(obsiWin)
+---requires: Obsidian Advanced URI plugin with `eval` being enabled
+Wf_ObsidanMoved = wf.new("Obsidian"):subscribe(wf.windowMoved, function(obsiWin)
 	if #u.app("Obsidian"):allWindows() > 1 then return end -- prevent popout window resizing to affect sidebars
 
 	local relObsiWinWidth = obsiWin:size().w / obsiWin:screen():frame().w
@@ -141,7 +142,7 @@ Wf_pdfReader = wf.new({ "Preview", "Highlights", "PDF Expert" })
 -- FIX window position not being remembered
 ReadkitWatcher = aw.new(function(appName, event)
 	if appName == "ReadKit" and event == aw.activated then
-		u.runWithDelays(0.1, function ()
+		u.runWithDelays({ 0, 0.2 }, function()
 			local win = u.app("ReadKit"):mainWindow()
 			if win then wu.moveResize(win, wu.pseudoMax) end
 		end)

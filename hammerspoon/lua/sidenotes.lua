@@ -3,7 +3,7 @@ local M = {}
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
-
+local aw = hs.application.watcher
 --------------------------------------------------------------------------------
 
 local function updateCounter() hs.execute(u.exportPath .. "sketchybar --trigger update-sidenotes-count") end
@@ -16,7 +16,7 @@ end
 
 -- update counter in sketchybar
 -- enlarge on startup
-SidenotesWatcher = u.aw
+SidenotesWatcher = aw
 	.new(function(appName, event, app)
 		if not (appName == "SideNotes") then return end
 		-- i.e., run on any event related to sidenotes
@@ -25,13 +25,13 @@ SidenotesWatcher = u.aw
 		-- FIX sidenotes always starting with a narrow width.
 		-- HACK Cannot use launch event as trigger for this, since SideNotes
 		-- launches in its special hidden mode
-		if event == u.aw.activated then
+		if event == aw.activated then
 			local win = app:mainWindow()
 			local relWidth = win:frame().w / win:screen():frame().w
 			-- on startup, SideNotes gets a width of ~18%, while sidenotesNarrow is ~20%
 			local isStartUp = relWidth < wu.sidenotesNarrow.w
 			if isStartUp then sidenotesStartup() end
-		elseif event == u.aw.launched then
+		elseif event == aw.launched then
 			sidenotesStartup()
 		end
 	end)

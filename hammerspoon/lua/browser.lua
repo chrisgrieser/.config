@@ -1,7 +1,8 @@
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
-local wf = require("lua.utils").wf
+local aw = hs.application.watcher
+local wf = hs.window.filter
 
 --------------------------------------------------------------------------------
 
@@ -64,16 +65,14 @@ KHidesCursor = u.hotkey({}, "k", function() hideCurAndPassThrough("k") end):disa
 
 -- watches browser, enables when hotkeys when browser is activated
 
-Jk_watcher = u.aw
-	.new(function(appName, eventType)
-		if eventType ~= u.aw.activated then return end
+Jk_watcher = aw.new(function(appName, eventType)
+	if eventType ~= aw.activated then return end
 
-		if appName == env.browserApp then
-			JHidesCursor:enable()
-			KHidesCursor:enable()
-		else
-			JHidesCursor:disable()
-			KHidesCursor:disable()
-		end
-	end)
-	:start()
+	if appName == env.browserApp then
+		JHidesCursor:enable()
+		KHidesCursor:enable()
+	else
+		JHidesCursor:disable()
+		KHidesCursor:disable()
+	end
+end):start()

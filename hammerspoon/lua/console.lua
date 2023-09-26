@@ -1,9 +1,10 @@
 local u = require("lua.utils")
 local cons = hs.console
-local wf = require("lua.utils").wf
-local aw = require("lua.utils").aw
+local aw = hs.application.watcher
+local wf = hs.window.filter
 --------------------------------------------------------------------------------
 
+-- CONFIG
 -- CONSOLE APPEARANCE
 local baseFont = { name = "JetBrainsMonoNL Nerd Font", size = 22 }
 local darkRed = { red = 0.7, green = 0, blue = 0, alpha = 1 }
@@ -40,8 +41,9 @@ local function cleanupConsole()
 		local ignore = line:find("Loading extensions?: ")
 			or line:find("Lazy extension loading enabled$")
 			or line:find("Loading Spoon: RoundedCorners$")
-			or line:find("Loading /Users/chrisgrieser/.config/hammerspoon/init.lua$")
+			or line:find("Loading /Users/chrisgrieser/.config/*hammerspoon/init.lua$")
 			or line:find("hs%.canvas:delete")
+			or line:find("%-%- Done%.$")
 			or line:find("wfilter: .* is STILL not registered") -- FIX https://github.com/Hammerspoon/hammerspoon/issues/3462
 
 		if not ignore then table.insert(cleanLines, line) end

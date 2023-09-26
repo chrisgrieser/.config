@@ -8,8 +8,6 @@ MyTimers = {} -- need to catch timers in global vars to ensure they don't get ga
 -- shorthands
 M.hotkey = hs.hotkey.bind
 M.keystroke = hs.eventtap.keyStroke
-M.aw = hs.application.watcher
-M.wf = hs.window.filter
 M.applescript = hs.osascript.applescript
 M.urischeme = hs.urlevent.bind
 M.tbl_contains = hs.fnutils.contains
