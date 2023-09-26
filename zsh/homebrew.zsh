@@ -30,6 +30,7 @@ command -v ct &>/dev/null && alias brew="ct brew"
 
 function print-section() {
 	echo
+	echo
 	echo "$*"
 	separator
 }
@@ -95,7 +96,7 @@ function listall() {
 	print-section "NPM"
 	npm list --location=global
 
-	print-section "Pip"
+	print-section "Pip3"
 	pip list --not-required
 
 	print-section "DUMP INSTALLS"
