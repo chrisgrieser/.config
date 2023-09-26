@@ -254,6 +254,7 @@ function run(argv) {
 	for (const key in entry) {
 		if (key === "type") continue; // already inserted in first line
 		let value = entry[key];
+		if (!value) continue;
 		if (typeof value === "string") {
 			// escape bibtex values
 			value = "{" + value + "}";
