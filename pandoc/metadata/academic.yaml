@@ -1,11 +1,14 @@
-# https://pandoc.org/MANUAL.html#option--metadata-file
+# DOCS https://pandoc.org/MANUAL.html#option--metadata-file
 # "Metadata values specified inside the document, or by using -M,
 # overwrite values specified with this option. The file will be
 # searched for first in the working directory, and then in the metadata
 # subdirectory of the user data directory (see --data-dir)."
+
+# INFO These values serve as fallback values when none have been provided in the
+# markdown document metadata
 #───────────────────────────────────────────────────────────────────────────────
 
-csl: apa-6th-edition # does not need extension
+csl: apa-7th # does not need extension
 lang: en-US
 
 title: Untitled

@@ -182,7 +182,7 @@ rules:
           - *remove-notice
           # to open the "unified" trash (iCloud trash + user trash), needs to use
           # AppleScript and not `open "$HOME/.Trash"`
-          - shell_command: | 
+          - shell_command: |
               osascript -e'
                 tell application "Finder"
                   activate

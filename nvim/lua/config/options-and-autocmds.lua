@@ -86,7 +86,7 @@ opt.cursorline = true
 opt.signcolumn = "yes:1"
 
 -- Wrapping
-opt.textwidth = 80 -- in some languages overridden by .editorconfig
+opt.textwidth = 80 -- overridden by .editorconfig
 opt.colorcolumn = { 81 } -- not relative to textwidth, as it is sometimes changed via .editorconfig
 opt.wrapmargin = 3 -- extra space since using a scrollbar plugin
 opt.wrap = false
