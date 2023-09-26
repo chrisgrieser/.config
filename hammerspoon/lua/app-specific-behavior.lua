@@ -201,6 +201,14 @@ Wf_mimestream = wf.new("Mimestream")
 	:subscribe(wf.windowCreated, function(newWin) wu.moveResize(newWin, wu.pseudoMax) end)
 
 --------------------------------------------------------------------------------
+-- Textpal
+-- FIX window opening on System start
+if not u.isReloading() then
+	local textpal = u.app("TextPal")
+	if textpal and textpal:mainWindow() then textpal:mainWindow():close() end
+end
+
+--------------------------------------------------------------------------------
 
 -- DISCORD
 -- when focused, enclose URL in clipboard with <>
