@@ -1,7 +1,8 @@
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
-local aw = require("lua.utils").aw
+local aw = hs.application.watcher
+local wf = hs.window.filter
 
 --------------------------------------------------------------------------------
 
@@ -126,11 +127,11 @@ TickerWakeWatcher = c.new(function(event)
 end):start()
 
 -- show/hide twitter when other wins move
-Wf_SomeWindowActivity = u.wf
+Wf_SomeWindowActivity = wf
 	.new(true)
 	:setOverrideFilter({ allowRoles = "AXStandardWindow", hasTitlebar = true })
-	:subscribe(u.wf.windowMoved, function(movedWin) showHideTickerApp(movedWin) end)
-	:subscribe(u.wf.windowCreated, function(createdWin) showHideTickerApp(createdWin) end)
+	:subscribe(wf.windowMoved, function(movedWin) showHideTickerApp(movedWin) end)
+	:subscribe(wf.windowCreated, function(createdWin) showHideTickerApp(createdWin) end)
 
 --------------------------------------------------------------------------------
 

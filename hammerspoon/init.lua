@@ -3,7 +3,7 @@
 ---@param module string module to load
 local function safeRequire(module)
 	local success, _ = pcall(require, module)
-	if not success then hs.alert("Error loading " .. module) end
+	if not success then hs.alert("⚠️ Error loading " .. module) end
 end
 
 --------------------------------------------------------------------------------

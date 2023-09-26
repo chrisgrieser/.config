@@ -8,7 +8,7 @@ local fn = vim.fn
 local function irregularWhitespace()
 	-- USER CONFIG
 	-- filetypes and the number of spaces they use. Omit or set to nil to use tabs for that filetype.
-	local spaceFiletypes = { python = 4, yaml = 2 } 
+	local spaceFiletypes = { python = 4, yaml = 2 }
 	local ignoredFiletypes = { "css", "markdown", "gitcommit" }
 	local linebreakType = "unix" ---@type "unix" | "mac" | "dos"
 
@@ -111,9 +111,7 @@ local function navicBreadcrumbs()
 	return require("nvim-navic").get_location()
 end
 
-local function lspActionLightbulb()
-	return require("nvim-lightbulb").get_status_text()
-end
+local function lspActionLightbulb() return require("nvim-lightbulb").get_status_text() end
 
 --------------------------------------------------------------------------------
 
@@ -198,8 +196,8 @@ local lualineConfig = {
 		},
 		lualine_c = {
 			{
-				function () require("funcs.quickfix").counter() end,
-				cond = function () return #vim.fn.getqflist() > 0 end,
+				function() return require("funcs.quickfix").counter() end,
+				cond = function() return #vim.fn.getqflist() > 0 end,
 			},
 		},
 		lualine_x = {

@@ -3,6 +3,7 @@ local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local visuals = require("lua.visuals")
 local wu = require("lua.window-utils")
+local wf = hs.window.filter
 
 --------------------------------------------------------------------------------
 -- HELPERS
@@ -124,7 +125,7 @@ end
 --------------------------------------------------------------------------------
 
 -- Open Apps always at Mouse Screen
-Wf_appsOnMouseScreen = u.wf
+Wf_appsOnMouseScreen = wf
 	.new({
 		env.browserApp,
 		env.mailApp,
@@ -148,7 +149,7 @@ Wf_appsOnMouseScreen = u.wf
 		"Netflix",
 		"CrunchyRoll",
 	})
-	:subscribe(u.wf.windowCreated, function(newWin)
+	:subscribe(wf.windowCreated, function(newWin)
 		local mouseScreen = hs.mouse.getCurrentScreen()
 		local app = newWin:application()
 		local screenOfWindow = newWin:screen()

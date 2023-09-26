@@ -1,6 +1,8 @@
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
+local aw = hs.application.watcher
 --------------------------------------------------------------------------------
+
 -- INFO This is essentially an implementation of the inspired by the macOS app
 -- [quitter](https://marco.org/apps), this module quits any app if long enough idle
 
@@ -20,6 +22,8 @@ Thresholds = {
 	Finder = 20, -- only closes windows when not on projector
 	Obsidian = 100,
 }
+
+--------------------------------------------------------------------------------
 
 ---@param app string name of the app
 local function quit(app)
@@ -57,13 +61,13 @@ for app, _ in pairs(Thresholds) do
 end
 
 ---log times when an app has been deactivated
-DeactivationWatcher = u.aw
+DeactivationWatcher = aw
 	.new(function(app, event)
 		if not app or app == "" then return end -- empty string as safeguard for special apps
 
-		if event == u.aw.deactivated then
+		if event == aw.deactivated then
 			IdleApps[app] = now()
-		elseif event == u.aw.activated or event == u.aw.terminated then
+		elseif event == aw.activated or event == aw.terminated then
 			IdleApps[app] = nil -- removes active or closed app from table
 		end
 	end)

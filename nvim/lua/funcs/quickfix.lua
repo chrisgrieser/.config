@@ -32,6 +32,7 @@ local function openFoldUnderCursor() cmd.normal { "zv", bang = true } end
 --------------------------------------------------------------------------------
 
 -- STATUSLINE COMPONENT
+---@nodiscard
 function M.counter()
 	local totalItems = countCurQuickfix()
 	if totalItems == 0 then return "" end

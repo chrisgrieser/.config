@@ -1,7 +1,8 @@
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
-local aw = require("lua.utils").aw
+local aw = hs.application.watcher
+local wf = hs.window.filter
 
 --------------------------------------------------------------------------------
 
@@ -53,9 +54,9 @@ NeovideWatcher = aw.new(function(appName, eventType, neovide)
 	end
 end):start()
 
-Wf_neovideMoved = u.wf
+Wf_neovideMoved = wf
 	.new({ "Neovide", "neovide" })
-	:subscribe(u.wf.windowMoved, function(movedWin) obsidianThemeDevHelper(movedWin) end)
+	:subscribe(wf.windowMoved, function(movedWin) obsidianThemeDevHelper(movedWin) end)
 
 --------------------------------------------------------------------------------
 
