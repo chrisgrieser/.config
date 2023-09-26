@@ -1,1 +1,10 @@
-{}
+// enable typescript support in JXA files
+{
+	"compilerOptions": {
+		"checkJs": true,
+		// JXA is compliant with most of ECMAScript: https://github.com/JXA-Cookbook/JXA-Cookbook/wiki/ES6-Features-in-JXA
+		// ES2021 makes e.g. `.replaceAll()` and `new Set` valid
+		// ES2022 makes .at() valid
+		"target": "ES2022"
+	}
+}
