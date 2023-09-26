@@ -41,7 +41,7 @@ local function cleanupConsole()
 		local ignore = line:find("Loading extensions?: ")
 			or line:find("Lazy extension loading enabled$")
 			or line:find("Loading Spoon: RoundedCorners$")
-			or line:find("Loading /Users/chrisgrieser/.config/*hammerspoon/init.lua$")
+			or line:find("Loading /Users/chrisgrieser/.config//?hammerspoon/init.lua$")
 			or line:find("hs%.canvas:delete")
 			or line:find("%-%- Done%.$")
 			or line:find("wfilter: .* is STILL not registered") -- FIX https://github.com/Hammerspoon/hammerspoon/issues/3462
@@ -93,7 +93,7 @@ u.urischeme("copy-last-command", function()
 	if not consoleHistory then return end
 	local lastcommand = consoleHistory[#consoleHistory]
 	hs.pasteboard.setContents(lastcommand)
-	u.notify("Copied: '" .. lastcommand .. "'")
+	u.notify(('Copied: "%s"'):format(lastcommand))
 end)
 
 -- `hammerspoon://clear-console` for Karabiner Elements (⌘K)
