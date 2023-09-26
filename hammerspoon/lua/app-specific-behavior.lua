@@ -139,9 +139,14 @@ Wf_pdfReader = wf.new({ "Preview", "Highlights", "PDF Expert" })
 ------------------------------------------------------------------------------
 
 -- FIX window position not being remembered
-Wf_readkit = wf.new("ReadKit"):subscribe(wf.windowCreated, function(newWin)
-	u.runWithDelays({ 0, 0.1, 0.3 }, function() wu.moveResize(newWin, wu.pseudoMax) end)
-end)
+ReadkitWatcher = aw.new(function(appName, event)
+	if appName == "ReadKit" and event == aw.activated then
+		u.runWithDelays(0.1, function ()
+			local win = u.app("ReadKit"):mainWindow()
+			if win then wu.moveResize(win, wu.pseudoMax) end
+		end)
+	end
+end):start()
 
 ------------------------------------------------------------------------------
 
