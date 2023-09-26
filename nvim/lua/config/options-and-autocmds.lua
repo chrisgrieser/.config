@@ -86,16 +86,15 @@ opt.cursorline = true
 opt.signcolumn = "yes:1"
 
 -- Wrapping
-opt.textwidth = 80 -- overridden by .editorconfig
-opt.colorcolumn = { 81 } -- not relative to textwidth, as it is sometimes changed via .editorconfig
+opt.textwidth = 80 -- only fallback value, mostly overridden by .editorconfig
+opt.colorcolumn = { "+1" }
 opt.wrapmargin = 3 -- extra space since using a scrollbar plugin
 opt.wrap = false
 opt.breakindent = false
 opt.linebreak = true -- do not break up full words on wrap
 
 -- Color Column: textwidth + guiding line for `gm`
--- BUG the "WinResized" autocmd event does not seem to work currently (nvim 0.9.1)
-autocmd({ "VimEnter", "VimResized" }, {
+autocmd({ "VimEnter", "VimResized", "WinResized" }, {
 	callback = function()
 		if opt_local.wrap:get() then return end
 		local gmColumn = math.floor(vim.api.nvim_win_get_width(0) / 2)
