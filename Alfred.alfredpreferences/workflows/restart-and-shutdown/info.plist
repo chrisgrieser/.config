@@ -137,6 +137,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>B616131D-288D-4C96-B586-C024DA33C276</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E3A971CD-7DC4-4FDF-9FEB-C73F0A3A8BD7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>B676CE46-BEC5-4201-9170-768499351B3D</key>
 		<array>
 			<dict>
@@ -194,6 +207,29 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>FC350FC9-C6D2-45FA-BC34-7B415C787DE3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E3A971CD-7DC4-4FDF-9FEB-C73F0A3A8BD7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A5B116EC-8220-4ABE-8376-976F243A9EF3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>2692343D-ECF2-4555-842D-915217029E2F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -559,6 +595,81 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>A5B116EC-8220-4ABE-8376-976F243A9EF3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/neovim-hard-restart.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E3A971CD-7DC4-4FDF-9FEB-C73F0A3A8BD7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<true/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>19</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>2</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>B616131D-288D-4C96-B586-C024DA33C276</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -591,6 +702,23 @@ fi</string>
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>C5467250-ED54-4905-BDBB-5B6EA35BC1F1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>paths</key>
+				<array>
+					<string>/System/Volumes/Data/Applications/Neovide.app</string>
+				</array>
+				<key>toggle</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.launchfiles</string>
+			<key>uid</key>
+			<string>2692343D-ECF2-4555-842D-915217029E2F</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -647,6 +775,15 @@ fi</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>20</real>
+		</dict>
+		<key>2692343D-ECF2-4555-842D-915217029E2F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>360</real>
+			<key>ypos</key>
+			<real>415</real>
 		</dict>
 		<key>26ABDCE2-3900-4463-AD5F-1EE785422A03</key>
 		<dict>
@@ -740,6 +877,26 @@ fi</string>
 			<key>ypos</key>
 			<real>30</real>
 		</dict>
+		<key>A5B116EC-8220-4ABE-8376-976F243A9EF3</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>360</real>
+			<key>ypos</key>
+			<real>300</real>
+		</dict>
+		<key>B616131D-288D-4C96-B586-C024DA33C276</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>neovim hard restart</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>335</real>
+		</dict>
 		<key>B676CE46-BEC5-4201-9170-768499351B3D</key>
 		<dict>
 			<key>colorindex</key>
@@ -797,6 +954,15 @@ fi</string>
 			<real>440</real>
 			<key>ypos</key>
 			<real>165</real>
+		</dict>
+		<key>E3A971CD-7DC4-4FDF-9FEB-C73F0A3A8BD7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>335</real>
 		</dict>
 		<key>EB2622C1-55F8-43AA-A491-C3A981FB3BD6</key>
 		<dict>
