@@ -132,14 +132,6 @@ end
 local function formatterConfig()
 	require("conform").setup { formatters_by_ft = formatters }
 
-	require("conform.formatters.prettier").args = {
-		-- .editorconfig uses value of 80 since it sets vim's textwidth, but I
-		-- prefer 105 for formatting
-		"--print-width=105",
-		"--stdin-filepath",
-		"$FILENAME",
-	}
-
 	-- stylua: ignore
 	require("conform.formatters.bibtex-tidy").args = {
 		"--quiet",
