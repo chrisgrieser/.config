@@ -1,7 +1,7 @@
 matches:
   # cencorship for carl
   - trigger: "roadmap"
-    replace: "r0admap (carl, no!)"
+    replace: "nopemap"
   - trigger: "legacy editor"
     replace: "legacy edit0r (carl, no!)"
   - trigger: "getting started"
@@ -14,9 +14,6 @@ matches:
   - triggers: ["!carl", "!xkcd"]
     replace: sudo xkcd automation
     label: "xkcd: automation"
-  - triggers: ["!carl", "!roles"]
-    replace: get roles
-    label: Get Discord Roles
 
   # sed for fixing messages
   - trigger: "sss"
@@ -24,22 +21,3 @@ matches:
   # send silent (no ping) messages
   - triggers: ["zzz"]
     replace: "@silent "
-
-  # announcements
-  - trigger: "!update"
-    replace: |
-      **Shimmering Focus Update ⟡**
-
-      ✨ __New__
-      - $|$
-
-      ↗️ __Improvements__
-      - 
-
-      🐞 __Bug Fixes__
-      - 
-
-      ⚠️ __Breaking Changes__
-      - 
-
-      ➡️ <https://github.com/chrisgrieser/shimmering-focus>
