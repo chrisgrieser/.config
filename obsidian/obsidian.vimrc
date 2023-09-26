@@ -151,7 +151,7 @@ exmap caseSwitch obcommand obsidian-editor-shortcuts:toggleCase
 nnoremap ö :caseSwitch
 vnoremap ö :caseSwitch
 
-" do not move to the right on toggling case of a character
+" do not move to the right on toggling case
 nnoremap ~ ~h
 
 " Move words (equivalent to sibling-swap.nvim)
@@ -196,9 +196,8 @@ nmap &b& :blankBelow
 nmap o &b&i
 
 " Add Blank Line above/below
-" INFO adding in 0d$ to clear the line from list markers from the o/O remapping above
-nnoremap = O<Esc>0"_d$j
-nnoremap _ o<Esc>0"_d$k
+nnoremap = mzO<Esc>`z
+nnoremap _ mzo<Esc>`z
 
 """"""""""""""""""""""""""""
 " Markdown/Obsidian specific

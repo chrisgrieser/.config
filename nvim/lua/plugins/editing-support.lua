@@ -1,5 +1,4 @@
 local u = require("config.utils")
-
 --------------------------------------------------------------------------------
 
 return {
@@ -232,7 +231,7 @@ return {
 			-- https://github.com/gbprod/yanky.nvim#%EF%B8%8F-special-put
 			-- INFO not binding p/P in visual mode, since I prefer my switch of
 			-- "p" and "P" to be in visual mode for not replacing stuff
-			{ "p", "<Plug>(YankyPutIndentAfter)", desc = " Paste at Indentation" },
+			{ "p", "<Plug>(YankyPutAfter)", desc = " Paste (Yanky)" },
 			{ "P", "<Plug>(YankyPutIndentAfterShiftRight)", desc = " Paste & Indent" },
 			{ "gp", "<Plug>(YankyPutIndentAfterCharwise)", desc = " Charwise Paste" },
 			{ "<D-p>", "<Plug>(YankyCycleForward)", desc = " Cycle Killring" },
@@ -246,7 +245,10 @@ return {
 			highlight = { timer = 1000 },
 		},
 		-- IncSearch is the default highlight group for post-yank highlights
-		init = function() u.colorschemeMod("YankyYanked", { link = "IncSearch" }) end,
+		init = function()
+			u.ftKeymap("python", "n", "p", "<Plug>(YankyPutIndentAfter)", { desc = " Paste at Indent" })
+			u.colorschemeMod("YankyYanked", { link = "IncSearch" })
+		end,
 	},
 	{ -- which-key
 		"folke/which-key.nvim",
