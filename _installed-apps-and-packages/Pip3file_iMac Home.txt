@@ -1,4 +1,7 @@
+certifi
 chromaterm
+mutagen
+Pillow
 pip-autoremove
 Pygments
 wheel
