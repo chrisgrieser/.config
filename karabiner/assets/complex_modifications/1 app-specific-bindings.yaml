@@ -437,21 +437,21 @@ rules:
           - { key_code: c, modifiers: [command, shift] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^cc\.ffitch\.shottr$] }]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Pixelmator"
+  - description: "(Apps) Pixelmator/Preview: Export"
     manipulators:
-      # Export
       - type: basic
         from: { key_code: e, modifiers: { mandatory: [command, shift] } }
         to:
           - shell_command: |
               osascript -e '
-                tell application "System Events"
-                  tell process "Pixelmator Pro"
-                    set frontmost to true
-                    click menu item "Export…" of menu "File" of menu bar 1
-                  end tell
+                tell application "System Events" to tell (first process where it is frontmost) 
+                  click menu item "Export…" of menu "File" of menu bar 1 
                 end tell'
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.pixelmatorteam\.pixelmator\.x$] }]
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.pixelmatorteam\.pixelmator\.x$
+              - ^com\.apple\.Preview$
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Sidenotes"
     manipulators:
