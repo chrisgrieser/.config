@@ -8,13 +8,13 @@ FRONT_APP=$(osascript -e 'tell application "System Events" to return name of fir
 if [[ "$FRONT_APP" != "neovide" ]]; then
 	killall "$FRONT_APP"
 
-	# wait for 2.5 secs
+	# wait for 2.0 secs
 	i=0
 	while pgrep -xq "$FRONT_APP"; do
 		i=$((i + 1))
 		sleep 0.1
-		if [[ $i -gt 25 ]]; then
-			osascript -e "display notification \"\" with title \"Could not quit $FRONT_APP\""
+		if [[ $i -gt 20 ]]; then
+			echo -n "Could not quit $FRONT_APP" # Alfred notification
 			exit 1
 		fi
 	done

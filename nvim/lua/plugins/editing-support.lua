@@ -7,20 +7,21 @@ return {
 		"monaqa/dial.nvim",
 		-- stylua: ignore
 		keys = {
-			{ "+", function() return require("dial.map").inc_normal() end, expr = true, desc = "Increment" },
+			{ "+", function() return require("dial.map").inc_normal() end, desc = "󰘂 Dial", expr = true },
 		},
 		config = function()
-			local a = require("dial.augend")
+			local augend = require("dial.augend")
+			local toggle = require("dial.augend").constant.new
 			require("dial.config").augends:register_group {
 				default = {
-					a.integer.alias.decimal_int,
-					a.constant.alias.bool,
-					a.constant.new { elements = { "let", "const" } },
-					a.constant.new { elements = { "and", "or" } },
-					a.constant.new { elements = { "increase", "decrease" }, word = false },
-					a.constant.new { elements = { "dark", "light" }, word = false },
-					a.constant.new { elements = { "~=", "==" }, word = false },
-					a.constant.new { elements = { "!==", "===" }, word = false },
+					augend.integer.alias.decimal_int,
+					augend.constant.alias.bool,
+					toggle { elements = { "let", "const" } },
+					toggle { elements = { "and", "or" } },
+					toggle { elements = { "increase", "decrease" }, word = false },
+					toggle { elements = { "dark", "light" }, word = false },
+					toggle { elements = { "~=", "==" }, word = false },
+					toggle { elements = { "!==", "===" }, word = false },
 				},
 			}
 		end,
@@ -52,8 +53,13 @@ return {
 				rule("<", ">", { "vim", "html", "xml" }), -- keymaps & tags
 				rule('\\"', '\\"', { "json", "sh" }), -- escaped quotes
 				rule("*", "*", "markdown"), -- italics
-				rule("__", "__", "markdown"), -- bold
 				rule("![", "]()", "markdown"):set_end_pair_length(1), -- images
+
+				-- git conventional commit with scope: auto-append `:`
+				rule("^%a+%(%)", ":", "gitcommit")
+					:use_regex(true)
+					:with_pair(negLookahead(".+"))
+					:with_pair(isNodeType ("subject")),
 
 				-- auto-add trailing semicolon, but only for declarations
 				-- (which are at the end of the line and have no text afterwards)
