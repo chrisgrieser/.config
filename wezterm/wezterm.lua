@@ -160,13 +160,24 @@ local keybindings = {
 			end),
 		},
 	},
+	{ -- cmd+o -> open Hyperlink
+		key = "o",
+		mods = "CMD",
+		action = act.QuickSelectArgs {
+			label = "Open Hyperlink",
+			action = actFun(function(window, pane)
+				local url = window:get_selection_text_for_pane(pane)
+				wt.open_with(url)
+			end),
+		},
+	},
 	{ -- cmd+y -> copy full line, useful for pages like `fx`
 		key = "y",
 		mods = "CMD",
 		action = act.QuickSelectArgs { patterns = { "^.*$" }, label = "Copy Full Line" },
 	},
-	{ -- cmd+o -> copy shell option, e.g. to copy them from a man page
-		key = "o",
+	{ -- cmd+s -> copy shell option, e.g. to copy them from a man page
+		key = "s",
 		mods = "CMD",
 		action = act.QuickSelectArgs {
 			patterns = { "--[\\w=-]+", "-\\w" }, -- long option, short option
@@ -224,13 +235,6 @@ table.insert(myHyperlinkRules, {
 	format = "https://github.com/$1/$2",
 })
 
--- links that are probably file paths
-table.insert(myHyperlinkRules, {
-	regex = [[/\b\S*\b]],
-	highlight = 0,
-	format = "file://$0",
-})
-
 --------------------------------------------------------------------------------
 -- SETTINGS
 
@@ -258,8 +262,8 @@ local config = {
 	cursor_blink_ease_out = "Constant",
 	force_reverse_video_cursor = true, -- true = color is reverse, false = color by color scheme
 
-	-- font
-	-- INFO some nerd font requires a space after them to be properly sized
+	-- FONT
+	-- some nerd font icons requires a space after them to be properly sized
 	font = wt.font("Iosevka Fixed", { weight = "Medium" }),
 	font_size = fontSize,
 	command_palette_font_size = 30,
