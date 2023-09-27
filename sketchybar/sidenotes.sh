@@ -22,7 +22,8 @@ fi
 # add preview of note to status bar (similar to the OneThing app)
 if [[ -n "$current_note" ]]; then
 	preview="$(echo -n "$current_note" |
-		sed -e 's/\[ ] //' -e 's/- //' |
+		head -n1 |
+		sed -e 's/\[ ] //' -e 's/- //' -Ee 's/#+ //' |
 		cut -c-$preview_cutoff_chars)"
 	[[ -n "$preview" ]] && preview="$preview…"
 	label="$label $preview"
