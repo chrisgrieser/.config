@@ -6,17 +6,6 @@ alias ..=" z .."
 alias ...=" z ../.."
 alias ....=" z ../../.."
 
-# MAKE
-# add a pseudo-flag `--list|-l` which lists all recipes
-function make() {
-	if [[ "$1" == "--list" || "$1" == "-l" ]]; then
-		grep '^[^#[:space:].].*' ./Makefile | tr -d ":" | 
-			sed -e $'s/#/\033[1;30m#/' -e $'s/$/\033[0m/'
-	else
-		command make --silent "$@"
-	fi
-}
-
 # utils
 # INFO leading space to ignore it in history due to HIST_IGNORE_SPACE
 alias r=' exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
@@ -42,11 +31,10 @@ alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in 
 
 alias bkp='zsh "$DOTFILE_FOLDER/_utility-scripts/backup-script.sh"'
 
-alias l='command eza --all --long --time-style=relative --no-user --icons --git --group-directories-first --sort=newest'
-alias tree='command eza --tree --level=2 --icons --git-ignore'
-alias treee='command eza --tree --level=3 --icons --git-ignore'
-alias treeee='command eza --tree --level=4 --icons --git-ignore'
-alias treeeee='command eza --tree --level=5 --icons --git-ignore'
+alias l='eza --hyperlink --all --long --time-style=relative --no-user --icons --git --group-directories-first --sort=newest'
+alias tree='eza --hyperlink --tree --level=2 --icons --git-ignore'
+alias treee='eza --hyperlink --tree --level=3 --icons --git-ignore'
+alias treeee='eza --hyperlink --tree --level=4 --icons --git-ignore'
 
 #───────────────────────────────────────────────────────────────────────────────
 # https://www.thorsten-hans.com/5-types-of-zsh-aliases
