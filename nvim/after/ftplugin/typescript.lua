@@ -1,15 +1,14 @@
 local fn = vim.fn
 local keymap = vim.keymap.set
-local abbr = vim.cmd.inoreabbrev
+local u = require("config.utils")
 --------------------------------------------------------------------------------
 
-abbr("<buffer> cosnt const")
-abbr("<buffer> local const") -- habit from writing too much lua
-abbr("<buffer> -- //") -- habit from writing too much lua
+-- fix my habits
+u.ftAbbr("cosnt", "const")
+u.ftAbbr("local", "const") 
+u.ftAbbr("--", "//") 
 
 --------------------------------------------------------------------------------
-
-keymap("n", "<localleader>R", vim.cmd.RegexHelper, { desc = " RegexHelper", buffer = true })
 
 -- Open regex in regex101
 keymap("n", "<localleader>r", function()
