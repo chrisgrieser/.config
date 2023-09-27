@@ -1,6 +1,3 @@
-local u = require("config.utils")
---------------------------------------------------------------------------------
-
 -- SIGN ICONS
 local diagnosticTypes = {
 	Error = "",
@@ -22,12 +19,16 @@ end
 
 --------------------------------------------------------------------------------
 
----@nodiscard
+---@class diagnostic nvim diagnostic https://neovim.io/doc/user/diagnostic.html#diagnostic-structure
+---@field message string
+---@field source string
+---@field code string
+---@field bufnr number
+
 ---@param diag diagnostic
 ---@return string text to display
 local function diagnosticFmt(diag)
 	local source = diag.source and " (" .. diag.source:gsub("%.$", "") .. ")" or ""
-
 	return diag.message .. source
 end
 
@@ -41,7 +42,7 @@ vim.diagnostic.config {
 	float = {
 		format = diagnosticFmt,
 		focusable = true,
-		border = u.borderStyle,
+		border = require("config.utils").borderStyle,
 		max_width = 75,
 		header = "", -- remove "Diagnostics:" heading
 	},

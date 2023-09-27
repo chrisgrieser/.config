@@ -1,9 +1,10 @@
 #!/usr/bin/env zsh
 
-# shellcheck disable=2154
 file="$1"
+# shellcheck disable=2154
 cd "$repo" || return 1
 
+# shellcheck disable=2154
 if [[ "$mode" == "stage" ]]; then
 	git add "$file"
 elif [[ "$mode" == "unstage" ]]; then
@@ -16,5 +17,3 @@ elif [[ "$mode" == "reveal" ]]; then
 elif [[ "$mode" == "open" ]]; then
 	open "$file"
 fi
-
-echo "$file"
