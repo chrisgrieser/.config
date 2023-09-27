@@ -1,28 +1,11 @@
 """This is a test file."""
 
-import os
 
 
 
-def myfun(one: int, two: int) -> int:
+def myfun() -> int: # pyright: ignore [reportGeneralTypeIssues]
     """Test."""
-    return one * three
 
 
-def hello() -> None:
+def hello() -> int:
     """Test."""
-    numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    used_numbers = []
-
-    print("hello world")
-
-    the_sum = 0
-    for numb in numbers:
-        the_sum += numb
-        the_sum = the_sum / 2
-        used_numbers.append(numb)
-
-    print(the_sum)
-
-
-hello()
