@@ -286,19 +286,6 @@ end
 --------------------------------------------------------------------------------
 
 return {
-	{ -- package manager
-		"williamboman/mason.nvim",
-		keys = {
-			{ "<leader>pm", vim.cmd.Mason, desc = " Mason Home" },
-		},
-		opts = {
-			ui = {
-				border = u.borderStyle,
-				height = 0.8, -- so it won't cover the statusline
-				icons = { package_installed = "✓", package_pending = "󰔟", package_uninstalled = "✗" },
-			},
-		},
-	},
 	{ -- nvim-lua-types
 		"folke/neodev.nvim",
 		opts = {

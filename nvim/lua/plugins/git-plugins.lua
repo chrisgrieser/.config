@@ -3,12 +3,16 @@ return {
 		"chrisgrieser/nvim-tinygit",
 		dependencies = "stevearc/dressing.nvim",
 		keys = {
-			{ "<leader>gc", function() require("tinygit").smartCommit() end, desc = "󰊢 Smart-Commit" },
 			{ "<leader>gp", function() require("tinygit").push() end, desc = "󰊢 Push" },
 			{ "<leader>gU", function() require("tinygit").githubUrl("repo") end, desc = " Goto Repo" },
 			{
+				"<leader>gc",
+				function() require("tinygit").smartCommit { openReferencedIssue = true } end,
+				desc = "󰊢 Smart-Commit",
+			},
+			{
 				"<leader>gg",
-				function() require("tinygit").smartCommit { push = true } end,
+				function() require("tinygit").smartCommit { push = true, openReferencedIssue = true } end,
 				desc = "󰊢 Smart-Commit & Push",
 			},
 			{
