@@ -23,9 +23,9 @@ function inspect() {
 		return 1
 	fi
 
-	# config
+	# CONFIG
 	local max_gitlog_lines=5
-	local max_files_lines=7
+	local max_files_lines=8
 	local disabled_below_term_height=20
 
 	# guard clauses
@@ -46,15 +46,11 @@ function inspect() {
 
 	# FILES
 	# columns needs to be set, since eza print as `--oneline` if piped
-	# https://github.com/ogham/exa/issues/522
-	local eza_output terminal_width
-	terminal_width=$(tput cols)
-
-	eza_output=$(export COLUMNS=$terminal_width &&
-		eza --all --grid --color=always --icons \
-			--git-ignore --ignore-glob=".DS_Store|Icon?" \
-			--sort=name --git --long --group-directories-first \
-			--no-user --no-permissions --no-filesize --no-time)
+	local eza_output
+	eza_output=$(eza --all --grid --color=always --icons --hyperlink \
+		--git-ignore --ignore-glob=".DS_Store|Icon?" \
+		--sort=name --group-directories-first \
+		--git --long --no-user --no-permissions --no-filesize --no-time)
 
 	if [[ $(echo "$eza_output" | wc -l) -gt $max_files_lines ]]; then
 		echo "$eza_output" | head -n"$max_files_lines"
