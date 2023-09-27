@@ -6,15 +6,16 @@ return {
 		keys = {
 			{ "<leader>i", vim.cmd.IronRepl, desc = "󱠤 Toggle REPL" },
 			{ "<leader>I", vim.cmd.IronRestart, desc = "󱠤 Restart REPL" },
-			{ "++", desc = "󱠤 Send Line to REPL" },
-			{ "+", mode = { "n", "x" }, desc = "󱠤 Send-to-REPL Operator" },
+			{ "ää", desc = "󱠤 Send Line to REPL" },
+			{ "ä", mode = { "n", "x" }, desc = "󱠤 Send-to-REPL Operator" },
+			{ "Ä", "ä$", desc = "󱠤 Send-to-REPL to EoL" },
 		},
 		main = "iron.core",
 		opts = {
 			keymaps = {
-				send_line = "++",
-				visual_send = "+",
-				send_motion = "+",
+				send_line = "ää",
+				visual_send = "ä",
+				send_motion = "ä",
 			},
 			config = {
 				repl_open_cmd = "horizontal bot 10 split",

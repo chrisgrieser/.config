@@ -42,20 +42,6 @@ keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
 -- overwrites nvim default: https://neovim.io/doc/user/vim_diff.html#default-mappings
 keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward", unique = false })
 
--- Simplified Marks
--- INFO a custom lualine component shows what is currently marked
-keymap("n", "ä", "'M", { desc = " Goto Mark" })
-
-keymap("n", "Ä", function()
-	u.normal("mM")
-	u.notify("", " Mark set.", "trace")
-end, { desc = " Set Mark" })
-
-keymap("n", "dä", function()
-	api.nvim_del_mark("M")
-	u.notify("", " Mark deleted.", "trace")
-end, { desc = " Delete Mark" })
-
 -- Changes
 keymap("n", "gc", "g;", { desc = "Goto older change" })
 keymap("n", "gC", "g,", { desc = "Goto newer change" })
@@ -112,6 +98,9 @@ keymap(
 -- (wrapping in normal avoids temporarily scrolling to the side)
 keymap("n", "X", "<cmd>normal!mz$x`z<CR>", { desc = "󱎘 Delete char at EoL" })
 
+-- Toggle Char Case
+keymap("n", "~", function() require("funcs.quality-of-life").toggleCase() end, { desc = "better ~" })
+
 -- QUICKFIX
 require("funcs.quickfix").setup()
 keymap("n", "gq", require("funcs.quickfix").next, { desc = " Next Quickfix" })
@@ -135,15 +124,6 @@ keymap("n", "]", ">", { desc = "indent" })
 
 -- toggle all top-level folds
 keymap("n", "zz", function() cmd("%foldclose") end, { desc = "󰘖 Close toplevel folds" })
-
--- WORD FLIPPER
-keymap(
-	"n",
-	"Ö",
-	function() require("funcs.flipper").flipWord() end,
-	{ desc = "󱀽 flip words / toggle casing" }
-)
-keymap("n", "~", function() require("funcs.quality-of-life").toggleCase() end, { desc = "better ~" })
 
 -- [O]pen new scope / brace
 keymap(

@@ -213,17 +213,4 @@ keymap(
 -- FIX scrolloff
 keymap("n", "<leader>of", function() vim.opt.scrolloff = 13 end, { desc = "󰘖 Fix Scrolloff" })
 
--- make <C-a>/<C-x> work on letters. Useful for macros
-keymap("n", "<leader>oa", function()
-	local nrformats = vim.opt.nrformats
-	local hasAlpha = vim.tbl_contains(nrformats:get(), "alpha")
-	if hasAlpha then
-		nrformats:remove { "alpha" }
-		u.notify("Option", "󰀫 alpha disabled")
-	else
-		nrformats:append("alpha")
-		u.notify("Option", "󰀫 alpha enabled")
-	end
-end, { desc = "󰀫 Toggle nrformats alpha" })
-
 --------------------------------------------------------------------------------

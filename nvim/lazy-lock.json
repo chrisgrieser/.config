@@ -18,6 +18,7 @@
   "codeium.vim": { "branch": "main", "commit": "bee5429aba9bc1df9cb15a2f10fea06ce87a47be" },
   "conform.nvim": { "branch": "master", "commit": "368fe9217dc9c83772292042a26ba2a9f0aed324" },
   "cybu.nvim": { "branch": "main", "commit": "c0866ef6735a85f85d4cf77ed6d9bc92046b5a99" },
+  "dial.nvim": { "branch": "master", "commit": "611cf5e84f655c96318b803785f89e3146d8e48f" },
   "diffview.nvim": { "branch": "main", "commit": "a111d19ccceac6530448d329c63f998f77b5626e" },
   "dressing.nvim": { "branch": "master", "commit": "c1e1d5fa44fe08811b6ef4aadac2b50e602f9504" },
   "eyeliner.nvim": { "branch": "main", "commit": "c540d58bf52aa979d4cca639c60387ae0c0ccf88" },
