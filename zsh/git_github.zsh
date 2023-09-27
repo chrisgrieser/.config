@@ -240,7 +240,6 @@ function gb {
 # - if commit message is empty use `chore` as default message
 # - if commit msg contains issue number, open the issue in the browser
 function ac() {
-	if ! command -v ct &>/dev/null; then print "\033[1;33mchromaterm not installed. (\`pip3 install chromaterm\`)\033[0m" && return 1; fi
 	local large_files commit_msg msg_length
 
 	# guard: accidental pushing of large files
@@ -268,7 +267,7 @@ function ac() {
 	# if no staged changes, stage all
 	git diff --staged --quiet && git add -A
 
-	ct git commit -m "$commit_msg"
+	git commit -m "$commit_msg"
 
 	# if commit msg contains issue number, open the issue in the browser
 	if [[ "$commit_msg" =~ \#[0-9]+ ]]; then

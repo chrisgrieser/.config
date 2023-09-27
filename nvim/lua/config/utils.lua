@@ -58,6 +58,12 @@ function M.applyTemplateIfEmptyFile(ext)
 	end, 1)
 end
 
+function M.ftAbbr(lhs, rhs)
+	-- TODO replace with 
+	-- vim.keymap.set("ia", lhs, rhs, { buffer = true })
+	vim.cmd.inoreabbrev(("<buffer> %s %s"):format(lhs, rhs))
+end
+
 ---https://www.reddit.com/r/neovim/comments/oxddk9/comment/h7maerh/
 ---@param name string name of highlight group
 ---@param key "fg"|"bg"

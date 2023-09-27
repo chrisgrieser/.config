@@ -59,6 +59,7 @@ if vim.version().major == 0 and vim.version().minor >= 10 then
 		"- vim.system",
 		"- vim.lsp.getclient",
 		"- vim.uv instead of vim.loop",
+		"- ftAbbr: vim.keymap.set('ia', lhs, rhs, { buffer = true })",
 	}
 	vim.notify(table.concat(todo, "\n"))
 end

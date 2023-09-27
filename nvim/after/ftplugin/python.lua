@@ -1,8 +1,8 @@
 local bo = vim.bo
-local abbr = vim.cmd.inoreabbrev
+local u = require("config.utils")
 --------------------------------------------------------------------------------
 
-require("config.utils").applyTemplateIfEmptyFile("py")
+u.applyTemplateIfEmptyFile("py")
 
 -- python standard
 bo.expandtab = true
@@ -20,10 +20,10 @@ vim.opt_local.listchars:append { multispace = " " }
 --------------------------------------------------------------------------------
 
 -- fix habits
-abbr("<buffer> true True")
-abbr("<buffer> false False")
-abbr("<buffer> // #")
-abbr("<buffer> -- #")
-abbr("<buffer> null None")
-abbr("<buffer> nil None")
-abbr("<buffer> none None")
+u.ftAbbr("true", "True")
+u.ftAbbr("false", "False")
+u.ftAbbr("//", "#") 
+u.ftAbbr("--", "#") 
+u.ftAbbr("null", "None")
+u.ftAbbr("nil", "None")
+u.ftAbbr("none", "None")

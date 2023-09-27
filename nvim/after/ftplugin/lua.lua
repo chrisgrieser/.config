@@ -1,16 +1,16 @@
 local cmd = vim.cmd
 local keymap = vim.keymap.set
 local expand = vim.fn.expand
-local abbr = vim.cmd.inoreabbrev
 local u = require("config.utils")
+
 --------------------------------------------------------------------------------
 
 -- habits from writing too much in other languages
-abbr("<buffer> // --")
-abbr("<buffer> const local")
-abbr("<buffer> fi end")
-abbr("<buffer> != ~=")
-abbr("<buffer> !== ~=")
+u.ftAbbr("//", "--")
+u.ftAbbr("const", "local")
+u.ftAbbr("fi", "end")
+u.ftAbbr("!=", "~=")
+u.ftAbbr("!== ~=")
 
 --------------------------------------------------------------------------------
 
