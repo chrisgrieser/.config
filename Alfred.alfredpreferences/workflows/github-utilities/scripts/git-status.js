@@ -78,7 +78,7 @@ function run() {
 				mods: {
 					alt: {
 						subtitle: isDeleted ? "🚫 Cannot reveal, because the file is deleted." : "⌥: Reveal in Finder",
-						valid: isDeleted,
+						valid: !isDeleted,
 						variables: { mode: "reveal" },
 					},
 					shift: {
@@ -91,7 +91,7 @@ function run() {
 					},
 					cmd: {
 						subtitle: isDeleted ? "🚫 Cannot open, because the file is deleted." : "⌥: Open File",
-						valid: isDeleted,
+						valid: !isDeleted,
 						variables: { mode: "open" },
 					},
 				},

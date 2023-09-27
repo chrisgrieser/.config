@@ -165,7 +165,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>0790AF04-5513-44B5-94E2-FC7E6F552C71</string>
+				<string>B6818B6F-457E-4CCC-B030-46BCD7DA9F02</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -416,6 +416,21 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B6818B6F-457E-4CCC-B030-46BCD7DA9F02</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0790AF04-5513-44B5-94E2-FC7E6F552C71</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>A8406F36-C61C-4479-B0FE-B314F462019B</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1445,6 +1460,38 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:mode}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>^(un)?stage$</string>
+						<key>outputlabel</key>
+						<string></string>
+						<key>uid</key>
+						<string>A8406F36-C61C-4479-B0FE-B314F462019B</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>else</string>
+				<key>hideelse</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>B6818B6F-457E-4CCC-B030-46BCD7DA9F02</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -1605,7 +1652,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>435</real>
+			<real>600</real>
 			<key>ypos</key>
 			<real>1220</real>
 		</dict>
@@ -1652,7 +1699,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>205</real>
+			<real>295</real>
 			<key>ypos</key>
 			<real>1290</real>
 		</dict>
@@ -1683,7 +1730,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>290</real>
+			<real>380</real>
 			<key>ypos</key>
 			<real>1220</real>
 		</dict>
@@ -1768,7 +1815,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>205</real>
+			<real>295</real>
 			<key>ypos</key>
 			<real>1345</real>
 		</dict>
@@ -1824,7 +1871,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>290</real>
+			<real>380</real>
 			<key>ypos</key>
 			<real>1105</real>
 		</dict>
@@ -1842,7 +1889,7 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>205</real>
+			<real>295</real>
 			<key>ypos</key>
 			<real>1390</real>
 		</dict>
@@ -1854,6 +1901,13 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<real>260</real>
 			<key>ypos</key>
 			<real>210</real>
+		</dict>
+		<key>B6818B6F-457E-4CCC-B030-46BCD7DA9F02</key>
+		<dict>
+			<key>xpos</key>
+			<real>530</real>
+			<key>ypos</key>
+			<real>1250</real>
 		</dict>
 		<key>B9B78B61-7C88-4603-A426-26DD49000D41</key>
 		<dict>

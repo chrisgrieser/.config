@@ -51,15 +51,15 @@ safeRequire("config.abbreviations")
 --------------------------------------------------------------------------------
 
 if vim.version().major == 0 and vim.version().minor >= 10 then
-	local todo = {
-		"TODO for 0.10",
-		"- satellite.nvim can now be updated.",
-		"- change event trigger for symbols-usage",
-		"- biome lspconfig https://github.com/neovim/nvim-lspconfig/issues/2807",
-		"- vim.system",
-		"- vim.lsp.getclient",
-		"- vim.uv instead of vim.loop",
-		"- ftAbbr & abbreviations.lua: vim.keymap.set('ia', lhs, rhs, { buffer = true })",
-	}
-	vim.notify(table.concat(todo, "\n"))
+	local todo = [[
+		# nvim 0.10
+		- satellite.nvim can now be updated.
+		- change event trigger for symbols-usage
+		- biome lspconfig https://github.com/neovim/nvim-lspconfig/issues/2807
+		- vim.system
+		- vim.lsp.getclient
+		- vim.uv instead of vim.loop
+		- ftAbbr & abbreviations.lua: vim.keymap.set('ia', lhs, rhs, { buffer = true })
+	]]
+	vim.notify(todo)
 end
