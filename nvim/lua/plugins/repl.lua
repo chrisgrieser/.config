@@ -8,7 +8,7 @@ return {
 			{ "<leader>I", vim.cmd.IronRestart, desc = "󱠤 Restart REPL" },
 			{ "ää", desc = "󱠤 Send Line to REPL" },
 			{ "ä", mode = { "n", "x" }, desc = "󱠤 Send-to-REPL Operator" },
-			{ "Ä", "ä$", desc = "󱠤 Send-to-REPL to EoL" },
+			{ "Ä", "ä$", desc = "󱠤 Send-to-REPL to EoL", remap = true },
 		},
 		main = "iron.core",
 		opts = {

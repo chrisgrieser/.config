@@ -12,6 +12,8 @@ local evalCmds = {
 	typescript = { repl = "node -e", printer = "console.log(%s)" },
 }
 
+
+---dedent lines, mostly for python REPL
 ---@param lines string[]
 ---@return string[] dedentedLines
 local function dedent(lines)
