@@ -238,6 +238,7 @@ function gb {
 # - if there are staged changes, commit them
 # - if there are no changes, stage all changes (`git add -A`) and then commit
 # - if commit message is empty use `chore` as default message
+# - if commit msg contains issue number, open the issue in the browser
 function ac() {
 	if ! command -v ct &>/dev/null; then print "\033[1;33mchromaterm not installed. (\`pip3 install chromaterm\`)\033[0m" && return 1; fi
 	local large_files commit_msg msg_length
@@ -268,13 +269,23 @@ function ac() {
 	git diff --staged --quiet && git add -A
 
 	ct git commit -m "$commit_msg"
+
+	# if commit msg contains issue number, open the issue in the browser
+	if [[ "$commit_msg" =~ \#[0-9]+ ]]; then
+		local issue_number url
+		issue_number=$(echo "$commit_msg" | grep -Eo "#[0-9]+" | cut -c2-)
+		url=$(git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 |
+			sed -e 's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//')
+		open "$url/issues/$issue_number"
+	fi
 }
 
 # same as ac, just followed by git pull & git push
 function acp {
-	ac "$@" || return 1 
+	ac "$@" || return 1
 
-	ct git pull ; ct git push
+	ct git pull
+	ct git push
 	sketchybar --trigger repo-files-update
 }
 
