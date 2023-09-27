@@ -86,16 +86,6 @@ local function selectionCount()
 	return " " .. tostring(lines) .. "L " .. tostring(fn.wordcount().visual_chars) .. "C"
 end
 
--- shows global mark M
-vim.api.nvim_del_mark("M") -- reset on session start
-local function markM()
-	local markObj = vim.api.nvim_get_mark("M", {})
-	local markLn = markObj[1]
-	local markBufname = vim.fs.basename(markObj[4])
-	if markBufname == "" then return "" end -- mark not set
-	return " " .. markBufname .. ":" .. markLn
-end
-
 -- only show the clock when fullscreen (= it covers the menubar clock)
 local function clock()
 	if vim.opt.columns:get() < 110 or vim.opt.lines:get() < 25 then return "" end
@@ -181,9 +171,7 @@ local lualineConfig = {
 		lualine_x = {},
 		-- INFO dap and recording status defined in the respective plugin configs
 		-- for lualine_y and lualine_z for their lazy loading
-		lualine_y = {
-			{ markM, section_separators = topSeparators },
-		},
+		lualine_y = {},
 		lualine_z = {},
 	},
 	sections = {

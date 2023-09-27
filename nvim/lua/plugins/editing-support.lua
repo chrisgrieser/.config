@@ -1,7 +1,30 @@
 local u = require("config.utils")
+
 --------------------------------------------------------------------------------
 
 return {
+	{
+		"monaqa/dial.nvim",
+		-- stylua: ignore
+		keys = {
+			{ "+", function() return require("dial.map").inc_normal() end, expr = true, desc = "Increment" },
+		},
+		config = function()
+			local a = require("dial.augend")
+			require("dial.config").augends:register_group {
+				default = {
+					a.integer.alias.decimal_int,
+					a.constant.alias.bool,
+					a.constant.new { elements = { "let", "const" } },
+					a.constant.new { elements = { "and", "or" } },
+					a.constant.new { elements = { "increase", "decrease" }, word = false },
+					a.constant.new { elements = { "dark", "light" }, word = false },
+					a.constant.new { elements = { "~=", "==" }, word = false },
+					a.constant.new { elements = { "!==", "===" }, word = false },
+				},
+			}
+		end,
+	},
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
