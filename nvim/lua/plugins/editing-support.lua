@@ -59,7 +59,7 @@ return {
 				rule("^%a+%(%)", ":", "gitcommit")
 					:use_regex(true)
 					:with_pair(negLookahead(".+"))
-					:with_pair(isNodeType ("subject")),
+					:with_move(function(opts) return opts.char == ":" end),
 
 				-- auto-add trailing semicolon, but only for declarations
 				-- (which are at the end of the line and have no text afterwards)
