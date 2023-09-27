@@ -118,9 +118,9 @@ end, { desc = "󰜊 Undo since last open", silent = true })
 ---@param action object CodeAction Object https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#codeAction
 ---@return boolean
 local function codeActionFilter(action)
-	local title, kind, ft = action.title, action.kind, vim.bo.ft
+	local title, kind, ft = action.title, action.kind, vim.bo.filetype
 
-	-- in lua, ignore all quickfixes except line disables and all rewrites
+	-- in lua, ignore all quickfixes except line disables and all "move argument" actions
 	local ignoreInLua = ft == "lua"
 		and not (title:find("on this line"))
 		and (kind == "quickfix" or kind == "refactor.rewrite")
@@ -153,9 +153,10 @@ keymap("n", "<leader>l1", function() require("funcs.sawmill").timeLog() end, { d
 keymap("n", "<leader>lr", function() require("funcs.sawmill").removeLogs() end, { desc = "󰸢  remove log" })
 keymap("n", "<leader>ld", function() require("funcs.sawmill").debugLog() end, { desc = "󰸢 debugger log" })
 keymap("n", "<leader>la", function() require("funcs.sawmill").assertLog() end, { desc = "󰸢 assert log" })
+-- stylua: ignore end
+
 keymap("n", "<leader>li", cmd.Inspect, { desc = " :Inspect" })
 keymap("n", "<leader>lt", cmd.InspectTree, { desc = " :InspectTree" })
--- stylua: ignore end
 
 --------------------------------------------------------------------------------
 
@@ -164,7 +165,8 @@ keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "󰗈 Merge line down" })
 keymap("x", "<leader>s", [[<Esc>`>a<CR><Esc>`<i<CR><Esc>=j]], { desc = "󰗈 Split around selection" })
 
 -- Append to / delete from EoL
-for _, key in pairs { ",", ";", ")", '"' } do
+local trailChars = { ",", ";", ")", "'", '"', "|", "\\", "{", "." }
+for _, key in pairs(trailChars) do
 	keymap("n", "<leader>" .. key, "mzA" .. key .. "<Esc>`z", { desc = "which_key_ignore" })
 end
 

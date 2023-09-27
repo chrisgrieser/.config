@@ -1,6 +1,3 @@
--- extra trailing char
-vim.keymap.set("n", "<leader>{", "mzA {<Esc>`z", { desc = "which_key_ignore", buffer = true })
-
 -- toggle !important
 vim.keymap.set("n", "<leader>i", function()
 	local lineContent = vim.api.nvim_get_current_line()

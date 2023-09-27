@@ -166,6 +166,27 @@ end
 
 --------------------------------------------------------------------------------
 
+function M.openAtRegex101()
+	-- keymaps assume a/ and i/ mapped as regex textobj via treesitter textobj
+	vim.cmd.normal { '"zya/', bang = false } -- yank outer regex
+	vim.cmd.normal { "vi/", bang = false } -- select inner regex for easy replacement
+
+	local regex = vim.fn.getreg("z")
+	local pattern = regex:match("/(.*)/")
+	local flags = regex:match("/.*/(%l*)")
+	local replacement = vim.api.nvim_get_current_line():match('replace ?%(/.*/.*, ?"(.-)"')
+
+	-- https://github.com/firasdib/Regex101/wiki/FAQ#how-to-prefill-the-fields-on-the-interface-via-url
+	local url = "https://regex101.com/?regex=" .. pattern .. "&flags=" .. flags
+	if replacement then url = url .. "&subst=" .. replacement end
+
+	vim.fn.system({ "open", url })
+end
+
+--------------------------------------------------------------------------------
+
+
+
 ---@param direction "up"|"down"
 function M.scrollHoverWin(direction)
 	local a = vim.api
