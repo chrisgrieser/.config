@@ -17,6 +17,9 @@ local function commitNotification(title, stagedAllChanges, commitMsg, extra)
 
 			local commitMsgLine = extra and lastLine - 1 or lastLine
 			local ccKeywordStart, _, ccKeywordEnd, ccScopeEnd = commitMsg:find("^%a+()%b()():")
+
+
+
 			if not ccKeywordStart then
 				-- has cc keyword, but not scope
 				ccKeywordStart, _, ccKeywordEnd = commitMsg:find("^%a+():")
