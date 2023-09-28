@@ -37,10 +37,13 @@ while pgrep -xq "neovide" || pgrep -xq "nvim"; do
 	sleep 0.1
 	i=$((i + 1))
 	if [[ $i -gt 15 ]]; then
-		killall -9 neovide nvim || exit 1
+		if ! killall -9 neovide nvim ; then
+			echo -n "Could not kill neovide." # Alfred notification
+			exit 1
+		fi
 	fi
 done
-sleep 0.1
+sleep 0.3
 
 # Restart
 open -a "Neovide" # config reopens last file if no arg
