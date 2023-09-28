@@ -590,9 +590,6 @@
 	<string># Requirements
 - [Homebrew](https://brew.sh/)
 
-# Info: Update
-The list of available formulae and casks is updated whenever you run `brew update` in the terminal. (The update frequency is also controlled via the environment variable `export HOMEBREW_NO_AUTO_UPDATE=0`.) Therefore, the shown list is always in sync with what formulae and casks you can find via local `brew` commands.
-
 ---
 
 Created by [Chris Grieser](https://chris-grieser.de/)</string>
