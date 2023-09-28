@@ -1,0 +1,1 @@
+Make readme more explanatory

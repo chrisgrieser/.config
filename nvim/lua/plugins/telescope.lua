@@ -165,6 +165,7 @@ local function telescopeConfig()
 			git_status = {
 				prompt_prefix = "󰊢 ",
 				show_untracked = true,
+				initial_mode = "normal",
 			},
 			git_commits = {
 				prompt_prefix = "󰊢 ",
