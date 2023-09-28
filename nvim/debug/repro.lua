@@ -8,10 +8,13 @@ local plugins = {
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
-		opts = {},
+		opts = {
+			indent = { char = "│" },
+		},
 	},
 }
 
+vim.opt.list = true
 --------------------------------------------------------------------------------
 
 

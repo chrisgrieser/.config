@@ -4,6 +4,18 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
+	{ -- indentation guides
+		"lukas-reineke/indent-blankline.nvim",
+		event = "UIEnter",
+		main = "ibl",
+		opts = {
+			indent = {
+				char = "│",
+				-- highlight = "Function",
+			},
+			exclude ={ filetypes = {"undotree"} },
+		},
+	},
 	{ -- always show matchparens
 		"utilyre/sentiment.nvim",
 		event = "VeryLazy",
@@ -51,11 +63,6 @@ return {
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		-- red too aggressive
 		init = function() u.colorschemeMod("RainbowDelimiterRed", { fg = "#7e8a95" }) end,
-	},
-	{ -- indentation guides
-		"lukas-reineke/indent-blankline.nvim",
-		main = "ibl",
-		opts = {},
 	},
 	{ -- Nerdfont filetype icons
 		-- https://www.reddit.com/r/neovim/comments/12lf0ke/comment/jg6idvr/
