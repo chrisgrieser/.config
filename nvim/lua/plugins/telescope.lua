@@ -122,6 +122,7 @@ local function telescopeConfig()
 
 			-- other ignores are defined via .gitignore, .ignore, or fd/ignore
 			file_ignore_patterns = {
+				"%.pdf$",
 				"%.png$",
 				"%.gif$",
 				"%.jpe?g$",

@@ -336,7 +336,7 @@ rules:
           - shell_command: |
               killall Finder
               osascript -e 'display notification "🔁 Restarting Finder…" with title "Finder Vim Mode"'
-              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/screen_sharing_started.caf" &
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/screen_sharing_started.calf" &
           - *remove-insert-notice
           - *leave-insert-mode
           - *remove-menu-notice
@@ -658,7 +658,7 @@ rules:
               current_vol=$(osascript -e 'output volume of (get volume settings)')
               [[ "$current_vol" == "missing value" ]] && current_vol=50
               vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc) # afplay play with 100% volume by default
-              afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/facetime/multiway_join.caf" &
+              afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/facetime/multiway_join.caf" & # codespell-ignore
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # M = Move selection to new folder
       - type: basic
@@ -683,7 +683,7 @@ rules:
               current_vol=$(osascript -e 'output volume of (get volume settings)')
               [[ "$current_vol" == "missing value" ]] && current_vol=50
               vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc) # afplay play with 100% volume by default
-              afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/begin_record.caf" &
+              afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/begin_record.caf" & # codespell-ignore
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # b = Toggle `.bkp` (Backup).
       - type: basic
@@ -712,7 +712,7 @@ rules:
                 fi
                 mv -n "$file" "$newName"
               done
-              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/begin_record.caf" &
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/begin_record.caf" & # codespell-ignore
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # s = Create Symlink
       - type: basic
@@ -802,26 +802,26 @@ rules:
         from: { key_code: o }
         to_if_alone:
           - key_code: right_arrow
-          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_unmute.caf" &
+          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_unmute.caf" & # codespell-ignore
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: o, modifiers: { mandatory: [shift] } }
         to_if_alone:
           - { key_code: right_arrow, modifiers: [option] }
-          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_unmute.caf" &
+          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_unmute.caf" & # codespell-ignore
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # c = close/collapse fold (C: do it recursively)
       - type: basic
         from: { key_code: c }
         to_if_alone:
           - key_code: left_arrow
-          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_mute.caf" &
+          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_mute.caf" & # codespell-ignore
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: c, modifiers: { mandatory: [shift] } }
         to_if_alone:
           - { key_code: left_arrow, modifiers: [option] }
-          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_mute.caf" &
+          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_mute.caf" & # codespell-ignore
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # <C-h> = History Back
       - type: basic
@@ -852,24 +852,24 @@ rules:
         to:
           - shell_command: |
               selectedFiles=$(osascript -e '
-              	tell application "Finder" to set selectedFiles to (every item of (get selection))
-              	set out to ""
-              	repeat with theFile in selectedFiles
-              		set out to out & (POSIX path of (theFile as text)) & linefeed
-              	end repeat
-              	return out
+                tell application "Finder" to set selectedFiles to (every item of (get selection))
+                set out to ""
+                repeat with theFile in selectedFiles
+                  set out to out & (POSIX path of (theFile as text)) & linefeed
+                end repeat
+                return out
               ')
               [[ -z "$selectedFiles" ]] && return 1
 
               parent_dir=$(dirname "$(echo "$selectedFiles" | head -n1)")
 
               echo "$selectedFiles" | while read -r item; do
-              	[[ ! -d "$item" ]] && continue
+                [[ ! -d "$item" ]] && continue
                 # `mv -n` ensures no file is overwritten, and `rmdir` ensures
                 # only empty directories are removed
-              	find "$item" -mindepth 1 -print0 -not -type d | 
-              		xargs -0 -I {} mv -n "{}" "$parent_dir"
-              	find "$item" -print0 -type d | xargs -0 rmdir
+                find "$item" -mindepth 1 -print0 -not -type d |
+                  xargs -0 -I {} mv -n "{}" "$parent_dir"
+                find "$item" -print0 -type d | xargs -0 rmdir
               done
 
               current_vol=$(osascript -e 'output volume of (get volume settings)')
@@ -1102,7 +1102,7 @@ rules:
           - { key_code: "1", modifiers: [control, option, command] }
           - { key_code: "up_arrow", modifiers: [option] } # go to top
           - shell_command: |
-              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.calf" &
               osascript -e 'display notification "⬇️ Sort by name" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic # by modification date
@@ -1111,7 +1111,7 @@ rules:
           - { key_code: "5", modifiers: [control, option, command] }
           - { key_code: "up_arrow", modifiers: [option] } # go to top
           - shell_command: |
-              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.calf" &
               osascript -e 'display notification "⬅️ Sort by modification date" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic # by size
@@ -1120,7 +1120,7 @@ rules:
           - { key_code: "6", modifiers: [control, option, command] }
           - { key_code: "up_arrow", modifiers: [option] } # go to top
           - shell_command: |
-              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.calf" &
               osascript -e 'display notification "⬆️ Sort by size" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic # by kind
@@ -1129,7 +1129,7 @@ rules:
           - { key_code: "2", modifiers: [control, option, command] }
           - { key_code: "up_arrow", modifiers: [option] } # go to top
           - shell_command: |
-              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.calf" &
               osascript -e 'display notification "➡️ Sort by kind" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic # by tags
@@ -1138,7 +1138,7 @@ rules:
           - { key_code: "7", modifiers: [control, option, command] }
           - { key_code: "up_arrow", modifiers: [option] } # go to top
           - shell_command: |
-              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.calf" &
               osascript -e 'display notification "🔚 Sort by tags" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
@@ -1215,7 +1215,7 @@ rules:
         to:
           - shell_command: |
               osascript -e 'display notification "☁️ 🔁 Restarting iCloud…" with title "Finder Vim Mode"'
-              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/screen_sharing_started.caf" &
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/screen_sharing_started.calf" &
               killall bird
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # ctrl-p: copy path

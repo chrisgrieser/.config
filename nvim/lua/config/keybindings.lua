@@ -33,7 +33,6 @@ keymap({ "n", "x" }, "K", "6gk")
 -- dj = delete 2 lines, dJ = delete 3 lines
 keymap("o", "J", "2j")
 
-
 -- indent-wise movement
 keymap({ "n", "x" }, "gj", function() require("funcs.quality-of-life").gotoNextIndentChange("down") end)
 keymap({ "n", "x" }, "gk", function() require("funcs.quality-of-life").gotoNextIndentChange("up") end)
