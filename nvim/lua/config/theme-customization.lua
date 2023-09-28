@@ -122,7 +122,7 @@ local function themeModifications()
 	-----------------------------------------------------------------------------
 	-- light themes
 	elseif theme == "dawnfox" then
-		updateHighlight("IndentBlanklineChar", "guifg=#e3d4c4")
+		updateHighlight("IblIndent", "guifg=#e3d4c4")
 		updateHighlight("ColorColumn", "guibg=#eee6dc")
 		updateHighlight("VertSplit", "guifg=#b29b84")
 		for _, v in pairs(vimModes) do
@@ -134,7 +134,7 @@ local function themeModifications()
 		linkHighlight("@string.documentation.python", "Typedef")
 		linkHighlight("@keyword.operator.python", "Operator")
 	elseif theme == "rose-pine" and mode == "light" then
-		updateHighlight("IndentBlanklineChar", "guifg=#e3d4c4")
+		updateHighlight("IblIndent", "guifg=#e3d4c4")
 		updateHighlight("ColorColumn", "guibg=#eee6dc")
 		updateHighlight("Headline", "gui=bold guibg=#ebe1d5")
 	end

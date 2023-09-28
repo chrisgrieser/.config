@@ -138,7 +138,7 @@ opt.listchars = {
 	precedes = "…",
 	extends = "…",
 	multispace = "·",
-	tab = "│ ", -- FIX https://www.reddit.com/r/neovim/comments/16u5abl/comment/k2k2otd/?utm_source=share&utm_medium=web2x&context=3
+	tab = "│ ",
 	lead = "·",
 }
 

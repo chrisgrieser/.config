@@ -9,11 +9,16 @@ return {
 		event = "UIEnter",
 		main = "ibl",
 		opts = {
-			indent = {
-				char = "│",
-				-- highlight = "Function",
+			scope = {
+				highlight = "Comment",
+				show_start = false,
+				show_end = false,
 			},
-			exclude ={ filetypes = {"undotree"} },
+			indent ={
+				char = "│", -- spaces
+				tab_char = "│", -- tabs, can be list for changing level
+			},
+			exclude = { filetypes = { "undotree" } },
 		},
 	},
 	{ -- always show matchparens
