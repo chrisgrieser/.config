@@ -23,7 +23,7 @@ function writeToFile(filepath, text) {
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
-// biome-ignore lint/correctness/noUnusedVariables: Alfred run
+// rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	// guard: cache was not updated
 	const cachesUpToDate = $.getenv("cache_was_updated") === "false";
@@ -53,7 +53,7 @@ function run() {
 		const oldCache = fileExists(subredditCache) ? JSON.parse(readFile(subredditCache)) : [];
 
 		const posts =
-			// biome-ignore lint/correctness/noUndeclaredVariables: import HACK
+			// rome-ignore lint/correctness/noUndeclaredVariables: import HACK
 			subredditName === "hackernews" ? getHackernewsPosts(oldCache) : getRedditPosts(subredditName, oldCache);
 
 		writeToFile(subredditCache, JSON.stringify(posts));

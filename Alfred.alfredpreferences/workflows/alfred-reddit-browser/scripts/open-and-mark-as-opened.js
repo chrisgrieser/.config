@@ -21,7 +21,7 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
-// biome-ignore lint/correctness/noUnusedVariables: Alfred run
+// rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	// identify position of selected item in the cache
 	const selectedUrl = argv[0];

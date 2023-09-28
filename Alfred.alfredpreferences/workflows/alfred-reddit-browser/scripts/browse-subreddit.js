@@ -60,7 +60,7 @@ function olderThan(firstPath, secondPath) {
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
-// biome-ignore lint/correctness/noUnusedVariables: Alfred run
+// rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const timelogStart = +new Date();
 
@@ -97,11 +97,11 @@ function run() {
 	// request new posts from API
 	if (subredditName === "hackernews") {
 		console.log("Writing new cache for hackernews");
-		// biome-ignore lint/correctness/noUndeclaredVariables: JXA import HACK
+		// rome-ignore lint/correctness/noUndeclaredVariables: JXA import HACK
 		posts = getHackernewsPosts(oldItems);
 	} else {
 		console.log("Writing new cache for r/" + subredditName);
-		// biome-ignore lint/correctness/noUndeclaredVariables: JXA import HACK
+		// rome-ignore lint/correctness/noUndeclaredVariables: JXA import HACK
 		posts = getRedditPosts(subredditName, oldItems);
 	}
 
