@@ -334,6 +334,7 @@ rules:
             hold_down_milliseconds: 40
           - key_code: up_arrow
           - key_code: v
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$] }]
       # scroll to bottom (mnenonic: vim's G)
       - type: basic
         from: { key_code: g, modifiers: { mandatory: [command] } }

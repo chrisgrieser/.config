@@ -54,13 +54,8 @@ return {
 	},
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",
-		event = "UIEnter",
-		opts = {
-			use_treesitter = true,
-			show_current_context = true, -- color active indent differently
-			context_highlight_list = { "Comment" }, 
-			filetype_exclude = { "undotree", "help", "man", "lspinfo", "" },
-		},
+		main = "ibl",
+		opts = {},
 	},
 	{ -- Nerdfont filetype icons
 		-- https://www.reddit.com/r/neovim/comments/12lf0ke/comment/jg6idvr/
