@@ -138,7 +138,7 @@ opt.listchars = {
 	precedes = "…",
 	extends = "…",
 	multispace = "·",
-	tab = "│ ",
+	tab = "│ ", -- overridden by indent-blankline
 	lead = "·",
 }
 

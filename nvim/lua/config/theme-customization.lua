@@ -39,7 +39,6 @@ local function customHighlights()
 		("guisp=%s guifg=%s gui=underline term=underline"):format(commentColor, commentColor)
 	)
 
-
 	overwriteHighlight("LspReferenceWrite", { underdashed = true }) -- i.e. definition
 	overwriteHighlight("LspReferenceRead", { underdotted = true }) -- i.e. reference
 	overwriteHighlight("LspReferenceText", {}) -- too much noise, as is underlines e.g. strings
@@ -53,7 +52,6 @@ local function customHighlights()
 	end
 end
 
--- selene: allow(high_cyclomatic_complexity)
 local function themeModifications()
 	local mode = vim.opt.background:get()
 	local theme = g.colors_name -- some themes do not set g.colors_name
@@ -122,7 +120,7 @@ local function themeModifications()
 	-----------------------------------------------------------------------------
 	-- light themes
 	elseif theme == "dawnfox" then
-		updateHighlight("IblIndent", "guifg=#e3d4c4")
+		updateHighlight("IblIndent", "guifg=#e0cfbd")
 		updateHighlight("ColorColumn", "guibg=#eee6dc")
 		updateHighlight("VertSplit", "guifg=#b29b84")
 		for _, v in pairs(vimModes) do

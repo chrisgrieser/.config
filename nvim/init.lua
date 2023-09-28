@@ -60,6 +60,7 @@ if vim.version().major == 0 and vim.version().minor >= 10 then
 		- vim.lsp.getclient
 		- vim.uv instead of vim.loop
 		- ftAbbr & abbreviations.lua: vim.keymap.set('ia', lhs, rhs, { buffer = true })
+		- inlay hints setup: https://www.reddit.com/r/neovim/comments/16tmzkh/comment/k2gpy16/?context=3
 	]]
 	vim.notify(todo)
 end
