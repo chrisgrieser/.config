@@ -66,14 +66,14 @@ ExternalHarddriveWatcher = hs.usb.watcher
 ---notifies & writes reminder
 ---is low. Caveat: `hs.battery` seems to work only with Apple devices.
 local function batteryCheck()
-	local warningLevel = 10
+	local warningLevel = 15
 	local devices = hs.battery.privateBluetoothBatteryInfo()
 	if not devices then return end
 
 	for _, device in pairs(devices) do
 		local percent = tonumber(device.batteryPercentSingle)
 		if percent > warningLevel then return end
-		local msg = device.name .. " Battery is low (" .. percent .. "%)"
+		local msg = ("%s Battery is low (%s)"):format(device.name, percent)
 		hs.osascript.javascript(([[Application("SideNotes").createNote({text: "%s"})]]):format(msg))
 		print("⚠️", msg)
 	end
@@ -81,9 +81,4 @@ end
 
 --------------------------------------------------------------------------------
 -- TRIGGERS
-
--- 1. System Start
-if not u.isReloading() then batteryCheck() end
-
--- -- 2. daily
 DailyBatteryCheckTimer = hs.timer.doAt("01:30", "01d", batteryCheck, true):start()
