@@ -5,7 +5,11 @@ end
 --------------------------------------------------------------------------------
 
 local plugins = {
-	{ "windwp/nvim-autopairs", opts = true }
+	{ -- indentation guides
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		opts = {},
+	},
 }
 
 --------------------------------------------------------------------------------

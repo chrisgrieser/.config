@@ -197,7 +197,7 @@ return {
 				height = 0.8, -- so it won't cover the statusline
 				icons = { package_installed = "✓", package_pending = "󰔟", package_uninstalled = "✗" },
 				-- consistent keymaps with lazy.nvim
-				keymaps ={
+				keymaps = {
 					uninstall_package = "x",
 					toggle_help = "?",
 				},
@@ -221,12 +221,21 @@ return {
 			}
 
 			-- clean unused & install missing
-			vim.defer_fn(vim.cmd.MasonToolsInstall, 300) 
+			vim.defer_fn(vim.cmd.MasonToolsInstall, 300)
 			vim.defer_fn(vim.cmd.MasonToolsClean, 1000) -- delayed, so noice.nvim is loaded before
 		end,
 	},
 	{ -- add ignore-comments & lookup rules
 		"chrisgrieser/nvim-rulebook",
+		opts = {
+			-- FIX lua_ls has indentation issue when used via code action
+			ignoreRuleComment = {
+				["Lua Diagnostics."] = {
+					comment = "---@diagnostic disable-next-line: %s",
+					location = "prevLine",
+				},
+			},
+		},
 		keys = {
 			{ "<leader>d", function() require("rulebook").lookupRule() end, desc = "󰒕 Lookup Rule" },
 			{ "<leader>C", function() require("rulebook").ignoreRule() end, desc = "󰒕 Ignore Rule" },
