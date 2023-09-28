@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.thebitguru.alfred-2fa</string>
+	<key>category</key>
+	<string>⬇️</string>
+	<key>connections</key>
+	<dict>
+		<key>A4D95526-D6F8-4128-801F-C202F57B42F5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E7F29D45-025C-4CE3-922F-C2F5A4BAF634</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B2134B58-A76E-45E9-854A-503A1C378C34</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E819A847-A36C-4867-AACD-CFFCFB59B5A9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string>Copy the code and paste it into the active app with a system paste</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F4475CE4-E166-4292-A90B-EDFB0CA51D3D</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>Copy text to clipboard</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>A4D95526-D6F8-4128-801F-C202F57B42F5</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>Copy the code and paste it into the active app with simulated keystrokes</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F4475CE4-E166-4292-A90B-EDFB0CA51D3D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CEBD08AD-93B2-4317-939A-49E805C90AA1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Farhan Ahmad</string>
+	<key>description</key>
+	<string>Find two-factor authentication codes in your recent Messages</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Simple 2FA Paste</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>E819A847-A36C-4867-AACD-CFFCFB59B5A9</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:keyword}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Looking up two factor authentication codes...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>get_codes.sh</string>
+				<key>subtext</key>
+				<string>Find two factor authentication codes in your messages</string>
+				<key>title</key>
+				<string>Two Factor Authentication Codes</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>B2134B58-A76E-45E9-854A-503A1C378C34</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>'{query}' copied to clipboard</string>
+				<key>title</key>
+				<string>Code copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>CEBD08AD-93B2-4317-939A-49E805C90AA1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>F4475CE4-E166-4292-A90B-EDFB0CA51D3D</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>A4D95526-D6F8-4128-801F-C202F57B42F5</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>osascript -e 'tell application "System Events" to keystroke the clipboard as text'</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E7F29D45-025C-4CE3-922F-C2F5A4BAF634</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string># Simple 2FA Paste
+Search Apple Messages for two-factor authentication codes and easily paste them in any app.
+
+macOS supports [autofilling security codes sent to your iPhone](https://support.apple.com/guide/safari/autofill-security-codes-from-your-iphone-ibrwa4a6c6c6/mac). This is a great feature if you are using Safari, but it is not supported in other browsers (e.g., Chrome) and apps (e.g., an Electron app). This Alfred workflow adds this feature across the system.
+
+![Results](screenshot.png)
+
+## Usage
+
+1. Launch Alfred.
+2. Enter the configured keyword (`2fa` by default).
+3. Select the correct two-factor code if it isn't the first one. You can also use shortcuts like Command+2 or Command+3 to select and paste in a single go.
+4. If you did not use Command+2, or another number, shortcut then press enter to paste in the currently active text field.
+
+---
+
+Icon made by [flaticon.com/authors/freepik](https://www.flaticon.com/authors/freepik) from www.flaticon.com.</string>
+	<key>uidata</key>
+	<dict>
+		<key>A4D95526-D6F8-4128-801F-C202F57B42F5</key>
+		<dict>
+			<key>note</key>
+			<string>Method 2: AppleScript paste to simulate keystrokes</string>
+			<key>xpos</key>
+			<real>425</real>
+			<key>ypos</key>
+			<real>330</real>
+		</dict>
+		<key>B2134B58-A76E-45E9-854A-503A1C378C34</key>
+		<dict>
+			<key>xpos</key>
+			<real>60</real>
+			<key>ypos</key>
+			<real>150</real>
+		</dict>
+		<key>CEBD08AD-93B2-4317-939A-49E805C90AA1</key>
+		<dict>
+			<key>xpos</key>
+			<real>605</real>
+			<key>ypos</key>
+			<real>185</real>
+		</dict>
+		<key>E7F29D45-025C-4CE3-922F-C2F5A4BAF634</key>
+		<dict>
+			<key>xpos</key>
+			<real>605</real>
+			<key>ypos</key>
+			<real>330</real>
+		</dict>
+		<key>E819A847-A36C-4867-AACD-CFFCFB59B5A9</key>
+		<dict>
+			<key>note</key>
+			<string>Default Method: Alfred paste</string>
+			<key>xpos</key>
+			<real>425</real>
+			<key>ypos</key>
+			<real>25</real>
+		</dict>
+		<key>F4475CE4-E166-4292-A90B-EDFB0CA51D3D</key>
+		<dict>
+			<key>note</key>
+			<string>Only copy to clipboard</string>
+			<key>xpos</key>
+			<real>425</real>
+			<key>ypos</key>
+			<real>185</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>2fa</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Keyword you would like to use to start searching your message</string>
+			<key>label</key>
+			<string>Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>240</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>How many minutes to look back for messages with two factor authentication codes.</string>
+			<key>label</key>
+			<string>Minutes to look back</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>lookBackMinutes</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string>0.8</string>
+	<key>webaddress</key>
+	<string>https://github.com/thebitguru/alfred-simple-2fa-paste</string>
+</dict>
+</plist>
