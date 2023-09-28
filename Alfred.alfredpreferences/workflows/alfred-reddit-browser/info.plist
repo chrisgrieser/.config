@@ -809,7 +809,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<string>Include hackernews</string>
 			</dict>
 			<key>description</key>
-			<string>This makes hackernews appear in the list of subreddits, treating it as if it was another subreddit. The reddit-specific settings are apply to the hackernews feed.</string>
+			<string>This makes hackernews appear in the list of subreddits, treating it as if it was another subreddit. (The reddit-specific settings are not applied to the hackernews feed.)</string>
 			<key>label</key>
 			<string>Hackernews</string>
 			<key>type</key>
@@ -828,7 +828,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<string>Use dstill.ai</string>
 			</dict>
 			<key>description</key>
-			<string>Redirect to dstill.ai as hackernews frontend</string>
+			<string>Redirect to dstill.ai as hackernews frontend.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -837,8 +837,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<string>use_dstill_ai</string>
 		</dict>
 	</array>
-	<key>variablesdontexport</key>
-	<array/>
 	<key>version</key>
 	<string>1.2.5</string>
 	<key>webaddress</key>
