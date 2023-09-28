@@ -70,13 +70,6 @@ opt.spell = false -- just using spellfile to quickly add words for ltex
 opt.spellfile = u.linterConfigFolder .. "/spellfile-vim-ltex.add" -- has to be `.add`
 opt.spelllang = "en_us" -- still relevant for `z=`
 
-vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
-	callback = function()
-		local specialBuffer = vim.bo.buftype ~= ""
-		if specialBuffer then opt_local.spell = false end
-	end,
-})
-
 -- Split
 opt.splitright = true -- vsplit right instead of left
 opt.splitbelow = true -- split down instead of up
@@ -145,7 +138,7 @@ opt.listchars = {
 	precedes = "…",
 	extends = "…",
 	multispace = "·",
-	tab = "  ",
+	tab = "│ ", -- FIX https://www.reddit.com/r/neovim/comments/16u5abl/comment/k2k2otd/?utm_source=share&utm_medium=web2x&context=3
 	lead = "·",
 }
 
@@ -162,22 +155,6 @@ autocmd({ "BufNew", "BufReadPost" }, {
 autocmd("FileType", {
 	callback = function() opt_local.formatoptions:remove("o") end,
 })
-
-autocmd("BufReadPost", {
-	callback = function()
-		vim.defer_fn(function()
-			opt_local.listchars = vim.opt.listchars:get() -- copy the global
-			if bo.expandtab then
-				opt_local.listchars:append { tab = "󰌒 " }
-				opt_local.listchars:append { lead = " " }
-			else
-				opt_local.listchars:append { tab = "  " }
-				opt_local.listchars:append { lead = "·" }
-			end
-		end, 5) -- delayed to ensure it runs after `:GuessIndent`
-	end,
-})
-
 
 -- auto-nohl -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
 vim.on_key(function(char)
