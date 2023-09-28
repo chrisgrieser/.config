@@ -84,7 +84,7 @@ function cacheSubscriberCount(subredditName) {
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
-// biome-ignore lint/correctness/noUnusedVariables: Alfred run
+// rome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const subreddits = $.getenv("subreddits")
 		.split("\n")

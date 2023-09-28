@@ -30,7 +30,7 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
  */
 
 /** @param {AlfredItem[]} oldItems */
-// biome-ignore lint/correctness/noUnusedVariables: JXA import HACK
+// rome-ignore lint/correctness/noUnusedVariables: JXA import HACK
 function getHackernewsPosts(oldItems) {
 	// INFO https://hn.algolia.com/api/
 	// alternative "https://hacker-news.firebaseio.com/v0/topstories.json";
@@ -126,7 +126,7 @@ function getHackernewsPosts(oldItems) {
  * @param {string} subredditName
  * @param {AlfredItem[]} oldItems
  */
-// biome-ignore lint/correctness/noUnusedVariables: JXA import HACK
+// rome-ignore lint/correctness/noUnusedVariables: JXA import HACK
 function getRedditPosts(subredditName, oldItems) {
 	const opts = getSettings();
 
