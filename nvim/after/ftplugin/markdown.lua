@@ -11,7 +11,8 @@ optl.tabstop = 4
 require("funcs.quality-of-life").wrap("on")
 
 -- decrease line length without zen mode plugins
-vim.defer_fn(function() optl.signcolumn = "yes:9" end, 1)
+-- workaround, since vim.opt_local.signcolumn does not work well for some reason
+vim.api.nvim_win_set_option(0, "signcolumn", "yes:9")
 
 -- do not auto-wrap text
 optl.formatoptions:remove { "t", "c" }
