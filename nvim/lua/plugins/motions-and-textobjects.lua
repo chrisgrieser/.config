@@ -55,6 +55,26 @@ return {
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		event = "BufReadPre", -- not later to ensure it loads in time properly
 		dependencies = "nvim-treesitter/nvim-treesitter",
+		-- HACK avoid conflict with visual mode comment from Comments.nvim
+		keys = {
+			{ "q", "&&&", mode = "o", desc = "󱡔 comment textobj", remap = true },
+			{ -- sticky deleting comment
+				"dq",
+				function()
+					local prevCursor = vim.api.nvim_win_get_cursor(0)
+					vim.cmd.normal { "d&&&" } -- without bang for remapping
+					vim.api.nvim_win_set_cursor(0, prevCursor)
+				end,
+				remap = true,
+				desc = " Delete Comment",
+			},
+			{ -- change inner comment (HACK, since only outer comments are supported rn)
+				"cq",
+				"d&&&xQ",
+				remap = true,
+				desc = " Delete Comment",
+			},
+		},
 	},
 	{ -- tons of text objects
 		"chrisgrieser/nvim-various-textobjs",

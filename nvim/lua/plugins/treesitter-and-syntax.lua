@@ -76,10 +76,6 @@ local tsConfig = {
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		keys = {
-			-- HACK avoid conflict with visual mode comment from Comments.nvim
-			{ "q", "&&&", mode = "o", desc = "󱡔 comment textobj", remap = true },
-		},
 		event = "VeryLazy",
 		build = ":TSUpdate",
 		main = "nvim-treesitter.configs",
