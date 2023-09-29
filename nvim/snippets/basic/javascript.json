@@ -47,10 +47,6 @@
 		],
 		"description": "https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#typedef-callback-and-param"
 	},
-	"type implement (JSDoc)": {
-		"prefix": "type implement (JSDoc)",
-		"body": "/** @type{$0} */"
-	},
 	"don't check file (TypeScript)": {
 		"prefix": [
 			"nocheck (TypeScript)",

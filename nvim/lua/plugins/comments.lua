@@ -1,3 +1,6 @@
+local u = require("config.utils")
+--------------------------------------------------------------------------------
+
 return {
 	{ -- comment
 		"numToStr/Comment.nvim",
@@ -19,7 +22,6 @@ return {
 		keys = {
 			-- stylua: ignore start
 			{ "qf", function() require("neogen").generate { type = "func" } end, desc = " Function Annotation" },
-			{ "qF", function() require("neogen").generate { type = "file" } end, desc = " File Annotation" },
 			{ "qt", function() require("neogen").generate { type = "type" } end, desc = " Type Annotation" },
 			-- stylua: ignore end,
 		},

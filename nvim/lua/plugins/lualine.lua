@@ -101,10 +101,6 @@ local function navicBreadcrumbs()
 	return require("nvim-navic").get_location()
 end
 
-local function lspActionLightbulb() return require("nvim-lightbulb").get_status_text() end
-
---------------------------------------------------------------------------------
-
 ---improves upon the default statusline components by having properly working icons
 ---@nodiscard
 local function currentFile()
@@ -130,6 +126,16 @@ local function currentFile()
 
 	if icon == "" then return name end
 	return icon .. " " .. name
+end
+
+--------------------------------------------------------------------------------
+
+local function stageInfo()
+	local output = vim.fn.system { "git", "diff", "--staged", "--numstat" }
+	if vim.v.shell_error ~= 0 then return "" end
+	local insertions, deletions = output:match("(%d+)%s*(%d+)")
+	local staged = ("Stage: +%s -%s"):format(insertions, deletions)
+	return staged
 end
 
 --------------------------------------------------------------------------------
@@ -189,7 +195,6 @@ local lualineConfig = {
 			},
 		},
 		lualine_x = {
-			{ lspActionLightbulb },
 			{
 				"diagnostics",
 				symbols = { error = "󰅚 ", warn = " ", info = "󰋽 ", hint = "󰘥 " },
@@ -198,6 +203,7 @@ local lualineConfig = {
 		},
 		lualine_y = {
 			"diff",
+			{ stageInfo },
 		},
 		lualine_z = {
 			{ selectionCount, padding = { left = 0, right = 1 } },
@@ -205,7 +211,7 @@ local lualineConfig = {
 		},
 	},
 	options = {
-		refresh = { statusline = 1000 },
+		refresh = { statusline = 1500 },
 		ignore_focus = {
 			"DressingInput",
 			"DressingSelect",
