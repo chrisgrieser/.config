@@ -4,7 +4,7 @@ local u = require("lua.utils")
 --------------------------------------------------------------------------------
 
 local config = {
-	syncMins = 30,
+	syncIntervallMins = 30,
 	repos = {
 		{
 			name = "Dotfiles",
@@ -22,24 +22,28 @@ local config = {
 			scriptPath = env.passwordStore .. "/pass-sync.sh",
 		},
 	},
+	postSyncHook = {
+		func = function() hs.execute(u.exportPath .. "sketchybar --trigger repo-files-update") end,
+		delaySecs = 2,
+	},
 }
 
 --------------------------------------------------------------------------------
 -- REPO SYNC JOBS
 
-SyncSucessIcons = {}
-SyncTasks = {}
+local syncSucessIcons = {}
+local syncTasks = {}
 
 ---@param name string
 ---@param icon string
 ---@param scriptPath string
 local function repoSync(name, icon, scriptPath)
-	if SyncTasks[name] and SyncTasks[name]:isRunning() then return end
+	if syncTasks[name] and syncTasks[name]:isRunning() then return end
 
-	SyncTasks[name] = hs.task
+	syncTasks[name] = hs.task
 		.new(scriptPath, function(exitCode, _, stdErr)
 			if exitCode == 0 then
-				table.insert(SyncSucessIcons, icon)
+				table.insert(syncSucessIcons, icon)
 			else
 				u.notify(("%s⚠️️ %s Sync: %s"):format(icon, name, stdErr))
 			end
@@ -47,35 +51,36 @@ local function repoSync(name, icon, scriptPath)
 		:start()
 end
 
----sync all three git repos
----@param notify boolean
-local function syncAllGitRepos(notify)
+---@nodiscard
+---@return boolean
+local function noSyncInProgress()
+	local isSyncing = {}
+	for _, repo in pairs(config.repos) do
+		local stillSyncing = syncTasks[repo.name] and syncTasks[repo.name]:isRunning()
+		table.insert(isSyncing, stillSyncing)
+	end
+	return not (u.tbl_contains(isSyncing, true))
+end
+
+---@param notifyOnSuccess boolean
+local function syncAllGitRepos(notifyOnSuccess)
 	for _, repo in pairs(config.repos) do
 		repoSync(repo.name, repo.icon, repo.scriptPath)
 	end
 
-	local function noSyncInProgress()
-		local isSyncing = {}
-		for _, repo in pairs(config.repos) do
-			local syncing = SyncTasks[repo.name] and SyncTasks[repo.name]:isRunning()
-			table.insert(isSyncing, syncing)
-		end
-		return not (u.tbl_contains(isSyncing, true))
-	end
-
 	AllSyncTimer = hs.timer
 		.waitUntil(noSyncInProgress, function()
-			local allSyncSucess = #SyncSucessIcons == #config.repos
-			if allSyncSucess and notify then
-				u.notify("🔁 Sync done.")
-			elseif allSyncSucess then
-				print("Sync done: " .. table.concat(SyncSucessIcons, ""))
+			local allSyncSuccess = #syncSucessIcons == #config.repos
+			local successfulSyncs = "Sync done: " .. table.concat(syncSucessIcons)
+			if allSyncSuccess then
+				local func = notifyOnSuccess and u.notify or print
+				func(successfulSyncs)
 			else
-				print(("⚠️ %s Sync failed."):format(#config.repos - #SyncSucessIcons))
+				print(successfulSyncs)
+				print(("⚠️ %s Sync failed."):format(#config.repos - #syncSucessIcons))
 			end
-			SyncSucessIcons = {} -- reset
-			-- stylua: ignore
-			u.runWithDelays(2, function() hs.execute(u.exportPath .. "sketchybar --trigger repo-files-update") end)
+			syncSucessIcons = {} -- reset
+			u.runWithDelays(config.postSyncHook.delaySecs, config.postSyncHook.func)
 		end)
 		:start()
 end
@@ -88,7 +93,7 @@ if not u.isReloading() then syncAllGitRepos(true) end
 
 -- 2. every x minutes
 RepoSyncTimer = hs.timer
-	.doEvery(config.syncMins * 60, function()
+	.doEvery(config.syncIntervallMins * 60, function()
 		if u.screenIsUnlocked() then syncAllGitRepos(false) end
 	end)
 	:start()
@@ -113,8 +118,6 @@ end):start()
 
 -- 5. Every morning at 8:00, when at home
 -- (safety redundancy to ensure sync when leaving for the office)
-MorningSyncTimer = hs.timer
-	.doAt("08:00", "01d", function()
-		if env.isAtHome then syncAllGitRepos(false) end
-	end)
-	:start()
+if env.isAtHome then
+	MorningSyncTimer = hs.timer.doAt("08:00", "01d", function() syncAllGitRepos(false) end):start()
+end
