@@ -9,41 +9,22 @@ local repoSyncMins = 30
 --------------------------------------------------------------------------------
 -- REPO SYNC JOBS
 
----@return string|nil nil if not successful, otherwise success Symbol
-local function gitDotfileSync()
-	local gitDotfileScript = env.dotfilesFolder .. "/git-dotfile-sync.sh"
-	if GitDotfileSyncTask and GitDotfileSyncTask:isRunning() then return end
+SyncSucesses = {}
+SyncTasks = {}
 
-	GitDotfileSyncTask = hs.task
-		.new(gitDotfileScript, function(exitCode, _, stdErr)
-			if exitCode == 0 then return "🔵" end
-			u.notify("🔵⚠️️ Dotfiles Sync: " .. stdErr)
-		end)
-		:start()
-end
+---@param name string
+---@param icon string
+---@param scriptPath string
+local function repoSync(name, icon, scriptPath)
+	if SyncTasks[name] and SyncTasks[name]:isRunning() then return end
 
----@return string|nil nil if not successful, otherwise success Symbol
-local function gitVaultSync()
-	local gitVaultScript = env.vaultLocation .. "/Meta/git-vault-sync.sh"
-	if GitVaultSyncTask and GitVaultSyncTask:isRunning() then return end
-
-	GitVaultSyncTask = hs.task
-		.new(gitVaultScript, function(exitCode, _, stdErr)
-			if exitCode == 0 then return "🟪" end
-			u.notify("🟪⚠️️ Vault Sync: " .. stdErr)
-		end)
-		:start()
-end
-
----@return string|nil nil if not successful, otherwise success Symbol
-local function gitPassSync()
-	local gitPassScript = env.passwordStore .. "/pass-sync.sh"
-	if GitPassSyncTask and GitPassSyncTask:isRunning() then return end
-
-	GitPassSyncTask = hs.task
-		.new(gitPassScript, function(exitCode, _, stdErr)
-			if exitCode == 0 then return "🔑" end
-			u.notify("🔑⚠️️ Password-Store Sync: " .. stdErr)
+	SyncTasks[name] = hs.task
+		.new(scriptPath, function(exitCode, _, stdErr)
+			if exitCode == 0 then
+				table.insert(SyncSucesses, icon)
+			else
+				u.notify(("%s⚠️️ %s Sync: %s"):format(icon, name, stdErr))
+			end
 		end)
 		:start()
 end
@@ -51,30 +32,34 @@ end
 ---sync all three git repos
 ---@param notify boolean
 local function syncAllGitRepos(notify)
-	local success1 = gitDotfileSync()
-	local success2 = gitPassSync()
-	local success3 = gitVaultSync()
-	print("Sycned: " .. (success1 or "") .. (success2 or "") .. (success3 or ""))
+	repoSync("Dotfiles", "🔵", env.dotfilesFolder .. "/git-dotfile-sync.sh")
+	repoSync("Vault", "🟪", env.vaultLocation .. "/Meta/git-vault-sync.sh")
+	repoSync("Passwords", "🔑", env.passwordStore .. "/pass-sync.sh")
 
 	local function noSyncInProgress()
-		local dotfilesSyncing = GitDotfileSyncTask and GitDotfileSyncTask:isRunning()
-		local passSyncing = GitPassSyncTask and GitPassSyncTask:isRunning()
-		local vaultSyncing = GitVaultSyncTask and GitVaultSyncTask:isRunning()
-		return not (dotfilesSyncing or vaultSyncing or passSyncing)
+		local isSyncing = {}
+		isSyncing["Dotfiles"] = SyncTasks["Dotfiles"] and SyncTasks["Dotfiles"]:isRunning()
+		isSyncing["Vault"] = SyncTasks["Vault"] and SyncTasks["Vault"]:isRunning()
+		isSyncing["Passwords"] = SyncTasks["Passwords"] and SyncTasks["Passwords"]:isRunning()
+		return not (isSyncing["Dotfiles"] or isSyncing["Vault"] or isSyncing["Passwords"])
 	end
 
 	AllSyncTimer = hs.timer
 		.waitUntil(noSyncInProgress, function()
+			local repoNum = 3
+			local allSyncSucess = #SyncSucesses == repoNum
+			if allSyncSucess and notify then
+				u.notify("🔁 Sync done.")
+			elseif allSyncSucess then
+				print("Sync done: " .. table.concat(SyncSucesses, ""))
+			else
+				print(("⚠️ %s Sync failed."):format(repoNum - #SyncSucesses))
+			end
+			SyncSucesses = {} -- reset
 			-- stylua: ignore
 			u.runWithDelays(2, function() hs.execute(u.exportPath .. "sketchybar --trigger repo-files-update") end)
 		end)
 		:start()
-
-	if not (success1 and success2 and success3) then
-		u.notify("⚠️ Sync fail.")
-	elseif notify then
-		u.notify("🔁 Sync done.")
-	end
 end
 
 --------------------------------------------------------------------------------
