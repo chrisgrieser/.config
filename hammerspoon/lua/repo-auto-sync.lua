@@ -50,7 +50,6 @@ end
 
 ---sync all three git repos
 ---@param notify boolean
----@return boolean success
 local function syncAllGitRepos(notify)
 	local success1 = gitDotfileSync()
 	local success2 = gitPassSync()
@@ -66,18 +65,15 @@ local function syncAllGitRepos(notify)
 
 	AllSyncTimer = hs.timer
 		.waitUntil(noSyncInProgress, function()
-			u.runWithDelays(
-				2,
-				function() hs.execute(u.exportPath .. "sketchybar --trigger repo-files-update") end
-			)
+			-- stylua: ignore
+			u.runWithDelays(2, function() hs.execute(u.exportPath .. "sketchybar --trigger repo-files-update") end)
 		end)
 		:start()
 
 	if not (success1 and success2 and success3) then
-		u.notify("⚠️ Sync failed")
-		return false
-	else
-		return true
+		u.notify("⚠️ Sync fail.")
+	elseif notify then
+		u.notify("🔁 Sync done.")
 	end
 end
 
@@ -101,18 +97,16 @@ u.urischeme("sync-repos", function()
 end)
 
 -- 4. when going to sleep or when unlocking
-SleepWatcherForRepoSync = hs.caffeinate.watcher
-	.new(function(event)
-		if env.isProjector() then return end
-		local c = hs.caffeinate.watcher
-		local lockOrSleep = event == c.screensDidLock
-			or event == c.screensDidSleep
-			or event == c.screensDidUnlock
-			or event == c.systemDidWake
-			or event == c.screensDidWake
-		if lockOrSleep then syncAllGitRepos(true) end
-	end)
-	:start()
+local c = hs.caffeinate.watcher
+SleepWatcherForRepoSync = c.new(function(event)
+	if env.isProjector() then return end
+	local lockOrSleep = event == c.screensDidLock
+		or event == c.screensDidSleep
+		or event == c.screensDidUnlock
+		or event == c.systemDidWake
+		or event == c.screensDidWake
+	if lockOrSleep then syncAllGitRepos(true) end
+end):start()
 
 -- 5. Every morning at 8:00, when at home
 -- (safety redundancy to ensure sync when leaving for the office)
