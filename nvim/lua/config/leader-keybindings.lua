@@ -175,7 +175,7 @@ end
 keymap(
 	"n",
 	"<leader>w",
-	function() require("funcs.quality-of-life").peekWin(0) end,
+	function() require("funcs.quality-of-life").peekWin() end,
 	{ desc = " Peek Window" }
 )
 
