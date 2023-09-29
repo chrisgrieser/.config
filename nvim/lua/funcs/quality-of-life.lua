@@ -187,11 +187,11 @@ end
 local peekWinNr
 
 ---Toggles peek-window
----@param bufnr? number defaults to 0 (current buffer)
-function M.peekWin(bufnr)
+function M.peekWin()
 	-- CONFIG
-	local height = 9
-	local width = 35
+	local bufnr = 0 -- current buffer
+	local height = 11
+	local width = 40
 
 	-- if already open, just close is
 	local peekWinOpen = vim.tbl_contains(vim.api.nvim_list_wins(), peekWinNr)
@@ -201,7 +201,6 @@ function M.peekWin(bufnr)
 	end
 
 	-- create peek window
-	if not bufnr then bufnr = 0 end
 	peekWinNr = vim.api.nvim_open_win(bufnr, false, {
 		relative = "win",
 		width = width,
