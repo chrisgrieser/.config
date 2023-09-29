@@ -31,7 +31,7 @@ local config = {
 --------------------------------------------------------------------------------
 -- REPO SYNC JOBS
 
-local syncSucessIcons = {}
+local syncSuccessIcons = {}
 local syncTasks = {}
 
 ---@param name string
@@ -43,7 +43,7 @@ local function repoSync(name, icon, scriptPath)
 	syncTasks[name] = hs.task
 		.new(scriptPath, function(exitCode, _, stdErr)
 			if exitCode == 0 then
-				table.insert(syncSucessIcons, icon)
+				table.insert(syncSuccessIcons, icon)
 			else
 				u.notify(("%s⚠️️ %s Sync: %s"):format(icon, name, stdErr))
 			end
@@ -70,16 +70,16 @@ local function syncAllGitRepos(notifyOnSuccess)
 
 	AllSyncTimer = hs.timer
 		.waitUntil(noSyncInProgress, function()
-			local allSyncSuccess = #syncSucessIcons == #config.repos
-			local successfulSyncs = "Sync done: " .. table.concat(syncSucessIcons)
+			local allSyncSuccess = #syncSuccessIcons == #config.repos
+			local successfulSyncs = "Sync done: " .. table.concat(syncSuccessIcons)
 			if allSyncSuccess then
 				local func = notifyOnSuccess and u.notify or print
 				func(successfulSyncs)
 			else
 				print(successfulSyncs)
-				print(("⚠️ %s Sync failed."):format(#config.repos - #syncSucessIcons))
+				print(("⚠️ %s Sync failed."):format(#config.repos - #syncSuccessIcons))
 			end
-			syncSucessIcons = {} -- reset
+			syncSuccessIcons = {} -- reset
 			u.runWithDelays(config.postSyncHook.delaySecs, config.postSyncHook.func)
 		end)
 		:start()
