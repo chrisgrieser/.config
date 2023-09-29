@@ -178,10 +178,10 @@ return {
 		opts = {
 			render = "wrapped-compact",
 			top_down = false,
-			max_width = 50,
+			max_width = 55,
 			minimum_width = 15,
-			level = 0, -- minimum severity level to display (0 = display all)
-			timeout = 7500,
+			level = vim.log.levels.TRACE, -- minimum severity level
+			timeout = 6000,
 			stages = "slide", -- slide|fade
 			icons = { DEBUG = "", ERROR = "", INFO = "", TRACE = "", WARN = "" },
 			on_open = function(win)

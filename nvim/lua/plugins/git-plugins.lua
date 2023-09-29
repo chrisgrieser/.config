@@ -56,13 +56,27 @@ return {
 			{ "<leader>gy", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "󰊢 Unstage Last Hunk" },
 			{ "<leader>gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Add Buffer" },
 			{ "<leader>gv", "<cmd>Gitsigns preview_hunk<CR>", desc = "󰊢 Preview Hunk Diff" },
-			{ "<leader>g?", "<cmd>Gitsigns blame_line<CR>", desc = "󰊢 Blame Line" },
-			{ "gh", "<cmd>Gitsigns next_hunk<CR>", desc = "󰊢 Next Hunk" },
-			{ "gH", "<cmd>Gitsigns prev_hunk<CR>", desc = "󰊢 Prev Hunk" },
+			{ "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", desc = "󰊢 Reset Hunk" },
+			{ "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", desc = "󰊢 Reset Buffer" },
 			{ "gh", "<cmd>Gitsigns select_hunk<CR>", mode = { "o", "x" }, desc = "󱡔 󰊢 hunk textobj" },
+			{
+				"gh",
+				function() require("gitsigns").next_hunk { foldopen = true } end,
+				desc = "󰊢 Next Hunk",
+			},
+			{
+				"gH",
+				function() require("gitsigns").next_hunk { foldopen = true } end,
+				desc = "󰊢 Previous Hunk",
+			},
+			{
+				"<leader>g?",
+				function() require("gitsigns").blame_line { full = true } end,
+				desc = "󰊢 Blame Line",
+			},
 		},
 		opts = {
-			max_file_length = 10000,
+			max_file_length = 12000, -- lines
 			preview_config = { border = require("config.utils").borderStyle },
 		},
 	},
