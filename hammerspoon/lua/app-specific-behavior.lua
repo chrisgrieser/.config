@@ -23,7 +23,7 @@ end
 
 -- auto-pause/resume Spotify on launch/quit of apps with sound
 SpotifyAppWatcher = aw.new(function(appName, eventType)
-	local appsWithSound = { "YouTube", "zoom.us", "FaceTime", "Twitch", "Netflix", "CrunchyRoll", "Crunchyroll" }
+	local appsWithSound = env.videoAndAudioApps
 	if
 		not u.screenIsUnlocked()
 		or env.isAtOffice
@@ -124,6 +124,7 @@ end)
 HighlightsAppWatcher = aw.new(function(appName, eventType, highlights)
 	if not (eventType == aw.launched and appName == "Highlights") then return end
 
+	-- set appearance according to dark mode
 	local targetView = u.isDarkMode() and "Night" or "Default"
 	highlights:selectMenuItem { "View", "PDF Appearance", targetView }
 
@@ -214,7 +215,7 @@ Wf_mimestream = wf.new("Mimestream")
 	:subscribe(wf.windowCreated, function(newWin) wu.moveResize(newWin, wu.pseudoMax) end)
 
 --------------------------------------------------------------------------------
--- Textpal
+-- TEXTPAL
 -- FIX window opening on System-start
 if not u.isReloading() then
 	local textpal = u.app("TextPal")
@@ -233,6 +234,7 @@ DiscordAppWatcher = aw.new(function(appName, eventType)
 	if not clipb then return end
 
 	if eventType == aw.launched or eventType == aw.launching then
+		-- #off-topic in OMG Discord-server
 		u.openLinkInBg("discord://discord.com/channels/686053708261228577/700466324840775831")
 	elseif eventType == aw.activated then
 		local hasURL = clipb:find("^https?:%S+$")

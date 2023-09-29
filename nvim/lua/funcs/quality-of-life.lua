@@ -184,24 +184,24 @@ end
 
 --------------------------------------------------------------------------------
 
-local peekWinNr
+local pinWinNr
 
----Toggles peek-window
-function M.peekWin()
+---Toggles pin-window
+function M.pinWin()
 	-- CONFIG
-	local bufnr = 0 -- current buffer
-	local height = 11
 	local width = 40
+	local height = 11
 
 	-- if already open, just close is
-	local peekWinOpen = vim.tbl_contains(vim.api.nvim_list_wins(), peekWinNr)
-	if peekWinOpen then
-		vim.api.nvim_win_close(peekWinNr, true)
+	local pinWinOpen = vim.tbl_contains(vim.api.nvim_list_wins(), pinWinNr)
+	if pinWinOpen then
+		vim.api.nvim_win_close(pinWinNr, true)
 		return
 	end
 
-	-- create peek window
-	peekWinNr = vim.api.nvim_open_win(bufnr, false, {
+	-- create pin window
+	local bufnr = 0 -- current buffer
+	pinWinNr = vim.api.nvim_open_win(bufnr, false, {
 		relative = "win",
 		width = width,
 		height = height,
@@ -210,13 +210,12 @@ function M.peekWin()
 		col = vim.api.nvim_win_get_width(0),
 		style = "minimal",
 		border = u.borderStyle,
-		title = "  " .. vim.fs.basename(vim.api.nvim_buf_get_name(bufnr)) .. " ",
+		title = "  " .. vim.fs.basename(vim.api.nvim_buf_get_name(bufnr)) .. " ",
 		title_pos = "center",
 	})
-
-	vim.api.nvim_win_set_option(peekWinNr, "scrolloff", 2)
-	vim.api.nvim_win_set_option(peekWinNr, "sidescrolloff", 2)
-	vim.api.nvim_win_set_option(peekWinNr, "signcolumn", "no")
+	vim.api.nvim_win_set_option(pinWinNr, "scrolloff", 2)
+	vim.api.nvim_win_set_option(pinWinNr, "sidescrolloff", 2)
+	vim.api.nvim_win_set_option(pinWinNr, "signcolumn", "no")
 end
 
 --------------------------------------------------------------------------------

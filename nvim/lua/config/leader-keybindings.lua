@@ -173,8 +173,8 @@ end
 keymap(
 	"n",
 	"<leader>w",
-	function() require("funcs.quality-of-life").peekWin() end,
-	{ desc = " Peek Window" }
+	function() require("funcs.quality-of-life").pinWin() end,
+	{ desc = " Pin Window" }
 )
 
 -- MAKE
