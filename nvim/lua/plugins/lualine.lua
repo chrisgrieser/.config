@@ -5,6 +5,7 @@ local fn = vim.fn
 
 -- displays irregular indentation and linebreaks, displays nothing when all is good
 -- selene: allow(high_cyclomatic_complexity)
+---@nodiscard
 local function irregularWhitespace()
 	-- USER CONFIG
 	-- filetypes and the number of spaces they use. Omit or set to nil to use tabs for that filetype.
@@ -17,7 +18,6 @@ local function irregularWhitespace()
 	local usesTabs = not bo.expandtab
 	local brUsed = bo.fileformat
 	local ft = bo.filetype
-	local width = bo.tabstop
 	if vim.tbl_contains(ignoredFiletypes, ft) or fn.mode() ~= "n" or bo.buftype ~= "" then return "" end
 
 	-- non-default indentation setting (e.g. changed via indent-o-matic)
@@ -25,25 +25,11 @@ local function irregularWhitespace()
 	local spaceFtsOnly = vim.tbl_keys(spaceFiletypes)
 	if
 		(usesSpaces and not vim.tbl_contains(spaceFtsOnly, ft))
-		or (usesSpaces and width ~= spaceFiletypes[ft])
+		or (usesSpaces and bo.tabstop ~= spaceFiletypes[ft])
 	then
-		nonDefaultSetting = " " .. tostring(width) .. "󱁐  "
+		nonDefaultSetting = " " .. tostring(bo.tabstop.. "󱁐  ")
 	elseif usesTabs and vim.tbl_contains(spaceFtsOnly, ft) then
-		nonDefaultSetting = " 󰌒 " .. tostring(width)(" ")
-	end
-
-	-- wrong or mixed indentation
-	local hasTabs = fn.search("^\t", "nw") > 0
-	local hasSpaces = fn.search("^ ", "nw") > 0
-	-- exception, jsdocs: space not followed by "*"
-	if bo.filetype == "javascript" then hasSpaces = fn.search([[^ \(\*\)\@!]], "nw") > 0 end
-	local wrongIndent = ""
-	if usesTabs and hasSpaces then
-		wrongIndent = " 󱁐 "
-	elseif usesSpaces and hasTabs then
-		wrongIndent = " 󰌒 "
-	elseif hasTabs and hasSpaces then
-		wrongIndent = " 󱁐 + 󰌒 "
+		nonDefaultSetting = " 󰌒 " .. tostring(bo.tabstop)
 	end
 
 	-- line breaks
@@ -58,7 +44,7 @@ local function irregularWhitespace()
 		end
 	end
 
-	return nonDefaultSetting .. wrongIndent .. linebreakIcon
+	return nonDefaultSetting .. linebreakIcon
 end
 
 --------------------------------------------------------------------------------
@@ -77,6 +63,7 @@ end
 
 --------------------------------------------------------------------------------
 
+---@nodiscard
 local function selectionCount()
 	local isVisualMode = fn.mode():find("[Vv]")
 	if not isVisualMode then return "" end
@@ -87,6 +74,7 @@ local function selectionCount()
 end
 
 -- only show the clock when fullscreen (= it covers the menubar clock)
+---@nodiscard
 local function clock()
 	if vim.opt.columns:get() < 110 or vim.opt.lines:get() < 25 then return "" end
 
@@ -96,6 +84,7 @@ local function clock()
 end
 
 -- wrapper to not require navic/lightbulb directly
+---@nodiscard
 local function navicBreadcrumbs()
 	if bo.filetype == "css" or not require("nvim-navic").is_available() then return "" end
 	return require("nvim-navic").get_location()
@@ -126,16 +115,6 @@ local function currentFile()
 
 	if icon == "" then return name end
 	return icon .. " " .. name
-end
-
---------------------------------------------------------------------------------
-
-local function stageInfo()
-	local output = vim.fn.system { "git", "diff", "--staged", "--numstat" }
-	if vim.v.shell_error ~= 0 then return "" end
-	local insertions, deletions = output:match("(%d+)%s*(%d+)")
-	local staged = ("Stage: +%s -%s"):format(insertions, deletions)
-	return staged
 end
 
 --------------------------------------------------------------------------------
@@ -203,7 +182,6 @@ local lualineConfig = {
 		},
 		lualine_y = {
 			"diff",
-			{ stageInfo },
 		},
 		lualine_z = {
 			{ selectionCount, padding = { left = 0, right = 1 } },
@@ -211,7 +189,7 @@ local lualineConfig = {
 		},
 	},
 	options = {
-		refresh = { statusline = 1500 },
+		refresh = { statusline = 1000 },
 		ignore_focus = {
 			"DressingInput",
 			"DressingSelect",
