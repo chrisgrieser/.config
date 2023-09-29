@@ -95,10 +95,9 @@ SleepAutoVideoOffTimer = hs.timer
 			if not idleMins(1) then return end
 			u.notify("💤 SleepTimer triggered.")
 
-			-- 1. no need to quit IINA since it autoquits
-			-- 2. close browser tabs running YouTube (not using full name for youtube short-urls)
-			-- 3. close leftover fullscreen spaces created by apps running in fullscreen
-			u.quitApp { "YouTube", "Twitch", "CrunchyRoll", "Crunchyroll", "Netflix", "Tagesschau" }
+			-- 1. close browser tabs running YouTube (not using full name for youtube short-urls)
+			-- 2. close leftover fullscreen spaces created by apps running in fullscreen
+			u.quitApp (env.videoAndAudioApps)
 			u.closeTabsContaining("youtu")
 			closeFullscreenSpaces()
 		end)

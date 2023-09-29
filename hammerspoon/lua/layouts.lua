@@ -63,7 +63,7 @@ local function workLayout()
 	setHigherBrightnessDuringDay()
 
 	-- close
-	u.quitApp { "YouTube", "Netflix", "CrunchyRoll", "Crunchyroll", "IINA", "Twitch", "Tagesschau" }
+	u.quitApp(env.videoAndAudioApps)
 	require("lua.private").closer()
 	closeAllFinderWins()
 
@@ -77,7 +77,7 @@ local function workLayout()
 			wu.moveResize(win, wu.pseudoMax)
 		end)
 	end
-	u.restartApp("AltTab") -- FIX missing apps
+	u.restartApp("AltTab") -- FIX duplicate items
 
 	-- finish
 	require("lua.sidenotes").reminderToSidenotes()
@@ -125,42 +125,40 @@ end
 --------------------------------------------------------------------------------
 
 -- Open Apps always at Mouse Screen
-Wf_appsOnMouseScreen = wf
-	.new({
-		env.browserApp,
-		env.mailApp,
-		"BetterTouchTool",
-		"Obsidian",
-		"Finder",
-		"ReadKit",
-		"Slack",
-		"IINA",
-		"WezTerm",
-		"Hammerspoon",
-		"System Settings",
-		"Discord",
-		"Neovide",
-		"neovide",
-		"Espanso",
-		"espanso",
-		"BusyCal",
-		"Alfred Preferences",
-		"YouTube",
-		"Netflix",
-		"CrunchyRoll",
-	})
-	:subscribe(wf.windowCreated, function(newWin)
-		local mouseScreen = hs.mouse.getCurrentScreen()
-		local app = newWin:application()
-		local screenOfWindow = newWin:screen()
-		if not (mouseScreen and env.isProjector() and app) then return end
+Wf_appsOnMouseScreen = wf.new({
+	env.browserApp,
+	env.mailApp,
+	"BetterTouchTool",
+	"Obsidian",
+	"Finder",
+	"ReadKit",
+	"Slack",
+	"IINA",
+	"WezTerm",
+	"Hammerspoon",
+	"System Settings",
+	"Discord",
+	"Neovide",
+	"neovide",
+	"Espanso",
+	"espanso",
+	"BusyCal",
+	"Alfred Preferences",
+	"YouTube",
+	"Netflix",
+	"CrunchyRoll",
+}):subscribe(wf.windowCreated, function(newWin)
+	local mouseScreen = hs.mouse.getCurrentScreen()
+	local app = newWin:application()
+	local screenOfWindow = newWin:screen()
+	if not (mouseScreen and env.isProjector() and app) then return end
 
-		u.runWithDelays({ 0, 0.3 }, function()
-			if mouseScreen:name() == screenOfWindow:name() then return end
-			newWin:moveToScreen(mouseScreen)
-			wu.moveResize(newWin, wu.maximized)
-		end)
+	u.runWithDelays({ 0, 0.3 }, function()
+		if mouseScreen:name() == screenOfWindow:name() then return end
+		newWin:moveToScreen(mouseScreen)
+		wu.moveResize(newWin, wu.maximized)
 	end)
+end)
 
 --------------------------------------------------------------------------------
 -- WHEN TO SET LAYOUT

@@ -27,9 +27,23 @@ M.browserApp = readZshEnv("BROWSER_APP")
 M.browserDefaultsPath = readZshEnv("BROWSER_DEFAULTS_PATH")
 M.tickerApp = readZshEnv("TICKER_APP")
 
+M.videoAndAudioApps = {
+	"IINA",
+	"YouTube",
+	"Youtube", -- PWA sometimes cased differently
+	"zoom.us",
+	"FaceTime",
+	"Twitch",
+	"Twitch.tv",
+	"Netflix",
+	"Prime Video",
+	"Tageschau",
+	"CrunchyRoll",
+	"Crunchyroll", -- PWA sometimes cased differently
+}
+
 --------------------------------------------------------------------------------
 -- DEVICE
-
 local deviceName = hs.host.localizedName():gsub(".- ", "", 1)
 
 M.isAtOffice = (deviceName:find("[Mm]ini") or deviceName:find("eduroam")) ~= nil
