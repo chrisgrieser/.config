@@ -53,36 +53,16 @@ keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS
 
--- REMAPPING OF BUILTIN TEXT OBJECTS
+-- remapping of builtin text objects
 for remap, original in pairs(u.textobjRemaps) do
 	keymap({ "o", "x" }, "i" .. remap, "i" .. original, { desc = "󱡔 inner " .. original })
 	keymap({ "o", "x" }, "a" .. remap, "a" .. original, { desc = "󱡔 outer " .. original })
 end
 
--- QUICK TEXTOBJ OPERATIONS
+-- quick textobj operations
 keymap("n", "<Space>", '"_ciw', { desc = "󱡔 change word" })
 keymap("x", "<Space>", '"_c', { desc = "󱡔 change selection" })
 keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
-
--- STICKY COMMENT TEXT OBJECT ACTIONS
--- HACK effectively creating "q" as comment textobj, can't map directly to q since
--- overlap in visual mode where q can be object and operator. However, this
--- method here also has the advantage of making it possible to preserve cursor
--- position.
-keymap("n", "dq", function()
-	local prevCursor = vim.api.nvim_win_get_cursor(0)
-	cmd.normal { "d&&&" } -- without bang for remapping of COM
-	vim.api.nvim_win_set_cursor(0, prevCursor)
-end, { remap = true, desc = " Delete Comment" })
-
--- manually changed cq to preserve the commentstring
-keymap("n", "cq", function()
-	cmd.normal { "d&&&" } -- without bang for remapping
-	cmd.normal { "x" }
-	cmd.normal { "Q" }
-	cmd.startinsert { bang = true }
-end, { desc = " Change Comment" })
--- INFO omap q &&& is done is treesitter config, takes care of other operators like `y`
 
 keymap(
 	"o",
@@ -253,7 +233,7 @@ end, { expr = true })
 
 -- always paste characterwise when in insert mode
 keymap("i", "<D-v>", function()
-	local regContent = fn.getreg("+"):gsub("^%s*", ""):gsub("%s*$", "")
+	local regContent = vim.trim(fn.getreg("+"))
 	fn.setreg("+", regContent, "v") ---@diagnostic disable-line: param-type-mismatch
 	return "<C-g>u<C-r><C-o>+" -- "<C-g>u" adds undopoint before the paste
 end, { desc = " Paste charwise", expr = true })
@@ -325,8 +305,6 @@ keymap("n", "<PageDown>", function() require("funcs.quality-of-life").scrollHove
 keymap("n", "<PageUp>", function() require("funcs.quality-of-life").scrollHoverWin("up") end, { desc = "󰮽 Scroll hover up" })
 -- stylua: ignore end
 
-keymap("n", "gd", function() cmd.Telescope("lsp_definitions") end, { desc = "󰒕 Definitions" })
-keymap("n", "gf", function() cmd.Telescope("lsp_references") end, { desc = "󰒕 References" })
 keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename" })
 keymap("n", "<leader>V", ":IncRename <C-r><C-w>", { desc = "󰒕 IncRename (cword)" })
 
