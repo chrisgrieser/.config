@@ -179,12 +179,41 @@ function M.openAtRegex101()
 	local url = "https://regex101.com/?regex=" .. pattern .. "&flags=" .. flags
 	if replacement then url = url .. "&subst=" .. replacement end
 
-	vim.fn.system({ "open", url })
+	vim.fn.system { "open", url }
 end
 
 --------------------------------------------------------------------------------
 
+local peekWinNr = 0
 
+---Toggles peek-window
+---@param bufnr? number defaults to 0 (current buffer)
+function M.peekWin(bufnr)
+	if not bufnr then bufnr = 0 end
+
+	local peekWinOpen = vim.tbl_contains(vim.api.nvim_list_wins(), peekWinNr)
+	if peekWinOpen then
+		vim.api.nvim_win_close(peekWinNr, true)
+		return
+	end
+
+	peekWinNr = vim.api.nvim_open_win(0, false, {
+		relative = "win",
+		width = 35,
+		height = 9,
+		anchor = "NE",
+		row = 0,
+		col = vim.api.nvim_list_uis()[1].width - 2,
+		style = "minimal",
+		border = { "╔", "" ,"", "", "╝", "═", "╚", "║" },
+		focusable = true,
+		-- title = " " .. vim.fs.basename(vim.api.nvim_buf_get_name(0)),
+		-- title_pos = "center",
+		noautocmd = true,
+	})
+end
+
+--------------------------------------------------------------------------------
 
 ---@param direction "up"|"down"
 function M.scrollHoverWin(direction)
