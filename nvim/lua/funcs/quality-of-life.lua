@@ -184,33 +184,40 @@ end
 
 --------------------------------------------------------------------------------
 
-local peekWinNr = 0
+local peekWinNr
 
 ---Toggles peek-window
 ---@param bufnr? number defaults to 0 (current buffer)
 function M.peekWin(bufnr)
-	if not bufnr then bufnr = 0 end
+	-- CONFIG
+	local height = 9
+	local width = 35
 
+	-- if already open, just close is
 	local peekWinOpen = vim.tbl_contains(vim.api.nvim_list_wins(), peekWinNr)
 	if peekWinOpen then
 		vim.api.nvim_win_close(peekWinNr, true)
 		return
 	end
 
-	peekWinNr = vim.api.nvim_open_win(0, false, {
+	-- create peek window
+	if not bufnr then bufnr = 0 end
+	peekWinNr = vim.api.nvim_open_win(bufnr, false, {
 		relative = "win",
-		width = 35,
-		height = 9,
+		width = width,
+		height = height,
 		anchor = "NE",
 		row = 0,
-		col = vim.api.nvim_list_uis()[1].width - 2,
+		col = vim.api.nvim_win_get_width(0),
 		style = "minimal",
-		border = { "╔", "" ,"", "", "╝", "═", "╚", "║" },
-		focusable = true,
-		-- title = " " .. vim.fs.basename(vim.api.nvim_buf_get_name(0)),
-		-- title_pos = "center",
-		noautocmd = true,
+		border = u.borderStyle,
+		title = "  " .. vim.fs.basename(vim.api.nvim_buf_get_name(bufnr)) .. " ",
+		title_pos = "center",
 	})
+
+	vim.api.nvim_win_set_option(peekWinNr, "scrolloff", 2)
+	vim.api.nvim_win_set_option(peekWinNr, "sidescrolloff", 2)
+	vim.api.nvim_win_set_option(peekWinNr, "signcolumn", "no")
 end
 
 --------------------------------------------------------------------------------

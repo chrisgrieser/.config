@@ -123,8 +123,7 @@ local function lintTriggers()
 		callback = doLint,
 	})
 
-	-- run once on initialization
-	doLint()
+	doLint() -- run once on initialization
 end
 
 --------------------------------------------------------------------------------
@@ -229,7 +228,7 @@ return {
 		"chrisgrieser/nvim-rulebook",
 		opts = {
 			-- FIX lua_ls has indentation issue when used via code action
-			ignoreRuleComment = {
+			ignoreComments = {
 				["Lua Diagnostics."] = {
 					comment = "---@diagnostic disable-next-line: %s",
 					location = "prevLine",
