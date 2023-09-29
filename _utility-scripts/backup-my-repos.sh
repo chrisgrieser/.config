@@ -1,9 +1,9 @@
 #!/usr/bin/env zsh
-
-# Backup all public non-fork repos owned by the specified 
-# github user as zip archive. For speed and disk space, only shallow 
-# clones are saved. Requires `yq` being installed. Due to github API
-# restrictions, only a maximum of 100 repos are downloaded.
+# INFO
+# - Backup all PUBLIC NON-FORK repos owned by the specified github user as zip archive. 
+# - For speed and disk space, only shallow clones are saved (depth 2).
+# - Requires `yq` being installed. 
+# - Due to github API restrictions, only a maximum of 100 repos are downloaded.
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -27,16 +27,19 @@ curl -s "$apiURL" |
 	cut -c3- |
 	# WARN depth=2 ensures that amending a shallow commit does not result in a 
 	# new commit without parent, effectively destroying git history (!!)
-	xargs -I {} git clone --depth=2 'git@github.com:{}.git' && echo
+	xargs -I {} git clone --depth=2 'git@github.com:{}.git'
 
 # archive them
 date_stamp=$(date +%Y-%m-%d_%H-%M-%S)
 repos_count=$(find . -mindepth 1 -maxdepth 1 -type d | wc -l | tr -d " ")
+if [[ repos_count -ge 100 ]]; then	
+	print "\033[1;33mGitHub API only allows up to 100 repos to be downloaded.\033[0m"
+fi
 archive_name="${repos_count} Repos – ${date_stamp}.zip"
-zip -r --quiet "../archive/$archive_name" .
+zip -r --quiet "../$archive_name" . || return 1
 
 echo
-print "\033[1;32m🗄️ Archived $repos_count repos.\033[0m"
+print "\033[1;32mArchived $repos_count repos.\033[0m"
 open -R "$backup_location/$archive_name"
 
 # remove leftover folders
