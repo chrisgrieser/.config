@@ -171,7 +171,15 @@ for _, key in pairs(trailChars) do
 end
 
 --------------------------------------------------------------------------------
+-- PEEK WIN
+keymap(
+	"n",
+	"<leader>w",
+	function() require("funcs.quality-of-life").peekWin() end,
+	{ desc = " Peek Window" }
+)
 
+-- MAKE
 keymap(
 	"n",
 	"<leader>r",
