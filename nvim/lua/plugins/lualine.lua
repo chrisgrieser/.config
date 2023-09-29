@@ -4,8 +4,8 @@ local fn = vim.fn
 --------------------------------------------------------------------------------
 
 -- displays irregular indentation and linebreaks, displays nothing when all is good
--- selene: allow(high_cyclomatic_complexity)
 ---@nodiscard
+---@return string
 local function irregularWhitespace()
 	-- USER CONFIG
 	-- filetypes and the number of spaces they use. Omit or set to nil to use tabs for that filetype.
@@ -64,6 +64,7 @@ end
 --------------------------------------------------------------------------------
 
 ---@nodiscard
+---@return string
 local function selectionCount()
 	local isVisualMode = fn.mode():find("[Vv]")
 	if not isVisualMode then return "" end
@@ -75,6 +76,7 @@ end
 
 -- only show the clock when fullscreen (= it covers the menubar clock)
 ---@nodiscard
+---@return string
 local function clock()
 	if vim.opt.columns:get() < 110 or vim.opt.lines:get() < 25 then return "" end
 
@@ -85,6 +87,7 @@ end
 
 -- wrapper to not require navic/lightbulb directly
 ---@nodiscard
+---@return string
 local function navicBreadcrumbs()
 	if bo.filetype == "css" or not require("nvim-navic").is_available() then return "" end
 	return require("nvim-navic").get_location()
@@ -92,6 +95,7 @@ end
 
 ---improves upon the default statusline components by having properly working icons
 ---@nodiscard
+---@return string
 local function currentFile()
 	local maxLen = 25
 
