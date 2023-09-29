@@ -2,10 +2,8 @@ local M = {}
 --------------------------------------------------------------------------------
 local fn = vim.fn
 local bo = vim.bo
-local g = vim.g
 local cmd = vim.cmd
 local expand = vim.fn.expand
-local warn = vim.log.levels.WARN
 
 ---runs :normal natively with bang
 local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
@@ -111,7 +109,7 @@ function M.variableLog()
 	elseif ft == "css" or ft == "scss" then
 		templateStr = "outline: 2px solid red !important; /* %s */"
 	else
-		vim.notify("󰸢 VariableLog does not support " .. ft .. " yet.", warn)
+		notify("VariableLog does not support " .. ft .. " yet.", "warn")
 		return
 	end
 
@@ -161,7 +159,6 @@ end
 function M.beepLog()
 	local templateStr
 	local ft = bo.filetype
-
 	local randomEmoji = beepEmojis[math.random(1, #beepEmojis)]
 
 	if expand("%:p"):find("nvim") and ft == "lua" then
@@ -185,6 +182,9 @@ function M.beepLog()
 	local logStatement = templateStr:format(marker, randomEmoji)
 	append(logStatement)
 end
+
+
+--------------------------------------------------------------------------------
 
 function M.timeLog()
 	---@diagnostic disable-next-line: inject-field
@@ -224,11 +224,12 @@ function M.timeLog()
 		notify("Time log does not support " .. ft .. " yet.", "warn")
 		return
 	end
-	local statementToUse = g.timelogStart and logStatement1 or logStatement2
+	local statementToUse = vim.b.timelogStart and logStatement1 or logStatement2
 	for _, line in pairs(statementToUse) do
 		append(line:format(marker))
 	end
-	g.timelogStart = not g.timelogStart
+	---@diagnostic disable-next-line: inject-field
+	vim.b.timelogStart = not vim.b.timelogStart
 end
 
 -- simple debug statement
