@@ -9,9 +9,12 @@ u.urischeme("hs-reload", function()
 	u.runWithDelays(0.15, hs.reload)
 end)
 
-if u.isReloading() then
+--------------------------------------------------------------------------------
+
+if u.isSystemStart() then
+	hs.notify.show("Hammerspoon", "", "🔨 Finished loading")
+else
+	-- is reloading
 	print("\n--------------------------- 🔨 HAMMERSPOON RELOAD -------------------------------\n")
 	os.remove(reloadIndicator)
-else
-	u.notify("🔨 Finished loading")
 end

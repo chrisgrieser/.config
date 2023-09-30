@@ -50,7 +50,7 @@ end
 
 --------------------------------------------------------------------------------
 -- initialize on system start
-if not u.isReloading() then M.holeCover() end
+if u.isSystemStart() then M.holeCover() end
 
 --------------------------------------------------------------------------------
 return M

@@ -95,7 +95,7 @@ end
 -- WHEN TO SYNC
 
 -- 1. on systemstart
-if not u.isReloading() then syncAllGitRepos(true) end
+if u.isSystemStart() then syncAllGitRepos(true) end
 
 -- 2. every x minutes
 RepoSyncTimer = hs.timer

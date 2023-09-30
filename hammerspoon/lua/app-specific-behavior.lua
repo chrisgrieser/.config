@@ -217,7 +217,7 @@ Wf_mimestream = wf.new("Mimestream")
 --------------------------------------------------------------------------------
 -- TEXTPAL
 -- FIX window opening on System-start
-if not u.isReloading() then
+if u.isSystemStart() then
 	local textpal = u.app("TextPal")
 	if textpal and textpal:mainWindow() then textpal:mainWindow():close() end
 end

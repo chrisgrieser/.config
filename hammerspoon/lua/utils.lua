@@ -20,13 +20,13 @@ M.exportPath = [[export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$P
 
 --------------------------------------------------------------------------------
 
----@nodiscard
 ---differentiate code to be run on reload and code to be run on startup.
 ---dependent on the setup in `reload.lua`
 ---@return boolean
-function M.isReloading()
+---@nodiscard
+function M.isSystemStart()
 	local _, isReloading = hs.execute("test -f /tmp/hs-is-reloading")
-	return isReloading ~= nil
+	return not isReloading
 end
 
 ---Whether the current time is between startHour & endHour. Also works for
@@ -124,7 +124,7 @@ function M.screenIsUnlocked()
 	return success == true -- convert to Boolean
 end
 
----Send system Notification, accepting any number of arguments of any type. 
+---Send system Notification, accepting any number of arguments of any type.
 ---Converts everything into strings, concatenates them, and then sends it.
 function M.notify(...)
 	local args = hs.fnutils.map({ ... }, function(arg)
