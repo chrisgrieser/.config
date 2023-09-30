@@ -4,9 +4,9 @@ local u = require("config.utils")
 return {
 	{ -- better references/definitions
 		"dnlhc/glance.nvim",
-		keys ={
-			{ "gd", "<cmd>Glance definitions<CR>", desc = "Glance" },
-			{ "gf", "<cmd>Glance references<CR>", desc = "Glance" },
+		keys = {
+			{ "gd", "<cmd>Glance definitions<CR>", desc = "󰒕 Definitions" },
+			{ "gf", "<cmd>Glance references<CR>", desc = "󰒕 References" },
 		},
 		config = function()
 			local actions = require("glance").actions

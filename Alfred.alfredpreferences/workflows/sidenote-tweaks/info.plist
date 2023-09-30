@@ -794,7 +794,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string>openurl close</string>
+				<string>openurl</string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
@@ -1343,7 +1343,7 @@ sketchybar --trigger update-sidenotes-count</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>note</key>
-			<string>pass "openurl close"</string>
+			<string>pass "openurl"</string>
 			<key>xpos</key>
 			<real>325</real>
 			<key>ypos</key>
