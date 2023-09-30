@@ -25,10 +25,14 @@ newCommand("LspCapabilities", function(ctx)
 	for _, client in pairs(clients) do
 		local capAsList = {}
 		for key, value in pairs(client.server_capabilities) do
-			local capability = key
+			local entry = "- " .. key
+
 			-- indicate manually deactivated capabilities
-			if value == false then capability = capability .. " (false)" end
-			table.insert(capAsList, "- " .. capability)
+			if value == false then entry = entry .. " (false)" end
+			-- capabilities like `willRename` are listed under the workspace key
+			if key == "workspace" then entry = entry .. " " .. vim.inspect(value) end
+
+			table.insert(capAsList, entry)
 		end
 		table.sort(capAsList) -- sorts alphabetically
 		local msg = client.name:upper() .. "\n" .. table.concat(capAsList, "\n")
