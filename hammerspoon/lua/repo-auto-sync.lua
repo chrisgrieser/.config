@@ -31,6 +31,9 @@ local config = {
 --------------------------------------------------------------------------------
 -- REPO SYNC JOBS
 
+---@param msg string
+local function notify(msg) hs.notify.show("Hammerspoon", "", msg) end
+
 local syncedRepos = {}
 local syncTasks = {}
 
@@ -43,7 +46,7 @@ local function repoSync(repo)
 			if exitCode == 0 then
 				table.insert(syncedRepos, repo)
 			else
-				u.notify(("%s⚠️️ %s Sync: %s"):format(repo.icon, repo.name, stdErr))
+				notify(("⚠️️%s %s Sync: %s"):format(repo.icon, repo.name, stdErr))
 			end
 		end)
 		:start()
@@ -60,7 +63,7 @@ local function noSyncInProgress()
 	return not (u.tbl_contains(isSyncing, true))
 end
 
----@param notifyOnSuccess boolean
+---@param notifyOnSuccess boolean set to false for regularly occurring syncs
 local function syncAllGitRepos(notifyOnSuccess)
 	for _, repo in pairs(config.repos) do
 		repoSync(repo)
@@ -72,17 +75,17 @@ local function syncAllGitRepos(notifyOnSuccess)
 				config.repos,
 				function(r) return not (hs.fnutils.contains(syncedRepos, r)) end
 			)
-			local syncedIcons = hs.fnutils.map(syncedRepos, function(r) return r.icon end) or {}
-			local failedIcons = hs.fnutils.map(failedRepos, function(r) return r.icon end) or {}
 
 			if #syncedRepos > 0 then
+				local syncedIcons = hs.fnutils.map(syncedRepos, function(r) return r.icon end) or {}
 				print("🔁 Sync done: " .. table.concat(syncedIcons))
-				if notifyOnSuccess then hs.notify.show("Hammerspoon", "", "🔁 Sync done") end
+				if notifyOnSuccess then notify("🔁 Sync done") end
 			end
 			if #failedRepos > 0 then
+				local failedIcons = hs.fnutils.map(failedRepos, function(r) return r.icon end) or {}
 				local failMsg = "🔁⚠️ Sync failed: " .. table.concat(failedIcons)
 				print(failMsg)
-				hs.notify.show("Hammerspoon", "", failMsg)
+				notify(failMsg)
 			end
 
 			syncedRepos = {} -- reset
