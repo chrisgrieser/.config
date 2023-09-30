@@ -31,21 +31,19 @@ local config = {
 --------------------------------------------------------------------------------
 -- REPO SYNC JOBS
 
-local syncSuccessIcons = {}
+local syncedRepos = {}
 local syncTasks = {}
 
----@param name string
----@param icon string
----@param scriptPath string
-local function repoSync(name, icon, scriptPath)
-	if syncTasks[name] and syncTasks[name]:isRunning() then return end
+---@param repo { name: string, icon: string, scriptPath: string }
+local function repoSync(repo)
+	if syncTasks[repo.name] and syncTasks[repo.name]:isRunning() then return end
 
-	syncTasks[name] = hs.task
-		.new(scriptPath, function(exitCode, _, stdErr)
+	syncTasks[repo.name] = hs.task
+		.new(repo.scriptPath, function(exitCode, _, stdErr)
 			if exitCode == 0 then
-				table.insert(syncSuccessIcons, icon)
+				table.insert(syncedRepos, repo)
 			else
-				u.notify(("%s⚠️️ %s Sync: %s"):format(icon, name, stdErr))
+				u.notify(("%s⚠️️ %s Sync: %s"):format(repo.icon, repo.name, stdErr))
 			end
 		end)
 		:start()
@@ -65,21 +63,25 @@ end
 ---@param notifyOnSuccess boolean
 local function syncAllGitRepos(notifyOnSuccess)
 	for _, repo in pairs(config.repos) do
-		repoSync(repo.name, repo.icon, repo.scriptPath)
+		repoSync(repo)
 	end
 
 	AllSyncTimer = hs.timer
 		.waitUntil(noSyncInProgress, function()
-			local allSyncSuccess = #syncSuccessIcons == #config.repos
-			local successfulSyncs = "Sync done: " .. table.concat(syncSuccessIcons)
+			local successRepoIcons = hs.fnutils.map(syncedRepos, function(repo) return repo.icon end)
+			local failRepoIcons = hs.fnutils.map(syncedRepos, function(repo) return repo.icon end)
+			local successfulSyncs = "Sync done: " .. successRepoIcons
+
+			local allSyncSuccess = #syncedRepos == #config.repos
 			if allSyncSuccess then
 				local func = notifyOnSuccess and u.notify or print
 				func(successfulSyncs)
 			else
 				print(successfulSyncs)
-				print(("⚠️ %s Sync failed."):format(#config.repos - #syncSuccessIcons))
+				local failMsg = "Sync failed."
+				u.notify(failMsg)
 			end
-			syncSuccessIcons = {} -- reset
+			syncedRepos = {} -- reset
 			u.runWithDelays(config.postSyncHook.delaySecs, config.postSyncHook.func)
 		end)
 		:start()
