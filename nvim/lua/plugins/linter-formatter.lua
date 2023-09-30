@@ -33,7 +33,7 @@ local formatters = {
 	python = { "black" },
 	yaml = { "prettier" },
 	html = { "prettier" },
-	markdown = { "markdown-toc", "markdownlint" },
+	markdown = { "markdown-toc", "markdownlint", "injected" },
 	css = { "stylelint", "prettier" },
 	sh = { "shellcheck", "shfmt" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
@@ -41,15 +41,16 @@ local formatters = {
 	["*"] = { "codespell" },
 }
 
-local debuggers = { "debugpy" }
+if false then return end
 
 local dontInstall = {
 	-- installed externally due to its plugins: https://github.com/williamboman/mason.nvim/issues/695
 	"stylelint",
-	-- not real formatters
+	-- not real formatters, but pseudo-formatters from conform.nvim
 	"trim_whitespace",
 	"trim_newlines",
 	"squeeze_blanks",
+	"injected",
 }
 
 ---given the linter- and formatter-list of nvim-lint and conform.nvim, extract a
@@ -102,6 +103,8 @@ end
 
 local function lintTriggers()
 	local function doLint()
+		if vim.bo.buftype ~= "" then return end
+
 		-- condition when to lint https://github.com/mfussenegger/nvim-lint/issues/370#issuecomment-1729671151
 		local lintersToUse = require("lint").linters_by_ft[vim.bo.filetype]
 		local hasNoSeleneConfig = vim.loop.fs_stat(vim.loop.cwd() .. "/selene.toml") == nil
@@ -220,7 +223,7 @@ return {
 			}
 
 			-- clean unused & install missing
-			vim.defer_fn(vim.cmd.MasonToolsInstall, 300)
+			vim.defer_fn(vim.cmd.MasonToolsInstall, 500)
 			vim.defer_fn(vim.cmd.MasonToolsClean, 1000) -- delayed, so noice.nvim is loaded before
 		end,
 	},
