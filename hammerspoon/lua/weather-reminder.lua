@@ -27,7 +27,7 @@ local function getOutsideTemp()
 	if not (u.betweenTime(18, 1) or u.betweenTime(8, 13)) then return end
 	hs.http.asyncGet(callUrl, nil, function(status, body, _)
 		if status ~= 200 then
-			print("🌡️ Warning: Could not get weather data: " .. status)
+			print("⚠️🌡️ Could not get weather data: " .. status)
 			return
 		end
 		---@diagnostic disable-next-line: undefined-field
