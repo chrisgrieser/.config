@@ -70,7 +70,7 @@ local function syncAllGitRepos(notifyOnSuccess)
 		.waitUntil(noSyncInProgress, function()
 			local failedRepos = hs.fnutils.filter(
 				config.repos,
-				function(r) return hs.fnutils.contains(syncedRepos, r) end
+				function(r) return not (hs.fnutils.contains(syncedRepos, r)) end
 			)
 			local syncedIcons = hs.fnutils.map(syncedRepos, function(r) return r.icon end) or {}
 			local failedIcons = hs.fnutils.map(failedRepos, function(r) return r.icon end) or {}
