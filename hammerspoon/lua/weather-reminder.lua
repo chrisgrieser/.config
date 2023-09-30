@@ -56,7 +56,7 @@ end
 --------------------------------------------------------------------------------
 
 -- run once on startup
-if not u.isReloading() then getOutsideTemp() end
+if u.isSystemStart() then getOutsideTemp() end
 
 -- run on timer
 WeatherReminder = hs.timer.doEvery(60 * checkIntervalMins, getOutsideTemp):start()

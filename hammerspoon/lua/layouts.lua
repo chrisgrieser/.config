@@ -179,7 +179,7 @@ DisplayCountWatcher = hs.screen.watcher
 u.hotkey(u.hyper, "home", selectLayout)
 
 -- 3. Systemstart
-if not u.isReloading() then selectLayout() end
+if u.isSystemStart() then selectLayout() end
 
 -- 4. Waking
 local c = hs.caffeinate.watcher

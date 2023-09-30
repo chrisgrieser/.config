@@ -88,7 +88,7 @@ end
 -- TRIGGERS
 
 -- 1. Systemstart
-if not u.isReloading() then
+if u.isSystemStart() then
 	-- with delay, to avoid importing duplicate reminders due to reminders
 	-- that are not being synced yet
 	u.runWithDelays(15, M.reminderToSidenotes)
