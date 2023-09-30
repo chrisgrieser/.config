@@ -82,7 +82,7 @@ local function syncAllGitRepos(notifyOnSuccess)
 			if #failedRepos > 0 then
 				local failMsg = "🔁⚠️ Sync failed: " .. table.concat(failedIcons)
 				print(failMsg)
-				hs.notify.new("Hammerspoon", "", failMsg)
+				hs.notify.show("Hammerspoon", "", failMsg)
 			end
 
 			syncedRepos = {} -- reset
