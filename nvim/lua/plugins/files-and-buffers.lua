@@ -1,7 +1,6 @@
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
-
 return {
 	{ -- auto-save buffers
 		"okuuva/auto-save.nvim",
@@ -52,8 +51,11 @@ return {
 		},
 	},
 	{ -- convenience file operations
-		"chrisgrieser/nvim-genghis",
-		dependencies = "stevearc/dressing.nvim",
+		"bugabinga/nvim-genghis",
+		dependencies = {
+			"stevearc/dressing.nvim",
+			{ "antosha417/nvim-lsp-file-operations", opts = true }, -- renaming files via LSP
+		},
 		init = function() vim.g.genghis_disable_commands = true end,
 		keys = {
 			-- stylua: ignore start

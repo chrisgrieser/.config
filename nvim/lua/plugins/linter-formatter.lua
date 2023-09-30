@@ -165,7 +165,7 @@ end
 
 return {
 	{ -- Linter integration
-		"chrisgrieser/nvim-lint", -- PENDING https://github.com/mfussenegger/nvim-lint/pull/377
+		"mfussenegger/nvim-lint", 
 		event = "VeryLazy",
 		config = function()
 			linterConfigs()
