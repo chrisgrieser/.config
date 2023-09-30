@@ -41,7 +41,7 @@ local formatters = {
 	["*"] = { "codespell" },
 }
 
-if false then return end
+local debuggers = { "debugpy" }
 
 local dontInstall = {
 	-- installed externally due to its plugins: https://github.com/williamboman/mason.nvim/issues/695
