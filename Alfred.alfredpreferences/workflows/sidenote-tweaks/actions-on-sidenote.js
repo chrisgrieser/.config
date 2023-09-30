@@ -71,7 +71,7 @@ function run(argv) {
 	const sidenotes = Application("SideNotes");
 
 	// determine actions
-	const doArchive = argv[0].includes("archive");
+	let doArchive = argv[0].includes("archive");
 	const doOpenUrl = argv[0].includes("openurl");
 	const doCopy = argv[0].includes("copy");
 	const doExport = argv[0].includes("export");
@@ -103,7 +103,9 @@ function run(argv) {
 
 		// dynamically decide whether to delete note
 		const numberOfLines = details.split("\n").length;
-		if (numberOfLines <= 2 && urls.length === 1) archiveNote(noteObj, safeTitle);
+		if (numberOfLines <= 2 && urls.length === 1) {
+			archiveNote(noteObj, safeTitle);
+		}
 	}
 
 	if (doArchive) archiveNote(noteObj, safeTitle);

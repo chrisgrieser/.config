@@ -189,8 +189,8 @@ local pinWinNr
 ---Toggles pin-window
 function M.pinWin()
 	-- CONFIG
-	local width = 40
-	local height = 11
+	local width = 0.45
+	local height = 0.35
 
 	-- if already open, just close is
 	local pinWinOpen = vim.tbl_contains(vim.api.nvim_list_wins(), pinWinNr)
@@ -203,8 +203,8 @@ function M.pinWin()
 	local bufnr = 0 -- current buffer
 	pinWinNr = vim.api.nvim_open_win(bufnr, false, {
 		relative = "win",
-		width = width,
-		height = height,
+		width = math.floor(vim.api.nvim_win_get_width(0) * width),
+		height = math.floor(vim.api.nvim_win_get_height(0) * height),
 		anchor = "NE",
 		row = 0,
 		col = vim.api.nvim_win_get_width(0),
@@ -216,56 +216,6 @@ function M.pinWin()
 	vim.api.nvim_win_set_option(pinWinNr, "scrolloff", 2)
 	vim.api.nvim_win_set_option(pinWinNr, "sidescrolloff", 2)
 	vim.api.nvim_win_set_option(pinWinNr, "signcolumn", "no")
-end
-
---------------------------------------------------------------------------------
-
----@param direction "up"|"down"
-function M.scrollHoverWin(direction)
-	local a = vim.api
-	local scrollCmd = (direction == "down" and "5j" or "5k")
-	local winIds = a.nvim_tabpage_list_wins(0)
-	for _, winId in ipairs(winIds) do
-		local isHover = a.nvim_win_get_config(winId).relative ~= ""
-			and a.nvim_win_get_config(winId).focusable
-		if isHover then
-			a.nvim_set_current_win(winId)
-			normal(scrollCmd)
-			return
-		end
-	end
-	u.notify("No floating windows found. ", "warn")
-end
-
----@param direction "up"|"down"
-function M.gotoNextIndentChange(direction)
-	local isBlankLine = function(lnum) return vim.fn.getline(lnum):find("^%s*$") end
-
-	local lastLineNum = vim.api.nvim_buf_line_count(0)
-	local increment = direction == "up" and -1 or 1
-	local stopAtLine = direction == "up" and 1 or lastLineNum
-	local lineNum, colNum = unpack(vim.api.nvim_win_get_cursor(0))
-
-	-- blank lines always have indent 0, so we go to the next non-blank to
-	-- determine the "true" indent
-	local currentIndent
-	while true do
-		currentIndent = vim.fn.indent(lineNum)
-		if not isBlankLine(lineNum) then break end
-		lineNum = lineNum + increment
-	end
-
-	-- having the current indent, we jump to the next non-blank
-	local targetLineNum
-	for i = lineNum, stopAtLine, increment do
-		targetLineNum = i
-		local indent = vim.fn.indent(i)
-		if indent ~= currentIndent and not isBlankLine(i) then break end
-	end
-
-	-- set cursor
-	vim.api.nvim_win_set_cursor(0, { targetLineNum, colNum })
-	normal("^")
 end
 
 --------------------------------------------------------------------------------

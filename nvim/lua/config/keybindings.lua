@@ -33,18 +33,10 @@ keymap({ "n", "x" }, "K", "6gk")
 -- dj = delete 2 lines, dJ = delete 3 lines
 keymap("o", "J", "2j")
 
--- indent-wise movement
-keymap({ "n", "x" }, "gj", function() require("funcs.quality-of-life").gotoNextIndentChange("down") end)
-keymap({ "n", "x" }, "gk", function() require("funcs.quality-of-life").gotoNextIndentChange("up") end)
-
 -- Jump history
 keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
 -- overwrites nvim default: https://neovim.io/doc/user/vim_diff.html#default-mappings
 keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward", unique = false })
-
--- Changes
-keymap("n", "gc", "g;", { desc = "Goto older change" })
-keymap("n", "gC", "g,", { desc = "Goto newer change" })
 
 -- SEARCH
 keymap("n", "-", "/")
@@ -301,8 +293,6 @@ keymap("n", "ge", function() vim.diagnostic.goto_next { float = true } end, { de
 keymap("n", "gE", function() vim.diagnostic.goto_prev { float = true } end, { desc = "󰒕 Previous Diagnostic" })
 keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Symbols" })
 keymap("n", "gw", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols" })
-keymap("n", "<PageDown>", function() require("funcs.quality-of-life").scrollHoverWin("down") end, { desc = "󰮷 Scroll hover down" })
-keymap("n", "<PageUp>", function() require("funcs.quality-of-life").scrollHoverWin("up") end, { desc = "󰮽 Scroll hover up" })
 -- stylua: ignore end
 
 keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename" })
