@@ -10,10 +10,6 @@ function writeToFile(filepath, text) {
 	str.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);
 }
 
-const urlRegex =
-	/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/g;
-const exportFolder = $.getenv("export_folder").replace(/^~/, app.pathTo("home folder"));
-
 //──────────────────────────────────────────────────────────────────────────────
 
 // HACK since notes are not directly accessible via their id, but only from
@@ -26,8 +22,7 @@ const exportFolder = $.getenv("export_folder").replace(/^~/, app.pathTo("home fo
 
 /** @param {string} noteId */
 function getNoteObj(noteId) {
-	const sidenotes = Application("SideNotes");
-	const folders = sidenotes.folders;
+	const folders = Application("SideNotes").folders;
 	let noteObj;
 	for (let i = 0; i < folders.length; i++) {
 		const notesInFolder = folders[i].notes;
@@ -44,7 +39,7 @@ function getNoteObj(noteId) {
 
 function closeSideNotes() {
 	// apparently there is no JXA API for it, therefore done via keystrokes
-	// since it is ensured that SideNotes is the most frontmost app
+	// since it is already ensured that SideNotes is the most frontmost app
 	Application("System Events").keystroke("w", { using: ["command down"] });
 }
 
@@ -94,18 +89,18 @@ function run(argv) {
 	//───────────────────────────────────────────────────────────────────────────
 
 	if (doOpenUrl) {
+		const urlRegex =
+			/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/g;
 		const urls = content.match(urlRegex);
-		if (!urls) return "!� No URL found."; // notification
+		if (!urls) return "No URL found."; // notification
 		closeSideNotes(); // needs to close before opening URL due to focus loss
 		for (const url of urls) {
 			app.openLocation(url);
 		}
 
-		// dynamically decide whether to delete note
+		// dynamically decide whether to archive the note
 		const numberOfLines = details.split("\n").length;
-		if (numberOfLines <= 2 && urls.length === 1) {
-			archiveNote(noteObj, safeTitle);
-		}
+		if (numberOfLines <= 2 && urls.length === 1) doArchive = true;
 	}
 
 	if (doArchive) archiveNote(noteObj, safeTitle);
@@ -117,12 +112,8 @@ function run(argv) {
 
 	if (doExport) {
 		if (id === "current") closeSideNotes();
-		// ensure line breaks before headings
-		// (sometimes skipped since SideNotes UI makes it not apparent)
-		const exportContent = content.replace(/\n+(?=#+ )/g, "\n\n");
-
-		const exportPath = `${exportFolder}/${safeTitle}.md`;
-		writeToFile(exportPath, exportContent);
+		const exportPath = `${$.getenv("export_location")}/${safeTitle}.md`;
+		writeToFile(exportPath, content);
 		app.doShellScript(`open -R "${exportPath}"`);
 	}
 
