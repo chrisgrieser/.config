@@ -68,19 +68,23 @@ local function syncAllGitRepos(notifyOnSuccess)
 
 	AllSyncTimer = hs.timer
 		.waitUntil(noSyncInProgress, function()
-			local successRepoIcons = hs.fnutils.map(syncedRepos, function(repo) return repo.icon end)
-			local failRepoIcons = hs.fnutils.map(syncedRepos, function(repo) return repo.icon end)
-			local successfulSyncs = "Sync done: " .. successRepoIcons
+			local failedRepos = hs.fnutils.filter(
+				config.repos,
+				function(r) return hs.fnutils.contains(syncedRepos, r) end
+			)
+			local syncedIcons = hs.fnutils.map(syncedRepos, function(r) return r.icon end) or {}
+			local failedIcons = hs.fnutils.map(failedRepos, function(r) return r.icon end) or {}
 
-			local allSyncSuccess = #syncedRepos == #config.repos
-			if allSyncSuccess then
-				local func = notifyOnSuccess and u.notify or print
-				func(successfulSyncs)
-			else
-				print(successfulSyncs)
-				local failMsg = "Sync failed."
-				u.notify(failMsg)
+			if #syncedRepos > 0 then
+				print("🔁 Sync done: " .. table.concat(syncedIcons))
+				if notifyOnSuccess then hs.notify.show("Hammerspoon", "", "🔁 Sync done.") end
 			end
+			if #failedRepos > 0 then
+				local failMsg = "🔁⚠️ Sync failed: " .. table.concat(failedIcons)
+				print(failMsg)
+				hs.notify.new("Hammerspoon", "", failMsg)
+			end
+
 			syncedRepos = {} -- reset
 			u.runWithDelays(config.postSyncHook.delaySecs, config.postSyncHook.func)
 		end)
@@ -101,10 +105,7 @@ RepoSyncTimer = hs.timer
 	:start()
 
 -- 3. manually via Alfred: `hammerspoon://sync-repos`
-u.urischeme("sync-repos", function()
-	u.app("Hammerspoon"):hide() -- so the previous app does not loose focus
-	syncAllGitRepos(true)
-end)
+u.urischeme("sync-repos", function() syncAllGitRepos(true) end)
 
 -- 4. when going to sleep or when unlocking
 local c = hs.caffeinate.watcher

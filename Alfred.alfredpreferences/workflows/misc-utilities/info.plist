@@ -113,7 +113,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>318E19F4-2DB1-4B3E-B1E2-F288DF9FF244</string>
+				<string>DC943639-4DB9-44BA-B722-273F16EEED36</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -136,23 +136,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
+				<key>concurrently</key>
 				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>open -g "hammerspoon://sync-repos"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
 				<string></string>
-				<key>url</key>
-				<string>hammerspoon://sync-repos</string>
+				<key>type</key>
+				<integer>11</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>318E19F4-2DB1-4B3E-B1E2-F288DF9FF244</string>
+			<string>DC943639-4DB9-44BA-B722-273F16EEED36</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -812,15 +814,6 @@ fi</string>
 			<key>ypos</key>
 			<real>245</real>
 		</dict>
-		<key>318E19F4-2DB1-4B3E-B1E2-F288DF9FF244</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>190</real>
-			<key>ypos</key>
-			<real>15</real>
-		</dict>
 		<key>7F470F6C-F1DD-4F6C-A598-CA405EA0B456</key>
 		<dict>
 			<key>colorindex</key>
@@ -900,6 +893,15 @@ fi</string>
 			<real>605</real>
 			<key>ypos</key>
 			<real>330</real>
+		</dict>
+		<key>DC943639-4DB9-44BA-B722-273F16EEED36</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>15</real>
 		</dict>
 		<key>DE6D43CB-FDC8-4501-B0BC-6EDCECD2043A</key>
 		<dict>
