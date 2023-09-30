@@ -54,8 +54,6 @@ end
 -- LAYOUTS
 
 local function workLayout()
-	print("🔲 WorkLayout: loading")
-
 	-- screen & visuals
 	darkmode.AutoSwitch()
 	visuals.holeCover()
@@ -82,11 +80,10 @@ local function workLayout()
 	-- finish
 	require("lua.sidenotes").reminderToSidenotes()
 	u.whenAppWinAvailable("Discord", function() u.app(env.mailApp):activate() end)
-	print("🔲 WorkLayout: done")
+	print("🔲 Loaded WorkLayout")
 end
 
 local function movieLayout()
-	print("🔲 MovieLayout: loading")
 	local targetMode = env.isAtMother and "mother-movie" or "movie" -- different PWAs due to not being M1 device
 	dockSwitcher(targetMode)
 	wu.iMacDisplay:setBrightness(0)
@@ -107,7 +104,7 @@ local function movieLayout()
 		"Obsidian",
 		"lo-rain",
 	}
-	print("🔲 MovieModeLayout: done")
+	print("🔲 Loaded MovieModeLayout")
 end
 
 ---select layout depending on number of screens, and prevent concurrent runs
