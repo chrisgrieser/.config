@@ -3,7 +3,7 @@ local s = {
 	emojis = { name = "emoji", keyword_length = 2 },
 	nerdfont = { name = "nerdfont", keyword_length = 2 },
 	buffer = { name = "buffer", keyword_length = 4 },
-	fuzzybuffer = { name = "fuzzy_buffer", max_item_count = 3 },
+	fuzzy_buffer = { name = "fuzzy_buffer", max_item_count = 3 },
 	path = { name = "path" },
 	zsh = { name = "zsh" },
 	snippets = { name = "luasnip" },
@@ -11,8 +11,8 @@ local s = {
 	treesitter = { name = "treesitter" },
 	cmdline_history = { name = "cmdline_history", keyword_length = 2 },
 	cmdline = { name = "cmdline" },
+	signature_help = { name = "nvim_lsp_signature_help" },
 }
-
 local source_icons = {
 	treesitter = "",
 	buffer = "󰽙",
@@ -25,8 +25,10 @@ local source_icons = {
 	path = "",
 	cmdline = "󰘳",
 	cmdline_history = "󰋚",
+	nvim_lsp_signature_help = "󰘎",
 }
 local defaultSources = {
+	s.signature_help,
 	s.snippets,
 	s.lsp,
 	s.emojis,
@@ -177,6 +179,7 @@ local function filetypeCompletionConfig()
 			return not (line:find("%s%-%-?$") or line:find("^%-%-?$"))
 		end,
 		sources = cmp.config.sources {
+			s.signature_help,
 			s.snippets,
 			s.lsp,
 			s.nerdfont, -- add nerdfont for config
@@ -187,6 +190,7 @@ local function filetypeCompletionConfig()
 
 	cmp.setup.filetype("css", {
 		sources = cmp.config.sources {
+			s.signature_help,
 			s.lsp,
 			s.snippets,
 			s.emojis,
@@ -246,8 +250,8 @@ local function filetypeCompletionConfig()
 		},
 	})
 
-	-- config files (e.g. ignore files)
-	cmp.setup.filetype("conf", {
+	-- config files
+	cmp.setup.filetype({ "conf", "ini", "gitignore" }, {
 		sources = cmp.config.sources {
 			s.snippets,
 			s.path,
@@ -299,7 +303,7 @@ local function cmdlineCompletionConfig()
 
 	cmp.setup.cmdline({ "/", "?" }, {
 		mapping = cmp.mapping.preset.cmdline(),
-		sources = { s.fuzzybuffer },
+		sources = { s.fuzzy_buffer },
 	})
 end
 
@@ -325,6 +329,7 @@ return {
 			"tamago324/cmp-zsh", -- some shell completions
 			"ray-x/cmp-treesitter",
 			"hrsh7th/cmp-nvim-lsp", -- LSP input
+			"hrsh7th/cmp-nvim-lsp-signature-help", -- signature help
 			"L3MON4D3/LuaSnip", -- snippet engine
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 		},
