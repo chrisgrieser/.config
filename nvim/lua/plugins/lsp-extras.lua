@@ -134,7 +134,8 @@ return {
 			floating_window = false,
 			always_trigger = true,
 			hint_prefix = "󰘎 ",
-			hint_scheme = "NonText", -- = highlight group
+			hint_scheme = "DiagnosticHint", -- = highlight group
+			hint_inline = function() return false end, -- TODO change with 0.10
 		},
 	},
 	{ -- better LSP variable-rename
