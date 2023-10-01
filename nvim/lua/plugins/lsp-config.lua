@@ -65,12 +65,6 @@ serverConfigs.lua_ls = {
 			format = { enable = false }, -- using stylua instead
 		},
 	},
-
-	on_attach = function(client)
-		-- enable `willRename` for `nvim-lsp-file-operations`
-		client.server_capabilities.workspace.fileOperations.willRename =
-			client.server_capabilities.workspace.fileOperations.didRename
-	end,
 }
 
 --------------------------------------------------------------------------------
