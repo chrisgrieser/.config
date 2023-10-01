@@ -11,7 +11,6 @@ local s = {
 	treesitter = { name = "treesitter" },
 	cmdline_history = { name = "cmdline_history", keyword_length = 2 },
 	cmdline = { name = "cmdline" },
-	signature_help = { name = "nvim_lsp_signature_help" },
 }
 local source_icons = {
 	treesitter = "",
@@ -25,10 +24,8 @@ local source_icons = {
 	path = "",
 	cmdline = "󰘳",
 	cmdline_history = "󰋚",
-	nvim_lsp_signature_help = "󰘎",
 }
 local defaultSources = {
-	s.signature_help,
 	s.snippets,
 	s.lsp,
 	s.emojis,
@@ -179,7 +176,6 @@ local function filetypeCompletionConfig()
 			return not (line:find("%s%-%-?$") or line:find("^%-%-?$"))
 		end,
 		sources = cmp.config.sources {
-			s.signature_help,
 			s.snippets,
 			s.lsp,
 			s.nerdfont, -- add nerdfont for config
@@ -190,7 +186,6 @@ local function filetypeCompletionConfig()
 
 	cmp.setup.filetype("css", {
 		sources = cmp.config.sources {
-			s.signature_help,
 			s.lsp,
 			s.snippets,
 			s.emojis,
@@ -329,7 +324,6 @@ return {
 			"tamago324/cmp-zsh", -- some shell completions
 			"ray-x/cmp-treesitter",
 			"hrsh7th/cmp-nvim-lsp", -- LSP input
-			"hrsh7th/cmp-nvim-lsp-signature-help", -- signature help
 			"L3MON4D3/LuaSnip", -- snippet engine
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 		},
