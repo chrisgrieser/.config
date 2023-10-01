@@ -26,6 +26,8 @@ return {
 						["<C-CR>"] = actions.enter_win("preview"),
 						["j"] = actions.next_location, -- `.next` goes to next item, `.next_location` skips groups
 						["k"] = actions.previous_location,
+						["<PageUp>"] = actions.preview_scroll_win(5),
+						["<PageDown>"] = actions.preview_scroll_win(-5),
 
 						-- consistent with the respective keymap for telescope
 						["<D-s>"] = function()
@@ -35,8 +37,7 @@ return {
 					},
 					preview = {
 						["<C-CR>"] = actions.enter_win("list"),
-						["<PageUp>"] = actions.preview_scroll_win(5),
-						["<PageDown>"] = actions.preview_scroll_win(-5),
+						["Q"] = false,
 					},
 				},
 				hooks = {

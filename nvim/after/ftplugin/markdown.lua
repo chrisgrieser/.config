@@ -108,7 +108,7 @@ keymap("n", "zg", function()
 			return
 		end
 	end
-	return "zg" -- regular "zg" run via expr = true
+	return "zg" --[[ -- regular "zg" run via expr = true ]]
 end, { desc = "󰓆 Add Word", buffer = true, expr = true })
 
 --------------------------------------------------------------------------------
