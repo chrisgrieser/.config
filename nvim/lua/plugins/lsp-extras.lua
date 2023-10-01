@@ -20,6 +20,7 @@ return {
 				},
 				preview_win_opts = { number = false, wrap = false },
 				folds = { folded = false },
+				indent_lines = { icon = " " },
 				mappings = {
 					list = {
 						["<C-CR>"] = actions.enter_win("preview"),
@@ -34,27 +35,27 @@ return {
 					},
 					preview = {
 						["<C-CR>"] = actions.enter_win("list"),
+						["<PageUp>"] = actions.preview_scroll_win(5),
+						["<PageDown>"] = actions.preview_scroll_win(-5),
 					},
 				},
 				hooks = {
-					-- jump directly if there is only one references
-					-- filter out current line, if references
 					before_open = function(results, open, jump, method)
+						-- filter out current line, if references
 						if method == "references" then
-							local filtered = {}
 							local curLn = vim.fn.line(".")
 							local curUri = vim.uri_from_bufnr(0)
-							for _, result in pairs(results) do
+							results = vim.tbl_filter(function(result)
 								local targetLine = result.range.start.line + 1 -- LSP counts off-by-one
 								local targetUri = result.uri or result.targetUri
-								local isCurrentLine = targetLine == curLn and (targetUri == curUri)
-								if not isCurrentLine then table.insert(filtered, result) end
-							end
-							results = filtered
+								local notCurrentLine = (targetLine ~= curLn) or (targetUri ~= curUri)
+								return notCurrentLine
+							end, results)
 						end
 
+						-- jump directly if there is only one references
 						if #results == 0 then
-							vim.notify("No " .. method .. " found")
+							vim.notify("No " .. method .. " found.")
 						elseif #results == 1 then
 							jump(results[1])
 						else
@@ -133,8 +134,8 @@ return {
 		opts = {
 			floating_window = false,
 			always_trigger = true,
-			hint_prefix = "󰘎 ",
-			hint_scheme = "DiagnosticHint", -- = highlight group
+			hint_prefix = "󰏪 ",
+			hint_scheme = "@parameter", -- highlight group
 			hint_inline = function() return false end, -- TODO change with 0.10
 		},
 	},
@@ -150,7 +151,7 @@ return {
 				if filesChanged > 1 then vim.cmd("silent wall") end
 
 				-- FIX making the cmdline-history not navigable
-				-- PENDING: https://github.com/smjonas/inc-rename.nvim/issues/40
+				-- PENDING https://github.com/smjonas/inc-rename.nvim/issues/40
 				vim.fn.histdel("cmd", "^IncRename ")
 			end,
 		},
