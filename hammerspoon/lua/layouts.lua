@@ -179,13 +179,14 @@ u.hotkey(u.hyper, "home", selectLayout)
 if u.isSystemStart() then selectLayout() end
 
 -- 4. Waking
+local recentlyWoke
 local c = hs.caffeinate.watcher
 UnlockWatcher = c.new(function(event)
-	if RecentlyWoke then return end
-	RecentlyWoke = true
+	if recentlyWoke then return end
+	recentlyWoke = true
 	local hasWoken = event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock
 
 	print("🔓 Wake")
 	if hasWoken then u.runWithDelays(0.5, selectLayout) end -- delay for recognizing screens
-	u.runWithDelays(3, function() RecentlyWoke = false end)
+	u.runWithDelays(3, function() recentlyWoke = false end)
 end):start()

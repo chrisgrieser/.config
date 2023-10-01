@@ -1,5 +1,5 @@
 return {
-	{
+	{ -- smart commit & amend actions
 		"chrisgrieser/nvim-tinygit",
 		dependencies = "stevearc/dressing.nvim",
 		keys = {
@@ -80,14 +80,15 @@ return {
 			preview_config = { border = require("config.utils").borderStyle },
 		},
 	},
-	{ -- diff / merge
+	{ -- diff / merge / file history
 		"sindrets/diffview.nvim",
 		dependencies = "nvim-lua/plenary.nvim",
+		cmd = { "DiffviewOpen", "DiffviewFileHistory" },
 		keys = {
 			{
 				"<leader>gd",
 				function()
-					vim.ui.input({ prompt = "󰢷 Git Pickaxe (empty = full history)" }, function(pickaxe)
+					vim.ui.input({ prompt = "󰢷 Git Pickaxe\n(empty = full history)" }, function(pickaxe)
 						if not pickaxe then return end
 
 						local query = pickaxe ~= "" and (" -G'%s'"):format(pickaxe) or ""

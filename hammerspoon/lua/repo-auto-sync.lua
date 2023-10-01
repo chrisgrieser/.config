@@ -39,8 +39,6 @@ local syncTasks = {}
 
 ---@param repo { name: string, icon: string, scriptPath: string }
 local function repoSync(repo)
-	if syncTasks[repo.name] and syncTasks[repo.name]:isRunning() then return end
-
 	syncTasks[repo.name] = hs.task
 		.new(repo.scriptPath, function(exitCode, _, stdErr)
 			if exitCode == 0 then
@@ -65,6 +63,11 @@ end
 
 ---@param notifyOnSuccess boolean set to false for regularly occurring syncs
 local function syncAllGitRepos(notifyOnSuccess)
+	if not noSyncInProgress() then
+		print("🔁 Sync already in progress")
+		return
+	end
+
 	for _, repo in pairs(config.repos) do
 		repoSync(repo)
 	end
@@ -111,15 +114,20 @@ RepoSyncTimer = hs.timer
 u.urischeme("sync-repos", function() syncAllGitRepos(true) end)
 
 -- 4. when going to sleep or when unlocking
+local recentlyTriggered
 local c = hs.caffeinate.watcher
 SleepWatcherForRepoSync = c.new(function(event)
 	if env.isProjector() then return end
+	if recentlyTriggered then return end
+	recentlyTriggered = true
+
 	local lockOrSleep = event == c.screensDidLock
 		or event == c.screensDidSleep
 		or event == c.screensDidUnlock
 		or event == c.systemDidWake
 		or event == c.screensDidWake
 	if lockOrSleep then syncAllGitRepos(true) end
+	u.runWithDelays(3, function() recentlyTriggered = false end)
 end):start()
 
 -- 5. Every morning at 8:00, when at home

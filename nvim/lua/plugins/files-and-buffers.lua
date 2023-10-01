@@ -54,9 +54,9 @@ return {
 		"bugabinga/nvim-genghis",
 		dependencies = {
 			"stevearc/dressing.nvim",
-			-- renaming files via LSP, when `willRename` capability exists 
+			-- INFO renaming files via LSP, when `willRename` capability exists 
 			-- (only rust_analyzer & tsserver)
-			-- { "antosha417/nvim-lsp-file-operations", opts = true },
+			{ "antosha417/nvim-lsp-file-operations", opts = true },
 		},
 		init = function() vim.g.genghis_disable_commands = true end,
 		keys = {
