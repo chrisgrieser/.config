@@ -64,7 +64,7 @@ end
 ---@param notifyOnSuccess boolean set to false for regularly occurring syncs
 local function syncAllGitRepos(notifyOnSuccess)
 	if not noSyncInProgress() then
-		print("🔁 Sync already in progress")
+		print("🔁 Sync already in progress.")
 		return
 	end
 
@@ -86,7 +86,7 @@ local function syncAllGitRepos(notifyOnSuccess)
 			end
 			if #failedRepos > 0 then
 				local failedIcons = hs.fnutils.map(failedRepos, function(r) return r.icon end) or {}
-				local failMsg = "🔁⚠️ Sync failed: " .. table.concat(failedIcons)
+				local failMsg = "🔁⚠️ Warning – Sync failed: " .. table.concat(failedIcons)
 				print(failMsg)
 				notify(failMsg)
 			end
