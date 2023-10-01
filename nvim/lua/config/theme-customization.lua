@@ -70,6 +70,21 @@ local function themeModifications()
 		end, 100)
 		updateHighlight("GitSignsChange", "guifg=#acaa62")
 		updateHighlight("GitSignsAdd", "guifg=#369a96")
+	elseif theme == "dawnfox" then
+		updateHighlight("IblIndent", "guifg=#e0cfbd")
+		updateHighlight("ColorColumn", "guibg=#eee6dc")
+		updateHighlight("VertSplit", "guifg=#b29b84")
+		for _, v in pairs(vimModes) do
+			updateHighlight("lualine_y_diff_modified_" .. v, "guifg=#a9810a")
+		end
+		updateHighlight("Operator", "guifg=#846a52")
+		-- FIX python highlighting issues
+		linkHighlight("@type.builtin.python", "Typedef")
+		linkHighlight("@string.documentation.python", "Typedef")
+		linkHighlight("@keyword.operator.python", "Operator")
+
+	-----------------------------------------------------------------------------
+
 	elseif theme == "gruvbox-material" or theme == "sonokai" then
 		local commentColor = u.getHighlightValue("Comment", "fg")
 		updateHighlight("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
@@ -117,20 +132,6 @@ local function themeModifications()
 		updateHighlight("IncSearch", "guifg=#FFFFFF")
 		linkHighlight("TabLineSel", "lualine_a_normal")
 		linkHighlight("TabLineFill", "lualine_c_normal")
-	-----------------------------------------------------------------------------
-	-- light themes
-	elseif theme == "dawnfox" then
-		updateHighlight("IblIndent", "guifg=#e0cfbd")
-		updateHighlight("ColorColumn", "guibg=#eee6dc")
-		updateHighlight("VertSplit", "guifg=#b29b84")
-		for _, v in pairs(vimModes) do
-			updateHighlight("lualine_y_diff_modified_" .. v, "guifg=#a9810a")
-		end
-		updateHighlight("Operator", "guifg=#846a52")
-		-- FIX python highlighting issues
-		linkHighlight("@type.builtin.python", "Typedef")
-		linkHighlight("@string.documentation.python", "Typedef")
-		linkHighlight("@keyword.operator.python", "Operator")
 	elseif theme == "rose-pine" and mode == "light" then
 		updateHighlight("IblIndent", "guifg=#e3d4c4")
 		updateHighlight("ColorColumn", "guibg=#eee6dc")
