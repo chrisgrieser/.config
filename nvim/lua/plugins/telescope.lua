@@ -149,7 +149,7 @@ local function telescopeConfig()
 					height = 0.75,
 					width = 0.99,
 					preview_cutoff = 70,
-					preview_width = { 0.5 , min = 30 },
+					preview_width = { 0.55, min = 30 },
 				},
 			},
 		},
@@ -266,7 +266,7 @@ return {
 	},
 	{ -- better recent files
 		"smartpde/telescope-recent-files",
-		dependencies =  "nvim-telescope/telescope.nvim" ,
+		dependencies = "nvim-telescope/telescope.nvim",
 		config = function() require("telescope").load_extension("recent_files") end,
 		keys = {
 			{
