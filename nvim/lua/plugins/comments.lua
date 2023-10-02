@@ -1,6 +1,3 @@
-local u = require("config.utils")
---------------------------------------------------------------------------------
-
 return {
 	{ -- comment
 		"numToStr/Comment.nvim",

@@ -242,6 +242,13 @@ local function telescopeConfig()
 		},
 		extensions = {
 			smart_open = { match_algorithm = "fzf" },
+			recent_files = {
+				prompt_prefix = "󰋚 ",
+				previewer = false,
+				layout_config = {
+					horizontal = { anchor = "W", width = 0.45, height = 0.55 },
+				},
+			},
 		},
 	}
 end
@@ -257,16 +264,21 @@ return {
 		},
 		config = telescopeConfig,
 	},
+	{ -- better recent files
+		"smartpde/telescope-recent-files",
+		dependencies =  "nvim-telescope/telescope.nvim" ,
+		config = function() require("telescope").load_extension("recent_files") end,
+		keys = {
+			{
+				"gr",
+				function() require("telescope").extensions.recent_files.pick() end,
+				desc = " Recent Files",
+			},
+		},
+	},
 	{ -- better sorting algorithm
 		"nvim-telescope/telescope-fzf-native.nvim",
 		config = function() require("telescope").load_extension("fzf") end,
 		build = "make",
-	},
-	{ -- frecency-based opener
-		"danielfalk/smart-open.nvim",
-		branch = "0.2.x",
-		dependencies = { "kkharji/sqlite.lua", "nvim-telescope/telescope-fzf-native.nvim" },
-		init = function() u.colorschemeMod("Directory", { link = "NonText" }) end,
-		config = function() require("telescope").load_extension("smart_open") end,
 	},
 }
