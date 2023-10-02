@@ -26,7 +26,6 @@ vim.filetype.add {
 -- move to custom location where they are synced independently from the dotfiles repo
 opt.undodir:prepend(u.vimDataDir .. "undo//")
 opt.viewdir = u.vimDataDir .. "view"
-opt.shadafile = u.vimDataDir .. "main.shada"
 opt.swapfile = false -- doesn't help and only creates useless files
 
 --------------------------------------------------------------------------------
@@ -38,7 +37,10 @@ opt.undofile = true -- enables persistent undo history
 -- with those chars from working
 local undopointChars = { ".", ",", ";", '"', ":", "'", "<Space>" }
 for _, char in pairs(undopointChars) do
-	vim.keymap.set("i", char, char .. "<C-g>u", { desc = "extra undopoint for " .. char, remap = true })
+	vim.keymap.set("i", char, function()
+		if vim.bo.buftype ~= "" then return char end
+		return char .. "<C-g>u"
+	end, { desc = "extra undopoint for " .. char, remap = true, expr = true })
 end
 
 --------------------------------------------------------------------------------

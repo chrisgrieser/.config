@@ -11,25 +11,26 @@ end
 -- If that files does not exist, open last existing oldfile.
 local function reOpenLastFile()
 	if vim.fn.argc() ~= 0 then return end
-	if vim.bo.filetype == "lazy" then vim.cmd.close() end
 
-	local lastFileExist = vim.loop.fs_stat(vim.api.nvim_get_mark("0", {})[4]) ~= nil
-	if lastFileExist then
-		vim.cmd.normal { "'0", bang = true }
-		pcall(vim.cmd.bwipeout, "#") -- remove leftover new buffer
-	else
+	-- if vim.bo.filetype == "lazy" then return end
+
+	local lastFile = vim.api.nvim_get_mark("0", {})[4]
+	local fileDoesNotExist = vim.loop.fs_stat(lastFile) == nil
+	if fileDoesNotExist then
 		local i = 0
-		local oldfile
 		repeat
 			i = i + 1
 			if i > #vim.v.oldfiles then return end
-			oldfile = vim.v.oldfiles[i]
-			local fileExists = vim.loop.fs_stat(oldfile) ~= nil
+			lastFile = vim.v.oldfiles[i]
+			local fileExists = vim.loop.fs_stat(lastFile) ~= nil
 		until fileExists
-		vim.cmd.edit(oldfile)
 	end
+	vim.cmd.edit(lastFile)
 end
-vim.defer_fn(reOpenLastFile, 1) -- after options, so correct shada file is read
+
+-- last file location stored in shada, therefore needs to be loaded before
+vim.opt.shadafile = require("config.utils").vimDataDir .. "main.shada"
+vim.defer_fn(reOpenLastFile, 1)
 
 --------------------------------------------------------------------------------
 
@@ -61,7 +62,7 @@ if vim.version().major == 0 and vim.version().minor >= 10 then
 		- vim.uv instead of vim.loop
 		- ftAbbr & abbreviations.lua: vim.keymap.set('ia', lhs, rhs, { buffer = true })
 		- inlay hints setup: https://www.reddit.com/r/neovim/comments/16tmzkh/comment/k2gpy16/?context=3
-		- change lsp-signature inline hint
+		- change lsp-signature to inline hint
 	]]
 	vim.notify(todo)
 end
