@@ -263,39 +263,51 @@ local function telescopeConfig()
 					horizontal = { anchor = "W", width = 0.45, height = 0.55 },
 				},
 			},
+			frecency = {
+				default_workspace = "CWD",
+				mappings = { i = keymappings_I },
+				path_display = { "tail" },
+				db_root = u.vimDataDir,
+			},
 		},
 	}
 end
 
 return {
-	{
+	{ -- fuzzy selector
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
-			"nvim-telescope/telescope-fzf-native.nvim",
 			{
-				"smartpde/telescope-recent-files",
-				keys = {
-					{
-						"gr",
-						function() require("telescope").extensions.recent_files.pick() end,
-						desc = " Recent Files",
-					},
-				},
+				"nvim-telescope/telescope-fzf-native.nvim",
+				config = function() require("telescope").load_extension("fzf") end,
 			},
 		},
-
-		config = function()
-			telescopeConfig()
-			require("telescope").load_extension("recent_files")
-
-			-- INFO since used for cmp-fuzzy-buffer already, might as well add it
-			-- here as well. Even though performance-wise vanilla telescope is fine
-			-- for me, it does add the minor benefit of having better query syntax
-			-- https://github.com/nvim-telescope/telescope-fzf-native.nvim#telescope-fzf-nativenvim
-			require("telescope").load_extension("fzf")
-		end,
+		config = telescopeConfig,
+	},
+	{ -- better recent files
+		"smartpde/telescope-recent-files",
+		config = function() require("telescope").load_extension("recent_files") end,
+		keys = {
+			{
+				"gr",
+				function() require("telescope").extensions.recent_files.pick() end,
+				desc = " Recent Files",
+			},
+		},
+	},
+	{
+		"nvim-telescope/telescope-frecency.nvim",
+		config = function() require("telescope").load_extension("frecency") end,
+		dependencies = { "kkharji/sqlite.lua" },
+		keys = {
+			{
+				"gO",
+				function() vim.cmd.Telescope("frecency") end,
+				desc = " Frecent",
+			},
+		},
 	},
 }

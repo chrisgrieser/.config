@@ -41,23 +41,21 @@ return {
 			end
 		end,
 		config = function()
-			-- only display activity
 			u.addToLuaLine("sections", "lualine_x", function ()
+				-- only display activity
 				local status = vim.fn["codeium#GetStatusString"]()
 				if not status:find("%*") then return "" end
 				return "󰚩 …"
 			end)
 
-			vim.g.codeium_filetypes = { TelescopePrompt = false, DressingInput = false }
-
-			-- INFO if cmp visible, will use cmp selection instead.
+			vim.g.codeium_filetypes = {
+				TelescopePrompt = false,
+				DressingInput = false,
+			}
 			vim.g.codeium_disable_bindings = 1
-			-- stylua: ignore start
 
-			vim.keymap.set("i", "<Tab>", function() return vim.fn["codeium#Accept"]() end, { expr = true, desc = "󰚩 Accept Suggestion", silent = true })
+			-- stylua: ignore
 			vim.keymap.set("i", "<D-s>", function() return vim.fn["codeium#Accept"]() end, { expr = true, desc = "󰚩 Accept Suggestion", silent = true })
-			vim.keymap.set("i", "<D-g>", function() return vim.fn["codeium#CycleCompletions"](1) end, { expr = true, desc = "󰚩 Accept Suggestion", silent = true })
-			-- stylua: ignore end
 		end,
 	},
 }
