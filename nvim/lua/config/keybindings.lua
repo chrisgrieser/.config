@@ -265,6 +265,12 @@ end
 keymap(
 	"n",
 	"go",
+	function() require("telescope").extensions.smart_open.smart_open { prompt_title = projectName() } end,
+	{ desc = " Smart Open" }
+)
+keymap(
+	"n",
+	"gO",
 	function() require("telescope.builtin").find_files { prompt_title = projectName() } end,
 	{ desc = " Browse in Project" }
 )
@@ -274,13 +280,6 @@ keymap(
 	"gl",
 	function() require("telescope.builtin").live_grep { prompt_title = "Live Grep: " .. projectName() } end,
 	{ desc = " Live Grep in Project" }
-)
-
-keymap(
-	{ "n", "x" },
-	"gL",
-	function() cmd.Telescope("grep_string") end,
-	{ desc = " Grep cword in Project" }
 )
 
 keymap("n", "g.", function() cmd.Telescope("resume") end, { desc = " Continue" })
