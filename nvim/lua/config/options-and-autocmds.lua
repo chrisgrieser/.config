@@ -26,7 +26,8 @@ vim.filetype.add {
 -- move to custom location where they are synced independently from the dotfiles repo
 opt.undodir:prepend(u.vimDataDir .. "undo//")
 opt.viewdir = u.vimDataDir .. "view"
-opt.swapfile = false -- doesn't help and only creates useless files
+opt.shadafile = u.vimDataDir .. "main.shada"
+opt.swapfile = false -- doesn't help and only creates useless files and notifications
 
 --------------------------------------------------------------------------------
 -- Undo
