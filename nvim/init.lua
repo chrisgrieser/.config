@@ -9,28 +9,30 @@ end
 
 -- If nvim was opened w/o argument, re-open the last file.
 -- If that files does not exist, open last existing oldfile.
----@param shadaPath string
-local function reOpenLastFile(shadaPath)
+local function reOpenLastFile()
 	if vim.fn.argc() ~= 0 then return end
 
-	-- last file location stored in shada, therefore needs to be loaded before
-	vim.opt.shadafile = shadaPath
+	local function fileDoesNotExist(file) return vim.loop.fs_stat(file) == nil end
+	local lastFile = vim.api.nvim_get_mark("0", {})[4]
+	local i = 0
+	while fileDoesNotExist(lastFile) and i < #vim.v.oldfiles do
+		i = i + 1
+		lastFile = vim.v.oldfiles[i]
+	end
+	if lastFile == "" then return end
 
-	vim.defer_fn(function()
-		local function fileDoesNotExist(file) return file == nil or vim.loop.fs_stat(file) == nil end
-		local lastFile = vim.api.nvim_get_mark("0", {})[4]
-		local i = 0
-		while fileDoesNotExist(lastFile) do
-			i = i + 1
-			lastFile = vim.v.oldfiles[i]
-		end
-
-		-- vim.api.nvim_buf_call(1, function() vim.cmd.edit(lastFile) end)
-	end, 1)
+	local startBuf = vim.api.nvim_list_bufs()[1]
+	vim.api.nvim_buf_call(startBuf, function() vim.cmd.edit(lastFile) end)
 end
 
-local shadaPath = require("config.utils").vimDataDir .. "main.shada"
-reOpenLastFile(shadaPath)
+-- last file location stored in shada, therefore needs to be loaded before
+vim.opt.shadafile = require("config.utils").vimDataDir .. "main.shada"
+vim.defer_fn(reOpenLastFile, 1)
+
+vim.api.nvim_create_autocmd("User", {
+	pattern = "VeryLazy",
+	callback = function() vim.notify("🪚 beep 👽") end,
+})
 
 --------------------------------------------------------------------------------
 
