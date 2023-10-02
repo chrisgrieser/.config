@@ -21,18 +21,17 @@ end
 ---@return number
 local function numberOfWins()
 	local count = 0
-
-	for i = 1, fn.winnr("$"), 1 do
-		local win = fn.bufname(fn.winbufnr(i))
-		local winId = fn.win_getid(i)
-		local winConf = api.nvim_win_get_config(winId)
+	local wins = api.nvim_list_wins()
+	for _, win in pairs(wins) do
+		local winConf = api.nvim_win_get_config(win)
+		local bufname = api.nvim_buf_get_name(api.nvim_win_get_buf(win))
 
 		if
-			win
-			and win ~= ""
+			bufname
+			and bufname ~= ""
 			and not winConf.external
 			and winConf.focusable
-			and api.nvim_win_is_valid(winId)
+			and api.nvim_win_is_valid(win)
 		then
 			count = count + 1
 		end
