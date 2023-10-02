@@ -52,18 +52,18 @@ end
 
 ---@nodiscard
 ---@return boolean
-local function noSyncInProgress()
+local function syncInProgress()
 	local isSyncing = {}
 	for _, repo in pairs(config.repos) do
-		local stillSyncing = syncTasks[repo.name] and syncTasks[repo.name]:isRunning()
-		table.insert(isSyncing, stillSyncing)
+		local isStillSyncing = syncTasks[repo.name] and syncTasks[repo.name]:isRunning()
+		table.insert(isSyncing, isStillSyncing)
 	end
-	return not (u.tbl_contains(isSyncing, true))
+	return u.tbl_contains(isSyncing, true)
 end
 
 ---@param notifyOnSuccess boolean set to false for regularly occurring syncs
 local function syncAllGitRepos(notifyOnSuccess)
-	if not noSyncInProgress() then
+	if syncInProgress() then
 		print("🔁 Sync already in progress.")
 		return
 	end
@@ -73,7 +73,7 @@ local function syncAllGitRepos(notifyOnSuccess)
 	end
 
 	AllSyncTimer = hs.timer
-		.waitUntil(noSyncInProgress, function()
+		.waitUntil(function() return not syncInProgress() end, function()
 			local failedRepos = hs.fnutils.filter(
 				config.repos,
 				function(r) return not (hs.fnutils.contains(syncedRepos, r)) end
