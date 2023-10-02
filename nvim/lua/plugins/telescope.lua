@@ -109,6 +109,7 @@ local function telescopeConfig()
 
 	require("telescope").setup {
 		defaults = {
+
 			path_display = function(_, path)
 				-- parent is colored as a comment via autocmd further above
 				local tail = vim.fs.basename(path)
@@ -154,7 +155,7 @@ local function telescopeConfig()
 		pickers = {
 			find_files = {
 				prompt_prefix = "󰝰 ",
-				-- using the default find command from telescope is somewhat buggy,
+				-- FIX using the default find command from telescope is somewhat buggy,
 				-- e.g. not respecting fd/ignore
 				find_command = { "fd", "--type=file", "--type=symlink" },
 				follow = true,
@@ -162,7 +163,6 @@ local function telescopeConfig()
 				mappings = { i = findFileMappings },
 			},
 			live_grep = { prompt_prefix = " ", disable_coordinates = true },
-			grep_string = { prompt_prefix = " ", disable_coordinates = true },
 			git_status = {
 				prompt_prefix = "󰊢 ",
 				show_untracked = true,
@@ -193,22 +193,6 @@ local function telescopeConfig()
 				prompt_prefix = " ",
 				trim_text = true,
 				fname_width = 0,
-			},
-			lsp_references = {
-				prompt_prefix = "󰈿 ",
-				show_line = true,
-				trim_text = true,
-				include_declaration = false,
-				include_current_line = false,
-				initial_mode = "normal",
-				fname_width = 12,
-			},
-			lsp_definitions = {
-				prompt_prefix = "󰈿 ",
-				show_line = true,
-				trim_text = true,
-				initial_mode = "normal",
-				fname_width = 12,
 			},
 			lsp_document_symbols = {
 				prompt_prefix = "󰒕 ",
@@ -256,18 +240,9 @@ local function telescopeConfig()
 			},
 		},
 		extensions = {
-			recent_files = {
-				prompt_prefix = "󰋚 ",
-				previewer = false,
-				layout_config = {
-					horizontal = { anchor = "W", width = 0.45, height = 0.55 },
-				},
-			},
-			frecency = {
-				default_workspace = "CWD",
-				mappings = { i = keymappings_I },
-				path_display = { "tail" },
-				db_root = u.vimDataDir,
+			smart_open = {
+				prompt_prefix = "󰧑 ",
+				match_algorithm = "fzf",
 			},
 		},
 	}
@@ -280,34 +255,20 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
-			{
-				"nvim-telescope/telescope-fzf-native.nvim",
-				config = function() require("telescope").load_extension("fzf") end,
-			},
+			"nvim-telescope/telescope-fzf-native.nvim",
 		},
 		config = telescopeConfig,
 	},
-	{ -- better recent files
-		"smartpde/telescope-recent-files",
-		config = function() require("telescope").load_extension("recent_files") end,
-		keys = {
-			{
-				"gr",
-				function() require("telescope").extensions.recent_files.pick() end,
-				desc = " Recent Files",
-			},
-		},
+	{ -- better sorting algorithm
+		"nvim-telescope/telescope-fzf-native.nvim",
+		config = function() require("telescope").load_extension("fzf") end,
+		build = "make",
 	},
-	{
-		"nvim-telescope/telescope-frecency.nvim",
-		config = function() require("telescope").load_extension("frecency") end,
-		dependencies = { "kkharji/sqlite.lua" },
-		keys = {
-			{
-				"gO",
-				function() vim.cmd.Telescope("frecency") end,
-				desc = " Frecent",
-			},
-		},
+	{ -- frecency-based opener
+		"danielfalk/smart-open.nvim",
+		branch = "0.2.x",
+		dependencies = { "kkharji/sqlite.lua", "nvim-telescope/telescope-fzf-native.nvim" },
+		init = function() u.colorschemeMod("Directory", { link = "NonText" }) end,
+		config = function() require("telescope").load_extension("smart_open") end,
 	},
 }
