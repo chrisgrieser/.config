@@ -13,7 +13,7 @@ Thresholds = {
 	Slack = 20,
 	[env.mailApp] = 5,
 	Highlights = 90,
-	Discord = 180, -- not when steam is one
+	Discord = 180, -- when Steam is not on
 	BusyCal = 2,
 	neovide = 120, -- needs lowercase
 	Hammerspoon = 3, -- affects the console, not hammerspoon itself
@@ -46,7 +46,7 @@ local function quit(app)
 	else
 		u.app(app):kill()
 	end
-	print("🔴 AutoQuitting: " .. app .. suffix)
+	print("📴 AutoQuitting: " .. app .. suffix)
 	IdleApps[app] = nil
 end
 

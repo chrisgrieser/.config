@@ -4,7 +4,7 @@ local c = hs.caffeinate.watcher
 local env = require("lua.environment-vars")
 
 ---@return string three chars representing the day of the week (English)
-local function getWeekday() return tostring(os.date()):sub(1, 3) end
+local function getWeekday() return tostring(os.date("%a")) end
 
 --------------------------------------------------------------------------------
 
@@ -40,11 +40,11 @@ JourFixeTimer = hs.timer
 local function backup()
 	-- stylua: ignore start
 	hs.task.new("./helpers/bookmark-bkp.sh", function(exitCode, _, stdErr)
-		local msg = exitCode == 0 and "✅ Bookmark Backup successful." or "⚠️ Bookmark Backup failed: " .. stdErr
+		local msg = exitCode == 0 and "✅ Bookmark Backup successful" or "⚠️ Bookmark Backup failed: " .. stdErr
 		u.notify(msg)
 	end):start()
 	hs.task.new("./helpers/dotfile-bkp.sh", function(exitCode, _, stdErr)
-		local msg = exitCode == 0 and "✅ Dotfile Backup successful." or "⚠️ Dotfile Backup failed: " .. stdErr
+		local msg = exitCode == 0 and "✅ Dotfile Backup successful" or "⚠️ Dotfile Backup failed: " .. stdErr
 		u.notify(msg)
 	end):start()
 	u.applescript([[tell application id "com.runningwithcrayons.Alfred" to run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"]])
@@ -81,24 +81,33 @@ local function idleMins(mins)
 	return minutesIdle > mins
 end
 
--- Between 1:00 and 6:00, check every 10 min if device has been idle for 40
+-- Between 0:00 and 7:00, check every 10 min if device has been idle for 30
 -- minutes. If so, alert and wait for another minute. If still idle then, quit
 -- video apps.
+local config = {
+	betweenHours = { 0, 7 },
+	checkIntervalMins = 10,
+	idleMins = 30,
+	timeToReactSecs = 60,
+}
+
 SleepAutoVideoOffTimer = hs.timer
-	.doEvery(10 * 60, function()
-		if not (u.betweenTime(1, 6) and idleMins(40) and env.isProjector() and u.screenIsUnlocked()) then
+	.doEvery(config.checkIntervalMins * 60, function()
+		local isNight = u.betweenTime(table.unpack(config.betweenHours))
+		if not (isNight and idleMins(config.idleMins) and env.isProjector() and u.screenIsUnlocked()) then
 			return
 		end
-		hs.alert.show("💤 SleepTimer in 1 min if idle.")
 
-		u.runWithDelays(61, function()
-			if not idleMins(1) then return end
-			u.notify("💤 SleepTimer triggered.")
+		hs.alert.show(("💤 Will sleep in %ss if idle."):format(config.timeToReactSecs))
+
+		u.runWithDelays(config.timeToReactSecs, function()
+			if hs.host.idleTime() < config.timeToReactSecs then return end
+			u.notify("💤 SleepTimer triggered")
 
 			-- 1. close browser tabs running YouTube (not using full name for youtube short-urls)
 			-- 2. close leftover fullscreen spaces created by apps running in fullscreen
-			u.quitApp (env.videoAndAudioApps)
 			u.closeTabsContaining("youtu")
+			u.quitApp(env.videoAndAudioApps)
 			closeFullscreenSpaces()
 		end)
 	end)

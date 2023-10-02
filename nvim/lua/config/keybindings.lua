@@ -265,13 +265,18 @@ end
 keymap(
 	"n",
 	"go",
-	function() require("telescope").extensions.smart_open.smart_open { prompt_title = projectName() } end,
+	function()
+		require("telescope").extensions.smart_open.smart_open {
+			prompt_title = "Smart Open: " .. projectName(),
+			prompt_prefix = "󰧑 ",
+		}
+	end,
 	{ desc = " Smart Open" }
 )
 keymap(
 	"n",
 	"gO",
-	function() require("telescope.builtin").find_files { prompt_title = projectName() } end,
+	function() require("telescope.builtin").find_files { prompt_title = "Find Files: " .. projectName() } end,
 	{ desc = " Browse in Project" }
 )
 
