@@ -21,11 +21,6 @@ return {
 			exclude = { filetypes = { "undotree" } },
 		},
 	},
-	{ -- always show matchparens
-		"utilyre/sentiment.nvim",
-		event = "VeryLazy",
-		opts = true,
-	},
 	{ -- scrollbar with information
 		"lewis6991/satellite.nvim",
 		commit = "5d33376", -- TODO following versions require nvim 0.10
