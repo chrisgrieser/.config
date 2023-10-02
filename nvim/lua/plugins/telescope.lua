@@ -135,7 +135,7 @@ local function telescopeConfig()
 				".DS_Store", -- cause it is unignored in certain repos
 			},
 			preview = {
-				timeout = 200, -- ms
+				timeout = 400, -- ms
 				filesize_limit = 0.3, -- in MB, do not preview big files for performance
 			},
 			borderchars = u.borderChars,
@@ -149,7 +149,7 @@ local function telescopeConfig()
 					height = 0.75,
 					width = 0.99,
 					preview_cutoff = 70,
-					preview_width = { 0.55, min = 30 },
+					preview_width = { 0.5 , min = 30 },
 				},
 			},
 		},

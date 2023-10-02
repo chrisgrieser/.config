@@ -273,6 +273,8 @@ keymap(
 	end,
 	{ desc = " Smart Open" }
 )
+keymap("n", "gr", "go", { desc = " Smart Open", remap = true })
+
 keymap(
 	"n",
 	"gO",

@@ -18,8 +18,10 @@ return {
 		ft = "markdown",
 		init = function()
 			vim.g.bullets_delete_last_bullet_if_empty = 1
+			vim.g.bullets_enable_in_empty_buffers = 0
 			vim.g.bullets_set_mappings = 0
 			u.ftKeymap("markdown", "n", "o", "<Plug>(bullets-newline)")
+			u.ftKeymap("markdown", "i", "<CR>", "<Plug>(bullets-newline)")
 		end,
 	},
 	{ -- preview markdown

@@ -20,10 +20,16 @@ return {
 		"danymat/neogen",
 		opts = true,
 		keys = {
-			-- stylua: ignore start
-			{ "qf", function() require("neogen").generate { type = "func" } end, desc = " Function Annotation" },
-			{ "qt", function() require("neogen").generate { type = "type" } end, desc = " Type Annotation" },
-			-- stylua: ignore end,
+			{
+				"qf",
+				function() require("neogen").generate { type = "func" } end,
+				desc = " Function Annotation",
+			},
+			{
+				"qt",
+				function() require("neogen").generate { type = "type" } end,
+				desc = " Type Annotation",
+			},
 		},
 	},
 }

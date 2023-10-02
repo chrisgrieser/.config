@@ -3,6 +3,7 @@
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img src="https://dotfyle.com/chrisgrieser/config-nvim/badges/leaderkey?style=flat" /></a>
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img src="https://dotfyle.com/chrisgrieser/config-nvim/badges/plugin-manager?style=flat" /></a>
 
+<!-- editorconfig-checker-disable -->
 ```text
 ├── lua
 │  ├── config # keybindings, options, …
@@ -20,6 +21,7 @@
    ├── formatters
    └── linters
 ```
+<!-- editorconfig-checker-enable -->
 
 The tree was generated using <https://tree.nathanfriend.io/>
 
