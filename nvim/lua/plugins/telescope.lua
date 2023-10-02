@@ -25,10 +25,13 @@ local keymappings_I = {
 	end,
 	["<C-p>"] = function(prompt_bufnr)
 		-- Copy path of file -- https://github.com/nvim-telescope/telescope-file-browser.nvim/issues/191
+		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+		local cwd = current_picker.cwd and tostring(current_picker.cwd) or vim.loop.cwd()
 		local path = require("telescope.actions.state").get_selected_entry().value
+		local fullpath = cwd .. "/" .. path
 		require("telescope.actions").close(prompt_bufnr)
-		vim.fn.setreg("+", path)
-		u.notify("Copied", path)
+		vim.fn.setreg("+", fullpath)
+		u.notify("Copied", fullpath)
 	end,
 	["<C-n>"] = function(prompt_bufnr)
 		-- Copy name of file -- https://github.com/nvim-telescope/telescope-file-browser.nvim/issues/191
@@ -54,7 +57,7 @@ local findFileMappings = {
 			cwd = parent_dir,
 		}
 	end,
-	-- add `--hidden`
+	-- add `--hidden` & `--no-ignore`
 	["<C-h>"] = function(prompt_bufnr)
 		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
 		-- cwd is only set if passed as telescope option
@@ -62,20 +65,8 @@ local findFileMappings = {
 
 		require("telescope.actions").close(prompt_bufnr)
 		require("telescope.builtin").find_files {
-			prompt_title = vim.fs.basename(cwd) .. " (--hidden)",
+			prompt_title = vim.fs.basename(cwd) .. " (--hidden --no-ignore)",
 			hidden = true,
-			cwd = cwd,
-		}
-	end,
-	-- add `--no-ignore`
-	["<C-g>"] = function(prompt_bufnr)
-		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-		-- cwd is only set if passed as telescope option
-		local cwd = current_picker.cwd and tostring(current_picker.cwd) or vim.loop.cwd()
-
-		require("telescope.actions").close(prompt_bufnr)
-		require("telescope.builtin").find_files {
-			prompt_title = vim.fs.basename(cwd) .. " (--no-ignore)",
 			no_ignore = true,
 			cwd = cwd,
 		}
@@ -109,8 +100,6 @@ local function telescopeConfig()
 
 	require("telescope").setup {
 		defaults = {
-			dynamic_preview_title = true,
-			results_title = false,
 			path_display = function(_, path)
 				-- parent is colored as a comment via autocmd further above
 				local tail = vim.fs.basename(path)
@@ -119,8 +108,9 @@ local function telescopeConfig()
 				return string.format("%s\t %s", tail, parentBase)
 			end,
 			selection_caret = "󰜋 ",
-			prompt_prefix = "❱ ",
 			multi_icon = "󰒆 ",
+			dynamic_preview_title = true,
+			results_title = false,
 
 			-- other ignores are defined via .gitignore, .ignore, or fd/ignore
 			file_ignore_patterns = {
