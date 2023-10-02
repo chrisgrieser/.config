@@ -5,23 +5,27 @@ local u = require("lua.utils")
 
 --------------------------------------------------------------------------------
 
--- CONFIG
--- INFO right-click on a location in Google Maps to get the latitude/longitude
--- roughly Berlin-Tegel (no precise location due to pricacy)
-local latitude = 52
-local longitude = 13
-local insideTemp = 25
-local checkIntervalMins = 30
+local config = {
+	-- INFO right-click on a location in Google Maps to get the latitude/longitude
+	-- roughly Berlin-Tegel (no precise location due to pricacy)
+	latitude = 52,
+	longitude = 13,
+	insideTemp = 25,
+	checkIntervalMins = 30,
+}
 
 -- only run in the summer  & at home
-local month = tostring(os.date("%B")):sub(1, 3)
+local month = tostring(os.date("%b"))
 local isSummer = (month == "Aug" or month == "Jul" or month == "Sep")
 if not isSummer or not env.isAtHome then return end
 
 --------------------------------------------------------------------------------
 
 -- DOCS: https://brightsky.dev/docs/#get-/current_weather
-local callUrl = ("https://api.brightsky.dev/current_weather?lat=%s&lon=%s"):format(latitude, longitude)
+local callUrl = ("https://api.brightsky.dev/current_weather?lat=%s&lon=%s"):format(
+	config.latitude,
+	config.longitude
+)
 
 local function getOutsideTemp()
 	if not (u.betweenTime(18, 1) or u.betweenTime(8, 13)) then return end
@@ -30,17 +34,20 @@ local function getOutsideTemp()
 			print("⚠️🌡️ Could not get weather data: " .. status)
 			return
 		end
-		---@diagnostic disable-next-line: undefined-field
-		local outTemp = hs.json.decode(body).weather.temperature
-		if not outTemp then return end
+
+		local weatherData = hs.json.decode(body) ---@type table|nil
+		if not weatherData then return end
+		local outTemp = weatherData.weather.temperature
 
 		-- first run has no value yet
 		if not PrevOutTemp then
 			PrevOutTemp = outTemp
 			return
 		end
-		local outsideNowCoolerThanInside = outTemp < insideTemp and not (PrevOutTemp < insideTemp)
-		local outsideNowHotterThanInside = outTemp > insideTemp and not (PrevOutTemp > insideTemp)
+		local outsideNowCoolerThanInside = outTemp < config.insideTemp
+			and not (PrevOutTemp < config.insideTemp)
+		local outsideNowHotterThanInside = outTemp > config.insideTemp
+			and not (PrevOutTemp > config.insideTemp)
 		PrevOutTemp = outTemp
 
 		if outsideNowCoolerThanInside then
@@ -59,4 +66,4 @@ end
 if u.isSystemStart() then getOutsideTemp() end
 
 -- run on timer
-WeatherReminder = hs.timer.doEvery(60 * checkIntervalMins, getOutsideTemp):start()
+WeatherReminder = hs.timer.doEvery(60 * config.checkIntervalMins, getOutsideTemp):start()

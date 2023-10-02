@@ -54,7 +54,7 @@ local findFileMappings = {
 			cwd = parent_dir,
 		}
 	end,
-	-- toggle `--hidden`
+	-- add `--hidden`
 	["<C-h>"] = function(prompt_bufnr)
 		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
 		-- cwd is only set if passed as telescope option
@@ -67,7 +67,7 @@ local findFileMappings = {
 			cwd = cwd,
 		}
 	end,
-	-- toggle `--no-ignore`
+	-- add `--no-ignore`
 	["<C-g>"] = function(prompt_bufnr)
 		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
 		-- cwd is only set if passed as telescope option
@@ -109,7 +109,8 @@ local function telescopeConfig()
 
 	require("telescope").setup {
 		defaults = {
-
+			dynamic_preview_title = true,
+			results_title = false,
 			path_display = function(_, path)
 				-- parent is colored as a comment via autocmd further above
 				local tail = vim.fs.basename(path)
@@ -240,10 +241,7 @@ local function telescopeConfig()
 			},
 		},
 		extensions = {
-			smart_open = {
-				prompt_prefix = "󰧑 ",
-				match_algorithm = "fzf",
-			},
+			smart_open = { match_algorithm = "fzf" },
 		},
 	}
 end
