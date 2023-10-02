@@ -103,16 +103,17 @@ end
 
 local function lintTriggers()
 	local function doLint()
-		if vim.bo.buftype ~= "" then return end
+		vim.defer_fn(function()
+			if vim.bo.buftype ~= "" then return end
 
-		-- condition when to lint https://github.com/mfussenegger/nvim-lint/issues/370#issuecomment-1729671151
-		local lintersToUse = require("lint").linters_by_ft[vim.bo.filetype]
-		local hasNoSeleneConfig = vim.loop.fs_stat(vim.loop.cwd() .. "/selene.toml") == nil
-		if hasNoSeleneConfig and vim.bo.filetype == "lua" then
-			lintersToUse = vim.tbl_filter(function(l) return l ~= "selene" end, lintersToUse)
-		end
-
-		vim.defer_fn(function() require("lint").try_lint(lintersToUse) end, 1)
+			-- condition when to lint https://github.com/mfussenegger/nvim-lint/issues/370#issuecomment-1729671151
+			local lintersToUse = require("lint").linters_by_ft[vim.bo.filetype]
+			local hasNoSeleneConfig = vim.loop.fs_stat(vim.loop.cwd() .. "/selene.toml") == nil
+			if hasNoSeleneConfig and vim.bo.filetype == "lua" then
+				lintersToUse = vim.tbl_filter(function(l) return l ~= "selene" end, lintersToUse)
+			end
+			require("lint").try_lint(lintersToUse)
+		end, 1)
 	end
 
 	vim.api.nvim_create_autocmd({ "BufReadPost", "InsertLeave", "TextChanged", "FocusGained" }, {
@@ -165,7 +166,7 @@ end
 
 return {
 	{ -- Linter integration
-		"mfussenegger/nvim-lint", 
+		"mfussenegger/nvim-lint",
 		event = "VeryLazy",
 		config = function()
 			linterConfigs()

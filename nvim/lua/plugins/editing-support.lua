@@ -19,6 +19,7 @@ return {
 					toggle { elements = { "let", "const" } },
 					toggle { elements = { "and", "or" } },
 					toggle { elements = { "increase", "decrease" }, word = false },
+					toggle { elements = { "enable", "disable" }, word = false },
 					toggle { elements = { "dark", "light" }, word = false },
 					toggle { elements = { "~=", "==" }, word = false },
 					toggle { elements = { "!==", "===" }, word = false },
