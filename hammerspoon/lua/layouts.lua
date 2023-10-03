@@ -61,9 +61,9 @@ local function workLayout()
 	setHigherBrightnessDuringDay()
 
 	-- close
+	closeAllFinderWins()
 	u.quitApp(env.videoAndAudioApps)
 	require("lua.private").closer()
-	closeAllFinderWins()
 
 	-- open
 	local appsToOpen = { "Discord", env.browserApp, env.mailApp, env.tickerApp }

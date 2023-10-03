@@ -193,7 +193,9 @@ autocmd("FocusGained", {
 		local fileExists = vim.loop.fs_stat(vim.fn.expand("%")) ~= nil
 		local specialBuffer = vim.bo.buftype ~= ""
 		if not fileExists and not specialBuffer then
-			u.notify("", "File does not exist anymore.", "warn")
+			local name = vim.api.nvim_buf_get_name(0)
+			u.notify("", ("%s does not exist anymore, deleted buffer."):format(name), "warn")
+			vim.cmd.bdelete()
 		end
 	end,
 })
