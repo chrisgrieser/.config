@@ -14,28 +14,28 @@ local function sidenotesStartup()
 	wu.moveResize(u.app("SideNotes"):mainWindow(), wu.sideNotesWide)
 end
 
+--------------------------------------------------------------------------------
+
 -- update counter in sketchybar
 -- enlarge on startup
-SidenotesWatcher = aw
-	.new(function(appName, event, app)
-		if not (appName == "SideNotes") then return end
-		-- i.e., run on any event related to sidenotes
-		updateCounter()
+SidenotesWatcher = aw.new(function(appName, event, app)
+	if not (appName == "SideNotes") then return end
+	-- i.e., run on any event related to sidenotes
+	updateCounter()
 
-		-- FIX sidenotes always starting with a narrow width.
-		-- HACK Cannot use launch event as trigger for this, since SideNotes
-		-- launches in its special hidden mode
-		if event == aw.activated then
-			local win = app:mainWindow()
-			local relWidth = win:frame().w / win:screen():frame().w
-			-- on startup, SideNotes gets a width of ~18%, while sidenotesNarrow is ~20%
-			local isStartUp = relWidth < wu.sidenotesNarrow.w
-			if isStartUp then sidenotesStartup() end
-		elseif event == aw.launched then
-			sidenotesStartup()
-		end
-	end)
-	:start()
+	-- FIX sidenotes always starting with a narrow width.
+	-- HACK Cannot use launch event as trigger for this, since SideNotes
+	-- launches in its special hidden mode
+	if event == aw.activated then
+		local win = app:mainWindow()
+		local relWidth = win:frame().w / win:screen():frame().w
+		-- on startup, SideNotes gets a width of ~18%, while sidenotesNarrow is ~20%
+		local isStartUp = relWidth < wu.sidenotesNarrow.w
+		if isStartUp then sidenotesStartup() end
+	elseif event == aw.launched then
+		sidenotesStartup()
+	end
+end):start()
 
 --------------------------------------------------------------------------------
 
@@ -49,7 +49,7 @@ local function moveOfficeNotesToBase()
 	PushOfficeNotesTask = hs.task
 		.new(script, function(exitCode, _, stdErr)
 			if exitCode == 0 then
-				print("🗒️ Office Sidenotes -> Base")
+				print("☑️ Office Sidenotes → Base")
 			else
 				u.notify("⚠️ Moving Office-SideNotes failed: " .. stdErr)
 			end
@@ -72,7 +72,7 @@ function M.reminderToSidenotes()
 	PushRemindersTask = hs.task
 		.new(script, function(exitCode, _, stdErr)
 			if exitCode == 0 then
-				print("🗒️ Reminder -> SideNotes")
+				print("☑️ Reminder → SideNotes")
 			else
 				u.notify("⚠️ Reminder-to-Sidenote failed: " .. stdErr)
 			end

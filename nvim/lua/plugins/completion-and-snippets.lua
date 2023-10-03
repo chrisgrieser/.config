@@ -18,14 +18,13 @@ local source_icons = {
 	zsh = "",
 	nvim_lsp = "󰒕",
 	luasnip = "󰞘",
-	emoji = "󰇵",
+	emoji = "󰞅",
 	nerdfont = "󰇳",
 	path = "",
 	cmdline = "󰘳",
 	cmdline_history = "󰋚",
 }
 local defaultSources = {
-	s.luasnip_choice,
 	s.snippets,
 	s.lsp,
 	s.emojis,
@@ -75,9 +74,9 @@ local function cmpconfig()
 			-- default values: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L18
 			-- explanations: https://github.com/hrsh7th/nvim-cmp/blob/main/doc/cmp.txt#L425
 			debounce = 30,
-			throttle = 20,
-			fetching_timeout = 250,
-			async_budget = 0.8,
+			throttle = 15,
+			fetching_timeout = 200,
+			async_budget = 0.5,
 			max_view_entries = 100,
 		},
 		window = {
@@ -169,7 +168,6 @@ local function filetypeCompletionConfig()
 			return not (line:find("%s%-%-?$") or line:find("^%-%-?$"))
 		end,
 		sources = cmp.config.sources {
-			s.luasnip_choice,
 			s.snippets,
 			s.lsp,
 			s.nerdfont, -- add nerdfont for config

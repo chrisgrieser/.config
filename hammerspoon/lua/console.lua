@@ -56,7 +56,7 @@ local function cleanupConsole()
 			color = isDark and lightGrey or darkGrey
 		elseif line:lower():find("error") then
 			color = isDark and lightRed or darkRed
-		elseif line:lower():find("warning") or line:find("stack traceback") then
+		elseif line:lower():find("warning") or line:find("stack traceback") or line:find("fail") then
 			color = isDark and lightYellow or darkYellow
 		else
 			color = isDark and white or black

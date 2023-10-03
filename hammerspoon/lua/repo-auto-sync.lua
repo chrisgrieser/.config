@@ -86,7 +86,7 @@ local function syncAllGitRepos(notifyOnSuccess)
 			end
 			if #failedRepos > 0 then
 				local failedIcons = hs.fnutils.map(failedRepos, function(r) return r.icon end) or {}
-				local failMsg = "🔁⚠️ Warning – Sync failed: " .. table.concat(failedIcons)
+				local failMsg = "🔁⚠️ Sync failed: " .. table.concat(failedIcons)
 				print(failMsg)
 				notify(failMsg)
 			end

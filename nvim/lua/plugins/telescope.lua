@@ -43,6 +43,7 @@ local keymappings_I = {
 	end,
 }
 
+local hiddenIgnoreActive = false
 local findFileMappings = {
 	-- search directory up
 	["<D-up>"] = function(prompt_bufnr)
@@ -57,17 +58,20 @@ local findFileMappings = {
 			cwd = parent_dir,
 		}
 	end,
-	-- add `--hidden` & `--no-ignore`
+	-- toggle `--hidden` & `--no-ignore`
 	["<C-h>"] = function(prompt_bufnr)
 		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
 		-- cwd is only set if passed as telescope option
 		local cwd = current_picker.cwd and tostring(current_picker.cwd) or vim.loop.cwd()
+		hiddenIgnoreActive = not hiddenIgnoreActive
+		local title = vim.fs.basename(cwd)
+		if hiddenIgnoreActive then title = title .. " (--hidden --no-ignore)" end
 
 		require("telescope.actions").close(prompt_bufnr)
 		require("telescope.builtin").find_files {
-			prompt_title = vim.fs.basename(cwd) .. " (--hidden --no-ignore)",
-			hidden = true,
-			no_ignore = true,
+			prompt_title = title,
+			hidden = hiddenIgnoreActive,
+			no_ignore = hiddenIgnoreActive,
 			cwd = cwd,
 		}
 	end,
@@ -122,7 +126,7 @@ local function telescopeConfig()
 				"%.zip$",
 				"%.pxd$",
 				"%.plist$", -- mostly Alfred files
-				".DS_Store", -- cause it is unignored in certain repos
+				".DS_Store",
 			},
 			preview = {
 				timeout = 400, -- ms
@@ -150,7 +154,6 @@ local function telescopeConfig()
 				-- e.g. not respecting fd/ignore
 				find_command = { "fd", "--type=file", "--type=symlink" },
 				follow = true,
-				hidden = false,
 				mappings = { i = findFileMappings },
 			},
 			live_grep = { prompt_prefix = " ", disable_coordinates = true },
@@ -187,12 +190,12 @@ local function telescopeConfig()
 			},
 			lsp_document_symbols = {
 				prompt_prefix = "󰒕 ",
-				ignore_symbols = { "boolean", "number", "string" },
+				ignore_symbols = { "boolean", "number" },
 				fname_width = 12,
 			},
 			lsp_workspace_symbols = {
 				prompt_prefix = "󰒕 ",
-				ignore_symbols = { "string", "boolean", "number" },
+				ignore_symbols = { "boolean", "number", "string" },
 				fname_width = 12,
 			},
 			buffers = {
@@ -231,7 +234,6 @@ local function telescopeConfig()
 			},
 		},
 		extensions = {
-			smart_open = { match_algorithm = "fzf" },
 			recent_files = {
 				prompt_prefix = "󰋚 ",
 				previewer = false,
@@ -266,7 +268,7 @@ return {
 			},
 		},
 	},
-	{ -- better sorting algorithm
+	{ -- better sorting algorithm + fzf syntax
 		"nvim-telescope/telescope-fzf-native.nvim",
 		config = function() require("telescope").load_extension("fzf") end,
 		build = "make",
