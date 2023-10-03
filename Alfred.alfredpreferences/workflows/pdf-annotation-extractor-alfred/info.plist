@@ -70,6 +70,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>D512D46E-8C0B-49AB-808B-051BDA488A65</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>65783839-9CCB-48D0-A740-1F7BF96926D1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -343,6 +356,25 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>com.adobe.pdf</string>
+				</array>
+				<key>name</key>
+				<string>Extract PDF Annotations</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>D512D46E-8C0B-49AB-808B-051BDA488A65</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -433,7 +465,7 @@ Extract Annotations as Markdown, insert Pandoc Citations with correct page numbe
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>360</real>
+			<real>425</real>
 		</dict>
 		<key>546351AD-A982-43F7-9869-97C07EC801A3</key>
 		<dict>
@@ -464,18 +496,18 @@ Extract Annotations as Markdown, insert Pandoc Citations with correct page numbe
 			<key>note</key>
 			<string>run PDF annotation extractor</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>75</real>
+			<real>20</real>
 		</dict>
 		<key>AADD9ECB-F4AB-488C-8C2C-B7736DD7B815</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>225</real>
+			<real>170</real>
 		</dict>
 		<key>CD293D43-2356-49DB-AD4F-DBA5FDE026C5</key>
 		<dict>
@@ -486,7 +518,16 @@ Extract Annotations as Markdown, insert Pandoc Citations with correct page numbe
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>360</real>
+			<real>425</real>
+		</dict>
+		<key>D512D46E-8C0B-49AB-808B-051BDA488A65</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>295</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

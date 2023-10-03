@@ -58,10 +58,6 @@
 		"prefix": ["then return end", "tree"],
 		"body": "then return end"
 	},
-	"format": {
-		"prefix": "format",
-		"body": "(\"$0%s\"):format(${1:var})"
-	},
 	"home": {
 		"prefix": "home",
 		"body": "os.getenv(\"HOME\")"

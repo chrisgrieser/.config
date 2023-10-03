@@ -11,6 +11,7 @@ local s = {
 	treesitter = { name = "treesitter" },
 	cmdline_history = { name = "cmdline_history", keyword_length = 2 },
 	cmdline = { name = "cmdline" },
+	luasnip_choice = { name = "luasnip_choice" },
 }
 local source_icons = {
 	treesitter = "",
@@ -24,8 +25,10 @@ local source_icons = {
 	path = "",
 	cmdline = "󰘳",
 	cmdline_history = "󰋚",
+	luasnip_choice = "󰊖",
 }
 local defaultSources = {
+	s.luasnip_choice,
 	s.snippets,
 	s.lsp,
 	s.emojis,
@@ -113,19 +116,14 @@ local function cmpconfig()
 
 			-- Next item, or trigger completion, or insert normal tab
 			["<Tab>"] = cmp.mapping(function(fallback)
-				if require("luasnip").choice_active() then
-					cmp.abort()
-					require("luasnip").change_choice(1)
-				elseif cmp.visible() then
+				if cmp.visible() then
 					cmp.select_next_item()
 				else
 					fallback()
 				end
 			end, { "i", "s" }),
 			["<S-Tab>"] = cmp.mapping(function(fallback)
-				if require("luasnip").choice_active() then
-					require("luasnip").change_choice(-1)
-				elseif cmp.visible() then
+				if cmp.visible() then
 					cmp.select_prev_item()
 				else
 					fallback()
@@ -142,20 +140,18 @@ local function cmpconfig()
 		},
 		formatting = {
 			fields = { "kind", "abbr", "menu" }, -- order of the fields
-			format = function(entry, vim_item)
+			format = function(entry, item)
 				-- abbreviate length https://github.com/hrsh7th/nvim-cmp/discussions/609
 				-- (height is controlled via pumheight option)
-				local max_length = 45
-				if #vim_item.abbr > max_length then
-					vim_item.abbr = vim_item.abbr:sub(1, max_length) .. "…"
-				end
+				local max_length = 50
+				if #item.abbr > max_length then item.abbr = item.abbr:sub(1, max_length) .. "…" end
 
 				-- icons
-				local kindIcon = kind_icons[vim_item.kind] or ""
-				vim_item.kind = " " .. kindIcon .. " "
-				vim_item.menu = source_icons[entry.source.name]
-				if entry.source.name == "fuzzy_buffer" then vim_item.kind = "" end
-				return vim_item
+				local kindIcon = kind_icons[item.kind] or ""
+				item.kind = " " .. kindIcon .. " "
+				item.menu = source_icons[entry.source.name]
+				if entry.source.name == "fuzzy_buffer" then item.kind = "" end
+				return item
 			end,
 		},
 		sources = cmp.config.sources(defaultSources),
@@ -176,6 +172,7 @@ local function filetypeCompletionConfig()
 			return not (line:find("%s%-%-?$") or line:find("^%-%-?$"))
 		end,
 		sources = cmp.config.sources {
+			s.luasnip_choice,
 			s.snippets,
 			s.lsp,
 			s.nerdfont, -- add nerdfont for config
@@ -326,16 +323,14 @@ return {
 			"hrsh7th/cmp-nvim-lsp", -- LSP input
 			"L3MON4D3/LuaSnip", -- snippet engine
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
+			"L3MON4D3/cmp-luasnip-choice", -- suggestions for luasnip choice nodes
 		},
 	},
 	{ -- for fuzzy searching the buffer via /
 		"tzachar/cmp-fuzzy-buffer",
 		dependencies = {
 			"hrsh7th/nvim-cmp",
-			{
-				"tzachar/fuzzy.nvim",
-				dependencies = { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-			},
+			{ "tzachar/fuzzy.nvim", dependencies = "nvim-telescope/telescope-fzf-native.nvim" },
 		},
 	},
 	{ -- Snippet Engine
@@ -346,16 +341,18 @@ return {
 			require("luasnip").setup {
 				region_check_events = "CursorMoved", -- prevent <Tab> jumping back to a snippet after it has been left early
 				update_events = { "TextChanged", "TextChangedI" }, -- live updating of snippets
-				ext_opts = {
-					-- choice node https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#ext_opts
-					[require("luasnip.util.types").choiceNode] = {
-						active = { virt_text = { { "󰊖 ", "DiagnosticHint" } } },
-					},
-				},
 			}
 
 			-- VS-code-style snippets
 			require("luasnip.loaders.from_vscode").lazy_load { paths = "./snippets" }
+		end,
+	},
+	{
+		"L3MON4D3/cmp-luasnip-choice",
+		config = function()
+			require("cmp_luasnip_choice").setup {
+				auto_open = true, -- Automatically open nvim-cmp on choice node (default: true)
+			}
 		end,
 	},
 }
