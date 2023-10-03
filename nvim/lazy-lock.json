@@ -9,7 +9,6 @@
   "cmp-cmdline-history": { "branch": "master", "commit": "003573b72d4635ce636234a826fa8c4ba2895ffe" },
   "cmp-emoji": { "branch": "main", "commit": "19075c36d5820253d32e2478b6aaf3734aeaafa0" },
   "cmp-fuzzy-buffer": { "branch": "main", "commit": "ada6352bc7e3c32471ab6c08f954001870329de1" },
-  "cmp-luasnip-choice": { "branch": "master", "commit": "4f49232e51c9df379b9daf43f25f7ee6320450f0" },
   "cmp-nerdfont": { "branch": "main", "commit": "853a946eda00016f60c0602a20d8595c6eb074a6" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "44b16d11215dce86f253ce0c30949813c0a90765" },
   "cmp-path": { "branch": "main", "commit": "91ff86cd9c29299a64f968ebb45846c485725f23" },
