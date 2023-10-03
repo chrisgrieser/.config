@@ -30,9 +30,11 @@ nnoremap k gk
 nnoremap I g0i
 nnoremap A g$a
 
-" navigate paragraphs
-nnoremap gj }j
-nnoremap gk {k
+" navigate chapters (longform plugin)
+exmap previousScene obcommand longform:longform-previous-scene
+exmap nextScene obcommand longform:longform-next-scene
+nnoremap gj :nextScene
+nnoremap gk :previousScene
 
 " HJKL behaves like hjkl, but bigger distance
 noremap H g0
@@ -139,8 +141,11 @@ nnoremap ,gc :gitCommit
 " Editing
 """"""""""""""""""""""
 
-" undo consistently on one key
+" undo/redo consistently on one key
 nnoremap U <C-r>
+
+" redo all
+nnoremap ,ur 1000<C-r>
 
 " split line
 vnoremap ,s gq
