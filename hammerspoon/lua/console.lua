@@ -94,6 +94,16 @@ end)
 u.urischeme("clear-console", cons.clearConsole)
 
 --------------------------------------------------------------------------------
+
+-- Separator the logs every day at midnight
+DailyConsoleSeperator = hs.timer
+	.doAt("00:00", "01d", function()
+		local date = os.date("%a, %d. %b")
+		print(("\n--------------------------- %s -------------------------------\n"):format(date))
+	end, true)
+	:start()
+
+--------------------------------------------------------------------------------
 local M = {}
 
 function M.setConsoleColors()
