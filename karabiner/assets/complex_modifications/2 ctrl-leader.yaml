@@ -75,13 +75,7 @@ rules:
           - type: input_source_if
             input_sources: [{ language: ^de$ }]
         to:
-          - shell_command: |
-              source $HOME/.zshenv
-              if [[ "$TICKER_APP" == "Twitter" ]]; then
-                open -a "Twitter"
-              else
-                open 'https://pkm.social/notifications'
-              fi
+          - shell_command: open 'https://pkm.social/notifications'
           - *deactivate-leader
           - *remove-notice
       # [,]: System Preferences
@@ -122,7 +116,7 @@ rules:
         from: { key_code: "n" }
         conditions: [*leader-active]
         to:
-          - shell_command: osascript -e 'tell application "Neovide" to activate'
+          - shell_command: open -a "Neovide"
           - *deactivate-leader
           - *remove-notice
       # [S]lack
