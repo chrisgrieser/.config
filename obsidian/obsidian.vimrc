@@ -45,6 +45,16 @@ nnoremap K 6gk
 onoremap J 2j
 onoremap K 2k
 
+" Jumps
+nnoremap <C-h> <C-o>
+nnoremap <C-l> <C-i>
+
+" :bnext/bprev
+exmap goBack obcommand app:go-back
+exmap goForward obcommand app:go-forward
+nnoremap <BS> :goBack
+nnoremap <S-BS> :goForward
+
 " sentence navigation
 noremap [ (
 noremap ] )
@@ -62,10 +72,6 @@ exmap nextHeading obcommand obsidian-editor-shortcuts:goToNextHeading
 exmap prevHeading obcommand obsidian-editor-shortcuts:goToPrevHeading
 nnoremap <C-j> :nextHeading
 nnoremap <C-k> :prevHeading
-
-" done via Obsidian Hotkeys, so they also work in Preview Mode
-" nnoremap <C-h> :back
-" nnoremap <C-l> :forward
 
 " INFO doesn't work in visual mode
 exmap lineUp obcommand editor:swap-line-up
@@ -203,6 +209,9 @@ nmap o &b&i
 " Add Blank Line above/below
 nnoremap = mzO<Esc>`z
 nnoremap _ mzo<Esc>`z
+
+" Increment
+nnoremap + <C-a>
 
 """"""""""""""""""""""""""""
 " Markdown/Obsidian specific
@@ -348,7 +357,6 @@ nnoremap <C-w>o :only
 " Tabs
 exmap nextTab obcommand workspace:next-tab
 exmap prevTab obcommand workspace:previous-tab
-nnoremap <BS> :nextTab
 nnoremap gt :nextTab
 nnoremap gT :prevTab
 
