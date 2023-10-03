@@ -1,4 +1,3 @@
--- source definitions
 local s = {
 	emojis = { name = "emoji", keyword_length = 2 },
 	nerdfont = { name = "nerdfont", keyword_length = 2 },
@@ -11,7 +10,6 @@ local s = {
 	treesitter = { name = "treesitter" },
 	cmdline_history = { name = "cmdline_history", keyword_length = 2 },
 	cmdline = { name = "cmdline" },
-	luasnip_choice = { name = "luasnip_choice" },
 }
 local source_icons = {
 	treesitter = "",
@@ -25,7 +23,6 @@ local source_icons = {
 	path = "",
 	cmdline = "󰘳",
 	cmdline_history = "󰋚",
-	luasnip_choice = "󰊖",
 }
 local defaultSources = {
 	s.luasnip_choice,
@@ -286,10 +283,6 @@ local function cmdlineCompletionConfig()
 			return true
 		end,
 		sources = cmp.config.sources({
-			s.path,
-			s.cmdline,
-		}, { -- second array only relevant when no source from the first matches
-			s.cmdline_history,
 		}),
 	})
 
@@ -304,7 +297,7 @@ end
 return {
 	{ -- Completion Engine + Sources
 		"hrsh7th/nvim-cmp",
-		event = { "InsertEnter", "CmdlineEnter" }, -- CmdlineEnter for completions there
+		event = { "InsertEnter", "CmdlineEnter" }, 
 		config = function()
 			cmpconfig()
 			filetypeCompletionConfig()
@@ -323,7 +316,6 @@ return {
 			"hrsh7th/cmp-nvim-lsp", -- LSP input
 			"L3MON4D3/LuaSnip", -- snippet engine
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
-			"L3MON4D3/cmp-luasnip-choice", -- suggestions for luasnip choice nodes
 		},
 	},
 	{ -- for fuzzy searching the buffer via /
@@ -345,14 +337,6 @@ return {
 
 			-- VS-code-style snippets
 			require("luasnip.loaders.from_vscode").lazy_load { paths = "./snippets" }
-		end,
-	},
-	{
-		"L3MON4D3/cmp-luasnip-choice",
-		config = function()
-			require("cmp_luasnip_choice").setup {
-				auto_open = true, -- Automatically open nvim-cmp on choice node (default: true)
-			}
 		end,
 	},
 }

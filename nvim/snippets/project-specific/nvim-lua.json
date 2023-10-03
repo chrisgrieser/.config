@@ -1,8 +1,4 @@
 {
-	"keymap": {
-		"prefix": "keymap",
-		"body": "keymap(\"n\", \"${1:LHS}\", ${2:\"RHS\"}, { desc = \"$3\" })"
-	},
 	"nvim-utils (require)": {
 		"prefix": "utils (require)",
 		"body": "local u = require(\"config.utils\")"
@@ -10,14 +6,6 @@
 	"check if file exists": {
 		"prefix": "check if file exists",
 		"body": "local fileExists = vim.loop.fs_stat(\"${1:filepath}\") ~= nil"
-	},
-	"keymap (multi-mode)": {
-		"prefix": "keymap (multi-mode)",
-		"body": "keymap({ \"n\", \"x\" }, \"${1:LHS}\", ${2:\"RHS\"}, { desc = \"$3\" })"
-	},
-	"keymap (buffer)": {
-		"prefix": "keymap (buffer)",
-		"body": "keymap(\"n\", \"${1:LHS}\", ${2:\"RHS\"}, { desc = \"$3\", buffer = true })"
 	},
 	"plugin spec (lazy.nvim)": {
 		"prefix": "plugin spec (lazy.nvim)",
@@ -43,7 +31,7 @@
 	"autocmd": {
 		"prefix": "autocmd",
 		"body": [
-			"vim.api.nvim_create_autocmd(\"${1|BufReadPost,ColorScheme,InsertEnter,InsertLeave|}\", {",
+			"vim.api.nvim_create_autocmd(\"${1:event}\", {",
 			"\tcallback = function()",
 			"\t\t$0",
 			"\tend,",
