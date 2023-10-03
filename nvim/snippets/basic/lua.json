@@ -50,10 +50,6 @@
 		"prefix": "if .. then .. else",
 		"body": ["if ${1:true} then", "\t$2", "else", "\t$0", "end"]
 	},
-	"return end": {
-		"prefix": ["return end", "re"],
-		"body": "return end"
-	},
 	"then return end": {
 		"prefix": ["then return end", "tree"],
 		"body": "then return end"
