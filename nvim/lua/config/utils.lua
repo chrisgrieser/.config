@@ -151,7 +151,7 @@ end
 
 --------------------------------------------------------------------------------
 
----Sets the global BorderStyle variable (see: https://neovim.io/doc/user/api.html#nvim_open_win())
+---Sets the global BorderStyle variable (see: https://neovim.io/doc/user/api.html#nvim_open_win() )
 M.borderStyle = "rounded" ---@type "single"|"double"|"rounded"|"solid"|"shadow"|"none"
 M.borderHorizontal = "─" -- ═
 
