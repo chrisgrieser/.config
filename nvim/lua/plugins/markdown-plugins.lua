@@ -29,14 +29,7 @@ return {
 		ft = "markdown",
 		build = "cd app && npm install",
 		init = function()
-			vim.g.mkdp_preview_options = { disable_sync_scroll = 0 }
-			u.ftKeymap(
-				"markdown",
-				"n",
-				"<localleader><localleader>",
-				"<Plug>MarkdownPreview",
-				{ desc = " Preview" }
-			)
+			u.ftKeymap("markdown", "n", "<D-r>", "<Plug>MarkdownPreview", { desc = " Preview" })
 		end,
 	},
 }

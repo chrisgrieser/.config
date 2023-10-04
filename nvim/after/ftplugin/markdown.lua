@@ -51,7 +51,7 @@ keymap("n", "<localleader>i", function()
 	vim.api.nvim_set_current_line(htmlImage)
 end, { desc = "  MD image to <img>", buffer = true })
 
--- searchlink
+-- searchlink / ddgr
 keymap({ "n", "x" }, "<localleader>k", function()
 	local query
 	if fn.mode() == "n" then
@@ -85,20 +85,6 @@ keymap(
 
 --------------------------------------------------------------------------------
 -- SPELLING
-
-local lang = "de-DE"
-keymap("n", "<localleader>d", function()
-	local clients = vim.lsp.buf_get_clients(0)
-	for _, client in ipairs(clients) do
-		if client.name == "ltex" then
-			u.notify("ltex lang", lang)
-			client.config.settings.ltex.language = lang
-			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = client.config.settings })
-			return
-		end
-	end
-end, { desc = ("󰓆 ltex lang to %q"):format(lang), buffer = true })
-
 keymap("n", "zg", function()
 	local clients = vim.lsp.buf_get_clients(0)
 	for _, client in ipairs(clients) do
