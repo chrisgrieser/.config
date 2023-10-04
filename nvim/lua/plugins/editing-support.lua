@@ -215,15 +215,8 @@ return {
 			{ "Ü", function() require("sibling-swap").swap_with_left() end, desc = "󰶢 Move Node Left" },
 		},
 		init = function()
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = { "markdown", "text", "gitcommit" },
-				callback = function()
-					-- stylua: ignore
-					vim.keymap.set("n", "ü", '"zdawel"zph', { desc = "󰔰 Move Word Right", buffer = true })
-					-- stylua: ignore
-					vim.keymap.set("n", "Ü", '"zdawbh"zph', { desc = "󰶢 Move Word Left", buffer = true })
-				end,
-			})
+			u.ftKeymap({ "markdown", "text", "gitcommit" }, "n", "ü", '"zdawel"zph')
+			u.ftKeymap({ "markdown", "text", "gitcommit" }, "n", "Ü", '"zdawbh"zph')
 		end,
 	},
 	{ -- fixes scrolloff at end of file
@@ -248,6 +241,7 @@ return {
 						both = { fallback = function() vim.cmd("normal! gww") end },
 					},
 				},
+				-- comments
 				comment = {
 					source = {
 						both = { fallback = function() vim.cmd("normal! gww") end },
@@ -267,6 +261,8 @@ return {
 			{ "gp", "<Plug>(YankyPutIndentAfterCharwise)", desc = " Charwise Paste" },
 			{ "<D-p>", "<Plug>(YankyCycleForward)", desc = " Cycle Killring" },
 			{ "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = " Sticky Yank" },
+			{ "gp", "<Plug>(YankyPutIndentAfterCharwise)", desc = " Charwise Paste" },
+			{ "<D-p>", "<Plug>(YankyCycleForward)", desc = " Cycle Killring" },
 			{
 				"p",
 				function() require("yanky.textobj").last_put() end,

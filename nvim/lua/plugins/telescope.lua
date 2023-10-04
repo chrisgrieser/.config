@@ -132,7 +132,12 @@ local function telescopeConfig()
 				timeout = 400, -- ms
 				filesize_limit = 0.3, -- in MB, do not preview big files for performance
 			},
-			borderchars = u.borderChars,
+
+			-- { "═", "║", "═", "║", "╔", "╗", "╝", "╚" }
+			-- { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+			borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+			border = false,
+
 			history = { path = u.vimDataDir .. "telescope_history" }, -- sync the history
 			default_mappings = { i = keymappings_I, n = keymappings_N },
 			sorting_strategy = "ascending", -- so layout is correctly orientated with prompt_position "top"

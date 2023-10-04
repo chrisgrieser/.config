@@ -97,7 +97,10 @@ end
 ---@param label string
 function M.leaderSubkey(key, label)
 	local ok, whichKey = pcall(require, "which-key")
-	if ok then whichKey.register { ["<leader>" .. key] = { name = " " .. label } } end
+	if not ok then return end
+	whichKey.register {
+		["<leader>" .. key] = { name = " " .. label },
+	}
 end
 
 ---Adds a component to the lualine after lualine was already set up. Useful for
@@ -148,23 +151,9 @@ end
 
 --------------------------------------------------------------------------------
 
----Sets the global BorderStyle variable and the matching BorderChars Variable.
----See also https://neovim.io/doc/user/api.html#nvim_open_win()
----(BorderChars is needed for Harpoon and Telescope, both of which do not accept
----a Borderstyle string.)
-
-M.borderStyle = "single"
-
-if M.borderStyle == "single" then
-	M.borderChars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
-	M.borderHorizontal = "─"
-elseif M.borderStyle == "double" then
-	M.borderChars = { "═", "║", "═", "║", "╔", "╗", "╝", "╚" }
-	M.borderHorizontal = "═"
-elseif M.borderStyle == "rounded" then
-	M.borderChars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
-	M.borderHorizontal = "─"
-end
+---Sets the global BorderStyle variable (see: https://neovim.io/doc/user/api.html#nvim_open_win())
+M.borderStyle = "rounded" ---@type "single"|"double"|"rounded"|"solid"|"shadow"|"none"
+M.borderHorizontal = "─" -- ═
 
 --------------------------------------------------------------------------------
 
