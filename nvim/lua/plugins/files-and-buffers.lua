@@ -9,10 +9,10 @@ return {
 			execution_message = { enabled = false },
 			noautocmd = true,
 			debounce_delay = 1000, -- save at most this many ms
-			condition = function(buf)
-				local isRegularBuffer = vim.api.nvim_buf_get_option(buf, "buftype") == ""
-				return isRegularBuffer
-			end,
+			-- condition = function(buf)
+			-- 	local isRegularBuffer = vim.api.nvim_buf_get_option(buf, "buftype") == ""
+			-- 	return isRegularBuffer
+			-- end,
 		},
 	},
 	{ -- auto-close inactive buffers

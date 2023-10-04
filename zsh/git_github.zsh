@@ -252,8 +252,7 @@ function ac() {
 	fi
 
 	# fill in empty commit msg
-	[[ $# -eq 0 ]] && commit_msg=chore
-	commit_msg=$1
+	[[ -z "$1" ]] && commit_msg=chore || commit_msg=$1
 
 	# ensure no overlength of commit msg
 	msg_length=${#commit_msg}
