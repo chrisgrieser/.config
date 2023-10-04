@@ -61,10 +61,6 @@ require("lazy").setup("plugins", {
 	},
 })
 
-keymap("n", "<leader>pp", require("lazy").sync, { desc = " Lazy Update" })
-keymap("n", "<leader>ph", require("lazy").home, { desc = " Lazy Overview" })
-keymap("n", "<leader>pi", require("lazy").install, { desc = " Lazy Install" })
-
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "lazy",
 	callback = function()
@@ -73,6 +69,11 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
+-- KEYMAPS
+keymap("n", "<leader>pp", require("lazy").sync, { desc = " Lazy Update" })
+keymap("n", "<leader>ph", require("lazy").home, { desc = " Lazy Overview" })
+keymap("n", "<leader>pi", require("lazy").install, { desc = " Lazy Install" })
+
 -- 5s after startup, notify if there many plugin updates
 vim.defer_fn(function()
 	if not require("lazy.status").has_updates() then return end

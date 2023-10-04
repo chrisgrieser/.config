@@ -263,12 +263,21 @@ return {
 			{ "zl", function() telescope("spell_suggest") end, desc = "󰓆 Spell Suggest" },
 			{ "gb", function() telescope("buffers") end, desc = " 󰽙 Buffers" },
 			{ "g.", function() telescope("resume") end, desc = " Continue" },
+			{ "gs", function() telescope("lsp_document_symbols") end, desc = "󰒕 Symbols" },
+			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
+			{ "<leader>pg", function() telescope("highlights") end, desc = " Highlight Groups" },
+			{ "<leader>pc", function() telescope("colorscheme") end, desc = " Change Colorschemes" },
+			{ "<leader>gs", function() telescope("git_status") end, desc = " Status" },
+			{ "<leader>gl", function() telescope("git_commits") end, desc = " Log" },
+			{
+				"<leader>lh",
+				function() telescope("command_history") end,
+				desc = "󰘳  Command History",
+			},
 			{
 				"go",
 				function()
-					require("telescope.builtin").find_files {
-						prompt_title = "Find Files: " .. projectName(),
-					}
+					require("telescope.builtin").find_files { prompt_title = "Find Files: " .. projectName() }
 				end,
 				desc = " Browse in Project",
 			},
@@ -279,13 +288,6 @@ return {
 				end,
 				desc = " Browse in Project",
 			},
-			{ "gs", function() telescope("lsp_document_symbols") end, desc = "󰒕 Symbols" },
-			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
-			{ "<leader>pg", function() telescope("highlights") end, desc = " Highlight Groups" },
-			{ "<leader>pc", function() telescope("colorscheme") end, desc = " Change Colorschemes" },
-			{ "<leader>gs", function() telescope("git_status") end, desc = " Status" },
-			{ "<leader>gl", function() telescope("git_commits") end, desc = " Log" },
-			{ "<leader>lh", function() telescope("command_history") end, desc = "󰘳  Command History" },
 		},
 		cmd = "Telescope",
 		dependencies = {
