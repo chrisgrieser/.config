@@ -41,6 +41,8 @@ noremap H g0
 noremap L g$
 nnoremap J 6gj
 nnoremap K 6gk
+vnoremap J 6gj
+vnoremap K 6gk
 
 onoremap J 2j
 onoremap K 2k
@@ -182,6 +184,8 @@ nnoremap ,c :enhanceUrlWithTitle
 
 " Change Word/Selection
 nnoremap <Space> "_ciw
+onoremap <Space> iw
+onoremap a<Space> iW
 
 " Delete Word/Selection
 nnoremap <S-Space> "_daw
@@ -256,6 +260,7 @@ vnoremap v <C-v>
 """"""""""""""""""""""
 " Text Objects
 """"""""""""""""""""""
+
 " quicker access to [m]assive word, [q]uote, [z]ingle quote, inline cod[e],
 " [r]ectangular bracket, and [c]urly braces
 onoremap am aW
