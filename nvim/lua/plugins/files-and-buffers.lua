@@ -22,6 +22,7 @@ return {
 			retirementAgeMins = 15,
 			ignoreUnsavedChangesBufs = false,
 			notificationOnAutoClose = true,
+			deleteBufferWhenFileDeleted = true,
 		},
 	},
 	{ -- change cwd per project
@@ -52,12 +53,7 @@ return {
 	},
 	{ -- convenience file operations
 		"chrisgrieser/nvim-genghis",
-		dependencies = {
-			"stevearc/dressing.nvim",
-			-- INFO renaming files via LSP, when `willRename` capability exists 
-			-- (only rust_analyzer & tsserver)
-			-- { "antosha417/nvim-lsp-file-operations", opts = true },
-		},
+		dependencies = "stevearc/dressing.nvim",
 		init = function() vim.g.genghis_disable_commands = true end,
 		keys = {
 			-- stylua: ignore start

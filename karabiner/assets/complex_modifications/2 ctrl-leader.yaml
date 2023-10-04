@@ -116,7 +116,13 @@ rules:
         from: { key_code: "n" }
         conditions: [*leader-active]
         to:
-          - shell_command: open -a "Neovide"
+          - shell_command: |
+              # HACK since `open -a "Neovide"` does not focus Neovide
+              if pgrep -xq "neovide" ; then
+                osascript -e 'tell application "Neovide" to activate'
+              else
+                open -a "Neovide"
+              end
           - *deactivate-leader
           - *remove-notice
       # [S]lack
@@ -283,7 +289,7 @@ rules:
           - shell_command: open 'https://www.messenger.com/'
           - *deactivate-leader
           - *remove-notice
-      # [r]eddit
+      # reddit
       - type: basic
         from: { key_code: r }
         conditions: [*leader-active]
