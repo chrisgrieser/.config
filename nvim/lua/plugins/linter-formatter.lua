@@ -230,15 +230,6 @@ return {
 	},
 	{ -- add ignore-comments & lookup rules
 		"chrisgrieser/nvim-rulebook",
-		opts = {
-			-- FIX lua_ls has indentation issue when used via code action
-			ignoreComments = {
-				["Lua Diagnostics."] = {
-					comment = "---@diagnostic disable-next-line: %s",
-					location = "prevLine",
-				},
-			},
-		},
 		keys = {
 			{ "<leader>d", function() require("rulebook").lookupRule() end, desc = "󰒕 Lookup Rule" },
 			{ "<leader>C", function() require("rulebook").ignoreRule() end, desc = "󰒕 Ignore Rule" },
