@@ -7,7 +7,6 @@ local keymap = require("config.utils").uniqueKeymap
 
 --------------------------------------------------------------------------------
 -- META
-
 keymap("n", "<D-;>", function()
 	local pathOfThisFile = debug.getinfo(1).source:sub(2)
 	vim.cmd.edit(pathOfThisFile)
@@ -15,9 +14,7 @@ end, { desc = "⌨️ Edit leader-keybindings.lua" })
 
 --------------------------------------------------------------------------------
 
---------------------------------------------------------------------------------
-
--- copy Last Command
+-- Copy Last Command
 keymap("n", "<leader>lc", function()
 	local lastCommand = fn.getreg(":")
 	if lastCommand == "" then
@@ -42,7 +39,6 @@ end, { desc = "󰽘 Inspect FileType & BufType" })
 
 --------------------------------------------------------------------------------
 -- REFACTORING
-
 keymap("n", "<leader>ff", ":% s/<C-r><C-w>//g<Left><Left><Left>", { desc = " :s (cursor word)" })
 keymap("x", "<leader>ff", [["zy:%s /<C-r>z//g<Left><Left>]], { desc = " :s (selection)" })
 keymap("x", "<leader>fv", ":s ///g<Left><Left><Left>", { desc = " :s (inside visual)" })
@@ -76,7 +72,7 @@ keymap("n", "<leader>uo", function()
 	local now = os.time() -- saved in epoch secs
 	local secsPassed = now - vim.b.timeOpened
 	cmd.earlier(tostring(secsPassed) .. "s")
-end, { desc = "󰜊 Undo since last open", silent = true })
+end, { desc = "󰜊 Undo since last open" })
 
 --------------------------------------------------------------------------------
 -- LSP
@@ -160,15 +156,16 @@ keymap("n", "<leader>R", function() require("funcs.maker").make() end, { desc = 
 -- stylua: ignore
 keymap("n", "<leader>or", "<cmd>set relativenumber!<CR>", { desc = " Relative Line Numbers" })
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line Numbers" })
-keymap("n", "<leader>os", "<cmd>set spell!<CR>", { desc = "󰓆 spellcheck" })
 keymap("n", "<leader>ol", "<cmd>LspRestart<CR>", { desc = "󰒕 LspRestart" })
-keymap("n", "<leader>oh", function() vim.lsp.inlay_hint(0, nil) end, { desc = "󰒕 Inlay Hint" })
+keymap("n", "<leader>oh", function() vim.lsp.inlay_hint(0, nil) end, { desc = "󰒕 Inlay Hints" })
 
 keymap("n", "<leader>od", function() -- codespell-ignore
 	if vim.diagnostic.is_disabled(0) then
 		vim.diagnostic.enable(0)
 	else
 		vim.diagnostic.disable(0)
+		vim.diagnostic.disable(0)
+
 	end
 end, { desc = " Diagnostics" })
 
