@@ -1,3 +1,6 @@
+local keymap = require("config.utils").uniqueKeymap
+--------------------------------------------------------------------------------
+
 -- Bootstrap Lazy.nvim plugin manager https://github.com/folke/lazy.nvim#-installation
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 local lazyIsInstalled = vim.loop.fs_stat(lazypath)
@@ -58,7 +61,10 @@ require("lazy").setup("plugins", {
 	},
 })
 
--- remap lazy's K
+keymap("n", "<leader>pp", require("lazy").sync, { desc = " Lazy Update" })
+keymap("n", "<leader>ph", require("lazy").home, { desc = " Lazy Overview" })
+keymap("n", "<leader>pi", require("lazy").install, { desc = " Lazy Install" })
+
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "lazy",
 	callback = function()

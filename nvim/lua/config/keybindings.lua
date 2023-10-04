@@ -8,9 +8,6 @@ local keymap = require("config.utils").uniqueKeymap
 --------------------------------------------------------------------------------
 -- META
 
--- search keymaps
-keymap("n", "?", function() cmd.Telescope("keymaps") end, { desc = "⌨️  Search Keymaps" })
-
 keymap("n", "<D-,>", function()
 	local thisFilePath = debug.getinfo(1).source:sub(2)
 	cmd.edit(thisFilePath)
@@ -107,9 +104,7 @@ keymap(
 )
 
 -- SPELLING
--- these work even with `spell=false`
-keymap("n", "zl", function() vim.cmd.Telescope("spell_suggest") end, { desc = "󰓆 Spell Suggest" })
-keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
+keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" }) -- works even with `spell=false`
 
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
@@ -191,7 +186,6 @@ keymap({ "n", "x", "i" }, "<C-CR>", "<C-w>w", { desc = " Next Window" })
 
 -- stylua: ignore
 keymap({"n", "x", "i"}, "<D-w>", function() require("funcs.alt-alt").betterClose() end, { desc = "󰽙 close buffer/window" })
-keymap("n", "gb", function() cmd.Telescope("buffers") end, { desc = " 󰽙 Buffers" })
 
 keymap("n", "<C-w>h", "<cmd>split<CR>", { desc = " horizontal split" })
 keymap("n", "<C-w>v", "<cmd>vertical split<CR>", { desc = " vertical split" })
@@ -252,42 +246,10 @@ keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = "  Inline Code" }) -- no
 keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = "  Inline Code" })
 keymap("i", "<D-e>", "``<Left>", { desc = "  Inline Code" })
 
---------------------------------------------------------------------------------
--- FILES
-
----using this to show the actual directory where I am telescoping
----@nodiscard
----@return string name of the current project
-local function projectName()
-	local pwd = vim.loop.cwd() or ""
-	return vim.fs.basename(pwd)
-end
-
-keymap(
-	"n",
-	"go",
-	function() require("telescope.builtin").find_files { prompt_title = "Find Files: " .. projectName() } end,
-	{ desc = " Browse in Project" }
-)
-
-keymap(
-	"n",
-	"gl",
-	function() require("telescope.builtin").live_grep { prompt_title = "Live Grep: " .. projectName() } end,
-	{ desc = " Live Grep in Project" }
-)
-
-keymap("n", "g.", function() cmd.Telescope("resume") end, { desc = " Continue" })
-
 ------------------------------------------------------------------------------
 -- LSP KEYBINDINGS
-
--- stylua: ignore start
-keymap("n", "ge", function() vim.diagnostic.goto_next { float = true } end, { desc = "󰒕 Next Diagnostic" })
-keymap("n", "gE", function() vim.diagnostic.goto_prev { float = true } end, { desc = "󰒕 Previous Diagnostic" })
-keymap("n", "gs", function() cmd.Telescope("lsp_document_symbols") end, { desc = "󰒕 Symbols" })
-keymap("n", "gw", function() cmd.Telescope("lsp_workspace_symbols") end, { desc = "󰒕 Workspace Symbols" })
--- stylua: ignore end
+keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
+keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
 
 keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename" })
 keymap("n", "<leader>V", ":IncRename <C-r><C-w>", { desc = "󰒕 IncRename (cword)" })
