@@ -44,6 +44,20 @@ keymap("x", "<leader>ff", [["zy:%s /<C-r>z//g<Left><Left>]], { desc = " :s (s
 keymap("x", "<leader>fv", ":s ///g<Left><Left><Left>", { desc = " :s (inside visual)" })
 keymap("n", "<leader>fd", ":g //d<Left><Left>", { desc = " delete matching" })
 
+keymap("n", "<leader>f<Tab>", function()
+	bo.expandtab = false
+	bo.tabstop = 3
+	cmd.retab { bang = true }
+	u.notify("Indent", "Now using 󰌒 (width 3)")
+end, { desc = "󰌒 Use Tabs" })
+
+keymap("n", "<leader>f<Space>", function()
+	bo.tabstop = 2
+	bo.expandtab = true
+	cmd.retab { bang = true }
+	u.notify("Indent", "Now using 󱁐 (2)")
+end, { desc = "󱁐 Use Spaces" })
+
 --------------------------------------------------------------------------------
 
 -- UNDO

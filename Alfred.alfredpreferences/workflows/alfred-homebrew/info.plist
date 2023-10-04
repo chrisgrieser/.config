@@ -591,7 +591,15 @@
 - [Homebrew](https://brew.sh/)
 
 ## Usage
-- `bi`: Search Homebrew Packages.
+- Search for a Homebrew package via the `bi` keyword.
+	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Install the package (`brew install`) in the Terminal. (Uses the terminal app you have configured [in your Alfred settings](https://www.alfredapp.com/help/features/terminal/).)
+	+ &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Open the package's homepage (`brew home`).
+	+ &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy the package's homepage to the clipboard.
+	+ &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Show package information (`brew info`) in Large Text.
+- Reinstall a package already installed on your system via the `br` keyword (`brew reinstall`).
+- Uninstall a package via the `bu` keyword (`brew uninstall`). Optionally use the `--zap` option for a clean uninstallation.
+- Search and install fonts available in the [Homebrew font tap](https://github.com/Homebrew/homebrew-cask-fonts) via the `bf` keyword (`brew install font-…`).
+
 
 ---
 
@@ -783,7 +791,7 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.1</string>
+	<string>1.2.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

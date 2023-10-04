@@ -25,7 +25,7 @@
   "eyeliner.nvim": { "branch": "main", "commit": "c540d58bf52aa979d4cca639c60387ae0c0ccf88" },
   "fold-cycle.nvim": { "branch": "main", "commit": "18c6fbb9882a1baf16a81cf1f96bcd02d2688df5" },
   "fuzzy.nvim": { "branch": "master", "commit": "67a42ad2fa6d5ff41f0ef3cf69bb247410da5d7a" },
-  "gitsigns.nvim": { "branch": "main", "commit": "795e0bda580c8b86153b0e0fb07a9a1a55df4dba" },
+  "gitsigns.nvim": { "branch": "main", "commit": "7f6f1565ac0d9f4e26d87135c6cbe0b9fdcf70b3" },
   "glance.nvim": { "branch": "master", "commit": "8ed5cf3b3b1231ea696d88c9efd977027429d869" },
   "guess-indent.nvim": { "branch": "main", "commit": "b8ae749fce17aa4c267eec80a6984130b94f80b2" },
   "headlines.nvim": { "branch": "master", "commit": "74a083a3c32a08be24f7dfcc6f448ecf47857f46" },
@@ -100,5 +100,5 @@
   "vim-python-pep8-indent": { "branch": "master", "commit": "60ba5e11a61618c0344e2db190210145083c91f8" },
   "vim-visual-multi": { "branch": "master", "commit": "724bd53adfbaf32e129b001658b45d4c5c29ca1a" },
   "which-key.nvim": { "branch": "main", "commit": "7ccf476ebe0445a741b64e36c78a682c1c6118b7" },
-  "yanky.nvim": { "branch": "main", "commit": "c54a43cb377710b17907be8c863967fee1ffc4ee" }
+  "yanky.nvim": { "branch": "main", "commit": "f2375d09e71637aaf3d50298f4e734a432132cad" }
 }

@@ -6,6 +6,7 @@ local fn = vim.fn
 
 -- less nesting in md
 optl.tabstop = 4
+optl.expandtab = false
 
 -- Enable wrapping lines
 require("funcs.quality-of-life").wrap("on")
