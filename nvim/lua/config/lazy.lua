@@ -32,7 +32,7 @@ require("lazy").setup("plugins", {
 	},
 	checker = {
 		enabled = true, -- automatically check for plugin updates
-		notify = false, -- done on my own to with minimum condition for less noise
+		notify = false, -- done on my own to use minimum condition for less noise
 		frequency = 60 * 60 * 24, -- = 1 day
 	},
 	git = { timeout = 60 }, -- 1min timeout for tasks
@@ -41,7 +41,8 @@ require("lazy").setup("plugins", {
 	readme = { enabled = false },
 	performance = {
 		rtp = {
-			disabled_plugins = { -- disable unused builtin plugins from neovim
+			-- disable unused builtin plugins from neovim
+			disabled_plugins = {
 				"man",
 				"matchparen",
 				"matchit",
