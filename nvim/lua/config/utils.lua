@@ -151,9 +151,22 @@ end
 
 --------------------------------------------------------------------------------
 
----Sets the global BorderStyle variable (see: https://neovim.io/doc/user/api.html#nvim_open_win() )
-M.borderStyle = "rounded" ---@type "single"|"double"|"rounded"|"solid"|"shadow"|"none"
-M.borderHorizontal = "─" -- ═
+---Sets the global BorderStyle variable and the matching BorderChars Variable.
+---See also https://neovim.io/doc/user/api.html#nvim_open_win()
+---(BorderChars used for Telescope, borderHorizontal used for whichkey and Glance)
+
+M.borderStyle = "rounded" ---@type "single"|"double"|"rounded"
+
+if M.borderStyle == "single" then
+	M.borderChars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
+	M.borderHorizontal = "─"
+elseif M.borderStyle == "double" then
+	M.borderChars = { "═", "║", "═", "║", "╔", "╗", "╝", "╚" }
+	M.borderHorizontal = "═"
+elseif M.borderStyle == "rounded" then
+	M.borderChars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+	M.borderHorizontal = "─"
+end
 
 --------------------------------------------------------------------------------
 

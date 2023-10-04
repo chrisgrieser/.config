@@ -1,4 +1,5 @@
 local u = require("config.utils")
+local telescope = vim.cmd.Telescope
 --------------------------------------------------------------------------------
 
 -- default mappings: https://github.com/nvim-telescope/telescope.nvim/blob/942fe5faef47b21241e970551eba407bc10d9547/lua/telescope/mappings.lua#L133
@@ -132,12 +133,7 @@ local function telescopeConfig()
 				timeout = 400, -- ms
 				filesize_limit = 0.3, -- in MB, do not preview big files for performance
 			},
-
-			-- { "═", "║", "═", "║", "╔", "╗", "╝", "╚" }
-			-- { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
-			borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-			border = false,
-
+			borderchars = u.borderChars,
 			history = { path = u.vimDataDir .. "telescope_history" }, -- sync the history
 			default_mappings = { i = keymappings_I, n = keymappings_N },
 			sorting_strategy = "ascending", -- so layout is correctly orientated with prompt_position "top"
@@ -250,9 +246,47 @@ local function telescopeConfig()
 	}
 end
 
+--------------------------------------------------------------------------------
+
+---@nodiscard
+---@return string name of the current project
+local function projectName()
+	local pwd = vim.loop.cwd() or ""
+	return vim.fs.basename(pwd)
+end
+
 return {
 	{ -- fuzzy selector
 		"nvim-telescope/telescope.nvim",
+		keys = {
+			{ "?", function() telescope("keymaps") end, desc = "⌨️  Search Keymaps" },
+			{ "zl", function() telescope("spell_suggest") end, desc = "󰓆 Spell Suggest" },
+			{ "gb", function() telescope("buffers") end, desc = " 󰽙 Buffers" },
+			{ "g.", function() telescope("resume") end, desc = " Continue" },
+			{
+				"go",
+				function()
+					require("telescope.builtin").find_files {
+						prompt_title = "Find Files: " .. projectName(),
+					}
+				end,
+				desc = " Browse in Project",
+			},
+			{
+				"gl",
+				function()
+					require("telescope.builtin").live_grep { prompt_title = "Live Grep: " .. projectName() }
+				end,
+				desc = " Browse in Project",
+			},
+			{ "gs", function() telescope("lsp_document_symbols") end, desc = "󰒕 Symbols" },
+			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
+			{ "<leader>pg", function() telescope("highlights") end, desc = " Highlight Groups" },
+			{ "<leader>pc", function() telescope("colorscheme") end, desc = " Change Colorschemes" },
+			{ "<leader>gs", function() telescope("git_status") end, desc = " Status" },
+			{ "<leader>gl", function() telescope("git_commits") end, desc = " Log" },
+			{ "<leader>lh", function() telescope("command_history") end, desc = "󰘳  Command History" },
+		},
 		cmd = "Telescope",
 		dependencies = {
 			"nvim-lua/plenary.nvim",

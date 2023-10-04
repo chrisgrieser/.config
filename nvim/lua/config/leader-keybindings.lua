@@ -15,18 +15,6 @@ end, { desc = "⌨️ Edit leader-keybindings.lua" })
 
 --------------------------------------------------------------------------------
 
--- highlight groups
-keymap("n", "<leader>pg", function() cmd.Telescope("highlights") end, { desc = " Highlight Groups" })
-
--- Plugins
-keymap("n", "<leader>pp", require("lazy").sync, { desc = " Lazy Update" })
-keymap("n", "<leader>ph", require("lazy").home, { desc = " Lazy Overview" })
-keymap("n", "<leader>pi", require("lazy").install, { desc = " Lazy Install" })
-
--- Theme Picker
--- stylua: ignore
-keymap("n", "<leader>pc", function() cmd.Telescope("colorscheme") end, { desc = " Change Colorschemes" })
-
 --------------------------------------------------------------------------------
 
 -- copy Last Command
@@ -45,10 +33,6 @@ end, { desc = "󰘳 Copy last command" })
 -- as opposed to `@:`, `:<Up><CR>` works across sessions
 keymap("n", "<leader>lg", ":<Up><CR>", { desc = "󰘳 Run last command again", silent = true })
 
--- search command history
--- stylua: ignore
-keymap("n", "<leader>lh", function() cmd.Telescope("command_history") end, { desc = "󰘳  Command History" })
-
 -- show current filetype & buftype
 keymap("n", "<leader>lf", function()
 	local out = "filetype: " .. bo.filetype
@@ -62,23 +46,7 @@ end, { desc = "󰽘 Inspect FileType & BufType" })
 keymap("n", "<leader>ff", ":% s/<C-r><C-w>//g<Left><Left><Left>", { desc = " :s (cursor word)" })
 keymap("x", "<leader>ff", [["zy:%s /<C-r>z//g<Left><Left>]], { desc = " :s (selection)" })
 keymap("x", "<leader>fv", ":s ///g<Left><Left><Left>", { desc = " :s (inside visual)" })
-
 keymap("n", "<leader>fd", ":g //d<Left><Left>", { desc = " delete matching" })
-keymap("n", "<leader>fy", ":g //y<Left><Left>", { desc = " yank matching" })
-
-keymap("n", "<leader>f<Tab>", function()
-	bo.expandtab = false
-	bo.tabstop = 3
-	cmd.retab { bang = true }
-	u.notify("Indent", "Now using 󰌒 (width 3)")
-end, { desc = "󰌒 Use Tabs" })
-
-keymap("n", "<leader>f<Space>", function()
-	bo.tabstop = 2
-	bo.expandtab = true
-	cmd.retab { bang = true }
-	u.notify("Indent", "Now using 󱁐 (2)")
-end, { desc = "󱁐 Use Spaces" })
 
 --------------------------------------------------------------------------------
 
@@ -185,13 +153,6 @@ keymap(
 	{ desc = " Make First" }
 )
 keymap("n", "<leader>R", function() require("funcs.maker").make() end, { desc = " Select Make" })
-
---------------------------------------------------------------------------------
--- GIT
-
--- Telescope
-keymap("n", "<leader>gs", function() cmd.Telescope("git_status") end, { desc = " Status" })
-keymap("n", "<leader>gl", function() cmd.Telescope("git_commits") end, { desc = " Log" })
 
 --------------------------------------------------------------------------------
 -- OPTION TOGGLING
