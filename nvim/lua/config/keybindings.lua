@@ -91,6 +91,7 @@ keymap("n", "<Tab>", ">>", { desc = "󰉶 indent line" })
 keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent line" })
 keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent selection" })
 keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent selection" })
+
 keymap("n", "[", "<", { desc = "outdent" })
 keymap("n", "]", ">", { desc = "indent" })
 
@@ -300,6 +301,7 @@ keymap({ "n", "i", "v" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰒕 Si
 
 autocmd("FileType", {
 	pattern = {
+		"help",
 		"help",
 		"lspinfo",
 		"lazy",
