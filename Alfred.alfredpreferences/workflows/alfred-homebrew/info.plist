@@ -177,7 +177,7 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>More convenient brewing with Alfred</string>
+	<string>Search, install, or uninstall homebrew packages conveniently</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -399,7 +399,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>brew-info.sh</string>
+				<string>./scripts/brew-info.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -587,8 +587,11 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string># Requirements
+	<string>## Requirements
 - [Homebrew](https://brew.sh/)
+
+## Usage
+- `bi`: Search Homebrew Packages.
 
 ---
 
@@ -600,7 +603,7 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>note</key>
-			<string>brew uninstall --zap</string>
+			<string>brew uninstall</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -619,6 +622,8 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
+			<key>note</key>
+			<string>brew uninstall</string>
 			<key>xpos</key>
 			<real>370</real>
 			<key>ypos</key>
@@ -686,6 +691,8 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
+			<key>note</key>
+			<string>brew reinstall</string>
 			<key>xpos</key>
 			<real>370</real>
 			<key>ypos</key>
@@ -763,12 +770,12 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 				<key>required</key>
 				<false/>
 				<key>text</key>
-				<string>use</string>
+				<string>--zap</string>
 			</dict>
 			<key>description</key>
-			<string>When using the uninstallation command on a cask, use `--zap`. (This results in homebrew also cleaning up data and cache files from the app.)</string>
+			<string>When using the uninstallation command on a cask, use `--zap`. This results in homebrew also cleaning up data and cache files from the app.</string>
 			<key>label</key>
-			<string>--zap</string>
+			<string>shell options</string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>
