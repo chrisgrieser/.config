@@ -113,8 +113,11 @@ opt.nrformats:append("unsigned") -- make <C-a>/<C-x> ignore negative numbers
 opt.nrformats:remove { "bin", "hex" } -- remove ambiguity, since I don't use them anyway
 
 -- Timeouts
-opt.updatetime = 250 -- also affects current symbol highlight (treesitter-refactor) and current line lsp-hints
+opt.updatetime = 250 -- also affects cursorword symbols lsp-hints
 opt.timeoutlen = 666 -- also affects duration until which-key is shown
+
+-- Misc
+opt.debug = "msg" -- more verbose messages
 
 --------------------------------------------------------------------------------
 
@@ -184,20 +187,5 @@ vim.on_key(function(char)
 		if ok then hlslens.start() end
 	end
 end, vim.api.nvim_create_namespace("auto_nohl"))
-
---------------------------------------------------------------------------------
-
--- notify when coming back to a file that does not exist anymore
-autocmd("FocusGained", {
-	callback = function()
-		local fileExists = vim.loop.fs_stat(vim.fn.expand("%")) ~= nil
-		local specialBuffer = vim.bo.buftype ~= ""
-		if not fileExists and not specialBuffer then
-			local name = vim.fs.basename(vim.api.nvim_buf_get_name(0))
-			u.notify("", ("%s does not exist anymore, deleted buffer."):format(name), "warn")
-			vim.cmd.bdelete()
-		end
-	end,
-})
 
 --------------------------------------------------------------------------------

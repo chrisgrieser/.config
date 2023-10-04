@@ -16,8 +16,8 @@ local darkThemes = {
 	"ChallengerDeep",
 }
 local lightThemes = {
-	"Edge Light (base16)",
 	"seoulbones_light",
+	"Edge Light (base16)",
 	"Google Light (Gogh)",
 	"OneHalfLight",
 	"Atelier Cave Light (base16)",
