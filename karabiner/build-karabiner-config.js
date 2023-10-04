@@ -31,7 +31,7 @@ function main() {
 	customRulesJSONlocation = customRulesJSONlocation.replace(/^~/, app.pathTo("home folder"));
 
 	const yqNotInstalled = app.doShellScript("command yq || echo false") === "false";
-	if (yqNotInstalled) return "Karabiner Config Build: ❌ yq is not installed.";
+	if (yqNotInstalled) return "󱎘 yq is not installed.";
 
 	// convert yaml to json (requires `yq`)
 	// using `explode` to expand anchors & aliases: https://mikefarah.gitbook.io/yq/operators/anchor-and-alias-operators#explode-alias-and-anchor
@@ -44,22 +44,23 @@ function main() {
 		done
 	`);
 
-	// built new karabiner.json out of single jsons
+	// compile new rules
 	const customRules = [];
-	app.doShellScript(`ls "${customRulesJSONlocation}" | grep ".json"`)
-		.split("\r")
-		.forEach(fileName => {
-			const filePath = customRulesJSONlocation + fileName;
-			const ruleSet = JSON.parse(readFile(filePath))?.rules;
-			if (!ruleSet) return;
-			ruleSet.forEach((/** @type {any} */ rule) => customRules.push(rule));
-			app.doShellScript(`rm "${filePath}"`); // delete leftover JSON
-		});
-	const complexRules = JSON.parse(readFile(karabinerJSON));
+	const ruleFile = app.doShellScript(`ls "${customRulesJSONlocation}" | grep ".json"`).split("\r");
+	for (const fileName of ruleFile) {
+		const filePath = customRulesJSONlocation + fileName;
+		const ruleSet = JSON.parse(readFile(filePath))?.rules;
+		if (!ruleSet) return;
+		for (const rule of ruleSet) {
+			customRules.push(rule);
+		}
+		app.doShellScript(`rm "${filePath}"`); // delete leftover JSON
+	}
 
+	// insert new rules into karabiner config
 	// INFO: the rules are added to the *first* profile in the profile list from Karabiner.
+	const complexRules = JSON.parse(readFile(karabinerJSON));
 	complexRules.profiles[0].complex_modifications.rules = customRules;
-
 	writeToFile(karabinerJSON, JSON.stringify(complexRules));
 
 	// validate
@@ -68,8 +69,8 @@ function main() {
 			`"/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli" --lint-complex-modifications "${karabinerJSON}"`,
 		)
 		.trim();
-	const msg = lintStatus === "ok" ? "✅ Build Success." : "🛑 Config Invalid.";
-	return msg
+	const msg = lintStatus === "ok" ? " Build Success" : "󱎘 Config Invalid";
+	return msg; // notify via makefile output
 }
 
 main();

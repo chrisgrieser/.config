@@ -122,7 +122,7 @@ rules:
                 osascript -e 'tell application "Neovide" to activate'
               else
                 open -a "Neovide"
-              end
+              fi
           - *deactivate-leader
           - *remove-notice
       # [S]lack

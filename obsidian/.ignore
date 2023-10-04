@@ -1,0 +1,5 @@
+# Automator App Internals
+*.app
+
+*INFO*
+ApplicationStub.icns

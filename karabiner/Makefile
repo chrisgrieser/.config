@@ -1,5 +1,4 @@
-.PHONY: reload
+.PHONY: reload_karabiner
 
-reload:
+reload_karabiner:
 	osascript -l JavaScript ./build-karabiner-config.js
-
