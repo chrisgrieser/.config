@@ -267,7 +267,14 @@ return {
 			{ "gp", "<Plug>(YankyPutIndentAfterCharwise)", desc = " Charwise Paste" },
 			{ "<D-p>", "<Plug>(YankyCycleForward)", desc = " Cycle Killring" },
 			{ "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = " Sticky Yank" },
-			{ "Y", "y$" }, -- so it loads the killring in time
+			{
+				"p",
+				function() require("yanky.textobj").last_put() end,
+				mode = "o",
+				desc = "󱡔 Last Paste textobj",
+			},
+			-- so it loads the killring in time
+			{ "Y", "y$" },
 			"d",
 			"D",
 		},
