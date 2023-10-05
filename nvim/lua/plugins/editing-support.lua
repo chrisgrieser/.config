@@ -5,8 +5,8 @@ local u = require("config.utils")
 return {
 	{
 		"monaqa/dial.nvim",
-		-- stylua: ignore
 		keys = {
+			-- stylua: ignore
 			{ "+", function() return require("dial.map").inc_normal() end, desc = "󰘂 Dial", expr = true },
 		},
 		config = function()
@@ -21,6 +21,7 @@ return {
 					toggle { elements = { "increase", "decrease" }, word = false },
 					toggle { elements = { "enable", "disable" }, word = false },
 					toggle { elements = { "dark", "light" }, word = false },
+					toggle { elements = { "right", "left" }, word = false },
 					toggle { elements = { "~=", "==" }, word = false },
 					toggle { elements = { "!==", "===" }, word = false },
 				},
@@ -48,6 +49,7 @@ return {
 			local isNodeType = require("nvim-autopairs.ts-conds").is_ts_node
 			local isNotNodeType = require("nvim-autopairs.ts-conds").is_not_ts_node
 			local negLookahead = require("nvim-autopairs.conds").not_after_regex
+			local notBefore = require("nvim-autopairs.conds").not_before_text
 
 			require("nvim-autopairs").add_rules {
 				rule("<", ">", "lua"):with_pair(isNodeType { "string", "string_content" }),
@@ -71,6 +73,7 @@ return {
 				rule([[^%s*[:=%w]$]], ",", { "javascript", "typescript", "lua", "python" })
 					:use_regex(true)
 					:with_pair(negLookahead(".+")) -- neg. cond has to come first
+					:with_pair(notBefore(vim.bo.commentstring))
 					:with_pair(isNodeType { "table_constructor", "field", "object", "dictionary" })
 					:with_del(function() return false end)
 					:with_move(function(opts) return opts.char == "," end),
@@ -130,8 +133,6 @@ return {
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "undotree",
 				callback = function()
-					vim.opt_local.list = false
-					vim.keymap.set("n", "<D-w>", vim.cmd.UndotreeToggle, { buffer = true })
 					vim.defer_fn(function()
 						vim.keymap.set("n", "J", "6j", { buffer = true })
 						vim.keymap.set("n", "K", "6k", { buffer = true })
@@ -160,7 +161,6 @@ return {
 	{ -- automatically set correct indent for file
 		"nmac427/guess-indent.nvim",
 		event = "BufReadPre",
-		opts = { override_editorconfig = false },
 	},
 	{ -- basically autopair, but for keywords
 		"RRethy/nvim-treesitter-endwise",
@@ -209,17 +209,12 @@ return {
 			interline_swaps_witout_separator = false,
 		},
 		keys = {
-			-- stylua: ignore
+			-- stylua: ignore start
 			{ "ü", function() require("sibling-swap").swap_with_right() end, desc = "󰔰 Move Node Right" },
-			-- stylua: ignore
 			{ "Ü", function() require("sibling-swap").swap_with_left() end, desc = "󰶢 Move Node Left" },
-			{
-				"ü",
-				'"zdawel"zph',
-				ft = { "markdown", "text", "gitcommit" },
-				desc = "󰔰 Move Word Right",
-			},
+			{ "ü", '"zdawel"zph', ft = { "markdown", "text", "gitcommit" }, desc = "󰔰 Move Word Right" },
 			{ "Ü", '"zdawbh"zph', ft = { "markdown", "text", "gitcommit" }, desc = "󰶢 Move Word Left" },
+			-- stylua: ignore end
 		},
 	},
 	{ -- fixes scrolloff at end of file
@@ -282,9 +277,7 @@ return {
 			textobjs = { enabled = true },
 		},
 		-- IncSearch is the default highlight group for post-yank highlights
-		init = function()
-			u.colorschemeMod("YankyYanked", { link = "IncSearch" })
-		end,
+		init = function() u.colorschemeMod("YankyYanked", { link = "IncSearch" }) end,
 	},
 	{ -- which-key
 		"folke/which-key.nvim",
