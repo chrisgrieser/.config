@@ -34,14 +34,14 @@ return {
 		"chrisgrieser/nvim-spider",
 		opts = { skipInsignificantPunctuation = true },
 		keys = {
-			-- stylua: ignore,
+			-- stylua: ignore
 			{
 				"e",
 				function() require("spider").motion("e") end,
 				mode = { "n", "o", "x" },
 				desc = "󱇫 Spider e",
 			},
-			-- stylua: ignore,
+			-- stylua: ignore
 			{
 				"b",
 				function() require("spider").motion("b") end,
@@ -117,10 +117,21 @@ return {
 			{ "i.", "<cmd>lua require('various-textobjs').chainMember('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner indent textobj" },
 			{ "a.", "<cmd>lua require('various-textobjs').chainMember('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer indent textobj" },
 
+			-- markdown
 			{ "il", "<cmd>lua require('various-textobjs').mdlink('inner')<CR>", ft = "markdown", desc = "󱡔 inner md link" },
 			{ "al", "<cmd>lua require('various-textobjs').mdlink('outer')<CR>", ft = "markdown", desc = "󱡔 outer md link" },
 			{ "iE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock('inner')<CR>", ft = "markdown", desc = "󱡔 inner CodeBlock" },
 			{ "aE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock('outer')<CR>", ft = "markdown", desc = "󱡔 outer CodeBlock" },
+
+			-- css
+			{ "is", "<cmd>lua require('various-textobjs').cssSelector('inner')<CR>", ft = "css", desc = "󱡔 inner selector" },
+			{ "as", "<cmd>lua require('various-textobjs').cssSelector('outer')<CR>", ft = "css", desc = "󱡔 outer selector" },
+			{ "ix", "<cmd>lua require('various-textobjs').mdFencedCodeBlock('inner')<CR>", ft = "css", desc = "󱡔 inner attribute" },
+			{ "ax", "<cmd>lua require('various-textobjs').mdFencedCodeBlock('outer')<CR>", ft = "css", desc = "󱡔 outer attribute" },
+
+			-- shell
+			{ "i|", "<cmd>lua require('various-textobjs').shellPipe('inner')<CR>", ft = "sh", desc = "󱡔 inner pipe" },
+			{ "a|", "<cmd>lua require('various-textobjs').shellPipe('outer')<CR>", ft = "sh", desc = "󱡔 outer pipe" },
 			-- stylua: ignore end
 
 			{ -- delete surrounding indentation
@@ -151,16 +162,5 @@ return {
 				desc = "󰌹 Smart URL Opener",
 			},
 		},
-		init = function()
-			-- stylua: ignore start
-			u.ftKeymap("sh", {"o", "x"}, "a|", "<cmd>lua require('various-textobjs').shellPipe('inner')<CR>", { desc = "󱡔 inner shellPipe textobj"})
-			u.ftKeymap("sh", {"o", "x"}, "i|", "<cmd>lua require('various-textobjs').shellPipe('outer')<CR>", { desc = "󱡔 outer shellPipe textobj"})
-
-			u.ftKeymap("css", { "o", "x" }, "is", "<cmd>lua require('various-textobjs').cssSelector('inner')<CR>", { desc = "󱡔 inner CSS Selector textobj" })
-			u.ftKeymap("css", { "o", "x" }, "as", "<cmd>lua require('various-textobjs').cssSelector('outer')<CR>", { desc = "󱡔 outer CSS Selector textobj" })
-			u.ftKeymap("css", { "o", "x" }, "ix", "<cmd>lua require('various-textobjs').htmlAttribute('inner')<CR>", { desc = "󱡔 inner HTML Attribute textobj" })
-			u.ftKeymap("css", { "o", "x" }, "ax", "<cmd>lua require('various-textobjs').htmlAttribute('outer')<CR>", { desc = "󱡔 outer HTML Attribute textobj" })
-			-- stylua: ignore end
-		end,
 	},
 }
