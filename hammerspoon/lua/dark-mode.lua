@@ -10,28 +10,18 @@ local visuals = require("lua.visuals")
 -- - Highlights PDF appearance
 -- - Sketchybar
 -- - Hammerspoon Console
--- - SideNotes
 local function toggleDarkMode()
-	local toMode, pdfBg, sidenotesTheme 
-
-	if u.isDarkMode() then
-		toMode = "light"
-		pdfBg = "Default"
-		sidenotesTheme = "Marshmallow"
-	else
-		toMode = "dark"
-		pdfBg = "Night"
-		sidenotesTheme = "Grapes and Berries"
-	end
+	local toMode = u.isDarkMode() and "light" or "dark"
 
 	-- neovim
 	-- stylua: ignore
 	local nvimLuaCmd = ([[<cmd>lua require('config.theme-customization').setThemeMode('%s')<CR>]]):format(toMode)
-	local shellCmd1 = ([[nvim --server "/tmp/nvim_server.pipe" --remote-send "%s"]]):format(nvimLuaCmd)
-	hs.execute(u.exportPath .. shellCmd1)
+	local shellCmd = ([[nvim --server "/tmp/nvim_server.pipe" --remote-send "%s"]]):format(nvimLuaCmd)
+	hs.execute(u.exportPath .. shellCmd)
 
 	-- Highlights PDF background
 	if u.appRunning("Highlights") then
+		local pdfBg = u.isDarkMode() and "Default" or "Night"
 		u.app("Highlights"):selectMenuItem { "View", "PDF Appearance", pdfBg }
 	end
 
@@ -45,22 +35,7 @@ local function toggleDarkMode()
 	console.setConsoleColors() -- must come after OS color change
 
 	-- sketchybar
-	-- stylua: ignore
-	hs.execute(u.exportPath .. 'sketchybar --reload')
-
-	-- SideNotes
-	-- stylua: ignore
-	local themePath = os.getenv("HOME") .. "/Library/Application Support/com.apptorium.SideNotes-paddle/themes"
-	local builtInThemes = { "Classic", "Retro", "Dark Blue", "Graphite Gray", "Default" }
-	if u.tbl_contains(builtInThemes, sidenotesTheme) then
-		themePath = "/Applications/SideNotes.app/Contents/Resources"
-	end
-	local jxaCmd = ([[Application("SideNotes").setTheme("%s/%s.sntheme")]]):format(
-		themePath,
-		sidenotesTheme
-	)
-	local shellCmd2 = ([[osascript -l JavaScript -e '%s']]):format(jxaCmd)
-	hs.execute(shellCmd2)
+	hs.execute(u.exportPath .. "sketchybar --reload")
 end
 
 -- MANUAL TOGGLING OF DARK MODE

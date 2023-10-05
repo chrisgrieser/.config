@@ -26,8 +26,6 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.brave\.Browser$
-              - ^com\.vivaldi\.Vivaldi$
               - ^com\.tinyspeck\.slackmacgap$
               - ^com\.hnc\.Discord$
-              - ^com\.apptorium\.SideNotes-paddle$
               - ^com\.mimestream\.Mimestream$

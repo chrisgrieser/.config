@@ -67,7 +67,5 @@ rules:
               - ^com\.hnc\.Discord$
               - ^com\.tinyspeck\.slackmacgap$
               - ^com\.brave\.Browser$ # useful for reddit
-              - ^com\.vivaldi\.Vivaldi$ # useful for reddit
-              - ^com\.apptorium\.SideNotes-paddle$
               - ^com\.runningwithcrayons\.Alfred-Preferences$
   #─────────────────────────────────────────────────────────────────────────────

@@ -50,9 +50,8 @@ function inspect() {
 	if [[ $(echo "$eza_output" | wc -l) -gt $max_files_lines ]]; then
 		echo "$eza_output" | head -n"$max_files_lines"
 		print "\033[1;34m(…)\033[0m" # blue = eza's default folder color
-	else
-		[[ -z "$eza_output" ]] || echo "$eza_output"
-		echo
+	elif [[ -n "$eza_output" ]];then
+		echo "$eza_output"
 	fi
 }
 
@@ -60,9 +59,10 @@ function inspect() {
 
 # Quick Open File
 function o() {
-	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
-	if ! command -v fd &>/dev/null; then echo "fd not installed." && return 1; fi
+	if ! command -v fzf &>/dev/null; then print "\033[1;33mfzf not installed.\033[0m" && return 1; fi
+	if ! command -v fd &>/dev/null; then print "\033[1;33mfd not installed.\033[0m" && return 1; fi
 	if ! command -v eza &>/dev/null; then print "\033[1;33meza not installed.\033[0m" && return 1; fi
+	if ! command -v bat &>/dev/null; then print "\033[1;33mbat not installed.\033[0m" && return 1; fi
 
 	local input="$*"
 

@@ -85,30 +85,6 @@ function man() {
 }
 
 #───────────────────────────────────────────────────────────────────────────────
-# CHATGPT
-
-function ai() {
-	if ! command -v yq &>/dev/null; then echo "yq not installed." && return 1; fi
-	if ! command -v bat &>/dev/null; then echo "bat not installed." && return 1; fi
-	if [[ -z "$OPENAI_API_KEY" ]]; then echo "\$OPENAI_API_KEY not found." && return 1; fi
-
-	local query="$*"
-	# INFO do not use `$prompt`, since it's a reserved zsh variable
-	local the_prompt="The following request is concerned with shell scripting. If your response includes codeblocks, do add 'bash' as language label to it. Here is the request: $query"
-	# https://platform.openai.com/docs/api-reference/making-requests
-	curl "https://api.openai.com/v1/chat/completions" \
-		-H "Content-Type: application/json" \
-		-H "Authorization: Bearer $OPENAI_API_KEY" \
-		-d "{
-			\"model\": \"gpt-3.5-turbo\",
-			\"messages\": [{\"role\": \"user\", \"content\": \"$the_prompt\"}],
-			\"temperature\": 0
-		}" |
-		yq -r '.choices[].message.content' |
-		bat --language=markdown --style=plain --wrap=auto
-}
-
-#───────────────────────────────────────────────────────────────────────────────
 # LESS
 
 export LESS_TERMCAP_mb=$'\E[1;31m' # begin bold

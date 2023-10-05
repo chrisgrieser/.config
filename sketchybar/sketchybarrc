@@ -75,12 +75,6 @@ sketchybar \
 	script="$PLUGIN_DIR/weather.sh" \
 	icon.y_offset=-1 \
 	\
-	--add item sidenotes $first_row \
-	--set sidenotes \
-	script="$PLUGIN_DIR/sidenotes.sh" \
-	--add event update-sidenotes-count \
-	--subscribe sidenotes update-sidenotes-count \
-	\
 	--add alias "$stats" $second_row \
 	--set "$stats" width="$stats_width" \
 	\
