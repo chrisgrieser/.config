@@ -1,4 +1,7 @@
 #!/usr/bin/env osascript -l JavaScript
+ObjC.import("stdlib");
+
+//──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
@@ -7,7 +10,7 @@ function run() {
 	tot.includeStandardAdditions = true;
 
 	// DOCS in theory, colors are customizable: https://support.iconfactory.com/kb/tot/can-i-customize-the-colors-of-the-dots
-	const totColors = ["🟡", "🟠", "🔴", "🟣", "🔵", "⚪", "🟢"];
+	const totIcons = $.getenv("tot_icons").split(/, ?/);
 
 	let emptyCount = 0;
 	const tots = [1, 2, 3, 4, 5, 6, 7].map((dot) => {
@@ -17,10 +20,11 @@ function run() {
 			emptyCount++;
 			return {};
 		}
-		const firstLine = content.split("\n")[0];
-		const secondLine = content.split("\n")[1];
+		const firstLine = content.split("\n")[0].slice(0, 70);
+		const secondLine = content.split("\n")[1].slice(0, 90);
+		const icon = totIcons[dot - 1] || " · "
 		return {
-			title: totColors[dot - 1] + " " + firstLine,
+			title: icon + " " + firstLine,
 			subtitle: secondLine,
 			match: firstLine + " " + secondLine,
 			arg: dot,
@@ -36,8 +40,13 @@ function run() {
 
 	// guard: all tots empty
 	if (emptyCount === 7) {
+		const dot = 1;
 		return JSON.stringify({
-			items: [{ title: "All tots empty.", valid: false }],
+			items: [{
+				title: totIcons[dot - 1] + " New Tot",
+				arg: "",
+			}],
+			variables: { dot: dot },
 		});
 	}
 
