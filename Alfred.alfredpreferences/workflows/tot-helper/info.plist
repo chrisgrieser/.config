@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>09983247-5108-4A1F-A658-4A8F022B1B05</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5358EB63-C24C-429E-8DAC-901CAD16E3FA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>171481C4-C600-4B58-8D5A-D0575E5EE9AA</key>
 		<array>
 			<dict>
@@ -51,6 +64,32 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>9DE7C88F-9CE4-42C3-B9D8-6FA01F25AFCB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>3DBCAC53-D043-40E5-8BC7-17331F0676DA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>BD1918EE-9F7F-4E6B-B4F1-4E4B5AE7263E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>3E08FF65-F031-447F-B9F6-47F8F507D79B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E46E8809-57A1-4476-9A05-35F53EC4D16B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -137,6 +176,67 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>BD1918EE-9F7F-4E6B-B4F1-4E4B5AE7263E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3E08FF65-F031-447F-B9F6-47F8F507D79B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>F0D7A81E-E2BF-4692-AE88-05F7D6110593</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>3E08FF65-F031-447F-B9F6-47F8F507D79B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>02A8138C-B11B-4A71-BBC5-422F5C43A8D0</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>3E08FF65-F031-447F-B9F6-47F8F507D79B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>20C14D1D-7C29-411D-B1C4-0748C8B6E6AF</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E46E8809-57A1-4476-9A05-35F53EC4D16B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>09983247-5108-4A1F-A658-4A8F022B1B05</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>68CDCF97-F1F0-447D-9B01-8DDDF01FE0C3</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -258,7 +358,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/tots.js</string>
+				<string>./scripts/tot-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -402,6 +502,197 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>tell application "Brave Browser"	return the URL of active tab of front windowend tell
+
+-- funktioniert auch mit der Youtube Webapp</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/get-url-from-browser.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>3E08FF65-F031-447F-B9F6-47F8F507D79B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:focusedapp}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>com.apple.Safari</string>
+						<key>outputlabel</key>
+						<string>Safari</string>
+						<key>uid</key>
+						<string>F0D7A81E-E2BF-4692-AE88-05F7D6110593</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:focusedapp}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>com.vivaldi.Vivaldi</string>
+						<key>outputlabel</key>
+						<string>Vivaldi</string>
+						<key>uid</key>
+						<string>02A8138C-B11B-4A71-BBC5-422F5C43A8D0</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:focusedapp}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>com.brave.Browser</string>
+						<key>outputlabel</key>
+						<string>Brave</string>
+						<key>uid</key>
+						<string>20C14D1D-7C29-411D-B1C4-0748C8B6E6AF</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{query}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string></string>
+						<key>outputlabel</key>
+						<string>other: no sel</string>
+						<key>uid</key>
+						<string>68CDCF97-F1F0-447D-9B01-8DDDF01FE0C3</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>other: sel</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>BD1918EE-9F7F-4E6B-B4F1-4E4B5AE7263E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/append-to-tot.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E46E8809-57A1-4476-9A05-35F53EC4D16B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<true/>
+				<key>focusedappvariablename</key>
+				<string>focusedapp</string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.apptorium.SideNotes-paddle</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>2</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>3DBCAC53-D043-40E5-8BC7-17331F0676DA</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⚠️ No selection</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>09983247-5108-4A1F-A658-4A8F022B1B05</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>soundname</key>
+				<string>Basso</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>5358EB63-C24C-429E-8DAC-901CAD16E3FA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>acceptsmulti</key>
 				<integer>0</integer>
 				<key>filetypes</key>
@@ -468,6 +759,15 @@
 			<key>ypos</key>
 			<real>415</real>
 		</dict>
+		<key>09983247-5108-4A1F-A658-4A8F022B1B05</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>700</real>
+			<key>ypos</key>
+			<real>830</real>
+		</dict>
 		<key>171481C4-C600-4B58-8D5A-D0575E5EE9AA</key>
 		<dict>
 			<key>colorindex</key>
@@ -493,9 +793,29 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>50</real>
+			<real>45</real>
 			<key>ypos</key>
-			<real>805</real>
+			<real>985</real>
+		</dict>
+		<key>3DBCAC53-D043-40E5-8BC7-17331F0676DA</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>60</real>
+			<key>ypos</key>
+			<real>755</real>
+		</dict>
+		<key>3E08FF65-F031-447F-B9F6-47F8F507D79B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>get Browser URL</string>
+			<key>xpos</key>
+			<real>385</real>
+			<key>ypos</key>
+			<real>700</real>
 		</dict>
 		<key>49540ED2-DEDB-41DB-BF6B-FED0EB398A81</key>
 		<dict>
@@ -507,6 +827,15 @@
 			<real>30</real>
 			<key>ypos</key>
 			<real>140</real>
+		</dict>
+		<key>5358EB63-C24C-429E-8DAC-901CAD16E3FA</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>835</real>
+			<key>ypos</key>
+			<real>830</real>
 		</dict>
 		<key>778D7E9A-C113-4942-BC74-276C19AF6F0F</key>
 		<dict>
@@ -553,9 +882,9 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>210</real>
+			<real>205</real>
 			<key>ypos</key>
-			<real>805</real>
+			<real>985</real>
 		</dict>
 		<key>B1792DAF-7AA2-4C55-989C-8760D521EBAE</key>
 		<dict>
@@ -564,9 +893,18 @@
 			<key>note</key>
 			<string>append</string>
 			<key>xpos</key>
-			<real>650</real>
+			<real>800</real>
 			<key>ypos</key>
-			<real>70</real>
+			<real>65</real>
+		</dict>
+		<key>BD1918EE-9F7F-4E6B-B4F1-4E4B5AE7263E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>245</real>
+			<key>ypos</key>
+			<real>730</real>
 		</dict>
 		<key>C5998C8C-695A-4A5C-B99D-391E1E73A978</key>
 		<dict>
@@ -577,14 +915,25 @@
 			<key>ypos</key>
 			<real>130</real>
 		</dict>
+		<key>E46E8809-57A1-4476-9A05-35F53EC4D16B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>append</string>
+			<key>xpos</key>
+			<real>590</real>
+			<key>ypos</key>
+			<real>735</real>
+		</dict>
 		<key>FC097D95-8358-4EE7-B32D-FF2576B26087</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>365</real>
+			<real>360</real>
 			<key>ypos</key>
-			<real>805</real>
+			<real>985</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

@@ -24,6 +24,17 @@ rules:
         to:
           - { key_code: "0", modifiers: [command] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
+      # Delete Tot
+      - type: basic
+        from: { key_code: delete_or_backspace, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: a, modifiers: [command] }
+          - key_code: delete_or_backspace
+          - { key_code: left_arrow, modifiers: [command, option] }
+          - shell_command: |
+              export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+              sketchybar --trigger update-tot-count
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
       # Prev/Next Tot
       - type: basic
         from: { key_code: l, modifiers: { mandatory: [control] } }
