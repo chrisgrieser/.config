@@ -22,7 +22,7 @@ class PowerThesaurus:
     VERSION = open('./version').readline().strip()
     GQL_THESAURUS_QUERY = 'thesaurus_query'
     GQL_SEARCH_QUERY = 'search_query'
-    VERIFY_SSL = bool(os.getenv('ALFRED_PT_SSL_VERIFICATION'))
+    VERIFY_SSL = os.getenv('ALFRED_PT_SSL_VERIFICATION') == '1'
 
     def __init__(self, api_url, web_url, gql_queries_dir='./gql_queries/', pos_file_path='./pos.json', logger=logging):
         self.api_url = api_url
@@ -52,11 +52,11 @@ class PowerThesaurus:
     def read_gql_queries(self, dir):
         gql_queries = {}
         files = os.listdir(dir)
-        
+
         for filename in files:
             file_path = os.path.join(dir, filename)
             with open(file_path, 'r') as file:
-                
+
                 key = os.path.splitext(filename)[0]
                 gql_queries[key] = file.read()
         return gql_queries
@@ -69,7 +69,7 @@ class PowerThesaurus:
                 'query': query
             },
             'query': self.gql_queries[PowerThesaurus.GQL_SEARCH_QUERY]
-            
+
         }
 
     def build_thesaurus_query_params(self, term_id, query_type):
@@ -112,7 +112,7 @@ class PowerThesaurus:
         if not term_id:
             return []
         params = self.build_thesaurus_query_params(term_id, query_type)
-        
+
         r = requests.post(self.api_url, json=params, headers=self.request_headers, verify=PowerThesaurus.VERIFY_SSL)
         r.raise_for_status()
         return self.parse_thesaurus_query_response(r.json())
@@ -125,8 +125,8 @@ class PowerThesaurus:
             }, terms)
 
     def search_query(self, query): # handles query submission, obtains and parses response (which is only the name and ID of the word)
-        params = self.build_search_query_params(query) 
-        
+        params = self.build_search_query_params(query)
+
 
 
         # query submission via requests
@@ -138,7 +138,7 @@ class PowerThesaurus:
 
     def search_query_match(self, query):   #handles query results
         terms = self.search_query(query)
-        
+
         terms = list(terms) #need to covert back to a list because maps is not a list in Python3, it is a <map> object
         if not terms or terms[0]['word'] != query:
             return None

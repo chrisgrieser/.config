@@ -34,7 +34,7 @@ require("lazy").setup("plugins", {
 	},
 	git = { timeout = 60 }, -- 1min timeout for tasks
 	diff = { cmd = "browser" }, -- view diffs with "d" in the browser
-	change_detection = { notify = false },
+	change_detection = { notify = true },
 	readme = { enabled = false },
 	performance = {
 		rtp = {
@@ -62,7 +62,10 @@ require("lazy").setup("plugins", {
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "lazy",
 	callback = function()
-		vim.defer_fn(function() vim.keymap.set("n", "K", "6k", { buffer = true }) end, 1)
+		vim.defer_fn(function()
+			vim.keymap.set("n", "K", "6k", { buffer = true })
+			vim.keymap.set("n", "<Tab>", "<CR>", { buffer = true, remap = true })
+		end, 1)
 	end,
 })
 

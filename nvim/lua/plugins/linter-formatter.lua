@@ -199,10 +199,10 @@ return {
 				border = u.borderStyle,
 				height = 0.8, -- so it won't cover the statusline
 				icons = { package_installed = "✓", package_pending = "󰔟", package_uninstalled = "✗" },
-				-- consistent keymaps with lazy.nvim
-				keymaps = {
+				keymaps = { -- consistent keymaps with lazy.nvim
 					uninstall_package = "x",
 					toggle_help = "?",
+					toggle_package_expand = "<Tab>",
 				},
 			},
 		},

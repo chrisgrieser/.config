@@ -408,5 +408,5 @@ nnoremap ,os :spellcheck
 exmap enableDiagnostics obcommand obsidian-languagetool-plugin:ltcheck-text
 nnoremap ,od :enableDiagnostics
 
-exmap disableDiagnostics obcommand obsidian-languagetool-plugin:ltclear-text
+exmap disableDiagnostics obcommand obsidian-languagetool-plugin:ltclear
 nnoremap ,oD :disableDiagnostics
