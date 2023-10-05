@@ -1,7 +1,6 @@
-#───────────────────────────────────────────────────────────────────────────────
-
 CONFIG_FILES=(
 	load_plugins
+	transient_prompt
 	options_and_plugin_configs
 	vim_mode_config
 	fzf-tab_and_completion_settings

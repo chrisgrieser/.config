@@ -47,7 +47,8 @@ function inspect() {
 	# FILES
 	# columns needs to be set, since eza print as `--oneline` if piped
 	local eza_output
-	eza_output=$(eza --all --grid --color=always --icons --hyperlink \
+	eza_output=$(eza --width="$terminal_width" --all --grid \
+		--color=always --icons --hyperlink \
 		--git-ignore --ignore-glob=".DS_Store|Icon?" \
 		--sort=name --group-directories-first \
 		--git --long --no-user --no-permissions --no-filesize --no-time)
@@ -83,7 +84,7 @@ function o() {
 	selected=$(
 		fd --type=file --type=symlink --color=always | fzf \
 			-0 -1 --ansi --query="$input" --info=inline \
-			--header="^H hidden & ignored  ^D dirrectories" \
+			--header="^H hidden & ignored  ^D directories" \
 			--bind="ctrl-h:reload(fd --hidden --no-ignore --type=file --type=symlink --color=always)" \
 			--preview '[[ -f {} ]] && bat --color=always --style=snip --wrap=never --tabs=2 {} || eza --icons --color=always --group-directories-first {}'
 	)
