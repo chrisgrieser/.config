@@ -5,7 +5,7 @@
 
 declare class macAppObj {
 	includeStandardAdditions: boolean;
-	openLocation(url: string): void;
+	openLocation(url: string): string;
 	open(path: string): void;
 	id(): number;
 	name(): string;
