@@ -24,6 +24,7 @@ return {
 					toggle { elements = { "right", "left" }, word = false },
 					toggle { elements = { "~=", "==" }, word = false },
 					toggle { elements = { "!==", "===" }, word = false },
+					toggle { elements = { "&&", "===" }, word = false },
 				},
 			}
 		end,
@@ -248,7 +249,6 @@ return {
 	},
 	{ -- killring & highlights on `p`
 		"gbprod/yanky.nvim",
-		commit = "f2375d0", -- PENDING https://github.com/gbprod/yanky.nvim/issues/146
 		keys = {
 			-- https://github.com/gbprod/yanky.nvim#%EF%B8%8F-special-put
 			{ "p", "<Plug>(YankyPutAfter)", desc = " Paste (Yanky)" },
@@ -272,7 +272,7 @@ return {
 		opts = {
 			ring = { history_length = 50 },
 			highlight = { timer = 1000 },
-			textobj = { enabled = true },
+			textobject = { enabled = true },
 		},
 		-- IncSearch is the default highlight group for post-yank highlights
 		init = function() u.colorschemeMod("YankyYanked", { link = "IncSearch" }) end,

@@ -70,7 +70,7 @@ opt.clipboard = "unnamedplus"
 
 -- Spelling
 opt.spell = false -- just using spellfile to quickly add words for ltex
-opt.spellfile = u.linterConfigFolder .. "/spellfile-vim-ltex.add" -- has to be `.add`
+opt.spellfile = { u.linterConfigFolder .. "/spellfile-vim-ltex.add" } -- has to be `.add`
 opt.spelllang = "en_us" -- still relevant for `z=`
 
 -- Split

@@ -2,18 +2,10 @@
 ObjC.import("stdlib");
 //──────────────────────────────────────────────────────────────────────────────
 
-const toFolder = "Base"
-
-//──────────────────────────────────────────────────────────────────────────────
-
 // biome-ignore lint/correctness/noUnusedVariables: run
 function run() {
-	const sidenotes = Application("SideNotes");
 	const reminders = Application("Reminders");
-
 	const today = new Date();
-	const folder = sidenotes.folders.byName(toFolder);
-	const delaySecs = 0.05;
 
 	// https://leancrew.com/all-this/2017/08/my-jxa-problem/
 	// https://developer.apple.com/library/archive/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html#//apple_ref/doc/uid/TP40014508-CH109-SW10
@@ -28,24 +20,21 @@ function run() {
 	// - backwards, to not change the indices at loop runtime
 	for (let i = todaysTasks.length - 1; i >= 0; i--) {
 		const task = todaysTasks[i];
-		if (!task || !task.name()) continue;
+		if (!(task && !task.name())) continue;
 
 		const body = task.body();
 		const title = task.name();
-		const newNoteContent = body ? `# ${title}\n${body}` : title;
+		const content = body ? `## ${title}\n${body}` : title;
 
-		sidenotes.createNote({
-			folder: folder,
-			text: newNoteContent,
-			ispath: false,
-		});
+		// append to first tot
+		const tots = Application("Tots");
+		tots.includeStandardAdditions = true;
+		// DOCS https://gist.github.com/chockenberry/d33ef5b6e6da4a3e4aa9b07b093d3c23
+		tots.openLocation("tots://1/append?text=" + encodeURIComponent(content));
+
 		task.delete();
 	}
 
-	delay(delaySecs);
+	delay(0.1);
 	if (reminders) reminders.quit();
-
-	// close sidenotes again
-	delay(delaySecs);
-	Application("System Events").keystroke("w", { using: ["command down"] });
 }
