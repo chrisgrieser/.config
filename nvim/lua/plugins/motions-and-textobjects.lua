@@ -118,20 +118,20 @@ return {
 			{ "a.", "<cmd>lua require('various-textobjs').chainMember('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer indent textobj" },
 
 			-- markdown
-			{ "il", "<cmd>lua require('various-textobjs').mdlink('inner')<CR>", ft = "markdown", desc = "󱡔 inner md link" },
-			{ "al", "<cmd>lua require('various-textobjs').mdlink('outer')<CR>", ft = "markdown", desc = "󱡔 outer md link" },
-			{ "iE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock('inner')<CR>", ft = "markdown", desc = "󱡔 inner CodeBlock" },
-			{ "aE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock('outer')<CR>", ft = "markdown", desc = "󱡔 outer CodeBlock" },
+			{ "il", "<cmd>lua require('various-textobjs').mdlink('inner')<CR>", mode = { "x", "o" }, ft = "markdown", desc = "󱡔 inner md link" },
+			{ "al", "<cmd>lua require('various-textobjs').mdlink('outer')<CR>", mode = { "x", "o" }, ft = "markdown", desc = "󱡔 outer md link" },
+			{ "iE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock('inner')<CR>", mode = { "x", "o" }, ft = "markdown", desc = "󱡔 inner CodeBlock" },
+			{ "aE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock('outer')<CR>", mode = { "x", "o" }, ft = "markdown", desc = "󱡔 outer CodeBlock" },
 
 			-- css
-			{ "is", "<cmd>lua require('various-textobjs').cssSelector('inner')<CR>", ft = "css", desc = "󱡔 inner selector" },
-			{ "as", "<cmd>lua require('various-textobjs').cssSelector('outer')<CR>", ft = "css", desc = "󱡔 outer selector" },
-			{ "ix", "<cmd>lua require('various-textobjs').mdFencedCodeBlock('inner')<CR>", ft = "css", desc = "󱡔 inner attribute" },
-			{ "ax", "<cmd>lua require('various-textobjs').mdFencedCodeBlock('outer')<CR>", ft = "css", desc = "󱡔 outer attribute" },
+			{ "is", "<cmd>lua require('various-textobjs').cssSelector('inner')<CR>", mode = { "x", "o" }, ft = "css", desc = "󱡔 inner selector" },
+			{ "as", "<cmd>lua require('various-textobjs').cssSelector('outer')<CR>", mode = { "x", "o" }, ft = "css", desc = "󱡔 outer selector" },
+			{ "ix", "<cmd>lua require('various-textobjs').mdFencedCodeBlock('inner')<CR>", mode = { "x", "o" }, ft = "css", desc = "󱡔 inner attribute" },
+			{ "ax", "<cmd>lua require('various-textobjs').mdFencedCodeBlock('outer')<CR>", mode = { "x", "o" }, ft = "css", desc = "󱡔 outer attribute" },
 
 			-- shell
-			{ "i|", "<cmd>lua require('various-textobjs').shellPipe('inner')<CR>", ft = "sh", desc = "󱡔 inner pipe" },
-			{ "a|", "<cmd>lua require('various-textobjs').shellPipe('outer')<CR>", ft = "sh", desc = "󱡔 outer pipe" },
+			{ "i|", "<cmd>lua require('various-textobjs').shellPipe('inner')<CR>", mode = { "x", "o" }, ft = "sh", desc = "󱡔 inner pipe" },
+			{ "a|", "<cmd>lua require('various-textobjs').shellPipe('outer')<CR>", mode = { "x", "o" }, ft = "sh", desc = "󱡔 outer pipe" },
 			-- stylua: ignore end
 
 			{ -- delete surrounding indentation

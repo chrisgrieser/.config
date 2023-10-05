@@ -7,9 +7,34 @@ rules:
       - type: basic
         from: { key_code: "0", modifiers: { mandatory: [command] } }
         to:
-          - key_code: h
-            modifiers: [command, shift]
+          - { key_code: h, modifiers: [command, shift] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^us\.zoom\.xos$] }]
+  #─────────────────────────────────────────────────────────────────────────────
+  - description: "(Apps) Tot"
+    manipulators:
+      # Export
+      - type: basic
+        from: { key_code: e, modifiers: { mandatory: [command, shift] } }
+        to:
+          - { key_code: s, modifiers: [command, shift] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
+      # Open Empty Tot
+      - type: basic
+        from: { key_code: n, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: "0", modifiers: [command] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
+      # Prev/Next Tot
+      - type: basic
+        from: { key_code: j, modifiers: { mandatory: [control] } }
+        to:
+          - { key_code: right_arrow, modifiers: [command, option] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
+      - type: basic
+        from: { key_code: k, modifiers: { mandatory: [control] } }
+        to:
+          - { key_code: left_arrow, modifiers: [command, option] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Microsoft Office"
     manipulators:
@@ -17,15 +42,13 @@ rules:
       - type: basic
         from: { key_code: e, modifiers: { mandatory: [command, shift] } }
         to:
-          - key_code: s
-            modifiers: [command, shift]
+          - { key_code: s, modifiers: [command, shift] }
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.microsoft\.Word$
               - ^com\.microsoft\.Excel$
               - ^com\.microsoft\.Powerpoint$
-      # Comment in MS Word
       - type: basic
         from: { key_code: k, modifiers: { mandatory: [command] } }
         to:
@@ -410,7 +433,7 @@ rules:
           - { key_code: g, modifiers: [command, control] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Cleanshot/Shottr"
+  - description: "(Apps) Cleanshot"
     manipulators:
       # INFO https://cleanshot.com/docs/api
       # ⌘⇧4 (screenshot button): tap to screenshot, hold for OCR
@@ -439,8 +462,8 @@ rules:
         to:
           - shell_command: |
               osascript -e '
-                tell application "System Events" to tell (first process where it is frontmost) 
-                  click menu item "Export…" of menu "File" of menu bar 1 
+                tell application "System Events" to tell (first process where it is frontmost)
+                  click menu item "Export…" of menu "File" of menu bar 1
                 end tell'
         conditions:
           - type: frontmost_application_if

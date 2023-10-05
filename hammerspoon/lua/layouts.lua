@@ -9,7 +9,7 @@ local wf = hs.window.filter
 -- HELPERS
 
 local function isWeekend()
-	local weekday = tostring(os.date()):sub(1, 3)
+	local weekday = tostring(os.date("%a"))
 	return weekday == "Sat" or weekday == "Sun"
 end
 
@@ -89,7 +89,7 @@ local function movieLayout()
 	darkmode.set(true)
 	visuals.holeCover("remove")
 
-	u.openApps("YouTube")
+	u.openApps { "YouTube", "BetterTouchTool" }
 	u.quitApp {
 		"neovide",
 		"Slack",
