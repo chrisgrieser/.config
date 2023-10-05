@@ -116,7 +116,8 @@ end
 function M.toggleCase()
 	local col = vim.fn.col(".") -- fn.col correctly considers tab-indentation
 	local charUnderCursor = vim.api.nvim_get_current_line():sub(col, col)
-	local isLetter = charUnderCursor:find("^%a$")
+	-- so it works with diacritics
+	local isLetter = charUnderCursor:lower() ~= charUnderCursor:upper()
 	if isLetter then
 		normal("~h")
 		return

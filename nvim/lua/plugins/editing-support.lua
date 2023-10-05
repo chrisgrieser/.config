@@ -213,11 +213,14 @@ return {
 			{ "ü", function() require("sibling-swap").swap_with_right() end, desc = "󰔰 Move Node Right" },
 			-- stylua: ignore
 			{ "Ü", function() require("sibling-swap").swap_with_left() end, desc = "󰶢 Move Node Left" },
+			{
+				"ü",
+				'"zdawel"zph',
+				ft = { "markdown", "text", "gitcommit" },
+				desc = "󰔰 Move Word Right",
+			},
+			{ "Ü", '"zdawbh"zph', ft = { "markdown", "text", "gitcommit" }, desc = "󰶢 Move Word Left" },
 		},
-		init = function()
-			u.ftKeymap({ "markdown", "text", "gitcommit" }, "n", "ü", '"zdawel"zph')
-			u.ftKeymap({ "markdown", "text", "gitcommit" }, "n", "Ü", '"zdawbh"zph')
-		end,
 	},
 	{ -- fixes scrolloff at end of file
 		"Aasim-A/scrollEOF.nvim",
@@ -254,9 +257,8 @@ return {
 		"gbprod/yanky.nvim",
 		keys = {
 			-- https://github.com/gbprod/yanky.nvim#%EF%B8%8F-special-put
-			-- INFO not binding p/P in visual mode, since I prefer my switch of
-			-- "p" and "P" to be in visual mode for not replacing stuff
 			{ "p", "<Plug>(YankyPutAfter)", desc = " Paste (Yanky)" },
+			{ "p", "<Plug>(YankyPutIndentAfter)", ft = "python", desc = " Paste at Indent" },
 			{ "P", "<Plug>(YankyPutIndentAfterShiftRight)", desc = " Paste & Indent" },
 			{ "gp", "<Plug>(YankyPutIndentAfterCharwise)", desc = " Charwise Paste" },
 			{ "<D-p>", "<Plug>(YankyCycleForward)", desc = " Cycle Killring" },
@@ -281,7 +283,6 @@ return {
 		},
 		-- IncSearch is the default highlight group for post-yank highlights
 		init = function()
-			u.ftKeymap("python", "n", "p", "<Plug>(YankyPutIndentAfter)", { desc = " Paste at Indent" })
 			u.colorschemeMod("YankyYanked", { link = "IncSearch" })
 		end,
 	},
@@ -290,6 +291,12 @@ return {
 		event = "VeryLazy",
 		config = function()
 			require("which-key").setup {
+				-- FIX very weird bug where insert mode undo points (<C-g>u),
+				-- as well as vim-matchup's `<C-G>%` binding insert extra `1`s
+				-- after wrapping to the next line in insert mode. The `G` needs
+				-- to be uppercased to affect the right mapping.
+				triggers_blacklist = { i = { "<C-G>" } },
+
 				plugins = {
 					presets = { motions = false, g = false, z = false },
 					spelling = { enabled = false },
