@@ -26,7 +26,6 @@ return {
 	},
 	{ -- preview markdown
 		"iamcco/markdown-preview.nvim",
-		ft = "markdown",
 		build = "cd app && npm install",
 		init = function()
 			u.ftKeymap("markdown", "n", "<D-r>", "<Plug>MarkdownPreview", { desc = " Preview" })
