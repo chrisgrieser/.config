@@ -12,7 +12,7 @@ export HOMEBREW_CLEANUP_MAX_AGE_DAYS=60
 export HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=30
 
 # misc
-export HOMEBREW_NO_ANALYTICS=0 # they have the server in the EU now, so it's okay?
+export HOMEBREW_NO_ANALYTICS=0 # they have the server in the EU now, so it's okay
 export HOMEBREW_NO_ENV_HINTS=1
 
 alias bh='brew home'
@@ -72,6 +72,7 @@ function update() {
 	print-section "DUMP INSTALL LISTS"
 	dump
 
+	print-section "Restarting Sketchybar"
 	# - sketchybar usually updated and then has to be restarted to give permission
 	# - also updates the homebrew status counter
 	brew services restart sketchybar

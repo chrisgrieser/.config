@@ -16,20 +16,16 @@ function separator() {
 
 # show files + git status + brief git log
 function inspect() {
-	if ! test -d "$PWD"; then
-		local dirname
-		dirname=$(basename "$PWD")
-		printf '\033[1;33m"%s" has been moved or deleted.\033[0m' "$dirname"
+	if [[ ! -d "$PWD" ]]; then
+		printf '\033[1;33m"%s" has been moved or deleted.\033[0m' "$(basename "$PWD")"
 		return 1
 	fi
 
 	# CONFIG
 	local max_gitlog_lines=5
-	local max_files_lines=8
-	local disabled_below_term_height=20
+	local max_files_lines=7
 
 	# guard clauses
-	[[ $(tput lines) -gt $disabled_below_term_height ]] || return 0 # don't use in embedded terminals, since too small
 	if ! command -v eza &>/dev/null; then printf "\033[1;33meza not installed.\033[0m" && return 1; fi
 	if ! command -v git &>/dev/null; then printf "\033[1;33mgit not installed.\033[0m" && return 1; fi
 
@@ -39,16 +35,14 @@ function inspect() {
 		separator
 		if [[ -n "$(git status --short --porcelain)" ]]; then
 			# spread across multiple lines
-			git -c color.status="always" status --short | rs -e -w"$(tput cols)"
+			git -c color.status="always" status --short | rs -e -w"$((COLUMNS + 5))"
 			separator
 		fi
 	fi
 
 	# FILES
-	# columns needs to be set, since eza print as `--oneline` if piped
 	local eza_output
-	eza_output=$(eza --width="$terminal_width" --all --grid \
-		--color=always --icons --hyperlink \
+	eza_output=$(eza --width="$COLUMNS" --all --grid --color=always --icons \
 		--git-ignore --ignore-glob=".DS_Store|Icon?" \
 		--sort=name --group-directories-first \
 		--git --long --no-user --no-permissions --no-filesize --no-time)
@@ -57,7 +51,6 @@ function inspect() {
 		echo "$eza_output" | head -n"$max_files_lines"
 		print "\033[1;34m(…)\033[0m" # blue = eza's default folder color
 	else
-		# not using `[[ -n ]] &&` as that results in exit code 1
 		[[ -z "$eza_output" ]] || echo "$eza_output"
 		echo
 	fi

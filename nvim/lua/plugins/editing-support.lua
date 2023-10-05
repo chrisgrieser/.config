@@ -277,6 +277,7 @@ return {
 		opts = {
 			ring = { history_length = 50 },
 			highlight = { timer = 1000 },
+			textobjs = { enabled = true },
 		},
 		-- IncSearch is the default highlight group for post-yank highlights
 		init = function()
@@ -331,20 +332,17 @@ return {
 
 			-- leader prefixes normal mode
 			require("which-key").register({
-				f = { name = " 󱗘 Refactor" },
 				u = { name = " 󰕌 Undo" },
-				l = { name = "  Log / Cmdline" },
-				g = { name = " 󰊢 Git" },
 				o = { name = "  Options" },
 				p = { name = " 󰏗 Package" },
 			}, { prefix = "<leader>" })
 
-			-- leader prefixes visual mode
+			-- leader prefixes normal+visual mode
 			require("which-key").register({
 				f = { name = " 󱗘 Refactor" },
 				l = { name = "  Log / Cmdline" },
 				g = { name = " 󰊢 Git" },
-			}, { prefix = "<leader>", mode = "x" })
+			}, { prefix = "<leader>", mode = { "x", "n" } })
 
 			-- needed so localleader prefixes work with whichkey
 			require("which-key").register {
