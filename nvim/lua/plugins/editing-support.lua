@@ -212,8 +212,6 @@ return {
 			-- stylua: ignore start
 			{ "ü", function() require("sibling-swap").swap_with_right() end, desc = "󰔰 Move Node Right" },
 			{ "Ü", function() require("sibling-swap").swap_with_left() end, desc = "󰶢 Move Node Left" },
-			{ "ü", '"zdawel"zph', ft = { "markdown", "text", "gitcommit" }, desc = "󰔰 Move Word Right" },
-			{ "Ü", '"zdawbh"zph', ft = { "markdown", "text", "gitcommit" }, desc = "󰶢 Move Word Left" },
 			-- stylua: ignore end
 		},
 	},
