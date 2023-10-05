@@ -16,19 +16,21 @@ return {
 	{ -- auto-bullets for markdown-like filetypes
 		"dkarter/bullets.vim",
 		ft = "markdown",
+		keys = {
+			{ "o", "<Plug>(bullets-newline)", ft = "markdown" },
+			{ "<CR>", "<Plug>(bullets-newline)", mode = "i", ft = "markdown" },
+		},
 		init = function()
 			vim.g.bullets_delete_last_bullet_if_empty = 1
 			vim.g.bullets_enable_in_empty_buffers = 0
 			vim.g.bullets_set_mappings = 0
-			u.ftKeymap("markdown", "n", "o", "<Plug>(bullets-newline)")
-			u.ftKeymap("markdown", "i", "<CR>", "<Plug>(bullets-newline)")
 		end,
 	},
 	{ -- preview markdown
 		"iamcco/markdown-preview.nvim",
 		build = "cd app && npm install",
-		init = function()
-			u.ftKeymap("markdown", "n", "<D-r>", "<Plug>MarkdownPreview", { desc = " Preview" })
-		end,
+		keys = {
+			{ "<D-r>", "<Plug>MarkdownPreview", ft = "markdown", desc = " Preview" },
+		},
 	},
 }

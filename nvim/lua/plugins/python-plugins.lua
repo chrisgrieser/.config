@@ -1,8 +1,6 @@
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
--- more potential tools: https://www.reddit.com/r/neovim/comments/16p7um2/comment/k1qaqir/?context=3
-
 return {
 	{
 		"linux-cultist/venv-selector.nvim",
@@ -12,6 +10,9 @@ return {
 			"mfussenegger/nvim-dap-python",
 		},
 		cmd = { "VenvSelect", "VenvSelectCached" },
+		keys = {
+			{ "<localleader>v", "<cmd>VenvSelect<RC>", ft = "python", desc = "󱥒 VenvSelect"  },
+		},
 		config = function()
 			require("venv-selector").setup {
 				name = { ".venv" },
@@ -44,14 +45,6 @@ return {
 			end)
 		end,
 		init = function()
-			u.ftKeymap(
-				"python",
-				"n",
-				"<localleader>v",
-				"<cmd>VenvSelect<CR>",
-				{ desc = "󱥒 VenvSelect" }
-			)
-
 			-- auto-select venv on entering python buffer -- https://github.com/linux-cultist/venv-selector.nvim#-automate
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "python",

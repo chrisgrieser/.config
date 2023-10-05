@@ -135,20 +135,6 @@ function M.uniqueKeymap(modes, lhs, rhs, opts)
 	vim.keymap.set(modes, lhs, rhs, opts)
 end
 
----@param filetype string|string[]
----@param modes "n"|"v"|"x"|"i"|"o"|"c"|"t"|"ia"|"ca"|"!a"|string[]
----@param lhs string
----@param rhs string|function
----@param opts? { desc: string, buffer: boolean, nowait: boolean, remap: boolean }
-function M.ftKeymap(filetype, modes, lhs, rhs, opts)
-	if not opts then opts = {} end
-	opts.buffer = true
-	vim.api.nvim_create_autocmd("FileType", {
-		pattern = filetype,
-		callback = function() vim.keymap.set(modes, lhs, rhs, opts) end,
-	})
-end
-
 --------------------------------------------------------------------------------
 
 ---Sets the global BorderStyle variable and the matching BorderChars Variable.

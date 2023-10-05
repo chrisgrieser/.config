@@ -116,10 +116,31 @@ return {
 
 			{ "i.", "<cmd>lua require('various-textobjs').chainMember('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner indent textobj" },
 			{ "a.", "<cmd>lua require('various-textobjs').chainMember('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer indent textobj" },
-			-- stylua: ignore end,
+			-- stylua: ignore end
+
+			{ "il", "<cmd>lua require('various-textobjs').mdlink('inner')<CR>", ft = "markdown", desc = "󱡔 inner md link" },
+			{
+				"al",
+				"<cmd>lua require('various-textobjs').mdlink('outer')<CR>",
+				ft = "markdown",
+				desc = "󱡔 outer md link",
+			},
+			{
+				"iE",
+				"<cmd>lua require('various-textobjs').mdFencedCodeBlock('inner')<CR>",
+				ft = "markdown",
+				desc = "󱡔 inner CodeBlock",
+			},
+			{
+				"aE",
+				"<cmd>lua require('various-textobjs').mdFencedCodeBlock('outer')<CR>",
+				ft = "markdown",
+				desc = "󱡔 outer CodeBlock",
+			},
+
 			{ -- delete surrounding indentation
 				"dsi",
-				function ()
+				function()
 					require("various-textobjs").indentation(true, true)
 					local notOnIndentedLine = vim.fn.mode():find("V") == nil -- when textobj is found, will switch to visual line mode
 					if notOnIndentedLine then return end
@@ -133,7 +154,7 @@ return {
 			},
 			{ -- open URL (forward seeking)
 				"gx",
-				function ()
+				function()
 					require("various-textobjs").url()
 					local foundURL = vim.fn.mode():find("v") -- when textobj is found, will switch to visual line mode
 					if foundURL then
@@ -142,16 +163,11 @@ return {
 						vim.fn.system { "open", url }
 					end
 				end,
-				desc = "󰌹 Smart URL Opener" ,
+				desc = "󰌹 Smart URL Opener",
 			},
 		},
 		init = function()
 			-- stylua: ignore start
-			u.ftKeymap("markdown", {"o", "x"}, "il", "<cmd>lua require('various-textobjs').mdlink('inner')<CR>", { desc = "󱡔 inner md link" })
-			u.ftKeymap("markdown", {"o", "x"}, "al", "<cmd>lua require('various-textobjs').mdlink('outer')<CR>", { desc = "󱡔 outer md link" })
-			u.ftKeymap("markdown", {"o", "x"}, "iE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock('inner')<CR>", { desc = "󱡔 inner code block"})
-			u.ftKeymap("markdown", {"o", "x"}, "aE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock('outer')<CR>", { desc = "󱡔 outer code block"})
-
 			u.ftKeymap("sh", {"o", "x"}, "a|", "<cmd>lua require('various-textobjs').shellPipe('inner')<CR>", { desc = "󱡔 inner shellPipe textobj"})
 			u.ftKeymap("sh", {"o", "x"}, "i|", "<cmd>lua require('various-textobjs').shellPipe('outer')<CR>", { desc = "󱡔 outer shellPipe textobj"})
 
