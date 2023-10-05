@@ -301,48 +301,31 @@ onoremap w t"
 vnoremap w t"
 
 """"""""""""""""""""""
-" Surround
-""""""""""""""""""""""
-" https://github.com/esm7/obsidian-vimrc-support#surround-text-with-surround
-
-exmap surround_wiki surround [[ ]]
-exmap surround_double_quotes surround " "
-exmap surround_single_quotes surround ' '
-exmap surround_backticks surround ` `
-exmap surround_brackets surround ( )
-exmap surround_square_brackets surround [ ]
-exmap surround_curly_brackets surround { }
-exmap surround_underscore surround __ __
-exmap surround_asterisk surround * *
-
-nunmap s
-nnoremap sR :surround_wiki
-nnoremap sq :surround_double_quotes
-nnoremap sz :surround_single_quotes
-nnoremap se :surround_backticks
-nnoremap sb :surround_brackets
-nnoremap sr :surround_square_brackets
-nnoremap sc :surround_curly_brackets
-nnoremap sa :surround_asterisk
-nnoremap su :surround_underscore
-
-vunmap s
-vnoremap sR :surround_wiki
-vnoremap sq :surround_double_quotes
-vnoremap sz :surround_single_quotes
-vnoremap se :surround_backticks
-vnoremap sb :surround_brackets
-vnoremap sr :surround_square_brackets
-vnoremap sc :surround_curly_brackets
-vnoremap sa :surround_asterisk
-vnoremap su :surround_underscore
-
-""""""""""""""""""""""
 " Substitute
 """"""""""""""""""""""
 " poor man's substitute.nvim 🥲
 nnoremap ss Vp
 nnoremap S vg$p
+nnoremap sim viWp
+nnoremap sam vaWp
+nnoremap siw viwp
+nnoremap saw vawp
+nnoremap sis visp
+nnoremap sas vasp
+nnoremap sip vipp
+nnoremap sap vapp
+nnoremap sib vi)p
+nnoremap saq va"p
+nnoremap siq vi"p
+nnoremap saz va'p
+nnoremap siz vi'p
+nnoremap sae va`p
+nnoremap sie vi`p
+nnoremap sab va)p
+nnoremap sir vi]p
+nnoremap sar va]p
+nnoremap sic vi}p
+nnoremap sac va}p
 
 """"""""""""""""""""""
 " Tabs, Splits & Alt-file
