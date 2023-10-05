@@ -75,6 +75,12 @@ sketchybar \
 	script="$PLUGIN_DIR/weather.sh" \
 	icon.y_offset=-1 \
 	\
+	--add item tots $first_row \
+	--set tots \
+	script="$PLUGIN_DIR/tots.sh" \
+	--add event update-tots-count \
+	--subscribe tots update-tots-count \
+	\
 	--add alias "$stats" $second_row \
 	--set "$stats" width="$stats_width" \
 	\

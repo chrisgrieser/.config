@@ -58,7 +58,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>98A78F28-0FF7-49E6-BB65-E0968B71ECBC</string>
+				<string>8DE6C12A-AD83-445A-BE00-709A9B916DFB</string>
 				<key>modifiers</key>
 				<integer>262144</integer>
 				<key>modifiersubtext</key>
@@ -204,27 +204,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>tot://{query}/replace?text=</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>98A78F28-0FF7-49E6-BB65-E0968B71ECBC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -270,7 +249,7 @@
 					<string>dyn.ah62d4rv4ge8043a</string>
 				</array>
 				<key>name</key>
-				<string>Save as Tot 🟢</string>
+				<string>Save as last Tot 🟢</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.action</string>
@@ -328,7 +307,7 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>50</real>
+			<real>65</real>
 			<key>ypos</key>
 			<real>465</real>
 		</dict>
@@ -356,13 +335,6 @@
 		</dict>
 		<key>8DE6C12A-AD83-445A-BE00-709A9B916DFB</key>
 		<dict>
-			<key>xpos</key>
-			<real>535</real>
-			<key>ypos</key>
-			<real>330</real>
-		</dict>
-		<key>98A78F28-0FF7-49E6-BB65-E0968B71ECBC</key>
-		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>note</key>
@@ -370,7 +342,7 @@
 			<key>xpos</key>
 			<real>365</real>
 			<key>ypos</key>
-			<real>295</real>
+			<real>300</real>
 		</dict>
 		<key>9DE7C88F-9CE4-42C3-B9D8-6FA01F25AFCB</key>
 		<dict>
@@ -386,7 +358,7 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>405</real>
+			<real>385</real>
 			<key>ypos</key>
 			<real>465</real>
 		</dict>
