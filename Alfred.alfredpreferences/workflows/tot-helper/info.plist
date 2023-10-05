@@ -531,6 +531,20 @@
 				<array>
 					<dict>
 						<key>inputstring</key>
+						<string>{query}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string></string>
+						<key>outputlabel</key>
+						<string>other: no sel</string>
+						<key>uid</key>
+						<string>68CDCF97-F1F0-447D-9B01-8DDDF01FE0C3</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
 						<string>{var:focusedapp}</string>
 						<key>matchcasesensitive</key>
 						<false/>
@@ -570,20 +584,6 @@
 						<string>Brave</string>
 						<key>uid</key>
 						<string>20C14D1D-7C29-411D-B1C4-0748C8B6E6AF</string>
-					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string>{query}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string></string>
-						<key>outputlabel</key>
-						<string>other: no sel</string>
-						<key>uid</key>
-						<string>68CDCF97-F1F0-447D-9B01-8DDDF01FE0C3</string>
 					</dict>
 				</array>
 				<key>elselabel</key>
