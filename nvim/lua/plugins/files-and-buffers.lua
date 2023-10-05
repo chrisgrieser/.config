@@ -13,7 +13,6 @@ return {
 	},
 	{ -- auto-close inactive buffers
 		"chrisgrieser/nvim-early-retirement",
-		enabled = false,
 		event = "VeryLazy",
 		opts = {
 			retirementAgeMins = 15,

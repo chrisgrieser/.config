@@ -30,7 +30,7 @@ function run() {
 		.doShellScript(
 			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; cd "${dotfileFolder}" ;
 			fd --type=file --hidden --absolute-path \\
-			-E "*.plist" -E ".DS_Store"`,
+			-E "*.plist" -E "*.png" -E ".DS_Store"`,
 		)
 		.split("\r")
 		.map((/** @type {string} */ absPath) => {

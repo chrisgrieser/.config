@@ -5,6 +5,9 @@ ObjC.import("stdlib");
 // biome-ignore lint/correctness/noUnusedVariables: run
 function run() {
 	const reminders = Application("Reminders");
+	const tots = Application("Tot");
+	tots.includeStandardAdditions = true;
+
 	const today = new Date();
 
 	// https://leancrew.com/all-this/2017/08/my-jxa-problem/
@@ -20,15 +23,13 @@ function run() {
 	// - backwards, to not change the indices at loop runtime
 	for (let i = todaysTasks.length - 1; i >= 0; i--) {
 		const task = todaysTasks[i];
-		if (!(task && !task.name())) continue;
+		if (!task?.name()) continue;
 
 		const body = task.body();
 		const title = task.name();
 		const content = body ? `## ${title}\n${body}` : title;
 
 		// append to first tot
-		const tots = Application("Tots");
-		tots.includeStandardAdditions = true;
 		// DOCS https://gist.github.com/chockenberry/d33ef5b6e6da4a3e4aa9b07b093d3c23
 		tots.openLocation("tots://1/append?text=" + encodeURIComponent(content));
 

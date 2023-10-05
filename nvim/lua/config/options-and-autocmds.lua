@@ -116,9 +116,6 @@ opt.nrformats:remove { "bin", "hex" } -- remove ambiguity, since I don't use the
 opt.updatetime = 250 -- also affects cursorword symbols lsp-hints
 opt.timeoutlen = 666 -- also affects duration until which-key is shown
 
--- Misc
-opt.debug = "msg" -- more verbose messages
-
 --------------------------------------------------------------------------------
 
 -- Popups & Cmdline

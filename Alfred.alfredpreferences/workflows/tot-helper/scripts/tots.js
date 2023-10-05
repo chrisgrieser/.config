@@ -26,6 +26,10 @@ function run() {
 			arg: dot,
 			mods: {
 				alt: { arg: content },
+				cmd: {
+					arg: "",
+					variables: { dot: dot }
+				},
 			},
 		};
 	});

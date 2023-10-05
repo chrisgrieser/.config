@@ -66,6 +66,29 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>9823AB02-76C7-4449-9650-B778A002121E</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Append to Tot</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>9823AB02-76C7-4449-9650-B778A002121E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>375969CE-9B94-4660-977E-41F123CAC8C2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>9DE7C88F-9CE4-42C3-B9D8-6FA01F25AFCB</key>
 		<array>
@@ -227,6 +250,48 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/append-to-tot.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>375969CE-9B94-4660-977E-41F123CAC8C2</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Append: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>9823AB02-76C7-4449-9650-B778A002121E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>tasksettings</key>
 				<dict/>
 				<key>taskuid</key>
@@ -307,9 +372,20 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>65</real>
+			<real>50</real>
 			<key>ypos</key>
-			<real>465</real>
+			<real>620</real>
+		</dict>
+		<key>375969CE-9B94-4660-977E-41F123CAC8C2</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>note</key>
+			<string>append</string>
+			<key>xpos</key>
+			<real>365</real>
+			<key>ypos</key>
+			<real>440</real>
 		</dict>
 		<key>49540ED2-DEDB-41DB-BF6B-FED0EB398A81</key>
 		<dict>
@@ -327,7 +403,7 @@
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>note</key>
-			<string>open tot</string>
+			<string>open</string>
 			<key>xpos</key>
 			<real>365</real>
 			<key>ypos</key>
@@ -338,29 +414,38 @@
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>note</key>
-			<string>delete tot</string>
+			<string>delete</string>
 			<key>xpos</key>
 			<real>365</real>
 			<key>ypos</key>
 			<real>300</real>
+		</dict>
+		<key>9823AB02-76C7-4449-9650-B778A002121E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>210</real>
+			<key>ypos</key>
+			<real>440</real>
 		</dict>
 		<key>9DE7C88F-9CE4-42C3-B9D8-6FA01F25AFCB</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>225</real>
+			<real>210</real>
 			<key>ypos</key>
-			<real>465</real>
+			<real>620</real>
 		</dict>
 		<key>FC097D95-8358-4EE7-B32D-FF2576B26087</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>385</real>
+			<real>370</real>
 			<key>ypos</key>
-			<real>465</real>
+			<real>620</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
