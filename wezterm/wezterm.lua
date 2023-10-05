@@ -16,12 +16,12 @@ local darkThemes = {
 	"ChallengerDeep",
 }
 local lightThemes = {
+	"Atelier Cave Light (base16)",
+	"Paraiso (light) (terminal.sexy)",
 	"seoulbones_light",
 	"Edge Light (base16)",
 	"Google Light (Gogh)",
 	"OneHalfLight",
-	"Atelier Cave Light (base16)",
-	"Paraiso (light) (terminal.sexy)",
 	"BlulocoLight (Gogh)",
 	"Atelierdune (light) (terminal.sexy)",
 	"Atelier Lakeside Light (base16)",

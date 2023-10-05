@@ -37,6 +37,8 @@ safe_source "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-sub
 # Magic Enter
 safe_source "$DOTFILE_FOLDER/zsh/plugins/magic_enter.zsh"
 
-# Starship
+#───────────────────────────────────────────────────────────────────────────────
+
+# PROMPT
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG="$DOTFILE_FOLDER/starship/starship.toml"
