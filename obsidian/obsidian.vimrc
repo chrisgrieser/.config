@@ -68,6 +68,7 @@ nnoremap zl :contextMenu
 " next diagnostic
 exmap nextSuggestion obcommand obsidian-languagetool-plugin:ltjump-to-next-suggestion
 nnoremap ge :nextSuggestion
+vnoremap ge :nextSuggestion
 
 " INFO doesn't work in reading mode: https://github.com/timhor/obsidian-editor-shortcuts/issues/20
 exmap nextHeading obcommand obsidian-editor-shortcuts:goToNextHeading
