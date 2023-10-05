@@ -31,6 +31,8 @@ reOpenLastFile()
 vim.g.mapleader = ","
 vim.g.maplocalleader = "ö"
 
+--------------------------------------------------------------------------------
+
 safeRequire("config.lazy")
 if vim.fn.has("gui_running") == 1 then safeRequire("config.gui-settings") end
 safeRequire("config.theme-customization")

@@ -44,4 +44,4 @@ keymap("n", "<leader>r", function()
 		cmd.source()
 		u.notify("Re-sourced", packageName)
 	end
-end, { buffer = true, desc = " Reload /  Make" })
+end, { buffer = true, unique = false, desc = " Reload /  Make" })
