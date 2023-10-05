@@ -821,7 +821,7 @@ fi</string>
 			<key>note</key>
 			<string>quit Karabiner-EventViewer</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>445</real>
 		</dict>

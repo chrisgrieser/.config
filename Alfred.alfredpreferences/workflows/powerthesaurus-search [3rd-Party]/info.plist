@@ -412,20 +412,18 @@ CTRL+enter (^↩️) opens antonyms in browser</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>True</string>
-				<key>placeholder</key>
-				<string></string>
+				<true/>
 				<key>required</key>
 				<false/>
-				<key>trim</key>
-				<true/>
+				<key>text</key>
+				<string>Use SSL verification</string>
 			</dict>
 			<key>description</key>
-			<string>If you're having SSL issues, try temporarily disabling it by setting this workflow environment variable  to `False`. This will bypass SSL verification as a workaround while waiting for the SSL certificate to be rectified.</string>
+			<string>If you're having connection issues, try temporarily disabling SSL verification as a workaround while waiting for the SSL certificate to be rectified.</string>
 			<key>label</key>
-			<string>SSL verification</string>
+			<string>Secure Connection</string>
 			<key>type</key>
-			<string>textfield</string>
+			<string>checkbox</string>
 			<key>variable</key>
 			<string>ALFRED_PT_SSL_VERIFICATION</string>
 		</dict>
@@ -433,7 +431,7 @@ CTRL+enter (^↩️) opens antonyms in browser</string>
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>3.2</string>
+	<string>3.4</string>
 	<key>webaddress</key>
 	<string>https://github.com/giovannicoppola/alfred-powerthesaurus</string>
 </dict>
