@@ -21,6 +21,31 @@
 				<false/>
 			</dict>
 		</array>
+		<key>171481C4-C600-4B58-8D5A-D0575E5EE9AA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C5998C8C-695A-4A5C-B99D-391E1E73A978</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>BB0E4D69-62CC-406D-8229-0E6B10CEEFCE</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>778D7E9A-C113-4942-BC74-276C19AF6F0F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>350AF0AB-06E8-4B5B-A125-82C2F380674C</key>
 		<array>
 			<dict>
@@ -38,13 +63,23 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>778D7E9A-C113-4942-BC74-276C19AF6F0F</string>
+				<string>9823AB02-76C7-4449-9650-B778A002121E</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Append to Tot</string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>171481C4-C600-4B58-8D5A-D0575E5EE9AA</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -66,13 +101,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+		</array>
+		<key>778D7E9A-C113-4942-BC74-276C19AF6F0F</key>
+		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>9823AB02-76C7-4449-9650-B778A002121E</string>
+				<string>91D75681-FC5E-4D31-9FE2-FF0C89B5F5C1</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Append to Tot</string>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -81,7 +119,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>375969CE-9B94-4660-977E-41F123CAC8C2</string>
+				<string>B1792DAF-7AA2-4C55-989C-8760D521EBAE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -103,6 +141,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>C5998C8C-695A-4A5C-B99D-391E1E73A978</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B1792DAF-7AA2-4C55-989C-8760D521EBAE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -114,6 +165,67 @@
 	<string>Tot</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Append: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>9823AB02-76C7-4449-9650-B778A002121E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/append-to-tot.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>B1792DAF-7AA2-4C55-989C-8760D521EBAE</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Create: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>C5998C8C-695A-4A5C-B99D-391E1E73A978</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -166,6 +278,38 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>^$</string>
+						<key>outputlabel</key>
+						<string>yes</string>
+						<key>uid</key>
+						<string>BB0E4D69-62CC-406D-8229-0E6B10CEEFCE</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>no</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>171481C4-C600-4B58-8D5A-D0575E5EE9AA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -181,6 +325,14 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>778D7E9A-C113-4942-BC74-276C19AF6F0F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.hidealfred</string>
+			<key>uid</key>
+			<string>91D75681-FC5E-4D31-9FE2-FF0C89B5F5C1</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -250,63 +402,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/append-to-tot.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>375969CE-9B94-4660-977E-41F123CAC8C2</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Append: {query}</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>9823AB02-76C7-4449-9650-B778A002121E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict/>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/files-and-folders/file.read</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>9DE7C88F-9CE4-42C3-B9D8-6FA01F25AFCB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>acceptsmulti</key>
 				<integer>0</integer>
 				<key>filetypes</key>
@@ -344,6 +439,21 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict/>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/files-and-folders/file.read</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>9DE7C88F-9CE4-42C3-B9D8-6FA01F25AFCB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -354,18 +464,29 @@
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>365</real>
+			<real>330</real>
 			<key>ypos</key>
-			<real>180</real>
+			<real>415</real>
+		</dict>
+		<key>171481C4-C600-4B58-8D5A-D0575E5EE9AA</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>note</key>
+			<string>empty</string>
+			<key>xpos</key>
+			<real>326</real>
+			<key>ypos</key>
+			<real>160</real>
 		</dict>
 		<key>3396F88B-AD4F-41F0-9FA7-ED8173F325FF</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>510</real>
+			<real>475</real>
 			<key>ypos</key>
-			<real>180</real>
+			<real>415</real>
 		</dict>
 		<key>350AF0AB-06E8-4B5B-A125-82C2F380674C</key>
 		<dict>
@@ -374,18 +495,7 @@
 			<key>xpos</key>
 			<real>50</real>
 			<key>ypos</key>
-			<real>620</real>
-		</dict>
-		<key>375969CE-9B94-4660-977E-41F123CAC8C2</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>note</key>
-			<string>append</string>
-			<key>xpos</key>
-			<real>365</real>
-			<key>ypos</key>
-			<real>440</real>
+			<real>805</real>
 		</dict>
 		<key>49540ED2-DEDB-41DB-BF6B-FED0EB398A81</key>
 		<dict>
@@ -394,9 +504,9 @@
 			<key>note</key>
 			<string>Search / Open tot</string>
 			<key>xpos</key>
-			<real>65</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>45</real>
+			<real>140</real>
 		</dict>
 		<key>778D7E9A-C113-4942-BC74-276C19AF6F0F</key>
 		<dict>
@@ -405,9 +515,9 @@
 			<key>note</key>
 			<string>open</string>
 			<key>xpos</key>
-			<real>365</real>
+			<real>465</real>
 			<key>ypos</key>
-			<real>45</real>
+			<real>275</real>
 		</dict>
 		<key>8DE6C12A-AD83-445A-BE00-709A9B916DFB</key>
 		<dict>
@@ -416,18 +526,27 @@
 			<key>note</key>
 			<string>delete</string>
 			<key>xpos</key>
-			<real>365</real>
+			<real>330</real>
 			<key>ypos</key>
-			<real>300</real>
+			<real>535</real>
+		</dict>
+		<key>91D75681-FC5E-4D31-9FE2-FF0C89B5F5C1</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>630</real>
+			<key>ypos</key>
+			<real>305</real>
 		</dict>
 		<key>9823AB02-76C7-4449-9650-B778A002121E</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>210</real>
+			<real>460</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>15</real>
 		</dict>
 		<key>9DE7C88F-9CE4-42C3-B9D8-6FA01F25AFCB</key>
 		<dict>
@@ -436,20 +555,64 @@
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>620</real>
+			<real>805</real>
+		</dict>
+		<key>B1792DAF-7AA2-4C55-989C-8760D521EBAE</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>append</string>
+			<key>xpos</key>
+			<real>650</real>
+			<key>ypos</key>
+			<real>70</real>
+		</dict>
+		<key>C5998C8C-695A-4A5C-B99D-391E1E73A978</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>460</real>
+			<key>ypos</key>
+			<real>130</real>
 		</dict>
 		<key>FC097D95-8358-4EE7-B32D-FF2576B26087</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>370</real>
+			<real>365</real>
 			<key>ypos</key>
-			<real>620</real>
+			<real>805</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>🟡,🟠,🔴,🟣,🔵,⚪,🟢</string>
+				<key>placeholder</key>
+				<string>🟡,🟠,🔴,🟣,🔵,⚪,🟢</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>For users who changed their tot theme, you can specify a comma-separated list of 7 emojis used to indicate your custom tot colors.</string>
+			<key>label</key>
+			<string>tot colors</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>tot_icons</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string></string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

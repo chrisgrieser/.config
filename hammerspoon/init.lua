@@ -15,10 +15,6 @@ hs.allowAppleScript(true) -- allow external control
 hs.automaticallyCheckForUpdates(true)
 hs.window.animationDuration = 0 -- quicker animations
 
--- suppress unnecessary log messages
-hs.hotkey.setLogLevel(0) ---@diagnostic disable-line: undefined-field https://github.com/Hammerspoon/hammerspoon/issues/3491
-hs.application.enableSpotlightForNameSearches(false) 
-
 --------------------------------------------------------------------------------
 -- LOAD MODULES
 
@@ -46,6 +42,7 @@ safeRequire("lua.app-specific-behavior")
 safeRequire("lua.browser")
 safeRequire("lua.twitter-mastodon")
 safeRequire("lua.neovim")
+safeRequire("lua.tot")
 
 -- reload function (should come last)
 safeRequire("lua.reload")

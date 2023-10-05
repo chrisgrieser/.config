@@ -22,6 +22,10 @@ local config = {
 			scriptPath = env.passwordStore .. "/pass-sync.sh",
 		},
 	},
+	postSyncHook = {
+		func = function() hs.execute(u.exportPath .. "sketchybar --trigger repo-files-update") end,
+		delaySecs = 2,
+	},
 }
 
 --------------------------------------------------------------------------------
@@ -88,6 +92,7 @@ local function syncAllGitRepos(notifyOnSuccess)
 			end
 
 			syncedRepos = {} -- reset
+			u.runWithDelays(config.postSyncHook.delaySecs, config.postSyncHook.func)
 		end)
 		:start()
 end

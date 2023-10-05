@@ -1,4 +1,5 @@
 #!/usr/bin/env osascript -l JavaScript
+ObjC.import("stdlib");
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
