@@ -15,7 +15,7 @@
   "cmp-treesitter": { "branch": "master", "commit": "389eadd48c27aa6dc0e6b992644704f026802a2e" },
   "cmp-zsh": { "branch": "main", "commit": "c24db8e58fac9006ec23d93f236749288d00dec9" },
   "cmp_luasnip": { "branch": "master", "commit": "18095520391186d634a0045dacaa346291096566" },
-  "codeium.vim": { "branch": "main", "commit": "8bc1d192d4f93da60625664e18979a7444e196d4" },
+  "codeium.vim": { "branch": "main", "commit": "e03c410a7673dbbe7f64afbc9a08f423363ded81" },
   "conform.nvim": { "branch": "master", "commit": "603ede87f4676dae5b8170280cafbd2e28d9eaaa" },
   "cybu.nvim": { "branch": "main", "commit": "c0866ef6735a85f85d4cf77ed6d9bc92046b5a99" },
   "dawnfox": { "branch": "main", "commit": "fe2fc7b93d66349eff2c5baa6cec922ee3958f56" },
@@ -83,7 +83,7 @@
   "replacer.nvim": { "branch": "master", "commit": "32e1713230844fa52f7f0598c59295de3c90dc95" },
   "satellite.nvim": { "branch": "main", "commit": "5d33376287e384f04b84962a20d90bd10a9dac86" },
   "scrollEOF.nvim": { "branch": "master", "commit": "3fb4c699fc42b42cced466d09f38315b5d524253" },
-  "sg.nvim": { "branch": "master", "commit": "a7973a12ee8f995930f6d658b459469e8ab55828" },
+  "sg.nvim": { "branch": "master", "commit": "5efc8453c25d62274db3c731e780b4f5b94abb56" },
   "sibling-swap.nvim": { "branch": "main", "commit": "58b256f2a7def9b63be275b373c748c012b3a604" },
   "symbol-usage.nvim": { "branch": "main", "commit": "2d0c02245631fa647db602ca62c469b9025c5ceb" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "6c921ca12321edaa773e324ef64ea301a1d0da62" },
@@ -100,5 +100,5 @@
   "vim-python-pep8-indent": { "branch": "master", "commit": "60ba5e11a61618c0344e2db190210145083c91f8" },
   "vim-visual-multi": { "branch": "master", "commit": "724bd53adfbaf32e129b001658b45d4c5c29ca1a" },
   "which-key.nvim": { "branch": "main", "commit": "7ccf476ebe0445a741b64e36c78a682c1c6118b7" },
-  "yanky.nvim": { "branch": "main", "commit": "538af19b7fafcdb295a943b8b84bae8bb8fc9bb7" }
+  "yanky.nvim": { "branch": "main", "commit": "f2375d09e71637aaf3d50298f4e734a432132cad" }
 }
