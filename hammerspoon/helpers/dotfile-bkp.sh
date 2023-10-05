@@ -12,7 +12,7 @@ backup_file="$bkp_destination/dotfile-bkp_$timestamp.zip"
 # directory change necessary to avoid zipping root folder
 # https://unix.stackexchange.com/questions/245856/zip-a-file-without-including-the-parent-directory
 [[ -e "$bkp_destination" ]] || mkdir -p "$bkp_destination"
-cd "$DOTFILE_FOLDER" || return 1
+cd "$HOME/.config" || return 1
 # hidden files on the first level have to named explicitly since not matched
 # by globbing
 zip -r --quiet "$backup_file" ./* ./.{gitmodule,gitignore}

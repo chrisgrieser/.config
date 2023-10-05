@@ -126,7 +126,7 @@ function gd {
 
 	if [[ $(git diff | wc -l) -gt $threshold_lines ]]; then
 		if ! command -v diff2html &>/dev/null; then echo "diff2html not installed (\`npm -g install diff2html\`)." && return 1; fi
-		diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"
+		diff2html --hwt="$HOME/.config/diff2html/diff2html-template.html"
 	else
 		if ! command -v delta &>/dev/null; then echo "delta not installed (\`brew install git-delta\`)" && return 1; fi
 		if defaults read -g AppleInterfaceStyle &>/dev/null; then

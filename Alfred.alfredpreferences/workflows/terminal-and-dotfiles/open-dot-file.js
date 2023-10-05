@@ -12,11 +12,10 @@ function alfredMatcher(str) {
 }
 
 //──────────────────────────────────────────────────────────────────────────────
-// using `fd` over `find` for speed and gitignoring
 /** @type {AlfredRun} */
-// biome-ignore lint/correctness/noUnusedVariables: <explanation>
-function run(argv) {
-	const dotfileFolder = argv[0];
+// biome-ignore lint/correctness/noUnusedVariables: alfred run
+function run() {
+	const dotfileFolder = $.getenv("dotfile_folder");
 
 	// FILES
 	const dirtyFiles = app
@@ -24,6 +23,8 @@ function run(argv) {
 		.split("\r")
 		.map((/** @type {string} */ file) => file.replace(/^[ MD?]* /i, ""));
 
+
+	// INFO using `fd` over `find` for speed and gitignoring
 	/** @type{AlfredItem[]} */
 	const fileArray = app
 		.doShellScript(

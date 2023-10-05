@@ -43,7 +43,7 @@ duti -s "$browserAppId" webloc all # link files
 duti -s "$browserAppId" url all    # link files
 
 # reload karabiner & hammerspoon
-karabinerMsg=$(osascript -l JavaScript "$DOTFILE_FOLDER/karabiner/build-karabiner-config.js")
+karabinerMsg=$(osascript -l JavaScript "$HOME/.config/karabiner/build-karabiner-config.js")
 echo "$karabinerMsg"
 killall "Hammerspoon"
 while pgrep -xq "Hammerspoon"; do sleep 0.1; done

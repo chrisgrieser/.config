@@ -14,8 +14,7 @@ local function readZshEnv(varname)
 	return value
 end
 
--- stored as global files, so the values are not garbage collected
-M.dotfilesFolder = readZshEnv("DOTFILE_FOLDER")
+M.dotfilesFolder = os.getenv("HOME") .. "/.config/"
 M.passwordStore = readZshEnv("PASSWORD_STORE_DIR")
 M.vaultLocation = readZshEnv("VAULT_PATH")
 M.fileHub = readZshEnv("WD")

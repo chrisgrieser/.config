@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
-# export PYTHONSTARTUP="$DOTFILE_FOLDER/python/pythonrc.py"
-export IPYTHONDIR="$DOTFILE_FOLDER/ipython"
+# export PYTHONSTARTUP="$HOME/.config/python/pythonrc.py"
+export IPYTHONDIR="$HOME/.config/ipython"
 
 #───────────────────────────────────────────────────────────────────────────────
 

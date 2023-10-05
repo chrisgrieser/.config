@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # CONFIG
-spell_config="$DOTFILE_FOLDER/espanso/match/spelling.yml"
+spell_config="$HOME/.config/espanso/match/spelling.yml"
 
 #───────────────────────────────────────────────────────────────────────────────
 

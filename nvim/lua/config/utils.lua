@@ -3,7 +3,7 @@ local M = {}
 
 -- vim.env reads from .zshenv
 M.vimDataDir = vim.env.DATA_DIR .. "/vim-data/"
-M.linterConfigFolder = vim.env.DOTFILE_FOLDER .. "/_linter-configs/"
+M.linterConfigFolder = os.getenv("HOME") .. "/.config/_linter-configs/"
 
 ---runs :normal natively with bang
 ---@param cmdStr string
@@ -59,7 +59,7 @@ function M.applyTemplateIfEmptyFile(ext)
 end
 
 function M.ftAbbr(lhs, rhs)
-	-- TODO replace with 
+	-- TODO update on nvim 0.10
 	-- vim.keymap.set("ia", lhs, rhs, { buffer = true })
 	vim.cmd.inoreabbrev(("<buffer> %s %s"):format(lhs, rhs))
 end

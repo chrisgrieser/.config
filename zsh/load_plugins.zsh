@@ -23,7 +23,7 @@ function safe_source() {
 
 # "fzf-tab needs to be loaded after compinit, but before plugins which will wrap
 # widgets, such as zsh-autosuggestions or fast-syntax-highlighting"
-safe_source "$DOTFILE_FOLDER/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
+safe_source "$ZDOTDIR/plugins/fzf-tab/fzf-tab.plugin.zsh"
 
 # INFO `brew --prefix` ensures the right path is inserted on M1 as well as  non-M1 macs
 safe_source "$(brew --prefix)/share/zsh-you-should-use/you-should-use.plugin.zsh"
@@ -35,10 +35,10 @@ safe_source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 safe_source "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
 
 # Magic Enter
-safe_source "$DOTFILE_FOLDER/zsh/plugins/magic_enter.zsh"
+safe_source "$ZDOTDIR/plugins/magic_enter.zsh"
 
 #───────────────────────────────────────────────────────────────────────────────
 
 # PROMPT
 eval "$(starship init zsh)"
-export STARSHIP_CONFIG="$DOTFILE_FOLDER/starship/starship.toml"
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"

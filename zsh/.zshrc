@@ -1,6 +1,5 @@
 CONFIG_FILES=(
 	load_plugins
-	transient_prompt
 	options_and_plugin_configs
 	vim_mode_config
 	fzf-tab_and_completion_settings
@@ -23,12 +22,12 @@ CONFIG_FILES=(
 #───────────────────────────────────────────────────────────────────────────────
 
 for config_file in "${CONFIG_FILES[@]}"; do
-	file="$DOTFILE_FOLDER/zsh/$config_file.zsh"
+	file="$ZDOTDIR/$config_file.zsh"
 	if [[ -f "$file" ]] ; then
 		# shellcheck disable=1090
 		source "$file"
 	else
-		echo "$file cannot be found."
+		print "\033[1;33m$file found\033[0m"
 	fi
 done
 
