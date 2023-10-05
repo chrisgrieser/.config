@@ -230,8 +230,8 @@ return {
 		},
 		opts = {
 			use_default_keymaps = false,
-			cursor_behavior = "start", -- start|end|hold
-			max_join_length = 140,
+			cursor_behavior = "start",
+			max_join_length = 160,
 			langs = {
 				-- python docstrings
 				python = {
