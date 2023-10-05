@@ -1,13 +1,9 @@
 #!/usr/bin/env zsh
-export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-
-#───────────────────────────────────────────────────────────────────────────────
+# INFO displays a preview of the current Tot content
 
 tot1=$(osascript -e 'tell application "Tot" to open location "tot://1/content"')
-
-# add preview of note to status bar (similar to the OneThing app)
 if [[ -n "$tot1" ]]; then
-	icon=""
+	icon="󱗜"
 	preview="$(echo -n "$tot1" |
 		head -n1 |
 		sed -e 's/- //' -Ee 's/#+ //' |
