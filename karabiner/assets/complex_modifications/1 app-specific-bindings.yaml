@@ -35,6 +35,12 @@ rules:
         to:
           - { key_code: left_arrow, modifiers: [command, option] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
+      # prevent accidental quitting
+      - type: basic
+        from: { key_code: q, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: w, modifiers: [command] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Microsoft Office"
     manipulators:

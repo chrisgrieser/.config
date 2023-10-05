@@ -57,7 +57,7 @@
 		"body": [
 			"/** @type {AlfredRun} */",
 			"// biome-ignore lint/correctness/noUnusedVariables: Alfred run",
-			"function run(argv){",
+			"function run(argv) {",
 			"\tconst ${1:query} = argv[0];",
 			"}"
 		]
@@ -70,7 +70,7 @@
 			"\t\targ: $1,",
 			"\t\tsubtitle: \"⌘: $2\",",
 			"\t},",
-			"},"
+			"}"
 		]
 	},
 	"Script Filter": {

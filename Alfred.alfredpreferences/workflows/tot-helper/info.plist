@@ -8,11 +8,70 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
+		<key>05C47DFA-6E22-4EA4-A341-99651AEBD5AD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3396F88B-AD4F-41F0-9FA7-ED8173F325FF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>350AF0AB-06E8-4B5B-A125-82C2F380674C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9DE7C88F-9CE4-42C3-B9D8-6FA01F25AFCB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>49540ED2-DEDB-41DB-BF6B-FED0EB398A81</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>778D7E9A-C113-4942-BC74-276C19AF6F0F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>05C47DFA-6E22-4EA4-A341-99651AEBD5AD</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy Tot</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>98A78F28-0FF7-49E6-BB65-E0968B71ECBC</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>⌃: Delete Tot</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>9DE7C88F-9CE4-42C3-B9D8-6FA01F25AFCB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FC097D95-8358-4EE7-B32D-FF2576B26087</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -32,27 +91,6 @@
 	<string>Tot</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>tot://{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>778D7E9A-C113-4942-BC74-276C19AF6F0F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -85,7 +123,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>tot.js</string>
+				<string>./scripts/tots.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -102,13 +140,202 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>tot://{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>778D7E9A-C113-4942-BC74-276C19AF6F0F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>📋 Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>3396F88B-AD4F-41F0-9FA7-ED8173F325FF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>05C47DFA-6E22-4EA4-A341-99651AEBD5AD</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>tot://{query}/replace?text=</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>98A78F28-0FF7-49E6-BB65-E0968B71ECBC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/delete-tot.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>8DE6C12A-AD83-445A-BE00-709A9B916DFB</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict/>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/files-and-folders/file.read</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>9DE7C88F-9CE4-42C3-B9D8-6FA01F25AFCB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>dyn.ah62d4rv4ge8043a</string>
+				</array>
+				<key>name</key>
+				<string>Save as Tot 🟢</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>350AF0AB-06E8-4B5B-A125-82C2F380674C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>tot://7/append?text={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>FC097D95-8358-4EE7-B32D-FF2576B26087</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>05C47DFA-6E22-4EA4-A341-99651AEBD5AD</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>365</real>
+			<key>ypos</key>
+			<real>180</real>
+		</dict>
+		<key>3396F88B-AD4F-41F0-9FA7-ED8173F325FF</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>510</real>
+			<key>ypos</key>
+			<real>180</real>
+		</dict>
+		<key>350AF0AB-06E8-4B5B-A125-82C2F380674C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>50</real>
+			<key>ypos</key>
+			<real>465</real>
+		</dict>
 		<key>49540ED2-DEDB-41DB-BF6B-FED0EB398A81</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
 			<key>note</key>
 			<string>Search / Open tot</string>
 			<key>xpos</key>
@@ -118,10 +345,50 @@
 		</dict>
 		<key>778D7E9A-C113-4942-BC74-276C19AF6F0F</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>note</key>
+			<string>open tot</string>
 			<key>xpos</key>
-			<real>280</real>
+			<real>365</real>
 			<key>ypos</key>
 			<real>45</real>
+		</dict>
+		<key>8DE6C12A-AD83-445A-BE00-709A9B916DFB</key>
+		<dict>
+			<key>xpos</key>
+			<real>535</real>
+			<key>ypos</key>
+			<real>330</real>
+		</dict>
+		<key>98A78F28-0FF7-49E6-BB65-E0968B71ECBC</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>note</key>
+			<string>delete tot</string>
+			<key>xpos</key>
+			<real>365</real>
+			<key>ypos</key>
+			<real>295</real>
+		</dict>
+		<key>9DE7C88F-9CE4-42C3-B9D8-6FA01F25AFCB</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>225</real>
+			<key>ypos</key>
+			<real>465</real>
+		</dict>
+		<key>FC097D95-8358-4EE7-B32D-FF2576B26087</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>405</real>
+			<key>ypos</key>
+			<real>465</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

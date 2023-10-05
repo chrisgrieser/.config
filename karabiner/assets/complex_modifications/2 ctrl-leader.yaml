@@ -40,12 +40,12 @@ rules:
         to_if_alone:
           - *activate-leader
           - *set-notice
-      # 2x L-Ctrl: Finder
+      # 2x L-Ctrl: Tot
       - type: basic
         from: { key_code: left_control }
         conditions: [*leader-active]
         to_if_alone:
-          - { key_code: f19 } # Alfred: bound to Finder window
+          - { key_code: f19 }
           - *deactivate-leader
           - *remove-notice
       # Cancel (Hyper/Esc)

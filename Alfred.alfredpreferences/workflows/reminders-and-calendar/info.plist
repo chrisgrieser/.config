@@ -168,7 +168,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>4D043F24-F2CC-45D6-A315-F4F576D06E6B</string>
+				<string>AB6C212F-70C4-4291-963F-B7D6DFD63435</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -264,23 +264,28 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
+				<key>concurrently</key>
 				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>tell application "Reminders" 
+	show (list "Shopping") 
+	activate 
+end tell</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
 				<string></string>
-				<key>url</key>
-				<string>sidenotes://open/40D17936-B168-4478-BBB0-59666BBB96D2</string>
+				<key>type</key>
+				<integer>6</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>4D043F24-F2CC-45D6-A315-F4F576D06E6B</string>
+			<string>AB6C212F-70C4-4291-963F-B7D6DFD63435</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -789,15 +794,6 @@
 			<key>ypos</key>
 			<real>450</real>
 		</dict>
-		<key>4D043F24-F2CC-45D6-A315-F4F576D06E6B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>xpos</key>
-			<real>240</real>
-			<key>ypos</key>
-			<real>15</real>
-		</dict>
 		<key>504E5795-9E1D-48DE-B0AC-A694A9285F3E</key>
 		<dict>
 			<key>xpos</key>
@@ -862,6 +858,13 @@
 			<real>240</real>
 			<key>ypos</key>
 			<real>160</real>
+		</dict>
+		<key>AB6C212F-70C4-4291-963F-B7D6DFD63435</key>
+		<dict>
+			<key>xpos</key>
+			<real>285</real>
+			<key>ypos</key>
+			<real>15</real>
 		</dict>
 		<key>C539C739-DFEF-4D04-8767-7244B05540C3</key>
 		<dict>
