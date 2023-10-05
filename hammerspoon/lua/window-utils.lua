@@ -8,8 +8,6 @@ M.iMacDisplay = hs.screen("Built%-in")
 M.maximized = hs.layout.maximized
 M.pseudoMax = { x = 0.184, y = 0, w = 0.817, h = 1 }
 M.centered = { x = 0.184, y = 0, w = 0.6, h = 1 }
-M.sideNotesWide = { x = 0, y = 0, w = 0.4, h = 1 }
-M.sidenotesNarrow = { x = 0, y = 0, w = 0.2, h = 1 }
 
 -- negative x to hide useless sidebar
 if env.isAtMother then
@@ -58,11 +56,9 @@ function M.moveResize(win, pos)
 	if
 		not win
 		or not (win:application())
-		---@diagnostic disable-next-line: undefined-field
-		or u.tbl_contains(appsToIgnore, win:application():name())
-		---@diagnostic disable-next-line: undefined-field
-		or not (win:isMaximizable() or win:application():name() == "SideNotes")
-		or not (win:isStandard())
+		or u.tbl_contains(appsToIgnore, win:application():name()) ---@diagnostic disable-line: undefined-field
+		or not win:isMaximizable()
+		or not win:isStandard()
 	then
 		return
 	end
@@ -198,9 +194,7 @@ local function controlSpaceAction()
 	local curWin = hs.window.focusedWindow()
 	local pos
 
-	if u.isFront("SideNotes") then
-		pos = M.CheckSize(curWin, M.sideNotesWide) and M.sidenotesNarrow or M.sideNotesWide
-	elseif u.isFront { "Finder", "Script Editor" } then
+	if u.isFront { "Finder", "Script Editor" } then
 		pos = M.CheckSize(curWin, M.centered) and M.maximized or M.centered
 	else
 		pos = M.CheckSize(curWin, M.pseudoMax) and M.maximized or M.pseudoMax

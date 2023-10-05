@@ -78,7 +78,6 @@ local function workLayout()
 	u.restartApp("AltTab") -- FIX duplicate items
 
 	-- finish
-	require("lua.sidenotes").reminderToSidenotes()
 	u.whenAppWinAvailable("Discord", function() u.app(env.mailApp):activate() end)
 	print("🔲 Loaded WorkLayout")
 end

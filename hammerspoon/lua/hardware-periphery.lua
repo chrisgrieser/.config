@@ -1,43 +1,13 @@
-local env = require("lua.environment-vars")
 local u = require("lua.utils")
-
 --------------------------------------------------------------------------------
+
 -- USB WATCHER
 
--- Podcasts onto OpenSwim-Player
--- local podcastSyncScript = "./helpers/cp-podcasts.sh"
--- OpenSwimWatcher = hs.usb.watcher
--- 	.new(function(device)
--- 		if not (device.eventType == "added" and device.productName == "LC8234xx_17S EVK") then return end
---
--- 		u.notify("⏳ Starting Podcast Sync…")
--- 		hs.task
--- 			.new(podcastSyncScript, function(exitCode, _, stdErr)
--- 				local msg = exitCode == 0 and "✅ Podcast Sync" or "⚠️️ Podcast Sync" .. stdErr
--- 				u.notify(msg)
--- 			end)
--- 			:start()
--- 	end)
--- 	:start()
-
--- notify when new USB device is plugged in
 -- if backup device: open terminal
--- otherwise: open volume
 ExternalHarddriveWatcher = hs.usb.watcher
 	.new(function(device)
 		if not (device.eventType == "added") then return end
 		local name = device.productName
-
-		-- Docking Station in office does spammy reports
-		if
-			env.isAtOffice
-			and (name == "Integrated RGB Camera" or name == "USB 10/100/1000 LAN" or name == "T27hv-20")
-		then
-			return
-		end
-		if env.isAtMother and name == "CHERRY Wireless Device" then return end
-
-		u.notify("Mounted: " .. name)
 
 		local harddriveNames = {
 			"ZY603 USB3.0 Device", -- Externe A
@@ -45,18 +15,7 @@ ExternalHarddriveWatcher = hs.usb.watcher
 			"Elements 2621", -- Externe C
 		}
 
-		if u.tbl_contains(harddriveNames, name) then
-			hs.application.open("WezTerm")
-		else
-			-- open if volume
-			u.runWithDelays({ 1, 2, 4 }, function()
-				local stdout, success =
-					hs.execute([[df -h | grep -io "\s/Volumes/.*" | cut -c2- | head -n1]])
-				if not success or not stdout then return end
-				local path = stdout:gsub("\n", "")
-				hs.open(path)
-			end)
-		end
+		if u.tbl_contains(harddriveNames, name) then hs.application.open("WezTerm") end
 	end)
 	:start()
 
@@ -74,11 +33,8 @@ local function batteryCheck()
 		local percent = tonumber(device.batteryPercentSingle)
 		if percent > warningLevel then return end
 		local msg = ("%s Battery is low (%s)"):format(device.name, percent)
-		hs.osascript.javascript(([[Application("SideNotes").createNote({text: "%s"})]]):format(msg))
-		print("⚠️", msg)
+		u.notify("⚠️", msg)
 	end
 end
 
---------------------------------------------------------------------------------
--- TRIGGERS
-DailyBatteryCheckTimer = hs.timer.doAt("01:30", "01d", batteryCheck, true):start()
+DailyBatteryCheckTimer = hs.timer.doAt("14:30", "01d", batteryCheck, true):start()

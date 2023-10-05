@@ -41,7 +41,7 @@ local function hideOthers(appObj)
 	if not (wu.CheckSize(thisWin, wu.pseudoMax) or wu.CheckSize(thisWin, wu.maximized)) then return end
 
 	local appsNotToHide =
-		{ "Espanso", "IINA", "zoom.us", "CleanShot X", "SideNotes", env.tickerApp, "Alfred", thisAppName }
+		{ "Espanso", "IINA", "zoom.us", "CleanShot X", env.tickerApp, "Alfred", thisAppName }
 	for _, w in pairs(thisWin:otherWindowsSameScreen()) do
 		local app = w:application()
 		if
@@ -83,7 +83,7 @@ AutoTileAppWatcher = aw.new(function(appName, eventType, appObj)
 		and not (appObj:findWindow("Picture in Picture"))
 		and not (appObj:findWindow("^$")) -- special windows?
 		and not (env.isProjector())
-		and not (u.isFront { "Alfred", "SideNotes", "CleanShot X", "IINA" })
+		and not (u.isFront { "Alfred", "CleanShot X", "IINA" })
 	then
 		appObj:hide()
 	end
@@ -94,7 +94,7 @@ Wf_maxWindows = wf.new(true):subscribe(wf.windowUnfocused, function(win)
 	if
 		not (env.isProjector())
 		and wu.CheckSize(win, wu.maximized)
-		and not (u.isFront { "Alfred", "SideNotes", "CleanShot X", "IINA" })
+		and not (u.isFront { "Alfred", "CleanShot X", "IINA" })
 	then
 		win:application():hide()
 	end

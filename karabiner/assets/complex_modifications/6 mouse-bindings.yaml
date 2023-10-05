@@ -19,7 +19,6 @@ rules:
               - ^org\.chromium\.Chromium$
               - ^com\.brave\.Browser$
               - ^com\.apple\.Safari$
-              - ^com\.vivaldi\.Vivaldi$
       # RSS Reader
       - type: basic
         from: { pointing_button: button2 }
@@ -65,7 +64,6 @@ rules:
         conditions:
           - type: frontmost_application_if
             file_paths: [BetterTouchTool, Hammerspoon]
-  #─────────────────────────────────────────────────────────────────────────────
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 4 (bottom)"
     manipulators:
@@ -139,7 +137,6 @@ rules:
           - type: frontmost_application_unless
             bundle_identifiers:
               - ^com\.brave\.Browser$
-              - ^com\.vivaldi\.Vivaldi$
               - ^com\.apple\.finder$
               - ^com\.mimestream\.Mimestream$
               - ^net\.highlightsapp\.universal$
@@ -180,7 +177,6 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.brave\.Browser$
-              - ^com\.vivaldi\.Vivaldi$
               - ^com\.apple\.finder$
               - ^org\.hammerspoon\.Hammerspoon$
         to_if_held_down:

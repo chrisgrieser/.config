@@ -15,9 +15,6 @@ BookmarkWatcher = pw(sourceBookmarkPath, function()
 	local bookmarks = hs.json.read(sourceBookmarkPath)
 	if not bookmarks then return end
 
-	-- remove Vivaldi's trash folder for Alfred
-	if env.browserApp == "Vivaldi" then bookmarks.roots.trash = nil end
-
 	hs.execute(("mkdir -p '%s'"):format(chromeProfileLocation))
 	local success = hs.json.write(bookmarks, chromeProfileLocation .. "/Default/Bookmarks", false, true)
 	if not success then
@@ -34,17 +31,6 @@ BookmarkWatcher = pw(sourceBookmarkPath, function()
 end):start()
 
 --------------------------------------------------------------------------------
-
--- DOWNLOAD FOLDER BADGE
-local downloadFolder = home .. "/Downloaded"
-DownloadFolderWatcher = pw(
-	downloadFolder,
-	function()
-		hs.execute("zsh ./helpers/download-folder-badge/download-folder-icon.sh " .. downloadFolder)
-	end
-):start()
-
---------------------------------------------------------------------------------
 -- TO FILE HUB
 
 -- GenuisScan
@@ -57,14 +43,7 @@ end):start()
 
 -- Downloads Folder
 local systemDownloadFolder = home .. "/Downloads/"
-SystemDlFolderWatcher = pw(systemDownloadFolder, function(files)
-	-- Stats Update file can directly be trashed
-	for _, filePath in pairs(files) do
-		if not filePath:find("Stats%.dmg$") then break end
-		u.runWithDelays(1, function() os.rename(filePath, home .. "/.Trash/Stats.dmg") end)
-	end
-
-	-- otherwise move to file hub
+SystemDlFolderWatcher = pw(systemDownloadFolder, function()
 	os.execute("mv '" .. systemDownloadFolder .. "'/* '" .. env.fileHub .. "'")
 	print("➡️ Download moved to File Hub.")
 end):start()
@@ -88,38 +67,25 @@ FileHubWatcher = pw(env.fileHub, function(paths, _)
 		local fileName = filep:gsub(".*/", "")
 		local ext = fileName:gsub(".*%.", "")
 
-		-- isDownloaded ensures files created on my own are not affected
-		local isDownloaded = fileIsDownloaded(filep)
-
 		-- alfredworkflows or iCal
-		if (ext == "alfredworkflow" or ext == "ics") and isDownloaded then
-			u.runWithDelays(3, function() os.remove(filep) end)
-
-		-- dmg (cannot be auto-opened via Browser)
-		elseif ext == "dmg" and isDownloaded then
-			if not (fileName == "Stats.dmg") then hs.open(filep) end
-			u.runWithDelays(3, function() os.remove(filep) end)
-
-		-- zip: unzip
-		elseif ext == "zip" and fileName ~= "violentmonkey.zip" and isDownloaded then
-			-- done via hammerspoon to differentiate between zips to auto-open and
-			-- zips to archive (like violentmonkey)
-			hs.open(filep)
+		if (ext == "alfredworkflow" or ext == "ics") and fileIsDownloaded(filep) then
 			u.runWithDelays(3, function() os.remove(filep) end)
 
 		-- bib: save to library
-		elseif ext == "bib" and isDownloaded then
+		elseif ext == "bib" and fileIsDownloaded(filep) then
 			local libraryPath = home .. "/.config/pandoc/main-bibliography.bib"
 			local bibEntry = u.readFile(filep)
 			if not bibEntry then return end
-			if not bibEntry:find("\n$") then bibEntry = bibEntry .. "\n" end
+			bibEntry = bibEntry:gsub("\n?$", "\n")
 			u.writeToFile(libraryPath, bibEntry, true)
 			hs.open(libraryPath)
 			os.remove(filep)
 
 		-- violentmonkey
-		elseif fileName:find("violentmonkey%.zip") then
-			os.rename(filep, browserSettings .. "violentmonkey.zip")
+		elseif fileName == "violentmonkey" then
+			os.rename(filep, browserSettings .. "violentmonkey")
+			-- needs to be zipped again, since browser auto-opens all zip files
+			hs.execute("cd '" .. browserSettings .. "' && zip violentmonkey.zip ./violentmonkey/* && rm -rf ./violentmonkey")
 			print("➡️ Violentmonkey backup")
 
 		-- ublacklist

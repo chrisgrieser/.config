@@ -106,7 +106,6 @@ rules:
             bundle_identifiers:
               - ^com\.tinyspeck\.slackmacgap$
               - ^com\.microsoft\.Word$
-              - ^com\.apptorium\.SideNotes-paddle$
               - ^net\.highlightsapp\.universal$
               - ^com\.mimestream\.Mimestream$
         to:

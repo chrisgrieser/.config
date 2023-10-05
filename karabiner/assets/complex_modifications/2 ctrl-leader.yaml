@@ -40,13 +40,12 @@ rules:
         to_if_alone:
           - *activate-leader
           - *set-notice
-      # 2x L-Ctrl: Toggle Sidenotes
+      # 2x L-Ctrl: Finder
       - type: basic
         from: { key_code: left_control }
         conditions: [*leader-active]
         to_if_alone:
-          # cmd+opt+ctrl+s in the SideNotes Settings set to toggle
-          - { key_code: s, modifiers: [command, option, control] }
+          - { key_code: f19 } # Alfred: bound to Finder window
           - *deactivate-leader
           - *remove-notice
       # Cancel (Hyper/Esc)
