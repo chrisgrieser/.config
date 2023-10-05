@@ -1,6 +1,3 @@
-local M = {}
-
-local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local aw = hs.application.watcher
 --------------------------------------------------------------------------------
@@ -15,41 +12,45 @@ end):start()
 --------------------------------------------------------------------------------
 
 -- REMINDERS -> TOT
-function M.reminderToSidenotes()
-	if not u.appRunning("SideNotes") then u.openApps("SideNotes") end
+local function remindersToTot()
+	if not u.appRunning("Tot") then u.openApps("Tot") end
 
-	local script = "./helpers/push-todays-reminders-to-sidenotes.js"
+	local script = "./helpers/push-todays-reminders-to-tot.js"
 	if PushRemindersTask and PushRemindersTask:isRunning() then return end
 
 	-- run as task so it's non-blocking
 	PushRemindersTask = hs.task
 		.new(script, function(exitCode, _, stdErr)
 			if exitCode == 0 then
-				print("☑️ Reminder → SideNotes")
+				print("☑️ Reminder → Tot")
 			else
-				u.notify("⚠️ Reminder-to-Sidenote failed: " .. stdErr)
+				u.notify("⚠️ Reminder-to-Tot failed: " .. stdErr)
 			end
 		end)
 		:start()
 
 	updateCounter()
-	-- FIX Reminders not properly quitting here
-	u.runWithDelays({ 1, 2, 3 }, function() u.quitApp("Reminders") end)
+	-- FIX Reminders not properly quitting
+	u.runWithDelays({ 1, 3 }, function() u.quitApp("Reminders") end)
 end
 
 --------------------------------------------------------------------------------
 -- TRIGGERS
 
--- 2. Every morning (safety redundancy)
-MorningTimerForSidenotes = hs.timer.doAt("07:00", "01d", M.reminderToSidenotes, true):start()
+-- 1. Systemstart
+if u.isSystemStart() then
+	-- with delay, to avoid importing duplicate reminders due to reminders
+	-- that are not being synced yet
+	u.runWithDelays(15, remindersToTot)
+end
 
--- 3. On wake, update Sidenotes Counter
+-- 2. Every morning (safety redundancy)
+MorningTimerForSidenotes = hs.timer.doAt("07:00", "01d", remindersToTot, true):start()
+
+-- 3. On wake, update Counter
 local c = hs.caffeinate.watcher
-WakeSideNotes = c.new(function(event)
+WakeTot = c.new(function(event)
 	local hasWoken = event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock
 	if hasWoken then updateCounter() end
 end):start()
 
---------------------------------------------------------------------------------
-
-return M
