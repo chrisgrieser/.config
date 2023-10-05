@@ -4,7 +4,6 @@ local u = require("lua.utils")
 local home = os.getenv("HOME")
 
 --------------------------------------------------------------------------------
-
 -- BOOKMARKS SYNCED TO CHROME BOOKMARKS
 -- (needed for Alfred)
 
@@ -81,7 +80,7 @@ local function fileIsDownloaded(filepath)
 	return fileExists and msg ~= nil
 end
 
-local browserSettings = env.dotfilesFolder .. "/_browser-extension-configs/"
+local browserSettings = home .. "/.config/_browser-extension-configs/"
 -- selene: allow(high_cyclomatic_complexity)
 FileHubWatcher = pw(env.fileHub, function(paths, _)
 	if not u.screenIsUnlocked() then return end
@@ -94,12 +93,12 @@ FileHubWatcher = pw(env.fileHub, function(paths, _)
 
 		-- alfredworkflows or iCal
 		if (ext == "alfredworkflow" or ext == "ics") and isDownloaded then
-			 u.runWithDelays(3, function() os.remove(filep) end)
+			u.runWithDelays(3, function() os.remove(filep) end)
 
 		-- dmg (cannot be auto-opened via Browser)
 		elseif ext == "dmg" and isDownloaded then
 			if not (fileName == "Stats.dmg") then hs.open(filep) end
-			u.runWithDelays(5, function() os.remove(filep) end)
+			u.runWithDelays(3, function() os.remove(filep) end)
 
 		-- zip: unzip
 		elseif ext == "zip" and fileName ~= "violentmonkey.zip" and isDownloaded then
@@ -110,7 +109,7 @@ FileHubWatcher = pw(env.fileHub, function(paths, _)
 
 		-- bib: save to library
 		elseif ext == "bib" and isDownloaded then
-			local libraryPath = env.dotfilesFolder .. "/pandoc/main-bibliography.bib"
+			local libraryPath = home .. "/.config/pandoc/main-bibliography.bib"
 			local bibEntry = u.readFile(filep)
 			if not bibEntry then return end
 			if not bibEntry:find("\n$") then bibEntry = bibEntry .. "\n" end

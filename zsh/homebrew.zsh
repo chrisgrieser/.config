@@ -36,7 +36,7 @@ function print-section() {
 }
 
 function dump() {
-	local dump_path="$DOTFILE_FOLDER/_installed-apps-and-packages/"
+	local dump_path="$HOME/.config/_installed-apps-and-packages/"
 	local device_name
 	device_name=$(scutil --get ComputerName | cut -d" " -f2-)
 	brew bundle dump --force --file "$dump_path/Brewfile_$device_name.txt"

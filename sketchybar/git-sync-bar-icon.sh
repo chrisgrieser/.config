@@ -11,7 +11,7 @@ GIT_OPTIONAL_LOCKS=0
 #───────────────────────────────────────────────────────────────────────────────
 # CHANGES
 
-cd "$DOTFILE_FOLDER" || configError="repo-path wrong"
+cd "$HOME/.config" || configError="repo-path wrong"
 dotChanges=$(git status --short | wc -l | tr -d " ")
 
 cd "$VAULT_PATH" || configError="repo-path wrong"
@@ -33,7 +33,7 @@ sketchybar --set "$NAME" icon="$icon" label="$label$configError"
 #───────────────────────────────────────────────────────────────────────────────
 # COMMITS BEHIND
 
-cd "$DOTFILE_FOLDER" || configError="repo-path wrong"
+cd "$HOME/.config" || configError="repo-path wrong"
 git fetch # required to check for commits behind
 dotBehind=$(git status --porcelain --branch | head -n1 | grep "behind" | grep -Eo "\d")
 

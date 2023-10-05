@@ -1,9 +1,9 @@
 #!/usr/bin/env zsh
 
-cd "$DOTFILE_FOLDER" || return 1
+cd "$HOME/.config" || return 1
 if [[ -n "$(git status --porcelain)" ]]; then
 	osascript -e 'display notification "" with title "🔁 Syncing Dotfiles…"'
-	zsh "$DOTFILE_FOLDER/git-dotfile-sync.sh" &>/dev/null
+	zsh "$HOME/.config/git-dotfile-sync.sh" &>/dev/null
 fi
 
 cd "$VAULT_PATH" || return 1

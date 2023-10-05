@@ -30,8 +30,8 @@ alias prose='ssh nanotipsforvim@prose.sh'
 alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
 #───────────────────────────────────────────────────────────────────────────────
 
-alias bkp='zsh "$DOTFILE_FOLDER/_utility-scripts/backup-script.sh"'
-alias repobkp='zsh "$DOTFILE_FOLDER/_utility-scripts/backup-my-repos.sh"'
+alias bkp='zsh "$HOME/.config/_utility-scripts/backup-script.sh"'
+alias repobkp='zsh "$HOME/.config/_utility-scripts/backup-my-repos.sh"'
 
 alias l='eza --hyperlink --all --long --time-style=relative --no-user --icons --git --group-directories-first --sort=newest'
 alias tree='eza --hyperlink --tree --level=2 --icons --git-ignore'

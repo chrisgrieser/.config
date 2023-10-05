@@ -63,7 +63,7 @@ function backup() {
 # - WARN All source paths needs to end with a slash to sync folder contents
 # - locations defined in zshenv
 backup "$HOME/Applications/" ./Homefolder/Applications # user applications
-backup "$DOTFILE_FOLDER/" ./Homefolder/config
+backup "$HOME/.config/" ./Homefolder/config
 backup "$VAULT_PATH/" ./Homefolder/main-vault
 backup "$PASSWORD_STORE_DIR/" ./Homefolder/password-store
 backup "$HOME/RomComs/" ./Homefolder/RomComs

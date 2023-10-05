@@ -27,8 +27,8 @@ zle -N kill-full-line
 function grappling-hook() {
 	local to_open="$WD"
 	if [[ "$PWD" == "$WD" ]]; then
-		to_open="$DOTFILE_FOLDER"
-	elif [[ "$PWD" == "$DOTFILE_FOLDER" ]]; then
+		to_open="$HOME/.config"
+	elif [[ "$PWD" == "$HOME/.config" ]]; then
 		to_open="$VAULT_PATH"
 	elif [[ "$PWD" == "$VAULT_PATH" ]]; then
 		to_open="$WD"

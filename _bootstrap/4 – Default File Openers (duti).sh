@@ -6,8 +6,8 @@
 command -v duti &>/dev/null || brew install duti
 
 # open once to initialize
-open "$DOTFILE_FOLDER/nvim/mac-helper/Neovide Helper.app" 
-open "$DOTFILE_FOLDER/obsidian/Obsidian Helper.app" 
+open "$HOME/.config/nvim/mac-helper/Neovide Helper.app" 
+open "$HOME/.config/obsidian/Obsidian Helper.app" 
 
 # Obsidian
 obsiOpenerID="com.apple.automator.Obsidian-Helper"
