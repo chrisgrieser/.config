@@ -30,10 +30,6 @@ rules:
         to:
           - { key_code: a, modifiers: [command] }
           - key_code: delete_or_backspace
-          - { key_code: left_arrow, modifiers: [command, option] }
-          - shell_command: |
-              export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-              sketchybar --trigger update-tot-count
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
       # Prev/Next Tot
       - type: basic
@@ -60,6 +56,7 @@ rules:
         from: { key_code: q, modifiers: { mandatory: [command] } }
         to:
           - { key_code: w, modifiers: [command] }
+          - { key_code: h, modifiers: [command] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Microsoft Office"

@@ -18,5 +18,7 @@
 	<string>https://chris-grieser.de/</string>
 	<key>rememberSelectedCategory</key>
 	<true/>
+	<key>showCanvasHints</key>
+	<false/>
 </dict>
 </plist>
