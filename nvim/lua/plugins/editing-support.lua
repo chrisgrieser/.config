@@ -209,10 +209,10 @@ return {
 			interline_swaps_witout_separator = false,
 		},
 		keys = {
-			-- stylua: ignore start
+			-- stylua: ignore
 			{ "ü", function() require("sibling-swap").swap_with_right() end, desc = "󰔰 Move Node Right" },
+			-- stylua: ignore
 			{ "Ü", function() require("sibling-swap").swap_with_left() end, desc = "󰶢 Move Node Left" },
-			-- stylua: ignore end
 		},
 	},
 	{ -- fixes scrolloff at end of file
