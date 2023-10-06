@@ -18,7 +18,7 @@ return {
 			retirementAgeMins = 15,
 			ignoreUnsavedChangesBufs = false,
 			notificationOnAutoClose = true,
-			deleteBufferWhenFileDeleted = false,
+			deleteBufferWhenFileDeleted = true,
 		},
 	},
 	{ -- :bnext & :bprevious get visual overview of buffers
@@ -68,9 +68,9 @@ return {
 			exclude_dirs = { "node_modules", "build", "dist", ".venv", "venv" },
 			datapath = u.vimDataDir,
 			patterns = {
-				".git",
 				"Makefile",
 				".editorconfig",
+				".git", -- submodules
 				"pyproject.toml", -- python
 				"requirements.txt", -- python
 				"manifest.json", -- node
@@ -79,6 +79,7 @@ return {
 				".luarc.json", -- lua
 				"selene.toml", -- lua
 				"stylua.toml", -- lua
+				-- specific to my personal setup
 				".project-root", -- manually marked
 				">com~apple~CloudDocs", -- = all subfolders of the iCloud drive
 				">Repos", -- = all subfolders of the Repos folder
