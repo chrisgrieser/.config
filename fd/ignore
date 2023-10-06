@@ -30,6 +30,7 @@ manifest.json
 
 # python
 __init__.py
+pyproject.toml
 
 # nvim-plugins
 selene.toml

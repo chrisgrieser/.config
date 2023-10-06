@@ -37,16 +37,12 @@ local routes = {
 	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
 	{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
 
-	-- code actions, especially annoying with ruff where the fixall code action
-	-- is triggered on every format
-	{ filter = { event = "notify", find = "^No code actions available$" }, skip = true },
-
 	-- DAP
 	{ filter = { event = "notify", find = "^Session terminated$" }, view = "mini" },
 
-	-- redirect to split
-	{ filter = { event = "msg_show", min_height = 15 }, view = "popup" },
-	{ filter = { event = "notify", min_height = 15 }, view = "popup" },
+	-- redirect to popup
+	{ filter = { event = "msg_show", min_height = 12 }, view = "popup" },
+	{ filter = { event = "notify", min_height = 12 }, view = "popup" },
 }
 
 --------------------------------------------------------------------------------

@@ -32,18 +32,9 @@ local function overwriteHighlight(hlgroup, changes) vim.api.nvim_set_hl(0, hlgro
 
 local function customHighlights()
 	-- Comments
-	clearHighlight("@lsp.type.comment") -- FIX: https://github.com/stsewd/tree-sitter-comment/issues/22
-	local commentColor = u.getHighlightValue("Comment", "fg")
-	updateHighlight(
-		"@text.uri",
-		("guisp=%s guifg=%s gui=underline term=underline"):format(commentColor, commentColor)
-	)
+	clearHighlight("@lsp.type.comment") -- FIX https://github.com/stsewd/tree-sitter-comment/issues/22
 
-	overwriteHighlight("LspReferenceWrite", { underdashed = true }) -- i.e. definition
-	overwriteHighlight("LspReferenceRead", { underdotted = true }) -- i.e. reference
-	overwriteHighlight("LspReferenceText", {}) -- too much noise, as is underlines e.g. strings
-
-	-- make `MatchParen` stand out more (orange to close to rainbow brackets)
+	-- make `MatchParen` stand out more (orange is too close to rainbow brackets)
 	overwriteHighlight("MatchParen", { reverse = true })
 
 	-- proper underlines for diagnostics

@@ -1,9 +1,7 @@
 """This is a test file."""
 
 
-
-
-def myfun() -> int: # pyright: ignore [reportGeneralTypeIssues]
+def myfun() -> int:  # pyright: ignore [reportGeneralTypeIssues]
     """Test."""
     f_f = 20
     if f_f == 20:

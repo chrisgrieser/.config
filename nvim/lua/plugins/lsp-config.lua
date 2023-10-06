@@ -76,18 +76,8 @@ serverConfigs.ruff_lsp = {
 		-- disable, since already included in FixAll when ruff-rules include "I"
 		settings = { organizeImports = false },
 	},
-	on_attach = function(client)
-		-- Disable hover in favor of jedi
-		client.server_capabilities.hoverProvider = false
-
-		-- add fix-all code actions to formatting
-		-- https://github.com/astral-sh/ruff-lsp/issues/119#issuecomment-1595628355
-		vim.keymap.set("n", "<D-s>", function()
-			vim.lsp.buf.code_action { apply = true, context = { only = { "source.fixAll.ruff" } } }
-			require("conform").format()
-			vim.cmd.update()
-		end, { buffer = true, desc = "󰒕 RuffFixAll & Format & Save" })
-	end,
+	-- Disable hover in favor of jedi
+	on_attach = function(client) client.server_capabilities.hoverProvider = false end,
 }
 
 -- DOCS https://github.com/microsoft/pyright/blob/main/docs/configuration.md
@@ -101,9 +91,14 @@ serverConfigs.pyright = {
 	on_attach = function(client) client.server_capabilities.hoverProvider = false end,
 }
 
+-- DOCS https://github.com/pappasam/jedi-language-server#configuration
 serverConfigs.jedi_language_server = {
 	init_options = {
 		diagnostics = { enable = true },
+		codeAction = {
+			nameExtractVariable = "extracted_var",
+			nameExtractFunction = "extracted_def",
+		},
 	},
 }
 
@@ -279,6 +274,13 @@ local function lspCurrentTokenHighlight()
 				callback = vim.lsp.buf.clear_references,
 				buffer = args.buf,
 			})
+		end,
+	})
+	vim.api.nvim_create_autocmd("ColorScheme", {
+		callback = function()
+			vim.api.nvim_set_hl(0, "LspReferenceWrite", { underdashed = true }) -- definition
+			vim.api.nvim_set_hl(0, "LspReferenceRead", { underdotted = true }) -- reference
+			vim.api.nvim_set_hl(0, "LspReferenceText", {}) -- too much noise, as is underlines e.g. strings
 		end,
 	})
 end
