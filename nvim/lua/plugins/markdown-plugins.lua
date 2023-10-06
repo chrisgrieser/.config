@@ -1,6 +1,3 @@
-local u = require("config.utils")
---------------------------------------------------------------------------------
-
 return {
 	{ -- emphasized headers & code blocks
 		"lukas-reineke/headlines.nvim",
@@ -19,11 +16,13 @@ return {
 		keys = {
 			{ "o", "<Plug>(bullets-newline)", ft = "markdown" },
 			{ "<CR>", "<Plug>(bullets-newline)", mode = "i", ft = "markdown" },
+			{ "<Tab>", "<Plug>(bullets-demote)", mode = { "i", "n", "x" }, ft = "markdown" },
+			{ "<S-Tab>", "<Plug>(bullets-promote)", mode = { "i", "n", "x" }, ft = "markdown" },
 		},
 		init = function()
+			vim.g.bullets_set_mappings = 0 -- using my own
 			vim.g.bullets_delete_last_bullet_if_empty = 1
 			vim.g.bullets_enable_in_empty_buffers = 0
-			vim.g.bullets_set_mappings = 0
 		end,
 	},
 	{ -- preview markdown
