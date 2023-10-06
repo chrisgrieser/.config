@@ -668,12 +668,12 @@
 	</array>
 	<key>readme</key>
 	<string>## Usage
-- Access your Dots via the keyword `tot`. (You can also use `tot+` to include your empty Dots.)
+- Access your Dots via the keyword `tot`.
 	* &lt;kbd&gt;⏎&lt;/kbd&gt; Open the Dot.
 	* &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; Append to the Dot.
 	* &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; Copy the contents of the Dot.
 	* &lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; Delete the Dot.
-- Quickly append to a pre-selected Dot via the keyword `qq`. Use
+- Quickly append to a pre-selected Dot via the keyword `qq`.
 - Configure the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to append the current browser tab and/or selected text.
 
 ---
@@ -1013,7 +1013,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.2.0</string>
+	<string>1.2.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
