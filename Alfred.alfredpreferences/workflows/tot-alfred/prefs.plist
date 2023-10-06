@@ -4,6 +4,8 @@
 <dict>
 	<key>append_prefix</key>
 	<string>- </string>
+	<key>quicksave_keyword</key>
+	<string>+</string>
 	<key>regular_keyword</key>
 	<string>,</string>
 	<key>show_all_keyword</key>

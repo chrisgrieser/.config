@@ -64,7 +64,7 @@ keymap({ "n", "x" }, "<localleader>k", function()
 	local link = vim.json.decode(jsonResponse)[1].url
 	local mdlink = ("[%s](%s)"):format(query, link)
 	fn.setreg("z", mdlink)
-	u.normal([["zp]])
+	u.normal([["zP]])
 end, { desc = " SearchLink (ddgr)", buffer = true })
 
 --------------------------------------------------------------------------------

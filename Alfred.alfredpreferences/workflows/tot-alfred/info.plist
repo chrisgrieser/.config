@@ -154,6 +154,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>A57A67B5-BE58-4F12-91BF-B731B3EEEB75</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3E08FF65-F031-447F-B9F6-47F8F507D79B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>C5998C8C-695A-4A5C-B99D-391E1E73A978</key>
 		<array>
 			<dict>
@@ -467,6 +480,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:quicksave_keyword}</string>
+				<key>subtext</key>
+				<string>to dot #{var:quicksave_dot}</string>
+				<key>text</key>
+				<string>Append {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>A57A67B5-BE58-4F12-91BF-B731B3EEEB75</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -476,7 +510,7 @@
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>✅ Appended to Dot #{var:quicksave_dot}</string>
+				<string>✅ Appended to dot #{var:quicksave_dot}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -721,6 +755,15 @@
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>A57A67B5-BE58-4F12-91BF-B731B3EEEB75</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>530</real>
+		</dict>
 		<key>C5998C8C-695A-4A5C-B99D-391E1E73A978</key>
 		<dict>
 			<key>colorindex</key>
@@ -810,6 +853,27 @@
 			<key>config</key>
 			<dict>
 				<key>default</key>
+				<string>qq</string>
+				<key>placeholder</key>
+				<string>qq</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Quick Append</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>quicksave_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
 				<string>1</string>
 				<key>pairs</key>
 				<array>
@@ -846,7 +910,7 @@
 			<key>description</key>
 			<string>The dot where quick-saved content will be appended to.</string>
 			<key>label</key>
-			<string>Quicksave Dot</string>
+			<string>Quick Append Dot</string>
 			<key>type</key>
 			<string>popupbutton</string>
 			<key>variable</key>

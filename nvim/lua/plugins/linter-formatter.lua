@@ -33,7 +33,11 @@ local formatters = {
 	python = { "black" },
 	yaml = { "prettier" },
 	html = { "prettier" },
-	markdown = { "markdown-toc", "markdownlint", "injected" },
+	markdown = {
+		"markdown-toc",
+		"markdownlint",
+		-- "injected",
+	},
 	css = { "stylelint", "prettier" },
 	sh = { "shellcheck", "shfmt" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
