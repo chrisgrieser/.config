@@ -130,7 +130,7 @@ local function telescopeConfig()
 			},
 			preview = {
 				timeout = 400, -- ms
-				filesize_limit = 0.3, -- in MB, do not preview big files for performance
+				filesize_limit = 1, -- in MB, do not preview big files for performance
 			},
 			borderchars = u.borderChars,
 			history = { path = u.vimDataDir .. "telescope_history" }, -- sync the history

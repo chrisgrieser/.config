@@ -101,11 +101,12 @@ function run() {
 			};
 		});
 
-	if (Object.keys(changesArr[0]).length === 0) {
+	const noChanges = Object.keys(changesArr[0]).length === 0
+	if (noChanges) {
 		return JSON.stringify({
 			items: [{ title: "🚫 No Changes", valid: false }],
-			rerun: 0.2, // needed for Alfred looping on actions
-			skipknowledge: true, // so Alfred does not change order on looping
+			rerun: 0.2,
+			skipknowledge: true,
 		});
 	}
 
