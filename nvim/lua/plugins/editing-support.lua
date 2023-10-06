@@ -247,7 +247,7 @@ return {
 		opts = {
 			ring = { history_length = 50 },
 			highlight = { timer = 1000 },
-			textobject = { enabled = true },
+			textobj = { enabled = true },
 		},
 		-- IncSearch is the default highlight group for post-yank highlights
 		init = function() u.colorschemeMod("YankyYanked", { link = "IncSearch" }) end,

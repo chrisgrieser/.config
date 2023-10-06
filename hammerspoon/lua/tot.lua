@@ -1,12 +1,20 @@
 local u = require("lua.utils")
 local aw = hs.application.watcher
 --------------------------------------------------------------------------------
-
+-- COUNTER FOR SKETCHYBAR
 local function updateCounter() hs.execute(u.exportPath .. "sketchybar --trigger update-tot-count") end
 
--- update counter in sketchybar
+-- Triggers
+-- 1. App Switch
 TotWatcher = aw.new(function(appName, event, _)
 	if appName == "Tot" and (event == aw.activated or event == aw.deactivated) then updateCounter() end
+end):start()
+
+-- 2. On wake
+local c = hs.caffeinate.watcher
+WakeTot = c.new(function(event)
+	local hasWoken = event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock
+	if hasWoken then updateCounter() end
 end):start()
 
 --------------------------------------------------------------------------------
@@ -17,12 +25,11 @@ local function remindersToTot()
 
 	-- run as task so it's non-blocking
 	PushRemindersTask = hs.task
-		.new(script, function(exitCode, _, stdErr)
-			if exitCode == 0 then
-				print("☑️ Reminder → Tot")
-			else
-				u.notify("⚠️ Reminder-to-Tot failed: " .. stdErr)
-			end
+		.new(script, function(exitCode, stdout, stderr)
+			if stdout == "" then return end
+			local msg = exitCode == 0 and "✅ Added reminders to Tot: " .. stdout
+				or "⚠️ Reminder-to-Tot failed: " .. stderr
+			u.notify(msg)
 		end)
 		:start()
 
@@ -32,9 +39,7 @@ local function remindersToTot()
 	updateCounter()
 end
 
---------------------------------------------------------------------------------
--- TRIGGERS
-
+-- triggers
 -- 1. Systemstart
 if u.isSystemStart() then
 	-- with delay, to avoid importing duplicate reminders due to reminders
@@ -45,9 +50,5 @@ end
 -- 2. Every morning
 MorningTimerForSidenotes = hs.timer.doAt("07:00", "01d", remindersToTot, true):start()
 
--- 3. On wake, update Counter
-local c = hs.caffeinate.watcher
-WakeTot = c.new(function(event)
-	local hasWoken = event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock
-	if hasWoken then updateCounter() end
-end):start()
+-- 3. Manually via URI-Scheme
+u.urischeme("tot", remindersToTot)

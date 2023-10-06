@@ -4,6 +4,9 @@ ObjC.import("stdlib");
 
 // biome-ignore lint/correctness/noUnusedVariables: run
 function run() {
+	// CONFIG
+	const dotToUse = 1;
+
 	const reminders = Application("Reminders");
 	const tots = Application("Tot");
 	tots.includeStandardAdditions = true;
@@ -19,23 +22,29 @@ function run() {
 		return;
 	}
 
+	let addedTasks = 0;
 	// - needs iterating for loop since JXA Record Array cannot be looped with `foreach` or `for in`
 	// - backwards, to not change the indices at loop runtime
 	for (let i = todaysTasks.length - 1; i >= 0; i--) {
 		const task = todaysTasks[i];
 		if (!task?.name()) continue;
 
+		addedTasks++;
 		const body = task.body();
 		const title = task.name();
 		const content = body ? `## ${title}\n${body}` : title;
+		const encodedContent = encodeURIComponent("\n\n" + content);
 
-		// append to first tot
 		// DOCS https://gist.github.com/chockenberry/d33ef5b6e6da4a3e4aa9b07b093d3c23
-		tots.openLocation("tots://1/append?text=" + encodeURIComponent(content));
+		tots.openLocation(`tots://${dotToUse}/append?text=${encodedContent}`);
 
 		task.delete();
 	}
 
+	// FIX Reminder.app being left open
 	delay(0.1);
 	if (reminders) reminders.quit();
+
+	// information hwo many tasks were added for hammrspoon
+	if (addedTasks > 0) return addedTasks;
 }
