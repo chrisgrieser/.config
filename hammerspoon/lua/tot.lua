@@ -42,7 +42,7 @@ if u.isSystemStart() then
 	u.runWithDelays(15, remindersToTot)
 end
 
--- 2. Every morning (safety redundancy)
+-- 2. Every morning
 MorningTimerForSidenotes = hs.timer.doAt("07:00", "01d", remindersToTot, true):start()
 
 -- 3. On wake, update Counter
