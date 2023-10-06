@@ -14,6 +14,18 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 --------------------------------------------------------------------------------
+
+-- change lazy keymaps
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "lazy",
+	callback = function()
+		vim.defer_fn(function()
+			vim.keymap.set("n", "K", "6k", { buffer = true })
+			vim.keymap.set("n", "<Tab>", "<CR>", { buffer = true, remap = true })
+		end, 1)
+	end,
+})
+
 -- DOCS https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
 require("lazy").setup("plugins", {
 	defaults = { lazy = true },
@@ -32,7 +44,6 @@ require("lazy").setup("plugins", {
 		notify = false, -- done on my own to use minimum condition for less noise
 		frequency = 60 * 60 * 24, -- = 1 day
 	},
-	git = { timeout = 60 }, -- 1min timeout for tasks
 	diff = { cmd = "browser" }, -- view diffs with "d" in the browser
 	change_detection = { notify = false },
 	readme = { enabled = false },
@@ -57,17 +68,6 @@ require("lazy").setup("plugins", {
 			},
 		},
 	},
-})
-
--- change lazy keymaps
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "lazy",
-	callback = function()
-		vim.defer_fn(function()
-			vim.keymap.set("n", "K", "6k", { buffer = true })
-			vim.keymap.set("n", "<Tab>", "<CR>", { buffer = true, remap = true })
-		end, 1)
-	end,
 })
 
 --------------------------------------------------------------------------------

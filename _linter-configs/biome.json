@@ -28,6 +28,7 @@
 			},
 			"style": {
 				"useTemplate": "off",
+				"useConst": "warn",
 				"noUnusedTemplateLiteral": "warn",
 				"useSingleVarDeclarator": "off",
 				"useNamingConvention": "warn"
