@@ -10,7 +10,7 @@ function run() {
 	// DOCS colors are customizable: https://support.iconfactory.com/kb/tot/can-i-customize-the-colors-of-the-dots
 	const totIcons = $.getenv("tot_icons").split(/, ?/);
 
-	const showAll = $.getenv("alfred_workflow_keyword") === $.getenv("show_all_keyword");
+	const showAll = $.getenv("include_empty_dots") === "1"
 	let emptyCount = 0;
 
 	/** @type {AlfredItem[]} */

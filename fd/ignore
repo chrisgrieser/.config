@@ -18,8 +18,7 @@
 *INFO*
 
 #───────────────────────────────────────────────────────────────────────────────
-# project boilerplate info files – not gitignored, but not used manually as well
-
+# project boilerplate info files – not gitignored, but rarely used manually as well
 LICENSE
 
 # node
