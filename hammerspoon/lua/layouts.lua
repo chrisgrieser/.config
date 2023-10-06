@@ -66,7 +66,7 @@ local function workLayout()
 	require("lua.private").closer()
 
 	-- open
-	local appsToOpen = { "Discord", env.browserApp, env.mailApp, env.tickerApp }
+	local appsToOpen = { "Discord", "Tot", env.browserApp, env.mailApp, env.tickerApp }
 	if not isWeekend() then table.insert(appsToOpen, "Slack") end
 	u.openApps(appsToOpen)
 	for _, appName in pairs(appsToOpen) do
@@ -91,17 +91,18 @@ local function movieLayout()
 
 	u.openApps { "YouTube", "BetterTouchTool" }
 	u.quitApp {
+		"Tot",
 		"neovide",
 		"Slack",
 		"Discord",
 		"BusyCal",
-		env.mailApp,
 		"Alfred Preferences",
 		"Finder",
 		"Highlights",
-		env.tickerApp,
 		"Obsidian",
 		"lo-rain",
+		env.mailApp,
+		env.tickerApp,
 	}
 	print("🔲 Loaded MovieModeLayout")
 end
