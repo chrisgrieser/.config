@@ -17,17 +17,13 @@ u.ftAbbr("!== ~=")
 -- if in nvim dir, reload file/plugin, otherwise run `make`
 keymap("n", "<leader>r", function()
 	cmd("silent update")
-	---@diagnostic disable-next-line: undefined-field
 	local isNvimConfig = vim.loop.cwd() == vim.fn.stdpath("config")
 	local filepath = vim.fn.expand("%:p")
 
-	if not isNvimConfig then
-		require("funcs.maker").make("useFirst")
-		return
-	elseif filepath:find("nvim/after/ftplugin/") then
+	if filepath:find("nvim/after/ftplugin/") then
 		u.notify("", "ftplugins cannot be reloaded.", "warn")
 	elseif filepath:find("nvim/lua/config/.*keymap") or filepath:find("nvim/lua/config/.*keybinding") then
-		u.notify("", "keymaps cannot be reloaded due to `mapunique`", "warn")
+		u.notify("", "keymaps cannot be reloaded due to `map-unique`", "warn")
 	elseif filepath:find("nvim/lua/plugins/") then
 		-- experimental reload of plugin-specs via lazy.nvim
 		local packageName = vim.fn.expand("%:t:r")
@@ -37,11 +33,17 @@ keymap("n", "<leader>r", function()
 			return name
 		end, pluginSpecs)
 		vim.cmd.Lazy("reload " .. table.concat(pluginNames, " "))
-	else
+	elseif filepath:find("/lua/") and filepath:find("nvim") then
+		-- locally developed nvim plugin
+		local pluginName = filepath:match(".*/(.-)/lua/")
+		vim.cmd.Lazy("reload " .. pluginName)
+	elseif isNvimConfig then
 		-- unload from lua cache (assuming that the pwd is ~/.config/nvim)
 		local packageName = expand("%:r"):gsub("lua/", ""):gsub("/", ".")
 		package.loaded[packageName] = nil
 		cmd.source()
 		u.notify("Re-sourced", packageName)
+	else
+		require("funcs.maker").make("useFirst")
 	end
 end, { buffer = true, unique = false, desc = " Reload /  Make" })
