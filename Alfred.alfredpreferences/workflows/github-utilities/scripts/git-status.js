@@ -44,7 +44,7 @@ function run() {
 		.doShellScript(`cd "${repoPath}" && ${gitStatusCommand}`)
 		.split("\r")
 		.map((file) => {
-			if (!file) return;
+			if (!file) return {};
 			// quotes are added for escaping when the path has spaces, but are
 			// irrelevant for this workflow
 			file = file.replaceAll('"', "");
