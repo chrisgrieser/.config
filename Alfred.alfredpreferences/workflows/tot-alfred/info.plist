@@ -355,7 +355,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>{var:regular_keyword}||{var:show_all_keyword}</string>
+				<string>{var:keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -875,51 +875,49 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Shows all active tots.</string>
+			<string>keyword</string>
 			<key>label</key>
+			<string>Dots selector</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>include</string>
+			</dict>
+			<key>description</key>
+			<string>empty dots</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>include_empty_dots</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>qq</string>
+				<key>placeholder</key>
+				<string>qq</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
 			<string>Keyword</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>regular_keyword</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>tot+</string>
-				<key>placeholder</key>
-				<string>tot+</string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>Shows all tots, including empty ones.</string>
 			<key>label</key>
-			<string></string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>show_all_keyword</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>qq</string>
-				<key>placeholder</key>
-				<string>qq</string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
 			<string>Quick Append</string>
-			<key>label</key>
-			<string></string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -963,9 +961,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				</array>
 			</dict>
 			<key>description</key>
-			<string>The dot where quick-saved content will be appended to.</string>
+			<string>Dot to append to.</string>
 			<key>label</key>
-			<string>Quick Append Dot</string>
+			<string></string>
 			<key>type</key>
 			<string>popupbutton</string>
 			<key>variable</key>
@@ -1015,7 +1013,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.1.2</string>
+	<string>1.2.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

@@ -730,13 +730,11 @@ rules:
                   open -R "${sel}-symlink"
               fi
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # S = follow symlink
+      # S = follow symlink (or alias)
       - type: basic
         from: { key_code: s, modifiers: { mandatory: [shift] } }
         to:
-          - shell_command: |
-              selection=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as text)')
-              open -R "$(readlink -f "$selection")"
+          - { key_code: r, modifiers: [command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # z = zip files
       # (if single directory is selected, zip its file contents instead)

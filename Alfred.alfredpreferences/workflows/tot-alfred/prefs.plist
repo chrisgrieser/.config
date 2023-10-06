@@ -4,11 +4,11 @@
 <dict>
 	<key>append_prefix</key>
 	<string>- </string>
-	<key>quicksave_keyword</key>
-	<string>+</string>
-	<key>regular_keyword</key>
-	<string>,</string>
-	<key>show_all_keyword</key>
+	<key>include_empty_dots</key>
+	<true/>
+	<key>keyword</key>
 	<string>,,</string>
+	<key>quicksave_keyword</key>
+	<string>,</string>
 </dict>
 </plist>

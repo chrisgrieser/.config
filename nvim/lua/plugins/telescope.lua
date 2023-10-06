@@ -127,7 +127,6 @@ local function telescopeConfig()
 				"%.zip$",
 				"%.pxd$",
 				"%.plist$", -- mostly Alfred files
-				".DS_Store",
 			},
 			preview = {
 				timeout = 400, -- ms
