@@ -64,7 +64,7 @@ local function showHideTickerApp(referenceWin)
 	local app = u.app(env.tickerApp)
 	if not app or not referenceWin or u.isFront("CleanShot X") then return end
 
-	if wu.CheckSize(referenceWin, wu.pseudoMax) or wu.CheckSize(referenceWin, wu.centered) then
+	if wu.CheckSize(referenceWin, wu.pseudoMax) or wu.CheckSize(referenceWin, wu.centerSection) then
 		winToTheSide()
 		return
 	end

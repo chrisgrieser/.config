@@ -7,7 +7,8 @@ local u = require("lua.utils")
 M.iMacDisplay = hs.screen("Built%-in")
 M.maximized = hs.layout.maximized
 M.pseudoMax = { x = 0.184, y = 0, w = 0.817, h = 1 }
-M.centered = { x = 0.184, y = 0, w = 0.6, h = 1 }
+M.centerSection = { x = 0.184, y = 0, w = 0.6, h = 1 }
+M.center = { x = 0.25, y = 0.2, w = 0.5, h = 0.6 }
 
 -- negative x to hide useless sidebar
 if env.isAtMother then
@@ -128,7 +129,7 @@ function M.autoTile(winSrc)
 		if env.isProjector() then
 			pos[1] = M.maximized
 		elseif u.isFront("Finder") then
-			pos[1] = M.centered
+			pos[1] = M.centerSection
 		else
 			pos[1] = M.pseudoMax
 		end
@@ -194,8 +195,10 @@ local function controlSpaceAction()
 	local curWin = hs.window.focusedWindow()
 	local pos
 
-	if u.isFront { "Finder", "Script Editor" } then
-		pos = M.CheckSize(curWin, M.centered) and M.maximized or M.centered
+	if u.isFront("Tot") then
+		pos = M.CheckSize(curWin, M.center) and M.centerSection or M.center
+	elseif u.isFront { "Finder", "Script Editor" } then
+		pos = M.CheckSize(curWin, M.centerSection) and M.maximized or M.centerSection
 	else
 		pos = M.CheckSize(curWin, M.pseudoMax) and M.maximized or M.pseudoMax
 	end

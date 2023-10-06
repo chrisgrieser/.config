@@ -24,7 +24,7 @@ return {
 					toggle { elements = { "right", "left" }, word = false },
 					toggle { elements = { "~=", "==" }, word = false },
 					toggle { elements = { "!==", "===" }, word = false },
-					toggle { elements = { "&&", "===" }, word = false },
+					toggle { elements = { "&&", "||" }, word = false },
 				},
 			}
 		end,

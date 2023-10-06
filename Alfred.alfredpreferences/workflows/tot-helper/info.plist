@@ -48,19 +48,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>350AF0AB-06E8-4B5B-A125-82C2F380674C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>9DE7C88F-9CE4-42C3-B9D8-6FA01F25AFCB</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>3DBCAC53-D043-40E5-8BC7-17331F0676DA</key>
 		<array>
 			<dict>
@@ -147,20 +134,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>B1792DAF-7AA2-4C55-989C-8760D521EBAE</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>9DE7C88F-9CE4-42C3-B9D8-6FA01F25AFCB</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>FC097D95-8358-4EE7-B32D-FF2576B26087</string>
+				<string>EA1AE9E7-13F5-4739-8D9E-647138BA4E87</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -196,18 +170,6 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>09983247-5108-4A1F-A658-4A8F022B1B05</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>68CDCF97-F1F0-447D-9B01-8DDDF01FE0C3</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>3E08FF65-F031-447F-B9F6-47F8F507D79B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -220,19 +182,19 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>3E08FF65-F031-447F-B9F6-47F8F507D79B</string>
+				<string>BB4A2BC6-9813-4591-BB9F-003519C0625B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>sourceoutputuid</key>
-				<string>20C14D1D-7C29-411D-B1C4-0748C8B6E6AF</string>
+				<string>68CDCF97-F1F0-447D-9B01-8DDDF01FE0C3</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>BB4A2BC6-9813-4591-BB9F-003519C0625B</string>
+				<string>09983247-5108-4A1F-A658-4A8F022B1B05</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -245,7 +207,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>B1792DAF-7AA2-4C55-989C-8760D521EBAE</string>
+				<string>F5342914-4BDB-4980-9BE8-1FBBE8FFC082</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -256,6 +218,19 @@
 		</array>
 		<key>E46E8809-57A1-4476-9A05-35F53EC4D16B</key>
 		<array/>
+		<key>EA1AE9E7-13F5-4739-8D9E-647138BA4E87</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F5342914-4BDB-4980-9BE8-1FBBE8FFC082</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -289,25 +264,41 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
+				<key>argument</key>
+				<string>
+{query}</string>
+				<key>passthroughargument</key>
 				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/append-to-tot.js</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>variables</key>
+				<dict/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
-			<string>B1792DAF-7AA2-4C55-989C-8760D521EBAE</string>
+			<string>EA1AE9E7-13F5-4739-8D9E-647138BA4E87</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>tot://{var:dot}/append?text={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>F5342914-4BDB-4980-9BE8-1FBBE8FFC082</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -344,7 +335,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>,</string>
+				<string>{var:regular_keyword}||{var:show_all_keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -490,187 +481,14 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>tot://7/append?text={query}</string>
+				<string>tot://{query}/append?text=</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>FC097D95-8358-4EE7-B32D-FF2576B26087</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict/>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/files-and-folders/file.read</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>9DE7C88F-9CE4-42C3-B9D8-6FA01F25AFCB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>dyn.ah62d4rv4ge8043a</string>
-				</array>
-				<key>name</key>
-				<string>Save as last Tot 🟢</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>350AF0AB-06E8-4B5B-A125-82C2F380674C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/delete-tot.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
 			<string>8DE6C12A-AD83-445A-BE00-709A9B916DFB</string>
 			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>⚠️ No selection</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>09983247-5108-4A1F-A658-4A8F022B1B05</string>
-			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{query}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string></string>
-						<key>outputlabel</key>
-						<string>other: no sel</string>
-						<key>uid</key>
-						<string>68CDCF97-F1F0-447D-9B01-8DDDF01FE0C3</string>
-					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:focusedapp}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>com.apple.Safari</string>
-						<key>outputlabel</key>
-						<string>Safari</string>
-						<key>uid</key>
-						<string>F0D7A81E-E2BF-4692-AE88-05F7D6110593</string>
-					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:focusedapp}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>com.brave.Browser</string>
-						<key>outputlabel</key>
-						<string>Brave</string>
-						<key>uid</key>
-						<string>20C14D1D-7C29-411D-B1C4-0748C8B6E6AF</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>other: sel</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>BD1918EE-9F7F-4E6B-B4F1-4E4B5AE7263E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>1</integer>
-				<key>focusedappvariable</key>
-				<true/>
-				<key>focusedappvariablename</key>
-				<string>focusedapp</string>
-				<key>hotkey</key>
-				<integer>1</integer>
-				<key>hotmod</key>
-				<integer>1966080</integer>
-				<key>hotstring</key>
-				<string>S</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.iconfactory.Tot</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>2</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>3DBCAC53-D043-40E5-8BC7-17331F0676DA</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -721,6 +539,87 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<true/>
+				<key>focusedappvariablename</key>
+				<string>focusedapp</string>
+				<key>hotkey</key>
+				<integer>1</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>S</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.iconfactory.Tot</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>2</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>3DBCAC53-D043-40E5-8BC7-17331F0676DA</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:focusedapp}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>safari|brave|chrome|vivaldi|firefox|opera</string>
+						<key>outputlabel</key>
+						<string>Browser</string>
+						<key>uid</key>
+						<string>F0D7A81E-E2BF-4692-AE88-05F7D6110593</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{query}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>1</integer>
+						<key>matchstring</key>
+						<string></string>
+						<key>outputlabel</key>
+						<string>sel</string>
+						<key>uid</key>
+						<string>68CDCF97-F1F0-447D-9B01-8DDDF01FE0C3</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>no sel</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>BD1918EE-9F7F-4E6B-B4F1-4E4B5AE7263E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -762,6 +661,27 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⚠️ No selection</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>09983247-5108-4A1F-A658-4A8F022B1B05</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -781,9 +701,9 @@
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>585</real>
+			<real>370</real>
 			<key>ypos</key>
-			<real>670</real>
+			<real>925</real>
 		</dict>
 		<key>171481C4-C600-4B58-8D5A-D0575E5EE9AA</key>
 		<dict>
@@ -801,9 +721,9 @@
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>585</real>
+			<real>570</real>
 			<key>ypos</key>
-			<real>795</real>
+			<real>700</real>
 		</dict>
 		<key>3396F88B-AD4F-41F0-9FA7-ED8173F325FF</key>
 		<dict>
@@ -814,25 +734,16 @@
 			<key>ypos</key>
 			<real>390</real>
 		</dict>
-		<key>350AF0AB-06E8-4B5B-A125-82C2F380674C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>715</real>
-			<key>ypos</key>
-			<real>475</real>
-		</dict>
 		<key>3DBCAC53-D043-40E5-8BC7-17331F0676DA</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>note</key>
-			<string>save selection/tab as Tot</string>
+			<string>Quick-Save</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>765</real>
+			<real>725</real>
 		</dict>
 		<key>3E08FF65-F031-447F-B9F6-47F8F507D79B</key>
 		<dict>
@@ -841,20 +752,20 @@
 			<key>note</key>
 			<string>get Browser URL</string>
 			<key>xpos</key>
-			<real>400</real>
+			<real>360</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>695</real>
 		</dict>
 		<key>49540ED2-DEDB-41DB-BF6B-FED0EB398A81</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>note</key>
-			<string>Search / Open tot</string>
+			<string>show tots</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>140</real>
+			<real>160</real>
 		</dict>
 		<key>778D7E9A-C113-4942-BC74-276C19AF6F0F</key>
 		<dict>
@@ -876,7 +787,7 @@
 			<key>xpos</key>
 			<real>315</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>520</real>
 		</dict>
 		<key>91D75681-FC5E-4D31-9FE2-FF0C89B5F5C1</key>
 		<dict>
@@ -892,29 +803,9 @@
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>460</real>
+			<real>455</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>9DE7C88F-9CE4-42C3-B9D8-6FA01F25AFCB</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>875</real>
-			<key>ypos</key>
-			<real>475</real>
-		</dict>
-		<key>B1792DAF-7AA2-4C55-989C-8760D521EBAE</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>note</key>
-			<string>append</string>
-			<key>xpos</key>
-			<real>655</real>
-			<key>ypos</key>
-			<real>65</real>
 		</dict>
 		<key>BB4A2BC6-9813-4591-BB9F-003519C0625B</key>
 		<dict>
@@ -923,9 +814,9 @@
 			<key>note</key>
 			<string>select tot 1</string>
 			<key>xpos</key>
-			<real>490</real>
+			<real>475</real>
 			<key>ypos</key>
-			<real>945</real>
+			<real>850</real>
 		</dict>
 		<key>BD1918EE-9F7F-4E6B-B4F1-4E4B5AE7263E</key>
 		<dict>
@@ -934,16 +825,16 @@
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
-			<real>755</real>
+			<real>730</real>
 		</dict>
 		<key>C5998C8C-695A-4A5C-B99D-391E1E73A978</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>460</real>
+			<real>455</real>
 			<key>ypos</key>
-			<real>130</real>
+			<real>125</real>
 		</dict>
 		<key>E46E8809-57A1-4476-9A05-35F53EC4D16B</key>
 		<dict>
@@ -952,22 +843,123 @@
 			<key>note</key>
 			<string>append</string>
 			<key>xpos</key>
-			<real>585</real>
+			<real>570</real>
 			<key>ypos</key>
-			<real>915</real>
+			<real>820</real>
 		</dict>
-		<key>FC097D95-8358-4EE7-B32D-FF2576B26087</key>
+		<key>EA1AE9E7-13F5-4739-8D9E-647138BA4E87</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>9</integer>
+			<key>note</key>
+			<string>insert line break</string>
 			<key>xpos</key>
-			<real>1030</real>
+			<real>615</real>
 			<key>ypos</key>
-			<real>475</real>
+			<real>45</real>
+		</dict>
+		<key>F5342914-4BDB-4980-9BE8-1FBBE8FFC082</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>append</string>
+			<key>xpos</key>
+			<real>690</real>
+			<key>ypos</key>
+			<real>60</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>tot</string>
+				<key>placeholder</key>
+				<string>tot</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Shows all active tots.</string>
+			<key>label</key>
+			<string>Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>regular_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>tot+</string>
+				<key>placeholder</key>
+				<string>tot+</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Shows all tots, including empty ones.</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>show_all_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>1</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>1</string>
+						<string>1</string>
+					</array>
+					<array>
+						<string>2</string>
+						<string>2</string>
+					</array>
+					<array>
+						<string>3</string>
+						<string>3</string>
+					</array>
+					<array>
+						<string>4</string>
+						<string>4</string>
+					</array>
+					<array>
+						<string>5</string>
+						<string>5</string>
+					</array>
+					<array>
+						<string>6</string>
+						<string>6</string>
+					</array>
+					<array>
+						<string>7</string>
+						<string>7</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>The dot where quick-saved content will be appended to.</string>
+			<key>label</key>
+			<string>Quicksave Dot</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>quicksave_dot</string>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -983,7 +975,7 @@
 			<key>description</key>
 			<string>For users who changed their tot theme, you can specify a comma-separated list of 7 emojis used to indicate your custom tot colors.</string>
 			<key>label</key>
-			<string>tot colors</string>
+			<string>Tot colors</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
