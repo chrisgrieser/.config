@@ -5,18 +5,19 @@ local aw = hs.application.watcher
 local function updateCounter() hs.execute(u.exportPath .. "sketchybar --trigger update-tot-count") end
 
 -- update counter in sketchybar
-TotWatcher = aw.new(function(appName, _, _)
-	if appName == "Tot" then updateCounter() end
+TotWatcher = aw.new(function(appName, event, _)
+	if
+		not appName == "Tot" and (event == aw.activated or event == aw.deactivated or event == aw.launched)
+	then
+		updateCounter()
+	end
 end):start()
 
 --------------------------------------------------------------------------------
 
 -- REMINDERS -> TOT
 local function remindersToTot()
-	if not u.appRunning("Tot") then u.openApps("Tot") end
-
 	local script = "./helpers/push-todays-reminders-to-tot.js"
-	if PushRemindersTask and PushRemindersTask:isRunning() then return end
 
 	-- run as task so it's non-blocking
 	PushRemindersTask = hs.task
@@ -29,9 +30,10 @@ local function remindersToTot()
 		end)
 		:start()
 
-	updateCounter()
 	-- FIX Reminders not properly quitting
 	u.runWithDelays({ 1, 3 }, function() u.quitApp("Reminders") end)
+
+	updateCounter()
 end
 
 --------------------------------------------------------------------------------
@@ -53,4 +55,3 @@ WakeTot = c.new(function(event)
 	local hasWoken = event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock
 	if hasWoken then updateCounter() end
 end):start()
-
