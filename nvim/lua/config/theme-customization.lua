@@ -25,14 +25,16 @@ local function updateHighlight(hlgroup, changes) cmd.highlight(hlgroup .. " " ..
 local function clearHighlight(hlgroup) vim.api.nvim_set_hl(0, hlgroup, {}) end
 
 ---@param hlgroup string
----@param changes table
+---@param changes { link?: string, default?: boolean, fg?: string, bg?: string, underline?: boolean, reverse?: boolean, underdashed?: boolean, underdotted?: boolean }
 local function overwriteHighlight(hlgroup, changes) vim.api.nvim_set_hl(0, hlgroup, changes) end
 
 --------------------------------------------------------------------------------
 
 local function customHighlights()
 	-- Comments
-	clearHighlight("@lsp.type.comment") -- FIX https://github.com/stsewd/tree-sitter-comment/issues/22
+	clearHighlight("@lsp.type.comment") -- FIX: https://github.com/stsewd/tree-sitter-comment/issues/22
+	local commentColor = u.getHighlightValue("Comment", "fg")
+	overwriteHighlight("@text.uri", { underline = true, fg = commentColor })
 
 	-- make `MatchParen` stand out more (orange is too close to rainbow brackets)
 	overwriteHighlight("MatchParen", { reverse = true })
@@ -75,7 +77,6 @@ local function themeModifications()
 		linkHighlight("@keyword.operator.python", "Operator")
 
 	-----------------------------------------------------------------------------
-
 	elseif theme == "gruvbox-material" or theme == "sonokai" then
 		local commentColor = u.getHighlightValue("Comment", "fg")
 		updateHighlight("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
