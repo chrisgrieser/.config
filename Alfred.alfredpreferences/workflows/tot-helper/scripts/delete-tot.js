@@ -9,4 +9,5 @@ function run(argv) {
 
 	// delete content https://gist.github.com/chockenberry/d33ef5b6e6da4a3e4aa9b07b093d3c23
 	tot.openLocation(`tot://${dot}/replace?text=`);
+
 }

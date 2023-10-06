@@ -14,7 +14,7 @@ return {
 				show_start = false,
 				show_end = false,
 			},
-			indent ={
+			indent = {
 				char = "│", -- spaces
 				tab_char = "│", -- tabs, can be list for changing level
 			},
@@ -165,41 +165,14 @@ return {
 			}
 		end,
 	},
-	{ -- :bnext & :bprevious get visual overview of buffers
-		"ghillb/cybu.nvim",
-		keys = {
-			{ "<BS>", function() require("cybu").cycle("next") end, desc = "󰽙 Next Buffer" },
-			{ "<S-BS>", function() require("cybu").cycle("prev") end, desc = "󰽙 Previous Buffer" },
-		},
-		dependencies = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim" },
-		opts = {
-			display_time = 1000,
-			position = {
-				anchor = "bottomcenter",
-				max_win_height = 12,
-				vertical_offset = 3,
-			},
-			style = {
-				border = u.borderStyle,
-				padding = 7,
-				path = "tail",
-				hide_buffer_id = true,
-				highlights = {
-					current_buffer = "CursorLine",
-					adjacent_buffers = "Normal",
-				},
-			},
-			behavior = {
-				mode = {
-					default = { switch = "immediate", view = "paging" },
-				},
-			},
-		},
-	},
 	{ -- Better input/selection fields
 		"stevearc/dressing.nvim",
+		keys = {
+			{ "<Tab>", "j", ft = "DressingSelect" },
+			{ "<S-Tab>", "k", ft = "DressingSelect" },
+		},
+		-- lazy load triggers
 		init = function()
-			-- lazy load triggers
 			---@diagnostic disable-next-line: duplicate-set-field
 			vim.ui.select = function(...)
 				require("lazy").load { plugins = { "dressing.nvim" } }
@@ -210,15 +183,6 @@ return {
 				require("lazy").load { plugins = { "dressing.nvim" } }
 				return vim.ui.input(...)
 			end
-
-			-- extra keybindings
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "DressingSelect",
-				callback = function()
-					vim.keymap.set("n", "<Tab>", "j", { buffer = true })
-					vim.keymap.set("n", "<S-Tab>", "k", { buffer = true })
-				end,
-			})
 		end,
 		opts = {
 			input = {
