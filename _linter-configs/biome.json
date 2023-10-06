@@ -29,6 +29,7 @@
 			"style": {
 				"useTemplate": "off",
 				"useConst": "warn",
+				"noParameterAssign": "off",
 				"noUnusedTemplateLiteral": "warn",
 				"useSingleVarDeclarator": "off",
 				"useNamingConvention": "warn"
