@@ -100,7 +100,7 @@ function run() {
 			};
 		});
 
-	if (changesArr.length === 0) {
+	if (Object.keys(changesArr[0]).length === 0) {
 		return JSON.stringify({
 			items: [{ title: "🚫 No Changes", valid: false }],
 			rerun: 0.2, // needed for Alfred looping on actions
