@@ -28,7 +28,6 @@
 			},
 			"style": {
 				"useBlockStatements": "off",
-				"useConst": "warn",
 				"noParameterAssign": "off",
 				"useTemplate": "off",
 				"noUnusedTemplateLiteral": "warn",

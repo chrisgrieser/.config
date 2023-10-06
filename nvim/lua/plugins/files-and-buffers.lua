@@ -21,6 +21,44 @@ return {
 			deleteBufferWhenFileDeleted = false,
 		},
 	},
+	{ -- :bnext & :bprevious get visual overview of buffers
+		"ghillb/cybu.nvim",
+		keys = {
+			{
+				"<BS>",
+				function() require("cybu").cycle("next") end,
+				mode = { "n", "x" },
+				desc = "󰽙 Next Buffer",
+			},
+			{
+				"<S-BS>",
+				function() require("cybu").cycle("prev") end,
+				mode = { "n", "x" },
+				desc = "󰽙 Previous Buffer",
+			},
+		},
+		dependencies = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim" },
+		opts = {
+			display_time = 1000,
+			position = {
+				anchor = "bottomcenter",
+				max_win_height = 12,
+				vertical_offset = 3,
+			},
+			style = {
+				border = u.borderStyle,
+				padding = 7,
+				path = "tail",
+				hide_buffer_id = true,
+				highlights = { current_buffer = "CursorLine", adjacent_buffers = "Normal" },
+			},
+			behavior = {
+				mode = {
+					default = { switch = "immediate", view = "paging" },
+				},
+			},
+		},
+	},
 	{ -- change cwd per project
 		"ahmedkhalf/project.nvim",
 		event = "VimEnter",
