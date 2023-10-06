@@ -6,11 +6,7 @@ local function updateCounter() hs.execute(u.exportPath .. "sketchybar --trigger 
 
 -- update counter in sketchybar
 TotWatcher = aw.new(function(appName, event, _)
-	if
-		not appName == "Tot" and (event == aw.activated or event == aw.deactivated or event == aw.launched)
-	then
-		updateCounter()
-	end
+	if appName == "Tot" and (event == aw.activated or event == aw.deactivated) then updateCounter() end
 end):start()
 
 --------------------------------------------------------------------------------

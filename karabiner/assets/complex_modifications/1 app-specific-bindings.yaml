@@ -30,6 +30,7 @@ rules:
         to:
           - { key_code: a, modifiers: [command] }
           - key_code: delete_or_backspace
+          - shell_command: open "tot://1"
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
       # Prev/Next Tot
       - type: basic
@@ -46,8 +47,6 @@ rules:
       - type: basic
         from: { key_code: d, modifiers: { mandatory: [command, shift] } }
         to:
-          - { key_code: d, modifiers: [command, shift] }
-          - { key_code: return_or_enter }
           - { key_code: d, modifiers: [command, shift] }
           - { key_code: return_or_enter }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]

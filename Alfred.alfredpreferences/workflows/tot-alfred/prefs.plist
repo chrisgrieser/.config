@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>append_prefix</key>
+	<string>- </string>
 	<key>regular_keyword</key>
 	<string>,</string>
 	<key>show_all_keyword</key>

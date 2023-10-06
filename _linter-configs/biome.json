@@ -27,11 +27,10 @@
 				"noConsoleLog": "off"
 			},
 			"style": {
-				"useBlockStatements": "off",
-				"noParameterAssign": "off",
 				"useTemplate": "off",
 				"noUnusedTemplateLiteral": "warn",
-				"useSingleVarDeclarator": "off"
+				"useSingleVarDeclarator": "off",
+				"useNamingConvention": "warn"
 			}
 		}
 	}
