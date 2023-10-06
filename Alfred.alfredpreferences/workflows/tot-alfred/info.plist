@@ -222,7 +222,7 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string></string>
+	<string>Tot.app Integration for Alfred</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -235,7 +235,7 @@
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>subtext</key>
-				<string></string>
+				<string>to Dot #{var:dot}</string>
 				<key>text</key>
 				<string>Append: {query}</string>
 				<key>withspace</key>
@@ -485,7 +485,7 @@
 				<key>keyword</key>
 				<string>{var:quicksave_keyword}</string>
 				<key>subtext</key>
-				<string>to dot #{var:quicksave_dot}</string>
+				<string>to Dot #{var:quicksave_dot}</string>
 				<key>text</key>
 				<string>Append {query}</string>
 				<key>withspace</key>
@@ -510,7 +510,7 @@
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>✅ Appended to dot #{var:quicksave_dot}</string>
+				<string>✅ Appended to Dot #{var:quicksave_dot}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -634,7 +634,18 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<string>## Usage
+- Access your Dots via the keyword `tot`. (You can also use `tot+` to include your empty Dots.)
+	* &lt;kbd&gt;⏎&lt;/kbd&gt; Open the Dot.
+	* &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; Append to the Dot.
+	* &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; Copy the contents of the Dot.
+	* &lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; Delete the Dot.
+- Quickly append to a pre-selected Dot via the keyword `qq`. Use
+- Configure the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to append the current browser tab and/or selected text.
+
+---
+
+Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>05C47DFA-6E22-4EA4-A341-99651AEBD5AD</key>
@@ -960,7 +971,7 @@
 		</dict>
 	</array>
 	<key>version</key>
-	<string></string>
+	<string>1.1.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
