@@ -30,7 +30,7 @@ local formatters = {
 	json = { "biome" },
 	jsonc = { "biome" },
 	lua = { "stylua" },
-	python = { "black" },
+	python = { "ruff_format", "ruff_fix" },
 	yaml = { "prettier" },
 	html = { "prettier" },
 	markdown = { "markdown-toc", "markdownlint", "injected" },
@@ -41,7 +41,10 @@ local formatters = {
 	["*"] = { "codespell" },
 }
 
-local debuggers = { "debugpy" }
+local extraInstalls = {
+	"debugpy", -- debugger
+	"ruff", -- since ruff_format and ruff_fix aren't the real names
+}
 
 local dontInstall = {
 	-- installed externally due to its plugins: https://github.com/williamboman/mason.nvim/issues/695
@@ -51,22 +54,24 @@ local dontInstall = {
 	"trim_newlines",
 	"squeeze_blanks",
 	"injected",
+	"ruff_format", 
+	"ruff_fix" ,
 }
 
 ---given the linter- and formatter-list of nvim-lint and conform.nvim, extract a
 ---list of all tools that need to be auto-installed
 ---@param myLinters object[]
 ---@param myFormatters object[]
----@param myDebuggers string[]
+---@param extraTools string[]
 ---@param ignoreTools string[]
 ---@return string[] tools
 ---@nodiscard
-local function toolsToAutoinstall(myLinters, myFormatters, myDebuggers, ignoreTools)
-	-- get all linters, formatters, & debuggers and merge them into one list
+local function toolsToAutoinstall(myLinters, myFormatters, extraTools, ignoreTools)
+	-- get all linters, formatters, & extra tools and merge them into one list
 	local linterList = vim.tbl_flatten(vim.tbl_values(myLinters))
 	local formatterList = vim.tbl_flatten(vim.tbl_values(myFormatters))
 	local tools = vim.list_extend(linterList, formatterList)
-	vim.list_extend(tools, myDebuggers)
+	vim.list_extend(tools, extraTools)
 
 	-- only unique tools
 	table.sort(tools)
@@ -135,6 +140,7 @@ end
 local function formatterConfig()
 	require("conform").setup { formatters_by_ft = formatters }
 
+	-- PENDING https://github.com/stevearc/conform.nvim/issues/111#issuecomment-1750658745
 	require("conform.formatters.injected").options.ignore_errors = true
 
 	-- stylua: ignore
@@ -217,7 +223,7 @@ return {
 		},
 		dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
 		config = function()
-			local myTools = toolsToAutoinstall(linters, formatters, debuggers, dontInstall)
+			local myTools = toolsToAutoinstall(linters, formatters, extraInstalls, dontInstall)
 			vim.list_extend(myTools, vim.g.myLsps)
 
 			require("mason-tool-installer").setup {

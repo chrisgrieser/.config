@@ -3,3 +3,8 @@
 
 # vale styles
 vale/styles
+
+# unignore, since these ones I actually frequently change
+!selene.toml
+!stylua.toml
+!pyproject.toml
