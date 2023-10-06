@@ -167,11 +167,24 @@
 				<false/>
 			</dict>
 		</array>
-		<key>C5998C8C-695A-4A5C-B99D-391E1E73A978</key>
+		<key>AC952B18-4AA7-4805-B8AE-C886E9A98AE5</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>F5342914-4BDB-4980-9BE8-1FBBE8FFC082</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C5998C8C-695A-4A5C-B99D-391E1E73A978</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>AC952B18-4AA7-4805-B8AE-C886E9A98AE5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -303,6 +316,26 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>C5998C8C-695A-4A5C-B99D-391E1E73A978</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>dot</key>
+					<string>1</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>AC952B18-4AA7-4805-B8AE-C886E9A98AE5</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -487,7 +520,7 @@
 				<key>subtext</key>
 				<string>to Dot #{var:quicksave_dot}</string>
 				<key>text</key>
-				<string>Append {query}</string>
+				<string>Append: {query}</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -775,6 +808,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>530</real>
 		</dict>
+		<key>AC952B18-4AA7-4805-B8AE-C886E9A98AE5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>use dot 1</string>
+			<key>xpos</key>
+			<real>615</real>
+			<key>ypos</key>
+			<real>160</real>
+		</dict>
 		<key>C5998C8C-695A-4A5C-B99D-391E1E73A978</key>
 		<dict>
 			<key>colorindex</key>
@@ -971,7 +1015,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.1.1</string>
+	<string>1.1.2</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

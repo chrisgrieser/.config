@@ -66,9 +66,9 @@ end
 
 ---https://www.reddit.com/r/neovim/comments/oxddk9/comment/h7maerh/
 ---@param name string name of highlight group
----@param key "fg"|"bg"
+---@param key "fg"|"bg"|"underline"|"reverse"|"underdashed"|"underdotted"
 ---@nodiscard
----@return string|nil the value, or nil if hlgroup or key is not available
+---@return string|boolean|nil the value, or nil if hlgroup or key is not available
 function M.getHighlightValue(name, key)
 	local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = name })
 	if not ok then return end

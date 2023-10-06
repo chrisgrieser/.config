@@ -8,11 +8,6 @@ useLibraryCodeForTypes = true
 
 #───────────────────────────────────────────────────────────────────────────────
 
-[tool.black]
-line-length = 100
-
-#───────────────────────────────────────────────────────────────────────────────
-
 # DOCS https://beta.ruff.rs/docs/rules/
 [tool.ruff]
 line-length = 100

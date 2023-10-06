@@ -8,12 +8,14 @@ declare type AlfredRun = (argv: string[]) => string | void;
 declare class AlfredScriptFilter {
 	items: AlfredItem[];
 	rerun?: number; // only accepts values between 0.1 and 5
+	// biome-ignore lint/complexity/noBannedTypes: <explanation>
 	variables?: Object;
 	skipknowledge?: boolean;
 }
 
 declare class AlfredItem {
-	title: string;
+	title?: string;
+	// biome-ignore lint/complexity/noBannedTypes: <explanation>
 	action?: string | string[] | Object;
 	subtitle?: string;
 	arg?: string | string[];
@@ -23,6 +25,7 @@ declare class AlfredItem {
 	uid?: string;
 	autocomplete?: string;
 	quicklookurl?: string;
+	// biome-ignore lint/complexity/noBannedTypes: <explanation>
 	variables?: Object;
 	icon?: {
 		type?: "fileicon" | "filetype" | "";
@@ -48,5 +51,6 @@ declare class AlfredModifierKey {
 	subtitle?: string;
 	arg?: string | string[];
 	valid?: boolean;
+	// biome-ignore lint/complexity/noBannedTypes: <explanation>
 	variables?: Object;
 }
