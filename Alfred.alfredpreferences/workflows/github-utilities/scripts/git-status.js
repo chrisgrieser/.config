@@ -40,7 +40,7 @@ function run() {
 
 	const gitStatusCommand = "export GIT_OPTIONAL_LOCKS=0 ; git status --porcelain";
 	/** @type AlfredItem[] */
-	const unstagesArr = app
+	const changesArr = app
 		.doShellScript(`cd "${repoPath}" && ${gitStatusCommand}`)
 		.split("\r")
 		.map((file) => {
@@ -100,10 +100,18 @@ function run() {
 			};
 		});
 
+	if (changesArr.length === 0) {
+		return JSON.stringify({
+			items: [{ title: "🚫 No Changes", valid: false }],
+			rerun: 0.2, // needed for Alfred looping on actions
+			skipknowledge: true, // so Alfred does not change order on looping
+		});
+	}
+
 	return JSON.stringify({
 		rerun: 0.2, // needed for Alfred looping on actions
 		skipknowledge: true, // so Alfred does not change order on looping
 		variables: { repo: repoPath },
-		items: unstagesArr,
+		items: changesArr,
 	});
 }
