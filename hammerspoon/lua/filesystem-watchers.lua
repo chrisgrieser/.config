@@ -2,45 +2,39 @@ local pw = hs.pathwatcher.new
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local home = os.getenv("HOME")
+local applicationSupport = home .. "/Library/Application Support/"
 
 --------------------------------------------------------------------------------
 -- BOOKMARKS SYNCED TO CHROME BOOKMARKS
 -- (needed for Alfred)
 
-local sourceProfileLocation = home .. "/Library/Application Support/" .. env.browserDefaultsPath
-local sourceBookmarkPath = sourceProfileLocation .. "/Default/Bookmarks"
-local chromeProfileLocation = home .. "/Library/Application Support/Google/Chrome/"
-BookmarkWatcher = pw(sourceBookmarkPath, function()
-	-- Bookmarks
-	local bookmarks = hs.json.read(sourceBookmarkPath)
-	if not bookmarks then return end
+local loc = {
+	sourceProfile = applicationSupport .. env.browserDefaultsPath,
+	sourceBookmarks = applicationSupport .. env.browserDefaultsPath .. "/Default/Bookmarks",
+	chromeProfile = applicationSupport .. "Google/Chrome/",
+}
 
-	hs.execute(("mkdir -p '%s'"):format(chromeProfileLocation))
-	local success = hs.json.write(bookmarks, chromeProfileLocation .. "/Default/Bookmarks", false, true)
+BookmarkWatcher = pw(loc.sourceBookmarks, function()
+	-- Bookmarks
+	local bookmarks = hs.json.read(loc.sourceBookmarks)
+	if not bookmarks then return end
+	hs.execute(("mkdir -p '%s'"):format(loc.chromeProfile))
+	local success = hs.json.write(bookmarks, loc.chromeProfile .. "/Default/Bookmarks", false, true)
 	if not success then
 		u.notify("🔖⚠️ Bookmarks not correctly synced.")
 		return
 	end
 
 	-- Local State (also required for Alfred to pick up the Bookmarks)
-	local content = u.readFile(sourceProfileLocation .. "/Local State")
+	local content = u.readFile(loc.sourceProfile .. "/Local State")
 	if not content then return end
-	u.writeToFile(chromeProfileLocation .. "/Local State", content, false)
+	u.writeToFile(loc.chromeProfile .. "/Local State", content, false)
 
 	print("🔖 Bookmarks synced to Chrome Bookmarks")
 end):start()
 
 --------------------------------------------------------------------------------
 -- TO FILE HUB
-
--- GenuisScan
-local scanFolder = home .. "/Library/Mobile Documents/iCloud~com~geniussoftware~GeniusScan/Documents/"
-ScanFolderWatcher = pw(scanFolder, function()
-	hs.execute("mv '" .. scanFolder .. "'/* '" .. env.fileHub .. "'")
-	u.notify("📸 Scan synced to File Hub")
-	u.sound("Funk")
-end):start()
-
 -- Downloads Folder
 local systemDownloadFolder = home .. "/Downloads/"
 SystemDlFolderWatcher = pw(systemDownloadFolder, function()
@@ -85,6 +79,7 @@ FileHubWatcher = pw(env.fileHub, function(paths, _)
 		elseif fileName == "violentmonkey" then
 			os.rename(filep, browserSettings .. "violentmonkey")
 			-- needs to be zipped again, since browser auto-opens all zip files
+			-- stylua: ignore
 			hs.execute("cd '" .. browserSettings .. "' && zip violentmonkey.zip ./violentmonkey/* && rm -rf ./violentmonkey")
 			print("➡️ Violentmonkey backup")
 

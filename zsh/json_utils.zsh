@@ -64,15 +64,15 @@ function file_url_or_stdin() {
 }
 
 # fx, but in a new wezterm tab
-function fx() {
-	if ! command -v fx &>/dev/null; then print "\033[1;33mfx not installed.\033[0m" && return 1; fi
+function jless() {
+	if ! command -v jless &>/dev/null; then print "\033[1;33mfx not installed.\033[0m" && return 1; fi
 	if ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then echo "Not using WezTerm." && return 1; fi
 
 	local tmp="/tmp/temp.json"
 	file_url_or_stdin "$1"
 
-	pane_id=$(wezterm cli spawn -- fx "$tmp") # open in new wezterm tab
-	wezterm cli set-tab-title --pane-id="$pane_id" "fx"
+	pane_id=$(wezterm cli spawn -- jless "$tmp") # open in new wezterm tab
+	wezterm cli set-tab-title --pane-id="$pane_id" "jless"
 }
 
 # [j]son e[x]plore

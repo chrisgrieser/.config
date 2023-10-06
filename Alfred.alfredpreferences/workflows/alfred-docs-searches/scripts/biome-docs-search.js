@@ -17,7 +17,7 @@ function alfredMatcher(str) {
 function run() {
 	const docsUrl = "https://api.github.com/repos/biomejs/biome/git/trees/main?recursive=1";
 	const baseUrl = "https://biomejs.dev";
-	const docPathRegex = /^website\/src\/pages\/(.*)\.mdx?$/i;
+	const docPathRegex = /^website\/src\/content\/docs\/(.*)\.mdx?$/i;
 
 	const workArray = JSON.parse(app.doShellScript(`curl -sL "${docsUrl}"`))
 		.tree.filter((/** @type {{ path: string; }} */ file) => docPathRegex.test(file.path))

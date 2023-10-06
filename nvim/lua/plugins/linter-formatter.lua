@@ -33,11 +33,7 @@ local formatters = {
 	python = { "black" },
 	yaml = { "prettier" },
 	html = { "prettier" },
-	markdown = {
-		"markdown-toc",
-		"markdownlint",
-		-- "injected",
-	},
+	markdown = { "markdown-toc", "markdownlint", "injected" },
 	css = { "stylelint", "prettier" },
 	sh = { "shellcheck", "shfmt" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
@@ -138,6 +134,8 @@ end
 
 local function formatterConfig()
 	require("conform").setup { formatters_by_ft = formatters }
+
+	require("conform.formatters.injected").options.ignore_errors = true
 
 	-- stylua: ignore
 	require("conform.formatters.bibtex-tidy").args = {
