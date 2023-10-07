@@ -66,7 +66,7 @@ local function workLayout()
 	require("lua.private").closer()
 
 	-- open
-	local appsToOpen = { "Discord", "Tot", env.browserApp, env.mailApp, env.tickerApp }
+	local appsToOpen = { "Discord", env.browserApp, env.mailApp, env.tickerApp }
 	if not isWeekend() then table.insert(appsToOpen, "Slack") end
 	u.openApps(appsToOpen)
 	for _, appName in pairs(appsToOpen) do
@@ -75,6 +75,7 @@ local function workLayout()
 			wu.moveResize(win, wu.pseudoMax)
 		end)
 	end
+	u.openApps("Tot")
 	u.restartApp("AltTab") -- FIX duplicate items
 
 	-- finish

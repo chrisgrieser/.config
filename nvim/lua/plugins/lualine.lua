@@ -7,39 +7,39 @@ local fn = vim.fn
 ---@nodiscard
 ---@return string
 local function irregularWhitespace()
+	if bo.buftype ~= "" then return "" end
+
 	-- CONFIG
 	-- filetypes and the number of spaces they use. Omit or set to nil to use tabs for that filetype.
 	local spaceFiletypes = { python = 4, yaml = 2 }
 	local ignoredFiletypes = { "css" }
-	local linebreakType = "unix" ---@type "unix" | "mac" | "dos"
+	local linebreakType = "unix" ---@type "unix"|"mac"|"dos"
+	local icons = { unix = "", mac = "", dos = "", space = "󱁐", tab = "󰌒" }
 
-	-- vars & guard
-	local usesSpaces = bo.expandtab
-	local usesTabs = not bo.expandtab
-	local brUsed = bo.fileformat
+	-- non-default indentation setting (e.g. changed via guessIndent or editorconfig)
+	local indentation
 	local ft = bo.filetype
-	if vim.tbl_contains(ignoredFiletypes, ft) or fn.mode() ~= "n" or bo.buftype ~= "" then return "" end
-
-	-- non-default indentation setting (e.g. changed via indent-o-matic)
-	local nonDefaultSetting = ""
 	local spaceFtsOnly = vim.tbl_keys(spaceFiletypes)
-	if
-		(usesSpaces and not vim.tbl_contains(spaceFtsOnly, ft))
-		or (usesSpaces and bo.tabstop ~= spaceFiletypes[ft])
-	then
-		nonDefaultSetting = "󱁐 " .. tostring(bo.tabstop)
-	elseif usesTabs and vim.tbl_contains(spaceFtsOnly, ft) then
-		nonDefaultSetting = "󰌒 " .. tostring(bo.tabstop)
+	local spacesInsteadOfTabs = bo.expandtab and not vim.tbl_contains(spaceFtsOnly, ft)
+	local differentSpaceAmount = bo.expandtab and spaceFiletypes[ft] ~= bo.tabstop
+	local tabsInsteadOfSpaces = not bo.expandtab and vim.tbl_contains(spaceFtsOnly, ft)
+	if spacesInsteadOfTabs or differentSpaceAmount then
+		indentation = icons.space .. " " .. tostring(bo.tabstop)
+	elseif tabsInsteadOfSpaces then
+		indentation = icons.tab .. " " .. tostring(bo.tabstop)
 	end
+	if vim.tbl_contains(ignoredFiletypes, ft) then indentation = nil end
 
 	-- line breaks
-	local linebreakIcon = ""
-	if brUsed ~= linebreakType then
-		local lbIcons = { unix = " ", mac = " ", dos = " " }
-		linebreakIcon = "󰌑" .. lbIcons[brUsed]
-	end
+	local linebreak
+	local irregularLinebreak = bo.fileformat ~= linebreakType
+	if irregularLinebreak then linebreak = "󰌑 " .. icons[bo.fileformat] .. " " end
 
-	return nonDefaultSetting .. linebreakIcon
+	-- out
+	if indentation and linebreak then return indentation .. "  " .. linebreak end
+	if indentation and not linebreak then return indentation end
+	if not indentation and linebreak then return linebreak end
+	return ""
 end
 
 --------------------------------------------------------------------------------
