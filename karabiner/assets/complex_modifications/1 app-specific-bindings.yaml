@@ -50,6 +50,13 @@ rules:
           - { key_code: d, modifiers: [command, shift] }
           - { key_code: return_or_enter }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
+      # copy & delete tot
+      - type: basic
+        from: { key_code: c, modifiers: { mandatory: [command, shift] } }
+        to:
+          - { key_code: a, modifiers: [command] }
+          - { key_code: x, modifiers: [command] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
       # prevent accidental quitting
       - type: basic
         from: { key_code: q, modifiers: { mandatory: [command] } }
