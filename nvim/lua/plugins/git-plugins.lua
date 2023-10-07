@@ -15,7 +15,7 @@ return {
 			{ "<leader>gi", function() require("tinygit").issuesAndPrs { state = "open" } end, desc = " Open Issues" },
 			{ "<leader>gI", function() require("tinygit").issuesAndPrs { state = "closed" } end, desc = " Closed Issues" },
 			{ "<leader>gu", function() require("tinygit").githubUrl() end, mode = { "n", "x" }, desc = " GitHub Link" },
-			{ "<leader>gd", function() require("tinygit.pickaxe").currentFileHistory() end, desc = "󰢷 File History" },
+			{ "<leader>gd", function() require("tinygit").searchFileHistory() end, desc = "󰢷 File History" },
 			-- stylua: ignore end
 		},
 	},
