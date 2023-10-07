@@ -1,0 +1,35 @@
+commit b6c5380c72fc510bd63c9096de2b88de163cfc39
+Author: 🤖 automated <cron@job>
+Date:   Sun Jul 30 13:27:48 2023 +0200
+
+    iMac Home (15)
+
+diff --git a/nvim/lua/plugins/git-plugins.lua b/nvim/lua/plugins/git-plugins.lua
+index 757b80a9b..2fb356ae3 100644
+--- a/nvim/lua/plugins/git-plugins.lua
++++ b/nvim/lua/plugins/git-plugins.lua
+@@ -8,13 +8,6 @@ return {
+ 		"NeogitOrg/neogit",
+ 		dependencies = "nvim-lua/plenary.nvim",
+ 		cmd = "Neogit",
+-		init = function()
+-			-- HACK https://github.com/NeogitOrg/neogit/issues/405
+-			vim.api.nvim_create_autocmd("FileType", {
+-				pattern = "NeogitCommitMessage",
+-				command = "silent! set filetype=gitcommit",
+-			})
+-		end,
+ 		opts = {
+ 			disable_insert_on_commit = false, -- false = start commit msgs in insert mode
+ 			disable_commit_confirmation = true,
+@@ -25,9 +18,7 @@ return {
+ 				item = { "", "" },
+ 			},
+ 			mappings = {
+-				status = {
+-					["<D-w>"] = "close",
+-				},
++				status = { ["<D-w>"] = "close" },
+ 			},
+ 		},
+ 	},

@@ -81,3 +81,9 @@ function ..d() {
 	(afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/dock/drag to trash.aif" &)
 }
 
+# auto-install duti, if necessary
+function duti() {
+	command -v duti &>/dev/null || brew install duti
+	duti "$@"
+	brew uninstall duti
+}

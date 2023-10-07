@@ -3,11 +3,14 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 # install duti if needed
+unfunction duti
 command -v duti &>/dev/null || brew install duti
 
-# open once to initialize
+# open once to initialize the apps
 open "$HOME/.config/nvim/mac-helper/Neovide Helper.app" 
 open "$HOME/.config/obsidian/Obsidian Helper.app" 
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # Obsidian
 obsiOpenerID="com.apple.automator.Obsidian-Helper"
@@ -27,6 +30,7 @@ duti -s "$videoplayerID" m4a all
 
 # code
 editorID="com.apple.automator.Neovide-Helper"
+duti -s "$editorID" diff all
 duti -s "$editorID" public.unix-executable all 
 duti -s "$editorID" scm all # treesitter
 duti -s "$editorID" add all # vim spell file
