@@ -287,6 +287,7 @@ return {
 				end,
 				desc = " Browse in Project",
 			},
+			{ "gL", function() telescope("grep_string") end, desc = " Grep cword in Project" },
 		},
 		cmd = "Telescope",
 		dependencies = {

@@ -142,7 +142,7 @@ opt.listchars = {
 	extends = "…",
 	multispace = "·",
 	tab = "│ ", -- overridden by indent-blankline
-	lead = "·",
+	lead = " ",
 }
 
 -- no list chars in special buffers
