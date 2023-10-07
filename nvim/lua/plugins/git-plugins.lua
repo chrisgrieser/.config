@@ -1,13 +1,10 @@
 return {
-	{ -- smart commit & amend actions
+	{ -- lightweight git client
 		"chrisgrieser/nvim-tinygit",
 		dependencies = "stevearc/dressing.nvim",
 		keys = {
 			-- stylua: ignore start
 			{ "<leader>gp", function() require("tinygit").push() end, desc = "󰊢 Push" },
-			{ "<leader>gU", function() require("tinygit").githubUrl("repo") end, desc = " Goto Repo" },
-			---@diagnostic disable-next-line: deprecated
-			{ "<leader>ga", function() require("tinygit.staging").stageHunkWithInfo() end, desc = "󰊢 Stage Hunk" },
 			{ "<leader>gc", function() require("tinygit").smartCommit { openReferencedIssue = true } end, desc = "󰊢 Smart-Commit" },
 			{ "<leader>gg", function() require("tinygit").smartCommit { push = true, openReferencedIssue = true } end, desc = "󰊢 Smart-Commit & Push" },
 			{ "<leader>gm", function() require("tinygit").amendNoEdit { forcePush = true } end, desc = "󰊢 Amend-No-Edit & Push" },
@@ -15,7 +12,10 @@ return {
 			{ "<leader>gi", function() require("tinygit").issuesAndPrs { state = "open" } end, desc = " Open Issues" },
 			{ "<leader>gI", function() require("tinygit").issuesAndPrs { state = "closed" } end, desc = " Closed Issues" },
 			{ "<leader>gu", function() require("tinygit").githubUrl() end, mode = { "n", "x" }, desc = " GitHub Link" },
+			{ "<leader>gU", function() require("tinygit").githubUrl("repo") end, desc = " Goto Repo" },
 			{ "<leader>gd", function() require("tinygit").searchFileHistory() end, desc = "󰢷 File History" },
+			---@diagnostic disable-next-line: deprecated
+			{ "<leader>ga", function() require("tinygit.staging").stageHunkWithInfo() end, desc = "󰊢 Stage Hunk" },
 			-- stylua: ignore end
 		},
 	},

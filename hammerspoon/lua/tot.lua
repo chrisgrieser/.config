@@ -18,7 +18,6 @@ WakeTot = c.new(function(event)
 end):start()
 
 --------------------------------------------------------------------------------
-
 -- REMINDERS -> TOT
 local function remindersToTot()
 	local script = "./helpers/push-todays-reminders-to-tot.js"
@@ -39,7 +38,7 @@ local function remindersToTot()
 	updateCounter()
 end
 
--- triggers
+-- TRIGGERS
 -- 1. Systemstart
 if u.isSystemStart() then
 	-- with delay, to avoid importing duplicate reminders due to reminders
@@ -49,6 +48,3 @@ end
 
 -- 2. Every morning
 MorningTimerForSidenotes = hs.timer.doAt("07:00", "01d", remindersToTot, true):start()
-
--- 3. Manually via URI-Scheme
-u.urischeme("tot", remindersToTot)
