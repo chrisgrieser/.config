@@ -37,14 +37,14 @@ return {
 			-- stylua: ignore
 			{
 				"e",
-				function() require("spider").motion("e") end,
+				"<cmd>lua require('spider').motion('e')<CR>",
 				mode = { "n", "o", "x" },
 				desc = "󱇫 Spider e",
 			},
 			-- stylua: ignore
 			{
 				"b",
-				function() require("spider").motion("b") end,
+				"<cmd>lua require('spider').motion('b')<CR>",
 				mode = { "n", "o", "x" },
 				desc = "󱇫 Spider b",
 			},
