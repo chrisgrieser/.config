@@ -92,11 +92,11 @@ keymap("n", "zg", function()
 			local word = vim.fn.expand("<cword>")
 			table.insert(client.config.settings.ltex.dictionary["en-US"], word)
 			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = client.config.settings })
-			return
+			break
 		end
 	end
-	return "zg" --[[ -- regular "zg" run via expr = true ]]
-end, { desc = "󰓆 Add Word", buffer = true, expr = true })
+	u.normal("zg")
+end, { desc = "󰓆 Add Word", buffer = true })
 
 --------------------------------------------------------------------------------
 -- GUI KEYBINDINGS
