@@ -244,6 +244,16 @@ serverConfigs.ltex = {
 			},
 		},
 	},
+	on_attach = function(_)
+		vim.keymap.set("n", "zg", function()
+			local ltex = vim.lsp.get_active_clients({ name = "ltex" })[1]
+			if not ltex then return end
+			local word = vim.fn.expand("<cword>")
+			table.insert(ltex.config.settings.ltex.dictionary["en-US"], word)
+			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = ltex.config.settings })
+			u.normal("zg") -- add to spellfile, which is used as dictionary
+		end, { desc = "󰓆 Add Word", buffer = true })
+	end,
 }
 
 --------------------------------------------------------------------------------

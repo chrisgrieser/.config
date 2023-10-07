@@ -197,7 +197,7 @@ keymap("n", "<C-Left>", "<cmd>vertical resize -3<CR>", { desc = " vertical re
 keymap("n", "<C-Up>", "<cmd>resize +3<CR>", { desc = " horizontal resize (+)" })
 keymap("n", "<C-Down>", "<cmd>resize -3<CR>", { desc = " horizontal resize (-)" })
 
--- needs remapping since I use `gf` for referecnes
+-- needs remapping since I use `gf` for references
 keymap("n", "ga", "gf", { desc = " Open File under cursor" })
 --------------------------------------------------------------------------------
 -- CLIPBOARD
