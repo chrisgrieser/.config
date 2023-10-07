@@ -45,7 +45,7 @@ function run() {
 			let matcher = alfredMatcher(`${name} ${relativeParentFolder}`);
 			if (fileIsDirty) matcher += " dirty";
 
-			// type determiniation
+			// type determination
 			let type = "";
 			if (name.startsWith(".z")) type = "sh";
 			else if (name.endsWith("akefile")) type = "make";

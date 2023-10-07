@@ -11,11 +11,6 @@ vim.cmd.cnoreabbrev("i", "lua =")
 -- no arg: all LSPs attached to current buffer
 -- one arg: name of the LSP
 newCommand("LspCapabilities", function(ctx)
-	-- TODO
-	if vim.version().major == 0 and vim.version().minor >= 10 then
-		vim.notify("switch to vim.lsp.get_client")
-	end
-
 	local selected = ctx.args
 
 	local filter = selected == "" and { bufnr = vim.api.nvim_get_current_buf() } or { name = selected }

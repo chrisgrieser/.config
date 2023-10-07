@@ -84,21 +84,6 @@ keymap(
 )
 
 --------------------------------------------------------------------------------
--- SPELLING
-keymap("n", "zg", function()
-	local clients = vim.lsp.buf_get_clients(0)
-	for _, client in ipairs(clients) do
-		if client.name == "ltex" then
-			local word = vim.fn.expand("<cword>")
-			table.insert(client.config.settings.ltex.dictionary["en-US"], word)
-			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = client.config.settings })
-			break
-		end
-	end
-	u.normal("zg")
-end, { desc = "󰓆 Add Word", buffer = true })
-
---------------------------------------------------------------------------------
 -- GUI KEYBINDINGS
 
 -- cmd+k: markdown link
