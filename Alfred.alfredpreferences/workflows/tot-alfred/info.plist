@@ -522,7 +522,7 @@
 				<key>text</key>
 				<string>Append: {query}</string>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
