@@ -3,7 +3,7 @@
 // https://github.com/JXA-userland/JXA/tree/master/packages/%40jxa/types/src
 //──────────────────────────────────────────────────────────────────────────────
 
-declare class macAppObj {
+declare class MacAppObj {
 	includeStandardAdditions: boolean;
 	openLocation(url: string): string;
 	open(path: string): void;
@@ -15,6 +15,7 @@ declare class macAppObj {
 	quit(): void;
 	launch(): void;
 	properties(): object; // inspect all properties
+	theClipboard(): string;
 
 	menuBars: {
 		menuBarItems: {
@@ -42,7 +43,7 @@ declare class SideNotesNote {
 	id(): string;
 }
 
-declare class finderItem {
+declare class FinderItem {
 	creationDate(): Date;
 	modificationDate(): Date;
 	name(): string; // basename
@@ -99,8 +100,8 @@ declare const Application: {
 			buttonReturned: string;
 		};
 	};
-	(name: "System Events"): macAppObj & {
-		aliases: finderItem[]; // hashmap of all paths, e.g. .aliases["/some/path/file.txt"]
+	(name: "System Events"): MacAppObj & {
+		aliases: FinderItem[]; // hashmap of all paths, e.g. .aliases["/some/path/file.txt"]
 		keystroke(key: string, modifiers?: { using: string[] });
 		keyCode(keycode: number, modifiers?: { using: string[] });
 		// biome-ignore lint/suspicious/noExplicitAny: later
@@ -108,14 +109,14 @@ declare const Application: {
 		// biome-ignore lint/suspicious/noExplicitAny: later
 		processes: any;
 	};
-	(name: "Reminders"): macAppObj & {
+	(name: "Reminders"): MacAppObj & {
 		defaultList(): {
 			make(any);
 			// biome-ignore lint/suspicious/noExplicitAny: later
 			reminders: any;
 		};
 	};
-	(name: "Finder"): macAppObj & {
+	(name: "Finder"): MacAppObj & {
 		// PathObj and finderItems are not the same, but are apparently both accepted
 		exists(path: PathObj): boolean;
 		open(path: PathObj): void;
@@ -123,16 +124,16 @@ declare const Application: {
 		// accepts arrays only for *files*?! https://github.com/chrisgrieser/finder-vim-mode/issues/3
 		select(path: PathObj | PathObj[]): void;
 		selection(): PathObj[];
-		finderWindows: { target: finderItem };
-		insertionLocation(): finderItem;
+		finderWindows: { target: FinderItem };
+		insertionLocation(): FinderItem;
 		// https://medium.com/hackernoon/javascript-for-automation-in-macos-3b499da40da1
 		make(options: {
 			new: "folder" | "file";
 			at: PathObj;
 			withProperties: { name: string };
-		}): finderItem;
+		}): FinderItem;
 	};
-	(name: "SideNotes"): macAppObj & {
+	(name: "SideNotes"): MacAppObj & {
 		currentNote(): SideNotesNote;
 		createNote(options: {
 			text: string;
@@ -145,19 +146,20 @@ declare const Application: {
 			byName(folderName: string): SideNotesFolder;
 		}&SideNotesFolder[];
 	};
-	(name: "Alfred" | "com.runningwithcrayons.Alfred"): macAppObj & {
+	(name: "Alfred" | "com.runningwithcrayons.Alfred"): MacAppObj & {
+		// biome-ignore lint/complexity/noBannedTypes: <explanation>
 		setConfiguration(envVar: string, options: Object): void;
 		revealWorkflow(workflowId: string): void; // workflow id = name of workflow folder
 	};
-	(name: "Safari" | "Webkit"): macAppObj & {
+	(name: "Safari" | "Webkit"): MacAppObj & {
 		documents: { url(): string; name(): string }[];
 	};
 	(
 		name: "Google Chrome" | "Chromium" | "Opera" | "Vivaldi" | "Brave Browser" | "Microsoft Edge" | "Arc",
-	): macAppObj & {
+	): MacAppObj & {
 		documents: { url(): string; name(): string }[];
 	};
-	(name: string): macAppObj;
+	(name: string): MacAppObj;
 };
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -171,27 +173,27 @@ declare function delay(seconds: number): void;
 
 declare const $: {
 	// requires `ObjC.import("AppKit")`
-	// biome-ignore lint/suspicious/noExplicitAny: too long
+	// biome-ignore lint: not set by me
 	NSPasteboard: any;
-	// biome-ignore lint/suspicious/noExplicitAny: too long
+	// biome-ignore lint: not set by me
 	NSFilenamesPboardType: any;
-	// biome-ignore lint/suspicious/noExplicitAny: too long
+	// biome-ignore lint: not set by me
 	(paths: string[]): any;
 
 	// requires `ObjC.import("stdlib")`
 	getenv: (envVar: string) => string;
-	// biome-ignore lint/suspicious/noExplicitAny: too long
+	// biome-ignore lint: not set by me
 	NSFileManager: any;
-	// biome-ignore lint/suspicious/noExplicitAny: too long
+	// biome-ignore lint: not set by me
 	NSUTF8StringEncoding: any;
-	// biome-ignore lint/suspicious/noExplicitAny: too long
+	// biome-ignore lint: not set by me
 	NSFileModificationDate: any;
-	// biome-ignore lint/suspicious/noExplicitAny: too long
+	// biome-ignore lint: not set by me
 	NSProcessInfo: any;
-	// biome-ignore lint/suspicious/noExplicitAny: too long
+	// biome-ignore lint: not set by me
 	NSURL: any;
-	// biome-ignore lint/suspicious/noExplicitAny: too long
+	// biome-ignore lint: not set by me
 	NSString: any;
-	// biome-ignore lint/suspicious/noExplicitAny: too long
+	// biome-ignore lint: not set by me
 	NSData: any;
 };

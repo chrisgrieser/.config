@@ -152,21 +152,20 @@ end):start()
 
 ------------------------------------------------------------------------------
 
--- TRANSMISSION / TWITTER / MASTODON
--- Fallthrough: prevent unintended focussing after qutting another app
--- unintended focussing via alt+tab is prevented via alt+tab settings
-FallthroughWatcher = aw.new(function(appName, event)
-	local fallThroughApps = { "Transmission", env.tickerApp }
-	if event ~= aw.terminated or u.tbl_contains(fallThroughApps, appName) then return end
+-- TRANSMISSION / TWITTER / MASTODON / TOT
+-- Fallthrough: prevent unintended focusing after qutting another app or closing
+-- last window
+local function fallthrough()
+	-- CONFIG
+	local fallThroughApps = { "Transmission", env.tickerApp, "Tot" }
 
-	u.runWithDelays({ 0.1, 0.3 }, function()
+	u.runWithDelays({ 0.1, 0.2 }, function()
 		if not u.isFront(fallThroughApps) then return end
 		local visibleWins = hs.window:orderedWindows()
 		local nextWin
 		for _, win in pairs(visibleWins) do
 			if not win:application() then break end
-			---@diagnostic disable-next-line: undefined-field
-			local name = win:application():name()
+			local name = win:application():name() ---@diagnostic disable-line: undefined-field
 			if not (u.tbl_contains(fallThroughApps, name)) then
 				nextWin = win
 				break
@@ -175,7 +174,17 @@ FallthroughWatcher = aw.new(function(appName, event)
 		if not nextWin or nextWin:id() == hs.window.frontmostWindow():id() then return end
 		nextWin:focus()
 	end)
+end
+
+FallthroughAppWatcher = aw.new(function(_, event)
+	if event == aw.terminated then fallthrough() end
 end):start()
+Wf_fallthrough = wf.new(true)
+	:setOverrideFilter({ allowRoles = "AXStandardWindow" })
+	:subscribe(wf.windowDestroyed, function(closedWin)
+		local appWins = #closedWin:application():allWindows()
+		if appWins == 0 then fallthrough() end
+	end)
 
 --------------------------------------------------------------------------------
 -- SCRIPT EDITOR
@@ -189,7 +198,6 @@ Wf_script_editor = wf
 		elseif newWin:title() == "Untitled" then
 			wu.moveResize(newWin, wu.centerSection)
 			local clipb = hs.pasteboard.getContents()
-			-- passing via for escaping
 			hs.osascript.javascript(([[
 				Application("Script Editor").documents()[0].text = `%s`;
 				Application("Script Editor").documents()[0].checkSyntax();

@@ -38,18 +38,12 @@
 		"body": "Application(\"System Events\").applicationProcesses.where({ backgroundOnly: false }).displayedName();"
 	},
 	"notification": {
-		"prefix": [
-			"notification",
-			"displayNotification"
-		],
+		"prefix": ["notification", "displayNotification"],
 		"body": "app.displayNotification(\"\", { withTitle: \"${1:title}\", subtitle: \"${2:subtitle}\" })"
 	},
 	"app (define)": {
 		"prefix": "app (define)",
-		"body": [
-			"const app = Application.currentApplication()",
-			"app.includeStandardAdditions = true;"
-		]
+		"body": ["const app = Application.currentApplication()", "app.includeStandardAdditions = true;"]
 	},
 	"open location (url)": {
 		"prefix": "open location (url)",
@@ -58,6 +52,10 @@
 	"set clipboard (string)": {
 		"prefix": "set clipboard (string)",
 		"body": "app.setTheClipboardTo(${1:\"str\"});"
+	},
+	"get clipboard": {
+		"prefix": "get clipboard",
+		"body": ["app.includeStandardAdditions = true;", "const clipb = app.ClipboardTo();"]
 	},
 	"set clipboard (file)": {
 		"prefix": "set clipboard (file)",

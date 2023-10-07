@@ -63,7 +63,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>3E08FF65-F031-447F-B9F6-47F8F507D79B</string>
+				<string>6BB0E44D-7589-40AE-B22B-A01E1E604B88</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -124,6 +124,31 @@
 				<integer>262144</integer>
 				<key>modifiersubtext</key>
 				<string>⌃: Delete Tot</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>6BB0E44D-7589-40AE-B22B-A01E1E604B88</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3E08FF65-F031-447F-B9F6-47F8F507D79B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>AA46D100-FBE5-4DE6-8B1F-0533A8C9ED90</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F63C35AB-EDD8-44D0-AE2E-D47352E8F9D1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -322,26 +347,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<true/>
-				<key>variables</key>
-				<dict>
-					<key>dot</key>
-					<string>1</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>AC952B18-4AA7-4805-B8AE-C886E9A98AE5</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -387,6 +392,26 @@
 			<string>49540ED2-DEDB-41DB-BF6B-FED0EB398A81</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>dot</key>
+					<string>1</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>AC952B18-4AA7-4805-B8AE-C886E9A98AE5</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -555,41 +580,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>1</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string>focusedapp</string>
-				<key>hotkey</key>
-				<integer>1</integer>
-				<key>hotmod</key>
-				<integer>1966080</integer>
-				<key>hotstring</key>
-				<string>S</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.iconfactory.Tot</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>2</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>3DBCAC53-D043-40E5-8BC7-17331F0676DA</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -611,6 +601,69 @@
 			<string>3E08FF65-F031-447F-B9F6-47F8F507D79B</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<true/>
+				<key>focusedappvariablename</key>
+				<string>focusedapp</string>
+				<key>hotkey</key>
+				<integer>1</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>S</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>3DBCAC53-D043-40E5-8BC7-17331F0676DA</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:focusedapp}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>1</integer>
+						<key>matchstring</key>
+						<string>com.iconfactory.Tot</string>
+						<key>outputlabel</key>
+						<string>other</string>
+						<key>uid</key>
+						<string>AA46D100-FBE5-4DE6-8B1F-0533A8C9ED90</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>Tot</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>6BB0E44D-7589-40AE-B22B-A01E1E604B88</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -665,6 +718,29 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/open-urls-tot.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>F63C35AB-EDD8-44D0-AE2E-D47352E8F9D1</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
@@ -674,7 +750,10 @@
 	* &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; Copy the contents of the Dot.
 	* &lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; Delete the Dot.
 - Quickly append to a pre-selected Dot via the keyword `qq`.
-- Configure the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to append the current browser tab and/or selected text.
+- Configure the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) for quick appending to a configurable Dot.
+	* If a browser is frontmost, appends the current browser tab as Markdown link.
+	* In any other app, appends the selected text.
+	* If Tot is frontmost, opens all URLs in the current Dot instead.
 
 ---
 
@@ -715,7 +794,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>note</key>
-			<string>Quick Save</string>
+			<string>Quick Append/Open</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -725,8 +804,10 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
+			<key>note</key>
+			<string>quick append</string>
 			<key>xpos</key>
-			<real>185</real>
+			<real>335</real>
 			<key>ypos</key>
 			<real>690</real>
 		</dict>
@@ -746,16 +827,27 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>455</real>
+			<real>605</real>
 			<key>ypos</key>
 			<real>795</real>
+		</dict>
+		<key>6BB0E44D-7589-40AE-B22B-A01E1E604B88</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>front app</string>
+			<key>xpos</key>
+			<real>201</real>
+			<key>ypos</key>
+			<real>710</real>
 		</dict>
 		<key>75635E54-B997-49F2-8E90-9EE10283A669</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>455</real>
+			<real>605</real>
 			<key>ypos</key>
 			<real>675</real>
 		</dict>
@@ -802,11 +894,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>A57A67B5-BE58-4F12-91BF-B731B3EEEB75</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>5</integer>
+			<key>note</key>
+			<string>Quick Append</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>545</real>
 		</dict>
 		<key>AC952B18-4AA7-4805-B8AE-C886E9A98AE5</key>
 		<dict>
@@ -833,7 +927,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>335</real>
+			<real>485</real>
 			<key>ypos</key>
 			<real>710</real>
 		</dict>
@@ -858,6 +952,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>695</real>
 			<key>ypos</key>
 			<real>70</real>
+		</dict>
+		<key>F63C35AB-EDD8-44D0-AE2E-D47352E8F9D1</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>open URLs in current Tot</string>
+			<key>xpos</key>
+			<real>340</real>
+			<key>ypos</key>
+			<real>830</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -1013,7 +1118,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.2.1</string>
+	<string>1.3.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
