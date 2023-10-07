@@ -167,12 +167,8 @@ return {
 	},
 	{ -- Better input/selection fields
 		"stevearc/dressing.nvim",
-		keys = {
-			{ "<Tab>", "j", ft = "DressingSelect" },
-			{ "<S-Tab>", "k", ft = "DressingSelect" },
-		},
-		-- lazy load triggers
 		init = function()
+			-- lazy load triggers
 			---@diagnostic disable-next-line: duplicate-set-field
 			vim.ui.select = function(...)
 				require("lazy").load { plugins = { "dressing.nvim" } }
@@ -183,6 +179,15 @@ return {
 				require("lazy").load { plugins = { "dressing.nvim" } }
 				return vim.ui.input(...)
 			end
+
+			-- extra keybindings
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "DressingSelect",
+				callback = function()
+					vim.keymap.set("n", "<Tab>", "j", { buffer = true })
+					vim.keymap.set("n", "<S-Tab>", "k", { buffer = true })
+				end,
+			})
 		end,
 		opts = {
 			input = {
