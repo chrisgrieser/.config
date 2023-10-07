@@ -7,10 +7,10 @@ local fn = vim.fn
 ---@nodiscard
 ---@return string
 local function irregularWhitespace()
-	-- USER CONFIG
+	-- CONFIG
 	-- filetypes and the number of spaces they use. Omit or set to nil to use tabs for that filetype.
 	local spaceFiletypes = { python = 4, yaml = 2 }
-	local ignoredFiletypes = { "css", "markdown", "gitcommit" }
+	local ignoredFiletypes = { "css" }
 	local linebreakType = "unix" ---@type "unix" | "mac" | "dos"
 
 	-- vars & guard
@@ -27,21 +27,16 @@ local function irregularWhitespace()
 		(usesSpaces and not vim.tbl_contains(spaceFtsOnly, ft))
 		or (usesSpaces and bo.tabstop ~= spaceFiletypes[ft])
 	then
-		nonDefaultSetting = " " .. tostring(bo.tabstop.. "󱁐  ")
+		nonDefaultSetting = "󱁐 " .. tostring(bo.tabstop)
 	elseif usesTabs and vim.tbl_contains(spaceFtsOnly, ft) then
-		nonDefaultSetting = " 󰌒 " .. tostring(bo.tabstop)
+		nonDefaultSetting = "󰌒 " .. tostring(bo.tabstop)
 	end
 
 	-- line breaks
 	local linebreakIcon = ""
 	if brUsed ~= linebreakType then
-		if brUsed == "unix" then
-			linebreakIcon = " 󰌑 "
-		elseif brUsed == "mac" then
-			linebreakIcon = " 󰌑 "
-		elseif brUsed == "dos" then
-			linebreakIcon = " 󰌑 "
-		end
+		local lbIcons = { unix = " ", mac = " ", dos = " " }
+		linebreakIcon = "󰌑" .. lbIcons[brUsed]
 	end
 
 	return nonDefaultSetting .. linebreakIcon
