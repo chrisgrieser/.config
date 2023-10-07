@@ -134,10 +134,6 @@ return {
 			min_rows_ft = { python = 10 },
 		},
 	},
-	{ -- automatically set correct indent for file
-		"nmac427/guess-indent.nvim",
-		event = "BufReadPre",
-	},
 	{ -- basically autopair, but for keywords
 		"RRethy/nvim-treesitter-endwise",
 		event = "InsertEnter",

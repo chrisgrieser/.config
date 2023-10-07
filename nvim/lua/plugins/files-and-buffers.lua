@@ -2,6 +2,11 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
+	{ -- automatically set correct indent for file
+		"nmac427/guess-indent.nvim",
+		event = "BufReadPre",
+		opts = true,
+	},
 	{ -- auto-save buffers
 		"okuuva/auto-save.nvim",
 		event = { "InsertLeave", "TextChanged" }, -- only needs to be loaded on files changes
