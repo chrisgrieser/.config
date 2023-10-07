@@ -113,7 +113,9 @@ local function lintTriggers()
 
 			-- condition when to lint https://github.com/mfussenegger/nvim-lint/issues/370#issuecomment-1729671151
 			local lintersToUse = require("lint").linters_by_ft[vim.bo.filetype]
-			local hasNoSeleneConfig = vim.loop.fs_stat(vim.loop.cwd() .. "/selene.toml") == nil
+			local pwd = vim.loop.cwd()
+			if not pwd then return end
+			local hasNoSeleneConfig = vim.loop.fs_stat(pwd .. "/selene.toml") == nil
 			if hasNoSeleneConfig and vim.bo.filetype == "lua" then
 				lintersToUse = vim.tbl_filter(function(l) return l ~= "selene" end, lintersToUse)
 			end

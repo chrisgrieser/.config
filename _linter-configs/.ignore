@@ -8,3 +8,4 @@ vale/styles
 !selene.toml
 !stylua.toml
 !pyproject.toml
+!biome.json

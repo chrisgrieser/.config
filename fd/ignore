@@ -20,16 +20,22 @@
 #───────────────────────────────────────────────────────────────────────────────
 # project boilerplate info files – not gitignored, but rarely used manually as well
 LICENSE
+.editorconfig
 
 # node
 package.json
 package-lock.json
 versions.json
 manifest.json
+tsconfig.json
+jsconfig.json
+esbuild.config.mjs
+biome.json
 
 # python
 __init__.py
 pyproject.toml
+requirements.txt
 
 # nvim-plugins
 selene.toml

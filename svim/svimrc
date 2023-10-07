@@ -21,9 +21,9 @@ nnoremap M J
 nnoremap <Space> "_ciw
 nnoremap <C-s> "_daw
 
-nnoremap [ (
-nnoremap ] )
-
 nnoremap <C-e> A
 
 vnoremap V j
+
+onoremap rg G
+onoremap rp }
