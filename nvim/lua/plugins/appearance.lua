@@ -217,7 +217,9 @@ return {
 					},
 				},
 				get_config = function(opts)
-					if opts.kind == "github_issue" then return { backend = "telescope" } end
+					if opts.kind == "github_issue" or opts.kind == "commit_selection" then
+						return { backend = "telescope" }
+					end
 				end,
 			},
 		},
