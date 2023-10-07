@@ -3,8 +3,6 @@ local M = {}
 local cmd = vim.cmd
 local qfCount
 
-local function normal(theCmd) vim.cmd.normal { theCmd, bang = true } end
-
 ---@param msg string
 ---@param level? "info"|"trace"|"debug"|"warn"|"error"
 local function notify(msg, level)
@@ -67,13 +65,12 @@ function M.next()
 	local wentToNext = pcall(function() cmd("silent cnext") end)
 	if wentToNext then
 		qfCount = qfCount + 1
-		openFoldUnderCursor()
 	else
 		cmd("silent cfirst")
 		qfCount = 1
 		notify("Wrapped to beginning", "trace")
 	end
-	normal("zv") -- open folder under cursor
+	openFoldUnderCursor()
 end
 
 ---goto previous quickfix and wrap around
@@ -84,13 +81,12 @@ function M.previous()
 	local wentToPrevious = pcall(function() cmd("silent cprevious") end)
 	if wentToPrevious then
 		qfCount = qfCount - 1
-		openFoldUnderCursor()
 	else
 		cmd("silent clast")
 		qfCount = countCurQuickfix()
 		notify("Wrapped to end", "trace")
 	end
-	normal("zv") -- open folder under cursor
+	openFoldUnderCursor()
 end
 
 --------------------------------------------------------------------------------
