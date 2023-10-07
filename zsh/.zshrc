@@ -4,6 +4,7 @@ CONFIG_FILES=(
 	vim_mode_config
 	fzf-tab_and_completion_settings
 	terminal_utils
+	mac_specific
 	terminal_keybindings
 	aliases
 	history_config
