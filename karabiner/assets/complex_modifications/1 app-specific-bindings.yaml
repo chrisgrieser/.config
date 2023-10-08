@@ -262,16 +262,6 @@ rules:
         from: { key_code: q, modifiers: { mandatory: [command] } }
         to: [{ key_code: w, modifiers: [command] }]
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^org\.hammerspoon\.Hammerspoon$] }]
-      - type: basic
-        from: { key_code: k, modifiers: { mandatory: [command] } }
-        to:
-          - shell_command: open 'hammerspoon://clear-console'
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^org\.hammerspoon\.Hammerspoon$] }]
-      - type: basic
-        from: { key_code: c, modifiers: { mandatory: [command, shift] } }
-        to:
-          - shell_command: open 'hammerspoon://copy-last-command'
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^org\.hammerspoon\.Hammerspoon$] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Slack"
     # https://slack.com/help/articles/201374536-Slack-keyboard-shortcuts
