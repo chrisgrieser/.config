@@ -121,6 +121,7 @@ return {
 		"chrisgrieser/nvim-puppeteer",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		ft = { "python", "javascript", "typescript", "lua" },
+		init = function() vim.g.puppeteer_lua_format_string = true end,
 	},
 	{ -- virtual text context at the end of a scope
 		"haringsrob/nvim_context_vt",
