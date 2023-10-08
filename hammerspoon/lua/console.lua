@@ -81,17 +81,25 @@ end):start()
 
 --------------------------------------------------------------------------------
 
--- `hammerspoon://copy-last-command` for Karabiner Elements (⌘⇧C)
-u.urischeme("copy-last-command", function()
-	local consoleHistory = cons.getHistory()
-	if not consoleHistory then return end
-	local lastcommand = consoleHistory[#consoleHistory]
-	hs.pasteboard.setContents(lastcommand)
-	u.notify(('Copied: "%s"'):format(lastcommand))
+u.hotkey({ "cmd", "shift" }, "c", function()
+	if hs.application.frontmostApplication() == "Hammerspoon" then
+		local consoleHistory = cons.getHistory()
+		if not consoleHistory then return end
+		local lastcommand = consoleHistory[#consoleHistory]
+		hs.pasteboard.setContents(lastcommand)
+		u.notify(('Copied: "%s"'):format(lastcommand))
+	else
+		u.keystroke({ "cmd", "shift" }, "c")
+	end
 end)
 
--- `hammerspoon://clear-console` for Karabiner Elements (⌘K)
-u.urischeme("clear-console", cons.clearConsole)
+u.hotkey("cmd", "k", function()
+	if hs.application.frontmostApplication() == "Hammerspoon" then
+		cons.clearConsole()
+	else
+		u.keystroke("cmd", "k")
+	end
+end)
 
 --------------------------------------------------------------------------------
 -- Separator the logs every day at midnight

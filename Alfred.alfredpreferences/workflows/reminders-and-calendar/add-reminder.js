@@ -1,4 +1,6 @@
 #!/usr/bin/env osascript -l JavaScript
+/** @type {AlfredRun} */
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const today = new Date();
 	const weekdayNum = today.getDay();

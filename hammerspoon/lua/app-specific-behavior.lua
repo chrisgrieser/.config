@@ -176,7 +176,8 @@ local function fallthrough()
 	end)
 end
 
-FallthroughAppWatcher = aw.new(function(_, event)
+FallthroughAppWatcher = aw.new(function(appName, event)
+	if appName == "Reminders" then return end -- reminders often opening in the background
 	if event == aw.terminated then fallthrough() end
 end):start()
 Wf_fallthrough = wf.new(true)
