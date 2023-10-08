@@ -8,7 +8,7 @@ local function updateCounter() hs.execute(u.exportPath .. "sketchybar --trigger 
 -- 1. App Switch
 TotWatcher = aw.new(function(appName, event, tot)
 	if appName ~= "Tot" then return end
-	if event == aw.deactivated or event == aw.deactivated then updateCounter() end
+	if event == aw.activated or event == aw.deactivated then updateCounter() end
 	if event == aw.deactivated and not u.isFront("Alfred") then tot:hide() end
 end):start()
 
@@ -16,7 +16,7 @@ end):start()
 local c = hs.caffeinate.watcher
 WakeTot = c.new(function(event)
 	local hasWoken = event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock
-	if hasWoken then updateCounter() end
+	if hasWoken and u.appRunning("Tot") then updateCounter() end
 end):start()
 
 --------------------------------------------------------------------------------
