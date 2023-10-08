@@ -23,6 +23,10 @@
 ```
 <!-- editorconfig-checker-enable -->
 
+```lua
+print("hi")
+```
+
 The tree was generated using <https://tree.nathanfriend.io/>
 
 ## All Installed Plugins
