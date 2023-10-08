@@ -1,5 +1,4 @@
-# https://espanso.org/docs/configuration/options/
-# yamllint disable rule:truthy
+# DOCS https://espanso.org/docs/configuration/options/
 #───────────────────────────────────────────────────────────────────────────────
 
 toggle_key: OFF
@@ -10,5 +9,5 @@ show_icon: false
 show_notifications: true
 auto_restart: true
 
-undo_backspace: false # backspace undos expansion
+undo_backspace: true # backspace undos expansion
 backend: auto

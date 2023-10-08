@@ -20,6 +20,22 @@ M.exportPath = [[export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$P
 
 --------------------------------------------------------------------------------
 
+---binds a hotkey for a specific application only
+---@param appName string
+---@param modifier string|string[]
+---@param key string
+---@param action function
+function M.appHotkey(appName, modifier, key, action)
+	hs.hotkey.bind(modifier, key, function()
+		local frontApp = hs.application.frontmostApplication()
+		if frontApp:name() == appName then
+			action()
+		else
+			hs.eventtap.keyStroke(modifier, key, 1, frontApp)
+		end
+	end)
+end
+
 ---differentiate code to be run on reload and code to be run on startup.
 ---dependent on the setup in `reload.lua`
 ---@return boolean
@@ -169,11 +185,10 @@ end
 function M.isFront(appNames)
 	if appNames == nil then return false end
 	if type(appNames) == "string" then appNames = { appNames } end
-	local oneIsFrontmost = false
 	for _, name in pairs(appNames) do
-		if M.app(name) and M.app(name):isFrontmost() then oneIsFrontmost = true end
+		if M.app(name) and M.app(name):isFrontmost() then return true end
 	end
-	return oneIsFrontmost
+	return false
 end
 
 ---@param appNames string|string[] app or apps that should be running
