@@ -81,24 +81,15 @@ end):start()
 
 --------------------------------------------------------------------------------
 
-u.hotkey({ "cmd", "shift" }, "c", function()
-	if hs.application.frontmostApplication() == "Hammerspoon" then
-		local consoleHistory = cons.getHistory()
-		if not consoleHistory then return end
-		local lastcommand = consoleHistory[#consoleHistory]
-		hs.pasteboard.setContents(lastcommand)
-		u.notify(('Copied: "%s"'):format(lastcommand))
-	else
-		u.keystroke({ "cmd", "shift" }, "c")
-	end
-end)
-
-u.hotkey("cmd", "k", function()
-	if hs.application.frontmostApplication() == "Hammerspoon" then
-		cons.clearConsole()
-	else
-		u.keystroke("cmd", "k")
-	end
+-- app-hotkeys
+u.appHotkey("Hammerspoon", "cmd", "q", hs.closeConsole) -- prevent accidental quitting
+u.appHotkey("Hammerspoon", "cmd", "k", hs.console.clearConsole)
+u.appHotkey("Hammerspoon", {"cmd", "shift"}, "c", function ()
+	local consoleHistory = cons.getHistory()
+	if not consoleHistory then return end
+	local lastcommand = consoleHistory[#consoleHistory]
+	hs.pasteboard.setContents(lastcommand)
+	u.notify(('Copied: "%s"'):format(lastcommand))
 end)
 
 --------------------------------------------------------------------------------

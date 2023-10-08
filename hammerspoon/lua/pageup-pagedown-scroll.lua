@@ -30,7 +30,7 @@ local function scroll(direction)
 	if not frontApp:mainWindow() then return end
 
 	-- cursor needs to be inside main window to scroll the right frame, since on
-	-- macOS the frame below the cursor is scrolled not the focussed one
+	-- macOS the frame below the cursor is scrolled not the focused one
 	local frame = frontApp:mainWindow():frame()
 	local centerPos = { x = frame.x + frame.w * 0.5, y = frame.y + frame.h * 0.5 }
 	hs.mouse.setRelativePosition(centerPos)

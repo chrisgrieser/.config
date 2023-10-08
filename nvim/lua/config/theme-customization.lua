@@ -33,8 +33,9 @@ local function overwriteHighlight(hlgroup, changes) vim.api.nvim_set_hl(0, hlgro
 local function customHighlights()
 	-- Comments
 	clearHighlight("@lsp.type.comment") -- FIX: https://github.com/stsewd/tree-sitter-comment/issues/22
+
 	local commentColor = u.getHighlightValue("Comment", "fg")
-	overwriteHighlight("@text.uri", { underdouble = true, fg = commentColor })
+	updateHighlight("@text.uri", "guifg=" .. commentColor)
 
 	-- make `MatchParen` stand out more (orange is too close to rainbow brackets)
 	overwriteHighlight("MatchParen", { reverse = true })

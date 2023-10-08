@@ -256,13 +256,6 @@ rules:
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Hammerspoon: ⌘Q → Close instead of Quit, ⌘K → Clear Console, ⌘⇧C → copy last command"
-    manipulators:
-      - type: basic
-        from: { key_code: q, modifiers: { mandatory: [command] } }
-        to: [{ key_code: w, modifiers: [command] }]
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^org\.hammerspoon\.Hammerspoon$] }]
-  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Slack"
     # https://slack.com/help/articles/201374536-Slack-keyboard-shortcuts
     manipulators:

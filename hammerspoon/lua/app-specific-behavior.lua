@@ -171,7 +171,7 @@ local function fallthrough()
 				break
 			end
 		end
-		if not nextWin or nextWin:id() == hs.window.frontmostWindow():id() then return end
+		if not nextWin or (nextWin:id() == hs.window.frontmostWindow():id()) then return end
 		nextWin:focus()
 	end)
 end
