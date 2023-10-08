@@ -1,4 +1,4 @@
-# https://espanso.org/docs/
+# yaml-language-server: $schema=../schemas/espanso-match-schema.json
 #───────────────────────────────────────────────────────────────────────────────
 
 matches:

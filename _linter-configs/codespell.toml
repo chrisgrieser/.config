@@ -26,6 +26,6 @@ uri-ignore-words-list = "*" # ignore all misspellings in URLs/mail-adresses
 
 # INFO has to be lowercased
 ignore-words-list = """\
-noice,acknowledgements,aesthetics,\
+noice,acknowledgements,aesthetics,termine,\
 master,jupyter,\
 """

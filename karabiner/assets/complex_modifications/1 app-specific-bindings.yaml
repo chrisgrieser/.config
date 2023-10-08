@@ -43,13 +43,6 @@ rules:
         to:
           - { key_code: left_arrow, modifiers: [command, option] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
-      # auto-confirm compact dots
-      - type: basic
-        from: { key_code: d, modifiers: { mandatory: [command, shift] } }
-        to:
-          - { key_code: d, modifiers: [command, shift] }
-          - { key_code: return_or_enter }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
       # copy & delete tot
       - type: basic
         from: { key_code: c, modifiers: { mandatory: [command, shift] } }

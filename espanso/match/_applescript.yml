@@ -1,6 +1,7 @@
-# https://espanso.org/docs/
-# ------------------------------------------
+# yaml-language-server: $schema=../schemas/espanso-match-schema.json
+#───────────────────────────────────────────────────────────────────────────────
 
+# editorconfig-checker-disable
 matches:
   - replace: |
       if frontmost of application "$|$" then
@@ -12,14 +13,14 @@ matches:
 
       end if
     label: 🍏 Check whether app is running
-  - trigger: '!menu'
+  - trigger: "!menu"
     replace: |
       tell application "System Events" to tell process "$|$"
       	set frontmost to true
       	click menu item "" of menu "File" of menu bar 1
       end tell
     label: 🍏 Click Menubar Item
-  - trigger: '!submenu'
+  - trigger: "!submenu"
     replace: |
       tell application "System Events" to tell process "$|$"
       	set frontmost to true
@@ -44,13 +45,13 @@ matches:
     label: 🍏 Get name of frontmost app
   - replace: tell application "System Events" to tell process "Drafts" to set visible to false
     label: 🍏 Hide App
-  - trigger: '!key'
+  - trigger: "!key"
     replace: tell application "System Events" to keystroke "$|$" using {command down}
     label: 🍏 Keystroke
-  - trigger: '!quit'
+  - trigger: "!quit"
     replace: tell application "Twitterrific$|$" to if it is running then quit
     label: 🍏 Quit App
-  - trigger: '!shortcut'
+  - trigger: "!shortcut"
     replace: tell application "Shortcuts" to run shortcut "$|$"
     label: 🍏 Run Shortcut
   - replace: |
@@ -66,4 +67,4 @@ matches:
       end tell
     label: 🍏 Name of front window of a process
   - label: "cut string"
-    replace: set window_name to (characters 12 thru -2 of window_name as string)
+    replace: set window_name to (characters 12 through -2 of window_name as string)

@@ -117,8 +117,7 @@ u.urischeme("sync-repos", function() syncAllGitRepos(true) end)
 local recentlyTriggered
 local c = hs.caffeinate.watcher
 SleepWatcherForRepoSync = c.new(function(event)
-	if env.isProjector() then return end
-	if recentlyTriggered then return end
+	if recentlyTriggered or env.isProjector() then return end
 	recentlyTriggered = true
 
 	local lockOrSleep = event == c.screensDidLock

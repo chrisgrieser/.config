@@ -182,7 +182,9 @@ end):start()
 Wf_fallthrough = wf.new(true)
 	:setOverrideFilter({ allowRoles = "AXStandardWindow" })
 	:subscribe(wf.windowDestroyed, function(closedWin)
-		local appWins = #closedWin:application():allWindows()
+		local app = closedWin:application()
+		if not app then return end
+		local appWins = #app:allWindows()
 		if appWins == 0 then fallthrough() end
 	end)
 

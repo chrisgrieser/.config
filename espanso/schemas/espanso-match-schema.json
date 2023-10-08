@@ -1,0 +1,98 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"$ref": "#/definitions/BaseSchema",
+	"definitions": {
+		"BaseSchema": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"matches": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Match"
+					}
+				}
+			},
+			"required": ["matches"],
+			"title": "BaseSchema"
+		},
+		"Match": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"trigger": {
+					"type": "string"
+				},
+				"replace": {
+					"type": "string",
+					"qt-uri-protocols": ["https"]
+				},
+				"word": {
+					"type": "boolean"
+				},
+				"propagate_case": {
+					"type": "boolean"
+				},
+				"regex": {
+					"type": "string"
+				},
+				"vars": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Var"
+					}
+				},
+				"triggers": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"label": {
+					"type": "string"
+				}
+			},
+			"required": ["replace"],
+			"title": "Match"
+		},
+		"Var": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"type": {
+					"$ref": "#/definitions/Type"
+				},
+				"params": {
+					"$ref": "#/definitions/Params"
+				}
+			},
+			"required": ["name", "params", "type"],
+			"title": "Var"
+		},
+		"Params": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"cmd": {
+					"type": "string"
+				},
+				"shell": {
+					"type": "string"
+				},
+				"format": {
+					"type": "string"
+				}
+			},
+			"required": [],
+			"title": "Params"
+		},
+		"Type": {
+			"type": "string",
+			"enum": ["shell", "date"],
+			"title": "Type"
+		}
+	}
+}
