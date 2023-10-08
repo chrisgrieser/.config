@@ -1,11 +1,10 @@
 ---
-aliases: 
-tags: pandoc, citation, coding
+aliases: null
+tags: 'pandoc, citation, coding'
 similar:
-- "[[Citation Styles]]"
-- "[[Bibliography Creation]]"
+  - '[[Citation Styles]]'
+  - '[[Bibliography Creation]]'
 ---
-
 > [!INFO]  
 > This note is a symlink to `pandoc/README.md` in [my dotfile directory](https://github.com/chrisgrieser/dotfiles)
 
@@ -18,6 +17,7 @@ __Lingo__
 > reference-docs = templates  
 
 ## Extensions
+
 ```bash
 # list default extensions for a file format
 # (+: enabled, -: disabled)
@@ -36,8 +36,10 @@ export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; {{folder_path:absolute}}/
 ```
 
 ## Handling Bibliography
+
 ```yaml
 # list in bibliography without citing them in text
+
 ---
 nocite: @one, @two
 ---
@@ -45,16 +47,18 @@ nocite: @one, @two
 
 ```yaml
 # generate only bibliography without content
+
 ---
-nocite: '@*'
----
+
+## nocite: '@\*'
 ```
 
 ```yaml
 # Generate text without bibliography
+
 ---
-suppress-bibliography: true
----
+
+## suppress-bibliography: true
 ```
 
 ```sh
@@ -64,7 +68,7 @@ pandoc "My Library.bib" -t csljson -o "bibtexjson.json"
 ```
 
 ## Resolving Citations
-Use Pandoc solely as citation resolver, without changing the format (i.e. markdown as input and output file):
+Use Pandoc solely as citation resolver, without changing the format (i.e., markdown as input and output file):
 
 ```bash
 # https://superuser.com/a/1161832
@@ -97,9 +101,9 @@ __Higher overwrites lower__
 
 ## How Templating works
 > yeah, the pandoc docs aren't really good in explaining templates. For odt, pptx, and docs, pandoc calls templates "reference documents" (`--reference-doc`), where you style a docx (etc) document and when selected as reference for a docx output, the output gets styled the same way as that document.
-> 
+>
 > for *all* other output formats you need actual templates (`--template`), which depend on the output format (html template + css for html output, etc.). Most notoriously, for a PDF output, the type of template you need depends on the pdf-engine (`--pdf-engine`) you use are using, since pandoc does not directly convert to pdf, but converts to PDF via something like an "intermediate format". In most cases, it's either a html-based pdf-engine (e.g. `wkhtmltopdf`) in which case you need a html and css template (and need to know html and css for that), or a latex-based pdf-engine (e.g. `pdflatex`), in which case the template needs to be written in latex. And to make it even more complicated, in both cases, there are some variables for the templates (e.g., margins) __which__ can be set in the yaml-metadata of the markdown document.
-> 
+>
 > So if you want PDF output, you either have to learn html/css, latex, or simply export to docx (and convert the docx to a pdf), with the latter being probably the easiest approach.
 
 __Summary__
@@ -108,6 +112,7 @@ __Summary__
 - output format is `pdf`, you either need a `latex` template (which determines looks & content) or you need the `html-css`-combination from above. (Different PDF engines use different forms of templates.)
 
 ## Useful Snippets
+
 ```xml
 <!-- will generate a pagebreak when converting md to docx
 https://pandoc.org/MANUAL.html#generic-raw-attribute
@@ -148,8 +153,8 @@ geometry: "margin=2cm"
 ## Filters
 - [raghur/mermaid-filter: Pandoc filter for creating diagrams in mermaid syntax blocks in markdown docs](https://github.com/raghur/mermaid-filter)
 - Tools for Automatic References
-	- [url2cite](https://github.com/phiresky/pandoc-url2cite/) ([usage with normal citekeys](https://github.com/phiresky/pandoc-url2cite/issues/10#issuecomment-899101361))
-	- [manubot](https://github.com/manubot)
+	+ [url2cite](https://github.com/phiresky/pandoc-url2cite/) ([usage with normal citekeys](https://github.com/phiresky/pandoc-url2cite/issues/10#issuecomment-899101361))
+	+ [manubot](https://github.com/manubot)
 - filters can be written in [[Lua]]
 
 > [!INFO] Priority of Filters  
@@ -158,7 +163,6 @@ geometry: "margin=2cm"
 
 __Why Lua Filters?__
 > Although traditional filters are very flexible, they have a couple of disadvantages. First, there is some overhead in writing JSON to stdout and reading it from stdin (twice, once on each side of the filter). Second, whether a filter will work will depend on details of the user's environment. A filter may require an interpreter for a certain programming language to be available, as well as a library for manipulating the pandoc AST in JSON form. One cannot simply provide a filter that can be used by anyone who has a certain version of the pandoc executable.
-> 
+>
 > Starting with version 2.0, pandoc makes it possible to write filters in Lua without any external dependencies at all. A Lua interpreter (version 5.3) and a Lua library for creating pandoc filters is built into the pandoc executable. Pandoc data types are marshaled to Lua directly, avoiding the overhead of writing JSON to stdout and reading it from stdin.
 - [Pandoc - Pandoc Lua Filters](https://pandoc.org/lua-filters.html)
-
