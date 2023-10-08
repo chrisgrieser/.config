@@ -12,8 +12,7 @@ optl.expandtab = false
 require("funcs.quality-of-life").wrap("on")
 
 -- decrease line length without zen mode plugins
--- HACK workaround, since vim.opt_local.signcolumn does not work well for some reason
-optl.signcolumn = "yes:9"
+if vim.bo.buffer == "" then optl.signcolumn = "yes:9" end
 
 -- do not auto-wrap text
 optl.formatoptions:remove { "t", "c" }

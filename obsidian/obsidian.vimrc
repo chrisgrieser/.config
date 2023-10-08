@@ -299,7 +299,8 @@ vnoremap w t"
 """"""""""""""""""""""
 " Substitute
 """"""""""""""""""""""
-" poor man's substitute.nvim 🥲
+" poor man's substitute.nvim through brut-forcing all possible text objects :'(
+nunmap s
 nnoremap ss Vp
 nnoremap S vg$p
 nnoremap sim viWp
