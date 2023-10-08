@@ -339,16 +339,6 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>3437AEA1-E781-4F91-9F2E-42D89A4ECF6C</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>E8EDD4EE-AAE7-4018-945B-FF2F53BDD11C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -392,6 +382,21 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E8EDD4EE-AAE7-4018-945B-FF2F53BDD11C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3437AEA1-E781-4F91-9F2E-42D89A4ECF6C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>13B727F0-A58A-4C0C-ACB4-9EE69BD4DE07</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
