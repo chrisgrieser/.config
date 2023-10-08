@@ -1,12 +1,7 @@
 # yaml-language-server: $schema=../schemas/espanso-match-schema.json
 #───────────────────────────────────────────────────────────────────────────────
+
 matches:
-  - trigger: qqq
-    replace: '{query}'
-    label: "🎩 {query}"
-  - trigger: QQQ
-    replace: '{var:$|$}'
-    label: "🎩 {var:}"
-  - trigger: "!kbd"
-    replace: '<kbd>$|$</kbd>'
-    label: "🎩 <kbd>"
+  # smart bullet in Tot https://blog.iconfactory.com/2022/06/tot-1-4-making-people-happy/
+  - regex: "- "
+    replace: "– "
