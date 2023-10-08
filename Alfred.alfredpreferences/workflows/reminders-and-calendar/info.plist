@@ -817,6 +817,8 @@ end tell</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
+			<key>note</key>
+			<string>snooze one day</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -829,7 +831,7 @@ end tell</string>
 			<key>xpos</key>
 			<real>215</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>545</real>
 		</dict>
 		<key>3B742E23-7911-4DD4-A24D-49E02F1AF0AC</key>
 		<dict>
@@ -881,7 +883,7 @@ end tell</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>545</real>
 		</dict>
 		<key>8610EFE4-6BCC-4C55-A92F-A1ACAF175489</key>
 		<dict>
@@ -919,7 +921,7 @@ end tell</string>
 			<key>xpos</key>
 			<real>215</real>
 			<key>ypos</key>
-			<real>400</real>
+			<real>415</real>
 		</dict>
 		<key>C539C739-DFEF-4D04-8767-7244B05540C3</key>
 		<dict>
@@ -971,7 +973,7 @@ end tell</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>400</real>
+			<real>415</real>
 		</dict>
 		<key>F00C2986-4FD7-478F-B72E-810CA90E50D0</key>
 		<dict>

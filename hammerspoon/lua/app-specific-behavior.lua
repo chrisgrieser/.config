@@ -155,16 +155,19 @@ end):start()
 -- TRANSMISSION / TWITTER / MASTODON / TOT
 -- Fallthrough: prevent unintended focusing after qutting another app or closing
 -- last window
-local function fallthrough()
+
+FallthroughAppWatcher = aw.new(function(appName, event)
+	if appName == "Reminders" then return end -- reminders often opening in the background
+	if event ~= aw.terminated then return end
+
 	-- CONFIG
 	local fallThroughApps = { "Transmission", env.tickerApp, "Tot" }
-
 	u.runWithDelays({ 0.1, 0.2 }, function()
 		if not u.isFront(fallThroughApps) then return end
 		local visibleWins = hs.window:orderedWindows()
 		local nextWin
 		for _, win in pairs(visibleWins) do
-			if not win:application() then break end
+			if not win:application() then return end
 			local name = win:application():name() ---@diagnostic disable-line: undefined-field
 			if not (u.tbl_contains(fallThroughApps, name)) then
 				nextWin = win
@@ -174,20 +177,7 @@ local function fallthrough()
 		if not nextWin or (nextWin:id() == hs.window.frontmostWindow():id()) then return end
 		nextWin:focus()
 	end)
-end
-
-FallthroughAppWatcher = aw.new(function(appName, event)
-	if appName == "Reminders" then return end -- reminders often opening in the background
-	if event == aw.terminated then fallthrough() end
 end):start()
-Wf_fallthrough = wf.new(true)
-	:setOverrideFilter({ allowRoles = "AXStandardWindow" })
-	:subscribe(wf.windowDestroyed, function(closedWin)
-		local app = closedWin:application()
-		if not app then return end
-		local appWins = #app:allWindows()
-		if appWins == 0 then fallthrough() end
-	end)
 
 --------------------------------------------------------------------------------
 -- SCRIPT EDITOR
