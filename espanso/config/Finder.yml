@@ -1,5 +1,7 @@
-# https://espanso.org/docs/configuration/app-specific-configurations/#advanced-use-cases-for-filter_title
+# yaml-language-server: $schema=../schemas/espanso-appconfig-schema.json
 #───────────────────────────────────────────────────────────────────────────────
+
+# DOCS https://espanso.org/docs/configuration/app-specific-configurations/#advanced-use-cases-for-filter_title
 # disabling emojis, since `::` is needlessly triggered by toggling hidden files
 # on and off
 

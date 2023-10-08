@@ -1,4 +1,6 @@
-# https://espanso.org/docs/configuration/app-specific-configurations/
+# yaml-language-server: $schema=../schemas/espanso-appconfig-schema.json
+#───────────────────────────────────────────────────────────────────────────────
+
 filter_class: com.mimestream.Mimestream
 
 extra_includes:
