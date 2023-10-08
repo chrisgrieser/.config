@@ -347,6 +347,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E8EDD4EE-AAE7-4018-945B-FF2F53BDD11C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</key>
 		<array>
@@ -494,37 +504,6 @@
 			<string>DC23B294-25E4-4CEA-841A-71546D15BD89</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>-1</integer>
-				<key>hotmod</key>
-				<integer>524288</integer>
-				<key>hotstring</key>
-				<string>double tap</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>B4D4D74C-56BC-4F3B-9840-A3CD979D396C</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -715,6 +694,37 @@ osascript -l JavaScript  "$WD"</string>
 			<string>E8EDD4EE-AAE7-4018-945B-FF2F53BDD11C</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>-1</integer>
+				<key>hotmod</key>
+				<integer>524288</integer>
+				<key>hotstring</key>
+				<string>double tap</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>B4D4D74C-56BC-4F3B-9840-A3CD979D396C</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1807,7 +1817,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>30</real>
+			<real>245</real>
 		</dict>
 		<key>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</key>
 		<dict>
