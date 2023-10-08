@@ -131,12 +131,8 @@ exmap searchReplace obcommand editor:open-search-replace
 nnoremap ,ff :searchReplace
 
 """"""""""""""""""""""
-" Diffview & Git
+" Git
 """"""""""""""""""""""
-
-" Diffview
-exmap diffview obcommand obsidian-version-history-diff:open-git-diff-view
-nnoremap ,gd :diffview
 
 " Git Plugin
 exmap gitAdd obcommand obsidian-git:stage-current-file

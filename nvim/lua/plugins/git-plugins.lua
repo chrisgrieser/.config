@@ -29,21 +29,11 @@ return {
 			{ "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", desc = "󰊢 Reset Hunk" },
 			{ "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", desc = "󰊢 Reset Buffer" },
 			{ "gh", "<cmd>Gitsigns select_hunk<CR>", mode = { "o", "x" }, desc = "󱡔 󰊢 hunk textobj" },
-			{
-				"gh",
-				function() require("gitsigns").next_hunk { foldopen = true } end,
-				desc = "󰊢 Next Hunk",
-			},
-			{
-				"gH",
-				function() require("gitsigns").next_hunk { foldopen = true } end,
-				desc = "󰊢 Previous Hunk",
-			},
-			{
-				"<leader>g?",
-				function() require("gitsigns").blame_line { full = true } end,
-				desc = "󰊢 Blame Line",
-			},
+			-- stylua: ignore start
+			{ "gh", function() require("gitsigns").next_hunk { foldopen = true } end, desc = "󰊢 Next Hunk" },
+			{ "gH", function() require("gitsigns").prev_hunk { foldopen = true } end, desc = "󰊢 Previous Hunk" },
+			{ "<leader>g?", function() require("gitsigns").blame_line { full = true } end, desc = "󰊢 Blame Line" },
+			-- stylua: ignore end
 		},
 		opts = {
 			max_file_length = 12000, -- lines
