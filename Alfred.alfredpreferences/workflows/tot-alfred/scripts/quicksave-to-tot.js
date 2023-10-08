@@ -55,14 +55,18 @@ function browserTab() {
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
-function run(argv) {
+function run() {
 	const tot = Application("Tot");
 	tot.includeStandardAdditions = true;
 
 	const quicksaveDot = $.getenv("quicksave_dot");
 	const appendPrefix = $.getenv("append_prefix");
-	const selectedText = argv[0] || "";
 	const isBrowser = frontBrowser() !== "no browser";
+
+	// get selected text
+	Application("System Events").keystroke("c", {using: ["command down"]});
+	delay(0.05)
+	const selectedText = app.theClipboard().toString();
 
 	// Guard
 	if (!(selectedText || isBrowser)) return "";

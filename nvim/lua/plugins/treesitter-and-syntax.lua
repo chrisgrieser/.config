@@ -69,7 +69,6 @@ local tsConfig = {
 		disable_virtual_text = true, -- nvim-context-vt is better
 	},
 	endwise = { enable = true },
-	context_commentstring = { enable = true },
 }
 
 --------------------------------------------------------------------------------
