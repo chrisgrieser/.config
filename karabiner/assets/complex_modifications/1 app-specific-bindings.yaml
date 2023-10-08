@@ -24,6 +24,13 @@ rules:
         to:
           - { key_code: "0", modifiers: [command] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
+      # Reload Formatting (e.g. when broken due to svim)
+      - type: basic
+        from: { key_code: r, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: t, modifiers: [command, shift] }
+          - { key_code: t, modifiers: [command, shift] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
       # Delete Tot
       - type: basic
         from: { key_code: delete_or_backspace, modifiers: { mandatory: [command] } }

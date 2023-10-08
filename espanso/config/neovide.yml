@@ -1,4 +1,5 @@
-# disable in neovide, since it always messes up stuff
+# yaml-language-server: $schema=../schemas/espanso-appconfig-schema.json
+#───────────────────────────────────────────────────────────────────────────────
 
 filter_exec: "[Nn]eovide"
 enable: false

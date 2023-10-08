@@ -7,6 +7,6 @@ matches:
   - trigger: QQQ
     replace: '{var:$|$}'
     label: "🎩 {var:}"
-  - trigger: "!kbd"
+  - triggers: ["kkk", "!kbd"]
     replace: '<kbd>$|$</kbd>'
     label: "🎩 <kbd>"

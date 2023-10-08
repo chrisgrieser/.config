@@ -1,0 +1,25 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"$ref": "#/definitions/EspansoAppConfig",
+	"definitions": {
+		"EspansoAppConfig": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"extra_includes": {
+					"type": "array",
+					"items": { "type": "string" }
+				},
+				"extra_excludes": {
+					"type": "array",
+					"items": { "type": "string" }
+				},
+				"enable": { "type": "boolean" },
+				"filter_exec": { "type": "string" },
+				"filter_class": { "type": "string" },
+				"filter_title": { "type": "string" }
+			},
+			"title": "EspansoAppConfig"
+		}
+	}
+}

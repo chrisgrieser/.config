@@ -1,5 +1,7 @@
-# https://espanso.org/docs/configuration/app-specific-configurations/#advanced-use-cases-for-filter_title
+# yaml-language-server: $schema=../schemas/espanso-appconfig-schema.json
 #───────────────────────────────────────────────────────────────────────────────
+
+# DOCS https://espanso.org/docs/configuration/app-specific-configurations/#advanced-use-cases-for-filter_title
 # only activates code snippets when a file of the right language is open
 
 filter_exec: Alfred
@@ -8,10 +10,3 @@ extra_includes:
   - "../match/_shell.yml"
   - "../match/_applescript.yml"
   - "../match/_alfred.yml"
-
-extra_excludes:
-  - "../match/_email.yml"
-
-enable: false
-
-filter_title: \.applescript|scpt$|^Untitled
