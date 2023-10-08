@@ -120,7 +120,7 @@ return {
 	{ -- auto-convert string and f/template string
 		"chrisgrieser/nvim-puppeteer",
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		ft = { "python", "javascript", "typescript" },
+		ft = { "python", "javascript", "typescript", "lua" },
 	},
 	{ -- virtual text context at the end of a scope
 		"haringsrob/nvim_context_vt",
