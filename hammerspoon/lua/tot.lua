@@ -7,7 +7,8 @@ local function updateCounter() hs.execute(u.exportPath .. "sketchybar --trigger 
 -- Triggers
 -- 1. App Switch
 TotWatcher = aw.new(function(appName, event, tot)
-	if appName == "Tot" and event == aw.deactivated then
+	if appName ~= "Tot" then return end
+	if event == aw.deactivated then
 		updateCounter()
 		if not u.isFront("Alfred") then
 			tot:hide()
