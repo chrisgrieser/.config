@@ -117,6 +117,15 @@ return {
 			}
 		end,
 	},
+	{ -- icon-picker
+		"chrisgrieser/icon-picker.nvim",
+		branch = "patch-1",
+		keys = {
+			{ "<D-ö>", "<cmd>IconPickerInsert<CR>", mode = "i" },
+			{ "<D-ö>", "<cmd>IconPickerNormal<CR>" },
+		},
+		opts = { disable_legacy_commands = true },
+	},
 	{ -- auto-convert string and f/template string
 		"chrisgrieser/nvim-puppeteer",
 		dependencies = "nvim-treesitter/nvim-treesitter",

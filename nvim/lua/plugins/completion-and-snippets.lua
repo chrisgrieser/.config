@@ -27,9 +27,7 @@ local source_icons = {
 local defaultSources = {
 	s.snippets,
 	s.lsp,
-	s.emojis,
 	s.treesitter,
-	s.buffer,
 }
 local kind_icons = {
 	Text = "",
@@ -162,26 +160,15 @@ local function filetypeCompletionConfig()
 	-- disable in special filetypes
 	cmp.setup.filetype("", { enabled = false })
 
-	cmp.setup.filetype({ "lua", "toml" }, {
+	cmp.setup.filetype({ "lua" }, {
 		enabled = function() -- disable leading "-" in lua
 			local line = vim.api.nvim_get_current_line()
 			return not (line:find("%s%-%-?$") or line:find("^%-%-?$"))
 		end,
-		sources = cmp.config.sources {
-			s.snippets,
-			s.lsp,
-			s.nerdfont, -- add nerdfont for config
-			s.emojis,
-			s.treesitter,
-		},
 	})
 
 	cmp.setup.filetype("css", {
-		sources = cmp.config.sources {
-			s.lsp,
-			s.snippets,
-			s.emojis,
-		},
+		sources = cmp.config.sources { s.snippets, s.lsp },
 	})
 
 	cmp.setup.filetype("markdown", {
@@ -190,16 +177,6 @@ local function filetypeCompletionConfig()
 			s.treesitter,
 			s.path, -- e.g. image paths
 			s.lsp,
-			s.emojis,
-		},
-	})
-
-	cmp.setup.filetype({ "yaml", "json" }, {
-		sources = cmp.config.sources {
-			s.lsp, -- prioritize schemas
-			s.snippets,
-			s.treesitter, -- useful when no schemas
-			s.emojis,
 		},
 	})
 
@@ -216,8 +193,6 @@ local function filetypeCompletionConfig()
 			s.lsp,
 			s.path,
 			s.treesitter,
-			s.nerdfont, -- used for some configs
-			s.emojis,
 		},
 	})
 
@@ -225,8 +200,6 @@ local function filetypeCompletionConfig()
 		sources = cmp.config.sources {
 			s.path,
 			s.zsh,
-			s.nerdfont, 
-			s.emojis,
 		},
 	})
 
@@ -261,7 +234,6 @@ local function filetypeCompletionConfig()
 		sources = cmp.config.sources {
 			s.snippets,
 			s.buffer,
-			s.emojis,
 		},
 	})
 end
