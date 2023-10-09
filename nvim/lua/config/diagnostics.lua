@@ -1,8 +1,8 @@
 -- SIGN ICONS
 local diagnosticTypes = {
-	Error = "",
+	Error = "ﮋ",
 	Warn = "▲",
-	Info = "",
+	Info = "♦",
 	Hint = "",
 }
 for type, icon in pairs(diagnosticTypes) do
@@ -11,14 +11,22 @@ for type, icon in pairs(diagnosticTypes) do
 end
 
 --------------------------------------------------------------------------------
+---@param str string
+---@return string
+local function rmTrailDot(str)
+	str = str:gsub(" ?%.$", "")
+	return str
+end
 
 vim.diagnostic.config {
 	virtual_text = {
-		severity = { min = vim.diagnostic.severity.INFO },
-		source = false,
+		severity = { min = vim.diagnostic.severity.INFO }, -- leave out hints
+		source = false, -- added as suffix already
 		spacing = 1,
+		format = function(diag) return rmTrailDot(diag.message) end,
 		suffix = function(diag) ---@param diag Diagnostic
-			local source = diag.source:gsub("%.$", "")
+			if not (diag.source) then return "" end
+			local source = rmTrailDot(diag.source)
 			return (" (%s)"):format(source)
 		end,
 	},
@@ -32,11 +40,12 @@ vim.diagnostic.config {
 			if total == 1 then return "" end
 			return "• ", "NonText"
 		end,
+		format = function(diag) return rmTrailDot(diag.message) end,
 		suffix = function(diag) ---@param diag Diagnostic
 			if not (diag.source or diag.code) then return "" end
-			local source = diag.source and diag.source:gsub("%.$", "") or ""
+			local source = diag.source and rmTrailDot(diag.source) or ""
 			local rule = diag.code and ": " .. diag.code or ""
-			return (" (%s%s)"):format(source, rule), "NonText"
+			return (" (%s%s)"):format(source, rule), "Comment"
 		end,
 	},
 }
