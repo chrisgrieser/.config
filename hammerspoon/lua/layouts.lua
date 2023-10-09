@@ -56,7 +56,7 @@ end
 local function workLayout()
 	-- screen & visuals
 	darkmode.autoSwitch()
-	visuals.holeCover()
+	visuals.holeCover("auto")
 	dockSwitcher("work")
 	setHigherBrightnessDuringDay()
 

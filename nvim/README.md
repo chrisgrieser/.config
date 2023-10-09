@@ -4,7 +4,7 @@
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img src="https://dotfyle.com/chrisgrieser/config-nvim/badges/plugin-manager?style=flat" /></a>
 
 <!-- editorconfig-checker-disable -->
-```text
+```bash
 ├── lua
 │  ├── config # keybindings, options, …
 │  ├── funcs # utility functions / private plugins
@@ -13,13 +13,10 @@
 │  └── ftplugin # filetype-specific configs
 ├── queries # modifications of treesitter queries
 ├── mac-helper # opener for neovide on macOS
-├── snippets # VS Code Style for portability
+├── snippets # VS-Code-style for portability
 │  ├── basic
 │  └── project-specific
-├── templates # skeleton files
-└── tool-configs # custom configs for efm
-   ├── formatters
-   └── linters
+└── templates # skeleton files
 ```
 <!-- editorconfig-checker-enable -->
 
