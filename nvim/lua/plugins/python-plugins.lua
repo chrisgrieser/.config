@@ -11,7 +11,7 @@ return {
 		},
 		cmd = { "VenvSelect", "VenvSelectCached" },
 		keys = {
-			{ "<localleader>v", "<cmd>VenvSelect<RC>", ft = "python", desc = "󱥒 VenvSelect"  },
+			{ "<localleader>v", "<cmd>VenvSelect<CR>", ft = "python", desc = "󱥒 VenvSelect" },
 		},
 		config = function()
 			require("venv-selector").setup {
