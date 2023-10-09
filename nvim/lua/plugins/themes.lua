@@ -1,6 +1,5 @@
 -- INFO only the first theme will be used
 local lightThemes = {
-	"sainnhe/everforest",
 	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
 	-- {
 	-- 	"marko-cerovac/material.nvim",

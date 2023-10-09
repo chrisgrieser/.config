@@ -77,9 +77,6 @@ local function themeModifications()
 		linkHl("@keyword.operator.python", "Operator")
 
 	-----------------------------------------------------------------------------
-	elseif theme == "everforest" then
-		vim.notify("🪚 beep 👾")
-		linkHl("@lsp.type.parameter", "@lsp.type.typeParameter")
 	elseif theme == "gruvbox-material" or theme == "sonokai" then
 		local commentColor = u.getHighlightValue("Comment", "fg")
 		updateHl("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
