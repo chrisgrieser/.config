@@ -2,8 +2,6 @@ local bo = vim.bo
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
-u.applyTemplateIfEmptyFile("py")
-
 -- python standard
 bo.expandtab = true
 bo.shiftwidth = 4
