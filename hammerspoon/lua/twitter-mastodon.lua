@@ -147,6 +147,7 @@ IvoryReloadTimer = hs.timer
 		if not ivory then return end
 
 		-- only reload when not idle, so this does not prevent screensaver/sleep
+		-- also do not reload when app is frontmost, since that may interrupt reading
 		local idle = hs.host.idleTime() > (reloadMins * 60 / 2)
 		if idle or ivory:isFrontmost() then return end
 
