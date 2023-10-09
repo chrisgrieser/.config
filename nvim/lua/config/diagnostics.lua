@@ -12,25 +12,30 @@ end
 
 --------------------------------------------------------------------------------
 
----@param diag Diagnostic
----@return string
-local function diagnosticFmt(diag)
-	local source = diag.source and " (" .. diag.source:gsub("%.$", "") .. ")" or ""
-	return diag.message .. source
-end
-
 vim.diagnostic.config {
 	virtual_text = {
-		format = diagnosticFmt,
 		severity = { min = vim.diagnostic.severity.INFO },
-		source = false, -- handled by my format function
+		source = false,
 		spacing = 1,
+		suffix = function (diag)
+			local source = diag.source:gsub("%.$", "")
+			return (" (%s)"):format(source)
+		end,
 	},
 	float = {
-		format = diagnosticFmt,
 		focusable = true,
+		severity_sort = true,
 		border = require("config.utils").borderStyle,
 		max_width = 75,
-		header = "", -- remove "Diagnostics:" heading
+		header = false,
+		prefix = function(_, _, total)
+			if total == 1 then return "" end
+			return "• ", "NonText"
+		end,
+		suffix = function(diag) ---@param diag Diagnostic
+			local source = diag.source:gsub("%.$", "")
+			local rule = diag.code and diag.code .. " " or ""
+			return ("(%s%s)"):format(source, rule), "NonText"
+		end,
 	},
 }
