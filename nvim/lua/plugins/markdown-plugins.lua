@@ -31,5 +31,6 @@ return {
 		keys = {
 			{ "<D-r>", "<Plug>MarkdownPreview", ft = "markdown", desc = " Preview" },
 		},
+		init = function() vim.g.mkdp_filetypes = { "markdown" } end,
 	},
 }
