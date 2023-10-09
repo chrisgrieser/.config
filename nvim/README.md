@@ -26,8 +26,6 @@
 The tree was generated using <https://tree.nathanfriend.io/>
 
 ## All Installed Plugins
-
-### test
 - [Aasim-A/scrollEOF.nvim](https://github.com/Aasim-A/scrollEOF.nvim)
 - [EdenEast/nightfox.nvim](https://github.com/EdenEast/nightfox.nvim)
 - [Exafunction/codeium.vim](https://github.com/Exafunction/codeium.vim)
@@ -40,7 +38,6 @@ The tree was generated using <https://tree.nathanfriend.io/>
 - [Vigemus/iron.nvim](https://github.com/Vigemus/iron.nvim)
 - [Vimjas/vim-python-pep8-indent](https://github.com/Vimjas/vim-python-pep8-indent)
 - [Wansmer/sibling-swap.nvim](https://github.com/Wansmer/sibling-swap.nvim)
-- [Wansmer/symbol-usage.nvim](https://github.com/Wansmer/symbol-usage.nvim)
 - [Wansmer/treesj](https://github.com/Wansmer/treesj)
 - [WhoIsSethDaniel/mason-tool-installer.nvim](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim)
 - [ahmedkhalf/project.nvim](https://github.com/ahmedkhalf/project.nvim)
@@ -56,7 +53,6 @@ The tree was generated using <https://tree.nathanfriend.io/>
 - [chrisgrieser/nvim-spider](https://github.com/chrisgrieser/nvim-spider)
 - [chrisgrieser/nvim-tinygit](https://github.com/chrisgrieser/nvim-tinygit)
 - [chrisgrieser/nvim-various-textobjs](https://github.com/chrisgrieser/nvim-various-textobjs)
-- [danielfalk/smart-open.nvim](https://github.com/danielfalk/smart-open.nvim)
 - [danymat/neogen](https://github.com/danymat/neogen)
 - [dkarter/bullets.vim](https://github.com/dkarter/bullets.vim)
 - [dmitmel/cmp-cmdline-history](https://github.com/dmitmel/cmp-cmdline-history)
@@ -86,7 +82,6 @@ The tree was generated using <https://tree.nathanfriend.io/>
 - [kevinhwang91/nvim-hlslens](https://github.com/kevinhwang91/nvim-hlslens)
 - [kevinhwang91/nvim-ufo](https://github.com/kevinhwang91/nvim-ufo)
 - [kevinhwang91/promise-async](https://github.com/kevinhwang91/promise-async)
-- [kkharji/sqlite.lua](https://github.com/kkharji/sqlite.lua)
 - [kylechui/nvim-surround](https://github.com/kylechui/nvim-surround)
 - [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
 - [lewis6991/satellite.nvim](https://github.com/lewis6991/satellite.nvim)
@@ -117,7 +112,7 @@ The tree was generated using <https://tree.nathanfriend.io/>
 - [rcarriga/nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui)
 - [rcarriga/nvim-notify](https://github.com/rcarriga/nvim-notify)
 - [saadparwaiz1/cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)
-- [sindrets/diffview.nvim](https://github.com/sindrets/diffview.nvim)
+- [smartpde/telescope-recent-files](https://github.com/smartpde/telescope-recent-files)
 - [smjonas/inc-rename.nvim](https://github.com/smjonas/inc-rename.nvim)
 - [sourcegraph/sg.nvim](https://github.com/sourcegraph/sg.nvim)
 - [stevearc/conform.nvim](https://github.com/stevearc/conform.nvim)
@@ -128,7 +123,6 @@ The tree was generated using <https://tree.nathanfriend.io/>
 - [tzachar/fuzzy.nvim](https://github.com/tzachar/fuzzy.nvim)
 - [tzachar/highlight-undo.nvim](https://github.com/tzachar/highlight-undo.nvim)
 - [uga-rosa/ccc.nvim](https://github.com/uga-rosa/ccc.nvim)
-- [utilyre/sentiment.nvim](https://github.com/utilyre/sentiment.nvim)
 - [williamboman/mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)
 - [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim)
 - [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)

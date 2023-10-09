@@ -68,6 +68,7 @@ keymap(
 keymap("n", "X", "<cmd>normal!mz$x`z<CR>", { desc = "󱎘 Delete char at EoL" })
 
 -- Toggle Char Case
+-- stylua: ignore
 keymap("n", "~", function() require("funcs.quality-of-life").toggleCase() end, { desc = "better ~" })
 
 -- QUICKFIX

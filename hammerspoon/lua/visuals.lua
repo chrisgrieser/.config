@@ -7,12 +7,15 @@ local wu = require("lua.window-utils")
 
 -- https://www.hammerspoon.org/Spoons/RoundedCorners.html
 local roundedCorners = hs.loadSpoon("RoundedCorners")
-roundedCorners.radius = 8
+roundedCorners.radius = 8 ---@diagnostic disable-line: inject-field
 if roundedCorners then roundedCorners:start() end
 
 ---to stop wallpaper shining through
----@param arg? string
-function M.holeCover(arg)
+---@param arg? any
+---@param toMode? string
+function M.holeCover(arg, toMode)
+	if not toMode then toMode = u.isDarkMode() and "dark" or "light" end
+
 	if CoverParts then
 		---@diagnostic disable-next-line: unused-local
 		for _, cover in pairs(CoverParts) do
@@ -25,7 +28,7 @@ function M.holeCover(arg)
 
 	local bgColor
 	local screen = hs.screen.mainScreen():frame()
-	if u.isDarkMode() then
+	if toMode == "dark" then
 		bgColor = { red = 0.2, green = 0.2, blue = 0.2, alpha = 1 }
 	else
 		bgColor = { red = 0.8, green = 0.8, blue = 0.8, alpha = 1 }

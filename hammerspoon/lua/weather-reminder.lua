@@ -12,12 +12,12 @@ local config = {
 	longitude = 13,
 	insideTemp = 25,
 	checkIntervalMins = 30,
+	activeInMonths = { "Aug", "Jul", "Sep" },
 }
 
 -- only run in the summer  & at home
-local month = tostring(os.date("%b"))
-local isSummer = (month == "Aug" or month == "Jul" or month == "Sep")
-if not isSummer or not env.isAtHome then return end
+local curMonth = tostring(os.date("%b"))
+if not u.tbl_contains(config.activeInMonths, curMonth) or not env.isAtHome then return end
 
 --------------------------------------------------------------------------------
 
