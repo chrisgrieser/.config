@@ -1,19 +1,17 @@
 local fn = vim.fn
 local cmd = vim.cmd
-local newCommand = vim.api.nvim_create_user_command
 local u = require("config.utils")
-
-vim.cmd.cnoreabbrev("i", "lua =")
 
 --------------------------------------------------------------------------------
 
 -- inspect capabilities of current lsp
 -- no arg: all LSPs attached to current buffer
 -- one arg: name of the LSP
-newCommand("LspCapabilities", function(ctx)
+vim.api.nvim_create_user_command("LspCapabilities", function(ctx)
 	local selected = ctx.args
 
-	local filter = selected == "" and { bufnr = vim.api.nvim_get_current_buf() } or { name = selected }
+	local filter = selected == "" and { bufnr = vim.api.nvim_get_current_buf() }
+		or { name = selected }
 	local clients = vim.lsp.get_active_clients(filter)
 
 	local out = {}
@@ -49,7 +47,7 @@ end, {
 --------------------------------------------------------------------------------
 
 -- shorthand for `.!curl -s` which also creates a new html buffer for syntax highlighting
-newCommand("Curl", function(ctx)
+vim.api.nvim_create_user_command("Curl", function(ctx)
 	local url = ctx.args
 	local a = vim.api
 

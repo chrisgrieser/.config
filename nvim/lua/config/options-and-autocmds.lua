@@ -170,7 +170,9 @@ vim.on_key(function(char)
 	local searchStarted = (key == "/" or key == "?") and vim.fn.mode() == "n"
 	local searchConfirmed = (key == "<CR>" and isCmdlineSearch)
 	local searchCancelled = (key == "<Esc>" and isCmdlineSearch)
-	if not (searchStarted or searchConfirmed or searchCancelled or vim.fn.mode() == "n") then return end
+	if not (searchStarted or searchConfirmed or searchCancelled or vim.fn.mode() == "n") then
+		return
+	end
 	local searchMovement = vim.tbl_contains(searchMvKeys, key)
 	local hlSearchOn = vim.opt.hlsearch:get()
 
