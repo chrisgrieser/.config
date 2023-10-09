@@ -1,12 +1,13 @@
 local defaultSources = {
 	{ name = "luasnip" },
 	{ name = "nvim_lsp" },
-	{ name = "treesitter" },
+	{ name = "buffer", keyword_length = 4 },
 	{ name = "path" },
-	{ name = "emoji", keyword_length = 2 },
+	{ name = "emoji" },
 }
-local source_icons = {
-	treesitter = "",
+
+local sourceIcons = {
+	buffer = "󰽙",
 	zsh = "",
 	nvim_lsp = "󰒕",
 	luasnip = "󰞘",
@@ -21,7 +22,6 @@ local source_icons = {
 local function cmpconfig()
 	local cmp = require("cmp")
 	local compare = require("cmp.config.compare")
-	local u = require("config.utils")
 
 	cmp.setup {
 		snippet = {
@@ -30,10 +30,10 @@ local function cmpconfig()
 		window = {
 			completion = {
 				side_padding = 0,
-				border = u.borderStyle,
+				border = require("config.utils").borderStyle,
 			},
 			documentation = {
-				border = u.borderStyle,
+				border = require("config.utils").borderStyle,
 			},
 		},
 		sorting = {
@@ -73,7 +73,7 @@ local function cmpconfig()
 					fallback()
 				end
 			end, { "i", "s" }),
-			-- Force jumping
+			-- Jumping to next location
 			["<D-j>"] = cmp.mapping(function(_)
 				if require("luasnip").locally_jumpable(1) then
 					require("luasnip").jump(1)
@@ -85,7 +85,7 @@ local function cmpconfig()
 		formatting = {
 			fields = { "kind", "abbr", "menu" }, -- order of the fields
 			format = function(entry, item)
-				local kind_icons = {
+				local kindIcons = {
 					Text = "",
 					Method = "󰆧",
 					Function = "󰊕",
@@ -115,14 +115,13 @@ local function cmpconfig()
 
 				-- abbreviate length https://github.com/hrsh7th/nvim-cmp/discussions/609
 				-- (height is controlled via pumheight option)
-				local max_length = 50
-				if #item.abbr > max_length then item.abbr = item.abbr:sub(1, max_length) .. "…" end
+				local maxLength = 50
+				if #item.abbr > maxLength then item.abbr = item.abbr:sub(1, maxLength) .. "…" end
 
 				-- icons
-				local kindIcon = kind_icons[item.kind] or ""
+				local kindIcon = kindIcons[item.kind] or ""
 				item.kind = " " .. kindIcon .. " "
-				item.menu = source_icons[entry.source.name]
-				if entry.source.name == "fuzzy_buffer" then item.kind = "" end
+				item.menu = sourceIcons[entry.source.name]
 				return item
 			end,
 		},
@@ -190,7 +189,7 @@ return {
 			"hrsh7th/cmp-emoji",
 			"dmitmel/cmp-cmdline-history",
 			"tamago324/cmp-zsh", -- some shell completions
-			"ray-x/cmp-treesitter",
+			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-nvim-lsp", -- LSP input
 			"L3MON4D3/LuaSnip", -- snippet engine
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine

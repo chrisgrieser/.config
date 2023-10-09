@@ -76,7 +76,7 @@ serverConfigs.ruff_lsp = {
 		settings = {
 			organizeImports = false,
 			fixAll = false,
-			codeAction = { fixViolation = { enable = false } } 
+			codeAction = { fixViolation = { enable = false } },
 		},
 	},
 	-- Disable hover in favor of jedi
@@ -253,7 +253,11 @@ serverConfigs.ltex = {
 			if not ltex then return end
 			local word = vim.fn.expand("<cword>")
 			table.insert(ltex.config.settings.ltex.dictionary["en-US"], word)
-			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = ltex.config.settings })
+			vim.lsp.buf_notify(
+				0,
+				"workspace/didChangeConfiguration",
+				{ settings = ltex.config.settings }
+			)
 			u.normal("zg") -- add to spellfile, which is used as dictionary
 		end, { desc = "󰓆 Add Word", buffer = true })
 	end,
@@ -265,7 +269,8 @@ local function setupAllLsps()
 	-- Enable snippets-completion (nvim_cmp) and folding (nvim-ufo)
 	local lspCapabilities = vim.lsp.protocol.make_client_capabilities()
 	lspCapabilities.textDocument.completion.completionItem.snippetSupport = true
-	lspCapabilities.textDocument.foldingRange = { dynamicRegistration = false, lineFoldingOnly = true }
+	lspCapabilities.textDocument.foldingRange =
+		{ dynamicRegistration = false, lineFoldingOnly = true }
 
 	for lsp, serverConfig in pairs(serverConfigs) do
 		serverConfig.capabilities = lspCapabilities
@@ -298,6 +303,15 @@ local function lspCurrentTokenHighlight()
 	})
 end
 
+local function lspSignatureSettings()
+	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+		border = require("config.utils").borderStyle,
+	})
+	-- INFO this needs to be disabled for noice.nvim
+	-- vim.lsp.handlers["textDocument/hover"] =
+	-- vim.lsp.with(vim.lsp.handlers.hover, { border = u.borderStyle })
+end
+
 --------------------------------------------------------------------------------
 
 return {
@@ -313,6 +327,7 @@ return {
 		init = function()
 			setupAllLsps()
 			lspCurrentTokenHighlight()
+			lspSignatureSettings()
 		end,
 		config = function() require("lspconfig.ui.windows").default_options.border = u.borderStyle end,
 	},
