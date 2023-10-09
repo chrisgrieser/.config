@@ -6,8 +6,6 @@ u.ftAbbr("cosnt", "const")
 u.ftAbbr("local", "const")
 u.ftAbbr("--", "//")
 
-u.applyTemplateIfEmptyFile("jxa")
-
 --------------------------------------------------------------------------------
 
 -- Open regex in regex101

@@ -30,34 +30,6 @@ function M.notify(title, msg, level)
 	vim.notify(msg, vim.log.levels[level:upper()], { title = title })
 end
 
----reads a template to apply if the file is empty. Add to a filetype config to
----activate templates for it
----@param ext string extension of the skeleton
-function M.applyTemplateIfEmptyFile(ext)
-	-- prevent buggy duplicate application of template
-	if vim.b.templateWasApplied then return end
-	vim.b.templateWasApplied = true ---@diagnostic disable-line: inject-field
-
-	vim.defer_fn(function()
-		local filename = vim.fn.expand("%")
-		local fileExists = vim.loop.fs_stat(filename) ~= nil
-		if not fileExists then return end
-
-		local skeletonFile = vim.fn.stdpath("config") .. "/templates/skeleton." .. ext
-		local skeletonExists = vim.loop.fs_stat(skeletonFile) ~= nil
-		if not skeletonExists then
-			vim.notify("Skeleton file not found.", vim.log.levels.ERROR)
-			return
-		end
-
-		local fileIsEmpty = vim.loop.fs_stat(filename).size < 4 -- account for linebreaks
-		if not fileIsEmpty then return end
-
-		vim.cmd("silent keepalt 0read " .. skeletonFile)
-		M.normal("G")
-	end, 1)
-end
-
 function M.ftAbbr(lhs, rhs)
 	-- TODO update on nvim 0.10
 	-- vim.keymap.set("ia", lhs, rhs, { buffer = true })
