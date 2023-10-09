@@ -1,21 +1,21 @@
 -- INFO only the first theme will be used
 local lightThemes = {
+	"sainnhe/everforest",
 	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
-	-- { "rose-pine/neovim", name = "rose-pine" },
-	-- { "catppuccin/nvim", name = "catppuccin" },
 	-- {
 	-- 	"marko-cerovac/material.nvim",
 	-- 	init = function() vim.g.material_style = "lighter" end,
 	-- 	opts = { lualine_style = "stealth", high_visibility = { lighter = false } },
 	-- },
+	-- { "rose-pine/neovim", name = "rose-pine" },
 }
 
 local darkThemes = {
-	{ "folke/tokyonight.nvim", opts = { style = "moon" } },
+	"rebelot/kanagawa.nvim",
+	-- { "folke/tokyonight.nvim", opts = { style = "moon" } },
 	-- { "sainnhe/sonokai", init = function() vim.g.sonokai_style = "shusia" end },
 	-- { "catppuccin/nvim", name = "catppuccin" },
 	-- "sainnhe/gruvbox-material",
-	-- "sainnhe/everforest",
 	-- "nvimdev/zephyr-nvim",
 	-- "kvrohit/mellow.nvim",
 }

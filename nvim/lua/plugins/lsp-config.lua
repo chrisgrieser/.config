@@ -54,7 +54,6 @@ serverConfigs.lua_ls = {
 			diagnostics = {
 				globals = { "vim" }, -- when contributing to nvim plugins missing a .luarc.json
 				disable = { "trailing-space" }, -- formatter already does that
-				severity = { ["return-type-mismatch"] = "Error" }, -- https://github.com/LuaLS/lua-language-server/wiki/Settings#diagnosticsseverity
 			},
 			hint = {
 				enable = true, -- enabled inlay hints
@@ -73,8 +72,12 @@ serverConfigs.lua_ls = {
 -- DOCS https://github.com/astral-sh/ruff-lsp#settings
 serverConfigs.ruff_lsp = {
 	init_options = {
-		-- disable, since already included in FixAll when ruff-rules include "I"
-		settings = { organizeImports = false },
+		-- disable, since they are done by the formatter automatically
+		settings = {
+			organizeImports = false,
+			fixAll = false,
+			codeAction = { fixViolation = { enable = false } } 
+		},
 	},
 	-- Disable hover in favor of jedi
 	on_attach = function(client) client.server_capabilities.hoverProvider = false end,
