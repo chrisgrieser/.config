@@ -35,9 +35,8 @@ keymap("n", "<leader>lf", function()
 	local out = {
 		"filetype: " .. bo.filetype,
 		"buftype: " .. bo.buftype,
-		"scrolloff: " .. vim.opt_local.scrolloff:get(),
 		("indent: %s (%s)"):format(bo.expandtab and "spaces" or "tabs", bo.tabstop),
-		"node at cursor: " .. vim.treesitter.get_node():type(),
+		"node: " .. vim.treesitter.get_node():type(),
 	}
 	u.notify("Buffer Information", table.concat(out, "\n"), "trace")
 end, { desc = "󰽘 Inspect Buffer Info" })
@@ -72,7 +71,6 @@ keymap(
 	function() cmd("silent later " .. tostring(vim.opt.undolevels:get())) end,
 	{ desc = "󰛒 Redo All" }
 )
-keymap("n", "<leader>ul", "U", { desc = "– Undo line" })
 
 keymap(
 	{ "n", "x" },
