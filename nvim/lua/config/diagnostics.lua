@@ -17,7 +17,7 @@ vim.diagnostic.config {
 		severity = { min = vim.diagnostic.severity.INFO },
 		source = false,
 		spacing = 1,
-		suffix = function (diag)
+		suffix = function(diag) ---@param diag Diagnostic
 			local source = diag.source:gsub("%.$", "")
 			return (" (%s)"):format(source)
 		end,
@@ -33,10 +33,10 @@ vim.diagnostic.config {
 			return "• ", "NonText"
 		end,
 		suffix = function(diag) ---@param diag Diagnostic
-			local source = diag.source:gsub("%.$", "")
-			local rule = diag.code and diag.code .. " " or ""
-			return ("(%s%s)"):format(source, rule), "NonText"
+			if not (diag.source or diag.code) then return "" end
+			local source = diag.source and diag.source:gsub("%.$", "") or ""
+			local rule = diag.code and ": " .. diag.code or ""
+			return (" (%s%s)"):format(source, rule), "NonText"
 		end,
 	},
 }
-fsfsf

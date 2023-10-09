@@ -118,8 +118,7 @@ return {
 		end,
 	},
 	{ -- icon-picker
-		"chrisgrieser/icon-picker.nvim",
-		branch = "patch-1",
+		"ziontee113/icon-picker.nvim",
 		keys = {
 			{ "<D-ö>", function() vim.cmd("IconPickerNormal nerd_font symbols") end },
 			{ "<D-ö>", function() vim.cmd("IconPickerInsert nerd_font symbols") end, mode = "i" },
