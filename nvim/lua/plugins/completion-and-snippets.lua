@@ -15,6 +15,7 @@ local source_icons = {
 	cmdline_history = "󰋚",
 	emoji = "󰞅",
 }
+
 --------------------------------------------------------------------------------
 
 local function cmpconfig()
