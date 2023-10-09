@@ -2,18 +2,17 @@ local pw = hs.pathwatcher.new
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local home = os.getenv("HOME")
-local applicationSupport = home .. "/Library/Application Support/"
+local appSupport = home .. "/Library/Application Support/"
 
 --------------------------------------------------------------------------------
 -- BOOKMARKS SYNCED TO CHROME BOOKMARKS
 -- (needed for Alfred)
 
 local loc = {
-	sourceProfile = applicationSupport .. env.browserDefaultsPath,
-	sourceBookmarks = applicationSupport .. env.browserDefaultsPath .. "/Default/Bookmarks",
-	chromeProfile = applicationSupport .. "Google/Chrome/",
+	sourceProfile = appSupport .. env.browserDefaultsPath,
+	sourceBookmarks = appSupport .. env.browserDefaultsPath .. "/Default/Bookmarks",
+	chromeProfile = appSupport .. "Google/Chrome/",
 }
-
 BookmarkWatcher = pw(loc.sourceBookmarks, function()
 	-- Bookmarks
 	local bookmarks = hs.json.read(loc.sourceBookmarks)
@@ -45,7 +44,8 @@ end):start()
 --------------------------------------------------------------------------------
 -- FROM FILE HUB
 
----HACK works as only downloaded files get quarantined
+---HACK this works as only downloaded files get quarantined.
+---Rnsures that files created locally do not trigger the actions.
 ---@param filepath string
 ---@return boolean whether the file exists
 local function fileIsDownloaded(filepath)
@@ -54,18 +54,15 @@ local function fileIsDownloaded(filepath)
 end
 
 local browserSettings = home .. "/.config/_browser-extension-configs/"
--- selene: allow(high_cyclomatic_complexity)
 FileHubWatcher = pw(env.fileHub, function(paths, _)
 	if not u.screenIsUnlocked() then return end
 	for _, filep in pairs(paths) do
 		local fileName = filep:gsub(".*/", "")
 		local ext = fileName:gsub(".*%.", "")
 
-		-- alfredworkflows or iCal
+		-- ALFREDWORKFLOWS, ICAL, & BIB
 		if (ext == "alfredworkflow" or ext == "ics") and fileIsDownloaded(filep) then
 			u.runWithDelays(3, function() os.remove(filep) end)
-
-		-- bib: save to library
 		elseif ext == "bib" and fileIsDownloaded(filep) then
 			local libraryPath = home .. "/.config/pandoc/main-bibliography.bib"
 			local bibEntry = u.readFile(filep)
@@ -75,35 +72,26 @@ FileHubWatcher = pw(env.fileHub, function(paths, _)
 			hs.open(libraryPath)
 			os.remove(filep)
 
-		-- violentmonkey
+		-- VARIOUS BROWSER SETTINGS
 		elseif fileName == "violentmonkey" then
 			os.rename(filep, browserSettings .. "violentmonkey")
 			-- needs to be zipped again, since browser auto-opens all zip files
 			-- stylua: ignore
 			hs.execute("cd '" .. browserSettings .. "' && zip violentmonkey.zip ./violentmonkey/* && rm -rf ./violentmonkey")
 			print("➡️ Violentmonkey backup")
-
-		-- ublacklist
+			u.app(env.browserApp):activate() -- window created by auto-unzipping
 		elseif fileName == "ublacklist-settings.json" then
 			os.rename(filep, browserSettings .. fileName)
 			print("➡️ ublacklist backup")
-
-		-- vimium-c
 		elseif fileName:find("vimium_c.*%.json") then
 			os.rename(filep, browserSettings .. "vimium-c-settings.json")
 			print("➡️ Vimium-C backup")
-
-		-- adguard
 		elseif fileName:find("adg_ext_settings_.*%.json") then
 			os.rename(filep, browserSettings .. "adguard-settings.json")
 			print("➡️ AdGuard backup")
-
-		-- sponsor block
 		elseif fileName:find("SponsorBlockConfig_.*%.json") then
 			os.rename(filep, browserSettings .. "SponsorBlock-settings.json")
 			print("➡️ SponsorBlockConfig backup")
-
-		-- Inoreader
 		elseif fileName:find("Inoreader Feeds .*%.xml") then
 			os.rename(filep, browserSettings .. "Inoreader Feeds.opml")
 			print("➡️ Inoreader backup")
