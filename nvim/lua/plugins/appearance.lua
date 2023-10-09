@@ -197,11 +197,13 @@ return {
 				title_pos = "left",
 				min_width = { 0.4, 60 },
 				win_options = { winblend = 0 },
+				mappings = { n = { ["q"] = "Close" } },
 			},
 			select = {
 				backend = { "builtin" },
 				trim_prompt = true, -- trailing `:`
 				builtin = {
+					mappings = { ["q"] = "Close" },
 					show_numbers = false,
 					border = u.borderStyle,
 					relative = "cursor",

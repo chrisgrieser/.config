@@ -132,7 +132,10 @@ keymap("n", "<leader>la", function() require("funcs.sawmill").assertLog() end, {
 -- stylua: ignore end
 
 keymap("n", "<leader>li", cmd.Inspect, { desc = " :Inspect" })
-keymap("n", "<leader>lt", cmd.InspectTree, { desc = " :InspectTree" })
+keymap("n", "<leader>lt", function()
+	cmd.InspectTree()
+	vim.keymap.set("n", "q", vim.cmd.close, { nowait = true, buffer = true })
+end, { desc = " :InspectTree" })
 
 --------------------------------------------------------------------------------
 
