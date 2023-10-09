@@ -1,12 +1,13 @@
-# HELPER FUNCTION USED BY OTHERS
+# HELPER FUNCTION USED BY OTHERS FUNCTIONS
+
 # draws a separator line with terminal width
 function separator() {
+	# CONFIG
 	local sep_char="═"           # ─ ═
 	local sep_color="\033[1;30m" # black
-	local terminal_width
+
 	local sep=""
-	terminal_width=$(tput cols)
-	for ((i = 0; i < terminal_width; i++)); do
+	for ((i = 0; i < COLUMNS; i++)); do
 		sep="$sep$sep_char"
 	done
 	print "$sep_color$sep\033[0m"
@@ -17,19 +18,16 @@ function inspect() {
 	# check if pwd still exists
 	if [[ ! -d "$PWD" ]]; then
 		printf '\033[1;33m"%s" has been moved or deleted.\033[0m' "$(basename "$PWD")"
-		printf '\033[1;33mGoing up a directory.\033[0m'
-		command cd .. || return 1 && return 0
+		printf '\033[1;33mGoing to last directory.\033[0m'
+		command cd - || return 1
 	fi
 
 	# CONFIG
 	local max_gitlog_lines=5
-	local max_files_lines=7
-
-	# guard clauses
-	if ! command -v eza &>/dev/null; then printf "\033[1;33meza not installed.\033[0m" && return 1; fi
-	if ! command -v git &>/dev/null; then printf "\033[1;33mgit not installed.\033[0m" && return 1; fi
+	local max_files_lines=5
 
 	# GIT LOG & STATUS
+	if ! command -v git &>/dev/null; then printf "\033[1;33mgit not installed.\033[0m" && return 1; fi
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
 		gitlog -n "$max_gitlog_lines"
 		separator
@@ -41,6 +39,7 @@ function inspect() {
 	fi
 
 	# FILES
+	if ! command -v eza &>/dev/null; then printf "\033[1;33meza not installed.\033[0m" && return 1; fi
 	local eza_output
 	eza_output=$(eza --width="$COLUMNS" --all --grid --color=always --icons \
 		--git-ignore --ignore-glob=".DS_Store|Icon?" \
@@ -50,7 +49,7 @@ function inspect() {
 	if [[ $(echo "$eza_output" | wc -l) -gt $max_files_lines ]]; then
 		echo "$eza_output" | head -n"$max_files_lines"
 		print "\033[1;34m(…)\033[0m" # blue = eza's default folder color
-	elif [[ -n "$eza_output" ]];then
+	elif [[ -n "$eza_output" ]]; then
 		echo "$eza_output"
 	fi
 }
@@ -138,7 +137,6 @@ function ld() {
 	z "$last_pwd"
 }
 
-
 # copies last command(s)
 function lc() {
 	num=${1-"1"} # default= 1 -> just last command
@@ -153,25 +151,3 @@ function lr() {
 	echo -n "$(eval "$last_command")" | pbcopy
 	echo "Copied."
 }
-
-# extract
-function ex() {
-	if [[ -f $1 ]]; then
-		case $1 in
-		*.tar.bz2) tar -xjf "$1" ;;
-		*.tar.gz) tar -xzf "$1" ;;
-		*.tar.zsr) tar --use-compress-program=unzstd -xvf "$1" ;;
-		*.rar) unrar -e "$1" ;;
-		*.gz) gunzip "$1" ;;
-		*.tar) tar -xf "$1" ;;
-		*.tbz2) tar -xjf "$1" ;;
-		*.tgz) tar -xzf "$1" ;;
-		*.zip) unzip "$1" ;;
-		*.Z) uncompress "$1" ;;
-		*) echo "'$1' cannot be extracted via ´ex´" ;;
-		esac
-	else
-		echo "'$1' is not a valid file"
-	fi
-}
-

@@ -221,34 +221,4 @@ end
 
 --------------------------------------------------------------------------------
 
----Apply if the file is empty. Add to a filetype config to
----activate templates for it.
----@param ext string extension of the skeleton
-function M.applyTemplateIfEmptyFile(ext)
-	if vim.b.templateWasApplied then return end -- prevent duplicate application of template
-	vim.b.templateWasApplied = true ---@diagnostic disable-line: inject-field
-
-	vim.defer_fn(function()
-		local filename = vim.fn.expand("%")
-		local fileDoesNotExit = vim.loop.fs_stat(filename) == nil
-		if fileDoesNotExit then return end
-
-		local skeletonFile = vim.fn.stdpath("config") .. "/templates/skeleton." .. ext
-		local noSkeleton = vim.loop.fs_stat(skeletonFile) == nil
-		if noSkeleton then
-			vim.notify("Skeleton file not found.", vim.log.levels.ERROR)
-			return
-		end
-
-		local fileIsEmpty = vim.loop.fs_stat(filename).size < 4 -- account for linebreaks
-		if not fileIsEmpty then return end
-
-		vim.cmd("silent keepalt 0read " .. skeletonFile)
-		M.normal("G")
-	end, 1)
-end
-
-
---------------------------------------------------------------------------------
-
 return M
