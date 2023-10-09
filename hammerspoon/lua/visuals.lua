@@ -12,7 +12,7 @@ if roundedCorners then roundedCorners:start() end
 
 ---to stop wallpaper shining through
 ---@param arg? any
----@param toMode? string
+---@param toMode? "dark"|"light"
 function M.holeCover(arg, toMode)
 	if not toMode then toMode = u.isDarkMode() and "dark" or "light" end
 

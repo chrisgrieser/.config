@@ -106,7 +106,7 @@ DailyConsoleSeperator = hs.timer
 --------------------------------------------------------------------------------
 local M = {}
 
----@param toMode? string
+---@param toMode? "dark"|"light"
 function M.setConsoleColors(toMode)
 	if not toMode then toMode = u.isDarkMode() and "dark" or "light" end
 

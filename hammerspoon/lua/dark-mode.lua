@@ -5,7 +5,7 @@ local u = require("lua.utils")
 local visuals = require("lua.visuals")
 --------------------------------------------------------------------------------
 
--- done manually to include app-specific toggling for:
+-- INFO done manually to include app-specific toggling for:
 -- - Neovim
 -- - Highlights PDF appearance
 -- - Sketchybar
@@ -13,6 +13,7 @@ local visuals = require("lua.visuals")
 ---@param toMode "dark"|"light"|"toggle"
 function M.setDarkMode(toMode)
 	if toMode == "toggle" then toMode = u.isDarkMode() and "light" or "dark" end
+	---@cast toMode "dark"|"light"
 
 	-- neovim
 	-- stylua: ignore
@@ -44,19 +45,14 @@ end
 
 -- MANUAL TOGGLING OF DARK MODE
 -- `del` key on Keychron Keyboard
-u.hotkey({}, "f13", function()
-	M.setDarkMode("toggle")
-	local brightness = math.floor(hs.brightness.ambient())
-	local hasBrightnessSensor = brightness > -1
-	if hasBrightnessSensor then u.notify("☀️ Brightness:", tostring(brightness)) end
-end)
+u.hotkey({}, "f13", function() M.setDarkMode("toggle") end)
 
 --------------------------------------------------------------------------------
 
 -- autoswitch dark mode and light mode
 -- If device has brightness sensor, uses a threshold to determine whether to
 -- change. Otherwise, changes based on the time of day.
-function M.AutoSwitch()
+function M.autoSwitch()
 	local brightness = hs.brightness.ambient()
 	local hasBrightnessSensor = brightness > -1
 	local targetMode
