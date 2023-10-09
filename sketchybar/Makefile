@@ -2,5 +2,5 @@
 
 reload: # sketchybarrc
 	sketchybar --reload
-	echo "✅ sketchybar config"
+	echo " sketchybar config"
 
