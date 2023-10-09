@@ -11,7 +11,7 @@ local u = require("config.utils")
 vim.filetype.add {
 	extension = {
 		zsh = "sh",
-		sh = "sh", -- so .sh files with zsh-shebang still get sh filetype
+		sh = "sh", -- force sh-files with zsh-shebang to still get sh as filetype
 	},
 	filename = {
 		[".zshrc"] = "sh",
@@ -159,6 +159,8 @@ autocmd("FileType", {
 	callback = function() opt_local.formatoptions:remove("o") end,
 })
 
+--------------------------------------------------------------------------------
+
 -- auto-nohl -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
 vim.on_key(function(char)
 	local key = vim.fn.keytrans(char)
@@ -180,9 +182,46 @@ vim.on_key(function(char)
 
 	-- nvim-hlslens plugin
 	if searchConfirmed or searchMovement then
-		local ok, hlslens = pcall(require, "hlslens")
-		if ok then hlslens.start() end
+		local installed, hlslens = pcall(require, "hlslens")
+		if installed then hlslens.start() end
 	end
 end, vim.api.nvim_create_namespace("auto_nohl"))
+
+--------------------------------------------------------------------------------
+
+-- filetype -> extension
+local skeletons = {
+	python = "py",
+	applescript = "applescript",
+	javascript = "jxa",
+	make = "make",
+	sh = "zsh",
+}
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = vim.tbl_keys(skeletons),
+	callback = function(ctx)
+		vim.defer_fn(function()
+			local fileStats = vim.loop.fs_stat(vim.fn.expand("%"))
+			local specialBuffer = vim.bo.buftype ~= ""
+			if specialBuffer or not fileStats then return end
+
+			local filetype = ctx.match
+			local ext = skeletons[filetype]
+			local skeletonFile = vim.fn.stdpath("config") .. "/templates/skeleton." .. ext
+			local noSkeleton = vim.loop.fs_stat(skeletonFile) == nil
+			if noSkeleton then
+				u.notify("Skeleton", "Skeleton file not found.", "error")
+				return
+			end
+
+			local fileIsEmpty = fileStats.size < 4 -- account for linebreaks
+			if not fileIsEmpty then return end
+
+			vim.cmd("silent keepalt 0read " .. skeletonFile)
+			u.normal("G")
+		end, 1)
+	end,
+})
 
 --------------------------------------------------------------------------------
