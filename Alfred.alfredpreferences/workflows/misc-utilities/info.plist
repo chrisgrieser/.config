@@ -83,19 +83,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>BA7E00FB-F43B-4DDF-869D-A9DB23200405</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F34FCF8E-937F-468A-8727-48A458BF4FA9</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>E99EAF40-8819-42A3-BBED-A3BC465A0D66</key>
 		<array>
 			<dict>
@@ -238,352 +225,47 @@ end tell</string>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>68</integer>
+				<integer>102</integer>
 				<key>script</key>
-				<string>function run(input, parameters) {
-
-  const appNames = [];
-  const skipAppNames = [];
-  const verbose = true;
-
-  const scriptName = "close_notifications_applescript";
-
-  const CLEAR_ALL_ACTION = "Clear All";
-  const CLEAR_ALL_ACTION_TOP = "Clear";
-  const CLOSE_ACTION = "Close";
-
-  const notNull = (val) =&gt; {
-    return val !== null &amp;&amp; val !== undefined;
-  };
-
-  const isNull = (val) =&gt; {
-    return !notNull(val);
-  };
-
-  const notNullOrEmpty = (val) =&gt; {
-    return notNull(val) &amp;&amp; val.length &gt; 0;
-  };
-
-  const isNullOrEmpty = (val) =&gt; {
-    return !notNullOrEmpty(val);
-  };
-
-  const isError = (maybeErr) =&gt; {
-    return notNull(maybeErr) &amp;&amp; (maybeErr instanceof Error || maybeErr.message);
-  };
-
-  const systemVersion = () =&gt; {
-    return Application("Finder").version().split(".").map(val =&gt; parseInt(val));
-  };
-
-  const systemVersionGreaterThanOrEqualTo = (vers) =&gt; {
-    return systemVersion()[0] &gt;= vers;
-  };
-
-  const isBigSurOrGreater = () =&gt; {
-    return systemVersionGreaterThanOrEqualTo(11);
-  };
-
-  const V11_OR_GREATER = isBigSurOrGreater();
-  const V12 = systemVersion()[0] === 12;
-  const APP_NAME_MATCHER_ROLE = V11_OR_GREATER ? "AXStaticText" : "AXImage";
-  const hasAppNames = notNullOrEmpty(appNames);
-  const hasSkipAppNames = notNullOrEmpty(skipAppNames);
-  const hasAppNameFilters = hasAppNames || hasSkipAppNames;
-  const appNameForLog = hasAppNames ? ` [${appNames.join(",")}]` : "";
-
-  const logs = [];
-  const log = (message, ...optionalParams) =&gt; {
-    let message_with_prefix = `${new Date().toISOString().replace("Z", "").replace("T", " ")} [${scriptName}]${appNameForLog} ${message}`;
-    console.log(message_with_prefix, optionalParams);
-    logs.push(message_with_prefix);
-  };
-
-  const logError = (message, ...optionalParams) =&gt; {
-    if (isError(message)) {
-      let err = message;
-      message = `${err}${err.stack ? (" " + err.stack) : ""}`;
-    }
-    log(`ERROR ${message}`, optionalParams);
-  };
-
-  const logErrorVerbose = (message, ...optionalParams) =&gt; {
-    if (verbose) {
-      logError(message, optionalParams);
-    }
-  };
-
-  const logVerbose = (message) =&gt; {
-    if (verbose) {
-      log(message);
-    }
-  };
-
-  const getLogLines = () =&gt; {
-    return logs.join("\n");
-  };
-
-  const getSystemEvents = () =&gt; {
-    let systemEvents = Application("System Events");
-    systemEvents.includeStandardAdditions = true;
-    return systemEvents;
-  };
-
-  const getNotificationCenter = () =&gt; {
-    try {
-      return getSystemEvents().processes.byName("NotificationCenter");
-    } catch (err) {
-      logError("Could not get NotificationCenter");
-      throw err;
-    }
-  };
-
-  const getNotificationCenterGroups = (retryOnError = false) =&gt; {
-    try {
-      let notificationCenter = getNotificationCenter();
-      if (notificationCenter.windows.length &lt;= 0) {
-        return [];
-      }
-      if (!V11_OR_GREATER) {
-        return notificationCenter.windows();
-      }
-      if (V12) {
-        return notificationCenter.windows[0].uiElements[0].uiElements[0].uiElements();
-      }
-      return notificationCenter.windows[0].uiElements[0].uiElements[0].uiElements[0].uiElements();
-    } catch (err) {
-      logError("Could not get NotificationCenter groups");
-      if (retryOnError) {
-        logError(err);
-        log("Retrying getNotificationCenterGroups...");
-        return getNotificationCenterGroups(false);
-      } else {
-        throw err;
-      }
-    }
-  };
-
-  const isClearButton = (description, name) =&gt; {
-    return description === "button" &amp;&amp; name === CLEAR_ALL_ACTION_TOP;
-  };
-
-  const matchesAnyAppNames = (value, checkValues) =&gt; {
-    if (isNullOrEmpty(checkValues)) {
-      return false;
-    }
-    let lowerAppName = value.toLowerCase();
-    for (let checkValue of checkValues) {
-      if (lowerAppName === checkValue.toLowerCase()) {
-        return true;
-      }
-    }
-    return false;
-  };
-
-  const matchesAppName = (role, value) =&gt; {
-    if (role !== APP_NAME_MATCHER_ROLE) {
-      return false;
-    }
-    if (hasAppNames) {
-      return matchesAnyAppNames(value, appNames);
-    }
-    return !matchesAnyAppNames(value, skipAppNames);
-  };
-
-  const notificationGroupMatches = (group) =&gt; {
-    try {
-      let description = group.description();
-      if (V11_OR_GREATER &amp;&amp; isClearButton(description, group.name())) {
-        return true;
-      }
-      if (V11_OR_GREATER &amp;&amp; description !== "group") {
-        return false;
-      }
-      if (!V11_OR_GREATER) {
-        let matchedAppName = !hasAppNameFilters;
-        if (!matchedAppName) {
-          for (let elem of group.uiElements()) {
-            if (matchesAppName(elem.role(), elem.description())) {
-              matchedAppName = true;
-              break;
-            }
-          }
-        }
-        if (matchedAppName) {
-          return notNull(findCloseActionV10(group, -1));
-        }
-        return false;
-      }
-      if (!hasAppNameFilters) {
-        return true;
-      }
-      let firstElem = group.uiElements[0];
-      return matchesAppName(firstElem.role(), firstElem.value());
-    } catch (err) {
-      logErrorVerbose(`Caught error while checking window, window is probably closed: ${err}`);
-      logErrorVerbose(err);
-    }
-    return false;
-  };
-
-  const findCloseActionV10 = (group, closedCount) =&gt; {
-    try {
-      for (let elem of group.uiElements()) {
-        if (elem.role() === "AXButton" &amp;&amp; elem.title() === CLOSE_ACTION) {
-          return elem.actions["AXPress"];
-        }
-      }
-    } catch (err) {
-      logErrorVerbose(`(group_${closedCount}) Caught error while searching for close action, window is probably closed: ${err}`);
-      logErrorVerbose(err);
-      return null;
-    }
-    log("No close action found for notification");
-    return null;
-  };
-
-  const findCloseAction = (group, closedCount) =&gt; {
-    try {
-      if (!V11_OR_GREATER) {
-        return findCloseActionV10(group, closedCount);
-      }
-      let checkForPress = isClearButton(group.description(), group.name());
-      let clearAllAction;
-      let closeAction;
-      for (let action of group.actions()) {
-        let description = action.description();
-        if (description === CLEAR_ALL_ACTION) {
-          clearAllAction = action;
-          break;
-        } else if (description === CLOSE_ACTION) {
-          closeAction = action;
-        } else if (checkForPress &amp;&amp; description === "press") {
-          clearAllAction = action;
-          break;
-        }
-      }
-      if (notNull(clearAllAction)) {
-        return clearAllAction;
-      } else if (notNull(closeAction)) {
-        return closeAction;
-      }
-    } catch (err) {
-      logErrorVerbose(`(group_${closedCount}) Caught error while searching for close action, window is probably closed: ${err}`);
-      logErrorVerbose(err);
-      return null;
-    }
-    log("No close action found for notification");
-    return null;
-  };
-
-  const closeNextGroup = (groups, closedCount) =&gt; {
-    try {
-      for (let group of groups) {
-        if (notificationGroupMatches(group)) {
-          let closeAction = findCloseAction(group, closedCount);
-
-          if (notNull(closeAction)) {
-            try {
-              closeAction.perform();
-              return [true, 1];
-            } catch (err) {
-              logErrorVerbose(`(group_${closedCount}) Caught error while performing close action, window is probably closed: ${err}`);
-              logErrorVerbose(err);
-            }
-          }
-          return [true, 0];
-        }
-      }
-      return false;
-    } catch (err) {
-      logError("Could not run closeNextGroup");
-      throw err;
-    }
-  };
-
-  try {
-    let groupsCount = getNotificationCenterGroups(true).filter(group =&gt; notificationGroupMatches(group)).length;
-
-    if (groupsCount &gt; 0) {
-      logVerbose(`Closing ${groupsCount}${appNameForLog} notification group${(groupsCount &gt; 1 ? "s" : "")}`);
-
-      let startTime = new Date().getTime();
-      let closedCount = 0;
-      let maybeMore = true;
-      let maxAttempts = 2;
-      let attempts = 1;
-      while (maybeMore &amp;&amp; ((new Date().getTime() - startTime) &lt;= (1000 * 30))) {
-        try {
-          let closeResult = closeNextGroup(getNotificationCenterGroups(), closedCount);
-          maybeMore = closeResult[0];
-          if (maybeMore) {
-            closedCount = closedCount + closeResult[1];
-          }
-        } catch (innerErr) {
-          if (maybeMore &amp;&amp; closedCount === 0 &amp;&amp; attempts &lt; maxAttempts) {
-            log(`Caught an error before anything closed, trying ${maxAttempts - attempts} more time(s).`)
-            attempts++;
-          } else {
-            throw innerErr;
-          }
-        }
-      }
-    } else {
-      throw Error(`No${appNameForLog} notifications found...`);
-    }
-  } catch (err) {
-    logError(err);
-    logError(err.message);
-    getLogLines();
-    throw err;
-  }
-
-  return getLogLines();
-}</string>
+				<string>if pgrep -xq "lo-rain" ; then
+	killall "lo-rain"
+else
+	open -a "lo-rain"
+fi</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/dismiss-notification.js</string>
+				<string></string>
 				<key>type</key>
-				<integer>8</integer>
+				<integer>11</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>F34FCF8E-937F-468A-8727-48A458BF4FA9</string>
+			<string>AF2E709C-56BA-4D78-AD00-074FC6326079</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>25</integer>
-				<key>hotmod</key>
-				<integer>1966080</integer>
-				<key>hotstring</key>
-				<string>9</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
+				<key>argumenttype</key>
 				<integer>2</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
+				<key>keyword</key>
+				<string>rain</string>
+				<key>subtext</key>
+				<string>lo-rain</string>
+				<key>text</key>
+				<string>Toggle Rain</string>
+				<key>withspace</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>BA7E00FB-F43B-4DDF-869D-A9DB23200405</string>
+			<string>A495CCCB-F21B-41F1-B7AA-E4A511EC63C4</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -655,88 +337,6 @@ end tell</string>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>if pgrep -xq "lo-rain" ; then
-	killall "lo-rain"
-else
-	open -a "lo-rain"
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>11</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>AF2E709C-56BA-4D78-AD00-074FC6326079</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>rain</string>
-				<key>subtext</key>
-				<string>lo-rain</string>
-				<key>text</key>
-				<string>Toggle Rain</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>A495CCCB-F21B-41F1-B7AA-E4A511EC63C4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>1</integer>
-				<key>filetypes</key>
-				<array>
-					<string>com.apple.application-bundle</string>
-				</array>
-				<key>name</key>
-				<string>Uninstall with AppCleaner</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>E99EAF40-8819-42A3-BBED-A3BC465A0D66</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string>/System/Volumes/Data/Applications/AppCleaner.app</string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>D9D1017F-1F5D-4562-8B69-0232E40032C5</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
 				<integer>68</integer>
 				<key>script</key>
 				<string>tell application "Karabiner-EventViewer" to if it is running then quit</string>
@@ -789,6 +389,40 @@ fi</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>1</integer>
+				<key>filetypes</key>
+				<array>
+					<string>com.apple.application-bundle</string>
+				</array>
+				<key>name</key>
+				<string>Uninstall with AppCleaner</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>E99EAF40-8819-42A3-BBED-A3BC465A0D66</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string>/System/Volumes/Data/Applications/AppCleaner.app</string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>D9D1017F-1F5D-4562-8B69-0232E40032C5</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -823,7 +457,7 @@ fi</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>295</real>
 		</dict>
 		<key>9734FC1B-0242-4229-B9BF-4A809F59C81E</key>
 		<dict>
@@ -832,7 +466,7 @@ fi</string>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>295</real>
 		</dict>
 		<key>A2960A81-02AB-485E-AF91-AEF7B502D533</key>
 		<dict>
@@ -854,7 +488,7 @@ fi</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>310</real>
+			<real>160</real>
 		</dict>
 		<key>AF2E709C-56BA-4D78-AD00-074FC6326079</key>
 		<dict>
@@ -863,18 +497,7 @@ fi</string>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>310</real>
-		</dict>
-		<key>BA7E00FB-F43B-4DDF-869D-A9DB23200405</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>note</key>
-			<string>dismiss notifications</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>165</real>
+			<real>160</real>
 		</dict>
 		<key>C120F733-C46F-44AC-ADAA-504E11D52028</key>
 		<dict>
@@ -933,15 +556,6 @@ fi</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>F34FCF8E-937F-468A-8727-48A458BF4FA9</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>190</real>
-			<key>ypos</key>
-			<real>165</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

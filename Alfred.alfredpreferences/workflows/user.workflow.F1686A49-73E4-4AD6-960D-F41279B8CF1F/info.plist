@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.alfredapp.vitor.bannerbegone</string>
+	<key>category</key>
+	<string>⬇️</string>
+	<key>connections</key>
+	<dict>
+		<key>56056996-E906-4F4A-8EA9-FBEF1B6A826A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B0C35CAF-841A-4F23-8192-F4888C603092</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>831C449E-97B8-488E-AB60-CBD3842BB487</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B0C35CAF-841A-4F23-8192-F4888C603092</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Vítor Galvão</string>
+	<key>description</key>
+	<string>Close notification alerts</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Banner Be Gone</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>// Helpers
+function envVar(varName) {
+  return $.NSProcessInfo
+    .processInfo
+    .environment
+    .objectForKey(varName).js
+}
+
+// Constants
+const closeText = envVar("close_text")
+const clearAllText = envVar("clear_all_text")
+
+// Main
+Application("System Events")
+  .applicationProcesses.byName("NotificationCenter")
+  .windows[0]
+  .groups[0]
+  .scrollAreas[0]
+  .uiElements[0]
+  .groups()
+  .map(banner =&gt; banner.actions()
+    .find(action =&gt; action.description() === closeText || action.description() === clearAllText))
+  .forEach(banner =&gt; banner.perform())</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>7</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>B0C35CAF-841A-4F23-8192-F4888C603092</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>{var:clear_keyword}</string>
+				<key>subtext</key>
+				<string>Close notification banners</string>
+				<key>text</key>
+				<string>{const:alfred_workflow_name}</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>831C449E-97B8-488E-AB60-CBD3842BB487</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>25</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>9</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>56056996-E906-4F4A-8EA9-FBEF1B6A826A</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>## Usage
+
+Clear macOS notification banners via the `notclear` keyword.
+
+![Clearing notification banners](images/about/notclear.png)
+
+Configure the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) for faster triggering.</string>
+	<key>uidata</key>
+	<dict>
+		<key>56056996-E906-4F4A-8EA9-FBEF1B6A826A</key>
+		<dict>
+			<key>xpos</key>
+			<real>45</real>
+			<key>ypos</key>
+			<real>180</real>
+		</dict>
+		<key>831C449E-97B8-488E-AB60-CBD3842BB487</key>
+		<dict>
+			<key>xpos</key>
+			<real>45</real>
+			<key>ypos</key>
+			<real>45</real>
+		</dict>
+		<key>B0C35CAF-841A-4F23-8192-F4888C603092</key>
+		<dict>
+			<key>xpos</key>
+			<real>275</real>
+			<key>ypos</key>
+			<real>45</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>notclear</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>The keyword to clear visible notifications.</string>
+			<key>label</key>
+			<string>Clear Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>clear_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>Close</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Individual Banners</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>close_text</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>Clear All</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>The descriptions used on the different types of notifications. Change these to your language if your system is not in English.</string>
+			<key>label</key>
+			<string>Grouped Banners</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>clear_all_text</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string>2023.1</string>
+	<key>webaddress</key>
+	<string>https://github.com/alfredapp/banner-be-gone-workflow/</string>
+</dict>
+</plist>
