@@ -3,7 +3,7 @@ local defaultSources = {
 	{ name = "nvim_lsp" },
 	{ name = "treesitter" },
 	{ name = "path" },
-	emojis = { name = "emoji", keyword_length = 2 },
+	{ name = "emoji", keyword_length = 2 },
 }
 local source_icons = {
 	treesitter = "",

@@ -155,9 +155,10 @@ keymap("c", "<C-u>", "<C-e><C-u>") -- clear full line
 keymap("c", "<C-w>", "<C-r><C-w>") -- add word under cursor
 keymap("c", "<BS>", function()
 	local cmdLine = vim.fn.getcmdline()
+	local cmdPos = vim.fn.getcmdpos()
 	local cmdlineEmpty = cmdLine:find("^$")
-	local isIncRename = cmdLine:find("^IncRename $")
-	local isSubstitute = cmdLine:find("^%%? ?s ?/$")
+	local isIncRename = cmdLine:find("^IncRename ") and cmdPos < 12
+	local isSubstitute = cmdLine:find("^%% s/") and cmdPos < 6
 	if cmdlineEmpty or isIncRename or isSubstitute then return end
 	return "<BS>"
 end, { desc = "Restricted <BS>", expr = true })

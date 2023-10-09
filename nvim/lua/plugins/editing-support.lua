@@ -121,8 +121,8 @@ return {
 		"chrisgrieser/icon-picker.nvim",
 		branch = "patch-1",
 		keys = {
-			{ "<D-ö>", "<cmd>IconPickerInsert<CR>", mode = "i" },
-			{ "<D-ö>", "<cmd>IconPickerNormal<CR>" },
+			{ "<D-ö>", function() vim.cmd("IconPickerNormal nerd_font symbols") end },
+			{ "<D-ö>", function() vim.cmd("IconPickerInsert nerd_font symbols") end, mode = "i" },
 		},
 		opts = { disable_legacy_commands = true },
 	},
