@@ -10,17 +10,10 @@ for type, icon in pairs(diagnosticTypes) do
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
--- BORDERS FOR FLOATS & VIRTUAL TEXT
--- INFO this needs to be disabled for noice.nvim
--- vim.lsp.handlers["textDocument/signatureHelp"] =
--- 	vim.lsp.with(vim.lsp.handlers.signature_help, { border = u.borderStyle })
--- vim.lsp.handlers["textDocument/hover"] =
--- vim.lsp.with(vim.lsp.handlers.hover, { border = u.borderStyle })
-
 --------------------------------------------------------------------------------
 
 ---@param diag Diagnostic
----@return string text to display
+---@return string
 local function diagnosticFmt(diag)
 	local source = diag.source and " (" .. diag.source:gsub("%.$", "") .. ")" or ""
 	return diag.message .. source
@@ -41,4 +34,3 @@ vim.diagnostic.config {
 		header = "", -- remove "Diagnostics:" heading
 	},
 }
-
