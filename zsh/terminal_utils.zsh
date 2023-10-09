@@ -17,8 +17,7 @@ function separator() {
 function inspect() {
 	# check if pwd still exists
 	if [[ ! -d "$PWD" ]]; then
-		printf '\033[1;33m"%s" has been moved or deleted.\033[0m' "$(basename "$PWD")"
-		printf '\033[1;33mGoing to last directory.\033[0m'
+		printf '\033[1;33m"%s" has been moved or deleted. Going to last directory.\033[0m' "$(basename "$PWD")"
 		command cd - || return 1
 	fi
 
@@ -76,7 +75,7 @@ function o() {
 	selected=$(
 		fd --type=file --type=symlink --color=always | fzf \
 			-0 -1 --ansi --query="$input" --info=inline \
-			--header="^H hidden & ignored  ^D directories" \
+			--header="^H --hidden --no-ignore   ^D directories" \
 			--bind="ctrl-h:reload(fd --hidden --no-ignore --type=file --type=symlink --color=always)" \
 			--preview '[[ -f {} ]] && bat --color=always --style=snip --wrap=never --tabs=2 {} || eza --icons --color=always --group-directories-first {}'
 	)
