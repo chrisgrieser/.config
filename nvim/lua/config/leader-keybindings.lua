@@ -106,11 +106,7 @@ local function codeActionFilter(action)
 		and not (title:find("on this line"))
 		and (kind == "quickfix" or kind == "refactor.rewrite")
 
-	-- in python, ignore ruff actions except for line disables
-	local ignoreInPython = ft == "python"
-		and title:find("^Ruff")
-		and not (title:find("Disable for this line$"))
-	return not (ignoreInLua or ignoreInPython)
+	return not (ignoreInLua)
 end
 
 -- INFO use `lua require('nvim-lightbulb').debug()` to inspect code action kinds
