@@ -1,5 +1,4 @@
 local api = vim.api
-local autocmd = vim.api.nvim_create_autocmd
 local cmd = vim.cmd
 local expand = vim.fn.expand
 local fn = vim.fn
@@ -259,26 +258,5 @@ keymap("n", "<leader>V", ":IncRename <C-r><C-w>", { desc = "󰒕 IncRename (cwor
 
 -- "v" instead of "x", so signature can be shown during snippet completion
 keymap({ "n", "i", "v" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰒕 Signature Help" })
-
---------------------------------------------------------------------------------
-
--- Q / ESC TO CLOSE SPECIAL WINDOWS
-
-autocmd("FileType", {
-	pattern = {
-		"help",
-		"help",
-		"lspinfo",
-		"lazy",
-		"noice",
-		"DressingSelect", -- done here and not as dressing keybinding to be able to set `nowait`
-		"DressingInput",
-	},
-	callback = function()
-		local opts = { buffer = true, nowait = true, desc = "󱎘 Close", unique = false }
-		keymap("n", "<Esc>", cmd.close, opts)
-		keymap("n", "q", cmd.close, opts)
-	end,
-})
 
 --------------------------------------------------------------------------------

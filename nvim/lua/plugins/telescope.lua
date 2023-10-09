@@ -161,6 +161,13 @@ local function telescopeConfig()
 				prompt_prefix = "󰊢 ",
 				show_untracked = true,
 				initial_mode = "normal",
+				mappings = {
+					n = {
+						["<Tab>"] = "move_selection_worse",
+						["<S-Tab>"] = "move_selection_better",
+						["<D-CR>"] = "git_staging_toggle",
+					},
+				},
 			},
 			git_commits = {
 				prompt_prefix = "󰊢 ",
@@ -263,9 +270,17 @@ return {
 			{ "gb", function() telescope("buffers") end, desc = " 󰽙 Buffers" },
 			{ "g.", function() telescope("resume") end, desc = " Continue" },
 			{ "gs", function() telescope("lsp_document_symbols") end, desc = "󰒕 Symbols" },
-			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
+			{
+				"gw",
+				function() telescope("lsp_workspace_symbols") end,
+				desc = "󰒕 Workspace Symbols",
+			},
 			{ "<leader>pg", function() telescope("highlights") end, desc = " Highlight Groups" },
-			{ "<leader>pc", function() telescope("colorscheme") end, desc = " Change Colorschemes" },
+			{
+				"<leader>pc",
+				function() telescope("colorscheme") end,
+				desc = " Change Colorschemes",
+			},
 			{ "<leader>gs", function() telescope("git_status") end, desc = " Status" },
 			{ "<leader>gl", function() telescope("git_commits") end, desc = " Log" },
 			{
@@ -276,14 +291,18 @@ return {
 			{
 				"go",
 				function()
-					require("telescope.builtin").find_files { prompt_title = "Find Files: " .. projectName() }
+					require("telescope.builtin").find_files {
+						prompt_title = "Find Files: " .. projectName(),
+					}
 				end,
 				desc = " Browse in Project",
 			},
 			{
 				"gl",
 				function()
-					require("telescope.builtin").live_grep { prompt_title = "Live Grep: " .. projectName() }
+					require("telescope.builtin").live_grep {
+						prompt_title = "Live Grep: " .. projectName(),
+					}
 				end,
 				desc = " Browse in Project",
 			},
