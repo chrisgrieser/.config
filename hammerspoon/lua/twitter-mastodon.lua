@@ -6,7 +6,7 @@ local wf = hs.window.filter
 
 --------------------------------------------------------------------------------
 
--- simply scroll up without the mouse and without focussing the app
+-- simply scroll up without the mouse and without focusing the app
 local function scrollUp()
 	-- after quitting, it takes a few seconds until Twitter is fully quit,
 	-- therefore also checking for the main window existence
@@ -84,8 +84,11 @@ end
 --------------------------------------------------------------------------------
 -- TRIGGERS
 
+-- toggle mute when Zoom is running, otherwise scroll up
+u.hotkey({}, "home", scrollUp)
+
 -- once on system startup or reload
-scrollUp()
+if u.isSystemStart() then scrollUp() end
 
 TickerAppWatcher = aw.new(function(appName, event)
 	if appName == "CleanShot X" or appName == "Alfred" then return end
@@ -127,38 +130,26 @@ TickerWakeWatcher = c.new(function(event)
 end):start()
 
 -- show/hide twitter when other wins move
-Wf_SomeWindowActivity = wf
-	.new(true)
+Wf_SomeWindowActivity = wf.new(true)
 	:setOverrideFilter({ allowRoles = "AXStandardWindow", hasTitlebar = true })
 	:subscribe(wf.windowMoved, function(movedWin) showHideTickerApp(movedWin) end)
 	:subscribe(wf.windowCreated, function(createdWin) showHideTickerApp(createdWin) end)
 
 --------------------------------------------------------------------------------
-
--- toggle mute when Zoom is running, otherwise scroll up
-u.hotkey({}, "home", function()
-	if u.app("zoom.us") then
-		hs.alert.show("🔉/🔇")
-		u.keystroke({ "cmd", "shift" }, "a")
-	else
-		scrollUp()
-	end
-end)
-
 --------------------------------------------------------------------------------
 -- FIX pin to top not working yet in Ivory https://tapbots.social/@ivory/110651107834916828
-if env.tickerApp == "Ivory" then
-	local reloadMins = 3
-	IvoryReloadTimer = hs.timer
-		.doEvery(reloadMins * 60, function()
-			local ivory = u.app(env.tickerApp)
-			if not ivory then return end
+if env.tickerApp ~= "Ivory" then return end
 
-			-- only reload when not idle, so this does not prevent screensaver/sleep
-			local idle = hs.host.idleTime() > (reloadMins * 60 / 2)
-			if idle or ivory:isFrontmost() then return end
+local reloadMins = 3
+IvoryReloadTimer = hs.timer
+	.doEvery(reloadMins * 60, function()
+		local ivory = u.app(env.tickerApp)
+		if not ivory then return end
 
-			scrollUp()
-		end)
-		:start()
-end
+		-- only reload when not idle, so this does not prevent screensaver/sleep
+		local idle = hs.host.idleTime() > (reloadMins * 60 / 2)
+		if idle or ivory:isFrontmost() then return end
+
+		scrollUp()
+	end)
+	:start()

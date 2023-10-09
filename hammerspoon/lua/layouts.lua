@@ -87,7 +87,7 @@ local function movieLayout()
 	local targetMode = env.isAtMother and "mother-movie" or "movie" -- different PWAs due to not being M1 device
 	dockSwitcher(targetMode)
 	wu.iMacDisplay:setBrightness(0)
-	darkmode.set(true)
+	darkmode.setDarkMode("dark")
 	visuals.holeCover("remove")
 
 	u.openApps { "YouTube", "BetterTouchTool" }
@@ -117,7 +117,7 @@ local function selectLayout()
 	else
 		workLayout()
 	end
-	u.runWithDelays(1, function() IsLayouting = false end)
+	u.runWithDelays(1.5, function() IsLayouting = false end)
 end
 
 --------------------------------------------------------------------------------
@@ -169,7 +169,7 @@ DisplayCountWatcher = hs.screen.watcher
 
 		-- If at night switching back to one display, put iMac display to sleep
 		-- (this triggers when the projector is turned off before going to sleep)
-		if u.betweenTime(22, 7) and not env.isProjector() then hs.caffeinate.systemSleep() end
+		if u.betweenTime(21, 7) and not env.isProjector() then hs.caffeinate.systemSleep() end
 	end)
 	:start()
 

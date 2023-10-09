@@ -10,50 +10,48 @@ local visuals = require("lua.visuals")
 -- - Highlights PDF appearance
 -- - Sketchybar
 -- - Hammerspoon Console
-local function toggleDarkMode()
-	local toMode = u.isDarkMode() and "light" or "dark"
+---@param toMode "dark"|"light"|"toggle"
+function M.setDarkMode(toMode)
+	if toMode == "toggle" then toMode = u.isDarkMode() and "light" or "dark" end
 
 	-- neovim
 	-- stylua: ignore
 	local nvimLuaCmd = ([[<cmd>lua require('config.theme-customization').setThemeMode('%s')<CR>]]):format(toMode)
-	local shellCmd = ([[nvim --server "/tmp/nvim_server.pipe" --remote-send "%s"]]):format(nvimLuaCmd)
-	hs.execute(u.exportPath .. shellCmd)
+	hs.execute(
+		u.exportPath
+			.. ([[nvim --server "/tmp/nvim_server.pipe" --remote-send "%s"]]):format(nvimLuaCmd)
+	)
 
 	-- Highlights PDF background
 	if u.appRunning("Highlights") then
-		local pdfBg = u.isDarkMode() and "Default" or "Night"
+		local pdfBg = toMode == "light" and "Default" or "Night"
 		u.app("Highlights"):selectMenuItem { "View", "PDF Appearance", pdfBg }
 	end
 
 	-- System
+	local bool = toMode == "light" and "false" or "true"
 	u.applescript(
-		'tell application "System Events" to tell appearance preferences to set dark mode to not dark mode'
+		'tell application "System Events" to tell appearance preferences to set dark mode to ' .. bool
 	)
-	visuals.holeCover() -- must come after OS color change
-
-	-- hammerspoon console
-	console.setConsoleColors() -- must come after OS color change
+	visuals.holeCover(nil, toMode)
 
 	-- sketchybar
 	hs.execute(u.exportPath .. "sketchybar --reload")
+
+	-- hammerspoon console
+	console.setConsoleColors(toMode)
 end
 
 -- MANUAL TOGGLING OF DARK MODE
 -- `del` key on Keychron Keyboard
 u.hotkey({}, "f13", function()
-	toggleDarkMode()
+	M.setDarkMode("toggle")
 	local brightness = math.floor(hs.brightness.ambient())
 	local hasBrightnessSensor = brightness > -1
 	if hasBrightnessSensor then u.notify("☀️ Brightness:", tostring(brightness)) end
 end)
 
 --------------------------------------------------------------------------------
-
----@param toDark boolean true = dark, false = light
-function M.set(toDark)
-	if ((u.isDarkMode()) and toDark) or (not u.isDarkMode() and not toDark) then return end
-	toggleDarkMode()
-end
 
 -- autoswitch dark mode and light mode
 -- If device has brightness sensor, uses a threshold to determine whether to
@@ -71,10 +69,10 @@ function M.AutoSwitch()
 	end
 
 	if targetMode == "light" and u.isDarkMode() then
-		M.set(false)
+		M.setDarkMode("light")
 		print("☀️ Auto-switching to Light Mode")
 	elseif targetMode == "dark" and not (u.isDarkMode()) then
-		M.set(true)
+		M.setDarkMode("dark")
 		print("🌔 Auto-switching to Dark Mode")
 	end
 end
