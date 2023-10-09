@@ -8,38 +8,34 @@ local fn = vim.fn
 ---@return string
 local function irregularWhitespace()
 	if bo.buftype ~= "" then return "" end
+	local out = {}
 
 	-- CONFIG
 	-- filetypes and the number of spaces they use. Omit or set to nil to use tabs for that filetype.
-	local spaceFiletypes = { python = 4, yaml = 2 }
+	local spaceFiletypes = { python = 4, yaml = 2, query = 2 }
 	local ignoredFiletypes = { "css" }
 	local linebreakType = "unix" ---@type "unix"|"mac"|"dos"
 	local icons = { unix = "", mac = "", dos = "", space = "󱁐", tab = "󰌒" }
 
 	-- non-default indentation setting (e.g. changed via guessIndent or editorconfig)
-	local indentation
 	local ft = bo.filetype
 	local spaceFtsOnly = vim.tbl_keys(spaceFiletypes)
 	local spacesInsteadOfTabs = bo.expandtab and not vim.tbl_contains(spaceFtsOnly, ft)
 	local differentSpaceAmount = bo.expandtab and spaceFiletypes[ft] ~= bo.tabstop
 	local tabsInsteadOfSpaces = not bo.expandtab and vim.tbl_contains(spaceFtsOnly, ft)
 	if spacesInsteadOfTabs or differentSpaceAmount then
-		indentation = icons.space .. " " .. tostring(bo.tabstop)
+		out.indentation = icons.space .. " " .. tostring(bo.tabstop)
 	elseif tabsInsteadOfSpaces then
-		indentation = icons.tab .. " " .. tostring(bo.tabstop)
+		out.indentation = icons.tab .. " " .. tostring(bo.tabstop)
 	end
-	if vim.tbl_contains(ignoredFiletypes, ft) then indentation = nil end
+	if vim.tbl_contains(ignoredFiletypes, ft) then out.indentation = nil end
 
 	-- line breaks
-	local linebreak
 	local irregularLinebreak = bo.fileformat ~= linebreakType
-	if irregularLinebreak then linebreak = "󰌑 " .. icons[bo.fileformat] .. " " end
+	if irregularLinebreak then out.linebreak = "󰌑 " .. icons[bo.fileformat] .. " " end
 
 	-- out
-	if indentation and linebreak then return indentation .. "  " .. linebreak end
-	if indentation and not linebreak then return indentation end
-	if not indentation and linebreak then return linebreak end
-	return ""
+	return table.concat(vim.tbl_values(out), " ")
 end
 
 --------------------------------------------------------------------------------

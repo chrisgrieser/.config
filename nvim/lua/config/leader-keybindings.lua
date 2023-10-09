@@ -32,10 +32,15 @@ keymap("n", "<leader>lg", ":<Up><CR>", { desc = "󰘳 Run last command again", s
 
 -- show current filetype & buftype
 keymap("n", "<leader>lf", function()
-	local out = "filetype: " .. bo.filetype
-	if bo.buftype ~= "" then out = out .. "\nbuftype: " .. bo.buftype end
-	u.notify("", out, "trace")
-end, { desc = "󰽘 Inspect FileType & BufType" })
+	local out = {
+		"filetype: " .. bo.filetype,
+		"buftype: " .. bo.buftype,
+		"scrolloff: " .. vim.opt_local.scrolloff:get(),
+		("indent: %s (%s)"):format(bo.expandtab and "spaces" or "tabs", bo.tabstop),
+		"node at cursor: " .. vim.treesitter.get_node():type(),
+	}
+	u.notify("Buffer Information", table.concat(out, "\n"), "trace")
+end, { desc = "󰽘 Inspect Buffer Info" })
 
 --------------------------------------------------------------------------------
 -- REFACTORING
@@ -132,10 +137,7 @@ keymap("n", "<leader>la", function() require("funcs.sawmill").assertLog() end, {
 -- stylua: ignore end
 
 keymap("n", "<leader>li", cmd.Inspect, { desc = " :Inspect" })
-keymap("n", "<leader>lt", function()
-	cmd.InspectTree()
-	vim.keymap.set("n", "q", vim.cmd.close, { nowait = true, buffer = true })
-end, { desc = " :InspectTree" })
+keymap("n", "<leader>lt", cmd.InspectTree, { desc = " :InspectTree" })
 
 --------------------------------------------------------------------------------
 
