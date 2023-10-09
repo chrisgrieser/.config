@@ -1,60 +1,19 @@
-local s = {
+local defaultSources = {
+	{ name = "luasnip" },
+	{ name = "nvim_lsp" },
+	{ name = "treesitter" },
+	{ name = "path" },
 	emojis = { name = "emoji", keyword_length = 2 },
-	nerdfont = { name = "nerdfont", keyword_length = 2 },
-	buffer = { name = "buffer", keyword_length = 4 },
-	fuzzy_buffer = { name = "fuzzy_buffer", max_item_count = 3 },
-	path = { name = "path" },
-	zsh = { name = "zsh" },
-	snippets = { name = "luasnip" },
-	lsp = { name = "nvim_lsp" },
-	treesitter = { name = "treesitter" },
-	cmdline_history = { name = "cmdline_history", keyword_length = 2 },
-	cmdline = { name = "cmdline" },
 }
 local source_icons = {
 	treesitter = "",
-	buffer = "󰽙",
-	fuzzy_buffer = "f",
 	zsh = "",
 	nvim_lsp = "󰒕",
 	luasnip = "󰞘",
-	emoji = "󰞅",
-	nerdfont = "󰇳",
 	path = "",
 	cmdline = "󰘳",
 	cmdline_history = "󰋚",
-}
-local defaultSources = {
-	s.snippets,
-	s.lsp,
-	s.treesitter,
-}
-local kind_icons = {
-	Text = "",
-	Method = "󰆧",
-	Function = "󰊕",
-	Constructor = "",
-	Field = "󰇽",
-	Variable = "󰂡",
-	Class = "󰠱",
-	Interface = "",
-	Module = "",
-	Property = "󰜢",
-	Unit = "",
-	Value = "󰎠",
-	Enum = "",
-	Keyword = "󰌋",
-	Snippet = "󰅱",
-	Color = "󰏘",
-	File = "󰈙",
-	Reference = "",
-	Folder = "󰉋",
-	EnumMember = "",
-	Constant = "󰏿",
-	Struct = "",
-	Event = "",
-	Operator = "󰆕",
-	TypeParameter = "󰅲",
+	emoji = "󰞅",
 }
 --------------------------------------------------------------------------------
 
@@ -66,16 +25,6 @@ local function cmpconfig()
 	cmp.setup {
 		snippet = {
 			expand = function(args) require("luasnip").lsp_expand(args.body) end,
-		},
-		performance = {
-			-- PERF lower values for lag-free performance
-			-- default values: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L18
-			-- explanations: https://github.com/hrsh7th/nvim-cmp/blob/main/doc/cmp.txt#L425
-			debounce = 30,
-			throttle = 15,
-			fetching_timeout = 200,
-			async_budget = 0.5,
-			max_view_entries = 100,
 		},
 		window = {
 			completion = {
@@ -135,6 +84,34 @@ local function cmpconfig()
 		formatting = {
 			fields = { "kind", "abbr", "menu" }, -- order of the fields
 			format = function(entry, item)
+				local kind_icons = {
+					Text = "",
+					Method = "󰆧",
+					Function = "󰊕",
+					Constructor = "",
+					Field = "󰇽",
+					Variable = "󰂡",
+					Class = "󰠱",
+					Interface = "",
+					Module = "",
+					Property = "󰜢",
+					Unit = "",
+					Value = "󰎠",
+					Enum = "",
+					Keyword = "󰌋",
+					Snippet = "󰅱",
+					Color = "󰏘",
+					File = "󰈙",
+					Reference = "",
+					Folder = "󰉋",
+					EnumMember = "",
+					Constant = "󰏿",
+					Struct = "",
+					Event = "",
+					Operator = "󰆕",
+					TypeParameter = "󰅲",
+				}
+
 				-- abbreviate length https://github.com/hrsh7th/nvim-cmp/discussions/609
 				-- (height is controlled via pumheight option)
 				local max_length = 50
@@ -150,97 +127,29 @@ local function cmpconfig()
 		},
 		sources = cmp.config.sources(defaultSources),
 	}
-end
 
---------------------------------------------------------------------------------
+	-----------------------------------------------------------------------------
 
-local function filetypeCompletionConfig()
-	local cmp = require("cmp")
-
-	-- disable in special filetypes
-	cmp.setup.filetype("", { enabled = false })
-
-	cmp.setup.filetype({ "lua" }, {
-		enabled = function() -- disable leading "-" in lua
+	-- LUA
+	cmp.setup.filetype("lua", {
+		enabled = function() -- disable annoying --#region suggestions
 			local line = vim.api.nvim_get_current_line()
 			return not (line:find("%s%-%-?$") or line:find("^%-%-?$"))
 		end,
 	})
 
-	cmp.setup.filetype("css", {
-		sources = cmp.config.sources { s.snippets, s.lsp },
-	})
-
-	cmp.setup.filetype("markdown", {
-		sources = cmp.config.sources {
-			s.snippets,
-			s.treesitter,
-			s.path, -- e.g. image paths
-			s.lsp,
-		},
-	})
-
+	-- ZSH
+	local defaultPlusZsh = vim.tbl_extend("keep", defaultSources, { name = "zsh" })
 	cmp.setup.filetype("sh", {
-		-- disable the annoying `\[` suggestion
-		enabled = function()
+		enabled = function() -- disable the annoying `\[` suggestion
 			local col = vim.fn.col(".") - 1
 			local charBefore = vim.api.nvim_get_current_line():sub(col, col)
 			return charBefore ~= "\\"
 		end,
-		sources = cmp.config.sources {
-			s.snippets,
-			s.zsh, -- completion from zsh itself
-			s.lsp,
-			s.path,
-			s.treesitter,
-		},
+		sources = cmp.config.sources(defaultPlusZsh),
 	})
 
-	cmp.setup.filetype("make", {
-		sources = cmp.config.sources {
-			s.path,
-			s.zsh,
-		},
-	})
-
-	-- in big bibliographies, other stuff performs too slow
-	cmp.setup.filetype("bib", {
-		sources = cmp.config.sources {
-			s.snippets,
-			s.buffer, -- for consistent keyword usage
-		},
-	})
-
-	-- config files
-	cmp.setup.filetype({ "conf", "ini", "gitignore" }, {
-		sources = cmp.config.sources {
-			s.snippets,
-			s.path,
-			s.buffer,
-		},
-	})
-
-	-- vimscript (e.g., obsidian.vimrc)
-	cmp.setup.filetype("vim", {
-		sources = cmp.config.sources {
-			s.snippets,
-			s.treesitter,
-			s.buffer,
-		},
-	})
-
-	-- plaintext
-	cmp.setup.filetype("text", {
-		sources = cmp.config.sources {
-			s.snippets,
-			s.buffer,
-		},
-	})
-end
-
-local function cmdlineCompletionConfig()
-	local cmp = require("cmp")
-
+	-- COMMANDLINE
 	cmp.setup.cmdline(":", {
 		mapping = cmp.mapping.preset.cmdline(),
 		enabled = function()
@@ -252,12 +161,18 @@ local function cmdlineCompletionConfig()
 			end
 			return true
 		end,
-		sources = cmp.config.sources { s.path, s.cmdline, s.cmdline_history },
+		sources = cmp.config.sources {
+			{ name = "path" },
+			{ name = "cmdline" },
+			{ name = "cmdline_history", keyword_length = 2 },
+		},
 	})
 
 	cmp.setup.cmdline({ "/", "?" }, {
 		mapping = cmp.mapping.preset.cmdline(),
-		sources = { s.fuzzy_buffer },
+		sources = {
+			{ name = "treesitter", max_item_count = 3 },
+		},
 	})
 end
 
@@ -267,31 +182,17 @@ return {
 	{ -- Completion Engine + Sources
 		"hrsh7th/nvim-cmp",
 		event = { "InsertEnter", "CmdlineEnter" },
-		config = function()
-			cmpconfig()
-			filetypeCompletionConfig()
-			cmdlineCompletionConfig()
-		end,
+		config = cmpconfig,
 		dependencies = {
-			"hrsh7th/cmp-buffer",
-			"tzachar/cmp-fuzzy-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
-			"dmitmel/cmp-cmdline-history",
 			"hrsh7th/cmp-emoji",
-			"chrisgrieser/cmp-nerdfont",
+			"dmitmel/cmp-cmdline-history",
 			"tamago324/cmp-zsh", -- some shell completions
 			"ray-x/cmp-treesitter",
 			"hrsh7th/cmp-nvim-lsp", -- LSP input
 			"L3MON4D3/LuaSnip", -- snippet engine
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
-		},
-	},
-	{ -- for fuzzy searching the buffer via /
-		"tzachar/cmp-fuzzy-buffer",
-		dependencies = {
-			"hrsh7th/nvim-cmp",
-			{ "tzachar/fuzzy.nvim", dependencies = "nvim-telescope/telescope-fzf-native.nvim" },
 		},
 	},
 	{ -- Snippet Engine
