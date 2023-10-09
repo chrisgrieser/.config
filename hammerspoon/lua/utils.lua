@@ -16,7 +16,7 @@ M.tbl_contains = hs.fnutils.contains
 M.hyper = { "cmd", "alt", "ctrl", "shift" }
 
 -- add path for `hs.execute()`
-M.exportPath = [[export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; ]]
+M.exportPath = "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
 
 --------------------------------------------------------------------------------
 

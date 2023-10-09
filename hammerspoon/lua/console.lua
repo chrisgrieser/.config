@@ -1,6 +1,5 @@
 local u = require("lua.utils")
 local cons = hs.console
-local aw = hs.application.watcher
 local wf = hs.window.filter
 --------------------------------------------------------------------------------
 
@@ -29,13 +28,12 @@ hs.consoleOnTop(false)
 -- HACK to fix https://www.reddit.com/r/hammerspoon/comments/11ao9ui/how_to_suppress_logging_for_hshotkeyenable/
 -- selene: allow(high_cyclomatic_complexity)
 local function cleanupConsole()
-	local isDark = u.isDarkMode()
-
 	local consoleOutput = tostring(cons.getConsole())
 	hs.console.clearConsole()
 	local consoleLines = hs.fnutils.split(consoleOutput, "\n+")
 	if not consoleLines then return end
 
+	-- remove some lines
 	local cleanLines = {}
 	for _, line in ipairs(consoleLines) do
 		local ignore = line:find("Loading extensions?: ")
@@ -50,6 +48,7 @@ local function cleanupConsole()
 	end
 
 	-- colorize certain messages
+	local isDark = u.isDarkMode()
 	for _, line in pairs(cleanLines) do
 		local color
 		if line:find("^> ") then -- user input
@@ -70,21 +69,20 @@ end
 
 -- clean up console as soon as it is opened
 -- hide console as soon as unfocused
-Wf_hsConsole = wf.new("Hammerspoon"):subscribe(wf.windowUnfocused, function(win)
-	if win:title() == "Hammerspoon Console" then u.app("Hammerspoon"):hide() end
-end)
-
-Aw_hsConsole = aw.new(function(appName, eventType)
-	if not (appName == "Hammerspoon" and eventType == aw.activated) then return end
-	cleanupConsole()
-end):start()
+Wf_hsConsole = wf.new("Hammerspoon")
+	:subscribe(wf.windowUnfocused, function(win)
+		if win:title() == "Hammerspoon Console" then u.app("Hammerspoon"):hide() end
+	end)
+	:subscribe(wf.windowFocused, function(win)
+		if win:title() == "Hammerspoon Console" then cleanupConsole() end
+	end)
 
 --------------------------------------------------------------------------------
 
 -- app-hotkeys
 u.appHotkey("Hammerspoon", "cmd", "q", hs.closeConsole) -- prevent accidental quitting
 u.appHotkey("Hammerspoon", "cmd", "k", hs.console.clearConsole)
-u.appHotkey("Hammerspoon", {"cmd", "shift"}, "c", function ()
+u.appHotkey("Hammerspoon", { "cmd", "shift" }, "c", function()
 	local consoleHistory = cons.getHistory()
 	if not consoleHistory then return end
 	local lastcommand = consoleHistory[#consoleHistory]
@@ -98,7 +96,9 @@ DailyConsoleSeperator = hs.timer
 	.doAt("00:00", "01d", function()
 		local date = os.date("%a, %d. %b")
 		print(
-			("\n-------------------------------- %s ------------------------------------\n"):format(date)
+			("\n-------------------------------- %s ------------------------------------\n"):format(
+				date
+			)
 		)
 	end, true)
 	:start()
@@ -106,10 +106,8 @@ DailyConsoleSeperator = hs.timer
 --------------------------------------------------------------------------------
 local M = {}
 
----@param toMode? "dark"|"light"
+---@param toMode "dark"|"light"
 function M.setConsoleColors(toMode)
-	if not toMode then toMode = u.isDarkMode() and "dark" or "light" end
-
 	if toMode == "dark" then
 		cons.darkMode(true)
 		cons.outputBackgroundColor(black)
@@ -122,7 +120,9 @@ function M.setConsoleColors(toMode)
 		cons.consoleCommandColor(darkGrey)
 	end
 end
-M.setConsoleColors() -- initialize
+
+-- initialize
+if u.isSystemStart() then M.setConsoleColors(u.isDarkMode() and "dark" or "light") end
 
 --------------------------------------------------------------------------------
 return M

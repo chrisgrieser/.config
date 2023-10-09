@@ -34,13 +34,13 @@ function M.setDarkMode(toMode)
 	u.applescript(
 		'tell application "System Events" to tell appearance preferences to set dark mode to ' .. bool
 	)
-	visuals.holeCover(nil, toMode)
 
 	-- sketchybar
 	hs.execute(u.exportPath .. "sketchybar --reload")
 
-	-- hammerspoon console
+	-- hammerspoon
 	console.setConsoleColors(toMode)
+	visuals.holeCover(toMode)
 end
 
 -- MANUAL TOGGLING OF DARK MODE

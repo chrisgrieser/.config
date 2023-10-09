@@ -37,6 +37,7 @@ local function notify(msg) hs.notify.show("Hammerspoon", "", msg) end
 local syncedRepos = {}
 local syncTasks = {}
 
+---@async
 ---@param repo { name: string, icon: string, scriptPath: string }
 local function repoSync(repo)
 	syncTasks[repo.name] = hs.task
@@ -61,6 +62,7 @@ local function syncInProgress()
 	return u.tbl_contains(isSyncing, true)
 end
 
+---@async
 ---@param notifyOnSuccess boolean set to false for regularly occurring syncs
 local function syncAllGitRepos(notifyOnSuccess)
 	if syncInProgress() then

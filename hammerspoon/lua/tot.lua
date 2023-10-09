@@ -1,5 +1,6 @@
 local u = require("lua.utils")
 local aw = hs.application.watcher
+local wu = require("lua.window-utils")
 --------------------------------------------------------------------------------
 -- COUNTER FOR SKETCHYBAR
 local function updateCounter() hs.execute(u.exportPath .. "sketchybar --trigger update-tot-count") end
@@ -9,26 +10,28 @@ local function updateCounter() hs.execute(u.exportPath .. "sketchybar --trigger 
 TotWatcher = aw.new(function(appName, event, tot)
 	if appName ~= "Tot" then return end
 
-	if event == aw.deactivated then
-		updateCounter()
-		if not u.isFront("Alfred") then tot:hide() end
+	if event == aw.deactivated or aw.launched then updateCounter() end
+	if event == aw.deactivated and not u.isFront("Alfred") then
+		if wu.CheckSize(tot:mainWindow(), wu.totCenter) then tot:hide() end
 	end
-	if event == aw.launched then updateCounter() end -- when count has changed via sync
 end):start()
 
 -- 2. On wake
 local c = hs.caffeinate.watcher
 WakeTot = c.new(function(event)
-	local hasWoken = event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock
+	local hasWoken = event == c.screensDidWake
+		or event == c.systemDidWake
+		or event == c.screensDidUnlock
 	if hasWoken then updateCounter() end
 end):start()
 
 --------------------------------------------------------------------------------
 -- REMINDERS -> TOT
+---@async
 local function remindersToTot()
 	local script = "./helpers/push-todays-reminders-to-tot.js"
 
-	-- run as task so it's non-blocking
+	-- run as task so it's not blocking
 	PushRemindersTask = hs.task
 		.new(script, function(exitCode, stdout, stderr)
 			if stdout == "" then return end
@@ -53,4 +56,4 @@ if u.isSystemStart() then
 end
 
 -- 2. Every morning
-MorningTimerForSidenotes = hs.timer.doAt("07:00", "01d", remindersToTot, true):start()
+MorningTimerForTot = hs.timer.doAt("07:00", "01d", remindersToTot, true):start()

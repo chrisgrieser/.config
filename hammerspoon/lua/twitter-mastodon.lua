@@ -64,7 +64,7 @@ local function showHideTickerApp(referenceWin)
 	local app = u.app(env.tickerApp)
 	if not app or not referenceWin or u.isFront("CleanShot X") then return end
 
-	if wu.CheckSize(referenceWin, wu.pseudoMax) or wu.CheckSize(referenceWin, wu.centerSection) then
+	if wu.CheckSize(referenceWin, wu.pseudoMax) or wu.CheckSize(referenceWin, wu.centerHalf) then
 		winToTheSide()
 		return
 	end
@@ -86,9 +86,6 @@ end
 
 -- toggle mute when Zoom is running, otherwise scroll up
 u.hotkey({}, "home", scrollUp)
-
--- once on system startup or reload
-if u.isSystemStart() then scrollUp() end
 
 TickerAppWatcher = aw.new(function(appName, event)
 	if appName == "CleanShot X" or appName == "Alfred" then return end

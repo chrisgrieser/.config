@@ -5,12 +5,9 @@ local u = require("config.utils")
 -- do not autowrap
 bo.formatoptions = bo.formatoptions:gsub("t", "")
 
--- for some reason, bib files have no comment string defined, even though they
+-- for some reason, bib files have no commentstring defined, even though they
 -- do have comments?
 bo.commentstring = "% %s"
-
--- off, since too many false negatives
-vim.opt_local.spell = false
 
 --------------------------------------------------------------------------------
 
