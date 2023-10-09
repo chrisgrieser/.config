@@ -1,6 +1,6 @@
 ; MODIFICATION OF THE ORIGINAL HIGHLIGHTS TO ADD MORE COMMON TAGS
 
-; DOCS
+; INFO
 ; Supposedly, this adding this file to the after directory should be enough to
 ; extend the query. https://github.com/nvim-treesitter/nvim-treesitter#adding-queries
 ;
@@ -8,11 +8,10 @@
 ; only possible to completely override the query. Therefore, this file is a copy
 ; of the comment highlights, modified to include some changes I like to have.
 ; https://github.com/nvim-treesitter/nvim-treesitter/blob/master/queries/comment/highlights.scm
-;
 ;───────────────────────────────────────────────────────────────────────────────
 
 ; added by me:
-; CONFIG SIC PENDING CAVEAT DATA
+; CONFIG SIC PENDING CAVEAT DATA GUARD
 
 ; test for this file to work
 ; FOOBAR TEST ERROR
@@ -27,10 +26,10 @@
   (name) @text.todo @nospell
   ("(" @punctuation.bracket (user) @constant ")" @punctuation.bracket)?
   ":" @punctuation.delimiter)
-  (#any-of? @text.todo "TODO" "WIP" "PENDING"))
+  (#any-of? @text.todo "TODO" "WIP" "PENDING" "GUARD"))
 
 ("text" @text.todo @nospell
- (#any-of? @text.todo "TODO" "WIP" "PENDING"))
+ (#any-of? @text.todo "TODO" "WIP" "PENDING" "GUARD"))
 
 ((tag
   (name) @text.note @nospell
