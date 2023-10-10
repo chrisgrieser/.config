@@ -5,7 +5,6 @@ local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
 --------------------------------------------------------------------------------
 -- CONFIG
 local commentHrChar = "─"
-local commentWidth = vim.opt_local.textwidth:get()
 local toggleSigns = {
 	["="] = "!",
 	["|"] = "&",
@@ -61,6 +60,7 @@ function M.commentHr()
 	end
 	if comStr:find("-") then commentHrChar = "-" end
 
+	local commentWidth = vim.opt_local.textwidth:get()
 	local linelength = commentWidth - indent - comStrLength
 
 	-- the common formatters (black and stylelint) demand extra spaces
@@ -185,9 +185,8 @@ end
 
 --------------------------------------------------------------------------------
 
+---Toggles a pin-window
 local pinWinNr
-
----Toggles pin-window
 function M.pinWin()
 	-- CONFIG
 	local width = 0.45
