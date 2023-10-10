@@ -362,19 +362,16 @@ nnoremap qq :contextualComment
 " Folding
 """"""""""""""""""""""
 " Emulate vim folding command
-exmap unfoldall obcommand editor:unfold-all
 exmap togglefold obcommand editor:toggle-fold
-exmap foldall obcommand editor:fold-all
-exmap foldless obcommand editor:fold-less
-exmap foldmore obcommand editor:fold-more
-
 nnoremap za :togglefold
 nnoremap zo :togglefold
 nnoremap zc :togglefold
+nnoremap ^ :togglefold
+
+exmap unfoldall obcommand editor:unfold-all
+exmap foldall obcommand editor:fold-all
 nnoremap zm :foldall
 nnoremap zr :unfoldall
-nnoremap ^ :foldmore
-nnoremap \ :foldless
 
 """"""""""""""""""""""
 " Option Toggling
