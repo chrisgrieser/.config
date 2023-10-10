@@ -18,7 +18,6 @@ local linters = {
 	bib = {},
 }
 
--- PENDING https://github.com/mfussenegger/nvim-lint/issues/355
 for ft, _ in pairs(linters) do
 	table.insert(linters[ft], "codespell")
 	table.insert(linters[ft], "editorconfig-checker")
@@ -202,7 +201,7 @@ return {
 	{ -- package manager
 		"williamboman/mason.nvim",
 		keys = {
-			{ "<leader>pm", vim.cmd.Mason, desc = " Mason Home" },
+			{ "<leader>pm", vim.cmd.Mason, desc = " Mason Home" },
 		},
 		opts = {
 			ui = {
@@ -221,7 +220,7 @@ return {
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		event = "VeryLazy",
 		keys = {
-			{ "<leader>pM", vim.cmd.MasonToolsUpdate, desc = " Mason Update" },
+			{ "<leader>pM", vim.cmd.MasonToolsUpdate, desc = " Mason Update" },
 		},
 		dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
 		config = function()
