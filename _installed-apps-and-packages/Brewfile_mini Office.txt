@@ -36,6 +36,7 @@ brew "ripgrep"
 brew "spotify-tui"
 brew "starship"
 brew "tesseract"
+brew "walk"
 brew "yq"
 brew "zoxide"
 brew "zsh-autopair"
@@ -73,7 +74,6 @@ cask "neovide"
 cask "obsidian"
 cask "replacicon"
 cask "shortcat"
-cask "sidenotes"
 cask "slack"
 cask "stats"
 cask "wezterm"
@@ -85,3 +85,4 @@ mas "lo-rain", id: 6446921886
 mas "Peek", id: 1554235898
 mas "Pixelmator Pro", id: 1289583905
 mas "ReadKit", id: 1615798039
+mas "Tot", id: 1491071483
