@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
-# INFO displays a preview of the current Tot content
 
 # ensure that this counter does not launch Tot
 pgrep -xq "Tot" || return 0
