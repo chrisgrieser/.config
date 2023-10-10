@@ -5,7 +5,7 @@ export WD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub"
 export DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder"
 export LOCAL_REPOS="$HOME/Repos"
 
-# define default pandoc location (HACK since pandoc does not allow default data-dirs)
+# define pandoc data location (HACK since pandoc does not allow default data-dirs)
 function pandoc() {
 	command pandoc --data-dir="$HOME/.config/pandoc" "$@"
 }
@@ -17,15 +17,13 @@ export ZDOTDIR="$HOME/.config/zsh"
 
 #───────────────────────────────────────────────────────────────────────────────
 # APPS
-
-# for CLIs
 export EDITOR=nvim
 
 # for my configs
 export BROWSER_DEFAULTS_PATH="BraveSoftware/Brave-Browser"
 export BROWSER_APP="Brave Browser" # not using "$BROWSER" since it's a reserved variable
 export MAIL_APP="Mimestream"
-export TICKER_APP="Ivory" # or Twitter/Mastodon
+export TICKER_APP="Ivory"
 
 #───────────────────────────────────────────────────────────────────────────────
 # Safe API keys outside the dotfile repo
@@ -35,7 +33,7 @@ export TICKER_APP="Ivory" # or Twitter/Mastodon
 #───────────────────────────────────────────────────────────────────────────────
 
 # NEOVIM
-# so linters managed by mason are available to other apps
+# so linters managed by mason are generally available
 export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
 
 #───────────────────────────────────────────────────────────────────────────────
