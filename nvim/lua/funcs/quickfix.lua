@@ -33,11 +33,8 @@ local function openFoldUnderCursor() cmd.normal { "zv", bang = true } end
 ---@nodiscard
 function M.counter()
 	local totalItems = countCurQuickfix()
-	if totalItems == 0 then return "" end
-	local out = " "
-	if qfCount then out = out .. tostring(qfCount) .. "/" end
-	out = out .. tostring(totalItems)
-	return out
+	if totalItems == 0 or not qfCount then return "" end
+	return (" %s/%s"):format(qfCount, totalItems)
 end
 
 --------------------------------------------------------------------------------

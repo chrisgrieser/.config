@@ -164,19 +164,14 @@ local lualineConfig = {
 		},
 		lualine_c = {
 			{
-				function() return require("funcs.quickfix").counter() end,
-				cond = function() return #vim.fn.getqflist() > 0 end,
+				require("funcs.quickfix").counter,
 			},
 		},
 		lualine_x = {
 			{
 				"diagnostics",
-				symbols = {
-					error = "ﮋ",
-					warn = "▲",
-					info = "♦",
-					hint = "",
-				},
+				-- symbols = { error = "󰅚 ", warn = " ", info = "󰋽 ", hint = "󰘥 " },
+				symbols = { error = "ﮋ", warn = "▲", info = "♦", hint = "" },
 			},
 			{ irregularWhitespace },
 		},

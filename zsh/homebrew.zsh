@@ -72,10 +72,8 @@ function update() {
 	print-section "DUMP INSTALL LISTS"
 	dump
 
-	print-section "Restarting Sketchybar"
-	# - sketchybar usually updated and then has to be restarted to give permission
-	# - also updates the homebrew status counter
-	brew services restart sketchybar
+	print-section "Reloading Sketchybar"
+	sketchybar --reload # also updates the homebrew status counter
 
 	osascript -e 'display notification "" with title "🍺 Homebrew finished." sound name "Blow"'
 }
