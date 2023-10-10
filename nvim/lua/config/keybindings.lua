@@ -10,7 +10,7 @@ local keymap = require("config.utils").uniqueKeymap
 keymap("n", "<D-,>", function()
 	local thisFilePath = debug.getinfo(1).source:sub(2)
 	cmd.edit(thisFilePath)
-end, { desc = "⌨️ Edit keybindings.lua" })
+end, { desc = "⌨️ Edit keybindings" })
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
@@ -30,9 +30,9 @@ keymap({ "n", "x" }, "K", "6gk")
 keymap("o", "J", "2j")
 
 -- Jump history
-keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
--- overwrites nvim default: https://neovim.io/doc/user/vim_diff.html#default-mappings
+-- non-unique, since it overwrites nvim default: https://neovim.io/doc/user/vim_diff.html#default-mappings
 keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward", unique = false })
+keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
 
 -- SEARCH
 keymap("n", "-", "/")
@@ -162,7 +162,7 @@ keymap("c", "<C-w>", "<C-r><C-w>") -- add word under cursor
 keymap("c", "<BS>", function()
 	local cmdLine = vim.fn.getcmdline()
 	local cmdPos = vim.fn.getcmdpos()
-	local cmdlineEmpty = cmdLine:find("^$")
+	local cmdlineEmpty = cmdLine == ""
 	local isIncRename = cmdLine:find("^IncRename ") and cmdPos < 12
 	local isSubstitute = cmdLine:find("^%% s/") and cmdPos < 6
 	if cmdlineEmpty or isIncRename or isSubstitute then return end
@@ -191,8 +191,12 @@ keymap("n", "<CR>", function()
 end, { desc = "󰽙 Alt Buffer" })
 keymap({ "n", "x", "i" }, "<C-CR>", "<C-w>w", { desc = " Next Window" })
 
--- stylua: ignore
-keymap({"n", "x", "i"}, "<D-w>", function() require("funcs.alt-alt").betterClose() end, { desc = "󰽙 close buffer/window" })
+keymap(
+	{ "n", "x", "i" },
+	"<D-w>",
+	function() require("funcs.alt-alt").betterClose() end,
+	{ desc = "󰽙 close buffer/window" }
+)
 
 keymap("n", "<C-w>h", "<cmd>split<CR>", { desc = " horizontal split" })
 keymap("n", "<C-w>v", "<cmd>vertical split<CR>", { desc = " vertical split" })
