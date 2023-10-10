@@ -171,7 +171,12 @@ local lualineConfig = {
 		lualine_x = {
 			{
 				"diagnostics",
-				symbols = { error = "󰅚 ", warn = " ", info = "󰋽 ", hint = "󰘥 " },
+				symbols = {
+					error = "ﮋ",
+					warn = "▲",
+					info = "♦",
+					hint = "",
+				},
 			},
 			{ irregularWhitespace },
 		},

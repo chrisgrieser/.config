@@ -33,7 +33,7 @@ vim.diagnostic.config {
 	float = {
 		severity_sort = true,
 		border = require("config.utils").borderStyle,
-		max_width = 70,
+		max_width = 65,
 		header = false,
 		prefix = function(_, _, total)
 			if total == 1 then return "" end

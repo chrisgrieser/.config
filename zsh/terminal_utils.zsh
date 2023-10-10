@@ -23,7 +23,7 @@ function inspect() {
 
 	# CONFIG
 	local max_gitlog_lines=5
-	local max_files_lines=5
+	local max_files_lines=6
 
 	# GIT LOG & STATUS
 	if ! command -v git &>/dev/null; then printf "\033[1;33mgit not installed.\033[0m" && return 1; fi
