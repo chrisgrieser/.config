@@ -1,4 +1,5 @@
-local u = require("config.utils")
+local textobjMaps = require("config.utils").textobjMaps
+--------------------------------------------------------------------------------
 
 local tsConfig = {
 	-- easier than keeping track of new parsers, especially the special ones,
@@ -40,12 +41,12 @@ local tsConfig = {
 				-- stylua: ignore start
 				["iu"] = { query = "@loop.inner", desc = "󱡔 inner loop textobj" }, -- mnemonic: luup
 				["au"] = { query = "@loop.outer", desc = "󱡔 outer loop textobj" },
-				["a" .. u.textobjMaps["function"]] = { query = "@function.outer", desc = "󱡔 outer function textobj" },
-				["i" .. u.textobjMaps["function"]] = { query = "@function.inner", desc = "󱡔 inner function textobj" },
-				["a" .. u.textobjMaps["conditional"]] = { query = "@conditional.outer", desc = "󱡔 outer conditional textobj" },
-				["i" .. u.textobjMaps["conditional"]] = { query = "@conditional.inner", desc = "󱡔 inner conditional textobj" },
-				["a" .. u.textobjMaps["call"]] = { query = "@call.outer", desc = "󱡔 outer call textobj" },
-				["i" .. u.textobjMaps["call"]] = { query = "@call.inner", desc = "󱡔 inner call textobj" },
+				["a" .. textobjMaps.func] = { query = "@function.outer", desc = "󱡔 outer function textobj" },
+				["i" .. textobjMaps.func] = { query = "@function.inner", desc = "󱡔 inner function textobj" },
+				["a" .. textobjMaps.cond] = { query = "@conditional.outer", desc = "󱡔 outer cond. textobj" },
+				["i" .. textobjMaps.cond] = { query = "@conditional.inner", desc = "󱡔 inner cond. textobj" },
+				["a" .. textobjMaps.call] = { query = "@call.outer", desc = "󱡔 outer call textobj" },
+				["i" .. textobjMaps.call] = { query = "@call.inner", desc = "󱡔 inner call textobj" },
 				-- stylua: ignore end
 
 				-- INFO later remapped to q only in operator pending mode to avoid conflict
@@ -69,7 +70,7 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		event = "VeryLazy",
 		build = ":TSUpdate",
-		-- main = "nvim-treesitter.configs",
+		main = "nvim-treesitter.configs",
 		opts = tsConfig,
 	},
 
