@@ -197,7 +197,7 @@ local function controlSpaceAction()
 
 	if u.isFront("Tot") then
 		pos = M.CheckSize(curWin, M.totCenter) and M.centerHalf or M.totCenter
-	elseif u.isFront { "Finder", "Script Editor" } then
+	elseif u.isFront { "Finder", "Script Editor", "Reminders" } then
 		pos = M.CheckSize(curWin, M.centerHalf) and M.maximized or M.centerHalf
 	else
 		pos = M.CheckSize(curWin, M.pseudoMax) and M.maximized or M.pseudoMax

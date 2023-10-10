@@ -1,11 +1,8 @@
 local bo = vim.bo
 local fn = vim.fn
-
 --------------------------------------------------------------------------------
 
 -- displays irregular indentation and linebreaks, displays nothing when all is good
----@nodiscard
----@return string
 local function irregularWhitespace()
 	if bo.buftype ~= "" then return "" end
 	local out = {}
@@ -52,8 +49,6 @@ end
 
 --------------------------------------------------------------------------------
 
----@nodiscard
----@return string
 local function selectionCount()
 	local isVisualMode = fn.mode():find("[Vv]")
 	if not isVisualMode then return "" end
@@ -64,18 +59,14 @@ local function selectionCount()
 end
 
 -- only show the clock when fullscreen (= it covers the menubar clock)
----@nodiscard
----@return string
 local function clock()
 	if vim.opt.columns:get() < 110 or vim.opt.lines:get() < 25 then return "" end
-	local time = tostring(os.date()):sub(12, 16)
-	if os.time() % 2 == 1 then time = time:gsub(":", " ") end -- make the `:` blink
+	local time = tostring(os.date("%H:%M"))
+	if os.date("%S") % 2 == 1 then time = time:gsub(":", " ") end -- make the `:` blink
 	return time
 end
 
--- wrapper to not require navic/lightbulb directly
----@nodiscard
----@return string
+-- wrapper to not require navic directly
 local function navicBreadcrumbs()
 	if bo.filetype == "css" or not require("nvim-navic").is_available() then return "" end
 	return require("nvim-navic").get_location()
