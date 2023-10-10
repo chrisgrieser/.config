@@ -53,8 +53,8 @@ local dontInstall = {
 	"trim_newlines",
 	"squeeze_blanks",
 	"injected",
-	"ruff_format", 
-	"ruff_fix" ,
+	"ruff_format",
+	"ruff_fix",
 }
 
 ---given the linter- and formatter-list of nvim-lint and conform.nvim, extract a
@@ -88,7 +88,7 @@ local function linterConfigs()
 	lint.linters_by_ft = linters
 
 	lint.linters.codespell.args = { "--toml=" .. linterConfig .. "/codespell.toml" }
-	lint.linters.shellcheck.args = { "--shell=bash", "--format=json", "-" }
+	lint.linters.shellcheck.args = { "--shell=bash", "--format=json", "--external-sources", "-" }
 	lint.linters.yamllint.args =
 		{ "--config-file=" .. linterConfig .. "/yamllint.yaml", "--format=parsable", "-" }
 	lint.linters.vale.args =
@@ -207,7 +207,11 @@ return {
 			ui = {
 				border = u.borderStyle,
 				height = 0.8, -- so it won't cover the statusline
-				icons = { package_installed = "✓", package_pending = "󰔟", package_uninstalled = "✗" },
+				icons = {
+					package_installed = "✓",
+					package_pending = "󰔟",
+					package_uninstalled = "✗",
+				},
 				keymaps = { -- consistent keymaps with lazy.nvim
 					uninstall_package = "x",
 					toggle_help = "?",
@@ -240,8 +244,16 @@ return {
 	{ -- add ignore-comments & lookup rules
 		"chrisgrieser/nvim-rulebook",
 		keys = {
-			{ "<leader>d", function() require("rulebook").lookupRule() end, desc = "󰒕 Lookup Rule" },
-			{ "<leader>C", function() require("rulebook").ignoreRule() end, desc = "󰒕 Ignore Rule" },
+			{
+				"<leader>d",
+				function() require("rulebook").lookupRule() end,
+				desc = "󰒕 Lookup Rule",
+			},
+			{
+				"<leader>C",
+				function() require("rulebook").ignoreRule() end,
+				desc = "󰒕 Ignore Rule",
+			},
 		},
 	},
 }

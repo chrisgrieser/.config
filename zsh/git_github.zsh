@@ -1,17 +1,17 @@
 #!/usr/bin/env zsh
 
-alias co="ct git checkout"
-alias gg="ct git checkout -" # go to previous branch/commit, like `zz` switching to last directory
+alias co="git checkout"
+alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to last directory
 alias gs='git status'
 alias ga="git add"
-alias push="ct git push"
-alias pull="ct git pull"
+alias push="git push"
+alias pull="git pull"
 alias g.='cd "$(git rev-parse --show-toplevel)"' # goto git root
-alias grh='ct git reset --hard'
+alias grh='git reset --hard'
 
 alias gi='gh issue list --state=open'
 alias gI='gh issue list --state=closed'
-alias rel='ct make --silent release'
+alias rel='make --silent release'
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -182,7 +182,6 @@ function gl {
 # interactive
 function gli {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
-	if ! command -v ct &>/dev/null; then print "\033[1;33mchromaterm not installed. (\`pip3 install chromaterm\`)\033[0m" && return 1; fi
 
 	local hash key_pressed selected
 	local format="%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s %n%C(reset)%n---%n%C(magenta)"
@@ -203,7 +202,7 @@ function gli {
 		echo "$hash" | pbcopy
 		echo "'$hash' copied."
 	else # pressed return
-		ct git checkout "$hash"
+		git checkout "$hash"
 	fi
 }
 
@@ -212,7 +211,6 @@ function gli {
 
 function gb {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
-	if ! command -v ct &>/dev/null; then print "\033[1;33mchromaterm not installed. (\`pip3 install chromaterm\`)\033[0m" && return 1; fi
 	local selected
 
 	selected=$(
@@ -225,10 +223,10 @@ function gb {
 	# how to checkout remote branches: https://stackoverflow.com/questions/67699/how-do-i-clone-all-remote-branches
 	if [[ $selected == remotes/* ]]; then
 		remote=$(echo "$selected" | cut -d/ -f2-)
-		ct git checkout "$remote"
+		git checkout "$remote"
 		selected=$(echo "$selected" | cut -d/ -f3)
 	fi
-	ct git checkout "$selected"
+	git checkout "$selected"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -282,23 +280,21 @@ function ac() {
 function acp {
 	ac "$@" || return 1
 
-	ct git pull
-	ct git push
+	git pull
+	git push
 	sketchybar --trigger repo-files-update
 }
 
 #───────────────────────────────────────────────────────────────────────────────
 
 function clone() {
-	if ! command -v ct &>/dev/null; then print "\033[1;33mchromaterm not installed. (\`pip3 install chromaterm\`)\033[0m" && return 1; fi
-
 	url="$1"
 	# turn http into SSH remotes
 	[[ "$url" =~ http ]] && url="$(echo "$1" | sed -E 's/https?:\/\/github.com\//git@github.com:/').git"
 
 	# WARN depth=2 ensures that amending a shallow commit does not result in a
 	# new commit without parent, effectively destroying git history (!!)
-	ct git clone --depth=2 --filter=blob:none "$url"
+	git clone --depth=2 --filter=blob:none "$url"
 
 	# shellcheck disable=SC2012
 	cd "$(command ls -1 -t | head -n1)" || return 1

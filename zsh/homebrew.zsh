@@ -23,11 +23,6 @@ alias bu='brew uninstall --zap' # codespell-ignore
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# colorize via chromaterm (recursive -> affects all brew commands)
-command -v ct &>/dev/null && alias brew="ct brew"
-
-#───────────────────────────────────────────────────────────────────────────────
-
 function print-section() {
 	echo
 	echo
@@ -40,12 +35,15 @@ function dump() {
 	local device_name
 	device_name=$(scutil --get ComputerName | cut -d" " -f2-)
 	brew bundle dump --force --file "$dump_path/Brewfile_$device_name.txt"
-	npm list --location=global --parseable | sed "1d" | sed -E "s/.*\///" >"$dump_path/NPMfile_$device_name.txt"
-	pip3 list --not-required | tail -n+3 | cut -d" " -f1 >"$dump_path/Pip3file_$device_name.txt"
+	npm list --location=global --parseable | sed "1d" | sed -E "s/.*\///" \
+		>"$dump_path/NPMfile_$device_name.txt"
+	pip3 list --not-required | sed "1,2d" | cut -d" " -f1 \
+		>"$dump_path/Pip3file_$device_name.txt"
 
-	# shellcheck disable=2012
-	command ls "$HOME/Library/Application Support/$BROWSER_DEFAULTS_PATH/Default/Extensions/" |
-		grep -v "Temp" | sed "s|^|https://chrome.google.com/webstore/detail/|" >"$dump_path/browser-extensions.txt"
+	# shellcheck disable=2010
+	ls "$HOME/Library/Application Support/$BROWSER_DEFAULTS_PATH/Default/Extensions/" |
+		grep -v "Temp" | sed "s|^|https://chrome.google.com/webstore/detail/|" \
+		>"$dump_path/browser-extensions.txt"
 
 	echo "Brewfile, NPM-File, Pip-File and list of browser extensions dumped at \"$dump_path\""
 }
@@ -67,13 +65,15 @@ function update() {
 	npm update --location=global
 
 	print-section "PIP"
-	pip list --not-required | tail -n+3 | cut -d" " -f1 | xargs pip install --upgrade
+	pip3 list --not-required --outdated | cut -d" " -f1 | xargs pip3 install --upgrade
 
 	print-section "DUMP INSTALL LISTS"
 	dump
 
-	print-section "Reloading Sketchybar"
-	sketchybar --reload # also updates the homebrew status counter
+	print-section "Restarting Sketchybar"
+	# - sketchybar usually updated and then has to be restarted to give permission
+	# - also updates the homebrew status counter
+	brew services restart sketchybar
 
 	osascript -e 'display notification "" with title "🍺 Homebrew finished." sound name "Blow"'
 }
@@ -83,7 +83,7 @@ function listall() {
 	print-section "Taps"
 	brew tap
 	print-section "Leaves (formulas installed-on-request)"
-	brew leaves --installed-on-request
+	brew leaves
 	print-section "Casks"
 	brew list --casks
 	print-section "Doctor"
