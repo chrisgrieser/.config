@@ -4328,6 +4328,55 @@ Application('com.runningwithcrayons.Alfred').removeConfiguration('ObRunning', {
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:keywordless_search}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/o_search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>84552F1E-91DA-42D0-BB81-029DD6FA4B99</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>externaltriggerid</key>
 				<string>open-in-new-tab</string>
 				<key>passinputasargument</key>
@@ -7669,6 +7718,17 @@ DOUBLE CLICK THIS to set Hotkey.</string>
 			<key>ypos</key>
 			<real>2155</real>
 		</dict>
+		<key>84552F1E-91DA-42D0-BB81-029DD6FA4B99</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>note</key>
+			<string>triggers on every letter of the roman alphabet</string>
+			<key>xpos</key>
+			<real>220</real>
+			<key>ypos</key>
+			<real>2490</real>
+		</dict>
 		<key>863C601A-3E8C-4BD2-8240-F66020F40A44</key>
 		<dict>
 			<key>colorindex</key>
@@ -9045,6 +9105,32 @@ DOUBLE CLICK THIS to set Hotkey. Suggested Hotkey: cmd + shift + 1</string>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>workspace_to_spellcheck</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>disable</string>
+						<string></string>
+					</array>
+					<array>
+						<string>enable</string>
+						<string>a||b||c||d||e||f||g||h||i||j||k||l||m||n||o||p||q||r||s||t||u||v||w||x||y||z</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>EXPERIMENTAL. Main search is always triggered, with or without the keyword. Useful for discoverability of your notes if you use Alfred a lot.</string>
+			<key>label</key>
+			<string>keywordless search</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>keywordless_search</string>
 		</dict>
 	</array>
 	<key>variables</key>
