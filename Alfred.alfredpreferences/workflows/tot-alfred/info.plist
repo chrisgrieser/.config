@@ -949,7 +949,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>append</string>
 			<key>xpos</key>
-			<real>695</real>
+			<real>710</real>
 			<key>ypos</key>
 			<real>70</real>
 		</dict>
@@ -982,7 +982,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>description</key>
 			<string>keyword</string>
 			<key>label</key>
-			<string>Dots selector</string>
+			<string>Show Dots</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -1087,9 +1087,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<false/>
 			</dict>
 			<key>description</key>
-			<string>The prefix is added when appending via quick save or via the tot search.</string>
+			<string>appending prefix</string>
 			<key>label</key>
-			<string>Append Prefix</string>
+			<string></string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>

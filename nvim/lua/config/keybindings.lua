@@ -125,11 +125,18 @@ keymap("n", "<Left>", function()
 	if fn.col(".") == 1 then return end
 	return [["zdh"zph]]
 end, { desc = "Move Char Left", expr = true })
-
--- stylua: ignore start
-keymap("x", "<Down>", [[:move '>+1<CR><cmd>normal! gv=gv<CR>]], { desc = "󰜮 Move selection down", silent = true })
-keymap("x", "<Up>", [[:move '<-2<CR><cmd>normal! gv=gv<CR>]], { desc = "󰜷 Move selection up", silent = true })
--- stylua: ignore end
+keymap(
+	"x",
+	"<Down>",
+	[[:move '>+1<CR><cmd>normal! gv=gv<CR>]],
+	{ desc = "󰜮 Move selection down", silent = true }
+)
+keymap(
+	"x",
+	"<Up>",
+	[[:move '<-2<CR><cmd>normal! gv=gv<CR>]],
+	{ desc = "󰜷 Move selection up", silent = true }
+)
 
 keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Move selection right" })
 keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "➡️ Move selection left" })
