@@ -84,8 +84,7 @@ local function workLayout()
 end
 
 local function movieLayout()
-	local targetMode = env.isAtMother and "mother-movie" or "movie" -- different PWAs due to not being M1 device
-	dockSwitcher(targetMode)
+	dockSwitcher(env.isAtMother and "mother-movie" or "movie") -- different PWAs due to not being M1 device
 	wu.iMacDisplay:setBrightness(0)
 	darkmode.setDarkMode("dark")
 	visuals.holeCover("remove")
@@ -105,19 +104,18 @@ local function movieLayout()
 		env.mailApp,
 		env.tickerApp,
 	}
+	u.quitApp("Tot") -- FIX tot sometimes not quitting properly
 	print("🔲 Loaded MovieModeLayout")
 end
 
 ---select layout depending on number of screens, and prevent concurrent runs
+local isLayouting
 local function selectLayout()
-	if IsLayouting then return end
-	IsLayouting = true
-	if env.isProjector() then
-		movieLayout()
-	else
-		workLayout()
-	end
-	u.runWithDelays(1.5, function() IsLayouting = false end)
+	if isLayouting then return end
+	isLayouting = true
+	local layout = env.isProjector() and movieLayout or workLayout
+	layout()
+	u.runWithDelays(1.5, function() isLayouting = false end)
 end
 
 --------------------------------------------------------------------------------
@@ -131,6 +129,7 @@ Wf_appsOnMouseScreen = wf.new({
 	"Finder",
 	"ReadKit",
 	"Slack",
+	"Tot",
 	"IINA",
 	"WezTerm",
 	"Hammerspoon",
@@ -185,7 +184,9 @@ local c = hs.caffeinate.watcher
 UnlockWatcher = c.new(function(event)
 	if recentlyWoke then return end
 	recentlyWoke = true
-	local hasWoken = event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock
+	local hasWoken = event == c.screensDidWake
+		or event == c.systemDidWake
+		or event == c.screensDidUnlock
 
 	print("🔓 Wake")
 	if hasWoken then u.runWithDelays(0.5, selectLayout) end -- delay for recognizing screens
