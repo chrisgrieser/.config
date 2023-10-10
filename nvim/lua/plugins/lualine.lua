@@ -41,8 +41,6 @@ end
 --------------------------------------------------------------------------------
 
 --- https://github.com/nvim-lualine/lualine.nvim/blob/master/lua/lualine/components/branch/git_branch.lua#L118
----@nodiscard
----@return boolean
 local function isStandardBranch()
 	-- checking via lualine API, to not call git outself
 	local curBranch = require("lualine.components.branch.git_branch").get_branch()
@@ -70,7 +68,6 @@ end
 ---@return string
 local function clock()
 	if vim.opt.columns:get() < 110 or vim.opt.lines:get() < 25 then return "" end
-
 	local time = tostring(os.date()):sub(12, 16)
 	if os.time() % 2 == 1 then time = time:gsub(":", " ") end -- make the `:` blink
 	return time
@@ -85,14 +82,13 @@ local function navicBreadcrumbs()
 end
 
 local function quickfixCounter()
-	local totalItems = #vim.fn.getqflist()
-	if totalItems == 0 then return "" end
+	local totalQfItems = #vim.fn.getqflist()
+	if totalQfItems == 0 then return "" end
 	local qfIndex = vim.fn.getqflist({ idx = 0 }).idx
-	return (" %s/%s"):format(qfIndex, totalItems)
+	return (" %s/%s"):format(qfIndex, totalQfItems)
 end
 
 ---improves upon the default statusline components by having properly working icons
----@nodiscard
 ---@return string
 local function currentFile()
 	local maxLen = 25
@@ -123,10 +119,11 @@ end
 
 -- FIX Add missing buffer names for current file component
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "lazy", "mason", "TelescopePrompt", "noice", "checkhealth", "lspinfo" },
-	callback = function()
-		local name = vim.fn.expand("<amatch>")
-		name = name:sub(1, 1):upper() .. name:sub(2) -- capitalize
+	pattern = { "lazy", "mason", "TelescopePrompt", "noice", "checkhealth", "lspinfo", "qf" },
+	callback = function(ctx)
+		local ft = ctx.match
+		local name = ft:sub(1, 1):upper() .. ft:sub(2) -- capitalize
+		if ft == "qf" then name = "Quickfix" end
 		pcall(vim.api.nvim_buf_set_name, 0, name)
 	end,
 })
@@ -136,9 +133,9 @@ local bottomSeparators = { left = "", right = "" }
 local topSeparators = { left = "", right = "" }
 
 local lualineConfig = {
-	-- INFO using the tabline will override vim's default tabline, so the tabline
-	-- should always include the tab element
 	tabline = {
+		-- INFO using the tabline will override vim's default tabline, so the tabline
+		-- should always include the tab element
 		lualine_a = {
 			-- INFO setting different section separators in the same components has
 			-- yanky results, they should have the same separator
@@ -170,7 +167,7 @@ local lualineConfig = {
 			{ require("funcs.alt-alt").altFileStatusline },
 		},
 		lualine_c = {
-			{ require("funcs.quickfix").statuslineCounter },
+			{ quickfixCounter },
 		},
 		lualine_x = {
 			{
@@ -190,11 +187,7 @@ local lualineConfig = {
 	},
 	options = {
 		refresh = { statusline = 1000 },
-		ignore_focus = {
-			"DressingInput",
-			"DressingSelect",
-			"ccc-ui",
-		},
+		ignore_focus = { "DressingInput", "DressingSelect", "ccc-ui" },
 		globalstatus = true,
 		component_separators = { left = "", right = "" },
 		section_separators = bottomSeparators,

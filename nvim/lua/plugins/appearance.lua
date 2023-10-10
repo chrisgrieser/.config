@@ -16,7 +16,7 @@ return {
 			},
 			indent = {
 				char = "│", -- spaces
-				tab_char = "│", -- tabs, can be list for changing level
+				tab_char = "│", -- tabs
 			},
 			exclude = { filetypes = { "undotree" } },
 		},
@@ -61,11 +61,9 @@ return {
 		"https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
 		event = "BufReadPost", -- later does not load on first buffer
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		-- red too aggressive
 		init = function() u.colorschemeMod("RainbowDelimiterRed", { fg = "#7e8a95" }) end,
 	},
 	{ -- Nerdfont filetype icons
-		-- https://www.reddit.com/r/neovim/comments/12lf0ke/comment/jg6idvr/
 		"nvim-tree/nvim-web-devicons",
 		opts = {
 			default = true, -- use default icon as fallback
@@ -74,8 +72,9 @@ return {
 				applescript = { icon = "", color = "#7f7f7f", name = "Applescript" },
 				bib = { icon = "", color = "#6e9b2a", name = "BibTeX" },
 				http = { icon = "󰴚", name = "HTTP request" }, -- for rest.nvim
-				-- give plugins icons for my status line components
 				gitignore = { icon = "", name = "gitignore" },
+				-- give plugins icons for my status line components
+				qf = { icon = "", name = "quickfix" },
 				ipython = { icon = "󰌠", name = "ipython" },
 				checkhealth = { icon = "󰩂", name = ":checkhealth" },
 				noice = { icon = "󰎟", name = "noice.nvim" },

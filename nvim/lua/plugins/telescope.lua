@@ -10,7 +10,10 @@ local keymappings_I = {
 	["<PageUp>"] = "preview_scrolling_up",
 	["<Up>"] = "cycle_history_prev",
 	["<Down>"] = "cycle_history_next",
-	["<D-s>"] = "smart_send_to_qflist", -- sends selected, or if none selected, sends all
+	["<D-s>"] = function (prompt_bufnr)
+		require("telescope.actions").smart_send_to_qflist(prompt_bufnr)-- sends selected, or if none selected, sends all
+		vim.cmd.cfirst()
+	end,
 	["<Tab>"] = "move_selection_worse",
 	["<S-Tab>"] = "move_selection_better",
 	["<D-a>"] = "toggle_all",
