@@ -15,15 +15,6 @@ local tsConfig = {
 	-- TREESITTER PLUGINS
 
 	textobjects = {
-		lsp_interop = {
-			enable = true,
-			border = u.borderStyle,
-			floating_preview_opts = {},
-			peek_definition_code = {
-				["<leader>H"] = { query = "@function.outer", desc = "󰒕 Peek Definition (outer function)" },
-			},
-		},
-
 		move = { -- move to next comment / function
 			enable = true,
 			set_jumps = true,
@@ -37,8 +28,8 @@ local tsConfig = {
 			include_surrounding_whitespace = false,
 			disable = { "markdown" }, -- so `al` can be remapped to link text object
 			keymaps = {
-				["ik"] = { query = "@assignment.lhs", desc = "󱡔 inner key textobj" },
 				-- INFO: outer key textobj defined via various textobjs
+				["ik"] = { query = "@assignment.lhs", desc = "󱡔 inner key textobj" },
 				["a<CR>"] = { query = "@return.outer", desc = "󱡔 outer return textobj" },
 				["i<CR>"] = { query = "@return.inner", desc = "󱡔 inner return textobj" },
 				["a/"] = { query = "@regex.outer", desc = "󱡔 outer regex textobj" },
@@ -78,7 +69,7 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		event = "VeryLazy",
 		build = ":TSUpdate",
-		main = "nvim-treesitter.configs",
+		-- main = "nvim-treesitter.configs",
 		opts = tsConfig,
 	},
 

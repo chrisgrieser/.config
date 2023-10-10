@@ -12,7 +12,6 @@ return {
 	},
 	{ -- auto-bullets for markdown-like filetypes
 		"dkarter/bullets.vim",
-		ft = "markdown",
 		keys = {
 			{ "o", "<Plug>(bullets-newline)", ft = "markdown" },
 			{ "<CR>", "<Plug>(bullets-newline)", mode = "i", ft = "markdown" },
@@ -28,9 +27,12 @@ return {
 	{ -- preview markdown
 		"iamcco/markdown-preview.nvim",
 		build = "cd app && npm install",
+		-- ft-load-trigger needed for the plugin to work, even though it's only
+		-- loaded on the keymap, probably the plugin has some ftplugin conditions
+		-- or something.
+		ft = "markdown", 
 		keys = {
-			{ "<D-r>", "<Plug>MarkdownPreview", ft = "markdown", desc = " Preview" },
+			{ "<D-r>", vim.cmd.MarkdownPreview, ft = "markdown", desc = " Preview" },
 		},
-		init = function() vim.g.mkdp_filetypes = { "markdown" } end,
 	},
 }
