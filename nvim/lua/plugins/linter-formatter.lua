@@ -133,7 +133,7 @@ local function lintTriggers()
 		callback = doLint,
 	})
 
-	doLint() -- run once on initialization
+	doLint() -- run on initialization
 end
 
 --------------------------------------------------------------------------------
