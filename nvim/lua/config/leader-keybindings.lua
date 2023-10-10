@@ -27,7 +27,6 @@ keymap("n", "<leader>lc", function()
 end, { desc = "󰘳 Copy last command" })
 
 -- [l]ast command a[g]ain
--- as opposed to `@:`, `:<Up><CR>` works across sessions
 keymap("n", "<leader>lg", ":<Up><CR>", { desc = "󰘳 Run last command again", silent = true })
 
 -- show current filetype & buftype
@@ -36,10 +35,11 @@ keymap("n", "<leader>lf", function()
 		"filetype: " .. bo.filetype,
 		"buftype: " .. bo.buftype,
 		("indent: %s (%s)"):format(bo.expandtab and "spaces" or "tabs", bo.tabstop),
-		"node: " .. vim.treesitter.get_node():type(),
 	}
+	local ok, node = pcall(vim.treesitter.get_node)
+	if ok and node then table.insert(out, "node: " .. node:type()) end
 	u.notify("Buffer Information", table.concat(out, "\n"), "trace")
-end, { desc = "󰽘 Buffer Info" })
+end, { desc = " Buffer Info" })
 
 --------------------------------------------------------------------------------
 -- REFACTORING
@@ -130,8 +130,8 @@ keymap("n", "<leader>ld", function() require("funcs.sawmill").debugLog() end, { 
 keymap("n", "<leader>la", function() require("funcs.sawmill").assertLog() end, { desc = "󰸢 assert log" })
 -- stylua: ignore end
 
-keymap("n", "<leader>li", cmd.Inspect, { desc = " :Inspect" })
-keymap("n", "<leader>lt", cmd.InspectTree, { desc = " :InspectTree" })
+keymap("n", "<leader>li", cmd.Inspect, { desc = " :Inspect" })
+keymap("n", "<leader>lt", cmd.InspectTree, { desc = " :InspectTree" })
 
 --------------------------------------------------------------------------------
 

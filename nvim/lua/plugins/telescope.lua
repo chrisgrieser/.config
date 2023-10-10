@@ -285,12 +285,8 @@ return {
 				desc = " Change Colorschemes",
 			},
 			{ "<leader>gs", function() telescope("git_status") end, desc = " Status" },
-			{ "<leader>gl", function() telescope("git_commits") end, desc = " Log" },
-			{
-				"<leader>lh",
-				function() telescope("command_history") end,
-				desc = "󰘳  Command History",
-			},
+			{ "<leader>gl", function() telescope("git_commits") end, desc = " Log/Commits" },
+			{ "<leader>gb", function() telescope("git_branches") end, desc = " Branches" },
 			{
 				"go",
 				function()

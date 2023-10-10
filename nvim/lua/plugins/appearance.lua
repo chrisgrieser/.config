@@ -214,7 +214,7 @@ return {
 				},
 				telescope = {
 					layout_config = {
-						horizontal = { width = 0.8, height = 0.6 },
+						horizontal = { width = 0.7, height = 0.55 },
 					},
 				},
 				get_config = function(opts)
@@ -222,6 +222,7 @@ return {
 						"github_issue", -- tinygit
 						"commit_selection", -- tinygit pickaxe
 						"icon_picker", -- icon-picker.nvim
+						"mason.ui.language-filter", -- mason
 					}
 					if vim.tbl_contains(telescopeKinds, opts.kind) then
 						return { backend = "telescope" }
