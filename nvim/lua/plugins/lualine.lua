@@ -84,6 +84,13 @@ local function navicBreadcrumbs()
 	return require("nvim-navic").get_location()
 end
 
+local function quickfixCounter()
+	local totalItems = #vim.fn.getqflist()
+	if totalItems == 0 then return "" end
+	local qfIndex = vim.fn.getqflist({ idx = 0 }).idx
+	return (" %s/%s"):format(qfIndex, totalItems)
+end
+
 ---improves upon the default statusline components by having properly working icons
 ---@nodiscard
 ---@return string
@@ -163,9 +170,7 @@ local lualineConfig = {
 			{ require("funcs.alt-alt").altFileStatusline },
 		},
 		lualine_c = {
-			{
-				require("funcs.quickfix").counter,
-			},
+			{ require("funcs.quickfix").statuslineCounter },
 		},
 		lualine_x = {
 			{

@@ -71,10 +71,9 @@ keymap("n", "X", "<cmd>normal!mz$x`z<CR>", { desc = "󱎘 Delete char at EoL" })
 keymap("n", "~", function() require("funcs.quality-of-life").toggleCase() end, { desc = "better ~" })
 
 -- QUICKFIX
-require("funcs.quickfix").setup()
-keymap("n", "gq", require("funcs.quickfix").next, { desc = " Next Quickfix" })
-keymap("n", "gQ", require("funcs.quickfix").previous, { desc = " Prev Quickfix" })
-keymap("n", "dQ", require("funcs.quickfix").deleteList, { desc = " Empty Quickfix List" })
+keymap("n", "gq", vim.cmd.cnext, { desc = " Next Quickfix" })
+keymap("n", "gQ", vim.cmd.cprevious, { desc = " Prev Quickfix" })
+keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Delete Quickfix List" })
 
 -- COMMENTS
 -- stylua: ignore
