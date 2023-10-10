@@ -1,14 +1,16 @@
 -- TREESITTER QUERY FILETYPE
 
+local optl = vim.opt_local
+
 -- for `:InspectTree`
 if vim.bo.buftype == "nofile" then
-	vim.opt_local.scrolloff = 10
-	vim.opt_local.listchars:append { lead = "│" }
+	optl.scrolloff = 10
+	optl.listchars:append { lead = "│" }
 	vim.keymap.set("n", "q", vim.cmd.close, { buffer = true, nowait = true })
 end
 
 -- for .scm files
 if vim.bo.buftype == "" then
-	vim.opt_local.tabstop = 2
-	vim.opt_local.expandtab = true
+	optl.tabstop = 2
+	optl.expandtab = true
 end
