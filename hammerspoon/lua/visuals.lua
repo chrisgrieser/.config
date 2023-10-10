@@ -9,9 +9,6 @@ local wu = require("lua.window-utils")
 local roundedCorners = hs.loadSpoon("RoundedCorners")
 if roundedCorners then roundedCorners:start() end
 
--- initialize
-if u.isSystemStart() then M.holeCover("auto") end
-
 --------------------------------------------------------------------------------
 
 ---to stop wallpaper shining through
@@ -48,6 +45,11 @@ function M.holeCover(toMode)
 		cover:show()
 	end
 end
+
+--------------------------------------------------------------------------------
+
+-- initialize
+if u.isSystemStart() then M.holeCover("auto") end
 
 --------------------------------------------------------------------------------
 return M
