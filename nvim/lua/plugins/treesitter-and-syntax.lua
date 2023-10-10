@@ -16,14 +16,14 @@ local tsConfig = {
 	-- TREESITTER PLUGINS
 
 	textobjects = {
-		move = { -- move to next comment / function
+		move = { -- move to next function
 			enable = true,
 			set_jumps = true,
 			disable = { "markdown", "css", "scss" }, -- so they can be mapped to heading/section navigation
 			goto_next_start = { ["<C-j>"] = "@function.outer" },
 			goto_previous_start = { ["<C-k>"] = "@function.outer" },
 		},
-		select = {
+		select = { -- textobj definitions
 			enable = true,
 			lookahead = true,
 			include_surrounding_whitespace = false,
