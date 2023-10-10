@@ -20,7 +20,7 @@ if host:find("Mother") then
 	g.neovide_scale_factor = 0.88
 	g.neovide_refresh_rate = 35
 elseif isAtOffice then
-	g.neovide_scale_factor = 1.09
+	g.neovide_scale_factor = 1.06
 	g.neovide_refresh_rate = 45
 else
 	g.neovide_scale_factor = 1
