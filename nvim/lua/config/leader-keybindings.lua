@@ -10,7 +10,7 @@ local keymap = require("config.utils").uniqueKeymap
 keymap("n", "<D-;>", function()
 	local pathOfThisFile = debug.getinfo(1).source:sub(2)
 	vim.cmd.edit(pathOfThisFile)
-end, { desc = "⌨️ Edit leader-keybindings.lua" })
+end, { desc = "⌨️ Edit leader-keybindings" })
 
 --------------------------------------------------------------------------------
 
@@ -21,7 +21,7 @@ keymap("n", "<leader>lc", function()
 		u.notify("", "No last command available", "warn")
 		return
 	end
-	lastCommand = lastCommand:gsub("^i ", ""):gsub("^lua ?=? ", "")
+	lastCommand = lastCommand:gsub("^lua ?=? ", "")
 	fn.setreg("+", lastCommand)
 	u.notify("Copied", lastCommand)
 end, { desc = "󰘳 Copy last command" })
@@ -39,7 +39,7 @@ keymap("n", "<leader>lf", function()
 		"node: " .. vim.treesitter.get_node():type(),
 	}
 	u.notify("Buffer Information", table.concat(out, "\n"), "trace")
-end, { desc = "󰽘 Inspect Buffer Info" })
+end, { desc = "󰽘 Buffer Info" })
 
 --------------------------------------------------------------------------------
 -- REFACTORING
@@ -104,7 +104,7 @@ local function codeActionFilter(action)
 		and not (title:find("on this line"))
 		and (kind == "quickfix" or kind == "refactor.rewrite")
 
-	return not (ignoreInLua)
+	return not ignoreInLua
 end
 
 -- INFO use `lua require('nvim-lightbulb').debug()` to inspect code action kinds
@@ -178,12 +178,8 @@ keymap("n", "<leader>ol", "<cmd>LspRestart<CR>", { desc = "󰒕 LspRestart" })
 keymap("n", "<leader>oh", function() vim.lsp.inlay_hint(0, nil) end, { desc = "󰒕 Inlay Hints" })
 
 keymap("n", "<leader>od", function() -- codespell-ignore
-	if vim.diagnostic.is_disabled(0) then
-		vim.diagnostic.enable(0)
-	else
-		vim.diagnostic.disable(0)
-		vim.diagnostic.disable(0)
-	end
+	local change = vim.diagnostic.is_disabled(0) and "enable" or "disable"
+	vim.diagnostic[change](0)
 end, { desc = " Diagnostics" })
 
 keymap(
