@@ -103,7 +103,7 @@ end):start()
 -- close first window, when second is open
 -- don't leave browser tab behind when opening zoom
 Wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function()
-	u.quitApp("BusyCal") -- only used to open a Zoom link
+	u.quitApps("BusyCal") -- only used to open a Zoom link
 	u.closeTabsContaining("zoom.us")
 	u.runWithDelays(1, function()
 		local zoom = u.app("zoom.us")

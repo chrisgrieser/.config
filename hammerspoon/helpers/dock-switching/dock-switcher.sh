@@ -1,36 +1,36 @@
 #!/usr/bin/env zsh
 
-DATA_DIR=$(dirname "$0")
-MODE="$1"
-LAYOUT="$2"
-DOCK_PLIST="$HOME/Library/Preferences/com.apple.dock.plist"
-DOCK_CONFIG="$DATA_DIR/$LAYOUT.plist" 
+data_store=$(dirname "$0")
+mode="$1"
+layout="$2"
+dock_plist="$HOME/Library/Preferences/com.apple.dock.plist"
+dock_config="$data_store/$layout.plist" 
 
-#-------------------------------------------------------------------------------
+#───────────────────────────────────────────────────────────────────────────────
 
-if [[ "$MODE" == "--load" ]]; then
-	if [[ -z "$LAYOUT" ]] ; then
+if [[ "$mode" == "--load" ]]; then
+	if [[ -z "$layout" ]] ; then
 		echo "Layout to load is missing."
-		exit 1
-	elif [[ ! -e "$DOCK_CONFIG" ]]; then
-		echo "Layout '$LAYOUT' does not exist."
-		exit 1
+		return 1
+	elif [[ ! -e "$dock_config" ]]; then
+		echo "Layout '$layout' does not exist."
+		return 1
 	fi
-	rm "$DOCK_PLIST" || exit 1
-	cp -a "$DOCK_CONFIG" "$DOCK_PLIST"
-	defaults import com.apple.dock "$DOCK_PLIST"
+	rm "$dock_plist" || return 1
+	cp -a "$dock_config" "$dock_plist"
+	defaults import com.apple.dock "$dock_plist"
 	sleep 0.1
 	killall Dock
-	echo "Loaded layout '$LAYOUT'"
-elif [[ "$MODE" == "--save" ]]; then
-	if [[ -z "$LAYOUT" ]] ; then
+	echo "Loaded layout '$layout'"
+elif [[ "$mode" == "--save" ]]; then
+	if [[ -z "$layout" ]] ; then
 		echo "Layout to save is missing."
-		exit 1
+		return 1
 	fi
-	cp -f "$DOCK_PLIST" "$DOCK_CONFIG"
-	echo "Saved as '$LAYOUT'"
+	cp -f "$dock_plist" "$dock_config"
+	echo "Saved as '$layout'"
 else
 	echo "Not a valid option."
-	exit 1
+	return 1
 fi
 

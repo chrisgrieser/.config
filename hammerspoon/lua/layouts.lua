@@ -15,7 +15,9 @@ end
 
 ---@param targetMode string
 local function dockSwitcher(targetMode)
-	hs.execute("zsh ./helpers/dock-switching/dock-switcher.sh --load " .. targetMode)
+	DockSwitchingTask = hs.task
+		.new("./helpers/dock-switching/dock-switcher.sh", nil, { "--load", targetMode })
+		:start()
 end
 
 local function setHigherBrightnessDuringDay()
@@ -62,7 +64,7 @@ local function workLayout()
 
 	-- close
 	closeAllFinderWins()
-	u.quitApp(env.videoAndAudioApps)
+	u.quitApps(env.videoAndAudioApps)
 	require("lua.private").closer()
 
 	-- open
@@ -76,6 +78,7 @@ local function workLayout()
 		end)
 	end
 	u.openApps("Tot")
+	u.app("Tot"):hide()
 	u.restartApp("AltTab") -- FIX duplicate items
 
 	-- finish
@@ -90,7 +93,7 @@ local function movieLayout()
 	visuals.holeCover("remove")
 
 	u.openApps { "YouTube", "BetterTouchTool" }
-	u.quitApp {
+	u.quitApps {
 		"Tot",
 		"neovide",
 		"Slack",
@@ -104,7 +107,7 @@ local function movieLayout()
 		env.mailApp,
 		env.tickerApp,
 	}
-	u.quitApp("Tot") -- FIX tot sometimes not quitting properly
+	u.quitApps("Tot") -- FIX tot sometimes not quitting properly
 	print("🔲 Loaded MovieModeLayout")
 end
 
@@ -180,15 +183,16 @@ if u.isSystemStart() then selectLayout() end
 
 -- 4. Waking
 local recentlyWoke
-local c = hs.caffeinate.watcher
-UnlockWatcher = c.new(function(event)
-	if recentlyWoke then return end
-	recentlyWoke = true
-	local hasWoken = event == c.screensDidWake
-		or event == c.systemDidWake
-		or event == c.screensDidUnlock
+UnlockWatcher = hs.caffeinate.watcher
+	.new(function(event)
+		if recentlyWoke then return end
+		recentlyWoke = true
+		local hasWoken = event == hs.caffeinate.watcher.screensDidWake
+			or event == hs.caffeinate.watcher.systemDidWake
+			or event == hs.caffeinate.watcher.screensDidUnlock
 
-	print("🔓 Wake")
-	if hasWoken then u.runWithDelays(0.5, selectLayout) end -- delay for recognizing screens
-	u.runWithDelays(3, function() recentlyWoke = false end)
-end):start()
+		print("🔓 Wake")
+		if hasWoken then u.runWithDelays(0.5, selectLayout) end -- delay for recognizing screens
+		u.runWithDelays(3, function() recentlyWoke = false end)
+	end)
+	:start()
