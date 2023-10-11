@@ -84,7 +84,6 @@ opt.signcolumn = "yes:1"
 -- Wrapping
 opt.textwidth = 80 -- only fallback value, mostly overridden by .editorconfig
 opt.colorcolumn = { "+1" }
-opt.wrapmargin = 3 -- extra space since using a scrollbar plugin
 opt.wrap = false
 opt.breakindent = false
 opt.linebreak = true -- do not break up full words on wrap

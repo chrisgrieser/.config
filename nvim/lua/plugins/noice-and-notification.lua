@@ -141,7 +141,7 @@ return {
 			messages = { view_search = false }, -- replaced by nvim-hlslens
 			lsp = {
 				progress = { enabled = false }, -- replaced with nvim-dr-lsp, since this one cannot filter null-ls
-				signature = { enabled = false }, -- replaced with lsp_signature.nvim
+				signature = { enabled = true }, -- replaced with lsp_signature.nvim
 
 				-- ENABLED features
 				override = {

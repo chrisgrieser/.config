@@ -115,17 +115,17 @@ return {
 			depth_limit_indicator = "…",
 		},
 	},
-	{ -- signature hints
-		"ray-x/lsp_signature.nvim",
-		event = "BufReadPre", -- TODO need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
-		opts = {
-			floating_window = false,
-			always_trigger = true,
-			hint_prefix = "󰏪 ",
-			hint_scheme = "@parameter", -- highlight group
-			hint_inline = function() return false end, -- TODO change with 0.10
-		},
-	},
+	-- { -- signature hints
+	-- 	"ray-x/lsp_signature.nvim",
+	-- 	event = "BufReadPre", -- TODO need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
+	-- 	opts = {
+	-- 		floating_window = false,
+	-- 		always_trigger = true,
+	-- 		hint_prefix = "󰏪 ",
+	-- 		hint_scheme = "@parameter", -- highlight group
+	-- 		hint_inline = function() return false end, -- TODO change with 0.10
+	-- 	},
+	-- },
 	{ -- better LSP variable-rename
 		"smjonas/inc-rename.nvim",
 		event = "CmdlineEnter", -- loading with `cmd = "IncRename` does not work with incremental preview

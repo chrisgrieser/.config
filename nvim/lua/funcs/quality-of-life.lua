@@ -55,7 +55,7 @@ function M.commentHr()
 	local comStrLength = #(comStr:gsub(" ?%%s ?", ""))
 
 	if comStr == "" then
-		u.notify("No commentstring for this filetype available.", "warn")
+		u.notify("", "No commentstring for this filetype available.", "warn")
 		return
 	end
 	if comStr:find("-") then commentHrChar = "-" end
@@ -116,8 +116,7 @@ end
 function M.toggleCase()
 	local col = vim.fn.col(".") -- fn.col correctly considers tab-indentation
 	local charUnderCursor = vim.api.nvim_get_current_line():sub(col, col)
-	-- so it works with diacritics
-	local isLetter = charUnderCursor:lower() ~= charUnderCursor:upper()
+	local isLetter = charUnderCursor:lower() ~= charUnderCursor:upper() -- so it works with diacritics
 	if isLetter then
 		normal("~h")
 		return
@@ -146,21 +145,24 @@ end
 function M.wrap(toMode)
 	local turnOn = (toMode == "toggle" and not vim.opt_local.wrap:get()) or toMode == "on"
 	local turnOff = (toMode == "toggle" and vim.opt_local.wrap:get()) or toMode == "off"
+	local optl = vim.opt_local
+	local keymap = vim.keymap.set
+	local delmap = vim.keymap.del
 
 	if turnOn then
-		vim.opt_local.wrap = true
-		vim.opt_local.colorcolumn = ""
-		vim.keymap.set("n", "A", "g$a", { buffer = true })
-		vim.keymap.set("n", "I", "g^i", { buffer = true })
-		vim.keymap.set("n", "H", "g^", { buffer = true })
-		vim.keymap.set("n", "L", "g$", { buffer = true })
+		optl.wrap = true
+		optl.colorcolumn = ""
+		keymap("n", "A", "g$a", { buffer = true })
+		keymap("n", "I", "g^i", { buffer = true })
+		keymap("n", "H", "g^", { buffer = true })
+		keymap("n", "L", "g$", { buffer = true })
 	elseif turnOff then
-		vim.opt_local.wrap = false
-		vim.opt_local.colorcolumn = vim.opt.colorcolumn:get()
-		pcall(vim.keymap.del, "n", "A", { buffer = true })
-		pcall(vim.keymap.del, "n", "I", { buffer = true })
-		pcall(vim.keymap.del, "n", "H", { buffer = true })
-		pcall(vim.keymap.del, "n", "L", { buffer = true })
+		optl.wrap = false
+		optl.colorcolumn = vim.opt.colorcolumn:get()
+		pcall(delmap, "n", "A", { buffer = true })
+		pcall(delmap, "n", "I", { buffer = true })
+		pcall(delmap, "n", "H", { buffer = true })
+		pcall(delmap, "n", "L", { buffer = true })
 	end
 end
 

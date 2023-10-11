@@ -6,7 +6,6 @@ local fn = vim.fn
 
 -- less nesting in md
 optl.tabstop = 4
-optl.expandtab = false
 
 -- Enable wrapping lines
 require("funcs.quality-of-life").wrap("on")
@@ -19,9 +18,6 @@ optl.formatoptions:remove { "t", "c" }
 
 -- hide links and some markup (similar to Obsidian's live preview)
 optl.conceallevel = 2
-
--- off, since using vale & ltex here
-optl.spell = false
 
 --------------------------------------------------------------------------------
 -- MARKDOWN-SPECIFIC KEYMAPS

@@ -4,7 +4,6 @@ CONFIG_FILES=(
 	vim_mode_config
 	fzf-tab_and_completion_settings
 	terminal_utils
-	mac_specific
 	terminal_keybindings
 	aliases
 	history_config
@@ -19,6 +18,7 @@ CONFIG_FILES=(
 
 # shell integration for wezterm -- https://github.com/wez/wezterm/blob/main/assets/shell-integration/wezterm.sh
 [[ "$TERM_PROGRAM" == "WezTerm" ]] && CONFIG_FILES+=(semantic_prompts)
+[[ "$OSTYPE" =~ "darwin" ]] && CONFIG_FILES+=(mac_specific)
 
 #───────────────────────────────────────────────────────────────────────────────
 
