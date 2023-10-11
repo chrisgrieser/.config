@@ -148,6 +148,7 @@ keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
 -- INSERT MODE
 keymap("i", "<C-e>", "<Esc>A") -- EoL
 keymap("i", "<C-a>", "<Esc>I") -- BoL
+
 -- indent properly when entering insert mode on empty lines
 keymap("n", "i", function()
 	if api.nvim_get_current_line():find("^%s*$") then return [["_cc]] end
@@ -250,7 +251,7 @@ keymap(
 	{ "n", "x" },
 	"<D-5>",
 	function() require("funcs.quality-of-life").openAlfredPref() end,
-	{ desc = "󰮤 Reveal Workflow in Alfred" }
+	{ desc = "󰮤 Reveal in Alfred" }
 )
 
 -- cmd+e: inline code
