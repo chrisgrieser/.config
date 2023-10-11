@@ -10,8 +10,8 @@ local keymappings_I = {
 	["<PageUp>"] = "preview_scrolling_up",
 	["<Up>"] = "cycle_history_prev",
 	["<Down>"] = "cycle_history_next",
-	["<D-s>"] = function (prompt_bufnr)
-		require("telescope.actions").smart_send_to_qflist(prompt_bufnr)-- sends selected, or if none selected, sends all
+	["<D-s>"] = function(prompt_bufnr)
+		require("telescope.actions").smart_send_to_qflist(prompt_bufnr) -- sends selected, or if none selected, sends all
 		vim.cmd.cfirst()
 	end,
 	["<Tab>"] = "move_selection_worse",
@@ -49,19 +49,6 @@ local keymappings_I = {
 
 local hiddenIgnoreActive = false
 local findFileMappings = {
-	-- search directory up
-	["<D-up>"] = function(prompt_bufnr)
-		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-		-- cwd is only set if passed as telescope option
-		local cwd = current_picker.cwd and tostring(current_picker.cwd) or vim.loop.cwd()
-		local parent_dir = vim.fs.dirname(cwd)
-
-		require("telescope.actions").close(prompt_bufnr)
-		require("telescope.builtin").find_files {
-			prompt_title = vim.fs.basename(parent_dir),
-			cwd = parent_dir,
-		}
-	end,
 	-- toggle `--hidden` & `--no-ignore`
 	["<C-h>"] = function(prompt_bufnr)
 		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
@@ -79,12 +66,32 @@ local findFileMappings = {
 			cwd = cwd,
 		}
 	end,
+	-- search directory up
+	["<D-up>"] = function(prompt_bufnr)
+		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+		-- cwd is only set if passed as telescope option
+		local cwd = current_picker.cwd and tostring(current_picker.cwd) or vim.loop.cwd()
+		local parent_dir = vim.fs.dirname(cwd)
+
+		require("telescope.actions").close(prompt_bufnr)
+		require("telescope.builtin").find_files {
+			prompt_title = vim.fs.basename(parent_dir),
+			cwd = parent_dir,
+		}
+	end,
 }
 
 -- add j/k to mappings if normal mode
 local keymappings_N = vim.deepcopy(keymappings_I)
 keymappings_N["j"] = "move_selection_worse"
 keymappings_N["k"] = "move_selection_better"
+
+-- extra stuff needed to be able to set `nowait` for `q`
+keymappings_N["q"] = {
+	function(prompt_bufnr) require("telescope.actions").close(prompt_bufnr) end,
+	type = "action",
+	opts = { nowait = true },
+}
 
 --------------------------------------------------------------------------------
 
@@ -265,7 +272,7 @@ local function projectName()
 end
 
 return {
-	{ -- fuzzy selector
+	{ -- fuzzy finder
 		"nvim-telescope/telescope.nvim",
 		keys = {
 			{ "?", function() telescope("keymaps") end, desc = "⌨️  Search Keymaps" },

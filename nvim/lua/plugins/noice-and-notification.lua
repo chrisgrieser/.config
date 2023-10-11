@@ -3,10 +3,23 @@ local u = require("config.utils")
 
 -- DOCS https://github.com/folke/noice.nvim#-routes
 local routes = {
+	-- redirect to popup
+	{ filter = { event = "msg_show", min_height = 12 }, view = "popup" },
+	{ filter = { event = "notify", min_height = 12 }, view = "popup" },
+
 	-- write/deletion messages
 	{ filter = { event = "msg_show", find = "%d+B written$" }, view = "mini" },
 	{ filter = { event = "msg_show", find = "%d+L, %d+B$" }, view = "mini" },
 	{ filter = { event = "msg_show", find = "%-%-No lines in buffer%-%-" }, view = "mini" },
+
+	-- unneeded info on search patterns
+	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
+	{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
+
+	-- Word added to spellfile via
+	{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
+
+	-----------------------------------------------------------------------------
 
 	{ -- nvim-early-retirement
 		filter = {
@@ -20,29 +33,24 @@ local routes = {
 	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
 	{ filter = { event = "notify", find = "All parsers are up%-to%-date" }, view = "mini" },
 
-	-- Word added to spellfile via
-	{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
+	-- sg.nvim (sourcegraph)
+	{ filter = { event = "msg_show", find = "^%[sg%]" }, view = "mini" },
+	{ filter = { event = "notify", find = "^%[sg%]" }, view = "mini" },
 
 	-- Mason
 	{ filter = { event = "notify", find = "%[mason%-tool%-installer%]" }, view = "mini" },
 	{
 		filter = {
 			event = "notify",
-			cond = function(msg) return msg.opts and msg.opts.title and msg.opts.title:find("mason.*.nvim") end,
+			cond = function(msg)
+				return msg.opts and msg.opts.title and msg.opts.title:find("mason.*.nvim")
+			end,
 		},
 		view = "mini",
 	},
 
-	-- unneeded info on search patterns
-	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
-	{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
-
 	-- DAP
 	{ filter = { event = "notify", find = "^Session terminated$" }, view = "mini" },
-
-	-- redirect to popup
-	{ filter = { event = "msg_show", min_height = 12 }, view = "popup" },
-	{ filter = { event = "notify", min_height = 12 }, view = "popup" },
 }
 
 --------------------------------------------------------------------------------
@@ -56,10 +64,7 @@ return {
 			{ "<Esc>", function() vim.cmd.Noice("dismiss") end, desc = "󰎟 Clear Notifications" },
 			{
 				"<D-0>",
-				function()
-					vim.cmd.Noice("dismiss")
-					vim.cmd.Noice("history")
-				end,
+				"<cmd>Noice dismiss<CR><cmd>Noice history<CR>",
 				mode = { "n", "x", "i" },
 				desc = "󰎟 Notification Log",
 			},
