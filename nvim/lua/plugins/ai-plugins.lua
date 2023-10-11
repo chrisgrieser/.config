@@ -27,7 +27,7 @@ return {
 		},
 		init = function() u.leaderSubkey("q", "󰓁 SourceGraph") end,
 	},
-	{ -- AI Ghost Text Suggestions
+	{ -- AI Ghost-Text Suggestions
 		"Exafunction/codeium.vim",
 		event = "InsertEnter",
 		build = function()
@@ -40,22 +40,26 @@ return {
 				vim.loop.fs_symlink(symLinkFrom, symLinkTo)
 			end
 		end,
+		keys = {
+			{
+				"<D-s>",
+				function() return vim.fn["codeium#Accept"]() end,
+				mode = "i",
+				expr = true,
+				desc = "󰚩 Accept Suggestion",
+				silent = true,
+			},
+		},
 		config = function()
-			u.addToLuaLine("sections", "lualine_x", function ()
+			u.addToLuaLine("sections", "lualine_x", function()
 				-- only display activity
 				local status = vim.fn["codeium#GetStatusString"]()
 				if not status:find("%*") then return "" end
 				return "󰚩 …"
 			end)
 
-			vim.g.codeium_filetypes = {
-				TelescopePrompt = false,
-				DressingInput = false,
-			}
+			vim.g.codeium_filetypes = { TelescopePrompt = false, DressingInput = false }
 			vim.g.codeium_disable_bindings = 1
-
-			-- stylua: ignore
-			vim.keymap.set("i", "<D-s>", function() return vim.fn["codeium#Accept"]() end, { expr = true, desc = "󰚩 Accept Suggestion", silent = true })
 		end,
 	},
 }
