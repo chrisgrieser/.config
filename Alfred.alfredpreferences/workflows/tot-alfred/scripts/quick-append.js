@@ -12,15 +12,7 @@ function getFrontAppName() {
 function frontBrowser() {
 	const frontAppName = getFrontAppName();
 	// biome-ignore format: -
-	const chromiumVariants = [
-		"Google Chrome",
-		"Chromium",
-		"Opera",
-		"Vivaldi",
-		"Brave Browser",
-		"Microsoft Edge",
-		"Arc",
-	];
+	const chromiumVariants = [ "Google Chrome", "Chromium", "Opera", "Vivaldi", "Brave Browser", "Microsoft Edge", "Arc" ];
 	const webkitVariants = ["Safari", "Webkit"];
 	const isChromium = chromiumVariants.some((appName) => frontAppName.startsWith(appName));
 	const isWebKit = webkitVariants.some((appName) => frontAppName.startsWith(appName));

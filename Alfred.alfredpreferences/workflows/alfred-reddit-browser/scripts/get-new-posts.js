@@ -30,7 +30,7 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
  */
 
 /** @param {AlfredItem[]} oldItems */
-// rome-ignore lint/correctness/noUnusedVariables: JXA import HACK
+// biome-ignore lint/correctness/noUnusedVariables: JXA import HACK
 function getHackernewsPosts(oldItems) {
 	// INFO https://hn.algolia.com/api/
 	// alternative "https://hacker-news.firebaseio.com/v0/topstories.json";
@@ -83,6 +83,7 @@ function getHackernewsPosts(oldItems) {
 				icon: { path: "hackernews.png" },
 				mods: {
 					cmd: { arg: "next" },
+					// biome-ignore lint/complexity/useLiteralKeys: false positive
 					["cmd+shift"]: { arg: "prev" },
 					shift: { arg: externalUrl },
 				},
@@ -126,7 +127,7 @@ function getHackernewsPosts(oldItems) {
  * @param {string} subredditName
  * @param {AlfredItem[]} oldItems
  */
-// rome-ignore lint/correctness/noUnusedVariables: JXA import HACK
+// biome-ignore lint/correctness/noUnusedVariables: JXA import HACK
 function getRedditPosts(subredditName, oldItems) {
 	const opts = getSettings();
 
@@ -191,6 +192,7 @@ function getRedditPosts(subredditName, oldItems) {
 				quicklookurl: quicklookUrl,
 				mods: {
 					cmd: { arg: "next" },
+					// biome-ignore lint/complexity/useLiteralKeys: false positive
 					["cmd+shift"]: { arg: "prev" },
 					shift: {
 						valid: !isOnReddit,

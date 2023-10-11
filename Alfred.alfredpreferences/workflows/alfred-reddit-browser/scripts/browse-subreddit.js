@@ -60,7 +60,7 @@ function olderThan(firstPath, secondPath) {
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const timelogStart = +new Date();
 
@@ -81,7 +81,7 @@ function run() {
 	if (!cacheIsOutdated(subredditCache) && olderThan(`${pathOfThisWorkflow}/prefs.plist`, subredditCache)) {
 		posts = JSON.parse(readFile(subredditCache));
 		return JSON.stringify({
-			variables: { cache_was_updated: "false" }, // Alfred vars always strings
+			variables: { cacheWasUpdated: "false" }, // Alfred vars always strings
 			skipknowledge: true, // workflow handles order to remember reading positions
 			items: posts,
 		});
@@ -97,11 +97,11 @@ function run() {
 	// request new posts from API
 	if (subredditName === "hackernews") {
 		console.log("Writing new cache for hackernews");
-		// rome-ignore lint/correctness/noUndeclaredVariables: JXA import HACK
+		// biome-ignore lint/correctness/noUndeclaredVariables: JXA import HACK
 		posts = getHackernewsPosts(oldItems);
 	} else {
 		console.log("Writing new cache for r/" + subredditName);
-		// rome-ignore lint/correctness/noUndeclaredVariables: JXA import HACK
+		// biome-ignore lint/correctness/noUndeclaredVariables: JXA import HACK
 		posts = getRedditPosts(subredditName, oldItems);
 	}
 
@@ -118,7 +118,7 @@ function run() {
 	console.log("Total", durationSecs, "s");
 
 	return JSON.stringify({
-		variables: { cache_was_updated: "true" }, // Alfred vars always strings
+		variables: { cacheWasUpdated: "true" }, // Alfred vars always strings
 		items: posts,
 	});
 }

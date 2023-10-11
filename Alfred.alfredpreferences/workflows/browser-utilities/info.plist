@@ -432,13 +432,13 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>down for everyone or just me</string>
+				<string>down</string>
 				<key>subtext</key>
-				<string>Current Tab</string>
+				<string>"{query}" OR browser tab (if browser is front)</string>
 				<key>text</key>
 				<string>Down for Everyone or just me?</string>
 				<key>withspace</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>

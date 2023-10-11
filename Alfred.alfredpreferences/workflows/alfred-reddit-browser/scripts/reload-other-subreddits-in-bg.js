@@ -23,10 +23,10 @@ function writeToFile(filepath, text) {
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
-// rome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	// guard: cache was not updated
-	const cachesUpToDate = $.getenv("cache_was_updated") === "false";
+	const cachesUpToDate = $.getenv("cacheWasUpdated") === "false";
 	if (cachesUpToDate) return;
 
 	// IMPORT SUBREDDIT-LOADING-FUNCTIONS
@@ -45,7 +45,7 @@ function run() {
 	const otherSubreddits = allSubreddits.filter((subreddit) => subreddit !== curSubreddit);
 
 	// reload cache for them
-	otherSubreddits.forEach((subredditName) => {
+	for (const subredditName of otherSubreddits) {
 		const subredditCache = `${$.getenv("alfred_workflow_cache")}/${subredditName}.json`;
 		console.log("Reloading cache for " + subredditName);
 
@@ -53,9 +53,9 @@ function run() {
 		const oldCache = fileExists(subredditCache) ? JSON.parse(readFile(subredditCache)) : [];
 
 		const posts =
-			// rome-ignore lint/correctness/noUndeclaredVariables: import HACK
+			// biome-ignore lint/correctness/noUndeclaredVariables: import HACK
 			subredditName === "hackernews" ? getHackernewsPosts(oldCache) : getRedditPosts(subredditName, oldCache);
 
 		writeToFile(subredditCache, JSON.stringify(posts));
-	});
+	}
 }
