@@ -34,16 +34,16 @@ local config = {
 ---@param msg string
 local function notify(msg) hs.notify.show("Hammerspoon", "", msg) end
 
-local syncedRepos = {}
-local syncTasks = {}
+SyncedRepos = {}
+SyncTasks = {}
 
 ---@async
 ---@param repo { name: string, icon: string, scriptPath: string }
 local function repoSync(repo)
-	syncTasks[repo.name] = hs.task
+	SyncTasks[repo.name] = hs.task
 		.new(repo.scriptPath, function(exitCode, _, stdErr)
 			if exitCode == 0 then
-				table.insert(syncedRepos, repo)
+				table.insert(SyncedRepos, repo)
 			else
 				notify(("⚠️️%s %s Sync: %s"):format(repo.icon, repo.name, stdErr))
 			end
@@ -56,7 +56,7 @@ end
 local function syncInProgress()
 	local isSyncing = {}
 	for _, repo in pairs(config.repos) do
-		local isStillSyncing = syncTasks[repo.name] and syncTasks[repo.name]:isRunning()
+		local isStillSyncing = SyncTasks[repo.name] and SyncTasks[repo.name]:isRunning()
 		table.insert(isSyncing, isStillSyncing)
 	end
 	return u.tbl_contains(isSyncing, true)
@@ -78,11 +78,11 @@ local function syncAllGitRepos(notifyOnSuccess)
 		.waitUntil(function() return not syncInProgress() end, function()
 			local failedRepos = hs.fnutils.filter(
 				config.repos,
-				function(r) return not (hs.fnutils.contains(syncedRepos, r)) end
+				function(r) return not (hs.fnutils.contains(SyncedRepos, r)) end
 			)
 
-			if #syncedRepos > 0 then
-				local syncedIcons = hs.fnutils.map(syncedRepos, function(r) return r.icon end) or {}
+			if #SyncedRepos > 0 then
+				local syncedIcons = hs.fnutils.map(SyncedRepos, function(r) return r.icon end) or {}
 				print("🔁 Sync done: " .. table.concat(syncedIcons))
 				if notifyOnSuccess then notify("🔁 Sync done") end
 			end
@@ -93,7 +93,7 @@ local function syncAllGitRepos(notifyOnSuccess)
 				notify(failMsg)
 			end
 
-			syncedRepos = {} -- reset
+			SyncedRepos = {} -- reset
 			u.runWithDelays(config.postSyncHook.delaySecs, config.postSyncHook.func)
 		end)
 		:start()

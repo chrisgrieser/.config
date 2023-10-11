@@ -2,7 +2,9 @@ local M = {}
 
 local env = require("lua.environment-vars")
 
-MyTimers = {} -- need to catch timers in global vars to ensure they don't get garbage collected
+-- need to catch timers in global vars to ensure they don't get garbage collected
+-- https://github.com/asmagill/hammerspoon/wiki/Variable-Scope-and-Garbage-Collection
+MyTimers = {}
 --------------------------------------------------------------------------------
 
 -- shorthands
@@ -209,7 +211,7 @@ end
 function M.restartApp(appName)
 	local app = M.app(appName)
 	if app then app:kill() end
-	MyTimers[appName] = hs.timer.waitUntil(
+	MyTimers[appName .. "Restart"] = hs.timer.waitUntil(
 		function() return M.app(appName) == nil end,
 		function() hs.application.open(appName) end,
 		0.05
@@ -253,7 +255,7 @@ function M.openApps(appNames)
 end
 
 ---@param appNames string|string[]
-function M.quitApp(appNames)
+function M.quitApps(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
 	for _, name in pairs(appNames) do
 		local appObj = M.app(name)

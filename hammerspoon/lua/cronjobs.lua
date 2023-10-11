@@ -107,7 +107,7 @@ SleepAutoVideoOffTimer = hs.timer
 			-- 1. close browser tabs running YouTube (not using full name for youtube short-urls)
 			-- 2. close leftover fullscreen spaces created by apps running in fullscreen
 			u.closeTabsContaining("youtu")
-			u.quitApp(env.videoAndAudioApps)
+			u.quitApps(env.videoAndAudioApps)
 			closeFullscreenSpaces()
 		end)
 	end)
