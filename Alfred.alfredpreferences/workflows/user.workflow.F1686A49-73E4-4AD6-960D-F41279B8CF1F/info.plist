@@ -61,10 +61,6 @@ function envVar(varName) {
     .objectForKey(varName).js
 }
 
-// Constants
-const closeText = envVar("close_text")
-const clearAllText = envVar("clear_all_text")
-
 // Main
 Application("System Events")
   .applicationProcesses.byName("NotificationCenter")
@@ -73,8 +69,7 @@ Application("System Events")
   .scrollAreas[0]
   .uiElements[0]
   .groups()
-  .map(banner =&gt; banner.actions()
-    .find(action =&gt; action.description() === closeText || action.description() === clearAllText))
+  .map(banner =&gt; banner.actions().slice(-1)[0])
   .forEach(banner =&gt; banner.perform())</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -131,7 +126,7 @@ Application("System Events")
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
-				<integer>2</integer>
+				<integer>0</integer>
 				<key>relatedAppsMode</key>
 				<integer>0</integer>
 			</dict>
@@ -146,7 +141,7 @@ Application("System Events")
 	<key>readme</key>
 	<string>## Usage
 
-Clear macOS notification banners via the `notclear` keyword.
+Clear visible macOS notification banners via the `notclear` keyword.
 
 ![Clearing notification banners](images/about/notclear.png)
 
@@ -190,7 +185,7 @@ Configure the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>The keyword to clear visible notifications.</string>
+			<string></string>
 			<key>label</key>
 			<string>Clear Keyword</string>
 			<key>type</key>
@@ -198,51 +193,9 @@ Configure the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/
 			<key>variable</key>
 			<string>clear_keyword</string>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>Close</string>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string></string>
-			<key>label</key>
-			<string>Individual Banners</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>close_text</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>Clear All</string>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>The descriptions used on the different types of notifications. Change these to your language if your system is not in English.</string>
-			<key>label</key>
-			<string>Grouped Banners</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>clear_all_text</string>
-		</dict>
 	</array>
 	<key>version</key>
-	<string>2023.1</string>
+	<string>2023.2</string>
 	<key>webaddress</key>
 	<string>https://github.com/alfredapp/banner-be-gone-workflow/</string>
 </dict>
