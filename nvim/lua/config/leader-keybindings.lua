@@ -114,7 +114,10 @@ keymap(
 	function() vim.lsp.buf.code_action { filter = codeActionFilter } end,
 	{ desc = "󰒕 Code Action" }
 )
-keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
+keymap("n", "<leader>h", function ()
+	vim.lsp.buf.hover()
+	vim.defer_fn(vim.lsp.buf.hover, 100) -- 2nd call = enter the hover window
+end, { desc = "󰒕 Hover" })
 
 --------------------------------------------------------------------------------
 

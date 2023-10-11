@@ -1,13 +1,10 @@
 """This is a test file."""
 
+f = 100
 
-def myfun() -> int:  # pyright: ignore [reportGeneralTypeIssues]
-    """Test."""
+
+def myfun() -> int:
+    """Tesft."""
     f_f = 20
-    if f_f == 20:
-        f_f = 10
-    print(f_f)
-
-
-def hello() -> int:
-    """Test."""
+    ffff = f"""ffsf__f {__f}sfs"""
+    return f_f
