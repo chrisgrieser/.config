@@ -219,10 +219,10 @@ return {
 				},
 				get_config = function(opts)
 					local telescopeKinds = {
-						"github_issue", -- tinygit
-						"commit_selection", -- tinygit pickaxe
-						"icon_picker", -- icon-picker.nvim
-						"mason.ui.language-filter", -- mason
+						"tinygit.github_issue",
+						"tinygit.pickaxe_diff",
+						"icon_picker",
+						"mason.ui.language-filter",
 					}
 					if vim.tbl_contains(telescopeKinds, opts.kind) then
 						return { backend = "telescope" }
