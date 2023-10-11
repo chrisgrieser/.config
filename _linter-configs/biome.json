@@ -20,6 +20,7 @@
 	"linter": {
 		"rules": {
 			"all": true,
+			"nursery": { "noExcessiveComplexity": "off" },
 			"suspicious": { "noConsoleLog": "off" },
 			"style": {
 				"useTemplate": "off",
