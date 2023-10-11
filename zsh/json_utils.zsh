@@ -57,7 +57,7 @@ function file_url_or_stdin() {
 		[[ -f "$url_temp" ]] && last_url=$(cat "$url_temp")
 		[[ "$last_url" == "$url" ]] && return # already cached
 
-		# HACK using chrome as user agent, as some APIs don't like curl
+		# HACK using Chrome as user agent, as some APIs don't like curl
 		command curl --progress-bar --header "User-Agent: Chrome/115.0.0.0" "$url" >"$tmp"
 		echo "$url" > "$url_temp"
 	fi
@@ -65,13 +65,13 @@ function file_url_or_stdin() {
 
 # fx, but in a new wezterm tab
 function jless() {
-	if ! command -v jless &>/dev/null; then print "\033[1;33mfx not installed.\033[0m" && return 1; fi
+	if ! command -v jless &>/dev/null; then print "\033[1;33mjless not installed.\033[0m" && return 1; fi
 	if ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then echo "Not using WezTerm." && return 1; fi
 
 	local tmp="/tmp/temp.json"
 	file_url_or_stdin "$1"
 
-	pane_id=$(wezterm cli spawn -- jless "$tmp") # open in new wezterm tab
+	pane_id=$(wezterm cli spawn -- command jless "$tmp") # open in new wezterm tab
 	wezterm cli set-tab-title --pane-id="$pane_id" "jless"
 }
 
