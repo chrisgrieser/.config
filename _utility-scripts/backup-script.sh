@@ -1,8 +1,5 @@
 #!/bin/zsh
 
-if ! command -v ct &>/dev/null; then print "\033[1;33mchrometerm not installed.\033[0m" && return 1; fi
-
-
 # CONFIG
 LOG_LOCATION="$DATA_DIR/Backups/backups-to-external-drives.log"
 
@@ -51,7 +48,7 @@ function backup() {
 	print "─────────────────────────────────────────────────────────────────────────────\033[0m"
 	mkdir -p "$bkp_to"
 	# --delete-during the fastest deletion method, --arcive already implies --recursive
-	ct rsync --archive --delete-during --progress --human-readable \
+	rsync --archive --delete-during --progress --human-readable \
 		--exclude="*.Trash/*" "$bkp_from" "$bkp_to"
 }
 
@@ -82,8 +79,8 @@ echo "completed: $(date '+%H:%M')" >>"$LOG_LOCATION"
 # Log (at Backup Destination)
 echo "Backup: $(date '+%Y-%m-%d %H:%M')" >>last_backup.log
 
-# Reminder for Next Backup in 14 days, if there os no next backup reminder
-# already (avoids duplicate reminders if backup run twice)
+# Reminder for Next Backup in 14 days, if there is no backup reminder already
+# (avoids duplicate reminders if backup run twice)
 osascript -e'
 	set nextDate to (current date) + 14 * (60 * 60 * 24)
 	tell application "Reminders"
@@ -95,6 +92,6 @@ osascript -e'
 	end tell' &>/dev/null
 
 # Notify on Completion
-osascript -e 'display notification "" with title "Backup finished." sound name ""'
+osascript -e 'display notification "" with title "Backup finished." sound name "Blow"'
 
 #───────────────────────────────────────────────────────────────────────────────
