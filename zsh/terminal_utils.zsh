@@ -17,8 +17,8 @@ function separator() {
 function inspect() {
 	# check if pwd still exists
 	if [[ ! -d "$PWD" ]]; then
-		printf '\033[1;33m"%s" has been moved or deleted. Going to last directory.\033[0m' "$(basename "$PWD")"
-		command cd - || return 1
+		printf '\033[1;33m"%s" has been moved or deleted.\033[0m' "$(basename "$PWD")"
+		command cd "$OLDPWD" || return 1
 	fi
 
 	# CONFIG
@@ -101,19 +101,15 @@ function z() {
 
 function w {
 	if ! command -v walk &>/dev/null; then print "\033[1;33mwalk not installed.\033[0m" && return 1; fi
-	export WALK_EDITOR="open" # macos default app
-
-	if command -v __zoxide_z &>/dev/null; then
-		z "$(walk --icons "$@")"
-	else
-		cd "$(walk --icons "$@")" || return 1
-	fi
+	if ! command -v __zoxide_z &>/dev/null; then printf "\033[1;33mzoxide not installed.\033[0m" && return 1; fi
+	export WALK_EDITOR="open" # opens via macos default app
+	z "$(walk --icons "$@")"
 }
 
 # back to last directory
 function zz() {
 	if ! command -v __zoxide_z &>/dev/null; then printf "\033[1;33mzoxide not installed.\033[0m" && return 1; fi
-	__zoxide_z - &>/dev/null # since this is verbose command
+	__zoxide_z "$OLDPWD"
 	inspect
 	auto_venv
 }
