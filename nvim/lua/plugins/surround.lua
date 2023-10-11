@@ -1,12 +1,7 @@
-
---------------------------------------------------------------------------------
-
 local function surroundConfig()
 	local u = require("config.utils")
 	local textobjectRemaps = require("config.utils").textobjRemaps
 	local maps = require("config.utils").textobjMaps
-
-	-- requires unmapping yS from normal_line below
 
 	-- https://github.com/kylechui/nvim-surround/blob/main/doc/nvim-surround.txt#L483
 	local config = require("nvim-surround.config")
@@ -39,7 +34,7 @@ local function surroundConfig()
 					target = "(/)().-(/)()",
 				},
 			},
-			[maps["function"]] = {
+			[maps.func] = {
 				find = function()
 					return config.get_selection { motion = "a" .. maps["function"] }
 				end,
@@ -87,11 +82,11 @@ local function surroundConfig()
 					return { { "" }, { "" } }
 				end,
 			},
-			[maps["call"]] = {
+			[maps.call] = {
 				find = function() return config.get_selection { motion = "a" .. maps["call"] } end,
 				delete = "^([^=%s]+%()().-(%))()$", -- https://github.com/kylechui/nvim-surround/blob/main/doc/nvim-surround.txt#L357
 			},
-			[maps["conditional"]] = {
+			[maps.cond] = {
 				find = function()
 					return config.get_selection { motion = "a" .. maps["conditional"] }
 				end,

@@ -1,5 +1,4 @@
 local u = require("config.utils")
-
 --------------------------------------------------------------------------------
 
 vim.g.myLsps = {
@@ -34,7 +33,6 @@ vim.g.myLsps = {
 
 ---@type table<string, lspConfiguration>
 local serverConfigs = {}
-
 for _, lsp in pairs(vim.g.myLsps) do
 	serverConfigs[lsp] = {}
 end
@@ -43,12 +41,15 @@ end
 -- LUA
 
 serverConfigs.lua_ls = {
-	-- DOCS https://github.com/LuaLS/lua-language-server/wiki/Settings
+	-- DOCS https://luals.github.io/wiki/settings/
 	settings = {
 		Lua = {
 			completion = {
 				callSnippet = "Replace",
 				keywordSnippet = "Replace",
+				displayContext = 4,
+				showWord = "Disable",
+				workspaceWord = true, -- requires showWord to be disabled
 				postfix = ".", -- useful for `table.insert` and the like
 			},
 			diagnostics = {
@@ -72,9 +73,9 @@ serverConfigs.lua_ls = {
 -- DOCS https://github.com/astral-sh/ruff-lsp#settings
 serverConfigs.ruff_lsp = {
 	init_options = {
-		-- disable, since they are done by the formatter automatically
+		-- disabled, since they are done by the ruff_fix formatter
 		settings = {
-			organizeImports = false,
+			organizeImports = false, -- when "I" ruleset is added, then included in "fixAll"
 			fixAll = false,
 			codeAction = { fixViolation = { enable = false } },
 		},
