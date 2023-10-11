@@ -319,6 +319,9 @@ return {
 			require("which-key").register {
 				["<localleader>"] = { name = "filetype-specific", mode = { "n", "x" } },
 			}
+
+			-- set by some plugins and unnecessarily clobbers whichkey
+			vim.keymap.set("o", "<LeftMouse>", "<Nop>")
 		end,
 	},
 }

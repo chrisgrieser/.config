@@ -47,9 +47,7 @@ serverConfigs.lua_ls = {
 			completion = {
 				callSnippet = "Replace",
 				keywordSnippet = "Replace",
-				displayContext = 4,
-				showWord = "Disable",
-				workspaceWord = true, -- requires showWord to be disabled
+				displayContext = 6,
 				postfix = ".", -- useful for `table.insert` and the like
 			},
 			diagnostics = {
@@ -99,10 +97,7 @@ serverConfigs.pyright = {
 serverConfigs.jedi_language_server = {
 	init_options = {
 		diagnostics = { enable = true },
-		codeAction = {
-			nameExtractVariable = "extracted_var",
-			nameExtractFunction = "extracted_def",
-		},
+		codeAction = { nameExtractVariable = "extracted_var", nameExtractFunction = "extracted_def" },
 	},
 }
 

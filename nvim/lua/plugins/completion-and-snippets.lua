@@ -1,4 +1,5 @@
 local defaultSources = {
+	{ name = "nvim_lsp_signature_help" },
 	{ name = "luasnip" },
 	{ name = "nvim_lsp" },
 	{ name = "buffer", keyword_length = 4 },
@@ -9,6 +10,7 @@ local defaultSources = {
 local sourceIcons = {
 	buffer = "󰽙",
 	zsh = "",
+	nvim_lsp_signature_help = "󰏪",
 	nvim_lsp = "󰒕",
 	luasnip = "󰞘",
 	path = "",
@@ -95,6 +97,7 @@ local function cmpconfig()
 				local kindIcons = { Text = "", Method = "󰆧", Function = "󰊕", Constructor = "", Field = "󰇽", Variable = "󰂡", Class = "󰠱", Interface = "", Module = "", Property = "󰜢", Unit = "", Value = "󰎠", Enum = "", Keyword = "󰌋", Snippet = "󰅱", Color = "󰏘", File = "󰈙", Reference = "", Folder = "󰉋", EnumMember = "", Constant = "󰏿", Struct = "", Event = "", Operator = "󰆕", TypeParameter = "󰅲" }
 				local kindIcon = kindIcons[item.kind] or ""
 				item.kind = " " .. kindIcon .. " "
+				if entry.source.name == "nvim_lsp_signature_help" then item.kind = "" end
 				item.menu = sourceIcons[entry.source.name]
 				return item
 			end,
@@ -165,6 +168,7 @@ return {
 			"tamago324/cmp-zsh", -- some shell completions
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-nvim-lsp", -- LSP input
+			"hrsh7th/cmp-nvim-lsp-signature-help", -- LSP signature hints
 			"L3MON4D3/LuaSnip", -- snippet engine
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 		},
