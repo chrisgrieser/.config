@@ -1,4 +1,5 @@
 local defaultSources = {
+	{ name = "nvim_lsp_signature_help" },
 	{ name = "luasnip" },
 	{ name = "nvim_lsp" },
 	{ name = "buffer", keyword_length = 4 },
@@ -9,6 +10,7 @@ local defaultSources = {
 local sourceIcons = {
 	buffer = "󰽙",
 	zsh = "",
+	nvim_lsp_signature_help = "󰏪",
 	nvim_lsp = "󰒕",
 	luasnip = "󰞘",
 	path = "",
@@ -85,40 +87,14 @@ local function cmpconfig()
 		formatting = {
 			fields = { "kind", "abbr", "menu" }, -- order of the fields
 			format = function(entry, item)
-				local kindIcons = {
-					Text = "",
-					Method = "󰆧",
-					Function = "󰊕",
-					Constructor = "",
-					Field = "󰇽",
-					Variable = "󰂡",
-					Class = "󰠱",
-					Interface = "",
-					Module = "",
-					Property = "󰜢",
-					Unit = "",
-					Value = "󰎠",
-					Enum = "",
-					Keyword = "󰌋",
-					Snippet = "󰅱",
-					Color = "󰏘",
-					File = "󰈙",
-					Reference = "",
-					Folder = "󰉋",
-					EnumMember = "",
-					Constant = "󰏿",
-					Struct = "",
-					Event = "",
-					Operator = "󰆕",
-					TypeParameter = "󰅲",
-				}
-
 				-- abbreviate length https://github.com/hrsh7th/nvim-cmp/discussions/609
 				-- (height is controlled via pumheight option)
 				local maxLength = 50
 				if #item.abbr > maxLength then item.abbr = item.abbr:sub(1, maxLength) .. "…" end
 
 				-- icons
+				-- stylua: ignore
+				local kindIcons = { Text = "", Method = "󰆧", Function = "󰊕", Constructor = "", Field = "󰇽", Variable = "󰂡", Class = "󰠱", Interface = "", Module = "", Property = "󰜢", Unit = "", Value = "󰎠", Enum = "", Keyword = "󰌋", Snippet = "󰅱", Color = "󰏘", File = "󰈙", Reference = "", Folder = "󰉋", EnumMember = "", Constant = "󰏿", Struct = "", Event = "", Operator = "󰆕", TypeParameter = "󰅲" }
 				local kindIcon = kindIcons[item.kind] or ""
 				item.kind = " " .. kindIcon .. " "
 				item.menu = sourceIcons[entry.source.name]
@@ -171,7 +147,7 @@ local function cmpconfig()
 	cmp.setup.cmdline({ "/", "?" }, {
 		mapping = cmp.mapping.preset.cmdline(),
 		sources = {
-			{ name = "treesitter", max_item_count = 3 },
+			{ name = "buffer", max_item_count = 3 },
 		},
 	})
 end
@@ -191,6 +167,7 @@ return {
 			"tamago324/cmp-zsh", -- some shell completions
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-nvim-lsp", -- LSP input
+			"hrsh7th/cmp-nvim-lsp-signature-help", -- LSP signature hints
 			"L3MON4D3/LuaSnip", -- snippet engine
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 		},

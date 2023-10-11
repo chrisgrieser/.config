@@ -11,6 +11,7 @@ function getFrontAppName() {
 
 function frontBrowser() {
 	const frontAppName = getFrontAppName();
+	// biome-ignore format: -
 	const chromiumVariants = [
 		"Google Chrome",
 		"Chromium",
@@ -55,7 +56,7 @@ function browserTab() {
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
-function run() {
+function run(argv) {
 	const tot = Application("Tot");
 	tot.includeStandardAdditions = true;
 
@@ -64,9 +65,16 @@ function run() {
 	const isBrowser = frontBrowser() !== "no browser";
 
 	// get selected text
-	Application("System Events").keystroke("c", {using: ["command down"]});
-	delay(0.05)
-	const selectedText = app.theClipboard().toString();
+	const keywordUsed = Boolean(argv[0]);
+	let selectedText;
+	if (keywordUsed) {
+		selectedText = argv[0];
+	} else {
+		app.setTheClipboardTo(""); // empty clipboard in case of no selection
+		Application("System Events").keystroke("c", { using: ["command down"] });
+		delay(0.05);
+		selectedText = app.theClipboard().toString();
+	}
 
 	// Guard
 	if (!(selectedText || isBrowser)) return "";
