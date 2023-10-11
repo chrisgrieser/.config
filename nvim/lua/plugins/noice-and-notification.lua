@@ -106,7 +106,7 @@ return {
 				mini = { timeout = 3000 },
 				hover = {
 					border = { style = u.borderStyle },
-					size = { max_width = 80 },
+					size = { max_width = 80, max_height = 20 },
 					win_options = { scrolloff = 4 },
 				},
 				popup = {
@@ -135,13 +135,11 @@ return {
 				},
 			},
 
-			-- popupmenu = { backend = "nui" }, -- replace with nvim-cmp, since more sources
-
 			-- DISABLED, since conflicts with existing plugins I prefer to use
 			messages = { view_search = false }, -- replaced by nvim-hlslens
 			lsp = {
-				progress = { enabled = false }, -- replaced with nvim-dr-lsp, since this one cannot filter null-ls
-				signature = { enabled = true }, -- replaced with lsp_signature.nvim
+				progress = { enabled = false }, -- replaced with nvim-dr-lsp, since less intrusive
+				signature = { enabled = false }, -- using with lsp_signature.nvim
 
 				-- ENABLED features
 				override = {

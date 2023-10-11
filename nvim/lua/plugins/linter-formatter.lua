@@ -207,6 +207,7 @@ return {
 			ui = {
 				border = u.borderStyle,
 				height = 0.8, -- so it won't cover the statusline
+				width = 0.99,
 				icons = {
 					package_installed = "✓",
 					package_pending = "󰔟",
