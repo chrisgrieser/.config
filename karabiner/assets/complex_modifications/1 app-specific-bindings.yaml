@@ -12,6 +12,13 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Tot"
     manipulators:
+      # Smart Bullet
+      - type: basic
+        from: { key_code: "4", modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: a, modifiers: [control] } # ctrl-8 only works at the BoL
+          - { key_code: "8", modifiers: [control] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
       # Export
       - type: basic
         from: { key_code: e, modifiers: { mandatory: [command, shift] } }

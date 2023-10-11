@@ -146,9 +146,13 @@
 	"front window title": {
 		"prefix": "front window title",
 		"body": [
-			"const pdfName = Application(\"System Events\")",
-			"\t.processes.whose({ name: \"${1:appName}\" })",
-			"\t.windows[0].name()[0];"
+			"const frontWinName = Application(\"System Events\").processes.whose({ frontmost: true })[0].windows[0].name();"
+		]
+	},
+	"front app (process)": {
+		"prefix": "front app (process)",
+		"body": [
+			"const frontAppName = Application(\"System Events\").processes.whose({ frontmost: true })[0];"
 		]
 	},
 	"menu item": {

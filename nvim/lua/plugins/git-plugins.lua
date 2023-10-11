@@ -23,7 +23,25 @@ return {
 		"lewis6991/gitsigns.nvim",
 		event = "VeryLazy",
 		keys = {
-			{ "<leader>ga", ":Gitsigns stage_hunk<CR>", mode = "x", desc = "󰊢 Stage Selected Hunks" },
+			{
+				"<leader>ga",
+				function()
+					require("gitsigns").stage_hunk()
+					-- PENDING https://github.com/lewis6991/gitsigns.nvim/issues/906
+					vim.defer_fn(function()
+						local resp = vim.trim(vim.fn.system { "git", "diff", "--staged", "--stat" })
+						require("config.utils").notify("Staged Changes", resp)
+					end, 100)
+				end,
+				desc = "󰊢 Stage Hunk",
+			},
+			{
+				"<leader>ga",
+				":Gitsigns stage_hunk<CR>",
+				mode = "x",
+				desc = "󰊢 Stage Selected Hunks",
+				silent = true,
+			},
 			{ "<leader>gy", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "󰊢 Unstage Last Hunk" },
 			{ "<leader>gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Add Buffer" },
 			{ "<leader>gv", "<cmd>Gitsigns preview_hunk<CR>", desc = "󰊢 Preview Hunk Diff" },
