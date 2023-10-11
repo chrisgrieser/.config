@@ -23,7 +23,7 @@ local function surroundConfig()
 		},
 		surrounds = {
 			invalid_key_behavior = { add = false, find = false, delete = false, change = false },
-			[maps["doubleSquareBracket"]] = {
+			[maps.wikilink] = {
 				find = "%[%[.-%]%]",
 				add = { "[[", "]]" },
 				delete = "(%[%[)().-(%]%])()",

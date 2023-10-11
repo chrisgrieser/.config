@@ -128,6 +128,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>4A5614C3-8944-4C7D-89FD-18313D7209F2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A9D543B9-9D71-4CF2-9269-623972B72F0F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>6BB0E44D-7589-40AE-B22B-A01E1E604B88</key>
 		<array>
 			<dict>
@@ -591,7 +604,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/quicksave-to-tot.js</string>
+				<string>./scripts/quick-append.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -694,6 +707,21 @@
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>D5B2FECD-F5C9-405C-9595-34A812172444</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>soundname</key>
+				<string>Basso</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>A9D543B9-9D71-4CF2-9269-623972B72F0F</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -901,6 +929,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>545</real>
+		</dict>
+		<key>A9D543B9-9D71-4CF2-9269-623972B72F0F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>750</real>
+			<key>ypos</key>
+			<real>795</real>
 		</dict>
 		<key>AC952B18-4AA7-4805-B8AE-C886E9A98AE5</key>
 		<dict>
@@ -1118,7 +1155,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.3.1</string>
+	<string>1.3.2</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

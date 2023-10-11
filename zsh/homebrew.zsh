@@ -25,7 +25,6 @@ alias bu='brew uninstall --zap' # codespell-ignore
 
 function print-section() {
 	echo
-	echo
 	echo "$*"
 	separator
 }
@@ -82,7 +81,7 @@ function listall() {
 	print-section "HOMEBREW"
 	print-section "Taps"
 	brew tap
-	print-section "Leaves (formulas installed-on-request)"
+	print-section "Leaves"
 	brew leaves
 	print-section "Casks"
 	brew list --casks
