@@ -75,7 +75,7 @@ end
 local function quickfixCounter()
 	local totalQfItems = #vim.fn.getqflist()
 	if totalQfItems == 0 then return "" end
-	local qfData = vim.fn.getqflist({ idx = 0, title = true })
+	local qfData = vim.fn.getqflist { idx = 0, title = true }
 	local title = qfData.title:gsub("^Live Grep: .- %((.*)%)", "Grep: %1")
 	local index = qfData.idx
 	return (" %s/%s (%s)"):format(index, totalQfItems, title)
@@ -115,9 +115,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function(ctx)
 		local ft = ctx.match
 		local name = ft:sub(1, 1):upper() .. ft:sub(2) -- capitalize
-		if ft == "qf" then
-			name = 	qfData.title:gsub("^Live Grep: .- %((.*)%)", "Grep: %1")
-		end
+		if ft == "qf" then name = vim.fn.getqflist({ title = true }).title end
 		pcall(vim.api.nvim_buf_set_name, 0, name)
 	end,
 })
