@@ -5,13 +5,13 @@ matches:
   # `,,lang,,` will create a code block of the respective language and prefill
   # it with the clipboard content, e.g. `,,js,,`
   - regex: ",,(?P<lang>\\w*),,"
-    replace: |
+    replace: |-
       ```{{lang}}
-      {{unindentedCode}}
+      {{dedentedCode}}
       ```
     label: Markdown Codeblock
     vars:
-      - name: unindentedCode
+      - name: dedentedCode
         type: shell
         params:
           # LC_CTYPE: fix encoding issues
@@ -19,7 +19,9 @@ matches:
           # python3: remove indentation
           cmd: |
             export LC_CTYPE="en_US.UTF-8"
-            pbpaste | awk "NF {p=1} p" | python3 -c "import textwrap,sys; print(textwrap.dedent(sys.stdin.read()))"
+            pbpaste | 
+              awk "NF {p=1} p" | 
+              python3 -c "import textwrap,sys; print(textwrap.dedent(sys.stdin.read()))"
   - trigger: LLL
     replace: '[$|$]({{url}})'
     label: Markdown Link
@@ -29,9 +31,6 @@ matches:
         params:
           # only pastes clipboard content if it's a URL
           cmd: '[[ "$(pbpaste)" =~ ^http.* ]] && pbpaste || echo ""'
-  - trigger: TTT
-    replace: '- [ ] '
-    label: Markdown Task
   #─────────────────────────────────────────────────────────────────────────────
   - trigger: '!table'
     replace: |
@@ -42,6 +41,3 @@ matches:
   - trigger: '!img'
     replace: '<img width=60% alt="" src="$|$">'
     label: HTML Image
-  - trigger: '!progress'
-    replace: '<progress value="$|$" max="10"></progress>'
-    label: HTML Progress Bar

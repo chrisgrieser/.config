@@ -97,6 +97,7 @@ local function cmpconfig()
 				local kindIcons = { Text = "", Method = "󰆧", Function = "󰊕", Constructor = "", Field = "󰇽", Variable = "󰂡", Class = "󰠱", Interface = "", Module = "", Property = "󰜢", Unit = "", Value = "󰎠", Enum = "", Keyword = "󰌋", Snippet = "󰅱", Color = "󰏘", File = "󰈙", Reference = "", Folder = "󰉋", EnumMember = "", Constant = "󰏿", Struct = "", Event = "", Operator = "󰆕", TypeParameter = "󰅲" }
 				local kindIcon = kindIcons[item.kind] or ""
 				item.kind = " " .. kindIcon .. " "
+				if entry.source.name == "nvim_lsp_signature_help" then item.kind = "" end
 				item.menu = sourceIcons[entry.source.name]
 				return item
 			end,
