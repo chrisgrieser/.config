@@ -28,6 +28,11 @@ return {
 			{ "<leader>gv", "<cmd>Gitsigns preview_hunk<CR>", desc = "󰊢 Preview Hunk Diff" },
 			{ "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", desc = "󰊢 Reset Hunk" },
 			{ "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", desc = "󰊢 Reset Buffer" },
+			-- stylua: ignore start
+			{ "<leader>g?", function() require("gitsigns").blame_line { full = true } end, desc = "󰊢 Blame Line"},
+			{ "gh", function() require("gitsigns").next_hunk { foldopen = true } end, desc = "󰊢 Next Hunk" },
+			{ "gH", function() require("gitsigns").prev_hunk { foldopen = true } end, desc = "󰊢 Previous Hunk" },
+			-- stylua: ignore end
 			{
 				"gh",
 				"<cmd>Gitsigns select_hunk<CR>",
@@ -35,19 +40,13 @@ return {
 				desc = "󱡔 󰊢 hunk textobj",
 			},
 			{
-				"<leader>g?",
-				function() require("gitsigns").blame_line { full = true } end,
-				desc = "󰊢 Blame Line",
-			},
-			{
 				"<leader>gq",
-				function() require("gitsigns").setqflist("all", { open = false }) end,
-				desc = "󰊢 Blame Line",
+				function()
+					require("gitsigns").setqflist("all", { open = false })
+					vim.defer_fn(vim.cmd.cfirst, 100) -- PENDING https://github.com/lewis6991/gitsigns.nvim/issues/906
+				end,
+				desc = " Hunks to Quickfix",
 			},
-			-- stylua: ignore
-			{ "gh", function() require("gitsigns").next_hunk { foldopen = true } end, desc = "󰊢 Next Hunk" },
-			-- stylua: ignore
-			{ "gH", function() require("gitsigns").prev_hunk { foldopen = true } end, desc = "󰊢 Previous Hunk" },
 		},
 		opts = {
 			max_file_length = 12000, -- lines
