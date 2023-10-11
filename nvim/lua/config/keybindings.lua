@@ -266,8 +266,4 @@ keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" 
 keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename" })
 keymap("n", "<leader>V", ":IncRename <C-r><C-w>", { desc = "󰒕 IncRename (cword)" })
 
--- "v" instead of "x", so signature can be shown during snippet completion
-keymap({ "n", "i", "v" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰒕 Signature Help" })
-
 --------------------------------------------------------------------------------
-
