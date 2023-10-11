@@ -98,7 +98,7 @@ return {
 					},
 				},
 			},
-			-- https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua
+			-- DOCS https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua
 			views = {
 				cmdline_popup = {
 					border = { style = u.borderStyle },
@@ -106,7 +106,7 @@ return {
 				mini = { timeout = 3000 },
 				hover = {
 					border = { style = u.borderStyle },
-					size = { max_width = 80, max_height = 20 },
+					size = { max_width = 80 },
 					win_options = { scrolloff = 4 },
 				},
 				popup = {
