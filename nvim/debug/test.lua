@@ -1,4 +1,3 @@
-for _ = 1, 4 do -- remove first four lines (irrelevant diff header)
-	vim.notify("hii")
-	-- table.remove(diffLines, 1)
-end
+local function myFunc() print(debug.getinfo(1, "n").name) end
+myFunc()
+

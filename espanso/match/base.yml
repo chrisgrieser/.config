@@ -29,7 +29,7 @@ matches:
   - trigger: "!dontask"
     replace: "<https://dontasktoask.com/>"
   - trigger: "!bug"
-    replace: >
+    replace: >-
       Could you open a bug report at the GitHub repo? 
       Reason being that the bug report forms asks for various information 
       I need to investigate the issue. 
@@ -77,7 +77,7 @@ matches:
         params:
           cmd: "source $HOME/.zshenv && echo -n $OPENAI_API_KEY"
   - trigger: "!nversion"
-    replace: |
+    replace: |-
       ```
       {{neovimVersion}}
 
@@ -98,7 +98,7 @@ matches:
         params:
           cmd: "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; neovide --version | cut -d' ' -f2"
   - trigger: "!oversion"
-    replace: |
+    replace: |-
       ```
       Obsidian {{obsiVersion}}
       macOS {{OSversion}} (M1)
