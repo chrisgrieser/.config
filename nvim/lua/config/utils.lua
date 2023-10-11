@@ -137,10 +137,10 @@ M.textobjRemaps = {
 }
 
 M.textobjMaps = {
-	func = "f",
-	cond = "o",
-	call = "l",
-	wikilink = "R",
+	func = "f", -- [f]unction
+	cond = "o", -- c[o]nditional
+	call = "l", -- cal[l]
+	wikilink = "R", -- two [R]ectangular brackets
 }
 
 --------------------------------------------------------------------------------
