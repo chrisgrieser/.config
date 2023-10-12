@@ -100,7 +100,7 @@ local keymappings_N = vim.tbl_extend("force", keymappings_I, normalModeOnly)
 -- HELPERS
 
 -- https://github.com/nvim-telescope/telescope.nvim/issues/605
----@param mode "git_log"|"git_status"|"git_bcommits"
+---@param mode "git_status"|"git_commits"
 local function deltaPreviewer(mode)
 	local previewer = require("telescope.previewers").new_termopen_previewer {
 		get_command = function(entry)
@@ -110,16 +110,11 @@ local function deltaPreviewer(mode)
 				"-c", ("delta.%s=true"):format(vim.opt.background:get()),
 				"diff",
 			}
-			if mode == "git_log" then
+			if mode == "git_commits" then
 				local hash = entry.value
 				table.insert(cmd, hash .. "^!")
-			elseif mode == "git_bcommits" then
-				return
-				-- local hash = entry.value
-				-- table.insert(cmd, hash .. "^!")
-				-- local gitroot = vim.trim(vim.fn.system { "git", "rev-parse", "--show-toplevel" })
-				-- local filepath = gitroot .. "/" .. entry.value
-				-- table.insert(cmd, filepath)
+				-- INFO cannot determine hash & path, making is not possible to use
+				-- delta for git_bcommits
 			elseif mode == "git_status" then
 				local gitroot = vim.trim(vim.fn.system { "git", "rev-parse", "--show-toplevel" })
 				local filepath = gitroot .. "/" .. entry.value
@@ -223,15 +218,14 @@ local telescopeConfig = {
 			prompt_prefix = "󰊢 ",
 			initial_mode = "normal",
 			prompt_title = "Git Log",
-			previewer = deltaPreviewer("git_log"),
+			previewer = deltaPreviewer("git_commits"),
 			layout_config = { horizontal = { height = 0.9 } },
 			-- add commit time (%cr) & `--all`
-			git_command = { "git", "log", "--all", "--pretty=%h %s\t%cr", "--", "." }, 
+			git_command = { "git", "log", "--all", "--pretty=%h %s\t%cr", "--", "." },
 		},
 		git_bcommits = {
 			prompt_prefix = "󰊢 ",
 			initial_mode = "normal",
-			-- previewer = deltaPreviewer("git_bcommits"),
 			layout_config = { horizontal = { height = 0.9 } },
 			git_command = { "git", "log", "--pretty=%h %s\t%cr" }, -- add commit time (%cr)
 		},
