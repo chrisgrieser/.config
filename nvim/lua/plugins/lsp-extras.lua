@@ -83,26 +83,6 @@ return {
 	},
 	{ -- breadcrumbs for winbar
 		"SmiteshP/nvim-navic",
-		keys = {
-			{
-				"<D-b>",
-				function()
-					local rawdata = require("nvim-navic").get_data()
-					if not rawdata then
-						u.notify("Navic", "No breadcrumbs available.")
-						return
-					end
-					local breadcrumbs = ""
-					for _, v in pairs(rawdata) do
-						breadcrumbs = breadcrumbs .. v.name .. "."
-					end
-					breadcrumbs = breadcrumbs:sub(1, -2)
-					vim.fn.setreg("+", breadcrumbs)
-					u.notify("Copied", breadcrumbs)
-				end,
-				desc = "󰒕 Copy Breadcrumbs",
-			},
-		},
 		opts = {
 			lsp = {
 				auto_attach = true,

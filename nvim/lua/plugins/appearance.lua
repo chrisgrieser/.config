@@ -71,17 +71,13 @@ return {
 				-- filetypes
 				applescript = { icon = "", color = "#7f7f7f", name = "Applescript" },
 				bib = { icon = "", color = "#6e9b2a", name = "BibTeX" },
-				http = { icon = "󰴚", name = "HTTP request" }, -- for rest.nvim
-				gitignore = { icon = "", name = "gitignore" },
 				-- give plugins icons for my status line components
 				qf = { icon = "", name = "quickfix" },
 				ipython = { icon = "󰌠", name = "ipython" },
-				checkhealth = { icon = "󰩂", name = ":checkhealth" },
 				noice = { icon = "󰎟", name = "noice.nvim" },
 				lazy = { icon = "󰒲", name = "lazy.nvim" },
 				mason = { icon = "", name = "mason.nvim" },
 				lspinfo = { icon = "󰒕", name = "lspinfo" },
-				TelescopePrompt = { icon = "", name = "Telescope" },
 			},
 		},
 	},

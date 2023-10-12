@@ -129,6 +129,7 @@ function M.altBuffer()
 end
 
 ---Close window/buffer, preserving alt-file
+local lastClosedBuffer
 function M.betterClose()
 	if vim.bo.buftype ~= "" then
 		pcall(cmd.bwipeout, { bang = true })
@@ -137,7 +138,7 @@ function M.betterClose()
 
 	local absPath = fn.expand("%:p")
 	local fileExists = vim.loop.fs_stat(absPath) ~= nil
-	if vim.bo.modifiable and absPath and fileExists then cmd("silent update " .. absPath) end
+	if fileExists then cmd("silent update " .. absPath) end
 
 	-- close window
 	if numberOfWins() > 1 then
@@ -152,22 +153,19 @@ function M.betterClose()
 		return
 	end
 
-	local bufToDel = fn.expand("%:p")
-	local couldDelete
-	vim.g.last_deleted_buffer = bufToDel -- save for undoing
+	lastClosedBuffer = absPath -- save for undoing
 	if #openBuffers == 2 then
-		couldDelete = pcall(cmd.bwipeout) -- cannot clear altfile otherwise :/
+		pcall(cmd.bwipeout) -- cannot clear altfile otherwise :/
 		return
 	end
 
-	couldDelete = pcall(cmd.bdelete)
+	local couldDelete = pcall(cmd.bdelete)
 	if not couldDelete then
 		notify("Could not delete buffer.", "warn")
 		return
 	end
 
 	-- ensure new alt file points towards open, non-active buffer, or altoldfile
-	local curFile = fn.expand("%:p")
 	local i = 0
 	local newAltBuf = ""
 	repeat
@@ -177,7 +175,7 @@ function M.betterClose()
 			break
 		end
 		newAltBuf = openBuffers[i].name
-	until newAltBuf ~= curFile and newAltBuf ~= bufToDel
+	until newAltBuf ~= absPath and newAltBuf ~= absPath
 	fn.setreg("#", newAltBuf) -- empty string would set the altfile to the current buffer
 end
 
@@ -186,7 +184,7 @@ end
 function M.reopenBuffer()
 	-- cannot use purely oldfiles, since they are sometimes not updated
 	-- in time after buffer closing
-	local lastClosedBuf = vim.g.last_deleted_buffer or altOldfile()
+	local lastClosedBuf = lastClosedBuffer or altOldfile()
 	cmd.edit(lastClosedBuf)
 end
 
