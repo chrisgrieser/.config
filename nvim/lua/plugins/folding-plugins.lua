@@ -39,7 +39,6 @@ return {
 		"jghauser/fold-cycle.nvim",
 		keys = {
 			{ "^", function() require("fold-cycle").close() end, desc = " Cycle-Close Folds" },
-			{ "\\", function() require("fold-cycle").open() end, desc = " Cycle-Open Folds" },
 		},
 	},
 	{
@@ -80,7 +79,7 @@ return {
 			-- open opening the buffer, close these fold kinds
 			-- use `:UfoInspect` to get available fold kinds from the LSP
 			close_fold_kinds = { "imports" },
-			open_fold_hl_timeout = 500,
+			open_fold_hl_timeout = 800,
 			fold_virt_text_handler = foldTextFormatter,
 		},
 	},

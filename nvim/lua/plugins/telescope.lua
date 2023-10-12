@@ -66,8 +66,7 @@ local findFileMappings = {
 			hidden = hiddenIgnoreActive,
 			no_ignore = hiddenIgnoreActive,
 			cwd = cwd,
-			-- prevent these becoming visible through `--no-ignore`
-			file_ignore_patterns = { "%.DS_Store$", "%.git/" }
+			file_ignore_patterns = { "%.DS_Store$", "%.git/" }, -- prevent these becoming visible through `--no-ignore`
 		}
 	end,
 	-- search directory up
@@ -188,7 +187,7 @@ local telescopeConfig = {
 		file_ignore_patterns = {
 			"%.pdf$", "%.png$", "%.gif$", "%.jpe?g$","%.icns$", "%.pxd$",
 			"%.zip$", "%.plist$",
-			-- other ignores are defined via .gitignore, .ignore, or fd/ignore
+			-- other ignores are defined via .gitignore, .ignore, /fd/ignore, or /git/ignore
 		},
 	},
 	pickers = {
@@ -249,12 +248,15 @@ local telescopeConfig = {
 		},
 		lsp_document_symbols = {
 			prompt_prefix = "󰒕 ",
-			ignore_symbols = { "boolean", "number" },
-			fname_width = 12,
+			prompt_title = "Functions",
+			-- stylua: ignore
+			ignore_symbols = { "boolean", "number", "string", "variable", "array", "object", "constant", "package" },
 		},
 		lsp_workspace_symbols = {
 			prompt_prefix = "󰒕 ",
-			ignore_symbols = { "boolean", "number", "string" },
+			prompt_title = "Functions",
+			-- stylua: ignore
+			ignore_symbols = { "boolean", "number", "string", "variable", "array", "object", "constant", "package" },
 			fname_width = 12,
 		},
 		buffers = {
@@ -348,13 +350,29 @@ return {
 			},
 			{ "gL", function() telescope("grep_string") end, desc = " Grep cword in Project" },
 		},
-		cmd = "Telescope",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
 			"nvim-telescope/telescope-fzf-native.nvim",
 		},
 		opts = telescopeConfig,
+	},
+	{ -- Icon Picker
+		"nvim-telescope/telescope-symbols.nvim",
+		keys = {
+			{
+				"<D-ö>",
+				mode = { "n", "i" },
+				function()
+					require("telescope.builtin").symbols {
+						sources = { "nerd", "math" },
+						theme = "cursor",
+						layout_config = { cursor = { width = 0.35, height = 0.55 } },
+					}
+				end,
+				desc = " Icon Picker",
+			},
+		},
 	},
 	{ -- better recent files
 		"smartpde/telescope-recent-files",

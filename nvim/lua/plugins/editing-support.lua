@@ -116,14 +116,6 @@ return {
 			}
 		end,
 	},
-	{ -- icon-picker
-		"ziontee113/icon-picker.nvim",
-		keys = {
-			{ "<D-ö>", function() vim.cmd("IconPickerNormal nerd_font symbols") end },
-			{ "<D-ö>", function() vim.cmd("IconPickerInsert nerd_font symbols") end, mode = "i" },
-		},
-		opts = { disable_legacy_commands = true },
-	},
 	{ -- auto-convert string and f/template string
 		"chrisgrieser/nvim-puppeteer",
 		dependencies = "nvim-treesitter/nvim-treesitter",
