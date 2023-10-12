@@ -31,31 +31,26 @@ anchors:
 rules:
   - description: "🔺App Switcher Leader"
     manipulators:
-      - type: basic
-        from: { key_code: left_control }
-        to:
-          - key_code: capslock
-        conditions:
-          - *leader-inactive
-        to_if_alone:
-          - *activate-leader
-          - *set-notice
       # 2x L-Ctrl: Tot
       - type: basic
         from: { key_code: left_control, modifiers: { mandatory: [caps_lock] } }
-        conditions: [*leader-active]
         to_if_alone:
           - { key_code: f19 }
-          - key_code: capslock
-          - *deactivate-leader
+          - key_code: caps_lock
           - *remove-notice
       # Cancel (Hyper/Esc)
       - type: basic
-        from: { key_code: caps_lock }
-        conditions: [*leader-active]
+        from: { key_code: caps_lock, modifiers: { mandatory: [caps_lock] } }
         to_if_alone:
-          - *deactivate-leader
+          - key_code: caps_lock
           - *remove-notice
+      - type: basic
+        from: { key_code: left_control }
+        to:
+          - key_code: left_control
+        to_if_alone:
+          - key_code: caps_lock
+          - *set-notice
   #─────────────────────────────────────────────────────────────────────────────
   - description: "🔺 App Switcher Actions"
     manipulators:
