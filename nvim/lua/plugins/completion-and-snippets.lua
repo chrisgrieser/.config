@@ -23,6 +23,12 @@ local function cmpconfig()
 	local cmp = require("cmp")
 	local compare = require("cmp.config.compare")
 
+	local function hasBlankBefore()
+		local col = vim.api.nvim_win_get_cursor(0)[2]
+		local blankBefore = vim.api.nvim_get_current_line():sub(1, col):match("^%s*$") ~= nil
+		return blankBefore
+	end
+
 	cmp.setup {
 		snippet = {
 			expand = function(args) require("luasnip").lsp_expand(args.body) end,
@@ -52,8 +58,6 @@ local function cmpconfig()
 		},
 		mapping = cmp.mapping.preset.insert {
 			["<CR>"] = cmp.mapping.confirm { select = true }, -- true = autoselect first entry
-			["<D-Esc>"] = cmp.mapping.complete(), -- trigger suggestion popup
-			["<S-CR>"] = cmp.mapping.abort(), -- accept current text, consistent with Obsidian https://medium.com/obsidian-observer/obsidian-quick-tip-use-shift-enter-to-skip-autocomplete-on-links-8495ea189c4c
 			["<PageUp>"] = cmp.mapping.scroll_docs(-4),
 			["<PageDown>"] = cmp.mapping.scroll_docs(4),
 			["<C-e>"] = cmp.mapping.abort(),
@@ -62,6 +66,8 @@ local function cmpconfig()
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_next_item()
+				elseif hasBlankBefore() then
+					cmp.complete()
 				else
 					fallback()
 				end
@@ -105,17 +111,20 @@ local function cmpconfig()
 	-----------------------------------------------------------------------------
 
 	-- LUA
+	-- disable annoying --#region suggestions
 	cmp.setup.filetype("lua", {
-		enabled = function() -- disable annoying --#region suggestions
+		enabled = function()
 			local line = vim.api.nvim_get_current_line()
 			return not (line:find("%s%-%-?$") or line:find("^%-%-?$"))
 		end,
 	})
 
 	-- ZSH
+	-- add zsh source
+	-- disable the annoying `\[` suggestion
 	local defaultPlusZsh = vim.tbl_extend("keep", defaultSources, { name = "zsh" })
 	cmp.setup.filetype("sh", {
-		enabled = function() -- disable the annoying `\[` suggestion
+		enabled = function() 
 			local col = vim.fn.col(".") - 1
 			local charBefore = vim.api.nvim_get_current_line():sub(col, col)
 			return charBefore ~= "\\"

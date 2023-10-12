@@ -201,7 +201,7 @@ return {
 	{ -- package manager
 		"williamboman/mason.nvim",
 		keys = {
-			{ "<leader>pm", vim.cmd.Mason, desc = " Mason Home" },
+			{ "<leader>pm", vim.cmd.Mason, desc = " Mason Home" },
 		},
 		opts = {
 			ui = {
@@ -224,7 +224,7 @@ return {
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		event = "VeryLazy",
 		keys = {
-			{ "<leader>pM", vim.cmd.MasonToolsUpdate, desc = " Mason Update" },
+			{ "<leader>pM", vim.cmd.MasonToolsUpdate, desc = " Mason Update" },
 		},
 		dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
 		config = function()

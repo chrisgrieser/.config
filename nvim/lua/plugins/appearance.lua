@@ -79,7 +79,7 @@ return {
 				checkhealth = { icon = "󰩂", name = ":checkhealth" },
 				noice = { icon = "󰎟", name = "noice.nvim" },
 				lazy = { icon = "󰒲", name = "lazy.nvim" },
-				mason = { icon = "", name = "mason.nvim" },
+				mason = { icon = "", name = "mason.nvim" },
 				lspinfo = { icon = "󰒕", name = "lspinfo" },
 				TelescopePrompt = { icon = "", name = "Telescope" },
 			},
