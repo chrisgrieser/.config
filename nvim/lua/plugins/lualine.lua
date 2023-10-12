@@ -2,60 +2,25 @@ local bo = vim.bo
 local fn = vim.fn
 --------------------------------------------------------------------------------
 
--- displays irregular indentation and linebreaks, displays nothing when all is good
+-- displays irregular indentation, displays nothing when all is good
 local function irregularWhitespace()
-	if bo.buftype ~= "" then return "" end
-	local out = {}
-
-	-- CONFIG
-	-- filetypes and the number of spaces they use. Omit or set to nil to use tabs for that filetype.
-	local spaceFiletypes = { python = 4, yaml = 2, query = 2 }
-	local ignoredFiletypes = { "css" }
-	local linebreakType = "unix" ---@type "unix"|"mac"|"dos"
-	local icons = { unix = "", mac = "", dos = "", space = "󱁐", tab = "󰌒" }
-
-	-- non-default indentation setting (e.g. changed via guessIndent or editorconfig)
 	local ft = bo.filetype
+	if bo.buftype ~= "" then return "" end
+
+	-- CONFIG and the number of spaces they use.
+	local spaceFiletypes = { python = 4, yaml = 2, query = 2 }
+
 	local spaceFtsOnly = vim.tbl_keys(spaceFiletypes)
 	local spacesInsteadOfTabs = bo.expandtab and not vim.tbl_contains(spaceFtsOnly, ft)
 	local differentSpaceAmount = bo.expandtab and spaceFiletypes[ft] ~= bo.tabstop
 	local tabsInsteadOfSpaces = not bo.expandtab and vim.tbl_contains(spaceFtsOnly, ft)
+
 	if spacesInsteadOfTabs or differentSpaceAmount then
-		out.indentation = icons.space .. " " .. tostring(bo.tabstop)
+		return "󱁐 " .. tostring(bo.tabstop)
 	elseif tabsInsteadOfSpaces then
-		out.indentation = icons.tab .. " " .. tostring(bo.tabstop)
+		return "󰌒 " .. tostring(bo.tabstop)
 	end
-	if vim.tbl_contains(ignoredFiletypes, ft) then out.indentation = nil end
-
-	-- line breaks
-	local irregularLinebreak = bo.fileformat ~= linebreakType
-	if irregularLinebreak then out.linebreak = "󰌑 " .. icons[bo.fileformat] .. " " end
-
-	-- out
-	return table.concat(vim.tbl_values(out), " ")
-end
-
---------------------------------------------------------------------------------
-
---- https://github.com/nvim-lualine/lualine.nvim/blob/master/lua/lualine/components/branch/git_branch.lua#L118
-local function isStandardBranch()
-	-- checking via lualine API, to not call git ourself
-	local curBranch = require("lualine.components.branch.git_branch").get_branch()
-	local notMainBranch = curBranch ~= "main" and curBranch ~= "master"
-	local notSpecialBuffer = bo.buftype == ""
-	return notMainBranch and notSpecialBuffer
-end
-
---------------------------------------------------------------------------------
-
--- better than lualine's default
-local function selectionCount()
-	local isVisualMode = fn.mode():find("[Vv]")
-	if not isVisualMode then return "" end
-	local starts = fn.line("v")
-	local ends = fn.line(".")
-	local lines = starts <= ends and ends - starts + 1 or starts - ends + 1
-	return " " .. tostring(lines) .. "L " .. tostring(fn.wordcount().visual_chars) .. "C"
+	return ""
 end
 
 local function quickfixCounter()
@@ -71,18 +36,18 @@ end
 
 -- FIX Add missing buffer names for current file component
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "lazy", "mason", "noice", "checkhealth", "lspinfo", "qf" },
+	pattern = { "lazy", "mason", "noice", "checkhealth", "lspinfo" },
 	callback = function(ctx)
 		local ft = ctx.match
 		local name = ft:sub(1, 1):upper() .. ft:sub(2) -- capitalize
-		if ft == "qf" then name = vim.fn.getqflist({ title = true }).title end
 		pcall(vim.api.nvim_buf_set_name, 0, name)
 	end,
 })
 
--- nerdfont: powerline icons have the prefix 'ple-'
-local bottomSeparators = { left = "", right = "" }
+local bottomSeparators = { left = "", right = "" } -- nerdfont-powerline icons have prefix 'ple-'
 local topSeparators = { left = "", right = "" }
+
+--------------------------------------------------------------------------------
 
 local lualineConfig = {
 	tabline = {
@@ -94,7 +59,7 @@ local lualineConfig = {
 			{
 				"datetime",
 				style = "%H:%M",
-				cond = function() return vim.opt.columns:get() > 110 and vim.opt.lines:get() > 25 end,
+				cond = function() return vim.o.columns > 110 and vim.o.lines > 25 end,
 				section_separators = topSeparators,
 			},
 			{
@@ -108,20 +73,26 @@ local lualineConfig = {
 		lualine_b = {
 			{
 				"navic",
+				cond = function() return bo.filetype ~= "css" end,
 				section_separators = topSeparators,
-				cond = function() return vim.bo.filetype ~= "css" end,
 			},
 		},
 		lualine_c = {},
 		lualine_x = {},
-		-- INFO dap and recording status defined in the respective plugin configs
-		-- for lualine_y and lualine_z for their lazy loading
 		lualine_y = {},
 		lualine_z = {},
 	},
 	sections = {
 		lualine_a = {
-			{ "branch", cond = isStandardBranch },
+			{
+				"branch",
+				cond = function()
+					local curBranch = require("lualine.components.branch.git_branch").get_branch()
+					local notMainBranch = curBranch ~= "main" and curBranch ~= "master"
+					local notSpecialBuffer = bo.buftype == ""
+					return notMainBranch and notSpecialBuffer
+				end,
+			},
 			{ "filetype", icon_only = true, colored = false, padding = { right = 0, left = 1 } },
 			{ "filename", file_status = false },
 		},
@@ -137,12 +108,16 @@ local lualineConfig = {
 				symbols = { error = "󰅚 ", warn = " ", info = "󰋽 ", hint = "󰘥 " },
 			},
 			{ irregularWhitespace },
+			{ "fileformat", cond = function() return bo.fileformat ~= "unix" end },
 		},
 		lualine_y = {
 			"diff",
 		},
 		lualine_z = {
-			{ selectionCount, padding = { left = 0, right = 1 } },
+			{
+				"selectioncount",
+				fmt = function(str) return str ~= "" and str .. "礪" or "" end,
+			},
 			"location",
 		},
 	},
@@ -153,6 +128,7 @@ local lualineConfig = {
 		component_separators = { left = "", right = "" },
 		section_separators = bottomSeparators,
 	},
+	extensions = { "quickfix" },
 }
 
 --------------------------------------------------------------------------------

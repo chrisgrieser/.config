@@ -58,6 +58,7 @@ end
 
 ---shows info on alternate window/buffer/oldfile in that priority
 ---@nodiscard
+---@return string
 function M.altFileStatusline()
 	local maxLen = 25
 	local altFile = fn.expand("#:t")
@@ -66,8 +67,8 @@ function M.altFileStatusline()
 	local curPath = fn.expand("%:p")
 	local altOld = altOldfile()
 	local name, icon = "", ""
-	local altBufNr = vim.fn.bufnr("#")---@diagnostic disable-line: param-type-mismatch
-	local specialFile = altBufNr > -1 and vim.api.nvim_buf_get_option(altBufNr, "buftype") or false
+	local altBufNr = vim.fn.bufnr("#") ---@diagnostic disable-line: param-type-mismatch
+	local specialFile = vim.api.nvim_buf_get_option(altBufNr, "buftype") ~= ""
 	local fileExists = vim.loop.fs_stat(altPath) ~= nil
 	local hasAltFile = altFile ~= "" and altPath ~= curPath and (fileExists or specialFile)
 
@@ -75,19 +76,11 @@ function M.altFileStatusline()
 		local ext = fn.expand("#:e")
 		local altBufFt = vim.api.nvim_buf_get_option(fn.bufnr("#"), "filetype") ---@diagnostic disable-line: param-type-mismatch
 		local ftOrExt = ext ~= "" and ext or altBufFt
-		if ftOrExt == "javascript" then ftOrExt = "js" end
-		if ftOrExt == "typescript" then ftOrExt = "ts" end
-		if ftOrExt == "markdown" then ftOrExt = "md" end
-		if ftOrExt == "vimrc" then ftOrExt = "vim" end
-		local deviconsInstalled, devicons = pcall(require, "nvim-web-devicons")
-		icon = deviconsInstalled and devicons.get_icon(altFile, ftOrExt) or "#"
-
-		-- add sourcegraph icon for clarity
-		if fn.expand("#"):find("^sg") then icon = "󰓁 " .. icon end
+		local ok, devicons = pcall(require, "nvim-web-devicons")
+		icon = ok and devicons.get_icon(altFile, ftOrExt) or "#"
 
 		if curFile == altFile then
-			-- append parent of altfile
-			local altParent = fn.expand("#:p:h:t")
+			local altParent = fn.expand("#:p:h:t") -- append parent of altfile
 			name = altParent .. "/" .. altFile
 		else
 			name = altFile
@@ -105,7 +98,6 @@ function M.altFileStatusline()
 		local ext = name:match("%.%w+$")
 		name = nameNoExt:sub(1, maxLen) .. "…" .. ext
 	end
-
 	return icon .. " " .. name
 end
 
@@ -114,7 +106,7 @@ function M.altBuffer()
 	local altFile = fn.expand("#:t")
 	local altPath = fn.expand("#:p")
 	local curPath = fn.expand("%:p")
-	local altBufNr = vim.fn.bufnr("#")---@diagnostic disable-line: param-type-mismatch
+	local altBufNr = vim.fn.bufnr("#") ---@diagnostic disable-line: param-type-mismatch
 	local specialFile = altBufNr > -1 and vim.api.nvim_buf_get_option(altBufNr, "buftype") or false
 	local fileExists = vim.loop.fs_stat(altPath) ~= nil
 	local hasAltFile = altFile ~= "" and altPath ~= curPath and (fileExists or specialFile)
@@ -168,24 +160,23 @@ function M.betterClose()
 	-- ensure new alt file points towards open, non-active buffer, or altoldfile
 	local i = 0
 	local newAltBuf = ""
-	repeat
+	while true do
 		i = i + 1
 		if i > #openBuffers then
 			newAltBuf = altOldfile() or ""
 			break
 		end
 		newAltBuf = openBuffers[i].name
-	until newAltBuf ~= absPath and newAltBuf ~= absPath
+		if newAltBuf ~= absPath and newAltBuf ~= absPath then break end
+	end
 	fn.setreg("#", newAltBuf) -- empty string would set the altfile to the current buffer
 end
 
 ---repons last closed buffer, similar to ctrl-shift-t in the browser. If no
 ---buffer has been closed this session, opens last oldfile
 function M.reopenBuffer()
-	-- cannot use purely oldfiles, since they are sometimes not updated
-	-- in time after buffer closing
-	local lastClosedBuf = lastClosedBuffer or altOldfile()
-	cmd.edit(lastClosedBuf)
+	-- cannot use purely oldfiles, since they are not updated after buffer closing
+	cmd.edit(lastClosedBuffer or altOldfile())
 end
 
 --------------------------------------------------------------------------------
