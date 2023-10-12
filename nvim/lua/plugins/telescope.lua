@@ -100,26 +100,31 @@ local keymappings_N = vim.tbl_extend("force", keymappings_I, normalModeOnly)
 -- HELPERS
 
 -- https://github.com/nvim-telescope/telescope.nvim/issues/605
----@param mode "git_log"|"git_status"
+---@param mode "git_log"|"git_status"|"git_bcommits"
 local function deltaPreviewer(mode)
 	local previewer = require("telescope.previewers").new_termopen_previewer {
 		get_command = function(entry)
 			-- stylua: ignore
 			local cmd = {
-				"git",
-				"-c", "core.pager=delta",
-				-- "-c", ("delta.%s=true"):format(vim.opt.background:get()),
+				"git", "-c", "core.pager=delta",
+				"-c", ("delta.%s=true"):format(vim.opt.background:get()),
 				"diff",
 			}
 			if mode == "git_log" then
 				local hash = entry.value
 				table.insert(cmd, hash .. "^!")
+			elseif mode == "git_bcommits" then
+				return
+				-- local hash = entry.value
+				-- table.insert(cmd, hash .. "^!")
+				-- local gitroot = vim.trim(vim.fn.system { "git", "rev-parse", "--show-toplevel" })
+				-- local filepath = gitroot .. "/" .. entry.value
+				-- table.insert(cmd, filepath)
 			elseif mode == "git_status" then
-				local filename = entry.value
-				table.insert(cmd, "--")
-				table.insert(cmd, filename)
+				local gitroot = vim.trim(vim.fn.system { "git", "rev-parse", "--show-toplevel" })
+				local filepath = gitroot .. "/" .. entry.value
+				table.insert(cmd, filepath)
 			end
-			vim.notify("🪚 cmd: " .. vim.inspect(cmd))
 			return cmd
 		end,
 	}
@@ -130,7 +135,7 @@ end
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "TelescopeResults",
 	callback = function()
-		vim.fn.matchadd("TelescopeParent", "\t\t.*$")
+		vim.fn.matchadd("TelescopeParent", "\t.*$")
 		vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
 	end,
 })
@@ -220,7 +225,14 @@ local telescopeConfig = {
 			prompt_title = "Git Log",
 			previewer = deltaPreviewer("git_log"),
 			layout_config = { horizontal = { height = 0.9 } },
-			git_command = { "git", "log", "--pretty=%h %s (%cr)", "--", "." }, -- add commit time (%cr)
+			git_command = { "git", "log", "--pretty=%h %s\t%cr", "--", "." }, -- add commit time (%cr)
+		},
+		git_bcommits = {
+			prompt_prefix = "󰊢 ",
+			initial_mode = "normal",
+			previewer = deltaPreviewer("git_bcommits"),
+			layout_config = { horizontal = { height = 0.9 } },
+			git_command = { "git", "log", "--pretty=%h %s\t%cr" }, -- add commit time (%cr)
 		},
 		keymaps = {
 			prompt_prefix = " ",
@@ -318,6 +330,7 @@ return {
 			},
 			{ "<leader>gs", function() telescope("git_status") end, desc = " Status" },
 			{ "<leader>gl", function() telescope("git_commits") end, desc = " Log/Commits" },
+			{ "<leader>gL", function() telescope("git_bcommits") end, desc = " Buffer Commits" },
 			{ "<leader>gb", function() telescope("git_branches") end, desc = " Branches" },
 			{
 				"go",
