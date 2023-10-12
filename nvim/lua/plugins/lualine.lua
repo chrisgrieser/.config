@@ -6,7 +6,7 @@ local fn = vim.fn
 local function irregularWhitespace()
 	if bo.buftype ~= "" then return "" end
 
-	-- CONFIG and the number of spaces they use.
+	-- CONFIG
 	local spaceFiletypes = { python = 4, yaml = 2, query = 2 }
 
 	local spaceFtsOnly = vim.tbl_keys(spaceFiletypes)
@@ -33,20 +33,8 @@ end
 
 --------------------------------------------------------------------------------
 
--- FIX Add missing buffer names for filename component
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "lazy", "mason", "noice", "checkhealth", "lspinfo" },
-	callback = function(ctx)
-		local ft = ctx.match
-		local name = ft:sub(1, 1):upper() .. ft:sub(2) -- capitalize
-		pcall(vim.api.nvim_buf_set_name, 0, name)
-	end,
-})
-
 local bottomSeparators = { left = "", right = "" } -- nerdfont-powerline icons have prefix 'ple-'
 local topSeparators = { left = "", right = "" }
-
---------------------------------------------------------------------------------
 
 local lualineConfig = {
 	tabline = {
@@ -119,7 +107,16 @@ local lualineConfig = {
 	},
 	options = {
 		refresh = { statusline = 1000 },
-		ignore_focus = { "DressingInput", "DressingSelect", "ccc-ui" },
+		ignore_focus = {
+			"DressingInput",
+			"DressingSelect",
+			"ccc-ui",
+			"TelescopePrompt",
+			"lazy",
+			"mason",
+			"checkhealth",
+			"lspinfo",
+		},
 		globalstatus = true,
 		component_separators = { left = "", right = "" },
 		section_separators = bottomSeparators,
