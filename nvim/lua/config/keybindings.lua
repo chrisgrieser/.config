@@ -7,10 +7,13 @@ local keymap = require("config.utils").uniqueKeymap
 --------------------------------------------------------------------------------
 -- META
 
-keymap("n", "<D-,>", function()
-	local thisFilePath = debug.getinfo(1).source:sub(2)
-	cmd.edit(thisFilePath)
-end, { desc = "⌨️ Edit keybindings" })
+local pathOfThisFile = debug.getinfo(1).source:sub(2)
+keymap(
+	"n",
+	"<D-,>",
+	function() vim.cmd.edit(pathOfThisFile) end,
+	{ desc = "⌨️ Edit " .. vim.fs.basename(pathOfThisFile) }
+)
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
@@ -105,6 +108,9 @@ keymap(
 -- SPELLING
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" }) -- works even with `spell=false`
 
+-- Merging
+keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
+
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
 
@@ -139,9 +145,6 @@ keymap(
 
 keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Move selection right" })
 keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "➡️ Move selection left" })
-
--- Merging
-keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
 
 --------------------------------------------------------------------------------
 

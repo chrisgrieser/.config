@@ -7,10 +7,13 @@ local keymap = require("config.utils").uniqueKeymap
 
 --------------------------------------------------------------------------------
 -- META
-keymap("n", "<D-;>", function()
-	local pathOfThisFile = debug.getinfo(1).source:sub(2)
-	vim.cmd.edit(pathOfThisFile)
-end, { desc = "⌨️ Edit leader-keybindings" })
+local pathOfThisFile = debug.getinfo(1).source:sub(2)
+keymap(
+	"n",
+	"<D-;>",
+	function() vim.cmd.edit(pathOfThisFile) end,
+	{ desc = "⌨️ Edit " .. vim.fs.basename(pathOfThisFile) }
+)
 
 --------------------------------------------------------------------------------
 
@@ -114,7 +117,7 @@ keymap(
 	function() vim.lsp.buf.code_action { filter = codeActionFilter } end,
 	{ desc = "󰒕 Code Action" }
 )
-keymap("n", "<leader>h", function ()
+keymap("n", "<leader>h", function()
 	vim.lsp.buf.hover()
 	vim.defer_fn(vim.lsp.buf.hover, 100) -- 2nd call = enter the hover window
 end, { desc = "󰒕 Hover" })
