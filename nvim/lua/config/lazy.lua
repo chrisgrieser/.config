@@ -73,9 +73,9 @@ require("lazy").setup("plugins", {
 --------------------------------------------------------------------------------
 -- KEYMAPS
 local keymap = require("config.utils").uniqueKeymap
-keymap("n", "<leader>pp", require("lazy").sync, { desc = " Lazy Update" })
-keymap("n", "<leader>ph", require("lazy").home, { desc = " Lazy Overview" })
-keymap("n", "<leader>pi", require("lazy").install, { desc = " Lazy Install" })
+keymap("n", "<leader>pp", require("lazy").sync, { desc = "󰒲 Lazy Update" })
+keymap("n", "<leader>ph", require("lazy").home, { desc = "󰒲 Lazy Overview" })
+keymap("n", "<leader>pi", require("lazy").install, { desc = "󰒲 Lazy Install" })
 
 -- 5s after startup, notify if there many plugin updates
 vim.defer_fn(function()

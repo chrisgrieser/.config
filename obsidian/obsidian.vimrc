@@ -30,12 +30,6 @@ nnoremap k gk
 nnoremap I g0i
 nnoremap A g$a
 
-" navigate chapters (longform plugin)
-exmap previousScene obcommand longform:longform-previous-scene
-exmap nextScene obcommand longform:longform-next-scene
-nnoremap gj :nextScene
-nnoremap gk :previousScene
-
 " HJKL behaves like hjkl, but bigger distance
 noremap H g0
 noremap L g$
