@@ -1,6 +1,5 @@
 -- vim-pseudo-modeline: buffer_has_colors
 local u = require("config.utils")
-
 --------------------------------------------------------------------------------
 
 return {
@@ -66,17 +65,9 @@ return {
 	{ -- Nerdfont filetype icons
 		"nvim-tree/nvim-web-devicons",
 		opts = {
-			default = true, -- use default icon as fallback
 			override = {
-				-- filetypes
 				applescript = { icon = "", color = "#7f7f7f", name = "Applescript" },
 				bib = { icon = "", color = "#6e9b2a", name = "BibTeX" },
-				-- give plugins icons for my status line components
-				ipython = { icon = "󰌠", name = "ipython" },
-				noice = { icon = "󰎟", name = "noice.nvim" },
-				lazy = { icon = "󰒲", name = "lazy.nvim" },
-				mason = { icon = "", name = "mason.nvim" },
-				lspinfo = { icon = "󰒕", name = "lspinfo" },
 			},
 		},
 	},
@@ -113,7 +104,7 @@ return {
 				end,
 			})
 		end,
-		cmd = { "CccHighlighterEnable" }, -- enable manually via command
+		cmd = { "CccHighlighterEnable" },
 		keys = {
 			{ "g#", vim.cmd.CccPick, desc = " Color Picker" }, -- shift-# on german keyboard
 		},
@@ -125,7 +116,7 @@ return {
 				win_opts = { border = u.borderStyle },
 				highlighter = {
 					auto_enable = true,
-					max_byte = 2 * 1024 * 1024, -- 2mb
+					max_byte = 1.5 * 1024 * 1024, -- 1.5 Mb
 					lsp = true,
 					filetypes = { "css", "scss", "sh" },
 				},
@@ -133,7 +124,6 @@ return {
 					ccc.picker.hex,
 					ccc.picker.css_rgb,
 					ccc.picker.css_hsl,
-					-- whether the 1 means bright or yellow
 					ccc.picker.ansi_escape { meaning1 = "bright" },
 				},
 				alpha_show = "hide", -- needed when highlighter.lsp is set to true
@@ -190,7 +180,6 @@ return {
 				relative = "editor",
 				title_pos = "left",
 				min_width = { 0.4, 60 },
-				win_options = { winblend = 0 },
 				mappings = { n = { ["q"] = "Close" } },
 			},
 			select = {
@@ -205,7 +194,6 @@ return {
 					min_width = 20,
 					max_height = 20,
 					min_height = 3,
-					win_options = { winblend = 0 },
 				},
 				telescope = {
 					layout_config = {

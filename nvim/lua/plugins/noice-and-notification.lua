@@ -20,7 +20,10 @@ local routes = {
 	{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
 
 	-- Diagnostics
-	{ filter = { event = "msg_show", find = "No more valid diagnostics to move to" }, view = "mini" },
+	{
+		filter = { event = "msg_show", find = "No more valid diagnostics to move to" },
+		view = "mini",
+	},
 
 	-----------------------------------------------------------------------------
 
@@ -157,6 +160,13 @@ return {
 				},
 			},
 		},
+		init = function()
+			-- Display for `:Noice history`
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "noice",
+				callback = function() pcall(vim.api.nvim_buf_set_name, 0, "Noice") end,
+			})
+		end,
 	},
 	{ -- Notifications
 		"rcarriga/nvim-notify",
