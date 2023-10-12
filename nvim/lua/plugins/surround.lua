@@ -36,7 +36,7 @@ local function surroundConfig()
 			},
 			[maps.func] = {
 				find = function()
-					return config.get_selection { motion = "a" .. maps["function"] }
+					return config.get_selection { motion = "a" .. maps.func }
 				end,
 				delete = function()
 					local ft = vim.bo.filetype
@@ -56,7 +56,7 @@ local function surroundConfig()
 						patt = "()()()()"
 					end
 					return config.get_selections {
-						char = maps["function"],
+						char = maps.func,
 						pattern = patt,
 					}
 				end,
@@ -83,12 +83,12 @@ local function surroundConfig()
 				end,
 			},
 			[maps.call] = {
-				find = function() return config.get_selection { motion = "a" .. maps["call"] } end,
+				find = function() return config.get_selection { motion = "a" .. maps.call } end,
 				delete = "^([^=%s]+%()().-(%))()$", -- https://github.com/kylechui/nvim-surround/blob/main/doc/nvim-surround.txt#L357
 			},
 			[maps.cond] = {
 				find = function()
-					return config.get_selection { motion = "a" .. maps["conditional"] }
+					return config.get_selection { motion = "a" .. maps.cond }
 				end,
 				delete = function()
 					local ft = vim.bo.filetype
@@ -102,7 +102,7 @@ local function surroundConfig()
 						patt = "()()()()"
 					end
 					return config.get_selections {
-						char = maps["conditional"],
+						char = maps.cond,
 						pattern = patt,
 					}
 				end,

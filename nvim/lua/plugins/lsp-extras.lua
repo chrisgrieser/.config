@@ -83,7 +83,7 @@ return {
 	},
 	{ -- breadcrumbs for winbar
 		"SmiteshP/nvim-navic",
-		event = "LspAttach", -- loading on `require` ignores the config, so loading on LspAttach
+		event = "LspAttach",
 		keys = {
 			{
 				"<D-b>",
@@ -130,7 +130,10 @@ return {
 	},
 	{ -- better LSP variable-rename
 		"smjonas/inc-rename.nvim",
-		event = "CmdlineEnter", -- loading with `cmd = "IncRename` does not work with incremental preview
+		keys = {
+			{ "<leader>v", ":IncRename ", { desc = "󰒕 IncRename" } },
+			{ "<leader>V", ":IncRename <C-r><C-w>", { desc = "󰒕 IncRename (cword)" } },
+		},
 		opts = {
 			post_hook = function(results)
 				if not results.changes then return end
@@ -139,8 +142,7 @@ return {
 				local filesChanged = #vim.tbl_keys(results.changes)
 				if filesChanged > 1 then vim.cmd("silent wall") end
 
-				-- FIX making the cmdline-history not navigable
-				-- PENDING https://github.com/smjonas/inc-rename.nvim/issues/40
+				-- FIX make the cmdline-history navigable https://github.com/smjonas/inc-rename.nvim/issues/40
 				vim.fn.histdel("cmd", "^IncRename ")
 			end,
 		},

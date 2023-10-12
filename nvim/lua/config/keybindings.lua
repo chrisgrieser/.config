@@ -41,6 +41,10 @@ keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
 keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
 
+-- Diagnostics
+keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
+keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
+
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS
 
@@ -113,38 +117,14 @@ keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
 
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
-
-keymap("n", "<Down>", function()
-	if api.nvim_win_get_cursor(0)[1] == fn.line("$") then return end
-	return [[<cmd>. move +1<CR>==]]
-end, { desc = "󰜮 Move Line Down", expr = true })
-keymap("n", "<Up>", function()
-	if api.nvim_win_get_cursor(0)[1] == 1 then return end
-	return [[<cmd>. move -2<CR>==]]
-end, { desc = "󰜷 Move Line Up", expr = true })
-keymap("n", "<Right>", function()
-	if fn.col(".") >= fn.col("$") - 1 then return end
-	return [["zx"zp]]
-end, { desc = "Move Char Right", expr = true })
-keymap("n", "<Left>", function()
-	if fn.col(".") == 1 then return end
-	return [["zdh"zph]]
-end, { desc = "Move Char Left", expr = true })
-keymap(
-	"x",
-	"<Down>",
-	[[:move '>+1<CR><cmd>normal! gv=gv<CR>]],
-	{ desc = "󰜮 Move selection down", silent = true }
-)
-keymap(
-	"x",
-	"<Up>",
-	[[:move '<-2<CR><cmd>normal! gv=gv<CR>]],
-	{ desc = "󰜷 Move selection up", silent = true }
-)
-
-keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Move selection right" })
-keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "➡️ Move selection left" })
+keymap("n", "<Down>", [[<cmd>. move +1<CR>==]], { desc = "󰜮 Move Line Down" })
+keymap("n", "<Up>", [[<cmd>. move -2<CR>==]], { desc = "󰜷 Move Line Up" })
+keymap("n", "<Right>", [["zx"zp]], { desc = "➡️ Move Char Right" })
+keymap("n", "<Left>", [["zdh"zph]], { desc = "⬅ Move Char Left" })
+keymap("x", "<Down>", [[:move '>+1<CR>gv=gv]], { desc = "󰜮 Move sel down", silent = true })
+keymap("x", "<Up>", [[:move '<-2<CR>gv=gv]], { desc = "󰜷 Move sel up", silent = true })
+keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Move sel right" })
+keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "⬅ Move sel left" })
 
 --------------------------------------------------------------------------------
 
@@ -166,10 +146,9 @@ keymap("c", "<C-w>", "<C-r><C-w>") -- add word under cursor
 keymap("c", "<BS>", function()
 	local cmdLine = vim.fn.getcmdline()
 	local cmdPos = vim.fn.getcmdpos()
-	local cmdlineEmpty = cmdLine == ""
 	local isIncRename = cmdLine:find("^IncRename ") and cmdPos < 12
 	local isSubstitute = cmdLine:find("^%% s/") and cmdPos < 6
-	if cmdlineEmpty or isIncRename or isSubstitute then return end
+	if cmdLine == "" or isIncRename or isSubstitute then return end
 	return "<BS>"
 end, { desc = "Restricted <BS>", expr = true })
 
@@ -216,8 +195,7 @@ keymap("n", "ga", "gf", { desc = " Open File under cursor" })
 --------------------------------------------------------------------------------
 -- CLIPBOARD
 
---- macOS bindings (needed for compatibility with automation apps)
-keymap({ "n", "x" }, "<D-c>", "y", { desc = "copy" })
+--- macOS bindings
 keymap({ "n", "x" }, "<D-v>", "p", { desc = "paste" })
 keymap("c", "<D-v>", "<C-r>+", { desc = "paste" })
 
@@ -225,7 +203,6 @@ keymap("c", "<D-v>", "<C-r>+", { desc = "paste" })
 keymap("n", "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
 keymap("n", "C", '"_C')
-keymap("x", "p", "P", { desc = " Paste w/o switching register" })
 
 -- do not clutter the register if blank line is deleted
 keymap("n", "dd", function()
@@ -240,6 +217,9 @@ keymap("i", "<D-v>", function()
 	fn.setreg("+", regContent, "v") ---@diagnostic disable-line: param-type-mismatch
 	return "<C-g>u<C-r><C-o>+" -- "<C-g>u" adds undopoint before the paste
 end, { desc = " Paste charwise", expr = true })
+
+-- paste w/o switching register
+keymap("x", "p", "P")
 
 ------------------------------------------------------------------------------
 -- CMD-KEYBINDINGS
@@ -261,13 +241,5 @@ keymap(
 keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = "  Inline Code" }) -- no selection = word under cursor
 keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = "  Inline Code" })
 keymap("i", "<D-e>", "``<Left>", { desc = "  Inline Code" })
-
-------------------------------------------------------------------------------
--- LSP KEYBINDINGS
-keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
-keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
-
-keymap("n", "<leader>v", ":IncRename ", { desc = "󰒕 IncRename" })
-keymap("n", "<leader>V", ":IncRename <C-r><C-w>", { desc = "󰒕 IncRename (cword)" })
 
 --------------------------------------------------------------------------------
