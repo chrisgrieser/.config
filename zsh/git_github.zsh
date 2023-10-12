@@ -1,17 +1,17 @@
 #!/usr/bin/env zsh
 
-alias co="ct git checkout"
-alias gg="ct git checkout -" # go to previous branch/commit, like `zz` switching to last directory
+alias co="git checkout"
+alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to last directory
 alias gs='git status'
 alias ga="git add"
-alias push="ct git push"
-alias pull="ct git pull"
+alias push="git push"
+alias pull="git pull"
 alias g.='cd "$(git rev-parse --show-toplevel)"' # goto git root
-alias grh='ct git reset --hard'
+alias grh='git reset --hard'
 
 alias gi='gh issue list --state=open'
 alias gI='gh issue list --state=closed'
-alias rel='ct make --silent release'
+alias rel='make --silent release'
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -126,7 +126,7 @@ function gd {
 
 	if [[ $(git diff | wc -l) -gt $threshold_lines ]]; then
 		if ! command -v diff2html &>/dev/null; then echo "diff2html not installed (\`npm -g install diff2html\`)." && return 1; fi
-		diff2html --hwt="$DOTFILE_FOLDER/diff2html/diff2html-template.html"
+		diff2html --hwt="$HOME/.config/diff2html/diff2html-template.html"
 	else
 		if ! command -v delta &>/dev/null; then echo "delta not installed (\`brew install git-delta\`)" && return 1; fi
 		if defaults read -g AppleInterfaceStyle &>/dev/null; then
@@ -182,7 +182,6 @@ function gl {
 # interactive
 function gli {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
-	if ! command -v ct &>/dev/null; then print "\033[1;33mchromaterm not installed. (\`pip3 install chromaterm\`)\033[0m" && return 1; fi
 
 	local hash key_pressed selected
 	local format="%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s %n%C(reset)%n---%n%C(magenta)"
@@ -203,7 +202,7 @@ function gli {
 		echo "$hash" | pbcopy
 		echo "'$hash' copied."
 	else # pressed return
-		ct git checkout "$hash"
+		git checkout "$hash"
 	fi
 }
 
@@ -212,7 +211,6 @@ function gli {
 
 function gb {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
-	if ! command -v ct &>/dev/null; then print "\033[1;33mchromaterm not installed. (\`pip3 install chromaterm\`)\033[0m" && return 1; fi
 	local selected
 
 	selected=$(
@@ -225,10 +223,10 @@ function gb {
 	# how to checkout remote branches: https://stackoverflow.com/questions/67699/how-do-i-clone-all-remote-branches
 	if [[ $selected == remotes/* ]]; then
 		remote=$(echo "$selected" | cut -d/ -f2-)
-		ct git checkout "$remote"
+		git checkout "$remote"
 		selected=$(echo "$selected" | cut -d/ -f3)
 	fi
-	ct git checkout "$selected"
+	git checkout "$selected"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -238,8 +236,8 @@ function gb {
 # - if there are staged changes, commit them
 # - if there are no changes, stage all changes (`git add -A`) and then commit
 # - if commit message is empty use `chore` as default message
+# - if commit msg contains issue number, open the issue in the browser
 function ac() {
-	if ! command -v ct &>/dev/null; then print "\033[1;33mchromaterm not installed. (\`pip3 install chromaterm\`)\033[0m" && return 1; fi
 	local large_files commit_msg msg_length
 
 	# guard: accidental pushing of large files
@@ -252,8 +250,7 @@ function ac() {
 	fi
 
 	# fill in empty commit msg
-	[[ $# -eq 0 ]] && commit_msg=chore
-	commit_msg=$1
+	[[ -z "$1" ]] && commit_msg=chore || commit_msg=$1
 
 	# ensure no overlength of commit msg
 	msg_length=${#commit_msg}
@@ -267,29 +264,37 @@ function ac() {
 	# if no staged changes, stage all
 	git diff --staged --quiet && git add -A
 
-	ct git commit -m "$commit_msg"
+	git commit -m "$commit_msg"
+
+	# if commit msg contains issue number, open the issue in the browser
+	if [[ "$commit_msg" =~ \#[0-9]+ ]]; then
+		local issue_number url
+		issue_number=$(echo "$commit_msg" | grep -Eo "#[0-9]+" | cut -c2-)
+		url=$(git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 |
+			sed -e 's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//')
+		open "$url/issues/$issue_number"
+	fi
 }
 
 # same as ac, just followed by git pull & git push
 function acp {
-	ac "$@" || return 1 
+	ac "$@" || return 1
 
-	ct git pull ; ct git push
+	git pull
+	git push
 	sketchybar --trigger repo-files-update
 }
 
 #───────────────────────────────────────────────────────────────────────────────
 
 function clone() {
-	if ! command -v ct &>/dev/null; then print "\033[1;33mchromaterm not installed. (\`pip3 install chromaterm\`)\033[0m" && return 1; fi
-
 	url="$1"
 	# turn http into SSH remotes
 	[[ "$url" =~ http ]] && url="$(echo "$1" | sed -E 's/https?:\/\/github.com\//git@github.com:/').git"
 
 	# WARN depth=2 ensures that amending a shallow commit does not result in a
 	# new commit without parent, effectively destroying git history (!!)
-	ct git clone --depth=2 --filter=blob:none "$url"
+	git clone --depth=2 --filter=blob:none "$url"
 
 	# shellcheck disable=SC2012
 	cd "$(command ls -1 -t | head -n1)" || return 1
