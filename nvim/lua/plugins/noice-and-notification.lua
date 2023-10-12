@@ -19,6 +19,9 @@ local routes = {
 	-- Word added to spellfile via
 	{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
 
+	-- Diagnostics
+	{ filter = { event = "msg_show", find = "No more valid diagnostics to move to" }, view = "mini" },
+
 	-----------------------------------------------------------------------------
 
 	{ -- nvim-early-retirement
