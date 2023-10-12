@@ -9,5 +9,5 @@ show_icon: false
 show_notifications: true
 auto_restart: true
 
-undo_backspace: true # backspace undos expansion
+undo_backspace: false # backspace undos expansion
 backend: auto
