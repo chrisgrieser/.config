@@ -20,11 +20,6 @@ keymap(
 -- Copy Last Command
 keymap("n", "<leader>lc", function()
 	local lastCommand = fn.getreg(":")
-	if lastCommand == "" then
-		u.notify("", "No last command available", "warn")
-		return
-	end
-	lastCommand = lastCommand:gsub("^lua ?=? ", "")
 	fn.setreg("+", lastCommand)
 	u.notify("Copied", lastCommand)
 end, { desc = "󰘳 Copy last command" })
@@ -51,23 +46,21 @@ keymap("x", "<leader>ff", [["zy:% s/<C-r>z//g<Left><Left>]], { desc = " :s (s
 keymap("x", "<leader>fv", ":s///g<Left><Left><Left>", { desc = " :s (inside visual)" })
 keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = " delete matching" })
 
-keymap("n", "<leader>f<Tab>", function()
-	bo.expandtab = false
-	bo.tabstop = 3
+---@param useSpaces boolean
+local function retabber(useSpaces)
+	local width = useSpaces and 2 or 3
+	local char = useSpaces and "󱁐" or "󰌒"
+	bo.expandtab = useSpaces
+	bo.tabstop = width
 	cmd.retab { bang = true }
-	u.notify("Indent", "Now using 󰌒 (width 3)")
-end, { desc = "󰌒 Use Tabs" })
-
-keymap("n", "<leader>f<Space>", function()
-	bo.tabstop = 2
-	bo.expandtab = true
-	cmd.retab { bang = true }
-	u.notify("Indent", "Now using 󱁐 (2)")
-end, { desc = "󱁐 Use Spaces" })
+	u.notify("Indent", ("Now using %s (%s)"):format(char, width))
+end
+keymap("n", "<leader>f<Tab>", function() retabber(false) end, { desc = "󰌒 Use Tabs" })
+keymap("n", "<leader>f<Space>", function() retabber(true) end, { desc = "󱁐 Use Spaces" })
 
 --------------------------------------------------------------------------------
-
 -- UNDO
+
 keymap(
 	"n",
 	"<leader>ur",
@@ -97,7 +90,7 @@ end, { desc = "󰜊 Undo since last open" })
 --------------------------------------------------------------------------------
 -- LSP
 
----@param action object CodeAction Object https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#codeAction
+---@param action object CodeAction https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#codeAction
 ---@return boolean
 local function codeActionFilter(action)
 	local title, kind, ft = action.title, action.kind, vim.bo.filetype
@@ -110,7 +103,6 @@ local function codeActionFilter(action)
 	return not ignoreInLua
 end
 
--- INFO use `lua require('nvim-lightbulb').debug()` to inspect code action kinds
 keymap(
 	{ "n", "x" },
 	"<leader>c",
@@ -143,12 +135,6 @@ keymap("n", "<leader>lt", cmd.InspectTree, { desc = " :InspectTree" })
 
 -- Merging & Splitting Lines
 keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "󰗈 Merge line down" })
-keymap(
-	"x",
-	"<leader>s",
-	[[<Esc>`>a<CR><Esc>`<i<CR><Esc>=j]],
-	{ desc = "󰗈 Split around selection" }
-)
 
 -- Append to / delete from EoL
 local trailChars = { ",", ";", ")", "'", '"', "|", "\\", "{", "." }
@@ -156,7 +142,6 @@ for _, key in pairs(trailChars) do
 	keymap("n", "<leader>" .. key, "mzA" .. key .. "<Esc>`z", { desc = "which_key_ignore" })
 end
 
---------------------------------------------------------------------------------
 -- PEEK WIN
 keymap(
 	"n",
@@ -177,25 +162,19 @@ keymap("n", "<leader>R", function() require("funcs.maker").make() end, { desc = 
 --------------------------------------------------------------------------------
 -- OPTION TOGGLING
 
--- stylua: ignore
-keymap("n", "<leader>or", "<cmd>set relativenumber!<CR>", { desc = " Relative Line Numbers" })
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line Numbers" })
 keymap("n", "<leader>ol", "<cmd>LspRestart<CR>", { desc = "󰒕 LspRestart" })
 keymap("n", "<leader>oh", function() vim.lsp.inlay_hint(0, nil) end, { desc = "󰒕 Inlay Hints" })
-
 keymap("n", "<leader>od", function() -- codespell-ignore
 	local change = vim.diagnostic.is_disabled(0) and "enable" or "disable"
 	vim.diagnostic[change](0)
 end, { desc = " Diagnostics" })
-
 keymap(
 	"n",
 	"<leader>ow",
 	function() require("funcs.quality-of-life").wrap("toggle") end,
 	{ desc = "󰖶 Wrap" }
 )
-
--- FIX scrolloff
-keymap("n", "<leader>of", function() vim.opt.scrolloff = 13 end, { desc = "󰘖 Fix Scrolloff" })
+keymap("n", "<leader>of", function() vim.opt.scrolloff = 13 end, { desc = "⇓ Fix Scrolloff" })
 
 --------------------------------------------------------------------------------
