@@ -625,6 +625,7 @@
 				"control",
 				"left_control",
 				"right_control",
+				"caps_lock",
 				"fn"
 			],
 			"title": "Mandatory"
