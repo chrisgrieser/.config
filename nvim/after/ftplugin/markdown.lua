@@ -22,10 +22,12 @@ optl.conceallevel = 2
 --------------------------------------------------------------------------------
 -- MARKDOWN-SPECIFIC KEYMAPS
 
--- do not ignore type "string" in md, since that's what headings in markdown are
 -- stylua: ignore
 keymap("n", "gs", function ()
-	require("telescope.builtin").lsp_document_symbols { ignore_symbols = {}, }
+	require("telescope.builtin").lsp_document_symbols {
+		ignore_symbols = {}, -- do not ignore type "string", since that's what headings in md are
+		prompt_title = "Headings",
+	}
 end, { desc = "󰒕 Markdown Headings", buffer = true })
 
 keymap("n", "<leader>x", "mzI- [ ] <Esc>`z", { desc = " Add Task", buffer = true })
@@ -36,7 +38,7 @@ keymap(
 	"n",
 	"<localleader>f",
 	"vip:!pandoc -t commonmark_x<CR><CR>",
-	{ desc = "  Format Table under Cursor", buffer = true }
+	{ desc = " Format Table under Cursor", buffer = true }
 )
 
 -- convert md image to html image
@@ -69,13 +71,13 @@ keymap(
 	{ "n", "x" },
 	"<C-j>",
 	[[/^#\+ <CR><cmd>nohl<CR>]],
-	{ desc = " # Next Heading", buffer = true }
+	{ desc = " Next Heading", buffer = true }
 )
 keymap(
 	{ "n", "x" },
 	"<C-k>",
 	[[?^#\+ <CR><cmd>nohl<CR>]],
-	{ desc = " # Prev Heading", buffer = true }
+	{ desc = " Prev Heading", buffer = true }
 )
 
 --------------------------------------------------------------------------------
