@@ -100,16 +100,27 @@ local keymappings_N = vim.tbl_extend("force", keymappings_I, normalModeOnly)
 -- HELPERS
 
 -- https://github.com/nvim-telescope/telescope.nvim/issues/605
-local function deltaPreviewer()
+---@param mode "git_log"|"git_status"
+local function deltaPreviewer(mode)
 	local previewer = require("telescope.previewers").new_termopen_previewer {
 		get_command = function(entry)
 			-- stylua: ignore
-			return { "git",
+			local cmd = {
+				"git",
 				"-c", "core.pager=delta",
-				"-c", ("delta.%s=true"):format(vim.opt.background:get()),
-				"-c", "delta.side-by-side=false",
-				"diff", entry.value .. "^!",
+				-- "-c", ("delta.%s=true"):format(vim.opt.background:get()),
+				"diff",
 			}
+			if mode == "git_log" then
+				local hash = entry.value
+				table.insert(cmd, hash .. "^!")
+			elseif mode == "git_status" then
+				local filename = entry.value
+				table.insert(cmd, "--")
+				table.insert(cmd, filename)
+			end
+			vim.notify("🪚 cmd: " .. vim.inspect(cmd))
+			return cmd
 		end,
 	}
 	return previewer
@@ -173,8 +184,9 @@ local telescopeConfig = {
 		},
 		-- stylua: ignore
 		file_ignore_patterns = {
-			"%.pdf$", "%.png$", "%.gif$", "%.jpe?g$",
-			"%.icns$", "%.zip$", "%.pxd$", "%.plist$",
+			"%.pdf$", "%.png$", "%.gif$", "%.jpe?g$","%.icns$", "%.pxd$",
+			"%.zip$", "%.plist$",
+			"%.DS_Store$", -- when `--no-ignore` is set
 			-- other ignores are defined via .gitignore, .ignore, or fd/ignore
 		},
 	},
@@ -193,6 +205,7 @@ local telescopeConfig = {
 			prompt_prefix = "󰊢 ",
 			show_untracked = true,
 			initial_mode = "normal",
+			previewer = deltaPreviewer("git_status"),
 			mappings = {
 				n = {
 					["<Tab>"] = "move_selection_worse",
@@ -204,8 +217,8 @@ local telescopeConfig = {
 		git_commits = {
 			prompt_prefix = "󰊢 ",
 			initial_mode = "normal",
-			results_title = "git log",
-			previewer = deltaPreviewer(),
+			prompt_title = "Git Log",
+			previewer = deltaPreviewer("git_log"),
 			layout_config = { horizontal = { height = 0.9 } },
 			git_command = { "git", "log", "--pretty=%h %s (%cr)", "--", "." }, -- add commit time (%cr)
 		},
@@ -246,7 +259,7 @@ local telescopeConfig = {
 			results_title = false,
 			previewer = false,
 			layout_config = {
-				horizontal = { anchor = "W", width = 0.4, height = 0.5 },
+				horizontal = { anchor = "W", width = 0.5, height = 0.5 },
 			},
 		},
 		spell_suggest = {
@@ -259,7 +272,6 @@ local telescopeConfig = {
 		colorscheme = {
 			enable_preview = true,
 			prompt_prefix = " ",
-			results_title = false,
 			layout_strategy = "horizontal",
 			layout_config = {
 				horizontal = {
@@ -276,7 +288,7 @@ local telescopeConfig = {
 			prompt_prefix = "󰋚 ",
 			previewer = false,
 			layout_config = {
-				horizontal = { anchor = "W", width = 0.45, height = 0.55 },
+				horizontal = { anchor = "W", width = 0.5, height = 0.55 },
 			},
 		},
 	},

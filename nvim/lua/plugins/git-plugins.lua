@@ -14,8 +14,6 @@ return {
 			{ "<leader>gu", function() require("tinygit").githubUrl() end, mode = { "n", "x" }, desc = " GitHub Link" },
 			{ "<leader>gU", function() require("tinygit").githubUrl("repo") end, desc = " Goto Repo" },
 			{ "<leader>gd", function() require("tinygit").searchFileHistory() end, desc = "󰢷 File History" },
-			---@diagnostic disable-next-line: deprecated
-			{ "<leader>ga", function() require("tinygit.staging").stageHunkWithInfo() end, desc = "󰊢 Stage Hunk" },
 			-- stylua: ignore end
 		},
 	},
