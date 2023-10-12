@@ -9,14 +9,19 @@ const frontmostAppName = Application("System Events").applicationProcesses.where
 const frontmostApp = Application(frontmostAppName);
 
 function browserTab() {
+	// biome-ignore format: long
 	const chromiumVariants = ["Google Chrome", "Chromium", "Opera", "Vivaldi", "Brave Browser", "Microsoft Edge", "Arc"];
 	const webkitVariants = ["Safari", "Webkit"];
 	let title, url;
 	if (chromiumVariants.some((appName) => frontmostAppName.startsWith(appName))) {
+		// @ts-ignore
 		url = frontmostApp.windows[0].activeTab.url();
+		// @ts-ignore
 		title = frontmostApp.windows[0].activeTab.name();
 	} else if (webkitVariants.some((appName) => frontmostAppName.startsWith(appName))) {
+		// @ts-ignore
 		url = frontmostApp.documents[0].url();
+		// @ts-ignore
 		title = frontmostApp.documents[0].name();
 	} else {
 		app.displayNotification("", { withTitle: "You need a supported browser as your frontmost app", subtitle: "" });

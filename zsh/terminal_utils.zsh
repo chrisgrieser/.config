@@ -76,7 +76,7 @@ function o() {
 		fd --type=file --type=symlink --color=always | fzf \
 			-0 -1 --ansi --query="$input" --info=inline \
 			--header="^H --hidden --no-ignore   ^D directories" \
-			--bind="ctrl-h:reload(fd --hidden --no-ignore --type=file --type=symlink --color=always)" \
+			--bind="ctrl-h:reload(fd --hidden --no-ignore --exclude='/.git/' --exclude='.DS_Store' --type=file --type=symlink --color=always)" \
 			--preview '[[ -f {} ]] && bat --color=always --style=snip --wrap=never --tabs=2 {} || eza --icons --color=always --group-directories-first {}'
 	)
 	if [[ -z "$selected" ]]; then # fzf aborted
