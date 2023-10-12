@@ -84,21 +84,23 @@ local findFileMappings = {
 }
 
 -- add j/k/q to mappings if normal mode
-local keymappings_N = vim.deepcopy(keymappings_I)
-keymappings_N["j"] = "move_selection_worse"
-keymappings_N["k"] = "move_selection_better"
-keymappings_N["q"] = {
-	-- extra stuff needed to be able to set `nowait` for `q`
-	function(prompt_bufnr) require("telescope.actions").close(prompt_bufnr) end,
-	type = "action",
-	opts = { nowait = true },
+local normalModeOnly = {
+	["j"] = "move_selection_worse",
+	["k"] = "move_selection_better",
+	["q"] = {
+		-- extra stuff needed to be able to set `nowait` for `q`
+		function(prompt_bufnr) require("telescope.actions").close(prompt_bufnr) end,
+		type = "action",
+		opts = { nowait = true },
+	},
 }
+local keymappings_N = vim.tbl_extend("force", keymappings_I, normalModeOnly)
 
 --------------------------------------------------------------------------------
 -- HELPERS
 
+-- https://github.com/nvim-telescope/telescope.nvim/issues/605
 local function deltaPreviewer()
-	-- https://github.com/nvim-telescope/telescope.nvim/issues/605
 	local previewer = require("telescope.previewers").new_termopen_previewer {
 		get_command = function(entry)
 			-- stylua: ignore
@@ -113,11 +115,11 @@ local function deltaPreviewer()
 	return previewer
 end
 
--- color parent as Comment
+-- color parent as comment
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "TelescopeResults",
 	callback = function()
-		vim.fn.matchadd("TelescopeParent", "\t .*$")
+		vim.fn.matchadd("TelescopeParent", "\t\t.*$")
 		vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
 	end,
 })
@@ -127,15 +129,12 @@ vim.api.nvim_create_autocmd("FileType", {
 ---@param path string
 ---@return string
 local function pathDisplay(_, path)
-	local isDir = vim.loop.fs_stat(path).type == "directory"
-	if isDir then path = path:sub(1, -2) end -- remove trailing slash
-
+	path = path:gsub("/$", "") -- trailing slash from directories breaks fs.basename
 	local tail = vim.fs.basename(path)
-	local parentBase = vim.fs.basename(vim.fs.dirname(path))
-	if parentBase == "." then return tail end
-
-	-- parent is colored as a comment via autocmd further above
-	return string.format("%s\t %s", tail, parentBase)
+	local parent = vim.fs.dirname(path)
+	if parent == "." then return tail end
+	local parentDisplay = #parent > 20 and vim.fs.basename(parent) or parent
+	return string.format("%s\t\t%s", tail, parentDisplay) -- parent colored via autocmd above
 end
 
 ---@nodiscard
@@ -144,7 +143,6 @@ local function projectName()
 	local pwd = vim.loop.cwd() or ""
 	return vim.fs.basename(pwd)
 end
-
 
 --------------------------------------------------------------------------------
 
@@ -157,8 +155,8 @@ local telescopeConfig = {
 		dynamic_preview_title = true,
 		preview = {
 			timeout = 400, -- ms
-			filesize_limit = 1, -- in MB, do not preview big files for performance
-			ls_short = true,
+			filesize_limit = 1, -- Mb
+			ls_short = true, -- ls is only used when displaying directories
 		},
 		borderchars = u.borderChars,
 		default_mappings = { i = keymappings_I, n = keymappings_N },
@@ -173,16 +171,10 @@ local telescopeConfig = {
 				preview_width = { 0.55, min = 30 },
 			},
 		},
-		-- stylua: ignore,
+		-- stylua: ignore
 		file_ignore_patterns = {
-			"%.pdf$",
-			"%.png$",
-			"%.gif$",
-			"%.jpe?g$",
-			"%.icns$",
-			"%.zip$",
-			"%.pxd$",
-			"%.plist$",
+			"%.pdf$", "%.png$", "%.gif$", "%.jpe?g$",
+			"%.icns$", "%.zip$", "%.pxd$", "%.plist$",
 			-- other ignores are defined via .gitignore, .ignore, or fd/ignore
 		},
 	},
@@ -191,8 +183,8 @@ local telescopeConfig = {
 			prompt_prefix = "󰝰 ",
 			-- FIX using the default find command from telescope is somewhat buggy,
 			-- e.g. not respecting fd/ignore
-			-- find_command = { "fd", "--type=file", "--type=symlink" },
-			find_command = { "fd" },
+			find_command = { "fd", "--type=file", "--type=symlink" },
+			-- find_command = { "fd" }, -- include directories, requires assigning them some action
 			follow = true,
 			mappings = { i = findFileMappings },
 		},
@@ -221,7 +213,7 @@ local telescopeConfig = {
 			prompt_prefix = " ",
 			modes = { "n", "i", "c", "x", "o", "t" },
 			show_plug = false, -- do not show mappings with "<Plug>"
-			-- lhs_filter = function(lhs) return not lhs:find("Þ") end, -- remove which-key mappings
+			lhs_filter = function(lhs) return not lhs:find("Þ") end, -- remove which-key mappings
 		},
 		highlights = {
 			prompt_prefix = " ",
