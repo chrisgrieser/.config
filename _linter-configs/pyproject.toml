@@ -48,4 +48,6 @@ disable = [
 	"undefined-variable",
 	"unused-argument",
 	"unused-import",
+	"trailing-newlines",   # taken care of by formatter
+	"trailing-whitespace", # taken care of by formatter
 ]
