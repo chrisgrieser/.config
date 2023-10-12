@@ -39,16 +39,16 @@ end
 
 --- https://github.com/nvim-lualine/lualine.nvim/blob/master/lua/lualine/components/branch/git_branch.lua#L118
 local function isStandardBranch()
-	-- checking via lualine API, to not call git outself
+	-- checking via lualine API, to not call git ourself
 	local curBranch = require("lualine.components.branch.git_branch").get_branch()
 	local notMainBranch = curBranch ~= "main" and curBranch ~= "master"
-	local validFiletype = bo.filetype ~= "help" -- vim help files are located in a git repo
 	local notSpecialBuffer = bo.buftype == ""
-	return notMainBranch and validFiletype and notSpecialBuffer
+	return notMainBranch and notSpecialBuffer
 end
 
 --------------------------------------------------------------------------------
 
+-- better than lualine's default
 local function selectionCount()
 	local isVisualMode = fn.mode():find("[Vv]")
 	if not isVisualMode then return "" end
@@ -56,20 +56,6 @@ local function selectionCount()
 	local ends = fn.line(".")
 	local lines = starts <= ends and ends - starts + 1 or starts - ends + 1
 	return " " .. tostring(lines) .. "L " .. tostring(fn.wordcount().visual_chars) .. "C"
-end
-
--- only show the clock when fullscreen (= it covers the menubar clock)
-local function clock()
-	if vim.opt.columns:get() < 110 or vim.opt.lines:get() < 25 then return "" end
-	local time = tostring(os.date("%H:%M"))
-	if os.date("%S") % 2 == 1 then time = time:gsub(":", " ") end -- make the `:` blink
-	return time
-end
-
--- wrapper to not require navic directly
-local function navicBreadcrumbs()
-	if bo.filetype == "css" or not require("nvim-navic").is_available() then return "" end
-	return require("nvim-navic").get_location()
 end
 
 local function quickfixCounter()
@@ -85,7 +71,7 @@ end
 
 -- FIX Add missing buffer names for current file component
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "lazy", "mason", "TelescopePrompt", "noice", "checkhealth", "lspinfo", "qf" },
+	pattern = { "lazy", "mason", "noice", "checkhealth", "lspinfo", "qf" },
 	callback = function(ctx)
 		local ft = ctx.match
 		local name = ft:sub(1, 1):upper() .. ft:sub(2) -- capitalize
@@ -105,7 +91,12 @@ local lualineConfig = {
 		lualine_a = {
 			-- INFO setting different section separators in the same components has
 			-- yanky results, they should have the same separator
-			{ clock, section_separators = topSeparators },
+			{
+				"datetime",
+				style = "%H:%M",
+				cond = function() return vim.opt.columns:get() > 110 and vim.opt.lines:get() > 25 end,
+				section_separators = topSeparators,
+			},
 			{
 				"tabs",
 				mode = 1,
@@ -115,7 +106,11 @@ local lualineConfig = {
 			},
 		},
 		lualine_b = {
-			{ navicBreadcrumbs, section_separators = topSeparators },
+			{
+				"navic",
+				section_separators = topSeparators,
+				cond = function() return vim.bo.filetype ~= "css" end,
+			},
 		},
 		lualine_c = {},
 		lualine_x = {},
@@ -148,13 +143,12 @@ local lualineConfig = {
 		},
 		lualine_z = {
 			{ selectionCount, padding = { left = 0, right = 1 } },
-			"selectioncount",
 			"location",
 		},
 	},
 	options = {
 		refresh = { statusline = 1000 },
-		ignore_focus = { "DressingInput", "DressingSelect", "ccc-ui" },
+		ignore_focus = { "DressingInput", "DressingSelect", "ccc-ui", "TelescopePrompt" },
 		globalstatus = true,
 		component_separators = { left = "", right = "" },
 		section_separators = bottomSeparators,
