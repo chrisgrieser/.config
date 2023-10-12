@@ -9,10 +9,8 @@
 	<key>github_username</key>
 	<string>chrisgrieser</string>
 	<key>no_display_authors</key>
-	<string>🤖 automated</string>
+	<string>🤖 automated, pseudometa, chrisgrieser</string>
 	<key>results_number</key>
 	<string>40</string>
-	<key>vault_repo</key>
-	<string>~/main-vault</string>
 </dict>
 </plist>
