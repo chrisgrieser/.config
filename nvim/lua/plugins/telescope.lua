@@ -233,8 +233,7 @@ local telescopeConfig = {
 			initial_mode = "normal",
 			-- previewer = deltaPreviewer("git_bcommits"),
 			layout_config = { horizontal = { height = 0.9 } },
-			-- add commit time (%cr) & `--all`
-			git_command = { "git", "log", "--all", "--pretty=%h %s\t%cr" }, 
+			git_command = { "git", "log", "--pretty=%h %s\t%cr" }, -- add commit time (%cr)
 		},
 		keymaps = {
 			prompt_prefix = " ",
