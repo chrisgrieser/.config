@@ -1,6 +1,8 @@
 local u = require("config.utils")
 local telescope = vim.cmd.Telescope
+
 --------------------------------------------------------------------------------
+-- MAPPINGS
 
 -- default mappings: https://github.com/nvim-telescope/telescope.nvim/blob/942fe5faef47b21241e970551eba407bc10d9547/lua/telescope/mappings.lua#L133
 local keymappings_I = {
@@ -92,12 +94,20 @@ keymappings_N["q"] = {
 	opts = { nowait = true },
 }
 
--- -- https://github.com/nvim-telescope/telescope.nvim/issues/605
+--------------------------------------------------------------------------------
+-- HELPERS
+
 local function deltaPreviewer()
-	-- stylua: ignore
+	-- https://github.com/nvim-telescope/telescope.nvim/issues/605
 	local previewer = require("telescope.previewers").new_termopen_previewer {
 		get_command = function(entry)
-			return { "git", "-c", "core.pager=delta", "-c", "delta.side-by-side=false", "diff", entry.value .. "^!" }
+			-- stylua: ignore
+			return { "git",
+				"-c", "core.pager=delta",
+				"-c", ("delta.%s=true"):format(vim.opt.background:get()),
+				"-c", "delta.side-by-side=false",
+				"diff", entry.value .. "^!",
+			}
 		end,
 	}
 	return previewer
@@ -112,15 +122,19 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
----comment
----@param _ string
+---Requires the autocmd above
+---@param _ table
 ---@param path string
 ---@return string
 local function pathDisplay(_, path)
-	-- parent is colored as a comment via autocmd further above
+	local isDir = vim.loop.fs_stat(path).type == "directory"
+	if isDir then path = path:sub(1, -2) end -- remove trailing slash
+
 	local tail = vim.fs.basename(path)
 	local parentBase = vim.fs.basename(vim.fs.dirname(path))
 	if parentBase == "." then return tail end
+
+	-- parent is colored as a comment via autocmd further above
 	return string.format("%s\t %s", tail, parentBase)
 end
 
@@ -131,6 +145,7 @@ local function projectName()
 	return vim.fs.basename(pwd)
 end
 
+
 --------------------------------------------------------------------------------
 
 local telescopeConfig = {
@@ -138,28 +153,16 @@ local telescopeConfig = {
 		path_display = pathDisplay,
 		selection_caret = "󰜋 ",
 		multi_icon = "󰒆 ",
-		dynamic_preview_title = true,
 		results_title = false,
-
-		-- other ignores are defined via .gitignore, .ignore, or fd/ignore
-		file_ignore_patterns = {
-			"%.pdf$",
-			"%.png$",
-			"%.gif$",
-			"%.jpe?g$",
-			"%.icns$",
-			"%.zip$",
-			"%.pxd$",
-			"%.plist$", -- mostly Alfred files
-		},
+		dynamic_preview_title = true,
 		preview = {
 			timeout = 400, -- ms
 			filesize_limit = 1, -- in MB, do not preview big files for performance
+			ls_short = true,
 		},
 		borderchars = u.borderChars,
-		history = { path = u.vimDataDir .. "telescope_history" }, -- sync the history
 		default_mappings = { i = keymappings_I, n = keymappings_N },
-		sorting_strategy = "ascending", -- so layout is correctly orientated with prompt_position "top"
+		sorting_strategy = "ascending", -- so layout is consistent with prompt_position "top"
 		layout_strategy = "horizontal",
 		layout_config = {
 			horizontal = {
@@ -170,13 +173,26 @@ local telescopeConfig = {
 				preview_width = { 0.55, min = 30 },
 			},
 		},
+		-- stylua: ignore,
+		file_ignore_patterns = {
+			"%.pdf$",
+			"%.png$",
+			"%.gif$",
+			"%.jpe?g$",
+			"%.icns$",
+			"%.zip$",
+			"%.pxd$",
+			"%.plist$",
+			-- other ignores are defined via .gitignore, .ignore, or fd/ignore
+		},
 	},
 	pickers = {
 		find_files = {
 			prompt_prefix = "󰝰 ",
 			-- FIX using the default find command from telescope is somewhat buggy,
 			-- e.g. not respecting fd/ignore
-			find_command = { "fd", "--type=file", "--type=symlink" },
+			-- find_command = { "fd", "--type=file", "--type=symlink" },
+			find_command = { "fd" },
 			follow = true,
 			mappings = { i = findFileMappings },
 		},
@@ -199,14 +215,13 @@ local telescopeConfig = {
 			results_title = "git log",
 			previewer = deltaPreviewer(),
 			layout_config = { horizontal = { height = 0.9 } },
-			-- add commit time (%cr)
-			git_command = { "git", "log", "--pretty=%h %s (%cr)", "--", "." },
+			git_command = { "git", "log", "--pretty=%h %s (%cr)", "--", "." }, -- add commit time (%cr)
 		},
 		keymaps = {
 			prompt_prefix = " ",
 			modes = { "n", "i", "c", "x", "o", "t" },
 			show_plug = false, -- do not show mappings with "<Plug>"
-			lhs_filter = function(lhs) return not lhs:find("Þ") end, -- remove which-key mappings
+			-- lhs_filter = function(lhs) return not lhs:find("Þ") end, -- remove which-key mappings
 		},
 		highlights = {
 			prompt_prefix = " ",
