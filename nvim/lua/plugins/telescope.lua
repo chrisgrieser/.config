@@ -66,6 +66,8 @@ local findFileMappings = {
 			hidden = hiddenIgnoreActive,
 			no_ignore = hiddenIgnoreActive,
 			cwd = cwd,
+			-- prevent these becoming visible through `--no-ignore`
+			file_ignore_patterns = { "%.DS_Store$", "%.git/" }
 		}
 	end,
 	-- search directory up
@@ -186,7 +188,6 @@ local telescopeConfig = {
 		file_ignore_patterns = {
 			"%.pdf$", "%.png$", "%.gif$", "%.jpe?g$","%.icns$", "%.pxd$",
 			"%.zip$", "%.plist$",
-			"%.DS_Store$", -- when `--no-ignore` is set
 			-- other ignores are defined via .gitignore, .ignore, or fd/ignore
 		},
 	},
