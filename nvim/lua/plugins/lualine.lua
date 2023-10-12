@@ -81,32 +81,6 @@ local function quickfixCounter()
 	return (" %s/%s (%s)"):format(index, totalQfItems, title)
 end
 
----improves upon the default statusline components by having properly working icons
-local function currentFile()
-	local maxLen = 25
-
-	local ext = fn.expand("%:e")
-	local ft = bo.filetype
-	local name = fn.expand("%:t")
-
-	local deviconsInstalled, devicons = pcall(require, "nvim-web-devicons")
-	local ftOrExt = ext ~= "" and ext or ft
-	if ftOrExt == "javascript" then ftOrExt = "js" end
-	if ftOrExt == "typescript" then ftOrExt = "ts" end
-	if ftOrExt == "markdown" then ftOrExt = "md" end
-	if ftOrExt == "vimrc" then ftOrExt = "vim" end
-	local icon = deviconsInstalled and devicons.get_icon(name, ftOrExt) or ""
-	-- add sourcegraph icon for clarity
-	if fn.expand("%"):find("^sg") then icon = "󰓁 " .. icon end
-
-	-- truncate
-	local nameNoExt = name:gsub("%.%w+$", "")
-	if #nameNoExt > maxLen then name = nameNoExt:sub(1, maxLen) .. "…" .. ext end
-
-	if icon == "" then return name end
-	return icon .. " " .. name
-end
-
 --------------------------------------------------------------------------------
 
 -- FIX Add missing buffer names for current file component
@@ -153,7 +127,8 @@ local lualineConfig = {
 	sections = {
 		lualine_a = {
 			{ "branch", cond = isStandardBranch },
-			{ currentFile },
+			{ "filetype", icon_only = true, colored = false, padding = { right = 0, left = 1 } },
+			{ "filename", file_status = false },
 		},
 		lualine_b = {
 			{ require("funcs.alt-alt").altFileStatusline },
@@ -173,6 +148,7 @@ local lualineConfig = {
 		},
 		lualine_z = {
 			{ selectionCount, padding = { left = 0, right = 1 } },
+			"selectioncount",
 			"location",
 		},
 	},
@@ -189,7 +165,7 @@ local lualineConfig = {
 
 return {
 	"nvim-lualine/lualine.nvim",
-	lazy = false, -- load immediately so there is no flickering
+	event = "UIEnter",
 	dependencies = "nvim-tree/nvim-web-devicons",
 	opts = lualineConfig,
 }
