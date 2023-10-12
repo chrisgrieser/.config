@@ -4,16 +4,15 @@ local fn = vim.fn
 
 -- displays irregular indentation, displays nothing when all is good
 local function irregularWhitespace()
-	local ft = bo.filetype
 	if bo.buftype ~= "" then return "" end
 
 	-- CONFIG and the number of spaces they use.
 	local spaceFiletypes = { python = 4, yaml = 2, query = 2 }
 
 	local spaceFtsOnly = vim.tbl_keys(spaceFiletypes)
-	local spacesInsteadOfTabs = bo.expandtab and not vim.tbl_contains(spaceFtsOnly, ft)
-	local differentSpaceAmount = bo.expandtab and spaceFiletypes[ft] ~= bo.tabstop
-	local tabsInsteadOfSpaces = not bo.expandtab and vim.tbl_contains(spaceFtsOnly, ft)
+	local spacesInsteadOfTabs = bo.expandtab and not vim.tbl_contains(spaceFtsOnly, bo.ft)
+	local differentSpaceAmount = bo.expandtab and spaceFiletypes[bo.ft] ~= bo.tabstop
+	local tabsInsteadOfSpaces = not bo.expandtab and vim.tbl_contains(spaceFtsOnly, bo.ft)
 
 	if spacesInsteadOfTabs or differentSpaceAmount then
 		return "󱁐 " .. tostring(bo.tabstop)
@@ -34,7 +33,7 @@ end
 
 --------------------------------------------------------------------------------
 
--- FIX Add missing buffer names for current file component
+-- FIX Add missing buffer names for filename component
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "lazy", "mason", "noice", "checkhealth", "lspinfo" },
 	callback = function(ctx)
@@ -65,7 +64,7 @@ local lualineConfig = {
 			{
 				"tabs",
 				mode = 1,
-				max_length = vim.o.columns * 0.7,
+				max_length = vim.o.columns * 0.6,
 				section_separators = topSeparators,
 				cond = function() return fn.tabpagenr("$") > 1 end,
 			},
@@ -77,10 +76,6 @@ local lualineConfig = {
 				section_separators = topSeparators,
 			},
 		},
-		lualine_c = {},
-		lualine_x = {},
-		lualine_y = {},
-		lualine_z = {},
 	},
 	sections = {
 		lualine_a = {
@@ -94,7 +89,7 @@ local lualineConfig = {
 				end,
 			},
 			{ "filetype", icon_only = true, colored = false, padding = { right = 0, left = 1 } },
-			{ "filename", file_status = false },
+			{ "filename", symbols = { modified = "", readonly = "" } },
 		},
 		lualine_b = {
 			{ require("funcs.alt-alt").altFileStatusline },
@@ -108,22 +103,23 @@ local lualineConfig = {
 				symbols = { error = "󰅚 ", warn = " ", info = "󰋽 ", hint = "󰘥 " },
 			},
 			{ irregularWhitespace },
-			{ "fileformat", cond = function() return bo.fileformat ~= "unix" end },
+			{
+				"fileformat",
+				cond = function() return bo.fileformat ~= "unix" end,
+				fmt = function(str) return str ~= "" and str .. " 󰌑" or "" end,
+			},
 		},
 		lualine_y = {
 			"diff",
 		},
 		lualine_z = {
-			{
-				"selectioncount",
-				fmt = function(str) return str ~= "" and str .. "礪" or "" end,
-			},
+			{ "selectioncount", fmt = function(str) return str ~= "" and "礪" .. str or "" end },
 			"location",
 		},
 	},
 	options = {
 		refresh = { statusline = 1000 },
-		ignore_focus = { "DressingInput", "DressingSelect", "ccc-ui", "TelescopePrompt" },
+		ignore_focus = { "DressingInput", "DressingSelect", "ccc-ui" },
 		globalstatus = true,
 		component_separators = { left = "", right = "" },
 		section_separators = bottomSeparators,

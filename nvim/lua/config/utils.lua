@@ -55,7 +55,7 @@ end
 ---specific to plugins, that should persist across colorscheme changes triggered
 ---by switching between dark and light mode.
 ---@param hlgroup string
----@param modification string|object
+---@param modification table
 ---@return nil
 function M.colorschemeMod(hlgroup, modification)
 	vim.api.nvim_create_autocmd("ColorScheme", {

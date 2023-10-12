@@ -72,7 +72,6 @@ return {
 				applescript = { icon = "", color = "#7f7f7f", name = "Applescript" },
 				bib = { icon = "", color = "#6e9b2a", name = "BibTeX" },
 				-- give plugins icons for my status line components
-				qf = { icon = "", name = "quickfix" },
 				ipython = { icon = "󰌠", name = "ipython" },
 				noice = { icon = "󰎟", name = "noice.nvim" },
 				lazy = { icon = "󰒲", name = "lazy.nvim" },
@@ -214,13 +213,13 @@ return {
 					},
 				},
 				get_config = function(opts)
-					local telescopeKinds = {
+					local useTelescope = {
 						"tinygit.github_issue",
 						"tinygit.pickaxe_diff",
 						"icon_picker",
 						"mason.ui.language-filter",
 					}
-					if vim.tbl_contains(telescopeKinds, opts.kind) then
+					if vim.tbl_contains(useTelescope, opts.kind) then
 						return { backend = "telescope" }
 					end
 				end,
