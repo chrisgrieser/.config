@@ -83,7 +83,6 @@ return {
 	},
 	{ -- breadcrumbs for winbar
 		"SmiteshP/nvim-navic",
-		event = "LspAttach",
 		keys = {
 			{
 				"<D-b>",
