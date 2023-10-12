@@ -34,7 +34,7 @@ rules:
       - type: basic
         from: { key_code: left_control }
         to:
-          - key_code: left_control
+          - key_code: capslock
         conditions:
           - *leader-inactive
         to_if_alone:
@@ -42,10 +42,11 @@ rules:
           - *set-notice
       # 2x L-Ctrl: Tot
       - type: basic
-        from: { key_code: left_control }
+        from: { key_code: left_control, modifiers: { mandatory: [caps_lock] } }
         conditions: [*leader-active]
         to_if_alone:
           - { key_code: f19 }
+          - key_code: capslock
           - *deactivate-leader
           - *remove-notice
       # Cancel (Hyper/Esc)
