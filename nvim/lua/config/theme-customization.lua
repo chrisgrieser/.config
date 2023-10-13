@@ -119,7 +119,7 @@ local function themeModifications()
 			updateHl("DiagnosticSign" .. type, "guibg=none")
 		end
 
-		linkHl("MoreMsg", "Folded") -- FIX for https://github.com/rebelot/kanagawa.nvim/issues/89
+		-- linkHl("MoreMsg", "Folded") -- FIX for https://github.com/rebelot/kanagawa.nvim/issues/89
 	elseif theme == "zephyr" then
 		updateHl("IncSearch", "guifg=#FFFFFF")
 		linkHl("TabLineSel", "lualine_a_normal")
