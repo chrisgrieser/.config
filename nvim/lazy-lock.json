@@ -81,6 +81,7 @@
   "scrollEOF.nvim": { "branch": "master", "commit": "3fb4c699fc42b42cced466d09f38315b5d524253" },
   "sg.nvim": { "branch": "master", "commit": "0a3c7f76a5e81452b5d4bd78a7bb8cd2603445b5" },
   "sibling-swap.nvim": { "branch": "main", "commit": "58b256f2a7def9b63be275b373c748c012b3a604" },
+  "symbol-usage.nvim": { "branch": "main", "commit": "d1b5c5a5028dc48e3f4ae9978adfaac5b0bd2182" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "6c921ca12321edaa773e324ef64ea301a1d0da62" },
   "telescope-recent-files": { "branch": "main", "commit": "6893cda11625254cc7dc2ea76e0a100c7deeb028" },
   "telescope-symbols.nvim": { "branch": "master", "commit": "f2060117d965df4a626f068a4ebbd8ee051aa076" },
@@ -93,7 +94,6 @@
   "vim-css3-syntax": { "branch": "main", "commit": "30ef43aed3e700f21db58dfd67b78c9e82673d77" },
   "vim-matchup": { "branch": "master", "commit": "6dbe108230c7dbbf00555b7d4d9f6a891837ef07" },
   "vim-python-pep8-indent": { "branch": "master", "commit": "60ba5e11a61618c0344e2db190210145083c91f8" },
-  "vim-visual-multi": { "branch": "master", "commit": "724bd53adfbaf32e129b001658b45d4c5c29ca1a" },
   "which-key.nvim": { "branch": "main", "commit": "6962dae3565369363b59dd51fb206051555fcb4d" },
   "yanky.nvim": { "branch": "main", "commit": "cc3fc03c780a14f189290edcf1c47dc1306626d4" }
 }

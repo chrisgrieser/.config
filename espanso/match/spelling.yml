@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=../schemas/espanso-match-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/ajmarkow/espanso-schema-json/master/schemas/Espanso_Matches_File_Schema.json
 #───────────────────────────────────────────────────────────────────────────────
 matches:
   - trigger: "I#d"

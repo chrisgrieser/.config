@@ -1,18 +1,8 @@
-# yaml-language-server: $schema=../schemas/espanso-match-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/ajmarkow/espanso-schema-json/master/schemas/Espanso_Matches_File_Schema.json
 #───────────────────────────────────────────────────────────────────────────────
 
 # editorconfig-checker-disable
 matches:
-  - replace: |
-      if frontmost of application "$|$" then
-
-      end if
-    label: 🍏 Check whether App is frontmost
-  - replace: |
-      if application "$|$" is running then
-
-      end if
-    label: 🍏 Check whether app is running
   - trigger: "!menu"
     replace: |
       tell application "System Events" to tell process "$|$"
@@ -27,24 +17,6 @@ matches:
       	click menu item "" of menu of menu item "Share" of menu "Edit" of menu bar 1
       end tell
     label: 🍏 Click Submenu Item of Menubar
-  - replace: set the clipboard to POSIX file ($|$)
-    label: 🍏 Copy Image to Clipboard
-  - replace: display notification "subtitle" with title "title$|$"
-    label: 🍏 Display Notification
-  - replace: |
-      tell application "Finder"
-      	if ((count windows) is 0) then return "no window"
-
-      	set sel to selection
-      	if ((count sel) > 1) then return POSIX path of ((item 1 of sel) as text)
-      	if ((count sel) = 1) then return POSIX path of (sel as text)
-      	if ((count sel) = 0) then return POSIX path of (target of window 1 as alias)
-      end tell
-    label: 🍏 Get Finder selection / window
-  - replace: tell application "System Events" to set frontApp to (name of first process where it is frontmost)
-    label: 🍏 Get name of frontmost app
-  - replace: tell application "System Events" to tell process "Drafts" to set visible to false
-    label: 🍏 Hide App
   - trigger: "!key"
     replace: tell application "System Events" to keystroke "$|$" using {command down}
     label: 🍏 Keystroke
@@ -54,17 +26,3 @@ matches:
   - trigger: "!shortcut"
     replace: tell application "Shortcuts" to run shortcut "$|$"
     label: 🍏 Run Shortcut
-  - replace: |
-      repeat until application "App$|$" is running
-      	delay 0.5
-      end repeat
-    label: 🍏 Wait till app is running
-  - replace: |
-      tell application "System Events"
-      	tell process "Highlights"
-      		if (count of windows) > 0 then set window_name to name of front window
-      	end tell
-      end tell
-    label: 🍏 Name of front window of a process
-  - label: "cut string"
-    replace: set window_name to (characters 12 through -2 of window_name as string)

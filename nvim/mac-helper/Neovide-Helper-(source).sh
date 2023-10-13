@@ -9,19 +9,18 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 #───────────────────────────────────────────────────────────────────────────────
 
 if pgrep -xq "neovide"; then
-	# https://neovim.io/doc/user/remote.html
-	nvim --server "/tmp/nvim_server.pipe" --remote "$@"
+	nvim --server "/tmp/nvim_server.pipe" --remote "$@" # https://neovim.io/doc/user/remote.html
 
 	# $LINE is set via `open --env=LINE=n` by the caller
 	[[ -n "$LINE" ]] && nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>$LINE<CR>"
 
 	osascript -e 'tell application "Neovide" to activate'
 else
-	if [[ -z "$LINE" ]] ; then
-		nohup neovide --geometry=104x33 "$@" &
+	if [[ -z "$LINE" ]]; then
+		nohup neovide --geometry=104x33 --notabs "$@" &
 		disown # https://stackoverflow.com/a/20338584/22114136
 	else
-		nohup neovide --geometry=104x33 "+$LINE" "$@" &
+		nohup neovide --geometry=104x33 --notabs "+$LINE" "$@" &
 		disown
 	fi
 fi
