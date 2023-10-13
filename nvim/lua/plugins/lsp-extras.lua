@@ -108,6 +108,21 @@ return {
 			depth_limit_indicator = "…",
 		},
 	},
+	{
+		"stevearc/aerial.nvim",
+		keys = {
+			{ "<D-1>", "<cmd>AerialToggle<CR>", desc = "󰒕 Symbols" },
+		},
+		opts = {
+			backends = { "lsp", "treesitter", "markdown", "man" },
+			layout = {
+				default_direction = "prefer_left",
+				min_width = 15,
+			},
+
+		},
+		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+	},
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",
 		event = "BufReadPre", -- TODO need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'

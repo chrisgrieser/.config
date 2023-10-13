@@ -118,7 +118,7 @@ local lualineConfig = {
 
 return {
 	"nvim-lualine/lualine.nvim",
-	event = "UIEnter",
+	event = "VimEnter",
 	dependencies = "nvim-tree/nvim-web-devicons",
 	opts = lualineConfig,
 }
