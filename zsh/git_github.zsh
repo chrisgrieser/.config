@@ -280,7 +280,7 @@ function ac() {
 function acp {
 	ac "$@" || return 1
 
-	git pull
+	git pull ; echo
 	git push
 	sketchybar --trigger repo-files-update
 }

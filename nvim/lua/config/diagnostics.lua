@@ -1,8 +1,8 @@
 -- SIGN ICONS
 local diagnosticTypes = {
-	Error = "ﮋ",
+	Error = "",
 	Warn = "▲",
-	Info = "♦",
+	Info = "●",
 	Hint = "",
 }
 for type, icon in pairs(diagnosticTypes) do
@@ -11,24 +11,43 @@ for type, icon in pairs(diagnosticTypes) do
 end
 
 --------------------------------------------------------------------------------
----@param str string
+---@param diag Diagnostic
 ---@return string
-local function rmTrailDot(str)
-	str = str:gsub(" ?%.$", "")
-	return str
+local function rmTrailDot(diag)
+	-- lua_ls leaves annoying dot in their source
+	local msg = diag.message:gsub(" ?%.$", "")
+	return msg
 end
+
+---@param diag Diagnostic
+---@param mode "virtual_text"|"float"
+---@return string displayedText
+---@return string? highlight_group
+local function diagSuffix(diag, mode)
+	if not (diag.source or diag.code) then return "" end
+	local source = diag.source and diag.source:gsub(" ?%.$", "") or ""
+
+	local docsIcon = ""
+	local installed, rulebook = pcall(require, "rulebook")
+	if installed and rulebook then docsIcon = rulebook.hasDocs(diag) and "  " or "" end
+
+	if mode == "virtual_text" then
+		return (" (%s%s)"):format(source, docsIcon)
+	elseif mode == "float" then
+		local rule = diag.code and ": " .. diag.code or ""
+		return (" (%s%s%s)"):format(source, rule, docsIcon), "Comment"
+	end
+	return "??"
+end
+fsfsf
 
 vim.diagnostic.config {
 	virtual_text = {
 		severity = { min = vim.diagnostic.severity.INFO }, -- leave out hints
 		source = false, -- added as suffix already
 		spacing = 1,
-		format = function(diag) return rmTrailDot(diag.message) end,
-		suffix = function(diag) ---@param diag Diagnostic
-			if not (diag.source) then return "" end
-			local source = rmTrailDot(diag.source)
-			return (" (%s)"):format(source)
-		end,
+		format = rmTrailDot,
+		suffix = function(diag) return diagSuffix(diag, "virtual_text") end,
 	},
 	float = {
 		severity_sort = true,
@@ -39,12 +58,7 @@ vim.diagnostic.config {
 			if total == 1 then return "" end
 			return "• ", "NonText"
 		end,
-		format = function(diag) return rmTrailDot(diag.message) end,
-		suffix = function(diag) ---@param diag Diagnostic
-			if not (diag.source or diag.code) then return "" end
-			local source = diag.source and rmTrailDot(diag.source) or ""
-			local rule = diag.code and ": " .. diag.code or ""
-			return (" (%s%s)"):format(source, rule), "Comment"
-		end,
+		format = rmTrailDot,
+		suffix = function(diag) return diagSuffix(diag, "float") end,
 	},
 }
