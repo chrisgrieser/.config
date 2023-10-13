@@ -30,10 +30,10 @@ local function cmpconfig()
 	local cmp = require("cmp")
 	local compare = require("cmp.config.compare")
 
-	local function hasBlankBefore()
+	local function noBlankBefore()
 		local col = vim.api.nvim_win_get_cursor(0)[2]
-		local blankBefore = vim.api.nvim_get_current_line():sub(1, col):match("^%s*$") ~= nil
-		return blankBefore
+		local noBlankBef = vim.api.nvim_get_current_line():sub(1, col):match("^%s*$") == nil
+		return noBlankBef
 	end
 
 	cmp.setup {
@@ -73,7 +73,7 @@ local function cmpconfig()
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_next_item()
-				elseif hasBlankBefore() then
+				elseif noBlankBefore() then
 					cmp.complete()
 				else
 					fallback()

@@ -31,7 +31,7 @@ vim.api.nvim_create_user_command("LspCapabilities", function(ctx)
 		local msg = client.name:upper() .. "\n" .. table.concat(capAsList, "\n")
 		table.insert(out, msg)
 	end
-	vim.notify(table.concat(out, "\n\n"), vim.log.levels.TRACE, { timeout = 14000 })
+	u.notify(":LspCapabilities", "trace", table.concat(out, "\n\n"))
 end, {
 	nargs = "?",
 	complete = function()

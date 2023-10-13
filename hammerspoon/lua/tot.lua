@@ -5,8 +5,7 @@ local wu = require("lua.window-utils")
 -- COUNTER FOR SKETCHYBAR
 local function updateCounter() hs.execute(u.exportPath .. "sketchybar --trigger update-tot-count") end
 
--- Triggers
--- 1. App Switch
+-- Triggers: App Switch
 TotWatcher = aw.new(function(appName, event, tot)
 	if appName ~= "Tot" then return end
 
@@ -14,15 +13,6 @@ TotWatcher = aw.new(function(appName, event, tot)
 	if event == aw.deactivated and not u.isFront("Alfred") then
 		if wu.CheckSize(tot:mainWindow(), wu.totCenter) then tot:hide() end
 	end
-end):start()
-
--- 2. On wake
-local c = hs.caffeinate.watcher
-WakeTot = c.new(function(event)
-	local hasWoken = event == c.screensDidWake
-		or event == c.systemDidWake
-		or event == c.screensDidUnlock
-	if hasWoken then updateCounter() end
 end):start()
 
 --------------------------------------------------------------------------------
@@ -57,3 +47,15 @@ end
 
 -- 2. Every morning
 MorningTimerForTot = hs.timer.doAt("07:00", "01d", remindersToTot, true):start()
+
+-- 3. On wake
+local c = hs.caffeinate.watcher
+WakeTot = c.new(function(event)
+	local hasWoken = event == c.screensDidWake
+		or event == c.systemDidWake
+		or event == c.screensDidUnlock
+	if hasWoken then
+		updateCounter()
+		u.runWithDelays(15, remindersToTot)
+	end
+end):start()
