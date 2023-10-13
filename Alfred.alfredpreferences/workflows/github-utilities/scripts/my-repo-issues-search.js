@@ -5,6 +5,9 @@ ObjC.import("Foundation");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
+//──────────────────────────────────────────────────────────────────────────────
+
+/** @param {string} url */
 function alfredMatcher(str) {
 	return str.replace(/[-()_.]/g, " ") + " " + str;
 }
