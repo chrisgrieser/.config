@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=../schemas/espanso-appconfig-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/ajmarkow/espanso-schema-json/master/schemas/Espanso_Config_File_Schema.json
 #───────────────────────────────────────────────────────────────────────────────
 
 # https://espanso.org/docs/configuration/app-specific-configurations/

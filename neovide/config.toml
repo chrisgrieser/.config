@@ -1,9 +1,9 @@
 # DOCS https://neovide.dev/config-file.html?highlight=frame#available-settings
 #───────────────────────────────────────────────────────────────────────────────
 
-# remove titlebar
-# WARN using "None" prevents window managers from controlling the neovide window
+# REMOVE TITLEBAR
+# - using "None" prevents window managers from controlling the neovide window
+# - keeping traffic lights via `frame = "Transparent"` does not work due to
+#   with lualine: https://github.com/nvim-lualine/lualine.nvim/issues/1067
 frame = "Buttonless"
 
-# keeping traffic lights via `frame = "Transparent"` does not work due to
-# overlaps with lualine: https://github.com/nvim-lualine/lualine.nvim/issues/1067

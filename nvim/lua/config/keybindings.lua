@@ -117,7 +117,12 @@ keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
 -- Multi-Cursor replacement
 -- https://www.reddit.com/r/neovim/comments/173y1dv/comment/k47kqb3/?context=3
 keymap("n", "<D-j>", "*<C-o>cgn", { desc = " 󰆿 Pseudo-Multi-Cursor" })
-keymap("x", "<D-j>", "*<C-o>cgn", { desc = " 󰆿 Pseudo-Multi-Cursor", remap = true, unique = false })
+keymap(
+	"x",
+	"<D-j>",
+	"*<C-o>cgn",
+	{ desc = " 󰆿 Pseudo-Multi-Cursor", remap = true, unique = false } -- requires nvim's `*`
+)
 
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
@@ -158,7 +163,7 @@ keymap("x", "v", "<C-v>", { desc = "`vv` from Normal starts Visual Block" })
 -- also relevant for REPLs such as iron.nvim
 keymap("t", "<C-CR>", [[<C-\><C-n><C-w>w]], { desc = " Goto next window" })
 keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste (Terminal Mode)" })
-keymap("t", "<Esc>", [[<C-\><C-n>]],):format() { desc = " Esc (Terminal Mode)" })
+keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = " Esc (Terminal Mode)" })
 
 --------------------------------------------------------------------------------
 -- BUFFERS & WINDOWS & FILES
