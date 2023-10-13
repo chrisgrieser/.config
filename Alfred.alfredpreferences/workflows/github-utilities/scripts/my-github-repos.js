@@ -20,22 +20,6 @@ function httpRequest(url) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @typedef {Object} gitRepo
- * @property {boolean} fork
- * @property {boolean} private
- * @property {boolean} archived
- * @property {boolean} is_template
- * @property {string} name
- * @property {string} full_name
- * @property {string} html_url
- * @property {string} description
- * @property {number} stargazers_count
- * @property {number} open_issues_count
- * @property {number} forks_count
- */
-
-//──────────────────────────────────────────────────────────────────────────────
-
 /** @param {string[]} argv */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
@@ -71,19 +55,21 @@ function run(argv) {
 	// DOCS https://docs.github.com/en/free-pro-team@latest/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
 	const apiURL = `https://api.github.com/users/${username}/repos?per_page=100`;
 	const scriptFilterArr = JSON.parse(httpRequest(apiURL))
-		.filter((/** @type {gitRepo} */ repo) => includeArchived || !repo.archived)
-		.sort((/** @type {gitRepo&{isLocal: boolean}} */ a, /** @type {gitRepo&{isLocal: boolean}} */ b) => {
-			a.isLocal = localRepos[a.name];
-			b.isLocal = localRepos[b.name];
-			if (a.isLocal && !b.isLocal) return -1;
-			else if (!a.isLocal && b.isLocal) return 1;
-			else if (a.fork && !b.fork) return 1;
-			else if (!a.fork && b.fork) return -1;
-			else if (a.archived && !b.archived) return 1;
-			else if (!a.archived && b.archived) return -1;
-			return b.stargazers_count - a.stargazers_count;
-		})
-		.map((/** @type {gitRepo&{local: {path: string}}} */ repo) => {
+		.filter((/** @type {GithubRepo} */ repo) => includeArchived || !repo.archived)
+		.sort(
+			(/** @type {GithubRepo&{isLocal: boolean}} */ a, /** @type {GithubRepo&{isLocal: boolean}} */ b) => {
+				a.isLocal = localRepos[a.name];
+				b.isLocal = localRepos[b.name];
+				if (a.isLocal && !b.isLocal) return -1;
+				else if (!a.isLocal && b.isLocal) return 1;
+				else if (a.fork && !b.fork) return 1;
+				else if (!a.fork && b.fork) return -1;
+				else if (a.archived && !b.archived) return 1;
+				else if (!a.archived && b.archived) return -1;
+				return b.stargazers_count - a.stargazers_count;
+			},
+		)
+		.map((/** @type {GithubRepo&{local: {path: string}}} */ repo) => {
 			let matcher = alfredMatcher(repo.name);
 			let type = "";
 
@@ -118,7 +104,7 @@ function run(argv) {
 			}
 			let subtitle = "";
 			if (repo.stargazers_count > 0) subtitle += `⭐ ${repo.stargazers_count}  `;
-			if (repo.open_issues_count > 0) subtitle += `🟢 ${repo.open_issues_count}  `;
+			if (repo.open_issues > 0) subtitle += `🟢 ${repo.open_issues}  `;
 			if (repo.forks_count > 0) subtitle += `🍴 ${repo.forks_count}  `;
 
 			return {
@@ -144,9 +130,9 @@ function run(argv) {
 						arg: repo.html_url,
 					},
 					shift: {
-						subtitle: `⇧: Search Issues (${repo.open_issues_count} open)`,
+						subtitle: `⇧: Search Issues (${repo.open_issues} open)`,
 						arg: repo.full_name,
-						valid: repo.open_issues_count > 0,
+						valid: repo.open_issues > 0,
 					},
 				},
 			};

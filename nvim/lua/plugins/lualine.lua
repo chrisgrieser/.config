@@ -77,7 +77,7 @@ local lualineConfig = {
 				end,
 			},
 			{ "filetype", icon_only = true, colored = false, padding = { right = 0, left = 1 } },
-			{ "filename", symbols = { modified = "", readonly = "" } },
+			{ "filename", file_status = false },
 		},
 		lualine_b = {
 			{ require("funcs.alt-alt").altFileStatusline },

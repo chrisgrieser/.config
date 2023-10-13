@@ -32,17 +32,6 @@ declare class MacAppObj {
 	}[];
 }
 
-declare class SideNotesFolder {
-	notes: SideNotesNote[];
-}
-declare class SideNotesNote {
-	content(): string;
-	title(): string;
-	delete(): void;
-	text(): string;
-	id(): string;
-}
-
 declare class FinderItem {
 	creationDate(): Date;
 	modificationDate(): Date;
@@ -132,19 +121,6 @@ declare const Application: {
 			at: PathObj;
 			withProperties: { name: string };
 		}): FinderItem;
-	};
-	(name: "SideNotes"): MacAppObj & {
-		currentNote(): SideNotesNote;
-		createNote(options: {
-			text: string;
-			path?: string;
-			folder?: SideNotesFolder;
-			ispath?: boolean;
-		}): void;
-		open(noteOrFolder: SideNotesNote | SideNotesFolder): void;
-		folders: {
-			byName(folderName: string): SideNotesFolder;
-		}&SideNotesFolder[];
 	};
 	(name: "Alfred" | "com.runningwithcrayons.Alfred"): MacAppObj & {
 		// biome-ignore lint/complexity/noBannedTypes: <explanation>
