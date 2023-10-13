@@ -127,9 +127,9 @@ return {
 				},
 				split = {
 					enter = true,
-					size = "40%",
+					size = "45%",
 					close = { keys = { "q", "<D-w>", "<D-0>" } },
-					win_options = { scrolloff = 2 },
+					win_options = { scrolloff = 3 },
 				},
 			},
 			commands = {
@@ -183,7 +183,7 @@ return {
 		opts = {
 			render = "wrapped-compact",
 			top_down = false,
-			max_width = 55,
+			max_width = 72, -- commit message max length
 			minimum_width = 15,
 			level = vim.log.levels.TRACE, -- minimum severity level
 			timeout = 6000,

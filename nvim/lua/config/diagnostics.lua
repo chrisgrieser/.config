@@ -11,10 +11,10 @@ for type, icon in pairs(diagnosticTypes) do
 end
 
 --------------------------------------------------------------------------------
+-- cause lua_ls leaves annoying dot in their source…
 ---@param diag Diagnostic
 ---@return string
 local function rmTrailDot(diag)
-	-- lua_ls leaves annoying dot in their source
 	local msg = diag.message:gsub(" ?%.$", "")
 	return msg
 end
@@ -32,19 +32,17 @@ local function diagSuffix(diag, mode)
 	if installed and rulebook then docsIcon = rulebook.hasDocs(diag) and "  " or "" end
 
 	if mode == "virtual_text" then
-		return (" (%s%s)"):format(source, docsIcon)
+		return (" %s%s"):format(source, docsIcon)
 	elseif mode == "float" then
 		local rule = diag.code and ": " .. diag.code or ""
-		return (" (%s%s%s)"):format(source, rule, docsIcon), "Comment"
+		return (" %s%s%s"):format(source, rule, docsIcon), "Comment"
 	end
 	return "??"
 end
-fsfsf
 
 vim.diagnostic.config {
 	virtual_text = {
 		severity = { min = vim.diagnostic.severity.INFO }, -- leave out hints
-		source = false, -- added as suffix already
 		spacing = 1,
 		format = rmTrailDot,
 		suffix = function(diag) return diagSuffix(diag, "virtual_text") end,
@@ -52,7 +50,7 @@ vim.diagnostic.config {
 	float = {
 		severity_sort = true,
 		border = require("config.utils").borderStyle,
-		max_width = 65,
+		max_width = 70,
 		header = false,
 		prefix = function(_, _, total)
 			if total == 1 then return "" end
