@@ -149,13 +149,6 @@ local function pathDisplay(_, path)
 	return string.format("%s\t\t%s", tail, parentDisplay) -- parent colored via autocmd above
 end
 
----@nodiscard
----@return string name of the current project
-local function projectName()
-	local pwd = vim.loop.cwd() or ""
-	return vim.fs.basename(pwd)
-end
-
 --------------------------------------------------------------------------------
 
 local telescopeConfig = {
@@ -306,6 +299,12 @@ local telescopeConfig = {
 
 --------------------------------------------------------------------------------
 
+---@return string name of the current project
+local function projectName()
+	local pwd = vim.loop.cwd() or ""
+	return vim.fs.basename(pwd)
+end
+
 return {
 	{ -- fuzzy finder
 		"nvim-telescope/telescope.nvim",
@@ -366,8 +365,7 @@ return {
 				function()
 					require("telescope.builtin").symbols {
 						sources = { "nerd", "math" },
-						theme = "cursor",
-						layout_config = { cursor = { width = 0.35, height = 0.55 } },
+						layout_config = { horizontal = { width = 0.35, height = 0.55 } },
 					}
 				end,
 				desc = " Icon Picker",

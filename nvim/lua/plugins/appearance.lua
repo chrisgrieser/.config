@@ -175,7 +175,7 @@ return {
 		end,
 		opts = {
 			input = {
-				insert_only = false, -- enable normal mode
+				insert_only = false, -- = enable normal mode
 				border = u.borderStyle,
 				relative = "editor",
 				title_pos = "left",
@@ -184,7 +184,7 @@ return {
 			},
 			select = {
 				backend = { "builtin" },
-				trim_prompt = true, -- trailing `:`
+				trim_prompt = true,
 				builtin = {
 					mappings = { ["q"] = "Close" },
 					show_numbers = false,
@@ -201,13 +201,9 @@ return {
 					},
 				},
 				get_config = function(opts)
-					local useTelescope = {
-						"tinygit.github_issue",
-						"tinygit.pickaxe_diff",
-						"icon_picker",
-						"mason.ui.language-filter",
-					}
-					if vim.tbl_contains(useTelescope, opts.kind) then
+					local useTelescope = { "tinygit", "mason" }
+					local pluginName = vim.split(opts.kind, "%.")[1]
+					if vim.tbl_contains(useTelescope, pluginName) then
 						return { backend = "telescope" }
 					end
 				end,
