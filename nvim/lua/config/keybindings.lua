@@ -172,7 +172,7 @@ keymap("n", "<CR>", function()
 	if vim.bo.buftype == "terminal" then
 		u.normal("a") -- enter terminal mode
 	else
-		require("funcs.alt-alt").altBuffer()
+		require("funcs.alt-alt").gotoAltBuffer()
 	end
 end, { desc = "󰽙 Alt Buffer" })
 keymap({ "n", "x", "i" }, "<C-CR>", "<C-w>w", { desc = " Next Window" })
