@@ -138,7 +138,7 @@ function gd {
 }
 
 # make delta theme-aware
-function delta {
+function diff {
 	if defaults read -g AppleInterfaceStyle &>/dev/null; then
 		command delta --dark "$@"
 	else
