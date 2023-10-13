@@ -45,10 +45,6 @@
 		"prefix": "if .. then .. else",
 		"body": ["if ${1:true} then", "\t$2", "else", "\t$0", "end"]
 	},
-	"then return end": {
-		"prefix": "then return end",
-		"body": "then return end"
-	},
 	"home": {
 		"prefix": "home",
 		"body": "os.getenv(\"HOME\")"

@@ -1,4 +1,5 @@
 local u = require("config.utils")
+local trace = vim.log.levels.TRACE
 --------------------------------------------------------------------------------
 
 -- DOCS https://github.com/folke/noice.nvim#-routes
@@ -170,7 +171,6 @@ return {
 			{
 				"<leader>ln",
 				function()
-					local trace = vim.log.levels.TRACE
 					local history = require("notify").history()
 					if #history == 0 then
 						vim.notify("No Notification in this session.", trace, { title = "nvim-notify" })
