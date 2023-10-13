@@ -61,29 +61,29 @@ end
 ---@return string
 function M.altFileStatusline()
 	local maxLen = 25
+	local name, icon = "", ""
 	local altFile = fn.expand("#:t")
 	local curFile = fn.expand("%:t")
 	local altPath = fn.expand("#:p")
 	local curPath = fn.expand("%:p")
+	local altBufNr = fn.bufnr("#") ---@diagnostic disable-line: param-type-mismatch
+
 	local altOld = altOldfile()
-	local name, icon = "", ""
-	local altBufNr = vim.fn.bufnr("#") ---@diagnostic disable-line: param-type-mismatch
 	local specialFile = vim.api.nvim_buf_get_option(altBufNr, "buftype") ~= ""
 	local fileExists = vim.loop.fs_stat(altPath) ~= nil
-	local hasAltFile = altFile ~= "" and altPath ~= curPath and (fileExists or specialFile)
+	local hasAltFile = altPath ~= curPath and (fileExists or specialFile)
 
 	if hasAltFile then
 		local ext = fn.expand("#:e")
-		local altBufFt = vim.api.nvim_buf_get_option(fn.bufnr("#"), "filetype") ---@diagnostic disable-line: param-type-mismatch
+		local altBufFt = vim.api.nvim_buf_get_option(altBufNr, "filetype") ---@diagnostic disable-line: param-type-mismatch
 		local ftOrExt = ext ~= "" and ext or altBufFt
 		local ok, devicons = pcall(require, "nvim-web-devicons")
 		icon = ok and devicons.get_icon(altFile, ftOrExt) or "#"
+		name = altFile
 
 		if curFile == altFile then
-			local altParent = fn.expand("#:p:h:t") -- append parent of altfile
+			local altParent = vim.fs.basename(vim.fs.dirname(altPath))
 			name = altParent .. "/" .. altFile
-		else
-			name = altFile
 		end
 	elseif altOld then
 		icon = "󰋚"
