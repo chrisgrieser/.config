@@ -179,10 +179,6 @@ keymap("n", "ga", "gf", { desc = " Open File under cursor" })
 --------------------------------------------------------------------------------
 -- CLIPBOARD
 
---- macOS bindings
-keymap({ "n", "x" }, "<D-v>", "p", { desc = "paste" })
-keymap("c", "<D-v>", "<C-r>+", { desc = "paste" })
-
 -- keep the register clean
 keymap("n", "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
@@ -194,6 +190,9 @@ keymap("n", "dd", function()
 	return "dd"
 end, { expr = true })
 
+-- paste w/o switching register
+keymap("x", "p", "P")
+
 -- always paste characterwise when in insert mode
 keymap("i", "<D-v>", function()
 	local regContent = vim.trim(fn.getreg("+"))
@@ -201,8 +200,8 @@ keymap("i", "<D-v>", function()
 	return "<C-g>u<C-r><C-o>+" -- "<C-g>u" adds undopoint before the paste
 end, { desc = " Paste charwise", expr = true })
 
--- paste w/o switching register
-keymap("x", "p", "P")
+--- paste in command mode
+keymap("c", "<D-v>", "<C-r>+", { desc = " Paste" })
 
 ------------------------------------------------------------------------------
 -- CMD-KEYBINDINGS

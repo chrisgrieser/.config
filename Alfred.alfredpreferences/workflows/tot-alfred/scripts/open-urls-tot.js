@@ -11,7 +11,9 @@ function run() {
 	se.includeStandardAdditions = true;
 	se.keystroke("a", { using: ["command down"] });
 	se.keystroke("c", { using: ["command down"] });
+	delay(0.05);
 	se.keyCode(124); // arrow right -> deselect
+	delay(0.05);
 	const clipb = se.theClipboard();
 
 	// search for URLs and open any
