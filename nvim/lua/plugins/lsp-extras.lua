@@ -112,7 +112,16 @@ return {
 		"stevearc/aerial.nvim",
 		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
 		keys = {
-			{ "<D-1>", "<cmd>AerialToggle<CR>", desc = "󰒕 Symbols" },
+			{ "<D-1>", "<cmd>AerialToggle<CR>", desc = "󰒕 Symbols Sidebar" },
+			{
+				"gs",
+				function()
+					require("telescope").extensions.aerial.aerial {
+						show_nesting = { ["_"] = true },
+					}
+				end,
+				desc = "󰒕 Symbols Search",
+			},
 		},
 		opts = {
 			layout = {
@@ -120,7 +129,6 @@ return {
 				min_width = 20,
 				win_opts = { signcolumn = "yes:1" },
 			},
-			autojump = true,
 			show_guides = true,
 			highlight_on_hover = true,
 		},

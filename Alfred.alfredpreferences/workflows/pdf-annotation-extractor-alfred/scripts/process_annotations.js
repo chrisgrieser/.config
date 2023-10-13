@@ -140,11 +140,11 @@ function underlinesToSidenotes(annotations, citekey) {
 
 	// Annotations with leading "_"
 	const underscoreAnnos = [];
-	annotations.forEach((anno) => {
+	for (const anno of annotations) {
 		if (!anno.comment?.startsWith("_")) return;
 		anno.comment = anno.comment.slice(1).trim(); // remove "_" prefix
 		underscoreAnnos.push(anno);
-	});
+	}
 
 	if (sidenotesIsInstalled) {
 		const underlineAnnos = annotations.filter((a) => a.type === "Underline");
@@ -152,7 +152,7 @@ function underlinesToSidenotes(annotations, citekey) {
 		const annosToSplitOff = [...underlineAnnos, ...underscoreAnnos];
 		if (annosToSplitOff.length > 0) {
 			const text = jsonToMd(annosToSplitOff, citekey);
-			Application("SideNotes").createNote({ text: text });
+			app.openLocation(`tot://2/append?text=${encodeURIComponent(text)}`);
 		}
 	}
 	return annotations.filter((/** @type {{ type: string; }} */ anno) => anno.type !== "Underline");
@@ -317,7 +317,11 @@ function transformTag4yaml(annotations, keywords) {
 	let tagsForYaml = "";
 
 	// existing tags (from BibTeX library)
-	if (keywords) keywords.split(",").forEach((tag) => newKeywords.push(tag));
+	if (keywords) {
+		for (const tag of keywords.split(",")) {
+			newKeywords.push(tag);
+		}
+	}
 
 	// additional tags (from annotations)
 	const arr = annotations.map((a) => {
@@ -325,7 +329,9 @@ function transformTag4yaml(annotations, keywords) {
 		if (a.comment?.startsWith("=") && !a.comment?.startsWith("==")) {
 			let tags = a.comment.slice(1); // remove the "="
 			if (a.type === "Highlight" || a.type === "Underline") tags += " " + a.quote;
-			tags.split(",").forEach((/** @type {string} */ tag) => newKeywords.push(tag));
+			for (const tag of tags.split(",")) {
+				newKeywords.push(tag);
+			}
 			a.type = "remove";
 		}
 		return a;
@@ -357,10 +363,10 @@ function extractMetadata(citekey, rawEntry) {
 	// biome-ignore format: more compact
 	const otherChars = ["{\\~n};ñ", "{\\'a};á", "{\\'e};é", "{\\v c};č", "\\c{c};ç", "\\o{};ø", "\\^{i};î", '\\"{i};î', '\\"{i};ï', "{\\'c};ć", '\\"e;ë'];
 	const specialChars = ["\\&;&", '``;"', "`;'", "\\textendash{};—", "---;—", "--;—"];
-	[...germanChars, ...otherChars, ...specialChars].forEach((pair) => {
+	for (const pair of [...germanChars, ...otherChars, ...specialChars]) {
 		const half = pair.split(";");
 		bibtexEntry = bibtexEntry.replaceAll(half[0], half[1]);
-	});
+	}
 
 	// extracts content of a BibTeX-field
 	/** @param {string} str */
@@ -382,7 +388,7 @@ function extractMetadata(citekey, rawEntry) {
 		citekey: citekey,
 	};
 
-	bibtexEntry.split("\n").forEach((property) => {
+	for (const property of bibtexEntry.split("\n")) {
 		if (/\stitle =/i.test(property)) {
 			data.title = extract(property)
 				.replaceAll('"', "'") // avoid invalid yaml, since title is wrapped in "'"
@@ -405,7 +411,7 @@ function extractMetadata(citekey, rawEntry) {
 			data.url = "https://doi.org/" + extract(property);
 			data.doi = extract(property);
 		} else if (property.includes("url =")) data.url = extract(property);
-	});
+	}
 
 	// prompt for page number if needed
 	if (data.firstPage === -999) {
