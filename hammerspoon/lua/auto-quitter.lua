@@ -20,7 +20,7 @@ Thresholds = {
 	["Alfred Preferences"] = 20,
 	["System Settings"] = 2,
 	Finder = 20, -- only closes windows when not on projector
-	Obsidian = nil, -- don't quit Obsidian due to omnisearch-http-server
+	Obsidian = 100,
 }
 
 --------------------------------------------------------------------------------
