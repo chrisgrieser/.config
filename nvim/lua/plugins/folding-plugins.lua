@@ -32,7 +32,6 @@ end
 return {
 	{
 		"chrisgrieser/nvim-origami",
-		enabled = false,
 		event = "BufReadPost", -- later will not save folds
 		opts = true,
 	},
@@ -53,10 +52,26 @@ return {
 				desc = " 󱃄 Open All Folds except comments",
 			},
 			{ "zm", function() require("ufo").closeAllFolds() end, desc = " 󱃄 Close All Folds" },
-			{ "z1", function() require("ufo").closeFoldsWith(1) end, desc = " 󱃄 Close L1 Folds" },
-			{ "z2", function() require("ufo").closeFoldsWith(2) end, desc = " 󱃄 Close L2 Folds" },
-			{ "z3", function() require("ufo").closeFoldsWith(3) end, desc = " 󱃄 Close L3 Folds" },
-			{ "z4", function() require("ufo").closeFoldsWith(4) end, desc = " 󱃄 Close L4 Folds" },
+			{
+				"z1",
+				function() require("ufo").closeFoldsWith(1) end,
+				desc = " 󱃄 Close L1 Folds",
+			},
+			{
+				"z2",
+				function() require("ufo").closeFoldsWith(2) end,
+				desc = " 󱃄 Close L2 Folds",
+			},
+			{
+				"z3",
+				function() require("ufo").closeFoldsWith(3) end,
+				desc = " 󱃄 Close L3 Folds",
+			},
+			{
+				"z4",
+				function() require("ufo").closeFoldsWith(4) end,
+				desc = " 󱃄 Close L4 Folds",
+			},
 		},
 		init = function()
 			-- INFO fold commands usually change the foldlevel, which fixes folds, e.g.
@@ -72,8 +87,7 @@ return {
 				-- INFO some filetypes only allow indent, some only LSP, some only
 				-- treesitter. However, ufo only accepts two kinds as priority,
 				-- therefore making this function necessary :/
-				local lspWithOutFolding =
-					{ "markdown", "bash", "sh", "bash", "zsh", "css", "html", "python" }
+				local lspWithOutFolding = { "markdown", "sh", "css", "html", "python" }
 				if vim.tbl_contains(lspWithOutFolding, ft) then return { "treesitter", "indent" } end
 				return { "lsp", "indent" }
 			end,

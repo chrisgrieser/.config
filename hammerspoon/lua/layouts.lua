@@ -68,7 +68,7 @@ local function workLayout()
 	require("lua.private").closer()
 
 	-- open
-	local appsToOpen = { "Discord", env.browserApp, env.mailApp, env.tickerApp, "Obsidian" }
+	local appsToOpen = { "Discord", env.browserApp, env.mailApp, env.tickerApp }
 	if not isWeekend() then table.insert(appsToOpen, "Slack") end
 	u.openApps(appsToOpen)
 	for _, appName in pairs(appsToOpen) do

@@ -184,19 +184,19 @@ function gli {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 
 	local hash key_pressed selected
-	local format="%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s %n%C(reset)%n---%n%C(magenta)"
+	local format="%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s%C(magenta)"
 	selected=$(
 		gitlog --color=always |
 			fzf -0 --query="$1" \
 				--ansi --no-sort --no-info \
 				--header-first --header="↵ : Checkout   ^H: Copy [H]ash" \
 				--expect="ctrl-h" \
-				--preview-window=40% \
-				--preview="git show {1} --name-only --color=always --format='$format'"
+				--preview-window=45% \
+				--preview="git show {2} --name-only --color=always --format='$format'"
 	)
 	[[ -z "$selected" ]] && return 0
 	key_pressed=$(echo "$selected" | head -n1)
-	hash=$(echo "$selected" | cut -d' ' -f1 | tail -n+2)
+	hash=$(echo "$selected" | cut -d' ' -f2 | tail -n+2)
 
 	if [[ "$key_pressed" == "ctrl-h" ]]; then
 		echo "$hash" | pbcopy
