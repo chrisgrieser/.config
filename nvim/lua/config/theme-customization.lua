@@ -80,6 +80,9 @@ local function themeModifications()
 	elseif theme == "gruvbox-material" or theme == "sonokai" then
 		local commentColor = u.getHighlightValue("Comment", "fg")
 		updateHl("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
+		overwriteHl("TSParameter", { fg = "#6f92b3" })
+	elseif theme == "nordic" then
+		overwriteHl("@parameter", { fg = "#8d8fe1" })
 	elseif theme == "material" and mode == "light" then
 		updateHl("@property", "guifg=#6c9798")
 		updateHl("@field", "guifg=#6c9798")
@@ -120,14 +123,6 @@ local function themeModifications()
 		end
 
 		-- linkHl("MoreMsg", "Folded") -- FIX for https://github.com/rebelot/kanagawa.nvim/issues/89
-	elseif theme == "zephyr" then
-		updateHl("IncSearch", "guifg=#FFFFFF")
-		linkHl("TabLineSel", "lualine_a_normal")
-		linkHl("TabLineFill", "lualine_c_normal")
-	elseif theme == "rose-pine" and mode == "light" then
-		updateHl("IblIndent", "guifg=#e3d4c4")
-		updateHl("ColorColumn", "guibg=#eee6dc")
-		updateHl("Headline", "gui=bold guibg=#ebe1d5")
 	end
 end
 
