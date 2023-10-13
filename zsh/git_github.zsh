@@ -165,7 +165,7 @@ function gitlog {
 			-e 's/HEAD/󱍀 /g' \
 			-e 's/->/󰔰 /g' \
 			-e 's/tags: / )/' \
-			-Ee $'s/ (improv|fix|refactor|build|ci|docs|feat|test|perf|chore|revert|break)(\\(.+\\)|!)?:/ \033[1;35m\\1\033[0;34m\\2\033[0m:/' \
+			-Ee $'s/ (improv|fix|refactor|build|ci|docs|feat|test|perf|chore|revert|break|style)(\\(.+\\)|!)?:/ \033[1;35m\\1\033[0;34m\\2\033[0m:/' \
 			-Ee $'s/(#[0-9]+)/\033[1;31m\\1\033[0m/' # issue numbers
 	# INFO inserting ansi colors via sed requires leading $
 	echo

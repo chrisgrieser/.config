@@ -41,8 +41,6 @@ local lualineConfig = {
 		-- INFO using the tabline will override vim's default tabline, so the tabline
 		-- should always include the tab element
 		lualine_a = {
-			-- INFO setting different section separators in the same components has
-			-- yanky results, they should have the same separator
 			{
 				"datetime",
 				style = "%H:%M",
@@ -107,19 +105,11 @@ local lualineConfig = {
 	},
 	options = {
 		refresh = { statusline = 1000 },
-		ignore_focus = {
-			"DressingInput",
-			"DressingSelect",
-			"ccc-ui",
-			"TelescopePrompt",
-			"lazy",
-			"mason",
-			"checkhealth",
-			"lspinfo",
-		},
 		globalstatus = true,
 		component_separators = { left = "", right = "" },
 		section_separators = bottomSeparators,
+		-- stylua: ignore
+		ignore_focus = { "DressingInput", "DressingSelect", "ccc-ui", "TelescopePrompt", "lazy", "mason", "checkhealth", "lspinfo" },
 	},
 	extensions = { "quickfix" },
 }
