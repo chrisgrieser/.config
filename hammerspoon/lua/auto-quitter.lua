@@ -20,34 +20,34 @@ Thresholds = {
 	["Alfred Preferences"] = 20,
 	["System Settings"] = 2,
 	Finder = 20, -- only closes windows when not on projector
-	Obsidian = 100,
+	Obsidian = nil, -- don't quit Obsidian due to omnisearch-http-server
 }
 
 --------------------------------------------------------------------------------
 
----@param app string name of the app
-local function quit(app)
+---@param appName string name of the app
+local function quit(appName)
 	local suffix = ""
 
 	-- don't leave voice call when gaming
-	if app == "Discord" and u.appRunning("Steam") then return end
+	if appName == "Discord" and u.appRunning("Steam") then return end
 
-	if app == "Finder" then
+	if appName == "Finder" then
 		if env.isProjector() then return end
 		local finderWins = u.app("Finder"):allWindows()
 		if #finderWins == 0 then return end
 		for _, win in pairs(finderWins) do
 			win:close()
 		end
-		suffix = " (windows closed)"
-	elseif app == "Hammerspoon" then
+		suffix = "(windows closed)"
+	elseif appName == "Hammerspoon" then
 		hs.closeConsole()
-		suffix = " (Console)"
+		suffix = "(Console)"
 	else
-		u.app(app):kill()
+		u.app(appName):kill()
 	end
-	print("📴 AutoQuitting: " .. app .. suffix)
-	IdleApps[app] = nil
+	print("📴 AutoQuitting: " .. appName .. " " .. suffix)
+	IdleApps[appName] = nil
 end
 
 --------------------------------------------------------------------------------
