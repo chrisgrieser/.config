@@ -88,12 +88,12 @@ local lualineConfig = {
 				"diagnostics",
 				symbols = { error = "󰅚 ", warn = " ", info = "󰋽 ", hint = "󰘥 " },
 			},
-			{ irregularWhitespace },
 			{
 				"fileformat",
 				cond = function() return bo.fileformat ~= "unix" end,
 				fmt = function(str) return str ~= "" and str .. " 󰌑" or "" end,
 			},
+			{ irregularWhitespace },
 		},
 		lualine_y = {
 			"diff",
@@ -113,7 +113,7 @@ local lualineConfig = {
 			"DressingInput", "DressingSelect",
 			"lazy", "mason", "lspinfo",
 			"ccc-ui", "TelescopePrompt", "checkhealth",
-			"aerial", "noice",
+			"aerial", "noice", "Outline",
 		},
 	},
 	extensions = { "quickfix" },

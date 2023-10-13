@@ -108,30 +108,30 @@ return {
 			depth_limit_indicator = "…",
 		},
 	},
-	{
+	{ -- symbols sibebar and search
 		"stevearc/aerial.nvim",
 		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
 		keys = {
 			{ "<D-1>", "<cmd>AerialToggle<CR>", desc = "󰒕 Symbols Sidebar" },
 			{
 				"gs",
-				function()
-					require("telescope").extensions.aerial.aerial {
-						show_nesting = { ["_"] = true },
-					}
-				end,
+				function() require("telescope").extensions.aerial.aerial() end,
 				desc = "󰒕 Symbols Search",
 			},
 		},
-		opts = {
-			layout = {
-				default_direction = "prefer_left",
-				min_width = 20,
-				win_opts = { signcolumn = "yes:1" },
-			},
-			show_guides = true,
-			highlight_on_hover = true,
-		},
+		config = function()
+			require("aerial").setup {
+				layout = {
+					default_direction = "prefer_left",
+					min_width = 20,
+					win_opts = { signcolumn = "yes:1" },
+				},
+				show_guides = true,
+				highlight_on_hover = true,
+				close_on_select = true,
+			}
+			require("telescope").load_extension("aerial")
+		end,
 	},
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",

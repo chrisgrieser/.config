@@ -234,12 +234,6 @@ local telescopeConfig = {
 				horizontal = { preview_width = { 0.7, min = 30 } },
 			},
 		},
-		lsp_document_symbols = {
-			prompt_prefix = "󰒕 ",
-			prompt_title = "Functions",
-			-- stylua: ignore
-			ignore_symbols = { "boolean", "number", "string", "variable", "array", "object", "constant", "package" },
-		},
 		lsp_workspace_symbols = {
 			prompt_prefix = "󰒕 ",
 			prompt_title = "Functions",
@@ -259,13 +253,6 @@ local telescopeConfig = {
 			layout_config = {
 				horizontal = { anchor = "W", width = 0.5, height = 0.5 },
 			},
-		},
-		spell_suggest = {
-			initial_mode = "normal",
-			prompt_prefix = "󰓆",
-			previewer = false,
-			theme = "cursor",
-			layout_config = { cursor = { width = 0.3 } },
 		},
 		colorscheme = {
 			enable_preview = true,
@@ -289,6 +276,9 @@ local telescopeConfig = {
 				horizontal = { anchor = "W", width = 0.5, height = 0.55 },
 			},
 		},
+		aerial = {
+			show_nesting = { ["_"] = true },
+		},
 	},
 }
 
@@ -305,10 +295,8 @@ return {
 		"nvim-telescope/telescope.nvim",
 		keys = {
 			{ "?", function() telescope("keymaps") end, desc = "⌨️  Search Keymaps" },
-			{ "zl", function() telescope("spell_suggest") end, desc = "󰓆 Spell Suggest" },
 			{ "gb", function() telescope("buffers") end, desc = " 󰽙 Buffers" },
 			{ "g.", function() telescope("resume") end, desc = " Continue" },
-			-- { "gs", function() telescope("lsp_document_symbols") end, desc = "󰒕 Symbols" },
 			{
 				"gw",
 				function() telescope("lsp_workspace_symbols") end,
