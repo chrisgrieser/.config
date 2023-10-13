@@ -308,7 +308,7 @@ return {
 			{ "zl", function() telescope("spell_suggest") end, desc = "󰓆 Spell Suggest" },
 			{ "gb", function() telescope("buffers") end, desc = " 󰽙 Buffers" },
 			{ "g.", function() telescope("resume") end, desc = " Continue" },
-			{ "gs", function() telescope("lsp_document_symbols") end, desc = "󰒕 Symbols" },
+			-- { "gs", function() telescope("lsp_document_symbols") end, desc = "󰒕 Symbols" },
 			{
 				"gw",
 				function() telescope("lsp_workspace_symbols") end,
