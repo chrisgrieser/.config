@@ -20,18 +20,13 @@
 		"body": "local ${1:name} = require(\"${2:module}.${1:name}\")"
 	},
 	"trim trailing line break": {
-		"prefix": "trim trailing line break",
+		"prefix": "trim",
 		"body": ":gsub(\"\\n$\", \"\")"
 	},
 	"nodiscard": {
 		"prefix": "nodiscard",
 		"body": "---@nodiscard",
 		"description": "Luadoc Annotation that a function's return value should not be discarded. https://github.com/LuaLS/lua-language-server/wiki/Annotations#nodiscard"
-	},
-	"enum": {
-		"prefix": "enum",
-		"body": "\"${1:value1}\"|\"${2:value2}\"",
-		"description": "Luadoc Custom Parameter Type for a function. https://github.com/LuaLS/lua-language-server/wiki/Annotations#param"
 	},
 	"class definition": {
 		"prefix": ["class definition", "type definition"],
@@ -51,14 +46,14 @@
 		"body": ["if ${1:true} then", "\t$2", "else", "\t$0", "end"]
 	},
 	"then return end": {
-		"prefix": ["then return end", "tree"],
+		"prefix": "then return end",
 		"body": "then return end"
 	},
 	"home": {
 		"prefix": "home",
 		"body": "os.getenv(\"HOME\")"
 	},
-	"try": {
+	"pcall": {
 		"prefix": ["try", "pcall"],
 		"body": ["local success = pcall(${1:func})", "if not success then", "\t$0", "\treturn", "end"]
 	},
