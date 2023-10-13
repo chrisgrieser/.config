@@ -72,8 +72,8 @@ function run(argv) {
 	if (!(selectedText || isBrowser)) return "";
 
 	// determine text
-	const linebreakAtEnd = tot.openLocation(`tot://${quicksaveDot}/content`)?.endsWith("\n");
-	const lb = linebreakAtEnd ? "" : "\n";
+	const empty = tot.openLocation(`tot://${quicksaveDot}/content`) === "";
+	const lb = empty ? "" : "\n";
 	let text = lb + appendPrefix + selectedText;
 	if (isBrowser) {
 		const { url, title } = browserTab();

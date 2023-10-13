@@ -176,7 +176,7 @@ function gl {
 	local cutoff=15 # CONFIG
 	gitlog -n "$cutoff"
 	# add `(…)` if commits were shortened
-	[[ $(git log --oneline | wc -l) -gt $cutoff ]] && echo "(…)"
+	[[ $(git log --oneline | wc -l) -lt $cutoff ]] || echo "(…)"
 }
 
 # interactive

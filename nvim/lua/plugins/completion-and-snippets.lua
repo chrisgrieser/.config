@@ -1,7 +1,14 @@
 local defaultSources = {
 	{ name = "luasnip" },
 	{ name = "nvim_lsp" },
-	{ name = "buffer", keyword_length = 4 },
+	{
+		name = "buffer",
+		keyword_length = 4,
+		option = {
+			keyword_pattern = [[\k\+]], -- use `opt.iskeyword`
+			get_bufnrs = vim.api.nvim_list_bufs, -- get from all buffers
+		},
+	},
 	{ name = "path" },
 	{ name = "emoji" },
 }
@@ -124,7 +131,7 @@ local function cmpconfig()
 	-- disable the annoying `\[` suggestion
 	local defaultPlusZsh = vim.tbl_extend("keep", defaultSources, { name = "zsh" })
 	cmp.setup.filetype("sh", {
-		enabled = function() 
+		enabled = function()
 			local col = vim.fn.col(".") - 1
 			local charBefore = vim.api.nvim_get_current_line():sub(col, col)
 			return charBefore ~= "\\"
