@@ -24,6 +24,7 @@ local function remindersToTot()
 	-- run as task so it's not blocking
 	PushRemindersTask = hs.task
 		.new("./helpers/push-todays-reminders-to-tot.js", function(exitCode, stdout, stderr)
+			updateCounter()
 			if stdout == "" then return end
 			local msg = exitCode == 0 and "✅ Added reminders to Tot: " .. stdout
 				or "⚠️ Reminder-to-Tot failed: " .. stderr
@@ -49,11 +50,6 @@ MorningTimerForTot = hs.timer.doAt("07:00", "01d", remindersToTot, true):start()
 -- 3. On wake
 local c = hs.caffeinate.watcher
 WakeTot = c.new(function(event)
-	local hasWoken = event == c.screensDidWake
-		or event == c.systemDidWake
-		or event == c.screensDidUnlock
-	if hasWoken then
-		updateCounter()
-		u.runWithDelays(15, remindersToTot)
-	end
+	local woke = event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock
+	if woke then u.runWithDelays(10, remindersToTot) end
 end):start()
