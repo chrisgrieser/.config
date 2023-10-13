@@ -5,16 +5,20 @@ end
 --------------------------------------------------------------------------------
 
 local plugins = {
-	{ -- indentation guides
-		"lukas-reineke/indent-blankline.nvim",
-		main = "ibl",
-		opts = {
-			indent = { char = "│" },
+	{ -- symbols sibebar and search
+		"stevearc/aerial.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+		keys = {
+			{ "<C-1>", "<cmd>AerialToggle<CR>", desc = "󰒕 Symbols Sidebar" },
 		},
+		config = function()
+			require("aerial").setup {
+				autojump = true,
+			}
+		end,
 	},
 }
 
-vim.opt.list = true
 --------------------------------------------------------------------------------
 
 

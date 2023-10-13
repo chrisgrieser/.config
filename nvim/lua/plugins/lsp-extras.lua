@@ -129,6 +129,7 @@ return {
 				show_guides = true,
 				highlight_on_hover = true,
 				close_on_select = true,
+				autojump = true, --https://github.com/stevearc/aerial.nvim/issues/309uggy?
 			}
 			require("telescope").load_extension("aerial")
 		end,

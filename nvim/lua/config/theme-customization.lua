@@ -77,10 +77,11 @@ local function themeModifications()
 		linkHl("@keyword.operator.python", "Operator")
 
 	-----------------------------------------------------------------------------
-	elseif theme == "gruvbox-material" or theme == "sonokai" then
+	elseif theme == "gruvbox-material" or theme == "sonokai" or theme == "everforest" then
 		local commentColor = u.getHighlightValue("Comment", "fg")
 		updateHl("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
 		overwriteHl("TSParameter", { fg = "#6f92b3" })
+		if theme == "everforest" then overwriteHl("Red", { fg = "#ce7d7c" }) end
 	elseif theme == "nordic" then
 		overwriteHl("@parameter", { fg = "#8d8fe1" })
 	elseif theme == "material" and mode == "light" then
