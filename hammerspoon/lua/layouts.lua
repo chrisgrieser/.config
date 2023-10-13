@@ -68,6 +68,7 @@ local function workLayout()
 	require("lua.private").closer()
 
 	-- open
+	u.openApps("Tot")
 	local appsToOpen = { "Discord", env.browserApp, env.mailApp, env.tickerApp }
 	if not isWeekend() then table.insert(appsToOpen, "Slack") end
 	u.openApps(appsToOpen)
@@ -77,8 +78,6 @@ local function workLayout()
 			wu.moveResize(win, wu.pseudoMax)
 		end)
 	end
-	u.openApps("Tot")
-	u.app("Tot"):hide()
 	u.restartApp("AltTab") -- FIX duplicate items
 
 	-- finish
@@ -107,7 +106,6 @@ local function movieLayout()
 		env.mailApp,
 		env.tickerApp,
 	}
-	u.quitApps("Tot") -- FIX tot sometimes not quitting properly
 	print("🔲 Loaded MovieModeLayout")
 end
 
