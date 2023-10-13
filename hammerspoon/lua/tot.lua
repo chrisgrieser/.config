@@ -19,11 +19,11 @@ end):start()
 -- REMINDERS -> TOT
 ---@async
 local function remindersToTot()
-	local script = "./helpers/push-todays-reminders-to-tot.js"
+	if not u.appRunning("Tot") then return end
 
 	-- run as task so it's not blocking
 	PushRemindersTask = hs.task
-		.new(script, function(exitCode, stdout, stderr)
+		.new("./helpers/push-todays-reminders-to-tot.js", function(exitCode, stdout, stderr)
 			if stdout == "" then return end
 			local msg = exitCode == 0 and "✅ Added reminders to Tot: " .. stdout
 				or "⚠️ Reminder-to-Tot failed: " .. stderr
@@ -33,8 +33,6 @@ local function remindersToTot()
 
 	-- FIX Reminders not properly quitting
 	u.runWithDelays({ 1, 3 }, function() u.quitApps("Reminders") end)
-
-	updateCounter()
 end
 
 -- TRIGGERS
