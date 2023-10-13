@@ -157,7 +157,7 @@ end):start()
 -- last window
 
 FallthroughAppWatcher = aw.new(function(appName, event)
-	if appName == "Reminders" then return end -- reminders often opening in the background
+	if appName == "Reminders" then return end -- Reminders often opening in the background
 	if event ~= aw.terminated then return end
 
 	-- CONFIG
