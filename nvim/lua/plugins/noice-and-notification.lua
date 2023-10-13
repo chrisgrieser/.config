@@ -70,7 +70,10 @@ return {
 			{ "<Esc>", function() vim.cmd.Noice("dismiss") end, desc = "󰎟 Clear Notifications" },
 			{
 				"<D-0>",
-				"<cmd>Noice dismiss<CR><cmd>Noice history<CR>",
+				function()
+					vim.cmd.Noice("dismiss")
+					vim.cmd.Noice("history")
+				end,
 				mode = { "n", "x", "i" },
 				desc = "󰎟 Notification Log",
 			},
