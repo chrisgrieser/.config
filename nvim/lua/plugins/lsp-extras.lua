@@ -110,18 +110,20 @@ return {
 	},
 	{
 		"stevearc/aerial.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
 		keys = {
 			{ "<D-1>", "<cmd>AerialToggle<CR>", desc = "󰒕 Symbols" },
 		},
 		opts = {
-			backends = { "lsp", "treesitter", "markdown", "man" },
 			layout = {
 				default_direction = "prefer_left",
-				min_width = 15,
+				min_width = 20,
+				win_opts = { signcolumn = "yes:1" },
 			},
-
+			autojump = true,
+			show_guides = true,
+			highlight_on_hover = true,
 		},
-		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
 	},
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",

@@ -160,13 +160,6 @@ return {
 				},
 			},
 		},
-		init = function()
-			-- Display for `:Noice history`
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "noice",
-				callback = function() pcall(vim.api.nvim_buf_set_name, 0, "Noice") end,
-			})
-		end,
 	},
 	{ -- Notifications
 		"rcarriga/nvim-notify",
