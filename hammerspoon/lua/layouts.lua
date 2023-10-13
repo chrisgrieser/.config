@@ -106,6 +106,8 @@ local function movieLayout()
 		env.mailApp,
 		env.tickerApp,
 	}
+	u.runWithDelays(2, function() u.quitApps("Tot") end) -- FIX Tot sometimes not quitting
+
 	print("🔲 Loaded MovieModeLayout")
 end
 
@@ -180,17 +182,12 @@ u.hotkey(u.hyper, "home", selectLayout)
 if u.isSystemStart() then selectLayout() end
 
 -- 4. Waking
-local recentlyWoke
 UnlockWatcher = hs.caffeinate.watcher
 	.new(function(event)
-		if recentlyWoke then return end
-		recentlyWoke = true
 		local hasWoken = event == hs.caffeinate.watcher.screensDidWake
 			or event == hs.caffeinate.watcher.systemDidWake
 			or event == hs.caffeinate.watcher.screensDidUnlock
 
-		print("🔓 Wake")
 		if hasWoken then u.runWithDelays(0.5, selectLayout) end -- delay for recognizing screens
-		u.runWithDelays(3, function() recentlyWoke = false end)
 	end)
 	:start()
