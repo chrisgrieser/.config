@@ -10,21 +10,38 @@ vim.defer_fn(function()
 	bo.grepprg = "rg --vimgrep --no-column" -- remove columns for readability
 	keymap("n", "gs", function()
 		cmd([[silent! lgrep "^(\# <<\|/\* <)" %]]) -- riggrep-search for navigaton markers in SF
-		require("telescope.builtin").loclist { prompt_title = "Navigation Markers" }
+		require("telescope.builtin").loclist {
+			prompt_prefix = " ",
+			prompt_title = "Navigation Markers",
+			trim_text = true,
+			fname_width = 0,
+		}
 	end, { desc = "Search Navigation Markers", buffer = true })
 	-- search only for variables
 	keymap("n", "gw", function()
 		cmd([[silent! lgrep "^\s*--" %]]) -- riggrep-search for css variables
 		require("telescope.builtin").loclist {
-			prompt_title = "CSS Variables",
 			prompt_prefix = "󰀫 ",
+			prompt_title = "CSS Variables",
+			trim_text = true,
+			fname_width = 0,
 		}
 	end, { desc = "Search CSS Variables", buffer = true })
 end, 500)
 
 -- next/prev comment marks
-keymap({ "n", "x" }, "<C-j>", [[/^\/\* <<CR>:nohl<CR>]], { buffer = true, desc = "next comment mark" })
-keymap({ "n", "x" }, "<C-k>", [[?^\/\* <<CR>:nohl<CR>]], { buffer = true, desc = "prev comment mark" })
+keymap(
+	{ "n", "x" },
+	"<C-j>",
+	[[/^\/\* <<CR>:nohl<CR>]],
+	{ buffer = true, desc = "next comment mark" }
+)
+keymap(
+	{ "n", "x" },
+	"<C-k>",
+	[[?^\/\* <<CR>:nohl<CR>]],
+	{ buffer = true, desc = "prev comment mark" }
+)
 
 -- create comment mark
 keymap("n", "qw", function()

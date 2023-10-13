@@ -234,11 +234,6 @@ local telescopeConfig = {
 				horizontal = { preview_width = { 0.7, min = 30 } },
 			},
 		},
-		loclist = {
-			prompt_prefix = " ",
-			trim_text = true,
-			fname_width = 0,
-		},
 		lsp_document_symbols = {
 			prompt_prefix = "󰒕 ",
 			prompt_title = "Functions",

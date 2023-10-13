@@ -68,7 +68,7 @@ function run(argv) {
 		selectedText = app.theClipboard().toString();
 	}
 
-	// Guard
+	// GUARD
 	if (!(selectedText || isBrowser)) return "";
 
 	// determine text
@@ -84,6 +84,10 @@ function run(argv) {
 
 	// append
 	tot.openLocation(`tot://${quicksaveDot}/append?text=${encodeURIComponent(text)}`);
+
+	// hide the app
+	const totProcess = Application("System Events").applicationProcesses.byName("Tot");
+	totProcess.visible = false
 
 	// Pass for Alfred notification
 	return text;
