@@ -109,7 +109,12 @@ local lualineConfig = {
 		component_separators = { left = "", right = "" },
 		section_separators = bottomSeparators,
 		-- stylua: ignore
-		ignore_focus = { "DressingInput", "DressingSelect", "ccc-ui", "TelescopePrompt", "lazy", "mason", "checkhealth", "lspinfo" },
+		ignore_focus = {
+			"DressingInput", "DressingSelect",
+			"lazy", "mason", "lspinfo",
+			"ccc-ui", "TelescopePrompt", "checkhealth",
+			"aerial", "noice",
+		},
 	},
 	extensions = { "quickfix" },
 }
