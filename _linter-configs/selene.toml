@@ -1,3 +1,5 @@
+std="vim"
+
 [lints]
 # disabled since duplication with LSP
 undefined_variable = "allow"
@@ -14,3 +16,4 @@ high_cyclomatic_complexity = "warn" # enabled
 
 [config]
 high_cyclomatic_complexity = { maximum_complexity = 20 }
+

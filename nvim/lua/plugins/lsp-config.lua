@@ -52,7 +52,10 @@ serverConfigs.lua_ls = {
 			},
 			diagnostics = {
 				globals = { "vim" }, -- when contributing to nvim plugins missing a .luarc.json
-				disable = { "trailing-space" }, -- formatter already does that
+				disable = {
+					"lowercase-global", -- selene better, since it disallows any globals
+					"trailing-space", -- formatter already does that
+				},
 			},
 			hint = {
 				enable = true, -- enabled inlay hints
@@ -290,7 +293,7 @@ local function lspCurrentTokenHighlight()
 			})
 		end,
 	})
-	vim.api.nvim_create_autocmd("ColorScheme", {
+	vim.api.nvim_create_autocmd({ "VimEnter", "ColorScheme" }, {
 		callback = function()
 			vim.api.nvim_set_hl(0, "LspReferenceWrite", { underdashed = true }) -- definition
 			vim.api.nvim_set_hl(0, "LspReferenceRead", { underdotted = true }) -- reference

@@ -111,8 +111,9 @@ return {
 			},
 		},
 		opts = {
+			backends = { "lsp", "treesitter", "markdown", "man" },
 			layout = {
-				default_direction = "prefer_left",
+				default_direction = "left",
 				min_width = 20,
 				win_opts = { signcolumn = "yes:1" },
 			},
