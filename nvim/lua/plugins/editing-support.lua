@@ -122,18 +122,6 @@ return {
 		ft = { "python", "javascript", "typescript", "lua" },
 		init = function() vim.g.puppeteer_lua_format_string = true end,
 	},
-	{ -- virtual text context at the end of a scope
-		"haringsrob/nvim_context_vt",
-		event = "VeryLazy",
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		opts = {
-			prefix = " 󱞷",
-			highlight = "NonText",
-			min_rows = 6,
-			disable_ft = { "markdown", "yaml", "css" },
-			min_rows_ft = { python = 10 },
-		},
-	},
 	{ -- basically autopair, but for keywords
 		"RRethy/nvim-treesitter-endwise",
 		event = "InsertEnter",

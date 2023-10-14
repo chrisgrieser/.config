@@ -30,7 +30,7 @@ end
 ---@param win hs.window
 ---@param relSize hs.geometry
 ---@nodiscard
----@return boolean?
+---@return boolean|nil nil if no win
 function M.CheckSize(win, relSize)
 	if not win then return end
 	local maxf = win:screen():frame()
@@ -40,7 +40,7 @@ function M.CheckSize(win, relSize)
 	local diffx = relSize.x * maxf.w + maxf.x - winf.x -- calculated this way for two screens
 	local diffy = relSize.y * maxf.h + maxf.y - winf.y
 
-	local leeway = 5 -- e.g. terminal cell widths creating some minor inprecision
+	local leeway = 5 -- CONFIG e.g., terminal cell widths creating some minor inprecision
 	local widthOkay = (diffw > -leeway and diffw < leeway)
 	local heightOkay = (diffh > -leeway and diffh < leeway)
 	local posyOkay = (diffy > -leeway and diffy < leeway)
@@ -65,7 +65,7 @@ function M.moveResize(win, pos)
 	end
 
 	-- resize with safety redundancy
-	u.runWithDelays({ 0, 0.4, 0.8 }, function()
+	u.runWithDelays({ 0, 0.3, 0.6 }, function()
 		if M.CheckSize(win, pos) then return end
 		win:moveToUnit(pos)
 	end)

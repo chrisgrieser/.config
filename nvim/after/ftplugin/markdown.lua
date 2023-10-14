@@ -65,22 +65,6 @@ keymap({ "n", "x" }, "<localleader>k", function()
 end, { desc = " SearchLink (ddgr)", buffer = true })
 
 --------------------------------------------------------------------------------
-
--- Heading jump to next/prev heading
-keymap(
-	{ "n", "x" },
-	"<C-j>",
-	[[/^#\+ <CR><cmd>nohl<CR>]],
-	{ desc = " Next Heading", buffer = true }
-)
-keymap(
-	{ "n", "x" },
-	"<C-k>",
-	[[?^#\+ <CR><cmd>nohl<CR>]],
-	{ desc = " Prev Heading", buffer = true }
-)
-
---------------------------------------------------------------------------------
 -- GUI KEYBINDINGS
 
 -- cmd+k: markdown link
