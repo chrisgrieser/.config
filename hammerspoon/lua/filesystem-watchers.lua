@@ -1,9 +1,10 @@
-local pw = hs.pathwatcher.new
+local pathw = hs.pathwatcher.new
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local home = os.getenv("HOME")
 local appSupport = home .. "/Library/Application Support/"
 
+local g = {} -- persist from garbage collector
 --------------------------------------------------------------------------------
 -- BOOKMARKS SYNCED TO CHROME BOOKMARKS
 -- (needed for Alfred)
@@ -13,7 +14,7 @@ local loc = {
 	sourceBookmarks = appSupport .. env.browserDefaultsPath .. "/Default/Bookmarks",
 	chromeProfile = appSupport .. "Google/Chrome/",
 }
-BookmarkWatcher = pw(loc.sourceBookmarks, function()
+g.pathw_bookmarks = pathw(loc.sourceBookmarks, function()
 	-- Bookmarks
 	local bookmarks = hs.json.read(loc.sourceBookmarks)
 	if not bookmarks then return end
@@ -36,7 +37,7 @@ end):start()
 -- TO FILE HUB
 -- Downloads Folder
 local systemDownloadFolder = home .. "/Downloads/"
-SystemDlFolderWatcher = pw(systemDownloadFolder, function()
+g.pathw_systemDlFolder = pathw(systemDownloadFolder, function()
 	os.execute("mv '" .. systemDownloadFolder .. "'/* '" .. env.fileHub .. "'")
 	print("➡️ Download moved to File Hub.")
 end):start()
@@ -44,7 +45,7 @@ end):start()
 --------------------------------------------------------------------------------
 -- FROM FILE HUB
 
----HACK this works as only downloaded files get quarantined.
+---INFO this works as only downloaded files get quarantined.
 ---Rnsures that files created locally do not trigger the actions.
 ---@param filepath string
 ---@return boolean whether the file exists
@@ -54,7 +55,7 @@ local function fileIsDownloaded(filepath)
 end
 
 local browserSettings = home .. "/.config/_browser-extension-configs/"
-FileHubWatcher = pw(env.fileHub, function(paths, _)
+g.pathw_fileHub = pathw(env.fileHub, function(paths, _)
 	if not u.screenIsUnlocked() then return end
 	for _, filep in pairs(paths) do
 		local fileName = filep:gsub(".*/", "")
@@ -102,7 +103,7 @@ end):start()
 --------------------------------------------------------------------------------
 -- AUTO-INSTALL OBSIDIAN ALPHA
 
-ObsiAlphaWatcher = pw(env.fileHub, function(files)
+g.pathw_ObsiAlph = pathw(env.fileHub, function(files)
 	for _, file in pairs(files) do
 		-- needs delay and `.crdownload` check, since the renaming is sometimes not picked up by hammerspoon
 		if not (file:match("%.crdownload$") or file:match("%.asar%.gz$")) then return end
@@ -126,3 +127,4 @@ ObsiAlphaWatcher = pw(env.fileHub, function(files)
 end):start()
 
 --------------------------------------------------------------------------------
+return nil, g

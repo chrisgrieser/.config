@@ -1,6 +1,7 @@
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 
+local g = {} -- persist from garbage collector
 --------------------------------------------------------------------------------
 
 local config = {
@@ -34,16 +35,16 @@ local config = {
 ---@param msg string
 local function notify(msg) hs.notify.show("Hammerspoon", "", msg) end
 
-SyncedRepos = {}
-SyncTasks = {}
+g.syncedRepos = {}
+g.task_sync = {}
 
 ---@async
 ---@param repo { name: string, icon: string, scriptPath: string }
 local function repoSync(repo)
-	SyncTasks[repo.name] = hs.task
+	g.task_sync[repo.name] = hs.task
 		.new(repo.scriptPath, function(exitCode, _, stdErr)
 			if exitCode == 0 then
-				table.insert(SyncedRepos, repo)
+				table.insert(g.syncedRepos, repo)
 			else
 				notify(("⚠️️%s %s Sync: %s"):format(repo.icon, repo.name, stdErr))
 			end
@@ -56,7 +57,7 @@ end
 local function syncInProgress()
 	local isSyncing = {}
 	for _, repo in pairs(config.repos) do
-		local isStillSyncing = SyncTasks[repo.name] and SyncTasks[repo.name]:isRunning()
+		local isStillSyncing = g.task_sync[repo.name] and g.task_sync[repo.name]:isRunning()
 		table.insert(isSyncing, isStillSyncing)
 	end
 	return u.tbl_contains(isSyncing, true)
@@ -74,15 +75,15 @@ local function syncAllGitRepos(notifyOnSuccess)
 		repoSync(repo)
 	end
 
-	AllSyncTimer = hs.timer
+	g.timer_AllSyncs = hs.timer
 		.waitUntil(function() return not syncInProgress() end, function()
 			local failedRepos = hs.fnutils.filter(
 				config.repos,
-				function(r) return not (hs.fnutils.contains(SyncedRepos, r)) end
+				function(r) return not (hs.fnutils.contains(g.syncedRepos, r)) end
 			)
 
-			if #SyncedRepos > 0 then
-				local syncedIcons = hs.fnutils.map(SyncedRepos, function(r) return r.icon end) or {}
+			if #g.syncedRepos > 0 then
+				local syncedIcons = hs.fnutils.map(g.syncedRepos, function(r) return r.icon end) or {}
 				print("🔁 Sync done: " .. table.concat(syncedIcons))
 				if notifyOnSuccess then notify("🔁 Sync done") end
 			end
@@ -93,7 +94,7 @@ local function syncAllGitRepos(notifyOnSuccess)
 				notify(failMsg)
 			end
 
-			SyncedRepos = {} -- reset
+			g.syncedRepos = {} -- reset
 			u.runWithDelays(config.postSyncHook.delaySecs, config.postSyncHook.func)
 		end)
 		:start()
@@ -106,7 +107,7 @@ end
 if u.isSystemStart() then syncAllGitRepos(true) end
 
 -- 2. every x minutes
-RepoSyncTimer = hs.timer
+g.timer_repoSync = hs.timer
 	.doEvery(config.syncIntervallMins * 60, function()
 		if u.screenIsUnlocked() then syncAllGitRepos(false) end
 	end)
@@ -116,11 +117,10 @@ RepoSyncTimer = hs.timer
 u.urischeme("sync-repos", function() syncAllGitRepos(true) end)
 
 -- 4. when going to sleep or when unlocking
-local recentlyTriggered
 local c = hs.caffeinate.watcher
-SleepWatcherForRepoSync = c.new(function(event)
-	if recentlyTriggered or env.isProjector() then return end
-	recentlyTriggered = true
+g.caff_SleepWatcherForRepoSync = c.new(function(event)
+	if g.recentlyTriggered or env.isProjector() then return end
+	g.recentlyTriggered = true
 
 	local lockOrSleep = event == c.screensDidLock
 		or event == c.screensDidSleep
@@ -128,11 +128,14 @@ SleepWatcherForRepoSync = c.new(function(event)
 		or event == c.systemDidWake
 		or event == c.screensDidWake
 	if lockOrSleep then syncAllGitRepos(true) end
-	u.runWithDelays(3, function() recentlyTriggered = false end)
+	u.runWithDelays(3, function() g.recentlyTriggered = false end)
 end):start()
 
 -- 5. Every morning at 8:00, when at home
 -- (safety redundancy to ensure sync when leaving for the office)
 if env.isAtHome then
-	MorningSyncTimer = hs.timer.doAt("08:00", "01d", function() syncAllGitRepos(false) end):start()
+	g.timer_MorningSync = hs.timer.doAt("08:00", "01d", function() syncAllGitRepos(false) end):start()
 end
+
+--------------------------------------------------------------------------------
+return nil, g

@@ -3,13 +3,15 @@ local wu = require("lua.window-utils")
 local c = hs.caffeinate.watcher
 local env = require("lua.environment-vars")
 
+local g = {} -- persist from garbage collector
+
 ---@return string three chars representing the day of the week (English)
 local function getWeekday() return tostring(os.date("%a")) end
 
 --------------------------------------------------------------------------------
 
 -- keep the iMac display brightness low when projector is connected
-ProjectorScreensaverWatcher = c.new(function(event)
+g.caff_projectorScreensave = c.new(function(event)
 	if env.isAtOffice then return end
 	if
 		event == c.screensaverDidStop
@@ -25,7 +27,7 @@ ProjectorScreensaverWatcher = c.new(function(event)
 end):start()
 
 -- on Mondays shortly before 10:00, open #fg-organisation Slack Channel
-JourFixeTimer = hs.timer
+g.timer_JourFixe = hs.timer
 	.doAt("09:59", "01d", function()
 		if not (getWeekday() == "Mon" and u.screenIsUnlocked()) then return end
 		hs.execute("open 'slack://channel?team=T010A5PEMBQ&id=CV95T641Y'")
@@ -39,11 +41,11 @@ JourFixeTimer = hs.timer
 -- - Backup Vault, Dotfiles, Bookmarks
 local function backup()
 	-- stylua: ignore start
-	hs.task.new("./helpers/bookmark-bkp.sh", function(exitCode, _, stdErr)
+	g.timer_bookmarksBackup = hs.task.new("./helpers/bookmark-bkp.sh", function(exitCode, _, stdErr)
 		local msg = exitCode == 0 and "✅ Bookmark Backup successful" or "⚠️ Bookmark Backup failed: " .. stdErr
 		u.notify(msg)
 	end):start()
-	hs.task.new("./helpers/dotfile-bkp.sh", function(exitCode, _, stdErr)
+	g.timer_dotfileBackup = hs.task.new("./helpers/dotfile-bkp.sh", function(exitCode, _, stdErr)
 		local msg = exitCode == 0 and "✅ Dotfile Backup successful" or "⚠️ Dotfile Backup failed: " .. stdErr
 		u.notify(msg)
 	end):start()
@@ -51,7 +53,7 @@ local function backup()
 	-- stylua: ignore end
 end
 
-NightlyMaintenanceTimer = hs.timer
+g.timer_nightlyMaintenance = hs.timer
 	.doAt("01:00", "01d", function()
 		local weekday = getWeekday()
 		if weekday == "Sun" then hs.loadSpoon("EmmyLua") end
@@ -91,7 +93,7 @@ local config = {
 	timeToReactSecs = 60,
 }
 
-SleepAutoVideoOffTimer = hs.timer
+g.timer_sleepAutoVideoOff = hs.timer
 	.doEvery(config.checkIntervalMins * 60, function()
 		local isNight = u.betweenTime(table.unpack(config.betweenHours))
 		if not (isNight and idleMins(config.idleMins) and env.isProjector() and u.screenIsUnlocked()) then
@@ -112,3 +114,6 @@ SleepAutoVideoOffTimer = hs.timer
 		end)
 	end)
 	:start()
+
+--------------------------------------------------------------------------------
+return nil, g

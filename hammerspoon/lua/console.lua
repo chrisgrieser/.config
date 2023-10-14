@@ -1,6 +1,9 @@
 local u = require("lua.utils")
 local cons = hs.console
 local wf = hs.window.filter
+
+local g = {} -- persist from garbage collector
+local M = {}
 --------------------------------------------------------------------------------
 
 -- CONFIG
@@ -29,7 +32,7 @@ hs.consoleOnTop(false)
 -- selene: allow(high_cyclomatic_complexity)
 local function cleanupConsole()
 	local consoleOutput = tostring(cons.getConsole())
-	hs.console.clearConsole()
+	cons.clearConsole()
 	local consoleLines = hs.fnutils.split(consoleOutput, "\n+")
 	if not consoleLines then return end
 
@@ -69,7 +72,7 @@ end
 
 -- clean up console as soon as it is opened
 -- hide console as soon as unfocused
-Wf_hsConsole = wf.new("Hammerspoon")
+g.wf_hsConsole = wf.new("Hammerspoon")
 	:subscribe(wf.windowUnfocused, function(win)
 		if win:title() == "Hammerspoon Console" then u.app("Hammerspoon"):hide() end
 	end)
@@ -92,7 +95,7 @@ end)
 
 --------------------------------------------------------------------------------
 -- Separator the logs every day at midnight
-DailyConsoleSeperator = hs.timer
+g.timer_dailyConsoleSeperator = hs.timer
 	.doAt("00:00", "01d", function()
 		local date = os.date("%a, %d. %b")
 		print(
@@ -104,7 +107,6 @@ DailyConsoleSeperator = hs.timer
 	:start()
 
 --------------------------------------------------------------------------------
-local M = {}
 
 ---@param toMode "dark"|"light"
 function M.setConsoleColors(toMode)
@@ -125,4 +127,4 @@ end
 if u.isSystemStart() then M.setConsoleColors(u.isDarkMode() and "dark" or "light") end
 
 --------------------------------------------------------------------------------
-return M
+return M, g

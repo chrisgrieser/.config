@@ -1,10 +1,7 @@
 local M = {}
+local g = {} -- persist from garbage collector
 
 local env = require("lua.environment-vars")
-
--- need to catch timers in global vars to ensure they don't get garbage collected
--- https://github.com/asmagill/hammerspoon/wiki/Variable-Scope-and-Garbage-Collection
-MyTimers = {}
 --------------------------------------------------------------------------------
 
 -- shorthands
@@ -109,9 +106,8 @@ function M.isDarkMode() return hs.execute("defaults read -g AppleInterfaceStyle"
 ---@param callbackFn function function to be run on delay(s)
 function M.runWithDelays(delaySecs, callbackFn)
 	if type(delaySecs) == "number" then delaySecs = { delaySecs } end
-	local rng = tostring(math.random())
 	for _, delay in pairs(delaySecs) do
-		MyTimers[rng] = hs.timer.doAfter(delay, callbackFn):start()
+		g[hs.host.uuid()] = hs.timer.doAfter(delay, callbackFn):start()
 	end
 end
 
@@ -157,10 +153,10 @@ end
 ---play macOS sound
 ---@param soundName string
 function M.sound(soundName)
-	if Soundfile and Soundfile:isPlaying() then return end
+	if g.activeSound and g.activeSound:isPlaying() then return end
 	---@diagnostic disable-next-line: undefined-field
-	Soundfile = hs.sound.getByName(soundName):play()
-	Soundfile = nil
+	g.activeSound = hs.sound.getByName(soundName):play()
+	g.activeSound = nil
 end
 
 --------------------------------------------------------------------------------
@@ -211,7 +207,7 @@ end
 function M.restartApp(appName)
 	local app = M.app(appName)
 	if app then app:kill() end
-	MyTimers[appName .. "Restart"] = hs.timer.waitUntil(
+	g[appName .. "Restart"] = hs.timer.waitUntil(
 		function() return M.app(appName) == nil end,
 		function() hs.application.open(appName) end,
 		0.05
@@ -222,7 +218,7 @@ end
 ---@param appName string
 ---@param callbackFn function function to execute when a window of the app is available
 function M.whenAppWinAvailable(appName, callbackFn)
-	MyTimers[appName .. "WinAvailable"] = hs.timer.waitUntil(function()
+	g[appName .. "WinAvailable"] = hs.timer.waitUntil(function()
 		local app = M.app(appName)
 		local windowAvailable = app and app:mainWindow()
 		return windowAvailable
@@ -233,7 +229,7 @@ end
 ---@param appName string
 ---@param callbackFn function function to execute when the app is available
 function M.whenAppRuns(appName, callbackFn)
-	MyTimers[appName .. "AppRun"] = hs.timer.waitUntil(
+	g[appName .. "AppRun"] = hs.timer.waitUntil(
 		function() return M.app(appName) ~= nil end,
 		callbackFn,
 		0.1
@@ -264,4 +260,4 @@ function M.quitApps(appNames)
 end
 
 --------------------------------------------------------------------------------
-return M
+return M, g
