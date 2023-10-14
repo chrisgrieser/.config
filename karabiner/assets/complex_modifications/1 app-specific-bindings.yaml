@@ -65,13 +65,6 @@ rules:
           - { key_code: a, modifiers: [command] }
           - { key_code: x, modifiers: [command] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
-      # prevent accidental quitting
-      - type: basic
-        from: { key_code: q, modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: w, modifiers: [command] }
-          - { key_code: h, modifiers: [command] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Microsoft Office"
     manipulators:

@@ -146,8 +146,8 @@ return {
 	{ -- better LSP variable-rename
 		"smjonas/inc-rename.nvim",
 		keys = {
-			{ "<leader>v", ":IncRename ", { desc = "󰒕 IncRename" } },
-			{ "<leader>V", ":IncRename <C-r><C-w>", { desc = "󰒕 IncRename (cword)" } },
+			{ "<leader>v", ":IncRename ", desc = "󰒕 IncRename" },
+			{ "<leader>V", ":IncRename <C-r><C-w>", desc = "󰒕 IncRename (cword)" },
 		},
 		opts = {
 			post_hook = function(results)
