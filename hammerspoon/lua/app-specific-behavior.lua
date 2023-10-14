@@ -3,6 +3,8 @@ local u = require("lua.utils")
 local wu = require("lua.window-utils")
 local aw = hs.application.watcher
 local wf = hs.window.filter
+
+local g = {} -- persist from garbage collector
 --------------------------------------------------------------------------------
 
 ---play/pause spotify
@@ -22,7 +24,7 @@ local function spotifyDo(toStatus)
 end
 
 -- auto-pause/resume Spotify on launch/quit of apps with sound
-SpotifyAppWatcher = aw.new(function(appName, eventType)
+g.aw_spotify = aw.new(function(appName, eventType)
 	if
 		not u.screenIsUnlocked()
 		or env.isAtOffice
@@ -42,7 +44,7 @@ end):start()
 --------------------------------------------------------------------------------
 
 -- PIXELMATOR: open maximized
-PixelmatorWatcher = aw.new(function(appName, eventType, pixelmator)
+g.aw_pixelmator = aw.new(function(appName, eventType, pixelmator)
 	if appName == "Pixelmator" and eventType == aw.launched then
 		u.whenAppWinAvailable(appName, function() wu.moveResize(pixelmator, wu.maximized) end)
 	end
@@ -55,7 +57,7 @@ end):start()
 ---pseudo-maximized -> show right sidebar
 ---max -> hide right sidebars (assuming split)
 ---requires: Obsidian Advanced URI plugin with `eval` being enabled
-Wf_ObsidanMoved = wf.new("Obsidian"):subscribe(wf.windowMoved, function(obsiWin)
+g.wf_obsidanMoved = wf.new("Obsidian"):subscribe(wf.windowMoved, function(obsiWin)
 	if #u.app("Obsidian"):allWindows() > 1 then return end -- prevent popout window resizing to affect sidebars
 
 	local relObsiWinWidth = obsiWin:size().w / obsiWin:screen():frame().w
@@ -68,7 +70,7 @@ end)
 --------------------------------------------------------------------------------
 -- FINDER
 
-Wf_finder = wf.new("Finder")
+g.wf_finder = wf.new("Finder")
 	:setOverrideFilter({
 		-- Info windows *end* with "Info"
 		rejectTitles = { "^Move$", "^Copy$", "^Delete$", "^Finder Settings$", " Info$" },
@@ -80,17 +82,17 @@ Wf_finder = wf.new("Finder")
 		if env.isProjector() and winOnMainScreen then
 			wu.moveResize(win, wu.maximized)
 		elseif win:isMaximizable() and win:isStandard() and u.app("Finder"):isFrontmost() then
-			u.runWithDelays(0.05, function() wu.autoTile(Wf_finder) end)
+			u.runWithDelays(0.05, function() wu.autoTile(g.wf_finder) end)
 		end
 	end)
 	:subscribe(wf.windowDestroyed, function()
 		-- no conditions, since destroyed windows do not have properties
-		wu.autoTile(Wf_finder)
+		wu.autoTile(g.wf_finder)
 	end)
 
 -- also triggered via app-watcher, since windows created in the background do
 -- not always trigger window filters
-FinderAppWatcher = aw.new(function(appName, eventType, finder)
+g.aw_finder = aw.new(function(appName, eventType, finder)
 	if eventType == aw.activated and appName == "Finder" then
 		finder:selectMenuItem { "View", "Hide Sidebar" }
 		wu.bringAllWinsToFront() -- redundancy
@@ -103,7 +105,7 @@ end):start()
 -- ZOOM
 -- close first window, when second is open
 -- don't leave browser tab behind when opening zoom
-Wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function()
+g.wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function()
 	u.quitApps("BusyCal") -- only used to open a Zoom link
 	u.closeTabsContaining("zoom.us") -- remove leftover tabs
 	u.runWithDelays(1, function()
@@ -111,7 +113,7 @@ Wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function()
 		if not zoom or zoom:findWindow("Update") then return end
 		local secondWin = zoom:findWindow("^Zoom$") or zoom:findWindow("^Login$")
 		-- zoom always has an invisible, title-less third window running, thus three
-		if not secondWin or #Wf_zoom:getWindows() < 3 then return end
+		if not secondWin or #g.wf_zoom:getWindows() < 3 then return end
 		secondWin:close()
 	end)
 end)
@@ -121,7 +123,7 @@ end)
 -- HIGHLIGHTS / PDF READER
 -- - Sync Dark & Light Mode
 -- - Start with Highlight Tool enabled
-HighlightsAppWatcher = aw.new(function(appName, eventType, highlights)
+g.aw_highlights = aw.new(function(appName, eventType, highlights)
 	if not (eventType == aw.launched and appName == "Highlights") then return end
 
 	-- set appearance according to dark mode
@@ -135,7 +137,7 @@ HighlightsAppWatcher = aw.new(function(appName, eventType, highlights)
 end):start()
 
 -- open all windows pseudo-maximized
-Wf_pdfReader = wf.new({ "Preview", "Highlights", "PDF Expert" }):subscribe(
+g.wf_pdfReader = wf.new({ "Preview", "Highlights", "PDF Expert" }):subscribe(
 	wf.windowCreated,
 	function(newWin) wu.moveResize(newWin, wu.pseudoMax) end
 )
@@ -143,7 +145,7 @@ Wf_pdfReader = wf.new({ "Preview", "Highlights", "PDF Expert" }):subscribe(
 ------------------------------------------------------------------------------
 
 -- FIX window position not being remembered
-ReadkitWatcher = aw.new(function(appName, event)
+g.aw_readkit = aw.new(function(appName, event)
 	if appName == "ReadKit" and event == aw.activated then
 		u.runWithDelays({ 0, 0.2 }, function()
 			local win = u.app("ReadKit"):mainWindow()
@@ -158,7 +160,7 @@ end):start()
 -- Fallthrough: prevent unintended focusing after qutting another app or closing
 -- last window
 
-FallthroughAppWatcher = aw.new(function(appName, event)
+g.aw_fallthrough = aw.new(function(appName, event)
 	if appName == "Reminders" then return end -- Reminders often opening in the background
 	if event ~= aw.terminated then return end
 
@@ -183,7 +185,7 @@ end):start()
 
 --------------------------------------------------------------------------------
 -- SCRIPT EDITOR
-Wf_script_editor = wf
+g.wf_scripteditor = wf
 	.new("Script Editor")
 	:subscribe(wf.windowCreated, function(newWin)
 		-- skip new file creation dialog
@@ -214,7 +216,7 @@ Wf_script_editor = wf
 -- MIMESTREAM
 
 -- move new window
-Wf_mimestream = wf.new("Mimestream"):subscribe(
+g.wf_mimestream = wf.new("Mimestream"):subscribe(
 	wf.windowCreated,
 	function(newWin) wu.moveResize(newWin, wu.pseudoMax) end
 )
@@ -233,7 +235,7 @@ end
 -- DISCORD
 -- when focused, enclose URL in clipboard with <>
 -- when unfocused, removes <> from URL in clipboard
-DiscordAppWatcher = aw.new(function(appName, eventType)
+g.aw_discord = aw.new(function(appName, eventType)
 	if not (appName == "Discord") then return end
 
 	local clipb = hs.pasteboard.getContents()
@@ -259,3 +261,6 @@ DiscordAppWatcher = aw.new(function(appName, eventType)
 		end
 	end
 end):start()
+
+--------------------------------------------------------------------------------
+return nil, g
