@@ -8,27 +8,26 @@ local wf = hs.window.filter
 ---play/pause spotify
 ---@param toStatus string pause|play
 local function spotifyDo(toStatus)
-	-- stylua: ignore start
-	---@diagnostic disable-next-line: undefined-field
-	local currentStatus = hs.execute(u.exportPath .. "spt playback --status --format=%s"):gsub("\n$", "")
+	local currentStatus = hs.execute(u.exportPath .. "spt playback --status --format=%s")
+		:gsub("\n$", "") ---@diagnostic disable-line: undefined-field
+
 	if
 		(currentStatus == "▶️" and toStatus == "pause")
 		or (currentStatus == "⏸" and toStatus == "play")
 	then
 		local stdout = hs.execute(u.exportPath .. "spt playback --toggle")
-		if toStatus == "play" then u.notify(stdout) end ---@diagnostic disable-line: param-type-mismatch
+		if toStatus == "play" then u.notify(stdout) end
 	end
 	-- stylua: ignore end
 end
 
 -- auto-pause/resume Spotify on launch/quit of apps with sound
 SpotifyAppWatcher = aw.new(function(appName, eventType)
-	local appsWithSound = env.videoAndAudioApps
 	if
 		not u.screenIsUnlocked()
 		or env.isAtOffice
 		or env.isProjector()
-		or not (u.tbl_contains(appsWithSound, appName))
+		or not (u.tbl_contains(env.videoAndAudioApps, appName))
 	then
 		return
 	end
@@ -61,7 +60,9 @@ Wf_ObsidanMoved = wf.new("Obsidian"):subscribe(wf.windowMoved, function(obsiWin)
 
 	local relObsiWinWidth = obsiWin:size().w / obsiWin:screen():frame().w
 	local modeRight = (relObsiWinWidth > 0.6 and relObsiWinWidth < 0.99) and "expand" or "collapse"
-	u.openLinkInBg("obsidian://advanced-uri?eval=this.app.workspace.rightSplit." .. modeRight .. "%28%29")
+	u.openLinkInBg(
+		"obsidian://advanced-uri?eval=this.app.workspace.rightSplit." .. modeRight .. "%28%29"
+	)
 end)
 
 --------------------------------------------------------------------------------
@@ -83,7 +84,7 @@ Wf_finder = wf.new("Finder")
 		end
 	end)
 	:subscribe(wf.windowDestroyed, function()
-		-- no conditions, since destroyed windows do not have those properties
+		-- no conditions, since destroyed windows do not have properties
 		wu.autoTile(Wf_finder)
 	end)
 
@@ -104,13 +105,12 @@ end):start()
 -- don't leave browser tab behind when opening zoom
 Wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function()
 	u.quitApps("BusyCal") -- only used to open a Zoom link
-	u.closeTabsContaining("zoom.us")
+	u.closeTabsContaining("zoom.us") -- remove leftover tabs
 	u.runWithDelays(1, function()
 		local zoom = u.app("zoom.us")
 		if not zoom or zoom:findWindow("Update") then return end
 		local secondWin = zoom:findWindow("^Zoom$") or zoom:findWindow("^Login$")
-		-- zoom always has an invisible, title-less third window running, therefore
-		-- three
+		-- zoom always has an invisible, title-less third window running, thus three
 		if not secondWin or #Wf_zoom:getWindows() < 3 then return end
 		secondWin:close()
 	end)
@@ -135,8 +135,10 @@ HighlightsAppWatcher = aw.new(function(appName, eventType, highlights)
 end):start()
 
 -- open all windows pseudo-maximized
-Wf_pdfReader = wf.new({ "Preview", "Highlights", "PDF Expert" })
-	:subscribe(wf.windowCreated, function(newWin) wu.moveResize(newWin, wu.pseudoMax) end)
+Wf_pdfReader = wf.new({ "Preview", "Highlights", "PDF Expert" }):subscribe(
+	wf.windowCreated,
+	function(newWin) wu.moveResize(newWin, wu.pseudoMax) end
+)
 
 ------------------------------------------------------------------------------
 
@@ -212,12 +214,15 @@ Wf_script_editor = wf
 -- MIMESTREAM
 
 -- move new window
-Wf_mimestream = wf.new("Mimestream")
-	:subscribe(wf.windowCreated, function(newWin) wu.moveResize(newWin, wu.pseudoMax) end)
+Wf_mimestream = wf.new("Mimestream"):subscribe(
+	wf.windowCreated,
+	function(newWin) wu.moveResize(newWin, wu.pseudoMax) end
+)
 
 --------------------------------------------------------------------------------
 -- TEXTPAL
--- FIX window opening on System-start
+
+-- FIX window opening on System-Start
 if u.isSystemStart() then
 	local textpal = u.app("TextPal")
 	if textpal and textpal:mainWindow() then textpal:mainWindow():close() end

@@ -1,17 +1,13 @@
 local u = require("lua.utils")
 local aw = hs.application.watcher
-local wu = require("lua.window-utils")
 --------------------------------------------------------------------------------
 -- COUNTER FOR SKETCHYBAR
 local function updateCounter() hs.execute(u.exportPath .. "sketchybar --trigger update-tot-count") end
 
 -- Triggers: App Switch
-TotWatcher = aw.new(function(appName, event, tot)
-	if appName ~= "Tot" then return end
-
-	if event == aw.deactivated or aw.launched then updateCounter() end
-	if event == aw.deactivated and not u.isFront("Alfred") then
-		if wu.CheckSize(tot:mainWindow(), wu.totCenter) then tot:hide() end
+TotWatcher = aw.new(function(appName, event, _)
+	if appName == "Tot" and (event == aw.deactivated or event == aw.launched) then
+		updateCounter()
 	end
 end):start()
 

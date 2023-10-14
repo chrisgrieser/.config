@@ -1,4 +1,4 @@
----try to require the module, and do not error when one of them cannot be
+---Try to require the module, and do not error when one of them cannot be
 ---loaded, but do notify if there was an error.
 ---@param module string module to load
 local function safeRequire(module)

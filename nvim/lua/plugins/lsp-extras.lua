@@ -99,6 +99,8 @@ return {
 		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
 		keys = {
 			{ "<D-1>", "<cmd>AerialToggle<CR>", desc = "󰒕 Symbols Sidebar" },
+			{ "<C-j>", "<cmd>AerialNext<CR>", desc = "󰒕 Next Symbol" },
+			{ "<C-k>", "<cmd>AerialPrev<CR>", desc = "󰒕 Previous Symbol" },
 			{
 				"gs",
 				function() require("telescope").extensions.aerial.aerial() end,

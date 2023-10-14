@@ -29,20 +29,6 @@ vim.defer_fn(function()
 	end, { desc = "Search CSS Variables", buffer = true })
 end, 500)
 
--- next/prev comment marks
-keymap(
-	{ "n", "x" },
-	"<C-j>",
-	[[/^\/\* <<CR>:nohl<CR>]],
-	{ buffer = true, desc = "next comment mark" }
-)
-keymap(
-	{ "n", "x" },
-	"<C-k>",
-	[[?^\/\* <<CR>:nohl<CR>]],
-	{ buffer = true, desc = "prev comment mark" }
-)
-
 -- create comment mark
 keymap("n", "qw", function()
 	local hr = {

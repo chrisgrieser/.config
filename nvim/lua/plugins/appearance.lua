@@ -29,10 +29,21 @@ return {
 			handlers = { marks = { enable = false } }, -- FIX mark-related error message
 		},
 	},
+	{ -- virtual text context at the end of a scope
+		"haringsrob/nvim_context_vt",
+		event = "VeryLazy",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		opts = {
+			prefix = " 󱞷",
+			highlight = "NonText",
+			min_rows = 12,
+			disable_ft = { "markdown", "yaml", "css" },
+		},
+	},
 	{ -- when searching, search count is shown next to the cursor
 		"kevinhwang91/nvim-hlslens",
 		init = function()
-			-- cannot use my utility, as the value of incsearch needs to be retrieved dynamically
+			-- cannot use my utility, as the value of IncSearch needs to be retrieved dynamically
 			vim.api.nvim_create_autocmd("ColorScheme", {
 				callback = function()
 					local reversed = u.getHighlightValue("IncSearch", "bg")
