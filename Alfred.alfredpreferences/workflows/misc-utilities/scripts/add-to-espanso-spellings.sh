@@ -11,7 +11,7 @@ correct=$(echo "$*" | cut -d" " -f2)
 {
 	echo "  - trigger: $wrong"
 	echo "    replace: $correct"
-	echo "    propagate_casing: true"
+	echo "    propagate_case: true"
 	echo "    word: true"
 } >>"$spell_config"
 

@@ -181,17 +181,17 @@ matches:
     propagate_case: true
   - trigger: ejtzt
     replace: jetzt
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: esle
     replace: else
     word: true
   - trigger: lwoer
     replace: lower
-    propagate_casing: true
+    propagate_case: true
   - trigger: fidn
     replace: find
-    propagate_casing: true
+    propagate_case: true
     word: true
   - triggers: ["url", "Url"]
     replace: URL
@@ -203,37 +203,37 @@ matches:
     word: true
   - trigger: agian
     replace: again
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: shwo
     replace: show
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: foudn
     replace: found
   - trigger: yb
     replace: by
     word: true
-    propagate_casing: true
+    propagate_case: true
   - trigger: ahrd
     replace: hard
     word: true
-    propagate_casing: true
+    propagate_case: true
   - trigger: nru
     replace: nur
     word: true
-    propagate_casing: true
+    propagate_case: true
   - trigger: sjon
     replace: json
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: mosue
     replace: mouse
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: palce
     replace: place
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: dont
     replace: don't
@@ -243,18 +243,18 @@ matches:
     word: true
   - trigger: ahs
     replace: has
-    propagate_casing: true
+    propagate_case: true
     word: true
   - triggers: [aht, hta]
     replace: hat
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: fo
     replace: of
     word: true
   - trigger: seperate
     replace: separate
-    propagate_casing: true
+    propagate_case: true
   - regex: "\\Bsich " # https://espanso.org/docs/matches/regex-triggers#arguments
     replace: "isch "
   - trigger: Youtube # only fix when capitalized, so stuff like urls is unaffected
@@ -265,98 +265,102 @@ matches:
     word: true
   - trigger: hte
     replace: the
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: hwoever
     replace: however
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: Cafe
     replace: Café
-    propagate_casing: true
+    propagate_case: true
   - trigger: acheive
     replace: achieve
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: defualt
     replace: default
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: ahbe
     replace: habe
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: ahst
     replace: hast
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: ym
     replace: my
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: theorei
     replace: theorie
-    propagate_casing: true
+    propagate_case: true
   - trigger: seperator
     replace: separator
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: pwoer
     replace: power
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: Diesntag
     replace: Dienstag
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: oepn
     replace: open
-    propagate_casing: true
+    propagate_case: true
     word: true
   - triggers: [isntead, instread]
     replace: instead
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: cion
     replace: icon
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: tiem
     replace: item
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: wnat
     replace: want
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: thsi
     replace: this
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: taks
     replace: task
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: breif
     replace: brief
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: srue
     replace: sure
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: brwose
     replace: browse
-    propagate_casing: true
+    propagate_case: true
   - trigger: ti
     replace: it
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: oru
     replace: our
-    propagate_casing: true
+    propagate_case: true
     word: true
   - trigger: yuo
     replace: you
-    propagate_casing: true
+    propagate_case: true
+    word: true
+  - trigger: lgiht
+    replace: light
+    propagate_case: true
     word: true
