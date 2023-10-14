@@ -118,14 +118,13 @@ return {
 	},
 	{ -- auto-convert string and f/template string
 		"chrisgrieser/nvim-puppeteer",
-		dependencies = "nvim-treesitter/nvim-treesitter",
 		ft = { "python", "javascript", "typescript", "lua" },
 		init = function() vim.g.puppeteer_lua_format_string = true end,
 	},
 	{ -- basically autopair, but for keywords
 		"RRethy/nvim-treesitter-endwise",
-		event = "InsertEnter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
+		event = "InsertEnter",
 	},
 	{ -- case conversion
 		"johmsalas/text-case.nvim",
@@ -182,7 +181,6 @@ return {
 	},
 	{ -- split-join lines
 		"Wansmer/treesj",
-		dependencies = "nvim-treesitter/nvim-treesitter",
 		keys = {
 			{ "<leader>s", function() require("treesj").toggle() end, desc = "󰗈 Split-join lines" },
 		},
