@@ -44,6 +44,7 @@ keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
 -- Diagnostics
 keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
 keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
+keymap({ "n", "v", "i" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 Signature" })
 
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS
@@ -62,7 +63,7 @@ keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
 keymap(
 	"o",
 	"u",
-	function() require("funcs.quality-of-life").commented_lines_textobject() end,
+	function() require("funcs.quality-of-life").commentsTextobj() end,
 	{ desc = "󱡔  Big Comment textobj" }
 )
 

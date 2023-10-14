@@ -103,31 +103,33 @@ return {
 			{ "<C-k>", "<cmd>AerialPrev<CR>zv", desc = "󰒕 Previous Symbol" },
 			{
 				"gs",
-				function() require("telescope").extensions.aerial.aerial() end,
+				function()
+					require("telescope").load_extension("aerial")
+					require("telescope").extensions.aerial.aerial()
+				end,
 				desc = "󰒕 Symbols Search",
 			},
 		},
-		config = function()
-			require("aerial").setup {
-				layout = {
-					default_direction = "left",
-					min_width = 20,
-					win_opts = { signcolumn = "yes:1" },
-				},
-				show_guides = true,
-				highlight_on_hover = true,
-				close_on_select = true,
-				autojump = false, -- BUG https://github.com/stevearc/aerial.nvim/issues/309
-				keymaps = {
-					["<Esc>"] = "actions.close",
+		opts = {
+			layout = {
+				default_direction = "prefer_left",
+				min_width = 20,
+				win_opts = { signcolumn = "yes:1" },
+			},
+			show_guides = true,
+			highlight_on_hover = true,
+			close_on_select = true,
+			autojump = false, -- BUG https://github.com/stevearc/aerial.nvim/issues/309
+			keymaps = {
+				-- HACK use `down_and_scroll` instead of `down` to emulate autojump
+				["j"] = "actions.down_and_scroll",
+				["k"] = "actions.up_and_scroll",
 
-					-- HACK emulate autojump
-					["j"] = "actions.down_and_scroll", 
-					["k"] = "actions.up_and_scroll",
-				},
-			}
-			require("telescope").load_extension("aerial")
-		end,
+				["<Tab>"] = "actions.down_and_scroll",
+				["<S-Tab>"] = "actions.up_and_scroll",
+				["<Esc>"] = "actions.close",
+			},
+		},
 	},
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",
@@ -135,11 +137,10 @@ return {
 		opts = {
 			hint_prefix = "󰏪 ",
 			hint_scheme = "@parameter", -- highlight group
-			hint_inline = function() return false end, -- TODO change with 0.10
+			hint_inline = function() return vim.lsp.inlay_hint ~= nil end,
 			floating_window = false,
 			always_trigger = true,
 			noice = true, -- render via noice.nvim
-			toggle_key = "<D-g>",
 		},
 	},
 	{ -- better LSP variable-rename
