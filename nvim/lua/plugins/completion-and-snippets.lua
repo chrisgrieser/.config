@@ -3,10 +3,9 @@ local defaultSources = {
 	{ name = "nvim_lsp" },
 	{
 		name = "buffer",
-		keyword_length = 4,
 		option = {
 			keyword_pattern = [[\k\+]], -- use `opt.iskeyword`
-			get_bufnrs = vim.api.nvim_list_bufs, -- get from all buffers
+			get_bufnrs = vim.api.nvim_list_bufs, -- use all buffers
 		},
 	},
 	{ name = "path" },

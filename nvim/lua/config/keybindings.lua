@@ -117,13 +117,9 @@ keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
 
 -- Multi-Cursor replacement
 -- https://www.reddit.com/r/neovim/comments/173y1dv/comment/k47kqb3/?context=3
-keymap("n", "<D-j>", "*<C-o>cgn", { desc = " 󰆿 Pseudo-Multi-Cursor" })
-keymap(
-	"x",
-	"<D-j>",
-	"*<C-o>cgn",
-	{ desc = " 󰆿 Pseudo-Multi-Cursor", remap = true, unique = false } -- requires nvim's `*`
-)
+keymap("n", "<D-j>", "*<C-o>cgn", { desc = "󰆿 Multi-Edit" })
+-- requires nvim's `*`
+keymap("x", "<D-j>", "*<C-o>cgn", { desc = "󰆿 Multi-Edit", remap = true, unique = false })
 
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
