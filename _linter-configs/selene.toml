@@ -3,15 +3,14 @@
 undefined_variable = "allow"
 unused_variable = "allow"
 empty_if = "allow"
-unscoped_variables = "allow"
 multiple_statements = "allow"
-incorrect_standard_library_use = "allow"
 
 # changed severity
 if_same_then_else = "warn"
 
-# enabled
-high_cyclomatic_complexity = "warn"
+#───────────────────────────────────────────────────────────────────────────────
+
+high_cyclomatic_complexity = "warn" # enabled
 
 [config]
 high_cyclomatic_complexity = { maximum_complexity = 20 }

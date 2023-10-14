@@ -4,6 +4,7 @@ local wu = require("lua.window-utils")
 local aw = hs.application.watcher
 local wf = hs.window.filter
 
+local g = {} -- persist from garbage collector
 --------------------------------------------------------------------------------
 
 -- simply scroll up without the mouse and without focusing the app
@@ -87,7 +88,7 @@ end
 -- toggle mute when Zoom is running, otherwise scroll up
 u.hotkey({}, "home", scrollUp)
 
-TickerAppWatcher = aw.new(function(appName, event)
+g.aw_tickerWatcher = aw.new(function(appName, event)
 	if appName == "CleanShot X" or appName == "Alfred" then return end
 	local app = u.app(env.tickerApp)
 
@@ -120,14 +121,14 @@ end):start()
 
 -- scrollup on wake
 local c = hs.caffeinate.watcher
-TickerWakeWatcher = c.new(function(event)
+g.caff_TickerWak = c.new(function(event)
 	if event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock then
 		scrollUp()
 	end
 end):start()
 
 -- show/hide twitter when other wins move
-Wf_SomeWindowActivity = wf.new(true)
+g.wf_someWindowActivity = wf.new(true)
 	:setOverrideFilter({ allowRoles = "AXStandardWindow", hasTitlebar = true })
 	:subscribe(wf.windowMoved, function(movedWin) showHideTickerApp(movedWin) end)
 	:subscribe(wf.windowCreated, function(createdWin) showHideTickerApp(createdWin) end)
@@ -138,7 +139,7 @@ Wf_SomeWindowActivity = wf.new(true)
 if env.tickerApp ~= "Ivory" then return end
 
 local reloadMins = 3
-IvoryReloadTimer = hs.timer
+g.timer_ivoryReload = hs.timer
 	.doEvery(reloadMins * 60, function()
 		local ivory = u.app(env.tickerApp)
 		if not ivory then return end
@@ -151,3 +152,6 @@ IvoryReloadTimer = hs.timer
 		scrollUp()
 	end)
 	:start()
+
+--------------------------------------------------------------------------------
+return nil, g

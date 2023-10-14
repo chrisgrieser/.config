@@ -4,9 +4,10 @@ local wu = require("lua.window-utils")
 local aw = hs.application.watcher
 local wf = hs.window.filter
 
+local g = {} -- persist from garbage collector
 --------------------------------------------------------------------------------
 
-Wf_browser = wf.new(env.browserApp)
+g.wf_browser = wf.new(env.browserApp)
 	:setOverrideFilter({
 		rejectTitles = {
 			"^Picture in Picture$",
@@ -23,15 +24,15 @@ Wf_browser = wf.new(env.browserApp)
 		if env.isProjector() and winOnMainScreen then
 			wu.moveResize(win, wu.maximized)
 		else
-			wu.autoTile(Wf_browser)
+			wu.autoTile(g.wf_browser)
 		end
 	end)
-	:subscribe(wf.windowDestroyed, function() wu.autoTile(Wf_browser) end)
+	:subscribe(wf.windowDestroyed, function() wu.autoTile(g.wf_browser) end)
 	:subscribe(wf.windowFocused, wu.bringAllWinsToFront)
 
 -- Automatically hide Browser has when no window
 -- requires wider window-filter to not hide PiP windows etc
-Wf_browser_all = wf.new(env.browserApp)
+g.wf_browserAll = wf.new(env.browserApp)
 	:setOverrideFilter({ allowRoles = "AXStandardWindow" })
 	:subscribe(wf.windowDestroyed, function()
 		local app = u.app(env.browserApp)
@@ -48,8 +49,8 @@ Wf_browser_all = wf.new(env.browserApp)
 ---@param key string character that triggers cursor hiding
 local function hideCurAndPassThrough(key)
 	-- disable to it works only once
-	JHidesCursor:disable()
-	KHidesCursor:disable()
+	g.hotkey_jHidesCursor:disable()
+	g.hotkey_kHidesCursor:disable()
 
 	-- hide the cursor
 	local screen = hs.mouse.getCurrentScreen() or hs.screen.mainScreen()
@@ -60,8 +61,8 @@ local function hideCurAndPassThrough(key)
 	u.keystroke({}, key, 1)
 end
 
-JHidesCursor = u.hotkey({}, "j", function() hideCurAndPassThrough("j") end):disable()
-KHidesCursor = u.hotkey({}, "k", function() hideCurAndPassThrough("k") end):disable()
+g.hotkey_jHidesCursor = u.hotkey({}, "j", function() hideCurAndPassThrough("j") end):disable()
+g.hotkey_kHidesCursor = u.hotkey({}, "k", function() hideCurAndPassThrough("k") end):disable()
 
 -- watches browser, enables when hotkeys when browser is activated
 
@@ -69,10 +70,13 @@ Jk_watcher = aw.new(function(appName, eventType)
 	if eventType ~= aw.activated then return end
 
 	if appName == env.browserApp then
-		JHidesCursor:enable()
-		KHidesCursor:enable()
+		g.hotkey_jHidesCursor:enable()
+		g.hotkey_kHidesCursor:enable()
 	else
-		JHidesCursor:disable()
-		KHidesCursor:disable()
+		g.hotkey_jHidesCursor:disable()
+		g.hotkey_kHidesCursor:disable()
 	end
 end):start()
+
+--------------------------------------------------------------------------------
+return nil, g

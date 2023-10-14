@@ -4,6 +4,7 @@ local wu = require("lua.window-utils")
 local aw = hs.application.watcher
 local wf = hs.window.filter
 
+local g = {} -- persist from garbage collector
 --------------------------------------------------------------------------------
 
 ---ensures Obsidian windows are always shown when developing (for CSS live reloads)
@@ -46,7 +47,7 @@ local function addCssSelectorLeadingDot()
 	hs.pasteboard.setContents(clipb)
 end
 
-NeovideWatcher = aw.new(function(appName, eventType, neovide)
+g.aw_neovide = aw.new(function(appName, eventType, neovide)
 	if not appName then return end
 	if appName:lower() == "neovide" and eventType == aw.activated then
 		addCssSelectorLeadingDot()
@@ -54,7 +55,7 @@ NeovideWatcher = aw.new(function(appName, eventType, neovide)
 	end
 end):start()
 
-Wf_neovideMoved = wf
+g.wf_neovideMoved = wf
 	.new({ "Neovide", "neovide" })
 	:subscribe(wf.windowMoved, function(movedWin) obsidianThemeDevHelper(movedWin) end)
 
@@ -71,3 +72,6 @@ u.urischeme("neovide-post-startup", function()
 		u.app("neovide"):activate()
 	end)
 end)
+
+--------------------------------------------------------------------------------
+return nil, g

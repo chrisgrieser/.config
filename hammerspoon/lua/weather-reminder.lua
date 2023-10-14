@@ -3,6 +3,7 @@
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 
+local g = {} -- persist from garbage collector
 --------------------------------------------------------------------------------
 
 local config = {
@@ -29,7 +30,7 @@ local callUrl = ("https://api.brightsky.dev/current_weather?lat=%s&lon=%s"):form
 
 local function getOutsideTemp()
 	if not (u.betweenTime(18, 1) or u.betweenTime(8, 13)) then return end
-	hs.http.asyncGet(callUrl, nil, function(status, body, _)
+	g.task_getWeather = hs.http.asyncGet(callUrl, nil, function(status, body, _)
 		if status ~= 200 then
 			print("⚠️🌡️ Could not get weather data: " .. status)
 			return
@@ -40,15 +41,15 @@ local function getOutsideTemp()
 		local outTemp = weatherData.weather.temperature
 
 		-- first run has no value yet
-		if not PrevOutTemp then
-			PrevOutTemp = outTemp
+		if not g.prevOutTemp then
+			g.prevOutTemp = outTemp
 			return
 		end
 		local outsideNowCoolerThanInside = outTemp < config.insideTemp
-			and not (PrevOutTemp < config.insideTemp)
+			and not (g.prevOutTemp < config.insideTemp)
 		local outsideNowHotterThanInside = outTemp > config.insideTemp
-			and not (PrevOutTemp > config.insideTemp)
-		PrevOutTemp = outTemp
+			and not (g.PrevOutTemp > config.insideTemp)
+		g.prevOutTemp = outTemp
 
 		if outsideNowCoolerThanInside then
 			hs.alert.show("🌡️🔵 Outside now cooler than inside.")
@@ -61,9 +62,11 @@ local function getOutsideTemp()
 end
 
 --------------------------------------------------------------------------------
+-- TRIGGERS
 
--- run once on startup
 if u.isSystemStart() then getOutsideTemp() end
 
--- run on timer
-WeatherReminder = hs.timer.doEvery(60 * config.checkIntervalMins, getOutsideTemp):start()
+g.timer_weatherReminder = hs.timer.doEvery(60 * config.checkIntervalMins, getOutsideTemp):start()
+
+--------------------------------------------------------------------------------
+return nil, g

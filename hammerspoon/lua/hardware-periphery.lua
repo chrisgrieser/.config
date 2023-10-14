@@ -1,10 +1,12 @@
 local u = require("lua.utils")
---------------------------------------------------------------------------------
 
+local g = {} -- persist from garbage collector
+
+--------------------------------------------------------------------------------
 -- USB WATCHER
 
 -- if backup device: open terminal
-ExternalHarddriveWatcher = hs.usb.watcher
+g.usbw_externalHarddriv = hs.usb.watcher
 	.new(function(device)
 		if not (device.eventType == "added") then return end
 		local name = device.productName
@@ -37,4 +39,7 @@ local function batteryCheck()
 	end
 end
 
-DailyBatteryCheckTimer = hs.timer.doAt("14:30", "01d", batteryCheck, true):start()
+g.timer_dailyBatteryCheck = hs.timer.doAt("14:30", "01d", batteryCheck, true):start()
+
+--------------------------------------------------------------------------------
+return nil, g
