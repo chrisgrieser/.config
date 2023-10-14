@@ -5,6 +5,8 @@ local visuals = require("lua.visuals")
 local wu = require("lua.window-utils")
 local wf = hs.window.filter
 
+local g = {} -- persist from garbage collector
+
 --------------------------------------------------------------------------------
 -- HELPERS
 
@@ -15,7 +17,7 @@ end
 
 ---@param targetMode string
 local function dockSwitcher(targetMode)
-	DockSwitchingTask = hs.task
+	g.task_dockSwitching = hs.task
 		.new("./helpers/dock-switching/dock-switcher.sh", nil, { "--load", targetMode })
 		:start()
 end
@@ -112,19 +114,18 @@ local function movieLayout()
 end
 
 ---select layout depending on number of screens, and prevent concurrent runs
-local isLayouting
 local function selectLayout()
-	if isLayouting then return end
-	isLayouting = true
+	if g.isLayouting then return end
+	g.isLayouting = true
 	local layout = env.isProjector() and movieLayout or workLayout
 	layout()
-	u.runWithDelays(1.5, function() isLayouting = false end)
+	u.runWithDelays(1.5, function() g.isLayouting = false end)
 end
 
 --------------------------------------------------------------------------------
 
 -- Open Apps always at Mouse Screen
-Wf_appsOnMouseScreen = wf.new({
+g.wf_appsOnMouseScreen = wf.new({
 	env.browserApp,
 	env.mailApp,
 	"BetterTouchTool",
@@ -164,7 +165,7 @@ end)
 -- WHEN TO SET LAYOUT
 
 -- 1. Change of screen numbers
-DisplayCountWatcher = hs.screen.watcher
+g.caff_displayCount = hs.screen.watcher
 	.new(function()
 		local delay = env.isAtMother and 1 or 0 -- TV at mother needs small delay
 		u.runWithDelays(delay, selectLayout)
@@ -182,7 +183,7 @@ u.hotkey(u.hyper, "home", selectLayout)
 if u.isSystemStart() then selectLayout() end
 
 -- 4. Waking
-UnlockWatcher = hs.caffeinate.watcher
+g.caff_unlock = hs.caffeinate.watcher
 	.new(function(event)
 		local hasWoken = event == hs.caffeinate.watcher.screensDidWake
 			or event == hs.caffeinate.watcher.systemDidWake
@@ -191,3 +192,6 @@ UnlockWatcher = hs.caffeinate.watcher
 		if hasWoken then u.runWithDelays(0.5, selectLayout) end -- delay for recognizing screens
 	end)
 	:start()
+
+--------------------------------------------------------------------------------
+return nil, g
