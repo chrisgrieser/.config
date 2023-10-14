@@ -298,7 +298,7 @@ fi</string>
 				<key>keyword</key>
 				<string>spell</string>
 				<key>subtext</key>
-				<string>$1: Misspelling $2: Correct Spelling</string>
+				<string>$1: Misspelling     $2: Correct Spelling</string>
 				<key>text</key>
 				<string>Spelling: {query}</string>
 				<key>withspace</key>

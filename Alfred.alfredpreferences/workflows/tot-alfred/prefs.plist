@@ -3,12 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>append_prefix</key>
-	<string>- </string>
+	<string>– </string>
 	<key>include_empty_dots</key>
 	<true/>
 	<key>keyword</key>
 	<string>,,</string>
 	<key>quicksave_keyword</key>
 	<string>,</string>
+	<key>tot_icons</key>
+	<string>🔵,🟠,🔴,🟣,🟡,⚪,🟢</string>
 </dict>
 </plist>
