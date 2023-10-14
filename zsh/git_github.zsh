@@ -15,12 +15,13 @@ alias rel='make --silent release'
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# highlight conventional commits & issue numbers
+ZSH_HIGHLIGHT_REGEXP+=('(feat|fix|test|perf|build|ci|revert|refactor|chore|docs|break|improv)(\(.+\)|\\!)?:' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=('(#[0-9]+)' 'fg=red,bold')
+
 # commit messages longer than 50 chars: yellow, longer than 72 chars: red
 ZSH_HIGHLIGHT_REGEXP+=('^(acp?|gc -m|git commit -m) ".{72,}"' 'fg=white,bold,bg=red')
 ZSH_HIGHLIGHT_REGEXP+=('^(acp?|gc -m|git commit -m) ".{51,71}"' 'fg=black,bg=yellow')
-
-# highlight conventional commits
-ZSH_HIGHLIGHT_REGEXP+=('(feat|fix|test|perf|build|ci|revert|refactor|chore|docs|break|improv)(\(.+\)|\\!)?:' 'fg=magenta,bold')
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -33,9 +34,10 @@ function pr {
 	gh pr create --web --fill || gh pr create --web || return 1
 
 	# set remote to my fork for subsequent additions
+	local username="chrisgrieser"
 	local reponame
-	reponame=$(basename "$PWD")
-	git remote set-url origin "git@github.com:chrisgrieser/$reponame.git"
+	reponame=$(basename "$(git rev-parse --show-toplevel)")
+	git remote set-url origin "git@github.com:$username/$reponame.git"
 }
 
 # select a fork or multiple forks to delete
@@ -56,7 +58,7 @@ function deletefork() {
 	fi
 }
 
-# select a recent commit to fixup
+# select a recent commit to fixup (append the staged changes to)
 function fixup {
 	local cutoff=15 # CONFIG
 
@@ -100,6 +102,7 @@ function unlock {
 }
 
 # rebase last x commits
+# $1: number of commits
 function rebase {
 	local num="$1"
 	if grep -qE '^[0-9]+$'; then

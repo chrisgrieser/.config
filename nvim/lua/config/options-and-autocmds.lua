@@ -91,6 +91,7 @@ opt.linebreak = true -- do not break up full words on wrap
 -- Color Column: textwidth + guiding line for `gm`
 autocmd({ "VimEnter", "VimResized", "WinResized" }, {
 	callback = function()
+		if vim.bo.buftype ~= "" then return end
 		if opt_local.wrap:get() then return end
 		local gmColumn = math.floor(vim.api.nvim_win_get_width(0) / 2)
 		local global = opt.colorcolumn:get()[1]

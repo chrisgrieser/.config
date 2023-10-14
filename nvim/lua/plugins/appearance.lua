@@ -73,15 +73,6 @@ return {
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function() u.colorschemeMod("RainbowDelimiterRed", { fg = "#7e8a95" }) end,
 	},
-	{ -- Nerdfont filetype icons
-		"nvim-tree/nvim-web-devicons",
-		opts = {
-			override = {
-				applescript = { icon = "", color = "#7f7f7f", name = "Applescript" },
-				bib = { icon = "", color = "#6e9b2a", name = "BibTeX" },
-			},
-		},
-	},
 	{ -- emphasized undo/redos
 		"tzachar/highlight-undo.nvim",
 		keys = { "u", "U" },

@@ -22,7 +22,7 @@ local toggleSigns = {
 --------------------------------------------------------------------------------
 
 -- https://github.com/numToStr/Comment.nvim/issues/22#issuecomment-1272569139
-function M.commented_lines_textobject()
+function M.commentsTextobj()
 	local U = require("Comment.utils")
 	local cl = vim.api.nvim_win_get_cursor(0)[1] -- current line
 	local range = { srow = cl, scol = 0, erow = cl, ecol = 0 }
