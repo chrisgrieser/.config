@@ -99,8 +99,8 @@ return {
 		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
 		keys = {
 			{ "<D-1>", "<cmd>AerialToggle<CR>", desc = "󰒕 Symbols Sidebar" },
-			{ "<C-j>", "<cmd>AerialNext<CR>", desc = "󰒕 Next Symbol" },
-			{ "<C-k>", "<cmd>AerialPrev<CR>", desc = "󰒕 Previous Symbol" },
+			{ "<C-j>", "<cmd>AerialNext<CR>zv", desc = "󰒕 Next Symbol" },
+			{ "<C-k>", "<cmd>AerialPrev<CR>zv", desc = "󰒕 Previous Symbol" },
 			{
 				"gs",
 				function() require("telescope").extensions.aerial.aerial() end,
@@ -110,7 +110,7 @@ return {
 		config = function()
 			require("aerial").setup {
 				layout = {
-					default_direction = "prefer_left",
+					default_direction = "left",
 					min_width = 20,
 					win_opts = { signcolumn = "yes:1" },
 				},
@@ -118,6 +118,13 @@ return {
 				highlight_on_hover = true,
 				close_on_select = true,
 				autojump = false, -- BUG https://github.com/stevearc/aerial.nvim/issues/309
+				keymaps = {
+					["<Esc>"] = "actions.close",
+
+					-- HACK emulate autojump
+					["j"] = "actions.down_and_scroll", 
+					["k"] = "actions.up_and_scroll",
+				},
 			}
 			require("telescope").load_extension("aerial")
 		end,
