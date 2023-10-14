@@ -106,7 +106,7 @@ local function movieLayout()
 		env.mailApp,
 		env.tickerApp,
 	}
-	u.runWithDelays(2, function() u.quitApps("Tot") end) -- FIX Tot sometimes not quitting
+	u.runWithDelays({ 1, 3, 10 }, function() u.quitApps("Tot") end) -- FIX Tot sometimes not quitting
 
 	print("🔲 Loaded MovieModeLayout")
 end
