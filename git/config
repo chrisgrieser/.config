@@ -22,6 +22,7 @@
 [advice]
 	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-advice
 	statusHints = true
+	# fsfs
 	detachedHead = true
 
 #───────────────────────────────────────────────────────────────────────────────

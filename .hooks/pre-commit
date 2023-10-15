@@ -1,0 +1,3 @@
+# vim: filetype=sh
+echo "block from pre-commit-hook"
+exit 1
