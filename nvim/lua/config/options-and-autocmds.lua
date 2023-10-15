@@ -145,6 +145,7 @@ opt.listchars:append {
 	multispace = "·",
 	tab = "│ ", -- overridden by indent-blankline
 	lead = " ",
+	trail = " ",
 }
 
 -- no list chars in special buffers

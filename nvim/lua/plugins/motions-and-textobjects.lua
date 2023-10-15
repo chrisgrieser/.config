@@ -26,9 +26,9 @@ return {
 		end,
 	},
 	{ -- display line numbers when using `:` to go to a line with
-		"nacro90/numb.nvim",
+		"chrisgrieser/numb.nvim", -- PENDING https://github.com/nacro90/numb.nvim/pull/30
 		keys = ":",
-		opts = true,
+		opts = { skip_cmdline_history = true }, -- cmds not stored in cmdline-history
 	},
 	{ -- CamelCase Motion plus
 		"chrisgrieser/nvim-spider",
