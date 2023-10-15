@@ -120,10 +120,12 @@ return {
 				default_direction = "left",
 				min_width = { 20, 0.2 },
 				max_width = { 60, 0.5 },
+				win_opts = {
+					winhighlight = "Normal:Colorcolumn,CursorLine:CursorLineFold",
+				},
 			},
 			icons = { Collapsed = "" },
 			keymaps = {
-				["<Esc>"] = "actions.close",
 				-- instead of `autojump = true`, using these to only move when
 				-- navigating within the symbol sidebar
 				["<Tab>"] = "actions.down_and_scroll",
@@ -132,16 +134,6 @@ return {
 				["k"] = "actions.up_and_scroll",
 			},
 		},
-		init = function()
-			vim.api.nvim_create_autocmd({ "FileType", "WinResized" }, {
-				callback = function()
-					if vim.bo.filetype ~= "aerial" then return end
-					local newWidth = vim.api.nvim_win_get_width(0) + 2
-					vim.cmd("noautocmd vertical resize " .. newWidth)
-					vim.opt_local.signcolumn = "yes:1"
-				end,
-			})
-		end,
 	},
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",
