@@ -41,7 +41,7 @@ function pr {
 }
 
 # select a fork or multiple forks to delete
-function deletefork() {
+function deletefork {
 	if ! command -v gh &>/dev/null; then print "\033[1;33mgh not installed.\033[0m" && return 1; fi
 	if ! command -v fzf &>/dev/null; then print "\033[1;33mfzf not installed.\033[0m" && return 1; fi
 
@@ -82,7 +82,7 @@ function gm {
 }
 
 # amend message only
-function gM() {
+function gM {
 	git commit --amend
 	separator
 	gitlog -n 4
@@ -91,7 +91,7 @@ function gM() {
 # Github Url: open & copy url
 function gu {
 	url=$(git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 |
-		sed -e 's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//')
+	sed -e 's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//')
 	echo "$url" | pbcopy
 	open "$url"
 }
@@ -125,7 +125,7 @@ function unshallow {
 
 # use delta for small diffs and diff2html for big diffs
 function gd {
-	local threshold_lines=100 # CONFIG
+	local threshold_lines=120 # CONFIG
 
 	if [[ $(git diff | wc -l) -gt $threshold_lines ]]; then
 		if ! command -v diff2html &>/dev/null; then echo "diff2html not installed (\`npm -g install diff2html\`)." && return 1; fi
@@ -165,16 +165,16 @@ function gli {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 
 	local hash key_pressed selected
-	local format="%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s%C(magenta)"
+	local preview_format="%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s%C(magenta)"
 	selected=$(
-		gitlog --color=always | 
-			sed 's/^[*| ]*//' | # remove the graph at the beginning
-			fzf -0 --query="$1" \
-				--ansi --no-sort --no-info \
-				--header-first --header="↵ : Checkout   ^H: Copy [H]ash" \
-				--expect="ctrl-h" \
-				--preview-window=45% \
-				--preview="git show {1} --name-only --color=always --format='$format'"
+		gitlog --color=always |
+		sed 's/^[*| ]*//' | # remove the graph at the beginning
+		fzf -0 --query="$1" \
+			--ansi --no-sort --no-info \
+			--header-first --header="↵ : Checkout   ^H: Copy [H]ash" \
+			--expect="ctrl-h" \
+			--preview-window=45% \
+			--preview="git show {1} --name-only --color=always --format='$preview_format'"
 	)
 	[[ -z "$selected" ]] && return 0
 	key_pressed=$(echo "$selected" | head -n1)
@@ -197,7 +197,7 @@ function gb {
 
 	selected=$(
 		git branch --all --color | grep -v "HEAD" |
-			fzf --ansi --no-info --height=40% --header-first --header="↵ : Checkout Branch"
+		fzf --ansi --no-info --height=40% --header-first --header="↵ : Checkout Branch"
 	)
 	[[ -z "$selected" ]] && return 0
 	selected=$(echo "$selected" | tr -d "* ")
@@ -219,7 +219,7 @@ function gb {
 # - if there are no changes, stage all changes (`git add -A`) and then commit
 # - if commit message is empty use `chore` as default message
 # - if commit msg contains issue number, open the issue in the browser
-function ac() {
+function ac {
 	local commit_msg="$1"
 	[[ -z "$commit_msg" ]] && commit_msg=chore || commit_msg=$1 # fill in empty commit msg,
 	git diff --staged --quiet && git add -A                     # if no staged changes, stage all
@@ -232,7 +232,7 @@ function ac() {
 		local issue_number url
 		issue_number=$(echo "$commit_msg" | grep -Eo "#[0-9]+" | cut -c2-)
 		url=$(git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 |
-			sed -e 's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//')
+		sed -e 's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//')
 		open "$url/issues/$issue_number"
 	fi
 }
@@ -247,7 +247,7 @@ function acp {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-function clone() {
+function clone {
 	url="$1"
 	# turn http into SSH remotes
 	[[ "$url" =~ http ]] && url="$(echo "$1" | sed -E 's/https?:\/\/github.com\//git@github.com:/').git"
@@ -282,7 +282,7 @@ function nuke {
 	# WARN depth > 1 ensures that amending a shallow commit does not result in a
 	# new commit without parent, effectively destroying git history (!!)
 	git clone --depth=5 "$SSH_REMOTE" "$local_repo_path" &&
-		cd "$local_repo_path" || return 1
+	cd "$local_repo_path" || return 1
 	separator
 	inspect
 }
@@ -325,11 +325,11 @@ function gdf {
 	echo
 
 	choices="restore file (checkout)
-copy to clipboard
-show file (bat)"
+	copy to clipboard
+	show file (bat)"
 	decision=$(echo "$choices" |
 		fzf --bind="j:down,k:up" --no-sort --no-info --height="5" \
-			--layout=reverse-list --header="j:↓  k:↑")
+		--layout=reverse-list --header="j:↓  k:↑")
 
 	if [[ -z "$decision" ]]; then
 		echo "Aborted."

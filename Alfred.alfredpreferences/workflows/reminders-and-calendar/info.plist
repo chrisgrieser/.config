@@ -190,6 +190,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>F79C0E63-67BE-46EA-9D1A-CD461F90A596</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4707CD41-4A4E-4B1A-B0CF-7DCF6340337E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>F829271A-399C-4995-8A07-6D7A7E8FB722</key>
 		<array>
 			<dict>
@@ -546,19 +559,42 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsmulti</key>
+				<key>argumenttype</key>
 				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>com.apple.addressbook.person</string>
-				</array>
-				<key>name</key>
-				<string>Call</string>
+				<key>keyword</key>
+				<string>cal</string>
+				<key>subtext</key>
+				<string>{query}</string>
+				<key>text</key>
+				<string>Add to Busycal</string>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>504E5795-9E1D-48DE-B0AC-A694A9285F3E</string>
+			<string>F79C0E63-67BE-46EA-9D1A-CD461F90A596</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>busycalevent://new/{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>4707CD41-4A4E-4B1A-B0CF-7DCF6340337E</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -608,6 +644,61 @@ end tell</string>
 			<string>AB6C212F-70C4-4291-963F-B7D6DFD63435</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>com.apple.addressbook.person</string>
+				</array>
+				<key>name</key>
+				<string>Call</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>504E5795-9E1D-48DE-B0AC-A694A9285F3E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Open Adress in Maps</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>7107C86B-1891-4DC6-B157-D10F2AEF3358</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>searcher</key>
+				<integer>1635216737</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.systemwebsearch</string>
+			<key>uid</key>
+			<string>2893A1EE-7E10-4249-BEE6-08B0F14FEBFB</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -674,42 +765,6 @@ end tell</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
-				<false/>
-				<key>name</key>
-				<string>Open Adress in Maps</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>7107C86B-1891-4DC6-B157-D10F2AEF3358</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>searcher</key>
-				<integer>1635216737</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.systemwebsearch</string>
-			<key>uid</key>
-			<string>2893A1EE-7E10-4249-BEE6-08B0F14FEBFB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -749,7 +804,7 @@ end tell</string>
 			<key>xpos</key>
 			<real>605</real>
 			<key>ypos</key>
-			<real>425</real>
+			<real>565</real>
 		</dict>
 		<key>42A7B9B4-EB45-4703-9232-AF5C99D4512E</key>
 		<dict>
@@ -760,12 +815,21 @@ end tell</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>4707CD41-4A4E-4B1A-B0CF-7DCF6340337E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>775</real>
+			<key>ypos</key>
+			<real>310</real>
+		</dict>
 		<key>504E5795-9E1D-48DE-B0AC-A694A9285F3E</key>
 		<dict>
 			<key>xpos</key>
 			<real>605</real>
 			<key>ypos</key>
-			<real>310</real>
+			<real>450</real>
 		</dict>
 		<key>578C08D0-C681-4E8A-AC1A-63359A0F0C34</key>
 		<dict>
@@ -839,7 +903,7 @@ end tell</string>
 			<key>xpos</key>
 			<real>960</real>
 			<key>ypos</key>
-			<real>425</real>
+			<real>565</real>
 		</dict>
 		<key>C73C4C50-6AAA-4294-929D-5C770E4E4E36</key>
 		<dict>
@@ -855,7 +919,7 @@ end tell</string>
 			<key>xpos</key>
 			<real>800</real>
 			<key>ypos</key>
-			<real>425</real>
+			<real>565</real>
 		</dict>
 		<key>E206A8A9-ADE8-4A8D-AA62-AC94A971FBB3</key>
 		<dict>
@@ -887,6 +951,15 @@ end tell</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>F79C0E63-67BE-46EA-9D1A-CD461F90A596</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>610</real>
+			<key>ypos</key>
+			<real>310</real>
 		</dict>
 		<key>F829271A-399C-4995-8A07-6D7A7E8FB722</key>
 		<dict>
