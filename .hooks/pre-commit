@@ -7,10 +7,11 @@ max_file_size_mb=10
 #───────────────────────────────────────────────────────────────────────────────
 
 # safeguard against accidental pushing of large files
-number_large_files=$(find . -not -path "**/.git/**" -size +${max_file_size_mb}M | wc -l | xargs)
-if [[ $number_large_files -gt 0 ]]; then
-	print "\033[1;33m$number_large_files large files found. Aborting commit.\033[0m"
+large_files=$(find . -not -path "**/.git/**" -size +${max_file_size_mb}M)
+if [[ -n "$large_files" ]]; then
+	print "\033[1;33m"
+	echo "$large_files"
+	echo
+	print "Large file(s) found. Aborting commit.\033[0m"
 	exit 1
 fi
-
-exit 0
