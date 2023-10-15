@@ -3,8 +3,6 @@ local M = {}
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
-
-local g = {} -- persist from garbage collector
 --------------------------------------------------------------------------------
 
 -- https://www.hammerspoon.org/Spoons/RoundedCorners.html
@@ -18,12 +16,12 @@ if roundedCorners then roundedCorners:start() end
 function M.holeCover(toMode)
 	if toMode == "auto" then toMode = u.isDarkMode() and "dark" or "light" end
 
-	if g.coverParts then
-		for _, cover in pairs(g.coverParts) do
+	if M.coverParts then
+		for _, cover in pairs(M.coverParts) do
 			cover:delete()
 			cover = nil
 		end
-		g.CoverParts = nil
+		M.CoverParts = nil
 	end
 	if toMode == "remove" or env.isProjector() then return end
 
@@ -33,13 +31,13 @@ function M.holeCover(toMode)
 		or { red = 0.8, green = 0.8, blue = 0.8, alpha = 1 }
 
 	-- three points, forming roughly a triangle
-	g.coverParts = {
+	M.coverParts = {
 		hs.drawing.rectangle { x = pseudoMaxCorner - 9, y = screen.h - 3, w = 18, h = 3 },
 		hs.drawing.rectangle { x = pseudoMaxCorner - 6, y = screen.h - 6, w = 12, h = 3 },
 		hs.drawing.rectangle { x = pseudoMaxCorner - 3, y = screen.h - 9, w = 6, h = 3 },
 	}
 
-	for _, cover in pairs(g.coverParts) do
+	for _, cover in pairs(M.coverParts) do
 		cover:setFillColor(bgColor)
 		cover:sendToBack()
 		cover:setFill(true)
@@ -51,4 +49,4 @@ end
 if u.isSystemStart() then M.holeCover("auto") end
 
 --------------------------------------------------------------------------------
-return M, g
+return M

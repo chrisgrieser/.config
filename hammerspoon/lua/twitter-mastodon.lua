@@ -1,10 +1,10 @@
+local M = {} -- persist from garbage collector
+
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
 local aw = hs.application.watcher
 local wf = hs.window.filter
-
-local g = {} -- persist from garbage collector
 --------------------------------------------------------------------------------
 
 -- simply scroll up without the mouse and without focusing the app
@@ -88,7 +88,7 @@ end
 -- toggle mute when Zoom is running, otherwise scroll up
 u.hotkey({}, "home", scrollUp)
 
-g.aw_tickerWatcher = aw.new(function(appName, event)
+M.aw_tickerWatcher = aw.new(function(appName, event)
 	if appName == "CleanShot X" or appName == "Alfred" then return end
 	local app = u.app(env.tickerApp)
 
@@ -121,14 +121,14 @@ end):start()
 
 -- scrollup on wake
 local c = hs.caffeinate.watcher
-g.caff_TickerWak = c.new(function(event)
+M.caff_TickerWak = c.new(function(event)
 	if event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock then
 		scrollUp()
 	end
 end):start()
 
 -- show/hide twitter when other wins move
-g.wf_someWindowActivity = wf.new(true)
+M.wf_someWindowActivity = wf.new(true)
 	:setOverrideFilter({ allowRoles = "AXStandardWindow", hasTitlebar = true })
 	:subscribe(wf.windowMoved, function(movedWin) showHideTickerApp(movedWin) end)
 	:subscribe(wf.windowCreated, function(createdWin) showHideTickerApp(createdWin) end)
@@ -138,8 +138,8 @@ g.wf_someWindowActivity = wf.new(true)
 -- FIX pin to top not working yet in Ivory https://tapbots.social/@ivory/110651107834916828
 if env.tickerApp ~= "Ivory" then return end
 
-local reloadMins = 3
-g.timer_ivoryReload = hs.timer
+local reloadMins = 2
+M.timer_ivoryReload = hs.timer
 	.doEvery(reloadMins * 60, function()
 		local ivory = u.app(env.tickerApp)
 		if not ivory then return end
@@ -154,4 +154,4 @@ g.timer_ivoryReload = hs.timer
 	:start()
 
 --------------------------------------------------------------------------------
-return nil, g
+return M

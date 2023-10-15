@@ -1,5 +1,4 @@
-local M = {}
-local g = {} -- persist from garbage collector
+local M = {} -- persist from garbage collector
 
 local env = require("lua.environment-vars")
 --------------------------------------------------------------------------------
@@ -107,7 +106,7 @@ function M.isDarkMode() return hs.execute("defaults read -g AppleInterfaceStyle"
 function M.runWithDelays(delaySecs, callbackFn)
 	if type(delaySecs) == "number" then delaySecs = { delaySecs } end
 	for _, delay in pairs(delaySecs) do
-		g[hs.host.uuid()] = hs.timer.doAfter(delay, callbackFn):start()
+		M[hs.host.uuid()] = hs.timer.doAfter(delay, callbackFn):start()
 	end
 end
 
@@ -153,10 +152,10 @@ end
 ---play macOS sound
 ---@param soundName string
 function M.sound(soundName)
-	if g.activeSound and g.activeSound:isPlaying() then return end
+	if M.activeSound and M.activeSound:isPlaying() then return end
 	---@diagnostic disable-next-line: undefined-field
-	g.activeSound = hs.sound.getByName(soundName):play()
-	g.activeSound = nil
+	M.activeSound = hs.sound.getByName(soundName):play()
+	M.activeSound = nil
 end
 
 --------------------------------------------------------------------------------
@@ -207,7 +206,7 @@ end
 function M.restartApp(appName)
 	local app = M.app(appName)
 	if app then app:kill() end
-	g[appName .. "Restart"] = hs.timer.waitUntil(
+	M[appName .. "Restart"] = hs.timer.waitUntil(
 		function() return M.app(appName) == nil end,
 		function() hs.application.open(appName) end,
 		0.05
@@ -218,7 +217,7 @@ end
 ---@param appName string
 ---@param callbackFn function function to execute when a window of the app is available
 function M.whenAppWinAvailable(appName, callbackFn)
-	g[appName .. "WinAvailable"] = hs.timer.waitUntil(function()
+	M[appName .. "WinAvailable"] = hs.timer.waitUntil(function()
 		local app = M.app(appName)
 		local windowAvailable = app and app:mainWindow()
 		return windowAvailable
@@ -229,7 +228,7 @@ end
 ---@param appName string
 ---@param callbackFn function function to execute when the app is available
 function M.whenAppRuns(appName, callbackFn)
-	g[appName .. "AppRun"] = hs.timer.waitUntil(
+	M[appName .. "AppRun"] = hs.timer.waitUntil(
 		function() return M.app(appName) ~= nil end,
 		callbackFn,
 		0.1
@@ -260,4 +259,4 @@ function M.quitApps(appNames)
 end
 
 --------------------------------------------------------------------------------
-return M, g
+return M

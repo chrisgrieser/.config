@@ -1,13 +1,14 @@
+local M = {} -- persist from garbage collector
+
 local u = require("lua.utils")
 local aw = hs.application.watcher
 
-local g = {} -- persist from garbage collector
 --------------------------------------------------------------------------------
 -- COUNTER FOR SKETCHYBAR
 local function updateCounter() hs.execute(u.exportPath .. "sketchybar --trigger update-tot-count") end
 
 -- Triggers: App Switch
-g.aw_tot = aw.new(function(appName, event, _)
+M.aw_tot = aw.new(function(appName, event, _)
 	if appName == "Tot" and (event == aw.deactivated or event == aw.launched) then
 		updateCounter()
 	end
@@ -20,7 +21,7 @@ local function remindersToTot()
 	if not u.appRunning("Tot") then return end
 
 	-- run as task so it's not blocking
-	g.task_pushReminder = hs.task
+	M.task_pushReminder = hs.task
 		.new("./helpers/push-todays-reminders-to-tot.js", function(exitCode, stdout, stderr)
 			updateCounter()
 			if stdout == "" then return end
@@ -43,14 +44,14 @@ if u.isSystemStart() then
 end
 
 -- 2. Every morning
-g.timer_morning = hs.timer.doAt("07:00", "01d", remindersToTot, true):start()
+M.timer_morning = hs.timer.doAt("07:00", "01d", remindersToTot, true):start()
 
 -- 3. On wake
 local c = hs.caffeinate.watcher
-g.caff_wake = c.new(function(event)
+M.caff_wake = c.new(function(event)
 	local woke = event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock
 	if woke then u.runWithDelays(10, remindersToTot) end
 end):start()
 
 --------------------------------------------------------------------------------
-return nil, g
+return M

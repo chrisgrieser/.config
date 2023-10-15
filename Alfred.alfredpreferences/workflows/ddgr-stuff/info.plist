@@ -34,11 +34,37 @@
 				<false/>
 			</dict>
 		</array>
+		<key>23388016-EC5C-4368-AB42-CB8DEF1D10E8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D43E8A7B-48B4-4004-A798-0C9D544EAD7F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>76AAB3AC-6FFB-4BD3-8A66-7FF66A8F7C77</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>0AD1A926-80B8-4274-9DFF-10183BF36867</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>770184AB-9021-4CA5-AA07-1CA43D00BC0E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>23388016-EC5C-4368-AB42-CB8DEF1D10E8</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -69,12 +95,35 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>FEEDB102-49DB-4F54-88FA-D54C378729DA</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy first link</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>EC1B0B5F-26D6-43F4-BEE2-52834356253E</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>DD75F164-F04B-4A1C-84BD-49B4068C8E88</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>FEEDB102-49DB-4F54-88FA-D54C378729DA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>770184AB-9021-4CA5-AA07-1CA43D00BC0E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -94,6 +143,34 @@
 	<string>DDGR</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./search-selection.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>search-selection</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>DD75F164-F04B-4A1C-84BD-49B4068C8E88</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -137,50 +214,14 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./search-selection.sh</string>
+				<string>./search-for-link.sh</string>
 				<key>type</key>
 				<integer>8</integer>
-			</dict>
-			<key>inboundconfig</key>
-			<dict>
-				<key>externalid</key>
-				<string>search-selection</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>DD75F164-F04B-4A1C-84BD-49B4068C8E88</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>1</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>40</integer>
-				<key>hotmod</key>
-				<integer>1179648</integer>
-				<key>hotstring</key>
-				<string>K</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>76AAB3AC-6FFB-4BD3-8A66-7FF66A8F7C77</string>
+			<string>10797BFB-ECCC-404B-9A55-B91951068BC9</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -227,38 +268,33 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
+				<key>action</key>
 				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
+				<key>argument</key>
 				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./search-for-link.sh</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>40</integer>
+				<key>hotmod</key>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>K</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>10797BFB-ECCC-404B-9A55-B91951068BC9</string>
+			<string>76AAB3AC-6FFB-4BD3-8A66-7FF66A8F7C77</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>text</key>
-				<string>Google: {query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.fallback</string>
-			<key>uid</key>
-			<string>C16E37C8-CCD7-4E12-8580-F48FEE5112C0</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -272,6 +308,19 @@
 			<string>alfred.workflow.action.systemwebsearch</string>
 			<key>uid</key>
 			<string>E0294F25-25E9-4D75-A042-047FE2AF1D91</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>text</key>
+				<string>Google: {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.fallback</string>
+			<key>uid</key>
+			<string>C16E37C8-CCD7-4E12-8580-F48FEE5112C0</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -296,6 +345,90 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>23388016-EC5C-4368-AB42-CB8DEF1D10E8</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>"{query}"</string>
+				<key>title</key>
+				<string>📋 Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>D43E8A7B-48B4-4004-A798-0C9D544EAD7F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./search-for-link.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>FEEDB102-49DB-4F54-88FA-D54C378729DA</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>\[([^\]]*)\]\(([^)]*)\)</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string>$1 – $2</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>770184AB-9021-4CA5-AA07-1CA43D00BC0E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -319,6 +452,15 @@
 			<key>ypos</key>
 			<real>190</real>
 		</dict>
+		<key>23388016-EC5C-4368-AB42-CB8DEF1D10E8</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>485</real>
+			<key>ypos</key>
+			<real>610</real>
+		</dict>
 		<key>76AAB3AC-6FFB-4BD3-8A66-7FF66A8F7C77</key>
 		<dict>
 			<key>colorindex</key>
@@ -330,12 +472,34 @@
 			<key>ypos</key>
 			<real>190</real>
 		</dict>
+		<key>770184AB-9021-4CA5-AA07-1CA43D00BC0E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>strip markdown syntax</string>
+			<key>xpos</key>
+			<real>405</real>
+			<key>ypos</key>
+			<real>640</real>
+		</dict>
 		<key>C16E37C8-CCD7-4E12-8580-F48FEE5112C0</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>400</real>
+			<real>360</real>
+		</dict>
+		<key>D43E8A7B-48B4-4004-A798-0C9D544EAD7F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>625</real>
+			<key>ypos</key>
+			<real>610</real>
 		</dict>
 		<key>DD75F164-F04B-4A1C-84BD-49B4068C8E88</key>
 		<dict>
@@ -348,10 +512,12 @@
 		</dict>
 		<key>E0294F25-25E9-4D75-A042-047FE2AF1D91</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>250</real>
+			<real>245</real>
 			<key>ypos</key>
-			<real>400</real>
+			<real>360</real>
 		</dict>
 		<key>E6BFAD6E-029F-480F-AD49-21705DD25C3D</key>
 		<dict>
@@ -377,12 +543,25 @@
 		</dict>
 		<key>FCCFADF4-51AA-4D3C-A46C-96B5B1379397</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>note</key>
 			<string>ducky search</string>
 			<key>xpos</key>
-			<real>250</real>
+			<real>245</real>
 			<key>ypos</key>
-			<real>515</real>
+			<real>475</real>
+		</dict>
+		<key>FEEDB102-49DB-4F54-88FA-D54C378729DA</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>Copy first link</string>
+			<key>xpos</key>
+			<real>245</real>
+			<key>ypos</key>
+			<real>610</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

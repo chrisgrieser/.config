@@ -1,11 +1,11 @@
+local M = {} -- persist from garbage collector
+
 local darkmode = require("lua.dark-mode")
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local visuals = require("lua.visuals")
 local wu = require("lua.window-utils")
 local wf = hs.window.filter
-
-local g = {} -- persist from garbage collector
 
 --------------------------------------------------------------------------------
 -- HELPERS
@@ -17,7 +17,7 @@ end
 
 ---@param targetMode string
 local function dockSwitcher(targetMode)
-	g.task_dockSwitching = hs.task
+	M.task_dockSwitching = hs.task
 		.new("./helpers/dock-switching/dock-switcher.sh", nil, { "--load", targetMode })
 		:start()
 end
@@ -115,17 +115,17 @@ end
 
 ---select layout depending on number of screens, and prevent concurrent runs
 local function selectLayout()
-	if g.isLayouting then return end
-	g.isLayouting = true
+	if M.isLayouting then return end
+	M.isLayouting = true
 	local layout = env.isProjector() and movieLayout or workLayout
 	layout()
-	u.runWithDelays(1.5, function() g.isLayouting = false end)
+	u.runWithDelays(1.5, function() M.isLayouting = false end)
 end
 
 --------------------------------------------------------------------------------
 
 -- Open Apps always at Mouse Screen
-g.wf_appsOnMouseScreen = wf.new({
+M.wf_appsOnMouseScreen = wf.new({
 	env.browserApp,
 	env.mailApp,
 	"BetterTouchTool",
@@ -165,7 +165,7 @@ end)
 -- WHEN TO SET LAYOUT
 
 -- 1. Change of screen numbers
-g.caff_displayCount = hs.screen.watcher
+M.caff_displayCount = hs.screen.watcher
 	.new(function()
 		local delay = env.isAtMother and 1 or 0 -- TV at mother needs small delay
 		u.runWithDelays(delay, selectLayout)
@@ -183,7 +183,7 @@ u.hotkey(u.hyper, "home", selectLayout)
 if u.isSystemStart() then selectLayout() end
 
 -- 4. Waking
-g.caff_unlock = hs.caffeinate.watcher
+M.caff_unlock = hs.caffeinate.watcher
 	.new(function(event)
 		local hasWoken = event == hs.caffeinate.watcher.screensDidWake
 			or event == hs.caffeinate.watcher.systemDidWake
@@ -194,4 +194,4 @@ g.caff_unlock = hs.caffeinate.watcher
 	:start()
 
 --------------------------------------------------------------------------------
-return nil, g
+return M
