@@ -34,9 +34,6 @@ safe_source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # has to be loaded *after* zsh syntax highlighting
 safe_source "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
 
-# Magic Enter
-safe_source "$ZDOTDIR/plugins/magic_enter.zsh"
-
 #───────────────────────────────────────────────────────────────────────────────
 
 # PROMPT
