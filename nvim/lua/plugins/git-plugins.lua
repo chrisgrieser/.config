@@ -26,6 +26,7 @@ return {
 				"<leader>ga",
 				function()
 					require("gitsigns").stage_hunk()
+
 					-- PENDING https://github.com/lewis6991/gitsigns.nvim/issues/906
 					vim.defer_fn(function()
 						local resp = vim.trim(vim.fn.system { "git", "diff", "--staged", "--stat" })
@@ -50,21 +51,8 @@ return {
 			{ "<leader>g?", function() require("gitsigns").blame_line { full = true } end, desc = "󰊢 Blame Line"},
 			{ "gh", function() require("gitsigns").next_hunk { foldopen = true } end, desc = "󰊢 Next Hunk" },
 			{ "gH", function() require("gitsigns").prev_hunk { foldopen = true } end, desc = "󰊢 Previous Hunk" },
+			{ "gh", "<cmd>Gitsigns select_hunk<CR>", mode = { "o", "x" }, desc = "󱡔 󰊢 hunk textobj" },
 			-- stylua: ignore end
-			{
-				"gh",
-				"<cmd>Gitsigns select_hunk<CR>",
-				mode = { "o", "x" },
-				desc = "󱡔 󰊢 hunk textobj",
-			},
-			{
-				"<leader>gq",
-				function()
-					require("gitsigns").setqflist("all", { open = false })
-					vim.defer_fn(vim.cmd.cfirst, 100) -- PENDING https://github.com/lewis6991/gitsigns.nvim/issues/906
-				end,
-				desc = " Hunks to Quickfix",
-			},
 		},
 		opts = {
 			max_file_length = 12000, -- lines
