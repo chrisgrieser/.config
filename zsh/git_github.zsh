@@ -222,7 +222,7 @@ function ac() {
 	local commit_msg="$1"
 	[[ -z "$commit_msg" ]] && commit_msg=chore || commit_msg=$1 # fill in empty commit msg,
 	git diff --staged --quiet && git add -A                     # if no staged changes, stage all
-	git commit -m "$commit_msg"
+	git commit -m "$commit_msg" || return 1
 
 	# if commit msg contains issue number, open the issue in the browser
 	if [[ "$commit_msg" =~ \#[0-9]+ ]]; then
