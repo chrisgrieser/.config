@@ -112,18 +112,22 @@ return {
 		},
 		opts = {
 			backends = { "lsp", "treesitter", "markdown" },
+			close_on_select = true,
+			autojump = true,
+			link_folds_to_tree = true,
 			layout = {
 				default_direction = "left",
 				min_width = 20,
 				win_opts = { signcolumn = "yes:1" },
 			},
+			icons = {
+				Collapsed = ""
+			},
 			show_guides = true,
 			highlight_on_hover = true,
-			close_on_select = true,
-			autojump = true,
 			keymaps = {
-				["<Tab>"] = "actions.down",
-				["<S-Tab>"] = "actions.up",
+				["<Tab>"] = "actions.next",
+				["<S-Tab>"] = "actions.prev",
 				["<Esc>"] = "actions.close",
 			},
 		},

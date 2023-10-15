@@ -4,7 +4,7 @@ local wu = require("lua.window-utils")
 local aw = hs.application.watcher
 local wf = hs.window.filter
 
-local g = {} -- persist from garbage collector
+local M = {} -- persist from garbage collector
 --------------------------------------------------------------------------------
 
 -- INFO - REASONS FOR ALL THIS APP HIDING
@@ -61,7 +61,7 @@ end
 
 -- if an app with bg-transparency is activated, hide all other apps
 -- if such an app is terminated, unhide them again
-g.transBgAppWatcher = aw.new(function(appName, event, appObj)
+M.transBgAppWatcher = aw.new(function(appName, event, appObj)
 	if env.isProjector() then return end
 	if event == aw.terminated then
 		unHideAll()
@@ -71,12 +71,12 @@ g.transBgAppWatcher = aw.new(function(appName, event, appObj)
 end):start()
 
 -- also trigger on minimization and on window reszing
-g.transBgAppWindowFilter = wf.new(transBgApps)
+M.transBgAppWindowFilter = wf.new(transBgApps)
 	:subscribe(wf.windowMoved, function(movedWin) hideOthers(movedWin:application()) end)
 	:subscribe(wf.windowMinimized, unHideAll)
 
 -- when currently auto-tiled, hide the app on deactivation so it does not cover sketchybar
-g.autoTileAppWatcher = aw.new(function(appName, eventType, appObj)
+M.autoTileAppWatcher = aw.new(function(appName, eventType, appObj)
 	local autoTileApps = { "Finder", env.browserApp }
 	if
 		eventType == aw.deactivated
@@ -92,7 +92,7 @@ g.autoTileAppWatcher = aw.new(function(appName, eventType, appObj)
 end):start()
 
 -- prevent maximized window from covering sketchybar if they are unfocused
-g.wf_maxWindows = wf.new(true):subscribe(wf.windowUnfocused, function(win)
+M.wf_maxWindows = wf.new(true):subscribe(wf.windowUnfocused, function(win)
 	if
 		not (env.isProjector())
 		and wu.CheckSize(win, wu.maximized)
@@ -103,4 +103,4 @@ g.wf_maxWindows = wf.new(true):subscribe(wf.windowUnfocused, function(win)
 end)
 
 --------------------------------------------------------------------------------
-return nil, g
+return M

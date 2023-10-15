@@ -3,7 +3,7 @@
 # IF SELECTION IS…
 # file path: reveal it in file explorer
 # directory path: open it
-# url: open in Browser
+# url(s): open all urls in Browser
 # email: send to that address
 # some other text: google it & open first duckduckgo hit
 # empty: do nothing
@@ -18,8 +18,9 @@ if [[ -z "$SEL" ]]; then
 	osascript -e 'tell application "System Events" to keystroke "c" using {command down}'
 	sleep 0.1
 	SEL=$(pbpaste)
-	# restore clipboard
+
 	[[ -n "$PREV_CLIPBOARD" ]] && echo "$PREV_CLIPBOARD" | pbcopy
+
 	[[ -z "$SEL" ]] && return 1 # = no selection
 fi
 
@@ -30,8 +31,10 @@ SEL="${SEL/#\~/$HOME}"                                # resolve ~
 # openers
 if [[ -f "$SEL" ]]; then # file
 	open -R "$SEL"
-elif [[ -d "$SEL" || "$SEL" =~ ^http.* ]]; then # url or directory
+elif [[ -d "$SEL" ]]; then # directory
 	open "$SEL"
+elif echo "$SEL" | grep -Eq "https?://"; then # url(s) in selection
+	echo "$SEL" | grep -Eo "https?://[^> ]*" | xargs open
 elif [[ "$SEL" =~ "@" ]]; then # mail
 	open "mailto:$SEL"
 elif [[ -n "$SEL" ]]; then

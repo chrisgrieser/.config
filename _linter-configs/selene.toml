@@ -1,19 +1,11 @@
-std="vim"
-
 [lints]
-# disabled since duplication with LSP
-undefined_variable = "allow"
+undefined_variable = "allow" # duplication with LSP
 unused_variable = "allow"
 empty_if = "allow"
 multiple_statements = "allow"
-
-# changed severity
-if_same_then_else = "warn"
-
-#───────────────────────────────────────────────────────────────────────────────
-
+if_same_then_else = "warn" # changed severity
 high_cyclomatic_complexity = "warn" # enabled
 
 [config]
 high_cyclomatic_complexity = { maximum_complexity = 20 }
-
+unscoped_variables = { ignore_pattern = "^_|^vim$|^hs$" }

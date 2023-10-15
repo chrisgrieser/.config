@@ -1,5 +1,4 @@
-local M = {}
-local g = {} -- persist from garbage collector
+local M = {} -- persist from garbage collector
 
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
@@ -91,7 +90,7 @@ end
 function M.autoTile(winSrc)
 	local isMultiscreen = #(hs.screen.allScreens()) > 1
 	if isMultiscreen then return end
-	if g.AutoTileInProgress then return end
+	if M.AutoTileInProgress then return end
 
 	local wins = {}
 	if type(winSrc) == "string" then
@@ -115,7 +114,7 @@ function M.autoTile(winSrc)
 
 	M.bringAllWinsToFront()
 
-	g.autoTileInProgress = true
+	M.autoTileInProgress = true
 	u.runWithDelays(0.1, function() AutoTileInProgress = false end)
 	local pos = {}
 
@@ -278,4 +277,4 @@ u.hotkey({ "ctrl" }, "space", controlSpaceAction) -- fn+space also bound to ctrl
 u.urischeme("move-all-wins-to-projector", moveAllWinsToProjectorScreen)
 
 --------------------------------------------------------------------------------
-return M, g
+return M

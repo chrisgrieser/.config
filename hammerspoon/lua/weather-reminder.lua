@@ -1,9 +1,9 @@
 -- INFO Checks when the outside temperature passes the inside temperature or vice versa.
 --------------------------------------------------------------------------------
+local M = {} -- persist from garbage collector
+
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
-
-local g = {} -- persist from garbage collector
 --------------------------------------------------------------------------------
 
 local config = {
@@ -30,7 +30,7 @@ local callUrl = ("https://api.brightsky.dev/current_weather?lat=%s&lon=%s"):form
 
 local function getOutsideTemp()
 	if not (u.betweenTime(18, 1) or u.betweenTime(8, 13)) then return end
-	g.task_getWeather = hs.http.asyncGet(callUrl, nil, function(status, body, _)
+	M.task_getWeather = hs.http.asyncGet(callUrl, nil, function(status, body, _)
 		if status ~= 200 then
 			print("⚠️🌡️ Could not get weather data: " .. status)
 			return
@@ -41,15 +41,15 @@ local function getOutsideTemp()
 		local outTemp = weatherData.weather.temperature
 
 		-- first run has no value yet
-		if not g.prevOutTemp then
-			g.prevOutTemp = outTemp
+		if not M.prevOutTemp then
+			M.prevOutTemp = outTemp
 			return
 		end
 		local outsideNowCoolerThanInside = outTemp < config.insideTemp
-			and not (g.prevOutTemp < config.insideTemp)
+			and not (M.prevOutTemp < config.insideTemp)
 		local outsideNowHotterThanInside = outTemp > config.insideTemp
-			and not (g.PrevOutTemp > config.insideTemp)
-		g.prevOutTemp = outTemp
+			and not (M.PrevOutTemp > config.insideTemp)
+		M.prevOutTemp = outTemp
 
 		if outsideNowCoolerThanInside then
 			hs.alert.show("🌡️🔵 Outside now cooler than inside.")
@@ -66,7 +66,7 @@ end
 
 if u.isSystemStart() then getOutsideTemp() end
 
-g.timer_weatherReminder = hs.timer.doEvery(60 * config.checkIntervalMins, getOutsideTemp):start()
+M.timer_weatherReminder = hs.timer.doEvery(60 * config.checkIntervalMins, getOutsideTemp):start()
 
 --------------------------------------------------------------------------------
-return nil, g
+return M

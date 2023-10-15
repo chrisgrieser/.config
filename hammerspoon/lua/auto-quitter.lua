@@ -1,8 +1,12 @@
+local M = {} -- persist from garbage collector
+
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local aw = hs.application.watcher
 
-local g = {} -- persist from garbage collector
+---@return integer
+local function now() return os.time() end
+
 --------------------------------------------------------------------------------
 
 -- INFO This is essentially an implementation of the inspired by the macOS app
@@ -11,18 +15,18 @@ local g = {} -- persist from garbage collector
 ---CONFIG
 ---times after which apps should quit, in minutes
 ---(Apps not in this list will be ignored and never quit automatically).
-g.thresholds = {
+M.thresholds = {
 	Slack = 20,
 	[env.mailApp] = 5,
 	Highlights = 90,
 	Discord = 180, -- when Steam is not on
 	BusyCal = 2,
 	neovide = 120, -- needs lowercase
-	Hammerspoon = 3, -- affects the console, not hammerspoon itself
+	Hammerspoon = 2, -- affects the console, not hammerspoon itself
 	["Alfred Preferences"] = 20,
 	["System Settings"] = 2,
 	Finder = 20, -- only closes windows when not on projector
-	Obsidian = 100,
+	Obsidian = nil, -- do not autoquit due to omnisearch indexing
 }
 
 --------------------------------------------------------------------------------
@@ -49,46 +53,43 @@ local function quit(appName)
 		u.app(appName):kill()
 	end
 	print("📴 AutoQuitting: " .. appName .. " " .. suffix)
-	g.idleApps[appName] = nil
+	M.idleApps[appName] = nil
 end
 
 --------------------------------------------------------------------------------
 
-g.idleApps = {} ---table containing all apps with their last activation time
-local now = os.time
+M.idleApps = {} ---table containing all apps with their last activation time
 
 --Initialize on load: fills `g.idleApps` with all running apps and the current time
-for app, _ in pairs(g.thresholds) do
-	if u.appRunning(app) then g.idleApps[app] = now() end
+for app, _ in pairs(M.thresholds) do
+	if u.appRunning(app) then M.idleApps[app] = now() end
 end
 
 ---log times when an app has been deactivated
-DeactivationWatcher = aw
-	.new(function(app, event)
-		if not app or app == "" then return end -- empty string as safeguard for special apps
+M.aw_appDeactivation = aw.new(function(app, event)
+	if not app or app == "" then return end -- empty string as safeguard for special apps
 
-		if event == aw.deactivated then
-			g.idleApps[app] = now()
-		elseif event == aw.activated or event == aw.terminated then
-			g.idleApps[app] = nil -- removes active or closed app from table
-		end
-	end)
-	:start()
+	if event == aw.deactivated then
+		M.idleApps[app] = now()
+	elseif event == aw.activated or event == aw.terminated then
+		M.idleApps[app] = nil -- removes active or closed app from table
+	end
+end):start()
 
 --------------------------------------------------------------------------------
 
 ---check apps regularly and quit if idle for longer than their thresholds
 local checkIntervallSecs = 20
-AutoQuitterTimer = hs.timer
+M.timer_autoQuitter = hs.timer
 	.doEvery(checkIntervallSecs, function()
-		for app, lastActivation in pairs(g.idleApps) do
+		for app, lastActivation in pairs(M.idleApps) do
 			-- can't do this with guard clause, since lua has no `continue`
-			local appHasThreshhold = g.thresholds[app] ~= nil
+			local appHasThreshhold = M.thresholds[app] ~= nil
 			local appIsRunning = u.appRunning(app)
 
 			if appHasThreshhold and appIsRunning then
 				local idleTimeSecs = now() - lastActivation
-				local thresholdSecs = g.thresholds[app] * 60
+				local thresholdSecs = M.thresholds[app] * 60
 				if idleTimeSecs > thresholdSecs then quit(app) end
 			end
 		end
@@ -96,4 +97,4 @@ AutoQuitterTimer = hs.timer
 	:start()
 
 --------------------------------------------------------------------------------
-return nil, g
+return M

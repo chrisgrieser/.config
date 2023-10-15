@@ -1,9 +1,8 @@
+local M = {} -- persist from garbage collector
+
 local u = require("lua.utils")
 local cons = hs.console
 local wf = hs.window.filter
-
-local g = {} -- persist from garbage collector
-local M = {}
 --------------------------------------------------------------------------------
 
 -- CONFIG
@@ -72,7 +71,7 @@ end
 
 -- clean up console as soon as it is opened
 -- hide console as soon as unfocused
-g.wf_hsConsole = wf.new("Hammerspoon")
+M.wf_hsConsole = wf.new("Hammerspoon")
 	:subscribe(wf.windowUnfocused, function(win)
 		if win:title() == "Hammerspoon Console" then u.app("Hammerspoon"):hide() end
 	end)
@@ -95,7 +94,7 @@ end)
 
 --------------------------------------------------------------------------------
 -- Separator the logs every day at midnight
-g.timer_dailyConsoleSeperator = hs.timer
+M.timer_dailyConsoleSeperator = hs.timer
 	.doAt("00:00", "01d", function()
 		local date = os.date("%a, %d. %b")
 		print(
@@ -127,4 +126,4 @@ end
 if u.isSystemStart() then M.setConsoleColors(u.isDarkMode() and "dark" or "light") end
 
 --------------------------------------------------------------------------------
-return M, g
+return M

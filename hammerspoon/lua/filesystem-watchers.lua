@@ -1,10 +1,10 @@
+local M = {} -- persist from garbage collector
+
 local pathw = hs.pathwatcher.new
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local home = os.getenv("HOME")
 local appSupport = home .. "/Library/Application Support/"
-
-local g = {} -- persist from garbage collector
 --------------------------------------------------------------------------------
 -- BOOKMARKS SYNCED TO CHROME BOOKMARKS
 -- (needed for Alfred)
@@ -14,7 +14,7 @@ local loc = {
 	sourceBookmarks = appSupport .. env.browserDefaultsPath .. "/Default/Bookmarks",
 	chromeProfile = appSupport .. "Google/Chrome/",
 }
-g.pathw_bookmarks = pathw(loc.sourceBookmarks, function()
+M.pathw_bookmarks = pathw(loc.sourceBookmarks, function()
 	-- Bookmarks
 	local bookmarks = hs.json.read(loc.sourceBookmarks)
 	if not bookmarks then return end
@@ -37,7 +37,7 @@ end):start()
 -- TO FILE HUB
 -- Downloads Folder
 local systemDownloadFolder = home .. "/Downloads/"
-g.pathw_systemDlFolder = pathw(systemDownloadFolder, function()
+M.pathw_systemDlFolder = pathw(systemDownloadFolder, function()
 	os.execute("mv '" .. systemDownloadFolder .. "'/* '" .. env.fileHub .. "'")
 	print("➡️ Download moved to File Hub.")
 end):start()
@@ -55,7 +55,7 @@ local function fileIsDownloaded(filepath)
 end
 
 local browserSettings = home .. "/.config/_browser-extension-configs/"
-g.pathw_fileHub = pathw(env.fileHub, function(paths, _)
+M.pathw_fileHub = pathw(env.fileHub, function(paths, _)
 	if not u.screenIsUnlocked() then return end
 	for _, filep in pairs(paths) do
 		local fileName = filep:gsub(".*/", "")
@@ -103,7 +103,7 @@ end):start()
 --------------------------------------------------------------------------------
 -- AUTO-INSTALL OBSIDIAN ALPHA
 
-g.pathw_ObsiAlph = pathw(env.fileHub, function(files)
+M.pathw_ObsiAlph = pathw(env.fileHub, function(files)
 	for _, file in pairs(files) do
 		-- needs delay and `.crdownload` check, since the renaming is sometimes not picked up by hammerspoon
 		if not (file:match("%.crdownload$") or file:match("%.asar%.gz$")) then return end
@@ -127,4 +127,4 @@ g.pathw_ObsiAlph = pathw(env.fileHub, function(files)
 end):start()
 
 --------------------------------------------------------------------------------
-return nil, g
+return M
