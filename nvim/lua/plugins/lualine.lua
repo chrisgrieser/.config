@@ -123,7 +123,7 @@ local lualineConfig = {
 
 return {
 	"nvim-lualine/lualine.nvim",
-	event = "VimEnter",
+	lazy = false,
 	dependencies = { "nvim-tree/nvim-web-devicons", "folke/noice.nvim" },
 	opts = lualineConfig,
 }

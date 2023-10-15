@@ -152,7 +152,7 @@ function diff {
 #───────────────────────────────────────────────────────────────────────────────
 # GIT LOG
 
-# brief git log (only last 15)
+# brief git log
 function gl {
 	local cutoff=15 # CONFIG
 	gitlog -n "$cutoff"
@@ -167,13 +167,14 @@ function gli {
 	local hash key_pressed selected
 	local format="%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s%C(magenta)"
 	selected=$(
-		gitlog --color=always | sed 's/^[*| ]*//' |
+		gitlog --color=always | 
+			sed 's/^[*| ]*//' | # remove the graph at the beginning
 			fzf -0 --query="$1" \
 				--ansi --no-sort --no-info \
 				--header-first --header="↵ : Checkout   ^H: Copy [H]ash" \
 				--expect="ctrl-h" \
 				--preview-window=45% \
-				--preview="git show {2} --name-only --color=always --format='$format'"
+				--preview="git show {1} --name-only --color=always --format='$format'"
 	)
 	[[ -z "$selected" ]] && return 0
 	key_pressed=$(echo "$selected" | head -n1)
