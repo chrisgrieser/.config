@@ -45,16 +45,16 @@ end
 ---append string below current line
 ---@param text string
 local function append(text)
-	local movementCmd = "j=="
+	local ln = vim.api.nvim_win_get_cursor(0)[1]
+
 	if vim.bo.ft == "python" then
 		local indent = vim.api.nvim_get_current_line():match("^%s*")
 		text = indent .. text
-		movementCmd = "j"
+		vim.api.nvim_buf_set_lines(0, ln, ln, false, { text })
+	else
+		vim.api.nvim_buf_set_lines(0, ln, ln, false, { text })
+		vim.cmd.normal { "j==", bang = true }
 	end
-	local ln = vim.api.nvim_win_get_cursor(0)[1]
-	vim.api.nvim_buf_set_lines(0, ln, ln, false, { text })
-
-	if vim.bo.ft ~= "python" then vim.cmd.normal { movementCmd, bang = true } end
 end
 
 --------------------------------------------------------------------------------
@@ -182,7 +182,6 @@ function M.beepLog()
 	local logStatement = templateStr:format(marker, randomEmoji)
 	append(logStatement)
 end
-
 
 --------------------------------------------------------------------------------
 
