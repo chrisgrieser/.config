@@ -28,6 +28,17 @@ function toTitleCase(str) {
 	return sentenceFirstCharUpper;
 }
 
+/** JSON signature of annotations expected by this script
+ * @typedef {Object} Annotation
+ * @property {"Highlight"|"Underline"|"Free Comment"|"Image"|"Heading"|"Question Callout"|"remove"} type – of the annotation
+ * @property {number} page - page number where the annotation is located
+ * @property {string=} pageStr - page number as string, so it can represent page ranges
+ * @property {string=} comment - user-written comment for the annotation
+ * @property {string=} quote - text marked in the pdf by Highlight or Underline
+ * @property {string=} imagePath - path of image file
+ * @property {string=} image - filename of image file
+ */
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** to make pdfannots and pdfannots2json compatible with the format required by this script
@@ -56,40 +67,19 @@ function adapterForInput(nonStandardizedAnnos, usePdfAnnots) {
 			// in case the page numbers have names like "image 1" instead of integers
 			if (typeof a.page === "string") a.page = parseInt(a.page.match(/\d+/)[0]);
 
-			switch (a.type) {
-				case "text":
-					a.type = "Free Comment";
-					break;
-				case "strike":
-					a.type = "Strikethrough";
-					break;
-				case "highlight":
-					a.type = "Highlight";
-					break;
-				case "underline":
-					a.type = "Underline";
-					break;
-				case "image":
-					a.type = "Image";
-					break;
-				default:
-			}
+			const typeMap = {
+				text: "Free Comment",
+				strike: "Strikethrough",
+				highlight: "Highlight",
+				underline: "Underline",
+				image: "Image",
+			};
+			a.type = typeMap[a.type] || a.type;
 			return a;
 		});
 	}
 	return out;
 }
-
-/** JSON signature of annotations expected by this script
- * @typedef {Object} Annotation
- * @property {"Highlight"|"Underline"|"Free Comment"|"Image"|"Heading"|"Question Callout"|"remove"} type – of the annotation
- * @property {number} page - page number where the annotation is located
- * @property {string=} pageStr - page number as string, so it can represent page ranges
- * @property {string=} comment - user-written comment for the annotation
- * @property {string=} quote - text marked in the pdf by Highlight or Underline
- * @property {string=} imagePath - path of image file
- * @property {string=} image - filename of image file
- */
 
 /** @param {Annotation[]} annotations */
 function cleanQuoteKey(annotations) {
@@ -130,12 +120,12 @@ function insertPageNumber(annotations, pageNo) {
  */
 function underlinesToSidenotes(annotations, citekey) {
 	// sidenotes is installed?
-	let sidenotesIsInstalled = false;
+	let totInstalled;
 	try {
-		Application("SideNotes");
-		sidenotesIsInstalled = true;
+		Application("Tot");
+		totInstalled = true;
 	} catch (_error) {
-		sidenotesIsInstalled = false;
+		totInstalled = false;
 	}
 
 	// Annotations with leading "_"
@@ -146,13 +136,14 @@ function underlinesToSidenotes(annotations, citekey) {
 		underscoreAnnos.push(anno);
 	}
 
-	if (sidenotesIsInstalled) {
+	if (totInstalled) {
 		const underlineAnnos = annotations.filter((a) => a.type === "Underline");
 
 		const annosToSplitOff = [...underlineAnnos, ...underscoreAnnos];
 		if (annosToSplitOff.length > 0) {
+			const dot = 2;
 			const text = jsonToMd(annosToSplitOff, citekey);
-			app.openLocation(`tot://2/append?text=${encodeURIComponent(text)}`);
+			app.openLocation(`tot://${dot}/append?text=${encodeURIComponent(text)}`);
 		}
 	}
 	return annotations.filter((/** @type {{ type: string; }} */ anno) => anno.type !== "Underline");

@@ -22,8 +22,8 @@ keymap(
 keymap({ "o", "x" }, "H", "^") -- `zv` opens folds when navigating a horizontal lines
 keymap("n", "H", "0^") -- `0` ensures fully scrolling to the left on long unwrapped lines
 keymap({ "n", "x" }, "L", "$zv")
-keymap({ "n", "x" }, "J", "6gj")
-keymap({ "n", "x" }, "K", "6gk")
+keymap({ "n", "x" }, "J", "6j")
+keymap({ "n", "x" }, "K", "6k")
 
 -- dj = delete 2 lines, dJ = delete 3 lines
 keymap("o", "J", "2j")
@@ -86,7 +86,12 @@ keymap("n", "dQ", function() cmd.cexpr("[]") end, { desc = " Delete Quickfix 
 -- COMMENTS
 -- stylua: ignore
 keymap("n", "qw", function () require("funcs.quality-of-life").commentHr() end, { desc = " Horizontal Divider" })
-keymap("n", "wq", '"zyy"zpkqqj', { desc = " Duplicate Line as Comment", remap = true })
+keymap("n", "wq", function()
+	local ln = vim.api.nvim_win_get_cursor(0)[1]
+	local curLine = api.nvim_get_current_line()
+	local commentedLine = vim.bo.commentstring:format(curLine)
+	vim.api.nvim_buf_set_lines(0, ln - 1, ln, false, { commentedLine, curLine })
+end, { desc = " Duplicate Line as Comment" })
 
 -- WHITESPACE CONTROL
 keymap("n", "=", "mzO<Esc>`z", { desc = "  blank above" })
@@ -182,7 +187,8 @@ keymap(
 )
 
 -- needs remapping since I use `gf` for LSP-references
-keymap("n", "ga", "gf", { desc = " Open File under cursor" })
+keymap("n", "ga", "gf", { desc = " Goto File under cursor" })
+
 --------------------------------------------------------------------------------
 -- CLIPBOARD
 
