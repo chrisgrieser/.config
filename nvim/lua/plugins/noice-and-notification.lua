@@ -84,9 +84,9 @@ return {
 			cmdline = {
 				view = "cmdline", -- cmdline|cmdline_popup
 				format = {
-					cmdline = { view = "cmdline_popup" },
 					search_down = { icon = "  ", view = "cmdline" }, -- FIX needed to be set explicitly
-					lua = { pattern = { "^:%s*lua%s+" }, view = "cmdline_popup" }, -- show the `=`
+					cmdline = { view = "cmdline_popup" },
+					lua = { view = "cmdline_popup" }, -- show the `=`
 					help = { view = "cmdline_popup" },
 					numb = {
 						pattern = "^:%d+$",

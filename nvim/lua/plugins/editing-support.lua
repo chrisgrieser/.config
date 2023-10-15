@@ -199,8 +199,13 @@ return {
 						both = { fallback = function() vim.cmd("normal! gww") end },
 					},
 				},
+				html = {
+					fragment = {
+						both = { fallback = function() vim.cmd("normal! gww") end },
+					},
+				},
 				markdown_inline = {
-					source = {
+					inline = {
 						both = { fallback = function() vim.cmd("normal! gww") end },
 					},
 				},
