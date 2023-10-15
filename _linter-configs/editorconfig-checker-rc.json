@@ -1,0 +1,7 @@
+{
+	"Exclude": ["\\.md${}"],
+	"Disable": {
+		"TrimTrailingWhitespace": true,
+		"MaxLineLength": true
+	}
+}

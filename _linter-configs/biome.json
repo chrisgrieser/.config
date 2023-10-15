@@ -10,7 +10,6 @@
 		"formatWithErrors": true
 	},
 	"organizeImports": { "enabled": true },
-	"vcs": { "enabled": true, "clientKind": "git" },
 	"json": {
 		"parser": { "allowComments": true }
 	},
