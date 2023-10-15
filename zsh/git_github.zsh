@@ -237,9 +237,9 @@ function ac() {
 # same as ac, just followed by git pull & git push
 function acp {
 	ac "$@" || return 1
-	git pull
-	echo
-	git push
+
+	printf "\033[1;34mPull: \033[0m" && git pull
+	printf "\033[1;34mPush: \033[0m" && git push
 }
 
 #───────────────────────────────────────────────────────────────────────────────
