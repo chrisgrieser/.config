@@ -23,10 +23,6 @@ local config = {
 			scriptPath = env.passwordStore .. "/pass-sync.sh",
 		},
 	},
-	postSyncHook = {
-		func = function() hs.execute(u.exportPath .. "sketchybar --trigger repo-files-update") end,
-		delaySecs = 2,
-	},
 }
 
 --------------------------------------------------------------------------------
@@ -46,7 +42,9 @@ local function repoSync(repo)
 			if exitCode == 0 then
 				table.insert(M.syncedRepos, repo)
 			else
-				notify(("⚠️️%s %s Sync: %s"):format(repo.icon, repo.name, stdErr))
+				local msg = ("⚠️️%s %s Sync: %s"):format(repo.icon, repo.name, stdErr)
+				print(msg)
+				notify(msg)
 			end
 		end)
 		:start()
@@ -77,25 +75,14 @@ local function syncAllGitRepos(notifyOnSuccess)
 
 	M.timer_AllSyncs = hs.timer
 		.waitUntil(function() return not syncInProgress() end, function()
-			local failedRepos = hs.fnutils.filter(
-				config.repos,
-				function(r) return not (hs.fnutils.contains(M.syncedRepos, r)) end
-			)
-
 			if #M.syncedRepos > 0 then
 				local syncedIcons = hs.fnutils.map(M.syncedRepos, function(r) return r.icon end) or {}
-				print("🔁 Sync done: " .. table.concat(syncedIcons))
-				if notifyOnSuccess then notify("🔁 Sync done") end
-			end
-			if #failedRepos > 0 then
-				local failedIcons = hs.fnutils.map(failedRepos, function(r) return r.icon end) or {}
-				local failMsg = "🔁⚠️ Sync failed: " .. table.concat(failedIcons)
-				print(failMsg)
-				notify(failMsg)
+				local msg = "🔁 Sync done: " .. table.concat(syncedIcons)
+				print(msg)
+				if notifyOnSuccess then notify(msg) end
 			end
 
 			M.syncedRepos = {} -- reset
-			u.runWithDelays(config.postSyncHook.delaySecs, config.postSyncHook.func)
 		end)
 		:start()
 end
@@ -134,7 +121,9 @@ end):start()
 -- 5. Every morning at 8:00, when at home
 -- (safety redundancy to ensure sync when leaving for the office)
 if env.isAtHome then
-	M.timer_morningSync = hs.timer.doAt("08:00", "01d", function() syncAllGitRepos(false) end):start()
+	M.timer_morningSync = hs.timer
+		.doAt("08:00", "01d", function() syncAllGitRepos(false) end)
+		:start()
 end
 
 --------------------------------------------------------------------------------

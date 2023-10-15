@@ -68,7 +68,7 @@ function inspect() {
 
 	if [[ $(echo "$eza_output" | wc -l) -gt $max_files_lines ]]; then
 		echo -n "$(echo "$eza_output" | head -n"$max_files_lines")"
-		printf "\033[1;34m  (…)\033[0m" # blue = eza's default folder color
+		printf "\033[1;34m (…)\033[0m" # blue = eza's default folder color
 	elif [[ -n "$eza_output" ]]; then
 		echo "$eza_output"
 	fi
