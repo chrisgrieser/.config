@@ -48,12 +48,12 @@ keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = " delete matching" })
 
 ---@param useSpaces boolean
 local function retabber(useSpaces)
-	local width = useSpaces and 2 or 3
 	local char = useSpaces and "󱁐" or "󰌒"
 	bo.expandtab = useSpaces
-	bo.tabstop = width
+	bo.tabstop = 2
 	cmd.retab { bang = true }
-	u.notify("Indent", ("Now using %s (%s)"):format(char, width))
+	if not useSpaces then bo.tabstop = 3 end
+	u.notify("Indent", ("Now using %s"):format(char))
 end
 keymap("n", "<leader>f<Tab>", function() retabber(false) end, { desc = "󰌒 Use Tabs" })
 keymap("n", "<leader>f<Space>", function() retabber(true) end, { desc = "󱁐 Use Spaces" })
