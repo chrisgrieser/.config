@@ -68,10 +68,16 @@ return {
 		},
 	},
 	{ -- rainbow brackets
-		"https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
+		"hiphish/rainbow-delimiters.nvim",
 		event = "BufReadPost", -- later does not load on first buffer
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function() u.colorschemeMod("RainbowDelimiterRed", { fg = "#7e8a95" }) end,
+		main = "rainbow-delimiters.setup",
+		opts = {
+			query = {
+				lua = "rainbow-blocks",
+			},
+		},
 	},
 	{ -- emphasized undo/redos
 		"tzachar/highlight-undo.nvim",
