@@ -100,16 +100,12 @@ local function linterConfigs()
 		{ "--config-file=" .. linterConfig .. "/yamllint.yaml", "--format=parsable", "-" }
 	lint.linters.vale.args =
 		{ "--output=JSON", "--ext=.md", "--no-exit", "--config=" .. linterConfig .. "/vale/vale.ini" }
+	lint.linters["editorconfig-checker"].args =
+		{ "--no-color", "--config=" .. linterConfig .. "/editorconfig-checker-rc.json" }
 	lint.linters.markdownlint.args = {
 		"--disable=no-trailing-spaces", -- not disabled in config, so it's enabled for formatting
 		"--disable=no-multiple-blanks",
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
-	}
-	lint.linters["editorconfig-checker"].args = {
-		"-no-color",
-		"-disable-trim-trailing-whitespace", -- will be formatted anyway
-		"-disable-max-line-length", -- only rule of thumb
-		"-exlude=\\.md$" -- too many issues with code blocks
 	}
 end
 
