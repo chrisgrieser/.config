@@ -257,14 +257,6 @@ rules:
           - { key_code: c, modifiers: [shift, command] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^md\.obsidian$] }
-      # do not quit Obsidian, Omnisearch-results in Google require it to be open
-      - type: basic
-        from: { key_code: q, modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: w, modifiers: [command] }
-          - { key_code: h, modifiers: [command] }
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^md\.obsidian$] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Slack"
     # https://slack.com/help/articles/201374536-Slack-keyboard-shortcuts
