@@ -46,6 +46,11 @@ local lualineConfig = {
 				style = "%H:%M",
 				cond = function() return vim.o.columns > 110 and vim.o.lines > 25 end,
 				section_separators = topSeparators,
+				fmt = function (time)
+					-- make the `:` blink
+					if os.time() % 2 == 0 then time = time:gsub(":", " ") end
+					return time
+				end,
 			},
 			{
 				"tabs",
@@ -91,7 +96,7 @@ local lualineConfig = {
 			{
 				"fileformat",
 				cond = function() return bo.fileformat ~= "unix" end,
-				fmt = function(str) return str ~= "" and str .. " 󰌑" or "" end,
+				fmt = function(str) return str .. " 󰌑" end,
 			},
 			{ irregularWhitespace },
 		},

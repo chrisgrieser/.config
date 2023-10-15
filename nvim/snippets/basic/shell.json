@@ -247,7 +247,7 @@
 	},
 	"function": {
 		"prefix": "function",
-		"body": "function ${1:name}() {\n\t${0}\n}"
+		"body": "function ${1:name} {\n\t${0}\n}"
 	},
 	"switch case": {
 		"prefix": "switch case",
