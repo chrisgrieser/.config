@@ -107,13 +107,13 @@ format = '[󰘬 ](fg:purple bg:black bold) '
 
 # files
 [git_status]
-stashed = '[󰜦  $count ](fg:yellow bg:black)'
+stashed = '[󰜦 $count ](fg:yellow bg:black)'
 untracked = '[+$count ](fg:green bg:black)'
 deleted = '[-$count ](fg:red bg:black)'
 modified = '[~$count ](fg:208 bg:black)'
 renamed = '[󰑕  $count ](fg:blue bg:black)'
 staged = '[  $count ](fg:green bg:black)'
-conflicted = '[  $count ](fg:red bg:black)'
+conflicted = '[ $count ](fg:red bg:black)'
 diverged = '[󰃻 $count ](fg:red bg:black)'
 ahead = '[󰶣 $count ](fg:cyan bg:black)'
 behind = '[󰶡 $count ](fg:yellow bg:black)'
