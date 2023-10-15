@@ -41,7 +41,7 @@ for _, char in pairs(undopointChars) do
 	vim.keymap.set("i", char, function()
 		if vim.bo.buftype ~= "" then return char end
 		return char .. "<C-g>u"
-	end, { desc = "extra undopoint for " .. char, remap = true, expr = true })
+	end, { desc = "󰕌 Extra undopoint for " .. char, remap = true, expr = true })
 end
 
 --------------------------------------------------------------------------------
@@ -54,7 +54,6 @@ opt.titlestring = '%{expand("%:p")}'
 -- Motions & Editing
 opt.startofline = true -- motions like "G" also move to the first char
 opt.virtualedit = "block" -- visual-block mode can select beyond end of line
-opt.mouse = "" -- disable mouse completely
 opt.jumpoptions = "stack" -- https://www.reddit.com/r/neovim/comments/16nead7/comment/k1e1nj5/?context=3
 
 -- Search
@@ -81,18 +80,15 @@ opt.splitbelow = true -- split down instead of up
 opt.cursorline = true
 opt.signcolumn = "yes:1"
 
--- Wrapping
+-- Wrapping & Line Length
 opt.textwidth = 80 -- only fallback value, mostly overridden by .editorconfig
 opt.colorcolumn = { "+1" }
 opt.wrap = false
-opt.breakindent = false
-opt.linebreak = true -- do not break up full words on wrap
 
 -- Color Column: textwidth + guiding line for `gm`
 autocmd({ "VimEnter", "VimResized", "WinResized" }, {
 	callback = function()
 		if vim.bo.buftype ~= "" then return end
-		if opt_local.wrap:get() then return end
 		local gmColumn = math.floor(vim.api.nvim_win_get_width(0) / 2)
 		local global = opt.colorcolumn:get()[1]
 		opt.colorcolumn = { global, gmColumn }
@@ -126,14 +122,14 @@ opt.scrolloff = 13
 opt.sidescrolloff = 13
 
 -- whitespace & indentation
-opt.tabstop = 3
-opt.softtabstop = 3
-opt.shiftwidth = 3
+opt.expandtab = false -- fallback, mostly set by .editorconfig
+opt.tabstop = 3 -- fallback, mostly set by .editorconfig
 opt.shiftround = true
 opt.smartindent = true
 
 -- invisible chars
 opt.list = true
+opt.conceallevel = 1
 opt.fillchars:append {
 	eob = " ",
 	fold = " ",
@@ -148,8 +144,6 @@ opt.listchars:append {
 	trail = " ",
 	conceal = "…",
 }
-
-vim.opt.conceallevel = 1
 
 -- no list chars in special buffers
 autocmd({ "BufNew", "BufReadPost" }, {
@@ -172,13 +166,12 @@ vim.on_key(function(char)
 	local key = vim.fn.keytrans(char)
 	local isCmdlineSearch = vim.fn.getcmdtype():find("[/?]") ~= nil
 	local searchMvKeys = { "n", "N", "*", "#" } -- works for RHS, therefore no need to consider remaps
+	local isNormalMode = vim.api.nvim_get_mode().mode == "n"
 
-	local searchStarted = (key == "/" or key == "?") and vim.fn.mode() == "n"
+	local searchStarted = (key == "/" or key == "?") and isNormalMode
 	local searchConfirmed = (key == "<CR>" and isCmdlineSearch)
 	local searchCancelled = (key == "<Esc>" and isCmdlineSearch)
-	if not (searchStarted or searchConfirmed or searchCancelled or vim.fn.mode() == "n") then
-		return
-	end
+	if not (searchStarted or searchConfirmed or searchCancelled or isNormalMode) then return end
 	local searchMovement = vim.tbl_contains(searchMvKeys, key)
 	local hlSearchOn = vim.opt.hlsearch:get()
 
@@ -197,6 +190,7 @@ end, vim.api.nvim_create_namespace("auto_nohl"))
 
 --------------------------------------------------------------------------------
 
+-- SKELETIONS (TEMPLATES)
 -- filetype -> extension
 local skeletons = {
 	python = "py",

@@ -91,8 +91,6 @@ end, { desc = "󰜊 Undo since last open" })
 -- LSP
 
 
----@see https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_codeAction
----@see vim.lsp.protocol.constants.CodeActionTriggerKind
 ---@param action object CodeAction https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#codeAction
 ---@return boolean
 local function codeActionFilter(action)
