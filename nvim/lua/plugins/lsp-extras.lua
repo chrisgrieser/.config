@@ -111,7 +111,7 @@ return {
 			},
 		},
 		opts = {
-			backends = { "lsp", "treesitter", "markdown", "man" },
+			backends = { "lsp", "treesitter", "markdown" },
 			layout = {
 				default_direction = "left",
 				min_width = 20,
@@ -120,14 +120,10 @@ return {
 			show_guides = true,
 			highlight_on_hover = true,
 			close_on_select = true,
-			autojump = false, -- BUG https://github.com/stevearc/aerial.nvim/issues/309
+			autojump = true,
 			keymaps = {
-				-- HACK use `down_and_scroll` instead of `down` to emulate autojump
-				["j"] = "actions.down_and_scroll",
-				["k"] = "actions.up_and_scroll",
-
-				["<Tab>"] = "actions.down_and_scroll",
-				["<S-Tab>"] = "actions.up_and_scroll",
+				["<Tab>"] = "actions.down",
+				["<S-Tab>"] = "actions.up",
 				["<Esc>"] = "actions.close",
 			},
 		},
