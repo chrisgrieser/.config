@@ -1,7 +1,7 @@
 ## Config structure
-<a href="https://dotfyle.com/chrisgrieser/config-nvim"><img src="https://dotfyle.com/chrisgrieser/config-nvim/badges/plugins?style=flat" /></a>
-<a href="https://dotfyle.com/chrisgrieser/config-nvim"><img src="https://dotfyle.com/chrisgrieser/config-nvim/badges/leaderkey?style=flat" /></a>
-<a href="https://dotfyle.com/chrisgrieser/config-nvim"><img src="https://dotfyle.com/chrisgrieser/config-nvim/badges/plugin-manager?style=flat" /></a>
+<a href="https://dotfyle.com/chrisgrieser/config-nvim"><img src="https://dotfyle.com/chrisgrieser/config-nvim/badges/plugins?style=flat"/></a>
+<a href="https://dotfyle.com/chrisgrieser/config-nvim"><img src="https://dotfyle.com/chrisgrieser/config-nvim/badges/leaderkey?style=flat"/></a>
+<a href="https://dotfyle.com/chrisgrieser/config-nvim"><img src="https://dotfyle.com/chrisgrieser/config-nvim/badges/plugin-manager?style=flat"/></a>
 
 <!-- editorconfig-checker-disable -->
 ```bash
@@ -24,9 +24,7 @@ The tree was generated using <https://tree.nathanfriend.io/>
 
 ## All Installed Plugins
 - [Aasim-A/scrollEOF.nvim](https://github.com/Aasim-A/scrollEOF.nvim)
-- [EdenEast/nightfox.nvim](https://github.com/EdenEast/nightfox.nvim)
 - [Exafunction/codeium.vim](https://github.com/Exafunction/codeium.vim)
-- [HiPhish/rainbow-delimiters.nvim](https://github.com/HiPhish/rainbow-delimiters.nvim)
 - [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip)
 - [MunifTanjim/nui.nvim](https://github.com/MunifTanjim/nui.nvim)
 - [RRethy/nvim-treesitter-endwise](https://github.com/RRethy/nvim-treesitter-endwise)
@@ -39,7 +37,7 @@ The tree was generated using <https://tree.nathanfriend.io/>
 - [WhoIsSethDaniel/mason-tool-installer.nvim](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim)
 - [ahmedkhalf/project.nvim](https://github.com/ahmedkhalf/project.nvim)
 - [andymass/vim-matchup](https://github.com/andymass/vim-matchup)
-- [chrisgrieser/cmp-nerdfont](https://github.com/chrisgrieser/cmp-nerdfont)
+- [chrisgrieser/numb.nvim](https://github.com/chrisgrieser/numb.nvim)
 - [chrisgrieser/nvim-dr-lsp](https://github.com/chrisgrieser/nvim-dr-lsp)
 - [chrisgrieser/nvim-early-retirement](https://github.com/chrisgrieser/nvim-early-retirement)
 - [chrisgrieser/nvim-genghis](https://github.com/chrisgrieser/nvim-genghis)
@@ -65,6 +63,7 @@ The tree was generated using <https://tree.nathanfriend.io/>
 - [ghillb/cybu.nvim](https://github.com/ghillb/cybu.nvim)
 - [hail2u/vim-css3-syntax](https://github.com/hail2u/vim-css3-syntax)
 - [haringsrob/nvim_context_vt](https://github.com/haringsrob/nvim_context_vt)
+- [hiphish/rainbow-delimiters.nvim](https://github.com/hiphish/rainbow-delimiters.nvim)
 - [hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer)
 - [hrsh7th/cmp-cmdline](https://github.com/hrsh7th/cmp-cmdline)
 - [hrsh7th/cmp-emoji](https://github.com/hrsh7th/cmp-emoji)
@@ -89,39 +88,41 @@ The tree was generated using <https://tree.nathanfriend.io/>
 - [mfussenegger/nvim-dap-python](https://github.com/mfussenegger/nvim-dap-python)
 - [mfussenegger/nvim-dap](https://github.com/mfussenegger/nvim-dap)
 - [mfussenegger/nvim-lint](https://github.com/mfussenegger/nvim-lint)
-- [mg979/vim-visual-multi](https://github.com/mg979/vim-visual-multi)
 - [mityu/vim-applescript](https://github.com/mityu/vim-applescript)
 - [monaqa/dial.nvim](https://github.com/monaqa/dial.nvim)
-- [nacro90/numb.nvim](https://github.com/nacro90/numb.nvim)
 - [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
 - [nmac427/guess-indent.nvim](https://github.com/nmac427/guess-indent.nvim)
 - [numToStr/Comment.nvim](https://github.com/numToStr/Comment.nvim)
 - [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
 - [nvim-lualine/lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)
 - [nvim-telescope/telescope-fzf-native.nvim](https://github.com/nvim-telescope/telescope-fzf-native.nvim)
+- [nvim-telescope/telescope-symbols.nvim](https://github.com/nvim-telescope/telescope-symbols.nvim)
 - [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
 - [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
 - [nvim-treesitter/nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)
 - [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 - [okuuva/auto-save.nvim](https://github.com/okuuva/auto-save.nvim)
-- [ray-x/cmp-treesitter](https://github.com/ray-x/cmp-treesitter)
 - [ray-x/lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim)
 - [rcarriga/nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui)
 - [rcarriga/nvim-notify](https://github.com/rcarriga/nvim-notify)
 - [saadparwaiz1/cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)
+- [sainnhe/everforest](https://github.com/sainnhe/everforest)
 - [smartpde/telescope-recent-files](https://github.com/smartpde/telescope-recent-files)
 - [smjonas/inc-rename.nvim](https://github.com/smjonas/inc-rename.nvim)
 - [sourcegraph/sg.nvim](https://github.com/sourcegraph/sg.nvim)
+- [stevearc/aerial.nvim](https://github.com/stevearc/aerial.nvim)
 - [stevearc/conform.nvim](https://github.com/stevearc/conform.nvim)
 - [stevearc/dressing.nvim](https://github.com/stevearc/dressing.nvim)
 - [tamago324/cmp-zsh](https://github.com/tamago324/cmp-zsh)
 - [theHamsta/nvim-dap-virtual-text](https://github.com/theHamsta/nvim-dap-virtual-text)
-- [tzachar/cmp-fuzzy-buffer](https://github.com/tzachar/cmp-fuzzy-buffer)
-- [tzachar/fuzzy.nvim](https://github.com/tzachar/fuzzy.nvim)
 - [tzachar/highlight-undo.nvim](https://github.com/tzachar/highlight-undo.nvim)
 - [uga-rosa/ccc.nvim](https://github.com/uga-rosa/ccc.nvim)
 - [williamboman/mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)
 - [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim)
 - [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)
 
-This list was auto-generated [with this small shell script](https://nanotipsforvim.prose.sh/list-all-your-installed-plugins). Also, you can check out [the nvim plugins I authored myself](https://github.com/chrisgrieser?tab=repositories&q=nvim&type=source&language=&sort=stargazers).
+<!-- vale Google.FirstPerson = NO -->
+This list was auto-generated [with this small shell
+script](https://nanotipsforvim.prose.sh/list-all-your-installed-plugins). Also,
+you can check out [the nvim plugins I authored
+myself](https://github.com/chrisgrieser?tab=repositories&q=nvim&type=source&language=&sort=stargazers).

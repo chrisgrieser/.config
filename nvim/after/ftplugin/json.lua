@@ -1,11 +1,6 @@
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
--- hides quotes, making it more readable
-vim.opt_local.conceallevel = 2
-
---------------------------------------------------------------------------------
-
 -- convert to yaml
 vim.keymap.set("n", "<localleader>y", function()
 	vim.cmd("silent update")

@@ -1,5 +1,5 @@
 {
-	"Exclude": ["\\.md${}"],
+	"Exclude": ["\\.md$"],
 	"Disable": {
 		"TrimTrailingWhitespace": true,
 		"MaxLineLength": true

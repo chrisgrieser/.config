@@ -146,7 +146,10 @@ opt.listchars:append {
 	tab = "│ ", -- overridden by indent-blankline
 	lead = " ",
 	trail = " ",
+	conceal = "…",
 }
+
+vim.opt.conceallevel = 1
 
 -- no list chars in special buffers
 autocmd({ "BufNew", "BufReadPost" }, {

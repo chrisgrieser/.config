@@ -82,7 +82,7 @@ autocmd("BufReadPost", {
 })
 
 keymap("n", "<leader>uo", function()
-	local now = os.time() -- saved in epoch secs
+	local now = os.time() 
 	local secsPassed = now - vim.b.timeOpened
 	cmd.earlier(tostring(secsPassed) .. "s")
 end, { desc = "󰜊 Undo since last open" })
@@ -90,6 +90,9 @@ end, { desc = "󰜊 Undo since last open" })
 --------------------------------------------------------------------------------
 -- LSP
 
+
+---@see https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_codeAction
+---@see vim.lsp.protocol.constants.CodeActionTriggerKind
 ---@param action object CodeAction https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#codeAction
 ---@return boolean
 local function codeActionFilter(action)
@@ -170,6 +173,13 @@ keymap("n", "<leader>od", function() -- codespell-ignore
 	local change = vim.diagnostic.is_disabled(0) and "enable" or "disable"
 	vim.diagnostic[change](0)
 end, { desc = " Diagnostics" })
+
+keymap(
+	"n",
+	"<leader>oc",
+	function() vim.opt_local.conceallevel = vim.opt_local.conceallevel:get() == 0 and 1 or 0 end,
+	{ desc = "󰈉 Conceal" }
+)
 
 -- FIX
 keymap("n", "<leader>of", function() vim.opt.scrolloff = 13 end, { desc = "⇓ Fix Scrolloff" })

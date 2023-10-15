@@ -2,7 +2,6 @@ local bo = vim.bo
 local fn = vim.fn
 --------------------------------------------------------------------------------
 
--- displays irregular indentation, displays nothing when all is good
 local function irregularWhitespace()
 	if bo.buftype ~= "" then return "" end
 
