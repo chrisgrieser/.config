@@ -40,6 +40,13 @@ local formatters = {
 	["*"] = { "codespell" },
 }
 
+-- filetypes that should use lsp formatting
+local lspFormatting = {
+	"toml",
+}
+
+--------------------------------------------------------------------------------
+
 local extraInstalls = {
 	"debugpy", -- debugger
 	"ruff", -- since ruff_format and ruff_fix aren't the real names
@@ -141,7 +148,7 @@ end
 local function formatterConfig()
 	require("conform").setup { formatters_by_ft = formatters }
 
-	-- PENDING https://github.com/stevearc/conform.nvim/issues/111#issuecomment-1750658745
+	-- errors in injected fields should not make the other formatters fail https://github.com/stevearc/conform.nvim/issues/111#issuecomment-1750658745
 	require("conform.formatters.injected").options.ignore_errors = true
 
 	-- stylua: ignore
@@ -190,7 +197,11 @@ return {
 			{
 				"<D-s>",
 				function()
-					require("conform").format { lsp_fallback = "always" }
+					if vim.tbl_contains(lspFormatting, vim.bo.filetype) then
+						vim.lsp.buf.format()
+					else
+						require("conform").format { lsp_fallback = false }
+					end
 					vim.cmd.update()
 				end,
 				mode = { "n", "x" },

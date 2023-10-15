@@ -364,3 +364,7 @@ matches:
     replace: light
     propagate_case: true
     word: true
+  - trigger: tehme
+    replace: theme
+    propagate_case: true
+    word: true

@@ -51,7 +51,7 @@ function run() {
 			else if (name.endsWith("akefile")) type = "make";
 			else if (name.startsWith(".")) type = "config";
 			else if (!name.includes(".")) type = "blank";
-			else if (name === "obsidian.vimrc") type = "obsidian";
+			else if (name === "obsidian-vimrc.vim") type = "obsidian";
 			else type = name.split(".").pop() || ""; // default: extension
 
 			if (type === "yml") type = "yaml";

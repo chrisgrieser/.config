@@ -4,32 +4,11 @@ local u = require("config.utils")
 local fn = vim.fn
 --------------------------------------------------------------------------------
 
--- less nesting in md
 optl.tabstop = 4
-
--- Enable wrapping lines
-require("funcs.quality-of-life").wrap("on")
-
--- decrease line length without zen mode plugins
-if vim.bo.buftype == "" then optl.signcolumn = "yes:9" end
-
--- do not auto-wrap text
-optl.formatoptions:remove { "t", "c" }
-
--- hide links and some markup (similar to Obsidian's live preview)
-optl.conceallevel = 2
+optl.conceallevel = 2 -- hide links and some markup (similar to Obsidian's live preview)
 
 --------------------------------------------------------------------------------
 -- MARKDOWN-SPECIFIC KEYMAPS
-
--- stylua: ignore
-keymap("n", "gs", function ()
-	require("telescope.builtin").lsp_document_symbols {
-		ignore_symbols = {}, -- do not ignore type "string", since that's what headings in md are
-		prompt_title = "Headings",
-	}
-end, { desc = "󰒕 Markdown Headings", buffer = true })
-
 keymap("n", "<leader>x", "mzI- [ ] <Esc>`z", { desc = " Add Task", buffer = true })
 keymap("n", "<leader>-", "mzI- <Esc>`z", { desc = " Add List", buffer = true })
 

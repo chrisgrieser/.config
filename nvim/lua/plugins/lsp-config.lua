@@ -52,10 +52,7 @@ serverConfigs.lua_ls = {
 			},
 			diagnostics = {
 				globals = { "vim" }, -- when contributing to nvim plugins missing a .luarc.json
-				disable = {
-					"lowercase-global", -- selene better, since it disallows any globals
-					"trailing-space", -- formatter already does that
-				},
+				disable = { "trailing-space" }, -- formatter already does that
 			},
 			hint = {
 				enable = true, -- enabled inlay hints
@@ -63,7 +60,6 @@ serverConfigs.lua_ls = {
 				arrayIndex = "Disable",
 			},
 			workspace = { checkThirdParty = false }, -- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
-			format = { enable = false }, -- using stylua instead
 		},
 	},
 }
@@ -175,35 +171,12 @@ serverConfigs.tsserver = {
 			},
 		},
 	},
-	-- disable formatting, since taken care of by biome
-	on_attach = function(client)
-		client.server_capabilities.documentFormattingProvider = false
-		client.server_capabilities.documentRangeFormattingProvider = false
-	end,
-}
-
---------------------------------------------------------------------------------
--- JSON/YAML/TOML
-
--- DOCS https://github.com/Microsoft/vscode/tree/main/extensions/json-language-features/server#configuration
--- disable formatting, since taken care of by biome
-serverConfigs.jsonls = {
-	init_options = {
-		provideFormatter = false,
-	},
-}
-
--- disable formatting, since taken care of by prettier
-serverConfigs.yamlls = {
-	settings = {
-		yaml = { format = { enable = false } },
-	},
 }
 
 --------------------------------------------------------------------------------
 -- LTEX (LanguageTool LSP)
 
--- HACK since reading external file with the method described in docs does not work
+-- since reading external file with the method described in docs does not work
 local function getDictWords()
 	local dictfile = u.linterConfigFolder .. "/spellfile-vim-ltex.add"
 	local fileDoesNotExist = vim.loop.fs_stat(dictfile) == nil

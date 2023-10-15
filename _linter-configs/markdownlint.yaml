@@ -4,18 +4,21 @@
 # DOCS https://github.com/markdownlint/markdownlint/blob/main/docs/RULES.md
 #───────────────────────────────────────────────────────────────────────────────
 
-blanks-around-headings: { lines_below: 0 }
-
-# lists
-blanks-around-lists: false
+# MODIFIED SETTINGS
+blanks-around-headings:
+  lines_below: 0
+line-length:
+  code_blocks: false
+  tables: false
+no-inline-html:
+  allowed_elements: [img, details, summary, kbd, a]
 ul-style: { style: sublist }
 
-# taken care of by editorconfig
-line-length: false
-no-hard-tabs: false
-ul-indent: false
+#─────────────────────────────────────────────────────────────────────────────
+# DISABLED
 
-# disabled
+no-hard-tabs: false # taken care of by editorconfig
+ul-indent: false # taken care of by editorconfig
+blanks-around-lists: false
 first-line-heading: false
-no-inline-html: false
 no-emphasis-as-heading: false
