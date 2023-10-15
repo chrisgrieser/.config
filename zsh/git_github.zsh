@@ -222,6 +222,8 @@ function ac() {
 	local commit_msg="$1"
 	[[ -z "$commit_msg" ]] && commit_msg=chore || commit_msg=$1 # fill in empty commit msg,
 	git diff --staged --quiet && git add -A                     # if no staged changes, stage all
+
+	printf "\033[1;32mCommit: \033[0m"
 	git commit -m "$commit_msg" || return 1
 
 	# if commit msg contains issue number, open the issue in the browser
@@ -238,8 +240,8 @@ function ac() {
 function acp {
 	ac "$@" || return 1
 
-	printf "\033[1;34mPull: \033[0m" && git pull
-	printf "\033[1;34mPush: \033[0m" && git push
+	printf "\033[1;32mPull: \033[0m" && git pull
+	printf "\033[1;32mPush: \033[0m" && git push
 }
 
 #───────────────────────────────────────────────────────────────────────────────
