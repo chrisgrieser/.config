@@ -28,11 +28,13 @@ local function runMake(recipe)
 			if data[1] == "" and #data == 1 then return end
 			local output = table.concat(data, "\n"):gsub("%s*$", "")
 			vim.notify(output, vim.log.levels.INFO, { title = "make " .. recipe })
+			vim.cmd.checktime()
 		end,
 		on_stderr = function(_, data)
 			if data[1] == "" and #data == 1 then return end
 			local output = table.concat(data, "\n"):gsub("%s*$", "")
 			vim.notify(output, vim.log.levels.WARN, { title = "make " .. recipe })
+			vim.cmd.checktime()
 		end,
 	})
 end

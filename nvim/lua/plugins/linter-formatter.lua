@@ -107,8 +107,9 @@ local function linterConfigs()
 	}
 	lint.linters["editorconfig-checker"].args = {
 		"-no-color",
-		"-disable-max-line-length", -- only rule of thumb
 		"-disable-trim-trailing-whitespace", -- will be formatted anyway
+		"-disable-max-line-length", -- only rule of thumb
+		"-exlude=\\.md$" -- too many issues with code blocks
 	}
 end
 
