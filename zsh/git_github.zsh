@@ -152,28 +152,6 @@ function diff {
 #───────────────────────────────────────────────────────────────────────────────
 # GIT LOG
 
-function gitlog {
-	# my color format used for git log
-	local format="format:%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)"
-
-	git log --all --color --graph --format="$format" "$@" |
-		sed -e 's/ seconds* ago)/s)/' \
-			-e 's/ minutes* ago)/m)/' \
-			-e 's/ hours* ago)/h)/' \
-			-e 's/ days* ago)/d)/' \
-			-e 's/ weeks* ago)/w)/' \
-			-e 's/ months* ago)/mo)/' \
-			-e 's/grafted/ /' \
-			-e 's/origin\//󰞶  /g' \
-			-e 's/HEAD/󱍀 /g' \
-			-e 's/->/󰔰 /g' \
-			-e 's/tags: / )/' \
-			-Ee $'s/ (improv|fix|refactor|build|ci|docs|feat|test|perf|chore|revert|break|style)(\\(.+\\)|!)?:/ \033[1;35m\\1\033[0;34m\\2\033[0m:/' \
-			-Ee $'s/(#[0-9]+)/\033[1;31m\\1\033[0m/' # issue numbers
-	# INFO inserting ansi colors via sed requires leading $
-	echo
-}
-
 # brief git log (only last 15)
 function gl {
 	local cutoff=15 # CONFIG
@@ -189,7 +167,7 @@ function gli {
 	local hash key_pressed selected
 	local format="%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s%C(magenta)"
 	selected=$(
-		gitlog --color=always |
+		gitlog --color=always | sed 's/^[*| ]*//' |
 			fzf -0 --query="$1" \
 				--ansi --no-sort --no-info \
 				--header-first --header="↵ : Checkout   ^H: Copy [H]ash" \
@@ -241,32 +219,9 @@ function gb {
 # - if commit message is empty use `chore` as default message
 # - if commit msg contains issue number, open the issue in the browser
 function ac() {
-	local large_files commit_msg msg_length
-
-	# guard: accidental pushing of large files
-	large_files=$(find . -not -path "**/.git/**" -not -path "**/*.pxd/**" \
-		-not -path "**/node_modules/**" -not -path "**/*venv*/**" -size +10M)
-	if [[ -n "$large_files" ]]; then
-		print "\033[1;33mLarge file(s) detected, aborting."
-		print "$large_files\033[0m"
-		return 1
-	fi
-
-	# fill in empty commit msg
-	[[ -z "$1" ]] && commit_msg=chore || commit_msg=$1
-
-	# ensure no overlength of commit msg
-	msg_length=${#commit_msg}
-	if [[ $msg_length -gt 72 ]]; then
-		echo "Commit Message too long ($msg_length chars)."
-		commit_msg=${commit_msg::72}
-		print -z "acp \"$commit_msg\"" # put back into buffer
-		return 1
-	fi
-
-	# if no staged changes, stage all
-	git diff --staged --quiet && git add -A
-
+	local commit_msg="$1"
+	[[ -z "$commit_msg" ]] && commit_msg=chore || commit_msg=$1 # fill in empty commit msg,
+	git diff --staged --quiet && git add -A                     # if no staged changes, stage all
 	git commit -m "$commit_msg"
 
 	# if commit msg contains issue number, open the issue in the browser
@@ -282,10 +237,9 @@ function ac() {
 # same as ac, just followed by git pull & git push
 function acp {
 	ac "$@" || return 1
-
-	git pull ; echo
+	git pull
+	echo
 	git push
-	sketchybar --trigger repo-files-update
 }
 
 #───────────────────────────────────────────────────────────────────────────────

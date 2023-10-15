@@ -35,10 +35,6 @@ export EZA_STRICT=1
 
 export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgrep-config"
 
-# leading space to ignore it in history due to HIST_IGNORE_SPACE
-export MAGIC_ENTER_GIT_COMMAND=" inspect" 
-export MAGIC_ENTER_OTHER_COMMAND=" inspect"
-
 # zoxide
 export _ZO_DATA_DIR="$DATA_DIR/zoxide/"
 eval "$(zoxide init --no-cmd zsh)" # needs to be placed after compinit
