@@ -34,7 +34,7 @@ local formatters = {
 	html = { "prettier" },
 	markdown = { "markdown-toc", "markdownlint", "injected" },
 	css = { "stylelint", "prettier" },
-	sh = { "shellcheck", "shfmt" },
+	sh = { "shellcheck", "beautysh" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
 	["_"] = { "trim_whitespace", "trim_newlines", "squeeze_blanks" },
 	["*"] = { "codespell" },
@@ -173,6 +173,7 @@ local function formatterConfig()
 		"--check-hidden", -- conform.nvim's temp file is hidden
 		"--toml=" .. linterConfig .. "/codespell.toml",
 	}
+	require("conform.formatters.beautysh").args = { "--force-function-style=fnonly", "--tab", "-" }
 end
 
 --------------------------------------------------------------------------------
