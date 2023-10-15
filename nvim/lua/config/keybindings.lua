@@ -18,10 +18,6 @@ keymap(
 --------------------------------------------------------------------------------
 -- NAVIGATION
 
--- visual instead of logical lines
-keymap({ "n", "x" }, "j", "gj")
-keymap({ "n", "x" }, "k", "gk")
-
 -- HJKL behaves like hjkl, but bigger distance
 keymap({ "o", "x" }, "H", "^") -- `zv` opens folds when navigating a horizontal lines
 keymap("n", "H", "0^") -- `0` ensures fully scrolling to the left on long unwrapped lines
@@ -34,10 +30,10 @@ keymap("o", "J", "2j")
 
 -- Jump history
 -- non-unique, since it overwrites nvim default: https://neovim.io/doc/user/vim_diff.html#default-mappings
-keymap("n", "<C-l>", "<C-i>", { desc = "Jump forward", unique = false })
-keymap("n", "<C-h>", "<C-o>", { desc = "Jump back" })
+keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
+keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
 
--- SEARCH
+-- Search
 keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
 
@@ -45,6 +41,10 @@ keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
 keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
 keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
 keymap({ "n", "v", "i" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 Signature" })
+
+-- Changes
+keymap("n", "gc", "g;", { desc = "~ Newer Change" })
+keymap("n", "gC", "g,", { desc = "~ Older Change" })
 
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS
@@ -117,9 +117,9 @@ keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
 
 -- Multi-Cursor replacement
 -- https://www.reddit.com/r/neovim/comments/173y1dv/comment/k47kqb3/?context=3
-keymap("n", "<D-j>", "*<C-o>cgn", { desc = "󰆿 Multi-Edit" })
+keymap("n", "R", "*<C-o>cgn", { desc = "󰆿 Multi-Edit" })
 -- requires nvim's `*`
-keymap("x", "<D-j>", "*<C-o>cgn", { desc = "󰆿 Multi-Edit", remap = true, unique = false })
+keymap("x", "R", "*<C-o>cgn", { desc = "󰆿 Multi-Edit", remap = true, unique = false })
 
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT

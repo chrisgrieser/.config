@@ -165,16 +165,13 @@ keymap("n", "<leader>R", function() require("funcs.maker").make() end, { desc = 
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line Numbers" })
 keymap("n", "<leader>ol", "<cmd>LspRestart<CR>", { desc = "󰒕 LspRestart" })
 keymap("n", "<leader>oh", function() vim.lsp.inlay_hint(0, nil) end, { desc = "󰒕 Inlay Hints" })
+
 keymap("n", "<leader>od", function() -- codespell-ignore
 	local change = vim.diagnostic.is_disabled(0) and "enable" or "disable"
 	vim.diagnostic[change](0)
 end, { desc = " Diagnostics" })
-keymap(
-	"n",
-	"<leader>ow",
-	function() require("funcs.quality-of-life").wrap("toggle") end,
-	{ desc = "󰖶 Wrap" }
-)
+
+-- FIX
 keymap("n", "<leader>of", function() vim.opt.scrolloff = 13 end, { desc = "⇓ Fix Scrolloff" })
 
 --------------------------------------------------------------------------------

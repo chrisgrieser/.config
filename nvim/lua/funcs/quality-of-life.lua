@@ -141,33 +141,6 @@ end
 
 --------------------------------------------------------------------------------
 
----@param toMode "on"|"off"|"toggle"
-function M.wrap(toMode)
-	local turnOn = (toMode == "toggle" and not vim.opt_local.wrap:get()) or toMode == "on"
-	local turnOff = (toMode == "toggle" and vim.opt_local.wrap:get()) or toMode == "off"
-	local optl = vim.opt_local
-	local keymap = vim.keymap.set
-	local delmap = vim.keymap.del
-
-	if turnOn then
-		optl.wrap = true
-		optl.colorcolumn = ""
-		keymap("n", "A", "g$a", { buffer = true })
-		keymap("n", "I", "g^i", { buffer = true })
-		keymap("n", "H", "g^", { buffer = true })
-		keymap("n", "L", "g$", { buffer = true })
-	elseif turnOff then
-		optl.wrap = false
-		optl.colorcolumn = vim.opt.colorcolumn:get()
-		pcall(delmap, "n", "A", { buffer = true })
-		pcall(delmap, "n", "I", { buffer = true })
-		pcall(delmap, "n", "H", { buffer = true })
-		pcall(delmap, "n", "L", { buffer = true })
-	end
-end
-
---------------------------------------------------------------------------------
-
 function M.openAtRegex101()
 	-- keymaps assume a/ and i/ mapped as regex textobj via treesitter textobj
 	vim.cmd.normal { '"zya/', bang = false } -- yank outer regex

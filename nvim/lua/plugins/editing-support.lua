@@ -189,14 +189,17 @@ return {
 			cursor_behavior = "start",
 			max_join_length = 160,
 			langs = {
-				-- python docstrings
 				python = {
-					string_content = {
+					string_content = { -- python docstrings
 						both = { fallback = function() vim.cmd("normal! gww") end },
 					},
 				},
-				-- comments
 				comment = {
+					source = {
+						both = { fallback = function() vim.cmd("normal! gww") end },
+					},
+				},
+				markdown_inline = {
 					source = {
 						both = { fallback = function() vim.cmd("normal! gww") end },
 					},
