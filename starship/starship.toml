@@ -1,8 +1,6 @@
-# INFO
-# - https://starship.rs/config/ 
-# - https://github.com/toml-lang/toml
-# - Ansi colors: https://i.stack.imgur.com/KTSQa.png
-# - some nerd font requires a space after them to be properly sized
+# - DOCS https://starship.rs/config/ 
+# - Ansi color codes: https://i.stack.imgur.com/KTSQa.png
+# - INFO some nerd font requires a space after them to be properly sized
 #───────────────────────────────────────────────────────────────────────────────
 
 add_newline = false
@@ -109,7 +107,7 @@ format = '[󰘬 ](fg:purple bg:black bold) '
 [git_status]
 stashed = '[󰜦 $count ](fg:yellow bg:black)'
 untracked = '[+$count ](fg:green bg:black)'
-deleted = '[-$count ](fg:red bg:black)'
+deleted = '[-$count ](fg:red bg:black)' # SIC unstaged as well as stage deletion
 modified = '[~$count ](fg:208 bg:black)'
 renamed = '[󰑕  $count ](fg:blue bg:black)'
 staged = '[  $count ](fg:green bg:black)'

@@ -5,11 +5,10 @@ local fn = vim.fn
 --------------------------------------------------------------------------------
 
 optl.tabstop = 4 -- less nesting in md
-optl.conceallevel = 2 -- hide links and some markup (similar to Obsidian's live preview)
 
 -- since markdown has rarely indented lines, and also rarely overlength in lines, 
 -- move everything a bit more to the right
-if vim.bo.buftype == "" then optl.signcolumn = "yes:3" end
+if vim.bo.buftype == "" then optl.signcolumn = "yes:5" end
 
 --------------------------------------------------------------------------------
 -- MARKDOWN-SPECIFIC KEYMAPS
@@ -23,7 +22,7 @@ keymap("n", "gs", function ()
 end, { desc = "󰒕 Markdown Headings", buffer = true })
 
 keymap("n", "<leader>x", "mzI- [ ] <Esc>`z", { desc = " Add Task", buffer = true })
-keymap("n", "<leader>-", "mzI- <Esc>`z", { desc = " Add List", buffer = true })
+keymap("n", "<D-4>", "mzI- <Esc>`z", { desc = " Add List", buffer = true })
 
 -- Format Table
 keymap(
