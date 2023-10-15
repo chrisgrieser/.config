@@ -238,10 +238,17 @@ rules:
             bundle_identifiers: [^com.brave.Browser.app.*] # PWAs
         to:
           - { key_code: w, modifiers: [command] }
+      - type: basic
+        from: { key_code: escape, modifiers: { mandatory: [control] } }
+        to:
+          - { key_code: c, modifiers: [option, command] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
   #─────────────────────────────────────────────────────────────────────────────
-  # DEV TOOLS -> ELEMENT PICKER
-  - description: "(Apps) Dev Tools"
+  # Obsidian
+  - description: "(Apps) Obsidian"
     manipulators:
+      # Dev Tools & Element Picker
       - type: basic
         from: { key_code: escape, modifiers: { mandatory: [control] } }
         to:
@@ -250,12 +257,14 @@ rules:
           - { key_code: c, modifiers: [shift, command] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^md\.obsidian$] }
+      # do not quit Obsidian, Omnisearch-results in Google require it to be open
       - type: basic
-        from: { key_code: escape, modifiers: { mandatory: [control] } }
+        from: { key_code: q, modifiers: { mandatory: [command] } }
         to:
-          - { key_code: c, modifiers: [option, command] }
+          - { key_code: w, modifiers: [command] }
+          - { key_code: h, modifiers: [command] }
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
+          - { type: frontmost_application_if, bundle_identifiers: [^md\.obsidian$] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Slack"
     # https://slack.com/help/articles/201374536-Slack-keyboard-shortcuts

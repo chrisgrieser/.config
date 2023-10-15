@@ -26,18 +26,14 @@ end
 local function diagSuffix(diag, mode)
 	if not (diag.source or diag.code) then return "" end
 	local source = diag.source and diag.source:gsub(" ?%.$", "") or ""
-
-	local docsIcon = ""
-	local installed, rulebook = pcall(require, "rulebook")
-	if installed and rulebook then docsIcon = rulebook.hasDocs(diag) and "  " or "" end
+	local rule = diag.code and ": " .. diag.code or ""
 
 	if mode == "virtual_text" then
-		return (" %s%s"):format(source, docsIcon)
+		return (" (%s%s)"):format(source, rule)
 	elseif mode == "float" then
-		local rule = diag.code and ": " .. diag.code or ""
-		return (" %s%s%s"):format(source, rule, docsIcon), "Comment"
+		return (" %s%s"):format(source, rule), "Comment"
 	end
-	return "??"
+	return ""
 end
 
 vim.diagnostic.config {

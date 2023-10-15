@@ -3,10 +3,14 @@
 		"prefix": "shebang",
 		"body": "#!/usr/bin/env zsh"
 	},
-	"global variable": {
-		"prefix": "global (shellcheck)",
+	"global var (shellcheck)": {
+		"prefix": "global var (shellcheck)",
 		"body": "\\${${1:global_var}:?}",
 		"description": "shellcheck recommends failing if global variable is undefined (SC2054). Useful for example for Alfred Environment Variables."
+	},
+	"ignore (beautysh)": {
+		"prefix": "ignore (beautysh)",
+		"body": ["# @formatter:off", "# @formatter:on"]
 	},
 	"i++": {
 		"prefix": "i++",
@@ -80,17 +84,11 @@
 		"body": "cd \"$(dirname \"\\$0\")\" || return 1"
 	},
 	"osascript jxa (run script)": {
-		"prefix": [
-			"jxa (run script)",
-			"osascript -l JavaScript"
-		],
+		"prefix": ["jxa (run script)", "osascript -l JavaScript"],
 		"body": "osascript -l JavaScript \"${1:file}\""
 	},
 	"osascript applescript (execute)": {
-		"prefix": [
-			"applescript (execute)",
-			"osascript -e"
-		],
+		"prefix": ["applescript (execute)", "osascript -e"],
 		"body": "osascript -e '${1:command}'"
 	},
 	"xargs (for each line)": {
@@ -140,13 +138,7 @@
 	},
 	"if .. then .. else": {
 		"prefix": "if .. then .. else",
-		"body": [
-			"if [[ \"$${1:cond}\" ]]; then",
-			"\t$0",
-			"else",
-			"\t",
-			"fi"
-		]
+		"body": ["if [[ \"$${1:cond}\" ]]; then", "\t$0", "else", "\t", "fi"]
 	},
 	"check if installed": {
 		"prefix": "check if installed",
@@ -171,13 +163,7 @@
 	},
 	"input (stdin or $1)": {
 		"prefix": "input (stdin or $1)",
-		"body": [
-			"if [[ $# -eq 0 ]]; then",
-			"\tinput=$(< /dev/stdin)",
-			"else",
-			"\tinput=\"$1\"",
-			"fi"
-		],
+		"body": ["if [[ $# -eq 0 ]]; then", "\tinput=$(< /dev/stdin)", "else", "\tinput=\"$1\"", "fi"],
 		"description": "reads either from STDIN or $1. stdin may have unescaped newlines, which have to be removed, e.g. via `tr -d '\n'`."
 	},
 	"stdin": {
@@ -233,11 +219,7 @@
 		]
 	},
 	"play sound": {
-		"prefix": [
-			"play sound",
-			"audio",
-			"afplay"
-		],
+		"prefix": ["play sound", "audio", "afplay"],
 		"body": "afplay \"/System/Library/Sounds/${1|Basso,Blow,Bottle,Frog,Funk,Glass,Hero,Morse,Ping,Pop,Purr,Sosumi,Submarine,Tink|}.aiff\" &",
 		"description": "Running in the background to not block during sound playing"
 	},
