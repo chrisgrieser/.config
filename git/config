@@ -43,7 +43,7 @@
 	navigate = true
 
 	# side-by-side-view: deactivate line numbers but keep vertical separator
-	line-numbers-left-format = ""
+	line-numbers-left-format = " "
 	line-numbers-right-format = "│ "
 
 	# grep output as clickable links https://dandavison.github.io/delta/grep.html
