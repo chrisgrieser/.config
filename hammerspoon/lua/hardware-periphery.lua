@@ -8,9 +8,14 @@ local u = require("lua.utils")
 -- otherwise: open in Finder
 M.usb_externalDrive = hs.usb.watcher
 	.new(function(device)
-		if not (device.eventType == "added") then return end
 		local name = device.productName
-		u.notify("Mounted: ".. name)
+		local ignore = {
+			"Integrated RGB Camera", -- Docking Station in the office
+			"CHERRY Wireless Device" -- Mouse at mother
+		} 
+		if u.tbl_contains(ignore, name) or device.eventType == "remove" then return end
+
+		u.notify("Mounted: " .. name)
 
 		local harddriveNames = {
 			"ZY603 USB3.0 Device", -- Externe A
@@ -21,6 +26,7 @@ M.usb_externalDrive = hs.usb.watcher
 		if u.tbl_contains(harddriveNames, name) then
 			hs.application.open("WezTerm")
 		else
+			-- search for mounted volumes, since the usb-watcher does not report it to us
 			u.runWithDelays({ 1, 2, 4 }, function()
 				local stdout, success =
 					hs.execute([[df -h | grep -io "\s/Volumes/.*" | cut -c2- | head -n1]])

@@ -115,7 +115,7 @@ function M.autoTile(winSrc)
 	M.bringAllWinsToFront()
 
 	M.autoTileInProgress = true
-	u.runWithDelays(0.1, function() AutoTileInProgress = false end)
+	u.runWithDelays(0.1, function() M.autoTileInProgress = false end)
 	local pos = {}
 
 	if #wins == 0 and u.isFront("Finder") then
