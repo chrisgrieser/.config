@@ -48,6 +48,9 @@ second_row="popup.clock"
 stats_width=250
 scutil --get ComputerName | grep -q "Mother" && stats_width=225
 
+# INFO
+# use `sketchybar --hotload` to auto-reload config when building stuff
+
 #───────────────────────────────────────────────────────────────────────────────
 # SKETCHYBAR CALL
 
@@ -56,6 +59,7 @@ sketchybar \
 	--bar \
 	height="60" position="top" display="all" \
 	padding_left=0 padding_right=0 color="$BG_COLOR" \
+	\
 	--default \
 	updates="when_shown" drawing="on" align="left" \
 	icon.font="JetBrainsMonoNL Nerd Font:Bold:16" icon.color="$FONT_COLOR" \
@@ -96,8 +100,6 @@ sketchybar \
 	script="$PLUGIN_DIR/homebrew-update-tracker.sh" \
 	--add event homebrew-update \
 	--subscribe package-updates homebrew-update \
-	\
-	--update
 
 # INFO
 # - `--update` needs to run at the end of config and should not be run in an item script

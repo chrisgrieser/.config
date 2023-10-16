@@ -119,8 +119,8 @@ return {
 			{ "a.", "<cmd>lua require('various-textobjs').chainMember('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer indent textobj" },
 
 			-- python
-			{ "i" .. u.textobjMaps.docstring, "<cmd>lua require('various-textobjs').pyDocstring('inner')<CR>", ft = "python", mode = { "x", "o" }, desc = "󱡔 inner docstring textobj" },
-			{ "a" .. u.textobjMaps.docstring, "<cmd>lua require('various-textobjs').pyDocstring('outer')<CR>", ft = "python", mode = { "x", "o" }, desc = "󱡔 outer docstring textobj" },
+			{ "iy", "<cmd>lua require('various-textobjs').pyTripleQuotes('inner')<CR>", ft = "python", mode = { "x", "o" }, desc = "󱡔 inner tripleQuotes textobj" },
+			{ "ay", "<cmd>lua require('various-textobjs').pyTripleQuotes('outer')<CR>", ft = "python", mode = { "x", "o" }, desc = "󱡔 outer tripleQuotes textobj" },
 
 			-- markdown
 			{ "il", "<cmd>lua require('various-textobjs').mdlink('inner')<CR>", mode = { "x", "o" }, ft = "markdown", desc = "󱡔 inner md link" },

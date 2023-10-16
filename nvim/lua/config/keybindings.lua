@@ -35,7 +35,8 @@ keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
 
 -- Search
 keymap("n", "-", "/")
-keymap("x", "-", "<Esc>/\\%V", { desc = "Search within selection" })
+keymap("x", "-", [["zy/<C-r>z<CR>]], { desc = "Search for sel" })
+keymap("x", "/", "<Esc>/\\%V", { desc = "Search within sel" })
 
 -- Diagnostics
 keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
