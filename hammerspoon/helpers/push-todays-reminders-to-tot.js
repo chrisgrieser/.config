@@ -44,6 +44,6 @@ function run() {
 	delay(0.1);
 	if (reminders) reminders.quit(); // FIX Reminder.app being left open
 
-	// information hwo many tasks were added for hammrspoon
+	// information how many tasks were added for hammrspoon,
 	if (addedTasks > 0) return addedTasks;
 }

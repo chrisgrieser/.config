@@ -1,12 +1,13 @@
 --------------------------------------------------------------------------------
 -- INFO if abbreviations are not working, probably something has been mapped to
--- in insert `<Space>`
+-- `<Space>` in insert mode
 -----------------------------------------------------------------------------------
 
 local spellfixes = {
 	teh = "the",
 	brwoser = "browser",
 	markdwon = "markdown",
+	dwon = "down",
 	keybaord = "keyboard",
 	sicne = "since",
 	nto = "not",
@@ -16,6 +17,7 @@ local spellfixes = {
 	cleitn = "client",
 	fiel = "file",
 	shwo = "show",
+	hwo = "how",
 	retrun = "return",
 	onyl = "only",
 	esle = "else",
@@ -24,7 +26,6 @@ local spellfixes = {
 	terue = "true",
 	fo = "of",
 	oepn = "open",
-	dwon = "down",
 	ntoe = "note",
 	verison = "version",
 	ot = "to",
