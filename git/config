@@ -13,6 +13,7 @@
 [core]
 	editor = nvim
 	autocrlf = input
+	hooksPath = .hooks
 [pager]
 	branch = false
 [pull]
