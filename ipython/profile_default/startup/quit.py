@@ -1,2 +1,2 @@
-# quit with q -- https://waylonwalker.com/ipython-q-exit/
+"""Quit with q -- https://waylonwalker.com/ipython-q-exit/"""
 q = exit

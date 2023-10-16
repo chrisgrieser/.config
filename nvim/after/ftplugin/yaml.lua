@@ -2,9 +2,8 @@ local u = require("config.utils")
 local bo = vim.bo
 --------------------------------------------------------------------------------
 
-bo.shiftwidth = 2
 bo.tabstop = 2
-bo.softtabstop = 2
+bo.shiftwidth = 2
 bo.expandtab = true
 
 --------------------------------------------------------------------------------

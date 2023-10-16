@@ -1,10 +1,11 @@
-local M = {} -- persist from garbage collector
+local M = {}
 
 local pathw = hs.pathwatcher.new
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local home = os.getenv("HOME")
 local appSupport = home .. "/Library/Application Support/"
+
 --------------------------------------------------------------------------------
 -- BOOKMARKS SYNCED TO CHROME BOOKMARKS
 -- (needed for Alfred)
@@ -46,7 +47,7 @@ end):start()
 -- FROM FILE HUB
 
 ---INFO this works as only downloaded files get quarantined.
----Rnsures that files created locally do not trigger the actions.
+---Ensures that files created locally do not trigger the actions.
 ---@param filepath string
 ---@return boolean whether the file exists
 local function fileIsDownloaded(filepath)
@@ -72,6 +73,10 @@ M.pathw_fileHub = pathw(env.fileHub, function(paths, _)
 			u.writeToFile(libraryPath, bibEntry, true)
 			hs.open(libraryPath)
 			os.remove(filep)
+
+		-- STATS UPDATE
+		elseif fileName == "Stats.dmg" then
+			u.runWithDelays(6, function() os.remove(filep) end)
 
 		-- VARIOUS BROWSER SETTINGS
 		elseif fileName == "violentmonkey" then
@@ -105,7 +110,8 @@ end):start()
 
 M.pathw_ObsiAlph = pathw(env.fileHub, function(files)
 	for _, file in pairs(files) do
-		-- needs delay and `.crdownload` check, since the renaming is sometimes not picked up by hammerspoon
+		-- needs delay and `.crdownload` check, since the renaming is sometimes
+		-- not picked up by hammerspoon
 		if not (file:match("%.crdownload$") or file:match("%.asar%.gz$")) then return end
 
 		u.runWithDelays(0.5, function()
