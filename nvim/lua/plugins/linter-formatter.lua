@@ -143,30 +143,37 @@ end
 --------------------------------------------------------------------------------
 
 local function formatterConfig()
-	require("conform").setup { formatters_by_ft = formatters }
+	require("conform").setup {
+		formatters_by_ft = formatters,
+		formatters = {
+			-- stylua: ignore
+			["bibtex-tidy"] = {
+				prepend_args =
+					"--tab", "--curly", "--strip-enclosing-braces", "--no-align", "--no-wrap",
+					"--enclosing-braces=title,journal,booktitle", "--drop-all-caps",
+					"--numeric", "--months", "--encode-urls",
+					"--duplicates", "--sort-fields", "--remove-empty-fields", "--omit=month,issn,abstract",
 
-	-- errors in injected fields should not make the other formatters fail https://github.com/stevearc/conform.nvim/issues/111#issuecomment-1750658745
-	require("conform.formatters.injected").options.ignore_errors = true
-
-	-- stylua: ignore
-	require("conform.formatters.bibtex-tidy").args = {
-		"--quiet",
-		"--tab", "--curly", "--strip-enclosing-braces", "--no-align", "--no-wrap",
-		"--enclosing-braces=title,journal,booktitle", "--drop-all-caps",
-		"--numeric", "--months", "--encode-urls",
-		"--duplicates", "--sort-fields", "--remove-empty-fields", "--omit=month,issn,abstract",
+				condition = function(ctx)
+					local ignore = vim.fs.basename(ctx.filename) == "main-bibliography.bib"
+					if ignore then u.notify("conform.nvim", "Ignoring main-bibliography.bib") end
+					return not ignore
+				end,
+			},
+			markdownlint = {
+				prepend_args = { "--config=" .. linterConfig .. "/markdownlint.yaml" },
+			},
+			codespell = {
+				
+				"--toml=" .. linterConfig .. "/codespell.toml",
+			},
+			injected = {
+				-- errors in injected fields should not make the other formatters fail https://github.com/stevearc/conform.nvim/issues/111#issuecomment-1750658745
+				options = { ignore_errors = true },
+			},
+		},
 	}
-	require("conform.formatters.bibtex-tidy").condition = function(ctx)
-		local ignore = vim.fs.basename(ctx.filename) == "main-bibliography.bib"
-		if ignore then u.notify("conform.nvim", "Ignoring main-bibliography.bib") end
-		return not ignore
-	end
 
-	require("conform.formatters.markdownlint").args = {
-		"--fix",
-		"--config=" .. linterConfig .. "/markdownlint.yaml",
-		"$FILENAME",
-	}
 	require("conform.formatters.codespell").args = {
 		"$FILENAME",
 		"--write-changes",
