@@ -16,7 +16,7 @@ i=0
 while true; do
 	git add -A && git commit -m "$commit_msg" --author="🤖 automated<cron@job>"
 	git pull && git push && return 0
-	sleep 3
+	sleep 1
 	i=$((i + 1))
-	[[ $i -gt 5 ]] && return 1
+	[[ $i -gt 3 ]] && return 1
 done

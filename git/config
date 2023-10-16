@@ -13,17 +13,18 @@
 [core]
 	editor = nvim
 	autocrlf = input
-	hooksPath = .hooks
+	; version control hooks, and also sync them (for my repos only though)
+	hooksPath = .git-hooks
 [pager]
 	branch = false
 [pull]
 	rebase = true
 [status]
 	showUntrackedFiles = all
+
+# https://git-scm.com/docs/git-config#Documentation/git-config.txt-advice
 [advice]
-	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-advice
 	statusHints = true
-	# fsfs
 	detachedHead = true
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -54,16 +55,3 @@
 	hyperlinks-file-link-format = "file-line://{path}:{line}"
 
 ;────────────────────────────────────────────────────────────────────────────
-
-# Merge Tool
-# https://www.reddit.com/r/neovim/comments/158zdir/comment/jtdn6tf/&utm_medium=web2x&context=3
-; [merge]
-;     tool = nvim
-; [mergetool "nvim"]
-;     cmd = nvim -f -c \"DiffviewOpen\"
-; [mergetool]
-;     prompt = false
-;
-; [alias]
-;   mergetool = "!nvim -c DiffviewOpen"
-;   dt = "! args=$@; shift $#; nvim -c \"DiffviewOpen $args\""
