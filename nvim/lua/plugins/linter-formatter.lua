@@ -142,46 +142,33 @@ end
 
 --------------------------------------------------------------------------------
 
-local function formatterConfig()
-	require("conform").setup {
-		formatters_by_ft = formatters,
-		formatters = {
-			-- stylua: ignore
-			["bibtex-tidy"] = {
-				prepend_args =
-					"--tab", "--curly", "--strip-enclosing-braces", "--no-align", "--no-wrap",
-					"--enclosing-braces=title,journal,booktitle", "--drop-all-caps",
-					"--numeric", "--months", "--encode-urls",
-					"--duplicates", "--sort-fields", "--remove-empty-fields", "--omit=month,issn,abstract",
-
-				condition = function(ctx)
-					local ignore = vim.fs.basename(ctx.filename) == "main-bibliography.bib"
-					if ignore then u.notify("conform.nvim", "Ignoring main-bibliography.bib") end
-					return not ignore
-				end,
-			},
-			markdownlint = {
-				prepend_args = { "--config=" .. linterConfig .. "/markdownlint.yaml" },
-			},
-			codespell = {
-				
-				"--toml=" .. linterConfig .. "/codespell.toml",
-			},
-			injected = {
-				-- errors in injected fields should not make the other formatters fail https://github.com/stevearc/conform.nvim/issues/111#issuecomment-1750658745
-				options = { ignore_errors = true },
-			},
+local formatterConfig = {
+	formatters_by_ft = formatters,
+	formatters = {
+		markdownlint = {
+			prepend_args = { "--config=" .. linterConfig .. "/markdownlint.yaml" },
 		},
-	}
-
-	require("conform.formatters.codespell").args = {
-		"$FILENAME",
-		"--write-changes",
-		"--check-hidden", -- conform.nvim's temp file is hidden
-		"--toml=" .. linterConfig .. "/codespell.toml",
-	}
-	require("conform.formatters.beautysh").args = { "--force-function-style=fnonly", "--tab", "-" }
-end
+		codespell = {
+			prepend_args = { "--toml=" .. linterConfig .. "/codespell.toml" },
+		},
+		beautysh = {
+			prepend_args = { "--tab", "--force-function-style=fnonly" },
+		},
+		-- stylua: ignore
+		["bibtex-tidy"] = {
+			prepend_args =
+				"--tab", "--curly", "--strip-enclosing-braces", "--no-align", "--no-wrap",
+				"--enclosing-braces=title,journal,booktitle", "--drop-all-caps",
+				"--numeric", "--months", "--encode-urls",
+				"--duplicates", "--sort-fields", "--remove-empty-fields", "--omit=month,issn,abstract",
+			condition = function(ctx)
+				local ignore = vim.fs.basename(ctx.filename) == "main-bibliography.bib"
+				if ignore then u.notify("conform.nvim", "Ignoring main-bibliography.bib") end
+				return not ignore
+			end,
+		},
+	},
+}
 
 --------------------------------------------------------------------------------
 
@@ -196,7 +183,7 @@ return {
 	},
 	{ -- Formatter integration
 		"stevearc/conform.nvim",
-		config = formatterConfig,
+		opts = formatterConfig,
 		cmd = "ConformInfo",
 		keys = {
 			{
