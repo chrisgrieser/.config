@@ -189,6 +189,16 @@ return {
 			{
 				"<D-s>",
 				function()
+					vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
+					vim.cmd.normal { "gq", bang = true }
+					vim.cmd.update()
+				end,
+				desc = "󰒕 Format Selection & Save",
+				mode = "x",
+			},
+			{
+				"<D-s>",
+				function()
 					if vim.tbl_contains(lspFormatting, vim.bo.filetype) then
 						vim.lsp.buf.format()
 					else
@@ -196,7 +206,6 @@ return {
 					end
 					vim.cmd.update()
 				end,
-				mode = { "n", "x" },
 				desc = "󰒕 Format & Save",
 			},
 		},

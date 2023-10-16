@@ -138,6 +138,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>AB6C212F-70C4-4291-963F-B7D6DFD63435</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6D5011F9-F8DB-4744-945E-FE33325726F3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>C73C4C50-6AAA-4294-929D-5C770E4E4E36</key>
 		<array>
 			<dict>
@@ -252,7 +265,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>add-reminder.applescript</string>
+				<string>./scripts/add-reminder.applescript</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -295,7 +308,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>add-reminder.js</string>
+				<string>./scripts/add-reminder.js</string>
 				<key>subtext</key>
 				<string>loading…</string>
 				<key>title</key>
@@ -473,7 +486,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>weekly-generator.js</string>
+				<string>./scripts/weekly-generator.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -608,7 +621,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>Open Shopping List</string>
+				<string>Add to shopping list: "{query}"</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -634,9 +647,9 @@ end tell</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>./scripts/add-to-shopping-list.applescript</string>
 				<key>type</key>
-				<integer>6</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -644,6 +657,27 @@ end tell</string>
 			<string>AB6C212F-70C4-4291-963F-B7D6DFD63435</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>🛒 Added to Shopping List</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>6D5011F9-F8DB-4744-945E-FE33325726F3</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -754,7 +788,7 @@ end tell</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>click-call.applescript</string>
+				<string>./scripts/click-call.applescript</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -850,6 +884,15 @@ end tell</string>
 			<real>190</real>
 			<key>ypos</key>
 			<real>185</real>
+		</dict>
+		<key>6D5011F9-F8DB-4744-945E-FE33325726F3</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>385</real>
+			<key>ypos</key>
+			<real>415</real>
 		</dict>
 		<key>7107C86B-1891-4DC6-B157-D10F2AEF3358</key>
 		<dict>
@@ -957,7 +1000,7 @@ end tell</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>610</real>
+			<real>605</real>
 			<key>ypos</key>
 			<real>310</real>
 		</dict>
