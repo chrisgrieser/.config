@@ -14,5 +14,3 @@ if [[ -n "$large_files" ]]; then
 	printf "\033[0m"
 	exit 1
 fi
-
-echo "hi from hook"
