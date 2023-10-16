@@ -2,6 +2,7 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 lines: # prints total length of config
+	echo ;\
 	find . -name "*.lua" | xargs wc -l | tail -r
 
 plugins: # prints remote repo of all installed plugins as markdown links

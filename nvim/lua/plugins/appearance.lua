@@ -54,7 +54,7 @@ return {
 		opts = {
 			nearest_only = true,
 			override_lens = function(render, posList, nearest, idx, _)
-				-- formats virtual text
+				-- formats virtual text as a bubble
 				local lnum, col = unpack(posList[idx])
 				local text = ("%d/%d"):format(idx, #posList)
 				local chunks = {
@@ -204,12 +204,13 @@ return {
 					},
 				},
 				get_config = function(opts)
-					if opts.kind == "code_action" then return { builtin = { relative = "cursor" } } end
+					-- code actions: show at cursor
+					if opts.kind == "codeaction" then return { builtin = { relative = "cursor" } } end
 
+					-- complex selectors: use telescope
 					local useTelescope = {
 						"tinygit.github_issue",
 						"tinygit.pickaxe_diff",
-						"icon_picker",
 						"mason.ui.language-filter",
 					}
 					if vim.tbl_contains(useTelescope, opts.kind) then
