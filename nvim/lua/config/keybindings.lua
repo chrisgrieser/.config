@@ -101,10 +101,11 @@ keymap("n", "<Tab>", ">>", { desc = "󰉶 indent line" })
 keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent line" })
 keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent selection" })
 keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent selection" })
+
 keymap("n", "[", "<", { desc = "󰉵 outdent" })
 keymap("n", "]", ">", { desc = "󰉶 indent" })
 
--- toggle all top-level folds
+-- Close all top-level folds
 keymap("n", "zz", function() cmd("%foldclose") end, { desc = "󰘖 Close toplevel folds" })
 
 -- [O]pen new scope / brace

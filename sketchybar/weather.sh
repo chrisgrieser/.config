@@ -33,9 +33,9 @@ while true; do
 				-e 's/snow//' -e 's/clear-day//' -e 's/clear-night//' \
 				-e 's/thunderstorm//'
 	)
-	[[ -n "$icon" && "$icon" != "null" || $i -gt 10 ]] && break
+	[[ -n "$icon" || $i -gt 10 ]] && break
 	i=$((i + 1))
-	sleep 1.5
+	sleep 2
 done
 
 #───────────────────────────────────────────────────────────────────────────────

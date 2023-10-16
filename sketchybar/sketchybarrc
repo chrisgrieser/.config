@@ -27,7 +27,7 @@ while true; do
 done
 
 #───────────────────────────────────────────────────────────────────────────────
-# CONFIG VALUES
+# CONFIG
 
 PLUGIN_DIR="$(dirname "$0")" # plugins in same folder as this rc file
 
@@ -100,6 +100,8 @@ sketchybar \
 	script="$PLUGIN_DIR/homebrew-update-tracker.sh" \
 	--add event homebrew-update \
 	--subscribe package-updates homebrew-update \
+	\
+	--update
 
 # INFO
 # - `--update` needs to run at the end of config and should not be run in an item script

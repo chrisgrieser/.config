@@ -14,7 +14,7 @@
   "cmp-zsh": { "branch": "main", "commit": "c24db8e58fac9006ec23d93f236749288d00dec9" },
   "cmp_luasnip": { "branch": "master", "commit": "05a9ab28b53f71d1aece421ef32fee2cb857a843" },
   "codeium.vim": { "branch": "main", "commit": "6b0f2bbbbd7669af50775ad27eff0077858aa9b8" },
-  "conform.nvim": { "branch": "master", "commit": "fea1acda64d43072388225381aca565a31126a4f" },
+  "conform.nvim": { "branch": "master", "commit": "1281e26948fc06994e0e0cdcaafdd9bbd28929e7" },
   "cybu.nvim": { "branch": "main", "commit": "c0866ef6735a85f85d4cf77ed6d9bc92046b5a99" },
   "dial.nvim": { "branch": "master", "commit": "019bbe9daea397c93a99adc747f8f071379fee5c" },
   "dressing.nvim": { "branch": "master", "commit": "1f2d1206a03bd3add8aedf6251e4534611de577f" },

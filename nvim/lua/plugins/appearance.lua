@@ -192,7 +192,7 @@ return {
 					mappings = { ["q"] = "Close" },
 					show_numbers = false,
 					border = u.borderStyle,
-					relative = "cursor",
+					relative = "editor",
 					max_width = 80,
 					min_width = 20,
 					max_height = 20,
@@ -204,9 +204,15 @@ return {
 					},
 				},
 				get_config = function(opts)
-					local useTelescope = { "tinygit", "mason" }
-					local pluginName = vim.split(opts.kind, "%.")[1]
-					if vim.tbl_contains(useTelescope, pluginName) then
+					if opts.kind == "code_action" then return { builtin = { relative = "cursor" } } end
+
+					local useTelescope = {
+						"tinygit.github_issue",
+						"tinygit.pickaxe_diff",
+						"icon_picker",
+						"mason.ui.language-filter",
+					}
+					if vim.tbl_contains(useTelescope, opts.kind) then
 						return { backend = "telescope" }
 					end
 				end,
