@@ -37,7 +37,6 @@
       <outline text="Big Technology (Alex Kantrowitz)" title="Big Technology (Alex Kantrowitz)" type="rss" xmlUrl="https://bigtechnology.substack.com/feed/" htmlUrl="https://bigtechnology.substack.com/"/>
       <outline text="Biome Blog" title="Biome Blog" type="rss" xmlUrl="https://biomejs.dev/feed.xml" htmlUrl="https://biomejs.dev/"/>
       <outline text="Brave’s Latest News on Brave Browser" title="Brave’s Latest News on Brave Browser" type="rss" xmlUrl="https://brave.com/blog/index.xml" htmlUrl="https://brave.com/blog/"/>
-      <outline text="BrettTerpstra.com" title="BrettTerpstra.com" type="rss" xmlUrl="http://brett.trpstra.net/brettterpstra" htmlUrl="http://brettterpstra.com/"/>
       <outline text="Bryan Jenks" title="Bryan Jenks" type="rss" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCfhSB16X9MXhzSFe_H7XbHg" htmlUrl=""/>
       <outline text="Café Lob-On" title="Café Lob-On" type="rss" xmlUrl="https://blog.bloonface.com/feed/" htmlUrl="https://blog.bloonface.com/"/>
       <outline text="Chaos Computer Club (Chaosknoten)" title="Chaos Computer Club (Chaosknoten)" type="rss" xmlUrl="https://www.ccc.de/de/rss/updates.rdf" htmlUrl="http://www.ccc.de/"/>
@@ -58,15 +57,12 @@
       <outline text="nvim-cmp: Recent Wiki Updates" title="nvim-cmp: Recent Wiki Updates" type="rss" xmlUrl="https://github.com/hrsh7th/nvim-cmp/wiki.atom" htmlUrl="https://github.com/hrsh7th/nvim-cmp/wiki"/>
       <outline text="Obsidian Blog" title="Obsidian Blog" type="rss" xmlUrl="https://obsidian.md/feed.xml" htmlUrl="https://obsidian.md/"/>
       <outline text="Obsidian Changelog" title="Obsidian Changelog" type="rss" xmlUrl="https://obsidian.md/changelog.xml" htmlUrl="https://obsidian.md/"/>
-      <outline text="Obsidian Observer - Medium" title="Obsidian Observer - Medium" type="rss" xmlUrl="https://medium.com/feed/obsidian-observer" htmlUrl="https://medium.com/obsidian-observer?source=rss----dc0a52745260---4"/>
       <outline text="One Thing Well" title="One Thing Well" type="rss" xmlUrl="https://onethingwell.org/rss" htmlUrl="https://onethingwell.org/"/>
       <outline text="One Useful Thing" title="One Useful Thing" type="rss" xmlUrl="https://www.oneusefulthing.org/feed" htmlUrl="https://www.oneusefulthing.org/"/>
+      <outline text="Personal weblog about programming, linux, life, the universe and everything" title="Personal weblog about programming, linux, life, the universe and everything" type="rss" xmlUrl="https://zignar.net/index.xml" htmlUrl="https://zignar.net/"/>
       <outline text="Release notes from neovim" title="Release notes from neovim" type="rss" xmlUrl="https://github.com/neovim/neovim/releases.atom" htmlUrl="https://github.com/neovim/neovim/releases"/>
-      <outline text="Rome's blog posts" title="Rome's blog posts" type="rss" xmlUrl="https://rome.tools/feed.xml" htmlUrl="https://rome.tools/"/>
-      <outline text="Scripting OS X" title="Scripting OS X" type="rss" xmlUrl="https://scriptingosx.com/feed/" htmlUrl="https://scriptingosx.com/"/>
       <outline text="Stephan Ango" title="Stephan Ango" type="rss" xmlUrl="https://stephanango.com/feed.xml" htmlUrl="https://stephanango.com/"/>
       <outline text="Stratechery (Ben Thompson)" title="Stratechery (Ben Thompson)" type="rss" xmlUrl="https://stratechery.com/feed/" htmlUrl="https://stratechery.com/"/>
-      <outline text="The Overflow – Stack Overflow Blog" title="The Overflow – Stack Overflow Blog" type="rss" xmlUrl="https://stackoverflow.blog/newsletter/feed/" htmlUrl="https://stackoverflow.blog/"/>
       <outline text="The Pragmatic Engineer" title="The Pragmatic Engineer" type="rss" xmlUrl="https://feeds.feedburner.com/ThePragmaticEngineer" htmlUrl="https://blog.pragmaticengineer.com/"/>
       <outline text="The Setup" title="The Setup" type="rss" xmlUrl="https://usesthis.com/feed.atom" htmlUrl="http://usesthis.com/"/>
       <outline text="The Valuable Dev" title="The Valuable Dev" type="rss" xmlUrl="https://thevaluable.dev/index.xml" htmlUrl="https://web-techno.net/"/>
