@@ -6,7 +6,6 @@ local u = require("config.utils")
 bo.expandtab = true
 bo.shiftwidth = 4
 bo.tabstop = 4
-bo.softtabstop = 4
 
 -- python inline comments are separated by two spaces via `black`, so multispace
 -- only adds noise when displaying the dots for them

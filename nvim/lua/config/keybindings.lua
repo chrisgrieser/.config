@@ -186,7 +186,7 @@ keymap(
 	{ desc = "󰽙 close buffer/window" }
 )
 
--- needs remapping since I use `gf` for LSP-references
+-- needs remapping since `gf` is used for LSP-references
 keymap("n", "ga", "gf", { desc = " Goto File under cursor" })
 
 --------------------------------------------------------------------------------

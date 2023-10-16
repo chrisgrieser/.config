@@ -55,7 +55,7 @@ function inspect {
 	# GIT STATUS
 	if git rev-parse --is-inside-work-tree &>/dev/null && [[ -n "$(git status --short --porcelain)" ]]; then
 		# spread across multiple lines via rs
-		git -c color.status="always" status --short | rs -e -w"$((COLUMNS + 5))"
+		git -c color.status="always" status --short | rs -e -w"$COLUMNS"
 		separator
 	fi
 
@@ -70,7 +70,7 @@ function inspect {
 		echo -n "$(echo "$eza_output" | head -n"$max_files_lines")"
 		printf "\033[1;34m (…)\033[0m" # blue = eza's default folder color
 	elif [[ -n "$eza_output" ]]; then
-		echo "$eza_output"
+		echo -n "$eza_output"
 	fi
 }
 

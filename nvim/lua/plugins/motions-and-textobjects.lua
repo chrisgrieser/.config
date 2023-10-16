@@ -118,6 +118,10 @@ return {
 			{ "i.", "<cmd>lua require('various-textobjs').chainMember('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner indent textobj" },
 			{ "a.", "<cmd>lua require('various-textobjs').chainMember('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer indent textobj" },
 
+			-- python
+			{ "i.", "<cmd>lua require('various-textobjs').chainMember('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner indent textobj" },
+			{ "a.", "<cmd>lua require('various-textobjs').chainMember('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer indent textobj" },
+
 			-- markdown
 			{ "il", "<cmd>lua require('various-textobjs').mdlink('inner')<CR>", mode = { "x", "o" }, ft = "markdown", desc = "󱡔 inner md link" },
 			{ "al", "<cmd>lua require('various-textobjs').mdlink('outer')<CR>", mode = { "x", "o" }, ft = "markdown", desc = "󱡔 outer md link" },
@@ -138,7 +142,7 @@ return {
 			{ -- delete surrounding indentation
 				"dsi",
 				function()
-					require("various-textobjs").indentation(true, true)
+					require("various-textobjs").indentation("inner", "inner")
 					local notOnIndentedLine = vim.fn.mode():find("V") == nil -- when textobj is found, will switch to visual line mode
 					if notOnIndentedLine then return end
 					u.normal("<") -- dedent indentation

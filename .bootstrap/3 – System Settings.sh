@@ -17,8 +17,6 @@ networksetup -listallnetworkservices | # list all
 	tail -n +2 | # skip info text
 	tr -d "*" | # remove "*" markings disabled services
 	xargs -I {} networksetup -setdnsservers {} "$dns_address_1" "$dns_address_2"
-networksetup -setdnsservers Wi-Fi 1.1.1.1 1.0.0.1
-networksetup -setdnsservers Ethernet 1.1.1.1 1.0.0.1
 
 #───────────────────────────────────────────────────────────────────────────────
 # FINDER
@@ -166,16 +164,14 @@ defaults write org.gpgtools.common DisableKeychain -bool yes
 # DOCK
 # INFO Dock settings do not need to be saved, since the Dock-Switcher setup also
 # saves them, and therefore syncs them across devices already as soon as
-# Hammerspoon is up and running. Lines here are only kept for reference.
+# Hammerspoon is up. Lines here are only kept for reference.
+# defaults write com.apple.dock minimize-to-application -int 1
 
-# hot corners
+# HOT CORNERS
 # defaults write com.apple.dock wvous-tr-corner -int 12 Top right → Notification Center
 # defaults write com.apple.dock wvous-br-corner -int 0
 # defaults write com.apple.dock wvous-tl-corner -int 0
 # defaults write com.apple.dock wvous-bl-corner -int 0
-#
-# defaults write com.apple.dock minimize-to-application -int 1
-#
 # killall Dock
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -187,11 +183,10 @@ sudo tmutil disable # disable automatic backups
 
 #───────────────────────────────────────────────────────────────────────────────
 # SAFARI
-defaults write com.apple.Safari IncludeDevelopMenu -bool true            # Enable Develop menu and Web Inspector
+defaults write com.apple.Safari IncludeDevelopMenu -bool true            # Enable Develop menu & Inspector
 defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true # full URL in address bar
 defaults write com.apple.Safari HomePage -string "about:blank"           # faster loading
 defaults write com.apple.Safari DownloadsPath -string "$WD"              # Download path
-
 
 #───────────────────────────────────────────────────────────────────────────────
 # APP STORE

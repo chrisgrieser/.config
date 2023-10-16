@@ -12,5 +12,6 @@ end
 -- for .scm files
 if vim.bo.buftype == "" then
 	optl.tabstop = 2
+	optl.shiftround = 2
 	optl.expandtab = true
 end

@@ -141,6 +141,7 @@ M.textobjMaps = {
 	cond = "o", -- c[o]nditional
 	call = "l", -- cal[l]
 	wikilink = "R", -- two [R]ectangular brackets
+	docstring = "Q", -- big [Q]uote
 }
 
 --------------------------------------------------------------------------------
