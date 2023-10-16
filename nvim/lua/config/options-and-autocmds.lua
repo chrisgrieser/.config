@@ -126,8 +126,8 @@ opt.shiftround = true
 opt.smartindent = true
 -- fallback, mostly set by .editorconfig
 opt.expandtab = false
-opt.tabstop = 3 
-opt.shiftwidth = 3 
+opt.tabstop = 3
+opt.shiftwidth = 3
 
 -- invisible chars
 opt.list = true
@@ -135,6 +135,8 @@ opt.conceallevel = 1
 opt.fillchars:append {
 	eob = " ",
 	fold = " ",
+	vert = "║",
+	horiz = "═",
 }
 opt.listchars:append {
 	nbsp = "󰚌",

@@ -4,8 +4,8 @@ return {
 	{ -- REPL
 		"Vigemus/iron.nvim",
 		keys = {
-			{ "<leader>II", vim.cmd.IronRepl, desc = "󱠤 Toggle REPL" },
-			{ "<leader>IR", vim.cmd.IronRestart, desc = "󱠤 Restart REPL" },
+			{ "<leader>it", vim.cmd.IronRepl, desc = "󱠤 Toggle REPL" },
+			{ "<leader>ir", vim.cmd.IronRestart, desc = "󱠤 Restart REPL" },
 			{ "<leader>ii", desc = "󱠤 Send Line to REPL" },
 			{ "<leader>i", mode = { "n", "x" }, desc = "󱠤 Send-to-REPL Operator" },
 		},
