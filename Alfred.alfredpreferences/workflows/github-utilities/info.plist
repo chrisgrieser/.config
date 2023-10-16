@@ -138,7 +138,7 @@
 				<key>modifiersubtext</key>
 				<string>fn: Delete Local Repo</string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -488,7 +488,18 @@
 			</dict>
 		</array>
 		<key>C27D01B3-A3B9-4661-9D70-8808DC522FD1</key>
-		<array/>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4C6743FC-6D60-44F4-9E59-7EE559C99DAB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>CC245103-888B-4440-A348-64F8A74D87F3</key>
 		<array>
 			<dict>
@@ -774,6 +785,13 @@ osascript -l JavaScript "./scripts/my-github-repos.js" "$LOCAL_REPOS"</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>repo-search-loop</string>
+				<key>inputmode</key>
+				<integer>1</integer>
+			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
@@ -967,6 +985,25 @@ osascript -l JavaScript "./scripts/my-github-repos.js" "$LOCAL_REPOS"</string>
 			<string>17D804EC-6AFE-403E-A6CC-8F536D379033</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>repo-search-loop</string>
+				<key>passinputasargument</key>
+				<false/>
+				<key>passvariables</key>
+				<false/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>4C6743FC-6D60-44F4-9E59-7EE559C99DAB</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>type</key>
@@ -1744,6 +1781,15 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<real>565</real>
 			<key>ypos</key>
 			<real>540</real>
+		</dict>
+		<key>4C6743FC-6D60-44F4-9E59-7EE559C99DAB</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>720</real>
+			<key>ypos</key>
+			<real>405</real>
 		</dict>
 		<key>4C690E73-DC85-438E-B8AA-52CD91D40CDA</key>
 		<dict>
