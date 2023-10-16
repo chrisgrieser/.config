@@ -23,27 +23,26 @@ function run() {
 	}
 
 	let addedTasks = 0;
+	let acc = ""
 	// - needs iterating for loop since JXA Record Array cannot be looped with `foreach` or `for in`
 	// - backwards, to not change the indices at loop runtime
 	for (let i = todaysTasks.length - 1; i >= 0; i--) {
 		const task = todaysTasks[i];
 		if (!task?.name()) continue;
 
-		addedTasks++;
 		const body = task.body();
 		const title = task.name();
-		const content = body ? `## ${title}\n${body}` : title;
-		const encodedContent = encodeURIComponent("\n\n" + content);
+		const content = body ? `\n## ${title}\n${body}` : "– " + title;
 
-		// DOCS https://gist.github.com/chockenberry/d33ef5b6e6da4a3e4aa9b07b093d3c23
-		tots.openLocation(`tots://${dotToUse}/append?text=${encodedContent}`);
+		acc += "\n" + content;
+		addedTasks++;
 
-		task.delete();
+		task.delete(); // DOCS https://gist.github.com/chockenberry/d33ef5b6e6da4a3e4aa9b07b093d3c23
 	}
+	tots.openLocation(`tots://${dotToUse}/append?text=${encodeURIComponent(acc)}`);
 
-	// FIX Reminder.app being left open
 	delay(0.1);
-	if (reminders) reminders.quit();
+	if (reminders) reminders.quit(); // FIX Reminder.app being left open
 
 	// information hwo many tasks were added for hammrspoon
 	if (addedTasks > 0) return addedTasks;
