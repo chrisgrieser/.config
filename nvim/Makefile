@@ -2,7 +2,7 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 lines: # prints total length of config
-	find . -name "*.lua" | xargs wc -l
+	find . -name "*.lua" | xargs wc -l | tail -r
 
 plugins: # prints remote repo of all installed plugins as markdown links
 	location_of_installed_plugins="$$HOME/.local/share/nvim/lazy" ; \
