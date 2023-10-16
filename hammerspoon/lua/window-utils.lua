@@ -106,7 +106,9 @@ function M.autoTile(winSrc)
 	-- progress, and of the Info windows
 	wins = hs.fnutils.filter(
 		wins,
-		function(win) return win:isMaximizable() and win:isStandard() and not (win:title():find("Info$")) end
+		function(win)
+			return win:isMaximizable() and win:isStandard() and not (win:title():find("Info$"))
+		end
 	)
 	if not wins then return end
 
@@ -157,17 +159,6 @@ function M.autoTile(winSrc)
 			{ h = 0.5, w = 0.33, x = 0.66, y = 0 },
 		}
 		if #wins == 6 then table.insert(pos, { h = 0.5, w = 0.33, x = 0.66, y = 0.5 }) end
-	elseif #wins == 7 or #wins == 8 then
-		pos = {
-			{ h = 0.5, w = 0.25, x = 0, y = 0 },
-			{ h = 0.5, w = 0.25, x = 0, y = 0.5 },
-			{ h = 0.5, w = 0.25, x = 0.25, y = 0 },
-			{ h = 0.5, w = 0.25, x = 0.25, y = 0.5 },
-			{ h = 0.5, w = 0.25, x = 0.5, y = 0 },
-			{ h = 0.5, w = 0.25, x = 0.5, y = 0.5 },
-			{ h = 0.5, w = 0.25, x = 0.75, y = 0 },
-		}
-		if #wins == 8 then table.insert(pos, { h = 0.5, w = 0.25, x = 0.75, y = 0.5 }) end
 	end
 
 	-- Do not autotile when windows are already tiled but not in the order of the
@@ -233,15 +224,19 @@ local function moveAllWinsToProjectorScreen()
 end
 
 local function verticalSplit()
-	-- since not using spaces for anything else, using its number to detect
+	-- Cince not using spaces for anything else, using its number to detect
 	-- whether there is a split or not
 	local noSplit = #hs.spaces.spacesForScreen(hs.mouse.getCurrentScreen()) == 1
-	local tryingToStartSplitFromNeovide = u.app("neovide"):isFrontmost() and noSplit
+
+	local tryingToStartSplitFromNeovide = u.app("neovide")
+		and u.app("neovide"):isFrontmost()
+		and noSplit
 
 	if tryingToStartSplitFromNeovide then
-		local msg = "Neovide does not support macOS window options."
-			.. "\n\nStart the split the other different app."
-		hs.alert.show(msg)
+		hs.alert.show(
+			"Neovide does not support macOS window options."
+				.. "\n\nStart the split the other different app."
+		)
 		return
 	end
 
@@ -252,7 +247,9 @@ local function verticalSplit()
 			if app and app:isHidden() then app:unhide() end
 		end
 
-		hs.application.frontmostApplication():selectMenuItem { "Window", "Tile Window to Right of Screen" }
+		hs.application
+			.frontmostApplication()
+			:selectMenuItem { "Window", "Tile Window to Right of Screen" }
 	else
 		-- un-fullscreen both windows
 		for _, win in pairs(hs.window.allWindows()) do
@@ -265,9 +262,9 @@ end
 -- Triggers: Hotkeys & URI Scheme
 u.hotkey(u.hyper, "V", verticalSplit)
 u.hotkey(u.hyper, "N", moveWinToNextDisplay)
+-- stylua: ignore start
 u.hotkey(u.hyper, "right", function() M.moveResize(hs.window.focusedWindow(), hs.layout.right50) end)
 u.hotkey(u.hyper, "left", function() M.moveResize(hs.window.focusedWindow(), hs.layout.left50) end)
--- stylua: ignore start
 u.hotkey(u.hyper, "down", function() M.moveResize(hs.window.focusedWindow(), { x = 0, y = 0.5, w = 1, h = 0.5 }) end)
 u.hotkey(u.hyper, "up", function() M.moveResize(hs.window.focusedWindow(), { x = 0, y = 0, w = 1, h = 0.5 }) end)
 -- stylua: ignore end

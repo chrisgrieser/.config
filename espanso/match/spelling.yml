@@ -372,3 +372,7 @@ matches:
     replace: threshold
     propagate_case: true
     word: true
+  - trigger: occured
+    replace: occurred
+    propagate_case: true
+    word: true
