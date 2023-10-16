@@ -368,3 +368,7 @@ matches:
     replace: theme
     propagate_case: true
     word: true
+  - trigger: threshhold
+    replace: threshold
+    propagate_case: true
+    word: true
