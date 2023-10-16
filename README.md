@@ -5,6 +5,7 @@
 
 ## Configurations of Interest
 People tell me they find the following configurations most useful:
+
 - [neovim config](/nvim) (~6000 LoC)
 - [hammerspoon config](/hammerspoon) (~2500 LoC)
 - [zshrc](/zsh) (~1500 LoC)
