@@ -43,7 +43,7 @@ end, { desc = " Buffer Info" })
 -- REFACTORING
 keymap("n", "<leader>ff", ":% s/<C-r><C-w>//g<Left><Left>", { desc = " :s (cursor word)" })
 keymap("x", "<leader>ff", [["zy:% s/<C-r>z//g<Left><Left>]], { desc = " :s (selection)" })
-keymap("x", "<leader>fv", ":s///g<Left><Left><Left>", { desc = " :s (inside visual)" })
+keymap("x", "<leader>fv", ": s///g<Left><Left><Left>", { desc = " :s (inside visual)" })
 keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = " delete matching" })
 
 ---@param useSpaces boolean
@@ -164,8 +164,9 @@ keymap("n", "<leader>R", function() require("funcs.maker").make() end, { desc = 
 -- OPTION TOGGLING
 
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line Numbers" })
+keymap("n", "<leader>ow", "<cmd>set wrap!<CR>", { desc = "󰖶 Wrap" })
 keymap("n", "<leader>ol", "<cmd>LspRestart<CR>", { desc = "󰒕 LspRestart" })
-keymap("n", "<leader>oh", function() vim.lsp.inlay_hint(0, nil) end, { desc = "󰒕 Inlay Hints" })
+keymap("n", "<leader>oh", function() vim.lsp.inlay_hint(0, nil) end, { desc = "󰩔 Inlay Hints" })
 
 keymap("n", "<leader>od", function() -- codespell-ignore
 	local change = vim.diagnostic.is_disabled(0) and "enable" or "disable"

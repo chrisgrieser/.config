@@ -17,6 +17,11 @@ return {
 			{ "<leader>g#", function() require("tinygit").openIssueUnderCursor() end, desc = " Open Issue under Cursor" },
 			-- stylua: ignore end
 		},
+		opts = {
+			searchFileHistory = {
+				diffPopupBorder = require("config.utils").borderStyle,
+			},
+		},
 	},
 	{ -- git sign gutter & hunk actions
 		"lewis6991/gitsigns.nvim",

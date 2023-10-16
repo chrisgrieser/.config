@@ -111,7 +111,6 @@ return {
 			},
 		},
 		opts = {
-			backends = { "lsp", "treesitter", "markdown" },
 			close_on_select = true,
 			link_folds_to_tree = true,
 			show_guides = true,
@@ -119,7 +118,7 @@ return {
 			layout = {
 				default_direction = "left",
 				min_width = { 20, 0.2 },
-				max_width = { 60, 0.5 },
+				max_width = 0.35,
 				win_opts = {
 					winhighlight = "Normal:Colorcolumn,CursorLine:CursorLineFold",
 				},
