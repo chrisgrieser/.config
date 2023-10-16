@@ -13,8 +13,7 @@
 [core]
 	editor = nvim
 	autocrlf = input
-	; version control hooks, and also sync them (for my repos only though)
-	hooksPath = .git-hooks
+	hooksPath = .git-hooks ; version control hooks, and also sync them (for my repos only though)
 [pager]
 	branch = false
 [pull]
