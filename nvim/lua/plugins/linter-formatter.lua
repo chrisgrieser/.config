@@ -104,24 +104,39 @@ local function linterConfigs()
 	lint.linters["editorconfig-checker"].args =
 		{ "--no-color", "--config=" .. linterConfig .. "/editorconfig-checker-rc.json" }
 	lint.linters.markdownlint.args = {
-		"--disable=no-trailing-spaces", -- not disabled in config, so it's enabled for formatting
+		"--disabled=no-trailing-spaces", -- not disabled in config, so it's enabled for formatting
 		"--disable=no-multiple-blanks",
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
 	}
+	-- slave
+	-- pop
 
-	-- disable
-	local pattern = "%s*(%d+)(.+)"
-	local groups = { "lnum", "message" }
+	local pattern = "%s*(%d+):(%d+)-(%d+):(%d+)%s+(%w+)%s+(.+)  %s*(%g+)%s+%g+"
+	local groups = { "lnum", "col", "end_lnum", "end_col", "severity", "message", "code" }
+	local severity_map = {
+		warning = vim.diagnostic.severity.WARN,
+		error = vim.diagnostic.severity.ERROR,
+	}
 	lint.linters.alex = {
 		cmd = "alex",
 		stdin = true,
-		args = { "--stdin", "--text" },
+		stream = "stderr",
 		ignore_exitcode = true,
+		args = {
+			"--stdin",
+			function()
+				if vim.bo.ft == "html" then
+					return "--html"
+				elseif vim.bo.ft ~= "markdown" then
+					return "--text"
+				end
+			end,
+		},
 		parser = require("lint.parser").from_pattern(
 			pattern,
 			groups,
-			nil,
-			{ severity = vim.diagnostic.severity.WARN, source = "alex" }
+			severity_map,
+			{ severity = vim.diagnostic.severity.INFO, source = "alex" }
 		),
 	}
 end
