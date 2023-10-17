@@ -106,6 +106,9 @@ local lualineConfig = {
 				"commit",
 				findout_master_name = true,
 				diff_against_master = true,
+
+
+
 			},
 		},
 		lualine_z = {
