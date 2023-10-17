@@ -86,7 +86,7 @@ return {
 				format = {
 					search_down = { icon = "  ", view = "cmdline" }, -- FIX needs to be set explicitly
 					cmdline = { view = "cmdline_popup" },
-					lua = { view = "cmdline_popup" }, 
+					lua = { view = "cmdline_popup" },
 					help = { view = "cmdline_popup" },
 					numb = {
 						pattern = "^:%d+$",
@@ -121,6 +121,7 @@ return {
 				mini = {
 					timeout = 3000,
 					zindex = 10, -- lower, so it does not cover nvim-notify
+					position = { col = "96%" }, -- to the left to avoid collision with scrollbar
 				},
 				hover = {
 					border = { style = u.borderStyle },

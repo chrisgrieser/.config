@@ -21,7 +21,6 @@ local linters = {
 for _, list in pairs(linters) do
 	table.insert(list, "codespell")
 	table.insert(list, "editorconfig-checker")
-	table.insert(list, "alex")
 end
 
 local formatters = {
@@ -108,37 +107,6 @@ local function linterConfigs()
 		"--disable=no-multiple-blanks",
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
 	}
-	-- slave
-	-- pop
-
-	local pattern = "%s*(%d+):(%d+)-(%d+):(%d+)%s+(%w+)%s+(.+)  %s*(%g+)%s+%g+"
-	local groups = { "lnum", "col", "end_lnum", "end_col", "severity", "message", "code" }
-	local severity_map = {
-		warning = vim.diagnostic.severity.WARN,
-		error = vim.diagnostic.severity.ERROR,
-	}
-	lint.linters.alex = {
-		cmd = "alex",
-		stdin = true,
-		stream = "stderr",
-		ignore_exitcode = true,
-		args = {
-			"--stdin",
-			function()
-				if vim.bo.ft == "html" then
-					return "--html"
-				elseif vim.bo.ft ~= "markdown" then
-					return "--text"
-				end
-			end,
-		},
-		parser = require("lint.parser").from_pattern(
-			pattern,
-			groups,
-			severity_map,
-			{ severity = vim.diagnostic.severity.INFO, source = "alex" }
-		),
-	}
 end
 
 local function lintTriggers()
@@ -147,11 +115,11 @@ local function lintTriggers()
 			if vim.bo.buftype ~= "" then return end
 
 			-- condition when to lint https://github.com/mfussenegger/nvim-lint/issues/370#issuecomment-1729671151
-			local lintersToUse = require("lint").linters_by_ft[vim.bo.filetype]
+			local lintersToUse = require("lint").linters_by_ft[vim.bo.ft]
 			local pwd = vim.loop.cwd()
 			if not pwd then return end
 			local hasNoSeleneConfig = vim.loop.fs_stat(pwd .. "/selene.toml") == nil
-			if hasNoSeleneConfig and vim.bo.filetype == "lua" then
+			if hasNoSeleneConfig and vim.bo.ft == "lua" then
 				lintersToUse = vim.tbl_filter(function(l) return l ~= "selene" end, lintersToUse)
 			end
 			require("lint").try_lint(lintersToUse)
