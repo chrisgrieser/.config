@@ -126,12 +126,6 @@ keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" }) -- works even with `spe
 -- Merging
 keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
 
--- Multi-Cursor replacement
--- https://www.reddit.com/r/neovim/comments/173y1dv/comment/k47kqb3/?context=3
-keymap("n", "R", "*<C-o>cgn", { desc = "󰆿 Multi-Edit" })
--- requires nvim's `*`
-keymap("x", "R", "*<C-o>cgn", { desc = "󰆿 Multi-Edit", remap = true, unique = false })
-
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
 keymap("n", "<Down>", [[<cmd>. move +1<CR>==]], { desc = "󰜮 Move Line Down" })
