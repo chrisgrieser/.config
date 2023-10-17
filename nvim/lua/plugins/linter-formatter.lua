@@ -123,7 +123,7 @@ local function linterConfigs()
 		end,
 		ignore_exitcode = true,
 		parser = require("lint.parser").from_pattern(
-		  pattern,
+			{},
 		  groups,
 		  nil,
 		  { severity = vim.diagnostic.severity.INFO, source = "editorconfig-checker" }
