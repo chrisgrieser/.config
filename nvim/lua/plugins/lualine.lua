@@ -45,11 +45,8 @@ local lualineConfig = {
 				style = "%H:%M",
 				cond = function() return vim.o.columns > 110 and vim.o.lines > 25 end,
 				section_separators = topSep,
-				fmt = function(time)
-					-- make the `:` blink
-					if os.time() % 2 == 0 then time = time:gsub(":", " ") end
-					return time
-				end,
+				-- make the `:` blink
+				fmt = function(time) return os.time() % 2 == 0 and time or time:gsub(":", " ") end,
 			},
 			{
 				"tabs",
@@ -127,7 +124,6 @@ local lualineConfig = {
 			"noice", "lazy", "mason", "qf",
 		},
 	},
-	extensions = { "quickfix" },
 }
 
 --------------------------------------------------------------------------------
