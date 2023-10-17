@@ -13,7 +13,7 @@ M.usb_externalDrive = hs.usb.watcher
 			"Integrated RGB Camera", -- Docking Station in the office
 			"CHERRY Wireless Device" -- Mouse at mother
 		} 
-		if u.tbl_contains(ignore, name) or device.eventType == "remove" then return end
+		if u.tbl_contains(ignore, name) or device.eventType ~= "added" then return end
 
 		u.notify("Mounted: " .. name)
 
