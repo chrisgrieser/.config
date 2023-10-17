@@ -95,6 +95,7 @@
   "vim-css3-syntax": { "branch": "main", "commit": "30ef43aed3e700f21db58dfd67b78c9e82673d77" },
   "vim-matchup": { "branch": "master", "commit": "6dbe108230c7dbbf00555b7d4d9f6a891837ef07" },
   "vim-python-pep8-indent": { "branch": "master", "commit": "60ba5e11a61618c0344e2db190210145083c91f8" },
+  "vim-visual-multi": { "branch": "master", "commit": "724bd53adfbaf32e129b001658b45d4c5c29ca1a" },
   "which-key.nvim": { "branch": "main", "commit": "3a5383161996b36698139f2a425d83ca05b13f83" },
   "yanky.nvim": { "branch": "main", "commit": "c1211c6c6d983a72c74dde44df8575a64d50562f" }
 }

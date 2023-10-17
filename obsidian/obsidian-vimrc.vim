@@ -103,9 +103,6 @@ nnoremap gr :quickSwitcher
 " go to last change (HACK, only works to jump to the last location)
 nnoremap gc u<C-r>
 
-" Multi-Edit
-nnoremap R *<C-o>cgn
-
 """"""""""""""""""""""
 " Search
 """"""""""""""""""""""

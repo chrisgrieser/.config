@@ -2,11 +2,49 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
+	{ -- Multi Cursor
+		"mg979/vim-visual-multi",
+		keys = {
+			{ "<D-j>", mode = { "n", "x" }, desc = "󰆿 Multi-Cursor (Cursor Word)" },
+			{ "<D-a>", mode = { "n", "x" }, desc = "󰆿 Multi-Cursor (All)" },
+			{ "<D-Down>", desc = "󰆿 Multi-Cursor (Down)" },
+		},
+		init = function()
+			vim.g.VM_set_statusline = 0 -- using my version via lualine component
+			vim.g.VM_show_warnings = 0
+			vim.g.VM_silent_exit = 1
+			vim.g.VM_quit_after_leaving_insert_mode = 1 -- can use "reselect last" to restore
+			-- DOCS https://github.com/mg979/vim-visual-multi/blob/master/doc/vm-mappings.txt
+			vim.g.VM_maps = {
+				-- Enter Visual-Multi-Mode
+				["Find Under"] = "<D-j>", -- select word under cursor
+				["Reselect Last"] = "gV",
+				["Visual Add"] = "<D-j>",
+				["Select All"] = "<D-a>",
+				["Visual All"] = "<D-a>",
+				["Add Cursor Down"] = "<D-Down>",
+
+				-- Visual-Multi-Mode Mappings
+				["Find Next"] = "<D-j>",
+				["Skip Region"] = "n", -- [n]o & find next
+				["Find Operator"] = "s", -- operator, selects all regions found in textobj
+				["Motion $"] = "L", -- use my HL motions here as well
+				["Motion ^"] = "H",
+			}
+		end,
+		config = function()
+			u.addToLuaLine("tabline", "lualine_z", function()
+				---@diagnostic disable-next-line: undefined-field
+				if not vim.b.VM_Selection or not vim.b.VM_Selection.Regions then return "" end
+				return ("󰇀 Visual-Multi (%s)"):format(#vim.b.VM_Selection.Regions)
+			end)
+		end,
+	},
 	{ -- editable quickfix list
 		"gabrielpoca/replacer.nvim",
 		opts = { rename_files = false },
 		keys = {
-			{ "<leader>fq", function() require("replacer").run() end, desc = " replacer" },
+			{ "<leader>fq", function() require("replacer").run() end, desc = " Replacer" },
 		},
 		init = function()
 			vim.api.nvim_create_autocmd("FileType", {
