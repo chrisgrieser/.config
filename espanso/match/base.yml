@@ -18,6 +18,12 @@ matches:
     replace: https://www.paypal.me/ChrisGrieser
   - trigger: "!name"
     replace: Christopher Grieser
+  - regex: "\\bvvv" # Signatures
+    replace: |-
+      $|$
+
+      Viele Grüße
+      Chris
   #─────────────────────────────────────────────────────────────────────────────
   - trigger: "!wd"
     replace: "/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"

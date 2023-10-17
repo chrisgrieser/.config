@@ -33,6 +33,8 @@ local function remindersToTot()
 
 	-- FIX Reminders not properly quitting
 	u.runWithDelays({ 1, 3 }, function() u.quitApps("Reminders") end)
+
+	u.runWithDelays({ 2, 4 }, updateCounter)
 end
 
 -- TRIGGERS

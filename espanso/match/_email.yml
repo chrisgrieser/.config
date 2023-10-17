@@ -13,13 +13,6 @@ matches:
       Mit freundlichen Grüßen
       Christopher Grieser
   # Signatures
-  - regex: "\\bvvv"
-    replace: |-
-      $|$
-
-      Viele Grüße
-      Chris
-    label: Viele Grüße (Vorname)
   - triggers: ["vvg", "!mail"]
     replace: |-
       $|$
