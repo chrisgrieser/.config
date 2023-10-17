@@ -101,15 +101,14 @@ local lualineConfig = {
 			{ irregularWhitespace },
 		},
 		lualine_y = {
-			"diff",
 			{
 				"commit",
-				findout_master_name = true,
-				diff_against_master = true,
-
-
-
+				unpulled_master_icon = "󰔰 ",
+				unpulled_icon = "󰶡 ",
+				unpushed_icon = "󰶣 ",
+				show_only_diverged = true,
 			},
+			"diff",
 		},
 		lualine_z = {
 			{ "selectioncount", fmt = function(str) return str ~= "" and "礪" .. str or "" end },
@@ -134,7 +133,10 @@ local lualineConfig = {
 --------------------------------------------------------------------------------
 
 return {
-	"gzbd/lualine.nvim", -- PENDING https://github.com/nvim-lualine/lualine.nvim/pull/1027
+	-- PENDING https://github.com/nvim-lualine/lualine.nvim/pull/1027
+	"gzbd/lualine.nvim",
+	branch = "feat/commit-component",
+
 	lazy = false, -- no flickering on startup
 	dependencies = { "nvim-tree/nvim-web-devicons", "folke/noice.nvim" },
 	opts = lualineConfig,

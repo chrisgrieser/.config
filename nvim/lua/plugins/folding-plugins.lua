@@ -38,7 +38,12 @@ return {
 	{
 		"jghauser/fold-cycle.nvim",
 		keys = {
-			{ "^", function() require("fold-cycle").close() end, desc = " Cycle-Close Folds" },
+			{
+				"^",
+				function() require("fold-cycle").close() end,
+				desc = " Cycle-Close Folds",
+				silent = true,
+			},
 		},
 	},
 	{
