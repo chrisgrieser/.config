@@ -71,7 +71,6 @@ return {
 		opts = {
 			detection_methods = { "pattern", "lsp" }, -- priority: pattern, then lsp-root
 			exclude_dirs = { "node_modules", "build", "dist", ".venv", "venv" },
-			datapath = u.vimDataDir,
 			patterns = {
 				"Makefile",
 				".editorconfig",
