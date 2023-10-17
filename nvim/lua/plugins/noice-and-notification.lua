@@ -84,9 +84,9 @@ return {
 			cmdline = {
 				view = "cmdline", -- cmdline|cmdline_popup
 				format = {
-					search_down = { icon = "  ", view = "cmdline" }, -- FIX needed to be set explicitly
+					search_down = { icon = "  ", view = "cmdline" }, -- FIX needs to be set explicitly
 					cmdline = { view = "cmdline_popup" },
-					lua = { view = "cmdline_popup" }, -- show the `=`
+					lua = { view = "cmdline_popup" }, 
 					help = { view = "cmdline_popup" },
 					numb = {
 						pattern = "^:%d+$",
@@ -118,7 +118,10 @@ return {
 				cmdline_popup = {
 					border = { style = u.borderStyle },
 				},
-				mini = { timeout = 3000 },
+				mini = {
+					timeout = 3000,
+					zindex = 10, -- lower, so it does not cover nvim-notify
+				},
 				hover = {
 					border = { style = u.borderStyle },
 					size = { max_width = 80 },
