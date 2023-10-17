@@ -199,12 +199,11 @@ return {
 			{
 				"<D-s>",
 				function()
-					if vim.tbl_contains(lspFormatting, vim.bo.filetype) then
-						vim.lsp.buf.format()
-					else
-						require("conform").format { lsp_fallback = false }
-					end
-					vim.cmd.update()
+					require("conform").format {
+						lsp_fallback = vim.tbl_contains(lspFormatting, vim.bo.ft),
+						async = true,
+						callback = vim.cmd.update,
+					}
 				end,
 				desc = "󰒕 Format & Save",
 			},
