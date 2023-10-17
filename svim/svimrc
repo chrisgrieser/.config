@@ -1,5 +1,3 @@
-set clipboard=unnamed
-
 nnoremap Y y$
 noremap U <C-r>
 
