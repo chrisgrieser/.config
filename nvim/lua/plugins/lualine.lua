@@ -32,8 +32,8 @@ end
 
 --------------------------------------------------------------------------------
 
-local bottomSeparators = { left = "", right = "" } -- nerdfont-powerline icons have prefix 'ple-'
-local topSeparators = { left = "", right = "" }
+local bottomSep = { left = "", right = "" } -- nerdfont-powerline icons have prefix 'ple-'
+local topSep = { left = "", right = "" }
 
 local lualineConfig = {
 	tabline = {
@@ -44,8 +44,8 @@ local lualineConfig = {
 				"datetime",
 				style = "%H:%M",
 				cond = function() return vim.o.columns > 110 and vim.o.lines > 25 end,
-				section_separators = topSeparators,
-				fmt = function (time)
+				section_separators = topSep,
+				fmt = function(time)
 					-- make the `:` blink
 					if os.time() % 2 == 0 then time = time:gsub(":", " ") end
 					return time
@@ -55,7 +55,7 @@ local lualineConfig = {
 				"tabs",
 				mode = 1,
 				max_length = vim.o.columns * 0.6,
-				section_separators = topSeparators,
+				section_separators = topSep,
 				cond = function() return fn.tabpagenr("$") > 1 end,
 			},
 		},
@@ -63,7 +63,7 @@ local lualineConfig = {
 			{
 				"navic",
 				cond = function() return bo.filetype ~= "css" end,
-				section_separators = topSeparators,
+				section_separators = topSep,
 			},
 		},
 	},
@@ -72,6 +72,7 @@ local lualineConfig = {
 			{
 				"branch",
 				cond = function()
+					-- show branch only when not in main/master
 					local curBranch = require("lualine.components.branch.git_branch").get_branch()
 					local notMainBranch = curBranch ~= "main" and curBranch ~= "master"
 					local notSpecialBuffer = bo.buftype == ""
@@ -103,11 +104,8 @@ local lualineConfig = {
 			"diff",
 			{
 				"commit",
-				colored = true, -- Set to true displays safe to merge commits and conflicts in color.
-				findout_master_name = true, -- Let's the component get the master branch name from origin HEAD branch.
-				diff_against_master = true, -- Compare current branch to remote and master branch.
-				fetch_interval = 30 * 60 * 1000, -- `git fetch`, every 30 minutes
-				show_only_diverged = false, -- Don't show `0` or check mark if up to date.
+				findout_master_name = true,
+				diff_against_master = true,
 			},
 		},
 		lualine_z = {
@@ -119,13 +117,12 @@ local lualineConfig = {
 		refresh = { statusline = 1000 },
 		globalstatus = true,
 		component_separators = { left = "", right = "" },
-		section_separators = bottomSeparators,
+		section_separators = bottomSep,
 		-- stylua: ignore
 		ignore_focus = {
-			"DressingInput", "DressingSelect",
-			"lazy", "mason", "lspinfo",
+			"DressingInput", "DressingSelect", "lspinfo", "aerial",
 			"ccc-ui", "TelescopePrompt", "checkhealth",
-			"aerial", "noice", "Outline",
+			"noice", "lazy", "mason"
 		},
 	},
 	extensions = { "quickfix" },
@@ -134,8 +131,8 @@ local lualineConfig = {
 --------------------------------------------------------------------------------
 
 return {
-	"nvim-lualine/lualine.nvim",
-	lazy = false,
+	"gzbd/lualine.nvim", -- PENDING https://github.com/nvim-lualine/lualine.nvim/pull/1027
+	lazy = false, -- no flickering on startup
 	dependencies = { "nvim-tree/nvim-web-devicons", "folke/noice.nvim" },
 	opts = lualineConfig,
 }
