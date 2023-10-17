@@ -2,13 +2,10 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 rules:
-  - name: appletree
+  - name: fn.getline
     terms:
-      - appletree
+      - vim.fn.getline(".")
+      - fn.getline(".")
     severity: info
-    note: Apples are bad for your health. 
-    options: 
-      include_note: true
-      word_boundary: false
-      categories: 
-        - health
+    note: Use `vim.api.nvim_get_current_line()` instead.
+    options: { word_boundary: false }
