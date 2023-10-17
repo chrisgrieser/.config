@@ -293,6 +293,7 @@ end
 return {
 	{ -- fuzzy finder
 		"nvim-telescope/telescope.nvim",
+		cmd = "Telescope",
 		keys = {
 			{ "?", function() telescope("keymaps") end, desc = "⌨️  Search Keymaps" },
 			{ "gb", function() telescope("buffers") end, desc = " 󰽙 Buffers" },
