@@ -18,9 +18,10 @@ local linters = {
 	bib = {},
 }
 
-for ft, _ in pairs(linters) do
-	table.insert(linters[ft], "codespell")
-	table.insert(linters[ft], "editorconfig-checker")
+for _, list in pairs(linters) do
+	table.insert(list, "codespell")
+	table.insert(list, "editorconfig-checker")
+	table.insert(list, "alex")
 end
 
 local formatters = {
@@ -106,6 +107,27 @@ local function linterConfigs()
 		"--disable=no-trailing-spaces", -- not disabled in config, so it's enabled for formatting
 		"--disable=no-multiple-blanks",
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
+	}
+
+	-- slave
+	lint.linters.alex = {
+		cmd = "alex",
+		stdin = true,
+		args = function()
+			if vim.bo.ft == "markdown" then
+				return { "--stdin" }
+			elseif vim.bo.ft == "html" then
+				return { "--stdin", "--html" }
+			end
+			return { "--stdin", "--text" }
+		end,
+		ignore_exitcode = true,
+		parser = require("lint.parser").from_pattern(
+		  pattern,
+		  groups,
+		  nil,
+		  { severity = vim.diagnostic.severity.INFO, source = "editorconfig-checker" }
+		),
 	}
 end
 
