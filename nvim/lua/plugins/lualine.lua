@@ -101,6 +101,14 @@ local lualineConfig = {
 		},
 		lualine_y = {
 			"diff",
+			{
+				"commit",
+				colored = true, -- Set to true displays safe to merge commits and conflicts in color.
+				findout_master_name = true, -- Let's the component get the master branch name from origin HEAD branch.
+				diff_against_master = true, -- Compare current branch to remote and master branch.
+				fetch_interval = 30 * 60 * 1000, -- `git fetch`, every 30 minutes
+				show_only_diverged = false, -- Don't show `0` or check mark if up to date.
+			},
 		},
 		lualine_z = {
 			{ "selectioncount", fmt = function(str) return str ~= "" and "礪" .. str or "" end },
