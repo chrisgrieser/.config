@@ -109,32 +109,18 @@ local function linterConfigs()
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
 	}
 
-	local pattern = "%s*(%d+).(%d+).(%d+).(%d+)%s*(.+)"
-	local groups = { "lnum", "col", "end_lnum", "end_col", "message" }
-	local severity_map = {
-		error = vim.diagnostic.severity.ERROR,
-		warning = vim.diagnostic.severity.WARN,
-	}
-	-- disabled
+	-- disable
+	local pattern = "%s*(%d+)(.+)"
+	local groups = { "lnum", "message" }
 	lint.linters.alex = {
 		cmd = "alex",
 		stdin = true,
-		args = {
-			"--stdin",
-			"--text",
-			-- function()
-			-- 	if vim.bo.ft == "html" then
-			-- 		return "--html"
-			-- 	elseif vim.bo.ft ~= "markdown" then
-			-- 		return "--text"
-			-- 	end
-			-- end,
-		},
+		args = { "--stdin", "--text" },
 		ignore_exitcode = true,
 		parser = require("lint.parser").from_pattern(
 			pattern,
 			groups,
-			severity_map,
+			nil,
 			{ severity = vim.diagnostic.severity.WARN, source = "alex" }
 		),
 	}
