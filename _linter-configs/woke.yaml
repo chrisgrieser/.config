@@ -1,0 +1,12 @@
+# DOCS https://docs.getwoke.tech/rules/
+#───────────────────────────────────────────────────────────────────────────────
+
+rules:
+  - name: appletree
+    terms:
+      - appletree
+    severity: warn
+    note: Apples are bad for your health. appletreeeee
+    options: 
+      include_note: true
+      word_boundary: true

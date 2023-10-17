@@ -21,7 +21,7 @@ local linters = {
 for _, list in pairs(linters) do
 	table.insert(list, "codespell")
 	table.insert(list, "editorconfig-checker")
-	table.insert(list, "blocklint")
+	table.insert(list, "woke")
 end
 
 local formatters = {
@@ -63,7 +63,7 @@ local dontInstall = {
 	"injected",
 	"ruff_format",
 	"ruff_fix",
-	"blocklint", -- PENDING PR to mason
+	"woke", -- PENDING PR to mason
 }
 
 ---given the linter- and formatter-list of nvim-lint and conform.nvim, extract a
@@ -109,16 +109,24 @@ local function linterConfigs()
 		"--disable=no-multiple-blanks",
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
 	}
-	lint.linters.blocklint = {
-		cmd = "blocklint",
-		args = { "--stdin", "--end-pos" },
+
+	lint.linters.woke = {
+		cmd = "woke",
+		args = {
+			"--stdin",
+			"--output=simple",
+			"--config=" .. linterConfig .. "/woke.yaml",
+			"--disable-default-rules",
+		},
 		stdin = true,
-		parser = require("lint.parser").from_errorformat("stdin:%l:%c:%k: %m", {
-			source = "blocklint",
-			severity = vim.diagnostic.severity.INFO,
-		}),
+		parser = require("lint.parser").from_errorformat(
+			"/dev/stdin:%l:%c: [%tarning] %m,/dev/stdin:%l:%c: [%trror] %m",
+			{ source = "woke", severity = vim.diagnostic.severity.INFO }
+		),
 	}
-	-- master
+
+	-- slave
+	-- whitelist
 end
 
 local function lintTriggers()
