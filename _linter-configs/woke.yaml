@@ -9,4 +9,4 @@ rules:
     note: Apples are bad for your health. appletreeeee
     options: 
       include_note: true
-      word_boundary: true
+      word_boundary: false
