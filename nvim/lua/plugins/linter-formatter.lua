@@ -19,7 +19,7 @@ local linters = {
 }
 
 for _, list in pairs(linters) do
-	table.insert(list, "codespell")
+	-- table.insert(list, "codespell")
 	table.insert(list, "editorconfig-checker")
 	table.insert(list, "woke")
 end
@@ -110,23 +110,46 @@ local function linterConfigs()
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
 	}
 
+	-- whitelist
+	-- blacklist
+	-- slave
+	local severity_map = {
+		warn = vim.diagnostic.severity.WARN,
+		warning = vim.diagnostic.severity.WARN,
+		error = vim.diagnostic.severity.ERROR,
+	} 
 	lint.linters.woke = {
 		cmd = "woke",
 		args = {
 			"--stdin",
-			"--output=simple",
+			"--output=json",
 			"--config=" .. linterConfig .. "/woke.yaml",
 			"--disable-default-rules",
 		},
 		stdin = true,
-		parser = require("lint.parser").from_errorformat(
-			"/dev/stdin:%l:%c: [%tarning] %m,/dev/stdin:%l:%c: [%trror] %m",
-			{ source = "woke", severity = vim.diagnostic.severity.INFO }
-		),
-	}
+		parser = function(output, _)
+			if output == "" or output == "No findings found." then return {} end
+			local decoded = vim.json.decode(output)
+			if decoded == nil then return {} end
 
-	-- slave
-	-- whitelist
+			local diagnostics = {}
+			for _, item in ipairs(decoded.Results) do
+				local msg = item.Rule.Note
+				if not msg or msg == "" then msg = item.Reason end
+				table.insert(diagnostics, {
+					lnum = item.StartPosition.Line - 1,
+					end_lnum = item.EndPosition.Line - 1,
+					col = item.StartPosition.Column,
+					end_col = item.EndPosition.Column,
+					severity = severity_map[item.Rule.Severity],
+					source = "woke",
+					code = item.Rule.Name,
+					message = msg,
+				})
+			end
+			return diagnostics
+		end,
+	}
 end
 
 local function lintTriggers()
