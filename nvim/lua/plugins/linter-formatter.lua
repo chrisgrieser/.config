@@ -21,6 +21,7 @@ local linters = {
 for _, list in pairs(linters) do
 	table.insert(list, "codespell")
 	table.insert(list, "editorconfig-checker")
+	table.insert(list, "blocklint")
 end
 
 local formatters = {
@@ -62,6 +63,7 @@ local dontInstall = {
 	"injected",
 	"ruff_format",
 	"ruff_fix",
+	"blocklint", -- PENDING PR to mason
 }
 
 ---given the linter- and formatter-list of nvim-lint and conform.nvim, extract a
@@ -107,6 +109,16 @@ local function linterConfigs()
 		"--disable=no-multiple-blanks",
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
 	}
+	lint.linters.blocklint = {
+		cmd = "blocklint",
+		args = { "--stdin", "--end-pos" },
+		stdin = true,
+		parser = require("lint.parser").from_errorformat("stdin:%l:%c:%k: %m", {
+			source = "blocklint",
+			severity = vim.diagnostic.severity.INFO,
+		}),
+	}
+	-- master
 end
 
 local function lintTriggers()
