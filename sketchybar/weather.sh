@@ -28,21 +28,19 @@ while true; do
 	# replace icon-string with nerdfont icon
 	icon=$(
 		echo "$weather" | yq ".icon" |
-			sed -e 's/partly-cloudy-day//' -e 's/partly-cloudy-night//' -e 's/rain//' \
-				-e 's/cloudy//' -e 's/wind//' -e 's/fog/󰖑/' -e 's/hail/󰖒/' \
-				-e 's/snow//' -e 's/clear-day//' -e 's/clear-night//' \
-				-e 's/thunderstorm//'
+		sed -e 's/partly-cloudy-day//' -e 's/partly-cloudy-night//' \
+			-e 's/rain//' -e 's/cloudy//' -e 's/wind//' -e 's/fog/󰖑/' \
+			-e 's/hail/󰖒/' -e 's/snow//' -e 's/clear-day//' \
+			-e 's/clear-night//' -e 's/thunderstorm//'
 	)
-	[[ -n "$icon" || $i -gt 10 ]] && break
+	[[ -n "$icon" || $i -gt 5 ]] && break
 	i=$((i + 1))
-	sleep 2
+	sleep 4
 done
 
 #───────────────────────────────────────────────────────────────────────────────
 
-if [[ "$temperature" == "null" ]]; then
-	icon=""
-	temperature="–"
-fi
+[[ "$temperature" == "null" ]] && temperature="–"
+[[ "$icon" == "null" ]] && icon=""
 
 sketchybar --set "$NAME" icon="$icon" label="$temperature°"
