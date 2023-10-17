@@ -5,6 +5,8 @@ rules:
   - name: appletree
     terms:
       - appletree
+    alternatives:
+      - orangetree
     severity: warn
     note: Apples are bad for your health. appletreeeee
     options: 
