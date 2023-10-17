@@ -97,6 +97,15 @@ function M.commentHr()
 	end
 end
 
+function M.duplicateAsComment()
+	local ln, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local curLine = vim.api.nvim_get_current_line()
+	local indent, content = curLine:match("^(%s*)(.*)")
+	local commentedLine = indent .. vim.bo.commentstring:format(content)
+	vim.api.nvim_buf_set_lines(0, ln - 1, ln, false, { commentedLine, curLine })
+	vim.api.nvim_win_set_cursor(0, { ln + 1, col })
+end
+
 --------------------------------------------------------------------------------
 
 function M.openAlfredPref()

@@ -3,7 +3,7 @@ local linterConfig = require("config.utils").linterConfigFolder
 --------------------------------------------------------------------------------
 
 local linters = {
-	lua = { "selene" },
+	lua = { "selene", "woke" },
 	css = { "stylelint" },
 	sh = { "shellcheck" },
 	markdown = { "markdownlint", "vale" },
@@ -19,9 +19,8 @@ local linters = {
 }
 
 for _, list in pairs(linters) do
-	-- table.insert(list, "codespell")
+	table.insert(list, "codespell")
 	table.insert(list, "editorconfig-checker")
-	table.insert(list, "woke")
 end
 
 local formatters = {
@@ -109,46 +108,11 @@ local function linterConfigs()
 		"--disable=no-multiple-blanks",
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
 	}
-
-	-- whitelist
-	-- blacklist
-	-- slave
-	local severity_map = {
-		warn = vim.diagnostic.severity.WARN,
-		warning = vim.diagnostic.severity.WARN,
-		error = vim.diagnostic.severity.ERROR,
-	} 
-	lint.linters.woke = {
-		cmd = "woke",
-		args = {
-			"--stdin",
-			"--output=json",
-			"--config=" .. linterConfig .. "/woke.yaml",
-			"--disable-default-rules",
-		},
-		stdin = true,
-		parser = function(output, _)
-			if output == "" or output == "No findings found." then return {} end
-			local decoded = vim.json.decode(output)
-			if decoded == nil then return {} end
-
-			local diagnostics = {}
-			for _, item in ipairs(decoded.Results) do
-				local msg = item.Rule.Note
-				if not msg or msg == "" then msg = item.Reason end
-				table.insert(diagnostics, {
-					lnum = item.StartPosition.Line - 1,
-					end_lnum = item.EndPosition.Line - 1,
-					col = item.StartPosition.Column,
-					end_col = item.EndPosition.Column,
-					severity = severity_map[item.Rule.Severity],
-					source = "woke",
-					code = item.Rule.Name,
-					message = msg,
-				})
-			end
-			return diagnostics
-		end,
+	lint.linters.woke.args = {
+		"--stdin",
+		"--output=json",
+		"--config=" .. linterConfig .. "/woke.yaml",
+		"--disable-default-rules",
 	}
 end
 
@@ -217,7 +181,7 @@ local formatterConfig = {
 
 return {
 	{ -- Linter integration
-		"mfussenegger/nvim-lint",
+		"chrisgrieser/nvim-lint",
 		event = "VeryLazy",
 		config = function()
 			linterConfigs()

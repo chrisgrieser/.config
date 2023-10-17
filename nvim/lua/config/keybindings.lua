@@ -85,14 +85,18 @@ keymap("n", "gQ", cmd.cprevious, { desc = " Prev Quickfix" })
 keymap("n", "dQ", function() cmd.cexpr("[]") end, { desc = " Delete Quickfix List" })
 
 -- COMMENTS
--- stylua: ignore
-keymap("n", "qw", function () require("funcs.quality-of-life").commentHr() end, { desc = " Horizontal Divider" })
-keymap("n", "wq", function()
-	local ln = vim.api.nvim_win_get_cursor(0)[1]
-	local curLine = api.nvim_get_current_line()
-	local commentedLine = vim.bo.commentstring:format(curLine)
-	vim.api.nvim_buf_set_lines(0, ln - 1, ln, false, { commentedLine, curLine })
-end, { desc = " Duplicate Line as Comment" })
+keymap(
+	"n",
+	"qw",
+	function() require("funcs.quality-of-life").commentHr() end,
+	{ desc = " Horizontal Divider" }
+)
+keymap(
+	"n",
+	"wq",
+	function() require("funcs.quality-of-life").duplicateAsComment() end,
+	{ desc = " Duplicate Line as Comment" }
+)
 
 -- WHITESPACE CONTROL
 keymap("n", "=", "mzO<Esc>`z", { desc = "  blank above" })
