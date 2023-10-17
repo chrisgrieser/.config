@@ -5,10 +5,10 @@ rules:
   - name: appletree
     terms:
       - appletree
-    alternatives:
-      - orangetree
-    severity: warn
-    note: Apples are bad for your health. appletreeeee
+    severity: info
+    note: Apples are bad for your health. 
     options: 
       include_note: true
       word_boundary: false
+      categories: 
+        - health
