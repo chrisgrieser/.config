@@ -1,4 +1,5 @@
 #!/usr/bin/env osascript -l JavaScript
+ObjC.import("stdlib")
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
@@ -14,5 +15,5 @@ function run(argv) {
 		.processes.byName("Finder")
 		.menuBars[0].menuBarItems.byName(menu)
 		.menus[0].menuItems.byName(submenu)
-		.menus[0].menuItems[menuId - 1].click();
+		.menus[0].menuItems[menuId].click();
 }

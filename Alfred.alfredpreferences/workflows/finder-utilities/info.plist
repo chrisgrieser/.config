@@ -1634,7 +1634,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/open-recent-file-or-folder.applescript</string>
+				<string>./scripts/open-recent-file-or-folder.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
