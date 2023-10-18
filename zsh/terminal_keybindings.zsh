@@ -46,9 +46,11 @@ function zvm_after_init {
 	bindkey -M viins "…" insert-last-word # …=alt+.
 	bindkey -M viins "^Z" undo            # cmd+z via wezterm
 
-	# When confirming a command, move down the history afterwards.
-	# e.g., Using `<up><up><up><CR><CR><CR>` will rerun the last three commands.
-	bindkey '^M' accept-line-and-down-history
+	# DOCS https://zsh.sourceforge.io/Doc/Release/Zsh-Line-Editor.html#Miscellaneous
+	# When confirming a command, search history for it and fill buffer with
+	# following command. e.g., using `<up><up><up><C-l><C-l><C-l>` will rerun 
+	# three commands. Similar Alternative: accept-line-and-down-history
+	bindkey '^L' accept-and-infer-next-history
 
 	# Plugin Bindings
 	bindkey -M viins '^[[A' history-substring-search-up # up/down: history substring search

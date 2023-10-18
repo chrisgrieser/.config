@@ -362,8 +362,11 @@ rules:
       # Window & Tabs
       # w (or cmd+w) = close window/tab
       - type: basic
-        from: { key_code: w }
+        from: { key_code: w, modifiers: { optional: [command] } }
         to:
+          - shell_command: |
+              osascript -e '
+              '
           - { key_code: w, modifiers: [command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # e = close other windows (:only)
