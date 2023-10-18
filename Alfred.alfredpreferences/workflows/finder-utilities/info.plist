@@ -8,6 +8,29 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
+		<key>00F901BA-E149-4363-B3CB-B7F82E2E82C4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>26983499-55C4-4DD0-A206-350270B46652</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>46A45233-5321-47DC-858E-8D7A6D955922</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Reveal in Finder</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>0194E157-0701-47CC-996A-E69B0F976319</key>
 		<array>
 			<dict>
@@ -1535,11 +1558,105 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>ff</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/select-recent-file-or-folder.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Recent Files/Folders</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>00F901BA-E149-4363-B3CB-B7F82E2E82C4</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/open-recent-file-or-folder.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>26983499-55C4-4DD0-A206-350270B46652</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>path</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.revealfile</string>
+			<key>uid</key>
+			<string>46A45233-5321-47DC-858E-8D7A6D955922</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>00F901BA-E149-4363-B3CB-B7F82E2E82C4</key>
+		<dict>
+			<key>note</key>
+			<string>search recent files/folders</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>1490</real>
+		</dict>
 		<key>0194E157-0701-47CC-996A-E69B0F976319</key>
 		<dict>
 			<key>colorindex</key>
@@ -1616,6 +1733,13 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>ypos</key>
 			<real>1265</real>
 		</dict>
+		<key>26983499-55C4-4DD0-A206-350270B46652</key>
+		<dict>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>1490</real>
+		</dict>
 		<key>27C718FF-91BB-4C68-B44E-75CC9EBBE46A</key>
 		<dict>
 			<key>colorindex</key>
@@ -1664,6 +1788,13 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<real>325</real>
 			<key>ypos</key>
 			<real>1270</real>
+		</dict>
+		<key>46A45233-5321-47DC-858E-8D7A6D955922</key>
+		<dict>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>1635</real>
 		</dict>
 		<key>47245CFC-B3E9-4FD6-A021-06D0B87D637C</key>
 		<dict>
@@ -1842,7 +1973,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>note</key>
 			<string>move to front window</string>
 			<key>xpos</key>
-			<real>830</real>
+			<real>825</real>
 			<key>ypos</key>
 			<real>485</real>
 		</dict>
