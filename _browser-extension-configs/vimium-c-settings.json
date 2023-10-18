@@ -1,11 +1,11 @@
 {
 	"name": "Vimium C",
-	"@time": "9/23/2023, 5:01:56 PM",
-	"time": 1695481316498,
+	"@time": "10/18/2023, 4:48:20 PM",
+	"time": 1697640500314,
 	"environment": {
 		"extension": "1.99.994",
 		"platform": "mac",
-		"chromium": 117
+		"chromium": 118
 	},
 	"allBrowserUrls": true,
 	"exclusionListenHash": false,
@@ -39,8 +39,8 @@
 			"pattern": ":https://www.youtube.com/"
 		},
 		{
-			"passKeys": "",
-			"pattern": ":https://eproofing.springer.com/"
+			"passKeys": "? j k o ",
+			"pattern": ":https://github.com/notifications"
 		}
 	],
 	"extAllowList": [
@@ -100,7 +100,6 @@
 		"map q closeTabsOnLeft",
 		"map e closeTabsOnRight",
 		"map m removeTab mayClose",
-		"\" -- using  then/else, since runKey does not work with the `mayClose` parameter",
 		"map u restoreTab",
 		"",
 		"\" wasd",
@@ -109,6 +108,7 @@
 		"map A moveTabLeft",
 		"map D moveTabRight",
 		"map w removeTab mayClose",
+		"\" -- using  then/else, since runKey does not work with the `mayClose` parameter",
 		"map s copyCurrentUrl $then=\"w\" $else=\"w\"",
 		"",
 		"unmap 0",
@@ -163,7 +163,7 @@
 		"map yg copyCurrentUrl sed=\"s=https?://github.com/(.+?/.[^/]+).*=$1=\"",
 		"\" copy links of all tabs",
 		"map yw copyWindowInfo format=\"${url}\"",
-		"\" copy link as markdown",
+		"\" copy as markdown link",
 		"map ym copyCurrentUrl format=\"[${title}](${url})\"",
 		"",
 		"\" Help",

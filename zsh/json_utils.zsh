@@ -71,7 +71,7 @@ function jless() {
 	local tmp="/tmp/temp.json"
 	file_url_or_stdin "$1"
 
-	pane_id=$(wezterm cli spawn -- command jless "$tmp") # open in new wezterm tab
+	pane_id=$(wezterm cli spawn -- command jless --no-line-numbers "$tmp") # open in new wezterm tab
 	wezterm cli set-tab-title --pane-id="$pane_id" "jless"
 }
 

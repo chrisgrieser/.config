@@ -181,7 +181,7 @@ local formatterConfig = {
 
 return {
 	{ -- Linter integration
-		"chrisgrieser/nvim-lint",
+		"mfussenegger/nvim-lint",
 		event = "VeryLazy",
 		config = function()
 			linterConfigs()
