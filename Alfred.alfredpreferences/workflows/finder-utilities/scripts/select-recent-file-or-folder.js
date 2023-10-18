@@ -65,7 +65,7 @@ function run() {
 			title: item.name,
 			uid: item.name,
 			match: camelCaseMatch(item.name),
-			icon: { path: iconPath },
+			icon: { path: item.type + ".png" },
 			arg: item.menuId.toString(),
 			mods: {
 				alt: {
