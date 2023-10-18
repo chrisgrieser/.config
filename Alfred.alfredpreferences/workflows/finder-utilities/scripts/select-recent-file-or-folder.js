@@ -4,7 +4,7 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
 /** @param {string} str */
-function alfredMatcher(str) {
+function camelCaseMatch(str) {
 	const clean = str.replace(/[-()_.:#;,/\\[\]]/g, " ");
 	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
 	return [clean, camelCaseSeperated, str].join(" ");
@@ -63,7 +63,7 @@ function run() {
 		const alfredItem = {
 			title: item.name,
 			uid: item.name,
-			match: alfredMatcher(item.name),
+			match: camelCaseMatch(item.name),
 			icon: { path: iconPath },
 			arg: item.menuId.toString(),
 			mods: {
