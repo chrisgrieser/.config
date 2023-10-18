@@ -142,6 +142,7 @@ serverConfigs.tsserver = {
 			-- JXA is compliant with most of ECMAScript: https://github.com/JXA-Cookbook/JXA-Cookbook/wiki/ES6-Features-in-JXA
 			-- ES2022: .at(), ES2021: `.replaceAll()`, `new Set`
 			target = "ES2022",
+			strictNullChecks = true,
 		},
 		-- "cannot redeclare block-scoped variable" -> not useful for JXA
 		diagnostics = { ignoredCodes = { 2451 } },
