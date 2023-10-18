@@ -80,7 +80,7 @@ sketchybar \
 	icon.y_offset=-1 \
 	\
 	--add item github_notifications $first_row \
-	--set github_notifications update_freq=1800 \
+	--set github_notifications update_freq=60 \
 	script="$PLUGIN_DIR/github_notifications.sh" \
 	\
 	--add item tot $first_row \
