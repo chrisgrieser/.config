@@ -3,7 +3,7 @@
 		"prefix": "matcher (CamelCase)",
 		"body": [
 			"/** @param {string} str */",
-			"function alfredMatcher(str) {",
+			"function camelCaseMatch(str) {",
 			"\tconst clean = str.replace(/[-()_.:#/\\\\\\;,[\\]]/g, \" \");",
 			"\tconst camelCaseSeperated = str.replace(/([A-Z])/g, \" \\$1\");",
 			"\treturn [clean, camelCaseSeperated, str].join(\" \") + \" \";",

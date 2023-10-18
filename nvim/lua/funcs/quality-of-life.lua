@@ -173,8 +173,8 @@ end
 local pinWinNr
 function M.pinWin()
 	-- CONFIG
-	local width = 0.45
-	local height = 0.35
+	local width = 0.4
+	local height = 0.3
 
 	-- if already open, just close is
 	local pinWinOpen = vim.tbl_contains(vim.api.nvim_list_wins(), pinWinNr)
