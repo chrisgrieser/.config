@@ -36,7 +36,7 @@ function run() {
 		.map((item) => item.slice(10).split(" of ")[0])
 		.map((item) => {
 			id++;
-			return { name: item, id: id, type: "d" };
+			return { name: item, id: id, type: "dir" };
 		});
 
 	id = 0;
@@ -46,39 +46,35 @@ function run() {
 			// saved in the menu, so that the IDs need to be used to emulate a click in
 			// the next applescript step
 			id++;
-			return { name: item, id: id, type: "f" };
+			return { name: item, id: id, type: "file" };
 		})
 		.slice(start, end)
 		.filter((item) => !item.name.includes("“"));
 
 	/** @type {AlfredItem[]} */
 	const recentAll = [...recentFolders, ...recentItemsMap].map((item) => {
-		let revealID = item.id;
-		let iconPath = "folder.png";
-		let subtitle = "❌ not available for folder";
-		if (item.type === "f") {
-			// type: [f]ile, [d]irectory
-			revealID++; // id + 1 = reveal in Finder
-			iconPath = "file.png";
-			subtitle = "⌥: Reveal in Finder";
-		}
-		const openArg = item.type + item.id.toString();
-		const revealArg = item.type + revealID.toString();
+		const revealID = item.type === "file" ? item.id : item.id + 1;
+		let iconPath = "../../../_custom-filetype-icons/";
+		iconPath += item.type === "file" ? "blank.png" : "folder.png";
+		const subtitle = item.type === "file" ? "⌥: Reveal in Finder" : "❌ not available for folder";
 
-		return {
+		/** @type {AlfredItem} */
+		const alfredItem = {
 			title: item.name,
 			uid: item.name,
 			match: alfredMatcher(item.name),
 			mods: {
 				alt: {
-					arg: revealArg,
+					arg: revealID.toString(),
 					valid: item.type === "f",
 					subtitle: subtitle,
 				},
 			},
 			icon: { path: iconPath },
-			arg: openArg,
+			arg: item.id.toString(),
+			variables: { type: item.type },
 		};
+		return alfredItem;
 	});
 
 	return JSON.stringify({ items: recentAll });

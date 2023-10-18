@@ -14,7 +14,7 @@ declare class AlfredScriptFilter {
 }
 
 declare class AlfredItem {
-	title?: string;
+	title: string;
 	// biome-ignore lint/complexity/noBannedTypes: <explanation>
 	action?: string | string[] | Object;
 	subtitle?: string;
