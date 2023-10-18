@@ -6,17 +6,27 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 # CONFIG: https://github.com/settings/notifications
 #───────────────────────────────────────────────────────────────────────────────
 
+# GUARD
 if ! command -v yq &>/dev/null; then
 	sketchybar --set "$NAME" icon="" label="yq not found"
 	return 1
+elif [[ -z "$GITHUB_TOKEN" ]]; then
+	# $GITHUB_TOKEN is saved in .zshenv and therefore available here
+	sketchybar --set "$NAME" icon="" label="GITHUB_TOKEN not set"
+	return 1
 fi
 
-# INFO $GITHUB_TOKEN is saved in .zshenv and therefore available here
-notification_count=$(curl -L \
-	-H "Accept: application/vnd.github+json" \
-	-H "Authorization: Bearer $GITHUB_TOKEN" \
-	-H "X-GitHub-Api-Version: 2022-11-28" \
-	"https://api.github.com/notifications" |
-	yq ". | length")
+#───────────────────────────────────────────────────────────────────────────────
 
-sketchybar --set "$NAME" icon="" label="$notification_count"
+notification_count=$(curl -L \
+		-H "Accept: application/vnd.github+json" \
+		-H "Authorization: Bearer $GITHUB_TOKEN" \
+		-H "X-GitHub-Api-Version: 2022-11-28" \
+		"https://api.github.com/notifications" |
+yq ". | length")
+
+if [[ $notification_count -eq 0 ]]; then
+	sketchybar --remove "$NAME"
+else
+	sketchybar --set "$NAME" icon="" label="$notification_count"
+fi

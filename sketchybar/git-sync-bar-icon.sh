@@ -1,7 +1,6 @@
 #!/usr/bin/env zsh
 
-# shellcheck disable=2034
-GIT_OPTIONAL_LOCKS=0
+export GIT_OPTIONAL_LOCKS=0
 
 # WARN running a git command on a path watcher trigger leads to an infinite loop
 # since git commands create index lock files, which again trigger the path
@@ -24,11 +23,17 @@ passChanges=$(git status --porcelain | wc -l | tr -d " ")
 [[ $vaultChanges -ne 0 ]] && label="$label${vaultChanges}v "
 [[ $passChanges -ne 0 ]] && label="$label${passChanges}p"
 
+#───────────────────────────────────────────────────────────────────────────────
+
 # INFO set early, since `git fetch` requires time and the icons should update quicker
 # If there are behinds, icons will appear a few seconds later which isn't a
 # problem. But if there are no behinds, the outdated label will disappear quicker.
-[[ -n "$label" ]] && icon=" "
-sketchybar --set "$NAME" icon="$icon" label="$label$configError"
+
+if [[ -n "$label" ]] ; then
+	sketchybar --set "$NAME" icon=" " label="$label$configError"
+else
+	sketchybar --remove "$NAME"
+fi
 
 #───────────────────────────────────────────────────────────────────────────────
 # COMMITS BEHIND
@@ -49,5 +54,8 @@ passBehind=$(git status --porcelain --branch | head -n1 | grep "behind" | grep -
 [[ -n "$vaultBehind" ]] && label="$label${vaultBehind}!v "
 [[ -n "$passBehind" ]] && label="$label${passBehind}!p"
 
-[[ -n "$label" ]] && icon=" "
-sketchybar --set "$NAME" icon="$icon" label="$label$configError"
+if [[ -n "$label" ]] ; then
+	sketchybar --set "$NAME" icon=" " label="$label$configError"
+else
+	sketchybar --remove "$NAME"
+fi
