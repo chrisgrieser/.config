@@ -11,6 +11,8 @@ M.usb_externalDrive = hs.usb.watcher
 		local name = device.productName
 		local ignore = {
 			"Integrated RGB Camera", -- Docking Station in the office
+			"T27hv-20",
+			"USB 10/100/1000 LAN",
 			"CHERRY Wireless Device" -- Mouse at mother
 		} 
 		if u.tbl_contains(ignore, name) or device.eventType ~= "added" then return end
