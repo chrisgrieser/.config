@@ -79,6 +79,10 @@ sketchybar \
 	script="$PLUGIN_DIR/weather.sh" \
 	icon.y_offset=-1 \
 	\
+	--add item github_notifications $first_row \
+	--set github_notifications update_freq=1800 \
+	script="$PLUGIN_DIR/github_notifications.sh" \
+	\
 	--add item tot $first_row \
 	--set tot \
 	script="$PLUGIN_DIR/tot-count.sh" \

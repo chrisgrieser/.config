@@ -24,17 +24,17 @@ function run() {
 	const recentFilesStart = recentFiles.indexOf("Documents") + 1;
 	const recentFilesEnd = recentFiles.indexOf("Servers") - 1;
 
-	let menuId = 0;
+	let menuId = recentFilesStart;
 	const recentItemsMap = recentFiles
 		.slice(recentFilesStart, recentFilesEnd)
-		.filter((item) => !item.includes("“"))
+		.filter((item) => !item.includes("“")) // remove the "Show item…" entries
 		.map((item) => {
 			// HACK workaround with id necessary, since only file names, but not file paths are
 			// saved in the menu, so that the IDs need to be used to emulate a click in
 			// the next applescript step
 			const itemData = {
 				name: item,
-				menuId: recentFilesStart + menuId,
+				menuId: menuId,
 				type: "file",
 			};
 			menuId = menuId + 2; // every other id results in showing the item
@@ -58,7 +58,7 @@ function run() {
 
 	/** @type {AlfredItem[]} */
 	const recentAll = [...recentItemsMap, ...recentFolders].map((item) => {
-		const subtitle = item.type === "file" ? "⌥: Reveal in Finder" : "❌ Not for folder";
+		const revealSubtitle = item.type === "file" ? "⌥: Reveal in Finder" : "❌ Not for folder";
 
 		/** @type {AlfredItem} */
 		const alfredItem = {
@@ -71,7 +71,7 @@ function run() {
 				alt: {
 					arg: item.menuId + 1,
 					valid: item.type === "file",
-					subtitle: subtitle,
+					subtitle: revealSubtitle,
 				},
 			},
 			variables: { type: item.type },

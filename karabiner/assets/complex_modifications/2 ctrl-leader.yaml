@@ -240,12 +240,13 @@ rules:
           - shell_command: open -a 'Highlights'
           - *deactivate-leader
           - *remove-notice
-      # [g]oogle Docs
+      # [g]ithub notifications
       - type: basic
         from: { key_code: g }
         conditions: [*leader-active]
         to:
-          - shell_command: open -a 'Docs' || open -a "Google Docs" || open 'https://docs.google.com/'
+          # - shell_command: open -a 'Docs' || open -a "Google Docs" || open 'https://docs.google.com/'
+          - shell_command: open "https://github.com/notifications"
           - *deactivate-leader
           - *remove-notice
       # [v]ideo: IINA
