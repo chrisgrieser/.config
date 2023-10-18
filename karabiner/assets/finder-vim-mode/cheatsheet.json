@@ -107,16 +107,7 @@
       ]
     },
     "q (Q)\nmenu (restart Finder)",
-    {
-      "f": 2
-    },
-    "w\nclose win",
-    {
-      "f": 1,
-      "fa": [
-        2
-      ]
-    },
+    "w (W)\nclose (reopen) win",
     "e\nclose other wins",
     {
       "f": 2
