@@ -952,6 +952,86 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>ff</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/select-recent-file-or-folder.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Recent Files/Folders</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>00F901BA-E149-4363-B3CB-B7F82E2E82C4</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/open-recent-file-or-folder.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>26983499-55C4-4DD0-A206-350270B46652</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>49E040C0-C3F2-4056-9AF1-41106F027943</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -1573,86 +1653,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>ff</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/select-recent-file-or-folder.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Recent Files/Folders</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>00F901BA-E149-4363-B3CB-B7F82E2E82C4</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/open-recent-file-or-folder.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>26983499-55C4-4DD0-A206-350270B46652</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>49E040C0-C3F2-4056-9AF1-41106F027943</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -1665,7 +1665,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1490</real>
+			<real>565</real>
 		</dict>
 		<key>0194E157-0701-47CC-996A-E69B0F976319</key>
 		<dict>
@@ -1674,7 +1674,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>480</real>
 			<key>ypos</key>
-			<real>1265</real>
+			<real>1360</real>
 		</dict>
 		<key>06732C2D-88EF-48DF-81E5-A21235C6E96A</key>
 		<dict>
@@ -1683,7 +1683,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>675</real>
 			<key>ypos</key>
-			<real>1390</real>
+			<real>1485</real>
 		</dict>
 		<key>08389D62-E55B-43D3-80A1-D99149535F3C</key>
 		<dict>
@@ -1692,7 +1692,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>525</real>
 			<key>ypos</key>
-			<real>640</real>
+			<real>735</real>
 		</dict>
 		<key>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</key>
 		<dict>
@@ -1721,7 +1721,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>765</real>
+			<real>860</real>
 		</dict>
 		<key>1F75DB1A-2934-4303-AFC0-03FB14B86AC0</key>
 		<dict>
@@ -1741,14 +1741,14 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>675</real>
 			<key>ypos</key>
-			<real>1265</real>
+			<real>1360</real>
 		</dict>
 		<key>26983499-55C4-4DD0-A206-350270B46652</key>
 		<dict>
 			<key>xpos</key>
 			<real>285</real>
 			<key>ypos</key>
-			<real>1490</real>
+			<real>565</real>
 		</dict>
 		<key>27C718FF-91BB-4C68-B44E-75CC9EBBE46A</key>
 		<dict>
@@ -1757,7 +1757,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>485</real>
 			<key>ypos</key>
-			<real>1155</real>
+			<real>1250</real>
 		</dict>
 		<key>2839F7DC-68C1-483F-BC90-1A0A504CF70C</key>
 		<dict>
@@ -1768,7 +1768,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>175</real>
 			<key>ypos</key>
-			<real>1265</real>
+			<real>1360</real>
 		</dict>
 		<key>2B2CC8D8-AB33-455A-BDF2-333C1C7C656F</key>
 		<dict>
@@ -1777,7 +1777,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>820</real>
 			<key>ypos</key>
-			<real>1090</real>
+			<real>1185</real>
 		</dict>
 		<key>3437AEA1-E781-4F91-9F2E-42D89A4ECF6C</key>
 		<dict>
@@ -1797,7 +1797,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>325</real>
 			<key>ypos</key>
-			<real>1270</real>
+			<real>1365</real>
 		</dict>
 		<key>47245CFC-B3E9-4FD6-A021-06D0B87D637C</key>
 		<dict>
@@ -1806,21 +1806,21 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>520</real>
 			<key>ypos</key>
-			<real>830</real>
+			<real>925</real>
 		</dict>
 		<key>49E040C0-C3F2-4056-9AF1-41106F027943</key>
 		<dict>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>1580</real>
+			<real>655</real>
 		</dict>
 		<key>4B567C2C-667C-4052-9432-9180CDC519F6</key>
 		<dict>
 			<key>xpos</key>
 			<real>765</real>
 			<key>ypos</key>
-			<real>810</real>
+			<real>905</real>
 		</dict>
 		<key>51903BB3-AE69-45A7-8492-CC712BB612A4</key>
 		<dict>
@@ -1831,7 +1831,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>350</real>
 			<key>ypos</key>
-			<real>900</real>
+			<real>995</real>
 		</dict>
 		<key>56CD69F0-DA3F-4EF1-809F-78543F4459A1</key>
 		<dict>
@@ -1840,7 +1840,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>640</real>
+			<real>735</real>
 		</dict>
 		<key>5CCD4941-B4C3-444A-8318-2DDBF741229A</key>
 		<dict>
@@ -1858,7 +1858,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>765</real>
+			<real>860</real>
 		</dict>
 		<key>64FEC427-2CB3-4EB1-8543-392E2319CBFC</key>
 		<dict>
@@ -1876,7 +1876,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>415</real>
 			<key>ypos</key>
-			<real>1295</real>
+			<real>1390</real>
 		</dict>
 		<key>75EB64A7-C7B8-455C-A6E7-28745AF96CB9</key>
 		<dict>
@@ -1894,7 +1894,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>345</real>
 			<key>ypos</key>
-			<real>640</real>
+			<real>735</real>
 		</dict>
 		<key>89AAC152-1A79-4CBF-9BDD-DBBAF712F72C</key>
 		<dict>
@@ -1905,7 +1905,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>470</real>
+			<real>415</real>
 		</dict>
 		<key>8D046756-BF24-4658-BD57-CAB48FF61B9D</key>
 		<dict>
@@ -1925,7 +1925,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1265</real>
+			<real>1360</real>
 		</dict>
 		<key>91F1901A-DC76-40BB-A629-0A37A7CDABD7</key>
 		<dict>
@@ -1934,7 +1934,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>900</real>
+			<real>995</real>
 		</dict>
 		<key>942D4032-DF12-435D-AF6E-B89AEBF9791E</key>
 		<dict>
@@ -1943,7 +1943,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1090</real>
+			<real>1185</real>
 		</dict>
 		<key>9536809F-DBBD-4982-90BC-427C6D115A14</key>
 		<dict>
@@ -1954,7 +1954,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>350</real>
 			<key>ypos</key>
-			<real>760</real>
+			<real>855</real>
 		</dict>
 		<key>993B0563-52D6-4547-B1D7-97E70FF55DB2</key>
 		<dict>
@@ -1963,7 +1963,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>640</real>
+			<real>735</real>
 		</dict>
 		<key>B4D4D74C-56BC-4F3B-9840-A3CD979D396C</key>
 		<dict>
@@ -2012,7 +2012,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>480</real>
 			<key>ypos</key>
-			<real>1390</real>
+			<real>1485</real>
 		</dict>
 		<key>DC23B294-25E4-4CEA-841A-71546D15BD89</key>
 		<dict>
@@ -2043,7 +2043,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>900</real>
+			<real>995</real>
 		</dict>
 		<key>EF11B1CF-FE50-4578-AE30-F89D6BD8390D</key>
 		<dict>
@@ -2052,14 +2052,14 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>975</real>
 			<key>ypos</key>
-			<real>1140</real>
+			<real>1235</real>
 		</dict>
 		<key>F1D55862-6DBA-467E-ADC2-C57091BD0065</key>
 		<dict>
 			<key>xpos</key>
 			<real>925</real>
 			<key>ypos</key>
-			<real>810</real>
+			<real>905</real>
 		</dict>
 		<key>F51A014F-1ABC-49D4-ADA8-0B83A691533F</key>
 		<dict>
@@ -2068,7 +2068,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>345</real>
+			<real>290</real>
 		</dict>
 		<key>F77CBF99-913B-4E23-B45A-1330ABD690FC</key>
 		<dict>
@@ -2077,7 +2077,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>670</real>
 			<key>ypos</key>
-			<real>1090</real>
+			<real>1185</real>
 		</dict>
 		<key>FBA872DF-C511-43B9-8018-C366115A078C</key>
 		<dict>
@@ -2086,7 +2086,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>340</real>
 			<key>ypos</key>
-			<real>470</real>
+			<real>415</real>
 		</dict>
 		<key>FFC42B20-8DB1-4234-9917-12D9E1656CC1</key>
 		<dict>
@@ -2095,7 +2095,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>825</real>
 			<key>ypos</key>
-			<real>1265</real>
+			<real>1360</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

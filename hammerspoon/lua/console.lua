@@ -19,9 +19,9 @@ local lightGrey = { white = 0.55 }
 
 -- CONSOLE SETTINGS
 cons.titleVisibility("hidden")
-cons.toolbar(nil)
-cons.consoleFont(baseFont)
 hs.consoleOnTop(false)
+-- cons.toolbar(nil)
+cons.consoleFont(baseFont)
 
 --------------------------------------------------------------------------------
 
@@ -71,13 +71,9 @@ end
 
 -- clean up console as soon as it is opened
 -- hide console as soon as unfocused
-M.wf_hsConsole = wf.new("Hammerspoon")
-	:subscribe(wf.windowUnfocused, function(win)
-		if win:title() == "Hammerspoon Console" then u.app("Hammerspoon"):hide() end
-	end)
-	:subscribe(wf.windowFocused, function(win)
-		if win:title() == "Hammerspoon Console" then cleanupConsole() end
-	end)
+M.wf_hsConsole = wf.new("Hammerspoon"):subscribe(wf.windowCreated, function(win)
+	if win:title() == "Hammerspoon Console" then cleanupConsole() end
+end)
 
 --------------------------------------------------------------------------------
 
