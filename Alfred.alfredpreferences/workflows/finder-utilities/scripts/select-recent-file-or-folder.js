@@ -15,6 +15,7 @@ function camelCaseMatch(str) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
+	/** @type {string[]} */
 	const recentFiles = Application("System Events")
 		.processes.byName("Finder")
 		.menuBars[0].menuBarItems.byName("Apple")
@@ -23,20 +24,21 @@ function run() {
 	const recentFilesStart = recentFiles.indexOf("Documents") + 1;
 	const recentFilesEnd = recentFiles.indexOf("Servers") - 1;
 
-	let menuId = -1;
+	let menuId = 0;
 	const recentItemsMap = recentFiles
 		.slice(recentFilesStart, recentFilesEnd)
-		.filter((/** @type {string} */ item) => !item.includes("“"))
-		.map((/** @type {string} */ item) => {
+		.filter((item) => !item.includes("“"))
+		.map((item) => {
 			// HACK workaround with id necessary, since only file names, but not file paths are
 			// saved in the menu, so that the IDs need to be used to emulate a click in
 			// the next applescript step
-			menuId = menuId + 2;
-			return {
+			const itemData = {
 				name: item,
 				menuId: recentFilesStart + menuId,
 				type: "file",
 			};
+			menuId = menuId + 2; // every other id results in showing the item
+			return itemData;
 		});
 
 	//───────────────────────────────────────────────────────────────────────────
@@ -49,14 +51,13 @@ function run() {
 		.menus[0].menuItems.name()
 		.slice(0, -2)
 		.map((/** @type {string} */ item) => {
+			const itemData = { name: item, menuId: menuId, type: "folder" };
 			menuId++;
-			return { name: item, menuId: menuId, type: "dir" };
+			return itemData;
 		});
 
 	/** @type {AlfredItem[]} */
 	const recentAll = [...recentItemsMap, ...recentFolders].map((item) => {
-		let iconPath = "../../../_custom-filetype-icons/";
-		iconPath += item.type === "file" ? "blank.png" : "folder.png";
 		const subtitle = item.type === "file" ? "⌥: Reveal in Finder" : "❌ Not for folder";
 
 		/** @type {AlfredItem} */
