@@ -6,8 +6,7 @@ threshold=30
 
 # only show menubar item above threshold
 if [[ $outdated -gt $threshold ]] ; then
-	label="$outdated" 
-	icon=" "	
+	sketchybar --set "$NAME" icon=" " label="$outdated"
+else
+	sketchybar --remove "$NAME"
 fi
-
-sketchybar --set "$NAME" icon="$icon" label="$label"
