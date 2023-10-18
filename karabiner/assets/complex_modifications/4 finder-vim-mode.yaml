@@ -346,11 +346,19 @@ rules:
           - *remove-find-notice
           - *leave-find-mode
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
+      #─────────────────────────────────────────────────────────────────────────
+      # WINDOWS
       # closing win should end insert, menu, and find mode, but not cancel move
       - type: basic
         from: { key_code: w, modifiers: { mandatory: [command] } }
         to:
-          - { key_code: w, modifiers: [command] }
+          - shell_command: |
+              osascript -e '
+                tell application "Finder" 
+                  if ((count Finder windows) is 0) then return 
+                  return POSIX path of (insertion location as alias) 
+                end tell' > /tmp/finder-vim-mode-last-closed-window
+              osascript -e 'tell application "Finder" to close window 1'
           - *remove-insert-notice
           - *leave-insert-mode
           - *remove-menu-notice
@@ -358,18 +366,25 @@ rules:
           - *remove-find-notice
           - *leave-find-mode
         conditions: [*finder-app]
-      #─────────────────────────────────────────────────────────────────────────
-      # Window & Tabs
       # w (or cmd+w) = close window/tab
       - type: basic
-        from: { key_code: w, modifiers: { optional: [command] } }
+        from: { key_code: w }
         to:
           - shell_command: |
               osascript -e '
-              '
-          - { key_code: w, modifiers: [command] }
+                tell application "Finder" 
+                  if ((count Finder windows) is 0) then return 
+                  return POSIX path of (insertion location as alias) 
+                end tell' > /tmp/finder-vim-mode-last-closed-window
+              osascript -e 'tell application "Finder" to close window 1'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
-      # e = close other windows (:only)
+      # W = re-open window
+      - type: basic
+        from: { key_code: w, modifiers: { mandatory: [shift] } }
+        to:
+          - shell_command: open "$(cat "/tmp/finder-vim-mode-last-closed-window")"
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
+      # e = close all other windows (:only)
       - type: basic
         from: { key_code: e }
         to:
@@ -377,9 +392,13 @@ rules:
               osascript -e '
                 tell application "Finder"
                   repeat while Finder window 2 exists
+                    if ((count Finder windows) is 2) then
+                      set winPath to POSIX path of (target of window 2 as alias) 
+                    end if
                     close Finder window 2
                   end repeat
-                end tell'
+                  return winPath
+                end tell' > /tmp/finder-vim-mode-last-closed-window
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # <BS> = cycle windows (:bnext)
       - type: basic
