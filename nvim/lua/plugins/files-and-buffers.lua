@@ -74,6 +74,7 @@ return {
 			patterns = {
 				"Makefile",
 				".editorconfig",
+				"README.md",
 				".git", -- submodules
 				"pyproject.toml", -- python
 				"requirements.txt", -- python

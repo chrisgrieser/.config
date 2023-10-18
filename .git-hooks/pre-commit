@@ -9,8 +9,9 @@ max_file_size_mb=10
 # safeguard against accidental pushing of large files
 large_files=$(find . -not -path "**/.git/**" -size +${max_file_size_mb}M)
 if [[ -n "$large_files" ]]; then
-	print "\033[1;33mLarge file(s) found. Aborting commit."
+	echo "Large file(s) found. Aborting commit."
 	echo "$large_files" | sed 's/^/- /'
-	printf "\033[0m"
 	exit 1
 fi
+
+echo "Pre-Commit passed."
