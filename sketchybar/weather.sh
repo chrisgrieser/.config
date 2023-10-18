@@ -1,4 +1,5 @@
-#!/usr/bin/env zsh
+# vim: filetype=bash
+export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 #───────────────────────────────────────────────────────────────────────────────
 # WEATHER USING BRIGHTSKY API
 # DOCS: https://brightsky.dev/docs/#get-/current_weather
@@ -10,11 +11,9 @@
 readonly latitude=52
 readonly longitude=13
 
-export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 if ! command -v yq &>/dev/null; then
-	temperature="yq not found"
-	icon=""
-	sketchybar --set "$NAME" icon="$icon" label="$temperature"
+	sketchybar --set "$NAME" icon="" label="yq not found"
+	return 1
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
