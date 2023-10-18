@@ -2,7 +2,7 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 # https://github.com/jeffreytse/zsh-vi-mode#configuration-function
-function zvm_config() {
+function zvm_config {
 	# Always starting with insert mode for each command line
 	ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 
@@ -30,20 +30,20 @@ vi_plugin="$(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin
 
 # yank to system clipboard – https://stackoverflow.com/a/37411340
 # equivalent to `set clipboard=unnamed` (but only for y)
-function vi-yank-pbcopy() {
+function vi_yank_pbcopy {
 	zle vi-yank # still perform vim-yank for pasting via `p`
 	echo "$CUTBUFFER" | pbcopy
 }
 
 # q in normal mode exists the Terminal
-function normal-mode-exit() { exit; }
+function normal_mode_exit { exit; }
 
-zle -N vi-yank-pbcopy
-zle -N normal-mode-exit
+zle -N vi_yank_pbcopy
+zle -N normal_mode_exit
 
 #───────────────────────────────────────────────────────────────────────────────
 
-function zvm_after_lazy_keybindings() {
+function zvm_after_lazy_keybindings {
 	bindkey -M vicmd 'L' vi-end-of-line
 	bindkey -M vicmd 'H' vi-first-non-blank
 	bindkey -M vicmd 'U' redo
@@ -56,7 +56,6 @@ function zvm_after_lazy_keybindings() {
 
 	# -s flag sends direct keystrokes and therefore allows for remappings
 	bindkey -M vicmd -s 'Y' 'y$'
-	bindkey -M vicmd -s 'X' 'mz$"_x`z' # Remove last character from line
 
 	bindkey -M vicmd -s '^[OQ' 'daw'   # HACK ^[OQ = F2, set via Karabiner to <S-Space>
 	bindkey -M vicmd -s ' ' 'ciw'

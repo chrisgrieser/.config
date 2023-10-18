@@ -1,30 +1,21 @@
 #───────────────────────────────────────────────────────────────────────────────
 # CUSTOM WIDGETS
 # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/copybuffer/copybuffer.plugin.zsh
-function copy-buffer() {
+function copy_buffer {
 	# shellcheck disable=2153
 	printf "%s" "$BUFFER" | pbcopy
 	zle -M "Buffer copied."
 }
-zle -N copy-buffer
+zle -N copy_buffer
 
-function copy-location() {
+function copy_location {
 	pwd | pbcopy
 	zle -M "'$PWD' copied."
 }
-zle -N copy-location
-
-# kills complete line, instead of just to beginning (^U) or end of a line (^K)
-# and copies to system clipboard
-function kill-full-line() {
-	printf "%s" "$BUFFER" | pbcopy
-	zle end-of-line || true
-	zle vi-kill-line
-}
-zle -N kill-full-line
+zle -N copy_location
 
 # Cycle through Directories
-function grappling-hook() {
+function grappling_hook {
 	local to_open="$WD"
 	if [[ "$PWD" == "$WD" ]]; then
 		to_open="$HOME/.config"
@@ -38,7 +29,7 @@ function grappling-hook() {
 	wezterm set-working-directory # so wezterm knows we are in a new directory
 	zle reset-prompt
 }
-zle -N grappling-hook
+zle -N grappling_hook
 
 #───────────────────────────────────────────────────────────────────────────────
 # INFO BINDINGS FOR WIDGETS
@@ -48,27 +39,29 @@ zle -N grappling-hook
 #───────────────────────────────────────────────────────────────────────────────
 
 # needs to be wrapped to not be overwritten by zsh-vi-mode
-function zvm_after_init() {
-	bindkey -M viins '^P' copy-location
-	bindkey -M viins '^B' copy-buffer
-	bindkey -M viins "^O" grappling-hook # bound to cmd+enter via wezterm
-	bindkey -M viins "^U" kill-full-line
-}
-bindkey -M viins "…" insert-last-word # …=alt+.
-bindkey -M viins "^Z" undo            # cmd+z via wezterm
+function zvm_after_init {
+	bindkey -M viins '^P' copy_location
+	bindkey -M viins '^B' copy_buffer
+	bindkey -M viins "^O" grappling_hook # bound to cmd+enter via wezterm
+	bindkey -M viins "…" insert-last-word # …=alt+.
+	bindkey -M viins "^Z" undo            # cmd+z via wezterm
 
-# Plugin Bindings
-bindkey -M viins '^[[A' history-substring-search-up # up/down: history substring search
-bindkey -M viins '^[[B' history-substring-search-down
+	# When confirming a command, move down the history afterwards.
+	# e.g., Using `<up><up><up><CR><CR><CR>` will rerun the last three commands.
+	bindkey '^M' accept-line-and-down-history
+
+	# Plugin Bindings
+	bindkey -M viins '^[[A' history-substring-search-up # up/down: history substring search
+	bindkey -M viins '^[[B' history-substring-search-down
+}
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# but when typing hashes or backticks, escape them
-function autoEscapeBackTick() { LBUFFER+='\`' ; }
+# when typing bangs or backticks, escape them
+function autoEscapeBackTick { LBUFFER+='\`' ; }
 zle -N autoEscapeBackTick
 bindkey -M viins '`' autoEscapeBackTick
 
 function autoEscapeBang { LBUFFER+='\!' ; }
 zle -N autoEscapeBang
 bindkey -M viins '!' autoEscapeBang
-
