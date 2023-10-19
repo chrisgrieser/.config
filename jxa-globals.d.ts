@@ -45,9 +45,7 @@ declare class FinderItem {
 }
 
 // DOCS https://developer.apple.com/library/archive/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html
-declare type PathObj = {
-	toString(): string;
-};
+declare type PathObj = { toString(): string; };
 declare function Path(filepath: string): PathObj;
 
 declare type ReminderList = {
@@ -62,10 +60,27 @@ declare type ReminderList = {
 	}
 } 
 
+declare type ReminderProperties = {
+	name: string;
+	body?: string;
+	id?: string; // x-apple-reminder:// URI
+	completed?: boolean;
+	flagged?: boolean;
+	priority?: number;
+	remindMeDate?: Date;
+	allDayDueDate?: Date;
+	dueDate?: Date;
+	alldayDueDate?: Date;
+	dueDate?: Date;
+	completionDate?: Date;
+	creationDate?: Date;
+}
+
 declare type ReminderObj = {
 	name(): string;
 	body(): string;
 	delete(): void;
+	properties(): ReminderProperties;
 }
 
 declare const Application: {
@@ -121,13 +136,8 @@ declare const Application: {
 		lists: {
 			byName(name: string): ReminderList;
 		};
-		// biome-ignore lint/style/useNamingConvention: given like that
-		Reminder(options: {
-			name: string;
-			body?: string;
-			allDayDueDate?: Date;
-			dueDate?: Date;
-		}): ReminderObj;
+		// biome-ignore lint/style/useNamingConvention: not set by me
+		Reminder(options: ReminderProperties): ReminderObj;
 	};
 	(name: "Finder"): MacAppObj & {
 		// PathObj and finderItems are not the same, but are apparently both accepted
@@ -171,8 +181,8 @@ declare const ObjC: {
 
 declare function delay(seconds: number): void;
 
-// requires `ObjC.import("AppKit")`
 declare const $: {
+	// REQUIRES `ObjC.import("AppKit")`
 	// biome-ignore lint: not set by me
 	NSPasteboard: any;
 	// biome-ignore lint: not set by me
@@ -180,7 +190,7 @@ declare const $: {
 	// biome-ignore lint: not set by me
 	(paths: string[]): any;
 
-	// requires `ObjC.import("stdlib")`
+	// REQUIRES `ObjC.import("stdlib")`
 	getenv: (envVar: string) => string;
 	// biome-ignore lint: not set by me
 	NSFileManager: any;
