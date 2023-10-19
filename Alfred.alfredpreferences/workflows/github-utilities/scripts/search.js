@@ -27,6 +27,7 @@ function run() {
 	const notifications = httpRequest("https://api.github.com/notifications", [
 		"Accept: application/vnd.github.v3+json",
 		"Authorization: BEARER " + $.getenv("github_token"),
+		"X-GitHub-Api-Version: 2022-11-28",
 	])
 		.split("\r")
 		.map((item) => {
