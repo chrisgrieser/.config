@@ -1240,33 +1240,6 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>sleep 2
-
-# Update Counter in Sketchybar
-export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-sketchybar --trigger update-github-notifications</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>11</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>2219BB00-C543-481D-87FF-C1E38C53E3CF</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1320,6 +1293,33 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 			<string>B35052FF-0027-40CC-BC59-EA7D442A57EA</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>sleep 2
+
+# Update Counter in Sketchybar
+export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+sketchybar --trigger update-github-notifications</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>2219BB00-C543-481D-87FF-C1E38C53E3CF</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1711,9 +1711,9 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<key>note</key>
 			<string>update sketchybar counter</string>
 			<key>xpos</key>
-			<real>445</real>
+			<real>770</real>
 			<key>ypos</key>
-			<real>900</real>
+			<real>1005</real>
 		</dict>
 		<key>24CFE3CA-F401-498B-8ABC-20D1D4AB3AB3</key>
 		<dict>
