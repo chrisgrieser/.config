@@ -36,11 +36,18 @@ local function diagSuffix(diag, mode)
 	return ""
 end
 
+---@param diag Diagnostic
+---@return string
+local function formatVirtualText(diag)
+	return diag.message:gsub(" ?%.$", "")
+
+end
+
 vim.diagnostic.config {
 	virtual_text = {
 		severity = { min = vim.diagnostic.severity.INFO }, -- leave out hints
 		spacing = 1,
-		format = rmTrailDot,
+		format = formatVirtualText,
 		suffix = function(diag) return diagSuffix(diag, "virtual_text") end,
 	},
 	float = {
