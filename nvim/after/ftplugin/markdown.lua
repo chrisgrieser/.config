@@ -4,23 +4,15 @@ local u = require("config.utils")
 local fn = vim.fn
 --------------------------------------------------------------------------------
 
+optl.expandtab = false
 optl.tabstop = 4 -- less nesting in md
 
--- since markdown has rarely indented lines, and also rarely overlength in lines, 
+-- since markdown has rarely indented lines, and also rarely overlength in lines,
 -- move everything a bit more to the right
 if vim.bo.buftype == "" then optl.signcolumn = "yes:5" end
 
 --------------------------------------------------------------------------------
 -- MARKDOWN-SPECIFIC KEYMAPS
-
--- stylua: ignore
-keymap("n", "gs", function ()
-	require("telescope.builtin").lsp_document_symbols {
-		ignore_symbols = {}, -- do not ignore type "string", since that's what headings in md are
-		prompt_title = "Headings",
-	}
-end, { desc = "󰒕 Markdown Headings", buffer = true })
-
 keymap("n", "<leader>x", "mzI- [ ] <Esc>`z", { desc = " Add Task", buffer = true })
 keymap("n", "<D-4>", "mzI- <Esc>`z", { desc = " Add List", buffer = true })
 
