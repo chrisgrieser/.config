@@ -1118,6 +1118,55 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>gn</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>🔔 GitHub Notifications</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>B35052FF-0027-40CC-BC59-EA7D442A57EA</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>path</key>
 				<string></string>
 			</dict>
@@ -1947,6 +1996,13 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<real>260</real>
 			<key>ypos</key>
 			<real>210</real>
+		</dict>
+		<key>B35052FF-0027-40CC-BC59-EA7D442A57EA</key>
+		<dict>
+			<key>xpos</key>
+			<real>1055</real>
+			<key>ypos</key>
+			<real>650</real>
 		</dict>
 		<key>B6818B6F-457E-4CCC-B030-46BCD7DA9F02</key>
 		<dict>

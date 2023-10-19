@@ -62,7 +62,6 @@ local dontInstall = {
 	"injected",
 	"ruff_format",
 	"ruff_fix",
-	"woke", -- PENDING PR to mason
 }
 
 ---given the linter- and formatter-list of nvim-lint and conform.nvim, extract a
@@ -170,7 +169,7 @@ local formatterConfig = {
 				"--duplicates", "--sort-fields", "--remove-empty-fields", "--omit=month,issn,abstract",
 			condition = function(ctx)
 				local ignore = vim.fs.basename(ctx.filename) == "main-bibliography.bib"
-				if ignore then u.notify("conform.nvim", "Ignoring main-bibliography.bib") end
+				if ignore then u.notify("conform.nvim", "Ignoring main-bibliography.bib.") end
 				return not ignore
 			end,
 		},
