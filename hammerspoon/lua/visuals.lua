@@ -18,7 +18,7 @@ function M.holeCover(toMode)
 
 	if M.coverParts then
 		for _, cover in pairs(M.coverParts) do
-			cover:delete()
+			if cover then cover:delete() end
 			cover = nil
 		end
 		M.CoverParts = nil
