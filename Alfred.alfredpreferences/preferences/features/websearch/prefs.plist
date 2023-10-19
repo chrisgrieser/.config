@@ -26,19 +26,6 @@
 			<key>url</key>
 			<string>steam://openurl/https://store.steampowered.com/search/?term={query}</string>
 		</dict>
-		<key>9672465E-E164-4221-9824-0E164A40E39B</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>gn</string>
-			<key>text</key>
-			<string>Google News</string>
-			<key>url</key>
-			<string>https://news.google.com/?hl=de&amp;gl=DE&amp;ceid=DE:de</string>
-			<key>utf8</key>
-			<true/>
-		</dict>
 		<key>9A8A5D68-CFCD-4834-A82F-D1866C708FF3</key>
 		<dict>
 			<key>enabled</key>
