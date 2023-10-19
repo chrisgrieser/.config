@@ -32,7 +32,7 @@ local formatters = {
 	python = { "ruff_format", "ruff_fix" },
 	yaml = { "prettier" },
 	html = { "prettier" },
-	markdown = { "markdown-toc", "markdownlint", "injected" },
+	markdown = { "markdown-toc", "markdownlint" },
 	css = { "stylelint", "prettier" },
 	sh = { "shellcheck", "beautysh", "squeeze_blanks", "trim_newlines" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
@@ -103,8 +103,7 @@ local function linterConfigs()
 	lint.linters["editorconfig-checker"].args =
 		{ "--no-color", "--config=" .. linterConfig .. "/editorconfig-checker-rc.json" }
 	lint.linters.markdownlint.args = {
-		"--disabled=no-trailing-spaces", -- not disabled in config, so it's enabled for formatting
-		"--disable=no-multiple-blanks",
+		"--disable=no-trailing-spaces no-multiple-blanks", -- not disabled in config, so it's enabled for formatting
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
 	}
 	lint.linters.woke.args = {
