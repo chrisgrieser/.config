@@ -50,6 +50,24 @@ declare type PathObj = {
 };
 declare function Path(filepath: string): PathObj;
 
+declare type ReminderList = {
+	make(any);
+	reminders: {
+		push(newReminder: ReminderObj): void;
+		whose(options: { dueDate: {
+			_lessThan?: Date; // https://developer.apple.com/library/archive/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html#//apple_ref/doc/uid/TP40014508-CH109-SW10
+			_greaterThan?: Date;
+		}; })
+		(): ReminderObj[];
+	}
+} 
+
+declare type ReminderObj = {
+	name(): string;
+	body(): string;
+	delete(): void;
+}
+
 declare const Application: {
 	currentApplication: () => {
 		doShellScript(script: string): string; // DOCS https://developer.apple.com/library/archive/technotes/tn2065/_index.html
@@ -99,11 +117,17 @@ declare const Application: {
 		processes: any;
 	};
 	(name: "Reminders"): MacAppObj & {
-		defaultList(): {
-			make(any);
-			// biome-ignore lint/suspicious/noExplicitAny: later
-			reminders: any;
+		defaultList(): ReminderList;
+		lists: {
+			byName(name: string): ReminderList;
 		};
+		// biome-ignore lint/style/useNamingConvention: given like that
+		Reminder(options: {
+			name: string;
+			body?: string;
+			allDayDueDate?: Date;
+			dueDate?: Date;
+		}): ReminderObj;
 	};
 	(name: "Finder"): MacAppObj & {
 		// PathObj and finderItems are not the same, but are apparently both accepted
@@ -147,8 +171,8 @@ declare const ObjC: {
 
 declare function delay(seconds: number): void;
 
+// requires `ObjC.import("AppKit")`
 declare const $: {
-	// requires `ObjC.import("AppKit")`
 	// biome-ignore lint: not set by me
 	NSPasteboard: any;
 	// biome-ignore lint: not set by me

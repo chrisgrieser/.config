@@ -265,7 +265,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/add-reminder.applescript</string>
+				<string>./scripts/add-reminder.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -308,7 +308,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/add-reminder.js</string>
+				<string>./scripts/select-reminder-time.js</string>
 				<key>subtext</key>
 				<string>loading…</string>
 				<key>title</key>
@@ -335,7 +335,7 @@
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string>{var:selection}</string>
+				<string></string>
 				<key>title</key>
 				<string>✅ Added "{var:reminderText}"</string>
 			</dict>
