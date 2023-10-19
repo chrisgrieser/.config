@@ -10,7 +10,6 @@
 		"formatWithErrors": true
 	},
 	"organizeImports": { "enabled": true },
-	"vcs": { "enabled": true, "clientKind": "git" },
 	"json": {
 		"parser": { "allowComments": true }
 	},
@@ -21,6 +20,12 @@
 		"rules": {
 			"all": true,
 			"suspicious": { "noConsoleLog": "off" },
+			"nursery": {
+				"noUselessLoneBlockStatements": "off"
+			},
+			"complexity": {
+				"noExcessiveCognitiveComplexity": "off" 
+			},
 			"style": {
 				"useTemplate": "off",
 				"noParameterAssign": "off",
