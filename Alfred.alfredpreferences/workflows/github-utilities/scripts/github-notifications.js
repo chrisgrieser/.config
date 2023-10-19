@@ -49,28 +49,48 @@ function run(argv) {
 	const responseObj = JSON.parse(response);
 	if (responseObj.length === 0) {
 		return JSON.stringify({
-			items: [{ title: "No unread notifications.", valid: false }],
+			items: [
+				{
+					title: "No unread notifications.",
+					subtitle: "⏎: Open Notification Inbox at Github.",
+					arg: "https://github.com/notifications",
+					mods: {
+						cmd: { valid: false },
+					},
+				},
+			],
 		});
 	}
 
+	const iconMaps = {
+		// biome-ignore lint/style/useNamingConvention: <explanation>
+		PullRequest: "🟧", //codespell-ignore
+		// biome-ignore lint/style/useNamingConvention: <explanation>
+		Issue: "🔵",
+		author: "👤",
+		mention: "💬",
+	} 
+
 	/** @type AlfredItem[] */
 	const notifications = responseObj.map((/** @type {GithubNotif} */ notif) => {
-		const subtitle = `${notif.repository.name}  ·  ${notif.subject.type}  ·  ${notif.reason} `;
 		const url = notif.subject.url
 			.replace("https://api.github.com/repos/", "https://github.com/")
 			.replace("pulls/", "pull/");
+		const typeIcon = iconMaps[notif.subject.type] || notif.subject.type;
+		const reasonIcon = iconMaps[notif.reason] || notif.reason;
+		const subtitle = `${typeIcon} ${reasonIcon}  ${notif.repository.name}`;
 		return {
 			title: notif.subject.title,
 			subtitle: subtitle,
 			arg: url,
 			mods: {
-				cmd: {
-					arg: notif.id,
-					variable: { notificationsLeft: notifications.length - 1 },
-				},
+				cmd: { arg: notif.id },
 			},
 		};
 	});
 
-	return JSON.stringify({ items: notifications });
+	return JSON.stringify({
+		items: notifications,
+		variable: { notificationsLeft: notifications.length - 1 },
+	});
 }

@@ -55,7 +55,7 @@ alias -g B='| bat'
 alias -g L='| less'
 alias -g C='| pbcopy ; echo "Copied."' # copy
 alias -g N='| wc -l | tr -d " "'       # count lines
-alias -g J='| command jless'
+alias -g J='| command jless --no-line-numbers'
 
 # highlights for them
 ZSH_HIGHLIGHT_REGEXP+=(' G$' 'fg=magenta,bold')

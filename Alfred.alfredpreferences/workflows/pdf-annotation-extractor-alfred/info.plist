@@ -503,7 +503,7 @@ Extract Annotations as Markdown, insert Pandoc Citations with correct page numbe
 		</dict>
 	</array>
 	<key>version</key>
-	<string>8.9.0</string>
+	<string>8.10.0</string>
 	<key>webaddress</key>
 	<string>https://github.com/chrisgrieser/pdf-annotation-extractor-alfred</string>
 </dict>
