@@ -14,21 +14,14 @@
 		"parser": { "allowComments": true }
 	},
 	"javascript": {
-		"globals": ["ObjC", "Application", "delay", "Path"]
+		"globals": ["ObjC", "Application", "delay", "Path", "$"]
 	},
 	"linter": {
 		"rules": {
 			"all": true,
-			"correctness": {
-
-			},
 			"suspicious": { "noConsoleLog": "off" },
-			"nursery": {
-				"noUselessLoneBlockStatements": "off"
-			},
-			"complexity": {
-				"noExcessiveCognitiveComplexity": "off" 
-			},
+			"nursery": { "noUselessLoneBlockStatements": "off" },
+			"complexity": { "noExcessiveCognitiveComplexity": "off" },
 			"style": {
 				"useTemplate": "off",
 				"noParameterAssign": "off",

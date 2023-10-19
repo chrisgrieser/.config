@@ -100,6 +100,7 @@ local lualineConfig = {
 		lualine_y = {
 			{
 				"commit",
+				icon = "",
 				unpulled_master_icon = "󰔰 ",
 				unpulled_icon = "󰶡 ",
 				unpushed_icon = "󰶣 ",
