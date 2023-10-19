@@ -34,32 +34,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>3B742E23-7911-4DD4-A24D-49E02F1AF0AC</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>CB8F1C4C-17CA-4750-9BEE-0D8EAF2CA8E4</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>504E5795-9E1D-48DE-B0AC-A694A9285F3E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>CB8F1C4C-17CA-4750-9BEE-0D8EAF2CA8E4</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>578C08D0-C681-4E8A-AC1A-63359A0F0C34</key>
 		<array>
 			<dict>
@@ -78,19 +52,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>8610EFE4-6BCC-4C55-A92F-A1ACAF175489</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>7107C86B-1891-4DC6-B157-D10F2AEF3358</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2893A1EE-7E10-4249-BEE6-08B0F14FEBFB</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -156,19 +117,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>931A201F-67BF-4D23-845D-15074A56A83D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>CB8F1C4C-17CA-4750-9BEE-0D8EAF2CA8E4</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C563AE61-3FFD-4FB3-B63B-7D3655C138BE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -250,7 +198,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Calendar &amp; Reminders &amp; Phone &amp; Map</string>
+	<string>Calendar &amp; Reminders</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -265,7 +213,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/add-reminder.js</string>
+				<string>./scripts/add-reminder1.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -331,13 +279,13 @@
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
-				<false/>
+				<true/>
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string></string>
+				<string>{query}</string>
 				<key>title</key>
-				<string>✅ Added "{var:reminderText}"</string>
+				<string>✅ Added Reminder</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -679,126 +627,6 @@ end tell</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>com.apple.addressbook.person</string>
-				</array>
-				<key>name</key>
-				<string>Call</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>504E5795-9E1D-48DE-B0AC-A694A9285F3E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
-				<false/>
-				<key>name</key>
-				<string>Open Adress in Maps</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>7107C86B-1891-4DC6-B157-D10F2AEF3358</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>searcher</key>
-				<integer>1635216737</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.systemwebsearch</string>
-			<key>uid</key>
-			<string>2893A1EE-7E10-4249-BEE6-08B0F14FEBFB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
-				<false/>
-				<key>name</key>
-				<string>Call with Facetime</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>3B742E23-7911-4DD4-A24D-49E02F1AF0AC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>tel://{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>CB8F1C4C-17CA-4750-9BEE-0D8EAF2CA8E4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/click-call.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>C563AE61-3FFD-4FB3-B63B-7D3655C138BE</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -824,22 +652,6 @@ end tell</string>
 			<key>ypos</key>
 			<real>270</real>
 		</dict>
-		<key>2893A1EE-7E10-4249-BEE6-08B0F14FEBFB</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>215</real>
-			<key>ypos</key>
-			<real>545</real>
-		</dict>
-		<key>3B742E23-7911-4DD4-A24D-49E02F1AF0AC</key>
-		<dict>
-			<key>xpos</key>
-			<real>605</real>
-			<key>ypos</key>
-			<real>565</real>
-		</dict>
 		<key>42A7B9B4-EB45-4703-9232-AF5C99D4512E</key>
 		<dict>
 			<key>colorindex</key>
@@ -857,13 +669,6 @@ end tell</string>
 			<real>775</real>
 			<key>ypos</key>
 			<real>310</real>
-		</dict>
-		<key>504E5795-9E1D-48DE-B0AC-A694A9285F3E</key>
-		<dict>
-			<key>xpos</key>
-			<real>605</real>
-			<key>ypos</key>
-			<real>450</real>
 		</dict>
 		<key>578C08D0-C681-4E8A-AC1A-63359A0F0C34</key>
 		<dict>
@@ -888,20 +693,11 @@ end tell</string>
 		<key>6D5011F9-F8DB-4744-945E-FE33325726F3</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>3</integer>
 			<key>xpos</key>
 			<real>385</real>
 			<key>ypos</key>
 			<real>415</real>
-		</dict>
-		<key>7107C86B-1891-4DC6-B157-D10F2AEF3358</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>545</real>
 		</dict>
 		<key>8610EFE4-6BCC-4C55-A92F-A1ACAF175489</key>
 		<dict>
@@ -935,18 +731,11 @@ end tell</string>
 		<key>AB6C212F-70C4-4291-963F-B7D6DFD63435</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>215</real>
+			<real>210</real>
 			<key>ypos</key>
 			<real>415</real>
-		</dict>
-		<key>C563AE61-3FFD-4FB3-B63B-7D3655C138BE</key>
-		<dict>
-			<key>xpos</key>
-			<real>960</real>
-			<key>ypos</key>
-			<real>565</real>
 		</dict>
 		<key>C73C4C50-6AAA-4294-929D-5C770E4E4E36</key>
 		<dict>
@@ -957,19 +746,12 @@ end tell</string>
 			<key>ypos</key>
 			<real>165</real>
 		</dict>
-		<key>CB8F1C4C-17CA-4750-9BEE-0D8EAF2CA8E4</key>
-		<dict>
-			<key>xpos</key>
-			<real>800</real>
-			<key>ypos</key>
-			<real>565</real>
-		</dict>
 		<key>E206A8A9-ADE8-4A8D-AA62-AC94A971FBB3</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>3</integer>
 			<key>note</key>
-			<string>open shopping list</string>
+			<string>add to shopping list</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -1000,7 +782,7 @@ end tell</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>605</real>
+			<real>600</real>
 			<key>ypos</key>
 			<real>310</real>
 		</dict>
