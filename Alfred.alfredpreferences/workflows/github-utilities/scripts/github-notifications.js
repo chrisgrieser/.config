@@ -62,22 +62,25 @@ function run(argv) {
 		});
 	}
 
-	const iconMaps = {
+	const typeMaps = {
 		// biome-ignore lint/style/useNamingConvention: <explanation>
 		PullRequest: "🟧", //codespell-ignore
 		// biome-ignore lint/style/useNamingConvention: <explanation>
 		Issue: "🔵",
+	};
+	const reasonMaps = {
 		author: "👤",
 		mention: "💬",
-	} 
+		subscribed: "👁️",
+	};
 
 	/** @type AlfredItem[] */
 	const notifications = responseObj.map((/** @type {GithubNotif} */ notif) => {
 		const url = notif.subject.url
 			.replace("https://api.github.com/repos/", "https://github.com/")
 			.replace("pulls/", "pull/");
-		const typeIcon = iconMaps[notif.subject.type] || notif.subject.type;
-		const reasonIcon = iconMaps[notif.reason] || notif.reason;
+		const typeIcon = typeMaps[notif.subject.type] || notif.subject.type;
+		const reasonIcon = reasonMaps[notif.reason] || notif.reason;
 		const subtitle = `${typeIcon} ${reasonIcon}  ${notif.repository.name}`;
 		return {
 			title: notif.subject.title,
