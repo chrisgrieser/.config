@@ -2,6 +2,7 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
+//──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} str */
 function alfredMatcher(str) {
@@ -31,14 +32,7 @@ const noDisplayAuthors = $.getenv("no_display_authors")
 function run() {
 	// determine repo
 	const defaultRepo = $.getenv("default_repo").replace(/^~/, app.pathTo("home folder"));
-	let fileActionUsed, repoPath;
-	try {
-		fileActionUsed = true;
-		repoPath = $.getenv("filepath").replace(/(.*\/).*/, "$1");
-	} catch (_error) {
-		fileActionUsed = false;
-		repoPath = finderFrontWindow() || defaultRepo;
-	}
+	const repoPath = finderFrontWindow() || defaultRepo;
 
 	// validate it's in a git repo
 	try {
@@ -51,18 +45,15 @@ function run() {
 
 	// determine branches
 	const branchCommitPairs = {};
-	app
-		.doShellScript(`cd "${repoPath}" && git branch --verbose`)
-		.split("\r")
-		.forEach((line) => {
-			const branch = line.split(" ")[1];
-			const hash = line.split(" ")[2];
-			branchCommitPairs[hash] = branch;
-		});
+	const branches = app.doShellScript(`cd "${repoPath}" && git branch --verbose`).split("\r");
+	for (const line of branches) {
+		const branch = line.split(" ")[1];
+		const hash = line.split(" ")[2];
+		branchCommitPairs[hash] = branch;
+	}
 
 	// https://stackoverflow.com/questions/3701404/how-to-list-all-commits-that-changed-a-specific-file
-	const fileCommits = fileActionUsed ? ` --follow -- '${$.getenv("filepath")}'` : "";
-	const gitLogCommand = `git log --all --format="%h;;%D;;%cr;;%an;;%s" ${fileCommits}`;
+	const gitLogCommand = 'git log --all --format="%h;;%D;;%cr;;%an;;%s"';
 
 	/** @type AlfredItem[] */
 	const commitArr = app
@@ -71,7 +62,7 @@ function run() {
 		.map((commit) => {
 			const parts = commit.split(";;");
 			const hash = parts[0];
-			const pointer = parts[1]
+			const pointer = parts[1];
 			const pointerDisplay = pointer
 				.replaceAll("HEAD", "👤")
 				.replaceAll("origin", "☁️")

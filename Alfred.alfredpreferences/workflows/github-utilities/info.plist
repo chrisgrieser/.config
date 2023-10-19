@@ -212,50 +212,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>52C4FB7A-4D96-4FE8-884C-BC35E541C31D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>BC540696-9F8F-4C3E-A49D-75AB31EF690F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>5AF52A7B-9FA9-4D8B-9784-4864B0A9AF06</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>EC5EF5AB-920D-45E1-9F3E-CEF737C5D2F5</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>5C6380EF-E35A-4951-ADF5-C995040DBE27</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>D4F0274E-F79C-43A1-9C38-65C92510EEF2</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>64E22B39-2269-4B91-832E-9ACC83DF0D4A</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>52C4FB7A-4D96-4FE8-884C-BC35E541C31D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -395,19 +356,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>90792685-336C-4947-8358-1DB95CD61C0E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>BC540696-9F8F-4C3E-A49D-75AB31EF690F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>9D26C27E-AC67-428B-9499-55924E79D48C</key>
 		<array>
 			<dict>
@@ -468,6 +416,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>764E04CB-5854-4BC2-A752-639115FB0805</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Mark as read</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>B6818B6F-457E-4CCC-B030-46BCD7DA9F02</key>
 		<array>
@@ -480,32 +438,6 @@
 				<string></string>
 				<key>sourceoutputuid</key>
 				<string>A8406F36-C61C-4479-B0FE-B314F462019B</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>B9B78B61-7C88-4603-A426-26DD49000D41</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>5C6380EF-E35A-4951-ADF5-C995040DBE27</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>BC540696-9F8F-4C3E-A49D-75AB31EF690F</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>4C690E73-DC85-438E-B8AA-52CD91D40CDA</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -541,19 +473,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>4C6743FC-6D60-44F4-9E59-7EE559C99DAB</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>CC245103-888B-4440-A348-64F8A74D87F3</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>90792685-336C-4947-8358-1DB95CD61C0E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -694,7 +613,7 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string></string>
+	<string>Git &amp; GitHub Client</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -1443,6 +1362,30 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>source $HOME/.zshenv
+osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB_TOKEN"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>764E04CB-5854-4BC2-A752-639115FB0805</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -1554,23 +1497,6 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array/>
-				<key>name</key>
-				<string>Commits with this File</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>B9B78B61-7C88-4603-A426-26DD49000D41</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
@@ -1580,26 +1506,6 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 			<string>alfred.workflow.action.terminalcommand</string>
 			<key>uid</key>
 			<string>8D753493-85EA-4742-8B0E-1720EB36F108</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>filepath</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>5C6380EF-E35A-4951-ADF5-C995040DBE27</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1746,124 +1652,6 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array/>
-				<key>name</key>
-				<string>Open at GitHub</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>CC245103-888B-4440-A348-64F8A74D87F3</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<true/>
-				<key>variables</key>
-				<dict>
-					<key>mode</key>
-					<string>open</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>90792685-336C-4947-8358-1DB95CD61C0E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>❌ {query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>4C690E73-DC85-438E-B8AA-52CD91D40CDA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/open-at-github.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>BC540696-9F8F-4C3E-A49D-75AB31EF690F</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array/>
-				<key>name</key>
-				<string>Copy Github URL</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>64E22B39-2269-4B91-832E-9ACC83DF0D4A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<true/>
-				<key>variables</key>
-				<dict>
-					<key>mode</key>
-					<string>copy</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>52C4FB7A-4D96-4FE8-884C-BC35E541C31D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -1876,16 +1664,16 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 			<key>xpos</key>
 			<real>235</real>
 			<key>ypos</key>
-			<real>1170</real>
+			<real>1345</real>
 		</dict>
 		<key>0790AF04-5513-44B5-94E2-FC7E6F552C71</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>600</real>
+			<real>595</real>
 			<key>ypos</key>
-			<real>1470</real>
+			<real>1610</real>
 		</dict>
 		<key>08C2ABDA-FA6A-4AA1-94A5-3B83CD36C0F7</key>
 		<dict>
@@ -1941,9 +1729,9 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>270</real>
+			<real>265</real>
 			<key>ypos</key>
-			<real>1535</real>
+			<real>1675</real>
 		</dict>
 		<key>378B3595-A76C-4026-AC7F-0AC288FDF625</key>
 		<dict>
@@ -1972,9 +1760,9 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>380</real>
+			<real>375</real>
 			<key>ypos</key>
-			<real>1470</real>
+			<real>1610</real>
 		</dict>
 		<key>42255CF9-BC03-46B1-8AB6-0AD60FA92ECE</key>
 		<dict>
@@ -1996,15 +1784,6 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 			<key>ypos</key>
 			<real>405</real>
 		</dict>
-		<key>4C690E73-DC85-438E-B8AA-52CD91D40CDA</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>435</real>
-			<key>ypos</key>
-			<real>1755</real>
-		</dict>
 		<key>4DC9B99A-333B-4BC6-B2A3-13EC4B319487</key>
 		<dict>
 			<key>colorindex</key>
@@ -2013,15 +1792,6 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 			<real>310</real>
 			<key>ypos</key>
 			<real>655</real>
-		</dict>
-		<key>52C4FB7A-4D96-4FE8-884C-BC35E541C31D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>195</real>
-			<key>ypos</key>
-			<real>1840</real>
 		</dict>
 		<key>5AF52A7B-9FA9-4D8B-9784-4864B0A9AF06</key>
 		<dict>
@@ -2032,24 +1802,6 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 			<key>ypos</key>
 			<real>145</real>
 		</dict>
-		<key>5C6380EF-E35A-4951-ADF5-C995040DBE27</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>180</real>
-			<key>ypos</key>
-			<real>1365</real>
-		</dict>
-		<key>64E22B39-2269-4B91-832E-9ACC83DF0D4A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>1815</real>
-		</dict>
 		<key>6B63D08C-0E2C-443F-9B43-3CAAD1687E91</key>
 		<dict>
 			<key>colorindex</key>
@@ -2057,9 +1809,9 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 			<key>note</key>
 			<string>git status (stage/unstage)</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>1470</real>
+			<real>1610</real>
 		</dict>
 		<key>70D5D260-5DD8-4976-B866-5F1137356D99</key>
 		<dict>
@@ -2070,14 +1822,25 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 			<key>ypos</key>
 			<real>1040</real>
 		</dict>
+		<key>764E04CB-5854-4BC2-A752-639115FB0805</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>note</key>
+			<string>mark as read</string>
+			<key>xpos</key>
+			<real>300</real>
+			<key>ypos</key>
+			<real>1160</real>
+		</dict>
 		<key>7808AF69-5EBD-49E1-87ED-58F14D54BBD3</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>270</real>
+			<real>265</real>
 			<key>ypos</key>
-			<real>1585</real>
+			<real>1725</real>
 		</dict>
 		<key>7CE3F725-5F4E-4A4B-B16B-94871083E6A2</key>
 		<dict>
@@ -2113,7 +1876,7 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 			<key>xpos</key>
 			<real>355</real>
 			<key>ypos</key>
-			<real>1180</real>
+			<real>1365</real>
 		</dict>
 		<key>80310399-4092-49D2-B048-D91D9184B37F</key>
 		<dict>
@@ -2131,9 +1894,9 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>380</real>
+			<real>375</real>
 			<key>ypos</key>
-			<real>1355</real>
+			<real>1495</real>
 		</dict>
 		<key>8E86D71D-9D93-44EC-BC5F-6869A771A25D</key>
 		<dict>
@@ -2143,15 +1906,6 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 			<real>300</real>
 			<key>ypos</key>
 			<real>900</real>
-		</dict>
-		<key>90792685-336C-4947-8358-1DB95CD61C0E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>195</real>
-			<key>ypos</key>
-			<real>1725</real>
 		</dict>
 		<key>9C309873-3D47-4FFD-817C-67F6388A7C30</key>
 		<dict>
@@ -2167,9 +1921,9 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>270</real>
+			<real>265</real>
 			<key>ypos</key>
-			<real>1630</real>
+			<real>1770</real>
 		</dict>
 		<key>B04FEC5B-79E4-407B-ACCE-EAA0C5B81AB8</key>
 		<dict>
@@ -2196,27 +1950,9 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>530</real>
+			<real>525</real>
 			<key>ypos</key>
-			<real>1500</real>
-		</dict>
-		<key>B9B78B61-7C88-4603-A426-26DD49000D41</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>1335</real>
-		</dict>
-		<key>BC540696-9F8F-4C3E-A49D-75AB31EF690F</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>270</real>
-			<key>ypos</key>
-			<real>1755</real>
+			<real>1640</real>
 		</dict>
 		<key>BE9CDE2A-D239-4472-8CF0-D6E9B2A54B8D</key>
 		<dict>
@@ -2225,7 +1961,7 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 			<key>xpos</key>
 			<real>235</real>
 			<key>ypos</key>
-			<real>1250</real>
+			<real>1435</real>
 		</dict>
 		<key>BF79E782-31E9-4840-A0FA-00EE2CB5403A</key>
 		<dict>
@@ -2246,15 +1982,6 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 			<real>575</real>
 			<key>ypos</key>
 			<real>405</real>
-		</dict>
-		<key>CC245103-888B-4440-A348-64F8A74D87F3</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>1695</real>
 		</dict>
 		<key>CC25EB33-36DC-49B4-B46D-C70DC2FA45FD</key>
 		<dict>
@@ -2292,7 +2019,7 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 			<key>xpos</key>
 			<real>500</real>
 			<key>ypos</key>
-			<real>1180</real>
+			<real>1365</real>
 		</dict>
 		<key>D4F0274E-F79C-43A1-9C38-65C92510EEF2</key>
 		<dict>
@@ -2303,7 +2030,7 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>1180</real>
+			<real>1365</real>
 		</dict>
 		<key>E6DBBBE7-CEB7-477C-AC88-395FF2B34092</key>
 		<dict>
