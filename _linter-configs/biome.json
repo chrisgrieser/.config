@@ -4,12 +4,13 @@
 		"ignore": ["node_modules/**"]
 	},
 	"formatter": {
-		"lineWidth": 110,
+		"lineWidth": 105,
 		"indentStyle": "tab",
-		"indentSize": 3,
+		"indentWidth": 3,
 		"formatWithErrors": true
 	},
 	"organizeImports": { "enabled": true },
+	"vcs": { "enabled": true, "clientKind": "git" },
 	"json": {
 		"parser": { "allowComments": true }
 	},
@@ -19,7 +20,6 @@
 	"linter": {
 		"rules": {
 			"all": true,
-			"nursery": { "noExcessiveComplexity": "off" },
 			"suspicious": { "noConsoleLog": "off" },
 			"style": {
 				"useTemplate": "off",
