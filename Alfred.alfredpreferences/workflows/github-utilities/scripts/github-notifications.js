@@ -55,7 +55,7 @@ function run(argv) {
 
 	/** @type AlfredItem[] */
 	const notifications = responseObj.map((/** @type {GithubNotif} */ notif) => {
-		const subtitle = `${notif.repository.name} · ${notif.subject.type} · ${notif.reason} `;
+		const subtitle = `${notif.repository.name}  ·  ${notif.subject.type}  ·  ${notif.reason} `;
 		const url = notif.subject.url
 			.replace("https://api.github.com/repos/", "https://github.com/")
 			.replace("pulls/", "pull/");
@@ -63,7 +63,9 @@ function run(argv) {
 			title: notif.subject.title,
 			subtitle: subtitle,
 			arg: url,
-			cmd: { arg: notif.id },
+			mods: {
+				cmd: { arg: notif.id },
+			},
 		};
 	});
 

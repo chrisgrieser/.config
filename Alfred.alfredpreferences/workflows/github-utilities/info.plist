@@ -420,7 +420,7 @@
 				<key>destinationuid</key>
 				<string>764E04CB-5854-4BC2-A752-639115FB0805</string>
 				<key>modifiers</key>
-				<integer>0</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
 				<string>⌘: Mark as read</string>
 				<key>vitoclose</key>
@@ -1370,7 +1370,7 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 				<integer>102</integer>
 				<key>script</key>
 				<string>source $HOME/.zshenv
-osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB_TOKEN"</string>
+osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB_TOKEN" "$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
