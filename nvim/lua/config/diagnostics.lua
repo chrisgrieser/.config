@@ -39,8 +39,8 @@ end
 ---@param diag Diagnostic
 ---@return string
 local function formatVirtualText(diag)
-	return diag.message:gsub(" ?%.$", "")
-
+	if diag.source == "editorconfig-checker" then return "formatting" end
+	return rmTrailDot(diag)
 end
 
 vim.diagnostic.config {
@@ -48,7 +48,10 @@ vim.diagnostic.config {
 		severity = { min = vim.diagnostic.severity.INFO }, -- leave out hints
 		spacing = 1,
 		format = formatVirtualText,
-		suffix = function(diag) return diagSuffix(diag, "virtual_text") end,
+		suffix = function(diag)
+			if diag.source == "editorconfig-checker" then return "" end
+			return diagSuffix(diag, "virtual_text")
+		end,
 	},
 	float = {
 		severity_sort = true,
