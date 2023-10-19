@@ -75,19 +75,21 @@ sketchybar \
 	background.padding_left=5 \
 	\
 	--add item weather $first_row \
-	--set weather update_freq=1800 \
+	--set weather update_freq=900 \
 	script="$PLUGIN_DIR/weather.sh" \
 	icon.y_offset=-1 \
 	\
 	--add item github_notifications $first_row \
-	--set github_notifications update_freq=60 \
+	--set github_notifications update_freq=120 \
 	script="$PLUGIN_DIR/github_notifications.sh" \
+	--add event update-github-notifications \
+	--subscribe tot update-github-notifications \
 	\
 	--add item tot $first_row \
-	--set tot \
-	script="$PLUGIN_DIR/tot-count.sh" \
+	--set tot script="$PLUGIN_DIR/tot-count.sh" \
 	--add event update-tot-count \
 	--subscribe tot update-tot-count \
+	--subscribe sync-indicator system_woke \
 	\
 	--add alias "$stats" $second_row \
 	--set "$stats" width="$stats_width" \
