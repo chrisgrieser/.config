@@ -64,7 +64,10 @@ function run(argv) {
 			subtitle: subtitle,
 			arg: url,
 			mods: {
-				cmd: { arg: notif.id },
+				cmd: {
+					arg: notif.id,
+					variable: { notificationsLeft: notifications.length - 1 },
+				},
 			},
 		};
 	});

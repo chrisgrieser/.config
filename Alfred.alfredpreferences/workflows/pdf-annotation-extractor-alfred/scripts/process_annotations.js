@@ -18,7 +18,7 @@ function writeToFile(filepath, text) {
 function toTitleCase(str) {
 	const smallWords =
 		/\b(and|because|but|for|neither|nor|only|over|per|some|that|than|the|upon|vs?\.?|versus|via|when|with(out)?|yet)\b/i;
-	const word = str.replace(/\w\S*/g, function (word) {
+	const word = str.replace(/\w\S*/g, (word) => {
 		if (smallWords.test(word)) return word.toLowerCase();
 		if (word.toLowerCase() === "i") return "I";
 		if (word.length < 3) return word.toLowerCase();
@@ -118,7 +118,7 @@ function insertPageNumber(annotations, pageNo) {
  * @param {Annotation[]} annotations
  * @param {string} citekey
  */
-function underlinesToSidenotes(annotations, citekey) {
+function underlinesToTot(annotations, citekey) {
 	// sidenotes is installed?
 	let totInstalled;
 	try {
@@ -131,9 +131,10 @@ function underlinesToSidenotes(annotations, citekey) {
 	// Annotations with leading "_"
 	const underscoreAnnos = [];
 	for (const anno of annotations) {
-		if (!anno.comment?.startsWith("_")) return;
-		anno.comment = anno.comment.slice(1).trim(); // remove "_" prefix
-		underscoreAnnos.push(anno);
+		if (anno.comment?.startsWith("_")) {
+			anno.comment = anno.comment.slice(1).trim(); // remove "_" prefix
+			underscoreAnnos.push(anno);
+		}
 	}
 
 	if (totInstalled) {
@@ -474,7 +475,8 @@ ${annos}
 	writeToFile(path, noteContent);
 
 	// automatically determine if file is an Obsidian Vault
-	const obsidianJson = app.pathTo("home folder") + "/Library/Application Support/obsidian/obsidian.json";
+	const obsidianJson =
+		app.pathTo("home folder") + "/Library/Application Support/obsidian/obsidian.json";
 	let isInObsidianVault = false;
 	const fileExists = Application("Finder").exists(Path(obsidianJson));
 	if (fileExists) {
@@ -517,7 +519,7 @@ function run(argv) {
 
 	// finish up
 	if (!usePdfannots) annos = insertImage4pdfannots2json(annos, citekey);
-	annos = underlinesToSidenotes(annos, citekey);
+	annos = underlinesToTot(annos, citekey);
 	annos = jsonToMd(annos, citekey);
 
 	writeNote(annos, metadata, outPath, tagsForYaml);

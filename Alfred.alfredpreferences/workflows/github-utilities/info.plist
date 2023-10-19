@@ -23,6 +23,31 @@
 		</array>
 		<key>0790AF04-5513-44B5-94E2-FC7E6F552C71</key>
 		<array/>
+		<key>08B7842B-16DA-4BFC-8F35-AE680AF1E07B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>06CC5118-3CAE-427B-928D-48B78C81B6B6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>256FC39B-A43F-4DB1-A4E2-01DAFE87554A</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>968A454B-B9EE-46DD-8156-3630F678E31C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>08C2ABDA-FA6A-4AA1-94A5-3B83CD36C0F7</key>
 		<array>
 			<dict>
@@ -282,7 +307,40 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>2219BB00-C543-481D-87FF-C1E38C53E3CF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>9C309873-3D47-4FFD-817C-67F6388A7C30</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>764E04CB-5854-4BC2-A752-639115FB0805</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2219BB00-C543-481D-87FF-C1E38C53E3CF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>08B7842B-16DA-4BFC-8F35-AE680AF1E07B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -356,6 +414,8 @@
 				<false/>
 			</dict>
 		</array>
+		<key>9C309873-3D47-4FFD-817C-67F6388A7C30</key>
+		<array/>
 		<key>9D26C27E-AC67-428B-9499-55924E79D48C</key>
 		<array>
 			<dict>
@@ -424,7 +484,7 @@
 				<key>modifiersubtext</key>
 				<string>⌘: Mark as read</string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 		<key>B6818B6F-457E-4CCC-B030-46BCD7DA9F02</key>
@@ -1240,6 +1300,52 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>sleep 2
+
+# Update Counter in Sketchybar
+export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+sketchybar --trigger update-github-notifications</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>2219BB00-C543-481D-87FF-C1E38C53E3CF</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>70D5D260-5DD8-4976-B866-5F1137356D99</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1297,52 +1403,6 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>sleep 2
-
-# Update Counter in Sketchybar
-export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-sketchybar --trigger update-github-notifications</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>11</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>2219BB00-C543-481D-87FF-C1E38C53E3CF</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>70D5D260-5DD8-4976-B866-5F1137356D99</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -1384,6 +1444,65 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<string>764E04CB-5854-4BC2-A752-639115FB0805</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.hidealfred</string>
+			<key>uid</key>
+			<string>06CC5118-3CAE-427B-928D-48B78C81B6B6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>github-notifications</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>968A454B-B9EE-46DD-8156-3630F678E31C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:notificationsLeft}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>0</string>
+						<key>outputlabel</key>
+						<string>no</string>
+						<key>uid</key>
+						<string>256FC39B-A43F-4DB1-A4E2-01DAFE87554A</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>yes</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>08B7842B-16DA-4BFC-8F35-AE680AF1E07B</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>type</key>
@@ -1666,6 +1785,15 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<key>ypos</key>
 			<real>1345</real>
 		</dict>
+		<key>06CC5118-3CAE-427B-928D-48B78C81B6B6</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>600</real>
+			<key>ypos</key>
+			<real>1155</real>
+		</dict>
 		<key>0790AF04-5513-44B5-94E2-FC7E6F552C71</key>
 		<dict>
 			<key>colorindex</key>
@@ -1674,6 +1802,17 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<real>595</real>
 			<key>ypos</key>
 			<real>1610</real>
+		</dict>
+		<key>08B7842B-16DA-4BFC-8F35-AE680AF1E07B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>note</key>
+			<string>notifications left</string>
+			<key>xpos</key>
+			<real>491</real>
+			<key>ypos</key>
+			<real>1205</real>
 		</dict>
 		<key>08C2ABDA-FA6A-4AA1-94A5-3B83CD36C0F7</key>
 		<dict>
@@ -1706,14 +1845,12 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 		</dict>
 		<key>2219BB00-C543-481D-87FF-C1E38C53E3CF</key>
 		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
 			<key>note</key>
 			<string>update sketchybar counter</string>
 			<key>xpos</key>
-			<real>770</real>
+			<real>695</real>
 			<key>ypos</key>
-			<real>1005</real>
+			<real>900</real>
 		</dict>
 		<key>24CFE3CA-F401-498B-8ABC-20D1D4AB3AB3</key>
 		<dict>
@@ -1818,9 +1955,9 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>300</real>
+			<real>295</real>
 			<key>ypos</key>
-			<real>1040</real>
+			<real>1015</real>
 		</dict>
 		<key>764E04CB-5854-4BC2-A752-639115FB0805</key>
 		<dict>
@@ -1829,9 +1966,9 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<key>note</key>
 			<string>mark as read</string>
 			<key>xpos</key>
-			<real>300</real>
+			<real>295</real>
 			<key>ypos</key>
-			<real>1160</real>
+			<real>1130</real>
 		</dict>
 		<key>7808AF69-5EBD-49E1-87ED-58F14D54BBD3</key>
 		<dict>
@@ -1903,18 +2040,27 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>300</real>
+			<real>295</real>
 			<key>ypos</key>
 			<real>900</real>
+		</dict>
+		<key>968A454B-B9EE-46DD-8156-3630F678E31C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>660</real>
+			<key>ypos</key>
+			<real>1200</real>
 		</dict>
 		<key>9C309873-3D47-4FFD-817C-67F6388A7C30</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>445</real>
+			<real>695</real>
 			<key>ypos</key>
-			<real>1040</real>
+			<real>1055</real>
 		</dict>
 		<key>9D26C27E-AC67-428B-9499-55924E79D48C</key>
 		<dict>
@@ -1941,9 +2087,9 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<key>note</key>
 			<string>github notifications</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>965</real>
+			<real>1015</real>
 		</dict>
 		<key>B6818B6F-457E-4CCC-B030-46BCD7DA9F02</key>
 		<dict>
