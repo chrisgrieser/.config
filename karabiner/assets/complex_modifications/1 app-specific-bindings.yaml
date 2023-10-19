@@ -39,12 +39,12 @@ rules:
           - { key_code: t, modifiers: [command, shift] }
           - { key_code: t, modifiers: [command, shift] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
-      # Delete Tot
+      # Copy & Delete Tot
       - type: basic
         from: { key_code: delete_or_backspace, modifiers: { mandatory: [command] } }
         to:
           - { key_code: a, modifiers: [command] }
-          - key_code: delete_or_backspace
+          - { key_code: c, modifiers: [command] }
           - shell_command: open "tot://1"
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
       # Prev/Next Tot
@@ -57,13 +57,6 @@ rules:
         from: { key_code: h, modifiers: { mandatory: [control] } }
         to:
           - { key_code: left_arrow, modifiers: [command, option] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
-      # copy & delete tot
-      - type: basic
-        from: { key_code: c, modifiers: { mandatory: [command, shift] } }
-        to:
-          - { key_code: a, modifiers: [command] }
-          - { key_code: x, modifiers: [command] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Microsoft Office"
