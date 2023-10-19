@@ -3,24 +3,6 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{
-		"gsuuon/tshjkl.nvim",
-		keys = { "ä" },
-		opts = {
-			select_current_node = true, -- false to highlight only
-			keymaps = {
-				toggle = "<M-v>",
-				toggle_outer = "<S-M-v>",
-
-				-- these are only bound when we're toggled on on
-				parent = "h",
-				next = "j",
-				prev = "k",
-				child = "l",
-				toggle_named = "<S-M-n>", -- named mode skips unnamed nodes
-			},
-		},
-	},
 	{ -- highlights for ftFT
 		"jinh0/eyeliner.nvim",
 		keys = { "f", "F", "t", "T" },
@@ -90,7 +72,7 @@ return {
 				"cq",
 				"d&&&xQ",
 				remap = true,
-				desc = " Delete Comment",
+				desc = " Change Comment",
 			},
 		},
 	},
