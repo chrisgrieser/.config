@@ -82,8 +82,26 @@ function run(argv) {
 			.replace("pulls/", "pull/");
 		const typeIcon = typeMaps[notif.subject.type] || notif.subject.type;
 		const reasonIcon = reasonMaps[notif.reason] || notif.reason;
-		const deltaSecs = (+new Date() - +new Date(notif.updated_at));
-		const updatedAt = 
+		const deltaSecs = +new Date() - +new Date(notif.updated_at);
+
+		/** @type {"day" | "hour" | "minute"|"second"} */
+		let unit;
+		let delta;
+		if (deltaSecs < 60) {
+			unit = "second";
+			delta = deltaSecs;
+		} else if (deltaSecs < 60 * 60) {
+			unit = "minute";
+			delta = Math.ceil(deltaSecs / 60);
+		} else if (deltaSecs < 60 * 60 * 24) {
+			unit = "hour";
+			delta = Math.ceil(deltaSecs / 60 / 60);
+		} else if (deltaSecs < 60 * 60 * 24 * 7) {
+			unit = "day";
+			delta = Math.ceil((deltaSecs / 60 / 60) * 24);
+		}
+		const formatter = new Intl.RelativeTimeFormat("en", { style: "narrow" });
+		const updatedAt = formatter.format(-delta, unit);
 
 		const subtitle = `${typeIcon} ${reasonIcon}  ${notif.repository.name} ${updatedAt}`;
 		return {
