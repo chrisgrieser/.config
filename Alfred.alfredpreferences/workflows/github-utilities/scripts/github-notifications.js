@@ -59,7 +59,9 @@ function relativeDate(absoluteDate) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
-	const notifReferrerId = "NT_kwDOBF5B1LM2MjkxNDg2NDc4OjczMjg2MTAw";
+	const referrer = $.getenv("notif_referrer_id")
+		? "?notification_referrer_id=" + $.getenv("notif_referrer_id")
+		: "";
 
 	const githubToken = argv[0];
 	if (!githubToken) {
@@ -106,13 +108,34 @@ function run(argv) {
 	};
 	const reasonMaps = {
 		author: "👤",
-		mention: "❗",
+		mention: "⭕",
+		// biome-ignore lint/style/useNamingConvention: not by me
+		team_mention: "⭕",
 		subscribed: "🔔",
 		comment: "💬",
+		assign: "➡️",
+		// biome-ignore lint/style/useNamingConvention: not by me
+		ci_activity: "👷",
+		invitation: "👥",
+		manual: "🔔",
+		// biome-ignore lint/style/useNamingConvention: not by me
+		review_requested: "➡️",
+		// biome-ignore lint/style/useNamingConvention: not by me
+		security_alert: "❗",
+		// biome-ignore lint/style/useNamingConvention: not by me
+		state_change: "✴️",
 	};
 
 	/** @type AlfredItem[] */
 	const notifications = responseObj.map((/** @type {GithubNotif} */ notif) => {
+		const idInRepo = notif.subject.url.match(/\d+$/);
+		const lastCommentId =
+			notif.subject.latest_comment_url && notif.subject.latest_comment_url !== notif.subject.url
+				? "#issuecomment-" + notif.subject.latest_comment_url.match(/\d+$/)
+				: "";
+		const type = notif.subject.type === "PullRequest" ? "pull" : "issues"; //codespell-ignore
+		const url = `https://github.com/${notif.repository.full_name}/${type}/${idInRepo}${referrer}${lastCommentId}`;
+
 		const typeIcon = typeMaps[notif.subject.type] || notif.subject.type;
 		const reasonIcon = reasonMaps[notif.reason] || notif.reason;
 		const updatedAt = relativeDate(new Date(notif.updated_at));
@@ -121,14 +144,15 @@ function run(argv) {
 		return {
 			title: notif.subject.title,
 			subtitle: subtitle,
-			arg: notif.id,
-			variables: { mode: "open" },
+			arg: url,
 			mods: {
-				alt: { variables: { mode: "copy" } },
-				cmd: { variables: { notificationsLeft: responseObj.length - 1 } },
+				cmd: { arg: notif.id },
 			},
 		};
 	});
 
-	return JSON.stringify({ items: notifications });
+	return JSON.stringify({
+		items: notifications,
+		variable: { notificationsLeft: notifications.length - 1 },
+	});
 }
