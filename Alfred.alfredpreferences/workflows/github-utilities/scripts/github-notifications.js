@@ -22,6 +22,38 @@ function httpRequestWithHeaders(url, header, extraOpts) {
 	return response;
 }
 
+/**
+ * @param {Date} absoluteDate
+ * @return {string} relative date
+ */
+function relativeDate(absoluteDate) {
+	const deltaSecs = (+new Date() - +absoluteDate) / 1000;
+	/** @type {"month"|"week"|"day"|"hour"|"minute"|"second"} */
+	let unit;
+	let delta;
+	if (deltaSecs < 60) {
+		unit = "second";
+		delta = deltaSecs;
+	} else if (deltaSecs < 60 * 60) {
+		unit = "minute";
+		delta = Math.ceil(deltaSecs / 60);
+	} else if (deltaSecs < 60 * 60 * 24) {
+		unit = "hour";
+		delta = Math.ceil(deltaSecs / 60 / 60);
+	} else if (deltaSecs < 60 * 60 * 24 * 7) {
+		unit = "day";
+		delta = Math.ceil(deltaSecs / 60 / 60 / 24);
+	} else if (deltaSecs < 60 * 60 * 24 * 7 * 4) {
+		unit = "week";
+		delta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7);
+	} else if (deltaSecs < 60 * 60 * 24 * 7 * 4 * 12) {
+		unit = "month";
+		delta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7 / 4);
+	}
+	const formatter = new Intl.RelativeTimeFormat("en", { style: "long", numeric: "auto" });
+	return formatter.format(-delta, unit);
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -82,28 +114,9 @@ function run(argv) {
 			.replace("pulls/", "pull/");
 		const typeIcon = typeMaps[notif.subject.type] || notif.subject.type;
 		const reasonIcon = reasonMaps[notif.reason] || notif.reason;
-		const deltaSecs = +new Date() - +new Date(notif.updated_at);
+		const updatedAt = relativeDate(new Date(notif.updated_at));
 
-		/** @type {"day" | "hour" | "minute"|"second"} */
-		let unit;
-		let delta;
-		if (deltaSecs < 60) {
-			unit = "second";
-			delta = deltaSecs;
-		} else if (deltaSecs < 60 * 60) {
-			unit = "minute";
-			delta = Math.ceil(deltaSecs / 60);
-		} else if (deltaSecs < 60 * 60 * 24) {
-			unit = "hour";
-			delta = Math.ceil(deltaSecs / 60 / 60);
-		} else if (deltaSecs < 60 * 60 * 24 * 7) {
-			unit = "day";
-			delta = Math.ceil((deltaSecs / 60 / 60) * 24);
-		}
-		const formatter = new Intl.RelativeTimeFormat("en", { style: "narrow" });
-		const updatedAt = formatter.format(-delta, unit);
-
-		const subtitle = `${typeIcon} ${reasonIcon}  ${notif.repository.name} ${updatedAt}`;
+		const subtitle = `${typeIcon} ${reasonIcon}  ${notif.repository.name}  ·  ${updatedAt}`;
 		return {
 			title: notif.subject.title,
 			subtitle: subtitle,
