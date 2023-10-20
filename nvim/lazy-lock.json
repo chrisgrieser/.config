@@ -1,7 +1,7 @@
 {
   "Comment.nvim": { "branch": "master", "commit": "0236521ea582747b58869cb72f70ccfa967d2e89" },
   "LuaSnip": { "branch": "master", "commit": "80a8528f084a97b624ae443a6f50ff8074ba486b" },
-  "aerial.nvim": { "branch": "master", "commit": "b5d5f480a72ce08cb5c769f32f08bab29932de87" },
+  "aerial.nvim": { "branch": "master", "commit": "3a3baf0930444c78d19964fdb401bd3a6a23270f" },
   "auto-save.nvim": { "branch": "main", "commit": "610e72307d675fcc15098c5a435ad89e45aaf855" },
   "bullets.vim": { "branch": "master", "commit": "746f92ae05cdcc988857d8e76418326f07af9494" },
   "ccc.nvim": { "branch": "main", "commit": "cd2a10557b4a13e80929f59a7076ae792b2c60fa" },
@@ -13,7 +13,7 @@
   "cmp-path": { "branch": "main", "commit": "91ff86cd9c29299a64f968ebb45846c485725f23" },
   "cmp-zsh": { "branch": "main", "commit": "c24db8e58fac9006ec23d93f236749288d00dec9" },
   "cmp_luasnip": { "branch": "master", "commit": "05a9ab28b53f71d1aece421ef32fee2cb857a843" },
-  "codeium.vim": { "branch": "main", "commit": "d23654372ae4036a835192b98eeda9a9bb6a22c2" },
+  "codeium.vim": { "branch": "main", "commit": "7b2f57ba35bbff7dabd5e3eaa6e60d0490516c78" },
   "conform.nvim": { "branch": "master", "commit": "55abaaa9ed4684cd9ba8f0c062379be6cf41b8f3" },
   "cybu.nvim": { "branch": "main", "commit": "c0866ef6735a85f85d4cf77ed6d9bc92046b5a99" },
   "dawnfox": { "branch": "main", "commit": "6a6076bd678f825ffbe16ec97807793c3167f1a7" },

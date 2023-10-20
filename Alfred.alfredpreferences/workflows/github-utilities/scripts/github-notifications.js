@@ -63,15 +63,16 @@ function run(argv) {
 	}
 
 	const typeMaps = {
-		// biome-ignore lint/style/useNamingConvention: <explanation>
+		// biome-ignore lint/style/useNamingConvention: not by me
 		PullRequest: "🟧", //codespell-ignore
-		// biome-ignore lint/style/useNamingConvention: <explanation>
+		// biome-ignore lint/style/useNamingConvention: not by me
 		Issue: "🔵",
 	};
 	const reasonMaps = {
 		author: "👤",
-		mention: "💬",
-		subscribed: "👁️",
+		mention: "❗",
+		subscribed: "🔔",
+		comment: "💬",
 	};
 
 	/** @type AlfredItem[] */
@@ -81,7 +82,10 @@ function run(argv) {
 			.replace("pulls/", "pull/");
 		const typeIcon = typeMaps[notif.subject.type] || notif.subject.type;
 		const reasonIcon = reasonMaps[notif.reason] || notif.reason;
-		const subtitle = `${typeIcon} ${reasonIcon}  ${notif.repository.name}`;
+		const deltaSecs = (+new Date(notif.updated_at) - +new Date());
+		const updatedAt = 
+
+		const subtitle = `${typeIcon} ${reasonIcon}  ${notif.repository.name} ${updatedAt}`;
 		return {
 			title: notif.subject.title,
 			subtitle: subtitle,
