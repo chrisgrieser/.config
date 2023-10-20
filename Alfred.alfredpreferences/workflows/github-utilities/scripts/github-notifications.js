@@ -82,7 +82,7 @@ function run(argv) {
 			.replace("pulls/", "pull/");
 		const typeIcon = typeMaps[notif.subject.type] || notif.subject.type;
 		const reasonIcon = reasonMaps[notif.reason] || notif.reason;
-		const deltaSecs = (+new Date(notif.updated_at) - +new Date());
+		const deltaSecs = (+new Date() - +new Date(notif.updated_at));
 		const updatedAt = 
 
 		const subtitle = `${typeIcon} ${reasonIcon}  ${notif.repository.name} ${updatedAt}`;
