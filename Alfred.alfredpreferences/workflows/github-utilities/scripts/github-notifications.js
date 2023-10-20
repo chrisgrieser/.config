@@ -105,6 +105,8 @@ function run(argv) {
 		Issue: "🔵",
 		// biome-ignore lint/style/useNamingConvention: not by me
 		Discussion: "🗣️",
+		// biome-ignore lint/style/useNamingConvention: not by me
+		CheckSuite: "🤖",
 	};
 	const reasonMaps = {
 		author: "👤",
@@ -115,7 +117,7 @@ function run(argv) {
 		comment: "💬",
 		assign: "➡️",
 		// biome-ignore lint/style/useNamingConvention: not by me
-		ci_activity: "👷",
+		ci_activity: " ",
 		invitation: "👥",
 		manual: "🔔",
 		// biome-ignore lint/style/useNamingConvention: not by me
@@ -128,13 +130,18 @@ function run(argv) {
 
 	/** @type AlfredItem[] */
 	const notifications = responseObj.map((/** @type {GithubNotif} */ notif) => {
-		const idInRepo = notif.subject.url.match(/\d+$/);
-		const lastCommentId =
-			notif.subject.latest_comment_url && notif.subject.latest_comment_url !== notif.subject.url
-				? "#issuecomment-" + notif.subject.latest_comment_url.match(/\d+$/)
-				: "";
-		const type = notif.subject.type === "PullRequest" ? "pull" : "issues"; //codespell-ignore
-		const url = `https://github.com/${notif.repository.full_name}/${type}/${idInRepo}${referrer}${lastCommentId}`;
+		let url;
+		if (notif.subject.url) {
+			const idInRepo = notif.subject.url.match(/\d+$/);
+			const lastCommentId =
+				notif.subject.latest_comment_url && notif.subject.latest_comment_url !== notif.subject.url
+					? "#issuecomment-" + notif.subject.latest_comment_url.match(/\d+$/)
+					: "";
+			const type = notif.subject.type === "PullRequest" ? "pull" : "issues"; //codespell-ignore
+			url = `https://github.com/${notif.repository.full_name}/${type}/${idInRepo}${referrer}${lastCommentId}`;
+		} else {
+			url = "https://github.com/notifications";
+		}
 
 		const typeIcon = typeMaps[notif.subject.type] || notif.subject.type;
 		const reasonIcon = reasonMaps[notif.reason] || notif.reason;
@@ -147,12 +154,10 @@ function run(argv) {
 			arg: url,
 			mods: {
 				cmd: { arg: notif.id },
+				alt: { variable: { notificationsLeft: responseObj.length - 1 } },
 			},
 		};
 	});
 
-	return JSON.stringify({
-		items: notifications,
-		variable: { notificationsLeft: notifications.length - 1 },
-	});
+	return JSON.stringify({ items: notifications });
 }

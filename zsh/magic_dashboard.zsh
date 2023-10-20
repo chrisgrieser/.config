@@ -35,6 +35,7 @@ function gitlog {
 function inspect {
 	if ! command -v git &>/dev/null; then printf "\033[1;33mgit not installed.\033[0m" && return 1; fi
 	if ! command -v eza &>/dev/null; then printf "\033[1;33meza not installed.\033[0m" && return 1; fi
+	if ! command -v rs &>/dev/null; then printf "\033[1;33mrs not installed.\033[0m" && return 1; fi
 
 	# check if pwd still exists
 	if [[ ! -d "$PWD" ]]; then
@@ -76,7 +77,7 @@ function inspect {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# Based on Magic-Enter by @dufferzafar
+# Based on Magic-Enter by @dufferzafar (MIT License)
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/magic-enter
 
 function magic_enter {
