@@ -200,7 +200,7 @@ return {
 				-- set borderstyle
 				if not vim.api.nvim_win_is_valid(win) then return end
 				vim.api.nvim_win_set_config(win, { border = u.borderStyle })
-				vim.api.nvim_win_set_option(win, "winhighlight", "Normal:Colorcolumn")
+				vim.api.nvim_win_set_option(win, "winhighlight", "Normal:NormalFloat")
 			end,
 		},
 	},

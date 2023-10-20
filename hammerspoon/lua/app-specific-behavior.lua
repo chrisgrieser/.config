@@ -96,7 +96,7 @@ M.wf_finder = wf.new("Finder")
 M.aw_finder = aw.new(function(appName, eventType, finder)
 	if eventType == aw.activated and appName == "Finder" then
 		finder:selectMenuItem { "View", "Hide Sidebar" }
-		wu.bringAllWinsToFront() -- redundancy
+		finder:selectMenuItem { "View", "as List" }
 		wu.autoTile("Finder")
 	end
 end):start()
@@ -247,7 +247,7 @@ M.aw_discord = aw.new(function(appName, eventType)
 		u.openLinkInBg("discord://discord.com/channels/686053708261228577/700466324840775831")
 	elseif eventType == aw.activated then
 		local hasURL = clipb:find("^https?:%S+$")
-		local hasObsidianURL = clipb:find("^obsidian:%S+$")
+		local hasObsidianURL = clipb:find("^obsidian://%S+$")
 		local isTweet = clipb:find("^https?://twitter%.com") -- for tweets, the previews are actually useful since they show the full content
 		local isToot = clipb:find("^https?://mastodon%.*") -- same for toots
 		if (hasURL or hasObsidianURL) and not (isTweet or isToot) then
