@@ -61,6 +61,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>159C1307-6FCE-4B79-91EB-7EE1D26C4A86</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2219BB00-C543-481D-87FF-C1E38C53E3CF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>17D804EC-6AFE-403E-A6CC-8F536D379033</key>
 		<array>
 			<dict>
@@ -303,29 +316,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>70D5D260-5DD8-4976-B866-5F1137356D99</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2219BB00-C543-481D-87FF-C1E38C53E3CF</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>9C309873-3D47-4FFD-817C-67F6388A7C30</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>764E04CB-5854-4BC2-A752-639115FB0805</key>
 		<array>
 			<dict>
@@ -401,19 +391,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>8E86D71D-9D93-44EC-BC5F-6869A771A25D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2219BB00-C543-481D-87FF-C1E38C53E3CF</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>9C309873-3D47-4FFD-817C-67F6388A7C30</key>
 		<array/>
 		<key>9D26C27E-AC67-428B-9499-55924E79D48C</key>
@@ -458,21 +435,21 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>8E86D71D-9D93-44EC-BC5F-6869A771A25D</string>
+				<string>EE71A6E3-E048-4B3F-94A3-7E6FE724E8D0</string>
 				<key>modifiers</key>
-				<integer>0</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>70D5D260-5DD8-4976-B866-5F1137356D99</string>
+				<string>159C1307-6FCE-4B79-91EB-7EE1D26C4A86</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy URL</string>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -648,6 +625,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>42255CF9-BC03-46B1-8AB6-0AD60FA92ECE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>EE71A6E3-E048-4B3F-94A3-7E6FE724E8D0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9C309873-3D47-4FFD-817C-67F6388A7C30</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1279,23 +1269,42 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
+				<key>lastpathcomponent</key>
 				<false/>
-				<key>skipvarencode</key>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
 				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>📋 Copied</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>8E86D71D-9D93-44EC-BC5F-6869A771A25D</string>
+			<string>9C309873-3D47-4FFD-817C-67F6388A7C30</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>EE71A6E3-E048-4B3F-94A3-7E6FE724E8D0</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1323,21 +1332,23 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
 				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
+				<key>skipvarencode</key>
 				<false/>
-				<key>transient</key>
-				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>70D5D260-5DD8-4976-B866-5F1137356D99</string>
+			<string>159C1307-6FCE-4B79-91EB-7EE1D26C4A86</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1395,27 +1406,6 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 			<string>B35052FF-0027-40CC-BC59-EA7D442A57EA</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>📋 Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>9C309873-3D47-4FFD-817C-67F6388A7C30</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1786,9 +1776,9 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>600</real>
+			<real>570</real>
 			<key>ypos</key>
-			<real>1155</real>
+			<real>1170</real>
 		</dict>
 		<key>0790AF04-5513-44B5-94E2-FC7E6F552C71</key>
 		<dict>
@@ -1828,6 +1818,15 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<key>ypos</key>
 			<real>265</real>
 		</dict>
+		<key>159C1307-6FCE-4B79-91EB-7EE1D26C4A86</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>295</real>
+			<key>ypos</key>
+			<real>1015</real>
+		</dict>
 		<key>17D804EC-6AFE-403E-A6CC-8F536D379033</key>
 		<dict>
 			<key>colorindex</key>
@@ -1844,9 +1843,9 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<key>note</key>
 			<string>update sketchybar counter</string>
 			<key>xpos</key>
-			<real>695</real>
+			<real>630</real>
 			<key>ypos</key>
-			<real>900</real>
+			<real>1015</real>
 		</dict>
 		<key>24CFE3CA-F401-498B-8ABC-20D1D4AB3AB3</key>
 		<dict>
@@ -1946,15 +1945,6 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<key>ypos</key>
 			<real>1610</real>
 		</dict>
-		<key>70D5D260-5DD8-4976-B866-5F1137356D99</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>295</real>
-			<key>ypos</key>
-			<real>1015</real>
-		</dict>
 		<key>764E04CB-5854-4BC2-A752-639115FB0805</key>
 		<dict>
 			<key>colorindex</key>
@@ -2031,21 +2021,12 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<key>ypos</key>
 			<real>1495</real>
 		</dict>
-		<key>8E86D71D-9D93-44EC-BC5F-6869A771A25D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>295</real>
-			<key>ypos</key>
-			<real>900</real>
-		</dict>
 		<key>968A454B-B9EE-46DD-8156-3630F678E31C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>660</real>
+			<real>625</real>
 			<key>ypos</key>
 			<real>1200</real>
 		</dict>
@@ -2054,9 +2035,9 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>695</real>
+			<real>635</real>
 			<key>ypos</key>
-			<real>1055</real>
+			<real>895</real>
 		</dict>
 		<key>9D26C27E-AC67-428B-9499-55924E79D48C</key>
 		<dict>
@@ -2083,7 +2064,7 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<key>note</key>
 			<string>github notifications</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
 			<real>1015</real>
 		</dict>
@@ -2191,6 +2172,15 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<real>780</real>
 			<key>ypos</key>
 			<real>175</real>
+		</dict>
+		<key>EE71A6E3-E048-4B3F-94A3-7E6FE724E8D0</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>300</real>
+			<key>ypos</key>
+			<real>895</real>
 		</dict>
 		<key>FE44448E-7653-4A3C-B7F9-C3A787EE0556</key>
 		<dict>
@@ -2303,11 +2293,32 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<key>description</key>
 			<string>Comma-separated list of authors whose names should not be displayed in the log command. The commits themselves are still listed, only the author field is not shown. This is intended to reduce clutter by hiding certain author names, e.g. from bots or yourself.</string>
 			<key>label</key>
-			<string>Log: No authors</string>
+			<string>No authors in log</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>no_display_authors</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>ID for notifications. Starts with "NT_" and enables interaction with the notification after opening in the browser.</string>
+			<key>label</key>
+			<string>Notification Referrer  ID</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>notif_referrer_id</string>
 		</dict>
 	</array>
 	<key>version</key>
