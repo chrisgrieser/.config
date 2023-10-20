@@ -1303,19 +1303,15 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string>sleep 2
-
-# Update Counter in Sketchybar
-export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-sketchybar --trigger update-github-notifications</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>update-github-notif-sketchybar.sh</string>
 				<key>type</key>
-				<integer>11</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>

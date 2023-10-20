@@ -65,7 +65,7 @@ function run(argv) {
 			items: [
 				{
 					title: "⚠️ No $GITHUB_TOKEN found.",
-					subtitle: "Please add it to your .zshenv",
+					subtitle: "Please export it in your `.zshenv`.",
 					valid: false,
 				},
 			],

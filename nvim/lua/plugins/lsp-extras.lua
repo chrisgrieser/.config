@@ -133,9 +133,7 @@ return {
 				default_direction = "left",
 				min_width = { 20, 0.2 },
 				max_width = 0.35,
-				win_opts = {
-					winhighlight = "Normal:Colorcolumn,CursorLine:CursorLineFold",
-				},
+				win_opts = { winhighlight = "Normal:NormalFloat" },
 			},
 			icons = { Collapsed = "" },
 			keymaps = {

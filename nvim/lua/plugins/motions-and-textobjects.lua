@@ -14,16 +14,14 @@ return {
 	},
 	{ -- better % (highlighting, matches across lines, match quotes)
 		"andymass/vim-matchup",
-		event = "UIEnter", -- cannot load on key due to highlights
+		event = "VimEnter", -- cannot load on key due to highlights
 		keys = {
 			{ "m", "<Plug>(matchup-%)", desc = "Goto Matching Bracket" },
 			{ "k", "<Plug>(matchup-i%)", mode = "o", desc = "󱡔 Any Inner Block textobj" },
 			{ "K", "<Plug>(matchup-a%)", mode = "o", desc = "󱡔 Any Outer Block textobj" },
 		},
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		init = function()
-			vim.g.matchup_matchparen_offscreen = { method = "popup" } -- empty list to disable
-		end,
+		init = function() vim.g.matchup_matchparen_offscreen = { method = "popup" } end,
 	},
 	{ -- display line numbers when using `:` to go to a line with
 		"chrisgrieser/numb.nvim", -- PENDING https://github.com/nacro90/numb.nvim/pull/30
@@ -55,8 +53,8 @@ return {
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		event = "BufReadPre", -- not later to ensure it loads in time properly
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		-- HACK avoid conflict with visual mode comment from Comments.nvim
 		keys = {
+			-- HACK avoid conflict with visual mode comment from Comments.nvim
 			{ "q", "&&&", mode = "o", desc = "󱡔 comment textobj", remap = true },
 			{ -- sticky deleting comment
 				"dq",
@@ -151,7 +149,7 @@ return {
 					vim.cmd(tostring(endBorderLn) .. " delete") -- delete end first so line index is not shifted
 					vim.cmd(tostring(startBorderLn) .. " delete")
 				end,
-				desc = "Delete surrounding indentation",
+				desc = " Delete surrounding indent",
 			},
 			{ -- open URL (forward seeking)
 				"gx",
