@@ -59,6 +59,8 @@ function relativeDate(absoluteDate) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
+	const notifReferrerId = "NT_kwDOBF5B1LM2MjkxNDg2NDc4OjczMjg2MTAw";
+
 	const githubToken = argv[0];
 	if (!githubToken) {
 		return JSON.stringify({
@@ -99,6 +101,8 @@ function run(argv) {
 		PullRequest: "🟧", //codespell-ignore
 		// biome-ignore lint/style/useNamingConvention: not by me
 		Issue: "🔵",
+		// biome-ignore lint/style/useNamingConvention: not by me
+		Discussion: "🗣️",
 	};
 	const reasonMaps = {
 		author: "👤",
@@ -109,9 +113,6 @@ function run(argv) {
 
 	/** @type AlfredItem[] */
 	const notifications = responseObj.map((/** @type {GithubNotif} */ notif) => {
-		const url = notif.subject.url
-			.replace("https://api.github.com/repos/", "https://github.com/")
-			.replace("pulls/", "pull/");
 		const typeIcon = typeMaps[notif.subject.type] || notif.subject.type;
 		const reasonIcon = reasonMaps[notif.reason] || notif.reason;
 		const updatedAt = relativeDate(new Date(notif.updated_at));
@@ -120,15 +121,14 @@ function run(argv) {
 		return {
 			title: notif.subject.title,
 			subtitle: subtitle,
-			arg: url,
+			arg: notif.id,
+			variables: { mode: "open" },
 			mods: {
-				cmd: { arg: notif.id },
+				alt: { variables: { mode: "copy" } },
+				cmd: { variables: { notificationsLeft: responseObj.length - 1 } },
 			},
 		};
 	});
 
-	return JSON.stringify({
-		items: notifications,
-		variable: { notificationsLeft: notifications.length - 1 },
-	});
+	return JSON.stringify({ items: notifications });
 }
