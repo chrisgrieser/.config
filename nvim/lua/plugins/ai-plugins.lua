@@ -46,8 +46,8 @@ return {
 				function() return vim.fn["codeium#Accept"]() end,
 				mode = "i",
 				expr = true,
-				desc = "󰚩 Accept Suggestion",
 				silent = true,
+				desc = "󰚩 Accept Suggestion",
 			},
 		},
 		config = function()
@@ -58,7 +58,10 @@ return {
 				return "󰚩 …"
 			end)
 
-			vim.g.codeium_filetypes = { TelescopePrompt = false, DressingInput = false }
+			vim.g.codeium_filetypes = {
+				TelescopePrompt = false,
+				DressingInput = false,
+			}
 			vim.g.codeium_disable_bindings = 1
 		end,
 	},
