@@ -18,7 +18,7 @@ function M.holeCover(toMode)
 
 	if M.coverParts then
 		for _, cover in pairs(M.coverParts) do
-			if cover then cover:delete() end
+			cover:delete()
 			cover = nil
 		end
 		M.CoverParts = nil
@@ -31,11 +31,13 @@ function M.holeCover(toMode)
 		or { red = 0.8, green = 0.8, blue = 0.8, alpha = 1 }
 
 	-- three points, forming roughly a triangle
-	M.coverParts = {
-		hs.drawing.rectangle { x = pseudoMaxCorner - 9, y = screen.h - 3, w = 18, h = 3 },
-		hs.drawing.rectangle { x = pseudoMaxCorner - 6, y = screen.h - 6, w = 12, h = 3 },
-		hs.drawing.rectangle { x = pseudoMaxCorner - 3, y = screen.h - 9, w = 6, h = 3 },
-	}
+	M.coverParts = {} -- needs to be assigned this way for some reason?
+	M.coverParts[1] =
+		hs.drawing.rectangle { x = pseudoMaxCorner - 9, y = screen.h - 3, w = 18, h = 3 }
+	M.coverParts[2] =
+		hs.drawing.rectangle { x = pseudoMaxCorner - 6, y = screen.h - 6, w = 12, h = 3 }
+	M.coverParts[3] =
+		hs.drawing.rectangle { x = pseudoMaxCorner - 3, y = screen.h - 9, w = 6, h = 3 }
 
 	for _, cover in pairs(M.coverParts) do
 		cover:setFillColor(bgColor)

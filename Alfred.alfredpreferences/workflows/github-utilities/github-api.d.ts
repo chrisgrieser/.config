@@ -1,3 +1,4 @@
+// https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#list-notifications-for-the-authenticated-user
 declare class GithubNotif {
 	id: string;
 	repository: GithubRepo;
