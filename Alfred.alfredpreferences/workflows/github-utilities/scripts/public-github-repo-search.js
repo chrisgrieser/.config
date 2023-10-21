@@ -20,7 +20,7 @@ function httpRequest(url) {
  */
 function relativeDate(absoluteDate) {
 	const deltaSecs = (+new Date() - +new Date(absoluteDate)) / 1000;
-	/** @type {"month"|"week"|"day"|"hour"|"minute"|"second"} */
+	/** @type {"year"|"month"|"week"|"day"|"hour"|"minute"|"second"} */
 	let unit;
 	let delta;
 	if (deltaSecs < 60) {
@@ -41,7 +41,10 @@ function relativeDate(absoluteDate) {
 	} else if (deltaSecs < 60 * 60 * 24 * 7 * 4 * 12) {
 		unit = "month";
 		delta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7 / 4);
-	}
+	} else {
+		unit = "year";
+		delta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7 / 4 / 12);
+	} 
 	const formatter = new Intl.RelativeTimeFormat("en", { style: "long", numeric: "auto" });
 	return formatter.format(-delta, unit);
 }
@@ -94,5 +97,8 @@ function run(argv) {
 			valid: false,
 		});
 	}
-	return JSON.stringify({ items: repos });
+	return JSON.stringify({
+		items: repos,
+		variables: { publicRepo: "true" },
+	});
 }
