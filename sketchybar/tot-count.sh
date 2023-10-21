@@ -11,8 +11,4 @@ for i in {1..7}; do
 	[[ -n "$content" ]] && dots="$dots"
 done
 
-if [[ -n "$dots" ]]; then
-	sketchybar --set "$NAME" icon="$dots"
-else
-	sketchybar --remove "$NAME"
-fi
+sketchybar --set "$NAME" icon="$dots"

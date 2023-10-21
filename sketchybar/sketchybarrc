@@ -45,7 +45,7 @@ fi
 first_row="left"
 second_row="popup.clock"
 
-stats_width=250
+stats_width=242
 scutil --get ComputerName | grep -q "Mother" && stats_width=225
 
 # INFO
