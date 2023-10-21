@@ -11,6 +11,7 @@ alias grh='git reset --hard'
 
 alias gi='gh issue list --state=open'
 alias gI='gh issue list --state=closed'
+alias pr='gh pr create --web --fill'
 alias rel='make --silent release'
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -27,17 +28,7 @@ ZSH_HIGHLIGHT_REGEXP+=('^(acp?|gc -m|git commit -m) ".{51,71}"' 'fg=black,bg=yel
 
 function grem {
 	git remote -v
-	echo -n "gh default: "
-	gh repo set-default --view
-}
-
-function pr {
-	if ! command -v gh &>/dev/null; then print "\033[1;33mgh not installed.\033[0m" && return 1; fi
-
-	# set default remote, if it lacks one
-	[[ -z "$(gh repo set-default --view)" ]] && gh repo set-default
-
-	gh pr create --web --fill || gh pr create --web || return 1
+	echo -n "gh default: " && gh repo set-default --view
 }
 
 # select a fork or multiple forks to delete
