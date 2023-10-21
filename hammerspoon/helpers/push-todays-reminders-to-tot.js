@@ -23,7 +23,7 @@ function run() {
 	}
 
 	let addedTasks = 0;
-	let acc = "";
+	let accText = "";
 	// - needs iterating for loop since JXA Record Array cannot be looped with `foreach` or `for in`
 	// - backwards, to not change the indices at loop runtime
 	for (let i = todaysTasks.length - 1; i >= 0; i--) {
@@ -34,15 +34,15 @@ function run() {
 		const title = task.name();
 		const content = body ? `\n## ${title}\n${body}` : "– " + title;
 
-		acc += "\n" + content;
+		accText += "\n" + content;
 		addedTasks++;
 
 		task.delete(); // DOCS https://gist.github.com/chockenberry/d33ef5b6e6da4a3e4aa9b07b093d3c23
 	}
 
 	const empty = tot.openLocation(`tot://${dotToUse}/content`) === "";
-	if (empty) acc.trim();
-	tot.openLocation(`tots://${dotToUse}/append?text=${encodeURIComponent(acc)}`);
+	if (empty) accText.trim();
+	tot.openLocation(`tots://${dotToUse}/append?text=${encodeURIComponent(accText)}`);
 
 	delay(0.1);
 	if (reminders) reminders.quit(); // FIX Reminder.app being left open

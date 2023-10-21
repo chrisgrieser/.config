@@ -14,6 +14,38 @@ function httpRequest(url) {
 	return requestString;
 }
 
+/**
+ * @param {string} absoluteDate string to be converted to a date
+ * @return {string} relative date
+ */
+function relativeDate(absoluteDate) {
+	const deltaSecs = (+new Date() - +new Date(absoluteDate)) / 1000;
+	/** @type {"month"|"week"|"day"|"hour"|"minute"|"second"} */
+	let unit;
+	let delta;
+	if (deltaSecs < 60) {
+		unit = "second";
+		delta = deltaSecs;
+	} else if (deltaSecs < 60 * 60) {
+		unit = "minute";
+		delta = Math.ceil(deltaSecs / 60);
+	} else if (deltaSecs < 60 * 60 * 24) {
+		unit = "hour";
+		delta = Math.ceil(deltaSecs / 60 / 60);
+	} else if (deltaSecs < 60 * 60 * 24 * 7) {
+		unit = "day";
+		delta = Math.ceil(deltaSecs / 60 / 60 / 24);
+	} else if (deltaSecs < 60 * 60 * 24 * 7 * 4) {
+		unit = "week";
+		delta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7);
+	} else if (deltaSecs < 60 * 60 * 24 * 7 * 4 * 12) {
+		unit = "month";
+		delta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7 / 4);
+	}
+	const formatter = new Intl.RelativeTimeFormat("en", { style: "long", numeric: "auto" });
+	return formatter.format(-delta, unit);
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -27,22 +59,18 @@ function run(argv) {
 	const repos = JSON.parse(httpRequest(apiURL))
 		.items.filter((/** @type {GithubRepo} */ repo) => !(repo.fork || repo.archived))
 		.map((/** @type {GithubRepo} */ repo) => {
+			console.log("🪚 " + repo.full_name);
 
 			// calculate relative date
 			// INFO pushed_at refers to commits only https://github.com/orgs/community/discussions/24442
 			// CAVEAT pushed_at apparently also includes pushes via PR :(
-			const daysAgo = Math.ceil((+new Date() - +new Date(repo.pushed_at)) / 1000 / 3600 / 24);
-			let updated =
-				daysAgo < 31
-					? daysAgo.toString() + " days ago"
-					: Math.ceil(daysAgo / 30).toString() + " months ago";
-			if (updated.startsWith("1 ")) updated = updated.replace("s ago", " ago");
+			const lastUpdated = repo.pushed_at ? relativeDate(repo.pushed_at) : "";
 
 			const subtitle = [
 				repo.owner.login,
 				"★ " + repo.stargazers_count,
-				updated,
-				repo.description
+				lastUpdated,
+				repo.description,
 			].join("  ·  ");
 
 			return {

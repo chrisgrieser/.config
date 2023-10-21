@@ -7,15 +7,15 @@
 		"prefix": "replace",
 		"body": "replace(/${1:regexp}/, \"$2\")"
 	},
-	"relative Date": {
-		"prefix": "relative Date",
+	"relative date": {
+		"prefix": "relative date",
 		"body": [
 			"/**",
-			" * @param {Date} absoluteDate",
+			" * @param {string} absoluteDate string to be converted to a date",
 			" * @return {string} relative date",
 			" */",
 			"function relativeDate(absoluteDate) {",
-			"\tconst deltaSecs = (+new Date() - +absoluteDate) / 1000;",
+			"\tconst deltaSecs = (+new Date() - +new Date(absoluteDate)) / 1000;",
 			"\t/** @type {\"month\"|\"week\"|\"day\"|\"hour\"|\"minute\"|\"second\"} */",
 			"\tlet unit;",
 			"\tlet delta;",
