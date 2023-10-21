@@ -21,12 +21,13 @@ git clone --depth=2 --filter="blob:none" "$url" || return 1
 
 # shellcheck disable=2154 # set via previous script
 if [[ "$publicRepo" == "true" ]]; then
-	cd "$reponame" || exit 1
+	cd "$reponame" || return 1
 	gh repo fork --remote=false
 
 	git remote add my-fork "git@github.com:$github_username/$reponame.git"
 
 	git checkout -b "feature"
+	git push --set-upstream my-fork "feature"
 fi
 
 echo -n "$LOCAL_REPOS/$reponame" # Open in terminal via Alfred

@@ -29,24 +29,27 @@ passChanges=$(git status --porcelain | wc -l | tr -d " ")
 # If there are behinds, icons will appear a few seconds later which isn't a
 # problem. But if there are no behinds, the outdated label will disappear quicker.
 
-if [[ -n "$label" ]] ; then
-	sketchybar --set "$NAME" icon=" " label="$label$configError"
-else
-	sketchybar --remove "$NAME"
-fi
+[[ -n "$label" ]] && icon=" "
+sketchybar --set "$NAME" icon="$icon" label="$label$configError"
+
+[[ -n "$configError" ]] && return 1
 
 #───────────────────────────────────────────────────────────────────────────────
 # COMMITS BEHIND
 
-cd "$HOME/.config" || configError="repo-path wrong"
+icon=""
+# shellcheck disable=2164
+cd "$HOME/.config"
 git fetch # required to check for commits behind
 dotBehind=$(git status --porcelain --branch | head -n1 | grep "behind" | grep -Eo "\d")
 
-cd "$VAULT_PATH" || configError="repo-path wrong"
+# shellcheck disable=2164
+cd "$VAULT_PATH"
 git fetch
 vaultBehind=$(git status --porcelain --branch | head -n1 | grep "behind" | grep -Eo "\d")
 
-cd "$PASSWORD_STORE_DIR" || configError="repo-path wrong"
+# shellcheck disable=2164
+cd "$PASSWORD_STORE_DIR"
 git fetch
 passBehind=$(git status --porcelain --branch | head -n1 | grep "behind" | grep -Eo "\d")
 
@@ -54,8 +57,5 @@ passBehind=$(git status --porcelain --branch | head -n1 | grep "behind" | grep -
 [[ -n "$vaultBehind" ]] && label="$label${vaultBehind}!v "
 [[ -n "$passBehind" ]] && label="$label${passBehind}!p"
 
-if [[ -n "$label" ]] ; then
-	sketchybar --set "$NAME" icon=" " label="$label$configError"
-else
-	sketchybar --remove "$NAME"
-fi
+[[ -n "$label" ]] && icon=" "
+sketchybar --set "$NAME" icon="$icon" label="$label"

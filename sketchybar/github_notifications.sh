@@ -26,7 +26,10 @@ notification_count=$(curl -L \
 yq ". | length")
 
 if [[ $notification_count -eq 0 ]]; then
-	sketchybar --remove "$NAME"
+	icon=""
+	label=""
 else
-	sketchybar --set "$NAME" icon="" label="$notification_count"
+	icon=""
+	label="$notification_count"
 fi
+sketchybar --set "$NAME" icon="$icon" label="$label"
