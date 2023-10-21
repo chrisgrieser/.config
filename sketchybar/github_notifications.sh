@@ -28,8 +28,10 @@ yq ". | length")
 if [[ $notification_count -eq 0 ]]; then
 	icon=""
 	label=""
+	pad=0
 else
 	icon=""
 	label="$notification_count"
+	pad=12
 fi
-sketchybar --set "$NAME" icon="$icon" label="$label"
+sketchybar --set "$NAME" icon="$icon" label="$label" background.padding_right=$pad

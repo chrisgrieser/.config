@@ -8,7 +8,7 @@ while ! pgrep -xq "Stats"; do
 	open -a "Stats"
 	sleep 2
 	i=$((i + 1))
-	if [[ $i -gt 20 ]]; then
+	if [[ $i -gt 10 ]]; then
 		osascript -e 'display notification "⚠️ Sketchybar cannot be loaded" with title "Stats does not start"'
 		return 1
 	fi
@@ -20,7 +20,7 @@ while true; do
 	[[ -n "$stats" ]] && break
 	sleep 2
 	i=$((i + 1))
-	if [[ $i -gt 20 ]]; then
+	if [[ $i -gt 5 ]]; then
 		osascript -e 'display notification "⚠️ Sketchybar cannot be loaded" with title "Stats Combined Module not found"'
 		return 1
 	fi
@@ -45,7 +45,7 @@ fi
 first_row="left"
 second_row="popup.clock"
 
-stats_width=242
+stats_width=240
 scutil --get ComputerName | grep -q "Mother" && stats_width=225
 
 # INFO
@@ -64,15 +64,15 @@ sketchybar \
 	updates="when_shown" drawing="on" align="left" \
 	icon.font="JetBrainsMonoNL Nerd Font:Bold:16" icon.color="$FONT_COLOR" \
 	label.font="Lucida Grande:Regular:16.5" label.color="$FONT_COLOR" \
-	icon.padding_left=2 icon.padding_right=1 \
-	label.padding_left=2 label.padding_right=10 \
+	background.padding_right=12 label.padding_right=2 icon.padding_right=3 \
+	\
 	popup.drawing=true popup.horizontal=true popup.topmost=false \
 	popup.y_offset="-35" y_offset="18" \
 	\
 	--add item clock $first_row \
 	--set clock update_freq=1 \
 	script="$PLUGIN_DIR/clock.sh" \
-	background.padding_left=5 \
+	background.padding_left=8 \
 	\
 	--add item weather $first_row \
 	--set weather update_freq=900 \

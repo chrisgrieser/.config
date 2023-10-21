@@ -22,8 +22,6 @@
 	hooksPath = .git-hooks
 [pull]
 	rebase = true
-[push]
-	autoSetupRemote = true
 [status]
 	showUntrackedFiles = all
 
