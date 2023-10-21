@@ -64,7 +64,7 @@ sketchybar \
 	updates="when_shown" drawing="on" align="left" \
 	icon.font="JetBrainsMonoNL Nerd Font:Bold:16" icon.color="$FONT_COLOR" \
 	label.font="Lucida Grande:Regular:16.5" label.color="$FONT_COLOR" \
-	background.padding_right=12 label.padding_right=2 icon.padding_right=3 \
+	background.padding_right=15 label.padding_right=2 \
 	\
 	popup.drawing=true popup.horizontal=true popup.topmost=false \
 	popup.y_offset="-35" y_offset="18" \
@@ -96,7 +96,7 @@ sketchybar \
 	--set "$stats" width="$stats_width" \
 	\
 	--add item sync-indicator $second_row \
-	--set sync-indicator update_freq=300 \
+	--set sync-indicator update_freq=300 icon.padding_right=3 \
 	script="$PLUGIN_DIR/git-sync-bar-icon.sh" \
 	--add event repo-files-update \
 	--subscribe sync-indicator repo-files-update \
