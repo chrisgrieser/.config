@@ -23,11 +23,11 @@ function httpRequestWithHeaders(url, header, extraOpts) {
 }
 
 /**
- * @param {Date} absoluteDate
+ * @param {string} absoluteDate string to be converted to a date
  * @return {string} relative date
  */
 function relativeDate(absoluteDate) {
-	const deltaSecs = (+new Date() - +absoluteDate) / 1000;
+	const deltaSecs = (+new Date() - +new Date(absoluteDate)) / 1000;
 	/** @type {"month"|"week"|"day"|"hour"|"minute"|"second"} */
 	let unit;
 	let delta;
@@ -145,7 +145,7 @@ function run(argv) {
 
 		const typeIcon = typeMaps[notif.subject.type] || notif.subject.type;
 		const reasonIcon = reasonMaps[notif.reason] || notif.reason;
-		const updatedAt = relativeDate(new Date(notif.updated_at));
+		const updatedAt = relativeDate(notif.updated_at);
 
 		const subtitle = `${typeIcon} ${reasonIcon}  ${notif.repository.name}  ·  ${updatedAt}`;
 		return {
