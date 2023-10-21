@@ -8,6 +8,7 @@ alias push="git push"
 alias pull="git pull"
 alias g.='cd "$(git rev-parse --show-toplevel)"' # goto git root
 alias grh='git reset --hard'
+alias grem='git remote -v'
 
 alias gi='gh issue list --state=open'
 alias gI='gh issue list --state=closed'
@@ -32,12 +33,6 @@ function pr {
 	[[ -z "$(gh repo set-default --view)" ]] && gh repo set-default
 
 	gh pr create --web --fill || gh pr create --web || return 1
-
-	# set remote to my fork for subsequent additions
-	local username="chrisgrieser"
-	local reponame
-	reponame=$(basename "$(git rev-parse --show-toplevel)")
-	git remote set-url origin "git@github.com:$username/$reponame.git"
 }
 
 # select a fork or multiple forks to delete
