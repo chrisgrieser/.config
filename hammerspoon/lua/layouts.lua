@@ -60,7 +60,7 @@ end
 local function workLayout()
 	-- screen & visuals
 	darkmode.autoSwitch()
-	visuals.holeCover("auto")
+	visuals.updateHoleCover()
 	dockSwitcher("work")
 	setHigherBrightnessDuringDay()
 
@@ -91,7 +91,7 @@ local function movieLayout()
 	dockSwitcher(env.isAtMother and "mother-movie" or "movie") -- different PWAs due to not being M1 device
 	wu.iMacDisplay:setBrightness(0)
 	darkmode.setDarkMode("dark")
-	visuals.holeCover("remove")
+	visuals.updateHoleCover()
 
 	u.openApps { "YouTube", "BetterTouchTool" }
 	u.quitApps {
@@ -120,7 +120,7 @@ local function selectLayout()
 	M.isLayouting = true
 	local layout = env.isProjector() and movieLayout or workLayout
 	layout()
-	u.runWithDelays(1.5, function() M.isLayouting = false end)
+	u.runWithDelays(2.5, function() M.isLayouting = false end)
 end
 
 --------------------------------------------------------------------------------
@@ -168,8 +168,7 @@ end)
 -- 1. Change of screen numbers
 M.caff_displayCount = hs.screen.watcher
 	.new(function()
-		local delay = env.isAtMother and 1 or 0 -- TV at mother needs small delay
-		u.runWithDelays(delay, selectLayout)
+		u.runWithDelays(0.5, selectLayout) -- delay for recognizing screens
 
 		-- If at night switching back to one display, put iMac display to sleep
 		-- (this triggers when the projector is turned off before going to sleep)
