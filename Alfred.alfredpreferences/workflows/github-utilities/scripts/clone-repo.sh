@@ -17,17 +17,18 @@ git clone --depth=2 --filter="blob:none" "$url"
 # Open in terminal via Alfred
 echo -n "$LOCAL_REPOS/$reponame"
 
-[[ "$publicRepo" != "true" ]] && return 0
-
 #───────────────────────────────────────────────────────────────────────────────
 # PREPARE PR
 
-cd "$reponame" || return 1
-gh repo fork --remote=false
+if [[ "$publicRepo" != "true" ]] ; then
+	cd "$reponame" || return 1
+	gh repo fork --remote=false
 
-# add my remote as SSH & set it to origin for `push.autoSetupRemote`
-git remote rename origin upstream
-git remote add origin "git@github.com:$github_username/$reponame.git"
+	# add my remote as SSH & set it to origin for `push.autoSetupRemote`
+	git remote rename origin upstream
+	git config push.autoSetupRemote true
+	git remote add origin "git@github.com:$github_username/$reponame.git"
 
-gh repo set-default "$origin_repo" # where to send PRs
-git checkout -b "dev" # send PR as branch so maintainer can edit it
+	gh repo set-default "$origin_repo" # where `gh` sends PRs to
+	git checkout -b "dev" # as branch so maintainer can edit it
+fi

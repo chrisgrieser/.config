@@ -29,7 +29,7 @@ passChanges=$(git status --porcelain | wc -l | tr -d " ")
 # If there are behinds, icons will appear a few seconds later which isn't a
 # problem. But if there are no behinds, the outdated label will disappear quicker.
 
-[[ -n "$label" ]] && icon=" "
+[[ -n "$label" ]] && icon=""
 sketchybar --set "$NAME" icon="$icon" label="$label$configError"
 
 [[ -n "$configError" ]] && return 1
