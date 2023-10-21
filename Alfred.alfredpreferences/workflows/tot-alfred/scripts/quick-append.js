@@ -72,9 +72,7 @@ function run(argv) {
 	if (!(selectedText || isBrowser)) return "";
 
 	// determine text
-	const empty = tot.openLocation(`tot://${quicksaveDot}/content`) === "";
-	const lb = empty ? "" : "\n";
-	let text = lb + appendPrefix + selectedText;
+	let text = "\n" + appendPrefix + selectedText;
 	if (isBrowser) {
 		const { url, title } = browserTab();
 		const mdlink = `[${title}](${url})`;
@@ -83,6 +81,8 @@ function run(argv) {
 	}
 
 	// append
+	const empty = tot.openLocation(`tot://${quicksaveDot}/content`) === "";
+	if (empty) text.trim();
 	tot.openLocation(`tot://${quicksaveDot}/append?text=${encodeURIComponent(text)}`);
 
 	// hide the app
