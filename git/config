@@ -20,10 +20,10 @@
 	; 3. Caveat: this trick only works on repos solely managed by the user of
 	; this dotfile-repo, it does not work to enforce hooks on other people's clones
 	hooksPath = .git-hooks
-[pager]
-	branch = false
 [pull]
 	rebase = true
+[push]
+	autoSetupRemote = true
 [status]
 	showUntrackedFiles = all
 
