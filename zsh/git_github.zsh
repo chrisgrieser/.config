@@ -8,7 +8,6 @@ alias push="git push"
 alias pull="git pull"
 alias g.='cd "$(git rev-parse --show-toplevel)"' # goto git root
 alias grh='git reset --hard'
-alias grem='git remote -v'
 
 alias gi='gh issue list --state=open'
 alias gI='gh issue list --state=closed'
@@ -25,6 +24,12 @@ ZSH_HIGHLIGHT_REGEXP+=('^(acp?|gc -m|git commit -m) ".{72,}"' 'fg=white,bold,bg=
 ZSH_HIGHLIGHT_REGEXP+=('^(acp?|gc -m|git commit -m) ".{51,71}"' 'fg=black,bg=yellow')
 
 #───────────────────────────────────────────────────────────────────────────────
+
+function grem {
+	git remote -v
+	echo -n "gh default: "
+	gh repo set-default --view
+}
 
 function pr {
 	if ! command -v gh &>/dev/null; then print "\033[1;33mgh not installed.\033[0m" && return 1; fi
