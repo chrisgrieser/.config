@@ -59,7 +59,7 @@ if vim.version().major == 0 and vim.version().minor >= 10 then
 		- ftAbbr & abbreviations.lua: vim.keymap.set('ia', lhs, rhs, { buffer = true })
 		- inlay hints setup: https://www.reddit.com/r/neovim/comments/16tmzkh/comment/k2gpy16/?context=3
 		- change lsp-signature to inline hint
-		- vim.snippet
+		- vim.snippet https://www.reddit.com/r/neovim/comments/17cwptz/comment/k5uoswd/?utm_source=share&utm_medium=web2x&context=3
 	]]
 	vim.notify(todo)
 end
