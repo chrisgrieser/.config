@@ -12,18 +12,17 @@ if roundedCorners then roundedCorners:start() end
 --------------------------------------------------------------------------------
 
 ---to stop wallpaper shining through
----@param toMode "dark"|"light"|"auto"|"remove"
-function M.holeCover(toMode)
-	if toMode == "auto" then toMode = u.isDarkMode() and "dark" or "light" end
+function M.updateHoleCover()
+	local toMode = u.isDarkMode() and "dark" or "light"
 
 	if M.coverParts then
 		for _, cover in pairs(M.coverParts) do
-			cover:delete()
+			if cover then cover:delete() end
 			cover = nil
 		end
 		M.CoverParts = nil
 	end
-	if toMode == "remove" or env.isProjector() then return end
+	if env.isProjector() then return end
 
 	local screen = hs.screen.mainScreen():frame()
 	local pseudoMaxCorner = wu.toTheSide.w + wu.toTheSide.x
@@ -31,13 +30,11 @@ function M.holeCover(toMode)
 		or { red = 0.8, green = 0.8, blue = 0.8, alpha = 1 }
 
 	-- three points, forming roughly a triangle
-	M.coverParts = {} -- needs to be assigned this way for some reason?
-	M.coverParts[1] =
-		hs.drawing.rectangle { x = pseudoMaxCorner - 9, y = screen.h - 3, w = 18, h = 3 }
-	M.coverParts[2] =
-		hs.drawing.rectangle { x = pseudoMaxCorner - 6, y = screen.h - 6, w = 12, h = 3 }
-	M.coverParts[3] =
-		hs.drawing.rectangle { x = pseudoMaxCorner - 3, y = screen.h - 9, w = 6, h = 3 }
+	M.coverParts = {
+		hs.drawing.rectangle { x = pseudoMaxCorner - 9, y = screen.h - 3, w = 18, h = 3 },
+		hs.drawing.rectangle { x = pseudoMaxCorner - 6, y = screen.h - 6, w = 12, h = 3 },
+		hs.drawing.rectangle { x = pseudoMaxCorner - 3, y = screen.h - 9, w = 6, h = 3 },
+	}
 
 	for _, cover in pairs(M.coverParts) do
 		cover:setFillColor(bgColor)
@@ -48,7 +45,7 @@ function M.holeCover(toMode)
 	end
 end
 
-if u.isSystemStart() then M.holeCover("auto") end
+if u.isSystemStart() then M.updateHoleCover() end
 
 --------------------------------------------------------------------------------
 return M

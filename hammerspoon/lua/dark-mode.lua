@@ -40,7 +40,7 @@ function M.setDarkMode(toMode)
 
 	-- hammerspoon
 	console.setConsoleColors(toMode)
-	visuals.holeCover(toMode)
+	visuals.updateHoleCover()
 end
 
 -- MANUAL TOGGLING OF DARK MODE
