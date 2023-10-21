@@ -32,6 +32,6 @@ if [[ $notification_count -eq 0 ]]; then
 else
 	icon=""
 	label="$notification_count"
-	pad=12
+	pad=15
 fi
 sketchybar --set "$NAME" icon="$icon" label="$label" background.padding_right=$pad
