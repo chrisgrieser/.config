@@ -22,7 +22,6 @@ M.thresholds = {
 	Discord = 180, -- when Steam is not on
 	BusyCal = 2,
 	neovide = 120, -- needs lowercase
-	Hammerspoon = 2, -- affects the console, not hammerspoon itself
 	["Alfred Preferences"] = 20,
 	["System Settings"] = 2,
 	Finder = 20, -- only closes windows when not on projector
@@ -46,9 +45,6 @@ local function quit(appName)
 			win:close()
 		end
 		suffix = "(windows closed)"
-	elseif appName == "Hammerspoon" then
-		hs.closeConsole()
-		suffix = "(Console)"
 	else
 		u.app(appName):kill()
 	end
