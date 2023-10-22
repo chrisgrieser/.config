@@ -4,47 +4,6 @@ local pathw = hs.pathwatcher.new
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local home = os.getenv("HOME")
-local appSupport = home .. "/Library/Application Support/"
-
---------------------------------------------------------------------------------
--- BOOKMARKS SYNCED TO CHROME BOOKMARKS
--- (needed for Alfred)
-
-local loc = {
-	sourceProfile = appSupport .. env.browserDefaultsPath,
-	sourceBookmarks = appSupport .. env.browserDefaultsPath .. "/Default/Bookmarks",
-	chromeProfile = appSupport .. "Google/Chrome/",
-}
-M.pathw_bookmarks = pathw(loc.sourceBookmarks, function()
-	-- Bookmarks
-	local bookmarks = hs.json.read(loc.sourceBookmarks)
-	if not bookmarks then return end
-	hs.execute(("mkdir -p '%s'"):format(loc.chromeProfile))
-	local success = hs.json.write(bookmarks, loc.chromeProfile .. "/Default/Bookmarks", false, true)
-	if not success then
-		u.notify("🔖⚠️ Bookmarks not correctly synced.")
-		return
-	end
-
-	-- Local State (also required for Alfred to pick up the Bookmarks)
-	local content = u.readFile(loc.sourceProfile .. "/Local State")
-	if not content then return end
-	u.writeToFile(loc.chromeProfile .. "/Local State", content, false)
-
-	print("🔖 Bookmarks synced to Chrome Bookmarks")
-end):start()
-
---------------------------------------------------------------------------------
--- TO FILE HUB
--- Downloads Folder
-local systemDownloadFolder = home .. "/Downloads/"
-M.pathw_systemDlFolder = pathw(systemDownloadFolder, function()
-	os.execute("mv '" .. systemDownloadFolder .. "'/* '" .. env.fileHub .. "'")
-	print("➡️ Download moved to File Hub.")
-end):start()
-
---------------------------------------------------------------------------------
--- FROM FILE HUB
 
 ---INFO this works as only downloaded files get quarantined.
 ---Ensures that files created locally do not trigger the actions.
@@ -55,7 +14,14 @@ local function fileIsDownloaded(filepath)
 	return fileExists and msg ~= nil
 end
 
+--------------------------------------------------------------------------------
+
+-- CONFIG
 local browserSettings = home .. "/.config/_browser-extension-configs/"
+local libraryPath = home .. "/.config/pandoc/main-bibliography.bib"
+
+--------------------------------------------------------------------------------
+
 M.pathw_fileHub = pathw(env.fileHub, function(paths, _)
 	if not u.screenIsUnlocked() then return end
 	for _, filep in pairs(paths) do
@@ -66,7 +32,6 @@ M.pathw_fileHub = pathw(env.fileHub, function(paths, _)
 		if (ext == "alfredworkflow" or ext == "ics") and fileIsDownloaded(filep) then
 			u.runWithDelays(3, function() os.remove(filep) end)
 		elseif ext == "bib" and fileIsDownloaded(filep) then
-			local libraryPath = home .. "/.config/pandoc/main-bibliography.bib"
 			local bibEntry = u.readFile(filep)
 			if not bibEntry then return end
 			bibEntry = bibEntry:gsub("\n?$", "\n")
