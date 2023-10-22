@@ -30,5 +30,5 @@ fi
 
 # quit Transmission, if there are no other torrents active
 sleep 5 # time for new torrents to be initialized
-torrent_active=$(transmission-remote --list | sed '$d' | tail -n+2)
+torrent_active=$(transmission-remote --list | sed '1d;$d')
 [[ -z "$torrent_active" ]] && killall "Transmission"
