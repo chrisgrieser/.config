@@ -5,5 +5,3 @@ sleep 2.5
 sketchybar --trigger update-github-notifications
 sleep 5
 sketchybar --trigger update-github-notifications
-sleep 5
-sketchybar --trigger update-github-notifications

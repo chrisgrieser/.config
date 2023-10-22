@@ -45,9 +45,6 @@ fi
 first_row="left"
 second_row="popup.clock"
 
-stats_width=240
-scutil --get ComputerName | grep -q "Mother" && stats_width=225
-
 # INFO
 # use `sketchybar --hotload` to auto-reload config when building stuff
 
@@ -75,7 +72,7 @@ sketchybar \
 	background.padding_left=8 \
 	\
 	--add item weather $first_row \
-	--set weather update_freq=900 \
+	--set weather update_freq=1200 \
 	script="$PLUGIN_DIR/weather.sh" \
 	icon.y_offset=-1 \
 	\
@@ -93,7 +90,7 @@ sketchybar \
 	--subscribe tot system_woke \
 	\
 	--add alias "$stats" $second_row \
-	--set "$stats" width="$stats_width" \
+	--set "$stats" width=235 \
 	\
 	--add item sync-indicator $second_row \
 	--set sync-indicator update_freq=300 icon.padding_right=3 \
