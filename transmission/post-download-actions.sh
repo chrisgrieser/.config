@@ -1,15 +1,10 @@
 #!/usr/bin/env zsh
-#───────────────────────────────────────────────────────────────────────────────
 # DOCS https://github.com/transmission/transmission/blob/main/docs/Scripts.md#scripts
-
-# CONFIG
-VIDEO_DIR="$HOME/Downloaded"
-
 #───────────────────────────────────────────────────────────────────────────────
 
-# Check requirements
+# GUARD
 command -v transmission-remote &>/dev/null || touch "./WARN transmission-remote not installed"
-cd "$VIDEO_DIR" || return 1
+cd "$HOME/Downloads/" || return 1
 
 # delete clutter
 find . \( -name '*.txt' -or -name '*.nfo' -or -name '*.exe' -or -name '*.md' \
