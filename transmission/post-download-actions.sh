@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 #───────────────────────────────────────────────────────────────────────────────
-# INFO https://github.com/transmission/transmission/blob/main/docs/Scripts.md#scripts
+# DOCS https://github.com/transmission/transmission/blob/main/docs/Scripts.md#scripts
 
 # CONFIG
 VIDEO_DIR="$HOME/Downloaded"
@@ -29,6 +29,6 @@ if [[ $FILES_IN_FOLDER -eq 1 ]]; then
 fi
 
 # quit Transmission, if there are no other torrents active
-sleep 5 # time for new torrents to be initialized
-torrent_active=$(transmission-remote --list | sed '1d;$d')
+sleep 3 # time for new torrents to be initialized
+torrent_active=$(transmission-remote --list | sed '1d;$d' | grep -v " Done")
 [[ -z "$torrent_active" ]] && killall "Transmission"
