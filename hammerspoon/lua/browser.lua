@@ -27,7 +27,12 @@ M.wf_browser = wf.new(env.browserApp)
 			wu.autoTile(M.wf_browser)
 		end
 	end)
-	:subscribe(wf.windowDestroyed, function() wu.autoTile(M.wf_browser) end)
+	:subscribe(wf.windowDestroyed, function()
+		wu.autoTile(M.wf_browser)
+		-- closing windows means we are done with things, which include working on
+		-- github notifications
+		hs.execute(u.exportPath .. "sketchybar --trigger update-github-notifications")
+	end)
 	:subscribe(wf.windowFocused, wu.bringAllWinsToFront)
 
 -- Automatically hide Browser has when no window
@@ -65,7 +70,6 @@ M.hotkey_jHidesCursor = u.hotkey({}, "j", function() hideCurAndPassThrough("j") 
 M.hotkey_kHidesCursor = u.hotkey({}, "k", function() hideCurAndPassThrough("k") end):disable()
 
 -- watches browser, enables when hotkeys when browser is activated
-
 M.aw_jkHotkeys = aw.new(function(appName, eventType)
 	if eventType ~= aw.activated then return end
 
