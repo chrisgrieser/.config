@@ -96,13 +96,21 @@ rules:
                 end tell'
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Finder: Sidebar"
+  - description: "(Apps) Finder"
     manipulators:
+      # sidebar
       - type: basic
         from: { key_code: "1", modifiers: { mandatory: [command] } }
         to:
           - { key_code: s, modifiers: [control, command] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
+      # cmd+shift+d -> downloads instead of desktop (which I do not use)
+      - type: basic
+        from: { key_code: d, modifiers: { mandatory: [command, shift] } }
+        to:
+          - { key_code: l, modifiers: [command, option] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) ReadKit: Sidebar"
     manipulators:
       - type: basic
@@ -110,7 +118,6 @@ rules:
         to:
           - { key_code: s, modifiers: [control, command] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [app\.readkit\.universal] }]
-
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Highlights"
     manipulators:
