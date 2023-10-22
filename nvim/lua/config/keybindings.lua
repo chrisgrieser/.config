@@ -63,13 +63,6 @@ keymap("n", "<Space>", '"_ciw', { desc = "󱡔 change word" })
 keymap("x", "<Space>", '"_c', { desc = "󱡔 change selection" })
 keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
 
-keymap(
-	"o",
-	"u",
-	function() require("funcs.quality-of-life").commentsTextobj() end,
-	{ desc = "󱡔  Big Comment textobj" }
-)
-
 --------------------------------------------------------------------------------
 -- EDITING
 

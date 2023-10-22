@@ -9,3 +9,10 @@ rules:
     severity: info
     note: Use `vim.api.nvim_get_current_line()` instead.
     options: { word_boundary: false }
+  - name: fn.line("$")
+    terms:
+      - vim.fn.line("$")
+      - fn.line("$")
+    severity: info
+    note: Use `vim.api.nvim_buf_line_count(0)` instead.
+    options: { word_boundary: false }
