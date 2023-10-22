@@ -58,6 +58,8 @@ for remap, original in pairs(u.textobjRemaps) do
 	keymap({ "o", "x" }, "a" .. remap, "a" .. original, { desc = "󱡔 outer " .. original })
 end
 
+keymap("o", "k", 'i"', { desc = "󱡔 inner quote"})
+
 -- quick textobj operations
 keymap("n", "<Space>", '"_ciw', { desc = "󱡔 change word" })
 keymap("x", "<Space>", '"_c', { desc = "󱡔 change selection" })

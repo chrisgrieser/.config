@@ -17,8 +17,6 @@ return {
 		event = "VimEnter", -- cannot load on key due to highlights
 		keys = {
 			{ "m", "<Plug>(matchup-%)", desc = "Goto Matching Bracket" },
-			{ "k", "<Plug>(matchup-i%)", mode = "o", desc = "󱡔 Any Inner Block textobj" },
-			{ "K", "<Plug>(matchup-a%)", mode = "o", desc = "󱡔 Any Outer Block textobj" },
 		},
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function() vim.g.matchup_matchparen_offscreen = { method = "popup" } end,
