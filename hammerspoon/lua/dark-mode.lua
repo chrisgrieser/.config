@@ -15,6 +15,15 @@ function M.setDarkMode(toMode)
 	if toMode == "toggle" then toMode = u.isDarkMode() and "light" or "dark" end
 	---@cast toMode "dark"|"light"
 
+	-- System
+	local bool = toMode == "light" and "false" or "true"
+	u.applescript(
+		'tell application "System Events" to tell appearance preferences to set dark mode to ' .. bool
+	)
+
+	-- sketchybar
+	hs.execute(u.exportPath .. "sketchybar --reload")
+
 	-- neovim
 	-- stylua: ignore
 	local nvimLuaCmd = ([[<cmd>lua require('config.theme-customization').setThemeMode('%s')<CR>]]):format(toMode)
@@ -28,15 +37,6 @@ function M.setDarkMode(toMode)
 		local pdfBg = toMode == "light" and "Default" or "Night"
 		u.app("Highlights"):selectMenuItem { "View", "PDF Appearance", pdfBg }
 	end
-
-	-- System
-	local bool = toMode == "light" and "false" or "true"
-	u.applescript(
-		'tell application "System Events" to tell appearance preferences to set dark mode to ' .. bool
-	)
-
-	-- sketchybar
-	hs.execute(u.exportPath .. "sketchybar --reload")
 
 	-- hammerspoon
 	console.setConsoleColors(toMode)

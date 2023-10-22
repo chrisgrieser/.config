@@ -9,7 +9,7 @@ optl.tabstop = 4 -- less nesting in md
 
 -- since markdown has rarely indented lines, and also rarely overlength in lines,
 -- move everything a bit more to the right
-if vim.bo.buftype == "" then optl.signcolumn = "yes:5" end
+if vim.bo.buftype == "" then optl.signcolumn = "yes:8" end
 
 --------------------------------------------------------------------------------
 -- MARKDOWN-SPECIFIC KEYMAPS

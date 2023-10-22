@@ -6,8 +6,11 @@ local wu = require("lua.window-utils")
 --------------------------------------------------------------------------------
 
 -- https://www.hammerspoon.org/Spoons/RoundedCorners.html
-local roundedCorners = hs.loadSpoon("RoundedCorners")
-if roundedCorners then roundedCorners:start() end
+local roundedCorner = hs.loadSpoon("RoundedCorners")
+if roundedCorner then
+	roundedCorner.radius = 8
+	roundedCorner:start()
+end
 
 --------------------------------------------------------------------------------
 
@@ -17,7 +20,7 @@ function M.updateHoleCover()
 
 	if M.coverParts then
 		for _, cover in pairs(M.coverParts) do
-			if cover then cover:delete() end
+			if cover.delete then cover:delete() end
 			cover = nil
 		end
 		M.CoverParts = nil
@@ -38,9 +41,9 @@ function M.updateHoleCover()
 
 	for _, cover in pairs(M.coverParts) do
 		cover:setFillColor(bgColor)
-		cover:sendToBack()
 		cover:setFill(true)
 		cover:setStrokeColor(bgColor)
+		cover:sendToBack()
 		cover:show()
 	end
 end
