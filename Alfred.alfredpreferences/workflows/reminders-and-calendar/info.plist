@@ -99,11 +99,37 @@
 				<false/>
 			</dict>
 		</array>
+		<key>A4ACD6F8-231C-47F8-A51D-8BA80C8CB4FC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>AB6C212F-70C4-4291-963F-B7D6DFD63435</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>AB6C212F-70C4-4291-963F-B7D6DFD63435</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>6D5011F9-F8DB-4744-945E-FE33325726F3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C0706453-E9D1-4D41-9BC9-2BF209CBDFA8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>AB6C212F-70C4-4291-963F-B7D6DFD63435</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -129,11 +155,21 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>AB6C212F-70C4-4291-963F-B7D6DFD63435</string>
+				<string>A4ACD6F8-231C-47F8-A51D-8BA80C8CB4FC</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>C0706453-E9D1-4D41-9BC9-2BF209CBDFA8</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Open Reminders afterwards</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -563,7 +599,7 @@
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>keyword</key>
 				<string>ein</string>
 				<key>subtext</key>
@@ -586,12 +622,9 @@
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>68</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string>tell application "Reminders" 
-	show (list "Shopping") 
-	activate 
-end tell</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -624,6 +657,46 @@ end tell</string>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>6D5011F9-F8DB-4744-945E-FE33325726F3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>openRemindersAfterwards</key>
+					<string>false</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>A4ACD6F8-231C-47F8-A51D-8BA80C8CB4FC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>openRemindersAfterwards</key>
+					<string>true</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>C0706453-E9D1-4D41-9BC9-2BF209CBDFA8</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -695,7 +768,7 @@ end tell</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>385</real>
+			<real>395</real>
 			<key>ypos</key>
 			<real>415</real>
 		</dict>
@@ -728,14 +801,32 @@ end tell</string>
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
+		<key>A4ACD6F8-231C-47F8-A51D-8BA80C8CB4FC</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>185</real>
+			<key>ypos</key>
+			<real>420</real>
+		</dict>
 		<key>AB6C212F-70C4-4291-963F-B7D6DFD63435</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>210</real>
+			<real>250</real>
 			<key>ypos</key>
 			<real>415</real>
+		</dict>
+		<key>C0706453-E9D1-4D41-9BC9-2BF209CBDFA8</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>185</real>
+			<key>ypos</key>
+			<real>510</real>
 		</dict>
 		<key>C73C4C50-6AAA-4294-929D-5C770E4E4E36</key>
 		<dict>
