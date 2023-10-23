@@ -4,11 +4,11 @@ ObjC.import("stdlib");
 
 // biome-ignore lint/correctness/noUnusedVariables: run
 function run() {
-	// CONFIG
-	const dotToUse = 1;
+	const dotToUse = 1; // CONFIG
 
 	const reminders = Application("Reminders");
 	const tot = Application("Tot");
+	if (!tot.running()) tot.launch();
 	tot.includeStandardAdditions = true;
 
 	const today = new Date();

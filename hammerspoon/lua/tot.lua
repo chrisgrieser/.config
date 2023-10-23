@@ -18,8 +18,6 @@ end):start()
 -- REMINDERS -> TOT
 ---@async
 local function remindersToTot()
-	if not u.appRunning("Tot") then return end
-
 	-- run as task so it's not blocking
 	M.task_pushReminder = hs.task
 		.new("./helpers/push-todays-reminders-to-tot.js", function(exitCode, stdout, stderr)
