@@ -245,7 +245,6 @@ rules:
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
   #─────────────────────────────────────────────────────────────────────────────
-  # Obsidian
   - description: "(Apps) Obsidian"
     manipulators:
       # Dev Tools & Element Picker
