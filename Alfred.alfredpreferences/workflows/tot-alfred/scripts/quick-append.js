@@ -81,9 +81,13 @@ function run(argv) {
 	}
 
 	// append
-	const empty = tot.openLocation(`tot://${quicksaveDot}/content`) === "";
-	if (empty) text.trim();
-	tot.openLocation(`tot://${quicksaveDot}/append?text=${encodeURIComponent(text)}`);
+	const empty = tot.openLocation(`tot://${quicksaveDot}/content`).match(/^\s*$/);
+	if (empty) {
+		text.trim(); 
+		tot.openLocation(`tots://${quicksaveDot}/replace?text=${encodeURIComponent(text)}`);
+	} else {
+		tot.openLocation(`tots://${quicksaveDot}/append?text=${encodeURIComponent(text)}`);
+	} 
 
 	// hide the app
 	const totProcess = Application("System Events").applicationProcesses.byName("Tot");

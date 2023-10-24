@@ -40,9 +40,13 @@ function run() {
 		task.delete(); // DOCS https://gist.github.com/chockenberry/d33ef5b6e6da4a3e4aa9b07b093d3c23
 	}
 
-	const empty = tot.openLocation(`tot://${dotToUse}/content`) === "";
-	if (empty) accText.trim();
-	tot.openLocation(`tots://${dotToUse}/append?text=${encodeURIComponent(accText)}`);
+	const empty = tot.openLocation(`tot://${dotToUse}/content`).match(/^\s*$/);
+	if (empty) {
+		accText.trim(); 
+		tot.openLocation(`tots://${dotToUse}/replace?text=${encodeURIComponent(accText)}`);
+	} else {
+		tot.openLocation(`tots://${dotToUse}/append?text=${encodeURIComponent(accText)}`);
+	} 
 
 	delay(0.1);
 	if (reminders) reminders.quit(); // FIX Reminder.app being left open
