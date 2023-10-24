@@ -45,8 +45,11 @@ M.timer_morning = hs.timer.doAt("07:00", "01d", remindersToTot, true):start()
 -- 3. On wake
 local c = hs.caffeinate.watcher
 M.caff_wake = c.new(function(event)
+	if M.recentlyWoke then return end
+	M.recentlyWoke = true
 	local woke = event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock
 	if woke then u.runWithDelays(10, remindersToTot) end
+	u.runWithDelays(2.5, function() M.recentlyWoke = false end)
 end):start()
 
 --------------------------------------------------------------------------------
