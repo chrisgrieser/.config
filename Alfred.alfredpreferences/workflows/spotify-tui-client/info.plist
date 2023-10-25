@@ -204,7 +204,7 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>requires Spotify TUI</string>
+	<string>requires Spotify TUI. Alternative: https://github.com/aome510/spotify-player</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -969,7 +969,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.5</string>
+	<string></string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
