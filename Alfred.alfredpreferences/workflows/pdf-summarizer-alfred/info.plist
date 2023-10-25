@@ -130,7 +130,7 @@
 					<string>com.adobe.pdf</string>
 				</array>
 				<key>name</key>
-				<string>ChatPDF: Summary of PDF</string>
+				<string>Summary of PDF</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.action</string>
