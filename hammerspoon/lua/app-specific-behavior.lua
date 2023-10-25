@@ -96,7 +96,7 @@ M.wf_finder = wf.new("Finder")
 M.aw_finder = aw.new(function(appName, eventType, finder)
 	if eventType == aw.activated and appName == "Finder" then
 		finder:selectMenuItem { "View", "Hide Sidebar" }
-		finder:selectMenuItem { "View", "as List" }
+		if not env.isProjector() then finder:selectMenuItem { "View", "as List" } end
 		wu.autoTile("Finder")
 	end
 end):start()
