@@ -120,10 +120,6 @@
 		"prefix": "notify (msg)",
 		"body": "osascript -e 'display notification \"\" with title \"${1:msg}\"'"
 	},
-	"[[ .. ]] && .. ": {
-		"prefix": "[[ .. ]] && .. ",
-		"body": "[[ $1 ]] && $0"
-	},
 	"then": {
 		"prefix": "then .. fi",
 		"body": "then\n\t$0\nfi"
@@ -142,7 +138,8 @@
 	},
 	"check if installed": {
 		"prefix": "check if installed",
-		"body": "if [[ ! -x \"$(command -v ${1:cli})\" ]] then print \"\\033[1;33m${1:cli} not installed.\\033[0m\" && return 1; fi\n$0"
+		"body": "if [[ ! -x \"$(command -v ${1:cli})\" ]] then print \"\\033[1;33m${1:cli} not installed.\\033[0m\" && return 1; fi\n$0",
+		"description": "https://stackoverflow.com/a/26759734/22114136"
 	},
 	"check if in git repo": {
 		"prefix": "check if in git repo",

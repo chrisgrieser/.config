@@ -3,8 +3,7 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 # install duti if needed
-unfunction duti
-command -v duti &>/dev/null || brew install duti
+[[ -x "$(command -v duti)" ]] || brew install duti
 
 # open once to initialize the apps
 open "$HOME/.config/nvim/mac-helper/Neovide Helper.app" 
@@ -44,7 +43,7 @@ duti -s "$editorID" ini all
 duti -s "$editorID" cfg all
 duti -s "$editorID" com.apple.property-list all # plist
 duti -s "$editorID" xml all
-duti -s "$editorID" vimrc all
+duti -s "$editorID" vim all
 duti -s "$editorID" vim all
 duti -s "$editorID" csv all
 duti -s "$editorID" log all
