@@ -80,13 +80,3 @@ function  ..d() {
 	vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc)
 	(afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/dock/drag to trash.aif" &)
 }
-
-# auto-install duti, if necessary
-function duti {
-	if [[ ! -x "$(command -v foo)" ]]; then
-		brew install duti
-	fi
-
-	command duti "$@"
-	brew uninstall duti
-}
