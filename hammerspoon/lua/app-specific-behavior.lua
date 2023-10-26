@@ -11,17 +11,11 @@ local wf = hs.window.filter
 ---play/pause spotify
 ---@param toStatus string pause|play
 local function spotifyDo(toStatus)
-	local currentStatus = hs.execute(u.exportPath .. "spt playback --status --format=%s")
-		:gsub("\n$", "") ---@diagnostic disable-line: undefined-field
-
-	if
-		(currentStatus == "▶️" and toStatus == "pause")
-		or (currentStatus == "⏸" and toStatus == "play")
-	then
+	local status = hs.execute(u.exportPath .. "spt playback --status --format=%s"):gsub("\n$", "") ---@diagnostic disable-line: undefined-field
+	if (status == "▶️" and toStatus == "pause") or (status == "⏸" and toStatus == "play") then
 		local stdout = hs.execute(u.exportPath .. "spt playback --toggle")
 		if toStatus == "play" then u.notify(stdout) end
 	end
-	-- stylua: ignore end
 end
 
 -- auto-pause/resume Spotify on launch/quit of apps with sound

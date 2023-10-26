@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # eject
-function e() {
+function e {
 	volumes=$(df -h | grep -io "\s/Volumes/.*" | cut -c2-)
 	if [[ -z "$volumes" ]]; then
 		print "\033[1;33mNo volume connected.\033[0m"
@@ -16,7 +16,7 @@ function e() {
 }
 
 # app-id of macOS apps
-function appid() {
+function appid {
 	local id
 	id=$(osascript -e "id of app \"$1\"")
 	echo "Copied appid: $id"
@@ -24,7 +24,7 @@ function appid() {
 }
 
 # read app and macOS system setting changes https://news.ycombinator.com/item?id=36982463
-function prefs() {
+function prefs {
 	if [[ "$PREF_BEFORE" -eq 0 ]]; then
 		defaults read >/tmp/before
 		PREF_BEFORE=1
@@ -48,7 +48,7 @@ function prefs() {
 # - moves to macOS trash instead of irreversibly deleting with `rm`
 # - no arg = all files in folder will be deleted
 # - adds sound on success
-function d() {
+function d {
 	if ! command -v trash &>/dev/null; then print "\033[1;33mmacos-trash not installed.\033[0m" && return 1; fi
 
 	if [[ $# == 0 ]]; then
@@ -65,7 +65,7 @@ function d() {
 }
 
 # go up and delete current dir
-function ..d() {
+function  ..d() {
 	if ! command -v trash &>/dev/null; then print "\033[1;33mmacos-trash not installed.\033[0m" && return 1; fi
 
 	local current_dir="$PWD"
@@ -82,8 +82,11 @@ function ..d() {
 }
 
 # auto-install duti, if necessary
-function duti() {
-	command -v duti &>/dev/null || brew install duti
-	duti "$@"
+function duti {
+	if [[ ! -x "$(command -v foo)" ]]; then
+		brew install duti
+	fi
+
+	command duti "$@"
 	brew uninstall duti
 }
