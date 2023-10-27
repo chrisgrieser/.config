@@ -160,8 +160,7 @@ keymap("n", "<leader>R", function()
 		if recipe then table.insert(recipes, recipe) end
 	end
 	vim.ui.select(recipes, { prompt = " make" }, function(selection)
-		if not selection then return end
-		vim.cmd.lmake(selection)
+		if selection then vim.cmd.lmake(selection) end
 	end)
 end, { desc = " Select Make" })
 

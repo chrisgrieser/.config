@@ -61,7 +61,7 @@ sketchybar \
 	updates="when_shown" drawing="on" align="left" \
 	icon.font="JetBrainsMonoNL Nerd Font:Bold:16" icon.color="$FONT_COLOR" \
 	label.font="Lucida Grande:Regular:16.5" label.color="$FONT_COLOR" \
-	background.padding_right=15 label.padding_right=2 \
+	background.padding_right=10 label.padding_right=2 \
 	\
 	popup.drawing=true popup.horizontal=true popup.topmost=false \
 	popup.y_offset="-35" y_offset="18" \
