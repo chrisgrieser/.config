@@ -1,6 +1,3 @@
-# shellcheck disable=SC2190
-
-#───────────────────────────────────────────────────────────────────────────────
 # GENERAL SETTINGS
 
 # sets English everywhere, so that programs behave predictably
@@ -50,7 +47,6 @@ export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets regexp root)
 # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/regexp.md
 # shellcheck disable=2034 # used in other files
 typeset -A ZSH_HIGHLIGHT_REGEXP
-
 # NOTE: There are also some custom highlights for global aliases in aliases.zsh
 
 export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)" # ignores long history items
