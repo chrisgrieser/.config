@@ -198,9 +198,9 @@ function M.timeLog()
 			'print("%s timelog:", durationSecs, "s")',
 		}
 	elseif ft == "python" then
-		logStatement1 = { "timelogStart = time.perf_counter() # %s" }
+		logStatement1 = { "timelogStart = time.perf_counter()  # %s" }
 		logStatement2 = {
-			"durationSecs = round(time.perf_counter() - timelogStart, 3) # %s",
+			"durationSecs = round(time.perf_counter() - timelogStart, 3)  # %s",
 			'print("%s timelog:", durationSecs, "s")',
 		}
 	elseif ft == "javascript" then
@@ -237,24 +237,18 @@ function M.debugLog()
 	local ft = bo.filetype
 
 	if ft == "javascript" or ft == "typescript" then
-		logStatement = { "debugger // %s" }
+		logStatement = "debugger; // %s"
 	elseif ft == "python" then
-		logStatement = {
-			"from IPython import embed # %s",
-			"embed() # %s",
-		}
+		logStatement = "breakpoint()  # %s"
 	else
 		notify("Debug Log does not support " .. ft .. " yet.", "warn")
 		return
 	end
 
-	for _, line in pairs(logStatement) do
-		append(line:format(marker))
-	end
+	append(logStatement:format(marker))
 end
 
 ---Remove all log statements in the current buffer
----Supported: lua, python, js/ts, zsh/bash/fish, and applescript
 function M.removeLogs()
 	local numOfLinesBefore = vim.api.nvim_buf_line_count(0)
 

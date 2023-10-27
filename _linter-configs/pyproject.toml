@@ -14,6 +14,7 @@ line-length = 100
 select = ["ALL"]
 ignore = [
 	"T201",   # print statements
+	"T100",   # "breakpoint()"
 	"S311",   # requires cryptographically secure random number generators
 	"W",      # pycodestyle warnings are already autofixed by black
 	"RET504", # unnecessary assign for return (makes stuff less verbose)
@@ -50,4 +51,5 @@ disable = [
 	"unused-import",
 	"trailing-newlines",   # taken care of by formatter
 	"trailing-whitespace", # taken care of by formatter
+	"forgotten-debug-statement",
 ]
