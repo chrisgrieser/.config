@@ -34,7 +34,7 @@ local formatters = {
 	html = { "prettier" },
 	markdown = { "markdown-toc", "markdownlint" },
 	css = { "stylelint", "prettier" },
-	sh = { "shellcheck", "beautysh", "squeeze_blanks", "trim_newlines" },
+	sh = { "shellcheck", "shfmt" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
 	["_"] = { "trim_whitespace", "trim_newlines", "squeeze_blanks" },
 	["*"] = { "codespell" },
@@ -155,9 +155,6 @@ local formatterConfig = {
 		},
 		codespell = {
 			prepend_args = { "--toml=" .. linterConfig .. "/codespell.toml" },
-		},
-		beautysh = {
-			prepend_args = { "--tab", "--force-function-style=fnonly" },
 		},
 		-- stylua: ignore
 		["bibtex-tidy"] = {

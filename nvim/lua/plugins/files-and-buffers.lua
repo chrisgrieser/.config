@@ -75,18 +75,10 @@ return {
 			detection_methods = { "pattern", "lsp" }, -- priority: pattern, then lsp-root
 			exclude_dirs = { "node_modules", "build", "dist", ".venv", "venv" },
 			patterns = {
-				"Makefile",
-				".editorconfig",
-				"README.md",
 				".git", -- submodules
-				"pyproject.toml", -- python
 				"requirements.txt", -- python
-				"manifest.json", -- node
-				"package.json", -- node
 				"info.plist", -- Alfred
 				".luarc.json", -- lua
-				"selene.toml", -- lua
-				"stylua.toml", -- lua
 				-- specific to my personal setup
 				".project-root", -- manually marked
 				">com~apple~CloudDocs", -- = all subfolders of the iCloud drive
