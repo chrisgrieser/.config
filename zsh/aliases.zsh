@@ -23,7 +23,7 @@ alias ls='ls --color'
 alias which='which -a'           # show all
 alias mkdir='mkdir -p'           # create intermediate directories
 alias curl='curl --progress-bar' # nicer progress bar
-alias make='make --silent'
+alias make='make --silent --warn-undefined-variables'
 
 # misc
 alias prose='ssh nanotipsforvim@prose.sh'

@@ -111,6 +111,9 @@ opt.nrformats:remove { "bin", "hex" } -- remove ambiguity, since I don't use the
 opt.updatetime = 250 -- also affects cursorword symbols lsp-hints
 opt.timeoutlen = 666 -- also affects duration until which-key is shown
 
+-- Make
+opt.makeprg = "make --silent"
+
 --------------------------------------------------------------------------------
 
 -- Popups & Cmdline

@@ -72,7 +72,7 @@ keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
 -- (wrapping in normal avoids temporarily scrolling to the side)
 keymap("n", "X", "<cmd>normal!mz$x`z<CR>", { desc = "󱎘 Delete char at EoL" })
 
--- Toggle Char Case
+-- CharCase
 -- stylua: ignore
 keymap("n", "~", function() require("funcs.quality-of-life").toggleCase() end, { desc = "better ~" })
 
