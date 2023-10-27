@@ -26,6 +26,10 @@ local routes = {
 		view = "mini",
 	},
 
+	-- :make
+	{ filter = { event = "msg_show", find = "^:!make" }, skip = true },
+	{ filter = { event = "msg_show", find = "^%(%d+ of %d+%):" }, skip = true },
+
 	-----------------------------------------------------------------------------
 
 	{ -- nvim-early-retirement

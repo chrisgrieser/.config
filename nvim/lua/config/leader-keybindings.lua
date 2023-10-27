@@ -152,12 +152,7 @@ keymap(
 )
 
 -- MAKE
-keymap(
-	"n",
-	"<leader>r",
-	function() require("funcs.maker").make("runFirst") end,
-	{ desc = " Make First" }
-)
+keymap("n", "<leader>r", "<cmd>lmake<CR>", { desc = " Make" })
 keymap("n", "<leader>R", function() require("funcs.maker").make() end, { desc = " Select Make" })
 
 --------------------------------------------------------------------------------
