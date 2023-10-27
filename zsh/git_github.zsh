@@ -82,7 +82,7 @@ function gM {
 # Github Url: open & copy url
 function gu {
 	url=$(git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 |
-	sed -e 's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//')
+		sed -e 's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//')
 	echo "$url" | pbcopy
 	open "$url"
 }
@@ -159,13 +159,13 @@ function gli {
 	local preview_format="%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s%C(magenta)"
 	selected=$(
 		gitlog --color=always |
-		sed 's/^[*| ]*//' | # remove the graph at the beginning
-		fzf -0 --query="$1" \
-			--ansi --no-sort --no-info \
-			--header-first --header="↵ : Checkout   ^H: Copy [H]ash" \
-			--expect="ctrl-h" \
-			--preview-window=45% \
-			--preview="git show {1} --name-only --color=always --format='$preview_format'"
+			sed 's/^[*| ]*//' | # remove the graph at the beginning
+			fzf -0 --query="$1" \
+				--ansi --no-sort --no-info \
+				--header-first --header="↵ : Checkout   ^H: Copy [H]ash" \
+				--expect="ctrl-h" \
+				--preview-window=45% \
+				--preview="git show {1} --name-only --color=always --format='$preview_format'"
 	)
 	[[ -z "$selected" ]] && return 0
 	key_pressed=$(echo "$selected" | head -n1)
@@ -188,7 +188,7 @@ function gb {
 
 	selected=$(
 		git branch --all --color | grep -v "HEAD" |
-		fzf --ansi --no-info --height=40% --header-first --header="↵ : Checkout Branch"
+			fzf --ansi --no-info --height=40% --header-first --header="↵ : Checkout Branch"
 	)
 	[[ -z "$selected" ]] && return 0
 	selected=$(echo "$selected" | tr -d "* ")
@@ -223,7 +223,7 @@ function ac {
 		local issue_number url
 		issue_number=$(echo "$commit_msg" | grep -Eo "#[0-9]+" | cut -c2-)
 		url=$(git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 |
-		sed -e 's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//')
+			sed -e 's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//')
 		open "$url/issues/$issue_number"
 	fi
 }
@@ -231,9 +231,14 @@ function ac {
 # same as ac, just followed by git pull & git push
 function acp {
 	ac "$@" || return 1
-
-	printf "\033[1;32mPull: \033[0m" && git pull
-	printf "\033[1;32mPush: \033[0m" && git push
+	if [[ -z "$(git status --porcelain)" ]]; then
+		printf "\033[1;34mNot pushing since repo still dirty. \033[0m"
+	else
+		printf "\033[1;32mPull: \033[0m" &&
+			git pull &&
+			printf "\033[1;32mPush: \033[0m" &&
+			git push
+	fi
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -273,7 +278,7 @@ function nuke {
 	# WARN depth > 1 ensures that amending a shallow commit does not result in a
 	# new commit without parent, effectively destroying git history (!!)
 	git clone --depth=5 "$SSH_REMOTE" "$local_repo_path" &&
-	cd "$local_repo_path" || return 1
+		cd "$local_repo_path" || return 1
 	separator
 	inspect
 }
@@ -320,7 +325,7 @@ function gdf {
 	show file (bat)"
 	decision=$(echo "$choices" |
 		fzf --bind="j:down,k:up" --no-sort --no-info --height="5" \
-		--layout=reverse-list --header="j:↓  k:↑")
+			--layout=reverse-list --header="j:↓  k:↑")
 
 	if [[ -z "$decision" ]]; then
 		echo "Aborted."
