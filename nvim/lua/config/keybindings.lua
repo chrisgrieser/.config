@@ -45,10 +45,6 @@ keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
 keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
 keymap({ "n", "v", "i" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 Signature" })
 
--- Changes
-keymap("n", "gc", "g;", { desc = "~ Newer Change" })
-keymap("n", "gC", "g,", { desc = "~ Older Change" })
-
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS
 
@@ -184,7 +180,7 @@ keymap(
 )
 
 -- needs remapping since `gf` is used for LSP-references
-keymap("n", "ga", "gf", { desc = " Goto File under cursor" })
+keymap("n", "gp", "gf", { desc = " Goto Path under cursor" })
 
 --------------------------------------------------------------------------------
 -- CLIPBOARD

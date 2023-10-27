@@ -12,7 +12,7 @@ local function updateCursor(update) vim.opt.guicursor:append(update) end
 ---@param hlgroupfrom string
 ---@param hlgroupto string
 local function linkHl(hlgroupfrom, hlgroupto)
-	vim.api.nvim_set_hl(0, hlgroupfrom, { link = hlgroupto, default = true })
+	vim.api.nvim_set_hl(0, hlgroupfrom, { link = hlgroupto })
 end
 
 ---INFO not using `api.nvim_set_hl` yet as it overwrites a group instead of updating it
@@ -24,7 +24,7 @@ local function updateHl(hlgroup, changes) vim.cmd.highlight(hlgroup .. " " .. ch
 local function clearHl(hlgroup) vim.api.nvim_set_hl(0, hlgroup, {}) end
 
 ---@param hlgroup string
----@param changes { link?: string, default?: boolean, fg?: string, bg?: string, underline?: boolean, reverse?: boolean, underdashed?: boolean, underdotted?: boolean, underdouble?: boolean }
+---@param changes { link?: string, fg?: string, bg?: string, underline?: boolean, reverse?: boolean, underdashed?: boolean, underdotted?: boolean, underdouble?: boolean }
 local function overwriteHl(hlgroup, changes) vim.api.nvim_set_hl(0, hlgroup, changes) end
 
 --------------------------------------------------------------------------------
