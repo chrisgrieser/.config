@@ -1,51 +1,5 @@
 local M = {}
 --------------------------------------------------------------------------------
-local fn = vim.fn
-local bo = vim.bo
-
----runs :normal natively with bang
-local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
-
----send notification
----@param funcname string
-local function noSupportNotif(funcname)
-	local msg = funcname .. " does not support " .. bo.filetype .. " yet."
-	vim.notify(msg, vim.log.levels.WARN, { title = "Chainsaw" })
-end
-
----in normal mode, returns word under cursor, in visual mode, returns selection
----@return string?
-local function getVar()
-	local varname
-	local isVisualMode = fn.mode():find("[Vv]")
-	if isVisualMode then
-		local prevReg = fn.getreg("z")
-		normal('"zy')
-		varname = fn.getreg("z"):gsub('"', '//"')
-		fn.setreg("z", prevReg)
-	else
-		local node = vim.treesitter.get_node()
-		if not node then return "" end
-		varname = vim.treesitter.get_node_text(node, 0)
-	end
-	return varname
-end
-
----append string below current line
----@param text string
-local function append(text)
-	local ln = vim.api.nvim_win_get_cursor(0)[1]
-	local indent = vim.api.nvim_get_current_line():match("^%s*")
-	vim.api.nvim_buf_set_lines(0, ln, ln, false, { indent .. text })
-end
-
-local function getFiletype()
-	local ft = bo.filetype
-	if ft == "lua" and vim.fn.expand("%:p"):find("nvim") then ft = "nvim_lua" end
-	return ft
-end
-
---------------------------------------------------------------------------------
 
 -- CONFIG
 local config = {
@@ -93,135 +47,159 @@ local config = {
 			css = "outline: 2px solid red !important; /* %s */",
 			scss = "outline: 2px solid red !important; /* %s */",
 		},
+		debugLog = {
+			javascript = "debugger; // %s",
+			typescript = "debugger; // %s",
+			python = "breakpoint()  # %s",
+		},
+		timeLogStart = {
+			lua = "local timelogStart = os.time() -- %s",
+			python = "local timelogStart = time.perf_counter()  # %s",
+			javascript = "const timelogStart = +new Date(); // %s", -- not all JS engines support console.time()
+			typescript = 'console.time("timelog"); // %s',
+			sh = "timelogStart=$(date +%%s) # %s",
+		},
+		timeLogStop = {
+			lua = {
+				"local durationSecs = os.difftime(os.time(), timelogStart) -- %s",
+				'print("%s:", durationSecs, "s")',
+			},
+			python = {
+				"durationSecs = round(time.perf_counter() - timelogStart, 3)  # %s",
+				'print(f"%s: {durationSecs}s")',
+			},
+			javascript = {
+				"const durationSecs = (+new Date() - timelogStart) / 1000; // %s",
+				"console.log(`%s: ${durationSecs}s`);",
+			},
+			typescript = 'console.timeEnd("timelog"); // %s',
+			sh = {
+				"timelogEnd=$(date +%%s) && durationSecs = $((timelogEnd - timelogStart)) # %s",
+				'echo "%s ${durationSecs}s"',
+			},
+		},
 	},
 }
 
-function M.messageLog()
-	local ft = getFiletype()
-	local templateStr = config.logStatements.messageLog[ft]
-	if not templateStr then
-		noSupportNotif("Message Log")
-		return
+--------------------------------------------------------------------------------
+
+local fn = vim.fn
+local bo = vim.bo
+local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
+
+---in normal mode, returns word under cursor, in visual mode, returns selection
+---@return string
+---@nodiscard
+local function getVar()
+	local varname
+	local isVisualMode = fn.mode():find("[Vv]")
+	if isVisualMode then
+		local prevReg = fn.getreg("z")
+		normal('"zy')
+		varname = fn.getreg("z"):gsub('"', '//"')
+		fn.setreg("z", prevReg)
+	else
+		local node = vim.treesitter.get_node()
+		if not node then return "" end
+		varname = vim.treesitter.get_node_text(node, 0)
 	end
+	return varname
+end
+
+---@param text string
+local function appendLine(text)
+	local ln = vim.api.nvim_win_get_cursor(0)[1]
+	local indent = vim.api.nvim_get_current_line():match("^%s*")
+	vim.api.nvim_buf_set_lines(0, ln, ln, false, { indent .. text })
+end
+
+---@param logType string
+---@return string|string[]
+---@nodiscard
+local function getTemplateStr(logType)
+	local ft = bo.filetype
+	if ft == "lua" and vim.fn.expand("%:p"):find("nvim") then ft = "nvim_lua" end
+	local templateStr = config.logStatements[logType][ft]
+	if not templateStr then
+		local msg = ("%s does not support %s yet."):format(logType, ft)
+		vim.notify(msg, vim.log.levels.WARN, { title = "Chainsaw" })
+	end
+	return templateStr
+end
+
+--------------------------------------------------------------------------------
+
+function M.messageLog()
+	local templateStr = getTemplateStr("messageLog") ---@cast templateStr string
+	if not templateStr then return end
 
 	local logStatement = templateStr:format(config.marker)
-	append(logStatement)
+	appendLine(logStatement)
+
 	-- goto insert mode at correct location
 	normal('f";') -- goto second `"`
 	vim.cmd.startinsert()
 end
 
----log statement for variable under cursor, similar to the 'turbo console log'
----VS Code plugin. Supported: lua, python, js/ts, zsh/bash/fish, and applescript
+---log statement for variable under cursor, similar to the 'turbo console log' VS Code plugin
 function M.variableLog()
-	local ft = getFiletype()
-	local templateStr = config.logStatements.variableLog[ft]
-	if not templateStr then
-		noSupportNotif("Variable Log")
-		return
-	end
+	local templateStr = getTemplateStr("variableLog") ---@cast templateStr string
+	if not templateStr then return end
 
 	local varname = getVar()
 	local logStatement = templateStr:format(config.marker, varname, varname)
-	append(logStatement)
-end
-
-function M.assertLog()
-	local ft = getFiletype()
-	local templateStr = config.logStatements.assertLog[ft]
-	if not templateStr then
-		noSupportNotif("Assert Log")
-		return
-	end
-
-	local varname = getVar()
-	local logStatement = templateStr:format(varname, config.marker, varname)
-	append(logStatement)
-	normal("f,") -- goto the comma to edit the condition
+	appendLine(logStatement)
 end
 
 function M.objectLog()
-	local ft = getFiletype()
-	local templateStr = config.logStatements.objectLog[ft]
-	if not templateStr then
-		noSupportNotif("Object Log")
-		return
-	end
+	local templateStr = getTemplateStr("objectLog") ---@cast templateStr string
+	if not templateStr then return end
 
 	local varname = getVar()
 	local logStatement = templateStr:format(config.marker, varname, varname)
-	append(logStatement)
+	appendLine(logStatement)
+end
+
+function M.assertLog()
+	local templateStr = getTemplateStr("assertLog") ---@cast templateStr string
+	if not templateStr then return end
+
+	local varname = getVar()
+	local logStatement = templateStr:format(varname, config.marker, varname)
+	appendLine(logStatement)
+	normal("f,") -- goto the comma to edit the condition
 end
 
 ---adds simple "beep" log statement to check whether conditionals have been triggered
 function M.beepLog()
-	local ft = getFiletype()
-	local templateStr = config.logStatements.beepLog[ft]
-	if not templateStr then
-		noSupportNotif("Beep Log")
-		return
-	end
+	local templateStr = getTemplateStr("beepLog") ---@cast templateStr string
+	if not templateStr then return end
 
 	local randomEmoji = config.beepEmojis[math.random(1, #config.beepEmojis)]
 	local logStatement = templateStr:format(config.marker, randomEmoji)
-	append(logStatement)
+	appendLine(logStatement)
 end
-
---------------------------------------------------------------------------------
 
 function M.timeLog()
 	if vim.b.timelogStart == nil then vim.b.timelogStart = true end ---@diagnostic disable-line: inject-field
-	local start, stop
-	local ft = bo.filetype
 
-	if ft == "lua" then
-		start = { "local timelogStart = os.time() -- %s" }
-		stop = {
-			"local durationSecs = os.difftime(os.time(), timelogStart) -- %s",
-			'print("%s:", durationSecs, "s")',
-		}
-	elseif ft == "python" then
-		start = { "timelogStart = time.perf_counter()  # %s" }
-		stop = {
-			"durationSecs = round(time.perf_counter() - timelogStart, 3)  # %s",
-			'print(f"%s: {durationSecs}s")',
-		}
-	elseif ft == "javascript" then
-		-- not all JS engines support console.time()
-		start = { "const timelogStart = +new Date(); // %s" }
-		stop = {
-			"const durationSecs = (+new Date() - timelogStart) / 1000; // %s",
-			"console.log(`%s: ${durationSecs}s`);",
-		}
-	elseif ft == "typescript" then
-		start = { 'console.time("timelog"); // %s' }
-		stop = { 'console.timeEnd("timelog"); // %s' }
-	elseif ft == "bash" or ft == "zsh" or ft == "sh" then
-		start = { "timelogStart=$(date +%%s) # %s" }
-		stop = {
-			"timelogEnd=$(date +%%s) && durationSecs = $((timelogEnd - timelogStart)) # %s",
-			'echo "%s ${durationSecs}s"',
-		}
-	else
-		noSupportNotif("Time Log")
-		return
-	end
-	local statementToUse = vim.b.timelogStart and start or stop
-	for _, line in pairs(statementToUse) do
-		append(line:format(config.marker))
+	local startOrStop = vim.b.timelogStart and "timeLogStart" or "timeLogStop"
+	local templateStr = getTemplateStr(startOrStop)
+	if not templateStr then return end
+
+	if type(templateStr) == "string" then templateStr = { templateStr } end
+	for _, line in pairs(templateStr) do
+		appendLine(line:format(config.marker))
 	end
 	vim.b.timelogStart = not vim.b.timelogStart ---@diagnostic disable-line: inject-field
 end
 
--- simple debug statement
+-- simple debugger statement
 function M.debugLog()
-	local logStatement
-	local ft = bo.filetype
+	local templateStr = getTemplateStr("debugLog") ---@cast templateStr string
+	if not templateStr then return end
 
-		return
-	end
-
-	append(logStatement:format(config.marker))
+	appendLine(templateStr:format(config.marker))
 end
 
 ---Remove all log statements in the current buffer
@@ -242,5 +220,4 @@ function M.removeLogs()
 end
 
 --------------------------------------------------------------------------------
-
 return M
