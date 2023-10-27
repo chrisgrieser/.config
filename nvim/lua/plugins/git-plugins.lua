@@ -27,21 +27,8 @@ return {
 		keys = {
 			{
 				"ga",
-				function()
-					require("gitsigns").stage_hunk()
-
-					-- PENDING https://github.com/lewis6991/gitsigns.nvim/issues/906
-					vim.defer_fn(function()
-						local resp = vim.trim(vim.fn.system { "git", "diff", "--staged", "--stat" })
-						require("config.utils").notify("Staged Changes", resp)
-					end, 100)
-				end,
-				desc = "󰊢 Stage Hunk",
-			},
-			{
-				"ga",
 				":Gitsigns stage_hunk<CR>",
-				mode = "x",
+				mode = {"n", "x"},
 				desc = "󰊢 Stage Selected Hunks",
 				silent = true,
 			},
