@@ -30,23 +30,6 @@ keymap("n", "<leader>r", function()
 	elseif filepath:find("nvim/lua/.*keymap") or filepath:find("nvim/lua/.*keybinding") then
 		u.notify("", "keymaps cannot be reloaded due to `map-unique`", "warn")
 		return
-	end
-
-	-- reload of plugin-specs via lazy.nvim
-	if filepath:find("nvim/lua/plugins/") then
-		local packageName = vim.fn.expand("%:t:r")
-		local pluginSpecs = require("plugins." .. packageName)
-		local pluginNames = vim.tbl_map(function(spec)
-			local name = spec[1]:gsub(".*/", "")
-			return name
-		end, pluginSpecs)
-		vim.cmd.Lazy("reload " .. table.concat(pluginNames, " "))
-
-	-- locally developed nvim plugin
-	elseif filepath:find("/lua/") and filepath:find("nvim") then
-		local pluginName = filepath:match(".*/(.-)/lua/")
-		vim.cmd.Lazy("reload " .. pluginName)
-
 	-- unload from lua cache (assuming that the pwd is ~/.config/nvim)
 	elseif isNvimConfig then
 		local packageName = expand("%:r"):gsub("lua/", ""):gsub("/", ".")
@@ -56,6 +39,6 @@ keymap("n", "<leader>r", function()
 
 	-- run `make`
 	else
-		require("funcs.maker").make("useFirst")
+		vim.cmd.lmake()
 	end
 end, { buffer = true, desc = " Reload /  Make" })
