@@ -16,6 +16,10 @@ return {
 			-- stylua: ignore end
 		},
 		opts = {
+			commitMsg = {
+				enforceConvCommits = { enabled = true },
+				spellcheck = true,
+			},
 			searchFileHistory = {
 				diffPopupBorder = require("config.utils").borderStyle,
 			},

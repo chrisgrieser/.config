@@ -43,6 +43,11 @@ local function customHighlights()
 	for _, type in pairs { "Error", "Warn", "Info", "Hint" } do
 		updateHl("DiagnosticUnderline" .. type, "gui=underdouble cterm=underline")
 	end
+
+	-- proper underlines for spell issues (used only for git commit messages though)
+	for _, type in pairs { "Bad", "Cap", "Rare", "Local" } do
+		updateHl("Spell" .. type, "gui=underdotted cterm=underline")
+	end
 end
 
 local function themeModifications()
