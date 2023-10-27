@@ -112,7 +112,7 @@ opt.updatetime = 250 -- also affects cursorword symbols lsp-hints
 opt.timeoutlen = 666 -- also affects duration until which-key is shown
 
 -- Make
-opt.makeprg = "make --silent"
+opt.makeprg = "make --silent --warn-undefined-variables"
 
 --------------------------------------------------------------------------------
 

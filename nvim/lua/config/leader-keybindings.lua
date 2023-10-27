@@ -82,14 +82,13 @@ autocmd("BufReadPost", {
 })
 
 keymap("n", "<leader>uo", function()
-	local now = os.time() 
+	local now = os.time()
 	local secsPassed = now - vim.b.timeOpened
 	cmd.earlier(tostring(secsPassed) .. "s")
 end, { desc = "󰜊 Undo since last open" })
 
 --------------------------------------------------------------------------------
 -- LSP
-
 
 ---@param action object CodeAction https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#codeAction
 ---@return boolean
@@ -153,7 +152,18 @@ keymap(
 
 -- MAKE
 keymap("n", "<leader>r", "<cmd>lmake<CR>", { desc = " Make" })
-keymap("n", "<leader>R", function() require("funcs.maker").make() end, { desc = " Select Make" })
+keymap("n", "<leader>R", function()
+	local makefile = vim.loop.cwd() .. "/Makefile"
+	local recipes = {}
+	for line in io.lines(makefile) do
+		local recipe = line:match("^[%w_]+")
+		if recipe then table.insert(recipes, recipe) end
+	end
+	vim.ui.select(recipes, { prompt = " make" }, function(selection)
+		if not selection then return end
+		vim.cmd.lmake(selection)
+	end)
+end, { desc = " Select Make" })
 
 --------------------------------------------------------------------------------
 -- OPTION TOGGLING
