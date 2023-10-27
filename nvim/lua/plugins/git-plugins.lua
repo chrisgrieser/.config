@@ -4,9 +4,7 @@ return {
 		dependencies = "stevearc/dressing.nvim",
 		keys = {
 			-- stylua: ignore start
-			{ "<leader>gp", function() require("tinygit").push() end, desc = "󰊢 Push" },
-			{ "<leader>gc", function() require("tinygit").smartCommit { openReferencedIssue = true } end, desc = "󰊢 Smart-Commit" },
-			{ "<leader>gg", function() require("tinygit").smartCommit { push = true, openReferencedIssue = true } end, desc = "󰊢 Smart-Commit & Push" },
+			{ "gc", function() require("tinygit").smartCommit { pushIfClean = true, openReferencedIssue = true } end, desc = "󰊢 Smart-Commit & PushIfClean" },
 			{ "<leader>gm", function() require("tinygit").amendNoEdit { forcePush = true } end, desc = "󰊢 Amend-No-Edit & Push" },
 			{ "<leader>gM", function() require("tinygit").amendOnlyMsg { forcePush = true } end, desc = "󰊢 Amend Only Msg & Push" },
 			{ "<leader>gi", function() require("tinygit").issuesAndPrs { state = "open" } end, desc = " Open Issues" },
@@ -28,7 +26,7 @@ return {
 		event = "VeryLazy",
 		keys = {
 			{
-				"<leader>ga",
+				"ga",
 				function()
 					require("gitsigns").stage_hunk()
 
@@ -41,7 +39,7 @@ return {
 				desc = "󰊢 Stage Hunk",
 			},
 			{
-				"<leader>ga",
+				"ga",
 				":Gitsigns stage_hunk<CR>",
 				mode = "x",
 				desc = "󰊢 Stage Selected Hunks",

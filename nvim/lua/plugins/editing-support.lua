@@ -230,10 +230,7 @@ return {
 			-- https://github.com/gbprod/yanky.nvim#%EF%B8%8F-special-put
 			{ "p", "<Plug>(YankyPutAfter)", desc = " Paste (Yanky)" },
 			{ "P", "<Plug>(YankyPutIndentAfterShiftRight)", desc = " Paste & Indent" },
-			{ "gp", "<Plug>(YankyPutIndentAfterCharwise)", desc = " Charwise Paste" },
-			{ "<D-p>", "<Plug>(YankyCycleForward)", desc = " Cycle Killring" },
 			{ "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = " Sticky Yank" },
-			{ "gp", "<Plug>(YankyPutIndentAfterCharwise)", desc = " Charwise Paste" },
 			{ "<D-p>", "<Plug>(YankyCycleForward)", desc = " Cycle Killring" },
 			{
 				"p",
