@@ -26,11 +26,6 @@ ZSH_HIGHLIGHT_REGEXP+=('^(acp?|gc -m|git commit -m) ".{51,71}"' 'fg=black,bg=yel
 
 #───────────────────────────────────────────────────────────────────────────────
 
-function grem {
-	git remote -v
-	echo -n "gh default: " && gh repo set-default --view
-}
-
 # select a fork or multiple forks to delete
 function deletefork {
 	if ! command -v gh &>/dev/null; then print "\033[1;33mgh not installed.\033[0m" && return 1; fi
@@ -85,11 +80,6 @@ function gu {
 		sed -e 's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//')
 	echo "$url" | pbcopy
 	open "$url"
-}
-
-function unlock {
-	rm "$(git rev-parse --git-dir)/index.lock"
-	echo "Lock file removed."
 }
 
 # rebase last x commits
