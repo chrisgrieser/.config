@@ -129,6 +129,7 @@ local function gitShowAndDeltaPreviewer()
 			local previewFormat =
 				"%C(bold)%C(magenta)%s %n%C(reset)%C(cyan)%D%n %C(blue)%an %C(yellow)(%ch) %C(reset)"
 			local cmd = {
+				-- commit stats
 				"git show " .. hash,
 				"--color=always",
 				"--stat=" .. statArgs,
@@ -139,6 +140,8 @@ local function gitShowAndDeltaPreviewer()
 				"-c core.pager=delta",
 				("-c delta.%s=true"):format(vim.o.background),
 				"-c", "delta.file-style=omit", -- eats too much space
+				"-c", "delta.hunk-header-decoration-style='blue ol'",
+				"-c", "delta.hunk-label='>>'",
 				"diff " .. hash .. "^!",
 			}
 			return table.concat(cmd, " ")

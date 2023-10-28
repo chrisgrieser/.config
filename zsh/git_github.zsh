@@ -145,11 +145,9 @@ function gl {
 function gli {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 
-	local hash key_pressed selected style separator
+	local hash key_pressed selected style
 	local preview_format="%C(yellow)%h %C(red)%D %n%C(green)%ch %n%C(blue)%an%C(reset) %n%n%C(bold)%C(magenta)%s%C(reset)"
 	defaults read -g AppleInterfaceStyle &>/dev/null && style="--dark" || style="--light"
-	# shellcheck disable=2183
-	separator=$(printf '%100s' |tr ' ' '═')
 
 	selected=$(
 		gitlog --color=always |
@@ -159,7 +157,7 @@ function gli {
 				--header-first --header="↵ : Checkout   ^H: Copy [H]ash" \
 				--expect="ctrl-h" \
 				--with-nth=2.. --preview-window=55% \
-				--preview="git show {1} --stat=,25 --color=always --format='$preview_format' | sed -e '\$d' -e 's/^ //' ; print '\n$separator' ; git diff {1}^! | delta $style"
+				--preview="git show {1} --stat=,25 --color=always --format='$preview_format' | sed -e '\$d' -e 's/^ //' ; git diff {1}^! | delta $style --hunk-header-decoration-style='blue ol' --hunk-label='󱞷 ' --file-style=omit"
 	)
 	[[ -z "$selected" ]] && return 0 # abort
 

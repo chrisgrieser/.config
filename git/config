@@ -35,7 +35,7 @@
 # (`brew install git-delta`)
 
 [core]
-	pager = delta
+	; pager = delta
 [interactive]
 	diffFilter = delta --color-only
 [merge]
@@ -43,18 +43,10 @@
 [diff]
 	colorMoved = default
 [delta]
-	tabs = 2
-
+	# omit line number
+	hunk-header-style="syntax"
+	hunk-label=
 	# use n and N to move between diff sections
 	navigate = true
-
-	# side-by-side-view: deactivate line numbers but keep vertical separator
-	line-numbers-left-format = " "
-	line-numbers-right-format = "│ "
-
-	# grep output as clickable links https://dandavison.github.io/delta/grep.html
-	# this also makes links from git-log clickable (https://github.com/wez/wezterm/discussions/3618)
-	hyperlinks = true
-	hyperlinks-file-link-format = "file-line://{path}:{line}"
 
 ;────────────────────────────────────────────────────────────────────────────
