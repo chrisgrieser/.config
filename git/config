@@ -35,7 +35,7 @@
 # (`brew install git-delta`)
 
 [core]
-	; pager = delta
+	pager = delta
 [interactive]
 	diffFilter = delta --color-only
 [merge]
@@ -45,6 +45,7 @@
 [delta]
 	# omit line number
 	hunk-header-style="syntax"
+	# save space
 	hunk-label=
 	# use n and N to move between diff sections
 	navigate = true
