@@ -80,10 +80,8 @@ M.wf_finder = wf.new("Finder")
 			u.runWithDelays(0.05, function() wu.autoTile(M.wf_finder) end)
 		end
 	end)
-	:subscribe(wf.windowDestroyed, function()
-		-- no conditions, since destroyed windows do not have properties
-		wu.autoTile(M.wf_finder)
-	end)
+	-- no conditions, since destroyed windows do not have properties
+	:subscribe(wf.windowDestroyed, function() wu.autoTile(M.wf_finder) end)
 
 -- also triggered via app-watcher, since windows created in the background do
 -- not always trigger window filters

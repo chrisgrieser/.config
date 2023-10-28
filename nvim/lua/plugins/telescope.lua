@@ -112,7 +112,7 @@ local function deltaPreviewer()
 				"git",
 				"-c", "core.pager=delta",
 				"-c", ("delta.%s=true"):format(vim.opt.background:get()),
-				"-c", "delta.file-style=omit", -- no need for filename, since it's only one file
+				"-c", "delta.file-style=omit", -- no need for filename, since only one file
 				"diff", filepath
 			}
 		end,
@@ -133,6 +133,7 @@ local function gitShowPreviewer()
 				"--stat=" .. statArgs,
 				"--format='" .. previewFormat .. "'",
 				"| sed -e 's/^ //' -e '$d'", -- remove clutter
+				"| less -R",
 			}
 			return table.concat(cmd, " ")
 		end,
