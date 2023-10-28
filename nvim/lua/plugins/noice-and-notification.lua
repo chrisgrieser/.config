@@ -31,7 +31,6 @@ local routes = {
 	{ filter = { event = "msg_show", find = "^%(%d+ of %d+%):" }, skip = true },
 
 	-----------------------------------------------------------------------------
-
 	{ -- nvim-early-retirement
 		filter = {
 			event = "notify",

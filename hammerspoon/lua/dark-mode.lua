@@ -45,7 +45,15 @@ end
 
 -- MANUAL TOGGLING OF DARK MODE
 -- `del` key on Keychron Keyboard
-u.hotkey({}, "f13", function() M.setDarkMode("toggle") end)
+u.hotkey({}, "f13", function()
+	M.setDarkMode("toggle")
+
+	-- notify on brightness level
+	local brightness = math.floor(hs.brightness.ambient())
+	local hasBrightnessSensor = brightness > -1
+	if not hasBrightnessSensor then return end
+	u.notify("☀️ Brightness: " .. brightness)
+end)
 
 --------------------------------------------------------------------------------
 

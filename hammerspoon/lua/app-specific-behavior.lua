@@ -140,10 +140,10 @@ M.wf_pdfReader = wf.new({ "Preview", "Highlights", "PDF Expert" }):subscribe(
 ------------------------------------------------------------------------------
 
 -- FIX window position not being remembered
-M.aw_readkit = aw.new(function(appName, event)
+M.aw_readkit = aw.new(function(appName, event, readkit)
 	if appName == "ReadKit" and event == aw.activated then
 		u.runWithDelays({ 0, 0.2 }, function()
-			local win = u.app("ReadKit"):mainWindow()
+			local win = readkit:mainWindow()
 			if win then wu.moveResize(win, wu.pseudoMax) end
 		end)
 	end
@@ -231,7 +231,7 @@ end
 -- when focused, enclose URL in clipboard with <>
 -- when unfocused, removes <> from URL in clipboard
 M.aw_discord = aw.new(function(appName, eventType)
-	if not (appName == "Discord") then return end
+	if appName ~= "Discord" then return end
 
 	local clipb = hs.pasteboard.getContents()
 	if not clipb then return end
