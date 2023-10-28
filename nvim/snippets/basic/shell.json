@@ -8,10 +8,6 @@
 		"body": "\\${${1:global_var}:?}",
 		"description": "shellcheck recommends failing if global variable is undefined (SC2054). Useful for example for Alfred Environment Variables."
 	},
-	"ignore (beautysh)": {
-		"prefix": "ignore (beautysh)",
-		"body": ["# @formatter:off", "# @formatter:on"]
-	},
 	"i++": {
 		"prefix": "i++",
 		"body": "${1:i}=$((${1:i} + 1))"
@@ -23,11 +19,6 @@
 	"i--": {
 		"prefix": "i--",
 		"body": "${1:i}=$((${1:i} - 1))"
-	},
-	"ls → find": {
-		"prefix": "ls → find",
-		"body": "find . -maxdepth 1 -mindepth 1",
-		"description": "shellcheck recommends using find instead of ls for most cases (SC2045)."
 	},
 	"default arg value": {
 		"prefix": "default arg value",
@@ -138,7 +129,7 @@
 	},
 	"check if installed": {
 		"prefix": "check if installed",
-		"body": "if [[ ! -x \"$(command -v ${1:cli})\" ]] then print \"\\033[1;33m${1:cli} not installed.\\033[0m\" && return 1; fi\n$0",
+		"body": "if [[ ! -x \"$(command -v ${1:cli})\" ]]; then print \"\\033[1;33m${1:cli} not installed.\\033[0m\" && return 1; fi\n$0",
 		"description": "https://stackoverflow.com/a/26759734/22114136"
 	},
 	"check if in git repo": {

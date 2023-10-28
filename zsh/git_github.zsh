@@ -156,7 +156,7 @@ function gli {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 
 	local hash key_pressed selected
-	local preview_format="%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%s%C(magenta)"
+	local preview_format="%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%C(magenta)%s%C(reset)"
 	selected=$(
 		gitlog --color=always |
 			sed 's/^[*| ]*//' | # remove the graph at the beginning
@@ -164,16 +164,16 @@ function gli {
 				--ansi --no-sort --no-info \
 				--header-first --header="↵ : Checkout   ^H: Copy [H]ash" \
 				--expect="ctrl-h" \
-				--preview-window=45% \
-				--preview="git show {1} --name-only --color=always --format='$preview_format'"
+				--preview-window=65% \
+				--preview="git show {1} --stat --color=always --format='$preview_format' | sed -e '\$d' -e 's/^ //'"
 	)
 	[[ -z "$selected" ]] && return 0
 	key_pressed=$(echo "$selected" | head -n1)
-	hash=$(echo "$selected" | cut -d' ' -f2 | tail -n+2)
+	hash=$(echo "$selected" | cut -d' ' -f1 | sed '1d')
 
 	if [[ "$key_pressed" == "ctrl-h" ]]; then
 		echo "$hash" | pbcopy
-		echo "'$hash' copied."
+		echo "\"$hash\" copied."
 	else # pressed return
 		git checkout "$hash"
 	fi
