@@ -121,9 +121,10 @@ end
 
 local function gitShowPreviewer()
 	return require("telescope.previewers").new_termopen_previewer {
+		dyn_title = function (_, entry) return entry.value end, -- use hash as title
 		get_command = function(entry, status)
-			local previewWinWidth = vim.api.nvim_win_get_width(status.preview_win)
 			local hash = entry.value
+			local previewWinWidth = vim.api.nvim_win_get_width(status.preview_win)
 			local statArgs = ("%s,%s"):format(previewWinWidth, math.floor(previewWinWidth / 2))
 			local previewFormat =
 				"%C(bold)%C(magenta)%s %n%C(reset)%C(red)%D%n %C(blue)%an %C(green)(%ch) %C(reset)"
@@ -133,14 +134,9 @@ local function gitShowPreviewer()
 				"--stat=" .. statArgs,
 				"--format='" .. previewFormat .. "'",
 				"| sed -e 's/^ //' -e '$d'", -- remove clutter
-				"| less -R",
 			}
 			return table.concat(cmd, " ")
 		end,
-		dyn_title = function (_, entry)
-			local hash = entry.value
-			return hash
-		end
 	}
 end
 

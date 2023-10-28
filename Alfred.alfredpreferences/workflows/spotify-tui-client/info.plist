@@ -739,7 +739,7 @@ spt play --device="$*"</string>
 	<key>readme</key>
 	<string>Requires the [Spotify-TUI](https://github.com/Rigellute/spotify-tui).
 
-The [spotify_player](https://github.com/aome510/spotify-player) is maintained and has a similar feature set, but does require a running instance to manipulate playback.
+The [spotify_player](https://github.com/aome510/spotify-player) is maintained and has a similar feature set, but does require a running instance to manipulate playback. Pending: https://github.com/aome510/spotify-player/issues/279
 
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
