@@ -223,7 +223,7 @@ function ac {
 function acp {
 	ac "$@" || return 1
 
-	if [[ -z "$(git status --porcelain)" ]]; then
+	if [[ -z "$(command git status --porcelain)" ]]; then
 		printf "\033[1;34m(Not pushing since repo still dirty.)\033[0m"
 	else
 		printf "\033[1;32mPull: \033[0m" &&
