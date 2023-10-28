@@ -111,7 +111,7 @@ local function deltaPreviewer()
 			return {
 				"git",
 				"-c", "core.pager=delta",
-				"-c", ("delta.%s=true"):format(vim.opt.background:get()),
+				("-c delta.%s=true"):format(vim.o.background),
 				"-c", "delta.file-style=omit", -- no need for filename, since only one file
 				"diff", filepath
 			}
@@ -141,7 +141,7 @@ local function gitShowAndDeltaPreviewer()
 				("-c delta.%s=true"):format(vim.o.background),
 				"-c", "delta.file-style=omit", -- eats too much space
 				"-c", "delta.hunk-header-decoration-style='blue ol'",
-				"-c", "delta.hunk-label='>>'",
+				"-c", "delta.hunk-label=■",
 				"diff " .. hash .. "^!",
 			}
 			return table.concat(cmd, " ")
