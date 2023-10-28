@@ -14,28 +14,28 @@ function separator {
 
 function gitlog {
 	git log --all --color --graph \
-		--format="%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)" "$@" |
-	sed -e 's/ seconds* ago)/s)/' \
-		-e 's/ minutes* ago)/m)/' \
-		-e 's/ hours* ago)/h)/' \
-		-e 's/ days* ago)/d)/' \
-		-e 's/ weeks* ago)/w)/' \
-		-e 's/ months* ago)/mo)/' \
-		-e 's/grafted/ /' \
-		-e 's/origin\//󰞶  /g' \
-		-e 's/HEAD/󱍀 /g' \
-		-e 's/->/󰔰 /g' \
-		-e 's/tags: / )/' \
-		-Ee $'s/ (improv|fix|refactor|build|ci|docs|feat|test|perf|chore|revert|break|style)(\\(.+\\)|!)?:/ \033[1;35m\\1\033[0;34m\\2\033[0m:/' \
-		-Ee $'s/(#[0-9]+)/\033[1;31m\\1\033[0m/' # issue numbers
+		--format="%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)%an%C(reset)" "$@" |
+		sed -e 's/ seconds* ago)/s)/' \
+			-e 's/ minutes* ago)/m)/' \
+			-e 's/ hours* ago)/h)/' \
+			-e 's/ days* ago)/d)/' \
+			-e 's/ weeks* ago)/w)/' \
+			-e 's/ months* ago)/mo)/' \
+			-e 's/grafted/ /' \
+			-e 's/origin\//󰞶  /g' \
+			-e 's/HEAD/󱍀 /g' \
+			-e 's/->/󰔰 /g' \
+			-e 's/tags: / )/' \
+			-Ee $'s/ (improv|fix|refactor|build|ci|docs|feat|test|perf|chore|revert|break|style)(\\(.+\\)|!)?:/ \033[1;35m\\1\033[0;34m\\2\033[0m:/' \
+			-Ee $'s/(#[0-9]+)/\033[1;31m\\1\033[0m/' # issue numbers
 	# INFO inserting ansi colors via sed requires leading $
 }
 
 # show files + git status + brief git log
 function inspect {
-	if ! command -v git &>/dev/null; then printf "\033[1;33mgit not installed.\033[0m" && return 1; fi
-	if ! command -v eza &>/dev/null; then printf "\033[1;33meza not installed.\033[0m" && return 1; fi
-	if ! command -v rs &>/dev/null; then printf "\033[1;33mrs not installed.\033[0m" && return 1; fi
+	if [[ ! -x "$(command -v git)" ]]; then print "\033[1;33mgit not installed.\033[0m" && return 1; fi
+	if [[ ! -x "$(command -v eza)" ]]; then print "\033[1;33meza not installed.\033[0m" && return 1; fi
+	if [[ ! -x "$(command -v rs)" ]]; then print "\033[1;33mrs not installed.\033[0m" && return 1; fi
 
 	# check if pwd still exists
 	if [[ ! -d "$PWD" ]]; then
@@ -63,8 +63,8 @@ function inspect {
 	# FILES
 	local eza_output
 	eza_output=$(eza --width="$COLUMNS" --all --grid --color=always --icons \
-			--git-ignore --ignore-glob=".DS_Store|Icon?" \
-			--sort=name --group-directories-first \
+		--git-ignore --ignore-glob=".DS_Store|Icon?" \
+		--sort=name --group-directories-first --no-quotes \
 		--git --long --no-user --no-permissions --no-filesize --no-time)
 
 	if [[ $(echo "$eza_output" | wc -l) -gt $max_files_lines ]]; then

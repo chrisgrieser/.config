@@ -33,10 +33,9 @@ alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in 
 alias bkp='zsh "$HOME/.config/_utility-scripts/backup-script.sh"'
 alias repobkp='zsh "$HOME/.config/_utility-scripts/backup-my-repos.sh"'
 
-alias l='eza --hyperlink --all --long --time-style=relative --no-user --icons --git --group-directories-first --sort=newest'
-alias tree='eza --hyperlink --tree --level=2 --icons --git-ignore'
-alias treee='eza --hyperlink --tree --level=3 --icons --git-ignore'
-alias treeee='eza --hyperlink --tree --level=4 --icons --git-ignore'
+alias tree='eza --tree --level=2 --icons --git-ignore --no-quotes'
+alias treee='eza --tree --level=3 --icons --git-ignore --no-quotes'
+alias treeee='eza --tree --level=4 --icons --git-ignore --no-quotes'
 
 #───────────────────────────────────────────────────────────────────────────────
 # https://www.thorsten-hans.com/5-types-of-zsh-aliases
