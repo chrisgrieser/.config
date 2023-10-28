@@ -34,7 +34,7 @@ rules:
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
       # Reload Formatting (e.g. when broken due to svim)
       - type: basic
-        from: { key_code: r, modifiers: { mandatory: [command] } }
+        from: { key_code: s, modifiers: { mandatory: [command] } }
         to:
           - { key_code: t, modifiers: [command, shift] }
           - { key_code: t, modifiers: [command, shift] }
