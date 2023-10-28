@@ -2,7 +2,7 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{
+	{ -- better increment/decrement + toggling command
 		"monaqa/dial.nvim",
 		keys = {
 			-- stylua: ignore
@@ -133,7 +133,7 @@ return {
 			},
 		},
 	},
-	{ -- basically autopair, but for keywords
+	{ -- autopair, but for keywords
 		"RRethy/nvim-treesitter-endwise",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		event = "InsertEnter",
