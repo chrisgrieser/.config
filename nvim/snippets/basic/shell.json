@@ -34,7 +34,7 @@
 	},
 	"check if dark mode (macOS)": {
 		"prefix": "check if dark mode (macOS)",
-		"body": "defaults read -g AppleInterfaceStyle | grep -q \"Dark\""
+		"body": "defaults read -g AppleInterfaceStyle &>/dev/null; && echo 'isDark'"
 	},
 	"slice": {
 		"prefix": "slice (expansion)",
