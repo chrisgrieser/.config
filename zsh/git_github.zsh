@@ -228,10 +228,8 @@ function acp {
 		return 0
 	fi
 
-	printf "\033[1;32mPull: \033[0m" &&
-		git pull &&
-		printf "\033[1;32mPush: \033[0m" &&
-		git push
+	printf "\033[1;32mPull: \033[0m" && git pull &&
+		printf "\033[1;32mPush: \033[0m" && git push
 }
 
 #───────────────────────────────────────────────────────────────────────────────
