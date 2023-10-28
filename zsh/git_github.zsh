@@ -145,8 +145,10 @@ function gl {
 function gli {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 
-	local hash key_pressed selected
+	local hash key_pressed selected style
 	local preview_format="%C(yellow)%h %C(red)%D %n%C(green)%ch %n%C(blue)%an%C(reset) %n%n%C(bold)%C(magenta)%s%C(reset)"
+	defaults read -g AppleInterfaceStyle &>/dev/null && style="--dark" || style="--light"
+
 	selected=$(
 		gitlog --color=always |
 			sed 's/^[*| ]*//' | # remove the graph at the beginning
@@ -154,10 +156,12 @@ function gli {
 				--ansi --no-sort --no-info \
 				--header-first --header="↵ : Checkout   ^H: Copy [H]ash" \
 				--expect="ctrl-h" \
-				--with-nth=2.. \
-				--preview="git show {1} --stat=,25 --color=always --format='$preview_format' | sed -e '\$d' -e 's/^ //'"
+				--with-nth=2.. --preview-window=55% \
+				--preview="git show {1} --stat=,25 --color=always --format='$preview_format' | sed -e '\$d' -e 's/^ //' ; echo ; git diff {1}^! | delta $style"
+
 	)
-	[[ -z "$selected" ]] && return 0
+	[[ -z "$selected" ]] && return 0 # abort
+
 	key_pressed=$(echo "$selected" | head -n1)
 	hash=$(echo "$selected" | cut -d' ' -f1 | sed '1d')
 
