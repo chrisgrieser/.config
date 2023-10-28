@@ -739,6 +739,8 @@ spt play --device="$*"</string>
 	<key>readme</key>
 	<string>Requires the [Spotify-TUI](https://github.com/Rigellute/spotify-tui).
 
+The [spotify_player](https://github.com/aome510/spotify-player) is maintained and has a similar feature set, but does require a running instance to manipulate playback.
+
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
@@ -969,7 +971,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string></string>
+	<string>0.9</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
