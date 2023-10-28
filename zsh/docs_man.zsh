@@ -94,7 +94,7 @@ export LESS_TERMCAP_us=$'\E[1;36m' # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'    # reset underline
 
 # --ignore-case is actually smart case
-export LESS='--RAW-CONTROL-CHARS --incsearch --ignore-case --window=-3 --no-init --tilde'
+export LESS='--RAW-CONTROL-CHARS --incsearch --ignore-case --window=-3 --no-init --tilde --LONG-PROMPT'
 export LESSHISTFILE=- # don't clutter home directory with useless `.lesshst` file
 
 # INFO Keybindings

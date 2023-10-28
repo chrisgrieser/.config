@@ -135,7 +135,6 @@ local function gitShowAndDeltaPreviewer()
 				"--format='" .. previewFormat .. "'",
 				"| sed -e 's/^ //' -e '$d' ;", -- remove clutter
 				-- delta
-				"echo ;",
 				"git",
 				"-c core.pager=delta",
 				("-c delta.%s=true"):format(vim.o.background),
