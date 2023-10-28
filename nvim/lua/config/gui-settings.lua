@@ -4,10 +4,9 @@ local keymap = require("config.utils").uniqueKeymap
 
 -- REMOTE CONTROL
 -- nvim server (RPC) to remote control neovide instances
--- https://neovim.io/doc/user/remote.html
-local removed, _ = pcall(os.remove, "/tmp/nvim_server.pipe") -- FIX server sometimes not properly shut down
-local delay = removed and 400 or 0
-vim.defer_fn(function() vim.fn.serverstart("/tmp/nvim_server.pipe") end, delay)
+-- DOCS https://neovim.io/doc/user/remote.html
+pcall(os.remove, "/tmp/nvim_server.pipe") -- FIX server sometimes not properly shut down
+vim.defer_fn(function() vim.fn.serverstart("/tmp/nvim_server.pipe") end, 400)
 
 --------------------------------------------------------------------------------
 
@@ -29,7 +28,7 @@ end
 
 local function setNeovideScaleFactor(delta)
 	g.neovide_scale_factor = g.neovide_scale_factor + delta
-	require("config.utils").notify("Neovide", "Scale Factor: " .. g.neovide_scale_factor)
+	require("config.utils").notify("", "Scale Factor: " .. g.neovide_scale_factor)
 end
 
 keymap({ "n", "x", "i" }, "<D-+>", function() setNeovideScaleFactor(0.01) end)

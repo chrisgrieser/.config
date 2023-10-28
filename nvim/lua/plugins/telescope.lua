@@ -348,7 +348,7 @@ return {
 						prompt_title = "Live Grep: " .. projectName(),
 					}
 				end,
-				desc = " Browse in Project",
+				desc = " Live-Grep in Project",
 			},
 			{ "gL", function() telescope("grep_string") end, desc = " Grep cword in Project" },
 		},

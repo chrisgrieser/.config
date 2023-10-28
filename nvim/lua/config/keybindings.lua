@@ -23,7 +23,7 @@ keymap("n", "k", "gk")
 -- HJKL behaves like hjkl, but bigger distance
 keymap({ "o", "x" }, "H", "^") -- `zv` opens folds when navigating a horizontal lines
 keymap("n", "H", "0^") -- `0` ensures fully scrolling to the left on long unwrapped lines
-keymap({ "n", "x" }, "L", "$zv")
+keymap({ "n", "x" }, "L", "$")
 keymap({ "n", "x" }, "J", "6j")
 keymap({ "n", "x" }, "K", "6k")
 
@@ -54,7 +54,7 @@ for remap, original in pairs(u.textobjRemaps) do
 	keymap({ "o", "x" }, "a" .. remap, "a" .. original, { desc = "󱡔 outer " .. original })
 end
 
-keymap("o", "k", 'i"', { desc = "󱡔 inner quote"})
+keymap("o", "k", 'i"', { desc = "󱡔 inner quote" })
 
 -- quick textobj operations
 keymap("n", "<Space>", '"_ciw', { desc = "󱡔 change word" })
@@ -229,5 +229,12 @@ keymap(
 keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = "  Inline Code" }) -- no selection = word under cursor
 keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = "  Inline Code" })
 keymap("i", "<D-e>", "``<Left>", { desc = "  Inline Code" })
+
+--------------------------------------------------------------------------------
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "qf", "help" },
+	callback = function() vim.keymap.set("n", "q", cmd.close, { buffer = true, nowait = true }) end,
+})
 
 --------------------------------------------------------------------------------

@@ -82,18 +82,8 @@ opt.signcolumn = "yes:1"
 
 -- Wrapping & Line Length
 opt.textwidth = 80 -- only fallback value, mostly overridden by .editorconfig
-opt.colorcolumn = { "+1" }
+opt.colorcolumn = "+1"
 opt.wrap = false
-
--- Color Column: textwidth + guiding line for `gm`
-autocmd({ "VimEnter", "VimResized", "WinResized" }, {
-	callback = function()
-		if vim.bo.buftype ~= "" then return end
-		local gmColumn = math.floor(vim.api.nvim_win_get_width(0) / 2)
-		local global = opt.colorcolumn:get()[1]
-		opt.colorcolumn = { global, gmColumn }
-	end,
-})
 
 -- status bar & cmdline
 opt.cmdheight = 0
@@ -108,7 +98,7 @@ opt.nrformats:append("unsigned") -- make <C-a>/<C-x> ignore negative numbers
 opt.nrformats:remove { "bin", "hex" } -- remove ambiguity, since I don't use them anyway
 
 -- Timeouts
-opt.updatetime = 250 -- also affects cursorword symbols lsp-hints
+opt.updatetime = 250 -- also affects cursorword symbols and lsp-hints
 opt.timeoutlen = 666 -- also affects duration until which-key is shown
 
 -- Make

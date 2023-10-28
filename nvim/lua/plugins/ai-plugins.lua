@@ -2,31 +2,6 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{ -- code search
-		-- requires access tokens: https://github.com/sourcegraph/sg.nvim#setup
-		-- which in my case are set in .zshenv (private dotfiles)
-		"sourcegraph/sg.nvim",
-		dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
-		keys = {
-			{
-				"<leader>qq",
-				function() require("sg.extensions.telescope").fuzzy_search_results() end,
-				desc = "󰓁 SourceGraph Search",
-			},
-			{ "<leader>qu", "<cmd>SourcegraphLink<CR>", desc = "󰓁 Copy SourceGraph URL" },
-			{ "<leader>qa", "<cmd>CodyAsk<CR>", desc = "󰓁 CodyAsk" },
-			{ "<leader>qd", "<cmd>CodyDo<CR>", desc = "󰓁 CodyDo" },
-		},
-		init = function() u.leaderSubkey("q", "󰓁 SourceGraph") end,
-		opts = {
-			on_attach = function()
-				-- stylua: ignore
-				vim.keymap.set("n", "gd", function() vim.cmd.Telescope("lsp_definitions") end, { desc = "󰒕 Definitions" })
-				-- stylua: ignore
-				vim.keymap.set("n", "gf", function() vim.cmd.Telescope("lsp_references") end, { desc = "󰒕 References" })
-			end,
-		},
-	},
 	{ -- AI Ghost-Text Suggestions
 		"Exafunction/codeium.vim",
 		event = "InsertEnter",
