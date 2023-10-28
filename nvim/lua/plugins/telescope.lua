@@ -6,19 +6,19 @@ local telescope = vim.cmd.Telescope
 
 -- default mappings: https://github.com/nvim-telescope/telescope.nvim/blob/942fe5faef47b21241e970551eba407bc10d9547/lua/telescope/mappings.lua#L133
 local keymappings_I = {
+	["<Tab>"] = "move_selection_worse",
+	["<S-Tab>"] = "move_selection_better",
 	["<CR>"] = "select_default",
 	["<Esc>"] = "close",
 	["<PageDown>"] = "preview_scrolling_down",
 	["<PageUp>"] = "preview_scrolling_up",
 	["<Up>"] = "cycle_history_prev",
 	["<Down>"] = "cycle_history_next",
+	["<D-a>"] = "toggle_all",
 	["<D-s>"] = function(prompt_bufnr)
 		require("telescope.actions").smart_send_to_qflist(prompt_bufnr) -- sends selected, or if none selected, sends all
 		vim.cmd.cfirst()
 	end,
-	["<Tab>"] = "move_selection_worse",
-	["<S-Tab>"] = "move_selection_better",
-	["<D-a>"] = "toggle_all",
 	["<D-CR>"] = function(prompt_bufnr)
 		require("telescope.actions").toggle_selection(prompt_bufnr)
 		require("telescope.actions").move_selection_worse(prompt_bufnr)
@@ -125,7 +125,7 @@ local function gitShowPreviewer()
 		get_command = function(entry, status)
 			local hash = entry.value
 			local previewWinWidth = vim.api.nvim_win_get_width(status.preview_win)
-			local statArgs = ("%s,%s"):format(previewWinWidth, math.floor(previewWinWidth / 2))
+			local statArgs = ("%s,%s,50"):format(previewWinWidth, math.floor(previewWinWidth / 2))
 			local previewFormat =
 				"%C(bold)%C(magenta)%s %n%C(reset)%C(cyan)%D%n %C(blue)%an %C(yellow)(%ch) %C(reset)"
 			local cmd = {
@@ -256,11 +256,9 @@ local telescopeConfig = {
 		buffers = {
 			prompt_prefix = "󰽙 ",
 			ignore_current_buffer = false,
+			sort_mru = true,
 			initial_mode = "normal",
 			mappings = { n = { ["<D-w>"] = "delete_buffer" } },
-			sort_mru = true,
-			prompt_title = false,
-			results_title = false,
 			previewer = false,
 			layout_config = {
 				horizontal = { anchor = "W", width = 0.5, height = 0.5 },
