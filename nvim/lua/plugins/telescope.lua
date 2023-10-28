@@ -125,13 +125,13 @@ local function gitShowPreviewer()
 			local hash = entry.value
 			local statArgs = ("%s,%s"):format(previewWinWidth, math.floor(previewWinWidth / 2))
 			local previewFormat =
-				"%C(blue)%an %C(green)(%ch) %n%C(red)%D%n%C(bold)%C(magenta)%s%C(reset)"
+				"%C(bold)%C(magenta)%s %n%C(red)%D%n %C(blue)%an %C(green)(%ch) %n%C(reset)"
 			local cmd = {
 				"git show " .. hash,
 				"--color=always",
 				"--stat=" .. statArgs,
 				"--format='" .. previewFormat .. "'",
-				"| sed -e 's/^ //' -e '$d'", -- remove 
+				"| sed -e 's/^ //' -e '$d'", -- remove clutter
 			}
 			return table.concat(cmd, " ")
 		end,
