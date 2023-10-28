@@ -109,7 +109,7 @@ local function deltaPreviewer()
 			local filepath = gitroot .. "/" .. filename
 			-- stylua: ignore
 			return {
-				"git", 
+				"git",
 				"-c", "core.pager=delta",
 				"-c", ("delta.%s=true"):format(vim.opt.background:get()),
 				"diff", filepath
@@ -121,15 +121,14 @@ end
 local function gitShowPreviewer()
 	return require("telescope.previewers").new_termopen_previewer {
 		get_command = function(entry, status)
-		vim.notify("🪚 status: " .. vim.inspect(status))
-		vim.notify("🪚 entry: " .. vim.inspect(entry))
+			local previewWinWidth = vim.api.nvim_win_get_width(status.preview_win)
 			local hash = entry.value
 			local previewFormat =
 				"%C(yellow)%h %C(red)%D %n%C(green)%ch %n%C(blue)%an%C(reset) %n%n%C(bold)%C(magenta)%s%C(reset)"
 			-- stylua: ignore
 			return {
-				"git", "show", hash, "--color=always", 
-				"--stat=,25", 
+				"git", "show", hash, "--color=always",
+				("--stat=%s,%s"):format(previewWinWidth, math.floor(previewWinWidth / 2)),
 				"--format=" .. previewFormat,
 			}
 		end,
