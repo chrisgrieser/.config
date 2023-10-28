@@ -226,19 +226,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>4B567C2C-667C-4052-9432-9180CDC519F6</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F1D55862-6DBA-467E-ADC2-C57091BD0065</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>51903BB3-AE69-45A7-8492-CC712BB612A4</key>
 		<array>
 			<dict>
@@ -1022,6 +1009,42 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<integer>2</integer>
 		</dict>
 		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>library</string>
+				<key>subtext</key>
+				<string>~/Library/</string>
+				<key>text</key>
+				<string>Library</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>874056B3-7017-49B3-94F5-296C9E05D2E4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>~/Library</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>08389D62-E55B-43D3-80A1-D99149535F3C</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -1067,27 +1090,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>library</string>
-				<key>subtext</key>
-				<string>~/Library/</string>
-				<key>text</key>
-				<string>Library</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>874056B3-7017-49B3-94F5-296C9E05D2E4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>jumpto</key>
 				<string>alfred.action.move</string>
 				<key>path</key>
@@ -1101,21 +1103,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<string>56CD69F0-DA3F-4EF1-809F-78543F4459A1</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>~/Library</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>08389D62-E55B-43D3-80A1-D99149535F3C</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1189,38 +1176,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<string>61FD59B0-9B8B-4772-9CC7-FD5C55823BF6</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array/>
-				<key>name</key>
-				<string>Open with TextEdit…</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>4B567C2C-667C-4052-9432-9180CDC519F6</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string>/System/Applications/TextEdit.app</string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>F1D55862-6DBA-467E-ADC2-C57091BD0065</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1690,9 +1645,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>525</real>
+			<real>605</real>
 			<key>ypos</key>
-			<real>735</real>
+			<real>640</real>
 		</dict>
 		<key>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</key>
 		<dict>
@@ -1815,13 +1770,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>ypos</key>
 			<real>655</real>
 		</dict>
-		<key>4B567C2C-667C-4052-9432-9180CDC519F6</key>
-		<dict>
-			<key>xpos</key>
-			<real>765</real>
-			<key>ypos</key>
-			<real>905</real>
-		</dict>
 		<key>51903BB3-AE69-45A7-8492-CC712BB612A4</key>
 		<dict>
 			<key>colorindex</key>
@@ -1892,9 +1840,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>345</real>
+			<real>450</real>
 			<key>ypos</key>
-			<real>735</real>
+			<real>640</real>
 		</dict>
 		<key>89AAC152-1A79-4CBF-9BDD-DBBAF712F72C</key>
 		<dict>
@@ -2053,13 +2001,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<real>975</real>
 			<key>ypos</key>
 			<real>1235</real>
-		</dict>
-		<key>F1D55862-6DBA-467E-ADC2-C57091BD0065</key>
-		<dict>
-			<key>xpos</key>
-			<real>925</real>
-			<key>ypos</key>
-			<real>905</real>
 		</dict>
 		<key>F51A014F-1ABC-49D4-ADA8-0B83A691533F</key>
 		<dict>

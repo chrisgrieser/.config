@@ -72,17 +72,11 @@ return {
 		event = "VimEnter",
 		main = "project_nvim",
 		opts = {
-			detection_methods = { "pattern", "lsp" }, -- priority: pattern, then lsp-root
-			exclude_dirs = { "node_modules", "build", "dist", ".venv", "venv" },
+			detection_methods = { "pattern" },
 			patterns = {
-				".git", -- submodules
-				"requirements.txt", -- python
-				"info.plist", -- Alfred
-				".luarc.json", -- lua
-				-- specific to my personal setup
-				".project-root", -- manually marked
-				">com~apple~CloudDocs", -- = all subfolders of the iCloud drive
-				">Repos", -- = all subfolders of the Repos folder
+				".git", -- git root
+				"info.plist", -- Alfred workflows
+				">.config", -- all subfolders of the dotfile directory
 			},
 		},
 	},
@@ -99,7 +93,6 @@ return {
 			{"<C-d>", function() require("genghis").duplicateFile() end, desc = " Duplicate file" },
 			{"<D-BS>", function() require("genghis").trashFile() end, desc = " Move file to trash" },
 			{"<D-n>", function() require("genghis").createNewFile() end, desc = " Create new file" },
-			{"<D-m>", function() require("genghis").moveAndRenameFile() end, desc = " Move & rename file" },
 			{"X", function() require("genghis").moveSelectionToNewFile() end, mode = "x", desc = " Selection to new file" },
 			-- stylua: ignore end
 		},

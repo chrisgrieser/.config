@@ -1,2 +1,5 @@
+gpg
+gpg
+gpg
 pip-autoremove
 wheel

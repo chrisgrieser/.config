@@ -62,13 +62,13 @@ for app, _ in pairs(M.thresholds) do
 end
 
 ---log times when an app has been deactivated
-M.aw_appDeactivation = aw.new(function(app, event)
-	if not app or app == "" then return end -- empty string as safeguard for special apps
+M.aw_appDeactivation = aw.new(function(appName, event)
+	if not appName or appName == "" then return end -- empty string as safeguard for special apps
 
 	if event == aw.deactivated then
-		M.idleApps[app] = now()
+		M.idleApps[appName] = now()
 	elseif event == aw.activated or event == aw.terminated then
-		M.idleApps[app] = nil -- removes active or closed app from table
+		M.idleApps[appName] = nil -- removes active or closed app from table
 	end
 end):start()
 
