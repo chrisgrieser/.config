@@ -5,7 +5,7 @@
 	<key>bundleid</key>
 	<string></string>
 	<key>category</key>
-	<string>❇️</string>
+	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
 		<key>018CFD53-52AA-46A8-A745-DFFD5C49C54F</key>
@@ -204,11 +204,11 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>requires Spotify TUI. Alternative: https://github.com/aome510/spotify-player</string>
+	<string></string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Spotify TUI Control</string>
+	<string>Spotify Control</string>
 	<key>objects</key>
 	<array>
 		<dict>
