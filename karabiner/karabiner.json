@@ -12792,7 +12792,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "fast_forward"
+                            "key_code": "f9"
                         }
                     ]
                 },
