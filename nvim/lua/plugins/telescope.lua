@@ -107,7 +107,8 @@ local function deltaPreviewer(mode)
 		get_command = function(entry)
 			-- stylua: ignore
 			local cmd = {
-				"git", "-c", "core.pager=delta",
+				"git", 
+				"-c", "core.pager=delta",
 				"-c", ("delta.%s=true"):format(vim.opt.background:get()),
 				"diff",
 			}

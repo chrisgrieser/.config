@@ -8,17 +8,13 @@
 **/*.app/*
 **/*.pxd/*
 
-# git isn't ignored by default?!
-.git
-
-# custom markers
-.project-root
-
 # INFO files
 *INFO*
 
 #───────────────────────────────────────────────────────────────────────────────
-# project boilerplate info files – not gitignored, but rarely used manually as well
+# IGNORE PROJECT BOILERPLATE
+
+# general
 LICENSE
 .editorconfig
 
