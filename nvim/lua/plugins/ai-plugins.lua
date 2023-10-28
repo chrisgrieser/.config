@@ -17,6 +17,7 @@ return {
 			{ "<leader>qa", "<cmd>CodyAsk<CR>", desc = "󰓁 CodyAsk" },
 			{ "<leader>qd", "<cmd>CodyDo<CR>", desc = "󰓁 CodyDo" },
 		},
+		init = function() u.leaderSubkey("q", "󰓁 SourceGraph") end,
 		opts = {
 			on_attach = function()
 				-- stylua: ignore
@@ -25,7 +26,6 @@ return {
 				vim.keymap.set("n", "gf", function() vim.cmd.Telescope("lsp_references") end, { desc = "󰒕 References" })
 			end,
 		},
-		init = function() u.leaderSubkey("q", "󰓁 SourceGraph") end,
 	},
 	{ -- AI Ghost-Text Suggestions
 		"Exafunction/codeium.vim",
@@ -38,6 +38,16 @@ return {
 			if not fileExists then
 				pcall(vim.fn.mkdir, vim.fs.dirname(symLinkTo))
 				vim.loop.fs_symlink(symLinkFrom, symLinkTo)
+			end
+
+			-- FIX https://github.com/Exafunction/codeium.vim/issues/200
+			local bin_path = os.getenv("HOME") .. "/.codeium/bin"
+			local oldBinaries =
+				vim.fs.find("language_server_macos_arm", { limit = math.huge, path = bin_path })
+			table.remove(oldBinaries) -- remove last item (= most up to date binary) from list
+			for _, binaryPath in pairs(oldBinaries) do
+				os.remove(binaryPath)
+				os.remove(vim.fs.dirname(binaryPath))
 			end
 		end,
 		keys = {
