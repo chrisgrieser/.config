@@ -40,7 +40,7 @@ return {
 				vim.loop.fs_symlink(symLinkFrom, symLinkTo)
 			end
 
-			-- FIX https://github.com/Exafunction/codeium.vim/issues/200
+			-- FIX accumulated leftover binaries https://github.com/Exafunction/codeium.vim/issues/200
 			local bin_path = os.getenv("HOME") .. "/.codeium/bin"
 			local oldBinaries =
 				vim.fs.find("language_server_macos_arm", { limit = math.huge, path = bin_path })
