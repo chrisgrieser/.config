@@ -163,6 +163,7 @@ function gli {
 			fzf -0 --query="$1" \
 				--ansi --no-sort --no-info \
 				--header-first --header="↵ : Checkout   ^H: Copy [H]ash" \
+				--with-nth=2.. \
 				--expect="ctrl-h" \
 				--preview-window=65% \
 				--preview="git show {1} --stat --color=always --format='$preview_format' | sed -e '\$d' -e 's/^ //'"
