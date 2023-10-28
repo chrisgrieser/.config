@@ -1,0 +1,11 @@
+# DOCS https://linux.die.net/man/1/lesskey
+#───────────────────────────────────────────────────────────────────────────────
+
+#command
+
+# search wraps around: https://unix.stackexchange.com/a/621514
+- forw-search ^W
+
+J forw-scroll
+K back-scroll
+

@@ -127,7 +127,7 @@ local function gitShowPreviewer()
 			local previewWinWidth = vim.api.nvim_win_get_width(status.preview_win)
 			local statArgs = ("%s,%s"):format(previewWinWidth, math.floor(previewWinWidth / 2))
 			local previewFormat =
-				"%C(bold)%C(magenta)%s %n%C(reset)%C(red)%D%n %C(blue)%an %C(green)(%ch) %C(reset)"
+				"%C(bold)%C(magenta)%s %n%C(reset)%C(cyan)%D%n %C(blue)%an %C(yellow)(%ch) %C(reset)"
 			local cmd = {
 				"git show " .. hash,
 				"--color=always",
