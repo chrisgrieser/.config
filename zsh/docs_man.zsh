@@ -102,7 +102,7 @@ export LESSHISTFILE=- # don't clutter home directory with useless `.lesshst` fil
 #   source files. Therefore for this to work, the version of less provided by
 #   homebrew is needed (v.633)
 # - keybinding for search includes a setting that makes `n` and `N` wrap
-export LESSKEYIN="$HOME/.config/zsh/.lesskey"
+export LESSKEYIN="$HOME/.config/zsh/lesskey"
 
 less_version=$(less --version | grep -E --only-matching --max-count=1 "[0-9.]{2,}")
 
