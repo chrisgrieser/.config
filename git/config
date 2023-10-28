@@ -1,7 +1,7 @@
 [init]
 	defaultBranch = main
 [user]
-	name = pseudometa
+	name = Chris Grieser
 	email = 73286100+chrisgrieser@users.noreply.github.com
 [color]
 	diff = auto

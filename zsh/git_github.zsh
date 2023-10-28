@@ -146,16 +146,15 @@ function gli {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 
 	local hash key_pressed selected
-	local preview_format="%C(yellow)%h %C(red)%D %n%C(green)%ch %C(blue)%an%C(reset) %n%n%C(bold)%C(magenta)%s%C(reset)"
+	local preview_format="%C(yellow)%h %C(red)%D %n%C(green)%ch %n%C(blue)%an%C(reset) %n%n%C(bold)%C(magenta)%s%C(reset)"
 	selected=$(
 		gitlog --color=always |
 			sed 's/^[*| ]*//' | # remove the graph at the beginning
 			fzf -0 --query="$1" \
 				--ansi --no-sort --no-info \
 				--header-first --header="↵ : Checkout   ^H: Copy [H]ash" \
-				--with-nth=2.. \
 				--expect="ctrl-h" \
-				--preview-window=65% \
+				--with-nth=2.. --preview-window=50% \
 				--preview="git show {1} --stat --color=always --format='$preview_format' | sed -e '\$d' -e 's/^ //'"
 	)
 	[[ -z "$selected" ]] && return 0
