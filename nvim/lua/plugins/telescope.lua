@@ -123,15 +123,22 @@ local function gitShowPreviewer()
 		get_command = function(entry, status)
 			local previewWinWidth = vim.api.nvim_win_get_width(status.preview_win)
 			local hash = entry.value
+			local statArgs = ("%s,%s"):format(previewWinWidth, math.floor(previewWinWidth / 2))
 			local previewFormat =
-				"%C(yellow)%h %C(red)%D %n%C(green)%ch %n%C(blue)%an%C(reset) %n%n%C(bold)%C(magenta)%s%C(reset)"
-			-- stylua: ignore
-			return {
-				"git", "show", hash, "--color=always",
-				("--stat=%s,%s"):format(previewWinWidth, math.floor(previewWinWidth / 2)),
-				"--format=" .. previewFormat,
+				("%C(bold)%C(magenta)%s%C(reset)"):format()
+			local cmd = {
+				"git show " .. hash,
+				"--color=always",
+				"--stat=" .. statArgs,
+				"--format='" .. previewFormat .. "'",
+				"| sed -e 's/^ //' -e '$d'", -- remove clutter
 			}
+			return table.concat(cmd, " ")
 		end,
+		dyn_title = function (_, entry)
+			local hash = entry.value
+			return hash
+		end
 	}
 end
 
