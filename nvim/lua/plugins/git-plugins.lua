@@ -4,7 +4,7 @@ return {
 		dependencies = "stevearc/dressing.nvim",
 		keys = {
 			-- stylua: ignore start
-			{ "gc", function() require("tinygit").smartCommit { pushIfClean = true, openReferencedIssue = true } end, desc = "󰊢 Smart-Commit & PushIfClean" },
+			{ "gc", function() require("tinygit").smartCommit { pushIfClean = true, openReferencedIssue = true } end, desc = "󰊢 Smart-Commit & Push" },
 			{ "<leader>gm", function() require("tinygit").amendNoEdit { forcePush = true } end, desc = "󰊢 Amend-No-Edit & Push" },
 			{ "<leader>gM", function() require("tinygit").amendOnlyMsg { forcePush = true } end, desc = "󰊢 Amend Only Msg & Push" },
 			{ "<leader>gi", function() require("tinygit").issuesAndPrs { state = "open" } end, desc = " Open Issues" },

@@ -154,8 +154,8 @@ function gli {
 				--ansi --no-sort --no-info \
 				--header-first --header="↵ : Checkout   ^H: Copy [H]ash" \
 				--expect="ctrl-h" \
-				--with-nth=2.. --preview-window=50% \
-				--preview="git show {1} --stat --color=always --format='$preview_format' | sed -e '\$d' -e 's/^ //'"
+				--with-nth=2.. \
+				--preview="git show {1} --stat=,25 --color=always --format='$preview_format' | sed -e '\$d' -e 's/^ //'"
 	)
 	[[ -z "$selected" ]] && return 0
 	key_pressed=$(echo "$selected" | head -n1)

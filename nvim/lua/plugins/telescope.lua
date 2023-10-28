@@ -101,31 +101,39 @@ local keymappings_N = vim.tbl_extend("force", keymappings_I, normalModeOnly)
 -- HELPERS
 
 -- https://github.com/nvim-telescope/telescope.nvim/issues/605
----@param mode "git_status"|"git_commits"
-local function deltaPreviewer(mode)
-	local previewer = require("telescope.previewers").new_termopen_previewer {
+local function deltaPreviewer()
+	return require("telescope.previewers").new_termopen_previewer {
 		get_command = function(entry)
+			local gitroot = vim.trim(vim.fn.system { "git", "rev-parse", "--show-toplevel" })
+			local filename = entry.value
+			local filepath = gitroot .. "/" .. filename
 			-- stylua: ignore
-			local cmd = {
+			return {
 				"git", 
 				"-c", "core.pager=delta",
 				"-c", ("delta.%s=true"):format(vim.opt.background:get()),
-				"diff",
+				"diff", filepath
 			}
-			if mode == "git_commits" then
-				local hash = entry.value
-				table.insert(cmd, hash .. "^!")
-				-- INFO cannot determine hash & path, making is not possible to use
-				-- delta for git_bcommits
-			elseif mode == "git_status" then
-				local gitroot = vim.trim(vim.fn.system { "git", "rev-parse", "--show-toplevel" })
-				local filepath = gitroot .. "/" .. entry.value
-				table.insert(cmd, filepath)
-			end
-			return cmd
 		end,
 	}
-	return previewer
+end
+
+local function gitShowPreviewer()
+	return require("telescope.previewers").new_termopen_previewer {
+		get_command = function(entry, status)
+		vim.notify("🪚 status: " .. vim.inspect(status))
+		vim.notify("🪚 entry: " .. vim.inspect(entry))
+			local hash = entry.value
+			local previewFormat =
+				"%C(yellow)%h %C(red)%D %n%C(green)%ch %n%C(blue)%an%C(reset) %n%n%C(bold)%C(magenta)%s%C(reset)"
+			-- stylua: ignore
+			return {
+				"git", "show", hash, "--color=always", 
+				"--stat=,25", 
+				"--format=" .. previewFormat,
+			}
+		end,
+	}
 end
 
 -- color parent as comment
@@ -188,10 +196,8 @@ local telescopeConfig = {
 		find_files = {
 			prompt_prefix = "󰝰 ",
 			-- FIX using the default find command from telescope is somewhat buggy,
-			-- e.g. not respecting fd/ignore
+			-- e.g. not respecting /fd/ignore
 			find_command = { "fd", "--type=file", "--type=symlink" },
-			-- find_command = { "fd" }, -- include directories, requires assigning them some action
-			follow = true,
 			mappings = { i = findFileMappings },
 		},
 		live_grep = { prompt_prefix = " ", disable_coordinates = true },
@@ -199,7 +205,8 @@ local telescopeConfig = {
 			prompt_prefix = "󰊢 ",
 			show_untracked = true,
 			initial_mode = "normal",
-			previewer = deltaPreviewer("git_status"),
+			previewer = deltaPreviewer(),
+			layout_config = { horizontal = { height = 0.9 } },
 			mappings = {
 				n = {
 					["<Tab>"] = "move_selection_worse",
@@ -212,7 +219,7 @@ local telescopeConfig = {
 			prompt_prefix = "󰊢 ",
 			initial_mode = "normal",
 			prompt_title = "Git Log",
-			previewer = deltaPreviewer("git_commits"),
+			previewer = gitShowPreviewer(),
 			layout_config = { horizontal = { height = 0.9 } },
 			-- add commit time (%cr) & `--all`
 			git_command = { "git", "log", "--all", "--pretty=%h %s\t%cr", "--", "." },
