@@ -223,14 +223,15 @@ function ac {
 function acp {
 	ac "$@" || return 1
 
-	if [[ -z "$(command git status --porcelain)" ]]; then
+	if [[ -n "$(git status --porcelain)" ]]; then
 		printf "\033[1;34m(Not pushing since repo still dirty.)\033[0m"
-	else
-		printf "\033[1;32mPull: \033[0m" &&
-			git pull &&
-			printf "\033[1;32mPush: \033[0m" &&
-			git push
+		return 0
 	fi
+
+	printf "\033[1;32mPull: \033[0m" &&
+		git pull &&
+		printf "\033[1;32mPush: \033[0m" &&
+		git push
 }
 
 #───────────────────────────────────────────────────────────────────────────────
