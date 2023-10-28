@@ -112,6 +112,7 @@ local function deltaPreviewer()
 				"git",
 				"-c", "core.pager=delta",
 				"-c", ("delta.%s=true"):format(vim.opt.background:get()),
+				"-c", "delta.file-style=omit", -- no need for filename, since it's only one file
 				"diff", filepath
 			}
 		end,
@@ -125,7 +126,7 @@ local function gitShowPreviewer()
 			local hash = entry.value
 			local statArgs = ("%s,%s"):format(previewWinWidth, math.floor(previewWinWidth / 2))
 			local previewFormat =
-				"%C(bold)%C(magenta)%s %n%C(red)%D%n %C(blue)%an %C(green)(%ch) %n%C(reset)"
+				"%C(bold)%C(magenta)%s %n%C(reset)%C(red)%D%n %C(blue)%an %C(green)(%ch) %C(reset)"
 			local cmd = {
 				"git show " .. hash,
 				"--color=always",
