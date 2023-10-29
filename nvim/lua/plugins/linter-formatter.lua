@@ -103,7 +103,8 @@ local function linterConfigs()
 	lint.linters["editorconfig-checker"].args =
 		{ "--no-color", "--config=" .. linterConfig .. "/editorconfig-checker-rc.json" }
 	lint.linters.markdownlint.args = {
-		"--disable=no-trailing-spaces no-multiple-blanks", -- not disabled in config, so it's enabled for formatting
+		"--disable=no-trailing-spaces", -- not disabled in config, so it's enabled for formatting 
+		"--disable=no-multiple-blanks",
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
 	}
 	lint.linters.woke.args = {
