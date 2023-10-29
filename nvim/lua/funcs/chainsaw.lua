@@ -1,11 +1,26 @@
 local M = {}
 --------------------------------------------------------------------------------
 
--- CONFIG
 local config = {
 	marker = "🪚", -- should be a short, unique string (.removeLogs() will remove any line with it)
 	beepEmojis = { "🤖", "👽", "👾", "💣" }, -- to differentiate between beepLog statements
 	logStatements = {
+		variableLog = {
+			lua = 'print("%s %s: ", %s)',
+			nvim_lua = 'vim.notify("%s %s: " .. tostring(%s))', -- FIX for noice.nvim
+			python = 'print(f"%s {%s = }")',
+			javascript = 'console.log("%s %s:", %s);',
+			typescript = 'console.log("%s %s:", %s);',
+			sh = 'echo "%s %s: $%s"',
+			applescript = 'log "%s %s:" & %s',
+			css = "outline: 2px solid red !important; /* %s */",
+			scss = "outline: 2px solid red !important; /* %s */",
+		},
+		objectLog = {
+			nvim_lua = 'vim.notify("%s %s: " .. vim.inspect(%s))',
+			typescript = 'console.log("%s %s:", %s)',
+			javascript = 'console.log("%s %s:", JSON.stringify(%s))',
+		},
 		beepLog = {
 			nvim_lua = 'vim.notify("%s beep %s")',
 			lua = 'print("%s beep %s")',
@@ -17,16 +32,6 @@ local config = {
 			css = "outline: 2px solid red !important; /* %s */",
 			scss = "outline: 2px solid red !important; /* %s */",
 		},
-		objectLog = {
-			nvim_lua = 'vim.notify("%s %s: " .. vim.inspect(%s))',
-			typescript = 'console.log("%s %s:", %s)',
-			javascript = 'console.log("%s %s:", JSON.stringify(%s))',
-		},
-		assertLog = {
-			lua = 'assert(%s, "%s %s")',
-			nvim_lua = 'assert(%s, "%s %s")',
-			python = 'assert %s, "%s %s"',
-		},
 		messageLog = {
 			lua = 'print("%s ")',
 			nvim_lua = 'vim.notify("%s ")', -- FIX for noice.nvim print-bug: https://github.com/folke/noice.nvim/issues/556
@@ -36,16 +41,10 @@ local config = {
 			sh = 'echo "%s "',
 			applescript = 'log "%s "',
 		},
-		variableLog = {
-			lua = 'print("%s %s: ", %s)',
-			nvim_lua = 'vim.notify("%s %s: " .. tostring(%s))', -- FIX for noice.nvim
-			python = 'print(f"%s {%s = }")',
-			javascript = 'console.log("%s %s:", %s);',
-			typescript = 'console.log("%s %s:", %s);',
-			sh = 'echo "%s %s: $%s"',
-			applescript = 'log "%s %s:" & %s',
-			css = "outline: 2px solid red !important; /* %s */",
-			scss = "outline: 2px solid red !important; /* %s */",
+		assertLog = {
+			lua = 'assert(%s, "%s %s")',
+			nvim_lua = 'assert(%s, "%s %s")',
+			python = 'assert %s, "%s %s"',
 		},
 		debugLog = {
 			javascript = "debugger; // %s",
