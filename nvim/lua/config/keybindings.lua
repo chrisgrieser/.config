@@ -105,8 +105,9 @@ keymap(
 	{ desc = " Open new scope" }
 )
 
--- SPELLING
+-- Spelling & Casing
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" }) -- works even with `spell=false`
+keymap("n", "~", "~h") -- don't move cursor, useful for vertical fixes
 
 -- Merging
 keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
