@@ -10,6 +10,8 @@
 	interactive = auto
 	pager = true
 	ui = always
+[diff]
+	context = 2 # default 3, reduced to save space
 [core]
 	editor = nvim
 	autocrlf = input
