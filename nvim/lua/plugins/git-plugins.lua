@@ -4,7 +4,7 @@ return {
 		dependencies = "stevearc/dressing.nvim",
 		keys = {
 			-- stylua: ignore start
-			{ "gc", function() require("tinygit").smartCommit { pushIfClean = true, openReferencedIssue = true } end, desc = "󰊢 Smart-Commit & Push" },
+			{ "gc", function() require("tinygit").smartCommit { pushIfClean = true } end, desc = "󰊢 Smart-Commit & Push" },
 			{ "<leader>gm", function() require("tinygit").amendNoEdit { forcePush = true } end, desc = "󰊢 Amend-No-Edit & Push" },
 			{ "<leader>gM", function() require("tinygit").amendOnlyMsg { forcePush = true } end, desc = "󰊢 Amend Only Msg & Push" },
 			{ "<leader>gi", function() require("tinygit").issuesAndPrs { state = "open" } end, desc = " Open Issues" },
@@ -19,6 +19,7 @@ return {
 			commitMsg = {
 				enforceConvCommits = { enabled = true },
 				spellcheck = true,
+				openReferencedIssue = true,
 			},
 			searchFileHistory = {
 				diffPopupBorder = require("config.utils").borderStyle,
@@ -32,7 +33,7 @@ return {
 			{
 				"ga",
 				":Gitsigns stage_hunk<CR>",
-				mode = {"n", "x"},
+				mode = { "n", "x" },
 				desc = "󰊢 Stage Selected Hunks",
 				silent = true,
 			},
