@@ -146,7 +146,7 @@ function gli {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 
 	local hash key_pressed selected style
-	local preview_format="%C(yellow)%h %C(red)%D %n%C(blue)%an %C(green)(%ch)%C(reset) %n%n%C(bold)%C(magenta)%s %C(reset)%b"
+	local preview_format="%C(yellow)%h %C(red)%D %n%C(blue)%an %C(green)(%ch)%C(reset) %n%n%C(bold)%C(magenta)%s %C(cyan)%b%C(reset)"
 	defaults read -g AppleInterfaceStyle &>/dev/null && style="--dark" || style="--light"
 
 	selected=$(

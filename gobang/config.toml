@@ -1,0 +1,12 @@
+# DOCS https://github.com/TaKO8Ki/gobang#Configuration
+#───────────────────────────────────────────────────────────────────────────────
+
+[[conn]]
+type = "sqlite"
+path = "/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/File Hub/actions.db"
+name = "Alfred actions"
+
+[[conn]]
+type = "sqlite"
+path = "/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/File Hub/clipboard.db"
+name = "Alfred clipboard"
