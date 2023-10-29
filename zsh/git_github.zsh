@@ -149,26 +149,18 @@ function gli {
 	local preview_format="%C(yellow)%h %C(red)%D %n%C(blue)%an %C(green)(%ch)%C(reset) %n%n%C(bold)%C(magenta)%s%C(reset)"
 	defaults read -g AppleInterfaceStyle &>/dev/null && style="--dark" || style="--light"
 
-	# overwrite the `--format` from `gitlog`, putting hash at the end for easier access
-	# HACK putting hash far to the right, since it cannot be hidden via
-	# `--with-nth`, as that would also break the display of the graph
-	local line_format="%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)%an%C(reset)                                 %h"
-
 	selected=$(
-		gitlog --color=always --format="$line_format" |
-			fzf -0 --query="$1" \
-				--ansi --no-sort --no-info \
+		gitlog --no-graph --color=always |
+			fzf -0 --query="$1" --ansi --no-sort \
 				--header-first --header="↵ : Checkout    ^H: Copy [H]ash" \
-				--expect="ctrl-h" \
-				--preview-window=55% --ellipsis="" \
-				--preview="[[ {-1} =~ ^[|\/]$ ]] && return ; git show {-1} --stat=,30,30 --color=always --format='$preview_format' | sed -e '\$d' -e 's/^ //' ; git diff {-1}^! | delta $style --hunk-header-decoration-style='blue ol' --hunk-label='■' --file-style=omit" \
+				--expect="ctrl-h" --with-nth=2.. --preview-window=55% \
+				--preview="git show {1} --stat=,30,30 --color=always --format='$preview_format' | sed -e '\$d' -e 's/^ //' ; git diff {1}^! | delta $style --hunk-header-decoration-style='blue ol' --hunk-label='■' --file-style=omit" \
 				--height="100%" #required for wezterm's pane:is_alt_screen_active()
 	)
 	[[ -z "$selected" ]] && return 0 # abort
 
 	key_pressed=$(echo "$selected" | head -n1)
-	hash=$(echo "$selected" | sed '1d' | rev | cut -d' ' -f1 | rev)
-	[[ -z "$hash" ]] && return 2 # part of graph selected
+	hash=$(echo "$selected" | sed '1d' | cut -d' ' -f1)
 
 	if [[ "$key_pressed" == "ctrl-h" ]]; then
 		echo -n "$hash" | pbcopy
