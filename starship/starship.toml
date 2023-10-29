@@ -22,7 +22,13 @@ $status\
 $character\
 """
 
-right_format = "$python"
+right_format = """\
+${custom.alfred}\
+$nodejs\
+$python\
+$jobs\
+$memory_usage\
+"""
 
 [character]
 success_symbol = "[ ](bold green)" # 󰀘
@@ -128,6 +134,33 @@ format = '(\([+$added]($added_style)/[-$deleted]($deleted_style)\) )'
 #───────────────────────────────────────────────────────────────────────────────
 # right side
 #───────────────────────────────────────────────────────────────────────────────
+
+[jobs]
+symbol = "󰰆 "
+format = "[ +$number $symbol ]($style)"
+style = "fg:white"
+symbol_threshold = 1
+number_threshold = 2
+
+[memory_usage]
+disabled = false
+symbol = "󰍛  "
+threshold = 80
+format = " [$symbol$ram_pct]($style)"
+
+[custom.alfred]
+description = "Version number of Alfred Workflow"
+when = "[[ -f info.plist ]] || [[ -f ../info.plist ]]"
+command = "if [[ -f ../info.plist ]] ; then ; plist=$(plutil -extract version xml1 -o - ../info.plist) ; else ; plist=$(plutil -extract version xml1 -o - info.plist) ; fi ; echo \"$plist\" | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1"
+os = "macos"
+format = '[󰮤 ](purple) [󰏗  $output]($style)'
+style = "bold cyan"
+
+[nodejs]
+format = " [$symbol $version]($style)"
+version_format = "$major"
+style = "bold cyan"
+detect_extensions = ["ts"]             # don't trigger for JXA
 
 [python]
 style = "bold cyan"
