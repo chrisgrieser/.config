@@ -138,6 +138,8 @@ opt.listchars:append {
 	multispace = "·",
 	tab = "│ ", -- overridden by indent-blankline
 	conceal = "?",
+	lead = " ",
+	trail = " ",
 }
 
 -- no list chars in special buffers

@@ -11,7 +11,7 @@ line-length:
   tables: false
   code_blocks: false
 no-inline-html:
-  allowed_elements: [img, details, summary, kbd, a]
+  allowed_elements: [img, details, summary, kbd, a, br]
 ul-style: { style: sublist }
 
 #─────────────────────────────────────────────────────────────────────────────

@@ -48,6 +48,9 @@ rules:
           - { key_code: f19 }
           - *deactivate-leader
           - *remove-notice
+          # open tot if not running, since toggle-key only works with tot open
+          # (adding this at the end, to reduce delay)
+          - shell_command: pgrep -xq "Tot" || open -a "Tot" 
       # Cancel (Hyper/Esc)
       - type: basic
         from: { key_code: caps_lock }
