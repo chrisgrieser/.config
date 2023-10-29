@@ -230,5 +230,3 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
-
-keymap("n", "<PageDown>", function() vim.notify("PageDown", vim.log.levels.INFO) end)

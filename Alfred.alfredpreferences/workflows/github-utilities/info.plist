@@ -48,19 +48,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>08C2ABDA-FA6A-4AA1-94A5-3B83CD36C0F7</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>80310399-4092-49D2-B048-D91D9184B37F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>159C1307-6FCE-4B79-91EB-7EE1D26C4A86</key>
 		<array>
 			<dict>
@@ -378,19 +365,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>80310399-4092-49D2-B048-D91D9184B37F</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>158FC0D8-5F6E-4AFE-BC6E-9406B6343527</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>9C309873-3D47-4FFD-817C-67F6388A7C30</key>
 		<array/>
 		<key>9D26C27E-AC67-428B-9499-55924E79D48C</key>
@@ -422,7 +396,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>08C2ABDA-FA6A-4AA1-94A5-3B83CD36C0F7</string>
+				<string>158FC0D8-5F6E-4AFE-BC6E-9406B6343527</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -892,73 +866,6 @@ osascript -l JavaScript "./scripts/my-github-repos.js" "$LOCAL_REPOS"</string>
 			<string>158FC0D8-5F6E-4AFE-BC6E-9406B6343527</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/search-in-git-repo.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Searching Repo</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>80310399-4092-49D2-B048-D91D9184B37F</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>folderToSearch</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>08C2ABDA-FA6A-4AA1-94A5-3B83CD36C0F7</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1800,21 +1707,12 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<key>ypos</key>
 			<real>1205</real>
 		</dict>
-		<key>08C2ABDA-FA6A-4AA1-94A5-3B83CD36C0F7</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>435</real>
-			<key>ypos</key>
-			<real>295</real>
-		</dict>
 		<key>158FC0D8-5F6E-4AFE-BC6E-9406B6343527</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>665</real>
+			<real>495</real>
 			<key>ypos</key>
 			<real>265</real>
 		</dict>
@@ -2000,17 +1898,6 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<real>355</real>
 			<key>ypos</key>
 			<real>1365</real>
-		</dict>
-		<key>80310399-4092-49D2-B048-D91D9184B37F</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>search in local repo</string>
-			<key>xpos</key>
-			<real>495</real>
-			<key>ypos</key>
-			<real>265</real>
 		</dict>
 		<key>8D753493-85EA-4742-8B0E-1720EB36F108</key>
 		<dict>
