@@ -25,7 +25,8 @@ alias mkdir='mkdir -p'           # create intermediate directories
 alias curl='curl --progress-bar' # nicer progress bar
 alias make='make --silent --warn-undefined-variables'
 
-# treeeeeeeeeeee
+# eza
+alias l='eza --all --long --time-style=relative --no-user --icons --git --group-directories-first --sort=newest'
 alias tree='eza --tree --level=2 --icons --git-ignore --no-quotes'
 alias treee='eza --tree --level=3 --icons --git-ignore --no-quotes'
 alias treeee='eza --tree --level=4 --icons --git-ignore --no-quotes'
