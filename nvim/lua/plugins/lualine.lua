@@ -106,7 +106,7 @@ local lualineConfig = {
 				unpushed_icon = "󰶣",
 				fetch_interval = 15 * 60 * 1000, -- = 15 min
 				show_only_diverged = true,
-				padding = { right = 0, left = 1 },
+				padding = { right = 1, left = 0 },
 			},
 			"diff",
 		},
