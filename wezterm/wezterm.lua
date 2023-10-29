@@ -91,6 +91,7 @@ local keybindings = {
 	{
 		key = "PageUp",
 		action = wt.action_callback(function(win, pane)
+			-- if TUI, send key to TUI, else scroll by page https://github.com/wez/wezterm/discussions/4101
 			if pane:is_alt_screen_active() then
 				win:perform_action(wt.action.SendKey { key = "PageUp" }, pane)
 			else

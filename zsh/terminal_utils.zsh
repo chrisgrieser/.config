@@ -20,8 +20,11 @@ function o() {
 		fd --type=file --type=symlink --color=always | fzf \
 			-0 -1 --ansi --query="$input" --info=inline --header-first \
 			--header="^H --hidden --no-ignore" \
+			--with-nth=..-2 --delimiter="/" \
 			--bind="ctrl-h:reload(fd --hidden --no-ignore --exclude='/.git/' --exclude='.DS_Store' --type=file --type=symlink --color=always)" \
-			--preview '[[ $(file --mime {}) =~ image ]] && du -h {} || bat --color=always --style=snip --wrap=never --tabs=2 {}'
+			--preview-window="60%,wrap" \
+			--preview '[[ $(file --mime {}) =~ text ]] && bat --color=always --wrap=never --style=default {} || file {}' \
+			--height="100%" #required for wezterm's pane:is_alt_screen_active()
 	)
 	if [[ -z "$selected" ]]; then # fzf aborted
 		return 0
