@@ -23,7 +23,7 @@ keymap("n", "k", "gk")
 -- HJKL behaves like hjkl, but bigger distance
 keymap({ "o", "x" }, "H", "^") -- `zv` opens folds when navigating a horizontal lines
 keymap("n", "H", "0^") -- `0` ensures fully scrolling to the left on long unwrapped lines
-keymap({ "n", "x" }, "L", "$v")
+keymap({ "n", "x" }, "L", "$")
 keymap({ "n", "x" }, "J", "6j")
 keymap({ "n", "x" }, "K", "6k")
 

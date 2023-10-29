@@ -151,23 +151,22 @@ function gli {
 
 	selected=$(
 		gitlog --color=always |
-			sed 's/^[*| ]*//' | # remove the graph at the beginning
 			fzf -0 --query="$1" \
 				--ansi --no-sort --no-info \
 				--header-first --header="↵ : Checkout   ^H: Copy [H]ash" \
 				--expect="ctrl-h" \
-				--with-nth=2.. --preview-window=55% \
-				--preview="git show {1} --stat=,25,25 --color=always --format='$preview_format' | sed -e '\$d' -e 's/^ //' ; git diff {1}^! | delta $style --hunk-header-decoration-style='blue ol' --hunk-label='■' --file-style=omit" \
+				--with-nth=.. --preview-window=55% \
+				--preview="hash=\$(echo {} | sed 's/^[*|/\ ]*//g' | cut -d' ' -f1) ; [[ -n \"\$hash\" ]] || return ; git show \$hash --stat=,25,25 --color=always --format='$preview_format' | sed -e '\$d' -e 's/^ //' ; git diff \$hash^! | delta $style --hunk-header-decoration-style='blue ol' --hunk-label='■' --file-style=omit" \
 				--height="100%" #required for wezterm's pane:is_alt_screen_active()
 	)
 	[[ -z "$selected" ]] && return 0 # abort
 
 	key_pressed=$(echo "$selected" | head -n1)
-	hash=$(echo "$selected" | cut -d' ' -f1 | sed '1d')
+	hash=$(echo "$selected" | sed '1d' | sed 's/^[*|/\ ]*//g' | cut -d' ' -f1)
 
 	if [[ "$key_pressed" == "ctrl-h" ]]; then
-		echo "$hash" | pbcopy
-		echo "\"$hash\" copied."
+		echo -n "$hash" | pbcopy
+		print "\033[1;33m$hash\033[0m copied."
 	else # pressed return
 		git checkout "$hash"
 	fi
