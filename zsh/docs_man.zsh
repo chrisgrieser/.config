@@ -69,7 +69,7 @@ function man() {
 	else
 		if ! command man -w "$command" &>/dev/null; then
 			# fallback to --help
-			if ! $command --help | bat --language=help --style=plain --wrap=character ; then
+			if ! $command --help | bat --language=help --style=plain --wrap=character; then
 				print "\033[1;33mNeither man page nor --help page found.\033[0m"
 				return 1
 			fi
@@ -94,7 +94,7 @@ export LESS_TERMCAP_us=$'\E[1;36m' # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'    # reset underline
 
 # --ignore-case is actually smart case
-export LESS='--RAW-CONTROL-CHARS --incsearch --ignore-case --window=-3 --no-init --tilde --LONG-PROMPT'
+export LESS='--RAW-CONTROL-CHARS --incsearch --ignore-case --window=-3 --no-init --tilde --long-prompt'
 export LESSHISTFILE=- # don't clutter home directory with useless `.lesshst` file
 
 # INFO Keybindings
@@ -107,4 +107,4 @@ export LESSKEYIN="$HOME/.config/zsh/lesskey"
 less_version=$(less --version | grep -E --only-matching --max-count=1 "[0-9.]{2,}")
 
 [[ $less_version -lt 582 ]] &&
-	echo "Installed version of less is lower v.582, does not support all features."
+	echo "Installed version of less is lower than v.582, does not support all features."

@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
-# shellcheck disable=2164
 # DOCS https://github.com/transmission/transmission/blob/main/docs/Scripts.md#scripts
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -8,6 +7,7 @@
 # read download folder from transmission settings
 download_folder="$(defaults read org.m0k.transmission DownloadFolder)"
 if [[ -d "$download_folder" ]]; then
+	# shellcheck disable=2164
 	cd "$download_folder"
 else
 	touch "./WARN Transmission DownloadFolder not found"
@@ -17,8 +17,7 @@ fi
 #───────────────────────────────────────────────────────────────────────────────
 
 # delete clutter
-find . \( -name '*.txt' -or -name '*.nfo' -or -name '*.exe' -or -name '*.md' \
-	-or -name '*.jpg' -or -name '*.png' \) -delete
+find -E . -iregex ".*\.(nfo|md|txt|jpe?g|png)$" -delete
 find . -type d -name "Sample" -exec rm -r {} + # Folders do not accept `-delete`
 
 # if single file, unnest it

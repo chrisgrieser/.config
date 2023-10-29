@@ -25,28 +25,19 @@ alias mkdir='mkdir -p'           # create intermediate directories
 alias curl='curl --progress-bar' # nicer progress bar
 alias make='make --silent --warn-undefined-variables'
 
-# misc
-alias prose='ssh nanotipsforvim@prose.sh'
-alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
-#───────────────────────────────────────────────────────────────────────────────
-
-alias bkp='zsh "$HOME/.config/_utility-scripts/backup-script.sh"'
-alias repobkp='zsh "$HOME/.config/_utility-scripts/backup-my-repos.sh"'
-
+# treeeeeeeeeeee
 alias tree='eza --tree --level=2 --icons --git-ignore --no-quotes'
 alias treee='eza --tree --level=3 --icons --git-ignore --no-quotes'
 alias treeee='eza --tree --level=4 --icons --git-ignore --no-quotes'
 
+# misc
+alias prose='ssh nanotipsforvim@prose.sh'
+alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
+alias bkp='zsh "$HOME/.config/_utility-scripts/backup-script.sh"'
+alias repobkp='zsh "$HOME/.config/_utility-scripts/backup-my-repos.sh"'
+
 #───────────────────────────────────────────────────────────────────────────────
 # https://www.thorsten-hans.com/5-types-of-zsh-aliases
-
-# SUFFIX Alias
-alias -s {yml,yaml}='yq "."'
-alias -s json='fx'
-alias -s pdf='qlmanage -p'
-
-[[ "$TERM_PROGRAM" == "WezTerm" ]] && image_viewer="wezterm imgcat" || image_viewer="qlmanage -p"
-alias -s {gif,png,jpg,jpeg,webp,tiff}="$image_viewer"
 
 # GLOBAL ALIAS (to be used at the end, mostly)
 alias -g G='| rg'
