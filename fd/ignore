@@ -8,6 +8,9 @@
 **/*.app/*
 **/*.pxd/*
 
+# git isn't ignored by default?!
+.git
+
 # INFO files
 *INFO*
 
