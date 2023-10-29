@@ -16,11 +16,11 @@ fi
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# delete clutter
+# DELETE CLUTTER
 find -E . -iregex ".*\.(nfo|md|txt|jpe?g|png)$" -delete
 find . -type d -name "Sample" -exec rm -r {} + # Folders do not accept `-delete`
 
-# if single file, unnest it
+# IF SINGLE FILE, UNNEST IT
 sleep 1
 last_folder="$(find . -mindepth 1 -type d -mtime -1m | head -n1)"
 files_in_folder=$(find "$last_folder" -depth 1 | wc -l | tr -d " ")
@@ -30,10 +30,10 @@ if [[ $files_in_folder -eq 1 ]]; then
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
-# quit Transmission, if no other active torrents
+# QUIT TRANSMISSION, IF NO OTHER ACTIVE TORRENTS
 
 if [[ ! -x "$(command -v transmission-remote)" ]]; then
-	touch "./WARN transmission-remote not installed"
+	touch "./WARN transmission-cli not installed"
 	return 1
 fi
 

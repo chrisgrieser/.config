@@ -53,6 +53,7 @@ function run() {
 					mods: {
 						cmd: { arg: repo },
 						fn: { arg: installPath },
+						shift: { arg: "", variables: { repoID: repo } },
 					},
 					uid: repo,
 				};

@@ -32,7 +32,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>D9E07FDE-1870-42B0-B6D4-AA209906679E</string>
+				<string>79F25308-2C64-400B-AC1D-C1FD5FC840DF</string>
 				<key>modifiers</key>
 				<integer>131072</integer>
 				<key>modifiersubtext</key>
@@ -154,7 +154,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>D9E07FDE-1870-42B0-B6D4-AA209906679E</string>
+				<string>79F25308-2C64-400B-AC1D-C1FD5FC840DF</string>
 				<key>modifiers</key>
 				<integer>131072</integer>
 				<key>modifiersubtext</key>
@@ -280,19 +280,6 @@
 		</array>
 		<key>D818D50E-55A9-45FB-AC92-10FCF4BC8B60</key>
 		<array/>
-		<key>D9E07FDE-1870-42B0-B6D4-AA209906679E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>79F25308-2C64-400B-AC1D-C1FD5FC840DF</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>F178F3ED-E855-4DC9-A178-D839E9C2C48D</key>
 		<array/>
 		<key>F5BC25CE-C34C-4EF9-B428-71EDB9170948</key>
@@ -840,26 +827,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>repoID</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>D9E07FDE-1870-42B0-B6D4-AA209906679E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>autopaste</key>
 				<false/>
 				<key>clipboardtext</key>
@@ -1234,15 +1201,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>335</real>
 			<key>ypos</key>
 			<real>780</real>
-		</dict>
-		<key>D9E07FDE-1870-42B0-B6D4-AA209906679E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>270</real>
-			<key>ypos</key>
-			<real>535</real>
 		</dict>
 		<key>F178F3ED-E855-4DC9-A178-D839E9C2C48D</key>
 		<dict>

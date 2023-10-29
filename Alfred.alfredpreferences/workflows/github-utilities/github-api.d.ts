@@ -20,6 +20,16 @@ declare class GithubNotif {
 	subscription_url: string;
 }
 
+declare class GithubIssue {
+	title: string;
+	user: { login: string; };
+	state: string;
+	comments: string;
+	number: string;
+	// biome-ignore lint/style/useNamingConvention: not_by_me
+	html_url: string;
+}
+
 declare class GithubRepo {
 	// biome-ignore lint/style/useNamingConvention: not_by_me
 	full_name: string;
