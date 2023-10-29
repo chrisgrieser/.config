@@ -135,6 +135,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>E744CD58-599D-48C1-9D47-C2CA87174496</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0EC0CF0A-56FD-4AD8-8894-B85501A7E927</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E99EAF40-8819-42A3-BBED-A3BC465A0D66</key>
 		<array>
 			<dict>
@@ -491,6 +504,21 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>searcher</key>
+				<integer>1635216737</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.systemwebsearch</string>
+			<key>uid</key>
+			<string>7FF2AE46-C3BF-4436-8261-FE3E1E797C71</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>acceptsmulti</key>
 				<integer>0</integer>
 				<key>filetypes</key>
@@ -504,21 +532,6 @@ fi</string>
 			<string>alfred.workflow.trigger.action</string>
 			<key>uid</key>
 			<string>3D0B8081-9BD2-40C0-9521-EDF82FFE8C23</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>searcher</key>
-				<integer>1635216737</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.systemwebsearch</string>
-			<key>uid</key>
-			<string>7FF2AE46-C3BF-4436-8261-FE3E1E797C71</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -640,6 +653,41 @@ fi</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>public.json</string>
+					<string>public.yaml</string>
+				</array>
+				<key>name</key>
+				<string>Browse in jless</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>E744CD58-599D-48C1-9D47-C2CA87174496</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>jless "{query}"</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.terminalcommand</string>
+			<key>uid</key>
+			<string>0EC0CF0A-56FD-4AD8-8894-B85501A7E927</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -665,6 +713,15 @@ fi</string>
 			<key>ypos</key>
 			<real>245</real>
 		</dict>
+		<key>0EC0CF0A-56FD-4AD8-8894-B85501A7E927</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>200</real>
+			<key>ypos</key>
+			<real>705</real>
+		</dict>
 		<key>1ED11A83-B032-49DD-A27E-82281010DEC8</key>
 		<dict>
 			<key>xpos</key>
@@ -689,9 +746,9 @@ fi</string>
 		<key>53E5054B-1A54-48FA-B642-7B674813E725</key>
 		<dict>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>680</real>
+			<real>580</real>
 		</dict>
 		<key>7F470F6C-F1DD-4F6C-A598-CA405EA0B456</key>
 		<dict>
@@ -709,16 +766,16 @@ fi</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>215</real>
+			<real>195</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>455</real>
 		</dict>
 		<key>94945DE5-0241-4967-9508-58E218F31B67</key>
 		<dict>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>680</real>
+			<real>580</real>
 		</dict>
 		<key>9734FC1B-0242-4229-B9BF-4A809F59C81E</key>
 		<dict>
@@ -805,6 +862,15 @@ fi</string>
 			<key>ypos</key>
 			<real>570</real>
 		</dict>
+		<key>E744CD58-599D-48C1-9D47-C2CA87174496</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>705</real>
+		</dict>
 		<key>E99EAF40-8819-42A3-BBED-A3BC465A0D66</key>
 		<dict>
 			<key>colorindex</key>
@@ -832,7 +898,7 @@ fi</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>455</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
