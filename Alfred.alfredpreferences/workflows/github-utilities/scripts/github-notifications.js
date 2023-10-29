@@ -107,7 +107,7 @@ function run(argv) {
 		// biome-ignore lint/style/useNamingConvention: not by me
 		Issue: "🔵",
 		// biome-ignore lint/style/useNamingConvention: not by me
-		Discussion: "🗣️",
+		Discussion: "🏛️",
 		// biome-ignore lint/style/useNamingConvention: not by me
 		CheckSuite: "🤖",
 	};
@@ -143,6 +143,7 @@ function run(argv) {
 			const type = notif.subject.type === "PullRequest" ? "pull" : "issues"; //codespell-ignore
 			url = `https://github.com/${notif.repository.full_name}/${type}/${idInRepo}${referrer}${lastCommentId}`;
 		} else {
+			// discussions do not have a direct URL available :/
 			url = "https://github.com/notifications";
 		}
 

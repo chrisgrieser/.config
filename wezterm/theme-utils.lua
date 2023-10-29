@@ -52,6 +52,7 @@ function M.cycle(window, _)
 			window:set_config_overrides(overrides)
 
 			window:copy_to_clipboard(nextScheme)
+			window:toast_notification("Color scheme", nextScheme, nil, 4000)
 			return
 		end
 	end
