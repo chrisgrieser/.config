@@ -23,7 +23,7 @@ return {
 		"chrisgrieser/nvim-early-retirement",
 		event = "VeryLazy",
 		opts = {
-			retirementAgeMins = 15,
+			retirementAgeMins = 10,
 			ignoreUnsavedChangesBufs = false,
 			notificationOnAutoClose = true,
 			deleteBufferWhenFileDeleted = true,
@@ -32,18 +32,8 @@ return {
 	{ -- :bnext & :bprevious get visual overview of buffers
 		"ghillb/cybu.nvim",
 		keys = {
-			{
-				"<BS>",
-				function() require("cybu").cycle("next") end,
-				mode = { "n", "x" },
-				desc = "󰽙 Next Buffer",
-			},
-			{
-				"<S-BS>",
-				function() require("cybu").cycle("prev") end,
-				mode = { "n", "x" },
-				desc = "󰽙 Previous Buffer",
-			},
+			{ "<BS>", function() require("cybu").cycle("next") end, desc = "󰽙 Next Buffer" },
+			{ "<S-BS>", function() require("cybu").cycle("prev") end, desc = "󰽙 Previous Buffer" },
 		},
 		dependencies = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim" },
 		opts = {

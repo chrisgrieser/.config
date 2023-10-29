@@ -30,11 +30,6 @@ local function quickfixCounter()
 	return (" %s/%s (%s)"):format(index, totalQfItems, title)
 end
 
-local function extraBufferCount()
-	local totalBufs = #vim.fn.getbufinfo { buflisted = 1 }
-	if totalBufs < 3 then return "" end
-	return (" +%s"):format(totalBufs - 2)
-end
 --------------------------------------------------------------------------------
 
 local bottomSep = { left = "", right = "" } -- nerdfont-powerline icons have prefix 'ple-'
@@ -86,7 +81,6 @@ local lualineConfig = {
 		},
 		lualine_b = {
 			{ require("funcs.alt-alt").altFileStatusline },
-			{ extraBufferCount, padding = { right = 1, left = 0 } },
 		},
 		lualine_c = {
 			{ quickfixCounter },
