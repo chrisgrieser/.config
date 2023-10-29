@@ -113,7 +113,8 @@ local function deltaPreviewer()
 				"-c", "core.pager=delta",
 				("-c delta.%s=true"):format(vim.o.background),
 				"-c", "delta.file-style=omit", -- no need for filename, since only one file
-				"diff", filepath
+				"diff", filepath,
+				"--unified=1", -- save space, show only 1 line of context
 			}
 		end,
 	}
@@ -143,6 +144,7 @@ local function gitShowAndDeltaPreviewer()
 				"-c", "delta.hunk-header-decoration-style='blue ol'",
 				"-c", "delta.hunk-label=■",
 				"diff " .. hash .. "^!",
+				"--unified=1", -- save space, show only 1 line of context
 			}
 			return table.concat(cmd, " ")
 		end,
