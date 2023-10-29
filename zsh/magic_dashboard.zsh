@@ -13,7 +13,16 @@ function separator {
 }
 
 function gitlog {
-	git log --all --color --graph \
+	# HACK pseudo-option to suppress graph
+	if [[ "$1" == "--no-graph" ]] ; then
+		shift
+		graph=""
+	else
+	graph="--graph"
+	fi
+
+	# shellcheck disable=2086
+	git log --all --color $graph \
 		--format="%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)%an%C(reset)" "$@" |
 		sed -e 's/ seconds* ago)/s)/' \
 			-e 's/ minutes* ago)/m)/' \
