@@ -13,9 +13,10 @@ sudo -v # ask for permissions upfront
 dns_address_1="1.1.1.1"
 dns_address_2="1.0.0.1"
 
+# set DNS on every network
 networksetup -listallnetworkservices | # list all
-	tail -n +2 | # skip info text
-	tr -d "*" | # remove "*" markings disabled services
+	sed '1d' | # remove first line
+	tr -d "*" | # remove "*" marking disabled services
 	xargs -I {} networksetup -setdnsservers {} "$dns_address_1" "$dns_address_2"
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -28,7 +29,7 @@ defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Libr
 # other settings
 defaults write com.apple.finder FXEnableExtensionChangeWarning -int 0
 defaults write com.apple.finder WarnOnEmptyTrash -int 0
-defaults write com.apple.finder QuitMenuItem -bool true # make finder quittable
+# defaults write com.apple.finder QuitMenuItem -bool true # make finder quittable
 defaults write com.apple.finder CreateDesktop false     # disable desktop icons & make desktop unfocussable
 
 # Automatically open a new Finder window when a volume is mounted

@@ -74,9 +74,10 @@ M.wf_finder = wf.new("Finder")
 	})
 	:subscribe(wf.windowCreated, function(win)
 		local winOnMainScreen = win:screen():id() == hs.screen.mainScreen():id()
+		local finder = u.app("Finder")
 		if env.isProjector() and winOnMainScreen then
 			wu.moveResize(win, wu.maximized)
-		elseif win:isMaximizable() and win:isStandard() and u.app("Finder"):isFrontmost() then
+		elseif win:isMaximizable() and win:isStandard() and finder and finder:isFrontmost() then
 			u.runWithDelays(0.05, function() wu.autoTile(M.wf_finder) end)
 		end
 	end)
