@@ -1,9 +1,9 @@
 # Quick Open File
 function o() {
-	if ! command -v fzf &>/dev/null; then print "\033[1;33mfzf not installed.\033[0m" && return 1; fi
-	if ! command -v fd &>/dev/null; then print "\033[1;33mfd not installed.\033[0m" && return 1; fi
-	if ! command -v eza &>/dev/null; then print "\033[1;33meza not installed.\033[0m" && return 1; fi
-	if ! command -v bat &>/dev/null; then print "\033[1;33mbat not installed.\033[0m" && return 1; fi
+	if [[ ! -x "$(command -v fzf)" ]]; then print "\033[1;33mfzf not installed.\033[0m" && return 1; fi
+	if [[ ! -x "$(command -v fd)" ]]; then print "\033[1;33mfd not installed.\033[0m" && return 1; fi
+	if [[ ! -x "$(command -v eza)" ]]; then print "\033[1;33meza not installed.\033[0m" && return 1; fi
+	if [[ ! -x "$(command -v bat)" ]]; then print "\033[1;33mbat not installed.\033[0m" && return 1; fi
 
 	local input="$*"
 
@@ -16,11 +16,12 @@ function o() {
 	# --delimiter and --nth options ensure only file name and parent folder are displayed
 	local selected
 	selected=$(
+		# shellcheck disable=2016
 		fd --type=file --type=symlink --color=always | fzf \
-			-0 -1 --ansi --query="$input" --info=inline \
-			--header="^H --hidden --no-ignore   ^D directories" \
+			-0 -1 --ansi --query="$input" --info=inline --header-first \
+			--header="^H --hidden --no-ignore" \
 			--bind="ctrl-h:reload(fd --hidden --no-ignore --exclude='/.git/' --exclude='.DS_Store' --type=file --type=symlink --color=always)" \
-			--preview '[[ -f {} ]] && bat --color=always --style=snip --wrap=never --tabs=2 {} || eza --icons --color=always --group-directories-first {}'
+			--preview '[[ $(file --mime {}) =~ image ]] && du -h {} || bat --color=always --style=snip --wrap=never --tabs=2 {}'
 	)
 	if [[ -z "$selected" ]]; then # fzf aborted
 		return 0

@@ -7,8 +7,8 @@ function e {
 		print "\033[1;33mNo volume connected.\033[0m"
 		return 1
 	fi
+	if [[ ! -x "$(command -v fzf)" ]]; then print "\033[1;33mfzf not installed.\033[0m" && return 1; fi
 
-	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 	# if one volume, will auto-eject due to `-1`
 	selected=$(echo "$volumes" | fzf -0 -1 --no-info --height=10%)
 	[[ -z "$selected" ]] && return 0 # fzf aborted
