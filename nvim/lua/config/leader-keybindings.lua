@@ -152,17 +152,12 @@ keymap(
 
 -- MAKE
 keymap("n", "<leader>r", "<cmd>lmake<CR>", { desc = " Make" })
-keymap("n", "<leader>R", function()
-	local makefile = vim.loop.cwd() .. "/Makefile"
-	local recipes = {}
-	for line in io.lines(makefile) do
-		local recipe = line:match("^[%w_]+")
-		if recipe then table.insert(recipes, recipe) end
-	end
-	vim.ui.select(recipes, { prompt = " make" }, function(selection)
-		if selection then vim.cmd.lmake(selection) end
-	end)
-end, { desc = " Select Make" })
+keymap(
+	"n",
+	"<leader>R",
+	function() require("funcs.quality-of-life").selectMake() end,
+	{ desc = " Select Make" }
+)
 
 --------------------------------------------------------------------------------
 -- OPTION TOGGLING
