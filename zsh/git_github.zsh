@@ -157,7 +157,7 @@ function gli {
 				--header-first --header="↵ : Checkout   ^H: Copy [H]ash" \
 				--expect="ctrl-h" \
 				--with-nth=2.. --preview-window=55% \
-				--preview="git show {1} --stat=,25 --color=always --format='$preview_format' | sed -e '\$d' -e 's/^ //' ; git diff {1}^! | delta $style --hunk-header-decoration-style='blue ol' --hunk-label='■' --file-style=omit" \
+				--preview="git show {1} --stat=,25,25 --color=always --format='$preview_format' | sed -e '\$d' -e 's/^ //' ; git diff {1}^! | delta $style --hunk-header-decoration-style='blue ol' --hunk-label='■' --file-style=omit" \
 				--height="100%" #required for wezterm's pane:is_alt_screen_active()
 	)
 	[[ -z "$selected" ]] && return 0 # abort

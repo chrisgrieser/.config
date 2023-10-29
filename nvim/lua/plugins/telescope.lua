@@ -125,7 +125,7 @@ local function gitShowAndDeltaPreviewer()
 		get_command = function(entry, status)
 			local hash = entry.value
 			local previewWinWidth = vim.api.nvim_win_get_width(status.preview_win)
-			local statArgs = ("%s,%s,50"):format(previewWinWidth, math.floor(previewWinWidth / 2))
+			local statArgs = ("%s,%s,25"):format(previewWinWidth, math.floor(previewWinWidth / 2))
 			local previewFormat =
 				"%C(bold)%C(magenta)%s %n%C(reset)%C(cyan)%D%n %C(blue)%an %C(yellow)(%ch) %C(reset)"
 			local cmd = {
