@@ -23,14 +23,12 @@ function run() {
 		.split("\r")
 		.map((/** @type {string} */ file) => file.replace(/^[ MD?]* /i, ""));
 
-
-	// INFO using `fd` over `find` for speed and gitignoring
 	/** @type{AlfredItem[]} */
 	const fileArray = app
-		.doShellScript(
+		.doShellScript( // INFO using `fd` over `find` for speed and gitignoring
 			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; cd "${dotfileFolder}" ;
-			fd --type=file --hidden --absolute-path \\
-			-E "*.plist" -E "*.png" -E ".DS_Store"`,
+			fd --type=file --type=symlink --hidden --absolute-path \\
+			-E "*.plist" -E "*.png"`,
 		)
 		.split("\r")
 		.map((/** @type {string} */ absPath) => {
@@ -61,7 +59,7 @@ function run() {
 			else if (type.endsWith("-bkp")) type = "other";
 
 			// icon determination
-			let iconObj = { path: "./../../../_custom-filetype-icons/" };
+			let iconObj = { path: "./custom-filetype-icons/" };
 			switch (type) {
 				// use image preview
 				case "icns":
