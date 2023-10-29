@@ -43,7 +43,6 @@ alias repobkp='zsh "$HOME/.config/_utility-scripts/backup-my-repos.sh"'
 # GLOBAL ALIAS (to be used at the end, mostly)
 alias -g G='| rg'
 alias -g B='| bat'
-alias -g L='| less'
 alias -g C='| pbcopy ; echo "Copied."' # copy
 alias -g N='| wc -l | tr -d " "'       # count lines
 alias -g J='| command jless --no-line-numbers'
