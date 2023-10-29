@@ -22,7 +22,7 @@ keymap("n", "k", "gk")
 
 -- HJKL behaves like hjkl, but bigger distance
 keymap({ "o", "x" }, "H", "^") -- `zv` opens folds when navigating a horizontal lines
-keymap("n", "H", "0^") -- `0` ensures fully scrolling to the left on long unwrapped lines
+keymap("n", "H", "0^") -- `0` ensures fully scrolling to the left on long indented lines
 keymap({ "n", "x" }, "L", "$")
 keymap({ "n", "x" }, "J", "6j")
 keymap({ "n", "x" }, "K", "6k")
@@ -63,14 +63,6 @@ keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
 
 --------------------------------------------------------------------------------
 -- EDITING
-
--- Delete trailing stuff
--- (wrapping in normal avoids temporarily scrolling to the side)
-keymap("n", "X", "<cmd>normal!mz$x`z<CR>", { desc = "󱎘 Delete char at EoL" })
-
--- CharCase
--- stylua: ignore
-keymap("n", "~", function() require("funcs.quality-of-life").toggleCase() end, { desc = "better ~" })
 
 -- QUICKFIX
 keymap("n", "gq", cmd.cnext, { desc = " Next Quickfix" })

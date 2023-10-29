@@ -3,24 +3,8 @@ local u = require("config.utils")
 local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
 
 --------------------------------------------------------------------------------
--- CONFIG
+
 local commentHrChar = "─"
-local toggleSigns = {
-	["="] = "!",
-	["|"] = "&",
-	[","] = ";",
-	["'"] = '"',
-	["^"] = "$",
-	["/"] = "*",
-	["+"] = "-",
-	["("] = ")",
-	["["] = "]",
-	["{"] = "}",
-	["<"] = ">",
-}
-
---------------------------------------------------------------------------------
-
 function M.commentHr()
 	local wasOnBlank = vim.api.nvim_get_current_line() == ""
 	local indent = vim.fn.indent(".") ---@diagnostic disable-line: param-type-mismatch
@@ -94,20 +78,6 @@ function M.openAlfredPref()
 	-- in case the right workflow is already open, Alfred is not focused.
 	-- Therefore manually focusing in addition to that here as well.
 	vim.fn.system { "open", "-a", "Alfred Preferences" }
-end
-
-function M.toggleCase()
-	local col = vim.fn.col(".") -- fn.col correctly considers tab-indentation
-	local charUnderCursor = vim.api.nvim_get_current_line():sub(col, col)
-	local isLetter = charUnderCursor:lower() ~= charUnderCursor:upper() -- so it works with diacritics
-	if isLetter then
-		normal("~h")
-		return
-	end
-	for left, right in pairs(toggleSigns) do
-		if charUnderCursor == left then normal("r" .. right) end
-		if charUnderCursor == right then normal("r" .. left) end
-	end
 end
 
 function M.openNewScope()
