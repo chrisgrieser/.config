@@ -57,8 +57,8 @@ end
 --------------------------------------------------------------------------------
 -- SET WINDOW POSITION ON STARTUP
 
--- on start, move window to the side ("pseudomaximized")
 wt.on("gui-startup", function(cmd)
+	-- on start, move window to the side ("pseudomaximized")
 	local pos = { x = 710, y = 0, w = 3135 }
 	if isAtOffice then
 		pos = { x = 375, y = -100, w = 1675 }
@@ -88,8 +88,26 @@ local keybindings = {
 	{ key = "k", mods = "CMD", action = act.ClearScrollback("ScrollbackAndViewport") },
 	{ key = "Enter", mods = "CTRL", action = act.ActivateTabRelative(1) },
 	{ key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
-	{ key = "PageDown", mods = "", action = act.ScrollByPage(0.8) },
-	{ key = "PageUp", mods = "", action = act.ScrollByPage(-0.8) },
+	{
+		key = "PageUp",
+		action = wt.action_callback(function(win, pane)
+			if pane:is_alt_screen_active() then
+				win:perform_action(wt.action.SendKey { key = "PageUp" }, pane)
+			else
+				win:perform_action(wt.action.ScrollByPage(-0.8), pane)
+			end
+		end),
+	},
+	{
+		key = "PageDown",
+		action = wt.action_callback(function(win, pane)
+			if pane:is_alt_screen_active() then
+				win:perform_action(wt.action.SendKey { key = "PageDown" }, pane)
+			else
+				win:perform_action(wt.action.ScrollByPage(0.8), pane)
+			end
+		end),
+	},
 
 	-- INFO using the mapping from the terminal_keybindings.zsh
 	-- undo
@@ -204,7 +222,8 @@ wt.on("format-tab-title", function(tab)
 
 	local icon
 	if title == "zsh" or title == "wezterm" then
-		local pwdBasefolder = tab.active_pane.current_working_dir:gsub(".*/(.*)/$", "%1"):gsub("%%20", " ")
+		local pwdBasefolder =
+			tab.active_pane.current_working_dir:gsub(".*/(.*)/$", "%1"):gsub("%%20", " ")
 		title = pwdBasefolder
 		icon = "  "
 	elseif title:find("^docs") then

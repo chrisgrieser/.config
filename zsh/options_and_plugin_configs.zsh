@@ -22,7 +22,7 @@ export FZF_DEFAULT_OPTS='
 	--color=hl:206,header::reverse --pointer=⟐ --prompt="❱ " --scrollbar=▐ --ellipsis=…  --marker=" +"
 	--scroll-off=5 --cycle --layout=reverse --height=90% --preview-window=border-left
 	--bind=tab:down,shift-tab:up
-	--bind=shift-down:preview-page-down,shift-up:preview-page-up
+	--bind=page-down:preview-page-down,page-up:preview-page-up
 	--bind=ctrl-s:select+down,ctrl-a:select-all
 '
 
