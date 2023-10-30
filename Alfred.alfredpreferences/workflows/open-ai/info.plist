@@ -3,16 +3,16 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>de.chris-grieser.open-ai</string>
+	<string>de.chris-grieser.rephrase-selection</string>
 	<key>category</key>
-	<string>❇️</string>
+	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
 		<key>24B5F6A6-BB86-4EDD-A3A3-C773874D3AD9</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>2B12E1CB-5927-4D3E-98CB-C7F7631B2F6D</string>
+				<string>0E7679F8-3381-4E27-8521-2CFEE619994B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -23,16 +23,6 @@
 		</array>
 		<key>79FE12FA-F9C4-4661-9015-C127754CDF28</key>
 		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>FCA73E94-1790-474B-9F8C-7F97974D8E0E</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>90D1403B-32F0-4002-89D1-0EEEC218E724</string>
@@ -61,30 +51,13 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string></string>
+	<string>AI writing assistent that shows a diff of how to improve your writing.</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Rephrase Selection</string>
+	<string>Rephraser</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>'{query}', {variables}</string>
-				<key>cleardebuggertext</key>
-				<true/>
-				<key>processoutputs</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.debug</string>
-			<key>uid</key>
-			<string>FCA73E94-1790-474B-9F8C-7F97974D8E0E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -110,7 +83,7 @@
 			<key>type</key>
 			<string>alfred.workflow.output.largetype</string>
 			<key>uid</key>
-			<string>2B12E1CB-5927-4D3E-98CB-C7F7631B2F6D</string>
+			<string>0E7679F8-3381-4E27-8521-2CFEE619994B</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -178,9 +151,9 @@
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string></string>
+				<string>Thinking…</string>
 				<key>title</key>
-				<string>🤖Thinking…</string>
+				<string>🤖Rephraser</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -192,27 +165,30 @@
 	</array>
 	<key>readme</key>
 	<string># Requirements
-- `node` installed
-- OpenAI API Key exported in `.zshenv`
+- `ansifilter`
 
 ---
 
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>0E7679F8-3381-4E27-8521-2CFEE619994B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>note</key>
+			<string>errors only</string>
+			<key>xpos</key>
+			<real>545</real>
+			<key>ypos</key>
+			<real>105</real>
+		</dict>
 		<key>24B5F6A6-BB86-4EDD-A3A3-C773874D3AD9</key>
 		<dict>
 			<key>note</key>
 			<string>call openAI (requires node)</string>
 			<key>xpos</key>
 			<real>375</real>
-			<key>ypos</key>
-			<real>105</real>
-		</dict>
-		<key>2B12E1CB-5927-4D3E-98CB-C7F7631B2F6D</key>
-		<dict>
-			<key>xpos</key>
-			<real>560</real>
 			<key>ypos</key>
 			<real>105</real>
 		</dict>
@@ -231,13 +207,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>225</real>
 			<key>ypos</key>
 			<real>105</real>
-		</dict>
-		<key>FCA73E94-1790-474B-9F8C-7F97974D8E0E</key>
-		<dict>
-			<key>xpos</key>
-			<real>230</real>
-			<key>ypos</key>
-			<real>25</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -309,28 +278,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>gpt-3.5-turbo</string>
-				<key>pairs</key>
-				<array>
-					<array>
-						<string>gpt-3.5-turbo</string>
-						<string>gpt-3.5-turbo</string>
-					</array>
-				</array>
-			</dict>
-			<key>description</key>
-			<string>(options in the future)</string>
-			<key>label</key>
-			<string>OpenAI Model</string>
-			<key>type</key>
-			<string>popupbutton</string>
-			<key>variable</key>
-			<string>model</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
 				<string>The following text is a paragraph for a scientific paper in sociology. Please make suggestions how to improve its readability and language. Do not change anything about the content, and refrain from doing any changes when the writing is already sufficiently clear and concise.</string>
 				<key>required</key>
 				<true/>
@@ -347,6 +294,36 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<string>textarea</string>
 			<key>variable</key>
 			<string>static_prompt</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>20</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>small</string>
+						<string>12</string>
+					</array>
+					<array>
+						<string>medium</string>
+						<string>20</string>
+					</array>
+					<array>
+						<string>large</string>
+						<string>30</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Font Size</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>font_size</string>
 		</dict>
 	</array>
 	<key>version</key>
