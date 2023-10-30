@@ -65,6 +65,8 @@ function inspect {
 
 	# GIT STATUS
 	if git rev-parse --is-inside-work-tree &>/dev/null && [[ -n "$(git status --short --porcelain)" ]]; then
+		# separate, so branch info is not reflown
+		git -c color.status="always" status --short --branch | head -n1
 		# spread across multiple lines via rs
 		git -c color.status="always" status --short | rs -e -w"$COLUMNS"
 		separator
