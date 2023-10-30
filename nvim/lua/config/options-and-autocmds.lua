@@ -68,7 +68,7 @@ opt.matchtime = 1 -- deci-seconds
 opt.clipboard = "unnamedplus"
 
 -- Spelling
-opt.spell = false -- just using spellfile to quickly add words for ltex
+opt.spell = false
 opt.spellfile = { u.linterConfigFolder .. "/spellfile-vim-ltex.add" } -- has to be `.add`
 opt.spelllang = "en_us" -- still relevant for `z=`
 

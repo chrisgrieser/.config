@@ -124,7 +124,7 @@ local lualineConfig = {
 		ignore_focus = {
 			"DressingInput", "DressingSelect", "lspinfo", "aerial",
 			"ccc-ui", "TelescopePrompt", "checkhealth",
-			"noice", "lazy", "mason", "qf",
+			"noice", "lazy", "mason", "qf", "toggleterm",
 		},
 	},
 }

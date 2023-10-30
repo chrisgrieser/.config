@@ -6,23 +6,29 @@ return {
 			direction = "horizontal",
 			autochdir = true, -- when nvim changes pwd, will also change its pwd
 		},
-		keys = {
-			{ "<leader>t", vim.cmd.ToggleTerm, desc = "  ToggleTerm" },
-			{ "<leader>ii", vim.cmd.ToggleTermSendCurrentLine, desc = "  ToggleTerm: Send Line" },
-			{ "<leader>ii", vim.cmd.ToggleTermSendVisualSelection, mode = "x", desc = "  ToggleTerm: Send Sel" },
-		},
-		cmd = { "ToggleTermSendCurrentLine", "ToggleTermSendVisualSelection" },
 		init = function()
 			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "sh",
-				callback = function()
-					-- stylua: ignore
-					vim.keymap.set("n", "<leader>ii", vim.cmd.ToggleTermSendCurrentLine, { desc = " REPL: Send Line", buffer = true })
-					-- stylua: ignore
-					vim.keymap.set("x", "<leader>ii", vim.cmd.ToggleTermSendVisualSelection, { desc = " REPL: Send Selection", buffer = true })
-				end,
+				pattern = "toggleterm",
+				callback = function() vim.opt_local.scrolloff = 0 end,
 			})
 		end,
+		keys = {
+			{ "<leader>t", vim.cmd.ToggleTerm, desc = "  ToggleTerm" },
+			{ "q", vim.cmd.close, ft = "toggleterm", desc = "  Quit", nowait = true },
+			{
+				"<leader>ii",
+				vim.cmd.ToggleTermSendCurrentLine,
+				ft = "sh",
+				desc = "  ToggleTerm: Send Line",
+			},
+			{
+				"<leader>ii",
+				vim.cmd.ToggleTermSendVisualSelection,
+				ft = "sh",
+				mode = "x",
+				desc = "  ToggleTerm: Send Sel",
+			},
+		},
 	},
 	{ -- REPL
 		"Vigemus/iron.nvim",

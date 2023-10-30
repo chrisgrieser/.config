@@ -91,18 +91,22 @@ function inspect {
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/magic-enter
 
 function magic_enter {
-	# Only run MAGIC_ENTER commands when in PS1 and command line is empty
+	# GUARD only in PS1 and when BUFFER is empty
 	# http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html#User_002dDefined-Widgets
-	if [[ -z "$BUFFER" && "$CONTEXT" == start ]]; then
-		echo
-		inspect
-	fi
+	[[ -z "$BUFFER" && "$CONTEXT" == "start" ]] || return
+
+	# GUARD only when in terminal with sufficient height
+	local disabled_below_term_height=15
+	[[ "$LINES" -lt disabled_below_term_height ]] || return
+
+	echo ; inspect
 }
 
 # WRAPPER FOR THE ACCEPT-LINE ZLE WIDGET (RUN WHEN PRESSING ENTER)
 # If the wrapper already exists don't redefine it
 type _magic_enter_accept_line &>/dev/null && return
 
+# WARN running the `shfmt` on this section will break it
 # shellcheck disable=2154
 case "${widgets[accept-line]}" in
 		# Override the current accept-line widget, calling the old one
