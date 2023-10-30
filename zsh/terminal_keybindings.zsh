@@ -42,13 +42,14 @@ zle -N grappling_hook
 function zvm_after_init {
 	bindkey -M viins '^P' copy_location
 	bindkey -M viins '^B' copy_buffer
-	bindkey -M viins "^O" grappling_hook # bound to cmd+enter via wezterm
+	bindkey -M viins "^O" grappling_hook  # bound to cmd+enter via wezterm
 	bindkey -M viins "…" insert-last-word # …=alt+.
 	bindkey -M viins "^Z" undo            # cmd+z via wezterm
+	bindkey -M viins "^U" kill-whole-line # whole line, not part of the line
 
 	# DOCS https://zsh.sourceforge.io/Doc/Release/Zsh-Line-Editor.html#Miscellaneous
 	# When confirming a command, search history for it and fill buffer with
-	# following command. e.g., using `<up><up><up><C-l><C-l><C-l>` will rerun 
+	# following command. e.g., using `<up><up><up><C-l><C-l><C-l>` will rerun
 	# three commands. Similar Alternative: accept-line-and-down-history
 	bindkey '^L' accept-and-infer-next-history
 
@@ -60,10 +61,10 @@ function zvm_after_init {
 #───────────────────────────────────────────────────────────────────────────────
 
 # when typing bangs or backticks, escape them
-function autoEscapeBackTick { LBUFFER+='\`' ; }
+function autoEscapeBackTick { LBUFFER+='\`'; }
 zle -N autoEscapeBackTick
 bindkey -M viins '`' autoEscapeBackTick
 
-function autoEscapeBang { LBUFFER+='\!' ; }
+function autoEscapeBang { LBUFFER+='\!'; }
 zle -N autoEscapeBang
 bindkey -M viins '!' autoEscapeBang
