@@ -3,20 +3,13 @@
 [user]
 	name = Chris Grieser
 	email = 73286100+chrisgrieser@users.noreply.github.com
-[color]
-	diff = auto
-	status = auto
-	branch = auto
-	interactive = auto
-	pager = true
-	ui = always
 [diff]
 	context = 2 # default 3, reduced to save space
 [core]
 	editor = nvim
 	autocrlf = input
 
-	; 1. Motiviation: version control & sync hooks across devices
+	; 1. Motiviation: version control & sync of hooks across devices
 	; 2. by setting them in the global git config, there is no more need to run
 	; `git config --global core.hooksPath .git-hooks` after every clone
 	; 3. Caveat: this trick only works on repos solely managed by the user of
@@ -26,11 +19,10 @@
 	rebase = true
 [status]
 	showUntrackedFiles = all
-
-# https://git-scm.com/docs/git-config#Documentation/git-config.txt-advice
-[advice]
-	statusHints = true
-	detachedHead = true
+	showStash = true
+	relativePaths = false # show path relative to git root, not to cwd
+[stash]
+	showIncludeUntracked = true
 
 #───────────────────────────────────────────────────────────────────────────────
 # SETUP FOR DELTA
@@ -45,11 +37,8 @@
 [diff]
 	colorMoved = default
 [delta]
-	# omit line number
-	hunk-header-style="syntax"
-	# save space
-	hunk-label=
-	# use n and N to move between diff sections
-	navigate = true
+	hunk-header-style="syntax" # omit line number
+	hunk-label= # save space
+	navigate = true # use n and N to move between diff sections
 
 ;────────────────────────────────────────────────────────────────────────────
