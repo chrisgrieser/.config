@@ -1,8 +1,28 @@
 return {
 	{ -- better embedded terminal
 		"akinsho/toggleterm.nvim",
-		cmd = { "ToggleTerm", "ToggleTermSendVisualSelection" },
-		config = function() require("toggleterm").setup() end,
+		opts = {
+			size = 10,
+			direction = "horizontal",
+			autochdir = true, -- when nvim changes pwd, will also change its pwd
+		},
+		keys = {
+			{ "<leader>t", vim.cmd.ToggleTerm, desc = "  ToggleTerm" },
+			{ "<leader>ii", vim.cmd.ToggleTermSendCurrentLine, desc = "  ToggleTerm: Send Line" },
+			{ "<leader>ii", vim.cmd.ToggleTermSendVisualSelection, mode = "x", desc = "  ToggleTerm: Send Sel" },
+		},
+		cmd = { "ToggleTermSendCurrentLine", "ToggleTermSendVisualSelection" },
+		init = function()
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "sh",
+				callback = function()
+					-- stylua: ignore
+					vim.keymap.set("n", "<leader>ii", vim.cmd.ToggleTermSendCurrentLine, { desc = " REPL: Send Line", buffer = true })
+					-- stylua: ignore
+					vim.keymap.set("x", "<leader>ii", vim.cmd.ToggleTermSendVisualSelection, { desc = " REPL: Send Selection", buffer = true })
+				end,
+			})
+		end,
 	},
 	{ -- REPL
 		"Vigemus/iron.nvim",
@@ -22,7 +42,8 @@ return {
 			config = {
 				repl_open_cmd = "horizontal bot 10 split",
 				repl_definition = {
-					sh = { command = { "zsh" } },
+					-- not used, since using toggleterm for that
+					-- sh = { command = { "zsh" } },
 					typescript = { command = { "node" } },
 					javascript = { command = { "osascript", "-i", "-l", "JavaScript" } },
 					applescript = { command = { "osascript", "-i", "-l", "AppleScript" } },
