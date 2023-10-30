@@ -100,6 +100,7 @@ function magic_enter {
 	[[ $LINES -gt $disabled_below_term_height ]] || return
 
 	echo ; inspect
+	\033[1;34m
 }
 
 # WRAPPER FOR THE ACCEPT-LINE ZLE WIDGET (RUN WHEN PRESSING ENTER)

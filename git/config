@@ -3,8 +3,6 @@
 [user]
 	name = Chris Grieser
 	email = 73286100+chrisgrieser@users.noreply.github.com
-[diff]
-	context = 2 # default 3, reduced to save space
 [core]
 	editor = nvim
 	autocrlf = input
