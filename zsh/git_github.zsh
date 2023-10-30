@@ -4,10 +4,14 @@ alias co="git checkout"
 alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to last directory
 alias gs='git status'
 alias ga="git add"
+alias gm="git add -A && git commit --amend --no-edit" # amend no-edit
+alias gM="git commit --amend"                         # amend message only
+
+alias grh='git reset --hard'
 alias push="git push"
 alias pull="git pull"
+alias unshallow="git fetch --unshallow"          # https://stackoverflow.com/a/17937889
 alias g.='cd "$(git rev-parse --show-toplevel)"' # goto git root
-alias grh='git reset --hard'
 
 alias gi='gh issue list --state=open'
 alias gI='gh issue list --state=closed'
@@ -44,20 +48,6 @@ function deletefork {
 	fi
 }
 
-# amend no-edit
-function gm {
-	git add -A && git commit --amend --no-edit
-	separator
-	gitlog -n 4
-}
-
-# amend message only
-function gM {
-	git commit --amend
-	separator
-	gitlog -n 4
-}
-
 # Github Url: open & copy url
 function gu {
 	url=$(git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 |
@@ -78,29 +68,26 @@ function rebase {
 	fi
 }
 
-# https://stackoverflow.com/a/17937889
-function unshallow {
-	git fetch --unshallow
-	git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
-	git fetch origin
-}
-
 #───────────────────────────────────────────────────────────────────────────────
 # GIT DIFF & DELTA
 
 # use delta for small diffs and turn into html for bigger files
 function gd {
-	if [[ ! -x "$(command -v delta)" ]]; then print "\033[1;33mdelta not installed (\`brew install git-delta\`)\033[0m" && return 1; fi
+	# CONFIG
+	local threshold_lines=120
 
-	local threshold_lines=120 # CONFIG
+	# GUARD
+	if [[ ! -x "$(command -v delta)" ]]; then print "\033[1;33mdelta not installed (\`brew install git-delta\`)\033[0m" && return 1; fi
+	if [[ ! -x "$(command -v ansifilter)" ]]; then print "\033[1;33mansifilter not installed.\033[0m" && return 1; fi
 
 	if [[ $(git diff | wc -l) -lt $threshold_lines ]]; then
-		git -c delta."$style"=true diff
+		git -c delta."$style"=true diff "$@"
 	else
+		# TODO work out how to output a dark mode for this
 		# https://github.com/dandavison/delta/discussions/1338
-		if [[ ! -x "$(command -v ansifilter)" ]]; then print "\033[1;33mansifilter not installed.\033[0m" && return 1; fi
-		git diff | delta --light --file-modified-label="FILE:" --hunk-label="" \
-		--file-decoration-style="blue" --hunk-header-decoration-style="blue" | ansifilter --html >"/tmp/delta.html"
+		git diff "$@" | delta --light --file-modified-label="FILE:" --hunk-label="" \
+			--file-decoration-style="blue" --hunk-header-decoration-style="blue" |
+			ansifilter --html >"/tmp/delta.html"
 		open "/tmp/delta.html"
 	fi
 }
