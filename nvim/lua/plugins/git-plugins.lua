@@ -1,3 +1,6 @@
+local u = require("config.utils")
+--------------------------------------------------------------------------------
+
 return {
 	{ -- lightweight git client
 		"chrisgrieser/nvim-tinygit",
@@ -29,6 +32,16 @@ return {
 	{ -- git sign gutter & hunk actions
 		"lewis6991/gitsigns.nvim",
 		event = "VeryLazy",
+		init = function()
+			u.addToLuaLine("sections", "lualine_y", {
+				function()
+					local hunks = #require("gitsigns").get_hunks()
+					if hunks == 0 then return "" end
+					return tostring(hunks) .. "⎰"
+				end,
+				color = function() return { fg = u.getHighlightValue("GitSignsChangeNr", "fg") } end,
+			})
+		end,
 		keys = {
 			{
 				"ga",
@@ -37,9 +50,10 @@ return {
 				desc = "󰊢 Stage Selected Hunks",
 				silent = true,
 			},
-			{ "<leader>gy", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "󰊢 Unstage Last Hunk" },
 			{ "<leader>gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Add Buffer" },
 			{ "<leader>gv", "<cmd>Gitsigns preview_hunk_inline<CR>", desc = "󰊢 Preview Hunk" },
+			{ "<leader>us", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "󰊢 Unstage Last Stage" },
+			{ "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", desc = "󰊢 Reset Hunk" },
 			{ "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", desc = "󰊢 Reset Buffer" },
 			-- stylua: ignore start
 			{ "<leader>g?", function() require("gitsigns").blame_line { full = true } end, desc = "󰊢 Blame Line"},
@@ -51,6 +65,9 @@ return {
 		opts = {
 			max_file_length = 12000, -- lines
 			preview_config = { border = require("config.utils").borderStyle },
+			-- deletions greater than one line will show a count to assess the size
+			-- digits are actually nerdfont numbers to achieve smaller size
+			count_chars = { "", "󰬻", "󰬼", "󰬽", "󰬾", "󰬿", "󰭀", "󰭁", "󰭂", ["+"] = "󰿮" },
 			signs = {
 				delete = { show_count = true },
 				topdelete = { show_count = true },
