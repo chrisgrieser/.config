@@ -208,7 +208,6 @@ function gc {
 		return 0
 	fi
 
-	sleep 0.2
 	printf "\033[1;32mPull: \033[0m" && git pull &&
 		printf "\033[1;32mPush: \033[0m" && git push
 }
