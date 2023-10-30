@@ -1,4 +1,5 @@
 local u = require("config.utils")
+local cmd = vim.cmd
 --------------------------------------------------------------------------------
 
 return {
@@ -37,18 +38,32 @@ return {
 				function()
 					local hunks = #require("gitsigns").get_hunks()
 					if hunks == 0 then return "" end
-					return tostring(hunks) .. "⎰"
+					return "⊔" .. tostring(hunks)
 				end,
-				color = function() return { fg = u.getHighlightValue("GitSignsChangeNr", "fg") } end,
+			})
+			vim.api.nvim_create_autocmd({"BufReadPost", "BufNewFile"}, {
+				callback = function()
+					vim.b.gitsigns_staged_hunks = #require("gitsigns").get_hunks()
+				end,
 			})
 		end,
 		keys = {
 			{
 				"ga",
+				function ()
+					cmd.Gitsigns("stage_hunk")
+					local fsfs
+					vim.b.gitsigns_staged_hunks = vim.b.gitsigns_staged_hunks + 1
+				end,
+				"<cmd>Gitsigns stage_hunk<CR>",
+				desc = "󰊢 Stage Hunk",
+			},
+			{
+				"ga",
 				":Gitsigns stage_hunk<CR>",
-				mode = { "n", "x" },
-				desc = "󰊢 Stage Selected Hunks",
+				mode = "x",
 				silent = true,
+				desc = "󰊢 Stage Selection",
 			},
 			{ "<leader>gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Add Buffer" },
 			{ "<leader>gv", "<cmd>Gitsigns preview_hunk_inline<CR>", desc = "󰊢 Preview Hunk" },
