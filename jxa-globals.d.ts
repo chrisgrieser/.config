@@ -16,6 +16,7 @@ declare class MacAppObj {
 	launch(): void;
 	properties(): object; // inspect all properties
 	theClipboard(): string;
+	beep(): void;
 
 	menuBars: {
 		menuBarItems: {

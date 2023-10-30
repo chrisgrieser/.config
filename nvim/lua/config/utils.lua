@@ -101,9 +101,13 @@ end
 ---@param rhs string|function
 ---@param opts? { unique: boolean, desc: string, buffer: boolean, nowait: boolean, remap: boolean }
 function M.uniqueKeymap(modes, lhs, rhs, opts)
-	if not opts then opts = {} end
-	if opts.unique == nil then opts.unique = true end
+	-- if not opts then opts = {} end
+	-- if opts.unique == nil then opts.unique = true end
 	vim.keymap.set(modes, lhs, rhs, opts)
+	local exists = (vim.fn.maparg(lhs, modes[1]) ~= "")
+	if exists then
+		M.notify("Keymap already exists", lhs, "warn")
+	end
 end
 
 --------------------------------------------------------------------------------

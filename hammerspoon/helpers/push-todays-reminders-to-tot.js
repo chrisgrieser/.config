@@ -42,7 +42,7 @@ function run() {
 
 	const empty = tot.openLocation(`tot://${dotToUse}/content`).match(/^\s*$/);
 	if (empty) {
-		accText.trim(); 
+		accText = accText.trim(); 
 		tot.openLocation(`tots://${dotToUse}/replace?text=${encodeURIComponent(accText)}`);
 	} else {
 		tot.openLocation(`tots://${dotToUse}/append?text=${encodeURIComponent(accText)}`);
