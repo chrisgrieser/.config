@@ -15,8 +15,6 @@
 	; 3. Caveat: this trick only works on repos solely managed by the user of
 	; this dotfile-repo, it does not work to enforce hooks on other people's clones
 	hooksPath = .git-hooks
-[pull]
-	rebase = true
 [status]
 	showUntrackedFiles = all
 	showStash = true
