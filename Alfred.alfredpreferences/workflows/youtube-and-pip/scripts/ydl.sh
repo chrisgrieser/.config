@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 # shellcheck disable=2154
 
-CURRENT_TAB=$(osascript -l JavaScript "./scripts/get-url-from-browser.js" &)
+CURRENT_TAB=$(osascript -e "tell application \"$BROWSER_APP\" to return URL of active tab of front window")
 
 if [[ -z "$CURRENT_TAB" ]]; then
 	echo -n "❌ Tab could not be retrieved."

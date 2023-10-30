@@ -49,7 +49,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Torrents</string>
+	<string>Torrents Search</string>
 	<key>objects</key>
 	<array>
 		<dict>

@@ -7,9 +7,7 @@ if ! command -v fileicon &>/dev/null; then print "\033[1;33mfileicon not install
 
 # cannot use JXA to get browser URL, since sometimes a PWA is frontmost
 source "$HOME/.zshenv" # get BROWSER_APP env var
-URL=$(osascript -e "tell application \"$BROWSER_APP\"
-	return URL of active tab of front window
-end tell")
+URL=$(osascript -e "tell application \"$BROWSER_APP\" to return URL of active tab of front window")
 
 # GUARD
 if [[ -z "$URL" ]]; then
