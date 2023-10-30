@@ -49,7 +49,7 @@ function inspect {
 
 	# check if pwd still exists
 	if [[ ! -d "$PWD" ]]; then
-		printf '\033[1;33m"%s" has been moved or deleted.\033[0m' "$(basename "$PWD")"
+		printf '\033[1;33m"%s" has been moved or deleted.\033[0m\n' "$(basename "$PWD")"
 		command cd "$OLDPWD" || return 1
 	fi
 
@@ -100,7 +100,6 @@ function magic_enter {
 	[[ $LINES -gt $disabled_below_term_height ]] || return
 
 	echo ; inspect
-	\033[1;34m
 }
 
 # WRAPPER FOR THE ACCEPT-LINE ZLE WIDGET (RUN WHEN PRESSING ENTER)

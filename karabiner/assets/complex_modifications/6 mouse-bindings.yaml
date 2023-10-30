@@ -71,9 +71,9 @@ rules:
       - type: basic
         from: { pointing_button: button4 }
         to:
-          - key_code: non_us_pound # the "#" key
+          - { key_code: left_arrow, modifiers: [command, option] }
         conditions:
-        - { type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }
+          - { type: frontmost_application_if, bundle_identifiers: [^md\.obsidian$] }
       # Mimestream: Delete
       - type: basic
         from: { pointing_button: button4 }
