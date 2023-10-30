@@ -5,7 +5,7 @@
 	<key>scope</key>
 	<array>
 		<string>~/Applications</string>
-		<string>~/Downloaded</string>
+		<string>~/Downloads</string>
 		<string>~/Library/Mobile Documents/com~apple~CloudDocs</string>
 	</array>
 </dict>

@@ -180,15 +180,8 @@
     },
     "a (A)\nselect all (only files)",
     "s (S)\nfollow (create) symlink",
+    "d (D)\ntrash file (open trash)",
     {
-      "f": 2
-    },
-    "d\ntrash file",
-    {
-      "f": 1,
-      "fa": [
-        2
-      ],
       "n": true
     },
     "f (F)\nfind mode (flatten dirs)",

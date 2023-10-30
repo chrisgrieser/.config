@@ -21,8 +21,8 @@ ZSH_HIGHLIGHT_REGEXP+=('(feat|fix|test|perf|build|ci|revert|refactor|chore|docs|
 ZSH_HIGHLIGHT_REGEXP+=('(#[0-9]+)' 'fg=red,bold')
 
 # commit messages longer than 50 chars: yellow, longer than 72 chars: red
-ZSH_HIGHLIGHT_REGEXP+=('^(acp?|gc -m|git commit -m) ".{72,}"' 'fg=white,bold,bg=red')
-ZSH_HIGHLIGHT_REGEXP+=('^(acp?|gc -m|git commit -m) ".{51,71}"' 'fg=black,bg=yellow')
+ZSH_HIGHLIGHT_REGEXP+=('^(gc|git commit -m) ".{72,}"' 'fg=white,bold,bg=red')
+ZSH_HIGHLIGHT_REGEXP+=('^(gc|git commit -m) ".{51,71}"' 'fg=black,bg=yellow')
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -42,22 +42,6 @@ function deletefork {
 		echo "Copied command to batch deleted forks."
 		echo "$cmd" | pbcopy
 	fi
-}
-
-# select a recent commit to fixup (append the staged changes to)
-function fixup {
-	local cutoff=15 # CONFIG
-
-	local target
-	target=$(gitlog -n "$cutoff" | fzf --ansi --no-sort --no-info | cut -d" " -f1)
-	[[ -z "$target" ]] && return 0
-	git commit --fixup="$target"
-
-	# HACK to make non-interactive rebase work with --autosquash: https://www.reddit.com/r/git/comments/uzh2no/what_is_the_utility_of_noninteractive_rebase/
-	git -c sequence.editor=: rebase --interactive --autosquash "$target"~1
-
-	separator
-	gitlog "$target"~2..
 }
 
 # amend no-edit
@@ -194,14 +178,14 @@ function gb {
 }
 
 #───────────────────────────────────────────────────────────────────────────────
-# GIT ADD, COMMIT, (PULL) & PUSH
+# GIT ADD, COMMIT, PULL-PUSH
 
 # smart commit:
 # - if there are staged changes, commit them
 # - if there are no changes, stage all changes (`git add -A`) and then commit
 # - if commit message is empty use `chore` as default message
 # - if commit msg contains issue number, open the issue in the browser
-function ac {
+function gc {
 	local commit_msg="$1"
 	[[ -z "$commit_msg" ]] && commit_msg=chore || commit_msg=$1 # fill in empty commit msg,
 	git diff --staged --quiet && git add -A                     # if no staged changes, stage all
@@ -217,12 +201,8 @@ function ac {
 			sed -e 's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//')
 		open "$url/issues/$issue_number"
 	fi
-}
 
-# same as ac, just followed by git pull & git push
-function acp {
-	ac "$@" || return 1
-
+	# pull-push
 	if [[ -n "$(git status --porcelain)" ]]; then
 		printf "\033[1;34m(Not pushing since repo still dirty.)\033[0m"
 		return 0

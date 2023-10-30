@@ -3,7 +3,6 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 # GUARD
-
 # read download folder from transmission settings
 download_folder="$(defaults read org.m0k.transmission DownloadFolder)"
 if [[ -d "$download_folder" ]]; then
