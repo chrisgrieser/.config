@@ -329,11 +329,7 @@ nnoremap ZZ :closeWindow
 
 " Splits
 exmap splitVertical obcommand workspace:split-vertical
-exmap splitHorizontal obcommand workspace:split-horizontal
-exmap only obcommand workspace:close-others
 nnoremap <C-w>v :splitVertical
-nnoremap <C-w>h :splitHorizontal
-nnoremap <C-w>o :only
 
 " Tabs
 exmap nextTab obcommand workspace:next-tab
