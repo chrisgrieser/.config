@@ -47,3 +47,5 @@ msg
 callouts
 cmd
 config
+Lua
+lua
