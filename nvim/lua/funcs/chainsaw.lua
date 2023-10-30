@@ -95,7 +95,7 @@ local config = {
 local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
 ---in normal mode, returns word under cursor, in visual mode, returns selection
----@return string fsfsf
+---@return string
 ---@nodiscard
 local function getVar()
 	local varname
@@ -116,11 +116,25 @@ local function getVar()
 	return vim.treesitter.get_node_text(node, 0)
 end
 
+---append string below current line
 ---@param text string
 local function appendLine(text)
 	local ln = vim.api.nvim_win_get_cursor(0)[1]
-	local indent = vim.api.nvim_get_current_line():match("^%s*")
-	vim.api.nvim_buf_set_lines(0, ln, ln, false, { indent .. text })
+
+	local indentBasedFts = { "python", "yaml", "elm" }
+	local isIndentBased = vim.tbl_contains(indentBasedFts,vim.bo.ft)
+
+	if isIndentBased then
+		-- copy indent
+		local indent = vim.api.nvim_get_current_line():match("^%s*")
+		text = indent .. text
+		vim.api.nvim_buf_set_lines(0, ln, ln, false, { text })
+		normal("j")
+	else
+		-- auto-indent via `==`
+		vim.api.nvim_buf_set_lines(0, ln, ln, false, { text })
+		normal("j==")
+	end
 end
 
 ---@param logType string
