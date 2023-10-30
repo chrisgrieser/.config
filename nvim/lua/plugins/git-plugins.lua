@@ -39,8 +39,7 @@ return {
 			},
 			{ "<leader>gy", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "󰊢 Unstage Last Hunk" },
 			{ "<leader>gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Add Buffer" },
-			{ "<leader>gv", "<cmd>Gitsigns preview_hunk<CR>", desc = "󰊢 Preview Hunk Diff" },
-			{ "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", desc = "󰊢 Reset Hunk" },
+			{ "<leader>gv", "<cmd>Gitsigns preview_hunk_inline<CR>", desc = "󰊢 Preview Hunk" },
 			{ "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", desc = "󰊢 Reset Buffer" },
 			-- stylua: ignore start
 			{ "<leader>g?", function() require("gitsigns").blame_line { full = true } end, desc = "󰊢 Blame Line"},
@@ -52,6 +51,11 @@ return {
 		opts = {
 			max_file_length = 12000, -- lines
 			preview_config = { border = require("config.utils").borderStyle },
+			signs = {
+				delete = { show_count = true },
+				topdelete = { show_count = true },
+				changedelete = { show_count = true },
+			},
 		},
 	},
 }
