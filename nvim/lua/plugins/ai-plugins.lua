@@ -3,6 +3,7 @@ local u = require("config.utils")
 
 return {
 	{ -- AI Ghost-Text Suggestions
+	-- alternative: https://github.com/huggingface/llm-ls
 		"Exafunction/codeium.vim",
 		event = "InsertEnter",
 		build = function()

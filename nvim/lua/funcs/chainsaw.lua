@@ -1,6 +1,12 @@
 local M = {}
 --------------------------------------------------------------------------------
 
+---@class pluginConfig
+---@field marker string
+---@field beepEmojis string[]
+---@field logStatements table<string, table<string, string|string[]>>
+
+---@type pluginConfig
 local config = {
 	marker = "🪚", -- should be a short, unique string (.removeLogs() will remove any line with it)
 	beepEmojis = { "🤖", "👽", "👾", "💣" }, -- to differentiate between beepLog statements
@@ -86,11 +92,10 @@ local config = {
 }
 
 --------------------------------------------------------------------------------
-
 local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
 ---in normal mode, returns word under cursor, in visual mode, returns selection
----@return string
+---@return string fsfsf
 ---@nodiscard
 local function getVar()
 	local varname
