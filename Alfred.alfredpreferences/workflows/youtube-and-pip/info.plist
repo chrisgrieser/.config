@@ -8,49 +8,11 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
-		<key>001DF3D5-7B49-4C43-9600-8626CFD5AD5A</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>FBD8FF8E-F489-414E-BAEF-C99DE8B66259</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>548C7E00-D279-4BFE-B4CB-4F94C970637F</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>77FF34ED-C1A2-4866-B205-06B792B3975B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>73E6734C-7032-4308-92BA-2E7CE5BABD4D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C7716DBE-2C15-46FC-A1E7-1A722EA60267</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>F838E321-0720-4BB5-A9C8-B9009B33E1D2</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>0F4560B0-1F7C-44C9-9E9C-A29866B3F8B5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -85,58 +47,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>8FE33DF8-EBEB-4631-AA48-A5A9C24B1AC6</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>73E6734C-7032-4308-92BA-2E7CE5BABD4D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>BBE06DAC-6097-47CD-906B-BDDE0C5B80AE</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>8FE33DF8-EBEB-4631-AA48-A5A9C24B1AC6</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>BEE928AE-90E4-4DBE-A85A-A975A8BD1ED2</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>0F4560B0-1F7C-44C9-9E9C-A29866B3F8B5</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>C5AA0008-F815-40D0-8944-7798B289E3DD</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>BEE928AE-90E4-4DBE-A85A-A975A8BD1ED2</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>C7716DBE-2C15-46FC-A1E7-1A722EA60267</key>
 		<array/>
 		<key>F30AA24D-259D-4D2C-80C9-06B5EA576F7C</key>
@@ -152,28 +62,15 @@
 				<false/>
 			</dict>
 		</array>
-		<key>FBD8FF8E-F489-414E-BAEF-C99DE8B66259</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>0F4560B0-1F7C-44C9-9E9C-A29866B3F8B5</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string></string>
+	<string>requires $BROWSER_APP environment variable in `.zshenv`</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>YouTube &amp; PiP</string>
+	<string>YouTube Download</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -275,7 +172,7 @@
 				<key>escaping</key>
 				<integer>68</integer>
 				<key>script</key>
-				<string>tell application "Brave Browser" to return URL of active tab of front window</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -295,211 +192,12 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<true/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>title=`curl -s "{query}" | grep -o "&lt;title&gt;[^&lt;]*" | cut -d'&gt;' -f2- | sed -E 's/\:/-/g' `
-
-echo -n "$title"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/pip-in-iina.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>8FE33DF8-EBEB-4631-AA48-A5A9C24B1AC6</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>pic browser</string>
-				<key>subtext</key>
-				<string>Browser Tab</string>
-				<key>text</key>
-				<string>Picture-in-Picture</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>BBE06DAC-6097-47CD-906B-BDDE0C5B80AE</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>4</integer>
-						<key>matchstring</key>
-						<string>.</string>
-						<key>outputlabel</key>
-						<string>error</string>
-						<key>uid</key>
-						<string>F838E321-0720-4BB5-A9C8-B9009B33E1D2</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>empty</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>73E6734C-7032-4308-92BA-2E7CE5BABD4D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>pic zoom</string>
-				<key>subtext</key>
-				<string>Zoom</string>
-				<key>text</key>
-				<string>Picture-in-Picture</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>C5AA0008-F815-40D0-8944-7798B289E3DD</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>tell application "System Events" to tell process "zoom.us"
-	set frontmost to true
-	click menu item "Keep on Top" of menu "Meeting" of menu bar 1
-end tell</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>BEE928AE-90E4-4DBE-A85A-A975A8BD1ED2</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict>
-					<key>height</key>
-					<string>600</string>
-					<key>width</key>
-					<string>500</string>
-					<key>x</key>
-					<string>0</string>
-					<key>y</key>
-					<string>800</string>
-				</dict>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/window-management/windows.current.bounds.set.custom</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>0F4560B0-1F7C-44C9-9E9C-A29866B3F8B5</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>tell application "System Events" to tell process "IINA" 
-	set frontmost to true 
-	try 
-		click menu item "Exit Full Screen" of menu "Video" of menu bar 1
-		delay 0.4 
-	end try 
-	click menu item "Float on Top" of menu "Video" of menu bar 1 
-end tell</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>FBD8FF8E-F489-414E-BAEF-C99DE8B66259</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>pic iina</string>
-				<key>subtext</key>
-				<string>IINA</string>
-				<key>text</key>
-				<string>Picture-in-Picture</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>001DF3D5-7B49-4C43-9600-8626CFD5AD5A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>### Requirements
 - [yt-dlp](https://github.com/yt-dlp/yt-dlp)
 - [fileicon](https://github.com/mklement0/fileicon)
+- requires $BROWSER_APP environment variable in `.zshenv`
 
 
 ### Supported Sites
@@ -510,26 +208,6 @@ end tell</string>
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>001DF3D5-7B49-4C43-9600-8626CFD5AD5A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>605</real>
-		</dict>
-		<key>0F4560B0-1F7C-44C9-9E9C-A29866B3F8B5</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>move to bottom left</string>
-			<key>xpos</key>
-			<real>445</real>
-			<key>ypos</key>
-			<real>520</real>
-		</dict>
 		<key>548C7E00-D279-4BFE-B4CB-4F94C970637F</key>
 		<dict>
 			<key>colorindex</key>
@@ -538,15 +216,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>25</real>
-		</dict>
-		<key>73E6734C-7032-4308-92BA-2E7CE5BABD4D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>340</real>
-			<key>ypos</key>
-			<real>350</real>
 		</dict>
 		<key>77FF34ED-C1A2-4866-B205-06B792B3975B</key>
 		<dict>
@@ -568,52 +237,14 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>185</real>
 		</dict>
-		<key>8FE33DF8-EBEB-4631-AA48-A5A9C24B1AC6</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>195</real>
-			<key>ypos</key>
-			<real>330</real>
-		</dict>
-		<key>BBE06DAC-6097-47CD-906B-BDDE0C5B80AE</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>330</real>
-		</dict>
-		<key>BEE928AE-90E4-4DBE-A85A-A975A8BD1ED2</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>keep on top</string>
-			<key>xpos</key>
-			<real>195</real>
-			<key>ypos</key>
-			<real>475</real>
-		</dict>
-		<key>C5AA0008-F815-40D0-8944-7798B289E3DD</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>475</real>
-		</dict>
 		<key>C7716DBE-2C15-46FC-A1E7-1A722EA60267</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>470</real>
+			<real>380</real>
 			<key>ypos</key>
-			<real>185</real>
+			<real>110</real>
 		</dict>
 		<key>F30AA24D-259D-4D2C-80C9-06B5EA576F7C</key>
 		<dict>
@@ -623,17 +254,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>195</real>
 			<key>ypos</key>
 			<real>185</real>
-		</dict>
-		<key>FBD8FF8E-F489-414E-BAEF-C99DE8B66259</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>keep on top &amp; exit fullscreen</string>
-			<key>xpos</key>
-			<real>195</real>
-			<key>ypos</key>
-			<real>605</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -682,7 +302,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string></string>
+	<string>0.9</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>de.chris-grieser.spelling-and-word-changer</string>
+	<string>de.chris-grieser.writing-assistant</string>
 	<key>category</key>
 	<string>⭐️</string>
 	<key>connections</key>
@@ -60,6 +60,45 @@
 				<false/>
 			</dict>
 		</array>
+		<key>569CD060-42E6-43E7-A18B-724E9B7D8357</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>932AEE6C-291D-43C3-87CC-D2E54FA12721</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>932AEE6C-291D-43C3-87CC-D2E54FA12721</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A2A06CF6-C0FD-4680-B7D3-44BB15153491</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A2A06CF6-C0FD-4680-B7D3-44BB15153491</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4937A340-F92B-46C5-A8FA-B4D40A786CF7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A79508C6-9D50-47FC-8E75-B8142611461C</key>
 		<array>
 			<dict>
@@ -81,7 +120,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Spelling &amp; Synonyms</string>
+	<string>Writing Assistant</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -255,8 +294,6 @@ end run</string>
 				<integer>1</integer>
 				<key>escaping</key>
 				<integer>0</integer>
-				<key>keyword</key>
-				<string>syn</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -274,7 +311,7 @@ end run</string>
 				<key>scriptfile</key>
 				<string>./scripts/synonym.js</string>
 				<key>subtext</key>
-				<string></string>
+				<string>Synonymer</string>
 				<key>title</key>
 				<string>{const:alfred_workflow_name}</string>
 				<key>type</key>
@@ -331,9 +368,118 @@ end run</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/rephrase-selection.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>A2A06CF6-C0FD-4680-B7D3-44BB15153491</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>4937A340-F92B-46C5-A8FA-B4D40A786CF7</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>Thinking…</string>
+				<key>title</key>
+				<string>🤖 Rephraser</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>932AEE6C-291D-43C3-87CC-D2E54FA12721</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>32</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>U</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>569CD060-42E6-43E7-A18B-724E9B7D8357</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
-	<string>Spell-fixing requires "aspell" to be installed on the system. (`brew install aspell`)
+	<string>## Requirements
+- `aspell`
+- `ansifilter`
+- OpenAi API Key
+
+---
 
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
@@ -343,18 +489,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>autocorrect for 2nd language (defined in settings)</string>
+			<string>Autocorrect word unser cursor (2nd language)</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>175</real>
 		</dict>
 		<key>322E5C7E-0088-48C7-8510-ABB6F13FAF6B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>180</real>
+			<real>185</real>
 			<key>ypos</key>
 			<real>350</real>
 		</dict>
@@ -363,18 +509,42 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>350</real>
+			<real>345</real>
 			<key>ypos</key>
 			<real>350</real>
+		</dict>
+		<key>4937A340-F92B-46C5-A8FA-B4D40A786CF7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>note</key>
+			<string>errors only</string>
+			<key>xpos</key>
+			<real>505</real>
+			<key>ypos</key>
+			<real>530</real>
 		</dict>
 		<key>527810E3-7675-48C8-ABF2-D21274E22579</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
+			<key>note</key>
+			<string>get synonym for word under cursor</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
 			<real>350</real>
+		</dict>
+		<key>569CD060-42E6-43E7-A18B-724E9B7D8357</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>note</key>
+			<string>rephrase selection</string>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>530</real>
 		</dict>
 		<key>812123A0-13FF-4E57-A76C-6EB0EDF2A55D</key>
 		<dict>
@@ -383,14 +553,34 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>180</real>
 			<key>ypos</key>
-			<real>80</real>
+			<real>90</real>
+		</dict>
+		<key>932AEE6C-291D-43C3-87CC-D2E54FA12721</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>530</real>
+		</dict>
+		<key>A2A06CF6-C0FD-4680-B7D3-44BB15153491</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>note</key>
+			<string>call openAI (requires node)</string>
+			<key>xpos</key>
+			<real>345</real>
+			<key>ypos</key>
+			<real>530</real>
 		</dict>
 		<key>A79508C6-9D50-47FC-8E75-B8142611461C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>Autocorrect for English</string>
+			<string>Autocorrect word unser cursor (English)</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -414,6 +604,120 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string>sk-...</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Rephraser. If empty, will look through `.zshenv` for a variable `$OPENAI_API_KEY`.</string>
+			<key>label</key>
+			<string>OpenAI API Key</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>alfred_apikey</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>100</string>
+				<key>placeholder</key>
+				<string>1337</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Rephraser: OpenAI token usage, between 1 and 4000</string>
+			<key>label</key>
+			<string>max tokens</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>maxTokens</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>0.3</string>
+				<key>placeholder</key>
+				<string>0.3</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Rephraser: "Creativity" value between 0 (more predictable) and 1 (more random).</string>
+			<key>label</key>
+			<string>Temperature</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>temperature</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>Please make suggestions how to improve the following text concerning its readability and language. Do not change anything about the content, and refrain from doing any changes when the writing is already sufficiently clear and concise.</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+				<key>verticalsize</key>
+				<integer>6</integer>
+			</dict>
+			<key>description</key>
+			<string>Rephraser: Prompt that is prefixed to the selected text. (Diff works better if prompted to make minimal changes.)</string>
+			<key>label</key>
+			<string>Prompt</string>
+			<key>type</key>
+			<string>textarea</string>
+			<key>variable</key>
+			<string>static_prompt</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>20</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>small</string>
+						<string>12</string>
+					</array>
+					<array>
+						<string>medium</string>
+						<string>20</string>
+					</array>
+					<array>
+						<string>large</string>
+						<string>30</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>Rephraser: Output</string>
+			<key>label</key>
+			<string>Font Size</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>font_size</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
 				<string>70</string>
 				<key>placeholder</key>
 				<string>70</string>
@@ -423,7 +727,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Adjust if results are not replaced correctly.</string>
+			<string>Spell Fixer / Synonymer: Adjust if results are not replaced correctly.</string>
 			<key>label</key>
 			<string>Delay in ms</string>
 			<key>type</key>
@@ -435,7 +739,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>de</string>
+				<string></string>
 				<key>placeholder</key>
 				<string>de</string>
 				<key>required</key>
@@ -444,7 +748,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>needs to be shortcode from aspell</string>
+			<string>Spell Fixer: needs to be shortcode from `aspell`</string>
 			<key>label</key>
 			<string>2nd language</string>
 			<key>type</key>
@@ -454,7 +758,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.5</string>
+	<string>0.9</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

@@ -13,7 +13,9 @@
 	<key>defaultCreatedBy</key>
 	<string>Chris Grieser</string>
 	<key>defaultReadme</key>
-	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<string>---
+
+Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>defaultWebsite</key>
 	<string>https://chris-grieser.de/</string>
 	<key>rememberSelectedCategory</key>
