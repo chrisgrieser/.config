@@ -376,3 +376,7 @@ matches:
     replace: occurred
     propagate_case: true
     word: true
+  - trigger: thsoe
+    replace: those
+    propagate_case: true
+    word: true
