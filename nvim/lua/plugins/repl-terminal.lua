@@ -14,7 +14,6 @@ return {
 		end,
 		keys = {
 			{ "<leader>t", vim.cmd.ToggleTerm, desc = "  ToggleTerm" },
-			{ "q", vim.cmd.close, ft = "toggleterm", desc = "  Quit", nowait = true },
 			{
 				"<leader>ii",
 				vim.cmd.ToggleTermSendCurrentLine,

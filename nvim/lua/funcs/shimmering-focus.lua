@@ -16,7 +16,7 @@ vim.defer_fn(function()
 			trim_text = true,
 			fname_width = 0,
 		}
-	end, { desc = "Search Navigation Markers", buffer = true })
+	end, { desc = " Search Comment Marks", buffer = true })
 	-- search only for variables
 	keymap("n", "gw", function()
 		cmd([[silent! lgrep "^\s*--" %]]) -- riggrep-search for css variables
@@ -26,8 +26,16 @@ vim.defer_fn(function()
 			trim_text = true,
 			fname_width = 0,
 		}
-	end, { desc = "Search CSS Variables", buffer = true })
+	end, { desc = " Search CSS Variables", buffer = true })
 end, 500)
+
+-- never push, since build script already pushes
+keymap(
+	"n",
+	"gc",
+	function() require("tinygit").smartCommit { pushIfClean = false } end,
+	{ desc = "󰊢 Smart-Commit (no push)", buffer = true }
+)
 
 -- create comment mark
 keymap("n", "qw", function()
@@ -43,10 +51,15 @@ keymap("n", "qw", function()
 	local colNum = #hr[2] + 2
 	vim.api.nvim_win_set_cursor(0, { lineNum, colNum })
 	cmd.startinsert { bang = true }
-end, { buffer = true })
+end, { buffer = true, desc = " Comment Mark" })
 
 -- INFO: fix syntax highlighting
 -- various other solutions are described here: https://github.com/vim/vim/issues/2790
 -- using treesitter, this is less of an issue, but treesitter css
 -- highlighting isn't good yet, so…
-keymap("n", "<localleader>s", "<cmd>syntax sync fromstart<CR>", { buffer = true })
+keymap(
+	"n",
+	"<localleader>s",
+	"<cmd>syntax sync fromstart<CR>",
+	{ buffer = true, desc = " Fix Syntax Hl" }
+)
