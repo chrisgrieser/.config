@@ -1,6 +1,9 @@
---------------------------------------------------------------------------------
-
 return {
+	{ -- better embedded terminal
+		"akinsho/toggleterm.nvim",
+		cmd = { "ToggleTerm", "ToggleTermSendVisualSelection" },
+		config = function() require("toggleterm").setup() end,
+	},
 	{ -- REPL
 		"Vigemus/iron.nvim",
 		keys = {
@@ -24,11 +27,11 @@ return {
 					javascript = { command = { "osascript", "-i", "-l", "JavaScript" } },
 					applescript = { command = { "osascript", "-i", "-l", "AppleScript" } },
 					python = {
-						command = function ()
+						command = function()
 							local ipythonAvailable = vim.fn.executable("ipython") == 1
 							local binary = ipythonAvailable and "ipython" or "python3"
 							return { binary }
-						end
+						end,
 					},
 				},
 			},

@@ -1,5 +1,5 @@
 local u = require("config.utils")
-local cmd = vim.cmd
+
 --------------------------------------------------------------------------------
 
 return {
@@ -36,28 +36,14 @@ return {
 		init = function()
 			u.addToLuaLine("sections", "lualine_y", {
 				function()
-					local hunks = #require("gitsigns").get_hunks()
-					if hunks == 0 then return "" end
-					return "⊔" .. tostring(hunks)
-				end,
-			})
-			vim.api.nvim_create_autocmd({"BufReadPost", "BufNewFile"}, {
-				callback = function()
-					vim.b.gitsigns_staged_hunks = #require("gitsigns").get_hunks()
+					local unstagedHunks = #require("gitsigns").get_hunks()
+					if unstagedHunks == 0 then return "" end
+					return "󱓺 " .. tostring(unstagedHunks)
 				end,
 			})
 		end,
 		keys = {
-			{
-				"ga",
-				function ()
-					cmd.Gitsigns("stage_hunk")
-					local fsfs
-					vim.b.gitsigns_staged_hunks = vim.b.gitsigns_staged_hunks + 1
-				end,
-				"<cmd>Gitsigns stage_hunk<CR>",
-				desc = "󰊢 Stage Hunk",
-			},
+			{ "ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 Stage Hunk" },
 			{
 				"ga",
 				":Gitsigns stage_hunk<CR>",
@@ -66,7 +52,7 @@ return {
 				desc = "󰊢 Stage Selection",
 			},
 			{ "<leader>gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Add Buffer" },
-			{ "<leader>gv", "<cmd>Gitsigns preview_hunk_inline<CR>", desc = "󰊢 Preview Hunk" },
+			{ "<leader>gp", "<cmd>Gitsigns preview_hunk_inline<CR>", desc = "󰊢 Preview Hunk" },
 			{ "<leader>us", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "󰊢 Unstage Last Stage" },
 			{ "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", desc = "󰊢 Reset Hunk" },
 			{ "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", desc = "󰊢 Reset Buffer" },
@@ -82,6 +68,7 @@ return {
 			preview_config = { border = require("config.utils").borderStyle },
 			-- deletions greater than one line will show a count to assess the size
 			-- digits are actually nerdfont numbers to achieve smaller size
+			-- stylua: ignore
 			count_chars = { "", "󰬻", "󰬼", "󰬽", "󰬾", "󰬿", "󰭀", "󰭁", "󰭂", ["+"] = "󰿮" },
 			signs = {
 				delete = { show_count = true },
