@@ -80,15 +80,15 @@ function gd {
 	if [[ ! -x "$(command -v delta)" ]]; then print "\033[1;33mdelta not installed (\`brew install git-delta\`)\033[0m" && return 1; fi
 	if [[ ! -x "$(command -v ansifilter)" ]]; then print "\033[1;33mansifilter not installed.\033[0m" && return 1; fi
 
-	if [[ $(git diff | wc -l) -lt $threshold_lines ]]; then
+	if [[ $(git diff "$@" | wc -l) -lt $threshold_lines ]]; then
 		git -c delta."$style"=true diff "$@"
 	else
-		# TODO work out how to output a dark mode for this
 		# https://github.com/dandavison/delta/discussions/1338
 		git diff "$@" | delta --light --file-modified-label="FILE:" --hunk-label="" \
 			--file-decoration-style="blue" --hunk-header-decoration-style="blue" |
 			ansifilter --html >"/tmp/delta.html"
 		open "/tmp/delta.html"
+		# TODO work out how to output a dark mode for this
 	fi
 }
 
