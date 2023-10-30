@@ -256,6 +256,12 @@ function nuke {
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# pickaxe entire repo history
+function pickaxe {
+	[[ $# -eq 0 ]] && echo "No search query provided." && return 1
+	gitlog --pickaxe-regex --regexp-ignore-case -S"$1"
+}
+
 # search for [g]it [d]eleted [f]ile
 function gdf {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi

@@ -96,7 +96,9 @@ function M.addToLuaLine(location, section, component)
 end
 
 ---ensures unique keymaps https://www.reddit.com/r/neovim/comments/16h2lla/can_you_make_neovim_warn_you_if_your_config_maps/
----@param modes "n"|"v"|"x"|"i"|"o"|"c"|"t"|"ia"|"ca"|"!a"|string[]
+
+---@alias vimMode "n"|"v"|"x"|"i"|"o"|"c"|"t"|"ia"|"ca"|"!a"
+---@param modes vimMode|vimMode[]
 ---@param lhs string
 ---@param rhs string|function
 ---@param opts? { unique: boolean, desc: string, buffer: boolean, nowait: boolean, remap: boolean }
