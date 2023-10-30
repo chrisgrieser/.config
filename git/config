@@ -35,8 +35,7 @@
 [diff]
 	colorMoved = default
 [delta]
-	hunk-header-style="syntax" # omit line number
-	hunk-label= # save space
+	; hunk-header-style="syntax" # omit line number
 	navigate = true # use n and N to move between diff sections
 
 ;────────────────────────────────────────────────────────────────────────────

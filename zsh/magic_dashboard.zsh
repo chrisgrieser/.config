@@ -97,7 +97,7 @@ function magic_enter {
 
 	# GUARD only when in terminal with sufficient height
 	local disabled_below_term_height=15
-	[[ "$LINES" -lt disabled_below_term_height ]] || return
+	[[ $LINES -gt $disabled_below_term_height ]] || return
 
 	echo ; inspect
 }
