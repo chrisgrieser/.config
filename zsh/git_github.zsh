@@ -292,8 +292,8 @@ function gdf {
 	echo
 
 	choices="restore file (checkout)
-	copy to clipboard
-	show file (bat)"
+copy to clipboard
+show file (bat)"
 	decision=$(echo "$choices" |
 		fzf --bind="j:down,k:up" --no-sort --no-info --height="5" \
 			--layout=reverse-list --header="j:↓  k:↑")
