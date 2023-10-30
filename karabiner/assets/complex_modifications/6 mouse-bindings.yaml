@@ -67,13 +67,13 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 4 (bottom)"
     manipulators:
-      # Obsidian: Back
+      # Obsidian: Back (like browser)
       - type: basic
         from: { pointing_button: button4 }
         to:
-          - { key_code: h, modifiers: [control] }
+          - key_code: non_us_pound # the "#" key
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^md\.obsidian$] }
+        - { type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }
       # Mimestream: Delete
       - type: basic
         from: { pointing_button: button4 }
@@ -143,6 +143,7 @@ rules:
               - ^org\.hammerspoon\.Hammerspoon$
               - ^com\.tapbots\.Ivory$
               - ^com\.factorio$
+              - ^md\.obsidian$
         to_if_held_down:
           - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.ddgr"'
       # Ivory: Close Media Window and tab away
@@ -179,6 +180,7 @@ rules:
               - ^com\.brave\.Browser$
               - ^com\.apple\.finder$
               - ^org\.hammerspoon\.Hammerspoon$
+              - ^md\.obsidian$
         to_if_held_down:
           - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.ddgr"'
       # Highlights: Yellow Highlight
