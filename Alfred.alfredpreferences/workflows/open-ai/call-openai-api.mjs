@@ -1,15 +1,17 @@
 #!/usr/bin/env node
+/* eslint-disable no-undef */
 // https://news.ycombinator.com/item?id=34615673
 // NOTE file needs to be `.mjs` because of top-level `await`
 //──────────────────────────────────────────────────────────────────────────────
 
-const maxTokens = parseInt(process.env.maxTokens || "100");
-const temperature = parseFloat(process.env.temperature || "0.5");
+const maxTokens = parseInt(process.env.maxTokens);
+const temperature = parseFloat(process.env.temperature);
 const model = process.env.model;
 const staticPromptPart = process.env.staticPrompt;
 
-const selection = process.argv[2].trim(); // 0: binary, 1: this file
-const apiKey = argv[0] || process.env.OPENAI_API_KEY; // read either via zshenv or from Alfred config
+const argv = process.argv.slice(2);
+const prompt = argv[1].trim();
+const apiKey = argv[0] || process.env.apiKey; // read either via zshenv or from Alfred config
 if (!apiKey) {
 	console.error("No API key provided.");
 	process.exit(1);

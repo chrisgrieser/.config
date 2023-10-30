@@ -8,11 +8,11 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
-		<key>0FD32B7B-CE8C-4871-A07E-564BB91F0477</key>
+		<key>24B5F6A6-BB86-4EDD-A3A3-C773874D3AD9</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>7F59CB22-957B-4E74-8A9E-3329447A0232</string>
+				<string>2B12E1CB-5927-4D3E-98CB-C7F7631B2F6D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -21,11 +21,21 @@
 				<false/>
 			</dict>
 		</array>
-		<key>92ED8532-D717-4F99-987C-4A3810BC7B5E</key>
+		<key>79FE12FA-F9C4-4661-9015-C127754CDF28</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>FB4D8632-309B-4BB0-BC22-4F8E12E09362</string>
+				<string>FCA73E94-1790-474B-9F8C-7F97974D8E0E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>90D1403B-32F0-4002-89D1-0EEEC218E724</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -34,21 +44,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>FB4D8632-309B-4BB0-BC22-4F8E12E09362</key>
+		<key>90D1403B-32F0-4002-89D1-0EEEC218E724</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>0FD32B7B-CE8C-4871-A07E-564BB91F0477</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>537C9592-CA70-4E39-A6FB-77555752AEB6</string>
+				<string>24B5F6A6-BB86-4EDD-A3A3-C773874D3AD9</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -65,79 +65,52 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>OpenAI</string>
+	<string>Rephrase Selection</string>
 	<key>objects</key>
 	<array>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>trigger-open-ai-call.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>0FD32B7B-CE8C-4871-A07E-564BB91F0477</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
 				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>0</integer>
-				<key>hotmod</key>
-				<integer>0</integer>
-				<key>hotstring</key>
-				<string></string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
+				<string>'{query}', {variables}</string>
+				<key>cleardebuggertext</key>
+				<true/>
+				<key>processoutputs</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
+			<string>alfred.workflow.utility.debug</string>
 			<key>uid</key>
-			<string>92ED8532-D717-4F99-987C-4A3810BC7B5E</string>
+			<string>FCA73E94-1790-474B-9F8C-7F97974D8E0E</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
 				<key>ignoredynamicplaceholders</key>
 				<false/>
-				<key>transient</key>
-				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
+			<string>alfred.workflow.output.largetype</string>
 			<key>uid</key>
-			<string>7F59CB22-957B-4E74-8A9E-3329447A0232</string>
+			<string>2B12E1CB-5927-4D3E-98CB-C7F7631B2F6D</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -153,37 +126,16 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>select-line.applescript</string>
+				<string>rephrase-selection.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>FB4D8632-309B-4BB0-BC22-4F8E12E09362</string>
+			<string>24B5F6A6-BB86-4EDD-A3A3-C773874D3AD9</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>🤖Thinking…</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>537C9592-CA70-4E39-A6FB-77555752AEB6</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -216,6 +168,27 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>🤖Thinking…</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>90D1403B-32F0-4002-89D1-0EEEC218E724</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string># Requirements
@@ -227,57 +200,44 @@
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>0FD32B7B-CE8C-4871-A07E-564BB91F0477</key>
+		<key>24B5F6A6-BB86-4EDD-A3A3-C773874D3AD9</key>
 		<dict>
 			<key>note</key>
 			<string>call openAI (requires node)</string>
 			<key>xpos</key>
-			<real>330</real>
+			<real>375</real>
 			<key>ypos</key>
-			<real>35</real>
+			<real>105</real>
 		</dict>
-		<key>537C9592-CA70-4E39-A6FB-77555752AEB6</key>
+		<key>2B12E1CB-5927-4D3E-98CB-C7F7631B2F6D</key>
 		<dict>
 			<key>xpos</key>
-			<real>330</real>
+			<real>560</real>
 			<key>ypos</key>
-			<real>190</real>
+			<real>105</real>
 		</dict>
 		<key>79FE12FA-F9C4-4661-9015-C127754CDF28</key>
 		<dict>
 			<key>note</key>
 			<string>rephrase selection</string>
 			<key>xpos</key>
-			<real>40</real>
+			<real>65</real>
 			<key>ypos</key>
-			<real>370</real>
+			<real>105</real>
 		</dict>
-		<key>7F59CB22-957B-4E74-8A9E-3329447A0232</key>
+		<key>90D1403B-32F0-4002-89D1-0EEEC218E724</key>
 		<dict>
-			<key>note</key>
-			<string>paste</string>
 			<key>xpos</key>
-			<real>485</real>
+			<real>225</real>
 			<key>ypos</key>
-			<real>35</real>
+			<real>105</real>
 		</dict>
-		<key>92ED8532-D717-4F99-987C-4A3810BC7B5E</key>
+		<key>FCA73E94-1790-474B-9F8C-7F97974D8E0E</key>
 		<dict>
-			<key>note</key>
-			<string>finish the sentence</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>230</real>
 			<key>ypos</key>
-			<real>35</real>
-		</dict>
-		<key>FB4D8632-309B-4BB0-BC22-4F8E12E09362</key>
-		<dict>
-			<key>note</key>
-			<string>get line under cursor</string>
-			<key>xpos</key>
-			<real>180</real>
-			<key>ypos</key>
-			<real>35</real>
+			<real>25</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -301,7 +261,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
-			<string>apiKey</string>
+			<string>alfred_apikey</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -309,7 +269,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<key>default</key>
 				<string>100</string>
 				<key>placeholder</key>
-				<string></string>
+				<string>1337</string>
 				<key>required</key>
 				<true/>
 				<key>trim</key>
@@ -330,7 +290,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<key>default</key>
 				<string>0.5</string>
 				<key>placeholder</key>
-				<string></string>
+				<string>0.6</string>
 				<key>required</key>
 				<true/>
 				<key>trim</key>
@@ -349,25 +309,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>text-davinci-003</string>
+				<string>gpt-3.5-turbo</string>
 				<key>pairs</key>
 				<array>
 					<array>
-						<string>text-davinci-003</string>
-						<string>text-davinci-003</string>
-					</array>
-					<array>
-						<string>text-davinci-002</string>
-						<string>text-davinci-002</string>
-					</array>
-					<array>
-						<string>code-davinci-002</string>
-						<string>code-davinci-002</string>
+						<string>gpt-3.5-turbo</string>
+						<string>gpt-3.5-turbo</string>
 					</array>
 				</array>
 			</dict>
 			<key>description</key>
-			<string>https://platform.openai.com/docs/models/gpt-3-5</string>
+			<string>(options in the future)</string>
 			<key>label</key>
 			<string>OpenAI Model</string>
 			<key>type</key>
@@ -379,22 +331,22 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>Finish the following sentence:</string>
-				<key>placeholder</key>
-				<string></string>
+				<string>The following text is a paragraph for a scientific paper in sociology. Please make suggestions how to improve its readability and language. Do not change anything about the content, and refrain from doing any changes when the writing is already sufficiently clear and concise.</string>
 				<key>required</key>
 				<true/>
 				<key>trim</key>
 				<true/>
+				<key>verticalsize</key>
+				<integer>6</integer>
 			</dict>
 			<key>description</key>
-			<string>String to be suffixed in front of every prompt</string>
+			<string></string>
 			<key>label</key>
-			<string>Static Prompt</string>
+			<string>Rephrasing Prompt</string>
 			<key>type</key>
-			<string>textfield</string>
+			<string>textarea</string>
 			<key>variable</key>
-			<string>staticPrompt</string>
+			<string>static_prompt</string>
 		</dict>
 	</array>
 	<key>version</key>
