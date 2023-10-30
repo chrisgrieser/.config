@@ -509,12 +509,29 @@ rules:
       # INFO: context menu cancellation configured with the insert mode cancellations
       #─────────────────────────────────────────────────────────────────────────
       # BASIC FILE OPERATIONS
-      # d = delete
+      # d = delete (or put back, when in Trash)
       - type: basic
         from: { key_code: d }
         to_if_alone:
           - { key_code: delete_or_backspace, modifiers: [command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      # D = open trash
+      - type: basic
+        from: { key_code: d, modifiers: { mandatory: [shift] } } 
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        to:
+          # to open the "unified" trash (iCloud trash + user trash), needs to use
+          # AppleScript and not `open "$HOME/.Trash"`
+          - shell_command: |
+              osascript -e'
+                tell application "Finder"
+                  activate
+                  open the trash
+                end tell
+                tell application "System Events" to tell process "Finder"
+                  set frontmost to true
+                end tell
+                '
       # y = yank (copy) file
       - type: basic
         from: { key_code: z } # y = z in German Keyboard

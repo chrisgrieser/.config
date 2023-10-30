@@ -192,7 +192,6 @@ rules:
                 end tell
                 tell application "System Events" to tell process "Finder"
                   set frontmost to true
-                  click menu item "as List" of menu "View" of menu bar 1
                 end tell
                 '
       # [h]ammerspoon console
