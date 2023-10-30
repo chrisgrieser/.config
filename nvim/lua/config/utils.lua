@@ -106,6 +106,7 @@ function M.uniqueKeymap(modes, lhs, rhs, opts)
 	vim.keymap.set(modes, lhs, rhs, opts)
 	local exists = (vim.fn.maparg(lhs, modes[1]) ~= "")
 	if exists then
+		vim.defer_fn(function() vim.keymap.del(modes, lhs) end, 500)
 		M.notify("Keymap already exists", lhs, "warn")
 	end
 end
