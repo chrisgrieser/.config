@@ -90,28 +90,16 @@ function unshallow {
 
 # use delta for small diffs and diff2html for big diffs
 function gd {
+	if [[ ! -x "$(command -v delta)" ]]; then print "\033[1;33mdelta not installed (\`brew install git-delta\`)\033[0m" && return 1; fi
+	
 	local threshold_lines=120 # CONFIG
+	local style
+	defaults read -g AppleInterfaceStyle &>/dev/null && style="dark" || style="light"
 
-	if [[ $(git diff | wc -l) -gt $threshold_lines ]]; then
-		if ! command -v diff2html &>/dev/null; then echo "diff2html not installed (\`npm -g install diff2html\`)." && return 1; fi
-		diff2html --hwt="$HOME/.config/diff2html/diff2html-template.html"
-	else
+
 		if ! command -v delta &>/dev/null; then echo "delta not installed (\`brew install git-delta\`)" && return 1; fi
-		if defaults read -g AppleInterfaceStyle &>/dev/null; then
-			git -c delta.dark=true diff
-		else
-			git -c delta.light=true diff
-		fi
-	fi
-}
+		git -c delta."$style"=true diff
 
-# make delta theme-aware
-function diff {
-	if defaults read -g AppleInterfaceStyle &>/dev/null; then
-		command delta --dark "$@"
-	else
-		command delta --light "$@"
-	fi
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -258,7 +246,11 @@ function nuke {
 
 # pickaxe entire repo history
 function pickaxe {
-	[[ $# -eq 0 ]] && echo "No search query provided." && return 1
+	[[ -z $1 ]] && print "\033[1;33mNo search query provided.\033[0m" && return 1
+	echo "Reminder: Mostly, these are deletion commits. Thus, the checkout target should usually be the parent commit:"
+	print "\033[1;36mgit checkout {hash}^\033[0m"
+	echo
+
 	gitlog --pickaxe-regex --regexp-ignore-case -S"$1"
 }
 
@@ -266,7 +258,7 @@ function pickaxe {
 function gdf {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 	if ! command -v bat &>/dev/null; then echo "bat not installed." && return 1; fi
-	if [[ $# -eq 0 ]]; then echo "No search query provided." && return 1; fi
+	[[ -z $1 ]] && print "\033[1;33mNo search query provided.\033[0m" && return 1
 
 	local deleted_path deletion_commit
 	cd "$(git rev-parse --show-toplevel)" || return 1

@@ -126,6 +126,7 @@ keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "⬅ Move sel left" })
 --------------------------------------------------------------------------------
 
 -- COMMAND & INSERT MODE
+keymap("c", "<C-u>", "<C-e><C-u>") -- kill whole line
 keymap({ "i", "c" }, "<C-a>", "<Home>")
 keymap({ "i", "c" }, "<C-e>", "<End>")
 keymap("c", "<BS>", function()
