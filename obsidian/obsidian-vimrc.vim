@@ -35,8 +35,8 @@ noremap H g0
 noremap L g$
 nnoremap J 6gj
 nnoremap K 6gk
-vnoremap J 6gj
-vnoremap K 6gk
+vnoremap J 6j
+vnoremap K 6k
 
 onoremap J 2j
 onoremap K 2k
@@ -330,6 +330,10 @@ nnoremap ZZ :closeWindow
 " Splits
 exmap splitVertical obcommand workspace:split-vertical
 nnoremap <C-w>v :splitVertical
+
+" Split Switching
+exmap nextSplit obcomamnd cycle-through-panes:cycle-through-panes
+nnoremap <C-CR> :nextSplit
 
 " Tabs
 exmap nextTab obcommand workspace:next-tab

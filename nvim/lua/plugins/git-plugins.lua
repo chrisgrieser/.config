@@ -1,7 +1,3 @@
-local u = require("config.utils")
-
---------------------------------------------------------------------------------
-
 return {
 	{ -- lightweight git client
 		"chrisgrieser/nvim-tinygit",
@@ -33,15 +29,6 @@ return {
 	{ -- git sign gutter & hunk actions
 		"lewis6991/gitsigns.nvim",
 		event = "VeryLazy",
-		init = function()
-			u.addToLuaLine("sections", "lualine_y", {
-				function()
-					local unstagedHunks = #require("gitsigns").get_hunks()
-					if unstagedHunks == 0 then return "" end
-					return "󱓺 " .. tostring(unstagedHunks)
-				end,
-			})
-		end,
 		keys = {
 			{ "ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 Stage Hunk" },
 			{
@@ -60,7 +47,7 @@ return {
 			{ "<leader>g?", function() require("gitsigns").blame_line { full = true } end, desc = "󰊢 Blame Line"},
 			{ "gh", function() require("gitsigns").next_hunk { foldopen = true } end, desc = "󰊢 Next Hunk" },
 			{ "gH", function() require("gitsigns").prev_hunk { foldopen = true } end, desc = "󰊢 Previous Hunk" },
-			{ "gh", "<cmd>Gitsigns select_hunk<CR>", mode = { "o", "x" }, desc = "󱡔 󰊢 hunk textobj" },
+			{ "gh", "<cmd>Gitsigns select_hunk<CR>", mode = { "o", "x" }, desc = "󱡔 󰊢 Hunk textobj" },
 			-- stylua: ignore end
 		},
 		opts = {
