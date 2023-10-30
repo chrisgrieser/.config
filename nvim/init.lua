@@ -2,9 +2,12 @@
 ---loaded, but do notify if there was an error.
 ---@param module string module to load
 local function safeRequire(module)
-	local success, _ = pcall(require, module)
+	local success, result = pcall(require, module)
 	if success then return end
-	vim.cmd.echomsg(("'Error loading %s'"):format(module))
+	vim.defer_fn( -- defer to so notification plugins are loaded before
+		function() vim.notify(("Error loading %s\n%s"):format(module, result), vim.log.levels.ERROR) end,
+		1
+	)
 end
 
 -- If nvim was opened w/o argument, re-open the last file.
