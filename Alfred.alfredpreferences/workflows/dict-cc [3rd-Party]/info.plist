@@ -8,6 +8,19 @@
 	<string>⬇️</string>
 	<key>connections</key>
 	<dict>
+		<key>1F149DD5-76CD-4ABE-81F4-2EF6FEDF2EC3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>230B7E17-DE58-409D-821F-A8F7228E7B6D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>230B7E17-DE58-409D-821F-A8F7228E7B6D</key>
 		<array>
 			<dict>
@@ -22,9 +35,55 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>64D310B5-3CCA-4CC5-B216-B8D58A59C070</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F1000F74-5759-4CCD-9340-87037FA12234</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>177877D7-B9C6-4769-B88B-D310CE841A9C</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>5FA0111C-4F93-4183-8AD5-73496AC4C857</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>230B7E17-DE58-409D-821F-A8F7228E7B6D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>AAF93BF2-1C2C-4D19-933F-5B3A07747BD2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>230B7E17-DE58-409D-821F-A8F7228E7B6D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
@@ -46,7 +105,7 @@
 			<key>config</key>
 			<dict>
 				<key>autopaste</key>
-				<true/>
+				<false/>
 				<key>clipboardtext</key>
 				<string></string>
 				<key>ignoredynamicplaceholders</key>
@@ -60,6 +119,52 @@
 			<string>BD993DCC-6A60-4320-903E-EF147BC55589</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>AAF93BF2-1C2C-4D19-933F-5B3A07747BD2</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>Copied "{query}" to clipboard</string>
+				<key>title</key>
+				<string>dict.cc</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>64D310B5-3CCA-4CC5-B216-B8D58A59C070</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -89,7 +194,7 @@
 				<key>runningsubtext</key>
 				<string>Please wait...</string>
 				<key>script</key>
-				<string>QUERY=$(iconv -f UTF8-MAC &lt;&lt;&lt;'{query}')
+				<string>QUERY=$(iconv -f utf-8 &lt;&lt;&lt;'{query}' || iconv -f UTF8-MAC &lt;&lt;&lt;'{query}')
 
 # Check for Apple Silicon
 if [[ $(uname -m) == 'arm64' ]]; then
@@ -102,7 +207,7 @@ fi</string>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string></string>
+				<string>[eng, ger, fra, swe, esp, buk, rom, ita, por, rus]</string>
 				<key>title</key>
 				<string>Translate...</string>
 				<key>type</key>
@@ -116,6 +221,73 @@ fi</string>
 			<string>230B7E17-DE58-409D-821F-A8F7228E7B6D</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Translate</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>5FA0111C-4F93-4183-8AD5-73496AC4C857</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>F1000F74-5759-4CCD-9340-87037FA12234</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>2</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>1F149DD5-76CD-4ABE-81F4-2EF6FEDF2EC3</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -151,23 +323,58 @@ https://www.buymeacoffee.com/dennistra</string>
 		<key>177877D7-B9C6-4769-B88B-D310CE841A9C</key>
 		<dict>
 			<key>xpos</key>
-			<real>320</real>
+			<real>510</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>540</real>
 		</dict>
-		<key>230B7E17-DE58-409D-821F-A8F7228E7B6D</key>
+		<key>1F149DD5-76CD-4ABE-81F4-2EF6FEDF2EC3</key>
 		<dict>
 			<key>xpos</key>
 			<real>50</real>
 			<key>ypos</key>
-			<real>215</real>
+			<real>490</real>
+		</dict>
+		<key>230B7E17-DE58-409D-821F-A8F7228E7B6D</key>
+		<dict>
+			<key>xpos</key>
+			<real>240</real>
+			<key>ypos</key>
+			<real>360</real>
+		</dict>
+		<key>5FA0111C-4F93-4183-8AD5-73496AC4C857</key>
+		<dict>
+			<key>xpos</key>
+			<real>50</real>
+			<key>ypos</key>
+			<real>365</real>
+		</dict>
+		<key>64D310B5-3CCA-4CC5-B216-B8D58A59C070</key>
+		<dict>
+			<key>xpos</key>
+			<real>510</real>
+			<key>ypos</key>
+			<real>300</real>
+		</dict>
+		<key>AAF93BF2-1C2C-4D19-933F-5B3A07747BD2</key>
+		<dict>
+			<key>xpos</key>
+			<real>45</real>
+			<key>ypos</key>
+			<real>235</real>
 		</dict>
 		<key>BD993DCC-6A60-4320-903E-EF147BC55589</key>
 		<dict>
 			<key>xpos</key>
-			<real>320</real>
+			<real>510</real>
 			<key>ypos</key>
-			<real>165</real>
+			<real>180</real>
+		</dict>
+		<key>F1000F74-5759-4CCD-9340-87037FA12234</key>
+		<dict>
+			<key>xpos</key>
+			<real>510</real>
+			<key>ypos</key>
+			<real>420</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -179,8 +386,10 @@ https://www.buymeacoffee.com/dennistra</string>
 		<key>to_language</key>
 		<string>eng</string>
 	</dict>
+	<key>variablesdontexport</key>
+	<array/>
 	<key>version</key>
-	<string>2.0.0</string>
+	<string>2.1.0</string>
 	<key>webaddress</key>
 	<string>https://github.com/dennis-tra/alfred-dict.cc-workflow</string>
 </dict>
