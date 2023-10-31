@@ -38,8 +38,8 @@ nnoremap K 6gk
 vnoremap J 6j
 vnoremap K 6k
 
+" dj = delete 2 lines, dJ = delete 3 lines
 onoremap J 2j
-onoremap K 2k
 
 " Jumps
 nnoremap <C-h> <C-o>
@@ -103,12 +103,12 @@ nnoremap gr :quickSwitcher
 " go to last change (HACK, only works to jump to the last location)
 nnoremap gc u<C-r>
 
+" increment quicker
+nnoremap + <C-a>
+
 """"""""""""""""""""""
 " Search
 """"""""""""""""""""""
-" no modifier key for jumping to next word
-nnoremap + *
-
 " Find Mode (by mirroring American keyboard layout on German keyboard layout)
 nnoremap - /
 
@@ -123,18 +123,6 @@ nnoremap gl :liveGrep
 " Obsidian builtin Search & replace
 exmap searchReplace obcommand editor:open-search-replace
 nnoremap ,ff :searchReplace
-
-""""""""""""""""""""""
-" Git
-""""""""""""""""""""""
-
-" Git Plugin
-exmap gitAdd obcommand obsidian-git:stage-current-file
-nnoremap ,ga :gitAdd
-nnoremap ,gA :gitAdd
-
-exmap gitCommit obcommand obsidian-git:commit-staged-specified-message
-nnoremap ,gc :gitCommit
 
 """"""""""""""""""""""
 " Editing
@@ -177,11 +165,6 @@ onoremap a<Space> iW
 
 " Delete Word/Selection
 nnoremap <S-Space> "_daw
-
-" [R]eplicate (duplicate)
-exmap duplicate obcommand obsidian-editor-shortcuts:duplicateLine
-unmap w
-nnoremap ww :duplicate
 
 " [M]erge Lines
 " the merge from Code Editor Shortcuts plugin is smarter than just using `J`
@@ -255,6 +238,7 @@ onoremap am aW
 onoremap im iW
 onoremap aq a"
 onoremap iq i"
+onoremap k i"
 onoremap az a'
 onoremap iz i'
 onoremap ae a`
@@ -291,10 +275,12 @@ vnoremap w t"
 " Substitute
 """"""""""""""""""""""
 
-" poor man's substitute.nvim: brut-forcing all possible text objects :'(
+" poor man's substitute.nvim/duplicate.nvim: 
+" brut-forcing all possible text objects 💀
 nunmap s
 nnoremap ss Vp
 nnoremap S vg$p
+nnoremap sj vjp
 nnoremap sim viWp
 nnoremap sam vaWp
 nnoremap siw viwp
@@ -306,6 +292,7 @@ nnoremap sap vapp
 nnoremap sib vi)p
 nnoremap saq va"p
 nnoremap siq vi"p
+nnoremap sk vi"p
 nnoremap saz va'p
 nnoremap siz vi'p
 nnoremap sae va`p
@@ -315,6 +302,37 @@ nnoremap sir vi]p
 nnoremap sar va]p
 nnoremap sic vi}p
 nnoremap sac va}p
+nnoremap srg vGp
+nnoremap sgg vggGp
+
+nunmap w
+exmap duplicate obcommand obsidian-editor-shortcuts:duplicateLine
+nnoremap ww :duplicate
+
+nnoremap W y$$p
+nnoremap wj yjjp
+nnoremap wim yiWp
+nnoremap wam yaWp
+nnoremap wiw yiwp
+nnoremap waw yawp
+nnoremap wis yisp
+nnoremap was yasp
+nnoremap wip yipp
+nnoremap wap yapp
+nnoremap wib yi)p
+nnoremap waq ya"p
+nnoremap wiq yi"p
+nnoremap wk yi"p
+nnoremap waz ya'p
+nnoremap wiz yi'p
+nnoremap wae ya`p
+nnoremap wie yi`p
+nnoremap wab ya)p
+nnoremap wir yi]p
+nnoremap war ya]p
+nnoremap wic yi}p
+nnoremap wac ya}p
+nnoremap wrg yGp
 
 """"""""""""""""""""""
 " Tabs, Splits & Alt-file

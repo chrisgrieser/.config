@@ -66,7 +66,9 @@ function inspect {
 	# GIT STATUS
 	if git rev-parse --is-inside-work-tree &>/dev/null && [[ -n "$(git status --short --porcelain)" ]]; then
 		# spread across multiple lines via rs
-		git -c color.status="always" status --short | rs -e -w"$COLUMNS"
+
+		# show only deleted or untracked (new) files
+		git -c color.status="always" status --short | grep -E "^( D|\?\?) " | rs -e -w"$COLUMNS"
 		separator
 	fi
 

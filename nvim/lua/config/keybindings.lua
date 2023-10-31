@@ -26,9 +26,7 @@ keymap("n", "H", "0^") -- `0` ensures fully scrolling to the left on long indent
 keymap({ "n", "x" }, "L", "$")
 keymap({ "n", "x" }, "J", "6j")
 keymap({ "n", "x" }, "K", "6k")
-
--- dj = delete 2 lines, dJ = delete 3 lines
-keymap("o", "J", "2j")
+keymap("o", "J", "2j") -- dj = delete 2 lines, dJ = delete 3 lines
 
 -- Jump history
 -- non-unique, since it overwrites nvim default: https://neovim.io/doc/user/vim_diff.html#default-mappings
