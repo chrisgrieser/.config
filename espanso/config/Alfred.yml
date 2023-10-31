@@ -7,6 +7,5 @@
 filter_exec: Alfred
 
 extra_includes:
-  - "../match/_shell.yml"
   - "../match/_applescript.yml"
   - "../match/_alfred.yml"

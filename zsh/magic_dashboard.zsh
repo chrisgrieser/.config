@@ -50,7 +50,7 @@ function inspect {
 	# check if pwd still exists
 	if [[ ! -d "$PWD" ]]; then
 		printf '\033[1;33m"%s" has been moved or deleted.\033[0m\n' "$(basename "$PWD")"
-		command cd "$OLDPWD" || return 1
+		cd "$OLDPWD" || return 0
 	fi
 
 	# CONFIG

@@ -1,6 +1,4 @@
-diff2html-cli
 npm
-postcss
 stylelint-config-recess-order
 stylelint-config-standard
 stylelint-order

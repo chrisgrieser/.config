@@ -8,37 +8,11 @@
 	<string>⬇️</string>
 	<key>connections</key>
 	<dict>
-		<key>5DF5D863-1F39-49F2-A91C-61F704DA934A</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F1B8FDFD-F928-4EE5-8589-191BC7BED0B4</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>6F7CBD9B-C876-48E2-B00E-92F71C1609A5</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>6B99D187-E195-432C-A079-D4A99D9A9B0D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>7BD17439-AE4E-4489-8185-F9F0C7D98A66</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>5DF5D863-1F39-49F2-A91C-61F704DA934A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -312,6 +286,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>jumpto</key>
+				<string>alfred.action.url.openin</string>
+				<key>path</key>
+				<string>{var:url}</string>
+				<key>type</key>
+				<integer>2</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.actioninalfred</string>
+			<key>uid</key>
+			<string>27EF6551-081A-4BF3-AE2C-3279905CA7FA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -355,23 +346,6 @@
 			<string>D09358D1-C880-4E62-837E-6648A334152E</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>jumpto</key>
-				<string>alfred.action.url.openin</string>
-				<key>path</key>
-				<string>{var:url}</string>
-				<key>type</key>
-				<integer>2</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.actioninalfred</string>
-			<key>uid</key>
-			<string>27EF6551-081A-4BF3-AE2C-3279905CA7FA</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -456,25 +430,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{var:url}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>6F7CBD9B-C876-48E2-B00E-92F71C1609A5</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -545,65 +500,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
+				<key>autopaste</key>
 				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string># get first URL from JSON
-# has to be done in Alfred, since Alfred environment variables are needed
-
-# small leeway getting lines 3-6, since line numbers sometimes shift
-./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",'</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>5DF5D863-1F39-49F2-A91C-61F704DA934A</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-				<key>triggerid</key>
-				<string>re-open-last-tab</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>7BD17439-AE4E-4489-8185-F9F0C7D98A66</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<true/>
-				<key>skipvarencode</key>
-				<true/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
+				<key>clipboardtext</key>
 				<string>{var:url}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>F1B8FDFD-F928-4EE5-8589-191BC7BED0B4</string>
+			<string>6F7CBD9B-C876-48E2-B00E-92F71C1609A5</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -660,15 +571,6 @@ Pressing `CMD` to enter `Other Actions...`:
 			<key>ypos</key>
 			<real>190</real>
 		</dict>
-		<key>5DF5D863-1F39-49F2-A91C-61F704DA934A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>200</real>
-			<key>ypos</key>
-			<real>610</real>
-		</dict>
 		<key>6B99D187-E195-432C-A079-D4A99D9A9B0D</key>
 		<dict>
 			<key>xpos</key>
@@ -682,17 +584,6 @@ Pressing `CMD` to enter `Other Actions...`:
 			<real>940</real>
 			<key>ypos</key>
 			<real>355</real>
-		</dict>
-		<key>7BD17439-AE4E-4489-8185-F9F0C7D98A66</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>leader → shift+b via Karabiner</string>
-			<key>xpos</key>
-			<real>40</real>
-			<key>ypos</key>
-			<real>610</real>
 		</dict>
 		<key>A1F782AE-40F5-47BE-BA57-F230607162D5</key>
 		<dict>
@@ -742,15 +633,6 @@ Pressing `CMD` to enter `Other Actions...`:
 			<real>565</real>
 			<key>ypos</key>
 			<real>195</real>
-		</dict>
-		<key>F1B8FDFD-F928-4EE5-8589-191BC7BED0B4</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>375</real>
-			<key>ypos</key>
-			<real>610</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -1078,7 +960,7 @@ Pressing `CMD` to enter `Other Actions...`:
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>4.1.2</string>
+	<string>4.1.3</string>
 	<key>webaddress</key>
 	<string>https://github.com/Acidham/chromium-hist-bookmarks</string>
 </dict>
