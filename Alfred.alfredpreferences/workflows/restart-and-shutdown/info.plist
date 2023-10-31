@@ -575,13 +575,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>cd ~/dotfiles/
-
-filesChanged="$(git status --porcelain | wc -l | tr -d ' ')"
-if [[ -n "$filesChanged" ]] ; then
-	echo "📴 pre-shutdown-sync" &gt;&gt; ~"/dotfiles/Cron Jobs/sync.log"
-	zsh ~/dotfiles/git-dotfile-sync.sh
-fi</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
