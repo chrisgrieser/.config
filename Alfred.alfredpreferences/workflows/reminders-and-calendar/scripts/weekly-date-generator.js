@@ -32,6 +32,8 @@ function ensureCacheFolderExists() {
 	}
 }
 
+const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
+
 //───────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -43,7 +45,6 @@ function run(argv) {
 	const resultInBrackets = $.getenv("in_brackets") === "1";
 	const addLineBreak = $.getenv("line_break_after") === "1";
 	const cacheDir = $.getenv("alfred_workflow_cache");
-	ensureCacheFolderExists();
 
 	const dateInput = argv[0];
 	let weekCounter;
@@ -53,13 +54,19 @@ function run(argv) {
 
 	// date input → set startdate + reset week counter
 	if (dateInput) {
-		writeToFile(cacheDir + "/startdate", dateInput);
-		weekCounter = 0;
 		startDate = new Date(dateInput);
+		weekCounter = 0;
+
+		ensureCacheFolderExists();
+		writeToFile(cacheDir + "/startDate", dateInput);
+		writeToFile(cacheDir + "/weekCounter", weekCounter.toString());
 	} else {
-		weekCounter = parseInt(readFile(cacheDir + "/weekCounter"));
-		weekCounter++; // one more week
+		if (!fileExists(cacheDir + "/startDate")) return "No Starting Date found."; 
+		if (!fileExists(cacheDir + "/weekCounter")) return "No Starting Date found."; 
+
 		startDate = new Date(readFile(cacheDir + "/startDate"));
+		weekCounter = 1 + parseInt(readFile(cacheDir + "/weekCounter"));
+		writeToFile(cacheDir + "/weekCounter", weekCounter.toString());
 	}
 
 	// calculate new date

@@ -49,3 +49,4 @@ cmd
 config
 Lua
 lua
+metadata
