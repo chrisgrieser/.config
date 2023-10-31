@@ -53,7 +53,7 @@ keymap("n", "qw", function()
 	cmd.startinsert { bang = true }
 end, { buffer = true, desc = " Comment Mark" })
 
--- INFO: fix syntax highlighting
+-- FIX syntax highlighting
 -- various other solutions are described here: https://github.com/vim/vim/issues/2790
 -- using treesitter, this is less of an issue, but treesitter css
 -- highlighting isn't good yet, so…

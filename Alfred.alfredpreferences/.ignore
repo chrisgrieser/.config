@@ -1,8 +1,11 @@
 # ignore file for `fd`
 
 # Alfred config, but keep the workflows
-*/**
-!workflows/**/*
+preferences
+remote
+resources
+themes
+workflowextras
 
 # 3rd-party workflows, manually marked as such
 workflows/*\[3rd-Party\]
