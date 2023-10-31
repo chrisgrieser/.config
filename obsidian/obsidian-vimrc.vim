@@ -162,9 +162,6 @@ nnoremap ~ ~h
 nnoremap ü "zdawel"zph
 nnoremap Ü "zdawbh"zph
 
-exmap aiWrite obcommand obsidian-textgenerator-plugin:insert-generated-text-From-template
-nnoremap ,a :aiWrite
-
 exmap toggleDevtools obcommand obsidian-theme-design-utilities:toggle-devtools
 nnoremap ,b :toggleDevtools
 vnoremap ,b :toggleDevtools
