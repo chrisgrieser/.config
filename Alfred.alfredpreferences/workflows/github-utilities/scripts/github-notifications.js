@@ -62,10 +62,6 @@ function relativeDate(absoluteDate) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
-	const referrer = $.getenv("notif_referrer_id")
-		? "?notification_referrer_id=" + $.getenv("notif_referrer_id")
-		: "";
-
 	const githubToken = argv[0];
 	if (!githubToken) {
 		return JSON.stringify({
@@ -141,7 +137,7 @@ function run(argv) {
 					? "#issuecomment-" + notif.subject.latest_comment_url.match(/\d+$/)
 					: "";
 			const type = notif.subject.type === "PullRequest" ? "pull" : "issues"; //codespell-ignore
-			url = `https://github.com/${notif.repository.full_name}/${type}/${idInRepo}${referrer}${lastCommentId}`;
+			url = `https://github.com/${notif.repository.full_name}/${type}/${idInRepo}${lastCommentId}`;
 		} else {
 			// discussions do not have a direct URL available :/
 			url = "https://github.com/notifications";

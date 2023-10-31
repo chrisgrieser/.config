@@ -21,44 +21,8 @@
 				<false/>
 			</dict>
 		</array>
-		<key>171481C4-C600-4B58-8D5A-D0575E5EE9AA</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C5998C8C-695A-4A5C-B99D-391E1E73A978</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>BB0E4D69-62CC-406D-8229-0E6B10CEEFCE</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>778D7E9A-C113-4942-BC74-276C19AF6F0F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>3396F88B-AD4F-41F0-9FA7-ED8173F325FF</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>91D75681-FC5E-4D31-9FE2-FF0C89B5F5C1</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>3DBCAC53-D043-40E5-8BC7-17331F0676DA</key>
 		<array>
 			<dict>
@@ -99,13 +63,13 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>171481C4-C600-4B58-8D5A-D0575E5EE9AA</string>
+				<string>778D7E9A-C113-4942-BC74-276C19AF6F0F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<true/>
+				<false/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -167,18 +131,7 @@
 			</dict>
 		</array>
 		<key>778D7E9A-C113-4942-BC74-276C19AF6F0F</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>91D75681-FC5E-4D31-9FE2-FF0C89B5F5C1</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>8DE6C12A-AD83-445A-BE00-709A9B916DFB</key>
 		<array>
 			<dict>
@@ -210,32 +163,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>3E08FF65-F031-447F-B9F6-47F8F507D79B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>AC952B18-4AA7-4805-B8AE-C886E9A98AE5</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F5342914-4BDB-4980-9BE8-1FBBE8FFC082</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>C5998C8C-695A-4A5C-B99D-391E1E73A978</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>AC952B18-4AA7-4805-B8AE-C886E9A98AE5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -354,19 +281,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>subtext</key>
+				<key>browser</key>
 				<string></string>
-				<key>text</key>
-				<string>Create: {query}</string>
-				<key>withspace</key>
-				<true/>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>tot://{query}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>C5998C8C-695A-4A5C-B99D-391E1E73A978</string>
+			<string>778D7E9A-C113-4942-BC74-276C19AF6F0F</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -423,87 +352,6 @@
 			<string>49540ED2-DEDB-41DB-BF6B-FED0EB398A81</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<true/>
-				<key>variables</key>
-				<dict>
-					<key>dot</key>
-					<string>1</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>AC952B18-4AA7-4805-B8AE-C886E9A98AE5</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>4</integer>
-						<key>matchstring</key>
-						<string>^$</string>
-						<key>outputlabel</key>
-						<string>yes</string>
-						<key>uid</key>
-						<string>BB0E4D69-62CC-406D-8229-0E6B10CEEFCE</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>no</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>171481C4-C600-4B58-8D5A-D0575E5EE9AA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>tot://{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>778D7E9A-C113-4942-BC74-276C19AF6F0F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.hidealfred</string>
-			<key>uid</key>
-			<string>91D75681-FC5E-4D31-9FE2-FF0C89B5F5C1</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -637,9 +485,7 @@
 				<key>escaping</key>
 				<integer>68</integer>
 				<key>script</key>
-				<string>tell application "Brave Browser"	return the URL of active tab of front windowend tell
-
--- funktioniert auch mit der Youtube Webapp</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -832,29 +678,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>315</real>
+			<real>305</real>
 			<key>ypos</key>
-			<real>390</real>
-		</dict>
-		<key>171481C4-C600-4B58-8D5A-D0575E5EE9AA</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>note</key>
-			<string>empty</string>
-			<key>xpos</key>
-			<real>326</real>
-			<key>ypos</key>
-			<real>180</real>
+			<real>295</real>
 		</dict>
 		<key>3396F88B-AD4F-41F0-9FA7-ED8173F325FF</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>460</real>
+			<real>455</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>295</real>
 		</dict>
 		<key>3DBCAC53-D043-40E5-8BC7-17331F0676DA</key>
 		<dict>
@@ -903,9 +738,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>465</real>
+			<real>460</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>415</real>
 		</dict>
 		<key>6BB0E44D-7589-40AE-B22B-A01E1E604B88</key>
 		<dict>
@@ -934,9 +769,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>open</string>
 			<key>xpos</key>
-			<real>460</real>
+			<real>305</real>
 			<key>ypos</key>
-			<real>255</real>
+			<real>160</real>
 		</dict>
 		<key>8DE6C12A-AD83-445A-BE00-709A9B916DFB</key>
 		<dict>
@@ -945,27 +780,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>delete</string>
 			<key>xpos</key>
-			<real>310</real>
+			<real>305</real>
 			<key>ypos</key>
-			<real>510</real>
-		</dict>
-		<key>91D75681-FC5E-4D31-9FE2-FF0C89B5F5C1</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>xpos</key>
-			<real>645</real>
-			<key>ypos</key>
-			<real>350</real>
+			<real>415</real>
 		</dict>
 		<key>9823AB02-76C7-4449-9650-B778A002121E</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>455</real>
+			<real>305</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>30</real>
 		</dict>
 		<key>A57A67B5-BE58-4F12-91BF-B731B3EEEB75</key>
 		<dict>
@@ -987,26 +813,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>795</real>
 		</dict>
-		<key>AC952B18-4AA7-4805-B8AE-C886E9A98AE5</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>note</key>
-			<string>use dot 1</string>
-			<key>xpos</key>
-			<real>615</real>
-			<key>ypos</key>
-			<real>160</real>
-		</dict>
-		<key>C5998C8C-695A-4A5C-B99D-391E1E73A978</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>xpos</key>
-			<real>455</real>
-			<key>ypos</key>
-			<real>130</real>
-		</dict>
 		<key>D5B2FECD-F5C9-405C-9595-34A812172444</key>
 		<dict>
 			<key>colorindex</key>
@@ -1023,9 +829,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>insert line break &amp; prefix</string>
 			<key>xpos</key>
-			<real>615</real>
+			<real>475</real>
 			<key>ypos</key>
-			<real>45</real>
+			<real>60</real>
 		</dict>
 		<key>F5342914-4BDB-4980-9BE8-1FBBE8FFC082</key>
 		<dict>
@@ -1034,9 +840,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>append</string>
 			<key>xpos</key>
-			<real>710</real>
+			<real>715</real>
 			<key>ypos</key>
-			<real>70</real>
+			<real>130</real>
 		</dict>
 		<key>F63C35AB-EDD8-44D0-AE2E-D47352E8F9D1</key>
 		<dict>
