@@ -57,26 +57,23 @@ function inspect {
 	local max_gitlog_lines=5
 	local max_files_lines=6
 
-	# BETTER GIT LOG
+	# BETTER GIT LOG & STATUS
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
 		gitlog -n "$max_gitlog_lines"
 		separator
-	fi
 
-	# BETTER GIT STATUS
+		# so new files show up in `git diff`
+		git ls-files --others --exclude-standard | xargs git add --intent-to-add
 
-	# so new files show up in `git diff` 
-	# (ls-files ensures deleted files are not removed from the index)
-	git ls-files --others --exclude-standard | xargs git add --intent-to-add 
-
-	if git rev-parse --is-inside-work-tree &>/dev/null && [[ -n "$(git status --short --porcelain)" ]]; then
-		# show changed files in a more informative way than normal `git status`
-		git diff --color="always" --compact-summary --stat |
-			sed '$d' |                                   # remove summary
-			sed $'s/\(gone\)/\033[1;31mD     \033[0m/' | # color ($ for ansi codes)
-			sed $'s/\(new\)/\033[1;32mN    \033[0m/'   |
-			rs -e -w"$COLUMNS"                           # reflow
-		separator
+		if ! git diff --quiet; then # `git diff --quiet` exits 0 if there are changes
+			# show changed files in a more informative way than normal `git status`
+			git diff --color="always" --compact-summary --stat |
+				sed '$d' |                                   # remove summary
+				sed $'s/\(gone\)/\033[1;31mD     \033[0m/' | # color ($ for ansi codes)
+				sed $'s/\(new\)/\033[1;32mN    \033[0m/' |
+				rs -e -w"$COLUMNS" # reflow
+			separator
+		fi
 	fi
 
 	# FILES
