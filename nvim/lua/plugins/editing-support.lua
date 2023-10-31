@@ -54,7 +54,6 @@ return {
 			require("nvim-autopairs").add_rules {
 				rule("<", ">", "lua"):with_pair(isNodeType { "string", "string_content" }),
 				rule("<", ">", { "vim", "html", "xml" }), -- keymaps & tags
-				rule('\\"', '\\"', { "json", "sh" }), -- escaped quotes
 				rule("*", "*", "markdown"), -- italics
 				rule("![", "]()", "markdown"):set_end_pair_length(1), -- images
 
@@ -109,7 +108,7 @@ return {
 					:use_key(":"),
 
 				-- quicker template string
-				rule("$", "{}", { "javascript", "typescript", "json" })
+				rule("$", "{}", { "javascript", "typescript" })
 					:with_pair(negLookahead("{", 1))
 					:with_pair(isNodeType { "string", "template_string", "string_fragment" })
 					:set_end_pair_length(1),

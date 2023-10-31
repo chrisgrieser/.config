@@ -184,8 +184,8 @@
 	"for .. in (object-key)": {
 		"prefix": "for .. in (object-key)",
 		"body": [
-			"for (const {1:key} in ${2:object}) {",
-			"\tconst value = ${2:object}[${1:key}];",
+			"for (const ${1:key} in ${2:object}) {",
+			"\t$0$",
 			"}"
 		]
 	},

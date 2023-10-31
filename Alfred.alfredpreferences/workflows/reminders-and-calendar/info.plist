@@ -470,7 +470,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/weekly-generator.js</string>
+				<string>./scripts/weekly-date-generator.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -980,6 +980,18 @@
 			<key>variable</key>
 			<string>bundesland_feiertage</string>
 		</dict>
+	</array>
+	<key>variables</key>
+	<dict>
+		<key>startdate</key>
+		<string>2023-11-28</string>
+		<key>week_no</key>
+		<string>1</string>
+	</dict>
+	<key>variablesdontexport</key>
+	<array>
+		<string>week_no</string>
+		<string>startdate</string>
 	</array>
 	<key>version</key>
 	<string>0.9</string>
