@@ -2186,27 +2186,6 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<key>variable</key>
 			<string>no_display_authors</string>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string></string>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>ID for notifications. Starts with "NT_" and enables interaction with the notification after opening in the browser.</string>
-			<key>label</key>
-			<string>Notification Referrer  ID</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>notif_referrer_id</string>
-		</dict>
 	</array>
 	<key>version</key>
 	<string></string>

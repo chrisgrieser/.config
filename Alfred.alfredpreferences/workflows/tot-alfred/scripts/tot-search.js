@@ -13,7 +13,6 @@ function run() {
 	const showAll = $.getenv("include_empty_dots") === "1"
 	let emptyCount = 0;
 
-	/** @type {AlfredItem[]} */
 	const tots = [1, 2, 3, 4, 5, 6, 7].map((dot) => {
 		// DOCS https://gist.github.com/chockenberry/d33ef5b6e6da4a3e4aa9b07b093d3c23
 		const content = tot.openLocation(`tot://${dot}/content`);
