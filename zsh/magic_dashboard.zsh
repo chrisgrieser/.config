@@ -57,25 +57,25 @@ function inspect {
 	local max_gitlog_lines=5
 	local max_files_lines=6
 
-	# GIT LOG
+	# BETTER GIT LOG
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
 		gitlog -n "$max_gitlog_lines"
 		separator
 	fi
 
-	# GIT STATUS
+	# BETTER GIT STATUS
+
+	# so new files show up in `git diff` 
+	# (ls-files ensures deleted files are not removed from the index)
+	git ls-files --others --exclude-standard | xargs git add --intent-to-add 
+
 	if git rev-parse --is-inside-work-tree &>/dev/null && [[ -n "$(git status --short --porcelain)" ]]; then
 		# show changed files in a more informative way than normal `git status`
-		git diff --color="always" --compact-summary \
-			--stat=$((COLUMNS / 2)),$((COLUMNS / 4)) | # half-width
-			sed '$d' |         # remove summary
-			rs -e -w"$COLUMNS" # reflow
-
-		# untracked (new) files
-		git status --short | grep "??" |         # select only untracked (new) files
-			sed $'s/??/\033[1;32m [new]\033[0m/' |    # color them
-			rs -e -w"$COLUMNS"                    # reflow
-
+		git diff --color="always" --compact-summary --stat |
+			sed '$d' |                                   # remove summary
+			sed $'s/\(gone\)/\033[1;31mD     \033[0m/' | # color ($ for ansi codes)
+			sed $'s/\(new\)/\033[1;32mN    \033[0m/'   |
+			rs -e -w"$COLUMNS"                           # reflow
 		separator
 	fi
 
