@@ -65,10 +65,17 @@ function inspect {
 
 	# GIT STATUS
 	if git rev-parse --is-inside-work-tree &>/dev/null && [[ -n "$(git status --short --porcelain)" ]]; then
-		# spread across multiple lines via rs
+		# show changed files in a more informative way than normal `git status`
+		git diff --color="always" --compact-summary \
+			--stat=$((COLUMNS / 2)),$((COLUMNS / 4)) | # half-width
+			sed '$d' |         # remove summary
+			rs -e -w"$COLUMNS" # reflow
 
-		# show only deleted or untracked (new) files
-		git -c color.status="always" status --short | grep -E "^( D|\?\?) " | rs -e -w"$COLUMNS"
+		# untracked (new) files
+		git status --short | grep "??" |         # select only untracked (new) files
+			sed $'s/??/\033[1;32m [new]\033[0m/' |    # color them
+			rs -e -w"$COLUMNS"                    # reflow
+
 		separator
 	fi
 
@@ -101,7 +108,7 @@ function magic_enter {
 	local disabled_below_term_height=15
 	[[ $LINES -gt $disabled_below_term_height ]] || return
 
-	echo ; inspect
+	echo && inspect
 }
 
 # WRAPPER FOR THE ACCEPT-LINE ZLE WIDGET (RUN WHEN PRESSING ENTER)
