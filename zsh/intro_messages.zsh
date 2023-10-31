@@ -1,3 +1,8 @@
+
+# GUARD
+# don't show the intro messages on terminals with lower height (e.g. embedded ones)
+[[ $LINES -gt 20 ]] || return 0
+
 if ! command -v cowsay &>/dev/null; then echo "cowsay not installed." && return 1; fi
 if ! command -v fortune &>/dev/null; then echo "fortune not installed." && return 1; fi
 

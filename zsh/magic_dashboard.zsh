@@ -1,13 +1,20 @@
 #!/usr/bin/env zsh
 
+# CONFIG
+horizontal_sep="═" # ─ ═
+sep_color="\033[1;30m" # black
+
+max_gitlog_lines=5
+max_files_lines=6
+
+#───────────────────────────────────────────────────────────────────────────────
+
 # draws a separator line with terminal width
 function separator {
-	local sep_char="═"           # ─ ═
-	local sep_color="\033[1;30m" # black
 
 	local sep=""
 	for ((i = 0; i < COLUMNS; i++)); do
-		sep="$sep$sep_char"
+		sep="$sep$horizontal_sep"
 	done
 	print "$sep_color$sep\033[0m"
 }
@@ -53,10 +60,6 @@ function inspect {
 		cd "$OLDPWD" || return 0
 	fi
 
-	# CONFIG
-	local max_gitlog_lines=5
-	local max_files_lines=6
-
 	# BETTER GIT LOG & STATUS
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
 		gitlog -n "$max_gitlog_lines"
@@ -69,9 +72,10 @@ function inspect {
 			# show changed files in a more informative way than normal `git status`
 			git diff --color="always" --compact-summary --stat |
 				sed '$d' |                                   # remove summary
-				sed $'s/\(gone\)/\033[1;31mD     \033[0m/' | # color ($ for ansi codes)
-				sed $'s/\(new\)/\033[1;32mN    \033[0m/' |
-				rs -e -w"$COLUMNS" # reflow
+				sed $'s/\(gone\)/\033[1;31mD     \033[0m/g' | # color ($ for ansi codes)
+				sed $'s/\(new\)/\033[1;32mN    \033[0m/g' |
+				sed $'s/ |/\033[1;30m│\033[0m/g' | # nicer bars
+				rs -e -w"$COLUMNS"                             # reflow
 			separator
 		fi
 	fi
@@ -85,7 +89,7 @@ function inspect {
 
 	if [[ $(echo "$eza_output" | wc -l) -gt $max_files_lines ]]; then
 		echo -n "$(echo "$eza_output" | head -n"$max_files_lines")"
-		printf "\033[1;36m (…)\033[0m" # blue = eza's default folder color
+		printf "\033[1;36m (…)\033[0m" 
 	elif [[ -n "$eza_output" ]]; then
 		echo -n "$eza_output"
 	fi
