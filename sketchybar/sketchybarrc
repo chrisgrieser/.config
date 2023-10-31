@@ -6,9 +6,9 @@
 i=0
 while ! pgrep -xq "Stats"; do
 	open -a "Stats"
-	sleep 2
+	sleep 5
 	i=$((i + 1))
-	if [[ $i -gt 10 ]]; then
+	if [[ $i -gt 3 ]]; then
 		osascript -e 'display notification "⚠️ Sketchybar cannot be loaded" with title "Stats does not start"'
 		return 1
 	fi
@@ -18,9 +18,9 @@ i=0
 while true; do
 	stats=$(sketchybar --query default_menu_items | grep --max-count=1 "Combined" | cut -d\" -f2)
 	[[ -n "$stats" ]] && break
-	sleep 2
+	sleep 5
 	i=$((i + 1))
-	if [[ $i -gt 5 ]]; then
+	if [[ $i -gt 3 ]]; then
 		osascript -e 'display notification "⚠️ Sketchybar cannot be loaded" with title "Stats Combined Module not found"'
 		return 1
 	fi

@@ -981,18 +981,6 @@
 			<string>bundesland_feiertage</string>
 		</dict>
 	</array>
-	<key>variables</key>
-	<dict>
-		<key>startdate</key>
-		<string>2023-11-28</string>
-		<key>week_no</key>
-		<string>1</string>
-	</dict>
-	<key>variablesdontexport</key>
-	<array>
-		<string>week_no</string>
-		<string>startdate</string>
-	</array>
 	<key>version</key>
 	<string>0.9</string>
 	<key>webaddress</key>
