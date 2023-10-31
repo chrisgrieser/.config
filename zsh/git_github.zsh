@@ -4,8 +4,6 @@ alias co="git checkout"
 alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to last directory
 alias gs='git status'
 alias ga="git add"
-alias gm="git add -A && git commit --amend --no-edit" # amend no-edit
-alias gM="git commit --amend"                         # amend message only
 
 alias grh='git reset --hard'
 alias push="git push"
@@ -71,25 +69,13 @@ function rebase {
 #───────────────────────────────────────────────────────────────────────────────
 # GIT DIFF & DELTA
 
-# use delta for small diffs and turn into html for bigger files
 function gd {
-	# CONFIG
-	local threshold_lines=120
-
-	# GUARD
 	if [[ ! -x "$(command -v delta)" ]]; then print "\033[1;33mdelta not installed (\`brew install git-delta\`)\033[0m" && return 1; fi
-	if [[ ! -x "$(command -v ansifilter)" ]]; then print "\033[1;33mansifilter not installed.\033[0m" && return 1; fi
 
-	if [[ $(git diff "$@" | wc -l) -lt $threshold_lines ]]; then
-		git -c delta."$style"=true diff "$@"
-	else
-		# https://github.com/dandavison/delta/discussions/1338
-		git diff "$@" | delta --light --file-modified-label="FILE:" --hunk-label="" \
-			--file-decoration-style="blue" --hunk-header-decoration-style="blue" |
-			ansifilter --html >"/tmp/delta.html"
-		open "/tmp/delta.html"
-		# TODO work out how to output a dark mode for this
-	fi
+	# make delta light/dark mode aware
+	local style
+	defaults read -g AppleInterfaceStyle &>/dev/null && style="dark" || style="light"
+	git -c delta."$style"=true diff "$@"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -166,7 +152,7 @@ function gb {
 function gc {
 	local commit_msg="$1"
 	[[ -z "$commit_msg" ]] && commit_msg=chore || commit_msg=$1 # fill in empty commit msg,
-	git diff --staged --quiet && git add -A                     # if no staged changes, stage all
+	git diff --staged --quiet && git add --all                  # if no staged changes, stage all
 
 	printf "\033[1;32mCommit: \033[0m"
 	git commit -m "$commit_msg" || return 1
@@ -189,6 +175,17 @@ function gc {
 	printf "\033[1;32mPull: \033[0m" && git pull &&
 		printf "\033[1;32mPush: \033[0m" && git push
 }
+
+# amend-no-edit
+function gm {
+	# if no staged changes, stage all
+	git diff --staged --quiet && git add --all 
+
+	git commit --amend --no-edit
+}
+
+# amend message only
+alias gM="git commit --amend" 
 
 #───────────────────────────────────────────────────────────────────────────────
 
