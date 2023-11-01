@@ -63,18 +63,20 @@ ln -sf "$HOME/.config/mackup/custom-app-configs" ~/.mackup
 brew install mackup 
 mackup restore
 
-# FIX these do not work with symlinked preferences
+# FIX most not working on initialization
 cd "$HOME/.config/mackup/backups/Library/Preferences/"
-tofix=(
-	"org.m0k.transmission"
-	"pl.maketheweb.cleanshotx"
-	"com.dexterleng.TextPal"
-	"com.hegenberg.BetterTouchTool"
-)
-for plist in "${tofix[@]}"; do
-	rm -f "$HOME/Library/Preferences/$plist.plist" # needs be removed as it's a symlink to the original
-	cp "$plist.plist" "$HOME/Library/Preferences"
+for plist in *.plist; do
+	rm -f "$HOME/Library/Preferences/$plist" # needs be removed as it's a symlink to the original
+	cp "$plist" "$HOME/Library/Preferences"
 done
+
+# Peek
+rm -f "$HOME/Library/Group Containers/9V456WSURS.com.bigzlabs.peekgroup/Library/Preferences/9V456WSURS.com.bigzlabs.peekgroup.plist"
+cp "$HOME/.config/mackup/backups/Library/Group Containers/9V456WSURS.com.bigzlabs.peekgroup/Library/Preferences/9V456WSURS.com.bigzlabs.peekgroup.plist" \
+	"$HOME/Library/Group Containers/9V456WSURS.com.bigzlabs.peekgroup/Library/Preferences/9V456WSURS.com.bigzlabs.peekgroup.plist"
+rm -f "$HOME/Library/Containers/com.bigzlabs.peek/Data/Library/Preferences/com.bigzlabs.peek.plist"
+cp "$HOME/.config/mackup/backups/Library/Containers/com.bigzlabs.peek/Data/Library/Preferences/com.bigzlabs.peek.plist" \
+	"$HOME/Library/Containers/com.bigzlabs.peek/Data/Library/Preferences/com.bigzlabs.peek.plist"
 
 #───────────────────────────────────────────────────────────────────────────────
 # CREATE SYMLINKS

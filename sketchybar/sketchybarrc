@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# INFO use `sketchybar --hotload` to auto-reload config when building stuff
+#───────────────────────────────────────────────────────────────────────────────
 
 # CONFIG
 
@@ -18,17 +20,11 @@ fi
 first_row="left"
 second_row="popup.clock"
 
-# INFO
-# use `sketchybar --hotload` to auto-reload config when building stuff
+# name differs slightly depending on macOS architecture
+stats="Stats,CombinedModules"
 
 #───────────────────────────────────────────────────────────────────────────────
 # SKETCHYBAR CALL
-
-if ! pgrep -xq "Stats"; then
-	open -a "Stats"
-	sleep 2 # ensure modules are loaded
-fi
-stats=$(sketchybar --query default_menu_items | grep --max-count=1 "Combined" | cut -d'"' -f2)
 
 # one big call to speed up reloading https://felixkratz.github.io/SketchyBar/config/bar
 sketchybar \
