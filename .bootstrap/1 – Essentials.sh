@@ -63,10 +63,17 @@ ln -sf "$HOME/.config/mackup/custom-app-configs" ~/.mackup
 brew install mackup 
 mackup restore
 
-# prevent apps from overwriting symlink files https://github.com/lra/mackup/issues/1854
-for file in "$HOME/.config"/mackup/backups/Library/Preferences/*; do
-	file=$(basename "$file")
-	chflags nouchg "$HOME/Library/Preferences/$file"
+# FIX these do not work with symlinked preferences
+cd "$HOME/.config/mackup/backups/Library/Preferences/"
+tofix=(
+	"org.m0k.transmission"
+	"pl.maketheweb.cleanshotx"
+	"com.dexterleng.TextPal"
+	"com.hegenberg.BetterTouchTool"
+)
+for plist in "${tofix[@]}"; do
+	rm -f "$HOME/Library/Preferences/$plist.plist" # needs be removed as it's a symlink to the original
+	cp "$plist.plist" "$HOME/Library/Preferences"
 done
 
 #───────────────────────────────────────────────────────────────────────────────
