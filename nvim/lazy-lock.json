@@ -80,7 +80,6 @@
   "satellite.nvim": { "branch": "main", "commit": "5d33376287e384f04b84962a20d90bd10a9dac86" },
   "scrollEOF.nvim": { "branch": "master", "commit": "cd7d9f02b0be033e254c8289f7a77bda57383637" },
   "sibling-swap.nvim": { "branch": "main", "commit": "58b256f2a7def9b63be275b373c748c012b3a604" },
-  "sunglasses.nvim": { "branch": "main", "commit": "fd207b243abd75c7d2b45e66596af474d89722d0" },
   "symbol-usage.nvim": { "branch": "main", "commit": "b21b731c09907149a1f996001aa1ce385c1512b5" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "6c921ca12321edaa773e324ef64ea301a1d0da62" },
   "telescope-recent-files": { "branch": "main", "commit": "6893cda11625254cc7dc2ea76e0a100c7deeb028" },
