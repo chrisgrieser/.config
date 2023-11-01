@@ -1,1 +1,0 @@
-/Users/chrisgrieser/.config/_linter-configs/alfred.d.ts

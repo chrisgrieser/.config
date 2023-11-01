@@ -117,9 +117,6 @@ defaults write -g PMPrintingExpandedStateForPrint2 -bool true
 
 defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
-# set highlight color
-defaults write NSGlobalDomain AppleHighlightColor -string "0.968627 0.831373 1.000000 Purple"
-
 # Avoid creating .DS_Store files on network or USB volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
