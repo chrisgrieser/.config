@@ -96,11 +96,10 @@ function man() {
 
 # have `bat` colorize man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-man 2 select
 
 #------------
 
-# --ignore-case is actually smart case
+# INFO --ignore-case is actually smart case
 export LESS='--RAW-CONTROL-CHARS --incsearch --ignore-case --window=-3 --no-init --tilde --long-prompt'
 export LESSHISTFILE=- # don't clutter home directory with useless `.lesshst` file
 
@@ -109,7 +108,7 @@ export LESSHISTFILE=- # don't clutter home directory with useless `.lesshst` fil
 #   source files. Therefore for this to work, the version of less provided by
 #   homebrew is needed (v.633)
 # - keybinding for search includes a setting that makes `n` and `N` wrap
-export PAGER="less" # needs to be set explicitly, so the homebrew version is used
+# export PAGER="less" # needs to be set explicitly, so the homebrew version is used
 export LESSKEYIN="$ZDOTDIR/.lesskey"
 
 less_version=$(less --version | grep -E --only-matching --max-count=1 "[0-9.]{2,}")

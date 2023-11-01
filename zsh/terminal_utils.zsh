@@ -39,27 +39,16 @@ function o() {
 
 # smarter z/cd
 # after entering new folder, inspect it (eza, git log, git status, etc.)
-function z() {
+function my_zoxide() {
 	if ! command -v __zoxide_z &>/dev/null; then printf "\033[1;33mzoxide not installed.\033[0m" && return 1; fi
-	__zoxide_z "$1"
+	# shellcheck disable=2086
+	"$1" $2 || return 1
 	inspect
 	auto_venv
 }
-
-# back to last directory
-function zz() {
-	if ! command -v __zoxide_z &>/dev/null; then printf "\033[1;33mzoxide not installed.\033[0m" && return 1; fi
-	__zoxide_z "$OLDPWD"
-	inspect
-	auto_venv
-}
-
-function zi() {
-	if ! command -v __zoxide_zi &>/dev/null; then printf "\033[1;33mzoxide not installed.\033[0m" && return 1; fi
-	__zoxide_zi
-	inspect
-	auto_venv
-}
+function z() { my_zoxide "__zoxide_z" "$1"; }
+function zz() { my_zoxide "__zoxide_z" "$OLDPWD"; } # back to last directory
+function zi() { my_zoxide "__zoxide_zi"; } # directory history
 
 # cd to pwd from last session. Requires setup in `.zlogout`
 function ld() {
