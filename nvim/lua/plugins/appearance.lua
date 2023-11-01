@@ -3,10 +3,6 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{
-		"miversen33/sunglasses.nvim",
-		config = true,
-	},
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",
 		event = "UIEnter",

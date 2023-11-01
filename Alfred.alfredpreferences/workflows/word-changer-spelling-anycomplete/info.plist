@@ -90,7 +90,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>4937A340-F92B-46C5-A8FA-B4D40A786CF7</string>
+				<string>4F7A6FD7-A938-4E18-BD93-CC83556B5F37</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -394,29 +394,19 @@ end run</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
 				<key>ignoredynamicplaceholders</key>
 				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
+				<key>transient</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
+			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>4937A340-F92B-46C5-A8FA-B4D40A786CF7</string>
+			<string>4F7A6FD7-A938-4E18-BD93-CC83556B5F37</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -513,14 +503,14 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>350</real>
 		</dict>
-		<key>4937A340-F92B-46C5-A8FA-B4D40A786CF7</key>
+		<key>4F7A6FD7-A938-4E18-BD93-CC83556B5F37</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>8</integer>
 			<key>note</key>
-			<string>errors only</string>
+			<string>paste</string>
 			<key>xpos</key>
-			<real>505</real>
+			<real>510</real>
 			<key>ypos</key>
 			<real>530</real>
 		</dict>
