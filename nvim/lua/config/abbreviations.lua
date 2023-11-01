@@ -20,6 +20,7 @@ local spellfixes = {
 	hwo = "how",
 	tiem = "item",
 	seperate = "separate",
+	msot = "most",
 	retrun = "return",
 	onyl = "only",
 	esle = "else",
