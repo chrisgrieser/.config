@@ -87,11 +87,18 @@ function man() {
 #───────────────────────────────────────────────────────────────────────────────
 # LESS
 
-export LESS_TERMCAP_mb=$'\E[1;31m' # begin bold
-export LESS_TERMCAP_md=$'\E[1;33m' # begin blink
-export LESS_TERMCAP_me=$'\E[0m'    # reset bold/blink
-export LESS_TERMCAP_us=$'\E[1;36m' # begin underline
-export LESS_TERMCAP_ue=$'\E[0m'    # reset underline
+# have `less` colorize man pages
+# export LESS_TERMCAP_mb=$'\E[1;31m' # begin bold
+# export LESS_TERMCAP_md=$'\E[1;33m' # begin blink
+# export LESS_TERMCAP_me=$'\E[0m'    # reset bold/blink
+# export LESS_TERMCAP_us=$'\E[1;36m' # begin underline
+# export LESS_TERMCAP_ue=$'\E[0m'    # reset underline
+
+# have `bat` colorize man pages
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+man 2 select
+
+#------------
 
 # --ignore-case is actually smart case
 export LESS='--RAW-CONTROL-CHARS --incsearch --ignore-case --window=-3 --no-init --tilde --long-prompt'
@@ -102,9 +109,9 @@ export LESSHISTFILE=- # don't clutter home directory with useless `.lesshst` fil
 #   source files. Therefore for this to work, the version of less provided by
 #   homebrew is needed (v.633)
 # - keybinding for search includes a setting that makes `n` and `N` wrap
-export LESSKEYIN="$HOME/.config/zsh/lesskey"
+export PAGER="less" # needs to be set explicitly, so the homebrew version is used
+export LESSKEYIN="$ZDOTDIR/.lesskey"
 
 less_version=$(less --version | grep -E --only-matching --max-count=1 "[0-9.]{2,}")
-
 [[ $less_version -lt 582 ]] &&
 	echo "Installed version of less is lower than v.582, does not support all features."
