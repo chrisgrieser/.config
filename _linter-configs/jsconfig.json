@@ -1,0 +1,6 @@
+{
+	"compilerOptions": {
+		"checkJs": true, // enable typescript support in JXA files
+		"target": "ES2022" // JXA is compliant with most of ECMAScript: https://github.com/JXA-Cookbook/JXA-Cookbook/wiki/ES6-Features-in-JXA
+	}
+}
