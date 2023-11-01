@@ -33,6 +33,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F9A17C92-A024-4643-9285-DEA835D7E716</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>578C08D0-C681-4E8A-AC1A-63359A0F0C34</key>
 		<array>
@@ -556,6 +566,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>count</key>
+				<integer>1</integer>
+				<key>keychar</key>
+				<string>⌫</string>
+				<key>keycode</key>
+				<integer>51</integer>
+				<key>keymod</key>
+				<integer>0</integer>
+				<key>overridewithargument</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.dispatchkeycombo</string>
+			<key>uid</key>
+			<string>F9A17C92-A024-4643-9285-DEA835D7E716</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
@@ -885,6 +916,17 @@
 			<real>30</real>
 			<key>ypos</key>
 			<real>155</real>
+		</dict>
+		<key>F9A17C92-A024-4643-9285-DEA835D7E716</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>deleted selection</string>
+			<key>xpos</key>
+			<real>205</real>
+			<key>ypos</key>
+			<real>270</real>
 		</dict>
 		<key>FFFCD856-9A0A-4D43-A899-CCA1AE5235BB</key>
 		<dict>
