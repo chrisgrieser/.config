@@ -214,6 +214,22 @@ exmap checkList obcommand editor:toggle-checklist-status
 nnoremap ,x :checkList
 
 """"""""""""""""""""""
+" Critic Markup
+""""""""""""""""""""""
+" accept all / selection
+exmap acceptAll obcommand commentator:commentator-accept-all-suggestions
+nnoremap ,a :acceptAll
+exmap acceptSelected obcommand commentator:commentator-accept-selected-suggestions
+vnoremap ,a :acceptAll
+
+" reject all / selection
+exmap rejectAll obcommand commentator:commentator-reject-all-suggestions
+nnoremap ,A :rejectAll
+exmap rejectSelected obcommand commentator:commentator-reject-selected-suggestions
+vnoremap ,A :rejectAll
+
+
+""""""""""""""""""""""
 " Indentation
 """"""""""""""""""""""
 " <Tab> as indentation is already implemented in Obsidian
