@@ -3,7 +3,6 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 # CONFIG
-
 PLUGIN_DIR="$(dirname "$0")" # plugins in same folder as this rc file
 
 if defaults read -g AppleInterfaceStyle | grep -q "Dark"; then
@@ -16,7 +15,6 @@ fi
 
 # HACK using popup for second row. the popup only refers to the clock item to
 # anchor it to the leftmost item, it actually has nothing to do with the clock
-# other method (requiring running multiple instances): https://felixkratz.github.io/SketchyBar/config/Tricks#multiple-bars
 first_row="left"
 second_row="popup.clock"
 
