@@ -88,14 +88,14 @@ function man() {
 # LESS
 
 # have `less` colorize man pages
-# export LESS_TERMCAP_mb=$'\E[1;31m' # begin bold
-# export LESS_TERMCAP_md=$'\E[1;33m' # begin blink
-# export LESS_TERMCAP_me=$'\E[0m'    # reset bold/blink
-# export LESS_TERMCAP_us=$'\E[1;36m' # begin underline
-# export LESS_TERMCAP_ue=$'\E[0m'    # reset underline
+export LESS_TERMCAP_mb=$'\E[1;31m' # begin bold
+export LESS_TERMCAP_md=$'\E[1;33m' # begin blink
+export LESS_TERMCAP_me=$'\E[0m'    # reset bold/blink
+export LESS_TERMCAP_us=$'\E[1;36m' # begin underline
+export LESS_TERMCAP_ue=$'\E[0m'    # reset underline
 
 # have `bat` colorize man pages
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+# export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 #------------
 

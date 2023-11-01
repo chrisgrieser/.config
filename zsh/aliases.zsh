@@ -20,7 +20,7 @@ alias grep='grep --ignore-case --color'
 alias ls='ls --color'
 alias which='which -a'           # show all
 alias mkdir='mkdir -p'           # create intermediate directories
-alias curl='curl --progress-bar' # nicer progress bar
+alias curl='curl --progress-bar --styled-output' # nicer progress bar
 alias make='make --silent --warn-undefined-variables'
 
 # eza
