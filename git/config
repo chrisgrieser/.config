@@ -14,6 +14,8 @@
 	; this dotfile-repo, it does not work to enforce hooks on other people's clones
 	hooksPath = .git-hooks
 [status]
+	branch = true
+	short = true
 	showUntrackedFiles = all
 	showStash = true
 	relativePaths = false # show path relative to git root, not to cwd

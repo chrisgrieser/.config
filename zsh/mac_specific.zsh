@@ -1,5 +1,13 @@
 #!/usr/bin/env zsh
 
+# mackup sync
+# INFO since symlinks of preferences are buggy since Sonoma, this workaround
+# will simply copy the preferences without symlinks
+alias saveprefs="mackup backup --force && mackup uninstall --force"
+alias loadprefs="mackup restore --force && mackup uninstall --force"
+
+#───────────────────────────────────────────────────────────────────────────────
+
 # eject
 function e {
 	volumes=$(df -h | grep -io "\s/Volumes/.*" | cut -c2-)
@@ -24,7 +32,7 @@ function appid {
 }
 
 # read app and macOS system setting changes https://news.ycombinator.com/item?id=36982463
-function prefs {
+function showdefaults {
 	if [[ "$PREF_BEFORE" -eq 0 ]]; then
 		defaults read >/tmp/before
 		PREF_BEFORE=1

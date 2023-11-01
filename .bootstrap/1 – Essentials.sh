@@ -18,14 +18,16 @@ brew install --no-quarantine alfred hammerspoon neovim wezterm karabiner-element
 brew install --no-quarantine --cask neovide
 
 # important settings
-defaults write com.apple.finder CreateDesktop false          # disable desktop icons & make desktop unfocussable
-defaults write com.apple.finder QuitMenuItem -bool true      # Finder quitable
+defaults write com.apple.finder CreateDesktop false     # disable desktop icons & make desktop unfocussable
+defaults write com.apple.finder QuitMenuItem -bool true # Finder quitable
 defaults write org.hammerspoon.Hammerspoon MJConfigFile "$HOME/.config/hammerspoon/init.lua"
+
+zsh "$HOME/.config/hammerspoon/dock-switching/dock-switcher.sh" --load home
 
 #───────────────────────────────────────────────────────────────────────────────
 
 # GPG Keys & Passwords
-brew install pinentry-mac pass gnupg 
+brew install pinentry-mac pass gnupg
 defaults write org.gpgtools.common DisableKeychain -bool yes # prevent from saving in the keychains
 
 gpg --import "$DATA_DIR/Authentication/passwords and gpg/gpg-pass.key"
@@ -56,27 +58,10 @@ git clone git@github.com:chrisgrieser/.password-store.git
 #───────────────────────────────────────────────────────────────────────────────
 # LOAD CONFIGS (MACKUP)
 
-zsh "$HOME/.config/hammerspoon/dock-switching/dock-switcher.sh" --load home
-
 ln -sf "$HOME/.config/mackup/mackup.cfg" ~/.mackup.cfg
 ln -sf "$HOME/.config/mackup/custom-app-configs" ~/.mackup
-brew install mackup 
-mackup restore
-
-# FIX most not working on initialization
-cd "$HOME/.config/mackup/backups/Library/Preferences/"
-for plist in *.plist; do
-	rm -f "$HOME/Library/Preferences/$plist" # needs be removed as it's a symlink to the original
-	cp "$plist" "$HOME/Library/Preferences"
-done
-
-# Peek
-rm -f "$HOME/Library/Group Containers/9V456WSURS.com.bigzlabs.peekgroup/Library/Preferences/9V456WSURS.com.bigzlabs.peekgroup.plist"
-cp "$HOME/.config/mackup/backups/Library/Group Containers/9V456WSURS.com.bigzlabs.peekgroup/Library/Preferences/9V456WSURS.com.bigzlabs.peekgroup.plist" \
-	"$HOME/Library/Group Containers/9V456WSURS.com.bigzlabs.peekgroup/Library/Preferences/9V456WSURS.com.bigzlabs.peekgroup.plist"
-rm -f "$HOME/Library/Containers/com.bigzlabs.peek/Data/Library/Preferences/com.bigzlabs.peek.plist"
-cp "$HOME/.config/mackup/backups/Library/Containers/com.bigzlabs.peek/Data/Library/Preferences/com.bigzlabs.peek.plist" \
-	"$HOME/Library/Containers/com.bigzlabs.peek/Data/Library/Preferences/com.bigzlabs.peek.plist"
+brew install mackup
+mackup restore --force && mackup uninstall --force # sets symlinks, and then writes full files
 
 #───────────────────────────────────────────────────────────────────────────────
 # CREATE SYMLINKS
@@ -94,9 +79,7 @@ ESPANSO_DIR=~"/Library/Application Support/espanso"
 ln -sf "$HOME/.config/espanso/" "$ESPANSO_DIR"
 
 # Browser PWAs
-# INFO "Vivaldi Apps" is internally still named "Chrome Apps"
-[[ "$BROWSER_APP" == "Vivaldi" ]] && browser="Chrome" || browser="$BROWSER_APP"
-[[ -e ~"/Applications/$browser Apps.localized" ]] && rm -rf ~"/Applications/$browser Apps.localized"
-ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$browser Apps.localized/" ~"/Applications/$browser Apps.localized"
+[[ -e ~"/Applications/$BROWSER_APP Apps.localized" ]] && rm -rf ~"/Applications/$BROWSER_APP Apps.localized"
+ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$BROWSER_APP Apps.localized/" ~"/Applications/$BROWSER_APP Apps.localized"
 
 #───────────────────────────────────────────────────────────────────────────────
