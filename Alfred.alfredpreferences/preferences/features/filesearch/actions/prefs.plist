@@ -41,6 +41,8 @@
 		<key>alfred.action.url.usedomainfromurl</key>
 		<true/>
 	</dict>
+	<key>escapeCopiedPath</key>
+	<true/>
 	<key>finderSelectionHotkey</key>
 	<dict>
 		<key>key</key>
