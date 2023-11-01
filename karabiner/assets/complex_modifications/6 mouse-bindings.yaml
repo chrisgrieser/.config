@@ -217,3 +217,11 @@ rules:
         conditions:
           # conflicts for some reason with space+dragging in the Canvas plugin
           - { type: frontmost_application_unless, bundle_identifiers: [^md\.obsidian$] }
+  #─────────────────────────────────────────────────────────────────────
+  - description: "(Mouse) 6: Cmd-Tab"
+    manipulators:
+      - type: basic
+        from:
+          simultaneous: [ { pointing_button: button6 } ]
+        to:
+          - { key_code: tab, modifiers: [command] }
