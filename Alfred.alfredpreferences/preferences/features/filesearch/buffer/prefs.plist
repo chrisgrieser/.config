@@ -4,5 +4,7 @@
 <dict>
 	<key>clearAfterIdle</key>
 	<true/>
+	<key>enabled</key>
+	<false/>
 </dict>
 </plist>

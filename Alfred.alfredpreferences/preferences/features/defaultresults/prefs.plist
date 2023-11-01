@@ -10,5 +10,7 @@
 	<true/>
 	<key>showPreferences</key>
 	<false/>
+	<key>showTextFiles</key>
+	<true/>
 </dict>
 </plist>
