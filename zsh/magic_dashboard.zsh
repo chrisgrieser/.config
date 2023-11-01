@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # CONFIG
-horizontal_sep="═" # ─ ═
+horizontal_sep="═"     # ─ ═
 sep_color="\033[1;30m" # black
 
 max_gitlog_lines=5
@@ -20,7 +20,7 @@ function separator {
 }
 
 function gitlog {
-	# HACK pseudo-option to suppress graph
+	# pseudo-option to suppress graph
 	if [[ "$1" == "--no-graph" ]]; then
 		shift
 		graph=""
@@ -50,7 +50,6 @@ function gitlog {
 
 # show files + git status + brief git log
 function inspect {
-	if [[ ! -x "$(command -v git)" ]]; then print "\033[1;33mgit not installed.\033[0m" && return 1; fi
 	if [[ ! -x "$(command -v eza)" ]]; then print "\033[1;33meza not installed.\033[0m" && return 1; fi
 
 	# check if pwd still exists
@@ -70,10 +69,10 @@ function inspect {
 		if ! git diff --quiet; then # `git diff --quiet` exits 0 if there are changes
 			# show changed files in a more informative way than normal `git status`
 			git diff --color="always" --compact-summary --stat |
-				sed '$d' |                                   # remove summary
+				sed '$d' |                                    # remove summary
 				sed $'s/\(gone\)/\033[1;31mD     \033[0m/g' | # color ($ for ansi codes)
 				sed $'s/\(new\)/\033[1;32mN    \033[0m/g' |
-				sed $'s/ |/\033[1;30m│\033[0m/g'  # nicer bars
+				sed $'s/ |/\033[1;30m│\033[0m/g' # nicer bars
 			separator
 		fi
 	fi
@@ -87,7 +86,7 @@ function inspect {
 
 	if [[ $(echo "$eza_output" | wc -l) -gt $max_files_lines ]]; then
 		echo -n "$(echo "$eza_output" | head -n"$max_files_lines")"
-		printf "\033[1;36m (…)\033[0m" 
+		printf "\033[1;36m (…)\033[0m"
 	elif [[ -n "$eza_output" ]]; then
 		echo -n "$eza_output"
 	fi
