@@ -4,6 +4,8 @@
 <dict>
 	<key>delay_ms</key>
 	<string>120</string>
+	<key>output_flavor</key>
+	<string>critic-markup</string>
 	<key>static_prompt</key>
 	<string>The following text is a paragraph for a scientific paper in sociology. Please make suggestions how to improve its readability and language. Do not change anything about the content, and refrain from doing any changes when the writing is already sufficiently clear and concise.</string>
 </dict>

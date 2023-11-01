@@ -39,8 +39,15 @@ echo "$response" >"$cache/rephrased.txt"
 diff=$(git diff --word-diff "$cache/selection.txt" "$cache/rephrased.txt" |
 	sed -e "1,5d")
 
-markdown=$(echo "$diff" | 
+if [[ "$output_flavor" == "markdown" ]]; then
+	output=$(echo "$diff" |
 	sed -e 's/\[-/~~/g' -e 's/-\]/~~/g' -e 's/{+/==/g' -e 's/+}/==/g')
+elif [[ "$output_flavor" == "critic-markup" ]]; then
+	output=$(echo "$diff" |
+	sed -e 's/\[-/{--/g' -e 's/-\]/--}/g' -e 's/{+/{++/g' -e 's/+}/++}/g')
+elif [[ "$output_flavor" == "response" ]]; then
+	output="$response"
+fi
 
 # paste via Alfred
-echo -n "$markdown"
+echo -n "$output"

@@ -466,7 +466,6 @@ end run</string>
 	<key>readme</key>
 	<string>## Requirements
 - `aspell`
-- `ansifilter`
 - OpenAi API Key
 
 ---
@@ -703,6 +702,36 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<string>popupbutton</string>
 			<key>variable</key>
 			<string>font_size</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>response</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>Rewritten Text</string>
+						<string>response</string>
+					</array>
+					<array>
+						<string>Markdown (Highlight &amp; Strikethrough)</string>
+						<string>markdown</string>
+					</array>
+					<array>
+						<string>Critic Markup</string>
+						<string>critic-markup</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>Rephraser: Syntax of the Output</string>
+			<key>label</key>
+			<string>Output Type</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>output_flavor</string>
 		</dict>
 		<dict>
 			<key>config</key>
