@@ -285,10 +285,10 @@ local config = {
 
 	-- FONT
 	-- some nerd font icons requires a space after them to be properly sized
-	font = wt.font("Iosevka Fixed", { weight = "Medium" }),
+	font = wt.font("Iosevka Term", { weight = "Medium" }),
 	font_size = fontSize,
 	command_palette_font_size = 30,
-	harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
+	-- harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
 	adjust_window_size_when_changing_font_size = false,
 
 	-- Appearance
