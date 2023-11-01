@@ -142,7 +142,6 @@ local function gitShowAndDeltaPreviewer()
 				("-c delta.%s=true"):format(vim.o.background),
 				"-c", "delta.file-style=omit", -- eats too much space
 				"-c", "delta.hunk-header-decoration-style='blue ol'",
-				"-c", "delta.hunk-label=■",
 				"diff " .. hash .. "^!",
 				"--unified=1", -- save space, show only 1 line of context
 			}

@@ -218,7 +218,8 @@ rules:
           # conflicts for some reason with space+dragging in the Canvas plugin
           - { type: frontmost_application_unless, bundle_identifiers: [^md\.obsidian$] }
   #─────────────────────────────────────────────────────────────────────
-  - description: "(Mouse) 6: Cmd-Tab"
+  # some MX Master Models have this builtin, others do not
+  - description: "(Mouse) 6: Cmd+Tab" 
     manipulators:
       - type: basic
         from:
