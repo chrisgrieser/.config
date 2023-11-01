@@ -22,6 +22,6 @@ function run(argv) {
 	});
 	rem.defaultList().reminders.push(newReminder)
 
-	// rem.quit()
+	rem.quit()
 	return title; // Alfred notification
 }
