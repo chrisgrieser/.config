@@ -36,6 +36,7 @@ M.videoAndAudioApps = {
 	"Twitch.tv",
 	"Netflix",
 	"Prime Video",
+	"Freevee",
 	"Tageschau",
 	"CrunchyRoll",
 	"Crunchyroll", -- PWA sometimes cased differently
