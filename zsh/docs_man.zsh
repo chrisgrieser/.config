@@ -1,6 +1,6 @@
 # CHEAT.SH
 # aggregates stackoverflow, tl;dr and many other help pages
-# https://cht.sh/:help
+# DOCS https://cht.sh/:help
 function h() {
 	local style pane_id
 	local query="$*"
@@ -86,6 +86,7 @@ function man() {
 
 #───────────────────────────────────────────────────────────────────────────────
 # LESS
+export PAGER="less" # needs to be set explicitly, so the homebrew version is used
 
 # have `less` colorize man pages
 export LESS_TERMCAP_mb=$'\E[1;31m' # begin bold
@@ -94,10 +95,6 @@ export LESS_TERMCAP_me=$'\E[0m'    # reset bold/blink
 export LESS_TERMCAP_us=$'\E[1;36m' # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'    # reset underline
 
-# have `bat` colorize man pages
-# export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-
-#------------
 
 # INFO --ignore-case is actually smart case
 export LESS='--RAW-CONTROL-CHARS --incsearch --ignore-case --window=-3 --no-init --tilde --long-prompt'
@@ -108,7 +105,6 @@ export LESSHISTFILE=- # don't clutter home directory with useless `.lesshst` fil
 #   source files. Therefore for this to work, the version of less provided by
 #   homebrew is needed (v.633)
 # - keybinding for search includes a setting that makes `n` and `N` wrap
-# export PAGER="less" # needs to be set explicitly, so the homebrew version is used
 export LESSKEYIN="$ZDOTDIR/.lesskey"
 
 less_version=$(less --version | grep -E --only-matching --max-count=1 "[0-9.]{2,}")
