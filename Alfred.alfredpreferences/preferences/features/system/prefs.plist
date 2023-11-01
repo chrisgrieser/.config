@@ -25,8 +25,8 @@
 	<string>h</string>
 	<key>hideKeywordEnabled</key>
 	<false/>
-	<key>logoutKeywordEnabled</key>
-	<false/>
+	<key>logoutConfirm</key>
+	<true/>
 	<key>quitKeyword</key>
 	<string>q</string>
 	<key>quitKeywordEnabled</key>
@@ -42,6 +42,8 @@
 	<key>shutdownConfirm</key>
 	<true/>
 	<key>shutdownKeywordEnabled</key>
+	<false/>
+	<key>sleepKeywordEnabled</key>
 	<false/>
 	<key>sleepdisplaysKeywordEnabled</key>
 	<false/>
