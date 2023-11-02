@@ -83,6 +83,5 @@ sketchybar \
 
 # INFO
 # - `--update` needs to run at the end of config and should not be run in an item script
-# - `repo-files-update` gets triggered via Hammerspoon after sync events
-# - clock and alias items needs the fixed-width to fix whitespace of the item next (Stats)
-# - not using builtin clock, to be able to customize font etc.
+# - clock and alias items needs the fixed-width to fix whitespace of the item next 
+# - not using builtin clock, to be able to customize font

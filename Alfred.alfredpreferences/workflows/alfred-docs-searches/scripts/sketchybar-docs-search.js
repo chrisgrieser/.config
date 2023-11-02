@@ -5,17 +5,16 @@ app.includeStandardAdditions = true;
 
 //──────────────────────────────────────────────────────────────────────────────
 
+// @ts-ignore
 const alfredMatcher = (/** @type {string} */ str) => str.replace(/[-()_./]/g, " ") + " " + str + " ";
 
 //──────────────────────────────────────────────────────────────────────────────
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const gitHubURL = "https://api.github.com/repos/felixkratz/SketchyBar/git/trees/main?recursive=1";
-	const workArray = JSON.parse(app.doShellScript(`curl -s "${gitHubURL}"`))
-		.tree.filter(
-			(/** @type {{ path: string; }} */ file) => file.path.startsWith("docs/") && file.path.endsWith(".md"),
-		)
+	const gitHubURL = "https://api.github.com/repos/felixkratz/SketchyBar/git/trees/documentation?recursive=1";
+	const workArray = JSON.parse(app.doShellScript(`curl -s "${gitHubURL}"`)).tree
+		.filter( (/** @type {{ path: string; }} */ file) => file.path.startsWith("docs/") && file.path.endsWith(".md"))
 		.map((/** @type {{ path: string }} */ file) => {
 			const site = file.path.slice(5, -3); // remove "docs/" and ".md"
 			const parts = site.split("/");

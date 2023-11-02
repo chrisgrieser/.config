@@ -65,7 +65,8 @@ end)
 --------------------------------------------------------------------------------
 -- FINDER
 
-M.wf_finder = wf.new("Finder")
+M.wf_finder = wf
+	.new("Finder")
 	:setOverrideFilter({
 		-- Info windows *end* with "Info"
 		rejectTitles = { "^Move$", "^Copy$", "^Delete$", "^Finder Settings$", " Info$" },
@@ -82,7 +83,10 @@ M.wf_finder = wf.new("Finder")
 		end
 	end)
 	-- no conditions, since destroyed windows do not have properties
-	:subscribe(wf.windowDestroyed, function() wu.autoTile(M.wf_finder) end)
+	:subscribe(
+		wf.windowDestroyed,
+		function() wu.autoTile(M.wf_finder) end
+	)
 
 -- also triggered via app-watcher, since windows created in the background do
 -- not always trigger window filters
@@ -223,6 +227,21 @@ if u.isSystemStart() then
 	local textpal = u.app("TextPal")
 	if textpal and textpal:mainWindow() then textpal:mainWindow():close() end
 end
+
+--------------------------------------------------------------------------------
+-- NEOVIDE
+
+-- HACK since neovide does not send a launch signal, triggering window resizing
+-- via its URI scheme called on VimEnter
+-- (window-movement also triggers hiding other apps via `app-hider`)
+u.urischeme("neovide-post-startup", function()
+	u.whenAppWinAvailable("neovide", function()
+		local neovideWin = u.app("neovide"):mainWindow()
+		local size = env.isProjector() and wu.maximized or wu.pseudoMax
+		wu.moveResize(neovideWin, size)
+		u.app("neovide"):activate()
+	end)
+end)
 
 --------------------------------------------------------------------------------
 

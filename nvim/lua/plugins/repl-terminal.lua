@@ -13,20 +13,9 @@ return {
 			})
 		end,
 		keys = {
-			{ "<leader>t", vim.cmd.ToggleTerm, desc = "  ToggleTerm" },
-			{
-				"<leader>ii",
-				vim.cmd.ToggleTermSendCurrentLine,
-				ft = "sh",
-				desc = "  ToggleTerm: Send Line",
-			},
-			{
-				"<leader>ii",
-				vim.cmd.ToggleTermSendVisualSelection,
-				ft = "sh",
-				mode = "x",
-				desc = "  ToggleTerm: Send Sel",
-			},
+			{ "<leader>T", vim.cmd.ToggleTerm, desc = "  ToggleTerm" },
+			{ "<leader>t", vim.cmd.ToggleTermSendCurrentLine, desc = "  ToggleTerm: Send Line" },
+			{ "<leader>t", vim.cmd.ToggleTermSendVisualSelection, mode = "x", desc = "  ToggleTerm: Send Sel" },
 		},
 	},
 	{ -- REPL

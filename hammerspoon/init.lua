@@ -49,7 +49,6 @@ safeRequire("lua.weather-reminder")
 safeRequire("lua.app-specific-behavior")
 safeRequire("lua.browser")
 safeRequire("lua.twitter-mastodon")
-safeRequire("lua.neovim")
 safeRequire("lua.tot")
 
 -- reload function (should come last)
