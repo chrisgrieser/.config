@@ -1,5 +1,6 @@
 local M = {} -- persist from garbage collector
 
+local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local aw = hs.application.watcher
 
@@ -47,8 +48,14 @@ local c = hs.caffeinate.watcher
 M.caff_wake = c.new(function(event)
 	if M.recentlyWoke then return end
 	M.recentlyWoke = true
+
 	local woke = event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock
-	if woke then u.runWithDelays(10, remindersToTot) end
+	if woke then
+		u.runWithDelays(10, function()
+			if not env.isProjector() then remindersToTot() end
+		end)
+	end
+
 	u.runWithDelays(2.5, function() M.recentlyWoke = false end)
 end):start()
 
