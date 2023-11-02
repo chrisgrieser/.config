@@ -253,7 +253,7 @@ return {
 			"D",
 		},
 		opts = {
-			ring = { history_length = 100 },
+			ring = { history_length = 100 }, -- also relevant for cmp_yanky
 			highlight = { timer = 1000 },
 			textobj = { enabled = true },
 		},
