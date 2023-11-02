@@ -58,8 +58,8 @@ function gu {
 # $1: number of commits
 function rebase {
 	local num="$1"
-	if grep -qE '^[0-9]+$'; then
-		git rebase -i HEAD~"$num"
+	if echo "$num" | grep -qE '^[0-9]+$'; then
+		git rebase -i HEAD^"$num"
 		gitlog -n $((num + 1))
 	else
 		print "\033[1;33mUsage: rebase <number of commits>"
@@ -154,7 +154,7 @@ function gc {
 	[[ -z "$commit_msg" ]] && commit_msg=chore || commit_msg=$1 # fill in empty commit msg,
 	git diff --staged --quiet && git add --all                  # if no staged changes, stage all
 
-	printf "\033[1;32mCommit: \033[0m"
+	printf "\033[1;36mCommit: \033[0m"
 	git commit -m "$commit_msg" || return 1
 
 	# if commit msg contains issue number, open the issue in the browser
@@ -168,24 +168,22 @@ function gc {
 
 	# pull-push
 	if [[ -n "$(git status --porcelain)" ]]; then
-		print "\033[1;32mPush: \033[0;36mNot pushing since repo still dirty.\033[0m"
+		print "\033[1;36mPush: \033[0;36mNot pushing since repo still dirty.\033[0m"
 		return 0
 	fi
 
-	printf "\033[1;32mPull: \033[0m" && git pull &&
-		printf "\033[1;32mPush: \033[0m" && git push
+	printf "\033[1;36mPull: \033[0m" && git pull &&
+		printf "\033[1;36mPush: \033[0m" && git push
 }
 
 # amend-no-edit
 function gm {
-	# if no staged changes, stage all
-	git diff --staged --quiet && git add --all 
-
+	git diff --staged --quiet && git add --all # if no staged changes, stage all
 	git commit --amend --no-edit
 }
 
 # amend message only
-alias gM="git commit --amend" 
+alias gM="git commit --amend"
 
 #───────────────────────────────────────────────────────────────────────────────
 

@@ -1,9 +1,6 @@
 #!/usr/bin/env zsh
 
 # CONFIG
-horizontal_sep="═"     # ─ ═
-sep_color="\033[1;30m" # black
-
 max_gitlog_lines=5
 max_files_lines=6
 
@@ -11,12 +8,12 @@ max_files_lines=6
 
 # draws a separator line with terminal width
 function separator {
-
+	sep_char="═"     # ─ ═
 	local sep=""
 	for ((i = 0; i < COLUMNS; i++)); do
-		sep="$sep$horizontal_sep"
+		sep="$sep$sep_char"
 	done
-	print "$sep_color$sep\033[0m"
+	print "\033[1;30m$sep\033[0m"
 }
 
 function gitlog {
@@ -39,8 +36,9 @@ function gitlog {
 			-e 's/ months* ago)/mo)/' \
 			-e 's/grafted/ /' \
 			-e 's/origin\//󰞶  /g' \
-			-e 's/HEAD/󱍀 /g' \
+			-e 's/HEAD/󱍞 /g' \
 			-e 's/tags: / )/' \
+			-e 's/\* /∘ /' \
 			-Ee $'s/ (improv|fix|refactor|build|ci|docs|feat|test|perf|chore|revert|break|style)(\\(.+\\)|!)?:/ \033[1;35m\\1\033[1;36m\\2\033[0m:/' \
 			-Ee $'s/(`[^`]*`)/\033[1;36m\\1\033[0m/g' \
 			-Ee $'s/(#[0-9]+)/\033[1;31m\\1\033[0m/g' # issue numbers
@@ -67,12 +65,13 @@ function inspect {
 
 		if ! git diff --quiet; then # `git diff --quiet` exits 0 if there are changes
 			# show changed files in a more informative way than normal `git status`
-			git diff --color="always" --compact-summary --stat |
-				sed '$d' |                                    # remove summary
-				sed $'s/\(gone\)/\033[1;31mD     \033[0m/g' | # color ($ for ansi codes)
-				sed $'s/\(new\)/\033[1;32mN    \033[0m/g' |
-				sed $'s/\(new\)/\033[1;32mN    \033[0m/g' |
-				sed $'s/ |/\033[1;30m│\033[0m/g' # nicer bars
+			git diff --color="always" --compact-summary --stat | sed -e '$d' \
+					-e $'s/\\(gone\\)/\033[1;31mD     \033[0m/g' \
+					-e $'s/\\(new\\)/\033[1;32mN    \033[0m/g' \
+					-e 's/ Bin /    /g' \
+					-e 's/ bytes$/ b/g' \
+					-Ee $'s/^ (.*\\/)/ \033[1;36m\\1\033[0m/g' \
+					-e $'s/ \\|/ \033[1;30m│\033[0m/g' # nicer bars
 			separator
 		fi
 	fi
