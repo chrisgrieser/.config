@@ -1,15 +1,15 @@
 local defaultSources = {
-	{ name = "cmp_yanky", option = { onlyCurrentFiletype = true } },
 	{ name = "luasnip" },
 	{ name = "nvim_lsp" },
 	{
 		name = "buffer",
 		option = {
-			keyword_pattern = [[\k\+]], -- use `opt.iskeyword`
-			get_bufnrs = vim.api.nvim_list_bufs, -- use all buffers
-			max_indexed_line_length = 500, -- don't suggest long lines, e.g. base64-encoded things
+			-- keyword_pattern = [[\k\+]], -- use `opt.iskeyword`
+			get_bufnrs = vim.api.nvim_list_bufs, -- all buffers instead of only the current
+			max_indexed_line_length = 500, -- no long lines (e.g. base64-encoded things)
 		},
 	},
+	{ name = "cmp_yanky", option = { onlyCurrentFiletype = true } },
 	{ name = "path" },
 	{ name = "emoji" },
 }
