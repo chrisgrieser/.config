@@ -280,7 +280,6 @@ local config = {
 		harfbuzz_features = { "calt=0", "ERLA=1" }, -- disable only `+++` ligatures https://typeof.net/Iosevka/
 	},
 	font_size = fontSize,
-	command_palette_font_size = 30,
 	adjust_window_size_when_changing_font_size = false,
 
 	-- Appearance

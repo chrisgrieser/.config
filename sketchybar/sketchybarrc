@@ -65,7 +65,7 @@ sketchybar \
 	\
 	--add alias "$stats" $second_row \
 	alias.color="$font_color" \
-	--set "$stats" width=235 \
+	--set "$stats" width=245 \
 	\
 	--add item sync-indicator $second_row \
 	--set sync-indicator update_freq=300 icon.padding_right=3 \
