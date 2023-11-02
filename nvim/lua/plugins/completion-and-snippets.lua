@@ -6,6 +6,7 @@ local defaultSources = {
 		option = {
 			keyword_pattern = [[\k\+]], -- use `opt.iskeyword`
 			get_bufnrs = vim.api.nvim_list_bufs, -- use all buffers
+			max_indexed_line_length = 500, -- don't suggest long lines, e.g. base64-encoded things
 		},
 	},
 	{ name = "path" },
