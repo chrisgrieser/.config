@@ -8,7 +8,7 @@ local defaultSources = {
 			max_indexed_line_length = 500, -- no long lines (e.g. base64-encoded things)
 		},
 		keyword_length = 3,
-		max_item_count = 4,
+		max_item_count = 4, -- since searching all buffers results in many results
 	},
 	{ name = "cmp_yanky", option = { onlyCurrentFiletype = true } },
 	{ name = "path" },
@@ -33,10 +33,10 @@ local function cmpconfig()
 	local cmp = require("cmp")
 	local compare = require("cmp.config.compare")
 
-	local function noBlankBefore()
+	local function onlyWhitespaceBefCursor()
 		local col = vim.api.nvim_win_get_cursor(0)[2]
-		local charsBefore = vim.api.nvim_get_current_line():sub(1, col - 1)
-		return charsBefore:match("^%s*$") == nil
+		local charsBefore = vim.api.nvim_get_current_line():sub(1, col)
+		return charsBefore:match("^%s*$") ~= nil
 	end
 
 	cmp.setup {
@@ -76,7 +76,7 @@ local function cmpconfig()
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_next_item()
-				elseif noBlankBefore() then
+				elseif not onlyWhitespaceBefCursor() then
 					cmp.complete()
 				else
 					fallback()
