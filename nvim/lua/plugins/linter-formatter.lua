@@ -36,11 +36,11 @@ local formatters = {
 	css = { "stylelint", "prettier" },
 	sh = { "shellcheck", "shfmt" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
-	["_"] = { "trim_whitespace", "trim_newlines", "squeeze_blanks" },
-	["*"] = { "codespell" },
+	["_"] = { "trim_whitespace", "trim_newlines", "squeeze_blanks" }, -- filetypes w/o formatter
+	["*"] = { "codespell" }, -- all filetypes
 }
 
--- filetypes that should use lsp formatting
+-- filetypes that should use lsp-formatting
 local lspFormatting = {
 	"toml",
 }
@@ -103,7 +103,7 @@ local function linterConfigs()
 	lint.linters["editorconfig-checker"].args =
 		{ "--no-color", "--config=" .. linterConfig .. "/editorconfig-checker-rc.json" }
 	lint.linters.markdownlint.args = {
-		"--disable=no-trailing-spaces", -- not disabled in config, so it's enabled for formatting 
+		"--disable=no-trailing-spaces", -- not disabled in config, so it's enabled for formatting
 		"--disable=no-multiple-blanks",
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
 	}

@@ -48,6 +48,7 @@ serverConfigs.lua_ls = {
 				callSnippet = "Replace",
 				keywordSnippet = "Replace",
 				displayContext = 6,
+				showWord = "Disable", -- don't suggest common words as fallback
 				postfix = ".", -- useful for `table.insert` and the like
 			},
 			diagnostics = {
