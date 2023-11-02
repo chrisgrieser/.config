@@ -137,13 +137,17 @@ serverConfigs.cssls = {
 serverConfigs.tsserver = {
 	settings = {
 		-- enable checking javascript without a `jsconfig.json`
-		implicitProjectConfiguration = {
+		implicitProjectConfiguration = { -- DOCS https://www.typescriptlang.org/tsconfig
 			checkJs = true,
-			-- JXA is compliant with most of ECMAScript: https://github.com/JXA-Cookbook/JXA-Cookbook/wiki/ES6-Features-in-JXA
-			-- ES2022: .at(), ES2021: `.replaceAll()`, `new Set`
-			target = "ES2022",
+			target = "ES2022", -- JXA is compliant with most of ECMAScript: https://github.com/JXA-Cookbook/JXA-Cookbook/wiki/ES6-Features-in-JXA
 		},
-		completions = { completeFunctionCalls = true },
+
+		-- INFO "cannot redeclare block-scoped variable" -> not useful for JXA.
+		-- Biome works on single-file-mode and therefore can be used to check for
+		-- unintended re-declaring
+		diagnostics = { ignoredCodes = { 2451 } },
+
+		-- completions = { completeFunctionCalls = true },
 		typescript = {
 			inlayHints = {
 				includeInlayEnumMemberValueHints = true,
@@ -195,7 +199,6 @@ serverConfigs.ltex = {
 	filetypes = { "gitcommit", "markdown" }, -- disable for bibtex and text files
 	settings = {
 		ltex = {
-			completionEnabled = false,
 			language = "en-US", -- de-DE; default language, can be set per-file via markdown yaml header
 			dictionary = { ["en-US"] = getDictWords() },
 			disabledRules = {
@@ -211,25 +214,26 @@ serverConfigs.ltex = {
 				MORFOLOGIK_RULE_EN_US = "hint", -- spelling
 			},
 			additionalRules = { enablePickyRules = true },
-			markdown = {
-				-- ignore links https://valentjn.github.io/ltex/settings.html#ltexmarkdownnodes
-				nodes = { Link = "dummy" },
-			},
+			completionEnabled = false, -- already taken care of by cmp-buffer
+			markdown = { nodes = { Link = "dummy" } }, -- ignore links https://valentjn.github.io/ltex/settings.html#ltexmarkdownnodes
 		},
 	},
 	on_attach = function(_)
+		-- have `zg` update ltex
 		vim.keymap.set("n", "zg", function()
 			local ltex = vim.lsp.get_active_clients({ name = "ltex" })[1]
 			if not ltex then return end
 			local word = vim.fn.expand("<cword>")
 			table.insert(ltex.config.settings.ltex.dictionary["en-US"], word)
-			vim.lsp.buf_notify(
-				0,
-				"workspace/didChangeConfiguration",
-				{ settings = ltex.config.settings }
-			)
+			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = ltex.config.settings })
 			u.normal("zg") -- add to spellfile, which is used as dictionary
 		end, { desc = "󰓆 Add Word", buffer = true })
+
+		-- Disable in Obsidian
+		vim.defer_fn(function()
+			local isInObsidianVault = vim.loop.cwd() == vim.env.VAULT_PATH
+			if isInObsidianVault then vim.cmd.LspStop() end
+		end, 500)
 	end,
 }
 

@@ -5,8 +5,18 @@ return {
 	{ -- better increment/decrement + toggling command
 		"monaqa/dial.nvim",
 		keys = {
-			-- stylua: ignore
-			{ "+", function() return require("dial.map").inc_normal() end, desc = "󰘂 Dial", expr = true },
+			{
+				"+",
+				function() return require("dial.map").inc_normal() end,
+				desc = "󰘂 Dial +",
+				expr = true,
+			},
+			{
+				"ä",
+				function() return require("dial.map").dec_normal() end,
+				desc = "󰘂 Dial -",
+				expr = true,
+			},
 		},
 		config = function()
 			local augend = require("dial.augend")

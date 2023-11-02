@@ -168,7 +168,7 @@ function gc {
 
 	# pull-push
 	if [[ -n "$(git status --porcelain)" ]]; then
-		printf "\033[1;34m(Not pushing since repo still dirty.)\033[0m"
+		print "\033[1;32mPush: \033[0;36mNot pushing since repo still dirty.\033[0m"
 		return 0
 	fi
 

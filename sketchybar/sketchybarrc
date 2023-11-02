@@ -3,14 +3,14 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 # CONFIG
-PLUGIN_DIR="$(dirname "$0")" # plugins in same folder as this rc file
+plugin_dir="$(dirname "$0")" # plugins in same folder as this rc file
 
 if defaults read -g AppleInterfaceStyle | grep -q "Dark"; then
-	BG_COLOR="0xff333333"
-	FONT_COLOR="0xffffffff"
+	bg_color="0xff333333"
+	font_color="0xffffffff"
 else
-	BG_COLOR="0xffcdcdcd"
-	FONT_COLOR="0xff000000"
+	bg_color="0xffcdcdcd"
+	font_color="0xff000000"
 fi
 
 # HACK using popup for second row. the popup only refers to the clock item to
@@ -28,12 +28,12 @@ stats="Stats,CombinedModules"
 sketchybar \
 	--bar \
 	height="60" position="top" display="all" \
-	padding_left=0 padding_right=0 color="$BG_COLOR" \
+	padding_left=0 padding_right=0 color="$bg_color" \
 	\
 	--default \
 	updates="when_shown" drawing="on" align="left" \
-	icon.font="JetBrainsMonoNL Nerd Font:Bold:16" icon.color="$FONT_COLOR" \
-	label.font="Lucida Grande:Regular:16.5" label.color="$FONT_COLOR" \
+	icon.font="JetBrainsMonoNL Nerd Font:Bold:16" icon.color="$font_color" \
+	label.font="Lucida Grande:Regular:16.5" label.color="$font_color" \
 	background.padding_right=15 label.padding_right=2 \
 	\
 	popup.drawing=true popup.horizontal=true popup.topmost=false \
@@ -41,41 +41,42 @@ sketchybar \
 	\
 	--add item clock $first_row \
 	--set clock update_freq=1 \
-	script="$PLUGIN_DIR/clock.sh" \
+	script="$plugin_dir/clock.sh" \
 	background.padding_left=8 \
 	\
 	--add item weather $first_row \
 	--set weather update_freq=1200 \
-	script="$PLUGIN_DIR/weather.sh" \
+	script="$plugin_dir/weather.sh" \
 	icon.y_offset=-1 label.padding_left=3 \
 	background.padding_right=7 \
 	\
 	--add item github_notif $first_row \
 	--set github_notif update_freq=900 \
-	script="$PLUGIN_DIR/github_notifications.sh" \
+	script="$plugin_dir/github_notifications.sh" \
 	--add event update-github-notifications \
 	--subscribe github_notif update-github-notifications \
 	--subscribe github_notif system_work \
 	\
 	--add item tot $first_row \
-	--set tot script="$PLUGIN_DIR/tot-count.sh" \
+	--set tot script="$plugin_dir/tot-count.sh" \
 	--add event update-tot-count \
 	--subscribe tot update-tot-count \
 	--subscribe tot system_woke \
 	\
 	--add alias "$stats" $second_row \
+	alias.color="$font_color" \
 	--set "$stats" width=235 \
 	\
 	--add item sync-indicator $second_row \
 	--set sync-indicator update_freq=300 icon.padding_right=3 \
-	script="$PLUGIN_DIR/git-sync-bar-icon.sh" \
+	script="$plugin_dir/git-sync-bar-icon.sh" \
 	--add event repo-files-update \
 	--subscribe sync-indicator repo-files-update \
 	--subscribe sync-indicator system_woke \
 	\
 	--add item package-updates $second_row \
 	--set package-updates update_freq=43200 \
-	script="$PLUGIN_DIR/homebrew-update-tracker.sh" \
+	script="$plugin_dir/homebrew-update-tracker.sh" \
 	--add event homebrew-update \
 	--subscribe package-updates homebrew-update \
 	\
