@@ -150,14 +150,6 @@ nnoremap ~ ~h
 nnoremap ü "zdawel"zph
 nnoremap Ü "zdawbh"zph
 
-exmap toggleDevtools obcommand obsidian-theme-design-utilities:toggle-devtools
-nnoremap ,b :toggleDevtools
-vnoremap ,b :toggleDevtools
-
-" pseudo-code-action: enhance URL with title
-exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-title
-nnoremap ,c :enhanceUrlWithTitle
-
 " Change Word/Selection
 nnoremap <Space> "_ciw
 onoremap <Space> iw
@@ -187,6 +179,21 @@ nnoremap _ mzo<Esc>`z
 
 " Increment
 nnoremap + <C-a>
+
+""""""""""""""""""""""""""""
+" Leader Mappings
+""""""""""""""""""""""""""""
+
+exmap fileRecovery obcommand file-recovery:open
+nnoremap ,ut :fileRecovery
+
+exmap toggleDevtools obcommand obsidian-theme-design-utilities:toggle-devtools
+nnoremap ,b :toggleDevtools
+vnoremap ,b :toggleDevtools
+
+" pseudo-code-action: enhance URL with title
+exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-title
+nnoremap ,c :enhanceUrlWithTitle
 
 """"""""""""""""""""""""""""
 " Markdown/Obsidian specific
