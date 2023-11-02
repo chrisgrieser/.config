@@ -1,5 +1,5 @@
 local defaultSources = {
-	{ name = "cmp_yanky" },
+	{ name = "cmp_yanky", option = { onlyCurrentFiletype = true } },
 	{ name = "luasnip" },
 	{ name = "nvim_lsp" },
 	{
@@ -163,7 +163,8 @@ local function cmpconfig()
 	cmp.setup.cmdline({ "/", "?" }, {
 		mapping = cmp.mapping.preset.cmdline(),
 		sources = {
-			{ name = "buffer", max_item_count = 3 },
+			{ name = "buffer", max_item_count = 2, keyword_length = 2 },
+			{ name = "cmdline_history", max_item_count = 2, keyword_length = 2 },
 		},
 	})
 end
