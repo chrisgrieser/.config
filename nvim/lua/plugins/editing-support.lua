@@ -253,7 +253,7 @@ return {
 			"D",
 		},
 		opts = {
-			ring = { history_length = 50 },
+			ring = { history_length = 100 },
 			highlight = { timer = 1000 },
 			textobj = { enabled = true },
 		},

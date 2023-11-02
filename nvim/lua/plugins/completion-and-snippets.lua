@@ -1,4 +1,5 @@
 local defaultSources = {
+	{ name = "cmp_yanky" },
 	{ name = "luasnip" },
 	{ name = "nvim_lsp" },
 	{
@@ -22,6 +23,7 @@ local sourceIcons = {
 	cmdline = "󰘳",
 	cmdline_history = "󰋚",
 	emoji = "󰞅",
+	cmp_yanky = "󰅍",
 }
 
 --------------------------------------------------------------------------------
@@ -183,6 +185,7 @@ return {
 			"hrsh7th/cmp-nvim-lsp", -- LSP input
 			"L3MON4D3/LuaSnip", -- snippet engine
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
+			"chrisgrieser/cmp_yanky",
 		},
 	},
 	{ -- Snippet Engine
