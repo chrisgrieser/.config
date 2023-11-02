@@ -77,15 +77,15 @@ function inspect {
 	fi
 
 	# FILES
-	local eza_output
+	local eza_output shortened
 	eza_output=$(eza --width="$COLUMNS" --all --grid --color=always --icons \
 		--git-ignore --ignore-glob=".DS_Store|Icon?" \
 		--sort=name --group-directories-first --no-quotes \
 		--git --long --no-user --no-permissions --no-filesize --no-time)
 
 	if [[ $(echo "$eza_output" | wc -l) -gt $max_files_lines ]]; then
-		echo -n "$(echo "$eza_output" | head -n"$max_files_lines")"
-		printf "\033[1;36m (…)\033[0m"
+		shortened="$(echo "$eza_output" | head -n"$max_files_lines")"
+		printf "%s \033[1;36m(…)\033[0m" "$shortened"
 	elif [[ -n "$eza_output" ]]; then
 		echo -n "$eza_output"
 	fi
