@@ -4,10 +4,11 @@ local defaultSources = {
 	{
 		name = "buffer",
 		option = {
-			-- keyword_pattern = [[\k\+]], -- use `opt.iskeyword`
 			get_bufnrs = vim.api.nvim_list_bufs, -- all buffers instead of only the current
 			max_indexed_line_length = 500, -- no long lines (e.g. base64-encoded things)
 		},
+		keyword_length = 3,
+		max_item_count = 4,
 	},
 	{ name = "cmp_yanky", option = { onlyCurrentFiletype = true } },
 	{ name = "path" },
@@ -34,8 +35,8 @@ local function cmpconfig()
 
 	local function noBlankBefore()
 		local col = vim.api.nvim_win_get_cursor(0)[2]
-		local noBlankBef = vim.api.nvim_get_current_line():sub(1, col):match("^%s*$") == nil
-		return noBlankBef
+		local charsBefore = vim.api.nvim_get_current_line():sub(1, col - 1)
+		return charsBefore:match("^%s*$") == nil
 	end
 
 	cmp.setup {
