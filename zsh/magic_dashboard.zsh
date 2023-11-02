@@ -67,12 +67,12 @@ function inspect {
 
 		if ! git diff --quiet; then # `git diff --quiet` exits 0 if there are changes
 			# show changed files in a more informative way than normal `git status`
-			git diff --color="always" --compact-summary --stat | sed -e '$d' \
-				-e $'s/\(gone\)/\033[1;31mD     \033[0m/g' \
-				-e $'s/\(new\)/\033[1;32mN    \033[0m/g' \
-				-e 's/ Bin /    /g' \
-				-e 's/ bytes$/ b/g' \
-				-Ee $'s/^ (.*\\/)/ \033[1;36m\\1\033[0m/g'
+			git diff --color="always" --compact-summary --stat |
+				sed '$d' |                                    # remove summary
+				sed $'s/\(gone\)/\033[1;31mD     \033[0m/g' | # color ($ for ansi codes)
+				sed $'s/\(new\)/\033[1;32mN    \033[0m/g' |
+				sed $'s/\(new\)/\033[1;32mN    \033[0m/g' |
+				sed $'s/ |/\033[1;30m│\033[0m/g' # nicer bars
 			separator
 		fi
 	fi
