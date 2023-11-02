@@ -40,7 +40,6 @@ function gitlog {
 			-e 's/grafted/ /' \
 			-e 's/origin\//󰞶  /g' \
 			-e 's/HEAD/󱍀 /g' \
-			-e 's/->/󰔰 /g' \
 			-e 's/tags: / )/' \
 			-Ee $'s/ (improv|fix|refactor|build|ci|docs|feat|test|perf|chore|revert|break|style)(\\(.+\\)|!)?:/ \033[1;35m\\1\033[1;36m\\2\033[0m:/' \
 			-Ee $'s/(`[^`]*`)/\033[1;36m\\1\033[0m/g' \
@@ -71,6 +70,7 @@ function inspect {
 			git diff --color="always" --compact-summary --stat |
 				sed '$d' |                                    # remove summary
 				sed $'s/\(gone\)/\033[1;31mD     \033[0m/g' | # color ($ for ansi codes)
+				sed $'s/\(new\)/\033[1;32mN    \033[0m/g' |
 				sed $'s/\(new\)/\033[1;32mN    \033[0m/g' |
 				sed $'s/ |/\033[1;30m│\033[0m/g' # nicer bars
 			separator

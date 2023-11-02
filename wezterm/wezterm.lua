@@ -246,17 +246,6 @@ wt.on("format-window-title", function(_, pane)
 end)
 
 --------------------------------------------------------------------------------
--- HYPERLINK RULES
-local myHyperlinkRules = wt.default_hyperlink_rules()
-
--- make github links of the form `owner/repo` clickable
-table.insert(myHyperlinkRules, {
-	regex = [["?(\b[-\w]+)/([-\w.]+)"?]],
-	highlight = 0,
-	format = "https://github.com/$1/$2",
-})
-
---------------------------------------------------------------------------------
 -- SETTINGS
 
 local config = {
@@ -284,11 +273,14 @@ local config = {
 	force_reverse_video_cursor = true, -- true = color is reverse, false = color by color scheme
 
 	-- FONT
-	-- some nerd font icons requires a space after them to be properly sized
-	font = wt.font("Iosevka Term", { weight = "Medium" }),
+	-- some nerdfont icons requires a space after them to be properly sized
+	font = wt.font {
+		family = "Iosevka Term",
+		weight = "Medium",
+		harfbuzz_features = { "calt=0", "ERLA=1" }, -- disable only `+++` ligatures https://typeof.net/Iosevka/
+	},
 	font_size = fontSize,
 	command_palette_font_size = 30,
-	-- harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
 	adjust_window_size_when_changing_font_size = false,
 
 	-- Appearance
@@ -303,8 +295,8 @@ local config = {
 	bold_brightens_ansi_colors = "BrightAndBold",
 	max_fps = isAtMother and 40 or 60,
 
-	-- remove titlebar, but keep macOS traffic lights, enabling menu bar stuff,
-	-- especially the "Window" Menu containing window split commands
+	-- remove titlebar, but keep macOS traffic lights. Doing so enables 
+	-- some macOS window bar window-related functionality, like split commands
 	-- (used by Hammerspoon)
 	window_decorations = "INTEGRATED_BUTTONS|RESIZE",
 	native_macos_fullscreen_mode = false,
@@ -319,9 +311,6 @@ local config = {
 	},
 	min_scroll_bar_height = "3cell",
 	scrollback_lines = 5000,
-
-	-- Hyperlinks
-	hyperlink_rules = myHyperlinkRules,
 
 	-- Tabs
 	enable_tab_bar = true,
