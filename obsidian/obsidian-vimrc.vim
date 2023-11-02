@@ -177,8 +177,9 @@ nmap o &b&i
 nnoremap = mzO<Esc>`z
 nnoremap _ mzo<Esc>`z
 
-" Increment
+" Dial
 nnoremap + <C-a>
+nnoremap ä <C-x>
 
 """"""""""""""""""""""""""""
 " Leader Mappings
@@ -298,7 +299,7 @@ vnoremap w t"
 " Substitute
 """"""""""""""""""""""
 
-" poor man's substitute.nvim/duplicate.nvim: 
+" poor man's substitute.nvim/duplicate.nvim:
 " brut-forcing all possible text objects 💀
 nunmap s
 nnoremap ss Vp
