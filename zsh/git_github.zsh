@@ -5,6 +5,9 @@ alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to
 alias gs='git status'
 alias ga="git add"
 
+alias stash="git stash"
+alias unstash="git stash pop"
+
 alias grh='git reset --hard'
 alias push="git push"
 alias pull="git pull"
@@ -54,18 +57,6 @@ function gu {
 	open "$url"
 }
 
-# rebase last x commits
-# $1: number of commits
-function rebase {
-	local num="$1"
-	if echo "$num" | grep -qE '^[0-9]+$'; then
-		git rebase -i HEAD^"$num"
-		_gitlog -n $((num + 1))
-	else
-		print "\033[1;33mUsage: rebase <number of commits>"
-	fi
-}
-
 #───────────────────────────────────────────────────────────────────────────────
 # GIT DIFF & DELTA
 
@@ -100,7 +91,7 @@ function gli {
 	selected=$(
 		_gitlog --no-graph --color=always |
 			fzf -0 --query="$1" --ansi --no-sort \
-				--header-first --header="↵ : Checkout    ^H: Copy [H]ash" \
+				--header-first --header="↵ : Checkout    ^H: Copy Hash    ^R: Rebase" \
 				--expect="ctrl-h" --with-nth=2.. --preview-window=55% \
 				--preview="git show {1} --stat=,30,30 --color=always --format='$preview_format' | sed -e '\$d' -e 's/^ //' ; git diff {1}^! --unified=1 | delta $style --hunk-header-decoration-style='blue ol' --file-style=omit" \
 				--height="100%" #required for wezterm's pane:is_alt_screen_active()
@@ -113,6 +104,9 @@ function gli {
 	if [[ "$key_pressed" == "ctrl-h" ]]; then
 		echo -n "$hash" | pbcopy
 		print "\033[1;33m$hash\033[0m copied."
+	elif [[ "$key_pressed" == "ctrl-r" ]]; then
+		git rebase -i "$hash^"
+		_gitlog "$hash^..HEAD"
 	else # pressed return
 		git checkout "$hash"
 	fi
@@ -159,7 +153,7 @@ function gc {
 
 	# pull-push
 	if [[ -n "$(git status --porcelain)" ]]; then
-		print "\033[1;36mPush: \033[0;36mNot pushing since repo still dirty.\033[0m"
+		print "\033[1;36mPush: \033[0;34mNot pushing since repo still dirty.\033[0m"
 		return 0
 	fi
 
@@ -178,7 +172,7 @@ function gm {
 function gM {
 	git commit --amend "$1"
 	git status
-} 
+}
 
 #───────────────────────────────────────────────────────────────────────────────
 
