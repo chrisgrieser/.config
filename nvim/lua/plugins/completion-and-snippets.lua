@@ -12,12 +12,7 @@ local defaultSources = {
 	},
 	{ name = "cmp_yanky", option = { onlyCurrentFiletype = true } },
 	{ name = "path" },
-	{
-		name = "emoji",
-		keyword_length = [=[
-		\%(\s\|^\)\zs:[[:alnum:]_\-\+]*:\?
-		]=],
-	},
+	{ name = "emoji" },
 }
 
 local sourceIcons = {
@@ -179,7 +174,7 @@ return {
 		dependencies = {
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
-			"hrsh7th/cmp-emoji",
+			{"chrisgrieser/cmp-emoji", branch = "dev"},
 			"dmitmel/cmp-cmdline-history",
 			"tamago324/cmp-zsh", -- some shell completions
 			"hrsh7th/cmp-buffer",
