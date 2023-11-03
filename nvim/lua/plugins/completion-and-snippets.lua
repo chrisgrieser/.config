@@ -45,11 +45,12 @@ local function cmpconfig()
 		},
 		window = {
 			completion = {
-				-- side_padding = 0,
 				border = require("config.utils").borderStyle,
+				scrolloff = 2,
 			},
 			documentation = {
 				border = require("config.utils").borderStyle,
+				scrolloff = 2,
 			},
 		},
 		sorting = {
