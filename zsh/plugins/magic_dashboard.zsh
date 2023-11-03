@@ -3,14 +3,13 @@
 # CONFIG options for the user
 # export MAGIC_DASHBOARD_GITLOG_LINES # default: 5
 # export MAGIC_DASHBOARD_FILES_LINES # default: 6
+# export MAGIC_DASHBOARD_DISABLED_BELOW_TERM_HEIGHT # default: 15
 
 #───────────────────────────────────────────────────────────────────────────────
 
-_truncation="\033[1;36m(…)\033[0m"
-
 # draws a separator line with terminal width
 function _separator {
-	sep_char="═" # ─ ═
+	local sep_char="═" # ─ ═
 	local sep=""
 	for ((i = 0; i < COLUMNS; i++)); do
 		sep="$sep$sep_char"
@@ -50,7 +49,7 @@ function _gitlog {
 function _list_files {
 	if [[ ! -x "$(command -v eza)" ]]; then print "\033[1;33mMagic Dashboard: \`eza\` not installed.\033[0m" && return 1; fi
 
-	max_files_lines=${MAGIC_DASHBOARD_FILES_LINES:-6}
+	local max_files_lines=${MAGIC_DASHBOARD_FILES_LINES:-6}
 	local eza_output shortened
 	eza_output=$(eza --width="$COLUMNS" --all --grid --color=always --icons \
 		--git-ignore --ignore-glob=".DS_Store|Icon?" \
@@ -106,7 +105,7 @@ function _magic_dashboard {
 	fi
 
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
-		max_gitlog_lines=${MAGIC_DASHBOARD_GITLOG_LINES:-5}
+		local max_gitlog_lines=${MAGIC_DASHBOARD_GITLOG_LINES:-5}
 		_gitlog -n "$max_gitlog_lines"
 		_separator
 
@@ -123,12 +122,12 @@ function _magic_dashboard {
 
 function magic_enter {
 	# GUARD only in PS1 and when BUFFER is empty
-	# http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html#User_002dDefined-Widgets
-	[[ -z "$BUFFER" && "$CONTEXT" == "start" ]] || return
+	# DOCS http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html#User_002dDefined-Widgets
+	[[ -z "$BUFFER" && "$CONTEXT" == "start" ]] || return 0
 
 	# GUARD only when in terminal with sufficient height
-	local disabled_below_term_height=15
-	[[ $LINES -gt $disabled_below_term_height ]] || return
+	local disabled_below_height=${MAGIC_DASHBOARD_DISABLED_BELOW_TERM_HEIGHT:-15}
+	[[ $LINES -gt $disabled_below_height ]] || return 0
 
 	echo && _magic_dashboard
 }
