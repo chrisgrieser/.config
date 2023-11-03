@@ -3,8 +3,11 @@
 # CONFIG options for the user
 # export MAGIC_DASHBOARD_GITLOG_LINES # default: 5
 # export MAGIC_DASHBOARD_FILES_LINES # default: 6
+# export MAGIC_DASHBOARD_STATUS_LINES # default: 20
 
 #───────────────────────────────────────────────────────────────────────────────
+
+_truncation="\033[1;36m(…)\033[0m"
 
 # draws a separator line with terminal width
 function _separator {
@@ -58,6 +61,7 @@ function _magic_dashboard {
 	# define default values for config
 	max_gitlog_lines=${MAGIC_DASHBOARD_GITLOG_LINES:-5}
 	max_files_lines=${MAGIC_DASHBOARD_FILES_LINES:-6}
+	max_status_lines=${MAGIC_DASHBOARD_STATUS_LINES:-20}
 
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
 		# BETTER GIT LOG
@@ -70,12 +74,13 @@ function _magic_dashboard {
 
 		if ! git diff --quiet; then # `git diff --quiet` exits 0 if there are changes
 			# show changed files in a more informative way than normal `git status`
-			git diff --color="always" --compact-summary --stat=,,5 | sed -e '$d' \
+			git diff --color="always" --compact-summary --stat=,,"$max_status_lines" | sed -e '$d' \
 				-e $'s/\\(gone\\)/\033[1;31mD     \033[0m/g' \
 				-e $'s/\\(new\\)/\033[1;32mN    \033[0m/g' \
 				-e 's/ Bin /    /g' \
 				-e 's/ bytes$/ b/g' \
 				-e $'s/ \\|/ \033[1;30m│\033[0m/g' \
+				-e $'s/^ \\.\\.\\./\033[1;36m (…)\033[0m/' \
 				-Ee $'s|([^/]*)(/)|\033[1;36m\\1\033[1;33m\\2\033[0m|g' # path highlights
 			_separator
 		fi

@@ -156,6 +156,8 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function()
 		vim.fn.matchadd("TelescopeParent", "\t.*$")
 		vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
+		vim.fn.matchadd("DirSep", "/")
+		vim.api.nvim_set_hl(0, "DirSep", { link = "MsgSeparator" })
 	end,
 })
 
