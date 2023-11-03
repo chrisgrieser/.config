@@ -14,6 +14,8 @@ return {
 			{ "<leader>gd", function() require("tinygit").searchFileHistory() end, desc = "󰢷 File History" },
 			{ "<leader>g#", function() require("tinygit").openIssueUnderCursor() end, desc = " Open Issue under Cursor" },
 			-- stylua: ignore end
+			{ "<leader>gt", function() require("tinygit").stashPush() end, desc = "󰜦 Stash Push" },
+			{ "<leader>gT", function() require("tinygit").stashPop() end, desc = "󰜦 Stash Pop" },
 		},
 		opts = {
 			commitMsg = {
