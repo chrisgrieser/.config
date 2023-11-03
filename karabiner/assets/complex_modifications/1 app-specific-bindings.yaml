@@ -224,6 +224,13 @@ rules:
           - { key_code: "2", modifiers: [option] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
+      # Toggle Right Sidebar (Leo)
+      - type: basic
+        from: { key_code: "0", modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: "0", modifiers: [option] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
       # Remove bookmark
       - type: basic
         from: { key_code: d, modifiers: { mandatory: [command, shift] } }
