@@ -21,13 +21,13 @@ function run() {
 		.filter((line) => line.includes("a href")) // only links
 		.map((line) => {
 			const url = line.replace(ahrefRegex, "$1").replaceAll("%3F", "?");
-			const title = line.replace(ahrefRegex, "$2");
+			const title = decodeURIComponent(line.replace(ahrefRegex, "$2"));
 			if (!url) return {};
-			const subsite = url.slice(12, -title.length).replaceAll("-", " ");
+			const subsite = decodeURIComponent(url.slice(12, -title.length).replaceAll("-", " "));
 
 			return {
 				title: title,
-				subtitle: "📖 " + subsite,
+				subtitle: "📖 Progit: " + subsite,
 				arg: `https://git-scm.com/${url}`,
 				uid: url,
 			};
@@ -40,12 +40,12 @@ function run() {
 		.filter((line) => line.includes("a href")) // only links
 		.map((line) => {
 			const url = line.replace(ahrefRegex, "$1");
-			const title = line.replace(ahrefRegex, "$2");
+			const title = decodeURIComponent(line.replace(ahrefRegex, "$2"));
 			if (!url) return {};
 
 			return {
 				title: title,
-				subtitle: "➡️ ",
+				subtitle: "Reference",
 				arg: `https://git-scm.com${url}`,
 				uid: url,
 			};
