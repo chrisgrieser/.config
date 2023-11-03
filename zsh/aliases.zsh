@@ -45,6 +45,7 @@ alias -g B='| bat'
 alias -g C='| pbcopy ; echo "Copied."' # copy
 alias -g N='| wc -l | tr -d " "'       # count lines
 alias -g J='| command jless --no-line-numbers'
+alias -g T='| spin' # tailspin (colorize)
 
 # highlights for them
 ZSH_HIGHLIGHT_REGEXP+=(' G$' 'fg=magenta,bold')
@@ -53,5 +54,6 @@ ZSH_HIGHLIGHT_REGEXP+=(' C$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' B$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' N$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' J$' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=(' T$' 'fg=magenta,bold')
 
 #───────────────────────────────────────────────────────────────────────────────
