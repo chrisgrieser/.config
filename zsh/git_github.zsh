@@ -158,6 +158,7 @@ function gc {
 	git commit -m "$commit_msg" | 
 		sed $'s/([[:digit:]])/\033[1;35m\\1\033[0m/g' || return 1
 
+
 	# if commit msg contains issue number, open the issue in the browser
 	if [[ "$commit_msg" =~ \#[0-9]+ ]]; then
 		local issue_number url
