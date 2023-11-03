@@ -145,9 +145,9 @@
 		"body": "awk '{ print $${1:1} }'",
 		"description": "Retrieve a field from the piped in string, with whitespace as the default field delimiter. `$n` means that the nth field will be used."
 	},
-	"sed (replacement)": {
-		"prefix": "sed (replacement)",
-		"body": "sed -E 's/${1:pattern}/${2:replacement}/g'"
+	"sed": {
+		"prefix": "sed",
+		"body": "sed 's/$0//'"
 	},
 	"input (stdin or $1)": {
 		"prefix": "input (stdin or $1)",

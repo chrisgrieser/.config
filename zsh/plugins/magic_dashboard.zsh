@@ -3,7 +3,6 @@
 # CONFIG options for the user
 # export MAGIC_DASHBOARD_GITLOG_LINES # default: 5
 # export MAGIC_DASHBOARD_FILES_LINES # default: 6
-# export MAGIC_DASHBOARD_STATUS_LINES # default: 20
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -61,27 +60,39 @@ function _magic_dashboard {
 	# define default values for config
 	max_gitlog_lines=${MAGIC_DASHBOARD_GITLOG_LINES:-5}
 	max_files_lines=${MAGIC_DASHBOARD_FILES_LINES:-6}
-	max_status_lines=${MAGIC_DASHBOARD_STATUS_LINES:-20}
 
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
 		# BETTER GIT LOG
 		_gitlog -n "$max_gitlog_lines"
 		_separator
 
-		# GIT DIFF STATS for unstaged files
+		# BETTER GIT STATUS
+		# show changed files in a more informative way than normal `git status`
+
 		# so new files show up in `git diff`
 		git ls-files --others --exclude-standard | xargs git add --intent-to-add
 
-		if ! git diff --quiet; then # `git diff --quiet` exits 0 if there are changes
-			# show changed files in a more informative way than normal `git status`
-			git diff --color="always" --compact-summary --stat=,,"$max_status_lines" | sed -e '$d' \
+		if [[ -n "$(git status --porcelain)" ]]; then
+			local unstaged staged
+			unstaged=$(git diff --color="always" --compact-summary --stat | sed -e '$d')
+			staged=$(git diff --staged --color="always" --compact-summary --stat | 
+				sed -e '$d' -e $'s/^ / \033[1;35m \033[0m\t/')
+			tabs -4 # set tabwidth to 4
+			local diffs=""
+			if [[ -n "$unstaged" && -n "$staged" ]]; then
+				diffs="$unstaged\n$staged"
+			elif [[ -n "$unstaged" ]]; then
+				diffs="$unstaged"
+			elif [[ -n "$staged" ]]; then
+				diffs="$staged"
+			fi
+			print "$diffs" | sed \
 				-e $'s/\\(gone\\)/\033[1;31mD     \033[0m/g' \
 				-e $'s/\\(new\\)/\033[1;32mN    \033[0m/g' \
 				-e 's/ Bin /    /g' \
 				-e 's/ bytes$/ b/g' \
 				-e $'s/ \\|/ \033[1;30m│\033[0m/g' \
-				-e $'s/^ \\.\\.\\./\033[1;36m (…)\033[0m/' \
-				-Ee $'s|([^/]*)(/)|\033[1;36m\\1\033[1;33m\\2\033[0m|g' # path highlights
+				-Ee $'s|([^/\t]*)(/)|\033[1;36m\\1\033[1;33m\\2\033[0m|g' # path highlights
 			_separator
 		fi
 	fi
