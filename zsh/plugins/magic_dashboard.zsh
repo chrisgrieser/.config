@@ -47,57 +47,10 @@ function _gitlog {
 	# INFO inserting ansi colors via sed requires leading $
 }
 
-# show files + git status + brief git log
-function _magic_dashboard {
+function _list_files {
 	if [[ ! -x "$(command -v eza)" ]]; then print "\033[1;33mMagic Dashboard: \`eza\` not installed.\033[0m" && return 1; fi
 
-	# check if pwd still exists
-	if [[ ! -d "$PWD" ]]; then
-		printf '\033[1;33m"%s" has been moved or deleted.\033[0m\n' "$(basename "$PWD")"
-		cd "$OLDPWD" || return 0
-	fi
-
-	# define default values for config
-	max_gitlog_lines=${MAGIC_DASHBOARD_GITLOG_LINES:-5}
 	max_files_lines=${MAGIC_DASHBOARD_FILES_LINES:-6}
-
-	if git rev-parse --is-inside-work-tree &>/dev/null; then
-		# BETTER GIT LOG
-		_gitlog -n "$max_gitlog_lines"
-		_separator
-
-		# BETTER GIT STATUS
-		# show changed files in a more informative way than normal `git status`
-
-		# so new files show up in `git diff`
-		git ls-files --others --exclude-standard | xargs git add --intent-to-add
-
-		if [[ -n "$(git status --porcelain)" ]]; then
-			local unstaged staged
-			unstaged=$(git diff --color="always" --compact-summary --stat | sed -e '$d')
-			staged=$(git diff --staged --color="always" --compact-summary --stat | 
-				sed -e '$d' -e $'s/^ / \033[1;35m \033[0m\t/')
-			tabs -4 # set tabwidth to 4
-			local diffs=""
-			if [[ -n "$unstaged" && -n "$staged" ]]; then
-				diffs="$unstaged\n$staged"
-			elif [[ -n "$unstaged" ]]; then
-				diffs="$unstaged"
-			elif [[ -n "$staged" ]]; then
-				diffs="$staged"
-			fi
-			print "$diffs" | sed \
-				-e $'s/\\(gone\\)/\033[1;31mD     \033[0m/g' \
-				-e $'s/\\(new\\)/\033[1;32mN    \033[0m/g' \
-				-e 's/ Bin /    /g' \
-				-e 's/ bytes$/ b/g' \
-				-e $'s/ \\|/ \033[1;30m│\033[0m/g' \
-				-Ee $'s|([^/\t]*)(/)|\033[1;36m\\1\033[1;33m\\2\033[0m|g' # path highlights
-			_separator
-		fi
-	fi
-
-	# FILES
 	local eza_output shortened
 	eza_output=$(eza --width="$COLUMNS" --all --grid --color=always --icons \
 		--git-ignore --ignore-glob=".DS_Store|Icon?" \
@@ -110,6 +63,57 @@ function _magic_dashboard {
 	elif [[ -n "$eza_output" ]]; then
 		echo -n "$eza_output"
 	fi
+}
+
+# show changed files in a more informative way than normal `git status`
+function _gitstatus {
+	# show changed files in a more informative way than normal `git status`
+	git ls-files --others --exclude-standard | xargs git add --intent-to-add
+
+	if [[ -n "$(git status --porcelain)" ]]; then
+		local unstaged staged
+		unstaged=$(git diff --color="always" --compact-summary --stat | sed -e '$d')
+		staged=$(git diff --staged --color="always" --compact-summary --stat | sed -e '$d' \
+			-e $'s/^ / \033[1;35m \033[0m\t/') # add marker for staged files
+		tabs -4                              # set tabwidth to 4 for stage marker (require for regex later)
+		local diffs=""
+		if [[ -n "$unstaged" && -n "$staged" ]]; then
+			diffs="$unstaged\n$staged"
+		elif [[ -n "$unstaged" ]]; then
+			diffs="$unstaged"
+		elif [[ -n "$staged" ]]; then
+			diffs="$staged"
+		fi
+		print "$diffs" | sed \
+			-e $'s/\\(gone\\)/\033[1;31mD     \033[0m/g' \
+			-e $'s/\\(new\\)/\033[1;32mN    \033[0m/g' \
+			-e 's/ Bin /    /g' \
+			-e 's/ bytes$/ b/g' \
+			-e $'s/ \\|/ \033[1;30m│\033[0m/g' \
+			-Ee $'s|([^/\t]*)(/)|\033[1;36m\\1\033[1;33m\\2\033[0m|g' # path highlights
+		_separator
+	fi
+}
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# show files + git status + brief git log
+function _magic_dashboard {
+	# check if pwd still exists
+	if [[ ! -d "$PWD" ]]; then
+		printf '\033[1;33m"%s" has been moved or deleted.\033[0m\n' "$(basename "$PWD")"
+		cd "$OLDPWD" || return 0
+	fi
+
+	if git rev-parse --is-inside-work-tree &>/dev/null; then
+		max_gitlog_lines=${MAGIC_DASHBOARD_GITLOG_LINES:-5}
+		_gitlog -n "$max_gitlog_lines"
+		_separator
+
+		_gitstatus
+	fi
+
+	_list_files
 }
 
 #───────────────────────────────────────────────────────────────────────────────

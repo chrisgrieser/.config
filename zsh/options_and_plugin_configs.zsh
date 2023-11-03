@@ -11,6 +11,8 @@ setopt AUTO_CD              # pure directory = cd into it
 # comments in interactive mode (useful for copypasting)
 setopt INTERACTIVE_COMMENTS
 
+# when a pipe fails, whole command fails
+set -o pipefail
 
 #───────────────────────────────────────────────────────────────────────────────
 # CLI/PLUGIN SETTINGS
