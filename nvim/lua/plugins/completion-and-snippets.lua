@@ -12,7 +12,12 @@ local defaultSources = {
 	},
 	{ name = "cmp_yanky", option = { onlyCurrentFiletype = true } },
 	{ name = "path" },
-	{ name = "emoji" },
+	{
+		name = "emoji",
+		keyword_length = [=[
+		\%(\s\|^\)\zs:[[:alnum:]_\-\+]*:\?
+		]=],
+	},
 }
 
 local sourceIcons = {
