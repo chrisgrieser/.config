@@ -13,7 +13,6 @@ CONFIG_FILES=(
 	homebrew
 	node_npm
 	python_pip
-	magic_dashboard
 	intro_messages
 )
 

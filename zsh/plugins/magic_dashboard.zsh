@@ -1,14 +1,14 @@
 #!/usr/bin/env zsh
 
-# CONFIG
-max_gitlog_lines=5
-max_files_lines=6
+# CONFIG options for the user
+# export MAGIC_DASHBOARD_GITLOG_LINES # default: 5
+# export MAGIC_DASHBOARD_FILES_LINES # default: 6
 
 #───────────────────────────────────────────────────────────────────────────────
 
 # draws a separator line with terminal width
-function separator {
-	sep_char="═"     # ─ ═
+function _separator {
+	sep_char="═" # ─ ═
 	local sep=""
 	for ((i = 0; i < COLUMNS; i++)); do
 		sep="$sep$sep_char"
@@ -16,7 +16,7 @@ function separator {
 	print "\033[1;30m$sep\033[0m"
 }
 
-function gitlog {
+function _gitlog {
 	# pseudo-option to suppress graph
 	if [[ "$1" == "--no-graph" ]]; then
 		shift
@@ -46,8 +46,8 @@ function gitlog {
 }
 
 # show files + git status + brief git log
-function inspect {
-	if [[ ! -x "$(command -v eza)" ]]; then print "\033[1;33meza not installed.\033[0m" && return 1; fi
+function _magic_dashboard {
+	if [[ ! -x "$(command -v eza)" ]]; then print "\033[1;33mMagic Dashboard: \`eza\` not installed.\033[0m" && return 1; fi
 
 	# check if pwd still exists
 	if [[ ! -d "$PWD" ]]; then
@@ -55,24 +55,29 @@ function inspect {
 		cd "$OLDPWD" || return 0
 	fi
 
-	# BETTER GIT LOG & STATUS
-	if git rev-parse --is-inside-work-tree &>/dev/null; then
-		gitlog -n "$max_gitlog_lines"
-		separator
+	# define default values for config
+	max_gitlog_lines=${MAGIC_DASHBOARD_GITLOG_LINES:-5}
+	max_files_lines=${MAGIC_DASHBOARD_FILES_LINES:-6}
 
+	if git rev-parse --is-inside-work-tree &>/dev/null; then
+		# BETTER GIT LOG
+		_gitlog -n "$max_gitlog_lines"
+		_separator
+
+		# GIT DIFF STATS for unstaged files
 		# so new files show up in `git diff`
 		git ls-files --others --exclude-standard | xargs git add --intent-to-add
 
 		if ! git diff --quiet; then # `git diff --quiet` exits 0 if there are changes
 			# show changed files in a more informative way than normal `git status`
-			git diff --color="always" --compact-summary --stat | sed -e '$d' \
-					-e $'s/\\(gone\\)/\033[1;31mD     \033[0m/g' \
-					-e $'s/\\(new\\)/\033[1;32mN    \033[0m/g' \
-					-e 's/ Bin /    /g' \
-					-e 's/ bytes$/ b/g' \
-					-Ee $'s/^ (.*\\/)/ \033[1;36m\\1\033[0m/g' \
-					-e $'s/ \\|/ \033[1;30m│\033[0m/g' # nicer bars
-			separator
+			git diff --color="always" --compact-summary --stat=,,5 | sed -e '$d' \
+				-e $'s/\\(gone\\)/\033[1;31mD     \033[0m/g' \
+				-e $'s/\\(new\\)/\033[1;32mN    \033[0m/g' \
+				-e 's/ Bin /    /g' \
+				-e 's/ bytes$/ b/g' \
+				-e $'s/ \\|/ \033[1;30m│\033[0m/g' \
+				-Ee $'s|([^/]*)(/)|\033[1;36m\\1\033[1;33m\\2\033[0m|g' # path highlights
+			_separator
 		fi
 	fi
 
@@ -105,7 +110,7 @@ function magic_enter {
 	local disabled_below_term_height=15
 	[[ $LINES -gt $disabled_below_term_height ]] || return
 
-	echo && inspect
+	echo && _magic_dashboard
 }
 
 # WRAPPER FOR THE ACCEPT-LINE ZLE WIDGET (RUN WHEN PRESSING ENTER)

@@ -11,8 +11,12 @@ setopt AUTO_CD              # pure directory = cd into it
 # comments in interactive mode (useful for copypasting)
 setopt INTERACTIVE_COMMENTS
 
+
 #───────────────────────────────────────────────────────────────────────────────
-# CLI SETTINGS
+# CLI/PLUGIN SETTINGS
+
+export MAGIC_DASHBOARD_GITLOG_LINES=5
+export MAGIC_DASHBOARD_FILES_LINES=6
 
 export YSU_IGNORED_ALIASES=("bi" "pi") # often copypasted without alias
 export YSU_MESSAGE_POSITION="after"

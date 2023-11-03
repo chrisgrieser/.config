@@ -46,7 +46,7 @@ function showdefaults {
 		echo "$changes"
 
 		# show context, so the domain can be identified
-		separator
+		_separator
 		toGrep=$(echo "$changes" | tail -n1 | sed -e 's/^> *//')
 		grep -B20 "$toGrep" /tmp/after
 	fi
@@ -79,7 +79,7 @@ function  ..d() {
 	local current_dir="$PWD"
 	cd ..
 	trash "$current_dir" || return 1
-	inspect
+	_magic_dashboard
 	auto_venv
 
 	# add nicer trash sound

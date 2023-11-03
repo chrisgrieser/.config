@@ -39,7 +39,7 @@ return {
 				desc = "󰊢 Stage Selection",
 			},
 			{ "<leader>gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Add Buffer" },
-			{ "<leader>gp", "<cmd>Gitsigns preview_hunk_inline<CR>", desc = "󰊢 Preview Hunk" },
+			{ "<leader>gp", "<cmd>Gitsigns preview_hunk<CR>", desc = "󰊢 Preview Hunk" },
 			{ "<leader>us", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "󰊢 Unstage Last Stage" },
 			{ "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", desc = "󰊢 Reset Hunk" },
 			{ "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", desc = "󰊢 Reset Buffer" },
