@@ -5,7 +5,7 @@ alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to
 alias gs='git status'
 alias ga="git add"
 
-alias stash="git stash"
+alias stash="git stash push"
 alias unstash="git stash pop"
 
 alias grh='git reset --hard'

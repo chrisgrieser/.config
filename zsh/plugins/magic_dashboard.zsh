@@ -50,13 +50,14 @@ function _list_files {
 	if [[ ! -x "$(command -v eza)" ]]; then print "\033[1;33mMagic Dashboard: \`eza\` not installed.\033[0m" && return 1; fi
 
 	local max_files_lines=${MAGIC_DASHBOARD_FILES_LINES:-6}
-	local eza_output shortened
+	local eza_output
 	eza_output=$(eza --width="$COLUMNS" --all --grid --color=always --icons \
 		--git-ignore --ignore-glob=".DS_Store|Icon?" \
 		--sort=name --group-directories-first --no-quotes \
 		--git --long --no-user --no-permissions --no-filesize --no-time)
 
 	if [[ $(echo "$eza_output" | wc -l) -gt $max_files_lines ]]; then
+		local shortened
 		shortened="$(echo "$eza_output" | head -n"$max_files_lines")"
 		printf "%s \033[1;36m(…)\033[0m" "$shortened"
 	elif [[ -n "$eza_output" ]]; then
