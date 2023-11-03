@@ -45,7 +45,7 @@ local function cmpconfig()
 		},
 		window = {
 			completion = {
-				side_padding = 0,
+				-- side_padding = 0,
 				border = require("config.utils").borderStyle,
 			},
 			documentation = {
@@ -99,21 +99,11 @@ local function cmpconfig()
 			end, { "i", "s" }),
 		},
 		formatting = {
-			fields = { "menu", "abbr", "kind" }, -- order of the fields
+			fields = { "abbr", "menu", "kind" }, -- order of the fields
 			format = function(entry, item)
-				-- abbreviate length https://github.com/hrsh7th/nvim-cmp/discussions/609
-				-- (height is controlled via pumheight option)
-				local maxLength = 50
-				if #item.abbr > maxLength then item.abbr = item.abbr:sub(1, maxLength) .. "…" end
-
-				-- icons
-				if entry.source.name == "nvim_lsp" then
-					-- stylua: ignore
-					local kindIcons = { Text = "", Method = "󰆧", Function = "󰊕", Constructor = "", Field = "󰇽", Variable = "󰂡", Class = "󰠱", Interface = "", Module = "", Property = "󰜢", Unit = "", Value = "󰎠", Enum = "", Keyword = "󰌋", Snippet = "󰅱", Color = "󰏘", File = "󰈙", Reference = "", Folder = "󰉋", EnumMember = "", Constant = "󰏿", Struct = "", Event = "", Operator = "󰆕", TypeParameter = "󰅲" }
-					item.kind = " " .. kindIcons[item.kind] .. " "
-				else
-					item.kind = "   "
-				end
+				-- stylua: ignore
+				local kindIcons = { Text = "", Method = "󰆧", Function = "󰊕", Constructor = "", Field = "󰇽", Variable = "󰂡", Class = "󰠱", Interface = "", Module = "", Property = "󰜢", Unit = "", Value = "󰎠", Enum = "", Keyword = "󰌋", Snippet = "󰅱", Color = "󰏘", File = "󰈙", Reference = "", Folder = "󰉋", EnumMember = "", Constant = "󰏿", Struct = "", Event = "", Operator = "󰆕", TypeParameter = "󰅲" }
+				item.kind = entry.source.name == "nvim_lsp" and kindIcons[item.kind] .. " " or ""
 				item.menu = sourceIcons[entry.source.name]
 				return item
 			end,
