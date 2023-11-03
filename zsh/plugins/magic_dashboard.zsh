@@ -120,7 +120,7 @@ function _magic_dashboard {
 # Based on Magic-Enter by @dufferzafar (MIT License)
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/magic-enter
 
-function magic_enter {
+function _magic_enter {
 	# GUARD only in PS1 and when BUFFER is empty
 	# DOCS http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html#User_002dDefined-Widgets
 	[[ -z "$BUFFER" && "$CONTEXT" == "start" ]] || return 0
@@ -142,13 +142,13 @@ case "${widgets[accept-line]}" in
 		# Override the current accept-line widget, calling the old one
 	user:*) zle -N _magic_enter_orig_accept_line "${widgets[accept-line]#user:}"
 		function _magic_enter_accept_line {
-			magic_enter
+			_magic_enter
 			zle _magic_enter_orig_accept_line -- "$@"
 		} ;;
 
 		# If no user widget defined, call the original accept-line widget
 	builtin) function _magic_enter_accept_line {
-			magic_enter
+			_magic_enter
 			zle .accept-line
 		} ;;
 esac

@@ -150,26 +150,12 @@ function gb {
 # - if commit message is empty use `chore` as default message
 # - if commit msg contains issue number, open the issue in the browser
 function gc {
-	local commit_msg="$1"
-	[[ -z "$commit_msg" ]] && commit_msg=chore || commit_msg=$1 # fill in empty commit msg,
-	git diff --staged --quiet && git add --all                  # if no staged changes, stage all
+	local msg="$1"
+	[[ -z "$msg" ]] && msg=chore || msg=$1     # fill in empty commit msg,
+	git diff --staged --quiet && git add --all # if no staged changes, stage all
 
-
-	set -o pipefail # when a pipe fails, whole command fails, ensuring `|| return 1` takes effect
 	printf "\033[1;36mCommit: \033[0m "
-	git commit -m "$commit_msg" |
-		sed -Ee $'s/( [[:digit:]]* )/\033[1;35m\\1\033[0m/g' \
-			-Ee $'s/([a-f0-9]{5,10})/\033[1;33m\\1\033[0m/g' || return 1
-	set +o pipefail # disable
-
-	# if commit msg contains issue number, open the issue in the browser
-	if [[ "$commit_msg" =~ \#[0-9]+ ]]; then
-		local issue_number url
-		issue_number=$(echo "$commit_msg" | grep -Eo "#[0-9]+" | cut -c2-)
-		url=$(git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 |
-			sed -e 's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//')
-		open "$url/issues/$issue_number"
-	fi
+	git commit -m "$msg" || return 1
 
 	# pull-push
 	if [[ -n "$(git status --porcelain)" ]]; then
@@ -185,10 +171,14 @@ function gc {
 function gm {
 	git diff --staged --quiet && git add --all # if no staged changes, stage all
 	git commit --amend --no-edit
+	git status
 }
 
 # amend message only
-alias gM="git commit --amend"
+function gM {
+	git commit --amend "$1"
+	git status
+} 
 
 #───────────────────────────────────────────────────────────────────────────────
 
