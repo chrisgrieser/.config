@@ -110,7 +110,7 @@ format = '[󰘬 ](fg:purple bg:black bold) '
 
 # files
 [git_status]
-stashed = '[󰜦  $count ](fg:yellow bg:black)'
+stashed = '[󰜦  $count ](fg:cyan bg:black)'
 untracked = '[+$count ](fg:green bg:black)'
 deleted = '[-$count ](fg:red bg:black)' # SIC unstaged as well as stage deletion
 modified = '[~$count ](fg:208 bg:black)'
