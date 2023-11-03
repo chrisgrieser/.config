@@ -8,7 +8,7 @@ local defaultSources = {
 			max_indexed_line_length = 500, -- no long lines (e.g. base64-encoded things)
 		},
 		keyword_length = 3,
-		max_item_count = 4, -- since searching all buffers results in many results
+		max_item_count = 5, -- since searching all buffers results in many results
 	},
 	{ name = "cmp_yanky", option = { onlyCurrentFiletype = true } },
 	{ name = "path" },
@@ -172,9 +172,9 @@ return {
 		event = { "InsertEnter", "CmdlineEnter" },
 		config = cmpconfig,
 		dependencies = {
+			{ "chrisgrieser/cmp-emoji", branch = "dev" }, -- PENDING https://github.com/hrsh7th/cmp-emoji/pull/9
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
-			{"chrisgrieser/cmp-emoji", branch = "dev"},
 			"dmitmel/cmp-cmdline-history",
 			"tamago324/cmp-zsh", -- some shell completions
 			"hrsh7th/cmp-buffer",
