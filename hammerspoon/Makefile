@@ -7,4 +7,4 @@ reload: # reload Hammerspoon config
 
 lines: # total length of config in LoC
 	echo ;\
-	find . -name "*.lua" -not -path "*/Spoons/*" | xargs wc -l | tail -r
+	find . -name "*.lua" -not -path "*/Spoons/*" | xargs wc -l | sort -r
