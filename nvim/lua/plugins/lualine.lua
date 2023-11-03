@@ -77,10 +77,10 @@ local lualineConfig = {
 				end,
 			},
 			{ "filetype", icon_only = true, colored = false, padding = { right = 0, left = 1 } },
-			{ "filename", file_status = false },
+			{ "filename", file_status = false, shortening_target = 30 },
 		},
 		lualine_b = {
-			{ require("funcs.alt-alt").altFileStatusline },
+			{ function() require("funcs.alt-alt").altFileStatusline { maxLen = 20 } end },
 		},
 		lualine_c = {
 			{ quickfixCounter },

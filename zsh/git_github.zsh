@@ -60,7 +60,7 @@ function rebase {
 	local num="$1"
 	if echo "$num" | grep -qE '^[0-9]+$'; then
 		git rebase -i HEAD^"$num"
-		gitlog -n $((num + 1))
+		_gitlog -n $((num + 1))
 	else
 		print "\033[1;33mUsage: rebase <number of commits>"
 	fi
@@ -84,7 +84,7 @@ function gd {
 # brief git log
 function gl {
 	local cutoff=15 # CONFIG
-	gitlog -n "$cutoff"
+	_gitlog -n "$cutoff"
 	# add `(…)` if commits were shortened
 	[[ $(git log --oneline | wc -l) -lt $cutoff ]] || echo "(…)"
 }
@@ -98,7 +98,7 @@ function gli {
 	defaults read -g AppleInterfaceStyle &>/dev/null && style="--dark" || style="--light"
 
 	selected=$(
-		gitlog --no-graph --color=always |
+		_gitlog --no-graph --color=always |
 			fzf -0 --query="$1" --ansi --no-sort \
 				--header-first --header="↵ : Checkout    ^H: Copy [H]ash" \
 				--expect="ctrl-h" --with-nth=2.. --preview-window=55% \
@@ -198,8 +198,8 @@ function clone {
 
 	# shellcheck disable=SC2012
 	cd "$(command ls -1 -t | head -n1)" || return 1
-	separator
-	inspect
+	_separator
+	_magic_dashboard
 }
 
 # delete and re-clone git repo
@@ -217,13 +217,13 @@ function nuke {
 	command rm -rf "$local_repo_path"
 	print "\033[1;34mLocal repo removed."
 	print "Cloning repo again from remote…\033[0m"
-	separator
+	_separator
 
 	# WARN depth > 1 ensures that amending a shallow commit does not result in a
 	# new commit without parent, effectively destroying git history (!!)
 	git clone --depth=5 "$SSH_REMOTE" "$local_repo_path" &&
 		cd "$local_repo_path" || return 1
-	separator
+	_separator
 	inspect
 }
 
@@ -236,7 +236,7 @@ function pickaxe {
 	print "\033[1;36mgit checkout {hash}^\033[0m"
 	echo
 
-	gitlog --pickaxe-regex --regexp-ignore-case -S"$1"
+	_gitlog --pickaxe-regex --regexp-ignore-case -S"$1"
 }
 
 # search for [g]it [d]eleted [f]ile

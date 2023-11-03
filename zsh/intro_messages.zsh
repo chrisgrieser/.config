@@ -36,5 +36,5 @@ fortune -n270 -s | cowsay -W$cow_maxwidth "$random_emotion" |
 
 #───────────────────────────────────────────────────────────────────────────────
 # show files in current directory
-separator
-inspect
+_separator
+_magic_dashboard

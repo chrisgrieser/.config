@@ -112,14 +112,14 @@ keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
 
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
-keymap("n", "<Down>", [[<cmd>. move +1<CR>==]], { desc = "󰜮 Line Down" })
-keymap("n", "<Up>", [[<cmd>. move -2<CR>==]], { desc = "󰜷 Line Up" })
-keymap("n", "<Right>", [["zx"zp]], { desc = "➡️ Char Right" })
-keymap("n", "<Left>", [["zdh"zph]], { desc = "⬅ Char Left" })
-keymap("x", "<Down>", [[:move '>+1<CR>gv=gv]], { desc = "󰜮 Selection down", silent = true })
-keymap("x", "<Up>", [[:move '<-2<CR>gv=gv]], { desc = "󰜷 Selection up", silent = true })
-keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Selection right" })
-keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "⬅ Selection left" })
+keymap("n", "<Down>", [[<cmd>. move +1<CR>==]], { desc = "󰜮 Move Line Down" })
+keymap("n", "<Up>", [[<cmd>. move -2<CR>==]], { desc = "󰜷 Move Line Up" })
+keymap("n", "<Right>", [["zx"zp]], { desc = "➡️ Move Char Right" })
+keymap("n", "<Left>", [["zdh"zph]], { desc = "⬅ Move Char Left" })
+keymap("x", "<Down>", [[:move '>+1<CR>gv=gv]], { desc = "󰜮 Move Selection down", silent = true })
+keymap("x", "<Up>", [[:move '<-2<CR>gv=gv]], { desc = "󰜷 Move Selection up", silent = true })
+keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Move Selection right" })
+keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "⬅ Move Selection left" })
 
 --------------------------------------------------------------------------------
 
