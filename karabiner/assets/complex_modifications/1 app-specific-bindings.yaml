@@ -210,6 +210,20 @@ rules:
   #───────────────────────────────────────────────────────────────────────
   - description: "(Apps) Brave"
     manipulators:
+      # Toggle Vertical Tab Sidebar
+      # Require custom shortcuts set via brave://settings/system/shortcuts?search=vertical
+      - type: basic
+        from: { key_code: "1", modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: "1", modifiers: [option] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
+      - type: basic
+        from: { key_code: "2", modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: "2", modifiers: [option] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
       # Remove bookmark
       - type: basic
         from: { key_code: d, modifiers: { mandatory: [command, shift] } }
