@@ -17,14 +17,14 @@ local defaultSources = {
 
 local sourceIcons = {
 	buffer = "󰽙",
-	zsh = "",
-	nvim_lsp = "󰒕",
-	luasnip = "󰞘",
-	path = "",
 	cmdline = "󰘳",
 	cmdline_history = "󰋚",
-	emoji = "󰞅",
 	cmp_yanky = "󰅍",
+	emoji = "󰞅",
+	luasnip = "󰞘",
+	nvim_lsp = "󰒕",
+	path = "",
+	zsh = "",
 }
 
 --------------------------------------------------------------------------------
