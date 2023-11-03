@@ -156,7 +156,7 @@ function gc {
 
 	printf "\033[1;36mCommit: \033[0m"
 	git commit -m "$commit_msg" | 
-		sed $'s/([[:digit:]])/\033[1;35m\\1\033[0m/g' || return 1
+		sed -E $'s/([[:digit:]])/\033[1;35m\\1\033[0m/g' || return 1
 
 
 	# if commit msg contains issue number, open the issue in the browser
