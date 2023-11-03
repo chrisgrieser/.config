@@ -13,24 +13,27 @@ model="gpt-3.5-turbo" # https://platform.openai.com/docs/models/gpt-3
 apikey=$alfred_apikey
 [[ -z "$apikey" ]] && apikey="$OPENAI_API_KEY" # defined in .zshenv
 
-#───────────────────────────────────────────────────────────────────────────────
 # GUARD
-
 if [[ -z "$apikey" ]]; then
 	echo "⚠️ No API key found."
 	echo "$selection"
 	return 1
 fi
 
-#───────────────────────────────────────────────────────────────────────────────
 # OPENAI API CALL
-
 # DOCS https://platform.openai.com/docs/api-reference/making-requests
 response=$(curl --silent https://api.openai.com/v1/chat/completions \
 	-H "Content-Type: application/json" \
 	-H "Authorization: Bearer $apikey" \
 	-d "{ \"model\": \"$model\", \"messages\": [{\"role\": \"user\", \"content\": \"$the_prompt\"}], \"temperature\": $temperature }" |
 	grep '"content"' | cut -d'"' -f4) # doing this avoids jq dependency
+
+#───────────────────────────────────────────────────────────────────────────────
+
+if [[ "$output_flavor" == "response" ]]; then
+	echo -n "$response"
+	exit 0
+fi
 
 echo "$selection" >"$cache/selection.txt"
 echo "$response" >"$cache/rephrased.txt"
@@ -45,8 +48,6 @@ if [[ "$output_flavor" == "markdown" ]]; then
 elif [[ "$output_flavor" == "critic-markup" ]]; then
 	output=$(echo "$diff" |
 	sed -e 's/\[-/{--/g' -e 's/-\]/--}/g' -e 's/{+/{++/g' -e 's/+}/++}/g')
-elif [[ "$output_flavor" == "response" ]]; then
-	output="$response"
 fi
 
 # paste via Alfred
