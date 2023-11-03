@@ -44,7 +44,7 @@ function dump() {
 		grep -v "Temp" | sed "s|^|https://chrome.google.com/webstore/detail/|" \
 		>"$dump_path/browser-extensions.txt"
 
-	echo "Brewfile, NPM-File, Pip-File and list of browser extensions dumped at \"$dump_path\""
+	echo "Brewfile, NPM-File, Pip-File, and list of browser extensions dumped at \"$dump_path\""
 }
 
 function update() {
@@ -95,7 +95,7 @@ function listall() {
 	npm list --location=global
 
 	print-section "Pip3"
-	pip list --not-required
+	pip3 list --not-required
 
 	print-section "DUMP INSTALLS"
 	dump
