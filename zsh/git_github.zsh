@@ -155,9 +155,9 @@ function gc {
 	git diff --staged --quiet && git add --all                  # if no staged changes, stage all
 
 	printf "\033[1;36mCommit\033[0m "
-	git commit -m "$commit_msg" |
+	git commit -m "$commit_msg" || return 1 |
 		sed -Ee $'s/( [[:digit:]]* )/\033[1;35m\\1\033[0m/g' \
-			-Ee $'s/([a-f0-9]{5,10})/\033[1;33m\\1\033[0m/g' || return 1
+			-Ee $'s/([a-f0-9]{5,10})/\033[1;33m\\1\033[0m/g'
 
 	# if commit msg contains issue number, open the issue in the browser
 	if [[ "$commit_msg" =~ \#[0-9]+ ]]; then
