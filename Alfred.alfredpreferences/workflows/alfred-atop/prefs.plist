@@ -7,7 +7,7 @@
 	<key>network_keyword</key>
 	<string>nn</string>
 	<key>process_keyword</key>
-	<string>ppp</string>
+	<string>ppp||kill</string>
 	<key>volume_keyword</key>
 	<string>vv</string>
 </dict>
