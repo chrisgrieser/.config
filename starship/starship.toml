@@ -1,4 +1,4 @@
-# - DOCS https://starship.rs/config/ 
+# - DOCS https://starship.rs/config/
 # - Ansi color codes: https://i.stack.imgur.com/KTSQa.png
 # - INFO some nerd font requires a space after them to be properly sized
 #───────────────────────────────────────────────────────────────────────────────
@@ -24,14 +24,13 @@ $character\
 
 right_format = """\
 ${custom.alfred}\
-$nodejs\
 $python\
 $jobs\
 $memory_usage\
 """
 
 [character]
-success_symbol = "[ ](bold green)" # 󰀘
+success_symbol = "[󰀘 ](bold green)" # 󰀘 
 error_symbol = " [󰇷 ](bold red)"
 vimcmd_symbol = " [ ](bold 206)"   # 206: magenta
 
@@ -153,14 +152,8 @@ description = "Version number of Alfred Workflow"
 when = "[[ -f info.plist ]] || [[ -f ../info.plist ]]"
 command = "if [[ -f ../info.plist ]] ; then ; plist=$(plutil -extract version xml1 -o - ../info.plist) ; else ; plist=$(plutil -extract version xml1 -o - info.plist) ; fi ; echo \"$plist\" | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1"
 os = "macos"
-format = '[󰮤 ](purple) [󰏗  $output]($style)'
-style = "bold cyan"
-
-[nodejs]
-format = " [$symbol $version]($style)"
-version_format = "$major"
-style = "bold cyan"
-detect_extensions = ["ts"]             # don't trigger for JXA
+format = '[󰮤  $output]($style)'
+style = "bold purple"
 
 [python]
 style = "bold cyan"
