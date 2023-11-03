@@ -154,7 +154,7 @@ function gc {
 	[[ -z "$msg" ]] && msg=chore || msg=$1     # fill in empty commit msg,
 	git diff --staged --quiet && git add --all # if no staged changes, stage all
 
-	printf "\033[1;36mCommit: \033[0m "
+	printf "\033[1;36mCommit: \033[0m"
 	git commit -m "$msg" || return 1
 
 	# pull-push
