@@ -80,7 +80,7 @@ local lualineConfig = {
 			{ "filename", file_status = false, shortening_target = 30 },
 		},
 		lualine_b = {
-			{ function() require("funcs.alt-alt").altFileStatusline { maxLen = 20 } end },
+			{ function() return require("funcs.alt-alt").altFileStatusline { maxLen = 20 } end },
 		},
 		lualine_c = {
 			{ quickfixCounter },

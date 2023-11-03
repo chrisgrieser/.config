@@ -15,9 +15,6 @@ setopt INTERACTIVE_COMMENTS
 #───────────────────────────────────────────────────────────────────────────────
 # CLI/PLUGIN SETTINGS
 
-export MAGIC_DASHBOARD_GITLOG_LINES=5
-export MAGIC_DASHBOARD_FILES_LINES=6
-
 export YSU_IGNORED_ALIASES=("bi" "pi") # often copypasted without alias
 export YSU_MESSAGE_POSITION="after"
 
