@@ -154,10 +154,10 @@ function gc {
 	[[ -z "$commit_msg" ]] && commit_msg=chore || commit_msg=$1 # fill in empty commit msg,
 	git diff --staged --quiet && git add --all                  # if no staged changes, stage all
 
-	printf "\033[1;36mCommit: \033[0m"
-	git commit -m "$commit_msg" | 
-		sed -E $'s/([[:digit:]])/\033[1;35m\\1\033[0m/g' || return 1
-
+	printf "\033[1;36mCommit\033[0m "
+	git commit -m "$commit_msg" |
+		sed -Ee $'s/( [[:digit:]] )/\033[1;35m\\1\033[0m/g' \
+			-Ee $'s/([a-f0-9])/\033[1;33m\\1\033[0m/g' || return 1
 
 	# if commit msg contains issue number, open the issue in the browser
 	if [[ "$commit_msg" =~ \#[0-9]+ ]]; then
