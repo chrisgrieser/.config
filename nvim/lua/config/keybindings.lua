@@ -225,9 +225,8 @@ keymap("i", "<D-e>", "``<Left>", { desc = "  Inline Code" })
 --------------------------------------------------------------------------------
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "qf", "help" },
+	pattern = { "qf", "help", "toggleterm" },
 	callback = function() vim.keymap.set("n", "q", cmd.close, { buffer = true, nowait = true }) end,
 })
 
 --------------------------------------------------------------------------------
-
