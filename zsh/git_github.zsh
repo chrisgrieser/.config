@@ -54,15 +54,13 @@ function gc {
 # select a recent commit to fixup *and* autosquash (not marked for next rebase!)
 function fixup {
 	local target
-	target=$(_gitlog -n 15 | fzf --ansi --no-sort --no-info | cut -d" " -f1)
+	target=$(_gitlog --no-graph -n 15 | fzf --ansi --no-sort --no-info | cut -d" " -f1)
 	[[ -z "$target" ]] && return 0
 	git commit --fixup="$target"
 
-	# HACK to make non-interactive rebase work with --autosquash: https://www.reddit.com/r/git/comments/uzh2no/what_is_the_utility_of_noninteractive_rebase/
-	git -c sequence.editor=: rebase --interactive --autosquash "$target"~1
-
-	_separator
-	_gitlog "$target"~2..
+	# HACK ":" is the "no-op-"editor https://www.reddit.com/r/git/comments/uzh2no/what_is_the_utility_of_noninteractive_rebase/
+	git -c sequence.editor=: rebase --interactive --autosquash "$target^" && 
+		_separator && _gitlog "$target"~2.. # inspect result
 }
 
 # amend-no-edit
