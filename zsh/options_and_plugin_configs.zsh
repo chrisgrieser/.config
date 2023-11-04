@@ -39,8 +39,8 @@ export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgrep-config"
 export _ZO_DATA_DIR="$DATA_DIR/zoxide/"
 eval "$(zoxide init --no-cmd zsh)" # needs to be placed after compinit
 export _ZO_FZF_OPTS="
-	$FZF_DEFAULT_OPTS --height=50% --with-nth=2.. --preview-window=right
-	--preview='eza {2} --icons --color=always --width=\$FZF_PREVIEW_COLUMNS'
+	$FZF_DEFAULT_OPTS --height=50% --preview-window=right,40% -1
+	--preview='eza {2} --icons --color=always --no-quotes --width=\$FZF_PREVIEW_COLUMNS'
 "
 
 # updates managed via homebrew https://cli.github.com/manual/gh_help_environment
