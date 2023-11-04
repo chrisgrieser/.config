@@ -89,16 +89,6 @@ function gu {
 	open "$url"
 }
 
-# git diff
-function gd {
-	if [[ ! -x "$(command -v delta)" ]]; then print "\033[1;33mdelta not installed (\`brew install git-delta\`)\033[0m" && return 1; fi
-
-	# make delta light/dark mode aware (on macOS)
-	local style
-	defaults read -g AppleInterfaceStyle &>/dev/null && style="dark" || style="light"
-	git -c delta."$style"=true diff "$@"
-}
-
 #───────────────────────────────────────────────────────────────────────────────
 # GIT LOG
 

@@ -1,3 +1,19 @@
+-- If nvim was opened w/o argument, re-open the first oldfile that exists
+vim.defer_fn(function()
+	if vim.fn.argc() > 0 then return end
+	for _, file in ipairs(vim.v.oldfiles) do
+		if vim.loop.fs_stat(file) and not file:find("COMMIT_EDITMSG$") then
+			vim.cmd.edit(file)
+			return
+		end
+	end
+end, 1)
+
+vim.g.mapleader = ","
+vim.g.maplocalleader = "ö"
+
+--------------------------------------------------------------------------------
+
 ---Try to require the module, and do not error out when one of them cannot be
 ---loaded, but do notify if there was an error.
 ---@param module string module to load
@@ -9,29 +25,6 @@ local function safeRequire(module)
 		1
 	)
 end
-
--- If nvim was opened w/o argument, re-open the last file.
--- If that files does not exist, open last existing oldfile.
-local function reOpenLastFile()
-	if vim.fn.argc() ~= 0 then return end
-
-	vim.defer_fn(function()
-		for _, file in ipairs(vim.v.oldfiles) do
-			if vim.loop.fs_stat(file) and not file:find("COMMIT_EDITMSG$") then 
-				vim.cmd.edit(file)
-				return
-			end
-		end
-	end, 1)
-end
-reOpenLastFile()
-
---------------------------------------------------------------------------------
-
-vim.g.mapleader = ","
-vim.g.maplocalleader = "ö"
-
---------------------------------------------------------------------------------
 
 safeRequire("config.lazy")
 if vim.fn.has("gui_running") == 1 then safeRequire("config.gui-settings") end

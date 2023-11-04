@@ -36,6 +36,7 @@
 [diff]
 	colorMoved = default
 [delta]
+	syntax-theme = ansi ; auto switch light/dark mode
 	navigate = true # use n and N to move between diff sections
 	hunk-label="■"
 
