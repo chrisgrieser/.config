@@ -840,13 +840,6 @@ osascript -l JavaScript ./scripts/show-properties.js "$PASSWORD_STORE_DIR"</stri
 	</array>
 	<key>readme</key>
 	<string># Alfred Client for the Pass-CLI
-
-## Requirements
-- `pass`
-- `pinentry-mac`
-
-Install them via `brew install pass pinentry-mac`. 
-
 1. Setup `pass` with an GPG key. See the [Pass-Website](https://www.passwordstore.org/) for more information.
 2. Setup `pinentry-mac` as your `pinentry-program`:
 

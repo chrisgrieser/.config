@@ -5,15 +5,6 @@ app.includeStandardAdditions = true;
 
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @param {string} str */
-function alfredMatcher(str) {
-	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
-	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
-	return [clean, camelCaseSeperated, str].join(" ") + " ";
-}
-
-//──────────────────────────────────────────────────────────────────────────────
-
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
@@ -23,12 +14,12 @@ function run(argv) {
 	// process Alfred args
 	const query = argv[0] || "";
 	const command = query.split(" ")[0];
-	const options = argv[0] ? query.split(" ").slice(1) : "";
+	const options = argv[0] ? query.split(" ").slice(1).join(" ") : "";
 
 	// get list of all installed binaries
 	const binariesList = app
 		.doShellScript(
-			"echo $PATH | tr ':' '\n' | xargs -I {} find {} -maxdepth 1 -type f -or -type l -perm '++x'",
+			"echo $PATH | tr ':' '\n' | xargs -I {} find {} -mindepth 1 -maxdepth 1 -type f -or -type l -perm '++x'",
 		)
 		.split("\r")
 		.filter((binary) => binary.includes(command));
@@ -38,17 +29,17 @@ function run(argv) {
 		.sort((a, b) => a.length - b.length) // sort shorter ones to the top
 		.map((binary) => {
 			const cmd = binary.split("/").pop();
-			const icon = binary.includes("brew") ? " 🍺" : "";
+			const icon = binary.includes("brew") ? "🍺" : "";
 			let url = manPageSite + cmd;
 			if (options) url += "#" + options;
 			return {
-				title: cmd + icon,
-				match: alfredMatcher(cmd),
+				title: [cmd, options, icon].filter(Boolean).join(" "),
+				match: cmd.replace(/[-_]/, " ") + " " + cmd,
 				arg: url,
 				mods: {
 					cmd: {
 						arg: "man " + argv[0],
-						subtitle: "> man " + argv[0],
+						subtitle: "⌘: Open in Terminal >> man " + argv[0],
 					},
 				},
 				uid: cmd,
