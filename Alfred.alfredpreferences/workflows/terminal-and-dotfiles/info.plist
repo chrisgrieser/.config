@@ -72,11 +72,37 @@
 				<false/>
 			</dict>
 		</array>
+		<key>7C9DF178-A8F4-4B38-977B-E15968AE6CC0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E063CB81-6C1F-4441-9576-0A9D97F6BBC3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>9EC4C5E4-FD5F-4585-86AE-47B0A7AFA214</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>707FB3E6-329A-4494-A074-D4CD436A44AD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E063CB81-6C1F-4441-9576-0A9D97F6BBC3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B8E947B4-1638-4F6B-8A9A-EF2294C60AC9</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -303,6 +329,89 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<true/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>50</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>&lt;</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>7C9DF178-A8F4-4B38-977B-E15968AE6CC0</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>B8E947B4-1638-4F6B-8A9A-EF2294C60AC9</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>{query}</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E063CB81-6C1F-4441-9576-0A9D97F6BBC3</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -350,6 +459,17 @@ check if path different from PWD</string>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
+		<key>7C9DF178-A8F4-4B38-977B-E15968AE6CC0</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>note</key>
+			<string>Quick Eval Selection</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>380</real>
+		</dict>
 		<key>902D4662-2953-4B92-BAE1-BE34CE7A174D</key>
 		<dict>
 			<key>colorindex</key>
@@ -376,6 +496,24 @@ check if path different from PWD</string>
 			<real>190</real>
 			<key>ypos</key>
 			<real>20</real>
+		</dict>
+		<key>B8E947B4-1638-4F6B-8A9A-EF2294C60AC9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>335</real>
+			<key>ypos</key>
+			<real>380</real>
+		</dict>
+		<key>E063CB81-6C1F-4441-9576-0A9D97F6BBC3</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>180</real>
+			<key>ypos</key>
+			<real>380</real>
 		</dict>
 		<key>F146B53A-B75E-4B95-8AC5-9AB4944913F4</key>
 		<dict>

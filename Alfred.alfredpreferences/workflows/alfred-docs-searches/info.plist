@@ -2896,23 +2896,21 @@ Search more than two dozen developer documentation sites via one of the keywords
 - `sc`: shellcheck Wiki
 - `pandoc`: Pandoc User Manual
 - `git`: official docs &amp; the "pro-git" book
-- `py`: python official docs\*
+- `py`: python official docs*
 - `ruff`: ruff rules
 - `pd`: pandas docs
 - `sh`: cheat.sh (includes `tldr` pages)
 - `man`: man pages (mankier.com)
-	+ second word gets treated as option to search for (for example, 
-	`man grep -e`), and opens the man page at that location
-	+ &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Search in the terminal, using the terminal app 
-	you have configured [in your Alfred settings](https://www.alfredapp.com/help/features/terminal/).,
+	- second word gets treated as option to search for (e.g., `man grep -e`), and will open the man page at that location
+	- &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Search in the terminal, using the terminal app you have configured [in your Alfred settings](https://www.alfredapp.com/help/features/terminal/).
 - `hs`: Hammerspoon reference
 - `sb`: sketchybar docs
 - `ke`: Karabiner Elements docs
 - `star`: starship prompt docs
 - `ep`: espanso docs
 - `wt`: WezTerm docs
-- `awd`: Alfred Workflow Development docs
-- `yq`\*
+- `awd`: Alfred Workflow docs
+- `yq`*
 
 
  * These documentation searches do not cover all sub-sites. Contributions to improve them are welcome.
@@ -3535,7 +3533,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.9.0</string>
+	<string>1.9.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
