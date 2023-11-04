@@ -38,7 +38,7 @@ function _gitlog {
 			-e 's/grafted/ /' \
 			-e 's/origin\//󰞶  /g' \
 			-e 's/HEAD/󱍞 /g' \
-			-e 's/tags: / )/' \
+			-e 's/tag: /  /' \
 			-e 's/\* /∘ /' \
 			-Ee $'s/ (improv|fix|refactor|build|ci|docs|feat|test|perf|chore|revert|break|style)(\\(.+\\)|!)?:/ \033[1;35m\\1\033[1;36m\\2\033[0m:/' \
 			-Ee $'s/(`[^`]*`)/\033[1;36m\\1\033[0m/g' \

@@ -52,7 +52,7 @@ require("lazy").setup("plugins", {
 		wrap = true,
 		border = u.borderStyle,
 		pills = false,
-		size = { width = 1, height = 0.96 },
+		size = { width = 1, height = 0.93 }, -- not full height, so search is visible
 	},
 	checker = {
 		enabled = true, -- automatically check for plugin updates

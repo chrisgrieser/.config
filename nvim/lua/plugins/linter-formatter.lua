@@ -30,7 +30,7 @@ local formatters = {
 	jsonc = { "biome" },
 	lua = { "stylua" },
 	python = { "ruff_format", "ruff_fix" },
-	yaml = { "prettier" },
+	-- yaml = { "prettier" },
 	html = { "prettier" },
 	markdown = { "markdown-toc", "markdownlint" },
 	css = { "stylelint", "prettier" },
@@ -43,6 +43,7 @@ local formatters = {
 -- filetypes that should use lsp-formatting
 local lspFormatting = {
 	"toml",
+	"yaml",
 }
 
 --------------------------------------------------------------------------------
@@ -160,10 +161,10 @@ local formatterConfig = {
 		-- stylua: ignore
 		["bibtex-tidy"] = {
 			prepend_args =
-				"--tab", "--curly", "--strip-enclosing-braces", "--no-align", "--no-wrap",
-				"--enclosing-braces=title,journal,booktitle", "--drop-all-caps",
-				"--numeric", "--months", "--encode-urls",
-				"--duplicates", "--sort-fields", "--remove-empty-fields", "--omit=month,issn,abstract",
+			"--tab", "--curly", "--strip-enclosing-braces", "--no-align", "--no-wrap",
+			"--enclosing-braces=title,journal,booktitle", "--drop-all-caps",
+			"--numeric", "--months", "--encode-urls",
+			"--duplicates", "--sort-fields", "--remove-empty-fields", "--omit=month,issn,abstract",
 			condition = function(ctx)
 				local ignore = vim.fs.basename(ctx.filename) == "main-bibliography.bib"
 				if ignore then u.notify("conform.nvim", "Ignoring main-bibliography.bib.") end
@@ -178,8 +179,7 @@ local formatterConfig = {
 return {
 	{ -- Linter integration
 		"mfussenegger/nvim-lint",
-		-- commit = "962a76877a4479a535b935bd7ef35ad41ba308b2", -- FIX EMFILE: too many open files
-		commit = "7a1bc763a41d5848ceeb47fe7345fb78c07404f9", -- FIX EMFILE: too many open files
+		commit = "85108b30869a9cd6ec11cf85b2a3e3bb3b3b1660", -- FIX EMFILE: too many open files
 		event = "VeryLazy",
 		config = function()
 			linterConfigs()
@@ -204,11 +204,15 @@ return {
 			{
 				"<D-s>",
 				function()
-					require("conform").format {
-						lsp_fallback = vim.tbl_contains(lspFormatting, vim.bo.ft),
-						async = true,
-						callback = vim.cmd.update,
-					}
+					if vim.tbl_contains(lspFormatting, vim.bo.ft) then
+						vim.lsp.buf.format()
+					else
+						require("conform").format {
+							lsp_fallback = false,
+							async = true,
+							callback = vim.cmd.update,
+						}
+					end
 				end,
 				desc = "󰒕 Format & Save",
 			},

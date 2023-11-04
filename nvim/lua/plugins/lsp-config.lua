@@ -238,6 +238,13 @@ serverConfigs.ltex = {
 	end,
 }
 
+-- disable formatting, since taken care of by prettier
+serverConfigs.yamlls = {
+	settings = {
+		yaml = { format = { enable = true } },
+	},
+}
+
 --------------------------------------------------------------------------------
 
 local function setupAllLsps()
