@@ -18,7 +18,7 @@ function o() {
 	selected=$(
 		# shellcheck disable=2016
 		fd --type=file --type=symlink --color=always | fzf \
-			-0 -1 --ansi --query="$input" --info=inline --header-first \
+			-1 --ansi --query="$input" --info=inline --header-first \
 			--header="^H --hidden --no-ignore" \
 			--with-nth=-1 --delimiter="/" \
 			--bind="ctrl-h:reload(fd --hidden --no-ignore --exclude='/.git/' --exclude='.DS_Store' --type=file --type=symlink --color=always)" \

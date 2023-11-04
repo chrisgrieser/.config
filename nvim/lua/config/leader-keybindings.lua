@@ -183,10 +183,3 @@ keymap(
 keymap("n", "<leader>of", function() vim.opt.scrolloff = 13 end, { desc = "⇓ Fix Scrolloff" })
 
 --------------------------------------------------------------------------------
-
-keymap("n", "<leader>gt", function ()
-	local stashMsg = vim.fn.system({"git", "stash", "push"}):gsub("\n", ""):gsub("^Saved working directory and index ", "")
-	local stashStat = vim.fn.system({"git", "stash", "show", "0"}):gsub("\n", "")
-	vim.notify(stashMsg .. "\n" .. stashStat, vim.log.levels.INFO, {title = "Stash"})
-	vim.cmd.checktime() -- reload this file from disk
-end, { desc = "󰜦 Stash Push"} )

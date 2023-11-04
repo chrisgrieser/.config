@@ -31,7 +31,8 @@ fi
 #───────────────────────────────────────────────────────────────────────────────
 # QUIT TRANSMISSION, IF NO OTHER ACTIVE TORRENTS
 
-if [[ ! -x "$(command -v transmission-remote)" ]]; then
+# INFO `test -x /transmission-remote` does not work reliably
+if ! command -v transmission-remote &> /dev/null; then
 	touch "./WARN transmission-cli not installed"
 	return 1
 fi

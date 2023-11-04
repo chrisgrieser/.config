@@ -8,21 +8,6 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
-		<key>04E4231A-9FF6-4D7E-873C-A80690A5A9A9</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>7F0C8CB8-FEE4-43E7-AC0F-F27C85688A0D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>0790AF04-5513-44B5-94E2-FC7E6F552C71</key>
-		<array/>
 		<key>08B7842B-16DA-4BFC-8F35-AE680AF1E07B</key>
 		<array>
 			<dict>
@@ -79,19 +64,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>BF79E782-31E9-4840-A0FA-00EE2CB5403A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>2C3038DA-F043-4F3E-8C18-97A96070D05F</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>3A5F393C-06D9-42AF-9EB4-DA50E6CCE0AE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -186,19 +158,6 @@
 				<true/>
 			</dict>
 		</array>
-		<key>3A5F393C-06D9-42AF-9EB4-DA50E6CCE0AE</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>B6818B6F-457E-4CCC-B030-46BCD7DA9F02</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>42255CF9-BC03-46B1-8AB6-0AD60FA92ECE</key>
 		<array>
 			<dict>
@@ -250,59 +209,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>6B63D08C-0E2C-443F-9B43-3CAAD1687E91</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>8D753493-85EA-4742-8B0E-1720EB36F108</string>
-				<key>modifiers</key>
-				<integer>262144</integer>
-				<key>modifiersubtext</key>
-				<string>⌃: Diff Changes in the Terminal</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>3A5F393C-06D9-42AF-9EB4-DA50E6CCE0AE</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<true/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>2C3038DA-F043-4F3E-8C18-97A96070D05F</string>
-				<key>modifiers</key>
-				<integer>131072</integer>
-				<key>modifiersubtext</key>
-				<string>⇧: Discard (Reset) Changes to File</string>
-				<key>vitoclose</key>
-				<true/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>7808AF69-5EBD-49E1-87ED-58F14D54BBD3</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>⌥: Reveal in Finder</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>9D26C27E-AC67-428B-9499-55924E79D48C</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Open File</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>764E04CB-5854-4BC2-A752-639115FB0805</key>
 		<array>
 			<dict>
@@ -326,19 +232,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>7808AF69-5EBD-49E1-87ED-58F14D54BBD3</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>3A5F393C-06D9-42AF-9EB4-DA50E6CCE0AE</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>7EF43790-CB0F-4E39-9D9A-E1D7E09610F6</key>
 		<array>
 			<dict>
@@ -352,34 +245,8 @@
 				<false/>
 			</dict>
 		</array>
-		<key>7F0C8CB8-FEE4-43E7-AC0F-F27C85688A0D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>D0CBD0A3-DDAB-4712-A246-8796E4A58D3B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>9C309873-3D47-4FFD-817C-67F6388A7C30</key>
 		<array/>
-		<key>9D26C27E-AC67-428B-9499-55924E79D48C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>3A5F393C-06D9-42AF-9EB4-DA50E6CCE0AE</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>B04FEC5B-79E4-407B-ACCE-EAA0C5B81AB8</key>
 		<array>
 			<dict>
@@ -436,34 +303,6 @@
 				<string>⌘: Mark as read</string>
 				<key>vitoclose</key>
 				<true/>
-			</dict>
-		</array>
-		<key>B6818B6F-457E-4CCC-B030-46BCD7DA9F02</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>0790AF04-5513-44B5-94E2-FC7E6F552C71</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>A8406F36-C61C-4479-B0FE-B314F462019B</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>BE9CDE2A-D239-4472-8CF0-D6E9B2A54B8D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>7F0C8CB8-FEE4-43E7-AC0F-F27C85688A0D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
 			</dict>
 		</array>
 		<key>BF79E782-31E9-4840-A0FA-00EE2CB5403A</key>
@@ -557,39 +396,6 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>D4F0274E-F79C-43A1-9C38-65C92510EEF2</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>04E4231A-9FF6-4D7E-873C-A80690A5A9A9</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>⌥: Copy Hash</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>7F0C8CB8-FEE4-43E7-AC0F-F27C85688A0D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>BE9CDE2A-D239-4472-8CF0-D6E9B2A54B8D</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Reset (Hard)</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1397,287 +1203,11 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>04E4231A-9FF6-4D7E-873C-A80690A5A9A9</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/git-log-action.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>7F0C8CB8-FEE4-43E7-AC0F-F27C85688A0D</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>gl</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/git-log.js</string>
-				<key>subtext</key>
-				<string>Current Finder Window or {var:default_repo}</string>
-				<key>title</key>
-				<string>Git Log</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>D4F0274E-F79C-43A1-9C38-65C92510EEF2</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>ℹ️ {var:mode}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>D0CBD0A3-DDAB-4712-A246-8796E4A58D3B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>BE9CDE2A-D239-4472-8CF0-D6E9B2A54B8D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.terminalcommand</string>
-			<key>uid</key>
-			<string>8D753493-85EA-4742-8B0E-1720EB36F108</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<true/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/git-stage-area-action.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>3A5F393C-06D9-42AF-9EB4-DA50E6CCE0AE</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>gs</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/git-status.js</string>
-				<key>subtext</key>
-				<string>Current Finder Window or {var:default_repo}</string>
-				<key>title</key>
-				<string>Git Status (Stage/Unstage Files)</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>6B63D08C-0E2C-443F-9B43-3CAAD1687E91</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>soundname</key>
-				<string>Tink</string>
-				<key>systemsound</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.playsound</string>
-			<key>uid</key>
-			<string>0790AF04-5513-44B5-94E2-FC7E6F552C71</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:mode}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>4</integer>
-						<key>matchstring</key>
-						<string>^(un)?stage$</string>
-						<key>outputlabel</key>
-						<string></string>
-						<key>uid</key>
-						<string>A8406F36-C61C-4479-B0FE-B314F462019B</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>else</string>
-				<key>hideelse</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>B6818B6F-457E-4CCC-B030-46BCD7DA9F02</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>2C3038DA-F043-4F3E-8C18-97A96070D05F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>7808AF69-5EBD-49E1-87ED-58F14D54BBD3</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>9D26C27E-AC67-428B-9499-55924E79D48C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>04E4231A-9FF6-4D7E-873C-A80690A5A9A9</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>235</real>
-			<key>ypos</key>
-			<real>1345</real>
-		</dict>
 		<key>06CC5118-3CAE-427B-928D-48B78C81B6B6</key>
 		<dict>
 			<key>colorindex</key>
@@ -1686,15 +1216,6 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<real>570</real>
 			<key>ypos</key>
 			<real>1170</real>
-		</dict>
-		<key>0790AF04-5513-44B5-94E2-FC7E6F552C71</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>595</real>
-			<key>ypos</key>
-			<real>1610</real>
 		</dict>
 		<key>08B7842B-16DA-4BFC-8F35-AE680AF1E07B</key>
 		<dict>
@@ -1754,15 +1275,6 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<key>ypos</key>
 			<real>775</real>
 		</dict>
-		<key>2C3038DA-F043-4F3E-8C18-97A96070D05F</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>265</real>
-			<key>ypos</key>
-			<real>1675</real>
-		</dict>
 		<key>378B3595-A76C-4026-AC7F-0AC288FDF625</key>
 		<dict>
 			<key>colorindex</key>
@@ -1784,15 +1296,6 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<real>30</real>
 			<key>ypos</key>
 			<real>145</real>
-		</dict>
-		<key>3A5F393C-06D9-42AF-9EB4-DA50E6CCE0AE</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>375</real>
-			<key>ypos</key>
-			<real>1610</real>
 		</dict>
 		<key>42255CF9-BC03-46B1-8AB6-0AD60FA92ECE</key>
 		<dict>
@@ -1832,17 +1335,6 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<key>ypos</key>
 			<real>145</real>
 		</dict>
-		<key>6B63D08C-0E2C-443F-9B43-3CAAD1687E91</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>git status (stage/unstage)</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>1610</real>
-		</dict>
 		<key>764E04CB-5854-4BC2-A752-639115FB0805</key>
 		<dict>
 			<key>colorindex</key>
@@ -1853,15 +1345,6 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<real>295</real>
 			<key>ypos</key>
 			<real>1130</real>
-		</dict>
-		<key>7808AF69-5EBD-49E1-87ED-58F14D54BBD3</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>265</real>
-			<key>ypos</key>
-			<real>1725</real>
 		</dict>
 		<key>7CE3F725-5F4E-4A4B-B16B-94871083E6A2</key>
 		<dict>
@@ -1890,24 +1373,6 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
-		<key>7F0C8CB8-FEE4-43E7-AC0F-F27C85688A0D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>355</real>
-			<key>ypos</key>
-			<real>1365</real>
-		</dict>
-		<key>8D753493-85EA-4742-8B0E-1720EB36F108</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>375</real>
-			<key>ypos</key>
-			<real>1495</real>
-		</dict>
 		<key>968A454B-B9EE-46DD-8156-3630F678E31C</key>
 		<dict>
 			<key>colorindex</key>
@@ -1925,15 +1390,6 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<real>635</real>
 			<key>ypos</key>
 			<real>895</real>
-		</dict>
-		<key>9D26C27E-AC67-428B-9499-55924E79D48C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>265</real>
-			<key>ypos</key>
-			<real>1770</real>
 		</dict>
 		<key>B04FEC5B-79E4-407B-ACCE-EAA0C5B81AB8</key>
 		<dict>
@@ -1954,24 +1410,6 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<real>35</real>
 			<key>ypos</key>
 			<real>1015</real>
-		</dict>
-		<key>B6818B6F-457E-4CCC-B030-46BCD7DA9F02</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>525</real>
-			<key>ypos</key>
-			<real>1640</real>
-		</dict>
-		<key>BE9CDE2A-D239-4472-8CF0-D6E9B2A54B8D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>235</real>
-			<key>ypos</key>
-			<real>1435</real>
 		</dict>
 		<key>BF79E782-31E9-4840-A0FA-00EE2CB5403A</key>
 		<dict>
@@ -2021,26 +1459,6 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<real>345</real>
 			<key>ypos</key>
 			<real>435</real>
-		</dict>
-		<key>D0CBD0A3-DDAB-4712-A246-8796E4A58D3B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>500</real>
-			<key>ypos</key>
-			<real>1365</real>
-		</dict>
-		<key>D4F0274E-F79C-43A1-9C38-65C92510EEF2</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>git log</string>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>1365</real>
 		</dict>
 		<key>E6DBBBE7-CEB7-477C-AC88-395FF2B34092</key>
 		<dict>
