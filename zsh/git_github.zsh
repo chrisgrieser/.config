@@ -5,7 +5,6 @@ alias gg="git checkout -" # go to previous branch/commit
 alias gs='git status'
 alias ga="git add"
 
-alias gl="_gitlog"
 alias gd="git diff"
 alias gt="git stash push && git stash show 0"
 alias gT="git stash pop"
@@ -14,7 +13,7 @@ alias grh='git reset --hard'
 alias push="git push"
 alias pull="git pull"
 alias pull="git rebase --interactive"
-alias unshallow="git fetch --unshallow" # make shallow clone complete again
+alias unshallow="git fetch --unshallow"          # make shallow clone complete again
 alias g.='cd "$(git rev-parse --show-toplevel)"' # goto git root
 
 alias gi='gh issue list --state=open'
@@ -49,7 +48,7 @@ function gc {
 		printf "\033[1;36mPull: \033[0m" && git pull &&
 			printf "\033[1;36mPush: \033[0m" && git push
 	else
-		print "\033[1;36mPush: \033[0m"
+		print "\033[1;36mPush:\033[0m Not pushing since repo still dirty."
 		return 0
 	fi
 
@@ -65,7 +64,7 @@ function fixup {
 	# HACK ":" is the "no-op-"editor https://www.reddit.com/r/git/comments/uzh2no/what_is_the_utility_of_noninteractive_rebase/
 	git -c sequence.editor=: rebase --interactive --autosquash "$target^" || return 0
 
-	# inspect result
+	# confirm result
 	_separator
 	_gitlog "$target"~2..
 }
@@ -95,6 +94,16 @@ function gu {
 
 #───────────────────────────────────────────────────────────────────────────────
 # GIT LOG
+
+function gl {
+	if [[ -z "$1" ]]; then
+		_gitlog -n 15
+	elif [[ "$1" =~ ^[0-9]+$ ]]; then
+		_gitlog -n "$1"
+	else
+		_gitlog "$@"
+	fi
+}
 
 # interactive
 function gli {
