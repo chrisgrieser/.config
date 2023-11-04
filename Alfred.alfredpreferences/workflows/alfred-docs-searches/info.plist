@@ -638,6 +638,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>A1B1021B-B929-4006-934F-400A3A96A53E</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: View Man Page in Terminal</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -1364,7 +1374,7 @@
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
-				<true/>
+				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
 				<key>argumenttreatemptyqueryasnil</key>
@@ -1376,7 +1386,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>manp</string>
+				<string>man</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -1384,7 +1394,7 @@
 				<key>queuedelaymode</key>
 				<integer>0</integer>
 				<key>queuemode</key>
-				<integer>1</integer>
+				<integer>2</integer>
 				<key>runningsubtext</key>
 				<string>loading...</string>
 				<key>script</key>
@@ -1408,6 +1418,21 @@
 			<string>D10E485C-BB78-4681-A267-D6B57E3E6EA3</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.terminalcommand</string>
+			<key>uid</key>
+			<string>A1B1021B-B929-4006-934F-400A3A96A53E</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2875,7 +2900,7 @@ Search more than two dozen developer documentation sites via one of the keywords
 - `ruff`: ruff rules
 - `pd`: pandas docs
 - `sh`: cheat.sh
-- `manp`: man pages
+- `man`: man pages
 - `hs`: Hammerspoon reference
 - `sb`: sketchybar docs
 - `ke`: Karabiner Elements docs
@@ -3194,6 +3219,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>2885</real>
 		</dict>
+		<key>A1B1021B-B929-4006-934F-400A3A96A53E</key>
+		<dict>
+			<key>xpos</key>
+			<real>330</real>
+			<key>ypos</key>
+			<real>610</real>
+		</dict>
 		<key>A3408036-87B4-4BA4-8D1F-10A05C30BA35</key>
 		<dict>
 			<key>colorindex</key>
@@ -3470,6 +3502,32 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>lua_version</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>https://man.cx/</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>man.cx</string>
+						<string>https://man.cx/</string>
+					</array>
+					<array>
+						<string>mankier.com</string>
+						<string>https://www.mankier.com/1/</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>man page website</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>man_page_website</string>
 		</dict>
 	</array>
 	<key>version</key>
