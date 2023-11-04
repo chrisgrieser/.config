@@ -8,9 +8,7 @@ rules:
         to:
           - { pointing_button: button1, modifiers: [control] }
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^com\.factorio$ ] }
-
-
+          - { type: frontmost_application_if, bundle_identifiers: [^com\.factorio$] }
 
       # bottom mouse: shift-leftclick
       - type: basic

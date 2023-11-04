@@ -226,7 +226,11 @@ serverConfigs.ltex = {
 			if not ltex then return end
 			local word = vim.fn.expand("<cword>")
 			table.insert(ltex.config.settings.ltex.dictionary["en-US"], word)
-			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = ltex.config.settings })
+			vim.lsp.buf_notify(
+				0,
+				"workspace/didChangeConfiguration",
+				{ settings = ltex.config.settings }
+			)
 			u.normal("zg") -- add to spellfile, which is used as dictionary
 		end, { desc = "󰓆 Add Word", buffer = true })
 
@@ -238,11 +242,18 @@ serverConfigs.ltex = {
 	end,
 }
 
--- disable formatting, since taken care of by prettier
+-- TODO check is this works
 serverConfigs.yamlls = {
 	settings = {
-		yaml = { format = { enable = true } },
+		yaml = {
+			format = {
+				enable = true,
+				printWidth = 120,
+			},
+		},
 	},
+	-- SIC needs enabling via setting *and* via capabilities to work
+	on_attach = function(client) client.server_capabilities.documentFormattingProvider = true end,
 }
 
 --------------------------------------------------------------------------------
