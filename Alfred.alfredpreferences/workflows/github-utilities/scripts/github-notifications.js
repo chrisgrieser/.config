@@ -52,7 +52,7 @@ function relativeDate(absoluteDate) {
 	} else {
 		unit = "year";
 		delta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7 / 4 / 12);
-	} 
+	}
 	const formatter = new Intl.RelativeTimeFormat("en", { style: "long", numeric: "auto" });
 	return formatter.format(-delta, unit);
 }
@@ -89,8 +89,10 @@ function run(argv) {
 					title: "No unread notifications.",
 					subtitle: "⏎: Open Notification Inbox at Github.",
 					arg: "https://github.com/notifications",
+					variables: { mode: "direct-open" },
 					mods: {
 						cmd: { valid: false },
+						alt: { valid: false },
 					},
 				},
 			],
@@ -129,19 +131,33 @@ function run(argv) {
 
 	/** @type AlfredItem[] */
 	const notifications = responseObj.map((/** @type {GithubNotif} */ notif) => {
-		const url = notif.subject.latest_comment_url || notif.subject.url || "https://github.com/notifications";;
+		const url = notif.subject.latest_comment_url || notif.subject.url || "";
+
 		const typeIcon = typeMaps[notif.subject.type] || notif.subject.type;
 		const reasonIcon = reasonMaps[notif.reason] || notif.reason;
 		const updatedAt = relativeDate(notif.updated_at);
+		const noUrl = url ? "" : "(🚫 No URL)";
 
 		const subtitle = `${typeIcon} ${reasonIcon}  ${notif.repository.name}  ·  ${updatedAt}`;
 		return {
 			title: notif.subject.title,
-			subtitle: subtitle,
+			subtitle: subtitle + "  " + noUrl,
 			arg: url,
 			mods: {
-				cmd: { arg: notif.id },
-				alt: { variable: { notificationsLeft: responseObj.length - 1 } },
+				cmd: {
+					arg: notif.id,
+					variable: {
+						notificationsLeft: responseObj.length - 1,
+						mode: "mark-as-read",
+					},
+				},
+				alt: {
+					variable: {
+						mode: "copy",
+						valid: Boolean(url),
+						subtitle: noUrl,
+					},
+				},
 			},
 		};
 	});
