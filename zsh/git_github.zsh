@@ -5,12 +5,14 @@ alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to
 alias gs='git status'
 alias ga="git add"
 
+alias gd="git diff"
 alias gt="git stash push && git stash show 0"
 alias gT="git stash pop"
 
 alias grh='git reset --hard'
 alias push="git push"
 alias pull="git pull"
+alias pull="git rebase --interactive"
 alias unshallow="git fetch --unshallow"          # https://stackoverflow.com/a/17937889
 alias g.='cd "$(git rev-parse --show-toplevel)"' # goto git root
 
@@ -42,13 +44,14 @@ function gc {
 	git commit -m "$1" || return 1
 
 	# if repo clean, pull-push
-	if [[ -n "$(git status --porcelain)" ]]; then
+	if [[ -z "$(git status --porcelain)" ]]; then
+		printf "\033[1;36mPull: \033[0m" && git pull &&
+			printf "\033[1;36mPush: \033[0m" && git push
+	else
 		print "\033[1;36mPush: \033[0m"
 		return 0
 	fi
 
-	printf "\033[1;36mPull: \033[0m" && git pull &&
-		printf "\033[1;36mPush: \033[0m" && git push
 }
 
 # select a recent commit to fixup *and* autosquash (not marked for next rebase!)
@@ -63,7 +66,7 @@ function fixup {
 
 	# inspect result
 	_separator
-	_gitlog "$target"~2.. 
+	_gitlog "$target"~2..
 }
 
 # amend-no-edit
@@ -94,7 +97,7 @@ function gu {
 
 # brief git log
 function gl {
-	local cutoff=15 # CONFIG
+	local cutoff=${1:-15} # default to 15
 	_gitlog -n "$cutoff"
 	# add `(…)` if commits were shortened
 	[[ $(git log --oneline | wc -l) -lt $cutoff ]] || echo "(…)"
@@ -106,14 +109,13 @@ function gli {
 
 	local hash key_pressed selected style
 	local preview_format="%C(yellow)%h %C(red)%D %n%C(blue)%an %C(green)(%ch)%C(reset) %n%n%C(bold)%C(magenta)%s %C(cyan)%b%C(reset)"
-	defaults read -g AppleInterfaceStyle &>/dev/null && style="--dark" || style="--light"
 
 	selected=$(
 		_gitlog --no-graph --color=always |
 			fzf -0 --query="$1" --ansi --no-sort \
 				--header-first --header="↵ : Checkout    ^H: Copy Hash    ^R: Rebase" \
 				--expect="ctrl-h" --with-nth=2.. --preview-window=55% \
-				--preview="git show {1} --stat=,30,30 --color=always --format='$preview_format' | sed -e '\$d' -e 's/^ //' ; git diff {1}^! --unified=1 | delta $style --hunk-header-decoration-style='blue ol' --file-style=omit" \
+				--preview="git show {1} --stat=,30,30 --color=always --format='$preview_format' | sed -e '\$d' -e 's/^ //' ; git diff {1}^! | delta $style --hunk-header-decoration-style='blue ol' --file-style=omit" \
 				--height="100%" #required for wezterm's pane:is_alt_screen_active()
 	)
 	[[ -z "$selected" ]] && return 0 # abort
@@ -154,7 +156,6 @@ function gb {
 	fi
 	git checkout "$selected"
 }
-
 
 #───────────────────────────────────────────────────────────────────────────────
 

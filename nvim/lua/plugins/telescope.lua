@@ -104,25 +104,21 @@ local keymappings_N = vim.tbl_extend("force", keymappings_I, normalModeOnly)
 local function deltaPreviewer()
 	return require("telescope.previewers").new_termopen_previewer {
 		get_command = function(entry)
+			local pager = vim.fn.system { "git", "config", "core.pager" }
+			if not pager:find("^delta") then return { "echo", "pager not set to delta" } end
+
 			local gitroot = vim.trim(vim.fn.system { "git", "rev-parse", "--show-toplevel" })
 			local filename = entry.value
 			local filepath = gitroot .. "/" .. filename
 			-- stylua: ignore
-			return {
-				"git",
-				"-c", "core.pager=delta",
-				("-c delta.%s=true"):format(vim.o.background),
-				"-c", "delta.file-style=omit", -- no need for filename, since only one file
-				"diff", filepath,
-				"--unified=1", -- save space, show only 1 line of context
-			}
+			return { "git", "-c", "delta.file-style=omit" --[[only 1 file anyway]] , "diff", filepath }
 		end,
 	}
 end
 
-local function gitShowAndDeltaPreviewer()
+local function gitDiffStatPreviewer()
 	return require("telescope.previewers").new_termopen_previewer {
-		dyn_title = function (_, entry) return entry.value end, -- use hash as title
+		dyn_title = function(_, entry) return entry.value end, -- use hash as title
 		get_command = function(entry, status)
 			local hash = entry.value
 			local previewWinWidth = vim.api.nvim_win_get_width(status.preview_win)
@@ -130,20 +126,11 @@ local function gitShowAndDeltaPreviewer()
 			local previewFormat =
 				"%C(bold)%C(magenta)%s %n%C(reset)%C(cyan)%D%C(reset)%b %n%C(blue)%an %C(yellow)(%ch) %C(reset)"
 			local cmd = {
-				-- commit stats
 				"git show " .. hash,
 				"--color=always",
 				"--stat=" .. statArgs,
 				"--format='" .. previewFormat .. "'",
 				"| sed -e 's/^ //' -e '$d' ;", -- remove clutter
-				-- delta
-				"git",
-				"-c core.pager=delta",
-				("-c delta.%s=true"):format(vim.o.background),
-				"-c", "delta.file-style=omit", -- eats too much space
-				"-c", "delta.hunk-header-decoration-style='blue ol'",
-				"diff " .. hash .. "^!",
-				"--unified=1", -- save space, show only 1 line of context
 			}
 			return table.concat(cmd, " ")
 		end,
@@ -235,7 +222,7 @@ local telescopeConfig = {
 			prompt_prefix = "󰊢 ",
 			initial_mode = "normal",
 			prompt_title = "Git Log",
-			previewer = gitShowAndDeltaPreviewer(),
+			previewer = gitDiffStatPreviewer(),
 			layout_config = { horizontal = { height = 0.99 } },
 			-- add commit time (%cr) & `--all`
 			git_command = { "git", "log", "--all", "--pretty=%h %s\t%cr", "--", "." },

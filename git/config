@@ -28,7 +28,8 @@
 # (`brew install git-delta`)
 
 [core]
-	pager = delta
+	# auto-select light/dark mode on macOS -- https://github.com/dandavison/delta/issues/447#issuecomment-1239398586
+	pager = delta "$(defaults read -g AppleInterfaceStyle &> /dev/null && echo --dark || echo --light)"
 [interactive]
 	diffFilter = delta --color-only
 [merge]
@@ -36,7 +37,7 @@
 [diff]
 	colorMoved = default
 [delta]
-	syntax-theme = ansi ; auto switch light/dark mode
+	tabs = 3 ; tabwidth
 	navigate = true # use n and N to move between diff sections
 	hunk-label="■"
 
