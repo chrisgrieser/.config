@@ -157,7 +157,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.fn.matchadd("TelescopeParent", "\t.*$")
 		vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
 		vim.fn.matchadd("DirSep", "/")
-		vim.api.nvim_set_hl(0, "DirSep", { link = "MsgSeparator" })
+		vim.api.nvim_set_hl(0, "DirSep", { link = "Directory" })
 	end,
 })
 
@@ -388,6 +388,14 @@ return {
 				function() require("telescope").extensions.recent_files.pick() end,
 				desc = " Recent Files",
 			},
+		},
+	},
+	{ -- ast-grep search
+		"Marskey/telescope-sg",
+		dependencies = "nvim-telescope/telescope.nvim",
+		config = function() require("telescope").load_extension("ast_grep") end,
+		keys = {
+			{ "gS", function() telescope("ast_grep") end, desc = " Ast-Grep" },
 		},
 	},
 	{ -- better sorting algorithm + fzf syntax
