@@ -59,8 +59,11 @@ function fixup {
 	git commit --fixup="$target"
 
 	# HACK ":" is the "no-op-"editor https://www.reddit.com/r/git/comments/uzh2no/what_is_the_utility_of_noninteractive_rebase/
-	git -c sequence.editor=: rebase --interactive --autosquash "$target^" && 
-		_separator && _gitlog "$target"~2.. # inspect result
+	git -c sequence.editor=: rebase --interactive --autosquash "$target^" || return 0
+
+	# inspect result
+	_separator
+	_gitlog "$target"~2.. 
 }
 
 # amend-no-edit

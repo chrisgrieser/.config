@@ -16,15 +16,12 @@ local function reOpenLastFile()
 	if vim.fn.argc() ~= 0 then return end
 
 	vim.defer_fn(function()
-		local function fileDoesNotExist(file) return vim.loop.fs_stat(file) == nil end
-		local lastFile = vim.api.nvim_get_mark("0", {})[4]
-		local i = 0
-		while fileDoesNotExist(lastFile) and i < #vim.v.oldfiles do
-			i = i + 1
-			lastFile = vim.v.oldfiles[i]
+		for _, file in ipairs(vim.v.oldfiles) do
+			if vim.loop.fs_stat(file) and not file:find("COMMIT_EDITMSG$") then 
+				vim.cmd.edit(file)
+				return
+			end
 		end
-		if lastFile == "" then return end
-		vim.cmd.edit(lastFile)
 	end, 1)
 end
 reOpenLastFile()

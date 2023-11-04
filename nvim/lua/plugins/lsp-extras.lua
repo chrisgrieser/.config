@@ -2,20 +2,6 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{ -- virtual text showing usage count of functions
-		"Wansmer/symbol-usage.nvim",
-		event = "BufReadPre", -- TODO need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
-		opts = {
-			hl = { link = "NonText" },
-			vt_position = "end_of_line",
-			references = { enabled = true, include_declaration = false },
-			definition = { enabled = false },
-			implementation = { enabled = false },
-			-- see `lsp.SymbolKind`
-			kinds = { vim.lsp.protocol.SymbolKind.Function, vim.lsp.protocol.SymbolKind.Method },
-			text_format = function(symbol) return " 󰈿 " .. symbol.references end,
-		},
-	},
 	{ -- better references/definitions
 		"dnlhc/glance.nvim",
 		keys = {
