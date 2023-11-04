@@ -20,6 +20,8 @@
 	relativePaths = false # false = show path relative to git root, not to cwd
 [stash]
 	showIncludeUntracked = true
+[rebase]
+	autosquash = true
 
 #───────────────────────────────────────────────────────────────────────────────
 # SETUP FOR DELTA
