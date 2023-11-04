@@ -1,3 +1,6 @@
 vim.opt_local.list = false
 
-vim.notify("top: past\nbottom: future", vim.log.levels.INFO, { title = "rebase"})
+vim.defer_fn(
+	function() vim.notify("top: past\nbottom: future", vim.log.levels.INFO, { title = "rebase" }) end,
+	1
+)
