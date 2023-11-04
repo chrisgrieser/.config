@@ -30,8 +30,6 @@ local formatters = {
 	jsonc = { "biome" },
 	lua = { "stylua" },
 	python = { "ruff_format", "ruff_fix" },
-	-- yaml = { "prettier" },
-	html = { "prettier" },
 	markdown = { "markdown-toc", "markdownlint" },
 	css = { "stylelint", "prettier" },
 	sh = { "shellcheck", "shfmt" },
@@ -44,6 +42,7 @@ local formatters = {
 local lspFormatting = {
 	"toml",
 	"yaml",
+	"html",
 }
 
 --------------------------------------------------------------------------------
@@ -179,7 +178,8 @@ local formatterConfig = {
 return {
 	{ -- Linter integration
 		"mfussenegger/nvim-lint",
-		commit = "85108b30869a9cd6ec11cf85b2a3e3bb3b3b1660", -- FIX EMFILE: too many open files
+		commit = "7a1bc763a41d5848ceeb47fe7345fb78c07404f9",-- FIX EMFILE: too many open files
+		-- commit = "85108b30869a9cd6ec11cf85b2a3e3bb3b3b1660", -- commit introducing error
 		event = "VeryLazy",
 		config = function()
 			linterConfigs()
