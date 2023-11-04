@@ -21,19 +21,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>2C5107E7-5DCF-4F55-AEA9-5EC828CEFB91</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>EF862FA4-82AA-45A8-9EE8-565A0225BDEB</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>5B93B41A-F5A7-4C5F-AC89-7EA2F5284F83</key>
 		<array>
 			<dict>
@@ -134,19 +121,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>1B7FE114-DCC5-4243-8C64-D1D8DC1C0193</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>A2BFEBF8-7A2E-4CFD-BA3A-81E700DE84ED</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2C5107E7-5DCF-4F55-AEA9-5EC828CEFB91</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -614,69 +588,6 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string># get first URL from JSON
-# has to be done in Alfred, since Alfred environment variables are needed
-
-# small leeway getting lines 3-6, since line numbers sometimes shift
-./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",'</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>2C5107E7-5DCF-4F55-AEA9-5EC828CEFB91</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<true/>
-				<key>skipvarencode</key>
-				<true/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{var:url}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>EF862FA4-82AA-45A8-9EE8-565A0225BDEB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-				<key>triggerid</key>
-				<string>re-open-last-tab</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>A2BFEBF8-7A2E-4CFD-BA3A-81E700DE84ED</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -866,15 +777,6 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 			<key>ypos</key>
 			<real>750</real>
 		</dict>
-		<key>2C5107E7-5DCF-4F55-AEA9-5EC828CEFB91</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>905</real>
-			<key>ypos</key>
-			<real>575</real>
-		</dict>
 		<key>3F6D1856-6639-4F2D-B0F7-35E5ED4CE866</key>
 		<dict>
 			<key>colorindex</key>
@@ -972,20 +874,6 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 			<real>625</real>
 			<key>ypos</key>
 			<real>30</real>
-		</dict>
-		<key>A2BFEBF8-7A2E-4CFD-BA3A-81E700DE84ED</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>leader → shift+b via Karabiner
-
-BACKUP
-for when browser history search workflow updates</string>
-			<key>xpos</key>
-			<real>755</real>
-			<key>ypos</key>
-			<real>575</real>
 		</dict>
 		<key>AADFC524-047E-4638-ABAA-646CEC90599D</key>
 		<dict>
@@ -1086,15 +974,6 @@ for when browser history search workflow updates</string>
 			<real>625</real>
 			<key>ypos</key>
 			<real>295</real>
-		</dict>
-		<key>EF862FA4-82AA-45A8-9EE8-565A0225BDEB</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>1065</real>
-			<key>ypos</key>
-			<real>575</real>
 		</dict>
 		<key>FCE409B4-6AF4-4E92-AAAE-97E55636E8AE</key>
 		<dict>

@@ -53,7 +53,7 @@
   "nvim-early-retirement": { "branch": "main", "commit": "1c89c003e4eeba3ac38482e62d29d66a42549ac6" },
   "nvim-genghis": { "branch": "main", "commit": "ba59d6fd8440c9b8928acd22b845d18fe9a8b848" },
   "nvim-hlslens": { "branch": "main", "commit": "f0281591a59e95400babf61a96e59ba20e5c9533" },
-  "nvim-lint": { "branch": "master", "commit": "5d8ea07d3c14ec48043b7df66054afe6fd63141d" },
+  "nvim-lint": { "branch": "master", "commit": "962a76877a4479a535b935bd7ef35ad41ba308b2" },
   "nvim-lspconfig": { "branch": "master", "commit": "b44737605807023d32e6310b87ba69f4dbf10e0e" },
   "nvim-navic": { "branch": "master", "commit": "0ffa7ffe6588f3417e680439872f5049e38a24db" },
   "nvim-notify": { "branch": "master", "commit": "e4a2022f4fec2d5ebc79afa612f96d8b11c627b3" },

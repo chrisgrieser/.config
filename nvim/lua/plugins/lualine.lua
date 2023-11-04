@@ -98,16 +98,16 @@ local lualineConfig = {
 			{ irregularWhitespace },
 		},
 		lualine_y = {
-			-- {
-			-- 	"commit",
-			-- 	icon = "",
-			-- 	unpulled_master_icon = "󰔰",
-			-- 	unpulled_icon = "󰶡",
-			-- 	unpushed_icon = "󰶣",
-			-- 	fetch_interval = 15 * 60 * 1000, -- = 15 min
-			-- 	show_only_diverged = true,
-			-- 	padding = { right = 1, left = 0 },
-			-- },
+			{
+				"commit",
+				icon = "",
+				unpulled_master_icon = "󰔰",
+				unpulled_icon = "󰶡",
+				unpushed_icon = "󰶣",
+				fetch_interval = 15 * 60 * 1000, -- = 15 min
+				show_only_diverged = true,
+				padding = { right = 1, left = 0 },
+			},
 			"diff",
 		},
 		lualine_z = {
@@ -135,6 +135,7 @@ return {
 	-- PENDING https://github.com/nvim-lualine/lualine.nvim/pull/1027
 	"gzbd/lualine.nvim",
 	branch = "feat/commit-component",
+	-- "nvim-lualine/lualine.nvim",
 
 	lazy = false, -- no flickering on startup
 	dependencies = { "nvim-tree/nvim-web-devicons", "folke/noice.nvim" },

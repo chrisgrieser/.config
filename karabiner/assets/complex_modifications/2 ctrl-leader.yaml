@@ -50,7 +50,7 @@ rules:
           - *remove-notice
           # open tot if not running, since toggle-key only works with tot open
           # (adding this at the end, to reduce delay)
-          - shell_command: pgrep -xq "Tot" || open -a "Tot" 
+          - shell_command: pgrep -xq "Tot" || open -a "Tot"
       # Cancel (Hyper/Esc)
       - type: basic
         from: { key_code: caps_lock }
@@ -164,7 +164,9 @@ rules:
         from: { key_code: b, modifiers: { mandatory: [shift] } }
         conditions: [*leader-active]
         to:
-          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "re-open-last-tab" in workflow "com.apple.alfred.workflow.chromium-hist"'
+          - shell_command: source $HOME/.zshenv && open -a "$BROWSER_APP"
+          - { key_code: vk_none, hold_down_milliseconds: 50 }
+          - { key_code: t, modifiers: [shift, command] }
           - *deactivate-leader
           - *remove-notice
       # [f]inder

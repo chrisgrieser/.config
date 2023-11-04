@@ -18,6 +18,7 @@ vim.opt.runtimepath:prepend(lazypath)
 
 --------------------------------------------------------------------------------
 
+-- keymaps for the UI https://github.com/folke/lazy.nvim/blob/main/lua/lazy/view/config.lua
 require("lazy.view.config").keys.hover = "o"
 require("lazy.view.config").keys.details = "<Tab>"
 
@@ -38,16 +39,6 @@ require("lazy").setup("plugins", {
 		border = u.borderStyle,
 		pills = false,
 		size = { width = 1, height = 0.96 },
-		custom_keys = {
-			["<leader>h"] = {
-				function(plugin) vim.notify(vim.inspect(plugin)) end,
-				desc = "Plugin Info",
-			},
-			["K"] = {
-				function() vim.cmd.normal { "6k", bang = true } end,
-				desc = "6k",
-			},
-		},
 	},
 	checker = {
 		enabled = true, -- automatically check for plugin updates

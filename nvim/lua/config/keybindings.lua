@@ -156,9 +156,10 @@ keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = " Esc (Terminal Mode)" })
 -- BUFFERS & WINDOWS & FILES
 
 keymap("n", "<CR>", function()
+	-- disable on non-regular buffers
 	if vim.bo.buftype == "terminal" then
 		u.normal("a") -- enter terminal mode
-	else
+	elseif vim.bo.buftype == "" then
 		require("funcs.alt-alt").gotoAltBuffer()
 	end
 end, { desc = "󰽙 Alt Buffer" })
