@@ -109,6 +109,7 @@ serverConfigs.emmet_ls = {
 	filetypes = { "html", "css" },
 }
 
+-- DOCS https://github.com/sublimelsp/LSP-css/blob/master/LSP-css.sublime-settings
 -- DOCS https://github.com/microsoft/vscode-css-languageservice/blob/main/src/services/lintRules.ts
 serverConfigs.cssls = {
 	settings = {
@@ -252,6 +253,7 @@ serverConfigs.yamlls = {
 		},
 	},
 	-- SIC needs enabling via setting *and* via capabilities to work
+	-- TODO probably due to missing dynamic formatting in nvim
 	on_attach = function(client) client.server_capabilities.documentFormattingProvider = true end,
 }
 

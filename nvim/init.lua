@@ -56,6 +56,7 @@ if vim.version().major == 0 and vim.version().minor >= 10 then
 		- satellite.nvim can now be updated.
 		- change event trigger for symbols-usage
 		- biome lspconfig https://github.com/neovim/nvim-lspconfig/issues/2807
+		- yaml-ls dynamic formatting as well?
 		- vim.system
 		- vim.lsp.getclient
 		- vim.uv instead of vim.loop
