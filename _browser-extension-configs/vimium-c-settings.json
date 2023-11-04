@@ -1,11 +1,11 @@
 {
 	"name": "Vimium C",
-	"@time": "22/10/2023, 14:15:23",
-	"time": 1697976923170,
+	"@time": "04/11/2023, 12:28:30",
+	"time": 1699097310331,
 	"environment": {
 		"extension": "1.99.994",
 		"platform": "mac",
-		"chromium": 118
+		"chromium": 119
 	},
 	"allBrowserUrls": true,
 	"exclusionListenHash": false,
@@ -129,6 +129,8 @@
 		"map K scrollUp count=4",
 		"map gg scrollToTop",
 		"map G scrollToBottom",
+		"map gh scrollLeft",
+		"map gl scrollRight",
 		"",
 		"\" History",
 		"map h goBack",

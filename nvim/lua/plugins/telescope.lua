@@ -122,7 +122,7 @@ end
 
 local function gitShowAndDeltaPreviewer()
 	return require("telescope.previewers").new_termopen_previewer {
-		dyn_title = function(_, entry) return entry.value end, -- use hash as title
+		dyn_title = function (_, entry) return entry.value end, -- use hash as title
 		get_command = function(entry, status)
 			local hash = entry.value
 			local previewWinWidth = vim.api.nvim_win_get_width(status.preview_win)
@@ -140,10 +140,8 @@ local function gitShowAndDeltaPreviewer()
 				"git",
 				"-c core.pager=delta",
 				("-c delta.%s=true"):format(vim.o.background),
-				"-c",
-				"delta.file-style=omit", -- eats too much space
-				"-c",
-				"delta.hunk-header-decoration-style='blue ol'",
+				"-c", "delta.file-style=omit", -- eats too much space
+				"-c", "delta.hunk-header-decoration-style='blue ol'",
 				"diff " .. hash .. "^!",
 				"--unified=1", -- save space, show only 1 line of context
 			}
@@ -234,12 +232,13 @@ local telescopeConfig = {
 			},
 		},
 		git_commits = {
-			previewer = require("telescope.previewers").new_termopen_previewer {
-				get_command = function(entry)
-					local hash = entry.value
-					return { "git", "log", "-n1", hash }
-				end,
-			},
+			prompt_prefix = "󰊢 ",
+			initial_mode = "normal",
+			prompt_title = "Git Log",
+			previewer = gitShowAndDeltaPreviewer(),
+			layout_config = { horizontal = { height = 0.99 } },
+			-- add commit time (%cr) & `--all`
+			git_command = { "git", "log", "--all", "--pretty=%h %s\t%cr", "--", "." },
 		},
 		git_bcommits = {
 			prompt_prefix = "󰊢 ",

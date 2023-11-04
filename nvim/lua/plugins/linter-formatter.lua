@@ -178,7 +178,8 @@ local formatterConfig = {
 return {
 	{ -- Linter integration
 		"mfussenegger/nvim-lint",
-		commit = "962a76877a4479a535b935bd7ef35ad41ba308b2", -- FIX EMFILE: too many open files
+		-- commit = "962a76877a4479a535b935bd7ef35ad41ba308b2", -- FIX EMFILE: too many open files
+		commit = "7a1bc763a41d5848ceeb47fe7345fb78c07404f9", -- FIX EMFILE: too many open files
 		event = "VeryLazy",
 		config = function()
 			linterConfigs()
