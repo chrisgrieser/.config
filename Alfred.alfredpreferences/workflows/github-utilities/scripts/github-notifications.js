@@ -129,20 +129,7 @@ function run(argv) {
 
 	/** @type AlfredItem[] */
 	const notifications = responseObj.map((/** @type {GithubNotif} */ notif) => {
-		let url;
-		if (notif.subject.url) {
-			const idInRepo = notif.subject.url.match(/\d+$/);
-			const lastCommentId =
-				notif.subject.latest_comment_url && notif.subject.latest_comment_url !== notif.subject.url
-					? "#issuecomment-" + notif.subject.latest_comment_url.match(/\d+$/)
-					: "";
-			const type = notif.subject.type === "PullRequest" ? "pull" : "issues"; //codespell-ignore
-			url = `https://github.com/${notif.repository.full_name}/${type}/${idInRepo}${lastCommentId}`;
-		} else {
-			// discussions do not have a direct URL available :/
-			url = "https://github.com/notifications";
-		}
-
+		const url = notif.subject.latest_comment_url || notif.subject.url || "https://github.com/notifications";;
 		const typeIcon = typeMaps[notif.subject.type] || notif.subject.type;
 		const reasonIcon = reasonMaps[notif.reason] || notif.reason;
 		const updatedAt = relativeDate(notif.updated_at);

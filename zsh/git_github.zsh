@@ -98,7 +98,8 @@ function gu {
 
 # interactive
 function gli {
-	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
+	if [[ ! -x "$(command -v fzf)" ]]; then print "\033[1;33mfzf not installed.\033[0m" && return 1; fi
+	if [[ ! -x "$(command -v delta)" ]]; then print "\033[1;33mdelta not installed (\`brew install git-delta\`)\033[0m" && return 1; fi
 
 	local hash key_pressed selected style
 	local preview_format="%C(yellow)%h %C(red)%D %n%C(blue)%an %C(green)(%ch)%C(reset) %n%n%C(bold)%C(magenta)%s %C(cyan)%b%C(reset)"

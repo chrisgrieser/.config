@@ -33,19 +33,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>159C1307-6FCE-4B79-91EB-7EE1D26C4A86</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2219BB00-C543-481D-87FF-C1E38C53E3CF</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>17D804EC-6AFE-403E-A6CC-8F536D379033</key>
 		<array>
 			<dict>
@@ -286,7 +273,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>159C1307-6FCE-4B79-91EB-7EE1D26C4A86</string>
+				<string>BFABA717-A81E-4D69-A8C2-4ED2042B4588</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -310,6 +297,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>7EA483DA-F1D8-434E-B7BB-44B00E237DB6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>BFABA717-A81E-4D69-A8C2-4ED2042B4588</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2219BB00-C543-481D-87FF-C1E38C53E3CF</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -453,46 +453,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>7EF43790-CB0F-4E39-9D9A-E1D7E09610F6</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>CE6F0B40-E42E-4D8B-833A-537723F42C63</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -539,6 +499,67 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<string>378B3595-A76C-4026-AC7F-0AC288FDF625</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>7EF43790-CB0F-4E39-9D9A-E1D7E09610F6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>CE6F0B40-E42E-4D8B-833A-537723F42C63</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>5AF52A7B-9FA9-4D8B-9784-4864B0A9AF06</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -598,27 +619,6 @@ osascript -l JavaScript "./scripts/my-github-repos.js" "$LOCAL_REPOS"</string>
 			<integer>3</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>5AF52A7B-9FA9-4D8B-9784-4864B0A9AF06</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.hidealfred</string>
 			<key>uid</key>
@@ -676,21 +676,19 @@ osascript -l JavaScript "./scripts/my-github-repos.js" "$LOCAL_REPOS"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>externaltriggerid</key>
+				<string>repo-search-loop</string>
+				<key>passinputasargument</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
+				<key>passvariables</key>
 				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>{query}</string>
+				<key>workflowbundleid</key>
+				<string>self</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.output.callexternaltrigger</string>
 			<key>uid</key>
-			<string>C27D01B3-A3B9-4661-9D70-8808DC522FD1</string>
+			<string>4C6743FC-6D60-44F4-9E59-7EE559C99DAB</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -720,19 +718,21 @@ osascript -l JavaScript "./scripts/my-github-repos.js" "$LOCAL_REPOS"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>externaltriggerid</key>
-				<string>repo-search-loop</string>
-				<key>passinputasargument</key>
+				<key>lastpathcomponent</key>
 				<false/>
-				<key>passvariables</key>
+				<key>onlyshowifquerypopulated</key>
 				<false/>
-				<key>workflowbundleid</key>
-				<string>self</string>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>4C6743FC-6D60-44F4-9E59-7EE559C99DAB</string>
+			<string>C27D01B3-A3B9-4661-9D70-8808DC522FD1</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -743,6 +743,29 @@ osascript -l JavaScript "./scripts/my-github-repos.js" "$LOCAL_REPOS"</string>
 			<string>CF5614B3-814C-4F8C-958A-8757509B70EB</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/clone-repo.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>42255CF9-BC03-46B1-8AB6-0AD60FA92ECE</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -814,29 +837,6 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 			<string>E6DBBBE7-CEB7-477C-AC88-395FF2B34092</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/clone-repo.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>42255CF9-BC03-46B1-8AB6-0AD60FA92ECE</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>type</key>
@@ -1022,50 +1022,6 @@ osascript -l JavaScript "./my-github-issues.js" "$GITHUB_TOKEN"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>update-github-notif-sketchybar.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>2219BB00-C543-481D-87FF-C1E38C53E3CF</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>159C1307-6FCE-4B79-91EB-7EE1D26C4A86</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1119,6 +1075,52 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 			<string>B35052FF-0027-40CC-BC59-EA7D442A57EA</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>update-github-notif-sketchybar.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>2219BB00-C543-481D-87FF-C1E38C53E3CF</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/resolve-notification.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>BFABA717-A81E-4D69-A8C2-4ED2042B4588</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1237,15 +1239,6 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<key>ypos</key>
 			<real>265</real>
 		</dict>
-		<key>159C1307-6FCE-4B79-91EB-7EE1D26C4A86</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>295</real>
-			<key>ypos</key>
-			<real>1015</real>
-		</dict>
 		<key>17D804EC-6AFE-403E-A6CC-8F536D379033</key>
 		<dict>
 			<key>colorindex</key>
@@ -1342,9 +1335,9 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<key>note</key>
 			<string>mark as read</string>
 			<key>xpos</key>
-			<real>295</real>
+			<real>300</real>
 			<key>ypos</key>
-			<real>1130</real>
+			<real>1145</real>
 		</dict>
 		<key>7CE3F725-5F4E-4A4B-B16B-94871083E6A2</key>
 		<dict>
@@ -1421,6 +1414,17 @@ osascript -l JavaScript "./scripts/mark-github-notification-as-read.js" "$GITHUB
 			<real>420</real>
 			<key>ypos</key>
 			<real>745</real>
+		</dict>
+		<key>BFABA717-A81E-4D69-A8C2-4ED2042B4588</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>note</key>
+			<string>mark as read</string>
+			<key>xpos</key>
+			<real>300</real>
+			<key>ypos</key>
+			<real>1015</real>
 		</dict>
 		<key>C27D01B3-A3B9-4661-9D70-8808DC522FD1</key>
 		<dict>
