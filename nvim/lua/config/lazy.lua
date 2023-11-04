@@ -18,9 +18,23 @@ vim.opt.runtimepath:prepend(lazypath)
 
 --------------------------------------------------------------------------------
 
--- keymaps for the UI https://github.com/folke/lazy.nvim/blob/main/lua/lazy/view/config.lua
+-- change keymaps for the UI https://github.com/folke/lazy.nvim/blob/main/lua/lazy/view/config.lua
 require("lazy.view.config").keys.hover = "o"
 require("lazy.view.config").keys.details = "<Tab>"
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "lazy",
+	callback = function()
+		vim.keymap.set(
+			"n",
+			"gi",
+			"/#<CR>o",
+			{ buffer = true, remap = true, desc = "󰒲 Open next issue" }
+		)
+	end,
+})
+
+--------------------------------------------------------------------------------
 
 -- DOCS https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
 require("lazy").setup("plugins", {
