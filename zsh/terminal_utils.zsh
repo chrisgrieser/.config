@@ -42,11 +42,11 @@ function o() {
 function my_zoxide() {
 	if ! command -v __zoxide_z &>/dev/null; then printf "\033[1;33mzoxide not installed.\033[0m" && return 1; fi
 	# shellcheck disable=2086
-	"$1" $2 || return 1
+	"$1" "$2" || return 1
 	_magic_dashboard
 	auto_venv
 }
-function z() { my_zoxide "__zoxide_z" "$1"; }
+function z() { my_zoxide "__zoxide_z" "$*"; }
 function zz() { my_zoxide "__zoxide_z" "$OLDPWD"; } # back to last directory
 function zi() { my_zoxide "__zoxide_zi"; } # directory history
 
