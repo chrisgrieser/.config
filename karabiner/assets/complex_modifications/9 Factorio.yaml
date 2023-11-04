@@ -9,11 +9,6 @@ rules:
           - { pointing_button: button1, modifiers: [control] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com\.factorio$] }
-
-
-        fsfs: fsf
-
-
       # bottom mouse: shift-leftclick
       - type: basic
         from: { pointing_button: button4 }

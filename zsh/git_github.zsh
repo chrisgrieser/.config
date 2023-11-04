@@ -35,24 +35,50 @@ ZSH_HIGHLIGHT_REGEXP+=('^(gc|git commit -m) ".{51,71}"' 'fg=black,bg=yellow')
 # smart commit:
 # - if there are staged changes, commit them
 # - if there are no changes, stage all changes (`git add -A`) and then commit
-# - if commit message is empty use `chore` as default message
-# - if commit msg contains issue number, open the issue in the browser
 function gc {
-	local msg="$1"
 	git diff --staged --quiet && git add --all # if no staged changes, stage all
 
-	to_delete=$(gh repo list --fork | fzf --multi --with-nth=1 --info=inline | cut -f1)
-	[[ -z "$to_delete" ]] && return 0
-	if [[ $(echo "$to_delete" | wc -l) -eq 1 ]]; then
-		gh repo delete "$to_delete"
-	else
-		# INFO `gh repo delete` disallows multiple deletions at once
-		# shellcheck disable=2001
-		cmd=$(echo "$to_delete" | sed 's/^/gh repo delete --yes /')
-		echo "Copied command to batch deleted forks."
-		echo "$cmd" | pbcopy
+	printf "\033[1;36mCommit: \033[0m"
+	git commit -m "$1" || return 1
+
+	# if repo clean, pull-push
+	if [[ -n "$(git status --porcelain)" ]]; then
+		print "\033[1;36mPush: \033[0m"
+		return 0
 	fi
+
+	printf "\033[1;36mPull: \033[0m" && git pull &&
+		printf "\033[1;36mPush: \033[0m" && git push
 }
+
+# select a recent commit to fixup *and* autosquash (not marked for next rebase!)
+function fixup {
+	local target
+	target=$(_gitlog -n 15 | fzf --ansi --no-sort --no-info | cut -d" " -f1)
+	[[ -z "$target" ]] && return 0
+	git commit --fixup="$target"
+
+	# HACK to make non-interactive rebase work with --autosquash: https://www.reddit.com/r/git/comments/uzh2no/what_is_the_utility_of_noninteractive_rebase/
+	git -c sequence.editor=: rebase --interactive --autosquash "$target"~1
+
+	_separator
+	_gitlog "$target"~2..
+}
+
+# amend-no-edit
+function gm {
+	git diff --staged --quiet && git add --all # if no staged changes, stage all
+	git commit --amend --no-edit
+	git status
+}
+
+# amend message only
+function gM {
+	git commit --amend
+	git status
+}
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # Github Url: open & copy url
 function gu {
@@ -62,9 +88,7 @@ function gu {
 	open "$url"
 }
 
-#───────────────────────────────────────────────────────────────────────────────
-# GIT DIFF & DELTA
-
+# git diff
 function gd {
 	if [[ ! -x "$(command -v delta)" ]]; then print "\033[1;33mdelta not installed (\`brew install git-delta\`)\033[0m" && return 1; fi
 
@@ -140,44 +164,6 @@ function gb {
 	git checkout "$selected"
 }
 
-#───────────────────────────────────────────────────────────────────────────────
-# GIT ADD, COMMIT, PULL-PUSH
-
-# smart commit:
-# - if there are staged changes, commit them
-# - if there are no changes, stage all changes (`git add -A`) and then commit
-# - if commit message is empty use `chore` as default message
-# - if commit msg contains issue number, open the issue in the browser
-function gc {
-	local msg="$1"
-	[[ -z "$msg" ]] && msg=chore || msg=$1     # fill in empty commit msg,
-	git diff --staged --quiet && git add --all # if no staged changes, stage all
-
-	printf "\033[1;36mCommit: \033[0m"
-	git commit -m "$msg" || return 1
-
-	# pull-push
-	if [[ -n "$(git status --porcelain)" ]]; then
-		print "\033[1;36mPush: \033[0;34mNot pushing since repo still dirty.\033[0m"
-		return 0
-	fi
-
-	printf "\033[1;36mPull: \033[0m" && git pull &&
-		printf "\033[1;36mPush: \033[0m" && git push
-}
-
-# amend-no-edit
-function gm {
-	git diff --staged --quiet && git add --all # if no staged changes, stage all
-	git commit --amend --no-edit
-	git status
-}
-
-# amend message only
-function gM {
-	git commit --amend "$1"
-	git status
-}
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -221,6 +207,25 @@ function nuke {
 	inspect
 }
 
+#───────────────────────────────────────────────────────────────────────────────
+
+# select a fork or multiple forks to delete
+function deletefork {
+	if ! command -v gh &>/dev/null; then print "\033[1;33mgh not installed.\033[0m" && return 1; fi
+	if ! command -v fzf &>/dev/null; then print "\033[1;33mfzf not installed.\033[0m" && return 1; fi
+
+	to_delete=$(gh repo list --fork | fzf --multi --with-nth=1 --info=inline | cut -f1)
+	[[ -z "$to_delete" ]] && return 0
+	if [[ $(echo "$to_delete" | wc -l) -eq 1 ]]; then
+		gh repo delete "$to_delete"
+	else
+		# INFO `gh repo delete` disallows multiple deletions at once
+		# shellcheck disable=2001
+		cmd=$(echo "$to_delete" | sed 's/^/gh repo delete --yes /')
+		echo "Copied command to batch deleted forks."
+		echo "$cmd" | pbcopy
+	fi
+}
 #───────────────────────────────────────────────────────────────────────────────
 
 # pickaxe entire repo history

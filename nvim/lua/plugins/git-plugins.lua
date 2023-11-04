@@ -20,6 +20,7 @@ return {
 		opts = {
 			commitMsg = {
 				enforceConvCommits = { enabled = true },
+				emptyFillIn = false,
 				spellcheck = true,
 				openReferencedIssue = true,
 			},
