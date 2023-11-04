@@ -108,6 +108,8 @@ function run(argv) {
 		Discussion: "🏛️",
 		// biome-ignore lint/style/useNamingConvention: not by me
 		CheckSuite: "🤖",
+		// biome-ignore lint/style/useNamingConvention: not by me
+		Release: "🎉",
 	};
 	const reasonMaps = {
 		author: "👤",
@@ -120,7 +122,7 @@ function run(argv) {
 		// biome-ignore lint/style/useNamingConvention: not by me
 		ci_activity: " ",
 		invitation: "👥",
-		manual: "🔔",
+		manual: "Ⓜ️",
 		// biome-ignore lint/style/useNamingConvention: not by me
 		review_requested: "➡️",
 		// biome-ignore lint/style/useNamingConvention: not by me
@@ -131,18 +133,17 @@ function run(argv) {
 
 	/** @type AlfredItem[] */
 	const notifications = responseObj.map((/** @type {GithubNotif} */ notif) => {
-		const url = notif.subject.latest_comment_url || notif.subject.url || "";
-
+		const apiUrl = notif.subject.latest_comment_url || notif.subject.url || "";
 		const typeIcon = typeMaps[notif.subject.type] || notif.subject.type;
 		const reasonIcon = reasonMaps[notif.reason] || notif.reason;
 		const updatedAt = relativeDate(notif.updated_at);
-		const noUrl = url ? "" : "(🚫 No URL)";
-
 		const subtitle = `${typeIcon} ${reasonIcon}  ${notif.repository.name}  ·  ${updatedAt}`;
+
 		return {
 			title: notif.subject.title,
-			subtitle: subtitle + "  " + noUrl,
-			arg: url,
+			subtitle: subtitle,
+			arg: apiUrl,
+			variables: { mode: "open" },
 			mods: {
 				cmd: {
 					arg: notif.id,
@@ -154,8 +155,8 @@ function run(argv) {
 				alt: {
 					variable: {
 						mode: "copy",
-						valid: Boolean(url),
-						subtitle: noUrl,
+						valid: Boolean(apiUrl),
+						subtitle: apiUrl ? "" : "(🚫 No URL)",
 					},
 				},
 			},
