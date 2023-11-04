@@ -30,11 +30,16 @@ ZSH_HIGHLIGHT_REGEXP+=('^(gc|git commit -m) ".{72,}"' 'fg=white,bold,bg=red')
 ZSH_HIGHLIGHT_REGEXP+=('^(gc|git commit -m) ".{51,71}"' 'fg=black,bg=yellow')
 
 #───────────────────────────────────────────────────────────────────────────────
+# GIT ADD, COMMIT, PULL-PUSH
 
-# select a fork or multiple forks to delete
-function deletefork {
-	if ! command -v gh &>/dev/null; then print "\033[1;33mgh not installed.\033[0m" && return 1; fi
-	if ! command -v fzf &>/dev/null; then print "\033[1;33mfzf not installed.\033[0m" && return 1; fi
+# smart commit:
+# - if there are staged changes, commit them
+# - if there are no changes, stage all changes (`git add -A`) and then commit
+# - if commit message is empty use `chore` as default message
+# - if commit msg contains issue number, open the issue in the browser
+function gc {
+	local msg="$1"
+	git diff --staged --quiet && git add --all # if no staged changes, stage all
 
 	to_delete=$(gh repo list --fork | fzf --multi --with-nth=1 --info=inline | cut -f1)
 	[[ -z "$to_delete" ]] && return 0
