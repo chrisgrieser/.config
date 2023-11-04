@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "lazy",
 	callback = function()
 		vim.defer_fn(function()
-			vim.keymap.set("n", "K", "6k", { buffer = true })
+			-- vim.keymap.set("n", "K", "6k", { buffer = true })
 			vim.keymap.set("n", "<Tab>", "<CR>", { buffer = true, remap = true })
 		end, 1)
 	end,
@@ -28,7 +28,9 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- DOCS https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
 require("lazy").setup("plugins", {
-	defaults = { lazy = true },
+	defaults = {
+		lazy = true,
+	},
 	dev = { -- use remote repo when local repo doesn't exist
 		path = os.getenv("HOME") .. "/Repos",
 		patterns = { "chrisgrieser" }, -- set `dev = true` for all my repos
@@ -37,9 +39,13 @@ require("lazy").setup("plugins", {
 	ui = {
 		wrap = true,
 		border = require("config.utils").borderStyle,
-		size = {
-			width = 0.98, -- fixes breaking in word
-			height = 1,
+		pills = false,
+		size = { width = 1, height = 1 },
+		custom_keys = {
+			["K"] = {
+				function () vim.cmd.normal { "6k", bang = true } end,
+				desc = "6k",
+			} 
 		},
 	},
 	checker = {
@@ -92,3 +98,4 @@ vim.defer_fn(function()
 		{ title = "Lazy" }
 	)
 end, 5000)
+require("lazy.view.config").keys.hover = "D"
