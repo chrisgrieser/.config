@@ -16,7 +16,7 @@ vim.g.myLsps = {
 	"bashls", -- used for zsh
 	"taplo", -- toml
 	"html",
-	"ltex", -- languagetool (requires `openjdk`)
+	"ltex", -- languagetool
 }
 
 --------------------------------------------------------------------------------
@@ -104,7 +104,7 @@ serverConfigs.jedi_language_server = {
 --------------------------------------------------------------------------------
 -- JS/TS/CSS
 
--- don't pollute completions for js and ts with stuff I don't need
+-- don't pollute completions for js/ts with stuff I don't need
 serverConfigs.emmet_ls = {
 	filetypes = { "html", "css" },
 }
@@ -148,7 +148,6 @@ serverConfigs.tsserver = {
 		-- unintended re-declaring
 		diagnostics = { ignoredCodes = { 2451 } },
 
-		-- completions = { completeFunctionCalls = true },
 		typescript = {
 			inlayHints = {
 				includeInlayEnumMemberValueHints = true,
@@ -191,7 +190,7 @@ local function getDictWords()
 	return words
 end
 
--- HACK need to set $JAVA_HOME, since `ltex.java.path` does not to work
+-- FIX / PENDING https://github.com/williamboman/mason.nvim/issues/1531
 local brewPrefix = vim.trim(vim.fn.system("brew --prefix"))
 vim.env.JAVA_HOME = brewPrefix .. "/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
 
@@ -242,7 +241,7 @@ serverConfigs.ltex = {
 	end,
 }
 
--- TODO check is this works
+-- DOCS https://github.com/redhat-developer/yaml-language-server/tree/main#language-server-settings
 serverConfigs.yamlls = {
 	settings = {
 		yaml = {

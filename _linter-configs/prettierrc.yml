@@ -9,8 +9,3 @@
 # (not using .editorconfig to set it since it sets vim's textwidth, which I
 # prefer to be 80 for formatoptions)
 printWidth: 105
-quoteProps: consistent
-
-overrides:
-  - files: ["*.yml", "*.yaml"]
-    options: { printWidth: 120 }

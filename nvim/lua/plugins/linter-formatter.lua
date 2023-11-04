@@ -43,6 +43,7 @@ local lspFormatting = {
 	"toml",
 	"yaml",
 	"html",
+	"css",
 }
 
 --------------------------------------------------------------------------------
@@ -178,8 +179,6 @@ local formatterConfig = {
 return {
 	{ -- Linter integration
 		"mfussenegger/nvim-lint",
-		commit = "7a1bc763a41d5848ceeb47fe7345fb78c07404f9",-- FIX EMFILE: too many open files
-		-- commit = "85108b30869a9cd6ec11cf85b2a3e3bb3b3b1660", -- commit introducing error
 		event = "VeryLazy",
 		config = function()
 			linterConfigs()
@@ -233,7 +232,7 @@ return {
 					package_pending = "󰔟",
 					package_uninstalled = "✗",
 				},
-				keymaps = { -- consistent keymaps with lazy.nvim
+				keymaps = { -- consistent with keymaps for lazy.nvim
 					uninstall_package = "x",
 					toggle_help = "?",
 					toggle_package_expand = "<Tab>",
