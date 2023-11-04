@@ -62,6 +62,10 @@ keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
 --------------------------------------------------------------------------------
 -- EDITING
 
+-- Delete trailing stuff
+-- (wrapping in normal avoids temporarily scrolling to the side)
+keymap("n", "X", "<cmd>normal!mz$x`z<CR>", { desc = "󱎘 Delete char at EoL" })
+
 -- QUICKFIX
 keymap("n", "gq", cmd.cnext, { desc = " Next Quickfix" })
 keymap("n", "gQ", cmd.cprevious, { desc = " Prev Quickfix" })

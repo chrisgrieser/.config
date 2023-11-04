@@ -42,11 +42,11 @@
 	},
 	"Get Alfred Env": {
 		"prefix": "Get Alfred Env",
-		"body": "const ${1:envVar} = $.getenv(\"${2:envVar}\");"
+		"body": "$.getenv(\"${1:envVar}\");"
 	},
 	"Get Alfred Env (Safe)": {
 		"prefix": "Get Alfred Env (Safe)",
-		"body": "const ${1:envVar} = $.NSProcessInfo.processInfo.environment.objectForKey(\"${2:envVar}\").js;"
+		"body": "$.NSProcessInfo.processInfo.environment.objectForKey(\"${1:envVar}\").js;"
 	},
 	"AlfredRun": {
 		"prefix": [
