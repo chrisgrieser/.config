@@ -15,17 +15,6 @@ vim.opt.runtimepath:prepend(lazypath)
 
 --------------------------------------------------------------------------------
 
--- change lazy keymaps
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "lazy",
-	callback = function()
-		vim.defer_fn(function()
-			-- vim.keymap.set("n", "K", "6k", { buffer = true })
-			vim.keymap.set("n", "<Tab>", "<CR>", { buffer = true, remap = true })
-		end, 1)
-	end,
-})
-
 -- DOCS https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
 require("lazy").setup("plugins", {
 	defaults = {
@@ -45,6 +34,14 @@ require("lazy").setup("plugins", {
 			["K"] = {
 				function () vim.cmd.normal { "6k", bang = true } end,
 				desc = "6k",
+			} ,
+			["o"] = {
+				function () vim.cmd.normal { "6k", bang = true } end,
+				desc = "6k",
+			} ,
+			["<Tab>"] = {
+				function () vim.cmd.normal { "<CR>" } end,
+				desc = "Toggle Fold",
 			} 
 		},
 	},
@@ -81,7 +78,9 @@ require("lazy").setup("plugins", {
 
 --------------------------------------------------------------------------------
 -- KEYMAPS
-local keymap = require("config.utils").uniqueKeymap
+
+local u = require("config.utils")
+local keymap = u.uniqueKeymap
 keymap("n", "<leader>pp", require("lazy").sync, { desc = "󰒲 Lazy Update" })
 keymap("n", "<leader>ph", require("lazy").home, { desc = "󰒲 Lazy Overview" })
 keymap("n", "<leader>pi", require("lazy").install, { desc = "󰒲 Lazy Install" })
@@ -92,10 +91,7 @@ vim.defer_fn(function()
 	local threshold = 15
 	local numberOfUpdates = tonumber(require("lazy.status").updates():match("%d+"))
 	if numberOfUpdates < threshold then return end
-	vim.notify(
-		("󱧕 %s plugin updates"):format(numberOfUpdates),
-		vim.log.levels.INFO,
-		{ title = "Lazy" }
-	)
+	local msg = ("󱧕 %s plugin updates"):format(numberOfUpdates)
+	u.notify(msg, "Lazy")
 end, 5000)
 require("lazy.view.config").keys.hover = "D"
