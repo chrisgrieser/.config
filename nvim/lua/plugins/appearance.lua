@@ -26,7 +26,11 @@ return {
 		event = "VeryLazy",
 		opts = {
 			winblend = 0, -- no transparency, hard to see in many themes otherwise
-			handlers = { marks = { enable = false } }, -- FIX mark-related error message
+			handlers = {
+				cursor = { enable = false },
+				marks = { enable = false },-- FIX mark-related error message
+				quickfix = { enable = true } 
+			}, 
 		},
 	},
 	{ -- virtual text context at the end of a scope
