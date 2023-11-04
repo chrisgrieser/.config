@@ -20,7 +20,7 @@ function o() {
 		fd --type=file --type=symlink --color=always | fzf \
 			-1 --ansi --query="$input" --info=inline --header-first \
 			--header="^H: --hidden --no-ignore" \
-			--with-nth=-1 --delimiter="/" \
+			--with-nth=-2.. --delimiter="/" \
 			--bind="ctrl-h:reload(fd --hidden --no-ignore --exclude='/.git/' --exclude='.DS_Store' --type=file --type=symlink --color=always)" \
 			--preview-window="60%" \
 			--preview '[[ $(file --mime {}) =~ text ]] && bat --color=always --wrap=never --style=header {} || file {} | fold -w $FZF_PREVIEW_COLUMNS' \
