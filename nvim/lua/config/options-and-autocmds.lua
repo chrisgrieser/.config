@@ -156,6 +156,11 @@ autocmd("FileType", {
 	callback = function() opt_local.formatoptions:remove("o") end,
 })
 
+-- check if file has changed by external program and reload if so
+autocmd("FocusGained", {
+	callback = vim.cmd.checktime,
+})
+
 --------------------------------------------------------------------------------
 
 -- auto-nohl -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3

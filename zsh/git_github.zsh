@@ -1,10 +1,11 @@
 #!/usr/bin/env zsh
 
 alias co="git checkout"
-alias gg="git checkout -" # go to previous branch/commit, like `zz` switching to last directory
+alias gg="git checkout -" # go to previous branch/commit
 alias gs='git status'
 alias ga="git add"
 
+alias gl="_gitlog"
 alias gd="git diff"
 alias gt="git stash push && git stash show 0"
 alias gT="git stash pop"
@@ -13,13 +14,13 @@ alias grh='git reset --hard'
 alias push="git push"
 alias pull="git pull"
 alias pull="git rebase --interactive"
-alias unshallow="git fetch --unshallow"          # https://stackoverflow.com/a/17937889
+alias unshallow="git fetch --unshallow" # make shallow clone complete again
 alias g.='cd "$(git rev-parse --show-toplevel)"' # goto git root
 
 alias gi='gh issue list --state=open'
 alias gI='gh issue list --state=closed'
 alias pr='gh pr create --web --fill'
-alias rel='make --silent release'
+alias rel='make --silent release' # personal convention to have `make release`
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -95,27 +96,20 @@ function gu {
 #───────────────────────────────────────────────────────────────────────────────
 # GIT LOG
 
-# brief git log
-function gl {
-	local cutoff=${1:-15} # default to 15
-	_gitlog -n "$cutoff"
-	# add `(…)` if commits were shortened
-	[[ $(git log --oneline | wc -l) -lt $cutoff ]] || echo "(…)"
-}
-
 # interactive
 function gli {
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 
 	local hash key_pressed selected style
 	local preview_format="%C(yellow)%h %C(red)%D %n%C(blue)%an %C(green)(%ch)%C(reset) %n%n%C(bold)%C(magenta)%s %C(cyan)%b%C(reset)"
+	defaults read -g AppleInterfaceStyle &>/dev/null && style="--dark" || style="--light"
 
 	selected=$(
 		_gitlog --no-graph --color=always |
 			fzf -0 --query="$1" --ansi --no-sort \
 				--header-first --header="↵ : Checkout    ^H: Copy Hash    ^R: Rebase" \
 				--expect="ctrl-h" --with-nth=2.. --preview-window=55% \
-				--preview="git show {1} --stat=,30,30 --color=always --format='$preview_format' | sed -e '\$d' -e 's/^ //' ; git diff {1}^! | delta $style --hunk-header-decoration-style='blue ol' --file-style=omit" \
+				--preview="git show {1} --stat=,30,30 --color=always --format='$preview_format' | sed '\$d' ; git diff {1}^! | delta $style --hunk-header-decoration-style='blue ol' --file-style=omit" \
 				--height="100%" #required for wezterm's pane:is_alt_screen_active()
 	)
 	[[ -z "$selected" ]] && return 0 # abort
@@ -172,31 +166,6 @@ function clone {
 	cd "$(command ls -1 -t | head -n1)" || return 1
 	_separator
 	_magic_dashboard
-}
-
-# delete and re-clone git repo
-function nuke {
-	if ! git rev-parse --is-inside-work-tree &>/dev/null; then print "\033[1;33mfile is not ins a git repository.\033[0m" && return 1; fi
-	is_submodule=$(git rev-parse --show-superproject-working-tree)
-	if [[ -n "$is_submodule" ]]; then print "\033[1;33mnuke does not support submodules.\033[0m" && return 1; fi
-
-	SSH_REMOTE=$(git remote -v | head -n1 | cut -d" " -f1 | cut -d$'	' -f2)
-	# go to git repo root
-	cd "$(git rev-parse --show-toplevel)" || return 1
-	local_repo_path=$PWD
-	cd ..
-
-	command rm -rf "$local_repo_path"
-	print "\033[1;34mLocal repo removed."
-	print "Cloning repo again from remote…\033[0m"
-	_separator
-
-	# WARN depth > 1 ensures that amending a shallow commit does not result in a
-	# new commit without parent, effectively destroying git history (!!)
-	git clone --depth=5 "$SSH_REMOTE" "$local_repo_path" &&
-		cd "$local_repo_path" || return 1
-	_separator
-	inspect
 }
 
 #───────────────────────────────────────────────────────────────────────────────
