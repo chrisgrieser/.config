@@ -4,7 +4,8 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 add_newline = false
-continuation_prompt = "↪️ "
+continuation_prompt = '➜' # currently not working?
+
 format = """[\
 ${custom.location_indicator}\
 $directory\
@@ -29,10 +30,12 @@ $jobs\
 $memory_usage\
 """
 
+#───────────────────────────────────────────────────────────────────────────────
+
 [character]
 success_symbol = "[󰀘 ](bold green)" # 󰀘 
 error_symbol = " [󰇷 ](bold red)"
-vimcmd_symbol = " [ ](bold 206)"   # 206: magenta
+vimcmd_symbol = " [ ](bold cyan)"
 
 [sudo]
 style = 'fg:green bg:black'
@@ -64,7 +67,7 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 
 [directory.substitutions]
 ".config" = " "
-"main-vault" = "󰇈 "
+"main-vault" = "󱉽 "
 "~/Library/Mobile Documents/com~apple~CloudDocs/File Hub" = "/󰀶 "
 "~/Library/Mobile Documents/com~apple~CloudDocs" = "/ "
 "/Alfred.alfredpreferences" = "/󰮤 "
