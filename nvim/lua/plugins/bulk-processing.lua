@@ -7,7 +7,6 @@ return {
 		keys = {
 			{ "<D-j>", mode = { "n", "x" }, desc = "󰆿 Multi-Cursor (Cursor Word)" },
 			{ "<D-a>", mode = { "n", "x" }, desc = "󰆿 Multi-Cursor (All)" },
-			{ "<D-Down>", desc = "󰆿 Multi-Cursor (Down)" },
 		},
 		init = function()
 			vim.g.VM_set_statusline = 0 -- using my version via lualine component
@@ -22,11 +21,11 @@ return {
 				["Visual Add"] = "<D-j>",
 				["Select All"] = "<D-a>",
 				["Visual All"] = "<D-a>",
-				["Add Cursor Down"] = "<D-Down>",
 
 				-- Visual-Multi-Mode Mappings
 				["Find Next"] = "<D-j>",
 				["Skip Region"] = "n", -- [n]o & find next
+				["Remove Region"] = "N", -- [N]o & goto prev
 				["Find Operator"] = "s", -- operator, selects all regions found in textobj
 				["Motion $"] = "L", -- use my HL motions here as well
 				["Motion ^"] = "H",

@@ -7,8 +7,9 @@ local fn = vim.fn
 optl.expandtab = false
 optl.tabstop = 4 -- less nesting in md
 
--- so two trailing spaces get multispace-char, but not a single trailing space
-optl.listchars:remove { "trail" } 
+-- so two trailing spaces highlighted, but not a single trailing space
+optl.listchars:remove { "trail" }
+optl.listchars:append { multispace = "·" }
 
 -- since markdown has rarely indented lines, and also rarely overlength in lines,
 -- move everything a bit more to the right
