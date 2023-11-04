@@ -178,6 +178,7 @@ local formatterConfig = {
 return {
 	{ -- Linter integration
 		"mfussenegger/nvim-lint",
+		commit = "5d8ea07", -- FIX EONOT issue?
 		event = "VeryLazy",
 		config = function()
 			linterConfigs()

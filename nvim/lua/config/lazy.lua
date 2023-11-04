@@ -1,3 +1,6 @@
+local u = require("config.utils")
+--------------------------------------------------------------------------------
+
 -- Bootstrap Lazy.nvim plugin manager https://github.com/folke/lazy.nvim#-installation
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 local lazyIsInstalled = vim.loop.fs_stat(lazypath) ~= nil
@@ -15,6 +18,9 @@ vim.opt.runtimepath:prepend(lazypath)
 
 --------------------------------------------------------------------------------
 
+require("lazy.view.config").keys.hover = "o"
+require("lazy.view.config").keys.details = "<Tab>"
+
 -- DOCS https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
 require("lazy").setup("plugins", {
 	defaults = {
@@ -25,24 +31,22 @@ require("lazy").setup("plugins", {
 		patterns = { "chrisgrieser" }, -- set `dev = true` for all my repos
 		fallback = true,
 	},
+	-- colorschemes to use during installation
+	install = { colorscheme = { "tokyonight", "dawnfox", "habamax" } },
 	ui = {
 		wrap = true,
-		border = require("config.utils").borderStyle,
+		border = u.borderStyle,
 		pills = false,
-		size = { width = 1, height = 1 },
+		size = { width = 1, height = 0.96 },
 		custom_keys = {
+			["<leader>h"] = {
+				function(plugin) vim.notify(vim.inspect(plugin)) end,
+				desc = "Plugin Info",
+			},
 			["K"] = {
-				function () vim.cmd.normal { "6k", bang = true } end,
+				function() vim.cmd.normal { "6k", bang = true } end,
 				desc = "6k",
-			} ,
-			["o"] = {
-				function () vim.cmd.normal { "6k", bang = true } end,
-				desc = "6k",
-			} ,
-			["<Tab>"] = {
-				function () vim.cmd.normal { "<CR>" } end,
-				desc = "Toggle Fold",
-			} 
+			},
 		},
 	},
 	checker = {
@@ -79,7 +83,6 @@ require("lazy").setup("plugins", {
 --------------------------------------------------------------------------------
 -- KEYMAPS
 
-local u = require("config.utils")
 local keymap = u.uniqueKeymap
 keymap("n", "<leader>pp", require("lazy").sync, { desc = "󰒲 Lazy Update" })
 keymap("n", "<leader>ph", require("lazy").home, { desc = "󰒲 Lazy Overview" })
@@ -94,4 +97,3 @@ vim.defer_fn(function()
 	local msg = ("󱧕 %s plugin updates"):format(numberOfUpdates)
 	u.notify(msg, "Lazy")
 end, 5000)
-require("lazy.view.config").keys.hover = "D"
