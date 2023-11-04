@@ -517,7 +517,7 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # D = open trash
       - type: basic
-        from: { key_code: d, modifiers: { mandatory: [shift] } } 
+        from: { key_code: d, modifiers: { mandatory: [shift] } }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
         to:
           # to open the "unified" trash (iCloud trash + user trash), needs to use
