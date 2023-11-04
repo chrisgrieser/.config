@@ -4,6 +4,7 @@ local fn = vim.fn
 local keymap = vim.keymap.set
 
 --------------------------------------------------------------------------------
+-- COMMENT MARKS
 
 -- goto comment marks (deferred, to override lsp-gotosymbol)
 vim.defer_fn(function()
@@ -28,6 +29,22 @@ vim.defer_fn(function()
 		}
 	end, { desc = " Search CSS Variables", buffer = true })
 end, 500)
+
+-- next/prev comment marks
+keymap(
+	{ "n", "x" },
+	"<C-j>",
+	[[/^\/\* <<CR>:nohl<CR>]],
+	{ buffer = true, desc = "next comment mark" }
+)
+keymap(
+	{ "n", "x" },
+	"<C-k>",
+	[[?^\/\* <<CR>:nohl<CR>]],
+	{ buffer = true, desc = "prev comment mark" }
+)
+
+--------------------------------------------------------------------------------
 
 -- never push, since build script already pushes
 keymap(
