@@ -12,7 +12,7 @@ alias gT="git stash pop"
 alias grh='git reset --hard'
 alias push="git push"
 alias pull="git pull"
-alias pull="git rebase --interactive"
+alias rebase="git rebase --interactive"
 alias unshallow="git fetch --unshallow"          # make shallow clone complete again
 alias g.='cd "$(git rev-parse --show-toplevel)"' # goto git root
 
