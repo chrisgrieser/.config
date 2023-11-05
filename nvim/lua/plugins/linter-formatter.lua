@@ -3,7 +3,7 @@ local linterConfig = require("config.utils").linterConfigFolder
 --------------------------------------------------------------------------------
 
 local linters = {
-	lua = { "selene", "woke" },
+	lua = { "selene" },
 	css = { "stylelint" },
 	sh = { "shellcheck" },
 	markdown = { "markdownlint", "vale" },
@@ -28,7 +28,7 @@ local formatters = {
 	typescript = { "biome" },
 	json = { "biome" },
 	jsonc = { "biome" },
-	lua = { "stylua" },
+	lua = { "stylua", "ast-grep" },
 	python = { "ruff_format", "ruff_fix" },
 	markdown = { "markdown-toc", "markdownlint" },
 	css = { "stylelint", "prettier" },
@@ -62,6 +62,7 @@ local dontInstall = {
 	"injected",
 	"ruff_format",
 	"ruff_fix",
+	"ast-grep", -- PENDING https://github.com/mason-org/mason-registry/pull/3332
 }
 
 ---given the linter- and formatter-list of nvim-lint and conform.nvim, extract a
@@ -106,12 +107,6 @@ local function linterConfigs()
 		"--disable=no-trailing-spaces", -- not disabled in config, so it's enabled for formatting
 		"--disable=no-multiple-blanks",
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
-	}
-	lint.linters.woke.args = {
-		"--stdin",
-		"--output=json",
-		"--config=" .. linterConfig .. "/woke.yaml",
-		"--disable-default-rules",
 	}
 end
 
@@ -160,15 +155,22 @@ local formatterConfig = {
 		-- stylua: ignore
 		["bibtex-tidy"] = {
 			prepend_args =
-			"--tab", "--curly", "--strip-enclosing-braces", "--no-align", "--no-wrap",
-			"--enclosing-braces=title,journal,booktitle", "--drop-all-caps",
-			"--numeric", "--months", "--encode-urls",
-			"--duplicates", "--sort-fields", "--remove-empty-fields", "--omit=month,issn,abstract",
+				"--tab", "--curly", "--strip-enclosing-braces", "--no-align", "--no-wrap",
+				"--enclosing-braces=title,journal,booktitle", "--drop-all-caps",
+				"--numeric", "--months", "--encode-urls",
+				"--duplicates", "--sort-fields", "--remove-empty-fields", "--omit=month,issn,abstract",
 			condition = function(ctx)
 				local ignore = vim.fs.basename(ctx.filename) == "main-bibliography.bib"
 				if ignore then u.notify("conform.nvim", "Ignoring main-bibliography.bib.") end
 				return not ignore
 			end,
+		},
+		-- PENDING https://github.com/stevearc/conform.nvim/pull/177
+		["ast-grep"] = {
+			command = "ast-grep",
+			args = { "scan", "--update-all", "$FILENAME" },
+			stdin = false,
+			exit_codes = { 0, 5 }, -- 5 = no config file exists
 		},
 	},
 }

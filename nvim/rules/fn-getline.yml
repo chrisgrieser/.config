@@ -1,8 +1,7 @@
 id: fn-getline
-message: Add your rule message here....
+rule:
+  pattern: vim.fn.getline($DOT)
+fix: vim.api.nvim_get_current_line()
+message: Use `vim.api.nvim_get_current_line()` instead.
 severity: info
 language: Lua
-rule:
-  pattern: (vim.)?fn.getline(["'].["'])
-# utils: Extract repeated rule as local utility here.
-# note: Add detailed explanation for the rule.
