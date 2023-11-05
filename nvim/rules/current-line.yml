@@ -1,4 +1,4 @@
-id: fn-getline
+id: current-line
 rule:
   pattern: $FUNC(".")
   regex: fn\.getline # so it matches `fn.getline` as well as `vim.fn.getline`
