@@ -14,6 +14,7 @@ if not vim.g.tinygit_no_rebase_ftplugin then
 	)
 	vim.api.nvim_set_hl(0, "rebase_conventionalCommit", { link = "Title" })
 
+	-- fixup!
 	vim.fn.matchadd("rebase_fixupSquash", [[ fixup\!]])
 	vim.api.nvim_set_hl(0, "rebase_fixupSquash", { link = "Warning" })
 
