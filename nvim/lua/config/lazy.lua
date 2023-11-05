@@ -28,7 +28,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set(
 			"n",
 			"gi",
-			"/#<CR>o",
+			[[/#<CR>o``]],
 			{ buffer = true, remap = true, desc = "󰒲 Open next issue" }
 		)
 	end,
@@ -41,9 +41,9 @@ require("lazy").setup("plugins", {
 	defaults = {
 		lazy = true,
 	},
-	dev = { -- use remote repo when local repo doesn't exist
+	dev = { -- for repos with <pattern>, use local repos if one exists in <path>
 		path = os.getenv("HOME") .. "/Repos",
-		patterns = { "chrisgrieser" }, -- set `dev = true` for all my repos
+		patterns = { "chrisgrieser" }, -- set `dev = true` for all matching repos
 		fallback = true,
 	},
 	-- colorschemes to use during installation
