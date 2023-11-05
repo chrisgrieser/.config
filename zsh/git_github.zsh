@@ -46,14 +46,17 @@ function gc {
 	printf "\033[1;36mCommit: \033[0m"
 	git commit -m "$1" || return 1
 
-	# if repo clean, pull-push
-	if [[ -z "$(git status --porcelain)" ]]; then
-		printf "\033[1;36mPull: \033[0m" && git pull &&
-			printf "\033[1;36mPush: \033[0m" && git push
-	else
+	# GUARD
+	if [[ -n "$(git status --porcelain)" ]]; then
 		print "\033[1;36mPush: \033[0mNot pushing since repo still dirty."
 		return 0
+	elif [[ -n "$(git log --oneline --grep="^fixup!" --grep="^squash!")" ]]; then
+		print "\033[1;36mPush: \033[1;33mThere are still fixup or squash commits:\033[0m"
+		git log --oneline --grep="^fixup!" --grep="^squash!"
+		return 1
 	fi
+	printf "\033[1;36mPull: \033[0m" && git pull &&
+		printf "\033[1;36mPush: \033[0m" && git push
 }
 
 # select a recent commit to fixup *and* autosquash (not marked for next rebase!)
