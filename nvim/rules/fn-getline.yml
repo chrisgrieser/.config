@@ -1,0 +1,8 @@
+id: fn-getline
+message: Add your rule message here....
+severity: info
+language: Lua
+rule:
+  pattern: (vim.)?fn.getline(["'].["'])
+# utils: Extract repeated rule as local utility here.
+# note: Add detailed explanation for the rule.

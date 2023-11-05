@@ -80,7 +80,7 @@ function run(argv) {
 			// open in terminal when local, clone when not
 			const terminalArg = repo.local?.path || repo.html_url;
 			if (repo.local) {
-				if (localRepos[repo.name].dirty) type += "🔄 ";
+				if (localRepos[repo.name].dirty) type += "✴️ ";
 				type += "📂 ";
 				matcher += "local ";
 			}
