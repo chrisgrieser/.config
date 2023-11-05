@@ -215,6 +215,7 @@ return {
 					local useTelescope = {
 						"tinygit.githubIssue",
 						"tinygit.pickaxeDiff",
+						"tinygit.fixupCommit",
 						"mason.ui.language-filter",
 					}
 					if vim.tbl_contains(useTelescope, opts.kind) then
