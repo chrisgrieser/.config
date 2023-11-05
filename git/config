@@ -7,11 +7,11 @@
 	editor = nvim
 	autocrlf = input
 
-	; 1. Motiviation: version control & sync of hooks across devices
-	; 2. by setting them in the global git config, there is no more need to run
-	; `git config --global core.hooksPath .git-hooks` after every clone
-	; 3. Caveat: this trick only works on repos solely managed by the user of
-	; this dotfile-repo, it does not work to enforce hooks on other people's clones
+	# 1. Motiviation: version control & sync of hooks across devices
+	# 2. by setting them in the global git config, there is no more need to run
+	# `git config --global core.hooksPath .git-hooks` after every clone
+	# 3. Caveat: this trick only works on repos solely managed by the user of
+	# this dotfile-repo, it does not work to enforce hooks on other people's clones
 	hooksPath = .git-hooks
 [status]
 	showUntrackedFiles = all
@@ -21,7 +21,8 @@
 [stash]
 	showIncludeUntracked = true
 [pull]
-	rebase = false ; merge changes from pull
+	rebase = true # rebase changes instead of merging. 
+	# Alternative: --ff-only https://blog.sffc.xyz/post/185195398930/why-you-should-use-git-pull-ff-only
 [rebase]
 	autosquash = true
 
@@ -39,8 +40,8 @@
 [diff]
 	colorMoved = default
 [delta]
-	tabs = 3 ; tabwidth
+	tabs = 3 # tabwidth
 	navigate = true # use n and N to move between diff sections
 	hunk-label="■"
 
-;────────────────────────────────────────────────────────────────────────────
+#────────────────────────────────────────────────────────────────────────────
