@@ -29,6 +29,8 @@ return {
 			},
 			searchFileHistory = {
 				diffPopupBorder = require("config.utils").borderStyle,
+				diffPopupWidth = 0.9,
+				diffPopupHeight = 0.9,
 			},
 		},
 	},

@@ -28,14 +28,14 @@ local formatters = {
 	typescript = { "biome" },
 	json = { "biome" },
 	jsonc = { "biome" },
-	lua = { "stylua" },
+	lua = { "stylua", "ast-grep" },
 	python = { "ruff_format", "ruff_fix" },
 	markdown = { "markdown-toc", "markdownlint", "injected" },
 	css = { "stylelint", "prettier" },
 	sh = { "shellcheck", "shfmt" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
 	["_"] = { "trim_whitespace", "trim_newlines", "squeeze_blanks" }, -- filetypes w/o formatter
-	["*"] = { "codespell", "ast-grep" }, -- all filetypes
+	["*"] = { "codespell" }, -- all filetypes
 }
 
 -- filetypes that should use lsp-formatting
