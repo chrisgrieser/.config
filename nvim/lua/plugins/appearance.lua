@@ -213,8 +213,8 @@ return {
 
 					-- complex selectors: use telescope
 					local useTelescope = {
-						"tinygit.github_issue",
-						"tinygit.pickaxe_diff",
+						"tinygit.githubIssue",
+						"tinygit.pickaxeDiff",
 						"mason.ui.language-filter",
 					}
 					if vim.tbl_contains(useTelescope, opts.kind) then
