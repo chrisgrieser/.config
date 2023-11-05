@@ -35,7 +35,7 @@ local formatters = {
 	sh = { "shellcheck", "shfmt" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
 	["_"] = { "trim_whitespace", "trim_newlines", "squeeze_blanks" }, -- filetypes w/o formatter
-	["*"] = { "codespell", "ast-grep" }, -- all filetypes
+	["*"] = { "codespell", "astgrep" }, -- all filetypes
 }
 
 -- filetypes that should use lsp-formatting
@@ -62,6 +62,7 @@ local dontInstall = {
 	"injected",
 	"ruff_format",
 	"ruff_fix",
+	"astgrep",
 	"ast-grep", -- PENDING https://github.com/mason-org/mason-registry/pull/3332
 }
 
