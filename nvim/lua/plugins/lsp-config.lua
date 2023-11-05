@@ -308,16 +308,20 @@ end
 
 --------------------------------------------------------------------------------
 -- PENDING
-vim.api.nvim_create_autocmd("FileType", {
-	-- https://ast-grep.github.io/reference/languages.html
+vim.api.nvim_create_autocmd({ "FileType" }, {
 	-- stylua: ignore
 	pattern = { "C", "C++", "Rust", "Go", "Java", "Python", "C#", "JavaScript", "JSX", "TypeScript", "HTML", "CSS", "Kotlin", "Dart", "Lua" },
 	callback = function()
-		vim.lsp.start {
-			name = "ast-grep",
-			cmd = { "ast-grep", "lsp" },
-			root_dir = vim.fs.dirname(vim.fs.find({ "sgconfig.yml" }, { upward = true })[1]),
-		}
+		vim.defer_fn(
+			function()
+				vim.lsp.start {
+					name = "ast-grep",
+					cmd = { "ast-grep", "lsp" },
+					root_dir = vim.fs.dirname(vim.fs.find({ "sgconfig.yml" }, { upward = true })[1]),
+				}
+			end,
+			1
+		)
 	end,
 })
 

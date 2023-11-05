@@ -1,6 +1,7 @@
 id: fn-getline
 rule:
-  pattern: vim.fn.getline($DOT)
+  pattern: $FUNC(".")
+  regex: fn\.getline # so it matches `fn.getline` as well as `vim.fn.getline`
 fix: vim.api.nvim_get_current_line()
 message: Use `vim.api.nvim_get_current_line()` instead.
 severity: info

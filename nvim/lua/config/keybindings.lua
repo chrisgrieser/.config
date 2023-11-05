@@ -237,3 +237,6 @@ vim.api.nvim_create_autocmd("FileType", {
 
 --------------------------------------------------------------------------------
 
+local _ = vim.fn.getline(".")
+local _ = fn.getline(".")
+local _ = fn.line("$")
