@@ -286,7 +286,10 @@ local telescopeConfig = {
 			},
 		},
 		aerial = {
-			show_nesting = { ["_"] = true },
+			show_nesting = {
+				markdown = false,
+				["_"] = true,
+			},
 		},
 	},
 }

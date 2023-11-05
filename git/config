@@ -20,6 +20,8 @@
 	relativePaths = false # false = show path relative to git root, not to cwd
 [stash]
 	showIncludeUntracked = true
+[pull]
+	rebase = false ; merge changes from pull
 [rebase]
 	autosquash = true
 
