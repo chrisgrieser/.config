@@ -37,6 +37,7 @@ rules:
           - key_code: left_control
         conditions:
           - *leader-inactive
+          - { type: frontmost_application_unless, bundle_identifiers: [^com.runningwithcrayons\.Alfred$] }
         to_if_alone:
           - *activate-leader
           - *set-notice

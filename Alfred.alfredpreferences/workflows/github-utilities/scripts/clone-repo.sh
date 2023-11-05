@@ -12,7 +12,7 @@ url="git@github.com:$origin_repo.git" # use SSH instead of https
 cd "$LOCAL_REPOS" || exit 1
 # WARN depth=2 ensures that amending a shallow commit does not result in a
 # new commit without parent, effectively destroying git history (!!)
-git clone --depth=2 --filter="blob:none" "$url"
+git clone --depth=2 --no-single-branch "$url"
 
 # Open in terminal via Alfred
 echo -n "$LOCAL_REPOS/$reponame"
