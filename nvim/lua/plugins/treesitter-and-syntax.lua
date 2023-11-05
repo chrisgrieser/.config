@@ -11,6 +11,14 @@ local tsConfig = {
 		disable = { "css" }, -- PENDING https://github.com/tree-sitter/tree-sitter-css/issues/34
 	},
 	indentation = { enable = true }, -- autoindent with `=`
+	incremental_selection = {
+		enable = true,
+		keymaps = {
+			node_incremental = "<Space>",
+			node_decremental = "<BS>",
+			init_selection = false,
+		},
+	},
 
 	--------------------------------------------------------------------------
 	-- TREESITTER PLUGINS

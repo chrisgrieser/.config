@@ -56,7 +56,6 @@ keymap("o", "k", 'i"', { desc = "󱡔 inner quote" })
 
 -- quick textobj operations
 keymap("n", "<Space>", '"_ciw', { desc = "󱡔 change word" })
-keymap("x", "<Space>", '"_c', { desc = "󱡔 change selection" })
 keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
 
 --------------------------------------------------------------------------------
@@ -160,11 +159,12 @@ keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = " Esc (Terminal Mode)" })
 -- BUFFERS & WINDOWS & FILES
 
 keymap("n", "<CR>", function()
-	-- disable on non-regular buffers
 	if vim.bo.buftype == "terminal" then
 		u.normal("a") -- enter terminal mode
 	elseif vim.bo.buftype == "" then
 		require("funcs.alt-alt").gotoAltBuffer()
+	else
+		return -- disable in other buffertypes
 	end
 end, { desc = "󰽙 Alt Buffer" })
 keymap({ "n", "x", "i" }, "<C-CR>", "<C-w>w", { desc = " Next Window" })
@@ -183,9 +183,9 @@ keymap("n", "gp", "gf", { desc = " Goto Path under cursor" })
 -- CLIPBOARD
 
 -- keep the register clean
-keymap("n", "x", '"_x')
+keymap({ "n", "x" }, "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
-keymap("n", "C", '"_C')
+keymap({ "n", "x" }, "C", '"_C')
 
 -- do not clutter the register if blank line is deleted
 keymap("n", "dd", function()
@@ -236,7 +236,3 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
-
-local _ = vim.fn.getline(".")
-local _ = fn.getline(".")
-local _ = fn.line("$")
