@@ -27,6 +27,8 @@
 	autoSquash = true
 	autoStash = true
 	stat = true
+[advice]
+	detachedHead = false
 
 #───────────────────────────────────────────────────────────────────────────────
 # SETUP FOR DELTA

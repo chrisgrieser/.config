@@ -30,6 +30,7 @@ function _gitlog {
 			-e 's/ months* ago)/mo)/' \
 			-e 's/grafted/ /' \
 			-e 's/origin\//󰞶  /g' \
+			-e 's/upstream\//  /g' \
 			-e 's/HEAD/󱍞 /g' \
 			-e 's/tag: /  /' \
 			-e 's/\* /∘ /' \

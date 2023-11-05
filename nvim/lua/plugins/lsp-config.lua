@@ -299,12 +299,26 @@ end
 
 local function lspSignatureSettings()
 	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-		border = require("config.utils").borderStyle,
+		border = u.borderStyle,
 	})
 	-- INFO this needs to be disabled for noice.nvim
 	-- vim.lsp.handlers["textDocument/hover"] =
 	-- vim.lsp.with(vim.lsp.handlers.hover, { border = u.borderStyle })
 end
+
+--------------------------------------------------------------------------------
+-- PENDING 
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = {"lua"},
+	callback = function()
+		
+	end,
+})
+vim.lsp.start {
+	name = "ast-grep",
+	cmd = { "ast-grep", "lsp" },
+	root_dir = vim.fs.dirname(vim.fs.find({ "sgconfig.yml" }, { upward = true })[1]),
+}
 
 --------------------------------------------------------------------------------
 
