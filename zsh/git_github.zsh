@@ -13,8 +13,9 @@ alias grh='git reset --hard'
 alias push="git push"
 alias pull="git pull"
 alias rebase="git rebase --interactive"
-alias unshallow="git fetch --unshallow"          # make shallow clone complete again
-alias g.='cd "$(git rev-parse --show-toplevel)"' # goto git root
+alias auto-rebase="git -c sequence.editor=: rebase --interactive --autosquash" # ":" is a "no-op-"editor
+alias unshallow="git fetch --unshallow"                                        # make shallow clone complete again
+alias g.='cd "$(git rev-parse --show-toplevel)"'                               # goto git root
 
 alias gi='gh issue list --state=open'
 alias gI='gh issue list --state=closed'
@@ -23,9 +24,11 @@ alias rel='make --silent release' # personal convention to have `make release`
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# highlight conventional commits & issue numbers
+# highlight conventional commits
 ZSH_HIGHLIGHT_REGEXP+=('(feat|fix|test|perf|build|ci|revert|refactor|chore|docs|break|improv)(\(.+\)|\\!)?:' 'fg=magenta,bold')
-ZSH_HIGHLIGHT_REGEXP+=('(#[0-9]+)' 'fg=red,bold')
+
+ZSH_HIGHLIGHT_REGEXP+=('#[0-9]+' 'fg=red,bold')         # issues numbers
+ZSH_HIGHLIGHT_REGEXP+=('[0-9a-f]{6,}' 'fg=yellow,bold') # hashes
 
 # commit messages longer than 50 chars: yellow, longer than 72 chars: red
 ZSH_HIGHLIGHT_REGEXP+=('^(gc|git commit -m) ".{72,}"' 'fg=white,bold,bg=red')
@@ -48,10 +51,9 @@ function gc {
 		printf "\033[1;36mPull: \033[0m" && git pull &&
 			printf "\033[1;36mPush: \033[0m" && git push
 	else
-		print "\033[1;36mPush:\033[0m Not pushing since repo still dirty."
+		print "\033[1;36mPush: \033[0mNot pushing since repo still dirty."
 		return 0
 	fi
-
 }
 
 # select a recent commit to fixup *and* autosquash (not marked for next rebase!)
@@ -61,12 +63,10 @@ function fixup {
 	[[ -z "$target" ]] && return 0
 	git commit --fixup="$target"
 
-	# HACK ":" is the "no-op-"editor https://www.reddit.com/r/git/comments/uzh2no/what_is_the_utility_of_noninteractive_rebase/
+	# HACK ":" is a "no-op-"editor https://www.reddit.com/r/git/comments/uzh2no/what_is_the_utility_of_noninteractive_rebase/
 	git -c sequence.editor=: rebase --interactive --autosquash "$target^" || return 0
 
-	# confirm result
-	_separator
-	_gitlog "$target"~2..
+	_separator && _gitlog "$target"~2.. # confirm result
 }
 
 # amend-no-edit
@@ -122,7 +122,7 @@ function gli {
 		_gitlog --no-graph --color=always |
 			fzf -0 --query="$1" --ansi --no-sort \
 				--header-first --header="↵ : Checkout    ^H: Copy Hash    ^R: Rebase" \
-				--expect="ctrl-h" --with-nth=2.. --preview-window=55% \
+				--expect="ctrl-h,ctrl-r" --with-nth=2.. --preview-window=55% \
 				--preview="git show {1} --stat=,30,30 --color=always --format='$preview_format' | sed '\$d' ; git diff {1}^! | delta $style --hunk-header-decoration-style='blue ol' --file-style=omit" \
 				--height="100%" #required for wezterm's pane:is_alt_screen_active()
 	)
@@ -136,8 +136,8 @@ function gli {
 		print "\033[1;33m$hash\033[0m copied."
 	elif [[ "$key_pressed" == "ctrl-r" ]]; then
 		git rebase -i "$hash^"
-		_gitlog "$hash^..HEAD"
-	else # pressed return
+		_separator && _gitlog "$hash^..HEAD" # confirm result
+	else                                  # pressed return
 		git checkout "$hash"
 	fi
 }
