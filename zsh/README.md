@@ -6,6 +6,12 @@
   with.
 - `oh-my-zsh` also seems to affect performance, [increasing zsh loading time considerably](https://blog.jonlu.ca/posts/speeding-up-zsh).
 
-## Showcase
-![terminal showcase](https://github.com/chrisgrieser/.config/assets/73286100/6b7c772f-ad6b-4c07-bdc0-64d64995703f)
-(July 2023)
+## Pretty Dashboard
+
+![Showcase](https://github.com/chrisgrieser/zsh-magic-dashboard/assets/73286100/1ae9ca48-cdca-4f54-8c8c-7e87fa051351)
+<!-- LTeX: enabled=false -->
+*Terminal: WezTerm – Theme: Tinacious Design – Font: Iosevka Term with partial
+ligatures – Prompt: Starship*
+<!-- LTeX: enabled=true -->
+
+[zsh-magic-dashboard](https://github.com/chrisgrieser/zsh-magic-dashboard)

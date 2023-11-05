@@ -8,7 +8,7 @@ People tell me they find the following configurations most useful:
 
 - [neovim config](/nvim) (~6000 LoC)
 - [hammerspoon config](/hammerspoon) (~2500 LoC)
-- [zshrc](/zsh) (~1500 LoC)
+- [zshrc](/zsh) (~1900 LoC)
 - [Pandoc configs & pointers on how to use pandoc](/pandoc)
 - [Complex modifications for Karabiner Elements](/karabiner)
 - [obsidian-vimrc.vim](obsidian/obsidian-vimrc.vim) via the [vimrc Support Plugin](https://obsidian.md/plugins?id=obsidian-vimrc-support)

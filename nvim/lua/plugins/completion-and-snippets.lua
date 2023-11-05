@@ -164,6 +164,7 @@ local function cmpconfig()
 	})
 end
 
+
 --------------------------------------------------------------------------------
 
 return {
@@ -188,12 +189,25 @@ return {
 		"L3MON4D3/LuaSnip",
 		event = "InsertEnter",
 		config = function()
+			local types = require("luasnip.util.types")
 			-- DOCS https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#api-reference
 			require("luasnip").setup {
 				region_check_events = "CursorMoved", -- prevent <Tab> jumping back to a snippet after it has been left early
 				update_events = { "TextChanged", "TextChangedI" }, -- live updating of snippets
-
-
+				ext_opts = { -- DOCS https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#ext_opts
+					[types.choiceNode] = {
+						unvisited = { virt_text = { { "󰊖 ", "DiagnosticHint" } }, hl_mode = "combine" },
+						active = { virt_text = { { "󰊖 ", "DiagnosticHint" } }, hl_mode = "combine" },
+					},
+					-- $n
+					[types.insertNode] = {
+						unvisited = { virt_text = { { "⏽", "DiagnosticHint" } }, hl_mode = "combine" },
+					},
+					-- $0
+					[types.exitNode] = {
+						unvisited = { virt_text = { { "⏽", "DiagnosticHint" } }, hl_mode = "combine" },
+					},
+				},
 			}
 
 			-- VS-code-style snippets
