@@ -1,12 +1,5 @@
 #!/usr/bin/env zsh
 
-# CONFIG options for the user
-# export MAGIC_DASHBOARD_GITLOG_LINES # default: 5
-# export MAGIC_DASHBOARD_FILES_LINES # default: 6
-# export MAGIC_DASHBOARD_DISABLED_BELOW_TERM_HEIGHT # default: 15
-
-#───────────────────────────────────────────────────────────────────────────────
-
 # draws a separator line with terminal width
 function _separator {
 	local sep_char="═" # ─ ═

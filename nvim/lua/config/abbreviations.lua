@@ -5,6 +5,7 @@
 
 local spellfixes = {
 	teh = "the",
+	THe = "the",
 	brwoser = "browser",
 	markdwon = "markdown",
 	dwon = "down",
