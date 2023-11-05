@@ -4,6 +4,7 @@ alias co="git checkout"
 alias gg="git checkout -" # go to previous branch/commit
 alias gs='git status'
 alias ga="git add"
+alias gaa="git add --all"
 
 alias gd="git diff"
 alias gt="git stash push && git stash show 0"

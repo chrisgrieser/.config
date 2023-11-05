@@ -16,6 +16,7 @@ local tsConfig = {
 		keymaps = {
 			node_incremental = "<Space>",
 			node_decremental = "<BS>",
+			scope_incremental = false,
 			init_selection = false,
 		},
 	},
