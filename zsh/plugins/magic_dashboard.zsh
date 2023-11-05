@@ -41,8 +41,9 @@ function _gitlog {
 			-e 's/tag: /  /' \
 			-e 's/\* /∘ /' \
 			-Ee $'s/ (improv|fix|refactor|build|ci|docs|feat|test|perf|chore|revert|break|style)(\\(.+\\)|!)?:/ \033[1;35m\\1\033[1;36m\\2\033[0m:/' \
-			-Ee $'s/(`[^`]*`)/\033[1;36m\\1\033[0m/g' \
-			-Ee $'s/(#[0-9]+)/\033[1;31m\\1\033[0m/g' # issue numbers
+			-Ee $'s/ (fixup|squash)!/\033[1;33m&\033[0m/g' \
+			-Ee $'s/`[^`]*`/\033[1;36m&\033[0m/g' \
+			-Ee $'s/#[0-9]+/\033[1;31m&\033[0m/g' # issue numbers
 	# INFO inserting ansi colors via sed requires leading $
 }
 
