@@ -307,18 +307,19 @@ local function lspSignatureSettings()
 end
 
 --------------------------------------------------------------------------------
--- PENDING 
+-- PENDING
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = {"lua"},
+	-- https://ast-grep.github.io/reference/languages.html
+	-- stylua: ignore
+	pattern = { "C", "C++", "Rust", "Go", "Java", "Python", "C#", "JavaScript", "JSX", "TypeScript", "HTML", "CSS", "Kotlin", "Dart", "Lua" },
 	callback = function()
-		
+		vim.lsp.start {
+			name = "ast-grep",
+			cmd = { "ast-grep", "lsp" },
+			root_dir = vim.fs.dirname(vim.fs.find({ "sgconfig.yml" }, { upward = true })[1]),
+		}
 	end,
 })
-vim.lsp.start {
-	name = "ast-grep",
-	cmd = { "ast-grep", "lsp" },
-	root_dir = vim.fs.dirname(vim.fs.find({ "sgconfig.yml" }, { upward = true })[1]),
-}
 
 --------------------------------------------------------------------------------
 
