@@ -78,6 +78,10 @@ function gm {
 
 # amend message only
 function gM {
+	if ! git diff --staged --quiet; then
+		print "\033[1;33mStaged changes detected.\033[0m"
+		return 1
+	fi
 	git commit --amend
 	git status
 }
