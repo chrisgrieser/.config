@@ -28,14 +28,14 @@ local formatters = {
 	typescript = { "biome" },
 	json = { "biome" },
 	jsonc = { "biome" },
-	lua = { "stylua", "ast-grep" },
+	lua = { "stylua" },
 	python = { "ruff_format", "ruff_fix" },
-	markdown = { "markdown-toc", "markdownlint" },
+	markdown = { "markdown-toc", "markdownlint", "injected" },
 	css = { "stylelint", "prettier" },
 	sh = { "shellcheck", "shfmt" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
 	["_"] = { "trim_whitespace", "trim_newlines", "squeeze_blanks" }, -- filetypes w/o formatter
-	["*"] = { "codespell" }, -- all filetypes
+	["*"] = { "codespell", "ast-grep" }, -- all filetypes
 }
 
 -- filetypes that should use lsp-formatting
@@ -164,13 +164,6 @@ local formatterConfig = {
 				if ignore then u.notify("conform.nvim", "Ignoring main-bibliography.bib.") end
 				return not ignore
 			end,
-		},
-		-- PENDING https://github.com/stevearc/conform.nvim/pull/177
-		["ast-grep"] = {
-			command = "ast-grep",
-			args = { "scan", "--update-all", "$FILENAME" },
-			stdin = false,
-			exit_codes = { 0, 5 }, -- 5 = no config file exists
 		},
 	},
 }
