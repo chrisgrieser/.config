@@ -51,12 +51,13 @@ export GH_NO_UPDATE_NOTIFIER=1
 
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets regexp root)
 
-# https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/regexp.md
+# DOCS https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/regexp.md
 # shellcheck disable=2034 # used in other files
-typeset -A ZSH_HIGHLIGHT_REGEXP
-# NOTE: There are also some custom highlights for global aliases in aliases.zsh
+typeset -A ZSH_HIGHLIGHT_REGEXP # actual highlights defined in other files
 
+# DOCS https://github.com/zsh-users/zsh-autosuggestions#configuration
 export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)" # ignores long history items
-export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+export ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
+export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=30
 # do not accept autosuggestion when using vim `A`
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}")
