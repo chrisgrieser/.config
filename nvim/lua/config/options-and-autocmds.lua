@@ -69,6 +69,7 @@ opt.clipboard = "unnamedplus"
 
 -- Spelling
 opt.spell = false
+opt.spelloptions = "camel"
 opt.spellfile = { u.linterConfigFolder .. "/spellfile-vim-ltex.add" } -- has to be `.add`
 opt.spelllang = "en_us" -- still relevant for `z=`
 

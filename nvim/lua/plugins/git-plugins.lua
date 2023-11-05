@@ -2,6 +2,7 @@ return {
 	{ -- lightweight git client
 		"chrisgrieser/nvim-tinygit",
 		dependencies = "stevearc/dressing.nvim",
+		ft = "gitrebase" ,
 		keys = {
 			-- stylua: ignore start
 			{ "gc", function() require("tinygit").smartCommit { pushIfClean = true } end, desc = "󰊢 Smart-Commit & Push" },
