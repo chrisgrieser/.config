@@ -42,13 +42,13 @@ function run() {
 
 	const empty = tot.openLocation(`tot://${dotToUse}/content`).match(/^\s*$/);
 	if (empty) {
-		accText = accText.trim(); 
+		accText = accText.trim();
 		tot.openLocation(`tots://${dotToUse}/replace?text=${encodeURIComponent(accText)}`);
 	} else {
 		tot.openLocation(`tots://${dotToUse}/append?text=${encodeURIComponent(accText)}`);
-	} 
+	}
 
-	delay(0.1);
+	delay(0.3);
 	if (reminders) reminders.quit(); // FIX Reminder.app being left open
 
 	// information how many tasks were added for hammrspoon,
