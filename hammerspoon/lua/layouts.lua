@@ -46,14 +46,6 @@ local function setHigherBrightnessDuringDay()
 	wu.iMacDisplay:setBrightness(target)
 end
 
-local function closeAllFinderWins()
-	local finder = u.app("Finder")
-	if not finder then return end
-	for _, win in pairs(finder:allWindows()) do
-		win:close()
-	end
-end
-
 --------------------------------------------------------------------------------
 -- LAYOUTS
 
@@ -65,7 +57,6 @@ local function workLayout()
 	setHigherBrightnessDuringDay()
 
 	-- close
-	closeAllFinderWins()
 	u.quitApps(env.videoAndAudioApps)
 	require("lua.private").closer()
 

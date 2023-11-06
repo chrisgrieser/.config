@@ -64,6 +64,14 @@ M.timer_nightlyMaintenance = hs.timer
 --------------------------------------------------------------------------------
 -- SLEEP TIMER
 
+local function closeAllFinderWins()
+	local finder = u.app("Finder")
+	if not finder then return end
+	for _, win in pairs(finder:allWindows()) do
+		win:close()
+	end
+end
+
 local function closeFullscreenSpaces()
 	local allSpaces = hs.spaces.allSpaces()
 	if not allSpaces then return end
@@ -95,7 +103,7 @@ local config = {
 
 M.timer_sleepAutoVideoOff = hs.timer
 	.doEvery(config.checkIntervalMins * 60, function()
-		local isNight = u.betweenTime(table.unpack(config.betweenHours))
+		local isNight = u.betweenTime(config.betweenHours[1], config.betweenHours[2])
 		if
 			not (isNight and idleMins(config.idleMins) and env.isProjector() and u.screenIsUnlocked())
 		then
@@ -111,6 +119,7 @@ M.timer_sleepAutoVideoOff = hs.timer
 			-- 1. close browser tabs running YouTube (not using full name for youtube short-urls)
 			-- 2. close leftover fullscreen spaces created by apps running in fullscreen
 			u.closeTabsContaining("youtu")
+			closeAllFinderWins()
 			u.quitApps(env.videoAndAudioApps)
 			closeFullscreenSpaces()
 		end)

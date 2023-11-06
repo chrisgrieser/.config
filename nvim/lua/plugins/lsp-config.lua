@@ -310,7 +310,7 @@ end
 -- PENDING
 vim.api.nvim_create_autocmd({ "FileType" }, {
 	-- stylua: ignore
-	pattern = { "C", "C++", "Rust", "Go", "Java", "Python", "C#", "JavaScript", "JSX", "TypeScript", "HTML", "CSS", "Kotlin", "Dart", "Lua" },
+	pattern = { "c", "cpp", "rust", "go", "java", "python", "javascript", "typescript", "html", "css", "kotlin", "dart", "lua" },
 	callback = function()
 		vim.defer_fn(
 			function()
