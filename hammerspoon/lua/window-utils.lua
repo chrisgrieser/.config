@@ -223,44 +223,9 @@ local function moveAllWinsToProjectorScreen()
 	end
 end
 
-local function verticalSplit()
-	-- Cince not using spaces for anything else, using its number to detect
-	-- whether there is a split or not
-	local noSplit = #hs.spaces.spacesForScreen(hs.mouse.getCurrentScreen()) == 1
-
-	local tryingToStartSplitFromNeovide = u.app("neovide")
-		and u.app("neovide"):isFrontmost()
-		and noSplit
-
-	if tryingToStartSplitFromNeovide then
-		hs.alert.show(
-			"Neovide does not support macOS window options."
-				.. "\n\nStart the split the other different app."
-		)
-		return
-	end
-
-	if noSplit then
-		-- unhide all windows, so they are displayed as selection for the second window
-		for _, win in pairs(hs.window.allWindows()) do
-			local app = win:application()
-			if app and app:isHidden() then app:unhide() end
-		end
-
-		hs.application
-			.frontmostApplication()
-			:selectMenuItem { "Window", "Tile Window to Right of Screen" }
-	else
-		-- un-fullscreen both windows
-		for _, win in pairs(hs.window.allWindows()) do
-			if win:isFullScreen() then win:setFullScreen(false) end
-		end
-	end
-end
-
 --------------------------------------------------------------------------------
+
 -- Triggers: Hotkeys & URI Scheme
-u.hotkey(u.hyper, "V", verticalSplit)
 u.hotkey(u.hyper, "N", moveWinToNextDisplay)
 u.hotkey({ "ctrl" }, "space", controlSpaceAction) -- fn+space also bound to ctrl+space via Karabiner
 
