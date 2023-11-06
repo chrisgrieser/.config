@@ -273,31 +273,6 @@ local function setupAllLsps()
 	end
 end
 
-local function lspCurrentTokenHighlight()
-	vim.api.nvim_create_autocmd("LspAttach", {
-		callback = function(args)
-			local capabilities = vim.lsp.get_client_by_id(args.data.client_id).server_capabilities
-			if not capabilities.documentHighlightProvider then return end
-
-			vim.api.nvim_create_autocmd("CursorHold", {
-				callback = vim.lsp.buf.document_highlight,
-				buffer = args.buf,
-			})
-			vim.api.nvim_create_autocmd("CursorMoved", {
-				callback = vim.lsp.buf.clear_references,
-				buffer = args.buf,
-			})
-		end,
-	})
-	vim.api.nvim_create_autocmd({ "VimEnter", "ColorScheme" }, {
-		callback = function()
-			vim.api.nvim_set_hl(0, "LspReferenceWrite", { underdashed = true }) -- definition
-			vim.api.nvim_set_hl(0, "LspReferenceRead", { underdotted = true }) -- reference
-			vim.api.nvim_set_hl(0, "LspReferenceText", {}) -- too much noise, as is underlines e.g. strings
-		end,
-	})
-end
-
 local function lspSignatureSettings()
 	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 		border = u.borderStyle,
@@ -321,7 +296,6 @@ return {
 		dependencies = "folke/neodev.nvim", -- ensures it's loaded before lua_ls
 		init = function()
 			setupAllLsps()
-			lspCurrentTokenHighlight()
 			lspSignatureSettings()
 		end,
 		config = function() require("lspconfig.ui.windows").default_options.border = u.borderStyle end,
