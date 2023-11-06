@@ -25,7 +25,6 @@ function httpRequest(url) {
 function run(argv) {
 	// CONFIG
 	const username = $.getenv("github_username");
-	// const includeArchived = $.getenv("include_archived") === 1;
 	const includeArchived = false;
 
 	// local repos

@@ -9,8 +9,12 @@ vim.keymap.set("n", "<leader>i", function()
 	vim.api.nvim_set_current_line(line)
 end, { buffer = true, desc = " Toggle !important", nowait = true })
 
+--------------------------------------------------------------------------------
+
+-- CONFIG read project-specific config
 -- HACK workaround for `opt.exrc` not working
-vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = "*.css",
-	callback = function() vim.opt_local.exrc = true end,
-})
+vim.defer_fn(function()
+	local configPath = vim.loop.cwd() .. "/.nvim.lua"
+	local projectConfigExists = vim.loop.fs_stat(configPath) ~= nil
+	if projectConfigExists then vim.cmd.source(configPath) end
+end, 1)
