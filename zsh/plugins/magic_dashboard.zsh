@@ -84,8 +84,10 @@ function _gitstatus {
 			-e $'s/\\(new\\)/\033[1;32mN    \033[0m/g' \
 			-e 's/ Bin /    /g' \
 			-e 's/ bytes$/ b/g' \
+			-Ee $'s_([^ ][^/\t|]*)(/)_\033[1;36m\\1\033[1;33m\\2\033[0m_g' \
+			-e 's/ \| Unmerged /   /'\
 			-e $'s/ \\|/ \033[1;30m│\033[0m/g' \
-			-Ee $'s|([^/\t]*)(/)|\033[1;36m\\1\033[1;33m\\2\033[0m|g' # path highlights
+
 		_separator
 	fi
 }
