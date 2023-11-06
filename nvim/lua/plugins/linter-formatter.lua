@@ -62,7 +62,6 @@ local dontInstall = {
 	"injected",
 	"ruff_format",
 	"ruff_fix",
-	"ast-grep", -- PENDING https://github.com/mason-org/mason-registry/pull/3332
 	"ast_grep", -- LSP name, pending mason-lsp-config PR
 }
 

@@ -1,4 +1,7 @@
-vim.v.oldfiles = vim.tbl_filter(function(path)
-	local ignore = path:find("%.log$") or vim.fs.basename(path) == "COMMIT_EDITMSG"
-	return not ignore
-end, vim.v.oldfiles)
+local function fff() print("hi") end
+
+vim.lsp.buf.document_symbol {
+	on_list = function(items)
+		vim.notify(vim.inspect(items))
+	end,
+}
