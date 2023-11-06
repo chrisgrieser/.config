@@ -91,7 +91,7 @@ local function cmpconfig()
 				end
 			end, { "i", "s" }),
 			-- Jumping to next location
-			["<D-j>"] = cmp.mapping(function(fallback)
+			["<D-j>"] = cmp.mapping(function(_)
 				if require("luasnip").locally_jumpable(1) then
 					require("luasnip").jump(1)
 				else
@@ -188,21 +188,10 @@ return {
 		"L3MON4D3/LuaSnip",
 		event = "InsertEnter",
 		config = function()
-			local types = require("luasnip.util.types")
 			-- DOCS https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#api-reference
 			require("luasnip").setup {
 				region_check_events = "CursorMoved", -- prevent <Tab> jumping back to a snippet after it has been left early
 				update_events = { "TextChanged", "TextChangedI" }, -- live updating of snippets
-				ext_opts = { -- DOCS https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#ext_opts
-					[types.choiceNode] = {
-						unvisited = { virt_text = { { "󰊖 ", "DiagnosticHint" } }, hl_mode = "combine" },
-						active = { virt_text = { { "󰊖 ", "DiagnosticHint" } }, hl_mode = "combine" },
-					},
-					-- $n
-					[types.insertNode] = {
-						unvisited = { virt_text = { { "⏽", "DiagnosticHint" } }, hl_mode = "combine" },
-					},
-				},
 			}
 
 			-- VS-code-style snippets

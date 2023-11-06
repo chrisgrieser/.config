@@ -62,7 +62,7 @@ local dontInstall = {
 	"injected",
 	"ruff_format",
 	"ruff_fix",
-	"ast_grep", -- LSP name, pending mason-lsp-config PR
+	"ast_grep", -- LSP name, PENDING https://github.com/williamboman/mason-lspconfig.nvim/pull/309
 }
 
 ---given the linter- and formatter-list of nvim-lint and conform.nvim, extract a
@@ -203,7 +203,7 @@ return {
 					else
 						require("conform").format {
 							lsp_fallback = false,
-							async = true,
+							async = false,
 							callback = vim.cmd.update,
 						}
 					end
