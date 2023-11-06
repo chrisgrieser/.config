@@ -51,6 +51,8 @@ opt.title = true
 opt.titlelen = 0 -- do not shorten title
 opt.titlestring = '%{expand("%:p")}'
 
+opt.exrc = true
+
 -- Motions & Editing
 opt.startofline = true -- motions like "G" also move to the first char
 opt.virtualedit = "block" -- visual-block mode can select beyond end of line
@@ -143,6 +145,9 @@ opt.listchars:append {
 	trail = " ",
 }
 
+--------------------------------------------------------------------------------
+-- AUTOCMDs
+
 -- no list chars in special buffers
 autocmd({ "BufNew", "BufReadPost" }, {
 	callback = function()
@@ -162,6 +167,14 @@ autocmd("FocusGained", {
 	callback = vim.cmd.checktime,
 })
 
+vim.api.nvim_create_autocmd("QuitPre", {
+	callback = function()
+		vim.v.oldfiles = vim.tbl_filter(function(path)
+			return vim.fn.filereadable(path) == 1
+		end)
+	end,
+})
+
 --------------------------------------------------------------------------------
 
 -- auto-nohl -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
@@ -176,7 +189,7 @@ vim.on_key(function(char)
 	local searchCancelled = (key == "<Esc>" and isCmdlineSearch)
 	if not (searchStarted or searchConfirmed or searchCancelled or isNormalMode) then return end
 	local searchMovement = vim.tbl_contains(searchMvKeys, key)
-	local hlSearchOn = vim.opt.hlsearch:get()
+	local hlSearchOn = vim.o.hlsearch
 
 	if (searchMovement or searchConfirmed or searchStarted) and not hlSearchOn then
 		vim.opt.hlsearch = true
