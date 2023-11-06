@@ -68,3 +68,5 @@ Lualine
 statusline
 Statusline
 UI
+rebase
+namespace
