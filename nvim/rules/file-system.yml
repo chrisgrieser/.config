@@ -1,0 +1,8 @@
+id: rename
+rule:
+  pattern: $FUNC("$PATH1", "$PATH2")
+  regex: fn\.rename
+fix: os.rename("$PATH1", "$PATH2")
+message: Use `os.rename` instead.
+severity: info
+language: Lua

@@ -63,6 +63,7 @@ local dontInstall = {
 	"ruff_format",
 	"ruff_fix",
 	"ast-grep", -- PENDING https://github.com/mason-org/mason-registry/pull/3332
+	"ast_grep", -- LSP name, pending mason-lsp-config PR
 }
 
 ---given the linter- and formatter-list of nvim-lint and conform.nvim, extract a
@@ -73,11 +74,12 @@ local dontInstall = {
 ---@param ignoreTools string[]
 ---@return string[] tools
 ---@nodiscard
-local function toolsToAutoinstall(myLinters, myFormatters, extraTools, ignoreTools)
+local function toolsToAutoinstall(myLinters, myFormatters, myLsps, extraTools, ignoreTools)
 	-- get all linters, formatters, & extra tools and merge them into one list
 	local linterList = vim.tbl_flatten(vim.tbl_values(myLinters))
 	local formatterList = vim.tbl_flatten(vim.tbl_values(myFormatters))
 	local tools = vim.list_extend(linterList, formatterList)
+	vim.list_extend(tools, myLsps)
 	vim.list_extend(tools, extraTools)
 
 	-- only unique tools
@@ -242,8 +244,8 @@ return {
 		},
 		dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
 		config = function()
-			local myTools = toolsToAutoinstall(linters, formatters, extraInstalls, dontInstall)
-			vim.list_extend(myTools, vim.g.myLsps)
+			local myTools =
+				toolsToAutoinstall(linters, formatters, vim.g.myLsps, extraInstalls, dontInstall)
 
 			require("mason-tool-installer").setup {
 				ensure_installed = myTools,

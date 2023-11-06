@@ -1,7 +1,7 @@
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
-vim.g.myLsps = {
+vim.g.myLsps = { -- variable used by MasonToolInstaller
 	"lua_ls",
 	"yamlls",
 	"jsonls",
@@ -17,6 +17,7 @@ vim.g.myLsps = {
 	"taplo", -- toml
 	"html",
 	"ltex", -- languagetool
+	"ast_grep", -- custom, ast-based linter
 }
 
 --------------------------------------------------------------------------------
@@ -305,25 +306,6 @@ local function lspSignatureSettings()
 	-- vim.lsp.handlers["textDocument/hover"] =
 	-- vim.lsp.with(vim.lsp.handlers.hover, { border = u.borderStyle })
 end
-
---------------------------------------------------------------------------------
--- PENDING
-vim.api.nvim_create_autocmd({ "FileType" }, {
-	-- stylua: ignore
-	pattern = { "c", "cpp", "rust", "go", "java", "python", "javascript", "typescript", "html", "css", "kotlin", "dart", "lua" },
-	callback = function()
-		vim.defer_fn(
-			function()
-				vim.lsp.start {
-					name = "ast-grep",
-					cmd = { "ast-grep", "lsp" },
-					root_dir = vim.fs.dirname(vim.fs.find({ "sgconfig.yml" }, { upward = true })[1]),
-				}
-			end,
-			1
-		)
-	end,
-})
 
 --------------------------------------------------------------------------------
 
