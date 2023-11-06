@@ -1,6 +1,4 @@
--- https://neovim.io/doc/user/lsp.html#vim.lsp.start()
-vim.lsp.start {
-	name = "ast-grep",
-	cmd = { "ast-grep", "lsp" },
-	root_dir = vim.fs.dirname(vim.fs.find({ "sgconfig.yml" }, { upward = true })[1]),
-}
+vim.v.oldfiles = vim.tbl_filter(function(path)
+	local ignore = path:find("%.log$") or vim.fs.basename(path) == "COMMIT_EDITMSG"
+	return not ignore
+end, vim.v.oldfiles)

@@ -167,11 +167,13 @@ autocmd("FocusGained", {
 	callback = vim.cmd.checktime,
 })
 
-vim.api.nvim_create_autocmd("QuitPre", {
+-- remove log files and commit messages from oldfiles
+autocmd("ExitPre", {
 	callback = function()
 		vim.v.oldfiles = vim.tbl_filter(function(path)
-			return vim.fn.filereadable(path) == 1
-		end)
+			local ignore = path:find("%.log$") or vim.fs.basename(path) == "COMMIT_EDITMSG"
+			return not ignore
+		end, vim.v.oldfiles)
 	end,
 })
 

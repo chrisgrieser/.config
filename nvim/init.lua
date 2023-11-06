@@ -1,12 +1,7 @@
 -- If nvim was opened w/o argument, re-open the first oldfile that exists
 vim.defer_fn(function()
 	if vim.fn.argc() > 0 then return end
-	for _, file in ipairs(vim.v.oldfiles) do
-		if vim.loop.fs_stat(file) and not file:find("COMMIT_EDITMSG$") then
-			vim.cmd.edit(file)
-			return
-		end
-	end
+	vim.cmd.edit(vim.v.oldfiles[1])
 end, 1)
 
 vim.g.mapleader = ","
