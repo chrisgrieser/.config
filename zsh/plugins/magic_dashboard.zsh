@@ -69,8 +69,7 @@ function _gitstatus {
 		local unstaged staged
 		unstaged=$(git diff --color="always" --compact-summary --stat | sed -e '$d')
 		staged=$(git diff --staged --color="always" --compact-summary --stat | sed -e '$d' \
-			-e $'s/^ / \033[1;35m \033[0m\t/') # add marker for staged files
-		tabs -4                              # set tabwidth to 4 for stage marker (require for regex later)
+			-e $'s/^ / \033[1;35m \033[0m/') # add marker for staged files
 		local diffs=""
 		if [[ -n "$unstaged" && -n "$staged" ]]; then
 			diffs="$unstaged\n$staged"
@@ -84,10 +83,9 @@ function _gitstatus {
 			-e $'s/\\(new\\)/\033[1;32mN    \033[0m/g' \
 			-e 's/ Bin /    /g' \
 			-e 's/ bytes$/ b/g' \
-			-Ee $'s_([^ ][^/\t|]*)(/)_\033[1;36m\\1\033[1;33m\\2\033[0m_g' \
-			-e $'s/ | Unmerged /   /'\
-			-e $'s/ \\|/ \033[1;30m│\033[0m/g' \
-
+			-e $'s/ \\| Unmerged /  \033[1;31m  \033[0m /'\
+			-Ee $'s_([^/ ]*)(/)_\033[1;36m\\1\033[1;33m\\2\033[0m_g' \
+			-e $'s/ \\|/ \033[1;30m│\033[0m/g'
 		_separator
 	fi
 }
