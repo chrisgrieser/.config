@@ -9,6 +9,7 @@ alias ....=" z ../../.."
 alias r=' exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
 alias q=' exit'
 alias c='command'
+alias b='bat'
 
 # added verbosity
 alias mv='mv -v'
