@@ -18,6 +18,9 @@ alias auto-rebase="git -c sequence.editor=: rebase --interactive --autosquash" #
 alias unshallow="git fetch --unshallow"                                        # make shallow clone complete again
 alias g.='cd "$(git rev-parse --show-toplevel)"'                               # goto git root
 
+# remote info
+alias grem='git remote -v && echo -n "\`gh\` default: " && gh repo set-default --view'
+
 alias gi='gh issue list --state=open'
 alias gI='gh issue list --state=closed'
 alias pr='gh pr create --web --fill'
