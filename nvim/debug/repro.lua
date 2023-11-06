@@ -5,18 +5,6 @@ end
 --------------------------------------------------------------------------------
 
 local plugins = {
-	{ -- symbols sibebar and search
-		"stevearc/aerial.nvim",
-		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
-		keys = {
-			{ "<C-1>", "<cmd>AerialToggle<CR>", desc = "󰒕 Symbols Sidebar" },
-		},
-		config = function()
-			require("aerial").setup {
-				autojump = true,
-			}
-		end,
-	},
 }
 
 --------------------------------------------------------------------------------
@@ -45,3 +33,5 @@ vim.opt.guifont = "JetBrainsMonoNL Nerd Font:h25.2"
 vim.opt.signcolumn = "yes:1"
 
 --------------------------------------------------------------------------------
+
+vim.opt.exrc = true
