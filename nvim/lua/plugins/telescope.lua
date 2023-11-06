@@ -137,14 +137,13 @@ local function gitDiffStatPreviewer()
 	}
 end
 
--- color parent as comment
+-- HACK color parent as comment
+-- CAVEAT interferes with other Telescope Results that display for spaces
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "TelescopeResults",
 	callback = function()
-		vim.fn.matchadd("TelescopeParent", "\t.*$")
+		vim.fn.matchadd("TelescopeParent", "    .*$")
 		vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
-		vim.fn.matchadd("DirSep", "/")
-		vim.api.nvim_set_hl(0, "DirSep", { link = "Directory" })
 	end,
 })
 
@@ -158,7 +157,7 @@ local function pathDisplay(_, path)
 	local parent = vim.fs.dirname(path)
 	if parent == "." then return tail end
 	local parentDisplay = #parent > 20 and vim.fs.basename(parent) or parent
-	return string.format("%s\t\t%s", tail, parentDisplay) -- parent colored via autocmd above
+	return string.format("%s    %s", tail, parentDisplay) -- parent colored via autocmd above
 end
 
 --------------------------------------------------------------------------------
