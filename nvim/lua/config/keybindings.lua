@@ -234,5 +234,4 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "qf", "help" },
 	callback = function() vim.keymap.set("n", "q", cmd.close, { buffer = true, nowait = true }) end,
 })
-
 --------------------------------------------------------------------------------

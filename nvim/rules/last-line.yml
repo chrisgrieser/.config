@@ -1,7 +1,7 @@
 id: last-line
 rule:
-  pattern: $FUNC("$")
-  regex: fn\.line # so it matches `fn.line` as well as `vim.fn.line`
+  pattern: $FUNC("$STR")
+  regex: fn\.line\("\$"\)
 fix: vim.api.nvim_buf_line_count(0)
 message: Use `vim.api.nvim_buf_line_count(0)` instead.
 severity: info
