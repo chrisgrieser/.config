@@ -69,7 +69,7 @@ function _gitstatus {
 		local unstaged staged
 		unstaged=$(git diff --color="always" --compact-summary --stat | sed -e '$d')
 		staged=$(git diff --staged --color="always" --compact-summary --stat | sed -e '$d' \
-			-e $'s/^ / \033[1;35m \033[0m/') # add marker for staged files
+			-e $'s/^ /\033[1;35m  \033[0m/') # add marker for staged files
 		local diffs=""
 		if [[ -n "$unstaged" && -n "$staged" ]]; then
 			diffs="$unstaged\n$staged"
