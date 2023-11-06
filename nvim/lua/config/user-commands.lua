@@ -39,3 +39,15 @@ end, {
 })
 
 --------------------------------------------------------------------------------
+
+-- reload lua config
+vim.api.nvim_create_user_command(
+	"DataDir",
+	function() vim.fn.system{"open", vim.fn.stdpath("data")} end,
+	{}
+)
+vim.api.nvim_create_user_command(
+	"StateDir",
+	function() vim.fn.system{"open", vim.fn.stdpath("state")} end,
+	{}
+)
