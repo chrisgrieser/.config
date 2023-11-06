@@ -212,13 +212,7 @@ return {
 					if opts.kind == "codeaction" then return { builtin = { relative = "cursor" } } end
 
 					-- complex selectors: use telescope
-					local useTelescope = {
-						"tinygit.githubIssue",
-						"tinygit.pickaxeDiff",
-						"tinygit.fixupCommit",
-						"mason.ui.language-filter",
-					}
-					if vim.tbl_contains(useTelescope, opts.kind) then
+					if opts.kind == "mason.ui.language-filter" or opts.kind:find("^tinygit%.") then
 						return { backend = "telescope" }
 					end
 				end,
