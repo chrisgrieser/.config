@@ -63,3 +63,7 @@ stylelint
 shellcheck
 fixup
 Fixup
+lspProgress
+Lualine
+statusline
+Statusline
