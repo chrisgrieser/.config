@@ -85,7 +85,7 @@ function _gitstatus {
 			-e 's/ Bin /    /g' \
 			-e 's/ bytes$/ b/g' \
 			-Ee $'s_([^ ][^/\t|]*)(/)_\033[1;36m\\1\033[1;33m\\2\033[0m_g' \
-			-e 's/ \| Unmerged /   /'\
+			-e $'s/ | Unmerged /   /'\
 			-e $'s/ \\|/ \033[1;30m│\033[0m/g' \
 
 		_separator
