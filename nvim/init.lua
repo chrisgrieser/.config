@@ -1,7 +1,12 @@
 -- If nvim was opened w/o argument, re-open the first oldfile that exists
 vim.defer_fn(function()
 	if vim.fn.argc() > 0 then return end
-	vim.cmd.edit(vim.v.oldfiles[1])
+	for _, file in ipairs(vim.v.oldfiles) do
+		if vim.loop.fs_stat(file) then
+			vim.cmd.edit(file)
+			return
+		end
+	end
 end, 1)
 
 vim.g.mapleader = ","
@@ -15,7 +20,7 @@ vim.g.maplocalleader = "ö"
 local function safeRequire(module)
 	local success, result = pcall(require, module)
 	if success then return end
-	vim.defer_fn( -- defer to so notification plugins are loaded before
+	vim.defer_fn( -- defer so notification plugins are loaded before
 		function() vim.notify(("Error loading %s\n%s"):format(module, result), vim.log.levels.ERROR) end,
 		1
 	)
@@ -48,7 +53,8 @@ if vim.version().major == 0 and vim.version().minor >= 10 then
 		- ftAbbr & abbreviations.lua: vim.keymap.set('ia', lhs, rhs, { buffer = true })
 		- inlay hints setup: https://www.reddit.com/r/neovim/comments/16tmzkh/comment/k2gpy16/?context=3
 		- change lsp-signature to inline hint
-		- vim.snippet https://www.reddit.com/r/neovim/comments/17cwptz/comment/k5uoswd/?utm_source=share&utm_medium=web2x&context=3
+		- vim.snippet https://www.reddit.com/r/neovim/comments/17cwptz/comment/k5uoswd/?context=3
+		- exrc https://www.reddit.com/r/neovim/comments/17oa85c/comment/k827hts/?context=3
 	]]
 	vim.notify(todo)
 end

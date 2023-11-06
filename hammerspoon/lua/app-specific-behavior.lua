@@ -52,7 +52,8 @@ end):start()
 ---pseudo-maximized -> show right sidebar
 ---max -> hide right sidebars (assuming split)
 ---requires: Obsidian Advanced URI plugin with `eval` being enabled
-M.wf_obsidanMoved = wf.new("Obsidian"):subscribe(wf.windowMoved, function(obsiWin)
+---@param obsiWin hs.window
+local function autoToggleObsidianSidebar(obsiWin)
 	if #u.app("Obsidian"):allWindows() > 1 then return end -- prevent popout window resizing to affect sidebars
 
 	local relObsiWinWidth = obsiWin:size().w / obsiWin:screen():frame().w
@@ -60,7 +61,11 @@ M.wf_obsidanMoved = wf.new("Obsidian"):subscribe(wf.windowMoved, function(obsiWi
 	u.openLinkInBg(
 		"obsidian://advanced-uri?eval=this.app.workspace.rightSplit." .. modeRight .. "%28%29"
 	)
-end)
+end
+
+M.wf_obsidanMoved = wf.new("Obsidian")
+	:subscribe(wf.windowMoved, autoToggleObsidianSidebar)
+	:subscribe(wf.windowCreated, autoToggleObsidianSidebar) -- restarts
 
 --------------------------------------------------------------------------------
 -- FINDER
