@@ -33,12 +33,6 @@ local function cmpconfig()
 	local cmp = require("cmp")
 	local compare = require("cmp.config.compare")
 
-	local function onlyWhitespaceBefCursor()
-		local col = vim.api.nvim_win_get_cursor(0)[2]
-		local charsBefore = vim.api.nvim_get_current_line():sub(1, col)
-		return charsBefore:match("^%s*$") ~= nil
-	end
-
 	cmp.setup {
 		snippet = {
 			expand = function(args) require("luasnip").lsp_expand(args.body) end,
@@ -75,9 +69,15 @@ local function cmpconfig()
 
 			-- Next item, or trigger completion, or insert normal tab
 			["<Tab>"] = cmp.mapping(function(fallback)
+				local function onlyWhitespaceBefCursor()
+					local col = vim.api.nvim_win_get_cursor(0)[2]
+					local charsBefore = vim.api.nvim_get_current_line():sub(1, col)
+					return charsBefore:match("^%s*$") ~= nil
+				end
+
 				if cmp.visible() then
 					cmp.select_next_item()
-				elseif not onlyWhitespaceBefCursor() then
+				elseif not onlyWhitespaceBefCursor() or vim.tbl_contains({"yaml", "json"}, vim.bo.ft) then
 					cmp.complete()
 				else
 					fallback()
@@ -91,13 +91,13 @@ local function cmpconfig()
 				end
 			end, { "i", "s" }),
 			-- Jumping to next location
-			["<D-j>"] = cmp.mapping(function(_)
+			["<D-j>"] = cmp.mapping(function(fallback)
 				if require("luasnip").locally_jumpable(1) then
 					require("luasnip").jump(1)
 				else
-					vim.notify("No more jumps.", vim.log.levels.WARN, { title = "Luasnip" })
+					fallback() -- multi-cursor, when in normal mode
 				end
-			end, { "i", "s" }),
+			end, { "i", "s", "n" }),
 		},
 		formatting = {
 			fields = { "abbr", "menu", "kind" }, -- order of the fields
@@ -164,7 +164,6 @@ local function cmpconfig()
 	})
 end
 
-
 --------------------------------------------------------------------------------
 
 return {
@@ -201,10 +200,6 @@ return {
 					},
 					-- $n
 					[types.insertNode] = {
-						unvisited = { virt_text = { { "⏽", "DiagnosticHint" } }, hl_mode = "combine" },
-					},
-					-- $0
-					[types.exitNode] = {
 						unvisited = { virt_text = { { "⏽", "DiagnosticHint" } }, hl_mode = "combine" },
 					},
 				},

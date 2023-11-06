@@ -8,3 +8,9 @@ vim.keymap.set("n", "<leader>i", function()
 	end
 	vim.api.nvim_set_current_line(line)
 end, { buffer = true, desc = " Toggle !important", nowait = true })
+
+-- HACK workaround for `opt.exrc` not working
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = "*.css",
+	callback = function() vim.opt_local.exrc = true end,
+})

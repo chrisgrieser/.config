@@ -1,0 +1,8 @@
+id: file-existence-check
+rule:
+  pattern: $FUNC($PATH)
+  regex: fn\.filereadable # so it matches `fn.line` as well as `vim.fn.line`
+fix: vim.loop.fs_stat($PATH)
+message: Use `vim.loop.fs_stat`, which will be nil if file does not exist.
+severity: info
+language: Lua
