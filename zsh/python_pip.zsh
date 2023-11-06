@@ -3,6 +3,9 @@
 # export PYTHONSTARTUP="$HOME/.config/python/pythonrc.py"
 export IPYTHONDIR="$HOME/.config/ipython"
 
+# shellcheck disable=2139
+alias conda="$(brew --prefix)/anaconda3/bin/conda"
+
 #───────────────────────────────────────────────────────────────────────────────
 
 alias ip="ipython"

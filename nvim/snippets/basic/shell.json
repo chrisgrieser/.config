@@ -45,8 +45,8 @@
 		"body": "${${1:var}//${2:search}/${3:replace}}",
 		"description": "one slash for single substitution, two for global substitution"
 	},
-	"PATH": {
-		"prefix": "PATH",
+	"export PATH": {
+		"prefix": "export PATH",
 		"body": "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:\\$PATH",
 		"description": "Extends PATH in a way that homebrew installed CLIs are recognized in ARM and Intel Macs."
 	},

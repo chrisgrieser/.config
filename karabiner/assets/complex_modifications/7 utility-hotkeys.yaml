@@ -68,4 +68,5 @@ rules:
               - ^com\.tinyspeck\.slackmacgap$
               - ^com\.brave\.Browser$ # useful for reddit
               - ^com\.runningwithcrayons\.Alfred-Preferences$
+              - ^com\.iconfactory\.Tot$
   #─────────────────────────────────────────────────────────────────────────────

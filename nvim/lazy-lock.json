@@ -86,7 +86,7 @@
   "telescope-sg": { "branch": "main", "commit": "2e770cda77cb893035a5db5e67ea3ff45e6fc458" },
   "telescope-symbols.nvim": { "branch": "master", "commit": "f2060117d965df4a626f068a4ebbd8ee051aa076" },
   "telescope.nvim": { "branch": "master", "commit": "20bf20500c95208c3ac0ef07245065bf94dcab15" },
-  "text-case.nvim": { "branch": "main", "commit": "839be0a0d356ba348ec48da263b574c0abb4d8cb" },
+  "text-case.nvim": { "branch": "main", "commit": "826908c793f90cf89dd6db784e6da79145bd4b56" },
   "toggleterm.nvim": { "branch": "main", "commit": "c80844fd52ba76f48fabf83e2b9f9b93273f418d" },
   "tokyonight.nvim": { "branch": "main", "commit": "f247ee700b569ed43f39320413a13ba9b0aef0db" },
   "treesj": { "branch": "main", "commit": "070e6761d0b11a55446d988a69908f7a0928dbab" },
