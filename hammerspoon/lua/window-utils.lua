@@ -52,7 +52,7 @@ end
 ---@param win hs.window
 ---@param pos hs.geometry
 function M.moveResize(win, pos)
-	-- guard clauses
+	-- GUARD
 	local appsToIgnore = { "Transmission", "Hammerspoon", env.tickerApp }
 	if
 		not win

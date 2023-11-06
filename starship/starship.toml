@@ -38,7 +38,7 @@ error_symbol = " [󰇷 ](bold red)"
 vimcmd_symbol = " [ ](bold cyan)"
 
 [sudo]
-style = 'fg:green bg:black'
+style = 'fg:yellow bg:black'
 symbol = "  "
 format = "[$symbol]($style)"
 disabled = false

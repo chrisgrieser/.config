@@ -1,3 +1,7 @@
+# defines location of the rest of the zsh config
+export ZDOTDIR="$HOME/.config/zsh"
+#───────────────────────────────────────────────────────────────────────────────
+
 # Directories
 export VAULT_PATH="$HOME/main-vault"
 export PASSWORD_STORE_DIR="$HOME/.password-store" # default value, but still needed for bkp script
@@ -9,11 +13,6 @@ export LOCAL_REPOS="$HOME/Repos"
 function pandoc() {
 	command pandoc --data-dir="$HOME/.config/pandoc" "$@"
 }
-
-#───────────────────────────────────────────────────────────────────────────────
-
-# defines location of the rest of the zsh config
-export ZDOTDIR="$HOME/.config/zsh"
 
 #───────────────────────────────────────────────────────────────────────────────
 # APPS
