@@ -204,7 +204,7 @@ return {
 				},
 				telescope = {
 					layout_config = {
-						horizontal = { width = 0.7, height = 0.55 },
+						horizontal = { width = 0.8, height = 0.55 },
 					},
 				},
 				get_config = function(opts)
@@ -212,9 +212,9 @@ return {
 					if opts.kind == "codeaction" then return { builtin = { relative = "cursor" } } end
 
 					-- complex selectors: use telescope
-					-- if opts.kind == "mason.ui.language-filter" or opts.kind:find("^tinygit%.") then
-					-- 	return { backend = "telescope" }
-					-- end
+					if opts.kind == "mason.ui.language-filter" or opts.kind:find("^tinygit") then
+						return { backend = "telescope" }
+					end
 				end,
 			},
 		},
