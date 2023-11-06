@@ -53,6 +53,7 @@ for remap, original in pairs(u.textobjRemaps) do
 end
 
 keymap("o", "k", 'i"', { desc = "󱡔 inner quote" })
+keymap("o", "K", 'a"', { desc = "󱡔 outer quote" })
 
 -- quick textobj operations
 keymap("n", "<Space>", '"_ciw', { desc = "󱡔 change word" })

@@ -44,6 +44,7 @@ safeRequire("lua.auto-quitter")
 safeRequire("lua.hardware-periphery")
 safeRequire("lua.pageup-pagedown-scroll")
 safeRequire("lua.weather-reminder")
+safeRequire("lua.vertical-split")
 
 -- app-specific
 safeRequire("lua.app-specific-behavior")
