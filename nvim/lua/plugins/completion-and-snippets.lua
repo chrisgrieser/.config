@@ -95,9 +95,9 @@ local function cmpconfig()
 				if require("luasnip").locally_jumpable(1) then
 					require("luasnip").jump(1)
 				else
-					fallback() -- multi-cursor, when in normal mode
+					vim.notify("No more jumps.", vim.log.levels.WARN, { title = "Luasnip" })
 				end
-			end, { "i", "s", "n" }),
+			end, { "i", "s" }),
 		},
 		formatting = {
 			fields = { "abbr", "menu", "kind" }, -- order of the fields
