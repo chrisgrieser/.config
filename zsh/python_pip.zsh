@@ -65,16 +65,15 @@ function cd() {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# 1. alias `pip update` to `pip3 install --upgrade`
+# 1. Prevent accidental installation outside of virtual env
 # 2. alias `pip uninstall` to `pip-autoremove`
 # 3. other commands work as usual
 function pip() {
 	if [[ "$1" == "install" && -z "$VIRTUAL_ENV" ]]; then
-		echo "Are you sure you want to install outside of a virtual environment?"
-		read -rk 1 -p "Press any key to continue..."
-	elif [[ "$1" == "update" ]]; then
-		shift
-		pip3 install --upgrade "$@"
+		print "\033[1;33mAre you sure you want to install outside of a virtual environment? (y/n)\033[0m"
+		read -rk answer
+		if [[ "$answer" != "y" ]]; then return 2; fi
+		pip3 "$@"
 	elif [[ "$1" == "uninstall" ]] && [[ -z "$VIRTUAL_ENV" ]]; then
 		if ! command -v pip-autoremove &>/dev/null; then print "\033[1;33mpip-autoremove not installed.\033[0m" && return 1; fi
 		print "\033[1;34mUsing pip-autoremove\033[0m"

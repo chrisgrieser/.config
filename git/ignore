@@ -3,7 +3,7 @@
 *.icloud
 
 # Icon must end with two \r (^M in vim)
-Icon	
+Icon
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -12,6 +12,7 @@ node_modules
 venv
 .venv
 __pycache__
+.ipynb_checkpoints
 *.alfredworkflow
 *.dmg
 
