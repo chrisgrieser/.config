@@ -90,8 +90,11 @@ function pip() {
 # Lazy-load conda environment, to improve performance and also to prevent conda
 # taking over the prompt until it is needed
 function conda {
+	if [[ ! -x "$(command -v conda)" ]]; then print "\033[1;33mconda not installed.\033[0m" && return 1; fi
+	
 	unfunction conda
-	conda_prefix="$(brew --prefix)/anaconda3/bin" # change to your conda prefix
+	# change depending on where/hoow conda was installed
+	conda_prefix="$(brew --prefix)/anaconda3/bin" 
 
 	# setup snippet that `conda init zsh` adds to your `.zshrc`
 	__conda_setup="$("$conda_prefix/conda" 'shell.zsh' 'hook' 2> /dev/null)"
