@@ -28,10 +28,13 @@ return {
 				spellcheck = true,
 				openReferencedIssue = true,
 			},
-			searchFileHistory = {
-				diffPopupBorder = require("config.utils").borderStyle,
-				diffPopupWidth = 0.9,
-				diffPopupHeight = 0.9,
+			historySearch = {
+				diffPopup = {
+					width = 0.9,
+					height = 0.9,
+					border = require("config.utils").borderStyle,
+				},
+				autoUnshallowIfNeeded = true,
 			},
 		},
 	},
