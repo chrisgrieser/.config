@@ -33,7 +33,7 @@ function relativeDate(absoluteDate) {
 	let delta;
 	if (deltaSecs < 60) {
 		unit = "second";
-		delta = deltaSecs;
+		delta = Math.ceil(deltaSecs);
 	} else if (deltaSecs < 60 * 60) {
 		unit = "minute";
 		delta = Math.ceil(deltaSecs / 60);
