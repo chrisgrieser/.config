@@ -204,7 +204,7 @@ return {
 				},
 				telescope = {
 					layout_config = {
-						horizontal = { width = { 0.8, max = 80 }, height = 0.55 },
+						horizontal = { width = { 0.8, max = 75 }, height = 0.55 },
 					},
 				},
 				get_config = function(opts)
