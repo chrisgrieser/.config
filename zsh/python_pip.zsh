@@ -10,6 +10,7 @@ alias pu="pip uninstall"
 alias pi="pip install"
 alias pl="pip list --not-required"
 alias py="python3"
+alias jn="jupyter notebook"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -49,9 +50,9 @@ function auto_venv() {
 	local venv_path
 	venv_path=$(search_venv_path)
 
-	if [[ -n "$VIRTUAL_ENV" && -z "$venv_path" ]] ; then
+	if [[ -n "$VIRTUAL_ENV" && -z "$venv_path" ]]; then
 		deactivate
-	elif [[ -z "$VIRTUAL_ENV" && -n "$venv_path" ]] ; then
+	elif [[ -z "$VIRTUAL_ENV" && -n "$venv_path" ]]; then
 		# shellcheck disable=1091
 		source "$venv_path/bin/activate"
 	fi
@@ -68,7 +69,10 @@ function cd() {
 # 2. alias `pip uninstall` to `pip-autoremove`
 # 3. other commands work as usual
 function pip() {
-	if [[ "$1" == "update" ]]; then
+	if [[ "$1" == "install" && -z "$VIRTUAL_ENV" ]]; then
+		echo "Are you sure you want to install outside of a virtual environment?"
+		read -rk 1 -p "Press any key to continue..."
+	elif [[ "$1" == "update" ]]; then
 		shift
 		pip3 install --upgrade "$@"
 	elif [[ "$1" == "uninstall" ]] && [[ -z "$VIRTUAL_ENV" ]]; then
@@ -80,12 +84,3 @@ function pip() {
 		pip3 "$@"
 	fi
 }
-
-#───────────────────────────────────────────────────────────────────────────────
-
-# from python course
-anaconda_prefix="$(brew --prefix)/anaconda3/bin"
-export PATH="$anaconda_prefix":$PATH
-
-alias jn="jupyter notebook"
-
