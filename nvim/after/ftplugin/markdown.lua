@@ -54,6 +54,9 @@ end, { desc = " SearchLink (ddgr)", buffer = true })
 --------------------------------------------------------------------------------
 -- GUI KEYBINDINGS
 
+-- cmd+u: markdown link
+keymap("n", "<D-u>", "mzI- <Esc>`z", { desc = " Bullet List", buffer = true })
+
 -- cmd+k: markdown link
 keymap("n", "<D-k>", "bi[<Esc>ea]()<Esc>hp", { desc = "  Link", buffer = true })
 keymap("x", "<D-k>", "<Esc>`<i[<Esc>`>la]()<Esc>hp", { desc = "  Link", buffer = true })
