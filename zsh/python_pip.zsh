@@ -91,10 +91,12 @@ function pip() {
 # taking over the prompt until it is needed
 function conda {
 	unfunction conda
+	conda_prefix="$(brew --prefix)/anaconda3/bin" # change to your conda prefix
 
 	# setup snippet that `conda init zsh` adds to your `.zshrc`
-	__conda_setup="$("$(brew --prefix)/anaconda3/bin/conda" 'shell.zsh' 'hook' 2> /dev/null)"
+	__conda_setup="$("$conda_prefix/conda" 'shell.zsh' 'hook' 2> /dev/null)"
 	eval "$__conda_setup"
+	export PATH="$conda_prefix":$PATH
 
 	conda "$@"
 }
