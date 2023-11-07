@@ -204,10 +204,12 @@ return {
 				},
 				telescope = {
 					layout_config = {
-						horizontal = { width = 0.8, height = 0.55 },
+						horizontal = { width = { 0.8, max = 80 }, height = 0.55 },
 					},
 				},
 				get_config = function(opts)
+					if not opts.kind then return end
+
 					-- code actions: show at cursor
 					if opts.kind == "codeaction" then return { builtin = { relative = "cursor" } } end
 
