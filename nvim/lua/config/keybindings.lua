@@ -109,7 +109,7 @@ keymap(
 
 -- Spelling & Casing
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" }) -- works even with `spell=false`
-keymap("n", "~", "~h") -- don't move cursor, useful for vertical fixes
+keymap("n", "~", "~h") -- don't move cursor, useful for vertical changes
 
 -- Merging
 keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
@@ -233,6 +233,8 @@ keymap("i", "<D-e>", "``<Left>", { desc = "  Inline Code" })
 -- quick quitting
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "qf", "help" },
-	callback = function() vim.keymap.set("n", "q", cmd.close, { buffer = true, nowait = true }) end,
+	callback = function()
+		vim.keymap.set("n", "q", cmd.close, { buffer = true, nowait = true, desc = "Quit" })
+	end,
 })
 --------------------------------------------------------------------------------
