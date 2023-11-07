@@ -64,7 +64,7 @@ sketchybar \
 	--subscribe tot system_woke \
 	\
 	--add alias "Control Centre,AudioVideoModule" $first_row \
-	--set "Control Centre,AudioVideoModule" width=50 \
+	--set "Control Centre,AudioVideoModule" width=50 alias.scale=0.9 \
 	\
 	--add alias "$stats" $second_row \
 	alias.color="$font_color" \
