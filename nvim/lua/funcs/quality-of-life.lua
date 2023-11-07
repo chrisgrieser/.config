@@ -99,6 +99,7 @@ function M.openAtRegex101()
 	vim.cmd.normal { '"zya/', bang = false } -- yank outer regex
 	vim.cmd.normal { "vi/", bang = false } -- select inner regex for easy replacement
 
+	-- TODO use treesitter to get pattern and flags
 	local regex = vim.fn.getreg("z")
 	local pattern = regex:match("/(.*)/")
 	local flags = regex:match("/.*/(%l*)")
@@ -149,6 +150,7 @@ end
 --------------------------------------------------------------------------------
 
 function M.selectMake()
+	-- GUARD
 	local makefile = vim.loop.cwd() .. "/Makefile"
 	local fileExists = vim.loop.fs_stat(makefile)
 	if not fileExists then
@@ -163,7 +165,9 @@ function M.selectMake()
 	end
 
 	vim.ui.select(recipes, { prompt = " make" }, function(selection)
-		if selection then vim.cmd.lmake(selection) end
+		if not selection then return end
+		vim.cmd("silent! lmake")
+		vim.cmd.lmake(selection)
 	end)
 end
 

@@ -151,7 +151,10 @@ keymap(
 )
 
 -- MAKE
-keymap("n", "<leader>r", "<cmd>lmake<CR>", { desc = " Make" })
+keymap("n", "<leader>r", function ()
+	vim.cmd("silent! lmake")
+	vim.cmd.lmake()
+end, { desc = " Make" })
 keymap(
 	"n",
 	"<leader>R",
