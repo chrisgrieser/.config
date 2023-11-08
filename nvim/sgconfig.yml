@@ -1,2 +1,2 @@
 ruleDirs:
-  - ./rules
+  - ./nvim-api-linting

@@ -1,18 +1,22 @@
 # GENERAL SETTINGS
 
-# sets English everywhere, so that programs behave predictably
+# sets English everywhere, fixes encoding issues
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
-export LC_CTYPE="en_US.UTF-8" # fixes encoding issue when copying
+export LC_CTYPE="en_US.UTF-8" 
 
 # OPTIONS -- https://zsh.sourceforge.io/Doc/Release/Options.html
-setopt AUTO_CD              # pure directory = cd into it
+setopt AUTO_CD # pure directory = cd into it
 
 # comments in interactive mode (useful for copypasting)
 setopt INTERACTIVE_COMMENTS
 
-# when a pipe fails, whole command fails
-set -o pipefail
+# MATCHING / COMPLETION
+# case insensitive path-completion - https://scriptingosx.com/2019/07/moving-to-zsh-part-5-completions/
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
+
+# group commands
+zstyle ':completion:*:descriptions' format '%F{blue}%d%f'
 
 #───────────────────────────────────────────────────────────────────────────────
 # CLI/PLUGIN SETTINGS
@@ -62,7 +66,20 @@ export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=30
 # do not accept autosuggestion when using vim `A`
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}")
 
-# zsh-autocomplete
-zstyle ':completion:*:*:descriptions' format '%F{blue}%d%f'
-zstyle ':completion:*:descriptions' format '[%d]'
+#───────────────────────────────────────────────────────────────────────────────
 
+# ZSH-AUTOCOMPLETE
+# https://github.com/marlonrichert/zsh-autocomplete#configuration
+
+# tab to cycle suggestions
+# shellcheck disable=1087,2154
+bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
+# shellcheck disable=1087
+bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
+
+# return to select suggestion & execute
+bindkey -M menuselect '\r' .accept-line
+
+zstyle ':autocomplete:*' ignored-input 'z' # PENDING https://github.com/marlonrichert/zsh-autocomplete/issues/654
+zstyle ':autocomplete:*' ignored-input 'zz'
+zstyle ':autocomplete:*' ignored-input 'zi'
