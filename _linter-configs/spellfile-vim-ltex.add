@@ -76,3 +76,6 @@ ci
 autocmd
 yaml
 homebrew
+Numpy
+Mathlib
+numpy
