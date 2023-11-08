@@ -74,3 +74,5 @@ namespaces
 blockquotes
 ci
 autocmd
+yaml
+homebrew

@@ -3,7 +3,7 @@
 # sets English everywhere, fixes encoding issues
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
-export LC_CTYPE="en_US.UTF-8" 
+export LC_CTYPE="en_US.UTF-8"
 
 # OPTIONS -- https://zsh.sourceforge.io/Doc/Release/Options.html
 setopt AUTO_CD # pure directory = cd into it
@@ -80,6 +80,10 @@ bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
 # return to select suggestion & execute
 bindkey -M menuselect '\r' .accept-line
 
-zstyle ':autocomplete:*' ignored-input 'z' # PENDING https://github.com/marlonrichert/zsh-autocomplete/issues/654
+# PENDING https://github.com/marlonrichert/zsh-autocomplete/issues/654
+zstyle ':autocomplete:*' ignored-input 'z'
 zstyle ':autocomplete:*' ignored-input 'zz'
 zstyle ':autocomplete:*' ignored-input 'zi'
+
+# hide info message if there are no completions https://github.com/marlonrichert/zsh-autocomplete/discussions/513
+zstyle ':completion:*:warnings' format ""
