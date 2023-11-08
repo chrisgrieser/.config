@@ -166,7 +166,7 @@ rules:
         conditions: [*leader-active]
         to:
           - shell_command: source $HOME/.zshenv && open -a "$BROWSER_APP"
-          - { key_code: vk_none, hold_down_milliseconds: 50 }
+          - { key_code: vk_none, hold_down_milliseconds: 200 }
           - { key_code: t, modifiers: [shift, command] }
           - *deactivate-leader
           - *remove-notice

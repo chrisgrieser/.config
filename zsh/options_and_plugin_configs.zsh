@@ -5,11 +5,9 @@ export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 
-# OPTIONS -- https://zsh.sourceforge.io/Doc/Release/Options.html
+# DOCS https://zsh.sourceforge.io/Doc/Release/Options.html
 setopt AUTO_CD # pure directory = cd into it
-
-# comments in interactive mode (useful for copypasting)
-setopt INTERACTIVE_COMMENTS
+setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful for copypasting)
 
 # MATCHING / COMPLETION
 # case insensitive path-completion - https://scriptingosx.com/2019/07/moving-to-zsh-part-5-completions/
@@ -24,7 +22,7 @@ zstyle ':completion:*:descriptions' format '%F{blue}%d%f'
 export YSU_IGNORED_ALIASES=("bi" "pi") # often copypasted without alias
 export YSU_MESSAGE_POSITION="after"
 
-export FZF_DEFAULT_COMMAND='fd --hidden'
+export FZF_DEFAULT_COMMAND='fd'
 export FZF_DEFAULT_OPTS='
 	--color=hl:206,header::reverse --pointer=⟐ --prompt="❱ " --scrollbar=▐ --ellipsis=…  --marker=" +"
 	--scroll-off=5 --cycle --layout=reverse --height=90% --preview-window=border-left
@@ -83,4 +81,4 @@ bindkey -M menuselect '\r' .accept-line
 # hide info message if there are no completions https://github.com/marlonrichert/zsh-autocomplete/discussions/513
 zstyle ':completion:*:warnings' format ""
 
-zstyle ':autocomplete:*' ignored-input '[a-z]' # ignore single letter input
+zstyle ':autocomplete:*' ignored-input '[a-z]|[a-z][a-z]' # ignore single/two letter input

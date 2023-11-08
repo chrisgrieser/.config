@@ -60,9 +60,8 @@ function _list_files_here {
 	fi
 }
 
-# show changed files in a more informative way than normal `git status`
 function _gitstatus {
-	# show changed files in a more informative way than normal `git status`
+	# so new files show up in `git diff`
 	git ls-files --others --exclude-standard | xargs git add --intent-to-add
 
 	if [[ -n "$(git status --porcelain)" ]]; then
