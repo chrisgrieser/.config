@@ -61,7 +61,7 @@ serverConfigs.lua_ls = {
 				setType = true,
 				arrayIndex = "Disable",
 			},
-			workspace = { checkThirdParty = false }, -- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
+			workspace = { checkThirdParty = "Disable" }, -- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
 		},
 	},
 }
