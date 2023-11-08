@@ -4,12 +4,14 @@
 # REQUIRED must be loaded before completion setup
 FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
-# activate completions, also needed for ZSH auto suggestions & completions
-# must be loaded before plugins
-autoload compinit -Uz +X && compinit
-
-# Fix for Intel Mac, https://github.com/zsh-users/zsh-completions/issues/433#issuecomment-629539004
-[[ $(uname -p) == "i386" ]] && compaudit | xargs chmod g-w
+#───────────────────────────────────────────────────────────────────────────────
+# INFO deactivated when using zsh-autocomplete
+# # activate completions, also needed for ZSH auto suggestions & completions
+# # must be loaded before plugins
+# autoload compinit -Uz +X && compinit
+#
+# # Fix for Intel Mac, https://github.com/zsh-users/zsh-completions/issues/433#issuecomment-629539004
+# [[ $(uname -p) == "i386" ]] && compaudit | xargs chmod g-w
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -21,9 +23,12 @@ function safe_source() {
 	fi
 }
 
+safe_source "$(brew --prefix)/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
+
 # "fzf-tab needs to be loaded after compinit, but before plugins which will wrap
 # widgets, such as zsh-autosuggestions or fast-syntax-highlighting"
-safe_source "$ZDOTDIR/plugins/fzf-tab/fzf-tab.plugin.zsh"
+# safe_source "$ZDOTDIR/plugins/fzf-tab/fzf-tab.plugin.zsh"
+# safe_source "$ZDOTDIR/fzf-tab_and_completion_settings.zsh"
 
 # INFO `brew --prefix` ensures the right path is inserted on M1 as well as  non-M1 macs
 safe_source "$(brew --prefix)/share/zsh-you-should-use/you-should-use.plugin.zsh"

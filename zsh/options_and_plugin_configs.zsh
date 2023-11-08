@@ -61,3 +61,7 @@ export ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=30
 # do not accept autosuggestion when using vim `A`
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}")
+
+# zsh-autocomplete
+zstyle ':completion:*:*:descriptions' format '%F{blue}%d%f'
+
