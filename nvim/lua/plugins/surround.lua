@@ -34,10 +34,17 @@ local function surroundConfig()
 					target = "(/)().-(/)()",
 				},
 			},
-			[maps.func] = {
-				find = function()
-					return config.get_selection { motion = "a" .. maps.func }
+			[maps.codeblock] = {
+				add = function()
+					if vim.bo.ft ~= "markdown" then return { { "" }, { "" } } end
+					return {
+						{ "```", "" },
+						{ "", "```" },
+					}
 				end,
+			},
+			[maps.func] = {
+				find = function() return config.get_selection { motion = "a" .. maps.func } end,
 				delete = function()
 					local ft = vim.bo.filetype
 					local patt
@@ -87,9 +94,7 @@ local function surroundConfig()
 				delete = "^([^=%s]+%()().-(%))()$", -- https://github.com/kylechui/nvim-surround/blob/main/doc/nvim-surround.txt#L357
 			},
 			[maps.cond] = {
-				find = function()
-					return config.get_selection { motion = "a" .. maps.cond }
-				end,
+				find = function() return config.get_selection { motion = "a" .. maps.cond } end,
 				delete = function()
 					local ft = vim.bo.filetype
 					local patt
