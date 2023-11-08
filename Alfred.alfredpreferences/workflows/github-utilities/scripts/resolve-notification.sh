@@ -18,7 +18,7 @@ else
 	# DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#get-a-thread
 	if [[ -z "$api_url" ]]; then
 		# some notification types like ci-activity do not provide a thread
-		github_url="https://github.com/notifications"
+		github_url="https://github.com/notifications?query=is%3Aunread"
 	else
 		github_url=$(
 			curl -sL -H "Accept: application/vnd.github+json" \

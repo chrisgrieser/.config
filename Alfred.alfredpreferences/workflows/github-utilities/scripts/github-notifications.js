@@ -88,7 +88,7 @@ function run(argv) {
 				{
 					title: "No unread notifications.",
 					subtitle: "⏎: Open Notification Inbox at Github.",
-					arg: "https://github.com/notifications",
+					arg: "https://github.com/notifications?query=is%3Aunread",
 					variables: { mode: "direct-open" },
 					mods: {
 						cmd: { valid: false },
