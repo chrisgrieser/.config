@@ -2,7 +2,6 @@ CONFIG_FILES=(
 	load_plugins
 	options_and_plugin_configs
 	vim_mode_config
-	fzf-tab_and_completion_settings
 	terminal_utils
 	terminal_keybindings
 	aliases
@@ -15,9 +14,7 @@ CONFIG_FILES=(
 	python_pip
 	intro_messages
 )
-
-# shell integration for wezterm -- https://github.com/wez/wezterm/blob/main/assets/shell-integration/wezterm.sh
-[[ "$TERM_PROGRAM" == "WezTerm" ]] && CONFIG_FILES+=(semantic_prompts)
+[[ "$TERM_PROGRAM" == "WezTerm" ]] && CONFIG_FILES+=(semantic_prompts) # https://github.com/wez/wezterm/blob/main/assets/shell-integration/wezterm.sh
 [[ "$OSTYPE" =~ "darwin" ]] && CONFIG_FILES+=(mac_specific)
 
 #───────────────────────────────────────────────────────────────────────────────
