@@ -64,4 +64,5 @@ export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-a
 
 # zsh-autocomplete
 zstyle ':completion:*:*:descriptions' format '%F{blue}%d%f'
+zstyle ':completion:*:descriptions' format '[%d]'
 
