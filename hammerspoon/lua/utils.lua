@@ -258,5 +258,13 @@ function M.quitApps(appNames)
 	end
 end
 
+function M.closeAllFinderWins()
+	local finder = M.app("Finder")
+	if not finder then return end
+	for _, win in pairs(finder:allWindows()) do
+		win:close()
+	end
+end
+
 --------------------------------------------------------------------------------
 return M

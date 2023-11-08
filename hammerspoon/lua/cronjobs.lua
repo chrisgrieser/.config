@@ -64,14 +64,6 @@ M.timer_nightlyMaintenance = hs.timer
 --------------------------------------------------------------------------------
 -- SLEEP TIMER
 
-local function closeAllFinderWins()
-	local finder = u.app("Finder")
-	if not finder then return end
-	for _, win in pairs(finder:allWindows()) do
-		win:close()
-	end
-end
-
 local function closeFullscreenSpaces()
 	local allSpaces = hs.spaces.allSpaces()
 	if not allSpaces then return end
@@ -114,12 +106,12 @@ M.timer_sleepAutoVideoOff = hs.timer
 
 		u.runWithDelays(config.timeToReactSecs, function()
 			if hs.host.idleTime() < config.timeToReactSecs then return end
+			u.closeAllFinderWins()
 			u.notify("💤 SleepTimer triggered")
 
 			-- 1. close browser tabs running YouTube (not using full name for youtube short-urls)
 			-- 2. close leftover fullscreen spaces created by apps running in fullscreen
 			u.closeTabsContaining("youtu")
-			closeAllFinderWins()
 			u.quitApps(env.videoAndAudioApps)
 			closeFullscreenSpaces()
 		end)

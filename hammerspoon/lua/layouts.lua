@@ -57,6 +57,7 @@ local function workLayout()
 	setHigherBrightnessDuringDay()
 
 	-- close
+	u.closeAllFinderWins()
 	u.quitApps(env.videoAndAudioApps)
 	require("lua.private").closer()
 
