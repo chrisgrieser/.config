@@ -80,10 +80,7 @@ bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
 # return to select suggestion & execute
 bindkey -M menuselect '\r' .accept-line
 
-# PENDING https://github.com/marlonrichert/zsh-autocomplete/issues/654
-zstyle ':autocomplete:*' ignored-input 'z'
-zstyle ':autocomplete:*' ignored-input 'zz'
-zstyle ':autocomplete:*' ignored-input 'zi'
-
 # hide info message if there are no completions https://github.com/marlonrichert/zsh-autocomplete/discussions/513
 zstyle ':completion:*:warnings' format ""
+
+zstyle ':autocomplete:*' ignored-input '[a-z]' # ignore single letter input
