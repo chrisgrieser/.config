@@ -41,7 +41,7 @@ function _gitlog {
 	# INFO inserting ansi colors via sed requires leading $
 }
 
-function _list_files {
+function _list_files_here {
 	if [[ ! -x "$(command -v eza)" ]]; then print "\033[1;33mMagic Dashboard: \`eza\` not installed.\033[0m" && return 1; fi
 
 	local max_files_lines=${MAGIC_DASHBOARD_FILES_LINES:-6}
@@ -108,7 +108,7 @@ function _magic_dashboard {
 		_gitstatus
 	fi
 
-	_list_files
+	_list_files_here
 }
 
 #───────────────────────────────────────────────────────────────────────────────
