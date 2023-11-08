@@ -196,6 +196,9 @@ vnoremap ,b :toggleDevtools
 exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-title
 nnoremap ,c :enhanceUrlWithTitle
 
+exmap toggleAiCompletion obcommand obsidian-textgenerator-plugin:auto-suggest
+nnoremap ,a :toggleAiCompletion
+
 """"""""""""""""""""""""""""
 " Markdown/Obsidian specific
 """"""""""""""""""""""""""""
