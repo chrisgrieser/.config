@@ -1,2 +1,17 @@
+altair
+dask
+docopt
+fqdn
+h5py
+isoduration
+jsonpointer
+jupyter
+matplotlib
+openpyxl
 pip-autoremove
+scipy
+sympy
+uri-template
+vega-datasets
+webcolors
 wheel

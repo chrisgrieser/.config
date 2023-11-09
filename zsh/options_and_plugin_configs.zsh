@@ -34,6 +34,7 @@ export FZF_DEFAULT_OPTS='
 # extra spacing needed for WezTerm + Iosevka
 [[ "$TERM_PROGRAM" == "WezTerm" ]] && export EZA_ICON_SPACING=2
 export EZA_STRICT=1
+export EZA_ICONS_AUTO=1
 
 export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgrep-config"
 
