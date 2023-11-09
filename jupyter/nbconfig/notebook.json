@@ -1,0 +1,7 @@
+{
+  "load_extensions": {
+    "ruler/main": true,
+    "toc2/main": true,
+    "python-markdown/main": true
+  }
+}

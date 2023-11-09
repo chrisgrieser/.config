@@ -1,0 +1,18 @@
+{
+    // File Browser
+    // @jupyterlab/filebrowser-extension:browser
+    // File Browser settings.
+    // *****************************************
+
+    // Use checkboxes to select items
+    // Whether to show checkboxes next to files and folders
+    "showFileCheckboxes": true,
+
+    // Show file size column
+    // Whether to show the file size column
+    "showFileSizeColumn": true,
+
+    // When sorting by name, group notebooks before other files
+    // Whether to group the notebooks away from files
+    "sortNotebooksFirst": true
+}

@@ -10,11 +10,6 @@ export WD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub"
 export DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder"
 export LOCAL_REPOS="$HOME/Repos"
 
-# define pandoc data location (HACK since pandoc does not allow default data-dirs)
-function pandoc() {
-	command pandoc --data-dir="$HOME/.config/pandoc" "$@"
-}
-
 #───────────────────────────────────────────────────────────────────────────────
 # APPS
 export EDITOR=nvim
@@ -35,6 +30,15 @@ export TICKER_APP="Ivory"
 # NEOVIM
 # so linters managed by mason are generally available
 export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
+
+# JUPYTER
+export JUPYTER_CONFIG_DIR="$HOME/.config/jupyter" # https://docs.jupyter.org/en/latest/use/jupyter-directories.html#configuration-files
+
+# PANDOC
+# HACK since pandoc does not allow default data-dirs
+function pandoc() { command pandoc --data-dir="$HOME/.config/pandoc" "$@"; }
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # PASS
 export PASSWORD_STORE_CLIP_TIME=60

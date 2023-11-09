@@ -6,8 +6,7 @@ alias ....=" z ../../.."
 
 # utils
 # INFO leading space to ignore it in history due to HIST_IGNORE_SPACE
-# alias r=' exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
-alias r=' zsh --login' # alternative method of reloading?
+alias r=' exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
 alias q=' exit'
 alias c='command'
 alias b='bat'
@@ -22,7 +21,7 @@ alias grep='grep --ignore-case --color'
 alias ls='ls --color'
 alias which='which -a'           # show all
 alias mkdir='mkdir -p'           # create intermediate directories
-alias curl='curl --progress-bar --styled-output' # nicer progress bar
+alias curl='curl --progress-bar' # nicer progress bar
 alias make='make --silent --warn-undefined-variables'
 
 # eza
