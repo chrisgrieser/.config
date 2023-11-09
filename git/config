@@ -20,9 +20,6 @@
 	relativePaths = false # false = show path relative to git root, not to cwd
 [stash]
 	showIncludeUntracked = true
-[pull]
-	rebase = true # rebase changes instead of merging. 
-	# Alternative: --ff-only https://blog.sffc.xyz/post/185195398930/why-you-should-use-git-pull-ff-only
 [rebase]
 	autoSquash = true
 	autoStash = true
