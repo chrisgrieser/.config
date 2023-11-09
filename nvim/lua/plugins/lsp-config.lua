@@ -100,7 +100,7 @@ serverConfigs.pyright = {
 		-- Disable hover in favor of jedi
 		client.server_capabilities.hoverProvider = false
 
-		-- Automatically set python_path python_bin in `.venv`
+		-- Automatically set python_path to python binary in `.venv`
 		local venv_python = vim.loop.cwd() .. "/.venv/bin/python"
 		local noVenvPython = vim.loop.fs_stat(venv_python) == nil
 		if noVenvPython then return end

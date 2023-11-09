@@ -1,8 +1,17 @@
 {
-    // HTML Viewer
-    // @jupyterlab/htmlviewer-extension:plugin
-    // HTML Viewer settings.
-    // ***************************************
-
-
+    "toolbar": [
+        {
+            "name": "refresh",
+            "command": "",
+            "disabled": false,
+            "rank": 10
+        },
+        {
+            "name": "trust",
+            "command": "",
+            "disabled": false,
+            "rank": 20
+        }
+    ],
+    "trustByDefault": false
 }

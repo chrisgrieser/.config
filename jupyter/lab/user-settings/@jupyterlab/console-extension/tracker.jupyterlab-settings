@@ -4,8 +4,5 @@
     // Code Console settings.
     // *************************************
 
-    // Interaction mode
-    // Whether the console interaction mimics the notebook
-    // or terminal keyboard shortcuts.
-    "interactionMode": "terminal"
+
 }
