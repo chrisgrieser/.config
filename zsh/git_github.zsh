@@ -60,8 +60,8 @@ function gc {
 	fi
 
 	sleep 0.5 # prevent "Cannot rebase on multiple branches"
-	print "\033[1;36mPull: \033[0m" && git pull &&
-		print "\033[1;36mPush: \033[0m" && git push
+	printf "\033[1;36mPull: \033[0m" && git pull &&
+		printf "\033[1;36mPush: \033[0m" && git push
 }
 
 # select a recent commit to fixup *and* autosquash (not marked for next rebase!)
