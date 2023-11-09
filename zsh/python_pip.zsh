@@ -8,7 +8,7 @@ alias pu="pip uninstall"
 alias pi="pip install"
 alias pl="pip list --not-required"
 alias py="python3"
-alias jn="jupyter notebook"
+alias jn="europie notebook"
 
 #───────────────────────────────────────────────────────────────────────────────
 

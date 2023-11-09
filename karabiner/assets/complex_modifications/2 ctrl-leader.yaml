@@ -311,24 +311,6 @@ rules:
           - shell_command: open -a 'ReadKit' || open 'https://www.inoreader.com/all_articles'
           - *deactivate-leader
           - *remove-notice
-      # [i]: ipython
-      - type: basic
-        from: { key_code: i }
-        conditions: [*leader-active]
-        to:
-          - shell_command: |
-              PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ;
-              wezterm -e ipython || wezterm -e 'python3'
-          - *deactivate-leader
-          - *remove-notice
-      # [j]: jupyter lab (scratchpad)
-      - type: basic
-        from: { key_code: j }
-        conditions: [*leader-active]
-        to:
-          - shell_command: open "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Jupyter Notebooks/Scratch.ipynb"
-          - *deactivate-leader
-          - *remove-notice
       # [T]ransmission
       - type: basic
         from: { key_code: t, modifiers: { mandatory: [shift] } }
