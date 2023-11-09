@@ -145,6 +145,12 @@ M.wf_pdfReader = wf.new({ "Preview", "Highlights", "PDF Expert" }):subscribe(
 	function(newWin) wu.moveResize(newWin, wu.pseudoMax) end
 )
 
+-- open all windows pseudo-maximized
+M.wf_jupyterLab = wf.new("JupyterLab"):subscribe(
+	wf.windowCreated,
+	function(newWin) wu.moveResize(newWin, wu.pseudoMax) end
+)
+
 ------------------------------------------------------------------------------
 
 -- FIX window position not being remembered

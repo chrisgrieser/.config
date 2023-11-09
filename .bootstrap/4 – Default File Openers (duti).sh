@@ -29,6 +29,7 @@ duti -s "$videoplayerID" m4a all
 
 # code
 editorID="com.apple.automator.Neovide-Helper"
+duti -s "$editorID" jupyterlab-settings all
 duti -s "$editorID" diff all
 duti -s "$editorID" public.unix-executable all 
 duti -s "$editorID" scm all # treesitter

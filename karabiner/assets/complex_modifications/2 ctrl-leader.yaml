@@ -311,16 +311,22 @@ rules:
           - shell_command: open -a 'ReadKit' || open 'https://www.inoreader.com/all_articles'
           - *deactivate-leader
           - *remove-notice
-      # [j]: jupyter notebook as PWA
+      # [i]: ipython
+      - type: basic
+        from: { key_code: i }
+        conditions: [*leader-active]
+        to:
+          - shell_command: |
+              PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ;
+              wezterm -e ipython || wezterm -e 'python3'
+          - *deactivate-leader
+          - *remove-notice
+      # [j]: jupyter notebook
       - type: basic
         from: { key_code: j }
         conditions: [*leader-active]
         to:
-          - shell_command: |
-              export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ;
-              cd "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Jupyter Notebooks" || return 1
-              open -a "Jupyter Notebook" # PWA
-              jupyter notebook --no-browser
+          - shell_command: open "/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Jupyter Notebooks/Scratch.ipynb"
           - *deactivate-leader
           - *remove-notice
       # [T]ransmission

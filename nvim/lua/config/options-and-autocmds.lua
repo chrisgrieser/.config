@@ -12,6 +12,7 @@ vim.filetype.add {
 	extension = {
 		zsh = "sh",
 		sh = "sh", -- force sh-files with zsh-shebang to still get sh as filetype
+		["jupyterlab-settings"] = "json5",
 	},
 	filename = {
 		[".zshrc"] = "sh",

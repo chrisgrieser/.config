@@ -1,5 +1,6 @@
 # defines location of the rest of the zsh config
 export ZDOTDIR="$HOME/.config/zsh"
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # Directories
@@ -25,7 +26,7 @@ export MAIL_APP="Mimestream"
 export TICKER_APP="Ivory"
 
 #───────────────────────────────────────────────────────────────────────────────
-# Safe API keys outside the dotfile repo
+# Save API keys outside the dotfile repo
 # shellcheck disable=1091
 [[ -f "$DATA_DIR/private dotfiles/api-keys.sh" ]] && source "$DATA_DIR/private dotfiles/api-keys.sh"
 
@@ -35,7 +36,11 @@ export TICKER_APP="Ivory"
 # so linters managed by mason are generally available
 export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
 
-#───────────────────────────────────────────────────────────────────────────────
+# JUPYTER
+# https://jupyterlab.readthedocs.io/en/stable/user/directories.html#jupyterlab-user-settings-directory
+export JUPYTERLAB_SETTINGS_DIR="$HOME/.config/jupyterlab/settings"
+export JUPYTERLAB_WORKSPACES_DIR="$HOME/.config/jupyterlab/workspaces"
+
 # PASS
 export PASSWORD_STORE_CLIP_TIME=60
 export PASSWORD_STORE_GENERATED_LENGTH=32
