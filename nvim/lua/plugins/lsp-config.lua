@@ -100,6 +100,7 @@ serverConfigs.pyright = {
 		client.server_capabilities.hoverProvider = false
 
 		-- Automatically set python_path to .venv
+		local pwd = vim.fn.getcwd()
 		local pyright = vim.lsp.get_active_clients({ name = "pyright" })[1]
 		pyright.config.settings.python.pythonPath =
 			"/Users/chrisgrieser/Repos/axelrod-prisoner-dilemma/.venv/bin/python"
