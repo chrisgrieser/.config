@@ -36,11 +36,6 @@ export TICKER_APP="Ivory"
 # so linters managed by mason are generally available
 export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
 
-# JUPYTER
-# https://jupyterlab.readthedocs.io/en/stable/user/directories.html#jupyterlab-user-settings-directory
-export JUPYTERLAB_SETTINGS_DIR="$HOME/.config/jupyterlab/settings"
-export JUPYTERLAB_WORKSPACES_DIR="$HOME/.config/jupyterlab/workspaces"
-
 # PASS
 export PASSWORD_STORE_CLIP_TIME=60
 export PASSWORD_STORE_GENERATED_LENGTH=32

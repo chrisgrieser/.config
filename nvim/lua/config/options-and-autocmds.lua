@@ -163,11 +163,6 @@ autocmd("FileType", {
 	callback = function() opt_local.formatoptions:remove("o") end,
 })
 
--- check if file has changed by external program and reload if so
-autocmd("FocusGained", {
-	callback = vim.cmd.checktime,
-})
-
 -- remove log files and commit messages from oldfiles
 autocmd("ExitPre", {
 	callback = function()

@@ -78,12 +78,9 @@ function fixup {
 }
 
 function auto-rebase {
-	if [[ $# -eq 1 ]]; then
-		print "\033[1;33mUsage: $0 <num_of_commits>\033[0m"
-		return 1
-	fi
+	num_of_commits=${1:-10}
 	# ":" is a "no-op-"editor
-	git -c sequence.editor=: rebase --interactive --autosquash HEAD~"$1"
+	git -c sequence.editor=: rebase --interactive --autosquash HEAD~"$num_of_commits"
 }
 
 # amend-no-edit

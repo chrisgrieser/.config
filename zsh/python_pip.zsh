@@ -9,6 +9,7 @@ alias pu="pip uninstall"
 alias pi="pip install"
 alias pl="pip list --not-required"
 alias py="python3"
+alias jn="jupyter notebook"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -81,13 +82,6 @@ function pip() {
 		pip3 "$@"
 	fi
 }
-
-#───────────────────────────────────────────────────────────────────────────────
-# JUPYTER
-
-# https://jupyterlab.readthedocs.io/en/stable/user/directories.html#jupyterlab-user-settings-directory
-export JUPYTERLAB_SETTINGS_DIR="$HOME/.config/jupyterlab"
-alias jn="jupyter notebook"
 
 #───────────────────────────────────────────────────────────────────────────────
 # ANACONDA
