@@ -66,8 +66,8 @@ function _gitstatus {
 
 	if [[ -n "$(git status --porcelain)" ]]; then
 		local unstaged staged
-		unstaged=$(git diff --color="always" --compact-summary --stat | sed -e '$d')
-		staged=$(git diff --staged --color="always" --compact-summary --stat | sed -e '$d' \
+		unstaged=$(git diff --color="always" --compact-summary --stat=$COLUMNS,10 | sed -e '$d')
+		staged=$(git diff --staged --color="always" --compact-summary --stat=$COLUMNS,10 | sed -e '$d' \
 			-e $'s/^ /+/') # add marker for staged files
 		local diffs=""
 		if [[ -n "$unstaged" && -n "$staged" ]]; then

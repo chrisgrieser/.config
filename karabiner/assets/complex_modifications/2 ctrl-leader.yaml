@@ -316,7 +316,7 @@ rules:
         from: { key_code: j }
         conditions: [*leader-active]
         to:
-          - shell_command: open "$HOME/.config/jupyter/scratch.ipynb"
+          - shell_command: open -a "JupyterLab" "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Jupyter Notebooks/"
           - *deactivate-leader
           - *remove-notice
       # [T]ransmission

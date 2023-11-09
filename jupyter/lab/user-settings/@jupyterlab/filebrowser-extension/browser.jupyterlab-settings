@@ -1,10 +1,8 @@
 {
-    "navigateToCurrentDirectory": false,
-    "useFuzzyFilter": true,
-    "filterDirectories": true,
-    "showLastModifiedColumn": true,
-    "showFileSizeColumn": false,
-    "showHiddenFiles": false,
-    "showFileCheckboxes": false,
-    "sortNotebooksFirst": false
+    // File Browser
+    // @jupyterlab/filebrowser-extension:browser
+    // File Browser settings.
+    // *****************************************
+
+
 }
