@@ -12,16 +12,21 @@ bo.tabstop = 4
 vim.opt_local.listchars:append { multispace = " " }
 
 --------------------------------------------------------------------------------
--- auto-select project-local venv
+-- add venv-indicator to lualine
+if not vim.g.venv_lualine_added then
+	vim.g.venv_lualine_added = true -- prevent adding it multiple times
+	u.addToLuaLine("tabline", "lualine_a", function()
+		-- GUARD python ft, pyright attached, has custom python_path
+		if vim.bo.ft ~= "python" then return "" end
+		local pyright = vim.lsp.get_active_clients({ name = "pyright" })[1]
+		if not pyright then return "" end
+		local pythonPath = pyright.config.settings.python.pythonPath
+		if not pythonPath then return "" end
 
--- vim.api.nvim_create_autocmd("FileType", {
--- 	pattern = "python",
--- 	callback = function()
--- 		vim.defer_fn(function()
--- 			local venv = vim.fn.findfile("pyproject.toml", vim.fn.getcwd() .. ";")
--- 		end, 250)
--- 	end,
--- })
+		local venv = vim.fs.basename(vim.fs.dirname(vim.fs.dirname(pythonPath)))
+		return "󱥒 " .. venv
+	end)
+end
 
 --------------------------------------------------------------------------------
 

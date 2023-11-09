@@ -1,0 +1,7 @@
+id: pwd
+rule:
+  pattern: vim.fn.getcwd($$$)
+fix: vim.loop.cwd()
+message: Use `vim.loop.cwd()` instead.
+severity: info
+language: Lua
