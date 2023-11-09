@@ -6,6 +6,10 @@
 
 sudo -v # ask for permissions upfront
 
+# use touch-id to authenticate in the terminal
+# https://sixcolors.com/post/2023/08/in-macos-sonoma-touch-id-for-sudo-can-survive-updates/
+echo "auth       sufficient     pam_tid.so" | sudo tee /etc/pam.d/sudo_local
+
 #───────────────────────────────────────────────────────────────────────────────
 # SYSTEM PREFS
 
