@@ -87,24 +87,15 @@ serverConfigs.ruff_lsp = {
 -- https://github.com/microsoft/pyright/blob/main/docs/settings.md
 -- https://microsoft.github.io/pyright/#/settings
 serverConfigs.pyright = {
-	settings = {
-		python = {
-			disableOrganizeImports = true, -- done by ruff
-			analysis = {
-				autoSearchPaths = false, -- done by myself, since `.venv` is not searched
-				diagnosticMode = "workspace",
-			},
-		},
-	},
 	on_attach = function(client)
 		-- Disable hover in favor of jedi
 		client.server_capabilities.hoverProvider = false
 
 		-- Automatically set python_path to python binary in `.venv`
+		-- this assume that `pwd = the project root`, e.g. via projects.nvim
 		local venv_python = vim.loop.cwd() .. "/.venv/bin/python"
 		local noVenvPython = vim.loop.fs_stat(venv_python) == nil
 		if noVenvPython then return end
-
 		local pyright = vim.lsp.get_active_clients({ name = "pyright" })[1]
 		pyright.config.settings.python.pythonPath = venv_python
 		vim.lsp.buf_notify(
