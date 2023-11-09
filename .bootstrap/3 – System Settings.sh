@@ -18,8 +18,8 @@ dns_address_1="1.1.1.1"
 dns_address_2="1.0.0.1"
 
 # set DNS on every network
-networksetup -listallnetworkservices | # list all
-	sed '1d' | # remove first line
+networksetup -listallnetworkservices |
+	sed '1d' | 
 	tr -d "*" | # remove "*" marking disabled services
 	xargs -I {} networksetup -setdnsservers {} "$dns_address_1" "$dns_address_2"
 

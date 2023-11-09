@@ -10,13 +10,15 @@ local function updateCounter() hs.execute(u.exportPath .. "sketchybar --trigger 
 
 -- Triggers: App Switch
 M.aw_tot = aw.new(function(appName, event, _)
-	if appName == "Tot" and (event == aw.deactivated or event == aw.launched) then
+	if appName ~= "Tot" then return end
+	if event == aw.deactivated or event == aw.launched or event == aw.terminated then
 		updateCounter()
 	end
 end):start()
 
 --------------------------------------------------------------------------------
 -- REMINDERS -> TOT
+
 ---@async
 local function remindersToTot()
 	-- run as task so it's not blocking
