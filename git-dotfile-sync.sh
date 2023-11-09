@@ -12,6 +12,7 @@ commit_msg="$device_name ($files_changed)"
 # changed, the push will fail
 # 0: once push/pull is successful
 # 1: after multiple failed attempts to push/pull
+# 2: pre-commit hook failed
 i=0
 while true; do
 	git add -A && git commit -m "$commit_msg" --author="🤖 automated<cron@job>"
