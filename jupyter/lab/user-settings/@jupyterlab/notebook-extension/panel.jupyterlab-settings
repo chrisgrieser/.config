@@ -1,0 +1,84 @@
+{
+    "toolbar": [
+        {
+            "name": "save",
+            "command": "",
+            "disabled": false,
+            "rank": 10
+        },
+        {
+            "name": "insert",
+            "command": "notebook:insert-cell-below",
+            "disabled": false,
+            "icon": "ui-components:add",
+            "rank": 20
+        },
+        {
+            "name": "cut",
+            "command": "notebook:cut-cell",
+            "disabled": false,
+            "rank": 21
+        },
+        {
+            "name": "copy",
+            "command": "notebook:copy-cell",
+            "disabled": false,
+            "rank": 22
+        },
+        {
+            "name": "paste",
+            "command": "notebook:paste-cell-below",
+            "disabled": false,
+            "rank": 23
+        },
+        {
+            "name": "run",
+            "command": "notebook:run-cell-and-select-next",
+            "disabled": false,
+            "rank": 30
+        },
+        {
+            "name": "interrupt",
+            "command": "notebook:interrupt-kernel",
+            "disabled": false,
+            "rank": 31
+        },
+        {
+            "name": "restart",
+            "command": "notebook:restart-kernel",
+            "disabled": false,
+            "rank": 32
+        },
+        {
+            "name": "restart-and-run",
+            "command": "notebook:restart-run-all",
+            "disabled": false,
+            "rank": 33
+        },
+        {
+            "name": "cellType",
+            "command": "",
+            "disabled": false,
+            "rank": 40
+        },
+        {
+            "name": "spacer",
+            "command": "",
+            "disabled": false,
+            "type": "spacer",
+            "rank": 100
+        },
+        {
+            "name": "kernelName",
+            "command": "",
+            "disabled": false,
+            "rank": 1000
+        },
+        {
+            "name": "executionProgress",
+            "command": "",
+            "disabled": false,
+            "rank": 1002
+        }
+    ]
+}

@@ -33,7 +33,13 @@ export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
 
 # JUPYTER
 # https://docs.jupyter.org/en/latest/use/jupyter-directories.html#configuration-files
+# https://jupyterlab.readthedocs.io/en/stable/user/directories.html#jupyterlab-user-settings-directory
 export JUPYTER_CONFIG_DIR="$HOME/.config/jupyter"
+export JUPYTERLAB_SETTINGS_DIR="$JUPYTER_CONFIG_DIR/lab/user-settings"
+export JUPYTERLAB_WORKSPACES_DIR="$JUPYTER_CONFIG_DIR/lab/workspaces"
+
+# add jupyterlab binaries to path
+export PATH="$HOME/Library/jupyterlab-desktop/jlab_server/bin":$PATH
 
 # PANDOC
 # HACK since pandoc does not allow default data-dirs
