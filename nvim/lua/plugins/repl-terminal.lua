@@ -11,14 +11,20 @@ return {
 				pattern = "toggleterm",
 				callback = function()
 					vim.opt_local.scrolloff = 0
-					vim.keymap.set("n", "q", vim.cmd.close, { buffer = true, nowait = true })
+					-- stylua: ignore
+					vim.keymap.set("n", "q", vim.cmd.close, { buffer = true, nowait = true, desc = "Quit" })
 				end,
 			})
 		end,
 		keys = {
 			{ "<leader>t", vim.cmd.ToggleTerm, desc = " ToggleTerm" },
-			{ "<leader>z", vim.cmd.ToggleTermSendCurrentLine, desc = " ToggleTerm: Send Line" },
-			{ "<leader>z", vim.cmd.ToggleTermSendVisualSelection, mode = "x", desc = " ToggleTerm: Send Sel" },
+			{ "<leader>T", vim.cmd.ToggleTermSendCurrentLine, desc = " ToggleTerm: Send Line" },
+			{
+				"<leader>T",
+				vim.cmd.ToggleTermSendVisualSelection,
+				mode = "x",
+				desc = "  ToggleTerm: Send Sel",
+			},
 		},
 	},
 }

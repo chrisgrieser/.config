@@ -1,8 +1,10 @@
 {
-    // CSV Viewer
-    // @jupyterlab/csvviewer-extension:csv
-    // CSV Viewer settings.
-    // ***********************************
-
-
+    "toolbar": [
+        {
+            "name": "delimiter",
+            "command": "",
+            "disabled": false,
+            "rank": 10
+        }
+    ]
 }
