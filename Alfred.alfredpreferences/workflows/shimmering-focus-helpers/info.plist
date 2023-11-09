@@ -136,21 +136,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>soundname</key>
-				<string>Hero</string>
-				<key>systemsound</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.playsound</string>
-			<key>uid</key>
-			<string>D533FF07-1350-48E1-9451-EF19F6ED5C37</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>availableviaurlhandler</key>
 				<false/>
 				<key>triggerid</key>
@@ -160,6 +145,21 @@
 			<string>alfred.workflow.trigger.external</string>
 			<key>uid</key>
 			<string>51F16800-EC0B-4860-92F5-D833B4B6A06D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>soundname</key>
+				<string>Hero</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>D533FF07-1350-48E1-9451-EF19F6ED5C37</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -225,6 +225,27 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>93E4EBAF-798C-40AF-BBCD-4BF2B98B6F18</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⏳Cloning…</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>D430A6F9-293F-49FE-9E66-A091FB56677B</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -306,27 +327,6 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<string>769DBB7A-060F-4CCA-A806-0AAA1149D60B</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>⏳Cloning…</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>D430A6F9-293F-49FE-9E66-A091FB56677B</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -481,9 +481,9 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 		<key>D533FF07-1350-48E1-9451-EF19F6ED5C37</key>
 		<dict>
 			<key>xpos</key>
-			<real>505</real>
+			<real>325</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>35</real>
 		</dict>
 		<key>F9CA8CAA-C6EB-499B-9049-AA32687CAAFC</key>
 		<dict>

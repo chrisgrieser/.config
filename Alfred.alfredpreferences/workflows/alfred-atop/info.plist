@@ -135,7 +135,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>9C677454-9EBA-42D1-9B49-ABB15200167A</string>
+				<string>2759BEDD-4BDD-45E5-8864-D2705A801FC5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -210,7 +210,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>4F6FB435-0A87-45E8-A851-F458286E7A6F</string>
+				<string>BF21A407-7022-4593-A143-0BBA5B02294A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -535,27 +535,6 @@
 			<integer>2</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>2759BEDD-4BDD-45E5-8864-D2705A801FC5</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -572,14 +551,6 @@
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>BBE384FE-3246-4A73-873A-4B3F4FBF8E54</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
 			<key>config</key>
 			<dict>
 				<key>lastpathcomponent</key>
@@ -589,14 +560,22 @@
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string></string>
-				<key>title</key>
 				<string>{query}</string>
+				<key>title</key>
+				<string>{const:alfred_workflow_name}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>9C677454-9EBA-42D1-9B49-ABB15200167A</string>
+			<string>2759BEDD-4BDD-45E5-8864-D2705A801FC5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>BBE384FE-3246-4A73-873A-4B3F4FBF8E54</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -819,7 +798,7 @@
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>✅ Device address copid</string>
+				<string>✅ Device address copied</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -1069,6 +1048,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>{const:alfred_workflow_name}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>BF21A407-7022-4593-A143-0BBA5B02294A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1088,27 +1088,6 @@
 			<string>80995D89-9285-4E5C-8728-25576BF43113</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>4F6FB435-0A87-45E8-A851-F458286E7A6F</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1371,9 +1350,9 @@ Display mounted volumes directly via `vol`.
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>915</real>
+			<real>960</real>
 			<key>ypos</key>
-			<real>130</real>
+			<real>245</real>
 		</dict>
 		<key>329C9BD5-CD31-45B7-B732-102981D6418F</key>
 		<dict>
@@ -1394,15 +1373,6 @@ Display mounted volumes directly via `vol`.
 			<real>390</real>
 			<key>ypos</key>
 			<real>990</real>
-		</dict>
-		<key>4F6FB435-0A87-45E8-A851-F458286E7A6F</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>xpos</key>
-			<real>770</real>
-			<key>ypos</key>
-			<real>1090</real>
 		</dict>
 		<key>54580785-C343-4A69-8525-5BF78553961A</key>
 		<dict>
@@ -1491,15 +1461,6 @@ Display mounted volumes directly via `vol`.
 			<key>ypos</key>
 			<real>160</real>
 		</dict>
-		<key>9C677454-9EBA-42D1-9B49-ABB15200167A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>770</real>
-			<key>ypos</key>
-			<real>380</real>
-		</dict>
 		<key>A09D544F-ECA6-4D74-B8B0-AC69E572977B</key>
 		<dict>
 			<key>colorindex</key>
@@ -1555,6 +1516,15 @@ Display mounted volumes directly via `vol`.
 			<real>770</real>
 			<key>ypos</key>
 			<real>505</real>
+		</dict>
+		<key>BF21A407-7022-4593-A143-0BBA5B02294A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>755</real>
+			<key>ypos</key>
+			<real>1090</real>
 		</dict>
 		<key>CBFBCA76-39CE-4D22-A556-EDF1A996849C</key>
 		<dict>

@@ -13,8 +13,9 @@ setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful for copypasti
 # case insensitive path-completion - https://scriptingosx.com/2019/07/moving-to-zsh-part-5-completions/
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
 
-# group commands
-zstyle ':completion:*:descriptions' format '%F{blue}%d%f'
+# group commands & color groups
+# see https://github.com/marlonrichert/zsh-autocomplete/issues/654
+zstyle ':completion:*:*:descriptions' format $'\033[1;34m%d\033[0m'
 
 #───────────────────────────────────────────────────────────────────────────────
 # CLI/PLUGIN SETTINGS
@@ -87,4 +88,3 @@ bindkey -M menuselect '\r' .accept-line
 zstyle ':completion:*:warnings' format ""
 
 zstyle ':autocomplete:*' min-input 3 # minimum number of characters before suggestions are shown
-zstyle ':autocomplete:*' ignored-input 'z' # FIX z suggestions

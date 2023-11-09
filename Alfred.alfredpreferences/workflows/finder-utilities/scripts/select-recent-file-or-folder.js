@@ -57,7 +57,7 @@ function run() {
 		});
 
 	/** @type {AlfredItem[]} */
-	const recentAll = [...recentItemsMap, ...recentFolders].map((item) => {
+	const recentAll = [...recentFolders, ...recentItemsMap].map((item) => {
 		const revealSubtitle = item.type === "file" ? "⌥: Reveal in Finder" : "❌ Not for folder";
 
 		/** @type {AlfredItem} */

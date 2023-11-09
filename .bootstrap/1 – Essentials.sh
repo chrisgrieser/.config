@@ -63,23 +63,3 @@ ln -sf "$HOME/.config/mackup/custom-app-configs" ~/.mackup
 brew install mackup
 mackup restore --force && mackup uninstall --force # sets symlinks, and then writes full files
 
-#───────────────────────────────────────────────────────────────────────────────
-# CREATE SYMLINKS
-
-# zsh (ZDOTDIR set in .zshenv for the remaining config)
-ln -sf "$HOME/.config/zsh/.zshenv" ~
-
-# Fig
-# ln -sf "$HOME/.config/fig/settings.json" ~/.fig/settings.json
-# fig install --input-method
-
-# Espanso
-ESPANSO_DIR=~"/Library/Application Support/espanso"
-[[ -e "$ESPANSO_DIR" ]] && rm -rf "$ESPANSO_DIR"
-ln -sf "$HOME/.config/espanso/" "$ESPANSO_DIR"
-
-# Browser PWAs
-[[ -e ~"/Applications/$BROWSER_APP Apps.localized" ]] && rm -rf ~"/Applications/$BROWSER_APP Apps.localized"
-ln -sf ~"/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/$BROWSER_APP Apps.localized/" ~"/Applications/$BROWSER_APP Apps.localized"
-
-#───────────────────────────────────────────────────────────────────────────────

@@ -1,0 +1,8 @@
+{
+    "maximalDepth": 4,
+    "numberingH1": true,
+    "numberHeaders": true,
+    "includeOutput": true,
+    "syncCollapseState": false,
+    "baseNumbering": 1
+}
