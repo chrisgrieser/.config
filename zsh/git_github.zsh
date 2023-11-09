@@ -14,7 +14,6 @@ alias grh='git reset --hard'
 alias push="git push"
 alias pull="git pull"
 alias rebase="git rebase --interactive"
-alias auto-rebase="git -c sequence.editor=: rebase --interactive --autosquash" # ":" is a "no-op-"editor
 alias unshallow="git fetch --unshallow"                                        # make shallow clone complete again
 alias g.='cd "$(git rev-parse --show-toplevel)"'                               # goto git root
 
@@ -32,7 +31,7 @@ alias rel='make --silent release' # personal convention to have `make release`
 ZSH_HIGHLIGHT_REGEXP+=('(feat|fix|test|perf|build|ci|revert|refactor|chore|docs|break|style|improv)(\(.+\)|\\!)?:' 'fg=magenta,bold')
 
 ZSH_HIGHLIGHT_REGEXP+=('#[0-9]+' 'fg=red')         # issues numbers
-ZSH_HIGHLIGHT_REGEXP+=('[0-9a-f]{6,}((\^+|~)[0-9]*)?' 'fg=yellow') # git revs
+ZSH_HIGHLIGHT_REGEXP+=('([0-9a-f]{6,}|HEAD)((\^+|~)[0-9]*)?' 'fg=yellow') # git revs
 
 # commit messages longer than 50 chars: yellow, longer than 72 chars: red
 ZSH_HIGHLIGHT_REGEXP+=('^(gc|git commit -m) ".{72,}"' 'fg=white,bold,bg=red')
@@ -74,6 +73,15 @@ function fixup {
 	git -c sequence.editor=: rebase --interactive --autosquash "$target^" || return 0
 
 	_separator && _gitlog "$target"~2.. # confirm result
+}
+
+function auto-rebase {
+	if [[ $# -eq 1 ]]; then
+		print "\033[1;33mUsage: $0 <num_of_commits>\033[0m"
+		return 1
+	fi
+	# ":" is a "no-op-"editor
+	git -c sequence.editor=: rebase --interactive --autosquash HEAD~"$1"
 }
 
 # amend-no-edit

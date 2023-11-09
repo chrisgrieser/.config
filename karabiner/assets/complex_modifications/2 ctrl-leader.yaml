@@ -317,8 +317,18 @@ rules:
         conditions: [*leader-active]
         to:
           - shell_command: |
-              PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ;
+              export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ;
               wezterm -e ipython || wezterm -e 'python3'
+          - *deactivate-leader
+          - *remove-notice
+      # [j]: jupyter notebook
+      - type: basic
+        from: { key_code: j }
+        conditions: [*leader-active]
+        to:
+          - shell_command: |
+              export PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ;
+              jupyter notebook
           - *deactivate-leader
           - *remove-notice
       # [T]ransmission
