@@ -15,7 +15,7 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}
 
 # group commands & color groups
 # see https://github.com/marlonrichert/zsh-autocomplete/issues/654
-zstyle ':completion:*:*:descriptions' format $'\033[1;34m%d\033[0m'
+zstyle ':completion:*:descriptions' format $'\033[1;34m%d\033[0m'
 
 #───────────────────────────────────────────────────────────────────────────────
 # CLI/PLUGIN SETTINGS
@@ -65,7 +65,7 @@ typeset -A ZSH_HIGHLIGHT_REGEXP # actual highlights defined in other files
 
 # DOCS https://github.com/zsh-users/zsh-autosuggestions#configuration
 export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)" # ignores long history items
-export ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
+export ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=30
 # do not accept autosuggestion when using vim `A`
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}")
