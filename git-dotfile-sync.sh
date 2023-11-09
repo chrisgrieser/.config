@@ -14,7 +14,7 @@ commit_msg="$device_name ($files_changed)"
 # 1: after multiple failed attempts to push/pull
 i=0
 while true; do
-	git add -A && git commit -m "$commit_msg" --author="🤖 automated<cron@job>"
+	git add -A && git commit -m "$commit_msg" --author="🤖 automated<cron@job>" || return 1
 	git pull && git push && return 0
 	sleep 1
 	i=$((i + 1))
