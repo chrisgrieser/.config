@@ -1,6 +1,5 @@
 local opt_local = vim.opt_local
 local opt = vim.opt
-local bo = vim.bo
 local autocmd = vim.api.nvim_create_autocmd
 local u = require("config.utils")
 
@@ -146,31 +145,21 @@ opt.listchars:append {
 	trail = " ",
 }
 
---------------------------------------------------------------------------------
--- AUTOCMDs
-
 -- no list chars in special buffers
 autocmd({ "BufNew", "BufReadPost" }, {
 	callback = function()
-		if bo.buftype ~= "" then opt_local.list = false end
+		if vim.bo.buftype ~= "" then opt_local.list = false end
 	end,
 })
+
+--------------------------------------------------------------------------------
+-- AUTOCMDs
 
 -- Formatting `vim.opt.formatoptions:remove{"o"}` would not work, since it's
 -- overwritten by the ftplugins having the `o` option. Therefore needs to be set
 -- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
 autocmd("FileType", {
 	callback = function() opt_local.formatoptions:remove("o") end,
-})
-
--- remove log files and commit messages from oldfiles
-autocmd("ExitPre", {
-	callback = function()
-		vim.v.oldfiles = vim.tbl_filter(function(path)
-			local ignore = path:find("%.log$") or vim.fs.basename(path) == "COMMIT_EDITMSG"
-			return not ignore
-		end, vim.v.oldfiles)
-	end,
 })
 
 --------------------------------------------------------------------------------

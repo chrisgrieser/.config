@@ -43,6 +43,7 @@ safeRequire("config.abbreviations")
 if vim.version().major == 0 and vim.version().minor >= 10 then
 	local todo = [[
 		# nvim 0.10
+		- stevanmilic/nvim-lspimport can now be used
 		- satellite.nvim can now be updated.
 		- change event trigger for symbols-usage
 		- biome lspconfig https://github.com/neovim/nvim-lspconfig/issues/2807
