@@ -35,9 +35,6 @@ export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
 # https://docs.jupyter.org/en/latest/use/jupyter-directories.html#configuration-files
 export JUPYTER_CONFIG_DIR="$HOME/.config/jupyter"
 
-# add jupyterlab binaries to path
-export PATH="$HOME/Library/jupyterlab-desktop/jlab_server/bin":$PATH
-
 # PANDOC
 # HACK since pandoc does not allow default data-dirs
 function pandoc() { command pandoc --data-dir="$HOME/.config/pandoc" "$@"; }
