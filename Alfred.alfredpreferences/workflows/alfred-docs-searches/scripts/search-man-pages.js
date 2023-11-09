@@ -26,7 +26,6 @@ function run(argv) {
 
 	/** @type{AlfredItem[]} */
 	const binariesArr = [...new Set(binariesList)] // only unique
-		.sort((a, b) => a.length - b.length) // sort shorter ones to the top
 		.map((binary) => {
 			const cmd = binary.split("/").pop();
 			const icon = binary.includes("brew") ? "🍺" : "";
@@ -44,6 +43,12 @@ function run(argv) {
 				},
 				uid: cmd,
 			};
+		})
+		.sort((a, b) => {
+			// sort by length (shorter on top), then alphabetically
+			const diff = a.uid.length - b.uid.length;
+			if (diff !== 0) return diff;
+			return a.uid.localeCompare(b.uid);
 		});
 
 	return JSON.stringify({ items: binariesArr });
