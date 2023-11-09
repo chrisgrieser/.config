@@ -9,12 +9,15 @@ Icon
 
 # production stuff / builds
 node_modules
-venv
 .venv
 __pycache__
-.ipynb_checkpoints
 *.alfredworkflow
 *.dmg
+
+# jupyter notebooks
+.ipynb_checkpoints
+.virtual_documents
+.jupyter
 
 # safety net to prevent sensitive data being accidentally moved
 *.kdb
