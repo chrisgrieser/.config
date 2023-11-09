@@ -82,4 +82,5 @@ bindkey -M menuselect '\r' .accept-line
 # hide info message if there are no completions https://github.com/marlonrichert/zsh-autocomplete/discussions/513
 zstyle ':completion:*:warnings' format ""
 
-zstyle ':autocomplete:*' ignored-input '[a-z]|[a-z][a-z]' # ignore single/two letter input
+zstyle ':autocomplete:*' min-input 3 # minimum number of characters before suggestions are shown
+zstyle ':autocomplete:*' ignored-input '..##' # ignore if starting with `..`

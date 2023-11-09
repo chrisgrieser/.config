@@ -21,39 +21,4 @@ return {
 			{ "<leader>z", vim.cmd.ToggleTermSendVisualSelection, mode = "x", desc = " ToggleTerm: Send Sel" },
 		},
 	},
-	{ -- REPL
-		"Vigemus/iron.nvim",
-		keys = {
-			{ "<leader>it", vim.cmd.IronRepl, desc = "󱠤 Toggle REPL" },
-			{ "<leader>ir", vim.cmd.IronRestart, desc = "󱠤 Restart REPL" },
-			{ "<leader>ii", desc = "󱠤 Send Line to REPL" },
-			{ "<leader>i", mode = { "n", "x" }, desc = "󱠤 Send-to-REPL Operator" },
-		},
-		main = "iron.core",
-		init = function() require("config.utils").leaderSubkey("i", "󱠤 Iron") end,
-		opts = {
-			keymaps = {
-				send_line = "<leader>ii",
-				visual_send = "<leader>i",
-				send_motion = "<leader>i",
-			},
-			config = {
-				repl_open_cmd = "horizontal bot 10 split",
-				repl_definition = {
-					-- not used, since using toggleterm for that
-					-- sh = { command = { "zsh" } },
-					typescript = { command = { "node" } },
-					javascript = { command = { "osascript", "-i", "-l", "JavaScript" } },
-					applescript = { command = { "osascript", "-i", "-l", "AppleScript" } },
-					python = {
-						command = function()
-							local ipythonAvailable = vim.fn.executable("ipython") == 1
-							local binary = ipythonAvailable and "ipython" or "python3"
-							return { binary }
-						end,
-					},
-				},
-			},
-		},
-	},
 }
