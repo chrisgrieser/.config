@@ -32,7 +32,11 @@ export TICKER_APP="Ivory"
 export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
 
 # JUPYTER
-export JUPYTER_CONFIG_DIR="$HOME/.config/jupyter" # https://docs.jupyter.org/en/latest/use/jupyter-directories.html#configuration-files
+# https://docs.jupyter.org/en/latest/use/jupyter-directories.html#configuration-files
+export JUPYTER_CONFIG_DIR="$HOME/.config/jupyter"
+
+# add jupyterlab binaries to path
+export PATH="$HOME/Library/jupyterlab-desktop/jlab_server/bin":$PATH
 
 # PANDOC
 # HACK since pandoc does not allow default data-dirs

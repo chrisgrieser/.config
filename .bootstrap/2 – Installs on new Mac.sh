@@ -34,5 +34,4 @@ brew services start felixkratz/formulae/sketchybar
 cat "$HOME/Desktop/NPMfile" | xargs npm install --location=global --force
 npm list --location=global
 
-
 sudo gem install anystyle-cli
