@@ -1,0 +1,11 @@
+{
+    "toolbar": [
+        {
+            "name": "spacer",
+            "command": "",
+            "disabled": false,
+            "type": "spacer",
+            "rank": 50
+        }
+    ]
+}

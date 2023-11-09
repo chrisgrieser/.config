@@ -4,7 +4,7 @@
     "filterDirectories": true,
     "showLastModifiedColumn": true,
     "showFileSizeColumn": false,
-    "showHiddenFiles": true,
+    "showHiddenFiles": false,
     "showFileCheckboxes": false,
-    "sortNotebooksFirst": true
+    "sortNotebooksFirst": false
 }

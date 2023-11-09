@@ -1,0 +1,10 @@
+{
+    "toolbar": [
+        {
+            "name": "delimiter",
+            "command": "",
+            "disabled": false,
+            "rank": 10
+        }
+    ]
+}

@@ -1,0 +1,41 @@
+{
+    "toolbar": [
+        {
+            "name": "duplicate-cell",
+            "command": "notebook:duplicate-below",
+            "disabled": false,
+            "rank": 50
+        },
+        {
+            "name": "move-cell-up",
+            "command": "notebook:move-cell-up",
+            "disabled": false,
+            "rank": 50
+        },
+        {
+            "name": "move-cell-down",
+            "command": "notebook:move-cell-down",
+            "disabled": false,
+            "rank": 50
+        },
+        {
+            "name": "insert-cell-above",
+            "command": "notebook:insert-cell-above",
+            "disabled": false,
+            "rank": 50
+        },
+        {
+            "name": "insert-cell-below",
+            "command": "notebook:insert-cell-below",
+            "disabled": false,
+            "rank": 50
+        },
+        {
+            "name": "delete-cell",
+            "command": "notebook:delete-cell",
+            "disabled": false,
+            "icon": "ui-components:delete",
+            "rank": 50
+        }
+    ]
+}
