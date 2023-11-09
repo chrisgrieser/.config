@@ -25,14 +25,16 @@ alias curl='curl --progress-bar' # nicer progress bar
 alias make='make --silent --warn-undefined-variables'
 
 # eza
-alias l='eza --all --long --time-style=relative --no-user --icons --git --group-directories-first --sort=newest --color-scale'
-alias tree='eza --tree --level=2 --icons --git-ignore --no-quotes'
-alias treee='eza --tree --level=3 --icons --git-ignore --no-quotes'
-alias treeee='eza --tree --level=4 --icons --git-ignore --no-quotes'
+alias l='eza --all --long --time-style=relative --no-user --git --sort=newest --color-scale=age'
+alias tree='eza --tree --level=2 --git-ignore --no-quotes'
+alias treee='eza --tree --level=3 --git-ignore --no-quotes'
+alias treeee='eza --tree --level=4 --git-ignore --no-quotes'
+
+alias size2='eza --color-scale=size --sort=size --long --no-user --no-permissions --no-time'
+alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
 
 # misc
 alias prose='ssh nanotipsforvim@prose.sh'
-alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
 alias bkp='zsh "$HOME/.config/_utility-scripts/backup-script.sh"'
 alias repobkp='zsh "$HOME/.config/_utility-scripts/backup-my-repos.sh"'
 alias vd="visidata"
