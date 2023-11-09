@@ -14,7 +14,8 @@ commit_msg="$device_name ($files_changed)"
 # 1: after multiple failed attempts to push/pull
 i=0
 while true; do
-	git add -A && git commit -m "$commit_msg" --author="🤖 automated<cron@job>" || return 1
+	git add -A && git commit -m "$commit_msg" --author="🤖 automated<cron@job>"
+	[[ $? -eq 2 ]] && return 2 # pre-commit failed
 	sleep 0.5 # prevent "Cannot rebase on multiple branches"
 	git pull && git push && return 0
 	sleep 1

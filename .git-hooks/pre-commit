@@ -11,7 +11,7 @@ large_files=$(find . -not -path "**/.git/**" -size +${max_file_size_mb}M)
 if [[ -n "$large_files" ]]; then
 	echo "Large file(s) found. Aborting commit."
 	echo "$large_files" | sed 's/^/- /'
-	exit 1
+	exit 2
 fi
 
 echo "Pre-Commit passed."

@@ -55,9 +55,9 @@ local function cleanupConsole()
 		local color
 		if line:find("^> ") then -- user input
 			color = isDark and lightGrey or darkGrey
-		elseif line:lower():find("error") then
+		elseif line:lower():find("error") or line:lower():find("fatal") then
 			color = isDark and lightRed or darkRed
-		elseif line:lower():find("warning") or line:find("stack traceback") or line:find("fail") or line:find("Abort") then
+		elseif line:lower():find("warning") or line:find("stack traceback") or line:find("fail") or line:lower():find("abort") then
 			color = isDark and lightYellow or darkYellow
 		else
 			color = isDark and white or black
