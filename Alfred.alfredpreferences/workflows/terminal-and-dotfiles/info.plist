@@ -72,11 +72,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>7C9DF178-A8F4-4B38-977B-E15968AE6CC0</key>
+		<key>73F9DBDD-A980-4267-95BA-B94A5723353E</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E063CB81-6C1F-4441-9576-0A9D97F6BBC3</string>
+				<string>7E3AEF26-FACC-4A6A-A69C-D7CE916F8570</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -90,19 +90,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>707FB3E6-329A-4494-A074-D4CD436A44AD</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>E063CB81-6C1F-4441-9576-0A9D97F6BBC3</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>B8E947B4-1638-4F6B-8A9A-EF2294C60AC9</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -186,14 +173,14 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>path-different-from-wezterm-pwd.sh</string>
+				<string>open-terminal.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>707FB3E6-329A-4494-A074-D4CD436A44AD</string>
+			<string>9EC4C5E4-FD5F-4585-86AE-47B0A7AFA214</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -209,14 +196,14 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>open-terminal.sh</string>
+				<string>path-different-from-wezterm-pwd.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>9EC4C5E4-FD5F-4585-86AE-47B0A7AFA214</string>
+			<string>707FB3E6-329A-4494-A074-D4CD436A44AD</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -332,85 +319,34 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>1</integer>
-				<key>focusedappvariable</key>
-				<true/>
-				<key>focusedappvariablename</key>
+				<key>openwith</key>
+				<string>~/.config/nvim/mac-helper/Neovide Helper.app</string>
+				<key>sourcefile</key>
 				<string></string>
-				<key>hotkey</key>
-				<integer>50</integer>
-				<key>hotmod</key>
-				<integer>1966080</integer>
-				<key>hotstring</key>
-				<string>&lt;</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
+			<string>alfred.workflow.action.openfile</string>
 			<key>uid</key>
-			<string>7C9DF178-A8F4-4B38-977B-E15968AE6CC0</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>B8E947B4-1638-4F6B-8A9A-EF2294C60AC9</string>
+			<string>7E3AEF26-FACC-4A6A-A69C-D7CE916F8570</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>{query}</string>
-				<key>scriptargtype</key>
+				<key>acceptsmulti</key>
 				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
+				<key>filetypes</key>
+				<array/>
+				<key>name</key>
+				<string>Open with Neovide</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.trigger.action</string>
 			<key>uid</key>
-			<string>E063CB81-6C1F-4441-9576-0A9D97F6BBC3</string>
+			<string>73F9DBDD-A980-4267-95BA-B94A5723353E</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -459,16 +395,23 @@ check if path different from PWD</string>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
-		<key>7C9DF178-A8F4-4B38-977B-E15968AE6CC0</key>
+		<key>73F9DBDD-A980-4267-95BA-B94A5723353E</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>6</integer>
-			<key>note</key>
-			<string>Quick Eval Selection</string>
+			<integer>5</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>380</real>
+			<real>315</real>
+		</dict>
+		<key>7E3AEF26-FACC-4A6A-A69C-D7CE916F8570</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>315</real>
 		</dict>
 		<key>902D4662-2953-4B92-BAE1-BE34CE7A174D</key>
 		<dict>
@@ -496,24 +439,6 @@ check if path different from PWD</string>
 			<real>190</real>
 			<key>ypos</key>
 			<real>20</real>
-		</dict>
-		<key>B8E947B4-1638-4F6B-8A9A-EF2294C60AC9</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>335</real>
-			<key>ypos</key>
-			<real>380</real>
-		</dict>
-		<key>E063CB81-6C1F-4441-9576-0A9D97F6BBC3</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>180</real>
-			<key>ypos</key>
-			<real>380</real>
 		</dict>
 		<key>F146B53A-B75E-4B95-8AC5-9AB4944913F4</key>
 		<dict>

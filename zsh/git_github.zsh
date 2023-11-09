@@ -59,7 +59,8 @@ function gc {
 		return 1
 	fi
 
-	printf "\033[1;36mPull: \033[0m" && git fetch && git pull &&
+	sleep 0.5 # prevent "Cannot rebase on multiple branches"
+	printf "\033[1;36mPull: \033[0m" && git pull &&
 		printf "\033[1;36mPush: \033[0m" && git push
 }
 
