@@ -66,10 +66,10 @@ function _gitstatus {
 
 	if [[ -n "$(git status --porcelain)" ]]; then
 		local unstaged staged
-		unstaged=$(git diff --color="always" --compact-summary --stat=$COLUMNS,10 | sed -e '$d')
-		staged=$(git diff --staged --color="always" --compact-summary --stat=$COLUMNS,10 | sed -e '$d' \
+		unstaged=$(git diff --color="always" --compact-summary --stat=$COLUMNS | sed -e '$d')
+		staged=$(git diff --staged --color="always" --compact-summary --stat=$COLUMNS | sed -e '$d' \
 			-e $'s/^ /+/') # add marker for staged files
-		local diffs=""
+		local diffs
 		if [[ -n "$unstaged" && -n "$staged" ]]; then
 			diffs="$unstaged\n$staged"
 		elif [[ -n "$unstaged" ]]; then
@@ -103,10 +103,8 @@ function _magic_dashboard {
 		local max_gitlog_lines=${MAGIC_DASHBOARD_GITLOG_LINES:-5}
 		_gitlog -n "$max_gitlog_lines"
 		_separator
-
 		_gitstatus
 	fi
-
 	_list_files_here
 }
 
