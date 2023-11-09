@@ -100,49 +100,12 @@ local keymappings_N = vim.tbl_extend("force", keymappings_I, normalModeOnly)
 --------------------------------------------------------------------------------
 -- HELPERS
 
--- https://github.com/nvim-telescope/telescope.nvim/issues/605
-local function deltaPreviewer()
-	return require("telescope.previewers").new_termopen_previewer {
-		get_command = function(entry)
-			local pager = vim.fn.system { "git", "config", "core.pager" }
-			if not pager:find("^delta") then return { "echo", "pager not set to delta" } end
-
-			local gitroot = vim.trim(vim.fn.system { "git", "rev-parse", "--show-toplevel" })
-			local filename = entry.value
-			local filepath = gitroot .. "/" .. filename
-			-- stylua: ignore
-			return { "git", "-c", "delta.file-style=omit" --[[only 1 file anyway]] , "diff", filepath }
-		end,
-	}
-end
-
-local function gitDiffStatPreviewer()
-	return require("telescope.previewers").new_termopen_previewer {
-		dyn_title = function(_, entry) return entry.value end, -- use hash as title
-		get_command = function(entry, status)
-			local hash = entry.value
-			local previewWinWidth = vim.api.nvim_win_get_width(status.preview_win)
-			local statArgs = ("%s,%s,25"):format(previewWinWidth, math.floor(previewWinWidth / 2))
-			local previewFormat =
-				"%C(bold)%C(magenta)%s %n%C(reset)%C(cyan)%D%C(reset)%b %n%C(blue)%an %C(yellow)(%ch) %C(reset)"
-			local cmd = {
-				"git show " .. hash,
-				"--color=always",
-				"--stat=" .. statArgs,
-				"--format='" .. previewFormat .. "'",
-				"| sed -e 's/^ //' -e '$d' ;", -- remove clutter
-			}
-			return table.concat(cmd, " ")
-		end,
-	}
-end
-
 -- HACK color parent as comment
 -- CAVEAT interferes with other Telescope Results that display for spaces
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "TelescopeResults",
 	callback = function()
-		vim.fn.matchadd("TelescopeParent", "    .*$")
+		vim.fn.matchadd("TelescopeParent", "\t\t.*$")
 		vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
 	end,
 })
@@ -157,141 +120,162 @@ local function pathDisplay(_, path)
 	local parent = vim.fs.dirname(path)
 	if parent == "." then return tail end
 	local parentDisplay = #parent > 20 and vim.fs.basename(parent) or parent
-	return string.format("%s    %s", tail, parentDisplay) -- parent colored via autocmd above
+	return string.format("%s\t\t%s", tail, parentDisplay) -- parent colored via autocmd above
 end
 
 --------------------------------------------------------------------------------
 
-local telescopeConfig = {
-	defaults = {
-		path_display = pathDisplay,
-		selection_caret = "󰜋 ",
-		multi_icon = "󰒆 ",
-		results_title = false,
-		dynamic_preview_title = true,
-		preview = {
-			timeout = 400, -- ms
-			filesize_limit = 1, -- Mb
-			ls_short = true, -- ls is only used when displaying directories
-		},
-		borderchars = u.borderChars,
-		default_mappings = { i = keymappings_I, n = keymappings_N },
-		sorting_strategy = "ascending", -- so layout is consistent with prompt_position "top"
-		layout_strategy = "horizontal",
-		layout_config = {
-			horizontal = {
-				prompt_position = "top",
-				height = { 0.75, min = 13 },
-				width = 0.99,
-				preview_cutoff = 70,
-				preview_width = { 0.55, min = 30 },
+local function telescopeConfig()
+	require("telescope").setup {
+		defaults = {
+			path_display = pathDisplay,
+			selection_caret = "󰜋 ",
+			multi_icon = "󰒆 ",
+			results_title = false,
+			dynamic_preview_title = true,
+			preview = {
+				timeout = 400, -- ms
+				filesize_limit = 1, -- Mb
+				ls_short = true, -- ls is only used when displaying directories
 			},
-		},
+			borderchars = u.borderChars,
+			default_mappings = { i = keymappings_I, n = keymappings_N },
+			sorting_strategy = "ascending", -- so layout is consistent with prompt_position "top"
+			layout_strategy = "horizontal",
+			layout_config = {
+				horizontal = {
+					prompt_position = "top",
+					height = { 0.75, min = 13 },
+					width = 0.99,
+					preview_cutoff = 70,
+					preview_width = { 0.55, min = 30 },
+				},
+			},
 		-- stylua: ignore
 		file_ignore_patterns = {
 			"%.pdf$", "%.png$", "%.gif$", "%.jpe?g$","%.icns$", "%.pxd$",
 			"%.zip$", "%.plist$",
 			-- other ignores are defined via .gitignore, .ignore, /fd/ignore, or /git/ignore
 		},
-	},
-	pickers = {
-		find_files = {
-			prompt_prefix = "󰝰 ",
-			-- FIX using the default find command from telescope is somewhat buggy,
-			-- e.g. not respecting /fd/ignore
-			find_command = { "fd", "--type=file", "--type=symlink" },
-			mappings = { i = findFileMappings },
 		},
-		live_grep = { prompt_prefix = " ", disable_coordinates = true },
-		git_status = {
-			prompt_prefix = "󰊢 ",
-			show_untracked = true,
-			initial_mode = "normal",
-			previewer = deltaPreviewer(),
-			layout_config = { horizontal = { height = 0.99 } },
-			mappings = {
-				n = {
-					["<Tab>"] = "move_selection_worse",
-					["<S-Tab>"] = "move_selection_better",
-					["<D-CR>"] = "git_staging_toggle",
+		pickers = {
+			find_files = {
+				prompt_prefix = "󰝰 ",
+				-- FIX using the default find command from telescope is somewhat buggy,
+				-- e.g. not respecting /fd/ignore
+				find_command = { "fd", "--type=file", "--type=symlink" },
+				mappings = { i = findFileMappings },
+			},
+			live_grep = { prompt_prefix = " ", disable_coordinates = true },
+			git_status = {
+				prompt_prefix = "󰊢 ",
+				show_untracked = true,
+				initial_mode = "normal",
+				layout_config = { horizontal = { height = 0.99 } },
+				mappings = {
+					n = {
+						["<Tab>"] = "move_selection_worse",
+						["<S-Tab>"] = "move_selection_better",
+						["<D-CR>"] = "git_staging_toggle",
+					},
 				},
 			},
-		},
-		git_commits = {
-			prompt_prefix = "󰊢 ",
-			initial_mode = "normal",
-			prompt_title = "Git Log",
-			previewer = gitDiffStatPreviewer(),
-			layout_config = { horizontal = { height = 0.99 } },
-			-- add commit time (%cr) & `--all`
-			git_command = { "git", "log", "--all", "--pretty=%h %s\t%cr", "--", "." },
-		},
-		git_bcommits = {
-			prompt_prefix = "󰊢 ",
-			initial_mode = "normal",
-			layout_config = { horizontal = { height = 0.99 } },
-			git_command = { "git", "log", "--pretty=%h %s\t%cr" }, -- add commit time (%cr)
-		},
-		keymaps = {
-			prompt_prefix = " ",
-			modes = { "n", "i", "c", "x", "o", "t" },
-			show_plug = false, -- do not show mappings with "<Plug>"
-			lhs_filter = function(lhs) return not lhs:find("Þ") end, -- remove which-key mappings
-		},
-		highlights = {
-			prompt_prefix = " ",
-			layout_config = {
-				horizontal = { preview_width = { 0.7, min = 30 } },
+			git_commits = {
+				prompt_prefix = "󰊢 ",
+				initial_mode = "normal",
+				prompt_title = "Git Log",
+				previewer = require("telescope.previewers").new_termopen_previewer {
+					dyn_title = function(_, entry) return entry.value end, -- use hash as title
+					get_command = function(entry, status)
+						local hash = entry.value
+						local previewWinWidth = vim.api.nvim_win_get_width(status.preview_win)
+						local statArgs = ("%s,%s,25"):format(
+							previewWinWidth,
+							math.floor(previewWinWidth / 2)
+						)
+						local previewFormat =
+							"%C(bold)%C(magenta)%s %n%C(reset)%C(cyan)%D%C(reset)%b %n%C(blue)%an %C(yellow)(%ch) %C(reset)"
+						local cmd = {
+							"git show " .. hash,
+							"--color=always",
+							"--stat=" .. statArgs,
+							"--format='" .. previewFormat .. "'",
+							"| sed -e 's/^ //' -e '$d' ;", -- remove clutter
+						}
+						return table.concat(cmd, " ")
+					end,
+				},
+				layout_config = { horizontal = { height = 0.99 } },
+				-- add commit time (%cr) & `--all`
+				git_command = { "git", "log", "--all", "--pretty=%h %s\t%cr", "--", "." },
 			},
-		},
-		lsp_workspace_symbols = {
-			prompt_prefix = "󰒕 ",
-			prompt_title = "Functions",
+			git_bcommits = {
+				prompt_prefix = "󰊢 ",
+				initial_mode = "normal",
+				layout_config = { horizontal = { height = 0.99 } },
+				git_command = { "git", "log", "--pretty=%h %s\t%cr" }, -- add commit time (%cr)
+			},
+			keymaps = {
+				prompt_prefix = " ",
+				modes = { "n", "i", "c", "x", "o", "t" },
+				show_plug = false, -- do not show mappings with "<Plug>"
+				lhs_filter = function(lhs) return not lhs:find("Þ") end, -- remove which-key mappings
+			},
+			highlights = {
+				prompt_prefix = " ",
+				layout_config = {
+					horizontal = { preview_width = { 0.7, min = 30 } },
+				},
+			},
+			lsp_workspace_symbols = {
+				prompt_prefix = "󰒕 ",
+				prompt_title = "Functions",
 			-- stylua: ignore
 			ignore_symbols = { "boolean", "number", "string", "variable", "array", "object", "constant", "package" },
-			fname_width = 12,
-		},
-		buffers = {
-			prompt_prefix = "󰽙 ",
-			ignore_current_buffer = false,
-			sort_mru = true,
-			initial_mode = "normal",
-			mappings = { n = { ["<D-w>"] = "delete_buffer" } },
-			previewer = false,
-			layout_config = {
-				horizontal = { anchor = "W", width = 0.5, height = 0.5 },
+				fname_width = 12,
 			},
-		},
-		colorscheme = {
-			enable_preview = true,
-			prompt_prefix = " ",
-			layout_strategy = "horizontal",
-			layout_config = {
-				horizontal = {
-					height = 0.4,
-					width = 0.3,
-					anchor = "SE",
-					preview_width = 1, -- needs preview for live preview of the theme
+			buffers = {
+				prompt_prefix = "󰽙 ",
+				ignore_current_buffer = false,
+				sort_mru = true,
+				initial_mode = "normal",
+				mappings = { n = { ["<D-w>"] = "delete_buffer" } },
+				previewer = false,
+				layout_config = {
+					horizontal = { anchor = "W", width = 0.5, height = 0.5 },
+				},
+			},
+			colorscheme = {
+				enable_preview = true,
+				prompt_prefix = " ",
+				layout_strategy = "horizontal",
+				layout_config = {
+					horizontal = {
+						height = 0.4,
+						width = 0.3,
+						anchor = "SE",
+						preview_width = 1, -- needs preview for live preview of the theme
+					},
 				},
 			},
 		},
-	},
-	extensions = {
-		recent_files = {
-			prompt_prefix = "󰋚 ",
-			previewer = false,
-			layout_config = {
-				horizontal = { anchor = "W", width = 0.5, height = 0.55 },
+		extensions = {
+			recent_files = {
+				prompt_prefix = "󰋚 ",
+				previewer = false,
+				layout_config = {
+					horizontal = { anchor = "W", width = 0.5, height = 0.55 },
+				},
+			},
+			aerial = {
+				show_nesting = {
+					markdown = false,
+					["_"] = true,
+				},
 			},
 		},
-		aerial = {
-			show_nesting = {
-				markdown = false,
-				["_"] = true,
-			},
-		},
-	},
-}
+	}
+end
 
 --------------------------------------------------------------------------------
 
@@ -349,7 +333,7 @@ return {
 			"nvim-tree/nvim-web-devicons",
 			"nvim-telescope/telescope-fzf-native.nvim",
 		},
-		opts = telescopeConfig,
+		config = telescopeConfig,
 	},
 	{ -- Icon Picker
 		"nvim-telescope/telescope-symbols.nvim",
@@ -377,14 +361,6 @@ return {
 				function() require("telescope").extensions.recent_files.pick() end,
 				desc = " Recent Files",
 			},
-		},
-	},
-	{ -- ast-grep search
-		"Marskey/telescope-sg",
-		dependencies = "nvim-telescope/telescope.nvim",
-		config = function() require("telescope").load_extension("ast_grep") end,
-		keys = {
-			{ "gS", function() telescope("ast_grep") end, desc = " Ast-Grep" },
 		},
 	},
 	{ -- better sorting algorithm + fzf syntax
