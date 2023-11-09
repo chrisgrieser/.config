@@ -1,7 +1,9 @@
 #!/usr/bin/env zsh
 
-# export PYTHONSTARTUP="$HOME/.config/python/pythonrc.py"
 export IPYTHONDIR="$HOME/.config/ipython"
+
+# add jupyterlab binaries to path
+export PATH="$HOME/Library/jupyterlab-desktop/jlab_server/bin":$PATH
 
 #───────────────────────────────────────────────────────────────────────────────
 
