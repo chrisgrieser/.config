@@ -126,6 +126,6 @@ local lualineConfig = {
 return {
 	"nvim-lualine/lualine.nvim",
 	lazy = false, -- no flickering on startup
-	dependencies = { "nvim-tree/nvim-web-devicons", "folke/noice.nvim" },
+	dependencies = { "nvim-tree/nvim-web-devicons" },
 	opts = lualineConfig,
 }
