@@ -69,6 +69,16 @@ serverConfigs.lua_ls = {
 --------------------------------------------------------------------------------
 -- PYTHON
 
+---Automatically set python_path to python binary in `.venv`
+---this assume that `pwd = the project root`, e.g. via projects.nvim
+---@return string? venv_python_path or nil if not found
+local function get_venv()
+	local venv_python = vim.loop.cwd() .. "/.venv/bin/python"
+	local noVenvPython = vim.loop.fs_stat(venv_python) == nil
+	if noVenvPython then return nil end
+	return venv_python
+end
+
 -- DOCS https://github.com/astral-sh/ruff-lsp#settings
 serverConfigs.ruff_lsp = {
 	init_options = {
@@ -80,23 +90,20 @@ serverConfigs.ruff_lsp = {
 		},
 	},
 	-- Disable hover in favor of jedi
-	on_attach = function(client) client.server_capabilities.hoverProvider = false end,
+	on_attach = function(ruff) ruff.server_capabilities.hoverProvider = false end,
 }
 
 -- DOCS
 -- https://github.com/microsoft/pyright/blob/main/docs/settings.md
 -- https://microsoft.github.io/pyright/#/settings
 serverConfigs.pyright = {
-	on_attach = function(client)
+	on_attach = function(pyright)
 		-- Disable hover in favor of jedi
-		client.server_capabilities.hoverProvider = false
+		pyright.server_capabilities.hoverProvider = false
 
 		-- Automatically set python_path to python binary in `.venv`
-		-- this assume that `pwd = the project root`, e.g. via projects.nvim
-		local venv_python = vim.loop.cwd() .. "/.venv/bin/python"
-		local noVenvPython = vim.loop.fs_stat(venv_python) == nil
-		if noVenvPython then return end
-		local pyright = vim.lsp.get_active_clients({ name = "pyright" })[1]
+		local venv_python = get_venv()
+		if not venv_python then return end
 		pyright.config.settings.python.pythonPath = venv_python
 		vim.lsp.buf_notify(
 			0,
@@ -111,10 +118,21 @@ serverConfigs.jedi_language_server = {
 	init_options = {
 		diagnostics = { enable = true },
 		codeAction = { nameExtractVariable = "extracted_var", nameExtractFunction = "extracted_def" },
-		workspace = {
-			environmentPath = vim.env.VAULT_PATH,
-		},
+		-- workspace = {
+		-- 	environmentPath = "/Users/chrisgrieser/Repos/axelrod-prisoner-dilemma/.venv/bin/python",
+		-- },
 	},
+	on_attach = function(jedi)
+		-- Automatically set python_path to python binary in `.venv`
+		local venv_python = get_venv()
+		if not venv_python then return end
+		jedi.config.init_options.workspace.environmentPath = venv_python
+		vim.lsp.buf_notify(
+			0,
+			"workspace/didChangeConfiguration",
+			{ init_options = jedi.config.init_options }
+		)
+	end,
 }
 
 --------------------------------------------------------------------------------

@@ -30,11 +30,11 @@ function o() {
 	[[ -z "$selected" ]] && return 0 # aborted
 
 	key_pressed=$(echo "$selected" | head -n1)
-	file_path=$(echo "$selected" | sed '1d')
+	file_path="$PWD/$(echo "$selected" | sed '1d')"
 
 	if [[ "$key_pressed" == "ctrl-p" ]]; then
 		echo -n "$file_path" | pbcopy
-		print "\033[1;33m$file_path\033[0m copied."
+		print "\033[1;34m$file_path\033[0m copied."
 	else
 		open "$file_path"
 	fi
