@@ -37,8 +37,4 @@ return {
 			},
 		},
 	},
-	{ -- fix python indentation issues
-		"Vimjas/vim-python-pep8-indent",
-		ft = "python",
-	},
 }
