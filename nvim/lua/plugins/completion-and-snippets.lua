@@ -10,7 +10,10 @@ local defaultSources = {
 		keyword_length = 3,
 		max_item_count = 5, -- since searching all buffers results in many results
 	},
-	{ name = "cmp_yanky", option = { onlyCurrentFiletype = true } },
+	{
+		name = "cmp_yanky",
+		option = { onlyCurrentFiletype = true, minLength = 5 },
+	},
 	{ name = "path" },
 	{ name = "emoji" },
 }
@@ -77,7 +80,9 @@ local function cmpconfig()
 
 				if cmp.visible() then
 					cmp.select_next_item()
-				elseif not onlyWhitespaceBefCursor() or vim.tbl_contains({"yaml", "json"}, vim.bo.ft) then
+				elseif
+					not onlyWhitespaceBefCursor() or vim.tbl_contains({ "yaml", "json" }, vim.bo.ft)
+				then
 					cmp.complete()
 				else
 					fallback()

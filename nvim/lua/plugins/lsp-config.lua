@@ -115,10 +115,9 @@ serverConfigs.jedi_language_server = {
 	-- HACK since init_options cannot be changed during runtime, we need to use
 	-- `on_new_config` to set it and `on_attach` to notify the LSP of a new
 	-- config (even though the `on_attach` just passes the same config again)
-	on_new_config = function(new_config, root_dir)
-		local venv_python = root_dir .. "/.venv/bin/python"
-		local noVenvPython = vim.loop.fs_stat(venv_python) == nil
-		if noVenvPython then return end
+	on_new_config = function(new_config, _)
+		local venv_python = u.determineVenv()
+		if not venv_python then return end
 		new_config.init_options = {
 			workspace = {
 				environmentPath = venv_python,
@@ -138,7 +137,7 @@ serverConfigs.emmet_ls = {
 	filetypes = { "html", "css" },
 }
 
--- DOCS 
+-- DOCS
 -- https://github.com/sublimelsp/LSP-css/blob/master/LSP-css.sublime-settings
 -- https://github.com/microsoft/vscode-css-languageservice/blob/main/src/services/lintRules.ts
 serverConfigs.cssls = {

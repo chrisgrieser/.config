@@ -108,6 +108,15 @@ function M.uniqueKeymap(modes, lhs, rhs, opts)
 	vim.keymap.set(modes, lhs, rhs, opts)
 end
 
+-- for auto-setup of venvs
+---@return string? venv_python -- nil if no venv found
+function M.determineVenv()
+	local venv_python = vim.loop.cwd() .. "/.venv/bin/python"
+	local noVenvPython = vim.loop.fs_stat(venv_python) == nil
+	if noVenvPython then return nil end
+	return venv_python
+end
+
 --------------------------------------------------------------------------------
 
 ---Sets the global BorderStyle variable and the matching BorderChars Variable.

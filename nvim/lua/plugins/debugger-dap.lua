@@ -25,7 +25,10 @@ end
 local function dapSigns()
 	local sign = vim.fn.sign_define
 
-	sign("DapBreakpoint", { text = "", texthl = "DiagnosticSignInfo", numhl = "DiagnosticSignInfo" })
+	sign(
+		"DapBreakpoint",
+		{ text = "", texthl = "DiagnosticSignInfo", numhl = "DiagnosticSignInfo" }
+	)
 	sign("DapStopped", { text = "", texthl = "DiagnosticHint", numhl = "DiagnosticSignHint" })
 	sign("DapBreakpointCondition", { text = "", texthl = "DiagnosticInfo" })
 	sign("DapLogPoint", { text = "", texthl = "DiagnosticInfo" })
@@ -75,7 +78,9 @@ return {
 	{
 		"theHamsta/nvim-dap-virtual-text",
 		opts = { only_first_definition = true },
-		init = function() u.colorschemeMod("NvimDapVirtualText", { link = "DiagnosticVirtualTextInfo" }) end,
+		init = function()
+			u.colorschemeMod("NvimDapVirtualText", { link = "DiagnosticVirtualTextInfo" })
+		end,
 	},
 	{
 		"rcarriga/nvim-dap-ui",
@@ -118,19 +123,6 @@ return {
 	},
 
 	-----------------------------------------------------------------------------
-	-- language-specific debugger plugins
-	{
-		"mfussenegger/nvim-dap-python",
-		ft = "python",
-		config = function()
-			-- 1. use the debugypy installation by mason
-			-- 2. deactivate the annoying auto-opening the console by redirecting
-			-- to the internal console
-			local debugpyPythonPath = require("mason-registry").get_package("debugpy"):get_install_path()
-				.. "/venv/bin/python3"
-			require("dap-python").setup(debugpyPythonPath, { console = "internalConsole" })
-		end,
-	},
 	{
 		"jbyuki/one-small-step-for-vimkind",
 		dependencies = "mfussenegger/nvim-dap",
@@ -140,7 +132,11 @@ return {
 				{ type = "nlua", request = "attach", name = "Attach to running Neovim instance" },
 			}
 			dap.adapters.nlua = function(callback, config)
-				callback { type = "server", host = config.host or "127.0.0.1", port = config.port or 8086 }
+				callback {
+					type = "server",
+					host = config.host or "127.0.0.1",
+					port = config.port or 8086,
+				}
 			end
 		end,
 		keys = {
