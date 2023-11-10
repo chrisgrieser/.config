@@ -10,9 +10,9 @@ alias loadprefs="mackup restore --force && mackup uninstall --force"
 
 # eject
 function e {
-	volumes=$(df -h | grep -io "\s/Volumes/.*" | cut -c2-)
+	volumes=$(df -ih | grep -io "\s/Volumes/.*" | cut -c2-)
 	if [[ -z "$volumes" ]]; then
-		print "\033[1;33mNo volume connected.\033[0m"
+		print "\033[1;33mNo volume mounted.\033[0m"
 		return 1
 	fi
 	if [[ ! -x "$(command -v fzf)" ]]; then print "\033[1;33mfzf not installed.\033[0m" && return 1; fi
