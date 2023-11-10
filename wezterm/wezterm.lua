@@ -4,9 +4,9 @@
 -- INFO the first theme in the list is used
 -- rest are themes I already tried and also like
 local darkThemes = {
+	"Banana Blueberry",
 	"Tinacious Design (Dark)",
 	"SynthWave (Gogh)",
-	"Banana Blueberry",
 	"cyberpunk",
 	"Afterglow (Gogh)",
 	"Paraiso Dark",
@@ -17,13 +17,13 @@ local darkThemes = {
 	"ChallengerDeep",
 }
 local lightThemes = {
+	"BlulocoLight (Gogh)",
 	"Atelier Cave Light (base16)",
 	"Paraiso (light) (terminal.sexy)",
 	"seoulbones_light",
 	"Edge Light (base16)",
 	"Google Light (Gogh)",
 	"OneHalfLight",
-	"BlulocoLight (Gogh)",
 	"Atelierdune (light) (terminal.sexy)",
 	"Atelier Lakeside Light (base16)",
 	"Cupcake (base16)",
@@ -252,11 +252,6 @@ local config = {
 	-- Meta
 	check_for_updates = false, -- done via homebrew already
 	automatically_reload_config = true,
-
-	-- Passwords
-	-- INFO `sudo visudo`, and change line `Defaults env_reset` to `Defaults env_reset,pwfeedback`
-	-- to see asterisks in general
-	detect_password_input = false,
 
 	-- Start/Close
 	default_cwd = wt.home_dir .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/",
