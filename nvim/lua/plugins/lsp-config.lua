@@ -22,15 +22,17 @@ vim.g.myLsps = { -- variable used by MasonToolInstaller
 
 --------------------------------------------------------------------------------
 
----@class lspConfiguration see :h lspconfig-setup
+---@class lspConfiguration see https://github.com/neovim/nvim-lspconfig/blob/master/doc/lspconfig.txt#L46
 ---@field settings? table <string, table>
 ---@field root_dir? function(filename, bufnr)
 ---@field filetypes? string[]
 ---@field init_options? table <string, string|table|boolean>
 ---@field on_attach? function(client, bufnr)
+---@field on_new_config? function(new_config, root_dir)
 ---@field capabilities? table <string, string|table|boolean|function>
 ---@field cmd? string[]
 ---@field autostart? boolean
+---@field single_file_support? boolean
 
 ---@type table<string, lspConfiguration>
 local serverConfigs = {}
@@ -94,7 +96,7 @@ serverConfigs.pyright = {
 		-- Automatically set python_path to python binary in `.venv`
 		local venv_python = vim.loop.cwd() .. "/.venv/bin/python"
 		local noVenvPython = vim.loop.fs_stat(venv_python) == nil
-		if not noVenvPython then return end
+		if noVenvPython then return end
 		pyright.config.settings.python.pythonPath = venv_python
 		vim.lsp.buf_notify(
 			0,
@@ -104,25 +106,31 @@ serverConfigs.pyright = {
 	end,
 }
 
+-- vim.env.VIRTUAL_ENV = "/Users/chrisgrieser/Repos/axelrod-prisoner-dilemma/.venv/bin/python"
+
 -- DOCS https://github.com/pappasam/jedi-language-server#configuration
 serverConfigs.jedi_language_server = {
 	init_options = {
 		diagnostics = { enable = true },
 		codeAction = { nameExtractVariable = "extracted_var", nameExtractFunction = "extracted_def" },
-		workspace = {
-			-- environmentPath = "/Users/chrisgrieser/Repos/axelrod-prisoner-dilemma/.venv/bin/python",
-			extraPaths = {
-				"/Users/chrisgrieser/Repos/axelrod-prisoner-dilemma/.venv/bin/",
-			},
-		},
+		-- cannot be changed during runtime :/
+		-- workspace = {
+		-- 	environmentPath = "/Users/chrisgrieser/Repos/axelrod-prisoner-dilemma/.venv/bin/python",
+		-- },
 	},
-	on_attach = function(jedi)
-		-- Automatically set python_path to python binary in `.venv`
-		local venv_python = vim.loop.cwd() .. "/.venv/bin/python"
+	-- https://github.com/pappasam/jedi-language-server/issues/199#issuecomment-1291395905
+	on_new_config = function(new_config, root_dir)
+		local venv_python = root_dir .. "/.venv/bin/python"
 		local noVenvPython = vim.loop.fs_stat(venv_python) == nil
-		if not noVenvPython then return end
-		jedi.config.init_options.workspace.environmentPath = venv_python
-		vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = jedi.config })
+		if noVenvPython then return end
+		new_config.init_options = {
+			workspace = {
+				environmentPath = "/Users/chrisgrieser/Repos/axelrod-prisoner-dilemma/.venv/bin/python",
+			},
+		}
+	end,
+	on_attach = function(jedi)
+		vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = jedi.config.settings })
 	end,
 }
 
