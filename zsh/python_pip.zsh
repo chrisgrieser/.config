@@ -53,10 +53,7 @@ function auto_venv() {
 	fi
 }
 
-function cd() {
-	builtin cd "$@" || return 1
-	auto_venv
-}
+# `auto_venv` is added to `chpwd` hook on different file
 
 #───────────────────────────────────────────────────────────────────────────────
 

@@ -8,7 +8,7 @@ vim.g.myLsps = { -- variable used by MasonToolInstaller
 	"cssls",
 	"emmet_ls", -- css/html completion
 	"pyright", -- python LSP
-	"jedi_language_server", -- python (has refactor code actions & better hovers)
+	"jedi_language_server", -- python (has much better hovers)
 	"ruff_lsp", -- python linter
 	"marksman", -- markdown
 	"biome", -- ts/js/json linter/formatter
@@ -106,26 +106,22 @@ serverConfigs.pyright = {
 	end,
 }
 
--- vim.env.VIRTUAL_ENV = "/Users/chrisgrieser/Repos/axelrod-prisoner-dilemma/.venv/bin/python"
-
 -- DOCS https://github.com/pappasam/jedi-language-server#configuration
 serverConfigs.jedi_language_server = {
 	init_options = {
 		diagnostics = { enable = true },
 		codeAction = { nameExtractVariable = "extracted_var", nameExtractFunction = "extracted_def" },
-		-- cannot be changed during runtime :/
-		-- workspace = {
-		-- 	environmentPath = "/Users/chrisgrieser/Repos/axelrod-prisoner-dilemma/.venv/bin/python",
-		-- },
 	},
-	-- https://github.com/pappasam/jedi-language-server/issues/199#issuecomment-1291395905
+	-- HACK since init_options cannot be changed during runtime, we need to use
+	-- `on_new_config` to set it and `on_attach` to notify the LSP of a new
+	-- config (even though the `on_attach` just passes the same config again)
 	on_new_config = function(new_config, root_dir)
 		local venv_python = root_dir .. "/.venv/bin/python"
 		local noVenvPython = vim.loop.fs_stat(venv_python) == nil
 		if noVenvPython then return end
 		new_config.init_options = {
 			workspace = {
-				environmentPath = "/Users/chrisgrieser/Repos/axelrod-prisoner-dilemma/.venv/bin/python",
+				environmentPath = venv_python,
 			},
 		}
 	end,
@@ -142,8 +138,9 @@ serverConfigs.emmet_ls = {
 	filetypes = { "html", "css" },
 }
 
--- DOCS https://github.com/sublimelsp/LSP-css/blob/master/LSP-css.sublime-settings
--- DOCS https://github.com/microsoft/vscode-css-languageservice/blob/main/src/services/lintRules.ts
+-- DOCS 
+-- https://github.com/sublimelsp/LSP-css/blob/master/LSP-css.sublime-settings
+-- https://github.com/microsoft/vscode-css-languageservice/blob/main/src/services/lintRules.ts
 serverConfigs.cssls = {
 	settings = {
 		css = {
@@ -252,7 +249,7 @@ serverConfigs.ltex = {
 			markdown = { nodes = { Link = "dummy" } }, -- ignore links https://valentjn.github.io/ltex/settings.html#ltexmarkdownnodes
 		},
 	},
-	on_attach = function(_)
+	on_attach = function()
 		-- have `zg` update ltex
 		vim.keymap.set("n", "zg", function()
 			local ltex = vim.lsp.get_active_clients({ name = "ltex" })[1]

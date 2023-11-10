@@ -2,7 +2,7 @@
 # INFO leading space to ignore it in history due to HIST_IGNORE_SPACE
 alias ..=" z .."
 alias ...=" z ../.."
-alias ....=" z ../../.."
+alias zz='z -' # directory back
 
 # utils
 # INFO leading space to ignore it in history due to HIST_IGNORE_SPACE
