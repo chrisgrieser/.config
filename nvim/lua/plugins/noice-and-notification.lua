@@ -5,8 +5,7 @@ local trace = vim.log.levels.TRACE
 -- DOCS https://github.com/folke/noice.nvim#-routes
 local routes = {
 	-- redirect to popup
-	{ filter = { event = "msg_show", min_height = 12 }, view = "popup" },
-	{ filter = { event = "notify", min_height = 12 }, view = "popup" },
+	{ filter = { min_height = 10 }, view = "popup" },
 
 	-- write/deletion messages
 	{ filter = { event = "msg_show", find = "%d+B written$" }, view = "mini" },

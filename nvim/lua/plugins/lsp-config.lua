@@ -69,16 +69,6 @@ serverConfigs.lua_ls = {
 --------------------------------------------------------------------------------
 -- PYTHON
 
----Automatically set python_path to python binary in `.venv`
----this assume that `pwd = the project root`, e.g. via projects.nvim
----@return string? venv_python_path or nil if not found
-local function get_venv()
-	local venv_python = vim.loop.cwd() .. "/.venv/bin/python"
-	local noVenvPython = vim.loop.fs_stat(venv_python) == nil
-	if noVenvPython then return nil end
-	return venv_python
-end
-
 -- DOCS https://github.com/astral-sh/ruff-lsp#settings
 serverConfigs.ruff_lsp = {
 	init_options = {
@@ -102,8 +92,9 @@ serverConfigs.pyright = {
 		pyright.server_capabilities.hoverProvider = false
 
 		-- Automatically set python_path to python binary in `.venv`
-		local venv_python = get_venv()
-		if not venv_python then return end
+		local venv_python = vim.loop.cwd() .. "/.venv/bin/python"
+		local noVenvPython = vim.loop.fs_stat(venv_python) == nil
+		if not noVenvPython then return end
 		pyright.config.settings.python.pythonPath = venv_python
 		vim.lsp.buf_notify(
 			0,
@@ -118,20 +109,20 @@ serverConfigs.jedi_language_server = {
 	init_options = {
 		diagnostics = { enable = true },
 		codeAction = { nameExtractVariable = "extracted_var", nameExtractFunction = "extracted_def" },
-		-- workspace = {
-		-- 	environmentPath = "/Users/chrisgrieser/Repos/axelrod-prisoner-dilemma/.venv/bin/python",
-		-- },
+		workspace = {
+			-- environmentPath = "/Users/chrisgrieser/Repos/axelrod-prisoner-dilemma/.venv/bin/python",
+			extraPaths = {
+				"/Users/chrisgrieser/Repos/axelrod-prisoner-dilemma/.venv/bin/",
+			},
+		},
 	},
 	on_attach = function(jedi)
 		-- Automatically set python_path to python binary in `.venv`
-		local venv_python = get_venv()
-		if not venv_python then return end
+		local venv_python = vim.loop.cwd() .. "/.venv/bin/python"
+		local noVenvPython = vim.loop.fs_stat(venv_python) == nil
+		if not noVenvPython then return end
 		jedi.config.init_options.workspace.environmentPath = venv_python
-		vim.lsp.buf_notify(
-			0,
-			"workspace/didChangeConfiguration",
-			{ init_options = jedi.config.init_options }
-		)
+		vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = jedi.config })
 	end,
 }
 
