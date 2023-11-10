@@ -9,7 +9,7 @@ matches:
     label: 🕳️ gap
   - trigger: ttt
     replace: "#critique "
-    label: 🟣 critique
+    label: ☝️ critique
   - trigger: ttt
     replace: "#agree "
     label: 🟩 agree

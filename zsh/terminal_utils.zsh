@@ -19,11 +19,11 @@ function o() {
 		# shellcheck disable=2016
 		fd --type=file --type=symlink --color=always | fzf \
 			-1 --ansi --query="$input" --info=inline --header-first \
-			--header="^H: --hidden --no-ignore   ^P: Copy Path" \
+			--header="^H: --hidden --no-ignore   ^P: Copy Path   ^N: Copy Name" \
 			--with-nth=-2.. --delimiter="/" \
 			--bind="ctrl-h:reload(fd --hidden --no-ignore --exclude='/.git/' --exclude='.DS_Store' --type=file --type=symlink --color=always)" \
-			--expect="ctrl-p" \
-			--preview-window="60%" \
+			--expect="ctrl-p,ctrl-n" \
+			--preview-window="55%" \
 			--preview '[[ $(file --mime {}) =~ text ]] && bat --color=always --wrap=never --style=header {} || file {} | fold -w $FZF_PREVIEW_COLUMNS' \
 			--height="100%" #required for wezterm's pane:is_alt_screen_active()
 	)
@@ -32,15 +32,21 @@ function o() {
 	key_pressed=$(echo "$selected" | head -n1)
 	file_path="$PWD/$(echo "$selected" | sed '1d')"
 
-	if [[ "$key_pressed" == "ctrl-p" ]]; then
+	if [[ "$key_pressed" == "ctrl-p" || "$key_pressed" == "ctrl-n" ]]; then
+		[[ "$key_pressed" == "ctrl-n" ]] && file_path=$(basename "$file_path")
 		echo -n "$file_path" | pbcopy
-		print "\033[1;34m$file_path\033[0m copied."
+		print "Copied: \"\033[1;34m$file_path\033[0m\""
 	else
 		open "$file_path"
 	fi
 }
 
 #───────────────────────────────────────────────────────────────────────────────
+
+# mkdir and cd
+function mkcd {
+	mkdir -p "$1" && cd "$1" || return 1
+}
 
 # cd to pwd from last session. Requires setup in `.zlogout`
 function ld() {
@@ -57,15 +63,19 @@ function ld() {
 
 # copies last command(s)
 function lc() {
-	num=${1-"1"} # default= 1 -> just last command
-	history | tail -n"$num" | cut -c8- | sed 's/"/\"/g' | sed "s/'/\'/g" | sed -E '/^$/d' | pbcopy
+	num=${1:-1} # default 1 -> just last command
+	history |
+		tail -n"$num" |
+		cut -c8- |
+		sed -e 's/"/\"/g' -e "s/'/\'/g" -Ee '/^$/d' | 
+		pbcopy
 	echo "Copied."
 }
 
 # copies result of last command(s)
 function lr() {
-	num=${1-"1"} # default= 1 -> just last command
-	last_command=$(history | tail -n"$num" | cut -c 8-)
+	num=${1:-1} # default 1 -> just last command
+	last_command=$(history | tail -n"$num" | cut -c8-)
 	echo -n "$(eval "$last_command")" | pbcopy
 	echo "Copied."
 }

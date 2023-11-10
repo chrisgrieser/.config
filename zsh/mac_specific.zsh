@@ -73,14 +73,11 @@ function d {
 }
 
 # go up and delete current dir
-function  ..d() {
+function ..d() {
 	if ! command -v trash &>/dev/null; then print "\033[1;33mmacos-trash not installed.\033[0m" && return 1; fi
 
-	local current_dir="$PWD"
-	cd ..
-	trash "$current_dir" || return 1
-	_magic_dashboard
-	auto_venv
+	trash "$PWD" || return 1
+	cd "$(dirname "$PWD")" || return 1
 
 	# add nicer trash sound
 	current_vol=$(osascript -e 'output volume of (get volume settings)') # afplay play with 100% volume by default

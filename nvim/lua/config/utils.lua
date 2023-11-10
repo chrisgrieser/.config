@@ -109,9 +109,13 @@ function M.uniqueKeymap(modes, lhs, rhs, opts)
 end
 
 -- for auto-setup of venvs
+---@param root_dir? string
 ---@return string? venv_python -- nil if no venv found
-function M.determineVenv()
-	local venv_python = vim.loop.cwd() .. "/.venv/bin/python"
+function M.determineVenv(root_dir)
+	-- CONFIG
+	local usualVenvPath = "/.venv/bin/python"
+
+	local venv_python = (root_dir or vim.loop.cwd()) .. usualVenvPath
 	local noVenvPython = vim.loop.fs_stat(venv_python) == nil
 	if noVenvPython then return nil end
 	return venv_python
