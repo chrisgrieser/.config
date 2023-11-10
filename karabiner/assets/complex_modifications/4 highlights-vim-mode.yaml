@@ -13,6 +13,9 @@ anchors:
       - &highlights-app
         type: frontmost_application_if
         bundle_identifiers: [^net\.highlightsapp\.universal$]
+      - &german-keyboard
+        type: input_source_if
+        input_sources: [language: ^de$]
   - to:
       - &enter-normal-mode
         set_variable:
@@ -34,16 +37,7 @@ anchors:
 rules:
   - description: "✏️ Highlights Vim Mode: Triggers/Toggles"
     manipulators:
-      # Enter Insert Mode
-      # INFO can't be done on left click, since that initially block dragging
-      - type: basic
-        from: { key_code: caps_lock }
-        to_if_alone: [*set-notice, *enter-insert-mode]
-        to:
-          - { key_code: right_shift, modifiers: [control, option, command] }
-        conditions: [*highlights-app, *highlights-normal-mode]
       # Enter Normal Mode
-      # INFO done on capslock/escape, since that also exists writing an annotation
       - type: basic
         from: { key_code: caps_lock }
         to_if_alone:
@@ -136,9 +130,10 @@ rules:
                   end tell
                 end tell'
         conditions: [*highlights-app, *highlights-normal-mode]
-
-      #─────────────────────────────────────────────────────────────────────────
-      # INFO ALL OTHER KEYS: ENTER INSERT MODE
+  #─────────────────────────────────────────────────────────────────────────────
+  # INFO done on capslock/escape, since that also exits writing an annotation
+  - description: "✏️ Highlights Vim Mode: Insert Mode Entering"
+    manipulators:
       - type: basic
         from: { key_code: a }
         to: [{ key_code: a }, *set-notice, *enter-insert-mode]
@@ -223,103 +218,130 @@ rules:
         from: { key_code: z }
         to: [{ key_code: z }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
+      # German Umlaute
+      - type: basic
+        from: { key_code: quote }
+        to: [{ key_code: quote }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode, *german-keyboard]
+      - type: basic
+        from: { key_code: semicolon }
+        to: [{ key_code: semicolon }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode, *german-keyboard]
+      - type: basic
+        from: { key_code: open_bracket }
+        to: [{ key_code: open_bracket }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode, *german-keyboard]
 
       #───────────────────────────────────────────────────────────────────────
       - type: basic
         from: { key_code: a, modifiers: { mandatory: [shift] } }
-        to: [{key_code: a, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        to: [{ key_code: a, modifiers: [shift] }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: b, modifiers: { mandatory: [shift] } }
-        to: [{key_code: b, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        to: [{ key_code: b, modifiers: [shift] }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: c, modifiers: { mandatory: [shift] } }
-        to: [{key_code: c, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        to: [{ key_code: c, modifiers: [shift] }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: d, modifiers: { mandatory: [shift] } }
-        to: [{key_code: d, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        to: [{ key_code: d, modifiers: [shift] }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: e, modifiers: { mandatory: [shift] } }
-        to: [{key_code: e, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        to: [{ key_code: e, modifiers: [shift] }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: f, modifiers: { mandatory: [shift] } }
-        to: [{key_code: f, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        to: [{ key_code: f, modifiers: [shift] }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: h, modifiers: { mandatory: [shift] } }
-        to: [{key_code: h, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        to: [{ key_code: h, modifiers: [shift] }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: i, modifiers: { mandatory: [shift] } }
-        to: [{key_code: i, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        to: [{ key_code: i, modifiers: [shift] }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: l, modifiers: { mandatory: [shift] } }
-        to: [{key_code: l, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        to: [{ key_code: l, modifiers: [shift] }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: m, modifiers: { mandatory: [shift] } }
-        to: [{key_code: m, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        to: [{ key_code: m, modifiers: [shift] }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: n, modifiers: { mandatory: [shift] } }
-        to: [{key_code: n, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        to: [{ key_code: n, modifiers: [shift] }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: o, modifiers: { mandatory: [shift] } }
-        to: [{key_code: o, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        to: [{ key_code: o, modifiers: [shift] }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: p, modifiers: { mandatory: [shift] } }
-        to: [{key_code: p, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        to: [{ key_code: p, modifiers: [shift] }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: q, modifiers: { mandatory: [shift] } }
-        to: [{key_code: q, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        to: [{ key_code: q, modifiers: [shift] }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: r, modifiers: { mandatory: [shift] } }
-        to: [{key_code: r, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        to: [{ key_code: r, modifiers: [shift] }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: s, modifiers: { mandatory: [shift] } }
-        to: [{key_code: s, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        to: [{ key_code: s, modifiers: [shift] }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: t, modifiers: { mandatory: [shift] } }
-        to: [{key_code: t, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        to: [{ key_code: t, modifiers: [shift] }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: u, modifiers: { mandatory: [shift] } }
-        to: [{key_code: u, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        to: [{ key_code: u, modifiers: [shift] }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: v, modifiers: { mandatory: [shift] } }
-        to: [{key_code: v, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        to: [{ key_code: v, modifiers: [shift] }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: w, modifiers: { mandatory: [shift] } }
-        to: [{key_code: w, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        to: [{ key_code: w, modifiers: [shift] }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: x, modifiers: { mandatory: [shift] } }
-        to: [{key_code: x, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        to: [{ key_code: x, modifiers: [shift] }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: y, modifiers: { mandatory: [shift] } }
-        to: [{key_code: y, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        to: [{ key_code: y, modifiers: [shift] }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
         from: { key_code: z, modifiers: { mandatory: [shift] } }
-        to: [{key_code: z, modifiers: [shift]}, *set-notice, *enter-insert-mode]
+        to: [{ key_code: z, modifiers: [shift] }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
-        #───────────────────────────────────────────────────────────────────────
-      - type: basic # hashtag "#" for annotation tags
-        from: { key_code: non_us_pound}
-        to: [{key_code: non_us_pound}, *set-notice, *enter-insert-mode]
+      #─────────────────────────────────────────────────────────────────────────
+      # German Umlaute
+      - type: basic
+        from: { key_code: semicolon, modifiers: { mandatory: [shift] } }
+        to: [{ key_code: semicolon, modifiers: [shift] }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode, *german-keyboard]
+      - type: basic
+        from: { key_code: quote, modifiers: { mandatory: [shift] } }
+        to: [{ key_code: quote, modifiers: [shift] }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode, *german-keyboard]
+      - type: basic
+        from: { key_code: open_bracket, modifiers: { mandatory: [shift] } }
+        to: [{ key_code: open_bracket, modifiers: [shift] }, *set-notice, *enter-insert-mode]
+        conditions: [*highlights-app, *highlights-normal-mode, *german-keyboard]
+      #─────────────────────────────────────────────────────────────────────────
+      # hashtag "#" for annotation tags
+      - type: basic
+        from: { key_code: non_us_pound }
+        to: [{ key_code: non_us_pound }, *set-notice, *enter-insert-mode]
         conditions: [*highlights-app, *highlights-normal-mode]
-
