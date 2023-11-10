@@ -304,6 +304,7 @@ vnoremap w t"
 
 " poor man's substitute.nvim and duplicate.nvim:
 " brut-forcing all possible text objects 💀
+unmap s
 nunmap s
 nnoremap ss Vp
 nnoremap S vg$p
@@ -332,6 +333,7 @@ nnoremap sac va}p
 nnoremap srg vGp
 nnoremap sgg vggGp
 
+unmap w
 nunmap w
 exmap duplicate obcommand obsidian-editor-shortcuts:duplicateLine
 nnoremap ww :duplicate
