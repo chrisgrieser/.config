@@ -19,19 +19,24 @@ function o() {
 		# shellcheck disable=2016
 		fd --type=file --type=symlink --color=always | fzf \
 			-1 --ansi --query="$input" --info=inline --header-first \
-			--header="^H: --hidden --no-ignore" \
+			--header="^H: --hidden --no-ignore   ^P: Copy Path" \
 			--with-nth=-2.. --delimiter="/" \
 			--bind="ctrl-h:reload(fd --hidden --no-ignore --exclude='/.git/' --exclude='.DS_Store' --type=file --type=symlink --color=always)" \
+			--expect="ctrl-p" \
 			--preview-window="60%" \
 			--preview '[[ $(file --mime {}) =~ text ]] && bat --color=always --wrap=never --style=header {} || file {} | fold -w $FZF_PREVIEW_COLUMNS' \
 			--height="100%" #required for wezterm's pane:is_alt_screen_active()
 	)
-	if [[ -z "$selected" ]]; then # fzf aborted
-		return 0
-	elif [[ -f "$selected" ]]; then
-		open "$selected"
+	[[ -z "$selected" ]] && return 0 # aborted
+
+	key_pressed=$(echo "$selected" | head -n1)
+	file_path=$(echo "$selected" | sed '1d')
+
+	if [[ "$key_pressed" == "ctrl-p" ]]; then
+		echo -n "$file_path" | pbcopy
+		print "\033[1;33m$file_path\033[0m copied."
 	else
-		return 1
+		open "$file_path"
 	fi
 }
 

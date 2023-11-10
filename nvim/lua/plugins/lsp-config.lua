@@ -111,6 +111,9 @@ serverConfigs.jedi_language_server = {
 	init_options = {
 		diagnostics = { enable = true },
 		codeAction = { nameExtractVariable = "extracted_var", nameExtractFunction = "extracted_def" },
+		workspace = {
+			environmentPath = vim.env.VAULT_PATH,
+		},
 	},
 }
 
