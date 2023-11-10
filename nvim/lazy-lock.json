@@ -13,7 +13,7 @@
   "cmp-path": { "branch": "main", "commit": "91ff86cd9c29299a64f968ebb45846c485725f23" },
   "cmp-zsh": { "branch": "main", "commit": "c24db8e58fac9006ec23d93f236749288d00dec9" },
   "cmp_luasnip": { "branch": "master", "commit": "05a9ab28b53f71d1aece421ef32fee2cb857a843" },
-  "cmp_yanky": { "branch": "main", "commit": "b592223dcbffaae39eefd090e65239b81a3de0e5" },
+  "cmp_yanky": { "branch": "main", "commit": "18dcd0446a0843ed55f1385780244a54cf7bbc7f" },
   "codeium.vim": { "branch": "main", "commit": "1efe2a2cdf516094bdb211aa8a1d45ef01836207" },
   "conform.nvim": { "branch": "master", "commit": "c3447c0080f4d6a94917b6eefa2dbdcac63dbfcc" },
   "cybu.nvim": { "branch": "main", "commit": "c0866ef6735a85f85d4cf77ed6d9bc92046b5a99" },
