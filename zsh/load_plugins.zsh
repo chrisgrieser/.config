@@ -40,7 +40,9 @@ safe_source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 safe_source "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
 
 safe_source "$ZDOTDIR/plugins/magic_dashboard.zsh"
-#───────────────────────────────────────────────────────────────────────────────
+
+# needs to be placed after compinit
+eval "$(zoxide init zsh)" 
 
 # PROMPT
 eval "$(starship init zsh)"
