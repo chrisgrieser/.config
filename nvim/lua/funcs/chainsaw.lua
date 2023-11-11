@@ -1,7 +1,7 @@
 local M = {}
 --------------------------------------------------------------------------------
 
----@class pluginConfig
+---@class (exact) pluginConfig
 ---@field marker string
 ---@field beepEmojis string[]
 ---@field logStatements table<string, table<string, string|string[]>>

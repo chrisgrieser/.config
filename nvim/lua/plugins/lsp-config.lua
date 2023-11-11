@@ -43,8 +43,8 @@ end
 --------------------------------------------------------------------------------
 -- LUA
 
+-- DOCS https://luals.github.io/wiki/settings/
 serverConfigs.lua_ls = {
-	-- DOCS https://luals.github.io/wiki/settings/
 	settings = {
 		Lua = {
 			completion = {
@@ -66,7 +66,6 @@ serverConfigs.lua_ls = {
 			workspace = { checkThirdParty = "Disable" }, -- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
 		},
 	},
-	blubb = 2,
 }
 
 --------------------------------------------------------------------------------
