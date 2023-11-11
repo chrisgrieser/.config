@@ -17,8 +17,6 @@ keymap(
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
-keymap("n", "j", "gj")
-keymap("n", "k", "gk")
 
 -- HJKL behaves like hjkl, but bigger distance
 keymap({ "o", "x" }, "H", "^") -- `zv` opens folds when navigating a horizontal lines
@@ -113,6 +111,7 @@ keymap("n", "~", "~h") -- don't move cursor, useful for vertical changes
 
 -- Merging
 keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
+keymap({ "n", "x" }, "gM", "gJ", { desc = "󰗈 Merge line up (+ trim)" })
 
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT

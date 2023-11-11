@@ -9,7 +9,8 @@ function run(argv) {
 	const dueDate = new Date();
 	dueDate.setDate(dueDate.getDate() + inDays);
 
-	const lines = $.getenv("reminderText").split("\n");
+	const reminderText = $.getenv("reminderText").trim().replace(/^#+ ?/, "");
+	const lines = reminderText.split("\n");
 	const title = lines.shift();
 	const body = lines.join("\n");
 
