@@ -18,37 +18,37 @@ function run() {
 	const allDevices = JSON.parse(app.doShellScript("system_profiler -json SPBluetoothDataType"))
 		.SPBluetoothDataType[0];
 	if (allDevices.device_connected) {
-		allDevices.device_connected.forEach((/** @type {{ [x: string]: any; }} */ device) => {
+		for (const device of allDevices.device_connected) {
 			const name = Object.keys(device)[0];
 			const properties = device[name];
 			properties.device_name = name;
 			properties.connected = true;
 			deviceArr.push(properties);
-		});
+		}
 	}
 	if (allDevices.device_not_connected) {
-		allDevices.device_not_connected.forEach((/** @type {{ [x: string]: any; }} */ device) => {
+		for (const device of allDevices.device_not_connected) {
 			const name = Object.keys(device)[0];
 			const properties = device[name];
 			properties.device_name = name;
 			properties.connected = false;
 			deviceArr.push(properties);
-		});
+		}
 	}
 
-	// INFO some macOS versions use a different property for that (see issue #2)
+	// INFO some macOS versions use a different property for that (see #2)
 	if (allDevices.device_title) {
-		allDevices.device_title.forEach((/** @type {{ [x: string]: any; }} */ device) => {
+		for (const device of allDevices.device_title) {
 			const name = Object.keys(device)[0];
 			const properties = device[name];
-			// make keys consistent with the other versions of the output
+			// ADAPTER make keys consistent with the other versions of the output
 			properties.device_minorType = properties.device_minorClassOfDevice_string;
 			properties.device_name = name;
 			properties.connected = properties.device_isconnected === "attrib_Yes";
 			// WARN do not use `replaceAll` because it doesn't work on older macOS versions
 			properties.device_address = properties.device_addr.replace(/_/g, ":");
 			deviceArr.push(properties);
-		});
+		}
 	}
 
 	// INFO `ioreg` only includes Apple keyboards, mice, and trackpads, but does
@@ -61,37 +61,39 @@ function run() {
 	if (applePeriData.startsWith("<stdin>: Property List error")) applePeriData = "[]";
 
 	// data as xml -> remove "data" key -> convert to json
-	JSON.parse(applePeriData).forEach((/** @type {{ DeviceAddress: string; }} */ device) => {
+	for (const device of JSON.parse(applePeriData)) {
 		// make address consistent with output from `system_profiler`
 		// WARN do not use `replaceAll` because it doesn't work on older macOS versions
 		const address = device.DeviceAddress.toUpperCase().replace(/-/g, ":");
 		applePeriphery[address] = device;
-	});
+	}
 
 	//───────────────────────────────────────────────────────────────────────────
 
 	deviceArr = deviceArr.map((device) => {
 		const batteryLevel =
-			applePeriphery[device.device_address]?.BatteryPercent || parseInt(device.device_batteryLevelMain) || -1;
+			applePeriphery[device.device_address]?.BatteryPercent ||
+			parseInt(device.device_batteryLevelMain) ||
+			-1;
 		const batteryLow = batteryLevel < 20 ? "⚠️" : "";
 		const battery = batteryLevel > -1 ? `${batteryLow}${batteryLevel}%` : "";
 		const connected = device.connected ? "🟢 " : "🔴 ";
 		const distance = device.device_rssi ? ` rssi: ${device.device_rssi}` : "";
 		const name = device.device_name;
 		if (excludedDevices.includes(name)) return {};
-		const type = device.device_minorType;
+		const type = device.device_minorType
 
 		// icon
 		let category = "";
 		const typeIcons = {
-			Keyboard: "⌨️",
-			Mouse: "🖱️",
-			AppleTrackpad: "🖲️",
-			Gamepad: "🎮",
-			Headphones: "🎧",
-			Headset: "🎧",
+			keyboard: "⌨️",
+			mouse: "🖱️",
+			appletrackpad: "🖲️",
+			gamepad: "🎮",
+			headphones: "🎧",
+			headset: "🎧",
 		};
-		if (type) category = typeIcons[type];
+		if (type) category = typeIcons[type.toLowerCase()];
 		else if (name.toLowerCase().includes("phone")) category = "📱";
 
 		return {
