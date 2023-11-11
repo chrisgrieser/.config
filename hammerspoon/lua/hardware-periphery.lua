@@ -13,8 +13,8 @@ M.usb_externalDrive = hs.usb.watcher
 			"Integrated RGB Camera", -- Docking Station in the office
 			"T27hv-20",
 			"USB 10/100/1000 LAN",
-			"CHERRY Wireless Device" -- Mouse at mother
-		} 
+			"CHERRY Wireless Device", -- Mouse at mother
+		}
 		if u.tbl_contains(ignore, name) or device.eventType ~= "added" then return end
 
 		u.notify("Mounted: " .. name)
@@ -45,7 +45,7 @@ M.usb_externalDrive = hs.usb.watcher
 
 M.timer_dailyBatteryCheck = hs.timer
 	.doAt("14:30", "01d", function()
-		local warningLevel = 15
+		local warningLevel = 30
 		local devices = hs.battery.privateBluetoothBatteryInfo()
 		if not devices then return end
 
