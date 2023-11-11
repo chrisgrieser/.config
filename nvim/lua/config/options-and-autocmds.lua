@@ -148,7 +148,9 @@ opt.listchars:append {
 -- no list chars in special buffers
 autocmd({ "BufNew", "BufReadPost" }, {
 	callback = function()
-		if vim.bo.buftype ~= "" then opt_local.list = false end
+		vim.defer_fn(function()
+			if vim.bo.buftype ~= "" then opt_local.list = false end
+		end, 1)
 	end,
 })
 

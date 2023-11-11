@@ -304,7 +304,6 @@ vnoremap w t"
 
 " poor man's substitute.nvim and duplicate.nvim:
 " brut-forcing all possible text objects 💀
-unmap s
 nunmap s
 nnoremap ss Vp
 nnoremap S vg$p
