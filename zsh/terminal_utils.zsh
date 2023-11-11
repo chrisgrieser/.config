@@ -44,7 +44,6 @@ function o() {
 #───────────────────────────────────────────────────────────────────────────────
 
 # smarter z/cd
-# after entering new folder, inspect it (eza, git log, git status, etc.)
 function my_zoxide() {
 	if ! command -v __zoxide_z &>/dev/null; then printf "\033[1;33mzoxide not installed.\033[0m" && return 1; fi
 	# shellcheck disable=2086
@@ -52,6 +51,7 @@ function my_zoxide() {
 	_magic_dashboard
 	auto_venv
 }
+# requires `zoxide init --no-cmd zsh`
 function z() { my_zoxide "__zoxide_z" "$*"; }
 function zz() { my_zoxide "__zoxide_z" "$OLDPWD"; } # back to last directory
 function zi() { my_zoxide "__zoxide_zi"; } # directory history

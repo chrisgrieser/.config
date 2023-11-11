@@ -19,7 +19,7 @@ return {
 			{ "<S-Tab>", "<Plug>(bullets-promote)", mode = { "i", "n", "x" }, ft = "markdown" },
 		},
 		init = function()
-			vim.g.bullets_set_mappings = 0 -- using my own
+			vim.g.bullets_set_mappings = 0 -- using my own above
 			vim.g.bullets_delete_last_bullet_if_empty = 1
 			vim.g.bullets_enable_in_empty_buffers = 0
 		end,
@@ -29,8 +29,8 @@ return {
 		build = function() vim.fn["mkdp#util#install"]() end,
 		-- ft-load-trigger needed for the plugin to work, even though it's only
 		-- loaded on the keymap, probably the plugin has some ftplugin conditions
-		-- or something.
-		ft = "markdown", 
+		-- doing some pre-loading
+		ft = "markdown",
 		keys = {
 			{ "<D-r>", vim.cmd.MarkdownPreview, ft = "markdown", desc = " Preview" },
 		},

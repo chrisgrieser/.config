@@ -24,10 +24,18 @@ declare class GithubIssue {
 	title: string;
 	user: { login: string; };
 	state: string;
-	comments: string;
+	comments: number;
+	// biome-ignore lint/style/useNamingConvention: not_by_me
+	full_name: string;
+	// biome-ignore lint/style/useNamingConvention: not_by_me
+	open_issues: number;
 	number: string;
 	// biome-ignore lint/style/useNamingConvention: not_by_me
 	html_url: string;
+	// biome-ignore lint/style/useNamingConvention: not_by_me
+	repository_url: string;
+	// biome-ignore lint/style/useNamingConvention: not_by_me
+	pull_request: { merged_at?: string; };
 }
 
 declare class GithubRepo {
