@@ -69,6 +69,7 @@ local function cmpconfig()
 			["<PageUp>"] = cmp.mapping.scroll_docs(-4),
 			["<PageDown>"] = cmp.mapping.scroll_docs(4),
 			["<C-e>"] = cmp.mapping.abort(),
+			["<D-c>"] = cmp.mapping.complete(), -- manually triggereing useful for yaml/json
 
 			-- Next item, or trigger completion, or insert normal tab
 			["<Tab>"] = cmp.mapping(function(fallback)
@@ -80,9 +81,7 @@ local function cmpconfig()
 
 				if cmp.visible() then
 					cmp.select_next_item()
-				elseif
-					not onlyWhitespaceBefCursor() or vim.tbl_contains({ "yaml", "json" }, vim.bo.ft)
-				then
+				elseif not onlyWhitespaceBefCursor() then
 					cmp.complete()
 				else
 					fallback()

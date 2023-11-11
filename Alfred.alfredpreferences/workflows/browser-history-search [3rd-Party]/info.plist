@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>7B8EAFBE-1F13-43AC-877B-4E588E0CBBE6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>431B5DB0-7A04-4CD2-87E8-68938FF6C74B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A1F782AE-40F5-47BE-BA57-F230607162D5</key>
 		<array>
 			<dict>
@@ -75,6 +88,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>F00B5055-2A7B-4DF4-AFAA-1B57E89B61DB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>DA1E89B6-5228-4635-B4F1-092C9ECE1B68</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7B8EAFBE-1F13-43AC-877B-4E588E0CBBE6</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -286,23 +312,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>jumpto</key>
-				<string>alfred.action.url.openin</string>
-				<key>path</key>
-				<string>{var:url}</string>
-				<key>type</key>
-				<integer>2</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.actioninalfred</string>
-			<key>uid</key>
-			<string>27EF6551-081A-4BF3-AE2C-3279905CA7FA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -346,6 +355,23 @@
 			<string>D09358D1-C880-4E62-837E-6648A334152E</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>jumpto</key>
+				<string>alfred.action.url.openin</string>
+				<key>path</key>
+				<string>{var:url}</string>
+				<key>type</key>
+				<integer>2</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.actioninalfred</string>
+			<key>uid</key>
+			<string>27EF6551-081A-4BF3-AE2C-3279905CA7FA</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -430,6 +456,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{var:url}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>6F7CBD9B-C876-48E2-B00E-92F71C1609A5</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -500,21 +545,65 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
+				<key>availableviaurlhandler</key>
 				<false/>
-				<key>clipboardtext</key>
-				<string>{var:url}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
+				<key>triggerid</key>
+				<string>re-open-last-tab</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
+			<string>alfred.workflow.trigger.external</string>
 			<key>uid</key>
-			<string>6F7CBD9B-C876-48E2-B00E-92F71C1609A5</string>
+			<string>DA1E89B6-5228-4635-B4F1-092C9ECE1B68</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<true/>
+				<key>skipvarencode</key>
+				<true/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>431B5DB0-7A04-4CD2-87E8-68938FF6C74B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string># get first URL from JSON
+# has to be done in Alfred, since Alfred environment variables are needed
+
+# small leeway getting lines 3-6, since line numbers sometimes shift
+echo -n $(./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",')</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>7B8EAFBE-1F13-43AC-877B-4E588E0CBBE6</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -571,6 +660,15 @@ Pressing `CMD` to enter `Other Actions...`:
 			<key>ypos</key>
 			<real>190</real>
 		</dict>
+		<key>431B5DB0-7A04-4CD2-87E8-68938FF6C74B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>610</real>
+			<key>ypos</key>
+			<real>500</real>
+		</dict>
 		<key>6B99D187-E195-432C-A079-D4A99D9A9B0D</key>
 		<dict>
 			<key>xpos</key>
@@ -584,6 +682,15 @@ Pressing `CMD` to enter `Other Actions...`:
 			<real>940</real>
 			<key>ypos</key>
 			<real>355</real>
+		</dict>
+		<key>7B8EAFBE-1F13-43AC-877B-4E588E0CBBE6</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>450</real>
+			<key>ypos</key>
+			<real>500</real>
 		</dict>
 		<key>A1F782AE-40F5-47BE-BA57-F230607162D5</key>
 		<dict>
@@ -612,6 +719,20 @@ Pressing `CMD` to enter `Other Actions...`:
 			<real>380</real>
 			<key>ypos</key>
 			<real>190</real>
+		</dict>
+		<key>DA1E89B6-5228-4635-B4F1-092C9ECE1B68</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>leader → shift+b via Karabiner
+
+BACKUP
+for when browser history search workflow updates</string>
+			<key>xpos</key>
+			<real>300</real>
+			<key>ypos</key>
+			<real>500</real>
 		</dict>
 		<key>E420908F-C5F5-44DD-AB95-0B375998DC6F</key>
 		<dict>
