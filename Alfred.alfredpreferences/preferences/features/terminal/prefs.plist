@@ -18,12 +18,6 @@ on alfred_script(shellCmd)
 		end repeat
 	end tell
 
-	# Add `clear` if it is just a `cd` command, because it looks cleaner
-	set command to text 1 thru 2 of shellCmd
-	set isMultiCmd to (shellCmd contains "|" or shellCmd contains "&amp;&amp;" or shellCmd contains ";")
-	if command is "cd" and not isMultiCmd then 
-		set shellCmd to shellCmd &amp; " &amp;&amp; clear"
-	end if
 
 	# DOCS https://wezfurlong.org/wezterm/cli/cli/send-text
 	do shell script ("export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ;" ¬

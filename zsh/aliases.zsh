@@ -42,6 +42,18 @@ alias vd="visidata"
 #───────────────────────────────────────────────────────────────────────────────
 # https://www.thorsten-hans.com/5-types-of-zsh-aliases
 
+# SUFFIX Alias
+# shellcheck disable=2139
+alias -s {yml,yaml}='yq "."'
+alias -s json='command jless --no-line-numbers'
+alias -s pdf='qlmanage -p'
+
+[[ "$TERM_PROGRAM" == "WezTerm" ]] && image_viewer="wezterm imgcat" || image_viewer="qlmanage -p"
+# shellcheck disable=2139
+alias -s {gif,png,jpg,jpeg,webp,tiff}="$image_viewer"
+
+#───────────────────────────────────────────────────────────────────────────────
+
 # GLOBAL ALIAS (to be used at the end, mostly)
 alias -g G='| rg'
 alias -g B='| bat'

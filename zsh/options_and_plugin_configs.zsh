@@ -20,15 +20,6 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}
 zstyle ':completion:*:descriptions' format $'\033[1;34m%d\033[0m'
 
 #───────────────────────────────────────────────────────────────────────────────
-# HOOKS
-
-# `chpwd` is called on directory change
-function chpwd {
-	_magic_dashboard
-	auto_venv
-}
-
-#───────────────────────────────────────────────────────────────────────────────
 # CLI/PLUGIN SETTINGS
 
 # FIX for whatever reason, LS_COLORS is not being set, so setting it here with
