@@ -62,12 +62,12 @@ return {
 		event = "VimEnter",
 		main = "project_nvim",
 		opts = {
-			detection_methods = { "pattern" },
+			detection_methods = { "pattern", "lsp" },
 			patterns = {
 				".git", -- git root
 				"info.plist", -- Alfred workflows
 				">.config", -- all subfolders of the dotfile directory
-				">com~apple~CloudDocs", -- = all subfolders of the iCloud drive
+				">com~apple~CloudDocs", -- all subfolders of the iCloud drive
 			},
 		},
 	},
