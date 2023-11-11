@@ -17,9 +17,17 @@ function alfredMatcher(str) {
 function run() {
 	const resultsNumber = $.getenv("results_number");
 	const username = $.getenv("github_username");
-	const apiURL = `https://api.github.com/search/issues?q=involves:${username}&per_page=${resultsNumber}`;
 
-	const issues = JSON.parse(app.doShellScript(`curl -sL "${apiURL}"`)).items.map((item) => {
+	// search issues or PRs
+	const mode = $.getenv("alfred_workflow_keyword") === "ghi" ? "issues" : "pr";
+
+	// DOCS https://gist.github.com/bonniss/4f0de4f599708c5268134225dda003e0
+	const apiURL = `https://api.github.com/search/issues?q=user:${username}&per_page=${resultsNumber}`;
+
+	//───────────────────────────────────────────────────────────────────────────
+
+
+	const alfredItems = JSON.parse(app.doShellScript(`curl -sL "${apiURL}"`)).items.map((/** @type {GithubIssue} */ item) => {
 		const issueAuthor = item.user.login;
 		const authoredByMe = issueAuthor === username;
 
@@ -55,5 +63,5 @@ function run() {
 			},
 		};
 	});
-	return JSON.stringify({ items: issues });
+	return JSON.stringify({ items: alfredItems });
 }
