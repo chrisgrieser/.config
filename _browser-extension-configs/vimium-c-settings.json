@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "09/11/2023, 13:38:01",
-	"time": 1699533481632,
+	"@time": "11/11/2023, 12:48:56",
+	"time": 1699703336184,
 	"environment": {
 		"extension": "1.99.994",
 		"platform": "mac",
@@ -65,6 +65,7 @@
 		"idghocbbahafpfhjnfhpbfbmpegphmmp",
 		""
 	],
+	"filterLinkHints": true,
 	"grabBackFocus": true,
 	"keyLayout": 144,
 	"keyMappings": [
@@ -193,6 +194,7 @@
 		""
 	],
 	"vimSync": true,
+	"waitForEnter": false,
 	"ignoreCapsLock": 2,
 	"mapModifier": 2
 }
