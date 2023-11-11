@@ -8,6 +8,19 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
+		<key>1809AA65-C45E-4D01-976D-F2A765BF6019</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9C9521AF-BA6F-4442-BDE1-B6E220EAFED3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>1F170814-90DD-485E-A861-757A4FD92606</key>
 		<array>
 			<dict>
@@ -173,6 +186,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>FCE409B4-6AF4-4E92-AAAE-97E55636E8AE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D1765CC4-C76F-441D-ADC9-FE46B6582474</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1809AA65-C45E-4D01-976D-F2A765BF6019</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -588,6 +614,69 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
+				<key>triggerid</key>
+				<string>re-open-last-tab</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>D1765CC4-C76F-441D-ADC9-FE46B6582474</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string># get first URL from JSON
+# has to be done in Alfred, since Alfred environment variables are needed
+
+# small leeway getting lines 3-6, since line numbers sometimes shift
+./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",'</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>1809AA65-C45E-4D01-976D-F2A765BF6019</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<true/>
+				<key>skipvarencode</key>
+				<true/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{var:url}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>9C9521AF-BA6F-4442-BDE1-B6E220EAFED3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -755,6 +844,15 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>1809AA65-C45E-4D01-976D-F2A765BF6019</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>675</real>
+			<key>ypos</key>
+			<real>555</real>
+		</dict>
 		<key>1B7FE114-DCC5-4243-8C64-D1D8DC1C0193</key>
 		<dict>
 			<key>colorindex</key>
@@ -875,6 +973,15 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 			<key>ypos</key>
 			<real>30</real>
 		</dict>
+		<key>9C9521AF-BA6F-4442-BDE1-B6E220EAFED3</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>835</real>
+			<key>ypos</key>
+			<real>555</real>
+		</dict>
 		<key>AADFC524-047E-4638-ABAA-646CEC90599D</key>
 		<dict>
 			<key>colorindex</key>
@@ -945,6 +1052,20 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 			<real>460</real>
 			<key>ypos</key>
 			<real>160</real>
+		</dict>
+		<key>D1765CC4-C76F-441D-ADC9-FE46B6582474</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>leader → shift+b via Karabiner
+
+BACKUP
+for when browser history search workflow updates</string>
+			<key>xpos</key>
+			<real>525</real>
+			<key>ypos</key>
+			<real>555</real>
 		</dict>
 		<key>D909DE7E-1D08-42B3-B048-039BDE823F44</key>
 		<dict>

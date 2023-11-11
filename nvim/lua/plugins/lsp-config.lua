@@ -22,7 +22,7 @@ vim.g.myLsps = { -- variable used by MasonToolInstaller
 
 --------------------------------------------------------------------------------
 
----@class lspConfiguration see https://github.com/neovim/nvim-lspconfig/blob/master/doc/lspconfig.txt#L46
+---@class (exact) lspConfiguration see https://github.com/neovim/nvim-lspconfig/blob/master/doc/lspconfig.txt#L46
 ---@field settings? table <string, table>
 ---@field root_dir? function(filename, bufnr)
 ---@field filetypes? string[]
@@ -66,6 +66,7 @@ serverConfigs.lua_ls = {
 			workspace = { checkThirdParty = "Disable" }, -- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
 		},
 	},
+	blubb = 2,
 }
 
 --------------------------------------------------------------------------------
