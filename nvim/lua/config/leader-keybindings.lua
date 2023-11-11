@@ -112,8 +112,8 @@ keymap(
 keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
 
 --------------------------------------------------------------------------------
-
 -- LOGGING
+
 -- stylua: ignore start
 keymap({ "n", "x" }, "<leader>lm", function() require("funcs.chainsaw").messageLog() end, { desc = "󰸢 message log" })
 keymap({ "n", "x" }, "<leader>ll", function() require("funcs.chainsaw").variableLog() end, { desc = "󰸢 variable log" })

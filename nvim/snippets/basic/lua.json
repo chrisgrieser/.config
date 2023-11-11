@@ -30,7 +30,10 @@
 	},
 	"class definition": {
 		"prefix": ["class definition", "type definition"],
-		"body": ["---@class ${1:class_name} ${2:class_description}", "---@field ${3:field_name} string"],
+		"body": [
+			"---@class (exact) ${1:class_name}",
+			"---@field ${2:field_name} string"
+		],
 		"description": "https://github.com/LuaLS/lua-language-server/wiki/Annotations#class"
 	},
 	"ignore start/end (stylua)": {

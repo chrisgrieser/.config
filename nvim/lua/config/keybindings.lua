@@ -19,12 +19,11 @@ keymap(
 -- NAVIGATION
 
 -- HJKL behaves like hjkl, but bigger distance
-keymap({ "o", "x" }, "H", "^") -- `zv` opens folds when navigating a horizontal lines
-keymap("n", "H", "0^") -- `0` ensures fully scrolling to the left on long indented lines
+keymap({ "o", "x" }, "H", "^") 
+keymap("n", "H", "0^") -- `0` ensures fully scrolling to the left on long, indented lines
 keymap({ "n", "x" }, "L", "$")
 keymap({ "n", "x" }, "J", "6j")
 keymap({ "n", "x" }, "K", "6k")
-keymap("o", "J", "2j") -- dj = delete 2 lines, dJ = delete 3 lines
 
 -- Jump history
 -- non-unique, since it overwrites nvim default: https://neovim.io/doc/user/vim_diff.html#default-mappings
@@ -50,8 +49,10 @@ for remap, original in pairs(u.textobjRemaps) do
 	keymap({ "o", "x" }, "a" .. remap, "a" .. original, { desc = "󱡔 outer " .. original })
 end
 
+-- special remaps
 keymap("o", "k", 'i"', { desc = "󱡔 inner quote" })
 keymap("o", "K", 'a"', { desc = "󱡔 outer quote" })
+keymap("o", "J", "2j") -- dj = delete 2 lines, dJ = delete 3 lines
 
 -- quick textobj operations
 keymap("n", "<Space>", '"_ciw', { desc = "󱡔 change word" })
