@@ -96,7 +96,22 @@ return {
 		},
 	},
 	{ -- color previews & color picker
+		-- defiend
 		"uga-rosa/ccc.nvim",
+		init = function()
+			-- HACK from the vim docs: https://neovim.io/doc/user/options.html#modeline
+			-- setting `# vim-pseudo-modeline: buffer_has_colors` enables the
+			-- highlighter. Normally, this would not be possible since modelines
+			-- only support options set via `set`.
+			vim.api.nvim_create_autocmd("BufReadPost", {
+				callback = function()
+					local firstline = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]
+					if vim.endswith(firstline, "vim-pseudo-modeline: buffer_has_colors") then
+						vim.cmd.CccHighlighterEnable()
+					end
+				end,
+			})
+		end,
 		keys = {
 			{ "g#", vim.cmd.CccPick, desc = " Color Picker" },
 			-- shift-# on german keyboard
