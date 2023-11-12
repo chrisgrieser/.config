@@ -1,12 +1,12 @@
 local M = {}
 --------------------------------------------------------------------------------
 
-M.vimDataDir = vim.env.DATA_DIR .. "/vim-data/" -- vim.env reads from .zshenv
-M.linterConfigFolder = os.getenv("HOME") .. "/.config/_linter-configs/"
-
 ---runs :normal natively with bang
 ---@param cmdStr string
-function M.normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
+function M.normal(cmdStr)
+	-- selene: allow(mixed_table)
+	vim.cmd.normal { cmdStr, bang = true }
+end
 
 ---@param str string
 ---@param filePath string line(s) to add
@@ -122,6 +122,11 @@ end
 
 --------------------------------------------------------------------------------
 
+M.vimDataDir = vim.env.DATA_DIR .. "/vim-data/" -- vim.env reads from .zshenv
+M.linterConfigFolder = os.getenv("HOME") .. "/.config/_linter-configs/"
+
+--------------------------------------------------------------------------------
+
 ---Sets the global BorderStyle variable and the matching BorderChars Variable.
 ---See also https://neovim.io/doc/user/api.html#nvim_open_win()
 ---(BorderChars used for Telescope, borderHorizontal used for whichkey and Glance)
@@ -155,7 +160,7 @@ M.textobjMaps = {
 	cond = "o", -- c[o]nditional
 	call = "l", -- cal[l]
 	wikilink = "R", -- two [R]ectangular brackets
-	codeblock = "E", -- Markdown codeblock (upeprcase of e for `)
+	codeblock = "E", -- Markdown codeblock (uppercase of e for `)
 }
 
 --------------------------------------------------------------------------------

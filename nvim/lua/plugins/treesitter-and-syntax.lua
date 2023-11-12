@@ -1,3 +1,4 @@
+--# selene: allow(mixed_table) -- lazy.nvim uses them
 local textobjMaps = require("config.utils").textobjMaps
 --------------------------------------------------------------------------------
 

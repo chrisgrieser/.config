@@ -1,3 +1,4 @@
+--# selene: allow(mixed_table) -- lazy.nvim uses them
 -- vim-pseudo-modeline: buffer_has_colors
 local u = require("config.utils")
 --------------------------------------------------------------------------------
