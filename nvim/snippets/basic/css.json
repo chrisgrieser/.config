@@ -1,13 +1,13 @@
 {
-	"outline (debug)": {
-		"prefix": "outline (debug)",
-		"body": "outline: 2px solid red !important;"
-	},
 	"ignore range (stylelint)": {
 		"prefix": "ignore range (stylelint)",
 		"body": [
 			"/* stylelint-disable ${1:no-duplicate-selectors} */",
 			"/* stylelint-enable ${1:no-duplicate-selectors} */"
 		]
+	},
+	"ignore (prettier)": {
+		"prefix": "ignore (prettier)",
+		"body": "/* prettier-ignore */"
 	}
 }
