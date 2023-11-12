@@ -231,30 +231,6 @@ M.wf_mimestream = wf.new("Mimestream"):subscribe(
 )
 
 --------------------------------------------------------------------------------
--- TEXTPAL
-
--- FIX window opening on System-Start
-if u.isSystemStart() then
-	local textpal = u.app("TextPal")
-	if textpal and textpal:mainWindow() then textpal:mainWindow():close() end
-end
-
---------------------------------------------------------------------------------
--- NEOVIDE
-
--- HACK since neovide does not send a launch signal, triggering window resizing
--- via its URI scheme called on VimEnter
--- (window-movement also triggers hiding other apps via `app-hider`)
-u.urischeme("neovide-post-startup", function()
-	u.whenAppWinAvailable("neovide", function()
-		local neovideWin = u.app("neovide"):mainWindow()
-		local size = env.isProjector() and wu.maximized or wu.pseudoMax
-		wu.moveResize(neovideWin, size)
-		u.app("neovide"):activate()
-	end)
-end)
-
---------------------------------------------------------------------------------
 
 -- DISCORD
 -- when focused, enclose URL in clipboard with <>

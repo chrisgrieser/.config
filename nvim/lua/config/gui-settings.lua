@@ -38,8 +38,6 @@ keymap({ "n", "x", "i" }, "<D-->", function() setNeovideScaleFactor(-0.01) end)
 
 -- window size
 g.neovide_remember_window_size = true
--- HACK fix window size sometimes not being remembered
-vim.fn.system { "open", "-g", "hammerspoon://neovide-post-startup" }
 
 -- keymaps
 g.neovide_input_use_logo = true -- enable `cmd` key on macOS
