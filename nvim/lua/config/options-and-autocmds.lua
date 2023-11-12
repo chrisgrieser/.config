@@ -120,8 +120,7 @@ opt.sidescrolloff = 13
 -- whitespace & indentation
 opt.shiftround = true
 opt.smartindent = true
--- fallback, mostly set by .editorconfig
-opt.expandtab = false
+opt.expandtab = false -- fallback, mostly set by .editorconfig
 opt.tabstop = 3
 opt.shiftwidth = 3
 
