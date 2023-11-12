@@ -1,9 +1,6 @@
+--# selene: allow(mixed_table) -- lazy uses them
 local u = require("config.utils")
 --------------------------------------------------------------------------------
-
-local function fsfs()
-	local b = ( "fff" )
-end
 
 return {
 	{ -- better increment/decrement + toggling command
@@ -42,25 +39,6 @@ return {
 			}
 		end,
 	},
-	{
-		"altermo/ultimate-autopair.nvim",
-		event = { "InsertEnter", "CmdlineEnter" },
-		branch = "v0.6", --recomended as each new version will have breaking changes
-		opts = {
-			space2 = { -- *ultimate-autopair-map-space2-config*
-				enable = true,
-			},
-			fastwarp = { -- *ultimate-autopair-map-fastwarp-config*
-				hopout = false,
-				--{(|)} > fastwarp > {(}|)
-			},
-			close = { -- *ultimate-autopair-map-close-config*
-				enable = true,
-				map = "<A-)>", --string or table
-				cmap = "<A-)>", --string or table
-			},
-		},
-	},
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
@@ -73,18 +51,10 @@ return {
 				cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 			end
 
-			-- use treesitter
-			require("nvim-autopairs").setup { check_ts = true }
-
-			-- INFO disable all default mappings for ultimate-autopair
-			-- (but keep the mappings added afterwards)
-			-- https://github.com/altermo/ultimate-autopair.nvim/blob/v0.6/doc/ultimate-autopair.txt#L537
-			for _, rule in ipairs(require("nvim-autopairs").config.rules) do
-				rule.key_map = nil
-			end
-
 			-- CUSTOM RULES
 			-- DOCS https://github.com/windwp/nvim-autopairs/wiki/Rules-API
+			require("nvim-autopairs").setup { check_ts = true } -- use treesitter for custom rules
+
 			local rule = require("nvim-autopairs.rule")
 			local isNodeType = require("nvim-autopairs.ts-conds").is_ts_node
 			local isNotNodeType = require("nvim-autopairs.ts-conds").is_not_ts_node
