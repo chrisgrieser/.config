@@ -329,3 +329,11 @@ rules:
           - shell_command: open -a 'Transmission'
           - *deactivate-leader
           - *remove-notice
+      # [.]: Emoji Picker
+      - type: basic
+        from: { key_code: period }
+        conditions: [*leader-active]
+        to:
+          - { key_code: spacebar, modifiers: [control, command] }
+          - *deactivate-leader
+          - *remove-notice

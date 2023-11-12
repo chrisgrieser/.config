@@ -4,16 +4,15 @@
 -- INFO the first theme in the list is used
 -- rest are themes I already tried and also like
 local darkThemes = {
-	"SynthWave (Gogh)",
-	"Tinacious Design (Dark)",
+	"MaterialDesignColors",
 	"cyberpunk",
+	"ChallengerDeep",
+	"Tinacious Design (Dark)",
 	"Afterglow (Gogh)",
 	"Paraiso Dark",
 	"duckbones",
-	"MaterialDesignColors",
 	"Kanagawa (Gogh)",
 	"TokyoNight (Gogh)",
-	"ChallengerDeep",
 }
 local lightThemes = {
 	"BlulocoLight (Gogh)",
