@@ -10,7 +10,6 @@ local linters = {
 	markdown = { "markdownlint", "vale" },
 	yaml = { "yamllint" },
 	python = { "pylint" },
-	gitcommit = {},
 	json = {},
 	javascript = {},
 	typescript = {},
