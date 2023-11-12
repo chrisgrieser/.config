@@ -28,9 +28,9 @@ return {
 			winblend = 0, -- no transparency, hard to see in many themes otherwise
 			handlers = {
 				cursor = { enable = false },
-				marks = { enable = false },-- FIX mark-related error message
-				quickfix = { enable = true } 
-			}, 
+				marks = { enable = false }, -- FIX mark-related error message
+				quickfix = { enable = true },
+			},
 		},
 	},
 	{ -- virtual text context at the end of a scope
@@ -78,7 +78,7 @@ return {
 		init = function() u.colorschemeMod("RainbowDelimiterRed", { fg = "#7e8a95" }) end,
 		main = "rainbow-delimiters.setup",
 	},
-	{ -- emphasized undo/redos
+	{ -- highlighted undo/redos
 		"tzachar/highlight-undo.nvim",
 		keys = { "u", "U" },
 		opts = {
@@ -97,23 +97,11 @@ return {
 	},
 	{ -- color previews & color picker
 		"uga-rosa/ccc.nvim",
-		init = function()
-			-- HACK from the vim docs: https://neovim.io/doc/user/options.html#modeline
-			-- setting `# vim-pseudo-modeline: buffer_has_colors` enables the
-			-- highlighter. Normally, this would not be possible since modelines
-			-- only support options set via `set`.
-			vim.api.nvim_create_autocmd("BufReadPost", {
-				callback = function()
-					local firstline = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]
-					if vim.endswith(firstline, "vim-pseudo-modeline: buffer_has_colors") then
-						vim.cmd.CccHighlighterEnable()
-					end
-				end,
-			})
-		end,
-		cmd = { "CccHighlighterEnable" },
 		keys = {
-			{ "g#", vim.cmd.CccPick, desc = " Color Picker" }, -- shift-# on german keyboard
+			{ "g#", vim.cmd.CccPick, desc = " Color Picker" },
+			-- shift-# on german keyboard
+			{ "g'", vim.cmd.CccHighlighterEnable, desc = " Color Highlights" },
+			{ "#", "<Plug>(ccc-select-color)", mode = { "o", "x" }, desc = "󱡔 color textobj" },
 		},
 		ft = { "css", "scss", "sh" },
 		config = function()
