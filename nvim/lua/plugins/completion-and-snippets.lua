@@ -1,7 +1,13 @@
 --# selene: allow(mixed_table) -- lazy.nvim uses them
 local defaultSources = {
 	{ name = "luasnip" },
-	{ name = "nvim_lsp" },
+	{
+		name = "nvim_lsp",
+		entry_filter = function(entry)
+			local kind = require("cmp.types").lsp.CompletionItemKind[entry:get_kind()]
+			return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
+		end,
+	},
 	{
 		name = "buffer",
 		option = {
@@ -28,7 +34,7 @@ local sourceIcons = {
 	luasnip = "󰞘",
 	nvim_lsp = "󰒕",
 	path = "",
-	zsh = "",
+	zsh = "",
 }
 
 --------------------------------------------------------------------------------
@@ -129,15 +135,10 @@ local function cmpconfig()
 	})
 
 	-- ZSH
-	-- add zsh source
-	-- disable the annoying `\[` suggestion
-	local defaultPlusZsh = vim.tbl_extend("keep", defaultSources, { name = "zsh" })
+	-- add cmp-zsh source
+	local defaultPlusZsh = vim.deepcopy(defaultSources)
+	table.insert(defaultPlusZsh, { name = "zsh" })
 	cmp.setup.filetype("sh", {
-		enabled = function()
-			local col = vim.fn.col(".") - 1
-			local charBefore = vim.api.nvim_get_current_line():sub(col, col)
-			return charBefore ~= "\\"
-		end,
 		sources = cmp.config.sources(defaultPlusZsh),
 	})
 
