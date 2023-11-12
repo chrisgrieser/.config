@@ -1,3 +1,4 @@
+--# selene: allow(mixed_table) -- lazy.nvim uses them
 return {
 	{ -- lightweight git client
 		"chrisgrieser/nvim-tinygit",

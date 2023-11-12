@@ -1,3 +1,4 @@
+--# selene: allow(mixed_table) -- lazy.nvim uses them
 return {
 	{ -- better embedded terminal
 		"akinsho/toggleterm.nvim",
