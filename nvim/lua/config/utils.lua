@@ -149,7 +149,7 @@ end
 M.textobjRemaps = {
 	c = "}", -- [c]urly brace
 	r = "]", -- [r]ectangular bracket
-	m = "W", -- [m]assive word
+	fsfsf = "f",
 	q = '"', -- [q]uote
 	z = "'", -- [z]ingle quote
 	e = "`", -- t[e]mplate string / inline cod[e]
