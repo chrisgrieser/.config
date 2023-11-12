@@ -96,7 +96,6 @@ return {
 		},
 	},
 	{ -- color previews & color picker
-		-- defiend
 		"uga-rosa/ccc.nvim",
 		init = function()
 			-- HACK from the vim docs: https://neovim.io/doc/user/options.html#modeline
@@ -116,7 +115,7 @@ return {
 			{ "g#", vim.cmd.CccPick, desc = " Color Picker" },
 			-- shift-# on german keyboard
 			{ "g'", vim.cmd.CccHighlighterEnable, desc = " Color Highlights" },
-			{ "#", "<Plug>(ccc-select-color)", mode = { "o", "x" }, desc = "󱡔 color textobj" },
+			{ "#", "<Plug>(ccc-select-color)", mode = "o", desc = "󱡔 color textobj" },
 		},
 		ft = { "css", "scss", "sh" },
 		config = function()

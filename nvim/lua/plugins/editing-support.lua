@@ -1,6 +1,10 @@
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
+local function fsfs()
+	local b = ( "fff" )
+end
+
 return {
 	{ -- better increment/decrement + toggling command
 		"monaqa/dial.nvim",
@@ -38,6 +42,25 @@ return {
 			}
 		end,
 	},
+	{
+		"altermo/ultimate-autopair.nvim",
+		event = { "InsertEnter", "CmdlineEnter" },
+		branch = "v0.6", --recomended as each new version will have breaking changes
+		opts = {
+			space2 = { -- *ultimate-autopair-map-space2-config*
+				enable = true,
+			},
+			fastwarp = { -- *ultimate-autopair-map-fastwarp-config*
+				hopout = false,
+				--{(|)} > fastwarp > {(}|)
+			},
+			close = { -- *ultimate-autopair-map-close-config*
+				enable = true,
+				map = "<A-)>", --string or table
+				cmap = "<A-)>", --string or table
+			},
+		},
+	},
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
@@ -52,6 +75,13 @@ return {
 
 			-- use treesitter
 			require("nvim-autopairs").setup { check_ts = true }
+
+			-- INFO disable all default mappings for ultimate-autopair
+			-- (but keep the mappings added afterwards)
+			-- https://github.com/altermo/ultimate-autopair.nvim/blob/v0.6/doc/ultimate-autopair.txt#L537
+			for _, rule in ipairs(require("nvim-autopairs").config.rules) do
+				rule.key_map = nil
+			end
 
 			-- CUSTOM RULES
 			-- DOCS https://github.com/windwp/nvim-autopairs/wiki/Rules-API
