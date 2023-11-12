@@ -4,8 +4,10 @@ local defaultSources = {
 	{
 		name = "nvim_lsp",
 		entry_filter = function(entry)
-			local kind = require("cmp.types").lsp.CompletionItemKind[entry:get_kind()]
-			return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
+			-- remove suggestions of type "Text"
+			-- local kind = require("cmp.types").lsp.CompletionItemKind[entry:get_kind()]
+			-- return kind ~= "Text"
+			return entry ~= nil
 		end,
 	},
 	{
