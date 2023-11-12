@@ -26,16 +26,15 @@ return {
 			require("dap-python").setup(debugpyPythonPath, { console = "internalConsole" })
 		end,
 	},
-	{ -- import python modules action
-		"stevanmilic/nvim-lspimport",
-		enabled = false, -- TODO requires nvim 0.10
-		keys = {
-			{
-				"<leader>i",
-				function() require("lspimport").import() end,
-				ft = "python",
-				desc = "󰒕 Import",
-			},
-		},
-	},
+	-- { -- import python modules action
+	-- 	"stevanmilic/nvim-lspimport",
+	-- 	keys = {
+	-- 		{
+	-- 			"<leader>i",
+	-- 			function() require("lspimport").import() end,
+	-- 			ft = "python",
+	-- 			desc = "󰒕 Import",
+	-- 		},
+	-- 	},
+	-- },
 }
