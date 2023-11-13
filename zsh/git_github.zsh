@@ -192,16 +192,8 @@ function deletefork {
 	if [[ ! -x "$(command -v fzf)" ]]; then print "\033[1;33mfzf not installed.\033[0m" && return 1; fi
 	if [[ ! -x "$(command -v gh)" ]]; then print "\033[1;33mgh not installed.\033[0m" && return 1; fi
 	
-gh repo delete chrisgrieser/mason-lspconfig.nvim chrisgrieser/spotify-player
-gh repo delete chrisgrieser/spotify-player
-gh repo delete chrisgrieser/nvim-cmp
-gh repo delete chrisgrieser/conform.nvim
-gh repo delete chrisgrieser/dressing.nvim
-	
 	to_delete=$(gh repo list --fork | fzf --multi --with-nth=1 --info=inline | cut -f1)
 	[[ -z "$to_delete" ]] && return 0 # aborted
-
-
 
 	if [[ $(echo "$to_delete" | wc -l) -eq 1 ]]; then
 		gh repo delete "$to_delete"
