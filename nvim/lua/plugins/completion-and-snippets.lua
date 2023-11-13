@@ -14,7 +14,7 @@ local defaultSources = {
 		name = "buffer",
 		option = {
 			get_bufnrs = vim.api.nvim_list_bufs, -- all buffers instead of only the current
-			max_indexed_line_length = 200, -- no long lines (e.g. base64-encoded things)
+			max_indexed_line_length = 120, -- no long lines (e.g. base64-encoded things)
 		},
 		keyword_length = 3,
 		max_item_count = 5, -- since searching all buffers results in many results
@@ -142,6 +142,12 @@ local function cmpconfig()
 	table.insert(defaultPlusZsh, { name = "zsh" })
 	cmp.setup.filetype("sh", {
 		sources = cmp.config.sources(defaultPlusZsh),
+		-- disable useless `\[` suggestions at end of line
+		enabled = function()
+			local col = vim.fn.col(".") - 1
+			local charBefore = vim.api.nvim_get_current_line():sub(col, col)
+			return charBefore ~= "\\"
+		end,
 	})
 
 	-- COMMANDLINE

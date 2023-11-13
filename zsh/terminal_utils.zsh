@@ -18,8 +18,9 @@ function o() {
 	selected=$(
 		# shellcheck disable=2016
 		fd --type=file --type=symlink --color=always | fzf \
-			-1 --ansi --query="$input" --info=inline --header-first \
+			--select-1 --ansi --query="$input" --info=inline --header-first \
 			--header="^H: --hidden --no-ignore   ^P: Copy Path   ^N: Copy Name" \
+			--keep-right \
 			--with-nth=-2.. --delimiter="/" \
 			--bind="ctrl-h:reload(fd --hidden --no-ignore --exclude='/.git/' --exclude='.DS_Store' --type=file --type=symlink --color=always)" \
 			--expect="ctrl-p,ctrl-n" \
