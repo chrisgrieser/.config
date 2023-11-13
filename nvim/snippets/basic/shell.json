@@ -131,9 +131,9 @@
 		"prefix": "lazy load cli",
 		"body": [
 			"function ${1:cli} {",
-			"\tunfunction $$0",
+			"\tunfunction \"\\$0\"",
 			"\t$0",
-			"\t$0 \"$@\"",
+			"\t\\$0 \"$@\"",
 			"}"
 		]
 	},

@@ -21,17 +21,13 @@ CONFIG_FILES=(
 
 for config_file in "${CONFIG_FILES[@]}"; do
 	file="$ZDOTDIR/$config_file.zsh"
-	if [[ -f "$file" ]] ; then
-		# shellcheck disable=1090
-		source "$file"
-	else
-		print "\033[1;33m$file found\033[0m"
-	fi
+	# shellcheck disable=1090
+	source "$file"
 done
 
 
 # remove last login message that some terminals leave
-# https://stackoverflow.com/a/69915614 
+# https://stackoverflow.com/a/69915614
 [[ "$TERM_PROGRAM" == "WezTerm" ]] || printf '\33c\e[3J'
 
 #───────────────────────────────────────────────────────────────────────────────

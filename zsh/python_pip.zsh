@@ -85,7 +85,7 @@ function pip() {
 
 # Lazy-load conda environment, to improve performance and also to prevent conda
 # taking over the prompt until it is needed
-function npm {
+function conda {
 	unfunction "$0"
 	conda_prefix="$(brew --prefix)/anaconda3/bin" # change depending on where/hoow conda was installed
 

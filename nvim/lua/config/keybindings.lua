@@ -19,7 +19,7 @@ keymap(
 -- NAVIGATION
 
 -- HJKL behaves like hjkl, but bigger distance
-keymap({ "o", "x" }, "H", "^") 
+keymap({ "o", "x" }, "H", "^")
 keymap("n", "H", "0^") -- `0` ensures fully scrolling to the left on long, indented lines
 keymap({ "n", "x" }, "L", "$")
 keymap({ "n", "x" }, "J", "6j")
@@ -205,7 +205,8 @@ keymap("i", "<D-v>", function()
 	return "<C-g>u<C-r><C-o>+" -- "<C-g>u" adds undopoint before the paste
 end, { desc = " Paste charwise", expr = true })
 
---- paste in command mode
+--- paste via cmd+v
+keymap("n", "<D-v>", "p")
 keymap("c", "<D-v>", "<C-r>+", { desc = " Paste" })
 
 ------------------------------------------------------------------------------
