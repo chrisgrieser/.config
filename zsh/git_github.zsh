@@ -77,12 +77,6 @@ function fixup {
 	_separator && _gitlog "$target"~2.. # confirm result
 }
 
-function auto-rebase {
-	num_of_commits=${1:-10}
-	# ":" is a "no-op-"editor
-	git -c sequence.editor=: rebase --interactive --autosquash HEAD~"$num_of_commits"
-}
-
 # amend-no-edit
 function gm {
 	git diff --staged --quiet && git add --all # if no staged changes, stage all

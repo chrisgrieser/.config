@@ -11,7 +11,10 @@ local tsConfig = {
 		enable = true,
 		disable = { "css" }, -- PENDING https://github.com/tree-sitter/tree-sitter-css/issues/34
 	},
-	indent = { enable = true }, -- autoindent with `=`
+	indent = {
+		enable = true,
+		disable = { "markdown", "lua" },
+	},
 	incremental_selection = {
 		enable = true,
 		keymaps = {
