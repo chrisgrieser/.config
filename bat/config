@@ -1,19 +1,13 @@
-# `bat --list-themes` to list all available themes
-# INFO themes often depend on light/dark mode, so statically setting a theme here 
-# might break the look of `bat` in dark/light terminals. The default themes works
-# in both modes though: https://github.com/sharkdp/bat/pull/2197
-# alternatively, the theme can dynamically be chosen by bat: 
-# https://github.com/sharkdp/bat#dark-mode
-
-#───────────────────────────────────────────────────────────────────────────────
-
---terminal-width="-1"
---italic-text=always
-
---tabs=2
+# - `bat --list-themes` to list all available themes
+# - only themes that work in dark and light mode are `ansi` and `default` though
+# - alternatively, the theme can be set dynamically: https://github.com/sharkdp/bat#dark-mode
+--theme="ansi"
 
 # Possible values: *default*, full, auto, plain, changes, header,
 # header-filename, header-filesize, grid, rule, numbers, snip.
---style="numbers,changes"
+--style="changes"
 
+--terminal-width="-1"
+--italic-text="always"
+--tabs=2
 --pager="less --RAW-CONTROL-CHARS --quit-if-one-screen --chop-long-lines"
