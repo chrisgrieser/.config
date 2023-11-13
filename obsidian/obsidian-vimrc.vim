@@ -91,8 +91,10 @@ nnoremap gw :gotoScene
 
 " [g]oto definition / link (shukuchi makes it forward-seeking)
 exmap followNextLink obcommand shukuchi:open-link
+exmap followNextLinkInNewTab obcommand shukuchi:open-link-in-new-tab
 nnoremap gx :followNextLink
-nnoremap ga :followNextLink
+nnoremap gX :followNextLinkInNewTab
+nnoremap gp :followNextLink
 nnoremap gd :followNextLink
 
 " [g]oto [o]pen file (= Quick Switcher)
