@@ -48,7 +48,7 @@ export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgrep-config"
 # zoxide
 export _ZO_DATA_DIR="$DATA_DIR/zoxide/"
 export _ZO_FZF_OPTS="
-	$FZF_DEFAULT_OPTS --height=50% --preview-window=right,40% -1
+	$FZF_DEFAULT_OPTS --height=50% --preview-window=right,40% --select-1 --keep-right
 	--preview='eza {2} --icons --color=always --no-quotes --width=\$FZF_PREVIEW_COLUMNS'
 "
 

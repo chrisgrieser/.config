@@ -127,6 +127,16 @@
 		"prefix": "if .. then .. else",
 		"body": ["if [[ \"$${1:cond}\" ]]; then", "\t$0", "else", "\t", "fi"]
 	},
+	"lazy load cli": {
+		"prefix": "lazy load cli",
+		"body": [
+			"function ${1:cli} {",
+			"\tunfunction $$0",
+			"\t$0",
+			"\t$0 \"$@\"",
+			"}"
+		]
+	},
 	"check if installed": {
 		"prefix": "check if installed",
 		"body": "if [[ ! -x \"$(command -v ${1:cli})\" ]]; then print \"\\033[1;33m${1:cli} not installed.\\033[0m\" && return 1; fi\n$0",
