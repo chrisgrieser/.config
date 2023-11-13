@@ -365,7 +365,7 @@ function extractMetadata(citekey, rawEntry) {
 	// extracts content of a BibTeX-field
 	/** @param {string} str */
 	function extract(str) {
-		const prop = str.split(" = ")[1];
+		const prop = str.split("=")[1].trim();
 		return prop.replace(/[{}]|,$/g, ""); // remove TeX-syntax & trailing comma
 	}
 
@@ -389,16 +389,16 @@ function extractMetadata(citekey, rawEntry) {
 				.replaceAll(":", "."); // avoid invalid yaml
 		} else if (property.includes("@")) {
 			data.ptype = property.replace(/@(.*)\{.*/, "$1");
-		} else if (property.includes("pages =")) {
+		} else if (property.match(/pages ?=/)) {
 			const pages = property.match(/\d+/g);
 			if (pages) data.firstPage = parseInt(pages[0]);
-		} else if (/\syear =/i.test(property)) {
+		} else if (property.match(/year ?=/)) {
 			const year = property.match(/\d{4}/g);
 			if (year) data.year = parseInt(year[0]);
-		} else if (property.includes("date =")) {
+		} else if (property.match(/date ?=/)) {
 			const year = property.match(/\d{4}/g);
 			if (year) data.year = parseInt(year[0]);
-		} else if (property.includes("author =")) data.author = extract(property);
+		} else if (property.match("author =")) data.author = extract(property);
 		else if (property.includes("keywords =")) {
 			data.keywords = extract(property).replaceAll(", ", ",").replaceAll(" ", "-"); // no spaces allowed in tags
 		} else if (property.includes("doi =")) {

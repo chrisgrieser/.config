@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "11/11/2023, 12:48:56",
-	"time": 1699703336184,
+	"@time": "13/11/2023, 13:59:39",
+	"time": 1699880379499,
 	"environment": {
 		"extension": "1.99.994",
 		"platform": "mac",
@@ -65,9 +65,8 @@
 		"idghocbbahafpfhjnfhpbfbmpegphmmp",
 		""
 	],
-	"filterLinkHints": true,
 	"grabBackFocus": true,
-	"keyLayout": 144,
+	"keyLayout": 129,
 	"keyMappings": [
 		"#!no-check",
 		"\" combine commands: \" https://github.com/gdh1995/vimium-c/wiki/Auto-run-a-tree-of-commands#open-vomnibar-after-creating-a-new-tab",
@@ -195,6 +194,6 @@
 	],
 	"vimSync": true,
 	"waitForEnter": false,
-	"ignoreCapsLock": 2,
+	"ignoreKeyboardLayout": 2,
 	"mapModifier": 2
 }
