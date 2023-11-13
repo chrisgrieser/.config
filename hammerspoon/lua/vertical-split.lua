@@ -43,11 +43,12 @@ local function verticalSplit()
 
 	M.splitActive = true
 
-	-- end split when one of the two windows is destroyed
+	-- end split when one of the two windows is destroyed/unfullscreened
 	M.wf_vsplit = hs.window.filter
 		.new(true)
 		:setOverrideFilter({ currentSpace = true, fullscreen = true })
 		:subscribe(hs.window.filter.windowDestroyed, endSplit)
+		:subscribe(hs.window.filter.windowUnfullscreened, endSplit)
 end
 
 --------------------------------------------------------------------------------
