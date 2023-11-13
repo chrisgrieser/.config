@@ -195,7 +195,7 @@ function jsonToMd(annotations, citekey) {
 					} else {
 						output = "- ";
 					}
-					output += `${annotationTag}__${comment}__ "${a.quote}" ${reference}`;
+					output += `${annotationTag}**${comment}** "${a.quote}" ${reference}`;
 				} else {
 					output = `- ${annotationTag}"${a.quote}" ${reference}`;
 				}
@@ -383,28 +383,29 @@ function extractMetadata(citekey, rawEntry) {
 	};
 
 	for (const property of bibtexEntry.split("\n")) {
-		if (/\stitle =/i.test(property)) {
+		if (property.match(/title *=/)) {
 			data.title = extract(property)
 				.replaceAll('"', "'") // avoid invalid yaml, since title is wrapped in "'"
 				.replaceAll(":", "."); // avoid invalid yaml
 		} else if (property.includes("@")) {
 			data.ptype = property.replace(/@(.*)\{.*/, "$1");
-		} else if (property.match(/pages ?=/)) {
+		} else if (property.match(/pages *=/)) {
 			const pages = property.match(/\d+/g);
 			if (pages) data.firstPage = parseInt(pages[0]);
-		} else if (property.match(/year ?=/)) {
+		} else if (property.match(/year *=/)) {
 			const year = property.match(/\d{4}/g);
 			if (year) data.year = parseInt(year[0]);
-		} else if (property.match(/date ?=/)) {
+		} else if (property.match(/date *=/)) {
 			const year = property.match(/\d{4}/g);
 			if (year) data.year = parseInt(year[0]);
-		} else if (property.match("author =")) data.author = extract(property);
-		else if (property.includes("keywords =")) {
+		} else if (property.match(/author *=/)) {
+			data.author = extract(property);
+		} else if (property.match(/keywords *=/)) {
 			data.keywords = extract(property).replaceAll(", ", ",").replaceAll(" ", "-"); // no spaces allowed in tags
-		} else if (property.includes("doi =")) {
+		} else if (property.match(/doi *=/)) {
 			data.url = "https://doi.org/" + extract(property);
 			data.doi = extract(property);
-		} else if (property.includes("url =")) data.url = extract(property);
+		} else if (property.match(/url *=/)) data.url = extract(property);
 	}
 
 	// prompt for page number if needed
