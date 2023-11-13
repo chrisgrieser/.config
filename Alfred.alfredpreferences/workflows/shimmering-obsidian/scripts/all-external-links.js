@@ -26,12 +26,12 @@ function run() {
 			const filename = line.split(":")[0].split("/").pop().slice(0, -3);
 			const mdLink = line.split(":").slice(1).join(":");
 			const [_, title, url] = mdLink.match(/\[([^[]*)\]\((.*)\)/);
-			
+
 			return {
 				title: title,
-				subtitle: `${filename} · ${url}`,
+				subtitle: `${filename.slice(0, 30)}  ·  ${url.slice(8)}`,
 				arg: url,
-				match: alfredMatcher(title) + alfredMatcher(url),
+				match: alfredMatcher(title) + alfredMatcher(filename) + alfredMatcher(url),
 				uid: line,
 				mods: {
 					cmd: { arg: line },
