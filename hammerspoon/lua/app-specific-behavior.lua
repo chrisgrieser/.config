@@ -231,6 +231,14 @@ M.wf_mimestream = wf.new("Mimestream"):subscribe(
 )
 
 --------------------------------------------------------------------------------
+-- NEOVIDE
+
+M.wf_neovide = wf.new("neovide"):subscribe(wf.windowCreated, function(newWin)
+	local size = env.isProjector() and wu.maximized or wu.pseudoMax
+	wu.moveResize(newWin, size)
+end)
+
+--------------------------------------------------------------------------------
 
 -- DISCORD
 -- when focused, enclose URL in clipboard with <>

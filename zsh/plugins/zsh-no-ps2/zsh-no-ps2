@@ -1,0 +1,35 @@
+#!/usr/bin/env zsh
+
+builtin emulate -L zsh
+
+builtin local -r func=zsh-no-ps2-test
+
+if (( ${+functions[$func]} )); then
+  builtin unfunction -- $func
+fi
+
+if functions[$func]=$PREBUFFER$BUFFER 2>/dev/null &&
+   (( ${+functions[$func]} )); then
+  builtin unfunction -- $func
+  # This suffix allows us to detect two tricky cases: "for x" and "<<END".
+  # Each of these on their own is a valid function body but neither can
+  # be executed as a command in interactive shell.
+  if functions[$func]=$PREBUFFER$BUFFER$'\ndo\ndone' 2>/dev/null &&
+     (( ${+functions[$func]} )) ; then
+     builtin unfunction -- $func
+  else
+    builtin local w
+    builtin zstyle -s :zsh-no-ps2: accept-line w || w=accept-line
+    if [[ -n $w ]]; then
+      builtin zle -- $w
+    fi
+    builtin return
+  fi
+fi
+
+() {
+  # We do it this way instead of the plain LBUFFER+=$'\n' in order
+  # to make this plugin work with zsh-autosuggestions.
+  local -h KEYS=$'\n'
+  builtin zle self-insert-unmeta
+}
