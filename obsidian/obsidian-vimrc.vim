@@ -103,10 +103,11 @@ nnoremap go :quickSwitcher
 nnoremap gr :quickSwitcher
 
 " go to last change (HACK, only works to jump to the last location)
-nnoremap gc u<C-r>
+nnoremap g; u<C-r>
 
 " increment quicker
 nnoremap + <C-a>
+nnoremap ä <C-x>
 
 """"""""""""""""""""""
 " Search
