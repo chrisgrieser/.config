@@ -305,32 +305,33 @@ vnoremap w t"
 " poor man's substitute.nvim and duplicate.nvim:
 " brut-forcing all possible text objects 💀
 nunmap s
-nnoremap ss Vp
-nnoremap S vg$p
-nnoremap sj vjp
-nnoremap sim viWp
-nnoremap sam vaWp
-nnoremap siw viwp
-nnoremap saw vawp
-nnoremap sis visp
-nnoremap sas vasp
-nnoremap sip vipp
-nnoremap sap vapp
-nnoremap sib vi)p
-nnoremap saq va"p
-nnoremap siq vi"p
-nnoremap sk vi"p
-nnoremap saz va'p
-nnoremap siz vi'p
-nnoremap sae va`p
-nnoremap sie vi`p
-nnoremap sab va)p
-nnoremap sir vi]p
-nnoremap sar va]p
-nnoremap sic vi}p
-nnoremap sac va}p
-nnoremap srg vGp
-nnoremap sgg vggGp
+nnoremap ss VP
+nnoremap S vg$P
+nnoremap sj vjP
+nnoremap sim viWP
+nnoremap sam vaWP
+nnoremap siw viwP
+nnoremap saw vawP
+nnoremap sis visP
+nnoremap sas vasP
+nnoremap sip vipP
+nnoremap sap vapP
+nnoremap sib vi)P
+nnoremap saq va"P
+nnoremap siq vi"P
+nnoremap sk vi"P
+nnoremap saz va'P
+nnoremap siz vi'P
+nnoremap sae va`P
+nnoremap sie vi`P
+nnoremap sab va)P
+nnoremap sir vi]P
+nnoremap sar va]P
+nnoremap sic vi}P
+nnoremap sac va}P
+nnoremap srg vGP
+nnoremap srp v}P
+nnoremap sgg vggGP
 
 unmap w
 nunmap w
@@ -361,6 +362,7 @@ nnoremap war ya]p
 nnoremap wic yi}p
 nnoremap wac ya}p
 nnoremap wrg yGp
+nnoremap wrp y}p
 
 """"""""""""""""""""""
 " Tabs, Splits & Alt-file
