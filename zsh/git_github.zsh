@@ -55,6 +55,7 @@ function gc {
 	fi
 
 	# --no-rebase to prevent "Cannot rebase on multiple branches"
+
 	printf "\033[1;36mPull: \033[0m" && git pull --no-rebase &&
 		printf "\033[1;36mPush: \033[0m" && git push
 }
