@@ -266,5 +266,15 @@ function M.closeAllFinderWins()
 	end
 end
 
+function M.closeFullscreenSpaces()
+	local allSpaces = hs.spaces.allSpaces()
+	if not allSpaces then return end
+	for _, spaces in pairs(allSpaces) do
+		for _, spaceId in pairs(spaces) do
+			if hs.spaces.spaceType(spaceId) == "fullscreen" then hs.spaces.removeSpace(spaceId) end
+		end
+	end
+end
+
 --------------------------------------------------------------------------------
 return M
