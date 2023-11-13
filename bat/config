@@ -8,10 +8,8 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 --terminal-width="-1"
-# --wrap=never
 --italic-text=always
 
-# save space
 --tabs=2
 
 # Possible values: *default*, full, auto, plain, changes, header,
