@@ -36,7 +36,6 @@ alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in 
 alias prose='ssh nanotipsforvim@prose.sh'
 alias bkp='zsh "$HOME/.config/_utility-scripts/backup-script.sh"'
 alias repobkp='zsh "$HOME/.config/_utility-scripts/backup-my-repos.sh"'
-alias vd="visidata"
 
 #───────────────────────────────────────────────────────────────────────────────
 # https://www.thorsten-hans.com/5-types-of-zsh-aliases

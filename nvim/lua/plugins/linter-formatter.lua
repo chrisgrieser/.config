@@ -62,7 +62,6 @@ local dontInstall = {
 	"injected",
 	"ruff_format",
 	"ruff_fix",
-	"ast_grep", -- LSP name, PENDING https://github.com/williamboman/mason-lspconfig.nvim/pull/309
 }
 
 ---given the linter- and formatter-list of nvim-lint and conform.nvim, extract a
@@ -112,22 +111,7 @@ local function linterConfigs()
 end
 
 local function lintTriggers()
-	local function doLint()
-		vim.defer_fn(function()
-			if vim.bo.buftype ~= "" then return end
-
-			-- condition when to lint https://github.com/mfussenegger/nvim-lint/issues/370#issuecomment-1729671151
-			-- local lintersToUse = require("lint").linters_by_ft[vim.bo.ft]
-			-- local pwd = vim.loop.cwd()
-			-- if not pwd then return end
-			-- local hasNoSeleneConfig = vim.loop.fs_stat(pwd .. "/selene.toml") == nil
-			-- if hasNoSeleneConfig and vim.bo.ft == "lua" then
-			-- 	lintersToUse = vim.tbl_filter(function(l) return l ~= "selene" end, lintersToUse)
-			-- end
-			-- require("lint").try_lint(lintersToUse)
-			require("lint").try_lint()
-		end, 1)
-	end
+	local function doLint() vim.defer_fn(require("lint").try_lint, 1) end
 
 	vim.api.nvim_create_autocmd({ "BufReadPost", "InsertLeave", "TextChanged", "FocusGained" }, {
 		callback = doLint,
@@ -191,13 +175,13 @@ return {
 				function()
 					if vim.tbl_contains(lspFormatting, vim.bo.ft) then
 						vim.lsp.buf.format()
-					else
-						require("conform").format {
-							lsp_fallback = false,
-							async = false,
-							callback = vim.cmd.update,
-						}
+						return
 					end
+					require("conform").format {
+						lsp_fallback = false,
+						async = false,
+						callback = vim.cmd.update,
+					}
 				end,
 				mode = { "n", "x" },
 				desc = "󰒕 Format & Save",
