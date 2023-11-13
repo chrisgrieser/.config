@@ -49,14 +49,9 @@ function gc {
 	printf "\033[1;36mCommit: \033[0m"
 	git commit -m "$1" || return 1
 
-	# GUARD
 	if [[ -n "$(git status --porcelain)" ]]; then
 		print "\033[1;36mPush: \033[0mNot pushing since repo still dirty."
 		return 0
-	elif [[ -n "$(git log --oneline --grep="^fixup!" --grep="^squash!")" ]]; then
-		print "\033[1;36mPush: \033[1;33mThere are still fixup or squash commits:\033[0m"
-		git log --oneline --grep="^fixup!" --grep="^squash!"
-		return 1
 	fi
 
 	sleep 0.5 # prevent "Cannot rebase on multiple branches"
@@ -71,7 +66,7 @@ function fixup {
 	[[ -z "$target" ]] && return 0
 	git commit --fixup="$target"
 
-	# HACK ":" is a "no-op-"editor https://www.reddit.com/r/git/comments/uzh2no/what_is_the_utility_of_noninteractive_rebase/
+	# HACK ":" is no-op-editor https://www.reddit.com/r/git/comments/uzh2no/what_is_the_utility_of_noninteractive_rebase/
 	git -c sequence.editor=: rebase --interactive --autosquash "$target^" || return 0
 
 	_separator && _gitlog "$target"~2.. # confirm result
