@@ -10,16 +10,6 @@ setopt AUTO_CD # pure directory = cd into it
 setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful for copypasting)
 
 #───────────────────────────────────────────────────────────────────────────────
-
-# MATCHING / COMPLETION
-# case insensitive path-completion - https://scriptingosx.com/2019/07/moving-to-zsh-part-5-completions/
-zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
-
-# group commands & color groups
-# see https://github.com/marlonrichert/zsh-autocomplete/issues/654
-zstyle ':completion:*:descriptions' format $'\033[1;34m%d\033[0m'
-
-#───────────────────────────────────────────────────────────────────────────────
 # CLI/PLUGIN SETTINGS
 
 # FIX for whatever reason, LS_COLORS is not being set, so setting it here with
@@ -73,19 +63,33 @@ export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-a
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# ZSH-AUTOCOMPLETE
-# https://github.com/marlonrichert/zsh-autocomplete#configuration
+# MATCHING / COMPLETION
+# case insensitive path-completion - https://scriptingosx.com/2019/07/moving-to-zsh-part-5-completions/
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
+# group commands & color groups
+# see https://github.com/marlonrichert/zsh-autocomplete/issues/654
+zstyle ':completion:*:descriptions' format $'\033[1;34m%d\033[0m'
 
-# tab to cycle suggestions
+# ZSH-AUTOCOMPLETE
+# DOCS https://github.com/marlonrichert/zsh-autocomplete#configuration
+
+# <Tab> to cycle suggestions
 # shellcheck disable=1087,2154
 bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
 # shellcheck disable=1087
 bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
 
-# return to select suggestion & execute
+# <CR> to select suggestion & execute
 bindkey -M menuselect '\r' .accept-line
 
 # hide info message if there are no completions https://github.com/marlonrichert/zsh-autocomplete/discussions/513
 zstyle ':completion:*:warnings' format ""
 
 zstyle ':autocomplete:*' min-input 3 # minimum number of characters before suggestions are shown
+
+# pandoc completions
+function pandoc {
+	unfunction "$0"
+	eval "$(pandoc --bash-completion)"
+	$0 "$@"
+}

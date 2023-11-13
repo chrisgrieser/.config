@@ -20,11 +20,6 @@ source "$ZDOTDIR/plugins/zsh-no-ps2/zsh-no-ps2.plugin.zsh"
 
 source "$(brew --prefix)/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 
-# "fzf-tab needs to be loaded after compinit, but before plugins which will wrap
-# widgets, such as zsh-autosuggestions or fast-syntax-highlighting"
-# source "$ZDOTDIR/plugins/fzf-tab/fzf-tab.plugin.zsh"
-# source "$ZDOTDIR/fzf-tab_and_completion_settings.zsh"
-
 # INFO `brew --prefix` ensures the right path is inserted on M1 as well as  non-M1 macs
 source "$(brew --prefix)/share/zsh-you-should-use/you-should-use.plugin.zsh"
 source "$(brew --prefix)/share/zsh-autopair/autopair.zsh"
@@ -36,11 +31,10 @@ source "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substrin
 
 source "$ZDOTDIR/plugins/magic_dashboard.zsh"
 
-
 #───────────────────────────────────────────────────────────────────────────────
 
 # needs to be placed after compinit
-eval "$(zoxide init --no-cmd zsh)" 
+eval "$(zoxide init --no-cmd zsh)"
 
 # PROMPT
 eval "$(starship init zsh)"
