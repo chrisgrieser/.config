@@ -26,3 +26,9 @@ function conda {
 
 	$0 "$@"
 }
+
+function cli {
+	unfunction $
+	
+	 "$@"
+}
