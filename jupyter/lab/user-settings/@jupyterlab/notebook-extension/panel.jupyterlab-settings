@@ -3,81 +3,81 @@
         {
             "name": "save",
             "command": "",
-            "disabled": true,
+            "disabled": false,
             "rank": 10
         },
         {
             "name": "insert",
             "command": "notebook:insert-cell-below",
-            "disabled": true,
+            "disabled": false,
             "icon": "ui-components:add",
             "rank": 20
         },
         {
             "name": "cut",
             "command": "notebook:cut-cell",
-            "disabled": true,
+            "disabled": false,
             "rank": 21
         },
         {
             "name": "copy",
             "command": "notebook:copy-cell",
-            "disabled": true,
+            "disabled": false,
             "rank": 22
         },
         {
             "name": "paste",
             "command": "notebook:paste-cell-below",
-            "disabled": true,
+            "disabled": false,
             "rank": 23
         },
         {
             "name": "run",
             "command": "notebook:run-cell-and-select-next",
-            "disabled": true,
+            "disabled": false,
             "rank": 30
         },
         {
             "name": "interrupt",
             "command": "notebook:interrupt-kernel",
-            "disabled": true,
+            "disabled": false,
             "rank": 31
         },
         {
             "name": "restart",
             "command": "notebook:restart-kernel",
-            "disabled": true,
+            "disabled": false,
             "rank": 32
         },
         {
             "name": "restart-and-run",
             "command": "notebook:restart-run-all",
-            "disabled": true,
+            "disabled": false,
             "rank": 33
         },
         {
             "name": "cellType",
             "command": "",
-            "disabled": true,
+            "disabled": false,
             "rank": 40
         },
         {
             "name": "spacer",
             "command": "",
-            "disabled": true,
+            "disabled": false,
             "type": "spacer",
             "rank": 100
         },
         {
             "name": "kernelName",
             "command": "",
-            "disabled": true,
+            "disabled": false,
             "rank": 1000
         },
         {
             "name": "executionProgress",
             "command": "",
-            "disabled": true,
+            "disabled": false,
             "rank": 1002
         }
     ]
