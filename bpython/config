@@ -1,0 +1,7 @@
+# vim: filetype=toml
+# DOCS http://docs.bpython-interpreter.org/configuration.html for all
+#───────────────────────────────────────────────────────────────────────────────
+
+[general]
+hist_length = 0
+

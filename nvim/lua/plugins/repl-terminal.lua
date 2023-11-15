@@ -3,7 +3,7 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{
+	{ -- Jupyter Notebook Emulation
 		"GCBallesteros/NotebookNavigator.nvim",
 		init = function() u.leaderSubkey("n", " Notebook") end,
 		keys = {
@@ -23,25 +23,15 @@ return {
 		keys = {
 			{ "<leader>nn", vim.cmd.IronRepl, desc = "󱠤 Toggle" },
 			{ "<leader>nr", vim.cmd.IronRestart, desc = "󱠤 Restart" },
-			{ "<leader>nl", desc = "󱠤 Run Line" },
-			{ "<leader>ni", desc = "󱠤 Interrupt" },
-			{ "<leader>nc", desc = "󱠤 Clear" },
+			{ "<leader>nl", function () require("iron.core").send_line() end, desc = "󱠤 Run Line" },
+			{ "<leader>ni", function () require("iron.core").interrupt() end, desc = "󱠤 Interrupt" },
+			{ "<leader>nc", function () require("iron.core").clear() end, desc = "󱠤 Clear" },
 		},
 		config = function()
 			local view = require("iron.view")
 			require("iron.core").setup {
-				keymaps = {
-					send_line = "<leader>nl",
-					interrupt = "<leader>ni",
-					clear = "<leader>nc",
-				},
-				ignore_blank_lines = true,
 				config = {
-					-- repl_open_cmd = "vertical 40 split",
-					repl_open_cmd = view.split("30%", {
-						winhighlight = "Normal:NormalFloat",
-						signcolumn = "no",
-					}),
+					repl_open_cmd = view.split("30%", { winhighlight = "Normal:NormalFloat" }),
 					repl_definition = {
 						sh = { command = { "zsh" } },
 						typescript = { command = { "node" } },
@@ -49,8 +39,9 @@ return {
 						applescript = { command = { "osascript", "-i", "-l", "AppleScript" } },
 						python = {
 							command = function()
-								local ipythonAvailable = vim.fn.executable("bpython") == 1
-								local binary = ipythonAvailable and "bpython" or "python3"
+								-- TODO dynamically determine venv
+								local replAvailable = vim.fn.executable("bpython") == 1
+								local binary = replAvailable and "bpython" or "python3"
 								return { binary }
 							end,
 						},
@@ -58,33 +49,5 @@ return {
 				},
 			}
 		end,
-	},
-	{ -- better embedded terminal
-		"akinsho/toggleterm.nvim",
-		opts = {
-			size = 11,
-			direction = "horizontal",
-			autochdir = true, -- when nvim changes pwd, will also change its pwd
-		},
-		init = function()
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "toggleterm",
-				callback = function()
-					vim.opt_local.scrolloff = 0
-					-- stylua: ignore
-					vim.keymap.set("n", "q", vim.cmd.close, { buffer = true, nowait = true, desc = "Quit" })
-				end,
-			})
-		end,
-		keys = {
-			{ "<leader>t", vim.cmd.ToggleTerm, desc = " ToggleTerm" },
-			{ "<leader>T", vim.cmd.ToggleTermSendCurrentLine, desc = " ToggleTerm: Send Line" },
-			{
-				"<leader>T",
-				vim.cmd.ToggleTermSendVisualSelection,
-				mode = "x",
-				desc = "  ToggleTerm: Send Sel",
-			},
-		},
 	},
 }
