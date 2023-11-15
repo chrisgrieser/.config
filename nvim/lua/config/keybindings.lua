@@ -187,7 +187,7 @@ keymap("n", "gp", "gf", { desc = " Goto Path under cursor" })
 -- keep the register clean
 keymap({ "n", "x" }, "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
-keymap({ "n", "x" }, "C", '"_C')
+keymap("n", "C", '"_C')
 
 -- do not clutter the register if blank line is deleted
 keymap("n", "dd", function()
