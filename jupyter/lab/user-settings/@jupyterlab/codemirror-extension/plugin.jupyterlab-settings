@@ -1,11 +1,13 @@
 {
     "defaultConfig": {
         "autoClosingBrackets": true,
-        "codeFolding": true,
         "highlightActiveLine": true,
+        "rulers": [
+            80
+        ],
         "customStyles": {
             "fontFamily": "JetBrainsMono Nerd Font",
-            "fontSize": 20,
+            "fontSize": 23,
             "lineHeight": null
         }
     }

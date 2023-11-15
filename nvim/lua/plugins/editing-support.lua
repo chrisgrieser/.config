@@ -92,13 +92,6 @@ return {
 				rule("*", "*", "markdown"), -- italics
 				rule("![", "]()", "markdown"):set_end_pair_length(1), -- images
 
-				-- git conventional commit with scope: auto-append `:`
-				rule("^%a+%(%)", ":", "gitcommit")
-					:use_regex(true)
-					:with_pair(negLookahead(".+"))
-					:with_pair(isNotNodeType("message"))
-					:with_move(function(opts) return opts.char == ":" end),
-
 				-- auto-add trailing semicolon, but only for declarations
 				-- (which are at the end of the line and have no text afterwards)
 				rule(":", ";", "css"):with_pair(negLookahead(".+")),

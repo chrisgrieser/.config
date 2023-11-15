@@ -1,12 +1,12 @@
 {
-    "theme": "JupyterLab Dark",
+    "theme": "JupyterLab Light",
     "theme-scrollbars": false,
     "overrides": {
-        "code-font-family": "JetBrainsMono Nerd Font",
+        "code-font-family": null,
         "code-font-size": "21px",
         "content-font-family": null,
-        "content-font-size1": "19px",
+        "content-font-size1": "22px",
         "ui-font-family": null,
-        "ui-font-size1": "22px"
+        "ui-font-size1": "23px"
     }
 }

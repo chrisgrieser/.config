@@ -4,7 +4,5 @@
     // File Browser settings.
     // *****************************************
 
-    // Show last modified column
-    // Whether to show the last modified column
-    "showLastModifiedColumn": false
+
 }
