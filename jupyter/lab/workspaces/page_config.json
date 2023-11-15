@@ -1,6 +1,0 @@
-{
-	"disabledExtensions": {
-		"@jupyterlab/debugger": true,
-		"@jupyterlab/debugger-extension": true
-	}
-}
