@@ -1,0 +1,10 @@
+{
+    // Extension Manager
+    // @jupyterlab/extensionmanager-extension:plugin
+    // Extension manager settings.
+    // *********************************************
+
+    // Disclaimed Status
+    // Whether the user agrees the access to external web services and understands extensions may introduce security risks or contain malicious code that runs on his machine.
+    "disclaimed": true
+}
