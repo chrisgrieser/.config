@@ -22,7 +22,7 @@ alias grem='git remote -v && echo -n "\`gh\` default: " && gh repo set-default -
 
 alias gi='gh issue list --state=open'
 alias gI='gh issue list --state=closed'
-alias pr='gh pr create --web --fill'
+alias pr='gh pr create --web --fill'   
 alias rel='make --silent release' # personal convention to have `make release`
 
 #───────────────────────────────────────────────────────────────────────────────

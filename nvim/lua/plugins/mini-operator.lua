@@ -45,7 +45,7 @@ local function filetypeSpecificEval()
 				end
 
 				local lines = table.concat(inputLines, "\n")
-				local shellCmd = repl .. " '" .. lines:gsub("'", "\\'") .. "'"
+				local shellCmd = repl .. ' "' .. lines:gsub('"', '\\"') .. '"'
 				local evaluatedOut = vim.fn.system(shellCmd):gsub("\n$", "")
 				u.notify("Eval", evaluatedOut)
 				return originalLines -- do not modify original lines
