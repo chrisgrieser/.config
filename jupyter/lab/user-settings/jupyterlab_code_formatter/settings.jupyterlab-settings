@@ -30,7 +30,7 @@
         "wrap": true,
         "width_cutoff": 150
     },
-    "formatOnSave": false,
+    "formatOnSave": true,
     "cacheFormatters": false,
     "astyle": {
         "args": []
