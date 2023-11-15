@@ -15,38 +15,49 @@ return {
 			{ "<D-CR>", function() require("notebook-navigator").run_cell() end, desc = "  Run cell" },
 			-- stylua: ignore end
 		},
-		opts = {
-			syntax_highlight = true, -- hl of cell markers
-			repl_provider = "iron",
-		},
-		dependencies = "Vigemus/iron.nvim",
+		opts = { syntax_highlight = true }, -- hl of cell markers
+		dependencies = "Vigemus/iron.nvim", -- repl provider
 	},
 	{ -- REPL
 		"Vigemus/iron.nvim",
 		keys = {
-			{ "<leader>nn", vim.cmd.IronRepl, desc = "󱠤 Toggle REPL" },
-			{ "<leader>nr", vim.cmd.IronRestart, desc = "󱠤 Restart REPL" },
+			{ "<leader>nn", vim.cmd.IronRepl, desc = "󱠤 Toggle" },
+			{ "<leader>nr", vim.cmd.IronRestart, desc = "󱠤 Restart" },
+			{ "<leader>nl", desc = "󱠤 Run Line" },
+			{ "<leader>ni", desc = "󱠤 Interrupt" },
+			{ "<leader>nc", desc = "󱠤 Clear" },
 		},
-		main = "iron.core",
-		opts = {
-			config = {
-				repl_open_cmd = "horizontal bot 10 split",
-				repl_definition = {
-					sh = { command = { "zsh" } },
-					lua = { command = { "lua" } },
-					typescript = { command = { "node" } },
-					javascript = { command = { "osascript", "-i", "-l", "JavaScript" } },
-					applescript = { command = { "osascript", "-i", "-l", "AppleScript" } },
-					python = {
-						command = function()
-							local ipythonAvailable = vim.fn.executable("ipython") == 1
-							local binary = ipythonAvailable and "ipython" or "python3"
-							return { binary }
-						end,
+		config = function()
+			local view = require("iron.view")
+			require("iron.core").setup {
+				keymaps = {
+					send_line = "<leader>nl",
+					interrupt = "<leader>ni",
+					clear = "<leader>nc",
+				},
+				ignore_blank_lines = true,
+				config = {
+					-- repl_open_cmd = "vertical 40 split",
+					repl_open_cmd = view.split("30%", {
+						winhighlight = "Normal:NormalFloat",
+						signcolumn = "no",
+					}),
+					repl_definition = {
+						sh = { command = { "zsh" } },
+						typescript = { command = { "node" } },
+						javascript = { command = { "osascript", "-i", "-l", "JavaScript" } },
+						applescript = { command = { "osascript", "-i", "-l", "AppleScript" } },
+						python = {
+							command = function()
+								local ipythonAvailable = vim.fn.executable("bpython") == 1
+								local binary = ipythonAvailable and "bpython" or "python3"
+								return { binary }
+							end,
+						},
 					},
 				},
-			},
-		},
+			}
+		end,
 	},
 	{ -- better embedded terminal
 		"akinsho/toggleterm.nvim",
