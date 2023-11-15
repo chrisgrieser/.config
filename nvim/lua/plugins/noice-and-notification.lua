@@ -43,10 +43,6 @@ local routes = {
 	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
 	{ filter = { event = "notify", find = "All parsers are up%-to%-date" }, view = "mini" },
 
-	-- sg.nvim (sourcegraph)
-	{ filter = { event = "msg_show", find = "^%[sg%]" }, view = "mini" },
-	{ filter = { event = "notify", find = "^%[sg%]" }, view = "mini" },
-
 	-- Mason
 	{ filter = { event = "notify", find = "%[mason%-tool%-installer%]" }, view = "mini" },
 	{
@@ -91,7 +87,7 @@ return {
 					cmdline = { view = "cmdline_popup" },
 					lua = { view = "cmdline_popup" },
 					help = { view = "cmdline_popup" },
-					numb = {
+					numb = { -- numb.nvim
 						pattern = "^:%d+$",
 						view = "cmdline",
 						conceal = false,
@@ -108,7 +104,7 @@ return {
 							position = { row = -3, col = 0 },
 						},
 					},
-					substitute = {
+					substitute = { -- :s as a standalone popup
 						view = "cmdline_popup",
 						pattern = { "^:%%? ?s[ /]", "^:'<,'> ?s[ /]" },
 						icon = " ",

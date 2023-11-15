@@ -3,16 +3,17 @@ local u = require("lua.utils")
 
 -- INFO
 -- - overwrite pagedown & pageup to scroll a certain amount instead. This ensures
---   that they do not move a full viewport, effectively creating a scroll offset
--- - not implemented via Karabiner, since Karabiner does not allow for scrolling
+--   that they do not move a full viewport, effectively creating a scroll offset.
+-- - Not implemented via Karabiner, since Karabiner does not allow for scrolling
 -- - This spoon is somewhat equivalent to https://github.com/dexterleng/KeyboardScroller.docs
 
 -- CONFIG
--- - distance to scroll per app. Needed, since scrolling translates into
+-- - distance to scroll per app. Needed since scrolling translates into
 --   different distances in different apps
 -- - false to ignore app
 local perAppSettings = {
 	defaultScrollDistance = 30,
+	ReadKit = 60,
 	Obsidian = 20,
 	Discord = 20,
 	Highlights = 50,
