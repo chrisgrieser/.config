@@ -3,37 +3,37 @@
         {
             "name": "duplicate-cell",
             "command": "notebook:duplicate-below",
-            "disabled": false,
+            "disabled": true,
             "rank": 50
         },
         {
             "name": "move-cell-up",
             "command": "notebook:move-cell-up",
-            "disabled": false,
+            "disabled": true,
             "rank": 50
         },
         {
             "name": "move-cell-down",
             "command": "notebook:move-cell-down",
-            "disabled": false,
+            "disabled": true,
             "rank": 50
         },
         {
             "name": "insert-cell-above",
             "command": "notebook:insert-cell-above",
-            "disabled": false,
+            "disabled": true,
             "rank": 50
         },
         {
             "name": "insert-cell-below",
             "command": "notebook:insert-cell-below",
-            "disabled": false,
+            "disabled": true,
             "rank": 50
         },
         {
             "name": "delete-cell",
             "command": "notebook:delete-cell",
-            "disabled": false,
+            "disabled": true,
             "icon": "ui-components:delete",
             "rank": 50
         }

@@ -9,7 +9,7 @@
     "maxNumberOutputs": 50,
     "showEditorForReadOnlyMarkdown": true,
     "kernelStatus": {
-        "showOnStatusBar": true,
+        "showOnStatusBar": false,
         "showProgress": true
     },
     "documentWideUndoRedo": false,
