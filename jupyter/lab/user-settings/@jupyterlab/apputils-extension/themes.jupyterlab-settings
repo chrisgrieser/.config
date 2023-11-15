@@ -1,5 +1,5 @@
 {
-    "theme": "JupyterLab Light",
+    "theme": "JupyterLab Dark",
     "theme-scrollbars": false,
     "overrides": {
         "code-font-family": null,
