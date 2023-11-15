@@ -25,6 +25,7 @@ end
 return {
 	{ -- Jupyter Notebook Emulation
 		"GCBallesteros/NotebookNavigator.nvim",
+		dependencies = "Vigemus/iron.nvim", -- repl provider
 		init = function() u.leaderSubkey("n", " Notebook") end,
 		keys = {
 			-- stylua: ignore start
@@ -47,7 +48,6 @@ return {
 			},
 			syntax_highlight = true, -- hl of cell markers
 		},
-		dependencies = "Vigemus/iron.nvim", -- repl provider
 	},
 	{ -- REPL Provider
 		"Vigemus/iron.nvim",
@@ -71,14 +71,14 @@ return {
 			-- provided by iron instead of mapping via opts.keymaps from iron
 			-- stylua: ignore start
 			{ "<leader>ni", function() require("iron.core").send(nil, string.char(03)) end, desc = "󱠤 Interrupt" },
-			{ "<leader>nc", function() require("iron.core").send(nil, string.char(12)) end, desc = "󱠤 Clear" },
+			{ "<leader>nk", function() require("iron.core").send(nil, string.char(12)) end, desc = "󱠤 Clear" },
 			-- stylua: ignore end
 		},
 		config = function()
 			local view = require("iron.view")
 			require("iron.core").setup {
 				config = {
-					repl_open_cmd = view.split("30%", { winhighlight = "Normal:NormalFloat" }),
+					repl_open_cmd = view.split("35%", { winhighlight = "Normal:NormalFloat" }),
 					repl_definition = {
 						sh = { command = { "zsh" } },
 						lua = { command = { "luajit" } }, -- luajit already instead as nvim-dependency
@@ -92,6 +92,3 @@ return {
 		end,
 	},
 }
--- %%
--- %%
--- %%

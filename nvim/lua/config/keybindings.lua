@@ -21,7 +21,7 @@ keymap(
 -- HJKL behaves like hjkl, but bigger distance
 keymap({ "o", "x" }, "H", "^")
 keymap("n", "H", "0^") -- `0` ensures fully scrolling to the left on long, indented lines
-keymap({ "n", "x" }, "L", "$")
+keymap({ "n", "x" }, "L", "$zv") -- zv: unfold
 keymap({ "n", "x" }, "J", "6j")
 keymap({ "n", "x" }, "K", "6k")
 
@@ -32,8 +32,7 @@ keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
 
 -- Search
 keymap("n", "-", "/")
-keymap("x", "-", [["zy/<C-r>z<CR>]], { desc = "Search for sel" })
-keymap("x", "/", "<Esc>/\\%V", { desc = "Search within sel" })
+keymap("x", "-", "<Esc>/\\%V", { desc = "Search IN sel" })
 
 -- Diagnostics
 keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
@@ -51,7 +50,6 @@ end
 
 -- special remaps
 keymap("o", "k", 'i"', { desc = "󱡔 inner quote" })
-keymap("o", "K", 'a"', { desc = "󱡔 outer quote" })
 keymap("o", "J", "2j") -- dj = delete 2 lines, dJ = delete 3 lines
 
 -- quick textobj operations
