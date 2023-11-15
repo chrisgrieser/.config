@@ -30,12 +30,23 @@ return {
 			-- stylua: ignore start
 			{ "gn", function() require("notebook-navigator").move_cell("d") end, desc = " Next cell" },
 			{ "gN", function() require("notebook-navigator").move_cell("u") end, desc = " Prev cell" },
-			{ "<leader>na", function() require("notebook-navigator").add_cell_after() end, desc = " Add cell after" },
-			{ "<leader>nb", function() require("notebook-navigator").add_cell_before() end, desc = " Add cell before" },
+			{ "<leader>na", function ()
+				local marker = vim.bo.commentstring:format("%%")
+				local ln = vim.api.nvim_win_get_cursor(0)[1]
+				vim.api.nvim_buf_set_lines(0, ln, ln, false, { marker })
+			end, desc = " Add cell marker" },
+			{ "<leader>nb", function() require("notebook-navigator").add_cell_after() end, desc = " New cell below" },
 			{ "<D-CR>", function() require("notebook-navigator").run_cell() end, desc = "  Run cell" },
 			-- stylua: ignore end
 		},
-		opts = { syntax_highlight = true }, -- hl of cell markers
+		opts = {
+			cell_markers = {
+				applescript = "-- %%",
+				javascript = "// %%",
+				typescript = "// %%",
+			},
+			syntax_highlight = true, -- hl of cell markers
+		},
 		dependencies = "Vigemus/iron.nvim", -- repl provider
 	},
 	{ -- REPL Provider
@@ -51,7 +62,11 @@ return {
 				desc = "󱠤 Restart",
 			},
 			{ "<leader>nl", function() require("iron.core").send_line() end, desc = "󱠤 Run Line" },
-			{ "<leader>nc", function() require("iron.core").send_until_cursor() end, desc = "󱠤 Run to Cursor" },
+			{
+				"<leader>nc",
+				function() require("iron.core").send_until_cursor() end,
+				desc = "󱠤 Run to Cursor",
+			},
 			-- HACK to be able to set everything in `keys`, using the raw functions
 			-- provided by iron instead of mapping via opts.keymaps from iron
 			-- stylua: ignore start
@@ -77,3 +92,6 @@ return {
 		end,
 	},
 }
+-- %%
+-- %%
+-- %%

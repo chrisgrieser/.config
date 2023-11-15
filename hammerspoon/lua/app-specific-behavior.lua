@@ -37,15 +37,6 @@ M.aw_spotify = aw.new(function(appName, eventType)
 end):start()
 
 --------------------------------------------------------------------------------
-
--- PIXELMATOR: open maximized
-M.aw_pixelmator = aw.new(function(appName, eventType, pixelmator)
-	if appName == "Pixelmator" and eventType == aw.launched then
-		u.whenAppWinAvailable(appName, function() wu.moveResize(pixelmator, wu.maximized) end)
-	end
-end):start()
-
---------------------------------------------------------------------------------
 -- OBSIDIAN
 
 ---half -> hide right sidebar

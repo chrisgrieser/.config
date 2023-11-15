@@ -92,6 +92,7 @@ local config = {
 }
 
 --------------------------------------------------------------------------------
+-- selene: allow(mixed_table)
 local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
 ---in normal mode, returns word under cursor, in visual mode, returns selection
@@ -128,11 +129,11 @@ local function appendLine(text)
 		-- copy indent
 		local indent = vim.api.nvim_get_current_line():match("^%s*")
 		text = indent .. text
-		vim.api.nvim_buf_set_lines(0, ln, ln, false, { text })
+		vim.api.nvim_buf_set_lines(0, ln, ln, true, { text })
 		normal("j")
 	else
 		-- auto-indent via `==`
-		vim.api.nvim_buf_set_lines(0, ln, ln, false, { text })
+		vim.api.nvim_buf_set_lines(0, ln, ln, true, { text })
 		normal("j==")
 	end
 end
