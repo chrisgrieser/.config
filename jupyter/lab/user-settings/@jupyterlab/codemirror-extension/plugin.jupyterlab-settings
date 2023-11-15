@@ -6,8 +6,8 @@
             80
         ],
         "customStyles": {
-            "fontFamily": "JetBrainsMono Nerd Font",
-            "fontSize": 23,
+            "fontFamily": "JetBrainsMonoNL Nerd Font",
+            "fontSize": 24,
             "lineHeight": null
         }
     }
