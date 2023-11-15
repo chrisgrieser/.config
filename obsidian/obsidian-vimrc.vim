@@ -278,6 +278,10 @@ onoremap ar a[
 onoremap ac a{
 onoremap ic i{
 
+nnoremap ygg ggyG
+nnoremap dgg ggdG
+nnoremap cgg ggcG
+
 vnoremap am aW
 vnoremap im iW
 vnoremap aq a"
