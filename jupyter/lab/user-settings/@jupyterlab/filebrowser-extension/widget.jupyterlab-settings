@@ -1,34 +1,8 @@
 {
-    "toolbar": [
-        {
-            "name": "new-launcher",
-            "command": "launcher:create",
-            "disabled": false,
-            "rank": 1
-        },
-        {
-            "name": "new-directory",
-            "command": "filebrowser:create-new-directory",
-            "disabled": false,
-            "rank": 10
-        },
-        {
-            "name": "uploader",
-            "command": "",
-            "disabled": false,
-            "rank": 20
-        },
-        {
-            "name": "refresh",
-            "command": "filebrowser:refresh",
-            "disabled": false,
-            "rank": 30
-        },
-        {
-            "name": "fileNameSearcher",
-            "command": "",
-            "disabled": false,
-            "rank": 40
-        }
-    ]
+    // File Browser Widget
+    // @jupyterlab/filebrowser-extension:widget
+    // File Browser widget settings.
+    // ****************************************
+
+
 }
