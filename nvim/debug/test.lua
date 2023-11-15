@@ -9,3 +9,4 @@ end
 
 -- %%
 
+vim.fn.executable("/Users/chrisgrieser/Repos/axelrod-prisoner-dilemma/.venv/bin/bpython")

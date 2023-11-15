@@ -23,9 +23,19 @@ return {
 		keys = {
 			{ "<leader>nn", vim.cmd.IronRepl, desc = "󱠤 Toggle" },
 			{ "<leader>nr", vim.cmd.IronRestart, desc = "󱠤 Restart" },
-			{ "<leader>nl", function () require("iron.core").send_line() end, desc = "󱠤 Run Line" },
-			{ "<leader>ni", function () require("iron.core").interrupt() end, desc = "󱠤 Interrupt" },
-			{ "<leader>nc", function () require("iron.core").clear() end, desc = "󱠤 Clear" },
+			{ "<leader>nl", function() require("iron.core").send_line() end, desc = "󱠤 Run Line" },
+			-- HACK to be able to set everything in `keys`, using the raw functions
+			-- provided by iron instead of mapping via opts.keymaps from iron
+			{
+				"<leader>ni",
+				function() require("iron.core").send(nil, string.char(03)) end,
+				desc = "󱠤 Interrupt",
+			},
+			{
+				"<leader>nc",
+				function() require("iron.core").send(nil, string.char(12)) end,
+				desc = "󱠤 Clear",
+			},
 		},
 		config = function()
 			local view = require("iron.view")
@@ -35,13 +45,26 @@ return {
 					repl_definition = {
 						sh = { command = { "zsh" } },
 						typescript = { command = { "node" } },
-						javascript = { command = { "osascript", "-i", "-l", "JavaScript" } },
+						javascript = { command = { "osascript", "-i", "-l", "JavaScript" } }, 
 						applescript = { command = { "osascript", "-i", "-l", "AppleScript" } },
 						python = {
 							command = function()
-								-- TODO dynamically determine venv
-								local replAvailable = vim.fn.executable("bpython") == 1
-								local binary = replAvailable and "bpython" or "python3"
+								-- INFO using bypthon, since other REPLs have issues
+								-- with docstrings & indentation
+								local alternativeRepl = "bypthon"
+								local venvPython = u.determineVenv()
+								local binary
+								if venvPython then
+									local venvAltRepl = venvPython:gsub("python$", alternativeRepl)
+									vim.notify("🪚 venvAltRepl: " .. tostring(venvAltRepl))
+									local altAvailable = vim.fn.executable(venvAltRepl) == 1
+									vim.notify("🪚 altAvailable: " .. tostring(altAvailable))
+									binary = altAvailable and venvAltRepl or venvPython
+								else
+									local altAvailable = vim.fn.executable(alternativeRepl) == 1
+									binary = altAvailable and alternativeRepl or "python3"
+								end
+
 								return { binary }
 							end,
 						},
