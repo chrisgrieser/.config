@@ -3,6 +3,6 @@
     "numberingH1": true,
     "numberHeaders": true,
     "includeOutput": true,
-    "syncCollapseState": false,
+    "syncCollapseState": true,
     "baseNumbering": 1
 }
