@@ -146,10 +146,9 @@ M.wf_pdfReader = wf.new({ "Preview", "Highlights", "PDF Expert" }):subscribe(
 )
 
 -- open all windows pseudo-maximized
-M.wf_jupyter = wf.new("JupyterLab"):subscribe(
-	wf.windowCreated,
-	function(newWin) wu.moveResize(newWin, wu.pseudoMax) end
-)
+M.wf_jupyter = wf.new("JupyterLab"):subscribe(wf.windowCreated, function(newWin)
+	u.runWithDelays({ 0.1, 1, 2 }, function() wu.moveResize(newWin, wu.pseudoMax) end)
+end)
 
 ------------------------------------------------------------------------------
 
