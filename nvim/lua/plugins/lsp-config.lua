@@ -95,7 +95,7 @@ serverConfigs.pyright = {
 		pyright.server_capabilities.hoverProvider = false
 
 		-- Automatically set python_path to python binary in `.venv`
-		local venv_python = u.determineVenv()
+		local venv_python = u.getVenvPython()
 		if not venv_python then return end
 		pyright.config.settings.python.pythonPath = venv_python
 		vim.lsp.buf_notify(
@@ -116,7 +116,7 @@ serverConfigs.jedi_language_server = {
 	-- `on_new_config` to set it and `on_attach` to notify the LSP of a new
 	-- config (even though the `on_attach` just passes the same config again)
 	on_new_config = function(new_config, new_root_dir)
-		local venv_python = u.determineVenv(new_root_dir)
+		local venv_python = u.getVenvPython(new_root_dir)
 		if not venv_python then return end
 		new_config.init_options = {
 			workspace = {

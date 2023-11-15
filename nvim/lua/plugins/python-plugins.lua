@@ -11,7 +11,7 @@ return {
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "python",
 				callback = function()
-					local venv_python = u.determineVenv()
+					local venv_python = u.getVenvPython()
 					if not venv_python then return end
 					require("dap-python").resolve_python = function() return venv_python end
 				end,

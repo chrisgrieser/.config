@@ -110,7 +110,7 @@ end
 -- for auto-setup of venvs
 ---@param root_dir? string optional, will use cwd if not provided
 ---@return string? venv_python -- nil if no venv found
-function M.determineVenv(root_dir)
+function M.getVenvPython(root_dir)
 	-- CONFIG
 	local usualVenvPath = "/.venv/bin/python"
 
