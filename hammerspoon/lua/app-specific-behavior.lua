@@ -65,7 +65,7 @@ end
 
 M.wf_obsidanMoved = wf.new("Obsidian")
 	:subscribe(wf.windowMoved, autoToggleObsidianSidebar)
-	:subscribe(wf.windowCreated, autoToggleObsidianSidebar) -- restarts
+	:subscribe(wf.windowCreated, autoToggleObsidianSidebar) -- for Obsidian restarts
 
 --------------------------------------------------------------------------------
 -- FINDER
@@ -144,11 +144,6 @@ M.wf_pdfReader = wf.new({ "Preview", "Highlights", "PDF Expert" }):subscribe(
 	wf.windowCreated,
 	function(newWin) wu.moveResize(newWin, wu.pseudoMax) end
 )
-
--- open all windows pseudo-maximized
-M.wf_jupyter = wf.new("JupyterLab"):subscribe(wf.windowCreated, function(newWin)
-	u.runWithDelays({ 0.1, 1, 2 }, function() wu.moveResize(newWin, wu.pseudoMax) end)
-end)
 
 ------------------------------------------------------------------------------
 
