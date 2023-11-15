@@ -27,7 +27,7 @@ return {
 			retirementAgeMins = 10,
 			ignoreUnsavedChangesBufs = false,
 			notificationOnAutoClose = true,
-			deleteBufferWhenFileDeleted = false,
+			deleteBufferWhenFileDeleted = true,
 		},
 	},
 	{ -- :bnext & :bprevious get visual overview of buffers
