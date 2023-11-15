@@ -1,8 +1,34 @@
 {
-    // Notebook
-    // @jupyterlab/notebook-extension:tracker
-    // Notebook settings.
-    // **************************************
-
-
+    "defaultCell": "code",
+    "autoStartDefaultKernel": false,
+    "inputHistoryScope": "global",
+    "kernelShutdown": false,
+    "scrollPastEnd": true,
+    "recordTiming": false,
+    "overscanCount": 1,
+    "maxNumberOutputs": 50,
+    "showEditorForReadOnlyMarkdown": true,
+    "kernelStatus": {
+        "showOnStatusBar": true,
+        "showProgress": true
+    },
+    "documentWideUndoRedo": false,
+    "showHiddenCellsButton": true,
+    "renderingLayout": "default",
+    "sideBySideLeftMarginOverride": "10px",
+    "sideBySideRightMarginOverride": "10px",
+    "sideBySideOutputRatio": 1,
+    "windowingMode": "defer",
+    "codeCellConfig": {
+        "lineNumbers": false,
+        "lineWrap": false
+    },
+    "markdownCellConfig": {
+        "lineNumbers": false,
+        "matchBrackets": false
+    },
+    "rawCellConfig": {
+        "lineNumbers": false,
+        "matchBrackets": false
+    }
 }

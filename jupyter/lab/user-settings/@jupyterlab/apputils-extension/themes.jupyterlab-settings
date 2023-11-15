@@ -3,10 +3,10 @@
     "theme-scrollbars": false,
     "overrides": {
         "code-font-family": null,
-        "code-font-size": "17px",
+        "code-font-size": null,
         "content-font-family": null,
-        "content-font-size1": "22px",
+        "content-font-size1": null,
         "ui-font-family": null,
-        "ui-font-size1": "23px"
+        "ui-font-size1": null
     }
 }
