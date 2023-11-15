@@ -1,8 +1,12 @@
 """This is a test file."""
 
 
+# %%
 def double(x: int) -> int:
-    """Double the input."""
+    """Double a number."""
     return x * 2
 
-VAL = 3
+
+# %%
+a = 3
+print(double(a))
