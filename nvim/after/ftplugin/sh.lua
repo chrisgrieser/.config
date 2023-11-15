@@ -8,7 +8,7 @@ u.ftAbbr("--", "#")
 
 --------------------------------------------------------------------------------
 
--- https://wezfurlong.org/wezterm/cli/cli/send-text
+-- DOCS https://wezfurlong.org/wezterm/cli/cli/send-text
 local function sendToWezTerm()
 	fn.system([[
 		open -a 'WezTerm' 
@@ -24,11 +24,12 @@ local function sendToWezTerm()
 	local text
 	if fn.mode() == "n" then
 		text = vim.api.nvim_get_current_line() .. "\n"
+		fn.system { "wezterm", "cli", "send-text", "--no-paste", text }
 	elseif fn.mode():find("[Vv]") then
 		u.normal('"zy')
 		text = fn.getreg("z"):gsub("\n$", "")
+		fn.system { "wezterm", "cli", "send-text", text }
 	end
-	vim.fn.system { "wezterm", "cli", "send-text", "--no-paste", text }
 end
 
 vim.keymap.set(

@@ -10,14 +10,6 @@ rules:
           - { key_code: h, modifiers: [command, shift] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^us\.zoom\.xos$] }]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) JupyterLab"
-    manipulators:
-      - type: basic
-        from: { key_code: return_or_enter, modifiers: { mandatory: [control] } }
-        to:
-          - { key_code: left_arrow, modifiers: [command, option] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^org\.jupyter\.jupyterlab-desktop$] }]
-  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Tot"
     manipulators:
       # Smart Bullet (mnemonic: <ul>)
