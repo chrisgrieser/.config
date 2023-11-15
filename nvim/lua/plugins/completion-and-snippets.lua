@@ -140,7 +140,7 @@ local function cmpconfig()
 	-- add cmp-zsh source
 	local defaultPlusZsh = vim.deepcopy(defaultSources)
 	table.insert(defaultPlusZsh, { name = "zsh" })
-	cmp.setup.filetype("sh", {
+	cmp.setup.filetype({ "sh", "make" }, {
 		sources = cmp.config.sources(defaultPlusZsh),
 		-- disable useless `\[` suggestions at end of line
 		enabled = function()
