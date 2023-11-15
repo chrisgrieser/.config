@@ -663,11 +663,10 @@
         },
         {
             "command": "filebrowser:toggle-main",
-            "keys": [
-                "Accel 1"
-            ],
             "selector": "body",
-            "args": {}
+            "keys": [
+                "Accel 2"
+            ]
         },
         {
             "command": "filemenu:close-and-cleanup",
@@ -1377,32 +1376,22 @@
         },
         {
             "command": "application:toggle-left-area",
-            "keys": [
-                "Accel B"
-            ],
             "selector": "body",
-            "args": {}
+            "keys": [
+                "Accel 1"
+            ]
         },
         {
             "command": "filebrowser:toggle-main",
-            "keys": [
-                "Accel Shift F"
-            ],
             "selector": "body",
-            "args": {}
+            "keys": [
+                "Accel 2"
+            ]
         },
         {
             "command": "tabsmenu:activate-previously-used-tab",
             "keys": [
                 "Accel Shift '"
-            ],
-            "selector": "body",
-            "args": {}
-        },
-        {
-            "command": "toc:show-panel",
-            "keys": [
-                "Accel Shift K"
             ],
             "selector": "body",
             "args": {}
@@ -1430,6 +1419,13 @@
             ],
             "selector": "body",
             "args": {}
+        },
+        {
+            "command": "toc:show-panel",
+            "selector": "body",
+            "keys": [
+                "Accel 3"
+            ]
         }
     ]
 }
