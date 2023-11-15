@@ -2,12 +2,13 @@
     "defaultConfig": {
         "autoClosingBrackets": true,
         "highlightActiveLine": true,
+        "lineWrap": false,
         "rulers": [
             80
         ],
         "customStyles": {
             "fontFamily": "JetBrainsMonoNL Nerd Font",
-            "fontSize": 24,
+            "fontSize": 14,
             "lineHeight": null
         }
     }

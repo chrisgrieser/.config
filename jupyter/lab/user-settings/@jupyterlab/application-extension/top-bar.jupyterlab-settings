@@ -1,11 +1,8 @@
 {
-    "toolbar": [
-        {
-            "name": "spacer",
-            "command": "",
-            "disabled": false,
-            "type": "spacer",
-            "rank": 50
-        }
-    ]
+    // Top Bar
+    // @jupyterlab/application-extension:top-bar
+    // Top Bar settings.
+    // *****************************************
+
+
 }
