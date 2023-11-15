@@ -3,7 +3,7 @@
     "theme-scrollbars": false,
     "overrides": {
         "code-font-family": null,
-        "code-font-size": "21px",
+        "code-font-size": "17px",
         "content-font-family": null,
         "content-font-size1": "22px",
         "ui-font-family": null,
