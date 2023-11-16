@@ -6,17 +6,18 @@ local function getReplBinary()
 	-- INFO using bypthon, since other REPLs have issues
 	-- with docstrings & indentation when paired with iron.nvim
 	local alternativeRepl = "bpython" -- CONFIG
-	local venvPython = u.getVenvPython()
-	local binary
-	if venvPython then
-		local venvAltRepl = venvPython:gsub("python$", alternativeRepl)
-		local altAvailable = vim.fn.executable(venvAltRepl) == 1
-		binary = altAvailable and venvAltRepl or venvPython
-	else
+	local venvPython = vim.env.VIRTUAL_ENV .. "/bin/python"
+
+	-- if no venv, fallback to system python/repl
+	if not venvPython then
 		local altAvailable = vim.fn.executable(alternativeRepl) == 1
-		binary = altAvailable and alternativeRepl or "python3"
+		local binary = altAvailable and alternativeRepl or "python3"
+		return { binary }
 	end
 
+	local venvAltRepl = venvPython:gsub("python$", alternativeRepl)
+	local altAvailable = vim.fn.executable(venvAltRepl) == 1
+	local binary = altAvailable and venvAltRepl or venvPython
 	return { binary }
 end
 
