@@ -13,15 +13,9 @@ local tsConfig = {
 	},
 	indent = {
 		enable = true,
-		disable = { "markdown", "lua" },
-	},
-	incremental_selection = {
-		enable = true,
-		keymaps = {
-			node_incremental = "<Space>",
-			node_decremental = "<BS>",
-			scope_incremental = false,
-			init_selection = false,
+		disable = {
+			"markdown", -- indentation at bullet points worse
+			"lua", -- `o` sometimes get weird behavior
 		},
 	},
 

@@ -19,7 +19,7 @@ local darkThemes = {
 }
 
 vim.g.darkOpacity = 0.92
-vim.g.lightOpacity = 0.90
+vim.g.lightOpacity = 0.93
 
 --------------------------------------------------------------------------------
 
