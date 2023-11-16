@@ -1,7 +1,7 @@
 {
   "Comment.nvim": { "branch": "master", "commit": "0236521ea582747b58869cb72f70ccfa967d2e89" },
   "LuaSnip": { "branch": "master", "commit": "1f4ad8bb72bdeb60975e98652636b991a9b7475d" },
-  "NotebookNavigator.nvim": { "branch": "main", "commit": "51de12c70d4bddea314b017977c9d69f5f953270" },
+  "NotebookNavigator.nvim": { "branch": "main", "commit": "f1a0afd1d687f5fb7a07ec7997b075dc76cbee9a" },
   "aerial.nvim": { "branch": "master", "commit": "51bdd35f4f984293d4200e52aeff44f12febc6f2" },
   "auto-save.nvim": { "branch": "main", "commit": "e98cafef75271ec83dc84c933f124ab1bb675ef8" },
   "bullets.vim": { "branch": "master", "commit": "746f92ae05cdcc988857d8e76418326f07af9494" },
@@ -76,7 +76,7 @@
   "plenary.nvim": { "branch": "master", "commit": "50012918b2fc8357b87cff2a7f7f0446e47da174" },
   "project.nvim": { "branch": "main", "commit": "8c6bad7d22eef1b71144b401c9f74ed01526a4fb" },
   "promise-async": { "branch": "main", "commit": "e94f35161b8c5d4a4ca3b6ff93dd073eb9214c0e" },
-  "rainbow-delimiters.nvim": { "branch": "master", "commit": "ffb31befabb165812360ba70072e04c2101317d7" },
+  "rainbow-delimiters.nvim": { "branch": "master", "commit": "538b4aec989e05e86dd42eccafa84f27733f9cf7" },
   "refactoring.nvim": { "branch": "master", "commit": "156532476deb10b1b2a32cb38e1078b3f9951c42" },
   "replacer.nvim": { "branch": "master", "commit": "32e1713230844fa52f7f0598c59295de3c90dc95" },
   "satellite.nvim": { "branch": "main", "commit": "5d33376287e384f04b84962a20d90bd10a9dac86" },

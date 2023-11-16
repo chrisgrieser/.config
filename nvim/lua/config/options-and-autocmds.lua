@@ -11,7 +11,6 @@ vim.filetype.add {
 	extension = {
 		zsh = "sh",
 		sh = "sh", -- force sh-files with zsh-shebang to still get sh as filetype
-		["jupyterlab-settings"] = "json5",
 	},
 	filename = {
 		[".zshrc"] = "sh",
@@ -50,8 +49,6 @@ end
 opt.title = true
 opt.titlelen = 0 -- do not shorten title
 opt.titlestring = '%{expand("%:p")}'
-
-opt.exrc = true
 
 -- Motions & Editing
 opt.startofline = true -- motions like "G" also move to the first char

@@ -1,14 +1,13 @@
 #!/usr/bin/env zsh
-export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-
+# shellcheck disable=2164
 # DOCS https://github.com/transmission/transmission/blob/main/docs/Scripts.md#scripts
 #───────────────────────────────────────────────────────────────────────────────
 
 # GUARD
+
 # read download folder from transmission settings
 download_folder="$(defaults read org.m0k.transmission DownloadFolder)"
 if [[ -d "$download_folder" ]]; then
-	# shellcheck disable=2164
 	cd "$download_folder"
 else
 	touch "./WARN Transmission DownloadFolder not found"
@@ -17,11 +16,14 @@ fi
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# DELETE CLUTTER
-find -E . -iregex ".*\.(nfo|md|txt|jpe?g|png)$" -delete
+# delete clutter
+
+find -E . -regex ".*\.(nfo|md)$"
+find . \( -name '*.txt' -or -name '*.nfo' -or -name '*.exe' -or -name '*.md' \
+	-or -name '*.jpg' -or -name '*.png' \) -delete
 find . -type d -name "Sample" -exec rm -r {} + # Folders do not accept `-delete`
 
-# IF SINGLE FILE, UNNEST IT
+# if single file, unnest it
 sleep 1
 last_folder="$(find . -mindepth 1 -type d -mtime -1m | head -n1)"
 files_in_folder=$(find "$last_folder" -depth 1 | wc -l | tr -d " ")
@@ -31,11 +33,10 @@ if [[ $files_in_folder -eq 1 ]]; then
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
-# QUIT TRANSMISSION, IF NO OTHER ACTIVE TORRENTS
+# quit Transmission, if no other active torrents
 
-# INFO `test -x /transmission-remote` does not work reliably
-if ! command -v transmission-remote &> /dev/null; then
-	touch "./WARN transmission-cli not installed"
+if [[ ! -x "$(command -v transmission-remote)" ]]; then
+	touch "./WARN transmission-remote not installed"
 	return 1
 fi
 
