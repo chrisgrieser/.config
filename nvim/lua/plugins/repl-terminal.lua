@@ -40,14 +40,7 @@ return {
 			{ "<D-CR>", function() require("notebook-navigator").run_cell() end, desc = "  Run cell" },
 			-- stylua: ignore end
 		},
-		opts = {
-			cell_markers = { -- PENDING https://github.com/GCBallesteros/NotebookNavigator.nvim/issues/23
-				applescript = "-- %%",
-				javascript = "// %%",
-				typescript = "// %%",
-			},
-			syntax_highlight = true, -- hl of cell markers
-		},
+		opts = { syntax_highlight = true }, -- hl of cell markers
 	},
 	{ -- REPL Provider
 		"Vigemus/iron.nvim",
