@@ -14,7 +14,7 @@ alias grh='git reset --hard'
 alias push="git push"
 alias pull="git pull"
 alias rebase="git rebase --interactive"
-alias unshallow="git fetch --unshallow"          # make shallow clone complete again
+alias unshallow="git fetch --unshallow"           # make shallow clone complete again
 alias ..g='cd "$(git rev-parse --show-toplevel)"' # goto git root
 
 # remote info
@@ -22,7 +22,7 @@ alias grem='git remote -v && echo -n "\`gh\` default: " && gh repo set-default -
 
 alias gi='gh issue list --state=open'
 alias gI='gh issue list --state=closed'
-alias pr='gh pr create --web --fill'   
+alias pr='gh pr create --web --fill'
 alias rel='make --silent release' # personal convention to have `make release`
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -149,18 +149,18 @@ function gli {
 # SELECT BRANCH
 
 function gb {
-	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
+	if [[ ! -x "$(command -v fzf)" ]]; then print "\033[1;33mfzf not installed.\033[0m" && return 1; fi
 	local selected
 
-	selected=$(
-		git branch --all --color | grep -v "HEAD" |
-			fzf --ansi --no-info --height=40% --header-first --header="↵ : Checkout Branch"
+	selected=$( # double `--verbose` shows tracked remote branches https://stackoverflow.com/a/4952368/22114136
+		git branch --all --verbose --verbose --color |
+			fzf --ansi --height=40% --header-first --header="↵ : Checkout Branch"
 	)
 	[[ -z "$selected" ]] && return 0
-	selected=$(echo "$selected" | tr -d "* ")
+	selected=$(echo "$selected" | tr "*" " " | cut -f3 -d' ')
 
-	# how to checkout remote branches: https://stackoverflow.com/questions/67699/how-do-i-clone-all-remote-branches
 	if [[ $selected == remotes/* ]]; then
+		# how to checkout remote branches: https://stackoverflow.com/questions/67699/how-do-i-clone-all-remote-branches
 		remote=$(echo "$selected" | cut -d/ -f2-)
 		git checkout "$remote"
 		selected=$(echo "$selected" | cut -d/ -f3)
@@ -191,7 +191,7 @@ function clone {
 function deletefork {
 	if [[ ! -x "$(command -v fzf)" ]]; then print "\033[1;33mfzf not installed.\033[0m" && return 1; fi
 	if [[ ! -x "$(command -v gh)" ]]; then print "\033[1;33mgh not installed.\033[0m" && return 1; fi
-	
+
 	to_delete=$(gh repo list --fork | fzf --multi --with-nth=1 --info=inline | cut -f1)
 	[[ -z "$to_delete" ]] && return 0 # aborted
 

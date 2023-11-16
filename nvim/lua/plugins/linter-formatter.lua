@@ -106,7 +106,8 @@ local function linterConfigs()
 		"--disable=no-multiple-blanks",
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
 	}
-	lint.linters.zsh = {
+
+	lint.linters.zsh = { -- PENDING
 		cmd = "zsh",
 		stdin = false,
 		ignore_exitcode = true,
