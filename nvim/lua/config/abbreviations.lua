@@ -11,6 +11,7 @@ local spellfixes = {
 	dwon = "down",
 	keybaord = "keyboard",
 	sicne = "since",
+	ignroe = "ignore",
 	nto = "not",
 	reponse = "response",
 	fodler = "folder",

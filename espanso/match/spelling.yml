@@ -380,3 +380,7 @@ matches:
     replace: those
     propagate_case: true
     word: true
+  - trigger: ignroe
+    replace: ignore
+    propagate_case: true
+    word: true
