@@ -33,12 +33,12 @@ function run(argv) {
 
 	//───────────────────────────────────────────────────────────────────────────
 
-	let i = 0;
+	let ln = 0;
 	const navigationMarkers = readFile(sfPath)
 		.split("\n")
 		.map((line) => {
-			i++;
-			return { content: line, ln: i };
+			ln++;
+			return { content: line, ln: ln };
 		})
 		.map((marker) => {
 			// GUARD line is not marker
