@@ -112,28 +112,13 @@ serverConfigs.jedi_language_server = {
 		codeAction = { nameExtractVariable = "extracted_var", nameExtractFunction = "extracted_def" },
 	},
 	-- HACK since init_options cannot be changed during runtime, we need to use
-	-- `on_new_config` to set it and `on_attach` to notify the LSP of a new
-	-- config (even though the `on_attach` just passes the same config again)
+	-- `on_new_config` to set it. Since at `vim.env.VIRTUAL_ENV` is
+	-- not set in time, we need to hardcode the identification of the
+	-- venv-dir here
 	on_new_config = function(config, root_dir)
-		if not vim.env.VIRTUAL_ENV then
-			vim.notify("🪚 beep 🤖")
-			return
-		end
 		config.init_options.workspace = {
-			environmentPath = vim.env.VIRTUAL_ENV .. "/bin/python",
+			environmentPath = root_dir .. "/.venv/bin/python",
 		}
-	end,
-	on_attach = function(jedi)
-		vim.defer_fn(
-			function()
-				vim.lsp.buf_notify(
-					0,
-					"workspace/didChangeConfiguration",
-					{ settings = jedi.config.settings }
-				)
-			end,
-			1300
-		)
 	end,
 }
 

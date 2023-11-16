@@ -111,7 +111,17 @@ local function linterConfigs()
 end
 
 local function lintTriggers()
-	local function doLint() vim.defer_fn(require("lint").try_lint, 1) end
+	local function doLint()
+		vim.defer_fn(function()
+			if vim.bo.buftype ~= "" then return end
+
+			-- GUARD only when in lua, only lint when selene file available https://github.com/mfussenegger/nvim-lint/issues/370#issuecomment-1729671151
+			local hasNoSeleneConfig = vim.loop.fs_stat((vim.loop.cwd() or "") .. "/selene.toml") == nil
+			if hasNoSeleneConfig and vim.bo.ft == "lua" then return end
+
+			require("lint").try_lint()
+		end, 1)
+	end
 
 	vim.api.nvim_create_autocmd({ "BufReadPost", "InsertLeave", "TextChanged", "FocusGained" }, {
 		callback = doLint,

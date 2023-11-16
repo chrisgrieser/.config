@@ -18,7 +18,10 @@ vim.api.nvim_create_user_command("LspCapabilities", function(ctx)
 	-- creates multiple temporary windows, therefore deleting afterwards
 	local autocmdId = vim.api.nvim_create_autocmd("Filetype", {
 		pattern = "noice",
-		callback = function() vim.bo.filetype = "lua" end,
+		callback = function()
+			vim.diagnostic.disable(0)
+			vim.bo.filetype = "lua"
+		end,
 	})
 	vim.notify(msg)
 	vim.defer_fn(function() vim.api.nvim_del_autocmd(autocmdId) end, 100)
