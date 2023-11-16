@@ -94,9 +94,9 @@ serverConfigs.pyright = {
 		-- Disable hover in favor of jedi
 		pyright.server_capabilities.hoverProvider = false
 
-		-- Automatically set python_path to python binary
-		if not vim.g.python3_host_prog then return end
-		pyright.config.settings.python.pythonPath = vim.g.python3_host_prog
+		-- Automatically set python_path virtual env
+		if not vim.env.VIRTUAL_ENV then return end
+		pyright.config.settings.python.pythonPath = vim.env.VIRTUAL_ENV .. "/bin/python"
 		vim.lsp.buf_notify(
 			0,
 			"workspace/didChangeConfiguration",
@@ -114,16 +114,26 @@ serverConfigs.jedi_language_server = {
 	-- HACK since init_options cannot be changed during runtime, we need to use
 	-- `on_new_config` to set it and `on_attach` to notify the LSP of a new
 	-- config (even though the `on_attach` just passes the same config again)
-	on_new_config = function(new_config, _)
-		vim.notify("🪚 beep 💣")
-		new_config.init_options = {
-			workspace = {
-				environmentPath = vim.g.python3_host_prog,
-			},
+	on_new_config = function(config, root_dir)
+		if not vim.env.VIRTUAL_ENV then
+			vim.notify("🪚 beep 🤖")
+			return
+		end
+		config.init_options.workspace = {
+			environmentPath = vim.env.VIRTUAL_ENV .. "/bin/python",
 		}
 	end,
 	on_attach = function(jedi)
-		vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = jedi.config.settings })
+		vim.defer_fn(
+			function()
+				vim.lsp.buf_notify(
+					0,
+					"workspace/didChangeConfiguration",
+					{ settings = jedi.config.settings }
+				)
+			end,
+			1300
+		)
 	end,
 }
 
