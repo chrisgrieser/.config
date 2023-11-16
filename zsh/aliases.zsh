@@ -24,7 +24,8 @@ alias curl='curl --progress-bar' # nicer progress bar
 alias make='make --silent --warn-undefined-variables'
 
 # eza
-alias l='eza --all --long --time-style=relative --no-user --git --sort=newest --color-scale=age'
+alias l='eza --all --long --time-style=relative --no-user --smart-group \
+	--total-size --no-quotes --git --sort=newest --color-scale=age'
 alias tree='eza --tree --level=2 --git-ignore --no-quotes'
 alias treee='eza --tree --level=3 --git-ignore --no-quotes'
 alias treeee='eza --tree --level=4 --git-ignore --no-quotes'
