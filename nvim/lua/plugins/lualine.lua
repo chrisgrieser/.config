@@ -44,6 +44,10 @@ local lualineConfig = {
 		-- should always include the tab element
 		lualine_a = {
 			{
+				function () return "󱥒 " .. vim.fs.basename(vim.env.VIRTUAL_ENV) end,
+				cond = function() return vim.env.VIRTUAL_ENV and vim.bo.ft == "python" end,
+			},
+			{
 				"datetime",
 				style = "%H:%M",
 				cond = function() return vim.o.columns > 110 and vim.o.lines > 25 end,

@@ -6,17 +6,6 @@ return {
 	{ -- debugger preconfig for python
 		"mfussenegger/nvim-dap-python",
 		ft = "python",
-		init = function()
-			-- Auto-set virtual environment correctly
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "python",
-				callback = function()
-					local venv_python = u.getVenvPython()
-					if not venv_python then return end
-					require("dap-python").resolve_python = function() return venv_python end
-				end,
-			})
-		end,
 		config = function()
 			-- 1. use the debugypy installation by mason
 			-- 2. deactivate the annoying auto-opening the console by redirecting

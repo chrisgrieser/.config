@@ -107,19 +107,6 @@ function M.uniqueKeymap(modes, lhs, rhs, opts)
 	vim.keymap.set(modes, lhs, rhs, opts)
 end
 
--- for auto-setup of venvs
----@param root_dir? string optional, will use cwd if not provided
----@return string? venv_python -- nil if no venv found
-function M.getVenvPython(root_dir)
-	-- CONFIG
-	local usualVenvPath = "/.venv/bin/python"
-
-	local venv_python = (root_dir or vim.loop.cwd()) .. usualVenvPath
-	local noVenvPython = vim.loop.fs_stat(venv_python) == nil
-	if noVenvPython then return nil end
-	return venv_python
-end
-
 --------------------------------------------------------------------------------
 
 M.vimDataDir = vim.env.DATA_DIR .. "/vim-data/" -- vim.env reads from .zshenv

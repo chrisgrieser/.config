@@ -23,11 +23,6 @@ end
 --------------------------------------------------------------------------------
 
 return {
-	{ -- Notebook integration
-		"benlubas/molten-nvim",
-		build = ":UpdateRemotePlugins",
-		lazy = false,
-	},
 	{ -- Notebook Emulation
 		"GCBallesteros/NotebookNavigator.nvim",
 		dependencies = "Vigemus/iron.nvim", -- repl provider
