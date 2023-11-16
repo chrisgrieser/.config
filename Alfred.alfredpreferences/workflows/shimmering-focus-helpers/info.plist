@@ -102,7 +102,7 @@
 				<key>script</key>
 				<string># $LOCAL_REPOS" from zshenv passed to JavaScript
 source ~/.zshenv
-osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
+osascript -l JavaScript ./scripts/open-shimmering-focus.js "$LOCAL_REPOS"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -140,7 +140,7 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./switch-to-local-repo.sh</string>
+				<string>./scripts/switch-to-local-repo.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -216,7 +216,7 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>open-at-line.sh</string>
+				<string>./scripts/open-at-line.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -241,7 +241,7 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<key>xpos</key>
 			<real>325</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>235</real>
 		</dict>
 		<key>769DBB7A-060F-4CCA-A806-0AAA1149D60B</key>
 		<dict>
@@ -252,7 +252,7 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<key>xpos</key>
 			<real>470</real>
 			<key>ypos</key>
-			<real>315</real>
+			<real>105</real>
 		</dict>
 		<key>7F5B9DEA-0CE4-4402-804D-7E24157C08B1</key>
 		<dict>
@@ -261,7 +261,7 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>335</real>
+			<real>125</real>
 		</dict>
 		<key>D430A6F9-293F-49FE-9E66-A091FB56677B</key>
 		<dict>
@@ -270,7 +270,7 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<key>xpos</key>
 			<real>325</real>
 			<key>ypos</key>
-			<real>315</real>
+			<real>105</real>
 		</dict>
 		<key>F9CA8CAA-C6EB-499B-9049-AA32687CAAFC</key>
 		<dict>
@@ -281,7 +281,7 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>315</real>
+			<real>105</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

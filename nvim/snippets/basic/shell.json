@@ -72,7 +72,7 @@
 	},
 	"directory of script": {
 		"prefix": "directory of this script",
-		"body": "cd \"$(dirname \"\\$0\")\" || return 1"
+		"body": "\"$(dirname \"$(readlink -f \"\\$0\")\")\""
 	},
 	"osascript jxa (run script)": {
 		"prefix": ["jxa (run script)", "osascript -l JavaScript"],
