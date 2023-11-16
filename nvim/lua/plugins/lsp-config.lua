@@ -116,8 +116,10 @@ serverConfigs.jedi_language_server = {
 	-- not set in time, we need to hardcode the identification of the
 	-- venv-dir here
 	on_new_config = function(config, root_dir)
+		local venv_python = root_dir .. "/.venv/bin/python"
+		if vim.fn.executable(venv_python) ~= 1 then return end
 		config.init_options.workspace = {
-			environmentPath = root_dir .. "/.venv/bin/python",
+			environmentPath = venv_python,
 		}
 	end,
 }

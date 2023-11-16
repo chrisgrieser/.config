@@ -8,58 +8,10 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
-		<key>2D3B42A9-52F1-4193-8FE5-EBD2D2606DBD</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>9785CD12-8BE6-426A-B3E5-E88E0A90D807</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>51F16800-EC0B-4860-92F5-D833B4B6A06D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>D533FF07-1350-48E1-9451-EF19F6ED5C37</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>2D3B42A9-52F1-4193-8FE5-EBD2D2606DBD</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>769DBB7A-060F-4CCA-A806-0AAA1149D60B</key>
 		<array/>
 		<key>7F5B9DEA-0CE4-4402-804D-7E24157C08B1</key>
 		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2D3B42A9-52F1-4193-8FE5-EBD2D2606DBD</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>47477B9D-5F2A-4D51-A037-76601A68D460</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>D430A6F9-293F-49FE-9E66-A091FB56677B</string>
@@ -75,19 +27,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>389C4CDC-EC49-4AE7-BF23-142CD07AADDB</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>93E4EBAF-798C-40AF-BBCD-4BF2B98B6F18</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2D3B42A9-52F1-4193-8FE5-EBD2D2606DBD</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -133,122 +72,6 @@
 	<string>Shimmering Focus Development</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-				<key>triggerid</key>
-				<string>trigger-fallback</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>51F16800-EC0B-4860-92F5-D833B4B6A06D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>soundname</key>
-				<string>Hero</string>
-				<key>systemsound</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.playsound</string>
-			<key>uid</key>
-			<string>D533FF07-1350-48E1-9451-EF19F6ED5C37</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>switch-to-fallback.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>2D3B42A9-52F1-4193-8FE5-EBD2D2606DBD</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>✅ Switched to Fallback</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>9785CD12-8BE6-426A-B3E5-E88E0A90D807</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>fb</string>
-				<key>subtext</key>
-				<string>Switch to Fallback &amp; delete local repo</string>
-				<key>text</key>
-				<string>Shimmering Focus</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>93E4EBAF-798C-40AF-BBCD-4BF2B98B6F18</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>⏳Cloning…</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>D430A6F9-293F-49FE-9E66-A091FB56677B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -331,22 +154,29 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⏳Cloning…</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>D430A6F9-293F-49FE-9E66-A091FB56677B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>conditions</key>
 				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>fallback</string>
-						<key>outputlabel</key>
-						<string>fallback</string>
-						<key>uid</key>
-						<string>47477B9D-5F2A-4D51-A037-76601A68D460</string>
-					</dict>
 					<dict>
 						<key>inputstring</key>
 						<string></string>
@@ -402,17 +232,6 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>2D3B42A9-52F1-4193-8FE5-EBD2D2606DBD</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>switch to fallback &amp; delete local repo</string>
-			<key>xpos</key>
-			<real>325</real>
-			<key>ypos</key>
-			<real>170</real>
-		</dict>
 		<key>389C4CDC-EC49-4AE7-BF23-142CD07AADDB</key>
 		<dict>
 			<key>colorindex</key>
@@ -423,13 +242,6 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<real>325</real>
 			<key>ypos</key>
 			<real>445</real>
-		</dict>
-		<key>51F16800-EC0B-4860-92F5-D833B4B6A06D</key>
-		<dict>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>35</real>
 		</dict>
 		<key>769DBB7A-060F-4CCA-A806-0AAA1149D60B</key>
 		<dict>
@@ -447,27 +259,9 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>200</real>
+			<real>195</real>
 			<key>ypos</key>
-			<real>320</real>
-		</dict>
-		<key>93E4EBAF-798C-40AF-BBCD-4BF2B98B6F18</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>170</real>
-		</dict>
-		<key>9785CD12-8BE6-426A-B3E5-E88E0A90D807</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>470</real>
-			<key>ypos</key>
-			<real>170</real>
+			<real>335</real>
 		</dict>
 		<key>D430A6F9-293F-49FE-9E66-A091FB56677B</key>
 		<dict>
@@ -477,13 +271,6 @@ osascript -l JavaScript ./open-shimmering-focus.js "$LOCAL_REPOS"</string>
 			<real>325</real>
 			<key>ypos</key>
 			<real>315</real>
-		</dict>
-		<key>D533FF07-1350-48E1-9451-EF19F6ED5C37</key>
-		<dict>
-			<key>xpos</key>
-			<real>325</real>
-			<key>ypos</key>
-			<real>35</real>
 		</dict>
 		<key>F9CA8CAA-C6EB-499B-9049-AA32687CAAFC</key>
 		<dict>
