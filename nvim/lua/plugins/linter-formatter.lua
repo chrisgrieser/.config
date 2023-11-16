@@ -6,7 +6,7 @@ local linterConfig = require("config.utils").linterConfigFolder
 local linters = {
 	lua = { "selene" },
 	css = { "stylelint" },
-	sh = { "shellcheck" },
+	sh = { "zsh", "shellcheck" },
 	markdown = { "markdownlint", "vale" },
 	yaml = { "yamllint" },
 	python = { "pylint" },
@@ -27,7 +27,6 @@ local formatters = {
 	javascript = { "biome" },
 	typescript = { "biome" },
 	json = { "biome" },
-	jsonc = { "biome" },
 	lua = { "stylua", "ast-grep" },
 	python = { "ruff_format", "ruff_fix" },
 	markdown = { "markdown-toc", "markdownlint" },
@@ -53,10 +52,9 @@ local extraInstalls = {
 }
 
 local dontInstall = {
-	-- installed externally due to its plugins: https://github.com/williamboman/mason.nvim/issues/695
-	"stylelint",
-	-- not real formatters, but pseudo-formatters from conform.nvim
-	"trim_whitespace",
+	"stylelint", -- installed externally due to its plugins: https://github.com/williamboman/mason.nvim/issues/695
+	"zsh", -- builtin
+	"trim_whitespace", -- not real formatters, but pseudo-formatters from conform.nvim
 	"trim_newlines",
 	"squeeze_blanks",
 	"injected",
@@ -107,6 +105,17 @@ local function linterConfigs()
 		"--disable=no-trailing-spaces", -- not disabled in config, so it's enabled for formatting
 		"--disable=no-multiple-blanks",
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
+	}
+	lint.linters.zsh = {
+		cmd = "zsh",
+		stdin = false,
+		ignore_exitcode = true,
+		args = { "--no-exec" },
+		stream = "stderr",
+		parser = require("lint.parser").from_errorformat("%f:%l:%m", {
+			source = "zsh",
+			severity = vim.diagnostic.severity.ERROR,
+		}),
 	}
 end
 
