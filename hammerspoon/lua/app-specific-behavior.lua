@@ -64,17 +64,14 @@ M.wf_obsidanMoved = wf.new("Obsidian")
 M.wf_finder = wf
 	.new("Finder")
 	:setOverrideFilter({
-		-- Info windows *end* with "Info"
+		-- Info windows only *end* with "Info"
 		rejectTitles = { "^Move$", "^Copy$", "^Delete$", "^Finder Settings$", " Info$" },
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
 	})
 	:subscribe(wf.windowCreated, function(win)
-		local winOnMainScreen = win:screen():id() == hs.screen.mainScreen():id()
 		local finder = u.app("Finder")
-		if env.isProjector() and winOnMainScreen then
-			wu.moveResize(win, wu.maximized)
-		elseif win:isMaximizable() and win:isStandard() and finder and finder:isFrontmost() then
+		if win:isMaximizable() and win:isStandard() and finder and finder:isFrontmost() then
 			u.runWithDelays(0.05, function() wu.autoTile(M.wf_finder) end)
 		end
 	end)
@@ -84,8 +81,8 @@ M.wf_finder = wf
 		function() wu.autoTile(M.wf_finder) end
 	)
 
--- also triggered via app-watcher, since windows created in the background do
--- not always trigger window filters
+-- also trigger autoTile via app-watcher, since windows created in the
+-- background do not always trigger window filters
 M.aw_finder = aw.new(function(appName, eventType, finder)
 	if eventType == aw.activated and appName == "Finder" then
 		finder:selectMenuItem { "View", "Hide Sidebar" }
@@ -131,7 +128,7 @@ M.aw_highlights = aw.new(function(appName, eventType, highlights)
 end):start()
 
 -- open all windows pseudo-maximized
-M.wf_pdfReader = wf.new({ "Preview", "Highlights", "PDF Expert" }):subscribe(
+M.wf_pdfReader = wf.new({ "Preview", "Highlights" }):subscribe(
 	wf.windowCreated,
 	function(newWin) wu.moveResize(newWin, wu.pseudoMax) end
 )
@@ -228,6 +225,7 @@ end)
 -- DISCORD
 -- when focused, enclose URL in clipboard with <>
 -- when unfocused, removes <> from URL in clipboard
+-- on launch, open #off-topic in OMG Discord-server
 M.aw_discord = aw.new(function(appName, eventType)
 	if appName ~= "Discord" then return end
 
@@ -235,7 +233,6 @@ M.aw_discord = aw.new(function(appName, eventType)
 	if not clipb then return end
 
 	if eventType == aw.launched or eventType == aw.launching then
-		-- #off-topic in OMG Discord-server
 		u.openLinkInBg("discord://discord.com/channels/686053708261228577/700466324840775831")
 	elseif eventType == aw.activated then
 		local hasURL = clipb:find("^https?:%S+$")

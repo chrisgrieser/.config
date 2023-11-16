@@ -12,7 +12,7 @@ end, { buffer = true, desc = " Toggle !important", nowait = true })
 --------------------------------------------------------------------------------
 
 -- CONFIG read project-specific config
--- HACK workaround for `opt.exrc` not working
+-- HACK workaround for `opt.exrc` not working with neovide
 vim.defer_fn(function()
 	local configPath = (vim.loop.cwd() or "") .. "/.nvim.lua"
 	local projectConfigExists = vim.loop.fs_stat(configPath) ~= nil
