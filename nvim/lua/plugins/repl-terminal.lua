@@ -23,7 +23,12 @@ end
 --------------------------------------------------------------------------------
 
 return {
-	{ -- Jupyter Notebook Emulation
+	{ -- Notebook integration
+		"benlubas/molten-nvim",
+		build = ":UpdateRemotePlugins",
+		lazy = false,
+	},
+	{ -- Notebook Emulation
 		"GCBallesteros/NotebookNavigator.nvim",
 		dependencies = "Vigemus/iron.nvim", -- repl provider
 		init = function() u.leaderSubkey("n", " Notebook") end,
@@ -41,7 +46,7 @@ return {
 			-- stylua: ignore end
 		},
 		opts = {
-			cell_markers = { -- https://github.com/GCBallesteros/NotebookNavigator.nvim/issues/23
+			cell_markers = { -- PENDING https://github.com/GCBallesteros/NotebookNavigator.nvim/issues/23
 				applescript = "-- %%",
 				javascript = "// %%",
 				typescript = "// %%",
