@@ -31,17 +31,17 @@ return {
 			-- stylua: ignore start
 			{ "gn", function() require("notebook-navigator").move_cell("d") end, desc = " Next cell" },
 			{ "gN", function() require("notebook-navigator").move_cell("u") end, desc = " Prev cell" },
-			{ "<leader>na", function ()
+			{ "<leader>ns", function ()
 				local marker = vim.bo.commentstring:format("%%")
 				local ln = vim.api.nvim_win_get_cursor(0)[1]
 				vim.api.nvim_buf_set_lines(0, ln, ln, false, { marker })
-			end, desc = " Add cell marker" },
+			end, desc = " Split cell" },
 			{ "<leader>nb", function() require("notebook-navigator").add_cell_after() end, desc = " New cell below" },
 			{ "<D-CR>", function() require("notebook-navigator").run_cell() end, desc = "  Run cell" },
 			-- stylua: ignore end
 		},
 		opts = {
-			cell_markers = {
+			cell_markers = { -- https://github.com/GCBallesteros/NotebookNavigator.nvim/issues/23
 				applescript = "-- %%",
 				javascript = "// %%",
 				typescript = "// %%",

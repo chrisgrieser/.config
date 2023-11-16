@@ -1,3 +1,5 @@
 *.jupyterlab-settings
-workspaces
 migrated
+
+# ignore all, since unused
+*
