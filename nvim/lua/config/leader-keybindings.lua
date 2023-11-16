@@ -149,7 +149,7 @@ keymap(
 
 -- MAKE
 keymap("n", "<leader>r", function ()
-	vim.cmd("silent! lmake")
+	vim.cmd("silent! update")
 	vim.cmd.lmake()
 end, { desc = " Make" })
 keymap(

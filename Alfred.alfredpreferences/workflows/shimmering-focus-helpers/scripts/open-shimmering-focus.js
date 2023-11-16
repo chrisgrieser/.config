@@ -33,30 +33,26 @@ function run(argv) {
 
 	//───────────────────────────────────────────────────────────────────────────
 
-	let ln = 0;
+	let lineNum = 0;
 	const navigationMarkers = readFile(sfPath)
 		.split("\n")
 		.map((line) => {
-			ln++;
-			return { content: line, ln: ln };
-		})
-		.map((marker) => {
-			// GUARD line is not marker
-			if (!(marker.content.startsWith("/* <") || marker.content.startsWith("# <<"))) {
-				return {};
-			}
+			lineNum++;
 
-			const name = marker.content
-				.replace(/ \*\/$/, "") // comment-ending syntax
-				.replace(/^\/\* *<+ ?/, "") // comment-beginning syntax
-				.replace(/^# ?<+ ?/, ""); // YAML-comment syntax)
+			// GUARD line is not marker
+			if (!(line.startsWith("/* <") || line.startsWith("# <<"))) return {};
+
+			const name = line
+				.replace(/ \*\/$/, "") // comment-ending
+				.replace(/^\/\* *<+ ?/, "") // comment-beginning
+				.replace(/^# ?<+ ?/, ""); // YAML-comment
 
 			return {
 				title: name,
-				subtitle: marker.ln,
+				subtitle: lineNum,
 				match: alfredMatcher(name),
-				uid: name,
-				arg: marker.ln,
+				uid: name, // not lineNum, since the lineNum can change
+				arg: lineNum,
 			};
 		});
 
