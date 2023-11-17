@@ -230,17 +230,13 @@ nnoremap ,x :checkList
 """"""""""""""""""""""
 " Critic Markup
 """"""""""""""""""""""
-" accept all / selection
+" accept all
 exmap acceptAll obcommand commentator:commentator-accept-all-suggestions
 nnoremap ,a :acceptAll
-exmap acceptSelected obcommand commentator:commentator-accept-selected-suggestions
-vnoremap ,a :acceptAll
 
-" reject all / selection
+" reject all
 exmap rejectAll obcommand commentator:commentator-reject-all-suggestions
 nnoremap ,A :rejectAll
-exmap rejectSelected obcommand commentator:commentator-reject-selected-suggestions
-vnoremap ,A :rejectAll
 
 
 """"""""""""""""""""""
