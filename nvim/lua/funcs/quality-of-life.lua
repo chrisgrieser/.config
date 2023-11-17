@@ -1,5 +1,6 @@
 local M = {}
 local u = require("config.utils")
+-- selene: allow(mixed_table)
 local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
 
 --------------------------------------------------------------------------------
@@ -96,7 +97,9 @@ end
 
 function M.openAtRegex101()
 	-- keymaps assume a/ and i/ mapped as regex textobj via treesitter textobj
+	-- selene: allow(mixed_table)
 	vim.cmd.normal { '"zya/', bang = false } -- yank outer regex
+	-- selene: allow(mixed_table)
 	vim.cmd.normal { "vi/", bang = false } -- select inner regex for easy replacement
 
 	-- TODO use treesitter to get pattern and flags
@@ -116,11 +119,9 @@ end
 
 ---Toggles a pin-window
 local pinWinNr
-function M.pinWin()
-	-- CONFIG
-	local width = 0.4
-	local height = 0.3
-
+---@param width number -- between 0 and 1
+---@param height number -- between 0 and 1
+function M.pinWin(width, height)
 	-- if already open, just close is
 	local pinWinOpen = vim.tbl_contains(vim.api.nvim_list_wins(), pinWinNr)
 	if pinWinOpen then
