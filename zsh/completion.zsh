@@ -5,8 +5,8 @@
 # ansi colors https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#256-colors
 #───────────────────────────────────────────────────────────────────────────────
 
-# color completion groups -- https://stackoverflow.com/a/23568183
-zstyle ':completion:*:descriptions' format $'\e[7;38;5;97m %d \e[0;38;5;97m\e[0m'
+# color completion groups with pruple-gray background (ccc.nvim highlight is wrong)
+zstyle ':completion:*:descriptions' format $'\e[7;38;5;103m %d \e[0;38;5;103m\e[0m'
 
 # color items in specific group
 zstyle ':completion:*:aliases' list-colors '=*=35'
