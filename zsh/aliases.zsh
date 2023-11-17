@@ -8,7 +8,6 @@ alias ...=" z ../.."
 alias r=' exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
 alias q=' exit'
 alias c='command'
-alias b='bat'
 
 # added verbosity
 alias mv='mv -v'
@@ -30,10 +29,12 @@ alias tree='eza --tree --level=2 --git-ignore --no-quotes'
 alias treee='eza --tree --level=3 --git-ignore --no-quotes'
 alias treeee='eza --tree --level=4 --git-ignore --no-quotes'
 
-alias size2='eza --color-scale=size --sort=size --long --no-user --no-permissions --no-time'
-alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
+# bat
+alias bat="bat --theme=\$(defaults read -g AppleInterfaceStyle &>/dev/null && echo Dracula || echo GitHub)"
+alias b="bat"
 
 # misc
+alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
 alias prose='ssh nanotipsforvim@prose.sh'
 alias bkp='zsh "$HOME/.config/_utility-scripts/backup-script.sh"'
 alias repobkp='zsh "$HOME/.config/_utility-scripts/backup-my-repos.sh"'

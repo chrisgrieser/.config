@@ -16,7 +16,9 @@ vim.opt_local.listchars:append { multispace = " " }
 
 -- set virtual environment for other plugins to use
 vim.defer_fn(function()
-	vim.env.VIRTUAL_ENV = vim.loop.cwd() .. "/.venv" -- cwd set by projects.nvim
+	local venv = vim.loop.cwd() .. "/.venv" -- cwd set by projects.nvim
+	if not vim.loop.fs_stat(venv) then return end
+	vim.env.VIRTUAL_ENV = venv
 	vim.g.python3_host_prog = vim.env.VIRTUAL_ENV .. "/bin/python"
 end, 1)
 
