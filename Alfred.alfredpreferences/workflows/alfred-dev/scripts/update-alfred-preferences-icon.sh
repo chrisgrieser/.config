@@ -6,10 +6,6 @@ if ! command -v fileicon &>/dev/null; then
 	return 1
 fi
 
-if [[ ! -e "$custom_pref_icon_path" ]]; then
-	echo "Icon not found."
-	return 1
-fi
-
 pref_path="/Applications/Alfred 5.app/Contents/Preferences/Alfred Preferences.app"
-fileicon set "$pref_path" "$custom_pref_icon_path" &>/dev/null && echo "updated"
+icon_path="./Alfred Preferences.icns"
+fileicon set "$pref_path" "$icon_path" &>/dev/null && echo "updated"

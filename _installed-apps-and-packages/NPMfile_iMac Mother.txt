@@ -1,5 +1,5 @@
 npm
 stylelint-config-recess-order
-stylelint-config-recommended
+stylelint-config-standard
 stylelint-order
 stylelint
