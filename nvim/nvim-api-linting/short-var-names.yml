@@ -1,7 +1,10 @@
-id: short-var-names
-rule:
-  kind: identifier
-  pattern: ^.*$
-message: Variable name is too short.
-severity: info
-language: Lua
+# id: short-var-names
+# rule:
+#   kind: identifier
+#   regex: ^.{1,5}$
+#   inside:
+#     kind: variable_declaration
+#     stopBy: end
+# message: Variable name is too short.
+# severity: info
+# language: Lua

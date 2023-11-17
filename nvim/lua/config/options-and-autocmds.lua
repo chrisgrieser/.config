@@ -145,7 +145,7 @@ opt.listchars:append {
 autocmd({ "BufNew", "BufReadPost" }, {
 	callback = function()
 		vim.defer_fn(function()
-			if vim.bo.buftype ~= "" then opt_local.list = false end
+			if vim.bo.buftype ~= "" and vim.bo.ft ~= "query" then opt_local.list = false end
 		end, 1)
 	end,
 })
