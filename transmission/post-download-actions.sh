@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-# shellcheck disable=2164
+export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 # DOCS https://github.com/transmission/transmission/blob/main/docs/Scripts.md#scripts
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -7,12 +7,7 @@
 
 # read download folder from transmission settings
 download_folder="$(defaults read org.m0k.transmission DownloadFolder)"
-if [[ -d "$download_folder" ]]; then
-	cd "$download_folder"
-else
-	touch "./WARN Transmission DownloadFolder not found"
-	return 1
-fi
+cd "$download_folder" || return 1
 
 #───────────────────────────────────────────────────────────────────────────────
 
