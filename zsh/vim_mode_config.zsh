@@ -3,10 +3,8 @@
 
 # DOCS https://github.com/jeffreytse/zsh-vi-mode#configuration-function
 function zvm_config {
-	# Always starting with insert mode for each command line
-	ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
-
-	ZVM_KEYTIMEOUT=0.666 # default: 0.4
+	ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT # Always starting in insert mode
+	ZVM_KEYTIMEOUT=0.03 # lower delay for escape
 
 	# cursor styling with blinking
 	ZVM_INSERT_MODE_CURSOR=$ZVM_CURSOR_BLINKING_BEAM
@@ -19,9 +17,8 @@ function zvm_config {
 #───────────────────────────────────────────────────────────────────────────────
 
 # INFO has to run *after* zvm_config, but *before* zvm_after_lazy_keybindings
-vi_plugin="$(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
-# shellcheck disable=1090
-[[ -f "$vi_plugin" ]] && source "$vi_plugin"
+# shellcheck disable=1091
+source "$(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
 
 #───────────────────────────────────────────────────────────────────────────────
 
