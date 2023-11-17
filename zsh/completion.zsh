@@ -9,8 +9,8 @@
 zstyle ':completion:*:descriptions' format $'\e[1;36m%d\e[0m'
 
 # color items in specific group
-zstyle ':completion:*:aliases' list-colors '=*=35'
-zstyle ':completion:*:directory' list-colors '=*=39'
+zstyle ':completion:*:aliases' list-colors '=*=35' 
+zstyle ':completion:*:directories' list-colors '=*=39' # unset red color
 
 # option descriptions in gray (38;5;245 is visible in dark and light mode)
 zstyle ':completion:*:default' list-colors '=(#b)*(-- *)=39=38;5;245'
@@ -25,6 +25,9 @@ zstyle ':completion:*:default' list-colors '=(#b)*(-- *)=39=38;5;245'
 # shellcheck disable=2154
 bindkey '\t' menu-select "${terminfo}[kcbt]" menu-select
 bindkey -M menuselect '\t' menu-complete "${terminfo}[kcbt]" reverse-menu-complete
+
+# <Shift-Tab> to go to next group
+bindkey -M menuselect '^[[Z' vi-forward-blank-word
 
 # <CR> to select suggestion & execute
 bindkey -M menuselect '\r' .accept-line
