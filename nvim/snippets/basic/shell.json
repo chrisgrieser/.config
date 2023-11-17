@@ -139,12 +139,12 @@
 	},
 	"check if installed": {
 		"prefix": "check if installed",
-		"body": "if [[ ! -x \"$(command -v ${1:cli})\" ]]; then print \"\\033[1;33m${1:cli} not installed.\\033[0m\" && return 1; fi\n$0",
+		"body": "if [[ ! -x \"$(command -v ${1:cli})\" ]]; then print \"\\e[1;33m${1:cli} not installed.\\e[0m\" && return 1; fi\n$0",
 		"description": "https://stackoverflow.com/a/26759734/22114136"
 	},
 	"check if in git repo": {
 		"prefix": "check if in git repo",
-		"body": "if ! git rev-parse --is-inside-work-tree &>/dev/null ; then print \"\\033[1;33mfile is not ins a git repository.\\033[0m\" && return 1 ; fi"
+		"body": "if ! git rev-parse --is-inside-work-tree &>/dev/null ; then print \"\\e[1;33mfile is not ins a git repository.\\e[0m\" && return 1 ; fi"
 	},
 	"goto git root": {
 		"prefix": "goto git root",
@@ -266,70 +266,70 @@
 	},
 	"reset color": {
 		"prefix": "reset color",
-		"body": "\\033[0m"
+		"body": "\\e[0m"
 	},
 	"black": {
 		"prefix": "black",
-		"body": "\\033[1;30m"
+		"body": "\\e[1;30m"
 	},
 	"red": {
 		"prefix": "red",
-		"body": "\\033[1;31m"
+		"body": "\\e[1;31m"
 	},
 	"green": {
 		"prefix": "green",
-		"body": "\\033[1;32m"
+		"body": "\\e[1;32m"
 	},
 	"yellow": {
 		"prefix": "yellow",
-		"body": "\\033[1;33m"
+		"body": "\\e[1;33m"
 	},
 	"blue": {
 		"prefix": "blue",
-		"body": "\\033[1;34m"
+		"body": "\\e[1;34m"
 	},
 	"magenta": {
 		"prefix": ["magenta", "purple"],
-		"body": "\\033[1;35m"
+		"body": "\\e[1;35m"
 	},
 	"cyan": {
 		"prefix": "cyan",
-		"body": "\\033[1;36m"
+		"body": "\\e[1;36m"
 	},
 	"white": {
 		"prefix": "white",
-		"body": "\\033[1;37m"
+		"body": "\\e[1;37m"
 	},
 	"black bg": {
 		"prefix": "black bg",
-		"body": "\\033[1;40m"
+		"body": "\\e[1;40m"
 	},
 	"red bg": {
 		"prefix": "red bg",
-		"body": "\\033[1;41m"
+		"body": "\\e[1;41m"
 	},
 	"green bg": {
 		"prefix": "green bg",
-		"body": "\\033[1;42m"
+		"body": "\\e[1;42m"
 	},
 	"yellow bg": {
 		"prefix": "yellow bg",
-		"body": "\\033[1;43m"
+		"body": "\\e[1;43m"
 	},
 	"blue bg": {
 		"prefix": "blue bg",
-		"body": "\\033[1;44m"
+		"body": "\\e[1;44m"
 	},
 	"magenta bg": {
 		"prefix": ["magenta bg", "purple bg"],
-		"body": "\\033[1;45m"
+		"body": "\\e[1;45m"
 	},
 	"cyan bg": {
 		"prefix": "cyan bg",
-		"body": "\\033[1;46m"
+		"body": "\\e[1;46m"
 	},
 	"white bg": {
 		"prefix": "",
-		"body": "\\033[1;47m"
+		"body": "\\e[1;47m"
 	}
 }
