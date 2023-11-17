@@ -3,7 +3,7 @@ function o() {
 	if [[ ! -x "$(command -v fzf)" ]]; then print "\033[1;33mfzf not installed.\033[0m" && return 1; fi
 	if [[ ! -x "$(command -v fd)" ]]; then print "\033[1;33mfd not installed.\033[0m" && return 1; fi
 	if [[ ! -x "$(command -v eza)" ]]; then print "\033[1;33meza not installed.\033[0m" && return 1; fi
-	if [[ ! -x "$(command -v bat)" ]]; then print "\033[1;33mbat not installed.\033[0m" && return 1; fi
+	if [[ ! "$(command -v bat)" ]]; then print "\033[1;33mbat not installed.\033[0m" && return 1; fi
 
 	local input="$*"
 
