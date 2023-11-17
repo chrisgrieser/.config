@@ -106,18 +106,6 @@ local function linterConfigs()
 		"--disable=no-multiple-blanks",
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
 	}
-
-	lint.linters.zsh = { -- PENDING https://github.com/mfussenegger/nvim-lint/pull/461
-		cmd = "zsh",
-		stdin = false,
-		ignore_exitcode = true,
-		args = { "--no-exec" },
-		stream = "stderr",
-		parser = require("lint.parser").from_errorformat("%f:%l:%m", {
-		     source = "zsh",
-			severity = vim.diagnostic.severity.ERROR,
-		}),
-	}
 end
 
 local function lintTriggers()
