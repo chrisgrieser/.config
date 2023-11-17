@@ -4,30 +4,18 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 add_newline = false
-continuation_prompt = '➜' # currently not working?
 
 format = """[\
-${custom.location_indicator}\
-$directory\
-${custom.folder_number}\
-${custom.main_branch}\
-$git_branch\
-$git_status\
-$git_metrics\
-$git_commit\
-$git_state\
-$sudo\
-](bg:black)\
-$cmd_duration\
-$status\
-$character\
+${custom.location_indicator}$directory${custom.folder_number}\
+${custom.main_branch}$git_branch\
+$git_status$git_metrics$git_commit$git_state$sudo\
+](bg:black)[](fg:black)\
+$cmd_duration$status$character\
 """
 
 right_format = """\
-${custom.alfred}\
-$python\
-$jobs\
-$memory_usage\
+${custom.alfred}$python\
+$jobs$memory_usage\
 """
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -77,7 +65,7 @@ description = "Number of files (and folders) in the current working directory"
 command = "find . -mindepth 1 -maxdepth 1 -not -name '.git' -not -name '.DS_Store' -not -name 'Icon?' | wc -l"
 when = "true"                                                                                                  # always show
 symbol = " "
-format = '[$symbol$output]($style) '
+format = '[$symbol$output]($style)'
 style = "fg:yellow bg:black bold"
 
 [status]
@@ -103,13 +91,13 @@ format = "[󰘬 $hash]($style) "
 only_attached = true
 symbol = "󰘬 "                        # 
 style = "fg:purple bg:black bold"
-format = "[$symbol$branch]($style) "
+format = " [$symbol$branch]($style)"
 ignore_branches = ["main"]
 
 # since "ignore_branches" fully hides the git_branch component, still showing the symbol
 [custom.main_branch]
 when = "[[ $(git branch --show-current) == 'main' ]]"
-format = '[󰘬 ](fg:purple bg:black bold) '
+format = ' [󰘬 ](fg:purple bg:black bold)'
 
 # files
 [git_status]
@@ -124,14 +112,14 @@ diverged = '[󰃻 $count ](fg:red bg:black)'
 ahead = '[󰶣 $count ](fg:cyan bg:black)'
 behind = '[󰶡 $count ](fg:yellow bg:black)'
 style = 'fg:purple bg:black bold'
-format = '[$ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$deleted]($style)'
+format = ' [$ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$deleted]($style)'
 
 # lines
 [git_metrics]
 disabled = false
 added_style = "fg:green bg:black"
 deleted_style = "fg:red bg:black"
-format = '(\([+$added]($added_style)/[-$deleted]($deleted_style)\) )'
+format = '(\([+$added]($added_style)/[-$deleted]($deleted_style)\))'
 
 #───────────────────────────────────────────────────────────────────────────────
 # right side

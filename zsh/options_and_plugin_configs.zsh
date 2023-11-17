@@ -15,7 +15,7 @@ setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful for copypasti
 # Affects filetype-coloring in eza, fd, and completion menus
 # Can generate via: https://github.com/sharkdp/vivid
 # DOCS https://github.com/eza-community/eza/blob/main/man/eza_colors.5.md
-export LS_COLORS="di=1;34:ln=1;35:or=1;31:*.md=4;33:*.lua=1;36"
+export LS_COLORS="di=1;34:ln=3;35:or=7;31:ex=39:*.md=4;33"
 
 export YSU_IGNORED_ALIASES=("bi" "pi") # often copypasted without alias
 export YSU_MESSAGE_POSITION="after"
