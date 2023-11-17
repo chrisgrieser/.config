@@ -70,7 +70,7 @@ function pip() {
 		pip3 "$@"
 	elif [[ "$1" == "uninstall" ]] && [[ -z "$VIRTUAL_ENV" ]]; then
 		if ! command -v pip-autoremove &>/dev/null; then print "\033[1;33mpip-autoremove not installed.\033[0m" && return 1; fi
-		print "\033[1;34mUsing pip-autoremove\033[0m"
+		print "\033[1;36mUsing pip-autoremove\033[0m"
 		shift
 		pip-autoremove "$@"
 	else

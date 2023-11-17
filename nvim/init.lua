@@ -8,7 +8,6 @@ vim.defer_fn(function()
 		end
 	end
 end, 1)
-
 vim.g.mapleader = ","
 vim.g.maplocalleader = "ö"
 
