@@ -1,7 +1,7 @@
 CONFIG_FILES=(
 	load_plugins
 	options_and_plugin_configs
-	completions
+	completion
 	vim_mode_config
 	terminal_utils
 	terminal_keybindings
