@@ -1,23 +1,24 @@
 # DOCS
 # completion in zsh https://zsh.sourceforge.io/Guide/zshguide06.html
 # zsh-autocomplete https://github.com/marlonrichert/zsh-autocomplete#configuration
+# ansi colors https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#256-colors
+# good guide https://thevaluable.dev/zsh-completion-guide-examples/
 #───────────────────────────────────────────────────────────────────────────────
 
-# color completion groups
-# see https://github.com/marlonrichert/zsh-autocomplete/issues/654
-zstyle ':completion:*:descriptions' format $'\e[1;36m[%d]\e[0m'
+# color completion groups #  https://stackoverflow.com/a/23568183
+zstyle ':completion:*:descriptions' format $'\e[1;36m%d\e[0m'
 
-zstyle ':completion:*:descriptions' list-colors '=directory=1;35'
-
-# https://stackoverflow.com/a/23568183
-# https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#256-colors
+# color items in specific group
 zstyle ':completion:*:aliases' list-colors '=*=1;35'
 
-# 38;5;245 is gray that's visible in dark and light mode
-zstyle ':completion:*:default' list-colors '=(#b)*(-- *)=39=38;5;245' '=*=39'
+zstyle ':completion:*:default:' list-colors "di=35"
+# option descriptions in gray (38;5;245 is visible in dark and light mode)
+# zstyle ':completion:*:default' list-colors '=(#b)*(-- *)=39=38;5;245' '=*=39'
 
 # group order
 # zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'external commands'
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # <Tab> to cycle suggestions
 # shellcheck disable=2154
