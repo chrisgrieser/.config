@@ -14,6 +14,7 @@ M.usb_externalDrive = hs.usb.watcher
 			"T27hv-20",
 			"USB 10/100/1000 LAN",
 			"CHERRY Wireless Device", -- Mouse at mother
+			"SP 150", -- RICOH Drucker
 		}
 		if u.tbl_contains(ignore, name) or device.eventType ~= "added" then return end
 
@@ -29,7 +30,7 @@ M.usb_externalDrive = hs.usb.watcher
 			hs.application.open("WezTerm")
 		else
 			-- search for mounted volumes, since the usb-watcher does not report it to us
-			u.runWithDelays({ 1, 2, 4 }, function()
+			u.runWithDelays({ 1, 3 }, function()
 				local stdout, success =
 					hs.execute([[df -h | grep -io "\s/Volumes/.*" | cut -c2- | head -n1]])
 				if not success or not stdout then return end
@@ -54,6 +55,9 @@ M.timer_dailyBatteryCheck = hs.timer
 			if percent > warningLevel then return end
 			local msg = ("%s Battery is low (%s)"):format(device.name, percent)
 			u.notify("⚠️", msg)
+
+			local dotToUse = 1
+			u.openLinkInBg(("tots://%s/append?text=%s"):format(dotToUse, hs.http.encodeForQuery(msg)))
 		end
 	end, true)
 	:start()

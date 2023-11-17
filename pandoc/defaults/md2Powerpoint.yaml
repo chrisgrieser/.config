@@ -1,12 +1,9 @@
 # yaml-language-server: $schema=./pandoc-defaults-schema.json
-# schema needs to be reloaded to stop spurious errors https://github.com/jgm/pandoc/issues/8809#issuecomment-1524183838
+# schema needs to be loaded to stop spurious errors https://github.com/jgm/pandoc/issues/8809#issuecomment-1524183838
 #───────────────────────────────────────────────────────────────────────────────
 # INFO $USERDATA set via pandoc option `--data-dir` to this directory
 # DOCS https://pandoc.org/MANUAL.html#defaults-files
-#───────────────────────────────────────────────────────────────────────────────
-# DOCS
-# Powerpoint-Writer
-# https://pandoc.org/MANUAL.html#structuring-the-slide-show
+# DOCS Powerpoint-Writer https://pandoc.org/MANUAL.html#structuring-the-slide-show
 #───────────────────────────────────────────────────────────────────────────────
 
 writer: pptx
