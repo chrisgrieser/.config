@@ -1,19 +1,23 @@
 # DOCS
-# completion in zsh https://zsh.sourceforge.io/Guide/zshguide06.html
+# official docs https://zsh.sourceforge.io/Guide/zshguide06.html
+# good guide https://thevaluable.dev/zsh-completion-guide-examples/
 # zsh-autocomplete https://github.com/marlonrichert/zsh-autocomplete#configuration
 # ansi colors https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#256-colors
-# good guide https://thevaluable.dev/zsh-completion-guide-examples/
+# LS_COLORS: https://github.com/sharkdp/vivid
 #───────────────────────────────────────────────────────────────────────────────
 
 # color completion groups -- https://stackoverflow.com/a/23568183
-zstyle ':completion:*:descriptions' format $'\e[1;36m%d\e[0m'
+zstyle ':completion:*:descriptions' format $'\e[1;36m◀ %d ▶\e[0m'
 
 # color items in specific group
 zstyle ':completion:*:aliases' list-colors '=*=35' 
-zstyle ':completion:*:directories' list-colors '=*=39' # unset red color
+zstyle ':completion:*:*directories' list-colors '=*=39' # unset red color
 
-# option descriptions in gray (38;5;245 is visible in dark and light mode)
-zstyle ':completion:*:default' list-colors '=(#b)*(-- *)=39=38;5;245'
+# 1. option descriptions in gray (`38;5;245` is visible in dark and light mode)
+# 2. styling of selection
+zstyle ':completion:*:default' list-colors \
+	'=(#b)*(-- *)=39=38;5;245' \
+	"ma=48;5;205:*.md=33" # ma= selection
 
 # group order
 # zstyle ':completion:*:git:*' group-order \
@@ -26,7 +30,7 @@ zstyle ':completion:*:default' list-colors '=(#b)*(-- *)=39=38;5;245'
 bindkey '\t' menu-select "${terminfo}[kcbt]" menu-select
 bindkey -M menuselect '\t' menu-complete "${terminfo}[kcbt]" reverse-menu-complete
 
-# <Shift-Tab> to go to next group
+# <S-Tab> to go to next group
 bindkey -M menuselect '^[[Z' vi-forward-blank-word
 
 # <CR> to select suggestion & execute
