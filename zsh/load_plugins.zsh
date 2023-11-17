@@ -1,19 +1,4 @@
-# shellcheck disable=SC1090,SC1091,SC2292
-
-# Completions for Homebrew https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
-# REQUIRED must be loaded before completion setup
-FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-
-#───────────────────────────────────────────────────────────────────────────────
-# INFO deactivated when using zsh-autocomplete
-# # activate completions, also needed for ZSH auto suggestions & completions
-# # must be loaded before plugins
-# autoload compinit -Uz +X && compinit
-#
-# # Fix for Intel Mac, https://github.com/zsh-users/zsh-completions/issues/433#issuecomment-629539004
-# [[ $(uname -p) == "i386" ]] && compaudit | xargs chmod g-w
-
-#───────────────────────────────────────────────────────────────────────────────
+# shellcheck disable=SC1091
 
 # must be loaded *before* zsh syntax highlighting
 source "$ZDOTDIR/plugins/zsh-no-ps2/zsh-no-ps2.plugin.zsh"

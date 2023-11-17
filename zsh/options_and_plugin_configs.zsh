@@ -1,6 +1,3 @@
-# shellcheck disable=1087,2154
-#───────────────────────────────────────────────────────────────────────────────
-
 # GENERAL SETTINGS
 
 # sets English everywhere, fixes encoding issues
@@ -64,29 +61,3 @@ export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=30
 # do not accept autosuggestion when using vim `A`
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}")
 
-#───────────────────────────────────────────────────────────────────────────────
-
-# MATCHING / COMPLETION
-
-# group commands & color groups
-# see https://github.com/marlonrichert/zsh-autocomplete/issues/654
-zstyle ':completion:*:descriptions' format $'\033[0;40m%d\033[0m'
-
-# ZSH-AUTOCOMPLETE
-# DOCS https://github.com/marlonrichert/zsh-autocomplete#configuration
-
-# <Tab> to cycle suggestions
-bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
-bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
-
-# <CR> to select suggestion & execute
-bindkey -M menuselect '\r' .accept-line
-
-# hide info message if there are no completions https://github.com/marlonrichert/zsh-autocomplete/discussions/513
-zstyle ':completion:*:warnings' format ""
-
-# minimum number of characters before suggestions are shown
-zstyle ':autocomplete:*' min-input 3 
-
-# shellcheck disable=1090
-source <(carapace _carapace)
