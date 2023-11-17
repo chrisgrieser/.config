@@ -26,6 +26,12 @@ rules:
         to:
           - { key_code: s, modifiers: [command, shift] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
+      # Preview Mode
+      - type: basic
+        from: { key_code: r, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: t, modifiers: [command, shift] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.iconfactory\.Tot$] }]
       # Open Empty Tot
       - type: basic
         from: { key_code: n, modifiers: { mandatory: [command] } }
