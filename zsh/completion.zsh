@@ -5,18 +5,19 @@
 # good guide https://thevaluable.dev/zsh-completion-guide-examples/
 #───────────────────────────────────────────────────────────────────────────────
 
-# color completion groups #  https://stackoverflow.com/a/23568183
+# color completion groups -- https://stackoverflow.com/a/23568183
 zstyle ':completion:*:descriptions' format $'\e[1;36m%d\e[0m'
 
 # color items in specific group
-zstyle ':completion:*:aliases' list-colors '=*=1;35'
+zstyle ':completion:*:aliases' list-colors '=*=35'
+zstyle ':completion:*:directory' list-colors '=*=39'
 
-zstyle ':completion:*:default:' list-colors "di=35"
 # option descriptions in gray (38;5;245 is visible in dark and light mode)
-# zstyle ':completion:*:default' list-colors '=(#b)*(-- *)=39=38;5;245' '=*=39'
+zstyle ':completion:*:default' list-colors '=(#b)*(-- *)=39=38;5;245'
 
 # group order
-# zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'external commands'
+# zstyle ':completion:*:git:*' group-order \
+	# 'main commands' 'alias commands' 'external commands'
 
 #───────────────────────────────────────────────────────────────────────────────
 
