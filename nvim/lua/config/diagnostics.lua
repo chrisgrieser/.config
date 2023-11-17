@@ -39,7 +39,10 @@ end
 ---@param diag Diagnostic
 ---@return string
 local function formatVirtualText(diag)
-	if diag.source == "editorconfig-checker" then return "formatting" end
+	if diag.source == "editorconfig-checker" then
+		local msg = diag.message:gsub(".*%((.*)%)", "%1")
+		return msg
+	end
 	return rmTrailDot(diag)
 end
 

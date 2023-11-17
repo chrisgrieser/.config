@@ -112,6 +112,7 @@ return {
 				end,
 			})
 		end,
+		cmd = "CccHighlighterEnable",
 		keys = {
 			{ "g#", vim.cmd.CccPick, desc = " Color Picker" },
 			-- shift-# on german keyboard
