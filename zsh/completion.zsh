@@ -6,7 +6,7 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 # color completion groups -- https://stackoverflow.com/a/23568183
-zstyle ':completion:*:descriptions' format $'\e[7;38;5;147m %d \e[0;38;5;97m\e[0m'
+zstyle ':completion:*:descriptions' format $'\e[7;38;5;97m %d \e[0;38;5;97m\e[0m'
 
 # color items in specific group
 zstyle ':completion:*:aliases' list-colors '=*=35'
