@@ -173,14 +173,14 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>open-terminal.sh</string>
+				<string>./scripts/path-different-from-wezterm-pwd.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>9EC4C5E4-FD5F-4585-86AE-47B0A7AFA214</string>
+			<string>707FB3E6-329A-4494-A074-D4CD436A44AD</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -196,14 +196,14 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>path-different-from-wezterm-pwd.sh</string>
+				<string>./scripts/open-terminal.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>707FB3E6-329A-4494-A074-D4CD436A44AD</string>
+			<string>9EC4C5E4-FD5F-4585-86AE-47B0A7AFA214</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -299,7 +299,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./open-dot-file.js</string>
+				<string>./scripts/open-dot-file.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>

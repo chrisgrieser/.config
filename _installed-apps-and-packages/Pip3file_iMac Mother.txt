@@ -1,3 +1,2 @@
-chromaterm
 pip-autoremove
 wheel
