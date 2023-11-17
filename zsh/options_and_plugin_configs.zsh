@@ -1,3 +1,6 @@
+# shellcheck disable=1087,2154
+#───────────────────────────────────────────────────────────────────────────────
+
 # GENERAL SETTINGS
 
 # sets English everywhere, fixes encoding issues
@@ -6,7 +9,7 @@ export LANG="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 
 # DOCS https://zsh.sourceforge.io/Doc/Release/Options.html
-setopt AUTO_CD # pure directory = cd into it
+setopt AUTO_CD              # pure directory = cd into it
 setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful for copypasting)
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -64,19 +67,16 @@ export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-a
 #───────────────────────────────────────────────────────────────────────────────
 
 # MATCHING / COMPLETION
-# case insensitive path-completion - https://scriptingosx.com/2019/07/moving-to-zsh-part-5-completions/
-zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
+
 # group commands & color groups
 # see https://github.com/marlonrichert/zsh-autocomplete/issues/654
-zstyle ':completion:*:descriptions' format $'\033[1;34m%d\033[0m'
+zstyle ':completion:*:descriptions' format $'\033[0;40m%d\033[0m'
 
 # ZSH-AUTOCOMPLETE
 # DOCS https://github.com/marlonrichert/zsh-autocomplete#configuration
 
 # <Tab> to cycle suggestions
-# shellcheck disable=1087,2154
 bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
-# shellcheck disable=1087
 bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
 
 # <CR> to select suggestion & execute
@@ -85,11 +85,8 @@ bindkey -M menuselect '\r' .accept-line
 # hide info message if there are no completions https://github.com/marlonrichert/zsh-autocomplete/discussions/513
 zstyle ':completion:*:warnings' format ""
 
-zstyle ':autocomplete:*' min-input 3 # minimum number of characters before suggestions are shown
+# minimum number of characters before suggestions are shown
+zstyle ':autocomplete:*' min-input 3 
 
-# pandoc completions
-function pandoc {
-	unfunction "$0"
-	eval "$(pandoc --bash-completion)"
-	$0 "$@"
-}
+# shellcheck disable=1090
+source <(carapace _carapace)
