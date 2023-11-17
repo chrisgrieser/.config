@@ -1,11 +1,6 @@
 --# selene: allow(mixed_table) -- lazy.nvim uses them
 
 return {
-	{ -- Notebook integration
-		"benlubas/molten-nvim",
-		build = ":UpdateRemotePlugins",
-		lazy = false,
-	},
 	{ -- debugger preconfig for python
 		"mfussenegger/nvim-dap-python",
 		ft = "python",

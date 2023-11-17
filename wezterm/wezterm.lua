@@ -15,8 +15,8 @@ local darkThemes = {
 	"TokyoNight (Gogh)",
 }
 local lightThemes = {
-	"BlulocoLight (Gogh)",
 	"Atelier Cave Light (base16)",
+	"BlulocoLight (Gogh)",
 	"Paraiso (light) (terminal.sexy)",
 	"seoulbones_light",
 	"Edge Light (base16)",
