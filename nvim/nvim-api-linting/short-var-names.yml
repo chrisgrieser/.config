@@ -1,0 +1,7 @@
+id: short-var-names
+rule:
+  kind: identifier
+  pattern: ^.*$
+message: Variable name is too short.
+severity: info
+language: Lua

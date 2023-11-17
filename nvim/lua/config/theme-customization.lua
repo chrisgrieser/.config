@@ -31,23 +31,28 @@ local function overwriteHl(hlgroup, changes) vim.api.nvim_set_hl(0, hlgroup, cha
 
 local function customHighlights()
 	-- Comments
-	clearHl("@lsp.type.comment") -- FIX: https://github.com/stsewd/tree-sitter-comment/issues/22
+	clearHl("@lsp.type.comment") -- FIX https://github.com/stsewd/tree-sitter-comment/issues/22
 
+	-- better comment look
 	local commentColor = u.getHighlightValue("Comment", "fg")
 	overwriteHl("@text.uri", { fg = commentColor, underline = true })
 
-	-- make `MatchParen` stand out more (orange is too close to rainbow brackets)
+	-- make `MatchParen` stand out more
 	overwriteHl("MatchParen", { reverse = true })
 
-	-- proper underlines for diagnostics
+	-- thicker underlines for diagnostics
 	for _, type in pairs { "Error", "Warn", "Info", "Hint" } do
 		updateHl("DiagnosticUnderline" .. type, "gui=underdouble cterm=underline")
 	end
 
-	-- proper underlines for spell issues (used only for git commit messages though)
+	-- underdotted for spell issues (used only for git commit messages though)
 	for _, type in pairs { "Bad", "Cap", "Rare", "Local" } do
 		updateHl("Spell" .. type, "gui=underdotted cterm=underline")
 	end
+
+	-- mixed indentation screams in red
+	fn.matchadd("MixedIndent", [[\v^(\t+ +| +\t+)]])
+	linkHl("MixedIndent", "NvimInternalError")
 end
 
 local function themeModifications()
