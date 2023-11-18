@@ -24,6 +24,9 @@ zstyle ':completion:*:default' list-colors \
 # zstyle ':completion:*:git:*' group-order \
 	# 'main commands' 'alias commands' 'external commands'
 
+# hide info message if there are no completions https://github.com/marlonrichert/zsh-autocomplete/discussions/513
+zstyle ':completion:*:warnings' format ""
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # <Tab> to cycle suggestions
@@ -36,10 +39,3 @@ bindkey -M menuselect '^[[Z' vi-forward-blank-word
 
 # <CR> to select suggestion & execute
 bindkey -M menuselect '\r' .accept-line
-
-# hide info message if there are no completions https://github.com/marlonrichert/zsh-autocomplete/discussions/513
-zstyle ':completion:*:warnings' format ""
-
-# ZSH-AUTOCOMPLETE
-# minimum number of characters before suggestions are shown
-zstyle ':autocomplete:*' min-input 3

@@ -3,13 +3,12 @@
 # - INFO some nerd font requires a space after them to be properly sized
 #───────────────────────────────────────────────────────────────────────────────
 
-add_newline = false
-
+# 
 format = """[\
 ${custom.location_indicator}$directory${custom.folder_number}\
 ${custom.main_branch}$git_branch\
 $git_status$git_metrics$git_commit$git_state$sudo\
-](bg:black)[](fg:black)\
+](bg:black)\ 
 $cmd_duration$status$character\
 """
 
@@ -18,18 +17,25 @@ ${custom.alfred}$python\
 $memory_usage\
 """
 
+add_newline = false
+
 #───────────────────────────────────────────────────────────────────────────────
 
 [character]
-success_symbol = " [󰀘 ](bold green)" # 󰀘 
-error_symbol = " [󰇷 ](bold red)"
-vimcmd_symbol = " [ ](bold cyan)"
+success_symbol = "[█▓▒░](fg:black)" # 󰀘 
+error_symbol = "[█▓▒░](bg:red)"
+vimcmd_symbol = "[█▓▒░](fg:blue)"
+
+[status] # exit code
+format = " [$symbol$status]($style)"
+disabled = false
+symbol = ""
 
 [sudo]
+disabled = false
 style = 'fg:yellow bg:black'
 symbol = "  "
 format = "[$symbol]($style)"
-disabled = false
 
 [cmd_duration]
 min_time = 2000
@@ -67,11 +73,6 @@ when = "true"                                                                   
 symbol = " "
 format = '[$symbol$output]($style)'
 style = "fg:yellow bg:black bold"
-
-[status]
-format = " [$symbol$status]($style)"
-disabled = false
-symbol = ""
 
 #───────────────────────────────────────────────────────────────────────────────
 # GIT

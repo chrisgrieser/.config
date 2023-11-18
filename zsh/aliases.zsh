@@ -28,7 +28,6 @@ alias treeee='eza --tree --level=4 --git-ignore --no-quotes'
 
 # bat
 alias bat="bat --theme=\$(defaults read -g AppleInterfaceStyle &>/dev/null && echo Dracula || echo GitHub)"
-alias b="bat"
 
 # misc
 alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory

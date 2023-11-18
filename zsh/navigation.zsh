@@ -16,15 +16,14 @@ export CDPATH="$HOME/.config:$HOME/Repos"
 alias ..=" cd .."
 alias ...=" cd ../.."
 alias ....=" cd ../../.."
-alias cd="c"
+alias b=" cd -"
+alias c=" cd"
 
 # select recent dir from directory stack
 function gr {
 	local selected
-	selected=$(dirs -pl | 
-		sed $'s|/|\e[1;33m/\e[0m|g' |
-		fzf --query="$1" --no-sort --ansi \
-			--preview-window=right,40% --keep-right \
+	selected=$(dirs -pl | sed -E $'s|([^/]*)(/)|\e[0;34m\\1\e[0;33m\\2\e[0m|g' |
+		fzf --query="$1" --no-sort --ansi --keep-right \
 			--preview="eza {} --no-quotes --color=always --sort=newest --width=\$FZF_PREVIEW_COLUMNS"
 	)
 	[[ -z "$selected" ]] && return 0
@@ -38,7 +37,7 @@ function mkcd {
 	mkdir -p "$1" && cd "$1"
 }
 
-function c() {
+function cd() {
 	builtin cd "$@"
 	auto_venv
 	_magic_dashboard
