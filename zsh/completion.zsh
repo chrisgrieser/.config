@@ -10,7 +10,6 @@ zstyle ':completion:*:descriptions' format $'\e[7;38;5;103m %d \e[0;38;5;103m
 
 # color items in specific group
 zstyle ':completion:*:aliases' list-colors '=*=35'
-# zstyle ':completion:*:*directories' list-colors '=*=39' # unset red color
 
 # 1. option descriptions in gray (`38;5;245` is visible in dark and light mode)
 # 2. apply LS_COLORS
@@ -39,3 +38,9 @@ bindkey -M menuselect '^[[Z' vi-forward-blank-word
 
 # <CR> to select suggestion & execute
 bindkey -M menuselect '\r' .accept-line
+
+#───────────────────────────────────────────────────────────────────────────────
+# ZSH-AUTOCOMPLETE
+
+zstyle ':autocomplete:*' min-input 2
+zstyle ':autocomplete:*' ignored-input '..d'
