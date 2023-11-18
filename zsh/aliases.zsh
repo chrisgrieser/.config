@@ -1,7 +1,4 @@
 # z & cd
-# INFO leading space to ignore it in history due to HIST_IGNORE_SPACE
-alias ..=" z .."
-alias ...=" z ../.."
 
 # utils
 # INFO leading space to ignore it in history due to HIST_IGNORE_SPACE

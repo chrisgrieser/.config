@@ -18,9 +18,6 @@ source "$ZDOTDIR/plugins/magic_dashboard.zsh"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# needs to be placed after compinit
-eval "$(zoxide init --no-cmd zsh)"
-
 # PROMPT
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
