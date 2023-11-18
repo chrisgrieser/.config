@@ -44,19 +44,6 @@ function o() {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# cd to pwd from last session. Requires setup in `.zlogout`
-function ld() {
-	last_pwd_location="$ZDOTDIR/.last_pwd"
-	if [[ ! -f "$last_pwd_location" ]]; then
-		print "\033[1;33mNo Last PWD available.\033[0m"
-		return 1
-	fi
-	last_pwd=$(cat "$last_pwd_location")
-	z "$last_pwd"
-}
-
-#───────────────────────────────────────────────────────────────────────────────
-
 # copies last command(s)
 function lc() {
 	num=${1:-1} # default 1 -> just last command

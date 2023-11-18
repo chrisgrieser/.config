@@ -1,4 +1,5 @@
 # shellcheck disable=SC1091
+#───────────────────────────────────────────────────────────────────────────────
 
 # must be loaded *before* zsh syntax highlighting
 source "$ZDOTDIR/plugins/zsh-no-ps2/zsh-no-ps2.plugin.zsh"

@@ -8,7 +8,8 @@ setopt CD_SILENT # don't pwd when changing directories via stack or `-`
 setopt AUTO_PUSHD
 setopt PUSHD_IGNORE_DUPS
 
-export CDPATH="$HOME/.config:$HOME/Repos"
+# `cdpath_bookmarks` contains symlinks to often-visited directories
+export CDPATH="$ZDOTDIR/cdpath_bookmarks:$HOME/Repos"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -19,6 +20,8 @@ alias ....=" cd ../../.."
 alias b=" cd -"
 alias c=" cd"
 alias ..g='cd "$(git rev-parse --show-toplevel)"' # goto git root
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # select recent dir from directory stack
 function gr {
@@ -31,8 +34,6 @@ function gr {
 	cd "$selected"
 }
 
-#───────────────────────────────────────────────────────────────────────────────
-
 # mkdir and cd
 function mkcd {
 	mkdir -p "$1" && cd "$1"
@@ -42,5 +43,16 @@ function cd() {
 	builtin cd "$@"
 	auto_venv
 	_magic_dashboard
+}
+
+# cd to pwd from last session. Requires setup in `.zlogout`
+function ld() {
+	last_pwd_location="$ZDOTDIR/.last_pwd"
+	if [[ ! -f "$last_pwd_location" ]]; then
+		print "\033[1;33mNo Last PWD available.\033[0m"
+		return 1
+	fi
+	last_pwd=$(cat "$last_pwd_location")
+	z "$last_pwd"
 }
 
