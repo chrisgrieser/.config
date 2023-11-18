@@ -1,8 +1,8 @@
 # DOCS
-# official docs https://zsh.sourceforge.io/Guide/zshguide06.html
-# good guide https://thevaluable.dev/zsh-completion-guide-examples/
-# zsh-autocomplete https://github.com/marlonrichert/zsh-autocomplete#configuration
-# ansi colors https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#256-colors
+# official docs     https://zsh.sourceforge.io/Guide/zshguide06.html
+# good guide        https://thevaluable.dev/zsh-completion-guide-examples/
+# zsh-autocomplete  https://github.com/marlonrichert/zsh-autocomplete#configuration
+# ansi colors       https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#256-colors
 #───────────────────────────────────────────────────────────────────────────────
 
 # COLORS
@@ -13,7 +13,7 @@ zstyle ':completion:*:descriptions' format $'\e[7;38;5;103m %d \e[0;38;5;103m
 zstyle ':completion:*:aliases' list-colors '=*=35'
 
 # 1. option descriptions in gray (`38;5;245` is visible in dark and light mode)
-# 2. apply LS_COLORS
+# 2. apply LS_COLORS to files/directories
 # 3. selected item (styled via `ma=`)
 zstyle ':completion:*:default' list-colors \
 	'=(#b)*(-- *)=39=38;5;245' \
@@ -26,11 +26,11 @@ zstyle ':completion:*:warnings' format ""
 #───────────────────────────────────────────────────────────────────────────────
 
 # BINDINGS
-bindkey '\t' menu-select # <Tab> to cycle suggestions
-bindkey -M menuselect '^[[Z' reverse-menu-complete # <Shift+Tab> prev suggestion
-bindkey -M menuselect '\r' .accept-line # <CR> select & execute
-bindkey -M menuselect '^[[A' vi-backward-blank-word # <up> prev group
-bindkey -M menuselect '^[[B' vi-forward-blank-word # <down> next group
+bindkey '\t' menu-select                            # <Tab> next item
+bindkey -M menuselect '^[[Z' reverse-menu-complete  # <S-Tab> prev suggestion
+bindkey -M menuselect '\r' .accept-line             # <CR> select & execute
+bindkey -M menuselect '^[[A' vi-backward-blank-word # <Up> prev group
+bindkey -M menuselect '^[[B' vi-forward-blank-word  # <Down> next group
 
 # CACHE
 zstyle ':completion:*' use-cache on

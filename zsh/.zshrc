@@ -1,13 +1,13 @@
 CONFIG_FILES=(
 	load_plugins
 	options_and_plugin_configs
-	completion
 	navigation
-	vim_mode_config
+	completion
+	vim_mode
 	terminal_utils
 	terminal_keybindings
 	aliases
-	history_config
+	history
 	docs_man
 	git_github
 	json_utils
@@ -29,8 +29,7 @@ for config_file in "${CONFIG_FILES[@]}"; do
 	source "$file"
 done
 
-# remove last login message that some terminals leave
-# https://stackoverflow.com/a/69915614
+# remove last login message that some terminals leave https://stackoverflow.com/a/69915614
 [[ "$TERM_PROGRAM" == "WezTerm" ]] || printf '\33c\e[3J'
 
 #───────────────────────────────────────────────────────────────────────────────
