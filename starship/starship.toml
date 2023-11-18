@@ -6,9 +6,10 @@
 format = """[\
 ${custom.location_indicator}$directory${custom.folder_number}\
 ${custom.main_branch}$git_branch\
-$git_status$git_metrics$git_commit$git_state$sudo\
+$git_status$git_metrics$git_commit$git_state\
+$sudo$status\
 ](bg:black)\
-$character$cmd_duration$status\
+$character$cmd_duration\
 """
 
 right_format = """\
@@ -27,8 +28,9 @@ vimcmd_symbol = "[▓▒░](fg:blue)"
 
 [status] # exit code
 disabled = false
-format = "[$status $symbol]($style) "
-symbol = "󰇷 "
+format = "[ $status $symbol]($style)"
+style = "fg:bold 255 bg:red"
+symbol = ""
 
 [cmd_duration]
 min_time = 2000
@@ -42,10 +44,10 @@ format = "[$symbol]($style)"
 
 [custom.location_indicator]
 description = "Indicate if in my local repo folder"
-command = '[[ "$PWD" =~ "$HOME/Repos" ]] && echo "󰔽"'
+command = '[[ "$PWD" =~ "$HOME/local-repos" ]] && echo "󰔽"'
 # conditional, so no output does not leave the extra space from `format`. And the
 # space from format is needed, as the output from `command` is trimmed.
-when = '[[ "$PWD" =~ "$HOME/Repos" ]]'
+when = '[[ "$PWD" =~ "$HOME/local-repos" ]]'
 format = '[ $output  ]($style)'        # extra space for proper nerdfont sizing
 style = "fg:bright-blue bg:black bold"
 

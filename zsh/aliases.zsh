@@ -11,10 +11,12 @@ alias cp='cp -v'
 # defaults
 alias grep='grep --ignore-case --color'
 alias ls='ls --color'
-alias which='which -a' # show all
 alias mkdir='mkdir -p' # create intermediate directories
 alias curl='curl --progress-bar'
 alias make='make --silent --warn-undefined-variables'
+
+# colorized & showing all
+function which { builtin which -a "$@" | bat --language=sh; }
 
 # eza
 alias l='eza --all --long --time-style=relative --no-user --smart-group \
