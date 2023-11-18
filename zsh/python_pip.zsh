@@ -51,11 +51,6 @@ function auto_venv() {
 	fi
 }
 
-function cd() {
-	builtin cd "$@" || return 1
-	auto_venv
-}
-
 #───────────────────────────────────────────────────────────────────────────────
 
 # 1. Prevent accidental installation outside of virtual env

@@ -6,8 +6,8 @@ export LANG="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 
 # DOCS https://zsh.sourceforge.io/Doc/Release/Options.html
-setopt AUTO_CD              # pure directory = cd into it
 setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful for copypasting)
+setopt CORRECT
 
 #───────────────────────────────────────────────────────────────────────────────
 # CLI/PLUGIN SETTINGS
@@ -35,13 +35,6 @@ export EZA_STRICT=1
 export EZA_ICONS_AUTO=1
 
 export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgrep-config"
-
-# zoxide
-export _ZO_DATA_DIR="$DATA_DIR/zoxide/"
-export _ZO_FZF_OPTS="
-	$FZF_DEFAULT_OPTS --height=50% --preview-window=right,40% --select-1 --keep-right
-	--preview='eza {2} --icons --color=always --no-quotes --width=\$FZF_PREVIEW_COLUMNS'
-"
 
 # updates managed via homebrew https://cli.github.com/manual/gh_help_environment
 export GH_NO_UPDATE_NOTIFIER=1

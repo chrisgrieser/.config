@@ -44,24 +44,6 @@ function o() {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# smarter z/cd
-function my_zoxide() {
-	if ! command -v __zoxide_z &>/dev/null; then printf "\033[1;33mzoxide not installed.\033[0m" && return 1; fi
-	# shellcheck disable=2086
-	"$1" "$2" || return 1
-	_magic_dashboard
-	auto_venv
-}
-# requires `zoxide init --no-cmd zsh`
-function z() { my_zoxide "__zoxide_z" "$*"; }
-function zz() { my_zoxide "__zoxide_z" "$OLDPWD"; } # back to last directory
-function zi() { my_zoxide "__zoxide_zi"; } # directory history
-
-# mkdir and cd
-function mkcd {
-	mkdir -p "$1" && cd "$1" || return 1
-}
-
 # cd to pwd from last session. Requires setup in `.zlogout`
 function ld() {
 	last_pwd_location="$ZDOTDIR/.last_pwd"
