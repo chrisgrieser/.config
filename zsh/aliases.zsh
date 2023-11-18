@@ -34,7 +34,7 @@ function bat {
 alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
 alias prose='ssh nanotipsforvim@prose.sh'
 alias bkp='zsh "$HOME/.config/_utility-scripts/backup-script.sh"'
-alias repobkp='zsh "$HOME/.config/_utility-scripts/backup-my-repos.sh"'
+alias repobkp-repos='zsh "$HOME/.config/_utility-scripts/backup-my-repos.sh"'
 
 #───────────────────────────────────────────────────────────────────────────────
 # https://www.thorsten-hans.com/5-types-of-zsh-aliases
