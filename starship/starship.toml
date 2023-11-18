@@ -15,7 +15,7 @@ $cmd_duration$status$character\
 
 right_format = """\
 ${custom.alfred}$python\
-$jobs$memory_usage\
+$memory_usage\
 """
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -101,18 +101,18 @@ format = ' [󰘬 ](fg:purple bg:black bold)'
 
 # files
 [git_status]
-stashed = '[󰜦  $count ](fg:cyan bg:black)'
-untracked = '[+$count ](fg:green bg:black)'
-deleted = '[-$count ](fg:red bg:black)' # SIC unstaged as well as stage deletion
-modified = '[~$count ](fg:208 bg:black)'
-renamed = '[󰑕  $count ](fg:blue bg:black)'
-staged = '[  $count ](fg:green bg:black)'
-conflicted = '[ $count ](fg:red bg:black)'
-diverged = '[󰃻 $count ](fg:red bg:black)'
-ahead = '[󰶣 $count ](fg:cyan bg:black)'
-behind = '[󰶡 $count ](fg:yellow bg:black)'
+stashed = ' [󰜦  $count ](fg:cyan bg:black)'
+untracked = ' [+$count ](fg:green bg:black)'
+deleted = ' [-$count ](fg:red bg:black)' # SIC unstaged as well as stage deletion
+modified = ' [~$count ](fg:208 bg:black)'
+renamed = ' [󰑕  $count ](fg:blue bg:black)'
+staged = ' [  $count ](fg:green bg:black)'
+conflicted = ' [ $count ](fg:red bg:black)'
+diverged = ' [󰃻 $count ](fg:red bg:black)'
+ahead = ' [󰶣 $count ](fg:cyan bg:black)'
+behind = ' [󰶡 $count ](fg:yellow bg:black)'
 style = 'fg:purple bg:black bold'
-format = ' [$ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$deleted]($style)'
+format = '[$ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$deleted]($style)'
 
 # lines
 [git_metrics]
@@ -124,13 +124,6 @@ format = '(\([+$added]($added_style)/[-$deleted]($deleted_style)\))'
 #───────────────────────────────────────────────────────────────────────────────
 # right side
 #───────────────────────────────────────────────────────────────────────────────
-
-[jobs]
-symbol = "󰰆 "
-format = "[ +$number $symbol ]($style)"
-style = "fg:white"
-symbol_threshold = 1
-number_threshold = 2
 
 [memory_usage]
 disabled = false
