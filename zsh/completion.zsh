@@ -6,7 +6,6 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 # COLORS
-
 # color completion groups with purple-gray background (ccc.nvim highlight is wrong)
 zstyle ':completion:*:descriptions' format $'\e[7;38;5;103m %d \e[0;38;5;103m\e[0m'
 
@@ -25,26 +24,18 @@ zstyle ':completion:*:default' list-colors \
 zstyle ':completion:*:warnings' format ""
 
 #───────────────────────────────────────────────────────────────────────────────
+
 # BINDINGS
+bindkey '\t' menu-select # <Tab> to cycle suggestions
+bindkey -M menuselect '^[[Z' reverse-menu-complete # <Shift+Tab> prev suggestion
+bindkey -M menuselect '\r' .accept-line # <CR> select & execute
+bindkey -M menuselect '^[[A' vi-backward-blank-word # <up> prev group
+bindkey -M menuselect '^[[B' vi-forward-blank-word # <down> next group
 
-# <Tab> to cycle suggestions
-# shellcheck disable=2154
-bindkey '\t' menu-select "${terminfo}[kcbt]" menu-select
-bindkey -M menuselect '\t' menu-complete "${terminfo}[kcbt]" reverse-menu-complete
-
-# <S-Tab> to go to next group
-bindkey -M menuselect '^[[Z' vi-forward-blank-word
-
-# <CR> to select suggestion & execute
-bindkey -M menuselect '\r' .accept-line
-
-#───────────────────────────────────────────────────────────────────────────────
 # CACHE
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "$HOME/.cache/zsh/compcache"
 
-#───────────────────────────────────────────────────────────────────────────────
 # ZSH-AUTOCOMPLETE
-
 zstyle ':autocomplete:*' min-input 2
 zstyle ':autocomplete:*' ignored-input '..d'
