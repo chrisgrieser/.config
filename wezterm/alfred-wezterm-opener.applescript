@@ -11,11 +11,11 @@ on alfred_script(shellCmd)
 		end repeat
 	end tell
 
-	# Add `clear` if it is just a `cd` command, because it looks cleaner
+	# 1. use builtin to not trigger things like magic dashboard
+	# 2. Add `clear` if it is just a `cd` command, because it looks cleaner
 	set command to text 1 thru 2 of shellCmd
-	set isMultiCmd to (shellCmd contains "|" or shellCmd contains "&&" or shellCmd contains ";")
-	if command is "cd" and not isMultiCmd then 
-		set shellCmd to shellCmd & " && clear"
+	if command is "cd" then 
+		set shellCmd to "builtin " & shellCmd & " && clear"
 	end if
 
 	# DOCS https://wezfurlong.org/wezterm/cli/cli/send-text
