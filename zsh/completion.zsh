@@ -6,19 +6,19 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 # color completion groups with pruple-gray background (ccc.nvim highlight is wrong)
-zstyle ':completion:*:descriptions' format $'\e[7;38;5;103m %d \e[0;38;5;103m\e[0m'
+zstyle ':completion:*:descriptions' format $'\e[7;38;5;103m %d \e[0;38;5;103m\e[0m'
 
 # color items in specific group
 zstyle ':completion:*:aliases' list-colors '=*=35'
 # zstyle ':completion:*:*directories' list-colors '=*=39' # unset red color
 
 # 1. option descriptions in gray (`38;5;245` is visible in dark and light mode)
-# 2. styling of selection
-# 3. selected item
+# 2. apply LS_COLORS
+# 3. selected item (styled via `ma=`)
 zstyle ':completion:*:default' list-colors \
 	'=(#b)*(-- *)=39=38;5;245' \
 	"$LS_COLORS" \
-	"ma=7;38;5;207"
+	"ma=7;38;5;68"
 
 # group order
 # zstyle ':completion:*:git:*' group-order \

@@ -24,8 +24,7 @@ function grappling_hook {
 	elif [[ "$PWD" == "$VAULT_PATH" ]]; then
 		to_open="$WD"
 	fi
-	cd "$to_open" || return 1
-
+	builtin cd "$to_open" || return 1
 	wezterm set-working-directory # so wezterm knows we are in a new directory
 	zle reset-prompt
 }
