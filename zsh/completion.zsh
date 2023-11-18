@@ -41,7 +41,7 @@ bindkey -M menuselect '\r' .accept-line
 #───────────────────────────────────────────────────────────────────────────────
 # CACHE
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path "$HOME/.cache/zsh/.zcompcache"
+zstyle ':completion:*' cache-path "$HOME/.cache/zsh/compcache"
 
 #───────────────────────────────────────────────────────────────────────────────
 # ZSH-AUTOCOMPLETE

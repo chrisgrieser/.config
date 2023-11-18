@@ -6,4 +6,4 @@ lines:
 
 # measure shell startup time, https://blog.jonlu.ca/posts/speeding-up-zsh
 startup:
-	hyperfine "$$SHELL -i -c exit"
+	hyperfine --warmup=1 "$$SHELL -i -c exit"

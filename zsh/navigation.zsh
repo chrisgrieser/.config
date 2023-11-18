@@ -12,9 +12,9 @@ setopt CHASE_LINKS # resolve symlinks when changing directories
 export CDPATH="$ZDOTDIR/cdpath_bookmarks:$HOME/Repos"
 
 function bookmark {
-	local marks
-	marks=$(echo "$CDPATH" | cut -d':' -f1)
-	ln -s "$PWD" "$marks/$1"
+	local bookmark_path
+	bookmark_path=$(echo "$CDPATH" | cut -d':' -f1)
+	ln -sv "$PWD" "$bookmark_path/$1"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -36,11 +36,11 @@ export DIRSTACKSIZE=10
 function gr {
 	local selected
 	selected=$(
-		dirs -pl | sed -E $'s|([^/]*)(/)|\e[0;36m\\1\e[0;33m\\2\e[0m|g' |
+		dirs -pl | sed -E $'s|([^/]*/)|\e[0;38;5;245m\\1\e[0m|g' |
 			fzf --query="$1" --no-sort --ansi \
 				--keep-right --with-nth=-2.. --delimiter="/" \
-				--preview-window="55%" \
-				--preview="printf '\e[7;39m'; echo {} ; echo '\e[0m' ; eza {} --no-quotes --color=always --sort=newest --width=\$FZF_PREVIEW_COLUMNS"
+				--preview-window="55%" --height="45%" \
+				--preview="printf '\e[7;38;5;245m\n{}\n\n\e[0m' ; eza {} --no-quotes --color=always --sort=newest --width=\$FZF_PREVIEW_COLUMNS"
 	)
 	[[ -z "$selected" ]] && return 0
 	cd "$selected"
@@ -48,7 +48,7 @@ function gr {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# mkdir and cd
+# mkdir + cd
 function mkcd {
 	mkdir -p "$1" && cd "$1"
 }

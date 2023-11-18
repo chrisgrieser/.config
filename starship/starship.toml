@@ -9,12 +9,12 @@ ${custom.main_branch}$git_branch\
 $git_status$git_metrics$git_commit$git_state\
 $sudo$status\
 ](bg:black)\
-$character$cmd_duration\
+$character\
 """
 
 right_format = """\
 ${custom.alfred}$python\
-$memory_usage\
+$cmd_duration\
 """
 
 add_newline = false
@@ -31,10 +31,6 @@ disabled = false
 format = "[ $status $symbol]($style)"
 style = "fg:bold 255 bg:red"          # 255 as ansi enforces white regardless of terminal theme
 symbol = ""
-
-[cmd_duration]
-min_time = 2000
-format = "[$duration ⧖](bold cyan) " # avoid nerdfont symbol, since also send to notification
 
 [sudo]
 disabled = false
@@ -127,6 +123,10 @@ format = '(\([+$added]($added_style)/[-$deleted]($deleted_style)\)) '
 # right side
 #───────────────────────────────────────────────────────────────────────────────
 
+[cmd_duration]
+min_time = 2000
+format = "[󰥔  $duration](bold cyan)"
+
 [custom.alfred]
 description = "Version number of Alfred Workflow"
 when = "[[ -f info.plist ]] || [[ -f ../info.plist ]]"
@@ -136,7 +136,7 @@ format = '[󰮤  $output]($style)'
 style = "bold purple"
 
 [python]
-style = "bold cyan"
+style = "bold yellow"
 format = '[${symbol}${pyenv_prefix}(${version})(  󱥒  $virtualenv)]($style)'
 version_format = "$major.$minor"
 python_binary = ["python3"]
