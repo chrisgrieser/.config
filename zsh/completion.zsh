@@ -5,7 +5,7 @@
 # ansi colors https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#256-colors
 #───────────────────────────────────────────────────────────────────────────────
 
-# color completion groups with pruple-gray background (ccc.nvim highlight is wrong)
+# color completion groups with purple-gray background (ccc.nvim highlight is wrong)
 zstyle ':completion:*:descriptions' format $'\e[7;38;5;103m %d \e[0;38;5;103m\e[0m'
 
 # color items in specific group
@@ -18,10 +18,6 @@ zstyle ':completion:*:default' list-colors \
 	'=(#b)*(-- *)=39=38;5;245' \
 	"$LS_COLORS" \
 	"ma=7;38;5;68"
-
-# group order
-zstyle ':completion:*:*:-command-:*:*' group-order \
-	directories alias builtins functions commands
 
 # hide info message if there are no completions https://github.com/marlonrichert/zsh-autocomplete/discussions/513
 zstyle ':completion:*:warnings' format ""
