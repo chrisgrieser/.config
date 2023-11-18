@@ -52,9 +52,9 @@ function zvm_after_init {
 	# three commands. Similar Alternative: accept-line-and-down-history
 	bindkey '^L' accept-and-infer-next-history
 
-	# Plugin Bindings
-	bindkey -M viins '^[[A' history-substring-search-up # up/down: history substring search
-	bindkey -M viins '^[[B' history-substring-search-down
+	# zsh-history-substring-search
+	bindkey -M viins '^[[A' history-substring-search-up # up-arrow
+	bindkey -M viins '^[[B' history-substring-search-down # down-arrow
 }
 
 #───────────────────────────────────────────────────────────────────────────────

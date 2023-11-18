@@ -114,8 +114,8 @@ local keybindings = {
 	{ key = "z", mods = "CMD", action = act.SendKey { key = "z", mods = "CTRL" } },
 	-- Grappling-hook
 	{ key = "Enter", mods = "CMD", action = act.SendKey { key = "o", mods = "CTRL" } },
-	-- accept zsh-autosuggestion
-	{ key = "s", mods = "CMD", action = act.SendKey { key = "RightArrow" } },
+	-- accept-and-infer-next-history
+	{ key = "Enter", mods = "SHIFT", action = act.SendKey { key = "l", mods = "CTRL" } },
 
 	-- scroll-to-prompt, requires shell integration: https://wezfurlong.org/wezterm/config/lua/keyassignment/ScrollToPrompt.html
 	{ key = "k", mods = "CTRL", action = act.ScrollToPrompt(-1) },
