@@ -20,8 +20,8 @@ zstyle ':completion:*:default' list-colors \
 	"ma=7;38;5;68"
 
 # group order
-# zstyle ':completion:*:git:*' group-order \
-	# 'main commands' 'alias commands' 'external commands'
+zstyle ':completion:*:*:-command-:*:*' group-order \
+	directories alias builtins functions commands
 
 # hide info message if there are no completions https://github.com/marlonrichert/zsh-autocomplete/discussions/513
 zstyle ':completion:*:warnings' format ""
