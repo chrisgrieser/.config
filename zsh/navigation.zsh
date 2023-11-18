@@ -18,6 +18,7 @@ alias ...=" cd ../.."
 alias ....=" cd ../../.."
 alias b=" cd -"
 alias c=" cd"
+alias ..g='cd "$(git rev-parse --show-toplevel)"' # goto git root
 
 # select recent dir from directory stack
 function gr {

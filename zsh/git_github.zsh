@@ -15,7 +15,6 @@ alias push="git push"
 alias pull="git pull"
 alias rebase="git rebase --interactive"
 alias unshallow="git fetch --unshallow"           # make shallow clone complete again
-alias ..g='cd "$(git rev-parse --show-toplevel)"' # goto git root
 
 # remote info
 alias grem='git remote -v && echo -n "\`gh\` default: " && gh repo set-default --view'
