@@ -15,11 +15,11 @@ local darkThemes = {
 	"TokyoNight (Gogh)",
 }
 local lightThemes = {
-	"Atelier Cave Light (base16)",
-	"BlulocoLight (Gogh)",
-	"Paraiso (light) (terminal.sexy)",
-	"seoulbones_light",
+	"Silk Light (base16)",
 	"Edge Light (base16)",
+	"seoulbones_light",
+	"Paraiso (light) (terminal.sexy)",
+	"BlulocoLight (Gogh)",
 	"Google Light (Gogh)",
 	"OneHalfLight",
 	"Atelierdune (light) (terminal.sexy)",
@@ -28,7 +28,6 @@ local lightThemes = {
 	"Ivory Light (terminal.sexy)",
 	"Sakura (base16)",
 	"Solar Flare Light (base16)",
-	"Silk Light (base16)",
 }
 
 local lightOpacity = 0.94

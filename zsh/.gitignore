@@ -2,6 +2,3 @@
 .zcompcache
 .zcompdump
 .zsh_sessions
-
-# to have the last directory command
-.last_pwd
