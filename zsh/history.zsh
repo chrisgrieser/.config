@@ -22,15 +22,13 @@ export HIST_DATE_FORMAT='%a %d.%m %H:%M   ' # custom, defined by me
 
 # SEARCH HISTORY FOR A COMMAND
 # enter ➞ write to buffer (without sending)
-# alt+enter ➞ copy to clipboard
 function hs {
 	local date_char_count selected to_cut command
 	date_char_count=$(date "+$HIST_DATE_FORMAT" | wc -m | tr -d " ")
 	to_cut=$((date_char_count + 2))
 	selected=$(
 		history -t "$HIST_DATE_FORMAT" 1 | cut -c8- | fzf \
-			--tac --no-sort \
-			--no-info --height=60% \
+			--tac --no-sort --no-info --height=60% \
 			--query "$*" \
 	)
 	[[ -z "$selected" ]] && return 0

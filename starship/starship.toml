@@ -52,7 +52,7 @@ truncation_length = 2
 truncation_symbol = "/"
 truncate_to_repo = true
 read_only = "󰌾  "
-read_only_style = "red bg:black"
+read_only_style = "fg:red bg:black"
 style = "fg:bright-blue bg:black bold"
 format = "[$path]($style) [$read_only]($read_only_style)"
 
@@ -61,7 +61,6 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 "main-vault" = "󱉽 "
 "~/Library/Mobile Documents/com~apple~CloudDocs/File Hub" = "/󰀶 "
 "~/Library/Mobile Documents/com~apple~CloudDocs" = "/ "
-"/Alfred.alfredpreferences" = "/󰮤 "
 
 [custom.folder_number]
 description = "Number of files (and folders) in the current working directory"
@@ -76,7 +75,7 @@ style = "fg:yellow bg:black bold"
 
 # conflicts or rebasing
 [git_state]
-style = 'fg:yellow bg:black'
+style = 'fg:yellow bold bg:black'
 
 # checkout
 [git_commit]
@@ -109,7 +108,6 @@ conflicted = '[ $count ](fg:red bg:black)'
 diverged = '[󰃻 $count ](fg:red bg:black)'
 ahead = '[󰶣 $count ](fg:cyan bg:black)'
 behind = '[󰶡 $count ](fg:yellow bg:black)'
-style = 'fg:purple bg:black bold'
 format = '[$ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$deleted]($style)'
 
 # lines
@@ -125,7 +123,7 @@ format = '(\([+$added]($added_style)/[-$deleted]($deleted_style)\)) '
 
 [cmd_duration]
 min_time = 2000
-format = "[󰥔  $duration](bold cyan)"
+format = "[󰔟  $duration](bold cyan)"
 
 [custom.alfred]
 description = "Version number of Alfred Workflow"

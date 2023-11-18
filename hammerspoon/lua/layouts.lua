@@ -117,7 +117,7 @@ local function selectLayout()
 	M.isLayouting = true
 	local layout = env.isProjector() and movieLayout or workLayout
 	layout()
-	u.runWithDelays(2.5, function() M.isLayouting = false end)
+	u.runWithDelays(4, function() M.isLayouting = false end)
 end
 
 --------------------------------------------------------------------------------
