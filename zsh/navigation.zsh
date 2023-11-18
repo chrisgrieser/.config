@@ -11,8 +11,10 @@ setopt CHASE_LINKS # resolve symlinks when changing directories
 # `cdpath_bookmarks` contains symlinks to often-visited directories
 export CDPATH="$ZDOTDIR/cdpath_bookmarks:$HOME/Repos"
 
-function bookmmark {
-	ln -s "$PWD" "$ZDOTDIR/cdpath_bookmarks/$1"
+function bookmark {
+	local marks
+	marks=$(echo "$CDPATH" | cut -d':' -f1)
+	ln -s "$PWD" "$marks/$1"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -22,7 +24,6 @@ alias ..=" cd .."
 alias ...=" cd ../.."
 alias ....=" cd ../../.."
 alias b=" cd -"
-alias c=" cd"
 alias ..g='cd "$(git rev-parse --show-toplevel)"' # goto git root
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -57,15 +58,4 @@ function cd {
 	builtin cd "$1"
 	auto_venv
 	_magic_dashboard
-}
-
-# cd to pwd from last session. Requires setup in `.zlogout`
-function ld() {
-	last_pwd_location="$ZDOTDIR/.last_pwd"
-	if [[ ! -f "$last_pwd_location" ]]; then
-		print "\033[1;33mNo Last PWD available.\033[0m"
-		return 1
-	fi
-	last_pwd=$(cat "$last_pwd_location")
-	z "$last_pwd"
 }

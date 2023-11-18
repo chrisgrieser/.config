@@ -5,6 +5,8 @@
 # ansi colors https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#256-colors
 #───────────────────────────────────────────────────────────────────────────────
 
+# COLORS
+
 # color completion groups with purple-gray background (ccc.nvim highlight is wrong)
 zstyle ':completion:*:descriptions' format $'\e[7;38;5;103m %d \e[0;38;5;103m\e[0m'
 
@@ -23,6 +25,7 @@ zstyle ':completion:*:default' list-colors \
 zstyle ':completion:*:warnings' format ""
 
 #───────────────────────────────────────────────────────────────────────────────
+# BINDINGS
 
 # <Tab> to cycle suggestions
 # shellcheck disable=2154
@@ -34,6 +37,11 @@ bindkey -M menuselect '^[[Z' vi-forward-blank-word
 
 # <CR> to select suggestion & execute
 bindkey -M menuselect '\r' .accept-line
+
+#───────────────────────────────────────────────────────────────────────────────
+# CACHE
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$HOME/.cache/zsh/.zcompcache"
 
 #───────────────────────────────────────────────────────────────────────────────
 # ZSH-AUTOCOMPLETE
