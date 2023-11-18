@@ -7,7 +7,7 @@ format = """[\
 ${custom.location_indicator}$directory${custom.folder_number}\
 ${custom.main_branch}$git_branch\
 $git_status$git_metrics$git_commit$git_state$sudo\
-](bg:black)\ 
+](bg:black)\
 $character$cmd_duration$status\
 """
 
@@ -21,9 +21,9 @@ add_newline = false
 #───────────────────────────────────────────────────────────────────────────────
 
 [character]
-success_symbol = "[█▓▒░](fg:black)"
-error_symbol = "[█](fg:black)[▓▒░](fg:red)"
-vimcmd_symbol = "[█](fg:black)[▓▒░](fg:blue)"
+success_symbol = "[▓▒░](fg:black)"
+error_symbol = "[▓▒░](fg:red)"
+vimcmd_symbol = "[▓▒░](fg:blue)"
 
 [status] # exit code
 disabled = false
@@ -33,9 +33,6 @@ symbol = "󰇷 "
 [cmd_duration]
 min_time = 2000
 format = "[$duration ⧖](bold cyan) " # avoid nerdfont symbol, since also send to notification
-show_notifications = true
-min_time_to_notify = 10_000
-notification_timeout = 5000
 
 [sudo]
 disabled = false
@@ -73,7 +70,7 @@ description = "Number of files (and folders) in the current working directory"
 command = "find . -mindepth 1 -maxdepth 1 -not -name '.git' -not -name '.DS_Store' -not -name 'Icon?' | wc -l"
 when = "true"                                                                                                  # always show
 symbol = " "
-format = '[$symbol$output]($style)'
+format = '[$symbol$output]($style) '
 style = "fg:yellow bg:black bold"
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -94,13 +91,13 @@ format = "[󰘬 $hash]($style) "
 only_attached = true
 symbol = "󰘬 "                        # 
 style = "fg:purple bg:black bold"
-format = " [$symbol$branch]($style) "
+format = "[$symbol$branch]($style) "
 ignore_branches = ["main"]
 
 # since "ignore_branches" fully hides the git_branch component, still showing the symbol
 [custom.main_branch]
 when = "[[ $(git branch --show-current) == 'main' ]]"
-format = ' [󰘬 ](fg:purple bg:black bold) '
+format = '[󰘬 ](fg:purple bg:black bold) '
 
 # files
 [git_status]
@@ -122,7 +119,7 @@ format = '[$ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$de
 disabled = false
 added_style = "fg:green bg:black"
 deleted_style = "fg:red bg:black"
-format = '(\([+$added]($added_style)/[-$deleted]($deleted_style)\))'
+format = '(\([+$added]($added_style)/[-$deleted]($deleted_style)\)) '
 
 #───────────────────────────────────────────────────────────────────────────────
 # right side

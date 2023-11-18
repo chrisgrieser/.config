@@ -44,13 +44,39 @@ function o() {
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# previewer
+function p {
+	file="$1"
+	ext=${file##*.}
+	case $ext in
+	"yml" | "yaml")
+		yq "." "$file"
+		;;
+	"json")
+		command jless --no-line-numbers "." "$file"
+		;;
+	"pdf")
+		qlmanage -p "$file"
+		;;
+	"gif" | "png" | "jpg" | "jpeg" | "webp" | "tiff")
+		[[ "$TERM_PROGRAM" == "WezTerm" ]] && image_viewer="wezterm imgcat" || image_viewer="qlmanage -p"
+		$image_viewer "$file"
+		;;
+	*)
+		bat "$file"
+		;;
+	esac
+}
+
+#───────────────────────────────────────────────────────────────────────────────
+
 # copies last command(s)
 function lc() {
 	num=${1:-1} # default 1 -> just last command
 	history |
 		tail -n"$num" |
 		cut -c8- |
-		sed -e 's/"/\"/g' -e "s/'/\'/g" -Ee '/^$/d' | 
+		sed -e 's/"/\"/g' -e "s/'/\'/g" -Ee '/^$/d' |
 		pbcopy
 	echo "Copied."
 }
