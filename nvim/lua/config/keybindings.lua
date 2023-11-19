@@ -66,7 +66,7 @@ keymap("n", "X", "<cmd>normal!mz$x`z<CR>", { desc = "󱎘 Delete char at EoL" })
 -- QUICKFIX
 keymap("n", "gq", cmd.cnext, { desc = " Next Quickfix" })
 keymap("n", "gQ", cmd.cprevious, { desc = " Prev Quickfix" })
-keymap("n", "dQ", function() cmd.cexpr("[]") end, { desc = " Delete Quickfix List" })
+keymap("n", "dQ", function() cmd.cexpr("[]") end, { desc = " Delete Qf List" })
 
 -- COMMENTS
 keymap(
