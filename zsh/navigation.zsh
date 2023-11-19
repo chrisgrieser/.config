@@ -8,23 +8,17 @@ setopt AUTO_CD     # pure directory = cd into it
 setopt CD_SILENT   # don't pwd when changing directories via stack or `-`
 setopt CHASE_LINKS # resolve symlinks when changing directories
 
-# `cdpath_bookmarks` contains symlinks to often-visited directories
-export CDPATH="$ZDOTDIR/cdpath_bookmarks:$HOME/Repos"
+bookmark_path="$ZDOTDIR/cdpath_bookmarks" # folder with symlinks to directories
+export CDPATH="$bookmark_path:$LOCAL_REPOS"
 
 function bookmark {
-	local bookmark_path
-	bookmark_path=$(echo "$CDPATH" | cut -d':' -f1)
 	ln -sv "$PWD" "$bookmark_path/$1"
 }
 
 function unbookmark {
-	local bookmark_path
-	bookmark_path=$(echo "$CDPATH" | cut -d':' -f1)
-	to_unbookmark=$(find "$bookmark_path" -type l | 
-		fzf --with-nth=-1 --delimiter="/" --height=40%
-	)
-	[[ -z "$to_unbookmark" ]] && return 0
-	echo "$to_unbookmark"
+	to_unbookmark=$(find "$bookmark_path" -type l | fzf --with-nth=-1 --delimiter="/")
+	[[ -n "$to_unbookmark" ]] && return 0 # aborted
+	rm "$to_unbookmark" && echo "Removed Bookmark: $(basename "$to_unbookmark")"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -36,15 +30,12 @@ function _grappling_hook {
 		"$HOME/.config"
 		"$VAULT_PATH"
 	)
-	local to_open
+	local to_open="${locations[1]}"
 	if [[ "$PWD" == "${locations[1]}" ]]; then
 		to_open="${locations[2]}"
 	elif [[ "$PWD" == "${locations[2]}" ]]; then
 		to_open="${locations[3]}"
-	elif [[ "$PWD" == "${locations[3]}" ]]; then
-		to_open="${locations[1]}"
 	fi
-	echo
 	cd "$to_open" || return 1
 	[[ "$TERM_PROGRAM" == "WezTerm" ]] && wezterm set-working-directory # so wezterm knows we are in a new directory
 	zle reset-prompt
@@ -54,17 +45,11 @@ bindkey "^O" _grappling_hook # bound to cmd+enter via wezterm
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# hook when directory is changed
-function chpwd {
-	_magic_dashboard
-	_auto_venv
-}
-
 # INFO leading space to ignore it in history due to HIST_IGNORE_SPACE
+alias b=" cd -"
 alias ..=" cd .."
 alias ...=" cd ../.."
 alias ....=" cd ../../.."
-alias b=" cd -"
 alias ..g='cd "$(git rev-parse --show-toplevel)"' # goto git root
 
 #───────────────────────────────────────────────────────────────────────────────
