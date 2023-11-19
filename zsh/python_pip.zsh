@@ -7,7 +7,7 @@ alias py="python3"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-function search_venv_path() {
+function _search_venv_path() {
 	local dir_to_check=$PWD
 	while true; do
 		if [[ -d "$dir_to_check/.venv" ]]; then
@@ -27,7 +27,7 @@ function v() {
 		deactivate
 	else
 		local venv_path
-		venv_path=$(search_venv_path)
+		venv_path=$(_search_venv_path)
 		if [[ -n "$venv_path" ]]; then
 			# shellcheck disable=1091
 			source ./.venv/bin/activate
@@ -41,7 +41,7 @@ function v() {
 # venv if current dir or a parent has a `.venv` dir. Disables venv if not.
 function _auto_venv() {
 	local venv_path
-	venv_path=$(search_venv_path)
+	venv_path=$(_search_venv_path)
 
 	if [[ -n "$VIRTUAL_ENV" && -z "$venv_path" ]]; then
 		deactivate
@@ -50,6 +50,9 @@ function _auto_venv() {
 		source "$venv_path/bin/activate"
 	fi
 }
+
+# hook when directory is changed
+function chpwd { _auto_venv; }
 
 #───────────────────────────────────────────────────────────────────────────────
 

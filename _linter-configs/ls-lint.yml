@@ -1,0 +1,18 @@
+# DOCS https://ls-lint.org/2.2/configuration/the-basics.html
+#───────────────────────────────────────────────────────────────────────────────
+
+ls:
+    .js: kebab-case
+    .ts: kebab-case
+    .css: kebab-case
+    .sh: snake_case
+    .zsh: snake_case
+    .dir: lowercase # directory names
+
+ignore:
+    - .git
+    - "**/*.app"
+    - hammerspoon/Spoons
+    - zsh/plugins
+    - mackup/backups
+    - Alfred.alfredpreferences/workflows/*3rd-Party*
