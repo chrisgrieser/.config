@@ -3,18 +3,20 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 ls:
-    .js: kebab-case
-    .ts: kebab-case
-    .css: kebab-case
-    .sh: snake_case
-    .zsh: snake_case
-    .py: snake_case
-    .dir: lowercase # directory names
+  .js: kebab-case
+  .ts: kebab-case
+  .d.ts: kebab-case
+  .css: kebab-case
+  .sh: snake_case
+  .zsh: snake_case
+  .py: snake_case
+  .dir: lowercase # directory names
 
 ignore:
-    - .git
-    - "**/*.app"
-    - hammerspoon/Spoons
-    - zsh/plugins
-    - mackup/backups
-    - Alfred.alfredpreferences/workflows/*3rd-Party*
+  - .git
+  - "**/*.app"
+  - hammerspoon/Spoons
+  - _linter-configs/vale/styles
+  - zsh/plugins
+  - mackup/backups
+  - Alfred.alfredpreferences/workflows/*3rd-Party*

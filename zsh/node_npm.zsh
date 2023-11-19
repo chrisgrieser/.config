@@ -9,3 +9,12 @@ export NODE_REPL_HISTORY=""
 
 # disable funding reminder, has to be lowercase
 export npm_config_fund=false
+
+# lazy-load npm completions
+# DOCS https://docs.npmjs.com/cli/v10/commands/npm-completion
+function npm {
+	unfunction "$0"
+	# shellcheck disable=1090
+	source <(npm completion)
+	$0 "$@"
+}
