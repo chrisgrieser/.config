@@ -181,13 +181,10 @@ return {
 			{
 				"<D-s>",
 				function()
-					if vim.tbl_contains(lspFormatting, vim.bo.ft) then
-						vim.lsp.buf.format()
-						return
-					end
+					local useLsp = vim.tbl_contains(lspFormatting, vim.bo.ft)
 					require("conform").format {
-						lsp_fallback = false,
-						async = false,
+						lsp_fallback = (useLsp and "always" or false),
+						async = true,
 						callback = vim.cmd.update,
 					}
 				end,
