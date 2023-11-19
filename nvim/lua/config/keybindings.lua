@@ -176,9 +176,6 @@ keymap(
 	{ desc = "󰽙 close buffer/window" }
 )
 
--- needs remapping since `gf` is used for LSP-references
-keymap("n", "gp", "gf", { desc = " Goto Path under cursor" })
-
 --------------------------------------------------------------------------------
 -- CLIPBOARD
 

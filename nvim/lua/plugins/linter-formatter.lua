@@ -7,7 +7,7 @@ local linters = {
 	lua = { "selene" },
 	css = { "stylelint" },
 	sh = { "zsh", "shellcheck" },
-	markdown = { "markdownlint", "vale" },
+	markdown = { "markdownlint", "vale", "injected" },
 	yaml = { "yamllint" },
 	python = { "pylint" },
 	json = {},
@@ -37,7 +37,7 @@ local formatters = {
 	["*"] = { "codespell" }, -- all filetypes
 }
 
--- filetypes that should use lsp-formatting
+-- filetypes that should use lsp-formatting (after the formatters)
 local lspFormatting = {
 	"toml",
 	"yaml",
@@ -60,6 +60,7 @@ local dontInstall = {
 	"injected",
 	"ruff_format",
 	"ruff_fix",
+	"autotools_ls", -- PENDING Mason
 }
 
 ---given the linter- and formatter-list of nvim-lint and conform.nvim, extract a
@@ -181,9 +182,9 @@ return {
 			{
 				"<D-s>",
 				function()
-					local useLsp = vim.tbl_contains(lspFormatting, vim.bo.ft)
+					local useLsp = vim.tbl_contains(lspFormatting, vim.bo.ft) and "always" or false
 					require("conform").format {
-						lsp_fallback = (useLsp and "always" or false),
+						lsp_fallback = useLsp,
 						async = true,
 						callback = vim.cmd.update,
 					}
