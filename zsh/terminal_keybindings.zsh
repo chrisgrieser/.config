@@ -1,34 +1,18 @@
 #───────────────────────────────────────────────────────────────────────────────
 # CUSTOM WIDGETS
 # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/copybuffer/copybuffer.plugin.zsh
-function copy_buffer {
+function _copy_buffer {
 	# shellcheck disable=2153
 	printf "%s" "$BUFFER" | pbcopy
 	zle -M "Buffer copied."
 }
-zle -N copy_buffer
+zle -N _copy_buffer
 
-function copy_location {
+function _copy_location {
 	pwd | pbcopy
 	zle -M "'$PWD' copied."
 }
-zle -N copy_location
-
-# Cycle through Directories
-function grappling_hook {
-	local to_open="$WD"
-	if [[ "$PWD" == "$WD" ]]; then
-		to_open="$HOME/.config"
-	elif [[ "$PWD" == "$HOME/.config" ]]; then
-		to_open="$VAULT_PATH"
-	elif [[ "$PWD" == "$VAULT_PATH" ]]; then
-		to_open="$WD"
-	fi
-	builtin cd "$to_open" || return 1
-	wezterm set-working-directory # so wezterm knows we are in a new directory
-	zle reset-prompt
-}
-zle -N grappling_hook
+zle -N _copy_location
 
 #───────────────────────────────────────────────────────────────────────────────
 # INFO BINDINGS FOR WIDGETS
@@ -39,9 +23,8 @@ zle -N grappling_hook
 
 # needs to be wrapped to not be overwritten by zsh-vi-mode
 function zvm_after_init {
-	bindkey -M viins '^P' copy_location
-	bindkey -M viins '^B' copy_buffer
-	bindkey -M viins "^O" grappling_hook  # bound to cmd+enter via wezterm
+	bindkey -M viins '^P' _copy_location
+	bindkey -M viins '^B' _copy_buffer
 	bindkey -M viins "…" insert-last-word # …=alt+.
 	bindkey -M viins "^Z" undo            # cmd+z via wezterm
 	bindkey -M viins "^U" kill-whole-line # whole line, not part of the line
@@ -60,10 +43,10 @@ function zvm_after_init {
 #───────────────────────────────────────────────────────────────────────────────
 
 # when typing bangs or backticks, escape them
-function autoEscapeBackTick { LBUFFER+='\`'; }
-zle -N autoEscapeBackTick
-bindkey -M viins '`' autoEscapeBackTick
+function _autoEscapeBackTick { LBUFFER+='\`'; }
+zle -N _autoEscapeBackTick
+bindkey -M viins '`' _autoEscapeBackTick
 
-function autoEscapeBang { LBUFFER+='\!'; }
-zle -N autoEscapeBang
-bindkey -M viins '!' autoEscapeBang
+function _autoEscapeBang { LBUFFER+='\!'; }
+zle -N _autoEscapeBang
+bindkey -M viins '!' _autoEscapeBang
