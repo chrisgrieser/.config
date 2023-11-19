@@ -13,8 +13,8 @@ $character\
 """
 
 right_format = """\
-${custom.alfred}$python\
 $cmd_duration\
+${custom.alfred}$python\
 """
 
 add_newline = false
@@ -94,13 +94,13 @@ ignore_branches = ["main"]
 # since "ignore_branches" fully hides the git_branch component, still showing the symbol
 [custom.main_branch]
 when = "[[ $(git branch --show-current) == 'main' ]]"
-format = '[󰘬 ](fg:purple bg:black bold) '
+format = '[󰘬 ](fg:purple bg:black bold)'
 
 # files
 [git_status]
 stashed = '[󰜦  $count ](fg:cyan bg:black)'
 untracked = '[+$count ](fg:green bg:black)'
-deleted = '[-$count ](fg:red bg:black)'                                                         # SIC unstaged as well as stage deletion
+deleted = '[-$count ](fg:red bg:black)'                                                            # SIC unstaged as well as stage deletion
 modified = '[~$count ](fg:208 bg:black)'
 renamed = '[󰑕  $count ](fg:blue bg:black)'
 staged = '[  $count ](fg:green bg:black)'
@@ -108,7 +108,11 @@ conflicted = '[ $count ](fg:red bg:black)'
 diverged = '[󰃻 $count ](fg:red bg:black)'
 ahead = '[󰶣 $count ](fg:cyan bg:black)'
 behind = '[󰶡 $count ](fg:yellow bg:black)'
-format = '[$ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$deleted]($style)'
+style = 'bg:black'
+format = '[( $ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$deleted)]($style)'
+# INFO putting a variable into a bracket ensures that the bracket content is
+# only shown when the variable is set.
+# the
 
 # lines
 [git_metrics]
@@ -135,7 +139,6 @@ style = "bold purple"
 
 [python]
 style = "bold yellow"
-format = '[${symbol}${pyenv_prefix}(${version})(  󱥒  $virtualenv)]($style)'
+format = ' [${symbol}${pyenv_prefix}(${version})( 󱥒  $virtualenv)]($style)'
 version_format = "$major.$minor"
-python_binary = ["python3"]
 symbol = "  "
