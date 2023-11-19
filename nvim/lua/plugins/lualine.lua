@@ -46,6 +46,7 @@ local lualineConfig = {
 			{
 				function () return "󱥒 " .. vim.fs.basename(vim.env.VIRTUAL_ENV) end,
 				cond = function() return vim.env.VIRTUAL_ENV and vim.bo.ft == "python" end,
+				section_separators = topSep,
 			},
 			{
 				"datetime",
