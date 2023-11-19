@@ -32,16 +32,16 @@ bindkey -M menuselect '\r' .accept-line             # <CR> select & execute
 bindkey -M menuselect '^[[A' vi-backward-blank-word # <Up> prev group
 bindkey -M menuselect '^[[B' vi-forward-blank-word  # <Down> next group
 
-# CACHE
-zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path "$HOME/.cache/zsh/compcache"
+# ZSH-AUTOCOMPLETE
+zstyle ':autocomplete:*' ignored-input '..d'
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # GROUP ORDER
-builtin zstyle ':completion:*' group-order \
-	all-expansions expansions options local-directories directories \
-	cdpath cdpath-directories directories-in-cd-path directory-in-cdpath \
+# INFO "path-directories" changes the order of "directories in cdpath"
+zstyle ':completion:*' group-order \
+	all-expansions expansions options \
+	path-directories \
 	aliases suffix-aliases functions reserved-words builtins commands \
+	local-directories directories executables
 
-# ZSH-AUTOCOMPLETE
-# zstyle ':autocomplete:*' min-input 2
-zstyle ':autocomplete:*' ignored-input '..d'

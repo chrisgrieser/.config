@@ -83,6 +83,7 @@ local keybindings = {
 	{ key = "-", mods = "CMD", action = act.DecreaseFontSize },
 	{ key = "0", mods = "CMD", action = act.ResetFontSize },
 	{ key = "p", mods = "CMD", action = act.ActivateCommandPalette },
+	{ key = "ö", mods = "CMD", action = act.CharSelect },
 	{ key = "k", mods = "CMD", action = act.ClearScrollback("ScrollbackAndViewport") },
 	{ key = "Enter", mods = "CTRL", action = act.ActivateTabRelative(1) },
 	{ key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
@@ -272,7 +273,8 @@ local config = {
 		harfbuzz_features = { "calt=0", "ERLA=1" }, -- disable only `+++` ligatures https://typeof.net/Iosevka/
 	},
 	font_size = fontSize,
-	command_palette_font_size = 30,
+	command_palette_font_size = fontSize,
+	char_select_font_size = fontSize,
 	adjust_window_size_when_changing_font_size = false,
 
 	-- Appearance
