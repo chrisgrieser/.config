@@ -35,12 +35,6 @@ function d {
 	else
 		trash "$@" || return 1
 	fi
-
-	## add nicer trash sound
-	current_vol=$(osascript -e 'output volume of (get volume settings)')
-	[[ "$current_vol" == "missing value" ]] && current_vol=50
-	vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc) # afplay play with 100% volume by default
-	(afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/dock/drag to trash.aif" &)
 }
 
 # go up and delete current dir
@@ -49,10 +43,4 @@ function ..d() {
 
 	trash "$PWD" || return 1
 	cd "$(dirname "$PWD")" || return 1
-
-	# add nicer trash sound
-	current_vol=$(osascript -e 'output volume of (get volume settings)') # afplay play with 100% volume by default
-	[[ "$current_vol" == "missing value" ]] && current_vol=50
-	vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc)
-	(afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/dock/drag to trash.aif" &)
 }
