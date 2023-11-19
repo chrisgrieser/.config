@@ -39,7 +39,7 @@ zstyle ':completion:*' cache-path "$HOME/.cache/zsh/compcache"
 # GROUP ORDER
 builtin zstyle ':completion:*' group-order \
 	all-expansions expansions options local-directories directories \
-	cdpath cdpath-directories directories-in-cd-path directories-in-cdpath \
+	cdpath cdpath-directories directories-in-cd-path directory-in-cdpath \
 	aliases suffix-aliases functions reserved-words builtins commands \
 
 # ZSH-AUTOCOMPLETE
