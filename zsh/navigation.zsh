@@ -18,7 +18,7 @@ function bookmark {
 }
 
 function unbookmark {
-	local name bookmark_path
+	local bookmark_path
 	bookmark_path=$(echo "$CDPATH" | cut -d':' -f1)
 	to_unbookmark=$(find "$bookmark_path" -type l | 
 		fzf --with-nth=-1 --delimiter="/" --height=40%
