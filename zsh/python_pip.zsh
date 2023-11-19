@@ -8,7 +8,7 @@ alias py="python3"
 #───────────────────────────────────────────────────────────────────────────────
 
 function search_venv_path() {
-	dir_to_check=$PWD
+	local dir_to_check=$PWD
 	while true; do
 		if [[ -d "$dir_to_check/.venv" ]]; then
 			local venv_path="$dir_to_check/.venv"
@@ -39,7 +39,7 @@ function v() {
 
 # Utility function, intended terminal movement commands. Automatically enables
 # venv if current dir or a parent has a `.venv` dir. Disables venv if not.
-function auto_venv() {
+function _auto_venv() {
 	local venv_path
 	venv_path=$(search_venv_path)
 

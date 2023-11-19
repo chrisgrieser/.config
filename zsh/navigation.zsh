@@ -17,7 +17,21 @@ function bookmark {
 	ln -sv "$PWD" "$bookmark_path/$1"
 }
 
+function unbookmark {
+	local name bookmark_path
+	bookmark_path=$(echo "$CDPATH" | cut -d':' -f1)
+	name=$(basename "$PWD")
+	rm "$bookmark_path/$name" && echo "Removed bookmark."
+}
+
+
 #───────────────────────────────────────────────────────────────────────────────
+
+# hook when directory is changed
+function chpwd {
+	_auto_venv
+	_magic_dashboard
+}
 
 # INFO leading space to ignore it in history due to HIST_IGNORE_SPACE
 alias ..=" cd .."
@@ -51,11 +65,4 @@ function gr {
 # mkdir + cd
 function mkcd {
 	mkdir -p "$1" && cd "$1"
-}
-
-# hook when directory is changed (not using chpwd due to interference with scripts)
-function cd {
-	builtin cd "$1"
-	auto_venv
-	_magic_dashboard
 }
