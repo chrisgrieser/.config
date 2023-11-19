@@ -24,7 +24,7 @@ function h() {
 
 # COLORIZED HELP
 # `--` ensures dash can be used in the alias name
-alias -g -- -h="--help 2>&1 | bat --language=help --style=plain --wrap=character"
+alias -g -- -h="--help | bat --language=help --style=plain --wrap=character"
 ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -90,7 +90,7 @@ export LESS_TERMCAP_ue=$'\E[0m'    # reset underline
 
 
 # INFO --ignore-case is actually smart case
-export LESS='--RAW-CONTROL-CHARS --incsearch --ignore-case --window=-3 --no-init --tilde --long-prompt'
+export LESS='--RAW-CONTROL-CHARS --incsearch --ignore-case --window=-4 --no-init --tilde --long-prompt'
 export LESSHISTFILE=- # don't clutter home directory with useless `.lesshst` file
 
 # INFO Keybindings
