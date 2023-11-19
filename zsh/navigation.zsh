@@ -20,17 +20,44 @@ function bookmark {
 function unbookmark {
 	local name bookmark_path
 	bookmark_path=$(echo "$CDPATH" | cut -d':' -f1)
-	name=$(basename "$PWD")
-	rm "$bookmark_path/$name" && echo "Removed bookmark."
+	to_unbookmark=$(find "$bookmark_path" -type l | 
+		fzf --with-nth=-1 --delimiter="/" --height=40%
+	)
+	[[ -z "$to_unbookmark" ]] && return 0
+	echo "$to_unbookmark"
 }
 
+#───────────────────────────────────────────────────────────────────────────────
+# CYCLE THROUGH DIRECTORIES
+
+function _grappling_hook {
+	locations=(
+		"$WD"
+		"$HOME/.config"
+		"$VAULT_PATH"
+	)
+	local to_open
+	if [[ "$PWD" == "${locations[1]}" ]]; then
+		to_open="${locations[2]}"
+	elif [[ "$PWD" == "${locations[2]}" ]]; then
+		to_open="${locations[3]}"
+	elif [[ "$PWD" == "${locations[3]}" ]]; then
+		to_open="${locations[1]}"
+	fi
+	echo
+	cd "$to_open" || return 1
+	[[ "$TERM_PROGRAM" == "WezTerm" ]] && wezterm set-working-directory # so wezterm knows we are in a new directory
+	zle reset-prompt
+}
+zle -N _grappling_hook
+bindkey "^O" _grappling_hook # bound to cmd+enter via wezterm
 
 #───────────────────────────────────────────────────────────────────────────────
 
 # hook when directory is changed
 function chpwd {
-	_auto_venv
 	_magic_dashboard
+	_auto_venv
 }
 
 # INFO leading space to ignore it in history due to HIST_IGNORE_SPACE
@@ -56,8 +83,7 @@ function gr {
 				--preview-window="55%" --height="45%" \
 				--preview="printf '\e[7;38;5;245m\n{}\n\n\e[0m' ; eza {} --no-quotes --color=always --sort=newest --width=\$FZF_PREVIEW_COLUMNS"
 	)
-	[[ -z "$selected" ]] && return 0
-	cd "$selected"
+	[[ -d "$selected" ]] && cd "$selected"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
