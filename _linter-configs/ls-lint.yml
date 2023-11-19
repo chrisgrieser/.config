@@ -1,4 +1,5 @@
 # DOCS https://ls-lint.org/2.2/configuration/the-basics.html
+# PENDING https://github.com/loeffel-io/ls-lint/issues/187
 #───────────────────────────────────────────────────────────────────────────────
 
 ls:
@@ -7,6 +8,7 @@ ls:
     .css: kebab-case
     .sh: snake_case
     .zsh: snake_case
+    .py: snake_case
     .dir: lowercase # directory names
 
 ignore:
