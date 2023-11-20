@@ -129,13 +129,7 @@
 	},
 	"lazy load cli": {
 		"prefix": "lazy load cli",
-		"body": [
-			"function ${1:cli} {",
-			"\tunfunction \"\\$0\"",
-			"\t$0",
-			"\t\\$0 \"$@\"",
-			"}"
-		]
+		"body": ["function ${1:cli} {", "\tunfunction \"\\$0\"", "\t$0", "\t\\$0 \"$@\"", "}"]
 	},
 	"check if installed": {
 		"prefix": "check if installed",
@@ -300,36 +294,13 @@
 		"prefix": "white",
 		"body": "\\e[1;37m"
 	},
-	"black bg": {
-		"prefix": "black bg",
-		"body": "\\e[1;40m"
+	"gray": {
+		"prefix": "gray",
+		"body": "\\e[0;38;5;245m",
+		"description": "Gray that is readable in dark and light mode."
 	},
-	"red bg": {
-		"prefix": "red bg",
-		"body": "\\e[1;41m"
-	},
-	"green bg": {
-		"prefix": "green bg",
-		"body": "\\e[1;42m"
-	},
-	"yellow bg": {
-		"prefix": "yellow bg",
-		"body": "\\e[1;43m"
-	},
-	"blue bg": {
-		"prefix": "blue bg",
-		"body": "\\e[1;44m"
-	},
-	"magenta bg": {
-		"prefix": ["magenta bg", "purple bg"],
-		"body": "\\e[1;45m"
-	},
-	"cyan bg": {
-		"prefix": "cyan bg",
-		"body": "\\e[1;46m"
-	},
-	"white bg": {
-		"prefix": "",
-		"body": "\\e[1;47m"
+	"ansi": {
+		"prefix": "ansi",
+		"body": "\\e[1;38;5;${1:code}m"
 	}
 }

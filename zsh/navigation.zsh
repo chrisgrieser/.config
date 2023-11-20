@@ -17,7 +17,6 @@ function chpwd {
 # SHORTHANDS
 
 # INFO leading space to ignore it in history due to HIST_IGNORE_SPACE
-alias b=" cd ~+1" # dir back (requires AUTO_PUSHD; `cd -` doesn't work at session start)
 alias ..=" cd .."
 alias ...=" cd ../.."
 alias ....=" cd ../../.."
@@ -73,14 +72,21 @@ setopt AUTO_PUSHD
 setopt PUSHD_IGNORE_DUPS
 export DIRSTACKSIZE=13
 
+# no arg: go to last dir
+# arg: go to that dir
+# recent dirs are suggested
 function gr {
-	dir="$*"
-	dir="${dir/#\~/$HOME}"
-	cd "$dir"
+	if [[ -z "$1" ]]; then
+		cd ~+1 # as opposed to `cd -` doesn't work at session start
+		return 0
+	else
+		dir="$*"
+		dir="${dir/#\~/$HOME}"
+		cd "$dir"
+	fi
 }
 
-zstyle ':completion:*:*:recent-dirs' list-colors '=(#b)*/(*)=38;5;245=39='
-
+zstyle ':completion:*:recent-dirs' list-colors '=(#b)*/(*)=38;5;245=39='
 _gr () {
 	# shellcheck disable=2296
 	typeset -a recent_dirs=("${(f)"$(dirs -p | sed '1d')"}")
