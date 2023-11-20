@@ -7,7 +7,8 @@ export LC_CTYPE="en_US.UTF-8"
 
 # DOCS https://zsh.sourceforge.io/Doc/Release/Options.html
 setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful for copypasting)
-# setopt CORRECT_ALL
+setopt CORRECT_ALL
+export CORRECT_IGNORE=".git"
 
 # Glob settings
 setopt GLOB_DOTS # glob includes dotfiles
@@ -15,6 +16,11 @@ setopt EXTENDED_GLOB # more glob operators https://zsh.sourceforge.io/Doc/Releas
 
 # BUG not working with zsh-autocomplete
 # setopt GLOB_COMPLETE # globs aren't expanded, but result in a menu selection
+
+
+# colors STDERR in red
+# shellcheck disable=1009,1073,1036,1072
+exec 2>>( sed -e $'s/^/\e[1;31m/' -e 's/\$/\e[0m/' )
 
 #───────────────────────────────────────────────────────────────────────────────
 # CLI/PLUGIN SETTINGS
@@ -63,3 +69,4 @@ export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=30
 # do not accept autosuggestion when using vim `A`
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}")
 
+#───────────────────────────────────────────────────────────────────────────────

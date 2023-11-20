@@ -43,7 +43,7 @@ function yaml2schema() {
 # at the same path
 # $1: filepath or URL (if url from last time, use cache to reduce API calls)
 # no $1: read from stdin
-function file_url_or_stdin() {
+function _file_url_or_stdin() {
 	local tmp="/tmp/temp.json"
 	if [[ -z "$1" ]]; then
 		echo "$(</dev/stdin)" | tr -d "\n" >"$tmp"
@@ -69,7 +69,7 @@ function jless() {
 	if ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then echo "Not using WezTerm." && return 1; fi
 
 	local tmp="/tmp/temp.json"
-	file_url_or_stdin "$1"
+	_file_url_or_stdin "$1"
 
 	pane_id=$(wezterm cli spawn -- command jless --no-line-numbers "$tmp") # open in new wezterm tab
 	wezterm cli set-tab-title --pane-id="$pane_id" "jless"
@@ -83,7 +83,7 @@ function jx() {
 
 	local tmp="/tmp/temp.json"
 	local query="$2"
-	file_url_or_stdin "$1"
+	_file_url_or_stdin "$1"
 
 	# shellcheck disable=2016
 	selection=$(fastgron --color --no-newline "$tmp" |
