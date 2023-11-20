@@ -56,12 +56,14 @@ function gc {
 		printf "\033[1;36mPush: \033[0m" && git push
 }
 
+zstyle ':completion:*:*:coventional-commit' list-colors '=(#b)*(:)=36=38;5;245'
 _gc() {
-	local cc=("fix:" "feat:" "chore:" "docs:" "style:" "refactor:" "perf:"
+	((CURRENT != 2)) && return
+	local cc=("'fix:" "'feat:" "chore:" "docs:" "style:" "refactor:" "perf:"
 		"test:" "build:" "ci:" "revert:" "improv:" "break:")
-	if ((CURRENT == 2)); then
-		compadd -- "${cc[@]}"
-	fi
+	local expl
+	_description -V conventional-commit expl 'Conventional Commit'
+	compadd "${expl[@]}" -Q -- "${cc[@]}"
 }
 compdef _gc gc
 
