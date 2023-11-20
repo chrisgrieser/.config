@@ -9,14 +9,9 @@ export LC_CTYPE="en_US.UTF-8"
 setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful for copypasting)
 setopt CORRECT_ALL
 export CORRECT_IGNORE=".git"
-
-# Glob settings
-setopt GLOB_DOTS # glob includes dotfiles
-setopt EXTENDED_GLOB # more glob operators https://zsh.sourceforge.io/Doc/Release/Expansion.html#Glob-Operators
-
-# BUG not working with zsh-autocomplete
-# setopt GLOB_COMPLETE # globs aren't expanded, but result in a menu selection
-
+setopt PRINT_EXIT_VALUE
+setopt GLOB_DOTS        # glob includes dotfiles
+setopt EXTENDED_GLOB    # more glob operators https://zsh.sourceforge.io/Doc/Release/Expansion.html#Glob-Operators
 
 # colors STDERR in red
 # shellcheck disable=1009,1073,1036,1072
