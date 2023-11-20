@@ -1,4 +1,9 @@
 #───────────────────────────────────────────────────────────────────────────────
+# INFO BINDINGS FOR WIDGETS
+# - use `ctrl-v` and then a key combination to get the shell binding
+# - `bindkey -M main` to show existing keybinds
+# - some bindings with '^' are reserved (^M=enter, ^I=tab, ^[[Z = shift+tab)
+#───────────────────────────────────────────────────────────────────────────────
 # CUSTOM WIDGETS
 # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/copybuffer/copybuffer.plugin.zsh
 function _copy_buffer {
@@ -14,11 +19,6 @@ function _copy_location {
 }
 zle -N _copy_location
 
-#───────────────────────────────────────────────────────────────────────────────
-# INFO BINDINGS FOR WIDGETS
-# - use `ctrl-v` and then a key combination to get the shell binding
-# - `bindkey -M main` to show existing keybinds
-# - some bindings with '^' are reserved (^M=enter, ^I=tab, ^[[Z = shift+tab)
 #───────────────────────────────────────────────────────────────────────────────
 
 # needs to be wrapped to not be overwritten by zsh-vi-mode

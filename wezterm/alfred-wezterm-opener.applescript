@@ -12,10 +12,10 @@ on alfred_script(shellCmd)
 	end tell
 
 	# 1. use builtin to not trigger aliases, `-q` to suppress hooks (chpwd)
-	# 2. Add `clear` if it is just a `cd` command, because it looks cleaner
-	set command to text 1 thru 2 of shellCmd
-	if command is "cd" then
-		set shellCmd to "builtin " & shellCmd & " && clear"
+	# 2. Add `clear` to suppress the entering message
+	if (text 1 thru 3 of shellCmd) is "cd " then
+		set arg to text 4 thru -1 of shellCmd
+		set shellCmd to "builtin cd -q " & arg & " && clear"
 	end if
 
 	# DOCS https://wezfurlong.org/wezterm/cli/cli/send-text

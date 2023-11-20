@@ -7,17 +7,17 @@
 setopt AUTO_CD   # pure directory = cd into it
 setopt CD_SILENT # don't pwd when changing directories via stack or `-`
 
-# hook when directory is changed, use `cd -q` to suppress hook
+# hook when directory is changed (use `cd -q` to suppress hook)
 function chpwd {
-	_auto_venv
 	_magic_dashboard
+	_auto_venv
 }
 
 #───────────────────────────────────────────────────────────────────────────────
 # SHORTHANDS
 
 # INFO leading space to ignore it in history due to HIST_IGNORE_SPACE
-alias b=" cd ~+1" # as opposed to `cd -`, this also works at start of a session
+alias b=" cd ~+1" # dir back (requires AUTO_PUSHD; `cd -` doesn't work at session start)
 alias ..=" cd .."
 alias ...=" cd ../.."
 alias ....=" cd ../../.."
@@ -39,7 +39,7 @@ function bookmark {
 function unbookmark {
 	if [[ ! -x "$(command -v fzf)" ]]; then print "\e[1;33mfzf not installed.\e[0m" && return 1; fi
 	to_unbookmark=$(find "$bookmark_path" -type l | fzf --with-nth=-1 --delimiter="/")
-	[[ -n "$to_unbookmark" ]] && return 0 # aborted
+	[[ -z "$to_unbookmark" ]] && return 0 # aborted
 	rm "$to_unbookmark" && echo "Removed Bookmark: $(basename "$to_unbookmark")"
 }
 
@@ -58,6 +58,7 @@ function _grappling_hook {
 	elif [[ "$PWD" == "${locations[2]}" ]]; then
 		to_open="${locations[3]}"
 	fi
+	echo
 	cd "$to_open" || return 1
 	[[ "$TERM_PROGRAM" == "WezTerm" ]] && wezterm set-working-directory # so wezterm knows we are in a new directory
 	zle reset-prompt
@@ -70,7 +71,7 @@ bindkey "^O" _grappling_hook # bound to cmd+enter via wezterm
 
 setopt AUTO_PUSHD
 setopt PUSHD_IGNORE_DUPS
-export DIRSTACKSIZE=10
+export DIRSTACKSIZE=13
 
 function gr {
 	if [[ ! -x "$(command -v fzf)" ]]; then print "\e[1;33mfzf not installed.\e[0m" && return 1; fi
