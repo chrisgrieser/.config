@@ -129,16 +129,6 @@ local keybindings = {
 	{ key = "LeftArrow", mods = "CMD", action = act.SendKey { key = "A", mods = "CTRL" } },
 	{ key = "RightArrow", mods = "CMD", action = act.SendKey { key = "E", mods = "CTRL" } },
 
-	{ -- for adding inline code to a commit, hotkey consistent with GitHub
-		key = "e",
-		mods = "CMD",
-		action = act.Multiple {
-			act.SendString("``"),
-			act.SendKey { key = "LeftArrow" },
-			act.SendKey { key = "LeftArrow" }, -- 2nd to move into auto-added backslash
-		},
-	},
-
 	{ -- cmd+l -> open current location in Finder
 		key = "l",
 		mods = "CMD",

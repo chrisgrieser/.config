@@ -3,16 +3,37 @@
 # DOCS https://zsh.sourceforge.io/Doc/Release/Options.html#Changing-Directories
 #───────────────────────────────────────────────────────────────────────────────
 
+# GENERAL
+setopt AUTO_CD   # pure directory = cd into it
+setopt CD_SILENT # don't pwd when changing directories via stack or `-`
+
+# hook when directory is changed, use `cd -q` to suppress hook
+function chpwd {
+	_auto_venv
+	_magic_dashboard
+}
+
+#───────────────────────────────────────────────────────────────────────────────
+# SHORTHANDS
+
+# INFO leading space to ignore it in history due to HIST_IGNORE_SPACE
+alias b=" cd ~+1" # as opposed to `cd -`, this also works at start of a session
+alias ..=" cd .."
+alias ...=" cd ../.."
+alias ....=" cd ../../.."
+alias ..g=' cd "$(git rev-parse --show-toplevel)"' # goto git root
+function mkcd { mkdir -p "$1" && cd "$1"; }        # mkdir + cd
+
+#───────────────────────────────────────────────────────────────────────────────
+
 # BOOKMARKS (via cdpath & symlinks)
-setopt AUTO_CD     # pure directory = cd into it
-setopt CD_SILENT   # don't pwd when changing directories via stack or `-`
 setopt CHASE_LINKS # resolve symlinks when changing directories
 
 bookmark_path="$ZDOTDIR/cdpath_bookmarks" # folder with symlinks to directories
-export CDPATH="$bookmark_path:$LOCAL_REPOS"
+export CDPATH="$bookmark_path:$LOCAL_REPOS:$WD"
 
 function bookmark {
-	ln -sv "$PWD" "$bookmark_path/$1"
+	ln -s "$PWD" "$bookmark_path/$1" && echo "Bookmarked: $(basename "$PWD")"
 }
 
 function unbookmark {
@@ -45,17 +66,6 @@ zle -N _grappling_hook
 bindkey "^O" _grappling_hook # bound to cmd+enter via wezterm
 
 #───────────────────────────────────────────────────────────────────────────────
-# SHORTHANDS
-
-# INFO leading space to ignore it in history due to HIST_IGNORE_SPACE
-alias b=" cd -"
-alias ..=" cd .."
-alias ...=" cd ../.."
-alias ....=" cd ../../.."
-alias ..g=' cd "$(git rev-parse --show-toplevel)"' # goto git root
-function mkcd { mkdir -p "$1" && cd "$1"; }       # mkdir + cd
-
-#───────────────────────────────────────────────────────────────────────────────
 # RECENT DIRS (via pushd & dirstack)
 
 setopt AUTO_PUSHD
@@ -64,7 +74,7 @@ export DIRSTACKSIZE=10
 
 function gr {
 	if [[ ! -x "$(command -v fzf)" ]]; then print "\e[1;33mfzf not installed.\e[0m" && return 1; fi
-	
+
 	local selected
 	selected=$(
 		dirs -pl | sed -e '1d' -Ee $'s|([^/]*/)|\e[0;38;5;245m\\1\e[0m|g' |

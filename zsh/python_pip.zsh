@@ -51,9 +51,6 @@ function _auto_venv() {
 	fi
 }
 
-# hook when directory is changed
-function chpwd { _auto_venv; }
-
 #───────────────────────────────────────────────────────────────────────────────
 
 # 1. Prevent accidental installation outside of virtual env

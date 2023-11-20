@@ -39,8 +39,6 @@ zstyle ':autocomplete:*' ignored-input '..d'
 # GROUP ORDER & SORTING
 
 zstyle ':completion:*' file-sort modification follow
-# setopt AUTO_PARAM_SLASH # completing edits adds slash
-# setopt AUTO_REMOVE_SLASH
 
 # INFO "path-directories" changes the order of "directories in cdpath"
 zstyle ':completion:*' group-order \
