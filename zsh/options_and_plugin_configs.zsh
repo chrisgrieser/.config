@@ -9,13 +9,8 @@ export LC_CTYPE="en_US.UTF-8"
 setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful for copypasting)
 setopt CORRECT_ALL
 export CORRECT_IGNORE=".git"
-setopt PRINT_EXIT_VALUE
 setopt GLOB_DOTS        # glob includes dotfiles
 setopt EXTENDED_GLOB    # more glob operators https://zsh.sourceforge.io/Doc/Release/Expansion.html#Glob-Operators
-
-# colors STDERR in red
-# shellcheck disable=1009,1073,1036,1072
-exec 2>>( sed -e $'s/^/\e[1;31m/' -e 's/\$/\e[0m/' )
 
 #───────────────────────────────────────────────────────────────────────────────
 # CLI/PLUGIN SETTINGS
