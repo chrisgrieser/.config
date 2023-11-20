@@ -1,8 +1,6 @@
 #!/usr/bin/env zsh
 
 alias co="git checkout"
-alias gg="git checkout -" # go to previous branch/commit
-alias gs='git status'
 alias ga="git add"
 alias gaa="git add --all"
 
@@ -14,7 +12,7 @@ alias grh='git reset --hard'
 alias push="git push"
 alias pull="git pull"
 alias rebase="git rebase --interactive"
-alias unshallow="git fetch --unshallow"           # make shallow clone complete again
+alias unshallow="git fetch --unshallow" # make shallow clone complete again
 
 # remote info
 alias grem='git remote -v && echo -n "\`gh\` default: " && gh repo set-default --view'
@@ -58,6 +56,16 @@ function gc {
 		printf "\033[1;36mPush: \033[0m" && git push
 }
 
+_gc() {
+	local cc=("fix:" "feat:" "chore:" "docs:" "style:" "refactor:" "perf:"
+		"test:" "build:" "ci:" "revert:" "improv:" "break:")
+	if ((CURRENT == 2)); then
+		compadd -- "${cc[@]}"
+	fi
+}
+compdef _gc gc
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # select a recent commit to fixup *and* autosquash (not marked for next rebase!)
 function fixup {
