@@ -36,14 +36,8 @@ function bookmark {
 }
 
 function unbookmark {
-	bookmark="$1"
-	rm "$bookmark_path/$bookmark" && echo "Removed Bookmark: $bookmark"
+	rm "$bookmark_path/$1" && echo "Removed Bookmark: $1"
 }
-
-
-_unbookmark () {
-}
-compdef _unbookmarks unbookmark
 
 #───────────────────────────────────────────────────────────────────────────────
 # CYCLE THROUGH DIRECTORIES
@@ -89,6 +83,8 @@ function gr {
 	fi
 }
 
+#───────────────────────────────────────────────────────────────────────────────
+# COMPLETIONS
 zstyle ':completion:*:recent-dirs' list-colors '=(#b)*/(*)=38;5;245=39='
 _gr () {
 	# shellcheck disable=2296
@@ -96,5 +92,15 @@ _gr () {
 	local expl
 	_description -V recent-dirs expl 'recent directories'
 	compadd "${expl[@]}" -Q -- "${recent_dirs[@]}"
-} 
+}
 compdef _gr gr
+
+_unbookmark () {
+	# shellcheck disable=2296
+	typeset -a bookmarks=("${(f)"$(ls -1 "$bookmark_path")"}")
+	local expl
+	_description -V bookmarks expl 'Bookmarks'
+	compadd "${expl[@]}" -- "${bookmarks[@]}"
+}
+compdef _unbookmark unbookmark
+
