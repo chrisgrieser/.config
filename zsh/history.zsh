@@ -12,6 +12,7 @@ setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY
 setopt HIST_VERIFY
 setopt EXTENDED_HISTORY
+setopt NO_BANG_HIST # don't expand `!` (easier breaking changes in commit msgs)
 
 setopt HIST_NO_STORE # ignore history command itself
 setopt HIST_IGNORE_SPACE # leading space is not added to the history

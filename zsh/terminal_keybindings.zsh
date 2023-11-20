@@ -42,11 +42,10 @@ function zvm_after_init {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# when typing bangs or backticks, escape them
-function _autoEscapeBackTick { LBUFFER+='\`'; }
+# when typing backticks, escape & pair them
+function _autoEscapeBackTick {
+	LBUFFER+='\`'
+	RBUFFER+='\`'
+}
 zle -N _autoEscapeBackTick
 bindkey -M viins '`' _autoEscapeBackTick
-
-function _autoEscapeBang { LBUFFER+='\!'; }
-zle -N _autoEscapeBang
-bindkey -M viins '!' _autoEscapeBang
