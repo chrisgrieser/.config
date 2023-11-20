@@ -36,7 +36,7 @@ function o() {
 	if [[ "$key_pressed" == "ctrl-p" || "$key_pressed" == "ctrl-n" ]]; then
 		[[ "$key_pressed" == "ctrl-n" ]] && file_path=$(basename "$file_path")
 		echo -n "$file_path" | pbcopy
-		print "Copied: \"\033[1;34m$file_path\033[0m\""
+		print "Copied: \033[1;36m$file_path\033[0m"
 	else
 		open "$file_path"
 	fi
