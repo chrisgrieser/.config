@@ -58,6 +58,7 @@ function gc {
 		printf "\033[1;36mPush: \033[0m" && git push
 }
 
+
 # select a recent commit to fixup *and* autosquash (not marked for next rebase!)
 function fixup {
 	local target

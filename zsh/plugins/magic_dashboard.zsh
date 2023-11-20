@@ -54,7 +54,7 @@ function _list_files_here {
 	if [[ $(echo "$eza_output" | wc -l) -gt $max_files_lines ]]; then
 		local shortened
 		shortened="$(echo "$eza_output" | head -n"$max_files_lines")"
-		printf "%s \033[1;36m(…)\033[0m" "$shortened"
+		printf "%s \033[1;36m…\033[0m" "$shortened"
 	elif [[ -n "$eza_output" ]]; then
 		echo -n "$eza_output"
 	fi
@@ -128,7 +128,9 @@ function _magic_enter {
 	local disabled_below_height=${MAGIC_DASHBOARD_DISABLED_BELOW_TERM_HEIGHT:-15}
 	[[ $LINES -gt $disabled_below_height ]] || return 0
 
-	echo && _magic_dashboard
+	# shellcheck disable=2012
+	[[ "$(eza --git-ignore | wc -l)" -gt 0 ]] && echo
+	_magic_dashboard
 }
 
 # WRAPPER FOR THE ACCEPT-LINE ZLE WIDGET (RUN WHEN PRESSING ENTER)
