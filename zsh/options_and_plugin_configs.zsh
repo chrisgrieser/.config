@@ -14,7 +14,7 @@ setopt GLOB_DOTS # glob includes dotfiles
 setopt EXTENDED_GLOB # enables more global operators https://zsh.sourceforge.io/Doc/Release/Expansion.html#Glob-Operators
 
 setopt GLOB_COMPLETE # globs aren't expanded, but result in a menu selection
-setopt COMPLETE_IN_WORD
+setopt MARK_DIRS
 
 #───────────────────────────────────────────────────────────────────────────────
 # CLI/PLUGIN SETTINGS

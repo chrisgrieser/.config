@@ -26,11 +26,11 @@ zstyle ':completion:*:warnings' format ""
 #───────────────────────────────────────────────────────────────────────────────
 
 # BINDINGS
-bindkey '\t' menu-select                            # <Tab> next item
-bindkey -M menuselect '^[[Z' reverse-menu-complete  # <S-Tab> prev suggestion
-bindkey -M menuselect '\r' .accept-line             # <CR> select & execute
-bindkey -M menuselect '^[[A' vi-backward-blank-word # <Up> prev group
-bindkey -M menuselect '^[[B' vi-forward-blank-word  # <Down> next group
+# bindkey '\t' menu-select                            # <Tab> next item
+# bindkey -M menuselect '^[[Z' reverse-menu-complete  # <S-Tab> prev suggestion
+# bindkey -M menuselect '\r' .accept-line             # <CR> select & execute
+# bindkey -M menuselect '^[[A' vi-backward-blank-word # <Up> prev group
+# bindkey -M menuselect '^[[B' vi-forward-blank-word  # <Down> next group
 
 # ZSH-AUTOCOMPLETE
 zstyle ':autocomplete:*' ignored-input '..d'
