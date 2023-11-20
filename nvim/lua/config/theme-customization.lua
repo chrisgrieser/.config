@@ -49,10 +49,6 @@ local function customHighlights()
 	for _, type in pairs { "Bad", "Cap", "Rare", "Local" } do
 		updateHl("Spell" .. type, "gui=underdotted cterm=underline")
 	end
-
-	-- mixed indentation screams in red
-	fn.matchadd("MixedIndent", [[\v^(\t+ +| +\t+)]])
-	linkHl("MixedIndent", "NvimInternalError")
 end
 
 local function themeModifications()
