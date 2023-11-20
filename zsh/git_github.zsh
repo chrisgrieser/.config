@@ -56,14 +56,15 @@ function gc {
 		printf "\033[1;36mPush: \033[0m" && git push
 }
 
-zstyle ':completion:*:conventional-commit' list-colors "=*=35=" # purple is my cc color
+# completions for it
+zstyle ':completion:*:conventional-commit' list-colors "=*=1;35=" 
 _gc() {
 	((CURRENT != 2)) && return # only complete first word
 	local cc=("fix" "feat" "chore" "docs" "style" "refactor" "perf"
 		"test" "build" "ci" "revert" "improv" "break")
 	local expl
 	_description -V conventional-commit expl 'Conventional Commit Keyword'
-	compadd "${expl[@]}" -Q -P"'" -S":" -- "${cc[@]}"
+	compadd "${expl[@]}" -P'"' -S":" -- "${cc[@]}"
 }
 compdef _gc gc
 
