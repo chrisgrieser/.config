@@ -73,19 +73,28 @@ setopt AUTO_PUSHD
 setopt PUSHD_IGNORE_DUPS
 export DIRSTACKSIZE=13
 
-function gr {
-	if [[ ! -x "$(command -v fzf)" ]]; then print "\e[1;33mfzf not installed.\e[0m" && return 1; fi
 
-	local selected
-	selected=$(
-		dirs -pl | sed -e '1d' -Ee $'s|([^/]*/)|\e[0;38;5;245m\\1\e[0m|g' |
-			fzf --query="$1" --no-sort --ansi \
-				--keep-right --with-nth=-2.. --delimiter="/" \
-				--preview-window="55%" --height="45%" \
-				--preview="printf '\e[7;38;5;245m\n{}\n\n\e[0m' ; eza {} --no-quotes --color=always --sort=newest --width=\$FZF_PREVIEW_COLUMNS"
-	)
-	[[ -z "$selected" ]] && return 0
-	cd "$selected"
+function gr {
+	# if [[ ! -x "$(command -v fzf)" ]]; then print "\e[1;33mfzf not installed.\e[0m" && return 1; fi
+	#
+	# local selected
+	# selected=$(
+	# 	dirs -pl | sed -e '1d' -Ee $'s|([^/]*/)|\e[0;38;5;245m\\1\e[0m|g' |
+	# 		fzf --query="$1" --no-sort --ansi \
+	# 			--keep-right --with-nth=-2.. --delimiter="/" \
+	# 			--preview-window="55%" --height="45%" \
+	# 			--preview="printf '\e[7;38;5;245m\n{}\n\n\e[0m' ; eza {} --no-quotes --color=always --sort=newest --width=\$FZF_PREVIEW_COLUMNS"
+	# )
+	# [[ -z "$selected" ]] && return 0
+	dir="$*"
+	dir="${dir/#\~/$HOME}"
+	cd "$dir"
 }
 
-#───────────────────────────────────────────────────────────────────────────────
+_gr () {
+	local dirs=$(dirs -lp | sed -e '1d' -Ee $'s|([^/]*/)|\e[0;38;5;245m\\1\e[0m|g')
+	# shellcheck disable=2296
+	typeset -a dirs=("${(f)"$dirs"}")
+	compadd -Q -- "${dirs[@]}"
+} 
+compdef _gr gr
