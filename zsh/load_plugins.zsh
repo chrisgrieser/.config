@@ -1,6 +1,9 @@
 # shellcheck disable=SC1091
 #───────────────────────────────────────────────────────────────────────────────
 
+# load various cli completions, needs to be run before compinit
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
 # also loads compinit stuff, therefore has to be loaded before
 source "$(brew --prefix)/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 
