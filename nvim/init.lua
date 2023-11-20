@@ -9,14 +9,8 @@ vim.defer_fn(function()
 	end
 end, 1)
 
---------------------------------------------------------------------------------
-
 vim.g.mapleader = ","
 vim.g.maplocalleader = "ö"
-
--- default values, changed in python ftplugin
-vim.env.VIRTUAL_ENV = "/opt/homebrew"
-vim.g.python3_host_prog = vim.env.VIRTUAL_ENV .. "/bin/python3"
 
 --------------------------------------------------------------------------------
 

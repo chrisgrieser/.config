@@ -111,6 +111,7 @@ keymap("n", "~", "~h") -- don't move cursor, useful for vertical changes
 
 -- Merging
 keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
+keymap({ "n", "x" }, "gm", "ddpkJ", { desc = "󰗈 Merge line down" })
 keymap({ "n", "x" }, "gM", "gJ", { desc = "󰗈 Merge line up (+ trim)" })
 
 --------------------------------------------------------------------------------
@@ -229,7 +230,7 @@ keymap("i", "<D-e>", "``<Left>", { desc = "  Inline Code" })
 
 -- quick quitting
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "qf", "help" },
+	pattern = { "qf", "help", "checkhealth" },
 	callback = function()
 		vim.keymap.set("n", "q", cmd.close, { buffer = true, nowait = true, desc = "Quit" })
 	end,

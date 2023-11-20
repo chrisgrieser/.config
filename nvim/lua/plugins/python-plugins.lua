@@ -1,10 +1,15 @@
 --# selene: allow(mixed_table) -- lazy.nvim uses them
 
 return {
+	-- TODO https://github.com/benlubas/molten-nvim#configuration
 	{ -- Notebook integration
+		-- INFO needs to run `:UpdateRemotePlugins` manually when inside a venv
+		-- INFO requires `pip install jupyter ipykernel pynvim`
 		"benlubas/molten-nvim",
-		build = ":UpdateRemotePlugins",
-		lazy = false,
+		enabled = false,
+		cmd = { "MoltenInfo", "MoltenInit" },
+		keys = {},
+		-- config = {},
 	},
 	{ -- debugger preconfig for python
 		"mfussenegger/nvim-dap-python",
