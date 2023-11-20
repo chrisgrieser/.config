@@ -3,7 +3,7 @@ return {
 	{ -- lightweight git client
 		"chrisgrieser/nvim-tinygit",
 		dependencies = "stevearc/dressing.nvim",
-		ft = { "gitrebase", "gitcommit" }, -- so ftplugins are loaded
+		ft = { "gitrebase" }, -- so ftplugins are loaded
 		keys = {
 			-- stylua: ignore start
 			{ "gc", function() require("tinygit").smartCommit { pushIfClean = true } end, desc = "󰊢 Smart-Commit & Push" },
@@ -24,7 +24,7 @@ return {
 		},
 		opts = {
 			commitMsg = {
-				enforceConvCommits = { enabled = true },
+				conventionalCommits = { enforce = true },
 				emptyFillIn = false,
 				spellcheck = true,
 				openReferencedIssue = true,
