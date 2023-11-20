@@ -47,11 +47,12 @@ bindkey "^O" _grappling_hook # bound to cmd+enter via wezterm
 #───────────────────────────────────────────────────────────────────────────────
 # SHORTHANDS
 
-alias b="cd -"
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias ..g='cd "$(git rev-parse --show-toplevel)"' # goto git root
+# INFO leading space to ignore it in history due to HIST_IGNORE_SPACE
+alias b=" cd -"
+alias ..=" cd .."
+alias ...=" cd ../.."
+alias ....=" cd ../../.."
+alias ..g=' cd "$(git rev-parse --show-toplevel)"' # goto git root
 function mkcd { mkdir -p "$1" && cd "$1"; }       # mkdir + cd
 
 #───────────────────────────────────────────────────────────────────────────────
