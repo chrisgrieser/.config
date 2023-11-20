@@ -36,11 +36,14 @@ function bookmark {
 }
 
 function unbookmark {
-	if [[ ! -x "$(command -v fzf)" ]]; then print "\e[1;33mfzf not installed.\e[0m" && return 1; fi
-	to_unbookmark=$(find "$bookmark_path" -type l | fzf --with-nth=-1 --delimiter="/")
-	[[ -z "$to_unbookmark" ]] && return 0 # aborted
-	rm "$to_unbookmark" && echo "Removed Bookmark: $(basename "$to_unbookmark")"
+	bookmark="$1"
+	rm "$bookmark_path/$bookmark" && echo "Removed Bookmark: $bookmark"
 }
+
+
+_unbookmark () {
+}
+compdef _unbookmarks unbookmark
 
 #───────────────────────────────────────────────────────────────────────────────
 # CYCLE THROUGH DIRECTORIES
