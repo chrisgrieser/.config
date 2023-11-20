@@ -130,9 +130,6 @@ keymap("n", "<leader>lt", cmd.InspectTree, { desc = " :InspectTree" })
 
 --------------------------------------------------------------------------------
 
--- Merging & Splitting Lines
-keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "󰗈 Merge line down" })
-
 -- Append to / delete from EoL
 local trailChars = { ",", ";", ")", "'", '"', "|", "\\", "{", ".", "}" }
 for _, key in pairs(trailChars) do
