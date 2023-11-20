@@ -2,14 +2,7 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 # also loads compinit stuff, therefore has to be loaded before
-# source "$(brew --prefix)/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
-
-# activate completions, also needed for ZSH auto suggestions & completions
-# not needed when using zsh-autocomplete
-autoload compinit -Uz +X && compinit
-
-# # Fix for Intel Mac, https://github.com/zsh-users/zsh-completions/issues/433#issuecomment-629539004
-[[ $(uname -p) == "i386" ]] && compaudit | xargs chmod g-w
+source "$(brew --prefix)/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 
 #───────────────────────────────────────────────────────────────────────────────
 

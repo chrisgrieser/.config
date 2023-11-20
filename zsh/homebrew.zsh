@@ -23,13 +23,13 @@ alias bu='brew uninstall --zap' # codespell-ignore
 
 #───────────────────────────────────────────────────────────────────────────────
 
-function print-section() {
+function _print-section() {
 	echo
 	echo "$*"
 	_separator
 }
 
-function dump() {
+function _dump() {
 	local dump_path="$HOME/.config/_installed-apps-and-packages/"
 	local device_name
 	device_name=$(scutil --get ComputerName | cut -d" " -f2-)
@@ -48,28 +48,28 @@ function dump() {
 }
 
 function update() {
-	print-section "HOMEBREW"
+	_print-section "HOMEBREW"
 	brew update
 	brew upgrade
 	brew cleanup
 
 	# manually update, cause brew won't update as it is in theory self-upgrading
-	print-section "Obsidian Installer"
+	_print-section "Obsidian Installer"
 	brew upgrade obsidian
 
-	print-section "MAC APP STORE"
+	_print-section "MAC APP STORE"
 	mas upgrade
 
-	print-section "NPM"
+	_print-section "NPM"
 	npm update --location=global
 
-	print-section "PIP"
+	_print-section "PIP"
 	pip3 list --not-required --outdated | cut -d" " -f1 | xargs pip3 install --upgrade
 
-	print-section "DUMP INSTALL LISTS"
+	_print-section "DUMP INSTALL LISTS"
 	dump
 
-	print-section "Restarting Sketchybar"
+	_print-section "Restarting Sketchybar"
 	# - sketchybar usually updated and then has to be restarted to give permission
 	# - also updates the homebrew status counter
 	brew services restart sketchybar
@@ -78,25 +78,25 @@ function update() {
 }
 
 function listall() {
-	print-section "HOMEBREW"
-	print-section "Taps"
+	_print-section "HOMEBREW"
+	_print-section "Taps"
 	brew tap
-	print-section "Leaves"
-	brew leaves
+	_print-section "Leaves"
+	_brew leaves
 	print-section "Casks"
-	brew list --casks
-	print-section "Doctor"
+	_brew list --casks
+	_print-section "Doctor"
 	brew doctor
 
-	print-section "MAC APP STORE"
+	_print-section "MAC APP STORE"
 	mas list
 
-	print-section "NPM"
+	_print-section "NPM"
 	npm list --location=global
 
-	print-section "Pip3"
+	_print-section "Pip3"
 	pip3 list --not-required
 
-	print-section "DUMP INSTALLS"
-	dump
+	_print-section "DUMP INSTALLS"
+	_dump
 }

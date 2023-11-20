@@ -1,13 +1,17 @@
 # DOCS
-# official docs     https://zsh.sourceforge.io/Guide/zshguide06.html
-# good guide        https://thevaluable.dev/zsh-completion-guide-examples/
-# zsh-autocomplete  https://github.com/marlonrichert/zsh-autocomplete#configuration
-# ansi colors       https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#256-colors
+# official docs             https://zsh.sourceforge.io/Guide/zshguide06.html
+# good guide                https://thevaluable.dev/zsh-completion-guide-examples/
+# zsh-autocomplete config   https://github.com/marlonrichert/zsh-autocomplete#configuration
+# zsh-autocomplete presets  https://github.com/marlonrichert/zsh-autocomplete/blob/main/Functions/Init/.autocomplete__config
+# ansi colors               https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#256-colors
 #───────────────────────────────────────────────────────────────────────────────
 
 # COLORS
 # color completion groups with purple-gray background (ccc.nvim highlight is wrong)
 zstyle ':completion:*:descriptions' format $'\e[7;38;5;103m %d \e[0;38;5;103m\e[0m'
+zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
+zstyle ':completion:*:warning' format ' %F{yellow} -- %d --%f'
+zstyle ':completion:*corrections' format '%F{yellow}%d (errors: %e)%f'
 
 # color items in specific group
 zstyle ':completion:*:aliases' list-colors '=*=35'
@@ -26,11 +30,11 @@ zstyle ':completion:*:warnings' format ""
 #───────────────────────────────────────────────────────────────────────────────
 
 # BINDINGS
-# bindkey '\t' menu-select                            # <Tab> next item
-# bindkey -M menuselect '^[[Z' reverse-menu-complete  # <S-Tab> prev suggestion
-# bindkey -M menuselect '\r' .accept-line             # <CR> select & execute
-# bindkey -M menuselect '^[[A' vi-backward-blank-word # <Up> prev group
-# bindkey -M menuselect '^[[B' vi-forward-blank-word  # <Down> next group
+bindkey '\t' menu-select                            # <Tab> next item
+bindkey -M menuselect '^[[Z' reverse-menu-complete  # <S-Tab> prev suggestion
+bindkey -M menuselect '\r'   .accept-line           # <CR> select & execute
+bindkey -M menuselect '^[[A' vi-backward-blank-word # <Up> prev group
+bindkey -M menuselect '^[[B' vi-forward-blank-word  # <Down> next group
 
 # ZSH-AUTOCOMPLETE
 zstyle ':autocomplete:*' ignored-input '..d'
