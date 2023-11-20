@@ -57,7 +57,6 @@ function gc {
 }
 
 # completions for it
-zstyle ':completion:*:conventional-commit' list-colors "=*=1;35=" 
 _gc() {
 	((CURRENT != 2)) && return # only complete first word
 	local cc=("fix" "feat" "chore" "docs" "style" "refactor" "perf"
