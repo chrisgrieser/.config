@@ -36,12 +36,15 @@ bindkey -M menuselect '^[[B' vi-forward-blank-word  # <Down> next group
 zstyle ':autocomplete:*' ignored-input '..d'
 
 #───────────────────────────────────────────────────────────────────────────────
+# GROUP ORDER & SORTING
 
-# GROUP ORDER
+zstyle ':completion:*' file-sort modification follow
+# setopt AUTO_PARAM_SLASH # completing edits adds slash
+# setopt AUTO_REMOVE_SLASH
+
 # INFO "path-directories" changes the order of "directories in cdpath"
 zstyle ':completion:*' group-order \
 	all-expansions expansions options \
 	path-directories \
 	aliases suffix-aliases functions reserved-words builtins commands \
 	local-directories directories executables
-
