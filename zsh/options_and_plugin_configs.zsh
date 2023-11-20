@@ -7,14 +7,14 @@ export LC_CTYPE="en_US.UTF-8"
 
 # DOCS https://zsh.sourceforge.io/Doc/Release/Options.html
 setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful for copypasting)
-setopt CORRECT_ALL
+# setopt CORRECT_ALL
 
 # Glob settings
 setopt GLOB_DOTS # glob includes dotfiles
-setopt EXTENDED_GLOB # enables more global operators https://zsh.sourceforge.io/Doc/Release/Expansion.html#Glob-Operators
+setopt EXTENDED_GLOB # more glob operators https://zsh.sourceforge.io/Doc/Release/Expansion.html#Glob-Operators
 
-setopt GLOB_COMPLETE # globs aren't expanded, but result in a menu selection
-setopt MARK_DIRS
+# BUG not working with zsh-autocomplete
+# setopt GLOB_COMPLETE # globs aren't expanded, but result in a menu selection
 
 #───────────────────────────────────────────────────────────────────────────────
 # CLI/PLUGIN SETTINGS

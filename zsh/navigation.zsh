@@ -58,8 +58,7 @@ function _grappling_hook {
 	elif [[ "$PWD" == "${locations[2]}" ]]; then
 		to_open="${locations[3]}"
 	fi
-	echo
-	cd "$to_open" || return 1
+	cd -q "$to_open" || return 1
 	[[ "$TERM_PROGRAM" == "WezTerm" ]] && wezterm set-working-directory # so wezterm knows we are in a new directory
 	zle reset-prompt
 }
