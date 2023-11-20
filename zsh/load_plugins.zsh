@@ -19,6 +19,7 @@ source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
 
 source "$ZDOTDIR/plugins/magic_dashboard.zsh"
+source "$ZDOTDIR/plugins/transient_prompt.zsh"
 
 #───────────────────────────────────────────────────────────────────────────────
 

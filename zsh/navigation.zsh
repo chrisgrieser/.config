@@ -68,6 +68,7 @@ bindkey "^O" _grappling_hook # bound to cmd+enter via wezterm
 #───────────────────────────────────────────────────────────────────────────────
 # RECENT DIRS (via pushd & dirstack)
 
+# INFO zsh-autocomplete makes the dirstack persist
 setopt AUTO_PUSHD
 setopt PUSHD_IGNORE_DUPS
 export DIRSTACKSIZE=13

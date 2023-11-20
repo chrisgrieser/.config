@@ -9,9 +9,6 @@
 # COLORS
 # color completion groups with purple-gray background (ccc.nvim highlight is wrong)
 zstyle ':completion:*:descriptions' format $'\e[7;38;5;103m %d \e[0;38;5;103m\e[0m'
-zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
-zstyle ':completion:*:warning' format ' %F{yellow} -- %d --%f'
-zstyle ':completion:*corrections' format '%F{yellow}%d (errors: %e)%f'
 
 # color items in specific group
 zstyle ':completion:*:aliases' list-colors '=*=35'
