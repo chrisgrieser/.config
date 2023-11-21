@@ -11,6 +11,13 @@ setopt CD_SILENT # don't pwd when changing directories via stack or `-`
 function chpwd {
 	_magic_dashboard
 	_auto_venv
+	# check for empty files
+	empty_files=$(fd --hidden --type=empty --max-depth=2)
+	if [[ -n "$empty_files" ]] ; then
+		echo
+		print "\e[1;33mEmpty files found: \e[0m"
+		echo "$empty_files"
+	fi
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -104,4 +111,3 @@ _unbookmark () {
 	compadd "${expl[@]}" -- "${bookmarks[@]}"
 }
 compdef _unbookmark unbookmark
-

@@ -1,6 +1,6 @@
 {
-	"export PATH": {
-		"prefix": "PATH",
+	"PATH (export)": {
+		"prefix": "PATH (export)",
 		"body": "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$$PATH ; \\",
 		"description": "in case a CLI needs to be run"
 	},

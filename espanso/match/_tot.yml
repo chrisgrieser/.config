@@ -1,7 +1,0 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/ajmarkow/espanso-schema-json/master/schemas/Espanso_Matches_File_Schema.json
-#───────────────────────────────────────────────────────────────────────────────
-
-matches:
-  # smart bullet in Tot https://blog.iconfactory.com/2022/06/tot-1-4-making-people-happy/
-  - regex: "- "
-    replace: "– "
