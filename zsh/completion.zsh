@@ -25,25 +25,32 @@ zstyle ':completion:*:default' list-colors \
 zstyle ':completion:*:warnings' format ""
 
 #───────────────────────────────────────────────────────────────────────────────
-
 # BINDINGS
+
 bindkey '\t' menu-select                            # <Tab> next item
 bindkey -M menuselect '^[[Z' reverse-menu-complete  # <S-Tab> prev suggestion
 bindkey -M menuselect '\r'   .accept-line           # <CR> select & execute
 bindkey -M menuselect '^[[A' vi-backward-blank-word # <Up> prev group
 bindkey -M menuselect '^[[B' vi-forward-blank-word  # <Down> next group
 
-# ZSH-AUTOCOMPLETE
-zstyle ':autocomplete:*' ignored-input '..d'
-
 #───────────────────────────────────────────────────────────────────────────────
-# GROUP ORDER & SORTING
+# BEHAVIOR
 
-zstyle ':completion:*' file-sort modification follow
+# ignore
+zstyle ':completion:*' ignored-patterns ".DS_Store" ".git"
 
+# sort
+zstyle ':completion:*' file-sort modification follow # "follow" makes it follow symlinks
+
+# group order
 # INFO "path-directories" changes the order of "directories in cdpath"
 zstyle ':completion:*' group-order \
 	all-expansions expansions options \
 	path-directories \
 	aliases suffix-aliases functions reserved-words builtins commands \
 	local-directories directories executables
+
+#────────────────────────────────────────────────────────────────────────────
+
+# ZSH-AUTOCOMPLETE
+zstyle ':autocomplete:*' ignored-input '..d'
