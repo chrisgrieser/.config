@@ -44,7 +44,7 @@ function relativeDate(absoluteDate) {
 	} else {
 		unit = "year";
 		delta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7 / 4 / 12);
-	} 
+	}
 	const formatter = new Intl.RelativeTimeFormat("en", { style: "long", numeric: "auto" });
 	return formatter.format(-delta, unit);
 }
@@ -54,10 +54,14 @@ function relativeDate(absoluteDate) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
-	const query = argv[0] || "";
-	if (!query) return;
+	const query = argv[0];
 
-
+	// GUARD
+	if (!query) {
+		return JSON.stringify({
+			items: [{ title: "⚠️ No query provided.", subtitle: "Please provide a query.", valid: false }],
+		});
+	}
 
 	const apiURL = `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}`;
 
