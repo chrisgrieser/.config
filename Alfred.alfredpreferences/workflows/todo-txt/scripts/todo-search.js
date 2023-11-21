@@ -7,13 +7,24 @@ function readFile(path) {
 	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
 	return ObjC.unwrap(str);
 }
+
+
+/** @param {string} str */
+function unicodeStrikethough(str) {
+	// https://stackoverflow.com/questions/38926669/strike-through-plain-text-with-unicode-characters
+	return str
+		.split("")
+		.map((char) => char + "\u0336")
+		.join("");
+}
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	let lineNo = 0;
-	const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/g
+	const urlRegex =
+		/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/g;
 
 	/** @type AlfredItem[] */
 	const todos = readFile($.getenv("todotxt_filepath"))
@@ -21,20 +32,20 @@ function run() {
 		.map((item) => {
 			lineNo++;
 			const urls = item.match(urlRegex);
-			const urlOpenSubtitle = urls ? "⌘: Open " + urls.join(" ") : "🚫 No URL in the todo.";
+			let urlOpenSubtitle = urls ? "⌘: Open URL" : "🚫 No URL in the todo.";
 			const completed = item.startsWith("x") ? "completed" : "";
+			if (!completed)
+			const displayText = completed ? unicodeStrikethough(item) : item;
 
 			return {
-				title: item,
-				subtitle: completed,
+				title: displayText,
 				arg: lineNo,
 				mods: {
 					cmd: {
-						arg: urls,
 						valid: Boolean(urls),
 						subtitle: urlOpenSubtitle,
 					},
-				}
+				},
 			};
 		});
 

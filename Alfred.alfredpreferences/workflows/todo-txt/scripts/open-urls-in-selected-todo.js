@@ -12,8 +12,11 @@ function run() {
 	const se = Application("System Events");
 	se.includeStandardAdditions = true;
 	se.keystroke("c", { using: ["command down"] });
-	delay(0.05);
+	delay(0.1); // wait for clipboard
 	const clipb = se.theClipboard();
+
+	// mark as completed
+	se.keystroke("x");
 
 	// search for URLs and open any
 	const urls = clipb.match(
