@@ -44,7 +44,7 @@ local lualineConfig = {
 		-- should always include the tab element
 		lualine_a = {
 			{
-				function () return "󱥒 " .. vim.fs.basename(vim.env.VIRTUAL_ENV) end,
+				function() return "󱥒 " .. vim.fs.basename(vim.env.VIRTUAL_ENV) end,
 				cond = function() return vim.env.VIRTUAL_ENV and vim.bo.ft == "python" end,
 				section_separators = topSep,
 			},
@@ -111,6 +111,7 @@ local lualineConfig = {
 		lualine_z = {
 			{ "selectioncount", fmt = function(str) return str ~= "" and "礪" .. str or "" end },
 			"location",
+			{ function() return "" end },
 		},
 	},
 	options = {

@@ -43,7 +43,7 @@ function bookmark {
 }
 
 function unbookmark {
-	[[ -z "$1" ]] && return
+	[[ -z "$1" ]] && return 2
 	rm "$bookmark_path/$1" && echo "Removed Bookmark: $1"
 }
 
@@ -63,8 +63,10 @@ function _grappling_hook {
 		to_open="${locations[3]}"
 	fi
 	cd -q "$to_open" || return 1
-	[[ "$TERM_PROGRAM" == "WezTerm" ]] && wezterm set-working-directory # so wezterm knows we are in a new directory
 	zle reset-prompt
+
+	# so wezterm knows we are in a new directory
+	[[ "$TERM_PROGRAM" == "WezTerm" ]] && wezterm set-working-directory 
 }
 zle -N _grappling_hook
 bindkey "^O" _grappling_hook # bound to cmd+enter via wezterm
