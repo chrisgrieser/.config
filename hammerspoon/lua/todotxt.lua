@@ -10,12 +10,12 @@ local u = require("lua.utils")
 local function remindersToTodotxt()
 	-- run as task so it's not blocking
 	M.task_pushReminder = hs.task
-		.new("./helpers/push-todays-reminders-to-tot.js", function(exitCode, stdout, stderr)
+		.new("./helpers/push-todays-reminders-to-todotxt.js", function(exitCode, stdout, stderr)
 			if stdout == "" then return end
 			local msg = exitCode == 0 and "✅ Added reminders to Tot: " .. stdout
 				or "⚠️ Reminder-to-Tot failed: " .. stderr
 			u.notify(msg)
-		end, nil, { env.todotxtPath })
+		end, { env.todotxtPath })
 		:start()
 end
 
