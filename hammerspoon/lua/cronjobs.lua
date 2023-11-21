@@ -59,6 +59,14 @@ M.timer_nightlyMaintenance = hs.timer
 	end, true)
 	:start()
 
+-- stylua: ignore
+M.timer_todotxtBackup = hs.timer.doAt("01:00", "01d", function()
+	M.timer_todotxtBackup = hs.task.new("./helpers/todotxt-bkp.sh", function(exitCode, _, stdErr)
+		local msg = exitCode == 0 and "✅ Todo.txt Backup successful" or "⚠️ Todo.txt Backup failed: " .. stdErr
+		u.notify(msg)
+	end):start()
+end, true):start()
+
 --------------------------------------------------------------------------------
 -- SLEEP TIMER
 
@@ -74,7 +82,6 @@ local config = {
 
 M.timer_sleepAutoVideoOff = hs.timer
 	.doEvery(config.checkIntervalMins * 60, function()
-
 		-- GUARD
 		local isNight = u.betweenTime(config.betweenHours[1], config.betweenHours[2])
 		local isIdle = (hs.host.idleTime() / 60) > config.idleMins
@@ -82,7 +89,6 @@ M.timer_sleepAutoVideoOff = hs.timer
 
 		hs.alert.show(("💤 Will sleep in %ss if idle."):format(config.timeToReactSecs))
 		u.runWithDelays(config.timeToReactSecs, function()
-
 			-- GUARD
 			local userDidSth = hs.host.idleTime() < config.timeToReactSecs
 			if userDidSth then return end
