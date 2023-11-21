@@ -7,10 +7,6 @@ function run() {
 	const dotToUse = 1; // CONFIG
 
 	const reminders = Application("Reminders");
-	const tot = Application("Tot");
-	if (!tot.running()) tot.launch();
-	tot.includeStandardAdditions = true;
-
 	const today = new Date();
 
 	// https://leancrew.com/all-this/2017/08/my-jxa-problem/
@@ -38,14 +34,6 @@ function run() {
 		addedTasks++;
 
 		task.delete(); // DOCS https://gist.github.com/chockenberry/d33ef5b6e6da4a3e4aa9b07b093d3c23
-	}
-
-	const empty = tot.openLocation(`tot://${dotToUse}/content`).match(/^\s*$/);
-	if (empty) {
-		accText = accText.trim();
-		tot.openLocation(`tots://${dotToUse}/replace?text=${encodeURIComponent(accText)}`);
-	} else {
-		tot.openLocation(`tots://${dotToUse}/append?text=${encodeURIComponent(accText)}`);
 	}
 
 	delay(0.3);

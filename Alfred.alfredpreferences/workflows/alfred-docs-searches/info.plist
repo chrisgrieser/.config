@@ -195,19 +195,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>3A0027D0-2C3E-4F97-9F87-1344E1821FD5</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>093993C7-7C1F-4DEF-AD8F-D6BE78860096</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>3CA7F398-9E2A-467B-B1B1-CC0DBBCB20A5</key>
 		<array>
 			<dict>
@@ -320,7 +307,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>3A0027D0-2C3E-4F97-9F87-1344E1821FD5</string>
+				<string>093993C7-7C1F-4DEF-AD8F-D6BE78860096</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1482,23 +1469,6 @@
 			<string>5D0C789F-E59F-4435-8AB1-84CBA3CF65DC</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>key code {query}</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>3A0027D0-2C3E-4F97-9F87-1344E1821FD5</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -3039,15 +3009,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>865</real>
-		</dict>
-		<key>3A0027D0-2C3E-4F97-9F87-1344E1821FD5</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>685</real>
-			<key>ypos</key>
-			<real>655</real>
 		</dict>
 		<key>3CA7F398-9E2A-467B-B1B1-CC0DBBCB20A5</key>
 		<dict>

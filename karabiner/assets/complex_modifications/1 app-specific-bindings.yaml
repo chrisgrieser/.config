@@ -224,11 +224,25 @@ rules:
                   click menu item "Show Toolbar" of menu "View" of menu bar 1
                   click menu item "Rename…" of menu "File" of menu bar 1
                 end tell'
-        conditions: 
+        conditions:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^net\.highlightsapp\.universal$
               - ^com\.apple\.Preview$
+  #─────────────────────────────────────────────────────────────────────────────
+  - description: "(Apps) todo.txt"
+    manipulators:
+      - type: basic
+        from: { key_code: r, modifiers: { mandatory: [command] } }
+        to:
+          - shell_command: |
+              osascript -e '
+                tell application "System Events" to tell (first process where it is frontmost)
+                  click menu item "Toggle Editing Mode" of menu "View" of menu bar 1
+                  click menu item "Hide Toolbar" of menu "View" of menu bar 1
+                end tell'
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^com\.descy\.michael\.SwiftoDoDesktopLegacy$] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Brave"
     manipulators:

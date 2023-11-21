@@ -87,7 +87,6 @@ local function movieLayout()
 
 	u.openApps { "YouTube", "BetterTouchTool" }
 	u.quitApps {
-		"TodoTxtMac",
 		"neovide",
 		"Slack",
 		"Discord",
@@ -99,6 +98,7 @@ local function movieLayout()
 		"lo-rain",
 		env.mailApp,
 		env.tickerApp,
+		env.todoApp,
 	}
 	-- FIX Tot sometimes not quitting properly
 	u.runWithDelays({ 2, 5, 10 }, function() u.quitApps("Tot") end)
@@ -121,12 +121,12 @@ end
 M.wf_appsOnMouseScreen = wf.new({
 	env.browserApp,
 	env.mailApp,
+	env.todoApp,
 	"BetterTouchTool",
 	"Obsidian",
 	"Finder",
 	"ReadKit",
 	"Slack",
-	"TodoTxtMac",
 	"IINA",
 	"WezTerm",
 	"Hammerspoon",

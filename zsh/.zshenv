@@ -15,6 +15,11 @@ export BROWSER_APP="Brave Browser" # not using "$BROWSER" since it's a reserved 
 export MAIL_APP="Mimestream"
 export TICKER_APP="Ivory"
 
+export TODOTXT_APP="SwiftoDo Desktop"
+export TODOTXT="$HOME/Library/Mobile Documents/com~apple~CloudDocs/todo/todo.txt"
+
+#───────────────────────────────────────────────────────────────────────────────
+
 # Save API keys outside the dotfile repo
 # shellcheck disable=1091
 [[ -f "$DATA_DIR/private dotfiles/api-keys.sh" ]] && source "$DATA_DIR/private dotfiles/api-keys.sh"

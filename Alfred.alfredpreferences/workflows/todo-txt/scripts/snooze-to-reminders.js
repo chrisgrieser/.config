@@ -37,7 +37,7 @@ function run(argv) {
 		todo = app.theClipboard();
 
 		// delete task // TODO use todotxt syntax
-		se.keystroke("d"); // delete
+		se.keyCode(51); // delete
 		delay(0.05);
 		se.keyCode(76); // confirm
 	} else {

@@ -36,6 +36,16 @@ M.aw_spotify = aw.new(function(appName, eventType)
 	end
 end):start()
 
+
+--------------------------------------------------------------------------------
+-- TODOTXT
+M.aw_todotxt = aw.new(function(appName, event)
+	if appName == env.todoApp and event == aw.activated then
+		return
+	end
+end):start()
+
+
 --------------------------------------------------------------------------------
 -- OBSIDIAN
 

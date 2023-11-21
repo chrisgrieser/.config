@@ -47,12 +47,16 @@ rules:
         conditions: [*leader-active]
         to_if_alone:
           - shell_command: |
-              osascript -e '
-                if (application "TodoTxtMac" is frontmost) then
-                  tell application "TodoTxtMac" to quit
+              source "$HOME/.zshenv"
+              osascript -e "
+                if (application \"$TODOTXT_APP\" is frontmost) then
+                  tell application \"$TODOTXT_APP\" to quit
                 else
-                  tell application "TodoTxtMac" to activate
-                end if'
+                  tell application \"$TODOTXT_APP\"
+                    open \"$TODOTXT\"
+                    activate
+                  end tell
+                end if"
           - *deactivate-leader
           - *remove-notice
       # Cancel (Hyper/Esc)
