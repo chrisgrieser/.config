@@ -1,23 +1,20 @@
 local M = {} -- persist from garbage collector
-
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 
---------------------------------------------------------------------------------
--- REMINDERS -> TODOTXT
-
 ---@async
 local function remindersToTodotxt()
-	-- run as task so it's not blocking
-	M.task_pushReminder = hs.task
+	M.task_pushReminder = hs.task -- run as hs.task so it's not blocking
 		.new("./helpers/push-todays-reminders-to-todotxt.js", function(exitCode, stdout, stderr)
 			if stdout == "" then return end
-			local msg = exitCode == 0 and "✅ Added reminders to Tot: " .. stdout
-				or "⚠️ Reminder-to-Tot failed: " .. stderr
+			local msg = exitCode == 0 and "✅ Added todos: " .. stdout
+				or "⚠️ Reminders Import failed: " .. stderr
 			u.notify(msg)
 		end, { env.todotxtPath })
 		:start()
 end
+
+--------------------------------------------------------------------------------
 
 -- TRIGGERS
 -- 1. systemstart

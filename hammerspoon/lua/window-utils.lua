@@ -8,7 +8,7 @@ M.iMacDisplay = hs.screen("Built%-in")
 M.maximized = hs.layout.maximized
 M.pseudoMax = { x = 0.184, y = 0, w = 0.817, h = 1 }
 M.centerHalf = { x = 0.184, y = 0, w = 0.6, h = 1 }
-M.smallCenter = { x = 0.25, y = 0.2, w = 0.5, h = 0.6 }
+M.smallCenter = { x = 0.3, y = 0.15, w = 0.4, h = 0.7 }
 
 -- negative x to hide useless sidebar
 if env.isAtMother then
@@ -184,8 +184,8 @@ end
 
 local function controlSpaceAction()
 	local curWin = hs.window.focusedWindow()
-	local pos
 
+	local pos
 	if u.isFront { "Reminders", env.todoApp } then
 		pos = M.CheckSize(curWin, M.smallCenter) and M.centerHalf or M.smallCenter
 	elseif u.isFront { "Finder", "Script Editor" } then
