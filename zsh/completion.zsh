@@ -1,5 +1,6 @@
 # DOCS
 # official docs             https://zsh.sourceforge.io/Guide/zshguide06.html
+# zstyle                    https://zsh.sourceforge.io/Doc/Release/Completion-System.html#Standard-Styles
 # good guide                https://thevaluable.dev/zsh-completion-guide-examples/
 # zsh-autocomplete config   https://github.com/marlonrichert/zsh-autocomplete#configuration
 # zsh-autocomplete presets  https://github.com/marlonrichert/zsh-autocomplete/blob/main/Functions/Init/.autocomplete__config
@@ -9,8 +10,6 @@
 # FORMAT
 # color completion groups with purple-gray background (ccc.nvim highlight is wrong)
 zstyle ':completion:*:descriptions' format $'\e[7;38;5;103m %d \e[0;38;5;103m \e[0m'
-
-zstyle ':completion:*:directories' format "%d +x"
 
 # color items in specific group
 zstyle ':completion:*:aliases' list-colors '=*=35'
@@ -39,7 +38,8 @@ bindkey -M menuselect '^[[B' vi-forward-blank-word  # <Down> next group
 # BEHAVIOR
 
 # ignore
-zstyle ':completion:*' ignored-patterns ".DS_Store" ".git"
+zstyle ':completion:*' ignored-patterns \
+	".DS_Store" ".git" "node_modules" "__pycache__"
 
 # sort
 zstyle ':completion:*' file-sort modification follow # "follow" makes it follow symlinks

@@ -11,7 +11,7 @@ vim.defer_fn(function() vim.fn.serverstart("/tmp/nvim_server.pipe") end, 400)
 --------------------------------------------------------------------------------
 
 -- SIZE & FONT
-vim.opt.guifont = "JetBrainsMonoNL Nerd Font:h25.2"
+vim.opt.guifont = "JetBrainsMonoNL NF:h25.2"
 
 local host = vim.fn.hostname()
 local isAtOffice = (host:find("mini") or host:find("eduroam") or host:find("fak1")) ~= nil
