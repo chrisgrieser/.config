@@ -4,30 +4,29 @@
 -- INFO the first theme in the list is used
 -- rest are themes I already tried and also like
 local darkThemes = {
-	"MaterialDesignColors",
 	"cyberpunk",
+	"Paraiso Dark",
+	"MaterialDesignColors",
 	"ChallengerDeep",
 	"Tinacious Design (Dark)",
 	"Afterglow (Gogh)",
-	"Paraiso Dark",
 	"duckbones",
 	"Kanagawa (Gogh)",
 	"TokyoNight (Gogh)",
 }
 local lightThemes = {
-	"Silk Light (base16)",
+	"Solar Flare Light (base16)",
+	"Cupcake (base16)",
+	"Atelierdune (light) (terminal.sexy)",
+	"Google Light (Gogh)",
+	"Atelier Lakeside Light (base16)",
+	"Ivory Light (terminal.sexy)",
 	"Edge Light (base16)",
+	"Silk Light (base16)",
 	"seoulbones_light",
 	"Paraiso (light) (terminal.sexy)",
 	"BlulocoLight (Gogh)",
-	"Google Light (Gogh)",
 	"OneHalfLight",
-	"Atelierdune (light) (terminal.sexy)",
-	"Atelier Lakeside Light (base16)",
-	"Cupcake (base16)",
-	"Ivory Light (terminal.sexy)",
-	"Sakura (base16)",
-	"Solar Flare Light (base16)",
 }
 
 local lightOpacity = 0.94

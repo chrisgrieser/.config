@@ -166,6 +166,7 @@ local function telescopeConfig()
 				-- e.g. not respecting /fd/ignore
 				find_command = { "fd", "--type=file", "--type=symlink" },
 				mappings = { i = findFileMappings },
+				follow = false,
 			},
 			live_grep = { prompt_prefix = " ", disable_coordinates = true },
 			git_status = {
