@@ -72,6 +72,7 @@ local function workLayout()
 			wu.moveResize(win, wu.pseudoMax)
 		end)
 	end
+	u.openApps(env.todoApp)
 	u.restartApp("AltTab") -- FIX duplicate items
 
 	-- finish
@@ -100,8 +101,6 @@ local function movieLayout()
 		env.tickerApp,
 		env.todoApp,
 	}
-	-- FIX Tot sometimes not quitting properly
-	u.runWithDelays({ 2, 5, 10 }, function() u.quitApps("Tot") end)
 
 	print("🔲 Loaded MovieModeLayout")
 end
