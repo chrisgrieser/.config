@@ -34,17 +34,15 @@
 				<false/>
 			</dict>
 		</array>
-		<key>433F8BB4-E803-4D88-9F71-B8C1C06B435B</key>
-		<array/>
 		<key>49540ED2-DEDB-41DB-BF6B-FED0EB398A81</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>433F8BB4-E803-4D88-9F71-B8C1C06B435B</string>
+				<string>1D7C8259-A4E3-440B-9383-91B0F36836D4</string>
 				<key>modifiers</key>
-				<integer>0</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Open URL</string>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -186,25 +184,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
 				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
 				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
+				<key>url</key>
 				<string></string>
-				<key>type</key>
-				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>433F8BB4-E803-4D88-9F71-B8C1C06B435B</string>
+			<string>1D7C8259-A4E3-440B-9383-91B0F36836D4</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -218,7 +214,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>./scripts/toggle-completed.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -575,6 +571,15 @@
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>1D7C8259-A4E3-440B-9383-91B0F36836D4</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>305</real>
+			<key>ypos</key>
+			<real>30</real>
+		</dict>
 		<key>3DBCAC53-D043-40E5-8BC7-17331F0676DA</key>
 		<dict>
 			<key>colorindex</key>
@@ -596,17 +601,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>340</real>
 			<key>ypos</key>
 			<real>640</real>
-		</dict>
-		<key>433F8BB4-E803-4D88-9F71-B8C1C06B435B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>note</key>
-			<string>open URLs in todo</string>
-			<key>xpos</key>
-			<real>305</real>
-			<key>ypos</key>
-			<real>20</real>
 		</dict>
 		<key>49540ED2-DEDB-41DB-BF6B-FED0EB398A81</key>
 		<dict>

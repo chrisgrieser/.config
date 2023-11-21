@@ -50,7 +50,7 @@ safeRequire("lua.vertical-split")
 safeRequire("lua.app-specific-behavior")
 safeRequire("lua.browser")
 safeRequire("lua.twitter-mastodon")
-safeRequire("lua.tot")
+safeRequire("lua.todotxt")
 
 -- reload function (should come last)
 safeRequire("lua.reload")

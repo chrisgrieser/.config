@@ -16,6 +16,7 @@ local tsConfig = {
 		disable = {
 			"markdown", -- indentation at bullet points worse
 			"lua", -- `o` sometimes get weird behavior
+			"javascript", -- `o` sometimes get weird behavior
 		},
 	},
 
