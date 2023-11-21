@@ -23,7 +23,7 @@ fi
 i=0
 while true; do
 	weather=$(curl -sL "https://api.brightsky.dev/current_weather?lat=$latitude&lon=$longitude" | yq ".weather")
-	temperature="$(echo "$weather" | yq ".temperature" | cut -d. -f1)"
+	temperature="$(echo "$weather" | yq ".temperature" | cut -d. -f1 | sed 's/-0/0/')"
 	# replace icon-string with nerdfont icon
 	icon=$(
 		echo "$weather" | yq ".icon" |
