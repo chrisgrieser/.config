@@ -50,7 +50,7 @@ rules:
               source "$HOME/.zshenv"
               osascript -e "
                 if (application \"$TODOTXT_APP\" is frontmost) then
-                  tell application \"$TODOTXT_APP\" to quit
+                  tell application \"System Events\" to tell process \"$TODOTXT_APP\" to set visible to false
                 else
                   tell application \"$TODOTXT_APP\"
                     open \"$TODOTXT\"

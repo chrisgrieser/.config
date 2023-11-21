@@ -15,26 +15,26 @@ local function remindersToTodotxt()
 			local msg = exitCode == 0 and "✅ Added reminders to Tot: " .. stdout
 				or "⚠️ Reminder-to-Tot failed: " .. stderr
 			u.notify(msg)
-		end)
+		end, nil, { env.todotxtPath })
 		:start()
 end
 
 -- TRIGGERS
--- 1. Every morning
+-- 1. systemstart
+if u.isSystemStart() then remindersToTodotxt() end
+
+-- 2. Every morning
 M.timer_morning = hs.timer.doAt("07:00", "01d", remindersToTodotxt, true):start()
 
--- 2. On wake
+-- 3. On wake
 local c = hs.caffeinate.watcher
 M.caff_wake = c.new(function(event)
+	if env.isProjector() then return end
 	if M.recentlyWoke then return end
 	M.recentlyWoke = true
 
 	local woke = event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock
-	if woke then
-		u.runWithDelays(10, function()
-			if not env.isProjector() then remindersToTodotxt() end
-		end)
-	end
+	if woke then u.runWithDelays(10, remindersToTodotxt) end -- wait for sync
 
 	u.runWithDelays(2.5, function() M.recentlyWoke = false end)
 end):start()

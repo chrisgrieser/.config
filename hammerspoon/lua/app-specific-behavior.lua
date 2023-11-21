@@ -36,15 +36,14 @@ M.aw_spotify = aw.new(function(appName, eventType)
 	end
 end):start()
 
-
 --------------------------------------------------------------------------------
 -- TODOTXT
-M.aw_todotxt = aw.new(function(appName, event)
-	if appName == env.todoApp and event == aw.activated then
-		return
-	end
-end):start()
-
+-- FIX damn sidebar always showing
+M.wf_todotxt = wf.new(env.todoApp):subscribe(wf.windowCreated, function()
+	local todoApp = u.app(env.todoApp)
+	todoApp:selectMenuItem { "View", "Toggle Filter Sidebar" }
+	todoApp:selectMenuItem { "View", "Hide Toolbar" }
+end)
 
 --------------------------------------------------------------------------------
 -- OBSIDIAN
@@ -160,7 +159,7 @@ end):start()
 
 ------------------------------------------------------------------------------
 
--- TRANSMISSION / TWITTER / MASTODON
+-- TRANSMISSION / MASTODON / TODOAPP
 -- Fallthrough: prevent unintended focusing after qutting another app or closing
 -- last window
 
@@ -169,7 +168,7 @@ M.aw_fallthrough = aw.new(function(appName, event)
 	if event ~= aw.terminated then return end
 
 	-- CONFIG
-	local fallThroughApps = { "Transmission", env.tickerApp }
+	local fallThroughApps = { "Transmission", env.tickerApp, env.todoApp }
 	u.runWithDelays({ 0.1, 0.2 }, function()
 		if not u.isFront(fallThroughApps) then return end
 		local visibleWins = hs.window:orderedWindows()
