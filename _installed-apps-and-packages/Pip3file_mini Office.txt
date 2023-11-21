@@ -1,2 +1,3 @@
+certifi
 pip-autoremove
 wheel

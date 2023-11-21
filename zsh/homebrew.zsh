@@ -1,4 +1,4 @@
-# https://docs.brew.sh/Manpage#environment
+# DOCS https://docs.brew.sh/Manpage#environment
 
 # general
 export HOMEBREW_CASK_OPTS="--no-quarantine"
@@ -10,6 +10,8 @@ export HOMEBREW_AUTOREMOVE=1
 export HOMEBREW_NO_INSTALL_CLEANUP=1
 export HOMEBREW_CLEANUP_MAX_AGE_DAYS=60
 export HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=30
+
+#───────────────────────────────────────────────────────────────────────────────
 
 alias bh='brew home'
 alias bl='brew list'
@@ -63,7 +65,7 @@ function update() {
 	pip3 list --not-required --outdated | cut -d" " -f1 | xargs pip3 install --upgrade
 
 	_print-section "DUMP INSTALL LISTS"
-	dump
+	_dump
 
 	_print-section "Restarting Sketchybar"
 	# - sketchybar usually updated and then has to be restarted to give permission
@@ -78,9 +80,9 @@ function listall() {
 	_print-section "Taps"
 	brew tap
 	_print-section "Leaves"
-	_brew leaves
+	brew leaves
 	print-section "Casks"
-	_brew list --casks
+	brew list --casks
 	_print-section "Doctor"
 	brew doctor
 

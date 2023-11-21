@@ -229,6 +229,13 @@ end
 u.hotkey(u.hyper, "N", moveWinToNextDisplay)
 u.hotkey({ "ctrl" }, "space", controlSpaceAction) -- fn+space also bound to ctrl+space via Karabiner
 
+-- stylua: ignore start
+u.hotkey(u.hyper, "right", function() M.moveResize(hs.window.focusedWindow(), hs.layout.right50) end)
+u.hotkey(u.hyper, "left", function() M.moveResize(hs.window.focusedWindow(), hs.layout.left50) end)
+u.hotkey(u.hyper, "down", function() M.moveResize(hs.window.focusedWindow(), { x = 0, y = 0.5, w = 1, h = 0.5 }) end)
+u.hotkey(u.hyper, "up", function() M.moveResize(hs.window.focusedWindow(), { x = 0, y = 0, w = 1, h = 0.5 }) end)
+-- stylua: ignore end
+
 -- for adding to Shortcuts.app
 u.urischeme("move-all-wins-to-projector", moveAllWinsToProjectorScreen)
 
