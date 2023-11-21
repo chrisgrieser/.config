@@ -8,6 +8,8 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
+		<key>1D7C8259-A4E3-440B-9383-91B0F36836D4</key>
+		<array/>
 		<key>3DBCAC53-D043-40E5-8BC7-17331F0676DA</key>
 		<array>
 			<dict>
@@ -184,23 +186,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
+				<key>concurrently</key>
 				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
 				<string></string>
-				<key>url</key>
-				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/open-urls-at-line.sh</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>1D7C8259-A4E3-440B-9383-91B0F36836D4</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -575,6 +579,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
+			<key>note</key>
+			<string>open URLs at line</string>
 			<key>xpos</key>
 			<real>305</real>
 			<key>ypos</key>

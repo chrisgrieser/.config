@@ -1,12 +1,16 @@
 #!/usr/bin/env zsh
+
 # shellcheck disable=2154
 file="$todotxt_filepath"
 line_no=$1
 
 #───────────────────────────────────────────────────────────────────────────────
 
-if grep -q "^x " "$file"; then
-	sed -E -i '' "${line_no}s/^x ([0-9]{4}-[0-9]{2}-[0-9]{2} )?//" "$file"
-else
+# open url
+line=$(sed -n "${line_no}p" "$file")
+url=$(echo "$line" | grep -E --only-matching 'https?://[^ )]*')
+open "$url"
+
+# if task is not completed, mark is as completed
+grep -q "^x " "$file" ||
 	sed -E -i '' "${line_no}s/^/x $(date +%Y-%m-%d) /" "$file"
-fi
