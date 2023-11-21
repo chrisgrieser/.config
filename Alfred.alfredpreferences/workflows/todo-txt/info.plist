@@ -8,21 +8,6 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
-		<key>05C47DFA-6E22-4EA4-A341-99651AEBD5AD</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>3396F88B-AD4F-41F0-9FA7-ED8173F325FF</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>3396F88B-AD4F-41F0-9FA7-ED8173F325FF</key>
-		<array/>
 		<key>3DBCAC53-D043-40E5-8BC7-17331F0676DA</key>
 		<array>
 			<dict>
@@ -49,17 +34,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>433F8BB4-E803-4D88-9F71-B8C1C06B435B</key>
+		<array/>
 		<key>49540ED2-DEDB-41DB-BF6B-FED0EB398A81</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>9823AB02-76C7-4449-9650-B778A002121E</string>
+				<string>433F8BB4-E803-4D88-9F71-B8C1C06B435B</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Append to Tot</string>
+				<string>⌘: Open URL</string>
 				<key>vitoclose</key>
-				<true/>
+				<false/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -68,16 +55,6 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>05C47DFA-6E22-4EA4-A341-99651AEBD5AD</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>⌥: Copy Tot</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -93,18 +70,7 @@
 			</dict>
 		</array>
 		<key>4A5614C3-8944-4C7D-89FD-18313D7209F2</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A9D543B9-9D71-4CF2-9269-623972B72F0F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>6BB0E44D-7589-40AE-B22B-A01E1E604B88</key>
 		<array>
 			<dict>
@@ -131,8 +97,6 @@
 			</dict>
 		</array>
 		<key>778D7E9A-C113-4942-BC74-276C19AF6F0F</key>
-		<array/>
-		<key>8DE6C12A-AD83-445A-BE00-709A9B916DFB</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -145,11 +109,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>9823AB02-76C7-4449-9650-B778A002121E</key>
+		<key>8DE6C12A-AD83-445A-BE00-709A9B916DFB</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E84312A1-E047-48A6-9789-ABB1023C9F8F</string>
+				<string>4AFA85BA-5CEE-4E1B-AF02-4DE9615967E6</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -187,6 +151,18 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>CC01C46B-1841-4552-94CB-2FDCD927C6D6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>DAC3E3E8-676A-424E-9B1A-33408AA272C9</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>4A5614C3-8944-4C7D-89FD-18313D7209F2</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -210,21 +186,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
 				<integer>0</integer>
-				<key>subtext</key>
-				<string>to Dot #{var:dot}</string>
-				<key>text</key>
-				<string>Append: {query}</string>
-				<key>withspace</key>
-				<true/>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>9823AB02-76C7-4449-9650-B778A002121E</string>
+			<string>433F8BB4-E803-4D88-9F71-B8C1C06B435B</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -232,43 +212,22 @@
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>68</integer>
+				<integer>0</integer>
 				<key>script</key>
 				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/quick-append.js</string>
+				<string></string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>E84312A1-E047-48A6-9789-ABB1023C9F8F</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>tot://{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
 			<string>778D7E9A-C113-4942-BC74-276C19AF6F0F</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -302,7 +261,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/tot-search.js</string>
+				<string>./scripts/todo-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -315,7 +274,7 @@
 			<key>inboundconfig</key>
 			<dict>
 				<key>externalid</key>
-				<string>tot-loop</string>
+				<string>loop</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
@@ -327,71 +286,8 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>📋 Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>3396F88B-AD4F-41F0-9FA7-ED8173F325FF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>05C47DFA-6E22-4EA4-A341-99651AEBD5AD</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/delete-tot.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>8DE6C12A-AD83-445A-BE00-709A9B916DFB</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>externaltriggerid</key>
-				<string>tot-loop</string>
+				<string>loop</string>
 				<key>passinputasargument</key>
 				<false/>
 				<key>passvariables</key>
@@ -409,12 +305,35 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/delete-todo.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>8DE6C12A-AD83-445A-BE00-709A9B916DFB</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
 				<string>{var:quicksave_keyword}</string>
 				<key>subtext</key>
-				<string>to Dot #{var:quicksave_dot}</string>
+				<string></string>
 				<key>text</key>
 				<string>Append: {query}</string>
 				<key>withspace</key>
@@ -451,6 +370,33 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>adduuid</key>
+				<false/>
+				<key>allowemptyfiles</key>
+				<true/>
+				<key>createintermediatefolders</key>
+				<true/>
+				<key>filename</key>
+				<string>{var:todotxt_filepath}</string>
+				<key>filetext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>relativepathmode</key>
+				<integer>0</integer>
+				<key>type</key>
+				<integer>2</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.writefile</string>
+			<key>uid</key>
+			<string>CC01C46B-1841-4552-94CB-2FDCD927C6D6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -460,9 +406,11 @@
 				<key>focusedappvariablename</key>
 				<string>focusedapp</string>
 				<key>hotkey</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>hotmod</key>
-				<integer>0</integer>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>S</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -483,7 +431,7 @@
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>68</integer>
+				<integer>0</integer>
 				<key>script</key>
 				<string></string>
 				<key>scriptargtype</key>
@@ -545,7 +493,7 @@
 						<key>matchmode</key>
 						<integer>1</integer>
 						<key>matchstring</key>
-						<string>com.iconfactory.Tot</string>
+						<string>com.descy.michael.TodoTxtMac</string>
 						<key>outputlabel</key>
 						<string>other</string>
 						<key>uid</key>
@@ -553,7 +501,7 @@
 					</dict>
 				</array>
 				<key>elselabel</key>
-				<string>Tot</string>
+				<string>TodoTxtMac</string>
 				<key>hideelse</key>
 				<false/>
 			</dict>
@@ -561,21 +509,6 @@
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>6BB0E44D-7589-40AE-B22B-A01E1E604B88</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>soundname</key>
-				<string>Basso</string>
-				<key>systemsound</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.playsound</string>
-			<key>uid</key>
-			<string>A9D543B9-9D71-4CF2-9269-623972B72F0F</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -612,7 +545,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/open-urls-tot.js</string>
+				<string>./scripts/open-urls-in-selected-todo.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -626,40 +559,22 @@
 	</array>
 	<key>readme</key>
 	<string>## Usage
-- Access your Dots via the keyword `tot`.
-	* &lt;kbd&gt;⏎&lt;/kbd&gt; Open the Dot.
-	* &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; Append to the Dot.
-	* &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; Copy the contents of the Dot.
-	* &lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; Delete the Dot.
+- Access your Dots via the keyword `todo`.
+	* &lt;kbd&gt;⏎&lt;/kbd&gt; Toggle completion of the todo.
+	* &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; Open any URL in the todo.
+	* &lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; Delete the todo.
+	* &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt; Snooze the todo (send to Reminders.app with due date tomorrow).
 - Quickly append to a pre-selected Dot via the keyword `qq`.
 - Configure the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) for quick appending to a configurable Dot.
 	* If a browser is frontmost, appends the current browser tab as Markdown link.
+	* If TodoTxtMac is frontmost, opens all URLs in the selected task
 	* In any other app, appends the selected text.
-	* If Tot is frontmost, opens all URLs in the current Dot instead.
 
 ---
 
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>05C47DFA-6E22-4EA4-A341-99651AEBD5AD</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>xpos</key>
-			<real>305</real>
-			<key>ypos</key>
-			<real>290</real>
-		</dict>
-		<key>3396F88B-AD4F-41F0-9FA7-ED8173F325FF</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>xpos</key>
-			<real>455</real>
-			<key>ypos</key>
-			<real>290</real>
-		</dict>
 		<key>3DBCAC53-D043-40E5-8BC7-17331F0676DA</key>
 		<dict>
 			<key>colorindex</key>
@@ -667,7 +582,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>Quick Append/Open</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
 			<real>640</real>
 		</dict>
@@ -678,9 +593,20 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>quick append</string>
 			<key>xpos</key>
-			<real>335</real>
+			<real>340</real>
 			<key>ypos</key>
 			<real>640</real>
+		</dict>
+		<key>433F8BB4-E803-4D88-9F71-B8C1C06B435B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>note</key>
+			<string>open URLs in todo</string>
+			<key>xpos</key>
+			<real>305</real>
+			<key>ypos</key>
+			<real>20</real>
 		</dict>
 		<key>49540ED2-DEDB-41DB-BF6B-FED0EB398A81</key>
 		<dict>
@@ -696,9 +622,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>4A5614C3-8944-4C7D-89FD-18313D7209F2</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>1</integer>
 			<key>xpos</key>
-			<real>605</real>
+			<real>610</real>
 			<key>ypos</key>
 			<real>745</real>
 		</dict>
@@ -707,9 +633,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>460</real>
+			<real>495</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>230</real>
 		</dict>
 		<key>6BB0E44D-7589-40AE-B22B-A01E1E604B88</key>
 		<dict>
@@ -718,7 +644,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>front app</string>
 			<key>xpos</key>
-			<real>201</real>
+			<real>180</real>
 			<key>ypos</key>
 			<real>660</real>
 		</dict>
@@ -727,16 +653,16 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>605</real>
+			<real>610</real>
 			<key>ypos</key>
-			<real>625</real>
+			<real>510</real>
 		</dict>
 		<key>778D7E9A-C113-4942-BC74-276C19AF6F0F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>note</key>
-			<string>open</string>
+			<string>toggle completed status</string>
 			<key>xpos</key>
 			<real>305</real>
 			<key>ypos</key>
@@ -751,16 +677,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>305</real>
 			<key>ypos</key>
-			<real>410</real>
-		</dict>
-		<key>9823AB02-76C7-4449-9650-B778A002121E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>xpos</key>
-			<real>305</real>
-			<key>ypos</key>
-			<real>30</real>
+			<real>290</real>
 		</dict>
 		<key>A57A67B5-BE58-4F12-91BF-B731B3EEEB75</key>
 		<dict>
@@ -769,53 +686,63 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>Quick Append</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
 			<real>495</real>
 		</dict>
-		<key>A9D543B9-9D71-4CF2-9269-623972B72F0F</key>
+		<key>CC01C46B-1841-4552-94CB-2FDCD927C6D6</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>750</real>
+			<real>610</real>
 			<key>ypos</key>
-			<real>745</real>
+			<real>625</real>
 		</dict>
 		<key>D5B2FECD-F5C9-405C-9595-34A812172444</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>485</real>
+			<real>490</real>
 			<key>ypos</key>
 			<real>660</real>
-		</dict>
-		<key>E84312A1-E047-48A6-9789-ABB1023C9F8F</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>note</key>
-			<string>append</string>
-			<key>xpos</key>
-			<real>465</real>
-			<key>ypos</key>
-			<real>30</real>
 		</dict>
 		<key>F63C35AB-EDD8-44D0-AE2E-D47352E8F9D1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>open URLs in current Tot</string>
+			<string>open URLs in current todo</string>
 			<key>xpos</key>
-			<real>335</real>
+			<real>340</real>
 			<key>ypos</key>
 			<real>780</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>~/Desktop/todo.txt</string>
+				<key>filtermode</key>
+				<integer>2</integer>
+				<key>placeholder</key>
+				<string>~/Desktop/todo.txt</string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>todo.txt filepath</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>todotxt_filepath</string>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -858,30 +785,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>variable</key>
 			<string>quicksave_keyword</string>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>-</string>
-				<key>placeholder</key>
-				<string>-</string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
-				<false/>
-			</dict>
-			<key>description</key>
-			<string>appending prefix</string>
-			<key>label</key>
-			<string></string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>append_prefix</string>
-		</dict>
 	</array>
 	<key>version</key>
-	<string>1.4.0</string>
+	<string>0.9</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

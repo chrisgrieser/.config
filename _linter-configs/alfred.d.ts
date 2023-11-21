@@ -18,7 +18,7 @@ declare class AlfredItem {
 	// biome-ignore lint/complexity/noBannedTypes: <explanation>
 	action?: string | string[] | Object;
 	subtitle?: string;
-	arg?: string | string[];
+	arg?: string | string[] | number;
 	valid?: boolean;
 	type?: "default" | "file" | "file:skipcheck";
 	match?: string;
