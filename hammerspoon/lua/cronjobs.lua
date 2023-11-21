@@ -42,15 +42,16 @@ M.timer_nightlyMaintenance = hs.timer
 	.doAt("01:00", "01d", function()
 		if os.date("%a") == "Sun" then hs.loadSpoon("EmmyLua") end
 
+		-- GUARD
 		local isSunTueThuSat = os.date("%w") % 2 == 0
 		if isSunTueThuSat then return end
 
 		-- stylua: ignore start
-		M.timer_bookmarksBackup = hs.task.new("./helpers/bookmark-bkp.sh", function(exitCode, _, stdErr)
+		M.task_bookmarksBackup = hs.task.new("./helpers/bookmark-bkp.sh", function(exitCode, _, stdErr)
 			local msg = exitCode == 0 and "✅ Bookmark Backup successful" or "⚠️ Bookmark Backup failed: " .. stdErr
 			u.notify(msg)
 		end):start()
-		M.timer_dotfileBackup = hs.task.new("./helpers/dotfile-bkp.sh", function(exitCode, _, stdErr)
+		M.task_dotfileBackup = hs.task.new("./helpers/dotfile-bkp.sh", function(exitCode, _, stdErr)
 			local msg = exitCode == 0 and "✅ Dotfile Backup successful" or "⚠️ Dotfile Backup failed: " .. stdErr
 			u.notify(msg)
 		end):start()
@@ -58,14 +59,6 @@ M.timer_nightlyMaintenance = hs.timer
 		-- stylua: ignore end
 	end, true)
 	:start()
-
--- stylua: ignore
-M.timer_todotxtBackup = hs.timer.doAt("01:00", "01d", function()
-	M.timer_todotxtBackup = hs.task.new("./helpers/todotxt-bkp.sh", function(exitCode, _, stdErr)
-		local msg = exitCode == 0 and "✅ Todo.txt Backup successful" or "⚠️ Todo.txt Backup failed: " .. stdErr
-		u.notify(msg)
-	end):start()
-end, true):start()
 
 --------------------------------------------------------------------------------
 -- SLEEP TIMER

@@ -185,7 +185,7 @@ return {
 					local useLsp = vim.tbl_contains(lspFormatting, vim.bo.ft) and "always" or false
 					require("conform").format {
 						lsp_fallback = useLsp,
-						async = true,
+						async = false,
 						callback = vim.cmd.update,
 					}
 				end,

@@ -2,9 +2,13 @@ local M = {} -- persist from garbage collector
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 
+--------------------------------------------------------------------------------
+-- REMINDERS TO TODOTXT
+
 ---@async
 local function remindersToTodotxt()
-	M.task_pushReminder = hs.task -- run as hs.task so it's not blocking
+	M.task_pushReminder = hs.task
+		-- run as hs.task so it's not blocking
 		.new("./helpers/push-todays-reminders-to-todotxt.js", function(exitCode, stdout, stderr)
 			if stdout == "" then return end
 			local msg = exitCode == 0 and "✅ Added todos: " .. stdout
@@ -14,9 +18,7 @@ local function remindersToTodotxt()
 		:start()
 end
 
---------------------------------------------------------------------------------
-
--- TRIGGERS
+-- triggers
 -- 1. systemstart
 if u.isSystemStart() then remindersToTodotxt() end
 
@@ -35,6 +37,20 @@ M.caff_wake = c.new(function(event)
 
 	u.runWithDelays(2.5, function() M.recentlyWoke = false end)
 end):start()
+
+--------------------------------------------------------------------------------
+-- BACKUP
+
+-- CONFIG
+local backupFreqHours = 2
+
+-- stylua: ignore
+M.timer_todotxtBackup = hs.timer.doEvery(backupFreqHours * 3600, function()
+	M.task_todotxtBackup = hs.task.new("./helpers/todotxt-bkp.sh", function(exitCode, _, stdErr)
+		local msg = exitCode == 0 and "✅ Todo.txt Backup successful" or "⚠️ Todo.txt Backup failed: " .. stdErr
+		u.notify(msg)
+	end):start()
+end, true):start()
 
 --------------------------------------------------------------------------------
 return M
