@@ -55,10 +55,10 @@ function relativeDate(absoluteDate) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const query = argv[0] || "";
-
-
-
 	if (!query) return;
+
+
+
 	const apiURL = `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}`;
 
 	/** @type {AlfredItem[]} */
