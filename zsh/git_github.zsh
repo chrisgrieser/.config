@@ -1,19 +1,19 @@
 #!/usr/bin/env zsh
 
-alias co="git checkout"
+alias co='git checkout'
 alias gs='git status'
-alias ga="git add"
-alias gaa="git add --all"
+alias ga='git add'
+alias gaa='git add --all'
 
-alias gd="git diff"
-alias gt="git stash push && git stash show 0"
-alias gT="git stash pop"
+alias gd='git diff'
+alias gt='git stash push && git stash show 0'
+alias gT='git stash pop'
 
 alias grh='git reset --hard'
-alias push="git push"
-alias pull="git pull"
-alias rebase="git rebase --interactive"
-alias unshallow="git fetch --unshallow" # make shallow clone complete again
+alias push='git push'
+alias pull='git pull'
+alias rebase='git rebase --interactive'
+alias unshallow='git fetch --unshallow' # make shallow clone complete again
 
 # remote info
 alias grem='git remote -v && echo -n "\`gh\` default: " && gh repo set-default --view'
@@ -64,7 +64,7 @@ _gc() {
 		"test" "build" "ci" "revert" "improv" "break")
 	local expl
 	_description -V conventional-commit expl 'Conventional Commit Keyword'
-	compadd "${expl[@]}" -P'"' -S":" -- "${cc[@]}"
+	compadd "${expl[@]}" -S":" -- "${cc[@]}"
 }
 compdef _gc gc
 
@@ -211,7 +211,7 @@ function deletefork {
 	else
 		# INFO `gh repo delete` disallows multiple deletions at once
 		# shellcheck disable=2001
-		cmd=$(echo "$to_delete" | sed 's/^/gh repo delete --yes /')
+		cmd=$(echo "$to_delete" | sed 's/^/gh repo delete /')
 		echo "Copied command to batch deleted forks."
 		echo "$cmd" | pbcopy
 	fi
