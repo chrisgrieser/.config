@@ -1,21 +1,21 @@
 #!/bin/zsh
 
+# CONFIG
 max_number_of_bkps=5
+bkp_destination="$DATA_DIR/Backups/dotfile bkp" # DATA_DIR defined in zshenv
+dotfile_location="$HOME/.config"
 
 #───────────────────────────────────────────────────────────────────────────────
 
 timestamp=$(date '+%Y-%m-%d_%H-%M')
-bkp_destination="$DATA_DIR/Backups/dotfile bkp" # DATA_DIR defined in zshenv
-mkdir -p "$bkp_destination"
 backup_file="$bkp_destination/dotfile-bkp_$timestamp.zip"
 
 # directory change necessary to avoid zipping root folder
 # https://unix.stackexchange.com/questions/245856/zip-a-file-without-including-the-parent-directory
-[[ -e "$bkp_destination" ]] || mkdir -p "$bkp_destination"
-cd "$HOME/.config" || return 1
-# hidden files on the first level have to named explicitly since not matched
-# by globbing
-zip -r --quiet "$backup_file" ./* ./.{gitmodule,gitignore}
+mkdir -p "$bkp_destination"
+cd "$dotfile_location" || return 1
+setopt globdots
+zip -r --quiet "$backup_file" ./*
 
 #───────────────────────────────────────────────────────────────────────────────
 
