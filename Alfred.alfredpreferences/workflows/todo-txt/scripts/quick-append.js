@@ -68,7 +68,7 @@ function run(argv) {
 
 	// determine text
 	let text = "\n" + selectedText;
-	if (isBrowser) {
+	if (isBrowser && !keywordUsed) {
 		const { url, title } = browserTab();
 		const mdlink = `[${title}](${url})`;
 		const sep = selectedText ? " " : "";

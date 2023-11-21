@@ -3,6 +3,12 @@
 
 # editorconfig-checker-disable
 matches:
+  - trigger: "!front"
+    replace: |
+      if frontmost of application "$|$" then
+
+      end if
+    label: 🍏 Check whether App is frontmost
   - trigger: "!menu"
     replace: |
       tell application "System Events" to tell process "$|$"

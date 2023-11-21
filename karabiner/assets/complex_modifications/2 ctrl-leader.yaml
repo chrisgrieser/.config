@@ -41,17 +41,20 @@ rules:
         to_if_alone:
           - *activate-leader
           - *set-notice
-      # 2x L-Ctrl: Tot
+      # 2x L-Ctrl: todotxt
       - type: basic
         from: { key_code: left_control }
         conditions: [*leader-active]
         to_if_alone:
-          - { key_code: f19 }
+          - shell_command: |
+              osascript -e '
+                if (application "TodoTxtMac" is frontmost) then
+                  tell application "TodoTxtMac" to quit
+                else
+                  tell application "TodoTxtMac" to activate
+                end if'
           - *deactivate-leader
           - *remove-notice
-          # open tot if not running, since toggle-key only works with tot open
-          # (adding this at the end, to reduce delay)
-          - shell_command: pgrep -xq "Tot" || open -a "Tot"
       # Cancel (Hyper/Esc)
       - type: basic
         from: { key_code: caps_lock }
