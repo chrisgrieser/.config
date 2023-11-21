@@ -10,6 +10,19 @@
 	<dict>
 		<key>1D7C8259-A4E3-440B-9383-91B0F36836D4</key>
 		<array/>
+		<key>360A6295-1C41-4E81-964A-5269637C7DC3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CC2BDF8B-DFC2-4DBC-BCDC-D40E563F4370</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>3DBCAC53-D043-40E5-8BC7-17331F0676DA</key>
 		<array>
 			<dict>
@@ -67,6 +80,16 @@
 				<string>⌃: Delete Tot</string>
 				<key>vitoclose</key>
 				<true/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>CC2BDF8B-DFC2-4DBC-BCDC-D40E563F4370</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: Snooze Task</string>
+				<key>vitoclose</key>
+				<false/>
 			</dict>
 		</array>
 		<key>4A5614C3-8944-4C7D-89FD-18313D7209F2</key>
@@ -127,6 +150,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>3E08FF65-F031-447F-B9F6-47F8F507D79B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>CC2BDF8B-DFC2-4DBC-BCDC-D40E563F4370</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8407822E-86B9-435F-9065-0F60A62FDC27</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -322,6 +358,85 @@
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>8DE6C12A-AD83-445A-BE00-709A9B916DFB</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>✅ {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>8407822E-86B9-435F-9065-0F60A62FDC27</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>1</integer>
+				<key>hotmod</key>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>S</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.descy.michael.TodoTxtMac</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>360A6295-1C41-4E81-964A-5269637C7DC3</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/snooze-to-reminders.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>CC2BDF8B-DFC2-4DBC-BCDC-D40E563F4370</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -586,6 +701,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>30</real>
 		</dict>
+		<key>360A6295-1C41-4E81-964A-5269637C7DC3</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>snooze one day</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>450</real>
+		</dict>
 		<key>3DBCAC53-D043-40E5-8BC7-17331F0676DA</key>
 		<dict>
 			<key>colorindex</key>
@@ -593,9 +719,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>Quick Append/Open</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>640</real>
+			<real>750</real>
 		</dict>
 		<key>3E08FF65-F031-447F-B9F6-47F8F507D79B</key>
 		<dict>
@@ -604,9 +730,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>quick append</string>
 			<key>xpos</key>
-			<real>340</real>
+			<real>335</real>
 			<key>ypos</key>
-			<real>640</real>
+			<real>750</real>
 		</dict>
 		<key>49540ED2-DEDB-41DB-BF6B-FED0EB398A81</key>
 		<dict>
@@ -624,9 +750,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>610</real>
+			<real>605</real>
 			<key>ypos</key>
-			<real>745</real>
+			<real>855</real>
 		</dict>
 		<key>4AFA85BA-5CEE-4E1B-AF02-4DE9615967E6</key>
 		<dict>
@@ -644,18 +770,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>front app</string>
 			<key>xpos</key>
-			<real>180</real>
+			<real>175</real>
 			<key>ypos</key>
-			<real>660</real>
+			<real>770</real>
 		</dict>
 		<key>75635E54-B997-49F2-8E90-9EE10283A669</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>610</real>
+			<real>605</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>620</real>
 		</dict>
 		<key>778D7E9A-C113-4942-BC74-276C19AF6F0F</key>
 		<dict>
@@ -667,6 +793,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>305</real>
 			<key>ypos</key>
 			<real>155</real>
+		</dict>
+		<key>8407822E-86B9-435F-9065-0F60A62FDC27</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>410</real>
+			<key>ypos</key>
+			<real>450</real>
 		</dict>
 		<key>8DE6C12A-AD83-445A-BE00-709A9B916DFB</key>
 		<dict>
@@ -686,27 +821,38 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>Quick Append</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>495</real>
+			<real>605</real>
 		</dict>
 		<key>CC01C46B-1841-4552-94CB-2FDCD927C6D6</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>610</real>
+			<real>605</real>
 			<key>ypos</key>
-			<real>625</real>
+			<real>735</real>
+		</dict>
+		<key>CC2BDF8B-DFC2-4DBC-BCDC-D40E563F4370</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>snooze</string>
+			<key>xpos</key>
+			<real>235</real>
+			<key>ypos</key>
+			<real>450</real>
 		</dict>
 		<key>D5B2FECD-F5C9-405C-9595-34A812172444</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>490</real>
+			<real>485</real>
 			<key>ypos</key>
-			<real>660</real>
+			<real>770</real>
 		</dict>
 		<key>F63C35AB-EDD8-44D0-AE2E-D47352E8F9D1</key>
 		<dict>
@@ -715,9 +861,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>open URLs in current todo</string>
 			<key>xpos</key>
-			<real>340</real>
+			<real>335</real>
 			<key>ypos</key>
-			<real>780</real>
+			<real>890</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
