@@ -405,7 +405,7 @@
 				<integer>2</integer>
 				<key>relatedApps</key>
 				<array>
-					<string>com.descy.michael.TodoTxtMac</string>
+					<string>com.descy.michael.SwiftoDoDesktopLegacy</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>1</integer>
@@ -473,7 +473,7 @@
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>✅ Appended to Dot #{var:quicksave_dot}</string>
+				<string>✅ Added todo</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>

@@ -55,11 +55,10 @@ sketchybar \
 	--subscribe github_notif update-github-notifications \
 	--subscribe github_notif system_work \
 	\
-	--add item tot $first_row \
-	--set tot script="$plugin_dir/tot-count.sh" \
-	--add event update-tot-count \
-	--subscribe tot update-tot-count \
-	--subscribe tot system_woke \
+	--add item todotxt $first_row \
+	--set todotxt todotxt update_freq=60 \
+	script="$plugin_dir/todotxt-count.sh" \
+	--subscribe todotxt system_woke \
 	\
 	--add alias "$stats" $second_row \
 	alias.color="$font_color" \

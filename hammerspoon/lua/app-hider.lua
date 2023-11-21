@@ -64,6 +64,7 @@ end
 M.transBgAppWatcher = aw.new(function(appName, event, appObj)
 	if env.isProjector() then return end
 	if event == aw.terminated then
+		if appName == "Reminders" then return end -- Reminders often opening in the background
 		unHideAll()
 	elseif event == aw.activated and u.tbl_contains(transBgApps, appName) then
 		u.whenAppWinAvailable(appName, function() hideOthers(appObj) end)

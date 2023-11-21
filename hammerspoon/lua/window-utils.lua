@@ -186,7 +186,7 @@ local function controlSpaceAction()
 	local curWin = hs.window.focusedWindow()
 	local pos
 
-	if u.isFront { "Reminders", "TodoTxtMac" } then
+	if u.isFront { "Reminders", env.todoApp } then
 		pos = M.CheckSize(curWin, M.smallCenter) and M.centerHalf or M.smallCenter
 	elseif u.isFront { "Finder", "Script Editor" } then
 		pos = M.CheckSize(curWin, M.centerHalf) and M.maximized or M.centerHalf

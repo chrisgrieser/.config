@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
 alias co="git checkout"
+alias gs='git status'
 alias ga="git add"
 alias gaa="git add --all"
 
