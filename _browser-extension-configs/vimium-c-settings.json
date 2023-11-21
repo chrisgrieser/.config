@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "11/21/2023, 11:43:46 AM",
-	"time": 1700563426943,
+	"@time": "11/21/2023, 3:06:08 PM",
+	"time": 1700575568508,
 	"environment": {
 		"extension": "1.99.994",
 		"platform": "mac",
@@ -62,7 +62,7 @@
 		""
 	],
 	"grabBackFocus": true,
-	"keyLayout": 129,
+	"keyLayout": 154,
 	"keyMappings": [
 		"#!no-check",
 		"\" combine commands: \" https://github.com/gdh1995/vimium-c/wiki/Auto-run-a-tree-of-commands#open-vomnibar-after-creating-a-new-tab",
@@ -169,7 +169,6 @@
 		"",
 		"\" Help",
 		"map ? showHelp",
-		"map ! showTip",
 		"map , focusOrLaunch url=\"chrome-extension://hfjbmagddngcpeloejdejnfgbamkjaeg/pages/options.html\"",
 		""
 	],
@@ -190,6 +189,7 @@
 	],
 	"vimSync": true,
 	"waitForEnter": false,
-	"ignoreKeyboardLayout": 2,
+	"ignoreKeyboardLayout": 1,
+	"ignoreCapsLock": 2,
 	"mapModifier": 2
 }
