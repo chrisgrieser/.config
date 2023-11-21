@@ -34,7 +34,7 @@ function run() {
 			const urls = item.match(urlRegex);
 			let urlOpenSubtitle = urls ? "⌘: Open URL" : "🚫 No URL in the todo.";
 			const completed = item.startsWith("x") ? "completed" : "";
-			if (!completed)
+			if (!completed) urlOpenSubtitle += " & mark as completed"
 			const displayText = completed ? unicodeStrikethough(item) : item;
 
 			return {
