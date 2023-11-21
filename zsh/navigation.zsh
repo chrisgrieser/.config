@@ -36,6 +36,7 @@ function bookmark {
 }
 
 function unbookmark {
+	[[ -z "$1" ]] && return
 	rm "$bookmark_path/$1" && echo "Removed Bookmark: $1"
 }
 
