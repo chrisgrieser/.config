@@ -338,7 +338,8 @@ return {
 		config = telescopeConfig,
 	},
 	{ -- Icon Picker
-		"nvim-telescope/telescope-symbols.nvim",
+		"chrisgrieser/telescope-symbols.nvim",
+		branch = "dev", -- PENDING https://github.com/nvim-telescope/telescope-symbols.nvim/pull/17
 		keys = {
 			{
 				"<D-ö>",

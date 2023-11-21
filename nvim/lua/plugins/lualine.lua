@@ -111,7 +111,7 @@ local lualineConfig = {
 		lualine_z = {
 			{ "selectioncount", fmt = function(str) return str ~= "" and "礪" .. str or "" end },
 			"location",
-			{ function() return "" end },
+			{ function() return "" end, padding = { left = 0, right = 1 } },
 		},
 	},
 	options = {
