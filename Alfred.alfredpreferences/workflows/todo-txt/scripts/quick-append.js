@@ -18,7 +18,7 @@ function frontBrowser() {
 	const isWebKit = webkitVariants.some((appName) => frontAppName.startsWith(appName));
 
 	if (isChromium) return "chromium";
-	else if (isWebKit) return "webkit";
+	if (isWebKit) return "webkit";
 	return "no browser";
 }
 
@@ -49,11 +49,6 @@ function browserTab() {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
-	const tot = Application("Tot");
-	tot.includeStandardAdditions = true;
-
-	const quicksaveDot = $.getenv("quicksave_dot");
-	const appendPrefix = $.getenv("append_prefix");
 	const isBrowser = frontBrowser() !== "no browser";
 
 	// get selected text
@@ -72,27 +67,12 @@ function run(argv) {
 	if (!(selectedText || isBrowser)) return "";
 
 	// determine text
-	let text = "\n" + appendPrefix + selectedText;
+	let text = "\n" + selectedText;
 	if (isBrowser) {
 		const { url, title } = browserTab();
 		const mdlink = `[${title}](${url})`;
 		const sep = selectedText ? " " : "";
 		text += sep + mdlink;
 	}
-
-	// append
-	const empty = tot.openLocation(`tot://${quicksaveDot}/content`).match(/^\s*$/);
-	if (empty) {
-		text.trim(); 
-		tot.openLocation(`tots://${quicksaveDot}/replace?text=${encodeURIComponent(text)}`);
-	} else {
-		tot.openLocation(`tots://${quicksaveDot}/append?text=${encodeURIComponent(text)}`);
-	} 
-
-	// hide the app
-	const totProcess = Application("System Events").applicationProcesses.byName("Tot");
-	totProcess.visible = false
-
-	// Pass for Alfred notification
-	return text;
+	return text; // Pass for Alfred
 }
