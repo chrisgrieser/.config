@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>de.chris-grieser.tot</string>
+	<string>com.grieser.todotxt</string>
 	<key>category</key>
 	<string>⭐️</string>
 	<key>connections</key>
@@ -200,11 +200,11 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>Tot.app Integration for Alfred</string>
+	<string>todo.txt for Alfred</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Tot</string>
+	<string>todo.txt</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -451,6 +451,35 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<true/>
+				<key>focusedappvariablename</key>
+				<string>focusedapp</string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>3DBCAC53-D043-40E5-8BC7-17331F0676DA</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -470,69 +499,6 @@
 			<string>3E08FF65-F031-447F-B9F6-47F8F507D79B</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<true/>
-				<key>focusedappvariablename</key>
-				<string>focusedapp</string>
-				<key>hotkey</key>
-				<integer>1</integer>
-				<key>hotmod</key>
-				<integer>1966080</integer>
-				<key>hotstring</key>
-				<string>S</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>3DBCAC53-D043-40E5-8BC7-17331F0676DA</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:focusedapp}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>1</integer>
-						<key>matchstring</key>
-						<string>com.iconfactory.Tot</string>
-						<key>outputlabel</key>
-						<string>other</string>
-						<key>uid</key>
-						<string>AA46D100-FBE5-4DE6-8B1F-0533A8C9ED90</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>Tot</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>6BB0E44D-7589-40AE-B22B-A01E1E604B88</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -563,6 +529,38 @@
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>D5B2FECD-F5C9-405C-9595-34A812172444</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:focusedapp}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>1</integer>
+						<key>matchstring</key>
+						<string>com.iconfactory.Tot</string>
+						<key>outputlabel</key>
+						<string>other</string>
+						<key>uid</key>
+						<string>AA46D100-FBE5-4DE6-8B1F-0533A8C9ED90</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>Tot</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>6BB0E44D-7589-40AE-B22B-A01E1E604B88</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -822,9 +820,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>tot</string>
+				<string>todo</string>
 				<key>placeholder</key>
-				<string>tot</string>
+				<string>todo</string>
 				<key>required</key>
 				<true/>
 				<key>trim</key>
@@ -833,30 +831,11 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>description</key>
 			<string>keyword</string>
 			<key>label</key>
-			<string>Show Dots</string>
+			<string>Show todos</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>keyword</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<false/>
-				<key>required</key>
-				<false/>
-				<key>text</key>
-				<string>include</string>
-			</dict>
-			<key>description</key>
-			<string>empty dots</string>
-			<key>label</key>
-			<string></string>
-			<key>type</key>
-			<string>checkbox</string>
-			<key>variable</key>
-			<string>include_empty_dots</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -883,52 +862,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>1</string>
-				<key>pairs</key>
-				<array>
-					<array>
-						<string>1</string>
-						<string>1</string>
-					</array>
-					<array>
-						<string>2</string>
-						<string>2</string>
-					</array>
-					<array>
-						<string>3</string>
-						<string>3</string>
-					</array>
-					<array>
-						<string>4</string>
-						<string>4</string>
-					</array>
-					<array>
-						<string>5</string>
-						<string>5</string>
-					</array>
-					<array>
-						<string>6</string>
-						<string>6</string>
-					</array>
-					<array>
-						<string>7</string>
-						<string>7</string>
-					</array>
-				</array>
-			</dict>
-			<key>description</key>
-			<string>Dot to append to.</string>
-			<key>label</key>
-			<string></string>
-			<key>type</key>
-			<string>popupbutton</string>
-			<key>variable</key>
-			<string>quicksave_dot</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
 				<string>-</string>
 				<key>placeholder</key>
 				<string>-</string>
@@ -945,27 +878,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>append_prefix</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>🟡,🟠,🔴,🟣,🔵,⚪,🟢</string>
-				<key>placeholder</key>
-				<string>🟡,🟠,🔴,🟣,🔵,⚪,🟢</string>
-				<key>required</key>
-				<true/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>If you changed your tot theme, you can specify a comma-separated list of 7 emojis used to indicate your custom tot colors.</string>
-			<key>label</key>
-			<string>Tot colors</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>tot_icons</string>
 		</dict>
 	</array>
 	<key>version</key>

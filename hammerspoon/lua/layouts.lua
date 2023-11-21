@@ -75,7 +75,7 @@ local function workLayout()
 	u.openApps("Tot")
 	u.whenAppWinAvailable(
 		"Tot",
-		function() wu.moveResize(u.app("Tot"):mainWindow(), wu.totCenter) end
+		function() wu.moveResize(u.app("Tot"):mainWindow(), wu.smallCenter) end
 	)
 	u.restartApp("AltTab") -- FIX duplicate items
 
@@ -93,6 +93,7 @@ local function movieLayout()
 	u.openApps { "YouTube", "BetterTouchTool" }
 	u.quitApps {
 		"Tot",
+		"TodoTxtMac",
 		"neovide",
 		"Slack",
 		"Discord",
@@ -131,6 +132,7 @@ M.wf_appsOnMouseScreen = wf.new({
 	"Finder",
 	"ReadKit",
 	"Slack",
+	"TodoTxtMac",
 	"Tot",
 	"IINA",
 	"WezTerm",

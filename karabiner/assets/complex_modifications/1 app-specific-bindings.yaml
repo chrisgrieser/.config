@@ -214,7 +214,22 @@ rules:
             modifiers: [command, control]
           - shell_command: "osascript -e 'display notification \"Tool\" with title \"Yellow Highlight \U0001F7E8\"'"
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
-  #───────────────────────────────────────────────────────────────────────
+      # Rename
+      - type: basic
+        from: { key_code: r, modifiers: { mandatory: [control] } }
+        to:
+          - shell_command: |
+              osascript -e '
+                tell application "System Events" to tell (first process where it is frontmost)
+                  click menu item "Show Toolbar" of menu "View" of menu bar 1
+                  click menu item "Rename…" of menu "File" of menu bar 1
+                end tell'
+        conditions: 
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^net\.highlightsapp\.universal$
+              - ^com\.apple\.Preview$
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Brave"
     manipulators:
       # Toggle Vertical Tab Sidebar
