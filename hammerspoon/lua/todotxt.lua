@@ -7,8 +7,8 @@ local u = require("lua.utils")
 
 ---@async
 local function remindersToTodotxt()
-	M.task_pushReminder = hs.task
-		-- run as hs.task so it's not blocking
+	M.task_pushReminder = hs
+		.task -- run as hs.task so it's not blocking
 		.new("./helpers/push-todays-reminders-to-todotxt.js", function(exitCode, stdout, stderr)
 			if stdout == "" then return end
 			local msg = exitCode == 0 and "✅ Added todos: " .. stdout
@@ -47,8 +47,7 @@ local backupFreqHours = 2
 -- stylua: ignore
 M.timer_todotxtBackup = hs.timer.doEvery(backupFreqHours * 3600, function()
 	M.task_todotxtBackup = hs.task.new("./helpers/todotxt-bkp.sh", function(exitCode, _, stdErr)
-		local msg = exitCode == 0 and "✅ Todo.txt Backup successful" or "⚠️ Todo.txt Backup failed: " .. stdErr
-		u.notify(msg)
+		if exitCode ~= 0 then u.notify("⚠️ todo.txt Backup failed: " .. stdErr) end
 	end):start()
 end, true):start()
 
