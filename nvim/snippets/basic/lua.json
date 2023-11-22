@@ -98,7 +98,7 @@
 			"---read the full file",
 			"---@param filePath string",
 			"---@return string|nil nil on error",
-			"local function writeToFile(filePath, str)",
+			"local function readFile(filePath, str)",
 			"\tlocal content, _ = io.open(filePath, \"r\")",
 			"\tif not content then return end",
 			"\tfile:close()",

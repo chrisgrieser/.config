@@ -45,11 +45,8 @@ local isAtOffice = (host:find("mini") or host:find("eduroam") or host:find("fak1
 local isAtMother = host:find("Mother") ~= nil
 
 local fontSize = 28
-if isAtMother then
-	fontSize = 26
-elseif isAtOffice then
-	fontSize = 30
-end
+if isAtMother then fontSize = 26 end
+if isAtOffice then fontSize = 30 end
 
 --------------------------------------------------------------------------------
 -- SET WINDOW POSITION ON STARTUP
@@ -242,8 +239,8 @@ local config = {
 
 	-- Start/Close
 	default_cwd = wt.home_dir .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/",
-	quit_when_all_windows_are_closed = true,
 	window_close_confirmation = "NeverPrompt",
+	quit_when_all_windows_are_closed = true,
 
 	-- Mouse & Cursor
 	hide_mouse_cursor_when_typing = true,
@@ -263,7 +260,7 @@ local config = {
 	},
 	font_size = fontSize,
 	command_palette_font_size = fontSize,
-	char_select_font_size = fontSize,
+	char_select_font_size = fontSize, -- emoji picker
 	adjust_window_size_when_changing_font_size = false,
 
 	-- Appearance
@@ -278,7 +275,7 @@ local config = {
 	bold_brightens_ansi_colors = "BrightAndBold",
 	max_fps = isAtMother and 40 or 60,
 
-	-- remove titlebar, but keep macOS traffic lights. Doing so enables 
+	-- remove titlebar, but keep macOS traffic lights. Doing so enables
 	-- some macOS window bar window-related functionality, like split commands
 	-- (used by Hammerspoon)
 	window_decorations = "INTEGRATED_BUTTONS|RESIZE",

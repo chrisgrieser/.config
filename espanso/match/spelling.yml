@@ -384,3 +384,7 @@ matches:
     replace: ignore
     propagate_case: true
     word: true
+  - trigger: habe
+    replace: ahbe
+    propagate_case: true
+    word: true

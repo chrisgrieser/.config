@@ -65,19 +65,19 @@
 				<key>destinationuid</key>
 				<string>778D7E9A-C113-4942-BC74-276C19AF6F0F</string>
 				<key>modifiers</key>
-				<integer>0</integer>
+				<integer>262144</integer>
 				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌃: Toggle Completed</string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>8DE6C12A-AD83-445A-BE00-709A9B916DFB</string>
+				<string>EF867FE5-9D1C-425C-99AE-43926F6FFD37</string>
 				<key>modifiers</key>
-				<integer>262144</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌃: Delete Tot</string>
+				<string></string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -94,6 +94,19 @@
 		</array>
 		<key>4A5614C3-8944-4C7D-89FD-18313D7209F2</key>
 		<array/>
+		<key>6987CE85-CF8B-49DF-B005-D86823838E77</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4AFA85BA-5CEE-4E1B-AF02-4DE9615967E6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>6BB0E44D-7589-40AE-B22B-A01E1E604B88</key>
 		<array>
 			<dict>
@@ -132,17 +145,17 @@
 				<false/>
 			</dict>
 		</array>
-		<key>8DE6C12A-AD83-445A-BE00-709A9B916DFB</key>
+		<key>959FD6BF-FE47-4CCE-9E23-5E13C69B99EE</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>4AFA85BA-5CEE-4E1B-AF02-4DE9615967E6</string>
+				<string>6987CE85-CF8B-49DF-B005-D86823838E77</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 		<key>A57A67B5-BE58-4F12-91BF-B731B3EEEB75</key>
@@ -200,6 +213,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>4A5614C3-8944-4C7D-89FD-18313D7209F2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>EF867FE5-9D1C-425C-99AE-43926F6FFD37</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>959FD6BF-FE47-4CCE-9E23-5E13C69B99EE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -350,16 +376,52 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/delete-todo.sh</string>
+				<string>./scripts/update-todo.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>8DE6C12A-AD83-445A-BE00-709A9B916DFB</string>
+			<string>6987CE85-CF8B-49DF-B005-D86823838E77</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string>{query}</string>
+				<key>text</key>
+				<string>New text:</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>959FD6BF-FE47-4CCE-9E23-5E13C69B99EE</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{var:text}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>EF867FE5-9D1C-425C-99AE-43926F6FFD37</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -759,9 +821,20 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>495</real>
+			<real>625</real>
 			<key>ypos</key>
-			<real>230</real>
+			<real>210</real>
+		</dict>
+		<key>6987CE85-CF8B-49DF-B005-D86823838E77</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>note</key>
+			<string>update todo</string>
+			<key>xpos</key>
+			<real>460</real>
+			<key>ypos</key>
+			<real>290</real>
 		</dict>
 		<key>6BB0E44D-7589-40AE-B22B-A01E1E604B88</key>
 		<dict>
@@ -803,12 +876,10 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>450</real>
 		</dict>
-		<key>8DE6C12A-AD83-445A-BE00-709A9B916DFB</key>
+		<key>959FD6BF-FE47-4CCE-9E23-5E13C69B99EE</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
-			<key>note</key>
-			<string>delete</string>
 			<key>xpos</key>
 			<real>305</real>
 			<key>ypos</key>
@@ -853,6 +924,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>485</real>
 			<key>ypos</key>
 			<real>770</real>
+		</dict>
+		<key>EF867FE5-9D1C-425C-99AE-43926F6FFD37</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>note</key>
+			<string>insert line text</string>
+			<key>xpos</key>
+			<real>240</real>
+			<key>ypos</key>
+			<real>320</real>
 		</dict>
 		<key>F63C35AB-EDD8-44D0-AE2E-D47352E8F9D1</key>
 		<dict>
