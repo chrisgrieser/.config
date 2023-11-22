@@ -7,7 +7,7 @@
 # ansi colors               https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#256-colors
 #───────────────────────────────────────────────────────────────────────────────
 
-# FORMAT
+# FORMAT / COLOR
 # color completion groups with purple-gray background (ccc.nvim highlight is wrong)
 zstyle ':completion:*:descriptions' format $'\e[7;38;5;103m %d \e[0;38;5;103m \e[0m'
 
@@ -30,21 +30,15 @@ zstyle ':completion:*:warnings' format ""
 
 bindkey '\t' menu-select                            # <Tab> next item
 bindkey -M menuselect '^[[Z' reverse-menu-complete  # <S-Tab> prev suggestion
-bindkey -M menuselect '\r'   .accept-line           # <CR> select & execute
+bindkey -M menuselect '\r' .accept-line             # <CR> select & execute
 bindkey -M menuselect '^[[A' vi-backward-blank-word # <Up> prev group
 bindkey -M menuselect '^[[B' vi-forward-blank-word  # <Down> next group
 
 #───────────────────────────────────────────────────────────────────────────────
-# BEHAVIOR
+# SORT
 
-# ignore
-zstyle ':completion:*' ignored-patterns \
-	".DS_Store" ".git" "node_modules" "__pycache__"
-
-# sort
 zstyle ':completion:*' file-sort modification follow # "follow" makes it follow symlinks
 
-# group order
 # INFO "path-directories" changes the order of "directories in cdpath"
 zstyle ':completion:*' group-order \
 	all-expansions expansions options \
@@ -54,5 +48,15 @@ zstyle ':completion:*' group-order \
 
 #────────────────────────────────────────────────────────────────────────────
 
-# ZSH-AUTOCOMPLETE
-zstyle ':autocomplete:*' ignored-input '..d'
+# IGNORE
+# remove the _ignored completer set by zsh-autocomplete, so things ignored by
+# `ignored-patterns` take effect (https://stackoverflow.com/a/67510126)
+zstyle ':completion:*' completer \
+	_expand _complete _correct _approximate _complete:-fuzzy _prefix
+
+zstyle ':completion:*' ignored-patterns \
+	".git" ".DS_Store" "node_modules" "__pycache__"
+
+zstyle ':autocomplete:*' ignored-input '..d' # zsh-autocomplete
+
+#───────────────────────────────────────────────────────────────────────────────
