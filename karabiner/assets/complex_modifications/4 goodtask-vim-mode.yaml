@@ -1,0 +1,184 @@
+# yaml-language-server: $schema=./schema/karabiner-mod-schema.json
+title: Vim Mode for GoodTask
+anchors:
+  - conditions:
+      - &goodtask-insert-mode
+        type: variable_if
+        name: GOODTASK_INSERT_MODE
+        value: true
+      - &goodtask-normal-mode
+        type: variable_unless
+        name: GOODTASK_INSERT_MODE
+        value: true
+      - &goodtask-edit-mode
+        type: variable_if
+        name: GOODTASK_EDIT_MODE
+        value: true
+      - &not-edit-mode
+        type: variable_unless
+        name: GOODTASK_EDIT_MODE
+        value: true
+      - &goodtask-app
+        type: frontmost_application_if
+        bundle_identifiers: [^com\.hahainteractive\.GoodTask3Mac$]
+      - &german-keyboard
+        type: input_source_if
+        input_sources: [language: ^de$]
+  - to:
+      - &enter-normal-mode
+        set_variable:
+          name: GOODTASK_INSERT_MODE
+          value: false
+      - &enter-insert-mode
+        set_variable:
+          name: GOODTASK_INSERT_MODE
+          value: true
+      - &enter-edit-mode
+        set_variable:
+          name: GOODTASK_EDIT_MODE
+          value: true
+      - &leave-edit-mode
+        set_variable:
+          name: GOODTASK_EDIT_MODE
+          value: false
+      - &remove-notice
+        set_notification_message:
+          id: goodtask-vim-notice
+          text: ""
+      - &set-notice
+        set_notification_message:
+          id: goodtask-vim-notice
+          text: ✏️ GoodTask Insert Mode
+#───────────────────────────────────────────────────────────────────────────────
+rules:
+  - description: "✏️ GoodTask Vim Mode: Triggers/Toggles"
+    manipulators:
+      # Enter Edit Mode
+      - type: basic
+        from: { key_code: return_or_enter }
+        to_if_alone:
+          - *set-notice
+          - *enter-insert-mode
+          - *enter-edit-mode
+          - key_code: return_or_enter
+          # FIX text field not getting focus
+          - { key_code: vk_none, hold_down_milliseconds: 150 }
+          - { key_code: tab }
+        conditions: [*goodtask-app, *goodtask-normal-mode]
+      # Enter Normal Mode
+      # enter: confirm new task
+      - type: basic
+        from: { key_code: return_or_enter }
+        to_if_alone:
+          - key_code: return_or_enter
+          - *remove-notice
+          - *enter-normal-mode
+        conditions: [*goodtask-app, *goodtask-insert-mode, *not-edit-mode]
+      # enter: confirm editing task
+      - type: basic
+        from: { key_code: return_or_enter }
+        to_if_alone:
+          - { key_code: w, modifiers: [command] }
+          - *remove-notice
+          - *enter-normal-mode
+          - *leave-edit-mode
+        conditions: [*goodtask-app, *goodtask-insert-mode, *goodtask-edit-mode]
+      # esc/caps
+      - type: basic
+        from: { key_code: caps_lock }
+        to_if_alone:
+          - key_code: escape
+          - *remove-notice
+          - *enter-normal-mode
+        to:
+          - { key_code: right_shift, modifiers: [control, option, command] }
+        conditions: [*goodtask-app, *goodtask-insert-mode]
+      # cmd+w (close editing window)
+      - type: basic
+        from: { key_code: w, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: w, modifiers: [command] }
+          - *remove-notice
+          - *enter-normal-mode
+        conditions: [*goodtask-app, *goodtask-insert-mode]
+  #─────────────────────────────────────────────────────────────────────────────
+  - description: "✏️ GoodTask Vim Mode: Actions"
+    manipulators:
+      # new
+      - type: basic
+        from: { key_code: n }
+        to:
+          - { key_code: n, modifiers: [command] }
+          - *set-notice
+          - *enter-insert-mode
+        conditions: [*goodtask-app, *goodtask-normal-mode]
+      # up/down
+      - type: basic
+        from: { key_code: j }
+        to:
+          - key_code: down_arrow
+        conditions: [*goodtask-app, *goodtask-normal-mode]
+      - type: basic
+        from: { key_code: k }
+        to:
+          - key_code: up_arrow
+        conditions: [*goodtask-app, *goodtask-normal-mode]
+      # snooze
+      - type: basic
+        from: { key_code: s }
+        to:
+          - shell_command: |
+              osascript -e '
+                tell application "System Events" to tell process "GoodTask"
+                  click menu item "Tomorrow" of menu of menu item "Quick Actions" of menu "Edit" of menu bar 1
+                end tell
+              '
+        conditions: [*goodtask-app, *goodtask-normal-mode]
+      # open-url & delete
+      - type: basic
+        from: { key_code: o }
+        to:
+          - shell_command: |
+              osascript -e '
+                tell application "System Events" to tell process "GoodTask"
+                  click menu item "Open URL" of menu of menu item "Quick Actions" of menu "Edit" of menu bar 1
+                  click menu item "Delete" of menu "Edit" of menu bar 1
+                end tell
+              '
+        conditions: [*goodtask-app, *goodtask-normal-mode]
+      # yank
+      - type: basic
+        from: { key_code: z } # german keyboard z and y switched
+        to:
+          - { key_code: c, modifiers: [command] }
+        conditions: [*goodtask-app, *goodtask-normal-mode, *german-keyboard]
+      # undo
+      - type: basic
+        from: { key_code: u }
+        to:
+          - { key_code: y, modifiers: [command] } # german keyboard z and y switched
+        conditions: [*goodtask-app, *goodtask-normal-mode, *german-keyboard]
+      # paste
+      - type: basic
+        from: { key_code: p }
+        to:
+          - { key_code: v, modifiers: [command] }
+        conditions: [*goodtask-app, *goodtask-normal-mode]
+      # delete
+      - type: basic
+        from: { key_code: d }
+        to:
+          - key_code: delete_or_backspace
+          - key_code: down_arrow # FIX losing focus
+        conditions: [*goodtask-app, *goodtask-normal-mode]
+      # g/G fully down/up
+      - type: basic
+        from: { key_code: g }
+        to:
+          - { key_code: up_arrow, modifiers: [option] }
+        conditions: [*goodtask-app, *goodtask-normal-mode]
+      - type: basic
+        from: { key_code: g, modifiers: { mandatory: [shift] } }
+        to:
+          - { key_code: down_arrow, modifiers: [option] }
+        conditions: [*goodtask-app, *goodtask-normal-mode]
