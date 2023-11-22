@@ -38,7 +38,10 @@ function browserTab() {
 		// @ts-ignore
 		title = frontmostApp.documents[0].name();
 	} else {
-		app.displayNotification("", { withTitle: "Frontmost app is not a supported browser.", subtitle: "" });
+		app.displayNotification("", {
+			withTitle: "Frontmost app is not a supported browser.",
+			subtitle: "",
+		});
 		return;
 	}
 	return { url: url, title: title };
@@ -68,20 +71,15 @@ function run(argv) {
 
 	// determine text
 	let text = input;
-	if (isBrowser && !keywordUsed) {
-		const { url, title } = browserTab();
-		const mdlink = `[${title}](${url})`;
-		const sep = input ? " " : "";
-		text += sep + mdlink;
-	}
+	if (isBrowser && !keywordUsed) text = input + "\n" + browserTab().url;
 
 	// add reminder for today
 	const rem = Application("Reminders");
 	const today = new Date();
 	const newReminder = rem.Reminder({ name: text, alldayDueDate: today });
-	rem.defaultList().reminders.push(newReminder)
-	rem.quit()
+	rem.defaultList().reminders.push(newReminder);
+	rem.quit();
 
 	// Pass for Alfred notification
-	return text; 
+	return text;
 }
