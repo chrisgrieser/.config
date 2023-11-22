@@ -48,8 +48,8 @@
 			"end tell"
 		]
 	},
-	"submenu item": {
-		"prefix": "submenu item",
+	"sub-menu item": {
+		"prefix": "sub-menu item",
 		"body": [
 			"tell application \"System Events\" to tell process \"${1:process}\"",
 			"\tset frontmost to true",

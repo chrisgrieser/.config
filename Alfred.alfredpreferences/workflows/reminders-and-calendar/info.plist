@@ -25,7 +25,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>02F31CEE-51F0-4FC4-9CE6-23678476D4EB</string>
+				<string>E22F442B-BF76-46E0-AB6A-EF06F7657F9E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -111,6 +111,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>B4E512EC-87C3-4D74-A848-EE7DDE293DCE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A95B5D39-41EE-4658-ABC8-C995F28F5A5A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>C0706453-E9D1-4D41-9BC9-2BF209CBDFA8</key>
 		<array>
 			<dict>
@@ -143,6 +156,31 @@
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
 				<string>⌘: Open Reminders afterwards</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E22F442B-BF76-46E0-AB6A-EF06F7657F9E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>02F31CEE-51F0-4FC4-9CE6-23678476D4EB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>78243073-B256-4E26-A62B-B2655D2A6916</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>462CB6D6-05CB-4449-8004-6AFFB38489B5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -508,17 +546,126 @@
 				<false/>
 				<key>modsmode</key>
 				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.hahainteractive.GoodTask3Mac</string>
-				</array>
 				<key>relatedAppsMode</key>
-				<integer>2</integer>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>0921B9A3-3FC8-4E7E-8AEF-7CA31DED2C20</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/goodtask-open-url.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>462CB6D6-05CB-4449-8004-6AFFB38489B5</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:focusedapp}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>1</integer>
+						<key>matchstring</key>
+						<string>com.hahainteractive.GoodTask3Mac</string>
+						<key>outputlabel</key>
+						<string>other</string>
+						<key>uid</key>
+						<string>78243073-B256-4E26-A62B-B2655D2A6916</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>GoodTask</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>E22F442B-BF76-46E0-AB6A-EF06F7657F9E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/goodtask-snooze.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>A95B5D39-41EE-4658-ABC8-C995F28F5A5A</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<true/>
+				<key>focusedappvariablename</key>
+				<string>focusedapp</string>
+				<key>hotkey</key>
+				<integer>1</integer>
+				<key>hotmod</key>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>S</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.hahainteractive.GoodTask3Mac</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>B4E512EC-87C3-4D74-A848-EE7DDE293DCE</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -543,7 +690,7 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>Quick Append</string>
+			<string>Quick/Open Append</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -566,6 +713,17 @@
 			<real>415</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>462CB6D6-05CB-4449-8004-6AFFB38489B5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>open URL</string>
+			<key>xpos</key>
+			<real>335</real>
+			<key>ypos</key>
+			<real>355</real>
 		</dict>
 		<key>5BBE9F8F-CDC2-4B2D-B0ED-5CF31BC398C2</key>
 		<dict>
@@ -625,6 +783,15 @@
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
+		<key>A95B5D39-41EE-4658-ABC8-C995F28F5A5A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>520</real>
+		</dict>
 		<key>AB6C212F-70C4-4291-963F-B7D6DFD63435</key>
 		<dict>
 			<key>colorindex</key>
@@ -633,6 +800,17 @@
 			<real>895</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>B4E512EC-87C3-4D74-A848-EE7DDE293DCE</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>Snooze to tomorrow</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>520</real>
 		</dict>
 		<key>C0706453-E9D1-4D41-9BC9-2BF209CBDFA8</key>
 		<dict>
@@ -653,6 +831,15 @@
 			<real>650</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>E22F442B-BF76-46E0-AB6A-EF06F7657F9E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>175</real>
+			<key>ypos</key>
+			<real>360</real>
 		</dict>
 		<key>F300A89D-7DA2-4976-BF45-0CE5C7EA2C98</key>
 		<dict>

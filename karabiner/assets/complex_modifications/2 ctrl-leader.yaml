@@ -41,7 +41,7 @@ rules:
         to_if_alone:
           - *activate-leader
           - *set-notice
-      # 2x L-Ctrl: todotxt
+      # 2x L-Ctrl: GoodTask
       - type: basic
         from: { key_code: left_control }
         conditions: [*leader-active]
