@@ -224,8 +224,9 @@ vim.api.nvim_create_autocmd("FileType", {
 			local file = io.open(skeletonFile, "r")
 			if not file then return end
 			local lines = vim.split(file:read("*a"), "\n")
+			file:close()
 			vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
-			u.normal("G")
+			vim.api.nvim_win_set_cursor(0, { #lines, 0 })
 		end, 1)
 	end,
 })

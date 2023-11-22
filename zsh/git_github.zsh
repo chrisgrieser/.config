@@ -15,9 +15,6 @@ alias pull='git pull'
 alias rebase='git rebase --interactive'
 alias unshallow='git fetch --unshallow' # make shallow clone complete again
 
-# remote info
-alias grem='git remote -v && echo -n "\`gh\` default: " && gh repo set-default --view'
-
 alias gi='gh issue list --state=open'
 alias gI='gh issue list --state=closed'
 alias pr='gh pr create --web --fill'
@@ -102,6 +99,13 @@ function gM {
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# remote info
+function grem {
+	git branch --all --verbose --verbose
+	git remote -v 
+	echo -n "\`gh\` default repo: " && gh repo set-default --view
+}
+
 # Github Url: open & copy url
 function gu {
 	url=$(git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 |
@@ -154,29 +158,6 @@ function gli {
 	else                                  # pressed return
 		git checkout "$hash"
 	fi
-}
-
-#───────────────────────────────────────────────────────────────────────────────
-# SELECT BRANCH
-
-function gb {
-	if [[ ! -x "$(command -v fzf)" ]]; then print "\033[1;33mfzf not installed.\033[0m" && return 1; fi
-	local selected
-
-	selected=$( # double `--verbose` shows tracked remote branches https://stackoverflow.com/a/4952368/22114136
-		git branch --all --verbose --verbose --color |
-			fzf --ansi --height=40% --header-first --header="↵ : Checkout Branch"
-	)
-	[[ -z "$selected" ]] && return 0
-	selected=$(echo "$selected" | tr "*" " " | cut -f3 -d' ')
-
-	if [[ $selected == remotes/* ]]; then
-		# how to checkout remote branches: https://stackoverflow.com/questions/67699/how-do-i-clone-all-remote-branches
-		remote=$(echo "$selected" | cut -d/ -f2-)
-		git checkout "$remote"
-		selected=$(echo "$selected" | cut -d/ -f3)
-	fi
-	git checkout "$selected"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
