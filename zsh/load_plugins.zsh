@@ -9,9 +9,6 @@ source "$(brew --prefix)/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# must be loaded *before* zsh syntax highlighting
-source "$ZDOTDIR/plugins/zsh-no-ps2/zsh-no-ps2.plugin.zsh"
-
 # INFO `brew --prefix` ensures the right path is inserted on M1 as well as non-M1 macs
 source "$(brew --prefix)/share/zsh-you-should-use/you-should-use.plugin.zsh"
 source "$(brew --prefix)/share/zsh-autopair/autopair.zsh"

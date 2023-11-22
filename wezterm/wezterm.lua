@@ -111,7 +111,16 @@ local keybindings = {
 	-- Grappling-hook
 	{ key = "Enter", mods = "CMD", action = act.SendKey { key = "o", mods = "CTRL" } },
 	-- accept-and-infer-next-history
-	{ key = "Enter", mods = "SHIFT", action = act.SendKey { key = "l", mods = "CTRL" } },
+	{ key = "Enter", mods = "ALT", action = act.SendKey { key = "l", mods = "CTRL" } },
+
+	{ -- enter line-break https://unix.stackexchange.com/a/80820
+		key = "Enter",
+		mods = "SHIFT",
+		action = act.Multiple {
+			act.SendKey { key = "v", mods = "CTRL" },
+			act.SendKey { key = "j", mods = "CTRL" },
+		},
+	},
 
 	-- scroll-to-prompt, requires shell integration: https://wezfurlong.org/wezterm/config/lua/keyassignment/ScrollToPrompt.html
 	{ key = "k", mods = "CTRL", action = act.ScrollToPrompt(-1) },
@@ -119,7 +128,7 @@ local keybindings = {
 
 	-- FIX works with `send_composed_key_when_right_alt_is_pressed = true`
 	-- but expects another character, so this mapping fixes it
-	{ key = "n", mods = "META", action = act.SendString("~") },
+	{ key = "n", mods = "ALT", action = act.SendString("~") },
 
 	-- Emulates macOS' cmd-right & cmd-left
 	{ key = "LeftArrow", mods = "CMD", action = act.SendKey { key = "A", mods = "CTRL" } },
