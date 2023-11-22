@@ -15,7 +15,7 @@ export BROWSER_APP="Brave Browser" # not using "$BROWSER" since it's a reserved 
 export MAIL_APP="Mimestream"
 export TICKER_APP="Ivory"
 
-export TODOTXT_APP="SwiftoDo Desktop"
+export TODOTXT_APP="GoodTask"
 export TODOTXT="$HOME/Library/Mobile Documents/com~apple~CloudDocs/todo/todo.txt"
 
 #───────────────────────────────────────────────────────────────────────────────

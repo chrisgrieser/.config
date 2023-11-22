@@ -52,10 +52,7 @@ rules:
                 if (application \"$TODOTXT_APP\" is frontmost) then
                   tell application \"System Events\" to tell process \"$TODOTXT_APP\" to set visible to false
                 else
-                  tell application \"$TODOTXT_APP\"
-                    open \"$TODOTXT\"
-                    activate
-                  end tell
+                  tell application \"$TODOTXT_APP\" to activate
                 end if"
           - *deactivate-leader
           - *remove-notice
