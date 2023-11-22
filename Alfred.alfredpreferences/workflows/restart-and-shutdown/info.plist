@@ -373,7 +373,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
-				<string>❗️ Restart SketchyBar</string>
+				<string>❗️ Reload SketchyBar</string>
 				<key>withspace</key>
 				<false/>
 			</dict>

@@ -221,7 +221,10 @@ vim.api.nvim_create_autocmd("FileType", {
 			local fileIsEmpty = fileStats.size < 4 -- account for linebreaks
 			if not fileIsEmpty then return end
 
-			vim.cmd("silent keepalt 0read " .. skeletonFile)
+			local file = io.open(skeletonFile, "r")
+			if not file then return end
+			local lines = vim.split(file:read("*a"), "\n")
+			vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
 			u.normal("G")
 		end, 1)
 	end,

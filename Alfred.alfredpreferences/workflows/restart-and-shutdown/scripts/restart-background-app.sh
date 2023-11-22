@@ -6,6 +6,8 @@ app="$*"
 case "$app" in
 "sketchybar reload")
 	sketchybar --reload
+	echo -n "🔁 Reloaded sketchybar" # Alfred notification
+	return 0
 	;;
 "svim" | "sketchybar")
 	brew services restart "$app"

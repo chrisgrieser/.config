@@ -46,6 +46,8 @@ function run() {
 						subtitle: urlOpenSubtitle,
 					},
 				},
+				// for editing
+				variables: { text: item, lineNo: lineNo },
 			};
 		});
 

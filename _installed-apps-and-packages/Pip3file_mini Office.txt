@@ -1,3 +1,4 @@
-certifi
+docopt
 pip-autoremove
+Pygments
 wheel

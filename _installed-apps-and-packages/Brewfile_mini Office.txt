@@ -5,7 +5,6 @@ tap "homebrew/cask-fonts"
 tap "homebrew/services"
 tap "mgmeyers/pdfannots2json"
 tap "nikolaeu/numi"
-tap "saulpw/vd"
 brew "aspell"
 brew "bat"
 brew "bpython"
@@ -19,7 +18,6 @@ brew "fzf"
 brew "gh"
 brew "git-delta"
 brew "hyperfine"
-brew "ipython"
 brew "jless"
 brew "less"
 brew "mackup"
@@ -47,7 +45,6 @@ brew "felixkratz/formulae/sketchybar"
 brew "felixkratz/formulae/svim"
 brew "mgmeyers/pdfannots2json/pdfannots2json"
 brew "nikolaeu/numi/numi-cli"
-brew "saulpw/vd/visidata"
 cask "alfred"
 cask "alt-tab"
 cask "appcleaner"
@@ -83,4 +80,4 @@ mas "lo-rain", id: 6446921886
 mas "Peek", id: 1554235898
 mas "Pixelmator Pro", id: 1289583905
 mas "ReadKit", id: 1615798039
-mas "Tot", id: 1491071483
+mas "SwiftoDo Desktop", id: 1143641091
