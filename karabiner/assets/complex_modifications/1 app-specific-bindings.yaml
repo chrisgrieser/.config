@@ -199,6 +199,30 @@ rules:
           - { key_code: up_arrow }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com\.hahainteractive\.GoodTask3Mac$] }
+      - type: basic
+        from: { key_code: return_or_enter }
+        to:
+          - { key_code: return_or_enter }
+          - { key_code: vk_none, hold_down_milliseconds: 200 }
+          - { key_code: tab }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^com\.hahainteractive\.GoodTask3Mac$] }
+  #─────────────────────────────────────────────────────────────────────
+  - description: "(Apps) Neovide"
+    manipulators:
+      # "Neovide: ⇪R to restart, ⌘Q to Quit"
+      # INFO explicitly remapping cmd+q ensures that cursor position and changes are saved.
+      - type: basic
+        from: { key_code: q, modifiers: { mandatory: [command] } }
+        to:
+          - shell_command: |
+              export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+              if ! nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>try|wqall|catch|qall|endtry<CR>" ; then
+                osascript -e 'display notification "" with title "⚔️ Force killing nvim…"'
+                killall -9 nvim neovide
+              fi
+        conditions:
+          - { type: frontmost_application_if, file_paths: ["[Nn]eovide"] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Brave"
     manipulators:
