@@ -1,12 +1,20 @@
 #!/usr/bin/env zsh
 
-# INFO TODOTXT defined in .zshenv
-not_empty_or_completed=$(grep -Ecv "^$|^x " "$TODOTXT")
-if [[ $not_empty_or_completed -eq 0 ]] ; then
-	todos=""
+# GUARD Prevent loop when trying to open Reminders
+[[ "$INFO" == "Reminders" ]] && return 0
+
+# https://leancrew.com/all-this/2017/08/my-jxa-problem/
+# https://developer.apple.com/library/archive/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html#//apple_ref/doc/uid/TP40014508-CH109-SW10
+remindersToday=$(osascript -l JavaScript -e '
+	const count = Application("Reminders").defaultList().reminders.whose({ dueDate: { _lessThan: new Date() } }).length;
+	Application("Reminders").quit();
+	count
+')
+
+if [[ $remindersToday -eq 0 ]]; then
+	remindersToday=""
 	icon=""
 else
-	todos="$not_empty_or_completed"
 	icon=" "
 fi
-sketchybar --set "$NAME" label="$todos" icon="$icon" icon.padding_right=3
+sketchybar --set "$NAME" label="$remindersToday" icon="$icon" icon.padding_right=3
