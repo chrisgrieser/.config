@@ -37,18 +37,6 @@ M.aw_spotify = aw.new(function(appName, eventType)
 end):start()
 
 --------------------------------------------------------------------------------
--- TODOTXT
--- FIX damn sidebar always showing
-M.wf_todotxt = wf.new(env.todoApp)
-	:setOverrideFilter({ rejectTitles = "Preferences" }) -- don't hide toolbar of preferences
-	:subscribe(wf.windowCreated, function()
-		local todoApp = u.app(env.todoApp)
-		todoApp:selectMenuItem { "View", "Toggle Filter Sidebar" }
-		todoApp:selectMenuItem { "View", "Hide Toolbar" }
-		wu.moveResize(todoApp:mainWindow(), wu.smallCenter)
-	end)
-
---------------------------------------------------------------------------------
 -- OBSIDIAN
 
 ---half -> hide right sidebar
