@@ -24,37 +24,38 @@ source "$(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zs
 
 # yank to system clipboard – https://stackoverflow.com/a/37411340
 # equivalent to `set clipboard=unnamed` (but only for y)
-function vi_yank_pbcopy {
+function _vi_yank_pbcopy {
 	zle vi-yank # still perform vim-yank for pasting via `p`
 	echo "$CUTBUFFER" | pbcopy
 }
-zle -N vi_yank_pbcopy
+zle -N _vi_yank_pbcopy
 
-function vi_delete_pbcopy {
+function _vi_delete_pbcopy {
 	zle vi-delete
 	echo "$CUTBUFFER" | pbcopy
 } 
-zle -N vi_delete_pbcopy
+zle -N _vi_delete_pbcopy
 
 
 #───────────────────────────────────────────────────────────────────────────────
 
 # DOCS vi-mode widgets https://github.com/jeffreytse/zsh-vi-mode#custom-widgets-and-keybindings
 function zvm_after_lazy_keybindings {
+	# disable accidentally searching history search
+	bindkey -M vicmd 'k' up-line
+	bindkey -M vicmd 'gg' up-line
+
 	bindkey -M vicmd 'L' vi-end-of-line
 	bindkey -M vicmd 'H' vi-first-non-blank
+
+	bindkey -M vicmd -s 'Y' 'y$' # -s flag sends direct keystrokes and therefore allows for remappings
+	bindkey -M vicmd -s ' ' 'ciw'
 	bindkey -M vicmd 'U' redo
 	bindkey -M vicmd 'M' vi-join
 	bindkey -M vicmd 'm' zvm_move_around_surround
 	bindkey -M vicmd 'qq' vi-pound-insert # = toggle comment
 
-	bindkey -M vicmd 'gg' vi-beginning-of-line # so gg does not go to the top of history, which you never want
-	bindkey -M vicmd 'y' vi_yank_pbcopy        # so it copies to the system clipboard
-	bindkey -M vicmd 'd' vi_delete_pbcopy
-
-	# -s flag sends direct keystrokes and therefore allows for remappings
-	bindkey -M vicmd -s 'Y' 'y$'
-
-	bindkey -M vicmd -s '^[OQ' 'daw'   # HACK ^[OQ = F2, set via Karabiner to <S-Space>
-	bindkey -M vicmd -s ' ' 'ciw'
+	# so it copies to the system clipboard
+	bindkey -M vicmd 'y' _vi_yank_pbcopy 
+	bindkey -M vicmd 'd' _vi_delete_pbcopy
 }

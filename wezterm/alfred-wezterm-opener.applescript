@@ -13,9 +13,10 @@ on alfred_script(shellCmd)
 
 	# 1. use builtin to not trigger aliases, `-q` to suppress hooks (chpwd)
 	# 2. Add `clear` to suppress the entering message
+	# 3. Add leading space, so it is not saved to the history due HIST_IGNORE_SPACE
 	if (text 1 thru 3 of shellCmd) is "cd " then
 		set arg to text 4 thru -1 of shellCmd
-		set shellCmd to "builtin cd -q " & arg & " && clear"
+		set shellCmd to " builtin cd -q " & arg & " && clear"
 	end if
 
 	# DOCS https://wezfurlong.org/wezterm/cli/cli/send-text

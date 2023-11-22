@@ -28,6 +28,7 @@ zstyle ':completion:*:warnings' format ""
 #───────────────────────────────────────────────────────────────────────────────
 # BINDINGS
 
+bindkey -M vicmd '\t' menu-select
 bindkey '\t' menu-select                            # <Tab> next item
 bindkey -M menuselect '^[[Z' reverse-menu-complete  # <S-Tab> prev suggestion
 bindkey -M menuselect '\r' .accept-line             # <CR> select & execute
