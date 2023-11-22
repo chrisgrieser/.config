@@ -111,19 +111,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>B4E512EC-87C3-4D74-A848-EE7DDE293DCE</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A95B5D39-41EE-4658-ABC8-C995F28F5A5A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>C0706453-E9D1-4D41-9BC9-2BF209CBDFA8</key>
 		<array>
 			<dict>
@@ -611,64 +598,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/goodtask-snooze.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>A95B5D39-41EE-4658-ABC8-C995F28F5A5A</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<true/>
-				<key>focusedappvariablename</key>
-				<string>focusedapp</string>
-				<key>hotkey</key>
-				<integer>1</integer>
-				<key>hotmod</key>
-				<integer>1179648</integer>
-				<key>hotstring</key>
-				<string>S</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.hahainteractive.GoodTask3Mac</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>B4E512EC-87C3-4D74-A848-EE7DDE293DCE</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -783,15 +712,6 @@
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
-		<key>A95B5D39-41EE-4658-ABC8-C995F28F5A5A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>195</real>
-			<key>ypos</key>
-			<real>520</real>
-		</dict>
 		<key>AB6C212F-70C4-4291-963F-B7D6DFD63435</key>
 		<dict>
 			<key>colorindex</key>
@@ -800,17 +720,6 @@
 			<real>895</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>B4E512EC-87C3-4D74-A848-EE7DDE293DCE</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>Snooze to tomorrow</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>520</real>
 		</dict>
 		<key>C0706453-E9D1-4D41-9BC9-2BF209CBDFA8</key>
 		<dict>
