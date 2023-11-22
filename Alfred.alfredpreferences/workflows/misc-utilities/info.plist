@@ -34,11 +34,50 @@
 				<false/>
 			</dict>
 		</array>
+		<key>144D7958-617D-45F3-8140-CDD8105D98DD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3E7D1B62-B854-4F9E-9622-10F0EDC36A02</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>1E22BA45-6FE5-490E-8C79-4FCC4690939C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F775FF5D-3F3E-4F51-A502-32DA6822318A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>1ED11A83-B032-49DD-A27E-82281010DEC8</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>429CEC89-9C82-432F-900F-A22DDDF7964A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>2BBD4E3E-C51A-42A8-809D-20898A446B8C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>144D7958-617D-45F3-8140-CDD8105D98DD</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -60,11 +99,37 @@
 				<false/>
 			</dict>
 		</array>
+		<key>3E7D1B62-B854-4F9E-9622-10F0EDC36A02</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F668F3BA-49D3-42E4-A394-44FB468C078E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>429CEC89-9C82-432F-900F-A22DDDF7964A</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>E1F1F193-4BF3-42D0-A30E-784AC487FDA7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>4497C875-4C2B-417D-8073-1EB6DBC030CA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1E22BA45-6FE5-490E-8C79-4FCC4690939C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -200,6 +265,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>F775FF5D-3F3E-4F51-A502-32DA6822318A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>144D7958-617D-45F3-8140-CDD8105D98DD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>F776F4A5-FD97-4ACE-AE3E-64939F6E58E0</key>
 		<array>
 			<dict>
@@ -224,50 +302,6 @@
 	<string>Misc Utilities</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>open -g "hammerspoon://sync-repos"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>11</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>DC943639-4DB9-44BA-B722-273F16EEED36</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>sync</string>
-				<key>subtext</key>
-				<string>Dotfiles, Vault &amp; Password-Store</string>
-				<key>text</key>
-				<string>🔁 Sync Repos</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>E9FF31BC-709C-4387-975A-0B1410418161</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -329,20 +363,43 @@ end tell</string>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>rain</string>
+				<string>sync</string>
 				<key>subtext</key>
-				<string>lo-rain</string>
+				<string>Dotfiles, Vault &amp; Password-Store</string>
 				<key>text</key>
-				<string>Toggle Rain</string>
+				<string>🔁 Sync Repos</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>A495CCCB-F21B-41F1-B7AA-E4A511EC63C4</string>
+			<string>E9FF31BC-709C-4387-975A-0B1410418161</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>open -g "hammerspoon://sync-repos"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>DC943639-4DB9-44BA-B722-273F16EEED36</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -370,6 +427,27 @@ fi</string>
 			<string>AF2E709C-56BA-4D78-AD00-074FC6326079</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>rain</string>
+				<key>subtext</key>
+				<string>lo-rain</string>
+				<key>text</key>
+				<string>Toggle Rain</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>A495CCCB-F21B-41F1-B7AA-E4A511EC63C4</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -545,25 +623,6 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>com.apple.addressbook.person</string>
-				</array>
-				<key>name</key>
-				<string>Call</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>3D0B8081-9BD2-40C0-9521-EDF82FFE8C23</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>acceptsfiles</key>
 				<false/>
 				<key>acceptsmulti</key>
@@ -579,6 +638,25 @@ fi</string>
 			<string>alfred.workflow.trigger.universalaction</string>
 			<key>uid</key>
 			<string>F776F4A5-FD97-4ACE-AE3E-64939F6E58E0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>com.apple.addressbook.person</string>
+				</array>
+				<key>name</key>
+				<string>Call</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>3D0B8081-9BD2-40C0-9521-EDF82FFE8C23</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -650,6 +728,23 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array/>
+				<key>name</key>
+				<string>Open with TextEdit…</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>53E5054B-1A54-48FA-B642-7B674813E725</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>openwith</key>
 				<string>/System/Applications/TextEdit.app</string>
 				<key>sourcefile</key>
@@ -668,23 +763,6 @@ fi</string>
 				<key>acceptsmulti</key>
 				<integer>0</integer>
 				<key>filetypes</key>
-				<array/>
-				<key>name</key>
-				<string>Open with TextEdit…</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>53E5054B-1A54-48FA-B642-7B674813E725</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
 				<array>
 					<string>public.json</string>
 					<string>public.yaml</string>
@@ -696,27 +774,6 @@ fi</string>
 			<string>alfred.workflow.trigger.action</string>
 			<key>uid</key>
 			<string>E744CD58-599D-48C1-9D47-C2CA87174496</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>busycalevent://new/{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>9F084A08-61CC-4FFE-B826-D1C94F206A5A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -759,6 +816,27 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>busycalevent://new/{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>9F084A08-61CC-4FFE-B826-D1C94F206A5A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>acceptsfiles</key>
 				<false/>
 				<key>acceptsmulti</key>
@@ -776,6 +854,157 @@ fi</string>
 			<string>ED6732E3-D32A-4D0D-835B-815CF2FD8DAF</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>weekly</string>
+				<key>subtext</key>
+				<string>Set new Start Date</string>
+				<key>text</key>
+				<string>Weekly Date Generator</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>4497C875-4C2B-417D-8073-1EB6DBC030CA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>subtext</key>
+				<string>Format: YYYY-MM-DD</string>
+				<key>text</key>
+				<string>New Start Date: '{query}'</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>F775FF5D-3F3E-4F51-A502-32DA6822318A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{date:yyyy-MM-dd}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>1E22BA45-6FE5-490E-8C79-4FCC4690939C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>26</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>7</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>2BBD4E3E-C51A-42A8-809D-20898A446B8C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>F668F3BA-49D3-42E4-A394-44FB468C078E</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/weekly-date-generator.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>144D7958-617D-45F3-8140-CDD8105D98DD</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>\n$</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>3E7D1B62-B854-4F9E-9622-10F0EDC36A02</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -811,12 +1040,41 @@ fi</string>
 			<key>ypos</key>
 			<real>705</real>
 		</dict>
+		<key>144D7958-617D-45F3-8140-CDD8105D98DD</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>300</real>
+			<key>ypos</key>
+			<real>1020</real>
+		</dict>
+		<key>1E22BA45-6FE5-490E-8C79-4FCC4690939C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>180</real>
+			<key>ypos</key>
+			<real>910</real>
+		</dict>
 		<key>1ED11A83-B032-49DD-A27E-82281010DEC8</key>
 		<dict>
 			<key>xpos</key>
 			<real>445</real>
 			<key>ypos</key>
 			<real>570</real>
+		</dict>
+		<key>2BBD4E3E-C51A-42A8-809D-20898A446B8C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>note</key>
+			<string>add week</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>1020</real>
 		</dict>
 		<key>3D0B8081-9BD2-40C0-9521-EDF82FFE8C23</key>
 		<dict>
@@ -825,12 +1083,32 @@ fi</string>
 			<key>ypos</key>
 			<real>455</real>
 		</dict>
+		<key>3E7D1B62-B854-4F9E-9622-10F0EDC36A02</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>445</real>
+			<key>ypos</key>
+			<real>1050</real>
+		</dict>
 		<key>429CEC89-9C82-432F-900F-A22DDDF7964A</key>
 		<dict>
 			<key>xpos</key>
 			<real>640</real>
 			<key>ypos</key>
 			<real>570</real>
+		</dict>
+		<key>4497C875-4C2B-417D-8073-1EB6DBC030CA</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>note</key>
+			<string>weekly date generator</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>880</real>
 		</dict>
 		<key>53E5054B-1A54-48FA-B642-7B674813E725</key>
 		<dict>
@@ -1006,6 +1284,24 @@ fi</string>
 			<real>445</real>
 			<key>ypos</key>
 			<real>830</real>
+		</dict>
+		<key>F668F3BA-49D3-42E4-A394-44FB468C078E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>520</real>
+			<key>ypos</key>
+			<real>1020</real>
+		</dict>
+		<key>F775FF5D-3F3E-4F51-A502-32DA6822318A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>240</real>
+			<key>ypos</key>
+			<real>880</real>
 		</dict>
 		<key>F776F4A5-FD97-4ACE-AE3E-64939F6E58E0</key>
 		<dict>

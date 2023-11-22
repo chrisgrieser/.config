@@ -55,9 +55,10 @@ sketchybar \
 	--subscribe github_notif update-github-notifications \
 	--subscribe github_notif system_work \
 	\
-	--add item todotxt $first_row \
-	--set todotxt script="$plugin_dir/todotxt-count.sh" \
-	--subscribe todotxt system_woke front_app_switched \
+	--add item reminders $first_row \
+	--set reminders update_freq=120 \
+	script="$plugin_dir/reminders-count.sh" \
+	--subscribe reminders system_woke \
 	\
 	--add alias "Stats,CombinedModules" $second_row \
 	alias.color="$font_color" \

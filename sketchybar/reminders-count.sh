@@ -1,8 +1,5 @@
 #!/usr/bin/env zsh
 
-# GUARD Prevent loop when trying to open Reminders
-[[ "$INFO" == "Reminders" ]] && return 0
-
 # https://leancrew.com/all-this/2017/08/my-jxa-problem/
 # https://developer.apple.com/library/archive/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html#//apple_ref/doc/uid/TP40014508-CH109-SW10
 remindersToday=$(osascript -l JavaScript -e '
