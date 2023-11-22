@@ -56,9 +56,8 @@ sketchybar \
 	--subscribe github_notif system_work \
 	\
 	--add item todotxt $first_row \
-	--set todotxt todotxt update_freq=60 \
-	script="$plugin_dir/todotxt-count.sh" \
-	--subscribe todotxt system_woke \
+	--set todotxt script="$plugin_dir/todotxt-count.sh" \
+	--subscribe todotxt system_woke front_app_switched \
 	\
 	--add alias "Stats,CombinedModules" $second_row \
 	alias.color="$font_color" \
@@ -81,5 +80,5 @@ sketchybar \
 
 # INFO
 # - `--update` needs to run at the end of config and should not be run in an item script
-# - clock and alias items needs the fixed-width to fix whitespace of the item next 
+# - clock and alias items needs the fixed-width to fix whitespace of the item next
 # - not using builtin clock, to be able to customize font

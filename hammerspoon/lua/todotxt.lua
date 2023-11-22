@@ -1,6 +1,8 @@
 local M = {} -- persist from garbage collector
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
+local wf = hs.window.filter
+local wu = require("lua.window-utils")
 
 --------------------------------------------------------------------------------
 -- REMINDERS TO TODOTXT
@@ -50,6 +52,22 @@ M.timer_todotxtBackup = hs.timer.doEvery(backupFreqHours * 3600, function()
 		if exitCode ~= 0 then u.notify("⚠️ todo.txt Backup failed: " .. stdErr) end
 	end):start()
 end, true):start()
+
+
+--------------------------------------------------------------------------------
+-- TODOTXT
+-- FIX damn sidebar always showing
+M.wf_todotxt = wf
+	.new(env.todoApp)
+	:setOverrideFilter({ rejectTitles = "Preferences" }) -- don't hide toolbar of preferences
+	:subscribe(wf.windowCreated, function()
+		u.runWithDelays(0.1, function()
+			local todoApp = u.app(env.todoApp)
+			todoApp:selectMenuItem { "View", "Toggle Filter Sidebar" }
+			todoApp:selectMenuItem { "View", "Hide Toolbar" }
+			wu.moveResize(todoApp:mainWindow(), wu.smallCenter)
+		end)
+	end)
 
 --------------------------------------------------------------------------------
 return M

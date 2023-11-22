@@ -1,12 +1,12 @@
 #!/usr/bin/env zsh
 
 # INFO TODOTXT defined in .zshenv
-non_empty_lines=$(grep -cv "^$" "$TODOTXT")
-if [[ $non_empty_lines -eq 0 ]] ; then
+not_empty_or_completed=$(grep -Ecv "^$|^x " "$TODOTXT")
+if [[ $not_empty_or_completed -eq 0 ]] ; then
 	todos=""
 	icon=""
 else
-	todos="$non_empty_lines"
+	todos="$not_empty_or_completed"
 	icon=" "
 fi
 sketchybar --set "$NAME" label="$todos" icon="$icon" icon.padding_right=3
