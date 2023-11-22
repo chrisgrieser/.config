@@ -131,8 +131,7 @@ rules:
               osascript -e '
                 tell application "System Events" to tell process "GoodTask"
                   click menu item "Tomorrow" of menu of menu item "Quick Actions" of menu "Edit" of menu bar 1
-                end tell
-              '
+                end tell'
         conditions: [*goodtask-app, *goodtask-normal-mode]
       # open-url & delete
       - type: basic
@@ -141,14 +140,17 @@ rules:
           - shell_command: |
               osascript -e '
                 tell application "System Events" to tell process "GoodTask"
+                  set frontmost to true
                   click menu item "Open URL" of menu of menu item "Quick Actions" of menu "Edit" of menu bar 1
+                  set frontmost to true # due to focus loss
                   click menu item "Delete" of menu "Edit" of menu bar 1
+                  set visible to false # hide again
                 end tell
               '
         conditions: [*goodtask-app, *goodtask-normal-mode]
       # yank
       - type: basic
-        from: { key_code: z } # german keyboard z and y switched
+        from: { key_code: z } # German keyboard z and y switched
         to:
           - { key_code: c, modifiers: [command] }
         conditions: [*goodtask-app, *goodtask-normal-mode, *german-keyboard]
@@ -158,6 +160,18 @@ rules:
         to:
           - { key_code: y, modifiers: [command] } # german keyboard z and y switched
         conditions: [*goodtask-app, *goodtask-normal-mode, *german-keyboard]
+      # redo
+      - type: basic
+        from: { key_code: u, modifiers: { mandatory: [shift] } }
+        to:
+          - { key_code: y, modifiers: [command, shift] } # german keyboard z and y switched
+        conditions: [*goodtask-app, *goodtask-normal-mode, *german-keyboard]
+      # select all
+      - type: basic
+        from: { key_code: a }
+        to:
+          - { key_code: a, modifiers: [command] }
+        conditions: [*goodtask-app, *goodtask-normal-mode]
       # paste
       - type: basic
         from: { key_code: p }
