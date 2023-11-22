@@ -7,6 +7,8 @@ if [[ ! -f $donetxt_filepath ]]; then
 	return 1
 fi
 
+#───────────────────────────────────────────────────────────────────────────────
+
 to_be_archived_count=$(grep -c "^x " "$todotxt_filepath")
 
 # archive completed tasks
