@@ -36,7 +36,7 @@ local function verticalSplit()
 	end
 
 	M.delay_timer = hs.timer
-		.doAfter(0.1, function() -- wait for unhiding
+		.doAfter(0.2, function() -- wait for unhiding
 			frontApp:selectMenuItem { "Window", "Tile Window to Right of Screen" }
 		end)
 		:start()
