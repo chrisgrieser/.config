@@ -388,3 +388,7 @@ matches:
     replace: ahbe
     propagate_case: true
     word: true
+  - trigger: isntall
+    replace: install
+    propagate_case: true
+    word: true

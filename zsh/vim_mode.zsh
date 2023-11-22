@@ -33,7 +33,7 @@ zle -N _vi_yank_pbcopy
 function _vi_delete_pbcopy {
 	zle vi-delete
 	echo "$CUTBUFFER" | pbcopy
-} 
+}
 zle -N _vi_delete_pbcopy
 
 
@@ -56,6 +56,6 @@ function zvm_after_lazy_keybindings {
 	bindkey -M vicmd 'qq' vi-pound-insert # = toggle comment
 
 	# so it copies to the system clipboard
-	bindkey -M vicmd 'y' _vi_yank_pbcopy 
+	bindkey -M vicmd 'y' _vi_yank_pbcopy
 	bindkey -M vicmd 'd' _vi_delete_pbcopy
 }
