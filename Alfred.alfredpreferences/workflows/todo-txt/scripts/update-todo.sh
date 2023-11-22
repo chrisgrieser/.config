@@ -1,10 +1,8 @@
 #!/usr/bin/env zsh
-
 # shellcheck disable=2154
-file="$todotxt_filepath"
-new_text="$1"
 
-#───────────────────────────────────────────────────────────────────────────────
+new_text="$*"
 
-sed -i '' "${line_no}c\
-$new_text" "$file"
+sed -i '' "${lineNo}c\\
+$new_text
+" "$todotxt_filepath"

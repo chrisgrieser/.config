@@ -32,22 +32,33 @@ function run() {
 		.map((item) => {
 			lineNo++;
 			const urls = item.match(urlRegex);
-			let urlOpenSubtitle = urls ? "⌘: Open URL" : "🚫 No URL in the todo.";
 			const completed = item.startsWith("x") ? "completed" : "";
-			if (!completed) urlOpenSubtitle += " & mark as completed"
 			const displayText = completed ? unicodeStrikethough(item) : item;
+
+			let urlOpenSubtitle = urls ? "⌘: Open URL" : "🚫 No URL in the todo.";
+			let copySubtitle = "⌥: Copy to clipboard";
+			if (!completed) {
+				urlOpenSubtitle += " & mark as completed"
+				copySubtitle += " & mark as completed"
+			}
 
 			return {
 				title: displayText,
-				arg: lineNo,
+				variables: { text: item, lineNo: lineNo },
 				mods: {
 					cmd: {
 						valid: Boolean(urls),
 						subtitle: urlOpenSubtitle,
+						arg: "open-url",
+					},
+					alt: {
+						subtitle: copySubtitle,
+						arg: "copy",
+					},
+					ctrl: {
+						arg: "toggle-completed",
 					},
 				},
-				// for editing
-				variables: { text: item, lineNo: lineNo },
 			};
 		});
 
