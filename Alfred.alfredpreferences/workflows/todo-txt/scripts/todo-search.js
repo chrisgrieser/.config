@@ -29,34 +29,36 @@ function run() {
 	/** @type AlfredItem[] */
 	const todos = readFile($.getenv("todotxt_filepath"))
 		.split("\n")
-		.map((item) => {
+		.map((text) => {
 			lineNo++;
-			const urls = item.match(urlRegex);
-			const completed = item.startsWith("x") ? "completed" : "";
-			const displayText = completed ? unicodeStrikethough(item) : item;
+			const urls = text.match(urlRegex);
+			const isCompleted = text.startsWith("x") ? "completed" : "";
+			const displayText = isCompleted ? unicodeStrikethough(text) : text;
 
 			let urlOpenSubtitle = urls ? "⌘: Open URL" : "🚫 No URL in the todo.";
 			let copySubtitle = "⌥: Copy to clipboard";
-			if (!completed) {
+			if (!isCompleted) {
 				urlOpenSubtitle += " & mark as completed"
 				copySubtitle += " & mark as completed"
 			}
 
 			return {
 				title: displayText,
-				variables: { text: item, lineNo: lineNo },
+				variables: { text: text, lineNo: lineNo },
+				text: { copy: text, largetype: text },
 				mods: {
 					cmd: {
+						arg: "open-url",
 						valid: Boolean(urls),
 						subtitle: urlOpenSubtitle,
-						arg: "open-url",
 					},
 					alt: {
-						subtitle: copySubtitle,
 						arg: "copy",
+						subtitle: copySubtitle,
 					},
 					ctrl: {
 						arg: "toggle-completed",
+						subtitle: isCompleted ? "⌃: Unmark as completed" : "⌃: Mark as completed",
 					},
 				},
 			};
