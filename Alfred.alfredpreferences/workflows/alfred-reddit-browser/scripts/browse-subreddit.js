@@ -105,10 +105,11 @@ function run() {
 		posts = getRedditPosts(subredditName, oldItems);
 	}
 
-	// GUARDS: no API response or no posts left after filtering for min upvote count
+	// GUARD no API response or no posts left after filtering for min upvote count
 	if (!posts) {
 		return JSON.stringify({ items: [{ title: "Error", subtitle: "No response from API." }] });
-	} else if (posts.length === 0) {
+	} 
+	if (posts.length === 0) {
 		return JSON.stringify({ items: [{ title: "No Posts higher than minimum upvote count" }] });
 	}
 
