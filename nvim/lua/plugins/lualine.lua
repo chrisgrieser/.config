@@ -34,8 +34,8 @@ local function quickfixCounter()
 end
 
 --------------------------------------------------------------------------------
-
-local bottomSep = { left = "", right = "" } -- nerdfont-powerline icons have prefix 'ple-'
+-- nerdfont-powerline icons have prefix 'ple-'
+local bottomSep = { left = "", right = "" } 
 local topSep = { left = "", right = "" }
 
 local lualineConfig = {
@@ -46,13 +46,11 @@ local lualineConfig = {
 			{
 				function() return "󱥒 " .. vim.fs.basename(vim.env.VIRTUAL_ENV) end,
 				cond = function() return vim.env.VIRTUAL_ENV and vim.bo.ft == "python" end,
-				section_separators = topSep,
 			},
 			{
 				"datetime",
 				style = "%H:%M",
 				cond = function() return vim.o.columns > 110 and vim.o.lines > 25 end,
-				section_separators = topSep,
 				-- make the `:` blink
 				fmt = function(time) return os.time() % 2 == 0 and time or time:gsub(":", " ") end,
 			},
@@ -60,7 +58,6 @@ local lualineConfig = {
 				"tabs",
 				mode = 1,
 				max_length = vim.o.columns * 0.6,
-				section_separators = topSep,
 				cond = function() return fn.tabpagenr("$") > 1 end,
 			},
 		},

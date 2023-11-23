@@ -221,6 +221,8 @@ vim.api.nvim_create_autocmd("FileType", {
 			local fileIsEmpty = fileStats.size < 4 -- account for linebreaks
 			if not fileIsEmpty then return end
 
+			-- write file
+			-- (idempotent, since Filetype event sometimes triggered multiple times)
 			local file = io.open(skeletonFile, "r")
 			if not file then return end
 			local lines = vim.split(file:read("*a"), "\n")

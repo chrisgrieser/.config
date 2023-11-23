@@ -28,38 +28,31 @@ return {
 			})
 		end,
 	},
-	{ -- better increment/decrement + toggling command
+	{ -- toggling between values
 		"monaqa/dial.nvim",
 		keys = {
 			{
-				"+",
+				"Ä",
 				function() return require("dial.map").inc_normal() end,
-				desc = "󰘂 Dial +",
-				expr = true,
-			},
-			{
-				"ä",
-				function() return require("dial.map").dec_normal() end,
-				desc = "󰘂 Dial -",
+				desc = "󰘂 Dial",
 				expr = true,
 			},
 		},
 		config = function()
-			local augend = require("dial.augend")
 			local toggle = require("dial.augend").constant.new
 			require("dial.config").augends:register_group {
 				default = {
-					augend.integer.alias.decimal_int,
-					augend.constant.alias.bool,
+					require("dial.augend").constant.alias.bool,
 					toggle { elements = { "let", "const" } },
 					toggle { elements = { "and", "or" } },
+					toggle { elements = { "!=", "==" } },
+					toggle { elements = { "!==", "===" } },
+					toggle { elements = { "&&", "||" } },
 					toggle { elements = { "increase", "decrease" }, word = false },
 					toggle { elements = { "enable", "disable" }, word = false },
 					toggle { elements = { "dark", "light" }, word = false },
+					toggle { elements = { "top", "bottom" }, word = false },
 					toggle { elements = { "right", "left" }, word = false },
-					toggle { elements = { "~=", "==" }, word = false },
-					toggle { elements = { "!==", "===" }, word = false },
-					toggle { elements = { "&&", "||" }, word = false },
 				},
 			}
 		end,
@@ -104,6 +97,13 @@ return {
 					:with_pair(isNodeType { "table_constructor", "field", "object", "dictionary" })
 					:with_del(function() return false end)
 					:with_move(function(opts) return opts.char == "," end),
+
+				-- git conventional commit with scope: auto-append `:`
+				rule("^%a+%(%)", ":", "gitcommit")
+					:use_regex(true)
+					:with_pair(negLookahead(".+"))
+					:with_pair(isNotNodeType("message"))
+					:with_move(function(opts) return opts.char == ":" end),
 
 				-- add brackets to if/else in js/ts
 				rule("^%s*if $", "()", { "javascript", "typescript" })
