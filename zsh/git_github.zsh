@@ -105,7 +105,7 @@ function grem {
 	git branch --all --verbose --verbose
 	echo
 	git remote --verbose
-	printf "\e[1;34mgh\e[0m default repo: "&& gh repo set-default --view
+	printf "\e[1;34mgh\e[0m default repo: \e[1;31m" && gh repo set-default --view && printf "\e[0m"
 }
 
 # Github Url: open & copy url

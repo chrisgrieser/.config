@@ -8,8 +8,8 @@ local linters = {
 	css = { "stylelint" },
 	sh = { "zsh", "shellcheck" },
 	markdown = { "markdownlint", "vale" },
-	yaml = { "yamllint" },
 	python = { "pylint" },
+	yaml = {},
 	json = {},
 	javascript = {},
 	typescript = {},
@@ -49,7 +49,8 @@ local lspFormatting = {
 local extraInstalls = {
 	"debugpy", -- debugger
 	"ruff", -- since ruff_format and ruff_fix aren't the real names
-	"autotools-language-server", -- PENDING Mason
+	"autotools-language-server", -- PENDING https://github.com/williamboman/mason-lspconfig.nvim/pull/323
+	"typos-lsp",
 }
 
 local dontInstall = {
@@ -61,7 +62,8 @@ local dontInstall = {
 	"injected",
 	"ruff_format",
 	"ruff_fix",
-	"autotools_ls", -- PENDING Mason
+	"autotools_ls", -- PENDING https://github.com/williamboman/mason-lspconfig.nvim/pull/323
+	"typos_lsp",
 }
 
 ---given the linter- and formatter-list of nvim-lint and conform.nvim, extract a
@@ -97,8 +99,6 @@ local function linterConfigs()
 
 	lint.linters.codespell.args = { "--toml=" .. linterConfig .. "/codespell.toml" }
 	lint.linters.shellcheck.args = { "--shell=bash", "--format=json", "--external-sources", "-" }
-	lint.linters.yamllint.args =
-		{ "--config-file=" .. linterConfig .. "/yamllint.yaml", "--format=parsable", "-" }
 	lint.linters.vale.args =
 		{ "--output=JSON", "--ext=.md", "--no-exit", "--config=" .. linterConfig .. "/vale/vale.ini" }
 	lint.linters["editorconfig-checker"].args =
