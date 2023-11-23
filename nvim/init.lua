@@ -10,7 +10,7 @@ vim.defer_fn(function()
 end, 1)
 
 vim.g.mapleader = ","
-vim.g.maplocalleader = "ö"
+vim.g.maplocalleader = "ä"
 
 --------------------------------------------------------------------------------
 

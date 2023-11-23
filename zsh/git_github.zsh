@@ -172,7 +172,7 @@ function clone {
 	git clone --depth=2 --no-single-branch "$url"
 
 	# shellcheck disable=SC2012
-	cd "$(command ls -1 -t | head -n1)" || return 1
+	builtin cd "$(command ls -1 -t | head -n1)" || return 1
 	_separator
 	_magic_dashboard
 }
@@ -216,7 +216,7 @@ function gdf {
 	[[ -z $1 ]] && print "\033[1;33mNo search query provided.\033[0m" && return 1
 
 	local deleted_path deletion_commit
-	cd "$(git rev-parse --show-toplevel)" || return 1
+	builtin cd -q "$(git rev-parse --show-toplevel)" || return 1
 
 	# alternative method: `git rev-list -n 1 HEAD -- "**/*$1*"` to get the commit of a deleted file
 	deleted_path=$(git log --diff-filter=D --summary | grep "delete" | grep -i "$*" | cut -d" " -f5-)

@@ -14,9 +14,11 @@ export BROWSER_DEFAULTS_PATH="BraveSoftware/Brave-Browser"
 export BROWSER_APP="Brave Browser" # not using "$BROWSER" since it's a reserved variable
 export MAIL_APP="Mimestream"
 export TICKER_APP="Ivory"
-
 export TODOTXT_APP="GoodTask"
-export TODOTXT="$HOME/Library/Mobile Documents/com~apple~CloudDocs/todo/todo.txt"
+
+# settings
+export EDITOR=nvim
+export CODE_FONT="JetBrainsMonoNL NF"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -25,7 +27,6 @@ export TODOTXT="$HOME/Library/Mobile Documents/com~apple~CloudDocs/todo/todo.txt
 [[ -f "$DATA_DIR/private dotfiles/api-keys.sh" ]] && source "$DATA_DIR/private dotfiles/api-keys.sh"
 
 # NEOVIM
-export EDITOR=nvim
 # so linters managed by mason are generally available
 export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
 

@@ -81,7 +81,11 @@ declare type ReminderObj = {
 	name(): string;
 	body(): string;
 	delete(): void;
+	completed(): boolean;
 	properties(): ReminderProperties;
+	alldayDueDate(): Date;
+	dueDate(): Date;
+	completionDate(): Date;
 }
 
 declare const Application: {

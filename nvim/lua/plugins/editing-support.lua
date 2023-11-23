@@ -32,17 +32,34 @@ return {
 		"monaqa/dial.nvim",
 		keys = {
 			{
-				"Ä",
+				"+",
 				function() return require("dial.map").inc_normal() end,
-				desc = "󰘂 Dial",
+				desc = "󰘂 Dial +",
+				expr = true,
+			},
+			{
+				"ö",
+				function() return require("dial.map").dec_normal() end,
+				desc = "󰘂 Dial -",
+				expr = true,
+			},
+			{
+				"Ö",
+				function() return require("dial.map").inc_normal("toggle_words") end,
+				desc = "󰘂 Toggle",
 				expr = true,
 			},
 		},
 		config = function()
-			local toggle = require("dial.augend").constant.new
+			local augend = require("dial.augend")
+			local toggle = augend.constant.new
 			require("dial.config").augends:register_group {
 				default = {
-					require("dial.augend").constant.alias.bool,
+					augend.integer.alias.decimal,
+					augend.constant.alias.bool,
+				},
+				toggle_words = {
+					augend.constant.alias.bool,
 					toggle { elements = { "let", "const" } },
 					toggle { elements = { "and", "or" } },
 					toggle { elements = { "!=", "==" } },
@@ -52,6 +69,7 @@ return {
 					toggle { elements = { "enable", "disable" }, word = false },
 					toggle { elements = { "dark", "light" }, word = false },
 					toggle { elements = { "top", "bottom" }, word = false },
+					toggle { elements = { "up", "down" }, word = false },
 					toggle { elements = { "right", "left" }, word = false },
 				},
 			}
