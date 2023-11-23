@@ -4,8 +4,8 @@
 		"body": ["def ${1:name}($2) -> ${3|None,str,int,dict|}:", "\t\"\"\"${4:Insert docstring.}\"\"\"", "$0"],
 		"description": "function with docstring"
 	},
-	"ternary operator": {
-		"prefix": "ternary operator",
+	"ternary": {
+		"prefix": "ternary",
 		"body": "${1:value1} if ${2:condition} else ${3:value2}"
 	},
 	"if": {

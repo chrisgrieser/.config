@@ -189,6 +189,10 @@
 			"}"
 		]
 	},
+	"ternary": {
+		"prefix": "ternary",
+		"body": "${1:condition} ? ${2:value1} : ${3:value2}"
+	},
 	"for .. of (array)": {
 		"prefix": "for .. of (array)",
 		"body": [

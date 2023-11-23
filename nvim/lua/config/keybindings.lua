@@ -117,6 +117,9 @@ keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
 keymap({ "n", "x" }, "gm", "ddpkJ", { desc = "󰗈 Merge line down" })
 keymap({ "n", "x" }, "gM", "gJ", { desc = "󰗈 Merge line up (+ trim)" })
 
+keymap("n", "+", "<C-a>")
+keymap("n", "ä", "<C-x>")
+
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
 keymap("n", "<Down>", [[<cmd>. move +1<CR>==]], { desc = "󰜮 Move Line Down" })
