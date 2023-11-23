@@ -60,7 +60,6 @@ function pip() {
 	if [[ "$1" == "install" && -z "$VIRTUAL_ENV" ]]; then
 		printf "\033[1;33mAre you sure you want to install outside of a virtual environment? (y/n)\033[0m "
 		read -r answer
-		echo
 		if [[ "$answer" != "y" ]]; then return 2; fi
 		pip3 "$@"
 	elif [[ "$1" == "uninstall" ]] && [[ -z "$VIRTUAL_ENV" ]]; then
