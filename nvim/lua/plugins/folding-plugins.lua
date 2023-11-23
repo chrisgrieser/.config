@@ -36,17 +36,6 @@ return {
 		event = "BufReadPost", -- later will not save folds
 		opts = true,
 	},
-	{
-		"jghauser/fold-cycle.nvim",
-		keys = {
-			{
-				"^",
-				function() require("fold-cycle").close() end,
-				desc = " Cycle-Close Folds",
-				silent = true,
-			},
-		},
-	},
 	{ -- UFO
 		"kevinhwang91/nvim-ufo",
 		dependencies = "kevinhwang91/promise-async",

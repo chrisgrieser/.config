@@ -821,24 +821,35 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<false/>
-				<key>required</key>
-				<false/>
-				<key>text</key>
-				<string>Use dstill.ai</string>
+				<string>https://news.ycombinator.com/item?id=</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>default (ycombinator)</string>
+						<string>https://news.ycombinator.com/item?id=</string>
+					</array>
+					<array>
+						<string>dstill.ai</string>
+						<string>https://dstill.ai/hackernews/item/</string>
+					</array>
+					<array>
+						<string>hckrnws</string>
+						<string>https://www.hckrnws.com/stories/</string>
+					</array>
+				</array>
 			</dict>
 			<key>description</key>
-			<string>Redirect to dstill.ai as hackernews frontend.</string>
+			<string>whether to use an alternative hackernews frontend</string>
 			<key>label</key>
-			<string></string>
+			<string>Hackernews Frontend</string>
 			<key>type</key>
-			<string>checkbox</string>
+			<string>popupbutton</string>
 			<key>variable</key>
-			<string>use_dstill_ai</string>
+			<string>hackernews_frontend_url</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.3.0</string>
+	<string>1.3.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

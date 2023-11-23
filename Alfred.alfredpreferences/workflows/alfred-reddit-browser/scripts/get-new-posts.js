@@ -8,7 +8,7 @@ function getSettings() {
 	return {
 		minUpvotes: Math.max(minUpvotesSetting, 0), // minimum of 0
 		useOldReddit: $.getenv("use_old_reddit") === "1" ? "old" : "www",
-		useDstillAi: $.getenv("use_dstill_ai") === "1",
+		hnFrontendUrl: $.getenv("hackernews_frontend_url"),
 		iconFolder: $.getenv("custom_subreddit_icons") ?? $.getenv("alfred_workflow_data"),
 		sortType: $.getenv("sort_type") ?? "hot",
 		hideStickied: $.getenv("hide_stickied") === "1",
@@ -52,9 +52,7 @@ function getHackernewsPosts(oldItems) {
 			if (item.points < opts.minUpvotes) return acc;
 
 			const externalUrl = item.url || "";
-			const commentUrl = opts.useDstillAi
-				? "https://dstill.ai/hackernews/item/" + item.objectID
-				: "https://news.ycombinator.com/item?id=" + item.objectID;
+			const commentUrl = opts.hnFrontendUrl + item.objectID;
 
 			// filter out jobs
 			if (item._tags.some((tag) => tag === "job")) return acc;
@@ -71,7 +69,9 @@ function getHackernewsPosts(oldItems) {
 
 			// subtitle
 			let category = item._tags.find((tag) => tag === "show_hn" || tag === "ask_hn");
-			category = (category ? `[${category}]` : "").replace("show_hn", "Show HN").replace("ask_hn", "Ask HN");
+			category = (category ? `[${category}]` : "")
+				.replace("show_hn", "Show HN")
+				.replace("ask_hn", "Ask HN");
 			const comments = item.num_comments || 0;
 			const subtitle = `${ageIcon}${item.points}↑  ${comments}●  ${category}`;
 
@@ -181,7 +181,10 @@ function getRedditPosts(subredditName, oldItems) {
 			const crossposts = item.num_crossposts ? ` ${item.num_crossposts}↗` : "";
 			const subtitle = `${stickyIcon}${postTypeIcon}${ageIcon}${item.score}↑  ${comments}● ${crossposts} ${category}`;
 
-			const cleanTitle = item.title.replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&amp;", "&");
+			const cleanTitle = item.title
+				.replaceAll("&lt;", "<")
+				.replaceAll("&gt;", ">")
+				.replaceAll("&amp;", "&");
 
 			/** @type{AlfredItem} */
 			const post = {

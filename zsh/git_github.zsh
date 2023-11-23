@@ -99,6 +99,11 @@ function gM {
 
 #───────────────────────────────────────────────────────────────────────────────
 
+function unlock {
+	rm "$(git rev-parse --git-dir)/index.lock"
+	echo "Lock file removed."
+}
+
 # remote info
 function grem {
 	git branch --all --verbose --verbose

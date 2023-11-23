@@ -19,7 +19,7 @@ vim.g.myLsps = { -- variable used by MasonToolInstaller
 	"html",
 	"ltex", -- languagetool
 	"ast_grep", -- custom, ast-based linter
-	-- "autotools_ls", -- Makefiles PENDING https://github.com/Freed-Wu/autotools-language-server/issues/3
+	"autotools_ls", -- Makefiles
 }
 
 --------------------------------------------------------------------------------
