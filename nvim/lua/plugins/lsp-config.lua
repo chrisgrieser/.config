@@ -207,9 +207,20 @@ serverConfigs.tsserver = {
 -- DOCS https://github.com/tekumara/typos-vscode#settings
 -- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/typos_lsp.lua
 serverConfigs.typos_lsp = {
-	init_options = {
-		diagnosticSeverity = "information" ,
+	cmd = {
+		"typos-lsp",
+		"--config=" .. u.linterConfigFolder .. "/typos.toml",
 	},
+	-- noice
+	init_options = {
+		diagnosticSeverity = "information",
+	},
+}
+
+-- AST-GREP
+-- currently only rules for lua
+serverConfigs.ast_grep = {
+	filetypes = { "lua" },
 }
 
 --------------------------------------------------------------------------------
