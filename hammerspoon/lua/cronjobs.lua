@@ -55,6 +55,10 @@ M.timer_nightlyMaintenance = hs.timer
 			local msg = exitCode == 0 and "✅ Dotfile Backup successful" or "⚠️ Dotfile Backup failed: " .. stdErr
 			u.notify(msg)
 		end):start()
+		M.task_reminderBackup = hs.task.new("./helpers/reminders-bkp.js", function(exitCode, _, stdErr)
+			local msg = exitCode == 0 and "✅ Reminder Backup successful" or "⚠️ Reminder Backup failed: " .. stdErr
+			u.notify(msg)
+		end):start()
 		u.applescript([[tell application id "com.runningwithcrayons.Alfred" to run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"]])
 		-- stylua: ignore end
 	end, true)
@@ -80,7 +84,8 @@ M.timer_sleepAutoVideoOff = hs.timer
 		local isIdle = (hs.host.idleTime() / 60) > config.idleMins
 		if not (isNight and isIdle and env.isProjector() and u.screenIsUnlocked()) then return end
 
-		hs.alert.show(("💤 Will sleep in %ss if idle."):format(config.timeToReactSecs))
+		local alertMsg = ("💤 Will sleep in %ss if idle."):format(config.timeToReactSecs)
+		hs.alert.show(alertMsg, 5)
 		u.runWithDelays(config.timeToReactSecs, function()
 			-- GUARD
 			local userDidSth = hs.host.idleTime() < config.timeToReactSecs

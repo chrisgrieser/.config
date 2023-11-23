@@ -226,6 +226,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>516F0571-89D5-4CE1-B2B0-80C285A224C0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>ABC8CBB5-C063-4FD2-8C0E-30F4356B7887</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>51903BB3-AE69-45A7-8492-CC712BB612A4</key>
 		<array>
 			<dict>
@@ -1055,6 +1068,42 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>backups||bkp</string>
+				<key>subtext</key>
+				<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups</string>
+				<key>text</key>
+				<string>Backups</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>516F0571-89D5-4CE1-B2B0-80C285A224C0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>ABC8CBB5-C063-4FD2-8C0E-30F4356B7887</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -1645,9 +1694,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>605</real>
+			<real>610</real>
 			<key>ypos</key>
-			<real>640</real>
+			<real>600</real>
 		</dict>
 		<key>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</key>
 		<dict>
@@ -1770,6 +1819,15 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>ypos</key>
 			<real>655</real>
 		</dict>
+		<key>516F0571-89D5-4CE1-B2B0-80C285A224C0</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>455</real>
+			<key>ypos</key>
+			<real>710</real>
+		</dict>
 		<key>51903BB3-AE69-45A7-8492-CC712BB612A4</key>
 		<dict>
 			<key>colorindex</key>
@@ -1840,9 +1898,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>450</real>
+			<real>455</real>
 			<key>ypos</key>
-			<real>640</real>
+			<real>600</real>
 		</dict>
 		<key>89AAC152-1A79-4CBF-9BDD-DBBAF712F72C</key>
 		<dict>
@@ -1912,6 +1970,15 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>735</real>
+		</dict>
+		<key>ABC8CBB5-C063-4FD2-8C0E-30F4356B7887</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>610</real>
+			<key>ypos</key>
+			<real>710</real>
 		</dict>
 		<key>B4D4D74C-56BC-4F3B-9840-A3CD979D396C</key>
 		<dict>

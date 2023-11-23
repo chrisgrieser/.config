@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 # INFO use `sketchybar --hotload` to auto-reload config when building stuff
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -18,8 +18,8 @@ fi
 first_row="left"
 second_row="popup.clock"
 
-# name differs slightly depending on macOS architecture
-stats="Stats,CombinedModules"
+icon_font="$CODE_FONT"
+system_font="Lucida Grande"
 
 #───────────────────────────────────────────────────────────────────────────────
 # SKETCHYBAR CALL
@@ -31,8 +31,8 @@ sketchybar \
 	padding_left=0 padding_right=0 color="$bg_color" \
 	--default \
 	updates="when_shown" drawing="on" align="left" \
-	icon.font="JetBrainsMonoNL NF:Bold:16" icon.color="$font_color" \
-	label.font="Lucida Grande:Regular:16.5" label.color="$font_color" \
+	icon.font="${icon_font}:Bold:16" icon.color="$font_color" \
+	label.font="${system_font}:Regular:16.5" label.color="$font_color" \
 	background.padding_right=10 label.padding_right=2 \
 	popup.drawing=true popup.horizontal=true popup.topmost=false \
 	popup.y_offset="-35" y_offset="18" \
@@ -62,7 +62,7 @@ sketchybar \
 	\
 	--add alias "Stats,CombinedModules" $second_row \
 	alias.color="$font_color" \
-	--set "$stats" width=250 \
+	--set "Stats,CombinedModules" width=250 \
 	\
 	--add item sync-indicator $second_row \
 	--set sync-indicator update_freq=300 icon.padding_right=3 \

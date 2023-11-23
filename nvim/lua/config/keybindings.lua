@@ -3,7 +3,7 @@ local cmd = vim.cmd
 local expand = vim.fn.expand
 local fn = vim.fn
 local u = require("config.utils")
-local keymap = require("config.utils").uniqueKeymap
+local keymap = u.uniqueKeymap
 --------------------------------------------------------------------------------
 -- META
 
@@ -117,9 +117,6 @@ keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
 keymap({ "n", "x" }, "gm", "ddpkJ", { desc = "󰗈 Merge line down" })
 keymap({ "n", "x" }, "gM", "gJ", { desc = "󰗈 Merge line up (+ trim)" })
 
-keymap("n", "+", "<C-a>")
-keymap("n", "ä", "<C-x>")
-
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
 keymap("n", "<Down>", [[<cmd>. move +1<CR>==]], { desc = "󰜮 Move Line Down" })
@@ -167,7 +164,7 @@ keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = " Esc (Terminal Mode)" })
 
 keymap("n", "<CR>", function()
 	if vim.bo.buftype == "terminal" then
-		u.normal("a") -- enter terminal mode
+		u.normal("a<CR>") -- confirm in Terminal Mode
 	elseif vim.bo.buftype == "" then
 		require("funcs.alt-alt").gotoAltBuffer()
 	else
@@ -238,7 +235,7 @@ keymap("i", "<D-e>", "``<Left>", { desc = "  Inline Code" })
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "qf", "help", "checkhealth" },
 	callback = function()
-		vim.keymap.set("n", "q", cmd.close, { buffer = true, nowait = true, desc = "Quit" })
+		vim.keymap.set("n", "q", cmd.close, { buffer = true, nowait = true, desc = "Close" })
 	end,
 })
 

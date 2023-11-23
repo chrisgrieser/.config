@@ -107,7 +107,7 @@ nnoremap g; u<C-r>
 
 " increment quicker
 nnoremap + <C-a>
-nnoremap ä <C-x>
+nnoremap ö <C-x>
 
 """"""""""""""""""""""
 " Search

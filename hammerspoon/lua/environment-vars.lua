@@ -19,6 +19,8 @@ M.passwordStore = readZshEnv("PASSWORD_STORE_DIR")
 M.vaultLocation = readZshEnv("VAULT_PATH")
 M.fileHub = readZshEnv("WD")
 
+M.codeFont = readZshEnv("CODE_FONT")
+
 --------------------------------------------------------------------------------
 -- Apps
 M.mailApp = readZshEnv("MAIL_APP")

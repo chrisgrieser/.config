@@ -1,5 +1,6 @@
 local g = vim.g
-local keymap = require("config.utils").uniqueKeymap
+local u = require("config.utils")
+local keymap = u.uniqueKeymap
 --------------------------------------------------------------------------------
 
 -- REMOTE CONTROL
@@ -11,7 +12,7 @@ vim.defer_fn(function() vim.fn.serverstart("/tmp/nvim_server.pipe") end, 400)
 --------------------------------------------------------------------------------
 
 -- SIZE & FONT
-vim.opt.guifont = "JetBrainsMonoNL NF:h25.2"
+vim.opt.guifont = vim.env.CODE_FONT .. ":h25.2"
 
 local host = vim.fn.hostname()
 local isAtOffice = (host:find("mini") or host:find("eduroam") or host:find("fak1")) ~= nil
@@ -28,7 +29,7 @@ end
 
 local function setNeovideScaleFactor(delta)
 	g.neovide_scale_factor = g.neovide_scale_factor + delta
-	require("config.utils").notify("", "Scale Factor: " .. g.neovide_scale_factor)
+	u.notify("", "Scale Factor: " .. g.neovide_scale_factor)
 end
 
 keymap({ "n", "x", "i" }, "<D-+>", function() setNeovideScaleFactor(0.01) end)
