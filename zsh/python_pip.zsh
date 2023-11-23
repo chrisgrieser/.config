@@ -58,10 +58,10 @@ function _auto_venv() {
 # 3. other commands work as usual
 function pip() {
 	if [[ "$1" == "install" && -z "$VIRTUAL_ENV" ]]; then
-		printf "\033[1;33mAre you sure you want to install outside of a virtual environment? (Y/n)\033[0m "
-		read -rk answer
+		printf "\033[1;33mAre you sure you want to install outside of a virtual environment? (y/n)\033[0m "
+		read -r answer
 		echo
-		if [[ "$answer" != "Y" ]]; then return 2; fi
+		if [[ "$answer" != "y" ]]; then return 2; fi
 		pip3 "$@"
 	elif [[ "$1" == "uninstall" ]] && [[ -z "$VIRTUAL_ENV" ]]; then
 		if ! command -v pip-autoremove &>/dev/null; then print "\033[1;33mpip-autoremove not installed.\033[0m" && return 1; fi
