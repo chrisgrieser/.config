@@ -61,7 +61,7 @@ _gc() {
 		"test" "build" "ci" "revert" "improv" "break")
 	local expl
 	_description -V conventional-commit expl 'Conventional Commit Keyword'
-	compadd "${expl[@]}" -S":" -- "${cc[@]}"
+	compadd "${expl[@]}" -P'"' -S":" -- "${cc[@]}"
 }
 compdef _gc gc
 

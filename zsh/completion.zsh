@@ -56,7 +56,7 @@ zstyle ':completion:*' completer \
 	_expand _complete _correct _approximate _complete:-fuzzy _prefix
 
 zstyle ':completion:*' ignored-patterns \
-	".git" ".DS_Store" "node_modules" "__pycache__"
+	".git" ".DS_Store" ".localized" "node_modules" "__pycache__"
 
 zstyle ':autocomplete:*' ignored-input '..d' # zsh-autocomplete
 
