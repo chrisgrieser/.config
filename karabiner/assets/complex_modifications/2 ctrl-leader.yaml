@@ -74,9 +74,20 @@ rules:
           - shell_command: open -a 'BusyCal'
           - *deactivate-leader
           - *remove-notice
-      # [ö] (looks like tweetbot): Twitter/Mastodon
+      # [ö] (looks like tweetbot): Twitter/Mastodon App
       - type: basic
         from: { key_code: semicolon } # ö on German keyboard
+        conditions:
+          - *leader-active
+          - type: input_source_if
+            input_sources: [{ language: ^de$ }]
+        to:
+          - shell_command: source "$HOME/.zshenv" && open -a "$TICKER_APP"
+          - *deactivate-leader
+          - *remove-notice
+      # [Ö] (looks like tweetbot): Twitter/Mastodon Website
+      - type: basic
+        from: { key_code: semicolon, modifiers: { mandatory: [shift] } } # ö on German keyboard
         conditions:
           - *leader-active
           - type: input_source_if
@@ -153,7 +164,7 @@ rules:
         from: { key_code: m }
         conditions: [*leader-active]
         to:
-          - shell_command: source $HOME/.zshenv && open -a "$MAIL_APP"
+          - shell_command: source "$HOME/.zshenv" && open -a "$MAIL_APP"
           - *deactivate-leader
           - *remove-notice
       # [b]rowser
@@ -161,7 +172,7 @@ rules:
         from: { key_code: b }
         conditions: [*leader-active]
         to:
-          - shell_command: source $HOME/.zshenv && open -a "$BROWSER_APP"
+          - shell_command: source "$HOME/.zshenv" && open -a "$BROWSER_APP"
           - *deactivate-leader
           - *remove-notice
       # [B]rowser & re-open last tab (shift)
