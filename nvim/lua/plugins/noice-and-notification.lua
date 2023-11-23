@@ -120,7 +120,7 @@ return {
 				mini = {
 					timeout = 3000,
 					zindex = 10, -- lower, so it does not cover nvim-notify
-					position = { col = "96%" }, -- to the left to avoid collision with scrollbar
+					position = { col = -3 }, -- to the left to avoid collision with scrollbar
 				},
 				hover = {
 					border = { style = u.borderStyle },

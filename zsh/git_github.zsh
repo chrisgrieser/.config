@@ -8,12 +8,13 @@ alias gaa='git add --all'
 alias gd='git diff'
 alias gt='git stash push && git stash show 0'
 alias gT='git stash pop'
-
 alias grh='git reset --hard'
+
 alias push='git push'
 alias pull='git pull'
 alias rebase='git rebase --interactive'
 alias unshallow='git fetch --unshallow' # make shallow clone complete again
+alias unlock='rm -v "$(git rev-parse --git-dir)/index.lock"'
 
 alias gi='gh issue list --state=open'
 alias gI='gh issue list --state=closed'
@@ -29,8 +30,8 @@ ZSH_HIGHLIGHT_REGEXP+=('#[0-9]+' 'fg=red')                                # issu
 ZSH_HIGHLIGHT_REGEXP+=('([0-9a-f]{6,}|HEAD)((\^+|~)[0-9]*)?' 'fg=yellow') # git revs
 
 # commit messages longer than 50 chars: yellow, longer than 72 chars: red
-ZSH_HIGHLIGHT_REGEXP+=('^(gc|git commit -m) ".{72,}"' 'fg=white,bold,bg=red')
-ZSH_HIGHLIGHT_REGEXP+=('^(gc|git commit -m) ".{51,71}"' 'fg=black,bg=yellow')
+ZSH_HIGHLIGHT_REGEXP+=('^(gc|git commit -m) ".{72,}' 'fg=white,bold,bg=red')
+ZSH_HIGHLIGHT_REGEXP+=('^(gc|git commit -m) ".{51,71}' 'fg=black,bg=yellow')
 
 #───────────────────────────────────────────────────────────────────────────────
 # GIT ADD, COMMIT, PULL-PUSH
@@ -99,16 +100,12 @@ function gM {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-function unlock {
-	rm "$(git rev-parse --git-dir)/index.lock"
-	echo "Lock file removed."
-}
-
 # remote info
 function grem {
 	git branch --all --verbose --verbose
-	git remote -v 
-	echo -n "\`gh\` default repo: " && gh repo set-default --view
+	echo
+	git remote --verbose
+	printf "\e[1;34mgh\e[0m default repo: "&& gh repo set-default --view
 }
 
 # Github Url: open & copy url
