@@ -2955,6 +2955,7 @@ Search more than two dozen developer documentation sites via one of the keywords
 - `win`: window information for the frontmost app
 - `code`: Code search on GitHub and SourceGraph
 - `http`: HTTP status codes
+- `exit`: Common meanings of shell exit codes
 - `uri`: URI schemes available on the device
 - `as`: AppleScript Dictionaries of installed apps
 - `sound`: Preview (pre-listen, technically) macOS System Sounds
@@ -3565,7 +3566,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.9.3</string>
+	<string>1.10.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
