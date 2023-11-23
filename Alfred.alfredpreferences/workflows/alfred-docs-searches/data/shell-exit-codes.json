@@ -1,0 +1,11 @@
+{
+	"items": [
+		{ "title": "0 Success" },
+		{ "title": "1 Catchall for general errors" },
+		{ "title": "2 Misuse of shell builtins" },
+		{ "title": "126 Command invoked cannot execute" },
+		{ "title": "127 Command not found" },
+		{ "title": "128 Command not found" }
+	]
+}
+
