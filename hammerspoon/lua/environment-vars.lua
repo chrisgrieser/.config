@@ -27,7 +27,7 @@ M.mailApp = readZshEnv("MAIL_APP")
 M.browserApp = readZshEnv("BROWSER_APP")
 M.browserDefaultsPath = readZshEnv("BROWSER_DEFAULTS_PATH")
 M.tickerApp = readZshEnv("TICKER_APP")
-M.todoApp = readZshEnv("TODOTXT_APP")
+M.todoApp = readZshEnv("TASK_APP")
 
 M.videoAndAudioApps = {
 	"IINA",

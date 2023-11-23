@@ -41,7 +41,7 @@ rules:
         to_if_alone:
           - *activate-leader
           - *set-notice
-      # 2x L-Ctrl: GoodTask
+      # 2x L-Ctrl: Task App
       - type: basic
         from: { key_code: left_control }
         conditions: [*leader-active]
@@ -49,10 +49,10 @@ rules:
           - shell_command: |
               source "$HOME/.zshenv"
               osascript -e "
-                if (application \"$TODOTXT_APP\" is frontmost) then
-                  tell application \"System Events\" to tell process \"$TODOTXT_APP\" to set visible to false
+                if (application \"$TASK_APP\" is frontmost) then
+                  tell application \"System Events\" to tell process \"$TASK_APP\" to set visible to false
                 else
-                  tell application \"$TODOTXT_APP\" to activate
+                  tell application \"$TASK_APP\" to activate
                 end if"
           - *deactivate-leader
           - *remove-notice
@@ -124,7 +124,7 @@ rules:
         conditions: [*leader-active]
         to:
           - shell_command: |
-              # HACK since `open -a "Neovide"` does not focus Neovide
+              # HACK since `open -a Neovide` does not focus Neovide
               if pgrep -xq "neovide" ; then
                 osascript -e 'tell application "Neovide" to activate'
               else

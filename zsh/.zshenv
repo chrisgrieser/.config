@@ -14,7 +14,7 @@ export BROWSER_DEFAULTS_PATH="BraveSoftware/Brave-Browser"
 export BROWSER_APP="Brave Browser" # not using "$BROWSER" since it's a reserved variable
 export MAIL_APP="Mimestream"
 export TICKER_APP="Ivory"
-export TODOTXT_APP="GoodTask"
+export TASK_APP="GoodTask"
 
 # settings
 export EDITOR=nvim
