@@ -1,8 +1,17 @@
 # DOCS https://github.com/crate-ci/typos/blob/master/docs/reference.md
+# INFO LSP does not support all fields yet: https://github.com/tekumara/typos-vscode#config-file-supportv
+#───────────────────────────────────────────────────────────────────────────────
 
+# ignore these words
+[default.extend-words]
+noice = "noice"
+termine = "termine"
+als = "als"
+
+# ignore these files
 [files]
 extend-exclude = [
-	"noice",
-	"termine",
-	"als",
+	"main-bibliography.bib", # too many false positives, PENDING https://github.com/crate-ci/typos/issues/316
+	"spelling.yml",          # spell fixer
+	"abbreviations.lua",     # spell fixer
 ]
