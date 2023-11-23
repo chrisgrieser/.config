@@ -108,6 +108,11 @@ local keybindings = {
 	-- INFO using the mapping from the terminal_keybindings.zsh
 	-- undo
 	{ key = "z", mods = "CMD", action = act.SendKey { key = "z", mods = "CTRL" } },
+	{ -- for adding inline code to a commit, hotkey consistent with GitHub
+		key = "e",
+		mods = "CMD",
+		action = act.SendString("`"), -- auto-paired & escaped by zsh binding
+	},
 	-- Grappling-hook
 	{ key = "Enter", mods = "CMD", action = act.SendKey { key = "o", mods = "CTRL" } },
 	-- accept-and-infer-next-history
