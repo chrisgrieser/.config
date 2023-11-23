@@ -211,7 +211,6 @@ serverConfigs.typos_lsp = {
 		"typos-lsp",
 		"--config=" .. u.linterConfigFolder .. "/typos.toml", -- PENDING
 	},
-	-- defiend -- codespell-ignore
 	init_options = {
 		diagnosticSeverity = "information",
 	},

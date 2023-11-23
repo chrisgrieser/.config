@@ -21,7 +21,7 @@
 			"\treturn POSIX path of (insertion location as alias)",
 			"end tell"
 		],
-		"description": "`insertion location` seems to be more reliabe: https://apple.stackexchange.com/a/68901"
+		"description": "`insertion location` seems to be more reliable: https://apple.stackexchange.com/a/68901"
 	},
 	"function": {
 		"prefix": "function",

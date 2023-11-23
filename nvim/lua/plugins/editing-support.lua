@@ -222,7 +222,7 @@ return {
 			highlight_node_at_cursor = true,
 			ignore_injected_langs = true,
 			allow_interline_swaps = true,
-			interline_swaps_witout_separator = false,
+			interline_swaps_witout_separator = false, -- PENDING https://github.com/Wansmer/sibling-swap.nvim/issues/9
 		},
 		keys = {
 			-- stylua: ignore
