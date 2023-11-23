@@ -8,7 +8,7 @@
 		"body": "from: { key_code: ${1:key}, modifiers: { mandatory: [${2:command}] } }"
 	},
 	"delay": {
-		"prefix": "delay",
+		"prefix": ["wait", "delay"],
 		"body": "- { key_code: vk_none, hold_down_milliseconds: ${1:50} }"
 	}
 }

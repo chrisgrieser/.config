@@ -55,7 +55,11 @@ local config = {
 		debugLog = {
 			javascript = "debugger; // %s",
 			typescript = "debugger; // %s",
-			python = "breakpoint()  # %s",
+			python = "breakpoint()  # %s", -- https://docs.python.org/3.11/library/functions.html?highlight=breakpoint#breakpoint
+			sh = { -- https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html
+				"set -exuo pipefail # %s",
+				"set +exuo pipefail # %s", -- re-enable, so it does not disturb stuff from interactive shell
+			},
 		},
 		timeLogStart = {
 			nvim_lua = "local timelogStart = os.time() -- %s",
@@ -138,8 +142,9 @@ local function appendLine(text)
 	end
 end
 
+---get template string, if it does not exist, return nil
 ---@param logType string
----@return string|string[]
+---@return string|string[]|nil
 ---@nodiscard
 local function getTemplateStr(logType)
 	local ft = vim.bo.filetype
@@ -207,12 +212,12 @@ end
 
 function M.timeLog()
 	if vim.b.timeLogStart == nil then vim.b.timeLogStart = true end ---@diagnostic disable-line: inject-field
-
 	local startOrStop = vim.b.timeLogStart and "timeLogStart" or "timeLogStop"
+
 	local templateStr = getTemplateStr(startOrStop)
 	if not templateStr then return end
-
 	if type(templateStr) == "string" then templateStr = { templateStr } end
+
 	for _, line in pairs(templateStr) do
 		appendLine(line:format(config.marker))
 	end
@@ -221,10 +226,13 @@ end
 
 -- simple debugger statement
 function M.debugLog()
-	local templateStr = getTemplateStr("debugLog") ---@cast templateStr string
+	local templateStr = getTemplateStr("debugLog") 
 	if not templateStr then return end
+	if type(templateStr) == "string" then templateStr = { templateStr } end
 
-	appendLine(templateStr:format(config.marker))
+	for _, line in pairs(templateStr) do
+		appendLine(line:format(config.marker))
+	end
 end
 
 ---Remove all log statements in the current buffer
