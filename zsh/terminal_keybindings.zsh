@@ -35,12 +35,3 @@ function zvm_after_init {
 }
 
 #───────────────────────────────────────────────────────────────────────────────
-
-# when typing backticks, escape & pair them
-# (useful for typing commit messages)
-function _autoEscapeBackTick {
-	LBUFFER+='\`'
-	RBUFFER+='\`'
-}
-zle -N _autoEscapeBackTick
-bindkey -M viins '`' _autoEscapeBackTick
