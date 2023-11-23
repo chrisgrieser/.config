@@ -161,13 +161,16 @@ keymap(
 
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line Numbers" })
 keymap("n", "<leader>ow", "<cmd>set wrap!<CR>", { desc = "󰖶 Wrap" })
-keymap("n", "<leader>ol", "<cmd>LspRestart<CR>", { desc = "󰒕 LspRestart" })
-keymap("n", "<leader>oh", function() vim.lsp.inlay_hint(0, nil) end, { desc = "󰩔 Inlay Hints" })
+keymap("n", "<leader>ol", vim.cmd.LspRestart, { desc = "󰒕 LspRestart" })
 
 keymap("n", "<leader>od", function() -- codespell-ignore
 	local change = vim.diagnostic.is_disabled(0) and "enable" or "disable"
 	vim.diagnostic[change](0)
 end, { desc = " Diagnostics" })
+keymap("n", "<leader>oh", function() 
+	local enabled = vim.lsp.inlay_hint.is_enabled(0)
+	vim.lsp.inlay_hint.enabled(0, not enabled)
+end, { desc = "󰒕 LSP Inlay Hints" })
 
 keymap(
 	"n",

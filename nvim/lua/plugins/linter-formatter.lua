@@ -49,8 +49,7 @@ local lspFormatting = {
 local extraInstalls = {
 	"debugpy", -- debugger
 	"ruff", -- since ruff_format and ruff_fix aren't the real names
-	"autotools-language-server", -- PENDING https://github.com/williamboman/mason-lspconfig.nvim/pull/323
-	"typos-lsp",
+	"typos-lsp", -- PENDING Mason
 }
 
 local dontInstall = {
@@ -62,8 +61,7 @@ local dontInstall = {
 	"injected",
 	"ruff_format",
 	"ruff_fix",
-	"autotools_ls", -- PENDING https://github.com/williamboman/mason-lspconfig.nvim/pull/323
-	"typos_lsp",
+	"typos_lsp", -- PENDING Mason
 }
 
 ---given the linter- and formatter-list of nvim-lint and conform.nvim, extract a

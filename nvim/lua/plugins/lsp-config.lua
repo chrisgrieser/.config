@@ -7,19 +7,19 @@ vim.g.myLsps = { -- variable used by MasonToolInstaller
 	"yamlls",
 	"jsonls",
 	"cssls",
-	"emmet_ls", -- css/html completion
-	"pyright", -- python LSP
+	"emmet_ls",           -- css/html completion
+	"pyright",            -- python LSP
 	"jedi_language_server", -- python (has much better hovers)
-	"ruff_lsp", -- python linter
-	"marksman", -- markdown
-	"biome", -- ts/js/json linter/formatter
-	"tsserver", -- ts/js
-	"bashls", -- used for zsh
-	"taplo", -- toml
+	"ruff_lsp",           -- python linter
+	"marksman",           -- markdown
+	"biome",              -- ts/js/json linter/formatter
+	"tsserver",           -- ts/js
+	"bashls",             -- used for zsh
+	"taplo",              -- toml
 	"html",
-	"ltex", -- languagetool
-	"ast_grep", -- custom, ast-based linter
-	"autotools_ls", -- Makefiles
+	"ltex",               -- languagetool
+	"ast_grep",           -- custom, ast-based linter
+	"autotools_ls",       -- Makefiles
 	"typos_lsp",
 }
 
@@ -58,7 +58,7 @@ serverConfigs.lua_ls = {
 				postfix = ".", -- useful for `table.insert` and the like
 			},
 			diagnostics = {
-				globals = { "vim" }, -- when contributing to nvim plugins missing a .luarc.json
+				globals = { "vim" },    -- when contributing to nvim plugins missing a .luarc.json
 				disable = { "trailing-space" }, -- formatter already does that
 			},
 			hint = {
@@ -167,7 +167,7 @@ serverConfigs.tsserver = {
 		-- enable checking javascript without a `jsconfig.json`
 		implicitProjectConfiguration = { -- DOCS https://www.typescriptlang.org/tsconfig
 			checkJs = true,
-			target = "ES2022", -- JXA is compliant with most of ECMAScript: https://github.com/JXA-Cookbook/JXA-Cookbook/wiki/ES6-Features-in-JXA
+			target = "ES2022",        -- JXA is compliant with most of ECMAScript: https://github.com/JXA-Cookbook/JXA-Cookbook/wiki/ES6-Features-in-JXA
 		},
 
 		-- INFO "cannot redeclare block-scoped variable" -> not useful for JXA.
@@ -209,9 +209,9 @@ serverConfigs.tsserver = {
 serverConfigs.typos_lsp = {
 	cmd = {
 		"typos-lsp",
-		"--config=" .. u.linterConfigFolder .. "/typos.toml",
+		"--config=" .. u.linterConfigFolder .. "/typos.toml", -- PENDING
 	},
-	-- noice
+	-- defiend -- codespell-ignore
 	init_options = {
 		diagnosticSeverity = "information",
 	},
@@ -251,7 +251,7 @@ serverConfigs.ltex = {
 			dictionary = { ["en-US"] = getDictWords() },
 			disabledRules = {
 				["en-US"] = {
-					"EN_QUOTES", -- don't expect smart quotes
+					"EN_QUOTES",       -- don't expect smart quotes
 					"WHITESPACE_RULE", -- too many false positives
 					"PUNCTUATION_PARAGRAPH_END", -- too many false positives
 					"CURRENCY",
@@ -262,7 +262,7 @@ serverConfigs.ltex = {
 				MORFOLOGIK_RULE_EN_US = "hint", -- spelling
 			},
 			additionalRules = { enablePickyRules = true },
-			completionEnabled = false, -- already taken care of by cmp-buffer
+			completionEnabled = false,           -- already taken care of by cmp-buffer
 			markdown = { nodes = { Link = "dummy" } }, -- ignore links https://valentjn.github.io/ltex/settings.html#ltexmarkdownnodes
 		},
 	},
@@ -310,7 +310,7 @@ local function setupAllLsps()
 	local lspCapabilities = vim.lsp.protocol.make_client_capabilities()
 	lspCapabilities.textDocument.completion.completionItem.snippetSupport = true
 	lspCapabilities.textDocument.foldingRange =
-		{ dynamicRegistration = false, lineFoldingOnly = true }
+	{ dynamicRegistration = false, lineFoldingOnly = true }
 
 	for lsp, serverConfig in pairs(serverConfigs) do
 		serverConfig.capabilities = lspCapabilities
@@ -336,7 +336,7 @@ return {
 			library = { plugins = false }, -- too slow with all my plugins
 		},
 	},
-	{ -- configure LSPs
+	{                                  -- configure LSPs
 		"neovim/nvim-lspconfig",
 		dependencies = "folke/neodev.nvim", -- ensures it's loaded before lua_ls
 		init = function()

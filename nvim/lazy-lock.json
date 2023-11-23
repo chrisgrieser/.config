@@ -34,7 +34,7 @@
   "lsp_signature.nvim": { "branch": "master", "commit": "eb7ae6508fc22f4a6d57bd8de7a09f7549086793" },
   "lualine.nvim": { "branch": "master", "commit": "2248ef254d0a1488a72041cfb45ca9caada6d994" },
   "markdown-preview.nvim": { "branch": "master", "commit": "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee" },
-  "mason-lspconfig.nvim": { "branch": "main", "commit": "3d9e06ca604185ea5675d3c2ffd4284e0c2c7ffc" },
+  "mason-lspconfig.nvim": { "branch": "main", "commit": "a5476087db0a20c05bd1163e1cd4a29b795e73a7" },
   "mason-tool-installer.nvim": { "branch": "main", "commit": "e4f34741daa9cf95de68a603d3e7a6844a69fdf0" },
   "mason.nvim": { "branch": "main", "commit": "41e75af1f578e55ba050c863587cffde3556ffa6" },
   "mini.operators": { "branch": "main", "commit": "7a97e2528a4c274e9da8953d3ba22f493c360a9f" },
