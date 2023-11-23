@@ -49,6 +49,7 @@ local lspFormatting = {
 local extraInstalls = {
 	"debugpy", -- debugger
 	"ruff", -- since ruff_format and ruff_fix aren't the real names
+	"autotools-language-server", -- PENDING Mason
 }
 
 local dontInstall = {
