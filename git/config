@@ -23,6 +23,8 @@
 [pull]
 	rebase = true # rebase changes instead of merging. 
 	# Alternative: --ff-only https://blog.sffc.xyz/post/185195398930/why-you-should-use-git-pull-ff-only
+[push]
+	autoSetupRemote = true
 [rebase]
 	autoSquash = true
 	autoStash = true

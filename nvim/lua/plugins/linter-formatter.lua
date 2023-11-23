@@ -34,7 +34,7 @@ local formatters = {
 	sh = { "shellcheck", "shfmt" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
 	["_"] = { "trim_whitespace", "trim_newlines", "squeeze_blanks" }, -- filetypes w/o formatter
-	["*"] = { "codespell" }, -- all filetypes
+	["*"] = { "typos" }, -- all filetypes
 }
 
 -- filetypes that should use lsp-formatting (after the formatters)
@@ -107,7 +107,6 @@ local function linterConfigs()
 	}
 	lint.linters.typos.args = { "--config=" .. linterConfig .. "/typos.toml", "--format=json", "-" }
 end
--- defiend
 
 local function lintTriggers()
 	local function doLint()
@@ -159,6 +158,18 @@ local formatterConfig = {
 				if ignore then u.notify("conform.nvim", "Ignoring main-bibliography.bib.") end
 				return not ignore
 			end,
+		},
+
+		-- PENDING https://github.com/stevearc/conform.nvim/pull/214
+		typos = {
+			command = "typos",
+			stdin = true,
+			args = {
+				"--config=" .. linterConfig .. "/typos.toml",
+				"--write-changes",
+				"-",
+			},
+			exit_codes = { 0, 2 },
 		},
 	},
 }

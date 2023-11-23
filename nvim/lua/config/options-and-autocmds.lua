@@ -104,6 +104,9 @@ opt.timeoutlen = 666 -- also affects duration until which-key is shown
 -- Make
 opt.makeprg = "make --silent --warn-undefined-variables"
 
+-- Fold
+opt.foldminlines = 3
+
 --------------------------------------------------------------------------------
 
 -- Popups & Cmdline
