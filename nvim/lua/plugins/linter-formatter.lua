@@ -19,7 +19,7 @@ local linters = {
 }
 
 for _, list in pairs(linters) do
-	table.insert(list, "codespell")
+	table.insert(list, "typos")
 	table.insert(list, "editorconfig-checker")
 end
 
@@ -49,7 +49,6 @@ local lspFormatting = {
 local extraInstalls = {
 	"debugpy", -- debugger
 	"ruff", -- since ruff_format and ruff_fix aren't the real names
-	"typos-lsp", -- PENDING Mason
 }
 
 local dontInstall = {
@@ -61,7 +60,7 @@ local dontInstall = {
 	"injected",
 	"ruff_format",
 	"ruff_fix",
-	"typos_lsp", -- PENDING Mason
+	"typos", -- PENDING https://github.com/mason-org/mason-registry/pull/3559
 }
 
 ---given the linter- and formatter-list of nvim-lint and conform.nvim, extract a
@@ -106,7 +105,9 @@ local function linterConfigs()
 		"--disable=no-multiple-blanks",
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
 	}
+	lint.linters.typos.args = { "--config=" .. linterConfig .. "/typos.toml", "--format=json", "-" }
 end
+-- defiend
 
 local function lintTriggers()
 	local function doLint()
