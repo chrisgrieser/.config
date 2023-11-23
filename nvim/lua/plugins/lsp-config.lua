@@ -20,6 +20,7 @@ vim.g.myLsps = { -- variable used by MasonToolInstaller
 	"ltex", -- languagetool
 	"ast_grep", -- custom, ast-based linter
 	"autotools_ls", -- Makefiles
+	"typos_lsp",
 }
 
 --------------------------------------------------------------------------------
@@ -198,6 +199,16 @@ serverConfigs.tsserver = {
 				includeInlayVariableTypeHintsWhenTypeMatchesName = true,
 			},
 		},
+	},
+}
+
+--------------------------------------------------------------------------------
+-- TYPOS
+-- DOCS https://github.com/tekumara/typos-vscode#settings
+-- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/typos_lsp.lua
+serverConfigs.typos_lsp = {
+	init_options = {
+		diagnosticSeverity = "information" ,
 	},
 }
 
