@@ -11,11 +11,14 @@ for type, icon in pairs(diagnosticTypes) do
 end
 
 --------------------------------------------------------------------------------
--- cause lua_ls leaves annoying dot in their source…
+
 ---@param diag Diagnostic
 ---@return string
-local function rmTrailDot(diag)
-	local msg = diag.message:gsub(" ?%.$", "")
+local function diagMsgFormat(diag)
+	local msg = diag
+		.message
+		:gsub(" ?%.$", "") -- trailing dot for lua_ls
+		:gsub("`(%w+)` should be `(%w+)`", "%1 󰁔 %2") -- typos
 	return msg
 end
 
@@ -23,9 +26,11 @@ end
 ---@param mode "virtual_text"|"float"
 ---@return string displayedText
 ---@return string? highlight_group
-local function diagSuffix(diag, mode)
+local function diagSourceAsSuffix(diag, mode)
 	if not (diag.source or diag.code) then return "" end
-	local source = diag.source and diag.source:gsub(" ?%.$", "") or ""
+	local source = (diag.source or "")
+		:gsub(" ?%.$", "") -- trailing dot for lua_ls
+		:gsub("%[typos%] typo", "typos") -- fix `typos` source
 	local rule = diag.code and ": " .. diag.code or ""
 
 	if mode == "virtual_text" then
@@ -43,7 +48,7 @@ local function formatVirtualText(diag)
 		local msg = diag.message:gsub(".*%((.*)%)", "%1")
 		return msg
 	end
-	return rmTrailDot(diag)
+	return diagMsgFormat(diag)
 end
 
 vim.diagnostic.config {
@@ -53,7 +58,7 @@ vim.diagnostic.config {
 		format = formatVirtualText,
 		suffix = function(diag)
 			if diag.source == "editorconfig-checker" then return "" end
-			return diagSuffix(diag, "virtual_text")
+			return diagSourceAsSuffix(diag, "virtual_text")
 		end,
 	},
 	float = {
@@ -65,7 +70,7 @@ vim.diagnostic.config {
 			if total == 1 then return "" end
 			return "• ", "NonText"
 		end,
-		format = rmTrailDot,
-		suffix = function(diag) return diagSuffix(diag, "float") end,
+		format = diagMsgFormat,
+		suffix = function(diag) return diagSourceAsSuffix(diag, "float") end,
 	},
 }
