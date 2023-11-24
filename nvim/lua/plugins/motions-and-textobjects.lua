@@ -32,19 +32,9 @@ return {
 		opts = { skipInsignificantPunctuation = true },
 		keys = {
 			-- stylua: ignore
-			{
-				"e",
-				"<cmd>lua require('spider').motion('e')<CR>",
-				mode = { "n", "o", "x" },
-				desc = "󱇫 Spider e",
-			},
+			{ "e", "<cmd>lua require('spider').motion('e')<CR>", mode = { "n", "o", "x" }, desc = "󱇫 Spider e" },
 			-- stylua: ignore
-			{
-				"b",
-				"<cmd>lua require('spider').motion('b')<CR>",
-				mode = { "n", "o", "x" },
-				desc = "󱇫 Spider b",
-			},
+			{ "b", "<cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" }, desc = "󱇫 Spider b" },
 		},
 	},
 	-----------------------------------------------------------------------------
@@ -59,16 +49,20 @@ return {
 				mode = "o", -- mapped manually to only set operator pending mode
 				desc = "󱡔  comment textobj",
 			},
-			{ "dq", "mzd<cmd>TSTextobjectSelect @comment.outer<CR>`z", desc = " Sticky Delete Comment" },
-			{ -- change inner comment (HACK, since only outer comments are supported rn)
+			{
+				"dq",
+				"mzd<cmd>TSTextobjectSelect @comment.outer<CR>`z",
+				desc = " Sticky Delete Comment",
+			},
+			{-- HACK since only outer comments are supported right now
 				"cq",
-				function ()
+				function() 
+					vim.fn.setreg("z", vim.bo.commentstring:format(""))
 					vim.cmd.TSTextobjectSelect("@comment.outer")
-					vim.cmd.normal("dx")
-					vim.cmd.startinsert{ bang = true }
-					local com = vim.bo.commentstring
+					vim.cmd.normal('d"zp')
+					vim.cmd.startinsert { bang = true }
 				end,
-				desc = " Change Comment",
+				desc = " Change Inner Comment",
 			},
 		},
 	},
@@ -101,7 +95,7 @@ return {
 			{ "ge", "<cmd>lua require('various-textobjs').diagnostic()<CR>", mode = { "x", "o" }, desc = "󱡔 diagnostic textobj" },
 			{ "L", "<cmd>lua require('various-textobjs').url()<CR>", mode = "o", desc = "󱡔 link textobj" },
 			{ "o", "<cmd>lua require('various-textobjs').column()<CR>", mode = "o", desc = "󱡔 column textobj" },
-			{ "u", "<cmd>lua require('various-textobjs').multiCommentedLines()<CR>", mode = "o", desc = "󱡔 multi-comment-lint textobj" },
+			{ "u", "<cmd>lua require('various-textobjs').multiCommentedLines()<CR>", mode = "o", desc = "󱡔 multi-line-comment textobj" },
 			{ "in", "<cmd>lua require('various-textobjs').notebookCell('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner cell textobj" },
 			{ "an", "<cmd>lua require('various-textobjs').notebookCell('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer cell textobj" },
 
