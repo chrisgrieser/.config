@@ -2,11 +2,12 @@
 # INFO LSP does not support all fields yet: https://github.com/tekumara/typos-vscode#config-file-supportv
 #───────────────────────────────────────────────────────────────────────────────
 
-# ignore these words
 [default.extend-words]
+# ignore these words
 noice = "noice"
-termine = "termine"
+Termine = "Termine"
 als = "als"
+Fixe = "Fixe"
 
 # ignore these files
 [files]
