@@ -19,7 +19,7 @@ alias make='make --silent --warn-undefined-variables'
 function which { builtin which -a "$@" | bat --language=sh; }
 
 # eza
-alias l=' eza --all --long --time-style=relative --no-user --smart-group \
+alias l='eza --all --long --time-style=relative --no-user --smart-group \
 	--total-size --no-quotes --git-ignore --sort=newest'
 alias tree='eza --tree --level=2 --git-ignore --no-quotes'
 alias treee='eza --tree --level=3 --git-ignore --no-quotes'
@@ -27,7 +27,9 @@ alias treeee='eza --tree --level=4 --git-ignore --no-quotes'
 
 # bat
 function bat {
-	command bat --theme="$(defaults read -g AppleInterfaceStyle &>/dev/null && echo Dracula || echo GitHub)" "$@"
+	local theme
+	theme="$(defaults read -g AppleInterfaceStyle &>/dev/null && echo "Dracula" || echo "GitHub")"
+	command bat --theme="$theme" "$@"
 }
 
 # misc
