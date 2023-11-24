@@ -90,6 +90,7 @@ rules:
           - key_code: escape
           - *remove-notice
           - *enter-normal-mode
+          - *leave-edit-mode
         to:
           - { key_code: right_shift, modifiers: [control, option, command] }
         conditions: [*goodtask-app, *goodtask-insert-mode]

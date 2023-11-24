@@ -27,12 +27,15 @@ alias rel='make --silent release' # personal convention to have `make release`
 ZSH_HIGHLIGHT_REGEXP+=('#[0-9]+' 'fg=red')
 ZSH_HIGHLIGHT_REGEXP+=('([0-9a-f]{6,}|HEAD)((\^+|~)[0-9]*)?' 'fg=yellow')
 
-# commit messages longer than 50 chars: yellow, longer than 72 chars: red
+# commit messages longer than 50 chars: orange, longer than 72 chars: red
+ZSH_HIGHLIGHT_REGEXP+=('^(gc|git commit -m) ".{51,71}' 'fg=208') # 208 = orange
 ZSH_HIGHLIGHT_REGEXP+=('^(gc|git commit -m) ".{72,}' 'fg=white,bold,bg=red')
-ZSH_HIGHLIGHT_REGEXP+=('^(gc|git commit -m) ".{51,71}' 'fg=black,bg=yellow')
 
 # highlight conventional commits
-ZSH_HIGHLIGHT_REGEXP+=('(feat|fix|test|perf|build|ci|revert|refactor|chore|docs|break|style|improv)(\(.+\)|\\!)?:' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=(
+	'(feat|fix|test|perf|build|ci|revert|refactor|chore|docs|break|style|improv)(\(.+\)|\\!)?:'
+	'fg=magenta,bold'
+)
 
 #───────────────────────────────────────────────────────────────────────────────
 # GIT ADD, COMMIT, PULL-PUSH

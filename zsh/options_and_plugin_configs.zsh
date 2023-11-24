@@ -45,7 +45,7 @@ export GH_NO_UPDATE_NOTIFIER=1
 #───────────────────────────────────────────────────────────────────────────────
 # ZSH PLUGIN SETTINGS
 
-export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets regexp root)
+export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets regexp)
 
 # DOCS https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/regexp.md
 # shellcheck disable=2034 # used in other files
