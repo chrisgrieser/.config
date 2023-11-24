@@ -7,10 +7,9 @@ export LC_CTYPE="en_US.UTF-8"
 
 # DOCS https://zsh.sourceforge.io/Doc/Release/Options.html
 setopt INTERACTIVE_COMMENTS # comments in interactive mode (useful for copypasting)
-setopt CORRECT_ALL
+setopt CORRECT
 export CORRECT_IGNORE="cd" # cause zsh is sometimes dumb and suggests `fd` m(
 setopt GLOB_DOTS           # glob includes dotfiles
-setopt EXTENDED_GLOB       # more glob operators https://zsh.sourceforge.io/Doc/Release/Expansion.html#Glob-Operators
 setopt PIPE_FAIL           # exit if pipeline failed
 
 #───────────────────────────────────────────────────────────────────────────────

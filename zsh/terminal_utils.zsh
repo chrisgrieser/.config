@@ -53,7 +53,7 @@ function p {
 		yq "." "$file"
 		;;
 	"json")
-		command jless --no-line-numbers "." "$file"
+		command jless --no-line-numbers "$file"
 		;;
 	"pdf")
 		qlmanage -p "$file"
