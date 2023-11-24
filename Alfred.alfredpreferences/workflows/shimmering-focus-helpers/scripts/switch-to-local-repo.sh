@@ -27,7 +27,7 @@ osascript -e '
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# install only "production", since the dev-depdencies are on my machine globally
+# install only "production", since the dev-dependencies are on my machine globally
 # installed and only listed in the package.json for documentation purposes
 cd "./shimmering-focus/" || return 1
 npm install --omit=dev
