@@ -58,9 +58,7 @@ function run(argv) {
 
 	// GUARD
 	if (!query) {
-		return JSON.stringify({
-			items: [{ title: "⚠️ No query provided.", subtitle: "Please provide a query.", valid: false }],
-		});
+		return JSON.stringify({ items: [{ title: "Waiting for query…", valid: false }] });
 	}
 
 	const apiURL = `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}`;
