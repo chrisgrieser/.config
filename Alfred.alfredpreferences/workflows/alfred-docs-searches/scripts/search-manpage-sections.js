@@ -24,13 +24,7 @@ function alfredMatcher(str) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	// DOCS https://www.mankier.com/api
-	const apiUrl = "https://www.mankier.com/api/v2/mans/?sections=1,2,7,8&q=";
-
-	// process Alfred args
-	const query = argv[0];
-	if (!query) {
-		return JSON.stringify({ items: [{ title: "Waiting for query…", valid: false }] });
-	}
+	const sectionApiUrl = `https://www.mankier.com/api/v2/mans/${$.getenv("cmd")}.${$.getenv("section")}`;
 
 	// local binaries
 	const installedBinaries = app
@@ -40,23 +34,12 @@ function run(argv) {
 		.split("\r");
 
 	/** @type{AlfredItem[]} */
-	const manPages = JSON.parse(httpRequest(apiUrl + query)).results.map(
-		(/** @type {{ name: string; section: string; description: string; }} */ result) => {
-			const cmd = result.name;
-			const section = result.section;
-			const icon = installedBinaries.includes(cmd) ? " ✅" : "";
+	const sections = JSON.parse(httpRequest(sectionApiUrl)).sections.map((section) => ({
+		title: section.title,
+		match: alfredMatcher(section.title),
+		arg: section.url,
+		uid: section,
+	}));
 
-			return {
-				title: cmd + icon,
-				subtitle: `(${section})  ${result.description}`,
-				match: alfredMatcher(cmd),
-				uid: cmd,
-				// pass to next script filter
-				variables: { cmd: cmd, section: section },
-				arg: "",
-			};
-		},
-	);
-
-	return JSON.stringify({ items: manPages });
+	return JSON.stringify({ items: sections });
 }
