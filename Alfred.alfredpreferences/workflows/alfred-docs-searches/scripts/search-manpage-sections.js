@@ -13,8 +13,8 @@ function httpRequest(url) {
 
 /** @param {string} str */
 function alfredMatcher(str) {
-	const clean = str.replace(/[-_]/g, " ");
-	const squeezed = str.replace(/[-_]/g, "");
+	const clean = str.replace(/[<>-_;()]/g, " ");
+	const squeezed = str.replace(/[-_;]/g, "");
 	return [clean, squeezed, str].join(" ") + " ";
 }
 
@@ -22,24 +22,44 @@ function alfredMatcher(str) {
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
-function run(argv) {
+function run() {
 	// DOCS https://www.mankier.com/api
 	const sectionApiUrl = `https://www.mankier.com/api/v2/mans/${$.getenv("cmd")}.${$.getenv("section")}`;
 
-	// local binaries
-	const installedBinaries = app
-		.doShellScript(
-			"echo $PATH | tr ':' '\n' | xargs -I {} find {} -mindepth 1 -maxdepth 1 -type f -or -type l -perm '++x' | xargs basename",
-		)
-		.split("\r");
+	const manpageObj = JSON.parse(httpRequest(sectionApiUrl));
+
+	const sectionToIgnore = ["See Also", "Bugs"];
 
 	/** @type{AlfredItem[]} */
-	const sections = JSON.parse(httpRequest(sectionApiUrl)).sections.map((section) => ({
-		title: section.title,
-		match: alfredMatcher(section.title),
-		arg: section.url,
-		uid: section,
-	}));
+	const sections = manpageObj.sections
+		.map((/** @type {{ title: string; url: string; }} */ section) => ({
+			title: section.title,
+			match: alfredMatcher(section.title),
+			arg: section.url,
+			uid: section,
+		}))
+		.filter((/** @type {{ title: string; }} */ section) => !sectionToIgnore.includes(section.title));
 
-	return JSON.stringify({ items: sections });
+	const anchors = manpageObj.anchors.map(
+		(/** @type {{ anchor: string; description: string; url: string; }} */ anchor) => {
+			// format anchors for Alfred
+			// anchors look like this: <strong>--changed-before</strong> <em>date|duration</em>
+			const title = anchor.anchor
+				.replace(/<strong>(.*?)<\/strong>/, "$1")
+				.replace(/<em>(.*?)<\/em>/, "<$1>");
+
+			// remove html
+			const desc = anchor.description.replace(/<\w*?>(.*?)<\/\w*?>/g, "$1");
+
+			return {
+				title: title,
+				subtitle: desc,
+				match: alfredMatcher(title),
+				arg: anchor.url,
+				uid: title,
+			};
+		},
+	);
+
+	return JSON.stringify({ items: [...sections, ...anchors] });
 }

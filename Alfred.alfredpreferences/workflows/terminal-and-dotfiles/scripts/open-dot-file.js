@@ -6,9 +6,9 @@ app.includeStandardAdditions = true;
 /** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#;,/\\[\]]/g, " ");
-	const merged = str.replace(/[-_.]/g, "");
-	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
-	return [merged, clean, camelCaseSeperated, str].join(" ");
+	const squeezed = str.replace(/[-_.]/g, "");
+	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
+	return [clean, camelCaseSeparated, squeezed, str].join(" ");
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -25,7 +25,8 @@ function run() {
 
 	/** @type{AlfredItem[]} */
 	const fileArray = app
-		.doShellScript( // INFO using `fd` over `find` for speed and gitignoring
+		.doShellScript(
+			// INFO using `fd` over `find` for speed and gitignoring
 			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; cd "${dotfileFolder}" ;
 			fd --type=file --type=symlink --hidden --absolute-path \\
 			-E "*.plist" -E "*.png"`,
