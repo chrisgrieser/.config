@@ -45,7 +45,6 @@ if vim.version().major == 0 and vim.version().minor >= 10 then
 		# nvim 0.10
 		- stevanmilic/nvim-lspimport can now be used
 		- satellite.nvim can now be updated.
-		- change event trigger for symbols-usage
 		- biome lspconfig https://github.com/neovim/nvim-lspconfig/issues/2807
 		- yaml-ls dynamic formatting as well?
 		- vim.system
@@ -53,9 +52,8 @@ if vim.version().major == 0 and vim.version().minor >= 10 then
 		- vim.uv instead of vim.loop
 		- ftAbbr & abbreviations.lua: vim.keymap.set('ia', lhs, rhs, { buffer = true })
 		- inlay hints setup: https://www.reddit.com/r/neovim/comments/16tmzkh/comment/k2gpy16/?context=3
-		- change lsp-signature to inline hint
+		- change lsp-signature to inlay hint
 		- vim.snippet https://www.reddit.com/r/neovim/comments/17cwptz/comment/k5uoswd/?context=3
-		- exrc https://www.reddit.com/r/neovim/comments/17oa85c/comment/k827hts/?context=3
 	]]
 	vim.notify(todo)
 end

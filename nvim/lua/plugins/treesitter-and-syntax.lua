@@ -49,10 +49,6 @@ local tsConfig = {
 				["a" .. textobjMaps.call] = { query = "@call.outer", desc = "󱡔 outer call textobj" },
 				["i" .. textobjMaps.call] = { query = "@call.inner", desc = "󱡔 inner call textobj" },
 				-- stylua: ignore end
-
-				-- INFO later remapped to q only in operator pending mode to avoid conflict
-				-- @comment.inner not supported yet for most languages
-				["&&&"] = { query = "@comment.outer", desc = "which_key_ignore" },
 			},
 		},
 	},

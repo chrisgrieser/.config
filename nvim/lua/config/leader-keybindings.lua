@@ -19,7 +19,7 @@ keymap(
 
 -- Copy Last Command
 keymap("n", "<leader>lc", function()
-	local lastCommand = fn.getreg(":")
+	local lastCommand = fn.getreg(":"):gsub("^lua[ =]*", "")
 	fn.setreg("+", lastCommand)
 	u.notify("Copied", lastCommand)
 end, { desc = "󰘳 Copy last command" })

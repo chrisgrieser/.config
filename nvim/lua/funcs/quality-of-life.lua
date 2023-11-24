@@ -96,11 +96,12 @@ end
 --------------------------------------------------------------------------------
 
 function M.openAtRegex101()
-	-- keymaps assume a/ and i/ mapped as regex textobj via treesitter textobj
-	-- selene: allow(mixed_table)
-	vim.cmd.normal { '"zya/', bang = false } -- yank outer regex
-	-- selene: allow(mixed_table)
-	vim.cmd.normal { "vi/", bang = false } -- select inner regex for easy replacement
+	-- copy regex to register
+	vim.cmd.TSTextobjectSelect("@regex.outer")
+	u.normal('"zy')
+
+	-- reselect for easier pasting
+	vim.cmd.TSTextobjectSelect("@regex.inner") 
 
 	-- TODO use treesitter to get pattern and flags
 	local regex = vim.fn.getreg("z")
