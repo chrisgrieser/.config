@@ -39,7 +39,7 @@ return {
 	{ -- UFO
 		"kevinhwang91/nvim-ufo",
 		dependencies = "kevinhwang91/promise-async",
-		commit = "a6132d0", -- PENDING Bug fixes
+		-- commit = "a6132d0", -- PENDING Bug fixes
 		event = "BufReadPost", -- needed for folds to load properly
 		keys = {
 			{

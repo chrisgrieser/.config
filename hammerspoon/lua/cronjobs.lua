@@ -67,6 +67,18 @@ M.timer_nightlyMaintenance = hs.timer
 --------------------------------------------------------------------------------
 -- SLEEP TIMER
 
+
+local function closeFullscreenSpaces()
+	local allSpaces = hs.spaces.allSpaces()
+	if not allSpaces then return end
+	for _, spaces in pairs(allSpaces) do
+		for _, spaceId in pairs(spaces) do
+			if hs.spaces.spaceType(spaceId) == "fullscreen" then hs.spaces.removeSpace(spaceId) end
+		end
+	end
+end
+
+
 -- Between 0:00 and 7:00, check every 10 min if device has been idle for 30
 -- minutes. If so, alert and wait for another minute. If still idle then, quit
 -- video apps.
@@ -98,7 +110,7 @@ M.timer_sleepAutoVideoOff = hs.timer
 			-- 2. close leftover fullscreen spaces created by apps running in fullscreen
 			u.closeTabsContaining("youtu")
 			u.quitApps(env.videoAndAudioApps)
-			u.closeFullscreenSpaces()
+			closeFullscreenSpaces()
 		end)
 	end)
 	:start()

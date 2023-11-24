@@ -94,7 +94,6 @@ local function linterConfigs()
 	local lint = require("lint")
 	lint.linters_by_ft = linters
 
-	lint.linters.codespell.args = { "--toml=" .. linterConfig .. "/codespell.toml" }
 	lint.linters.shellcheck.args = { "--shell=bash", "--format=json", "--external-sources", "-" }
 	lint.linters.vale.args =
 		{ "--output=JSON", "--ext=.md", "--no-exit", "--config=" .. linterConfig .. "/vale/vale.ini" }
@@ -143,8 +142,8 @@ local formatterConfig = {
 		markdownlint = {
 			prepend_args = { "--config=" .. linterConfig .. "/markdownlint.yaml" },
 		},
-		codespell = {
-			prepend_args = { "--toml=" .. linterConfig .. "/codespell.toml" },
+		typos = {
+			prepend_args = { "--config=" .. linterConfig .. "/typos.toml" },
 		},
 		-- stylua: ignore
 		["bibtex-tidy"] = {
@@ -158,18 +157,6 @@ local formatterConfig = {
 				if ignore then u.notify("conform.nvim", "Ignoring main-bibliography.bib.") end
 				return not ignore
 			end,
-		},
-
-		-- PENDING https://github.com/stevearc/conform.nvim/pull/214
-		typos = {
-			command = "typos",
-			stdin = true,
-			args = {
-				"--config=" .. linterConfig .. "/typos.toml",
-				"--write-changes",
-				"-",
-			},
-			exit_codes = { 0, 2 },
 		},
 	},
 }

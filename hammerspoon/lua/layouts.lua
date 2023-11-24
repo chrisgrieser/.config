@@ -58,7 +58,6 @@ local function workLayout()
 
 	-- close
 	u.closeAllFinderWins()
-	u.closeFullscreenSpaces()
 	u.quitApps(env.videoAndAudioApps)
 	require("lua.private").closer()
 
