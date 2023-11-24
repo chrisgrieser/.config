@@ -53,22 +53,21 @@ return {
 		event = "BufReadPre", -- not later to ensure it loads in time properly
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		keys = {
-			-- HACK avoid conflict with visual mode comment from Comments.nvim
-			{ "q", "&&&", mode = "o", desc = "󱡔 comment textobj", remap = true },
-			{ -- sticky deleting comment
-				"dq",
-				function()
-					local prevCursor = vim.api.nvim_win_get_cursor(0)
-					vim.cmd.normal { "d&&&" } -- without bang for remapping
-					vim.api.nvim_win_set_cursor(0, prevCursor)
-				end,
-				remap = true,
-				desc = " Delete Comment",
+			{ -- avoid conflict with comment.nvim's visual mode
+				"q",
+				function() vim.cmd.TSTextobjectSelect("@comment.outer") end,
+				mode = "o", -- mapped manually to only set operator pending mode
+				desc = "󱡔  comment textobj",
 			},
+			{ "dq", "mzd<cmd>TSTextobjectSelect @comment.outer<CR>`z", desc = " Sticky Delete Comment" },
 			{ -- change inner comment (HACK, since only outer comments are supported rn)
 				"cq",
-				"d&&&xQ",
-				remap = true,
+				function ()
+					vim.cmd.TSTextobjectSelect("@comment.outer")
+					vim.cmd.normal("dx")
+					vim.cmd.startinsert{ bang = true }
+					local com = vim.bo.commentstring
+				end,
 				desc = " Change Comment",
 			},
 		},
