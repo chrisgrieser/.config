@@ -95,7 +95,7 @@ function jx() {
 		sort | uniq |                # remove duplicates
 		sed -E 's/^json\.?/./' |     # rm "json" prefix, keep dot for yq (Array: `json[0]`, Object: `json.key`)
 		sed $'s/\\./\033[1;31m./g' | # colorize dots
-		fzf --ansi --no-sort --query="$query" --info=inline --exact \
+		fzf --ansi --no-sort --track --query="$query" --info=inline --exact \
 			--height="80%" --preview-window="45%" --keep-right \
 			--preview='yq {} --colors --output-format=json "/tmp/temp.json" | grep -v "null"')
 
