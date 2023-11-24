@@ -127,7 +127,7 @@ format = '(\([+$added]($added_style)/[-$deleted]($deleted_style)\)) '
 
 [cmd_duration]
 min_time = 2000
-format = "[󰔟  $duration](bold cyan)"
+format = "[󰔟  $duration ](bold cyan)"
 
 [custom.alfred]
 description = "Version number of Alfred Workflow"

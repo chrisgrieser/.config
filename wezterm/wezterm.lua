@@ -4,23 +4,20 @@
 -- INFO the first theme in the list is used
 -- rest are themes I already tried and also like
 local darkThemes = {
-	"cyberpunk",
-	"Paraiso Dark",
-	"MaterialDesignColors",
+	"duckbones",
 	"ChallengerDeep",
 	"Tinacious Design (Dark)",
-	"Afterglow (Gogh)",
-	"duckbones",
 	"Kanagawa (Gogh)",
-	"TokyoNight (Gogh)",
+	"cyberpunk",
+	"MaterialDesignColors",
+	"Afterglow (Gogh)",
 }
 local lightThemes = {
-	"Solar Flare Light (base16)",
+	"Ivory Light (terminal.sexy)",
 	"Cupcake (base16)",
-	"Atelierdune (light) (terminal.sexy)",
+	"Solar Flare Light (base16)",
 	"Google Light (Gogh)",
 	"Atelier Lakeside Light (base16)",
-	"Ivory Light (terminal.sexy)",
 	"Edge Light (base16)",
 	"Silk Light (base16)",
 	"seoulbones_light",
