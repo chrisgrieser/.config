@@ -117,39 +117,6 @@ end
 
 --------------------------------------------------------------------------------
 
----Toggles a pin-window
-local pinWinNr
----@param width number -- between 0 and 1
----@param height number -- between 0 and 1
-function M.pinWin(width, height)
-	-- if already open, just close is
-	local pinWinOpen = vim.tbl_contains(vim.api.nvim_list_wins(), pinWinNr)
-	if pinWinOpen then
-		vim.api.nvim_win_close(pinWinNr, true)
-		return
-	end
-
-	-- create pin window
-	local bufnr = 0 -- current buffer
-	pinWinNr = vim.api.nvim_open_win(bufnr, false, {
-		relative = "win",
-		width = math.floor(vim.api.nvim_win_get_width(0) * width),
-		height = math.floor(vim.api.nvim_win_get_height(0) * height),
-		anchor = "NE",
-		row = 0,
-		col = vim.api.nvim_win_get_width(0),
-		style = "minimal",
-		border = u.borderStyle,
-		title = "  " .. vim.fs.basename(vim.api.nvim_buf_get_name(bufnr)) .. " ",
-		title_pos = "center",
-	})
-	vim.api.nvim_win_set_option(pinWinNr, "scrolloff", 2)
-	vim.api.nvim_win_set_option(pinWinNr, "sidescrolloff", 2)
-	vim.api.nvim_win_set_option(pinWinNr, "signcolumn", "no")
-end
-
---------------------------------------------------------------------------------
-
 function M.selectMake()
 	-- GUARD
 	local makefile = vim.loop.cwd() .. "/Makefile"

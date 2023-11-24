@@ -136,14 +136,6 @@ for _, key in pairs(trailChars) do
 	keymap("n", "<leader>" .. key, "mzA" .. key .. "<Esc>`z", { desc = "which_key_ignore" })
 end
 
--- PIN WIN
-keymap(
-	"n",
-	"<leader>w",
-	function() require("funcs.quality-of-life").pinWin(0.5, 0.45) end,
-	{ desc = " Pin Window" }
-)
-
 -- MAKE
 keymap("n", "<leader>r", function ()
 	vim.cmd("silent! update")
