@@ -34,7 +34,7 @@ export FZF_DEFAULT_OPTS='
 	--scroll-off=5 --cycle --layout=reverse --height=90% --preview-window=border-left
 	--bind=tab:down,shift-tab:up
 	--bind=page-down:preview-page-down,page-up:preview-page-up
-	--bind=ctrl-s:select+down,ctrl-a:select-all
+	--bind=ctrl-s:toggle+down,ctrl-a:select-all
 '
 
 # extra spacing needed for WezTerm + Iosevka

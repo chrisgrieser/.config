@@ -49,7 +49,7 @@ function _tree {
 
 	eza --tree --level="$1" --color=always --icons=always --git-ignore --no-quotes |
 		sed '1d' | # remove `.`
-		fzf --ansi --no-sort --track
+		fzf --ansi --no-sort --bind=tab:down+down+down+down,shift-tab:up+up+up+up
 }
 alias tree='_tree 2'
 alias treee='_tree 3'
