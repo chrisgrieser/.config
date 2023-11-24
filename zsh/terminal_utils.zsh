@@ -42,6 +42,19 @@ function o() {
 	fi
 }
 
+# nicer & more interactive tree
+function _tree {
+	if [[ ! -x "$(command -v eza)" ]]; then print "\e[1;33meza not installed.\e[0m" && return 1; fi
+	if [[ ! -x "$(command -v fzf)" ]]; then print "\e[1;33mfzf not installed.\e[0m" && return 1; fi
+
+	eza --tree --level="$1" --color=always --icons=always --git-ignore --no-quotes |
+		sed '1d' | # remove `.`
+		fzf --ansi --no-sort --track
+}
+alias tree='_tree 2'
+alias treee='_tree 3'
+alias treeee='_tree 4'
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # previewer

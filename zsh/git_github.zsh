@@ -144,7 +144,7 @@ function gli {
 
 	selected=$(
 		_gitlog --no-graph --color=always |
-			fzf --ansi --no-sort \
+			fzf --ansi --no-sort --track \
 				--header-first --header="↵ : Checkout    ^H: Copy Hash    ^R: Rebase" \
 				--expect="ctrl-h,ctrl-r" --with-nth=2.. --preview-window=55% \
 				--preview="git show {1} --stat=,30,30 --color=always --format='$preview_format' | sed '\$d' ; git diff {1}^! | delta $style --hunk-header-decoration-style='blue ol' --file-style=omit" \
