@@ -1,5 +1,3 @@
-Brotli
-certifi
 pip-autoremove
 Pygments
 wheel

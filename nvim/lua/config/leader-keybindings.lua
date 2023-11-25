@@ -92,12 +92,14 @@ end, { desc = "󰜊 Undo since last open" })
 
 ---@param action object CodeAction https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#codeAction
 ---@return boolean
-local function codeActionFilter(action, ff)
+local function codeActionFilter(action)
 	local title, _ = action.title, action.kind
 
 	---@type table<string, boolean>
 	local filter = {
-		lua = not (title:find("in this file") or title:find("in the workspace") or title:find("defined global")),
+		-- stylua: ignore
+		lua = not (title:find("in this file") or title:find("in the workspace") 
+			or title:find("defined global") or title:find("Change to parameter")),
 		javascript = not (title == "Move to a new file"),
 		typescript = not (title == "Move to a new file"),
 	}
