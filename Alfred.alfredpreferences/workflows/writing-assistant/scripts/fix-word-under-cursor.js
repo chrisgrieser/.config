@@ -14,15 +14,15 @@ function httpRequest(url) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const delaySecs = parseInt($.getenv("delay_ms")) / 1000;
-	const se = Application("System Events")
+	const se = Application("System Events");
 	se.includeStandardAdditions = true;
 
 	// get word under cursor
-	se.keyCode(123) // char left
-	se.keyCode(124, {using: ["option down"]}) // word right
-	se.keyCode(123, {using: ["option down", "shift down"]}) // select word to left
-	se.keystroke("c", {using: ["command down"]}) // copy
-	delay(delaySecs)
+	se.keyCode(123); // char left
+	se.keyCode(124, { using: ["option down"] }); // word right
+	se.keyCode(123, { using: ["option down", "shift down"] }); // select word to left
+	se.keystroke("c", { using: ["command down"] }); // copy
+	delay(delaySecs);
 	const wordUnderCursor = se.theClipboard();
 
 	// API call via Google

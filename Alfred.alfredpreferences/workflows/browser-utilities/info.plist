@@ -889,7 +889,7 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>add rss feed</string>
+			<string>add rss feed to inoreader</string>
 			<key>xpos</key>
 			<real>460</real>
 			<key>ypos</key>

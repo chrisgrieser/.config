@@ -84,7 +84,7 @@
 				<key>keyword</key>
 				<string>ai</string>
 				<key>subtext</key>
-				<string></string>
+				<string>👨‍💻Coding AI</string>
 				<key>text</key>
 				<string>Phind: {query}</string>
 				<key>withspace</key>
@@ -126,7 +126,7 @@
 				<key>keyword</key>
 				<string>ai</string>
 				<key>subtext</key>
-				<string></string>
+				<string>🎓Academic AI</string>
 				<key>text</key>
 				<string>Perplexity &amp; Consensus: {query}</string>
 				<key>withspace</key>

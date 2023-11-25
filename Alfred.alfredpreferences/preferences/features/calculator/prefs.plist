@@ -4,8 +4,6 @@
 <dict>
 	<key>advanced</key>
 	<false/>
-	<key>enabled</key>
-	<false/>
 	<key>inputType</key>
 	<integer>3</integer>
 	<key>outputType</key>
