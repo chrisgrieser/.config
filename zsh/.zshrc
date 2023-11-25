@@ -1,6 +1,7 @@
 CONFIG_FILES=(
 	load_plugins
-	options_and_plugin_configs
+	options
+	plugin_settings
 	navigation
 	completion
 	vim_mode

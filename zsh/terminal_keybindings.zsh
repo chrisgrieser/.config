@@ -28,10 +28,6 @@ function zvm_after_init {
 	bindkey -M viins "…" insert-last-word # …=alt+.
 	bindkey -M viins "^Z" undo            # cmd+z via wezterm
 	bindkey -M viins "^U" kill-whole-line # whole line, not part of the line
-
-	# zsh-history-substring-search
-	bindkey -M viins '^[[A' history-substring-search-up   # up-arrow
-	bindkey -M viins '^[[B' history-substring-search-down # down-arrow
 }
 
 #───────────────────────────────────────────────────────────────────────────────
