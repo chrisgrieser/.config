@@ -182,7 +182,7 @@ nnoremap _ mzo<Esc>`z
 
 " Dial
 nnoremap + <C-a>
-nnoremap ä <C-x>
+nnoremap ö <C-x>
 
 """"""""""""""""""""""""""""
 " Leader Mappings
