@@ -144,6 +144,7 @@ M.aw_readkit = aw.new(function(appName, event, readkit)
 		u.runWithDelays({ 0, 0.2 }, function()
 			local win = readkit:mainWindow()
 			if win then wu.moveResize(win, wu.pseudoMax) end
+			readkit:selectMenuItem { "View", "Hide Sidebar" }
 		end)
 	end
 end):start()

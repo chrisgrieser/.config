@@ -4,13 +4,13 @@
 -- INFO the first theme in the list is used
 -- rest are themes I already tried and also like
 local darkThemes = {
-	"duckbones",
 	"ChallengerDeep",
+	"cyberpunk",
+	"Afterglow (Gogh)",
+	"duckbones",
 	"Tinacious Design (Dark)",
 	"Kanagawa (Gogh)",
-	"cyberpunk",
 	"MaterialDesignColors",
-	"Afterglow (Gogh)",
 }
 local lightThemes = {
 	"Ivory Light (terminal.sexy)",

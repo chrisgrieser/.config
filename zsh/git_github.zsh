@@ -16,8 +16,6 @@ alias rebase='git rebase --interactive'
 alias unshallow='git fetch --unshallow' # make shallow clone complete again
 alias unlock='rm -v "$(git rev-parse --git-dir)/index.lock"'
 
-alias gi='gh issue list --state=open'
-alias gI='gh issue list --state=closed'
 alias pr='gh pr create --web --fill'
 alias rel='make --silent release' # personal convention to have `make release`
 

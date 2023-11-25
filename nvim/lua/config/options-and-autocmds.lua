@@ -68,7 +68,6 @@ opt.clipboard = "unnamedplus"
 
 -- Spelling
 opt.spell = false
-opt.spelloptions = "camel"
 opt.spellfile = { u.linterConfigFolder .. "/spellfile-vim-ltex.add" } -- has to be `.add`
 opt.spelllang = "en_us" -- still relevant for `z=`
 
@@ -103,9 +102,6 @@ opt.timeoutlen = 666 -- also affects duration until which-key is shown
 
 -- Make
 opt.makeprg = "make --silent --warn-undefined-variables"
-
--- Fold
-opt.foldminlines = 3
 
 --------------------------------------------------------------------------------
 
@@ -154,7 +150,6 @@ autocmd({ "BufNew", "BufReadPost" }, {
 })
 
 --------------------------------------------------------------------------------
--- AUTOCMDs
 
 -- Formatting `vim.opt.formatoptions:remove{"o"}` would not work, since it's
 -- overwritten by the ftplugins having the `o` option. Therefore needs to be set

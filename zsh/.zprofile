@@ -1,6 +1,9 @@
 # vim: filetype=bash
 #───────────────────────────────────────────────────────────────────────────────
-
-# INFO arm = M1 macs
-brew_prefix=$([[ $(uname -p) == "arm" ]] && echo "/opt/homebrew" || echo "/usr/local")
-eval "$($brew_prefix/bin/brew shellenv)" 
+# Homebrew Setup
+if [[ $(uname -p) == "arm" ]]; then
+	eval "$(/opt/homebrew/bin/brew shellenv)" # M1 Mac
+else
+	eval "$(/usr/local/bin/brew shellenv)" # Intel mac
+fi
+#───────────────────────────────────────────────────────────────────────────────
