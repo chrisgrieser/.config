@@ -1,2 +1,2 @@
--- the default comment string uses `;` which is unintuitive for me
+-- the default comment string uses `;` which is unintuitive 
 vim.opt_local.commentstring="# %s"

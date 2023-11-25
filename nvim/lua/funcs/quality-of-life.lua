@@ -67,6 +67,32 @@ end
 
 --------------------------------------------------------------------------------
 
+-- DOCS https://wezfurlong.org/wezterm/cli/cli/send-text
+function M.sendToWezTerm()
+	vim.fn.system([[
+		open -a 'WezTerm' 
+		i=0
+		while ! pgrep -xq wezterm-gui; do 
+			sleep 0.1
+			i=$((i+1))
+			test $i -gt 30 && return
+		done
+		sleep 0.2
+	]])
+
+	local text
+	if vim.fn.mode() == "n" then
+		text = vim.api.nvim_get_current_line() .. "\n"
+		vim.fn.system { "wezterm", "cli", "send-text", "--no-paste", text }
+	elseif vim.fn.mode():find("[Vv]") then
+		u.normal('"zy')
+		text = vim.fn.getreg("z"):gsub("\n$", "")
+		vim.fn.system { "wezterm", "cli", "send-text", text }
+	end
+end
+
+--------------------------------------------------------------------------------
+
 function M.openAlfredPref()
 	local parentFolder = vim.fn.expand("%:p:h")
 	if not parentFolder:find("Alfred%.alfredpreferences") then

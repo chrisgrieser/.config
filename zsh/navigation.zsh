@@ -1,13 +1,9 @@
-# shellcheck disable=2164,2088
 # DOCS https://blog.meain.io/2023/navigating-around-in-shell/
 # DOCS https://zsh.sourceforge.io/Doc/Release/Options.html#Changing-Directories
 #───────────────────────────────────────────────────────────────────────────────
 
-# GENERAL
-setopt AUTO_CD   # pure directory = cd into it
-setopt CD_SILENT # don't pwd when changing directories via stack or `-`
-
-# hook when directory is changed (use `cd -q` to suppress hook)
+# POST-DIRECTORY-CHANGE-HOOK 
+# (use `cd -q` to suppress this hook)
 function chpwd {
 	_magic_dashboard
 	_auto_venv
@@ -21,38 +17,27 @@ alias ..=" cd .."
 alias ...=" cd ../.."
 alias ....=" cd ../../.."
 alias ..g=' cd "$(git rev-parse --show-toplevel)"' # goto git root
-function mkcd { mkdir -p "$1" && cd "$1"; }        # mkdir + cd
+# shellcheck disable=2164
+function mkcd { mkdir -p "$1" && cd "$1"; } # mkdir + cd
 
 #───────────────────────────────────────────────────────────────────────────────
 # RECENT DIRS
-
 # DOCS https://zsh.sourceforge.io/Doc/Release/User-Contributions.html#Recent-Directories
+# INFO cannot use `zstyle ':chpwd:*' recent-dirs-prune`, since zsh-autocomplete
+# overrides it
+
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
-
-zstyle ':chpwd:*' recent-dirs-max 10
-alias gr=" cdr" # recent dirs
-# INFO some configs like 
-	# cannot use `zstyle ':chpwd:*' recent-dirs-prune`, since zsh-autocomplete overrides it
-	# ignore these directories
+alias gr=" cdr"
 
 #───────────────────────────────────────────────────────────────────────────────
 
 # BOOKMARKS (via cdpath & symlinks)
+setopt AUTO_CD     # pure directory = cd into it
 setopt CHASE_LINKS # resolve symlinks when changing directories
 
 bookmark_path="$ZDOTDIR/cdpath_bookmarks" # folder with symlinks to directories
 export CDPATH="$bookmark_path:$LOCAL_REPOS:$WD"
-
-function bookmark {
-	ln -s "$PWD" "$bookmark_path/"
-	echo "Bookmarked: $(basename "$PWD")"
-}
-
-function unbookmark {
-	bookmark=$(basename "$PWD")
-	rm "$bookmark_path/$bookmark"
-}
 
 #───────────────────────────────────────────────────────────────────────────────
 # CYCLE THROUGH DIRECTORIES

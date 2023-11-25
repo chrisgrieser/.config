@@ -122,23 +122,22 @@ deleted_style = "fg:red bg:black"
 format = '(\([+$added]($added_style)/[-$deleted]($deleted_style)\)) '
 
 #───────────────────────────────────────────────────────────────────────────────
-# right side
-#───────────────────────────────────────────────────────────────────────────────
+# RIGHT SIDE
 
 [cmd_duration]
 min_time = 2000
-format = "[󰔟  $duration ](bold cyan)"
+format = "[󰔟  $duration](bold cyan)"
 
 [custom.alfred]
 description = "Version number of Alfred Workflow"
 when = "[[ -f info.plist ]] || [[ -f ../info.plist ]]"
 command = "if [[ -f ../info.plist ]] ; then ; plist=$(plutil -extract version xml1 -o - ../info.plist) ; else ; plist=$(plutil -extract version xml1 -o - info.plist) ; fi ; echo \"$plist\" | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1"
 os = "macos"
-format = ' [󰮤  $output]($style)'
+format = '  [󰮤  $output]($style)'
 style = "bold purple"
 
 [python]
 style = "bold yellow"
-format = ' [${symbol}${pyenv_prefix}(${version})( 󱥒  $virtualenv)]($style)'
+format = '  [${symbol}${pyenv_prefix}(${version})( 󱥒  $virtualenv)]($style)'
 version_format = "$major.$minor"
 symbol = "  "

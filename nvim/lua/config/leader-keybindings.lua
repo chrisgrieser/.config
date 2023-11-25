@@ -151,6 +151,14 @@ keymap(
 	{ desc = " Select Make" }
 )
 
+-- TERMINAL
+keymap(
+	{ "n", "x" },
+	"<leader>t",
+	function() require("funcs.quality-of-life").sendToWezTerm() end,
+	{ desc = " Send to WezTerm" }
+)
+
 --------------------------------------------------------------------------------
 -- OPTION TOGGLING
 

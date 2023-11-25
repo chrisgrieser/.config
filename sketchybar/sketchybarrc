@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+# vim: filetype=sh
 # INFO use `sketchybar --hotload` to auto-reload config when building stuff
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -18,7 +19,7 @@ fi
 first_row="left"
 second_row="popup.clock"
 
-icon_font="$CODE_FONT"
+icon_font="$CODE_FONT" # requires zsh-shebang to load from .zshenv
 system_font="Lucida Grande"
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -53,10 +54,10 @@ sketchybar \
 	script="$plugin_dir/github_notifications.sh" \
 	--add event update-github-notifications \
 	--subscribe github_notif update-github-notifications \
-	--subscribe github_notif system_work \
+	--subscribe github_notif system_woke \
 	\
 	--add item reminders $first_row \
-	--set reminders update_freq=120 \
+	--set reminders update_freq=180 \
 	script="$plugin_dir/reminders-count.sh" \
 	--subscribe reminders system_woke \
 	\
@@ -74,12 +75,5 @@ sketchybar \
 	--add item package-updates $second_row \
 	--set package-updates update_freq=43200 \
 	script="$plugin_dir/homebrew-update-tracker.sh" \
-	--add event homebrew-update \
-	--subscribe package-updates homebrew-update \
 	\
-	--update
-
-# INFO
-# - `--update` needs to run at the end of config and should not be run in an item script
-# - clock and alias items needs the fixed-width to fix whitespace of the item next
-# - not using builtin clock, to be able to customize font
+	--update # needs to run at the end of config and should not be run in an item script
