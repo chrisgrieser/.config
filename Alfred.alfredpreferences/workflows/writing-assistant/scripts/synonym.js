@@ -8,6 +8,7 @@ app.includeStandardAdditions = true;
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: <explanation>
 function run(argv) {
+	// DOCS https://www.datamuse.com/api/
 	const baseURL = "https://api.datamuse.com/words?rel_syn=";
 	const query = argv[0].trim();
 

@@ -8,19 +8,6 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
-		<key>15C5CEF9-52E9-4682-8DE4-0E5332D17D18</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>812123A0-13FF-4E57-A76C-6EB0EDF2A55D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>322E5C7E-0088-48C7-8510-ABB6F13FAF6B</key>
 		<array>
 			<dict>
@@ -65,6 +52,32 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>932AEE6C-291D-43C3-87CC-D2E54FA12721</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>76A3BBE1-A98B-4D93-A191-A6C85E4376DD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>15B133BD-6344-403D-9853-3DD8A9DA073C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>812123A0-13FF-4E57-A76C-6EB0EDF2A55D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>76A3BBE1-A98B-4D93-A191-A6C85E4376DD</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -126,6 +139,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>15B133BD-6344-403D-9853-3DD8A9DA073C</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -164,43 +196,11 @@
 				<key>escaping</key>
 				<integer>68</integer>
 				<key>script</key>
-				<string>on run argv
-	-- workaround, since apple's float ("real") interpret , or . differently
-	-- depending on system language m( ...
-	set delayAmount to (system attribute "delay_ms") as number
-	set delayAmount to delayAmount/1000
-
-	set langArg to item 1 of argv
-	#----------------------------------------------------------------------------
-
-	set prevClipboard to the clipboard
-	delay delayAmount
-	tell application "System Events"
-		key code 123 -- char left
-		key code 124 using {option down} -- word right
-		key code 123 using {option down, shift down} -- word left selection
-		keystroke "c" using {command down} -- copy
-	end tell
-	delay delayAmount
-	set theWord to the clipboard
-	delay delayAmount
-
-	-- http://aspell.net/man-html/Through-A-Pipe.html
-	set theFixedWord to do shell script "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-	echo '" &amp; theWord &amp; "' | aspell pipe " &amp; langArg &amp; " | sed -n 2p | cut -d, -f1 | cut -d: -f2 | cut -c2-"
-
-	set the clipboard to theFixedWord
-	delay delayAmount
-	tell application "System Events" to keystroke "v" using {command down}
-	delay delayAmount
-
-	set the clipboard to prevClipboard
-
-end run</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/fix-word-under-cursor.applescript</string>
+				<string>./scripts/fix-word-under-cursor.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -214,39 +214,65 @@ end run</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>3</integer>
-				<key>argumenttext</key>
-				<string>--lang={var:second_lang}</string>
-				<key>focusedappvariable</key>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>\n$</string>
+				<key>regexcaseinsensitive</key>
 				<false/>
-				<key>focusedappvariablename</key>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
 				<string></string>
-				<key>hotkey</key>
-				<integer>47</integer>
-				<key>hotmod</key>
-				<integer>1179648</integer>
-				<key>hotstring</key>
-				<string>.</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.apple.finder</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>2</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
+			<string>alfred.workflow.utility.replace</string>
 			<key>uid</key>
-			<string>15C5CEF9-52E9-4682-8DE4-0E5332D17D18</string>
+			<string>76A3BBE1-A98B-4D93-A191-A6C85E4376DD</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/select-word.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>322E5C7E-0088-48C7-8510-ABB6F13FAF6B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>B34DBBCE-C220-4020-BDB7-DFAB47719F7A</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -329,42 +355,31 @@ end run</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>B34DBBCE-C220-4020-BDB7-DFAB47719F7A</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
+				<key>action</key>
 				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
+				<key>argument</key>
 				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/select-word.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>32</integer>
+				<key>hotmod</key>
+				<integer>1966080</integer>
+				<key>hotstring</key>
+				<string>U</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>322E5C7E-0088-48C7-8510-ABB6F13FAF6B</string>
+			<string>569CD060-42E6-43E7-A18B-724E9B7D8357</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -431,37 +446,6 @@ end run</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>1</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>32</integer>
-				<key>hotmod</key>
-				<integer>1966080</integer>
-				<key>hotstring</key>
-				<string>U</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>569CD060-42E6-43E7-A18B-724E9B7D8357</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Requirements
@@ -473,16 +457,16 @@ end run</string>
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>15C5CEF9-52E9-4682-8DE4-0E5332D17D18</key>
+		<key>15B133BD-6344-403D-9853-3DD8A9DA073C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>Autocorrect word unser cursor (2nd language)</string>
+			<string>paste</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>500</real>
 			<key>ypos</key>
-			<real>175</real>
+			<real>30</real>
 		</dict>
 		<key>322E5C7E-0088-48C7-8510-ABB6F13FAF6B</key>
 		<dict>
@@ -491,7 +475,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>350</real>
+			<real>195</real>
 		</dict>
 		<key>3D656B72-508C-472A-89A5-17C81D76BE04</key>
 		<dict>
@@ -500,7 +484,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>345</real>
 			<key>ypos</key>
-			<real>350</real>
+			<real>195</real>
 		</dict>
 		<key>4F7A6FD7-A938-4E18-BD93-CC83556B5F37</key>
 		<dict>
@@ -511,7 +495,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>510</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>375</real>
 		</dict>
 		<key>527810E3-7675-48C8-ABF2-D21274E22579</key>
 		<dict>
@@ -522,7 +506,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>350</real>
+			<real>195</real>
 		</dict>
 		<key>569CD060-42E6-43E7-A18B-724E9B7D8357</key>
 		<dict>
@@ -531,18 +515,29 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>rephrase selection</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>375</real>
+		</dict>
+		<key>76A3BBE1-A98B-4D93-A191-A6C85E4376DD</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>remove \n</string>
+			<key>xpos</key>
+			<real>380</real>
+			<key>ypos</key>
+			<real>60</real>
 		</dict>
 		<key>812123A0-13FF-4E57-A76C-6EB0EDF2A55D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>180</real>
+			<real>185</real>
 			<key>ypos</key>
-			<real>90</real>
+			<real>30</real>
 		</dict>
 		<key>932AEE6C-291D-43C3-87CC-D2E54FA12721</key>
 		<dict>
@@ -551,7 +546,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>375</real>
 		</dict>
 		<key>A2A06CF6-C0FD-4680-B7D3-44BB15153491</key>
 		<dict>
@@ -562,18 +557,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>345</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>375</real>
 		</dict>
 		<key>A79508C6-9D50-47FC-8E75-B8142611461C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>Autocorrect word unser cursor (English)</string>
+			<string>Autocorrect word unser cursor</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>25</real>
+			<real>30</real>
 		</dict>
 		<key>B34DBBCE-C220-4020-BDB7-DFAB47719F7A</key>
 		<dict>
@@ -584,7 +579,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>500</real>
 			<key>ypos</key>
-			<real>350</real>
+			<real>195</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -677,36 +672,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>20</string>
-				<key>pairs</key>
-				<array>
-					<array>
-						<string>small</string>
-						<string>12</string>
-					</array>
-					<array>
-						<string>medium</string>
-						<string>20</string>
-					</array>
-					<array>
-						<string>large</string>
-						<string>30</string>
-					</array>
-				</array>
-			</dict>
-			<key>description</key>
-			<string>Rephraser: Output</string>
-			<key>label</key>
-			<string>Font Size</string>
-			<key>type</key>
-			<string>popupbutton</string>
-			<key>variable</key>
-			<string>font_size</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
 				<string>response</string>
 				<key>pairs</key>
 				<array>
@@ -753,27 +718,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>delay_ms</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string></string>
-				<key>placeholder</key>
-				<string>de</string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>Spell Fixer: needs to be shortcode from `aspell`</string>
-			<key>label</key>
-			<string>2nd language</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>second_lang</string>
 		</dict>
 	</array>
 	<key>version</key>
