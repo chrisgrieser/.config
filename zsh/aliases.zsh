@@ -40,14 +40,15 @@ alias bkp-repos='zsh "$HOME/.config/_utility-scripts/backup-my-repos.sh"'
 
 # GLOBAL ALIAS (to be used at the end, mostly)
 alias -g G='| rg'
+alias -g F='| fzf --no-sort --filter' # fuzzy-grep
 alias -g B='| bat'
-alias -g C='| pbcopy ; echo "Copied."' # copy
-alias -g N='| wc -l | tr -d " "'       # count lines
-alias -g J='| command jless --no-line-numbers'
+alias -g C='| pbcopy ; echo "Copied."'         # copy
+alias -g N='| wc -l | tr -d " "'               # count lines
+alias -g J='| command jless --no-line-numbers' 
 
 # highlights for them
-ZSH_HIGHLIGHT_REGEXP+=(' G$' 'fg=magenta,bold')
-ZSH_HIGHLIGHT_REGEXP+=(' G ' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=(' G($| )' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=(' F($| )' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' C$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' B$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' N$' 'fg=magenta,bold')

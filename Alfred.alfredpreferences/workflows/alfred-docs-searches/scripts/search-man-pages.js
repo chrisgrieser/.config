@@ -31,6 +31,8 @@ function run(argv) {
 	if (!query) {
 		return JSON.stringify({ items: [{ title: "Waiting for query…", valid: false }] });
 	}
+	const firstWord = query.split(" ")[0];
+	const remainingQuery = query.split(" ").slice(1).join(" ");
 
 	// local binaries
 	const installedBinaries = app
@@ -40,7 +42,7 @@ function run(argv) {
 		.split("\r");
 
 	/** @type{AlfredItem[]} */
-	const manPages = JSON.parse(httpRequest(apiUrl + query)).results.map(
+	const manPages = JSON.parse(httpRequest(apiUrl + firstWord)).results.map(
 		(/** @type {{ name: string; section: string; description: string; }} */ result) => {
 			const cmd = result.name;
 			const section = result.section;
@@ -53,7 +55,7 @@ function run(argv) {
 				uid: cmd,
 				// pass to next script filter
 				variables: { cmd: cmd, section: section },
-				arg: "",
+				arg: remainingQuery,
 			};
 		},
 	);
