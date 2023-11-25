@@ -18,7 +18,7 @@ function zvm_config {
 
 # INFO has to run *after* zvm_config, but *before* zvm_after_lazy_keybindings
 # shellcheck disable=1091
-source "$(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
+source "$HOMEBREW_PREFIX/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
 
 #───────────────────────────────────────────────────────────────────────────────
 
