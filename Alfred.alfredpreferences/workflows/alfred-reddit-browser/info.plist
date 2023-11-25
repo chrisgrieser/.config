@@ -806,7 +806,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<key>required</key>
 				<false/>
 				<key>text</key>
-				<string>Include hackernews</string>
+				<string>Include</string>
 			</dict>
 			<key>description</key>
 			<string>This makes hackernews appear in the list of subreddits, treating it as if it was another subreddit. (The reddit-specific settings are not applied to the hackernews feed.)</string>
@@ -825,7 +825,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<key>pairs</key>
 				<array>
 					<array>
-						<string>default (ycombinator)</string>
+						<string>original (ycombinator)</string>
 						<string>https://news.ycombinator.com/item?id=</string>
 					</array>
 					<array>
@@ -839,9 +839,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				</array>
 			</dict>
 			<key>description</key>
-			<string>whether to use an alternative hackernews frontend</string>
+			<string>frontend to use for hackerend</string>
 			<key>label</key>
-			<string>Hackernews Frontend</string>
+			<string></string>
 			<key>type</key>
 			<string>popupbutton</string>
 			<key>variable</key>
