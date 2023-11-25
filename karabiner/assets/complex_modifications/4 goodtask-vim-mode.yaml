@@ -136,21 +136,18 @@ rules:
         to:
           - { key_code: up_arrow, modifiers: [command] }
         conditions: [*goodtask-app, *goodtask-normal-mode]
-      # done (mark as complete)
+      # done (toggle completed)
       - type: basic
-        from: { key_code: d }
+        from: { key_code: spacebar }
         to:
-          - shell_command: |
-              osascript -e '
-                tell application "System Events" to tell process "GoodTask"
-                  click menu item "Complete" of menu of menu item "Quick Actions" of menu "Edit" of menu bar 1
-                end tell
-                tell application "System Events" to key code 125 # down, fix focus loss
-              '
+          - { key_code: spacebar }
+          # FIX loosing focus
+          - { key_code: vk_none, hold_down_milliseconds: 400 }
+          - { key_code: tab }
         conditions: [*goodtask-app, *goodtask-normal-mode]
       # Toggle done tasks
       - type: basic
-        from: { key_code: d, modifiers: { mandatory: [shift] } }
+        from: { key_code: v }
         to:
           - { key_code: z, modifiers: [command] } # z & y switched
         conditions: [*goodtask-app, *goodtask-normal-mode, *german-keyboard]
@@ -162,7 +159,9 @@ rules:
               osascript -e '
                 tell application "System Events" to tell process "GoodTask"
                   click menu item "Tomorrow" of menu of menu item "Quick Actions" of menu "Edit" of menu bar 1
-                end tell'
+                end tell
+                display notification "Tomorrow" with title "💤Snoozed"
+              '
         conditions: [*goodtask-app, *goodtask-normal-mode]
       # snooze: next monday
       - type: basic
@@ -172,7 +171,9 @@ rules:
               osascript -e '
                 tell application "System Events" to tell process "GoodTask"
                   click menu item "Next Monday" of menu of menu item "Quick Actions" of menu "Edit" of menu bar 1
-                end tell'
+                  end tell
+                  display notification "Next Monday" with title "💤Snoozed"
+                '
         conditions: [*goodtask-app, *goodtask-normal-mode]
       # open-url & delete
       - type: basic
