@@ -24,6 +24,19 @@ alias ..g=' cd "$(git rev-parse --show-toplevel)"' # goto git root
 function mkcd { mkdir -p "$1" && cd "$1"; }        # mkdir + cd
 
 #───────────────────────────────────────────────────────────────────────────────
+# RECENT DIRS
+
+# DOCS https://zsh.sourceforge.io/Doc/Release/User-Contributions.html#Recent-Directories
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+
+alias gr="cdr" # recent dirs
+zstyle ':chpwd:*' recent-dirs-max 10
+zstyle ':chpwd:*' recent-dirs-default true
+zstyle ':chpwd:*' recent-dirs-insert true
+
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # BOOKMARKS (via cdpath & symlinks)
 setopt CHASE_LINKS # resolve symlinks when changing directories
@@ -32,12 +45,13 @@ bookmark_path="$ZDOTDIR/cdpath_bookmarks" # folder with symlinks to directories
 export CDPATH="$bookmark_path:$LOCAL_REPOS:$WD"
 
 function bookmark {
-	ln -s "$PWD" "$bookmark_path/$1" && echo "Bookmarked: $(basename "$PWD")"
+	ln -s "$PWD" "$bookmark_path/"
+	echo "Bookmarked: $(basename "$PWD")"
 }
 
 function unbookmark {
-	[[ -z "$1" ]] && return 2
-	rm "$bookmark_path/$1" && echo "Removed Bookmark: $1"
+	bookmark=$(basename "$PWD")
+	rm "$bookmark_path/$bookmark"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -59,50 +73,7 @@ function _grappling_hook {
 	zle reset-prompt
 
 	# so wezterm knows we are in a new directory
-	[[ "$TERM_PROGRAM" == "WezTerm" ]] && wezterm set-working-directory 
+	[[ "$TERM_PROGRAM" == "WezTerm" ]] && wezterm set-working-directory
 }
 zle -N _grappling_hook
 bindkey "^O" _grappling_hook # bound to cmd+enter via wezterm
-
-#───────────────────────────────────────────────────────────────────────────────
-# RECENT DIRS (via pushd & dirstack)
-
-# INFO zsh-autocomplete makes the dirstack persist
-setopt AUTO_PUSHD
-setopt PUSHD_IGNORE_DUPS
-export DIRSTACKSIZE=13
-
-# no arg: go to last dir
-# arg: go to that dir
-# recent dirs are suggested
-function gr {
-	if [[ -z "$1" ]]; then
-		cd ~+1 # as opposed to `cd -` doesn't work at session start
-		return 0
-	else
-		dir="$*"
-		dir="${dir/#\~/$HOME}"
-		cd "$dir"
-	fi
-}
-
-#───────────────────────────────────────────────────────────────────────────────
-# COMPLETIONS
-zstyle ':completion:*:recent-dirs' list-colors '=(#b)*/(*)=38;5;245=39='
-_gr () {
-	# shellcheck disable=2296
-	typeset -a recent_dirs=("${(f)"$(dirs -p | sed '1d')"}")
-	local expl
-	_description -V recent-dirs expl 'recent directories'
-	compadd "${expl[@]}" -Q -- "${recent_dirs[@]}"
-}
-compdef _gr gr
-
-_unbookmark () {
-	# shellcheck disable=2296
-	typeset -a bookmarks=("${(f)"$(ls -1 "$bookmark_path")"}")
-	local expl
-	_description -V bookmarks expl 'Bookmarks'
-	compadd "${expl[@]}" -- "${bookmarks[@]}"
-}
-compdef _unbookmark unbookmark

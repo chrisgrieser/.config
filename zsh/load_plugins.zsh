@@ -19,9 +19,6 @@ source "$HOMEBREW_PREFIX/share/zsh-autopair/autopair.zsh"
 source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
-# has to be loaded *after* zsh syntax highlighting
-source "$HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
-
 #───────────────────────────────────────────────────────────────────────────────
 
 source "$ZDOTDIR/plugins/magic_dashboard.zsh"
