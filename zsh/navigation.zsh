@@ -33,6 +33,8 @@ add-zsh-hook chpwd chpwd_recent_dirs
 zstyle ':chpwd:*' recent-dirs-max 10
 alias gr=" cdr" # recent dirs
 # INFO some configs like 
+	# cannot use `zstyle ':chpwd:*' recent-dirs-prune`, since zsh-autocomplete overrides it
+	# ignore these directories
 
 #───────────────────────────────────────────────────────────────────────────────
 
