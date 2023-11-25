@@ -13,24 +13,33 @@ function writeToFile(filepath, text) {
 
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	// determine backup dir
 	const dataDir = app.doShellScript('source "$HOME/.zshenv" && echo "$DATA_DIR"').trim();
-	const isoDate = new Date().toISOString().split("T")[0];
-	const backupLocation = `${dataDir}/Backups/Reminders/${isoDate}.json`;
+	const isoToday = new Date().toISOString().split("T")[0];
+	const backupLocation = `${dataDir}/Backups/Reminders/${isoToday}.json`;
+	const fourDaysAgo = new Date(Date.now() - 4 * (24 * 60 * 60 * 1000));
 
 	const remApp = Application("Reminders");
 	const reminders = remApp.defaultList().reminders();
 	const json = [];
+
 	for (let i = 0; i < reminders.length; i++) {
 		const reminder = reminders[i];
-		const name = reminder.name();
+		const completionDate = reminder.completionDate();
+
+		// delete old reminders
+		if (completionDate > fourDaysAgo) {
+			reminder.delete();
+			continue;
+		}
+
+		// backup recent reminders
 		json.push({
-			name: name,
-			completionDate: reminder.completionDate(),
+			name: reminder.name(),
+			completionDate: completionDate,
 			dueDate: reminder.dueDate(),
 		});
 	}
 
-	remApp.quit();
 	writeToFile(backupLocation, JSON.stringify(json));
+	remApp.quit();
 }
