@@ -448,11 +448,7 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>## Requirements
-- `aspell`
-- OpenAi API Key
-
----
+	<string>---
 
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
@@ -597,7 +593,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Rephraser. If empty, will look through `.zshenv` for a variable `$OPENAI_API_KEY`.</string>
+			<string>Only needed for Rephraser. If empty, will look through `.zshenv` for a variable `$OPENAI_API_KEY`.</string>
 			<key>label</key>
 			<string>OpenAI API Key</string>
 			<key>type</key>
