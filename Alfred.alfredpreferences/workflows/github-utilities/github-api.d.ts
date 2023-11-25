@@ -25,6 +25,7 @@ declare class GithubIssue {
 	user: { login: string; };
 	state: string;
 	comments: number;
+	draft: boolean;
 	// biome-ignore lint/style/useNamingConvention: not_by_me
 	full_name: string;
 	// biome-ignore lint/style/useNamingConvention: not_by_me
@@ -36,6 +37,10 @@ declare class GithubIssue {
 	repository_url: string;
 	// biome-ignore lint/style/useNamingConvention: not_by_me
 	pull_request: { merged_at?: string; };
+	// biome-ignore lint/style/useNamingConvention: not_by_me
+	created_at: string;
+	// biome-ignore lint/style/useNamingConvention: not_by_me
+	updated_at: string;
 }
 
 declare class GithubRepo {

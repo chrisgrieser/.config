@@ -7,8 +7,43 @@ app.includeStandardAdditions = true;
 /** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
-	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
-	return [clean, camelCaseSeperated, str].join(" ") + " ";
+	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
+	return [clean, camelCaseSeparated, str].join(" ") + " ";
+}
+
+/**
+ * @param {string} absoluteDate string to be converted to a date
+ * @return {string} relative date
+ */
+function relativeDate(absoluteDate) {
+	const deltaSecs = (+new Date() - +new Date(absoluteDate)) / 1000;
+	/** @type {"year"|"month"|"week"|"day"|"hour"|"minute"|"second"} */
+	let unit;
+	let delta;
+	if (deltaSecs < 60) {
+		unit = "second";
+		delta = deltaSecs;
+	} else if (deltaSecs < 60 * 60) {
+		unit = "minute";
+		delta = Math.ceil(deltaSecs / 60);
+	} else if (deltaSecs < 60 * 60 * 24) {
+		unit = "hour";
+		delta = Math.ceil(deltaSecs / 60 / 60);
+	} else if (deltaSecs < 60 * 60 * 24 * 7) {
+		unit = "day";
+		delta = Math.ceil(deltaSecs / 60 / 60 / 24);
+	} else if (deltaSecs < 60 * 60 * 24 * 7 * 4) {
+		unit = "week";
+		delta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7);
+	} else if (deltaSecs < 60 * 60 * 24 * 7 * 4 * 12) {
+		unit = "month";
+		delta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7 / 4);
+	} else {
+		unit = "year";
+		delta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7 / 4 / 12);
+	}
+	const formatter = new Intl.RelativeTimeFormat("en", { style: "long", numeric: "auto" });
+	return formatter.format(-delta, unit);
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -21,14 +56,20 @@ function run() {
 
 	const openPrs = JSON.parse(app.doShellScript(`curl -sL "${apiURL}"`)).items.map(
 		(/** @type {GithubIssue} */ item) => {
-
 			const title = item.title;
 			const repo = item.repository_url.match(/[^/]+$/)[0];
 			const comments = item.comments > 0 ? "💬 " + item.comments.toString() : "";
+			const draftIcon = item.draft ? "📝 " : "";
+			const subtitle = [
+				`#${item.number}`,
+				repo,
+				comments.toString(),
+				`(${relativeDate(item.created_at)})`,
+			].filter(Boolean).join("   ");
 
 			return {
-				title: title,
-				subtitle: `#${item.number}  ${repo}   ${comments}`,
+				title: draftIcon + title,
+				subtitle: subtitle,
 				match: alfredMatcher(title) + alfredMatcher(repo),
 				arg: item.html_url,
 			};
