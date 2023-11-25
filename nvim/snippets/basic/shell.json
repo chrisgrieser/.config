@@ -117,7 +117,7 @@
 	},
 	"ternary": {
 		"prefix": "ternary",
-		"body": "$$([[ \"$${1:cond}\" ]] && echo \"${2:value1}\" || echo \"${3:value2}\")"
+		"body": "$([[ \"$${1:cond}\" ]] && echo \"${2:value1}\" || echo \"${3:value2}\")"
 	},
 	"if .. then": {
 		"prefix": "if .. then",

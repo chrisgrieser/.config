@@ -76,9 +76,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>dock_switcher_path="${dock_switcher_path/#\~/$HOME}"
-
-zsh "$dock_switcher_path" --load "$1"</string>
+				<string>zsh "$dock_switcher_path" --load "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -171,9 +169,7 @@ zsh "$dock_switcher_path" --load "$1"</string>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>dock_switcher_path="${dock_switcher_path/#\~/$HOME}"
-
-zsh "$dock_switcher_path" --save "$1"</string>
+				<string>zsh "$dock_switcher_path" --save "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
