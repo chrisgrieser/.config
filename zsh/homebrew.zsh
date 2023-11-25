@@ -1,15 +1,17 @@
 # DOCS https://docs.brew.sh/Manpage#environment
 
-# general
+# install/update
 export HOMEBREW_CASK_OPTS="--no-quarantine"
 export HOMEBREW_DISPLAY_INSTALL_TIMES=1
-export HOMEBREW_NO_ENV_HINTS=0
+export HOMEBREW_AUTO_UPDATE_SECS=86400 # only once per day
 
 # cleanup
 export HOMEBREW_AUTOREMOVE=1
-export HOMEBREW_NO_INSTALL_CLEANUP=1
 export HOMEBREW_CLEANUP_MAX_AGE_DAYS=60
 export HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=30
+
+# misc
+export HOMEBREW_NO_ANALYTICS=1
 
 #───────────────────────────────────────────────────────────────────────────────
 
