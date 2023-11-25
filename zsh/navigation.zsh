@@ -1,4 +1,4 @@
-# shellcheck disable=2164
+# shellcheck disable=2164,2088
 # DOCS https://blog.meain.io/2023/navigating-around-in-shell/
 # DOCS https://zsh.sourceforge.io/Doc/Release/Options.html#Changing-Directories
 #───────────────────────────────────────────────────────────────────────────────
@@ -30,12 +30,10 @@ function mkcd { mkdir -p "$1" && cd "$1"; }        # mkdir + cd
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
 
-alias gr=" cdr" # recent dirs
 zstyle ':chpwd:*' recent-dirs-max 10
-zstyle ':chpwd:*' recent-dirs-prune pattern:"^$HOME$" pattern:'^/$'
+alias gr=" cdr" # recent dirs
+# INFO some configs like 
 
-# zstyle ':chpwd:*' recent-dirs-default true
-# zstyle ':completion:*' recent-dirs-insert true
 #───────────────────────────────────────────────────────────────────────────────
 
 # BOOKMARKS (via cdpath & symlinks)
