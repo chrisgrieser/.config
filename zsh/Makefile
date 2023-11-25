@@ -1,4 +1,4 @@
-.PHONY: lines, startup
+.PHONY: lines startup
 #───────────────────────────────────────────────────────────────────────────────
 # total length of config in LoC
 lines:

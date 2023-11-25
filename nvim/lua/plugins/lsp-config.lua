@@ -224,9 +224,8 @@ local function getDictWords()
 	return words
 end
 
--- FIX / PENDING https://github.com/williamboman/mason.nvim/issues/1531
-local brewPrefix = vim.trim(vim.fn.system("brew --prefix"))
-vim.env.JAVA_HOME = brewPrefix .. "/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
+-- PENDING https://github.com/williamboman/mason.nvim/issues/1531
+vim.env.JAVA_HOME = vim.env.HOMEBREW_PREFIX .. "/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
 
 -- DOCS https://valentjn.github.io/ltex/settings.html
 serverConfigs.ltex = {
