@@ -92,15 +92,16 @@ end, { desc = "󰜊 Undo since last open" })
 
 ---@param action object CodeAction https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#codeAction
 ---@return boolean
-local function codeActionFilter(action)
-	local title, kind, ft = action.title, action.kind, vim.bo.filetype
+local function codeActionFilter(action, ff)
+	local title, _ = action.title, action.kind
 
-	-- in lua, ignore all quickfixes except line disables and all "move argument" actions
-	local ignoreInLua = ft == "lua"
-		and not (title:find("on this line"))
-		and (kind == "quickfix" or kind == "refactor.rewrite")
-
-	return not ignoreInLua
+	---@type table<string, boolean>
+	local filter = {
+		lua = not (title:find("in this file") or title:find("in the workspace") or title:find("defined global")),
+		javascript = not (title == "Move to a new file"),
+		typescript = not (title == "Move to a new file"),
+	}
+	return filter[vim.bo.filetype]
 end
 
 keymap(
@@ -137,7 +138,7 @@ for _, key in pairs(trailChars) do
 end
 
 -- MAKE
-keymap("n", "<leader>r", function ()
+keymap("n", "<leader>r", function()
 	vim.cmd("silent! update")
 	vim.cmd.lmake()
 end, { desc = " Make" })
@@ -159,7 +160,7 @@ keymap("n", "<leader>od", function() -- codespell-ignore
 	local change = vim.diagnostic.is_disabled(0) and "enable" or "disable"
 	vim.diagnostic[change](0)
 end, { desc = " Diagnostics" })
-keymap("n", "<leader>oh", function() 
+keymap("n", "<leader>oh", function()
 	local enabled = vim.lsp.inlay_hint.is_enabled(0)
 	vim.lsp.inlay_hint.enabled(0, not enabled)
 end, { desc = "󰒕 LSP Inlay Hints" })
