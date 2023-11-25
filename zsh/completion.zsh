@@ -29,11 +29,15 @@ zstyle ':completion:*:warnings' format ""
 # BINDINGS
 
 bindkey -M vicmd '\t' menu-select
-bindkey '\t' menu-select                            # <Tab> next item
-bindkey -M menuselect '^[[Z' reverse-menu-complete  # <S-Tab> prev suggestion
-bindkey -M menuselect '\r' .accept-line             # <CR> select & execute
-bindkey -M menuselect '^[[A' vi-backward-blank-word # <Up> prev group
-bindkey -M menuselect '^[[B' vi-forward-blank-word  # <Down> next group
+bindkey '\t' menu-select                           # <Tab> next item
+bindkey -M menuselect '^[[Z' reverse-menu-complete # <S-Tab> prev suggestion
+bindkey -M menuselect '\r' .accept-line            # <CR> select & execute
+bindkey -M menuselect '^P' vi-backward-blank-word  # prev group
+bindkey -M menuselect '^N' vi-forward-blank-word   # next group
+
+# FIX for zsh-autocomplete, to be able to still cycle upwards
+bindkey -M viins '^[[A' up-line-or-history
+bindkey -M viins '^[[B' down-line-or-history
 
 #───────────────────────────────────────────────────────────────────────────────
 # SORT
