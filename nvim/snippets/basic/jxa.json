@@ -55,7 +55,7 @@
 	},
 	"get clipboard": {
 		"prefix": "get clipboard",
-		"body": ["app.includeStandardAdditions = true;", "const clipb = app.ClipboardTo();"]
+		"body": ["app.includeStandardAdditions = true;", "const clipb = app.theClipboard();"]
 	},
 	"set clipboard (file)": {
 		"prefix": "set clipboard (file)",
