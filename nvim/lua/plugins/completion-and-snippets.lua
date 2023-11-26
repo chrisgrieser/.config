@@ -115,6 +115,11 @@ local function cmpconfig()
 		formatting = {
 			fields = { "abbr", "menu", "kind" }, -- order of the fields
 			format = function(entry, item)
+				-- abbreviate length https://github.com/hrsh7th/nvim-cmp/discussions/609
+				-- (height is controlled via pumheight option)
+				local maxLength = 50
+				if #item.abbr > maxLength then item.abbr = item.abbr:sub(1, maxLength) .. "…" end
+
 				-- stylua: ignore
 				local kindIcons = { Text = "", Method = "󰆧", Function = "󰊕", Constructor = "", Field = "󰇽", Variable = "󰂡", Class = "󰠱", Interface = "", Module = "", Property = "󰜢", Unit = "", Value = "󰎠", Enum = "", Keyword = "󰌋", Snippet = "󰅱", Color = "󰏘", File = "󰈙", Reference = "", Folder = "󰉋", EnumMember = "", Constant = "󰏿", Struct = "", Event = "", Operator = "󰆕", TypeParameter = "󰅲" }
 				item.kind = entry.source.name == "nvim_lsp" and kindIcons[item.kind] .. " " or ""

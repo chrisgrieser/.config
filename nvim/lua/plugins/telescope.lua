@@ -111,6 +111,12 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+
+local function addBuffersToOldfiles ()
+	#vim.fn.getbufinfo { buflisted = 1 }
+	vim.tbl_filter(function (buf) return vim.api.nvim_buf_is_loaded(buf) end, vim.api.nvim_list_bufs())
+end
+
 ---Requires the autocmd above
 ---@param _ table
 ---@param path string
@@ -167,6 +173,13 @@ local function telescopeConfig()
 				find_command = { "fd", "--type=file", "--type=symlink" },
 				mappings = { i = findFileMappings },
 				follow = false,
+			},
+			oldfiles = {
+				prompt_prefix = "󰋚 ",
+				previewer = false,
+				layout_config = {
+					horizontal = { anchor = "W", width = 0.5, height = 0.55 },
+				},
 			},
 			live_grep = { prompt_prefix = " ", disable_coordinates = true },
 			git_status = {
@@ -231,9 +244,9 @@ local function telescopeConfig()
 			},
 			lsp_workspace_symbols = {
 				prompt_prefix = "󰒕 ",
-				prompt_title = "Functions",
-			-- stylua: ignore
-			ignore_symbols = { "boolean", "number", "string", "variable", "array", "object", "constant", "package" },
+				prompt_title = "Workspace Functions",
+				-- stylua: ignore
+				ignore_symbols = { "boolean", "number", "string", "variable", "array", "object", "constant", "package" },
 				fname_width = 12,
 			},
 			buffers = {
@@ -262,13 +275,6 @@ local function telescopeConfig()
 			},
 		},
 		extensions = {
-			recent_files = {
-				prompt_prefix = "󰋚 ",
-				previewer = false,
-				layout_config = {
-					horizontal = { anchor = "W", width = 0.5, height = 0.55 },
-				},
-			},
 			aerial = {
 				show_nesting = {
 					markdown = false,
@@ -310,6 +316,10 @@ return {
 			{ "<leader>gl", function() telescope("git_commits") end, desc = " Log/Commits" },
 			{ "<leader>gL", function() telescope("git_bcommits") end, desc = " Buffer Commits" },
 			{ "<leader>gb", function() telescope("git_branches") end, desc = " Branches" },
+			{ "gr", function()
+				addBuffersToOldfiles()
+				telescope("oldfiles")
+			end, desc = " Recent Files" },
 			{
 				"go",
 				function()
@@ -330,11 +340,7 @@ return {
 			},
 			{ "gL", function() telescope("grep_string") end, desc = " Grep cword in Project" },
 		},
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons",
-			"nvim-telescope/telescope-fzf-native.nvim",
-		},
+		dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
 		config = telescopeConfig,
 	},
 	{ -- Icon Picker
@@ -352,22 +358,5 @@ return {
 				desc = " Icon Picker",
 			},
 		},
-	},
-	{ -- better recent files
-		"smartpde/telescope-recent-files",
-		dependencies = "nvim-telescope/telescope.nvim",
-		config = function() require("telescope").load_extension("recent_files") end,
-		keys = {
-			{
-				"gr",
-				function() require("telescope").extensions.recent_files.pick() end,
-				desc = " Recent Files",
-			},
-		},
-	},
-	{ -- better sorting algorithm + fzf syntax
-		"nvim-telescope/telescope-fzf-native.nvim",
-		config = function() require("telescope").load_extension("fzf") end,
-		build = "make",
 	},
 }
