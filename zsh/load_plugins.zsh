@@ -25,3 +25,6 @@ source "$ZDOTDIR/plugins/magic_dashboard.zsh"
 
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+
+# https://github.com/wez/wezterm/blob/main/assets/shell-integration/wezterm.sh
+[[ "$TERM_PROGRAM" == "WezTerm" ]] && source "$ZDOTDIR/plugins/wezterm_semantic_prompts.zsh"

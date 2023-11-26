@@ -10,17 +10,16 @@ CONFIG_FILES=(
 	aliases
 	history
 	docs_man
+
 	git_github
 	json_utils
 	homebrew
 	node_npm
 	python_pip
+
 	intro_messages
 )
 [[ "$OSTYPE" =~ "darwin" ]] && CONFIG_FILES+=(mac_specific)
-
-# https://github.com/wez/wezterm/blob/main/assets/shell-integration/wezterm.sh
-[[ "$TERM_PROGRAM" == "WezTerm" ]] && CONFIG_FILES+=("plugins/wezterm_semantic_prompts")
 
 #───────────────────────────────────────────────────────────────────────────────
 

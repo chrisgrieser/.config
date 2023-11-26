@@ -25,7 +25,7 @@ keymap("n", "<leader>lc", function()
 end, { desc = "󰘳 Copy last command" })
 
 -- [l]ast command a[g]ain
-keymap("n", "<leader>lg", ":<Up><CR>", { desc = "󰘳 Run last command again", silent = true })
+keymap("n", "<leader>lg", ":<Up><CR>", { desc = "󰘳 Last command again", silent = true })
 
 -- show current filetype & buftype
 keymap("n", "<leader>lf", function()
@@ -98,7 +98,7 @@ local function codeActionFilter(action)
 	---@type table<string, boolean>
 	local filter = {
 		-- stylua: ignore
-		lua = not (title:find("in this file") or title:find("in the workspace") 
+		lua = not (title:find("in this file") or title:find("in the workspace")
 			or title:find("defined global") or title:find("Change to parameter")),
 		javascript = not (title == "Move to a new file"),
 		typescript = not (title == "Move to a new file"),

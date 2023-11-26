@@ -88,6 +88,11 @@ local function themeModifications()
 		updateHl("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
 		overwriteHl("TSParameter", { fg = "#6f92b3" })
 		if theme == "everforest" then overwriteHl("Red", { fg = "#ce7d7c" }) end
+	elseif theme == "bamboo" and mode == "light" then
+		overwriteHl("@comment", { fg = "#777f76" })
+		updateHl("@text.note", "guifg=#ffffff")
+		updateHl("@text.warning", "guifg=#ffffff")
+		updateHl("@text.danger", "guifg=#ffffff")
 	elseif theme == "nordic" then
 		overwriteHl("@parameter", { fg = "#8d8fe1" })
 	elseif theme == "material" and mode == "light" then
