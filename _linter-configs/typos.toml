@@ -7,7 +7,8 @@
 noice = "noice"
 Termine = "Termine"
 als = "als"
-Fixe = "Fixe"
+Fixe = "Fixe" # no inline ignore yet
+ue = "ue" # no inline ignoring yet https://github.com/crate-ci/typos/pull/695
 
 # ignore these files
 [files]

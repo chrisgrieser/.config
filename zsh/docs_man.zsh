@@ -5,10 +5,8 @@ function h() {
 	local style pane_id
 	local query="$*"
 
-	# curl cht.sh/:styles-demo
-	local lightstyle="trac"
-	local darkstyle="monokai"
-	defaults read -g AppleInterfaceStyle &>/dev/null && style="$darkstyle" || style="$lightstyle"
+	# `curl cht.sh/:styles-demo`
+	style=$(defaults read -g AppleInterfaceStyle &>/dev/null && echo "monokai" || echo "trac")
 
 	query=${query// /-} # dash as separator for subcommands, e.g. git-rebase
 	if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
@@ -19,6 +17,9 @@ function h() {
 		curl -s "https://cht.sh/$query?style=$style" | less
 	fi
 }
+FPATH="$FPATH:$ZDOTDIR/completion_data"
+compdef _cht h
+
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -87,7 +88,6 @@ export LESS_TERMCAP_md=$'\E[1;33m' # begin blink
 export LESS_TERMCAP_me=$'\E[0m'    # reset bold/blink
 export LESS_TERMCAP_us=$'\E[1;36m' # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'    # reset underline
-
 
 # INFO --ignore-case is actually smart case
 export LESS='--RAW-CONTROL-CHARS --incsearch --ignore-case --window=-4 --no-init --tilde --long-prompt'
