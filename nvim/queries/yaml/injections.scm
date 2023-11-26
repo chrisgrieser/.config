@@ -20,7 +20,7 @@ value: (block_node
 
 ;bash_3
 (block_mapping_pair
-key: (flow_node) @_run (#any-of? @_run "shell" "shell_command")
+key: (flow_node) @_run (#any-of? @_run "run" "shell" "shell_command")
 value: (block_node
 (block_sequence
 (block_sequence_item
