@@ -1,5 +1,4 @@
 --# selene: allow(mixed_table) -- lazy.nvim uses them
--- vim-pseudo-modeline: buffer_has_colors
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
@@ -99,66 +98,50 @@ return {
 	{ -- color previews & color picker
 		"uga-rosa/ccc.nvim",
 		-- #fff222
-		commit = "cd2a10557b4a13e80929f59a7076ae792b2c60fa",
-		init = function()
-			-- HACK from the vim docs: https://neovim.io/doc/user/options.html#modeline
-			-- setting `# vim-pseudo-modeline: buffer_has_colors` enables the
-			-- highlighter. Normally, this would not be possible since modelines
-			-- only support options set via `set`.
-			vim.api.nvim_create_autocmd("BufReadPost", {
-				callback = function()
-					local firstline = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]
-					if vim.endswith(firstline, "vim-pseudo-modeline: buffer_has_colors") then
-						vim.cmd.CccHighlighterEnable()
-					end
-				end,
-			})
-		end,
-		cmd = "CccHighlighterEnable",
 		keys = {
 			{ "g#", vim.cmd.CccPick, desc = " Color Picker" },
 			{ "#", "<Plug>(ccc-select-color)", mode = "o", desc = "󱡔 color textobj" },
 		},
-		ft = { "css", "scss", "sh", "lua" },
-		config = function()
-			vim.opt.termguicolors = true
-			local ccc = require("ccc")
-			ccc.setup {
-				win_opts = { border = u.borderStyle },
-				highlighter = {
-					auto_enable = true,
-					max_byte = 1.5 * 1024 * 1024, -- 1.5 Mb
-					lsp = true,
-					filetypes = { "css", "scss", "sh" },
-				},
-				pickers = {
-					ccc.picker.hex,
-					ccc.picker.css_rgb,
-					ccc.picker.css_hsl,
-					ccc.picker.ansi_escape { meaning1 = "bright" },
-				},
-				alpha_show = "hide", -- needed when highlighter.lsp is set to true
-				recognize = { output = true }, -- automatically recognize color format under cursor
-				inputs = { ccc.input.hsl },
-				outputs = {
-					ccc.output.css_hsl,
-					ccc.output.css_rgb,
-					ccc.output.hex,
-				},
-				convert = {
-					{ ccc.picker.hex, ccc.output.css_hsl },
-					{ ccc.picker.css_rgb, ccc.output.css_hsl },
-					{ ccc.picker.css_hsl, ccc.output.hex },
-				},
-				mappings = {
-					["<Esc>"] = ccc.mapping.quit,
-					["q"] = ccc.mapping.quit,
-					["L"] = ccc.mapping.increase10,
-					["H"] = ccc.mapping.decrease10,
-					["o"] = ccc.mapping.toggle_output_mode, -- = convert color
-				},
-			}
-		end,
+		-- ft = { "css", "scss", "sh", "lua" },
+		-- config = function()
+		-- 	vim.opt.termguicolors = true
+		-- 	local ccc = require("ccc")
+		-- 	ccc.setup {
+		-- 		win_opts = { border = u.borderStyle },
+		-- 		highlighter = {
+		-- 			auto_enable = true,
+		-- 			max_byte = 1.5 * 1024 * 1024, -- 1.5 Mb
+		-- 			lsp = true,
+		-- 			filetypes = { "css", "scss", "sh", "lua" },
+		-- 		},
+		-- 		pickers = {
+		-- 			ccc.picker.hex,
+		-- 			ccc.picker.css_rgb,
+		-- 			ccc.picker.css_hsl,
+		-- 			ccc.picker.ansi_escape { meaning1 = "bright" },
+		-- 		},
+		-- 		alpha_show = "hide", -- needed when highlighter.lsp is set to true
+		-- 		recognize = { output = true }, -- automatically recognize color format under cursor
+		-- 		inputs = { ccc.input.hsl },
+		-- 		outputs = {
+		-- 			ccc.output.css_hsl,
+		-- 			ccc.output.css_rgb,
+		-- 			ccc.output.hex,
+		-- 		},
+		-- 		convert = {
+		-- 			{ ccc.picker.hex, ccc.output.css_hsl },
+		-- 			{ ccc.picker.css_rgb, ccc.output.css_hsl },
+		-- 			{ ccc.picker.css_hsl, ccc.output.hex },
+		-- 		},
+		-- 		mappings = {
+		-- 			["<Esc>"] = ccc.mapping.quit,
+		-- 			["q"] = ccc.mapping.quit,
+		-- 			["L"] = ccc.mapping.increase10,
+		-- 			["H"] = ccc.mapping.decrease10,
+		-- 			["o"] = ccc.mapping.toggle_output_mode, -- = convert color
+		-- 		},
+		-- 	}
+		-- end,
 	},
 	{ -- Better input/selection fields
 		"stevearc/dressing.nvim",
