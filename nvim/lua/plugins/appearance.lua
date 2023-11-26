@@ -97,51 +97,50 @@ return {
 	},
 	{ -- color previews & color picker
 		"uga-rosa/ccc.nvim",
-		-- #fff222
 		keys = {
 			{ "g#", vim.cmd.CccPick, desc = " Color Picker" },
 			{ "#", "<Plug>(ccc-select-color)", mode = "o", desc = "󱡔 color textobj" },
 		},
-		-- ft = { "css", "scss", "sh", "lua" },
-		-- config = function()
-		-- 	vim.opt.termguicolors = true
-		-- 	local ccc = require("ccc")
-		-- 	ccc.setup {
-		-- 		win_opts = { border = u.borderStyle },
-		-- 		highlighter = {
-		-- 			auto_enable = true,
-		-- 			max_byte = 1.5 * 1024 * 1024, -- 1.5 Mb
-		-- 			lsp = true,
-		-- 			filetypes = { "css", "scss", "sh", "lua" },
-		-- 		},
-		-- 		pickers = {
-		-- 			ccc.picker.hex,
-		-- 			ccc.picker.css_rgb,
-		-- 			ccc.picker.css_hsl,
-		-- 			ccc.picker.ansi_escape { meaning1 = "bright" },
-		-- 		},
-		-- 		alpha_show = "hide", -- needed when highlighter.lsp is set to true
-		-- 		recognize = { output = true }, -- automatically recognize color format under cursor
-		-- 		inputs = { ccc.input.hsl },
-		-- 		outputs = {
-		-- 			ccc.output.css_hsl,
-		-- 			ccc.output.css_rgb,
-		-- 			ccc.output.hex,
-		-- 		},
-		-- 		convert = {
-		-- 			{ ccc.picker.hex, ccc.output.css_hsl },
-		-- 			{ ccc.picker.css_rgb, ccc.output.css_hsl },
-		-- 			{ ccc.picker.css_hsl, ccc.output.hex },
-		-- 		},
-		-- 		mappings = {
-		-- 			["<Esc>"] = ccc.mapping.quit,
-		-- 			["q"] = ccc.mapping.quit,
-		-- 			["L"] = ccc.mapping.increase10,
-		-- 			["H"] = ccc.mapping.decrease10,
-		-- 			["o"] = ccc.mapping.toggle_output_mode, -- = convert color
-		-- 		},
-		-- 	}
-		-- end,
+		ft = { "css", "scss", "sh", "lua" },
+		config = function()
+			vim.opt.termguicolors = true
+			local ccc = require("ccc")
+			ccc.setup {
+				win_opts = { border = u.borderStyle },
+				highlighter = {
+					auto_enable = true,
+					max_byte = 1.5 * 1024 * 1024, -- 1.5 Mb
+					lsp = true,
+					filetypes = { "css", "scss", "sh", "lua" },
+				},
+				pickers = {
+					ccc.picker.hex,
+					ccc.picker.css_rgb,
+					ccc.picker.css_hsl,
+					ccc.picker.ansi_escape { meaning1 = "bright" },
+				},
+				alpha_show = "hide", -- needed when highlighter.lsp is set to true
+				recognize = { output = true }, -- automatically recognize color format under cursor
+				inputs = { ccc.input.hsl },
+				outputs = {
+					ccc.output.css_hsl,
+					ccc.output.css_rgb,
+					ccc.output.hex,
+				},
+				convert = {
+					{ ccc.picker.hex, ccc.output.css_hsl },
+					{ ccc.picker.css_rgb, ccc.output.css_hsl },
+					{ ccc.picker.css_hsl, ccc.output.hex },
+				},
+				mappings = {
+					["<Esc>"] = ccc.mapping.quit,
+					["q"] = ccc.mapping.quit,
+					["L"] = ccc.mapping.increase10,
+					["H"] = ccc.mapping.decrease10,
+					["o"] = ccc.mapping.toggle_output_mode, -- = convert color
+				},
+			}
+		end,
 	},
 	{ -- Better input/selection fields
 		"stevearc/dressing.nvim",

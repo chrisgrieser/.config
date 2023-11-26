@@ -1,5 +1,1 @@
-
-
-
-
-local color = "#fff222"
+local color = "#dbf222"

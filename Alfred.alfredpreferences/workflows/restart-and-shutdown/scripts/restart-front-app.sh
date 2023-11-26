@@ -18,6 +18,7 @@ if [[ "$FRONT_APP" != "neovide" ]]; then
 			exit 1
 		fi
 	done
+	sleep 0.2
 
 	[[ "$FRONT_APP" == "wezterm-gui" ]] && FRONT_APP="WezTerm"
 	open -a "$FRONT_APP"

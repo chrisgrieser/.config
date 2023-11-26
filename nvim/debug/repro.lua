@@ -10,13 +10,12 @@ local plugins = {
 		"kevinhwang91/nvim-ufo",
 		dependencies = "kevinhwang91/promise-async",
 		-- commit = "4afd483", -- this commit introduced the issue
-		-- commit = "068053c", -- this commit is still fine
+		commit = "068053c", -- this commit is still fine
+		opts = true,
 	},
 	{
 		"uga-rosa/ccc.nvim",
-		init = function()
-			vim.opt.termguicolors = true
-		end,
+		init = function() vim.opt.termguicolors = true end,
 		keys = {
 			{ "g#", vim.cmd.CccPick },
 		},
