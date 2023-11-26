@@ -1,7 +1,7 @@
 ; inject bash for `shell_command` (karabiner elements config)
 ;bash_1
 (block_mapping_pair
-key: (flow_node) @_run (#any-of? @_run "run" "shell" "shell_command")
+key: (flow_node) @_run (#any-of? @_run "run" "cmd" "shell_command")
 value: (block_node
 (block_scalar) @injection.content
 (#set! injection.language "bash")
@@ -9,7 +9,7 @@ value: (block_node
 
 ;bash_2
 (block_mapping_pair
-key: (flow_node) @_run (#any-of? @_run "run" "shell" "shell_command")
+key: (flow_node) @_run (#any-of? @_run "run" "cmd" "shell_command")
 value: (block_node
 (block_sequence
 (block_sequence_item
@@ -20,7 +20,7 @@ value: (block_node
 
 ;bash_3
 (block_mapping_pair
-key: (flow_node) @_run (#any-of? @_run "run" "shell" "shell_command")
+key: (flow_node) @_run (#any-of? @_run "run" "cmd" "shell_command")
 value: (block_node
 (block_sequence
 (block_sequence_item
