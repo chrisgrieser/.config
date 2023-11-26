@@ -1,32 +1,5 @@
-# CHEAT.SH
-# aggregates stackoverflow, tl;dr and many other help pages
-# DOCS https://cht.sh/:help
-function h() {
-	local style pane_id
-	local query="$*"
-
-	# `curl cht.sh/:styles-demo`
-	style=$(defaults read -g AppleInterfaceStyle &>/dev/null && echo "monokai" || echo "trac")
-
-	query=${query// /-} # dash as separator for subcommands, e.g. git-rebase
-	if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
-		curl -s "https://cht.sh/$query?style=$style" >"/tmp/$query"
-		pane_id=$(wezterm cli spawn -- less "/tmp/$query")
-		wezterm cli set-tab-title --pane-id="$pane_id" "cheat: $query"
-	else
-		curl -s "https://cht.sh/$query?style=$style" | less
-	fi
-}
-FPATH="$FPATH:$ZDOTDIR/completion_data"
-compdef _cht h
-
-
-#───────────────────────────────────────────────────────────────────────────────
-
 # COLORIZED HELP
-# `--` ensures dash can be used in the alias name
 alias -g -- -h="--help | bat --language=help --style=plain --wrap=character"
-ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -100,6 +73,55 @@ export LESSHISTFILE=- # don't clutter home directory with useless `.lesshst` fil
 # - keybinding for search includes a setting that makes `n` and `N` wrap
 export LESSKEYIN="$ZDOTDIR/.lesskey"
 
-less_version=$(less --version | grep -E --only-matching --max-count=1 "[0-9.]{2,}")
-[[ $less_version -lt 582 ]] &&
-	echo "Installed version of less is lower than v.582, does not support all features."
+#───────────────────────────────────────────────────────────────────────────────
+
+# CHEAT.SH
+# aggregates stackoverflow, tl;dr and many other help pages
+# DOCS https://cht.sh/:help
+function h() {
+	local style pane_id
+	local query="$*"
+
+	# `curl cht.sh/:styles-demo`
+	style=$(defaults read -g AppleInterfaceStyle &>/dev/null && echo "monokai" || echo "trac")
+
+	query=${query// /-} # dash as separator for subcommands, e.g. git-rebase
+	if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
+		curl -s "https://cht.sh/$query?style=$style" >"/tmp/$query"
+		pane_id=$(wezterm cli spawn -- less "/tmp/$query")
+		wezterm cli set-tab-title --pane-id="$pane_id" "cheat: $query"
+	else
+		curl -s "https://cht.sh/$query?style=$style" | less
+	fi
+}
+
+# completions for cht.sh https://github.com/chubin/cheat.sh#zsh-tab-completion
+function _cht {
+	# shellcheck disable=2207
+	__CHTSH_LANGS=($(curl -s cheat.sh/:list))
+	_arguments -C \
+		'--help[show this help message and exit]: :->noargs' \
+		'--shell[enter shell repl]: :->noargs' \
+		'1:Cheat Sheet:->lang' \
+		'*::: :->noargs' && return 0
+
+	if [[ $CURRENT -ge 1 ]]; then
+		# shellcheck disable=2154
+		case $state in
+		noargs)
+			_message "nothing to complete"
+			;;
+		lang)
+			local expl
+			_description -V conventional-commit expl 'Cheat Sheet'
+			compadd "${expl[@]}" -- "${__CHTSH_LANGS[@]}"
+			;;
+		*)
+			_message "Unknown state, error in autocomplete"
+			;;
+		esac
+
+		return
+	fi
+}
+compdef _cht h
