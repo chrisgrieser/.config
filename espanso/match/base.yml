@@ -1,17 +1,13 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/ajmarkow/espanso-schema-json/master/schemas/Espanso_Matches_File_Schema.json
 #───────────────────────────────────────────────────────────────────────────────
 matches:
-  - trigger: "... " # space added to avoid conflict with `...` in the shell
+  - trigger: "... "
     replace: "… "
   #─────────────────────────────────────────────────────────────────────────────
   - trigger: "!web"
     replace: https://chris-grieser.de/
-  - trigger: "!twitter"
-    replace: https://twitter.com/pseudo_meta
   - trigger: "!masto"
     replace: https://pkm.social/@pseudometa
-  - trigger: "!github"
-    replace: https://github.com/chrisgrieser
   - triggers: ["!blog", "!vim"]
     replace: https://nanotipsforvim.prose.sh
   - trigger: "!paypal"
@@ -31,9 +27,7 @@ matches:
     replace: "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH"
   - trigger: "!null"
     replace: "&>/dev/null;"
-    #───────────────────────────────────────────────────────────────────────────
-  - trigger: "!dontask"
-    replace: "<https://dontasktoask.com/>"
+  #───────────────────────────────────────────────────────────────────────────
   - trigger: "!bug"
     replace: >-
       Could you open a bug report at the GitHub repo? 
@@ -41,9 +35,7 @@ matches:
       I need to investigate the issue. 
       (Also, I don't have the time to look into it right now, so a bug report
       will make sure that I can keep track of it.)
-  - trigger: "!here"
-    replace: "<https://heyoka.medium.com/dont-use-click-here-f32f445d1021>"
-    #───────────────────────────────────────────────────────────────────────────
+  #───────────────────────────────────────────────────────────────────────────
   - trigger: "!iso"
     replace: "{{todayISO}}"
     vars:
@@ -68,12 +60,16 @@ matches:
           format: "%d.%m.%Y"
   #─────────────────────────────────────────────────────────────────────────────
   - trigger: "!version"
-    replace: "macOS {{version}} (M1)"
+    replace: "macOS {{version}} ({{architecture}})"
     vars:
       - name: version
         type: shell
         params:
           cmd: "sw_vers -productVersion"
+      - name: architecture
+        type: shell
+        params:
+          cmd: "uname -p"
   - trigger: "!openai"
     replace: "{{apikey}}"
     label: get OpenAI API key
@@ -86,15 +82,17 @@ matches:
     replace: |-
       ```
       {{neovimVersion}}
-
-      neovide {{neovideVersion}}
-      macOS {{OSversion}}
+      macOS {{OSversion}} ({{architecture}})
       ```
     vars:
       - name: OSversion
         type: shell
         params:
           cmd: "sw_vers -productVersion"
+      - name: architecture
+        type: shell
+        params:
+          cmd: "uname -p"
       - name: neovimVersion
         type: shell
         params:
@@ -107,13 +105,17 @@ matches:
     replace: |-
       ```
       Obsidian {{obsiVersion}}
-      macOS {{OSversion}} (M1)
+      macOS {{OSversion}} ({{architecture}})
       ```
     vars:
       - name: OSversion
         type: shell
         params:
           cmd: "sw_vers -productVersion"
+      - name: architecture
+        type: shell
+        params:
+          cmd: "uname -p"
       - name: obsiVersion
         type: shell
         params:

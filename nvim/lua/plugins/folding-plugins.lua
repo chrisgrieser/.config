@@ -39,8 +39,10 @@ return {
 	{ -- UFO
 		"kevinhwang91/nvim-ufo",
 		dependencies = "kevinhwang91/promise-async",
-		commit = "068053c", -- PENDING
-		event = "BufReadPost", -- needed for folds to load properly
+		-- PENDING https://github.com/uga-rosa/ccc.nvim/issues/96
+		-- PENDING https://github.com/kevinhwang91/nvim-ufo/issues/183
+		commit = "068053c", 
+		event = "BufReadPost", -- needed for folds to load in time
 		keys = {
 			{
 				"zr",
