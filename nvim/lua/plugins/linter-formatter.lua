@@ -60,7 +60,6 @@ local dontInstall = {
 	"injected",
 	"ruff_format",
 	"ruff_fix",
-	"typos", -- PENDING https://github.com/mason-org/mason-registry/pull/3559
 }
 
 ---given the linter- and formatter-list of nvim-lint and conform.nvim, extract a
