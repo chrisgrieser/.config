@@ -118,7 +118,8 @@ serverConfigs.jedi_language_server = {
 	-- venv-dir here
 	on_new_config = function(config, root_dir)
 		local venv_python = root_dir .. "/.venv/bin/python"
-		if vim.fn.executable(venv_python) ~= 1 then return end
+		local fileExists = vim.loop.fs_stat(venv_python) ~= nil
+		if not fileExists then return end
 		config.init_options.workspace = {
 			environmentPath = venv_python,
 		}
