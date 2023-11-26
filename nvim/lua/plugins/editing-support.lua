@@ -194,6 +194,7 @@ return {
 				{ char = "s", arg = "snake", desc = "snake_case" },
 				{ char = "k", arg = "dash", desc = "kebab-case" },
 				{ char = "/", arg = "path", desc = "path/case" },
+				{ char = "<Space>", arg = "phrase", desc = "phrase case" },
 				{ char = "_", arg = "constant", desc = "SCREAMING_SNAKE_CASE" },
 			}
 
