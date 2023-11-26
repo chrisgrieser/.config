@@ -3,7 +3,14 @@
 
 # %%
 def double(x: int) -> int:
-    """Double a number."""
+    """Double the number.
+
+    Args:
+        x: input
+
+    Returns:
+        doubled number
+    """
     return x * 2
 
 

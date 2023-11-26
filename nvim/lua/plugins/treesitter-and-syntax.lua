@@ -70,6 +70,15 @@ return {
 		main = "nvim-treesitter.configs",
 		opts = tsConfig,
 	},
+	{ -- highlight injected code
+		"Dronakurl/injectme.nvim",
+		cmd = { "InjectmeToggle", "InjectmeSave", "InjectmeInfo", "InjectmeLeave" },
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+		},
+	},
 
 	-- Language Plugins
 	{ "mityu/vim-applescript", ft = "applescript" },

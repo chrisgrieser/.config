@@ -111,12 +111,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
-
-local function addBuffersToOldfiles ()
-	vim.fn.getbufinfo { buflisted = 1 }
-	vim.tbl_filter(function (buf) return vim.api.nvim_buf_is_loaded(buf) end, vim.api.nvim_list_bufs())
-end
-
 ---Requires the autocmd above
 ---@param _ table
 ---@param path string
@@ -316,10 +310,17 @@ return {
 			{ "<leader>gl", function() telescope("git_commits") end, desc = " Log/Commits" },
 			{ "<leader>gL", function() telescope("git_bcommits") end, desc = " Buffer Commits" },
 			{ "<leader>gb", function() telescope("git_branches") end, desc = " Branches" },
-			{ "gr", function()
-				addBuffersToOldfiles()
-				telescope("oldfiles")
-			end, desc = " Recent Files" },
+			{
+				"gr",
+				function()
+					-- add buffers to oldfiles
+					local listedBufs = vim.fn.getbufinfo { buflisted = 1 }
+					local bufPaths = vim.tbl_map(function(buf) return buf.name end, listedBufs)
+					vim.list_extend(vim.v.oldfiles, bufPaths)
+					telescope("oldfiles")
+				end,
+				desc = " Recent Files",
+			},
 			{
 				"go",
 				function()
