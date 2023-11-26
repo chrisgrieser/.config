@@ -2,6 +2,8 @@
 # DOCS https://zsh.sourceforge.io/Doc/Release/Options.html#Changing-Directories
 #───────────────────────────────────────────────────────────────────────────────
 
+setopt AUTO_CD     # pure directory = cd into it
+
 # POST-DIRECTORY-CHANGE-HOOK 
 # (use `cd -q` to suppress this hook)
 function chpwd {
@@ -33,11 +35,15 @@ alias gr=" cdr"
 #───────────────────────────────────────────────────────────────────────────────
 
 # BOOKMARKS (via cdpath & symlinks)
-setopt AUTO_CD     # pure directory = cd into it
 setopt CHASE_LINKS # resolve symlinks when changing directories
 
 bookmark_path="$ZDOTDIR/cdpath_bookmarks" # folder with symlinks to directories
 export CDPATH="$bookmark_path:$LOCAL_REPOS:$WD"
+
+function bookmark {
+	ln -s "$PWD" "$bookmark_path/"
+	echo "Bookmarked: $(basename "$PWD")"
+}
 
 #───────────────────────────────────────────────────────────────────────────────
 # CYCLE THROUGH DIRECTORIES
