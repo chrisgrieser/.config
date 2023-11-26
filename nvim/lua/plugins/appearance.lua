@@ -98,6 +98,8 @@ return {
 	},
 	{ -- color previews & color picker
 		"uga-rosa/ccc.nvim",
+		-- #fff222
+		commit = "cd2a10557b4a13e80929f59a7076ae792b2c60fa",
 		init = function()
 			-- HACK from the vim docs: https://neovim.io/doc/user/options.html#modeline
 			-- setting `# vim-pseudo-modeline: buffer_has_colors` enables the
@@ -115,11 +117,9 @@ return {
 		cmd = "CccHighlighterEnable",
 		keys = {
 			{ "g#", vim.cmd.CccPick, desc = " Color Picker" },
-			-- shift-# on german keyboard
-			{ "g'", vim.cmd.CccHighlighterEnable, desc = " Color Highlights" },
 			{ "#", "<Plug>(ccc-select-color)", mode = "o", desc = "󱡔 color textobj" },
 		},
-		ft = { "css", "scss", "sh" },
+		ft = { "css", "scss", "sh", "lua" },
 		config = function()
 			vim.opt.termguicolors = true
 			local ccc = require("ccc")
