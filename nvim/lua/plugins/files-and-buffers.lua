@@ -69,6 +69,7 @@ return {
 				"info.plist", -- Alfred workflows
 				">.config", -- all subfolders of the dotfile directory
 				">com~apple~CloudDocs", -- all subfolders of the iCloud drive
+				".project-root", -- manually marked root
 			},
 		},
 	},

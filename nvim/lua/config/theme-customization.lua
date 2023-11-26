@@ -1,5 +1,3 @@
--- vim-pseudo-modeline: buffer_has_colors
---------------------------------------------------------------------------------
 local M = {}
 
 local fn = vim.fn
@@ -90,6 +88,7 @@ local function themeModifications()
 		if theme == "everforest" then overwriteHl("Red", { fg = "#ce7d7c" }) end
 	elseif theme == "bamboo" and mode == "light" then
 		overwriteHl("@comment", { fg = "#777f76" })
+		updateHl("Todo", "guifg=#ffffff")
 		updateHl("@text.note", "guifg=#ffffff")
 		updateHl("@text.warning", "guifg=#ffffff")
 		updateHl("@text.danger", "guifg=#ffffff")
