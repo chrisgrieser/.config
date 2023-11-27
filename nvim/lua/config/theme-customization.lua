@@ -49,6 +49,7 @@ local function customHighlights()
 	end
 end
 
+-- selene: allow(high_cyclomatic_complexity)
 local function themeModifications()
 	local mode = vim.opt.background:get()
 	local theme = g.colors_name -- some themes do not set g.colors_name

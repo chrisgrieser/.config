@@ -30,16 +30,6 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>18F4A47C-90E0-4213-92B0-8FA7FD7F58FF</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 	</dict>
 	<key>createdby</key>
@@ -115,27 +105,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://btdig.com/search?q={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>18F4A47C-90E0-4213-92B0-8FA7FD7F58FF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -147,13 +116,6 @@
 			<real>30</real>
 			<key>ypos</key>
 			<real>170</real>
-		</dict>
-		<key>18F4A47C-90E0-4213-92B0-8FA7FD7F58FF</key>
-		<dict>
-			<key>xpos</key>
-			<real>235</real>
-			<key>ypos</key>
-			<real>285</real>
 		</dict>
 		<key>3E03A98F-86A5-4071-B729-8BB8E37F6E2D</key>
 		<dict>
