@@ -104,11 +104,8 @@ local function linterConfigs()
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
 	}
 	-- PENDING https://github.com/mfussenegger/nvim-lint/pull/474
-	lint.linters.typos.args = {
-		"--format=json",
-		"--force-exclude", -- so excluded files from `typos.toml` are still linted
-	}
-	lint.linters.typos.stdin = false -- so filenames are available
+	lint.linters.typos.args = { "--format=json", "--force-exclude" }
+	lint.linters.typos.stdin = false
 end
 
 local function lintTriggers()
@@ -169,15 +166,6 @@ local formatterConfig = {
 				if ignore then u.notify("conform.nvim", "Ignoring main-bibliography.bib.") end
 				return not ignore
 			end,
-		},
-		-- PENDING https://github.com/stevearc/conform.nvim/pull/219
-		typos = {
-			stdin = false,
-			args = {
-				"--write-changes",
-				"--force-exclude",
-				"$FILENAME",
-			},
 		},
 	},
 }
