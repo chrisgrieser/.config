@@ -93,8 +93,6 @@ local function themeModifications()
 		updateHl("@text.note", "guifg=#ffffff")
 		updateHl("@text.warning", "guifg=#ffffff")
 		updateHl("@text.danger", "guifg=#ffffff")
-	elseif theme == "nordic" then
-		overwriteHl("@parameter", { fg = "#8d8fe1" })
 	elseif theme == "material" and mode == "light" then
 		updateHl("@property", "guifg=#6c9798")
 		updateHl("@field", "guifg=#6c9798")
@@ -133,8 +131,6 @@ local function themeModifications()
 		for _, type in pairs { "Hint", "Info", "Warn", "Error" } do
 			updateHl("DiagnosticSign" .. type, "guibg=none")
 		end
-
-		-- linkHl("MoreMsg", "Folded") -- FIX for https://github.com/rebelot/kanagawa.nvim/issues/89
 	end
 end
 
