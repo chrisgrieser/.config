@@ -82,7 +82,7 @@
   "scrollEOF.nvim": { "branch": "master", "commit": "cd7d9f02b0be033e254c8289f7a77bda57383637" },
   "sibling-swap.nvim": { "branch": "main", "commit": "4af490451a11b02e98cd71fd7011fc1ac8953bab" },
   "telescope-symbols.nvim": { "branch": "master", "commit": "a6d0127a53d39b9fc2af75bd169d288166118aec" },
-  "telescope.nvim": { "branch": "master", "commit": "e4c62dedd760d339bea5b8325c2d918d87476d00" },
+  "telescope.nvim": { "branch": "master", "commit": "84c5a71d825b6687a55aed6f41e98b92fd8e5454" },
   "text-case.nvim": { "branch": "main", "commit": "111da7e6bc8262b6889612620690c5c5e159629c" },
   "treesj": { "branch": "main", "commit": "1d6e89f4790aa04eaae38fa9460a3ee191961c96" },
   "undotree": { "branch": "master", "commit": "36ff7abb6b60980338344982ad4cdf03f7961ecd" },
