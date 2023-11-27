@@ -42,12 +42,13 @@ function o() {
 	fi
 }
 
-# nicer & more interactively explorable tree
+# nicer & explorable tree view
 function _tree {
 	if [[ ! -x "$(command -v eza)" ]]; then print "\e[1;33meza not installed.\e[0m" && return 1; fi
 	if [[ ! -x "$(command -v fzf)" ]]; then print "\e[1;33mfzf not installed.\e[0m" && return 1; fi
 
-	eza --tree --level="$1" --color=always --icons=always --git-ignore --no-quotes |
+	eza --tree --level="$1" --color=always --icons=always --git-ignore \
+		--no-quotes --hyperlink |
 		sed '1d' | # remove `.`
 		fzf --ansi --no-sort --bind=tab:down+down+down+down,shift-tab:up+up+up+up
 }
@@ -93,8 +94,8 @@ function lc() {
 
 # copies result of last command(s)
 function lr() {
-	num=${1:-1} # default 1 -> just last command
-	to_copy=$(history -n -"$num")
+	num=${1:-1} # default 1 -> just last result
+	to_copy=$(eval "$(history -n -"$num")")
 	echo "Copied: $to_copy"
-	echo -n "$(eval "$to_copy")" | pbcopy
+	echo -n "$to_copy" | pbcopy
 }

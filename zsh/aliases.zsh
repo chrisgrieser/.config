@@ -20,7 +20,7 @@ function which { builtin which -a "$@" | bat --language=sh; }
 
 # eza
 alias l='eza --all --long --time-style=relative --no-user --smart-group \
-	--total-size --no-quotes --git-ignore --sort=newest'
+	--total-size --no-quotes --git-ignore --sort=newest --hyperlink'
 
 # bat: dark-mode aware
 function bat {

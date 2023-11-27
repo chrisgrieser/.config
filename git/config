@@ -48,6 +48,7 @@
 [delta]
 	tabs = 3 # tabwidth
 	navigate = true # use n and N to move between diff sections
+	hyperlinks = true
 	hunk-label="■"
 
 #────────────────────────────────────────────────────────────────────────────

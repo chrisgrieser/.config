@@ -3,8 +3,8 @@
 # don't show the intro messages on terminals with lower height (e.g. embedded ones)
 [[ $LINES -gt 20 ]] || return 0
 
-if ! command -v cowsay &>/dev/null; then echo "cowsay not installed." && return 1; fi
-if ! command -v fortune &>/dev/null; then echo "fortune not installed." && return 1; fi
+if [[ ! -x "$(command -v cowsay)" ]]; then print "\e[1;33mcowsay not installed.\e[0m" && return 1; fi
+if [[ ! -x "$(command -v fortune)" ]]; then print "\e[1;33mfortune not installed.\e[0m" && return 1; fi
 
 #───────────────────────────────────────────────────────────────────────────────
 

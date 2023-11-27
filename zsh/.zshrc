@@ -2,6 +2,7 @@ CONFIG_FILES=(
 	load_plugins
 	options
 	plugin_settings
+
 	navigation
 	completion
 	vim_mode
@@ -22,10 +23,9 @@ CONFIG_FILES=(
 
 #───────────────────────────────────────────────────────────────────────────────
 
-for config_file in "${CONFIG_FILES[@]}"; do
-	file="$ZDOTDIR/$config_file.zsh"
+for filename in "${CONFIG_FILES[@]}"; do
 	# shellcheck disable=1090
-	source "$file"
+	source "$ZDOTDIR/$filename.zsh"
 done
 
 # remove last login message that some terminals leave https://stackoverflow.com/a/69915614

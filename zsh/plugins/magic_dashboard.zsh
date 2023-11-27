@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+# shellcheck disable=2086 # simpler for various pseudo-options
 
 # draws a separator line with terminal width
 function _separator {
@@ -19,8 +20,12 @@ function _gitlog {
 		graph="--graph"
 	fi
 
-	# shellcheck disable=2086
-	git log --all --color $graph \
+	# so less displays nerdfont correctly https://github.com/ryanoasis/nerd-fonts/issues/1337
+	export LESSUTFCHARDEF=23fb-23fe:p,2665:p,26a1:p,2b58:p,e000-e00a:p,e0a0-e0a2:p,e0a3:p,e0b0-e0b3:p,e0b4-e0c8:p,e0ca:p,e0cc-e0d4:p,e200-e2a9:p,e300-e3e3:p,e5fa-e6a6:p,e700-e7c5:p,ea60-ebeb:p,f000-f2e0:p,f300-f32f:p,f400-f532:p,f500-fd46:p,f0001-f1af0:p
+
+	# INFO inserting ansi colors via sed requires leading $
+	local graph
+	graph=$(git log --all --color $graph \
 		--format="%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)%an%C(reset)" "$@" |
 		sed -e 's/ seconds* ago)/s)/' \
 			-e 's/ minutes* ago)/m)/' \
@@ -37,20 +42,27 @@ function _gitlog {
 			-Ee $'s/ (fix|refactor|build|ci|docs|feat|style|test|perf|chore|revert|break|improv)(\\(.+\\)|!)?:/ \033[1;35m\\1\033[1;36m\\2\033[0;38;5;245m:\033[0m/' \
 			-Ee $'s/ (fixup|squash)!/\033[1;32m&\033[0m/g' \
 			-Ee $'s/`[^`]*`/\033[1;36m&\033[0m/g' \
-			-Ee $'s/#[0-9]+/\033[1;31m&\033[0m/g' # issue numbers
-	# INFO inserting ansi colors via sed requires leading $
+			-Ee $'s/#[0-9]+/\033[1;31m&\033[0m/g'
+		)
+
+	if [[ "$MAGIC_DASHBOARD_USE_HYPERLINKS" != "0" ]]; then
+		echo "$graph" | delta --hyperlinks
+	else
+		echo "$graph"
+	fi
 }
 
 function _list_files_here {
 	if [[ ! -x "$(command -v eza)" ]]; then print "\033[1;33mMagic Dashboard: \`eza\` not installed.\033[0m" && return 1; fi
 
+	local use_hyperlinks eza_output
 	local max_files_lines=${MAGIC_DASHBOARD_FILES_LINES:-6}
-	local eza_output
+	use_hyperlinks=$([[ "$MAGIC_DASHBOARD_USE_HYPERLINKS" != "0" ]] && echo "--hyperlink" || echo "")
 	eza_output=$(eza --width="$COLUMNS" --all --grid --color=always --icons \
 		--git-ignore --ignore-glob=".DS_Store|Icon?" \
 		--sort=name --group-directories-first --no-quotes \
 		--git --long --no-user --no-permissions --no-filesize --no-time\
-		--hyperlink
+		$use_hyperlinks
 	)
 
 	if [[ $(echo "$eza_output" | wc -l) -gt $max_files_lines ]]; then
@@ -107,6 +119,7 @@ function _magic_dashboard {
 		return 0
 	fi
 
+	# show dashboard
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
 		local max_gitlog_lines=${MAGIC_DASHBOARD_GITLOG_LINES:-5}
 		_gitlog -n "$max_gitlog_lines"
