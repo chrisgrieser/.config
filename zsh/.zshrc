@@ -8,7 +8,6 @@ CONFIG_FILES=(
 	terminal_utils
 	terminal_keybindings
 	aliases
-	history
 	docs_man
 
 	git_github

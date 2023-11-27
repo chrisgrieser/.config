@@ -103,8 +103,8 @@ local function linterConfigs()
 		"--disable=no-multiple-blanks",
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
 	}
+	-- PENDING https://github.com/mfussenegger/nvim-lint/pull/474
 	lint.linters.typos.args = {
-		"--config=" .. linterConfig .. "/typos.toml",
 		"--format=json",
 		"--force-exclude", -- so excluded files from `typos.toml` are still linted
 	}
@@ -170,16 +170,14 @@ local formatterConfig = {
 				return not ignore
 			end,
 		},
+		-- PENDING https://github.com/stevearc/conform.nvim/pull/219
 		typos = {
-			-- prepend_args = { "--config=" .. linterConfig .. "/typos.toml" },
-			-- PENDING https://github.com/stevearc/conform.nvim/pull/219
 			stdin = false,
 			args = {
 				"--write-changes",
-				"--force-exclude", 
+				"--force-exclude",
 				"$FILENAME",
 			},
-			-- noice
 		},
 	},
 }

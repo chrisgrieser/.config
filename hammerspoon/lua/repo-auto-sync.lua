@@ -5,7 +5,7 @@ local u = require("lua.utils")
 --------------------------------------------------------------------------------
 
 local config = {
-	syncIntervallMins = 30,
+	syncIntervalMins = 30,
 	repos = {
 		{
 			name = "Dotfiles",
@@ -95,7 +95,7 @@ if u.isSystemStart() then syncAllGitRepos(true) end
 
 -- 2. every x minutes
 M.timer_repoSync = hs.timer
-	.doEvery(config.syncIntervallMins * 60, function()
+	.doEvery(config.syncIntervalMins * 60, function()
 		if u.screenIsUnlocked() then syncAllGitRepos(false) end
 	end)
 	:start()

@@ -2,7 +2,7 @@
 #───────────────────────────────────────────────────────────────────────────────
 matches:
   - trigger: "!lorem"
-    label: "Lorem: 5 paragraphes"
+    label: "Lorem: 5 paragraphs"
     replace: |
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a cursus sapien. Aenean sed mollis mauris. Morbi hendrerit eros id tortor facilisis, at consectetur dui iaculis. Nullam pharetra felis sit amet velit porttitor placerat. In vel lectus ipsum. Aliquam vestibulum a erat et sollicitudin. Quisque volutpat odio finibus nisi pellentesque, a efficitur lorem aliquam. Nunc tellus est, lacinia at mattis sed, vulputate sed neque. 
 

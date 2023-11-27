@@ -28,7 +28,7 @@ M.timer_JourFixe = hs.timer
 	.doAt("09:59", "01d", function()
 		if not (os.date("%a") == "Mon" and u.screenIsUnlocked()) then return end
 
-		hs.alert.show("Jour Fixe") -- codespell-ignore
+		hs.alert.show("Jour Fixe") 
 		local fgOrganisationChannel = "slack://channel?team=T010A5PEMBQ&id=CV95T641Y"
 		hs.urlevent.openURL(fgOrganisationChannel)
 	end)
