@@ -12,7 +12,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>3D656B72-508C-472A-89A5-17C81D76BE04</string>
+				<string>875F6925-275F-4987-8E44-E0D75F60EF4F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -64,7 +64,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>15B133BD-6344-403D-9853-3DD8A9DA073C</string>
+				<string>B34DBBCE-C220-4020-BDB7-DFAB47719F7A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -78,6 +78,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>76A3BBE1-A98B-4D93-A191-A6C85E4376DD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>875F6925-275F-4987-8E44-E0D75F60EF4F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3D656B72-508C-472A-89A5-17C81D76BE04</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -103,7 +116,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>4F7A6FD7-A938-4E18-BD93-CC83556B5F37</string>
+				<string>B34DBBCE-C220-4020-BDB7-DFAB47719F7A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -136,25 +149,6 @@
 	<string>Writing Assistant</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>15B133BD-6344-403D-9853-3DD8A9DA073C</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -355,6 +349,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>\n$</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>875F6925-275F-4987-8E44-E0D75F60EF4F</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -409,25 +424,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>4F7A6FD7-A938-4E18-BD93-CC83556B5F37</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -453,23 +449,12 @@
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>15B133BD-6344-403D-9853-3DD8A9DA073C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>paste</string>
-			<key>xpos</key>
-			<real>500</real>
-			<key>ypos</key>
-			<real>30</real>
-		</dict>
 		<key>322E5C7E-0088-48C7-8510-ABB6F13FAF6B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>185</real>
+			<real>170</real>
 			<key>ypos</key>
 			<real>195</real>
 		</dict>
@@ -478,20 +463,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>345</real>
+			<real>415</real>
 			<key>ypos</key>
 			<real>195</real>
-		</dict>
-		<key>4F7A6FD7-A938-4E18-BD93-CC83556B5F37</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>paste</string>
-			<key>xpos</key>
-			<real>510</real>
-			<key>ypos</key>
-			<real>375</real>
 		</dict>
 		<key>527810E3-7675-48C8-ABF2-D21274E22579</key>
 		<dict>
@@ -522,7 +496,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>remove \n</string>
 			<key>xpos</key>
-			<real>380</real>
+			<real>330</real>
 			<key>ypos</key>
 			<real>60</real>
 		</dict>
@@ -531,16 +505,27 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>185</real>
+			<real>170</real>
 			<key>ypos</key>
 			<real>30</real>
+		</dict>
+		<key>875F6925-275F-4987-8E44-E0D75F60EF4F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>remove \n</string>
+			<key>xpos</key>
+			<real>330</real>
+			<key>ypos</key>
+			<real>225</real>
 		</dict>
 		<key>932AEE6C-291D-43C3-87CC-D2E54FA12721</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>175</real>
 			<key>ypos</key>
 			<real>375</real>
 		</dict>
@@ -569,11 +554,11 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>B34DBBCE-C220-4020-BDB7-DFAB47719F7A</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>3</integer>
 			<key>note</key>
 			<string>paste</string>
 			<key>xpos</key>
-			<real>500</real>
+			<real>620</real>
 			<key>ypos</key>
 			<real>195</real>
 		</dict>
