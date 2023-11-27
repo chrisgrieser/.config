@@ -8,8 +8,7 @@ alias loadprefs="mackup restore --force && mackup uninstall --force"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# eject
-function e {
+function eject {
 	volumes=$(df -ih | grep -io "\s/Volumes/.*" | cut -c2-)
 	if [[ -z "$volumes" ]]; then
 		print "\033[1;33mNo volume mounted.\033[0m"
@@ -23,7 +22,7 @@ function e {
 	diskutil eject "$selected"
 }
 
-# safer removal
+# safer removal of files
 # - moves to macOS trash instead of irreversibly deleting with `rm`
 # - no arg = all files in folder will be deleted
 # - adds sound on success

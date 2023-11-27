@@ -6,6 +6,7 @@
 local spellfixes = {
 	teh = "the",
 	THe = "The",
+	curosr = "cursor",
 	brwoser = "browser",
 	markdwon = "markdown",
 	dwon = "down",
@@ -37,6 +38,8 @@ local spellfixes = {
 	ti = "it",
 	cant = "can't",
 	dont = "don't",
+	doestn = "doesn't",
+	doesnt = "doesn't",
 }
 
 for wrong, correct in pairs(spellfixes) do

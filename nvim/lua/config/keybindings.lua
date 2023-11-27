@@ -108,9 +108,13 @@ keymap(
 	{ desc = " Open new scope" }
 )
 
--- Spelling & Casing
-keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" }) -- works even with `spell=false`
-keymap("n", "~", "~h") -- don't move cursor, useful for vertical changes
+-- Spelling
+-- works even with `spell=false`
+keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
+
+-- ~ without moving don't move cursor, useful for vertical changes
+-- (`v~` instead of `~h` so dot-repetition, too, doesn't move the cursor)
+keymap("n", "~", "v~")
 
 -- Merging
 keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
