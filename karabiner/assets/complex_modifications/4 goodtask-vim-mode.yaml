@@ -182,7 +182,7 @@ rules:
                   display notification "Next Monday" with title "💤Snoozed"
                 '
         conditions: [*goodtask-app, *goodtask-normal-mode]
-      # open-url & delete
+      # open-url & mark as completed
       - type: basic
         from: { key_code: o }
         to:
