@@ -34,37 +34,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>23388016-EC5C-4368-AB42-CB8DEF1D10E8</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>D43E8A7B-48B4-4004-A798-0C9D544EAD7F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>76AAB3AC-6FFB-4BD3-8A66-7FF66A8F7C77</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>0AD1A926-80B8-4274-9DFF-10183BF36867</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>770184AB-9021-4CA5-AA07-1CA43D00BC0E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>23388016-EC5C-4368-AB42-CB8DEF1D10E8</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -123,7 +97,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>770184AB-9021-4CA5-AA07-1CA43D00BC0E</string>
+				<string>D43E8A7B-48B4-4004-A798-0C9D544EAD7F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -143,34 +117,6 @@
 	<string>DDGR</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./search-selection.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>inboundconfig</key>
-			<dict>
-				<key>externalid</key>
-				<string>search-selection</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>DD75F164-F04B-4A1C-84BD-49B4068C8E88</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -214,14 +160,50 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./search-for-link.sh</string>
+				<string>./scripts/search-selection.sh</string>
 				<key>type</key>
 				<integer>8</integer>
+			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>search-selection</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>10797BFB-ECCC-404B-9A55-B91951068BC9</string>
+			<string>DD75F164-F04B-4A1C-84BD-49B4068C8E88</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>40</integer>
+				<key>hotmod</key>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>K</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>76AAB3AC-6FFB-4BD3-8A66-7FF66A8F7C77</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -268,33 +250,38 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>1</integer>
-				<key>focusedappvariable</key>
+				<key>concurrently</key>
 				<false/>
-				<key>focusedappvariablename</key>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
 				<string></string>
-				<key>hotkey</key>
-				<integer>40</integer>
-				<key>hotmod</key>
-				<integer>1179648</integer>
-				<key>hotstring</key>
-				<string>K</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/searchlink.sh</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>76AAB3AC-6FFB-4BD3-8A66-7FF66A8F7C77</string>
+			<string>10797BFB-ECCC-404B-9A55-B91951068BC9</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>text</key>
+				<string>Google: {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.fallback</string>
+			<key>uid</key>
+			<string>C16E37C8-CCD7-4E12-8580-F48FEE5112C0</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -308,19 +295,6 @@
 			<string>alfred.workflow.action.systemwebsearch</string>
 			<key>uid</key>
 			<string>E0294F25-25E9-4D75-A042-047FE2AF1D91</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>text</key>
-				<string>Google: {query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.fallback</string>
-			<key>uid</key>
-			<string>C16E37C8-CCD7-4E12-8580-F48FEE5112C0</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -348,25 +322,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>23388016-EC5C-4368-AB42-CB8DEF1D10E8</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -374,7 +329,7 @@
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string>"{query}"</string>
+				<string>{query}</string>
 				<key>title</key>
 				<string>📋 Copied</string>
 			</dict>
@@ -397,7 +352,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./search-for-link.sh</string>
+				<string>./scripts/copy-first-link.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -405,27 +360,6 @@
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>FEEDB102-49DB-4F54-88FA-D54C378729DA</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>\[([^\]]*)\]\(([^)]*)\)</string>
-				<key>regexcaseinsensitive</key>
-				<false/>
-				<key>regexmultiline</key>
-				<false/>
-				<key>replacestring</key>
-				<string>$1 – $2</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
-			<key>uid</key>
-			<string>770184AB-9021-4CA5-AA07-1CA43D00BC0E</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -452,15 +386,6 @@
 			<key>ypos</key>
 			<real>190</real>
 		</dict>
-		<key>23388016-EC5C-4368-AB42-CB8DEF1D10E8</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>485</real>
-			<key>ypos</key>
-			<real>610</real>
-		</dict>
 		<key>76AAB3AC-6FFB-4BD3-8A66-7FF66A8F7C77</key>
 		<dict>
 			<key>colorindex</key>
@@ -471,17 +396,6 @@
 			<real>30</real>
 			<key>ypos</key>
 			<real>190</real>
-		</dict>
-		<key>770184AB-9021-4CA5-AA07-1CA43D00BC0E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>strip markdown syntax</string>
-			<key>xpos</key>
-			<real>405</real>
-			<key>ypos</key>
-			<real>640</real>
 		</dict>
 		<key>C16E37C8-CCD7-4E12-8580-F48FEE5112C0</key>
 		<dict>
@@ -497,7 +411,7 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>625</real>
+			<real>390</real>
 			<key>ypos</key>
 			<real>610</real>
 		</dict>
