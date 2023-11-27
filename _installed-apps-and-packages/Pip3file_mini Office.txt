@@ -1,4 +1,2 @@
-docopt
 pip-autoremove
-Pygments
 wheel

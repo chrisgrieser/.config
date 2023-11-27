@@ -28,7 +28,7 @@
 		"body": ["on ${1:func} (${2:argv})", "\t$0", "end ${1:func}"]
 	},
 	"notify": {
-		"prefix": "notify",
+		"prefix": ["notify", "notification"],
 		"body": "display notification \"${2:subtitle}\" with title \"${1:title}\""
 	},
 	"keystroke": {
