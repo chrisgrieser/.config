@@ -27,12 +27,7 @@ M.wf_browser = wf.new(env.browserApp)
 			wu.autoTile(M.wf_browser)
 		end
 	end)
-	:subscribe(wf.windowDestroyed, function()
-		wu.autoTile(M.wf_browser)
-		-- closing windows means we are done with things, which include working on
-		-- github notifications
-		hs.execute(u.exportPath .. "sketchybar --trigger update-github-notifications")
-	end)
+	:subscribe(wf.windowDestroyed, function() wu.autoTile(M.wf_browser) end)
 	:subscribe(wf.windowFocused, wu.bringAllWinsToFront)
 
 -- Automatically hide Browser has when no window
