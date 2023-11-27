@@ -103,7 +103,12 @@ local function linterConfigs()
 		"--disable=no-multiple-blanks",
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
 	}
-	lint.linters.typos.args = { "--config=" .. linterConfig .. "/typos.toml", "--format=json", "-" }
+	lint.linters.typos.args = {
+		"--config=" .. linterConfig .. "/typos.toml",
+		"--format=json",
+		"--force-exclude", -- so excluded files in the config take effect
+	}
+	lint.linters.typos.stdin = false -- so filenames are available
 end
 
 local function lintTriggers()
