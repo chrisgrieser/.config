@@ -142,7 +142,7 @@ rules:
         to:
           - { key_code: spacebar }
           # FIX loosing focus
-          - { key_code: vk_none, hold_down_milliseconds: 400 }
+          - { key_code: vk_none, hold_down_milliseconds: 450 }
           - { key_code: tab }
         conditions: [*goodtask-app, *goodtask-normal-mode]
       # Toggle done tasks
@@ -190,11 +190,17 @@ rules:
                 end tell
               '
         conditions: [*goodtask-app, *goodtask-normal-mode]
-      # yank
+      # yank / copy
       - type: basic
         from: { key_code: z } # German keyboard z and y switched
         to:
           - { key_code: c, modifiers: [command] }
+          - shell_command: |
+              # clean up copy content
+              export LC_CTYPE="en_US.UTF-8" # fix for pbcopy
+              sleep 0.1 # wait for clipboard
+              pbpaste | grep -v "^ *$" | sed -e '$d' -e '1s/^◯ //' | pbcopy
+              osascript -e 'display notification "" with title "📋 Copied"'
         conditions: [*goodtask-app, *goodtask-normal-mode, *german-keyboard]
       # undo
       - type: basic

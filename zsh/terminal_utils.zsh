@@ -42,7 +42,7 @@ function o() {
 	fi
 }
 
-# nicer & more interactive tree
+# nicer & more interactively explorable tree
 function _tree {
 	if [[ ! -x "$(command -v eza)" ]]; then print "\e[1;33meza not installed.\e[0m" && return 1; fi
 	if [[ ! -x "$(command -v fzf)" ]]; then print "\e[1;33mfzf not installed.\e[0m" && return 1; fi
@@ -86,18 +86,15 @@ function p {
 # copies last command(s)
 function lc() {
 	num=${1:-1} # default 1 -> just last command
-	history |
-		tail -n"$num" |
-		cut -c8- |
-		sed -e 's/"/\"/g' -e "s/'/\'/g" -Ee '/^$/d' |
-		pbcopy
-	echo "Copied."
+	to_copy=$(history -n -"$num" | sed -e 's/"/\"/g' -e "s/'/\'/g" -Ee '/^$/d')
+	echo "Copied: $to_copy"
+	echo -n "$to_copy" | pbcopy
 }
 
 # copies result of last command(s)
 function lr() {
 	num=${1:-1} # default 1 -> just last command
-	last_command=$(history | tail -n"$num" | cut -c8-)
-	echo -n "$(eval "$last_command")" | pbcopy
-	echo "Copied."
+	to_copy=$(history -n -"$num")
+	echo "Copied: $to_copy"
+	echo -n "$(eval "$to_copy")" | pbcopy
 }
