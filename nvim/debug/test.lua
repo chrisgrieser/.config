@@ -1,2 +1,2 @@
-local the
-local excude
+-- teh
+-- exlude

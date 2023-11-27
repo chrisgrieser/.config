@@ -107,6 +107,7 @@ local function linterConfigs()
 		"--config=" .. linterConfig .. "/typos.toml",
 		"--format=json",
 		"--force-exclude", -- so excluded files in the config take effect
+		"--no-ignore",
 	}
 	lint.linters.typos.stdin = false -- so filenames are available
 end
@@ -116,7 +117,7 @@ local function lintTriggers()
 		vim.defer_fn(function()
 			if vim.bo.buftype ~= "" then return end
 
-			-- GUARD only when in lua, only lint when selene file available 
+			-- GUARD only when in lua, only lint when selene file available
 			-- https://github.com/mfussenegger/nvim-lint/issues/370#issuecomment-1729671151
 			if vim.bo.ft == "lua" then
 				local noSeleneConfig = vim.loop.fs_stat((vim.loop.cwd() or "") .. "/selene.toml") == nil
@@ -157,9 +158,6 @@ local formatterConfig = {
 		markdownlint = {
 			prepend_args = { "--config=" .. linterConfig .. "/markdownlint.yaml" },
 		},
-		typos = {
-			prepend_args = { "--config=" .. linterConfig .. "/typos.toml" },
-		},
 		-- stylua: ignore
 		["bibtex-tidy"] = {
 			prepend_args =
@@ -172,6 +170,16 @@ local formatterConfig = {
 				if ignore then u.notify("conform.nvim", "Ignoring main-bibliography.bib.") end
 				return not ignore
 			end,
+		},
+		typos = {
+			prepend_args = { "--config=" .. linterConfig .. "/typos.toml" },
+			-- PENDING https://github.com/stevearc/conform.nvim/pull/219
+			stdin = false,
+			args = {
+				"--write-changes",
+				"--force-exclude", 
+				"$FILENAME",
+			},
 		},
 	},
 }
