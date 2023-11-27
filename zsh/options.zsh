@@ -2,7 +2,6 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 # GENERAL
-
 setopt INTERACTIVE_COMMENTS # comments in interactive mode, useful for copypasting
 setopt CORRECT
 setopt GLOB_DOTS # glob includes dotfiles
