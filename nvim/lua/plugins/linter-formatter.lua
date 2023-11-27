@@ -37,7 +37,7 @@ local formatters = {
 	["*"] = { "typos" }, -- all filetypes
 }
 
--- filetypes that should use lsp-formatting (after the formatters)
+-- filetypes that should use lsp-formatting (and the formtters for `*`)
 local lspFormatting = {
 	"toml",
 	"yaml",
