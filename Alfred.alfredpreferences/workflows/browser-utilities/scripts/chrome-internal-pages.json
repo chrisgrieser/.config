@@ -31,6 +31,11 @@
 			"uid": "5"
 		},
 		{
+			"title": "⌨️ Brave Shortcuts",
+			"arg": "brave://settings/system/shortcuts",
+			"uid": "6"
+		},
+		{
 			"title": "🕟 History",
 			"arg": "chrome://history/",
 			"uid": "7"
