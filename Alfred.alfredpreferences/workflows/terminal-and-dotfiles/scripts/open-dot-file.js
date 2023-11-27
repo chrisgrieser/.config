@@ -8,7 +8,9 @@ function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#;,/\\[\]]/g, " ");
 	const squeezed = str.replace(/[-_.]/g, "");
 	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
-	return [clean, camelCaseSeparated, squeezed, str].join(" ");
+	const kebabCase = str.replace(/[ _]/g, "-")
+	const snakeCase = str.replace(/[ -]/g, "_")
+	return [clean, camelCaseSeparated, squeezed, str, kebabCase, snakeCase].join(" ");
 }
 
 //──────────────────────────────────────────────────────────────────────────────

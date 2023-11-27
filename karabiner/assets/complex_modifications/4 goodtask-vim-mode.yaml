@@ -145,9 +145,9 @@ rules:
           - { key_code: vk_none, hold_down_milliseconds: 500 }
           - { key_code: tab }
         conditions: [*goodtask-app, *goodtask-normal-mode]
-      # w: Duplicate Tasks
+      # replicate task
       - type: basic
-        from: { key_code: w }
+        from: { key_code: r }
         to:
           - { key_code: c, modifiers: [command] }
           - { key_code: v, modifiers: [command] }
@@ -179,7 +179,7 @@ rules:
                 tell application "System Events" to tell process "GoodTask"
                   click menu item "Next Monday" of menu of menu item "Quick Actions" of menu "Edit" of menu bar 1
                   end tell
-                  display notification "Next Monday" with title "💤Snoozed"
+                display notification "Next Monday" with title "💤Snoozed"
                 '
         conditions: [*goodtask-app, *goodtask-normal-mode]
       # open-url & mark as completed
@@ -213,13 +213,13 @@ rules:
       - type: basic
         from: { key_code: u }
         to:
-          - { key_code: y, modifiers: [command] } # german keyboard z and y switched
+          - { key_code: y, modifiers: [command] } # German keyboard z and y switched
         conditions: [*goodtask-app, *goodtask-normal-mode, *german-keyboard]
       # redo
       - type: basic
         from: { key_code: u, modifiers: { mandatory: [shift] } }
         to:
-          - { key_code: y, modifiers: [command, shift] } # german keyboard z and y switched
+          - { key_code: y, modifiers: [command, shift] } # German keyboard z and y switched
         conditions: [*goodtask-app, *goodtask-normal-mode, *german-keyboard]
       # select all
       - type: basic
