@@ -52,7 +52,6 @@ serverConfigs.lua_ls = {
 			completion = {
 				callSnippet = "Replace",
 				keywordSnippet = "Replace",
-				displayContext = 6,
 				showWord = "Disable", -- don't suggest common words as fallback
 				postfix = ".", -- useful for `table.insert` and the like
 			},
@@ -113,10 +112,10 @@ serverConfigs.jedi_language_server = {
 		codeAction = { nameExtractVariable = "extracted_var", nameExtractFunction = "extracted_def" },
 	},
 	-- HACK since init_options cannot be changed during runtime, we need to use
-	-- `on_new_config` to set it. Since at `vim.env.VIRTUAL_ENV` is
-	-- not set in time, we need to hardcode the identification of the
-	-- venv-dir here
+	-- `on_new_config` to set it.
 	on_new_config = function(config, root_dir)
+		-- Since at `vim.env.VIRTUAL_ENV` is not set in time, we need to hardcode the
+		-- identification of the venv-dir here
 		local venv_python = root_dir .. "/.venv/bin/python"
 		local fileExists = vim.loop.fs_stat(venv_python) ~= nil
 		if not fileExists then return end
@@ -304,31 +303,17 @@ local function setupAllLsps()
 	end
 end
 
-local function lspSignatureSettings()
-	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-		border = u.borderStyle,
-	})
-	-- INFO this needs to be disabled for noice.nvim
-	-- vim.lsp.handlers["textDocument/hover"] =
-	-- vim.lsp.with(vim.lsp.handlers.hover, { border = u.borderStyle })
-end
-
 --------------------------------------------------------------------------------
 
 return {
-	{ -- nvim-lua-types
-		"folke/neodev.nvim",
-		opts = {
-			library = { plugins = false }, -- too slow with all my plugins
-		},
-	},
 	{ -- configure LSPs
 		"neovim/nvim-lspconfig",
-		dependencies = "folke/neodev.nvim", -- ensures it's loaded before lua_ls
-		init = function()
-			setupAllLsps()
-			lspSignatureSettings()
-		end,
+		lazy = false,
+		dependencies = { -- loading as dependency ensures it's loaded before lua_ls
+			"folke/neodev.nvim",
+			opts = { library = { plugins = false } }, -- too slow with all my plugins
+		},
+		init = function() setupAllLsps() end,
 		config = function() require("lspconfig.ui.windows").default_options.border = u.borderStyle end,
 	},
 }

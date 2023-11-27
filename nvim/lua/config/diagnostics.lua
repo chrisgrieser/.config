@@ -18,7 +18,7 @@ local function diagMsgFormat(diag)
 	local msg = diag
 		.message
 		:gsub(" ?%.$", "") -- trailing dot for lua_ls
-		:gsub("`(%w+)` should be `(%w+)`", "%1 󰁔 %2") -- typos
+		:gsub("`(%w-)` should be `(.+)`", "%1 󰁔 %2") -- typos
 	return msg
 end
 
