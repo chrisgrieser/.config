@@ -1,1 +1,2 @@
-local color = "#dbf222"
+local the
+local excude

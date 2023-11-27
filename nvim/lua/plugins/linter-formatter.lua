@@ -116,9 +116,20 @@ local function lintTriggers()
 		vim.defer_fn(function()
 			if vim.bo.buftype ~= "" then return end
 
-			-- GUARD only when in lua, only lint when selene file available https://github.com/mfussenegger/nvim-lint/issues/370#issuecomment-1729671151
-			local hasNoSeleneConfig = vim.loop.fs_stat((vim.loop.cwd() or "") .. "/selene.toml") == nil
-			if hasNoSeleneConfig and vim.bo.ft == "lua" then return end
+			-- GUARD only when in lua, only lint when selene file available 
+			-- https://github.com/mfussenegger/nvim-lint/issues/370#issuecomment-1729671151
+			if vim.bo.ft == "lua" then
+				local noSeleneConfig = vim.loop.fs_stat((vim.loop.cwd() or "") .. "/selene.toml") == nil
+				if noSeleneConfig then
+					local luaLinters = require("lint").linters_by_ft.lua
+					local noSelene = vim.tbl_filter(
+						function(linter) return linter ~= "selene" end,
+						luaLinters
+					)
+					require("lint").try_lint(noSelene)
+					return
+				end
+			end
 
 			require("lint").try_lint()
 		end, 1)
