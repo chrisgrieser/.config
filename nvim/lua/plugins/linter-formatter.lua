@@ -106,8 +106,7 @@ local function linterConfigs()
 	lint.linters.typos.args = {
 		"--config=" .. linterConfig .. "/typos.toml",
 		"--format=json",
-		"--force-exclude", -- so excluded files in the config take effect
-		"--no-ignore",
+		"--force-exclude", -- so excluded files from `typos.toml` are still linted
 	}
 	lint.linters.typos.stdin = false -- so filenames are available
 end
@@ -172,7 +171,7 @@ local formatterConfig = {
 			end,
 		},
 		typos = {
-			prepend_args = { "--config=" .. linterConfig .. "/typos.toml" },
+			-- prepend_args = { "--config=" .. linterConfig .. "/typos.toml" },
 			-- PENDING https://github.com/stevearc/conform.nvim/pull/219
 			stdin = false,
 			args = {
@@ -180,6 +179,7 @@ local formatterConfig = {
 				"--force-exclude", 
 				"$FILENAME",
 			},
+			-- noice
 		},
 	},
 }

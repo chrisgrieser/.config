@@ -142,10 +142,17 @@ rules:
         to:
           - { key_code: spacebar }
           # FIX loosing focus
-          - { key_code: vk_none, hold_down_milliseconds: 450 }
+          - { key_code: vk_none, hold_down_milliseconds: 500 }
           - { key_code: tab }
         conditions: [*goodtask-app, *goodtask-normal-mode]
-      # Toggle done tasks
+      # w: Duplicate Tasks
+      - type: basic
+        from: { key_code: w }
+        to:
+          - { key_code: c, modifiers: [command] }
+          - { key_code: v, modifiers: [command] }
+        conditions: [*goodtask-app, *goodtask-normal-mode, *german-keyboard]
+      # Toggle viewing completed tasks
       - type: basic
         from: { key_code: v }
         to:
