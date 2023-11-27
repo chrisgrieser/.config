@@ -62,6 +62,10 @@ matches:
     replace: only
   - trigger: '#s '
     replace: "'s "
+  - trigger: '#ve '
+    replace: "'ve "
+  - trigger: '#d '
+    replace: "'d "
   - trigger: shcon
     replace: schon
   - trigger: sosnt
