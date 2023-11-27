@@ -45,10 +45,8 @@ if vim.version().major == 0 and vim.version().minor >= 10 then
 		# nvim 0.10
 		- stevanmilic/nvim-lspimport can now be used
 		- satellite.nvim can now be updated.
-		- biome lspconfig https://github.com/neovim/nvim-lspconfig/issues/2807
-		- yaml-ls dynamic formatting as well?
+		- biome can now format via ls https://github.com/neovim/nvim-lspconfig/issues/2807
 		- vim.system
-		- vim.lsp.getclient
 		- vim.uv instead of vim.loop
 		- ftAbbr & abbreviations.lua: vim.keymap.set('ia', lhs, rhs, { buffer = true })
 		- inlay hints setup: https://www.reddit.com/r/neovim/comments/16tmzkh/comment/k2gpy16/?context=3
