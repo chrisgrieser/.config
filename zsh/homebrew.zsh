@@ -64,8 +64,10 @@ function update() {
 	_print-section "NPM"
 	npm update --location=global
 
-	_print-section "PIP"
-	pip3 list --not-required --outdated | cut -d" " -f1 | xargs pip3 install --upgrade
+	_print-section "PIP3"
+	command pip3 list --not-required --outdated | 
+		sed "1,2d" | cut -d" " -f1 | 
+		xargs command pip3 install --upgrade
 
 	_print-section "DUMP INSTALL LISTS"
 	_dump
@@ -93,10 +95,10 @@ function listall() {
 	mas list
 
 	_print-section "NPM"
-	npm list --location=global
+	command npm list --location=global
 
 	_print-section "Pip3"
-	pip3 list --not-required
+	command pip3 list --not-required
 
 	_print-section "DUMP INSTALLS"
 	_dump

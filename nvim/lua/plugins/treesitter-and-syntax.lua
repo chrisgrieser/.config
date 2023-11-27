@@ -3,8 +3,8 @@ local textobjMaps = require("config.utils").textobjMaps
 --------------------------------------------------------------------------------
 
 local tsConfig = {
-	-- easier than keeping track of new parsers, especially the special ones,
-	-- which are not auto-installed (luap, luadocs)
+	-- easier than keeping track of new parsers, especially "special parsers",
+	-- which are not auto-installed on entering a buffer (e.g., luap, luadocs)
 	ensure_installed = "all",
 
 	highlight = {
@@ -14,9 +14,9 @@ local tsConfig = {
 	indent = {
 		enable = true,
 		disable = {
-			"markdown", -- indentation at bullet points worse
-			"lua", -- `o` sometimes get weird behavior
-			"javascript", -- `o` sometimes get weird behavior
+			"markdown", -- indentation at bullet points is worse
+			"lua", -- `o` sometimes with weird indentation
+			"javascript", -- `o` sometimes with weird indentation
 		},
 	},
 
@@ -71,7 +71,7 @@ return {
 		opts = tsConfig,
 	},
 
-	-- Language Plugins
+	-- Language-specific syntax highlighting
 	{ "mityu/vim-applescript", ft = "applescript" },
 	{ "hail2u/vim-css3-syntax", ft = "css" }, -- FIX https://github.com/tree-sitter/tree-sitter-css/issues/34
 }
