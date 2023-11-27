@@ -95,7 +95,7 @@ end)
 
 --------------------------------------------------------------------------------
 -- Separator the logs every day at midnight
-M.timer_dailyConsoleSeperator = hs.timer
+M.timer_dailyConsoleSeparator = hs.timer
 	.doAt("00:00", "01d", function()
 		local date = os.date("%a, %d. %b")
 		print(

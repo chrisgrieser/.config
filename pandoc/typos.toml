@@ -1,0 +1,7 @@
+# DOCS https://github.com/crate-ci/typos/blob/master/docs/reference.md
+#───────────────────────────────────────────────────────────────────────────────
+
+# ignore these files
+# INFO (needs glob due to conform.nvim appending stuff for temporary file)
+[files]
+extend-exclude = ["*main-bibliography.bib"] # too many false positives

@@ -64,10 +64,10 @@ function M.autoSwitch()
 	local brightness = hs.brightness.ambient()
 	local hasBrightnessSensor = brightness > -1
 	local targetMode
-	local brightnessThreshhold = 90
+	local brightnessThreshold = 90
 
 	if hasBrightnessSensor then
-		targetMode = brightness > brightnessThreshhold and "light" or "dark"
+		targetMode = brightness > brightnessThreshold and "light" or "dark"
 	else
 		targetMode = u.betweenTime(7, 20) and "light" or "dark"
 	end

@@ -75,15 +75,15 @@ end):start()
 --------------------------------------------------------------------------------
 
 ---check apps regularly and quit if idle for longer than their thresholds
-local checkIntervallSecs = 20
+local checkIntervalSecs = 20
 M.timer_autoQuitter = hs.timer
-	.doEvery(checkIntervallSecs, function()
+	.doEvery(checkIntervalSecs, function()
 		for app, lastActivation in pairs(M.idleApps) do
 			-- can't do this with guard clause, since lua has no `continue`
-			local appHasThreshhold = M.thresholds[app] ~= nil
+			local appHasThreshold = M.thresholds[app] ~= nil
 			local appIsRunning = u.appRunning(app)
 
-			if appHasThreshhold and appIsRunning then
+			if appHasThreshold and appIsRunning then
 				local idleTimeSecs = now() - lastActivation
 				local thresholdSecs = M.thresholds[app] * 60
 				if idleTimeSecs > thresholdSecs then quit(app) end

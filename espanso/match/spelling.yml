@@ -60,11 +60,11 @@ matches:
     word: true
   - trigger: onyl
     replace: only
-  - trigger: '#s '
+  - trigger: "#s "
     replace: "'s "
-  - trigger: '#ve '
+  - trigger: "#ve "
     replace: "'ve "
-  - trigger: '#d '
+  - trigger: "#d "
     replace: "'d "
   - trigger: shcon
     replace: schon

@@ -73,7 +73,7 @@ end):start()
 --------------------------------------------------------------------------------
 -- AUTO-INSTALL OBSIDIAN ALPHA
 
-M.pathw_ObsiAlph = pathw(env.fileHub, function(files)
+M.pathw_ObsiAlpha = pathw(env.fileHub, function(files)
 	for _, file in pairs(files) do
 		-- needs delay and `.crdownload` check, since the renaming is sometimes
 		-- not picked up by hammerspoon
