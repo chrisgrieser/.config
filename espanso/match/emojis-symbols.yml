@@ -52,7 +52,7 @@ matches:
   - trigger: "!gimme" # codespell-ignore
     replace: ༼つ ◕_◕ ༽つ
     label: ༼つ ◕_◕ ༽つ gimme # codespell-ignore
-  - trigger: "!tableflip"
+  - trigger: "!flip"
     replace: (╯°□°）╯︵ ┻━┻
     label: (╯°□°）╯︵ ┻━┻ tableflip
   #─────────────────────────────────────────────────────────────────────────
