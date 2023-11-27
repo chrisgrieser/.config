@@ -14,6 +14,6 @@ ue = "ue"           # no inline ignoring yet https://github.com/crate-ci/typos/p
 [files]
 extend-exclude = [
 	"main-bibliography.bib", # too many false positives, PENDING https://github.com/crate-ci/typos/issues/316
-	"**/spelling.yml",       # spell fixer
+	"spelling.yml",          # spell fixer
 	"abbreviations.lua",     # spell fixer
 ]
