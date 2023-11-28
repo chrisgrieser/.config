@@ -136,14 +136,17 @@ rules:
         to:
           - { key_code: up_arrow, modifiers: [command] }
         conditions: [*goodtask-app, *goodtask-normal-mode]
-      # done (toggle completed)
+      # done (mark as completed)
+      # (not using space, since it sometimes looses focus which you cannot fix via Keyboard)
       - type: basic
-        from: { key_code: spacebar }
+        from: { key_code: d }
         to:
-          - { key_code: spacebar }
-          # FIX loosing focus
-          - { key_code: vk_none, hold_down_milliseconds: 500 }
-          - { key_code: tab }
+          - shell_command: |
+              osascript -e '
+                tell application "System Events" to tell process "GoodTask"
+                  click menu item "Complete" of menu of menu item "Quick Actions" of menu "Edit" of menu bar 1
+                end tell
+              '
         conditions: [*goodtask-app, *goodtask-normal-mode]
       # replicate task
       - type: basic
