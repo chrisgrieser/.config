@@ -37,8 +37,7 @@ local formatters = {
 	["*"] = { "typos" }, -- all filetypes
 }
 
--- filetypes that should use lsp-formatting (and the formtters for `*`)
-local lspFormatting = {
+local lspFormattingFiletypes = {
 	"toml",
 	"yaml",
 	"html",
@@ -189,7 +188,7 @@ return {
 			{
 				"<D-s>",
 				function()
-					local useLsp = vim.tbl_contains(lspFormatting, vim.bo.ft) and "always" or false
+					local useLsp = vim.tbl_contains(lspFormattingFiletypes, vim.bo.ft) and "always" or false
 					require("conform").format {
 						lsp_fallback = useLsp,
 						async = false,

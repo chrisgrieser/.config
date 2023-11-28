@@ -50,6 +50,7 @@ local keymappings_I = {
 	end,
 }
 
+-- mappings for `:Telescope find_files`
 local hiddenIgnoreActive = false
 local findFileMappings = {
 	-- toggle `--hidden` & `--no-ignore`
@@ -137,7 +138,6 @@ local function telescopeConfig()
 			preview = {
 				timeout = 400, -- ms
 				filesize_limit = 1, -- Mb
-				ls_short = true, -- ls is only used when displaying directories
 			},
 			borderchars = u.borderChars,
 			default_mappings = { i = keymappings_I, n = keymappings_N },
@@ -153,11 +153,8 @@ local function telescopeConfig()
 				},
 			},
 		-- stylua: ignore
-		file_ignore_patterns = {
-			"%.pdf$", "%.png$", "%.gif$", "%.jpe?g$","%.icns$", "%.pxd$",
-			"%.zip$", "%.plist$",
-			-- other ignores are defined via .gitignore, .ignore, /fd/ignore, or /git/ignore
-		},
+		-- other ignores are defined via .gitignore, .ignore, /fd/ignore, or /git/ignore
+		file_ignore_patterns = { "%.pdf$", "%.png$", "%.gif$", "%.jpe?g$","%.icns$", "%.zip$", "%.plist$", },
 		},
 		pickers = {
 			find_files = {
@@ -243,17 +240,6 @@ local function telescopeConfig()
 				ignore_symbols = { "boolean", "number", "string", "variable", "array", "object", "constant", "package" },
 				fname_width = 12,
 			},
-			buffers = {
-				prompt_prefix = "󰽙 ",
-				ignore_current_buffer = false,
-				sort_mru = true,
-				initial_mode = "normal",
-				mappings = { n = { ["<D-w>"] = "delete_buffer" } },
-				previewer = false,
-				layout_config = {
-					horizontal = { anchor = "W", width = 0.5, height = 0.5 },
-				},
-			},
 			colorscheme = {
 				enable_preview = true,
 				prompt_prefix = " ",
@@ -270,10 +256,7 @@ local function telescopeConfig()
 		},
 		extensions = {
 			aerial = {
-				show_nesting = {
-					markdown = false,
-					["_"] = true,
-				},
+				show_nesting = { markdown = false, ["_"] = true },
 			},
 		},
 	}
@@ -281,19 +264,12 @@ end
 
 --------------------------------------------------------------------------------
 
----@return string name of the current project
-local function projectName()
-	local pwd = vim.loop.cwd() or ""
-	return vim.fs.basename(pwd)
-end
-
 return {
 	{ -- fuzzy finder
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
 		keys = {
 			{ "?", function() telescope("keymaps") end, desc = "⌨️  Search Keymaps" },
-			{ "gb", function() telescope("buffers") end, desc = " 󰽙 Buffers" },
 			{ "g.", function() telescope("resume") end, desc = " Continue" },
 			{
 				"gw",
@@ -325,7 +301,7 @@ return {
 				"go",
 				function()
 					require("telescope.builtin").find_files {
-						prompt_title = "Find Files: " .. projectName(),
+						prompt_title = "Find Files: " .. vim.fs.basename(vim.loop.cwd() or ""),
 					}
 				end,
 				desc = " Browse in Project",
@@ -334,7 +310,7 @@ return {
 				"gl",
 				function()
 					require("telescope.builtin").live_grep {
-						prompt_title = "Live Grep: " .. projectName(),
+						prompt_title = "Live Grep: " .. vim.fs.basename(vim.loop.cwd() or ""),
 					}
 				end,
 				desc = " Live-Grep in Project",
