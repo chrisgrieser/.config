@@ -62,7 +62,7 @@ function _list_files_here {
 		--git-ignore --ignore-glob=".DS_Store|Icon?" \
 		--sort=name --group-directories-first --no-quotes \
 		--git --long --no-user --no-permissions --no-filesize --no-time\
-		$use_hyperlinks
+		# $use_hyperlinks PENDING https://github.com/eza-community/eza/issues/693
 	)
 
 	if [[ $(echo "$eza_output" | wc -l) -gt $max_files_lines ]]; then
