@@ -230,17 +230,15 @@ return {
 		keys = {
 			{ "<leader>pM", vim.cmd.MasonToolsUpdate, desc = " Mason Update" },
 		},
-		dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
+		dependencies = "williamboman/mason.nvim",
 		config = function()
-			local myTools =
-				toolsToAutoinstall(linters, formatters, vim.g.myLsps, extraInstalls, dontInstall)
+			local lsps = vim.tbl_values(vim.g.lspToMasonMap)
+			local myTools = toolsToAutoinstall(linters, formatters, lsps, extraInstalls, dontInstall)
 
 			require("mason-tool-installer").setup {
 				ensure_installed = myTools,
-				run_on_start = false, -- triggered manually, since not working with lazy-loading
+				run_on_start = false, -- manually, since otherwise not working with lazy-loading
 			}
-
-			-- clean unused & install missing
 			vim.defer_fn(vim.cmd.MasonToolsInstall, 500)
 			vim.defer_fn(vim.cmd.MasonToolsClean, 1000) -- delayed, so noice.nvim is loaded before
 		end,
@@ -248,16 +246,10 @@ return {
 	{ -- add ignore-comments & lookup rules
 		"chrisgrieser/nvim-rulebook",
 		keys = {
-			{
-				"<leader>d",
-				function() require("rulebook").lookupRule() end,
-				desc = "󰒕 Lookup Rule",
-			},
-			{
-				"<leader>C",
-				function() require("rulebook").ignoreRule() end,
-				desc = "󰒕 Ignore Rule",
-			},
+			-- stylua: ignore start
+			{ "<leader>d", function() require("rulebook").lookupRule() end, desc = "󰒕 Lookup Rule" },
+			{ "<leader>C", function() require("rulebook").ignoreRule() end, desc = "󰒕 Ignore Rule" },
+			-- stylua: ignore end
 		},
 	},
 }

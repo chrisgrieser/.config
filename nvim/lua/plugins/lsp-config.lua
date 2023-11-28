@@ -2,24 +2,27 @@
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
-vim.g.myLsps = { -- variable used by MasonToolInstaller
-	"lua_ls",
-	"yamlls",
-	"jsonls",
-	"cssls",
-	"emmet_ls", -- css/html completion
-	"pyright", -- python LSP
-	"jedi_language_server", -- python (has much better hovers)
-	"ruff_lsp", -- python linter
-	"marksman", -- markdown
-	"biome", -- ts/js/json linter/formatter
-	"tsserver", -- ts/js
-	"bashls", -- used for zsh
-	"taplo", -- toml
-	"html",
-	"ltex", -- languagetool
-	"ast_grep", -- custom, ast-based linter
-	"autotools_ls", -- Makefiles
+---since nvim-lspconfig and mason.nvim use different package names
+---mappings from https://github.com/williamboman/mason-lspconfig.nvim/blob/main/lua/mason-lspconfig/mappings/server.lua
+---@type table<string, string>
+vim.g.lspToMasonMap = {
+	ast_grep = "ast-grep", -- custom, ast-based linter
+	autotools_ls = "autotools-language-server", -- Makefiles
+	bashls = "bash-language-server", -- used for zsh
+	biome = "biome", -- ts/js/json linter/formatter
+	cssls = "css-lsp",
+	emmet_ls = "emmet-ls", -- css/html completion
+	html = "html-lsp",
+	jedi_language_server = "jedi-language-server", -- python (has much better hovers)
+	jsonls = "json-lsp",
+	ltex = "ltex-ls", -- languagetool
+	lua_ls = "lua-language-server",
+	marksman = "marksman", -- markdown
+	pyright = "pyright", -- python
+	ruff_lsp = "ruff-lsp", -- python linter
+	taplo = "taplo", -- toml
+	tsserver = "typescript-language-server",
+	yamlls = "yaml-language-server",
 }
 
 --------------------------------------------------------------------------------
@@ -38,8 +41,8 @@ vim.g.myLsps = { -- variable used by MasonToolInstaller
 
 ---@type table<string, lspConfiguration>
 local serverConfigs = {}
-for _, lsp in pairs(vim.g.myLsps) do
-	serverConfigs[lsp] = {}
+for lspName, _ in pairs(vim.g.lspToMasonMap) do
+	serverConfigs[lspName] = {}
 end
 
 --------------------------------------------------------------------------------
