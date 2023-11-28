@@ -3,26 +3,22 @@ return {
 	{ -- lightweight git client
 		"chrisgrieser/nvim-tinygit",
 		dependencies = "stevearc/dressing.nvim",
-		ft = { "gitrebase" }, -- so ftplugins are loaded
+		ft = "gitrebase", -- so ftplugin is loaded
 		keys = {
 			-- stylua: ignore start
 			{ "gc", function() require("tinygit").smartCommit { pushIfClean = true } end, desc = "󰊢 Smart-Commit & Push" },
 			{ "gC", function() require("tinygit").smartCommit { pushIfClean = false } end, desc = "󰊢 Smart-Commit" },
+			{ "<leader>gp", function() require("tinygit").push { createGitHubPr = true } end, desc = " Push & PR" },
 			{ "<leader>gf", function() require("tinygit").fixupCommit({ autoRebase = true }) end, desc = "󰊢 Fixup & Rebase" },
 			{ "<leader>gm", function() require("tinygit").amendNoEdit { forcePush = true } end, desc = "󰊢 Amend-No-Edit & F-Push" },
 			{ "<leader>gM", function() require("tinygit").amendOnlyMsg { forcePush = true } end, desc = "󰊢 Amend Only Msg & F-Push" },
 			{ "<leader>gi", function() require("tinygit").issuesAndPrs { state = "open" } end, desc = " Open Issues" },
 			{ "<leader>gI", function() require("tinygit").issuesAndPrs { state = "closed" } end, desc = " Closed Issues" },
 			{ "<leader>gd", function() require("tinygit").searchFileHistory() end, desc = "󰢷 File History" },
-			{ "<leader>gp", function() require("tinygit").push { pullBefore = true } end, desc = " Pull & Push" },
-			{ "<leader>gP", function() require("tinygit").push { createGitHubPr = true } end, desc = " Push & PR" },
 			{ "<leader>gD", function() require("tinygit").functionHistory() end, desc = "󰢷 Function History" },
 			{ "<leader>gu", function() require("tinygit").githubUrl() end, mode = { "n", "x" }, desc = " GitHub Link" },
 			{ "<leader>gU", function() require("tinygit").githubUrl("repo") end, desc = " Goto Repo" },
 			{ "<leader>g#", function() require("tinygit").openIssueUnderCursor() end, desc = " Open Issue under Cursor" },
-			-- stylua: ignore end
-			{ "<leader>gt", function() require("tinygit").stashPush() end, desc = "󰜦 Stash Push" },
-			{ "<leader>gT", function() require("tinygit").stashPop() end, desc = "󰜦 Stash Pop" },
 		},
 		opts = {
 			commitMsg = {
