@@ -53,9 +53,7 @@ end
 
 -- special remaps
 keymap("o", "k", 'i"', { desc = "󱡔 inner quote" })
-keymap("o", "J", "2j") -- dj = delete 2 lines, dJ = delete 3 lines
-
--- quick textobj operations
+keymap("o", "J", "2j") -- dd = 1 line, dj = 2 lines, dJ = 3 lines
 keymap("n", "<Space>", '"_ciw', { desc = "󱡔 change word" })
 keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
 
