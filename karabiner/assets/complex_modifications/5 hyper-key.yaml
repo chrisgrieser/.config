@@ -84,10 +84,8 @@ rules:
           - { key_code: delete_or_backspace, modifiers: [option] } # delete word
           - key_code: delete_or_backspace # delete the space
           - key_code: right_arrow # go to next word
-
       #─────────────────────────────────────────────────────────────────────
-
-      # SYSDIAGNOSIS
+      # DISABLE SYSDIAGNOSIS
       # HACK disable accidental triggering of via `Hyper+.` and `Hyper+,`.
       # Needs different versions to disable it for variants from quick typing
       - type: basic
@@ -105,7 +103,7 @@ rules:
             - key_code: control
             - key_code: option
         to: [key_code: vk_none]
-        parameters: { basic.simultaneous_threshold_milliseconds: 400 }
+        parameters: { basic.simultaneous_threshold_milliseconds: 600 }
       - type: basic
         from:
           simultaneous:
@@ -116,4 +114,4 @@ rules:
             - key_code: option
             - key_code: period
         to: [key_code: vk_none]
-        parameters: { basic.simultaneous_threshold_milliseconds: 400 }
+        parameters: { basic.simultaneous_threshold_milliseconds: 600 }
