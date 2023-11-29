@@ -232,7 +232,7 @@ rules:
           - shell_command: |
               osascript -e '
                 tell application "System Events" to tell process "Finder"
-                  click menu item "Compress" of menu "File" of menu bar 1
+                  click menu item "Rename…" of menu "File" of menu bar 1
                 end tell'
           - *insert-notice
           - *enter-insert-mode
