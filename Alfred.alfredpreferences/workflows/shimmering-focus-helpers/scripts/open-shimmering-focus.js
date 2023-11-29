@@ -40,12 +40,12 @@ function run(argv) {
 			lineNum++;
 
 			// GUARD line is not marker
-			if (!(line.startsWith("/* <") || line.startsWith("# <<"))) return {};
+			if (!(line.startsWith("/* <") || line.startsWith("  - # <<"))) return {};
 
 			const name = line
 				.replace(/ \*\/$/, "") // comment-ending
 				.replace(/^\/\* *<+ ?/, "") // comment-beginning
-				.replace(/^# ?<+ ?/, ""); // YAML-comment
+				.replace(/^ {2}- # ?<+ ?/, ""); // YAML-comment
 
 			return {
 				title: name,
