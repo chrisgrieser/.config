@@ -9,7 +9,9 @@ rules:
         to_if_alone:
           - key_code: escape
         to:
-          - { key_code: right_shift, modifiers: [control, right_option, command] }
+          # INFO not using cmd+opt+ctrl+shift to avoid triggering system
+          # diagnosis via cmd+opt+ctrl+shift+.
+          - { key_code: right_command, modifiers: [control, option] }
       # Map Esc to F18 (clipboard / screenshot history)
       - type: basic
         from: { key_code: escape }
@@ -23,7 +25,7 @@ rules:
           - { type: frontmost_application_unless, bundle_identifiers: [^com\.apple\.finder$] }
       # Restart Alfred & Alfred Preferences
       - type: basic
-        from: { key_code: "5", modifiers: { mandatory: [command, control, shift, option] } }
+        from: { key_code: "5", modifiers: { mandatory: [command, control, option] } }
         to:
           - shell_command: |
               osascript -e 'display notification "" with title "Restarting Alfred…"'
@@ -39,79 +41,48 @@ rules:
     manipulators:
       # deletion
       - type: basic
-        from: { key_code: "c", modifiers: { mandatory: [option, shift, command, control] } }
+        from: { key_code: "c", modifiers: { mandatory: [option, command, control] } }
         to:
           - { key_code: right_arrow, modifiers: [command, shift] }
           - key_code: delete_or_backspace
       - type: basic
-        from: { key_code: "x", modifiers: { mandatory: [option, shift, command, control] } }
+        from: { key_code: "x", modifiers: { mandatory: [option, command, control] } }
         to:
           - { key_code: left_arrow, modifiers: [command, shift] }
           - key_code: delete_or_backspace
       #─────────────────────────────────────────────────────────────────────────
       # Movement
       - type: basic
-        from: { key_code: h, modifiers: { mandatory: [option, shift, command, control] } }
+        from: { key_code: h, modifiers: { mandatory: [option, command, control] } }
         to:
           - key_code: left_arrow
       - type: basic
-        from: { key_code: j, modifiers: { mandatory: [option, shift, command, control] } }
+        from: { key_code: j, modifiers: { mandatory: [option, command, control] } }
         to:
           - key_code: down_arrow
       - type: basic
-        from: { key_code: k, modifiers: { mandatory: [option, shift, command, control] } }
+        from: { key_code: k, modifiers: { mandatory: [option, command, control] } }
         to:
           - key_code: up_arrow
       - type: basic
-        from: { key_code: l, modifiers: { mandatory: [option, shift, command, control] } }
+        from: { key_code: l, modifiers: { mandatory: [option, command, control] } }
         to:
           - key_code: right_arrow
       # word to the left
       - type: basic
-        from: { key_code: i, modifiers: { mandatory: [option, shift, command, control] } }
+        from: { key_code: i, modifiers: { mandatory: [option, command, control] } }
         to:
           - { key_code: left_arrow, modifiers: [option] }
       # word to the right
       - type: basic
-        from: { key_code: o, modifiers: { mandatory: [option, shift, command, control] } }
+        from: { key_code: o, modifiers: { mandatory: [option, command, control] } }
         to:
           - { key_code: right_arrow, modifiers: [option] }
       # delete word (use ⌘J from utility hotkeys for changing a word)
       - type: basic
-        from: { key_code: spacebar, modifiers: { mandatory: [option, shift, command, control] } }
+        from: { key_code: spacebar, modifiers: { mandatory: [option, command, control] } }
         to:
           - { key_code: right_arrow, modifiers: [option] } # to the right end of the word
           - { key_code: delete_or_backspace, modifiers: [option] } # delete word
           - key_code: delete_or_backspace # delete the space
           - key_code: right_arrow # go to next word
-      #─────────────────────────────────────────────────────────────────────
-      # DISABLE SYSDIAGNOSIS
-      # HACK disable accidental triggering of via `Hyper+.` and `Hyper+,`.
-      # Needs different versions to disable it for variants from quick typing
-      - type: basic
-        from: { key_code: period, modifiers: { mandatory: [command, control, shift, option] } }
-        to: [key_code: vk_none]
-      - type: basic
-        from: { key_code: comma, modifiers: { mandatory: [command, control, shift, option] } }
-        to: [key_code: vk_none]
-      - type: basic
-        from:
-          simultaneous:
-            - key_code: period
-            - key_code: command
-            - key_code: shift
-            - key_code: control
-            - key_code: option
-        to: [key_code: vk_none]
-        parameters: { basic.simultaneous_threshold_milliseconds: 600 }
-      - type: basic
-        from:
-          simultaneous:
-            - key_code: comma
-            - key_code: command
-            - key_code: shift
-            - key_code: control
-            - key_code: option
-            - key_code: period
-        to: [key_code: vk_none]
-        parameters: { basic.simultaneous_threshold_milliseconds: 600 }

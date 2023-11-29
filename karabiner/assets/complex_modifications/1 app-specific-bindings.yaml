@@ -191,7 +191,7 @@ rules:
   #─────────────────────────────────────────────────────────────────────
   - description: "(Apps) Neovide"
     manipulators:
-      # "Neovide: ⇪R to restart, ⌘Q to Quit"
+      # ⌘Q to Quit
       # INFO explicitly remapping cmd+q ensures that cursor position and changes are saved.
       - type: basic
         from: { key_code: q, modifiers: { mandatory: [command] } }
