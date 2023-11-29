@@ -230,7 +230,10 @@ rules:
         from: { key_code: return_or_enter, modifiers: { mandatory: [shift] } }
         to_if_alone:
           - shell_command: |
-              osascript -l JavaScript "$HOME/.config/karabiner/assets/finder-vim-mode/batch-rename.js"
+              osascript -e '
+                tell application "System Events" to tell process "Finder"
+                  click menu item "Compress" of menu "File" of menu bar 1
+                end tell'
           - *insert-notice
           - *enter-insert-mode
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
