@@ -396,3 +396,7 @@ matches:
     replace: install
     propagate_case: true
     word: true
+  - trigger: autoamtically
+    replace: automatically
+    propagate_case: true
+    word: true
