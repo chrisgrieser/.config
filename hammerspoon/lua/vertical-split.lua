@@ -1,11 +1,11 @@
 local M = {}
-M.splitActive = false -- initialize
 --------------------------------------------------------------------------------
 
 local function endSplit()
 	-- un-fullscreening the split windows effectively stops the split
-	for _, win in pairs(hs.window.allWindows()) do
-		if win:isFullScreen() then win:setFullScreen(false) end
+	local splitWins = M.wf_vsplit:getWindows()
+	for _, win in pairs(splitWins) do
+		win:setFullScreen(false)
 	end
 	M.wf_vsplit:unsubscribeAll()
 	M.wf_vsplit = nil
@@ -52,6 +52,9 @@ local function verticalSplit()
 end
 
 --------------------------------------------------------------------------------
-hs.hotkey.bind({ "cmd", "alt", "ctrl", "shift" }, "V", verticalSplit)
+
+hs.hotkey.bind(require("lua.utils").hyper, "V", verticalSplit)
+
+--------------------------------------------------------------------------------
 
 return M -- catch this after requiring to persist from garbage collector
