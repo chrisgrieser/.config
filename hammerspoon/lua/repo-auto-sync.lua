@@ -10,17 +10,17 @@ local config = {
 		{
 			name = "Dotfiles",
 			icon = "🔵",
-			scriptPath = env.dotfilesFolder .. "/git-dotfile-sync.sh",
+			scriptPath = env.dotfilesFolder .. "/.git-dotfile-sync.sh",
 		},
 		{
 			name = "Vault",
 			icon = "🟪",
-			scriptPath = env.vaultLocation .. "/Meta/git-vault-sync.sh",
+			scriptPath = env.vaultLocation .. "/.git-vault-sync.sh",
 		},
 		{
 			name = "Passwords",
 			icon = "🔑",
-			scriptPath = env.passwordStore .. "/pass-sync.sh",
+			scriptPath = env.passwordStore .. "/.pass-sync.sh",
 		},
 	},
 }
