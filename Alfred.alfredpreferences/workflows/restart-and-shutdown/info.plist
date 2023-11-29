@@ -320,7 +320,7 @@
 				<key>hotkey</key>
 				<integer>15</integer>
 				<key>hotmod</key>
-				<integer>1966080</integer>
+				<integer>1835008</integer>
 				<key>hotstring</key>
 				<string>R</string>
 				<key>leftcursor</key>
@@ -511,7 +511,7 @@
 				<key>hotkey</key>
 				<integer>19</integer>
 				<key>hotmod</key>
-				<integer>1966080</integer>
+				<integer>1835008</integer>
 				<key>hotstring</key>
 				<string>2</string>
 				<key>leftcursor</key>

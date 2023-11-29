@@ -11,7 +11,7 @@ M.urischeme = hs.urlevent.bind
 M.tbl_contains = hs.fnutils.contains
 
 -- bound to capslock via Karabiner elements
-M.hyper = { "cmd", "alt", "ctrl", "shift" }
+M.hyper = { "cmd", "alt", "ctrl" }
 
 -- add path for `hs.execute()`
 M.exportPath = "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
