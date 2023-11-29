@@ -102,9 +102,6 @@ local function linterConfigs()
 		"--disable=no-multiple-blanks",
 		"--config=" .. linterConfig .. "/markdownlint.yaml",
 	}
-	-- PENDING https://github.com/mfussenegger/nvim-lint/pull/474
-	lint.linters.typos.args = { "--format=json", "--force-exclude" }
-	lint.linters.typos.stdin = false
 end
 
 local function lintTriggers()
