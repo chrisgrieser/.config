@@ -132,11 +132,12 @@ local formatterConfig = {
 		},
 		-- stylua: ignore
 		["bibtex-tidy"] = {
-			prepend_args =
+			prepend_args = {
 				"--tab", "--curly", "--strip-enclosing-braces", "--no-align", "--no-wrap",
 				"--enclosing-braces=title,journal,booktitle", "--drop-all-caps",
 				"--numeric", "--months", "--encode-urls",
 				"--duplicates", "--sort-fields", "--remove-empty-fields", "--omit=month,issn,abstract",
+			},
 			condition = function(ctx)
 				local ignore = vim.fs.basename(ctx.filename) == "main-bibliography.bib"
 				if ignore then u.notify("conform.nvim", "Ignoring main-bibliography.bib.") end
