@@ -4,13 +4,13 @@
 setopt HIST_IGNORE_DUPS
 setopt HIST_REDUCE_BLANKS
 setopt INC_APPEND_HISTORY
-setopt HIST_NO_STORE     # ignore history command itself
+setopt HIST_NO_STORE     # ignore history command itself for the history
 setopt HIST_IGNORE_SPACE # leading space is not added to the history
 
 # DOCS https://zsh.sourceforge.io/Doc/Release/Parameters.html#Parameters-Used-By-The-Shell
-export HISTSIZE=5000
+export HISTSIZE=3000
 export SAVEHIST=$HISTSIZE
-export HISTFILE="$DATA_DIR/zsh_history" # to not save it in the (public) dotfiles repo
+export HISTFILE="$DATA_DIR/zsh_history.zsh" # don't save in ZDOTDIR as it's in (public) dotfile repo
 
 #───────────────────────────────────────────────────────────────────────────────
 
