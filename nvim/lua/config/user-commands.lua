@@ -2,9 +2,8 @@
 -- no arg: all LSPs attached to current buffer
 -- one arg: name of the LSP
 vim.api.nvim_create_user_command("LspCapabilities", function(ctx)
-	local selected = ctx.args
-	local filter = selected == "" and { bufnr = vim.api.nvim_get_current_buf() }
-		or { name = selected }
+	local filter = ctx.args == "" and { bufnr = vim.api.nvim_get_current_buf() }
+		or { name = ctx.args }
 	local clients = vim.lsp.get_active_clients(filter)
 
 	local out = {}
