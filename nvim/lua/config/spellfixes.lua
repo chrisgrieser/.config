@@ -29,7 +29,6 @@ local spellfixes = {
 	esle = "else",
 	treu = "true",
 	ture = "true",
-	terue = "true",
 	fo = "of",
 	oepn = "open",
 	ntoe = "note",

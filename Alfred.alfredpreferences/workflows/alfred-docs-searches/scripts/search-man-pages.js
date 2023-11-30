@@ -23,8 +23,10 @@ function alfredMatcher(str) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
+	// DOCS https://man7.org/linux/man-pages/man7/man-pages.7.html
+	const sections = "1,1p,2,7,8";
 	// DOCS https://www.mankier.com/api
-	const apiUrl = "https://www.mankier.com/api/v2/mans/?sections=1,2,7,8&q=";
+	const apiUrl = `https://www.mankier.com/api/v2/mans/?sections=${sections}&q=`;
 
 	// process Alfred args
 	const query = argv[0];
@@ -43,18 +45,22 @@ function run(argv) {
 
 	/** @type{AlfredItem[]} */
 	const manPages = JSON.parse(httpRequest(apiUrl + firstWord)).results.map(
-		(/** @type {{ name: string; section: string; description: string; }} */ result) => {
-			const cmd = result.name;
-			const section = result.section;
+		(
+			/** @type {{ name: string; section: string; description: string; is_alias: boolean; url: string; }} */ result,
+		) => {
+			const cmd = result.is_alias ? result.url.split("/").slice(-1)[0] : result.name;
+			const aliasSuffix = result.is_alias ? " (alias)" : "";
 			const icon = installedBinaries.includes(cmd) ? " ✅" : "";
+			let matcher = alfredMatcher(cmd);
+			if (result.is_alias) matcher += alfredMatcher(result.name);
 
 			return {
-				title: cmd + icon,
-				subtitle: `(${section})  ${result.description}`,
-				match: alfredMatcher(cmd),
+				title: result.name + aliasSuffix + icon,
+				subtitle: `(${result.section})  ${result.description}`,
+				match: matcher,
 				uid: cmd,
 				// pass to next script filter
-				variables: { cmd: cmd, section: section },
+				variables: { cmd: cmd, section: result.section },
 				arg: remainingQuery,
 			};
 		},

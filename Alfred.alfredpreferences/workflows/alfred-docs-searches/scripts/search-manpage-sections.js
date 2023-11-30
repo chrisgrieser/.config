@@ -28,7 +28,14 @@ function run() {
 
 	const manpageObj = JSON.parse(httpRequest(sectionApiUrl));
 
-	const sectionToIgnore = ["See Also", "Bugs"];
+	const sectionToIgnore = [
+		"See Also",
+		"Bugs",
+		"Version",
+		"Homepage",
+		"Referenced By",
+		"Authors",
+	];
 
 	/** @type{AlfredItem[]} */
 	const sections = manpageObj.sections
@@ -40,7 +47,7 @@ function run() {
 		}))
 		.filter((/** @type {{ title: string; }} */ section) => !sectionToIgnore.includes(section.title));
 
-	const anchors = manpageObj.anchors.map(
+	const anchors = (manpageObj.anchors || []).map(
 		(/** @type {{ anchor: string; description: string; url: string; }} */ anchor) => {
 			// format anchors for Alfred
 			// anchors look like this: <strong>--changed-before</strong> <em>date|duration</em>

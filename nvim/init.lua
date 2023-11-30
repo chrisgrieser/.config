@@ -36,7 +36,7 @@ safeRequire("config.leader-keybindings")
 
 safeRequire("config.diagnostics")
 safeRequire("config.user-commands")
-safeRequire("config.abbreviations")
+safeRequire("config.spellfixes")
 
 --------------------------------------------------------------------------------
 
@@ -45,7 +45,7 @@ if vim.version().major == 0 and vim.version().minor >= 10 then
 		# nvim 0.10
 		- stevanmilic/nvim-lspimport can now be used
 		- satellite.nvim can now be updated.
-		- biome can now format via ls https://github.com/neovim/nvim-lspconfig/issues/2807
+		- biome can now format via lsp https://github.com/neovim/nvim-lspconfig/issues/2807
 		- vim.system
 		- vim.uv instead of vim.loop
 		- ftAbbr & abbreviations.lua: vim.keymap.set('ia', lhs, rhs, { buffer = true })
