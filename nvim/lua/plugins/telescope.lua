@@ -16,6 +16,7 @@ local keymappings_I = {
 	["<Up>"] = "cycle_history_prev",
 	["<Down>"] = "cycle_history_next",
 	["<D-a>"] = "toggle_all",
+	["<D-f>"] = "to_fuzzy_refine", -- live grep & workspace symbols
 	["<D-s>"] = function(prompt_bufnr)
 		require("telescope.actions").smart_send_to_qflist(prompt_bufnr) -- sends selected, or if none selected, sends all
 		vim.cmd.cfirst()
@@ -116,7 +117,7 @@ vim.api.nvim_create_autocmd("FileType", {
 ---@param _ table
 ---@param path string
 ---@return string
-local function pathDisplay(_, path)
+local function filenameFirst(_, path)
 	path = path:gsub("/$", "") -- trailing slash from directories breaks fs.basename
 	local tail = vim.fs.basename(path)
 	local parent = vim.fs.dirname(path)
@@ -130,7 +131,7 @@ end
 local function telescopeConfig()
 	require("telescope").setup {
 		defaults = {
-			path_display = pathDisplay,
+			path_display = { "tail" },
 			selection_caret = "󰜋 ",
 			multi_icon = "󰒆 ",
 			results_title = false,
@@ -158,6 +159,7 @@ local function telescopeConfig()
 		},
 		pickers = {
 			find_files = {
+				path_display = filenameFirst,
 				prompt_prefix = "󰝰 ",
 				-- FIX using the default find command from telescope is somewhat buggy,
 				-- e.g. not respecting /fd/ignore
@@ -166,6 +168,7 @@ local function telescopeConfig()
 				follow = false,
 			},
 			oldfiles = {
+				path_display = filenameFirst,
 				prompt_prefix = "󰋚 ",
 				previewer = false,
 				layout_config = {
@@ -173,6 +176,7 @@ local function telescopeConfig()
 				},
 			},
 			live_grep = { prompt_prefix = " ", disable_coordinates = true },
+			grep_string = { prompt_prefix = " ", disable_coordinates = true },
 			git_status = {
 				prompt_prefix = "󰊢 ",
 				show_untracked = true,
