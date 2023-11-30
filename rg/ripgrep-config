@@ -5,5 +5,5 @@
 --smart-case
 --trim
 --hidden
---glob=!git/*
+--glob=!.git
 --hyperlink-format=default

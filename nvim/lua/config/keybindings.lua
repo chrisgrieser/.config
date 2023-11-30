@@ -65,9 +65,9 @@ keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
 keymap("n", "X", "<cmd>normal!mz$x`z<CR>", { desc = "󱎘 Delete char at EoL" })
 
 -- QUICKFIX
-keymap("n", "gq", cmd.cnext, { desc = " Next Quickfix" })
-keymap("n", "gQ", cmd.cprevious, { desc = " Prev Quickfix" })
-keymap("n", "dQ", function() cmd.cexpr("[]") end, { desc = " Delete Qf List" })
+keymap("n", "gq", "<cmd>cnext<CR>zv", { desc = " Next Quickfix" })
+keymap("n", "gQ", "<cmd>cprevious<CR>zv", { desc = " Prev Quickfix" })
+keymap("n", "dQ", '<cmd>cexpr"[]"<CR>', { desc = " Delete Qf List" })
 
 -- COMMENTS
 keymap(

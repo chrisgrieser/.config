@@ -1,6 +1,5 @@
 local M = {}
 local u = require("config.utils")
--- selene: allow(mixed_table)
 local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
 
 --------------------------------------------------------------------------------

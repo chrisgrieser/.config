@@ -86,7 +86,6 @@ end
 ---appname. If this function is not triggered by a windowfilter event, the window
 ---filter does not contain any windows, therefore we need to get the windows from
 ---the appObj instead in those cases
--- selene: allow(high_cyclomatic_complexity)
 function M.autoTile(winSrc)
 	local isMultiscreen = #(hs.screen.allScreens()) > 1
 	if isMultiscreen then return end

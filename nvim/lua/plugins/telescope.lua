@@ -1,4 +1,3 @@
---# selene: allow(mixed_table) -- lazy.nvim uses them
 local u = require("config.utils")
 local telescope = vim.cmd.Telescope
 
@@ -178,12 +177,12 @@ local function telescopeConfig()
 			live_grep = {
 				prompt_prefix = " ",
 				disable_coordinates = true,
-				additional_args = { "--hidden", "--trim" },
+				additional_args = { "--trim", "--hidden", "--glob=!.git" },
 			},
 			grep_string = {
 				prompt_prefix = " ",
 				disable_coordinates = true,
-				additional_args = { "--hidden", "--trim" },
+				additional_args = { "--trim", "--hidden", "--glob=!.git" },
 			},
 			git_status = {
 				prompt_prefix = "󰊢 ",

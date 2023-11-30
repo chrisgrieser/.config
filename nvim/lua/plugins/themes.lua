@@ -1,4 +1,3 @@
---# selene: allow(mixed_table) -- lazy.nvim uses them
 -- INFO only the first theme will be used
 local lightThemes = {
 	{ "sainnhe/everforest", init = function() vim.g.everforest_background = "hard" end },

@@ -1,4 +1,3 @@
---# selene: allow(mixed_table) -- lazy.nvim uses them
 local function surroundConfig()
 	local u = require("config.utils")
 	local textobjectRemaps = require("config.utils").textobjRemaps

@@ -1,4 +1,3 @@
---# selene: allow(mixed_table)
 for _, name in ipairs { "config", "data", "state", "cache" } do
 	vim.env[("XDG_%s_HOME"):format(name:upper())] = "/tmp/nvim-debug/" .. name
 end
