@@ -111,7 +111,7 @@ keymap(
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
 
 -- ~ without moving don't move cursor, useful for vertical changes
--- (`v~` instead of `~h` so dot-repetition, too, doesn't move the cursor)
+-- (`v~` instead of `~h` so dot-repetition also doesn't move the cursor)
 keymap("n", "~", "v~")
 
 -- Merging
@@ -183,7 +183,7 @@ keymap(
 	{ "n", "x", "i" },
 	"<D-w>",
 	function() require("funcs.alt-alt").betterClose() end,
-	{ desc = "󰽙 close buffer/window" }
+	{ desc = "󰽙 Close buffer/window" }
 )
 
 --------------------------------------------------------------------------------
@@ -243,6 +243,14 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "qf", "help", "checkhealth" },
 	callback = function()
 		vim.keymap.set("n", "q", cmd.close, { buffer = true, nowait = true, desc = "Close" })
+	end,
+})
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "gitcommit", "gitrebase" },
+	callback = function()
+		if vim.bo.buftype == "nofile" then return end -- do not trigger in DressingInput
+		-- INFO cquit exists non-zero, aborting the commit/rebase
+		vim.keymap.set("n", "q", cmd.cquit, { buffer = true, nowait = true, desc = "Quit" })
 	end,
 })
 

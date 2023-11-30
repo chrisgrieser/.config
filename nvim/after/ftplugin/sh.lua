@@ -5,5 +5,11 @@ local u = require("config.utils")
 u.ftAbbr("//", "#")
 u.ftAbbr("--", "#")
 
--- shome shell-filetypes override he makeprg
+-- some shell-filetypes override makeprg
 vim.opt_local.makeprg = "make --silent --warn-undefined-variables"
+
+vim.keymap.set("n", "<localleader>e", function()
+	local line = vim.trim(vim.api.nvim_get_current_line())
+	local site = "https://explainshell.com/explain?cmd="
+	vim.fn.system { "open", site .. line }
+end, { desc = "Explain Shell Command" })
