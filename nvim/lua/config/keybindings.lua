@@ -42,6 +42,11 @@ keymap({ "n", "v", "i" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 Si
 -- needs remapping since `gf` is used for LSP-references
 keymap("n", "gp", "gf", { desc = " Goto Path under cursor" })
 
+-- quickfix
+keymap("n", "gq", "<cmd>cnext<CR>zv", { desc = " Next Quickfix" })
+keymap("n", "gQ", "<cmd>cprevious<CR>zv", { desc = " Prev Quickfix" })
+keymap("n", "dQ", "<cmd>cexpr []<CR>", { desc = " Delete Qf List" })
+
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS
 
@@ -63,11 +68,6 @@ keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
 -- Delete trailing stuff
 -- (wrapping in normal avoids temporarily scrolling to the side)
 keymap("n", "X", "<cmd>normal!mz$x`z<CR>", { desc = "󱎘 Delete char at EoL" })
-
--- QUICKFIX
-keymap("n", "gq", "<cmd>cnext<CR>zv", { desc = " Next Quickfix" })
-keymap("n", "gQ", "<cmd>cprevious<CR>zv", { desc = " Prev Quickfix" })
-keymap("n", "dQ", "<cmd>cexpr []<CR>", { desc = " Delete Qf List" })
 
 -- COMMENTS
 keymap(
@@ -151,9 +151,13 @@ keymap("n", "i", function()
 	return "i"
 end, { expr = true, desc = "better i" })
 
+--------------------------------------------------------------------------------
+
 -- VISUAL MODE
 keymap("x", "V", "j", { desc = "repeated V selects more lines" })
-keymap("x", "v", "<C-v>", { desc = "`vv` from Normal starts Visual Block" })
+keymap("x", "v", "<C-v>", { desc = "`vv` starts Visual Block" })
+
+--------------------------------------------------------------------------------
 
 -- TERMINAL MODE
 -- also relevant for REPLs such as iron.nvim
@@ -232,10 +236,9 @@ keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = "  Inline Code" 
 keymap("i", "<D-e>", "``<Left>", { desc = "  Inline Code" })
 
 --------------------------------------------------------------------------------
-
+-- QUITTING
 keymap({ "n", "x" }, "<MiddleMouse>", "<cmd>try|wqall|catch|qall|endtry<CR>", { desc = "Quit App" })
 
--- quick quitting
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "qf", "help", "checkhealth" },
 	callback = function()
