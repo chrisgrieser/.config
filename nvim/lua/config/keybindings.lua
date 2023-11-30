@@ -67,7 +67,7 @@ keymap("n", "X", "<cmd>normal!mz$x`z<CR>", { desc = "󱎘 Delete char at EoL" })
 -- QUICKFIX
 keymap("n", "gq", "<cmd>cnext<CR>zv", { desc = " Next Quickfix" })
 keymap("n", "gQ", "<cmd>cprevious<CR>zv", { desc = " Prev Quickfix" })
-keymap("n", "dQ", '<cmd>cexpr []<CR>', { desc = " Delete Qf List" })
+keymap("n", "dQ", "<cmd>cexpr []<CR>", { desc = " Delete Qf List" })
 
 -- COMMENTS
 keymap(
@@ -233,8 +233,7 @@ keymap("i", "<D-e>", "``<Left>", { desc = "  Inline Code" })
 
 --------------------------------------------------------------------------------
 
-keymap({"n", "x"}, lhs, rhs, opts?)
-<cmd>try|wqall|catch|qall|endtry<CR>
+keymap({ "n", "x" }, "<MiddleMouse>", "<cmd>try|wqall|catch|qall|endtry<CR>", { desc = "Quit App" })
 
 -- quick quitting
 vim.api.nvim_create_autocmd("FileType", {
