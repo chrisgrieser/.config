@@ -23,26 +23,25 @@ source "$HOMEBREW_PREFIX/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zs
 # CUSTOM WIDGETS
 # make yank, delete, and killing line work with system clipboard
 function _vi_yank_pbcopy {
-	zle vi-yank # still perform vim-yank for pasting via `p`
 	echo "$CUTBUFFER" | pbcopy
+	zle vi-yank # still perform vim-yank for pasting via `p`
 }
 zle -N _vi_yank_pbcopy
 
 function _vi_delete_pbcopy {
-	zle vi-delete
 	echo "$CUTBUFFER" | pbcopy
+	zle vi-delete
 }
 zle -N _vi_delete_pbcopy
 
 function _cut_buffer {
-	echo -n "$BUFFER" | pbcopy
-	zle -M "Copied: $BUFFER"
-	zle kill-whole-line
+	echo "$BUFFER" | pbcopy
+	BUFFER="" # clears whole buffer, rather than just the line via `kill-whole-line`
 }
 zle -N _cut_buffer
 
 function _copy_location {
-	pwd | pbcopy
+	echo "$PWD" | pbcopy
 	zle -M "Copied: $PWD"
 }
 zle -N _copy_location
@@ -72,7 +71,6 @@ function zvm_after_lazy_keybindings {
 	bindkey -M vicmd -s 'Y' 'y$' # -s flag sends direct keystrokes and therefore allows for remappings
 	bindkey -M vicmd -s ' ' 'ciw'
 	bindkey -M vicmd 'U' redo
-	bindkey -M vicmd 'M' vi-join
 	bindkey -M vicmd 'm' zvm_move_around_surround
 	bindkey -M vicmd 'qq' vi-pound-insert # = toggle comment
 
