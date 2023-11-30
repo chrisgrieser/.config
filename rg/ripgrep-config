@@ -4,5 +4,6 @@
 --no-line-number
 --smart-case
 --trim
+--hidden
 --glob=!git/*
 --hyperlink-format=default
