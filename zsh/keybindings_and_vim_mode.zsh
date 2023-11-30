@@ -1,10 +1,8 @@
-# shellcheck disable=2034
-#───────────────────────────────────────────────────────────────────────────────
-
 # DOCS https://github.com/jeffreytse/zsh-vi-mode#configuration-function
+# shellcheck disable=2034
 function zvm_config {
 	ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT # Always starting in insert mode
-	ZVM_KEYTIMEOUT=0.03 # lower delay for escape
+	ZVM_KEYTIMEOUT=0.03                 # lower delay for escape
 
 	# cursor styling with blinking
 	ZVM_INSERT_MODE_CURSOR=$ZVM_CURSOR_BLINKING_BEAM
@@ -22,8 +20,8 @@ source "$HOMEBREW_PREFIX/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zs
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# yank to system clipboard – https://stackoverflow.com/a/37411340
-# equivalent to `set clipboard=unnamed` (but only for y)
+# CUSTOM WIDGETS
+# make yank, delete, and killing line work with system clipboard
 function _vi_yank_pbcopy {
 	zle vi-yank # still perform vim-yank for pasting via `p`
 	echo "$CUTBUFFER" | pbcopy
@@ -36,13 +34,36 @@ function _vi_delete_pbcopy {
 }
 zle -N _vi_delete_pbcopy
 
+function _cut_buffer {
+	echo -n "$BUFFER" | pbcopy
+	zle -M "Copied: $BUFFER"
+	zle kill-whole-line
+}
+zle -N _cut_buffer
+
+function _copy_location {
+	pwd | pbcopy
+	zle -M "Copied: $PWD"
+}
+zle -N _copy_location
 
 #───────────────────────────────────────────────────────────────────────────────
+# DEFINE KEYBINDINGS
+
+# INFO
+# - use `ctrl-v` and then a key combination to get the shell binding
+# - `bindkey -M main` to show existing keybinds
+# - some bindings with '^' are reserved (^M=enter, ^I=tab)
+
+# needs to be wrapped to not be overwritten by zsh-vi-mode
+function zvm_after_init {
+	bindkey -M viins '^P' _copy_location
+	bindkey -M viins '^U' _cut_buffer
+}
 
 # DOCS vi-mode widgets https://github.com/jeffreytse/zsh-vi-mode#custom-widgets-and-keybindings
 function zvm_after_lazy_keybindings {
-	# disable accidentally searching history search
-	bindkey -M vicmd 'k' up-line
+	bindkey -M vicmd 'k' up-line # disable accidentally searching history
 	bindkey -M vicmd 'gg' up-line
 
 	bindkey -M vicmd 'L' vi-end-of-line

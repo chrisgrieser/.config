@@ -1,14 +1,12 @@
 CONFIG_FILES=(
 	load_plugins
-	options
 	plugin_settings
 
+	options
 	navigation
 	completion
 	history
-	vim_mode
-	terminal_utils
-	terminal_keybindings
+	keybindings_and_vim_mode
 	aliases
 	docs_man
 
@@ -17,7 +15,7 @@ CONFIG_FILES=(
 	node_npm
 	python_pip
 
-	intro_messages
+	intro_message
 )
 [[ "$OSTYPE" =~ "darwin" ]] && CONFIG_FILES+=(mac_specific)
 
