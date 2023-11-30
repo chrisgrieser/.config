@@ -14,23 +14,6 @@ function command_not_found_handler() {
 }
 
 #───────────────────────────────────────────────────────────────────────────────
-# HISTORY
-
-export HISTSIZE=50000
-export SAVEHIST=$HISTSIZE
-export HISTFILE="$DATA_DIR/zsh_history" # to not save it in the (public) dotfiles repo
-
-setopt HIST_EXPIRE_DUPS_FIRST
-setopt HIST_IGNORE_DUPS
-setopt HIST_FIND_NO_DUPS
-setopt HIST_REDUCE_BLANKS
-setopt APPEND_HISTORY
-setopt INC_APPEND_HISTORY
-setopt NO_BANG_HIST # don't expand `!` (easier breaking changes in commit msgs)
-setopt HIST_NO_STORE     # ignore history command itself
-setopt HIST_IGNORE_SPACE # leading space is not added to the history
-
-#───────────────────────────────────────────────────────────────────────────────
 # LANGUAGE
 
 # sets English everywhere, fixes encoding issues

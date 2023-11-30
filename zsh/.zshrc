@@ -5,6 +5,7 @@ CONFIG_FILES=(
 
 	navigation
 	completion
+	history
 	vim_mode
 	terminal_utils
 	terminal_keybindings
