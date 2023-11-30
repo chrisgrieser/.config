@@ -233,6 +233,7 @@ keymap("i", "<D-e>", "``<Left>", { desc = "  Inline Code" })
 
 --------------------------------------------------------------------------------
 
+keymap({"n", "x"}, lhs, rhs, opts?)
 <cmd>try|wqall|catch|qall|endtry<CR>
 
 -- quick quitting
