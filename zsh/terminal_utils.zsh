@@ -86,16 +86,25 @@ function p {
 
 # copies last command(s)
 function lc() {
-	num=${1:-1} # default 1 -> just last command
-	to_copy=$(history -n -"$num" | sed -e 's/"/\"/g' -e "s/'/\'/g" -Ee '/^$/d')
-	echo "Copied: $to_copy"
+	to_copy="$*"
+	print "\e[1;32mCopied:\e[0m $to_copy"
 	echo -n "$to_copy" | pbcopy
 }
 
 # copies result of last command(s)
 function lr() {
-	num=${1:-1} # default 1 -> just last result
-	to_copy=$(eval "$(history -n -"$num")")
-	echo "Copied: $to_copy"
+	to_copy=$(eval "$1")
+	print "\e[1;32mCopied:\e[0m $to_copy"
 	echo -n "$to_copy" | pbcopy
 }
+
+# completions for it
+_last_commands () {
+	# shellcheck disable=2296
+	typeset -a recent_cmds=("${(f)"$(history -n)"}") # lines to array
+	local expl
+	_description -V last-commands expl 'Last Commands'
+	compadd "${expl[@]}" -Q -P"'" -S"'" -- "${recent_cmds[@]}"
+}
+compdef _last_commands lc
+compdef _last_commands lr

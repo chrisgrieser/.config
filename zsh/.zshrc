@@ -12,7 +12,6 @@ CONFIG_FILES=(
 	docs_man
 
 	git_github
-	json_utils
 	homebrew
 	node_npm
 	python_pip
