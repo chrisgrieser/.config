@@ -9,6 +9,7 @@
 --hidden
 --glob=!.git
 
+
 --smart-case
 --no-line-number
 --trim
