@@ -258,11 +258,18 @@ function M.quitApps(appNames)
 	end
 end
 
-function M.closeAllFinderWins()
+function M.closeAllTheStuff()
+	require("lua.private").closer()
+	M.quitApps(env.videoAndAudioApps)
+	-- finder wins
 	local finder = M.app("Finder")
 	if not finder then return end
 	for _, win in pairs(finder:allWindows()) do
 		win:close()
+	end
+	-- fullscreen wins
+	for _, win in pairs(hs.window.allWindows()) do
+		if win:isFullScreen() then win:setFullScreen(false) end
 	end
 end
 

@@ -10,6 +10,7 @@ on alfred_script(shellCmd)
 			delay 0.05
 		end repeat
 	end tell
+	delay 0.1 # ensure wezterm-gui is ready
 
 	# 1. use builtin to not trigger aliases, `-q` to suppress hooks (chpwd)
 	# 2. Add `clear` to suppress the entering message

@@ -96,7 +96,7 @@ keymap("n", "[", "<", { desc = "󰉵 outdent" })
 keymap("n", "]", ">", { desc = "󰉶 indent" })
 
 -- Close all top-level folds
-keymap("n", "zz", function() cmd("%foldclose") end, { desc = "󰘖 Close toplevel folds" })
+keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
 
 -- [O]pen new scope / brace
 keymap(
