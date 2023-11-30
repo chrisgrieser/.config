@@ -83,7 +83,7 @@ keymap(
 	{ desc = " Duplicate Line as Comment" }
 )
 
--- WHITESPACE CONTROL
+-- WHITESPACE & INDENTATION
 keymap("n", "=", "mzO<Esc>`z", { desc = "  blank above" })
 keymap("n", "_", "mzo<Esc>`z", { desc = "  blank below" })
 keymap("n", "<Tab>", ">>", { desc = "󰉶 indent line" })

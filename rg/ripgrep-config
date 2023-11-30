@@ -1,22 +1,23 @@
-# https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
+# DOCS https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
 #───────────────────────────────────────────────────────────────────────────────
 
-# shorten *really* long lines
+# shorten long lines
 --max-columns=150
 --max-columns-preview
 
-
+# include hidden files, but not the git directory
 --hidden
---glob=!.git
+--glob=!.git/*
 
-
+# behavior
 --smart-case
---no-line-number
---trim
 --hyperlink-format=default
 
+# shortened display
+--no-line-number
+--trim
 
-
+# colors
 --colors=match:fg:yellow
 --colors=match:style:nobold
 --colors=path:fg:blue
