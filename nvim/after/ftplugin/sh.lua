@@ -8,8 +8,13 @@ u.ftAbbr("--", "#")
 -- FIX some shell-filetypes override makeprg
 vim.opt_local.makeprg = "make --silent --warn-undefined-variables"
 
-vim.keymap.set("n", "<localleader>e", function()
-	local line = vim.trim(vim.api.nvim_get_current_line())
+-- explain shell command
+vim.keymap.set({"n", "x"}, "<localleader>e", function()
 	local site = "https://explainshell.com/explain?cmd="
-	vim.fn.system { "open", site .. line }
-end, { desc = "Explain Shell Command" })
+	local text = vim.api.nvim_get_current_line()
+	if vim.fn.mode():find("[Vv]") then
+		u.normal('"zy')
+		text = vim.fn.getreg("z")
+	end
+	vim.fn.system { "open", site .. text }
+end, { desc = " Explain Shell Command", buffer = true })
