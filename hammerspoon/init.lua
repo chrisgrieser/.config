@@ -1,4 +1,3 @@
--- selene: allow(unscoped_variables)
 G = {} -- persist from garbage collector
 
 ---Try to require the module, and do not error when one of them cannot be

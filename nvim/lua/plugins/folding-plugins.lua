@@ -1,4 +1,3 @@
---# selene: allow(mixed_table) -- lazy.nvim uses them
 local foldIcon = ""
 local hlgroup = "NonText"
 local function foldTextFormatter(virtText, lnum, endLnum, width, truncate)

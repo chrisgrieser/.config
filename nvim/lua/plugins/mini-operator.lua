@@ -1,4 +1,3 @@
---# selene: allow(mixed_table) -- lazy.nvim uses them
 local autocmd = vim.api.nvim_create_autocmd
 local u = require("config.utils")
 --------------------------------------------------------------------------------

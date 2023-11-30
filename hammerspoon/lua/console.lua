@@ -29,7 +29,6 @@ hs.consoleOnTop(false)
 ---filter console entries, removing logging for enabling/disabling hotkeys,
 ---useless layout info or warnings, or info on extension loading.
 -- HACK to fix https://www.reddit.com/r/hammerspoon/comments/11ao9ui/how_to_suppress_logging_for_hshotkeyenable/
--- selene: allow(high_cyclomatic_complexity)
 local function cleanupConsole()
 	local consoleOutput = tostring(cons.getConsole())
 	cons.clearConsole()

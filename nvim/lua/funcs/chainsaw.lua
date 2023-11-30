@@ -96,7 +96,6 @@ local config = {
 }
 
 --------------------------------------------------------------------------------
--- selene: allow(mixed_table)
 local function normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
 ---in normal mode, returns word under cursor, in visual mode, returns selection

@@ -1,4 +1,3 @@
---# selene: allow(mixed_table) -- lazy.nvim uses them
 return {
 	{ -- emphasized headers & code blocks
 		"lukas-reineke/headlines.nvim",

@@ -1,4 +1,3 @@
---# selene: allow(mixed_table) -- lazy.nvim uses them
 
 return {
 	-- TODO https://github.com/benlubas/molten-nvim#configuration

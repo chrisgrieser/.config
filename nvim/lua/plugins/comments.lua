@@ -1,4 +1,3 @@
---# selene: allow(mixed_table) -- lazy.nvim uses them
 return {
 	{ -- comment
 		"numToStr/Comment.nvim",

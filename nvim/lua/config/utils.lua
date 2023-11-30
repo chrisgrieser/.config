@@ -3,10 +3,7 @@ local M = {}
 
 ---runs :normal natively with bang
 ---@param cmdStr string
-function M.normal(cmdStr)
-	-- selene: allow(mixed_table)
-	vim.cmd.normal { cmdStr, bang = true }
-end
+function M.normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
 ---@param str string
 ---@param filePath string line(s) to add

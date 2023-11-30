@@ -1,4 +1,3 @@
---# selene: allow(mixed_table) -- lazy.nvim uses them
 local defaultSources = {
 	{ name = "luasnip" },
 	{
