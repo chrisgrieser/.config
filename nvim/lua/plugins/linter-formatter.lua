@@ -19,7 +19,6 @@ local linters = {
 }
 
 for _, list in pairs(linters) do
-	table.insert(list, "typos")
 	table.insert(list, "editorconfig-checker")
 end
 
@@ -34,7 +33,7 @@ local formatters = {
 	sh = { "shellcheck", "shfmt" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
 	["_"] = { "trim_whitespace", "trim_newlines", "squeeze_blanks" }, -- filetypes w/o formatter
-	["*"] = { "typos" }, -- all filetypes
+	["*"] = { "typos" }, -- all filetypes PENDING https://github.com/tekumara/typos-vscode/issues/20
 }
 
 local lspFormattingFiletypes = {

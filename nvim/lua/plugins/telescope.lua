@@ -175,8 +175,16 @@ local function telescopeConfig()
 					horizontal = { anchor = "W", width = 0.5, height = 0.55 },
 				},
 			},
-			live_grep = { prompt_prefix = " ", disable_coordinates = true },
-			grep_string = { prompt_prefix = " ", disable_coordinates = true },
+			live_grep = {
+				prompt_prefix = " ",
+				disable_coordinates = true,
+				additional_args = { "--hidden", "--trim" },
+			},
+			grep_string = {
+				prompt_prefix = " ",
+				disable_coordinates = true,
+				additional_args = { "--hidden", "--trim" },
+			},
 			git_status = {
 				prompt_prefix = "󰊢 ",
 				show_untracked = true,
