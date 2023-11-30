@@ -9,8 +9,8 @@
 --hidden
 --glob=!.git
 
---no-line-number
 --smart-case
+--no-line-number
 --trim
 --hyperlink-format=default
 
