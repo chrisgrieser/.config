@@ -5,7 +5,7 @@ local u = require("config.utils")
 u.ftAbbr("//", "#")
 u.ftAbbr("--", "#")
 
--- some shell-filetypes override makeprg
+-- FIX some shell-filetypes override makeprg
 vim.opt_local.makeprg = "make --silent --warn-undefined-variables"
 
 vim.keymap.set("n", "<localleader>e", function()
