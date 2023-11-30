@@ -14,6 +14,7 @@ alias ls='ls --color'
 alias mkdir='mkdir -p' # create intermediate directories
 alias curl='curl --progress-bar'
 alias make='make --silent --warn-undefined-variables'
+alias jless='jless --no-line-numbers'
 
 # colorized & showing all
 function which { builtin which -a "$@" | bat --language=sh; }

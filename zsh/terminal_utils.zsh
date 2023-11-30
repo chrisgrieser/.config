@@ -84,27 +84,3 @@ function p {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# copies last command(s)
-function lc() {
-	to_copy="$*"
-	print "\e[1;32mCopied:\e[0m $to_copy"
-	echo -n "$to_copy" | pbcopy
-}
-
-# copies result of last command(s)
-function lr() {
-	to_copy=$(eval "$1")
-	print "\e[1;32mCopied:\e[0m $to_copy"
-	echo -n "$to_copy" | pbcopy
-}
-
-# completions for it
-_last_commands () {
-	# shellcheck disable=2296
-	typeset -a recent_cmds=("${(f)"$(history -n)"}") # lines to array
-	local expl
-	_description -V last-commands expl 'Last Commands'
-	compadd "${expl[@]}" -Q -P"'" -S"'" -- "${recent_cmds[@]}"
-}
-compdef _last_commands lc
-compdef _last_commands lr
