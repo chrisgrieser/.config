@@ -11,10 +11,10 @@ M.usb_externalDrive = hs.usb.watcher
 		local name = device.productName
 		local ignore = {
 			"Integrated RGB Camera", -- Docking Station in the office
-			"T27hv-20",
-			"USB 10/100/1000 LAN",
+			-- "T27hv-20",
+			-- "USB 10/100/1000 LAN",
 			"CHERRY Wireless Device", -- Mouse at mother
-			"SP 150", -- RICOH Drucker
+			"SP 150", -- RICOH printer
 		}
 		if u.tbl_contains(ignore, name) or device.eventType ~= "added" then return end
 
@@ -52,12 +52,19 @@ M.timer_dailyBatteryCheck = hs.timer
 
 		for _, device in pairs(devices) do
 			local percent = tonumber(device.batteryPercentSingle)
-			if percent > warningLevel then return end
-			local msg = ("%s Battery is low (%s)"):format(device.name, percent)
-			u.notify("⚠️", msg)
+			if percent < warningLevel then
+				local msg = ("🔋 %s Battery low (%s)"):format(device.name, percent)
+				u.notify("⚠️", msg)
 
-			local dotToUse = 1
-			u.openLinkInBg(("tots://%s/append?text=%s"):format(dotToUse, hs.http.encodeForQuery(msg)))
+				-- new Reminder
+				hs.osascript.javascript(([[
+					const rem = Application("Reminders");
+					const today = new Date();
+					const newReminder = rem.Reminder({ name: "%s", alldayDueDate: today });
+					rem.defaultList().reminders.push(newReminder);
+					rem.quit();
+				]]):format(msg))
+			end
 		end
 	end, true)
 	:start()

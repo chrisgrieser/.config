@@ -45,7 +45,7 @@ command = '[[ "$PWD" =~ "$HOME/local-repos" ]] && echo "󰔽"'
 # space from format is needed, as the output from `command` is trimmed.
 when = '[[ "$PWD" =~ "$HOME/local-repos" ]]'
 format = '[ $output  ]($style)'              # extra space for proper nerdfont sizing
-style = "fg:bright-blue bg:black bold"
+style = "fg:cyan bg:black bold"
 
 [directory]
 truncation_length = 2
@@ -53,7 +53,7 @@ truncation_symbol = "/"
 truncate_to_repo = true
 read_only = "󰌾  "
 read_only_style = "fg:red bg:black"
-style = "fg:bright-blue bg:black bold"
+style = "fg:cyan bg:black bold"
 format = "[$path]($style) [$read_only]($read_only_style)"
 
 [directory.substitutions]
