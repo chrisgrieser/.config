@@ -1,8 +1,8 @@
 -- INFO only the first theme will be used
 local lightThemes = {
-	{ "sainnhe/everforest", init = function() vim.g.everforest_background = "hard" end },
+	{ "ribru17/bamboo.nvim" },
+	-- { "sainnhe/everforest", init = function() vim.g.everforest_background = "hard" end },
 	-- "sainnhe/gruvbox-material",
-	-- { "ribru17/bamboo.nvim" },
 	-- { "EdenEast/nightfox.nvim", name = "dawnfox" },
 	-- {
 	-- 	"marko-cerovac/material.nvim",
@@ -12,10 +12,10 @@ local lightThemes = {
 }
 
 local darkThemes = {
-	{ "EdenEast/nightfox.nvim", name = "nordfox" },
+	{ "folke/tokyonight.nvim", opts = { style = "moon" } },
+	-- { "EdenEast/nightfox.nvim", name = "nordfox" },
 	-- "sainnhe/gruvbox-material",
 	-- "rebelot/kanagawa.nvim",
-	-- { "folke/tokyonight.nvim", opts = { style = "moon" } },
 	-- { "sainnhe/sonokai", init = function() vim.g.sonokai_style = "shusia" end },
 }
 
@@ -53,5 +53,5 @@ allThemes = vim.tbl_map(function(theme)
 	return themeObj
 end, allThemes)
 
--- return for lazy
+-- return for lazy.nvim
 return allThemes
