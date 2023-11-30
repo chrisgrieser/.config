@@ -233,6 +233,8 @@ keymap("i", "<D-e>", "``<Left>", { desc = "  Inline Code" })
 
 --------------------------------------------------------------------------------
 
+<cmd>try|wqall|catch|qall|endtry<CR>
+
 -- quick quitting
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "qf", "help", "checkhealth" },
