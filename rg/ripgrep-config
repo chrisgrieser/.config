@@ -5,6 +5,10 @@
 --max-columns=150
 --max-columns-preview
 
+
+--hidden
+--glob=!.git
+
 --no-line-number
 --smart-case
 --trim
