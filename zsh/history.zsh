@@ -40,14 +40,15 @@ function lc() {
 
 # completions for it
 _lc () {
-	local -a descriptions=()
-	history -rn | while IFS='' read -r value; do
-		arr1+=("$value")
-	done
-	# shellcheck disable=2296 # valid in zsh
-	local values=({1..16})
+	# turn lines into array
+	local -a _last_cmds=()
+	while IFS='' read -r value; do
+		_last_cmds+=("$value")
+	done < <(history -rn)
+
+	local _values=({1..16})
 	local expl
 	_description -V last-commands expl 'Last Commands'
-	compadd "${expl[@]}" -l -d "${descriptions[@]}" -a "${values[@]}"
+	compadd "${expl[@]}" -Q -l -d _last_cmds -a _values
 }
 compdef _lc lc
