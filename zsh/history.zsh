@@ -40,7 +40,6 @@ function lc() {
 
 # completions for it
 _lc () {
-
 	local -a descriptions=()
 	history -rn | while IFS='' read -r value; do
 		arr1+=("$value")
@@ -49,6 +48,6 @@ _lc () {
 	local values=({1..16})
 	local expl
 	_description -V last-commands expl 'Last Commands'
-	compadd "${expl[@]}" -l -d "${descriptions[@]}" -a "${values"
+	compadd "${expl[@]}" -l -d "${descriptions[@]}" -a "${values[@]}"
 }
 compdef _lc lc
