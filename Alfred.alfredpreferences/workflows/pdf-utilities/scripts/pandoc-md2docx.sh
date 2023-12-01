@@ -1,11 +1,13 @@
 #!/usr/bin/env zsh
-
 #───────────────────────────────────────────────────────────────────────────────
 # INFO pandoc's --data-dir defined in .zshenv
 #───────────────────────────────────────────────────────────────────────────────
 
-INPUT="$*"
-OUTPUT="${INPUT%.*}_CG.docx"
+input="$(basename "$*" .md)"
+date="$(date +%Y-%m-%d)"
+output="${input}_${date}_CG.docx"
 
-pandoc "$INPUT" --output="$OUTPUT" --defaults="md2docx" 2>&1 &&
-	open -R "$OUTPUT"
+pandoc "$input" --output="$output" --defaults="md2docx" 2>&1 || return 1
+
+open -R "$output"
+open "$output"
