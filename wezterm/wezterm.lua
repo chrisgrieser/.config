@@ -1,4 +1,3 @@
---------------------------------------------------------------------------------
 -- THEME SETTINGS
 
 -- INFO the first theme in the list is used
@@ -30,15 +29,15 @@ local lightOpacity = 0.94
 local darkOpacity = 0.91
 
 --------------------------------------------------------------------------------
--- UTILS
+-- BASE
 
 local theme = require("theme-utils")
 local wt = require("wezterm")
 local act = wt.action
 
 local host = wt.hostname()
-local isAtOffice = (host:find("mini") or host:find("eduroam") or host:find("fak1")) ~= nil
-local isAtMother = host:find("Mother") ~= nil
+local isAtOffice = host:find("mini") or host:find("eduroam") or host:find("fak1")
+local isAtMother = host:find("Mother")
 
 local fontSize = 28
 if isAtMother then fontSize = 26 end
@@ -62,10 +61,7 @@ wt.on("gui-startup", function(cmd)
 end)
 
 --------------------------------------------------------------------------------
--- KEYBINDINGS
-
---------------------------------------------------------------------------------
--- TAB TITLE
+-- TAB & WINDOW TITLE
 
 -- https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
 wt.on("format-tab-title", function(tab)
@@ -89,7 +85,6 @@ wt.on("format-tab-title", function(tab)
 	return " " .. icon .. title .. " "
 end)
 
--- WINDOW TITLE
 -- set to pwd basename
 -- https://wezfurlong.org/wezterm/config/lua/window-events/format-window-title
 wt.on("format-window-title", function(_, pane)
@@ -100,7 +95,7 @@ end)
 --------------------------------------------------------------------------------
 -- SETTINGS
 
-local config = {
+return {
 	-- Meta
 	check_for_updates = false, -- done via homebrew already
 	automatically_reload_config = true,
@@ -184,7 +179,3 @@ local config = {
 	send_composed_key_when_left_alt_is_pressed = true, -- fix @{}~ etc. on German keyboard
 	send_composed_key_when_right_alt_is_pressed = true,
 }
-
---------------------------------------------------------------------------------
-
-return config
