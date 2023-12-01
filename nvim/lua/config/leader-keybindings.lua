@@ -118,14 +118,14 @@ keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
 -- LOGGING
 
 -- stylua: ignore start
-keymap({ "n", "x" }, "<leader>lm", function() require("funcs.chainsaw").messageLog() end, { desc = "󰸢 message log" })
-keymap({ "n", "x" }, "<leader>ll", function() require("funcs.chainsaw").variableLog() end, { desc = "󰸢 variable log" })
-keymap({ "n", "x" }, "<leader>lo", function() require("funcs.chainsaw").objectLog() end, { desc = "󰸢 object log" })
-keymap("n", "<leader>lb", function() require("funcs.chainsaw").beepLog() end, { desc = "󰸢 beep log" })
-keymap("n", "<leader>l1", function() require("funcs.chainsaw").timeLog() end, { desc = "󰸢 time log" })
-keymap("n", "<leader>lr", function() require("funcs.chainsaw").removeLogs() end, { desc = "󰸢  remove log" })
-keymap("n", "<leader>ld", function() require("funcs.chainsaw").debugLog() end, { desc = "󰸢 debugger log" })
-keymap("n", "<leader>la", function() require("funcs.chainsaw").assertLog() end, { desc = "󰸢 assert log" })
+keymap({ "n", "x" }, "<leader>lm", function() require("funcs.printing-press").messageLog() end, { desc = "󰸢 message log" })
+keymap({ "n", "x" }, "<leader>ll", function() require("funcs.printing-press").variableLog() end, { desc = "󰸢 variable log" })
+keymap({ "n", "x" }, "<leader>lo", function() require("funcs.printing-press").objectLog() end, { desc = "󰸢 object log" })
+keymap("n", "<leader>lb", function() require("funcs.printing-press").beepLog() end, { desc = "󰸢 beep log" })
+keymap("n", "<leader>l1", function() require("funcs.printing-press").timeLog() end, { desc = "󰸢 time log" })
+keymap("n", "<leader>lr", function() require("funcs.printing-press").removeLogs() end, { desc = "󰸢  remove log" })
+keymap("n", "<leader>ld", function() require("funcs.printing-press").debugLog() end, { desc = "󰸢 debugger log" })
+keymap("n", "<leader>la", function() require("funcs.printing-press").assertLog() end, { desc = "󰸢 assert log" })
 -- stylua: ignore end
 
 keymap("n", "<leader>li", cmd.Inspect, { desc = " :Inspect" })

@@ -151,7 +151,7 @@ local function getTemplateStr(logType)
 	local templateStr = config.logStatements[logType][ft]
 	if not templateStr then
 		local msg = ("%s does not support %s yet."):format(logType, ft)
-		vim.notify(msg, vim.log.levels.WARN, { title = "Chainsaw" })
+		vim.notify(msg, vim.log.levels.WARN, { title = "Printing Press" })
 	end
 	return templateStr
 end
