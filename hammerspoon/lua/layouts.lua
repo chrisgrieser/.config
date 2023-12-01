@@ -56,7 +56,7 @@ local function workLayout()
 	dockSwitcher("work")
 	setHigherBrightnessDuringDay()
 
-	M.closeAllTheStuff()
+	u.closeAllTheStuff()
 
 	-- open
 	local appsToOpen = { "Discord", env.browserApp, env.mailApp, env.tickerApp, "Obsidian" }
