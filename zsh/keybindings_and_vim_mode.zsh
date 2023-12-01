@@ -58,6 +58,7 @@ zle -N _copy_location
 function zvm_after_init {
 	bindkey -M viins '^P' _copy_location
 	bindkey -M viins '^U' _cut_buffer
+	bindkey -M viins '…' insert-last-word
 }
 
 # DOCS vi-mode widgets https://github.com/jeffreytse/zsh-vi-mode#custom-widgets-and-keybindings
