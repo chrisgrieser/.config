@@ -121,23 +121,22 @@ local function getVar()
 end
 
 ---append string below current line
----@param text string
-local function appendLine(text)
+---@param logLines string|string[]
+---@param varsToInsert string[]
+local function appendLines(logLines, varsToInsert)
 	local ln = vim.api.nvim_win_get_cursor(0)[1]
 
 	local indentBasedFts = { "python", "yaml", "elm" }
-	local isIndentBased = vim.tbl_contains(indentBasedFts,vim.bo.ft)
+	local isIndentBased = vim.tbl_contains(indentBasedFts, vim.bo.ft)
+	local indent = isIndentBased and vim.api.nvim_get_current_line():match("^%s*") or ""
+	local action = isIndentBased and "j" or "j=="
 
-	if isIndentBased then
-		-- copy indent
-		local indent = vim.api.nvim_get_current_line():match("^%s*")
-		text = indent .. text
-		vim.api.nvim_buf_set_lines(0, ln, ln, true, { text })
-		normal("j")
-	else
-		-- auto-indent via `==`
-		vim.api.nvim_buf_set_lines(0, ln, ln, true, { text })
-		normal("j==")
+	if type(logLines) == "string" then logLines = { logLines } end
+	for _, line in pairs(logLines) do
+		local toInsert = indent .. line:format(unpack(varsToInsert))
+		vim.api.nvim_buf_set_lines(0, ln, ln, true, { toInsert })
+		normal(action)
+		ln = ln + 1
 	end
 end
 
@@ -159,79 +158,59 @@ end
 --------------------------------------------------------------------------------
 
 function M.messageLog()
-	local templateStr = getTemplateStr("messageLog") ---@cast templateStr string
-	if not templateStr then return end
-
-	local logStatement = templateStr:format(config.marker)
-	appendLine(logStatement)
-
-	-- goto insert mode at correct location
-	normal('f";') -- goto second `"`
+	local logLines = getTemplateStr("messageLog") ---@cast logLines string
+	if not logLines then return end
+	appendLines(logLines, { config.marker })
+	normal('f";') -- goto insert mode at correct location
 	vim.cmd.startinsert()
 end
 
----log statement for variable under cursor, similar to the 'turbo console log' VS Code plugin
 function M.variableLog()
-	local templateStr = getTemplateStr("variableLog") ---@cast templateStr string
-	if not templateStr then return end
-
 	local varname = getVar()
-	local logStatement = templateStr:format(config.marker, varname, varname)
-	appendLine(logStatement)
+	local logLines = getTemplateStr("variableLog") ---@cast logLines string
+	if not logLines then return end
+	appendLines(logLines, { config.marker, varname, varname })
 end
 
 function M.objectLog()
-	local templateStr = getTemplateStr("objectLog") ---@cast templateStr string
-	if not templateStr then return end
-
 	local varname = getVar()
-	local logStatement = templateStr:format(config.marker, varname, varname)
-	appendLine(logStatement)
+	local logLines = getTemplateStr("objectLog") ---@cast logLines string
+	if not logLines then return end
+	appendLines(logLines, { config.marker, varname, varname })
 end
 
 function M.assertLog()
-	local templateStr = getTemplateStr("assertLog") ---@cast templateStr string
-	if not templateStr then return end
-
 	local varname = getVar()
-	local logStatement = templateStr:format(varname, config.marker, varname)
-	appendLine(logStatement)
+	local logLines = getTemplateStr("assertLog") ---@cast logLines string
+	if not logLines then return end
+	appendLines(logLines, { varname, config.marker, varname })
 	normal("f,") -- goto the comma to edit the condition
 end
 
 ---adds simple "beep" log statement to check whether conditionals have been triggered
 function M.beepLog()
-	local templateStr = getTemplateStr("beepLog") ---@cast templateStr string
-	if not templateStr then return end
-
+	local logLines = getTemplateStr("beepLog") ---@cast logLines string
+	if not logLines then return end
 	local randomEmoji = config.beepEmojis[math.random(1, #config.beepEmojis)]
-	local logStatement = templateStr:format(config.marker, randomEmoji)
-	appendLine(logStatement)
+	appendLines(logLines, { config.marker, randomEmoji })
 end
 
 function M.timeLog()
 	if vim.b.timeLogStart == nil then vim.b.timeLogStart = true end ---@diagnostic disable-line: inject-field
+
 	local startOrStop = vim.b.timeLogStart and "timeLogStart" or "timeLogStop"
+	local logLines = getTemplateStr(startOrStop)
+	if not logLines then return end
+	appendLines(logLines, { config.marker })
 
-	local templateStr = getTemplateStr(startOrStop)
-	if not templateStr then return end
-	if type(templateStr) == "string" then templateStr = { templateStr } end
-
-	for _, line in pairs(templateStr) do
-		appendLine(line:format(config.marker))
-	end
 	vim.b.timeLogStart = not vim.b.timeLogStart ---@diagnostic disable-line: inject-field
 end
 
 -- simple debugger statement
 function M.debugLog()
-	local templateStr = getTemplateStr("debugLog") 
-	if not templateStr then return end
-	if type(templateStr) == "string" then templateStr = { templateStr } end
-
-	for _, line in pairs(templateStr) do
-		appendLine(line:format(config.marker))
-	end
+	local logLines = getTemplateStr("debugLog")
+	if not logLines then return end
+	appendLines(logLines, { config.marker })
 end
 
 ---Remove all log statements in the current buffer

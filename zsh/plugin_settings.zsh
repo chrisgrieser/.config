@@ -1,12 +1,8 @@
-# CLI SETTINGS
-
 # Affects filetype-coloring in eza, fd, and completion menus
 # Can generate via: https://github.com/sharkdp/vivid
 # DOCS https://github.com/eza-community/eza/blob/main/man/eza_colors.5.md
-export LS_COLORS="di=1;34:ln=3;35:or=7;31:ex=39:README.md=4;33"
-
-export YSU_IGNORED_ALIASES=("bi" "pi") # often copypasted without alias
-export YSU_MESSAGE_POSITION="after"
+# INFO does also accept specific files via glob, e.g. `README.md=4;33`
+export LS_COLORS="di=1;34:ln=3;35:or=7;31:ex=39"
 
 export FZF_DEFAULT_COMMAND='fd'
 export FZF_DEFAULT_OPTS='
@@ -17,7 +13,6 @@ export FZF_DEFAULT_OPTS='
 	--bind=ctrl-s:toggle+down,ctrl-a:select-all
 '
 
-# extra spacing needed for WezTerm + Iosevka
 [[ "$TERM_PROGRAM" == "WezTerm" ]] && export EZA_ICON_SPACING=2
 export EZA_STRICT=1
 export EZA_ICONS_AUTO=1
@@ -26,9 +21,6 @@ export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgrep-config"
 
 # updates managed via homebrew https://cli.github.com/manual/gh_help_environment
 export GH_NO_UPDATE_NOTIFIER=1
-
-#───────────────────────────────────────────────────────────────────────────────
-# ZSH PLUGIN SETTINGS
 
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets regexp)
 
