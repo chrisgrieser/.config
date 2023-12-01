@@ -1,0 +1,130 @@
+-- Actions: https://wezfurlong.org/wezterm/config/lua/keyassignment/index.html#available-key-assignments
+-- Key-Names: https://wezfurlong.org/wezterm/config/keys.html#configuring-key-assignments
+
+local wt = require("wezterm")
+local act = wt.action
+local actFun = wt.action_callback
+local theme = require("theme-utils")
+
+--------------------------------------------------------------------------------
+
+return {
+	{ key = "t", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
+	{ key = "n", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
+	{ key = "q", mods = "CMD", action = act.QuitApplication },
+	{ key = "c", mods = "CMD", action = act.CopyTo("ClipboardAndPrimarySelection") },
+	{ key = "w", mods = "CMD", action = act.CloseCurrentTab { confirm = false } },
+	{ key = "+", mods = "CMD", action = act.IncreaseFontSize },
+	{ key = "-", mods = "CMD", action = act.DecreaseFontSize },
+	{ key = "0", mods = "CMD", action = act.ResetFontSize },
+	{ key = "p", mods = "CMD", action = act.ActivateCommandPalette },
+	{ key = "ö", mods = "CMD", action = act.CharSelect },
+	{ key = "k", mods = "CMD", action = act.ClearScrollback("ScrollbackAndViewport") },
+	{ key = "Enter", mods = "CTRL", action = act.ActivateTabRelative(1) },
+	{ key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
+	{
+		key = "PageUp",
+		action = wt.action_callback(function(win, pane)
+			-- if TUI, send key to TUI, else scroll by page https://github.com/wez/wezterm/discussions/4101
+			if pane:is_alt_screen_active() then
+				win:perform_action(wt.action.SendKey { key = "PageUp" }, pane)
+			else
+				win:perform_action(wt.action.ScrollByPage(-0.8), pane)
+			end
+		end),
+	},
+	{
+		key = "PageDown",
+		action = wt.action_callback(function(win, pane)
+			if pane:is_alt_screen_active() then
+				win:perform_action(wt.action.SendKey { key = "PageDown" }, pane)
+			else
+				win:perform_action(wt.action.ScrollByPage(0.8), pane)
+			end
+		end),
+	},
+
+	-- INFO using the mapping from the terminal_keybindings.zsh
+	-- undo
+	{ key = "z", mods = "CMD", action = act.SendKey { key = "z", mods = "CTRL" } },
+	{ -- for adding inline code to a commit, hotkey consistent with GitHub
+		key = "e",
+		mods = "CMD",
+		action = act.Multiple {
+			act.SendString([[\`\`]]),
+			act.SendKey { key = "LeftArrow" },
+			act.SendKey { key = "LeftArrow" },
+		},
+	},
+	-- Grappling-hook
+	{ key = "Enter", mods = "CMD", action = act.SendKey { key = "o", mods = "CTRL" } },
+	-- accept-and-infer-next-history
+	{ key = "Enter", mods = "ALT", action = act.SendKey { key = "l", mods = "CTRL" } },
+
+	{ -- enter line-break https://unix.stackexchange.com/a/80820
+		key = "Enter",
+		mods = "SHIFT",
+		action = act.Multiple {
+			act.SendKey { key = "v", mods = "CTRL" },
+			act.SendKey { key = "j", mods = "CTRL" },
+		},
+	},
+
+	-- scroll-to-prompt, requires shell integration: https://wezfurlong.org/wezterm/config/lua/keyassignment/ScrollToPrompt.html
+	{ key = "k", mods = "CTRL", action = act.ScrollToPrompt(-1) },
+	{ key = "j", mods = "CTRL", action = act.ScrollToPrompt(1) },
+
+	-- FIX works with `send_composed_key_when_right_alt_is_pressed = true`
+	-- but expects another character, so this mapping fixes it
+	{ key = "n", mods = "ALT", action = act.SendString("~") },
+
+	-- Emulates macOS' cmd-right & cmd-left
+	{ key = "LeftArrow", mods = "CMD", action = act.SendKey { key = "A", mods = "CTRL" } },
+	{ key = "RightArrow", mods = "CMD", action = act.SendKey { key = "E", mods = "CTRL" } },
+
+	{ -- cmd+l -> open current location in Finder
+		key = "l",
+		mods = "CMD",
+		action = actFun(function(_, pane)
+			local cwd = pane:get_current_working_dir()
+			wt.open_with(cwd, "Finder")
+		end),
+	},
+	-- Theme Cycler
+	{ key = "t", mods = "ALT", action = actFun(theme.cycle) },
+
+	-----------------------------------------------------------------------------
+
+	-- MODES
+	-- Search
+	{ key = "f", mods = "CMD", action = act.Search("CurrentSelectionOrEmptyString") },
+
+	-- Console / REPL
+	{ key = "Escape", mods = "CTRL", action = wt.action.ShowDebugOverlay },
+
+	-- Copy Mode (= Caret Mode) -- https://wezfurlong.org/wezterm/copymode.html
+	{ key = "c", mods = "CMD|SHIFT", action = act.ActivateCopyMode },
+
+	-- Quick Select (= Hint Mode) -- https://wezfurlong.org/wezterm/quickselect.html
+	{ key = "u", mods = "CMD", action = act.QuickSelect },
+
+	{ -- cmd+y -> copy full line, useful for pages like `fx`
+		key = "y",
+		mods = "CMD",
+		action = act.QuickSelectArgs { patterns = { "^.*$" }, label = "Copy Full Line" },
+	},
+	{ -- cmd+s -> copy shell option, e.g. to copy them from a man page
+		key = "s",
+		mods = "CMD",
+		action = act.QuickSelectArgs {
+			patterns = { "--[\\w=-]+", "-\\w" }, -- long option, short option
+			label = "Copy Shell Option",
+		},
+	},
+	-- cmd+, -> open this config file
+	{
+		key = ",",
+		mods = "CMD",
+		action = actFun(function() wt.open_with(wt.config_file) end),
+	},
+}
