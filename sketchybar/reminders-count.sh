@@ -8,7 +8,7 @@ remindersToday=$(osascript -l JavaScript -e '
 		dueDate: { _lessThan: new Date() },
 		completed: false,
 	});
-	remindersToday.length; -- direct return
+	remindersToday.length;
 ')
 
 if [[ $remindersToday -eq 0 ]]; then
