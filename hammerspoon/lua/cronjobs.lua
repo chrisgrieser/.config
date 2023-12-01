@@ -93,7 +93,7 @@ M.timer_sleepAutoVideoOff = hs.timer
 			if userDidSth then return end
 
 			u.notify("💤 SleepTimer triggered")
-			M.closeAllTheStuff()
+			u.closeAllTheStuff()
 		end)
 	end)
 	:start()

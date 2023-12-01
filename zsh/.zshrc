@@ -7,6 +7,7 @@ CONFIG_FILES=(
 	completion
 	history
 	keybindings_and_vim_mode
+	terminal_utils
 	aliases
 	docs_man
 

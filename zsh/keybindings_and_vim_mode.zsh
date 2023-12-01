@@ -71,6 +71,7 @@ function zvm_after_lazy_keybindings {
 	bindkey -M vicmd -s 'Y' 'y$' # -s flag sends direct keystrokes and therefore allows for remappings
 	bindkey -M vicmd -s ' ' 'ciw'
 	bindkey -M vicmd 'U' redo
+	bindkey -M vicmd 'M' vi-join
 	bindkey -M vicmd 'm' zvm_move_around_surround
 	bindkey -M vicmd 'qq' vi-pound-insert # = toggle comment
 
