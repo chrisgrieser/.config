@@ -8,7 +8,6 @@ remindersToday=$(osascript -l JavaScript -e '
 		dueDate: { _lessThan: new Date() },
 		completed: false,
 	}).length;
-	rem.quit();
 	count;
 ')
 
@@ -19,3 +18,8 @@ else
 	icon=" "
 fi
 sketchybar --set "$NAME" label="$remindersToday" icon="$icon" icon.padding_right=3
+
+#───────────────────────────────────────────────────────────────────────────────
+
+sleep 1
+killall "Reminders"
