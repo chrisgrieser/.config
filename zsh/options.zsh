@@ -4,8 +4,8 @@
 # GENERAL
 setopt INTERACTIVE_COMMENTS # comments in interactive mode, useful for copypasting
 setopt GLOB_DOTS            # glob includes dotfiles
-setopt PIPE_FAIL            # exit if pipeline failed
-unsetopt CLOBBER            # don't overwrite existing files with >, require >!
+setopt PIPE_FAIL            # tracability: exit if pipeline failed
+unsetopt CLOBBER            # safety: don't overwrite existing files with >, require >!
 
 # colorized
 function command_not_found_handler() {
@@ -18,5 +18,5 @@ function command_not_found_handler() {
 
 # sets English everywhere, fixes encoding issues
 export LANG="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
-export LC_CTYPE="en_US.UTF-8"
+export LC_ALL="$LANG"
+export LC_CTYPE="$LANG"
