@@ -2,7 +2,7 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 # load various completions of clis installed via homebrew
-# needs to be run before compinit
+# needs to be run *before* compinit
 FPATH="$HOMEBREW_PREFIX/share/zsh/site-functions:${FPATH}"
 
 # also loads compinit stuff, therefore has to be loaded before most plugins
