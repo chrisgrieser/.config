@@ -262,6 +262,15 @@
 		"prefix": "reset color",
 		"body": "\\e[0m"
 	},
+	"revert colors": {
+		"prefix": "revert colors",
+		"body": "\\e[7m"
+	},
+	"8-bit ansi color": {
+		"prefix": "8-bit ansi color",
+		"body": "\\e[38;5;${1:color}m",
+		"description": "https://i.stack.imgur.com/KTSQa.png"
+	},
 	"black": {
 		"prefix": "black",
 		"body": "\\e[1;30m"
