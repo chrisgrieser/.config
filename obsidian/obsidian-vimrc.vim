@@ -27,6 +27,8 @@ nnoremap x "_dl
 " navigate visual lines rather than logical ones
 nnoremap j gj
 nnoremap k gk
+vnoremap j gj
+vnoremap k gk
 nnoremap I g0i
 nnoremap A g$a
 
@@ -55,7 +57,7 @@ nnoremap <S-BS> :goForward
 noremap [ (
 noremap ] )
 
-" [z]pelling [l]ist (emulates `z=`)
+" spelling list (emulates `z=`)
 exmap contextMenu obcommand editor:context-menu
 nnoremap zl :contextMenu
 
