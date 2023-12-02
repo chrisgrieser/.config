@@ -1,5 +1,8 @@
 {
-	"Exclude": ["\\.md$"],
+	"Exclude": [
+		"\\.md$",
+		"manifest.json"
+	],
 	"Disable": {
 		"TrimTrailingWhitespace": true,
 		"MaxLineLength": true
