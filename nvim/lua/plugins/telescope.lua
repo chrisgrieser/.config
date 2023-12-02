@@ -251,6 +251,13 @@ local function telescopeConfig()
 				ignore_symbols = { "boolean", "number", "string", "variable", "array", "object", "constant", "package" },
 				fname_width = 12,
 			},
+		spell_suggest = {
+			initial_mode = "normal",
+			prompt_prefix = "󰓆",
+			previewer = false,
+			theme = "cursor",
+			layout_config = { cursor = { width = 0.3 } },
+		},
 			colorscheme = {
 				enable_preview = true,
 				prompt_prefix = " ",
@@ -297,6 +304,7 @@ return {
 			{ "<leader>gl", function() telescope("git_commits") end, desc = " Log/Commits" },
 			{ "<leader>gL", function() telescope("git_bcommits") end, desc = " Buffer Commits" },
 			{ "<leader>gb", function() telescope("git_branches") end, desc = " Branches" },
+			{ "zl", function() telescope("spell_suggest") end, desc = "󰓆 Spell Suggest" },
 			{
 				"gr",
 				function()
