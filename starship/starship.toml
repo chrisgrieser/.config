@@ -14,7 +14,7 @@ $character\
 
 right_format = """\
 $cmd_duration\
-${custom.alfred}$python\
+${custom.alfred}$python$nodejs\
 """
 
 add_newline = false
@@ -138,6 +138,14 @@ style = "bold purple"
 
 [python]
 style = "bold yellow"
-format = '  [${symbol}${pyenv_prefix}(${version})( 󱥒  $virtualenv)]($style)'
+format = '  [${symbol}${pyenv_prefix}($version)( 󱥒  $virtualenv)]($style)'
 version_format = "$major.$minor"
 symbol = "  "
+
+[nodejs]
+style = "bold red"
+format = '  [${symbol} $version]($style)'
+version_format = "$major.$minor"
+not_capable_style = "ft:white bg:red" # "engines property in package.json does not match the Node.js version"
+detect_extensions = [
+] # detect only via `package.json` or `node_modules` to avoid false positives

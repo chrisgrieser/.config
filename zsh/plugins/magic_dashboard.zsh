@@ -25,25 +25,26 @@ function _gitlog {
 
 	# INFO inserting ansi colors via sed requires leading $
 	local graph
-	graph=$(git log --all --color $graph \
-		--format="%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)%an%C(reset)" "$@" |
-		sed -e 's/ seconds* ago)/s)/' \
-			-e 's/ minutes* ago)/m)/' \
-			-e 's/ hours* ago)/h)/' \
-			-e 's/ days* ago)/d)/' \
-			-e 's/ weeks* ago)/w)/' \
-			-e 's/ months* ago)/mo)/' \
-			-e 's/grafted/ /' \
-			-e 's/origin\//󰞶  /g' \
-			-e 's/upstream\//  /g' \
-			-e 's/HEAD/󱍞 /g' \
-			-e 's/tag: /  /' \
-			-e 's/\* /∘ /' \
-			-Ee $'s/ (fix|refactor|build|ci|docs|feat|style|test|perf|chore|revert|break|improv)(\\(.+\\)|!)?:/ \033[1;35m\\1\033[1;36m\\2\033[0;38;5;245m:\033[0m/' \
-			-Ee $'s/ (fixup|squash)!/\033[1;32m&\033[0m/g' \
-			-Ee $'s/`[^`]*`/\033[1;36m&\033[0m/g' \
-			-Ee $'s/#[0-9]+/\033[1;31m&\033[0m/g'
-		)
+	graph=$(
+		git log --all --color $graph \
+			--format="%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)%an%C(reset)" "$@" |
+			sed -e 's/ seconds* ago)/s)/' \
+				-e 's/ minutes* ago)/m)/' \
+				-e 's/ hours* ago)/h)/' \
+				-e 's/ days* ago)/d)/' \
+				-e 's/ weeks* ago)/w)/' \
+				-e 's/ months* ago)/mo)/' \
+				-e 's/grafted/ /' \
+				-e 's/origin\//󰞶  /g' \
+				-e 's/upstream\//  /g' \
+				-e 's/HEAD/󱍞 /g' \
+				-e 's/tag: /  /' \
+				-e 's/\* /∘ /' \
+				-Ee $'s/ (fix|refactor|build|ci|docs|feat|style|test|perf|chore|revert|break|improv)(\\(.+\\)|!)?:/ \033[1;35m\\1\033[1;36m\\2\033[0;38;5;245m:\033[0m/' \
+				-Ee $'s/ (fixup|squash)!/\033[1;32m&\033[0m/g' \
+				-Ee $'s/`[^`]*`/\033[1;36m&\033[0m/g' \
+				-Ee $'s/#[0-9]+/\033[1;31m&\033[0m/g'
+	)
 
 	if [[ "$MAGIC_DASHBOARD_USE_HYPERLINKS" != "0" ]]; then
 		echo "$graph" | delta --hyperlinks
@@ -55,13 +56,15 @@ function _gitlog {
 function _list_files_here {
 	if [[ ! -x "$(command -v eza)" ]]; then print "\033[1;33mMagic Dashboard: \`eza\` not installed.\033[0m" && return 1; fi
 
-	local use_hyperlinks eza_output
+	local eza_output
 	local max_files_lines=${MAGIC_DASHBOARD_FILES_LINES:-6}
-	use_hyperlinks=$([[ "$MAGIC_DASHBOARD_USE_HYPERLINKS" != "0" ]] && echo "--hyperlink" || echo "")
-	eza_output=$(eza --width="$COLUMNS" --all --grid --color=always --icons \
-		--git-ignore --ignore-glob=".DS_Store|Icon?" \
-		--sort=name --group-directories-first --no-quotes \
-		--git --long --no-user --no-permissions --no-filesize --no-time\
+	# local use_hyperlinks
+	# use_hyperlinks=$([[ "$MAGIC_DASHBOARD_USE_HYPERLINKS" != "0" ]] && echo "--hyperlink" || echo "")
+	eza_output=$(
+		eza --width="$COLUMNS" --all --grid --color=always --icons \
+			--git-ignore --ignore-glob=".DS_Store|Icon?" \
+			--sort=name --group-directories-first --no-quotes \
+			--git --long --no-user --no-permissions --no-filesize --no-time
 		# $use_hyperlinks PENDING https://github.com/eza-community/eza/issues/693
 	)
 
@@ -96,7 +99,7 @@ function _gitstatus {
 			-e $'s/\\(new\\)/\033[1;32mN    \033[0m/' \
 			-e $'s/(\\(.*\\))/\033[1;34m\\1\033[0m/' \
 			-e 's/ Bin /    /' \
-			-e $'s/ \\| Unmerged /  \033[1;31m  \033[0m /'\
+			-e $'s/ \\| Unmerged /  \033[1;31m  \033[0m /' \
 			-Ee $'s|([^/+]*)(/)|\033[1;36m\\1\033[1;33m\\2\033[0m|g' \
 			-e $'s/^\\+/\033[1;35m \033[0m /' \
 			-e $'s/ \\|/ \033[1;30m│\033[0m/'
@@ -111,7 +114,7 @@ function _magic_dashboard {
 	# check if pwd still exists
 	if [[ ! -d "$PWD" ]]; then
 		printf '\033[1;33m"%s" has been moved or deleted.\033[0m\n' "$(basename "$PWD")"
-		if [[ -d "$OLDPWD" ]] ; then
+		if [[ -d "$OLDPWD" ]]; then
 			print '\033[1;33mMoving to last directory.\033[0m'
 			# shellcheck disable=2164
 			cd "$OLDPWD"
@@ -155,18 +158,22 @@ type _magic_enter_accept_line &>/dev/null && return
 # WARN running the `shfmt` on this section will break it
 # shellcheck disable=2154
 case "${widgets[accept-line]}" in
-		# Override the current accept-line widget, calling the old one
-	user:*) zle -N _magic_enter_orig_accept_line "${widgets[accept-line]#user:}"
+	# Override the current accept-line widget, calling the old one
+	user:*)
+		zle -N _magic_enter_orig_accept_line "${widgets[accept-line]#user:}"
 		function _magic_enter_accept_line {
 			_magic_enter
 			zle _magic_enter_orig_accept_line -- "$@"
-		} ;;
+		}
+		;;
 
 		# If no user widget defined, call the original accept-line widget
-	builtin) function _magic_enter_accept_line {
+	builtin)
+		function _magic_enter_accept_line {
 			_magic_enter
 			zle .accept-line
-		} ;;
+		}
+		;;
 esac
 
 zle -N accept-line _magic_enter_accept_line
