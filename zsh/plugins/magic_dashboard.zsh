@@ -155,25 +155,26 @@ function _magic_enter {
 # If the wrapper already exists don't redefine it
 type _magic_enter_accept_line &>/dev/null && return
 
-# WARN running the `shfmt` on this section will break it
-# shellcheck disable=2154
-case "${widgets[accept-line]}" in
-	# Override the current accept-line widget, calling the old one
-	user:*)
-		zle -N _magic_enter_orig_accept_line "${widgets[accept-line]#user:}"
-		function _magic_enter_accept_line {
-			_magic_enter
-			zle _magic_enter_orig_accept_line -- "$@"
-		}
-		;;
+widget_name="accept-line" # need to put into variable so `shfmt` does not break it
 
-		# If no user widget defined, call the original accept-line widget
-	builtin)
-		function _magic_enter_accept_line {
-			_magic_enter
-			zle .accept-line
-		}
-		;;
+# shellcheck disable=2154
+case "${widgets[$widget_name]}" in
+# Override the current accept-line widget, calling the old one
+user:*)
+	zle -N _magic_enter_orig_accept_line "${widgets[$widget_name]#user:}"
+	function _magic_enter_accept_line {
+		_magic_enter
+		zle _magic_enter_orig_accept_line -- "$@"
+	}
+	;;
+
+	# If no user widget defined, call the original accept-line widget
+builtin)
+	function _magic_enter_accept_line {
+		_magic_enter
+		zle .accept-line
+	}
+	;;
 esac
 
 zle -N accept-line _magic_enter_accept_line

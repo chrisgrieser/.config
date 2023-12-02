@@ -35,8 +35,10 @@ safeRequire("config.keybindings")
 safeRequire("config.leader-keybindings")
 
 safeRequire("config.diagnostics")
-safeRequire("config.user-commands")
-safeRequire("config.spellfixes")
+vim.defer_fn(function ()
+	safeRequire("config.user-commands")
+	safeRequire("config.spellfixes")
+end, 500)
 
 --------------------------------------------------------------------------------
 

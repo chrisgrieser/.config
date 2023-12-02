@@ -63,22 +63,22 @@ function p {
 	file="$1"
 	ext=${file##*.}
 	case $ext in
-		"yml" | "yaml")
-			yq "." "$file"
-			;;
-		"json")
-			command jless --no-line-numbers "$file"
-			;;
-		"pdf")
-			qlmanage -p "$file"
-			;;
-		"gif" | "png" | "jpg" | "jpeg" | "webp" | "tiff")
-			[[ "$TERM_PROGRAM" == "WezTerm" ]] && image_viewer="wezterm imgcat" || image_viewer="qlmanage -p"
-			$image_viewer "$file"
-			;;
-		*)
-			bat "$file"
-			;;
+	"yml" | "yaml")
+		yq "." "$file"
+		;;
+	"json")
+		command jless --no-line-numbers "$file"
+		;;
+	"pdf")
+		qlmanage -p "$file"
+		;;
+	"gif" | "png" | "jpg" | "jpeg" | "webp" | "tiff")
+		[[ "$TERM_PROGRAM" == "WezTerm" ]] && image_viewer="wezterm imgcat" || image_viewer="qlmanage -p"
+		$image_viewer "$file"
+		;;
+	*)
+		bat "$file"
+		;;
 	esac
 }
 
