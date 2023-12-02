@@ -1,5 +1,13 @@
 #!/usr/bin/env zsh
 
+# GUARD don't check while using projector
+if system_profiler SPDisplaysDataType | grep -q "ViewSonic PJ"; then
+	sketchybar --set "$NAME" label="" icon="" icon.padding_right=0
+	exit 0
+fi
+
+#───────────────────────────────────────────────────────────────────────────────
+
 # https://leancrew.com/all-this/2017/08/my-jxa-problem/
 # https://developer.apple.com/library/archive/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html#//apple_ref/doc/uid/TP40014508-CH109-SW10
 remindersToday=$(osascript -l JavaScript -e '
@@ -14,12 +22,13 @@ remindersToday=$(osascript -l JavaScript -e '
 if [[ $remindersToday -eq 0 ]]; then
 	remindersToday=""
 	icon=""
+	padding=0
 else
 	icon=" "
+	padding=3
 fi
-sketchybar --set "$NAME" label="$remindersToday" icon="$icon" icon.padding_right=3
+sketchybar --set "$NAME" label="$remindersToday" icon="$icon" icon.padding_right=$padding
 
 #───────────────────────────────────────────────────────────────────────────────
-
 sleep 1
 killall "Reminders"

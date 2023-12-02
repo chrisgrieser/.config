@@ -11,8 +11,7 @@ M.usb_externalDrive = hs.usb.watcher
 		local name = device.productName
 		local ignore = {
 			"Integrated RGB Camera", -- Docking Station in the office
-			-- "T27hv-20",
-			-- "USB 10/100/1000 LAN",
+			"USB 10/100/1000 LAN", -- Docking Station in the office
 			"CHERRY Wireless Device", -- Mouse at mother
 			"SP 150", -- RICOH printer
 		}
@@ -46,13 +45,21 @@ M.usb_externalDrive = hs.usb.watcher
 
 M.timer_dailyBatteryCheck = hs.timer
 	.doAt("14:30", "01d", function()
-		local warningLevel = 30
+		local warnBelowPercent = 15
+
+		-- `privateBluetoothBatteryInfo()` apparently retrieves battery info only
+		-- once on the first load and not dynamically on every call. Thus, so we
+		-- need to unload and reload the module to force a refresh of the
+		-- percentage values
+		package.loaded["hs.battery"] = nil
+
 		local devices = hs.battery.privateBluetoothBatteryInfo()
 		if not devices then return end
 
 		for _, device in pairs(devices) do
 			local percent = tonumber(device.batteryPercentSingle)
-			if percent < warningLevel then
+			-- battery info incorrect for non-Apple devices
+			if percent < warnBelowPercent and device.isApple == "YES" then
 				local msg = ("🔋 %s Battery low (%s)"):format(device.name, percent)
 				u.notify("⚠️", msg)
 
