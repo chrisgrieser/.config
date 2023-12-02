@@ -970,7 +970,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Open GitHub Repository</string>
+				<string>⌘: Open directly in Obsidian</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -9055,7 +9055,7 @@ DOUBLE CLICK THIS to set Hotkey. Suggested Hotkey: cmd + shift + 1</string>
 		<string>▉</string>
 	</dict>
 	<key>version</key>
-	<string>4.2.4</string>
+	<string>4.2.5</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

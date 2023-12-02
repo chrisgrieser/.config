@@ -8,4 +8,4 @@ noice = "noice" # plugin name
 # ignore these files
 # INFO (needs glob due to conform.nvim appending stuff for temporary file)
 [files]
-extend-exclude = ["*spellfixes.lua"] # spell fixer file
+extend-exclude = ["*spellfixes.lua"]

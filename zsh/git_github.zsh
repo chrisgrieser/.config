@@ -29,6 +29,9 @@ ZSH_HIGHLIGHT_REGEXP+=('([0-9a-f]{6,}|HEAD)((\^+|~)[0-9]*)?' 'fg=yellow')
 ZSH_HIGHLIGHT_REGEXP+=('^(gc|git commit -m) ".{51,71}' 'fg=208') # 208 = orange
 ZSH_HIGHLIGHT_REGEXP+=('^(gc|git commit -m) ".{72,}' 'fg=white,bold,bg=red')
 
+# inline code with backslashes
+ZSH_HIGHLIGHT_REGEXP+=($'\\\\`[^`]*\\\\`' 'fg=cyan,bold')
+
 # highlight conventional commits
 ZSH_HIGHLIGHT_REGEXP+=(
 '(feat|fix|test|perf|build|ci|revert|refactor|chore|docs|break|style|improv)(\(.+\))?(\\?\!)?:'
