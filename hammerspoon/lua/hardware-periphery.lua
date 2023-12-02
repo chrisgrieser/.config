@@ -31,7 +31,7 @@ M.usb_externalDrive = hs.usb.watcher
 			-- search for mounted volumes, since the usb-watcher does not report it to us
 			u.runWithDelays({ 1, 3 }, function()
 				local stdout, success =
-					hs.execute([[df -h | grep -io "\s/Volumes/.*" | cut -c2- | head -n1]])
+					hs.execute([[df | grep --only-matching --max-count=1 " /Volumes/.*" | cut -c2-]])
 				if not success or not stdout then return end
 				local path = stdout:gsub("\n$", "")
 				hs.open(path)
@@ -45,7 +45,7 @@ M.usb_externalDrive = hs.usb.watcher
 
 M.timer_dailyBatteryCheck = hs.timer
 	.doAt("14:30", "01d", function()
-		local warnBelowPercent = 15
+		local warnBelowPercent = 20
 
 		-- `privateBluetoothBatteryInfo()` apparently retrieves battery info only
 		-- once on the first load and not dynamically on every call. Thus, so we
