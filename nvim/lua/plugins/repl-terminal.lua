@@ -31,12 +31,9 @@ return {
 			-- stylua: ignore start
 			{ "gn", function() require("notebook-navigator").move_cell("d") end, desc = " Next cell" },
 			{ "gN", function() require("notebook-navigator").move_cell("u") end, desc = " Prev cell" },
-			{ "<leader>ns", function ()
-				local marker = vim.bo.commentstring:format("%%")
-				local ln = vim.api.nvim_win_get_cursor(0)[1]
-				vim.api.nvim_buf_set_lines(0, ln, ln, false, { marker })
-			end, desc = " Split cell" },
-			{ "<leader>nb", function() require("notebook-navigator").add_cell_after() end, desc = " New cell below" },
+			{ "<leader>ns", function() require("notebook-navigator").split_cell() end, desc = " Split cell" },
+			{ "<leader>nb", function() require("notebook-navigator").add_cell_below() end, desc = " Add cell below" },
+			{ "<leader>na", function() require("notebook-navigator").add_cell_above() end, desc = " Add cell above" },
 			{ "<D-CR>", function() require("notebook-navigator").run_cell() end, desc = "  Run cell" },
 			-- stylua: ignore end
 		},
