@@ -31,7 +31,7 @@ ZSH_HIGHLIGHT_REGEXP+=('^(gc|git commit -m) ".{72,}' 'fg=white,bold,bg=red')
 
 # highlight conventional commits
 ZSH_HIGHLIGHT_REGEXP+=(
-	'(feat|fix|test|perf|build|ci|revert|refactor|chore|docs|break|style|improv)(\(.+\))?\!?:'
+'(feat|fix|test|perf|build|ci|revert|refactor|chore|docs|break|style|improv)(\(.+\))?(\\?\!)?:'
 	'fg=magenta,bold'
 )
 
@@ -107,7 +107,7 @@ function grem {
 	git branch --all --verbose --verbose
 	echo
 	git remote --verbose
-	printf "\e[1;34mgh\e[0m default repo: \e[1;31m" && gh repo set-default --view && printf "\e[0m"
+	printf "\e[1;34mgh\e[0m default repo: \e[1;31m" && gh repo set-default --view ; printf "\e[0m"
 }
 
 # Github Url: open & copy url
@@ -173,7 +173,7 @@ function clone {
 
 	# WARN depth=2 ensures that amending a shallow commit does not result in a
 	# new commit without parent, effectively destroying git history (!!)
-	git clone --depth=2 --no-single-branch "$url"
+	git clone --depth=2 "$url"
 
 	# shellcheck disable=SC2012
 	builtin cd "$(command ls -1 -t | head -n1)" || return 1

@@ -35,7 +35,7 @@ function _vi_delete_pbcopy {
 zle -N _vi_delete_pbcopy
 
 function _cut_buffer {
-	echo "$BUFFER" | pbcopy
+	echo -n "$BUFFER" | pbcopy
 	BUFFER="" # clears whole buffer, rather than just the line via `kill-whole-line`
 }
 zle -N _cut_buffer
