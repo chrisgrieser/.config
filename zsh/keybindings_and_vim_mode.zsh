@@ -59,6 +59,7 @@ function zvm_after_init {
 	bindkey -M viins '^P' _copy_location
 	bindkey -M viins '^U' _cut_buffer
 	bindkey -M viins '…' insert-last-word
+	bindkey -M viins '^Z' undo # remapped to `cmd+z` via wezterm
 }
 
 # DOCS vi-mode widgets https://github.com/jeffreytse/zsh-vi-mode#custom-widgets-and-keybindings
