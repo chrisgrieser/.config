@@ -57,6 +57,12 @@ local function retabber(useSpaces)
 end
 keymap("n", "<leader>f<Tab>", function() retabber(false) end, { desc = "󰌒 Use Tabs" })
 keymap("n", "<leader>f<Space>", function() retabber(true) end, { desc = "󱁐 Use Spaces" })
+keymap(
+	"n",
+	"<leader>f<CR>",
+	function() vim.opt_local.fileformat = "unix" end,
+	{ desc = "󰌑 Use Unix File Endings" }
+)
 
 --------------------------------------------------------------------------------
 -- UNDO
