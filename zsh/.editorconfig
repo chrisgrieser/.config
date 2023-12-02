@@ -1,0 +1,3 @@
+# `shfmt` https://github.com/mvdan/sh/blob/master/cmd/shfmt/shfmt.1.scd#examples
+[*.{sh,zsh}]
+switch_case_indent = false
