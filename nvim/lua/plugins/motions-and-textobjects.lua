@@ -53,9 +53,9 @@ return {
 				"mzd<cmd>TSTextobjectSelect @comment.outer<CR>`z",
 				desc = " Sticky Delete Comment",
 			},
-			{-- HACK since only outer comments are supported right now
+			{ -- HACK since only outer comments are supported right now
 				"cq",
-				function() 
+				function()
 					vim.fn.setreg("z", vim.bo.commentstring:format(""))
 					vim.cmd.TSTextobjectSelect("@comment.outer")
 					vim.cmd.normal('d"zp')
@@ -133,13 +133,28 @@ return {
 				"dsi",
 				function()
 					require("various-textobjs").indentation("inner", "inner")
-					local notOnIndentedLine = vim.fn.mode():find("V") == nil -- when textobj is found, will switch to visual line mode
-					if notOnIndentedLine then return end
+					local onIndentedLine = vim.fn.mode():find("V") -- when textobj is found, will switch to visual line mode
+					if not onIndentedLine then return end
 					u.normal("<") -- dedent indentation
 					local endBorderLn = vim.api.nvim_buf_get_mark(0, ">")[1] + 1
 					local startBorderLn = vim.api.nvim_buf_get_mark(0, "<")[1] - 1
 					vim.cmd(tostring(endBorderLn) .. " delete") -- delete end first so line index is not shifted
 					vim.cmd(tostring(startBorderLn) .. " delete")
+				end,
+				desc = " Delete surrounding indent",
+			},
+			{ -- yank surrounding indentation
+				"ysi",
+				function()
+					require("various-textobjs").indentation("inner", "inner")
+					local onIndentedLine = vim.fn.mode():find("V") -- when textobj is found, will switch to visual line mode
+					if not onIndentedLine then return end
+					local startLn = vim.api.nvim_buf_get_mark(0, "<")[1] - 1
+					local endLn = vim.api.nvim_buf_get_mark(0, ">")[1] + 1
+					-- stylua: ignore
+					local borderLines = vim.api.nvim_buf_get_lines(0, startLn, startLn, false)[1]
+						.. vim.api.nvim_buf_get_lines(0, endLn, endLn, false)[1]
+					vim.fn.setreg("+", borderLines)
 				end,
 				desc = " Delete surrounding indent",
 			},
