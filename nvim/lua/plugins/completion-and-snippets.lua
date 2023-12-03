@@ -24,6 +24,7 @@ local defaultSources = {
 	},
 	{ name = "path" },
 	{ name = "emoji" },
+	{ name = "otter" },
 }
 
 local sourceIcons = {
@@ -36,6 +37,7 @@ local sourceIcons = {
 	nvim_lsp = "󰒕",
 	path = "",
 	zsh = "",
+	otter = "🦦 💤",
 }
 
 --------------------------------------------------------------------------------
