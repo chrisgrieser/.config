@@ -132,12 +132,13 @@ return {
 			{ -- delete surrounding indentation
 				"dsi",
 				function()
-					require("various-textobjs").indentation("inner", "inner")
+					require("various-textobjs").indentation("outer", "outer")
 					local onIndentedLine = vim.fn.mode():find("V") -- when textobj is found, will switch to visual line mode
 					if not onIndentedLine then return end
+
 					u.normal("<") -- dedent indentation
-					local endBorderLn = vim.api.nvim_buf_get_mark(0, ">")[1] + 1
-					local startBorderLn = vim.api.nvim_buf_get_mark(0, "<")[1] - 1
+					local endBorderLn = vim.api.nvim_buf_get_mark(0, ">")[1]
+					local startBorderLn = vim.api.nvim_buf_get_mark(0, "<")[1]
 					vim.cmd(tostring(endBorderLn) .. " delete") -- delete end first so line index is not shifted
 					vim.cmd(tostring(startBorderLn) .. " delete")
 				end,
@@ -146,17 +147,21 @@ return {
 			{ -- yank surrounding indentation
 				"ysi",
 				function()
-					require("various-textobjs").indentation("inner", "inner")
+					local startPos = vim.api.nvim_win_get_cursor(0)
+					require("various-textobjs").indentation("outer", "outer")
 					local onIndentedLine = vim.fn.mode():find("V") -- when textobj is found, will switch to visual line mode
 					if not onIndentedLine then return end
-					local startLn = vim.api.nvim_buf_get_mark(0, "<")[1] - 1
-					local endLn = vim.api.nvim_buf_get_mark(0, ">")[1] + 1
-					-- stylua: ignore
-					local borderLines = vim.api.nvim_buf_get_lines(0, startLn, startLn, false)[1]
-						.. vim.api.nvim_buf_get_lines(0, endLn, endLn, false)[1]
-					vim.fn.setreg("+", borderLines)
+
+					u.normal("V") -- leave visual mode so <> marks are set
+					local startLn = vim.api.nvim_buf_get_mark(0, "<")[1]
+					local endLn = vim.api.nvim_buf_get_mark(0, ">")[1]
+
+					local startLine = vim.api.nvim_buf_get_lines(0, startLn - 1, startLn, false)[1]
+					local endLine = vim.api.nvim_buf_get_lines(0, endLn - 1, endLn, false)[1]
+					vim.fn.setreg("+", startLine .. "\n" .. endLine .. "\n")
+					vim.api.nvim_win_set_cursor(0, startPos)
 				end,
-				desc = " Delete surrounding indent",
+				desc = "¥ Yank surrounding indent",
 			},
 			{ -- open URL (forward seeking)
 				"gx",
