@@ -119,8 +119,6 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 defaults write -g PMPrintingExpandedStateForPrint -bool true
 defaults write -g PMPrintingExpandedStateForPrint2 -bool true
 
-defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
-
 # Avoid creating .DS_Store files on network or USB volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
