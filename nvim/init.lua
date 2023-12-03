@@ -35,27 +35,11 @@ safeRequire("config.keybindings")
 safeRequire("config.leader-keybindings")
 
 safeRequire("config.diagnostics")
-vim.defer_fn(function ()
-	safeRequire("config.user-commands")
-	safeRequire("config.spellfixes")
-end, 500)
+safeRequire("config.user-commands")
+safeRequire("config.spellfixes")
 
 --------------------------------------------------------------------------------
 
 if vim.version().major == 0 and vim.version().minor >= 10 then
-	local todo = [[
-		# nvim 0.10
-		- stevanmilic/nvim-lspimport can now be used
-		- satellite.nvim can now be updated.
-		- biome can now format via lsp https://github.com/neovim/nvim-lspconfig/issues/2807
-		- vim.system
-		- vim.uv instead of vim.loop
-		- ftAbbr & abbreviations.lua: vim.keymap.set('ia', lhs, rhs, { buffer = true })
-		- inlay hints setup: https://www.reddit.com/r/neovim/comments/16tmzkh/comment/k2gpy16/?context=3
-		- change lsp-signature to inlay hint
-		- vim.snippet 
-			- https://www.reddit.com/r/neovim/comments/17cwptz/comment/k5uoswd/?context=3
-			- https://github.com/garymjr/nvim-snippets
-	]]
-	vim.notify(todo)
+	vim.notify("TODO version 0.10.md")
 end

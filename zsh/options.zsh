@@ -5,7 +5,6 @@
 setopt INTERACTIVE_COMMENTS # comments in interactive mode, useful for copypasting
 setopt GLOB_DOTS            # glob includes dotfiles
 setopt PIPE_FAIL            # tracability: exit if pipeline failed
-unsetopt CLOBBER            # safety: don't overwrite existing files with >, require >!
 
 # colorized
 function command_not_found_handler() {
