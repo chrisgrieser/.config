@@ -2,22 +2,26 @@
 
 __CHTSH_LANGS=($(curl -s cheat.sh/:list))
 _arguments -C \
-  '--help[show this help message and exit]: :->noargs' \
-  '--shell[enter shell repl]: :->noargs' \
-  '1:Cheat Sheet:->lang' \
-  '*::: :->noargs' && return 0
+	'--help[show this help message and exit]: :->noargs' \
+	'--shell[enter shell repl]: :->noargs' \
+	'1:Cheat Sheet:->lang' \
+	'*::: :->noargs' && return 0
 
-if [[ CURRENT -ge 1 ]]; then
-    case $state in
-        noargs)
-             _message "nothing to complete";;
-        lang)
-				local expl
-				_description -V conventional-commit expl 'Cheat Sheet'
-				compadd "${expl[@]}" -- "${__CHTSH_LANGS[@]}"
-        *)
-             _message "Unknown state, error in autocomplete";;
-    esac
+if [[ $CURRENT -ge 1 ]]; then
+	# shellcheck disable=2154
+	case $state in
+	noargs)
+		_message "nothing to complete"
+		;;
+	lang)
+		local expl
+		_description -V conventional-commit expl 'Cheat Sheet'
+		compadd "${expl[@]}" -- "${__CHTSH_LANGS[@]}"
+		;;
+	*)
+		_message "Unknown state, error in autocomplete"
+		;;
+	esac
 
-    return
+	return
 fi

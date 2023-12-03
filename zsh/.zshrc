@@ -5,7 +5,6 @@ CONFIG_FILES=(
 	options
 	navigation
 	completion
-	history
 	keybindings_and_vim_mode
 	terminal_utils
 	aliases

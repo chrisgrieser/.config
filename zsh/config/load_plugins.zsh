@@ -3,8 +3,8 @@
 
 # load various completions of clis installed via homebrew
 # needs to be run *before* compinit
-export FPATH="$HOMEBREW_PREFIX/share/zsh/site-functions:${FPATH}"
-export FPATH="$ZDOTDIR/completions:${FPATH}"
+export FPATH="$HOMEBREW_PREFIX/share/zsh/site-functions:$FPATH"
+export FPATH="$ZDOTDIR/completions:$FPATH"
 
 # also loads compinit stuff, therefore has to be loaded before most plugins
 source "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
