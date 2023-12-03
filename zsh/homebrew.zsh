@@ -86,7 +86,7 @@ function listall() {
 	brew tap
 	_print-section "Leaves"
 	brew leaves
-	print-section "Casks"
+	_print-section "Casks"
 	brew list --casks
 	_print-section "Doctor"
 	brew doctor
