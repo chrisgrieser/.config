@@ -86,7 +86,7 @@ return {
 					cmdline = { view = "cmdline_popup" },
 					lua = { view = "cmdline_popup" },
 					help = { view = "cmdline_popup" },
-					numb = { -- numb.nvim
+					numb_nvim = {
 						pattern = "^:%d+$",
 						view = "cmdline",
 						conceal = false,
@@ -124,12 +124,12 @@ return {
 				hover = {
 					border = { style = u.borderStyle },
 					size = { max_width = 80 },
-					win_options = { scrolloff = 4 },
+					win_options = { scrolloff = 4, wrap = true },
 				},
 				popup = {
 					border = { style = u.borderStyle },
 					size = { width = 90, height = 25 },
-					win_options = { scrolloff = 8 },
+					win_options = { scrolloff = 8, wrap = true },
 				},
 				split = {
 					enter = true,
