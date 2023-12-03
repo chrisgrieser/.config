@@ -71,7 +71,7 @@ export LESSHISTFILE=- # don't clutter home directory with useless `.lesshst` fil
 #   source files. Therefore for this to work, the version of less provided by
 #   homebrew is needed (v.633)
 # - keybinding for search includes a setting that makes `n` and `N` wrap
-export LESSKEYIN="$ZDOTDIR/.lesskey"
+export LESSKEYIN="$ZDOTDIR/config/lesskey"
 
 # FIX display nerdfont correctly https://github.com/ryanoasis/nerd-fonts/issues/1337
 export LESSUTFCHARDEF=23fb-23fe:p,2665:p,26a1:p,2b58:p,e000-e00a:p,e0a0-e0a2:p,e0a3:p,e0b0-e0b3:p,e0b4-e0c8:p,e0ca:p,e0cc-e0d4:p,e200-e2a9:p,e300-e3e3:p,e5fa-e6a6:p,e700-e7c5:p,ea60-ebeb:p,f000-f2e0:p,f300-f32f:p,f400-f532:p,f500-fd46:p,f0001-f1af0:p
@@ -97,34 +97,3 @@ function h() {
 		curl -s "https://cht.sh/$query?style=$style" | less
 	fi
 }
-
-# completions for cht.sh https://github.com/chubin/cheat.sh#zsh-tab-completion
-function _cht {
-	# shellcheck disable=2207
-	__CHTSH_LANGS=($(curl -s cheat.sh/:list))
-	_arguments -C \
-		'--help[show this help message and exit]: :->noargs' \
-		'--shell[enter shell repl]: :->noargs' \
-		'1:Cheat Sheet:->lang' \
-		'*::: :->noargs' && return 0
-
-	if [[ $CURRENT -ge 1 ]]; then
-		# shellcheck disable=2154
-		case $state in
-		noargs)
-			_message "nothing to complete"
-			;;
-		lang)
-			local expl
-			_description -V conventional-commit expl 'Cheat Sheet'
-			compadd "${expl[@]}" -- "${__CHTSH_LANGS[@]}"
-			;;
-		*)
-			_message "Unknown state, error in autocomplete"
-			;;
-		esac
-
-		return
-	fi
-}
-compdef _cht h

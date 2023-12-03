@@ -1,6 +1,6 @@
 CONFIG_FILES=(
 	load_plugins
-	plugin_settings
+	plugin_cli_settings
 
 	options
 	navigation
@@ -13,7 +13,6 @@ CONFIG_FILES=(
 
 	git_github
 	homebrew
-	node_npm
 	python_pip
 
 	intro_message
@@ -24,7 +23,7 @@ CONFIG_FILES=(
 
 for filename in "${CONFIG_FILES[@]}"; do
 	# shellcheck disable=1090
-	source "$ZDOTDIR/$filename.zsh"
+	source "$ZDOTDIR/config/$filename.zsh"
 done
 
 # remove last login message that some terminals leave https://stackoverflow.com/a/69915614
