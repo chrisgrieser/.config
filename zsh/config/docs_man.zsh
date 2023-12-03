@@ -1,5 +1,6 @@
 # COLORIZED HELP
-alias -g -- -h="--help | bat --language=help --style=plain --wrap=character"
+alias -g H="--help | bat --language=help --style=plain --wrap=character"
+ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -71,7 +72,7 @@ export LESSHISTFILE=- # don't clutter home directory with useless `.lesshst` fil
 #   source files. Therefore for this to work, the version of less provided by
 #   homebrew is needed (v.633)
 # - keybinding for search includes a setting that makes `n` and `N` wrap
-export LESSKEYIN="$ZDOTDIR/config/lesskey"
+export LESSKEYIN="$ZDOTDIR/lesskey"
 
 # FIX display nerdfont correctly https://github.com/ryanoasis/nerd-fonts/issues/1337
 export LESSUTFCHARDEF=23fb-23fe:p,2665:p,26a1:p,2b58:p,e000-e00a:p,e0a0-e0a2:p,e0a3:p,e0b0-e0b3:p,e0b4-e0c8:p,e0ca:p,e0cc-e0d4:p,e200-e2a9:p,e300-e3e3:p,e5fa-e6a6:p,e700-e7c5:p,ea60-ebeb:p,f000-f2e0:p,f300-f32f:p,f400-f532:p,f500-fd46:p,f0001-f1af0:p
@@ -97,3 +98,4 @@ function h() {
 		curl -s "https://cht.sh/$query?style=$style" | less
 	fi
 }
+compdef _cht h

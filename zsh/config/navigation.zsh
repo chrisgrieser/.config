@@ -20,7 +20,7 @@ alias ...=" cd ../.."
 alias ....=" cd ../../.."
 alias ..g=' cd "$(git rev-parse --show-toplevel)"' # goto git root
 # shellcheck disable=2164
-function mkcd { mkdir -p "$1" && cd "$1"; } # mkdir + cd
+function cake { mkdir -p "$1" && cd "$1"; } # change-make dir
 
 #───────────────────────────────────────────────────────────────────────────────
 # RECENT DIRS
@@ -34,16 +34,11 @@ alias gr=" cdr"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# BOOKMARKS (via cdpath & symlinks)
-setopt CHASE_LINKS # resolve symlinks when changing directories
+# BOOKMARKS
+setopt CHASE_LINKS # follow symlinks when they are cd target
 
 bookmark_path="$ZDOTDIR/cdpath_bookmarks" # folder with symlinks to directories
 export CDPATH="$bookmark_path:$LOCAL_REPOS:$WD"
-
-function bookmark {
-	ln -s "$PWD" "$bookmark_path/"
-	echo "Bookmarked: $(basename "$PWD")"
-}
 
 #───────────────────────────────────────────────────────────────────────────────
 # CYCLE THROUGH DIRECTORIES
