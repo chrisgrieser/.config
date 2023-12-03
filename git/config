@@ -28,7 +28,6 @@
 [rebase]
 	autoSquash = true
 	autoStash = true
-	stat = true
 [advice]
 	detachedHead = false
 

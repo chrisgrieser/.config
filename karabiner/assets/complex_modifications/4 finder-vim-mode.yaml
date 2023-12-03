@@ -337,7 +337,7 @@ rules:
           - shell_command: |
               killall Finder
               osascript -e 'display notification "🔁 Restarting Finder…" with title "Finder Vim Mode"'
-              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/screen_sharing_started.calf" &
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/screen_sharing_started.caf" &
           - *remove-insert-notice
           - *leave-insert-mode
           - *remove-menu-notice
@@ -1143,7 +1143,7 @@ rules:
           - { key_code: "1", modifiers: [control, option, command] }
           - { key_code: "up_arrow", modifiers: [option] } # go to top
           - shell_command: |
-              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.calf" &
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
               osascript -e 'display notification "⬇️ Sort by name" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic # by modification date
@@ -1152,7 +1152,7 @@ rules:
           - { key_code: "5", modifiers: [control, option, command] }
           - { key_code: "up_arrow", modifiers: [option] } # go to top
           - shell_command: |
-              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.calf" &
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
               osascript -e 'display notification "⬅️ Sort by modification date" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic # by size
@@ -1161,7 +1161,7 @@ rules:
           - { key_code: "6", modifiers: [control, option, command] }
           - { key_code: "up_arrow", modifiers: [option] } # go to top
           - shell_command: |
-              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.calf" &
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
               osascript -e 'display notification "⬆️ Sort by size" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic # by kind
@@ -1170,7 +1170,7 @@ rules:
           - { key_code: "2", modifiers: [control, option, command] }
           - { key_code: "up_arrow", modifiers: [option] } # go to top
           - shell_command: |
-              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.calf" &
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
               osascript -e 'display notification "➡️ Sort by kind" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic # by tags
@@ -1179,7 +1179,7 @@ rules:
           - { key_code: "7", modifiers: [control, option, command] }
           - { key_code: "up_arrow", modifiers: [option] } # go to top
           - shell_command: |
-              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.calf" &
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
               osascript -e 'display notification "🔚 Sort by tags" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
@@ -1256,7 +1256,7 @@ rules:
         to:
           - shell_command: |
               osascript -e 'display notification "☁️ 🔁 Restarting iCloud…" with title "Finder Vim Mode"'
-              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/screen_sharing_started.calf" &
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/screen_sharing_started.caf" &
               killall bird
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # ctrl-p: copy path
