@@ -98,9 +98,15 @@ return {
 			{ "in", "<cmd>lua require('various-textobjs').notebookCell('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner cell textobj" },
 			{ "an", "<cmd>lua require('various-textobjs').notebookCell('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer cell textobj" },
 
-			{ "ii", "<cmd>lua require('various-textobjs').indentation('inner', 'inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner indent textobj" },
+			-- { "ii", "<cmd>lua require('various-textobjs').indentation('inner', 'inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner indent textobj" },
+			{"ii", function ()
+				if vim.fn.indent(".") == 0 then
+					require('various-textobjs').entireBuffer()
+				else
+					require('various-textobjs').indentation('inner', 'inner')
+				end
+			end, mode = "o", desc = "󱡔 inner indent textobj"},
 			{ "ai", "<cmd>lua require('various-textobjs').indentation('outer', 'outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer indent textobj" },
-			{ "ij", "<cmd>lua require('various-textobjs').indentation('outer', 'inner')<CR>", mode = { "x", "o" }, desc = "󱡔 top-border indent textobj" },
 			{ "aj", "<cmd>lua require('various-textobjs').indentation('outer', 'inner')<CR>", mode = { "x", "o" }, desc = "󱡔 top-border indent textobj" },
 			{ "ig", "<cmd>lua require('various-textobjs').greedyOuterIndentation('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner greedy indent" },
 			{ "ag", "<cmd>lua require('various-textobjs').greedyOuterIndentation('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer greedy indent" },
@@ -133,8 +139,8 @@ return {
 				"dsi",
 				function()
 					require("various-textobjs").indentation("outer", "outer")
-					local onIndentedLine = vim.fn.mode():find("V") -- when textobj is found, will switch to visual line mode
-					if not onIndentedLine then return end
+					local indentationFound = vim.fn.mode():find("V") -- when textobj is found, will switch to visual line mode
+					if not indentationFound then return end
 
 					u.normal("<") -- dedent indentation
 					local endBorderLn = vim.api.nvim_buf_get_mark(0, ">")[1]
@@ -147,19 +153,26 @@ return {
 			{ -- yank surrounding indentation
 				"ysi",
 				function()
+					-- identify start- and end-border
 					local startPos = vim.api.nvim_win_get_cursor(0)
 					require("various-textobjs").indentation("outer", "outer")
-					local onIndentedLine = vim.fn.mode():find("V") -- when textobj is found, will switch to visual line mode
-					if not onIndentedLine then return end
-
+					local indentationFound = vim.fn.mode():find("V")
+					if not indentationFound then return end
 					u.normal("V") -- leave visual mode so <> marks are set
-					local startLn = vim.api.nvim_buf_get_mark(0, "<")[1]
-					local endLn = vim.api.nvim_buf_get_mark(0, ">")[1]
+					vim.api.nvim_win_set_cursor(0, startPos) -- restore cursor position
 
-					local startLine = vim.api.nvim_buf_get_lines(0, startLn - 1, startLn, false)[1]
-					local endLine = vim.api.nvim_buf_get_lines(0, endLn - 1, endLn, false)[1]
+					-- copy them into the + register
+					local startLn = vim.api.nvim_buf_get_mark(0, "<")[1] - 1
+					local endLn = vim.api.nvim_buf_get_mark(0, ">")[1] - 1
+					local startLine = vim.api.nvim_buf_get_lines(0, startLn, startLn + 1, false)[1]
+					local endLine = vim.api.nvim_buf_get_lines(0, endLn, endLn + 1, false)[1]
 					vim.fn.setreg("+", startLine .. "\n" .. endLine .. "\n")
-					vim.api.nvim_win_set_cursor(0, startPos)
+
+					-- highlight yanked text
+					local ns = vim.api.nvim_create_namespace("ysi")
+					vim.highlight.range(0, ns, "IncSearch", { startLn, 0 }, { startLn, -1 })
+					vim.highlight.range(0, ns, "IncSearch", { endLn, 0 }, { endLn, -1 })
+					vim.defer_fn(function() vim.api.nvim_buf_clear_namespace(0, ns, 0, -1) end, 1000)
 				end,
 				desc = "¥ Yank surrounding indent",
 			},
