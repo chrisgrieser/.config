@@ -46,20 +46,24 @@ declare class FinderItem {
 }
 
 // DOCS https://developer.apple.com/library/archive/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html
-declare type PathObj = { toString(): string; };
+declare type PathObj = { toString(): string };
 declare function Path(filepath: string): PathObj;
 
 declare type ReminderList = {
 	make(any);
 	reminders: {
 		push(newReminder: ReminderObj): void;
-		whose(options: { dueDate: {
-			_lessThan?: Date; // https://developer.apple.com/library/archive/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html#//apple_ref/doc/uid/TP40014508-CH109-SW10
-			_greaterThan?: Date;
-		}; })
+		whose(options: {
+			dueDate?: {
+				// https://developer.apple.com/library/archive/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html#//apple_ref/doc/uid/TP40014508-CH109-SW10
+				_lessThan?: Date;
+				_greaterThan?: Date;
+			};
+			completed?: boolean;
+		});
 		(): ReminderObj[];
-	}
-} 
+	};
+};
 
 declare type ReminderProperties = {
 	name: string;
@@ -75,7 +79,7 @@ declare type ReminderProperties = {
 	dueDate?: Date;
 	completionDate?: Date;
 	creationDate?: Date;
-}
+};
 
 declare type ReminderObj = {
 	name(): string;
@@ -86,7 +90,7 @@ declare type ReminderObj = {
 	alldayDueDate(): Date;
 	dueDate(): Date;
 	completionDate(): Date;
-}
+};
 
 declare const Application: {
 	currentApplication: () => {
@@ -170,7 +174,14 @@ declare const Application: {
 		documents: { url(): string; name(): string }[];
 	};
 	(
-		name: "Google Chrome" | "Chromium" | "Opera" | "Vivaldi" | "Brave Browser" | "Microsoft Edge" | "Arc",
+		name:
+			| "Google Chrome"
+			| "Chromium"
+			| "Opera"
+			| "Vivaldi"
+			| "Brave Browser"
+			| "Microsoft Edge"
+			| "Arc",
 	): MacAppObj & {
 		documents: { url(): string; name(): string }[];
 	};

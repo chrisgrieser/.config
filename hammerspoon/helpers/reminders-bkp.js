@@ -16,21 +16,24 @@ function run() {
 	const dataDir = app.doShellScript('source "$HOME/.zshenv" && echo "$DATA_DIR"').trim();
 	const isoToday = new Date().toISOString().split("T")[0];
 	const backupLocation = `${dataDir}/Backups/Reminders/${isoToday}.json`;
-	const fourDaysAgo = new Date(Date.now() - 4 * (24 * 60 * 60 * 1000));
 
 	const remApp = Application("Reminders");
-	const reminders = remApp.defaultList().reminders();
-	const json = [];
 
+	// delete old reminders
+	const fourDaysAgo = new Date(Date.now() - 4 * (24 * 60 * 60 * 1000));
+	const oldReminders = remApp.defaultList().reminders.whose({
+		dueDate: { _lessThan: fourDaysAgo }, // lessThan = dates in the past
+	});
+	for (let i = 0; i < oldReminders.length; i++) {
+		oldReminders[i].delete()
+	}
+
+	// Backup remaining reminders
+	const json = [];
+	const reminders = remApp.defaultList().reminders();
 	for (let i = 0; i < reminders.length; i++) {
 		const reminder = reminders[i];
 		const completionDate = reminder.completionDate();
-
-		// delete old reminders
-		if (completionDate > fourDaysAgo) {
-			reminder.delete();
-			continue;
-		}
 
 		// backup recent reminders
 		json.push({
