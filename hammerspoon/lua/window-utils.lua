@@ -225,7 +225,7 @@ end
 --------------------------------------------------------------------------------
 
 -- Triggers: Hotkeys & URI Scheme
-u.hotkey(u.hyper, "N", moveWinToNextDisplay)
+u.hotkey(u.hyper, "M", moveWinToNextDisplay)
 u.hotkey({ "ctrl" }, "space", controlSpaceAction) -- fn+space also bound to ctrl+space via Karabiner
 
 -- stylua: ignore start
