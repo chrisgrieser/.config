@@ -45,7 +45,7 @@ rules:
           - *remove-notice
           - *enter-normal-mode
         to:
-          - { key_code: right_shift, modifiers: [control, option, command] }
+          - { key_code: right_command, modifiers: [control, option] }
         conditions: [*highlights-app, *highlights-insert-mode]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "✏️ Highlights Vim Mode: Actions"

@@ -300,8 +300,7 @@ rules:
           - *leave-find-mode
         # keep hyper binding if not pressed alone
         to:
-          - key_code: right_command
-            modifiers: [control, option]
+          - { key_code: right_command, modifiers: [control , option] }
         conditions: [*finder-app]
       # regular Esc
       - type: basic
