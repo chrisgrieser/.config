@@ -1,4 +1,4 @@
-# INFO defines location of the rest of the zsh config
+# INFO defines location of the zsh config
 export ZDOTDIR="$HOME/.config/zsh"
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -17,7 +17,7 @@ export TICKER_APP="Ivory"
 export TASK_APP="GoodTask"
 
 # settings
-export EDITOR=nvim
+export EDITOR="nvim"
 export CODE_FONT="JetBrainsMonoNL NF"
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -37,5 +37,4 @@ function pandoc() { command pandoc --data-dir="$HOME/.config/pandoc" "$@"; }
 # PASS
 export PASSWORD_STORE_CLIP_TIME=60
 export PASSWORD_STORE_GENERATED_LENGTH=32
-export PASSWORD_STORE_ENABLE_EXTENSIONS=false
 export PASSWORD_STORE_CHARACTER_SET_NO_SYMBOLS="[:alnum:]"
