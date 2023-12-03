@@ -1,43 +1,32 @@
 local defaultSources = {
 	{ name = "luasnip" },
-	{
-		name = "nvim_lsp",
-		entry_filter = function(entry)
-			-- remove suggestions of type "Text"
-			-- local kind = require("cmp.types").lsp.CompletionItemKind[entry:get_kind()]
-			-- return kind ~= "Text"
-			return entry ~= nil
-		end,
-	},
+	{ name = "nvim_lsp" },
 	{
 		name = "buffer",
 		option = {
-			get_bufnrs = vim.api.nvim_list_bufs, -- all buffers instead of only the current
+			get_bufnrs = function()
+				local allBufs = vim.fn.getbufinfo { buflisted = 1 }
+				local allBufNums = vim.tbl_map(function(buf) return buf.bufnr end, allBufs)
+				return allBufNums
+			end,
 			max_indexed_line_length = 120, -- no long lines (e.g. base64-encoded things)
 		},
 		keyword_length = 3,
 		max_item_count = 5, -- since searching all buffers results in many results
 	},
-	{
-		name = "cmp_yanky",
-		option = { onlyCurrentFiletype = true, minLength = 5 },
-	},
 	{ name = "path" },
 	{ name = "emoji" },
-	{ name = "otter" },
 }
 
 local sourceIcons = {
 	buffer = "󰽙",
 	cmdline = "󰘳",
 	cmdline_history = "󰋚",
-	cmp_yanky = "󰅍",
 	emoji = "󰞅",
 	luasnip = "󰞘",
 	nvim_lsp = "󰒕",
 	path = "",
 	zsh = "",
-	otter = "🦦",
 }
 
 --------------------------------------------------------------------------------
@@ -51,14 +40,8 @@ local function cmpconfig()
 			expand = function(args) require("luasnip").lsp_expand(args.body) end,
 		},
 		window = {
-			completion = {
-				border = require("config.utils").borderStyle,
-				scrolloff = 2,
-			},
-			documentation = {
-				border = require("config.utils").borderStyle,
-				scrolloff = 2,
-			},
+			completion = { border = require("config.utils").borderStyle, scrolloff = 2 },
+			documentation = { border = require("config.utils").borderStyle, scrolloff = 2 },
 		},
 		sorting = {
 			comparators = {
@@ -201,7 +184,6 @@ return {
 			"hrsh7th/cmp-nvim-lsp", -- LSP input
 			"L3MON4D3/LuaSnip", -- snippet engine
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
-			"chrisgrieser/cmp_yanky",
 		},
 	},
 	{ -- Snippet Engine

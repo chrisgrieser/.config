@@ -57,6 +57,7 @@
       <outline text="nvim-cmp: Recent Wiki Updates" title="nvim-cmp: Recent Wiki Updates" type="rss" xmlUrl="https://github.com/hrsh7th/nvim-cmp/wiki.atom" htmlUrl="https://github.com/hrsh7th/nvim-cmp/wiki"/>
       <outline text="Obsidian Blog" title="Obsidian Blog" type="rss" xmlUrl="https://obsidian.md/feed.xml" htmlUrl="https://obsidian.md/"/>
       <outline text="Obsidian Changelog" title="Obsidian Changelog" type="rss" xmlUrl="https://obsidian.md/changelog.xml" htmlUrl="https://obsidian.md/"/>
+      <outline text="Obsidian Iceberg" title="Obsidian Iceberg" type="rss" xmlUrl="https://eleanorkonik.substack.com/feed?ref=eleanorkonik.com" htmlUrl="https://eleanorkonik.substack.com/"/>
       <outline text="One Thing Well" title="One Thing Well" type="rss" xmlUrl="https://onethingwell.org/rss" htmlUrl="https://onethingwell.org/"/>
       <outline text="One Useful Thing" title="One Useful Thing" type="rss" xmlUrl="https://www.oneusefulthing.org/feed" htmlUrl="https://www.oneusefulthing.org/"/>
       <outline text="Personal weblog about programming, linux, life, the universe and everything" title="Personal weblog about programming, linux, life, the universe and everything" type="rss" xmlUrl="https://zignar.net/index.xml" htmlUrl="https://zignar.net/"/>
@@ -69,7 +70,6 @@
       <outline text="The Verge -  Apps Posts" title="The Verge -  Apps Posts" type="rss" xmlUrl="https://www.theverge.com/apps/rss/index.xml" htmlUrl="https://www.theverge.com/apps"/>
       <outline text="The Verge -  Culture Posts" title="The Verge -  Culture Posts" type="rss" xmlUrl="https://www.theverge.com/culture/rss/index.xml" htmlUrl="https://www.theverge.com/culture"/>
       <outline text="The Verge -  Editorials" title="The Verge -  Editorials" type="rss" xmlUrl="http://www.theverge.com/rss/group/editorial/index.xml" htmlUrl="http://www.theverge.com/label/editorial"/>
-      <outline text="The Verge -  Installer s" title="The Verge -  Installer s" type="rss" xmlUrl="https://www.theverge.com/rss/installer-newsletter/index.xml" htmlUrl="https://www.theverge.com/installer-newsletter"/>
       <outline text="This Week in Neovim RSS Feed" title="This Week in Neovim RSS Feed" type="rss" xmlUrl="https://dotfyle.com/this-week-in-neovim/rss.xml" htmlUrl="https://dotfyle.com/this-week-in-neovim"/>
       <outline text="ThoughtAsylum" title="ThoughtAsylum" type="rss" xmlUrl="https://www.thoughtasylum.com/atom.xml" htmlUrl="https://www.thoughtasylum.com/"/>
       <outline text="tldr tech" title="tldr tech" type="rss" xmlUrl="https://kill-the-newsletter.com/feeds/dtt1ux9f50tehi8m.xml" htmlUrl="https://kill-the-newsletter.com/"/>

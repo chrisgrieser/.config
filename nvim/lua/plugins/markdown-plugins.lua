@@ -1,25 +1,4 @@
 return {
-	{ -- lsp support for embedded codeblocks
-		"jmbuhr/otter.nvim",
-		dependencies = "neovim/nvim-lspconfig",
-		-- ft = "markdown",
-		lazy = false,
-		opts = {
-			buffers = {
-				-- if set to true, the filetype of the otterbuffers will be set.
-				-- otherwise only the autocommand of lspconfig that attaches
-				-- the language server will be executed without setting the filetype
-				set_filetype = true,
-			},
-		},
-		keys = {
-			{
-				"<leader>oo",
-				function() require("otter").activate { "python", "lua" } end,
-				desc = " Activate Otter",
-			},
-		},
-	},
 	{ -- emphasized headers & code blocks
 		"lukas-reineke/headlines.nvim",
 		ft = "markdown", -- can work in other fts, but I only use it in markdown
