@@ -107,6 +107,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>66E04C3F-CFB0-402B-BA1C-F0C2A2A03C39</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8BF66D68-978A-4117-B7B8-849A6A39DBB1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -317,7 +330,7 @@
 				<key>subtext</key>
 				<string>Current Browser Tab</string>
 				<key>text</key>
-				<string>Sci-Hub Paper</string>
+				<string>Sci-Hub Paper  &amp; Annas Archive</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -340,7 +353,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>sci-hub.js</string>
+				<string>./scripts/sci-hub.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -371,6 +384,50 @@
 			<string>6442AC22-6F2F-49B6-ACBA-D5FD8F7F78E7</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>cite</string>
+				<key>subtext</key>
+				<string>Current Browser Tab</string>
+				<key>text</key>
+				<string>CiteAs</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>66E04C3F-CFB0-402B-BA1C-F0C2A2A03C39</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/cite-as.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>8BF66D68-978A-4117-B7B8-849A6A39DBB1</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -471,6 +528,15 @@
 			<key>ypos</key>
 			<real>475</real>
 		</dict>
+		<key>66E04C3F-CFB0-402B-BA1C-F0C2A2A03C39</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>440</real>
+			<key>ypos</key>
+			<real>625</real>
+		</dict>
 		<key>82300D05-4616-4CE1-AE7C-29E5E4420AD4</key>
 		<dict>
 			<key>colorindex</key>
@@ -488,6 +554,17 @@
 			<real>255</real>
 			<key>ypos</key>
 			<real>360</real>
+		</dict>
+		<key>8BF66D68-978A-4117-B7B8-849A6A39DBB1</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>note</key>
+			<string>open current browser tab</string>
+			<key>xpos</key>
+			<real>615</real>
+			<key>ypos</key>
+			<real>625</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
