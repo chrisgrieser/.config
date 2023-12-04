@@ -3,9 +3,7 @@
 
 playback_cmd=$1
 case $playback_cmd in
-"play-pause")
-	spotify_player playback --play-pause
-	;;
+"play-pause") spotify_player playback --play-pause ;;
 "three")
 	echo "bar"
 	;;
