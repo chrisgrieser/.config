@@ -11,7 +11,9 @@ local wf = hs.window.filter
 ---play/pause spotify
 ---@param toStatus string pause|play
 local function spotifyDo(toStatus)
-	local status = hs.execute(u.exportPath .. "spt playback --status --format=%s"):gsub("\n$", "") ---@diagnostic disable-line: undefined-field
+	local json = hs.execute(u.exportPath .. "spotify_player get key playback"):gsub("\n$", "") ---@diagnostic disable-line: undefined-field
+	local item = hs.json.decode(json).item
+	item
 	if (status == "▶️" and toStatus == "pause") or (status == "⏸" and toStatus == "play") then
 		local stdout = hs.execute(u.exportPath .. "spt playback --toggle")
 		if toStatus == "play" then u.notify(stdout) end

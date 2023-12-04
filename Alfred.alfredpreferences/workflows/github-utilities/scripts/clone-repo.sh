@@ -17,6 +17,7 @@ git clone --depth=2 "$url"
 # Open in terminal via Alfred
 echo -n "$LOCAL_REPOS/$reponame"
 
+
 #───────────────────────────────────────────────────────────────────────────────
 # PREPARE PR
 
