@@ -6,7 +6,9 @@ on alfred_script(shellCmd)
 	tell application "System Events" 
 		set weztermRunning to (name of processes) contains "wezterm-gui"
 	end tell
+
 	set isCd to(text 1 thru 3 of shellCmd) is "cd "
+
 	set setPath to "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
 
 	if isCd then
