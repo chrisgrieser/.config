@@ -84,6 +84,10 @@
 		"prefix": "home",
 		"body": "POSIX path of (path to home folder as string)"
 	},
+	"check if running": {
+		"prefix": "check if running",
+		"body": "tell application \"System Events\" to (name of processes) contains \"${1:processName}\""
+	},
 	"wait until browser tab is loaded": {
 		"prefix": "wait until browser tab is loaded",
 		"body": [
