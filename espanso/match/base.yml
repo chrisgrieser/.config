@@ -6,6 +6,8 @@ matches:
   #─────────────────────────────────────────────────────────────────────────────
   - trigger: "!web"
     replace: https://chris-grieser.de/
+  - trigger: "!github"
+    replace: https://github.com/chrisgrieser
   - trigger: "!masto"
     replace: https://pkm.social/@pseudometa
   - triggers: ["!blog", "!vim"]
