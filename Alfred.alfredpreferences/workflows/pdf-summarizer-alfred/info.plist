@@ -290,7 +290,18 @@ Instead of entering the API key directly, you can also enter ".zshenv" into the 
 
 ---
 
-Created by [Chris Grieser](https://chris-grieser.de/).</string>
+## Recommended Citation
+
+Please cite this software project as (APA):
+
+`Grieser, C. (2023). PDF summarizer for Alfred [Computer software]. https://github.com/chrisgrieser/pdf-summarizer-alfred`
+
+For other citation styles, use the following metadata:
+- [Citation File Format](https://github.com/chrisgrieser/pdf-summarizer-alfred/blob/main/CITATION.cff)
+- [BibTeX](https://github.com/chrisgrieser/pdf-summarizer-alfred/blob/main/CITATION.cff)
+
+## Created by
+[Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>2521CCD5-BF7A-401F-84A7-7EBD1562E94C</key>
@@ -446,7 +457,7 @@ Immediately start the summary, do not write anything else.</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.2</string>
+	<string>1.0.3</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
