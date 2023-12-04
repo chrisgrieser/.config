@@ -10,6 +10,7 @@ alias gt='git stash push && git stash show 0'
 alias gT='git stash pop'
 alias grh='git reset --hard'
 
+alias unadd='git restore --staged'
 alias push='git push'
 alias pull='git pull'
 alias rebase='git rebase --interactive'
