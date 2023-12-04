@@ -17,7 +17,7 @@ function run(argv) {
 
 	/** @type{AlfredItem[]} */
 	const casks = app
-		.doShellScript("ls -1 /opt/homebrew/Caskroom") // quicker than `brew list`
+		.doShellScript('ls -1 "$(brew --prefix)/Caskroom"') // quicker than `brew list`
 		.split("\r")
 		.map((name) => {
 			const zap = useZap ? "--zap" : "";
@@ -34,8 +34,9 @@ function run(argv) {
 
 	/** @type{AlfredItem[]} */
 	const formulas = app
-		// slower than `ls -1 /opt/homebrew/Cellar`, but --installed-on-request relevant
-		// (homebrew API does have data on `--installed-on-request`, but not on leaves)
+		// slower than `ls -1 "$(brew --prefix)/Caskroom"'`, but
+		// --installed-on-request relevant (homebrew API does have data on
+		// `--installed-on-request`, but not on leaves)
 		.doShellScript("brew leaves --installed-on-request")
 		.split("\r")
 		.map((name) => {

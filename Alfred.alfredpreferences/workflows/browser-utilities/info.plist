@@ -766,7 +766,7 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 				<key>browser</key>
 				<string>com.apple.Safari</string>
 				<key>skipqueryencode</key>
-				<false/>
+				<true/>
 				<key>skipvarencode</key>
 				<false/>
 				<key>spaces</key>
