@@ -300,7 +300,7 @@ rules:
           - *leave-find-mode
         # keep hyper binding if not pressed alone
         to:
-          - { key_code: right_command, modifiers: [control , option] }
+          - { key_code: right_command, modifiers: [control, option] }
         conditions: [*finder-app]
       # regular Esc
       - type: basic
@@ -355,9 +355,9 @@ rules:
         to:
           - shell_command: |
               osascript -e '
-                tell application "Finder" 
-                  if ((count Finder windows) is 0) then return 
-                  return POSIX path of (insertion location as alias) 
+                tell application "Finder"
+                  if ((count Finder windows) is 0) then return
+                  return POSIX path of (insertion location as alias)
                 end tell' > /tmp/finder-vim-mode-last-closed-window
               osascript -e 'tell application "Finder" to close window 1'
           - *remove-insert-notice
@@ -373,9 +373,9 @@ rules:
         to:
           - shell_command: |
               osascript -e '
-                tell application "Finder" 
-                  if ((count Finder windows) is 0) then return 
-                  return POSIX path of (insertion location as alias) 
+                tell application "Finder"
+                  if ((count Finder windows) is 0) then return
+                  return POSIX path of (insertion location as alias)
                 end tell' > /tmp/finder-vim-mode-last-closed-window
               osascript -e 'tell application "Finder" to close window 1'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
@@ -394,7 +394,7 @@ rules:
                 tell application "Finder"
                   repeat while Finder window 2 exists
                     if ((count Finder windows) is 2) then
-                      set winPath to POSIX path of (target of window 2 as alias) 
+                      set winPath to POSIX path of (target of window 2 as alias)
                     end if
                     close Finder window 2
                   end repeat
@@ -726,7 +726,7 @@ rules:
               current_vol=$(osascript -e 'output volume of (get volume settings)')
               [[ "$current_vol" == "missing value" ]] && current_vol=50
               vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc) # afplay play with 100% volume by default
-              afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/begin_record.caf" & # codespell-ignore
+              afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/begin_record.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # b = Toggle `.bkp` (Backup).
       - type: basic

@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=./schema/karabiner-mod-schema.json
+title: Spotify Control
+rules:
+  - description: Spotify Media Controls
+    manipulators:
+      - type: basic
+        from: { key_code: f3 }
+        to:
+          - shell_command: |
+              pgrep -xq "wezterm-gui" || open -a "WezTerm"
+              osascript -e 'tell application "WezTerm" to activate'
+              wezterm cli spawn --new-window -- spotify_player
+      - type: basic
+        from: { key_code: f4 }
+        to:
+          - shell_command: |
+              afplay --volume 0.5 "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/media_handoff.caf" &
+              spotify_player like
+      - type: basic
+        from: { key_code: f7 }
+        to:
+          - shell_command: spotify_player playback previous
+      - type: basic
+        from: { key_code: f8 }
+        to:
+          - shell_command: spotify_player playback play-pause
+      - type: basic
+        from: { key_code: f9 }
+        to:
+          - shell_command: spotify_player playback next
