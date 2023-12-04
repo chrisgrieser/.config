@@ -7,9 +7,12 @@ rules:
         from: { key_code: f3 }
         to:
           - shell_command: |
-              pgrep -xq "wezterm-gui" || open -a "WezTerm"
+              # pgrep -xq "wezterm-gui" || open -a "WezTerm"
+              # osascript -e 'tell application "WezTerm" to activate'
+              # wezterm cli spawn --new-window -- spotify_player
+              wezterm start --cwd "$HOME" &
+              sleep 0.5
               osascript -e 'tell application "WezTerm" to activate'
-              wezterm cli spawn --new-window -- spotify_player
       - type: basic
         from: { key_code: f4 }
         to:
