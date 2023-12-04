@@ -112,7 +112,7 @@ function insertPageNumber(annotations, pageNo) {
 	});
 }
 
-/** code: "_" or annotation type "Underline" -> split off and send to SideNotes.app
+/** code: "_" or annotation type "Underline" -> split off and send to Reminders.app
  * when tots is not installed, Underlines are ignored and annotations with
  * leading "_" are still extracted (though the "_" is removed)
  * @param {Annotation[]} annotations
@@ -138,9 +138,14 @@ function processUnderlines(annotations, citekey) {
 		if (annosToSplitOff.length > 0) {
 			const text = jsonToMd(annosToSplitOff, citekey);
 
+			// create new reminder due today
 			const rem = Application("Reminders");
 			const today = new Date();
-			const newReminder = rem.Reminder({ name: text, alldayDueDate: today });
+			const newReminder = rem.Reminder({
+				name: `Underline Annotations for ${citekey}`,
+				body: text,
+				alldayDueDate: today,
+			});
 			rem.defaultList().reminders.push(newReminder);
 			rem.quit();
 		}

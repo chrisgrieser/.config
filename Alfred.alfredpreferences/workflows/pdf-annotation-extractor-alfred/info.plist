@@ -436,18 +436,19 @@ Extract Annotations as Markdown, insert Pandoc Citations with correct page numbe
 
 ---
 
+## Recommended Citation
+
+Please cite this software project as (APA):
+
+`Grieser, C. (2023). PDF Annotation Extractor [Computer software]. https://github.com/chrisgrieser/pdf-annotation-extractor-alfred`
+
+For other citation styles, use the following metadata:
+- [Citation File Format](https://github.com/chrisgrieser/pdf-annotation-extractor-alfred/blob/main/CITATION.cff)
+- [BibTeX](https://github.com/chrisgrieser/pdf-annotation-extractor-alfred/blob/main/CITATION.bib)
+
+
 ## Created by
-[Chris Grieser](https://chris-grieser.de/)
-
-#### Profiles
-- [ResearchGate](https://www.researchgate.net/profile/Christopher-Grieser)
-- [Discord](https://discordapp.com/users/462774483044794368/)
-- [GitHub](https://github.com/chrisgrieser/)
-- [Twitter](https://twitter.com/pseudo_meta)
-- [LinkedIn](https://www.linkedin.com/in/christopher-grieser-ba693b17a/)
-
-#### Buy me a Coffee
-[Ko-Fi](https://ko-fi.com/pseudometa)</string>
+[Chris Grieser](https://chris-grieser.de/)</string>
 	<key>uidata</key>
 	<dict>
 		<key>0C315F47-D751-4D59-8DFA-2CFC7BF581A2</key>
@@ -624,7 +625,7 @@ Extract Annotations as Markdown, insert Pandoc Citations with correct page numbe
 		</dict>
 	</array>
 	<key>version</key>
-	<string>8.11.1</string>
+	<string>8.11.2</string>
 	<key>webaddress</key>
 	<string>https://github.com/chrisgrieser/pdf-annotation-extractor-alfred</string>
 </dict>
