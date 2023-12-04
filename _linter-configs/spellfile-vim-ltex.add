@@ -13,7 +13,10 @@ Treesitter
 subreddits
 hackernews
 fn⏎
+⌘fn⏎
 ⌘Y
+⌘C
+⌘L
 bufferline
 Subword
 camelCase
@@ -33,7 +36,6 @@ copypaste
 dedenting
 Keymaps
 dotfile
-__Zotero
 Zotero
 citekey
 Strikethrough
@@ -101,10 +103,10 @@ addon
 Raycast
 US
 blazingly
-Cycler
 cycler
 unindented
 Grieser
-__Blazingly
 Blazingly
 citekeys
+Wikilinks
+BibDesk
