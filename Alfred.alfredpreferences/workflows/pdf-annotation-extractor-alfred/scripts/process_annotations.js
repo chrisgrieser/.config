@@ -120,12 +120,6 @@ function insertPageNumber(annotations, pageNo) {
  */
 function processUnderlines(annotations, citekey) {
 	let totInstalled;
-	try {
-		Application("Tot");
-		totInstalled = true;
-	} catch (_error) {
-		totInstalled = false;
-	}
 
 	// Annotations with leading "_": collected & removal of the "_"
 	const underscoreAnnos = [];
@@ -142,9 +136,13 @@ function processUnderlines(annotations, citekey) {
 
 		const annosToSplitOff = [...underlineAnnos, ...underscoreAnnos];
 		if (annosToSplitOff.length > 0) {
-			const dot = 2;
 			const text = jsonToMd(annosToSplitOff, citekey);
-			app.openLocation(`tot://${dot}/append?text=${encodeURIComponent(text)}`);
+
+			const rem = Application("Reminders");
+			const today = new Date();
+			const newReminder = rem.Reminder({ name: text, alldayDueDate: today });
+			rem.defaultList().reminders.push(newReminder);
+			rem.quit();
 		}
 	}
 
