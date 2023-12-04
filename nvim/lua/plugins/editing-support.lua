@@ -266,6 +266,11 @@ return {
 						both = { fallback = function() vim.cmd("normal! gww") end },
 					},
 				},
+				markdown = {
+					element = {
+						both = { fallback = function() vim.cmd("normal! gww") end },
+					},
+				},
 			},
 		},
 	},

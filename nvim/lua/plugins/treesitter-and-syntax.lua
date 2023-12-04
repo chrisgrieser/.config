@@ -16,6 +16,7 @@ local tsConfig = {
 			"markdown", -- indentation at bullet points is worse
 			"lua", -- `o` sometimes with weird indentation
 			"javascript", -- `o` sometimes with weird indentation
+			"yaml",
 		},
 	},
 
