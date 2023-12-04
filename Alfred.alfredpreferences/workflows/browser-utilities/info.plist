@@ -34,6 +34,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>4DF1744A-10ED-4573-9F3C-69E0889CDA12</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>BFFDBA22-CF65-4C1A-BE4E-FE0B1FFC3E6B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>5B93B41A-F5A7-4C5F-AC89-7EA2F5284F83</key>
 		<array>
 			<dict>
@@ -120,7 +133,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>BFFDBA22-CF65-4C1A-BE4E-FE0B1FFC3E6B</string>
+				<string>4DF1744A-10ED-4573-9F3C-69E0889CDA12</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -768,11 +781,11 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 				<key>skipqueryencode</key>
 				<true/>
 				<key>skipvarencode</key>
-				<false/>
+				<true/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string></string>
+				<string>{query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -780,6 +793,27 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 			<string>BFFDBA22-CF65-4C1A-BE4E-FE0B1FFC3E6B</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>\n$</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>4DF1744A-10ED-4573-9F3C-69E0889CDA12</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -849,9 +883,9 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>675</real>
+			<real>880</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>570</real>
 		</dict>
 		<key>1B7FE114-DCC5-4243-8C64-D1D8DC1C0193</key>
 		<dict>
@@ -883,6 +917,17 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 			<real>305</real>
 			<key>ypos</key>
 			<real>270</real>
+		</dict>
+		<key>4DF1744A-10ED-4573-9F3C-69E0889CDA12</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>remove \n</string>
+			<key>xpos</key>
+			<real>350</real>
+			<key>ypos</key>
+			<real>780</real>
 		</dict>
 		<key>5B93B41A-F5A7-4C5F-AC89-7EA2F5284F83</key>
 		<dict>
@@ -978,9 +1023,9 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>835</real>
+			<real>1040</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>570</real>
 		</dict>
 		<key>AADFC524-047E-4638-ABAA-646CEC90599D</key>
 		<dict>
@@ -1018,7 +1063,7 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>335</real>
+			<real>445</real>
 			<key>ypos</key>
 			<real>750</real>
 		</dict>
@@ -1063,9 +1108,9 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 BACKUP
 for when browser history search workflow updates</string>
 			<key>xpos</key>
-			<real>525</real>
+			<real>730</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>570</real>
 		</dict>
 		<key>D909DE7E-1D08-42B3-B048-039BDE823F44</key>
 		<dict>
