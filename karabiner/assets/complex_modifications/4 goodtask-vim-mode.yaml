@@ -209,7 +209,7 @@ rules:
               # clean up copy content
               export LC_CTYPE="en_US.UTF-8" # fix for pbcopy
               sleep 0.1 # wait for clipboard
-              pbpaste | grep -v "^ *$" | sed -e '$d' -e '1s/^◯ //' | pbcopy
+              pbpaste | grep -v "^ *$" | grep -v "Due Date : " | sed '1s/^◯ //' | pbcopy
               osascript -e 'display notification "" with title "📋 Copied"'
         conditions: [*goodtask-app, *goodtask-normal-mode, *german-keyboard]
       # undo
