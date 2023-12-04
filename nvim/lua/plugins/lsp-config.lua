@@ -22,7 +22,6 @@ vim.g.lspToMasonMap = {
 	taplo = "taplo", -- toml
 	tsserver = "typescript-language-server",
 	yamlls = "yaml-language-server",
-	typos_lsp = "typos-lsp",
 }
 
 --------------------------------------------------------------------------------
@@ -212,13 +211,6 @@ serverConfigs.ast_grep = {
 	filetypes = { "lua" },
 }
 
--- TYPOS
--- DOCS https://github.com/tekumara/typos-vscode#settings
-serverConfigs.typos_lsp = {
-	init_options = {
-		diagnosticSeverity = "information",
-	},
-}
 --------------------------------------------------------------------------------
 -- LTEX (LanguageTool LSP)
 
