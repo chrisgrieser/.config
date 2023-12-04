@@ -21,8 +21,6 @@
 	<key>subreddits</key>
 	<string>neovim
 macapps
-commandline
-ProgrammerHumor
-7vsWild</string>
+ProgrammerHumor</string>
 </dict>
 </plist>
