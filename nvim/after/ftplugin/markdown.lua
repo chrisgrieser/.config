@@ -53,17 +53,13 @@ end, { desc = "  MD image to <img>", buffer = true })
 -- searchlink / ddgr
 keymap({ "n", "x" }, "<localleader>k", function()
 	local query
-	if fn.mode() == "n" then
-		u.normal([["zciw]])
-	else
-		u.normal([["zc]])
-	end
+	u.normal(fn.mode() == "n" and '"zciw' or '"zc')
 	query = fn.getreg("z")
 	local jsonResponse = fn.system(("ddgr --num=1 --json '%s'"):format(query))
 	local link = vim.json.decode(jsonResponse)[1].url
 	local mdlink = ("[%s](%s)"):format(query, link)
 	fn.setreg("z", mdlink)
-	u.normal([["zP]])
+	u.normal('"zP')
 end, { desc = " SearchLink (ddgr)", buffer = true })
 
 --------------------------------------------------------------------------------
