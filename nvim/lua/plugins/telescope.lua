@@ -244,20 +244,24 @@ local function telescopeConfig()
 					horizontal = { preview_width = { 0.7, min = 30 } },
 				},
 			},
+			lsp_document_symbols = {
+				prompt_prefix = "󰒕 ",
+				prompt_title = "Symbols",
+				symbols = { "function", "class", "method" },
+			},
 			lsp_workspace_symbols = {
 				prompt_prefix = "󰒕 ",
-				prompt_title = "Workspace Functions",
-				-- stylua: ignore
-				ignore_symbols = { "boolean", "number", "string", "variable", "array", "object", "constant", "package" },
+				prompt_title = "Workspace Symbols",
+				symbols = { "function", "class", "method" },
 				fname_width = 12,
 			},
-		spell_suggest = {
-			initial_mode = "normal",
-			prompt_prefix = "󰓆",
-			previewer = false,
-			theme = "cursor",
-			layout_config = { cursor = { width = 0.3 } },
-		},
+			spell_suggest = {
+				initial_mode = "normal",
+				prompt_prefix = "󰓆",
+				previewer = false,
+				theme = "cursor",
+				layout_config = { cursor = { width = 0.3 } },
+			},
 			colorscheme = {
 				enable_preview = true,
 				prompt_prefix = " ",
@@ -289,17 +293,12 @@ return {
 		keys = {
 			{ "?", function() telescope("keymaps") end, desc = "⌨️  Search Keymaps" },
 			{ "g.", function() telescope("resume") end, desc = " Continue" },
-			{
-				"gw",
-				function() telescope("lsp_workspace_symbols") end,
-				desc = "󰒕 Workspace Symbols",
-			},
+			{ "gs", function() telescope("lsp_document_symbols") end, desc = "󰒕 Symbols" },
+			-- stylua: ignore
+			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
 			{ "<leader>pg", function() telescope("highlights") end, desc = " Highlight Groups" },
-			{
-				"<leader>pc",
-				function() telescope("colorscheme") end,
-				desc = " Change Colorschemes",
-			},
+			-- stylua: ignore
+			{ "<leader>pc", function() telescope("colorscheme") end, desc = " Change Colorschemes" },
 			{ "<leader>gs", function() telescope("git_status") end, desc = " Status" },
 			{ "<leader>gl", function() telescope("git_commits") end, desc = " Log/Commits" },
 			{ "<leader>gL", function() telescope("git_bcommits") end, desc = " Buffer Commits" },

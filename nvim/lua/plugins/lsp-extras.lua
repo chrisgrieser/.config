@@ -94,44 +94,6 @@ return {
 			depth_limit_indicator = "…",
 		},
 	},
-	{ -- symbols sibebar and search
-		"stevearc/aerial.nvim",
-		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
-		keys = {
-			{ "<D-1>", "<cmd>AerialToggle<CR>", desc = "󰒕 Symbols Sidebar" },
-			{ "<C-j>", "<cmd>AerialNext<CR>zv", desc = "󰒕 Next Symbol" },
-			{ "<C-k>", "<cmd>AerialPrev<CR>zv", desc = "󰒕 Previous Symbol" },
-			{
-				"gs",
-				function()
-					require("telescope").load_extension("aerial")
-					require("telescope").extensions.aerial.aerial()
-				end,
-				desc = "󰒕 Symbols Search",
-			},
-		},
-		opts = {
-			close_on_select = true,
-			link_folds_to_tree = true,
-			show_guides = true,
-			highlight_on_hover = true,
-			layout = {
-				default_direction = "left",
-				min_width = { 20, 0.2 },
-				max_width = 0.35,
-				win_opts = { winhighlight = "Normal:NormalFloat" },
-			},
-			icons = { Collapsed = "" },
-			keymaps = {
-				-- instead of `autojump = true`, using these to only move when
-				-- navigating within the symbol sidebar
-				["<Tab>"] = "actions.down_and_scroll",
-				["<S-Tab>"] = "actions.up_and_scroll",
-				["j"] = "actions.down_and_scroll",
-				["k"] = "actions.up_and_scroll",
-			},
-		},
-	},
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",
 		event = "BufReadPre", -- TODO need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'

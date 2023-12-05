@@ -15,6 +15,14 @@ optl.listchars:append { multispace = "·" }
 -- move everything a bit more to the right
 if vim.bo.buftype == "" then optl.signcolumn = "yes:3" end
 
+-- stylua: ignore
+vim.keymap.set("n", "gs", function ()
+	require("telescope.builtin").lsp_document_symbols {
+		prompt_title = "Headings",
+		symbols = "string",
+	}
+end, { desc = " Headings" })
+
 --------------------------------------------------------------------------------
 -- MARKDOWN-SPECIFIC KEYMAPS
 keymap("n", "<leader>x", "mzI- [ ] <Esc>`z", { desc = " Add Task", buffer = true })

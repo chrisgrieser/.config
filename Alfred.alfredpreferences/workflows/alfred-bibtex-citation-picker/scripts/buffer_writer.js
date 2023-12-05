@@ -242,6 +242,7 @@ function run() {
 	const tagEmoji = "🏷";
 	const abstractEmoji = "📄";
 	const pdfEmoji = "📕";
+	const secondLibraryIcon = "2️⃣ ";
 	const litNoteFilterStr = "*";
 	const pdfFilterStr = "pdf";
 	const alfredBarLength = parseInt($.getenv("alfred_bar_length"));
@@ -376,10 +377,10 @@ function run() {
 		if (keywords.length) largeTypeInfo += "\n\nkeywords: " + keywords.join(", ");
 
 		// // Indicate 2nd library (this set via .map thisAry)
-		const icon = !this.isFirstLibrary ? secondLibIcon : "";
+		const libraryIndicator = !this.isFirstLibrary ? secondLibraryIcon : "";
 
 		return {
-			title: icon + shorterTitle,
+			title: libraryIndicator + shorterTitle,
 			autocomplete: primaryNames[0],
 			subtitle: namesToDisplay + year + collectionSubtitle + "   " + emojis.join(" "),
 			match: alfredMatcher,
