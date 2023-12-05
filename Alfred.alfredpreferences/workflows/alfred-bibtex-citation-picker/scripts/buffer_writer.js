@@ -71,9 +71,9 @@ class BibtexEntry {
 }
 
 /**
-* @param {string} encodedStr
-* @return {string} decodedStr
-*/
+ * @param {string} encodedStr
+ * @return {string} decodedStr
+ */
 function bibtexDecode(encodedStr) {
 	const germanChars = [
 		'{\\"u};ü',
@@ -232,7 +232,6 @@ function bibtexParse(rawBibtexStr) {
 	return bibtexEntryArray;
 }
 
-
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -250,6 +249,7 @@ function run() {
 	const matchAuthorsInEtAl = $.getenv("match_authors_in_etal") === "1";
 	const matchShortYears = $.getenv("match_year_type").includes("short");
 	const matchFullYears = $.getenv("match_year_type").includes("full");
+	const openEntriesIn = $.getenv("open_entries_in");
 
 	const libraryPath = $.getenv("bibtex_library_path");
 	const secondaryLibraryPath = $.getenv("secondary_library_path");
@@ -376,7 +376,7 @@ function run() {
 		if (keywords.length) largeTypeInfo += "\n\nkeywords: " + keywords.join(", ");
 
 		// // Indicate 2nd library (this set via .map thisAry)
-		const secondLibraryIcon = this.second ? "2️⃣ " : "";
+		const secondLibraryIcon = !this.isFirstLibrary ? "2️⃣ " : "";
 
 		return {
 			title: secondLibraryIcon + shorterTitle,
@@ -397,7 +397,19 @@ function run() {
 					arg: url,
 					subtitle: urlSubtitle,
 				},
-				shift: { valid: this.second },
+				// opening in second library not implemented yet
+				shift: {
+					valid: this.isFirstLibrary,
+					subtitle: this.isFirstLibrary
+						? `⇧: Open in ${openEntriesIn}`
+						: "⛔: Opening entries in 2nd library not yet implemented.",
+				},
+				"fn+cmd": {
+					valid: this.isFirstLibrary,
+					subtitle: this.isFirstLibrary
+						? "⌘+fn: Delete entry from BibTeX file. (⚠️ Experimental & irreversible)"
+						: "⛔: Deleting entries in 2nd library not yet implemented.",
+				},
 			},
 		};
 	}
@@ -407,12 +419,12 @@ function run() {
 	const firstBibtex = readFile(libraryPath);
 	const firstBibtexEntryArray = bibtexParse(firstBibtex)
 		.reverse() // reverse, so recent entries come first
-		.map(convertToAlfredItems, { second: false });
+		.map(convertToAlfredItems, { isFirstLibrary: true });
 
 	const secondBibtex = fileExists(secondaryLibraryPath) ? readFile(secondaryLibraryPath) : "";
 	const secondBibtexEntryArray = bibtexParse(secondBibtex)
-		.reverse() 
-		.map(convertToAlfredItems, { second: true });
+		.reverse()
+		.map(convertToAlfredItems, { isFirstLibrary: false });
 
 	return JSON.stringify({ items: [...firstBibtexEntryArray, ...secondBibtexEntryArray] });
 }

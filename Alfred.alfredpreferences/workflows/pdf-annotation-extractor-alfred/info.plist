@@ -441,7 +441,7 @@ Extract Annotations as Markdown, insert Pandoc Citations with correct page numbe
 Please cite this software project as (APA):
 
 `Grieser, C. (2023). PDF Annotation Extractor [Computer software]. https://github.com/chrisgrieser/pdf-annotation-extractor-alfred`
-
+  
 For other citation styles, use the following metadata:
 - [Citation File Format](https://github.com/chrisgrieser/pdf-annotation-extractor-alfred/blob/main/CITATION.cff)
 - [BibTeX](https://github.com/chrisgrieser/pdf-annotation-extractor-alfred/blob/main/CITATION.bib)
