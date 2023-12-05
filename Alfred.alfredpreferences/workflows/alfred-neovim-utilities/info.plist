@@ -206,29 +206,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>7572486D-59C9-427F-8DF0-A60B6F876F57</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F9AD00C3-C893-400C-ACEC-04513C20CC03</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>04FB2B7F-2F25-443A-98EC-3D62C8EFBF34</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>⌥: Copy URL</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>79F25308-2C64-400B-AC1D-C1FD5FC840DF</key>
 		<array>
 			<dict>
@@ -653,76 +630,6 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>{var:neovim_subreddit_search}</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/nvim-reddit.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Latest Posts from r/neovim</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>7572486D-59C9-427F-8DF0-A60B6F876F57</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>F9AD00C3-C893-400C-ACEC-04513C20CC03</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
 				<string>{var:plugin_search}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
@@ -821,25 +728,6 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>79F25308-2C64-400B-AC1D-C1FD5FC840DF</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>https://github.com/{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>04FB2B7F-2F25-443A-98EC-3D62C8EFBF34</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -992,10 +880,6 @@ Run `:nvim` once to create the local cache for the `:h` search.
 - `mason`: Search for tools available via [mason.nvim](https://github.com/williamboman/mason.nvim).
 - `ip`: Search for plugins (and mason tools) installed locally on your device. Mnemonic: `[i]installed [p]lugins`. The modifiers (&lt;kbd&gt;⌘⌥⌃⇧&lt;/kbd&gt;) from the plugin-search also apply for this command. In addition:
 	- &lt;kbd&gt;fn⏎&lt;/kbd&gt;: Open the local directory of the plugin in Finder.
-- `nvr`: Shows the latest posts from the neovim subreddit. 
-	- &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the post in the browser.
-	- &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the URL to the clipboard.
-	- &lt;kbd&gt;⇧&lt;/kbd&gt;: Show author of the post.
 - `:old`: Displays and searches your `:oldfiles`. Opens them in the system's default editor for the respective filetype. (To open them directly in neovim, you need a neovim GUI with `Open With…` capability though.)
 - `:nvim`: Creates the local cache for the online :help search. Run it once in a while, when there have been updates to the online docs.
 
@@ -1017,17 +901,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>35</real>
 			<key>ypos</key>
 			<real>475</real>
-		</dict>
-		<key>04FB2B7F-2F25-443A-98EC-3D62C8EFBF34</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>note</key>
-			<string>copy url</string>
-			<key>xpos</key>
-			<real>830</real>
-			<key>ypos</key>
-			<real>580</real>
 		</dict>
 		<key>14ECFC26-C670-4D39-9A5C-C24B452554F2</key>
 		<dict>
@@ -1119,17 +992,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>660</real>
 			<key>ypos</key>
 			<real>20</real>
-		</dict>
-		<key>7572486D-59C9-427F-8DF0-A60B6F876F57</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>note</key>
-			<string>reddit search</string>
-			<key>xpos</key>
-			<real>655</real>
-			<key>ypos</key>
-			<real>455</real>
 		</dict>
 		<key>79F25308-2C64-400B-AC1D-C1FD5FC840DF</key>
 		<dict>
@@ -1230,15 +1092,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>480</real>
 			<key>ypos</key>
 			<real>505</real>
-		</dict>
-		<key>F9AD00C3-C893-400C-ACEC-04513C20CC03</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>xpos</key>
-			<real>830</real>
-			<key>ypos</key>
-			<real>455</real>
 		</dict>
 		<key>FB617FEA-F94F-4A13-8327-5EC723FD66AB</key>
 		<dict>
@@ -1422,7 +1275,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.6.4</string>
+	<string>1.7.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
