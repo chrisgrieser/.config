@@ -1,6 +1,6 @@
 {
   "Comment.nvim": { "branch": "master", "commit": "0236521ea582747b58869cb72f70ccfa967d2e89" },
-  "LuaSnip": { "branch": "master", "commit": "4b451141a4239c24cf91048bdb10dfcb4c27608a" },
+  "LuaSnip": { "branch": "master", "commit": "954c81b53989097faaff0fabc11c29575288c3e1" },
   "NotebookNavigator.nvim": { "branch": "main", "commit": "6579ca1969327f311371c48fe85964ace68d542f" },
   "aerial.nvim": { "branch": "master", "commit": "88764566f96bf900a64b3dcd6d178cfb69b1c8ce" },
   "auto-save.nvim": { "branch": "main", "commit": "e98cafef75271ec83dc84c933f124ab1bb675ef8" },
@@ -50,7 +50,7 @@
   "nvim-early-retirement": { "branch": "main", "commit": "1c89c003e4eeba3ac38482e62d29d66a42549ac6" },
   "nvim-genghis": { "branch": "main", "commit": "884d98393d434e8e284bb7b32a9144b3dc6823e1" },
   "nvim-hlslens": { "branch": "main", "commit": "9bd8d6b155fafc59da18291858c39f115464287c" },
-  "nvim-lint": { "branch": "master", "commit": "f20f35756e74b91c0b4340d01fee22422bdffefa" },
+  "nvim-lint": { "branch": "master", "commit": "33115e02139bb20762b5559d9cfc19ad175218ec" },
   "nvim-lspconfig": { "branch": "master", "commit": "cf3dd4a290084a868fac0e2e876039321d57111c" },
   "nvim-navic": { "branch": "master", "commit": "8649f694d3e76ee10c19255dece6411c29206a54" },
   "nvim-notify": { "branch": "master", "commit": "e4a2022f4fec2d5ebc79afa612f96d8b11c627b3" },
