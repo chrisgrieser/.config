@@ -375,7 +375,7 @@ function run() {
 		if (keywords.length) largeTypeInfo += "\n\nkeywords: " + keywords.join(", ");
 
 		// Indicate 2nd library
-		const isSecondLibrary = this === true; // set via .map thisArg
+		const isSecondLibrary = this === "second"; // set via .map thisArg
 		const secondLibraryIcon = isSecondLibrary ? "2️⃣ " : "";
 
 		return {
