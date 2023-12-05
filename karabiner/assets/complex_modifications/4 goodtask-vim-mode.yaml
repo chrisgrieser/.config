@@ -62,7 +62,7 @@ rules:
           - *enter-edit-mode
           - key_code: return_or_enter
           # FIX text field not getting focus
-          - { key_code: vk_none, hold_down_milliseconds: 150 }
+          - { key_code: vk_none, hold_down_milliseconds: 200 }
           - { key_code: tab }
         conditions: [*goodtask-app, *goodtask-normal-mode]
       # Enter Normal Mode

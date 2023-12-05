@@ -30,7 +30,7 @@ while true; do
 		sed -e 's/partly-cloudy-day//' -e 's/partly-cloudy-night//' \
 			-e 's/rain//' -e 's/cloudy//' -e 's/wind//' -e 's/fog/󰖑/' \
 			-e 's/hail/󰖒/' -e 's/snow//' -e 's/clear-day//' \
-			-e 's/clear-night//' -e 's/thunderstorm//'
+			-e 's/clear-night//' -e 's/thunderstorm//' -e 's/sleet//'
 	)
 	[[ -n "$icon" || $i -gt 5 ]] && break
 	i=$((i + 1))
