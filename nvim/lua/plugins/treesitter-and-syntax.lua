@@ -16,6 +16,7 @@ local tsConfig = {
 			"markdown", -- indentation at bullet points is worse
 			"lua", -- `o` sometimes with weird indentation
 			"javascript", -- `o` sometimes with weird indentation
+			"typescript", -- `o` sometimes with weird indentation
 			"yaml",
 		},
 	},
@@ -24,6 +25,13 @@ local tsConfig = {
 	-- TREESITTER PLUGINS
 
 	textobjects = {
+		move = { -- move to next function
+			enable = true,
+			set_jumps = true,
+			disable = { "markdown" }, -- using
+			goto_next_start = { ["<C-j>"] = "@function.outer" },
+			goto_previous_start = { ["<C-k>"] = "@function.outer" },
+		},
 		select = { -- textobj definitions
 			enable = true,
 			lookahead = true,
