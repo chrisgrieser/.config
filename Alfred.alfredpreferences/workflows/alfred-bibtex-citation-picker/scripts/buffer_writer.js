@@ -88,69 +88,72 @@ class BibtexEntry {
 	}
 }
 
-const decodePairs = {
-	// German Umlaute
-	// '{\\"u}': 'ü',
-	// '{\\"a}': 'ä',
-	// '{\\"o}': 'ö',
-	// '{\\"U}': 'Ü',
-	// '{\\"A}': 'Ä',
-	// '{\\"O}': 'Ö',
-	// '\\"u': 'ü',
-	// '\\"a': 'ä',
-	// '\\"o': 'ö',
-	// '\\"U': 'Ü',
-	// '\\"A': 'Ä',
-	// '\\"O': 'Ö',
-	// "\\ss": "ß",
-	// "{\\ss}": "ß",
-	//
-	// // German (Bookends)
-	// "\\''A": "Ä",
-	// "\\''O": "Ö",
-	// "\\''U": "Ü",
-	// "\\''a": "ä",
-	// "\\''o": "ö",
-	// "\\''u": "ü",
-	//
-	// // German (bibtex-tidy)
-	// '\\"{O}': 'Ö',
-	// '\\"{o}': 'ö',
-	// '\\"{A}': 'Ä',
-	// '\\"{a}': 'ä',
-	// '\\"{u}': 'ü',
-	// '\\"{U}': 'Ü',
-	// // french chars
-	// "{\\'a}": "á",
-	// "{\\'o}": "ó",
-	// "{\\'e}": "é",
-	// "{\\`{e}}": "é",
-	// "{\\`e}": "é",
-	// "\\'E": "É",
-	// "\\c{c}": "ç",
-	// '\\"{i}': 'ï',
-	// // other chars
-	// "{\\~n}": "ñ",
-	// "\\~a": "ã",
-	// "{\\v c}": "č",
-	// "\\o{}": "ø",
-	// "{\\o}": "ø",
-	// "{\\O}": "Ø",
-	// "\\^{i}": "î",
-	// "\\'\\i": "í",
-	// "{\\'c}": "ć",
-	// '\\"e': 'ë',
-	//
-	// // special chars
-	// "\\&": "&",
-	// "``":'"',
-	// ",,":'"',
-	// "`": "`",
-	// "\\textendash{}": "—",
-	// "---": "—",
-	// "--": "—",
-	// "{	extquotesingle}": "`",
-};
+const germanChars = [
+	'{\\"u};ü',
+	'{\\"a};ä',
+	'{\\"o};ö',
+	'{\\"U};Ü',
+	'{\\"A};Ä',
+	'{\\"O};Ö',
+	'\\"u;ü',
+	'\\"a;ä',
+	'\\"o;ö',
+	'\\"U;Ü',
+	'\\"A;Ä',
+	'\\"O;Ö',
+	"\\ss;ß",
+	"{\\ss};ß",
+
+	// Bookends
+	"\\''A;Ä",
+	"\\''O;Ö",
+	"\\''U;Ü",
+	"\\''a;ä",
+	"\\''o;ö",
+	"\\''u;ü",
+
+	// bibtex-tidy
+	'\\"{O};Ö',
+	'\\"{o};ö',
+	'\\"{A};Ä',
+	'\\"{a};ä',
+	'\\"{u};ü',
+	'\\"{U};Ü',
+];
+const frenchChars = [
+	"{\\'a};á",
+	"{\\'o};ó",
+	"{\\'e};é",
+	"{\\`{e}};é",
+	"{\\`e};é",
+	"\\'E;É",
+	"\\c{c};ç",
+	'\\"{i};ï',
+];
+const otherChars = [
+	"{\\~n};ñ",
+	"\\~a;ã",
+	"{\\v c};č",
+	"\\o{};ø",
+	"{\\o};ø",
+	"{\\O};Ø",
+	"\\^{i};î",
+	"\\'\\i;í",
+	"{\\'c};ć",
+	'\\"e;ë',
+];
+const specialChars = [
+	"{\ldots};…",
+	"\\&;&",
+	'``;"',
+	',,;"',
+	"`;'",
+	"\\textendash{};—",
+	"---;—",
+	"--;—",
+	"{	extquotesingle};'",
+];
+const decodePair = [...germanChars, ...frenchChars, ...otherChars, ...specialChars];
 
 /**
  * @param {string} encodedStr
@@ -158,8 +161,9 @@ const decodePairs = {
  */
 function bibtexDecode(encodedStr) {
 	let decodedStr = encodedStr;
-	for (const bibtex of decodePairs) {
-		decodedStr = decodedStr.replaceAll(bibtex, decodePairs[bibtex]);
+	for (const pair of decodePair) {
+		const half = pair.split(";");
+		decodedStr = decodedStr.replaceAll(half[0], half[1]);
 	}
 	return decodedStr;
 }
