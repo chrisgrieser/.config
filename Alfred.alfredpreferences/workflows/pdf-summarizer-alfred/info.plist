@@ -295,7 +295,7 @@ Instead of entering the API key directly, you can also enter ".zshenv" into the 
 Please cite this software project as (APA):
 
 `Grieser, C. (2023). PDF summarizer for Alfred [Computer software]. https://github.com/chrisgrieser/pdf-summarizer-alfred`
-
+  
 For other citation styles, use the following metadata:
 - [Citation File Format](https://github.com/chrisgrieser/pdf-summarizer-alfred/blob/main/CITATION.cff)
 - [BibTeX](https://github.com/chrisgrieser/pdf-summarizer-alfred/blob/main/CITATION.cff)
