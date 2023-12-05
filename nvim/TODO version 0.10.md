@@ -1,6 +1,6 @@
 <!-- LTeX: enabled=false -->
 - `stevanmilic/nvim-lspimport` can now be used
-- nvim new default theme
+- nvim new default theme -> light theme?
 - satellite.nvim can now be updated.
 - biome can now format via lsp <https://github.com/neovim/nvim-lspconfig/issues/2807>
 - vim.system

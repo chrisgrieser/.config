@@ -80,7 +80,6 @@ function run() {
 	// yes, data must be parsed twice, since that is how the cache is saved by homebrew
 	const casksData = JSON.parse(JSON.parse(readFile(caskJson)).payload);
 	const formulaData = JSON.parse(JSON.parse(readFile(formulaJson)).payload);
-	writeToFile("/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/File Hub/form.json", formulaData)
 
 	// 2. INSTALL DATA (determined live every run)
 	// PERF `ls` quicker than `brew list` or the API
@@ -110,17 +109,23 @@ function run() {
 	const caskIcon = "🛢️";
 	const formulaIcon = "🍺";
 	const caveatIcon = "ℹ️";
+	const installedIcon = "✅";
+	const deprecatedIcon = "⚠️";
 
 	//───────────────────────────────────────────────────────────────────────────
 
 	/** @type{AlfredItem[]} */
 	const casks = casksData.map((/** @type {Cask} */ cask) => {
 		const name = cask.token;
-		const installedIcon = installedBrews.includes(name) ? " ✅" : "";
+
+		let icons = "";
+		if (installedBrews.includes(name)) icons += " " + installedIcon;
+		if (cask.deprecated) icons += " " + deprecatedIcon;
+
 		const downloads = caskDownloads[name] ? `${caskDownloads[name][0].count}↓ ` : "";
 		const desc = cask.desc ? "·  " + cask.desc : ""; // default to empty string instead of "null"
 		return {
-			title: name + installedIcon,
+			title: name + icons,
 			match: alfredMatcher(name) + desc,
 			subtitle: `${caskIcon} ${downloads} ${desc}`,
 			arg: `--cask ${name}`,
@@ -142,7 +147,9 @@ function run() {
 	/** @type{AlfredItem[]} */
 	const formulas = formulaData.map((/** @type {Formula} */ formula) => {
 		const name = formula.name;
-		const installedIcon = installedBrews.includes(name) ? " ✅" : "";
+		let icons = "";
+		if (installedBrews.includes(name)) icons += " " + installedIcon;
+		if (cask.deprecated) icons += " " + deprecatedIcon;
 		const caveatText = formula.caveats || "";
 		const caveats = caveatText ? caveatIcon + " " : "";
 		const downloads = formulaDownloads[name] ? `${formulaDownloads[name][0].count}↓ ` : "";

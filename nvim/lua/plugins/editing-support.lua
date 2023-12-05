@@ -27,53 +27,6 @@ return {
 			})
 		end,
 	},
-	{ -- toggling between values
-		"monaqa/dial.nvim",
-		keys = {
-			{
-				"+",
-				function() return require("dial.map").inc_normal() end,
-				desc = "󰘂 Dial +",
-				expr = true,
-			},
-			{
-				"ö",
-				function() return require("dial.map").dec_normal() end,
-				desc = "󰘂 Dial -",
-				expr = true,
-			},
-			{
-				"Ö",
-				function() return require("dial.map").inc_normal("toggle_words") end,
-				desc = "󰘂 Toggle",
-				expr = true,
-			},
-		},
-		config = function()
-			local augend = require("dial.augend")
-			local toggle = augend.constant.new
-			require("dial.config").augends:register_group {
-				default = {
-					augend.integer.alias.decimal,
-					augend.constant.alias.bool,
-				},
-				toggle_words = {
-					augend.constant.alias.bool,
-					toggle { elements = { "let", "const" } },
-					toggle { elements = { "and", "or" } },
-					toggle { elements = { "!=", "==" } },
-					toggle { elements = { "!==", "===" } },
-					toggle { elements = { "&&", "||" } },
-					toggle { elements = { "increase", "decrease" }, word = false },
-					toggle { elements = { "enable", "disable" }, word = false },
-					toggle { elements = { "dark", "light" }, word = false },
-					toggle { elements = { "top", "bottom" }, word = false },
-					toggle { elements = { "up", "down" }, word = false },
-					toggle { elements = { "right", "left" }, word = false },
-				},
-			}
-		end,
-	},
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
