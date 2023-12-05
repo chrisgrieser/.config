@@ -19,7 +19,7 @@ on alfred_script(shellCmd)
 
 	if isCd then
 		set dir to text 4 thru -1 of shellCmd
-		set shellCmd to "builtin cd -q " & quoted form of dir & " && clear"
+		set shellCmd to "builtin cd -q " & dir & " && clear"
 	end if
 	if not weztermRunning then
 		tell application "WezTerm" to activate
