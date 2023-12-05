@@ -131,6 +131,13 @@ local formatterConfig = {
 		markdownlint = {
 			prepend_args = { "--config=" .. linterConfig .. "/markdownlint.yaml" },
 		},
+
+		-- PENDING https://github.com/mason-org/mason-registry/pull/3671
+		biome = {
+			stdin = false,
+			args = { "format", "--write", "$FILENAME" },
+		},
+
 		-- stylua: ignore
 		["bibtex-tidy"] = {
 			prepend_args = {
@@ -140,9 +147,9 @@ local formatterConfig = {
 				"--duplicates", "--sort-fields", "--remove-empty-fields", "--omit=month,issn,abstract",
 			},
 			condition = function(ctx)
-				local ignore = vim.fs.basename(ctx.filename) == "main-bibliography.bib"
-				if ignore then u.notify("conform.nvim", "Ignoring main-bibliography.bib.") end
-				return not ignore
+				local biggerThan500Kb = vim.loop.fs_stat(ctx.filename).size > 500 * 1024;
+				if biggerThan500Kb then u.notify("conform.nvim", "Not formatting (file > 500kb).") end
+				return not biggerThan500Kb
 			end,
 		},
 	},
@@ -157,6 +164,11 @@ return {
 		config = function()
 			linterConfigs()
 			lintTriggers()
+			-- stylua: ignore
+			vim.api.nvim_create_user_command("LinterInfo", function()
+				local runningLinters = table.concat(require("lint").get_running(), "\n")
+				vim.notify(runningLinters, vim.log.levels.INFO, { title = "nvim-lint" })
+			end, {})
 		end,
 	},
 	{ -- Formatter integration
@@ -167,15 +179,25 @@ return {
 			{
 				"<D-s>",
 				function()
-					local useLsp = vim.tbl_contains(lspFormattingFiletypes, vim.bo.ft) and "always" or false
+					local useLsp = vim.tbl_contains(lspFormattingFiletypes, vim.bo.ft) and "always"
+						or false
 					require("conform").format {
 						lsp_fallback = useLsp,
 						async = false,
 						callback = vim.cmd.update,
 					}
 				end,
-				mode = { "n", "x" },
 				desc = "󰒕 Format & Save",
+			},
+			{
+				"<D-s>",
+				function()
+					vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
+					vim.cmd.normal { "gq", bang = true }
+					vim.cmd.update()
+				end,
+				desc = "󰒕 Format Selection & Save",
+				mode = "x",
 			},
 		},
 	},
