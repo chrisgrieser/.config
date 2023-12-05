@@ -379,7 +379,7 @@ function run() {
 		const icon = !this.isFirstLibrary ? secondLibIcon : "";
 
 		return {
-			title: secondLibraryIcon + shorterTitle,
+			title: icon + shorterTitle,
 			autocomplete: primaryNames[0],
 			subtitle: namesToDisplay + year + collectionSubtitle + "   " + emojis.join(" "),
 			match: alfredMatcher,
