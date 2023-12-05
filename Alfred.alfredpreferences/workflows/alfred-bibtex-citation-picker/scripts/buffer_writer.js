@@ -376,7 +376,7 @@ function run() {
 		if (keywords.length) largeTypeInfo += "\n\nkeywords: " + keywords.join(", ");
 
 		// // Indicate 2nd library (this set via .map thisAry)
-		const secondLibraryIcon = !this.isFirstLibrary ? "2️⃣ " : "";
+		const secondLibraryIcon = !this.isFirstLibrary ? secondLibIcon : "";
 
 		return {
 			title: secondLibraryIcon + shorterTitle,
