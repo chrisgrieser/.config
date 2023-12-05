@@ -90,7 +90,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>FF00A317-AA2D-40F0-8A56-B22E0426DD6F</string>
+				<string>E0A1EC4B-448F-4EA2-946E-26213FE99F2F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -116,7 +116,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>FF00A317-AA2D-40F0-8A56-B22E0426DD6F</string>
+				<string>E0A1EC4B-448F-4EA2-946E-26213FE99F2F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -194,7 +194,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>FF00A317-AA2D-40F0-8A56-B22E0426DD6F</string>
+				<string>E0A1EC4B-448F-4EA2-946E-26213FE99F2F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -259,7 +259,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>FF00A317-AA2D-40F0-8A56-B22E0426DD6F</string>
+				<string>E0A1EC4B-448F-4EA2-946E-26213FE99F2F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -299,6 +299,29 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>960D6BB0-26F8-46E0-8A9C-2D5387E82C5D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E0A1EC4B-448F-4EA2-946E-26213FE99F2F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B5752B07-6224-4973-AB75-37C85FA22156</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>FF00A317-AA2D-40F0-8A56-B22E0426DD6F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -420,6 +443,25 @@
 			<string>BC55B53D-B9D5-47AC-B2F4-45C6250702DD</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>B5752B07-6224-4973-AB75-37C85FA22156</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -556,6 +598,14 @@
 			<string>FF00A317-AA2D-40F0-8A56-B22E0426DD6F</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>E0A1EC4B-448F-4EA2-946E-26213FE99F2F</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1337,6 +1387,17 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>ypos</key>
 			<real>145</real>
 		</dict>
+		<key>B5752B07-6224-4973-AB75-37C85FA22156</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>note</key>
+			<string>copy error</string>
+			<key>xpos</key>
+			<real>1100</real>
+			<key>ypos</key>
+			<real>125</real>
+		</dict>
 		<key>B959FF0C-60CD-4ED2-855D-66F63FE3E7F7</key>
 		<dict>
 			<key>colorindex</key>
@@ -1364,6 +1425,15 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>ypos</key>
 			<real>655</real>
 		</dict>
+		<key>E0A1EC4B-448F-4EA2-946E-26213FE99F2F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>1010</real>
+			<key>ypos</key>
+			<real>265</real>
+		</dict>
 		<key>FA43383A-8BDF-4F83-BFD0-624DE8F43343</key>
 		<dict>
 			<key>colorindex</key>
@@ -1389,9 +1459,9 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>note</key>
 			<string>show error messages</string>
 			<key>xpos</key>
-			<real>1000</real>
+			<real>1100</real>
 			<key>ypos</key>
-			<real>235</real>
+			<real>255</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
