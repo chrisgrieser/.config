@@ -314,6 +314,7 @@ function run() {
 			litNotePath = litNoteFolder + "/" + citekey + ".md";
 			litNoteMatcher.push(litNoteFilterStr);
 		}
+
 		// PDFs
 		const hasPdf = pdfFolderCorrect && pdfArray.includes(citekey);
 		const pdfMatcher = [];
@@ -374,9 +375,8 @@ function run() {
 		if (abstract) largeTypeInfo += "\n\n" + abstract;
 		if (keywords.length) largeTypeInfo += "\n\nkeywords: " + keywords.join(", ");
 
-		// Indicate 2nd library
-		const isSecondLibrary = this === "second"; // set via .map thisArg
-		const secondLibraryIcon = isSecondLibrary ? "2️⃣ " : "";
+		// // Indicate 2nd library (this set via .map thisAry)
+		const secondLibraryIcon = this.second ? "2️⃣ " : "";
 
 		return {
 			title: secondLibraryIcon + shorterTitle,
@@ -397,19 +397,22 @@ function run() {
 					arg: url,
 					subtitle: urlSubtitle,
 				},
+				shift: { valid: this.second },
 			},
 		};
-	} 
+	}
+
+	//───────────────────────────────────────────────────────────────────────────
 
 	const firstBibtex = readFile(libraryPath);
 	const firstBibtexEntryArray = bibtexParse(firstBibtex)
 		.reverse() // reverse, so recent entries come first
-		.map(convertToAlfredItems, true);
+		.map(convertToAlfredItems, { second: false });
 
 	const secondBibtex = fileExists(secondaryLibraryPath) ? readFile(secondaryLibraryPath) : "";
 	const secondBibtexEntryArray = bibtexParse(secondBibtex)
-		.reverse() // reverse, so recent entries come first
-		.map(convertToAlfredItems, false);
+		.reverse() 
+		.map(convertToAlfredItems, { second: true });
 
-	return JSON.stringify({ items: [firstBibtexEntryArray, ...secondBibtexEntryArray] });
+	return JSON.stringify({ items: [...firstBibtexEntryArray, ...secondBibtexEntryArray] });
 }

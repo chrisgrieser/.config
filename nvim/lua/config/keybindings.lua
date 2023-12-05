@@ -120,7 +120,7 @@ keymap({ "n", "x" }, "gm", "ddpkJ", { desc = "󰗈 Merge line down" })
 keymap({ "n", "x" }, "gM", "gJ", { desc = "󰗈 Merge line up (+ trim)" })
 
 keymap({ "n", "x" }, "+", "<C-a>")
-keymap({ "n", "x" }, "ä", "<C-x>")
+keymap({ "n", "x" }, "ö", "<C-x>")
 
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
