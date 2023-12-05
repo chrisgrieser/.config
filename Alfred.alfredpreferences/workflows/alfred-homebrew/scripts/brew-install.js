@@ -47,6 +47,14 @@ function cacheIsOutdated(path) {
 	return cacheAgeDays > cacheAgeThresholdDays;
 }
 
+/** @param {string} url */
+function httpRequest(url) {
+	const queryURL = $.NSURL.URLWithString(url);
+	const requestData = $.NSData.dataWithContentsOfURL(queryURL);
+	const requestString = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
+	return requestString;
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 // MAIN DATA
 /** @typedef {object} Formula
@@ -71,17 +79,18 @@ function run() {
 
 	// 1. MAIN DATA (already cached by homebrew)
 	// DOCS https://formulae.brew.sh/docs/api/ & https://docs.brew.sh/Querying-Brew
-	// these files contain as payload the API response of casks and formulas; they
+	// these files contain the API response of casks and formulas as payload; they
 	// are updated on each `brew update`. Since they are effectively caches,
-	// there is no need create caches on our own.
+	// there is no need create caches of our own.
 	const caskJson = app.pathTo("home folder") + "/Library/Caches/Homebrew/api/cask.jws.json";
 	const formulaJson = app.pathTo("home folder") + "/Library/Caches/Homebrew/api/formula.jws.json";
 	if (!fileExists(formulaJson) || !fileExists(caskJson)) app.doShellScript("brew update");
-	// yes, data must be parsed twice, since that is how the cache is saved by homebrew
+
+	// SIC data must be parsed twice, since that is how the cache is saved by homebrew
 	const casksData = JSON.parse(JSON.parse(readFile(caskJson)).payload);
 	const formulaData = JSON.parse(JSON.parse(readFile(formulaJson)).payload);
 
-	// 2. INSTALL DATA (determined live every run)
+	// 2. LOCAL INSTALLATION DATA (determined live every run)
 	// PERF `ls` quicker than `brew list` or the API
 	const installedBrews = app
 		.doShellScript('cd "$(brew --prefix)" ; ls -1 ./Cellar ; ls -1 ./Caskroom')
@@ -93,17 +102,17 @@ function run() {
 	const formula90d = $.getenv("alfred_workflow_cache") + "/formulaDownloads90d.json";
 	if (cacheIsOutdated(cask90d)) {
 		console.log("Updating download count cache…");
-		const caskDownloadApi =
-			"https://formulae.brew.sh/api/analytics/cask-install/homebrew-cask/90d.json";
-		const caskDownloadResponse = app.doShellScript(`curl -sL "${caskDownloadApi}"`);
-		const formulaDownloadApi =
-			"https://formulae.brew.sh/api/analytics/install-on-request/homebrew-core/90d.json";
-		const formulaDownloadResponse = app.doShellScript(`curl -sL "${formulaDownloadApi}"`);
-		writeToFile(cask90d, caskDownloadResponse);
-		writeToFile(formula90d, formulaDownloadResponse);
+		const caskDownloads = httpRequest(
+			"https://formulae.brew.sh/api/analytics/cask-install/homebrew-cask/90d.json",
+		);
+		const formulaDownloads = httpRequest(
+			"https://formulae.brew.sh/api/analytics/install-on-request/homebrew-core/90d.json",
+		);
+		writeToFile(cask90d, caskDownloads);
+		writeToFile(formula90d, formulaDownloads);
 	}
 	const caskDownloads = JSON.parse(readFile(cask90d)).formulae;
-	const formulaDownloads = JSON.parse(readFile(formula90d)).formulae;
+	const formulaDownloads = JSON.parse(readFile(formula90d)).formulae; // SIC not .casks
 
 	// 4. ICONS
 	const caskIcon = "🛢️";
@@ -120,7 +129,7 @@ function run() {
 
 		let icons = "";
 		if (installedBrews.includes(name)) icons += " " + installedIcon;
-		if (cask.deprecated) icons += " " + deprecatedIcon;
+		if (cask.deprecated) icons += `   ${deprecatedIcon} [deprecated]`;
 
 		const downloads = caskDownloads[name] ? `${caskDownloads[name][0].count}↓ ` : "";
 		const desc = cask.desc ? "·  " + cask.desc : ""; // default to empty string instead of "null"
@@ -149,14 +158,15 @@ function run() {
 		const name = formula.name;
 		let icons = "";
 		if (installedBrews.includes(name)) icons += " " + installedIcon;
-		if (cask.deprecated) icons += " " + deprecatedIcon;
+		if (formula.deprecated) icons += `   ${deprecatedIcon} deprecated`;
+
 		const caveatText = formula.caveats || "";
 		const caveats = caveatText ? caveatIcon + " " : "";
 		const downloads = formulaDownloads[name] ? `${formulaDownloads[name][0].count}↓ ` : "";
 		const desc = formula.desc ? "·  " + formula.desc : ""; // no "null" as desc
 
 		return {
-			title: name + installedIcon,
+			title: name + icons,
 			match: alfredMatcher(name) + desc,
 			subtitle: `${formulaIcon} ${caveats}${downloads} ${desc}`,
 			arg: `--formula ${name}`,
@@ -182,5 +192,8 @@ function run() {
 	const duration = (+new Date() - timelogStart) / 1000;
 	console.log(`Total: ${formulas.length} formulas, ${casks.length} casks (${duration}s)`);
 
+	// PERF merging via spread operator performs slightly faster than
+	// concatenation with the number array elements cp.
+	// https://javascript.plainenglish.io/efficiently-merging-arrays-in-javascript-32993788a8b2
 	return JSON.stringify({ items: [...casks, ...formulas] });
 }
