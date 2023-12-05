@@ -255,16 +255,23 @@ serverConfigs.ltex = {
 	},
 	on_attach = function()
 		-- have `zg` update ltex
-		vim.keymap.set("n", "zg", function()
+		vim.keymap.set({"n", "x"}, "zg", function()
+			local word
+			if vim.fn.mode() == "n" then
+				word = vim.fn.expand("<cword>")
+				u.normal("zg") -- regular `zg` to add to spellfile
+			else
+				u.normal('"zy') -- copy to register z
+				word = vim.fn.getreg("z")
+				u.normal("gvzg") -- reselect & regular `zg` to add to spellfile
+			end
 			local ltex = vim.lsp.get_active_clients({ name = "ltex" })[1]
-			local word = vim.fn.expand("<cword>")
 			table.insert(ltex.config.settings.ltex.dictionary["en-US"], word)
 			vim.lsp.buf_notify(
 				0,
 				"workspace/didChangeConfiguration",
 				{ settings = ltex.config.settings }
 			)
-			u.normal("zg") -- add to spellfile, which is used as dictionary
 		end, { desc = "󰓆 Add Word", buffer = true })
 
 		-- Disable in Obsidian

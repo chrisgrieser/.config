@@ -161,7 +161,7 @@ local function telescopeConfig()
 				path_display = filenameFirst,
 				prompt_prefix = "󰝰 ",
 				-- FIX using the default find command from telescope is somewhat buggy,
-				-- e.g. not respecting /fd/ignore
+				-- e.g. not respecting `~/.config/fd/ignore`
 				find_command = { "fd", "--type=file", "--type=symlink" },
 				mappings = { i = findFileMappings },
 				follow = false,
