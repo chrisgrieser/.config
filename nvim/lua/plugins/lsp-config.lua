@@ -22,6 +22,7 @@ vim.g.lspToMasonMap = {
 	taplo = "taplo", -- toml
 	tsserver = "typescript-language-server",
 	yamlls = "yaml-language-server",
+	vale_ls = "vale-ls",
 }
 
 --------------------------------------------------------------------------------
@@ -255,7 +256,7 @@ serverConfigs.ltex = {
 	},
 	on_attach = function()
 		-- have `zg` update ltex
-		vim.keymap.set({"n", "x"}, "zg", function()
+		vim.keymap.set({ "n", "x" }, "zg", function()
 			local word
 			if vim.fn.mode() == "n" then
 				word = vim.fn.expand("<cword>")
@@ -281,6 +282,31 @@ serverConfigs.ltex = {
 		end, 500)
 	end,
 }
+
+
+-- FIX needs to be set, since init_option configPath is ignored
+vim.env.VALE_CONFIG_PATH = u.linterConfigFolder .. "/vale/vale.ini"
+
+-- VALE
+-- DOCS https://vale.sh/docs/integrations/guide/#vale-ls
+serverConfigs.vale_ls = {
+	init_options = {
+		installVale = true, -- needs to be set, since lspconfig disables it
+		-- configPath = u.linterConfigFolder .. "/vale/vale.ini",
+		syncOnStartup = false,
+	},
+	-- just needs any root directory to work
+	root_dir = function() return os.getenv("HOME") end,
+}
+
+-- TYPOS PENDING bugfixes for multi-workspace
+-- DOCS https://github.com/tekumara/typos-vscode#settings
+-- serverConfigs.typos_lsp = {
+-- 	init_options = {
+-- 		diagnosticSeverity = "information",
+-- 	},
+-- }
+--------------------------------------------------------------------------------
 
 -- DOCS https://github.com/redhat-developer/yaml-language-server/tree/main#language-server-settings
 serverConfigs.yamlls = {
