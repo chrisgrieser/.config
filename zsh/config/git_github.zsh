@@ -35,7 +35,7 @@ ZSH_HIGHLIGHT_REGEXP+=($'\\\\`[^`]*\\\\`' 'fg=cyan,bold')
 
 # highlight conventional commits
 ZSH_HIGHLIGHT_REGEXP+=(
-'(feat|fix|test|perf|build|ci|revert|refactor|chore|docs|break|style|improv)(\(.+\))?(\\?\!)?:'
+	'(feat|fix|test|perf|build|ci|revert|refactor|chore|docs|break|style|improv)(\(.+\))?(\\?\!)?:'
 	'fg=magenta,bold'
 )
 
@@ -61,6 +61,11 @@ function gc {
 		printf "\033[1;36mPush: \033[0m" && git push
 }
 
+function gC {
+	git diff --staged --quiet && git add --all # if no staged changes, stage all
+	git commit -m "$1"
+}
+
 # completions for it
 _gc() {
 	((CURRENT != 2)) && return # only complete first word
@@ -71,6 +76,7 @@ _gc() {
 	compadd "${expl[@]}" -P'"' -S":" -- "${cc[@]}"
 }
 compdef _gc gc
+compdef _gc gC
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -111,7 +117,9 @@ function grem {
 	git branch --all --verbose --verbose
 	echo
 	git remote --verbose
-	printf "\e[1;34mgh\e[0m default repo: \e[1;31m" && gh repo set-default --view ; printf "\e[0m"
+	printf "\e[1;34mgh\e[0m default repo: \e[1;31m" &&
+		gh repo set-default --view && 
+		printf "\e[0m"
 }
 
 # Github Url: open & copy url
