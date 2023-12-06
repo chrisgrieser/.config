@@ -42,7 +42,7 @@ local function repoSync(repo)
 			if exitCode == 0 then
 				table.insert(M.syncedRepos, repo)
 			else
-				local msg = ("⚠️️%s %s Sync: %s"):format(repo.icon, repo.name, stdErr)
+				local msg = ("⚠️️ %s %s Sync: %s"):format(repo.icon, repo.name, stdErr)
 				print(msg)
 				notify(msg)
 			end

@@ -7,10 +7,10 @@
 	<key>excluded_devices</key>
 	<string>Mac mini Office</string>
 	<key>network_keyword</key>
-	<string>nn</string>
+	<string>nnn</string>
 	<key>process_keyword</key>
 	<string>ppp||kill</string>
 	<key>volume_keyword</key>
-	<string>vv</string>
+	<string>vvv</string>
 </dict>
 </plist>
