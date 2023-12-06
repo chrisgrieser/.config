@@ -20,8 +20,6 @@
 
 The tree was generated using <https://tree.nathanfriend.io/>
 
-I think this is great.
-
 ## All Installed Plugins
 - [Aasim-A/scrollEOF.nvim](https://github.com/Aasim-A/scrollEOF.nvim)
 - [Exafunction/codeium.vim](https://github.com/Exafunction/codeium.vim)

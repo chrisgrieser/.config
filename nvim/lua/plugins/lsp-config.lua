@@ -284,20 +284,21 @@ serverConfigs.ltex = {
 }
 
 
--- FIX needs to be set, since init_option configPath is ignored
-vim.env.VALE_CONFIG_PATH = u.linterConfigFolder .. "/vale/vale.ini"
 
 -- VALE
 -- DOCS https://vale.sh/docs/integrations/guide/#vale-ls
+-- DOCS https://vale.sh/docs/topics/config#search-process
 serverConfigs.vale_ls = {
 	init_options = {
-		installVale = true, -- needs to be set, since lspconfig disables it
-		-- configPath = u.linterConfigFolder .. "/vale/vale.ini",
+		installVale = true, -- needs to be set, since false by default
 		syncOnStartup = false,
 	},
-	-- just needs any root directory to work
+	-- just needs any root directory to work, we are providing the config already
 	root_dir = function() return os.getenv("HOME") end,
 }
+
+-- FIX needs to be set, since init_option configPath is ignored
+vim.env.VALE_CONFIG_PATH = u.linterConfigFolder .. "/vale/vale.ini"
 
 -- TYPOS PENDING bugfixes for multi-workspace
 -- DOCS https://github.com/tekumara/typos-vscode#settings
