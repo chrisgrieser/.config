@@ -5,8 +5,8 @@ local linterConfig = require("config.utils").linterConfigFolder
 local linters = {
 	lua = {},
 	css = { "stylelint" },
-	sh = { "zsh", "shellcheck" },
-	markdown = { "markdownlint" },
+	sh = { "shellcheck" },
+	markdown = { "vale" },
 	python = { "pylint" },
 	yaml = {},
 	json = {},
@@ -92,15 +92,9 @@ local function linterConfigs()
 	lint.linters_by_ft = linters
 
 	lint.linters.shellcheck.args = { "--shell=bash", "--format=json", "--external-sources", "-" }
-	lint.linters.vale.args =
-		{ "--output=JSON", "--ext=.md", "--no-exit", "--config=" .. linterConfig .. "/vale/vale.ini" }
 	lint.linters["editorconfig-checker"].args =
 		{ "--no-color", "--config=" .. linterConfig .. "/editorconfig-checker-rc.json" }
-	lint.linters.markdownlint.args = {
-		"--disable=no-trailing-spaces", -- not disabled in config, so it's enabled for formatting
-		"--disable=no-multiple-blanks",
-		"--config=" .. linterConfig .. "/markdownlint.yaml",
-	}
+	vim.env.VALE_CONFIG_PATH = u.linterConfigFolder .. "/vale/vale.ini"
 end
 
 local function lintTriggers()
