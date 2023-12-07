@@ -4,7 +4,7 @@ local linterConfig = require("config.utils").linterConfigFolder
 
 local linters = {
 	sh = { "shellcheck" }, -- PENDING https://github.com/bash-lsp/bash-language-server/issues/1064
-	markdown = { "markdownlint", "vale" }, -- PENDING https://github.com/errata-ai/vale-ls/issues/8
+	markdown = { "vale" }, -- PENDING https://github.com/errata-ai/vale-ls/issues/8
 }
 
 local formatters = {
@@ -75,11 +75,6 @@ local function linterConfigs()
 	lint.linters_by_ft = linters
 
 	lint.linters.shellcheck.args = { "--shell=bash", "--format=json", "--external-sources", "-" }
-	lint.linters.markdownlint.args = {
-		"--disable=no-trailing-spaces", -- not disabled in config, so it's enabled for formatting
-		"--disable=no-multiple-blanks",
-		"--config=" .. linterConfig .. "/markdownlint.yaml",
-	}
 
 	vim.env.VALE_CONFIG_PATH = u.linterConfigFolder .. "/vale/vale.ini"
 end

@@ -374,7 +374,7 @@ return {
 					})
 					telescope("import")
 				end,
-				desc = { " Add Import" },
+				desc = "󰋺 Add Import",
 			},
 		},
 		config = function() require("telescope").load_extension("import") end,
