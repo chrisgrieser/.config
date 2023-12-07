@@ -129,7 +129,7 @@ return {
 			-- stylua: ignore end
 
 			{ -- delete surrounding indentation
-				"dsi",
+				"dsii",
 				function()
 					require("various-textobjs").indentation("outer", "outer")
 					local indentationFound = vim.fn.mode():find("V") -- when textobj is found, will switch to visual line mode
@@ -143,8 +143,8 @@ return {
 				end,
 				desc = " Delete surrounding indent",
 			},
-			{ -- yank surrounding indentation
-				"ysi",
+			{ -- yank surrounding inner indentation
+				"ysii", -- `ysi` would conflict with `ysib` and other textobs
 				function()
 					-- identify start- and end-border
 					local startPos = vim.api.nvim_win_get_cursor(0)
