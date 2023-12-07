@@ -354,4 +354,26 @@ return {
 			},
 		},
 	},
+	{ -- Add imports (requires `rg`)
+		"piersolenski/telescope-import.nvim",
+		dependencies = "nvim-telescope/telescope.nvim",
+		keys = {
+			{
+				"<leader>i",
+				function()
+					-- add syntax highlighting
+					-- PENDING https://github.com/piersolenski/telescope-import.nvim/pull/19
+					local currentFiletye = vim.bo.filetype
+					vim.api.nvim_create_autocmd("FileType", {
+						pattern = "TelescopeResults",
+						once = true, -- do not affect other Telescope windows
+						callback = function() vim.bo.filetype = currentFiletye end,
+					})
+					telescope("import")
+				end,
+				desc = { " Add Import" },
+			},
+		},
+		config = function() require("telescope").load_extension("import") end,
+	},
 }
