@@ -22,7 +22,7 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 // biome-ignore lint/correctness/noUnusedVariables: <explanation>
 function run(argv) {
 	const localRepos = argv[0];
-	const sfPath = localRepos + "/shimmering-focus/source.css";
+	const sfPath = localRepos + "/shimmering-focus/theme.css";
 
 	// GUARD Repo needs to be cloned
 	if (!fileExists(sfPath)) {

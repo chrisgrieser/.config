@@ -22,6 +22,7 @@ vim.g.lspToMasonMap = {
 	tsserver = "typescript-language-server",
 	yamlls = "yaml-language-server",
 	typos_lsp = "typos-lsp",
+	stylelint_lsp = "stylelint-lsp",
 }
 
 --------------------------------------------------------------------------------
@@ -167,7 +168,6 @@ serverConfigs.cssls = {
 			lint = {
 				vendorPrefix = "ignore", -- needed for scrollbars
 				duplicateProperties = "warning",
-				important = "warning",
 				zeroUnits = "warning",
 			},
 		},
@@ -293,7 +293,6 @@ serverConfigs.typos_lsp = {
 }
 
 -- PENDING https://github.com/errata-ai/vale-ls/issues/8
--- VALE
 -- DOCS https://vale.sh/docs/integrations/guide/#vale-ls
 -- DOCS https://vale.sh/docs/topics/config#search-process
 -- serverConfigs.vale_ls = {

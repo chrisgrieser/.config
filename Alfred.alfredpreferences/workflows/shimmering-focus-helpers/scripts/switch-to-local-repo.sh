@@ -2,10 +2,11 @@
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# INFO LOCAL_REPOS and VAULT_PATH are set in .zshenv
+
 # CONFIG
 theme_folder="$VAULT_PATH/.obsidian/themes/Shimmering Focus/"
 remote_ssh="git@github.com:chrisgrieser/shimmering-focus.git"
-# INFO LOCAL_REPOS and VAULT_PATH are set in .zshenv
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -17,7 +18,7 @@ cd "$LOCAL_REPOS" || return 1
 git clone --depth=2 --filter="blob:none" "$remote_ssh"
 
 # switch symlink
-ln -sf "$LOCAL_REPOS/shimmering-focus/source.css" "$theme_folder/theme.css"
+ln -sf "$LOCAL_REPOS/shimmering-focus/theme.css" "$theme_folder/theme.css"
 
 # loop back to open file
 # (dependencies only needed later and therefore installed afterwards)
