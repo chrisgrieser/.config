@@ -4,7 +4,7 @@ local linterConfig = require("config.utils").linterConfigFolder
 
 local linters = {
 	lua = {},
-	css = { "stylelint" },
+	-- css = { "stylelint" },
 	sh = { "shellcheck" },
 	markdown = { "markdownlint", "vale" }, -- PENDING https://github.com/errata-ai/vale-ls/issues/8
 	python = {},
@@ -24,6 +24,7 @@ end
 local formatters = {
 	javascript = { "biome" },
 	typescript = { "biome" },
+	applescript = { "trim_whitespace", "trim_newlines", "squeeze_blanks" },
 	json = { "biome" },
 	lua = { "stylua" },
 	markdown = { "markdown-toc", "markdownlint", "injected" },
