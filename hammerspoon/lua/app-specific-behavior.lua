@@ -8,6 +8,7 @@ local wf = hs.window.filter
 
 --------------------------------------------------------------------------------
 
+---PENDING https://github.com/aome510/spotify-player/issues/315
 ---play/pause spotify
 ---@param toStatus string pause|play
 local function spotifyDo(toStatus)
