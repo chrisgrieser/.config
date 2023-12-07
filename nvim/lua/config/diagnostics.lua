@@ -28,9 +28,7 @@ end
 ---@return string? highlight_group
 local function diagSourceAsSuffix(diag, mode)
 	if not (diag.source or diag.code) then return "" end
-	local source = (diag.source or "")
-		:gsub(" ?%.$", "") -- trailing dot for lua_ls
-		:gsub("%[typos%] typo", "typos") -- typos source name cleanup
+	local source = (diag.source or ""):gsub(" ?%.$", "") -- trailing dot for lua_ls
 	local rule = diag.code and ": " .. diag.code or ""
 
 	if mode == "virtual_text" then

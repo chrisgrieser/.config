@@ -22,7 +22,8 @@ vim.g.lspToMasonMap = {
 	taplo = "taplo", -- toml
 	tsserver = "typescript-language-server",
 	yamlls = "yaml-language-server",
-	vale_ls = "vale-ls",
+	-- vale_ls = "vale-ls",
+	typos_lsp = "typos-lsp",
 }
 
 --------------------------------------------------------------------------------
@@ -283,30 +284,28 @@ serverConfigs.ltex = {
 	end,
 }
 
+-- TYPOS
+-- DOCS https://github.com/tekumara/typos-vscode#settings
+serverConfigs.typos_lsp = {
+	init_options = { diagnosticSeverity = "information" },
+}
 
-
+-- PENDING https://github.com/errata-ai/vale-ls/issues/8
 -- VALE
 -- DOCS https://vale.sh/docs/integrations/guide/#vale-ls
 -- DOCS https://vale.sh/docs/topics/config#search-process
-serverConfigs.vale_ls = {
-	init_options = {
-		installVale = true, -- needs to be set, since false by default
-		syncOnStartup = false,
-	},
-	-- just needs any root directory to work, we are providing the config already
-	root_dir = function() return os.getenv("HOME") end,
-}
-
--- FIX needs to be set, since init_option configPath is ignored
-vim.env.VALE_CONFIG_PATH = u.linterConfigFolder .. "/vale/vale.ini"
-
--- TYPOS PENDING bugfixes for multi-workspace
--- DOCS https://github.com/tekumara/typos-vscode#settings
--- serverConfigs.typos_lsp = {
+-- serverConfigs.vale_ls = {
 -- 	init_options = {
--- 		diagnosticSeverity = "information",
+-- 		installVale = true, -- needs to be set, since false by default
+-- 		syncOnStartup = false,
 -- 	},
+-- 	-- just needs any root directory to work, we are providing the config already
+-- 	root_dir = function() return os.getenv("HOME") end,
 -- }
+--
+-- -- FIX https://github.com/errata-ai/vale-ls/issues/4
+-- vim.env.VALE_CONFIG_PATH = u.linterConfigFolder .. "/vale/vale.ini"
+
 --------------------------------------------------------------------------------
 
 -- DOCS https://github.com/redhat-developer/yaml-language-server/tree/main#language-server-settings
