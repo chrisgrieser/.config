@@ -5,7 +5,6 @@ local u = require("config.utils")
 ---mappings from https://github.com/williamboman/mason-lspconfig.nvim/blob/main/lua/mason-lspconfig/mappings/server.lua
 ---@type table<string, string>
 vim.g.lspToMasonMap = {
-	ast_grep = "ast-grep", -- custom, ast-based linter
 	autotools_ls = "autotools-language-server", -- Makefiles
 	bashls = "bash-language-server", -- used for zsh
 	biome = "biome", -- ts/js/json linter/formatter
@@ -22,7 +21,6 @@ vim.g.lspToMasonMap = {
 	taplo = "taplo", -- toml
 	tsserver = "typescript-language-server",
 	yamlls = "yaml-language-server",
-	-- vale_ls = "vale-ls",
 	typos_lsp = "typos-lsp",
 }
 
@@ -200,14 +198,6 @@ serverConfigs.tsserver = {
 			},
 		},
 	},
-}
-
---------------------------------------------------------------------------------
-
--- AST-GREP
--- currently only rules for lua
-serverConfigs.ast_grep = {
-	filetypes = { "lua" },
 }
 
 --------------------------------------------------------------------------------
