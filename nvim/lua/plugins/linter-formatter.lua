@@ -28,7 +28,7 @@ local formatters = {
 	json = { "biome" },
 	lua = { "stylua" },
 	markdown = { "markdown-toc", "markdownlint", "injected" },
-	css = { "stylelint", "squeeze_blanks" },
+	css = { "squeeze_blanks" },
 	sh = { "shellcheck", "shfmt" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
 	["*"] = { "typos" },
@@ -45,13 +45,12 @@ local lspFormattingFiletypes = {
 --------------------------------------------------------------------------------
 
 local extraInstalls = {
-	"debugpy", -- debugger
+	"debugpy",
 	{ "jedi-language-server", version = "0.41.0" }, -- PENDING https://github.com/pappasam/jedi-language-server/issues/296
 }
 
 local dontInstall = {
 	"jedi-language-server", -- PENDING https://github.com/pappasam/jedi-language-server/issues/296
-	"stylelint", -- installed externally due to its plugins: https://github.com/williamboman/mason.nvim/issues/695
 	"trim_whitespace", -- not real formatters, but pseudo-formatters from conform.nvim
 	"trim_newlines",
 	"squeeze_blanks",
