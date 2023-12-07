@@ -26,7 +26,7 @@ local formatters = {
 	typescript = { "biome" },
 	json = { "biome" },
 	lua = { "stylua", "ast-grep" },
-	python = { "ruff_format", "ruff_fix" },
+	python = { "ruff_fix" },
 	markdown = { "markdown-toc", "markdownlint", "injected" },
 	css = { "stylelint", "prettier" },
 	sh = { "shellcheck", "shfmt" },
@@ -57,7 +57,6 @@ local dontInstall = {
 	"trim_newlines",
 	"squeeze_blanks",
 	"injected",
-	"ruff_format",
 	"ruff_fix",
 }
 
