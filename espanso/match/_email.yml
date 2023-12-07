@@ -1,6 +1,12 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/ajmarkow/espanso-schema-json/master/schemas/Espanso_Matches_File_Schema.json
 #───────────────────────────────────────────────────────────────────────────────
 matches:
+  - regex: "\\bvvv" # Signatures
+    replace: |-
+      $|$
+
+      Viele Grüße
+      Chris
   # Greetings
   - trigger: "!mail"
     replace: "Dear sir or madam,\n\n"

@@ -137,8 +137,8 @@ opt.listchars = {
 	extends = "…",
 	multispace = "·",
 	tab = "│ ", -- mostly overridden by indent-blankline
-	lead = nil, -- so multi-space gets priority
-	trail = nil,
+	lead = " ",
+	trail = nil, -- so multi-space gets priority
 }
 
 -- no list chars in special buffers

@@ -1,8 +1,11 @@
 """This is a test file."""
 
+import time
+import sys
+
 
 def double(x: int) -> int:
-    """Double the number.
+    """Double the number
 
     Args:
         x: input

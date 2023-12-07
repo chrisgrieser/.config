@@ -24,7 +24,7 @@ function alfredMatcher(str) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	// DOCS https://man7.org/linux/man-pages/man7/man-pages.7.html
-	const sections = "1,1p,2,7,8";
+	const sections = "1,1p,2,5,7,8";
 	// DOCS https://www.mankier.com/api
 	const apiUrl = `https://www.mankier.com/api/v2/mans/?sections=${sections}&q=`;
 
