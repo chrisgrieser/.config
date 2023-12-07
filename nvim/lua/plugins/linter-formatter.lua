@@ -6,7 +6,7 @@ local linters = {
 	lua = {},
 	css = { "stylelint" },
 	sh = { "shellcheck" },
-	markdown = { "vale" }, -- PENDING https://github.com/errata-ai/vale-ls/issues/8
+	markdown = { "markdownlint", "vale" }, -- PENDING https://github.com/errata-ai/vale-ls/issues/8
 	python = {},
 	yaml = {},
 	json = {},
@@ -26,7 +26,6 @@ local formatters = {
 	typescript = { "biome" },
 	json = { "biome" },
 	lua = { "stylua" },
-	python = { "ruff_fix" },
 	markdown = { "markdown-toc", "markdownlint", "injected" },
 	css = { "stylelint", "squeeze_blanks" },
 	sh = { "shellcheck", "shfmt" },
@@ -47,7 +46,6 @@ local lspFormattingFiletypes = {
 
 local extraInstalls = {
 	"debugpy", -- debugger
-	"ruff", -- since ruff_format and ruff_fix aren't the real names
 	{ "jedi-language-server", version = "0.41.0" }, -- PENDING https://github.com/pappasam/jedi-language-server/issues/296
 }
 
@@ -58,7 +56,6 @@ local dontInstall = {
 	"trim_newlines",
 	"squeeze_blanks",
 	"injected",
-	"ruff_fix",
 }
 
 ---given the linter- and formatter-list of nvim-lint and conform.nvim, extract a
@@ -95,6 +92,12 @@ local function linterConfigs()
 	lint.linters.shellcheck.args = { "--shell=bash", "--format=json", "--external-sources", "-" }
 	lint.linters["editorconfig-checker"].args =
 		{ "--no-color", "--config=" .. linterConfig .. "/editorconfig-checker-rc.json" }
+	lint.linters.markdownlint.args = {
+		"--disable=no-trailing-spaces", -- not disabled in config, so it's enabled for formatting
+		"--disable=no-multiple-blanks",
+		"--config=" .. linterConfig .. "/markdownlint.yaml",
+	}
+
 	vim.env.VALE_CONFIG_PATH = u.linterConfigFolder .. "/vale/vale.ini"
 end
 
@@ -141,7 +144,7 @@ local formatterConfig = {
 				"--numeric", "--months", "--encode-urls",
 				"--duplicates", "--sort-fields", "--remove-empty-fields", "--omit=month,issn,abstract",
 			},
-			condition = function(ctx)
+			condition = function(self, ctx) ---@diagnostic disable-line: unused-local
 				local biggerThan500Kb = vim.loop.fs_stat(ctx.filename).size > 500 * 1024;
 				if biggerThan500Kb then u.notify("conform.nvim", "Not formatting (file > 500kb).") end
 				return not biggerThan500Kb
