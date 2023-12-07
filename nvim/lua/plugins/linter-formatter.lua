@@ -5,7 +5,7 @@ local linterConfig = require("config.utils").linterConfigFolder
 local linters = {
 	lua = {},
 	css = { "stylelint" },
-	sh = { "shellcheck" },
+	-- sh = { "shellcheck" },
 	markdown = { "markdownlint", "vale" }, -- PENDING https://github.com/errata-ai/vale-ls/issues/8
 	python = {},
 	yaml = {},
@@ -30,7 +30,6 @@ local formatters = {
 	css = { "stylelint", "squeeze_blanks" },
 	sh = { "shellcheck", "shfmt" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
-	["_"] = { "trim_whitespace", "trim_newlines", "squeeze_blanks" }, -- filetypes w/o formatter
 	["*"] = { "typos" },
 }
 

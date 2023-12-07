@@ -45,6 +45,13 @@ for lspName, _ in pairs(vim.g.lspToMasonMap) do
 end
 
 --------------------------------------------------------------------------------
+-- BASH
+
+serverConfigs.bashls = {
+	filetypes = { "sh", "bash", "zsh" },
+}
+
+--------------------------------------------------------------------------------
 -- LUA
 
 -- DOCS https://luals.github.io/wiki/settings/
@@ -297,10 +304,7 @@ serverConfigs.typos_lsp = {
 serverConfigs.yamlls = {
 	settings = {
 		yaml = {
-			format = {
-				enable = true,
-				printWidth = 120,
-			},
+			format = { enable = true, printWidth = 120 },
 		},
 	},
 	-- SIC needs enabling via setting *and* via capabilities to work
