@@ -141,17 +141,25 @@ serverConfigs.emmet_ls = {
 -- https://github.com/sublimelsp/LSP-css/blob/master/LSP-css.sublime-settings
 -- https://github.com/microsoft/vscode-css-languageservice/blob/main/src/services/lintRules.ts
 serverConfigs.cssls = {
+	init_options = { provideFormatter = true },
 	settings = {
 		css = {
-			colorDecorators = { enable = true }, -- color inlay hints
+			format = {
+				braceStyle = "collapse", -- same line as rules (`collapse`) or on own line (`expand`)
+				newlineBetweenRules = true, -- Separate rulesets by a blank line.
+				newlineBetweenSelectors = true, -- Separate selectors with a new line.
+				preserveNewLines = false,
+				spaceAroundSelectorSeparator = true, -- around selector separators '>', '+', '~' (e.g. `a > b`).
+			},
 			lint = {
 				compatibleVendorPrefixes = "ignore",
 				vendorPrefix = "ignore",
 				unknownVendorSpecificProperties = "ignore",
-				unknownProperties = "ignore", -- duplicate with stylelint
+				unknownProperties = "warning", -- duplicate with stylelint
 				duplicateProperties = "warning",
 				emptyRules = "warning",
 				importStatement = "warning",
+				important = "warning",
 				zeroUnits = "warning",
 				fontFaceProperties = "warning",
 				hexColorLength = "warning",
