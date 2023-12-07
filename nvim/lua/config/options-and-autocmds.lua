@@ -130,16 +130,16 @@ opt.fillchars:append {
 	vert = "║",
 	horiz = "═",
 }
-opt.listchars:append {
+opt.listchars = {
 	nbsp = "󰚌",
 	precedes = "…",
 	extends = "…",
 	multispace = "·",
 	tab = "│ ", -- overridden by indent-blankline
 	conceal = "?",
-	lead = " ",
-	trail = " ",
-}
+	lead = nil,  
+	  trail = nil, -- so multi-space gets priority
+      }
 
 -- no list chars in special buffers
 autocmd({ "BufNew", "BufReadPost" }, {

@@ -144,29 +144,18 @@ serverConfigs.cssls = {
 	init_options = { provideFormatter = true },
 	settings = {
 		css = {
+			-- BUG this config being ignored
+			-- using `squeeze_blank` from conform.nvim instead
 			format = {
-				braceStyle = "collapse", -- same line as rules (`collapse`) or on own line (`expand`)
-				newlineBetweenRules = true, -- Separate rulesets by a blank line.
-				newlineBetweenSelectors = true, -- Separate selectors with a new line.
-				preserveNewLines = false,
-				spaceAroundSelectorSeparator = true, -- around selector separators '>', '+', '~' (e.g. `a > b`).
+				preserveNewLines = true,
+				maxPreserveNewLines = 2,
+				spaceAroundSelectorSeparator = true,
 			},
 			lint = {
-				compatibleVendorPrefixes = "ignore",
-				vendorPrefix = "ignore",
-				unknownVendorSpecificProperties = "ignore",
-				unknownProperties = "warning", -- duplicate with stylelint
+				vendorPrefix = "ignore", -- needed for scrollbars
 				duplicateProperties = "warning",
-				emptyRules = "warning",
-				importStatement = "warning",
 				important = "warning",
 				zeroUnits = "warning",
-				fontFaceProperties = "warning",
-				hexColorLength = "warning",
-				argumentsInColorFunction = "warning",
-				unknownAtRules = "warning",
-				ieHack = "warning",
-				propertyIgnoredDueToDisplay = "warning",
 			},
 		},
 	},
