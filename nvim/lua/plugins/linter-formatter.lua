@@ -174,11 +174,18 @@ return {
 				function()
 					local useLsp = vim.tbl_contains(lspFormattingFiletypes, vim.bo.ft) and "always"
 						or false
-					require("conform").format {
+					require("conform").format({
 						lsp_fallback = useLsp,
 						async = false,
-						callback = vim.cmd.update,
-					}
+					}, function()
+						-- HACK since `fixAll` is not part of ruff-lsp formatting capabilities
+						if vim.bo.ft == "python" then
+							vim.lsp.buf.code_action {
+								apply = true,
+								context = { only = { "source.fixAll.ruff" } },
+							}
+						end
+					end)
 				end,
 				desc = "󰒕 Format & Save",
 			},

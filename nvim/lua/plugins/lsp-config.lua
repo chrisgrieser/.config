@@ -78,9 +78,8 @@ serverConfigs.lua_ls = {
 serverConfigs.ruff_lsp = {
 	init_options = {
 		settings = {
-			fixAll = true,
-			organizeImports = true, -- when "I" ruleset is added, then included in "fixAll"
-			codeAction = { fixViolation = { enable = true } },
+			organizeImports = false, -- when "I" ruleset is added, then included in "fixAll"
+			codeAction = { disableRuleComment = { enable = false } }, -- via nvim-rulebook
 		},
 	},
 	-- Disable hover in favor of jedi
