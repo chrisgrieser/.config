@@ -11,6 +11,7 @@ optl.tabstop = 4 -- less nesting in md
 -- move everything a bit more to the right
 if vim.bo.buftype == "" then optl.signcolumn = "yes:3" end
 
+
 --------------------------------------------------------------------------------
 -- HEADING navigation (instead of symbols)
 
