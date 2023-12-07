@@ -3,7 +3,6 @@
 strictListInference = true
 strictDictionaryInference = true
 strictSetInference = true
-typeCheckingMode = "basic"
 useLibraryCodeForTypes = true
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -36,20 +35,3 @@ ignore = [
 convention = "google" # "google"|"numpy"|"pep257"
 
 #───────────────────────────────────────────────────────────────────────────────
-
-[tool.pylint."MESSAGES CONTROL"]
-enable = ["useless-suppression"]
-disable = [
-	"fixme",        # allow TODO
-	"import-error",
-
-	# DUPLICATON WITH PYRIGHT/RUFF
-	"too-many-locals",
-	"unused-variable",
-	"undefined-variable",
-	"unused-argument",
-	"unused-import",
-	"trailing-newlines",   # taken care of by formatter
-	"trailing-whitespace", # taken care of by formatter
-	"forgotten-debug-statement",
-]

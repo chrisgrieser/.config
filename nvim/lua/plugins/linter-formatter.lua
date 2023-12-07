@@ -19,7 +19,6 @@ local linters = {
 
 for _, list in pairs(linters) do
 	table.insert(list, "editorconfig-checker")
-	table.insert(list, "typos")
 end
 
 local formatters = {
@@ -47,11 +46,12 @@ local lspFormattingFiletypes = {
 local extraInstalls = {
 	"debugpy", -- debugger
 	"ruff", -- since ruff_format and ruff_fix aren't the real names
+	{ "jedi-language-server", version = "0.41.0" } -- PENDING https://github.com/pappasam/jedi-language-server/issues/296
 }
 
 local dontInstall = {
+	"jedi-language-server",-- PENDING https://github.com/pappasam/jedi-language-server/issues/296
 	"stylelint", -- installed externally due to its plugins: https://github.com/williamboman/mason.nvim/issues/695
-	"zsh", -- builtin
 	"trim_whitespace", -- not real formatters, but pseudo-formatters from conform.nvim
 	"trim_newlines",
 	"squeeze_blanks",
@@ -74,14 +74,14 @@ local function toolsToAutoinstall(myLinters, myFormatters, myLsps, extraTools, i
 	local formatterList = vim.tbl_flatten(vim.tbl_values(myFormatters))
 	local tools = vim.list_extend(linterList, formatterList)
 	vim.list_extend(tools, myLsps)
-	vim.list_extend(tools, extraTools)
 
 	-- only unique tools
 	table.sort(tools)
 	tools = vim.fn.uniq(tools)
 
-	-- remove exceptions not to install
+	-- exceptions & extras
 	tools = vim.tbl_filter(function(tool) return not vim.tbl_contains(ignoreTools, tool) end, tools)
+	vim.list_extend(tools, extraTools)
 	return tools
 end
 
