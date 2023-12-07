@@ -25,7 +25,7 @@ function run() {
 		dueDate: { _lessThan: fourDaysAgo }, // lessThan = dates in the past
 	});
 	for (let i = 0; i < oldReminders.length; i++) {
-		oldReminders[i].delete()
+		oldReminders[i].delete();
 	}
 
 	// Backup remaining reminders

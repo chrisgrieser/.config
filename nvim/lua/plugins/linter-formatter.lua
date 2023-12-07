@@ -28,7 +28,7 @@ local formatters = {
 	lua = { "stylua", "ast-grep" },
 	python = { "ruff_fix" },
 	markdown = { "markdown-toc", "markdownlint", "injected" },
-	css = { "stylelint", "prettier" },
+	css = { "stylelint", "squeeze_blanks" },
 	sh = { "shellcheck", "shfmt" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
 	["_"] = { "trim_whitespace", "trim_newlines", "squeeze_blanks" }, -- filetypes w/o formatter
@@ -40,6 +40,7 @@ local lspFormattingFiletypes = {
 	"yaml",
 	"html",
 	"python",
+	"css",
 }
 
 --------------------------------------------------------------------------------
@@ -47,11 +48,11 @@ local lspFormattingFiletypes = {
 local extraInstalls = {
 	"debugpy", -- debugger
 	"ruff", -- since ruff_format and ruff_fix aren't the real names
-	{ "jedi-language-server", version = "0.41.0" } -- PENDING https://github.com/pappasam/jedi-language-server/issues/296
+	{ "jedi-language-server", version = "0.41.0" }, -- PENDING https://github.com/pappasam/jedi-language-server/issues/296
 }
 
 local dontInstall = {
-	"jedi-language-server",-- PENDING https://github.com/pappasam/jedi-language-server/issues/296
+	"jedi-language-server", -- PENDING https://github.com/pappasam/jedi-language-server/issues/296
 	"stylelint", -- installed externally due to its plugins: https://github.com/williamboman/mason.nvim/issues/695
 	"trim_whitespace", -- not real formatters, but pseudo-formatters from conform.nvim
 	"trim_newlines",
