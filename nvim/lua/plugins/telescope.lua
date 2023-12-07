@@ -152,9 +152,12 @@ local function telescopeConfig()
 					preview_width = { 0.55, min = 30 },
 				},
 			},
-		-- stylua: ignore
-		-- other ignores are defined via .gitignore, .ignore, /fd/ignore, or /git/ignore
-		file_ignore_patterns = { "%.pdf$", "%.png$", "%.gif$", "%.jpe?g$", "%.icns$", "%.zip$" },
+			-- stylua: ignore
+			-- other ignores are defined via .gitignore, .ignore, /fd/ignore, or /git/ignore
+			file_ignore_patterns = {
+				"%.png$", "%.gif$", "%.jpe?g$", "%.icns$",
+				"%.pdf$", "%.zip$", "%.plist$",
+			},
 		},
 		pickers = {
 			find_files = {

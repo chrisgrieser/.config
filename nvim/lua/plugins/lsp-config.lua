@@ -174,6 +174,18 @@ serverConfigs.cssls = {
 	},
 }
 
+-- DOCS https://github.com/bmatcuk/stylelint-lsp#settings
+serverConfigs.stylelint_lsp = {
+	filetypes = { "css", "scss" }, -- don't enable on js/ts, since I don't need it there
+	settings = {
+		stylelintplus = {
+			autoFixOnFormat = false,
+		},
+	},
+}
+
+--------------------------------------------------------------------------------
+
 -- DOCS https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
 serverConfigs.tsserver = {
 	settings = {

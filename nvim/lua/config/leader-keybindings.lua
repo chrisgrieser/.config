@@ -108,6 +108,7 @@ local function codeActionFilter(action)
 			or title:find("defined global") or title:find("Change to parameter")),
 		javascript = not (title == "Move to a new file"),
 		typescript = not (title == "Move to a new file"),
+		css = not (title:find("^Disable stylelint rule for entire file: ") or title:find("^Disable stylelint rule inline: ")),
 	}
 	local noFilterForFiletype = filter[vim.bo.filetype] == nil
 	return noFilterForFiletype or filter[vim.bo.filetype]
