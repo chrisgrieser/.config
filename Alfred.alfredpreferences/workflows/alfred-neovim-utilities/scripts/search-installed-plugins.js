@@ -9,8 +9,8 @@ app.includeStandardAdditions = true;
 /** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
-	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
-	return " " + [clean, camelCaseSeperated, str].join(" ") + " ";
+	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
+	return " " + [clean, camelCaseSeparated, str].join(" ") + " ";
 }
 
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
@@ -60,9 +60,10 @@ function run() {
 			});
 	}
 	if (masonLocation && fileExists(masonLocation)) {
-		const masonRegistryPath = masonLocation + "/registries/github/mason-org/mason-registry/registry.json";
+		const masonRegistryPath =
+			masonLocation + "/registries/github/mason-org/mason-registry/registry.json";
 		const masonRegistry = JSON.parse(readFile(masonRegistryPath));
-		const installedTools = app.doShellScript(`cd "${masonLocation}/bin" && ls -1`).split("\r");
+		const installedTools = app.doShellScript(`cd "${masonLocation}/packages" && ls -1`).split("\r");
 		const masonIcon = "./mason-logo.png";
 
 		masonArray = masonRegistry
