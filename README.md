@@ -3,7 +3,7 @@
 # pseudometa's dotfiles
 <!-- LTeX: enabled=true -->
 
-## Configurations of Interest
+## Configurations of interest
 People tell me they find the following configurations most useful:
 
 - [neovim config](/nvim) (~6000 LoC)

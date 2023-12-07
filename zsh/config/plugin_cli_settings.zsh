@@ -3,13 +3,14 @@
 # DOCS https://github.com/eza-community/eza/blob/main/man/eza_colors.5.md
 # INFO does also accept specific files via glob, e.g. `README.md=4;33`
 colors=(
-	"di=1;34:ln=3;35:or=7;31:ex=39:"
-	"*.md=0;33:*.txt=0;33:"
-	"*.png=0;32:*.jpg=0;32:*.gif=0;32:*.icns=0;32:*.pdf=0;32:"
-	"*.json=0;34:*.yml=0;34:*.yaml=0;34:*.xml=0;34:*.toml=0;34:csv=0;34:"
-	"*.zip:1:30"
+	"di=1;34:ln=3;35:or=7;31:ex=39:"                           # directory, symlink, dead symlink, executable
+	"*.md=0;33:*.txt=0;33:"                                    # text
+	"*.png=0;32:*.jpg=0;32:*.gif=0;32:*.icns=0;32:*.pdf=0;32:" # image
+	"*.json=0;34:*.yml=0;34:*.yaml=0;34:*.toml=0;34:csv=0;34:" # data
+	"*.zip:1:30"                                               # archive
 )
-export LS_COLORS="${colors[@]}"
+LS_COLORS=$(echo "${colors[*]}" | tr -d ' ')
+export LS_COLORS
 
 export FZF_DEFAULT_COMMAND='fd'
 export FZF_DEFAULT_OPTS='
