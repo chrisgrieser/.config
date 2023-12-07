@@ -179,6 +179,7 @@ return {
 						async = false,
 					}, function()
 						-- HACK since `fixAll` is not part of ruff-lsp formatting capabilities
+						-- PENDING https://github.com/astral-sh/ruff-lsp/issues/335
 						if vim.bo.ft == "python" then
 							vim.lsp.buf.code_action {
 								apply = true,

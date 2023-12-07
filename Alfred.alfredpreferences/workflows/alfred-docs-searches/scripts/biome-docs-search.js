@@ -6,8 +6,8 @@ app.includeStandardAdditions = true;
 /** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
-	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
-	return [clean, camelCaseSeperated, str].join(" ") + " ";
+	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
+	return [clean, camelCaseSeparated, str].join(" ") + " ";
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -20,7 +20,7 @@ function run() {
 	const docPathRegex = /^website\/src\/content\/docs\/(.*)\.mdx?$/i;
 
 	const workArray = JSON.parse(app.doShellScript(`curl -sL "${docsUrl}"`))
-		.tree.filter((/** @type {{ path: string; }} */ file) => docPathRegex.test(file.path))
+		.tree.filter((/** @type {{ path: string; }} */ file) => docPathRegex.test(file.path) && !file.path.includes("404"))
 		.map((/** @type {{ path: string; }} */ entry) => {
 			const subsite = entry.path.replace(docPathRegex, "$1");
 			const parts = subsite.split("/");
