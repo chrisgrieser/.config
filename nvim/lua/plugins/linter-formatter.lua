@@ -3,23 +3,9 @@ local linterConfig = require("config.utils").linterConfigFolder
 --------------------------------------------------------------------------------
 
 local linters = {
-	lua = {},
-	-- css = { "stylelint" },
-	sh = { "shellcheck" },
+	sh = { "shellcheck" }, -- PENDING https://github.com/bash-lsp/bash-language-server/issues/1064
 	markdown = { "markdownlint", "vale" }, -- PENDING https://github.com/errata-ai/vale-ls/issues/8
-	python = {},
-	yaml = {},
-	json = {},
-	javascript = {},
-	typescript = {},
-	toml = {},
-	applescript = {},
-	bib = {},
 }
-
-for _, list in pairs(linters) do
-	table.insert(list, "editorconfig-checker")
-end
 
 local formatters = {
 	javascript = { "biome" },
@@ -89,8 +75,6 @@ local function linterConfigs()
 	lint.linters_by_ft = linters
 
 	lint.linters.shellcheck.args = { "--shell=bash", "--format=json", "--external-sources", "-" }
-	lint.linters["editorconfig-checker"].args =
-		{ "--no-color", "--config=" .. linterConfig .. "/editorconfig-checker-rc.json" }
 	lint.linters.markdownlint.args = {
 		"--disable=no-trailing-spaces", -- not disabled in config, so it's enabled for formatting
 		"--disable=no-multiple-blanks",
@@ -107,13 +91,6 @@ local function lintTriggers()
 	end
 
 	vim.api.nvim_create_autocmd({ "BufReadPost", "InsertLeave", "TextChanged", "FocusGained" }, {
-		callback = doLint,
-	})
-
-	-- due to auto-save.nvim, we need the custom event "AutoSaveWritePost"
-	-- instead of "BufWritePost" to trigger linting to prevent race conditions
-	vim.api.nvim_create_autocmd("User", {
-		pattern = "AutoSaveWritePost",
 		callback = doLint,
 	})
 
@@ -157,7 +134,7 @@ local formatterConfig = {
 return {
 	{ -- Linter integration
 		"mfussenegger/nvim-lint",
-		event = "VeryLazy",
+		ft = vim.tbl_keys(linters),
 		config = function()
 			linterConfigs()
 			lintTriggers()

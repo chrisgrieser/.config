@@ -40,10 +40,10 @@ format = "[$symbol]($style)"
 
 [custom.location_indicator]
 description = "Indicate if in my local repo folder"
-command = '[[ "$PWD" =~ "$HOME/local-repos" ]] && echo "󰔽"'
+command = '[[ "$PWD" =~ "$HOME/repos" ]] && echo "󰔽"'
 # conditional, so no output does not leave the extra space from `format`. And the
 # space from format is needed, as the output from `command` is trimmed.
-when = '[[ "$PWD" =~ "$HOME/local-repos" ]]'
+when = '[[ "$PWD" =~ "$HOME/repos" ]]'
 format = '[ $output  ]($style)'              # extra space for proper nerdfont sizing
 style = "fg:cyan bg:black bold"
 

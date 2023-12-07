@@ -39,21 +39,11 @@ local function diagSourceAsSuffix(diag, mode)
 	return ""
 end
 
----@param diag Diagnostic
----@return string
-local function formatVirtualText(diag)
-	if diag.source == "editorconfig-checker" then
-		local msg = diag.message:gsub(".*%((.*)%)", "%1")
-		return msg
-	end
-	return diagMsgFormat(diag)
-end
-
 vim.diagnostic.config {
 	virtual_text = {
 		severity = { min = vim.diagnostic.severity.INFO }, -- leave out hints
 		spacing = 1,
-		format = formatVirtualText,
+		format = diagMsgFormat,
 		suffix = function(diag)
 			if diag.source == "editorconfig-checker" then return "" end
 			return diagSourceAsSuffix(diag, "virtual_text")
