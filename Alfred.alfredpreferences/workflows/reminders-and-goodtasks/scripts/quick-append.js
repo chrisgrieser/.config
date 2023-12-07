@@ -67,16 +67,14 @@ function run(argv) {
 	}
 
 	// GUARD
-	if (!(input || isBrowser)) return "";
+	if (!input && !isBrowser) return "";
 
-	// determine text
-	let text = input;
-	if (isBrowser && !keywordUsed) text = input + "\n" + browserTab().url;
+	const text = isBrowser && !keywordUsed ? input + "\n" + browserTab().url : input;
 
 	// add reminder for today
 	const rem = Application("Reminders");
 	const today = new Date();
-	const newReminder = rem.Reminder({ name: text, alldayDueDate: today });
+	const newReminder = rem.Reminder({ name: text.trim(), alldayDueDate: today });
 	rem.defaultList().reminders.push(newReminder);
 	rem.quit();
 

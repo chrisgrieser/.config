@@ -125,6 +125,12 @@ rules:
         to:
           - key_code: up_arrow
         conditions: [*goodtask-app, *goodtask-normal-mode]
+      # Select down
+      - type: basic
+        from: { key_code: spacebar, modifiers: { mandatory: [shift] } }
+        to:
+          - { key_code: down_arrow, modifiers: [shift] }
+        conditions: [*goodtask-app, *goodtask-normal-mode]
       # J/K: next/prev list
       - type: basic
         from: { key_code: j, modifiers: { mandatory: [shift] } }

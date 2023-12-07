@@ -12,7 +12,7 @@ export HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=30
 
 # misc
 export HOMEBREW_NO_ANALYTICS=1
-# export HOMEBREW_NO_ENV_HINTS=1
+export HOMEBREW_NO_ENV_HINTS=1
 
 #───────────────────────────────────────────────────────────────────────────────
 
