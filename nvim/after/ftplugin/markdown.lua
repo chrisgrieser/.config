@@ -7,7 +7,7 @@ local fn = vim.fn
 optl.expandtab = false
 optl.tabstop = 4 -- less nesting in md
 
--- since markdown has rarely indented lines, and also rarely overlength in lines,
+-- since markdown has rarely indented lines, and also rarely has overlong lines,
 -- move everything a bit more to the right
 if vim.bo.buftype == "" then optl.signcolumn = "yes:3" end
 
@@ -35,8 +35,8 @@ keymap("n", "<D-4>", "mzI- <Esc>`z", { desc = " Add List", buffer = true })
 keymap(
 	"n",
 	"<localleader>f",
-	"vip:!pandoc -t commonmark_x<CR><CR>",
-	{ desc = " Format Table under Cursor", buffer = true }
+	"vip:!pandoc -t commonmark_x<CR>",
+	{ desc = " Format Table under Cursor", buffer = true, silent = true }
 )
 
 -- convert md image to html image

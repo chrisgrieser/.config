@@ -6,7 +6,7 @@ local linters = {
 	lua = {},
 	css = { "stylelint" },
 	sh = { "shellcheck" },
-	markdown = { "vale" },
+	markdown = { "vale" }, -- PENDING https://github.com/errata-ai/vale-ls/issues/8
 	python = {},
 	yaml = {},
 	json = {},
@@ -159,11 +159,6 @@ return {
 		config = function()
 			linterConfigs()
 			lintTriggers()
-			-- stylua: ignore
-			vim.api.nvim_create_user_command("LinterInfo", function()
-				local runningLinters = table.concat(require("lint").get_running(), "\n")
-				vim.notify(runningLinters, vim.log.levels.INFO, { title = "nvim-lint" })
-			end, {})
 		end,
 	},
 	{ -- Formatter integration

@@ -82,7 +82,6 @@
   "tokyonight.nvim": { "branch": "main", "commit": "f247ee700b569ed43f39320413a13ba9b0aef0db" },
   "treesj": { "branch": "main", "commit": "1d6e89f4790aa04eaae38fa9460a3ee191961c96" },
   "undotree": { "branch": "master", "commit": "36ff7abb6b60980338344982ad4cdf03f7961ecd" },
-  "vim-applescript": { "branch": "master", "commit": "a39af8fc7e4caf581366e2917d558f6232e4db36" },
   "vim-css3-syntax": { "branch": "main", "commit": "3cd856659d117cd4ad097535cec8270a224643ed" },
   "vim-matchup": { "branch": "master", "commit": "269f9bea87e20a01438085eb13df539929a12727" },
   "vim-visual-multi": { "branch": "master", "commit": "aec289a9fdabaa0ee6087d044d75b32e12084344" },
