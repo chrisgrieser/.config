@@ -25,7 +25,7 @@ function o() {
 			--bind="ctrl-h:reload(fd --hidden --no-ignore --exclude='/.git/' --exclude='.DS_Store' --type=file --type=symlink --color=always)" \
 			--expect="ctrl-p,ctrl-n" \
 			--preview-window="55%" \
-			--preview '[[ $(file --mime {}) =~ text ]] && bat --color=always --wrap=never --style=header {} || file {} | fold -w $FZF_PREVIEW_COLUMNS' \
+			--preview '[[ $(file --mime {}) =~ text ]] && bat --color=always --wrap=never --style=header-filesize,header-filename,grid {} || file {} | fold -w $FZF_PREVIEW_COLUMNS' \
 			--height="100%" #required for wezterm's pane:is_alt_screen_active()
 	)
 	[[ -z "$selected" ]] && return 0 # aborted
