@@ -1,4 +1,40 @@
 {
+	"PENDING": {
+		"prefix": "PENDING",
+		"body": "PENDING"
+	},
+	"GUARD": {
+		"prefix": "GUARD",
+		"body": "GUARD"
+	},
+	"DOCS": {
+		"prefix": "DOCS",
+		"body": "DOCS"
+	},
+	"CONFIG": {
+		"prefix": "CONFIG",
+		"body": "CONFIG"
+	},
+	"HACK": {
+		"prefix": "HACK",
+		"body": "HACK"
+	},
+	"PERF": {
+		"prefix": "PERF",
+		"body": "PERF"
+	},
+	"INFO": {
+		"prefix": "INFO",
+		"body": "INFO"
+	},
+	"FIX": {
+		"prefix": "FIX",
+		"body": "FIX"
+	},
+	"BUG": {
+		"prefix": "BUG",
+		"body": "BUG"
+	},
 	"cmd": {
 		"prefix": "cmd",
 		"body": "⌘"
