@@ -4,7 +4,6 @@
 # good guide                https://thevaluable.dev/zsh-completion-guide-examples/
 # zsh-autocomplete config   https://github.com/marlonrichert/zsh-autocomplete#configuration
 # zsh-autocomplete presets  https://github.com/marlonrichert/zsh-autocomplete/blob/main/Functions/Init/.autocomplete__config
-# ansi colors               https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#256-colors
 #───────────────────────────────────────────────────────────────────────────────
 
 # FORMAT / COLOR
@@ -65,3 +64,5 @@ zstyle ':completion:*' ignored-patterns \
 zstyle ':autocomplete:*' ignored-input '..d' # zsh-autocomplete
 
 #───────────────────────────────────────────────────────────────────────────────
+# do not save in dotfile repo
+export ZSH_COMPDUMP="$HOME/.local/share/zcompdump"

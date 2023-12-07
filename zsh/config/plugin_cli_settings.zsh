@@ -1,16 +1,16 @@
 # Affects filetype-coloring in eza, fd, and completion menus
 # Can generate via: https://github.com/sharkdp/vivid
 # DOCS https://github.com/eza-community/eza/blob/main/man/eza_colors.5.md
-# INFO does also accept specific files via glob, e.g. `README.md=4;33`
-colors=(
-	"di=1;34:ln=3;35:or=7;31:ex=39:"                           # directory, symlink, dead symlink, executable
-	"*.md=0;33:*.txt=0;33:"                                    # text
-	"*.png=0;32:*.jpg=0;32:*.gif=0;32:*.icns=0;32:*.pdf=0;32:" # image
-	"*.json=0;34:*.yml=0;34:*.yaml=0;34:*.toml=0;34:csv=0;34:" # data
-	"*.zip:1:30"                                               # archive
-)
-LS_COLORS=$(echo "${colors[*]}" | tr -d ' ')
-export LS_COLORS
+# INFO does also accept specific files via glob, e.g. `README.md=4;33`, 
+# `.*=…` affects dotfiles
+export LS_COLORS="di=1;34:ln=3;35:or=7;31:ex=39:.*=38;5;247"
+
+export EZA_COLORS="gm=1;38;5;208" # `modified` with same orange as in starship
+export EZA_STRICT=1
+export EZA_ICONS_AUTO=1
+[[ "$TERM_PROGRAM" == "WezTerm" ]] && export EZA_ICON_SPACING=2
+
+#───────────────────────────────────────────────────────────────────────────────
 
 export FZF_DEFAULT_COMMAND='fd'
 export FZF_DEFAULT_OPTS='
@@ -21,9 +21,6 @@ export FZF_DEFAULT_OPTS='
 	--bind=ctrl-s:toggle+down,ctrl-a:toggle-all
 '
 
-[[ "$TERM_PROGRAM" == "WezTerm" ]] && export EZA_ICON_SPACING=2
-export EZA_STRICT=1
-export EZA_ICONS_AUTO=1
 
 export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgrep-config"
 

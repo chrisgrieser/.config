@@ -101,14 +101,13 @@ function M.autoTile(winSrc)
 	else
 		wins = winSrc:getWindows()
 	end
-	-- prevent autotiling of windows that are not maximizable, e.g. copy
-	-- progress, and of the Info windows
-	wins = hs.fnutils.filter(
-		wins,
-		function(win)
-			return win:isMaximizable() and win:isStandard() and not (win:title():find("Info$"))
-		end
-	)
+	-- prevent autotiling of special windows, e.g. copy progress or info wins
+	wins = hs.fnutils.filter(wins, function(win)
+		local rejectTitles = { "Move", "Copy", "Delete", "Finder Settings" }
+		return win:isStandard()
+			and not u.tbl_contains(rejectTitles, win:title())
+			and not win:title():find(" Info$")
+	end)
 	if not wins then return end
 
 	-----------------------------------------------------------------------------

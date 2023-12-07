@@ -1,0 +1,4 @@
+cdpath_bookmarks/*
+completions/*
+plugins/*
+!plugins/magic_dashboard.zsh

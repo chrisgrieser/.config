@@ -77,11 +77,10 @@ serverConfigs.lua_ls = {
 -- DOCS https://github.com/astral-sh/ruff-lsp#settings
 serverConfigs.ruff_lsp = {
 	init_options = {
-		-- disabled, since they are done by the ruff_fix formatter
 		settings = {
-			organizeImports = false, -- when "I" ruleset is added, then included in "fixAll"
-			fixAll = false,
-			codeAction = { fixViolation = { enable = false } },
+			fixAll = true,
+			organizeImports = true, -- when "I" ruleset is added, then included in "fixAll"
+			codeAction = { fixViolation = { enable = true } },
 		},
 	},
 	-- Disable hover in favor of jedi

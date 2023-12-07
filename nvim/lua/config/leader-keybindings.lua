@@ -109,7 +109,8 @@ local function codeActionFilter(action)
 		javascript = not (title == "Move to a new file"),
 		typescript = not (title == "Move to a new file"),
 	}
-	return filter[vim.bo.filetype]
+	local noFilterForFiletype = filter[vim.bo.filetype] == nil
+	return noFilterForFiletype or filter[vim.bo.filetype]
 end
 
 keymap(
@@ -172,7 +173,7 @@ keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line Numbers" })
 keymap("n", "<leader>ow", "<cmd>set wrap!<CR>", { desc = "󰖶 Wrap" })
 keymap("n", "<leader>ol", vim.cmd.LspRestart, { desc = "󰒕 LspRestart" })
 
-keymap("n", "<leader>od", function() -- codespell-ignore
+keymap("n", "<leader>od", function()
 	local change = vim.diagnostic.is_disabled(0) and "enable" or "disable"
 	vim.diagnostic[change](0)
 end, { desc = " Diagnostics" })
