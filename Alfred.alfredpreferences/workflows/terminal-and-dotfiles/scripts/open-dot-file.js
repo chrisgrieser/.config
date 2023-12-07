@@ -30,8 +30,7 @@ function run() {
 		.doShellScript(
 			// INFO using `fd` over `find` for speed and gitignoring
 			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; cd "${dotfileFolder}" ;
-			fd --type=file --type=symlink --hidden --absolute-path \\
-			-E "*.plist" -E "*.png"`,
+			fd --type=file --type=symlink --hidden --absolute-path -E "*.png"`,
 		)
 		.split("\r")
 		.map((/** @type {string} */ absPath) => {
@@ -77,7 +76,6 @@ function run() {
 				case "other":
 				case "webloc":
 				case "url":
-				case "plist":
 				case "html":
 				case "folder":
 					iconObj = { type: "fileicon", path: absPath };

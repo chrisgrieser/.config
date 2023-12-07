@@ -2,7 +2,14 @@
 # Can generate via: https://github.com/sharkdp/vivid
 # DOCS https://github.com/eza-community/eza/blob/main/man/eza_colors.5.md
 # INFO does also accept specific files via glob, e.g. `README.md=4;33`
-export LS_COLORS="di=1;34:ln=3;35:or=7;31:ex=39:*.md=1;33:*.png=1;32:*.json=0;34:*.yml=0;34:*.yaml=0;34;*.lua=0;31"
+colors=(
+	"di=1;34:ln=3;35:or=7;31:ex=39:"
+	"*.md=0;33:*.txt=0;33:"
+	"*.png=0;32:*.jpg=0;32:*.gif=0;32:*.icns=0;32:*.pdf=0;32:"
+	"*.json=0;34:*.yml=0;34:*.yaml=0;34:*.xml=0;34:*.toml=0;34:csv=0;34:"
+	"*.zip:1:30"
+)
+export LS_COLORS="${colors[@]}"
 
 export FZF_DEFAULT_COMMAND='fd'
 export FZF_DEFAULT_OPTS='
@@ -10,7 +17,7 @@ export FZF_DEFAULT_OPTS='
 	--scroll-off=5 --cycle --layout=reverse --height=90% --preview-window=border-left
 	--bind=tab:down,shift-tab:up
 	--bind=page-down:preview-page-down,page-up:preview-page-up
-	--bind=ctrl-s:toggle+down,ctrl-a:select-all
+	--bind=ctrl-s:toggle+down,ctrl-a:toggle-all
 '
 
 [[ "$TERM_PROGRAM" == "WezTerm" ]] && export EZA_ICON_SPACING=2
