@@ -2,7 +2,7 @@
 # Can generate via: https://github.com/sharkdp/vivid
 # DOCS https://github.com/eza-community/eza/blob/main/man/eza_colors.5.md
 # INFO does also accept specific files via glob, e.g. `README.md=4;33`
-export LS_COLORS="di=1;34:ln=3;35:or=7;31:ex=39"
+export LS_COLORS="di=1;34:ln=3;35:or=7;31:ex=39:*.md=1;33:*.png=1;32:*.json=0;34:*.yml=0;34:*.yaml=0;34;*.lua=0;31"
 
 export FZF_DEFAULT_COMMAND='fd'
 export FZF_DEFAULT_OPTS='
