@@ -148,7 +148,7 @@ serverConfigs.jedi_language_server = {
 
 -- don't pollute completions for js/ts with stuff I don't need
 serverConfigs.emmet_ls = {
-	filetypes = { "html", "css" },
+	filetypes = { "html", "css", "scss" },
 }
 
 -- DOCS
@@ -175,11 +175,12 @@ serverConfigs.cssls = {
 }
 
 -- DOCS https://github.com/bmatcuk/stylelint-lsp#settings
+-- INFO still requires LSP installed via npm (not working with stylelint from mason)
 serverConfigs.stylelint_lsp = {
 	filetypes = { "css", "scss" }, -- don't enable on js/ts, since I don't need it there
 	settings = {
 		stylelintplus = {
-			autoFixOnFormat = false,
+			autoFixOnFormat = true,
 		},
 	},
 }

@@ -13,6 +13,7 @@ function _separator {
 
 function _gitlog {
 	# pseudo-option to suppress graph
+	local graph
 	if [[ "$1" == "--no-graph" ]]; then
 		shift
 		graph=""
@@ -24,8 +25,8 @@ function _gitlog {
 	export LESSUTFCHARDEF=23fb-23fe:p,2665:p,26a1:p,2b58:p,e000-e00a:p,e0a0-e0a2:p,e0a3:p,e0b0-e0b3:p,e0b4-e0c8:p,e0ca:p,e0cc-e0d4:p,e200-e2a9:p,e300-e3e3:p,e5fa-e6a6:p,e700-e7c5:p,ea60-ebeb:p,f000-f2e0:p,f300-f32f:p,f400-f532:p,f500-fd46:p,f0001-f1af0:p
 
 	# INFO inserting ansi colors via sed requires leading $
-	local graph
-	graph=$(
+	local the_log
+	the_log=$(
 		git log --all --color $graph \
 			--format="%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)%an%C(reset)" "$@" |
 			sed -e 's/ seconds* ago)/s)/' \
@@ -47,9 +48,9 @@ function _gitlog {
 	)
 
 	if [[ "$MAGIC_DASHBOARD_USE_HYPERLINKS" != "0" ]]; then
-		echo "$graph" | delta --hyperlinks
+		echo "$the_log" | delta --hyperlinks
 	else
-		echo "$graph"
+		echo "$the_log"
 	fi
 }
 
