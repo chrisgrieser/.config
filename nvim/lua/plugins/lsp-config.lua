@@ -155,7 +155,6 @@ serverConfigs.emmet_ls = {
 -- https://github.com/sublimelsp/LSP-css/blob/master/LSP-css.sublime-settings
 -- https://github.com/microsoft/vscode-css-languageservice/blob/main/src/services/lintRules.ts
 serverConfigs.cssls = {
-	init_options = { provideFormatter = true },
 	settings = {
 		css = {
 			-- BUG this config being ignored
