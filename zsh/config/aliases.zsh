@@ -9,7 +9,7 @@ alias ln='ln -v'
 alias cp='cp -v'
 
 # defaults
-alias grep='grep --ignore-case --color'
+alias grep='grep --color'
 alias ls='ls --color'
 alias mkdir='mkdir -p' # create intermediate directories
 alias curl='curl --progress-bar'
@@ -25,15 +25,15 @@ alias l='eza --all --long --time-style=relative --no-user --smart-group \
 
 # bat: dark-mode aware
 function bat {
-	local theme
+	local theme # list themes via `bat --list-themes`
 	theme="$(defaults read -g AppleInterfaceStyle &>/dev/null && echo "Dracula" || echo "GitHub")"
 	command bat --theme="$theme" "$@"
 }
 
 # jqp: dar-mode aware
 function jqp {
-	local theme
-	theme="$(defaults read -g AppleInterfaceStyle &>/dev/null && echo "Dracula" || echo "GitHub")"
+	local theme # https://github.com/noahgorstein/jqp#light-themes
+	theme="$(defaults read -g AppleInterfaceStyle &>/dev/null && echo "witchhazel" || echo "trac")"
 	command jqp --theme="$theme" "$@"
 }
 
@@ -52,7 +52,8 @@ alias -g F='| fzf --no-sort --filter' # fuzzy-grep
 alias -g B='| bat'
 alias -g C='| pbcopy ; echo "Copied."'         # copy
 alias -g N='| wc -l | tr -d " "'               # count lines
-alias -g J='| command jless --no-line-numbers' 
+alias -g J='| jless' 
+alias -g JJ='| jqp' 
 
 # highlights for them
 ZSH_HIGHLIGHT_REGEXP+=(' G($| )' 'fg=magenta,bold')
@@ -60,6 +61,6 @@ ZSH_HIGHLIGHT_REGEXP+=(' F($| )' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' C$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' B$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' N$' 'fg=magenta,bold')
-ZSH_HIGHLIGHT_REGEXP+=(' J$' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=(' JJ?$' 'fg=magenta,bold')
 
 #───────────────────────────────────────────────────────────────────────────────
