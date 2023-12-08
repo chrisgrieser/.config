@@ -154,20 +154,16 @@ autocmd({ "BufNew", "BufReadPost" }, {
 -- AUTO-SAVE
 
 opt.autowriteall = true
-autocmd({ "InsertLeave", "TextChanged", "BufLeave", "BufDelete", "QuitPre", "FocusLost" }, {
+autocmd({ "InsertLeave", "TextChanged", "BufLeave", "BufDelete", "FocusLost" }, {
 	pattern = "?*",
 	callback = function(ctx)
 		local b = vim.bo[ctx.buf]
-		if b.buftype ~= "" or b.filetype == "gitcommit" or b.readonly then return end
+		local bufname = vim.api.nvim_buf_get_name(0)
+		if b.buftype ~= "" or b.ft == "gitcommit" or b.readonly or bufname == "" then return end
 
-		local debounce = (ctx.event == "InsertLeave" or ctx.event == "TextChanged") and 2 or 0
-
-		vim.api.nvim_buf_set_var(ctx.buf, "savingQueued", true)
-		vim.defer_fn(function()
-			if not vim.api.nvim_buf_is_valid(ctx.buf) then return end -- closed in meantime
-			vim.cmd("silent! update")
-			vim.api.nvim_buf_set_var(ctx.buf, "savingQueued", false)
-		end, 1000 * debounce)
+		local lastSavedSecsAgo = os.time() - vim.loop.fs_stat(bufname).mtime.sec
+		if lastSavedSecsAgo < 3 then return end
+		vim.cmd("silent! update")
 	end,
 })
 
