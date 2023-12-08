@@ -163,6 +163,7 @@ autocmd({ "InsertLeave", "TextChanged", "BufLeave", "BufDelete", "FocusLost" }, 
 
 		local lastSavedSecsAgo = os.time() - vim.loop.fs_stat(bufname).mtime.sec
 		if lastSavedSecsAgo < 3 then return end
+
 		vim.cmd("silent! update")
 	end,
 })

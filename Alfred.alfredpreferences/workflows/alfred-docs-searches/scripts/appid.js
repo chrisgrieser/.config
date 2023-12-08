@@ -11,9 +11,12 @@ function run() {
 	/** @type AlfredItem[] */
 	const apps = app
 		.doShellScript(`find \
-			'/Applications' \
+			"/Applications" \
+			"/Applications/Utilities" \
 			"$HOME/Applications" \
-			'/System/Applications' \
+			"/System/Applications" \
+			"/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" \
+			"/System/Library/CoreServices/Finder.app" \
 			-name '*.app' -maxdepth 1 -type d
 		`)
 		.split("\r")
@@ -26,14 +29,6 @@ function run() {
 				arg: appName,
 			};
 		});
-
-	// only relevant app in an otherwise big folder
-	apps.push({
-		title: "Finder",
-		type: "file:skipcheck",
-		icon: { path: "/System/Library/CoreServices/Finder.app", type: "fileicon" },
-		arg: "Finder",
-	});
 
 	return JSON.stringify({ items: apps });
 }

@@ -137,6 +137,7 @@ rules:
           - type: frontmost_application_unless
             bundle_identifiers:
               - ^com\.brave\.Browser$
+              - ^com\.apple\.Safari$
               - ^com\.apple\.finder$
               - ^com\.mimestream\.Mimestream$
               - ^net\.highlightsapp\.universal$
@@ -178,6 +179,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers:
               - ^com\.brave\.Browser$
+              - ^com\.apple\.Safari$
               - ^com\.apple\.finder$
               - ^org\.hammerspoon\.Hammerspoon$
               - ^md\.obsidian$
@@ -219,7 +221,7 @@ rules:
           - { type: frontmost_application_unless, bundle_identifiers: [^md\.obsidian$] }
   #─────────────────────────────────────────────────────────────────────
   # some MX Master Models have this builtin, others do not
-  - description: "(Mouse) 6: Cmd+Tab" 
+  - description: "(Mouse) 6: Cmd+Tab"
     manipulators:
       - type: basic
         from:
