@@ -3121,8 +3121,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
-			<key>note</key>
-			<string>AppleScript Dictionary</string>
 			<key>xpos</key>
 			<real>540</real>
 			<key>ypos</key>

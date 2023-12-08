@@ -144,7 +144,7 @@ keymap("n", "<leader>lt", cmd.InspectTree, { desc = " :InspectTree" })
 -- Append to / delete from EoL
 local trailChars = { ",", ";", ")", "'", '"', "|", "\\", "{", ".", "}" }
 for _, key in pairs(trailChars) do
-	keymap("n", "<leader>" .. key, "mzA" .. key .. "<Esc>`z", { desc = "which_key_ignore" })
+	keymap("n", "<leader>" .. key, ("mzA%s<Esc>`z"):format(key), { desc = "which_key_ignore" })
 end
 
 -- MAKE
