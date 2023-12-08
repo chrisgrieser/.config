@@ -6,6 +6,7 @@ return {
 		"nmac427/guess-indent.nvim",
 		event = "BufReadPre",
 		opts = {
+			override_editorconfig = false, -- = respect editorconfig
 			-- due to code blocks and bullets often having spaces or tabs
 			filetype_exclude = { "markdown" },
 		},

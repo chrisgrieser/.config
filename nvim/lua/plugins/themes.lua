@@ -12,10 +12,10 @@ local lightThemes = {
 }
 
 local darkThemes = {
-	{ "folke/tokyonight.nvim", opts = { style = "moon" } },
+	{ "EdenEast/nightfox.nvim", name = "duskfox" },
+	-- { "folke/tokyonight.nvim", opts = { style = "moon" } },
 	-- "shaunsingh/moonlight.nvim",
 	-- "rebelot/kanagawa.nvim",
-	-- { "EdenEast/nightfox.nvim", name = "nordfox" },
 	-- "sainnhe/gruvbox-material",
 	-- { "sainnhe/sonokai", init = function() vim.g.sonokai_style = "shusia" end },
 }
