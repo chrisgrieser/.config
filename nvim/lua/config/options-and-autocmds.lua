@@ -151,6 +151,27 @@ autocmd({ "BufNew", "BufReadPost" }, {
 })
 
 --------------------------------------------------------------------------------
+-- AUTO-SAVE
+
+opt.autowriteall = true
+autocmd({ "InsertLeave", "TextChanged", "BufLeave", "BufDelete", "QuitPre", "FocusLost" }, {
+	pattern = "?*",
+	callback = function(ctx)
+		local b = vim.bo[ctx.buf]
+		if b.buftype ~= "" or b.filetype == "gitcommit" or b.readonly then return end
+
+		local debounce = (ctx.event == "InsertLeave" or ctx.event == "TextChanged") and 2 or 0
+
+		vim.api.nvim_buf_set_var(ctx.buf, "savingQueued", true)
+		vim.defer_fn(function()
+			if not vim.api.nvim_buf_is_valid(ctx.buf) then return end -- closed in meantime
+			vim.cmd("silent! update")
+			vim.api.nvim_buf_set_var(ctx.buf, "savingQueued", false)
+		end, 1000 * debounce)
+	end,
+})
+
+--------------------------------------------------------------------------------
 
 -- Formatting `vim.opt.formatoptions:remove{"o"}` would not work, since it's
 -- overwritten by the ftplugins having the `o` option. Therefore needs to be set

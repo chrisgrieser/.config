@@ -325,7 +325,11 @@ serverConfigs.typos_lsp = {
 serverConfigs.yamlls = {
 	settings = {
 		yaml = {
-			format = { enable = true, printWidth = 120 },
+			format = {
+				enable = true,
+				printWidth = 120,
+				proseWrap = "always",
+			},
 		},
 	},
 	-- SIC needs enabling via setting *and* via capabilities to work
