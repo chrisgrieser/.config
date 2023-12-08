@@ -11,15 +11,6 @@ return {
 			filetype_exclude = { "markdown" },
 		},
 	},
-	{ -- auto-save buffers
-		"okuuva/auto-save.nvim",
-		event = { "InsertLeave", "TextChanged" }, -- only needs to be loaded on files changes
-		opts = {
-			execution_message = { enabled = false },
-			noautocmd = true, -- performance & conflicts with nvim-lint
-			debounce_delay = 1000, -- save at most this many ms
-		},
-	},
 	{ -- auto-close inactive buffers
 		"chrisgrieser/nvim-early-retirement",
 		event = "VeryLazy",
