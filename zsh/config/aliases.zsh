@@ -30,6 +30,13 @@ function bat {
 	command bat --theme="$theme" "$@"
 }
 
+# jqp: dar-mode aware
+function jqp {
+	local theme
+	theme="$(defaults read -g AppleInterfaceStyle &>/dev/null && echo "Dracula" || echo "GitHub")"
+	command jqp --theme="$theme" "$@"
+}
+
 # misc
 alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
 alias prose='ssh nanotipsforvim@prose.sh'

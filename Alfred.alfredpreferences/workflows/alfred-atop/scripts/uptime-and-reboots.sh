@@ -7,4 +7,4 @@ echo
 echo 
 echo "🆙 Last 10 Reboots"
 echo "──────────────────"
-last reboot | head -n 10 | cut -c 37-
+last reboot | head -n10 | tr -s " " | cut -d" " -f3-

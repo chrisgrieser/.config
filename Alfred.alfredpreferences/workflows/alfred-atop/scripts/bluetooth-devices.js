@@ -81,7 +81,7 @@ function run() {
 		const distance = device.device_rssi ? ` rssi: ${device.device_rssi}` : "";
 		const name = device.device_name;
 		if (excludedDevices.includes(name)) return {};
-		const type = device.device_minorType
+		const type = device.device_minorType;
 
 		// icon
 		let category = "";
@@ -105,4 +105,3 @@ function run() {
 
 	return JSON.stringify({ items: deviceArr });
 }
-
