@@ -51,21 +51,6 @@ return {
 				mode = "o", -- mapped manually to only set operator pending mode
 				desc = "󱡔  comment textobj",
 			},
-			{
-				"dq",
-				"mzd<cmd>TSTextobjectSelect @comment.outer<CR>`z",
-				desc = " Sticky Delete Comment",
-			},
-			{ -- HACK since only outer comments are supported right now
-				"cq",
-				function()
-					vim.fn.setreg("z", vim.bo.commentstring:format(""))
-					vim.cmd.TSTextobjectSelect("@comment.outer")
-					vim.cmd.normal('d"zp')
-					vim.cmd.startinsert { bang = true }
-				end,
-				desc = " Change Inner Comment",
-			},
 		},
 	},
 	{ -- tons of text objects
@@ -172,7 +157,7 @@ return {
 					vim.highlight.range(0, ns, "IncSearch", { endLn, 0 }, { endLn, -1 })
 					vim.defer_fn(function() vim.api.nvim_buf_clear_namespace(0, ns, 0, -1) end, 1000)
 				end,
-				desc = "¥ Yank surrounding indent",
+				desc = "󰅍 Yank surrounding indent",
 			},
 			{ -- open URL (forward seeking)
 				"gx",

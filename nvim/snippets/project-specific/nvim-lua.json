@@ -19,6 +19,14 @@
 			"},"
 		]
 	},
+	"keymap": {
+		"prefix": "keymap",
+		"body": "keymap(\"n\", \"${1:lhs}\", \"${2:rhs}\", { desc = \"${3:desc}\" })"
+	},
+	"keymap (multi-mode)": {
+		"prefix": "keymap (multi-mode)",
+		"body": "keymap({\"n\", \"x\"}, \"${1:lhs}\", \"${2:rhs}\", { desc = \"${3:desc}\" })"
+	},
 	"input (vim.ui)": {
 		"prefix": "input (vim.ui)",
 		"body": [
