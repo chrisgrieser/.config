@@ -98,6 +98,7 @@ opt.clipboard = "unnamedplus"
 
 autocmd("TextYankPost", {
 	callback = function()
+		vim.highlight.on_yank()
 	end,
 })
 
