@@ -34,7 +34,7 @@ end
 
 --------------------------------------------------------------------------------
 -- nerdfont-powerline icons have prefix 'ple-'
-local bottomSep = { left = "", right = "" } 
+local bottomSep = { left = "", right = "" }
 local topSep = { left = "", right = "" }
 
 local lualineConfig = {
@@ -45,6 +45,7 @@ local lualineConfig = {
 			{
 				function() return "󱥒 " .. vim.fs.basename(vim.env.VIRTUAL_ENV) end,
 				cond = function() return vim.env.VIRTUAL_ENV and vim.bo.ft == "python" end,
+				section_separators = topSep,
 			},
 			{
 				"datetime",
@@ -52,18 +53,13 @@ local lualineConfig = {
 				cond = function() return vim.o.columns > 110 and vim.o.lines > 25 end,
 				-- make the `:` blink
 				fmt = function(time) return os.time() % 2 == 0 and time or time:gsub(":", " ") end,
+				section_separators = topSep,
 			},
 			{
 				"tabs",
 				mode = 1,
 				max_length = vim.o.columns * 0.6,
 				cond = function() return fn.tabpagenr("$") > 1 end,
-			},
-		},
-		lualine_b = {
-			{
-				"navic",
-				cond = function() return bo.filetype ~= "css" end,
 				section_separators = topSep,
 			},
 		},
@@ -117,7 +113,7 @@ local lualineConfig = {
 		section_separators = bottomSep,
 		-- stylua: ignore
 		ignore_focus = {
-			"DressingInput", "DressingSelect", "lspinfo", "ccc-ui", "TelescopePrompt", 
+			"DressingInput", "DressingSelect", "lspinfo", "ccc-ui", "TelescopePrompt",
 			"checkhealth", "noice", "lazy", "mason", "qf",
 		},
 	},

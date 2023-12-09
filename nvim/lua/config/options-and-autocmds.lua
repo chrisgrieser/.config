@@ -55,9 +55,6 @@ opt.smartcase = true
 opt.showmatch = true
 opt.matchtime = 1 -- deci-seconds
 
--- Clipboard
-opt.clipboard = "unnamedplus"
-
 -- Spelling
 opt.spell = false
 opt.spellfile = { u.linterConfigFolder .. "/spellfile-vim-ltex.add" } -- has to be `.add`
@@ -94,6 +91,15 @@ opt.timeoutlen = 666 -- also affects duration until which-key is shown
 
 -- Make
 opt.makeprg = "make --silent --warn-undefined-variables"
+
+--------------------------------------------------------------------------------
+-- Clipboard
+opt.clipboard = "unnamedplus"
+
+autocmd("TextYankPost", {
+	callback = function()
+	end,
+})
 
 --------------------------------------------------------------------------------
 

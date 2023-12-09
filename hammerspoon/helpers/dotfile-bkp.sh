@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # CONFIG
 max_number_of_bkps=5
 bkp_destination="$DATA_DIR/Backups/dotfile bkp" # DATA_DIR defined in zshenv
