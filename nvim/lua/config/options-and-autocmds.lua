@@ -6,10 +6,13 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 -- FILETYPES
 
--- make zsh files recognized as sh for bash-ls & treesitter
 vim.filetype.add {
-	extension = { applescript = "applescript" },
-	filename = { [".ignore"] = "gitignore" },
+	extension = {
+		applescript = "applescript",
+	},
+	filename = {
+		[".ignore"] = "gitignore",
+	},
 }
 
 --------------------------------------------------------------------------------
@@ -41,9 +44,6 @@ end
 opt.title = true
 opt.titlelen = 0 -- do not shorten title
 opt.titlestring = '%{expand("%:p")}'
-
--- Clipboard
-opt.clipboard = "unnamedplus"
 
 -- Motions & Editing
 opt.startofline = true -- motions like "G" also move to the first char
@@ -95,6 +95,31 @@ opt.timeoutlen = 666 -- also affects duration until which-key is shown
 -- Make
 opt.makeprg = "make --silent --warn-undefined-variables"
 
+--------------------------------------------------------------------------------
+-- CLIPBOARD
+
+opt.clipboard = "unnamedplus"
+
+-- relevant for delete as well, in case of using forward-seeking textobjs
+for _, key in pairs { "y", "Y" } do
+	vim.keymap.set({ "n", "x" }, key, function()
+		vim.g.cursorPreYank = vim.api.nvim_win_get_cursor(0)
+		return key
+	end, { desc = "󰅍 Sticky yank", expr = true })
+end
+
+-- post-yank-highlight
+autocmd("TextYankPost", {
+	callback = function()
+		if vim.v.event.operator ~= "y" then return end -- do not trigger for `d`
+
+		-- FIX issue with vim-visual-multi
+		if vim.b["VM_Selection"] and vim.b["VM_Selection"].Regions then return end
+
+		vim.highlight.on_yank { timeout = 1000 }
+		vim.defer_fn(function() vim.api.nvim_win_set_cursor(0, vim.g.cursorPreYank) end, 1)
+	end,
+})
 --------------------------------------------------------------------------------
 
 -- Popups & Cmdline
@@ -175,7 +200,8 @@ autocmd("FileType", {
 
 --------------------------------------------------------------------------------
 
--- auto-nohl -> https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
+-- AUTO-NOHL
+-- https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
 vim.on_key(function(char)
 	local key = vim.fn.keytrans(char)
 	local isCmdlineSearch = vim.fn.getcmdtype():find("[/?]") ~= nil

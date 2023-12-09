@@ -51,6 +51,11 @@ return {
 				mode = "o", -- mapped manually to only set operator pending mode
 				desc = "󱡔  comment textobj",
 			},
+			{
+				"dq",
+				"mzd<cmd>TSTextobjectSelect @comment.outer<CR>`z",
+				desc = " Sticky Delete Comment",
+			},
 		},
 	},
 	{ -- tons of text objects
@@ -104,8 +109,8 @@ return {
 			-- markdown
 			{ "il", "<cmd>lua require('various-textobjs').mdlink('inner')<CR>", mode = { "x", "o" }, ft = "markdown", desc = "󱡔 inner md link" },
 			{ "al", "<cmd>lua require('various-textobjs').mdlink('outer')<CR>", mode = { "x", "o" }, ft = "markdown", desc = "󱡔 outer md link" },
-			{ "i" .. u.textobjMaps.codeblock, "<cmd>lua require('various-textobjs').mdFencedCodeBlock('inner')<CR>", mode = { "x", "o" }, ft = "markdown", desc = "󱡔 inner CodeBlock" },
-			{ "a" .. u.textobjMaps.codeblock, "<cmd>lua require('various-textobjs').mdFencedCodeBlock('outer')<CR>", mode = { "x", "o" }, ft = "markdown", desc = "󱡔 outer CodeBlock" },
+			{ "iE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock('inner')<CR>", mode = { "x", "o" }, ft = "markdown", desc = "󱡔 inner CodeBlock" },
+			{ "aE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock('outer')<CR>", mode = { "x", "o" }, ft = "markdown", desc = "󱡔 outer CodeBlock" },
 
 			-- css
 			{ "is", "<cmd>lua require('various-textobjs').cssSelector('inner')<CR>", mode = { "x", "o" }, ft = "css", desc = "󱡔 inner selector" },

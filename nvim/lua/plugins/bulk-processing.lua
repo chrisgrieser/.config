@@ -33,8 +33,7 @@ return {
 		end,
 		config = function()
 			u.addToLuaLine("tabline", "lualine_z", function()
-				---@diagnostic disable-next-line: undefined-field
-				if not vim.b.VM_Selection or not vim.b.VM_Selection.Regions then return "" end
+				if not vim.b["VM_Selection"] or not vim.b["VM_Selection"].Regions then return "" end
 				return ("󰇀 Visual-Multi (%s)"):format(#vim.b.VM_Selection.Regions)
 			end)
 		end,

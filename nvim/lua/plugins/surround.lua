@@ -34,15 +34,6 @@ local function surroundConfig()
 					target = "(/)().-(/)()",
 				},
 			},
-			[maps.codeblock] = {
-				add = function()
-					if vim.bo.ft ~= "markdown" then return { { "" }, { "" } } end
-					return {
-						{ "```", "" },
-						{ "", "```" },
-					}
-				end,
-			},
 			[maps.func] = {
 				find = function() return config.get_selection { motion = "a" .. maps.func } end,
 				delete = function()
@@ -66,27 +57,6 @@ local function surroundConfig()
 						char = maps.func,
 						pattern = patt,
 					}
-				end,
-				add = function()
-					local ft = vim.bo.filetype
-					if ft == "lua" then
-						-- function as one line
-						return { { "function() " }, { " end" } }
-					elseif
-						ft == "typescript"
-						or ft == "javascript"
-						or ft == "bash"
-						or ft == "zsh"
-						or ft == "sh"
-					then
-						-- function on surrounding lines
-						return {
-							{ "function () {", "\t" },
-							{ "", "}" },
-						}
-					end
-					u.notify("Surround", "No function-surround defined for " .. ft)
-					return { { "" }, { "" } }
 				end,
 			},
 			[maps.call] = {
