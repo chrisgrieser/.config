@@ -247,6 +247,26 @@ local function telescopeConfig()
 					horizontal = { preview_width = { 0.7, min = 30 } },
 				},
 			},
+			lsp_references = {
+				prompt_prefix = "󰈿 ",
+				trim_text = true,
+				show_line = false,
+				include_declaration = false,
+				include_current_line = false,
+				initial_mode = "normal",
+				layout_config = {
+					horizontal = { preview_width = { 0.7, min = 30 } },
+				},
+			},
+			lsp_definitions = {
+				prompt_prefix = "󰈿 ",
+				trim_text = true,
+				show_line = false,
+				initial_mode = "normal",
+				layout_config = {
+					horizontal = { preview_width = { 0.7, min = 30 } },
+				},
+			},
 			lsp_document_symbols = {
 				prompt_prefix = "󰒕 ",
 				prompt_title = "Symbols",
@@ -297,6 +317,8 @@ return {
 			{ "?", function() telescope("keymaps") end, desc = "⌨️  Search Keymaps" },
 			{ "g.", function() telescope("resume") end, desc = " Continue" },
 			{ "gs", function() telescope("lsp_document_symbols") end, desc = "󰒕 Symbols" },
+			{ "gd", function() telescope("lsp_definitions") end, desc = "󰒕 Definitions" },
+			{ "gf", function() telescope("lsp_references") end, desc = "󰒕 References" },
 			-- stylua: ignore
 			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
 			{ "<leader>pg", function() telescope("highlights") end, desc = " Highlight Groups" },

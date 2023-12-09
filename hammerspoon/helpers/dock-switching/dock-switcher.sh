@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 data_store=$(dirname "$0")
 mode="$1"
 layout="$2"

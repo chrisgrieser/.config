@@ -228,33 +228,6 @@ return {
 			},
 		},
 	},
-	{ -- killring & highlights on `p`
-		"gbprod/yanky.nvim",
-		keys = {
-			-- https://github.com/gbprod/yanky.nvim#%EF%B8%8F-special-put
-			{ "p", "<Plug>(YankyPutAfter)", desc = " Paste (Yanky)" },
-			{ "P", "<Plug>(YankyPutIndentAfterShiftRight)", desc = " Paste & Indent" },
-			{ "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = " Sticky Yank" },
-			{ "<D-p>", "<Plug>(YankyCycleForward)", desc = " Cycle Killring" },
-			{
-				"p",
-				function() require("yanky.textobj").last_put() end,
-				mode = "o",
-				desc = "󱡔 Last Paste textobj",
-			},
-			-- so it loads the killring in time
-			{ "Y", "y$" },
-			"d",
-			"D",
-		},
-		opts = {
-			ring = { history_length = 25 }, -- also relevant for cmp_yanky
-			highlight = { timer = 1000 },
-			textobj = { enabled = true },
-		},
-		-- IncSearch is the default highlight group for post-yank highlights
-		init = function() u.colorschemeMod("YankyYanked", { link = "IncSearch" }) end,
-	},
 	{ -- which-key
 		"folke/which-key.nvim",
 		event = "VeryLazy",

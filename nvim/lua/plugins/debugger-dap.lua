@@ -76,13 +76,6 @@ return {
 		end,
 	},
 	{
-		"theHamsta/nvim-dap-virtual-text",
-		opts = { only_first_definition = true },
-		init = function()
-			u.colorschemeMod("NvimDapVirtualText", { link = "DiagnosticVirtualTextInfo" })
-		end,
-	},
-	{
 		"rcarriga/nvim-dap-ui",
 		dependencies = "mfussenegger/nvim-dap",
 		keys = {
