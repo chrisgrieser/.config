@@ -2,6 +2,20 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
+	{ -- comment
+		"numToStr/Comment.nvim",
+		keys = {
+			{ "q", mode = { "n", "x" }, desc = " Comment Operator" },
+			{ "Q", desc = " Append Comment at EoL" },
+			{ "qo", desc = " Comment below" },
+			{ "qO", desc = " Comment above" },
+		},
+		opts = {
+			opleader = { line = "q", block = "<Nop>" },
+			toggler = { line = "qq", block = "<Nop>" },
+			extra = { eol = "Q", above = "qO", below = "qo" },
+		},
+	},
 	{ -- undo history
 		"mbbill/undotree",
 		keys = {
@@ -68,7 +82,7 @@ return {
 					:with_del(function() return false end)
 					:with_move(function(opts) return opts.char == "," end),
 
-				-- git conventional commit with scope: auto-append `:`
+				-- git conventional commit with scope auto-append `:`
 				rule("^%a+%(%)", ":", "gitcommit")
 					:use_regex(true)
 					:with_pair(negLookahead(".+"))
@@ -161,7 +175,7 @@ return {
 					"n",
 					"cR" .. case.char,
 					("<cmd>lua require('textcase').lsp_rename('to_%s_case')<CR>"):format(case.arg),
-					{ desc = "󰒕 " .. case.desc }
+					{ desc = "󰒕 LSP Rename" .. case.desc }
 				)
 			end
 		end,
@@ -194,8 +208,9 @@ return {
 			cursor_behavior = "start",
 			max_join_length = 160,
 			langs = {
+				-- python docstrings
 				python = {
-					string_content = { -- python docstrings
+					string_content = { 
 						both = { fallback = function() vim.cmd("normal! gww") end },
 					},
 				},
@@ -243,7 +258,6 @@ return {
 					presets = { motions = false, g = false, z = false },
 					spelling = { enabled = false },
 				},
-				-- INFO ignore a mapping with desc "which_key_ignore", with this "hidden" setting
 				hidden = { "<Plug>", "^:lua ", "<cmd>" },
 				key_labels = {
 					["<CR>"] = "↵",

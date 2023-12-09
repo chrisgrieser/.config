@@ -1,14 +1,25 @@
 
 return {
-	-- TODO https://github.com/benlubas/molten-nvim#configuration
-	{ -- Notebook integration
-		-- INFO needs to run `:UpdateRemotePlugins` manually when inside a venv
-		-- INFO requires `pip install jupyter ipykernel pynvim`
-		"benlubas/molten-nvim",
-		enabled = false,
-		cmd = { "MoltenInfo", "MoltenInit" },
-		keys = {},
-		-- config = {},
+	{ -- docstrings / annotation comments
+		"danymat/neogen",
+		opts = true,
+		keys = {
+			{
+				"qf",
+				function() require("neogen").generate { type = "func" } end,
+				desc = " Function Annotation",
+			},
+			{
+				"qF",
+				function() require("neogen").generate { type = "file" } end,
+				desc = " File Annotation",
+			},
+			{
+				"qt",
+				function() require("neogen").generate { type = "type" } end,
+				desc = " Type Annotation",
+			},
+		},
 	},
 	{ -- debugger preconfig for python
 		"mfussenegger/nvim-dap-python",

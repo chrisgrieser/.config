@@ -3,14 +3,6 @@ local u = require("config.utils")
 local keymap = u.uniqueKeymap
 --------------------------------------------------------------------------------
 
--- REMOTE CONTROL
--- nvim server (RPC) to remote control neovide instances
--- DOCS https://neovim.io/doc/user/remote.html
-pcall(os.remove, "/tmp/nvim_server.pipe") -- FIX server sometimes not properly shut down
-vim.defer_fn(function() vim.fn.serverstart("/tmp/nvim_server.pipe") end, 400)
-
---------------------------------------------------------------------------------
-
 -- SIZE & FONT
 vim.opt.guifont = vim.env.CODE_FONT .. ":h25.2"
 
