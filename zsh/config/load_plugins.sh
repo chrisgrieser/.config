@@ -21,7 +21,7 @@ source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-source "$ZDOTDIR/plugins/magic_dashboard.zsh"
+source "$ZDOTDIR/plugins/magic_dashboard.sh"
 
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
