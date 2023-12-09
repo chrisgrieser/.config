@@ -19,11 +19,18 @@ keymap(
 -- NAVIGATION
 
 -- HJKL behaves like hjkl, but bigger distance
-keymap({ "o", "x" }, "H", "^")
-keymap("n", "H", "0^") -- `0` ensures fully scrolling to the left on long, indented lines
+keymap({ "o", "x" }, "H", "0^") -- `0` ensures fully scrolling to the left on long, indented lines
 keymap({ "n", "x" }, "L", "$zv") -- zv: unfold
-keymap({ "n", "x" }, "J", "6j")
-keymap({ "n", "x" }, "K", "6k")
+
+-- vertical motions should always center (as opposed to scrolloff works at EoF)
+-- stylua: ignore
+local verticalMotion = { 
+	G = "G", n = "n", N = "N", 
+	j = "gj", k = "gk", J = "6gj", K = "6gk" 
+}
+for lhs, rhs in pairs(verticalMotion) do
+	keymap({ "n", "x" }, lhs, rhs .. "zz")
+end
 
 -- Jump history
 -- non-unique, since it overwrites nvim default: https://neovim.io/doc/user/vim_diff.html#default-mappings

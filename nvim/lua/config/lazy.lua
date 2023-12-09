@@ -66,19 +66,16 @@ require("lazy").setup("plugins", {
 		rtp = {
 			-- disable unused builtin plugins from neovim
 			disabled_plugins = {
-				"man",
 				"matchparen",
 				"matchit",
-				"netrw",
 				"netrwPlugin",
-				"gzip",
-				"zip",
-				"tar",
-				"tarPlugin",
+				"man",
 				"tutor",
 				"health",
 				"tohtml",
+				"gzip",
 				"zipPlugin",
+				"tarPlugin",
 			},
 		},
 	},

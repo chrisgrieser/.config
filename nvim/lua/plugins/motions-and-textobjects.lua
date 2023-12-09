@@ -21,19 +21,22 @@ return {
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function() vim.g.matchup_matchparen_offscreen = { method = "popup" } end,
 	},
-	{ -- display line numbers when using `:` to go to a line with
-		"chrisgrieser/numb.nvim", -- PENDING https://github.com/nacro90/numb.nvim/pull/30
-		keys = ":",
-		opts = { skip_cmdline_history = true }, -- cmds not stored in cmdline-history
-	},
 	{ -- CamelCase Motion plus
 		"chrisgrieser/nvim-spider",
 		opts = { skipInsignificantPunctuation = true },
 		keys = {
-			-- stylua: ignore
-			{ "e", "<cmd>lua require('spider').motion('e')<CR>", mode = { "n", "o", "x" }, desc = "󱇫 Spider e" },
-			-- stylua: ignore
-			{ "b", "<cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" }, desc = "󱇫 Spider b" },
+			{
+				"e",
+				"<cmd>lua require('spider').motion('e')<CR>",
+				mode = { "n", "o", "x" },
+				desc = "󱇫 Spider e",
+			},
+			{
+				"b",
+				"<cmd>lua require('spider').motion('b')<CR>",
+				mode = { "n", "o", "x" },
+				desc = "󱇫 Spider b",
+			},
 		},
 	},
 	-----------------------------------------------------------------------------
@@ -42,7 +45,7 @@ return {
 		event = "BufReadPre", -- not later to ensure it loads in time properly
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		keys = {
-			{ -- avoid conflict with comment.nvim's visual mode
+			{
 				"q",
 				function() vim.cmd.TSTextobjectSelect("@comment.outer") end,
 				mode = "o", -- mapped manually to only set operator pending mode
@@ -78,7 +81,7 @@ return {
 			-- INFO `ik` defined via treesitter to exclude `local` and `let`; mapping the *inner* obj to `ak`, since it includes `local` and `let`
 			{ "ak", "<cmd>lua require('various-textobjs').key('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 outer key textobj" },
 
-			{ "n", "<cmd>lua require('various-textobjs').nearEoL()<CR>", mode = { "o", "x" }, desc = "󱡔 near EoL textobj" },
+			{ "n", "<cmd>lua require('various-textobjs').nearEoL()<CR>", mode = "o", desc = "󱡔 near EoL textobj" },
 			{ "m", "<cmd>lua require('various-textobjs').toNextClosingBracket()<CR>", mode = { "o", "x" }, desc = "󱡔 to next closing bracket textobj" },
 			{ "w", "<cmd>lua require('various-textobjs').toNextQuotationMark()<CR>", mode = "o", desc = "󱡔 to next quote textobj", nowait = true },
 			{ "i" .. u.textobjMaps.wikilink, "<cmd>lua require('various-textobjs').doubleSquareBrackets('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner wikilink" },
@@ -144,7 +147,7 @@ return {
 				desc = " Delete surrounding indent",
 			},
 			{ -- yank surrounding inner indentation
-				"ysI", -- `ysi` would conflict with `ysib` and other textobs
+				"ysii", -- `ysi` would conflict with `ysib` and other textobs
 				function()
 					-- identify start- and end-border
 					local startPos = vim.api.nvim_win_get_cursor(0)
@@ -174,11 +177,11 @@ return {
 				function()
 					require("various-textobjs").url()
 					local foundURL = vim.fn.mode():find("v") -- when textobj is found, will switch to visual line mode
-					if foundURL then
-						u.normal('"zy')
-						local url = vim.fn.getreg("z")
-						vim.fn.system { "open", url }
-					end
+					if not foundURL then return end
+
+					u.normal('"zy')
+					local url = vim.fn.getreg("z")
+					vim.fn.system { "open", url }
 				end,
 				desc = "󰌹 Smart URL Opener",
 			},
