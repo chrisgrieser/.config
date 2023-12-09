@@ -6,6 +6,7 @@ local u = require("lua.utils")
 local visuals = require("lua.visuals")
 local wu = require("lua.window-utils")
 local wf = hs.window.filter
+local privatCloser = require("lua.private").closer
 
 --------------------------------------------------------------------------------
 -- HELPERS
@@ -56,7 +57,18 @@ local function workLayout()
 	dockSwitcher("work")
 	setHigherBrightnessDuringDay()
 
-	u.closeAllTheStuff()
+	-- close all the stuff
+	u.quitApps(env.videoAndAudioApps)
+	privatCloser()
+	local finder = hs.application("Finder")
+	if finder then
+		for _, win in pairs(finder:allWindows()) do
+			win:close()
+		end
+	end
+	for _, win in pairs(hs.window.allWindows()) do
+		if win:isFullScreen() then win:setFullScreen(false) end
+	end
 
 	-- open
 	local appsToOpen = { "Discord", env.browserApp, env.mailApp, env.tickerApp, "Obsidian" }

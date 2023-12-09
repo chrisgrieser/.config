@@ -111,7 +111,7 @@ opt.pumwidth = 15 -- min width
 opt.pumheight = 12 -- max height
 
 -- scrolling
-opt.scrolloff = 13
+-- INFO using `zz` mappings instead of opt.scrolloff to center cursor
 opt.sidescrolloff = 13
 
 -- whitespace & indentation

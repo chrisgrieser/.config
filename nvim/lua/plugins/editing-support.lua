@@ -184,11 +184,6 @@ return {
 			{ "Ü", function() require("sibling-swap").swap_with_left() end, desc = "󰶢 Move Node Left" },
 		},
 	},
-	{ -- fixes scrolloff at end of file
-		"Aasim-A/scrollEOF.nvim",
-		event = "CursorMoved",
-		opts = true,
-	},
 	{ -- split-join lines
 		"Wansmer/treesj",
 		keys = {

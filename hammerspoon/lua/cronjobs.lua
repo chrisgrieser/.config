@@ -66,37 +66,4 @@ M.timer_nightlyMaintenance = hs.timer
 	:start()
 
 --------------------------------------------------------------------------------
--- SLEEP TIMER
-
--- Between 0:00 and 7:00, check every 10 min if device has been idle for 30
--- minutes. If so, alert and wait for another minute. If still idle then, quit
--- video apps.
-local config = {
-	betweenHours = { 0, 7 },
-	checkIntervalMins = 10,
-	idleMins = 45,
-	timeToReactSecs = 60,
-}
-
-M.timer_sleepAutoVideoOff = hs.timer
-	.doEvery(config.checkIntervalMins * 60, function()
-		-- GUARD
-		local isNight = u.betweenTime(config.betweenHours[1], config.betweenHours[2])
-		local isIdle = (hs.host.idleTime() / 60) > config.idleMins
-		if not (isNight and isIdle and env.isProjector() and u.screenIsUnlocked()) then return end
-
-		local alertMsg = ("💤 Will sleep in %ss if idle."):format(config.timeToReactSecs)
-		hs.alert.show(alertMsg, 5)
-		u.runWithDelays(config.timeToReactSecs, function()
-			-- GUARD
-			local userDidSth = hs.host.idleTime() < config.timeToReactSecs
-			if userDidSth then return end
-
-			u.notify("💤 SleepTimer triggered")
-			u.closeAllTheStuff()
-		end)
-	end)
-	:start()
-
---------------------------------------------------------------------------------
 return M

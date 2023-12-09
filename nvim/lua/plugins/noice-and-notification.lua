@@ -86,11 +86,6 @@ return {
 					cmdline = { view = "cmdline_popup" },
 					lua = { view = "cmdline_popup" },
 					help = { view = "cmdline_popup" },
-					numb_nvim = {
-						pattern = "^:%d+$",
-						view = "cmdline",
-						conceal = false,
-					},
 					IncRename = {
 						pattern = "^:IncRename ",
 						icon = " ",
@@ -124,18 +119,17 @@ return {
 				hover = {
 					border = { style = u.borderStyle },
 					size = { max_width = 80 },
-					win_options = { scrolloff = 4, wrap = true },
+					win_options = {  wrap = true },
 				},
 				popup = {
 					border = { style = u.borderStyle },
 					size = { width = 90, height = 25 },
-					win_options = { scrolloff = 8, wrap = true },
+					win_options = {  wrap = true },
 				},
 				split = {
 					enter = true,
 					size = "45%",
 					close = { keys = { "q", "<D-w>", "<D-0>" } },
-					win_options = { scrolloff = 3 },
 				},
 			},
 			commands = {
