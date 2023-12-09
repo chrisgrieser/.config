@@ -29,4 +29,7 @@ sketchybar --set "$NAME" label="$remindersToday" icon="$icon" icon.padding_right
 
 #───────────────────────────────────────────────────────────────────────────────
 sleep 1
-killall "Reminders"
+
+# kill Reminders if it's not frontmost (prevents quitting remindders when using it)
+front_app=$(osascript -e 'tell application "System Events" to return (name of first process where it is frontmost)')
+[[ "$front_app" != "Reminders" ]] && killall "Reminders"

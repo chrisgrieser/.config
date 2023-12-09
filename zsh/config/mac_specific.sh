@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 # mackup sync
 # INFO since symlinks of preferences are buggy since Sonoma, this workaround
 # will simply copy the preferences without symlinks

@@ -1,4 +1,3 @@
-#!/usr/bin/env zsh
 # this script assumes Homebrew is already installed
 #───────────────────────────────────────────────────────────────────────────────
 

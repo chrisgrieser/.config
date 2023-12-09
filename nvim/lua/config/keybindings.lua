@@ -19,14 +19,13 @@ keymap(
 -- NAVIGATION
 
 -- HJKL behaves like hjkl, but bigger distance
-keymap({ "n", "x", "o" }, "H", "0^") -- `0` ensures fully scrolling to the left on long, indented lines
+keymap({ "n", "o", "x" }, "H", "0^") -- `0` ensures fully scrolling to the left on long, indented lines
 keymap({ "n", "x" }, "L", "$zv") -- zv: unfold
 
--- vertical motions should always center (as opposed to scrolloff works at EoF)
-local verticalMotion = { G = "G", n = "n", N = "N", j = "gj", k = "gk", J = "6gj", K = "6gk" }
-for lhs, rhs in pairs(verticalMotion) do
-	keymap({ "n", "x" }, lhs, rhs .. "zz")
-end
+keymap({ "n", "x" }, "j", "gj")
+keymap({ "n", "x" }, "k", "gk")
+keymap({ "n", "x" }, "J", "6gj")
+keymap({ "n", "x" }, "K", "6gk")
 
 -- Jump history
 -- non-unique, since it overwrites nvim default: https://neovim.io/doc/user/vim_diff.html#default-mappings
@@ -60,7 +59,6 @@ for remap, original in pairs(u.textobjRemaps) do
 end
 
 -- special remaps
-keymap("o", "k", 'i"', { desc = "󱡔 inner quote" })
 keymap("o", "J", "2j") -- dd = 1 line, dj = 2 lines, dJ = 3 lines
 keymap("n", "<Space>", '"_ciw', { desc = "󱡔 change word" })
 keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
@@ -160,7 +158,7 @@ end, { expr = true, desc = "better i" })
 --------------------------------------------------------------------------------
 
 -- VISUAL MODE
-keymap("x", "V", "gjzz", { desc = "repeated V selects more lines" })
+keymap("x", "V", "j", { desc = "repeated V selects more lines" })
 keymap("x", "v", "<C-v>", { desc = "`vv` starts Visual Block" })
 
 --------------------------------------------------------------------------------

@@ -1,7 +1,3 @@
-#!/usr/bin/env zsh
-export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-#───────────────────────────────────────────────────────────────────────────────
-
 # Import / Change settings
 open "chrome-extension://pncfbmialoiaghdehhbnbhkkgmjanfhe/pages/options.html"
 open "chrome-extension://hfjbmagddngcpeloejdejnfgbamkjaeg/pages/options.html"

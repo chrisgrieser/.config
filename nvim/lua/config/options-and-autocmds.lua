@@ -104,6 +104,7 @@ opt.pumheight = 12 -- max height
 -- scrolling
 -- INFO using `zz` mappings instead of opt.scrolloff to center cursor
 opt.sidescrolloff = 13
+opt.scrolloff = 13
 
 -- whitespace & indentation
 opt.shiftround = true
@@ -157,7 +158,7 @@ autocmd({ "InsertLeave", "TextChanged", "BufLeave", "BufDelete", "FocusLost" }, 
 		end
 
 		local lastSavedSecsAgo = os.time() - stats.mtime.sec
-		if lastSavedSecsAgo < 3 then return end
+		if lastSavedSecsAgo < 3 and ctx.event ~= "FocusLost" then return end
 
 		vim.cmd("silent! noautocmd update")
 	end,

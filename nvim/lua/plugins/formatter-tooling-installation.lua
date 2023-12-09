@@ -26,6 +26,7 @@ local lspFormattingFiletypes = {
 
 local extraInstalls = {
 	"debugpy",
+	"shellcheck", -- needed by bash-lsp
 	{ "jedi-language-server", version = "0.41.0" }, -- PENDING https://github.com/pappasam/jedi-language-server/issues/296
 }
 
@@ -37,7 +38,6 @@ local dontInstall = {
 	"injected",
 }
 
----given the linter- and formatter-list of nvim-lint and conform.nvim, extract a
 ---list of all tools that need to be auto-installed
 ---@param myFormatters object[]
 ---@param extraTools string[]
@@ -45,7 +45,7 @@ local dontInstall = {
 ---@return string[] tools
 ---@nodiscard
 local function toolsToAutoinstall(myFormatters, myLsps, extraTools, ignoreTools)
-	-- get all linters, formatters, & extra tools and merge them into one list
+	-- get all lsps, formatters, & extra tools and merge them into one list
 	local formatterList = vim.tbl_flatten(vim.tbl_values(myFormatters))
 	local tools = vim.list_extend(myLsps, formatterList)
 
@@ -155,7 +155,7 @@ return {
 			},
 		},
 	},
-	{ -- auto-install missing linters & formatters
+	{ -- auto-install missing lsps & formatters
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		event = "VeryLazy",
 		keys = {

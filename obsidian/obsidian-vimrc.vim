@@ -20,6 +20,9 @@ nnoremap C "_c$
 nnoremap x "_dl
 " nnoremap c "_c " BUG not working with vimrc plugin
 
+" don't override register
+vnoremap p P
+
 """"""""""""""""""""""
 " Navigation
 """"""""""""""""""""""

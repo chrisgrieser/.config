@@ -37,7 +37,6 @@ The tree was generated using <https://tree.nathanfriend.io/>
 - [ahmedkhalf/project.nvim](https://github.com/ahmedkhalf/project.nvim)
 - [andymass/vim-matchup](https://github.com/andymass/vim-matchup)
 - [chrisgrieser/cmp-emoji](https://github.com/chrisgrieser/cmp-emoji)
-- [chrisgrieser/numb.nvim](https://github.com/chrisgrieser/numb.nvim)
 - [chrisgrieser/nvim-dr-lsp](https://github.com/chrisgrieser/nvim-dr-lsp)
 - [chrisgrieser/nvim-early-retirement](https://github.com/chrisgrieser/nvim-early-retirement)
 - [chrisgrieser/nvim-genghis](https://github.com/chrisgrieser/nvim-genghis)
@@ -61,7 +60,6 @@ The tree was generated using <https://tree.nathanfriend.io/>
 - [gbprod/yanky.nvim](https://github.com/gbprod/yanky.nvim)
 - [ghillb/cybu.nvim](https://github.com/ghillb/cybu.nvim)
 - [hail2u/vim-css3-syntax](https://github.com/hail2u/vim-css3-syntax)
-- [haringsrob/nvim_context_vt](https://github.com/haringsrob/nvim_context_vt)
 - [hiphish/rainbow-delimiters.nvim](https://github.com/hiphish/rainbow-delimiters.nvim)
 - [hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer)
 - [hrsh7th/cmp-cmdline](https://github.com/hrsh7th/cmp-cmdline)
@@ -83,9 +81,7 @@ The tree was generated using <https://tree.nathanfriend.io/>
 - [mbbill/undotree](https://github.com/mbbill/undotree)
 - [mfussenegger/nvim-dap-python](https://github.com/mfussenegger/nvim-dap-python)
 - [mfussenegger/nvim-dap](https://github.com/mfussenegger/nvim-dap)
-- [mfussenegger/nvim-lint](https://github.com/mfussenegger/nvim-lint)
 - [mg979/vim-visual-multi](https://github.com/mg979/vim-visual-multi)
-- [mityu/vim-applescript](https://github.com/mityu/vim-applescript)
 - [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
 - [nmac427/guess-indent.nvim](https://github.com/nmac427/guess-indent.nvim)
 - [numToStr/Comment.nvim](https://github.com/numToStr/Comment.nvim)
@@ -96,7 +92,7 @@ The tree was generated using <https://tree.nathanfriend.io/>
 - [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
 - [nvim-treesitter/nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)
 - [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
-- [okuuva/auto-save.nvim](https://github.com/okuuva/auto-save.nvim)
+- [piersolenski/telescope-import.nvim](https://github.com/piersolenski/telescope-import.nvim)
 - [ray-x/lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim)
 - [rcarriga/nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui)
 - [rcarriga/nvim-notify](https://github.com/rcarriga/nvim-notify)
@@ -110,9 +106,3 @@ The tree was generated using <https://tree.nathanfriend.io/>
 - [uga-rosa/ccc.nvim](https://github.com/uga-rosa/ccc.nvim)
 - [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim)
 - [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)
-
-<!-- vale Google.FirstPerson = NO -->
-This list was auto-generated [with this small shell
-script](https://nanotipsforvim.prose.sh/list-all-your-installed-plugins). Also,
-you can check out [the nvim plugins I authored
-myself](https://github.com/chrisgrieser?tab=repositories&q=nvim&type=source&language=&sort=stargazers).

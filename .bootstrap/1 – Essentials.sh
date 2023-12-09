@@ -1,6 +1,3 @@
-#!/usr/bin/env zsh
-# shellcheck disable=SC2034,SC2164,SC1071
-
 # ask for credentials upfront
 sudo -v
 setopt INTERACTIVE_COMMENTS
@@ -49,7 +46,7 @@ fi
 ln -sf "$DATA_DIR/Authentication/ssh/" ~/.ssh
 sudo chmod -R 700 ~/.ssh/id_ed25519
 
-cd ~
+cd ~ || return 1
 [[ -e ~/.config ]] && rm -rfv ~/.config
 git clone git@github.com:chrisgrieser/.config.git
 git clone git@github.com:chrisgrieser/main-vault.git
