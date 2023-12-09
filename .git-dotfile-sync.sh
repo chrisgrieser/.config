@@ -16,10 +16,10 @@ commit_msg="$device_name ($files_changed)"
 i=0
 while true; do
 	git add -A && git commit -m "$commit_msg" --author="🤖 automated<cron@job>"
-	[[ $? -eq 2 ]] && return 2 # pre-commit failed
+	[[ $? -eq 2 ]] && exit 2 # pre-commit failed
 	sleep 0.5                  # prevent "Cannot rebase on multiple branches"
-	git pull && git push && return 0
+	git pull && git push && exit 0
 	sleep 1
 	i=$((i + 1))
-	[[ $i -gt 3 ]] && return 1
+	[[ $i -gt 3 ]] && exit 1
 done
