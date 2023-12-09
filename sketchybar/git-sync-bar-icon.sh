@@ -8,6 +8,9 @@ export GIT_OPTIONAL_LOCKS=0
 #───────────────────────────────────────────────────────────────────────────────
 # CHANGES
 
+# shellcheck disable=SC1091
+source "$HOME/.zshenv"
+
 cd "$HOME/.config" || configError="repo-path wrong"
 dotChanges=$(git status --short | wc -l | tr -d " ")
 

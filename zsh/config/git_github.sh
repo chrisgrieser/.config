@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 alias co='git checkout'
 alias gs='git status'
 alias ga='git add'
@@ -118,7 +116,7 @@ function grem {
 	echo
 	git remote --verbose
 	printf "\e[1;34mgh\e[0m default repo: \e[1;31m" &&
-		gh repo set-default --view && 
+		gh repo set-default --view &&
 		printf "\e[0m"
 }
 

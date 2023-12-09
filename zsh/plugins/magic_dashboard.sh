@@ -1,4 +1,3 @@
-#!/usr/bin/env zsh
 # shellcheck disable=2086 # simpler for various pseudo-options
 
 # draws a separator line with terminal width
