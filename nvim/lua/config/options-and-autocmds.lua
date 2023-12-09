@@ -8,17 +8,8 @@ local u = require("config.utils")
 
 -- make zsh files recognized as sh for bash-ls & treesitter
 vim.filetype.add {
-	extension = {
-		zsh = "sh",
-		sh = "sh", -- force sh-files with zsh-shebang to still get sh as filetype
-		applescript = "applescript",
-	},
-	filename = {
-		[".zshrc"] = "sh",
-		[".zshenv"] = "sh",
-		[".ignore"] = "gitignore", -- fd ignore files
-		[".cff"] = "yaml",
-	},
+	extension = { applescript = "applescript" },
+	filename = { [".ignore"] = "gitignore" },
 }
 
 --------------------------------------------------------------------------------
@@ -159,12 +150,16 @@ autocmd({ "InsertLeave", "TextChanged", "BufLeave", "BufDelete", "FocusLost" }, 
 	callback = function(ctx)
 		local b = vim.bo[ctx.buf]
 		local bufname = vim.api.nvim_buf_get_name(0)
-		if b.buftype ~= "" or b.ft == "gitcommit" or b.readonly or bufname == "" then return end
+		local stats = vim.loop.fs_stat(bufname)
 
-		local lastSavedSecsAgo = os.time() - vim.loop.fs_stat(bufname).mtime.sec
+		if b.buftype ~= "" or b.ft == "gitcommit" or b.readonly or bufname == "" or not stats then
+			return
+		end
+
+		local lastSavedSecsAgo = os.time() - stats.mtime.sec
 		if lastSavedSecsAgo < 3 then return end
 
-		vim.cmd("silent! update")
+		vim.cmd("silent! noautocmd update")
 	end,
 })
 
@@ -213,9 +208,9 @@ end, vim.api.nvim_create_namespace("auto_nohl"))
 local skeletons = {
 	python = "py",
 	applescript = "applescript",
-	javascript = "jxa",
+	javascript = "js",
 	make = "make",
-	sh = "zsh",
+	sh = "sh",
 }
 
 vim.api.nvim_create_autocmd("FileType", {

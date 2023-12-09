@@ -19,15 +19,11 @@ keymap(
 -- NAVIGATION
 
 -- HJKL behaves like hjkl, but bigger distance
-keymap({ "o", "x" }, "H", "0^") -- `0` ensures fully scrolling to the left on long, indented lines
+keymap({ "n", "x", "o" }, "H", "0^") -- `0` ensures fully scrolling to the left on long, indented lines
 keymap({ "n", "x" }, "L", "$zv") -- zv: unfold
 
 -- vertical motions should always center (as opposed to scrolloff works at EoF)
--- stylua: ignore
-local verticalMotion = { 
-	G = "G", n = "n", N = "N", 
-	j = "gj", k = "gk", J = "6gj", K = "6gk" 
-}
+local verticalMotion = { G = "G", n = "n", N = "N", j = "gj", k = "gk", J = "6gj", K = "6gk" }
 for lhs, rhs in pairs(verticalMotion) do
 	keymap({ "n", "x" }, lhs, rhs .. "zz")
 end
@@ -164,7 +160,7 @@ end, { expr = true, desc = "better i" })
 --------------------------------------------------------------------------------
 
 -- VISUAL MODE
-keymap("x", "V", "j", { desc = "repeated V selects more lines" })
+keymap("x", "V", "gjzz", { desc = "repeated V selects more lines" })
 keymap("x", "v", "<C-v>", { desc = "`vv` starts Visual Block" })
 
 --------------------------------------------------------------------------------

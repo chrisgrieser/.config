@@ -2,11 +2,6 @@ local u = require("config.utils")
 local linterConfig = require("config.utils").linterConfigFolder
 --------------------------------------------------------------------------------
 
-local linters = {
-	sh = { "shellcheck" }, -- PENDING https://github.com/bash-lsp/bash-language-server/issues/1064
-	markdown = { "vale" }, -- PENDING https://github.com/errata-ai/vale-ls/issues/8
-}
-
 local formatters = {
 	javascript = { "biome" },
 	typescript = { "biome" },
@@ -14,7 +9,6 @@ local formatters = {
 	json = { "biome" },
 	lua = { "stylua" },
 	markdown = { "markdown-toc", "markdownlint", "injected" },
-	css = { "squeeze_blanks" }, -- FIX cssls-bug not accepting formatting parameters
 	sh = { "shellcheck", "shfmt" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
 	["*"] = { "typos" },
@@ -45,18 +39,15 @@ local dontInstall = {
 
 ---given the linter- and formatter-list of nvim-lint and conform.nvim, extract a
 ---list of all tools that need to be auto-installed
----@param myLinters object[]
 ---@param myFormatters object[]
 ---@param extraTools string[]
 ---@param ignoreTools string[]
 ---@return string[] tools
 ---@nodiscard
-local function toolsToAutoinstall(myLinters, myFormatters, myLsps, extraTools, ignoreTools)
+local function toolsToAutoinstall(myFormatters, myLsps, extraTools, ignoreTools)
 	-- get all linters, formatters, & extra tools and merge them into one list
-	local linterList = vim.tbl_flatten(vim.tbl_values(myLinters))
 	local formatterList = vim.tbl_flatten(vim.tbl_values(myFormatters))
-	local tools = vim.list_extend(linterList, formatterList)
-	vim.list_extend(tools, myLsps)
+	local tools = vim.list_extend(myLsps, formatterList)
 
 	-- only unique tools
 	table.sort(tools)
@@ -66,30 +57,6 @@ local function toolsToAutoinstall(myLinters, myFormatters, myLsps, extraTools, i
 	tools = vim.tbl_filter(function(tool) return not vim.tbl_contains(ignoreTools, tool) end, tools)
 	vim.list_extend(tools, extraTools)
 	return tools
-end
-
---------------------------------------------------------------------------------
-
-local function linterConfigs()
-	local lint = require("lint")
-	lint.linters_by_ft = linters
-
-	lint.linters.shellcheck.args = { "--shell=bash", "--format=json", "--external-sources", "-" }
-
-	vim.env.VALE_CONFIG_PATH = u.linterConfigFolder .. "/vale/vale.ini"
-end
-
-local function lintTriggers()
-	local function doLint()
-		if vim.bo.buftype ~= "" then return end
-		require("lint").try_lint()
-	end
-
-	vim.api.nvim_create_autocmd({ "BufReadPost", "InsertLeave", "TextChanged", "FocusGained" }, {
-		callback = doLint,
-	})
-
-	doLint() -- run on initialization
 end
 
 --------------------------------------------------------------------------------
@@ -127,14 +94,6 @@ local formatterConfig = {
 --------------------------------------------------------------------------------
 
 return {
-	{ -- Linter integration
-		"mfussenegger/nvim-lint",
-		ft = vim.tbl_keys(linters),
-		config = function()
-			linterConfigs()
-			lintTriggers()
-		end,
-	},
 	{ -- Formatter integration
 		"stevearc/conform.nvim",
 		opts = formatterConfig,
@@ -205,7 +164,7 @@ return {
 		dependencies = "williamboman/mason.nvim",
 		config = function()
 			local lsps = vim.tbl_values(vim.g.lspToMasonMap)
-			local myTools = toolsToAutoinstall(linters, formatters, lsps, extraInstalls, dontInstall)
+			local myTools = toolsToAutoinstall(formatters, lsps, extraInstalls, dontInstall)
 
 			require("mason-tool-installer").setup {
 				ensure_installed = myTools,

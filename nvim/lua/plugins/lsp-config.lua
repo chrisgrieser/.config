@@ -18,25 +18,26 @@ vim.g.lspToMasonMap = {
 	marksman = "marksman", -- markdown
 	pyright = "pyright", -- python
 	ruff_lsp = "ruff-lsp", -- python linter
+	stylelint_lsp = "stylelint-lsp",
 	taplo = "taplo", -- toml
 	tsserver = "typescript-language-server",
-	yamlls = "yaml-language-server",
 	typos_lsp = "typos-lsp",
-	stylelint_lsp = "stylelint-lsp",
+	vale_ls = "vale-ls",
+	yamlls = "yaml-language-server",
 }
 
 --------------------------------------------------------------------------------
 
 ---@class (exact) lspConfiguration see https://github.com/neovim/nvim-lspconfig/blob/master/doc/lspconfig.txt#L46
----@field settings? table <string, table>
----@field root_dir? function(filename, bufnr)
+---@field autostart? boolean
+---@field capabilities? table <string, string|table|boolean|function>
+---@field cmd? string[]
 ---@field filetypes? string[]
 ---@field init_options? table <string, string|table|boolean>
 ---@field on_attach? function(client, bufnr)
 ---@field on_new_config? function(new_config, root_dir)
----@field capabilities? table <string, string|table|boolean|function>
----@field cmd? string[]
----@field autostart? boolean
+---@field root_dir? function(filename, bufnr)
+---@field settings? table <string, table>
 ---@field single_file_support? boolean
 
 ---@type table<string, lspConfiguration>
@@ -137,9 +138,7 @@ serverConfigs.jedi_language_server = {
 		local venv_python = root_dir .. "/.venv/bin/python"
 		local fileExists = vim.loop.fs_stat(venv_python) ~= nil
 		if not fileExists then return end
-		config.init_options.workspace = {
-			environmentPath = venv_python,
-		}
+		config.init_options.workspace = { environmentPath = venv_python }
 	end,
 }
 
@@ -157,9 +156,9 @@ serverConfigs.emmet_ls = {
 serverConfigs.cssls = {
 	settings = {
 		css = {
-			-- BUG this config being ignored
-			-- using `squeeze_blank` from conform.nvim instead
 			format = {
+				-- BUG this config being ignored
+				-- using `stylelint-lsp` formatting instead
 				preserveNewLines = true,
 				maxPreserveNewLines = 2,
 				spaceAroundSelectorSeparator = true,
@@ -178,9 +177,7 @@ serverConfigs.cssls = {
 serverConfigs.stylelint_lsp = {
 	filetypes = { "css", "scss" }, -- don't enable on js/ts, since I don't need it there
 	settings = {
-		stylelintplus = {
-			autoFixOnFormat = true,
-		},
+		stylelintplus = { autoFixOnFormat = true },
 	},
 }
 
@@ -304,20 +301,19 @@ serverConfigs.typos_lsp = {
 	init_options = { diagnosticSeverity = "information" },
 }
 
--- PENDING https://github.com/errata-ai/vale-ls/issues/8
 -- DOCS https://vale.sh/docs/integrations/guide/#vale-ls
 -- DOCS https://vale.sh/docs/topics/config#search-process
--- serverConfigs.vale_ls = {
--- 	init_options = {
--- 		installVale = true, -- needs to be set, since false by default
--- 		syncOnStartup = false,
--- 	},
--- 	-- just needs any root directory to work, we are providing the config already
--- 	root_dir = function() return os.getenv("HOME") end,
--- }
---
--- -- FIX https://github.com/errata-ai/vale-ls/issues/4
--- vim.env.VALE_CONFIG_PATH = u.linterConfigFolder .. "/vale/vale.ini"
+serverConfigs.vale_ls = {
+	init_options = {
+		installVale = true, -- needs to be set, since false by default
+		syncOnStartup = false,
+	},
+	-- just needs any root directory to work, we are providing the config already
+	root_dir = function() return os.getenv("HOME") end,
+}
+
+-- FIX https://github.com/errata-ai/vale-ls/issues/4
+vim.env.VALE_CONFIG_PATH = u.linterConfigFolder .. "/vale/vale.ini"
 
 --------------------------------------------------------------------------------
 
@@ -333,7 +329,7 @@ serverConfigs.yamlls = {
 		},
 	},
 	-- SIC needs enabling via setting *and* via capabilities to work
-	-- TODO probably due to missing dynamic formatting in nvim
+	-- TODO probably due to missing dynamic formatting in nvim?
 	on_attach = function(client) client.server_capabilities.documentFormattingProvider = true end,
 }
 
