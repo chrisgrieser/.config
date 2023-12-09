@@ -39,7 +39,7 @@ return {
 				border = u.borderStyle,
 				padding = 7,
 				path = "tail",
-				hide_buffer_id = true,
+				hide_buffer_id = false,
 				highlights = { current_buffer = "CursorLine", adjacent_buffers = "Normal" },
 			},
 			behavior = {

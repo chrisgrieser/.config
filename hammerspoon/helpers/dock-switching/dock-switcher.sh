@@ -1,10 +1,8 @@
-#!/usr/bin/env zsh
-
 data_store=$(dirname "$0")
 mode="$1"
 layout="$2"
 dock_plist="$HOME/Library/Preferences/com.apple.dock.plist"
-dock_config="$data_store/$layout.plist" 
+dock_config="$data_store/$layout.plist"
 
 #───────────────────────────────────────────────────────────────────────────────
 
