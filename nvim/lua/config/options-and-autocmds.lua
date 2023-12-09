@@ -25,7 +25,7 @@ opt.shadafile = u.vimDataDir .. "main.shada"
 opt.swapfile = false -- doesn't help and only creates useless files and notifications
 
 --------------------------------------------------------------------------------
--- Undo
+-- UNDO
 opt.undofile = true -- enables persistent undo history
 
 -- extra undo-points (= more fine-grained undos)
@@ -40,10 +40,20 @@ end
 
 --------------------------------------------------------------------------------
 
+-- AUTOMATION (external control)
+
 -- Set title so current file can be read from automation app via window title
 opt.title = true
 opt.titlelen = 0 -- do not shorten title
 opt.titlestring = '%{expand("%:p")}'
+
+-- nvim server (RPC) to remote control neovide instances https://neovim.io/doc/user/remote.html
+if vim.fn.has("gui_running") == 1 then
+	pcall(os.remove, "/tmp/nvim_server.pipe") -- FIX server sometimes not properly shut down
+	vim.defer_fn(function() vim.fn.serverstart("/tmp/nvim_server.pipe") end, 400)
+end
+
+--------------------------------------------------------------------------------
 
 -- Motions & Editing
 opt.startofline = true -- motions like "G" also move to the first char
@@ -61,7 +71,7 @@ opt.matchtime = 1 -- deci-seconds
 -- Spelling
 opt.spell = false
 opt.spellfile = { u.linterConfigFolder .. "/spellfile-vim-ltex.add" } -- has to be `.add`
-opt.spelllang = "en_us" -- still relevant for `z=`
+opt.spelllang = "en_us" -- even with spellcheck disabled, still relevant for `z=`
 
 -- Split
 opt.splitright = true -- vsplit right instead of left
@@ -72,7 +82,7 @@ opt.cursorline = true
 opt.signcolumn = "yes:1"
 
 -- Wrapping & Line Length
-opt.textwidth = 80 -- only fallback value, mostly overridden by .editorconfig
+opt.textwidth = 80 -- mostly set by .editorconfig, therefore only fallback
 opt.colorcolumn = "+1"
 opt.wrap = false
 
@@ -83,7 +93,7 @@ opt.shortmess:append("sSI") -- reduce info in :messages
 opt.report = 9001 -- disable "x more/fewer lines" messages
 
 -- Character groups
-opt.iskeyword:append("-") -- don't treat "-" as word boundary, e.g., for kebab-case
+opt.iskeyword:append("-") -- don't treat "-" as word boundary, e.g. for kebab-case variables
 
 opt.nrformats:append("unsigned") -- make <C-a>/<C-x> ignore negative numbers
 opt.nrformats:remove { "bin", "hex" } -- remove ambiguity, since I don't use them anyway
@@ -100,7 +110,7 @@ opt.makeprg = "make --silent --warn-undefined-variables"
 
 opt.clipboard = "unnamedplus"
 
--- relevant for delete as well, in case of using forward-seeking textobjs
+-- sticky yank operations
 for _, key in pairs { "y", "Y" } do
 	vim.keymap.set({ "n", "x" }, key, function()
 		vim.g.cursorPreYank = vim.api.nvim_win_get_cursor(0)
@@ -117,7 +127,7 @@ autocmd("TextYankPost", {
 		if vim.b["VM_Selection"] and vim.b["VM_Selection"].Regions then return end
 
 		vim.highlight.on_yank { timeout = 1000 }
-		vim.defer_fn(function() vim.api.nvim_win_set_cursor(0, vim.g.cursorPreYank) end, 1)
+		vim.api.nvim_win_set_cursor(0, vim.g.cursorPreYank)
 	end,
 })
 --------------------------------------------------------------------------------
@@ -127,20 +137,20 @@ opt.pumwidth = 15 -- min width
 opt.pumheight = 12 -- max height
 
 -- scrolling
--- INFO using `zz` mappings instead of opt.scrolloff to center cursor
 opt.sidescrolloff = 13
 opt.scrolloff = 13
 
 -- whitespace & indentation
 opt.shiftround = true
 opt.smartindent = true
-opt.expandtab = false -- fallback, mostly set by .editorconfig
+opt.expandtab = false -- mostly set by .editorconfig, therefore only fallback
 opt.tabstop = 3
 opt.shiftwidth = 3
 
 -- invisible chars
 opt.list = true
 opt.conceallevel = 1
+
 opt.fillchars:append {
 	eob = " ",
 	fold = " ",
@@ -185,15 +195,15 @@ autocmd({ "InsertLeave", "TextChanged", "BufLeave", "BufDelete", "FocusLost" }, 
 		local lastSavedSecsAgo = os.time() - stats.mtime.sec
 		if lastSavedSecsAgo < 3 and ctx.event ~= "FocusLost" then return end
 
-		vim.cmd("silent! noautocmd update")
+		vim.cmd("silent noautocmd update")
 	end,
 })
 
 --------------------------------------------------------------------------------
 
 -- Formatting `vim.opt.formatoptions:remove{"o"}` would not work, since it's
--- overwritten by the ftplugins having the `o` option. Therefore needs to be set
--- via autocommand https://www.reddit.com/r/neovim/comments/sqld76/stop_automatic_newline_continuation_of_comments/
+-- overwritten by ftplugins having the `o` option (which most do). Therefore
+-- needs to be set via autocommand
 autocmd("FileType", {
 	callback = function() opt_local.formatoptions:remove("o") end,
 })
@@ -261,11 +271,11 @@ vim.api.nvim_create_autocmd("FileType", {
 			if not fileIsEmpty then return end
 
 			-- write file
-			-- (idempotent, since Filetype event sometimes triggered multiple times)
 			local file = io.open(skeletonFile, "r")
 			if not file then return end
 			local lines = vim.split(file:read("*a"), "\n")
 			file:close()
+			-- overwrite so it's idempotent, since `Filetype` event is sometimes triggered twice
 			vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
 			vim.api.nvim_win_set_cursor(0, { #lines, 0 })
 		end, 1)
