@@ -1,3 +1,4 @@
+# vim: filetype=bash
 CONFIG_FILES=(
 	load_plugins
 	plugin_cli_settings
@@ -22,7 +23,7 @@ CONFIG_FILES=(
 
 for filename in "${CONFIG_FILES[@]}"; do
 	# shellcheck disable=1090
-	source "$ZDOTDIR/config/$filename.zsh"
+	source "$ZDOTDIR/config/$filename.sh"
 done
 
 # remove last login message that some terminals leave https://stackoverflow.com/a/69915614

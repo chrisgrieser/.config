@@ -153,7 +153,7 @@ local function cmpconfig()
 		end,
 		sources = cmp.config.sources {
 			{ name = "path" },
-			{ name = "cmdline" },
+			{ name = "cmdline", max_item_count = 8 },
 			{ name = "cmdline_history", keyword_length = 2 },
 		},
 	})

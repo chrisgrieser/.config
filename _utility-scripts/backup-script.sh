@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 # CONFIG
 LOG_LOCATION="$DATA_DIR/Backups/backups-to-external-drives.log"
 
@@ -82,15 +80,15 @@ echo "Backup: $(date '+%Y-%m-%d %H:%M')" >>last_backup.log
 # Reminder for Next Backup in 14 days, if there is no backup reminder already
 # (avoids duplicate reminders if backup run twice)
 osascript -e'
-	set nextDate to (current date) + 14 * (60 * 60 * 24) 
-	tell application "Reminders" 
-		set theList to default list 
-		set backupReminders to reminders of theList where name is "Backup" and completed is false 
-		if (count of backupReminders) is 0 then 
-			tell theList to make new reminder with properties {name:"Backup", allday due date:nextDate} 
-		end if 
-		quit 
-	end tell 
+	set nextDate to (current date) + 14 * (60 * 60 * 24)
+	tell application "Reminders"
+		set theList to default list
+		set backupReminders to reminders of theList where name is "Backup" and completed is false
+		if (count of backupReminders) is 0 then
+			tell theList to make new reminder with properties {name:"Backup", allday due date:nextDate}
+		end if
+		quit
+	end tell
 ' &>/dev/null
 
 # Notify on Completion
