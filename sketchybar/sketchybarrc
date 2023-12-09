@@ -1,6 +1,4 @@
 #!/usr/bin/env zsh
-# vim: filetype=sh
-# INFO use `sketchybar --hotload` to auto-reload config when building stuff
 #───────────────────────────────────────────────────────────────────────────────
 
 # CONFIG
@@ -19,6 +17,8 @@ fi
 first_row="left"
 second_row="popup.clock"
 
+# shellcheck disable=SC1091
+source "$HOME/.zshenv"
 icon_font="$CODE_FONT" # requires zsh-shebang to load from .zshenv
 system_font="Lucida Grande"
 

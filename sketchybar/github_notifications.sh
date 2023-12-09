@@ -1,10 +1,12 @@
-#!/usr/bin/env zsh
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 #───────────────────────────────────────────────────────────────────────────────
 # Count of GitHub notifications
 # DOCS: https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28
 # CONFIG: https://github.com/settings/notifications
 #───────────────────────────────────────────────────────────────────────────────
+
+# shellcheck disable=SC1091
+source "$HOME/.zshenv"
 
 # GUARD
 if ! command -v yq &>/dev/null; then

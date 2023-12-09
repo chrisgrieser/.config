@@ -1,4 +1,3 @@
-#!/usr/bin/env zsh
 # INFO
 # - Backup all PUBLIC NON-FORK repos owned by the specified github user as zip archive. 
 # - For speed and disk space, only shallow clones are saved (depth 2).

@@ -1,4 +1,6 @@
 #!/usr/bin/env zsh
+# INFO for whatever reason, has utf string errors when using bash
+
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 #───────────────────────────────────────────────────────────────────────────────
 # WEATHER USING BRIGHTSKY API
