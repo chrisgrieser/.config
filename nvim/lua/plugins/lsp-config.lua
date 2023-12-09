@@ -54,7 +54,7 @@ serverConfigs.bashls = {
 		bashIde = {
 			includeAllWorkspaceSymbols = true,
 			-- PENDING https://github.com/bash-lsp/bash-language-server/issues/1064
-			shellcheckArguments = "--shell=bash",
+			-- shellcheckArguments = "--shell=bash",
 		},
 	},
 }

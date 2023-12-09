@@ -15,10 +15,12 @@ end
 ---@param diag Diagnostic
 ---@return string
 local function diagMsgFormat(diag)
-	local msg = diag
-		.message
-		:gsub(" ?%.$", "") -- trailing dot for lua_ls
-		:gsub("`(%w-)` should be `(.+)`", "%1 󰁔 %2") -- typos
+	local msg = diag.message
+	if diag.source == "typos" then
+		msg = msg:gsub("should be", "󰁔"):gsub("`(.-)`", "%1")
+	elseif diag.source == "Lua Diagnostics." then
+		msg = msg:gsub("%.$", "")
+	end
 	return msg
 end
 

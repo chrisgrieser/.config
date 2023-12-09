@@ -2,6 +2,11 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
+	{ -- fixes scrolloff at end of file
+		"Aasim-A/scrollEOF.nvim",
+		event = "CursorMoved",
+		opts = true,
+	},
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",
 		event = "UIEnter",

@@ -1,9 +1,6 @@
-#!/usr/bin/env zsh
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 # DOCS https://github.com/transmission/transmission/blob/main/docs/Scripts.md#scripts
 #───────────────────────────────────────────────────────────────────────────────
-
-# GUARD
 
 # read download folder from transmission settings
 download_folder="$(defaults read org.m0k.transmission DownloadFolder)"
@@ -12,7 +9,6 @@ cd "$download_folder" || return 1
 #───────────────────────────────────────────────────────────────────────────────
 
 # delete clutter
-
 find -E . -regex ".*\.(nfo|md)$"
 find . \( -name '*.txt' -or -name '*.nfo' -or -name '*.exe' -or -name '*.md' \
 	-or -name '*.jpg' -or -name '*.png' \) -delete
@@ -28,8 +24,8 @@ if [[ $files_in_folder -eq 1 ]]; then
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
-# quit Transmission, if no other active torrents
 
+# quit Transmission, if no other active torrents
 if [[ ! -x "$(command -v transmission-remote)" ]]; then
 	touch "./WARN transmission-remote not installed"
 	return 1
