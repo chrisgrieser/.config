@@ -48,16 +48,12 @@ end
 
 --------------------------------------------------------------------------------
 -- BASH
+
 serverConfigs.bashls = {
-	filetypes = { "sh", "bash", "zsh" }, -- force to work with zsh
 	settings = {
 		bashIde = {
 			includeAllWorkspaceSymbols = true,
-			-- PENDING
-			-- Disable shellcheck, to avoid duplicate diagnostics when working on
-			-- bash files, since we have to use shellcheck via linter integration
-			-- due to https://github.com/bash-lsp/bash-language-server/issues/1064
-			shellcheckPath = "",
+			-- PENDING https://github.com/bash-lsp/bash-language-server/issues/1064
 			shellcheckArguments = "--shell=bash",
 		},
 	},
