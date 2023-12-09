@@ -26,7 +26,8 @@ rules:
       - type: basic
         from: { key_code: f8 }
         to:
-          - shell_command: spotify_player playback play-pause
+          - shell_command: |
+              spotify_player playback play-pause || spotify_player playback start
       - type: basic
         from: { key_code: f9 }
         to:

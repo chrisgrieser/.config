@@ -12,10 +12,12 @@ local wf = hs.window.filter
 ---play/pause spotify
 ---@param toStatus string pause|play
 local function spotifyDo(toStatus)
-	-- SIC there is no simpler way of determining whether spotify is playing
 	local playback = hs.execute(u.exportPath .. "spotify_player get key playback")
 	local decoded = hs.json.decode(playback)
-	if not decoded then return end
+	if not decoded then 
+		hs.execute(u.exportPath .. "spotify_player playback start")
+		return
+	end
 	local disallowed = decoded.actions.disallows 
 	local isPlaying = u.tbl_contains(disallowed, "resuming")
 
