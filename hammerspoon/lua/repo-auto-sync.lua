@@ -65,7 +65,7 @@ end
 ---@param notifyOnSuccess boolean set to false for regularly occurring syncs
 local function syncAllGitRepos(notifyOnSuccess)
 	if syncInProgress() then
-		print("🔁 Sync already in progress.")
+		u.notify("🔁 Sync already in progress.")
 		return
 	end
 
