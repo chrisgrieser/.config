@@ -144,7 +144,6 @@ M.textobjMaps = {
 	cond = "o", -- c[o]nditional
 	call = "l", -- cal[l]
 	wikilink = "R", -- two [R]ectangular brackets
-	codeblock = "E", -- Markdown codeblock (uppercase of e for `)
 }
 
 --------------------------------------------------------------------------------
