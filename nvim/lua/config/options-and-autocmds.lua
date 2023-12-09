@@ -42,6 +42,9 @@ opt.title = true
 opt.titlelen = 0 -- do not shorten title
 opt.titlestring = '%{expand("%:p")}'
 
+-- Clipboard
+opt.clipboard = "unnamedplus"
+
 -- Motions & Editing
 opt.startofline = true -- motions like "G" also move to the first char
 opt.virtualedit = "block" -- visual-block mode can select beyond end of line
@@ -91,16 +94,6 @@ opt.timeoutlen = 666 -- also affects duration until which-key is shown
 
 -- Make
 opt.makeprg = "make --silent --warn-undefined-variables"
-
---------------------------------------------------------------------------------
--- Clipboard
-opt.clipboard = "unnamedplus"
-
-autocmd("TextYankPost", {
-	callback = function()
-		vim.highlight.on_yank()
-	end,
-})
 
 --------------------------------------------------------------------------------
 

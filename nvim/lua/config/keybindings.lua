@@ -193,16 +193,28 @@ keymap(
 --------------------------------------------------------------------------------
 -- CLIPBOARD
 
+-- sticky yank/delete
+-- relevant for delete as well, in case of using forward-seeking textobjs
+for _, key in pairs { "y", "Y", "d", "D", "dd" } do
+	vim.keymap.set("n", key, function()
+		vim.g.cursorPreYank = vim.api.nvim_win_get_cursor(0)
+		if vim.api.nvim_get_current_line():find("^%s*$") and key == "dd" then return '"_dd' end
+		return key
+	end, { desc = "󰅍 Sticky yank/delete", expr = true })
+end
+
+-- post-yank-highlight
+vim.api.nvim_create_autocmd("TextYankPost", {
+	callback = function()
+		vim.highlight.on_yank { timeout = 1000 }
+		vim.defer_fn(function() vim.api.nvim_win_set_cursor(0, vim.g.cursorPreYank) end, 1)
+	end,
+})
+
 -- keep the register clean
 keymap({ "n", "x" }, "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
 keymap("n", "C", '"_C')
-
--- do not clutter the register if blank line is deleted
-keymap("n", "dd", function()
-	if api.nvim_get_current_line():find("^%s*$") then return '"_dd' end
-	return "dd"
-end, { expr = true })
 
 -- paste w/o switching register
 keymap("x", "p", "P")
