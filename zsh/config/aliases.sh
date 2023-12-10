@@ -3,7 +3,7 @@ alias r=' exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohm
 alias q=' exit'
 alias cmd='command'
 
-# added verbosity
+# added verbosity / safety
 alias mv='mv -v'
 alias ln='ln -vi'
 alias cp='cp -v'
@@ -30,7 +30,7 @@ function bat {
 	command bat --theme="$theme" "$@"
 }
 
-# jqp: dar-mode aware
+# jqp: dark-mode aware
 function jqp {
 	local theme # https://github.com/noahgorstein/jqp#light-themes
 	theme="$(defaults read -g AppleInterfaceStyle &>/dev/null && echo "witchhazel" || echo "trac")"
