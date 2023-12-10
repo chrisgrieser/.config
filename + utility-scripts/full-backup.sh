@@ -14,9 +14,9 @@ while true; do
 		break
 	fi
 
-	sleep 0.2
+	sleep 0.4
 	i=$((i + 1))
-	if [[ $i -gt 20 ]]; then
+	if [[ $i -gt 10 ]]; then
 		print "\033[1;33mNo Volume found.\033[0m"
 		return 1
 	fi

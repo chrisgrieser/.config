@@ -5,12 +5,10 @@ local M = {}
 -- HACK cannot be done via `os.getenv()`, since often it does not load properly on
 -- system startup, so the values have to be read manually.
 ---@param varname string
----@return string
+---@return string|nil
 local function readZshEnv(varname)
-	local value, success = hs.execute("source $HOME/.zshenv && echo $" .. varname)
+	local value, success = hs.execute("source $HOME/.zshenv && echo -n $" .. varname)
 	if not success then hs.notify.show("Hammerspoon", "", "⚠️ Could not source .zshenv") end
-	if not value then value = "" end
-	value = value:gsub("\n$", "")
 	return value
 end
 

@@ -108,7 +108,10 @@ local function codeActionFilter(action)
 			or title:find("defined global") or title:find("Change to parameter")),
 		javascript = not (title == "Move to a new file"),
 		typescript = not (title == "Move to a new file"),
-		css = not (title:find("^Disable stylelint rule for entire file: ") or title:find("^Disable stylelint rule inline: ")),
+		-- stylua: ignore
+		css = not (title:find("^Disable .+ for entire file: ") 
+			or title:find( "^Disable .+ rule inline: ")),
+		markdown = title ~= "Create a Table of Contents",
 	}
 	local noFilterForFiletype = filter[vim.bo.filetype] == nil
 	return noFilterForFiletype or filter[vim.bo.filetype]
@@ -126,7 +129,6 @@ keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
 -- LOGGING
 
 -- stylua: ignore start
-keymap({ "n", "x" }, "<leader>lm", function() require("funcs.printing-press").messageLog() end, { desc = " message log" })
 keymap({ "n", "x" }, "<leader>ll", function() require("funcs.printing-press").variableLog() end, { desc = " variable log" })
 keymap({ "n", "x" }, "<leader>lo", function() require("funcs.printing-press").objectLog() end, { desc = " object log" })
 keymap("n", "<leader>lb", function() require("funcs.printing-press").beepLog() end, { desc = " beep log" })

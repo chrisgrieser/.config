@@ -5,7 +5,7 @@ alias cmd='command'
 
 # added verbosity
 alias mv='mv -v'
-alias ln='ln -v'
+alias ln='ln -vi'
 alias cp='cp -v'
 
 # defaults
@@ -40,25 +40,23 @@ function jqp {
 # misc
 alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
 alias prose='ssh nanotipsforvim@prose.sh'
-alias bkp='zsh "$HOME/.config/_utility-scripts/backup-script.sh"'
-alias bkp-repos='zsh "$HOME/.config/_utility-scripts/backup-my-repos.sh"'
+alias bkp='zsh "$HOME/.config/+ utility-scripts/full-backup.sh"'
+alias bkp-repos='zsh "$HOME/.config/+ utility-scripts/backup-my-repos.sh"'
 
 #───────────────────────────────────────────────────────────────────────────────
 # https://www.thorsten-hans.com/5-types-of-zsh-aliases
 
 # GLOBAL ALIAS (to be used at the end, mostly)
 alias -g G='| rg'
-alias -g F='| fzf --no-sort --filter' # fuzzy-grep
 alias -g B='| bat'
-alias -g C='| pbcopy ; echo "Copied."'         # copy
-alias -g N='| wc -l | tr -d " "'               # count lines
-alias -g J='| jless' 
-alias -g L='| less' 
-alias -g JJ='| jqp' 
+alias -g C='| pbcopy ; echo "Copied."' # copy
+alias -g N='| wc -l | tr -d " "'       # count lines
+alias -g L='| less'
+alias -g J='| jless'
+alias -g JJ='| jqp'
 
 # highlights for them
 ZSH_HIGHLIGHT_REGEXP+=(' G($| )' 'fg=magenta,bold')
-ZSH_HIGHLIGHT_REGEXP+=(' F($| )' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' C$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' B$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' N$' 'fg=magenta,bold')
