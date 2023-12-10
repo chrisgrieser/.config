@@ -28,7 +28,7 @@ M.timer_JourFixe = hs.timer
 	.doAt("09:59", "01d", function()
 		if not (os.date("%a") == "Mon" and u.screenIsUnlocked()) then return end
 
-		hs.alert.show("Jour Fixe")
+		hs.alert.show("Jour Fixe") 
 		local fgOrganisationChannel = "slack://channel?team=T010A5PEMBQ&id=CV95T641Y"
 		hs.urlevent.openURL(fgOrganisationChannel)
 	end)
@@ -63,6 +63,45 @@ M.timer_nightlyMaintenance = hs.timer
 		u.applescript([[tell application id "com.runningwithcrayons.Alfred" to run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"]])
 		-- stylua: ignore end
 	end, true)
+	:start()
+
+--------------------------------------------------------------------------------
+-- SLEEP TIMER
+
+
+-- Between 0:00 and 7:00, check every 10 min if device has been idle for 30
+-- minutes. If so, alert and wait for another minute. If still idle then, quit
+-- video apps.
+local config = {
+	betweenHours = { 0, 7 },
+	checkIntervalMins = 10,
+	idleMins = 45,
+	timeToReactSecs = 60,
+}
+
+M.timer_sleepAutoVideoOff = hs.timer
+	.doEvery(config.checkIntervalMins * 60, function()
+		-- GUARD
+		local isNight = u.betweenTime(config.betweenHours[1], config.betweenHours[2])
+		local isIdle = (hs.host.idleTime() / 60) > config.idleMins
+		if not (isNight and isIdle and env.isProjector() and u.screenIsUnlocked()) then return end
+
+		local alertMsg = ("💤 Will sleep in %ss if idle."):format(config.timeToReactSecs)
+		hs.alert.show(alertMsg, 5)
+		u.runWithDelays(config.timeToReactSecs, function()
+			-- GUARD
+			local userDidSth = hs.host.idleTime() < config.timeToReactSecs
+			if userDidSth then return end
+
+			u.notify("💤 SleepTimer triggered")
+			for _, win in pairs(hs.window.allWindows()) do
+				if win:isFullScreen() then win:setFullScreen(false) end
+			end
+			u.closeAllFinderWins()
+			u.closeTabsContaining("youtu")
+			u.quitApps(env.videoAndAudioApps)
+		end)
+	end)
 	:start()
 
 --------------------------------------------------------------------------------
