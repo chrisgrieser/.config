@@ -190,7 +190,6 @@ keymap(
 	{ desc = "󰽙 Close buffer/window" }
 )
 
-
 -- keep the register clean
 keymap({ "n", "x" }, "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')

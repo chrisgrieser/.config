@@ -69,6 +69,9 @@ local function themeModifications()
 		updateHl("GitSignsAdd", "guifg=#369a96")
 	elseif theme == "monet" then
 		overwriteHl("Folded", { bg = "#313548" })
+		updateHl("String", "gui=none") -- no italics
+		updateHl("Visual", "gui=none") -- no bold
+		updateHl("TelescopeSelection", "gui=none") -- no bold
 	elseif theme == "dawnfox" then
 		updateHl("IblIndent", "guifg=#e0cfbd")
 		updateHl("ColorColumn", "guibg=#eee6dc")
