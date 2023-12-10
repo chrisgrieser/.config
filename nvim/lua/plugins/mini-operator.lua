@@ -39,7 +39,9 @@ local function filetypeSpecificEval()
 				if printer then
 					local lastLine = table.remove(inputLines)
 					local printCmd = printer:match("^%w+")
-					if not (vim.startswith(lastLine, printCmd)) then lastLine = printer:format(lastLine) end
+					if not (vim.startswith(lastLine, printCmd)) then
+						lastLine = printer:format(lastLine)
+					end
 					table.insert(inputLines, lastLine)
 				end
 
@@ -66,7 +68,7 @@ end
 ---@return string[] lines
 local function luaEval(content)
 	local input_lines = vim.deepcopy(content.lines) -- Currently needed as `content` is modified, which it shouldn't
-	local parentDir = vim.fn.expand("%:p:h")
+	local parentDir = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
 	local MiniOperators = require("mini.operators")
 
 	if parentDir:find("hammerspoon") then

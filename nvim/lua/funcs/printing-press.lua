@@ -146,7 +146,7 @@ end
 ---@nodiscard
 local function getTemplateStr(logType)
 	local ft = vim.bo.filetype
-	if ft == "lua" and vim.fn.expand("%:p"):find("nvim") then ft = "nvim_lua" end
+	if vim.api.nvim_buf_get_name(0):find("nvim.*%.lua$") then ft = "nvim_lua" end
 	local templateStr = config.logStatements[logType][ft]
 	if not templateStr then
 		local msg = ("%s does not support %s yet."):format(logType, ft)

@@ -4,6 +4,7 @@
 # ignore these words
 [default.extend-words]
 noice = "noice" # plugin name
+tre = "tre" # shorthand
 
 # ignore these files
 # INFO (needs glob due to conform.nvim appending stuff for temporary file)

@@ -13,7 +13,7 @@ u.ftAbbr("!=", "~=")
 u.ftAbbr("!==", "~=")
 
 -- shorthands
-u.ftAbbr("tre", "then return end") -- codespell-ignore
+u.ftAbbr("tre", "then return end")
 
 --------------------------------------------------------------------------------
 
@@ -21,7 +21,7 @@ u.ftAbbr("tre", "then return end") -- codespell-ignore
 keymap("n", "<leader>r", function()
 	cmd("silent update")
 	local isNvimConfig = vim.loop.cwd() == vim.fn.stdpath("config")
-	local filepath = vim.fn.expand("%:p")
+	local filepath = vim.api.nvim_buf_get_name(0)
 
 	--- GUARD
 	if filepath:find("nvim/after/ftplugin/") then
@@ -32,7 +32,7 @@ keymap("n", "<leader>r", function()
 		return
 	-- unload from lua cache (assuming that the pwd is ~/.config/nvim)
 	elseif isNvimConfig then
-		local packageName = expand("%:r"):gsub("lua/", ""):gsub("/", ".")
+		local packageName = vim.fn.expand("%:r"):gsub("lua/", ""):gsub("/", ".")
 		package.loaded[packageName] = nil
 		cmd.source()
 		u.notify("Re-sourced", packageName)

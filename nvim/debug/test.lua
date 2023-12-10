@@ -7,7 +7,6 @@ local ancestorDirs = { ".config" }
 local function getProjectRoot()
 	local function exists(path) return vim.loop.fs_stat(path) ~= nil end
 
-	local startPath = vim.fn.expand("%:p:h")
 	repeat
 		for _, file in ipairs(rootFiles) do
 			local path = startPath .. "/" .. file

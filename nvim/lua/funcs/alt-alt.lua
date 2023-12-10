@@ -49,7 +49,7 @@ local function altOldfile()
 		if i > #vim.v.oldfiles then return nil end
 		oldfile = vim.v.oldfiles[i]
 		local fileExists = vim.loop.fs_stat(oldfile) ~= nil
-		local isCurrentFile = oldfile == fn.expand("%:p")
+		local isCurrentFile = oldfile == api.nvim_buf_get_name(0)
 		local commitMsg = oldfile:find("COMMIT_EDITMSG$")
 	until fileExists and not commitMsg and not isCurrentFile
 	return oldfile
@@ -63,7 +63,7 @@ function M.altFileStatusline(opts)
 	local maxLen = opts.maxLen or 25
 
 	local altPath = fn.expand("#:p")
-	local curPath = fn.expand("%:p")
+	local curPath = vim.api.nvim_buf_get_name(0)
 	local curFile = vim.fs.basename(curPath)
 	local altFile = vim.fs.basename(altPath)
 
@@ -107,7 +107,7 @@ end
 function M.gotoAltBuffer()
 	local altFile = fn.expand("#:t")
 	local altPath = fn.expand("#:p")
-	local curPath = fn.expand("%:p")
+	local curPath = vim.api.nvim_buf_get_name(0)
 	local altBufNr = fn.bufnr("#") ---@diagnostic disable-line: param-type-mismatch
 	local specialFile = vim.api.nvim_buf_is_valid(altBufNr)
 		and vim.api.nvim_buf_get_option(altBufNr, "buftype") ~= ""
@@ -131,7 +131,7 @@ function M.betterClose()
 		return
 	end
 
-	local absPath = fn.expand("%:p")
+	local absPath = vim.api.nvim_buf_get_name(0)
 	local fileExists = vim.loop.fs_stat(absPath) ~= nil
 	if fileExists then cmd("silent update " .. absPath) end
 

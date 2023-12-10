@@ -93,7 +93,7 @@ end
 --------------------------------------------------------------------------------
 
 function M.openAlfredPref()
-	local parentFolder = vim.fn.expand("%:p:h")
+	local parentFolder = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
 	if not parentFolder:find("Alfred%.alfredpreferences") then
 		u.notify("", "Not in an Alfred directory.", "warn")
 		return
