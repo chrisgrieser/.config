@@ -8,10 +8,14 @@ local u = require("config.utils")
 
 vim.filetype.add {
 	extension = {
+		zsh = "sh",
+		sh = "sh", -- force sh-files with zsh-shebang to still get sh as filetype
 		applescript = "applescript",
 	},
 	filename = {
-		[".ignore"] = "gitignore",
+		[".zshrc"] = "sh",
+		[".zshenv"] = "sh",
+		[".ignore"] = "gitignore", -- fd ignore files
 	},
 }
 

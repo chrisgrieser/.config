@@ -1,3 +1,6 @@
+
+cat foo | grep "fff"
+
 alias co='git checkout'
 alias gs='git status'
 alias ga='git add'

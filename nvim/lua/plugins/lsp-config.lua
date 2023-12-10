@@ -9,7 +9,7 @@ vim.g.lspToMasonMap = {
 	bashls = "bash-language-server", -- used for zsh
 	biome = "biome", -- ts/js/json linter/formatter
 	cssls = "css-lsp",
-	efm = "efm", -- linter integration
+	efm = "efm", -- linter integration, only used for shellcheck in zsh files
 	emmet_ls = "emmet-ls", -- css/html completion
 	html = "html-lsp",
 	jedi_language_server = "jedi-language-server", -- python (has much better hovers)
@@ -48,7 +48,7 @@ for lspName, _ in pairs(vim.g.lspToMasonMap) do
 end
 
 --------------------------------------------------------------------------------
--- BASH
+-- BASH / ZSH
 
 -- DOCS https://github.com/bash-lsp/bash-language-server/blob/main/server/src/config.ts
 serverConfigs.bashls = {
@@ -65,11 +65,12 @@ serverConfigs.bashls = {
 
 -- WORKAROUND: use efm to use shellcheck with zsh files
 serverConfigs.efm = {
-	filetypes = { "sh" }, -- limit to shell files
-	init_options = {
-		
-	},
-} 
+	-- limit to shell files
+	filetypes = { "sh" },
+	-- formatting done via other LSPs or conform.nvim
+	init_options = { documentFormatting = false, documentRangeFormatting = false },
+}
+
 
 --------------------------------------------------------------------------------
 -- LUA

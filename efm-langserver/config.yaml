@@ -2,20 +2,21 @@
 # DOCS https://github.com/mattn/efm-langserver#example-for-configyaml
 #───────────────────────────────────────────────────────────────────────────────
 
-version: 2
 root-markers:
   - .git/
-lint-debounce: 1s
+  - Makefile
+  - .zshrc
 
 tools:
-  sh-shellcheck: &sh-shellcheck
-    lint-command: "shellcheck --format=gcc --external-sources --shell=bash"
+  shellcheck: &shellcheck
+    lint-command: "shellcheck --format=gcc --external-sources --shell=bash -"
+    lint-stdin: true
     lint-source: "shellcheck"
     lint-formats:
-      - "%f:%l:%c: %trror: %m"
-      - "%f:%l:%c: %tarning: %m"
-      - "%f:%l:%c: %tote: %m"
+      - "%f:%l:%c: %trror: %m [SC%n]"
+      - "%f:%l:%c: %tarning: %m [SC%n]"
+      - "%f:%l:%c: %tote: %m [SC%n]"
 
 languages:
   sh:
-    - <<: *sh-shellcheck
+    - <<: *shellcheck
