@@ -72,6 +72,7 @@ local function themeModifications()
 		updateHl("String", "gui=none") -- no italics
 		updateHl("Visual", "gui=none") -- no bold
 		updateHl("TelescopeSelection", "gui=none") -- no bold
+		overwriteHl("@keyword.return", { fg = "#1c79d6", bold = true }) -- darker
 	elseif theme == "dawnfox" then
 		updateHl("IblIndent", "guifg=#e0cfbd")
 		updateHl("ColorColumn", "guibg=#eee6dc")

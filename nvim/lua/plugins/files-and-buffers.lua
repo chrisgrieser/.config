@@ -49,21 +49,6 @@ return {
 			},
 		},
 	},
-	{ -- change cwd per project
-		"ahmedkhalf/project.nvim",
-		event = "VimEnter",
-		main = "project_nvim",
-		opts = {
-			detection_methods = { "pattern", "lsp" },
-			patterns = {
-				".git", -- git root
-				"info.plist", -- Alfred workflows
-				">.config", -- all subfolders of the dotfile directory
-				">com~apple~CloudDocs", -- all subfolders of the iCloud drive
-				".project-root", -- manually marked root
-			},
-		},
-	},
 	{ -- convenience file operations
 		"chrisgrieser/nvim-genghis",
 		dependencies = "stevearc/dressing.nvim",
