@@ -6,24 +6,24 @@ local u = require("config.utils")
 ---@type table<string, string>
 vim.g.lspToMasonMap = {
 	autotools_ls = "autotools-language-server", -- Makefiles
-	bashls = "bash-language-server", -- used for zsh
+	bashls = "bash-language-server",
 	biome = "biome", -- ts/js/json linter/formatter
 	cssls = "css-lsp",
 	efm = "efm", -- linter integration, only used for shellcheck in zsh files
 	emmet_ls = "emmet-ls", -- css/html completion
 	html = "html-lsp",
-	jedi_language_server = "jedi-language-server", -- python (has much better hovers)
+	jedi_language_server = "jedi-language-server", -- python (has better hovers)
 	jsonls = "json-lsp",
-	ltex = "ltex-ls", -- languagetool
+	ltex = "ltex-ls", -- languagetool (natural language linter)
 	lua_ls = "lua-language-server",
-	marksman = "marksman", -- markdown
-	pyright = "pyright", -- python
+	marksman = "marksman", -- markdown lsp
+	pyright = "pyright", -- python lsp
 	ruff_lsp = "ruff-lsp", -- python linter
-	stylelint_lsp = "stylelint-lsp",
+	stylelint_lsp = "stylelint-lsp", -- css linter
 	taplo = "taplo", -- toml
-	tsserver = "typescript-language-server",
-	typos_lsp = "typos-lsp",
-	vale_ls = "vale-ls",
+	tsserver = "typescript-language-server", -- js/ts
+	typos_lsp = "typos-lsp", -- spellchecker for code
+	vale_ls = "vale-ls", -- natural language linter
 	yamlls = "yaml-language-server",
 }
 

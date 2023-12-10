@@ -1,6 +1,5 @@
 local api = vim.api
 local cmd = vim.cmd
-local expand = vim.fn.expand
 local fn = vim.fn
 local u = require("config.utils")
 local keymap = u.uniqueKeymap
@@ -206,10 +205,12 @@ end, { desc = "󰅍 Sticky yank", expr = true, unique = false })
 -- post-yank-highlight
 vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
-		if vim.v.event.operator ~= "y" then return end -- do not trigger for `d`
+		-- do not trigger for `d` or yanks to helper-register `z`
+		if vim.v.event.operator ~= "y" or vim.v.event.regname == "z" then return end
 		-- FIX issue with vim-visual-multi
 		if vim.b["VM_Selection"] and vim.b["VM_Selection"].Regions then return end
-		pcall(vim.api.nvim_win_set_cursor, 0, vim.g.cursorPreYank)
+
+		vim.api.nvim_win_set_cursor(0, vim.g.cursorPreYank)
 	end,
 })
 

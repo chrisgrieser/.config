@@ -14,11 +14,11 @@ local wf = hs.window.filter
 local function spotifyDo(toStatus)
 	local playback = hs.execute(u.exportPath .. "spotify_player get key playback")
 	local decoded = hs.json.decode(playback)
-	if not decoded then 
+	if not decoded then
 		hs.execute(u.exportPath .. "spotify_player playback start")
 		return
 	end
-	local disallowed = decoded.actions.disallows 
+	local disallowed = decoded.actions.disallows
 	local isPlaying = u.tbl_contains(disallowed, "resuming")
 
 	if (isPlaying and toStatus == "pause") or (not isPlaying and toStatus == "play") then
@@ -53,7 +53,8 @@ end):start()
 ---requires: Obsidian Advanced URI plugin with `eval` being enabled
 ---@param obsiWin hs.window
 local function autoToggleObsidianSidebar(obsiWin)
-	if #u.app("Obsidian"):allWindows() > 1 then return end -- prevent popout window resizing to affect sidebars
+	local obsi = u.app("Obsidian")
+	if not obsi or obsi:allWindows() > 1 then return end -- prevent popout window resizing to affect sidebars
 
 	local relObsiWinWidth = obsiWin:size().w / obsiWin:screen():frame().w
 	local modeRight = (relObsiWinWidth > 0.6 and relObsiWinWidth < 0.99) and "expand" or "collapse"
@@ -194,6 +195,7 @@ M.wf_scripteditor = wf
 		-- skip new file creation dialog
 		if newWin:title() == "Open" then
 			u.applescript('tell application "Script Editor" to make new document')
+
 		-- auto-paste and lint content; resize window
 		elseif newWin:title() == "Untitled" then
 			wu.moveResize(newWin, wu.centerHalf)
@@ -202,6 +204,7 @@ M.wf_scripteditor = wf
 				Application("Script Editor").documents()[0].text = `%s`;
 				Application("Script Editor").documents()[0].checkSyntax();
 			]]):format(clipb))
+
 		-- just resize window if it's an AppleScript Dictionary
 		elseif newWin:title():find("%.sdef$") then
 			wu.moveResize(newWin, wu.centerHalf)
