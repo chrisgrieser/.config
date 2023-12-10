@@ -111,12 +111,14 @@ opt.makeprg = "make --silent --warn-undefined-variables"
 opt.clipboard = "unnamedplus"
 
 -- sticky yank operations
-for _, key in pairs { "y", "Y" } do
-	vim.keymap.set({ "n", "x" }, key, function()
-		vim.g.cursorPreYank = vim.api.nvim_win_get_cursor(0)
-		return key
-	end, { desc = "󰅍 Sticky yank", expr = true })
-end
+vim.keymap.set({ "n", "x" }, "y", function()
+	vim.g.cursorPreYank = vim.api.nvim_win_get_cursor(0)
+	return "y"
+end, { desc = "󰅍 Sticky yank", expr = true })
+vim.keymap.set("n", "Y", function()
+	vim.g.cursorPreYank = vim.api.nvim_win_get_cursor(0)
+	return "y$"
+end, { desc = "󰅍 Sticky yank", expr = true })
 
 -- post-yank-highlight
 autocmd("TextYankPost", {
@@ -291,7 +293,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = vim.tbl_keys(skeletons),
 	callback = function(ctx)
 		vim.defer_fn(function()
-			local fileStats = vim.loop.fs_stat(vim.fn.expand("%"))
+			local fileStats = vim.loop.fs_stat(vim.api.nvim_buf_get_name(0))
 			local specialBuffer = vim.bo.buftype ~= ""
 			if specialBuffer or not fileStats then return end
 

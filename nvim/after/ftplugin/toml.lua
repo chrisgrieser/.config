@@ -1,2 +1,2 @@
--- do not autowrap
-vim.bo.formatoptions = vim.bo.formatoptions:gsub("t", "") 
+-- do not auto-wrap text
+vim.opt_local.formatoptions:remove("t")

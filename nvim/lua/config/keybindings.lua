@@ -190,6 +190,9 @@ keymap(
 	{ desc = "󰽙 Close buffer/window" }
 )
 
+--------------------------------------------------------------------------------
+-- CLIPBOARD
+
 -- keep the register clean
 keymap({ "n", "x" }, "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
@@ -197,7 +200,7 @@ keymap("n", "C", '"_C')
 
 -- do not clutter the register if blank line is deleted
 vim.keymap.set("n", "dd", function()
-	vim.g.cursorPreYank = vim.api.nvim_win_get_cursor(0)
+	if vim.api.nvim_get_current_line():find("^%s*$") then return '"_dd' end
 	return "dd"
 end, { expr = true })
 
@@ -221,7 +224,7 @@ keymap("c", "<D-v>", "<C-r>+", { desc = " Paste" })
 keymap(
 	{ "n", "x" },
 	"<D-l>",
-	function() fn.system { "open", "-R", expand("%:p") } end,
+	function() fn.system { "open", "-R", vim.api.nvim_buf_get_name(0) } end,
 	{ desc = "󰀶 Reveal in Finder" }
 )
 keymap(
