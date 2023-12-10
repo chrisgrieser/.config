@@ -62,12 +62,14 @@ function httpRequest(url) {
  * @property {string} caveats
  * @property {string} desc
  * @property {string} homepage
+ * @property {boolean} deprecated
  */
 
 /** @typedef {object} Cask
  * @property {string} token
  * @property {string} desc
  * @property {string} homepage
+ * @property {boolean} deprecated
  */
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -115,11 +117,11 @@ function run() {
 	const formulaDownloads = JSON.parse(readFile(formula90d)).formulae; // SIC not .casks
 
 	// 4. ICONS
-	const caskIcon = "🛢️";
-	const formulaIcon = "🍺";
-	const caveatIcon = "ℹ️";
-	const installedIcon = "✅";
-	const deprecatedIcon = "⚠️";
+	const caskIcon = "🛢️ ";
+	const formulaIcon = "🍺 ";
+	const caveatIcon = "ℹ️ ";
+	const installedIcon = "✅ ";
+	const deprecatedIcon = "⚠️ ";
 
 	//───────────────────────────────────────────────────────────────────────────
 
@@ -129,14 +131,16 @@ function run() {
 
 		let icons = "";
 		if (installedBrews.includes(name)) icons += " " + installedIcon;
-		if (cask.deprecated) icons += `   ${deprecatedIcon} [deprecated]`;
+		if (cask.deprecated) icons += `   ${deprecatedIcon}[deprecated]`;
 
-		const downloads = caskDownloads[name] ? `${caskDownloads[name][0].count}↓ ` : "";
-		const desc = cask.desc ? "·  " + cask.desc : ""; // default to empty string instead of "null"
+		const downloads = caskDownloads[name] ? `${caskDownloads[name][0].count}↓` : "";
+		const desc = cask.desc || "";
+		const sep = desc && downloads ? "  ·  " : "";
+
 		return {
 			title: name + icons,
 			match: alfredMatcher(name) + desc,
-			subtitle: `${caskIcon} ${downloads} ${desc}`,
+			subtitle: [caskIcon, downloads, sep, desc ].join(""),
 			arg: `--cask ${name}`,
 			mods: {
 				// PERF quicker to pass here than to call `brew home` on brew-id
@@ -158,17 +162,18 @@ function run() {
 		const name = formula.name;
 		let icons = "";
 		if (installedBrews.includes(name)) icons += " " + installedIcon;
-		if (formula.deprecated) icons += `   ${deprecatedIcon} deprecated`;
+		if (formula.deprecated) icons += `   ${deprecatedIcon}deprecated`;
 
 		const caveatText = formula.caveats || "";
 		const caveats = caveatText ? caveatIcon + " " : "";
-		const downloads = formulaDownloads[name] ? `${formulaDownloads[name][0].count}↓ ` : "";
-		const desc = formula.desc ? "·  " + formula.desc : ""; // no "null" as desc
+		const downloads = formulaDownloads[name] ? `${formulaDownloads[name][0].count}↓` : "";
+		const desc = formula.desc || "";
+		const sep = desc && downloads ? "  ·  " : "";
 
 		return {
 			title: name + icons,
 			match: alfredMatcher(name) + desc,
-			subtitle: `${formulaIcon} ${caveats}${downloads} ${desc}`,
+			subtitle: [formulaIcon, caveats, downloads, sep, desc].join(""),
 			arg: `--formula ${name}`,
 			text: {
 				largetype: caveatText,
