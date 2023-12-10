@@ -63,6 +63,11 @@ function relativeDate(absoluteDate) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const githubToken = argv[0];
+	const showReadNotifs =
+		$.NSProcessInfo.processInfo.environment.objectForKey("mode").js === "show-read-notifications";
+	console.log("🪚 showReadNotifs:", showReadNotifs);
+
+	// GUARD: no github token
 	if (!githubToken) {
 		return JSON.stringify({
 			items: [
@@ -75,26 +80,32 @@ function run(argv) {
 		});
 	}
 
-	// DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#list-notifications-for-the-authenticated-user
-	const response = httpRequestWithHeaders("https://api.github.com/notifications", [
+	// CALL -- https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#list-notifications-for-the-authenticated-user
+	const parameter = showReadNotifs ? "?all=true" : "";
+	const response = httpRequestWithHeaders("https://api.github.com/notifications" + parameter, [
 		"Accept: application/vnd.github.v3+json",
 		`Authorization: BEARER ${githubToken}`,
 		"X-GitHub-Api-Version: 2022-11-28",
 	]);
 	const responseObj = JSON.parse(response);
+
+	// GUARD: no notifications
 	if (responseObj.length === 0) {
+		const deactivatedMods = {
+			cmd: { valid: false, subtitle: "" },
+			alt: { valid: false, subtitle: "" },
+		};
 		return JSON.stringify({
 			items: [
 				{
-					title: "Open Notification Inbox at Github.",
-					arg: "https://github.com/notifications?query=is%3Aunread",
-					variables: { mode: "direct-open" },
-					mods: { cmd: { valid: false }, alt: { valid: false } },
+					title: "Open Notification Inbox",
+					variables: { mode: "open-inbox" },
+					mods: deactivatedMods,
 				},
 				{
 					title: "Show Read Notifications",
-					arg: "https://github.com/notifications?query=is%3Aunread",
-					mods: { cmd: { valid: false }, alt: { valid: false } },
+					variables: { mode: "show-read-notifications" },
+					mods: deactivatedMods,
 				},
 			],
 		});
@@ -102,7 +113,7 @@ function run(argv) {
 
 	const typeMaps = {
 		// biome-ignore lint/style/useNamingConvention: not by me
-		PullRequest: "🟧", //codespell-ignore
+		PullRequest: "🟧",
 		// biome-ignore lint/style/useNamingConvention: not by me
 		Issue: "🔵",
 		// biome-ignore lint/style/useNamingConvention: not by me

@@ -1489,7 +1489,7 @@ osascript -l JavaScript "./scripts/github-notifications.js" "$GITHUB_TOKEN"</str
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>note</key>
-			<string>remote repo search</string>
+			<string>personal repo search</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>

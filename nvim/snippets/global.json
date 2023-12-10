@@ -7,6 +7,10 @@
 		"prefix": "GUARD",
 		"body": "GUARD"
 	},
+	"CAVEAT": {
+		"prefix": "CAVEAT",
+		"body": "CAVEAT"
+	},
 	"DOCS": {
 		"prefix": "DOCS",
 		"body": "DOCS"
