@@ -43,16 +43,18 @@ local lualineConfig = {
 		-- should always include the tab element
 		lualine_a = {
 			{
-				function() return "󱥒 " .. vim.fs.basename(vim.env.VIRTUAL_ENV) end,
-				cond = function() return vim.env.VIRTUAL_ENV and vim.bo.ft == "python" end,
-				section_separators = topSep,
-			},
-			{
 				"datetime",
 				style = "%H:%M",
 				cond = function() return vim.o.columns > 110 and vim.o.lines > 25 end,
 				-- make the `:` blink
 				fmt = function(time) return os.time() % 2 == 0 and time or time:gsub(":", " ") end,
+				section_separators = topSep,
+			},
+		},
+		lualine_b = {
+			{
+				function() return "󱥒 " .. vim.fs.basename(vim.env.VIRTUAL_ENV) end,
+				cond = function() return vim.env.VIRTUAL_ENV and vim.bo.ft == "python" end,
 				section_separators = topSep,
 			},
 			{
@@ -98,7 +100,7 @@ local lualineConfig = {
 			{ irregularWhitespace },
 		},
 		lualine_y = {
-			"diff",
+			{ "diff" },
 		},
 		lualine_z = {
 			{ "selectioncount", fmt = function(str) return str ~= "" and "礪" .. str or "" end },

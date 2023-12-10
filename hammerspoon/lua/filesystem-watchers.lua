@@ -17,7 +17,7 @@ end
 --------------------------------------------------------------------------------
 
 -- CONFIG
-local browserSettings = home .. "/.config/_browser-extension-configs/"
+local browserSettings = home .. "/.config/+ browser-extension-configs/"
 local libraryPath = home .. "/.config/pandoc/main-bibliography.bib"
 
 --------------------------------------------------------------------------------

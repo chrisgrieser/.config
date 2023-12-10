@@ -65,12 +65,9 @@ serverConfigs.bashls = {
 
 -- WORKAROUND: use efm to use shellcheck with zsh files
 serverConfigs.efm = {
-	-- limit to shell files
-	filetypes = { "sh" },
-	-- formatting done via other LSPs or conform.nvim
-	init_options = { documentFormatting = false, documentRangeFormatting = false },
+	cmd = { "efm-langserver", "-c", u.linterConfigFolder .. "/efm.yaml" },
+	filetypes = { "sh" }, -- limit to filestypes needed
 }
-
 
 --------------------------------------------------------------------------------
 -- LUA
@@ -107,7 +104,7 @@ serverConfigs.ruff_lsp = {
 	init_options = {
 		settings = {
 			organizeImports = false, -- when "I" ruleset is added, then included in "fixAll"
-			codeAction = { disableRuleComment = { enable = false } }, -- via nvim-rulebook
+			codeAction = { disableRuleComment = { enable = false } }, -- use nvim-rulebook instead
 		},
 	},
 	-- Disable hover in favor of jedi

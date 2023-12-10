@@ -107,7 +107,7 @@ end
 --------------------------------------------------------------------------------
 
 M.vimDataDir = vim.env.DATA_DIR .. "/vim-data/" -- vim.env reads from .zshenv
-M.linterConfigFolder = os.getenv("HOME") .. "/.config/_linter-configs/"
+M.linterConfigFolder = os.getenv("HOME") .. "/.config/+ linter-configs/"
 
 --------------------------------------------------------------------------------
 
