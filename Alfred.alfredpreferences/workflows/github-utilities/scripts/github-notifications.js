@@ -86,14 +86,15 @@ function run(argv) {
 		return JSON.stringify({
 			items: [
 				{
-					title: "No unread notifications.",
-					subtitle: "⏎: Open Notification Inbox at Github.",
+					title: "Open Notification Inbox at Github.",
 					arg: "https://github.com/notifications?query=is%3Aunread",
 					variables: { mode: "direct-open" },
-					mods: {
-						cmd: { valid: false },
-						alt: { valid: false },
-					},
+					mods: { cmd: { valid: false }, alt: { valid: false } },
+				},
+				{
+					title: "Show Read Notifications",
+					arg: "https://github.com/notifications?query=is%3Aunread",
+					mods: { cmd: { valid: false }, alt: { valid: false } },
 				},
 			],
 		});

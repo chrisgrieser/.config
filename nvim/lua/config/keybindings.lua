@@ -193,6 +193,26 @@ keymap(
 --------------------------------------------------------------------------------
 -- CLIPBOARD
 
+-- sticky yank operations
+vim.keymap.set({ "n", "x" }, "y", function()
+	vim.g.cursorPreYank = vim.api.nvim_win_get_cursor(0)
+	return "y"
+end, { desc = "󰅍 Sticky yank", expr = true })
+vim.keymap.set("n", "Y", function()
+	vim.g.cursorPreYank = vim.api.nvim_win_get_cursor(0)
+	return "y$"
+end, { desc = "󰅍 Sticky yank", expr = true })
+
+-- post-yank-highlight
+vim.api.nvim_create_autocmd("TextYankPost", {
+	callback = function()
+		if vim.v.event.operator ~= "y" then return end -- do not trigger for `d`
+		-- FIX issue with vim-visual-multi
+		if vim.b["VM_Selection"] and vim.b["VM_Selection"].Regions then return end
+		vim.api.nvim_win_set_cursor(0, vim.g.cursorPreYank)
+	end,
+})
+
 -- keep the register clean
 keymap({ "n", "x" }, "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
