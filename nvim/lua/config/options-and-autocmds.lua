@@ -181,21 +181,53 @@ autocmd({ "BufNew", "BufReadPost" }, {
 -- AUTO-SAVE
 
 opt.autowriteall = true
-autocmd({ "InsertLeave", "TextChanged", "BufLeave", "BufDelete", "FocusLost" }, {
+autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
 	pattern = "?*",
 	callback = function(ctx)
 		local b = vim.bo[ctx.buf]
 		local bufname = vim.api.nvim_buf_get_name(0)
-		local stats = vim.loop.fs_stat(bufname)
+		local function exists(file) return vim.loop.fs_stat(file) and file ~= "" end
 
-		if b.buftype ~= "" or b.ft == "gitcommit" or b.readonly or bufname == "" or not stats then
-			return
-		end
+		if vim.b.saveQueued or b.buftype ~= "" or b.ft == "gitcommit" or b.readonly then return end
 
-		local lastSavedSecsAgo = os.time() - stats.mtime.sec
-		if lastSavedSecsAgo < 3 and ctx.event ~= "FocusLost" then return end
+		vim.b["saveQueued"] = true
+		vim.defer_fn(function()
+			if not exists(bufname) then return end
+			vim.cmd("silent noautocmd update")
+			vim.b["saveQueued"] = false
+		end, 2000)
+	end,
+})
 
-		vim.cmd("silent noautocmd update")
+--------------------------------------------------------------------------------
+-- Auto-cd to project root
+local rootFiles = { "info.plist", ".git" }
+local ancestorDirs = { ".config" }
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	callback = function(ctx)
+		local function exists(path) return vim.loop.fs_stat(path) ~= nil end
+
+		local startPath = vim.fs.dirname(vim.api.nvim_buf_get_name(ctx.buf))
+		local root
+		repeat
+			for _, file in ipairs(rootFiles) do
+				local path = startPath .. "/" .. file
+				if exists(path) then
+					root = vim.fs.dirname(path)
+					break
+				end
+			end
+			if root then break end
+			for _, dir in ipairs(ancestorDirs) do
+				if vim.fs.basename(vim.fs.dirname(startPath)) == dir then
+					root = startPath
+					break
+				end
+			end
+			startPath = vim.fs.dirname(startPath)
+		until startPath == "/" or i > 10
+		vim.notify("none found")
 	end,
 })
 
