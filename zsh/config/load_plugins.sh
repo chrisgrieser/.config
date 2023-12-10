@@ -3,8 +3,7 @@
 
 # load various completions of clis installed via homebrew
 # needs to be run *before* compinit
-export FPATH="$HOMEBREW_PREFIX/share/zsh/site-functions:$FPATH"
-export FPATH="$ZDOTDIR/completions:$FPATH"
+export FPATH="$ZDOTDIR/completions:$HOMEBREW_PREFIX/share/zsh/site-functions:$FPATH"
 
 # also loads compinit stuff, therefore has to be loaded before most plugins
 source "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
@@ -18,6 +17,11 @@ source "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 source "$HOMEBREW_PREFIX/share/zsh-autopair/autopair.zsh"
 source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+# must be loaded after zsh-syntax-highlighting
+source "$HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 #───────────────────────────────────────────────────────────────────────────────
 
