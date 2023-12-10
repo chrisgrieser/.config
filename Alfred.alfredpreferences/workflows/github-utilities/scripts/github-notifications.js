@@ -65,7 +65,6 @@ function run() {
 	const githubToken = app.doShellScript("source $HOME/.zshenv && echo $GITHUB_TOKEN");
 	const showReadNotifs =
 		$.NSProcessInfo.processInfo.environment.objectForKey("mode").js === "show-read-notifications";
-	console.log("🪚 showReadNotifs:", showReadNotifs);
 
 	// GUARD: no github token
 	if (!githubToken) {
@@ -80,7 +79,7 @@ function run() {
 		});
 	}
 
-	// CALL -- https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#list-notifications-for-the-authenticated-user
+	// CALL GITHUB API https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#list-notifications-for-the-authenticated-user
 	const parameter = showReadNotifs ? "?all=true" : "";
 	const response = httpRequestWithHeaders("https://api.github.com/notifications" + parameter, [
 		"Accept: application/vnd.github.v3+json",

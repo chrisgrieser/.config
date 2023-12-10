@@ -272,8 +272,6 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
-				<key>sourceoutputuid</key>
-				<string>256FC39B-A43F-4DB1-A4E2-01DAFE87554A</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
