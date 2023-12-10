@@ -203,7 +203,7 @@ autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
 --------------------------------------------------------------------------------
 -- AUTO-CD TO PROJECT ROOT (PROJECT.NVIM LITE)
 local autocdConfig = {
-	rootFiles = { "info.plist", ".git" },
+	rootFiles = { "info.plist", "Makefile", ".git" }, -- order = priority
 	childOfDir = { ".config" },
 }
 

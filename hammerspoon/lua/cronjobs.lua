@@ -1,9 +1,9 @@
 local M = {} -- persist from garbage collector
 
+local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
 local c = hs.caffeinate.watcher
-local env = require("lua.environment-vars")
 
 --------------------------------------------------------------------------------
 
@@ -28,7 +28,7 @@ M.timer_JourFixe = hs.timer
 	.doAt("09:59", "01d", function()
 		if not (os.date("%a") == "Mon" and u.screenIsUnlocked()) then return end
 
-		hs.alert.show("Jour Fixe") 
+		hs.alert.show("Jour Fixe")
 		local fgOrganisationChannel = "slack://channel?team=T010A5PEMBQ&id=CV95T641Y"
 		hs.urlevent.openURL(fgOrganisationChannel)
 	end)
@@ -68,7 +68,6 @@ M.timer_nightlyMaintenance = hs.timer
 --------------------------------------------------------------------------------
 -- SLEEP TIMER
 
-
 -- Between 0:00 and 7:00, check every 10 min if device has been idle for 30
 -- minutes. If so, alert and wait for another minute. If still idle then, quit
 -- video apps.
@@ -94,12 +93,11 @@ M.timer_sleepAutoVideoOff = hs.timer
 			if userDidSth then return end
 
 			u.notify("💤 SleepTimer triggered")
+			u.closeTabsContaining("youtu")
+			u.quitApps(env.videoAndAudioApps)
 			for _, win in pairs(hs.window.allWindows()) do
 				if win:isFullScreen() then win:setFullScreen(false) end
 			end
-			u.closeAllFinderWins()
-			u.closeTabsContaining("youtu")
-			u.quitApps(env.videoAndAudioApps)
 		end)
 	end)
 	:start()
