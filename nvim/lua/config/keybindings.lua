@@ -194,14 +194,14 @@ keymap(
 -- CLIPBOARD
 
 -- sticky yank operations
-vim.keymap.set({ "n", "x" }, "y", function()
+keymap({ "n", "x" }, "y", function()
 	vim.g.cursorPreYank = vim.api.nvim_win_get_cursor(0)
 	return "y"
 end, { desc = "󰅍 Sticky yank", expr = true })
-vim.keymap.set("n", "Y", function()
+keymap("n", "Y", function()
 	vim.g.cursorPreYank = vim.api.nvim_win_get_cursor(0)
 	return "y$"
-end, { desc = "󰅍 Sticky yank", expr = true })
+end, { desc = "󰅍 Sticky yank", expr = true, unique = false })
 
 -- post-yank-highlight
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -219,7 +219,7 @@ keymap({ "n", "x" }, "c", '"_c')
 keymap("n", "C", '"_C')
 
 -- do not clutter the register if blank line is deleted
-vim.keymap.set("n", "dd", function()
+keymap("n", "dd", function()
 	if vim.api.nvim_get_current_line():find("^%s*$") then return '"_dd' end
 	return "dd"
 end, { expr = true })
