@@ -5,8 +5,8 @@
 [[ -x "$(command -v duti)" ]] || brew install duti
 
 # open once to initialize the apps
-open "$HOME/.config/nvim/mac-helper/Neovide Helper.app" 
-open "$HOME/.config/obsidian/Obsidian Helper.app" 
+open "$HOME/.config/nvim/mac-helper/Neovide Helper.app"
+open "$HOME/.config/obsidian/Obsidian Helper.app"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -30,7 +30,7 @@ duti -s "$videoplayerID" m4a all
 editorID="com.apple.automator.Neovide-Helper"
 duti -s "$editorID" cff all # citation file format
 duti -s "$editorID" diff all
-duti -s "$editorID" public.unix-executable all 
+duti -s "$editorID" public.unix-executable all
 duti -s "$editorID" scm all # treesitter
 duti -s "$editorID" add all # vim spell file
 duti -s "$editorID" com.apple.traditional-mac-plain-text all
@@ -72,7 +72,7 @@ duti -s "$browserID" webloc all # link files
 duti -s "$browserID" url all    # link files
 
 mailID=$(osascript -e "id of app \"$MAIL_APP\"") # set in zshenv
-duti -s "$mailID" mailto # = default mail client
+duti -s "$mailID" mailto                         # = default mail client
 
 # Misc
 duti -s "net.highlightsapp.universal" pdf all
