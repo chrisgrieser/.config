@@ -66,18 +66,10 @@ local function cmpconfig()
 
 			-- Next item, or trigger completion, or insert normal tab
 			["<Tab>"] = cmp.mapping(function(fallback)
-				local function onlyWhitespaceBefCursor()
-					local col = vim.api.nvim_win_get_cursor(0)[2]
-					local charsBefore = vim.api.nvim_get_current_line():sub(1, col)
-					return charsBefore:match("^%s*$") ~= nil
-				end
-
 				if cmp.visible() then
 					cmp.select_next_item()
-				elseif not onlyWhitespaceBefCursor() then
-					cmp.complete()
 				else
-					fallback()
+					fallback() -- e.g. tabout plugin
 				end
 			end, { "i", "s" }),
 			["<S-Tab>"] = cmp.mapping(function(fallback)
