@@ -70,7 +70,7 @@ local function themeModifications()
 	elseif theme == "monet" then
 		overwriteHl("Folded", { bg = "#313548" })
 		updateHl("String", "gui=none") -- no italics
-		updateHl("Visual", "gui=none") -- no bold
+		overwriteHl("Visual", { bg = "#3a626c" }) -- no bold
 		updateHl("TelescopeSelection", "gui=none") -- no bold
 		overwriteHl("@keyword.return", { fg = "#1c79d6", bold = true }) -- darker
 	elseif theme == "dawnfox" then

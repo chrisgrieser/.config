@@ -2,6 +2,25 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
+	{ -- Jump out of scope in insert mode
+		"abecodes/tabout.nvim",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		event = "InsertEnter",
+		opts = {
+			act_as_shift_tab = true,
+			ignore_beginning = true,
+			tabouts = {
+				{ open = "'", close = "'" },
+				{ open = '"', close = '"' },
+				{ open = "`", close = "`" },
+				{ open = "(", close = ")" },
+				{ open = "[", close = "]" },
+				{ open = "{", close = "}" },
+				{ open = "*", close = "*" }, -- markdown italics (multi-char not supported by tabout)
+				{ open = "<", close = ">" }, -- tags / keybindings in lua
+			},
+		},
+	},
 	{ -- comment
 		"numToStr/Comment.nvim",
 		keys = {
@@ -210,7 +229,7 @@ return {
 			langs = {
 				-- python docstrings
 				python = {
-					string_content = { 
+					string_content = {
 						both = { fallback = function() vim.cmd("normal! gww") end },
 					},
 				},

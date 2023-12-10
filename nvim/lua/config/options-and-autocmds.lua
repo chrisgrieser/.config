@@ -165,11 +165,9 @@ opt.listchars = {
 	precedes = "…",
 	extends = "…",
 	multispace = "·",
-	leadmultispace = "aa",
-            
 	tab = "│ ", -- mostly overridden by indent-blankline
 	lead = " ",
-	trail = nil, -- so multi-space gets priority
+	trail = " ",
 }
 
 -- no list chars in special buffers
