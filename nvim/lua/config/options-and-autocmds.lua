@@ -182,7 +182,6 @@ autocmd({ "BufNew", "BufReadPost" }, {
 
 opt.autowriteall = true
 autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
-	pattern = "?*",
 	callback = function(ctx)
 		local b = vim.bo[ctx.buf]
 		local bufname = vim.api.nvim_buf_get_name(0)
@@ -193,25 +192,29 @@ autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
 		vim.b["saveQueued"] = true
 		vim.defer_fn(function()
 			if not exists(bufname) then return end
-			vim.cmd("silent noautocmd update")
+			vim.cmd("silent! noautocmd update")
 			vim.b["saveQueued"] = false
 		end, 2000)
 	end,
 })
 
 --------------------------------------------------------------------------------
--- Auto-cd to project root
-local rootFiles = { "info.plist", ".git" }
-local ancestorDirs = { ".config" }
+-- AUTO-CD TO PROJECT ROOT (PROJECT.NVIM LITE)
+local autocdConfig = {
+	rootFiles = { "info.plist", ".git" },
+	childOfDir = { ".config" },
+}
 
 vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function(ctx)
 		local function exists(path) return vim.loop.fs_stat(path) ~= nil end
+		local bufname = vim.api.nvim_buf_get_name(ctx.buf)
+		if vim.bo.buftype ~= "" or not exists(bufname) then return end
 
-		local startPath = vim.fs.dirname(vim.api.nvim_buf_get_name(ctx.buf))
+		local startPath = vim.fs.dirname(bufname)
 		local root
 		repeat
-			for _, file in ipairs(rootFiles) do
+			for _, file in ipairs(autocdConfig.rootFiles) do
 				local path = startPath .. "/" .. file
 				if exists(path) then
 					root = vim.fs.dirname(path)
@@ -219,15 +222,17 @@ vim.api.nvim_create_autocmd("BufEnter", {
 				end
 			end
 			if root then break end
-			for _, dir in ipairs(ancestorDirs) do
+			for _, dir in ipairs(autocdConfig.childOfDir) do
 				if vim.fs.basename(vim.fs.dirname(startPath)) == dir then
 					root = startPath
 					break
 				end
 			end
+			if root then break end
 			startPath = vim.fs.dirname(startPath)
-		until startPath == "/" or i > 10
-		vim.notify("none found")
+		until startPath == "/"
+
+		if root and vim.loop.cwd() ~= root then vim.cmd.cd(root) end
 	end,
 })
 
