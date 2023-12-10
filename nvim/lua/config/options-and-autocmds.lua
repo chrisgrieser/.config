@@ -165,6 +165,8 @@ opt.listchars = {
 	precedes = "…",
 	extends = "…",
 	multispace = "·",
+	leadmultispace = "aa",
+            
 	tab = "│ ", -- mostly overridden by indent-blankline
 	lead = " ",
 	trail = nil, -- so multi-space gets priority
@@ -186,10 +188,10 @@ opt.autowriteall = true
 autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
 	callback = function(ctx)
 		local b = vim.bo[ctx.buf]
+		if vim.b.saveQueued or b.buftype ~= "" or b.ft == "gitcommit" or b.readonly then return end
+
 		local bufname = vim.api.nvim_buf_get_name(0)
 		local function exists(file) return vim.loop.fs_stat(file) and file ~= "" end
-
-		if vim.b.saveQueued or b.buftype ~= "" or b.ft == "gitcommit" or b.readonly then return end
 
 		vim.b["saveQueued"] = true
 		vim.defer_fn(function()
