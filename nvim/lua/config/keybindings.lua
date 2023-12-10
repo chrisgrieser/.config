@@ -209,7 +209,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		if vim.v.event.operator ~= "y" then return end -- do not trigger for `d`
 		-- FIX issue with vim-visual-multi
 		if vim.b["VM_Selection"] and vim.b["VM_Selection"].Regions then return end
-		vim.api.nvim_win_set_cursor(0, vim.g.cursorPreYank)
+		pcall(vim.api.nvim_win_set_cursor, 0, vim.g.cursorPreYank)
 	end,
 })
 

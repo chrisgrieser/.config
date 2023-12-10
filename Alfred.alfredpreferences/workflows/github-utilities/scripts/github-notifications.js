@@ -61,8 +61,8 @@ function relativeDate(absoluteDate) {
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
-function run(argv) {
-	const githubToken = argv[0];
+function run() {
+	const githubToken = app.doShellScript("source $HOME/.zshenv && echo $GITHUB_TOKEN");
 	const showReadNotifs =
 		$.NSProcessInfo.processInfo.environment.objectForKey("mode").js === "show-read-notifications";
 	console.log("🪚 showReadNotifs:", showReadNotifs);
@@ -98,13 +98,13 @@ function run(argv) {
 		return JSON.stringify({
 			items: [
 				{
-					title: "Open Notification Inbox",
-					variables: { mode: "open-inbox" },
+					title: "Show Read Notifications",
+					variables: { mode: "show-read-notifications" },
 					mods: deactivatedMods,
 				},
 				{
-					title: "Show Read Notifications",
-					variables: { mode: "show-read-notifications" },
+					title: "Open Notification Inbox",
+					variables: { mode: "open-inbox" },
 					mods: deactivatedMods,
 				},
 			],
@@ -160,8 +160,11 @@ function run(argv) {
 				cmd: {
 					arg: notif.id,
 					variable: {
+						// CAVEAT mark-as-unread not support in GitHub Notification API
+						valid: !showReadNotifs,
+						subtitle: showReadNotifs ? "" : "⌘: Mark as Read",
+						mode: "mark-as-read", 
 						notificationsLeft: responseObj.length - 1,
-						mode: "mark-as-read",
 					},
 				},
 				alt: {

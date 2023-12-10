@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mattn/efm-langserver/master/schema.json
+# DOCS https://github.com/mattn/efm-langserver#example-for-configyaml
+#───────────────────────────────────────────────────────────────────────────────
+
+version: 2
+root-markers:
+  - .git/
+lint-debounce: 1s
+
+tools:
+  sh-shellcheck: &sh-shellcheck
+    lint-command: "shellcheck --format=gcc --external-sources --shell=bash"
+    lint-source: "shellcheck"
+    lint-formats:
+      - "%f:%l:%c: %trror: %m"
+      - "%f:%l:%c: %tarning: %m"
+      - "%f:%l:%c: %tote: %m"
+
+languages:
+  sh:
+    - <<: *sh-shellcheck

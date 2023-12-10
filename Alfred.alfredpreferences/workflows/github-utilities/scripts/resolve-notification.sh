@@ -1,12 +1,7 @@
 #!/usr/bin/env zsh
 
 # shellcheck disable=2154
-if [[ "$mode" == "show-read-notifications" ]]; then
-	# loop back to show read notifications
-	osascript -e "tell application id \"com.runningwithcrayons.Alfred\"
-		run trigger \"github-notifications\" in workflow \"$alfred_workflow_bundleid\"
-	end tell"
-elif [[ "$mode" == "open-inbox" ]]; then
+if [[ "$mode" == "open-inbox" ]]; then
 	open "https://github.com/notifications"
 elif [[ "$mode" == "mark-as-read" ]]; then
 	# DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#mark-a-thread-as-read

@@ -18,10 +18,12 @@
 		},
 		{
 			"title": "Using the Workflow Debug Utility",
+			"subtitle": "of the Alfred UI",
 			"arg": "https://www.alfredapp.com/help/workflows/utilities/debug/"
 		},
 		{
 			"title": "Setting Variables in Workflows",
+			"subtitle": "in the Alfred UI",
 			"arg": "https://www.alfredapp.com/help/workflows/advanced/variables/"
 		},
 		{
@@ -39,6 +41,15 @@
 		{
 			"title": "Workflow Object Inbound Configuration",
 			"arg": "https://www.alfredapp.com/help/workflows/inbound-configuration/"
+		},
+		{
+			"title": "Dynamic Placeholders",
+			"arg": "https://www.alfredapp.com/help/workflows/advanced/placeholders/"
+		},
+		{
+			"title": "Reading Environment Variables",
+			"subtitle": "in a script",
+			"arg": "https://www.alfredapp.com/help/kb/reading-environment-variables/"
 		}
 	]
 }
