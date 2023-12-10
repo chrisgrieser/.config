@@ -4,9 +4,10 @@ alias q=' exit'
 alias cmd='command'
 
 # added verbosity / safety
-alias mv='mv -v'
-alias ln='ln -vi'
-alias cp='cp -v'
+alias mv='mv -vi'
+alias ln='ln -vwi'
+alias cp='cp -vi'
+alias rm='rm -vI'
 
 # defaults
 alias grep='grep --color'
@@ -15,13 +16,11 @@ alias mkdir='mkdir -p' # create intermediate directories
 alias curl='curl --progress-bar'
 alias make='make --silent --warn-undefined-variables'
 alias jless='jless --no-line-numbers'
+alias l='eza --all --long --time-style=relative --no-user --smart-group \
+	--total-size --no-quotes --git-ignore --sort=newest --hyperlink'
 
 # colorized & showing all
 function which { builtin which -a "$@" | bat --language=sh; }
-
-# eza
-alias l='eza --all --long --time-style=relative --no-user --smart-group \
-	--total-size --no-quotes --git-ignore --sort=newest --hyperlink'
 
 # bat: dark-mode aware
 function bat {
