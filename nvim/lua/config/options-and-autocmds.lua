@@ -105,32 +105,12 @@ opt.timeoutlen = 666 -- also affects duration until which-key is shown
 -- Make
 opt.makeprg = "make --silent --warn-undefined-variables"
 
---------------------------------------------------------------------------------
--- CLIPBOARD
-
+-- Clipboard
 opt.clipboard = "unnamedplus"
-
--- sticky yank operations
-vim.keymap.set({ "n", "x" }, "y", function()
-	vim.g.cursorPreYank = vim.api.nvim_win_get_cursor(0)
-	return "y"
-end, { desc = "󰅍 Sticky yank", expr = true })
-vim.keymap.set("n", "Y", function()
-	vim.g.cursorPreYank = vim.api.nvim_win_get_cursor(0)
-	return "y$"
-end, { desc = "󰅍 Sticky yank", expr = true })
 
 -- post-yank-highlight
 autocmd("TextYankPost", {
-	callback = function()
-		if vim.v.event.operator ~= "y" then return end -- do not trigger for `d`
-
-		-- FIX issue with vim-visual-multi
-		if vim.b["VM_Selection"] and vim.b["VM_Selection"].Regions then return end
-
-		vim.highlight.on_yank { timeout = 1000 }
-		vim.api.nvim_win_set_cursor(0, vim.g.cursorPreYank)
-	end,
+	callback = function() vim.highlight.on_yank { timeout = 1000 } end,
 })
 --------------------------------------------------------------------------------
 
