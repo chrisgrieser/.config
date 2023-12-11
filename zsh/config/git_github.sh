@@ -12,7 +12,6 @@ alias unadd='git restore --staged'
 alias push='git push'
 alias pull='git pull'
 alias rebase='git rebase --interactive'
-alias unshallow='git fetch --unshallow' # make shallow clone complete again
 alias unlock='rm -v "$(git rev-parse --git-dir)/index.lock"'
 
 alias pr='gh pr create --web --fill'
@@ -111,7 +110,7 @@ function gM {
 #───────────────────────────────────────────────────────────────────────────────
 
 # remote info
-function grem {
+function gri {
 	git branch --all --verbose --verbose
 	echo
 	git remote --verbose
@@ -189,6 +188,11 @@ function clone {
 	builtin cd "$(command ls -1 -t | head -n1)" || return 1
 	_separator
 	_magic_dashboard
+}
+
+# https://stackoverflow.com/a/17937889/22114136
+function unshallow {
+	git fetch --unshallow --update-head-ok origin '+refs/heads/*:refs/heads/*'
 }
 
 #───────────────────────────────────────────────────────────────────────────────
