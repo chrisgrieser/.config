@@ -71,6 +71,10 @@ local function themeModifications()
 		overwriteHl("Visual", { bg = "#2a454e" }) -- no bold
 		updateHl("TelescopeSelection", "gui=none") -- no bold
 		overwriteHl("@keyword.return", { fg = "#1c79d6", bold = true }) -- darker
+		for _, v in pairs(vimModes) do
+			updateHl("lualine_y_diff_modified_" .. v, "guifg=#ebdd1e")
+		end
+		updateHl("GitSignsChange", "guifg=#acaa62")
 	elseif theme == "dawnfox" then
 		updateHl("IblIndent", "guifg=#e0cfbd")
 		updateHl("ColorColumn", "guibg=#eee6dc")

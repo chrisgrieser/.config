@@ -4,7 +4,8 @@
 # ignore these words
 [default.extend-words]
 noice = "noice" # plugin name
-tre = "tre" # shorthand
+tre = "tre" # abbreviation for `then return end`
+ot = "ot" # keybinding
 
 # ignore these files
 # INFO (needs glob due to conform.nvim appending stuff for temporary file)

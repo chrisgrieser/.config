@@ -1,6 +1,5 @@
 local cmd = vim.cmd
 local keymap = vim.keymap.set
-local expand = vim.fn.expand
 local u = require("config.utils")
 
 --------------------------------------------------------------------------------
@@ -14,6 +13,7 @@ u.ftAbbr("!==", "~=")
 
 -- shorthands
 u.ftAbbr("tre", "then return end")
+u.ftAbbr("re", "return end")
 
 --------------------------------------------------------------------------------
 
