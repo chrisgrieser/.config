@@ -28,6 +28,11 @@
 [rebase]
 	autoSquash = true
 	autoStash = true
+[log]
+	abbrevCommit = true
+	follow = true
+[format]
+	pretty = %C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)%an%C(reset)
 [advice]
 	detachedHead = false
 	addEmptyPathspec = false

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 export GIT_OPTIONAL_LOCKS=0    # prevent unnecessary lock files
 cd "$(dirname "$0")" || exit 1 # go to location of this script, i.e. going into the git repo

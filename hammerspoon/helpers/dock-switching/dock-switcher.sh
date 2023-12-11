@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 data_store=$(dirname "$0")
 mode="$1"
 layout="$2"
