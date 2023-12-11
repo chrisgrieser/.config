@@ -13,6 +13,7 @@ return {
 		event = "VeryLazy",
 		keys = {
 			{ "gk", function() require("treesitter-context").go_to_context() end, desc = "Context" },
+			{ "<leader>to", function() require("treesitter-context").go_to_context() end, desc = "Treesitter Context" },
 		},
 		opts = { max_lines = 0 },
 	},

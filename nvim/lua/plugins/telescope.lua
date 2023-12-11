@@ -321,7 +321,7 @@ return {
 			{ "gf", function() telescope("lsp_references") end, desc = "󰒕 References" },
 			-- stylua: ignore
 			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
-			{ "<leader>pg", function() telescope("highlights") end, desc = " Highlight Groups" },
+			{ "<leader>ph", function() telescope("highlights") end, desc = " Highlight Groups" },
 			-- stylua: ignore
 			{ "<leader>pc", function() telescope("colorscheme") end, desc = " Change Colorschemes" },
 			{ "<leader>gs", function() telescope("git_status") end, desc = " Status" },
