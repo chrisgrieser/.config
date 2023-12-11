@@ -28,10 +28,10 @@ local function overwriteHl(hlgroup, changes) vim.api.nvim_set_hl(0, hlgroup, cha
 --------------------------------------------------------------------------------
 
 local function customHighlights()
-	-- Comments
-	clearHl("@lsp.type.comment") -- FIX https://github.com/stsewd/tree-sitter-comment/issues/22
+	-- FIX https://github.com/stsewd/tree-sitter-comment/issues/22
+	clearHl("@lsp.type.comment")
 
-	-- better comment look
+	-- better url look
 	local commentColor = u.getHighlightValue("Comment", "fg")
 	overwriteHl("@text.uri", { fg = commentColor, underline = true })
 
@@ -53,8 +53,6 @@ local function themeModifications()
 	local mode = vim.opt.background:get()
 	local theme = g.colors_name -- some themes do not set g.colors_name
 	if not theme then theme = mode == "light" and g.lightTheme or g.darkTheme end
-
-	-- FIX lualine_a not getting bold in many themes
 	local vimModes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
 
 	if theme == "tokyonight" then
@@ -128,7 +126,7 @@ local function themeModifications()
 		updateHl("GitSignsAdd", "guibg=none")
 		updateHl("GitSignsChange", "guibg=none")
 		updateHl("GitSignsDelete", "guibg=none")
-		-- bold lualine
+
 		vim.defer_fn(function()
 			for _, v in pairs(vimModes) do
 				updateHl("lualine_a_" .. v, "gui=bold")
