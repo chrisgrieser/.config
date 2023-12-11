@@ -54,7 +54,7 @@ end):start()
 ---@param obsiWin hs.window
 local function autoToggleObsidianSidebar(obsiWin)
 	local obsi = u.app("Obsidian")
-	if not obsi or obsi:allWindows() > 1 then return end -- prevent popout window resizing to affect sidebars
+	if not obsi or #obsi:allWindows() > 1 then return end -- prevent popout window resizing to affect sidebars
 
 	local relObsiWinWidth = obsiWin:size().w / obsiWin:screen():frame().w
 	local modeRight = (relObsiWinWidth > 0.6 and relObsiWinWidth < 0.99) and "expand" or "collapse"

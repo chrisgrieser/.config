@@ -7,6 +7,15 @@ return {
 		event = "CursorMoved",
 		opts = true,
 	},
+	{ -- context lines
+		"nvim-treesitter/nvim-treesitter-context",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		event = "BufEnter",
+		keys = {
+			{ "gk", function() require("treesitter-context").go_to_context() end, desc = "Context" },
+		},
+		opts = { max_lines = 0 },
+	},
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",
 		event = "UIEnter",

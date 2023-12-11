@@ -39,8 +39,6 @@ local topSep = { left = "", right = "" }
 
 local lualineConfig = {
 	tabline = {
-		-- INFO using the tabline will override vim's default tabline, so the tabline
-		-- should always include the tab element
 		lualine_a = {
 			{
 				"datetime",
@@ -104,8 +102,12 @@ local lualineConfig = {
 		},
 		lualine_z = {
 			{ "selectioncount", fmt = function(str) return str ~= "" and "礪" .. str or "" end },
-			"location",
-			{ function() return "" end, padding = { left = 0, right = 1 } },
+			{ "location" },
+			{
+				function() return "" end,
+				cond = function() return vim.fn.has("gui_running") == 1 end, -- glyph not supported by wezterm yet
+				padding = { left = 0, right = 1 },
+			},
 		},
 	},
 	options = {
