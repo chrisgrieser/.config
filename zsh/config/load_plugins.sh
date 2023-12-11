@@ -25,7 +25,7 @@ bindkey '^[[B' history-substring-search-down
 
 #───────────────────────────────────────────────────────────────────────────────
 
-source "$ZDOTDIR/plugins/magic_dashboard.sh"
+source "$ZDOTDIR/plugins/magic_dashboard.zsh"
 
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"

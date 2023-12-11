@@ -109,7 +109,7 @@ local function codeActionFilter(action)
 		javascript = not (title == "Move to a new file"),
 		typescript = not (title == "Move to a new file"),
 		-- stylua: ignore
-		css = not (title:find("^Disable .+ for entire file: ") 
+		css = not (title:find("^Disable .+ for entire file: ")
 			or title:find( "^Disable .+ rule inline: ")),
 		markdown = title ~= "Create a Table of Contents",
 	}
@@ -132,7 +132,7 @@ keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
 keymap({ "n", "x" }, "<leader>ll", function() require("funcs.printing-press").variableLog() end, { desc = " variable log" })
 keymap({ "n", "x" }, "<leader>lo", function() require("funcs.printing-press").objectLog() end, { desc = " object log" })
 keymap("n", "<leader>lb", function() require("funcs.printing-press").beepLog() end, { desc = " beep log" })
-keymap("n", "<leader>lm", function() require("funcs.printing-press").messageLog() end, { desc = "  log" })
+keymap("n", "<leader>lm", function() require("funcs.printing-press").messageLog() end, { desc = " message log" })
 keymap("n", "<leader>l1", function() require("funcs.printing-press").timeLog() end, { desc = " time log" })
 keymap("n", "<leader>lr", function() require("funcs.printing-press").removeLogs() end, { desc = "󰹝 remove log" })
 keymap("n", "<leader>ld", function() require("funcs.printing-press").debugLog() end, { desc = " debugger log" })
