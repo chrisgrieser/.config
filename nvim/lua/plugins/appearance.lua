@@ -10,7 +10,7 @@ return {
 	{ -- context lines
 		"nvim-treesitter/nvim-treesitter-context",
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		event = "BufEnter",
+		event = "VeryLazy",
 		keys = {
 			{ "gk", function() require("treesitter-context").go_to_context() end, desc = "Context" },
 		},
