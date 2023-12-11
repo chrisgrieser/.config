@@ -14,7 +14,7 @@ local formatters = {
 	["*"] = { "typos" },
 }
 
-local lspFormattingFiletypes = {
+local lspFormatFiletypes = {
 	"toml",
 	"yaml",
 	"html",
@@ -102,12 +102,8 @@ return {
 			{
 				"<D-s>",
 				function()
-					local useLsp = vim.tbl_contains(lspFormattingFiletypes, vim.bo.ft) and "always"
-						or false
-					require("conform").format({
-						lsp_fallback = useLsp,
-						async = false,
-					}, function()
+					local useLsp = vim.tbl_contains(lspFormatFiletypes, vim.bo.ft) and "always" or false
+					require("conform").format({ lsp_fallback = useLsp }, function()
 						-- HACK since `fixAll` is not part of ruff-lsp formatting capabilities
 						-- PENDING https://github.com/astral-sh/ruff-lsp/issues/335
 						if vim.bo.ft == "python" then
@@ -119,16 +115,7 @@ return {
 					end)
 				end,
 				desc = "󰒕 Format & Save",
-			},
-			{
-				"<D-s>",
-				function()
-					vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
-					vim.cmd.normal { "gq", bang = true }
-					vim.cmd.update()
-				end,
-				desc = "󰒕 Format Selection & Save",
-				mode = "x",
+				mode = { "n", "x" },
 			},
 		},
 	},
@@ -138,6 +125,10 @@ return {
 			{ "<leader>pm", vim.cmd.Mason, desc = " Mason Home" },
 		},
 		opts = {
+			registries = {
+				"github:mason-org/mason-registry",
+				"github:chrisgrieser/mason-registry",
+			},
 			ui = {
 				border = u.borderStyle,
 				height = 0.8, -- so statusline is still visible
@@ -155,7 +146,7 @@ return {
 			},
 		},
 	},
-	{ -- auto-install missing lsps & formatters
+	{ -- auto-install lsps & formatters
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		event = "VeryLazy",
 		keys = {
