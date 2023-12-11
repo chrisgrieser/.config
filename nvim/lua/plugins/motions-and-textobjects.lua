@@ -19,7 +19,6 @@ return {
 			{ "m", "<Plug>(matchup-%)", desc = "Goto Matching Bracket" },
 		},
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		init = function() vim.g.matchup_matchparen_offscreen = { method = "popup" } end,
 	},
 	{ -- CamelCase Motion plus
 		"chrisgrieser/nvim-spider",
