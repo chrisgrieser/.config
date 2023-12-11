@@ -86,7 +86,7 @@ require("lazy").setup("plugins", {
 
 local keymap = u.uniqueKeymap
 keymap("n", "<leader>pp", require("lazy").sync, { desc = "󰒲 Lazy Update" })
-keymap("n", "<leader>ph", require("lazy").home, { desc = "󰒲 Lazy Overview" })
+keymap("n", "<leader>pl", require("lazy").home, { desc = "󰒲 Lazy" })
 keymap("n", "<leader>pi", require("lazy").install, { desc = "󰒲 Lazy Install" })
 
 -- 5s after startup, notify if there many plugin updates

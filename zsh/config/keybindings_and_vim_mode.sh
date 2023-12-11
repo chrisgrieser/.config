@@ -54,12 +54,15 @@ zle -N _copy_location
 # - `bindkey -M main` to show existing keybinds
 # - some bindings with '^' are reserved (^M=enter, ^I=tab)
 
-# needs to be wrapped to not be overwritten by zsh-vi-mode
+# needs to be put into `zvm_after_init` to not be overwritten by zsh-vi-mode
 function zvm_after_init {
 	bindkey -M viins '^P' _copy_location
 	bindkey -M viins '^U' _cut_buffer
 	bindkey -M viins '…' insert-last-word
 	bindkey -M viins '^Z' undo # remapped to `cmd+z` via wezterm
+
+	bindkey '^[[A' history-substring-search-up
+	bindkey '^[[B' history-substring-search-down
 }
 
 # DOCS vi-mode widgets https://github.com/jeffreytse/zsh-vi-mode#custom-widgets-and-keybindings
