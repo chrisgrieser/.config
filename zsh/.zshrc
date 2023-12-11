@@ -23,7 +23,7 @@ CONFIG_FILES=(
 
 for filename in "${CONFIG_FILES[@]}"; do
 	# shellcheck disable=1090
-	source "$ZDOTDIR/config/$filename.sh"
+	source "$ZDOTDIR/config/$filename.zsh"
 done
 
 # remove last login message that some terminals leave https://stackoverflow.com/a/69915614

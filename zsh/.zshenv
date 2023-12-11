@@ -1,5 +1,3 @@
-# vim: filetype=bash
-
 # INFO defines location of the zsh config
 export ZDOTDIR="$HOME/.config/zsh"
 #───────────────────────────────────────────────────────────────────────────────
