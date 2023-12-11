@@ -22,7 +22,6 @@ return {
 	},
 	{ -- CamelCase Motion plus
 		"chrisgrieser/nvim-spider",
-		opts = { skipInsignificantPunctuation = true },
 		keys = {
 			{
 				"e",

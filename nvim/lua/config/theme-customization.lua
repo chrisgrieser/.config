@@ -58,14 +58,15 @@ local function themeModifications()
 	local vimModes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
 
 	if theme == "tokyonight" then
+		local yellow = mode == "dark" and "#acaa62" or "#c4bb45"
 		vim.defer_fn(function()
 			for _, v in pairs(vimModes) do
-				updateHl("lualine_y_diff_modified_" .. v, "guifg=#acaa62")
+				updateHl("lualine_y_diff_modified_" .. v, "guifg=" .. yellow)
 				updateHl("lualine_y_diff_added_" .. v, "guifg=#369a96")
 				updateHl("lualine_a_" .. v, "gui=bold")
 			end
 		end, 100)
-		updateHl("GitSignsChange", "guifg=#acaa62")
+		updateHl("GitSignsChange", "guifg=" .. yellow)
 		updateHl("GitSignsAdd", "guifg=#369a96")
 	elseif theme == "monet" then
 		overwriteHl("Folded", { bg = "#313548" })
