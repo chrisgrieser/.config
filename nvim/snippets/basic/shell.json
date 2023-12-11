@@ -1,7 +1,7 @@
 {
 	"shebang": {
 		"prefix": "shebang",
-		"body": "#!/usr/bin/env bash"
+		"body": "#!/usr/bin/env zsh"
 	},
 	"global var (shellcheck)": {
 		"prefix": "global var (shellcheck)",

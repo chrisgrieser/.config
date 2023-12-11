@@ -64,7 +64,7 @@ function _list_files_here {
 	eza_output=$(
 		eza --width="$COLUMNS" --all --grid --color=always --icons \
 			--git-ignore --ignore-glob=".DS_Store|Icon?" \
-			--sort=name --group-directories-first --no-quotes \
+			--sort=age --group-directories-first --no-quotes \
 			--git --long --no-user --no-permissions --no-filesize --no-time
 		# $use_hyperlinks PENDING https://github.com/eza-community/eza/issues/693
 	)
