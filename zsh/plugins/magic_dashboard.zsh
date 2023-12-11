@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # shellcheck disable=2086 # simpler for various pseudo-options
 
 # draws a separator line with terminal width
@@ -97,7 +98,7 @@ function _gitstatus {
 		print "$diffs" | sed \
 			-e $'s/\\(gone\\)/\033[1;31mD     \033[0m/' \
 			-e $'s/\\(new\\)/\033[1;32mN    \033[0m/' \
-			-e $'s/(\\(.*\\))/\033[1;34m\\1\033[0m/' \
+			-e $'s/(\\(new .*\\))/\033[1;34m\\1\033[0m/' \
 			-e 's/ Bin /    /' \
 			-e $'s/ \\| Unmerged /  \033[1;31m  \033[0m /' \
 			-Ee $'s|([^/+]*)(/)|\033[1;36m\\1\033[1;33m\\2\033[0m|g' \
