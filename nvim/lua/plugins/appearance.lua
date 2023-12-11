@@ -19,7 +19,7 @@ return {
 			},
 			{ "<leader>ot", vim.cmd.TSContextToggle, desc = " Treesitter Context" },
 		},
-		opts = { max_lines = 0 },
+		opts = { max_lines = 3 },
 	},
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",
