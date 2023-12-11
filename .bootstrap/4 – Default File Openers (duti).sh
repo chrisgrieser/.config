@@ -49,10 +49,9 @@ duti -s "$editorID" csv all
 duti -s "$editorID" log all
 duti -s "$editorID" toml all
 duti -s "$editorID" sh all
+duti -s "$editorID" zsh all
 duti -s "$editorID" bib all
 duti -s "$editorID" rb all
-duti -s "$editorID" zsh all
-duti -s "$editorID" bash all
 duti -s "$editorID" py all
 duti -s "$editorID" js all
 duti -s "$editorID" ts all
