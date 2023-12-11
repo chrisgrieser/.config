@@ -68,12 +68,6 @@ local formatterConfig = {
 			prepend_args = { "--config=" .. linterConfig .. "/markdownlint.yaml" },
 		},
 
-		-- PENDING https://github.com/mason-org/mason-registry/pull/3671
-		biome = {
-			stdin = false,
-			args = { "format", "--write", "$FILENAME" },
-		},
-
 		-- stylua: ignore
 		["bibtex-tidy"] = {
 			prepend_args = {
@@ -125,9 +119,10 @@ return {
 			{ "<leader>pm", vim.cmd.Mason, desc = " Mason Home" },
 		},
 		opts = {
+			-- PENDING https://github.com/mason-org/mason-registry/pull/3671
 			registries = {
+				"github:chrisgrieser/mason-registry", -- only has biome fix
 				"github:mason-org/mason-registry",
-				"github:chrisgrieser/mason-registry",
 			},
 			ui = {
 				border = u.borderStyle,
