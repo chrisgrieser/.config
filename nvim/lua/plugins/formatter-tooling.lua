@@ -119,11 +119,6 @@ return {
 			{ "<leader>pm", vim.cmd.Mason, desc = " Mason Home" },
 		},
 		opts = {
-			-- PENDING https://github.com/mason-org/mason-registry/pull/3671
-			registries = {
-				"github:chrisgrieser/mason-registry", -- only has biome fix
-				"github:mason-org/mason-registry",
-			},
 			ui = {
 				border = u.borderStyle,
 				height = 0.8, -- so statusline is still visible
