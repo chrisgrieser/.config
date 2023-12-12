@@ -6,13 +6,7 @@ rules:
       - type: basic
         from: { key_code: f3 }
         to:
-          - shell_command: |
-              if ! pgrep -xq "wezterm-gui" ; then
-                open -a "WezTerm"
-                while ! pgrep -xq "wezterm-gui"; do sleep 0.1; done
-                sleep 0.3
-              fi
-              echo "spotify_player" | wezterm cli send-text --no-paste
+          - shell_command: open "https://open.spotify.com/"
       - type: basic
         from: { key_code: f4 }
         to:
