@@ -45,7 +45,7 @@ return {
 	},
 
 	-- INFO using the mapping from the terminal_keybindings.zsh
-	-- undo
+	-- undo (ctrl-z set in terminal keybindings)
 	{ key = "z", mods = "CMD", action = act.SendKey { key = "z", mods = "CTRL" } },
 	{ -- for adding inline code to a commit, hotkey consistent with GitHub
 		key = "e",
@@ -58,8 +58,6 @@ return {
 	},
 	-- Grappling-hook
 	{ key = "Enter", mods = "CMD", action = act.SendKey { key = "o", mods = "CTRL" } },
-	-- accept-and-infer-next-history
-	{ key = "Enter", mods = "ALT", action = act.SendKey { key = "l", mods = "CTRL" } },
 
 	{ -- enter line-break https://unix.stackexchange.com/a/80820
 		key = "Enter",
@@ -103,16 +101,11 @@ return {
 	{ key = "Escape", mods = "CTRL", action = wt.action.ShowDebugOverlay },
 
 	-- Copy Mode (= Caret Mode) -- https://wezfurlong.org/wezterm/copymode.html
-	{ key = "c", mods = "CMD|SHIFT", action = act.ActivateCopyMode },
+	{ key = "y", mods = "CMD", action = act.ActivateCopyMode },
 
 	-- Quick Select (= Hint Mode) -- https://wezfurlong.org/wezterm/quickselect.html
 	{ key = "u", mods = "CMD", action = act.QuickSelect },
 
-	{ -- cmd+y -> copy full line, useful for pages like `fx`
-		key = "y",
-		mods = "CMD",
-		action = act.QuickSelectArgs { patterns = { "^.*$" }, label = "Copy Full Line" },
-	},
 	{ -- cmd+s -> copy shell option, e.g. to copy them from a man page
 		key = "s",
 		mods = "CMD",

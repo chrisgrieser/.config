@@ -1,15 +1,9 @@
 #!/usr/bin/env osascript -l JavaScript
-
-//──────────────────────────────────────────────────────────────────────────────
-// CONFIG
-let karabinerJSON = "~/.config/karabiner/karabiner.json";
-let customRulesJSONlocation = "~/.config/karabiner/assets/complex_modifications/";
-
-//──────────────────────────────────────────────────────────────────────────────
-
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 ObjC.import("Foundation");
+
+//──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} path */
 function readFile(path) {
@@ -26,14 +20,16 @@ function writeToFile(filepath, text) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-function main() {
-	karabinerJSON = karabinerJSON.replace(/^~/, app.pathTo("home folder"));
-	customRulesJSONlocation = customRulesJSONlocation.replace(/^~/, app.pathTo("home folder"));
+function run() {
+	// CONFIG
+	const home = app.pathTo("home folder");
+	const karabinerJson = home + "/.config/karabiner/karabiner.json";
+	const customRulesJson = home + "/.config/karabiner/assets/complex_modifications/";
 
-	const yqNotInstalled = app.doShellScript("command yq || echo false") === "false";
+	// GUARD yq is installed
+	const yqNotInstalled = app.doShellScript("command -v yq || echo 'false'") === "false";
 	if (yqNotInstalled) return "󱎘 yq is not installed.";
 
-	// convert yaml to json (requires `yq`)
 	// using `explode` to expand anchors & aliases: https://mikefarah.gitbook.io/yq/operators/anchor-and-alias-operators#explode-alias-and-anchor
 	app.doShellScript(`
 		export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
@@ -46,9 +42,9 @@ function main() {
 
 	// compile new rules
 	const customRules = [];
-	const ruleFile = app.doShellScript(`ls "${customRulesJSONlocation}" | grep ".json"`).split("\r");
+	const ruleFile = app.doShellScript(`ls "${customRulesJson}" | grep ".json"`).split("\r");
 	for (const fileName of ruleFile) {
-		const filePath = customRulesJSONlocation + fileName;
+		const filePath = customRulesJson + fileName;
 		const ruleSet = JSON.parse(readFile(filePath))?.rules;
 		if (!ruleSet) return;
 		for (const rule of ruleSet) {
@@ -59,18 +55,14 @@ function main() {
 
 	// insert new rules into karabiner config
 	// INFO: the rules are added to the *first* profile in the profile list from Karabiner.
-	const complexRules = JSON.parse(readFile(karabinerJSON));
+	const complexRules = JSON.parse(readFile(karabinerJson));
 	complexRules.profiles[0].complex_modifications.rules = customRules;
-	writeToFile(karabinerJSON, JSON.stringify(complexRules));
+	writeToFile(karabinerJson, JSON.stringify(complexRules));
 
 	// validate
-	const lintStatus = app
-		.doShellScript(
-			`"/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli" --lint-complex-modifications "${karabinerJSON}"`,
-		)
-		.trim();
-	const msg = lintStatus === "ok" ? " Build Success" : "󱎘 Config Invalid";
+	const lintStatus = app.doShellScript(
+		`"/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli" --lint-complex-modifications "${karabinerJson}"`,
+	);
+	const msg = lintStatus.includes("karabiner.json: ok") ? " Build Success" : "󱎘 Config Invalid";
 	return msg; // notify via makefile output
 }
-
-main();
