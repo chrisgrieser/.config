@@ -48,7 +48,7 @@ function run() {
 	for (const fileName of ruleFile) {
 		const filePath = customRulesJson + fileName;
 		const ruleSet = JSON.parse(readFile(filePath))?.rules;
-		if (!ruleSet) return "Parsing issue";
+		if (!ruleSet) return "󱎘 Parsing issue";
 		for (const rule of ruleSet) {
 			customRules.push(rule);
 		}
