@@ -114,9 +114,7 @@ function gri {
 	git branch --all --verbose --verbose
 	echo
 	git remote --verbose
-	printf "\e[1;34mgh\e[0m default repo: \e[1;31m" &&
-		gh repo set-default --view &&
-		printf "\e[0m"
+	printf "\e[1;34mgh\e[0m default repo: " && gh repo set-default --view
 }
 
 # Github Url: open & copy url
@@ -224,7 +222,7 @@ function pickaxe {
 	print "\033[1;36mgit checkout {hash}^\033[0m"
 	echo
 
-	_gitlog --pickaxe-regex --regexp-ignore-case -S"$1"
+	_gitlog -G"$1" --regexp-ignore-case --follow
 }
 
 # search for [g]it [d]eleted [f]ile
