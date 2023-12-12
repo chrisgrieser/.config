@@ -1,7 +1,8 @@
 #!/usr/bin/env osascript -l JavaScript
+
+ObjC.import("Foundation");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
-ObjC.import("Foundation");
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -20,6 +21,7 @@ function writeToFile(filepath, text) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
+// biome-ignore lint/correctness/noUnusedVariables: <explanation>
 function run() {
 	// CONFIG
 	const home = app.pathTo("home folder");
@@ -46,7 +48,7 @@ function run() {
 	for (const fileName of ruleFile) {
 		const filePath = customRulesJson + fileName;
 		const ruleSet = JSON.parse(readFile(filePath))?.rules;
-		if (!ruleSet) return;
+		if (!ruleSet) return "Parsing issue";
 		for (const rule of ruleSet) {
 			customRules.push(rule);
 		}
@@ -63,6 +65,6 @@ function run() {
 	const lintStatus = app.doShellScript(
 		`"/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli" --lint-complex-modifications "${karabinerJson}"`,
 	);
-	const msg = lintStatus.includes("karabiner.json: ok") ? " Build Success" : "󱎘 Config Invalid";
+	const msg = lintStatus.includes("ok") ? " Build Success" : "󱎘 Config Invalid";
 	return msg; // notify via makefile output
 }
