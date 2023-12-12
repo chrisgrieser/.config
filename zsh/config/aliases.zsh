@@ -29,13 +29,6 @@ function bat {
 	command bat --theme="$theme" "$@"
 }
 
-# jqp: dark-mode aware
-function jqp {
-	local theme # https://github.com/noahgorstein/jqp#light-themes
-	theme="$(defaults read -g AppleInterfaceStyle &>/dev/null && echo "witchhazel" || echo "trac")"
-	command jqp --theme="$theme" "$@"
-}
-
 # misc
 alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
 alias prose='ssh nanotipsforvim@prose.sh'
@@ -52,7 +45,6 @@ alias -g C='| pbcopy ; echo "Copied."' # copy
 alias -g N='| wc -l | tr -d " "'       # count lines
 alias -g L='| less'
 alias -g J='| jless'
-alias -g JJ='| jqp'
 
 # highlights for them
 ZSH_HIGHLIGHT_REGEXP+=(' G($| )' 'fg=magenta,bold')
@@ -60,6 +52,6 @@ ZSH_HIGHLIGHT_REGEXP+=(' C$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' B$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' N$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' L$' 'fg=magenta,bold')
-ZSH_HIGHLIGHT_REGEXP+=(' JJ?$' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=(' J?$' 'fg=magenta,bold')
 
 #───────────────────────────────────────────────────────────────────────────────

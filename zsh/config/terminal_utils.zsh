@@ -98,8 +98,9 @@ function lc() {
 		to_copy=""
 		for arg in "$@"; do
 			cmd=$(history -n -"$arg" -"$arg")
-			to_copy="$to_copy$cmd\n"
+			to_copy="$to_copy\n$cmd"
 		done
+		to_copy=$(echo -n "$to_copy" | grep -v "^$")
 	else
 		to_copy=$(history -n -1)
 	fi
