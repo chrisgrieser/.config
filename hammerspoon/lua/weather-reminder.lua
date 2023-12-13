@@ -53,10 +53,10 @@ local function getOutsideTemp()
 
 		if outsideNowCoolerThanInside then
 			hs.alert.show("🌡️🔵 Outside now cooler than inside.")
-			u.sound("Funk")
+			hs.sound.getByName("Funk"):play() ---@diagnostic disable-line: undefined-field
 		elseif outsideNowHotterThanInside then
 			hs.alert.show("🌡️🔴 Outside now hotter than inside.")
-			u.sound("Funk")
+			hs.sound.getByName("Funk"):play() ---@diagnostic disable-line: undefined-field
 		end
 	end)
 end

@@ -34,6 +34,16 @@ M.timer_JourFixe = hs.timer
 	end)
 	:start()
 
+-- every full hour, play a sound
+M.timer_hourlySound = hs.timer
+	.doEvery(60, function()
+		local isFullHour = os.date("%M") == "00"
+		if isFullHour then
+			hs.sound.getByName("Bottle"):play() ---@diagnostic disable-line: undefined-field
+		end
+	end)
+	:start()
+
 --------------------------------------------------------------------------------
 -- BACKUP / MAINTENANCE
 
