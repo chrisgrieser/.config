@@ -5,7 +5,10 @@
 --------------------------------------------------------------------------------
 
 on alfred_script(shellCmd)
-	# Launch Wezterm if needed (Appname is `WezTerm`, processname is `wezterm-gui`)
+	set exportPath to "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
+
+	# LAUNCH WEZTERM IF NEEDED 
+	# (Appname is `WezTerm`, processname is `wezterm-gui`)
 	tell application "WezTerm" to activate
 	tell application "System Events"
 		repeat while (name of first application process whose frontmost is true) is not "wezterm-gui"
@@ -14,6 +17,18 @@ on alfred_script(shellCmd)
 	end tell
 	delay 0.1 # ensure wezterm-gui is ready
 
+	# CREATE WINDOW IF NEEDED
+	tell application "System Events" to tell process "WezTerm" 
+		if (count of windows) is 0 then
+			set frontmost to true
+			click menu item "New Window" of menu "Shell" of menu bar 1
+		end if
+		repeat while (count of windows) is 0
+			delay 0.05
+		end repeat
+	end tell
+
+	# DETERMINE COMMAND
 	# 1. use builtin to not trigger aliases, `-q` to suppress hooks (chpwd)
 	# 2. Add `clear` to suppress the entering message
 	# 3. Add leading space, so it is not saved to the history due HIST_IGNORE_SPACE
@@ -22,6 +37,6 @@ on alfred_script(shellCmd)
 		set shellCmd to " builtin cd -q " & arg & " && clear"
 	end if
 
-	set exportPath to "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ;"
+	# SEND COMMAND
 	do shell script (exportPath & "echo " & quoted form of shellCmd & " | wezterm cli send-text --no-paste")
 end alfred_script
