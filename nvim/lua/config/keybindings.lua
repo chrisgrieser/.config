@@ -86,11 +86,13 @@ keymap(
 -- WHITESPACE & INDENTATION
 keymap("n", "=", "mzO<Esc>`z", { desc = "  blank above" })
 keymap("n", "_", "mzo<Esc>`z", { desc = "  blank below" })
-keymap("n", "<Tab>", ">>", { desc = "󰉶 indent line" })
-keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent line" })
+
 keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent selection" })
 keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent selection" })
-keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent" })
+keymap("n", "<Tab>", ">>", { desc = "󰉶 indent line" })
+keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent line" })
+keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent line" })
+keymap("i", "<Tab>", "<C-t>", { desc = "󰉵 indent line" })
 
 keymap("n", "[", "<", { desc = "󰉵 outdent" })
 keymap("n", "]", ">", { desc = "󰉶 indent" })
@@ -201,7 +203,6 @@ keymap("n", "Y", function()
 	return "y$"
 end, { desc = "󰅍 Sticky yank", expr = true, unique = false })
 
--- post-yank-highlight
 vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
 		-- do not trigger for `d` or yanks to helper-register `z`
@@ -274,7 +275,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function()
 		if vim.bo.buftype == "nofile" then return end -- do not trigger in DressingInput
 		-- INFO cquit exists non-zero, aborting the commit/rebase
-		vim.keymap.set("n", "q", cmd.cquit, { buffer = true, nowait = true, desc = "Quit" })
+		vim.keymap.set("n", "q", cmd.cquit, { buffer = true, nowait = true, desc = "Abort" })
 	end,
 })
 
