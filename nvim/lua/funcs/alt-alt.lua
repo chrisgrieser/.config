@@ -56,11 +56,9 @@ local function altOldfile()
 end
 
 ---shows info on alternate window/buffer/oldfile in that priority
----@param opts? { maxLen: number }
 ---@return string
-function M.altFileStatusline(opts)
-	opts = opts or {}
-	local maxLen = opts.maxLen or 25
+function M.altFileStatusline()
+	local maxLen = 25 -- CONFIG
 
 	local altPath = fn.expand("#:p")
 	local curPath = vim.api.nvim_buf_get_name(0)

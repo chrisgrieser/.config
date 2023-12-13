@@ -28,42 +28,15 @@ local function quickfixCounter()
 	local title = qfData.title
 		:gsub("^Live Grep: .- %((.*)%)", 'Grep: "%1"')
 		:gsub("^Find Word %((.-)%) ?%(?%)?", 'Grep: "%1"')
+		:gsub(" ?%(%)", "")
 	local index = qfData.idx
-	return (" %s/%s (%s)"):format(index, totalQfItems, title)
+	return (" %s/%s %s"):format(index, totalQfItems, title)
 end
 
 --------------------------------------------------------------------------------
--- nerdfont-powerline icons have prefix 'ple-'
-local bottomSep = { left = "", right = "" }
-local topSep = { left = "", right = "" }
+
 
 local lualineConfig = {
-	tabline = {
-		lualine_a = {
-			{
-				"datetime",
-				style = "%H:%M",
-				cond = function() return vim.o.columns > 110 and vim.o.lines > 25 end,
-				-- make the `:` blink
-				fmt = function(time) return os.time() % 2 == 0 and time or time:gsub(":", " ") end,
-				section_separators = topSep,
-			},
-		},
-		lualine_b = {
-			{
-				function() return "󱥒 " .. vim.fs.basename(vim.env.VIRTUAL_ENV) end,
-				cond = function() return vim.env.VIRTUAL_ENV and vim.bo.ft == "python" end,
-				section_separators = topSep,
-			},
-			{
-				"tabs",
-				mode = 1,
-				max_length = vim.o.columns * 0.6,
-				cond = function() return fn.tabpagenr("$") > 1 end,
-				section_separators = topSep,
-			},
-		},
-	},
 	sections = {
 		lualine_a = {
 			{
@@ -76,11 +49,27 @@ local lualineConfig = {
 					return notMainBranch and notSpecialBuffer
 				end,
 			},
-			{ "filetype", icon_only = true, colored = false, padding = { right = 0, left = 1 } },
+			{
+				function() return "󱥒 " .. vim.fs.basename(vim.env.VIRTUAL_ENV) end,
+				cond = function() return vim.env.VIRTUAL_ENV and vim.bo.ft == "python" end,
+			},
+			{
+				"filetype",
+				icon_only = true,
+				colored = false,
+				padding = { right = 0, left = 1 },
+				component_separators = { left = "", right = "" },
+			},
 			{ "filename", file_status = false, shortening_target = 30 },
 		},
 		lualine_b = {
-			{ function() return require("funcs.alt-alt").altFileStatusline { maxLen = 20 } end },
+			{ require("funcs.alt-alt").altFileStatusline },
+			{
+				"tabs",
+				mode = 1,
+				max_length = vim.o.columns * 0.6,
+				cond = function() return fn.tabpagenr("$") > 1 end,
+			},
 		},
 		lualine_c = {
 			{ quickfixCounter },
@@ -104,17 +93,22 @@ local lualineConfig = {
 			{ "selectioncount", fmt = function(str) return str ~= "" and "礪" .. str or "" end },
 			{ "location" },
 			{
-				function() return "" end,
-				cond = function() return vim.fn.has("gui_running") == 1 end, -- glyph not supported by wezterm yet
-				padding = { left = 0, right = 1 },
+				"datetime",
+				style = "%H:%M",
+				cond = function() return vim.o.columns > 110 end,
+				fmt = function(time)
+					local timeWithBlinkingColon = os.time() % 2 == 0 and time or time:gsub(":", " ")
+					return "󰅐 " .. timeWithBlinkingColon
+				end,
 			},
 		},
 	},
 	options = {
-		refresh = { statusline = 1000 },
 		globalstatus = true,
-		component_separators = { left = "", right = "" },
-		section_separators = bottomSep,
+		always_divide_middle = false,
+		-- nerdfont-powerline icons prefix: ple-
+		component_separators = { left = "", right = "" },
+		section_separators = { left = "", right = "" },
 		-- stylua: ignore
 		ignore_focus = {
 			"DressingInput", "DressingSelect", "lspinfo", "ccc-ui", "TelescopePrompt",
