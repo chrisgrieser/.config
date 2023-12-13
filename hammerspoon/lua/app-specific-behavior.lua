@@ -15,7 +15,10 @@ local function spotifyDo(toStatus)
 	local playback = hs.execute(u.exportPath .. "spotify_player get key playback")
 	local decoded = hs.json.decode(playback)
 	if not decoded then
-		hs.execute(u.exportPath .. "spotify_player playback start")
+		hs.execute(
+			u.exportPath
+				.. 'spotify_player playback start context playlist --name "Discover Weekly" --shuffle'
+		)
 		return
 	end
 	local disallowed = decoded.actions.disallows
