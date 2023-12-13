@@ -44,9 +44,9 @@ keymap({ "n", "v", "i" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 Si
 keymap("n", "gp", "gf", { desc = " Goto Path under cursor" })
 
 -- quickfix
-keymap("n", "gq", "<cmd>cnext<CR>zv", { desc = " Next Quickfix" })
-keymap("n", "gQ", "<cmd>cprevious<CR>zv", { desc = " Prev Quickfix" })
-keymap("n", "dQ", "<cmd>cexpr []<CR>", { desc = " Delete Qf List" })
+keymap("n", "gq", "<cmd>cnext<CR>zv", { desc = " Next Quickfix" })
+keymap("n", "gQ", "<cmd>cprevious<CR>zv", { desc = " Prev Quickfix" })
+keymap("n", "dQ", "<cmd>cexpr []<CR>", { desc = " Delete Qf List" })
 
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS

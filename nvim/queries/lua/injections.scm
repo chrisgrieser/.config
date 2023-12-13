@@ -1,4 +1,8 @@
 ;extends
+; INFO injected languages require the TS parser name, not the vim filetype name,
+; so "bash" works, but not "sh"
+;───────────────────────────────────────────────────────────────────────────────
+
 ;system_cmd
 (function_call                                  
   name: ((dot_index_expression) @_mm

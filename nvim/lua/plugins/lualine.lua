@@ -1,5 +1,4 @@
 local bo = vim.bo
-local fn = vim.fn
 --------------------------------------------------------------------------------
 
 local function irregularWhitespace()
@@ -30,11 +29,10 @@ local function quickfixCounter()
 		:gsub("^Find Word %((.-)%) ?%(?%)?", 'Grep: "%1"')
 		:gsub(" ?%(%)", "")
 	local index = qfData.idx
-	return (" %s/%s %s"):format(index, totalQfItems, title)
+	return (" %s/%s %s"):format(index, totalQfItems, title)
 end
 
 --------------------------------------------------------------------------------
-
 
 local lualineConfig = {
 	sections = {
@@ -42,11 +40,9 @@ local lualineConfig = {
 			{
 				"branch",
 				cond = function()
-					-- show branch only when not in main/master
+					if bo.buftype ~= "" then return false end
 					local curBranch = require("lualine.components.branch.git_branch").get_branch()
-					local notMainBranch = curBranch ~= "main" and curBranch ~= "master"
-					local notSpecialBuffer = bo.buftype == ""
-					return notMainBranch and notSpecialBuffer
+					return curBranch ~= "main" and curBranch ~= "master"
 				end,
 			},
 			{
@@ -64,12 +60,6 @@ local lualineConfig = {
 		},
 		lualine_b = {
 			{ require("funcs.alt-alt").altFileStatusline },
-			{
-				"tabs",
-				mode = 1,
-				max_length = vim.o.columns * 0.6,
-				cond = function() return fn.tabpagenr("$") > 1 end,
-			},
 		},
 		lualine_c = {
 			{ quickfixCounter },

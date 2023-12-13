@@ -1,4 +1,8 @@
 ;extends
+; INFO injected languages require the TS parser name, not the vim filetype name,
+; so "bash" works, but not "sh"
+;───────────────────────────────────────────────────────────────────────────────
+
 ; inject sh for `shell_command` (karabiner elements config)
 ; karabiner_1
 (block_mapping_pair
