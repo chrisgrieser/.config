@@ -83,7 +83,7 @@ M.timer_sleepAutoVideoOff = hs.timer
 		-- GUARD
 		local isNight = u.betweenTime(config.betweenHours[1], config.betweenHours[2])
 		local isIdle = (hs.host.idleTime() / 60) > config.idleMins
-		if not (isNight and isIdle and env.isProjector() and u.screenIsUnlocked()) then return end
+		if not (isNight and isIdle and u.screenIsUnlocked()) then return end
 
 		local alertMsg = ("💤 Will sleep in %ss if idle."):format(config.timeToReactSecs)
 		hs.alert.show(alertMsg, 5)

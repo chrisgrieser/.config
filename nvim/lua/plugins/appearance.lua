@@ -180,7 +180,7 @@ return {
 				border = u.borderStyle,
 				relative = "editor",
 				title_pos = "left",
-				min_width = { 0.4, 72 }, -- 72: git commit msg length
+				min_width = { 0.4, 72 }, -- 72 = git commit msg length
 				mappings = { n = { ["q"] = "Close" } },
 			},
 			select = {
