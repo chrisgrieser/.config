@@ -38,7 +38,7 @@ M.timer_JourFixe = hs.timer
 M.timer_hourlySound = hs.timer
 	.doEvery(60, function()
 		local isFullHour = os.date("%M") == "00"
-		if isFullHour then
+		if isFullHour and u.screenIsUnlocked() and u.betweenTime(8, 23) and not env.isProjector() then
 			hs.sound.getByName("Bottle"):play() ---@diagnostic disable-line: undefined-field
 		end
 	end)
