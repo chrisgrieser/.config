@@ -5,18 +5,6 @@ local M = {}
 ---@param cmdStr string
 function M.normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
----@param str string
----@param filePath string line(s) to add
----@param mode "w"|"a" -- write or append
----@return string|nil error
----@nodiscard
-function M.writeToFile(filePath, str, mode)
-	local file, error = io.open(filePath, mode)
-	if not file then return error end
-	file:write(str .. "\n")
-	file:close()
-end
-
 ---send notification
 ---@param msg string
 ---@param title string
@@ -73,24 +61,24 @@ end
 
 ---Adds a component to the lualine after lualine was already set up. Useful for
 ---lazyloading.
----@param component function|table the component forming the lualine
----@param location "tabline"|"sections" tabline = top, sections = bottom
+---@param bar "tabline"|"sections" tabline = top, sections = bottom
 ---@param section "lualine_a"|"lualine_b"|"lualine_c"|"lualine_x"|"lualine_y"|"lualine_z"
-function M.addToLuaLine(location, section, component)
+---@param component function|table the component forming the lualine
+function M.addToLuaLine(bar, section, component)
 	local ok, lualine = pcall(require, "lualine")
 	if not ok then return end
-	local sectionConfig = lualine.get_config()[location][section] or {}
+	local sectionConfig = lualine.get_config()[bar][section] or {}
 
 	local componentObj = type(component) == "table" and component or { component }
-	table.insert(sectionConfig, componentObj)
-	lualine.setup { [location] = { [section] = sectionConfig } }
+	table.insert(sectionConfig, 1, componentObj)
+	lualine.setup { [bar] = { [section] = sectionConfig } }
 
 	-- Theming needs to be re-applied, since the lualine-styling can change
 	require("config.theme-customization").reloadTheming()
 end
 
 ---ensures unique keymaps https://www.reddit.com/r/neovim/comments/16h2lla/can_you_make_neovim_warn_you_if_your_config_maps/
----@alias vimMode "n"|"v"|"x"|"i"|"o"|"c"|"t"|"ia"|"ca"|"!a"
+---@alias vimMode "n"|"v"|"x"|"i"|"o"|"c"|"t"
 ---@param modes vimMode|vimMode[]
 ---@param lhs string
 ---@param rhs string|function
