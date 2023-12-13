@@ -1,7 +1,7 @@
 -- INFO only the first theme will be used
 local lightThemes = {
 	{ "folke/tokyonight.nvim", opts = { style = "day" } },
-	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
+	-- { "EdenEast/nightfox.nvim", name = "dawnfox" },
 	-- { "ribru17/bamboo.nvim" },
 	-- { "sainnhe/everforest", init = function() vim.g.everforest_background = "hard" end },
 	-- {
@@ -12,12 +12,12 @@ local lightThemes = {
 }
 
 local darkThemes = {
-	"fynnfluegge/monet.nvim",
+	"rebelot/kanagawa.nvim",
 	-- { "navarasu/onedark.nvim", opts = { style = "warm" } },
+	-- "fynnfluegge/monet.nvim",
 	-- { "folke/tokyonight.nvim", opts = { style = "moon" } },
 	-- { "EdenEast/nightfox.nvim", name = "duskfox" },
 	-- "shaunsingh/moonlight.nvim",
-	-- "rebelot/kanagawa.nvim",
 	-- "sainnhe/gruvbox-material",
 	-- { "sainnhe/sonokai", init = function() vim.g.sonokai_style = "shusia" end },
 }
