@@ -13,7 +13,7 @@ u.ftAbbr("!==", "~=")
 
 -- shorthands
 u.ftAbbr("tre", "then return end")
-u.ftAbbr("re", "return end")
+u.ftAbbr("ree", "return end")
 
 --------------------------------------------------------------------------------
 
