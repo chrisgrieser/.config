@@ -134,15 +134,6 @@ local function cmpconfig()
 	-- COMMANDLINE
 	cmp.setup.cmdline(":", {
 		mapping = cmp.mapping.preset.cmdline(),
-		enabled = function()
-			-- ignore for :IncRename and :s -- https://github.com/hrsh7th/nvim-cmp/wiki/Advanced-techniques#disabling-cmdline-completion-for-certain-commands-such-as-increname
-			local cmd = vim.fn.getcmdline()
-			if cmd:find("^IncRename ") or cmd:find("^s ") then
-				cmp.close()
-				return false
-			end
-			return true
-		end,
 		sources = cmp.config.sources {
 			{ name = "path" },
 			{ name = "cmdline" },
