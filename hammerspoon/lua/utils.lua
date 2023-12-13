@@ -149,15 +149,6 @@ function M.notify(...)
 	print("💬 " .. out)
 end
 
----play macOS sound
----@param soundName string
-function M.sound(soundName)
-	if M.activeSound and M.activeSound:isPlaying() then return end
-	---@diagnostic disable-next-line: undefined-field
-	M.activeSound = hs.sound.getByName(soundName):play()
-	M.activeSound = nil
-end
-
 --------------------------------------------------------------------------------
 -- APP UTILS
 
