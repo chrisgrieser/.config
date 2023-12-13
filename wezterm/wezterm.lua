@@ -103,7 +103,7 @@ return {
 	-- Start/Close
 	default_cwd = wt.home_dir .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/",
 	window_close_confirmation = "NeverPrompt",
-	quit_when_all_windows_are_closed = true,
+	quit_when_all_windows_are_closed = false,
 
 	-- Mouse & Cursor
 	hide_mouse_cursor_when_typing = true,

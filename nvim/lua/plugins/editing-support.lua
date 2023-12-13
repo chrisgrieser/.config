@@ -227,37 +227,22 @@ return {
 			cursor_behavior = "start",
 			max_join_length = 160,
 			langs = {
-				-- python docstrings
-				python = {
-					string_content = {
-						both = { fallback = function() vim.cmd("normal! gww") end },
-					},
+				python = { -- python docstrings
+					string_content = { both = { fallback = function() vim.cmd("normal! gww") end } },
 				},
 				comment = {
-					source = {
-						both = { fallback = function() vim.cmd("normal! gww") end },
-					},
+					source = { both = { fallback = function() vim.cmd("normal! gww") end } },
 				},
 				html = {
-					fragment = {
-						both = { fallback = function() vim.cmd("normal! gww") end },
-					},
+					fragment = { both = { fallback = function() vim.cmd("normal! gww") end } },
 				},
 				markdown_inline = {
-					inline = {
-						both = { fallback = function() vim.cmd("normal! gww") end },
-					},
+					inline = { both = { fallback = function() vim.cmd("normal! gww") end } },
 				},
 				markdown = {
-					element = {
-						both = { fallback = function() vim.cmd("normal! gww") end },
-					},
-					list_marker_minus = {
-						both = { fallback = function() vim.cmd("normal! gww") end },
-					},
-					list_marker_dot = {
-						both = { fallback = function() vim.cmd("normal! gww") end },
-					},
+					element = { both = { fallback = function() vim.cmd("normal! gww") end } },
+					list_marker_minus = { both = { fallback = function() vim.cmd("normal! gww") end } },
+					list_marker_dot = { both = { fallback = function() vim.cmd("normal! gww") end } },
 				},
 			},
 		},

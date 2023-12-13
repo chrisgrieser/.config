@@ -116,8 +116,7 @@ keymap("n", "~", "v~")
 
 -- Merging
 keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
-keymap({ "n", "x" }, "gm", "ddpkJ", { desc = "󰗈 Merge line down" })
-keymap({ "n", "x" }, "gM", "gJ", { desc = "󰗈 Merge line up (+ trim)" })
+keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "󰗈 Merge line down" })
 
 keymap({ "n", "x" }, "+", "<C-a>")
 keymap({ "n", "x" }, "ö", "<C-x>")

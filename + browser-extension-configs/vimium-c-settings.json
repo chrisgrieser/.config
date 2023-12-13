@@ -1,11 +1,11 @@
 {
 	"name": "Vimium C",
-	"@time": "11/21/2023, 3:06:08 PM",
-	"time": 1700575568508,
+	"@time": "13/12/2023, 12:53:42",
+	"time": 1702468422496,
 	"environment": {
 		"extension": "1.99.994",
 		"platform": "mac",
-		"chromium": 118
+		"chromium": 120
 	},
 	"allBrowserUrls": true,
 	"exclusionListenHash": false,
@@ -89,7 +89,7 @@
 		"",
 		"\" Link Mode",
 		"map f LinkHints.activate",
-		"map F LinkHints.activateWithQueue",
+		"map F LinkHints.activateOpenInNewForegroundTab",
 		"map b LinkHints.activateOpenInNewTab",
 		"map yf LinkHints.activateCopyLinkUrl",
 		"map yi LinkHints.activateCopyImage",
@@ -108,7 +108,7 @@
 		"map A moveTabLeft",
 		"map D moveTabRight",
 		"map w removeTab mayClose",
-		"\" -- using  then/else, since runKey does not work with the `mayClose` parameter",
+		"\" using then/else, since runKey does not work with the `mayClose` parameter",
 		"map s copyCurrentUrl $then=\"w\" $else=\"w\"",
 		"",
 		"unmap 0",
@@ -154,9 +154,6 @@
 		"map r reload",
 		"map R reload hard",
 		"map gs toggleViewSource",
-		"\" does not work with most duplicate-tab-closing-extensions. *Does* works with ",
-		"\" https://chrome.google.com/webstore/detail/fast-duplicate-tab-closer/dpgkjbmiapibpdjnnoalnlkcmeepocak",
-		"map yt duplicateTab",
 		"",
 		"\" Copy URLs",
 		"map yy copyCurrentUrl",
