@@ -27,7 +27,6 @@ local lspFormatFiletypes = {
 local extraInstalls = {
 	"debugpy",
 	"shellcheck", -- needed by bash-lsp
-	{ "jedi-language-server", version = "0.41.0" }, -- PENDING https://github.com/pappasam/jedi-language-server/issues/296
 }
 
 local dontInstall = {
