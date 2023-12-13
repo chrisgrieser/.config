@@ -26,23 +26,4 @@ return {
 			always_trigger = true,
 		},
 	},
-	{ -- better LSP variable-rename
-		"smjonas/inc-rename.nvim",
-		keys = {
-			{ "<leader>v", ":IncRename ", desc = "󰒕 IncRename" },
-			{ "<leader>V", ":IncRename <C-r><C-w>", desc = "󰒕 IncRename (cword)" },
-		},
-		opts = {
-			post_hook = function(results)
-				if not results.changes then return end
-
-				-- if more than one file is changed, save all buffers
-				local filesChanged = #vim.tbl_keys(results.changes)
-				if filesChanged > 1 then vim.cmd("silent wall") end
-
-				-- FIX make the cmdline-history navigable https://github.com/smjonas/inc-rename.nvim/issues/40
-				vim.fn.histdel("cmd", "^IncRename ")
-			end,
-		},
-	},
 }

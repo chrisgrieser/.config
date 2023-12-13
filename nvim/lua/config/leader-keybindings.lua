@@ -15,7 +15,9 @@ keymap(
 	{ desc = "⌨️ Edit " .. vim.fs.basename(pathOfThisFile) }
 )
 
---------------------------------------------------------------------------------
+-- inspect
+keymap("n", "<leader>li", cmd.Inspect, { desc = " :Inspect" })
+keymap("n", "<leader>lt", cmd.InspectTree, { desc = " :InspectTree" })
 
 -- Copy Last Command
 keymap("n", "<leader>lc", function()
@@ -124,6 +126,7 @@ keymap(
 	{ desc = "󰒕 Code Action" }
 )
 keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
+keymap("n", "<leader>v", vim.lsp.buf.rename, { desc = "󰒕 LSP Rename" })
 
 --------------------------------------------------------------------------------
 -- LOGGING
@@ -138,9 +141,6 @@ keymap("n", "<leader>lr", function() require("funcs.printing-press").removeLogs(
 keymap("n", "<leader>ld", function() require("funcs.printing-press").debugLog() end, { desc = " debugger log" })
 keymap("n", "<leader>la", function() require("funcs.printing-press").assertLog() end, { desc = " assert log" })
 -- stylua: ignore end
-
-keymap("n", "<leader>li", cmd.Inspect, { desc = " :Inspect" })
-keymap("n", "<leader>lt", cmd.InspectTree, { desc = " :InspectTree" })
 
 --------------------------------------------------------------------------------
 

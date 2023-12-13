@@ -86,18 +86,6 @@ return {
 					cmdline = { view = "cmdline_popup" },
 					lua = { view = "cmdline_popup" },
 					help = { view = "cmdline_popup" },
-					IncRename = {
-						pattern = "^:IncRename ",
-						icon = " ",
-						conceal = true,
-						view = "cmdline_popup",
-						opts = {
-							border = { style = u.borderStyle },
-							relative = "cursor",
-							size = { width = 30 }, -- `max_width` does not work, so fixed value
-							position = { row = -3, col = 0 },
-						},
-					},
 					substitute = { -- :s as a standalone popup
 						view = "cmdline_popup",
 						pattern = { "^:%%? ?s[ /]", "^:'<,'> ?s[ /]" },

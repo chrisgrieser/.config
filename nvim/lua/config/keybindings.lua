@@ -143,9 +143,8 @@ keymap({ "i", "c" }, "<C-e>", "<End>")
 keymap("c", "<BS>", function()
 	local cmdLine = vim.fn.getcmdline()
 	local cmdPos = vim.fn.getcmdpos()
-	local isIncRename = cmdLine:find("^IncRename ") and cmdPos < 12
 	local isSubstitute = cmdLine:find("^%% s/") and cmdPos < 6
-	if cmdLine == "" or isIncRename or isSubstitute then return end
+	if cmdLine == "" or isSubstitute then return end
 	return "<BS>"
 end, { desc = "Restricted <BS>", expr = true })
 
