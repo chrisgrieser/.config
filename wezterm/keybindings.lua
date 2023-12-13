@@ -9,11 +9,11 @@ local theme = require("theme-utils")
 --------------------------------------------------------------------------------
 
 return {
+	{ key = "q", mods = "CMD", action = act.QuitApplication },
+	{ key = "w", mods = "CMD", action = act.CloseCurrentTab { confirm = false } },
 	{ key = "t", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
 	{ key = "n", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
 	{ key = "c", mods = "CMD", action = act.CopyTo("ClipboardAndPrimarySelection") },
-	{ key = "w", mods = "CMD", action = act.CloseCurrentTab { confirm = false } },
-	{ key = "q", mods = "CMD", action = act.CloseCurrentTab { confirm = false } },
 	{ key = "+", mods = "CMD", action = act.IncreaseFontSize },
 	{ key = "-", mods = "CMD", action = act.DecreaseFontSize },
 	{ key = "0", mods = "CMD", action = act.ResetFontSize },

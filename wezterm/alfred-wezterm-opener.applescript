@@ -5,8 +5,6 @@
 --------------------------------------------------------------------------------
 
 on alfred_script(shellCmd)
-	set exportPath to "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
-
 	# LAUNCH WEZTERM IF NEEDED 
 	# (Appname is `WezTerm`, processname is `wezterm-gui`)
 	tell application "WezTerm" to activate
@@ -38,5 +36,6 @@ on alfred_script(shellCmd)
 	end if
 
 	# SEND COMMAND
+	set exportPath to "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
 	do shell script (exportPath & "echo " & quoted form of shellCmd & " | wezterm cli send-text --no-paste")
 end alfred_script
