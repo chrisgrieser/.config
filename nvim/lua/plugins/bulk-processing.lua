@@ -32,9 +32,9 @@ return {
 			}
 		end,
 		config = function()
-			u.addToLuaLine("tabline", "lualine_z", function()
+			u.addToLuaLine("sections", "lualine_z", function()
 				if not vim.b["VM_Selection"] or not vim.b["VM_Selection"].Regions then return "" end
-				return ("󰇀 Visual-Multi (%s)"):format(#vim.b.VM_Selection.Regions)
+				return ("󰇀 %s"):format(#vim.b.VM_Selection.Regions)
 			end)
 		end,
 	},
@@ -72,8 +72,8 @@ return {
 				dapSharedKeymaps = true,
 				performanceOpts = { countThreshold = 10 },
 			}
-			u.addToLuaLine("tabline", "lualine_z", require("recorder").recordingStatus)
-			u.addToLuaLine("tabline", "lualine_y", require("recorder").displaySlots)
+			u.addToLuaLine("sections", "lualine_c", require("recorder").recordingStatus)
+			u.addToLuaLine("sections", "lualine_y", require("recorder").displaySlots)
 		end,
 	},
 }

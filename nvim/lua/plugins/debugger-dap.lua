@@ -3,12 +3,12 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 local function dapLualine()
-	u.addToLuaLine("tabline", "lualine_y", function()
+	u.addToLuaLine("sections", "lualine_x", function()
 		local dapStatus = require("dap").status()
 		if dapStatus ~= "" then dapStatus = "  " .. dapStatus end
 		return dapStatus
 	end)
-	u.addToLuaLine("tabline", "lualine_z", function()
+	u.addToLuaLine("sections", "lualine_y", function()
 		local breakpoints = require("dap.breakpoints").get()
 		local breakpointSum = 0
 		for buf, _ in pairs(breakpoints) do
