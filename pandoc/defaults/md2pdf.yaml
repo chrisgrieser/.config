@@ -23,7 +23,7 @@ variables:
   papersize: A4
 
 # FIX suppress irrelevant warning about missing title if file has no h1
-metadata: { title: "foobar" } 
+metadata: { title: "foobar" }
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -38,7 +38,9 @@ resource-path:
   - ${VAULT_PATH} # Vault path for images, value in .zshenv
 
 # MARKDOWN-READER
+# DOCS https://pandoc.org/MANUAL.html#extensions
+# DOCS https://pandoc.org/MANUAL.html#markdown-variants
 reader: |
-  markdown+lists_without_preceding_blankline+mark+alert+wikilinks_title_after_pipe+rebase_relative_paths
+  markdown+lists_without_preceding_blankline+mark+wikilinks_title_after_pipe+rebase_relative_paths
 number-sections: false
 shift-heading-level-by: -1 # h2 -> h1

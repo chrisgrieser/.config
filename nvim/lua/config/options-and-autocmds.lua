@@ -99,8 +99,7 @@ opt.report = 9001 -- disable "x more/fewer lines" messages
 -- Character groups
 opt.iskeyword:append("-") -- don't treat "-" as word boundary, e.g. for kebab-case variables
 
-opt.nrformats:append("unsigned") -- make <C-a>/<C-x> ignore negative numbers
-opt.nrformats:remove { "bin", "hex" } -- remove ambiguity, since I don't use them anyway
+opt.nrformats = { "unsigned" } -- make <C-a>/<C-x> ignore negative numbers
 
 -- Timeouts
 opt.updatetime = 250 -- also affects cursorword symbols and lsp-hints
@@ -270,7 +269,7 @@ local skeletons = {
 	applescript = "applescript",
 	javascript = "js",
 	make = "make",
-	sh = "sh",
+	sh = "zsh",
 }
 
 vim.api.nvim_create_autocmd("FileType", {
