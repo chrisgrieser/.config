@@ -19,6 +19,9 @@ __pycache__
 .virtual_documents
 .jupyter
 
+# Microsoft Office temporary files
+~$*.docs
+
 # safety net to prevent sensitive data being accidentally moved
 *.kdb
 *.kdbx
