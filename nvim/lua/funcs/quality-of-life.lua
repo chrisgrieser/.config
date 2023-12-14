@@ -175,7 +175,7 @@ function M.tabout()
 	local onlyWhitespaceBeforeCursor = charsBefore:match("^%s*$")
 
 	if onlyWhitespaceBeforeCursor then return "<C-t>" end -- indent line
-	return "<cmd>set<Esc>/['\"`)}\\]]<CR>a"
+	return "<cmd>set redraw<Esc>/['\"`)}\\]]<CR>a"
 end
 
 --------------------------------------------------------------------------------
