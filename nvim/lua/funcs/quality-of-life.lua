@@ -4,8 +4,8 @@ local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
 
 --------------------------------------------------------------------------------
 
-local commentHrChar = "─"
 function M.commentHr()
+	local commentHrChar = "─" -- CONFIG
 	local wasOnBlank = vim.api.nvim_get_current_line() == ""
 	local indent = vim.fn.indent(".") ---@diagnostic disable-line: param-type-mismatch
 	local comStr = vim.bo.commentstring
@@ -69,9 +69,9 @@ end
 -- DOCS https://wezfurlong.org/wezterm/cli/cli/send-text
 function M.sendToWezTerm()
 	vim.fn.system([[
-		open -a 'WezTerm' 
+		open -a 'WezTerm'
 		i=0
-		while ! pgrep -xq wezterm-gui; do 
+		while ! pgrep -xq wezterm-gui; do
 			sleep 0.1
 			i=$((i+1))
 			test $i -gt 30 && return
@@ -84,7 +84,7 @@ function M.sendToWezTerm()
 		text = vim.api.nvim_get_current_line() .. "\n"
 		vim.fn.system { "wezterm", "cli", "send-text", "--no-paste", text }
 	elseif vim.fn.mode():find("[Vv]") then
-		u.normal('"zy')
+		normal('"zy')
 		text = vim.fn.getreg("z"):gsub("\n$", "")
 		vim.fn.system { "wezterm", "cli", "send-text", text }
 	end
@@ -123,10 +123,10 @@ end
 function M.openAtRegex101()
 	-- copy regex to register
 	vim.cmd.TSTextobjectSelect("@regex.outer")
-	u.normal('"zy')
+	normal('"zy')
 
 	-- reselect for easier pasting
-	vim.cmd.TSTextobjectSelect("@regex.inner") 
+	vim.cmd.TSTextobjectSelect("@regex.inner")
 
 	-- TODO use treesitter to get pattern and flags
 	local regex = vim.fn.getreg("z")
@@ -163,6 +163,19 @@ function M.selectMake()
 		vim.cmd("silent! lmake")
 		vim.cmd.lmake(selection)
 	end)
+end
+
+--------------------------------------------------------------------------------
+-- simplified implementation of tabout.nvim
+-- to be used for an insert-mode mapping with `expr = true`
+function M.tabout()
+	local line = vim.api.nvim_get_current_line()
+	local col = vim.api.nvim_win_get_cursor(0)[2]
+	local charsBefore = line:sub(1, col)
+	local onlyWhitespaceBeforeCursor = charsBefore:match("^%s*$")
+
+	if onlyWhitespaceBeforeCursor then return "<C-t>" end -- indent line
+	return "<cmd>set<Esc>/['\"`)}\\]]<CR>a"
 end
 
 --------------------------------------------------------------------------------
