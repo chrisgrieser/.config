@@ -8,25 +8,11 @@ local wf = hs.window.filter
 
 --------------------------------------------------------------------------------
 
----PENDING https://github.com/aome510/spotify-player/issues/315
----play/pause spotify
----@param toStatus string pause|play
-local function spotifyDo(toStatus)
-	local playback = hs.execute(u.exportPath .. "spotify_player get key playback")
-	local decoded = hs.json.decode(playback)
-	if not decoded then
-		hs.execute(
-			u.exportPath
-				.. 'spotify_player playback start context playlist --name "Discover Weekly" --shuffle'
-		)
-		return
-	end
-	local disallowed = decoded.actions.disallows
-	local isPlaying = u.tbl_contains(disallowed, "resuming")
-
-	if (isPlaying and toStatus == "pause") or (not isPlaying and toStatus == "play") then
-		hs.execute(u.exportPath .. "spotify_player playback play-pause")
-	end
+---@async
+---@param action "play"|"pause"
+local function spotifyDo(action)
+	local binary = "/opt/homebrew/bin/spotify_player"
+	M.spotify_player_task = hs.task.new(binary, nil, { "playback", action }):start()
 end
 
 -- auto-pause/resume Spotify on launch/quit of apps with sound

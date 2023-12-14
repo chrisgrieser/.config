@@ -18,7 +18,6 @@ M.dotfilesFolder = os.getenv("HOME") .. "/.config/"
 M.passwordStore = readZshEnv("PASSWORD_STORE_DIR")
 M.vaultLocation = readZshEnv("VAULT_PATH")
 M.fileHub = readZshEnv("WD")
-M.brewPrefix = readZshEnv("HOMEBREW_PREFIX")
 
 M.codeFont = readZshEnv("CODE_FONT")
 
