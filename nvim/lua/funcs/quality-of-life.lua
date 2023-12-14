@@ -120,6 +120,7 @@ end
 
 --------------------------------------------------------------------------------
 
+--- open the next regex at https://regex101.com/
 function M.openAtRegex101()
 	-- copy regex to register
 	vim.cmd.TSTextobjectSelect("@regex.outer")
@@ -128,7 +129,6 @@ function M.openAtRegex101()
 	-- reselect for easier pasting
 	vim.cmd.TSTextobjectSelect("@regex.inner")
 
-	-- TODO use treesitter to get pattern and flags
 	local regex = vim.fn.getreg("z")
 	local pattern = regex:match("/(.*)/")
 	local flags = regex:match("/.*/(%l*)")
@@ -166,16 +166,27 @@ function M.selectMake()
 end
 
 --------------------------------------------------------------------------------
+
 -- simplified implementation of tabout.nvim
 -- to be used for an insert-mode mapping with `expr = true`
 function M.tabout()
 	local line = vim.api.nvim_get_current_line()
-	local col = vim.api.nvim_win_get_cursor(0)[2]
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local charsBefore = line:sub(1, col)
 	local onlyWhitespaceBeforeCursor = charsBefore:match("^%s*$")
 
-	if onlyWhitespaceBeforeCursor then return "<C-t>" end -- indent line
-	return "<cmd>set redraw<Esc>/['\"`)}\\]]<CR>a"
+	if onlyWhitespaceBeforeCursor then return "<Tab>" end
+
+	local closingPairs = "[%]\"'`)}]"
+	local nextClosingPairPos = line:find(closingPairs, col + 1)
+	if not nextClosingPairPos then return end
+
+	-- INFO nvim_win_set_cursor apparently does not work in insert mode
+	vim.cmd.stopinsert()
+	vim.defer_fn(function()
+		vim.api.nvim_win_set_cursor(0, { row, nextClosingPairPos })
+		vim.cmd.startinsert()
+	end, 1)
 end
 
 --------------------------------------------------------------------------------
