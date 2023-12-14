@@ -1,6 +1,8 @@
 local M = {}
 --------------------------------------------------------------------------------
 
+local timelogStart = os.time() -- 🪚
+
 -- RETRIEVE ENVIRONMENT VARS FROM ZSHENV
 -- HACK cannot be done via `os.getenv()`, since often it does not load properly on
 -- system startup, so the values have to be read manually.
@@ -64,5 +66,7 @@ function M.isProjector()
 	return projectorHelmholtz or tvLeuthinger
 end
 
+local durationSecs = os.difftime(os.time(), timelogStart) -- 🪚
+print("🪚:", durationSecs, "s")
 --------------------------------------------------------------------------------
 return M
