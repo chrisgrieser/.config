@@ -1,10 +1,11 @@
+local M = {} -- persist from garbage collector
+
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
 local aw = hs.application.watcher
 local wf = hs.window.filter
 
-local M = {} -- persist from garbage collector
 --------------------------------------------------------------------------------
 
 M.wf_browser = wf.new(env.browserApp)

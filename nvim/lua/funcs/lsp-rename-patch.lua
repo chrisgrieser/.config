@@ -4,7 +4,9 @@ local util = require("vim.lsp.util")
 --------------------------------------------------------------------------------
 
 -- https://github.com/smjonas/inc-rename.nvim/blob/main/lua/inc_rename/init.lua#L313-L356
-local function renameNotify(_, result, _, _)
+local function renameNotify(err, result, _, _)
+	if err or not result then return end
+
 	local changed_instances = 0
 	local changed_files = 0
 
@@ -15,7 +17,7 @@ local function renameNotify(_, result, _, _)
 	end
 
 	local message = string.format(
-		"Renamed %s instance%s in %s file%s",
+		"[LSP] Renamed %s instance%s in %s file%s.",
 		changed_instances,
 		changed_instances == 1 and "" or "s",
 		changed_files,
