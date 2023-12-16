@@ -233,11 +233,11 @@ rules:
         from: { key_code: d, modifiers: { mandatory: [command, shift] } }
         to:
           - { key_code: d, modifiers: [command] }
-          - { key_code: vk_none, hold_down_milliseconds: 100 }
+          - { key_code: vk_none, hold_down_milliseconds: 200 }
           - key_code: tab
           - key_code: tab
           - key_code: tab
-          - { key_code: vk_none, hold_down_milliseconds: 100 }
+          - { key_code: vk_none, hold_down_milliseconds: 200 }
           - key_code: spacebar
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
