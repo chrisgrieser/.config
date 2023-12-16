@@ -190,6 +190,7 @@ function M.tabout()
 	vim.defer_fn(function()
 		vim.api.nvim_win_set_cursor(0, { row, nextClosingPairPos })
 		local isEndOfLine = nextClosingPairPos == #line
+
 		vim.cmd.startinsert({ bang = isEndOfLine })
 	end, 1)
 end
