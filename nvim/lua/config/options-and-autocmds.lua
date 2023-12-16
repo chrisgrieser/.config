@@ -227,7 +227,10 @@ vim.api.nvim_create_autocmd("BufEnter", {
 -- overwritten by ftplugins having the `o` option (which most do). Therefore
 -- needs to be set via autocommand
 autocmd("FileType", {
-	callback = function() opt_local.formatoptions:remove("o") end,
+	callback = function()
+		opt_local.formatoptions:remove("o")
+		opt_local.formatoptions:remove("t")
+	end,
 })
 
 --------------------------------------------------------------------------------
