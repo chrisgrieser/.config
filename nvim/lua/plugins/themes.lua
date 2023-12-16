@@ -1,7 +1,7 @@
 -- INFO only the first theme will be used
 local lightThemes = {
-	{ "folke/tokyonight.nvim", opts = { style = "day" } },
-	-- { "EdenEast/nightfox.nvim", name = "dawnfox" },
+	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
+	-- { "folke/tokyonight.nvim", opts = { style = "day" } },
 	-- { "ribru17/bamboo.nvim" },
 	-- { "sainnhe/everforest", init = function() vim.g.everforest_background = "hard" end },
 	-- {

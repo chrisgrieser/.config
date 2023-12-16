@@ -1,12 +1,6 @@
-"""This is a test file."""
 
-import sys
-import time
-
-
-def double(x: int) -> int:
-    """Double the number.
-
+def double(x: int):
+    """fsfsf
     Args:
         x: input
 
@@ -16,5 +10,5 @@ def double(x: int) -> int:
     return x * 2
 
 
-a = 6
-print(double(a))
+a____ = 6
+# print(double(a))
