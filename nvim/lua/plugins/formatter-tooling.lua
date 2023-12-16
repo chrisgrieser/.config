@@ -96,7 +96,7 @@ return {
 				"<D-s>",
 				function()
 					-- FIX silence injected formatter
-					require("conform.format	ters.injected").options.ignore_errors = false
+					require("conform.formatters.injected").options.ignore_errors = false
 
 					local useLsp = vim.tbl_contains(lspFormatFiletypes, vim.bo.ft) and "always" or false
 					require("conform").format({ lsp_fallback = useLsp }, function()
