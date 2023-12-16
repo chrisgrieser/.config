@@ -7,3 +7,7 @@ vim.defer_fn(
 	end,
 	1
 )
+
+-- Cycle Rebase Action
+vim.keymap.set("n", "<Tab>", "<C-a>", { desc = "Cycle Action", buffer = true, remap = true })
+vim.keymap.set("n", "<S-Tab>", "<C-x>", { desc = "Cycle Action", buffer = true, remap = true })
