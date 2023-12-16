@@ -89,12 +89,15 @@ local formatterConfig = {
 return {
 	{ -- Formatter integration
 		"stevearc/conform.nvim",
-		opts = formatterConfig,
 		cmd = "ConformInfo",
+		opts = formatterConfig,
 		keys = {
 			{
 				"<D-s>",
 				function()
+					-- FIX silence injected formatter
+					require("conform.format	ters.injected").options.ignore_errors = false
+
 					local useLsp = vim.tbl_contains(lspFormatFiletypes, vim.bo.ft) and "always" or false
 					require("conform").format({ lsp_fallback = useLsp }, function()
 						-- HACK since `fixAll` is not part of ruff-lsp formatting capabilities

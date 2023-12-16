@@ -22,6 +22,9 @@ return {
 	},
 	{ -- CamelCase Motion plus
 		"chrisgrieser/nvim-spider",
+		opts = {
+			customPatterns = { "%a+" },
+		},
 		keys = {
 			{
 				"e",
