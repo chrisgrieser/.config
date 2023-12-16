@@ -149,37 +149,6 @@ return {
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		event = "InsertEnter",
 	},
-	{ -- case conversion
-		"johmsalas/text-case.nvim",
-		init = function()
-			local casings = {
-				{ char = "u", arg = "upper", desc = "UPPER CASE" },
-				{ char = "l", arg = "lower", desc = "lower case" },
-				{ char = "t", arg = "title", desc = "Title case" },
-				{ char = "c", arg = "camel", desc = "camelCase" },
-				{ char = "s", arg = "snake", desc = "snake_case" },
-				{ char = "k", arg = "dash", desc = "kebab-case" },
-				{ char = "/", arg = "path", desc = "path/case" },
-				{ char = "<Space>", arg = "phrase", desc = "phrase case" },
-				{ char = "_", arg = "constant", desc = "SCREAMING_SNAKE_CASE" },
-			}
-
-			for _, case in pairs(casings) do
-				vim.keymap.set(
-					"n",
-					"cr" .. case.char,
-					("<cmd>lua require('textcase').current_word('to_%s_case')<CR>"):format(case.arg),
-					{ desc = case.desc }
-				)
-				vim.keymap.set(
-					"n",
-					"cR" .. case.char,
-					("<cmd>lua require('textcase').lsp_rename('to_%s_case')<CR>"):format(case.arg),
-					{ desc = "󰒕 LSP Rename" .. case.desc }
-				)
-			end
-		end,
-	},
 	{ -- swapping of sibling nodes
 		"Wansmer/sibling-swap.nvim",
 		dependencies = "nvim-treesitter/nvim-treesitter",
