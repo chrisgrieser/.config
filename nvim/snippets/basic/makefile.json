@@ -10,6 +10,6 @@
 	},
 	"PHONY": {
 		"prefix": [".PHONY", "PHONY"],
-		"body": ".PHONY: ${task1}, ${task2}"
+		"body": ".PHONY: ${task1} ${task2}"
 	}
 }
