@@ -2,9 +2,6 @@ local bo = vim.bo
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
--- do not auto-wrap text
-vim.opt_local.formatoptions:remove("t")
-
 -- for some reason, bib files have no commentstring defined, even though they
 -- do have comments
 bo.commentstring = "% %s"

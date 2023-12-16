@@ -92,6 +92,17 @@
 			<key>url</key>
 			<string>tel://{query}</string>
 		</dict>
+		<key>D6C57494-6E24-4217-8918-2AE2DAA091A0</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>pip</string>
+			<key>text</key>
+			<string>PyPI: '{query}'</string>
+			<key>url</key>
+			<string>https://pypi.org/search/?q={query}</string>
+		</dict>
 		<key>E6EBE234-58DF-42AE-B019-B2941D2B424F</key>
 		<dict>
 			<key>enabled</key>
@@ -114,6 +125,19 @@
 			<key>url</key>
 			<string>https://thepiratebay.org/search.php?q={query}</string>
 		</dict>
+		<key>F7035B09-71AB-47A4-A8DE-F2CFA62686D4</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>npm</string>
+			<key>text</key>
+			<string>NPM Packages: '{query}'</string>
+			<key>url</key>
+			<string>https://pypi.org/search/?q={query}</string>
+		</dict>
 	</dict>
+	<key>onlyShowEnabledInPrefs</key>
+	<true/>
 </dict>
 </plist>
