@@ -175,7 +175,7 @@ function M.tabout()
 	local charsBefore = line:sub(1, col)
 	local onlyWhitespaceBeforeCursor = charsBefore:match("^%s*$")
 
-	if onlyWhitespaceBeforeCursor then return "<Tab>" end
+	if only	WhitespaceBeforeCursor then return "<Tab>" end
 
 	local closingPairs = "[%]\"'`)}]"
 	local nextClosingPairPos = line:find(closingPairs, col + 1)

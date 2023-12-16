@@ -92,12 +92,6 @@ keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent selection" })
 keymap("n", "<Tab>", ">>", { desc = "󰉶 indent line" })
 keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent line" })
 keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent line" })
-keymap(
-	"i",
-	"<Tab>",
-	function() return require("funcs.quality-of-life").tabout() end,
-	{ desc = " Tabout", expr = true }
-)
 
 keymap("n", "[", "<", { desc = "󰉵 outdent" })
 keymap("n", "]", ">", { desc = "󰉶 indent" })
