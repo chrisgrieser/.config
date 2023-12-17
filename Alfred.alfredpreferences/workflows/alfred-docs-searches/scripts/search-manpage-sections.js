@@ -28,14 +28,7 @@ function run() {
 
 	const manpageObj = JSON.parse(httpRequest(sectionApiUrl));
 
-	const sectionToIgnore = [
-		"See Also",
-		"Bugs",
-		"Version",
-		"Homepage",
-		"Referenced By",
-		"Authors",
-	];
+	const sectionToIgnore = ["See Also", "Bugs", "Version", "Homepage", "Referenced By", "Authors"];
 
 	/** @type{AlfredItem[]} */
 	const sections = manpageObj.sections
@@ -52,8 +45,10 @@ function run() {
 			// format anchors for Alfred
 			// anchors look like this: <strong>--changed-before</strong> <em>date|duration</em>
 			const title = anchor.anchor
-				.replace(/<strong>(.*?)<\/strong>/, "$1")
-				.replace(/<em>(.*?)<\/em>/, "<$1>");
+				.replace(/<strong>(.*?)<\/strong>/g, "$1")
+				.replace(/<em>(.*?)<\/em>/g, "<$1>")
+				.replace(/&lt;/g, "<")
+				.replace(/&gt;/g, ">");
 
 			// remove html
 			const desc = anchor.description.replace(/<\w*?>(.*?)<\/\w*?>/g, "$1");

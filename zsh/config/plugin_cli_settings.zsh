@@ -22,8 +22,10 @@ export FZF_DEFAULT_OPTS='
 	--bind=ctrl-s:toggle+down,ctrl-a:toggle-all
 '
 
-
-export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgrep-config"
+# custom config file paths
+export RIPGREP_CONFIG_PATH="$HOME/.config/+ cli-configs/ripgrep-config"
+export BAT_CONFIG_PATH="$HOME/.config/+ cli-configs/bat-config"
+export STARSHIP_CONFIG="$HOME/.config/+ cli-configs/starship.toml"
 
 # updates managed via homebrew https://cli.github.com/manual/gh_help_environment
 export GH_NO_UPDATE_NOTIFIER=1
