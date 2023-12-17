@@ -129,7 +129,10 @@ keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
 keymap(
 	"n",
 	"<leader>v",
-	function() require("funcs.lsp-rename-patch").lsp_rename() end,
+	function()
+		require("funcs.lsp-rename-patch").lsp_rename()
+		vim.cmd.wall()
+	end,
 	{ desc = "󰒕 LSP Rename" }
 )
 
