@@ -4,7 +4,7 @@ local util = require("vim.lsp.util")
 --------------------------------------------------------------------------------
 
 -- https://github.com/smjonas/inc-rename.nvim/blob/main/lua/inc_rename/init.lua#L313-L356
-local function renameNotify(err, result, _, _)
+local function rename_notify(err, result, _, _)
 	if err or not result then return end
 
 	local changed_instances = 0
@@ -74,7 +74,7 @@ function M.lsp_rename(new_name, options)
 				or vim.lsp.handlers["textDocument/rename"]
 			client.request("textDocument/rename", params, function(...)
 				handler(...)
-				renameNotify(...)
+				rename_notify(...)
 				try_use_client(next(clients, idx))
 			end, bufnr)
 		end
