@@ -174,7 +174,7 @@ autocmd({ "InsertLeave", "TextChanged", "BufLeave", "BufDelete", "FocusLost" }, 
 		local bufname = vim.api.nvim_buf_get_name(0)
 		local function exists(file) return vim.loop.fs_stat(file) and file ~= "" end
 
-		vim.b[ctx.buf]["saveQueued"] = true
+		vim.b[ctx.buf].saveQueued = true
 		vim.defer_fn(function()
 			if not exists(bufname) then return end
 			vim.cmd("silent! noautocmd update")
