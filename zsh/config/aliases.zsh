@@ -28,6 +28,7 @@ function bat {
 	theme="$(defaults read -g AppleInterfaceStyle &>/dev/null && echo "Dracula" || echo "GitHub")"
 	command bat --theme="$theme" "$@"
 }
+alias b="bat"
 
 # misc
 alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
