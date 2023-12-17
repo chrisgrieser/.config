@@ -1,7 +1,13 @@
+# point config paths to `.config`
+export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgrep-config"
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+
+#───────────────────────────────────────────────────────────────────────────────
+
 # Affects filetype-coloring in eza, fd, and completion menus
 # Can generate via: https://github.com/sharkdp/vivid
 # DOCS https://github.com/eza-community/eza/blob/main/man/eza_colors.5.md
-# INFO does also accept specific files via glob, e.g. `README.md=4;33`, 
+# INFO does also accept specific files via glob, e.g. `README.md=4;33`,
 # `.*=…` affects dotfiles
 file_colors=".*=38;5;247:LICENSE=38;5;247"
 export LS_COLORS="di=1;34:ln=3;35:or=7;31:ex=39:$file_colors"
@@ -21,11 +27,6 @@ export FZF_DEFAULT_OPTS='
 	--bind=page-down:preview-page-down,page-up:preview-page-up
 	--bind=ctrl-s:toggle+down,ctrl-a:toggle-all
 '
-
-# custom config file paths
-export RIPGREP_CONFIG_PATH="$HOME/.config/+ cli-configs/ripgrep-config"
-export BAT_CONFIG_PATH="$HOME/.config/+ cli-configs/bat-config"
-export STARSHIP_CONFIG="$HOME/.config/+ cli-configs/starship.toml"
 
 # updates managed via homebrew https://cli.github.com/manual/gh_help_environment
 export GH_NO_UPDATE_NOTIFIER=1
@@ -52,5 +53,4 @@ export NODE_REPL_HISTORY=""
 
 # INFO instead of writing npm config to ~/.npmrc, they can also be defined as shell
 # environment variables https://docs.npmjs.com/cli/v9/using-npm/config#environment-variables
-
 export npm_config_fund=false # disable funding reminder, has to be lowercase
