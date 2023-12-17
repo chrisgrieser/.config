@@ -166,7 +166,7 @@ autocmd({ "BufNew", "BufReadPost" }, {
 -- AUTO-SAVE
 
 opt.autowriteall = true
-autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
+autocmd({ "InsertLeave", "TextChanged", "BufLeave", "BufDelete", "FocusLost" }, {
 	callback = function(ctx)
 		local b = vim.bo[ctx.buf]
 		if vim.b.saveQueued or b.buftype ~= "" or b.ft == "gitcommit" or b.readonly then return end
