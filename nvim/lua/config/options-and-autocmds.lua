@@ -169,7 +169,7 @@ opt.autowriteall = true
 autocmd({ "InsertLeave", "TextChanged", "BufLeave", "BufDelete", "FocusLost" }, {
 	callback = function(ctx)
 		local b = vim.bo[ctx.buf]
-		if vsaveQueued or b.buftype ~= "" or b.ft == "gitcommit" or b.readonly then return end
+		if vim.b[ctx.buf].saveQueued or b.buftype ~= "" or b.ft == "gitcommit" or b.readonly then return end
 
 		local bufname = vim.api.nvim_buf_get_name(0)
 		local function exists(file) return vim.loop.fs_stat(file) and file ~= "" end
