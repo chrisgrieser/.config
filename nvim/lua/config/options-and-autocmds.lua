@@ -20,8 +20,8 @@ vim.filetype.add {
 }
 
 --------------------------------------------------------------------------------
-
 -- DIRECTORIES
+
 -- move to custom location where they are synced independently from the dotfiles repo
 local vimDataDir = vim.env.DATA_DIR .. "/vim-data/" -- vim.env reads from .zshenv
 opt.undodir:prepend(vimDataDir .. "undo//")
@@ -31,20 +31,20 @@ opt.swapfile = false -- doesn't help and only creates useless files and notifica
 
 --------------------------------------------------------------------------------
 -- UNDO
+
 opt.undofile = true -- enables persistent undo history
 
 -- extra undo-points (= more fine-grained undos)
--- WARN requires `remap = true`, since it otherwise prevents vim abbreviations
--- with those chars from working
 for _, char in pairs { ".", ",", ";", '"', ":", "'", "<Space>" } do
 	vim.keymap.set("i", char, function()
 		if vim.bo.buftype ~= "" then return char end
 		return char .. "<C-g>u"
+		-- WARN requires `remap = true`, since it otherwise prevents vim abbreviations
+		-- with those chars from working
 	end, { desc = "󰕌 Extra undopoint for " .. char, remap = true, expr = true })
 end
 
 --------------------------------------------------------------------------------
-
 -- AUTOMATION (external control)
 
 -- Set title so current file can be read from automation app via window title
@@ -59,80 +59,69 @@ if vim.fn.has("gui_running") == 1 then
 end
 
 --------------------------------------------------------------------------------
+-- CLIPBOARD
 
--- Motions & Editing
-opt.startofline = true -- motions like "G" also move to the first char
-opt.virtualedit = "block" -- visual-block mode can select beyond end of line
-
--- Search
-opt.ignorecase = true
-opt.smartcase = true
-
--- when closing a bracket, briefly flash the matching one
-opt.showmatch = true
-opt.matchtime = 1 -- deci-seconds
-
--- Spelling
-opt.spell = false
-opt.spellfile = { u.linterConfigFolder .. "/spellfile-vim-ltex.add" } -- has to be `.add`
-opt.spelllang = "en_us" -- even with spellcheck disabled, still relevant for `z=`
-
--- Split
-opt.splitright = true -- vsplit right instead of left
-opt.splitbelow = true -- split down instead of up
-
--- Workspace
-opt.cursorline = true
-opt.signcolumn = "yes:1"
-
--- Wrapping & Line Length
-opt.textwidth = 80 -- mostly set by .editorconfig, therefore only fallback
-opt.colorcolumn = "+1"
-opt.wrap = false
-
--- status bar & cmdline
-opt.cmdheight = 0
-opt.history = 400 -- reduce noise for command history search
-opt.shortmess:append("sSI") -- reduce info in :messages
-opt.report = 9001 -- disable "x more/fewer lines" messages
-
--- Character groups
-opt.iskeyword:append("-") -- don't treat "-" as word boundary, e.g. for kebab-case variables
-
-opt.nrformats = { "unsigned" } -- make <C-a>/<C-x> ignore negative numbers
-
--- Timeouts
-opt.updatetime = 250 -- also affects cursorword symbols and lsp-hints
-opt.timeoutlen = 666 -- also affects duration until which-key is shown
-
--- Make
-opt.makeprg = "make --silent --warn-undefined-variables"
-
--- Clipboard
 opt.clipboard = "unnamedplus"
 
 -- post-yank-highlight
 autocmd("TextYankPost", {
 	callback = function() vim.highlight.on_yank { timeout = 1000 } end,
 })
---------------------------------------------------------------------------------
 
--- Popups & Cmdline
+--------------------------------------------------------------------------------
+-- GENERAL
+
+opt.startofline = true -- motions like "G" also move to the first char
+opt.virtualedit = "block" -- visual-block mode can select beyond end of line
+
+opt.ignorecase = true
+opt.smartcase = true
+
+opt.showmatch = true -- when closing a bracket, briefly flash the matching one
+opt.matchtime = 1 -- deci-seconds
+
+opt.spell = false
+opt.spellfile = { u.linterConfigFolder .. "/spellfile-vim-ltex.add" } -- has to be `.add`
+opt.spelllang = "en_us" -- even with spellcheck disabled, still relevant for `z=`
+
+opt.splitright = true -- vsplit right instead of left
+opt.splitbelow = true -- split down instead of up
+
+opt.cursorline = true
+opt.signcolumn = "yes:1"
+
+opt.textwidth = 80 -- mostly set by .editorconfig, therefore only fallback
+opt.colorcolumn = "+1"
+opt.wrap = false
+
+opt.cmdheight = 0
+opt.history = 400 -- reduce noise for command history search
+opt.shortmess:append("sSI") -- reduce info in :messages
+opt.report = 9001 -- disable "x more/fewer lines" messages
+
+opt.iskeyword:append("-") -- don't treat "-" as word boundary, e.g. for kebab-case variables
+opt.nrformats = { "unsigned" } -- make <C-a>/<C-x> ignore negative numbers
+
+opt.updatetime = 250 -- also affects cursorword symbols and lsp-hints
+opt.timeoutlen = 666 -- also affects duration until which-key is shown
+
+opt.makeprg = "make --silent --warn-undefined-variables"
+
 opt.pumwidth = 15 -- min width
 opt.pumheight = 12 -- max height
 
--- scrolling
 opt.sidescrolloff = 13
 opt.scrolloff = 13
 
--- whitespace & indentation
 opt.shiftround = true
 opt.smartindent = true
 opt.expandtab = false -- mostly set by .editorconfig, therefore only fallback
 opt.tabstop = 3
 opt.shiftwidth = 3
 
--- invisible chars
+--------------------------------------------------------------------------------
+-- INVISIBLE CHARS
+
 opt.list = true
 opt.conceallevel = 1
 
