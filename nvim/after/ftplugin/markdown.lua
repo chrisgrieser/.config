@@ -8,12 +8,27 @@ optl.expandtab = false
 optl.tabstop = 4 -- less nesting in md
 
 -- so two trailing spaces highlighted, but not a single trailing space
-optl.listchars:remove { "trail" }
+optl.listchars:remove("trail")
 optl.listchars:append { multispace = "·" }
 
 -- since markdown has rarely indented lines, and also rarely has overlong lines,
 -- move everything a bit more to the right
 if vim.bo.buftype == "" then optl.signcolumn = "yes:3" end
+
+--------------------------------------------------------------------------------
+
+-- make bullets auto-continue https://www.reddit.com/r/vim/comments/otpr29/how_do_you_get_vim_to_automatically_continue_a/
+-- replaces bullets.vim
+optl.comments = {
+	"b:*", -- unordered list
+	"b:-",
+	"b:+",
+	"b:1.", -- ordered list (automatically continued as 1.)
+	"n:>", -- blockquotes
+}
+optl.formatoptions:append("r") -- for `<CR>`
+optl.formatoptions:append("o") -- for `o`
+optl.formatoptions:remove("c") -- continuation beyond textwidth should not insert bullet
 
 --------------------------------------------------------------------------------
 -- HEADING navigation (instead of symbols)

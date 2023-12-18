@@ -21,7 +21,8 @@
 The tree was generated using <https://tree.nathanfriend.io/>
 
 ## All Installed Plugins
-- [Aasim-A/scrollEOF.nvim](https://github.com/Aasim-A/scrollEOF.nvim)
+- [Aasim-A/scrollEOF.nvim](https://github.com/Aasim-A/scrollEOF.nvim) fsfsf sfsf
+sfs fsf sf sf sffssf fsfsfsf fsfsfsf
 - [EdenEast/nightfox.nvim](https://github.com/EdenEast/nightfox.nvim)
 - [Exafunction/codeium.vim](https://github.com/Exafunction/codeium.vim)
 - [GCBallesteros/NotebookNavigator.nvim](https://github.com/GCBallesteros/NotebookNavigator.nvim)

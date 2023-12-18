@@ -164,7 +164,7 @@ autocmd({ "InsertLeave", "TextChanged", "BufLeave", "BufDelete", "FocusLost" }, 
 		b.saveQueued = true
 		vim.defer_fn(function()
 			if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
-			vim.cmd("silent! noautocmd update")
+			vim.cmd("silent! noautocmd update!")
 			b.saveQueued = false
 		end, 2000)
 	end,
@@ -215,8 +215,9 @@ vim.api.nvim_create_autocmd("BufEnter", {
 -- needs to be set via autocommand.
 autocmd("FileType", {
 	callback = function(ctx)
+		if ctx.match == "markdown" then return end
 		opt_local.formatoptions:remove("o")
-		if ctx.match ~= "markdown" then opt_local.formatoptions:remove("t") end
+		opt_local.formatoptions:remove("t")
 	end,
 })
 

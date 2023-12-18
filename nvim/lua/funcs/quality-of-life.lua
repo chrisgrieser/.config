@@ -175,23 +175,21 @@ function M.tabout()
 	local onlyWhitespaceBeforeCursor = charsBefore:match("^%s*$")
 
 	if onlyWhitespaceBeforeCursor then
-		-- using feedkeys instead of `expr = true`, since the cmp-fallback mapping
+		-- using feedkeys instead of `expr = true`, since the cmp mapping
 		-- does not work with `expr = true`
 		local key = vim.api.nvim_replace_termcodes("<C-t>", true, false, true)
 		vim.api.nvim_feedkeys(key, "i", false)
 	else
 		local closingPairs = "[%]\"'`)}]"
 		local nextClosingPairPos = line:find(closingPairs, col + 1)
-		if nextClosingPairPos then return end
+		if not nextClosingPairPos then return end
 
-		local showMatchOptBefore = vim.opt.showmatch:get()
 		vim.cmd.stopinsert() -- INFO nvim_win_set_cursor does not work in insert mode
 		vim.defer_fn(function()
 			vim.api.nvim_win_set_cursor(0, { row, nextClosingPairPos })
 			local isEndOfLine = nextClosingPairPos == #line
 
 			vim.cmd.startinsert { bang = isEndOfLine }
-			vim.opt.showmatch = showMatchOptBefore
 		end, 1)
 	end
 end
