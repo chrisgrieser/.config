@@ -283,6 +283,7 @@ serverConfigs.ltex = {
 -- DOCS https://github.com/tekumara/typos-vscode#settings
 serverConfigs.typos_lsp = {
 	init_options = { diagnosticSeverity = "information" },
+	root_dir = util.root_pattern('typos.toml', '_typos.toml', '.typos.toml'),
 }
 
 -- DOCS https://vale.sh/docs/integrations/guide/#vale-ls
