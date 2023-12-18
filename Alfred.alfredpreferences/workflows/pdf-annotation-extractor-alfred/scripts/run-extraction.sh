@@ -26,16 +26,13 @@ elif [[ "$pdf_path" != *.pdf ]]; then
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
-
 # CITEKEY
-citekey=$(basename "$pdf_path" .pdf | sed -E 's/_.*//')
-entry=$(grep --after-context=20 --max-count=1 --ignore-case "{$citekey," "$bibtex_library_path")
+
+filename=$(basename "$pdf_path" .pdf | sed -E 's/_.*//')
+entry=$(grep --after-context=20 --max-count=1 --ignore-case "{$filename," "$bibtex_library_path")
 
 # GUARD
-if [[ -z "$entry" ]]; then
-	echo "⚠️ No entry with the citekey $citekey found in library file."
-	exit 1
-elif [[ "$extraction_engine" == "pdfannots" ]] && ! command -v pdfannots &>/dev/null; then
+if [[ "$extraction_engine" == "pdfannots" ]] && ! command -v pdfannots &>/dev/null; then
 	echo "⚠️ pdfannots not installed."
 	exit 1
 elif [[ "$extraction_engine" == "pdfannots2json" ]] && ! command -v pdfannots2json &>/dev/null; then
@@ -43,16 +40,25 @@ elif [[ "$extraction_engine" == "pdfannots2json" ]] && ! command -v pdfannots2js
 	exit 1
 fi
 
+# with citekey
+if [[ -n "$entry" ]]; then
+	osascript -e "display notification \"⏳ Running Extraction for $citkey…\" with title \"Annotation Extractor\""
+
+# without citekey
+else
+	osascript -e 'display notification "⏳ Running Extraction…" with title "Annotation Extractor"'
+	output_path="$(dirname "$pdf_path")"
+	filename="$(basename "$pdf_path")_annos"
+fi
+
 #───────────────────────────────────────────────────────────────────────────────
 # EXTRACTION
-extra=$([[ -z "$entry" ]] && echo "…" || echo " for $citekey…")
-osascript -e "display notification \"⏳ Running Extraction$extra\" with title \"Annotation Extractor\""
 
 if [[ "$extraction_engine" == "pdfannots" ]]; then
 	annotations=$(pdfannots --no-group --format=json "$pdf_path")
 else
 	prevDir="$PWD"
-	IMAGE_FOLDER="${output_path/#\~/$HOME}/attachments/image_temp"
+	IMAGE_FOLDER="$output_path/attachments/image_temp"
 	mkdir -p "$IMAGE_FOLDER" && cd "$IMAGE_FOLDER"
 
 	annotations=$(pdfannots2json "$pdf_path" --image-output-path=./ --image-format="png")
@@ -71,7 +77,7 @@ else
 		# rename images
 		i=1
 		for image in *; do
-			mv -f "$image" ../"${citekey}_image${i}.png"
+			mv -f "$image" ../"${filename}_image${i}.png"
 			i=$((i + 1))
 		done
 	fi
@@ -84,4 +90,4 @@ fi
 
 # PROCESS ANNOTATIONS
 osascript -l JavaScript "./scripts/process_annotations.js" \
-	"$citekey" "$annotations" "$entry" "$output_path" "$extraction_engine"
+	"$filename" "$annotations" "$entry" "$output_path" "$extraction_engine"
