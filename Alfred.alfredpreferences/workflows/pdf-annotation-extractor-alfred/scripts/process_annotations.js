@@ -507,8 +507,11 @@ ${annos}
 function run(argv) {
 	const [citekey, rawAnnotations, entry, outPath, engine] = argv;
 	const usePdfannots = engine === "pdfannots";
+	const hasLibraryEntry = entry !== "";
+	if (hasLibraryEntry)
 	const metadata = extractMetadata(citekey, entry);
 	if (!metadata) return; // cancellation of the page-number-dialog by the user
+	end
 
 	// process input
 	let annos = JSON.parse(rawAnnotations);

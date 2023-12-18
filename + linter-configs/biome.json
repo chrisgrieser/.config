@@ -13,6 +13,7 @@
 		"rules": {
 			"all": true,
 			"suspicious": { "noConsoleLog": "off" },
+			"complexity": { "noExcessiveCognitiveComplexity": "off" },
 			"style": {
 				"useTemplate": "off",
 				"noParameterAssign": "off",

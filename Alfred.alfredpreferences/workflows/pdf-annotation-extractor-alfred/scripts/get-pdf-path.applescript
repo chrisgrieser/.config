@@ -1,10 +1,10 @@
 #!/usr/bin/env osascript
 
-on run(filepath)
+on run()
 	tell application "System Events" to set frontApp to (name of first process where it is frontmost)
 
 	# PDF EXPERT
-	# opens Finder, so the subsequent block can do it's work
+	# opens Finder, so the subsequent Finder block can be used
 	if (frontApp is "PDF Expert") then
 		tell application "System Events"
 			tell process "PDF Expert"
@@ -20,11 +20,11 @@ on run(filepath)
 	if (frontApp is "Finder" or frontApp is "PDF Expert") then
 		tell application "Finder" to set sel to selection
 		if ((count sel) = 0) then
-			set current_file to "No file selected."
+			set current_file to "no-file"
 		else if ((count sel) = 1) then
 			set current_file to POSIX path of (sel as text)
 		else
-			set current_file to "More than one file selected."
+			set current_file to "more-than-one-file"
 		end if
 	end if
 
@@ -45,9 +45,11 @@ on run(filepath)
 		# ensure ".pdf" is appended to the file name, if the user has hidden extensions
 		set filename to do shell script ("filename=" & (quoted form of filename) & "; echo \"${filename%.pdf}.pdf\"")
 
+		# find PDF in folder
 		set pdfFolder to (system attribute "pdf_folder")
 		set current_file to do shell script ("find " & (quoted form of pdfFolder) & " -type f -name " & (quoted form of filename))
-		if current_file = "" then return "File not in PDF folder."
+
+		if current_file = "" then return "not-in-pdf-folder"
 	end if
 
 	return current_file
