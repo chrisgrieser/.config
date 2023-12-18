@@ -96,7 +96,7 @@ keymap(
 	"i",
 	"<Tab>",
 	function() require("funcs.quality-of-life").tabout() end,
-	{ desc = "󰉵 outdent line", expr = true }
+	{ desc = "󰉵 outdent line" }
 )
 
 

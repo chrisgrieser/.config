@@ -9,7 +9,7 @@ export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 # DOCS https://github.com/eza-community/eza/blob/main/man/eza_colors.5.md
 # INFO does also accept specific files via glob, e.g. `README.md=4;33`,
 # `.*=…` affects dotfiles
-file_colors=".*=38;5;247:LICENSE=38;5;247"
+grey="38;5;247" && file_colors=".*=$grey:LICENSE*=$grey:*lock*=$grey"
 export LS_COLORS="di=1;34:ln=3;35:or=7;31:ex=39:$file_colors"
 
 export EZA_COLORS="gm=1;38;5;208" # `modified` with same orange as in starship

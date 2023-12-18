@@ -167,30 +167,31 @@ end
 
 --------------------------------------------------------------------------------
 
--- simplified implementation of tabout.nvim
--- to be used for an insert-mode
--- requires `expr = true`
+---simplified implementation of tabout.nvim, to be used in insert-mode
 function M.tabout()
 	local line = vim.api.nvim_get_current_line()
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-	local charsBefore = line:sub(1, col + 1)
+	local charsBefore = line:sub(1, col)
 	local onlyWhitespaceBeforeCursor = charsBefore:match("^%s*$")
-	vim.notify("🪚 onlyWhitespaceBeforeCursor: " .. tostring(onlyWhitespaceBeforeCursor))
 
-	if onlyWhitespaceBeforeCursor then return "<C-t>" end
+	if onlyWhitespaceBeforeCursor then
+		-- using feedkeys instead of `expr = true`, since the cmp-fallback mapping
+		-- does not work with `expr = true`
+		local key = vim.api.nvim_replace_termcodes("<C-t>", true, false, true)
+		vim.api.nvim_feedkeys(key, "i", false)
+	else
+		local closingPairs = "[%]\"'`)}]"
+		local nextClosingPairPos = line:find(closingPairs, col + 1)
+		if not nextClosingPairPos then return end
 
-	local closingPairs = "[%]\"'`)}]"
-	local nextClosingPairPos = line:find(closingPairs, col + 1)
-	if not nextClosingPairPos then return end
+		vim.cmd.stopinsert() -- INFO nvim_win_set_cursor does not work in insert mode
+		vim.defer_fn(function()
+			vim.api.nvim_win_set_cursor(0, { row, nextClosingPairPos })
+			local isEndOfLine = nextClosingPairPos == #line
 
-	-- INFO nvim_win_set_cursor apparently does not work in insert mode
-	vim.cmd.stopinsert()
-	vim.defer_fn(function()
-		vim.api.nvim_win_set_cursor(0, { row, nextClosingPairPos })
-		local isEndOfLine = nextClosingPairPos == #line
-
-		vim.cmd.startinsert { bang = isEndOfLine }
-	end, 1)
+			vim.cmd.startinsert { bang = isEndOfLine }
+		end, 1)
+	end
 end
 
 --------------------------------------------------------------------------------
