@@ -116,9 +116,9 @@ function insertPageNumber(annotations, pageNo) {
  * when tots is not installed, Underlines are ignored and annotations with
  * leading "_" are still extracted (though the "_" is removed)
  * @param {Annotation[]} annotations
- * @param {string} citekey
+ * @param {string} filename
  */
-function processUnderlines(annotations, citekey) {
+function processUnderlines(annotations, filename) {
 	let totInstalled;
 
 	// Annotations with leading "_": collected & removal of the "_"
@@ -136,13 +136,13 @@ function processUnderlines(annotations, citekey) {
 
 		const annosToSplitOff = [...underlineAnnos, ...underscoreAnnos];
 		if (annosToSplitOff.length > 0) {
-			const text = jsonToMd(annosToSplitOff, citekey);
+			const text = jsonToMd(annosToSplitOff, filename);
 
 			// create new reminder due today
 			const rem = Application("Reminders");
 			const today = new Date();
 			const newReminder = rem.Reminder({
-				name: `Underline Annotations for ${citekey}`,
+				name: `Underline Annotations for ${filename}`,
 				body: text,
 				alldayDueDate: today,
 			});
@@ -358,7 +358,7 @@ function extractMetadata(citekey, rawEntry) {
 	// biome-ignore format: more compact
 	const germanChars = ['{\\"u};ü', '{\\"a};ä', '{\\"o};ö', '{\\"U};Ü', '{\\"A};Ä', '{\\"O};Ö', '\\"u;ü', '\\"a;ä', '\\"o;ö', '\\"U;Ü', '\\"A;Ä', '\\"O;Ö', "\\ss;ß", "{\\ss};ß"];
 	// biome-ignore format: more compact
-	const otherChars = ["{\\~n};ñ", "{\\'a};á", "{\\'e};é", "{\\v c};č", "\\c{c};ç", "\\o{};ø", "\\^{i};î", '\\"{i};î', '\\"{i};ï', "{\\'c};ć", '\\"e;ë'];
+	const otherChars = ["{\\~n};n", "{\\'a};a", "{\\'e};e", "{\\v c};c", "\\c{c};c", "\\o{};ø", "\\^{i};i", '\\"{i};i', '\\"{i};i', "{\\'c};c", '\\"e;e'];
 	const specialChars = ["\\&;&", '``;"', "`;'", "\\textendash{};—", "---;—", "--;—"];
 	for (const pair of [...germanChars, ...otherChars, ...specialChars]) {
 		const half = pair.split(";");
@@ -383,6 +383,7 @@ function extractMetadata(citekey, rawEntry) {
 		url: "",
 		doi: "",
 		citekey: citekey,
+		tagsForYaml: "",
 	};
 
 	for (const property of bibtexEntry.split("\n")) {
@@ -433,12 +434,20 @@ function extractMetadata(citekey, rawEntry) {
 }
 
 /**
- * @param {Annotation[]} annos
- * @param {{title: string;ptype: string;firstPage: number;author: string;year: number;keywords?: string;url: string;doi: string;citekey: string;}} metad
+ * @param {string} annos
+ * @param {{title: string;ptype: string;firstPage: number;author: string;year: number;keywords?: string;url: string;doi: string;tagsForYaml: string;citekey: string;}} metad
  * @param {string} outputPath
- * @param {string} tagsForYaml
+ * @param {string} filename
  */
-function writeNote(annos, metad, outputPath, tagsForYaml) {
+function writeNote(annos, metad, outputPath, filename) {
+	const path = outputPath + `/${filename}.md`;
+
+	// GUARD no citekey
+	if (!metad) {
+		writeToFile(outputPath, annos);
+		return;
+	}
+
 	// format authors for yaml
 	let authorStr = metad.author
 		.split(" and ")
@@ -454,7 +463,7 @@ function writeNote(annos, metad, outputPath, tagsForYaml) {
 	// yaml frontmatter
 	const yamlKeys = [
 		`aliaseses: "${metad.title}"`,
-		`tags: [literature-note, ${tagsForYaml}]`,
+		`tags: [literature-note, ${metad.tagsForYaml}]`,
 		"cssclasses: pdf-annotations",
 		`citekey: ${metad.citekey}`,
 		`year: ${metad.year.toString()}`,
@@ -477,7 +486,6 @@ ${yamlKeys.join("\n")}
 ${annos}
 `;
 
-	const path = outputPath + `/${metad.citekey}.md`;
 	writeToFile(path, noteContent);
 
 	// automatically determine if file is an Obsidian Vault
@@ -505,31 +513,35 @@ ${annos}
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: AlfredRun
 function run(argv) {
-	const [citekey, rawAnnotations, entry, outPath, engine] = argv;
+	const [filename, rawAnnotations, entry, outPath, engine] = argv;
 	const usePdfannots = engine === "pdfannots";
 	const hasLibraryEntry = entry !== "";
-	if (hasLibraryEntry)
-	const metadata = extractMetadata(citekey, entry);
-	if (!metadata) return; // cancellation of the page-number-dialog by the user
-	end
+	let metadata;
+	let citekey;
+	if (hasLibraryEntry) {
+		citekey = filename;
+		metadata = extractMetadata(citekey, entry);
+		if (!metadata) return; // cancellation of the page-number-dialog by the user
+	}
 
 	// process input
 	let annos = JSON.parse(rawAnnotations);
 	annos = adapterForInput(annos, usePdfannots);
-	annos = insertPageNumber(annos, metadata.firstPage);
+	annos = insertPageNumber(annos, metadata.firstPage || 1);
 	annos = cleanQuoteKey(annos);
 
 	// process annotation codes & images
 	annos = mergeQuotes(annos);
 	annos = transformHeadings(annos);
 	annos = questionCallout(annos);
-	const { filteredArray, tagsForYaml } = transformTag4yaml(annos, metadata.keywords);
+	const { filteredArray, tagsForYaml } = transformTag4yaml(annos, metadata.keywords || "");
 	annos = filteredArray;
+	metadata.tagsForYaml = tagsForYaml;
 
 	// finish up
-	if (!usePdfannots) annos = insertImage4pdfannots2json(annos, citekey);
-	annos = processUnderlines(annos, citekey);
+	if (!usePdfannots) annos = insertImage4pdfannots2json(annos, filename);
+	annos = processUnderlines(annos, filename);
 	annos = jsonToMd(annos, citekey);
 
-	writeNote(annos, metadata, outPath, tagsForYaml);
+	writeNote(annos, metadata, outPath, filename);
 }
