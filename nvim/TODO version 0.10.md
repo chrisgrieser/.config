@@ -1,4 +1,5 @@
 <!-- LTeX: enabled=false -->
+
 - nvim new default theme -> light theme?
 - `satellite.nvim` can now be updated.
 - `biome` can now format via lsp <https://github.com/neovim/nvim-lspconfig/issues/2807>

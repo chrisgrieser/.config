@@ -91,11 +91,6 @@ end
 
 --------------------------------------------------------------------------------
 
-M.vimDataDir = vim.env.DATA_DIR .. "/vim-data/" -- vim.env reads from .zshenv
-M.linterConfigFolder = os.getenv("HOME") .. "/.config/+ linter-configs/"
-
---------------------------------------------------------------------------------
-
 ---Sets the global BorderStyle variable and the matching BorderChars Variable.
 ---See also https://neovim.io/doc/user/api.html#nvim_open_win()
 ---(BorderChars used for Telescope, borderHorizontal used for whichkey and Glance)
@@ -130,6 +125,8 @@ M.textobjMaps = {
 	call = "l", -- cal[l]
 	wikilink = "R", -- two [R]ectangular brackets
 }
+
+M.linterConfigFolder = os.getenv("HOME") .. "/.config/+ linter-configs/"
 
 --------------------------------------------------------------------------------
 

@@ -1,4 +1,5 @@
 local u = require("config.utils")
+local linterConfig = require("config.utils").linterConfigFolder
 --------------------------------------------------------------------------------
 
 ---since nvim-lspconfig and mason.nvim use different package names
@@ -63,7 +64,7 @@ serverConfigs.bashls = {
 
 -- WORKAROUND: use efm to use shellcheck with zsh files
 serverConfigs.efm = {
-	cmd = { "efm-langserver", "-c", u.linterConfigFolder .. "/efm.yaml" },
+	cmd = { "efm-langserver", "-c", linterConfig .. "/efm.yaml" },
 	filetypes = { "sh" }, -- limit to filestypes needed
 }
 
@@ -212,7 +213,7 @@ serverConfigs.tsserver = {
 
 -- since reading external file with the method described in docs does not work
 local function getDictWords()
-	local dictfile = u.linterConfigFolder .. "/spellfile-vim-ltex.add"
+	local dictfile = linterConfig .. "/spellfile-vim-ltex.add"
 	local fileDoesNotExist = vim.loop.fs_stat(dictfile) == nil
 	if fileDoesNotExist then return {} end
 	local words = {}
@@ -296,7 +297,7 @@ serverConfigs.vale_ls = {
 }
 
 -- FIX https://github.com/errata-ai/vale-ls/issues/4
-vim.env.VALE_CONFIG_PATH = u.linterConfigFolder .. "/vale/vale.ini"
+vim.env.VALE_CONFIG_PATH = linterConfig .. "/vale/vale.ini"
 
 --------------------------------------------------------------------------------
 
