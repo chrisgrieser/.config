@@ -92,12 +92,7 @@ keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent selection" })
 keymap("n", "<Tab>", ">>", { desc = "󰉶 indent line" })
 keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent line" })
 keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent line" })
-keymap(
-	"i",
-	"<Tab>",
-	function() require("funcs.quality-of-life").tabout() end,
-	{ desc = "󰉵 outdent line" }
-)
+-- INFO TAB settings also done in the cmp config
 
 
 keymap("n", "[", "<", { desc = "󰉵 outdent" })

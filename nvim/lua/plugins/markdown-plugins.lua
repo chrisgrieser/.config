@@ -15,8 +15,8 @@ return {
 		keys = {
 			{ "o", "<Plug>(bullets-newline)", ft = "markdown" },
 			{ "<CR>", "<Plug>(bullets-newline)", mode = "i", ft = "markdown" },
-			{ "<Tab>", "<Plug>(bullets-demote)", mode = { "i", "n", "x" }, ft = "markdown" },
-			{ "<S-Tab>", "<Plug>(bullets-promote)", mode = { "i", "n", "x" }, ft = "markdown" },
+			{ "<Tab>", "<Plug>(bullets-demote)", mode = { "n", "x" }, ft = "markdown" },
+			{ "<S-Tab>", "<Plug>(bullets-promote)", mode = { "n", "x" }, ft = "markdown" },
 		},
 		init = function()
 			vim.g.bullets_set_mappings = 0 -- using my own above

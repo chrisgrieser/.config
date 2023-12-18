@@ -182,14 +182,16 @@ function M.tabout()
 	else
 		local closingPairs = "[%]\"'`)}]"
 		local nextClosingPairPos = line:find(closingPairs, col + 1)
-		if not nextClosingPairPos then return end
+		if nextClosingPairPos then return end
 
+		local showMatchOptBefore = vim.opt.showmatch:get()
 		vim.cmd.stopinsert() -- INFO nvim_win_set_cursor does not work in insert mode
 		vim.defer_fn(function()
 			vim.api.nvim_win_set_cursor(0, { row, nextClosingPairPos })
 			local isEndOfLine = nextClosingPairPos == #line
 
 			vim.cmd.startinsert { bang = isEndOfLine }
+			vim.opt.showmatch = showMatchOptBefore
 		end, 1)
 	end
 end
