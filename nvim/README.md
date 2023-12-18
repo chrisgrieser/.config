@@ -3,7 +3,7 @@
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img src="https://dotfyle.com/chrisgrieser/config-nvim/badges/leaderkey?style=flat"/></a>
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img src="https://dotfyle.com/chrisgrieser/config-nvim/badges/plugin-manager?style=flat"/></a>
 
-```python
+```bash
 ├── lua
 │  ├── config # keybindings, options, …
 │  ├── funcs # utility functions / private plugins
