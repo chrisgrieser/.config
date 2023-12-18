@@ -38,9 +38,8 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- DOCS https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
 require("lazy").setup("plugins", {
-	defaults = {
-		lazy = true,
-	},
+	defaults = { lazy = true },
+	lockfile = vim.fn.stdpath("config") .. "/.lazy-lock.json", -- make file hidden
 	dev = { -- for repos with <pattern>, use local repos if one exists in <path>
 		path = os.getenv("HOME") .. "/Repos",
 		patterns = { "chrisgrieser" }, -- set `dev = true` for all matching repos
