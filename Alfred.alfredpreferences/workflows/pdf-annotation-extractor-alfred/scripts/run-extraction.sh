@@ -48,7 +48,7 @@ if [[ -n "$entry" ]]; then
 else
 	osascript -e 'display notification "⏳ Running Extraction…" with title "Annotation Extractor"'
 	output_path="$(dirname "$pdf_path")"
-	filename="$(basename "$pdf_path")_annos"
+	filename="$(basename "$pdf_path" .pdf)_annos"
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -82,7 +82,12 @@ else
 		done
 	fi
 
-	rmdir "$IMAGE_FOLDER" # remove temp folder
+	# remove temp folder
+	rmdir "$IMAGE_FOLDER"
+	# remove attachment folder, if no images are extracted
+	# (rmdir fails if folder is not empty)
+	rmdir "$output_path/attachments"
+
 	cd "$prevDir"
 fi
 
@@ -91,7 +96,3 @@ fi
 # PROCESS ANNOTATIONS
 osascript -l JavaScript "./scripts/process_annotations.js" \
 	"$filename" "$annotations" "$entry" "$output_path" "$extraction_engine"
-
-# remove attachment folder, if no images are extracted
-# (rmdir fails if folder is not empty)
-rmdir "$output_path/attachments"
