@@ -1,15 +1,17 @@
-### Basics
+# Basics
 Use the hotkey to trigger the Annotation Extraction on the PDF file currently
-selected in Finder.
+selected in Finder. (The hotkey also works when triggered from [PDF Expert](https://pdfexpert.com/)
+or [Highlights](https://highlightsapp.net/).)
 
 __Annotation Types extracted__
-- Highlight ➡️ bullet point, quoting text and prepending the comment
+- Highlight ➡️ bullet point, quoting text and prepending the comment as bold text
 - Free Comment ➡️ blockquote of the comment text
 - Strikethrough ➡️ Markdown strikethrough
-- Rectangle ➡️ [image](#extracting-images)
-- Underlines ➡️ sent to `Reminders.app` as a task due today (default list)
+- Rectangle ➡️ [extracts image and inserts Markdown image link at the respective
+  place](#extracting-images)
+- Underlines ➡️ sent to `Reminders.app` as a task due today in the default list
 
-### Automatic Page Number Identification
+# Automatic Page Number Identification
 Instead of the PDF page numbers, this workflow retrieves information about the
 *real* page numbers from the BibTeX library and inserts them. If there is no
 page data in the BibTeX entry (for example, monographies), you are prompted to
@@ -24,36 +26,36 @@ enter the page number manually.
   have page number `-10`, you enter the value `-10` when prompted for a page
   number.*
 
-### Annotation Codes
-Insert these special codes at the __beginning__ of an annotation to invoke
-special actions on that annotation. Annotation Codes do not apply to
-Strikethroughs. (You can run the Alfred command `acode` to display a cheat sheet
-showing all the following information.)
+# Annotation Codes
+Insert the following codes at the __beginning__ of an annotation to invoke
+special actions on that annotation. Annotation codes do not apply to
+strikethroughs.
 
 - `+`: Merge this highlight with the previous highlight or underline. Works for
   annotations on the same PDF-page (= skipping text in between) and for
   annotations across two pages.
-- `? foo` __(free comments)__: Turns "foo" into a [Question
-  Callout](https://help.obsidian.md/How+to/Use+callouts)	(`> ![QUESTION]`) and
-  move up. (Callouts are Obsidian-specific Syntax.)
+  - `? foo` __(free comments)__: Turns "foo" into a Question
+  Callout (`> ![QUESTION]`) and move up. (Callouts are [Obsidian-specific
+  Syntax](https://help.obsidian.md/How+to/Use+callouts).)
 - `##`: Turns highlighted text into a __heading__ that is added at that
   location. The number of `#` determines the heading level. If the annotation is
   a free comment, the text following the `#` is used as heading instead. (The
   space after the is `#` required).
-- `=`: Adds highlighted text as __tags__ to the YAML frontmatter (mostly used
-  for Obsidian as output). If the annotation is a free comment, uses the text
+- `=`: Adds highlighted text as __tags__ to the YAML frontmatter. If the
+  annotation is a free comment, uses the text
   after the `=`. In both cases, the annotation is removed afterward.
 - `_`: A copy of the annotation is sent `Reminders.app` as a task due today
   (default list).
 
-### Extracting Images
-<!-- LTeX: enabled=false -->
+# Extracting Images
 - The respective images are saved in the `attachments` sub-folder of the output
   folder, and named `{citekey}_image{n}.png`.
 - The images are embedded in the markdown file with the `![[ ]]` syntax, for
   example `![[filename.png|foobar]]`
+<!-- LTeX: enabled=false -->
 - Any `rectangle` type annotation in the PDF is extracted as image.
+<!-- LTeX: enabled=true -->
 - If the rectangle annotation has any comment, it is used as the alt-text for
   the image. (Note that some PDF readers like PDF Expert do not allow you to add
   a comment to rectangular annotations.)
-<!-- LTeX: enabled=true -->
+
