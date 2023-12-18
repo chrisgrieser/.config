@@ -125,6 +125,7 @@ local function themeModifications()
 		updateCursor("o-v:hor10")
 		if mode == "dark" then updateHl("ColorColumn", "guibg=#2e3742") end
 	elseif theme == "kanagawa" then
+		overwriteHl("TreesitterContext", { bg = "#1c1c25" })
 		-- transparent sign column
 		clearHl("SignColumn")
 		updateHl("GitSignsAdd", "guibg=none")
