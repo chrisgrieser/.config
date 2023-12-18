@@ -91,3 +91,7 @@ fi
 # PROCESS ANNOTATIONS
 osascript -l JavaScript "./scripts/process_annotations.js" \
 	"$filename" "$annotations" "$entry" "$output_path" "$extraction_engine"
+
+# remove attachment folder, if no images are extracted
+# (rmdir fails if folder is not empty)
+rmdir "$output_path/attachments"
