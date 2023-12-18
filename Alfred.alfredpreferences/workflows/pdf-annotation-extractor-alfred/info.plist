@@ -544,10 +544,10 @@ For other citation styles, use the following metadata:
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>description</key>
-			<string>The .bib file containing your library.</string>
+			<string>The .bib file containing your library. A library file is required for automatic page number identification and for prepending a YAML header with bibliographic information.</string>
 			<key>label</key>
 			<string>BibTeX Library Path</string>
 			<key>type</key>
@@ -615,7 +615,7 @@ For other citation styles, use the following metadata:
 				<false/>
 			</dict>
 			<key>description</key>
-			<string>The folder containing all PDFs. Required to be able to extract the current PDF from Highlights.</string>
+			<string>Only for Highlights.app users: The folder containing all PDFs. Required to be able to trigger extraction with Highlights being the frontmost app.</string>
 			<key>label</key>
 			<string>Highlights.app PDF Folder</string>
 			<key>type</key>
