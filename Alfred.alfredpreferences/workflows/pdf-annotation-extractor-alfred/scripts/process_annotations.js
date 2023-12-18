@@ -44,6 +44,19 @@ function toTitleCase(str) {
  * @property {string=} image - filename of image file
  */
 
+/** @typedef {Object} entryMetadata
+ * @property {string} title
+ * @property {string} ptype
+ * @property {string} author
+ * @property {string=} keywords
+ * @property {string} url
+ * @property {string} doi
+ * @property {string} tagsForYaml
+ * @property {string} citekey
+ * @property {number} firstPage
+ * @property {number} year
+ */
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** to make pdfannots and pdfannots2json compatible with the format required by this script

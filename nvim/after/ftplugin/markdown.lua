@@ -11,13 +11,9 @@ optl.tabstop = 4 -- less nesting in md
 optl.listchars:remove { "trail" }
 optl.listchars:append { multispace = "·" }
 
--- do not auto-wrap text
-vim.opt_local.formatoptions:append("t")
-
 -- since markdown has rarely indented lines, and also rarely has overlong lines,
 -- move everything a bit more to the right
 if vim.bo.buftype == "" then optl.signcolumn = "yes:3" end
-
 
 --------------------------------------------------------------------------------
 -- HEADING navigation (instead of symbols)
