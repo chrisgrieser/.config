@@ -283,7 +283,6 @@ serverConfigs.ltex = {
 -- DOCS https://github.com/tekumara/typos-vscode#settings
 serverConfigs.typos_lsp = {
 	init_options = { diagnosticSeverity = "information" },
-	root_dir = util.root_pattern('typos.toml', '_typos.toml', '.typos.toml'),
 }
 
 -- DOCS https://vale.sh/docs/integrations/guide/#vale-ls
@@ -337,13 +336,18 @@ end
 
 return {
 	{ -- configure LSPs
-		"neovim/nvim-lspconfig",
+	-- PENDING https://github.com/neovim/nvim-lspconfig/pull/2935
+		"chrisgrieser/nvim-lspconfig",
+		branch = "dev",
+
 		lazy = false,
 		dependencies = { -- loading as dependency ensures it's loaded before lua_ls
 			"folke/neodev.nvim",
 			opts = { library = { plugins = false } }, -- too slow with all my plugins
 		},
-		init = function() setupAllLsps() end,
-		config = function() require("lspconfig.ui.windows").default_options.border = u.borderStyle end,
+		config = function()
+			setupAllLsps()
+			require("lspconfig.ui.windows").default_options.border = u.borderStyle
+		end,
 	},
 }
