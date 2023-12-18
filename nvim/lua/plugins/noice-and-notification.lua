@@ -86,12 +86,6 @@ return {
 					cmdline = { view = "cmdline_popup" },
 					lua = { view = "cmdline_popup" },
 					help = { view = "cmdline_popup" },
-					substitute = { -- :s as a standalone popup
-						view = "cmdline_popup",
-						pattern = { "^:%%? ?s[ /]", "^:'<,'> ?s[ /]" },
-						icon = " ",
-						conceal = true,
-					},
 				},
 			},
 			-- DOCS https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua

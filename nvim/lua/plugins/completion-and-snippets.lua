@@ -98,7 +98,7 @@ local function cmpconfig()
 
 				-- stylua: ignore
 				local kindIcons = { Text = "", Method = "󰆧", Function = "󰊕", Constructor = "", Field = "󰇽", Variable = "󰂡", Class = "󰠱", Interface = "", Module = "", Property = "󰜢", Unit = "", Value = "󰎠", Enum = "", Keyword = "󰌋", Snippet = "󰅱", Color = "󰏘", File = "󰈙", Reference = "", Folder = "󰉋", EnumMember = "", Constant = "󰏿", Struct = "", Event = "", Operator = "󰆕", TypeParameter = "󰅲" }
-				item.kind = entry.source.name == "nvim_lsp" and kindIcons[item.kind] .. " " or ""
+				item.kind = entry.source.name == "nvim_lsp" and kindIcons[item.kind] or ""
 				item.menu = sourceIcons[entry.source.name]
 				return item
 			end,
