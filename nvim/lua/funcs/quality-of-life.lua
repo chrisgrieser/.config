@@ -169,17 +169,15 @@ end
 
 -- simplified implementation of tabout.nvim
 -- to be used for an insert-mode
+-- requires `expr = true`
 function M.tabout()
 	local line = vim.api.nvim_get_current_line()
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-	local charsBefore = line:sub(1, col)
+	local charsBefore = line:sub(1, col + 1)
 	local onlyWhitespaceBeforeCursor = charsBefore:match("^%s*$")
+	vim.notify("🪚 onlyWhitespaceBeforeCursor: " .. tostring(onlyWhitespaceBeforeCursor))
 
-	if onlyWhitespaceBeforeCursor then
-		vim.cmd.stopinsert()
-		normal(">>")
-		return
-	end
+	if onlyWhitespaceBeforeCursor then return "<C-t>" end
 
 	local closingPairs = "[%]\"'`)}]"
 	local nextClosingPairPos = line:find(closingPairs, col + 1)
@@ -191,7 +189,7 @@ function M.tabout()
 		vim.api.nvim_win_set_cursor(0, { row, nextClosingPairPos })
 		local isEndOfLine = nextClosingPairPos == #line
 
-		vim.cmd.startinsert({ bang = isEndOfLine })
+		vim.cmd.startinsert { bang = isEndOfLine }
 	end, 1)
 end
 
