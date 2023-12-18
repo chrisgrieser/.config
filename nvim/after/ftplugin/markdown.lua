@@ -17,18 +17,27 @@ if vim.bo.buftype == "" then optl.signcolumn = "yes:3" end
 
 --------------------------------------------------------------------------------
 
--- make bullets auto-continue https://www.reddit.com/r/vim/comments/otpr29/how_do_you_get_vim_to_automatically_continue_a/
--- replaces bullets.vim
-optl.comments = {
-	"b:*", -- unordered list
-	"b:-",
-	"b:+",
-	"b:1.", -- ordered list (automatically continued as 1.)
-	"n:>", -- blockquotes
-}
-optl.formatoptions:append("r") -- for `<CR>`
-optl.formatoptions:append("o") -- for `o`
-optl.formatoptions:remove("c") -- continuation beyond textwidth should not insert bullet
+-- make bullets auto-continue
+-- replaces bullets.vim https://www.reddit.com/r/vim/comments/otpr29/how_do_you_get_vim_to_automatically_continue_a/
+-- INFO cannot set opt.comments permanently, since it disturbs the
+-- correctly indented continuation of bullet lists when hitting opt.textwidth
+optl.formatoptions:append("r") -- `<CR>` in insert mode
+optl.formatoptions:append("o") -- `o` in normal mode
+
+local function autocontinue(key)
+	local comBefore = optl.comments:get()
+	optl.comments = { "b:*", "b:-", "b:+", "b:1.", "n:>" } -- unordered, ordered, blockquotes
+	vim.defer_fn(function() optl.comments = comBefore end, 1) -- deferred to restore only after return
+	return key
+end
+
+vim.keymap.set("n", "o", function() return autocontinue("o") end, { buffer = true, expr = true })
+vim.keymap.set(
+	"i",
+	"<CR>",
+	function() return autocontinue("<CR>") end,
+	{ buffer = true, expr = true }
+)
 
 --------------------------------------------------------------------------------
 -- HEADING navigation (instead of symbols)

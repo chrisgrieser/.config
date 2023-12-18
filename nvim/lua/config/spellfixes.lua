@@ -16,6 +16,7 @@ local spellfixes = {
 	ignroe = "ignore",
 	nto = "not",
 	reponse = "response",
+	nromal = "normal",
 	fodler = "folder",
 	woudl = "would",
 	cleitn = "client",
