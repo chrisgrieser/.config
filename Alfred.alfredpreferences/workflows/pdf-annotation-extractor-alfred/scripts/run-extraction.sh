@@ -6,30 +6,36 @@ pdf_path="$*"
 [[ -z "$pdf_path" ]] && pdf_path=$(osascript "./scripts/get-pdf-path.applescript")
 
 #───────────────────────────────────────────────────────────────────────────────
-# GUARD CLAUSES & CITEKEY RETRIEVAL
 
+# GUARD
 if [[ ! -f "$bibtex_library_path" ]]; then
 	echo "⚠️ Library file does not exist."
 	exit 1
-elif [[ "$pdf_path" == "No file selected." ]]; then
+elif [[ "$pdf_path" == "no-file" ]]; then
 	echo "⚠️ No file selected."
 	exit 1
-elif [[ "$pdf_path" == "More than one file selected." ]]; then
+elif [[ "$pdf_path" == "more-than-one-file" ]]; then
 	echo "⚠️ More than one file selected."
+	exit 1
+elif [[ "$pdf_path" == "not-in-pdf-folder" ]]; then
+	echo "⚠️ When using Highlights, the PDF must be located in the PDF folder."
 	exit 1
 elif [[ "$pdf_path" != *.pdf ]]; then
 	echo "⚠️ Not a .pdf file."
 	exit 1
 fi
 
+#───────────────────────────────────────────────────────────────────────────────
+
+# CITEKEY
 citekey=$(basename "$pdf_path" .pdf | sed -E 's/_.*//')
 entry=$(grep --after-context=20 --max-count=1 --ignore-case "{$citekey," "$bibtex_library_path")
+
+# GUARD
 if [[ -z "$entry" ]]; then
 	echo "⚠️ No entry with the citekey $citekey found in library file."
 	exit 1
-fi
-
-if [[ "$extraction_engine" == "pdfannots" ]] && ! command -v pdfannots &>/dev/null; then
+elif [[ "$extraction_engine" == "pdfannots" ]] && ! command -v pdfannots &>/dev/null; then
 	echo "⚠️ pdfannots not installed."
 	exit 1
 elif [[ "$extraction_engine" == "pdfannots2json" ]] && ! command -v pdfannots2json &>/dev/null; then
@@ -39,7 +45,8 @@ fi
 
 #───────────────────────────────────────────────────────────────────────────────
 # EXTRACTION
-osascript -e 'display notification "⏳ Running Extraction…" with title "Annotation Extractor"'
+extra=$([[ -z "$entry" ]] && echo "…" || echo " for $citekey…")
+osascript -e "display notification \"⏳ Running Extraction$extra\" with title \"Annotation Extractor\""
 
 if [[ "$extraction_engine" == "pdfannots" ]]; then
 	annotations=$(pdfannots --no-group --format=json "$pdf_path")
