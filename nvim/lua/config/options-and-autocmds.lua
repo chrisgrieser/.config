@@ -62,7 +62,6 @@ end
 -- Motions & Editing
 opt.startofline = true -- motions like "G" also move to the first char
 opt.virtualedit = "block" -- visual-block mode can select beyond end of line
-opt.jumpoptions = "stack" -- https://www.reddit.com/r/neovim/comments/16nead7/comment/k1e1nj5/?context=3
 
 -- Search
 opt.ignorecase = true
@@ -169,15 +168,14 @@ opt.autowriteall = true
 autocmd({ "InsertLeave", "TextChanged", "BufLeave", "BufDelete", "FocusLost" }, {
 	callback = function(ctx)
 		local bo = vim.bo[ctx.buf]
-		if vim.b[ctx.buf].saveQueued or bo.buftype ~= "" or bo.ft == "gitcommit" or bo.readonly then
-			return
-		end
+		local b = vim.b[ctx.buf]
+		if b.saveQueued or bo.buftype ~= "" or bo.ft == "gitcommit" or bo.readonly then return end
 
-		vim.b[ctx.buf].saveQueued = true
+		b.saveQueued = true
 		vim.defer_fn(function()
 			if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
 			vim.cmd("silent! noautocmd update")
-			vim.b[ctx.buf].saveQueued = false
+			b.saveQueued = false
 		end, 2000)
 	end,
 })
