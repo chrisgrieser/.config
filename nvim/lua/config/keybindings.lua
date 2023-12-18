@@ -107,8 +107,7 @@ keymap(
 	{ desc = " Open new scope" }
 )
 
--- Spelling
--- works even with `spell=false`
+-- Spelling (works even with `spell=false`)
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
 
 -- ~ without moving don't move cursor, useful for vertical changes
@@ -119,8 +118,13 @@ keymap("n", "~", "v~")
 keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
 keymap({ "n", "x" }, "<leader>m", "ddpkJ", { desc = "󰗈 Merge line down" })
 
+-- Increment/Decrement
 keymap({ "n", "x" }, "+", "<C-a>")
 keymap({ "n", "x" }, "ö", "<C-x>")
+
+-- Undo
+keymap("n", "U", "<cmd>silent redo<CR>")
+keymap("n", "u", "<cmd>silent undo<CR>")
 
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
@@ -140,10 +144,7 @@ keymap("c", "<C-u>", "<C-e><C-u>") -- kill whole line
 keymap({ "i", "c" }, "<C-a>", "<Home>")
 keymap({ "i", "c" }, "<C-e>", "<End>")
 keymap("c", "<BS>", function()
-	local cmdLine = vim.fn.getcmdline()
-	local cmdPos = vim.fn.getcmdpos()
-	local isSubstitute = cmdLine:find("^%% s/") and cmdPos < 6
-	if cmdLine == "" or isSubstitute then return end
+	if vim.fn.getcmdline() == "" then return end
 	return "<BS>"
 end, { desc = "Restricted <BS>", expr = true })
 
@@ -151,7 +152,7 @@ end, { desc = "Restricted <BS>", expr = true })
 keymap("n", "i", function()
 	if api.nvim_get_current_line():find("^%s*$") then return [["_cc]] end
 	return "i"
-end, { expr = true, desc = "better i" })
+end, { desc = "indented i", expr = true })
 
 --------------------------------------------------------------------------------
 

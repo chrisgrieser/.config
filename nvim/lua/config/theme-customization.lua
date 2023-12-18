@@ -76,13 +76,14 @@ local function themeModifications()
 		end
 		updateHl("GitSignsChange", "guifg=#acaa62")
 	elseif theme == "dawnfox" then
-		updateHl("IblIndent", "guifg=#e0cfbd")
-		updateHl("ColorColumn", "guibg=#eee6dc")
-		updateHl("VertSplit", "guifg=#b29b84")
+		overwriteHl("IblIndent", { fg = "#e0cfbd" })
+		overwriteHl("ColorColumn", { bg = "#e9dfd2" })
+		overwriteHl("TreesitterContext", { bg = "#e6d9cb" })
+		overwriteHl("VertSplit", { fg = "#b29b84" })
+		overwriteHl("Operator", { fg = "#846a52" })
 		for _, v in pairs(vimModes) do
 			updateHl("lualine_y_diff_modified_" .. v, "guifg=#a9810a")
 		end
-		updateHl("Operator", "guifg=#846a52")
 		-- FIX python highlighting issues
 		linkHl("@type.builtin.python", "Typedef")
 		linkHl("@string.documentation.python", "Typedef")

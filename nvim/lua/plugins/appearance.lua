@@ -85,23 +85,6 @@ return {
 		init = function() u.colorschemeMod("RainbowDelimiterRed", { fg = "#7e8a95" }) end,
 		main = "rainbow-delimiters.setup",
 	},
-	{ -- highlighted undo/redos
-		"tzachar/highlight-undo.nvim",
-		keys = { "u", "U" },
-		opts = {
-			duration = 250,
-			undo = {
-				lhs = "u",
-				map = "silent undo",
-				opts = { desc = "󰕌 Undo" },
-			},
-			redo = {
-				lhs = "U",
-				map = "silent redo",
-				opts = { desc = "󰑎 Redo" },
-			},
-		},
-	},
 	{ -- color previews & color picker
 		"uga-rosa/ccc.nvim",
 		keys = {

@@ -27,7 +27,7 @@ return {
 				["Skip Region"] = "n", -- [n]o & find next
 				["Remove Region"] = "N", -- [N]o & goto prev
 				["Find Operator"] = "s", -- operator, selects all regions found in textobj
-				["Motion $"] = "L", -- use my HL motions here as well
+				["Motion $"] = "L", -- consistent with my mappings
 				["Motion ^"] = "H",
 			}
 		end,
