@@ -30,7 +30,6 @@ local extraInstalls = {
 }
 
 local dontInstall = {
-	"jedi-language-server", -- PENDING https://github.com/pappasam/jedi-language-server/issues/296
 	"trim_whitespace", -- not real formatters, but pseudo-formatters from conform.nvim
 	"trim_newlines",
 	"squeeze_blanks",
