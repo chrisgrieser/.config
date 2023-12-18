@@ -67,7 +67,6 @@ return {
 			{ "<leader>bt", function() require("dap").terminate({}, {}, terminateCallback) end, desc = " Terminate" },
 			-- stylua: ignore end
 		},
-		dependencies = { "theHamsta/nvim-dap-virtual-text" },
 		init = function() u.leaderSubkey("b", " Debugger") end,
 		config = function()
 			dapSigns()

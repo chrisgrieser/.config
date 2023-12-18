@@ -38,7 +38,7 @@ return {
 		},
 	},
 	-----------------------------------------------------------------------------
-	{ -- tons of text objects
+	{ -- treesitter-based textobjs
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		event = "BufReadPre", -- not later to ensure it loads in time properly
 		dependencies = "nvim-treesitter/nvim-treesitter",
@@ -56,7 +56,7 @@ return {
 			},
 		},
 	},
-	{ -- tons of text objects
+	{ -- pattern-based textobjs
 		"chrisgrieser/nvim-various-textobjs",
 		keys = {
 			-- stylua: ignore start
