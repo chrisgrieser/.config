@@ -174,7 +174,7 @@ autocmd({ "InsertLeave", "TextChanged", "BufLeave", "BufDelete", "FocusLost" }, 
 -- AUTO-CD TO PROJECT ROOT (PROJECT.NVIM LITE)
 local autoCdConfig = {
 	rootFiles = { "info.plist", "Makefile", ".git" }, -- order = priority
-	childOfDir = { ".config" },
+	childOfDir = { ".config", "com~apple~CloudDocs" },
 }
 
 vim.api.nvim_create_autocmd("BufEnter", {
