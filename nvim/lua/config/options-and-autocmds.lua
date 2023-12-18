@@ -23,9 +23,10 @@ vim.filetype.add {
 
 -- DIRECTORIES
 -- move to custom location where they are synced independently from the dotfiles repo
-opt.undodir:prepend(u.vimDataDir .. "undo//")
-opt.viewdir = u.vimDataDir .. "view"
-opt.shadafile = u.vimDataDir .. "main.shada"
+local vimDataDir = vim.env.DATA_DIR .. "/vim-data/" -- vim.env reads from .zshenv
+opt.undodir:prepend(vimDataDir .. "undo//")
+opt.viewdir = vimDataDir .. "view"
+opt.shadafile = vimDataDir .. "main.shada"
 opt.swapfile = false -- doesn't help and only creates useless files and notifications
 
 --------------------------------------------------------------------------------
@@ -222,7 +223,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 -- Formatting `vim.opt.formatoptions:remove{"o"}` would not work, since it's
 -- overwritten by ftplugins having the `o` option (which most do). Therefore
--- needs to be set via autocommand
+-- needs to be set via autocommand.
 autocmd("FileType", {
 	callback = function()
 		opt_local.formatoptions:remove("o")
