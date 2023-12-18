@@ -1,5 +1,5 @@
 #!/bin/zsh
-# shellcheck disable=2164,2154
+# shellcheck disable=2154
 
 # INPUT
 pdf_path="$*"
@@ -8,8 +8,11 @@ pdf_path="$*"
 #───────────────────────────────────────────────────────────────────────────────
 
 # GUARD
-if [[ ! -f "$bibtex_library_path" ]]; then
-	echo "⚠️ Library file does not exist."
+if [[ -n "$bibtex_library_path" && ! -f "$bibtex_library_path" ]]; then
+	echo "⚠️ Library file path not valid."
+	exit 1
+elif [[ -n "$output_path" && ! -d "$output_path" ]]; then
+	echo "⚠️ Output path not valid."
 	exit 1
 elif [[ "$pdf_path" == "no-file" ]]; then
 	echo "⚠️ No file selected."
@@ -23,16 +26,7 @@ elif [[ "$pdf_path" == "not-in-pdf-folder" ]]; then
 elif [[ "$pdf_path" != *.pdf ]]; then
 	echo "⚠️ Not a .pdf file."
 	exit 1
-fi
-
-#───────────────────────────────────────────────────────────────────────────────
-# CITEKEY
-
-filename=$(basename "$pdf_path" .pdf | sed -E 's/_.*//')
-entry=$(grep --after-context=20 --max-count=1 --ignore-case "{$filename," "$bibtex_library_path")
-
-# GUARD
-if [[ "$extraction_engine" == "pdfannots" ]] && ! command -v pdfannots &>/dev/null; then
+elif [[ "$extraction_engine" == "pdfannots" ]] && ! command -v pdfannots &>/dev/null; then
 	echo "⚠️ pdfannots not installed."
 	exit 1
 elif [[ "$extraction_engine" == "pdfannots2json" ]] && ! command -v pdfannots2json &>/dev/null; then
@@ -40,9 +34,18 @@ elif [[ "$extraction_engine" == "pdfannots2json" ]] && ! command -v pdfannots2js
 	exit 1
 fi
 
+#───────────────────────────────────────────────────────────────────────────────
+# DETERMINE CITEKEY & OUTPUT NAME
+
+citekey=$(basename "$pdf_path" .pdf | sed -E 's/_.*//')
+[[ -n "$bibtex_library_path" ]] &&
+	entry=$(grep --after-context=20 --max-count=1 --ignore-case "{$citekey," "$bibtex_library_path")
+
 # with citekey
-if [[ -n "$entry" ]]; then
-	osascript -e "display notification \"⏳ Running Extraction for $citkey…\" with title \"Annotation Extractor\""
+if [[ -n "$entry" && -n "$bibtex_library_path" ]]; then
+	osascript -e "display notification \"⏳ Running Extraction for $citekey…\" with title \"Annotation Extractor\""
+	filename="$citekey"
+	[[ -z "$output_path" ]] && output_path="$(dirname "$pdf_path")"
 
 # without citekey
 else
@@ -59,7 +62,7 @@ if [[ "$extraction_engine" == "pdfannots" ]]; then
 else
 	prevDir="$PWD"
 	IMAGE_FOLDER="$output_path/attachments/image_temp"
-	mkdir -p "$IMAGE_FOLDER" && cd "$IMAGE_FOLDER"
+	mkdir -p "$IMAGE_FOLDER" && cd "$IMAGE_FOLDER" || exit 1
 
 	annotations=$(pdfannots2json "$pdf_path" --image-output-path=./ --image-format="png")
 
@@ -88,7 +91,7 @@ else
 	# (rmdir fails if folder is not empty)
 	rmdir "$output_path/attachments"
 
-	cd "$prevDir"
+	cd "$prevDir" || exit 1
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
