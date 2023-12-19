@@ -3,6 +3,6 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 [general]
-hist_file = 
+hist_length = 0
 autocomplete_mode = "fuzzy"
 
