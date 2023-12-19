@@ -336,10 +336,7 @@ end
 
 return {
 	{ -- configure LSPs
-	-- PENDING https://github.com/neovim/nvim-lspconfig/pull/2935
-		"chrisgrieser/nvim-lspconfig",
-		branch = "dev",
-
+		"neovim/nvim-lspconfig",
 		lazy = false,
 		dependencies = { -- loading as dependency ensures it's loaded before lua_ls
 			"folke/neodev.nvim",

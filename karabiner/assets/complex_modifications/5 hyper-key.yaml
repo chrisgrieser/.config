@@ -37,20 +37,8 @@ rules:
               open -a "Alfred Preferences"
               osascript -e 'tell application id "com.runningwithcrayons.Alfred" to search'
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "Insert Mode Vim: ⇪ Hyper + hjklio<space> → ⌫←↓↑→"
+  - description: "Insert Mode Vim: ⇪ Hyper Movements"
     manipulators:
-      # deletion
-      - type: basic
-        from: { key_code: "c", modifiers: { mandatory: [option, command, control] } }
-        to:
-          - { key_code: right_arrow, modifiers: [command, shift] }
-          - key_code: delete_or_backspace
-      - type: basic
-        from: { key_code: "x", modifiers: { mandatory: [option, command, control] } }
-        to:
-          - { key_code: left_arrow, modifiers: [command, shift] }
-          - key_code: delete_or_backspace
-      #─────────────────────────────────────────────────────────────────────────
       # Movement
       - type: basic
         from: { key_code: h, modifiers: { mandatory: [option, command, control] } }
@@ -70,12 +58,12 @@ rules:
           - key_code: right_arrow
       # word to the left
       - type: basic
-        from: { key_code: i, modifiers: { mandatory: [option, command, control] } }
+        from: { key_code: b, modifiers: { mandatory: [option, command, control] } }
         to:
           - { key_code: left_arrow, modifiers: [option] }
       # word to the right
       - type: basic
-        from: { key_code: o, modifiers: { mandatory: [option, command, control] } }
+        from: { key_code: e, modifiers: { mandatory: [option, command, control] } }
         to:
           - { key_code: right_arrow, modifiers: [option] }
       # delete word (use ⌘J from utility hotkeys for changing a word)

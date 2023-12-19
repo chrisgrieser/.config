@@ -1,9 +1,11 @@
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
+-- potential alternatives: 
+-- https://github.com/huggingface/llm-ls
+-- https://docs.sourcegraph.com/cody/overview/install-neovim
 return {
 	{ -- AI Ghost-Text Suggestions
-	-- alternative: https://github.com/huggingface/llm-ls
 		"Exafunction/codeium.vim",
 		event = "InsertEnter",
 		build = function()
