@@ -1,7 +1,8 @@
 # vim: filetype=toml
-# DOCS http://docs.bpython-interpreter.org/configuration.html for all
+# DOCS http://docs.bpython-interpreter.org/configuration.html
 #───────────────────────────────────────────────────────────────────────────────
 
 [general]
-hist_length = 0
+hist_file = "/Users/chrisgrieser/.local/share/bpython_history"
+autocomplete_mode = "fuzzy"
 

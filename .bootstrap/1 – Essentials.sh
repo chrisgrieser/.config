@@ -60,3 +60,5 @@ ln -sf "$HOME/.config/mackup/custom-app-configs" ~/.mackup
 brew install mackup
 mackup restore --force && mackup uninstall --force # sets symlinks, and then writes full files
 
+# zsh (ZDOTDIR set in .zshenv for the remaining config)
+ln -sf "$HOME/.config/zsh/.zshenv" ~

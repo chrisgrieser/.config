@@ -1,13 +1,11 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/ajmarkow/espanso-schema-json/master/schemas/Espanso_Config_File_Schema.json
-#───────────────────────────────────────────────────────────────────────────────
 # DOCS https://espanso.org/docs/configuration/options/
 #───────────────────────────────────────────────────────────────────────────────
 
-toggle_key: OFF
 search_trigger: OFF
-search_shortcut: META+ALT+CTRL+SHIFT+E # = Hyper+E
+search_shortcut: META+ALT+CTRL+X # = Hyper+X
 
-show_icon: false
+show_icon: true
 show_notifications: true
 auto_restart: true
 
