@@ -16,27 +16,6 @@ return {
 			extra = { eol = "Q", above = "qO", below = "qo" },
 		},
 	},
-	{ -- docstrings / annotation comments
-		"danymat/neogen",
-		opts = true,
-		keys = {
-			{
-				"qf",
-				function() require("neogen").generate { type = "func" } end,
-				desc = " Function Annotation",
-			},
-			{
-				"qF",
-				function() require("neogen").generate { type = "file" } end,
-				desc = " File Annotation",
-			},
-			{
-				"qt",
-				function() require("neogen").generate { type = "type" } end,
-				desc = " Type Annotation",
-			},
-		},
-	},
 	{ -- undo history
 		"mbbill/undotree",
 		keys = {
@@ -147,17 +126,6 @@ return {
 					:set_end_pair_length(1),
 			}
 		end,
-	},
-	{ -- preview markdown
-		"iamcco/markdown-preview.nvim",
-		build = function() vim.fn["mkdp#util#install"]() end,
-		-- ft-load-trigger needed for the plugin to work, even though it's only
-		-- loaded on the keymap, probably the plugin has some ftplugin conditions
-		-- doing some pre-loading
-		ft = "markdown",
-		keys = {
-			{ "<D-r>", vim.cmd.MarkdownPreview, ft = "markdown", desc = " Preview" },
-		},
 	},
 	{ -- auto-convert string and f/template string
 		"chrisgrieser/nvim-puppeteer",
