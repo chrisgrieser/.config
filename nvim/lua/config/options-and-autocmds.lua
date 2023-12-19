@@ -160,12 +160,15 @@ autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
 		local b = vim.b[bufnr]
 		if b.saveQueued or bo.buftype ~= "" or bo.ft == "gitcommit" or bo.readonly then return end
 
+		-- save at once on focus loss
+		local debounce = ctx.event == "FocusLost" and 0 or 2000
+
 		b.saveQueued = true
 		vim.defer_fn(function()
 			if not vim.api.nvim_buf_is_valid(bufnr) then return end
 			vim.api.nvim_buf_call(bufnr, function() vim.cmd("silent! noautocmd update!") end)
 			b.saveQueued = false
-		end, 2000)
+		end, debounce)
 	end,
 })
 
