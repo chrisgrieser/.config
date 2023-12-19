@@ -66,8 +66,8 @@ end
 
 --------------------------------------------------------------------------------
 
--- DOCS https://wezfurlong.org/wezterm/cli/cli/send-text
 function M.sendToWezTerm()
+	-- open wezterm, if not already running
 	vim.fn.system([[
 		open -a 'WezTerm'
 		i=0
@@ -79,6 +79,7 @@ function M.sendToWezTerm()
 		sleep 0.2
 	]])
 
+	-- DOCS https://wezfurlong.org/wezterm/cli/cli/send-text
 	local text
 	if vim.fn.mode() == "n" then
 		text = vim.api.nvim_get_current_line() .. "\n"
