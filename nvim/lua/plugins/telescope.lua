@@ -233,8 +233,7 @@ local function telescopeConfig()
 				prompt_prefix = "󰊢 ",
 				initial_mode = "normal",
 				layout_config = { horizontal = { height = 0.99 } },
-				-- add commit time (%cr) and `--follow`
-				git_command = { "git", "log", "--pretty=%h %s\t%cr", "--follow" },
+				git_command = { "git", "log", "--pretty=%h %s\t%cr" }, -- add commit time (%cr)
 			},
 			keymaps = {
 				prompt_prefix = " ",
