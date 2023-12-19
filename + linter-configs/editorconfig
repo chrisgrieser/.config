@@ -22,6 +22,8 @@ indent_size = 4
 tab_width = 4
 
 [*.md]
+# pandoc-formatting and various other tools only work with spaces
+indent_style = space
 indent_size = 4
 tab_width = 4
 trim_trailing_whitespace = false

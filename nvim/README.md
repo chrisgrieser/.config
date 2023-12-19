@@ -18,8 +18,6 @@
 │  └── project-specific
 └── templates # skeleton files
 ```
-1. foo
-1. bar
 
 The tree was generated using <https://tree.nathanfriend.io/>
 
