@@ -167,6 +167,38 @@ end
 
 --------------------------------------------------------------------------------
 
+-- simplified version of neogen.nvim
+function M.docstring()
+	-- GUARD
+	local supportedFts = {
+		"lua",
+		"python",
+		"typescript",
+		"javascript",
+	}
+	if not vim.tbl_contains(supportedFts, vim.bo.filetype) then
+		u.notify("Unsupported filetype", "warn")
+		return
+	elseif
+		re
+	end
+
+	local ft = vim.bo.filetype
+	vim.cmd.TSTextobjectGotoPreviousStart("@function.outer")
+
+	if ft == "python" then
+		local ln = vim.api.nvim_win_get_cursor(0)[1]
+		local indent = vim.api.nvim_get_current_line():match("^%s*") .. (" "):rep(4)
+		vim.api.nvim_buf_set_lines(0, ln, ln, false, { indent .. ('"'):rep(6) })
+		vim.api.nvim_win_set_cursor(0, { ln + 1, #indent + 3 })
+		vim.cmd.startinsert()
+	elseif ft == "lua" then
+	elseif ft == "javascript" or ft == "typescript" then
+	end
+end
+
+--------------------------------------------------------------------------------
+
 ---simplified implementation of tabout.nvim, to be used in insert-mode
 function M.tabout()
 	local line = vim.api.nvim_get_current_line()

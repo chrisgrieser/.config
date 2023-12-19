@@ -133,6 +133,15 @@ keymap({ "n", "x" }, "ö", "<C-x>")
 keymap("n", "U", "<cmd>silent redo<CR>")
 keymap("n", "u", "<cmd>silent undo<CR>")
 
+-- Docstring
+-- (simplified version of neogen.nvim)
+keymap(
+	"n",
+	"qf",
+	function() require("funcs.quality-of-life").docstring() end,
+	{ desc = " Function Docstring" }
+)
+
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
 keymap("n", "<Down>", [[<cmd>. move +1<CR>==]], { desc = "󰜮 Move Line Down" })
