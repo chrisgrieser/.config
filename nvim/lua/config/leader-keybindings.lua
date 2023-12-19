@@ -34,6 +34,7 @@ keymap("n", "<leader>lf", function()
 	local out = {
 		"filetype: " .. bo.filetype,
 		"buftype: " .. bo.buftype,
+		"cwd: " .. (vim.loop.cwd() or "n/a"),
 		("indent: %s (%s)"):format(bo.expandtab and "spaces" or "tabs", bo.tabstop),
 	}
 	local ok, node = pcall(vim.treesitter.get_node)
