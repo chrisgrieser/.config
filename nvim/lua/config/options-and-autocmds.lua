@@ -13,8 +13,6 @@ vim.filetype.add {
 		applescript = "applescript",
 	},
 	filename = {
-		[".zshrc"] = "sh",
-		[".zshenv"] = "sh",
 		[".ignore"] = "gitignore", -- fd ignore files
 	},
 }
@@ -155,16 +153,17 @@ autocmd({ "BufNew", "BufReadPost" }, {
 -- AUTO-SAVE
 
 opt.autowriteall = true
-autocmd({ "InsertLeave", "TextChanged", "BufLeave", "BufDelete", "FocusLost" }, {
+autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
 	callback = function(ctx)
-		local bo = vim.bo[ctx.buf]
-		local b = vim.b[ctx.buf]
+		local bufnr = ctx.buf
+		local bo = vim.bo[bufnr]
+		local b = vim.b[bufnr]
 		if b.saveQueued or bo.buftype ~= "" or bo.ft == "gitcommit" or bo.readonly then return end
 
 		b.saveQueued = true
 		vim.defer_fn(function()
-			if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
-			vim.cmd("silent! noautocmd update!")
+			if not vim.api.nvim_buf_is_valid(bufnr) then return end
+			vim.api.nvim_buf_call(bufnr, function() vim.cmd("silent! noautocmd update!") end)
 			b.saveQueued = false
 		end, 2000)
 	end,
@@ -173,8 +172,15 @@ autocmd({ "InsertLeave", "TextChanged", "BufLeave", "BufDelete", "FocusLost" }, 
 --------------------------------------------------------------------------------
 -- AUTO-CD TO PROJECT ROOT (PROJECT.NVIM LITE)
 local autoCdConfig = {
-	rootFiles = { "info.plist", "Makefile", ".git" }, -- order = priority
-	childOfDir = { ".config", "com~apple~CloudDocs" },
+	rootFiles = { -- order = priority
+		"info.plist", -- Alfred workflows
+		"Makefile",
+		".git",
+	},
+	childOfDir = {
+		".config", -- Dotfiles
+		"com~apple~CloudDocs", -- iCloud Drive
+	},
 }
 
 vim.api.nvim_create_autocmd("BufEnter", {

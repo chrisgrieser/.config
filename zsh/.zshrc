@@ -1,3 +1,4 @@
+# vim: filetype=sh
 CONFIG_FILES=(
 	load_plugins
 	plugin_cli_settings
