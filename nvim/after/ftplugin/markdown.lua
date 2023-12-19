@@ -40,6 +40,24 @@ vim.keymap.set(
 )
 
 --------------------------------------------------------------------------------
+-- Markdown Preview (replaces markdown-preview.nvim)
+vim.keymap.set("n", "<D-r>", function()
+	local input = vim.api.nvim_buf_get_name(0)
+	local output = "/tmp/markdown-preview.html"
+	local githubCssPath = os.getenv("HOME") .. "/.config/pandoc/css/github-markdown.css"
+	vim.fn.system {
+		"pandoc",
+		"--from=gfm", -- gfm = GitHub Flavored Markdown
+		input,
+		"--output=" .. output,
+		"--standalone",
+		"--css=" .. githubCssPath,
+	}
+	vim.fn.system { "open", output } -- macOS open command
+end, { desc = " Preview", buffer = true })
+
+
+--------------------------------------------------------------------------------
 -- HEADING navigation (instead of symbols)
 
 -- stylua: ignore

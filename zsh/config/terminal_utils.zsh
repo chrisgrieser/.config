@@ -69,7 +69,7 @@ function p {
 	"json")
 		command jless --no-line-numbers "$file"
 		;;
-	"pdf")
+	"pdf", | "html")
 		qlmanage -p "$file"
 		;;
 	"gif" | "png" | "jpg" | "jpeg" | "webp" | "tiff")
@@ -110,7 +110,7 @@ function lc() {
 }
 
 # completions for it
-_lc () {
+_lc() {
 	# turn lines into array
 	local -a _last_cmds=()
 	while IFS='' read -r value; do
