@@ -30,8 +30,9 @@ function run() {
 			let displayName = name
 				.replace(/-\d$/, "")
 				.replace(/^extension-/, "Extension: ")
+				.replace(/^Option--/, "--")
 				.replaceAll("-", " ")
-				.replace(/^option {2}/, "--");
+				.replace(/\[$/, "") // FIX brackets leftover in pandoc html
 			displayName = displayName.charAt(0).toUpperCase() + displayName.slice(1); // capitalize
 
 			// construct breadcrumbs based on order of appearenace of headings
