@@ -125,7 +125,7 @@ keymap("x", "<D-k>", "<Esc>`<i[<Esc>`>la]()<Esc>hp", { desc = "  Link", bu
 keymap("i", "<D-k>", "[]()<Left><Left><Left>", { desc = "  Link", buffer = true })
 
 -- cmd+b: bold
-keymap("n", "<D-b>", "bi__<Esc>ea**<Esc>", { desc = "  Bold", buffer = true })
+keymap("n", "<D-b>", "bi**<Esc>ea**<Esc>", { desc = "  Bold", buffer = true })
 keymap("x", "<D-b>", "<Esc>`<i**<Esc>`>lla**<Esc>", { desc = "  Bold", buffer = true })
 keymap("i", "<D-b>", "****<Left><Left>", { desc = "  Bold", buffer = true })
 
