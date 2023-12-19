@@ -41,8 +41,12 @@ return {
 	-----------------------------------------------------------------------------
 	{ -- treesitter-based textobjs
 		"nvim-treesitter/nvim-treesitter-textobjects",
-		-- event = "BufReadPre", -- not later to ensure it loads in time properly
 		dependencies = "nvim-treesitter/nvim-treesitter",
+		cmd = { -- used in some of my mappings
+			"TSTextobjectSelect",
+			"TSTextobjectGotoNextStart",
+			"TSTextobjectGotoPreviousStart",
+		},
 		keys = {
 			{
 				"q",
