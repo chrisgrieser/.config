@@ -20,8 +20,9 @@ function run() {
 		.doShellScript(`curl -s "${pandocDocsUrl}"`)
 		.split(">") // INFO split by tags, not lines, since html formatting breaks up some tags across lines
 		.filter(
-			// biome-ignore format: off
-			(htmlTag) => (htmlTag.includes("<span id=") || htmlTag.includes("<section id=")) && !htmlTag.includes('id="cb'),
+			(htmlTag) =>
+				(htmlTag.includes("<span id=") || htmlTag.includes("<section id=")) &&
+				!htmlTag.includes('id="cb'),
 		)
 		.map((htmlTag) => {
 			htmlTag = htmlTag.replaceAll("\r", "");
@@ -32,7 +33,7 @@ function run() {
 				.replace(/^extension-/, "Extension: ")
 				.replace(/^Option--/, "--")
 				.replaceAll("-", " ")
-				.replace(/\[$/, "") // FIX brackets leftover in pandoc html
+				.replace(/\[$/, ""); // FIX brackets leftover in pandoc html
 			displayName = displayName.charAt(0).toUpperCase() + displayName.slice(1); // capitalize
 
 			// construct breadcrumbs based on order of appearenace of headings
