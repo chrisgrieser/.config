@@ -65,11 +65,11 @@ local function cmpconfig()
 			["<D-c>"] = cmp.mapping.complete(), -- manually triggering useful for yaml/json
 
 			-- Next item, or trigger completion, or insert normal tab
-			["<Tab>"] = cmp.mapping(function(_)
+			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_next_item()
 				else
-					require("funcs.quality-of-life").tabout()
+					fallback()
 				end
 			end, { "i", "s" }),
 			["<S-Tab>"] = cmp.mapping(function(fallback)

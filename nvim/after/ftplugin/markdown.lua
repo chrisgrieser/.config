@@ -107,8 +107,17 @@ end, { desc = " SearchLink (ddgr)", buffer = true })
 --------------------------------------------------------------------------------
 -- GUI KEYBINDINGS
 
--- cmd+u: markdown link
+-- cmd+u: markdown bullet
 keymap("n", "<D-u>", "mzI- <Esc>`z", { desc = " Bullet List", buffer = true })
+
+-- cmd+c: CodeBlock
+keymap("n", "<D-c>", function()
+	local ln = vim.api.nvim_win_get_cursor(0)[1]
+	vim.api.nvim_buf_set_lines(0, ln, ln, false, { "```", "```", "" })
+	-- insert mode at language block
+	vim.api.nvim_win_set_cursor(0, { ln + 1, 0 })
+	vim.cmd.startinsert { bang = true }
+end, { desc = " Code Block", buffer = true })
 
 -- cmd+k: markdown link
 keymap("n", "<D-k>", "bi[<Esc>ea]()<Esc>hp", { desc = "  Link", buffer = true })

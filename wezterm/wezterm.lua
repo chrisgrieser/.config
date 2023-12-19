@@ -119,7 +119,7 @@ return {
 	font = wt.font {
 		family = "Iosevka Term",
 		weight = "Medium",
-		harfbuzz_features = { "calt=0", "ERLA=1" }, -- disable only `+++` ligatures https://typeof.net/Iosevka/
+		harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
 	},
 	font_size = fontSize,
 	command_palette_font_size = fontSize,
