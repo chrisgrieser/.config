@@ -3,6 +3,6 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 [general]
-hist_file = "/Users/chrisgrieser/.local/share/bpython_history"
+hist_file = "~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/bpython_history"
 autocomplete_mode = "fuzzy"
 
