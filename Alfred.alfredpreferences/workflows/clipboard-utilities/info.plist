@@ -130,7 +130,7 @@
 	<key>description</key>
 	<string></string>
 	<key>disabled</key>
-	<true/>
+	<false/>
 	<key>name</key>
 	<string>Clipboard Utilities</string>
 	<key>objects</key>
@@ -412,9 +412,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>Killring: cycle through clipboard history</string>
 			<key>xpos</key>
-			<real>20</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>165</real>
+			<real>45</real>
 		</dict>
 		<key>10C0AD11-256B-43A0-AB25-0BFD581CE9C4</key>
 		<dict>
@@ -425,7 +425,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>350</real>
 			<key>ypos</key>
-			<real>165</real>
+			<real>45</real>
 		</dict>
 		<key>1722B571-8C67-4F8E-83CC-B056C7A04CDA</key>
 		<dict>
@@ -434,7 +434,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>165</real>
 			<key>ypos</key>
-			<real>470</real>
+			<real>350</real>
 		</dict>
 		<key>6BD613DE-67C3-46DE-B544-52922651AF7A</key>
 		<dict>
@@ -445,7 +445,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>515</real>
 			<key>ypos</key>
-			<real>165</real>
+			<real>45</real>
 		</dict>
 		<key>8BDCE90E-0EB2-44EA-A552-CBE1236F8673</key>
 		<dict>
@@ -456,7 +456,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>515</real>
 			<key>ypos</key>
-			<real>310</real>
+			<real>190</real>
 		</dict>
 		<key>8D4C472C-D8F1-4C6F-8449-C783B3793BD6</key>
 		<dict>
@@ -465,9 +465,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>sequential paste</string>
 			<key>xpos</key>
-			<real>20</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>310</real>
+			<real>190</real>
 		</dict>
 		<key>94DCD17D-DA21-4C88-95B4-2E4DAE903C4B</key>
 		<dict>
@@ -476,7 +476,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>320</real>
 		</dict>
 		<key>A00F9060-C8C1-42AA-9FB7-1104F7A40E1E</key>
 		<dict>
@@ -485,16 +485,16 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>180</real>
 			<key>ypos</key>
-			<real>165</real>
+			<real>45</real>
 		</dict>
 		<key>B0BC0002-BEC9-40E4-9EF5-DC5273E711B1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>20</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>320</real>
 		</dict>
 		<key>B2547A67-7A21-4CA8-8416-907D54C8A89F</key>
 		<dict>
@@ -505,7 +505,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>415</real>
 			<key>ypos</key>
-			<real>340</real>
+			<real>220</real>
 		</dict>
 		<key>F7EB5CA5-0498-4173-AF9E-A3B3EDD595B0</key>
 		<dict>
@@ -514,7 +514,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>310</real>
+			<real>190</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
