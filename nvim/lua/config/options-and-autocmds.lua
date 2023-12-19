@@ -178,7 +178,7 @@ local autoCdConfig = {
 		".git",
 	},
 	childOfDir = {
-		".config", -- Dotfiles
+		".config", -- Dotfile repo
 		"com~apple~CloudDocs", -- iCloud Drive
 	},
 }
