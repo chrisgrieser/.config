@@ -20,7 +20,7 @@ alias bh='brew home'
 alias bl='brew list'
 alias bi='brew install'
 alias br='brew reinstall'
-alias bu='brew uninstall --zap' # codespell-ignore
+alias bu='brew uninstall --zap' 
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -65,6 +65,7 @@ function update() {
 	npm update --location=global
 
 	_print-section "PIP3"
+	python3 -m pip install --upgrade pip # update pip itself
 	command pip3 list --not-required --outdated | 
 		sed "1,2d" | cut -d" " -f1 | 
 		xargs command pip3 install --upgrade
