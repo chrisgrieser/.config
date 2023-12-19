@@ -34,15 +34,6 @@
 		"body": ["<details>", "<summary>${1:Text}</summary>", "$0", "</details>"],
 		"description": "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details"
 	},
-	"Insert task": {
-		"prefix": "task",
-		"body": "- [ ] $0",
-		"description": "Insert task"
-	},
-	"Markdown Codeblock": {
-		"prefix": [",,", "Codeblock"],
-		"body": ["```${1:lang}", "$0", "```"]
-	},
 	"insert table 2x2": {
 		"prefix": "table (2x2)",
 		"body": [
