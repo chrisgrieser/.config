@@ -62,19 +62,13 @@ serverConfigs.bashls = {
 	},
 }
 -- WORKAROUND: use efm to use shellcheck with zsh files
-local markdownlint = require("efmls-configs.linters.markdownlint")
-local shellcheck = require("efmls-configs.linters.shellcheck")
-local languages = {
-	sh = { shellcheck },
-	markdown = { markdownlint },
-}
+
+--------------------------------------------------------------------------------
+-- EFM: Markdown & Shell
 
 serverConfigs.efm = {
-	filetypes = vim.tbl_keys(languages),
-	settings = {
-		rootMarkers = { ".git/" },
-		languages = languages,
-	},
+	cmd = { "efm-langserver", "-c", linterConfig .. "/efm.yaml" },
+	filetypes = { "sh", "markdown" }, -- limit to filestypes needed
 }
 
 --------------------------------------------------------------------------------
@@ -355,8 +349,5 @@ return {
 			setupAllLsps()
 			require("lspconfig.ui.windows").default_options.border = u.borderStyle
 		end,
-	},
-	{
-		"creativenull/efmls-configs-nvim",
 	},
 }

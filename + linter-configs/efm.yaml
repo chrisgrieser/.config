@@ -3,10 +3,7 @@
 # DOCS https://github.com/mattn/efm-langserver/blob/master/schema.md
 #───────────────────────────────────────────────────────────────────────────────
 
-root-markers:
-  - .git/
-  - Makefile
-  - .zshrc
+root-markers: [.git/]
 
 tools:
   shellcheck: &shellcheck
@@ -21,8 +18,9 @@ tools:
 
   markdownlint: &markdownlint
     lint-source: markdownlint
-    lint-command: |
+    lint-command: >
       markdownlint --stdin --config="$HOME/.config/+ linter-configs/markdownlint.yaml"
+      --disable=
     lint-stdin: true
     lint-severity: 2 # 2 = warning
     lint-formats:

@@ -48,7 +48,7 @@ local function customHighlights()
 		updateHl("Spell" .. type, "gui=underdotted cterm=underline")
 	end
 
-	-- markdown: color 
+	-- markdown: color
 	local headingFg = u.getHighlightValue("Function", "fg")
 	local bg = u.getHighlightValue("ColorColumn", "bg")
 	for lvl = 1, 6, 1 do
@@ -133,7 +133,7 @@ local function themeModifications()
 		updateCursor("o-v:hor10")
 		if mode == "dark" then updateHl("ColorColumn", "guibg=#2e3742") end
 	elseif theme == "kanagawa" then
-		overwriteHl("TreesitterContext", { bg = "#1c1c25" })
+		overwriteHl("TreesitterContext", { bg = "#2b2b39" })
 		-- transparent sign column
 		clearHl("SignColumn")
 		updateHl("GitSignsAdd", "guibg=none")
