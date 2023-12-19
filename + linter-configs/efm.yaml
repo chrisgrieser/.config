@@ -1,5 +1,6 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/mattn/efm-langserver/master/schema.json
 # DOCS https://github.com/mattn/efm-langserver#example-for-configyaml
+# DOCS https://github.com/mattn/efm-langserver/blob/master/schema.md
 #───────────────────────────────────────────────────────────────────────────────
 
 root-markers:
@@ -9,14 +10,27 @@ root-markers:
 
 tools:
   shellcheck: &shellcheck
-    lint-command: "shellcheck --format=gcc --external-sources --shell=bash -"
+    lint-source: shellcheck
+    lint-command: |
+      shellcheck --format=gcc --external-sources --shell=bash -
     lint-stdin: true
-    lint-source: "shellcheck"
     lint-formats:
       - "%f:%l:%c: %trror: %m [SC%n]"
       - "%f:%l:%c: %tarning: %m [SC%n]"
       - "%f:%l:%c: %tote: %m [SC%n]"
 
+  markdownlint: &markdownlint
+    lint-source: markdownlint
+    lint-command: |
+      markdownlint --stdin --config "$HOME/.config/+ linter-configs/markdownlint.yaml"
+    lint-stdin: true
+    lint-severity: 2 # 2 = warning
+    lint-formats:
+      - "%f:%l MD%n/%m"
+      - "%f:%l:%c MD%n/%m"
+
 languages:
   sh:
     - <<: *shellcheck
+  markdown:
+    - <<: *markdownlint

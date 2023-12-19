@@ -1,4 +1,5 @@
 ## Config structure
+
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img src="https://dotfyle.com/chrisgrieser/config-nvim/badges/plugins?style=flat"/></a>
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img src="https://dotfyle.com/chrisgrieser/config-nvim/badges/leaderkey?style=flat"/></a>
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img src="https://dotfyle.com/chrisgrieser/config-nvim/badges/plugin-manager?style=flat"/></a>
@@ -17,6 +18,8 @@
 │  └── project-specific
 └── templates # skeleton files
 ```
+1. foo
+1. bar
 
 The tree was generated using <https://tree.nathanfriend.io/>
 

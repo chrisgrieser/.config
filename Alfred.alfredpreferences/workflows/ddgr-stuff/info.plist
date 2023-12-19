@@ -506,6 +506,27 @@
 			<key>variable</key>
 			<string>region</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>see `ddgr --help`. Adding/Removing `--noua` sometimes fixes errors.</string>
+			<key>label</key>
+			<string>ddgr arguments</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>ddgr_args</string>
+		</dict>
 	</array>
 	<key>version</key>
 	<string></string>

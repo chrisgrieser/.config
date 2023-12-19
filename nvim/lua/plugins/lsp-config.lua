@@ -65,7 +65,7 @@ serverConfigs.bashls = {
 -- WORKAROUND: use efm to use shellcheck with zsh files
 serverConfigs.efm = {
 	cmd = { "efm-langserver", "-c", linterConfig .. "/efm.yaml" },
-	filetypes = { "sh" }, -- limit to filestypes needed
+	filetypes = { "sh", "markdown" }, -- limit to filestypes needed
 }
 
 --------------------------------------------------------------------------------
