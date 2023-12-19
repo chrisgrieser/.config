@@ -168,32 +168,43 @@ end
 --------------------------------------------------------------------------------
 
 -- simplified version of neogen.nvim
+-- requires nvim-treesitter-textobjects
 function M.docstring()
 	-- GUARD
-	local supportedFts = {
-		"lua",
-		"python",
-		"typescript",
-		"javascript",
-	}
+	local supportedFts = { "lua", "python", "javascript" }
 	if not vim.tbl_contains(supportedFts, vim.bo.filetype) then
-		u.notify("Unsupported filetype", "warn")
+		u.notify("Unsupported filetype.", "warn")
 		return
-	elseif
-		re
 	end
 
 	local ft = vim.bo.filetype
 	vim.cmd.TSTextobjectGotoPreviousStart("@function.outer")
 
+	local indent = vim.api.nvim_get_current_line():match("^%s*")
+	local ln = vim.api.nvim_win_get_cursor(0)[1]
+
 	if ft == "python" then
-		local ln = vim.api.nvim_win_get_cursor(0)[1]
-		local indent = vim.api.nvim_get_current_line():match("^%s*") .. (" "):rep(4)
+		indent = indent .. (" "):rep(4)
 		vim.api.nvim_buf_set_lines(0, ln, ln, false, { indent .. ('"'):rep(6) })
 		vim.api.nvim_win_set_cursor(0, { ln + 1, #indent + 3 })
 		vim.cmd.startinsert()
 	elseif ft == "lua" then
-	elseif ft == "javascript" or ft == "typescript" then
+		vim.api.nvim_buf_set_lines(0, ln - 1, ln - 1, false, { "--" })
+		vim.api.nvim_win_set_cursor(0, { ln, 0 })
+		vim.cmd.startinsert { bang = true }
+		-- need to manually press `-` to trigger lua-lsp completion
+		-- TODO figure out how to trigger it programmatically
+	elseif ft == "javascript" then
+		normal("t)") -- go to parameter, since cursor has to be on diagnostic for code action
+		vim.lsp.buf.code_action {
+			filter = function(action) return action.title == "Infer parameter types from usage" end,
+			apply = true,
+		}
+		-- goto docstring (delayed, so code action can finish first)
+		vim.defer_fn(function ()
+			vim.api.nvim_win_set_cursor(0, { ln + 1, 0 })
+			normal("t}") 
+		end, 100)
 	end
 end
 
