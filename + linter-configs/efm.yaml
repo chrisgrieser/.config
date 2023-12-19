@@ -15,19 +15,19 @@ tools:
       shellcheck --format=gcc --external-sources --shell=bash -
     lint-stdin: true
     lint-formats:
-      - "%f:%l:%c: %trror: %m [SC%n]"
-      - "%f:%l:%c: %tarning: %m [SC%n]"
-      - "%f:%l:%c: %tote: %m [SC%n]"
+      - "-:%l:%c: %trror: %m [SC%n]"
+      - "-:%l:%c: %tarning: %m [SC%n]"
+      - "-:%l:%c: %tote: %m [SC%n]"
 
   markdownlint: &markdownlint
     lint-source: markdownlint
     lint-command: |
-      markdownlint --stdin --config "$HOME/.config/+ linter-configs/markdownlint.yaml"
+      markdownlint --stdin --config="$HOME/.config/+ linter-configs/markdownlint.yaml"
     lint-stdin: true
     lint-severity: 2 # 2 = warning
     lint-formats:
-      - "%f:%l MD%n/%m"
-      - "%f:%l:%c MD%n/%m"
+      - "stdin:%l %m"
+      - "stdin:%l:%c %m"
 
 languages:
   sh:
