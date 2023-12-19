@@ -48,13 +48,13 @@ local function customHighlights()
 		updateHl("Spell" .. type, "gui=underdotted cterm=underline")
 	end
 
-	-- markdown: color
+	-- markdown: color headings & codeblocks
 	local headingFg = u.getHighlightValue("Function", "fg")
 	local bg = u.getHighlightValue("ColorColumn", "bg")
 	for lvl = 1, 6, 1 do
 		overwriteHl(("@text.title.%s.markdown"):format(lvl), { bg = bg, fg = headingFg })
 	end
-	updateHl("@text.literal", "guibg=" .. bg)
+	updateHl("@text.literal.block", "guibg=" .. bg) 
 end
 
 local function themeModifications()
