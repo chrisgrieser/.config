@@ -31,6 +31,10 @@ jsconfig.json
 esbuild.config.mjs
 biome.json
 
+# academic software projects
+CITATION.cff
+CITATION.bib
+
 # python
 __init__.py
 pyproject.toml
@@ -39,6 +43,9 @@ requirements.txt
 # Alfred
 info.plist
 prefs.plist
+OneUpdater.sh
+alfred.d.ts
+jxa-globals.d.ts
 # images using UUIDs
 ????????-????-????-????-????????????.png
 

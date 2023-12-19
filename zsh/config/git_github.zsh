@@ -78,7 +78,7 @@ compdef _gc gC
 #───────────────────────────────────────────────────────────────────────────────
 
 # select a recent commit to fixup *and* autosquash (not marked for next rebase!)
-function fixup {
+function gf {
 	local target
 	target=$(_gitlog --no-graph -n 15 | fzf --ansi --no-sort --no-info | cut -d" " -f1)
 	[[ -z "$target" ]] && return 0
