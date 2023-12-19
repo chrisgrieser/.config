@@ -92,12 +92,12 @@ keymap("n", "<localleader>i", function()
 	vim.api.nvim_set_current_line(htmlImage)
 end, { desc = "  MD image to <img>", buffer = true })
 
--- searchlink / ddgr
+-- ddgr (searchlink)
 keymap({ "n", "x" }, "<localleader>k", function()
 	local query
 	u.normal(fn.mode() == "n" and '"zciw' or '"zc')
 	query = fn.getreg("z")
-	local jsonResponse = fn.system(("ddgr --num=1 --json '%s'"):format(query))
+	local jsonResponse = fn.system(("ddgr --num=1 --unsafe --noua --json '%s'"):format(query))
 	local link = vim.json.decode(jsonResponse)[1].url
 	local mdlink = ("[%s](%s)"):format(query, link)
 	fn.setreg("z", mdlink)
