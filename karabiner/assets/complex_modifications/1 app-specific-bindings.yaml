@@ -47,6 +47,35 @@ rules:
                 end tell'
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }]
   #─────────────────────────────────────────────────────────────────────────────
+  - description: "(Apps) Google Docs PWA"
+    manipulators:
+      # Search Help Menu (= Command Palette)
+      - type: basic
+        from: { key_code: p, modifiers: { mandatory: [command] } }
+        to:
+          - key_code: m
+            modifiers: [option]
+        conditions:
+          - type: frontmost_application_if
+            file_paths: ["/Google Docs.app/"]
+      # Comment
+      - type: basic
+        from: { key_code: k, modifiers: { mandatory: [command] } }
+        to:
+          - key_code: m
+            modifiers: [command, option]
+        conditions:
+          - type: frontmost_application_if
+            file_paths: ["/Google Docs.app/"]
+      # Footnote
+      - type: basic
+        from: { key_code: non_us_backslash, modifiers: { mandatory: [command] } }
+        to:
+          - key_code: f
+            modifiers: [command, option]
+        conditions:
+          - type: frontmost_application_if
+            file_paths: ["/Google Docs.app/"]
   - description: "(Apps) Finder"
     manipulators:
       # sidebar

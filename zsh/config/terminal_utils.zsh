@@ -1,10 +1,5 @@
 # Quick Open File
 function o() {
-	if [[ ! -x "$(command -v fzf)" ]]; then print "\033[1;33mfzf not installed.\033[0m" && return 1; fi
-	if [[ ! -x "$(command -v fd)" ]]; then print "\033[1;33mfd not installed.\033[0m" && return 1; fi
-	if [[ ! -x "$(command -v eza)" ]]; then print "\033[1;33meza not installed.\033[0m" && return 1; fi
-	if [[ ! "$(command -v bat)" ]]; then print "\033[1;33mbat not installed.\033[0m" && return 1; fi
-
 	local input="$*"
 
 	# skip `fzf` if file is fully named, e.g. through tab completion
@@ -44,9 +39,6 @@ function o() {
 
 # nicer & explorable tree view
 function _tree {
-	if [[ ! -x "$(command -v eza)" ]]; then print "\e[1;33meza not installed.\e[0m" && return 1; fi
-	if [[ ! -x "$(command -v fzf)" ]]; then print "\e[1;33mfzf not installed.\e[0m" && return 1; fi
-
 	eza --tree --level="$1" --color=always --icons=always --git-ignore \
 		--no-quotes --hyperlink |
 		sed '1d' |
@@ -81,14 +73,14 @@ function p {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# copies result of last command
+# copy result of last command
 function lr() {
 	to_copy=$(eval "$(history -n -1)")
 	print "\e[1;32mCopied:\e[0m $to_copy"
 	echo -n "$to_copy" | pbcopy
 }
 
-# copies last command(s)
+# copy last command(s)
 function lc() {
 	local to_copy cmd
 	if [[ $# -gt 0 ]]; then
@@ -112,11 +104,10 @@ _lc() {
 	local -a _last_cmds=()
 	while IFS='' read -r value; do
 		_last_cmds+=("$value")
-	done < <(history -rn)
+	done < <(history -rn -10)
 
-	local _values=({1..16})
-	local expl
-	_description -V last-commands expl 'Last Commands'
+	local _values=({1..10})
+	local expl && _description -V last-commands expl 'Last Commands'
 	compadd "${expl[@]}" -Q -l -d _last_cmds -a _values
 }
 compdef _lc lc

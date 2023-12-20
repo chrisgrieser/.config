@@ -73,8 +73,7 @@ _gc() {
 	((CURRENT != 2)) && return # only complete first word
 	local cc=("fix" "feat" "chore" "docs" "style" "refactor" "perf"
 		"test" "build" "ci" "revert" "improv" "break")
-	local expl
-	_description -V conventional-commit expl 'Conventional Commit Keyword'
+	local expl && _description -V conventional-commit expl 'Conventional Commit Keyword'
 	compadd "${expl[@]}" -P'"' -S":" -- "${cc[@]}"
 }
 compdef _gc gc
