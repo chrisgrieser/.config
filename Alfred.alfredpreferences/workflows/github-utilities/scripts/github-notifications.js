@@ -23,11 +23,11 @@ function httpRequestWithHeaders(url, header, extraOpts) {
 }
 
 /**
- * @param {string} absoluteDate string to be converted to a date
+ * @param {string} isoDateStr string to be converted to a date
  * @return {string} relative date
  */
-function relativeDate(absoluteDate) {
-	const deltaSecs = (+new Date() - +new Date(absoluteDate)) / 1000;
+function humanRelativeDate(isoDateStr) {
+	const deltaSecs = (+new Date() - +new Date(isoDateStr)) / 1000;
 	/** @type {"year"|"month"|"week"|"day"|"hour"|"minute"|"second"} */
 	let unit;
 	let delta;
@@ -71,7 +71,7 @@ function run() {
 		return JSON.stringify({
 			items: [
 				{
-					title: "⚠️ No $GITHUB_TOKEN found.",
+					title: "! No $GITHUB_TOKEN found.",
 					subtitle: "Please export it in your `.zshenv`.",
 					valid: false,
 				},
@@ -116,7 +116,7 @@ function run() {
 		// biome-ignore lint/style/useNamingConvention: not by me
 		Issue: "🔵",
 		// biome-ignore lint/style/useNamingConvention: not by me
-		Discussion: "🏛️",
+		Discussion: "🏛",
 		// biome-ignore lint/style/useNamingConvention: not by me
 		CheckSuite: "🤖",
 		// biome-ignore lint/style/useNamingConvention: not by me
@@ -129,17 +129,17 @@ function run() {
 		team_mention: "⭕",
 		subscribed: "🔔",
 		comment: "💬",
-		assign: "➡️",
+		assign: "➡",
 		// biome-ignore lint/style/useNamingConvention: not by me
 		ci_activity: " ",
 		invitation: "👥",
-		manual: "Ⓜ️",
+		manual: "Ⓜ",
 		// biome-ignore lint/style/useNamingConvention: not by me
-		review_requested: "➡️",
+		review_requested: "➡",
 		// biome-ignore lint/style/useNamingConvention: not by me
 		security_alert: "❗",
 		// biome-ignore lint/style/useNamingConvention: not by me
-		state_change: "✴️",
+		state_change: "✴",
 	};
 
 	/** @type AlfredItem[] */
@@ -147,7 +147,7 @@ function run() {
 		const apiUrl = notif.subject.latest_comment_url || notif.subject.url || "";
 		const typeIcon = typeMaps[notif.subject.type] || notif.subject.type;
 		const reasonIcon = reasonMaps[notif.reason] || notif.reason;
-		const updatedAt = relativeDate(notif.updated_at);
+		const updatedAt = humanRelativeDate(notif.updated_at);
 		const subtitle = `${typeIcon} ${reasonIcon}  ${notif.repository.name}  ·  ${updatedAt}`;
 
 		return {
@@ -162,7 +162,7 @@ function run() {
 						// CAVEAT mark-as-unread not support in GitHub Notification API
 						valid: !showReadNotifs,
 						subtitle: showReadNotifs ? "" : "⌘: Mark as Read",
-						mode: "mark-as-read", 
+						mode: "mark-as-read",
 						notificationsLeft: responseObj.length - 1,
 					},
 				},

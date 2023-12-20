@@ -15,11 +15,11 @@ function httpRequest(url) {
 }
 
 /**
- * @param {string} absoluteDate string to be converted to a date
+ * @param {string} isoDateStr string to be converted to a date
  * @return {string} relative date
  */
-function relativeDate(absoluteDate) {
-	const deltaSecs = (+new Date() - +new Date(absoluteDate)) / 1000;
+function humanRelativeDate(isoDateStr) {
+	const deltaSecs = (+new Date() - +new Date(isoDateStr)) / 1000;
 	/** @type {"year"|"month"|"week"|"day"|"hour"|"minute"|"second"} */
 	let unit;
 	let delta;
@@ -45,7 +45,7 @@ function relativeDate(absoluteDate) {
 		unit = "year";
 		delta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7 / 4 / 12);
 	}
-	const formatter = new Intl.RelativeTimeFormat("en", { style: "long", numeric: "auto" });
+	const formatter = new Intl.RelativeTimeFormat("en", { style: "narrow", numeric: "auto" });
 	return formatter.format(-delta, unit);
 }
 
@@ -72,7 +72,7 @@ function run(argv) {
 			// calculate relative date
 			// INFO pushed_at refers to commits only https://github.com/orgs/community/discussions/24442
 			// CAVEAT pushed_at apparently also includes pushes via PR :(
-			const lastUpdated = repo.pushed_at ? relativeDate(repo.pushed_at) : "";
+			const lastUpdated = repo.pushed_at ? humanRelativeDate(repo.pushed_at) : "";
 
 			const subtitle = [
 				repo.owner.login,

@@ -43,7 +43,7 @@ M.timer_hourlySound = hs.timer
 				"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/media_paused.caf"
 			local sound = hs.sound.getByFile(soundPath)
 			if not sound then return end
-			sound:volume(0.5)
+			sound:volume(0.8)
 			sound:play()
 		end
 	end)
