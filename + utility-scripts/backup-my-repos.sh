@@ -32,16 +32,15 @@ curl -s "$apiURL" |
 date_stamp=$(date +%Y-%m-%d_%H-%M-%S)
 repos_count=$(find . -mindepth 1 -maxdepth 1 -type d | wc -l | tr -d " ")
 if [[ repos_count -ge 100 ]]; then	
-	print "\033[1;33mGitHub API only allows up to 100 repos to be downloaded.\033[0m"
+	print "\033[1;33mGitHub API only allows up to 100 repos to be downloaded, backup is therefore incomplete\033[0m"
 fi
 archive_name="${repos_count} Repos – ${date_stamp}.zip"
 zip -r --quiet "../$archive_name" . || return 1
 
+# confirm and remove leftover folders
 echo
 print "\033[1;32mArchived $repos_count repos.\033[0m"
 open -R "$backup_location/$archive_name"
-
-# remove leftover folders
 cd ..
 rm -rf "$backup_location/temp"
 

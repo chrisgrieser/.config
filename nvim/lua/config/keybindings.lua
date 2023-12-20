@@ -99,7 +99,6 @@ keymap(
 	{ desc = "󰉵 Tabout" }
 )
 
-
 keymap("n", "[", "<", { desc = "󰉵 outdent" })
 keymap("n", "]", ">", { desc = "󰉶 indent" })
 

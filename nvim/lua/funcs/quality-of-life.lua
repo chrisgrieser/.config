@@ -217,6 +217,7 @@ function M.tabout()
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local charsBefore = line:sub(1, col)
 	local onlyWhitespaceBeforeCursor = charsBefore:match("^%s*$")
+	local frontOfMarkdownList = vim.charsBefore:match("^%s*$")
 
 	if onlyWhitespaceBeforeCursor then
 		-- using feedkeys instead of `expr = true`, since the cmp mapping
