@@ -268,7 +268,6 @@ onoremap am aW
 onoremap im iW
 onoremap aq a"
 onoremap iq i"
-onoremap k i"
 onoremap az a'
 onoremap iz i'
 onoremap ae a`
@@ -304,6 +303,8 @@ onoremap m t]
 vnoremap m t]
 onoremap w t"
 vnoremap w t"
+onoremap k i"
+onoremap K a"
 
 """"""""""""""""""""""
 " Substitute
