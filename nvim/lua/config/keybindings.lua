@@ -2,7 +2,7 @@ local api = vim.api
 local cmd = vim.cmd
 local fn = vim.fn
 local u = require("config.utils")
-local keymap = u.uniqueKeymap
+local keymap = require("config.utils").uniqueKeymap
 --------------------------------------------------------------------------------
 -- META
 
@@ -96,7 +96,7 @@ keymap(
 	"i",
 	"<Tab>",
 	function() require("funcs.quality-of-life").tabout() end,
-	{ desc = "󰉵 Tabout" }
+	{ desc = " Tabout" }
 )
 
 keymap("n", "[", "<", { desc = "󰉵 outdent" })
@@ -132,7 +132,12 @@ keymap({ "n", "x" }, "ö", "<C-x>")
 keymap("n", "U", "<cmd>silent redo<CR>")
 keymap("n", "u", "<cmd>silent undo<CR>")
 
--- Docstring
+-- cmd+E: inline code
+keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = " Inline Code" }) -- no selection = word under cursor
+keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = " Inline Code" })
+keymap("i", "<D-e>", "``<Left>", { desc = " Inline Code" })
+
+-- DocString
 -- (simplified version of neogen.nvim)
 keymap(
 	"n",
@@ -169,16 +174,12 @@ keymap("n", "i", function()
 	return "i"
 end, { desc = "indented i", expr = true })
 
---------------------------------------------------------------------------------
-
 -- VISUAL MODE
 keymap("x", "V", "j", { desc = "repeated V selects more lines" })
 keymap("x", "v", "<C-v>", { desc = "`vv` starts Visual Block" })
 
---------------------------------------------------------------------------------
-
 -- TERMINAL MODE
--- also relevant for REPLs such as iron.nvim
+-- (also relevant for REPLs such as iron.nvim)
 keymap("t", "<C-CR>", [[<C-\><C-n><C-w>w]], { desc = " Goto next window" })
 keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste (Terminal Mode)" })
 keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = " Esc (Terminal Mode)" })
@@ -187,9 +188,7 @@ keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = " Esc (Terminal Mode)" })
 -- BUFFERS & WINDOWS & FILES
 
 keymap("n", "<CR>", function()
-	if vim.bo.buftype == "terminal" then
-		u.normal("a<CR>") -- confirm in Terminal Mode
-	elseif vim.bo.buftype == "" then
+	if vim.bo.buftype == "" then
 		require("funcs.alt-alt").gotoAltBuffer()
 	else
 		return -- disable in other buffertypes
@@ -208,12 +207,13 @@ keymap(
 -- CLIPBOARD
 
 -- sticky yank operations
+local cursorPreYank
 keymap({ "n", "x" }, "y", function()
-	vim.g.cursorPreYank = vim.api.nvim_win_get_cursor(0)
+	cursorPreYank = vim.api.nvim_win_get_cursor(0)
 	return "y"
 end, { desc = "󰅍 Sticky yank", expr = true })
 keymap("n", "Y", function()
-	vim.g.cursorPreYank = vim.api.nvim_win_get_cursor(0)
+	cursorPreYank = vim.api.nvim_win_get_cursor(0)
 	return "y$"
 end, { desc = "󰅍 Sticky yank", expr = true, unique = false })
 
@@ -224,7 +224,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		-- FIX issue with vim-visual-multi
 		if vim.b["VM_Selection"] and vim.b["VM_Selection"].Regions then return end
 
-		vim.api.nvim_win_set_cursor(0, vim.g.cursorPreYank)
+		vim.api.nvim_win_set_cursor(0, cursorPreYank)
 	end,
 })
 
@@ -254,7 +254,7 @@ keymap("n", "<D-v>", "p")
 keymap("c", "<D-v>", "<C-r>+", { desc = " Paste" })
 
 ------------------------------------------------------------------------------
--- CMD-KEYBINDINGS
+-- MAC-SPECIFIC-KEYBINDINGS
 
 keymap(
 	{ "n", "x" },
@@ -268,11 +268,6 @@ keymap(
 	function() require("funcs.quality-of-life").openAlfredPref() end,
 	{ desc = "󰮤 Reveal in Alfred" }
 )
-
--- cmd+e: inline code
-keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = "  Inline Code" }) -- no selection = word under cursor
-keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = "  Inline Code" })
-keymap("i", "<D-e>", "``<Left>", { desc = "  Inline Code" })
 
 --------------------------------------------------------------------------------
 -- QUITTING
