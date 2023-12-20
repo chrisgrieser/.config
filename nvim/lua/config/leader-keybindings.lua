@@ -169,15 +169,15 @@ keymap({ "n", "x" }, "<leader>lo", function() require("funcs.printing-press").ob
 keymap("n", "<leader>lb", function() require("funcs.printing-press").beepLog() end, { desc = " beep log" })
 keymap("n", "<leader>lm", function() require("funcs.printing-press").messageLog() end, { desc = " message log" })
 keymap("n", "<leader>l1", function() require("funcs.printing-press").timeLog() end, { desc = " time log" })
-keymap("n", "<leader>lr", function() require("funcs.printing-press").removeLogs() end, { desc = "󰹝 remove log" })
 keymap("n", "<leader>ld", function() require("funcs.printing-press").debugLog() end, { desc = " debugger log" })
 keymap("n", "<leader>la", function() require("funcs.printing-press").assertLog() end, { desc = " assert log" })
+keymap("n", "<leader>lr", function() require("funcs.printing-press").removeLogs() end, { desc = "󰹝 remove log" })
 -- stylua: ignore end
 
 --------------------------------------------------------------------------------
 
 -- Append to / delete from EoL
-local trailChars = { ",", ";", ")", "'", '"', "|", "\\", "{", ".", "}" }
+local trailChars = { ",", ";", ")", "'", '"', "|", "\\", "{", ".", "}", "`" }
 for _, key in pairs(trailChars) do
 	keymap("n", "<leader>" .. key, ("mzA%s<Esc>`z"):format(key), { desc = "which_key_ignore" })
 end
