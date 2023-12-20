@@ -20,7 +20,7 @@ alias rel='make --silent release' # personal convention to have `make release`
 #───────────────────────────────────────────────────────────────────────────────
 
 # issues numbers & git revs
-ZSH_HIGHLIGHT_REGEXP+=('#[0-9]+' 'fg=red')
+ZSH_HIGHLIGHT_REGEXP+=('#[0-9]+' 'fg=blue,bold')
 ZSH_HIGHLIGHT_REGEXP+=('([0-9a-f]{6,9}|HEAD)((\^+|~)[0-9]*)?' 'fg=yellow')
 
 # commit messages longer than 50 chars: orange, longer than 72 chars: red
