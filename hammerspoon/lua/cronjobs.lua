@@ -39,7 +39,12 @@ M.timer_hourlySound = hs.timer
 	.doEvery(60, function()
 		local isFullHour = os.date("%M") == "00"
 		if isFullHour and u.screenIsUnlocked() and u.betweenTime(8, 23) and not env.isProjector() then
-			hs.sound.getByName("Bottle"):play() ---@diagnostic disable-line: undefined-field
+			local soundPath =
+				"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/media_paused.caf"
+			local sound = hs.sound.getByFile(soundPath)
+			if not sound then return end
+			sound:volume(0.5)
+			sound:play()
 		end
 	end)
 	:start()
