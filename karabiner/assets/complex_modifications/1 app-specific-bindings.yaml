@@ -53,8 +53,11 @@ rules:
       - type: basic
         from: { key_code: p, modifiers: { mandatory: [command] } }
         to:
-          - key_code: m
-            modifiers: [option]
+          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ }
+          - { key_code: vk_none, hold_down_milliseconds: 20 }
+          - { key_code: slash, modifiers: [option] }
+        to_after_key_up:
+          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
         conditions:
           - type: frontmost_application_if
             file_paths: ["/Google Docs.app/"]
