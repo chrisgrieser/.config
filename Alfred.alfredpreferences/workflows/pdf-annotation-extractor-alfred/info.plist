@@ -383,7 +383,9 @@ fi</string>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>qlmanage -p "./cheatsheet-pdf-annotation-extractor.md"</string>
+				<string># using a webloc file that points to the readme reduces maintainance work of keeping
+# the cheatsheet and the README both up to date.
+qlmanage -p "./cheatsheet.webloc"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -406,9 +408,9 @@ fi</string>
 				<key>keyword</key>
 				<string>acodes</string>
 				<key>subtext</key>
-				<string></string>
+				<string>for the PDF Annotation Extractor</string>
 				<key>text</key>
-				<string>Cheatsheet for PDF Annotation Extractor</string>
+				<string>Cheatsheet</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -521,7 +523,7 @@ to set the hotkey for the annotation extraction</string>
 			<key>note</key>
 			<string>cheatsheet</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>480</real>
 		</dict>

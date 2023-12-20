@@ -37,33 +37,38 @@ ZSH_HIGHLIGHT_REGEXP+=(
 )
 
 #───────────────────────────────────────────────────────────────────────────────
-# GIT ADD, COMMIT, PULL-PUSH
-
-# smart commit:
-# - if there are staged changes, commit them
-# - if there are no changes, stage all changes (`git add -A`) and then commit
+# SMART COMMIT
+# - if there are no staged changes, stage all changes (`git add -A`) and then commit
+# - if the is clean after committing, pull-push
 function gc {
-	git diff --staged --quiet && git add --all # if no staged changes, stage all
+	git diff --staged --quiet && # if no staged changes
+		git add --all &&
+		print "\033[1;36mStaged all changes.\033[0m"
 
-	printf "\033[1;36mCommit: \033[0m"
-	git commit -m "$1" || return 1
+	printf "\033[1;36mCommit: \033[0m" &&
+		git commit -m "$1" || return 1
 
 	if [[ -n "$(git status --porcelain)" ]]; then
 		print "\033[1;36mPush: \033[0mNot pushing since repo still dirty."
-		return 0
+		git status
+	else
+		printf "\033[1;36mPull: \033[0m" && 
+			git pull --no-rebase && # --no-rebase prevents "Cannot rebase on multiple branches"
+			printf "\033[1;36mPush: \033[0m" && 
+			git push
 	fi
-
-	# --no-rebase to prevent "Cannot rebase on multiple branches"
-	printf "\033[1;36mPull: \033[0m" && git pull --no-rebase &&
-		printf "\033[1;36mPush: \033[0m" && git push
 }
 
 function gC {
-	git diff --staged --quiet && git add --all # if no staged changes, stage all
-	git commit -m "$1"
+	git diff --staged --quiet &&
+		git add --all &&
+		print "\033[1;36mStaged all Changes.\033[0m"
+
+	printf "\033[1;36mCommit: \033[0m" &&
+		git commit -m "$1" || return 1
 }
 
-# completions for it
+# completions for them
 _gc() {
 	((CURRENT != 2)) && return # only complete first word
 	local cc=("fix" "feat" "chore" "docs" "style" "refactor" "perf"
