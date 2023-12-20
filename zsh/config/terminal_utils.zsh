@@ -49,8 +49,8 @@ function _tree {
 
 	eza --tree --level="$1" --color=always --icons=always --git-ignore \
 		--no-quotes --hyperlink |
-		sed '1d' | # remove `.`
-		fzf --ansi --no-sort --bind=tab:down+down+down+down,shift-tab:up+up+up+up
+		sed '1d' |
+		fzf --ansi --no-sort
 }
 alias tree='_tree 2'
 alias treee='_tree 3'
@@ -63,17 +63,14 @@ function p {
 	file="$1"
 	ext=${file##*.}
 	case $ext in
-	"yml" | "yaml")
-		yq "." "$file"
+	"json" | "yml" | "yaml")
+		jless "$file"
 		;;
-	"json")
-		command jless --no-line-numbers "$file"
-		;;
-	"pdf", | "html")
+	"pdf" | "html")
 		qlmanage -p "$file"
 		;;
 	"gif" | "png" | "jpg" | "jpeg" | "webp" | "tiff")
-		[[ "$TERM_PROGRAM" == "WezTerm" ]] && image_viewer="wezterm imgcat" || image_viewer="qlmanage -p"
+		image_viewer=$([[ "$TERM_PROGRAM" == "WezTerm" ]] && echo "wezterm imgcat" || echo "qlmanage -p")
 		$image_viewer "$file"
 		;;
 	*)
