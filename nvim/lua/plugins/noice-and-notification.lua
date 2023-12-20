@@ -4,7 +4,7 @@ local trace = vim.log.levels.TRACE
 
 -- DOCS https://github.com/folke/noice.nvim#-routes
 local routes = {
-	-- redirect to popup
+	-- redirect to popup when message is longer than 10 lines
 	{ filter = { min_height = 10 }, view = "popup" },
 
 	-- write/deletion messages
@@ -16,7 +16,7 @@ local routes = {
 	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
 	{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
 
-	-- Word added to spellfile via
+	-- Word added to spellfile via `zg`
 	{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
 
 	-- Diagnostics
@@ -74,7 +74,17 @@ return {
 					vim.cmd.Noice("history")
 				end,
 				mode = { "n", "x", "i" },
-				desc = "󰎟 Notification Log",
+				desc = "󰎟 Noice Log",
+			},
+			{
+				"<D-k>",
+				function()
+					vim.cmd.close()
+					vim.cmd.Lazy("reload noice.nvim")
+					vim.notify("Noice Log cleared.", trace, { title = "noice.nvim" })
+				end,
+				ft = "noice", -- only work in noice log itself
+				desc = "󰎟 Clear Noice Log",
 			},
 		},
 		opts = {
