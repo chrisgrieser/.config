@@ -45,10 +45,10 @@ end
 --------------------------------------------------------------------------------
 -- AUTOMATION (external control)
 
--- Set title so current file can be read from automation app via window title
+-- Set title so cwd can be read by automation apps via window title
 opt.title = true
 opt.titlelen = 0 -- do not shorten title
-opt.titlestring = '%{expand("%:p")}'
+opt.titlestring = "%{getcwd()}"
 
 -- nvim server (RPC) to remote control neovide instances https://neovim.io/doc/user/remote.html
 if vim.fn.has("gui_running") == 1 then
