@@ -65,7 +65,7 @@ function update() {
 	npm update --location=global
 
 	_print-section "PIP3"
-	python3 -m pip install --upgrade pip # update pip itself
+	# python3 -m pip install --upgrade pip # update pip itself
 	command pip3 list --not-required --outdated | 
 		sed "1,2d" | cut -d" " -f1 | 
 		xargs command pip3 install --upgrade

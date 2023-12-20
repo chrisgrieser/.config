@@ -116,7 +116,7 @@ return {
 				},
 				split = {
 					enter = true,
-					size = "45%",
+					size = "50%",
 					close = { keys = { "q", "<D-w>", "<D-0>" } },
 					win_options = { scrolloff = 3 },
 				},
@@ -135,13 +135,13 @@ return {
 				},
 			},
 
-			-- DISABLED, since conflicts with existing plugins I prefer to use
+			-- DISABLE features, since conflicts with existing plugins I prefer to use
 			messages = { view_search = false }, -- replaced by nvim-hlslens
 			lsp = {
 				progress = { enabled = false }, -- replaced with nvim-dr-lsp, since less intrusive
 				signature = { enabled = false }, -- using with lsp_signature.nvim
 
-				-- ENABLED features
+				-- ENABLE features
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 					["vim.lsp.util.stylize_markdown"] = true,
