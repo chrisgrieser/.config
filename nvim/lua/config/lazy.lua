@@ -63,7 +63,8 @@ require("lazy").setup("plugins", {
 	readme = { enabled = true },
 	performance = {
 		rtp = {
-			-- disable unused builtin plugins from neovim
+			-- Disable unused builtin plugins from neovim
+			-- INFO do not disable `rplugin`, as it breaks plugins like magma.nvim
 			disabled_plugins = {
 				"matchparen",
 				"matchit",
