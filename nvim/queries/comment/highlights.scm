@@ -4,7 +4,7 @@
 ;───────────────────────────────────────────────────────────────────────────────
 
 ; added by me:
-; CONFIG SIC PENDING CAVEAT DATA GUARD
+; CONFIG SIC PENDING CAVEAT DATA GUARD SOURCE
 ; CONFIG: foo PENDING: foo
 
 ; original tags:
@@ -19,9 +19,9 @@
 ((tag (name) @text.todo ":" @punctuation.delimiter)
  (#any-of? @text.todo "PENDING" "GUARD"))
 
-("text" @text.note (#any-of? @text.note "CONFIG"))
+("text" @text.note (#any-of? @text.note "CONFIG" "SOURCE" "DATA"))
 ((tag (name) @text.note ":" @punctuation.delimiter)
- (#any-of? @text.note "CONFIG"))
+ (#any-of? @text.note "CONFIG" "SOURCE" "DATA"))
 
 ("text" @text.warning (#any-of? @text.warning "SIC" "CAVEAT"))
 ((tag (name) @text.warning ":" @punctuation.delimiter)
