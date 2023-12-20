@@ -836,6 +836,14 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>hckrnws</string>
 						<string>https://www.hckrnws.com/stories/</string>
 					</array>
+					<array>
+						<string>Hackerweb</string>
+						<string>https://hackerweb.app/#/item/</string>
+					</array>
+					<array>
+						<string>hw.leftium (Hackerweb fork)</string>
+						<string>https://hw.leftium.com/#/item/</string>
+					</array>
 				</array>
 			</dict>
 			<key>description</key>
@@ -849,7 +857,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.3.1</string>
+	<string>1.3.2</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
