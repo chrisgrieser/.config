@@ -4,15 +4,7 @@ path_to_open="$*"
 if [[ -z "$path_to_open" ]] ; then
 	echo -n "just activate terminal"
 	return 0
-fi
-
-if ! pgrep -xq "wezterm-gui" ; then
-	echo -n "$path_to_open"
-	return 0
-fi
-
-wezterm_windows=$(osascript -e 'tell application "System Events" to tell process "WezTerm" to get count windows')
-if [[ $wezterm_windows -eq 0 ]] ; then
+elif ! pgrep -xq "wezterm-gui" ; then
 	echo -n "$path_to_open"
 	return 0
 fi
