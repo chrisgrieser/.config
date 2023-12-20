@@ -121,7 +121,7 @@ end):start()
 
 -- scrollup on wake
 local c = hs.caffeinate.watcher
-M.caff_TickerWak = c.new(function(event)
+M.caff_TickerWake = c.new(function(event)
 	if event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock then
 		scrollUp()
 	end
@@ -132,26 +132,6 @@ M.wf_someWindowActivity = wf.new(true)
 	:setOverrideFilter({ allowRoles = "AXStandardWindow", hasTitlebar = true })
 	:subscribe(wf.windowMoved, function(movedWin) showHideTickerApp(movedWin) end)
 	:subscribe(wf.windowCreated, function(createdWin) showHideTickerApp(createdWin) end)
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
--- FIX pin to top not working yet in Ivory https://tapbots.social/@ivory/110651107834916828
-if env.tickerApp ~= "Ivory" then return end
-
-local reloadMins = 2
-M.timer_ivoryReload = hs.timer
-	.doEvery(reloadMins * 60, function()
-		local ivory = u.app(env.tickerApp)
-		if not ivory then return end
-
-		-- only reload when not idle, so this does not prevent screensaver/sleep
-		-- also do not reload when app is frontmost, since that may interrupt reading
-		local idle = hs.host.idleTime() > (reloadMins * 60 / 2)
-		if idle or ivory:isFrontmost() then return end
-
-		scrollUp()
-	end)
-	:start()
 
 --------------------------------------------------------------------------------
 return M
