@@ -12,11 +12,11 @@ function alfredMatcher(str) {
 }
 
 /**
- * @param {string} absoluteDate string to be converted to a date
+ * @param {string} isoDateStr string to be converted to a date
  * @return {string} relative date
  */
-function relativeDate(absoluteDate) {
-	const deltaSecs = (+new Date() - +new Date(absoluteDate)) / 1000;
+function humanRelativeDate(isoDateStr) {
+	const deltaSecs = (+new Date() - +new Date(isoDateStr)) / 1000;
 	/** @type {"year"|"month"|"week"|"day"|"hour"|"minute"|"second"} */
 	let unit;
 	let delta;
@@ -64,7 +64,7 @@ function run() {
 				`#${item.number}`,
 				repo,
 				comments.toString(),
-				`(${relativeDate(item.created_at)})`,
+				`(${humanRelativeDate(item.created_at)})`,
 			].filter(Boolean).join("   ");
 
 			return {

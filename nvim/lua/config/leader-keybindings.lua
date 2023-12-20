@@ -157,6 +157,7 @@ vim.lsp.handlers["textDocument/rename"] = (function(original_handler)
 			changed_files == 1 and "" or "s"
 		)
 		vim.notify(message)
+		vim.cmd.wall() -- write all
 	end
 end)(vim.lsp.handlers["textDocument/rename"])
 
