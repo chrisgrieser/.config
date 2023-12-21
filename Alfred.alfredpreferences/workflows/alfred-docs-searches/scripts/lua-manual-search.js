@@ -8,8 +8,8 @@ app.includeStandardAdditions = true;
 /** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
-	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
-	return [clean, camelCaseSeperated, str].join(" ");
+	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
+	return [clean, camelCaseSeparated, str].join(" ");
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -17,42 +17,45 @@ function alfredMatcher(str) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const luaVersion = $.getenv("lua_version");
-	const luaManualBaseURL = `https://www.lua.org/manual/${luaVersion}/`;
+	const luaManualBaseURL = `http://www.lua.org/manual/${luaVersion}/`;
 	const luaWikiBaseURL = "http://lua-users.org";
 
 	const ahrefRegex = /.*?href="(.*?)">(.*?)<.*/i;
-	const jsonArr = [];
 
 	const rawHTML =
 		app.doShellScript(`curl -sL '${luaManualBaseURL}'`) +
 		app.doShellScript(`curl -sL '${luaWikiBaseURL}/wiki/LuaDirectory'`);
 
-	rawHTML
+	const sites = rawHTML
 		.split("\r")
-		.filter((line) => line.toLowerCase().includes("href") && !line.includes("css") && !line.includes("IMG"))
-		.forEach((line) => {
-			const subsite = line.replace(ahrefRegex, "$1");
-			const isWiki = subsite.includes("wiki");
-			let title = line.replace(ahrefRegex, "$2").replaceAll("&ndash; ", "");
-			if (title.includes(">")) return;
+		.filter(
+			(line) => line.toLowerCase().includes("href") && !line.includes("css") && !line.includes("IMG"),
+		)
+	.map((line) => {
+		
 
-			let type = "manual";
-			if (isWiki) type = "wiki";
-			else if (title.match(/\d/)) type = "manual (chapter)";
+		const subsite = line.replace(ahrefRegex, "$1");
+		const isWiki = subsite.includes("wiki");
+		let title = line.replace(ahrefRegex, "$2").replaceAll("&ndash; ", "");
+		if (title.includes(">")) return;
 
-			title = title.replace(/^[.0-9]+ /, "");
+		let type = "manual";
+		if (isWiki) type = "wiki";
+		else if (title.match(/\d/)) type = "manual (chapter)";
 
-			let url = isWiki ? luaWikiBaseURL : luaManualBaseURL;
-			url += subsite;
+		title = title.replace(/^[.0-9]+ /, "");
 
-			jsonArr.push({
-				title: title,
-				subtitle: type,
-				match: alfredMatcher(title),
-				arg: url,
-				uid: url,
-			});
-		});
+		let url = isWiki ? luaWikiBaseURL : luaManualBaseURL;
+		url += subsite;
 
-	return JSON.stringify({ items: jsonArr });
+		return {
+			title: title,
+			subtitle: type,
+			match: alfredMatcher(title),
+			arg: url,
+			uid: url,
+		};
+	}
+
+	return JSON.stringify({ items: sites });
 }
