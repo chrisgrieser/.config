@@ -105,19 +105,18 @@ local function codeActionFilter(action)
 	local title, _ = action.title, action.kind
 
 	---@type table<string, boolean>
-	local filter = {
+	local ignore = {
 		-- stylua: ignore
-		lua = not (title:find("in this file") or title:find("in the workspace")
-			or title:find("defined global") or title:find("Change to parameter")),
-		javascript = not (title == "Move to a new file"),
-		typescript = not (title == "Move to a new file"),
+		lua = (title:find("in this file") or title:find("in the workspace")
+			or title:find("defined global") or title:find("Change to parameter")) ~= nil,
+		javascript = (title == "Move to a new file"),
+		typescript = (title == "Move to a new file"),
 		-- stylua: ignore
-		css = not (title:find("^Disable .+ for entire file: ")
-			or title:find( "^Disable .+ rule inline: ")),
-		markdown = title ~= "Create a Table of Contents",
+		css = (title:find("^Disable .+ for entire file: ")
+			or title:find( "^Disable .+ rule inline: ")) ~= nil,
+		markdown = title == "Create a Table of Contents",
 	}
-	local noFilterForFiletype = filter[vim.bo.filetype] == nil
-	return noFilterForFiletype or filter[vim.bo.filetype]
+	return ignore[vim.bo.filetype] == false -- not `nil`, so unset filetypes all pass
 end
 
 keymap(
