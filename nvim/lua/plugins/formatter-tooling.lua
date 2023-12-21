@@ -11,6 +11,7 @@ local formatters = {
 	markdown = { "markdown-toc", "markdownlint", "injected" },
 	sh = { "shellcheck", "shfmt" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
+	css = { "squeeze_blanks" }, -- since the css formatter does not support that
 	["*"] = { "typos" },
 }
 
@@ -30,7 +31,8 @@ local extraInstalls = {
 }
 
 local dontInstall = {
-	"trim_whitespace", -- not real formatters, but pseudo-formatters from conform.nvim
+	-- not real formatters, but pseudo-formatters from conform.nvim
+	"trim_whitespace",
 	"trim_newlines",
 	"squeeze_blanks",
 	"injected",

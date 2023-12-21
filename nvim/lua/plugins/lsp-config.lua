@@ -130,7 +130,7 @@ serverConfigs.pyright = {
 }
 
 --------------------------------------------------------------------------------
--- JS/TS/CSS
+-- CSS
 
 -- don't pollute completions for js/ts with stuff I don't need
 serverConfigs.emmet_ls = {
@@ -144,11 +144,11 @@ serverConfigs.cssls = {
 	settings = {
 		css = {
 			format = {
-				-- BUG this config being ignored
-				-- using `stylelint-lsp` formatting instead
-				preserveNewLines = true,
-				maxPreserveNewLines = 2,
-				spaceAroundSelectorSeparator = true,
+				enable = true,
+				-- BUG this config is being ignored
+				-- preserveNewLines = true,
+				-- maxPreserveNewLines = 2,
+				-- spaceAroundSelectorSeparator = true,
 			},
 			lint = {
 				vendorPrefix = "ignore", -- needed for scrollbars
@@ -169,6 +169,26 @@ serverConfigs.stylelint_lsp = {
 }
 
 --------------------------------------------------------------------------------
+-- JS/TS
+
+local configForBoth = {
+	inlayHints = {
+		includeInlayEnumMemberValueHints = true,
+		includeInlayFunctionLikeReturnTypeHints = true,
+		includeInlayFunctionParameterTypeHints = true,
+		includeInlayParameterNameHints = "all",
+		includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+		includeInlayPropertyDeclarationTypeHints = true,
+		includeInlayVariableTypeHints = true,
+		includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+	},
+	suggest = {
+		completeFunctionCalls = true,
+		completeJSDocs = true,
+		jsdoc = { generateReturns = true },
+	},
+	preferGoToSourceDefinition = true,
+}
 
 -- DOCS https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
 serverConfigs.tsserver = {
@@ -183,31 +203,8 @@ serverConfigs.tsserver = {
 		-- Biome works on single-file-mode and therefore can be used to check for
 		-- unintended re-declaring
 		diagnostics = { ignoredCodes = { 2451 } },
-
-		typescript = {
-			inlayHints = {
-				includeInlayEnumMemberValueHints = true,
-				includeInlayFunctionLikeReturnTypeHints = true,
-				includeInlayFunctionParameterTypeHints = true,
-				includeInlayParameterNameHints = "all",
-				includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-				includeInlayPropertyDeclarationTypeHints = true,
-				includeInlayVariableTypeHints = true,
-				includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-			},
-		},
-		javascript = {
-			inlayHints = {
-				includeInlayEnumMemberValueHints = true,
-				includeInlayFunctionLikeReturnTypeHints = true,
-				includeInlayFunctionParameterTypeHints = true,
-				includeInlayParameterNameHints = "all",
-				includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-				includeInlayPropertyDeclarationTypeHints = true,
-				includeInlayVariableTypeHints = true,
-				includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-			},
-		},
+		typescript = configForBoth,
+		javascript = configForBoth,
 	},
 }
 
