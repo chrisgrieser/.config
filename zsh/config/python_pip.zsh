@@ -24,15 +24,16 @@ function _search_venv_path() {
 function v() {
 	if [[ -n "$VIRTUAL_ENV" ]]; then
 		deactivate
+		return
+	fi
+
+	local venv_path
+	venv_path=$(_search_venv_path)
+	if [[ -n "$venv_path" ]]; then
+		# shellcheck disable=1091
+		source ./.venv/bin/activate
 	else
-		local venv_path
-		venv_path=$(_search_venv_path)
-		if [[ -n "$venv_path" ]]; then
-			# shellcheck disable=1091
-			source ./.venv/bin/activate
-		else
-			print "\033[1;33mNo virtual environment found.\033[0m"
-		fi
+		print "\033[1;33mNo virtual environment found.\033[0m"
 	fi
 }
 
@@ -70,4 +71,3 @@ function pip() {
 		pip3 "$@"
 	fi
 }
-

@@ -258,9 +258,8 @@ local function telescopeConfig()
 				prompt_prefix = " ",
 				initial_mode = "normal",
 				disable_coordinates = true,
-				line_width = "full",
 				layout_config = {
-					horizontal = { preview_width = 0. 3 },
+					horizontal = { preview_width = 0.3 },
 				},
 			},
 			lsp_references = {
@@ -334,7 +333,7 @@ return {
 			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
 			{ "<leader>ph", function() telescope("highlights") end, desc = " Highlight Groups" },
 			-- stylua: ignore
-			{ "<leader>D", function() telescope("diagnostics") end, desc = " Diagnostics" },
+			{ "<leader>e", function() telescope("diagnostics") end, desc = " Diagnostics" },
 			{
 				"<leader>pc",
 				function() telescope("colorscheme") end,

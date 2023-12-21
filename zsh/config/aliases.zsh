@@ -11,12 +11,11 @@ alias rm='rm -vI'
 
 # defaults
 alias grep='grep --color'
-alias ls='ls --color'
-alias mkdir='mkdir -p' # create intermediate directories
+alias mkdir='mkdir -pv' # create intermediate directories & verbose
 alias curl='curl --progress-bar'
 alias make='make --silent --warn-undefined-variables'
 alias jless='jless --no-line-numbers'
-alias l='eza --all --long --time-style=relative --no-user --smart-group \
+alias ls='eza --all --long --time-style=relative --no-user --smart-group \
 	--total-size --no-quotes --git-ignore --sort=newest --hyperlink'
 
 # colorized & showing all
@@ -28,7 +27,6 @@ function bat {
 	theme="$(defaults read -g AppleInterfaceStyle &>/dev/null && echo "Dracula" || echo "GitHub")"
 	command bat --theme="$theme" "$@"
 }
-alias b="bat"
 
 # misc
 alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
