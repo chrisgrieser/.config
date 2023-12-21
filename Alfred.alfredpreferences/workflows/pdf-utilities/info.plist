@@ -983,7 +983,7 @@
 				<integer>0</integer>
 				<key>filetypes</key>
 				<array>
-					<string>com.adobe.pdf</string>
+					<string>public.rtf</string>
 				</array>
 				<key>name</key>
 				<string>Print</string>

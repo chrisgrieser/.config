@@ -10,5 +10,5 @@ fi
 # send to printer
 lpr "$INPUT"
 
-# open printers to see progress
-find "$HOME/Library/Printers" -name "*.app" -exec open "{}" \;
+# see progress
+open -a "/System/Applications/Utilities/Print Center.app"
