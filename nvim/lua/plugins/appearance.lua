@@ -85,6 +85,17 @@ return {
 		init = function() u.colorschemeMod("RainbowDelimiterRed", { fg = "#7e8a95" }) end,
 		main = "rainbow-delimiters.setup",
 	},
+	{ -- emphasized headers & code blocks
+		"lukas-reineke/headlines.nvim",
+		ft = "markdown", -- can work in other fts, but I only use it in markdown
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		opts = {
+			markdown = {
+				fat_headlines = false,
+				dash_string = "─",
+			},
+		},
+	},
 	{ -- color previews & color picker
 		"uga-rosa/ccc.nvim",
 		keys = {

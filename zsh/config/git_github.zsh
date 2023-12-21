@@ -49,8 +49,8 @@ function gc {
 		git commit -m "$1" || return 1
 
 	if [[ -n "$(git status --porcelain)" ]]; then
-		print "\033[1;36mPush: \033[0mNot pushing since repo still dirty."
-		echo && git status
+		print "\033[1;36mPush: \033[0mNot pushing since repo still dirty." && 
+			git status
 	else
 		printf "\033[1;36mPull: \033[0m" &&
 			git pull --no-rebase && # --no-rebase prevents "Cannot rebase on multiple branches"

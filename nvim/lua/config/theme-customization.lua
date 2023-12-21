@@ -2,6 +2,7 @@ local M = {}
 
 local fn = vim.fn
 local g = vim.g
+
 local u = require("config.utils")
 
 ---@param update string
@@ -47,14 +48,6 @@ local function customHighlights()
 	for _, type in pairs { "Bad", "Cap", "Rare", "Local" } do
 		updateHl("Spell" .. type, "gui=underdotted cterm=underline")
 	end
-
-	-- markdown: color headings & codeblocks
-	local headingFg = u.getHighlightValue("Function", "fg")
-	local bg = u.getHighlightValue("ColorColumn", "bg")
-	for lvl = 1, 6, 1 do
-		overwriteHl(("@text.title.%s.markdown"):format(lvl), { bg = bg, fg = headingFg })
-	end
-	updateHl("@text.literal.block", "guibg=" .. bg) 
 end
 
 local function themeModifications()
