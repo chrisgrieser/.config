@@ -43,8 +43,6 @@
 	<true/>
 	<key>shutdownKeywordEnabled</key>
 	<false/>
-	<key>sleepKeywordEnabled</key>
-	<false/>
 	<key>sleepdisplaysKeywordEnabled</key>
 	<false/>
 	<key>volumedownKeywordEnabled</key>
