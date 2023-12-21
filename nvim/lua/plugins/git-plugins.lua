@@ -28,12 +28,12 @@ return {
 				openReferencedIssue = true,
 			},
 			historySearch = {
+				autoUnshallowIfNeeded = true,
 				diffPopup = {
 					width = 0.9,
 					height = 0.9,
 					border = require("config.utils").borderStyle,
 				},
-				autoUnshallowIfNeeded = true,
 			},
 		},
 	},

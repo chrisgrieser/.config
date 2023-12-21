@@ -4,9 +4,9 @@ alias ga='git add'
 alias gaa='git add --all'
 
 alias gd='git diff'
-alias gt='git stash push && git stash show 0'
-alias gT='git stash pop'
-alias grh='git reset --hard'
+alias grh='git reset --hard',
+alias gi='gh issue list --state=open'
+alias gI='gh issue list --state=closed'
 
 alias unadd='git restore --staged'
 alias push='git push'
