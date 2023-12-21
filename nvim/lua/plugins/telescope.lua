@@ -235,6 +235,13 @@ local function telescopeConfig()
 				layout_config = { horizontal = { height = 0.99 } },
 				git_command = { "git", "log", "--pretty=%h %s\t%cr" }, -- add commit time (%cr)
 			},
+			git_branches = {
+				prompt_prefix = " ",
+				show_remote_tracking_branches = true,
+				initial_mode = "normal",
+				previewer = false,
+				layout_config = { horizontal = { height = 0.4, width = 0.6 } },
+			},
 			keymaps = {
 				prompt_prefix = " ",
 				modes = { "n", "i", "c", "x", "o", "t" },
@@ -245,6 +252,15 @@ local function telescopeConfig()
 				prompt_prefix = " ",
 				layout_config = {
 					horizontal = { preview_width = { 0.7, min = 30 } },
+				},
+			},
+			diagnostics = {
+				prompt_prefix = " ",
+				initial_mode = "normal",
+				disable_coordinates = true,
+				line_width = "full",
+				layout_config = {
+					horizontal = { preview_width = 0. 3 },
 				},
 			},
 			lsp_references = {
@@ -299,11 +315,6 @@ local function telescopeConfig()
 				},
 			},
 		},
-		extensions = {
-			aerial = {
-				show_nesting = { markdown = false, ["_"] = true },
-			},
-		},
 	}
 end
 
@@ -323,7 +334,12 @@ return {
 			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
 			{ "<leader>ph", function() telescope("highlights") end, desc = " Highlight Groups" },
 			-- stylua: ignore
-			{ "<leader>pc", function() telescope("colorscheme") end, desc = " Change Colorschemes" },
+			{ "<leader>D", function() telescope("diagnostics") end, desc = " Diagnostics" },
+			{
+				"<leader>pc",
+				function() telescope("colorscheme") end,
+				desc = " Change Colorschemes",
+			},
 			{ "<leader>gs", function() telescope("git_status") end, desc = " Status" },
 			{ "<leader>gl", function() telescope("git_commits") end, desc = " Log/Commits" },
 			{ "<leader>gL", function() telescope("git_bcommits") end, desc = " Buffer Commits" },
