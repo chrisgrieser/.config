@@ -20,7 +20,10 @@ tools:
     lint-source: markdownlint
     lint-command: >
       markdownlint --stdin --config="$HOME/.config/+ linter-configs/markdownlint.yaml"
-      --disable=
+      --disable=no-trailing-spaces
+      --disable=no-multiple-blanks
+      --disable=blanks-around-fences
+    # not disabled in config, so it's enabled for formatting
     lint-stdin: true
     lint-severity: 2 # 2 = warning
     lint-formats:
