@@ -137,8 +137,7 @@ keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = " Inline Code" }) -- no sel
 keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = " Inline Code" })
 keymap("i", "<D-e>", "``<Left>", { desc = " Inline Code" })
 
--- DocString
--- (simplified version of neogen.nvim)
+-- DocString (simplified version of neogen.nvim)
 keymap(
 	"n",
 	"qf",
@@ -188,11 +187,8 @@ keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = " Esc (Terminal Mode)" })
 -- BUFFERS & WINDOWS & FILES
 
 keymap("n", "<CR>", function()
-	if vim.bo.buftype == "" then
-		require("funcs.alt-alt").gotoAltBuffer()
-	else
-		return -- disable in other buffertypes
-	end
+	-- effectively this `<CR>` mapping in irregular buffertypes
+	if vim.bo.buftype == "" then require("funcs.alt-alt").gotoAltBuffer() end
 end, { desc = "󰽙 Alt Buffer" })
 keymap({ "n", "x", "i" }, "<C-CR>", "<C-w>w", { desc = " Next Window" })
 
