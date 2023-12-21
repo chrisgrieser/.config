@@ -55,7 +55,7 @@ function run() {
 			arg: url,
 			uid: url,
 		};
-	}
+	})
 
 	return JSON.stringify({ items: sites });
 }
