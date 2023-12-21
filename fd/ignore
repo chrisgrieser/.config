@@ -21,7 +21,11 @@
 LICENSE
 .editorconfig
 
-# node
+# academic software projects
+CITATION.cff
+CITATION.bib
+
+# js/ts
 package.json
 package-lock.json
 versions.json
@@ -31,16 +35,12 @@ jsconfig.json
 esbuild.config.mjs
 biome.json
 
-# academic software projects
-CITATION.cff
-CITATION.bib
-
 # python
 __init__.py
 pyproject.toml
 requirements.txt
 
-# Alfred
+# Alfred workflows
 info.plist
 prefs.plist
 OneUpdater.sh
