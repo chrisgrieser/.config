@@ -416,6 +416,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argument</key>
+				<string>AltTab</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>BE446117-D29C-4B5C-BE3A-2AA51D8611CF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -454,23 +471,6 @@
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>FC350FC9-C6D2-45FA-BC34-7B415C787DE3</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>AltTab</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>BE446117-D29C-4B5C-BE3A-2AA51D8611CF</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -739,7 +739,7 @@
 			<key>xpos</key>
 			<real>825</real>
 			<key>ypos</key>
-			<real>405</real>
+			<real>395</real>
 		</dict>
 		<key>29260450-9968-4FA4-89C5-9D47EDA72C72</key>
 		<dict>
@@ -766,7 +766,7 @@
 			<key>xpos</key>
 			<real>660</real>
 			<key>ypos</key>
-			<real>375</real>
+			<real>365</real>
 		</dict>
 		<key>6594A058-1046-48E9-82E3-FE0574D679D5</key>
 		<dict>
@@ -802,7 +802,7 @@
 			<key>xpos</key>
 			<real>660</real>
 			<key>ypos</key>
-			<real>140</real>
+			<real>130</real>
 		</dict>
 		<key>9675C1B8-917C-48BC-82B3-F07BBE56E8F7</key>
 		<dict>
@@ -851,7 +851,7 @@
 			<key>xpos</key>
 			<real>660</real>
 			<key>ypos</key>
-			<real>255</real>
+			<real>245</real>
 		</dict>
 		<key>BE446117-D29C-4B5C-BE3A-2AA51D8611CF</key>
 		<dict>
@@ -860,7 +860,7 @@
 			<key>xpos</key>
 			<real>825</real>
 			<key>ypos</key>
-			<real>170</real>
+			<real>160</real>
 		</dict>
 		<key>C5467250-ED54-4905-BDBB-5B6EA35BC1F1</key>
 		<dict>
@@ -869,7 +869,7 @@
 			<key>xpos</key>
 			<real>825</real>
 			<key>ypos</key>
-			<real>285</real>
+			<real>275</real>
 		</dict>
 		<key>C8BAA286-8178-4777-B3D8-B9958B57D2DD</key>
 		<dict>
@@ -889,7 +889,7 @@
 			<key>note</key>
 			<string>restart</string>
 			<key>xpos</key>
-			<real>925</real>
+			<real>955</real>
 			<key>ypos</key>
 			<real>160</real>
 		</dict>
@@ -916,7 +916,7 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>1085</real>
+			<real>1115</real>
 			<key>ypos</key>
 			<real>160</real>
 		</dict>
