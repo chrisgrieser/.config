@@ -31,31 +31,29 @@ function run() {
 		.filter(
 			(line) => line.toLowerCase().includes("href") && !line.includes("css") && !line.includes("IMG"),
 		)
-	.map((line) => {
-		
+		.map((line) => {
+			const subsite = line.replace(ahrefRegex, "$1");
+			const isWiki = subsite.includes("wiki");
+			let title = line.replace(ahrefRegex, "$2").replaceAll("&ndash; ", "");
+			if (title.includes(">")) return;
 
-		const subsite = line.replace(ahrefRegex, "$1");
-		const isWiki = subsite.includes("wiki");
-		let title = line.replace(ahrefRegex, "$2").replaceAll("&ndash; ", "");
-		if (title.includes(">")) return;
+			let type = "manual";
+			if (isWiki) type = "wiki";
+			else if (title.match(/\d/)) type = "manual (chapter)";
 
-		let type = "manual";
-		if (isWiki) type = "wiki";
-		else if (title.match(/\d/)) type = "manual (chapter)";
+			title = title.replace(/^[.0-9]+ /, "");
 
-		title = title.replace(/^[.0-9]+ /, "");
+			let url = isWiki ? luaWikiBaseURL : luaManualBaseURL;
+			url += subsite;
 
-		let url = isWiki ? luaWikiBaseURL : luaManualBaseURL;
-		url += subsite;
-
-		return {
-			title: title,
-			subtitle: type,
-			match: alfredMatcher(title),
-			arg: url,
-			uid: url,
-		};
-	})
+			return {
+				title: title,
+				subtitle: type,
+				match: alfredMatcher(title),
+				arg: url,
+				uid: url,
+			};
+		});
 
 	return JSON.stringify({ items: sites });
 }
