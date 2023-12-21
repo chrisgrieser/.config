@@ -4,6 +4,7 @@ LOG_LOCATION="$DATA_DIR/Backups/backups-to-external-drives.log"
 #───────────────────────────────────────────────────────────────────────────────
 # DETERMINE VOLUME
 
+# check continuously for a volume
 i=0
 while true; do
 	VOLUME_NAME="$(df -h | grep -io "\s/Volumes/.*" | cut -c2-)"
@@ -14,9 +15,9 @@ while true; do
 		break
 	fi
 
-	sleep 0.4
+	sleep 0.5
 	i=$((i + 1))
-	if [[ $i -gt 10 ]]; then
+	if [[ $i -gt 15 ]]; then
 		print "\033[1;33mNo Volume found.\033[0m"
 		return 1
 	fi
