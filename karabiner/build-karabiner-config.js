@@ -6,7 +6,8 @@ app.includeStandardAdditions = true;
 
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @param {string} path */
+
+
 function readFile(path) {
 	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
 	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
