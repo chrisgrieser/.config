@@ -17,7 +17,7 @@ function alfredMatcher(str) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const luaVersion = $.getenv("lua_version");
-	const luaManualBaseURL = `http://www.lua.org/manual/${luaVersion}/`;
+	const luaManualBaseURL = `https://lua.org/manual/${luaVersion}/`;
 	const luaWikiBaseURL = "http://lua-users.org";
 
 	const ahrefRegex = /.*?href="(.*?)">(.*?)<.*/i;
@@ -35,7 +35,7 @@ function run() {
 			const subsite = line.replace(ahrefRegex, "$1");
 			const isWiki = subsite.includes("wiki");
 			let title = line.replace(ahrefRegex, "$2").replaceAll("&ndash; ", "");
-			if (title.includes(">")) return;
+			if (title.includes(">")) return {};
 
 			let type = "manual";
 			if (isWiki) type = "wiki";
