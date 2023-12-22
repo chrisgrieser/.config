@@ -4,7 +4,8 @@ local u = require("config.utils")
 return {
 	{ -- virtual text showing usage count of functions
 		"Wansmer/symbol-usage.nvim",
-		event = "BufReadPre", -- TODO need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
+		-- TODO need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
+		event = "BufReadPre",
 		opts = {
 			hl = { link = "NonText" },
 			vt_position = "end_of_line",
