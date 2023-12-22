@@ -68,6 +68,12 @@ local formatterConfig = {
 			prepend_args = { "--config=" .. linterConfig .. "/markdownlint.yaml" },
 		},
 
+		-- PENDING using biome via LSP (nvim 0.10)
+		biome = {
+			stdin = false,
+			args = { "format", "--write", "$FILENAME" },
+		},
+
 		-- stylua: ignore
 		["bibtex-tidy"] = {
 			prepend_args = {
