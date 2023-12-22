@@ -1344,7 +1344,7 @@ osascript -l JavaScript "./scripts/my-github-repos.js" "$LOCAL_REPOS"</string>
 				<array>
 					<dict>
 						<key>inputstring</key>
-						<string>{var:mode}</string>
+						<string>{query}</string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
