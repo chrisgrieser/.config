@@ -165,7 +165,7 @@ return {
 		keys = {
 			{ "<Tab>", "j", ft = "DressingSelect" },
 			{ "<S-Tab>", "k", ft = "DressingSelect" },
-			{ "<Tab>", "<End>", mode = ft = "DressingSelect" },
+			{ "<Tab>", "<End>", mode = "i", ft = "DressingSelect" },
 		},
 		opts = {
 			input = {
