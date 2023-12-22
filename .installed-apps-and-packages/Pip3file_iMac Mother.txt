@@ -1,2 +1,4 @@
+certifi
 pip-autoremove
+Pygments
 wheel

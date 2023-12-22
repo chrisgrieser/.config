@@ -161,16 +161,12 @@ return {
 				require("lazy").load { plugins = { "dressing.nvim" } }
 				return vim.ui.input(...)
 			end
-
-			-- extra keybindings
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "DressingSelect",
-				callback = function()
-					vim.keymap.set("n", "<Tab>", "j", { buffer = true })
-					vim.keymap.set("n", "<S-Tab>", "k", { buffer = true })
-				end,
-			})
 		end,
+		keys = {
+			{ "<Tab>", "j", ft = "DressingSelect" },
+			{ "<S-Tab>", "k", ft = "DressingSelect" },
+			{ "<Tab>", "k", ft = "DressingSelect" },
+		},
 		opts = {
 			input = {
 				insert_only = false, -- = enable normal mode
