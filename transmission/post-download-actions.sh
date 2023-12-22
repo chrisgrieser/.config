@@ -9,9 +9,7 @@ cd "$download_folder" || return 1
 #───────────────────────────────────────────────────────────────────────────────
 
 # delete clutter
-find -E . -regex ".*\.(nfo|md)$"
-find . \( -name '*.txt' -or -name '*.nfo' -or -name '*.exe' -or -name '*.md' \
-	-or -name '*.jpg' -or -name '*.png' \) -delete
+find -E . -regex ".*\.(nfo|md|jpe?g|png|exe)$" -delete
 find . -type d -name "Sample" -exec rm -r {} + # Folders do not accept `-delete`
 
 # if single file, unnest it
@@ -27,7 +25,7 @@ fi
 
 # quit Transmission, if no other active torrents
 if [[ ! -x "$(command -v transmission-remote)" ]]; then
-	touch "./WARN transmission-remote not installed"
+	touch "./transmission-cli not installed (brew install transmission-cli)"
 	return 1
 fi
 
