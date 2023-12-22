@@ -12,12 +12,16 @@ return {
 			definition = { enabled = false },
 			implementation = { enabled = false },
 			kinds = {
-				-- available symbolkinds: https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#textDocument_documentSymbol
+				-- available symbolkinds: https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#symbolKind
 				vim.lsp.protocol.SymbolKind.Function,
 				vim.lsp.protocol.SymbolKind.Method,
 				vim.lsp.protocol.SymbolKind.Object,
 			},
-			text_format = function(symbol) return " 󰈿 " .. symbol.references end,
+			disable = { lsp = {}, filetypes = {} },
+			text_format = function(symbol)
+				if symbol.references == 0 then return "" end
+				return " 󰈿 " .. symbol.references
+			end,
 		},
 	},
 	{ -- lsp definitions & references count in the status line
