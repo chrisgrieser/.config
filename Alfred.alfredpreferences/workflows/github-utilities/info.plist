@@ -501,6 +501,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>F99C6054-D3E9-4D1C-960A-8E9EC9FA5CB3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>06CC5118-3CAE-427B-928D-48B78C81B6B6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>FA2DA973-F996-4FDC-8058-22F7CCAE04A6</key>
 		<array>
 			<dict>

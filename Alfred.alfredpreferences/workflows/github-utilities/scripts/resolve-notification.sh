@@ -12,7 +12,6 @@ elif [[ "$mode" == "mark-as-read" ]]; then
 		-H "Authorization: Bearer $GITHUB_TOKEN" \
 		-H "X-GitHub-Api-Version: 2022-11-28" \
 		"https://api.github.com/notifications/threads/$thread_id"
-	echo "mark-as-read"
 else
 	api_url="$1"
 	# DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#get-a-thread
@@ -32,7 +31,7 @@ else
 	if [[ "$mode" == "open" ]]; then
 		open "$github_url"
 	elif [[ "$mode" == "copy" ]]; then
-		echo "$github_url" | pbcopy
-		echo "$github_url" # pass for Alfred notification
+		echo -n "$github_url" | pbcopy
+		echo -n "$github_url" # pass for Alfred notification
 	fi
 fi

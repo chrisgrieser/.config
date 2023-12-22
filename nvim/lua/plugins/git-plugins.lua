@@ -67,8 +67,8 @@ return {
 			-- deletions greater than one line will show a count to assess the size
 			-- digits are actually nerdfont numbers to achieve smaller size
 			-- stylua: ignore
-			-- count_chars = { "", "󰬻", "󰬼", "󰬽", "󰬾", "󰬿", "󰭀", "󰭁", "󰭂", ["+"] = "󰿮" },
-			count_chars = { "", "2", "3", "4", "5", "6", "7", "8", "9", ["+"] = "+" },
+			count_chars = { "", "󰬻", "󰬼", "󰬽", "󰬾", "󰬿", "󰭀", "󰭁", "󰭂", ["+"] = "󰿮" },
+			-- count_chars = { "", "2", "3", "4", "5", "6", "7", "8", "9", ["+"] = "+" },
 			signs = {
 				delete = { show_count = true },
 				topdelete = { show_count = true },
