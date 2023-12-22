@@ -27,7 +27,7 @@ local lspFormatFiletypes = {
 
 local extraInstalls = {
 	"debugpy",
-	"shellcheck", -- needed by bash-lsp
+	"shellcheck", -- needed by bash-lsp, since not bundled, PENDING https://github.com/bash-lsp/bash-language-server/issues/663
 }
 
 local dontInstall = {
@@ -84,8 +84,11 @@ local formatterConfig = {
 			},
 			condition = function(self, ctx) ---@diagnostic disable-line: unused-local
 				local biggerThan500Kb = vim.loop.fs_stat(ctx.filename).size > 500 * 1024;
-				if biggerThan500Kb then u.notify("conform.nvim", "Not formatting (file > 500kb).") end
-				return not biggerThan500Kb
+				if biggerThan500Kb then
+					u.notify("conform.nvim", "Not formatting (file > 500kb).")
+					return false
+				end
+				return true
 			end,
 		},
 	},
