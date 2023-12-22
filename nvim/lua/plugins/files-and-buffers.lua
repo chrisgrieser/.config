@@ -56,6 +56,7 @@ return {
 		keys = {
 			-- stylua: ignore start
 			{"<C-p>", function() require("genghis").copyFilepath() end, desc = " Copy filepath" },
+			{"<C-t>", function() require("genghis").copyRelativePath() end, desc = " Copy relative path" },
 			{"<C-n>", function() require("genghis").copyFilename() end, desc = " Copy filename" },
 			{"<C-r>", function() require("genghis").renameFile() end, desc = " Rename file" },
 			{"<leader>x", function() require("genghis").chmodx() end, desc = " chmod +x" },
