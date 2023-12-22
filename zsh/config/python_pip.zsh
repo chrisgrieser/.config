@@ -20,24 +20,7 @@ function _search_venv_path() {
 	echo "$venv_path"
 }
 
-# toggle virtual environment
-function v() {
-	if [[ -n "$VIRTUAL_ENV" ]]; then
-		deactivate
-		return
-	fi
-
-	local venv_path
-	venv_path=$(_search_venv_path)
-	if [[ -n "$venv_path" ]]; then
-		# shellcheck disable=1091
-		source ./.venv/bin/activate
-	else
-		print "\033[1;33mNo virtual environment found.\033[0m"
-	fi
-}
-
-# Utility function, intended terminal movement commands. Automatically enables
+# Utility function, intended for terminal movement commands. Automatically enables
 # venv if current dir or a parent has a `.venv` dir. Disables venv if not.
 function _auto_venv() {
 	local venv_path
@@ -53,6 +36,24 @@ function _auto_venv() {
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# toggle virtual environment
+function v() {
+	if [[ -n "$VIRTUAL_ENV" ]]; then
+		deactivate
+		return
+	else
+		local venv_path
+		venv_path=$(_search_venv_path)
+		if [[ -n "$venv_path" ]]; then
+			# shellcheck disable=1091
+			source ./.venv/bin/activate
+		else
+			print "\033[1;33mNo virtual environment found.\033[0m"
+		fi
+	fi
+}
+
+# Wrapper around pip
 # 1. Prevent accidental installation outside of virtual env
 # 2. alias `pip uninstall` to `pip-autoremove`
 # 3. other commands work as usual
