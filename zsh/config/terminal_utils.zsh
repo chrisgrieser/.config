@@ -14,11 +14,11 @@ function o() {
 		# shellcheck disable=2016
 		fd --type=file --type=symlink --color=always | fzf \
 			--select-1 --ansi --query="$input" --info=inline --header-first \
-			--header="^H: --hidden --no-ignore   ^P: Copy Path   ^N: Copy Name" \
+			--header="^H: --hidden --no-ignore  ^P: Copy Path  ^N: Copy Name  ^D: Goto Parent" \
 			--keep-right \
 			--with-nth=-2.. --delimiter="/" \
 			--bind="ctrl-h:reload(fd --hidden --no-ignore --exclude='/.git/' --exclude='.DS_Store' --type=file --type=symlink --color=always)" \
-			--expect="ctrl-p,ctrl-n" \
+			--expect="ctrl-p,ctrl-n,ctrl-d" \
 			--preview-window="55%" \
 			--preview '[[ $(file --mime {}) =~ text ]] && bat --color=always --wrap=never --style=header-filesize,header-filename,grid {} || file {} | fold -w $FZF_PREVIEW_COLUMNS' \
 			--height="100%" #required for wezterm's pane:is_alt_screen_active()
@@ -28,7 +28,10 @@ function o() {
 	key_pressed=$(echo "$selected" | head -n1)
 	file_path="$PWD/$(echo "$selected" | sed '1d')"
 
-	if [[ "$key_pressed" == "ctrl-p" || "$key_pressed" == "ctrl-n" ]]; then
+	if [[ "$key_pressed" == "ctrl-d" ]]; then
+		parent_dir=$(dirname "$file_path")
+		cd "$parent_dir" || return 1
+	elif [[ "$key_pressed" == "ctrl-p" || "$key_pressed" == "ctrl-n" ]]; then
 		[[ "$key_pressed" == "ctrl-n" ]] && file_path=$(basename "$file_path")
 		echo -n "$file_path" | pbcopy
 		print "Copied: \033[1;36m$file_path\033[0m"
