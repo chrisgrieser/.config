@@ -367,7 +367,7 @@
 				<key>modifiersubtext</key>
 				<string>⌘: Mark as Read</string>
 				<key>vitoclose</key>
-				<true/>
+				<false/>
 			</dict>
 		</array>
 		<key>BF79E782-31E9-4840-A0FA-00EE2CB5403A</key>

@@ -4,7 +4,7 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 origin_repo=$(echo "$*" | cut -c20-)
-reponame=$(echo "$*" | sed -E 's/.*\///')
+reponame=$(echo "$*" | sed -E 's|.*/||')
 url="git@github.com:$origin_repo.git" # use SSH instead of https
 
 # CLONE
@@ -12,7 +12,8 @@ url="git@github.com:$origin_repo.git" # use SSH instead of https
 cd "$LOCAL_REPOS" || exit 1
 # WARN depth=2 ensures that amending a shallow commit does not result in a
 # new commit without parent, effectively destroying git history (!!)
-git clone --depth=2 "$url"
+git clone --depth=2 "$url" \
+	--no-single-branch --no-tags # fetch all branches, but not all tags
 
 # Open in terminal via Alfred
 echo -n "$LOCAL_REPOS/$reponame"
