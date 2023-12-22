@@ -162,10 +162,7 @@ function run() {
 					// CAVEAT mark-as-unread not support in GitHub Notification API
 					valid: !showReadNotifs,
 					subtitle: showReadNotifs ? "🚫 Is already marked as read." : "⌘: Mark as Read",
-					variables: {
-						mode: "mark-as-read",
-						notificationsLeft: responseObj.length - 1,
-					},
+					variables: { mode: "mark-as-read", notificationsLeft: responseObj.length - 1 },
 				},
 				alt: {
 					subtitle: apiUrl ? "⌥: Copy URL" : "(🚫 No URL)",
