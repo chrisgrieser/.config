@@ -150,7 +150,8 @@ function run() {
 		const updatedAt = humanRelativeDate(notif.updated_at);
 		const subtitle = `${typeIcon} ${reasonIcon}  ${notif.repository.name}  ·  ${updatedAt}`;
 
-		return {
+		/** @type {AlfredItem} */
+		const alfredItem = {
 			title: notif.subject.title,
 			subtitle: subtitle,
 			arg: apiUrl,
@@ -158,23 +159,22 @@ function run() {
 			mods: {
 				cmd: {
 					arg: notif.id,
-					variable: {
-						// CAVEAT mark-as-unread not support in GitHub Notification API
-						valid: !showReadNotifs,
-						subtitle: showReadNotifs ? "" : "⌘: Mark as Read",
+					// CAVEAT mark-as-unread not support in GitHub Notification API
+					valid: !showReadNotifs,
+					subtitle: showReadNotifs ? "🚫 Is already marked as read." : "⌘: Mark as Read",
+					variables: {
 						mode: "mark-as-read",
 						notificationsLeft: responseObj.length - 1,
 					},
 				},
 				alt: {
-					variable: {
-						mode: "copy",
-						valid: Boolean(apiUrl),
-						subtitle: apiUrl ? "" : "(🚫 No URL)",
-					},
+					subtitle: apiUrl ? "⌥: Copy URL" : "(🚫 No URL)",
+					valid: Boolean(apiUrl),
+					variables: { mode: "copy" },
 				},
 			},
 		};
+		return alfredItem;
 	});
 
 	return JSON.stringify({ items: notifications });
