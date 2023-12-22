@@ -120,7 +120,7 @@ function gri {
 	git branch --all --verbose --verbose
 	echo
 	git remote --verbose
-	printf "\e[1;34mgh\e[0m default repo: " && gh repo set-default --view
+	printf "\e[1;34mgh default repo:\e[0m " && gh repo set-default --view
 }
 
 # Github Url: open & copy url

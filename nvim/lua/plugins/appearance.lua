@@ -88,7 +88,7 @@ return {
 		init = function() u.colorschemeMod("RainbowDelimiterRed", { fg = "#7e8a95" }) end,
 		main = "rainbow-delimiters.setup",
 	},
-	{ -- emphasized headers & code blocks
+	{ -- emphasized headers & code blocks in markdown
 		"lukas-reineke/headlines.nvim",
 		ft = "markdown", -- can work in other fts, but I only use it in markdown
 		dependencies = "nvim-treesitter/nvim-treesitter",
@@ -165,7 +165,7 @@ return {
 		keys = {
 			{ "<Tab>", "j", ft = "DressingSelect" },
 			{ "<S-Tab>", "k", ft = "DressingSelect" },
-			{ "<Tab>", "<End>", mode = "i", ft = "DressingInput" },
+			{ "<Tab>", "<End>", mode = "i", ft = "DressingInput" }, -- pseudo-tabout
 		},
 		opts = {
 			input = {
