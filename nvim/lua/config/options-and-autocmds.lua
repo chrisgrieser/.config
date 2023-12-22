@@ -178,6 +178,7 @@ local autoCdConfig = {
 		"info.plist", -- Alfred workflows
 		"Makefile",
 		".git",
+		".typos.toml",
 	},
 	childOfDir = {
 		".config", -- Dotfile repo
