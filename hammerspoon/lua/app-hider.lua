@@ -1,10 +1,12 @@
+local M = {} -- persist from garbage collector
+
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
+
 local aw = hs.application.watcher
 local wf = hs.window.filter
 
-local M = {} -- persist from garbage collector
 --------------------------------------------------------------------------------
 
 -- INFO - REASONS FOR ALL THIS APP HIDING
@@ -13,8 +15,19 @@ local M = {} -- persist from garbage collector
 -- 2) apps should not cover up the sketchybar that I only have in the top right
 -- corner
 
--- CONFIG
-local transBgApps = { "neovide", "Neovide", "Obsidian", "wezterm-gui", "WezTerm" }
+local config = {
+	transBgApps = { "neovide", "Neovide", "Obsidian", "wezterm-gui", "WezTerm" },
+	dontTriggerHidingOtherApps = { "Alfred", "CleanShot X", "IINA", "Shottr" },
+	appsNotToHide = {
+		"Espanso",
+		"IINA",
+		"zoom.us",
+		"CleanShot X",
+		env.tickerApp,
+		"Alfred",
+		"Shottr",
+	},
+}
 --------------------------------------------------------------------------------
 
 -- unhide all apps
@@ -40,16 +53,17 @@ local function hideOthers(appObj)
 	local thisAppName = appObj:name()
 
 	-- only hide when bigger window
-	if not (wu.CheckSize(thisWin, wu.pseudoMax) or wu.CheckSize(thisWin, wu.maximized)) then return end
+	if not (wu.CheckSize(thisWin, wu.pseudoMax) or wu.CheckSize(thisWin, wu.maximized)) then
+		return
+	end
 
-	local appsNotToHide =
-		{ "Espanso", "IINA", "zoom.us", "CleanShot X", env.tickerApp, "Alfred", thisAppName }
 	for _, w in pairs(thisWin:otherWindowsSameScreen()) do
 		local app = w:application()
 		if
 			app
 			and not (app:findWindow("Picture in Picture"))
-			and not (u.tbl_contains(appsNotToHide, app:name()))
+			and not (u.tbl_contains(config.appsNotToHide, app:name()))
+			and not (app:name() == thisAppName)
 			and not (app:isHidden())
 		then
 			app:hide()
@@ -66,13 +80,13 @@ M.transBgAppWatcher = aw.new(function(appName, event, appObj)
 	if event == aw.terminated then
 		if appName == "Reminders" then return end -- Reminders often opening in the background
 		unHideAll()
-	elseif event == aw.activated and u.tbl_contains(transBgApps, appName) then
+	elseif event == aw.activated and u.tbl_contains(config.transBgApps, appName) then
 		u.whenAppWinAvailable(appName, function() hideOthers(appObj) end)
 	end
 end):start()
 
 -- also trigger on minimization and on window reszing
-M.transBgAppWindowFilter = wf.new(transBgApps)
+M.transBgAppWindowFilter = wf.new(config.transBgApps)
 	:subscribe(wf.windowMoved, function(movedWin) hideOthers(movedWin:application()) end)
 	:subscribe(wf.windowMinimized, unHideAll)
 
@@ -86,7 +100,7 @@ M.autoTileAppWatcher = aw.new(function(appName, eventType, appObj)
 		and not (appObj:findWindow("Picture in Picture"))
 		and not (appObj:findWindow("^$")) -- special windows?
 		and not (env.isProjector())
-		and not (u.isFront { "Alfred", "CleanShot X", "IINA" })
+		and not (u.isFront(config.dontTriggerHidingOtherApps))
 	then
 		appObj:hide()
 	end
@@ -97,7 +111,7 @@ M.wf_maxWindows = wf.new(true):subscribe(wf.windowUnfocused, function(win)
 	if
 		not (env.isProjector())
 		and wu.CheckSize(win, wu.maximized)
-		and not (u.isFront { "Alfred", "CleanShot X", "IINA" })
+		and not (u.isFront(config.dontTriggerHidingOtherApps))
 	then
 		win:application():hide()
 	end

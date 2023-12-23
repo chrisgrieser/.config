@@ -332,6 +332,46 @@ local function setupAllLsps()
 	end
 end
 
+local function lspHandlers()
+	-- add notification & writeall to renaming
+	-- PENDING https://github.com/neovim/neovim/pull/26616
+	vim.lsp.handlers["textDocument/rename"] = (function(original_handler)
+		return function(err, result, ctx, config)
+			original_handler(err, result, ctx, config)
+			if err or not result then return end
+
+			vim.cmd.wall() -- write all
+
+			local changeCount = 0
+			local changes = result.changes or result.documentChanges
+			local changedFilesss = vim.tbl_map(
+				function(file) return "- " .. vim.fs.basename(file) end,
+				vim.tbl_keys(changes or {})
+			)
+			local nonCurrentFilesChanged = vim.tbl_filter(
+				function(file)
+					local currentFile = vim.fs.basename(ctx.bufname)
+					return not vim.fs.basename(file)
+				end,
+				changedFilesss
+			)
+
+			for _, change in pairs(changes) do
+				changeCount = changeCount + #(change.edits or change)
+			end
+
+			local msg = ("Renamed %s instance%s"):format(changeCount, changeCount == 1 and "" or "s")
+			if #nonCurrentFilesChanged > 0 then
+				msg = msg
+					.. (" in %s files:\n"):format(#nonCurrentFilesChanged)
+					.. table.concat(nonCurrentFilesChanged, "\n")
+			end
+
+			vim.notify(msg, vim.log.levels.INFO, { title = "LSP Renaming" })
+		end
+	end)(vim.lsp.handlers["textDocument/rename"])
+end
+
 --------------------------------------------------------------------------------
 
 return {
@@ -342,8 +382,9 @@ return {
 			"folke/neodev.nvim",
 			opts = { library = { plugins = false } }, -- too slow with all my plugins
 		},
+		init = setupAllLsps,
 		config = function()
-			setupAllLsps()
+			lspHandlers()
 			require("lspconfig.ui.windows").default_options.border = u.borderStyle
 		end,
 	},
