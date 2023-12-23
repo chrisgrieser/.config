@@ -3,8 +3,7 @@
 ; so "bash" works, but not "sh"
 ;───────────────────────────────────────────────────────────────────────────────
 
-; inject sh for `shell_command` (karabiner elements config)
-; karabiner_1
+; inject bash for `shell_command` from the karabiner elements config
 (block_mapping_pair
 key: (flow_node) @_run (#any-of? @_run "run" "cmd" "shell_command")
 value: (block_node
@@ -12,7 +11,6 @@ value: (block_node
 (#set! injection.language "bash")
 (#offset! @injection.content 0 1 0 0)))
 
-; karabiner_2
 (block_mapping_pair
 key: (flow_node) @_run (#any-of? @_run "run" "cmd" "shell_command")
 value: (block_node
@@ -23,7 +21,6 @@ value: (block_node
 (string_scalar) @injection.content))
 (#set! injection.language "bash")))))
 
-; karabiner_3
 (block_mapping_pair
 key: (flow_node) @_run (#any-of? @_run "run" "cmd" "shell_command")
 value: (block_node

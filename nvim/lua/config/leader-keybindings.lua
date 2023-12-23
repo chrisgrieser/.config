@@ -116,7 +116,7 @@ local function codeActionFilter(action)
 			or title:find( "^Disable .+ rule inline: ")) ~= nil,
 		markdown = title == "Create a Table of Contents",
 	}
-	return ignore[vim.bo.filetype] == false -- not `nil`, so unset filetypes all pass
+	return ignore[vim.bo.ft] == false -- not `nil`, so unset filetypes all pass
 end
 
 keymap(
@@ -125,6 +125,10 @@ keymap(
 	function() vim.lsp.buf.code_action { filter = codeActionFilter } end,
 	{ desc = "󰒕 Code Action" }
 )
+keymap("n", "<leader>df", function ()
+	vim.diagnostic.open_float()
+	vim.diagnostic.open_float() -- 2x = enter float
+end, { desc = "󰒕 Diagnostic under Cursor" })
 keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
 keymap("n", "<leader>v", vim.lsp.buf.rename, { desc = "󰒕 LSP Rename" })
 

@@ -1,4 +1,18 @@
 local u = require("config.utils")
+
+local use_legacy_query = vim.fn.has "nvim-0.9.0" ~= 1
+
+local parse_query_save = function(language, query)
+    -- vim.treesitter.query.parse_query() is deprecated, use vim.treesitter.query.parse() instead
+    local ok, parsed_query =
+        pcall(use_legacy_query and vim.treesitter.query.parse_query or vim.treesitter.query.parse, language, query) ---@diagnostic disable-line: deprecated
+    if not ok then
+        return nil
+    end
+    return parsed_query
+end
+
+
 --------------------------------------------------------------------------------
 
 return {
@@ -96,6 +110,25 @@ return {
 			markdown = {
 				fat_headlines = false,
 				dash_string = "─",
+				query = parse_query_save(
+					"markdown",
+					[[
+						(fenced_code_block) @codeblock
+
+						(block_quote_marker) @quote
+						(block_quote (paragraph (inline (block_continuation) @quote)))
+						(block_quote (paragraph (block_continuation) @quote))
+						(block_quote (block_continuation) @quote)
+					]]
+				),
+			},
+			yaml = {
+				query = parse_query_save(
+					"yaml",
+					[[
+						(block_scalar) @codeblock
+					]]
+				),
 			},
 		},
 	},

@@ -27,8 +27,7 @@ rules:
         to:
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-              spotify_player playback play-pause || 
-                spotify_player playback start context playlist --name "Discover Weekly" --shuffle
+              spotify_player playback play-pause
       - type: basic
         from: { key_code: f9 }
         to:

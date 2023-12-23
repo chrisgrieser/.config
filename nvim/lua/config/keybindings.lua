@@ -31,6 +31,8 @@ keymap({ "n", "x" }, "K", "6gk")
 keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
 keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
 
+keymap("n", "g,", "g;", { desc = " Goto Last Change" })
+
 -- Search
 keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = "Search IN sel" })
