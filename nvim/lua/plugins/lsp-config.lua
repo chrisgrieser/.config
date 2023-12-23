@@ -340,33 +340,28 @@ local function lspHandlers()
 			original_handler(err, result, ctx, config)
 			if err or not result then return end
 
+			-- changes files
 			vim.cmd.wall() -- write all
-
-			local changeCount = 0
 			local changes = result.changes or result.documentChanges
-			local changedFilesss = vim.tbl_map(
+			local changedFiles = vim.tbl_map(
 				function(file) return "- " .. vim.fs.basename(file) end,
 				vim.tbl_keys(changes or {})
 			)
-			local nonCurrentFilesChanged = vim.tbl_filter(
-				function(file)
-					local currentFile = vim.fs.basename(ctx.bufname)
-					return not vim.fs.basename(file)
-				end,
-				changedFilesss
-			)
 
+			-- changes
+			local changeCount = 0
 			for _, change in pairs(changes) do
 				changeCount = changeCount + #(change.edits or change)
 			end
 
-			local msg = ("Renamed %s instance%s"):format(changeCount, changeCount == 1 and "" or "s")
-			if #nonCurrentFilesChanged > 0 then
+			-- notification
+			local pluralS = changeCount > 1 and "s" or ""
+			local msg = changeCount .. " instance" .. pluralS
+			if #changedFiles > 1 then
 				msg = msg
-					.. (" in %s files:\n"):format(#nonCurrentFilesChanged)
-					.. table.concat(nonCurrentFilesChanged, "\n")
+					.. (" in %s files:\n"):format(#changedFiles)
+					.. table.concat(changedFiles, "\n")
 			end
-
 			vim.notify(msg, vim.log.levels.INFO, { title = "LSP Renaming" })
 		end
 	end)(vim.lsp.handlers["textDocument/rename"])
