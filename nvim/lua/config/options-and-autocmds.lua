@@ -182,7 +182,7 @@ local autoCdConfig = {
 	childOfDir = {
 		".config", -- Dotfile repo
 		"com~apple~CloudDocs", -- iCloud Drive
-		vim.env.VAULT_PATH,
+		vim.fs.basename(vim.env.VAULT_PATH),
 	},
 }
 
