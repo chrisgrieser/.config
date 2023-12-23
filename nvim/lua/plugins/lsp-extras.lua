@@ -49,4 +49,19 @@ return {
 			always_trigger = true,
 		},
 	},
+	{ -- add ignore-comments & lookup rules
+		"chrisgrieser/nvim-rulebook",
+		keys = {
+			{
+				"<leader>dl",
+				"<cmd>lua require('rulebook').lookupRule()<CR>",
+				desc = " Lookup Rule",
+			},
+			{
+				"<leader>di",
+				"<cmd>lua require('rulebook').ignoreRule()<CR>",
+				desc = "󰝟 Ignore Rule",
+			},
+		},
+	},
 }
