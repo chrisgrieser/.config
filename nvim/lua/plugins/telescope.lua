@@ -189,9 +189,10 @@ local function telescopeConfig()
 			},
 			git_status = {
 				prompt_prefix = "󰊢 ",
-				show_untracked = true,
 				initial_mode = "normal",
-				layout_config = { horizontal = { height = 0.99 } },
+				show_untracked = true,
+				previewer = false,
+				layout_config = { horizontal = { height = 0.4, width = 0.6 } },
 				mappings = {
 					n = {
 						["<Tab>"] = "move_selection_worse",
