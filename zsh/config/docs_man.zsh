@@ -2,21 +2,19 @@
 alias -g H="--help | bat --language=help --style=plain --wrap=character"
 ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
 
-#───────────────────────────────────────────────────────────────────────────────
-
-# SUPER MAN
+# MAN PAGES
 # - searches directly for $2 in the manpage of $1
 # - works for builtin commands as well
 # - opens in a new wezterm tab
 # - fallsback to --help page if no manpage found
 function man() {
-	local command="$1"
-	local search_term="$2"
-	local pane_id
-
 	if ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then echo "Not using WezTerm." && return 1; fi
 	if ! command -v "$command" &>/dev/null; then echo "$command not installed." && return 1; fi
 	if ! command -v bat &>/dev/null; then print "\033[1;33mbat not installed.\033[0m" && return 1; fi
+
+	local command="$1"
+	local search_term="$2"
+	local pane_id
 
 	# INFO `test` is an exception, as it is a builtin command, but still has a
 	# man page and no builtin help
@@ -53,6 +51,35 @@ function man() {
 }
 
 #───────────────────────────────────────────────────────────────────────────────
+# CHATGPT
+
+function ai() {
+	if ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then echo "Not using WezTerm." && return 1; fi
+	if ! command -v yq &>/dev/null; then echo "yq not installed." && return 1; fi
+	if ! command -v bat &>/dev/null; then echo "bat not installed." && return 1; fi
+	if [[ -z "$OPENAI_API_KEY" ]]; then echo "\$OPENAI_API_KEY not found." && return 1; fi
+
+	local query="$*"
+	local the_prompt="The following request is concerned with shell scripting. If your response includes codeblocks, do add 'bash' as language label to it. Here is the request: $query"
+	print "\e[1;34mAsking ChatGPT…\e[0m"
+
+	# https://platform.openai.com/docs/api-reference/making-requests
+	curl -s "https://api.openai.com/v1/chat/completions" \
+		-H "Content-Type: application/json" \
+		-H "Authorization: Bearer $OPENAI_API_KEY" \
+		-d "{
+			\"model\": \"gpt-3.5-turbo\",
+			\"messages\": [{\"role\": \"user\", \"content\": \"$the_prompt\"}],
+			\"temperature\": 0
+		}" |
+		yq -r '.choices[].message.content' > /tmp/chatgpt.md
+		
+	pane_id=$(wezterm cli spawn -- \
+		bat --style=plain --wrap=auto "/tmp/chatgpt.md"
+	)
+	wezterm cli set-tab-title --pane-id="$pane_id" "ChatGPT"
+}
+#───────────────────────────────────────────────────────────────────────────────
 # LESS
 export PAGER="less" # needs to be set explicitly, so the homebrew version is used
 
@@ -83,6 +110,8 @@ export LESSUTFCHARDEF=23fb-23fe:p,2665:p,26a1:p,2b58:p,e000-e00a:p,e0a0-e0a2:p,e
 # aggregates stackoverflow, tl;dr and many other help pages
 # DOCS https://cht.sh/:help
 function h() {
+	if ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then echo "Not using WezTerm." && return 1; fi
+
 	local style pane_id
 	local query="$*"
 
@@ -90,12 +119,8 @@ function h() {
 	style=$(defaults read -g AppleInterfaceStyle &>/dev/null && echo "monokai" || echo "trac")
 
 	query=${query// /-} # dash as separator for subcommands, e.g. git-rebase
-	if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
-		curl -s "https://cht.sh/$query?style=$style" >"/tmp/$query"
-		pane_id=$(wezterm cli spawn -- less "/tmp/$query")
-		wezterm cli set-tab-title --pane-id="$pane_id" "cheat: $query"
-	else
-		curl -s "https://cht.sh/$query?style=$style" | less
-	fi
+	curl -s "https://cht.sh/$query?style=$style" >"/tmp/$query"
+	pane_id=$(wezterm cli spawn -- less "/tmp/$query")
+	wezterm cli set-tab-title --pane-id="$pane_id" "cheat: $query"
 }
 compdef _cht h
