@@ -126,39 +126,7 @@ keymap(
 	{ desc = "󰒕 Code Action" }
 )
 keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
-
---------------------------------------------------------------------------------
-
 keymap("n", "<leader>v", vim.lsp.buf.rename, { desc = "󰒕 LSP Rename" })
-
--- ADD NOTIFICATION TO RENAMING
--- PENDING https://github.com/neovim/neovim/pull/26616
-vim.lsp.handlers["textDocument/rename"] = (function(original_handler)
-	return function(err, result, ctx, config)
-		original_handler(err, result, ctx, config)
-		-- https://github.com/smjonas/inc-rename.nvim/blob/main/lua/inc_rename/init.lua#L313-L356
-		if err or not result then return end
-
-		local changed_instances = 0
-		local changed_files = 0
-
-		local with_edits = result.documentChanges ~= nil
-		for _, change in pairs(result.documentChanges or result.changes) do
-			changed_instances = changed_instances + (with_edits and #change.edits or #change)
-			changed_files = changed_files + 1
-		end
-
-		local message = string.format(
-			"[LSP] Renamed %s instance%s in %s file%s.",
-			changed_instances,
-			changed_instances == 1 and "" or "s",
-			changed_files,
-			changed_files == 1 and "" or "s"
-		)
-		vim.notify(message)
-		vim.cmd.wall() -- write all
-	end
-end)(vim.lsp.handlers["textDocument/rename"])
 
 --------------------------------------------------------------------------------
 -- LOGGING

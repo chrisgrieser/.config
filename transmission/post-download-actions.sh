@@ -10,6 +10,8 @@ cd "$download_folder" || return 1
 
 # delete clutter
 find -E . -regex ".*\.(nfo|md|jpe?g|png|exe)$" -delete
+find . \( -name '*.txt' -or -name '*.nfo' -or -name '*.exe' -or -name '*.md' \
+	-or -name '*.jpg' -or -name '*.png' \) -delete
 find . -type d -name "Sample" -exec rm -r {} + # Folders do not accept `-delete`
 
 # if single file, unnest it
