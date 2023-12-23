@@ -36,7 +36,13 @@ function run() {
 			subtitle: "Press ↵ to open Feedreader.",
 			arg: $.getenv("feedreaderURL"),
 		})
-	}
+	} else {
+		readLaterItems.unshift({
+			title: "📖 Read Later",
+			subtitle: "Add current browser tab",
+			arg: "add",
+		})
+	} 
 
 	return JSON.stringify({ items: readLaterItems });
 }

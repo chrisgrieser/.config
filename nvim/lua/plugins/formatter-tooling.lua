@@ -170,10 +170,16 @@ return {
 	{ -- add ignore-comments & lookup rules
 		"chrisgrieser/nvim-rulebook",
 		keys = {
-			-- stylua: ignore start
-			{ "<leader>dl", function() require("rulebook").lookupRule() end, desc = " Lookup Rule" },
-			{ "<leader>di", function() require("rulebook").ignoreRule() end, desc = "󰝟 Ignore Rule" },
-			-- stylua: ignore end
+			{
+				"<leader>dl",
+				"<cmd>lua require('rulebook').lookupRule()<CR>",
+				desc = " Lookup Rule",
+			},
+			{
+				"<leader>di",
+				"<cmd>lua require('rulebook').ignoreRule()<CR>",
+				desc = "󰝟 Ignore Rule",
+			},
 		},
 	},
 }

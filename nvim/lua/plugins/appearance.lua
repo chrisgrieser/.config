@@ -102,7 +102,7 @@ return {
 	{ -- color previews & color picker
 		"uga-rosa/ccc.nvim",
 		keys = {
-			{ "g#", vim.cmd.CccPick, desc = " Color Picker" },
+			{ "<D-p>", vim.cmd.CccPick, desc = " Color Picker" },
 			-- INFO textobj is not forward-seeking
 			{ "#", "<Plug>(ccc-select-color)", mode = "o", desc = "󱡔 color textobj" },
 		},
