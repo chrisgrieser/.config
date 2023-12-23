@@ -334,7 +334,7 @@ return {
 			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
 			{ "<leader>ph", function() telescope("highlights") end, desc = " Highlight Groups" },
 			-- stylua: ignore
-			{ "<leader>e", function() telescope("diagnostics") end, desc = " Diagnostics" },
+			{ "<leader>dt", function() telescope("diagnostics") end, desc = " List Diagnostics" },
 			{
 				"<leader>pc",
 				function() telescope("colorscheme") end,

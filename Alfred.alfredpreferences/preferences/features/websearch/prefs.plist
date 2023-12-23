@@ -137,7 +137,5 @@
 			<string>https://pypi.org/search/?q={query}</string>
 		</dict>
 	</dict>
-	<key>onlyShowEnabledInPrefs</key>
-	<true/>
 </dict>
 </plist>

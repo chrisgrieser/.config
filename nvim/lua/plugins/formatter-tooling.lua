@@ -171,8 +171,8 @@ return {
 		"chrisgrieser/nvim-rulebook",
 		keys = {
 			-- stylua: ignore start
-			{ "<leader>d", function() require("rulebook").lookupRule() end, desc = "󰒕 Lookup Rule" },
-			{ "<leader>C", function() require("rulebook").ignoreRule() end, desc = "󰒕 Ignore Rule" },
+			{ "<leader>dl", function() require("rulebook").lookupRule() end, desc = " Lookup Rule" },
+			{ "<leader>di", function() require("rulebook").ignoreRule() end, desc = "󰝟 Ignore Rule" },
 			-- stylua: ignore end
 		},
 	},
