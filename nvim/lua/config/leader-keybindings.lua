@@ -121,7 +121,7 @@ end
 
 keymap(
 	{ "n", "x" },
-	"<leader>c",
+	"<leader>dd",
 	function() vim.lsp.buf.code_action { filter = codeActionFilter } end,
 	{ desc = "󰒕 Code Action" }
 )

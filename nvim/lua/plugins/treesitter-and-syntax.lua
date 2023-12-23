@@ -1,3 +1,6 @@
+local u = require("config.utils")
+--------------------------------------------------------------------------------
+
 local tsConfig = {
 	-- easier than keeping track of new parsers, especially "special parsers",
 	-- which are not auto-installed on entering a buffer (e.g., luap, luadocs)
@@ -34,6 +37,11 @@ local tsConfig = {
 			-- markdown does not know most treesitter objects anyway, so disabling
 			-- there to be able to map other textobjs
 			disable = { "markdown" },
+		},
+		lsp_interop = {
+			enable = true,
+			border = u.borderStyle,
+			floating_preview_opts = {},
 		},
 	},
 	matchup = {

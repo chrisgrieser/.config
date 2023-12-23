@@ -46,8 +46,14 @@ return {
 			"TSTextobjectSelect",
 			"TSTextobjectGotoNextStart",
 			"TSTextobjectGotoPreviousStart",
+			"TSTextobjectPeekDefinitionCode",
 		},
 		keys = {
+			{
+				"<leader>H",
+				function() vim.cmd.TSTextobjectPeekDefinitionCode("@function.outer") end,
+				desc = " Peek Function Definition",
+			},
 			{
 				"q",
 				function() vim.cmd.TSTextobjectSelect("@comment.outer") end,

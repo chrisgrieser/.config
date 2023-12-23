@@ -244,7 +244,8 @@ return {
 			require("which-key").register({
 				u = { name = " 󰕌 Undo" },
 				o = { name = "  Options" },
-				p = { name = " 󰏗 Package" },
+				p = { name = " 󰏗 Packages" },
+				d = { name = "  Diagnostics" },
 			}, { prefix = "<leader>" })
 
 			-- leader prefixes normal+visual mode
