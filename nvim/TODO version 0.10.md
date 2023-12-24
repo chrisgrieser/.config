@@ -2,6 +2,7 @@
 
 - nvim new default theme -> light theme?
 - `satellite.nvim` can now be updated.
+	+ checkout whether the updated version works with neovide's multi-grid
 - `biome` can now format via lsp <https://github.com/neovim/nvim-lspconfig/issues/2807>
 - `vim.system` instead of `vim.fn.system`
 - `vim.uv` instead of `vim.loop`
@@ -9,5 +10,5 @@
 - inlay hints setup: <https://www.reddit.com/r/neovim/comments/16tmzkh/comment/k2gpy16/?context=3>
 - change lsp-signature to inlay hint
 - `vim.snippet`
-	* <https://www.reddit.com/r/neovim/comments/17cwptz/comment/k5uoswd/?context=3>
-	* <https://github.com/garymjr/nvim-snippets>
+	+ <https://www.reddit.com/r/neovim/comments/17cwptz/comment/k5uoswd/?context=3>
+	+ <https://github.com/garymjr/nvim-snippets>

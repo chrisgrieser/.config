@@ -68,7 +68,7 @@ serverConfigs.bashls = {
 
 serverConfigs.efm = {
 	cmd = { "efm-langserver", "-c", linterConfig .. "/efm.yaml" },
-	filetypes = { "sh", "markdown" }, -- limit to filestypes needed
+	filetypes = { "sh", "markdown", "lua" }, -- limit to filestypes needed
 }
 
 --------------------------------------------------------------------------------
