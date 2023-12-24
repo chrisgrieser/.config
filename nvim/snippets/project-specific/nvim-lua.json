@@ -1,8 +1,4 @@
 {
-	"nvim-utils (require)": {
-		"prefix": "utils (require)",
-		"body": "local u = require(\"config.utils\")"
-	},
 	"check if file exists": {
 		"prefix": "check if file exists",
 		"body": "local fileExists = vim.loop.fs_stat(\"${1:filepath}\") ~= nil"
@@ -26,15 +22,6 @@
 	"keymap (multi-mode)": {
 		"prefix": "keymap (multi-mode)",
 		"body": "keymap({\"n\", \"x\"}, \"${1:lhs}\", \"${2:rhs}\", { desc = \"${3:desc}\" })"
-	},
-	"input (vim.ui)": {
-		"prefix": "input (vim.ui)",
-		"body": [
-			"vim.ui.input({ prompt = \"${1:prompt_msg}\"}, function (input)",
-			"\tif not(input) then return end",
-			"\t$2",
-			"end)"
-		]
 	},
 	"autocmd": {
 		"prefix": "autocmd",
