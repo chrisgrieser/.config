@@ -126,12 +126,14 @@ keymap("n", "~", "v~")
 keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
 keymap({ "n", "x" }, "gm", "ddpkJ", { desc = "󰗈 Merge line down" })
 
--- Increment/Decrement
-keymap({ "n", "x" }, "+", function ()
-	local cword = vim.fn.expand("<cword>")
-	if cword == "true" then return "ciwfalse<Esc>" end
-end, { desc = "+ Increment", expr = true })
-keymap({ "n", "x" }, "ö", "<C-x>")
+-- Increment/Decrement + Toggle if true/false
+keymap(
+	{ "n", "x" },
+	"+",
+	function() return require("funcs.quality-of-life").toggleOrIncrement() end,
+	{ desc = " Increment/Toggle", expr = true }
+)
+keymap({ "n", "x" }, "ö", "<C-x>", { desc = " Decrement" })
 
 -- Undo
 keymap("n", "U", "<cmd>silent redo<CR>")

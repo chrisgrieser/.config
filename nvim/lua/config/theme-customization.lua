@@ -35,22 +35,20 @@ local function customHighlights()
 
 	-- better url look
 	local commentColor = u.getHighlightValue("Comment", "fg")
-	overwriteHl("@text.uri", { fg = commentColor, underdouble = true })
+	overwriteHl("@text.uri", { fg = commentColor, underline = true })
 
 	-- make `MatchParen` stand out more
 	overwriteHl("MatchParen", { reverse = true })
 
 	-- thicker underlines for diagnostics
 	for _, type in pairs { "Error", "Warn", "Info", "Hint" } do
-		updateHl("DiagnosticUnderline" .. type, "gui=underdouble cterm=underline")
+		updateHl("DiagnosticUnderline" .. type, "gui=underline cterm=underline")
 	end
 
 	-- underdotted for spell issues (used only for git commit messages though)
 	for _, type in pairs { "Bad", "Cap", "Rare", "Local" } do
 		updateHl("Spell" .. type, "gui=underdotted cterm=underline")
 	end
-
-	updateHl("NormalFloat", "guibg=transparent")
 end
 
 local function themeModifications()
@@ -129,7 +127,7 @@ local function themeModifications()
 		updateCursor("o-v:hor10")
 		if mode == "dark" then updateHl("ColorColumn", "guibg=#2e3742") end
 	elseif theme == "kanagawa" then
-		overwriteHl("TreesitterContext", { bg = "#2b2b39" })
+		overwriteHl("TreesitterContext", { bg = "#363648" })
 		-- transparent sign column
 		clearHl("SignColumn")
 		updateHl("GitSignsAdd", "guibg=none")
