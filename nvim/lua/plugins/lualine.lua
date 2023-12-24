@@ -81,7 +81,6 @@ local lualineConfig = {
 		},
 		lualine_z = {
 			{ "selectioncount", fmt = function(str) return str ~= "" and "礪" .. str or "" end },
-			{ "location" },
 			{
 				"datetime",
 				style = "%H:%M",
@@ -90,6 +89,12 @@ local lualineConfig = {
 					local timeWithBlinkingColon = os.time() % 2 == 0 and time or time:gsub(":", " ")
 					return "󰅐 " .. timeWithBlinkingColon
 				end,
+			},
+			{ "location", component_separators = { right = "" } },
+			{
+				function() return "" end,
+				cond = function() return vim.fn.has("gui_running") == 1 end, -- glyph not supported by wezterm yet
+				padding = { left = 0, right = 1 },
 			},
 		},
 	},

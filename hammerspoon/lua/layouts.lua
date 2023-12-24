@@ -105,11 +105,11 @@ local function movieLayout()
 		"Highlights",
 		"Obsidian",
 		"lo-rain",
+		"WezTerm",
 		env.mailApp,
 		env.tickerApp,
 		env.todoApp,
 	}
-
 	print("🔲 Loaded MovieModeLayout")
 end
 
