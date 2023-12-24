@@ -103,15 +103,26 @@ end
 
 --- open the next regex at https://regex101.com/
 function M.openAtRegex101()
-	vim.cmd.TSTextobjectSelect("@regex.outer")
-	normal('"zy')
-	vim.cmd.TSTextobjectSelect("@regex.inner") -- reselect for easier pasting
-
-	local regex = vim.fn.getreg("z")
-	local pattern = regex:match("/(.*)/")
-	local flags = regex:match("/.*/(%l*)")
-	local replace = vim.api.nvim_get_current_line():match('replace ?%(/.*/.*, ?"(.-)"')
 	local lang = vim.bo.filetype
+	local regex, pattern, replace, flags
+	
+	if (lang == "javascript" or lang == "typescript") then
+		vim.cmd.TSTextobjectSelect("@regex.outer")
+		normal('"zy')
+		vim.cmd.TSTextobjectSelect("@regex.inner") -- reselect for easier pasting
+		regex = vim.fn.getreg("z")
+		pattern = regex:match("/(.*)/")
+		flags = regex:match("/.*/(%l*)") or ""
+		replace = vim.api.nvim_get_current_line():match('replace ?%(/.*/.*, ?"(.-)"')
+	elseif (lang == "python" or lang == "lua") then
+		normal('"zyi"vi"') -- yank & reselect inside quotes
+		pattern = vim.fn.getreg("z")
+		flags = ""
+	else
+		u.notify("Unsupported filetype.", "warn")
+		return
+	end
+
 
 	-- DOCS https://github.com/firasdib/Regex101/wiki/FAQ#how-to-prefill-the-fields-on-the-interface-via-url
 	local url = ("https://regex101.com/?regex=%s&subst=%s&flags=%s&flavor=%s"):format(

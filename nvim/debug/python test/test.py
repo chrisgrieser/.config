@@ -1,8 +1,7 @@
 
-def double(x: int):
-    print("hiiiii")
-    return x * 2
+import re
 
+str = "hello world hotel"
+str = re.sub(r"^h", "XXX", str)
 
-a = 6
-print(double(a))
+print(str)
