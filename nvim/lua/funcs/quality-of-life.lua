@@ -66,33 +66,6 @@ end
 
 --------------------------------------------------------------------------------
 
-function M.sendToWezTerm()
-	-- open wezterm, if not already running
-	vim.fn.system([[
-		open -a 'WezTerm'
-		i=0
-		while ! pgrep -xq wezterm-gui; do
-			sleep 0.1
-			i=$((i+1))
-			test $i -gt 30 && return
-		done
-		sleep 0.2
-	]])
-
-	-- DOCS https://wezfurlong.org/wezterm/cli/cli/send-text
-	local text
-	if vim.fn.mode() == "n" then
-		text = vim.api.nvim_get_current_line() .. "\n"
-		vim.fn.system { "wezterm", "cli", "send-text", "--no-paste", text }
-	elseif vim.fn.mode():find("[Vv]") then
-		normal('"zy')
-		text = vim.fn.getreg("z"):gsub("\n$", "")
-		vim.fn.system { "wezterm", "cli", "send-text", text }
-	end
-end
-
---------------------------------------------------------------------------------
-
 function M.openAlfredPref()
 	local parentFolder = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
 	if not parentFolder:find("Alfred%.alfredpreferences") then
@@ -204,7 +177,7 @@ function M.docstring()
 		-- goto docstring (delayed, so code action can finish first)
 		vim.defer_fn(function ()
 			vim.api.nvim_win_set_cursor(0, { ln + 1, 0 })
-			normal("t}") 
+			normal("t}")
 		end, 100)
 	end
 end

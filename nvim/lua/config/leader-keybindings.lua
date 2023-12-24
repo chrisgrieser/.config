@@ -2,6 +2,7 @@ local autocmd = vim.api.nvim_create_autocmd
 local bo = vim.bo
 local cmd = vim.cmd
 local fn = vim.fn
+
 local u = require("config.utils")
 local keymap = require("config.utils").uniqueKeymap
 
@@ -44,11 +45,11 @@ end, { desc = " Buffer Info" })
 
 --------------------------------------------------------------------------------
 -- REFACTORING
-keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰒕 LSP Rename" })
-keymap("n", "<leader>fs", ":% s/<C-r><C-w>//g<Left><Left>", { desc = " :substitute" })
-keymap("x", "<leader>fs", [["zy:% s/<C-r>z//g<Left><Left>]], { desc = " :s (selection)" })
-keymap("x", "<leader>fv", ": s///g<Left><Left><Left>", { desc = " :s (inside visual)" })
-keymap("n", "<leader>fd", ":global//d<Left><Left>", { desc = " delete matching" })
+keymap("n", "<leader>rf", vim.lsp.buf.rename, { desc = "󰒕 LSP Rename" })
+keymap("n", "<leader>rs", ":% s/<C-r><C-w>//g<Left><Left>", { desc = " :substitute" })
+keymap("x", "<leader>rs", [["zy:% s/<C-r>z//g<Left><Left>]], { desc = " :s (selection)" })
+keymap("x", "<leader>rv", ": s///g<Left><Left><Left>", { desc = " :s (inside visual)" })
+keymap("n", "<leader>rd", ":global//d<Left><Left>", { desc = " delete matching" })
 
 ---@param use "spaces"|"tabs"
 local function retabber(use)
@@ -59,8 +60,8 @@ local function retabber(use)
 	if use == "tabs" then bo.tabstop = 3 end
 	u.notify("Indent", ("Now using %s"):format(char))
 end
-keymap("n", "<leader>f<Tab>", function() retabber("tabs") end, { desc = "󰌒 Use Tabs" })
-keymap("n", "<leader>f<Space>", function() retabber("spaces") end, { desc = "󱁐 Use Spaces" })
+keymap("n", "<leader>r<Tab>", function() retabber("tabs") end, { desc = "󰌒 Use Tabs" })
+keymap("n", "<leader>r<Space>", function() retabber("spaces") end, { desc = "󱁐 Use Spaces" })
 
 --------------------------------------------------------------------------------
 -- UNDO
@@ -148,23 +149,15 @@ for _, key in pairs(trailChars) do
 end
 
 -- MAKE
-keymap("n", "<leader>r", function()
+keymap("n", "<leader>m", function()
 	vim.cmd("silent! update")
 	vim.cmd.lmake()
 end, { desc = " Make" })
 keymap(
 	"n",
-	"<leader>R",
+	"<leader>M",
 	function() require("funcs.quality-of-life").selectMake() end,
 	{ desc = " Select Make" }
-)
-
--- TERMINAL
-keymap(
-	{ "n", "x" },
-	"<leader>t",
-	function() require("funcs.quality-of-life").sendToWezTerm() end,
-	{ desc = " Send to WezTerm" }
 )
 
 --------------------------------------------------------------------------------
