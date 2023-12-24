@@ -45,28 +45,22 @@ end, { desc = " Buffer Info" })
 --------------------------------------------------------------------------------
 -- REFACTORING
 keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰒕 LSP Rename" })
-keymap("n", "<leader>fs", ":% s/<C-r><C-w>//g<Left><Left>", { desc = " :s (cursor word)" })
+keymap("n", "<leader>fs", ":% s/<C-r><C-w>//g<Left><Left>", { desc = " :substitute" })
 keymap("x", "<leader>fs", [["zy:% s/<C-r>z//g<Left><Left>]], { desc = " :s (selection)" })
 keymap("x", "<leader>fv", ": s///g<Left><Left><Left>", { desc = " :s (inside visual)" })
 keymap("n", "<leader>fd", ":global//d<Left><Left>", { desc = " delete matching" })
 
----@param useSpaces boolean
-local function retabber(useSpaces)
-	local char = useSpaces and "󱁐" or "󰌒"
-	bo.expandtab = useSpaces
+---@param use "spaces"|"tabs"
+local function retabber(use)
+	local char = use == "spaces" and "󱁐" or "󰌒"
+	bo.expandtab = use == "spaces"
 	bo.tabstop = 2
 	cmd.retab { bang = true }
-	if not useSpaces then bo.tabstop = 3 end
+	if use == "tabs" then bo.tabstop = 3 end
 	u.notify("Indent", ("Now using %s"):format(char))
 end
-keymap("n", "<leader>f<Tab>", function() retabber(false) end, { desc = "󰌒 Use Tabs" })
-keymap("n", "<leader>f<Space>", function() retabber(true) end, { desc = "󱁐 Use Spaces" })
-keymap(
-	"n",
-	"<leader>f<CR>",
-	function() vim.opt_local.fileformat = "unix" end,
-	{ desc = "󰌑 Use Unix File Endings" }
-)
+keymap("n", "<leader>f<Tab>", function() retabber("tabs") end, { desc = "󰌒 Use Tabs" })
+keymap("n", "<leader>f<Space>", function() retabber("spaces") end, { desc = "󱁐 Use Spaces" })
 
 --------------------------------------------------------------------------------
 -- UNDO
@@ -87,8 +81,7 @@ keymap(
 
 -- save open time for each buffer
 autocmd("BufReadPost", {
-	---@diagnostic disable-next-line: inject-field
-	callback = function() vim.b.timeOpened = os.time() end,
+	callback = function() vim.b["timeOpened"] = os.time() end,
 })
 
 keymap("n", "<leader>uo", function()
@@ -126,7 +119,7 @@ keymap(
 	function() vim.lsp.buf.code_action { filter = codeActionFilter } end,
 	{ desc = "󰒕 Code Action" }
 )
-keymap("n", "<leader>df", function ()
+keymap("n", "<leader>df", function()
 	vim.diagnostic.open_float()
 	vim.diagnostic.open_float() -- 2x = enter float
 end, { desc = "󰒕 Diagnostic under Cursor" })
