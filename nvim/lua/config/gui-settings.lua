@@ -1,6 +1,8 @@
+-- DOCS https://neovide.dev/configuration.html
 local g = vim.g
-local u = require("config.utils")
-local keymap = u.uniqueKeymap
+
+local u = require("")
+local keymap = require("config.utils").uniqueKeymap
 --------------------------------------------------------------------------------
 
 -- SIZE & FONT
@@ -37,8 +39,9 @@ g.neovide_input_use_logo = true -- enable `cmd` key on macOS
 g.neovide_input_macos_alt_is_meta = false -- false, so {@~ etc can be used
 g.neovide_hide_mouse_when_typing = true
 
--- Window Appearance
-g.neovide_underline_automatic_scaling = true -- slightly unstable according to docs
+-- Appearance
+-- g.neovide_underline_automatic_scaling = true -- slightly unstable according to docs
+g.neovide_underline_stroke_scale = 1.0
 g.neovide_scroll_animation_length = 1
 
 --------------------------------------------------------------------------------

@@ -251,6 +251,16 @@ end, { desc = " Paste charwise", expr = true })
 keymap("n", "<D-v>", "p")
 keymap("c", "<D-v>", "<C-r>+", { desc = " Paste" })
 
+--------------------------------------------------------------------------------
+
+-- Open regex in regex101
+keymap(
+	"n",
+	"g/",
+	function() require("funcs.quality-of-life").openAtRegex101() end,
+	{ desc = " Open in regex101" }
+)
+
 ------------------------------------------------------------------------------
 -- MAC-SPECIFIC-KEYBINDINGS
 

@@ -106,7 +106,7 @@ serverConfigs.ruff_lsp = {
 	init_options = {
 		settings = {
 			organizeImports = false, -- when "I" ruleset is added, then included in "fixAll"
-			codeAction = { disableRuleComment = { enable = false } }, -- use nvim-rulebook instead
+			codeAction = { disableRuleComment = { enable = false } }, -- using nvim-rulebook instead
 		},
 	},
 	-- Disable hover in favor of pyright
@@ -145,10 +145,10 @@ serverConfigs.cssls = {
 		css = {
 			format = {
 				enable = true,
-				-- BUG this config is being ignored
-				-- preserveNewLines = true,
-				-- maxPreserveNewLines = 2,
-				-- spaceAroundSelectorSeparator = true,
+				-- BUG this config is being ignored. Leaving in case of css-lsp-update
+				preserveNewLines = true,
+				maxPreserveNewLines = 2,
+				spaceAroundSelectorSeparator = true,
 			},
 			lint = {
 				vendorPrefix = "ignore", -- needed for scrollbars
@@ -182,6 +182,7 @@ local configForBoth = {
 		includeInlayVariableTypeHints = true,
 		includeInlayVariableTypeHintsWhenTypeMatchesName = true,
 	},
+	-- not entirely clear whats these below do, cannot find documentation
 	suggest = {
 		completeFunctionCalls = true,
 		completeJSDocs = true,
@@ -332,9 +333,9 @@ local function setupAllLsps()
 	end
 end
 
+-- add notification & writeall to renaming
+-- PENDING https://github.com/neovim/neovim/pull/26616
 local function lspHandlers()
-	-- add notification & writeall to renaming
-	-- PENDING https://github.com/neovim/neovim/pull/26616
 	vim.lsp.handlers["textDocument/rename"] = (function(original_handler)
 		return function(err, result, ctx, config)
 			original_handler(err, result, ctx, config)

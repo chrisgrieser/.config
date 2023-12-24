@@ -96,22 +96,22 @@ end
 
 --- open the next regex at https://regex101.com/
 function M.openAtRegex101()
-	-- copy regex to register
 	vim.cmd.TSTextobjectSelect("@regex.outer")
 	normal('"zy')
-
-	-- reselect for easier pasting
-	vim.cmd.TSTextobjectSelect("@regex.inner")
+	vim.cmd.TSTextobjectSelect("@regex.inner") -- reselect for easier pasting
 
 	local regex = vim.fn.getreg("z")
 	local pattern = regex:match("/(.*)/")
 	local flags = regex:match("/.*/(%l*)")
 	local replacement = vim.api.nvim_get_current_line():match('replace ?%(/.*/.*, ?"(.-)"')
 
-	-- https://github.com/firasdib/Regex101/wiki/FAQ#how-to-prefill-the-fields-on-the-interface-via-url
-	local url = "https://regex101.com/?regex=" .. pattern .. "&flags=" .. flags
-	if replacement then url = url .. "&subst=" .. replacement end
-
+	-- DOCS https://github.com/firasdib/Regex101/wiki/FAQ#how-to-prefill-the-fields-on-the-interface-via-url
+	local url = ("https://regex101.com/?regex=%s&subst=%s&flags=%s&flavor=%s"):format(
+		pattern,
+		replacement or "",
+		flags,
+		vim.bo.ft
+	)
 	vim.fn.system { "open", url }
 end
 
@@ -175,7 +175,7 @@ function M.docstring()
 			apply = true,
 		}
 		-- goto docstring (delayed, so code action can finish first)
-		vim.defer_fn(function ()
+		vim.defer_fn(function()
 			vim.api.nvim_win_set_cursor(0, { ln + 1, 0 })
 			normal("t}")
 		end, 100)
@@ -186,6 +186,13 @@ end
 
 ---simplified implementation of tabout.nvim, to be used in insert-mode
 function M.tabout()
+	-- using feedkeys instead of `expr = true`, since the cmp mapping
+	-- does not work with `expr = true`
+	local function feedkeys(key)
+		local keyCode = vim.api.nvim_replace_termcodes(key, true, false, true)
+		vim.api.nvim_feedkeys(keyCode, "i", false)
+	end
+
 	local line = vim.api.nvim_get_current_line()
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local charsBefore = line:sub(1, col)
@@ -193,10 +200,9 @@ function M.tabout()
 	local frontOfMarkdownList = vim.bo.ft == "markdown" and charsBefore:match("^[%s-*+]*$")
 
 	if onlyWhitespaceBeforeCursor or frontOfMarkdownList then
-		-- using feedkeys instead of `expr = true`, since the cmp mapping
-		-- does not work with `expr = true`
-		local key = vim.api.nvim_replace_termcodes("<C-t>", true, false, true)
-		vim.api.nvim_feedkeys(key, "i", false)
+		feedkeys("<C-t>")
+	elseif vim.bo.ft == "gitcommit" then
+		feedkeys("<C-e>")
 	else
 		local closingPairs = "[%]\"'`)}]"
 		local nextClosingPairPos = line:find(closingPairs, col + 1)
