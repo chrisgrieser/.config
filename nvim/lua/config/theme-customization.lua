@@ -68,6 +68,7 @@ local function themeModifications()
 		updateHl("GitSignsChange", "guifg=#acaa62")
 		updateHl("GitSignsAdd", "guifg=#369a96")
 	elseif theme == "monet" then
+		overwriteHl("NonText", { fg = "#717ca7" }) -- more distinguishable from comments
 		overwriteHl("Folded", { bg = "#313548" })
 		updateHl("String", "gui=none") -- no italics
 		overwriteHl("Visual", { bg = "#2a454e" }) -- no bold

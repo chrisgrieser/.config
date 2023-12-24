@@ -2,6 +2,7 @@ local M = {} -- persist from garbage collector
 
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
+
 local aw = hs.application.watcher
 
 ---@return integer
@@ -9,34 +10,28 @@ local function now() return os.time() end
 
 --------------------------------------------------------------------------------
 
--- INFO This is essentially an implementation of the inspired by the macOS app
--- [quitter](https://marco.org/apps), this module quits any app if long enough idle
-
 ---CONFIG
 ---times after which apps should quit, in minutes
 ---(Apps not in this list will be ignored and never quit automatically).
 M.thresholds = {
 	Slack = 20,
 	[env.mailApp] = 5,
+	[env.todoApp] = 1,
 	Highlights = 90,
-	Discord = 180, -- when Steam is not on
+	Discord = 180, 
 	BusyCal = 2,
 	["wezterm-gui"] = 45, -- does not work with "WezTerm"
 	["Alfred Preferences"] = 20,
 	["System Settings"] = 2,
 	Finder = 20, -- only closes windows when not on projector
-	Obsidian = nil, -- do not autoquit due to omnisearch indexing
+	Obsidian = nil, -- do not autoquit due to omnisearch plugin indexing
 }
+local checkIntervalSecs = 20
 
 --------------------------------------------------------------------------------
 
 ---@param appName string name of the app
 local function quit(appName)
-	local suffix = ""
-
-	-- don't leave voice call when gaming
-	if appName == "Discord" and u.appRunning("Steam") then return end
-
 	if appName == "Finder" then
 		if env.isProjector() then return end
 		local finderWins = u.app("Finder"):allWindows()
@@ -44,27 +39,28 @@ local function quit(appName)
 		for _, win in pairs(finderWins) do
 			win:close()
 		end
-		suffix = "(windows closed)"
-	elseif appName == "wezterm-gui" then
-		u.app(appName):kill9() -- needs kill9 to avoid confirmation
-		suffix = " (kill9)"
 	else
-		u.app(appName):kill()
+		u.quitApps(appName)
 	end
-	print("📴 AutoQuitting: " .. appName .. " " .. suffix)
+	print("📴 AutoQuitting: " .. appName)
 	M.idleApps[appName] = nil
 end
 
 --------------------------------------------------------------------------------
+-- Initialize
 
-M.idleApps = {} ---table containing all apps with their last activation time
+---apps with their last activation time
+---@type table<string, integer|nil>
+M.idleApps = {}
 
---Initialize on load: fills `g.idleApps` with all running apps and the current time
+-- fill `idleApps` with all running apps and the current time
 for app, _ in pairs(M.thresholds) do
 	if u.appRunning(app) then M.idleApps[app] = now() end
 end
 
----log times when an app has been deactivated
+--------------------------------------------------------------------------------
+
+---Watch app (de)activation & update `idleApps`
 M.aw_appDeactivation = aw.new(function(appName, event)
 	if not appName or appName == "" then return end -- empty string as safeguard for special apps
 
@@ -75,10 +71,7 @@ M.aw_appDeactivation = aw.new(function(appName, event)
 	end
 end):start()
 
---------------------------------------------------------------------------------
-
----check apps regularly and quit if idle for longer than their thresholds
-local checkIntervalSecs = 20
+---Check apps regularly & quit if idle
 M.timer_autoQuitter = hs.timer
 	.doEvery(checkIntervalSecs, function()
 		for app, lastActivation in pairs(M.idleApps) do

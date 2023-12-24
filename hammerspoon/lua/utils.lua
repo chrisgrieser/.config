@@ -245,7 +245,13 @@ function M.quitApps(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
 	for _, name in pairs(appNames) do
 		local appObj = M.app(name)
-		if appObj then appObj:kill() end
+		if appObj then
+			if name == "WezTerm" or name == "wezterm-gui" then -- avoid confirmation
+				appObj:kill9()
+			else
+				appObj:kill()
+			end
+		end
 	end
 end
 

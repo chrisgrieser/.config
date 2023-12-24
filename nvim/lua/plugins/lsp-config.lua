@@ -11,7 +11,7 @@ vim.g.lspToMasonMap = {
 	biome = "biome", -- ts/js/json linter/formatter
 	cssls = "css-lsp",
 	efm = "efm", -- linter integration, only used for shellcheck in zsh files
-	emmet_ls = "emmet-ls", -- css/html completion
+	emmet_language_server = "emmet-language-server", -- css/html completion
 	html = "html-lsp",
 	jsonls = "json-lsp",
 	ltex = "ltex-ls", -- languagetool (natural language linter)
@@ -133,7 +133,7 @@ serverConfigs.pyright = {
 -- CSS
 
 -- don't pollute completions for js/ts with stuff I don't need
-serverConfigs.emmet_ls = {
+serverConfigs.emmet_language_server = {
 	filetypes = { "html", "css", "scss" },
 }
 
