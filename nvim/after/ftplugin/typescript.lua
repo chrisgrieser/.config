@@ -7,11 +7,3 @@ u.ftAbbr("local", "const")
 u.ftAbbr("--", "//") 
 
 --------------------------------------------------------------------------------
-
--- Open regex in regex101
-vim.keymap.set(
-	"n",
-	"<localleader>r",
-	function() require("funcs.quality-of-life").openAtRegex101() end,
-	{ desc = " Open next regex in regex101", buffer = true }
-)

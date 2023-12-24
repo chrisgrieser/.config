@@ -45,7 +45,7 @@ end, { desc = " Buffer Info" })
 
 --------------------------------------------------------------------------------
 -- REFACTORING
-keymap("n", "<leader>rf", vim.lsp.buf.rename, { desc = "󰒕 LSP Rename" })
+keymap("n", "<leader>rr", vim.lsp.buf.rename, { desc = "󰒕 LSP Rename" })
 keymap("n", "<leader>rs", ":% s/<C-r><C-w>//g<Left><Left>", { desc = " :substitute" })
 keymap("x", "<leader>rs", [["zy:% s/<C-r>z//g<Left><Left>]], { desc = " :s (selection)" })
 keymap("x", "<leader>rv", ": s///g<Left><Left><Left>", { desc = " :s (inside visual)" })

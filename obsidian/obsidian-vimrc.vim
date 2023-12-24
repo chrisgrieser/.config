@@ -316,6 +316,7 @@ nunmap s
 nnoremap ss VP
 nnoremap S vg$P
 nnoremap sj VjP
+nnoremap sJ VjjP
 nnoremap sim viWP
 nnoremap sam vaWP
 nnoremap siw viwP
