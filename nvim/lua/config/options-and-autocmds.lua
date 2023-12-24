@@ -37,8 +37,7 @@ for _, char in pairs { ".", ",", ";", '"', ":", "'", "<Space>" } do
 	vim.keymap.set("i", char, function()
 		if vim.bo.buftype ~= "" then return char end
 		return char .. "<C-g>u"
-		-- WARN requires `remap = true`, since it otherwise prevents vim abbreviations
-		-- with those chars from working
+		-- WARN requires `remap = true`, otherwise prevents abbrev. with those chars
 	end, { desc = "󰕌 Extra undopoint for " .. char, remap = true, expr = true })
 end
 
@@ -175,21 +174,32 @@ autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
 --------------------------------------------------------------------------------
 -- AUTO-CD TO PROJECT ROOT (PROJECT.NVIM LITE)
 local autoCd = {
-	rootFiles = { "info.plist", "Makefile", ".git" },
-	childOfDir = { ".config", "com~apple~CloudDocs", vim.fs.basename(vim.env.VAULT_PATH) },
+	rootFiles = {
+		"info.plist", -- Alfred workflows
+		"Makefile",
+		".git",
+	},
+	childOfDir = {
+		".config", -- my dotfiles
+		"com~apple~CloudDocs", -- iCloud
+		fs.basename(vim.env.VAULT_PATH), -- Obsidian vault
+	},
 }
 
 vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function(ctx)
+		-- GUARD
 		local bufPath = ctx.file
 		local specialBuffer = vim.bo[ctx.buf].buftype ~= ""
-		local exists = vim.loop.fs_stat(bufPath)
+		local exists = vim.loop.fs_stat(bufPath) ~= nil
 		if specialBuffer or not exists then return end
 
+		-- rootfile
 		local newRoot
 		local rootFile = fs.find(autoCd.rootFiles, { upward = true, path = bufPath })[1]
 		if rootFile then newRoot = fs.dirname(rootFile) end
 
+		-- childOfDir
 		for parent in fs.parents(bufPath) do
 			local isChildOfDir = vim.tbl_contains(autoCd.childOfDir, fs.basename(parent))
 			local parentIsDeeper = #parent > #(newRoot or "")
@@ -278,11 +288,12 @@ vim.api.nvim_create_autocmd("FileType", {
 			local fileIsEmpty = fileStats.size < 4 -- account for linebreaks
 			if not fileIsEmpty then return end
 
-			-- write file
+			-- read file
 			local file = io.open(skeletonFile, "r")
 			if not file then return end
 			local lines = vim.split(file:read("*a"), "\n")
 			file:close()
+
 			-- overwrite so it's idempotent, since `Filetype` event is sometimes triggered twice
 			vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
 			vim.api.nvim_win_set_cursor(0, { #lines, 0 })

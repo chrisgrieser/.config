@@ -46,8 +46,8 @@ end, { desc = " Buffer Info" })
 --------------------------------------------------------------------------------
 -- REFACTORING
 keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰒕 Var Rename" })
-keymap("n", "<leader>", ":% s/<C-r><C-w>//g<Left><Left>", { desc = " :substitute" })
-keymap("x", "<leader>ff", [["zy:% s/<C-r>z//g<Left><Left>]], { desc = " :s (selection)" })
+keymap("n", "<leader>fs", ":% s/<C-r><C-w>//g<Left><Left>", { desc = " :substitute" })
+keymap("x", "<leader>fs", [["zy:% s/<C-r>z//g<Left><Left>]], { desc = " :s (for selection)" })
 keymap("x", "<leader>fv", ": s///g<Left><Left><Left>", { desc = " :s (inside visual)" })
 keymap("n", "<leader>fd", ":global//d<Left><Left>", { desc = " delete matching" })
 
