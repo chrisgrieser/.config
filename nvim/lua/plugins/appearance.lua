@@ -47,7 +47,7 @@ return {
 		commit = "5d33376", -- TODO following versions require nvim 0.10
 		event = "VeryLazy",
 		opts = {
-			winblend = 0, -- no transparency, hard to see in many themes otherwise
+			winblend = 10, -- little transparency, hard to see in many themes otherwise
 			handlers = {
 				cursor = { enable = false },
 				marks = { enable = false }, -- FIX mark-related error message

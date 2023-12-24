@@ -23,11 +23,6 @@ local darkThemes = {
 	-- { "sainnhe/sonokai", init = function() vim.g.sonokai_style = "shusia" end },
 }
 
-vim.g.darkOpacity = 0.92
-vim.g.lightOpacity = 0.93
-vim.g.darkShadow = 0.2
-vim.g.lightShadow = 0.15
-
 --------------------------------------------------------------------------------
 
 -- INFO The purpose of this is not having to manage two lists, one with themes

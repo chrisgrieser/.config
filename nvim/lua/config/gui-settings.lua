@@ -14,7 +14,7 @@ if host:find("Mother") then
 	g.neovide_scale_factor = 0.9
 	g.neovide_refresh_rate = 30
 	g.neovide_padding_top = 30
-	g.neovide_padding_left = 17
+	g.neovide_padding_left = 5
 elseif isAtOffice then
 	g.neovide_scale_factor = 1.05
 	g.neovide_refresh_rate = 45
@@ -31,7 +31,6 @@ end
 keymap({ "n", "x", "i" }, "<D-+>", function() setNeovideScaleFactor(0.01) end)
 keymap({ "n", "x", "i" }, "<D-->", function() setNeovideScaleFactor(-0.01) end)
 
-
 --------------------------------------------------------------------------------
 
 -- Behavior
@@ -41,10 +40,14 @@ g.neovide_input_macos_alt_is_meta = false -- false, so {@~ etc can be used
 g.neovide_hide_mouse_when_typing = true
 
 -- Appearance
+g.neovide_transparency = 0.91
 g.neovide_underline_stroke_scale = 1.1
-g.neovide_scroll_animation_length = 0.03 -- amount of smooth scrolling
-g.neovide_floating_shadow = true
 
+-- These have no effect with multi-grid turned off, and multi-grid has problems
+-- with satellite.nvim currently.
+-- g.neovide_scroll_animation_length = 0.03 -- amount of smooth scrolling
+-- g.neovide_floating_shadow = true
+-- g.neovide_floating_z_height = 20 -- amount of shadow
 
 --------------------------------------------------------------------------------
 -- CURSOR

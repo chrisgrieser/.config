@@ -158,8 +158,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 ---@param mode "dark"|"light"
 function M.setThemeMode(mode)
 	vim.opt.background = mode
-	g.neovide_transparency = mode == "dark" and g.darkOpacity or g.lightOpacity
-	g.neovide_floating_z_height = mode == "dark" and g.darkShadow or g.lightShadow
 	local targetTheme = mode == "dark" and g.darkTheme or g.lightTheme
 	vim.cmd.highlight("clear") -- needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
 	vim.cmd.colorscheme(targetTheme)
