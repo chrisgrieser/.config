@@ -13,7 +13,7 @@ local lightThemes = {
 }
 
 local darkThemes = {
-	"rebelot/kanagawa.nvim",
+	-- "rebelot/kanagawa.nvim",
 	"fynnfluegge/monet.nvim",
 	-- { "navarasu/onedark.nvim", opts = { style = "warm" } },
 	-- { "folke/tokyonight.nvim", opts = { style = "moon" } },
