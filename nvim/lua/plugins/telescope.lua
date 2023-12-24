@@ -378,6 +378,20 @@ return {
 			{ "gL", function() telescope("grep_string") end, desc = " Grep cword in Project" },
 		},
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
+		init = function()
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = { "yaml", "json", "toml" },
+				callback = function()
+					-- stylua: ignore
+					vim.keymap.set("n", "gs", function()
+						require("telescope.builtin").lsp_document_symbols {
+							prompt_title = "Sections",
+							symbols = {"objects", "module"},
+						}
+					end, { desc = " Sections", buffer = true })
+				end,
+			})
+		end,
 		config = telescopeConfig,
 	},
 	{ -- Icon Picker
