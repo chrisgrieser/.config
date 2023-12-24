@@ -315,15 +315,15 @@ onoremap K a"
 nunmap s
 nnoremap ss VP
 nnoremap S vg$P
-nnoremap sj vjP
+nnoremap sj VjP
 nnoremap sim viWP
 nnoremap sam vaWP
 nnoremap siw viwP
 nnoremap saw vawP
 nnoremap sis visP
 nnoremap sas vasP
-nnoremap sip vipP
-nnoremap sap vapP
+nnoremap sip VipP
+nnoremap sap VapP
 nnoremap sib vi)P
 nnoremap saq va"P
 nnoremap siq vi"P
