@@ -596,10 +596,10 @@
 	+ &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Open the package's homepage (`brew home`).
 	+ &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy the package's homepage to the clipboard.
 	+ &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Show package information (`brew info`) in Large Text.
+	+ The downloads counts refer to the number of downloads per 90 days.
 - Reinstall a package already installed on your system via the `br` keyword (`brew reinstall`).
 - Uninstall a package via the `bu` keyword (`brew uninstall`). Optionally use the `--zap` option for a clean uninstallation.
 - Search and install fonts available in the [Homebrew font tap](https://github.com/Homebrew/homebrew-cask-fonts) via the `bf` keyword (`brew install font-…`).
-
 
 ---
 

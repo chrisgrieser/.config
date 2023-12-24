@@ -2,8 +2,8 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 local tsConfig = {
-	-- easier than keeping track of new parsers, especially "special parsers",
-	-- which are not auto-installed on entering a buffer (e.g., luap, luadocs)
+	-- easier than keeping track of new "special parsers", which are not
+	-- auto-installed on entering a buffer (e.g., regex, luadocs, comments)
 	ensure_installed = "all",
 
 	highlight = {
@@ -14,9 +14,10 @@ local tsConfig = {
 		enable = true,
 		disable = {
 			"markdown", -- indentation at bullet points is worse
-			"lua", -- `o` sometimes with weird indentation
-			"javascript", -- `o` sometimes with weird indentation
-			"typescript", -- `o` sometimes with weird indentation
+			-- `o` sometimes with weird indentation
+			"lua", 
+			"javascript", 
+			"typescript", 
 			"yaml",
 		},
 	},
