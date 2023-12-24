@@ -143,6 +143,9 @@ end
 
 -- simplified version of neogen.nvim
 -- requires nvim-treesitter-textobjects
+
+
+
 function M.docstring()
 	-- GUARD
 	local supportedFts = { "lua", "python", "javascript" }
@@ -168,6 +171,7 @@ function M.docstring()
 		vim.cmd.startinsert { bang = true }
 		-- need to manually press `-` to trigger lua-lsp completion
 		-- TODO figure out how to trigger it programmatically
+		vim.api.nvim_feedkeys("-", "i", false)
 	elseif ft == "javascript" then
 		normal("t)") -- go to parameter, since cursor has to be on diagnostic for code action
 		vim.lsp.buf.code_action {

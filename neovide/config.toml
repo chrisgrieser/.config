@@ -5,5 +5,4 @@
 # - using "None" prevents window managers from controlling the neovide window
 # - keeping traffic lights via `frame = "Transparent"` does not work due to
 #   with lualine: https://github.com/nvim-lualine/lualine.nvim/issues/1067
-frame = "Buttonless"
-
+frame = "buttonless"
