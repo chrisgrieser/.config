@@ -4,6 +4,7 @@ local fn = vim.fn
 local g = vim.g
 
 local u = require("config.utils")
+--------------------------------------------------------------------------------
 
 ---@param update string
 local function updateCursor(update) vim.opt.guicursor:append(update) end
@@ -34,7 +35,7 @@ local function customHighlights()
 
 	-- better url look
 	local commentColor = u.getHighlightValue("Comment", "fg")
-	overwriteHl("@text.uri", { fg = commentColor, underline = true })
+	overwriteHl("@text.uri", { fg = commentColor, underdouble = true })
 
 	-- make `MatchParen` stand out more
 	overwriteHl("MatchParen", { reverse = true })
@@ -48,6 +49,8 @@ local function customHighlights()
 	for _, type in pairs { "Bad", "Cap", "Rare", "Local" } do
 		updateHl("Spell" .. type, "gui=underdotted cterm=underline")
 	end
+
+	updateHl("NormalFloat", "guibg=transparent")
 end
 
 local function themeModifications()

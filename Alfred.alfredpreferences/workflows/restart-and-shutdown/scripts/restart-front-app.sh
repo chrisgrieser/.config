@@ -29,8 +29,8 @@ fi
 # SPECIAL RESTART FOR NEOVIDE/NVIM
 
 # kill
-server="/tmp/nvim_server.pipe"
-nvim --server "$server" --remote-send "<cmd>try|wqall|catch|qall|endtry<CR>"
+nvim --server "/tmp/nvim_server.pipe" \
+	--remote-send "<cmd>try|wqall|catch|qall|endtry<CR>"
 
 # wait until dead
 i=0
@@ -44,7 +44,9 @@ while pgrep -xq "neovide" || pgrep -xq "nvim"; do
 		fi
 	fi
 done
-sleep 0.3
+sleep 0.2
 
 # Restart
-open -a "Neovide" # config reopens last file if no arg
+open -a "Neovide"
+sleep 0.1
+osascript -e 'tell application "Neovide" to activate' # `open -a` does not focus properly
