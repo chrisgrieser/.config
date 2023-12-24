@@ -68,7 +68,13 @@ local findFileMappings = {
 			hidden = hiddenIgnoreActive,
 			no_ignore = hiddenIgnoreActive,
 			cwd = cwd,
-			file_ignore_patterns = { "%.DS_Store$", "%.git/" }, -- prevent these becoming visible through `--no-ignore`
+			-- prevent these becoming visible through `--no-ignore`
+			file_ignore_patterns = {
+				"node_modules",
+				".venv",
+				"%.DS_Store$",
+				"%.git/",
+			},
 		}
 	end,
 	-- search directory up
