@@ -19,10 +19,8 @@ tools:
   markdownlint: &markdownlint
     lint-source: markdownlint
     lint-command: >
-      markdownlint --stdin --config="$HOME/.config/+ linter-configs/markdownlint.yaml"
-      --disable=no-trailing-spaces
-      --disable=no-multiple-blanks
-      --disable=blanks-around-fences
+      markdownlint --stdin --config="$HOME/.config/+ linter-configs/markdownlint.yaml" --disable=no-trailing-spaces
+      --disable=no-multiple-blanks --disable=blanks-around-fences
     # not disabled in config, so it's enabled for formatting
     lint-stdin: true
     lint-severity: 2 # 2 = warning
@@ -30,8 +28,20 @@ tools:
       - "stdin:%l %m"
       - "stdin:%l:%c %m"
 
+  woke: &woke
+    lint-source: woke
+    lint-command: |
+      woke --stdin --output=simple --config="$HOME/.config/+ linter-configs/woke.yaml"
+    lint-stdin: true
+    lint-formats:
+      - "/dev/stdin:%l:%c: [%tarning] %m"
+      - "/dev/stdin:%l:%c: [%trror] %m"
+      - "/dev/stdin:%l:%c: [%tnfo] %m"
+
 languages:
   sh:
     - <<: *shellcheck
   markdown:
     - <<: *markdownlint
+  lua:
+    - <<: *woke

@@ -104,6 +104,7 @@ local lualineConfig = {
 		-- nerdfont-powerline icons prefix: ple-
 		component_separators = { left = "|", right = "|" },
 		section_separators = { left = "", right = "" },
+		-- section_separators = { left = "", right = "" },
 		-- stylua: ignore
 		ignore_focus = {
 			"DressingInput", "DressingSelect", "lspinfo", "ccc-ui", "TelescopePrompt",

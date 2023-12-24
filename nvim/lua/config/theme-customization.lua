@@ -40,7 +40,7 @@ local function customHighlights()
 	-- make `MatchParen` stand out more
 	overwriteHl("MatchParen", { reverse = true })
 
-	-- thicker underlines for diagnostics
+	-- use underlines instead of undercurls for diagnostics
 	for _, type in pairs { "Error", "Warn", "Info", "Hint" } do
 		updateHl("DiagnosticUnderline" .. type, "gui=underline cterm=underline")
 	end
