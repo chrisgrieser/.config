@@ -1,3 +1,4 @@
+
 -- INFO only the first theme will be used
 local lightThemes = {
 	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
@@ -24,6 +25,8 @@ local darkThemes = {
 
 vim.g.darkOpacity = 0.92
 vim.g.lightOpacity = 0.93
+vim.g.darkShadow = 0.2
+vim.g.lightShadow = 0.15
 
 --------------------------------------------------------------------------------
 
