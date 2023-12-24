@@ -44,6 +44,7 @@ if vim.version().major == 0 and vim.version().minor >= 10 then
 	vim.notify("TODO version 0.10.md")
 end
 
-
--- blacklist
--- whitelist
+-- blacklist fsfsfsf
+			-- --- whit
+-- fn.getlin(".")
+-- vim.fn.getline(".")

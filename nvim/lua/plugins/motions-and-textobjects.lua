@@ -33,7 +33,7 @@ return {
 			{
 				"b",
 				"<cmd>lua require('spider').motion('b')<CR>",
-				mode = { "n", "o", "x" },
+				mode = { "n", "x" }, -- not `o`, since mapped to inner bracket
 				desc = "󱇫 Spider b",
 			},
 		},
