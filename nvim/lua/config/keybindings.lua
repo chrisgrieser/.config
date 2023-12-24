@@ -129,7 +129,7 @@ keymap({ "n", "x" }, "gm", "ddpkJ", { desc = "󰗈 Merge line down" })
 -- Increment/Decrement
 keymap({ "n", "x" }, "+", function ()
 	local cword = vim.fn.expand("<cword>")
-	if cword == "true" then return "ciwfalse" end
+	if cword == "true" then return "ciwfalse<Esc>" end
 end, { desc = "+ Increment", expr = true })
 keymap({ "n", "x" }, "ö", "<C-x>")
 
