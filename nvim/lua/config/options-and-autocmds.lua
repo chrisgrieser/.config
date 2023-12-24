@@ -1,5 +1,6 @@
 local opt_local = vim.opt_local
 local opt = vim.opt
+local fs = vim.fs
 local autocmd = vim.api.nvim_create_autocmd
 local u = require("config.utils")
 
@@ -173,33 +174,32 @@ autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
 
 --------------------------------------------------------------------------------
 -- AUTO-CD TO PROJECT ROOT (PROJECT.NVIM LITE)
-local autoCdConfig = {
-	rootFiles = {
-		"info.plist", -- Alfred workflows
-		"Makefile",
-		".git",
-	},
-	childOfDir = {
-		".config", -- Dotfile repo
-		"com~apple~CloudDocs", -- iCloud Drive
-		vim.fs.basename(vim.env.VAULT_PATH),
-	},
+local autoCd = {
+	rootFiles = { "info.plist", "Makefile", ".git" },
+	childOfDir = { ".config", "com~apple~CloudDocs", vim.fs.basename(vim.env.VAULT_PATH) },
 }
 
 vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function(ctx)
-		local exists = vim.loop.fs_stat
-
 		local bufPath = ctx.file
-		if vim.bo[ctx.buf].buftype ~= "" or not exists(bufPath) then return end
-		local pathToCheck = vim.fs.dirname(bufPath)
+		local specialBuffer = vim.bo[ctx.buf].buftype ~= ""
+		local exists = vim.loop.fs_stat(bufPath)
+		if specialBuffer or not exists then return end
 
-		local rootFile = vim.fs.find(autoCdConfig.rootFiles, { upward = true, path = pathToCheck })[1]
-		if rootFile then
-			local rootFolder = vim.fs.dirname(rootFile)
-			vim.cmd.cd(rootFolder)
-			return
+		local newRoot
+		local rootFile = fs.find(autoCd.rootFiles, { upward = true, path = bufPath })[1]
+		if rootFile then newRoot = fs.dirname(rootFile) end
+
+		for parent in fs.parents(bufPath) do
+			local isChildOfDir = vim.tbl_contains(autoCd.childOfDir, fs.basename(parent))
+			local parentIsDeeper = #parent > #(newRoot or "")
+			if isChildOfDir and parentIsDeeper then
+				newRoot = parent
+				break
+			end
 		end
+
+		if newRoot and vim.loop.cwd() ~= newRoot then vim.loop.chdir(newRoot) end
 	end,
 })
 
@@ -262,12 +262,12 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = vim.tbl_keys(skeletons),
 	callback = function(ctx)
 		vim.defer_fn(function()
-			local fileStats = vim.loop.fs_stat(vim.api.nvim_buf_get_name(0))
-			local specialBuffer = vim.bo.buftype ~= ""
+			local fileStats = vim.loop.fs_stat(ctx.file)
+			local specialBuffer = vim.bo[ctx.buf].buftype ~= ""
 			if specialBuffer or not fileStats then return end
 
-			local filetype = ctx.match
-			local ext = skeletons[filetype]
+			local ft = ctx.match
+			local ext = skeletons[ft]
 			local skeletonFile = vim.fn.stdpath("config") .. "/templates/skeleton." .. ext
 			local noSkeleton = vim.loop.fs_stat(skeletonFile) == nil
 			if noSkeleton then
