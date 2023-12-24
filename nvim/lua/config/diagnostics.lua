@@ -17,9 +17,7 @@ end
 local function diagMsgFormat(diag)
 	local msg = diag.message
 	if diag.source == "typos" then
-		msg = msg:gsub("should be", "󰁔"):gsub("may be insensitive, use", "󰁔"):gsub("`", "")
-	elseif diag.source == "typos" then
-		msg = msg:gsub("may be insensitive, use", "󰁔"):gsub("`", "")
+		msg = msg:gsub("should be", "󰁔"):gsub("`", "")
 	elseif diag.source == "Lua Diagnostics." then
 		msg = msg:gsub("%.$", "")
 	end

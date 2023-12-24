@@ -28,7 +28,6 @@ local lspFormatFiletypes = {
 local extraInstalls = {
 	"debugpy",
 	"shellcheck", -- needed by bash-lsp/efm; not bundled, PENDING https://github.com/bash-lsp/bash-language-server/issues/663
-	"woke", -- used by efm
 	"markdownlint", -- used by efm
 }
 

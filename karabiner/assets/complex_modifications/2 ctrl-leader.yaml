@@ -134,12 +134,8 @@ rules:
         conditions: [*leader-active]
         to:
           - shell_command: |
-              # HACK since `open -a Neovide` does not focus Neovide
-              if pgrep -xq "neovide" ; then
-                osascript -e 'tell application "Neovide" to activate'
-              else
-                open -a "Neovide"
-              fi
+              pgrep -xq "neovide" || open -a "Neovide"
+              osascript -e 'tell application "Neovide" to activate' # HACK `open -a Neovide` does not focus correctly
           - *deactivate-leader
           - *remove-notice
       # [S]lack

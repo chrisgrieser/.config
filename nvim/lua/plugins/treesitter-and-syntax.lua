@@ -8,7 +8,10 @@ local tsConfig = {
 
 	highlight = {
 		enable = true,
-		disable = { "css" }, -- PENDING https://github.com/tree-sitter/tree-sitter-css/issues/34
+		disable = {
+			"css",
+			"python"
+		}, -- PENDING https://github.com/tree-sitter/tree-sitter-css/issues/34
 	},
 	indent = {
 		enable = true,
@@ -62,7 +65,39 @@ return {
 		main = "nvim-treesitter.configs",
 		opts = tsConfig,
 	},
+	{ -- FIX https://github.com/tree-sitter/tree-sitter-css/issues/34
+		"hail2u/vim-css3-syntax",
+		ft = "css",
+	},
+	{
+		-- "numiras/semshi",
+		"wookayin/semshi", -- use a maintained fork
+		ft = "python",
+		build = ":UpdateRemotePlugins",
+		init = function()
+			vim.g.python3_host_prog = vim.fn.exepath("python3")
+			-- better provided by LSP
+			vim.g["semshi#error_sign"] = false
+			vim.g["semshi#simplify_markup"] = false
+			vim.g["semshi#mark_selected_nodes"] = false
+			vim.g["semshi#update_delay_factor"] = 0.001
 
-	-- FIX https://github.com/tree-sitter/tree-sitter-css/issues/34
-	{ "hail2u/vim-css3-syntax", ft = "css" },
+			vim.api.nvim_create_autocmd({ "VimEnter", "ColorScheme" }, {
+				callback = function()
+					-- Only add style, inherit or link to the LSP's colors
+					vim.cmd([[
+						highlight! link semshiGlobal @constant
+						highlight! link semshiImported @none
+						highlight! link semshiParameter @lsp.type.parameter
+						highlight! link semshiParameterUnused DiagnosticUnnecessary
+						highlight! link semshiBuiltin @function.builtin
+						highlight! link semshiAttribute @field
+						highlight! link semshiSelf @lsp.type.selfKeyword
+						highlight! link semshiUnresolved @lsp.type.unresolvedReference
+						highlight! link semshiFree @none
+					]])
+				end,
+			})
+		end,
+	},
 }
