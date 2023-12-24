@@ -174,7 +174,7 @@ autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
 --------------------------------------------------------------------------------
 -- AUTO-CD TO PROJECT ROOT (PROJECT.NVIM LITE)
 local autoCdConfig = {
-	rootFiles = { -- order = priority
+	rootFiles = {
 		"info.plist", -- Alfred workflows
 		"Makefile",
 		".git",
@@ -188,32 +188,18 @@ local autoCdConfig = {
 
 vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function(ctx)
-		local function exists(path) return vim.loop.fs_stat(path) ~= nil end
-		local function setRoot(path)
-			if vim.loop.cwd() ~= path then vim.cmd.cd(path) end
-		end
+		local exists = vim.loop.fs_stat
 
-		local bufPath = vim.api.nvim_buf_get_name(ctx.buf)
-		if vim.bo.buftype ~= "" or not exists(bufPath) then return end
-
+		local bufPath = ctx.file
+		if vim.bo[ctx.buf].buftype ~= "" or not exists(bufPath) then return end
 		local pathToCheck = vim.fs.dirname(bufPath)
-		repeat
-			for _, file in ipairs(autoCdConfig.rootFiles) do
-				local rootfile = pathToCheck .. "/" .. file
-				if exists(rootfile) then
-					setRoot(vim.fs.dirname(rootfile))
-					return
-				end
-			end
-			for _, dir in ipairs(autoCdConfig.childOfDir) do
-				local parentFolderName = vim.fs.basename(vim.fs.dirname(pathToCheck))
-				if parentFolderName == dir then
-					setRoot(pathToCheck)
-					return
-				end
-			end
-			pathToCheck = vim.fs.dirname(pathToCheck)
-		until pathToCheck == "/"
+
+		local rootFile = vim.fs.find(autoCdConfig.rootFiles, { upward = true, path = pathToCheck })[1]
+		if rootFile then
+			local rootFolder = vim.fs.dirname(rootFile)
+			if vim.loop.cwd() ~= rootFolder then vim.cmd.cd(rootFolder) end
+			return
+		end
 	end,
 })
 
