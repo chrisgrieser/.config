@@ -44,10 +44,11 @@ end, { desc = " Buffer Info" })
 
 --------------------------------------------------------------------------------
 -- REFACTORING
-keymap("n", "<leader>ff", ":% s/<C-r><C-w>//g<Left><Left>", { desc = " :s (cursor word)" })
-keymap("x", "<leader>ff", [["zy:% s/<C-r>z//g<Left><Left>]], { desc = " :s (selection)" })
+keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰒕 LSP Rename" })
+keymap("n", "<leader>fs", ":% s/<C-r><C-w>//g<Left><Left>", { desc = " :s (cursor word)" })
+keymap("x", "<leader>fs", [["zy:% s/<C-r>z//g<Left><Left>]], { desc = " :s (selection)" })
 keymap("x", "<leader>fv", ": s///g<Left><Left><Left>", { desc = " :s (inside visual)" })
-keymap("n", "<leader>fd", ":g//d<Left><Left>", { desc = " delete matching" })
+keymap("n", "<leader>fd", ":global//d<Left><Left>", { desc = " delete matching" })
 
 ---@param useSpaces boolean
 local function retabber(useSpaces)
@@ -130,7 +131,6 @@ keymap("n", "<leader>df", function ()
 	vim.diagnostic.open_float() -- 2x = enter float
 end, { desc = "󰒕 Diagnostic under Cursor" })
 keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
-keymap("n", "<leader>v", vim.lsp.buf.rename, { desc = "󰒕 LSP Rename" })
 
 --------------------------------------------------------------------------------
 -- LOGGING
