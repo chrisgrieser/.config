@@ -12,7 +12,7 @@ local host = vim.fn.hostname()
 local isAtOffice = (host:find("mini") or host:find("eduroam") or host:find("fak1")) ~= nil
 if host:find("Mother") then
 	g.neovide_scale_factor = 0.88
-	g.neovide_refresh_rate = 35
+	g.neovide_refresh_rate = 30
 elseif isAtOffice then
 	g.neovide_scale_factor = 1.06
 	g.neovide_refresh_rate = 45
@@ -40,7 +40,10 @@ g.neovide_hide_mouse_when_typing = true
 -- Appearance
 g.neovide_underline_stroke_scale = 1.0
 g.neovide_scroll_animation_length = 0.03 -- amount of smooth scrolling
+
 g.neovide_floating_shadow = true
+g.neovide_floating_z_height = 1.5
+
 
 --------------------------------------------------------------------------------
 -- CURSOR
@@ -55,6 +58,9 @@ g.neovide_cursor_animation_length = 0.01
 g.neovide_cursor_trail_size = 0.9
 g.neovide_cursor_unfocused_outline_width = 0.1
 g.neovide_cursor_vfx_mode = "railgun" -- railgun|torpedo|pixiedust|sonicboom|ripple|wireframe
+
+g.neovide_cursor_animate_in_insert_mode = true
+g.neovide_cursor_animate_command_line = true
 
 -- only railgun, torpedo, and pixiedust
 g.neovide_cursor_vfx_particle_lifetime = 0.8
