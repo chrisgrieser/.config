@@ -49,7 +49,7 @@ return {
 				silent = true,
 				desc = "󰊢 Stage Selection",
 			},
-			{ "<leader>ga", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Add Buffer" },
+			{ "gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Add Buffer" },
 			{ "<leader>gv", "<cmd>Gitsigns preview_hunk<CR>", desc = "󰊢 Preview Hunk" },
 			{ "<leader>ua", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "󰊢 Unstage Last Stage" },
 			{ "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", desc = "󰊢 Reset Hunk" },
@@ -68,7 +68,6 @@ return {
 			-- digits are actually nerdfont numbers to achieve smaller size
 			-- stylua: ignore
 			count_chars = { "", "󰬻", "󰬼", "󰬽", "󰬾", "󰬿", "󰭀", "󰭁", "󰭂", ["+"] = "󰿮" },
-			-- count_chars = { "", "2", "3", "4", "5", "6", "7", "8", "9", ["+"] = "+" },
 			signs = {
 				delete = { show_count = true },
 				topdelete = { show_count = true },
