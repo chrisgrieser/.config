@@ -193,9 +193,9 @@ keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = " Esc (Terminal Mode)" })
 --------------------------------------------------------------------------------
 -- BUFFERS & WINDOWS & FILES
 
-keymap("n", "<CR>", function()
-	-- effectively this `<CR>` mapping in irregular buffertypes
-	if vim.bo.buftype == "" then require("funcs.alt-alt").gotoAltBuffer() end
+keymap({ "n", "x" }, "<CR>", function()
+	if vim.bo.buftype ~= "" then return end
+	require("funcs.alt-alt").gotoAltBuffer()
 end, { desc = "󰽙 Alt Buffer" })
 keymap({ "n", "x", "i" }, "<C-CR>", "<C-w>w", { desc = " Next Window" })
 

@@ -44,7 +44,7 @@ while pgrep -xq "neovide" || pgrep -xq "nvim"; do
 		fi
 	fi
 done
-sleep 0.2
+sleep 0.1
 
 # Restart
 open -a "Neovide"

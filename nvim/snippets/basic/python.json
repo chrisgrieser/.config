@@ -43,10 +43,14 @@
 		"body": "if __name__ == \"__main__\":\n\t${1:main()}$0",
 		"description": "Create implicitly all the code at the top level using the __name__ special variable."
 	},
-	"List comprehension": {
+	"list comprehension": {
 		"prefix": ["lc", "list comprehension"],
 		"body": "list(${1:value} for ${2:value} in ${3:iterable})$0",
 		"description": "List comprehension for creating a list based on existing lists."
+	},
+	"replace (regex)": {
+		"prefix": "replace (regex)",
+		"body": "re.sub(r\"${1:regex}\", r\"${2:replace}\", ${3:str})$0"
 	},
 	"lambda": {
 		"prefix": "lambda",
