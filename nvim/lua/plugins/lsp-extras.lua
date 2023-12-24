@@ -18,7 +18,10 @@ return {
 				vim.lsp.protocol.SymbolKind.Method,
 				vim.lsp.protocol.SymbolKind.Object,
 			},
-			disable = { lsp = {}, filetypes = {} },
+			disable = {
+				lsp = { "taplo" }, -- buggy
+				filetypes = {},
+			},
 			text_format = function(symbol)
 				if symbol.references == 0 then return "" end
 				return " 󰈿 " .. symbol.references
