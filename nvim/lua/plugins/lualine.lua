@@ -103,7 +103,7 @@ local lualineConfig = {
 		always_divide_middle = false,
 		-- nerdfont-powerline icons prefix: ple-
 		component_separators = { left = "|", right = "|" },
-		section_separators = { left = "▓", right = "▒" },
+		section_separators = { left = "", right = "" },
 		-- section_separators = { left = "", right = "" },
 		-- stylua: ignore
 		ignore_focus = {

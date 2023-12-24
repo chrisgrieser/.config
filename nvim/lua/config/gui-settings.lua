@@ -6,15 +6,17 @@ local keymap = require("config.utils").uniqueKeymap
 --------------------------------------------------------------------------------
 
 -- SIZE & FONT
-vim.opt.guifont = vim.env.CODE_FONT .. ":h25.2"
+vim.opt.guifont = vim.env.CODE_FONT .. ":h25"
 
 local host = vim.fn.hostname()
 local isAtOffice = (host:find("mini") or host:find("eduroam") or host:find("fak1")) ~= nil
 if host:find("Mother") then
-	g.neovide_scale_factor = 0.88
+	g.neovide_scale_factor = 0.9
 	g.neovide_refresh_rate = 30
+	g.neovide_padding_top = 30
+	g.neovide_padding_left = 17
 elseif isAtOffice then
-	g.neovide_scale_factor = 1.06
+	g.neovide_scale_factor = 1.05
 	g.neovide_refresh_rate = 45
 else
 	g.neovide_scale_factor = 1
@@ -29,6 +31,7 @@ end
 keymap({ "n", "x", "i" }, "<D-+>", function() setNeovideScaleFactor(0.01) end)
 keymap({ "n", "x", "i" }, "<D-->", function() setNeovideScaleFactor(-0.01) end)
 
+
 --------------------------------------------------------------------------------
 
 -- Behavior
@@ -40,9 +43,7 @@ g.neovide_hide_mouse_when_typing = true
 -- Appearance
 g.neovide_underline_stroke_scale = 1.1
 g.neovide_scroll_animation_length = 0.03 -- amount of smooth scrolling
-
 g.neovide_floating_shadow = true
-g.neovide_floating_z_height = 1.5
 
 
 --------------------------------------------------------------------------------

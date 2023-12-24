@@ -1,6 +1,15 @@
 local M = {}
+
 local u = require("config.utils")
+
+---@param cmd string
 local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
+
+---@param key string
+local function feedkeys(key)
+	local keyCode = vim.api.nvim_replace_termcodes(key, true, false, true)
+	vim.api.nvim_feedkeys(keyCode, "i", false)
+end
 
 --------------------------------------------------------------------------------
 
@@ -92,8 +101,6 @@ function M.openNewScope()
 	vim.cmd.startinsert { bang = true }
 end
 
---------------------------------------------------------------------------------
-
 --- open the next regex at https://regex101.com/
 function M.openAtRegex101()
 	vim.cmd.TSTextobjectSelect("@regex.outer")
@@ -115,8 +122,6 @@ function M.openAtRegex101()
 	)
 	vim.fn.system { "open", url }
 end
-
---------------------------------------------------------------------------------
 
 -- simple task selector from makefile
 function M.selectMake()
@@ -155,13 +160,10 @@ function M.toggleOrIncrement()
 	return "<C-a>"
 end
 
---------------------------------------------------------------------------------
-
 -- simplified version of neogen.nvim
--- requires nvim-treesitter-textobjects
-
+-- - requires nvim-treesitter-textobjects
+-- - lsp usually provides better prefills for docstrings
 function M.docstring()
-	-- GUARD
 	local supportedFts = { "lua", "python", "javascript" }
 	if not vim.tbl_contains(supportedFts, vim.bo.filetype) then
 		u.notify("Unsupported filetype.", "warn")
@@ -180,12 +182,14 @@ function M.docstring()
 		vim.api.nvim_win_set_cursor(0, { ln + 1, #indent + 3 })
 		vim.cmd.startinsert()
 	elseif ft == "lua" then
-		vim.api.nvim_buf_set_lines(0, ln - 1, ln - 1, false, { "--" })
+		vim.api.nvim_buf_set_lines(0, ln - 1, ln - 1, false, { "---" })
 		vim.api.nvim_win_set_cursor(0, { ln, 0 })
 		vim.cmd.startinsert { bang = true }
-		-- need to manually press `-` to trigger lua-lsp completion
-		-- TODO figure out how to trigger it programmatically
-		vim.api.nvim_feedkeys("-", "i", false)
+		-- HACK to trigger the `@param;@return` luadoc completion from lua-ls
+		vim.defer_fn(function()
+			require("cmp").complete()
+			require("cmp").confirm { select = true }
+		end, 1)
 	elseif ft == "javascript" then
 		normal("t)") -- go to parameter, since cursor has to be on diagnostic for code action
 		vim.lsp.buf.code_action {
@@ -200,17 +204,8 @@ function M.docstring()
 	end
 end
 
---------------------------------------------------------------------------------
-
 ---simplified implementation of tabout.nvim, to be used in insert-mode
 function M.tabout()
-	-- using feedkeys instead of `expr = true`, since the cmp mapping
-	-- does not work with `expr = true`
-	local function feedkeys(key)
-		local keyCode = vim.api.nvim_replace_termcodes(key, true, false, true)
-		vim.api.nvim_feedkeys(keyCode, "i", false)
-	end
-
 	local line = vim.api.nvim_get_current_line()
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local charsBefore = line:sub(1, col)
@@ -218,6 +213,8 @@ function M.tabout()
 	local frontOfMarkdownList = vim.bo.ft == "markdown" and charsBefore:match("^[%s-*+]*$")
 
 	if onlyWhitespaceBeforeCursor or frontOfMarkdownList then
+		-- using feedkeys instead of `expr = true`, since the cmp mapping
+		-- does not work with `expr = true`
 		feedkeys("<C-t>")
 	elseif vim.bo.ft == "gitcommit" then
 		feedkeys("<C-e>")
