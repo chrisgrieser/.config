@@ -109,7 +109,7 @@ local keymappings_N = vim.tbl_extend("force", keymappings_I, normalModeOnly)
 -- HELPERS
 
 -- HACK color parent as comment
--- CAVEAT interferes with other Telescope Results that display for spaces
+-- CAVEAT interferes with other Telescope Results that display two tabs
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "TelescopeResults",
 	callback = function()
@@ -117,13 +117,14 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
 	end,
 })
+-- `M` in `:Telescope git_status`
+u.colorschemeMod("TelescopeResultsDiffChange", { link = "diffChanged" })
 
 ---Requires the autocmd above
 ---@param _ table
 ---@param path string
 ---@return string
 local function filenameFirst(_, path)
-	path = path:gsub("/$", "") -- trailing slash from directories breaks fs.basename
 	local tail = vim.fs.basename(path)
 	local parent = vim.fs.dirname(path)
 	if parent == "." then return tail end
@@ -169,7 +170,7 @@ local function telescopeConfig()
 			find_files = {
 				path_display = filenameFirst,
 				prompt_prefix = "󰝰 ",
-				-- FIX using the default find command from telescope is somewhat buggy,
+				-- FIX using the default fd command from telescope is somewhat buggy,
 				-- e.g. not respecting `~/.config/fd/ignore`
 				find_command = { "fd", "--type=file", "--type=symlink" },
 				mappings = { i = findFileMappings },
@@ -195,10 +196,19 @@ local function telescopeConfig()
 			},
 			git_status = {
 				prompt_prefix = "󰊢 ",
+				git_icons = {
+					added = "A",
+					changed = "M",
+					copied = "C",
+					deleted = "D",
+					renamed = "R",
+					unmerged = "U",
+					untracked = "?",
+				},
 				initial_mode = "normal",
 				show_untracked = true,
 				previewer = false,
-				layout_config = { horizontal = { height = 0.4, width = 0.6 } },
+				layout_config = { horizontal = { height = 0.5, width = 0.6 } },
 				mappings = {
 					n = {
 						["<Tab>"] = "move_selection_worse",

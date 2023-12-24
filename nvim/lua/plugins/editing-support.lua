@@ -177,12 +177,15 @@ return {
 			cursor_behavior = "start",
 			max_join_length = 160,
 			langs = {
-				python = { -- python docstrings
+				-- python docstrings
+				python = {
 					string_content = { both = { fallback = function() vim.cmd("normal! gww") end } },
 				},
+				-- comments in any language
 				comment = {
 					source = { both = { fallback = function() vim.cmd("normal! gww") end } },
 				},
+				-- various types of markdown lines
 				html = {
 					fragment = { both = { fallback = function() vim.cmd("normal! gww") end } },
 				},
@@ -250,7 +253,7 @@ return {
 
 			-- leader prefixes normal+visual mode
 			require("which-key").register({
-				f = { name = " 󱗘 Refactor" },
+				r = { name = " 󱗘 Refactor" },
 				l = { name = "  Log / Cmdline" },
 				g = { name = " 󰊢 Git" },
 			}, { prefix = "<leader>", mode = { "x", "n" } })
