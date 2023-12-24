@@ -1,7 +1,7 @@
 -- DOCS https://neovide.dev/configuration.html
 local g = vim.g
 
-local u = require("")
+local u = require("config.utils")
 local keymap = require("config.utils").uniqueKeymap
 --------------------------------------------------------------------------------
 
@@ -31,18 +31,16 @@ keymap({ "n", "x", "i" }, "<D-->", function() setNeovideScaleFactor(-0.01) end)
 
 --------------------------------------------------------------------------------
 
--- window size
+-- Behavior
 g.neovide_remember_window_size = true
-
--- keymaps
 g.neovide_input_use_logo = true -- enable `cmd` key on macOS
 g.neovide_input_macos_alt_is_meta = false -- false, so {@~ etc can be used
 g.neovide_hide_mouse_when_typing = true
 
 -- Appearance
--- g.neovide_underline_automatic_scaling = true -- slightly unstable according to docs
 g.neovide_underline_stroke_scale = 1.0
-g.neovide_scroll_animation_length = 1
+g.neovide_scroll_animation_length = 0.03 -- amount of smooth scrolling
+g.neovide_floating_shadow = true
 
 --------------------------------------------------------------------------------
 -- CURSOR
@@ -59,7 +57,7 @@ g.neovide_cursor_unfocused_outline_width = 0.1
 g.neovide_cursor_vfx_mode = "railgun" -- railgun|torpedo|pixiedust|sonicboom|ripple|wireframe
 
 -- only railgun, torpedo, and pixiedust
-g.neovide_cursor_vfx_particle_lifetime = 0.5
+g.neovide_cursor_vfx_particle_lifetime = 0.8
 g.neovide_cursor_vfx_particle_density = 20.0
 g.neovide_cursor_vfx_particle_speed = 40.0
 
