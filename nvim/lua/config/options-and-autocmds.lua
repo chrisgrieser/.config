@@ -197,7 +197,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		local rootFile = vim.fs.find(autoCdConfig.rootFiles, { upward = true, path = pathToCheck })[1]
 		if rootFile then
 			local rootFolder = vim.fs.dirname(rootFile)
-			if vim.loop.cwd() ~= rootFolder then vim.cmd.cd(rootFolder) end
+			vim.cmd.cd(rootFolder)
 			return
 		end
 	end,
