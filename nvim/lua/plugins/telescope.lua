@@ -386,7 +386,7 @@ return {
 					vim.keymap.set("n", "gs", function()
 						require("telescope.builtin").lsp_document_symbols {
 							prompt_title = "Sections",
-							symbols = {"objects", "module"},
+							symbols = {"object", "module"},
 						}
 					end, { desc = " Sections", buffer = true })
 				end,

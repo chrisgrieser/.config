@@ -1,7 +1,7 @@
 alias co='git checkout'
 alias gs='git status'
 alias ga='git add'
-alias gaa='git add --all'
+alias gA='git add --all'
 
 alias gd='git diff'
 alias grh='git reset --hard',
