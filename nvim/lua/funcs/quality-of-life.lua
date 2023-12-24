@@ -104,20 +104,20 @@ end
 --- open the next regex at https://regex101.com/
 function M.openAtRegex101()
 	local lang = vim.bo.filetype
-	local regex, pattern, replace, flags
-	
+	local text, pattern, replace, flags
+
 	if (lang == "javascript" or lang == "typescript") then
 		vim.cmd.TSTextobjectSelect("@regex.outer")
 		normal('"zy')
 		vim.cmd.TSTextobjectSelect("@regex.inner") -- reselect for easier pasting
-		regex = vim.fn.getreg("z")
-		pattern = regex:match("/(.*)/")
-		flags = regex:match("/.*/(%l*)") or ""
+		text = vim.fn.getreg("z")
+		pattern = text:match("/(.*)/")
+		flags = text:match("/.*/(%l*)") or "gm"
 		replace = vim.api.nvim_get_current_line():match('replace ?%(/.*/.*, ?"(.-)"')
-	elseif (lang == "python" or lang == "lua") then
+	elseif (lang == "python") then
 		normal('"zyi"vi"') -- yank & reselect inside quotes
 		pattern = vim.fn.getreg("z")
-		flags = ""
+		flags = "gm" -- TODO retrieve flags in a smarter way
 	else
 		u.notify("Unsupported filetype.", "warn")
 		return
