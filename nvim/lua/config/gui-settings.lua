@@ -38,7 +38,7 @@ g.neovide_input_macos_alt_is_meta = false -- false, so {@~ etc can be used
 g.neovide_hide_mouse_when_typing = true
 
 -- Appearance
-g.neovide_underline_stroke_scale = 1.0
+g.neovide_underline_stroke_scale = 1.1
 g.neovide_scroll_animation_length = 0.03 -- amount of smooth scrolling
 
 g.neovide_floating_shadow = true

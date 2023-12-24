@@ -103,20 +103,22 @@ function M.openAtRegex101()
 	local regex = vim.fn.getreg("z")
 	local pattern = regex:match("/(.*)/")
 	local flags = regex:match("/.*/(%l*)")
-	local replacement = vim.api.nvim_get_current_line():match('replace ?%(/.*/.*, ?"(.-)"')
+	local replace = vim.api.nvim_get_current_line():match('replace ?%(/.*/.*, ?"(.-)"')
+	local lang = vim.bo.filetype
 
 	-- DOCS https://github.com/firasdib/Regex101/wiki/FAQ#how-to-prefill-the-fields-on-the-interface-via-url
 	local url = ("https://regex101.com/?regex=%s&subst=%s&flags=%s&flavor=%s"):format(
 		pattern,
-		replacement or "",
+		(replace and "&subst=" .. replace or ""),
 		flags,
-		vim.bo.ft
+		lang
 	)
 	vim.fn.system { "open", url }
 end
 
 --------------------------------------------------------------------------------
 
+-- simple task selector from makefile
 function M.selectMake()
 	-- GUARD
 	local makefile = vim.loop.cwd() .. "/Makefile"
@@ -139,12 +141,24 @@ function M.selectMake()
 	end)
 end
 
+-- Increment, or Toggle if cursorword is true/false
+-- requires `expr = true` for the keymap
+function M.toggleOrIncrement()
+	local cword = vim.fn.expand("<cword>")
+	local bool = { ["true"] = "false", ["True"] = "False" }
+	local toggle
+	for word, opposite in pairs(bool) do
+		if cword == word then toggle = opposite end
+		if cword == opposite then toggle = word end
+		if toggle then return "mzciw" .. toggle .. "<Esc>`z" end
+	end
+	return "<C-a>"
+end
+
 --------------------------------------------------------------------------------
 
 -- simplified version of neogen.nvim
 -- requires nvim-treesitter-textobjects
-
-
 
 function M.docstring()
 	-- GUARD
