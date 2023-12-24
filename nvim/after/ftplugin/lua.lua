@@ -1,7 +1,4 @@
-local cmd = vim.cmd
-local keymap = vim.keymap.set
 local u = require("config.utils")
-
 --------------------------------------------------------------------------------
 
 -- habits from writing too much in other languages
@@ -18,14 +15,14 @@ u.ftAbbr("ree", "return end")
 --------------------------------------------------------------------------------
 
 -- if in nvim dir, reload file/plugin, otherwise run `make`
-keymap("n", "<leader>r", function()
-	cmd("silent update")
+vim.keymap.set("n", "<leader>m", function()
+	vim.cmd("silent! update")
 	local isNvimConfig = vim.loop.cwd() == vim.fn.stdpath("config")
 	local filepath = vim.api.nvim_buf_get_name(0)
 
 	--- GUARD
 	if filepath:find("nvim/after/ftplugin/") then
-		u.notify("", "ftplugins cannot be reloaded.", "warn")
+		u.notify("", "ftplugins cannot be reloaded. Just `:edit` buffer again.", "warn")
 		return
 	elseif filepath:find("nvim/lua/.*keymap") or filepath:find("nvim/lua/.*keybinding") then
 		u.notify("", "keymaps cannot be reloaded due to `map-unique`", "warn")
@@ -34,9 +31,8 @@ keymap("n", "<leader>r", function()
 	elseif isNvimConfig then
 		local packageName = vim.fn.expand("%:r"):gsub("lua/", ""):gsub("/", ".")
 		package.loaded[packageName] = nil
-		cmd.source()
+		vim.cmd.source()
 		u.notify("Re-sourced", packageName)
-
 	-- run `make`
 	else
 		vim.cmd.lmake()

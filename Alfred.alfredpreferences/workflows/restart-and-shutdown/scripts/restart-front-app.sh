@@ -15,7 +15,7 @@ if [[ "$FRONT_APP" != "neovide" ]]; then
 		sleep 0.1
 		if [[ $i -gt 20 ]]; then
 			echo -n "Could not quit $FRONT_APP" # Alfred notification
-			exit 1
+			return 1
 		fi
 	done
 	sleep 0.2
@@ -35,18 +35,18 @@ nvim --server "/tmp/nvim_server.pipe" \
 # wait until dead
 i=0
 while pgrep -xq "neovide" || pgrep -xq "nvim"; do
-	sleep 0.1
+	sleep 0.2
 	i=$((i + 1))
-	if [[ $i -gt 15 ]]; then
+	if [[ $i -gt 10 ]]; then
 		if ! killall -9 neovide nvim "Automator Application Stub" ; then
 			echo -n "Could not kill neovide." # Alfred notification
-			exit 1
+			return 1
 		fi
 	fi
 done
-sleep 0.1
 
 # Restart
+sleep 0.2
 open -a "Neovide"
 sleep 0.1
 osascript -e 'tell application "Neovide" to activate' # `open -a` does not focus properly
