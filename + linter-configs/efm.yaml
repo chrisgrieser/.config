@@ -31,12 +31,13 @@ tools:
   woke: &woke
     lint-source: woke
     lint-command: |
-      woke --stdin --output=simple --config="$HOME/.config/+ linter-configs/woke.yaml"
-    lint-stdin: true
+      woke --output=simple --no-ignore --config="$HOME/.config/+ linter-configs/woke.yaml"
+    lint-stdin: false # somehow stdin does not work
+    lint-offset-columns: 1
     lint-formats:
-      - "/dev/stdin:%l:%c: [%tarning] %m"
-      - "/dev/stdin:%l:%c: [%trror] %m"
-      - "/dev/stdin:%l:%c: [%tnfo] %m"
+      - "%f:%l:%c: [%tarning] %m"
+      - "%f:%l:%c: [%trror] %m"
+      - "%f:%l:%c: [%tnfo] %m"
 
 languages:
   sh:
