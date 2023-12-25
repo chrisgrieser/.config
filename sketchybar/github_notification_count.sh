@@ -1,8 +1,7 @@
 #!/usr/bin/env zsh
-# shellcheck disable=SC1091
+export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 #───────────────────────────────────────────────────────────────────────────────
 
-export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 # GUARD only via interval or when browser becomes frontmost
 [[ -z "$INFO" || "$INFO" == "$BROWSER_APP" ]] || return 0
@@ -20,8 +19,11 @@ fi
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# wait so notification opened is marked as read
+[[ "$INFO" == "$BROWSER_APP" ]] || sleep 3
+
 # DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28
-notification_count=$(curl -L \
+notification_count=$(curl -sL \
 	-H "Accept: application/vnd.github+json" \
 	-H "Authorization: Bearer $GITHUB_TOKEN" \
 	-H "X-GitHub-Api-Version: 2022-11-28" \
