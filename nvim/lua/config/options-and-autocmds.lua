@@ -154,6 +154,11 @@ autocmd({ "BufNew", "BufReadPost" }, {
 opt.autowriteall = true
 autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
 	callback = function(ctx)
+		local function save()
+			if not vim.api.nvim_buf_is_valid(bufnr) then return end
+			vim.api.nvim_buf_call(bufnr, function() vim.cmd("silent! noautocmd update!") end)
+			b.saveQueued = false
+		end
 		local bufnr = ctx.buf
 		local bo = vim.bo[bufnr]
 		local b = vim.b[bufnr]
