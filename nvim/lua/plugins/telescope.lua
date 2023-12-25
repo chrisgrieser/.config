@@ -15,7 +15,6 @@ local keymappings_I = {
 	["<Up>"] = "cycle_history_prev",
 	["<Down>"] = "cycle_history_next",
 	["<D-a>"] = "toggle_all",
-	["<D-f>"] = "to_fuzzy_refine", -- live grep & workspace symbols
 	["<D-s>"] = function(prompt_bufnr)
 		require("telescope.actions").smart_send_to_qflist(prompt_bufnr) -- sends selected, or if none selected, sends all
 		vim.cmd.cfirst()
@@ -142,10 +141,7 @@ local function telescopeConfig()
 			multi_icon = "󰒆 ",
 			results_title = false,
 			dynamic_preview_title = true,
-			preview = {
-				timeout = 400, -- ms
-				filesize_limit = 1, -- Mb
-			},
+			preview = { timeout = 400, filesize_limit = 1 }, -- ms & Mb
 			borderchars = u.borderChars,
 			default_mappings = { i = keymappings_I, n = keymappings_N },
 			sorting_strategy = "ascending", -- so layout is consistent with prompt_position "top"
@@ -196,15 +192,8 @@ local function telescopeConfig()
 			},
 			git_status = {
 				prompt_prefix = "󰊢 ",
-				git_icons = {
-					added = "A",
-					changed = "M",
-					copied = "C",
-					deleted = "D",
-					renamed = "R",
-					unmerged = "U",
-					untracked = "?",
-				},
+				-- stylua: ignore
+				git_icons = { added = "A", changed = "M", copied = "C", deleted = "D", renamed = "R", unmerged = "U", untracked = "?" },
 				initial_mode = "normal",
 				show_untracked = true,
 				previewer = false,
@@ -258,6 +247,12 @@ local function telescopeConfig()
 				initial_mode = "normal",
 				previewer = false,
 				layout_config = { horizontal = { height = 0.4, width = 0.6 } },
+				mappings = {
+					n = {
+						["<D-n>"] = "git_create_branch",
+						["<C-r>"] = "git_rename_branch",
+					},
+				},
 			},
 			keymaps = {
 				prompt_prefix = " ",
@@ -308,7 +303,7 @@ local function telescopeConfig()
 			lsp_workspace_symbols = {
 				prompt_prefix = "󰒕 ",
 				prompt_title = "Workspace Symbols",
-				symbols = { "function", "class", "method" },
+				-- symbols = { "function", "class", "method" },
 				fname_width = 12,
 			},
 			spell_suggest = {
@@ -351,7 +346,7 @@ return {
 			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
 			{ "<leader>ph", function() telescope("highlights") end, desc = " Highlight Groups" },
 			-- stylua: ignore
-			{ "<leader>dt", function() telescope("diagnostics") end, desc = " List Diagnostics" },
+			{"<leader>dt", function() telescope("diagnostics") end, desc = " List Diagnostics" },
 			{
 				"<leader>pc",
 				function() telescope("colorscheme") end,
@@ -360,6 +355,12 @@ return {
 			{ "<leader>gs", function() telescope("git_status") end, desc = " Status" },
 			{ "<leader>gl", function() telescope("git_commits") end, desc = " Log/Commits" },
 			{ "<leader>gL", function() telescope("git_bcommits") end, desc = " Buffer Commits" },
+			{
+				"<leader>gd",
+				function() telescope("git_bcommits_range") end,
+				mode = "x",
+				desc = " Line History",
+			},
 			{ "<leader>gb", function() telescope("git_branches") end, desc = " Branches" },
 			{ "zl", function() telescope("spell_suggest") end, desc = "󰓆 Spell Suggest" },
 			{

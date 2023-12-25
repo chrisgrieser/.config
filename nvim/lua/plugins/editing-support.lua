@@ -177,25 +177,22 @@ return {
 			cursor_behavior = "start",
 			max_join_length = 160,
 			langs = {
-				-- python docstrings
-				python = {
+				python = { -- python docstrings
 					string_content = { both = { fallback = function() vim.cmd("normal! gww") end } },
 				},
-				-- comments in any language
-				comment = {
+				comment = { -- comments in any language
 					source = { both = { fallback = function() vim.cmd("normal! gww") end } },
 				},
-				-- various types of markdown lines
-				html = {
-					fragment = { both = { fallback = function() vim.cmd("normal! gww") end } },
+				markdown = { -- various types of markdown lines
+					element = { both = { fallback = function() vim.cmd("normal! gww") end } },
+					list_marker_minus = { both = { fallback = function() vim.cmd("normal! gww") end } },
+					list_marker_dot = { both = { fallback = function() vim.cmd("normal! gww") end } },
 				},
 				markdown_inline = {
 					inline = { both = { fallback = function() vim.cmd("normal! gww") end } },
 				},
-				markdown = {
-					element = { both = { fallback = function() vim.cmd("normal! gww") end } },
-					list_marker_minus = { both = { fallback = function() vim.cmd("normal! gww") end } },
-					list_marker_dot = { both = { fallback = function() vim.cmd("normal! gww") end } },
+				html = {
+					fragment = { both = { fallback = function() vim.cmd("normal! gww") end } },
 				},
 			},
 		},
@@ -253,7 +250,7 @@ return {
 
 			-- leader prefixes normal+visual mode
 			require("which-key").register({
-				f = { name = " 󱗘 Refactor" },
+				r = { name = " 󱗘 Refactor" },
 				l = { name = "  Log / Cmdline" },
 				g = { name = " 󰊢 Git" },
 			}, { prefix = "<leader>", mode = { "x", "n" } })

@@ -81,6 +81,7 @@ local lualineConfig = {
 		},
 		lualine_z = {
 			{ "selectioncount", fmt = function(str) return str ~= "" and "礪" .. str or "" end },
+			{ "location" },
 			{
 				"datetime",
 				style = "%H:%M",
@@ -90,7 +91,6 @@ local lualineConfig = {
 					return "󰅐 " .. timeWithBlinkingColon
 				end,
 			},
-			{ "location", component_separators = { right = "" } },
 			{
 				function() return "" end,
 				cond = function() return vim.fn.has("gui_running") == 1 end, -- glyph not supported by wezterm yet
@@ -101,10 +101,8 @@ local lualineConfig = {
 	options = {
 		globalstatus = true,
 		always_divide_middle = false,
-		-- nerdfont-powerline icons prefix: ple-
-		component_separators = { left = "|", right = "|" },
-		section_separators = { left = "", right = "" },
-		-- section_separators = { left = "", right = "" },
+		component_separators = { left = "", right = "" },
+		section_separators = { left = "", right = "" }, -- nerdfont-powerline icons prefix: ple-
 		-- stylua: ignore
 		ignore_focus = {
 			"DressingInput", "DressingSelect", "lspinfo", "ccc-ui", "TelescopePrompt",
@@ -117,7 +115,7 @@ local lualineConfig = {
 
 return {
 	"nvim-lualine/lualine.nvim",
-	lazy = false, -- no flickering on startup
+	event = "UIEnter",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	opts = lualineConfig,
 }
