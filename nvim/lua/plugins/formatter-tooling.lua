@@ -3,10 +3,7 @@ local linterConfig = require("config.utils").linterConfigFolder
 --------------------------------------------------------------------------------
 
 local formatters = {
-	javascript = { "biome" },
-	typescript = { "biome" },
 	applescript = { "trim_whitespace", "trim_newlines", "squeeze_blanks" },
-	json = { "biome" },
 	lua = { "stylua" },
 	markdown = { "markdown-toc", "markdownlint", "injected" },
 	sh = { "shellcheck", "shfmt" },
@@ -16,6 +13,9 @@ local formatters = {
 }
 
 local lspFormatFiletypes = {
+	"javascript",
+	"typescript",
+	"json",
 	"toml",
 	"yaml",
 	"html",

@@ -207,6 +207,19 @@ serverConfigs.tsserver = {
 		typescript = configForBoth,
 		javascript = configForBoth,
 	},
+	-- Disable formatting in favor of biome
+	on_attach = function(client)
+		client.server_capabilities.documentFormattingProvider = false
+		client.server_capabilities.documentRangeFormattingProvider = false
+	end,
+}
+
+-- SIC needs to be enabled
+serverConfigs.biome = {
+	on_attach = function(client)
+		client.server_capabilities.documentFormattingProvider = true
+		client.server_capabilities.documentRangeFormattingProvider = true
+	end,
 }
 
 --------------------------------------------------------------------------------
