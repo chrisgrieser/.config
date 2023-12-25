@@ -67,8 +67,9 @@ local function retabber(use)
 	local char = use == "spaces" and "󱁐" or "󰌒"
 	bo.expandtab = use == "spaces"
 	bo.tabstop = 2
+	bo.shiftwidth = 2
+	bo.tabstop = 3
 	cmd.retab { bang = true }
-	if use == "tabs" then bo.tabstop = 3 end
 	u.notify("Indent", ("Now using %s"):format(char))
 end
 keymap("n", "<leader>r<Tab>", function() retabber("tabs") end, { desc = "󰌒 Use Tabs" })

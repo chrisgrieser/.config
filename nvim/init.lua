@@ -34,8 +34,7 @@ safeRequire("config.options-and-autocmds")
 safeRequire("config.keybindings")
 safeRequire("config.leader-keybindings")
 
-safeRequire("config.diagnostics")
-safeRequire("config.user-commands")
+safeRequire("config.lsp-and-diagnostics")
 safeRequire("config.spellfixes")
 
 --------------------------------------------------------------------------------

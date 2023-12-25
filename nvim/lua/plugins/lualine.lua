@@ -9,13 +9,13 @@ local function irregularWhitespace()
 
 	local spaceFtsOnly = vim.tbl_keys(spaceFiletypes)
 	local spacesInsteadOfTabs = bo.expandtab and not vim.tbl_contains(spaceFtsOnly, bo.ft)
-	local differentSpaceAmount = bo.expandtab and spaceFiletypes[bo.ft] ~= bo.tabstop
+	local differentSpaceAmount = bo.expandtab and spaceFiletypes[bo.ft] ~= bo.shiftwidth
 	local tabsInsteadOfSpaces = not bo.expandtab and vim.tbl_contains(spaceFtsOnly, bo.ft)
 
 	if spacesInsteadOfTabs or differentSpaceAmount then
-		return "󱁐 " .. tostring(bo.tabstop)
+		return "󱁐 " .. tostring(bo.shiftwidth)
 	elseif tabsInsteadOfSpaces then
-		return "󰌒 " .. tostring(bo.tabstop)
+		return "󰌒 " .. tostring(bo.shiftwidth)
 	end
 	return ""
 end

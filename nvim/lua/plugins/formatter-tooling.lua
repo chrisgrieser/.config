@@ -25,15 +25,15 @@ local lspFormatFiletypes = {
 
 --------------------------------------------------------------------------------
 
-local extraInstalls = {
-	"debugpy",
-	"shellcheck", -- used by bash-lsp/efm, not bundled PENDING https://github.com/bash-lsp/bash-language-server/issues/663
-	"markdownlint", -- used by efm
-	"pynvim", -- needed by semshi
+local dependencies = {
+	"debugpy", -- nvim-dap-python
+	"shellcheck", -- bash-lsp/efm, PENDING https://github.com/bash-lsp/bash-language-server/issues/663
+	"markdownlint", -- efm
+	"pynvim", -- semshi
 }
 
+-- not real formatters, but pseudo-formatters from conform.nvim
 local dontInstall = {
-	-- not real formatters, but pseudo-formatters from conform.nvim
 	"trim_whitespace",
 	"trim_newlines",
 	"squeeze_blanks",
@@ -163,7 +163,7 @@ return {
 		dependencies = "williamboman/mason.nvim",
 		config = function()
 			local lsps = vim.tbl_values(vim.g.lspToMasonMap)
-			local myTools = toolsToAutoinstall(formatters, lsps, extraInstalls, dontInstall)
+			local myTools = toolsToAutoinstall(formatters, lsps, dependencies, dontInstall)
 
 			require("mason-tool-installer").setup {
 				ensure_installed = myTools,
