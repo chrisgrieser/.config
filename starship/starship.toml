@@ -108,16 +108,16 @@ diverged = '[󰃻 $count ](fg:red bg:black)'
 ahead = '[󰶣 $count ](fg:cyan bg:black)'
 behind = '[󰶡 $count ](fg:yellow bg:black)'
 style = 'bg:black'
+format = '[$ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$deleted]($style)'
+
+# changed lines
 # INFO putting a variable into a bracket ensures that the bracket content is
 # only shown when the variable is set.
-format = '[( $ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$deleted)]($style)'
-
-# lines
 [git_metrics]
 disabled = false
 added_style = "fg:green bg:black"
 deleted_style = "fg:red bg:black"
-format = '(\([+$added]($added_style)/[-$deleted]($deleted_style)\)) '
+format = '(\([(+$added)]($added_style)[( -$deleted)]($deleted_style)\)) '
 
 #───────────────────────────────────────────────────────────────────────────────
 # RIGHT SIDE
