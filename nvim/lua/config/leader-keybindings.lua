@@ -45,11 +45,11 @@ end, { desc = " Buffer Info" })
 
 --------------------------------------------------------------------------------
 -- REFACTORING
-keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰒕 Var Rename" })
-keymap("n", "<leader>fs", ":% s/<C-r><C-w>//g<Left><Left>", { desc = " :substitute" })
-keymap("x", "<leader>fs", [["zy:% s/<C-r>z//g<Left><Left>]], { desc = " :s (for selection)" })
-keymap("x", "<leader>fv", ": s///g<Left><Left><Left>", { desc = " :s (inside visual)" })
-keymap("n", "<leader>fd", ":global//d<Left><Left>", { desc = " delete matching" })
+keymap("n", "<leader>rr", vim.lsp.buf.rename, { desc = "󰒕 Var Rename" })
+keymap("n", "<leader>rs", ":% s/<C-r><C-w>//g<Left><Left>", { desc = " :substitute" })
+keymap("x", "<leader>rs", [["zy:% s/<C-r>z//g<Left><Left>]], { desc = " :s (for selection)" })
+keymap("x", "<leader>rv", ": s///g<Left><Left><Left>", { desc = " :s (inside visual)" })
+keymap("n", "<leader>rd", ":global//d<Left><Left>", { desc = " delete matching" })
 
 ---@param use "spaces"|"tabs"
 local function retabber(use)
@@ -60,8 +60,8 @@ local function retabber(use)
 	if use == "tabs" then bo.tabstop = 3 end
 	u.notify("Indent", ("Now using %s"):format(char))
 end
-keymap("n", "<leader>f<Tab>", function() retabber("tabs") end, { desc = "󰌒 Use Tabs" })
-keymap("n", "<leader>f<Space>", function() retabber("spaces") end, { desc = "󱁐 Use Spaces" })
+keymap("n", "<leader>r<Tab>", function() retabber("tabs") end, { desc = "󰌒 Use Tabs" })
+keymap("n", "<leader>r<Space>", function() retabber("spaces") end, { desc = "󱁐 Use Spaces" })
 
 --------------------------------------------------------------------------------
 -- UNDO

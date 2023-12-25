@@ -17,6 +17,6 @@ if pgrep -xq "neovide"; then
 else
 	[[ -z "$LINE" ]] && linearg="+$LINE"
 	# shellcheck disable=2086
-	nohup neovide --notabs $linearg "$@" &
+	nohup neovide --no-tabs $linearg "$@" &
 	disown # https://stackoverflow.com/a/20338584/22114136
 fi
