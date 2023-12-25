@@ -274,8 +274,7 @@ serverConfigs.ltex = {
 
 		-- Disable in Obsidian
 		vim.defer_fn(function()
-			local isInObsidianVault = vim.loop.cwd() == vim.env.VAULT_PATH
-			if isInObsidianVault then vim.cmd.LspStop() end
+			if vim.loop.cwd() == vim.env.VAULT_PATH then vim.cmd.LspStop("ltex") end
 		end, 500)
 	end,
 }
@@ -368,17 +367,16 @@ local function lspHandlers()
 	end)(vim.lsp.handlers["textDocument/rename"])
 end
 
-
 --------------------------------------------------------------------------------
 
 return {
 	{ -- configure LSPs
 		"neovim/nvim-lspconfig",
 		lazy = false,
-		-- dependencies = { -- loading as dependency ensures it's loaded before lua_ls
-		-- 	"folke/neodev.nvim",
-		-- 	opts = { library = { plugins = false } }, -- too slow with all my plugins
-		-- },
+		dependencies = { -- loading as dependency ensures it's loaded before lua_ls
+			"folke/neodev.nvim",
+			opts = { library = { plugins = false } }, -- too slow with all my plugins
+		},
 		init = setupAllLsps,
 		config = function()
 			lspHandlers()

@@ -62,18 +62,22 @@ end
 
 --------------------------------------------------------------------------------
 
-local formatterConfig = {
-	formatters_by_ft = formatters,
-	formatters = {
-		markdownlint = {
-			prepend_args = { "--config=" .. linterConfig .. "/markdownlint.yaml" },
-		},
+local function formatterConfig()
+	-- FIX silence injected formatter
+	require("conform.formatters.injected").options.ignore_errors = true
 
-		-- PENDING using biome via LSP (nvim 0.10)
-		biome = {
-			stdin = false,
-			args = { "format", "--write", "$FILENAME" },
-		},
+	require("conform").setup {
+		formatters_by_ft = formatters,
+		formatters = {
+			markdownlint = {
+				prepend_args = { "--config=" .. linterConfig .. "/markdownlint.yaml" },
+			},
+
+			-- PENDING using biome via LSP (nvim 0.10)
+			biome = {
+				stdin = false,
+				args = { "format", "--write", "$FILENAME" },
+			},
 
 		-- stylua: ignore
 		["bibtex-tidy"] = {
@@ -92,8 +96,9 @@ local formatterConfig = {
 				return true
 			end,
 		},
-	},
-}
+		},
+	}
+end
 
 --------------------------------------------------------------------------------
 
@@ -101,14 +106,11 @@ return {
 	{ -- Formatter integration
 		"stevearc/conform.nvim",
 		cmd = "ConformInfo",
-		opts = formatterConfig,
+		config = formatterConfig,
 		keys = {
 			{
 				"<D-s>",
 				function()
-					-- FIX silence injected formatter
-					require("conform.formatters.injected").options.ignore_errors = false
-
 					local useLsp = vim.tbl_contains(lspFormatFiletypes, vim.bo.ft) and "always" or false
 					require("conform").format({ lsp_fallback = useLsp }, function()
 						-- HACK since `fixAll` is not part of ruff-lsp formatting capabilities
