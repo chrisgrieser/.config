@@ -51,7 +51,7 @@ return {
 			handlers = {
 				cursor = { enable = false },
 				marks = { enable = false }, -- FIX mark-related error message
-				quickfix = { enable = true },
+				quickfix = { enable = true, signs = { '⟶', '⇛', '⇛' } },
 			},
 		},
 	},

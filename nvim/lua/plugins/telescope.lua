@@ -231,9 +231,11 @@ local function telescopeConfig()
 						return table.concat(cmd, " ")
 					end,
 				},
-				layout_config = { horizontal = { height = 0.99 } },
-				-- add commit time (%cr) & `--all`
-				git_command = { "git", "log", "--all", "--pretty=%h %s\t%cr", "--", "." },
+				layout_config = {
+					horizontal = { preview_width = 0.5 },
+				},
+				-- add commit time (%cr) & `--all`, double `\t` for highlighting
+				git_command = { "git", "log", "--all", "--pretty=%h %s\t\t%cr", "--", "." },
 			},
 			git_bcommits = {
 				prompt_prefix = "󰊢 ",
@@ -263,7 +265,7 @@ local function telescopeConfig()
 			highlights = {
 				prompt_prefix = " ",
 				layout_config = {
-					horizontal = { preview_width = { 0.7, min = 30 } },
+					horizontal = { preview_width = { 0.7, min = 20 } },
 				},
 			},
 			diagnostics = {
