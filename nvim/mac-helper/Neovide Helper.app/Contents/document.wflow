@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>AMApplicationBuild</key>
-	<string>521.1</string>
+	<string>523</string>
 	<key>AMApplicationVersion</key>
 	<string>2.10</string>
 	<key>AMDocumentVersion</key>
@@ -59,31 +59,49 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>COMMAND_STRING</key>
-					<string>#!/usr/bin/env zsh
-export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-
-#───────────────────────────────────────────────────────────────────────────────
+					<string>#───────────────────────────────────────────────────────────────────────────────
 # INFO
 # - workaround for: https://github.com/neovide/neovide/issues/1586
 # - this script, bundled as .app via Automator, ensures you can open a file from
 #   anywhere in macOS and it will open in the currently existing Neovide instance
 #───────────────────────────────────────────────────────────────────────────────
+export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 if pgrep -xq "neovide"; then
-	nvim --server "/tmp/nvim_server.pipe" --remote "$@" # https://neovim.io/doc/user/remote.html
+	# DOCS # https://neovim.io/doc/user/remote.html
+	nvim --server "/tmp/nvim_server.pipe" --remote "$@"
 
 	# $LINE is set via `open --env=LINE=n` by the caller
 	[[ -n "$LINE" ]] &amp;&amp; nvim --server "/tmp/nvim_server.pipe" --remote-send "&lt;cmd&gt;$LINE&lt;CR&gt;"
 
 	osascript -e 'tell application "Neovide" to activate'
 else
-	if [[ -z "$LINE" ]]; then
-		nohup neovide --geometry=104x33 --notabs "$@" &amp;
-		disown # https://stackoverflow.com/a/20338584/22114136
-	else
-		nohup neovide --geometry=104x33 --notabs "+$LINE" "$@" &amp;
-		disown
-	fi
+	[[ -z "$LINE" ]] &amp;&amp; linearg="+$LINE"
+	# shellcheck disable=2086
+	nohup neovide --notabs $linearg "$@" &amp;
+	disown # https://stackoverflow.com/a/20338584/22114136
+fi
+#───────────────────────────────────────────────────────────────────────────────
+# INFO
+# - workaround for: https://github.com/neovide/neovide/issues/1586
+# - this script, bundled as .app via Automator, ensures you can open a file from
+#   anywhere in macOS and it will open in the currently existing Neovide instance
+#───────────────────────────────────────────────────────────────────────────────
+export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+
+if pgrep -xq "neovide"; then
+	# DOCS # https://neovim.io/doc/user/remote.html
+	nvim --server "/tmp/nvim_server.pipe" --remote "$@"
+
+	# $LINE is set via `open --env=LINE=n` by the caller
+	[[ -n "$LINE" ]] &amp;&amp; nvim --server "/tmp/nvim_server.pipe" --remote-send "&lt;cmd&gt;$LINE&lt;CR&gt;"
+
+	osascript -e 'tell application "Neovide" to activate'
+else
+	[[ -z "$LINE" ]] &amp;&amp; linearg="+$LINE"
+	# shellcheck disable=2086
+	nohup neovide --notabs $linearg "$@" &amp;
+	disown # https://stackoverflow.com/a/20338584/22114136
 fi</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
@@ -197,7 +215,7 @@ fi</string>
 				<key>isViewVisible</key>
 				<integer>1</integer>
 				<key>location</key>
-				<string>251.500000:252.000000</string>
+				<string>309.000000:252.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
