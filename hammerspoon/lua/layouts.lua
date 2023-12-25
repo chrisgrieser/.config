@@ -80,7 +80,6 @@ local function workLayout()
 			wu.moveResize(win, wu.pseudoMax)
 		end)
 	end
-	u.openApps(env.todoApp)
 	u.restartApp("AltTab") -- FIX duplicate items
 
 	-- finish
