@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 date=$(date +'%a %e. %b %H:%M')
 
 # blinking ":"

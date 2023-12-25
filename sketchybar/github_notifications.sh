@@ -1,12 +1,12 @@
-export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-#───────────────────────────────────────────────────────────────────────────────
-# Count of GitHub notifications
-# DOCS: https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28
-# CONFIG: https://github.com/settings/notifications
+#!/usr/bin/env zsh
+# shellcheck disable=SC1091
 #───────────────────────────────────────────────────────────────────────────────
 
-# shellcheck disable=SC1091
+# GUARD only via interval or when browser becomes frontmost
+[[ -z "$INFO" || "$INFO" == "Brave Browser" ]] || return 0
+
 source "$HOME/.zshenv"
+export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 # GUARD
 if ! command -v yq &>/dev/null; then
@@ -20,12 +20,13 @@ fi
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28
 notification_count=$(curl -L \
-		-H "Accept: application/vnd.github+json" \
-		-H "Authorization: Bearer $GITHUB_TOKEN" \
-		-H "X-GitHub-Api-Version: 2022-11-28" \
-		"https://api.github.com/notifications" |
-yq ". | length")
+	-H "Accept: application/vnd.github+json" \
+	-H "Authorization: Bearer $GITHUB_TOKEN" \
+	-H "X-GitHub-Api-Version: 2022-11-28" \
+	"https://api.github.com/notifications" |
+	yq ". | length")
 
 if [[ $notification_count -eq 0 ]]; then
 	icon=""

@@ -383,7 +383,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>pseudo-fzf.js</string>
+				<string>scripts/pseudo-fzf.js</string>
 				<key>subtext</key>
 				<string>| fzf "{query}"</string>
 				<key>title</key>
@@ -782,7 +782,7 @@
 				<key>acceptsurls</key>
 				<false/>
 				<key>name</key>
-				<string>Remove Excess Indentation</string>
+				<string>Dedent Indentation</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.universalaction</string>
@@ -859,7 +859,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>killring.sh</string>
+				<string>scripts/killring.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -952,7 +952,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>sequential-paste.sh</string>
+				<string>scripts/sequential-paste.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>

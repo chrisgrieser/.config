@@ -303,7 +303,6 @@ local function telescopeConfig()
 			lsp_workspace_symbols = {
 				prompt_prefix = "󰒕 ",
 				prompt_title = "Workspace Symbols",
-				-- symbols = { "function", "class", "method" },
 				fname_width = 12,
 			},
 			spell_suggest = {

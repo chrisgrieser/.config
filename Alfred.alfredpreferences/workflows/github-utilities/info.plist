@@ -395,16 +395,6 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>2219BB00-C543-481D-87FF-C1E38C53E3CF</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 		<key>C27D01B3-A3B9-4661-9D70-8808DC522FD1</key>
 		<array>
@@ -1427,29 +1417,6 @@ osascript -l JavaScript "./scripts/my-github-repos.js" "$LOCAL_REPOS"</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>update-github-notif-sketchybar.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>2219BB00-C543-481D-87FF-C1E38C53E3CF</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -1514,15 +1481,6 @@ osascript -l JavaScript "./scripts/my-github-repos.js" "$LOCAL_REPOS"</string>
 			<real>500</real>
 			<key>ypos</key>
 			<real>1355</real>
-		</dict>
-		<key>2219BB00-C543-481D-87FF-C1E38C53E3CF</key>
-		<dict>
-			<key>note</key>
-			<string>update sketchybar counter</string>
-			<key>xpos</key>
-			<real>480</real>
-			<key>ypos</key>
-			<real>1490</real>
 		</dict>
 		<key>24CFE3CA-F401-498B-8ABC-20D1D4AB3AB3</key>
 		<dict>

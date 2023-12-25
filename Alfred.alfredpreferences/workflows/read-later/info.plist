@@ -76,13 +76,13 @@
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>68</integer>
+				<integer>0</integer>
 				<key>script</key>
 				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>get-browser-markdown-link.js</string>
+				<string>scripts/get-browser-markdown-link.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -126,7 +126,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>open-and-check.js</string>
+				<string>scripts/open-and-mark-as-checked.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -136,6 +136,38 @@
 			<string>108AF0CF-D70A-4010-BC05-9C5F5F11B47B</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>add</string>
+						<key>outputlabel</key>
+						<string>add</string>
+						<key>uid</key>
+						<string>55FA8700-3E12-4EF2-88DC-0E80D3823F52</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>open</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>CAE7F279-2541-4411-A7A9-00B2974FF7FC</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -169,7 +201,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>read-read-later.js</string>
+				<string>scripts/select-read-later.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -185,38 +217,6 @@
 			<string>D223A211-45A1-481D-A981-9632A2E18CC5</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>add</string>
-						<key>outputlabel</key>
-						<string>add</string>
-						<key>uid</key>
-						<string>55FA8700-3E12-4EF2-88DC-0E80D3823F52</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>open</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>CAE7F279-2541-4411-A7A9-00B2974FF7FC</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
