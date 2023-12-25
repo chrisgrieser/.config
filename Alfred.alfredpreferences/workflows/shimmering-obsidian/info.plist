@@ -6636,9 +6636,8 @@ fi</string>
 ---
 
 ## 📙 Recent Changes
-- Keywordless search (Opt-in)
 - Prioritization of recent or bookmarked notes in the search results.
-- Fixed Some headings being ignored in certain situations.
+- Fixed some headings being ignored in certain situations.
 - Vault paths are now configured via the setting to the right instead. 
 - You can now use vaults even if the config folder is not placed in `.obsidian`.
 - `oe` [Search all external links in your entire vault.](https://github.com/chrisgrieser/shimmering-obsidian/blob/main/docs/Note-related%20Features.md#search-all-external-links-in-the-entire-vault)

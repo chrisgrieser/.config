@@ -301,9 +301,11 @@ local function telescopeConfig()
 				symbols = { "function", "class", "method" },
 			},
 			lsp_workspace_symbols = {
+				-- workspace symbols are not working correctly in lua
 				prompt_prefix = "󰒕 ",
 				prompt_title = "Workspace Symbols",
 				fname_width = 12,
+				symbols = { "function", "class", "method" },
 			},
 			spell_suggest = {
 				initial_mode = "normal",

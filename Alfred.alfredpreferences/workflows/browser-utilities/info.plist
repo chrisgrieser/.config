@@ -292,7 +292,7 @@
 				<key>subtext</key>
 				<string>Current Tab</string>
 				<key>text</key>
-				<string>Skip Paywall (12ft.io &amp; Spaywall)</string>
+				<string>Skip Paywall</string>
 				<key>withspace</key>
 				<false/>
 			</dict>

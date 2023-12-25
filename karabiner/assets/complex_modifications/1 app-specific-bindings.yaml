@@ -509,7 +509,7 @@ rules:
   - description: "(Apps) Shottr"
     manipulators:
       - type: basic
-        from: { key_code: s, modifiers: { mandatory: [command] } }
+        from: { key_code: c, modifiers: { mandatory: [command] } }
         to:
           - { key_code: c, modifiers: [command, shift] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^cc\.ffitch\.shottr$] }]

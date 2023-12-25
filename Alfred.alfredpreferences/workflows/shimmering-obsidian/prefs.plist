@@ -7,11 +7,9 @@
 	<key>backup_destination</key>
 	<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/Obsidian Backups</string>
 	<key>h_lvl_ignore</key>
-	<string>h1 h3 h4 h5 h6</string>
+	<string>h1 h2 h3 h4 h5 h6</string>
 	<key>input_append</key>
 	<string>clipboard</string>
-	<key>keywordless_search</key>
-	<string>a||b||c||d||e||f||g||h||i||j||k||l||m||n||o||p||q||r||s||t||u||v||w||x||y||z</string>
 	<key>max_number_of_bkps</key>
 	<string>5</string>
 	<key>merge_nested_tags</key>
