@@ -1,7 +1,8 @@
+#!/usr/bin/env zsh
 # GUARD don't check while using projector
 if system_profiler SPDisplaysDataType | grep -q "ViewSonic PJ"; then
 	sketchybar --set "$NAME" label="" icon="" icon.padding_right=0
-	exit 0
+	return 0
 fi
 
 #───────────────────────────────────────────────────────────────────────────────

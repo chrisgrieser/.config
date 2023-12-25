@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 outdated=$(brew outdated --quiet | wc -l | tr -d " ")
 threshold=30
 

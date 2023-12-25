@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 export GIT_OPTIONAL_LOCKS=0
 
 # WARN running a git command on a path watcher trigger leads to an infinite loop
