@@ -2,11 +2,11 @@
 # shellcheck disable=SC1091
 #───────────────────────────────────────────────────────────────────────────────
 
-# GUARD only via interval or when browser becomes frontmost
-[[ -z "$INFO" || "$INFO" == "Brave Browser" ]] || return 0
-
-source "$HOME/.zshenv"
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+
+# GUARD only via interval or when browser becomes frontmost
+[[ -z "$INFO" || "$INFO" == "$BROWSER_APP" ]] || return 0
+
 
 # GUARD
 if ! command -v yq &>/dev/null; then

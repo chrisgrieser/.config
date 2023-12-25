@@ -18,8 +18,6 @@ fi
 first_row="left"
 second_row="popup.clock"
 
-# shellcheck disable=SC1091
-source "$HOME/.zshenv"
 icon_font="$CODE_FONT" # requires zsh-shebang to load from .zshenv
 system_font="Lucida Grande"
 
@@ -52,7 +50,7 @@ sketchybar \
 	\
 	--add item github_notif $first_row \
 	--set github_notif update_freq=300 \
-	script="$plugin_dir/github_notifications.sh" \
+	script="$plugin_dir/github_notification_count.sh" \
 	--subscribe github_notif front_app_switched \
 	--subscribe github_notif system_woke \
 	\
