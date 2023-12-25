@@ -43,7 +43,20 @@ keymap("n", "<leader>lf", function()
 	u.notify("Buffer Information", table.concat(out, "\n"), "trace")
 end, { desc = " Buffer Info" })
 
-keymap("n", "<leader>pd", vim.cmd.cd, { desc = " Open Directory" })
+keymap("n", "<leader>pd", function ()
+	local dirs = {
+		state = vim.fn.stdpath("state"),
+		mason = vim.fn.stdpath("data") .. "/mason",
+		lazy = vim.fn.stdpath("data") .. "/lazy",
+		view = vim.o.viewdir,
+		undo = vim.o.undodir,
+	} 
+	vim.ui.select(dirs, { prompt = " Open Directory"}, function (dir)
+		if not dir then return end 
+	end)
+end, { desc = " Open Directory" })
+
+
 vim.api.nvim_create_user_command(
 	"DataDir",
 	function() vim.fn.system { "open", vim.fn.stdpath("data") } end,
@@ -57,11 +70,11 @@ vim.api.nvim_create_user_command(
 
 --------------------------------------------------------------------------------
 -- REFACTORING
-keymap("n", "<leader>rr", vim.lsp.buf.rename, { desc = "󰒕 Var Rename" })
-keymap("n", "<leader>rs", ":% s/<C-r><C-w>//g<Left><Left>", { desc = " :substitute" })
-keymap("x", "<leader>rs", [["zy:% s/<C-r>z//g<Left><Left>]], { desc = " :s (for selection)" })
-keymap("x", "<leader>rv", ": s///g<Left><Left><Left>", { desc = " :s (inside visual)" })
-keymap("n", "<leader>rd", ":global//d<Left><Left>", { desc = " delete matching" })
+keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰒕 Var Rename" })
+keymap("n", "<leader>fs", ":% s/<C-r><C-w>//g<Left><Left>", { desc = " :substitute" })
+keymap("x", "<leader>fs", [["zy:% s/<C-r>z//g<Left><Left>]], { desc = " :s (for selection)" })
+keymap("x", "<leader>fv", ": s///g<Left><Left><Left>", { desc = " :s (inside visual)" })
+keymap("n", "<leader>fd", ":global//d<Left><Left>", { desc = " delete matching" })
 
 ---@param use "spaces"|"tabs"
 local function retabber(use)

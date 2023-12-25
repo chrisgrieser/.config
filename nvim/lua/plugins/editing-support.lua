@@ -250,7 +250,7 @@ return {
 
 			-- leader prefixes normal+visual mode
 			require("which-key").register({
-				r = { name = " 󱗘 Refactor" },
+				f = { name = " 󱗘 Refactor" },
 				l = { name = "  Log / Cmdline" },
 				g = { name = " 󰊢 Git" },
 			}, { prefix = "<leader>", mode = { "x", "n" } })
