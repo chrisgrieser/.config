@@ -50,3 +50,5 @@ sleep 0.2
 open -a "Neovide"
 sleep 0.1
 osascript -e 'tell application "Neovide" to activate' # `open -a` does not focus properly
+sleep 0.1
+osascript -e 'tell application "Neovide" to activate'
