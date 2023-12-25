@@ -237,12 +237,6 @@ local function telescopeConfig()
 				-- add commit time (%cr) & `--all`, double `\t` for highlighting
 				git_command = { "git", "log", "--all", "--pretty=%h %s\t\t%cr", "--", "." },
 			},
-			git_bcommits = {
-				prompt_prefix = "󰊢 ",
-				initial_mode = "normal",
-				layout_config = { horizontal = { height = 0.99 } },
-				git_command = { "git", "log", "--pretty=%h %s\t%cr" }, -- add commit time (%cr)
-			},
 			git_branches = {
 				prompt_prefix = " ",
 				show_remote_tracking_branches = true,
@@ -340,30 +334,18 @@ return {
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
 		keys = {
-			{ "?", function() telescope("keymaps") end, desc = "⌨️  Search Keymaps" },
+			{ "?", function() telescope("keymaps") end, desc = "⌨️ Search Keymaps" },
 			{ "g.", function() telescope("resume") end, desc = " Continue" },
 			{ "gs", function() telescope("lsp_document_symbols") end, desc = "󰒕 Symbols" },
 			{ "gd", function() telescope("lsp_definitions") end, desc = "󰒕 Definitions" },
 			{ "gf", function() telescope("lsp_references") end, desc = "󰒕 References" },
 			-- stylua: ignore
 			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
-			{ "<leader>ph", function() telescope("highlights") end, desc = " Highlight Groups" },
-			-- stylua: ignore
-			{"<leader>dt", function() telescope("diagnostics") end, desc = " List Diagnostics" },
-			{
-				"<leader>pc",
-				function() telescope("colorscheme") end,
-				desc = " Change Colorschemes",
-			},
+			{ "<leader>ph", function() telescope("highlights") end, desc = " Highlights" },
+			{ "<leader>dt", function() telescope("diagnostics") end, desc = " List Diagnostics" },
+			{ "<leader>pc", function() telescope("colorscheme") end, desc = " Colorschemes" },
 			{ "<leader>gs", function() telescope("git_status") end, desc = " Status" },
 			{ "<leader>gl", function() telescope("git_commits") end, desc = " Log/Commits" },
-			{ "<leader>gL", function() telescope("git_bcommits") end, desc = " Buffer Commits" },
-			{
-				"<leader>gd",
-				function() telescope("git_bcommits_range") end,
-				mode = "x",
-				desc = " Line History",
-			},
 			{ "<leader>gb", function() telescope("git_branches") end, desc = " Branches" },
 			{ "zl", function() telescope("spell_suggest") end, desc = "󰓆 Spell Suggest" },
 			{
@@ -384,7 +366,7 @@ return {
 						prompt_title = "Find Files: " .. vim.fs.basename(vim.loop.cwd() or ""),
 					}
 				end,
-				desc = " Browse in Project",
+				desc = " Open File",
 			},
 			{
 				"gl",
@@ -393,9 +375,9 @@ return {
 						prompt_title = "Live Grep: " .. vim.fs.basename(vim.loop.cwd() or ""),
 					}
 				end,
-				desc = " Live-Grep in Project",
+				desc = " Live-Grep",
 			},
-			{ "gL", function() telescope("grep_string") end, desc = " Grep cword in Project" },
+			{ "gL", function() telescope("grep_string") end, desc = " Grep cword" },
 		},
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
 		init = function()
@@ -406,7 +388,7 @@ return {
 					vim.keymap.set("n", "gs", function()
 						require("telescope.builtin").lsp_document_symbols {
 							prompt_title = "Sections",
-							symbols = {"object", "module"},
+							symbols = { "object", "module" },
 						}
 					end, { desc = " Sections", buffer = true })
 				end,

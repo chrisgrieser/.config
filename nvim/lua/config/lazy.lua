@@ -85,7 +85,7 @@ require("lazy").setup("plugins", {
 -- KEYMAPS
 
 local keymap = u.uniqueKeymap
-keymap("n", "<leader>pp", require("lazy").sync, { desc = "󰒲 Lazy Update" })
+keymap("n", "<leader>pp", require("lazy").sync, { desc = "󰒲 Lazy Sync" })
 keymap("n", "<leader>pl", require("lazy").home, { desc = "󰒲 Lazy" })
 keymap("n", "<leader>pi", require("lazy").install, { desc = "󰒲 Lazy Install" })
 
