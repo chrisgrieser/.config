@@ -154,25 +154,24 @@ autocmd({ "BufNew", "BufReadPost" }, {
 opt.autowriteall = true
 autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
 	callback = function(ctx)
-		local function save()
+		local function save(bufnr)
 			if not vim.api.nvim_buf_is_valid(bufnr) then return end
 			vim.api.nvim_buf_call(bufnr, function() vim.cmd("silent! noautocmd update!") end)
-			b.saveQueued = false
 		end
+
 		local bufnr = ctx.buf
 		local bo = vim.bo[bufnr]
 		local b = vim.b[bufnr]
-		if b.saveQueued or bo.buftype ~= "" or bo.ft == "gitcommit" or bo.readonly then return end
+		if bo.buftype ~= "" or bo.ft == "gitcommit" or bo.readonly then return end
 
-		-- save at once on focus loss
-		local debounce = ctx.event == "FocusLost" and 0 or 2000
+		if ctx.event == "FocusLost" then save(bufnr) end -- save at once on focus loss
 
+		if b.saveQueued then return end
 		b.saveQueued = true
 		vim.defer_fn(function()
-			if not vim.api.nvim_buf_is_valid(bufnr) then return end
-			vim.api.nvim_buf_call(bufnr, function() vim.cmd("silent! noautocmd update!") end)
+			save(bufnr)
 			b.saveQueued = false
-		end, debounce)
+		end, 2000)
 	end,
 })
 
