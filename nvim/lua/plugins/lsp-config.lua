@@ -345,41 +345,6 @@ local function setupAllLsps()
 	end
 end
 
--- add notification & writeall to renaming
--- PENDING https://github.com/neovim/neovim/pull/26616
-local function lspHandlers()
-	vim.lsp.handlers["textDocument/rename"] = (function(original_handler)
-		return function(err, result, ctx, config)
-			original_handler(err, result, ctx, config)
-			if err or not result then return end
-
-			-- changes files
-			vim.cmd.wall() -- write all
-			local changes = result.changes or result.documentChanges
-			local changedFiles = vim.tbl_map(
-				function(file) return "- " .. vim.fs.basename(file) end,
-				vim.tbl_keys(changes or {})
-			)
-
-			-- changes
-			local changeCount = 0
-			for _, change in pairs(changes) do
-				changeCount = changeCount + #(change.edits or change)
-			end
-
-			-- notification
-			local pluralS = changeCount > 1 and "s" or ""
-			local msg = changeCount .. " instance" .. pluralS
-			if #changedFiles > 1 then
-				msg = msg
-					.. (" in %s files:\n"):format(#changedFiles)
-					.. table.concat(changedFiles, "\n")
-			end
-			vim.notify(msg, vim.log.levels.INFO, { title = "LSP Renaming" })
-		end
-	end)(vim.lsp.handlers["textDocument/rename"])
-end
-
 --------------------------------------------------------------------------------
 
 return {
@@ -391,9 +356,6 @@ return {
 			opts = { library = { plugins = false } }, -- too slow with all my plugins
 		},
 		init = setupAllLsps,
-		config = function()
-			lspHandlers()
-			require("lspconfig.ui.windows").default_options.border = u.borderStyle
-		end,
+		config = function() require("lspconfig.ui.windows").default_options.border = u.borderStyle end,
 	},
 }
