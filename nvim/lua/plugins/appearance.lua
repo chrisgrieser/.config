@@ -86,8 +86,8 @@ return {
 		"hiphish/rainbow-delimiters.nvim",
 		event = "BufReadPost", -- later does not load on first buffer
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		init = function() u.colorschemeMod("RainbowDelimiterRed", { fg = "#7e8a95" }) end,
 		main = "rainbow-delimiters.setup",
+		init = function() u.colorschemeMod("RainbowDelimiterRed", { fg = "#7e8a95" }) end,
 	},
 	{ -- emphasized headers & code blocks in markdown
 		"lukas-reineke/headlines.nvim",
