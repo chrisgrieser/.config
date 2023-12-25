@@ -4,7 +4,7 @@ alias ga='git add'
 alias gA='git add --all'
 
 alias gd='git diff'
-alias grh='git reset --hard',
+alias grh='git reset --hard'
 alias gt='git stash push && git stash show 0'
 alias gT='git stash pop'
 alias gi='gh issue list --state=open'
@@ -51,7 +51,7 @@ function gc {
 		git commit -m "$1" || return 1
 
 	if [[ -n "$(git status --porcelain)" ]]; then
-		print "\033[1;36mPush: \033[0mNot pushing since repo still dirty." && 
+		print "\033[1;36mPush: \033[0mNot pushing since repo still dirty." &&
 			git status
 	else
 		printf "\033[1;36mPull: \033[0m" &&

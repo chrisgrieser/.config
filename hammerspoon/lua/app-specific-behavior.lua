@@ -115,7 +115,6 @@ end)
 -- Close if prompt to purchase app
 M.wf_shottr = wf.new("Shottr"):subscribe(wf.windowCreated, function(win)
 	u.runWithDelays(0.1, function()
-		print("🪚 shottrWin: ", hs.inspect(win:size()))
 		if win:size().w == 600 and win:size().h == 428 then win:close() end
 	end)
 end)
