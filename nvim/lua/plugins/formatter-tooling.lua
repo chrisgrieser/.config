@@ -132,7 +132,7 @@ return {
 	{ -- package manager
 		"williamboman/mason.nvim",
 		keys = {
-			{ "<leader>pm", vim.cmd.Mason, desc = " Mason Home" },
+			{ "<leader>pm", vim.cmd.Mason, desc = " Mason" },
 		},
 		opts = {
 			-- PENDING https://github.com/mason-org/mason-registry/pull/3926
@@ -160,9 +160,6 @@ return {
 	{ -- auto-install lsps & formatters
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		event = "VeryLazy",
-		keys = {
-			{ "<leader>pM", vim.cmd.MasonToolsUpdate, desc = " Mason Update" },
-		},
 		dependencies = "williamboman/mason.nvim",
 		config = function()
 			local lsps = vim.tbl_values(vim.g.lspToMasonMap)

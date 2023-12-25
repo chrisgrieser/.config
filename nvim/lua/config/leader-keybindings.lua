@@ -16,10 +16,6 @@ keymap(
 	{ desc = "⌨️ Edit " .. vim.fs.basename(pathOfThisFile) }
 )
 
--- inspect
-keymap("n", "<leader>li", cmd.Inspect, { desc = " :Inspect" })
-keymap("n", "<leader>lt", cmd.InspectTree, { desc = " :InspectTree" })
-
 -- Copy Last Command
 keymap("n", "<leader>lc", function()
 	local lastCommand = fn.getreg(":"):gsub("^lua[ =]*", "")
@@ -30,7 +26,8 @@ end, { desc = "󰘳 Copy last command" })
 -- [l]ast command a[g]ain
 keymap("n", "<leader>lg", ":<Up><CR>", { desc = "󰘳 Last command again", silent = true })
 
--- show current filetype & buftype
+-- inspect
+keymap("n", "<leader>li", cmd.Inspect, { desc = " :Inspect" })
 keymap("n", "<leader>lf", function()
 	local out = {
 		"filetype: " .. bo.filetype,
@@ -43,29 +40,18 @@ keymap("n", "<leader>lf", function()
 	u.notify("Buffer Information", table.concat(out, "\n"), "trace")
 end, { desc = " Buffer Info" })
 
-keymap("n", "<leader>pd", function ()
-	local dirs = {
-		state = vim.fn.stdpath("state"),
-		mason = vim.fn.stdpath("data") .. "/mason",
-		lazy = vim.fn.stdpath("data") .. "/lazy",
-		view = vim.o.viewdir,
-		undo = vim.o.undodir,
-	} 
-	vim.ui.select(dirs, { prompt = " Open Directory"}, function (dir)
-		if not dir then return end 
-	end)
-end, { desc = " Open Directory" })
-
-
-vim.api.nvim_create_user_command(
-	"DataDir",
-	function() vim.fn.system { "open", vim.fn.stdpath("data") } end,
-	{}
+-- view internal directories
+keymap(
+	"n",
+	"<leader>pv",
+	function() vim.fn.system { "open", vim.o.viewdir } end,
+	{ desc = " View Dir" }
 )
-vim.api.nvim_create_user_command(
-	"StateDir",
-	function() vim.fn.system { "open", vim.fn.stdpath("state") } end,
-	{}
+keymap(
+	"n",
+	"<leader>pd",
+	function() vim.fn.system { "open", vim.fn.stdpath("data") } end,
+	{ desc = " Package Dirs" }
 )
 
 --------------------------------------------------------------------------------

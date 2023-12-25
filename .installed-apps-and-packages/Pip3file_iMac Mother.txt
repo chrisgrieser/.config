@@ -1,4 +1,3 @@
-certifi
 pip-autoremove
-Pygments
+pynvim
 wheel

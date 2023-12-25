@@ -22,7 +22,7 @@ vim.filetype.add {
 
 -- move to custom location where they are synced independently from the dotfiles repo
 local vimDataDir = vim.env.DATA_DIR .. "/vim-data/" -- vim.env reads from .zshenv
-opt.undodir:prepend(vimDataDir .. "undo//")
+opt.undodir = vimDataDir .. "undo"
 opt.viewdir = vimDataDir .. "view"
 opt.shadafile = vimDataDir .. "main.shada"
 opt.swapfile = false -- doesn't help and only creates useless files and notifications
