@@ -43,6 +43,18 @@ keymap("n", "<leader>lf", function()
 	u.notify("Buffer Information", table.concat(out, "\n"), "trace")
 end, { desc = " Buffer Info" })
 
+keymap("n", "<leader>pd", vim.cmd.cd, { desc = " Open Directory" })
+vim.api.nvim_create_user_command(
+	"DataDir",
+	function() vim.fn.system { "open", vim.fn.stdpath("data") } end,
+	{}
+)
+vim.api.nvim_create_user_command(
+	"StateDir",
+	function() vim.fn.system { "open", vim.fn.stdpath("state") } end,
+	{}
+)
+
 --------------------------------------------------------------------------------
 -- REFACTORING
 keymap("n", "<leader>rr", vim.lsp.buf.rename, { desc = "󰒕 Var Rename" })

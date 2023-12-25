@@ -27,8 +27,9 @@ local lspFormatFiletypes = {
 
 local extraInstalls = {
 	"debugpy",
-	"shellcheck", -- needed by bash-lsp/efm; not bundled, PENDING https://github.com/bash-lsp/bash-language-server/issues/663
+	"shellcheck", -- used by bash-lsp/efm, not bundled PENDING https://github.com/bash-lsp/bash-language-server/issues/663
 	"markdownlint", -- used by efm
+	"pynvim", -- needed by semshi
 }
 
 local dontInstall = {
@@ -134,6 +135,11 @@ return {
 			{ "<leader>pm", vim.cmd.Mason, desc = " Mason Home" },
 		},
 		opts = {
+			-- PENDING https://github.com/mason-org/mason-registry/pull/3926
+			registries = {
+				"github:chrisgrieser/mason-registry", -- only has pynvim
+				"github:mason-org/mason-registry",
+			},
 			ui = {
 				border = u.borderStyle,
 				height = 0.8, -- so statusline is still visible

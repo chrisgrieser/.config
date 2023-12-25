@@ -15,9 +15,9 @@ local tsConfig = {
 		disable = {
 			"markdown", -- indentation at bullet points is worse
 			-- `o` sometimes with weird indentation
-			"lua", 
-			"javascript", 
-			"typescript", 
+			"lua",
+			"javascript",
+			"typescript",
 			"yaml",
 		},
 	},
@@ -63,16 +63,20 @@ return {
 		main = "nvim-treesitter.configs",
 		opts = tsConfig,
 	},
-	{ -- FIX https://github.com/tree-sitter/tree-sitter-css/issues/34
+	{ -- CSS Highlighting FIX https://github.com/tree-sitter/tree-sitter-css/issues/34
 		"hail2u/vim-css3-syntax",
 		ft = "css",
 	},
-	{
+	{ -- Python Highlighting
 		"wookayin/semshi", -- maintained fork
 		ft = "python",
 		build = ":UpdateRemotePlugins", -- don't disable `rplugin` in lazy.nvim for this
 		init = function()
-			vim.g.python3_host_prog = vim.fn.exepath("python3")
+			-- use `pynvim` installed with mason
+			vim.g.python3_host_prog = require("mason-registry")
+				.get_package("pynvim")
+				:get_install_path() .. "/venv/bin/python3"
+
 			-- better provided by LSP
 			vim.g["semshi#error_sign"] = false
 			vim.g["semshi#simplify_markup"] = false
@@ -81,17 +85,16 @@ return {
 
 			vim.api.nvim_create_autocmd({ "VimEnter", "ColorScheme" }, {
 				callback = function()
-					vim.cmd([[
-						highlight! semshiGlobal gui=italic
-						highlight! link semshiImported @lsp.type.namespace
-						highlight! link semshiParameter @lsp.type.parameter
-						highlight! link semshiParameterUnused DiagnosticUnnecessary
-						highlight! link semshiBuiltin @function.builtin
-						highlight! link semshiAttribute @field
-						highlight! link semshiSelf @lsp.type.selfKeyword
-						highlight! link semshiUnresolved @lsp.type.unresolvedReference
-						highlight! link semshiFree @comment
-					]])
+					local function linkHl(from, to) vim.api.nvim_set_hl(0, from, { link = to }) end
+					linkHl("semshiGlobal", "Italic")
+					linkHl("semshiImported", "@lsp.type.namespace")
+					linkHl("semshiParameter", "@lsp.type.parameter")
+					linkHl("semshiParameterUnused", "DiagnosticUnnecessary")
+					linkHl("semshiBuiltin", "@function.builtin")
+					linkHl("semshiAttribute", "@field")
+					linkHl("semshiSelf", "@lsp.type.selfKeyword")
+					linkHl("semshiUnresolved", "@lsp.type.unresolvedReference")
+					linkHl("semshiFree", "NonText")
 				end,
 			})
 		end,

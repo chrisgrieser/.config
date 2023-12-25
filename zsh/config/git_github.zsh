@@ -1,8 +1,9 @@
-alias co='git checkout'
 alias gs='git status'
 alias ga='git add'
 alias gA='git add --all'
 
+alias co='git checkout'
+alias cp='git cherry-pick'
 alias gd='git diff'
 alias grh='git reset --hard'
 alias gt='git stash push && git stash show 0'
