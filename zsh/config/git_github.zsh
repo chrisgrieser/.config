@@ -3,7 +3,6 @@ alias ga='git add'
 alias gA='git add --all'
 
 alias co='git checkout'
-alias cp='git cherry-pick'
 alias gd='git diff'
 alias grh='git reset --hard'
 alias gt='git stash push && git stash show 0'
@@ -16,6 +15,7 @@ alias push='git push'
 alias pull='git pull'
 alias rebase='git rebase --interactive'
 alias unlock='rm -v "$(git rev-parse --git-dir)/index.lock"'
+alias unshallow='git fetch --unshallow' # https://stackoverflow.com/a/17937889/22114136
 
 alias pr='gh pr create --web --fill'
 alias rel='make --silent release' # personal convention to have `make release`
@@ -118,7 +118,7 @@ function gM {
 
 # remote info
 function gri {
-	git branch --all --verbose --verbose
+	git branch --all --verbose --verbose # 2x verbose shows tracked remote branches
 	echo
 	git remote --verbose
 	printf "\e[1;34mgh default repo:\e[0m " && gh repo set-default --view
@@ -132,9 +132,7 @@ function gu {
 	open "$url"
 }
 
-#───────────────────────────────────────────────────────────────────────────────
-# GIT LOG
-
+# git log
 function gl {
 	if [[ -z "$1" ]]; then
 		_gitlog -n 15
@@ -144,41 +142,6 @@ function gl {
 		_gitlog "$@"
 	fi
 }
-
-# interactive
-function gli {
-	if [[ ! -x "$(command -v fzf)" ]]; then print "\e[1;33mfzf not installed.\e[0m" && return 1; fi
-	if [[ ! -x "$(command -v delta)" ]]; then print "\e[1;33mdelta not installed (\`brew install git-delta\`)\e[0m" && return 1; fi
-
-	local hash key_pressed selected style
-	local preview_format="%C(yellow)%h %C(red)%D %n%C(blue)%an %C(green)(%ch)%C(reset) %n%n%C(bold)%C(magenta)%s %C(cyan)%b%C(reset)"
-	defaults read -g AppleInterfaceStyle &>/dev/null && style="--dark" || style="--light"
-
-	selected=$(
-		_gitlog --no-graph --color=always |
-			fzf --ansi --no-sort --track \
-				--header-first --header="↵ : Checkout    ^H: Copy Hash    ^R: Rebase" \
-				--expect="ctrl-h,ctrl-r" --with-nth=2.. --preview-window=55% \
-				--preview="git show {1} --stat=,30,30 --color=always --format='$preview_format' | sed '\$d' ; git diff {1}^! | delta $style --hunk-header-decoration-style='blue ol' --file-style=omit" \
-				--height="100%" #required for wezterm's pane:is_alt_screen_active()
-	)
-	[[ -z "$selected" ]] && return 0 # abort
-
-	key_pressed=$(echo "$selected" | head -n1)
-	hash=$(echo "$selected" | sed '1d' | cut -d' ' -f1)
-
-	if [[ "$key_pressed" == "ctrl-h" ]]; then
-		echo -n "$hash" | pbcopy
-		print "\e[1;33m$hash\e[0m copied."
-	elif [[ "$key_pressed" == "ctrl-r" ]]; then
-		git rebase -i "$hash^"
-		_separator && _gitlog "$hash^..HEAD" # confirm result
-	else                                  # pressed return
-		git checkout "$hash"
-	fi
-}
-
-#───────────────────────────────────────────────────────────────────────────────
 
 function clone {
 	url="$1"
@@ -190,17 +153,8 @@ function clone {
 	git clone --depth=2 "$url"
 
 	# shellcheck disable=SC2012
-	builtin cd "$(command ls -1 -t | head -n1)" || return 1
-	_separator
-	_magic_dashboard
+	cd "$(command ls -1 -t | head -n1)" || return 1
 }
-
-# https://stackoverflow.com/a/17937889/22114136
-function unshallow {
-	git fetch --unshallow --update-head-ok origin '+refs/heads/*:refs/heads/*'
-}
-
-#───────────────────────────────────────────────────────────────────────────────
 
 # select a fork or multiple forks to delete
 function deletefork {

@@ -203,7 +203,12 @@ keymap(
 	{ desc = "󰽙 Alt Buffer" }
 )
 
-keymap({ "n", "x", "i" }, "<D-w>", vim.cmd.bdelete, { desc = "󰽙 :bdelete" })
+keymap({ "n", "x", "i" }, "<D-w>", function ()
+	local onlyOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) == 1
+	if onlyOneBuffer then return end
+	vim.cmd("silent! update")
+	vim.cmd.bdelete()
+end, { desc = "󰽙 :bdelete" })
 
 --------------------------------------------------------------------------------
 -- CLIPBOARD
@@ -223,7 +228,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
 		-- do not trigger for `d` or yanks to helper-register `z`
 		if vim.v.event.operator ~= "y" or vim.v.event.regname == "z" then return end
-		-- FIX issue with vim-visual-multi
+		-- FIX for vim-visual-multi
 		if vim.b["VM_Selection"] and vim.b["VM_Selection"].Regions then return end
 
 		vim.api.nvim_win_set_cursor(0, cursorPreYank)

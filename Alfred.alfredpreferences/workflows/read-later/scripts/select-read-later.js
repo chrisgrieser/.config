@@ -38,8 +38,8 @@ function run() {
 		})
 	} else {
 		readLaterItems.unshift({
-			title: "📖 Read Later",
-			subtitle: "Add current browser tab",
+			title: "🔖 Add current browser tab",
+			subtitle: "",
 			arg: "add",
 		})
 	} 
