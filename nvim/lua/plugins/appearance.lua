@@ -51,7 +51,7 @@ return {
 			handlers = {
 				cursor = { enable = false },
 				marks = { enable = false }, -- FIX mark-related error message
-				quickfix = { enable = true, signs = { '⟶', '⇛', '⇛' } },
+				quickfix = { enable = true, signs = { "⟶", "⇛", "⇛" } },
 			},
 		},
 	},
@@ -200,13 +200,18 @@ return {
 					},
 				},
 				get_config = function(opts)
-					if not opts.kind then return end
+					local kind = opts.kind
+					if not kind then return end
 
 					-- code actions: show at cursor
-					if opts.kind == "codeaction" then return { builtin = { relative = "cursor" } } end
+					if kind == "codeaction" then return { builtin = { relative = "cursor" } } end
 
 					-- complex selectors: use telescope
-					if opts.kind == "mason.ui.language-filter" or opts.kind:find("^tinygit") then
+					if
+						kind == "mason.ui.language-filter"
+						or kind:find("^tinygit")
+						or kind == "snippetList"
+					then
 						return { backend = "telescope" }
 					end
 				end,

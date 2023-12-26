@@ -75,6 +75,8 @@ end
 
 ---switch to alternate buffer/oldfile (in that priority)
 function M.gotoAltBuffer()
+	if vim.bo.buftype ~= "" then return end -- deactivate if in a special buffer
+
 	local altBufNr = vim.fn.bufnr("#") ---@diagnostic disable-line: param-type-mismatch
 	local altOld = altOldfile()
 

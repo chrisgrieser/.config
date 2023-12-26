@@ -101,7 +101,7 @@
 		"body": [
 			"---read the full file",
 			"---@param filePath string",
-			"local function readFile(filePath, str)",
+			"local function readFile(filePath)",
 			"\tlocal file, err = io.open(filePath, \"r\")",
 			"\tif not file then return \"ERROR: \" .. err end",
 			"\tlocal content = file:read(\"*a\")",
