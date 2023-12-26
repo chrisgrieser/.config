@@ -244,7 +244,7 @@ function gdf {
 	deleted_path=$(git log --diff-filter=D --name-only --format="" | grep -i "$*")
 
 	if [[ -z "$deleted_path" ]]; then
-		print "🔍\e[1;33m No deleted file found.\e[0m"
+		print "🔍\e[1;31m No deleted file found with \e[1;33m$*\\e[0m"
 		return 1
 	elif [[ $(echo "$deleted_path" | wc -l) -gt 1 ]]; then
 		print "🔍\e[1;34m Multiple files found.\e[0m"
@@ -256,7 +256,7 @@ function gdf {
 	# alternative method: `git rev-list --max-count=1 HEAD -- "path/to/file"`
 	deletion_commit=$(git log --format='%h' --max-count=1 -- "$deleted_path")
 	last_commit=$(git rev-parse --short "$deletion_commit^")
-	print "🔍\e[1;32m File:\e[0m $deleted_path ($last_commit)"
+	print "🔍 \e[1;33m$last_commit\e[0m $deleted_path"
 	echo
 
 	# decision on how to act on file
@@ -281,7 +281,7 @@ show file (bat)"
 		echo "Content copied."
 	elif [[ "$decision" =~ show ]]; then
 		ext=${deleted_path##*.}
-		git show "$last_commit:$deleted_path" | bat --language="$ext" || 
+		git show "$last_commit:$deleted_path" | bat --language="$ext" ||
 			git show "$last_commit:$deleted_path" | bat # unknown extension
 	fi
 }

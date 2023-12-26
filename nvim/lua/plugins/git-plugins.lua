@@ -1,3 +1,6 @@
+local u = require("config.utils")
+--------------------------------------------------------------------------------
+
 return {
 	{ -- lightweight git client
 		"chrisgrieser/nvim-tinygit",
@@ -8,7 +11,7 @@ return {
 			{ "gc", function() require("tinygit").smartCommit { pushIfClean = true } end, desc = "󰊢 Smart-Commit & Push" },
 			{ "gC", function() require("tinygit").smartCommit { pushIfClean = false } end, desc = "󰊢 Smart-Commit" },
 			{ "<leader>gp", function() require("tinygit").push{ pullBefore = true } end, desc = "󰊢 Pull & Push" },
-			{ "<leader>gP", function() require("tinygit").createGitHubPr()  end, desc = " PR" },
+			{ "<leader>gP", function() require("tinygit").createGitHubPr() end, desc = " PR" },
 			{ "<leader>gf", function() require("tinygit").fixupCommit({ autoRebase = true }) end, desc = "󰊢 Fixup & Rebase" },
 			{ "<leader>gm", function() require("tinygit").amendNoEdit { forcePush = true } end, desc = "󰊢 Amend-No-Edit & F-Push" },
 			{ "<leader>gM", function() require("tinygit").amendOnlyMsg { forcePush = true } end, desc = "󰊢 Amend Only Msg & F-Push" },
@@ -33,7 +36,7 @@ return {
 				diffPopup = {
 					width = 0.9,
 					height = 0.9,
-					border = require("config.utils").borderStyle,
+					border = u.borderStyle,
 				},
 			},
 		},
@@ -51,7 +54,7 @@ return {
 				desc = "󰊢 Stage Selection",
 			},
 			{ "gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Add Buffer" },
-			{ "<leader>gv", "<cmd>Gitsigns preview_hunk<CR>", desc = "󰊢 Preview Hunk" },
+			{ "<leader>gv", "<cmd>Gitsigns toggle_deleted<CR>", desc = "󰊢 View Deletions Inline" },
 			{ "<leader>ua", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "󰊢 Unstage Last Stage" },
 			{ "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", desc = "󰊢 Reset Hunk" },
 			{ "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", desc = "󰊢 Reset Buffer" },
@@ -64,7 +67,6 @@ return {
 		},
 		opts = {
 			max_file_length = 12000, -- lines
-			preview_config = { border = require("config.utils").borderStyle },
 			-- deletions greater than one line will show a count to assess the size
 			-- digits are actually nerdfont numbers to achieve smaller size
 			-- stylua: ignore
