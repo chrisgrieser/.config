@@ -1,13 +1,13 @@
 local u = require("config.utils")
-
 --------------------------------------------------------------------------------
+
 -- LSP SETTINGS
 
 -- Add notification & writeall to renaming
 -- PENDING https://github.com/neovim/neovim/pull/26616
-local originalHandler = vim.lsp.handlers["textDocument/rename"]
+local originalRenameHandler = vim.lsp.handlers["textDocument/rename"]
 vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config) ---@diagnostic disable-line: duplicate-set-field
-	originalHandler(err, result, ctx, config)
+	originalRenameHandler(err, result, ctx, config)
 	if err or not result then return end
 
 	vim.cmd.wall() -- write all
@@ -31,7 +31,7 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config) ---
 	if #changedFiles > 1 then
 		msg = msg .. (" in %s files:\n"):format(#changedFiles) .. table.concat(changedFiles, "\n")
 	end
-	u.notify("LSP Renaming", msg)
+	u.notify("Renamed with LSP", msg)
 end
 
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
@@ -40,6 +40,8 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 -- INFO this needs to be disabled for noice.nvim
 -- vim.lsp.handlers["textDocument/hover"] =
 -- vim.lsp.with(vim.lsp.handlers.hover, { border = u.borderStyle })
+
+--------------------------------------------------------------------------------
 
 -- :LspCapabilities
 -- no arg: all LSPs attached to current buffer
@@ -69,12 +71,7 @@ end, {
 --------------------------------------------------------------------------------
 -- DIAGNOSTICS
 
-local diagnosticTypes = {
-	Error = "",
-	Warn = "▲",
-	Info = "●",
-	Hint = "",
-}
+local diagnosticTypes = { Error = "", Warn = "▲", Info = "●", Hint = "" }
 for type, icon in pairs(diagnosticTypes) do
 	local hl = "DiagnosticSign" .. type
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
