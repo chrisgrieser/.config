@@ -8,38 +8,32 @@ local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
 --------------------------------------------------------------------------------
 
 function M.commentHr()
-	local commentHrChar = "─" -- CONFIG
-	local wasOnBlank = vim.api.nvim_get_current_line() == ""
-	local indent = vim.fn.indent(".") ---@diagnostic disable-line: param-type-mismatch
 	local comStr = vim.bo.commentstring
-	local ft = vim.bo.filetype
-	local comStrLength = #(comStr:gsub(" ?%%s ?", ""))
-
 	if comStr == "" then
 		u.notify("", "No commentstring for this filetype available.", "warn")
 		return
 	end
-	if comStr:find("-") then commentHrChar = "-" end
 
-	local commentWidth = vim.opt_local.textwidth:get()
-	local linelength = commentWidth - indent - comStrLength
+	local wasOnBlank = vim.api.nvim_get_current_line() == ""
+	local indent = vim.fn.indent(".") ---@diagnostic disable-line: param-type-mismatch
+	local comStrLength = #(comStr:gsub(" ?%%s ?", ""))
+	local commentHrChar = comStr:find("%-") and "-" or "─"
+	local textwidth = vim.o.textwidth > 0 and vim.o.textwidth or 80
+	local linelength = textwidth - indent - comStrLength
 
 	-- the common formatters (black and stylelint) demand extra spaces
 	local fullLine
-	if ft == "css" then
+	if vim.bo.ft == "css" then
 		fullLine = " " .. commentHrChar:rep(linelength - 2) .. " "
-	elseif ft == "python" then
+	elseif vim.bo.ft == "python" then
 		fullLine = " " .. commentHrChar:rep(linelength - 1)
 	else
 		fullLine = commentHrChar:rep(linelength)
 	end
 
 	-- set HR
-	local hr = comStr:gsub(" ?%%s ?", fullLine)
-	if ft == "markdown" then hr = "---" end
-
-	local linesToAppend = { "", hr, "" }
-	if wasOnBlank then linesToAppend = { hr, "" } end
+	local hr = vim.bo.ft == "markdown" and "---" or comStr:gsub(" ?%%s ?", fullLine)
+	local linesToAppend = wasOnBlank and { hr, "" } or { "", hr, "" }
 
 	vim.fn.append(".", linesToAppend) ---@diagnostic disable-line: param-type-mismatch
 
@@ -102,7 +96,8 @@ function M.snippetSearch(snippetDir)
 		kind = "snippetList",
 	}, function(snip)
 		if not snip then return end
-		vim.cmd(("edit +/%s %s"):format(snip.key, snip.path))
+		local locationInFile = ('"%s"'):format(snip.key) -- json keys double-quoted
+		vim.cmd(("edit +/%s %s"):format(locationInFile, snip.path))
 	end)
 end
 
@@ -139,7 +134,7 @@ function M.openAtRegex101()
 	local lang = vim.bo.filetype
 	local text, pattern, replace, flags
 
-	if (lang == "javascript" or lang == "typescript") then
+	if lang == "javascript" or lang == "typescript" then
 		vim.cmd.TSTextobjectSelect("@regex.outer")
 		normal('"zy')
 		vim.cmd.TSTextobjectSelect("@regex.inner") -- reselect for easier pasting
@@ -147,7 +142,7 @@ function M.openAtRegex101()
 		pattern = text:match("/(.*)/")
 		flags = text:match("/.*/(%l*)") or "gm"
 		replace = vim.api.nvim_get_current_line():match('replace ?%(/.*/.*, ?"(.-)"')
-	elseif (lang == "python") then
+	elseif lang == "python" then
 		normal('"zyi"vi"') -- yank & reselect inside quotes
 		pattern = vim.fn.getreg("z")
 		flags = "gm" -- TODO retrieve flags in a smarter way
@@ -155,7 +150,6 @@ function M.openAtRegex101()
 		u.notify("", "Unsupported filetype.", "warn")
 		return
 	end
-
 
 	-- DOCS https://github.com/firasdib/Regex101/wiki/FAQ#how-to-prefill-the-fields-on-the-interface-via-url
 	local url = ("https://regex101.com/?regex=%s&subst=%s&flags=%s&flavor=%s"):format(
@@ -185,7 +179,7 @@ function M.selectMake()
 
 	vim.ui.select(recipes, { prompt = " make" }, function(selection)
 		if not selection then return end
-		vim.cmd("silent! lmake")
+		vim.cmd("silent! update")
 		vim.cmd.lmake(selection)
 	end)
 end
@@ -194,7 +188,7 @@ end
 -- of dial.nvim. (requires `expr = true` for the keymap)
 function M.toggleOrIncrement()
 	local cword = vim.fn.expand("<cword>")
-	local bool = { ["true"] = "false", ["True"] = "False" }
+	local bool = { ["true"] = "false", ["True"] = "False" } -- capitaliized for python
 	local toggle
 	for word, opposite in pairs(bool) do
 		if cword == word then toggle = opposite end
