@@ -4,39 +4,7 @@ local fn = vim.fn
 local api = vim.api
 local cmd = vim.cmd
 
----@param msg string
----@param level? "info"|"trace"|"debug"|"warn"|"error"
-local function notify(msg, level)
-	if not level then level = "info" end
-	local pluginName = "alt-alt"
-	vim.notify(msg, vim.log.levels[level:upper()], { title = pluginName })
-end
-
 --------------------------------------------------------------------------------
-
----count number of windows, excluding various special windows (scrollbars,
----notification windows, etc)
----@nodiscard
----@return number
-local function numberOfWins()
-	local count = 0
-	local wins = api.nvim_list_wins()
-	for _, win in pairs(wins) do
-		local winConf = api.nvim_win_get_config(win)
-		local bufname = api.nvim_buf_get_name(api.nvim_win_get_buf(win))
-
-		if
-			bufname
-			and bufname ~= ""
-			and not winConf.external
-			and winConf.focusable
-			and api.nvim_win_is_valid(win)
-		then
-			count = count + 1
-		end
-	end
-	return count
-end
 
 ---get the alternate oldfile, accounting for non-existing files etc.
 ---@nodiscard
@@ -117,67 +85,8 @@ function M.gotoAltBuffer()
 	elseif altOldfile() then
 		cmd.edit(altOldfile())
 	else
-		notify("Nothing to switch to.", "warn")
+		vim.notify("Nothing to switch to.", vim.log.levels.WARN, { title = "AltAlt" })
 	end
-end
-
----Close window/buffer, preserving alt-file
-local lastClosedBuffer
-function M.betterClose()
-	if vim.bo.buftype ~= "" then
-		pcall(cmd.bwipeout, { bang = true })
-		return
-	end
-
-	local absPath = vim.api.nvim_buf_get_name(0)
-	local fileExists = vim.loop.fs_stat(absPath) ~= nil
-	if fileExists then cmd("silent update " .. absPath) end
-
-	-- close window
-	if numberOfWins() > 1 then
-		cmd.close()
-		return
-	end
-
-	-- close buffers
-	local openBuffers = vim.fn.getbufinfo { buflisted = 1 }
-	if #openBuffers == 1 then
-		notify("Only one buffer open.", "trace")
-		return
-	end
-
-	lastClosedBuffer = absPath -- save for undoing
-	if #openBuffers == 2 then
-		pcall(cmd.bwipeout) -- cannot clear altfile otherwise :/
-		return
-	end
-
-	local couldDelete = pcall(cmd.bdelete)
-	if not couldDelete then
-		notify("Could not delete buffer.", "warn")
-		return
-	end
-
-	-- ensure new alt file points towards open, non-active buffer, or altoldfile
-	local i = 0
-	local newAltBuf = ""
-	while true do
-		i = i + 1
-		if i > #openBuffers then
-			newAltBuf = altOldfile() or ""
-			break
-		end
-		newAltBuf = openBuffers[i].name
-		if newAltBuf ~= absPath and newAltBuf ~= absPath then break end
-	end
-	fn.setreg("#", newAltBuf) -- empty string would set the altfile to the current buffer
-end
-
----repons last closed buffer, similar to ctrl-shift-t in the browser. If no
----buffer has been closed this session, opens last oldfile
-function M.reopenBuffer()
-	-- cannot use purely oldfiles, since they are not updated after buffer closing
-	cmd.edit(lastClosedBuffer or altOldfile())
 end
 
 --------------------------------------------------------------------------------

@@ -85,13 +85,6 @@ keymap(
 	{ desc = "󰛒 Redo All" }
 )
 
-keymap(
-	{ "n", "x" },
-	"<leader>uc",
-	function() require("funcs.alt-alt").reopenBuffer() end,
-	{ desc = "󰽙 Undo buffer closing" }
-)
-
 -- save open time for each buffer
 autocmd("BufReadPost", {
 	callback = function() vim.b["timeOpened"] = os.time() end,

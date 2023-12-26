@@ -22,7 +22,7 @@ export EZA_ICONS_AUTO=1
 
 export FZF_DEFAULT_COMMAND='fd'
 export FZF_DEFAULT_OPTS='
-	--color=hl:206,header::reverse --pointer=⟐ --prompt="❱ " --scrollbar=▐ --ellipsis=…  --marker=" +"
+	--color=hl:206,header::reverse --pointer=⟐ --prompt="❱ " --scrollbar=▐ --ellipsis=… --marker=" +"
 	--scroll-off=5 --cycle --layout=reverse --height=90% --preview-window=border-left
 	--bind=tab:down,shift-tab:up
 	--bind=page-down:preview-page-down,page-up:preview-page-up
@@ -55,3 +55,28 @@ export NODE_REPL_HISTORY=""
 # INFO instead of writing npm config to ~/.npmrc, they can also be defined as shell
 # environment variables https://docs.npmjs.com/cli/v9/using-npm/config#environment-variables
 export npm_config_fund=false # disable funding reminder, has to be lowercase
+
+#───────────────────────────────────────────────────────────────────────────────
+# LESS
+export PAGER="less" # needs to be set explicitly, so the homebrew version is used
+
+# have `less` colorize man pages
+export LESS_TERMCAP_mb=$'\E[1;31m' # begin bold
+export LESS_TERMCAP_md=$'\E[1;33m' # begin blink
+export LESS_TERMCAP_me=$'\E[0m'    # reset bold/blink
+export LESS_TERMCAP_us=$'\E[1;36m' # begin underline
+export LESS_TERMCAP_ue=$'\E[0m'    # reset underline
+
+# INFO --ignore-case is actually smart case
+export LESS='--RAW-CONTROL-CHARS --incsearch --ignore-case --window=-4 --no-init --tilde --long-prompt --quit-if-one-screen'
+export LESSHISTFILE=- # don't clutter home directory with useless `.lesshst` file
+
+# INFO Keybindings
+# - macOS currently ships less v.581, which lacks the ability to read lesskey
+#   source files. Therefore for this to work, the version of less provided by
+#   homebrew is needed (v.633)
+# - keybinding for search includes a setting that makes `n` and `N` wrap
+export LESSKEYIN="$ZDOTDIR/config/lesskey"
+
+# FIX display nerdfont correctly https://github.com/ryanoasis/nerd-fonts/issues/1337
+export LESSUTFCHARDEF=23fb-23fe:p,2665:p,26a1:p,2b58:p,e000-e00a:p,e0a0-e0a2:p,e0a3:p,e0b0-e0b3:p,e0b4-e0c8:p,e0ca:p,e0cc-e0d4:p,e200-e2a9:p,e300-e3e3:p,e5fa-e6a6:p,e700-e7c5:p,ea60-ebeb:p,f000-f2e0:p,f300-f32f:p,f400-f532:p,f500-fd46:p,f0001-f1af0:p
