@@ -53,9 +53,6 @@ local routes = {
 		},
 		view = "mini",
 	},
-
-	-- DAP
-	{ filter = { event = "notify", find = "^Session terminated$" }, view = "mini" },
 }
 
 --------------------------------------------------------------------------------

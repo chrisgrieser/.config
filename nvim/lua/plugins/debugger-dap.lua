@@ -1,7 +1,24 @@
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
-local function dapLualine()
+local function terminateCallback() require("dapui").close() end
+
+local function dapConfig()
+	-- Sign-Icons
+	local sign = vim.fn.sign_define
+	local hintBg = u.getHighlightValue("DiagnosticVirtualTextHint", "bg")
+	vim.api.nvim_set_hl(0, "DapBreak", { bg = hintBg })
+	sign("DapStopped", { text = "", texthl = "DiagnosticHint", linehl = "DapBreak" })
+	sign("DapBreakpoint", { text = "", texthl = "DiagnosticInfo" })
+	sign("DapBreakpointRejected", { text = "", texthl = "DiagnosticError" })
+
+	-- hooks
+	local listener = require("dap").listeners
+	listener.after.event_initialized["dapui_config"] = function() require("dapui").open() end
+	listener.before.event_terminated["dapui_config"] = terminateCallback
+	listener.before.event_exited["dapui_config"] = terminateCallback
+
+	-- lualine components
 	local breakpointHl = vim.fn.sign_getdefined("DapBreakpoint")[1].texthl
 	local breakpointFg = u.getHighlightValue(breakpointHl, "fg")
 	u.addToLuaLine("sections", "lualine_y", {
@@ -21,30 +38,7 @@ local function dapLualine()
 		local dapStatus = require("dap").status()
 		return dapStatus ~= "" and "  " .. dapStatus or ""
 	end)
-
 	require("config.theme-customization").reloadTheming()
-end
-
-local function dapSigns()
-	local sign = vim.fn.sign_define
-
-	local hintBg = u.getHighlightValue("DiagnosticVirtualTextHint", "bg")
-	vim.api.nvim_set_hl(0, "DapBreak", { bg = hintBg })
-	sign("DapStopped", { text = "", texthl = "DiagnosticHint", linehl = "DapBreak" })
-
-	sign("DapBreakpoint", { text = "", texthl = "DiagnosticInfo" })
-	sign("DapBreakpointCondition", { text = "", texthl = "DiagnosticInfo" })
-	sign("DapLogPoint", { text = "", texthl = "DiagnosticInfo" })
-	sign("DapBreakpointRejected", { text = "", texthl = "DiagnosticError" })
-end
-
-local function terminateCallback() require("dapui").close() end
-
-local function setupDapListeners()
-	local listener = require("dap").listeners
-	listener.after.event_initialized["dapui_config"] = function() require("dapui").open() end
-	listener.before.event_terminated["dapui_config"] = terminateCallback
-	listener.before.event_exited["dapui_config"] = terminateCallback
 end
 
 --------------------------------------------------------------------------------
@@ -61,11 +55,7 @@ return {
 			-- stylua: ignore end
 		},
 		init = function() u.leaderSubkey("b", " Debugger") end,
-		config = function()
-			dapSigns()
-			dapLualine()
-			setupDapListeners()
-		end,
+		config = dapConfig,
 	},
 	{
 		"rcarriga/nvim-dap-ui",
@@ -107,9 +97,9 @@ return {
 					position = "right",
 					size = 40, -- width
 					elements = {
-						{ id = "scopes", size = 0.8 },
+						{ id = "scopes", size = 0.8 }, -- Variables
 						{ id = "stacks", size = 0.2 },
-						-- { id = "watches", size = 0.15 },
+						-- { id = "watches", size = 0.15 }, -- Expressions
 					},
 				},
 			},

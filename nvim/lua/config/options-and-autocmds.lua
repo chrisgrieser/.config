@@ -136,13 +136,13 @@ opt.conceallevel = 1
 opt.fillchars:append {
 	eob = " ",
 	fold = " ",
-	vert = "║",
-	horiz = "═",
-	horizup = "╩",
-	horizdown = "╦",
-	vertleft = "╣",
-	vertright = "╠",
-	verthoriz = "╬",
+	horiz = "▄",
+	vert = "█",
+	horizup = "█",
+	horizdown = "█",
+	vertleft = "█",
+	vertright = "█",
+	verthoriz = "█",
 }
 opt.listchars = {
 	nbsp = "󰚌",

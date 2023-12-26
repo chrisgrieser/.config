@@ -1,7 +1,7 @@
 local M = {}
 --------------------------------------------------------------------------------
 
----runs :normal natively with bang
+---runs :normal with bang
 ---@param cmdStr string
 function M.normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
@@ -41,7 +41,6 @@ end
 ---by switching between dark and light mode.
 ---@param hlgroup string
 ---@param modification table
----@return nil
 function M.colorschemeMod(hlgroup, modification)
 	vim.api.nvim_create_autocmd("ColorScheme", {
 		callback = function() vim.api.nvim_set_hl(0, hlgroup, modification) end,
@@ -95,7 +94,7 @@ end
 ---See also https://neovim.io/doc/user/api.html#nvim_open_win()
 ---(BorderChars used for Telescope, borderHorizontal used for whichkey and Glance)
 
-M.borderStyle = "rounded" ---@type "single"|"double"|"rounded"
+M.borderStyle = "rounded" ---@type "single"|"double"|"rounded"|"solid"
 
 if M.borderStyle == "single" then
 	M.borderChars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
@@ -106,6 +105,9 @@ elseif M.borderStyle == "double" then
 elseif M.borderStyle == "rounded" then
 	M.borderChars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
 	M.borderHorizontal = "─"
+elseif M.borderStyle == "solid" then
+	M.borderChars = { "▄", "█", "▀", "█", "█", "█", "█", "█" }
+	M.borderHorizontal = "▄"
 end
 
 --------------------------------------------------------------------------------
@@ -129,5 +131,4 @@ M.textobjMaps = {
 M.linterConfigFolder = os.getenv("HOME") .. "/.config/+ linter-configs/"
 
 --------------------------------------------------------------------------------
-
 return M

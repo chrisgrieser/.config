@@ -350,11 +350,14 @@ end
 return {
 	{ -- configure LSPs
 		"neovim/nvim-lspconfig",
+		event = "VimEnter",
 		dependencies = { -- loading as dependency ensures it's loaded before lua_ls
 			"folke/neodev.nvim",
 			opts = { library = { plugins = false } }, -- too slow with all my plugins
 		},
-		init = setupAllLsps,
-		config = function() require("lspconfig.ui.windows").default_options.border = u.borderStyle end,
+		config = function()
+			setupAllLsps()
+			require("lspconfig.ui.windows").default_options.border = u.borderStyle
+		end,
 	},
 }
