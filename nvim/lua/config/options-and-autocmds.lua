@@ -138,6 +138,11 @@ opt.fillchars:append {
 	fold = " ",
 	vert = "║",
 	horiz = "═",
+	horizup = "╩",
+	horizdown = "╦",
+	vertleft = "╣",
+	vertright = "╠",
+	verthoriz = "╬",
 }
 opt.listchars = {
 	nbsp = "󰚌",
