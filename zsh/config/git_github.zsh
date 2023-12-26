@@ -46,18 +46,18 @@ ZSH_HIGHLIGHT_REGEXP+=(
 function gc {
 	git diff --staged --quiet && # if no staged changes
 		git add --all &&
-		print "\033[1;36mStaged all changes.\033[0m"
+		print "\e[1;36mStaged all changes.\e[0m"
 
-	printf "\033[1;36mCommit: \033[0m" &&
+	printf "\e[1;36mCommit: \e[0m" &&
 		git commit -m "$1" || return 1
 
 	if [[ -n "$(git status --porcelain)" ]]; then
-		print "\033[1;36mPush: \033[0mNot pushing since repo still dirty." &&
+		print "\e[1;36mPush: \e[0mNot pushing since repo still dirty." &&
 			git status
 	else
-		printf "\033[1;36mPull: \033[0m" &&
+		printf "\e[1;36mPull: \e[0m" &&
 			git pull --no-rebase && # --no-rebase prevents "Cannot rebase on multiple branches"
-			printf "\033[1;36mPush: \033[0m" &&
+			printf "\e[1;36mPush: \e[0m" &&
 			git push
 	fi
 }
@@ -65,9 +65,9 @@ function gc {
 function gC {
 	git diff --staged --quiet &&
 		git add --all &&
-		print "\033[1;36mStaged all Changes.\033[0m"
+		print "\e[1;36mStaged all Changes.\e[0m"
 
-	printf "\033[1;36mCommit: \033[0m" &&
+	printf "\e[1;36mCommit: \e[0m" &&
 		git commit -m "$1" || return 1
 }
 
@@ -107,7 +107,7 @@ function gm {
 # amend message only
 function gM {
 	if ! git diff --staged --quiet; then
-		print "\033[1;33mStaged changes detected.\033[0m"
+		print "\e[1;33mStaged changes detected.\e[0m"
 		return 1
 	fi
 	git commit --amend
@@ -147,8 +147,8 @@ function gl {
 
 # interactive
 function gli {
-	if [[ ! -x "$(command -v fzf)" ]]; then print "\033[1;33mfzf not installed.\033[0m" && return 1; fi
-	if [[ ! -x "$(command -v delta)" ]]; then print "\033[1;33mdelta not installed (\`brew install git-delta\`)\033[0m" && return 1; fi
+	if [[ ! -x "$(command -v fzf)" ]]; then print "\e[1;33mfzf not installed.\e[0m" && return 1; fi
+	if [[ ! -x "$(command -v delta)" ]]; then print "\e[1;33mdelta not installed (\`brew install git-delta\`)\e[0m" && return 1; fi
 
 	local hash key_pressed selected style
 	local preview_format="%C(yellow)%h %C(red)%D %n%C(blue)%an %C(green)(%ch)%C(reset) %n%n%C(bold)%C(magenta)%s %C(cyan)%b%C(reset)"
@@ -169,7 +169,7 @@ function gli {
 
 	if [[ "$key_pressed" == "ctrl-h" ]]; then
 		echo -n "$hash" | pbcopy
-		print "\033[1;33m$hash\033[0m copied."
+		print "\e[1;33m$hash\e[0m copied."
 	elif [[ "$key_pressed" == "ctrl-r" ]]; then
 		git rebase -i "$hash^"
 		_separator && _gitlog "$hash^..HEAD" # confirm result
@@ -204,8 +204,8 @@ function unshallow {
 
 # select a fork or multiple forks to delete
 function deletefork {
-	if [[ ! -x "$(command -v fzf)" ]]; then print "\033[1;33mfzf not installed.\033[0m" && return 1; fi
-	if [[ ! -x "$(command -v gh)" ]]; then print "\033[1;33mgh not installed.\033[0m" && return 1; fi
+	if [[ ! -x "$(command -v fzf)" ]]; then print "\e[1;33mfzf not installed.\e[0m" && return 1; fi
+	if [[ ! -x "$(command -v gh)" ]]; then print "\e[1;33mgh not installed.\e[0m" && return 1; fi
 
 	to_delete=$(gh repo list --fork | fzf --multi --with-nth=1 --info=inline | cut -f1)
 	[[ -z "$to_delete" ]] && return 0 # aborted
@@ -224,9 +224,9 @@ function deletefork {
 
 # pickaxe entire repo history
 function pickaxe {
-	[[ -z $1 ]] && print "\033[1;33mNo search query provided.\033[0m" && return 1
+	[[ -z $1 ]] && print "\e[1;33mNo search query provided.\e[0m" && return 1
 	echo "Reminder: Mostly, these are deletion commits. Thus, the checkout target should usually be the parent commit:"
-	print "\033[1;36mgit checkout {hash}^\033[0m"
+	print "\e[1;36mgit checkout {hash}^\e[0m"
 	echo
 
 	_gitlog -G"$1" --regexp-ignore-case --follow
@@ -234,49 +234,44 @@ function pickaxe {
 
 # search for [g]it [d]eleted [f]ile
 function gdf {
+	# GUARD
 	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
 	if ! command -v bat &>/dev/null; then echo "bat not installed." && return 1; fi
-	[[ -z $1 ]] && print "\033[1;33mNo search query provided.\033[0m" && return 1
-
-	local deleted_path deletion_commit
+	[[ -z $1 ]] && print "\e[1;33mNo search query provided.\e[0m" && return 1
 	builtin cd -q "$(git rev-parse --show-toplevel)" || return 1
 
-	# alternative method: `git rev-list -n 1 HEAD -- "**/*$1*"` to get the commit of a deleted file
-	deleted_path=$(git log --diff-filter=D --summary | grep "delete" | grep -i "$*" | cut -d" " -f5-)
+	local deleted_path deletion_commit last_commit
+	deleted_path=$(git log --diff-filter=D --name-only --format="" | grep -i "$*")
 
 	if [[ -z "$deleted_path" ]]; then
-		print "🔍\033[1;33m No deleted file found."
+		print "🔍\e[1;33m No deleted file found.\e[0m"
 		return 1
 	elif [[ $(echo "$deleted_path" | wc -l) -gt 1 ]]; then
-		print "🔍\033[1;34m Multiple files found."
-		echo
+		print "🔍\e[1;34m Multiple files found.\e[0m"
 		selection=$(echo "$deleted_path" | fzf --height=60%)
 		[[ -z "$selection" ]] && return 0
 		deleted_path="$selection"
 	fi
 
-	deletion_commit=$(git log --format='%h' --follow -- "$deleted_path" | head -n1)
-	last_commit=$(git show --format='%h' "$deletion_commit^" | head -n1)
-	if [[ -z "$selection" ]]; then
-		print "🔍\033[1;32m One file found:\033[0m"
-	else
-		print "🔍\033[1;32m Selected file:\033[0m"
-	fi
-
-	# decision on how to act on file
-	echo "$deleted_path -- $last_commit"
+	# alternative method: `git rev-list --max-count=1 HEAD -- "path/to/file"`
+	deletion_commit=$(git log --format='%h' --max-count=1 -- "$deleted_path")
+	last_commit=$(git rev-parse --short "$deletion_commit^")
+	print "🔍\e[1;32m File:\e[0m $deleted_path ($last_commit)"
 	echo
 
-	choices="restore file (checkout)
+	# decision on how to act on file
+	choices="restore file
+checkout commit
 copy to clipboard
 show file (bat)"
 	decision=$(echo "$choices" |
-		fzf --bind="j:down,k:up" --no-sort --no-info --height="5" \
+		fzf --bind="j:down,k:up" --no-sort --no-info --height="6" \
 			--layout=reverse-list --header="j:↓  k:↑")
 
 	if [[ -z "$decision" ]]; then
 		echo "Aborted."
-		return 0
+	elif [[ "$decision" =~ checkout ]]; then
+		git checkout "$last_commit"
 	elif [[ "$decision" =~ restore ]]; then
 		git checkout "$last_commit" -- "$deleted_path"
 		echo "File restored."
@@ -286,7 +281,8 @@ show file (bat)"
 		echo "Content copied."
 	elif [[ "$decision" =~ show ]]; then
 		ext=${deleted_path##*.}
-		git show "$last_commit:$deleted_path" | bat --language="$ext"
+		git show "$last_commit:$deleted_path" | bat --language="$ext" || 
+			git show "$last_commit:$deleted_path" | bat # unknown extension
 	fi
 }
 
