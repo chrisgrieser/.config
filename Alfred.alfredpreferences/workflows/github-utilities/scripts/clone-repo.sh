@@ -1,19 +1,18 @@
 #!/usr/bin/env zsh
 # shellcheck disable=2154
-# INFO LOCAL_REPOS defined in .zshenv
 #───────────────────────────────────────────────────────────────────────────────
 
 origin_repo=$(echo "$*" | cut -c20-)
 reponame=$(echo "$*" | sed -E 's|.*/||')
 url="git@github.com:$origin_repo.git" # use SSH instead of https
 
-# CLONE
+# INFO LOCAL_REPOS defined in .zshenv
 [[ ! -e "$LOCAL_REPOS" ]] && mkdir -p "$LOCAL_REPOS"
 cd "$LOCAL_REPOS" || exit 1
+
 # WARN depth=2 ensures that amending a shallow commit does not result in a
 # new commit without parent, effectively destroying git history (!!)
-git clone --depth=2 "$url" \
-	--no-single-branch --no-tags # fetch all branches, but not all tags
+git clone --depth=2 "$url" --no-single-branch --no-tags # get branches, but not tags
 
 # Open in terminal via Alfred
 echo -n "$LOCAL_REPOS/$reponame"

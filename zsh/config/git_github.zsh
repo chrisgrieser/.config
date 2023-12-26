@@ -56,7 +56,7 @@ function gc {
 			git status
 	else
 		printf "\e[1;36mPull: \e[0m" &&
-			git pull --no-rebase && # --no-rebase prevents "Cannot rebase on multiple branches"
+			git pull && # add `--no-rebase` to prevent "Cannot rebase on multiple branches"
 			printf "\e[1;36mPush: \e[0m" &&
 			git push
 	fi
@@ -135,9 +135,9 @@ function gu {
 # git log
 function gl {
 	if [[ -z "$1" ]]; then
-		_gitlog -n 15
+		_gitlog --max-count=15
 	elif [[ "$1" =~ ^[0-9]+$ ]]; then
-		_gitlog -n "$1"
+		_gitlog --max-count="$1"
 	else
 		_gitlog "$@"
 	fi
@@ -150,7 +150,7 @@ function clone {
 
 	# WARN depth=2 ensures that amending a shallow commit does not result in a
 	# new commit without parent, effectively destroying git history (!!)
-	git clone --depth=2 "$url"
+	git clone --depth=2 "$url" --no-single-branch --no-tags # get branches, but not tags
 
 	# shellcheck disable=SC2012
 	cd "$(command ls -1 -t | head -n1)" || return 1
