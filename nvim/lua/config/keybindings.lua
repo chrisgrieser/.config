@@ -199,12 +199,8 @@ keymap({ "n", "x" }, "<CR>", function()
 end, { desc = "󰽙 Alt Buffer" })
 keymap({ "n", "x", "i" }, "<C-CR>", "<C-w>w", { desc = " Next Window" })
 
-keymap(
-	{ "n", "x", "i" },
-	"<D-w>",
-	function() require("funcs.alt-alt").betterClose() end,
-	{ desc = "󰽙 Close buffer/window" }
-)
+-- bwipeout does not leave the buffer as alt-file
+keymap({ "n", "x", "i" }, "<D-w>", "<cmd>bwipeout<CR>", { desc = "󰽙 Close" })
 
 --------------------------------------------------------------------------------
 -- CLIPBOARD
