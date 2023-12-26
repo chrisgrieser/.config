@@ -94,12 +94,7 @@ keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent selection" })
 keymap("n", "<Tab>", ">>", { desc = "󰉶 indent line" })
 keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent line" })
 keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent line" })
-keymap(
-	"i",
-	"<Tab>",
-	function() require("funcs.mini-plugins").tabout() end,
-	{ desc = " Tabout" }
-)
+keymap("i", "<Tab>", function() require("funcs.mini-plugins").tabout() end, { desc = " Tabout" })
 
 keymap("n", "[", "<", { desc = "󰉵 outdent" })
 keymap("n", "]", ">", { desc = "󰉶 indent" })
@@ -203,7 +198,7 @@ keymap(
 	{ desc = "󰽙 Alt Buffer" }
 )
 
-keymap({ "n", "x", "i" }, "<D-w>", function ()
+keymap({ "n", "x", "i" }, "<D-w>", function()
 	local onlyOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) == 1
 	if onlyOneBuffer then return end
 	vim.cmd("silent! update")
