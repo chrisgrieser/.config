@@ -53,12 +53,11 @@ keymap(
 	function() vim.fn.system { "open", vim.fn.stdpath("data") } end,
 	{ desc = " Package Dirs" }
 )
-keymap(
-	"n",
-	"<leader>ps",
-	function() require("funcs.quality-of-life").snippetSearch() end,
-	{ desc = " Search Snippets" }
-)
+
+keymap("n", "<leader>ps", function()
+	local snippetDir = vim.fn.stdpath("config") .. "/snippets"
+	require("funcs.mini-plugins").snippetSearch(snippetDir)
+end, { desc = " Search Snippets" })
 
 --------------------------------------------------------------------------------
 -- REFACTORING
@@ -168,7 +167,7 @@ end, { desc = " Make" })
 keymap(
 	"n",
 	"<leader>M",
-	function() require("funcs.quality-of-life").selectMake() end,
+	function() require("funcs.mini-plugins").selectMake() end,
 	{ desc = " Select Make" }
 )
 

@@ -44,7 +44,6 @@ local function customHighlights()
 	for _, type in pairs { "Error", "Warn", "Info", "Hint" } do
 		updateHl("DiagnosticUnderline" .. type, "gui=underline cterm=underline")
 	end
-	updateHl("@lsp.type.unresolvedReference", "gui=underline cterm=underline")
 
 	-- underdotted for spell issues (used only for git commit messages though)
 	for _, type in pairs { "Bad", "Cap", "Rare", "Local" } do
