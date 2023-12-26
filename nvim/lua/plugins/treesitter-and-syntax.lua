@@ -24,6 +24,13 @@ local tsConfig = {
 
 	--------------------------------------------------------------------------
 	-- TREESITTER PLUGINS
+	matchup = {
+		enable = true,
+		enable_quotes = true,
+		disable_virtual_text = true,
+	},
+
+	endwise = { enable = true },
 
 	textobjects = {
 		move = { -- move to next function
@@ -45,12 +52,6 @@ local tsConfig = {
 			floating_preview_opts = {},
 		},
 	},
-	matchup = {
-		enable = true,
-		enable_quotes = true,
-		disable_virtual_text = true,
-	},
-	endwise = { enable = true },
 }
 
 --------------------------------------------------------------------------------
@@ -73,6 +74,7 @@ return {
 		build = ":UpdateRemotePlugins", -- don't disable `rplugin` in lazy.nvim for this
 		init = function()
 			-- use `pynvim` installed with mason
+			-- (not using `require("mason-registry")` to avoid loading mason)
 			vim.g.python3_host_prog = vim.fn.stdpath("data")
 				.. "/mason/packages/pynvim/venv/bin/python3"
 
