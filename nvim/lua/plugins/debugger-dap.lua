@@ -3,20 +3,24 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 local function dapLualine()
+	local breakpointHl = vim.fn.sign_getdefined("DapBreakpoint")[1].texthl
+	local breakpointFg = u.getHighlightValue(breakpointHl, "fg")
+	u.addToLuaLine("sections", "lualine_y", {
+		color = { fg = breakpointFg },
+		function()
+			local breakpoints = require("dap.breakpoints").get()
+			local breakpointSum = 0
+			for buf, _ in pairs(breakpoints) do
+				breakpointSum = breakpointSum + #breakpoints[buf]
+			end
+			if breakpointSum == 0 then return "" end
+			local breakpointIcon = vim.fn.sign_getdefined("DapBreakpoint")[1].text
+			return breakpointIcon .. tostring(breakpointSum)
+		end,
+	})
 	u.addToLuaLine("sections", "lualine_x", function()
 		local dapStatus = require("dap").status()
-		if dapStatus ~= "" then dapStatus = "  " .. dapStatus end
-		return dapStatus
-	end)
-	u.addToLuaLine("sections", "lualine_y", function()
-		local breakpoints = require("dap.breakpoints").get()
-		local breakpointSum = 0
-		for buf, _ in pairs(breakpoints) do
-			breakpointSum = breakpointSum + #breakpoints[buf]
-		end
-		if breakpointSum == 0 then return "" end
-		local breakpointIcon = vim.fn.sign_getdefined("DapBreakpoint")[1].text
-		return breakpointIcon .. tostring(breakpointSum)
+		return dapStatus ~= "" and "  " .. dapStatus or ""
 	end)
 
 	require("config.theme-customization").reloadTheming()
@@ -26,19 +30,13 @@ local function dapSigns()
 	local sign = vim.fn.sign_define
 
 	local hintBg = u.getHighlightValue("DiagnosticVirtualTextHint", "bg")
-	sign("DapStopped", { text = "", texthl = "DiagnosticHint" })
-	sign( "DapBreakpoint", { text = "", texthl = "DiagnosticSignInfo" })
+	vim.api.nvim_set_hl(0, "DapBreak", { bg = hintBg })
+	sign("DapStopped", { text = "", texthl = "DiagnosticHint", linehl = "DapBreak" })
+
+	sign("DapBreakpoint", { text = "", texthl = "DiagnosticInfo" })
 	sign("DapBreakpointCondition", { text = "", texthl = "DiagnosticInfo" })
 	sign("DapLogPoint", { text = "", texthl = "DiagnosticInfo" })
 	sign("DapBreakpointRejected", { text = "", texthl = "DiagnosticError" })
-
-	-- current line: apply only background of hints
-	local function currentDapLineHl()
-		vim.api.nvim_set_hl(0, "DebugPC", { bg = hintBg })
-	end
-
-	currentDapLineHl()
-	vim.api.nvim_create_autocmd("ColorScheme", { callback = currentDapLineHl })
 end
 
 local function terminateCallback() require("dapui").close() end
@@ -96,15 +94,15 @@ return {
 		},
 		opts = {
 			controls = { enabled = false, element = "scopes" },
-			floating = { border = require("config.utils").borderStyle },
+			floating = { border = u.borderStyle },
 			layouts = {
 				{
 					position = "right",
 					size = 40,
 					elements = {
-						{ id = "scopes", size = 0.7 },
-						{ id = "stacks", size = 0.15 },
-						{ id = "watches", size = 0.15 },
+						{ id = "scopes", size = 0.8 },
+						{ id = "stacks", size = 0.2 },
+						-- { id = "watches", size = 0.15 },
 					},
 				},
 			},
@@ -116,11 +114,10 @@ return {
 		"jbyuki/one-small-step-for-vimkind",
 		dependencies = "mfussenegger/nvim-dap",
 		config = function()
-			local dap = require("dap")
-			dap.configurations.lua = {
+			require("dap").configurations.lua = {
 				{ type = "nlua", request = "attach", name = "Attach to running Neovim instance" },
 			}
-			dap.adapters.nlua = function(callback, config)
+			require("dap").adapters.nlua = function(callback, config)
 				callback {
 					type = "server",
 					host = config.host or "127.0.0.1",
