@@ -25,8 +25,8 @@ local function quickfixCounter()
 	if totalQfItems == 0 then return "" end
 	local qfData = vim.fn.getqflist { idx = 0, title = true }
 	local title = qfData.title
-		:gsub("^Live Grep: .- %((.*)%)", 'Grep: "%1"')
-		:gsub("^Find Word %((.-)%) ?%(?%)?", 'Grep: "%1"')
+		:gsub("^Live Grep: .- %((.*)%)", '"%1"')
+		:gsub("^Find Word %((.-)%) ?%(?%)?", '"%1"')
 		:gsub(" ?%(%)", "")
 	local index = qfData.idx
 	return (" %s/%s %s"):format(index, totalQfItems, title)
