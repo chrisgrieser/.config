@@ -7,10 +7,12 @@ local a = vim.api
 local function hasAltFile(altBufnr)
 	if altBufnr < 0 then return false end
 	local altPath = a.nvim_buf_get_name(altBufnr)
-	local moreThanOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) > 1
 	local valid = a.nvim_buf_is_valid(altBufnr)
 	local nonSpecial = a.nvim_buf_get_option(altBufnr, "buftype") == ""
 	local fileExists = vim.loop.fs_stat(altPath) ~= nil
+
+	-- FIX sometimes current and alt buffer point to the same file
+	local moreThanOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) > 1 
 	return valid and nonSpecial and fileExists and moreThanOneBuffer
 end
 
@@ -59,7 +61,7 @@ function M.altFileStatus(maxDisplayLen)
 		icon = "󰋚"
 		name = vim.fs.basename(altOld)
 	else
-		return "???"
+		return "–––"
 	end
 
 	-- truncate

@@ -72,8 +72,8 @@ local function retabber(use)
 	cmd.retab { bang = true }
 	u.notify("Indent", ("Now using %s"):format(char))
 end
-keymap("n", "<leader>r<Tab>", function() retabber("tabs") end, { desc = "󰌒 Use Tabs" })
-keymap("n", "<leader>r<Space>", function() retabber("spaces") end, { desc = "󱁐 Use Spaces" })
+keymap("n", "<leader>f<Tab>", function() retabber("tabs") end, { desc = "󰌒 Use Tabs" })
+keymap("n", "<leader>f<Space>", function() retabber("spaces") end, { desc = "󱁐 Use Spaces" })
 
 --------------------------------------------------------------------------------
 -- UNDO
