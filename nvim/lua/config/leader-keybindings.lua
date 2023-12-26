@@ -53,6 +53,12 @@ keymap(
 	function() vim.fn.system { "open", vim.fn.stdpath("data") } end,
 	{ desc = " Package Dirs" }
 )
+keymap(
+	"n",
+	"<leader>ps",
+	function() require("funcs.quality-of-life").snippetSearch() end,
+	{ desc = " Search Snippets" }
+)
 
 --------------------------------------------------------------------------------
 -- REFACTORING

@@ -43,7 +43,7 @@ keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" 
 keymap({ "n", "v", "i" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 Signature" })
 
 -- needs remapping since `gf` is used for LSP-references
-keymap("n", "gp", "gf", { desc = " Goto Path under cursor" })
+keymap("n", "gP", "gf", { desc = " Goto Path under cursor" })
 
 -- quickfix
 keymap("n", "gq", "<cmd>cnext<CR>zv", { desc = " Next Quickfix" })
@@ -167,6 +167,7 @@ keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "⬅ Move Selection left" })
 
 -- COMMAND & INSERT MODE
 keymap("c", "<C-u>", "<C-e><C-u>") -- kill whole line
+keymap("c", "<D-v>", "<C-r>+", { desc = " Paste" })
 keymap({ "i", "c" }, "<C-a>", "<Home>")
 keymap({ "i", "c" }, "<C-e>", "<End>")
 keymap("c", "<BS>", function()
@@ -243,7 +244,7 @@ keymap("n", "dd", function()
 	return "dd"
 end, { expr = true })
 
--- paste w/o switching register
+-- paste without switching with register
 keymap("x", "p", "P")
 
 -- always paste characterwise when in insert mode
@@ -253,9 +254,9 @@ keymap("i", "<D-v>", function()
 	return "<C-g>u<C-r><C-o>+" -- "<C-g>u" adds undopoint before the paste
 end, { desc = " Paste charwise", expr = true })
 
---- paste via cmd+v
-keymap("n", "<D-v>", "p")
-keymap("c", "<D-v>", "<C-r>+", { desc = " Paste" })
+-- use register `y` as secondary clipboard
+keymap({ "n", "x" }, "gy", '"yy', { desc = "󰅍 Yank to 2ndary" })
+keymap({ "n", "x" }, "gp", '"yp', { desc = " Paste from 2ndary" })
 
 --------------------------------------------------------------------------------
 

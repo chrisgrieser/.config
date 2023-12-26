@@ -8,8 +8,8 @@ app.includeStandardAdditions = true;
 /** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
-	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
-	return [clean, camelCaseSeperated, str].join(" ") + " ";
+	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
+	return [clean, camelCaseSeparated, str].join(" ") + " ";
 }
 
 /** @param {string} path */
@@ -30,8 +30,7 @@ function run() {
 	/** @type{AlfredItem[]} */
 	const snippets = [];
 
-	app
-		.doShellScript(`find "${snippetDir}" -type f -name "*.json"`)
+	app.doShellScript(`find "${snippetDir}" -type f -name "*.json"`)
 		.split("\r")
 		.filter((path) => !path.endsWith("package.json"))
 		// iterate through files
@@ -66,7 +65,7 @@ function run() {
 						},
 					},
 					uid: `${fileName}/${snippet}`,
-				})
+				});
 			}
 		});
 

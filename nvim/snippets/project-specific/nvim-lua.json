@@ -21,7 +21,7 @@
 	},
 	"keymap (multi-mode)": {
 		"prefix": "keymap (multi-mode)",
-		"body": "keymap({\"n\", \"x\"}, \"${1:lhs}\", \"${2:rhs}\", { desc = \"${3:desc}\" })"
+		"body": "keymap({ \"n\", \"x\" }, \"${1:lhs}\", \"${2:rhs}\", { desc = \"${3:desc}\" })"
 	},
 	"autocmd": {
 		"prefix": "autocmd",

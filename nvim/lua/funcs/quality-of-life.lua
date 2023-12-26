@@ -75,6 +75,17 @@ end
 
 --------------------------------------------------------------------------------
 
+function M.snippetSearch()
+	local snippetDir = vim.fn.stdpath("config") .. "/snippets"
+	local out = {}
+	for name, _ in vim.fs.dir(snippetDir) do
+		table.insert(out, name)
+	end
+	vim.notify("🪚 out: " .. table.concat(out, "\n"))
+end
+
+--------------------------------------------------------------------------------
+
 function M.openAlfredPref()
 	local parentFolder = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
 	if not parentFolder:find("Alfred%.alfredpreferences") then
