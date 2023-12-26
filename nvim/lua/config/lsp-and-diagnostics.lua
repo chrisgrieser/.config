@@ -34,6 +34,13 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config) ---
 	u.notify("LSP Renaming", msg)
 end
 
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+	border = u.borderStyle,
+})
+-- INFO this needs to be disabled for noice.nvim
+-- vim.lsp.handlers["textDocument/hover"] =
+-- vim.lsp.with(vim.lsp.handlers.hover, { border = u.borderStyle })
+
 -- :LspCapabilities
 -- no arg: all LSPs attached to current buffer
 -- one arg: name of the LSP
