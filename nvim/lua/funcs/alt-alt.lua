@@ -6,14 +6,13 @@ local a = vim.api
 ---@return boolean
 local function hasAltFile(altBufnr)
 	if altBufnr < 0 then return false end
-	local altPath = a.nvim_buf_get_name(altBufnr)
 	local valid = a.nvim_buf_is_valid(altBufnr)
 	local nonSpecial = a.nvim_buf_get_option(altBufnr, "buftype") == ""
-	local fileExists = vim.loop.fs_stat(altPath) ~= nil
 
 	-- FIX sometimes current and alt buffer point to the same file
-	local moreThanOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) > 1 
-	return valid and nonSpecial and fileExists and moreThanOneBuffer
+	local moreThanOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) > 1
+
+	return valid and nonSpecial and moreThanOneBuffer
 end
 
 ---get the alternate oldfile, accounting for non-existing files
@@ -43,6 +42,7 @@ function M.altFileStatus(maxDisplayLen)
 	if hasAltFile(altBufNr) then
 		local altPath = a.nvim_buf_get_name(altBufNr)
 		local altFile = vim.fs.basename(altPath)
+		name = altFile ~= "" and altFile or "[No Name]"
 		-- icon
 		local ext = altFile:match("%w+$")
 		local altBufFt = a.nvim_buf_get_option(altBufNr, "filetype") ---@diagnostic disable-line: param-type-mismatch
@@ -50,7 +50,6 @@ function M.altFileStatus(maxDisplayLen)
 		icon = ok and devicons.get_icon(altFile, ext or altBufFt) or "#"
 
 		-- name: consider if alt and current file have same basename
-		name = altFile
 		local curFile = vim.fs.basename(a.nvim_buf_get_name(0))
 		local currentAndAltWithSameBasename = curFile == altFile
 		if currentAndAltWithSameBasename then
