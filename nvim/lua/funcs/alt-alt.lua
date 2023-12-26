@@ -5,11 +5,10 @@ local a = vim.api
 ---@param altBufnr integer
 ---@return boolean
 local function hasAltFile(altBufnr)
-	local altBufnr = 
 	local altPath = a.nvim_buf_get_name(altBufnr)
 	local curPath = a.nvim_buf_get_name(0)
 	local valid = a.nvim_buf_is_valid(altBufnr)
-	local nonSpecial = a.nvim_buf_get_option(altBufnr, "buftype") ~= ""
+	local nonSpecial = a.nvim_buf_get_option(altBufnr, "buftype") == ""
 	local exists = vim.loop.fs_stat(altPath) ~= nil
 	return valid and nonSpecial and exists and (altPath ~= curPath)
 end
@@ -28,24 +27,25 @@ local function altOldfile()
 end
 
 ---shows name & icon of alt buffer. If there is none, show first alt-oldfile.
----@param maxDisplayLen number
+---@param maxDisplayLen? number
 ---@return string
 function M.altFileStatusline(maxDisplayLen)
-	if not maxDisplayLen then maxDisplayLen = 25 end
+	-- some statusline plugins convert their input into strings
+	if type(maxDisplayLen) ~= "number" then maxDisplayLen = 25 end
+
 	local altBufNr = vim.fn.bufnr("#") ---@diagnostic disable-line: param-type-mismatch
 	local altPath = a.nvim_buf_get_name(altBufNr)
 	local curPath = a.nvim_buf_get_name(0)
 	local altFile = vim.fs.basename(altPath)
-	local altOld = altOldfile() 
+	local altOld = altOldfile()
 
 	local name, icon
 	if hasAltFile(altBufNr) then
 		-- icon
-		local ext = vim.fn.expand("#:e")
+		local ext = altFile:match("%w+$")
 		local altBufFt = a.nvim_buf_get_option(altBufNr, "filetype") ---@diagnostic disable-line: param-type-mismatch
-		local ftOrExt = ext ~= "" and ext or altBufFt
 		local ok, devicons = pcall(require, "nvim-web-devicons")
-		icon = ok and devicons.get_icon(altFile, ftOrExt) or "#"
+		icon = ok and devicons.get_icon(altFile, ext or altBufFt) or "#"
 
 		-- name
 		name = altFile
@@ -70,12 +70,12 @@ end
 ---switch to alternate buffer/oldfile (in that priority)
 function M.gotoAltBuffer()
 	local altBufNr = vim.fn.bufnr("#") ---@diagnostic disable-line: param-type-mismatch
-	vim.notify("🪚 hasAltFile(altBufNr): " .. tostring(hasAltFile(altBufNr)))
+	local altOld = altOldfile()
 
 	if hasAltFile(altBufNr) then
 		vim.cmd.buffer("#")
-	elseif altOldfile() then
-		vim.cmd.edit(altOldfile())
+	elseif altOld then
+		vim.cmd.edit(altOld)
 	else
 		vim.notify(
 			"No Alt File and not Oldfile available.",

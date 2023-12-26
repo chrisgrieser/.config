@@ -25,18 +25,15 @@ end
 local function dapSigns()
 	local sign = vim.fn.sign_define
 
-	sign(
-		"DapBreakpoint",
-		{ text = "", texthl = "DiagnosticSignInfo", numhl = "DiagnosticSignInfo" }
-	)
-	sign("DapStopped", { text = "", texthl = "DiagnosticHint", numhl = "DiagnosticSignHint" })
+	local hintBg = u.getHighlightValue("DiagnosticVirtualTextHint", "bg")
+	sign("DapStopped", { text = "", texthl = "DiagnosticHint" })
+	sign( "DapBreakpoint", { text = "", texthl = "DiagnosticSignInfo" })
 	sign("DapBreakpointCondition", { text = "", texthl = "DiagnosticInfo" })
 	sign("DapLogPoint", { text = "", texthl = "DiagnosticInfo" })
 	sign("DapBreakpointRejected", { text = "", texthl = "DiagnosticError" })
 
 	-- current line: apply only background of hints
 	local function currentDapLineHl()
-		local hintBg = u.getHighlightValue("DiagnosticVirtualTextHint", "bg")
 		vim.api.nvim_set_hl(0, "DebugPC", { bg = hintBg })
 	end
 
@@ -132,23 +129,9 @@ return {
 			end
 		end,
 		keys = {
-			{
-				"<leader>bn",
-				function()
-					-- INFO is the only one that needs manual starting, other debuggers
-					-- start with `continue` by themselves
-					if not vim.bo.filetype == "lua" then
-						vim.notify(
-							"Not a lua file.",
-							vim.log.levels.WARN,
-							{ title = "one-small-step-for-vimkind" }
-						)
-						return
-					end
-					require("osv").run_this()
-				end,
-				desc = "  nvim-lua debugger",
-			},
+			-- INFO is the only one that needs manual starting, other debuggers
+			-- start with `continue` by themselves
+			{ "<leader>bn", function() require("osv").run_this() end, desc = " nvim-lua debugger" },
 		},
 	},
 	{ -- debugger preconfig for python
