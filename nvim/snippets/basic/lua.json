@@ -101,7 +101,6 @@
 		"body": [
 			"---read the full file",
 			"---@param filePath string",
-			"---@return string|nil nil on error",
 			"local function readFile(filePath, str)",
 			"\tlocal file, err = io.open(filePath, \"r\")",
 			"\tif not file then return \"ERROR: \" .. err end",
