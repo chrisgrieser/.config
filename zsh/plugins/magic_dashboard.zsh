@@ -40,7 +40,7 @@ function _gitlog {
 				-e 's/upstream\//  /g' \
 				-e 's/HEAD/󱍞 /g' \
 				-e 's/tag: /  /g' \
-				-e 's/ -> / 󰑃 /' \
+				-e 's/ -> /   /' \
 				-e 's/\* /· /' \
 				-Ee $'s/ (fix|refactor|build|ci|docs|feat|style|test|perf|chore|revert|break|improv)(\\(.+\\)|!)?:/ \033[1;35m\\1\033[1;36m\\2\033[0;38;5;245m:\033[0m/' \
 				-Ee $'s/ (fixup|squash)!/\033[1;32m&\033[0m/g' \
