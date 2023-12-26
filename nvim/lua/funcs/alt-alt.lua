@@ -1,91 +1,87 @@
 local M = {}
-
-local fn = vim.fn
-local api = vim.api
-local cmd = vim.cmd
-
+local a = vim.api
 --------------------------------------------------------------------------------
 
----get the alternate oldfile, accounting for non-existing files etc.
+---@param altBufnr integer
+---@return boolean
+local function hasAltFile(altBufnr)
+	local altBufnr = 
+	local altPath = a.nvim_buf_get_name(altBufnr)
+	local curPath = a.nvim_buf_get_name(0)
+	local valid = a.nvim_buf_is_valid(altBufnr)
+	local nonSpecial = a.nvim_buf_get_option(altBufnr, "buftype") ~= ""
+	local exists = vim.loop.fs_stat(altPath) ~= nil
+	return valid and nonSpecial and exists and (altPath ~= curPath)
+end
+
+---get the alternate oldfile, accounting for non-existing files
 ---@nodiscard
 ---@return string|nil path of oldfile, nil if none exists in all oldfiles
 local function altOldfile()
-	local oldfile
-	local i = 0
-	repeat
-		i = i + 1
-		if i > #vim.v.oldfiles then return nil end
-		oldfile = vim.v.oldfiles[i]
-		local fileExists = vim.loop.fs_stat(oldfile) ~= nil
-		local isCurrentFile = oldfile == api.nvim_buf_get_name(0)
-		local commitMsg = oldfile:find("COMMIT_EDITMSG$")
-	until fileExists and not commitMsg and not isCurrentFile
-	return oldfile
+	local curPath = a.nvim_buf_get_name(0)
+	for _, file in ipairs(vim.v.oldfiles) do
+		if vim.loop.fs_stat(file) and not file:find("/COMMIT_EDITMSG$") and file ~= curPath then
+			return file
+		end
+	end
+	return nil
 end
 
----shows info on alternate window/buffer/oldfile in that priority
+---shows name & icon of alt buffer. If there is none, show first alt-oldfile.
+---@param maxDisplayLen number
 ---@return string
-function M.altFileStatusline()
-	local maxLen = 25 -- CONFIG
-
-	local altPath = fn.expand("#:p")
-	local curPath = vim.api.nvim_buf_get_name(0)
-	local curFile = vim.fs.basename(curPath)
+function M.altFileStatusline(maxDisplayLen)
+	if not maxDisplayLen then maxDisplayLen = 25 end
+	local altBufNr = vim.fn.bufnr("#") ---@diagnostic disable-line: param-type-mismatch
+	local altPath = a.nvim_buf_get_name(altBufNr)
+	local curPath = a.nvim_buf_get_name(0)
 	local altFile = vim.fs.basename(altPath)
-
-	local altBufNr = fn.bufnr("#") ---@diagnostic disable-line: param-type-mismatch
-	local specialFile = vim.api.nvim_buf_is_valid(altBufNr)
-		and vim.api.nvim_buf_get_option(altBufNr, "buftype") ~= ""
-	local fileExists = vim.loop.fs_stat(altPath) ~= nil
-	local hasAltFile = altFile ~= "" and altPath ~= curPath and (fileExists or specialFile)
+	local altOld = altOldfile() 
 
 	local name, icon
-	if hasAltFile then
+	if hasAltFile(altBufNr) then
 		-- icon
-		local ext = fn.expand("#:e")
-		local altBufFt = vim.api.nvim_buf_get_option(altBufNr, "filetype") ---@diagnostic disable-line: param-type-mismatch
+		local ext = vim.fn.expand("#:e")
+		local altBufFt = a.nvim_buf_get_option(altBufNr, "filetype") ---@diagnostic disable-line: param-type-mismatch
 		local ftOrExt = ext ~= "" and ext or altBufFt
 		local ok, devicons = pcall(require, "nvim-web-devicons")
 		icon = ok and devicons.get_icon(altFile, ftOrExt) or "#"
 
 		-- name
 		name = altFile
-		if curFile == altFile then
+		if vim.fs.basename(curPath) == altFile then
 			local altParent = vim.fs.basename(vim.fs.dirname(altPath))
 			name = altParent .. "/" .. altFile
 		end
-	elseif altOldfile() then
-		local altOld = altOldfile() ---@cast altOld string
+	elseif altOld then
 		icon = "󰋚"
 		name = vim.fs.basename(altOld)
 	end
 
 	-- truncate
 	local nameNoExt = name:gsub("%.%w+$", "")
-	if #nameNoExt > maxLen then
+	if #nameNoExt > maxDisplayLen then
 		local ext = name:match("%.%w+$")
-		name = nameNoExt:sub(1, maxLen) .. "…" .. ext
+		name = nameNoExt:sub(1, maxDisplayLen) .. "…" .. ext
 	end
 	return icon .. " " .. name
 end
 
 ---switch to alternate buffer/oldfile (in that priority)
 function M.gotoAltBuffer()
-	local altFile = fn.expand("#:t")
-	local altPath = fn.expand("#:p")
-	local curPath = vim.api.nvim_buf_get_name(0)
-	local altBufNr = fn.bufnr("#") ---@diagnostic disable-line: param-type-mismatch
-	local specialFile = vim.api.nvim_buf_is_valid(altBufNr)
-		and vim.api.nvim_buf_get_option(altBufNr, "buftype") ~= ""
-	local fileExists = vim.loop.fs_stat(altPath) ~= nil
-	local hasAltFile = altFile ~= "" and altPath ~= curPath and (fileExists or specialFile)
+	local altBufNr = vim.fn.bufnr("#") ---@diagnostic disable-line: param-type-mismatch
+	vim.notify("🪚 hasAltFile(altBufNr): " .. tostring(hasAltFile(altBufNr)))
 
-	if hasAltFile and (altPath ~= curPath) then
-		cmd.buffer("#")
+	if hasAltFile(altBufNr) then
+		vim.cmd.buffer("#")
 	elseif altOldfile() then
-		cmd.edit(altOldfile())
+		vim.cmd.edit(altOldfile())
 	else
-		vim.notify("Nothing to switch to.", vim.log.levels.WARN, { title = "AltAlt" })
+		vim.notify(
+			"No Alt File and not Oldfile available.",
+			vim.log.levels.WARN,
+			{ title = "AltAlt" }
+		)
 	end
 end
 
