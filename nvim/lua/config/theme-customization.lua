@@ -60,7 +60,7 @@ local function themeModifications()
 	if theme == "tokyonight" then
 		vim.defer_fn(function()
 			for _, v in pairs(vimModes) do
-				updateHl("lualine_y_diff_modified_" .. v, "guifg=#dfd21b")
+				updateHl("lualine_y_diff_modified_" .. v, "guifg=#c8be32")
 				updateHl("lualine_y_diff_added_" .. v, "guifg=#369a96")
 				updateHl("lualine_a_" .. v, "gui=bold")
 			end

@@ -1,5 +1,4 @@
 local u = require("config.utils")
-
 --------------------------------------------------------------------------------
 
 local function dapLualine()
@@ -56,8 +55,7 @@ return {
 		keys = {
 			-- INFO toggling breakpoints and "Continue" command done via nvim-recorder
 			-- stylua: ignore start
-			{ "<leader>bc", function() require("dap").run_to_cursor() end, desc = "󰇀 Run to Cursor" },
-			{ "<leader>bd", function() require("dap").clear_breakpoints() end, desc = " Remove Breakpoints" },
+			{ "<leader>bd", function() require("dap").clear_breakpoints() end, desc = " Remove All Breakpoints" },
 			{ "<leader>br", function() require("dap").restart() end, desc = " Restart" },
 			{ "<leader>bt", function() require("dap").terminate({}, {}, terminateCallback) end, desc = " Terminate" },
 			-- stylua: ignore end
@@ -73,32 +71,41 @@ return {
 		"rcarriga/nvim-dap-ui",
 		dependencies = "mfussenegger/nvim-dap",
 		keys = {
-			{ "<leader>bu", function() require("dapui").toggle() end, desc = "󱂬 Toggle DAP-UI" }, -- codespell-ignore
-			{
-				"<leader>bl",
-				function() require("dapui").float_element("breakpoints") end,
-				desc = " List Breakpoints",
-			},
+			{ "<leader>bu", function() require("dapui").toggle() end, desc = "󱂬 dap-ui" },
 			{
 				"<leader>bi",
-				function() require("dapui").float_element("repl") end,
-				mode = { "n", "x" },
+				function() require("dapui").float_element("repl", { enter = true }) end,
 				desc = " REPL",
 			},
 			{
-				"<leader>bb",
+				"<leader>bl",
+				function() require("dapui").float_element("breakpoints", { enter = true }) end,
+				desc = " List Breakpoints",
+			},
+			{
+				"<leader>be",
 				function() require("dapui").eval() end,
 				mode = { "n", "x" },
 				desc = " Eval",
 			},
 		},
 		opts = {
-			controls = { enabled = false, element = "scopes" },
-			floating = { border = u.borderStyle },
+			controls = {
+				enabled = true,
+				element = "scopes",
+			},
+			mappings = {
+				expand = { "<Tab>", "<2-LeftMouse>" }, -- 2-LeftMouse = Double Click
+				open = "<CR>",
+			},
+			floating = {
+				border = u.borderStyle,
+				mappings = { close = { "q", "<Esc>", "<D-w>" } },
+			},
 			layouts = {
 				{
 					position = "right",
-					size = 40,
+					size = 40, -- width
 					elements = {
 						{ id = "scopes", size = 0.8 },
 						{ id = "stacks", size = 0.2 },
@@ -108,8 +115,6 @@ return {
 			},
 		},
 	},
-
-	-----------------------------------------------------------------------------
 	{
 		"jbyuki/one-small-step-for-vimkind",
 		dependencies = "mfussenegger/nvim-dap",
