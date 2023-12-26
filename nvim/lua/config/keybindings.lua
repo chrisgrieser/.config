@@ -75,13 +75,13 @@ keymap("n", "X", "<cmd>normal!mz$x`z<CR>", { desc = "󱎘 Delete char at EoL" })
 keymap(
 	"n",
 	"qw",
-	function() require("funcs.quality-of-life").commentHr() end,
+	function() require("funcs.mini-plugins").commentHr() end,
 	{ desc = " Horizontal Divider" }
 )
 keymap(
 	"n",
 	"wq",
-	function() require("funcs.quality-of-life").duplicateAsComment() end,
+	function() require("funcs.mini-plugins").duplicateAsComment() end,
 	{ desc = " Duplicate Line as Comment" }
 )
 
@@ -97,7 +97,7 @@ keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent line" })
 keymap(
 	"i",
 	"<Tab>",
-	function() require("funcs.quality-of-life").tabout() end,
+	function() require("funcs.mini-plugins").tabout() end,
 	{ desc = " Tabout" }
 )
 
@@ -111,7 +111,7 @@ keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
 keymap(
 	{ "n", "i" },
 	"<D-o>",
-	function() require("funcs.quality-of-life").openNewScope() end,
+	function() require("funcs.mini-plugins").openNewScope() end,
 	{ desc = " Open new scope" }
 )
 
@@ -130,7 +130,7 @@ keymap({ "n", "x" }, "gm", "ddpkJ", { desc = "󰗈 Merge line down" })
 keymap(
 	{ "n", "x" },
 	"+",
-	function() return require("funcs.quality-of-life").toggleOrIncrement() end,
+	function() return require("funcs.mini-plugins").toggleOrIncrement() end,
 	{ desc = " Increment/Toggle", expr = true }
 )
 keymap({ "n", "x" }, "ö", "<C-x>", { desc = " Decrement" })
@@ -148,7 +148,7 @@ keymap("i", "<D-e>", "``<Left>", { desc = " Inline Code" })
 keymap(
 	"n",
 	"qf",
-	function() require("funcs.quality-of-life").docstring() end,
+	function() require("funcs.mini-plugins").docstring() end,
 	{ desc = " Function Docstring" }
 )
 
@@ -203,11 +203,7 @@ keymap(
 	{ desc = "󰽙 Alt Buffer" }
 )
 
-keymap({ "n", "x", "i" }, "<D-w>", function()
-	cmd("silent! update")
-	table.insert(vim.v.oldfiles, vim.api.nvim_buf_get_name(0))
-	cmd.bwipeout() -- bwipeout does not leave the buffer as alt-file
-end, { desc = "󰽙 Close Buffer" })
+keymap({ "n", "x", "i" }, "<D-w>", vim.cmd.bdelete, { desc = "󰽙 :bdelete" })
 
 --------------------------------------------------------------------------------
 -- CLIPBOARD
@@ -265,7 +261,7 @@ keymap({ "n", "x" }, "gp", '"yp', { desc = " Paste from 2ndary" })
 keymap(
 	"n",
 	"g/",
-	function() require("funcs.quality-of-life").openAtRegex101() end,
+	function() require("funcs.mini-plugins").openAtRegex101() end,
 	{ desc = " Open in regex101" }
 )
 
@@ -281,7 +277,7 @@ keymap(
 keymap(
 	{ "n", "x" },
 	"<D-5>",
-	function() require("funcs.quality-of-life").openAlfredPref() end,
+	function() require("funcs.mini-plugins").openAlfredPref() end,
 	{ desc = "󰮤 Reveal in Alfred" }
 )
 

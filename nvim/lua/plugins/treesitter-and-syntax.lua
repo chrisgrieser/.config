@@ -73,9 +73,8 @@ return {
 		build = ":UpdateRemotePlugins", -- don't disable `rplugin` in lazy.nvim for this
 		init = function()
 			-- use `pynvim` installed with mason
-			vim.g.python3_host_prog = require("mason-registry")
-				.get_package("pynvim")
-				:get_install_path() .. "/venv/bin/python3"
+			vim.g.python3_host_prog = vim.fn.stdpath("data")
+				.. "/mason/packages/pynvim/venv/bin/python3"
 
 			-- better provided by LSP
 			vim.g["semshi#error_sign"] = false
@@ -93,7 +92,7 @@ return {
 					linkHl("semshiBuiltin", "@function.builtin")
 					linkHl("semshiAttribute", "@field")
 					linkHl("semshiSelf", "@lsp.type.selfKeyword")
-					linkHl("semshiUnresolved", "@lsp.type.unresolvedReference")
+					linkHl("semshiUnresolved", "DiagnosticUnnecessary")
 					linkHl("semshiFree", "NonText")
 				end,
 			})

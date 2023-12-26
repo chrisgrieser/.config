@@ -28,5 +28,5 @@ vim.ui.select(allSnippets, {
 	kind = "snippetList",
 }, function(snip)
 	if not snip then return end
-	vim.cmd.edit(("+/%s %s"):format(snip.path, snip.key))
+	vim.cmd(("edit +/%s %s"):format(snip.key, snip.path))
 end)

@@ -5,12 +5,6 @@ local u = require("config.utils")
 ---@param cmd string
 local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
 
----@param key string
-local function feedkeys(key)
-	local keyCode = vim.api.nvim_replace_termcodes(key, true, false, true)
-	vim.api.nvim_feedkeys(keyCode, "i", false)
-end
-
 --------------------------------------------------------------------------------
 
 function M.commentHr()
@@ -75,13 +69,41 @@ end
 
 --------------------------------------------------------------------------------
 
-function M.snippetSearch()
-	local snippetDir = vim.fn.stdpath("config") .. "/snippets"
-	local out = {}
-	for name, _ in vim.fs.dir(snippetDir) do
-		table.insert(out, name)
+---Searches a folder of vs-code-like snippets in json format and opens the selected.
+function M.snippetSearch(snippetDir)
+	local function readFile(path)
+		local file, _ = io.open(path, "r")
+		if not file then return nil end
+		local content = file:read("*a")
+		file:close()
+		return content
 	end
-	vim.notify("🪚 out: " .. table.concat(out, "\n"))
+
+	local allSnippets = {}
+	for name, _ in vim.fs.dir(snippetDir, { depth = 2 }) do
+		if name:find("%.json$") and name ~= "package.json" then
+			local path = snippetDir .. "/" .. name
+			local snippets = vim.json.decode(readFile(path) or "{}") or {}
+			for key, snip in pairs(snippets) do
+				snip.path = path
+				snip.key = key
+				table.insert(allSnippets, snip)
+			end
+		end
+	end
+
+	vim.ui.select(allSnippets, {
+		prompt = "Select snippet",
+		format_item = function(item)
+			local snipname = item.prefix[1] or item.prefix
+			local filename = item.path:match("([^/]+)%.json$")
+			return snipname .. "\t\t" .. filename
+		end,
+		kind = "snippetList",
+	}, function(snip)
+		if not snip then return end
+		vim.cmd(("edit +/%s %s"):format(snip.key, snip.path))
+	end)
 end
 
 --------------------------------------------------------------------------------
@@ -168,8 +190,8 @@ function M.selectMake()
 	end)
 end
 
--- Increment, or Toggle if cursorword is true/false
--- requires `expr = true` for the keymap
+-- Increment, or Toggle if cursorword is true/false. Simplified-implementation
+-- of dial.nvim. (requires `expr = true` for the keymap)
 function M.toggleOrIncrement()
 	local cword = vim.fn.expand("<cword>")
 	local bool = { ["true"] = "false", ["True"] = "False" }
@@ -182,7 +204,7 @@ function M.toggleOrIncrement()
 	return "<C-a>"
 end
 
--- simplified version of neogen.nvim
+-- simplified implementation of neogen.nvim
 -- - requires nvim-treesitter-textobjects
 -- - lsp usually provides better prefills for docstrings
 function M.docstring()
@@ -226,7 +248,7 @@ function M.docstring()
 	end
 end
 
----simplified implementation of tabout.nvim, to be used in insert-mode
+---simplified implementation of tabout.nvim (mapped in insert-mode to `Tab`)
 function M.tabout()
 	local line = vim.api.nvim_get_current_line()
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -237,19 +259,21 @@ function M.tabout()
 	if onlyWhitespaceBeforeCursor or frontOfMarkdownList then
 		-- using feedkeys instead of `expr = true`, since the cmp mapping
 		-- does not work with `expr = true`
-		feedkeys("<C-t>")
+		local keyCode = vim.api.nvim_replace_termcodes("<C-t>", true, false, true)
+		vim.api.nvim_feedkeys(keyCode, "i", false)
 	elseif vim.bo.ft == "gitcommit" then
-		feedkeys("<C-e>")
+		vim.cmd.startinsert { bang = true }
 	else
 		local closingPairs = "[%]\"'`)}]"
 		local nextClosingPairPos = line:find(closingPairs, col + 1)
 		if not nextClosingPairPos then return end
 
-		vim.cmd.stopinsert() -- INFO nvim_win_set_cursor does not work in insert mode
+		-- INFO nvim_win_set_cursor does not work in insert mode, therefore
+		-- temporarily switching mode
+		vim.cmd.stopinsert()
 		vim.defer_fn(function()
 			vim.api.nvim_win_set_cursor(0, { row, nextClosingPairPos })
 			local isEndOfLine = nextClosingPairPos == #line
-
 			vim.cmd.startinsert { bang = isEndOfLine }
 		end, 1)
 	end
