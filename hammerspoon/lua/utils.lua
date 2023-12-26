@@ -89,8 +89,8 @@ end
 ---@nodiscard
 ---@return string|nil file content or nil when reading not successful
 function M.readFile(filePath)
-	local file = io.open(filePath, "r")
-	if not file then return end
+	local file, err = io.open(filePath, "r")
+	if not file then return "ERROR: " .. err end
 	local content = file:read("*a")
 	file:close()
 	return content

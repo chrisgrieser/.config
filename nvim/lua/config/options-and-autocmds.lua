@@ -28,13 +28,13 @@ opt.shadafile = vimDataDir .. "main.shada"
 opt.swapfile = false -- doesn't help and only creates useless files and notifications
 
 -- automatically cleanup dirs to prevent bloating
-local cleaned
+-- once a week, on first FocusLost, files older than 30 days
 autocmd("FocusLost", {
+	once = true,
 	callback = function()
-		if cleaned then return end
+		if not os.date("%a") == "Mon" then return end
 		vim.fn.system { "find", opt.viewdir:get(), "-mtime", "+60d", "-delete" }
 		vim.fn.system { "find", opt.undodir:get()[1], "-mtime", "+30d", "-delete" }
-		cleaned = true
 	end,
 })
 
@@ -49,7 +49,7 @@ for _, char in pairs { ".", ",", ";", '"', ":", "'", "<Space>" } do
 		if vim.bo.buftype ~= "" then return char end
 		return char .. "<C-g>u"
 		-- WARN requires `remap = true`, otherwise prevents abbrev. with those chars
-	end, { desc = "󰕌 Extra undopoint for " .. char, remap = true, expr = true })
+	end, { desc = "󰕌 Extra undopoint", remap = true, expr = true })
 end
 
 --------------------------------------------------------------------------------

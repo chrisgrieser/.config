@@ -103,8 +103,9 @@
 			"---@param filePath string",
 			"---@return string|nil nil on error",
 			"local function readFile(filePath, str)",
-			"\tlocal content, _ = io.open(filePath, \"r\")",
-			"\tif not content then return end",
+			"\tlocal file, err = io.open(filePath, \"r\")",
+			"\tif not file then return \"ERROR: \" .. err end",
+			"\tlocal content = file:read(\"*a\")",
 			"\tfile:close()",
 			"\treturn content",
 			"end"

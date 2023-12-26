@@ -1,32 +1,21 @@
-local a = vim.api
 
-local altBufnr = 1
-local altPath = a.nvim_buf_get_name(altBufnr)
-local curPath = a.nvim_buf_get_name(0)
-local valid = a.nvim_buf_is_valid(altBufnr)
-local nonSpecial = a.nvim_buf_get_option(altBufnr, "buftype") ~= ""
-local exists = vim.loop.fs_stat(altPath) ~= nil
-local moreThanOneBuffer = (altPath ~= curPath)
-local hasAlt = valid and nonSpecial and exists and moreThanOneBuffer
+local function readFile(filePath, str)
+	local file, err = io.open(path, "r")
+	if not file then return "ERROR: " .. err end
+	local content = file:read("*a")
+	file:close()
+	return content
+end
 
-local b = {
-	{ {
-		line = 1,
-	}, {
-		line = 6,
-	} },
-	[13] = {
-		{
-			line = 12,
-		},
-		{
-			line = 19,
-		},
-		{
-			line = 27,
-		},
-		{
-			line = 38,
-		},
-	},
-}
+local snippetDir = vim.fn.stdpath("config") .. "/snippets"
+local snippets = {}
+for name, type in vim.fs.dir(snippetDir, { depth = 2 }) do
+	if type == "file" and name ~= "package.json" then
+		local path = snippetDir .. "/" .. name
+		local file, err = io.open(path, "r")
+		if not file then return "ERROR: " .. err end
+		local content = file:read("*a")
+		file:close()
+		return content
+	end
+end
