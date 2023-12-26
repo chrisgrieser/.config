@@ -56,7 +56,7 @@ keymap(
 
 keymap("n", "<leader>ps", function()
 	local snippetDir = vim.fn.stdpath("config") .. "/snippets"
-	require("funcs.mini-plugins").snippetSearch(snippetDir)
+	require("funcs.nano-plugins").snippetSearch(snippetDir)
 end, { desc = " Search Snippets" })
 
 --------------------------------------------------------------------------------
@@ -167,7 +167,7 @@ end, { desc = " Make" })
 keymap(
 	"n",
 	"<leader>M",
-	function() require("funcs.mini-plugins").selectMake() end,
+	function() require("funcs.nano-plugins").selectMake() end,
 	{ desc = " Select Make" }
 )
 

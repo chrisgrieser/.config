@@ -75,13 +75,13 @@ keymap("n", "X", "<cmd>normal!mz$x`z<CR>", { desc = "󱎘 Delete char at EoL" })
 keymap(
 	"n",
 	"qw",
-	function() require("funcs.mini-plugins").commentHr() end,
+	function() require("funcs.nano-plugins").commentHr() end,
 	{ desc = " Horizontal Divider" }
 )
 keymap(
 	"n",
 	"wq",
-	function() require("funcs.mini-plugins").duplicateAsComment() end,
+	function() require("funcs.nano-plugins").duplicateAsComment() end,
 	{ desc = " Duplicate Line as Comment" }
 )
 
@@ -94,7 +94,7 @@ keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent selection" })
 keymap("n", "<Tab>", ">>", { desc = "󰉶 indent line" })
 keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent line" })
 keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent line" })
-keymap("i", "<Tab>", function() require("funcs.mini-plugins").tabout() end, { desc = " Tabout" })
+keymap("i", "<Tab>", function() require("funcs.nano-plugins").tabout() end, { desc = " Tabout" })
 
 keymap("n", "[", "<", { desc = "󰉵 outdent" })
 keymap("n", "]", ">", { desc = "󰉶 indent" })
@@ -106,7 +106,7 @@ keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
 keymap(
 	{ "n", "i" },
 	"<D-o>",
-	function() require("funcs.mini-plugins").openNewScope() end,
+	function() require("funcs.nano-plugins").openNewScope() end,
 	{ desc = " Open new scope" }
 )
 
@@ -125,7 +125,7 @@ keymap({ "n", "x" }, "gm", "ddpkJ", { desc = "󰗈 Merge line down" })
 keymap(
 	{ "n", "x" },
 	"+",
-	function() return require("funcs.mini-plugins").toggleOrIncrement() end,
+	function() return require("funcs.nano-plugins").toggleOrIncrement() end,
 	{ desc = " Increment/Toggle", expr = true }
 )
 keymap({ "n", "x" }, "ö", "<C-x>", { desc = " Decrement" })
@@ -143,7 +143,7 @@ keymap("i", "<D-e>", "``<Left>", { desc = " Inline Code" })
 keymap(
 	"n",
 	"qf",
-	function() require("funcs.mini-plugins").docstring() end,
+	function() require("funcs.nano-plugins").docstring() end,
 	{ desc = " Function Docstring" }
 )
 
@@ -261,7 +261,7 @@ keymap({ "n", "x" }, "gp", '"yp', { desc = " Paste from 2ndary" })
 keymap(
 	"n",
 	"g/",
-	function() require("funcs.mini-plugins").openAtRegex101() end,
+	function() require("funcs.nano-plugins").openAtRegex101() end,
 	{ desc = " Open in regex101" }
 )
 
@@ -277,7 +277,7 @@ keymap(
 keymap(
 	{ "n", "x" },
 	"<D-5>",
-	function() require("funcs.mini-plugins").openAlfredPref() end,
+	function() require("funcs.nano-plugins").openAlfredPref() end,
 	{ desc = "󰮤 Reveal in Alfred" }
 )
 
