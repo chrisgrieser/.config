@@ -193,14 +193,19 @@ keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = " Esc (Terminal Mode)" })
 --------------------------------------------------------------------------------
 -- BUFFERS & WINDOWS & FILES
 
+keymap({ "n", "x", "i" }, "<C-CR>", "<C-w>w", { desc = " Next Window" })
+
 keymap({ "n", "x" }, "<CR>", function()
 	if vim.bo.buftype ~= "" then return end
 	require("funcs.alt-alt").gotoAltBuffer()
 end, { desc = "󰽙 Alt Buffer" })
-keymap({ "n", "x", "i" }, "<C-CR>", "<C-w>w", { desc = " Next Window" })
 
--- bwipeout does not leave the buffer as alt-file
-keymap({ "n", "x", "i" }, "<D-w>", "<cmd>bwipeout<CR>", { desc = "󰽙 Close" })
+keymap({ "n", "x", "i" }, "<D-w>", function()
+	local onlyOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) == 1
+	if onlyOneBuffer then return end
+	cmd("silent! update")
+	cmd.bwipeout() -- bwipeout does not leave the buffer as alt-file
+end, { desc = "󰽙 Close Buffer" })
 
 --------------------------------------------------------------------------------
 -- CLIPBOARD
