@@ -8,13 +8,13 @@ ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
 # - opens in a new wezterm tab
 # - fallsback to --help page if no manpage found
 function man() {
-	if ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then echo "Not using WezTerm." && return 1; fi
-	if ! command -v "$command" &>/dev/null; then echo "$command not installed." && return 1; fi
-	if ! command -v bat &>/dev/null; then print "\033[1;33mbat not installed.\033[0m" && return 1; fi
-
 	local command="$1"
 	local search_term="$2"
 	local pane_id
+
+	if ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then echo "Not using WezTerm." && return 1; fi
+	if ! command -v "$command" &>/dev/null; then echo "$command not installed." && return 1; fi
+	if ! command -v bat &>/dev/null; then print "\033[1;33mbat not installed.\033[0m" && return 1; fi
 
 	# INFO `test` is an exception, as it is a builtin command, but still has a
 	# man page and no builtin help

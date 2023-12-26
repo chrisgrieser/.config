@@ -27,6 +27,17 @@ opt.viewdir = vimDataDir .. "view"
 opt.shadafile = vimDataDir .. "main.shada"
 opt.swapfile = false -- doesn't help and only creates useless files and notifications
 
+-- automatically cleanup dirs to prevent bloating
+local cleaned
+autocmd("FocusLost", {
+	callback = function()
+		if cleaned then return end
+		vim.fn.system { "find", opt.viewdir:get(), "-mtime", "+60d", "-delete" }
+		vim.fn.system { "find", opt.undodir:get()[1], "-mtime", "+30d", "-delete" }
+		cleaned = true
+	end,
+})
+
 --------------------------------------------------------------------------------
 -- UNDO
 

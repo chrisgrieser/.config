@@ -119,7 +119,7 @@ function M.openAtRegex101()
 		pattern = vim.fn.getreg("z")
 		flags = "gm" -- TODO retrieve flags in a smarter way
 	else
-		u.notify("Unsupported filetype.", "warn")
+		u.notify("", "Unsupported filetype.", "warn")
 		return
 	end
 
@@ -140,7 +140,7 @@ function M.selectMake()
 	local makefile = vim.loop.cwd() .. "/Makefile"
 	local fileExists = vim.loop.fs_stat(makefile)
 	if not fileExists then
-		u.notify("Makefile not found", "warn")
+		u.notify("", "Makefile not found", "warn")
 		return
 	end
 
@@ -177,7 +177,7 @@ end
 function M.docstring()
 	local supportedFts = { "lua", "python", "javascript" }
 	if not vim.tbl_contains(supportedFts, vim.bo.filetype) then
-		u.notify("Unsupported filetype.", "warn")
+		u.notify("", "Unsupported filetype.", "warn")
 		return
 	end
 
