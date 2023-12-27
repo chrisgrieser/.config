@@ -23,13 +23,13 @@ function M.globalSubstitute()
 	vim.opt_local.grepprg = "rg --vimgrep --no-column"
 
 	vim.ui.input({
-		prompt = "Grep",
+		prompt = " Grep",
 		default = vim.fn.expand("<cword>"),
 	}, function(input)
 		if not input then return end
 
 		vim.cmd("silent grep " .. input)
-		vim.fn.setqflist({}, "a", { title = " " .. input })
+		vim.fn.setqflist({}, "a", { title = (' "%s"'):format(input) }) -- set title
 		vim.cmd.copen() -- to preview results
 
 		local cmd = (":cdo s/%s//I"):format(input)
@@ -40,12 +40,16 @@ function M.globalSubstitute()
 		vim.defer_fn(function() vim.api.nvim_feedkeys(left2, "i", false) end, 100)
 
 		-- close quickfix, restore cursor position, save all changes
+		-- leaves all changes in the quickfix list for inspection
 		vim.api.nvim_create_autocmd("CmdlineLeave", {
 			once = true,
 			callback = function()
-				vim.cmd.cclose()
-				vim.defer_fn(vim.cmd.cfirst, 1)
-				vim.cmd.wall()
+				vim.defer_fn(function()
+					vim.cmd.cclose()
+					vim.cmd.cfirst()
+					vim.fn.setqflist({}, "r") -- clear quickfix
+					vim.cmd.wall()
+				end, 1)
 			end,
 		})
 	end)
@@ -305,7 +309,7 @@ function M.docstring()
 	end
 end
 
----simplified implementation of tabout.nvim 
+---simplified implementation of tabout.nvim
 ---(should be mapped in insert-mode to `<Tab>`)
 function M.tabout()
 	local line = vim.api.nvim_get_current_line()

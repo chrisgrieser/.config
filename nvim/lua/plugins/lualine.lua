@@ -21,15 +21,19 @@ local function irregularWhitespace()
 end
 
 local function quickfixCounter()
-	local totalQfItems = #vim.fn.getqflist()
-	if totalQfItems == 0 then return "" end
+	local qf = vim.fn.getqflist()
+	if #qf == 0 then return "" end
+
+	local qfBuffers = vim.tbl_map(function (item) return item.bufnr end, qf)
+	local fileCount = #vim.fn.uniq(qfBuffers) -- qfBuffers already sorted
+	local fileStr = fileCount > 1 and (" ⟨%s  ⟩"):format(fileCount) or ""
+
 	local qfData = vim.fn.getqflist { idx = 0, title = true }
 	local title = qfData.title
-		:gsub("^Live Grep: .- %((.*)%)", ' "%1"')
-		:gsub("^Find Word %((.-)%) ?%(?%)?", ' "%1"')
-		:gsub(" ?%(%)", "")
+		:gsub("^Live Grep: .- %((.*)%)", '"%1"')
+		:gsub("^Find Word %((.-)%) ?%(?%)?", '"%1"')
 	local index = qfData.idx
-	return (" %s/%s %s"):format(index, totalQfItems, title)
+	return (" %s/%s %s"):format(index, #qf, title) .. fileStr
 end
 
 --------------------------------------------------------------------------------
