@@ -30,15 +30,16 @@ fi
 
 # kill
 nvim --server "/tmp/nvim_server.pipe" \
-	--remote-send "<cmd>try|wqall|catch|qall|endtry<CR>"
+	--remote-send "<cmd>wqall<CR>"
 
 # wait until dead
 i=0
 while pgrep -xq "neovide" || pgrep -xq "nvim"; do
-	sleep 0.2
+	osascript -e 'beep'
+	sleep 0.1
 	i=$((i + 1))
 	if [[ $i -gt 10 ]]; then
-		if ! killall -9 neovide nvim "Automator Application Stub" ; then
+		if ! killall -9 neovide nvim "Automator Application Stub"; then
 			echo -n "Could not kill neovide." # Alfred notification
 			return 1
 		fi
@@ -46,9 +47,7 @@ while pgrep -xq "neovide" || pgrep -xq "nvim"; do
 done
 
 # Restart
-sleep 0.2
+sleep 0.1
 open -a "Neovide"
-sleep 0.1
+sleep 0.15
 osascript -e 'tell application "Neovide" to activate' # `open -a` does not focus properly
-sleep 0.1
-osascript -e 'tell application "Neovide" to activate'

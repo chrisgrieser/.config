@@ -68,7 +68,6 @@ end
 
 --------------------------------------------------------------------------------
 -- CLIPBOARD
-
 opt.clipboard = "unnamedplus"
 
 -- post-yank-highlight
@@ -84,6 +83,7 @@ opt.virtualedit = "block" -- visual-block mode can select beyond end of line
 
 opt.ignorecase = true
 opt.smartcase = true
+opt.inccommand = "split" -- preview incremental commands
 
 opt.showmatch = true -- when closing a bracket, briefly flash the matching one
 opt.matchtime = 1 -- deci-seconds
@@ -114,6 +114,7 @@ opt.updatetime = 250 -- also affects cursorword symbols and lsp-hints
 opt.timeoutlen = 666 -- also affects duration until which-key is shown
 
 opt.makeprg = "make --silent --warn-undefined-variables"
+opt.grepprg = "rg --vimgrep --hidden --smart-case"
 
 opt.pumwidth = 15 -- min width
 opt.pumheight = 12 -- max height

@@ -252,21 +252,12 @@ keymap("i", "<D-v>", function()
 end, { desc = " Paste charwise", expr = true })
 
 -- use register `y` as secondary clipboard
-keymap({ "n", "x" }, "gy", '"yy', { desc = "󰅍 Yank to 2ndary" })
-keymap({ "n", "x" }, "gp", '"yp', { desc = " Paste from 2ndary" })
-keymap({ "n", "x" }, "P", function()
-	local regs = { '"', "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }
-	vim.ui.select(regs, {
-		prompt = "󰅍 Select register",
-		format_item = function(reg)
-			local firstLine = vim.split(fn.getreg(reg), "\n")[1]
-			return reg .. ": " .. vim.trim(firstLine)
-		end,
-	}, function(reg)
-		if not reg then return end
-		u.normal('"' .. reg .. "p")
-	end)
-end, { desc = "󰅍 Paste from numbered reg" })
+keymap(
+	{ "n", "x" },
+	"gp",
+	function() require("funcs.nano-plugins").pasteFromNumberReg() end,
+	{ desc = "󰅍  Paste from number reg" }
+)
 
 --------------------------------------------------------------------------------
 
@@ -296,7 +287,7 @@ keymap(
 
 --------------------------------------------------------------------------------
 -- QUITTING
-keymap({ "n", "x" }, "<MiddleMouse>", "<cmd>try|wqall|catch|qall|endtry<CR>", { desc = "Quit App" })
+keymap({ "n", "x" }, "<MiddleMouse>", vim.cmd.wall, { desc = "Quit App" })
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "qf", "help", "checkhealth" },

@@ -19,16 +19,16 @@ function M.commentHr()
 	local comStrLength = #(comStr:gsub(" ?%%s ?", ""))
 	local commentHrChar = comStr:find("%-") and "-" or "─"
 	local textwidth = vim.o.textwidth > 0 and vim.o.textwidth or 80
-	local linelength = textwidth - indent - comStrLength
+	local hrLength = textwidth - indent - comStrLength
 
 	-- the common formatters (black and stylelint) demand extra spaces
 	local fullLine
 	if vim.bo.ft == "css" then
-		fullLine = " " .. commentHrChar:rep(linelength - 2) .. " "
+		fullLine = " " .. commentHrChar:rep(hrLength - 2) .. " "
 	elseif vim.bo.ft == "python" then
-		fullLine = " " .. commentHrChar:rep(linelength - 1)
+		fullLine = " " .. commentHrChar:rep(hrLength - 1)
 	else
-		fullLine = commentHrChar:rep(linelength)
+		fullLine = commentHrChar:rep(hrLength)
 	end
 
 	-- set HR
@@ -59,6 +59,22 @@ function M.duplicateAsComment()
 	local commentedLine = indent .. vim.bo.commentstring:format(content)
 	vim.api.nvim_buf_set_lines(0, ln - 1, ln, false, { commentedLine, curLine })
 	vim.api.nvim_win_set_cursor(0, { ln + 1, col })
+end
+
+--------------------------------------------------------------------------------
+function M.pasteFromNumberReg()
+	local regs = { '+', "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }
+	vim.ui.select(regs, {
+		prompt = "󰅍 Select register",
+		kind = "atCursor",
+		format_item = function(reg)
+			local firstLine = vim.split(vim.fn.getreg(reg), "\n")[1]
+			return vim.trim(firstLine):sub(1, 40)
+		end,
+	}, function(reg)
+		if not reg then return end
+		normal('"' .. reg .. "p")
+	end)
 end
 
 --------------------------------------------------------------------------------
