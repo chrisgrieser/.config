@@ -55,10 +55,10 @@ function backup() {
 # CONTENT TO BACKUP
 
 # - WARN each command has to sync to individual folders, since otherwise the
-#  `--delete` option will override the previous contents
+# `--delete` option will override the previous contents
 # - WARN All source paths needs to end with a slash to sync folder contents
 # - locations defined in zshenv
-backup "$HOME/Applications/" ./Homefolder/Applications # user applications
+backup "$HOME/Applications/" ./Homefolder/Applications # user applications have PWAs
 backup "$HOME/.config/" ./Homefolder/config
 backup "$VAULT_PATH/" ./Homefolder/main-vault
 backup "$PASSWORD_STORE_DIR/" ./Homefolder/password-store
@@ -78,13 +78,12 @@ echo "completed: $(date '+%H:%M')" >>"$LOG_LOCATION"
 # Log (at Backup Destination)
 echo "Backup: $(date '+%Y-%m-%d %H:%M')" >>last_backup.log
 
-# Reminder for Next Backup in 14 days, if there is no backup reminder already
-# (avoids duplicate reminders if backup run twice)
-osascript -e'
+# Reminder for Next Backup in 14 days (idempotent, due to multiple backup disks)
+osascript -e '
 	set nextDate to (current date) + 14 * (60 * 60 * 24)
 	tell application "Reminders"
-		set theList to default list
-		set backupReminders to reminders of theList where name is "Backup" and completed is false
+		set theList to (default list)
+		set backupReminders to (reminders of theList where name is "Backup" and completed is false)
 		if (count of backupReminders) is 0 then
 			tell theList to make new reminder with properties {name:"Backup", allday due date:nextDate}
 		end if
