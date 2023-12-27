@@ -1,7 +1,11 @@
 {
 	"safe require": {
 		"prefix": "safe require",
-		"body": ["local ok, ${1:module} = require(\"${1:module}\")", "if not ok then return end", "${1:module}"]
+		"body": [
+			"local ok, ${1:module} = require(\"${1:module}\")",
+			"if not ok then return end",
+			"${1:module}"
+		]
 	},
 	"export module": {
 		"prefix": "export module",
@@ -30,10 +34,7 @@
 	},
 	"class definition": {
 		"prefix": ["class definition", "type definition"],
-		"body": [
-			"---@class (exact) ${1:class_name}",
-			"---@field ${2:field_name} string"
-		],
+		"body": ["---@class (exact) ${1:class_name}", "---@field ${2:field_name} string"],
 		"description": "https://github.com/LuaLS/lua-language-server/wiki/Annotations#class"
 	},
 	"ignore start/end (stylua)": {
@@ -49,7 +50,7 @@
 		"body": ["if ${1:true} then", "\t$2", "else", "\t$0", "end"]
 	},
 	"then return end": {
-		"prefix": ["then return end", "tree"],
+		"prefix": "then return end",
 		"body": "then return end"
 	},
 	"home": {
@@ -85,9 +86,9 @@
 		"prefix": "write file",
 		"body": [
 			"---@param str string",
-			"---@param filePath string line(s) to add",
-			"---@return string|nil nil on error",
-			"local function writeToFile(filePath, str)",
+			"---@param filePath",
+			"---@return string|nil -- error message",
+			"local function overwriteFile(filePath, str)",
 			"\tlocal file, _ = io.open(filePath, \"w\")",
 			"\tif not file then return end",
 			"\tfile:write(str .. \"\n\")",
@@ -101,12 +102,14 @@
 		"body": [
 			"---read the full file",
 			"---@param filePath string",
+			"---@return string? -- content or error message",
+			"---@return boolean success",
 			"local function readFile(filePath)",
 			"\tlocal file, err = io.open(filePath, \"r\")",
-			"\tif not file then return \"ERROR: \" .. err end",
+			"\tif not file then return err, false end",
 			"\tlocal content = file:read(\"*a\")",
 			"\tfile:close()",
-			"\treturn content",
+			"\treturn content, true",
 			"end"
 		]
 	}

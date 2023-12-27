@@ -2,5 +2,5 @@
 after/**/applescript.vim
 after/**/log.vim
 
-# snippets files
+# snippets files (already using snippetSeacher for that)
 snippets/**

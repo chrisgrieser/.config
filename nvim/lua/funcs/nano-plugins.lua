@@ -132,10 +132,11 @@ end
 --------------------------------------------------------------------------------
 
 ---Searches a folder of vs-code-like snippets in json format and opens the selected.
+---@param snippetDir string
 function M.snippetSearch(snippetDir)
 	local function readFile(path)
 		local file, _ = io.open(path, "r")
-		if not file then return nil end
+		if not file then return "" end
 		local content = file:read("*a")
 		file:close()
 		return content
@@ -164,7 +165,7 @@ function M.snippetSearch(snippetDir)
 		kind = "snippetList",
 	}, function(snip)
 		if not snip then return end
-		local locationInFile = ('"%s"'):format(snip.key) -- json keys double-quoted
+		local locationInFile = '"' .. snip.key:gsub(" ", [[\ ]]) .. '":'
 		vim.cmd(("edit +/%s %s"):format(locationInFile, snip.path))
 	end)
 end

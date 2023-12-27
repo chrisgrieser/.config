@@ -26,7 +26,7 @@ local function quickfixCounter()
 
 	local qfBuffers = vim.tbl_map(function (item) return item.bufnr end, qf)
 	local fileCount = #vim.fn.uniq(qfBuffers) -- qfBuffers already sorted
-	local fileStr = fileCount > 1 and (" ⟨%s  ⟩"):format(fileCount) or ""
+	local fileStr = fileCount > 1 and (" [%s  ]"):format(fileCount) or ""
 
 	local qfData = vim.fn.getqflist { idx = 0, title = true }
 	local title = qfData.title
