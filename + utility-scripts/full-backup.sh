@@ -80,16 +80,17 @@ echo "Backup: $(date '+%Y-%m-%d %H:%M')" >>last_backup.log
 
 # Reminder for Next Backup in 14 days (idempotent, due to multiple backup disks)
 osascript -e '
-	set today to (current date)
-	set nextDate to today + 14 * (60 * 60 * 24)
-	tell application "Reminders"
-		set theList to (default list)
-		set backupReminders to (reminders of theList where name is "Backup" and completed is false)
-		if (count of backupReminders) is 0 then
-			tell theList to make new reminder with properties {name:"Backup", allday due date:nextDate}
-		end if
-		quit
-	end tell
+	set today to (current date) 
+	set inTwoWeeks to today + 14 * (60 * 60 * 24) 
+	tell application "Reminders" 
+		set theList to (default list) 
+		set backupReminders to (reminders of theList where name is "Backup" and completed is false and due date is greater than today) 
+		if (count of backupReminders) is 0 then 
+			tell theList to make new reminder with properties {name:"Backup", allday due date:inTwoWeeks} 
+		end if 
+		quit 
+	end tell 
+	count of backupReminders
 ' &>/dev/null
 
 # Notify on Completion
