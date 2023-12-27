@@ -1,13 +1,9 @@
 -- GUARD
 if not vim.g.neovide then return end
---------------------------------------------------------------------------------
-local g = vim.g
 
-local u = require("config.utils")
-local keymap = require("config.utils").uniqueKeymap
-
---------------------------------------------------------------------------------
 -- DOCS https://neovide.dev/configuration.html
+local g = vim.g
+--------------------------------------------------------------------------------
 
 -- SIZE & FONT
 
@@ -22,22 +18,12 @@ elseif isAtOffice then
 	g.neovide_padding_top = 0
 else
 	fontSize = 24.5
-	g.neovide_padding_top = 13
-end
-g.neovide_padding_left = 5
-
-vim.opt.guifont = {
-	vim.env.CODE_FONT .. ":h" .. fontSize,
-	"Symbols Nerd Font Mono",
-} 
-
-local function setNeovideScaleFactor(delta)
-	g.neovide_scale_factor = g.neovide_scale_factor + delta
-	u.notify("", "Scale Factor: " .. g.neovide_scale_factor)
+	g.neovide_padding_top = 15
 end
 
-keymap({ "n", "x", "i" }, "<D-+>", function() setNeovideScaleFactor(0.01) end)
-keymap({ "n", "x", "i" }, "<D-->", function() setNeovideScaleFactor(-0.01) end)
+g.neovide_padding_left = 7
+vim.opt.linespace = -2 -- less line height
+vim.opt.guifont = vim.env.CODE_FONT .. ":h" .. fontSize
 
 --------------------------------------------------------------------------------
 

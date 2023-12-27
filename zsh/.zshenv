@@ -20,8 +20,7 @@ export TASK_APP="GoodTask"
 
 # settings
 export EDITOR="nvim"
-# export CODE_FONT="JetBrainsMonoNL NF"
-export CODE_FONT="JetBrains Mono NL"
+export CODE_FONT="JetBrainsMonoNL NF"
 
 #───────────────────────────────────────────────────────────────────────────────
 
