@@ -18,41 +18,37 @@ end
 
 --------------------------------------------------------------------------------
 
----Simplified version of nvim-specture, using `rg` and vim's `:cdo s`
+---Convenience wrapper around `:cdo`, replaces nvim-spectre
 function M.globalSubstitute()
-	vim.opt_local.grepprg = "rg --vimgrep --no-column"
+	-- GUARD
+	local qf = vim.fn.getqflist { items = true, title = true }
+	local quickfixQuery = qf.title:match("%((..-)%)")
+	if not quickfixQuery or #qf.items == 0 then
+		local msg = #qf.items == 0 and "List empty." or "Query could not be determined."
+		notify("Quickfix", msg, "warn")
+		return
+	end
 
-	vim.ui.input({
-		prompt = " Grep",
-		default = vim.fn.expand("<cword>"),
-	}, function(input)
-		if not input then return end
+	-- :cdo
+	vim.cmd.copen() -- to preview results
+	local cmd = (":cdo s/%s//I"):format(quickfixQuery) -- prefill
+	vim.api.nvim_feedkeys(cmd, "i", true)
+	-- position cursor in cmdline
+	local left2 = vim.api.nvim_replace_termcodes("<Left><Left>", true, false, true)
+	vim.defer_fn(function() vim.api.nvim_feedkeys(left2, "i", false) end, 100)
 
-		vim.cmd("silent grep " .. input)
-		vim.fn.setqflist({}, "a", { title = (' "%s"'):format(input) }) -- set title
-		vim.cmd.copen() -- to preview results
-
-		local cmd = (":cdo s/%s//I"):format(input)
-		vim.api.nvim_feedkeys(cmd, "i", true)
-
-		-- position cursor in cmdline
-		local left2 = vim.api.nvim_replace_termcodes("<Left><Left>", true, false, true)
-		vim.defer_fn(function() vim.api.nvim_feedkeys(left2, "i", false) end, 100)
-
-		-- close quickfix, restore cursor position, save all changes
-		-- leaves all changes in the quickfix list for inspection
-		vim.api.nvim_create_autocmd("CmdlineLeave", {
-			once = true,
-			callback = function()
-				vim.defer_fn(function()
-					vim.cmd.cclose()
-					vim.cmd.cfirst()
-					vim.fn.setqflist({}, "r") -- clear quickfix
-					vim.cmd.wall()
-				end, 1)
-			end,
-		})
-	end)
+	-- Abort or post-operation
+	vim.api.nvim_create_autocmd("CmdlineLeave", {
+		once = true,
+		callback = function()
+			vim.defer_fn(function()
+				vim.cmd.cclose()
+				vim.cmd.cfirst() -- move cursor back
+				vim.fn.setqflist({}, "r") -- clear quickfix
+				vim.cmd.cfdo("write")
+			end, 1)
+		end,
+	})
 end
 
 --------------------------------------------------------------------------------
