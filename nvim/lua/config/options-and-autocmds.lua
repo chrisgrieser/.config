@@ -114,7 +114,6 @@ opt.updatetime = 250 -- also affects cursorword symbols and lsp-hints
 opt.timeoutlen = 666 -- also affects duration until which-key is shown
 
 opt.makeprg = "make --silent --warn-undefined-variables"
-opt.grepprg = "rg --vimgrep --hidden --smart-case"
 
 opt.pumwidth = 15 -- min width
 opt.pumheight = 12 -- max height
