@@ -29,7 +29,6 @@ function M.globalSubstitute()
 		return
 	end
 
-	-- :cdo
 	vim.cmd.copen() -- to preview results
 	local cmd = (":cdo s/%s//I"):format(quickfixQuery) -- prefill
 	vim.api.nvim_feedkeys(cmd, "i", true)
@@ -37,7 +36,6 @@ function M.globalSubstitute()
 	local left2 = vim.api.nvim_replace_termcodes("<Left><Left>", true, false, true)
 	vim.defer_fn(function() vim.api.nvim_feedkeys(left2, "i", false) end, 100)
 
-	-- Abort or post-operation
 	vim.api.nvim_create_autocmd("CmdlineLeave", {
 		once = true,
 		callback = function()
@@ -257,7 +255,7 @@ function M.toggleOrIncrement()
 	for word, opposite in pairs(bool) do
 		if cword == word then toggle = opposite end
 		if cword == opposite then toggle = word end
-		if toggle then return "mzciw" .. toggle .. "<Esc>`z" end
+		if toggle then return "ciw" .. toggle .. "<Esc>``" end
 	end
 	return "<C-a>"
 end

@@ -52,7 +52,7 @@ return {
 			{
 				"<leader>H",
 				function() vim.cmd.TSTextobjectPeekDefinitionCode("@function.outer") end,
-				desc = " Peek Function Definition",
+				desc = " Peek Function Def.",
 			},
 			{
 				"q",
@@ -106,8 +106,7 @@ return {
 			{ "iv", "<cmd>lua require('various-textobjs').value('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner value" },
 			{ "av", "<cmd>lua require('various-textobjs').value('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer value" },
 			-- INFO `ik` defined via treesitter to exclude `local` and `let`;
-			-- mapping the *inner* obj to `ak`, since it includes `local` and `let`
-			{ "ak", "<cmd>lua require('various-textobjs').key('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 outer key" },
+			{ "ak", "<cmd>lua require('various-textobjs').key('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer key" },
 
 			{ "n", "<cmd>lua require('various-textobjs').nearEoL()<CR>", mode = "o", desc = "󱡔 near EoL" },
 			{ "m", "<cmd>lua require('various-textobjs').toNextClosingBracket()<CR>", mode = { "o", "x" }, desc = "󱡔 to next closing bracket" },
@@ -116,8 +115,8 @@ return {
 			{ "B", "<cmd>lua require('various-textobjs').anyBracket('outer')<CR>", mode = "o", desc = "󱡔 outer anyBracket" },
 			{ "k", "<cmd>lua require('various-textobjs').anyQuote('inner')<CR>", mode = "o", desc = "󱡔 inner anyQuote" },
 			{ "K", "<cmd>lua require('various-textobjs').anyQuote('outer')<CR>", mode = "o", desc = "󱡔 outer anyQuote" },
-			{ "i" .. u.textobjMaps.wikilink, "<cmd>lua require('various-textobjs').doubleSquareBrackets('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner wikilink" },
-			{ "a" .. u.textobjMaps.wikilink, "<cmd>lua require('various-textobjs').doubleSquareBrackets('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer wikilink" },
+			{ "i" .. textobj.wikilink, "<cmd>lua require('various-textobjs').doubleSquareBrackets('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner wikilink" },
+			{ "a" .. textobj.wikilink, "<cmd>lua require('various-textobjs').doubleSquareBrackets('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer wikilink" },
 
 			-- INFO not setting in visual mode, to keep visual block mode replace
 			{ "rv", "<cmd>lua require('various-textobjs').restOfWindow()<CR>", mode = "o", desc = "󱡔 rest of viewport" },
@@ -205,7 +204,7 @@ return {
 				"gx",
 				function()
 					require("various-textobjs").url()
-					local foundURL = vim.fn.mode():find("v") -- when textobj is found, will switch to visual line mode
+					local foundURL = vim.fn.mode():find("v") -- when textobj found, switches to visual mode
 					if not foundURL then return end
 
 					u.normal('"zy')

@@ -68,7 +68,7 @@ function M.addToLuaLine(bar, section, component)
 	local sectionConfig = lualine.get_config()[bar][section] or {}
 
 	local componentObj = type(component) == "table" and component or { component }
-	table.insert(sectionConfig, 1, componentObj)
+	table.insert(sectionConfig, componentObj)
 	lualine.setup { [bar] = { [section] = sectionConfig } }
 
 	-- Theming needs to be re-applied, since the lualine-styling can change
