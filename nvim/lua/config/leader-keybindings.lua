@@ -67,17 +67,12 @@ keymap("n", "<leader>fs", ":%s /<C-r><C-w>//gI" .. l3, { desc = " :s (cword)"
 keymap("x", "<leader>fs", '"zy:% s/<C-r>z//gI' .. l3, { desc = " :s (for selection)" })
 keymap("x", "<leader>fv", ":s ///gI<Left>" .. l3, { desc = " :s (inside visual)" })
 keymap("n", "<leader>fd", ":g // d" .. l3, { desc = " delete matching" })
-keymap("n", "<leader>fg", function ()
-	vim.ui.input({
-		prompt = "Grep for:",
-		default = vim.fn.expand("<cword>"),
-	}, function (input)
-		if not input then return end
-		vim.cmd("silent! grep " .. input)
-	end)
-
--- MAYBE
-end, { desc = " global :s" })
+keymap(
+	"n",
+	"<leader>fg",
+	function() require("funcs.nano-plugins").globalSearch() end,
+	{ desc = " global :s" }
+)
 
 ---@param use "spaces"|"tabs"
 local function retabber(use)

@@ -81,7 +81,7 @@ keymap(
 keymap(
 	"n",
 	"wq",
-	function() require("funcs.nano-plugins").duplicateAsComment() end,
+	function() require("funcs.nano-plugins").duplicateLineAsComment() end,
 	{ desc = " Duplicate Line as Comment" }
 )
 

@@ -12,6 +12,9 @@ local routes = {
 	{ filter = { event = "msg_show", find = "%d+L, %d+B$" }, view = "mini" },
 	{ filter = { event = "msg_show", find = "%-%-No lines in buffer%-%-" }, view = "mini" },
 
+	-- :cdo
+	{ filter = { event = "msg_show", find = "%d+ lines %-%-%d+%%%-%-" }, skip = true },
+
 	-- unneeded info on search patterns
 	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
 	{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },

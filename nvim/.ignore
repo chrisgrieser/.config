@@ -1,0 +1,6 @@
+# vim files
+after/**/applescript.vim
+after/**/log.vim
+
+# snippets files
+snippets/**

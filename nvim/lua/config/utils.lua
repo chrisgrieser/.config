@@ -5,7 +5,6 @@ local M = {}
 ---@param cmdStr string
 function M.normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
----send notification
 ---@param msg string
 ---@param title string
 ---@param level? "info"|"trace"|"debug"|"warn"|"error"

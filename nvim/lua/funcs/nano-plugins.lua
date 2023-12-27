@@ -1,16 +1,64 @@
+-- A bunch of commands that are too small to be published as plugins, but too
+-- big to put in the main config, where they would crowd the actual
+-- configuration. Every function is self-contained (except the two helper
+-- functions here), and should be binded to a keymap.
+--------------------------------------------------------------------------------
 local M = {}
-
-local u = require("config.utils")
 
 ---@param cmd string
 local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
 
+---@param msg string
+---@param title string
+---@param level? "info"|"trace"|"debug"|"warn"|"error"
+local function notify(title, msg, level)
+	if not level then level = "info" end
+	vim.notify(msg, vim.log.levels[level:upper()], { title = title })
+end
+
 --------------------------------------------------------------------------------
 
+---Simplified version of nvim-specture, using `rg` and vim's `:cdo s`
+function M.globalSubstitute()
+	vim.opt_local.grepprg = "rg --vimgrep --no-column"
+
+	vim.ui.input({
+		prompt = "Grep",
+		default = vim.fn.expand("<cword>"),
+	}, function(input)
+		if not input then return end
+
+		vim.cmd("silent grep " .. input)
+		vim.fn.setqflist({}, "a", { title = " " .. input })
+		vim.cmd.copen() -- to preview results
+
+		local cmd = (":cdo s/%s//I"):format(input)
+		vim.api.nvim_feedkeys(cmd, "i", true)
+
+		-- position cursor in cmdline
+		local left2 = vim.api.nvim_replace_termcodes("<Left><Left>", true, false, true)
+		vim.defer_fn(function() vim.api.nvim_feedkeys(left2, "i", false) end, 100)
+
+		-- close quickfix, restore cursor position, save all changes
+		vim.api.nvim_create_autocmd("CmdlineLeave", {
+			once = true,
+			callback = function()
+				vim.cmd.cclose()
+				vim.defer_fn(vim.cmd.cfirst, 1)
+				vim.cmd.wall()
+			end,
+		})
+	end)
+end
+
+--------------------------------------------------------------------------------
+
+-- appends a horizontal line, with the language's comment syntax,
+-- correctly indented and padded
 function M.commentHr()
 	local comStr = vim.bo.commentstring
 	if comStr == "" then
-		u.notify("", "No commentstring for this filetype available.", "warn")
+		notify("", "No commentstring for this filetype available.", "warn")
 		return
 	end
 
@@ -52,7 +100,7 @@ function M.commentHr()
 	end
 end
 
-function M.duplicateAsComment()
+function M.duplicateLineAsComment()
 	local ln, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local curLine = vim.api.nvim_get_current_line()
 	local indent, content = curLine:match("^(%s*)(.*)")
@@ -63,7 +111,7 @@ end
 
 --------------------------------------------------------------------------------
 function M.pasteFromNumberReg()
-	local regs = { '+', "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }
+	local regs = { "+", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }
 	vim.ui.select(regs, {
 		prompt = "󰅍 Select register",
 		kind = "atCursor",
@@ -118,11 +166,10 @@ function M.snippetSearch(snippetDir)
 end
 
 --------------------------------------------------------------------------------
-
 function M.openAlfredPref()
 	local parentFolder = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
 	if not parentFolder:find("Alfred%.alfredpreferences") then
-		u.notify("", "Not in an Alfred directory.", "warn")
+		notify("", "Not in an Alfred directory.", "warn")
 		return
 	end
 	-- URI seems more reliable than JXA when called via nvim https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
@@ -163,7 +210,7 @@ function M.openAtRegex101()
 		pattern = vim.fn.getreg("z")
 		flags = "gm" -- TODO retrieve flags in a smarter way
 	else
-		u.notify("", "Unsupported filetype.", "warn")
+		notify("", "Unsupported filetype.", "warn")
 		return
 	end
 
@@ -183,7 +230,7 @@ function M.selectMake()
 	local makefile = vim.loop.cwd() .. "/Makefile"
 	local fileExists = vim.loop.fs_stat(makefile)
 	if not fileExists then
-		u.notify("", "Makefile not found", "warn")
+		notify("", "Makefile not found", "warn")
 		return
 	end
 
@@ -200,7 +247,7 @@ function M.selectMake()
 	end)
 end
 
--- Increment, or Toggle if cursorword is true/false. Simplified-implementation
+-- Increment or toggle if cursorword is true/false. Simplified-implementation
 -- of dial.nvim. (requires `expr = true` for the keymap)
 function M.toggleOrIncrement()
 	local cword = vim.fn.expand("<cword>")
@@ -220,7 +267,7 @@ end
 function M.docstring()
 	local supportedFts = { "lua", "python", "javascript" }
 	if not vim.tbl_contains(supportedFts, vim.bo.filetype) then
-		u.notify("", "Unsupported filetype.", "warn")
+		notify("", "Unsupported filetype.", "warn")
 		return
 	end
 
@@ -258,7 +305,8 @@ function M.docstring()
 	end
 end
 
----simplified implementation of tabout.nvim (mapped in insert-mode to `Tab`)
+---simplified implementation of tabout.nvim 
+---(should be mapped in insert-mode to `<Tab>`)
 function M.tabout()
 	local line = vim.api.nvim_get_current_line()
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
