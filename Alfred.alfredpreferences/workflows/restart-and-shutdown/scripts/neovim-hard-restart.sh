@@ -4,7 +4,7 @@ if killall -9 neovide nvim osascript "Automator Application Stub"; then
 	echo -n "Force restarting neovim…" # Alfred notification
 	open -a "Neovide"
 	sleep 0.1
-	osascript -e 'tell application "Neovide" to activate' # `open -a` does not focus properly
+	open -a "Neovide" # 2nd time to ensure focussing
 else
 	echo -n "Could not kill neovide." # Alfred notification
 fi

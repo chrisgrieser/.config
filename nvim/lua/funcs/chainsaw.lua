@@ -150,7 +150,7 @@ local function getTemplateStr(logType)
 	local templateStr = config.logStatements[logType][ft]
 	if not templateStr then
 		local msg = ("%s does not support %s yet."):format(logType, ft)
-		vim.notify(msg, vim.log.levels.WARN, { title = "Printing Press" })
+		vim.notify(msg, vim.log.levels.WARN, { title = "Chainsaw" })
 	end
 	return templateStr
 end
@@ -158,7 +158,7 @@ end
 --------------------------------------------------------------------------------
 
 function M.messageLog()
-	local logLines = getTemplateStr("messageLog") ---@cast logLines string
+	local logLines = getTemplateStr("messageLog") 
 	if not logLines then return end
 	appendLines(logLines, { config.marker })
 	normal('f";') -- goto insert mode at correct location
@@ -167,21 +167,21 @@ end
 
 function M.variableLog()
 	local varname = getVar()
-	local logLines = getTemplateStr("variableLog") ---@cast logLines string
+	local logLines = getTemplateStr("variableLog") 
 	if not logLines then return end
 	appendLines(logLines, { config.marker, varname, varname })
 end
 
 function M.objectLog()
 	local varname = getVar()
-	local logLines = getTemplateStr("objectLog") ---@cast logLines string
+	local logLines = getTemplateStr("objectLog") 
 	if not logLines then return end
 	appendLines(logLines, { config.marker, varname, varname })
 end
 
 function M.assertLog()
 	local varname = getVar()
-	local logLines = getTemplateStr("assertLog") ---@cast logLines string
+	local logLines = getTemplateStr("assertLog") 
 	if not logLines then return end
 	appendLines(logLines, { varname, config.marker, varname })
 	normal("f,") -- goto the comma to edit the condition
@@ -189,21 +189,21 @@ end
 
 ---adds simple "beep" log statement to check whether conditionals have been triggered
 function M.beepLog()
-	local logLines = getTemplateStr("beepLog") ---@cast logLines string
+	local logLines = getTemplateStr("beepLog") 
 	if not logLines then return end
 	local randomEmoji = config.beepEmojis[math.random(1, #config.beepEmojis)]
 	appendLines(logLines, { config.marker, randomEmoji })
 end
 
 function M.timeLog()
-	if vim.b.timeLogStart == nil then vim.b.timeLogStart = true end ---@diagnostic disable-line: inject-field
+	if vim.b.timeLogStart == nil then vim.b["timeLogStart"] = true end 
 
 	local startOrStop = vim.b.timeLogStart and "timeLogStart" or "timeLogStop"
 	local logLines = getTemplateStr(startOrStop)
 	if not logLines then return end
 	appendLines(logLines, { config.marker })
 
-	vim.b.timeLogStart = not vim.b.timeLogStart ---@diagnostic disable-line: inject-field
+	vim.b["timeLogStart"] = not vim.b.timeLogStart 
 end
 
 -- simple debugger statement
