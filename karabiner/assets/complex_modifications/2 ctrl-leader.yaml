@@ -135,7 +135,7 @@ rules:
         to:
           - shell_command: |
               open -a "Neovide"
-              sleep 0.2
+              sleep 0.25
               open -a "Neovide" # 2nd time to ensure focussing
           - *deactivate-leader
           - *remove-notice
