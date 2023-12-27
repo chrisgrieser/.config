@@ -74,8 +74,8 @@ keymap({ "n", "x" }, "<C-k>", [[?^#\+ .*<CR>]], { desc = " Prev Heading", buf
 
 --------------------------------------------------------------------------------
 -- MARKDOWN-SPECIFIC KEYMAPS
-keymap("n", "<leader>x", "I- [ ] <Esc>``", { desc = " Add Task", buffer = true })
-keymap("n", "<D-4>", "I- <Esc>``", { desc = " Add List", buffer = true })
+keymap("n", "<leader>x", "mzI- [ ] <Esc>`z", { desc = " Add Task", buffer = true })
+keymap("n", "<D-4>", "mzI- <Esc>`z", { desc = " Add List", buffer = true })
 
 -- Format Table
 keymap(
@@ -108,7 +108,7 @@ end, { desc = " SearchLink (ddgr)", buffer = true })
 -- GUI KEYBINDINGS
 
 -- cmd+u: markdown bullet
-keymap("n", "<D-u>", "I- <Esc>``", { desc = " Bullet List", buffer = true })
+keymap("n", "<D-u>", "mzI- <Esc>`z", { desc = " Bullet List", buffer = true })
 
 -- cmd+c: CodeBlock
 keymap("n", "<D-c>", function()

@@ -2,6 +2,7 @@ local u = require("config.utils")
 local linterConfig = require("config.utils").linterConfigFolder
 --------------------------------------------------------------------------------
 
+-- use formatting from conform.nvim
 local formatters = {
 	applescript = { "trim_whitespace", "trim_newlines", "squeeze_blanks" },
 	lua = { "stylua" },
@@ -11,8 +12,8 @@ local formatters = {
 	css = { "squeeze_blanks" }, -- since the css formatter does not support that
 	["*"] = { "typos" },
 }
-
-local lspFormatFiletypes = {
+-- use formatting from the LSP
+local lspFormatFt = {
 	"javascript",
 	"typescript",
 	"json",
@@ -21,6 +22,11 @@ local lspFormatFiletypes = {
 	"html",
 	"python",
 	"css",
+}
+-- use auto-indenting as poor man's formatter
+local autoIndentFt = {
+	"query",
+	"applescript",
 }
 
 --------------------------------------------------------------------------------
@@ -101,6 +107,21 @@ local function formatterConfig()
 	}
 end
 
+local function formattingFunc()
+	-- HACK since `fixAll` is not part of ruff-lsp formatting capabilities
+	-- PENDING https://github.com/astral-sh/ruff-lsp/issues/335
+	local function pythonRuffFixall()
+		if vim.bo.ft == "python" then
+			vim.lsp.buf.code_action { apply = true, context = { only = { "source.fixAll.ruff" } } }
+		end
+	end
+
+	if vim.tbl_contains(autoIndentFt, vim.bo.ft) then u.normal("gg=G``") end
+
+	local useLsp = vim.tbl_contains(lspFormatFt, vim.bo.ft) and "always" or false
+	require("conform").format({ lsp_fallback = useLsp }, pythonRuffFixall)
+end
+
 --------------------------------------------------------------------------------
 
 return {
@@ -109,24 +130,7 @@ return {
 		cmd = "ConformInfo",
 		config = formatterConfig,
 		keys = {
-			{
-				"<D-s>",
-				function()
-					local useLsp = vim.tbl_contains(lspFormatFiletypes, vim.bo.ft) and "always" or false
-					require("conform").format({ lsp_fallback = useLsp }, function()
-						-- HACK since `fixAll` is not part of ruff-lsp formatting capabilities
-						-- PENDING https://github.com/astral-sh/ruff-lsp/issues/335
-						if vim.bo.ft == "python" then
-							vim.lsp.buf.code_action {
-								apply = true,
-								context = { only = { "source.fixAll.ruff" } },
-							}
-						end
-					end)
-				end,
-				desc = "󰒕 Format & Save",
-				mode = { "n", "x" },
-			},
+			{ "<D-s>", formattingFunc, desc = "󰒕 Format & Save", mode = { "n", "x" } },
 		},
 	},
 	{ -- package manager
