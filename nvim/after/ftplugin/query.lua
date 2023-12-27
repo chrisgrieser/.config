@@ -14,3 +14,5 @@ if vim.bo.buftype == "" then
 	optl.tabstop = 2
 	optl.expandtab = true
 end
+
+vim.keymap.set("n", "<D-s>", "gg=G``", { buffer = true })
