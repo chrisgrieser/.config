@@ -35,7 +35,6 @@ g.neovide_hide_mouse_when_typing = true
 
 -- Appearance
 g.neovide_transparency = 0.91
-g.neovide_underline_stroke_scale = 1.1
 g.neovide_refresh_rate = host:find("Mother") and 30 or 50
 
 -- These have no effect with multi-grid turned off, and multi-grid has problems
