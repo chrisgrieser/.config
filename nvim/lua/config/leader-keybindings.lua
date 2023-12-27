@@ -70,7 +70,7 @@ keymap("n", "<leader>fd", ":g // d" .. l3, { desc = " delete matching" })
 keymap(
 	"n",
 	"<leader>fg",
-	function() require("funcs.nano-plugins").globalSearch() end,
+	function() require("funcs.nano-plugins").globalSubstitute() end,
 	{ desc = " global :s" }
 )
 
