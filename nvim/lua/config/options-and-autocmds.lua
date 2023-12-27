@@ -61,7 +61,7 @@ opt.titlelen = 0 -- 0 = do not shorten title
 opt.titlestring = "%{getcwd()}"
 
 -- issue commands (via nvim server https://neovim.io/doc/user/remote.html)
-if vim.fn.has("gui_running") == 1 then
+if vim.g.neovide then
 	pcall(os.remove, "/tmp/nvim_server.pipe") -- FIX server sometimes not properly shut down
 	vim.defer_fn(function() vim.fn.serverstart("/tmp/nvim_server.pipe") end, 400)
 end
@@ -136,6 +136,7 @@ opt.conceallevel = 1
 opt.fillchars:append {
 	eob = " ",
 	fold = " ",
+	-- solid window separators
 	horiz = "▄",
 	vert = "█",
 	horizup = "█",

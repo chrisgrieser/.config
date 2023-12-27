@@ -1,27 +1,34 @@
--- DOCS https://neovide.dev/configuration.html
+-- GUARD
+if not vim.g.neovide then return end
+--------------------------------------------------------------------------------
 local g = vim.g
 
 local u = require("config.utils")
 local keymap = require("config.utils").uniqueKeymap
+
 --------------------------------------------------------------------------------
+-- DOCS https://neovide.dev/configuration.html
 
 -- SIZE & FONT
-vim.opt.guifont = vim.env.CODE_FONT .. ":h25"
 
 local host = vim.fn.hostname()
 local isAtOffice = (host:find("mini") or host:find("eduroam") or host:find("fak1")) ~= nil
+local fontSize
 if host:find("Mother") then
-	g.neovide_scale_factor = 0.9
-	g.neovide_refresh_rate = 30
-	g.neovide_padding_top = 30
-	g.neovide_padding_left = 5
+	fontSize = 23
+	g.neovide_padding_top = 0
 elseif isAtOffice then
-	g.neovide_scale_factor = 1.05
-	g.neovide_refresh_rate = 45
+	fontSize = 26
+	g.neovide_padding_top = 0
 else
-	g.neovide_scale_factor = 1
-	g.neovide_refresh_rate = 50
+	fontSize = 24.5
+	g.neovide_padding_top = 13
 end
+g.neovide_padding_left = 5
+
+vim.opt.guifont = {
+	vim.env.CODE_FONT .. ":h" .. fontSize,
+} 
 
 local function setNeovideScaleFactor(delta)
 	g.neovide_scale_factor = g.neovide_scale_factor + delta
@@ -42,6 +49,7 @@ g.neovide_hide_mouse_when_typing = true
 -- Appearance
 g.neovide_transparency = 0.91
 g.neovide_underline_stroke_scale = 1.1
+g.neovide_refresh_rate = host:find("Mother") and 30 or 50
 
 -- These have no effect with multi-grid turned off, and multi-grid has problems
 -- with satellite.nvim currently.
