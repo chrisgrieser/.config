@@ -204,7 +204,9 @@ return {
 					if not kind then return end
 
 					-- code actions: show at cursor
-					if kind == "codeaction" then return { builtin = { relative = "cursor" } } end
+					if kind == "codeaction" or kind == "atCursor" then
+						return { builtin = { relative = "cursor" } }
+					end
 
 					-- complex selectors: use telescope
 					if
