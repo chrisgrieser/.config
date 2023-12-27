@@ -27,7 +27,7 @@ local function safeRequire(module)
 end
 
 safeRequire("config.lazy")
-if vim.fn.has("gui_running") == 1 then safeRequire("config.gui-settings") end
+safeRequire("config.neovide-settings")
 safeRequire("config.theme-customization")
 safeRequire("config.options-and-autocmds")
 

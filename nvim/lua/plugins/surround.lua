@@ -69,7 +69,7 @@ local function surroundConfig()
 					local ft = vim.bo.filetype
 					local patt
 					if ft == "lua" then
-						patt = "^(if .- then)().-( ?end)()$"
+						patt = "^(if .- then ?)().-( ?end)()$"
 					elseif ft == "javascript" or ft == "typescript" then
 						patt = "^(if %b() ?{?)().-( ?}?)()$"
 					else
