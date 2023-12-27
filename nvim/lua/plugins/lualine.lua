@@ -28,9 +28,10 @@ local function quickfixCounter()
 	local fileCount = #vim.fn.uniq(qfBuffers) -- qfBuffers already sorted
 	local fileStr = fileCount > 1 and (" 「%s  」"):format(fileCount) or ""
 
-	qf.title = qf.title
-		:gsub("^Live Grep: .-%((.+)%)", '"%1"')
-		:gsub("^Find Word %((.-)%) %(.-%)", '"%1"')
+	qf.title = qf.title -- prettify telescope's title output
+		:gsub("^Live Grep: .-%((.+)%)", 'rg: "%1"')
+		:gsub("^Find Files: .-%((.+)%)", 'fd: "%1"')
+		:gsub("^Find Word %((.-)%) %(.-%)", 'rg: "%1"')
 	return (" %s/%s %s"):format(qf.idx, #qf.items, qf.title) .. fileStr
 end
 

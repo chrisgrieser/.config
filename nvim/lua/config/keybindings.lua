@@ -69,7 +69,7 @@ keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
 
 -- Delete trailing stuff
 -- (wrapping in normal avoids temporarily scrolling to the side)
-keymap("n", "X", "<cmd>normal!$x``<CR>", { desc = "󱎘 Delete char at EoL" })
+keymap("n", "X", "mz<cmd>normal!$x`z<CR>", { desc = "󱎘 Delete char at EoL" })
 
 -- COMMENTS
 keymap(
@@ -86,8 +86,8 @@ keymap(
 )
 
 -- WHITESPACE & INDENTATION
-keymap("n", "=", "O<Esc>``", { desc = "  blank above" })
-keymap("n", "_", "o<Esc>``", { desc = "  blank below" })
+keymap("n", "=", "mzO<Esc>`z", { desc = "  blank above" })
+keymap("n", "_", "mzo<Esc>`z", { desc = "  blank below" })
 
 keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent selection" })
 keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent selection" })

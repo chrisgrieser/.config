@@ -43,7 +43,7 @@ function M.globalSubstitute()
 				vim.cmd.cclose()
 				vim.cmd.cfirst() -- move cursor back
 				vim.fn.setqflist({}, "r") -- clear quickfix
-				vim.cmd.cfdo("write")
+				vim.cmd.cfdo("update")
 			end, 1)
 		end,
 	})
@@ -255,7 +255,7 @@ function M.toggleOrIncrement()
 	for word, opposite in pairs(bool) do
 		if cword == word then toggle = opposite end
 		if cword == opposite then toggle = word end
-		if toggle then return "ciw" .. toggle .. "<Esc>``" end
+		if toggle then return "mzciw" .. toggle .. "<Esc>`z" end
 	end
 	return "<C-a>"
 end
