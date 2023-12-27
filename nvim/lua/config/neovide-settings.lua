@@ -28,6 +28,7 @@ g.neovide_padding_left = 5
 
 vim.opt.guifont = {
 	vim.env.CODE_FONT .. ":h" .. fontSize,
+	"Symbols Nerd Font Mono",
 } 
 
 local function setNeovideScaleFactor(delta)
