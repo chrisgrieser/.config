@@ -2,13 +2,13 @@
 # shellcheck disable=2154
 #───────────────────────────────────────────────────────────────────────────────
 
-origin_repo=$(echo "$*" | cut -c20-)
+source_repo=$(echo "$*" | cut -c20-)
 reponame=$(echo "$*" | sed -E 's|.*/||')
-url="git@github.com:$origin_repo.git" # use SSH instead of https
+url="git@github.com:$source_repo.git" # use SSH instead of https
 
 # INFO LOCAL_REPOS defined in .zshenv
 [[ ! -e "$LOCAL_REPOS" ]] && mkdir -p "$LOCAL_REPOS"
-cd "$LOCAL_REPOS" || exit 1
+cd "$LOCAL_REPOS" || return 1
 
 # WARN depth=2 ensures that amending a shallow commit does not result in a
 # new commit without parent, effectively destroying git history (!!)
@@ -25,11 +25,13 @@ if [[ "$publicRepo" == "true" ]] ; then
 	cd "$reponame" || return 1
 	gh repo fork --remote=false
 
-	# add my remote as SSH & name it "origin" for `push.autoSetupRemote`
+	# origin -> my fork repo
+	# upstream -> the source repo
 	git remote rename origin upstream
-	git config push.autoSetupRemote true
 	git remote add origin "git@github.com:$github_username/$reponame.git"
+	gh repo set-default "$source_repo" # where `gh` sends PRs to
 
-	gh repo set-default "$origin_repo" # where `gh` sends PRs to
-	git checkout -b "dev" # as branch so maintainer can edit it
+	# as branch so maintainer can edit it
+	git config push.autoSetupRemote true
+	git checkout -b "dev"
 fi

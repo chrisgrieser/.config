@@ -34,8 +34,7 @@ nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>wqall<CR>"
 # wait until dead
 i=0
 while pgrep -xq "neovide" || pgrep -xq "nvim"; do
-	osascript -e 'beep'
-	sleep 0.2
+	sleep 0.1
 	i=$((i + 1))
 	if [[ $i -gt 10 ]]; then
 		if ! killall -9 neovide nvim "Automator Application Stub"; then
@@ -48,5 +47,5 @@ done
 # Restart
 sleep 0.15
 open -a "Neovide"
-sleep 0.2
+sleep 0.25
 open -a "Neovide" # 2nd time to ensure focussing
