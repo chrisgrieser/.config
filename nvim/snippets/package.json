@@ -27,10 +27,6 @@
 				"path": "./basic/css.json"
 			},
 			{
-				"language": ["gitcommit"],
-				"path": "./basic/conventional-commits.json"
-			},
-			{
 				"language": ["bash", "zsh", "fish", "sh"],
 				"path": "./basic/shell.json"
 			},
@@ -65,10 +61,6 @@
 			{
 				"language": ["toml"],
 				"path": "./project-specific/typos-toml.json"
-			},
-			{
-				"language": ["json"],
-				"path": "./project-specific/vscode-snippets.json"
 			},
 			{
 				"language": ["lua"],

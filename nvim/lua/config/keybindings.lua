@@ -287,7 +287,7 @@ keymap(
 
 --------------------------------------------------------------------------------
 -- QUITTING
-keymap({ "n", "x" }, "<MiddleMouse>", vim.cmd.wall, { desc = "Quit App" })
+keymap({ "n", "x" }, "<MiddleMouse>", vim.cmd.wqall, { desc = "Quit App" })
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "qf", "help", "checkhealth" },

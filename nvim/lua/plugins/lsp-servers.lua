@@ -220,6 +220,15 @@ serverConfigs.biome = {
 	end,
 }
 
+-- DOCS https://github.com/Microsoft/vscode/tree/main/extensions/json-language-features/server#configuration
+-- Disable formatting in favor of biome
+serverConfigs.jsonls = {
+	init_options = {
+		provideFormatter = false,
+		documentRangeFormattingProvider = false,
+	},
+}
+
 --------------------------------------------------------------------------------
 -- LTEX (LanguageTool LSP)
 
