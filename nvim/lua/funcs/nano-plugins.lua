@@ -19,7 +19,7 @@ end
 --------------------------------------------------------------------------------
 
 ---Convenience wrapper around `:cdo`, replaces nvim-spectre
-function M.globalSubstitute()
+function M.cdoSubstitute()
 	-- GUARD
 	local qf = vim.fn.getqflist { items = true, title = true }
 	local quickfixQuery = qf.title:match("%((..-)%)")
@@ -29,7 +29,7 @@ function M.globalSubstitute()
 		return
 	end
 
-	vim.cmd.copen() -- to preview results
+	vim.cmd("copen 15") -- to preview results
 	local cmd = (":cdo s/%s//I"):format(quickfixQuery) -- prefill
 	vim.api.nvim_feedkeys(cmd, "i", true)
 	-- position cursor in cmdline
@@ -43,7 +43,7 @@ function M.globalSubstitute()
 				vim.cmd.cclose()
 				vim.cmd.cfirst() -- move cursor back
 				vim.fn.setqflist({}, "r") -- clear quickfix
-				vim.cmd.cfdo("update")
+				vim.cmd.cfdo("silent update")
 			end, 1)
 		end,
 	})

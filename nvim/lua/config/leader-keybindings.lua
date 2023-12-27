@@ -63,15 +63,15 @@ end, { desc = " Search Snippets" })
 -- REFACTORING
 local l3 = "<Left><Left><Left>"
 keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰒕 Var Rename" })
-keymap("n", "<leader>fs", ":%s /<C-r><C-w>//gI" .. l3, { desc = " :s (cword)" })
-keymap("x", "<leader>fs", '"zy:% s/<C-r>z//gI' .. l3, { desc = " :s (for selection)" })
-keymap("x", "<leader>fv", ":s ///gI<Left>" .. l3, { desc = " :s (inside visual)" })
+keymap("n", "<leader>fs", ":%s /<C-r><C-w>//gI" .. l3, { desc = " :s cword" })
+keymap("x", "<leader>fs", '"zy:% s/<C-r>z//gI' .. l3, { desc = " :s for selection" })
+keymap("x", "<leader>fv", ":s ///gI<Left>" .. l3, { desc = " :s inside visual" })
 keymap("n", "<leader>fd", ":g // d" .. l3, { desc = " delete matching" })
 keymap(
 	"n",
-	"<leader>fg",
-	function() require("funcs.nano-plugins").globalSubstitute() end,
-	{ desc = " global :s" }
+	"<leader>fq",
+	function() require("funcs.nano-plugins").cdoSubstitute() end,
+	{ desc = " :s quickfix" }
 )
 
 ---@param use "spaces"|"tabs"
