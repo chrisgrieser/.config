@@ -76,7 +76,7 @@ keymap("n", "<leader>fg", function ()
 		vim.cmd("silent! grep " .. input)
 	end)
 
--- foobarbaz
+-- MAYBE
 end, { desc = " global :s" })
 
 ---@param use "spaces"|"tabs"
