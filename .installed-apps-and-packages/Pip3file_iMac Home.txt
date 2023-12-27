@@ -1,3 +1,4 @@
 pip-autoremove
+Pygments
 pyobjc-framework-Cocoa
 wheel
