@@ -63,9 +63,7 @@ serverConfigs.bashls = {
 }
 -- WORKAROUND: use efm to use shellcheck with zsh files
 
---------------------------------------------------------------------------------
 -- EFM: Markdown & Shell
-
 serverConfigs.efm = {
 	cmd = { "efm-langserver", "-c", linterConfig .. "/efm.yaml" },
 	filetypes = { "sh", "markdown" }, -- limit to filestypes needed
@@ -81,15 +79,15 @@ serverConfigs.lua_ls = {
 			completion = {
 				callSnippet = "Replace",
 				keywordSnippet = "Replace",
-				showWord = "Disable", -- don'):format()t suggest common words as fallback
+				showWord = "Disable", -- don't suggest common words as fallback
 				postfix = ".", -- useful for `table.insert` and the like
 			},
 			diagnostics = {
-				globals = { "vim" }, -- when contributing to nvim plugins missing a .luarc.json
+				globals = { "vim" }, -- when contributing to nvim plugins missing a `.luarc.json`
 				disable = { "trailing-space" }, -- formatter already does that
 			},
-			hint = {
-				enable = true, -- enabled inlay hints
+			hint = { -- inlay hints
+				enable = true,
 				setType = true,
 				arrayIndex = "Disable",
 			},
@@ -237,7 +235,7 @@ local function getDictWords()
 	return words
 end
 
--- PENDING https://github.com/williamboman/mason.nvim/issues/1531
+-- FIX, PENDING https://github.com/williamboman/mason.nvim/issues/1531
 vim.env.JAVA_HOME = vim.env.HOMEBREW_PREFIX .. "/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
 
 -- DOCS https://valentjn.github.io/ltex/settings.html
@@ -265,24 +263,19 @@ serverConfigs.ltex = {
 		},
 	},
 	on_attach = function()
-		-- have `zg` update ltex
+		-- have `zg` update ltex as well
 		vim.keymap.set({ "n", "x" }, "zg", function()
 			local word
 			if vim.fn.mode() == "n" then
 				word = vim.fn.expand("<cword>")
 				u.normal("zg") -- regular `zg` to add to spellfile
 			else
-				u.normal('"zy') -- copy to register z
+				u.normal('zggv"zy') -- regular `zg` to add to spellfile, reselect 
 				word = vim.fn.getreg("z")
-				u.normal("gvzg") -- reselect & regular `zg` to add to spellfile
 			end
-			local ltex = vim.lsp.get_active_clients({ name = "ltex" })[1]
-			table.insert(ltex.config.settings.ltex.dictionary["en-US"], word)
-			vim.lsp.buf_notify(
-				0,
-				"workspace/didChangeConfiguration",
-				{ settings = ltex.config.settings }
-			)
+			local ltexSettings = vim.lsp.get_active_clients({ name = "ltex" })[1].config.settings
+			table.insert(ltexSettings.ltex.dictionary["en-US"], word)
+			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = ltexSettings })
 		end, { desc = "󰓆 Add Word", buffer = true })
 
 		-- Disable in Obsidian
