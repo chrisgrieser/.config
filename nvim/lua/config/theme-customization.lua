@@ -9,11 +9,9 @@ local u = require("config.utils")
 ---@param update string
 local function updateCursor(update) vim.opt.guicursor:append(update) end
 
----@param hlgroupfrom string
----@param hlgroupto string
-local function linkHl(hlgroupfrom, hlgroupto)
-	vim.api.nvim_set_hl(0, hlgroupfrom, { link = hlgroupto })
-end
+---@param fromGroup string
+---@param toGroup string
+local function linkHl(fromGroup, toGroup) vim.api.nvim_set_hl(0, fromGroup, { link = toGroup }) end
 
 ---INFO not using `api.nvim_set_hl` yet as it overwrites a group instead of updating it
 ---@param hlgroup string
@@ -53,16 +51,17 @@ end
 
 local function themeModifications()
 	local mode = vim.opt.background:get()
-	local theme = g.colors_name -- some themes do not set g.colors_name
+	local theme = g.colors_name
+	-- some themes do not set g.colors_name
 	if not theme then theme = mode == "light" and g.lightTheme or g.darkTheme end
 	local vimModes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
 
 	if theme == "tokyonight" then
 		vim.defer_fn(function()
-			for _, v in pairs(vimModes) do
-				updateHl("lualine_y_diff_modified_" .. v, "guifg=#c8be32")
-				updateHl("lualine_y_diff_added_" .. v, "guifg=#369a96")
-				updateHl("lualine_a_" .. v, "gui=bold")
+			for _, vimMode in pairs(vimModes) do
+				updateHl("lualine_y_diff_modified_" .. vimMode, "guifg=#b8b042")
+				updateHl("lualine_y_diff_added_" .. vimMode, "guifg=#369a96")
+				updateHl("lualine_a_" .. vimMode, "gui=bold")
 			end
 		end, 100)
 		updateHl("GitSignsChange", "guifg=#acaa62")
@@ -91,8 +90,6 @@ local function themeModifications()
 		linkHl("@type.builtin.python", "Typedef")
 		linkHl("@string.documentation.python", "Typedef")
 		linkHl("@keyword.operator.python", "Operator")
-
-	-----------------------------------------------------------------------------
 	elseif theme == "gruvbox-material" or theme == "sonokai" or theme == "everforest" then
 		local commentColor = u.getHighlightValue("Comment", "fg")
 		updateHl("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
@@ -171,9 +168,7 @@ function M.reloadTheming() themeModifications() end
 
 -- initialize theme on startup
 local isDarkMode = fn.system([[defaults read -g AppleInterfaceStyle]]):find("Dark")
-local targetMode = isDarkMode and "dark" or "light"
-M.setThemeMode(targetMode)
+M.setThemeMode(isDarkMode and "dark" or "light")
 
 --------------------------------------------------------------------------------
-
 return M
