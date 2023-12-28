@@ -109,23 +109,6 @@ end
 
 --------------------------------------------------------------------------------
 
-function M.pasteFromNumberReg()
-	local regs = { "+", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }
-	vim.ui.select(regs, {
-		prompt = "󰅍 Select register",
-		kind = "atCursor",
-		format_item = function(reg)
-			local firstLine = vim.split(vim.fn.getreg(reg), "\n")[1]
-			return vim.trim(firstLine):sub(1, 40)
-		end,
-	}, function(reg)
-		if not reg then return end
-		normal('"' .. reg .. "p")
-	end)
-end
-
-
---------------------------------------------------------------------------------
 function M.openAlfredPref()
 	local parentFolder = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
 	if not parentFolder:find("Alfred%.alfredpreferences") then

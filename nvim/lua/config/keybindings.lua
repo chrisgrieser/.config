@@ -251,14 +251,6 @@ keymap("i", "<D-v>", function()
 	return "<C-g>u<C-r><C-o>+" -- "<C-g>u" adds undopoint before the paste
 end, { desc = " Paste charwise", expr = true })
 
--- use register `y` as secondary clipboard
-keymap(
-	{ "n", "x" },
-	"gp",
-	function() require("funcs.nano-plugins").pasteFromNumberReg() end,
-	{ desc = "󰅍  Paste from number reg" }
-)
-
 --------------------------------------------------------------------------------
 
 -- Open regex in regex101
