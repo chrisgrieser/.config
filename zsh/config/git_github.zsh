@@ -56,7 +56,7 @@ function gc {
 			git status
 	else
 		printf "\e[1;36mPull: \e[0m" &&
-			git pull && # add `--no-rebase` to prevent "Cannot rebase on multiple branches"
+			git pull --no-rebase && # --no-rebase prevents "Cannot rebase on multiple branches"
 			printf "\e[1;36mPush: \e[0m" &&
 			git push
 	fi

@@ -30,8 +30,8 @@ local defaultConfig = {
 	},
 	-- `none` has no dependency, but writes a minified json file.
 	-- `yq` and `jq` ensure formatted & sorted json files, which you might prefer
-	-- for version-controlling your snippets.
-	jsonFormatter = "none", -- yq|jq|none
+	-- for version-controlling your snippets. (Both are also available via Mason.)
+	jsonFormatter = "yq", -- yq|jq|none
 }
 local config = defaultConfig
 
@@ -76,6 +76,7 @@ end
 
 --------------------------------------------------------------------------------
 
+---TODO determine filetype via `package.json`?
 ---Tries to determine filetype based on input string. If input is neither a
 ---filetype nor a file extension known to nvim, returns false.
 ---@param input string
@@ -261,6 +262,13 @@ local function editInPopup(snip, mode)
 		deleteSnippet(snip)
 		close()
 	end, { buffer = bufnr, nowait = true })
+
+	-- FIX/HACK shifting of virtual lines when using `<CR>` on empty buffer
+	vim.keymap.set("i", conf.keymaps.confirm, function()
+		local row, col = unpack(a.nvim_win_get_cursor(0))
+		if row == 0 and col == 0 then return end 
+		return "<CR>"
+	end, { buffer = bufnr, expr = true })
 end
 
 --------------------------------------------------------------------------------
