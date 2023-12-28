@@ -392,7 +392,8 @@ return {
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = vim.tbl_keys(symbolFilter),
 				callback = function(ctx)
-					local filetype = ctx.filetype
+					local ft = ctx.match
+					
 					-- stylua: ignore
 					vim.keymap.set("n", "gs", function()
 						require("telescope.builtin").treesitter {
