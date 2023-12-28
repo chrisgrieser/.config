@@ -100,7 +100,7 @@ return {
 		"chrisgrieser/nvim-various-textobjs",
 		keys = {
 			-- stylua: ignore start
-			{ "pp", "<cmd>lua require('various-textobjs.charwise-textobjs').lastPaste()<CR>", mode = {"x", "o"}, desc = "󱡔 last paste" },
+			{ "pp", "<cmd>lua require('various-textobjs').lastChange()<CR>", mode = "o", desc = "󱡔 last paste" },
 
 			{ "<Space>", "<cmd>lua require('various-textobjs').subword('inner')<CR>", mode = "o", desc = "󱡔 inner subword" },
 			{ "a<Space>", "<cmd>lua require('various-textobjs').subword('outer')<CR>", mode = { "o", "x" }, desc = "󱡔 outer subword" },
