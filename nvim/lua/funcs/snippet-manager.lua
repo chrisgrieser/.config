@@ -1,15 +1,19 @@
 local M = {}
-local a = vim.api
+--------------------------------------------------------------------------------
+
+local defaultConfig = {
+	snippetDir = vim.fn.stdpath("config") .. "/snippets",
+}
+local config = defaultConfig
+
 --------------------------------------------------------------------------------
 
 ---@class (exact) snippetObj VSCode snippet json
 ---@field path? string
----@field originalKey? string original key of the snippet
+---@field originalKey string original key of the snippet
 ---@field prefix string|string[]
 ---@field body string|string[]
 ---@field description? string
-
---------------------------------------------------------------------------------
 
 ---@param filePath string
 ---@return string? -- content or error message
@@ -22,14 +26,26 @@ local function readFile(filePath)
 	return content, true
 end
 
+---@param str string
+---@param filePath string
+---@param mode "w"|"a" writes or appends
+---@return string|nil -- error message
+local function writeFile(mode, filePath, str)
+	local file, _ = io.open(filePath, mode)
+	if not file then return end
+	file:write(str)
+	file:close()
+end
+
+--------------------------------------------------------------------------------
+
 ---Reads VS Code snippet json file, and also converts the object to an array of
 ---snippets, storing the filepath and the original key.
----@param snippetDir string
 ---@param filepath string
 ---@return snippetObj[] snippetsInFile returns empty table if file not readable
-local function parseSnippetFile(snippetDir, filepath)
+local function readSnippetFile(filepath)
 	local snippetsInFile = {}
-	local path = snippetDir .. "/" .. filepath
+	local path = config.snippetDir .. "/" .. filepath
 	local snippets = vim.json.decode(readFile(path) or "{}") or {}
 	for key, snip in pairs(snippets) do
 		snip.path = path
@@ -39,29 +55,42 @@ local function parseSnippetFile(snippetDir, filepath)
 	return snippetsInFile
 end
 
----@param snip snippetObj
-local function openFileAtSnippet(snip)
-	local locationInFile = '"' .. snip.originalKey:gsub(" ", [[\ ]]) .. '":'
-	vim.cmd(("edit +/%s %s"):format(locationInFile, snip.path))
+---@param snip snippetObj snippet to update
+---@param bodyLines string[]
+local function updateSnippet(snip, bodyLines)
+	local snippetsInFile = readSnippetFile(snip.path)
+
+	local key = snip.originalKey
+	snip.originalKey = nil
+	snip.path = nil
+	snip.body = #bodyLines == 1 and bodyLines[1] or bodyLines
+	snippetsInFile[key] = snip
+
+	local jsonStr = vim.json.encode(snippetsInFile)
+	assert(jsonStr, "snippet could not be written")
+	writeFile("w", snip.path, jsonStr)
 end
 
 ---@param snip snippetObj
-local function editSnippet(snip)
+local function editSnippetInPopup(snip)
 	local snipLines = snip.body
 	if type(snipLines) == "string" then snipLines = { snipLines } end
 	local displayName = snip.originalKey:sub(1, 25)
 	local sourceFile = vim.fs.basename(snip.path):gsub("%.json$", "")
 
+	-- create buffer and window
+	local a = vim.api
 	local bufnr = a.nvim_create_buf(false, true)
 	a.nvim_buf_set_lines(bufnr, 0, -1, false, snipLines)
 	a.nvim_buf_set_name(bufnr, displayName)
 	a.nvim_buf_set_option(bufnr, "filetype", sourceFile)
-	
-	local width = 0.8
-	local height = 0.8
+	a.nvim_buf_set_option(bufnr, "buftype", "nofile")
+
+	local width = 0.7
+	local height = 0.7
 	local winnr = a.nvim_open_win(bufnr, true, {
 		relative = "win",
-		-- centered
+		-- centered window
 		width = math.floor(width * a.nvim_win_get_width(0)),
 		height = math.floor(height * a.nvim_win_get_height(0)),
 		row = math.floor((1 - height) * a.nvim_win_get_height(0) / 2),
@@ -72,17 +101,28 @@ local function editSnippet(snip)
 		style = "minimal",
 		zindex = 1, -- below nvim-notify floats
 	})
+
+	-- keymaps
+	local function close()
+		a.nvim_win_close(winnr, true)
+		a.nvim_buf_delete(bufnr, { force = true })
+	end
+	vim.keymap.set("n", "q", close, { buffer = bufnr, nowait = true })
+	vim.keymap.set("n", "<CR>", function()
+		local editedLines = a.nvim_buf_get_lines(bufnr, 0, -1, false)
+		updateSnippet(snip, editedLines)
+		close()
+	end, { buffer = bufnr, nowait = true })
 end
 
 --------------------------------------------------------------------------------
 
 ---Searches a folder of vs-code-like snippets in json format and opens the selected.
----@param snippetDir string
-function M.snippetSearch(snippetDir)
+function M.snippetSearch()
 	local allSnippets = {} ---@type snippetObj[]
-	for name, _ in vim.fs.dir(snippetDir, { depth = 3 }) do
+	for name, _ in vim.fs.dir(config.snippetDir, { depth = 3 }) do
 		if name:find("%.json$") and name ~= "package.json" then
-			local snippetsInFile = parseSnippetFile(snippetDir, name)
+			local snippetsInFile = readSnippetFile(name)
 
 			vim.list_extend(allSnippets, snippetsInFile)
 		end
@@ -98,8 +138,11 @@ function M.snippetSearch(snippetDir)
 		kind = "snippetList",
 	}, function(snip)
 		if not snip then return end
-		-- openFileAtSnippet(snip)
-		editSnippet(snip)
+		editSnippetInPopup(snip)
+
+		-- to open file at snippet locaton:
+		-- local locationInFile = '"' .. snip.originalKey:gsub(" ", [[\ ]]) .. '":'
+		-- vim.cmd(("edit +/%s %s"):format(locationInFile, snip.path))
 	end)
 end
 

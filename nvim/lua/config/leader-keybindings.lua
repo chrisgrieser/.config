@@ -54,10 +54,12 @@ keymap(
 	{ desc = " Package Dirs" }
 )
 
-keymap("n", "<leader>ps", function()
-	local snippetDir = vim.fn.stdpath("config") .. "/snippets"
-	require("funcs.snippet-manager").snippetSearch(snippetDir)
-end, { desc = " Search Snippets" })
+keymap(
+	"n",
+	"<leader>ps",
+	function() require("funcs.snippet-manager").snippetSearch() end,
+	{ desc = " Search Snippets" }
+)
 
 --------------------------------------------------------------------------------
 -- REFACTORING
