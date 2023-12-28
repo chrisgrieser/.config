@@ -93,10 +93,6 @@ matches:
         type: shell
         params:
           cmd: "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; nvim --version | head -n3"
-      - name: neovideVersion
-        type: shell
-        params:
-          cmd: "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; neovide --version | cut -d' ' -f2"
   - trigger: "!oversion"
     replace: |-
       ```

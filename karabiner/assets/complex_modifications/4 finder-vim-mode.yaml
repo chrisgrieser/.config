@@ -418,11 +418,12 @@ rules:
           # INFO requires "Focus Menubar item" in macOS Keyboard Shortcuts
           - { key_code: f2, modifiers: [control] }
           - key_code: g
-          - { key_code: down_arrow, modifiers: [command] }
+          - key_code: down_arrow
+          - key_code: down_arrow
+          - { key_code: down_arrow, modifiers: [option] }
           - key_code: up_arrow
           - key_code: up_arrow
-          - key_code: up_arrow
-          - key_code: right_arrow
+          - { key_code: right_arrow, modifiers: [option] }
           - *start-menu
           - *menu-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
@@ -834,7 +835,10 @@ rules:
         from: { key_code: period }
         to:
           - { key_code: period, modifiers: [command, shift] }
-          - shell_command: afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/facetime/multiway_leave.caf' &
+          - shell_command:
+              afplay
+              '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/facetime/multiway_leave.caf'
+              &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       # Navigation
@@ -843,26 +847,32 @@ rules:
         from: { key_code: o }
         to_if_alone:
           - key_code: right_arrow
-          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_unmute.caf" & # codespell-ignore
+          - shell_command: afplay
+              "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_unmute.caf"
+              & # codespell-ignore
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: o, modifiers: { mandatory: [shift] } }
         to_if_alone:
           - { key_code: right_arrow, modifiers: [option] }
-          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_unmute.caf" & # codespell-ignore
+          - shell_command: afplay
+              "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_unmute.caf"
+              & # codespell-ignore
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # c = close/collapse fold (C: do it recursively)
       - type: basic
         from: { key_code: c }
         to_if_alone:
           - key_code: left_arrow
-          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_mute.caf" & # codespell-ignore
+          - shell_command: afplay
+              "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_mute.caf" & # codespell-ignore
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: c, modifiers: { mandatory: [shift] } }
         to_if_alone:
           - { key_code: left_arrow, modifiers: [option] }
-          - shell_command: afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_mute.caf" & # codespell-ignore
+          - shell_command: afplay
+              "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_mute.caf" & # codespell-ignore
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # <C-h> = History Back
       - type: basic
@@ -1190,62 +1200,92 @@ rules:
         from: { key_code: "1" } # ! used as mark
         to:
           - { key_code: "1", modifiers: [control] }
-          - shell_command: afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
+          - shell_command:
+              afplay
+              '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf'
+              &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "2" }
         to:
           - { key_code: "2", modifiers: [control] }
-          - shell_command: afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
+          - shell_command:
+              afplay
+              '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf'
+              &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "3" }
         to:
           - { key_code: "3", modifiers: [control] }
-          - shell_command: afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
+          - shell_command:
+              afplay
+              '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf'
+              &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "4" }
         to:
           - { key_code: "4", modifiers: [control] }
-          - shell_command: afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
+          - shell_command:
+              afplay
+              '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf'
+              &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "5" }
         to:
           - { key_code: "5", modifiers: [control] }
-          - shell_command: afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
+          - shell_command:
+              afplay
+              '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf'
+              &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "6" }
         to:
           - { key_code: "6", modifiers: [control] }
-          - shell_command: afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
+          - shell_command:
+              afplay
+              '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf'
+              &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "7" }
         to:
           - { key_code: "7", modifiers: [control] }
-          - shell_command: afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
+          - shell_command:
+              afplay
+              '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf'
+              &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "8" }
         to:
           - { key_code: "8", modifiers: [control] }
-          - shell_command: afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
+          - shell_command:
+              afplay
+              '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf'
+              &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "9" }
         to:
           - { key_code: "9", modifiers: [control] }
-          - shell_command: afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
+          - shell_command:
+              afplay
+              '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf'
+              &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # remove all tags
       - type: basic
         from: { key_code: "0" }
         to:
           - { key_code: "0", modifiers: [control] }
-          - shell_command: afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
+          - shell_command:
+              afplay
+              '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf'
+              &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       #─────────────────────────────────────────────────────────────────────────

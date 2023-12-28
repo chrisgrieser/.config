@@ -163,7 +163,7 @@ return {
 				return vim.ui.input(...)
 			end
 
-			-- extra keybindings (WARN setting via lazy filetype-keys is buggy)
+			-- extra keybindings PENDING https://github.com/folke/lazy.nvim/issues/1241
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "DressingSelect",
 				callback = function()
