@@ -290,14 +290,16 @@ local function telescopeConfig()
 					horizontal = { preview_width = { 0.7, min = 30 } },
 				},
 			},
-			lsp_document_symbols = {
-				prompt_prefix = "󰒕 ",
+			-- using treesitter-symbol search over LSP symbol search, as treesitter
+			-- symbol search leaves out anonymous functions
+			treesitter = {
+				prompt_prefix = " ",
+				show_line = false,
 				prompt_title = "Symbols",
-				symbol_type_width = 1,
 				symbols = { "function", "class", "method" },
+				symbol_highlights = { ["function"] = "Function" },
 			},
-			lsp_workspace_symbols = {
-				-- workspace symbols are not working correctly in lua
+			lsp_workspace_symbols = { -- workspace symbols are not working correctly in lua
 				prompt_prefix = "󰒕 ",
 				prompt_title = "Workspace Symbols",
 				fname_width = 12,
@@ -336,7 +338,7 @@ return {
 		keys = {
 			{ "?", function() telescope("keymaps") end, desc = "⌨️ Search Keymaps" },
 			{ "g.", function() telescope("resume") end, desc = " Continue" },
-			{ "gs", function() telescope("lsp_document_symbols") end, desc = "󰒕 Symbols" },
+			{ "gs", function() telescope("treesitter") end, desc = " Symbols" },
 			{ "gd", function() telescope("lsp_definitions") end, desc = "󰒕 Definitions" },
 			{ "gf", function() telescope("lsp_references") end, desc = "󰒕 References" },
 			-- stylua: ignore
@@ -381,12 +383,19 @@ return {
 		},
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
 		init = function()
+			local symbolFilter = {
+				yaml = "object",
+				json = "module",
+				toml = "object",
+				markdown = "string", -- = headings
+			} 
 			vim.api.nvim_create_autocmd("FileType", {
-				pattern = { "yaml", "json", "toml" },
-				callback = function()
+				pattern = vim.tbl_keys(symbolFilter),
+				callback = function(ctx)
+					local filetype = ctx.filetype
 					-- stylua: ignore
 					vim.keymap.set("n", "gs", function()
-						require("telescope.builtin").lsp_document_symbols {
+						require("telescope.builtin").treesitter {
 							prompt_title = "Sections",
 							symbols = { "object", "module" },
 						}

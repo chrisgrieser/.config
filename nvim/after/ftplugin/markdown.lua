@@ -1,7 +1,5 @@
 local keymap = vim.keymap.set
 local optl = vim.opt_local
-local u = require("config.utils")
-local fn = vim.fn
 --------------------------------------------------------------------------------
 
 optl.expandtab = false
@@ -56,24 +54,13 @@ vim.keymap.set("n", "<D-r>", function()
 	vim.fn.system { "open", output } -- macOS open command
 end, { desc = " Preview", buffer = true })
 
-
 --------------------------------------------------------------------------------
--- HEADING navigation (instead of symbols)
-
--- stylua: ignore
-vim.keymap.set("n", "gs", function ()
-	require("telescope.builtin").lsp_document_symbols {
-		prompt_title = "Headings",
-		symbols = "string", -- lsp considers headings as symbol-kind "string"
-	}
-end, { desc = " Headings", buffer = true })
+-- MARKDOWN-SPECIFIC KEYMAPS
 
 -- Jump to next/prev heading
 keymap({ "n", "x" }, "<C-j>", [[/^#\+ .*<CR>]], { desc = " Next Heading", buffer = true })
 keymap({ "n", "x" }, "<C-k>", [[?^#\+ .*<CR>]], { desc = " Prev Heading", buffer = true })
 
---------------------------------------------------------------------------------
--- MARKDOWN-SPECIFIC KEYMAPS
 keymap("n", "<leader>x", "mzI- [ ] <Esc>`z", { desc = " Add Task", buffer = true })
 keymap("n", "<D-4>", "mzI- <Esc>`z", { desc = " Add List", buffer = true })
 
