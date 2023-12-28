@@ -393,7 +393,7 @@ return {
 				pattern = vim.tbl_keys(symbolFilter),
 				callback = function(ctx)
 					local ft = ctx.match
-					
+					local symbol = symbolFilter[ft]
 					-- stylua: ignore
 					vim.keymap.set("n", "gs", function()
 						require("telescope.builtin").treesitter {
