@@ -54,11 +54,19 @@ keymap(
 	{ desc = " Package Dirs" }
 )
 
+--------------------------------------------------------------------------------
+u.leaderSubkey("n", " Snippets")
 keymap(
 	"n",
-	"<leader>ps",
-	function() require("funcs.snippet-manager").snippetSearch() end,
-	{ desc = " Search Snippets" }
+	"<leader>nn",
+	function() require("funcs.snippet-manager").editSnippet() end,
+	{ desc = " Edit Snippets" }
+)
+keymap(
+	"n",
+	"<leader>na",
+	function() require("funcs.snippet-manager").addNewSnippet() end,
+	{ desc = " Add new snippet" }
 )
 
 --------------------------------------------------------------------------------

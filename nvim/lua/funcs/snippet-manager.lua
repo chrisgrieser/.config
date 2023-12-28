@@ -1,5 +1,4 @@
 local M = {}
-local snippetAction = {}
 --------------------------------------------------------------------------------
 
 ---@class (exact) snippetObj VSCode snippet json
@@ -13,7 +12,7 @@ local snippetAction = {}
 
 ---@class (exact) pluginConfig
 ---@field snippetDir string
----@field editSnippetPopup { height: number, width: number, border: string }
+---@field editSnippetPopup { height: number, width: number, border: string, keymaps: table<string, string> }
 ---@field jsonFormatter string|string[]|false passed to vim.fn.system
 
 ---@type pluginConfig
@@ -23,6 +22,11 @@ local defaultConfig = {
 		height = 0.4, -- 0-1
 		width = 0.6,
 		border = "rounded",
+		keymaps = {
+			cancel = "q",
+			confirm = "<CR>",
+			delete = "<D-BS>",
+		}
 	},
 	-- If `false`, the json will be written in minified format. Pass a json
 	-- formatter like `jq` if you want the json written in prettified format. The
@@ -35,6 +39,11 @@ local defaultConfig = {
 	-- jsonFormatter = { "biome", "--stdin-file-path=foobar.json" },
 }
 local config = defaultConfig
+
+---@param userConfig? pluginConfig
+function M.setup(userConfig)
+	config = vim.tbl_deep_extend("force", defaultConfig, userConfig or {})
+end
 
 --------------------------------------------------------------------------------
 
@@ -123,8 +132,16 @@ local function updateSnippet(snip, bodyLines)
 end
 
 ---@param snip snippetObj
-function snippetAction.editInPopup(snip)
+local function deleteSnippet(snip)
+	local snippetsInFile = readAndParseJson(snip.path)
+	snippetsInFile[snip.originalKey] = nil -- = delete
+	writeAndFormatSnippetFile(snip.path, snippetsInFile)
+end
+
+---@param snip snippetObj
+local function editInPopup(snip)
 	local a = vim.api
+	local conf = config.editSnippetPopup
 
 	local body = type(snip.body) == "string" and { snip.body } or snip.body ---@cast body string[]
 	local prefix = type(snip.prefix) == "string" and { snip.prefix } or snip.prefix ---@cast prefix string[]
@@ -141,20 +158,16 @@ function snippetAction.editInPopup(snip)
 	if guessedFt then a.nvim_buf_set_option(bufnr, "filetype", guessedFt) end
 	a.nvim_buf_set_option(bufnr, "buftype", "nofile")
 
-	local width = config.editSnippetPopup.width
-	local height = config.editSnippetPopup.height
-	local widthInCells = math.floor(width * a.nvim_win_get_width(0))
-	local heightInCells = math.floor(height * a.nvim_win_get_height(0))
 	local winnr = a.nvim_open_win(bufnr, true, {
 		relative = "win",
-		-- centered window
-		width = widthInCells,
-		height = heightInCells,
-		row = math.floor((1 - height) * a.nvim_win_get_height(0) / 2),
-		col = math.floor((1 - width) * a.nvim_win_get_width(0) / 2),
 		title = (" %s (%s) "):format(displayName, sourceFile),
 		title_pos = "center",
-		border = config.editSnippetPopup.border,
+		border = conf.border,
+		-- centered window
+		width = math.floor(conf.width * a.nvim_win_get_width(0)),
+		height = math.floor(conf.height * a.nvim_win_get_height(0)),
+		row = math.floor((1 - conf.height) * a.nvim_win_get_height(0) / 2),
+		col = math.floor((1 - conf.width) * a.nvim_win_get_width(0) / 2),
 		zindex = 1, -- below nvim-notify floats
 	})
 	a.nvim_win_set_option(winnr, "signcolumn", "no")
@@ -163,18 +176,20 @@ function snippetAction.editInPopup(snip)
 	vim.fn.matchadd("DiagnosticVirtualTextInfo", [[\$\d]])
 	vim.fn.matchadd("DiagnosticVirtualTextInfo", [[\${\d:.\{-}}]])
 
-	-- prefix lines
+	-- label "prefix #N"
 	local ns = a.nvim_create_namespace("snippet-manager")
-	for i = 1, prefixCount do -- label "prefix #N"
+	for i = 1, prefixCount do
 		local ln = i - 1
 		a.nvim_buf_set_extmark(bufnr, ns, 0, ln, {
 			virt_text = { { ("Prefix #%s"):format(i), "DiagnosticVirtualTextHint" } },
 			virt_text_pos = vim.fn.has("nvim-0.10") == 1 and "inline" or "right_align",
 		})
 	end
+	-- separator line
+	local winWidth = a.nvim_win_get_width(winnr)
 	a.nvim_buf_set_extmark(bufnr, ns, prefixCount - 1, 0, {
-		virt_lines = { -- separator line
-			{ { ("═"):rep(widthInCells), "FloatBorder" } },
+		virt_lines = {
+			{ { ("═"):rep(winWidth), "FloatBorder" } },
 		},
 	})
 
@@ -183,42 +198,28 @@ function snippetAction.editInPopup(snip)
 		a.nvim_win_close(winnr, true)
 		a.nvim_buf_delete(bufnr, { force = true })
 	end
-	vim.keymap.set("n", "<CR>", function()
+	vim.keymap.set("n", conf.keymaps.confirm, function()
 		local editedLines = a.nvim_buf_get_lines(bufnr, 0, -1, false)
 		updateSnippet(snip, editedLines)
 		notify("Snippet updated.")
 		close()
 	end, { buffer = bufnr, nowait = true })
-	vim.keymap.set("n", "q", function()
-		notify("Aborted. Snippet not changed.")
+	vim.keymap.set("n", conf.keymaps.cancel, function()
+		notify("Cancelled. Snippet not changed.")
 		close()
 	end, { buffer = bufnr, nowait = true })
-end
-
----@param snip snippetObj
-function snippetAction.openSnippetFile(snip)
-	local locationInFile = '"' .. snip.originalKey:gsub(" ", [[\ ]]) .. '":'
-	vim.cmd(("edit +/%s %s"):format(locationInFile, snip.path))
-end
-
----@param snip snippetObj
-function snippetAction.deleteSnippet(snip)
-	local snippetsInFile = readAndParseJson(snip.path)
-	snippetsInFile[snip.originalKey] = nil -- = delete
-	writeAndFormatSnippetFile(snip.path, snippetsInFile)
+	vim.keymap.set("n", conf.keymaps.delete, function()
+		notify("Snippet deleted.")
+		deleteSnippet(snip)
+		close()
+	end, { buffer = bufnr, nowait = true })
 end
 
 --------------------------------------------------------------------------------
 
 ---Searches a folder of vs-code-like snippets in json format and opens the selected.
----@param action? "editInPopup"|"openSnippetFile"|"deleteSnippet"
-function M.snippetSearch(action)
-	if not action then action = "editInPopup" end
-	if not vim.tbl_contains(vim.tbl_keys(snippetAction), action) then
-		notify("snippetSearch does not accept '" .. action .. "'", "error")
-		return
-	end
-
+function M.editSnippet()
+	-- get all snippets
 	local allSnippets = {} ---@type snippetObj[]
 	for name, _ in vim.fs.dir(config.snippetDir, { depth = 3 }) do
 		if name:find("%.json$") and name ~= "package.json" then
@@ -236,6 +237,7 @@ function M.snippetSearch(action)
 		end
 	end
 
+	-- let user select
 	vim.ui.select(allSnippets, {
 		prompt = "Select snippet:",
 		format_item = function(item)
@@ -246,7 +248,31 @@ function M.snippetSearch(action)
 		kind = "snippet-manager.snippetSearch",
 	}, function(snip)
 		if not snip then return end
-		snippetAction[action](snip)
+		editInPopup(snip)
+	end)
+end
+
+function M.addNewSnippet()
+
+	-- get all snippets JSON files
+	local jsonFiles = {}
+	for name, _ in vim.fs.dir(config.snippetDir, { depth = 3 }) do
+		if name:find("%.json$") and name ~= "package.json" then
+			table.insert(jsonFiles, name)
+		end
+	end
+
+	-- let user select
+	vim.ui.select(jsonFiles, {
+		prompt = "Select snippet file:",
+		format_item = function(item) return item:gsub("%.json$", "") end,
+		kind = "snippet-manager.fileSelect",
+	}, function(file)
+		if not file then return end
+		local snip = {
+			path = config.snippetDir .. "/" .. file .. ".json",
+		} 
+		-- editInPopup(snip)
 	end)
 end
 
