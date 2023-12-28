@@ -63,6 +63,17 @@ local function notify(msg, level)
 	vim.notify(msg, vim.log.levels[level:upper()], { title = "Snippet Manager" })
 end
 
+---@return boolean
+local function snippetDirExists()
+	local stat = vim.loop.fs_stat(config.snippetDir)
+	local exists = stat and stat.type == "directory"
+	if not exists then
+		notify("Snippet dir does not exist: " .. config.snippetDir, "error")
+		return false
+	end
+	return true
+end
+
 --------------------------------------------------------------------------------
 
 ---Tries to determine filetype based on input string. If input is neither a
@@ -256,6 +267,8 @@ end
 
 ---Searches a folder of vs-code-like snippets in json format and opens the selected.
 function M.editSnippet()
+	if not snippetDirExists() then return end
+
 	-- get all snippets
 	local allSnippets = {} ---@type snippetObj[]
 	for name, _ in vim.fs.dir(config.snippetDir, { depth = 3 }) do
@@ -290,6 +303,8 @@ function M.editSnippet()
 end
 
 function M.addNewSnippet()
+	if not snippetDirExists() then return end
+
 	-- get all snippets JSON files
 	local jsonFiles = {}
 	for name, _ in vim.fs.dir(config.snippetDir, { depth = 3 }) do

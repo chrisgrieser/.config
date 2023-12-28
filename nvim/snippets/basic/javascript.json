@@ -1,281 +1,284 @@
 {
-	"replace /gm": {
-		"prefix": "replace /gm",
-		"body": "replace(/${1:regexp}/gm, \"$2\")"
-	},
-	"replace": {
-		"prefix": "replace",
-		"body": "replace(/${1:regexp}/, \"$2\")"
-	},
-	"relative date": {
-		"prefix": "relative date",
-		"body": [
-			"/**",
-			" * @param {string} absoluteDate string to be converted to a date",
-			" * @return {string} relative date",
-			" */",
-			"function relativeDate(absoluteDate) {",
-			"\tconst deltaSecs = (+new Date() - +new Date(absoluteDate)) / 1000;",
-			"\t/** @type {\"year\"|\"month\"|\"week\"|\"day\"|\"hour\"|\"minute\"|\"second\"} */",
-			"\tlet unit;",
-			"\tlet delta;",
-			"\tif (deltaSecs < 60) {",
-			"\t\tunit = \"second\";",
-			"\t\tdelta = deltaSecs;",
-			"\t} else if (deltaSecs < 60 * 60) {",
-			"\t\tunit = \"minute\";",
-			"\t\tdelta = Math.ceil(deltaSecs / 60);",
-			"\t} else if (deltaSecs < 60 * 60 * 24) {",
-			"\t\tunit = \"hour\";",
-			"\t\tdelta = Math.ceil(deltaSecs / 60 / 60);",
-			"\t} else if (deltaSecs < 60 * 60 * 24 * 7) {",
-			"\t\tunit = \"day\";",
-			"\t\tdelta = Math.ceil(deltaSecs / 60 / 60 / 24);",
-			"\t} else if (deltaSecs < 60 * 60 * 24 * 7 * 4) {",
-			"\t\tunit = \"week\";",
-			"\t\tdelta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7);",
-			"\t} else if (deltaSecs < 60 * 60 * 24 * 7 * 4 * 12) {",
-			"\t\tunit = \"month\";",
-			"\t\tdelta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7 / 4);",
-			"\t} else {",
-			"\t\tunit = \"year\";",
-			"\t\tdelta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7 / 4 / 12);",
-			"\t}",
-			"\tconst formatter = new Intl.RelativeTimeFormat(\"en\", { style: \"long\", numeric: \"auto\" });",
-			"\treturn formatter.format(-delta, unit);",
-			"}"
-		]
-	},
-	"thousand separator": {
-		"prefix": "thousand separator",
-		"body": "replace(/\\B(?=(\\d{3})+(?!\\d))/g, \" \");",
-		"description": "insert thousand separator into a digit string"
-	},
-	"ignore (biome formatter)": {
-		"prefix": "ignore (biome formatter)",
-		"body": "// biome-ignore format: ${1:explanation}",
-		"description": "Ignores the next block of code."
-	},
-	"safe title": {
-		"prefix": "safe title",
-		"body": [
-			"const safeTitle = ${1:title}",
-			"\t.replaceAll(\"/\", \"-\")",
-			"\t.replace(/[\\\\$€§*#?!:;.,`\"'’‘„“”«»’{}]/g, \"\")",
-			"\t.replaceAll(\"&\", \"and\")",
-			"\t.replace(/ {2,}/g, \" \")",
-			"\t.slice(0, 50);"
-		]
-	},
-	"split by \\n": {
-		"prefix": ".split by \\n",
-		"body": ".split(\"\\n\")"
-	},
-	"split by \\r": {
-		"prefix": ".split by \\r",
-		"body": ".split(\"\\r\")",
-		"description": "required for output from app.doShellScript()"
-	},
-	"type definition (JSDoc)": {
-		"prefix": ["type definition (JSDoc)", "class definition (JSDoc)"],
-		"body": [
-			"/** @typedef {Object} ${1:name}",
-			"* @property {${2|string,number,boolean,() => void|}} ${3:prop1}",
-			"* @property {${4|string,number,boolean|}} ${5:prop2}",
-			"*/"
-		],
-		"description": "https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#typedef-callback-and-param"
-	},
-	"don't check file (TypeScript)": {
-		"prefix": [
-			"nocheck (TypeScript)",
-			"ts-nocheck",
-			"exclude (TypeScript)"
-		],
-		"body": "// @ts-nocheck",
-		"description": "instructs TypeScript to ignore the whole file"
-	},
-	"for (i++)": {
-		"prefix": "for (i++)",
-		"body": [
-			"for (let i = 0; i < ${1:array}.length; i++) {",
-			"\tconst ${2:element} = ${1:array}[i];",
-			"\t$0",
-			"}"
-		]
-	},
-	"for (i--)": {
-		"prefix": "for (i--)",
-		"body": [
-			"for (let i = ${1:array}.length - 1; i >= 0; i--) {",
-			"\tconst ${2:element} = ${1:array}[i];",
-			"\t$0",
-			"}"
-		]
-	},
-	"forEach": {
-		"prefix": "forEach =>",
-		"body": [
-			"forEach(${1:item} => {",
-			"\t$0",
-			"});"
-		]
-	},
-	"reduce()": {
-		"prefix": "reduce()",
-		"body": [
-			".reduce((acc, ${1:item}) => {",
-			"\t$0",
-			"\treturn acc",
-			"}, ${2:initial_value})"
-		]
-	},
-	"map ( () => {} )": {
-		"prefix": "map ( () => {} )",
-		"body": [
-			".map(${1:item} => {",
-			"\t$0",
-			"\treturn ${1:item};",
-			"})"
-		]
-	},
-	"map ( => )": {
-		"prefix": "map ( => )",
-		"body": "map(${1:item} => ${1:item}$0)"
-	},
-	"filter ( => )": {
-		"prefix": "filter ( => )",
-		"body": "filter(${1:item} => ${1:item}$0)"
-	},
-	"sort ( () => {} )": {
-		"prefix": "sort ( () => {} )",
-		"body": [
-			"sort((a, b) => {",
-			"\treturn ${1:b - a};",
-			"})"
-		],
-		"description": "Sort Array with basic a-b-comparator function"
-	},
-	"unique items": {
-		"prefix": "unique items",
-		"body": "${1:arr} = [...new Set(${2:arr})];"
-	},
-	"today's date": {
-		"prefix": [
-			"today",
-			"date"
-		],
-		"body": "const today = new Date();"
-	},
-	"tomorrow's date": {
-		"prefix": [
-			"tomorrow",
-			"date"
-		],
-		"body": [
-			"const tomorrow = new Date();",
-			"tomorrow.setDate(tomorrow.getDate() + 1);"
-		]
-	},
-	"today as ISO 8601 string": {
-		"prefix": "ISO date",
-		"body": "new Date().toISOString().slice(0, 10);"
-	},
-	"for .. in (object-key)": {
-		"prefix": "for .. in (object-key)",
-		"body": [
-			"for (const ${1:key} in ${2:object}) {",
-			"\t$0$",
-			"}"
-		]
-	},
-	"ternary": {
-		"prefix": "ternary",
-		"body": "${1:condition} ? ${2:value1} : ${3:value2}"
-	},
-	"for .. of (array)": {
-		"prefix": "for .. of (array)",
-		"body": [
-			"for (const ${1:iterator} of ${2:array}) {",
-			"\t$0",
-			"}"
-		]
-	},
-	"if ..": {
-		"prefix": "if",
-		"body": [
-			"if (${1:condition}) {",
-			"\t$0",
-			"}"
-		]
-	},
-	"if .. else": {
-		"prefix": "if .. else",
-		"body": [
-			"if (${1:condition}) {",
-			"\t$0",
-			"} else {",
-			"\t",
-			"}"
-		]
-	},
-	"argv (node)": {
-		"prefix": "argv (node)",
-		"body": "const argv = process.argv.slice(2);",
-		"description": "Arguments from the command line. [0] is the node executable path, [1] the path of the file being executed, making [2] the first positional argument."
-	},
-	"switch .. case": {
-		"prefix": "switch .. case",
-		"body": [
-			"switch (${1:key}) {",
-			"\tcase ${2:value}:",
-			"\t\t$0",
-			"\t\tbreak;",
-			"\tdefault:",
-			"\t\tbreak;",
-			"}"
-		]
-	},
-	"While ..": {
-		"prefix": "while ..",
-		"body": [
-			"while (${1:condition}) {",
-			"\t$0",
-			"}"
-		]
-	},
-	"do .. while ..": {
-		"prefix": [
-			"do .. while",
-			"repeat until"
-		],
-		"body": [
-			"do {",
-			"\t$0",
-			"} while (${1:condition});"
-		]
-	},
-	"try .. catch": {
-		"prefix": "try .. catch",
-		"body": [
-			"try {",
-			"\t$0",
-			"} catch (_error) {",
-			"\t",
-			"}"
-		],
-		"description": "leading underscore so the variable is ignored by biome when not used."
-	},
-	"Set Timeout Function": {
-		"prefix": [
-			"settimeout",
-			"timeout",
-			"delay"
-		],
-		"body": [
-			"setTimeout(() => {",
-			"\t$0",
-			"}, ${1:timeoutMs});"
-		]
-	}
+  "Set Timeout Function": {
+    "body": [
+      "setTimeout(() => {",
+      "\t$0",
+      "}, ${1:timeoutMs});"
+    ],
+    "prefix": [
+      "settimeout",
+      "timeout",
+      "delay"
+    ]
+  },
+  "While ..": {
+    "body": [
+      "while (${1:condition}) {",
+      "\t$0",
+      "}"
+    ],
+    "prefix": "while .."
+  },
+  "argv (node)": {
+    "body": "const argv = process.argv.slice(2);",
+    "description": "Arguments from the command line. [0] is the node executable path, [1] the path of the file being executed, making [2] the first positional argument.",
+    "prefix": "argv (node)"
+  },
+  "do .. while ..": {
+    "body": [
+      "do {",
+      "\t$0",
+      "} while (${1:condition});"
+    ],
+    "prefix": [
+      "do .. while",
+      "repeat until"
+    ]
+  },
+  "don't check file (TypeScript)": {
+    "body": "// @ts-nocheck",
+    "description": "instructs TypeScript to ignore the whole file",
+    "prefix": [
+      "nocheck (TypeScript)",
+      "ts-nocheck",
+      "exclude (TypeScript)"
+    ]
+  },
+  "filter ( => )": {
+    "body": "filter(${1:item} => ${1:item}$0)",
+    "prefix": "filter ( => )"
+  },
+  "for (i++)": {
+    "body": [
+      "for (let i = 0; i < ${1:array}.length; i++) {",
+      "\tconst ${2:element} = ${1:array}[i];",
+      "\t$0",
+      "}"
+    ],
+    "prefix": "for (i++)"
+  },
+  "for (i--)": {
+    "body": [
+      "for (let i = ${1:array}.length - 1; i >= 0; i--) {",
+      "\tconst ${2:element} = ${1:array}[i];",
+      "\t$0",
+      "}"
+    ],
+    "prefix": "for (i--)"
+  },
+  "for .. in (object-key)": {
+    "body": [
+      "for (const ${1:key} in ${2:object}) {",
+      "\t$0$",
+      "}"
+    ],
+    "prefix": "for .. in (object-key)"
+  },
+  "for .. of (array)": {
+    "body": [
+      "for (const ${1:iterator} of ${2:array}) {",
+      "\t$0",
+      "}"
+    ],
+    "prefix": "for .. of (array)"
+  },
+  "forEach": {
+    "body": [
+      "forEach(${1:item} => {",
+      "\t$0",
+      "});"
+    ],
+    "prefix": "forEach =>"
+  },
+  "if ..": {
+    "body": [
+      "if (${1:condition}) {",
+      "\t$0",
+      "}"
+    ],
+    "prefix": "if"
+  },
+  "if .. else": {
+    "body": [
+      "if (${1:condition}) {",
+      "\t$0",
+      "} else {",
+      "\t",
+      "}"
+    ],
+    "prefix": "if .. else"
+  },
+  "ignore (biome formatter)": {
+    "body": "// biome-ignore format: ${1:explanation}",
+    "description": "Ignores the next block of code.",
+    "prefix": "ignore (biome formatter)"
+  },
+  "map ( () => {} )": {
+    "body": [
+      ".map(${1:item} => {",
+      "\t$0",
+      "\treturn ${1:item};",
+      "})"
+    ],
+    "prefix": "map ( () => {} )"
+  },
+  "map ( => )": {
+    "body": "map(${1:item} => ${1:item}$0)",
+    "prefix": "map ( => )"
+  },
+  "reduce()": {
+    "body": [
+      ".reduce((acc, ${1:item}) => {",
+      "\t$0",
+      "\treturn acc",
+      "}, ${2:initial_value})"
+    ],
+    "prefix": "reduce()"
+  },
+  "relative date": {
+    "body": [
+      "/**",
+      " * @param {string} absoluteDate string to be converted to a date",
+      " * @return {string} relative date",
+      " */",
+      "function relativeDate(absoluteDate) {",
+      "\tconst deltaSecs = (+new Date() - +new Date(absoluteDate)) / 1000;",
+      "\t/** @type {\"year\"|\"month\"|\"week\"|\"day\"|\"hour\"|\"minute\"|\"second\"} */",
+      "\tlet unit;",
+      "\tlet delta;",
+      "\tif (deltaSecs < 60) {",
+      "\t\tunit = \"second\";",
+      "\t\tdelta = deltaSecs;",
+      "\t} else if (deltaSecs < 60 * 60) {",
+      "\t\tunit = \"minute\";",
+      "\t\tdelta = Math.ceil(deltaSecs / 60);",
+      "\t} else if (deltaSecs < 60 * 60 * 24) {",
+      "\t\tunit = \"hour\";",
+      "\t\tdelta = Math.ceil(deltaSecs / 60 / 60);",
+      "\t} else if (deltaSecs < 60 * 60 * 24 * 7) {",
+      "\t\tunit = \"day\";",
+      "\t\tdelta = Math.ceil(deltaSecs / 60 / 60 / 24);",
+      "\t} else if (deltaSecs < 60 * 60 * 24 * 7 * 4) {",
+      "\t\tunit = \"week\";",
+      "\t\tdelta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7);",
+      "\t} else if (deltaSecs < 60 * 60 * 24 * 7 * 4 * 12) {",
+      "\t\tunit = \"month\";",
+      "\t\tdelta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7 / 4);",
+      "\t} else {",
+      "\t\tunit = \"year\";",
+      "\t\tdelta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7 / 4 / 12);",
+      "\t}",
+      "\tconst formatter = new Intl.RelativeTimeFormat(\"en\", { style: \"long\", numeric: \"auto\" });",
+      "\treturn formatter.format(-delta, unit);",
+      "}"
+    ],
+    "prefix": "relative date"
+  },
+  "replace": {
+    "body": "replace(/${1:regexp}/, \"$2\")",
+    "prefix": "replace"
+  },
+  "replace /gm": {
+    "body": "replace(/${1:regexp}/gm, \"$2\")",
+    "prefix": "replace /gm"
+  },
+  "safe title": {
+    "body": [
+      "const safeTitle = ${1:title}",
+      "\t.replaceAll(\"/\", \"-\")",
+      "\t.replace(/[\\\\$€§*#?!:;.,`\"'’‘„“”«»’{}]/g, \"\")",
+      "\t.replaceAll(\"&\", \"and\")",
+      "\t.replace(/ {2,}/g, \" \")",
+      "\t.slice(0, 50);"
+    ],
+    "prefix": "safe title"
+  },
+  "sort ( () => {} )": {
+    "body": [
+      "sort((a, b) => {",
+      "\treturn ${1:b - a};",
+      "})"
+    ],
+    "description": "Sort Array with basic a-b-comparator function",
+    "prefix": "sort ( () => {} )"
+  },
+  "split by \\n": {
+    "body": ".split(\"\\n\")",
+    "prefix": ".split by \\n"
+  },
+  "split by \\r": {
+    "body": ".split(\"\\r\")",
+    "description": "required for output from app.doShellScript()",
+    "prefix": ".split by \\r"
+  },
+  "switch .. case": {
+    "body": [
+      "switch (${1:key}) {",
+      "\tcase ${2:value}:",
+      "\t\t$0",
+      "\t\tbreak;",
+      "\tdefault:",
+      "\t\tbreak;",
+      "}"
+    ],
+    "prefix": "switch .. case"
+  },
+  "ternary": {
+    "body": "${1:condition} ? ${2:value1} : ${3:value2}",
+    "prefix": "ternary"
+  },
+  "thousand separator": {
+    "body": "replace(/\\B(?=(\\d{3})+(?!\\d))/g, \" \");",
+    "description": "insert thousand separator into a digit string",
+    "prefix": "thousand separator"
+  },
+  "today as ISO 8601 string": {
+    "body": "new Date().toISOString().slice(0, 10);",
+    "prefix": "ISO date"
+  },
+  "today's date": {
+    "body": "const today = new Date();",
+    "prefix": [
+      "today",
+      "date"
+    ]
+  },
+  "tomorrow's date": {
+    "body": [
+      "const tomorrow = new Date();",
+      "tomorrow.setDate(tomorrow.getDate() + 1);"
+    ],
+    "prefix": [
+      "tomorrow",
+      "date"
+    ]
+  },
+  "try .. catch": {
+    "body": [
+      "try {",
+      "\t$0",
+      "} catch (_error) {",
+      "\t",
+      "}"
+    ],
+    "description": "leading underscore so the variable is ignored by biome when not used.",
+    "prefix": "try .. catch"
+  },
+  "type definition (JSDoc)": {
+    "body": [
+      "/** @typedef {Object} ${1:name}",
+      "* @property {${2|string,number,boolean,() => void|}} ${3:prop1}",
+      "* @property {${4|string,number,boolean|}} ${5:prop2}",
+      "*/"
+    ],
+    "description": "https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#typedef-callback-and-param",
+    "prefix": [
+      "type definition (JSDoc)",
+      "class definition (JSDoc)"
+    ]
+  },
+  "unique items": {
+    "body": "${1:arr} = [...new Set(${2:arr})];",
+    "prefix": "unique items"
+  }
 }

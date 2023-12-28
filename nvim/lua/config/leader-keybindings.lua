@@ -55,6 +55,8 @@ keymap(
 )
 
 --------------------------------------------------------------------------------
+
+-- fd -I ".json" | xargs -I {} yq --inplace --output-format=json "sort_keys(..)" {}
 u.leaderSubkey("n", " Snippets")
 keymap(
 	"n",

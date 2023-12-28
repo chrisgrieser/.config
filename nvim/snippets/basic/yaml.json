@@ -1,7 +1,7 @@
 {
-	"schema (modeline)": {
-		"prefix": "schema (modeline)",
-		"body": "# yaml-language-server: $$schema=${1:url}",
-		"description": "https://github.com/redhat-developer/yaml-language-server#using-inlined-schema"
-	}
+  "schema (modeline)": {
+    "body": "# yaml-language-server: $$schema=${1:url}",
+    "description": "https://github.com/redhat-developer/yaml-language-server#using-inlined-schema",
+    "prefix": "schema (modeline)"
+  }
 }

@@ -1,116 +1,155 @@
 {
-	"get active file/TFile": {
-		"description": "Obsidian: Get the TFile of the currently active note.",
-		"prefix": ["tFile", "active file", "current"],
-		"body": "const ${1:activeFile} = this.app.workspace.getActiveFile();"
-	},
-	"vim mode": {
-		"prefix": "vim mode",
-		"body": "app.workspace.activeEditor.editor.cm.cm.state.vim.mode"
-	},
-	"get Tfile of active leaf": {
-		"description": "Obsidian: Get the TFile of a leaf, checking if the active leaf is a markdown file.",
-		"prefix": "tFile of leaf",
-		"body": [
-			"const currentLeaf = this.app.workspace.activeLeaf();",
-			"const tfile = currentLeaf.view instanceof MarkdownView ? currentLeaf.view.file : null;"
-		]
-	},
-	"recent files": {
-		"description": "Obsidian: Get the 10 most recent files, as an array of file-path strings. (The 10 most recent files are the ones visible in the Quick Switcher, when there no input yet.)",
-		"prefix": ["recent files", "Quick Switcher: recent files", "last opened files"],
-		"body": "const recentFiles = this.app.workspace.getLastOpenFiles();"
-	},
-	"get editor": {
-		"description": "Obsidian: Get the editor of the currently active note.",
-		"prefix": ["editor", "active file", "current"],
-		"body": [
-			"// getActiveViewOfType will return null if the active view is",
-			"// null or not of type MarkdownView.",
-			"const view = app.workspace.getActiveViewOfType(MarkdownView);",
-			"if (view) {",
-			"\tconst editor = view.editor;",
-			"\t${1: // Do something with editor}",
-			"}"
-		]
-	},
-	"get TFile from path": {
-		"description": "Obsidian: Get the TFile corresponding to the (vault-relative) file path string.",
-		"prefix": ["TFile from file path", "file path to TFile"],
-		"body": "this.app.vault.getAbstractFileByPath(${1:filepath});"
-	},
-	"add command": {
-		"description": "Obsidian: Add a command to the command palette, making it also available as a hotkey. Usually added to the `onload()` call of the plugin.",
-		"prefix": ["add command", "register command"],
-		"body": [
-			"this.addCommand({",
-			"\tid: \"${1:command-id}\",",
-			"\tname: \"${2:commandName}\",",
-			"\tcallback: () => this.${3:method}(),",
-			"});"
-		]
-	},
-	"add editor command": {
-		"description": "Obsidian: Add a command to the command palette that is only active in edit mode and passes the currently active editor to the respective method.",
-		"prefix": ["add editor command", "register editor command"],
-		"body": [
-			"this.addCommand({",
-			"\tid: \"${1:command-id}\",",
-			"\tname: \"${2:commandName}\",",
-			"\teditorCallback: (editor) => this.${3:method}(editor),",
-			"});"
-		]
-	},
-	"append to note": {
-		"prefix": "append to note",
-		"body": "await this.app.vault.append(${1:TFile}, ${2:textToAppend});"
-	},
-	"read note content": {
-		"prefix": "read note content",
-		"body": "await this.app.vault.read(${1:TFile});"
-	},
-	"write note content": {
-		"prefix": "write note content",
-		"body": "await this.app.vault.append(${1:TFile}, ${2:textToWrite});"
-	},
-	"Run Command": {
-		"prefix": "Run Command",
-		"description": "Run a command from another plugin or from Obsidian core.",
-		"body": "this.app.commands.executeCommandById(${1:cmd-id});"
-	},
-	"set config": {
-		"prefix": "set config",
-		"description": "Set a configuration value for the core Obsidian settings.",
-		"body": "this.app.vault.setConfig(\"${1:config-name}\", ${2:value});"
-	},
-	"get config": {
-		"prefix": "get config",
-		"description": "Get a configuration value from the core Obsidian settings.",
-		"body": "const ${1:config-name} = this.app.vault.getConfig(\"${1:config-name}\");"
-	},
-	"Multiple Cursors?": {
-		"description": "Obsidian: Check whether there are currently multiple cursors.",
-		"prefix": ["cursors", "multiple cursors", "multiple selections"],
-		"body": "const hasMultipleCursors = editor.listSelections().length > 1;"
-	},
-	"Write a file": {
-		"description": "Obsidian: Write text to an existing file.",
-		"prefix": ["modify file", "write to file", "change file"],
-		"body": "this.app.vault.modify(${1:TFile}, ${2:text});"
-	},
-	"get selection (edit mode)": {
-		"description": "Obsidian: Get the selection in Live Preview / Source mode.",
-		"prefix": ["selection", "selected text"],
-		"body": "const selection = editor.getSelection();"
-	},
-	"get selection (reading mode)": {
-		"description": "Obsidian: Get the selection in Reading Mode. (Note that this will retrieve plain text without formatting.)",
-		"prefix": ["selection", "selected text"],
-		"body": "const selection = activeWindow.getSelection().toString();"
-	},
-	"Notification": {
-		"description": "Obsidian: Create notification",
-		"prefix": ["notice", "notify", "notification"],
-		"body": "new Notice (\"${1:msg}\");"
-	}
+  "Multiple Cursors?": {
+    "body": "const hasMultipleCursors = editor.listSelections().length > 1;",
+    "description": "Obsidian: Check whether there are currently multiple cursors.",
+    "prefix": [
+      "cursors",
+      "multiple cursors",
+      "multiple selections"
+    ]
+  },
+  "Notification": {
+    "body": "new Notice (\"${1:msg}\");",
+    "description": "Obsidian: Create notification",
+    "prefix": [
+      "notice",
+      "notify",
+      "notification"
+    ]
+  },
+  "Run Command": {
+    "body": "this.app.commands.executeCommandById(${1:cmd-id});",
+    "description": "Run a command from another plugin or from Obsidian core.",
+    "prefix": "Run Command"
+  },
+  "Write a file": {
+    "body": "this.app.vault.modify(${1:TFile}, ${2:text});",
+    "description": "Obsidian: Write text to an existing file.",
+    "prefix": [
+      "modify file",
+      "write to file",
+      "change file"
+    ]
+  },
+  "add command": {
+    "body": [
+      "this.addCommand({",
+      "\tid: \"${1:command-id}\",",
+      "\tname: \"${2:commandName}\",",
+      "\tcallback: () => this.${3:method}(),",
+      "});"
+    ],
+    "description": "Obsidian: Add a command to the command palette, making it also available as a hotkey. Usually added to the `onload()` call of the plugin.",
+    "prefix": [
+      "add command",
+      "register command"
+    ]
+  },
+  "add editor command": {
+    "body": [
+      "this.addCommand({",
+      "\tid: \"${1:command-id}\",",
+      "\tname: \"${2:commandName}\",",
+      "\teditorCallback: (editor) => this.${3:method}(editor),",
+      "});"
+    ],
+    "description": "Obsidian: Add a command to the command palette that is only active in edit mode and passes the currently active editor to the respective method.",
+    "prefix": [
+      "add editor command",
+      "register editor command"
+    ]
+  },
+  "append to note": {
+    "body": "await this.app.vault.append(${1:TFile}, ${2:textToAppend});",
+    "prefix": "append to note"
+  },
+  "get TFile from path": {
+    "body": "this.app.vault.getAbstractFileByPath(${1:filepath});",
+    "description": "Obsidian: Get the TFile corresponding to the (vault-relative) file path string.",
+    "prefix": [
+      "TFile from file path",
+      "file path to TFile"
+    ]
+  },
+  "get Tfile of active leaf": {
+    "body": [
+      "const currentLeaf = this.app.workspace.activeLeaf();",
+      "const tfile = currentLeaf.view instanceof MarkdownView ? currentLeaf.view.file : null;"
+    ],
+    "description": "Obsidian: Get the TFile of a leaf, checking if the active leaf is a markdown file.",
+    "prefix": "tFile of leaf"
+  },
+  "get active file/TFile": {
+    "body": "const ${1:activeFile} = this.app.workspace.getActiveFile();",
+    "description": "Obsidian: Get the TFile of the currently active note.",
+    "prefix": [
+      "tFile",
+      "active file",
+      "current"
+    ]
+  },
+  "get config": {
+    "body": "const ${1:config-name} = this.app.vault.getConfig(\"${1:config-name}\");",
+    "description": "Get a configuration value from the core Obsidian settings.",
+    "prefix": "get config"
+  },
+  "get editor": {
+    "body": [
+      "// getActiveViewOfType will return null if the active view is",
+      "// null or not of type MarkdownView.",
+      "const view = app.workspace.getActiveViewOfType(MarkdownView);",
+      "if (view) {",
+      "\tconst editor = view.editor;",
+      "\t${1: // Do something with editor}",
+      "}"
+    ],
+    "description": "Obsidian: Get the editor of the currently active note.",
+    "prefix": [
+      "editor",
+      "active file",
+      "current"
+    ]
+  },
+  "get selection (edit mode)": {
+    "body": "const selection = editor.getSelection();",
+    "description": "Obsidian: Get the selection in Live Preview / Source mode.",
+    "prefix": [
+      "selection",
+      "selected text"
+    ]
+  },
+  "get selection (reading mode)": {
+    "body": "const selection = activeWindow.getSelection().toString();",
+    "description": "Obsidian: Get the selection in Reading Mode. (Note that this will retrieve plain text without formatting.)",
+    "prefix": [
+      "selection",
+      "selected text"
+    ]
+  },
+  "read note content": {
+    "body": "await this.app.vault.read(${1:TFile});",
+    "prefix": "read note content"
+  },
+  "recent files": {
+    "body": "const recentFiles = this.app.workspace.getLastOpenFiles();",
+    "description": "Obsidian: Get the 10 most recent files, as an array of file-path strings. (The 10 most recent files are the ones visible in the Quick Switcher, when there no input yet.)",
+    "prefix": [
+      "recent files",
+      "Quick Switcher: recent files",
+      "last opened files"
+    ]
+  },
+  "set config": {
+    "body": "this.app.vault.setConfig(\"${1:config-name}\", ${2:value});",
+    "description": "Set a configuration value for the core Obsidian settings.",
+    "prefix": "set config"
+  },
+  "vim mode": {
+    "body": "app.workspace.activeEditor.editor.cm.cm.state.vim.mode",
+    "prefix": "vim mode"
+  },
+  "write note content": {
+    "body": "await this.app.vault.append(${1:TFile}, ${2:textToWrite});",
+    "prefix": "write note content"
+  }
 }

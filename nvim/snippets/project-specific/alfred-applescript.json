@@ -1,10 +1,10 @@
 {
-	"Get Alfred Env": {
-		"prefix": "Get Alfred Env",
-		"body": "set ${1:envvar} to (system attribute \"${1:envvar}\")"
-	},
-	"argv": {
-		"prefix": "argv",
-		"body": "set input to argv as string"
-	}
+  "Get Alfred Env": {
+    "body": "set ${1:envvar} to (system attribute \"${1:envvar}\")",
+    "prefix": "Get Alfred Env"
+  },
+  "argv": {
+    "body": "set input to argv as string",
+    "prefix": "argv"
+  }
 }

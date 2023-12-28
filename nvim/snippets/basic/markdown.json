@@ -1,59 +1,97 @@
 {
-	"note (GitHub callout)": {
-		"prefix": ["info (callout)", "note (callout)"],
-		"body": ["> [!NOTE]", "> $0"],
-		"description": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts"
-	},
-	"warning (callout)": {
-		"prefix": "warning (callout)",
-		"body": ["> [!WARNING]", "> $0"],
-		"description": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts"
-	},
-	"important (callout)": {
-		"prefix": "important (callout)",
-		"body": ["> [!IMPORTANT]", "> $0"],
-		"description": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts"
-	},
-	"tip (callout)": {
-		"prefix": "tip (callout)",
-		"body": ["> [!TIP]", "> $0"],
-		"description": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts"
-	},
-	"caution (callout)": {
-		"prefix": "caution (callout)",
-		"body": ["> [!CAUTION]", "> $0"],
-		"description": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts"
-	},
-	"insert toc": {
-		"prefix": "insert toc",
-		"body": "<!-- toc -->",
-		"description": "https://github.com/jonschlinkert/markdown-toc#tocinsert"
-	},
-	"Markdown Codeblock": {
-		"prefix": [",,", "Codeblock", "```"],
-		"body": ["```${1:lang}", "$0", "```"]
-	},
-	"<kbd>": {
-		"prefix": ["kbd", "<kbd>", "key"],
-		"body": "<kbd>$0</kbd>",
-		"description": "HTML tag for keys"
-	},
-	"image": {
-		"prefix": "image",
-		"body": "<img src=\"${1:image_path}\" alt=\"${2:alt text}\" width=\"${3:50%}\">",
-		"description": "HTML syntax for images used to display images with reduced size"
-	},
-	"details & summary": {
-		"prefix": ["toggle / fold", "details & summary"],
-		"body": ["<details>", "<summary>${1:Text}</summary>", "$0", "</details>"],
-		"description": "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details"
-	},
-	"insert table 2x2": {
-		"prefix": "table (2x2)",
-		"body": [
-			"| ${1:Column1}   | ${2:Column2}   |",
-			"|--------------- | -------------- |",
-			"| ${3:Item1.1}   | ${4:Item2.1}   |"
-		]
-	}
+  "<kbd>": {
+    "body": "<kbd>$0</kbd>",
+    "description": "HTML tag for keys",
+    "prefix": [
+      "kbd",
+      "<kbd>",
+      "key"
+    ]
+  },
+  "Markdown Codeblock": {
+    "body": [
+      "```${1:lang}",
+      "$0",
+      "```"
+    ],
+    "prefix": [
+      ",,",
+      "Codeblock",
+      "```"
+    ]
+  },
+  "caution (callout)": {
+    "body": [
+      "> [!CAUTION]",
+      "> $0"
+    ],
+    "description": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts",
+    "prefix": "caution (callout)"
+  },
+  "details & summary": {
+    "body": [
+      "<details>",
+      "<summary>${1:Text}</summary>",
+      "$0",
+      "</details>"
+    ],
+    "description": "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details",
+    "prefix": [
+      "toggle / fold",
+      "details & summary"
+    ]
+  },
+  "image": {
+    "body": "<img src=\"${1:image_path}\" alt=\"${2:alt text}\" width=\"${3:50%}\">",
+    "description": "HTML syntax for images used to display images with reduced size",
+    "prefix": "image"
+  },
+  "important (callout)": {
+    "body": [
+      "> [!IMPORTANT]",
+      "> $0"
+    ],
+    "description": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts",
+    "prefix": "important (callout)"
+  },
+  "insert table 2x2": {
+    "body": [
+      "| ${1:Column1}   | ${2:Column2}   |",
+      "|--------------- | -------------- |",
+      "| ${3:Item1.1}   | ${4:Item2.1}   |"
+    ],
+    "prefix": "table (2x2)"
+  },
+  "insert toc": {
+    "body": "<!-- toc -->",
+    "description": "https://github.com/jonschlinkert/markdown-toc#tocinsert",
+    "prefix": "insert toc"
+  },
+  "note (GitHub callout)": {
+    "body": [
+      "> [!NOTE]",
+      "> $0"
+    ],
+    "description": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts",
+    "prefix": [
+      "info (callout)",
+      "note (callout)"
+    ]
+  },
+  "tip (callout)": {
+    "body": [
+      "> [!TIP]",
+      "> $0"
+    ],
+    "description": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts",
+    "prefix": "tip (callout)"
+  },
+  "warning (callout)": {
+    "body": [
+      "> [!WARNING]",
+      "> $0"
+    ],
+    "description": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts",
+    "prefix": "warning (callout)"
+  }
 }
