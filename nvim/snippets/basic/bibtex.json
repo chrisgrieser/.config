@@ -1,14 +1,14 @@
 {
-	"new entry template": {
-		"prefix": "new entry",
-		"body": [
-			"@${1:article}{${2:citekey},",
-			"\ttitle = {{${3:title}}},",
-			"\tauthor = {${4:names}},",
-			"\tyear = ${5:year},",
-			"\tkeywords = {$6}",
-			"}",
-			"$0"
-		]
-	}
+  "new entry template": {
+    "body": [
+      "@${1:article}{${2:citekey},",
+      "\ttitle = {{${3:title}}},",
+      "\tauthor = {${4:names}},",
+      "\tyear = ${5:year},",
+      "\tkeywords = {$6}",
+      "}",
+      "$0"
+    ],
+    "prefix": "new entry"
+  }
 }

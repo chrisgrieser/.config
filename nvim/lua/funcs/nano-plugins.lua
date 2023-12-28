@@ -233,7 +233,7 @@ function M.docstring()
 		vim.defer_fn(function()
 			require("cmp").complete()
 			require("cmp").confirm { select = true }
-		end, 100)
+		end, 200)
 	elseif ft == "javascript" then
 		normal("t)") -- go to parameter, since cursor has to be on diagnostic for code action
 		vim.lsp.buf.code_action {

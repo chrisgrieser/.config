@@ -1,199 +1,208 @@
 {
-	"shebang": {
-		"prefix": "shebang",
-		"body": "#!/usr/bin/env osascript -l JavaScript"
-	},
-	"http request": {
-		"prefix": "http request",
-		"description": "http request via c-bridge",
-		"body": [
-			"/** @param {string} url */",
-			"function httpRequest(url) {",
-			"\tconst queryURL = $.NSURL.URLWithString(url);",
-			"\tconst requestData = $.NSData.dataWithContentsOfURL(queryURL);",
-			"\tconst requestString = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;",
-			"\treturn requestString;",
-			"}"
-		]
-	},
-	"keystroke": {
-		"prefix": "keystroke",
-		"body": "Application(\"System Events\").keystroke(\"${1:key}\", {using: [\"${2:command} down\"]});"
-	},
-	"get Finder item": {
-		"prefix": "get Finder item",
-		"body": "Application(\"System Events\").aliases[${1:filepath}];",
-		"description": "https://apple.stackexchange.com/a/409691"
-	},
-	"check if app is running": {
-		"prefix": "check if app is running",
-		"body": "Application(\"${1:appName}\").running()"
-	},
-	"check if app is frontmost": {
-		"prefix": "check if app is frontmost",
-		"body": "Application(\"${1:appName}\").frontmost();"
-	},
-	"running apps array": {
-		"prefix": "running apps array",
-		"body": "Application(\"System Events\").applicationProcesses.where({ backgroundOnly: false }).displayedName();"
-	},
-	"notification": {
-		"prefix": ["notification", "displayNotification"],
-		"body": "app.displayNotification(\"\", { withTitle: \"${1:title}\", subtitle: \"${2:subtitle}\" })"
-	},
-	"app (define)": {
-		"prefix": "app (define)",
-		"body": ["const app = Application.currentApplication()", "app.includeStandardAdditions = true;"]
-	},
-	"open location (url)": {
-		"prefix": "open location (url)",
-		"body": "app.openLocation(\"${1:url}\");"
-	},
-	"set clipboard (string)": {
-		"prefix": "set clipboard (string)",
-		"body": "app.setTheClipboardTo(${1:\"str\"});"
-	},
-	"get clipboard": {
-		"prefix": "get clipboard",
-		"body": ["app.includeStandardAdditions = true;", "const clipb = app.theClipboard();"]
-	},
-	"set clipboard (file)": {
-		"prefix": "set clipboard (file)",
-		"body": [
-			"ObjC.import(\"AppKit\");",
-			"",
-			"/** @param {string} path */",
-			"function copyPathToClipboard(path) {",
-			"\tconst pasteboard = $.NSPasteboard.generalPasteboard;",
-			"\tpasteboard.clearContents;",
-			"\tconst success = pasteboard.setPropertyListForType($([path]), $.NSFilenamesPboardType);",
-			"\treturn success;",
-			"}"
-		],
-		"description": "https://github.com/JXA-Cookbook/JXA-Cookbook/wiki/User-Interaction-with-Files-and-Folders#copy-a-file-to-pasteboard"
-	},
-	"home (JXA)": {
-		"prefix": "home (JXA)",
-		"body": "app.pathTo(\"home folder\")"
-	},
-	"file exists": {
-		"prefix": "file exists",
-		"body": "const fileExists = (/** @type {string} */ filePath) => Application(\"Finder\").exists(Path(filePath));"
-	},
-	"cache (check if outdated)": {
-		"prefix": "cache (check if outdated)",
-		"body": [
-			"/** @param {string} path */",
-			"function cacheIsOutdated(path) {",
-			"\tconst cacheAgeThresholdMins = ${1:60};",
-			"\tensureCacheFolderExists();",
-			"\tconst cacheObj = Application(\"System Events\").aliases[path];",
-			"\tif (!cacheObj.exists()) return true;",
-			"\tconst cacheAgeMins = (+new Date() - cacheObj.creationDate()) / 1000 / 60;",
-			"\treturn cacheAgeMins > cacheAgeThresholdMins;",
-			"}"
-		]
-	},
-	"window path (Finder)": {
-		"prefix": "window path (Finder)",
-		"body": [
-			"/** @return {string|null} */",
-			"function finderFrontWindow(){",
-			"\tconst win = Application(\"Finder\").finderWindows[0]",
-			"\tif (!win) return null;",
-			"\treturn $.NSURL.alloc.initWithString(win.target.url()).fileSystemRepresentation;",
-			"}"
-		]
-	},
-	"selection (Finder)": {
-		"prefix": "selection (Finder)",
-		"body": [
-			"function finderSelection () {",
-			"\tconst selection = decodeURI(Application(\"Finder\").selection()[0]?.url());",
-			"\tif (selection === \"undefined\") return \"\"; // no selection",
-			"\treturn selection.slice(7);",
-			"}"
-		]
-	},
-	"read file": {
-		"prefix": "read file",
-		"body": [
-			"/** @param {string} path */",
-			"function readFile(path) {",
-			"\tconst data = $.NSFileManager.defaultManager.contentsAtPath(path);",
-			"\tconst str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);",
-			"\treturn ObjC.unwrap(str);",
-			"}"
-		]
-	},
-	"write to file": {
-		"prefix": "write to file",
-		"body": [
-			"/** @param {string} filepath @param {string} text */",
-			"function writeToFile(filepath, text) {",
-			"\tconst str = $.NSString.alloc.initWithUTF8String(text);",
-			"\tstr.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);",
-			"}"
-		]
-	},
-	"hide app": {
-		"prefix": "hide app",
-		"body": [
-			"const process = Application(\"System Events\").applicationProcesses.byName(\"${1:processName}\");",
-			"if (process) { process.visible = false; }"
-		]
-	},
-	"front window title": {
-		"prefix": "front window title",
-		"body": [
-			"const frontWinName = Application(\"System Events\").processes.whose({ frontmost: true })[0].windows[0].name();"
-		]
-	},
-	"front app (process)": {
-		"prefix": "front app (process)",
-		"body": [
-			"const frontAppName = Application(\"System Events\").processes.whose({ frontmost: true })[0];"
-		]
-	},
-	"menu item": {
-		"prefix": "menu item",
-		"body": [
-			"Application(\"${1:appName}\").activate();",
-			"Application(\"System Events\").processes.byName(\"${1:appName}\").menuBars[0].menuBarItems.byName(\"${2:menu}\").menus[0].menuItems.byName(\"${3:menuItem}\").click()"
-		],
-		"description": "https://github.com/JXA-Cookbook/JXA-Cookbook/wiki/System-Events#clicking-menu-items"
-	},
-	"browser URL & title (all-browser function)": {
-		"prefix": "browser URL & title (function)",
-		"body": [
-			"function browserTab() {",
-			"\tconst frontmostAppName = Application(\"System Events\")",
-			"\t.applicationProcesses.where({ frontmost: true })",
-			"\t.name()[0];",
-			"\tconst frontmostApp = Application(frontmostAppName);",
-			"\t// biome-ignore format: long",
-			"\tconst chromiumVariants = [ \"Google Chrome\", \"Chromium\", \"Opera\", \"Vivaldi\", \"Brave Browser\", \"Microsoft Edge\", \"Arc\" ];",
-			"\tconst webkitVariants = [\"Safari\", \"Webkit\"];",
-			"\tlet title, url;",
-			"\tif (chromiumVariants.some((appName) => frontmostAppName.startsWith(appName))) {",
-			"\t\t// @ts-ignore",
-			"\t\turl = frontmostApp.windows[0].activeTab.url();",
-			"\t\t// @ts-ignore",
-			"\t\ttitle = frontmostApp.windows[0].activeTab.name();",
-			"\t} else if (webkitVariants.some((appName) => frontmostAppName.startsWith(appName))) {",
-			"\t\t// @ts-ignore",
-			"\t\turl = frontmostApp.documents[0].url();",
-			"\t\t// @ts-ignore",
-			"\t\ttitle = frontmostApp.documents[0].name();",
-			"\t} else {",
-			"\t\tapp.displayNotification(\"\", {",
-			"\t\t\twithTitle: \"You need a supported browser as your frontmost app\",",
-			"\t\t\tsubtitle: \"\",",
-			"\t\t});",
-			"\t\treturn;",
-			"\t}",
-			"\t\treturn { url: url, title: title };",
-			"}"
-		]
-	}
+  "app (define)": {
+    "body": [
+      "const app = Application.currentApplication()",
+      "app.includeStandardAdditions = true;"
+    ],
+    "prefix": "app (define)"
+  },
+  "browser URL & title (all-browser function)": {
+    "body": [
+      "function browserTab() {",
+      "\tconst frontmostAppName = Application(\"System Events\")",
+      "\t.applicationProcesses.where({ frontmost: true })",
+      "\t.name()[0];",
+      "\tconst frontmostApp = Application(frontmostAppName);",
+      "\t// biome-ignore format: long",
+      "\tconst chromiumVariants = [ \"Google Chrome\", \"Chromium\", \"Opera\", \"Vivaldi\", \"Brave Browser\", \"Microsoft Edge\", \"Arc\" ];",
+      "\tconst webkitVariants = [\"Safari\", \"Webkit\"];",
+      "\tlet title, url;",
+      "\tif (chromiumVariants.some((appName) => frontmostAppName.startsWith(appName))) {",
+      "\t\t// @ts-ignore",
+      "\t\turl = frontmostApp.windows[0].activeTab.url();",
+      "\t\t// @ts-ignore",
+      "\t\ttitle = frontmostApp.windows[0].activeTab.name();",
+      "\t} else if (webkitVariants.some((appName) => frontmostAppName.startsWith(appName))) {",
+      "\t\t// @ts-ignore",
+      "\t\turl = frontmostApp.documents[0].url();",
+      "\t\t// @ts-ignore",
+      "\t\ttitle = frontmostApp.documents[0].name();",
+      "\t} else {",
+      "\t\tapp.displayNotification(\"\", {",
+      "\t\t\twithTitle: \"You need a supported browser as your frontmost app\",",
+      "\t\t\tsubtitle: \"\",",
+      "\t\t});",
+      "\t\treturn;",
+      "\t}",
+      "\t\treturn { url: url, title: title };",
+      "}"
+    ],
+    "prefix": "browser URL & title (function)"
+  },
+  "cache (check if outdated)": {
+    "body": [
+      "/** @param {string} path */",
+      "function cacheIsOutdated(path) {",
+      "\tconst cacheAgeThresholdMins = ${1:60};",
+      "\tensureCacheFolderExists();",
+      "\tconst cacheObj = Application(\"System Events\").aliases[path];",
+      "\tif (!cacheObj.exists()) return true;",
+      "\tconst cacheAgeMins = (+new Date() - cacheObj.creationDate()) / 1000 / 60;",
+      "\treturn cacheAgeMins > cacheAgeThresholdMins;",
+      "}"
+    ],
+    "prefix": "cache (check if outdated)"
+  },
+  "check if app is frontmost": {
+    "body": "Application(\"${1:appName}\").frontmost();",
+    "prefix": "check if app is frontmost"
+  },
+  "check if app is running": {
+    "body": "Application(\"${1:appName}\").running()",
+    "prefix": "check if app is running"
+  },
+  "file exists": {
+    "body": "const fileExists = (/** @type {string} */ filePath) => Application(\"Finder\").exists(Path(filePath));",
+    "prefix": "file exists"
+  },
+  "front app (process)": {
+    "body": [
+      "const frontAppName = Application(\"System Events\").processes.whose({ frontmost: true })[0];"
+    ],
+    "prefix": "front app (process)"
+  },
+  "front window title": {
+    "body": [
+      "const frontWinName = Application(\"System Events\").processes.whose({ frontmost: true })[0].windows[0].name();"
+    ],
+    "prefix": "front window title"
+  },
+  "get Finder item": {
+    "body": "Application(\"System Events\").aliases[${1:filepath}];",
+    "description": "https://apple.stackexchange.com/a/409691",
+    "prefix": "get Finder item"
+  },
+  "get clipboard": {
+    "body": [
+      "app.includeStandardAdditions = true;",
+      "const clipb = app.theClipboard();"
+    ],
+    "prefix": "get clipboard"
+  },
+  "hide app": {
+    "body": [
+      "const process = Application(\"System Events\").applicationProcesses.byName(\"${1:processName}\");",
+      "if (process) { process.visible = false; }"
+    ],
+    "prefix": "hide app"
+  },
+  "home (JXA)": {
+    "body": "app.pathTo(\"home folder\")",
+    "prefix": "home (JXA)"
+  },
+  "http request": {
+    "body": [
+      "/** @param {string} url */",
+      "function httpRequest(url) {",
+      "\tconst queryURL = $.NSURL.URLWithString(url);",
+      "\tconst requestData = $.NSData.dataWithContentsOfURL(queryURL);",
+      "\tconst requestString = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;",
+      "\treturn requestString;",
+      "}"
+    ],
+    "description": "http request via c-bridge",
+    "prefix": "http request"
+  },
+  "keystroke": {
+    "body": "Application(\"System Events\").keystroke(\"${1:key}\", {using: [\"${2:command} down\"]});",
+    "prefix": "keystroke"
+  },
+  "menu item": {
+    "body": [
+      "Application(\"${1:appName}\").activate();",
+      "Application(\"System Events\").processes.byName(\"${1:appName}\").menuBars[0].menuBarItems.byName(\"${2:menu}\").menus[0].menuItems.byName(\"${3:menuItem}\").click()"
+    ],
+    "description": "https://github.com/JXA-Cookbook/JXA-Cookbook/wiki/System-Events#clicking-menu-items",
+    "prefix": "menu item"
+  },
+  "notification": {
+    "body": "app.displayNotification(\"\", { withTitle: \"${1:title}\", subtitle: \"${2:subtitle}\" })",
+    "prefix": [
+      "notification",
+      "displayNotification"
+    ]
+  },
+  "open location (url)": {
+    "body": "app.openLocation(\"${1:url}\");",
+    "prefix": "open location (url)"
+  },
+  "read file": {
+    "body": [
+      "/** @param {string} path */",
+      "function readFile(path) {",
+      "\tconst data = $.NSFileManager.defaultManager.contentsAtPath(path);",
+      "\tconst str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);",
+      "\treturn ObjC.unwrap(str);",
+      "}"
+    ],
+    "prefix": "read file"
+  },
+  "running apps array": {
+    "body": "Application(\"System Events\").applicationProcesses.where({ backgroundOnly: false }).displayedName();",
+    "prefix": "running apps array"
+  },
+  "selection (Finder)": {
+    "body": [
+      "function finderSelection () {",
+      "\tconst selection = decodeURI(Application(\"Finder\").selection()[0]?.url());",
+      "\tif (selection === \"undefined\") return \"\"; // no selection",
+      "\treturn selection.slice(7);",
+      "}"
+    ],
+    "prefix": "selection (Finder)"
+  },
+  "set clipboard (file)": {
+    "body": [
+      "ObjC.import(\"AppKit\");",
+      "",
+      "/** @param {string} path */",
+      "function copyPathToClipboard(path) {",
+      "\tconst pasteboard = $.NSPasteboard.generalPasteboard;",
+      "\tpasteboard.clearContents;",
+      "\tconst success = pasteboard.setPropertyListForType($([path]), $.NSFilenamesPboardType);",
+      "\treturn success;",
+      "}"
+    ],
+    "description": "https://github.com/JXA-Cookbook/JXA-Cookbook/wiki/User-Interaction-with-Files-and-Folders#copy-a-file-to-pasteboard",
+    "prefix": "set clipboard (file)"
+  },
+  "set clipboard (string)": {
+    "body": "app.setTheClipboardTo(${1:\"str\"});",
+    "prefix": "set clipboard (string)"
+  },
+  "shebang": {
+    "body": "#!/usr/bin/env osascript -l JavaScript",
+    "prefix": "shebang"
+  },
+  "window path (Finder)": {
+    "body": [
+      "/** @return {string|null} */",
+      "function finderFrontWindow(){",
+      "\tconst win = Application(\"Finder\").finderWindows[0]",
+      "\tif (!win) return null;",
+      "\treturn $.NSURL.alloc.initWithString(win.target.url()).fileSystemRepresentation;",
+      "}"
+    ],
+    "prefix": "window path (Finder)"
+  },
+  "write to file": {
+    "body": [
+      "/** @param {string} filepath @param {string} text */",
+      "function writeToFile(filepath, text) {",
+      "\tconst str = $.NSString.alloc.initWithUTF8String(text);",
+      "\tstr.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);",
+      "}"
+    ],
+    "prefix": "write to file"
+  }
 }

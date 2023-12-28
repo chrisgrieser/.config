@@ -1,97 +1,97 @@
 {
-	"matcher (CamelCase)": {
-		"prefix": "matcher (CamelCase)",
-		"body": [
-			"/** @param {string} str */",
-			"function camelCaseMatch(str) {",
-			"\tconst clean = str.replace(/[-()_.:#/\\\\\\;,[\\]]/g, \" \");",
-			"\tconst camelCaseSeparated = str.replace(/([A-Z])/g, \" \\$1\");",
-			"\treturn [clean, camelCaseSeparated, str].join(\" \") + \" \";",
-			"}"
-		],
-		"description": "Make Alfred Match CamelCase Results. https://www.alfredapp.com/help/workflows/inputs/script-filter/json/"
-	},
-	"matcher (simple)": {
-		"prefix": "matcher (simple)",
-		"body": [
-			"/** @param {string} str */",
-			"function alfredMatcher(str) {",
-			"\tconst clean = str.replace(/[-()_.:#/\\\\\\;,[\\]]/g, \" \");",
-			"\treturn [clean, str].join(\" \") + \" \";",
-			"}"
-		]
-	},
-	"cache (ensure folder)": {
-		"prefix": "cache (ensure folder)",
-		"body": [
-			"function ensureCacheFolderExists() {",
-			"\tconst finder = Application(\"Finder\");",
-			"\tconst cacheDir = $.getenv(\"alfred_workflow_cache\");",
-			"\tif (!finder.exists(Path(cacheDir))) {",
-			"\t\tconsole.log(\"Cache Dir does not exist and is created.\");",
-			"\t\tconst cacheDirBasename = $.getenv(\"alfred_workflow_bundleid\");",
-			"\t\tconst cacheDirParent = cacheDir.slice(0, -cacheDirBasename.length);",
-			"\t\tfinder.make({",
-			"\t\t\tnew: \"folder\",",
-			"\t\t\tat: Path(cacheDirParent),",
-			"\t\t\twithProperties: { name: cacheDirBasename },",
-			"\t\t});",
-			"\t}",
-			"}"
-		]
-	},
-	"Get Alfred Env": {
-		"prefix": "Get Alfred Env",
-		"body": "$.getenv(\"${1:envVar}\");"
-	},
-	"Get Alfred Env (Safe)": {
-		"prefix": "Get Alfred Env (Safe)",
-		"body": "$.NSProcessInfo.processInfo.environment.objectForKey(\"${1:envVar}\").js;"
-	},
-	"AlfredRun": {
-		"prefix": [
-			"run (Alfred)",
-			"AlfredRun",
-			"argv (Alfred)"
-		],
-		"body": [
-			"/** @type {AlfredRun} */",
-			"// biome-ignore lint/correctness/noUnusedVariables: Alfred run",
-			"function run(argv) {",
-			"\tconst ${1:query} = argv[0];",
-			"}"
-		]
-	},
-	"Modifiers (Script Filter)": {
-		"prefix": "Modifiers (Alfred)",
-		"body": [
-			"mods: {",
-			"\tcmd: {",
-			"\t\targ: $1,",
-			"\t\tsubtitle: \"⌘: $2\",",
-			"\t},",
-			"}"
-		]
-	},
-	"Script Filter": {
-		"prefix": "Script Filter (Alfred)",
-		"body": [
-			"/** @type {AlfredRun} */",
-			"// biome-ignore lint/correctness/noUnusedVariables: Alfred run",
-			"function run(){",
-			"\t/** @type AlfredItem[] */",
-			"\tconst ${1:scriptFilterArr} = app.doShellScript(\"$2\")",
-			"\t\t.split(\"\\r\")",
-			"\t\t.map(item => {",
-			"\t\t\t$0",
-			"\t\t\treturn {",
-			"\t\t\t\ttitle: item,",
-			"\t\t\t\tsubtitle: item,",
-			"\t\t\t\targ: item,",
-			"\t\t\t};",
-			"\t\t});",
-			"\treturn JSON.stringify({ items: ${1:scriptFilterArr} });",
-			"}"
-		]
-	}
+  "AlfredRun": {
+    "body": [
+      "/** @type {AlfredRun} */",
+      "// biome-ignore lint/correctness/noUnusedVariables: Alfred run",
+      "function run(argv) {",
+      "\tconst ${1:query} = argv[0];",
+      "}"
+    ],
+    "prefix": [
+      "run (Alfred)",
+      "AlfredRun",
+      "argv (Alfred)"
+    ]
+  },
+  "Get Alfred Env": {
+    "body": "$.getenv(\"${1:envVar}\");",
+    "prefix": "Get Alfred Env"
+  },
+  "Get Alfred Env (Safe)": {
+    "body": "$.NSProcessInfo.processInfo.environment.objectForKey(\"${1:envVar}\").js;",
+    "prefix": "Get Alfred Env (Safe)"
+  },
+  "Modifiers (Script Filter)": {
+    "body": [
+      "mods: {",
+      "\tcmd: {",
+      "\t\targ: $1,",
+      "\t\tsubtitle: \"⌘: $2\",",
+      "\t},",
+      "}"
+    ],
+    "prefix": "Modifiers (Alfred)"
+  },
+  "Script Filter": {
+    "body": [
+      "/** @type {AlfredRun} */",
+      "// biome-ignore lint/correctness/noUnusedVariables: Alfred run",
+      "function run(){",
+      "\t/** @type AlfredItem[] */",
+      "\tconst ${1:scriptFilterArr} = app.doShellScript(\"$2\")",
+      "\t\t.split(\"\\r\")",
+      "\t\t.map(item => {",
+      "\t\t\t$0",
+      "\t\t\treturn {",
+      "\t\t\t\ttitle: item,",
+      "\t\t\t\tsubtitle: item,",
+      "\t\t\t\targ: item,",
+      "\t\t\t};",
+      "\t\t});",
+      "\treturn JSON.stringify({ items: ${1:scriptFilterArr} });",
+      "}"
+    ],
+    "prefix": "Script Filter (Alfred)"
+  },
+  "cache (ensure folder)": {
+    "body": [
+      "function ensureCacheFolderExists() {",
+      "\tconst finder = Application(\"Finder\");",
+      "\tconst cacheDir = $.getenv(\"alfred_workflow_cache\");",
+      "\tif (!finder.exists(Path(cacheDir))) {",
+      "\t\tconsole.log(\"Cache Dir does not exist and is created.\");",
+      "\t\tconst cacheDirBasename = $.getenv(\"alfred_workflow_bundleid\");",
+      "\t\tconst cacheDirParent = cacheDir.slice(0, -cacheDirBasename.length);",
+      "\t\tfinder.make({",
+      "\t\t\tnew: \"folder\",",
+      "\t\t\tat: Path(cacheDirParent),",
+      "\t\t\twithProperties: { name: cacheDirBasename },",
+      "\t\t});",
+      "\t}",
+      "}"
+    ],
+    "prefix": "cache (ensure folder)"
+  },
+  "matcher (CamelCase)": {
+    "body": [
+      "/** @param {string} str */",
+      "function camelCaseMatch(str) {",
+      "\tconst clean = str.replace(/[-()_.:#/\\\\\\;,[\\]]/g, \" \");",
+      "\tconst camelCaseSeparated = str.replace(/([A-Z])/g, \" \\$1\");",
+      "\treturn [clean, camelCaseSeparated, str].join(\" \") + \" \";",
+      "}"
+    ],
+    "description": "Make Alfred Match CamelCase Results. https://www.alfredapp.com/help/workflows/inputs/script-filter/json/",
+    "prefix": "matcher (CamelCase)"
+  },
+  "matcher (simple)": {
+    "body": [
+      "/** @param {string} str */",
+      "function alfredMatcher(str) {",
+      "\tconst clean = str.replace(/[-()_.:#/\\\\\\;,[\\]]/g, \" \");",
+      "\treturn [clean, str].join(\" \") + \" \";",
+      "}"
+    ],
+    "prefix": "matcher (simple)"
+  }
 }

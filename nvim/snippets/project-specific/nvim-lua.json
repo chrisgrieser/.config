@@ -1,47 +1,47 @@
 {
-	"check if file exists": {
-		"prefix": "check if file exists",
-		"body": "local fileExists = vim.loop.fs_stat(\"${1:filepath}\") ~= nil"
-	},
-	"plugin spec (lazy.nvim)": {
-		"prefix": "plugin spec (lazy.nvim)",
-		"body": [
-			"{",
-			"\t\"$1\",",
-			"\t${2|event = \"VeryLazy\",event = \"LspAttach\",lazy = true,cmd = \"\"|},",
-			"\topts = {",
-			"\t\t$0",
-			"\t},",
-			"},"
-		]
-	},
-	"keymap": {
-		"prefix": "keymap",
-		"body": "keymap(\"n\", \"${1:lhs}\", \"${2:rhs}\", { desc = \"${3:desc}\" })"
-	},
-	"keymap (multi-mode)": {
-		"prefix": "keymap (multi-mode)",
-		"body": "keymap({ \"n\", \"x\" }, \"${1:lhs}\", \"${2:rhs}\", { desc = \"${3:desc}\" })"
-	},
-	"autocmd": {
-		"prefix": "autocmd",
-		"body": [
-			"vim.api.nvim_create_autocmd(\"${1:event}\", {",
-			"\tcallback = function()",
-			"\t\t$0",
-			"\tend,",
-			"})"
-		]
-	},
-	"autocmd (FileType)": {
-		"prefix": "autocmd (FileType)",
-		"body": [
-			"vim.api.nvim_create_autocmd(\"FileType\", {",
-			"\tpattern = \"${2:ft}\",",
-			"\tcallback = function()",
-			"\t\t$3",
-			"\tend,",
-			"})"
-		]
-	}
+  "autocmd": {
+    "body": [
+      "vim.api.nvim_create_autocmd(\"${1:event}\", {",
+      "\tcallback = function()",
+      "\t\t$0",
+      "\tend,",
+      "})"
+    ],
+    "prefix": "autocmd"
+  },
+  "autocmd (FileType)": {
+    "body": [
+      "vim.api.nvim_create_autocmd(\"FileType\", {",
+      "\tpattern = \"${2:ft}\",",
+      "\tcallback = function()",
+      "\t\t$3",
+      "\tend,",
+      "})"
+    ],
+    "prefix": "autocmd (FileType)"
+  },
+  "check if file exists": {
+    "body": "local fileExists = vim.loop.fs_stat(\"${1:filepath}\") ~= nil",
+    "prefix": "check if file exists"
+  },
+  "keymap": {
+    "body": "keymap(\"n\", \"${1:lhs}\", \"${2:rhs}\", { desc = \"${3:desc}\" })",
+    "prefix": "keymap"
+  },
+  "keymap (multi-mode)": {
+    "body": "keymap({ \"n\", \"x\" }, \"${1:lhs}\", \"${2:rhs}\", { desc = \"${3:desc}\" })",
+    "prefix": "keymap (multi-mode)"
+  },
+  "plugin spec (lazy.nvim)": {
+    "body": [
+      "{",
+      "\t\"$1\",",
+      "\t${2|event = \"VeryLazy\",event = \"LspAttach\",lazy = true,cmd = \"\"|},",
+      "\topts = {",
+      "\t\t$0",
+      "\t},",
+      "},"
+    ],
+    "prefix": "plugin spec (lazy.nvim)"
+  }
 }
