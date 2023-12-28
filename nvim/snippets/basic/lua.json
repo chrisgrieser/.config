@@ -86,12 +86,12 @@
 		"prefix": "write file",
 		"body": [
 			"---@param str string",
-			"---@param filePath",
+			"---@param filePath string",
 			"---@return string|nil -- error message",
 			"local function overwriteFile(filePath, str)",
 			"\tlocal file, _ = io.open(filePath, \"w\")",
 			"\tif not file then return end",
-			"\tfile:write(str .. \"\n\")",
+			"\tfile:write(str)",
 			"\tfile:close()",
 			"end"
 		],
@@ -100,7 +100,6 @@
 	"read file": {
 		"prefix": "read file",
 		"body": [
-			"---read the full file",
 			"---@param filePath string",
 			"---@return string? -- content or error message",
 			"---@return boolean success",
