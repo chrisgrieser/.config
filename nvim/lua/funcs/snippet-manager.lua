@@ -164,7 +164,7 @@ function editSnippetIn.popup(snip)
 	})
 
 	-- info on keymaps
-	a.nvim_buf_set_extmark(bufnr, ns, heightInCells - 2, 0, {
+	a.nvim_buf_set_extmark(bufnr, ns, heightInCells - 3, 0, {
 		virt_text = { { "q: Cancel   <CR>: Save", "DiagnosticVirtualTextHint" } },
 		virt_text_pos = "right_align",
 	})
