@@ -1,6 +1,12 @@
 
--- goodbye
--- goodbye
+local list = {
+	"one",
+	"two",
+	"three",
+	"four",
+	"five",
+} 
+local splitAt = 2
 
--- $0
--- ${1:foo}
+local part1 = vim.list_slice(list, 1, splitAt)
+local part2 = vim.list_slice(list, splitAt + 1, #list)
