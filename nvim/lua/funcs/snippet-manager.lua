@@ -124,8 +124,7 @@ local function updateSnippet(snip, editedLines)
 	local numOfPrefixes = type(snip.prefix) == "string" and 1 or #snip.prefix
 
 	local prefix = vim.list_slice(editedLines, 1, numOfPrefixes)
-	local body = vim.list_slice(editedLines, numOfPrefixes + 1, #ed)
-	local prefix = vim.list_slice(editedLines, 1, numOfPrefixes)
+	local body = vim.list_slice(editedLines, numOfPrefixes + 1, #editedLines)
 
 	snip.originalKey = nil -- delete key set by this plugin
 	snip.fullPath = nil -- delete key set by this plugin
