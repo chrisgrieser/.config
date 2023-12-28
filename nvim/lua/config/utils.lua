@@ -80,7 +80,7 @@ end
 ---@param modes vimMode|vimMode[]
 ---@param lhs string
 ---@param rhs string|function
----@param opts? { unique: boolean, desc: string, buffer: boolean, nowait: boolean, remap: boolean }
+---@param opts? { unique: boolean, desc: string, buffer: boolean|number, nowait: boolean, remap: boolean }
 function M.uniqueKeymap(modes, lhs, rhs, opts)
 	if not opts then opts = {} end
 	if opts.unique == nil then opts.unique = true end
