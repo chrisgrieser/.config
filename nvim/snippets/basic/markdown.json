@@ -29,6 +29,10 @@
 		"body": "<!-- toc -->",
 		"description": "https://github.com/jonschlinkert/markdown-toc#tocinsert"
 	},
+	"Markdown Codeblock": {
+		"prefix": [",,", "Codeblock", "```"],
+		"body": ["```${1:lang}", "$0", "```"]
+	},
 	"<kbd>": {
 		"prefix": ["kbd", "<kbd>", "key"],
 		"body": "<kbd>$0</kbd>",
