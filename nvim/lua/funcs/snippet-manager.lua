@@ -1,5 +1,5 @@
 local M = {}
-local editSnippetIn = {}
+local snippetAction = {}
 --------------------------------------------------------------------------------
 
 ---@class (exact) snippetObj VSCode snippet json
@@ -28,7 +28,7 @@ local defaultConfig = {
 	-- formatter like `jq` if you want the json written in prettified format. The
 	-- json-string will be piped as stdin to the formatter. This can be useful
 	-- for version-controlling your snippets.
-	jsonFormatter = { "biome", "--stdin-file-path=foo.json" },
+	jsonFormatter = { "biome", "format", "--stdin-file-path=foo.json" },
 	-- examples
 	-- jsonFormatter = "jq",
 	-- jsonFormatter = false,
@@ -88,6 +88,23 @@ local function guessFileType(input)
 	return false
 end
 
+---@param filepath string
+---@param snippetsInFile snippetObj[]
+local function writeAndFormatSnippetFile(filepath, snippetsInFile)
+	local jsonStr = vim.json.encode(snippetsInFile)
+	assert(jsonStr, "snippet could not be written")
+	if config.jsonFormatter then
+		jsonStr = vim.fn.system(config.jsonFormatter, jsonStr)
+		if vim.v.shell_error ~= 0 then
+			notify("JSON formatting exited with error. \nNo changes made.", "error")
+			return
+		end
+	end
+
+	overwriteFile(filepath, jsonStr)
+end
+
+
 ---@param snip snippetObj snippet to update
 ---@param bodyLines string[]
 local function updateSnippet(snip, bodyLines)
@@ -102,14 +119,11 @@ local function updateSnippet(snip, bodyLines)
 	snip.body = #bodyLines == 1 and bodyLines[1] or bodyLines
 	snippetsInFile[key] = snip
 
-	local jsonStr = vim.json.encode(snippetsInFile)
-	assert(jsonStr, "snippet could not be written")
-	if config.jsonFormatter then jsonStr = vim.fn.system(config.jsonFormatter, jsonStr) end
-	overwriteFile(filepath, jsonStr)
+	writeAndFormatSnippetFile(filepath, snippetsInFile)
 end
 
 ---@param snip snippetObj
-function editSnippetIn.popup(snip)
+function snippetAction.editInPopup(snip)
 	local a = vim.api
 
 	local body = type(snip.body) == "string" and { snip.body } or snip.body ---@cast body string[]
@@ -151,22 +165,17 @@ function editSnippetIn.popup(snip)
 
 	-- prefix lines
 	local ns = a.nvim_create_namespace("snippet-manager")
-	-- label "prefix"
-	a.nvim_buf_set_extmark(bufnr, ns, 0, 0, {
-		virt_text = { { "Prefix", "DiagnosticVirtualTextHint" } },
-		virt_text_pos = "right_align",
-	})
-	-- separator line
+	for i = 1, prefixCount do -- label "prefix #N"
+		local ln = i - 1
+		a.nvim_buf_set_extmark(bufnr, ns, 0, ln, {
+			virt_text = { { ("Prefix #%s"):format(i), "DiagnosticVirtualTextHint" } },
+			virt_text_pos = vim.fn.has("nvim-0.10") == 1 and "inline" or "right_align",
+		})
+	end
 	a.nvim_buf_set_extmark(bufnr, ns, prefixCount - 1, 0, {
-		virt_lines = {
+		virt_lines = { -- separator line
 			{ { ("═"):rep(widthInCells), "FloatBorder" } },
 		},
-	})
-
-	-- info on keymaps
-	a.nvim_buf_set_extmark(bufnr, ns, heightInCells - 3, 0, {
-		virt_text = { { "q: Cancel   <CR>: Save", "DiagnosticVirtualTextHint" } },
-		virt_text_pos = "right_align",
 	})
 
 	-- keymaps
@@ -187,19 +196,26 @@ function editSnippetIn.popup(snip)
 end
 
 ---@param snip snippetObj
-function editSnippetIn.editor(snip)
+function snippetAction.openSnippetFile(snip)
 	local locationInFile = '"' .. snip.originalKey:gsub(" ", [[\ ]]) .. '":'
 	vim.cmd(("edit +/%s %s"):format(locationInFile, snip.path))
+end
+
+---@param snip snippetObj
+function snippetAction.deleteSnippet(snip)
+	local snippetsInFile = readAndParseJson(snip.path)
+	snippetsInFile[snip.originalKey] = nil -- = delete
+	writeAndFormatSnippetFile(snip.path, snippetsInFile)
 end
 
 --------------------------------------------------------------------------------
 
 ---Searches a folder of vs-code-like snippets in json format and opens the selected.
----@param editWhere? "popup"|"editor"
-function M.snippetSearch(editWhere)
-	if not editWhere then editWhere = "popup" end
-	if not vim.tbl_contains(vim.tbl_keys(editSnippetIn), editWhere) then
-		notify("snippetSearch does not accept '" .. editWhere .. "'", "error")
+---@param action? "editInPopup"|"openSnippetFile"|"deleteSnippet"
+function M.snippetSearch(action)
+	if not action then action = "editInPopup" end
+	if not vim.tbl_contains(vim.tbl_keys(snippetAction), action) then
+		notify("snippetSearch does not accept '" .. action .. "'", "error")
 		return
 	end
 
@@ -221,7 +237,7 @@ function M.snippetSearch(editWhere)
 	end
 
 	vim.ui.select(allSnippets, {
-		prompt = "Select snippet",
+		prompt = "Select snippet:",
 		format_item = function(item)
 			local snipname = item.prefix[1] or item.prefix
 			local filename = vim.fs.basename(item.path):gsub("%.json$", "")
@@ -230,7 +246,7 @@ function M.snippetSearch(editWhere)
 		kind = "snippet-manager.snippetSearch",
 	}, function(snip)
 		if not snip then return end
-		editSnippetIn[editWhere](snip)
+		snippetAction[action](snip)
 	end)
 end
 
