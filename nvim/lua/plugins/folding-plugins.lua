@@ -40,12 +40,14 @@ return {
 		dependencies = "kevinhwang91/promise-async",
 		event = "BufReadPost", -- needed for folds to load in time
 		keys = {
+			{ "zm", function() require("ufo").closeAllFolds() end, desc = " 󱃄 Close All Folds" },
+			{ "zk", function() require("ufo").goPreviousClosedFold() end, desc = " 󱃄 Goto Prev Fold" },
+			{ "zj", function() require("ufo").goNextClosedFold() end, desc = " 󱃄 Goto Next Fold" },
 			{
 				"zr",
-				function() require("ufo").openFoldsExceptKinds { "comment" } end,
-				desc = " 󱃄 Open All Folds except comments",
+				function() require("ufo").openFoldsExceptKinds { "comment", "imports" } end,
+				desc = " 󱃄 Open All Folds",
 			},
-			{ "zm", function() require("ufo").closeAllFolds() end, desc = " 󱃄 Close All Folds" },
 			{
 				"z1",
 				function() require("ufo").closeFoldsWith(1) end,
