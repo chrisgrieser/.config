@@ -12,6 +12,10 @@ u.ftAbbr("!==", "~=")
 u.ftAbbr("ree", "return end")
 u.ftAbbr("tree", "then return end")
 
+-- adds luadoc's as potential comment syntax (used for continuation of comment lines)
+vim.opt_local.comments:prepend(":---")
+vim.opt_local.comments:prepend(":---@")
+
 --------------------------------------------------------------------------------
 
 -- if in nvim dir, reload file/plugin, otherwise run `make`

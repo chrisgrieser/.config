@@ -71,6 +71,20 @@ local function updateSnippet(snip, bodyLines)
 	writeFile("w", snip.path, jsonStr)
 end
 
+---Tries to determine filetype based on input string. If input is neither a
+---filetype nor a file extension known to nvim, returns nil. fsfsf sfsfs fsfs
+---@param input string
+---@return string|nil filetype
+local function guessFileType(input)
+	-- input is filetype
+	local allKnownFts = vim.fn.getcompletion("", "filetype")
+	if vim.tbl_contains(allKnownFts, input) then return input end
+
+	-- input is file extension
+	local matchedFt = vim.filetype.match { filename = "dummy." .. input }
+	return matchedFt
+end
+
 ---@param snip snippetObj
 local function editSnippetInPopup(snip)
 	local snipLines = snip.body
@@ -83,7 +97,8 @@ local function editSnippetInPopup(snip)
 	local bufnr = a.nvim_create_buf(false, true)
 	a.nvim_buf_set_lines(bufnr, 0, -1, false, snipLines)
 	a.nvim_buf_set_name(bufnr, displayName)
-	a.nvim_buf_set_option(bufnr, "filetype", sourceFile)
+	local guessFt = guessFileType(sourceFile)
+	if guessFt then a.nvim_buf_set_option(bufnr, "filetype", guessFt) end
 	a.nvim_buf_set_option(bufnr, "buftype", "nofile")
 
 	local width = 0.7
