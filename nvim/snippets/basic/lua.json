@@ -1,1 +1,147 @@
-{"trim trailing line break":{"prefix":"trim","body":":gsub(\"\\n$\", \"\")"},"write file":{"prefix":"write file","body":["---@param str string","---@param filePath string","---@return string|nil -- error message","local function overwriteFile(filePath, str)","\tlocal file, _ = io.open(filePath, \"w\")","\tif not file then return end","\tfile:write(str)","\tfile:close()","end"],"description":"Overwriting file, for appending use `a` instead of `w`."},"nodiscard":{"prefix":"nodiscard","body":"---@nodiscard","description":"Luadoc Annotation that a function's return value should not be discarded. https:\/\/github.com\/LuaLS\/lua-language-server\/wiki\/Annotations#nodiscard"},"class (luadoc)":{"prefix":"class (luadoc)","body":["---@class (exact) ${1:class_name}","---@field ${2:field_name} string","---@field ddddd"],"description":"https:\/\/github.com\/LuaLS\/lua-language-server\/wiki\/Annotations#class"},"ignore start\/end (stylua)":{"prefix":"ignore start\/end (stylua)","body":["-- stylua: ignore start","-- stylua: ignore end"]},"pcall":{"prefix":["try","pcall"],"body":["local success = pcall(${1:func})","if not success then","\t$0","\treturn","end"]},"ignore (stylua)":{"prefix":"ignore (stylua)","body":"-- stylua: ignore"},"if .. then .. else":{"prefix":"if .. then .. else","body":["if ${1:true} then","\t$2","else","\t$0","end"]},"ternary":{"prefix":"ternary","body":"${1:condition} and ${2:value1} or ${3:value2}"},"then return end":{"prefix":"then return end","body":"then return end"},"home":{"prefix":"home","body":"os.getenv(\"HOME\")"},"for each (list)":{"prefix":"for each (list)","body":["for _, ${1:v} in pairs(${2:table}) do","\t$0","end"]},"for each line (of file)":{"prefix":["for each line (file)","read file (as lines)"],"body":["for line in io.lines(${1:filepath}) do","\t$0","end"]},"safe require":{"prefix":"safe require","body":["local ok, ${1:module} = require(\"${1:module}\")","if not ok then return end","${1:module}"]},"split (gmatch)":{"prefix":"split (gmatch)","body":["local acc = {}","for part in ${1:str}:gmatch(\"(.-)\" .. ${2:delimiter}) do","\ttable.insert(acc, part)","end"]},"export module":{"prefix":"export module","body":["local M = {}","--------------------------------------------------------------------------------","","$0","","--------------------------------------------------------------------------------","return M"]},"import module":{"prefix":"import module","body":"local ${1:name} = require(\"${2:module}.${1:name}\")"},"read file":{"prefix":"read file","body":["---@param filePath string","---@return string? -- content or error message","---@return boolean success","local function readFile(filePath)","\tlocal file, err = io.open(filePath, \"r\")","\tif not file then return err, false end","\tlocal content = file:read(\"*a\")","\tfile:close()","\treturn content, true","end"]}}
+{
+  "write file": {
+    "description": "Overwriting file, for appending use `a` instead of `w`.",
+    "prefix": "write file",
+    "body": [
+      "---@param str string",
+      "---@param filePath string",
+      "---@return string|nil -- error message",
+      "local function overwriteFile(filePath, str)",
+      "\tlocal file, _ = io.open(filePath, \"w\")",
+      "\tif not file then return end",
+      "\tfile:write(str)",
+      "\tfile:close()",
+      "end"
+    ]
+  },
+  "if .. then .. else": {
+    "body": [
+      "if ${1:true} then",
+      "\t$2",
+      "else",
+      "\t$0",
+      "end"
+    ],
+    "prefix": "if .. then .. else"
+  },
+  "home": {
+    "body": "os.getenv(\"HOME\")",
+    "prefix": "home"
+  },
+  "safe require": {
+    "body": [
+      "local ok, ${1:module} = require(\"${1:module}\")",
+      "if not ok then return end",
+      "${1:module}"
+    ],
+    "prefix": "safe require"
+  },
+  "for each (list)": {
+    "body": [
+      "for _, ${1:v} in pairs(${2:table}) do",
+      "\t$0",
+      "end"
+    ],
+    "prefix": "for each (list)"
+  },
+  "split (gmatch)": {
+    "body": [
+      "local acc = {}",
+      "for part in ${1:str}:gmatch(\"(.-)\" .. ${2:delimiter}) do",
+      "\ttable.insert(acc, part)",
+      "end"
+    ],
+    "prefix": "split (gmatch)"
+  },
+  "pcall": {
+    "body": [
+      "local success = pcall(${1:func})",
+      "if not success then",
+      "\t$0",
+      "\treturn",
+      "end"
+    ],
+    "prefix": [
+      "try",
+      "pcall"
+    ]
+  },
+  "export module": {
+    "body": [
+      "local M = {}",
+      "--------------------------------------------------------------------------------",
+      "",
+      "$0",
+      "",
+      "--------------------------------------------------------------------------------",
+      "return M"
+    ],
+    "prefix": "export module"
+  },
+  "class (luadoc)": {
+    "prefix": "class (luadoc)",
+    "description": "https://github.com/LuaLS/lua-language-server/wiki/Annotations#class",
+    "body": [
+      "---@class (exact) ${1:class_name}",
+      "---@field ${2:field_name} string"
+    ]
+  },
+  "read file": {
+    "body": [
+      "---@param filePath string",
+      "---@return string? -- content or error message",
+      "---@return boolean success",
+      "local function readFile(filePath)",
+      "\tlocal file, err = io.open(filePath, \"r\")",
+      "\tif not file then return err, false end",
+      "\tlocal content = file:read(\"*a\")",
+      "\tfile:close()",
+      "\treturn content, true",
+      "end"
+    ],
+    "prefix": "read file"
+  },
+  "then return end": {
+    "body": "then return end",
+    "prefix": "then return end"
+  },
+  "import module": {
+    "body": "local ${1:name} = require(\"${2:module}.${1:name}\")",
+    "prefix": "import module"
+  },
+  "nodiscard": {
+    "description": "Luadoc Annotation that a function's return value should not be discarded. https://github.com/LuaLS/lua-language-server/wiki/Annotations#nodiscard",
+    "prefix": "nodiscard",
+    "body": "---@nodiscard"
+  },
+  "trim trailing line break": {
+    "body": ":gsub(\"\\n$\", \"\")",
+    "prefix": "trim"
+  },
+  "ignore start/end (stylua)": {
+    "body": [
+      "-- stylua: ignore start",
+      "-- stylua: ignore end"
+    ],
+    "prefix": "ignore start/end (stylua)"
+  },
+  "for each line (of file)": {
+    "body": [
+      "for line in io.lines(${1:filepath}) do",
+      "\t$0",
+      "end"
+    ],
+    "prefix": [
+      "for each line (file)",
+      "read file (as lines)"
+    ]
+  },
+  "ternary": {
+    "body": "${1:condition} and ${2:value1} or ${3:value2}",
+    "prefix": "ternary"
+  },
+  "ignore (stylua)": {
+    "body": "-- stylua: ignore",
+    "prefix": "ignore (stylua)"
+  }
+}
