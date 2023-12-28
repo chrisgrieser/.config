@@ -38,7 +38,7 @@ return {
 	{ -- UFO
 		"kevinhwang91/nvim-ufo",
 		dependencies = "kevinhwang91/promise-async",
-		event = "BufReadPre", -- needed for folds to load in time and comments closed
+		event = "VimEnter", -- needed for folds to load in time and comments closed
 		keys = {
 			{ "zm", function() require("ufo").closeAllFolds() end, desc = " 󱃄 Close All Folds" },
 			{ "zk", function() require("ufo").goPreviousClosedFold() end, desc = " 󱃄 Goto Prev Fold" },

@@ -20,15 +20,19 @@ local editSnippetIn = {}
 local defaultConfig = {
 	snippetDir = vim.fn.stdpath("config") .. "/snippets",
 	editSnippetPopup = {
-		height = 0.5,
-		width = 0.7,
+		height = 0.4, -- 0-1
+		width = 0.6,
 		border = "rounded",
 	},
 	-- If `false`, the json will be written in minified format. Pass a json
-	-- formatter like `jq` if you want the json written in prettified
-	-- format. This can be useful for version-controlling your snippets.
-	jsonFormatter = false,
-	-- jsonFormatter = { "jq", ".", "--monochrome-output", "$FILENAME" },
+	-- formatter like `jq` if you want the json written in prettified format. The
+	-- json-string will be piped as stdin to the formatter. This can be useful
+	-- for version-controlling your snippets.
+	jsonFormatter = { "biome", "--stdin-file-path=foo.json" },
+	-- examples
+	-- jsonFormatter = "jq",
+	-- jsonFormatter = false,
+	-- jsonFormatter = { "biome", "--stdin-file-path=foobar.json" },
 }
 local config = defaultConfig
 
@@ -47,10 +51,9 @@ end
 
 ---@param str string
 ---@param filePath string
----@param mode "w"|"a" write or append
 ---@return string|nil -- error message
-local function writeFile(mode, filePath, str)
-	local file, _ = io.open(filePath, mode)
+local function overwriteFile(filePath, str)
+	local file, _ = io.open(filePath, "w")
 	if not file then return end
 	file:write(str)
 	file:close()
@@ -101,7 +104,8 @@ local function updateSnippet(snip, bodyLines)
 
 	local jsonStr = vim.json.encode(snippetsInFile)
 	assert(jsonStr, "snippet could not be written")
-	writeFile("w", filepath, jsonStr)
+	if config.jsonFormatter then jsonStr = vim.fn.system(config.jsonFormatter, jsonStr) end
+	overwriteFile(filepath, jsonStr)
 end
 
 ---@param snip snippetObj
@@ -133,10 +137,10 @@ function editSnippetIn.popup(snip)
 		title = (" %s (%s) "):format(displayName, sourceFile),
 		title_pos = "center",
 		border = config.editSnippetPopup.border,
-		style = "minimal",
 		zindex = 1, -- below nvim-notify floats
 	})
 	a.nvim_win_set_option(winnr, "number", true)
+	a.nvim_win_set_option(winnr, "signcolumn", "no")
 
 	-- keymaps
 	local function close()

@@ -14,9 +14,7 @@ u.ftAbbr("tree", "then return end")
 
 -- adds luadoc's as potential comment syntax (used for continuation of comment lines)
 vim.opt_local.comments = {
-	"b:---@field",
-	"b:---@param",
-	":---@",
+	"b:---@field", -- fields for `@class`
 	":---",
 	":--",
 }
