@@ -64,7 +64,7 @@ end
 local function readAndParseJson(path) return vim.json.decode(readFile(path) or "{}") or {} end
 
 ---@param msg string
----@param level "info"|"warn"|"error"|"debug"|"trace"
+---@param level? "info"|"warn"|"error"|"debug"|"trace"
 local function notify(msg, level)
 	if not level then level = "info" end
 	vim.notify(msg, vim.log.levels[level:upper()], { title = "Snippet Manager" })
@@ -112,8 +112,10 @@ end
 function editSnippetIn.popup(snip)
 	local a = vim.api
 
-	local snipLines = snip.body
-	if type(snipLines) == "string" then snipLines = { snipLines } end
+	local body = type(snip.body) == "string" and { snip.body } or snip.body ---@cast body string[]
+	local prefix = type(snip.prefix) == "string" and { snip.prefix } or snip.prefix ---@cast prefix string[]
+	local prefixCount = type(snip.prefix) == "string" and 1 or #prefix
+	local snipLines = vim.list_extend(prefix, body)
 	local displayName = snip.originalKey:sub(1, 25)
 	local sourceFile = vim.fs.basename(snip.path)
 
@@ -127,11 +129,13 @@ function editSnippetIn.popup(snip)
 
 	local width = config.editSnippetPopup.width
 	local height = config.editSnippetPopup.height
+	local widthInCells = math.floor(width * a.nvim_win_get_width(0))
+	local heightInCells = math.floor(height * a.nvim_win_get_height(0))
 	local winnr = a.nvim_open_win(bufnr, true, {
 		relative = "win",
 		-- centered window
-		width = math.floor(width * a.nvim_win_get_width(0)),
-		height = math.floor(height * a.nvim_win_get_height(0)),
+		width = widthInCells,
+		height = heightInCells,
 		row = math.floor((1 - height) * a.nvim_win_get_height(0) / 2),
 		col = math.floor((1 - width) * a.nvim_win_get_width(0) / 2),
 		title = (" %s (%s) "):format(displayName, sourceFile),
@@ -145,15 +149,39 @@ function editSnippetIn.popup(snip)
 	vim.fn.matchadd("DiagnosticVirtualTextInfo", [[\$\d]])
 	vim.fn.matchadd("DiagnosticVirtualTextInfo", [[\${\d:.\{-}}]])
 
+	-- prefix lines
+	local ns = a.nvim_create_namespace("snippet-manager")
+	-- label "prefix"
+	a.nvim_buf_set_extmark(bufnr, ns, 0, 0, {
+		virt_text = { { "Prefix", "DiagnosticVirtualTextHint" } },
+		virt_text_pos = "right_align",
+	})
+	-- separator line
+	a.nvim_buf_set_extmark(bufnr, ns, prefixCount - 1, 0, {
+		virt_lines = {
+			{ { ("═"):rep(widthInCells), "FloatBorder" } },
+		},
+	})
+
+	-- info on keymaps
+	a.nvim_buf_set_extmark(bufnr, ns, heightInCells - 2, 0, {
+		virt_text = { { "q: Cancel   <CR>: Save", "DiagnosticVirtualTextHint" } },
+		virt_text_pos = "right_align",
+	})
+
 	-- keymaps
 	local function close()
 		a.nvim_win_close(winnr, true)
 		a.nvim_buf_delete(bufnr, { force = true })
 	end
-	vim.keymap.set("n", "q", close, { buffer = bufnr, nowait = true })
 	vim.keymap.set("n", "<CR>", function()
 		local editedLines = a.nvim_buf_get_lines(bufnr, 0, -1, false)
 		updateSnippet(snip, editedLines)
+		notify("Snippet updated.")
+		close()
+	end, { buffer = bufnr, nowait = true })
+	vim.keymap.set("n", "q", function()
+		notify("Aborted. Snippet not changed.")
 		close()
 	end, { buffer = bufnr, nowait = true })
 end
