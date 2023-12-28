@@ -93,11 +93,16 @@ end
 ---@nodiscard
 local function writeAndFormatSnippetFile(filepath, snippetsInFile)
 	local jsonStr = vim.json.encode(snippetsInFile)
-	assert(jsonStr, "snippet could not be written")
+	assert(jsonStr, "Decoding error. No changes made.")
 	if config.jsonFormatter then
 		jsonStr = vim.fn.system(config.jsonFormatter, jsonStr)
 		if vim.v.shell_error ~= 0 then
-			notify("JSON formatting exited with error. \nNo changes made.", "error")
+			local msg = {
+				"JSON formatting exited with error.",
+				"No changes made.",
+				"Ensure your json formatting command is valid.",
+			}
+			notify(table.concat(msg, "\n"), "error")
 			return false
 		end
 	end
@@ -111,7 +116,7 @@ end
 
 ---@param snip snippetObj snippet to update/create
 ---@param editedLines string[]
-local function updateSnippet(snip, editedLines)
+local function updateSnippetFile(snip, editedLines)
 	local snippetsInFile = readAndParseJson(snip.fullPath)
 	local filepath = snip.fullPath
 
@@ -122,10 +127,10 @@ local function updateSnippet(snip, editedLines)
 
 	-- determine prefix & body
 	local numOfPrefixes = type(snip.prefix) == "string" and 1 or #snip.prefix
-
 	local prefix = vim.list_slice(editedLines, 1, numOfPrefixes)
 	local body = vim.list_slice(editedLines, numOfPrefixes + 1, #editedLines)
 
+	-- update snipObj
 	snip.originalKey = nil -- delete key set by this plugin
 	snip.fullPath = nil -- delete key set by this plugin
 	snip.body = #body == 1 and body[1] or body
@@ -154,6 +159,7 @@ local function editInPopup(snip, mode)
 	-- snippet properties
 	local body = type(snip.body) == "string" and { snip.body } or snip.body ---@cast body string[]
 	local prefix = type(snip.prefix) == "string" and { snip.prefix } or snip.prefix ---@cast prefix string[]
+	local numOfPrefixes = #prefix -- needs to be saved as list_extend mutates `prefix`
 	local snipLines = vim.list_extend(prefix, body)
 	local sourceFile = vim.fs.basename(snip.fullPath)
 
@@ -190,16 +196,16 @@ local function editInPopup(snip, mode)
 
 	-- label "prefix #N"
 	local ns = a.nvim_create_namespace("snippet-manager")
-	for i = 1, #prefix do
+	for i = 1, numOfPrefixes, 1 do
 		local ln = i - 1
-		a.nvim_buf_set_extmark(bufnr, ns, 0, ln, {
+		a.nvim_buf_set_extmark(bufnr, ns, ln, 0, {
 			virt_text = { { ("Prefix #%s"):format(i), "DiagnosticVirtualTextHint" } },
 			virt_text_pos = vim.fn.has("nvim-0.10") == 1 and "inline" or "right_align",
 		})
 	end
 	-- separator line
 	local winWidth = a.nvim_win_get_width(winnr)
-	a.nvim_buf_set_extmark(bufnr, ns, #prefix - 1, 0, {
+	a.nvim_buf_set_extmark(bufnr, ns, numOfPrefixes - 1, 0, {
 		virt_lines = {
 			{ { ("═"):rep(winWidth), "FloatBorder" } },
 		},
@@ -213,7 +219,7 @@ local function editInPopup(snip, mode)
 	vim.keymap.set("n", conf.keymaps.cancel, close, { buffer = bufnr, nowait = true })
 	vim.keymap.set("n", conf.keymaps.confirm, function()
 		local editedLines = a.nvim_buf_get_lines(bufnr, 0, -1, false)
-		updateSnippet(snip, editedLines)
+		updateSnippetFile(snip, editedLines)
 		close()
 	end, { buffer = bufnr, nowait = true })
 	vim.keymap.set("n", conf.keymaps.delete, function()
@@ -240,7 +246,7 @@ function M.editSnippet()
 			-- convert dictionary to array for `vim.ui.select`
 			local snippetsInFileList = {} ---@type snippetObj[]
 			for key, snip in pairs(snippetsInFileDict) do
-				snip.path = filepath
+				snip.fullPath = filepath
 				snip.originalKey = key
 				table.insert(snippetsInFileList, snip)
 			end
@@ -253,7 +259,7 @@ function M.editSnippet()
 		prompt = "Select snippet:",
 		format_item = function(item)
 			local snipname = item.prefix[1] or item.prefix
-			local filename = vim.fs.basename(item.path):gsub("%.json$", "")
+			local filename = vim.fs.basename(item.fullPath):gsub("%.json$", "")
 			return ("%s\t\t(%s)"):format(snipname, filename)
 		end,
 		kind = "snippet-manager.snippetSearch",
