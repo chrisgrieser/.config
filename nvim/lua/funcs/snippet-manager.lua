@@ -120,15 +120,30 @@ local function updateSnippetFile(snip, editedLines)
 	local snippetsInFile = readAndParseJson(snip.fullPath)
 	local filepath = snip.fullPath
 
-	-- new snippet: key = prefix
-	local isNewSnippet = snip.originalKey == nil
-	local key = isNewSnippet and snip.prefix or snip.originalKey
-	assert(key, "Snippet key missing")
-
 	-- determine prefix & body
 	local numOfPrefixes = type(snip.prefix) == "string" and 1 or #snip.prefix
 	local prefix = vim.list_slice(editedLines, 1, numOfPrefixes)
 	local body = vim.list_slice(editedLines, numOfPrefixes + 1, #editedLines)
+
+	-- LINTING PREFIX & BODY
+	-- trim (only trailing for body, since leading there is indentation)
+	prefix = vim.tbl_map(function(line) return vim.trim(line) end, prefix)
+	body = vim.tbl_map(function(line) return line:gsub("%s+$", "") end, body)
+	-- remove deleted prefixes
+	prefix = vim.tbl_filter(function(line) return line ~= "" end, prefix)
+	-- trim trailing empty lines from body
+	repeat
+		table.remove(body)
+	until body[#body] ~= ""
+
+	-- new snippet: key = prefix
+	local isNewSnippet = snip.originalKey == nil
+	local key = isNewSnippet and prefix[1] or snip.originalKey
+	assert(key, "Snippet key missing")
+	-- ensure key is unique
+	while isNewSnippet and snippetsInFile[key] ~= nil do
+		key = key .. "_1"
+	end
 
 	-- update snipObj
 	snip.originalKey = nil -- delete key set by this plugin
@@ -165,8 +180,8 @@ local function editInPopup(snip, mode)
 
 	-- title
 	local displayName = mode == "new" and "New Snippet" or snip.originalKey:sub(1, 25)
-	local title = mode == "new" and ('New Snippet in "%s"'):format(sourceFile)
-		or ("%s [%s] "):format(displayName, sourceFile)
+	local title = mode == "new" and (' New Snippet in "%s" '):format(sourceFile)
+		or (" %s [%s] "):format(displayName, sourceFile)
 
 	-- create buffer and window
 	local bufnr = a.nvim_create_buf(false, true)

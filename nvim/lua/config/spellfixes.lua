@@ -24,6 +24,7 @@ local spellfixes = {
 	shwo = "show",
 	hwo = "how",
 	tiem = "item",
+	ahve = "have",
 	seperate = "separate",
 	seperator = "separator",
 	msot = "most",
