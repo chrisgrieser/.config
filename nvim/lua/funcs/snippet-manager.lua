@@ -2,17 +2,17 @@ local M = {}
 local editSnippetIn = {}
 --------------------------------------------------------------------------------
 
----@class (exact) pluginConfig
----@field snippetDir string
-
 ---@class (exact) snippetObj VSCode snippet json
----@field path? string
----@field originalKey string original key of the snippet
+---@field path string (key only set by this plugin)
+---@field originalKey string (key only set by this plugin)
 ---@field prefix string|string[]
 ---@field body string|string[]
 ---@field description? string
 
 --------------------------------------------------------------------------------
+
+---@class (exact) pluginConfig
+---@field snippetDir string
 
 ---@type pluginConfig
 local defaultConfig = {
@@ -35,7 +35,7 @@ end
 
 ---@param str string
 ---@param filePath string
----@param mode "w"|"a" writes or appends
+---@param mode "w"|"a" write or append
 ---@return string|nil -- error message
 local function writeFile(mode, filePath, str)
 	local file, _ = io.open(filePath, mode)
@@ -44,23 +44,11 @@ local function writeFile(mode, filePath, str)
 	file:close()
 end
 
---------------------------------------------------------------------------------
+---@param path string
+---@return table
+local function readAndParseJson(path) return vim.json.decode(readFile(path) or "{}") or {} end
 
----Reads VS Code snippet json file, and also converts the object to an array of
----snippets, storing the filepath and the original key.
----@param filepath string
----@return snippetObj[] snippetsInFile returns empty table if file not readable
-local function readSnippetFile(filepath)
-	local snippetsInFile = {}
-	local path = config.snippetDir .. "/" .. filepath
-	local snippets = vim.json.decode(readFile(path) or "{}") or {}
-	for key, snip in pairs(snippets) do
-		snip.path = path
-		snip.originalKey = key
-		table.insert(snippetsInFile, snip)
-	end
-	return snippetsInFile
-end
+--------------------------------------------------------------------------------
 
 ---Tries to determine filetype based on input string. If input is neither a
 ---filetype nor a file extension known to nvim, returns false.
@@ -81,9 +69,10 @@ end
 ---@param snip snippetObj snippet to update
 ---@param bodyLines string[]
 local function updateSnippet(snip, bodyLines)
-	local snippetsInFile = readSnippetFile(snip.path)
+	local snippetsInFile = readAndParseJson(snip.path)
 
 	local key = snip.originalKey
+	local filepath = snip.path
 	snip.originalKey = nil
 	snip.path = nil
 	snip.body = #bodyLines == 1 and bodyLines[1] or bodyLines
@@ -91,7 +80,7 @@ local function updateSnippet(snip, bodyLines)
 
 	local jsonStr = vim.json.encode(snippetsInFile)
 	assert(jsonStr, "snippet could not be written")
-	writeFile("w", snip.path, jsonStr)
+	writeFile("w", filepath, jsonStr)
 end
 
 ---@param snip snippetObj
@@ -152,13 +141,25 @@ end
 ---@param editWhere? "popup"|"editor"
 function M.snippetSearch(editWhere)
 	if not editWhere then editWhere = "popup" end
+	if not vim.tbl_contains(vim.tbl_keys(editSnippetIn), editWhere) then
+		vim.notify("snippetSearch does not accept '" .. editWhere .. "'", vim.log.levels.ERROR)
+		return
+	end
 
 	local allSnippets = {} ---@type snippetObj[]
 	for name, _ in vim.fs.dir(config.snippetDir, { depth = 3 }) do
 		if name:find("%.json$") and name ~= "package.json" then
-			local snippetsInFile = readSnippetFile(name)
+			local filepath = config.snippetDir .. "/" .. name
+			local snippetsInFileDict = readAndParseJson(filepath)
 
-			vim.list_extend(allSnippets, snippetsInFile)
+			-- convert dictionary to list for vim.ui.select
+			local snippetsInFileList = {}
+			for key, snip in pairs(snippetsInFileDict) do
+				snip.path = filepath
+				snip.originalKey = key
+				table.insert(snippetsInFileList, snip)
+			end
+			vim.list_extend(allSnippets, snippetsInFileList)
 		end
 	end
 
