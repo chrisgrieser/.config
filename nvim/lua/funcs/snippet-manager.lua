@@ -139,8 +139,11 @@ function editSnippetIn.popup(snip)
 		border = config.editSnippetPopup.border,
 		zindex = 1, -- below nvim-notify floats
 	})
-	a.nvim_win_set_option(winnr, "number", true)
 	a.nvim_win_set_option(winnr, "signcolumn", "no")
+
+	-- highlight cursor positions like `$0` or `${1:foo}`
+	vim.fn.matchadd("DiagnosticVirtualTextInfo", [[\$\d]])
+	vim.fn.matchadd("DiagnosticVirtualTextInfo", [[\${\d:.\{-}}]])
 
 	-- keymaps
 	local function close()
