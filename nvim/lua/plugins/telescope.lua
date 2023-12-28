@@ -133,6 +133,37 @@ end
 
 --------------------------------------------------------------------------------
 
+-- Setup filetype-specific symbol-filters for symbol-search
+-- (mostly for filetypes that do not know functions)
+-- Also, we are using document symbols here since Treesitter apparently does not
+-- support symbols for these filetypes.
+local symbolFilter = {
+	yaml = { "object", "array" },
+	json = "module",
+	toml = "object",
+	markdown = "string", -- = headings
+}
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = vim.tbl_keys(symbolFilter),
+	callback = function(ctx)
+		local ft = ctx.match
+		local symbol = symbolFilter[ft]
+		vim.keymap.set(
+			"n",
+			"gs",
+			function()
+				require("telescope.builtin").lsp_document_symbols {
+					prompt_title = "Sections",
+					symbols = symbol,
+				}
+			end,
+			{ desc = " Sections", buffer = true }
+		)
+	end,
+})
+
+--------------------------------------------------------------------------------
+
 local function telescopeConfig()
 	require("telescope").setup {
 		defaults = {
@@ -299,9 +330,17 @@ local function telescopeConfig()
 				symbols = { "function", "class", "method" },
 				symbol_highlights = { ["function"] = "Function" },
 			},
+			lsp_document_symbols = {
+				prompt_prefix = "󰒕 ",
+				symbols = { "function", "class", "method" },
+				symbol_highlights = {
+					["module"] = "Comment",
+					["array"] = "Comment",
+					["object"] = "Comment",
+				},
+			},
 			lsp_workspace_symbols = { -- workspace symbols are not working correctly in lua
 				prompt_prefix = "󰒕 ",
-				prompt_title = "Workspace Symbols",
 				fname_width = 12,
 				symbols = { "function", "class", "method" },
 			},
@@ -382,28 +421,6 @@ return {
 			{ "gL", function() telescope("grep_string") end, desc = " Grep cword" },
 		},
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
-		init = function()
-			local symbolFilter = {
-				yaml = "object",
-				json = "module",
-				toml = "object",
-				markdown = "string", -- = headings
-			} 
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = vim.tbl_keys(symbolFilter),
-				callback = function(ctx)
-					local ft = ctx.match
-					local symbol = symbolFilter[ft]
-					-- stylua: ignore
-					vim.keymap.set("n", "gs", function()
-						require("telescope.builtin").treesitter {
-							prompt_title = "Sections",
-							symbols = { "object", "module" },
-						}
-					end, { desc = " Sections", buffer = true })
-				end,
-			})
-		end,
 		config = telescopeConfig,
 	},
 	{ -- Icon Picker

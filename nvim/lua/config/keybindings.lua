@@ -199,11 +199,13 @@ keymap(
 )
 
 keymap({ "n", "x", "i" }, "<D-w>", function()
+	vim.cmd("silent! update")
+	local closed = pcall(vim.cmd.close)
+	if closed then return end
 	local onlyOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) == 1
 	if onlyOneBuffer then return end
-	vim.cmd("silent! update")
 	vim.cmd.bdelete()
-end, { desc = "󰽙 :bdelete" })
+end, { desc = "󰽙 :close / :bdelete" })
 
 --------------------------------------------------------------------------------
 -- CLIPBOARD
