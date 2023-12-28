@@ -56,7 +56,7 @@ keymap(
 
 keymap("n", "<leader>ps", function()
 	local snippetDir = vim.fn.stdpath("config") .. "/snippets"
-	require("funcs.nano-plugins").snippetSearch(snippetDir)
+	require("funcs.snippet-manager").snippetSearch(snippetDir)
 end, { desc = " Search Snippets" })
 
 --------------------------------------------------------------------------------

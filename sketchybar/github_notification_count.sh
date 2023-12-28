@@ -20,7 +20,7 @@ fi
 #───────────────────────────────────────────────────────────────────────────────
 
 # wait so notification opened is marked as read
-[[ "$INFO" == "$BROWSER_APP" ]] || sleep 3
+[[ "$INFO" == "$BROWSER_APP" ]] || sleep 5
 
 # DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28
 notification_count=$(curl -sL \
