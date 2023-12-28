@@ -1,12 +1,9 @@
 local M = {}
+local editSnippetIn = {}
 --------------------------------------------------------------------------------
 
-local defaultConfig = {
-	snippetDir = vim.fn.stdpath("config") .. "/snippets",
-}
-local config = defaultConfig
-
---------------------------------------------------------------------------------
+---@class (exact) pluginConfig
+---@field snippetDir string
 
 ---@class (exact) snippetObj VSCode snippet json
 ---@field path? string
@@ -14,6 +11,16 @@ local config = defaultConfig
 ---@field prefix string|string[]
 ---@field body string|string[]
 ---@field description? string
+
+--------------------------------------------------------------------------------
+
+---@type pluginConfig
+local defaultConfig = {
+	snippetDir = vim.fn.stdpath("config") .. "/snippets",
+}
+local config = defaultConfig
+
+--------------------------------------------------------------------------------
 
 ---@param filePath string
 ---@return string? -- content or error message
@@ -55,6 +62,22 @@ local function readSnippetFile(filepath)
 	return snippetsInFile
 end
 
+---Tries to determine filetype based on input string. If input is neither a
+---filetype nor a file extension known to nvim, returns false.
+---@param input string
+---@return string|false filetype
+local function guessFileType(input)
+	-- input is filetype
+	local allKnownFts = vim.fn.getcompletion("", "filetype")
+	if vim.tbl_contains(allKnownFts, input) then return input end
+
+	-- input is file extension
+	local matchedFt = vim.filetype.match { filename = "dummy." .. input }
+	if matchedFt then return matchedFt end
+
+	return false
+end
+
 ---@param snip snippetObj snippet to update
 ---@param bodyLines string[]
 local function updateSnippet(snip, bodyLines)
@@ -71,22 +94,8 @@ local function updateSnippet(snip, bodyLines)
 	writeFile("w", snip.path, jsonStr)
 end
 
----Tries to determine filetype based on input string. If input is neither a
----filetype nor a file extension known to nvim, returns nil. fsfsf sfsfs fsfs
----@param input string
----@return string|nil filetype
-local function guessFileType(input)
-	-- input is filetype
-	local allKnownFts = vim.fn.getcompletion("", "filetype")
-	if vim.tbl_contains(allKnownFts, input) then return input end
-
-	-- input is file extension
-	local matchedFt = vim.filetype.match { filename = "dummy." .. input }
-	return matchedFt
-end
-
 ---@param snip snippetObj
-local function editSnippetInPopup(snip)
+function editSnippetIn.popup(snip)
 	local snipLines = snip.body
 	if type(snipLines) == "string" then snipLines = { snipLines } end
 	local displayName = snip.originalKey:sub(1, 25)
@@ -102,7 +111,7 @@ local function editSnippetInPopup(snip)
 	a.nvim_buf_set_option(bufnr, "buftype", "nofile")
 
 	local width = 0.7
-	local height = 0.7
+	local height = 0.5
 	local winnr = a.nvim_open_win(bufnr, true, {
 		relative = "win",
 		-- centered window
@@ -110,12 +119,13 @@ local function editSnippetInPopup(snip)
 		height = math.floor(height * a.nvim_win_get_height(0)),
 		row = math.floor((1 - height) * a.nvim_win_get_height(0) / 2),
 		col = math.floor((1 - width) * a.nvim_win_get_width(0) / 2),
-		title = ("%s (%s) "):format(displayName, sourceFile),
+		title = (" %s (%s) "):format(displayName, sourceFile),
 		title_pos = "center",
 		border = "rounded",
 		style = "minimal",
 		zindex = 1, -- below nvim-notify floats
 	})
+	a.nvim_win_set_option(winnr, "number", true)
 
 	-- keymaps
 	local function close()
@@ -130,10 +140,19 @@ local function editSnippetInPopup(snip)
 	end, { buffer = bufnr, nowait = true })
 end
 
+---@param snip snippetObj
+function editSnippetIn.editor(snip)
+	local locationInFile = '"' .. snip.originalKey:gsub(" ", [[\ ]]) .. '":'
+	vim.cmd(("edit +/%s %s"):format(locationInFile, snip.path))
+end
+
 --------------------------------------------------------------------------------
 
 ---Searches a folder of vs-code-like snippets in json format and opens the selected.
-function M.snippetSearch()
+---@param editWhere? "popup"|"editor"
+function M.snippetSearch(editWhere)
+	if not editWhere then editWhere = "popup" end
+
 	local allSnippets = {} ---@type snippetObj[]
 	for name, _ in vim.fs.dir(config.snippetDir, { depth = 3 }) do
 		if name:find("%.json$") and name ~= "package.json" then
@@ -153,11 +172,7 @@ function M.snippetSearch()
 		kind = "snippetList",
 	}, function(snip)
 		if not snip then return end
-		editSnippetInPopup(snip)
-
-		-- to open file at snippet locaton:
-		-- local locationInFile = '"' .. snip.originalKey:gsub(" ", [[\ ]]) .. '":'
-		-- vim.cmd(("edit +/%s %s"):format(locationInFile, snip.path))
+		editSnippetIn[editWhere](snip)
 	end)
 end
 

@@ -36,10 +36,8 @@ while pgrep -xq "neovide" || pgrep -xq "nvim"; do
 	sleep 0.1
 	i=$((i + 1))
 	if [[ $i -gt 10 ]]; then
-		if ! killall -9 neovide nvim "Automator Application Stub"; then
-			echo -n "Could not kill neovide." # Alfred notification
-			return 1
-		fi
+		echo -n "Could not quit neovide." # Alfred notification
+		return 1
 	fi
 done
 
