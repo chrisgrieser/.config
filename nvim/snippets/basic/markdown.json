@@ -14,6 +14,16 @@
 		"body": ["> [!IMPORTANT]", "> $0"],
 		"description": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts"
 	},
+	"tip (callout)": {
+		"prefix": "tip (callout)",
+		"body": ["> [!TIP]", "> $0"],
+		"description": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts"
+	},
+	"caution (callout)": {
+		"prefix": "caution (callout)",
+		"body": ["> [!CAUTION]", "> $0"],
+		"description": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts"
+	},
 	"insert toc": {
 		"prefix": "insert toc",
 		"body": "<!-- toc -->",
@@ -39,9 +49,7 @@
 		"body": [
 			"| ${1:Column1}   | ${2:Column2}   |",
 			"|--------------- | -------------- |",
-			"| ${3:Item1.1}   | ${4:Item2.1}   |",
-			"${0}"
-		],
-		"description": "Insert table with 2 rows and 2 columns. First row is heading."
+			"| ${3:Item1.1}   | ${4:Item2.1}   |"
+		]
 	}
 }
