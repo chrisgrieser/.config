@@ -13,7 +13,7 @@ local M = {}
 ---@class (exact) pluginConfig
 ---@field snippetDir string
 ---@field editSnippetPopup { height: number, width: number, border: string, keymaps: table<string, string> }
----@field jsonFormatter string|string[]|false passed to vim.fn.system
+---@field jsonFormatter "yq"|"jq"|"none"
 
 ---@type pluginConfig
 local defaultConfig = {
@@ -28,15 +28,10 @@ local defaultConfig = {
 			delete = "<D-BS>",
 		},
 	},
-	-- If `false`, the json will be written in minified format. Pass a json
-	-- formatter like `jq` if you want the json written in prettified format. The
-	-- json-string will be piped as stdin to the formatter. This can be useful
+	-- `none` has no dependency, but writes a minified json file.
+	-- `yq` and `jq` ensure formatted & sorted json files, which you might prefer
 	-- for version-controlling your snippets.
-	jsonFormatter = { "biome", "format", "--stdin-file-path=foo.json" },
-	-- examples
-	-- jsonFormatter = "jq",
-	-- jsonFormatter = false,
-	-- jsonFormatter = { "biome", "--stdin-file-path=foobar.json" },
+	jsonFormatter = "none", -- yq|jq|none
 }
 local config = defaultConfig
 
@@ -94,17 +89,18 @@ end
 local function writeAndFormatSnippetFile(filepath, snippetsInFile)
 	local jsonStr = vim.json.encode(snippetsInFile)
 	assert(jsonStr, "Decoding error. No changes made.")
-	if config.jsonFormatter then
-		jsonStr = vim.fn.system(config.jsonFormatter, jsonStr)
-		if vim.v.shell_error ~= 0 then
-			local msg = {
-				"JSON formatting exited with error.",
-				"No changes made.",
-				"Ensure your json formatting command is valid.",
-			}
-			notify(table.concat(msg, "\n"), "error")
-			return false
-		end
+
+	-- INFO formatting via `yq` or `jq` is necessary, since `vim.json.encode`
+	-- does not ensure a stable order of keys in the written JSON.
+	if config.jsonFormatter ~= "none" then
+		local cmds = {
+			-- DOCS https://mikefarah.gitbook.io/yq/operators/sort-keys
+			yq = { "yq", "--prettyPrint", "--output-format=json", "--no-colors", "sort_keys(..)" },
+			-- DOCS https://jqlang.github.io/jq/manual/#invoking-jq
+			jq = { "jq", "--sort-keys", "--monochrome-output" },
+		}
+		jsonStr = vim.fn.system(cmds[config.jsonFormatter], jsonStr)
+		assert(vim.v.shell_error ~= 0, "JSON formatting exited with error.")
 	end
 
 	local file, _ = io.open(filepath, "w")
@@ -125,16 +121,24 @@ local function updateSnippetFile(snip, editedLines)
 	local prefix = vim.list_slice(editedLines, 1, numOfPrefixes)
 	local body = vim.list_slice(editedLines, numOfPrefixes + 1, #editedLines)
 
-	-- LINTING PREFIX & BODY
+	-- LINT/VALIDATE PREFIX & BODY
 	-- trim (only trailing for body, since leading there is indentation)
 	prefix = vim.tbl_map(function(line) return vim.trim(line) end, prefix)
 	body = vim.tbl_map(function(line) return line:gsub("%s+$", "") end, body)
 	-- remove deleted prefixes
 	prefix = vim.tbl_filter(function(line) return line ~= "" end, prefix)
+	if #prefix == 0 then
+		notify("Prefix is empty. No changes made.", "warn")
+		return
+	end
 	-- trim trailing empty lines from body
-	repeat
+	while body[#body] == "" do
 		table.remove(body)
-	until body[#body] ~= ""
+		if #body == 0 then
+			notify("Body is empty. No changes made.", "warn")
+			return
+		end
+	end
 
 	-- new snippet: key = prefix
 	local isNewSnippet = snip.originalKey == nil
@@ -190,6 +194,7 @@ local function editInPopup(snip, mode)
 	local guessedFt = guessFileType(sourceFile:gsub("%.json$", ""))
 	if guessedFt then a.nvim_buf_set_option(bufnr, "filetype", guessedFt) end
 	a.nvim_buf_set_option(bufnr, "buftype", "nofile")
+	if mode == "new" then vim.cmd.startinsert() end
 
 	local winnr = a.nvim_open_win(bufnr, true, {
 		relative = "win",
@@ -275,7 +280,7 @@ function M.editSnippet()
 		format_item = function(item)
 			local snipname = item.prefix[1] or item.prefix
 			local filename = vim.fs.basename(item.fullPath):gsub("%.json$", "")
-			return ("%s\t\t(%s)"):format(snipname, filename)
+			return ("%s\t\t[%s]"):format(snipname, filename)
 		end,
 		kind = "snippet-manager.snippetSearch",
 	}, function(snip)
