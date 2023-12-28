@@ -13,10 +13,22 @@ local editSnippetIn = {}
 
 ---@class (exact) pluginConfig
 ---@field snippetDir string
+---@field editSnippetPopup { height: number, width: number, border: string }
+---@field jsonFormatter string|string[]|false passed to vim.fn.system
 
 ---@type pluginConfig
 local defaultConfig = {
 	snippetDir = vim.fn.stdpath("config") .. "/snippets",
+	editSnippetPopup = {
+		height = 0.5,
+		width = 0.7,
+		border = "rounded",
+	},
+	-- If `false`, the json will be written in minified format. Pass a json
+	-- formatter like `jq` if you want the json written in prettified
+	-- format. This can be useful for version-controlling your snippets.
+	jsonFormatter = false,
+	-- jsonFormatter = { "jq", ".", "--monochrome-output", "$FILENAME" },
 }
 local config = defaultConfig
 
@@ -48,6 +60,13 @@ end
 ---@return table
 local function readAndParseJson(path) return vim.json.decode(readFile(path) or "{}") or {} end
 
+---@param msg string
+---@param level "info"|"warn"|"error"|"debug"|"trace"
+local function notify(msg, level)
+	if not level then level = "info" end
+	vim.notify(msg, vim.log.levels[level:upper()], { title = "Snippet Manager" })
+end
+
 --------------------------------------------------------------------------------
 
 ---Tries to determine filetype based on input string. If input is neither a
@@ -71,10 +90,12 @@ end
 local function updateSnippet(snip, bodyLines)
 	local snippetsInFile = readAndParseJson(snip.path)
 
+	-- delete the keys set by this plugin
 	local key = snip.originalKey
 	local filepath = snip.path
 	snip.originalKey = nil
 	snip.path = nil
+
 	snip.body = #bodyLines == 1 and bodyLines[1] or bodyLines
 	snippetsInFile[key] = snip
 
@@ -85,22 +106,23 @@ end
 
 ---@param snip snippetObj
 function editSnippetIn.popup(snip)
+	local a = vim.api
+
 	local snipLines = snip.body
 	if type(snipLines) == "string" then snipLines = { snipLines } end
 	local displayName = snip.originalKey:sub(1, 25)
-	local sourceFile = vim.fs.basename(snip.path):gsub("%.json$", "")
+	local sourceFile = vim.fs.basename(snip.path)
 
 	-- create buffer and window
-	local a = vim.api
 	local bufnr = a.nvim_create_buf(false, true)
 	a.nvim_buf_set_lines(bufnr, 0, -1, false, snipLines)
 	a.nvim_buf_set_name(bufnr, displayName)
-	local guessFt = guessFileType(sourceFile)
-	if guessFt then a.nvim_buf_set_option(bufnr, "filetype", guessFt) end
+	local guessedFt = guessFileType(sourceFile:gsub("%.json$", ""))
+	if guessedFt then a.nvim_buf_set_option(bufnr, "filetype", guessedFt) end
 	a.nvim_buf_set_option(bufnr, "buftype", "nofile")
 
-	local width = 0.7
-	local height = 0.5
+	local width = config.editSnippetPopup.width
+	local height = config.editSnippetPopup.height
 	local winnr = a.nvim_open_win(bufnr, true, {
 		relative = "win",
 		-- centered window
@@ -110,7 +132,7 @@ function editSnippetIn.popup(snip)
 		col = math.floor((1 - width) * a.nvim_win_get_width(0) / 2),
 		title = (" %s (%s) "):format(displayName, sourceFile),
 		title_pos = "center",
-		border = "rounded",
+		border = config.editSnippetPopup.border,
 		style = "minimal",
 		zindex = 1, -- below nvim-notify floats
 	})
@@ -142,7 +164,7 @@ end
 function M.snippetSearch(editWhere)
 	if not editWhere then editWhere = "popup" end
 	if not vim.tbl_contains(vim.tbl_keys(editSnippetIn), editWhere) then
-		vim.notify("snippetSearch does not accept '" .. editWhere .. "'", vim.log.levels.ERROR)
+		notify("snippetSearch does not accept '" .. editWhere .. "'", "error")
 		return
 	end
 
@@ -152,8 +174,8 @@ function M.snippetSearch(editWhere)
 			local filepath = config.snippetDir .. "/" .. name
 			local snippetsInFileDict = readAndParseJson(filepath)
 
-			-- convert dictionary to list for vim.ui.select
-			local snippetsInFileList = {}
+			-- convert dictionary to array for `vim.ui.select`
+			local snippetsInFileList = {} ---@type snippetObj[]
 			for key, snip in pairs(snippetsInFileDict) do
 				snip.path = filepath
 				snip.originalKey = key
@@ -167,10 +189,10 @@ function M.snippetSearch(editWhere)
 		prompt = "Select snippet",
 		format_item = function(item)
 			local snipname = item.prefix[1] or item.prefix
-			local filename = item.path:match("([^/]+)%.json$")
+			local filename = vim.fs.basename(item.path):gsub("%.json$", "")
 			return ("%s\t\t(%s)"):format(snipname, filename)
 		end,
-		kind = "snippetList",
+		kind = "snippet-manager.snippetSearch",
 	}, function(snip)
 		if not snip then return end
 		editSnippetIn[editWhere](snip)
