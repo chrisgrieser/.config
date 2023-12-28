@@ -102,8 +102,6 @@ opt.textwidth = 80 -- mostly set by .editorconfig, therefore only fallback
 opt.colorcolumn = "+1"
 opt.wrap = false
 
-opt.cmdheight = 0
-opt.history = 400 -- reduce noise for command history search
 opt.shortmess:append("sSI") -- reduce info in :messages
 opt.report = 9001 -- disable "x more/fewer lines" messages
 
@@ -126,6 +124,20 @@ opt.smartindent = true
 opt.expandtab = false -- mostly set by .editorconfig, therefore only fallback
 opt.tabstop = 3
 opt.shiftwidth = 3
+
+--------------------------------------------------------------------------------
+-- CMDLINE
+opt.cmdheight = 0 -- also auto-set by noice
+opt.history = 400 -- reduce noise for command history search
+
+-- if last command was line-jump, remove it from history
+vim.api.nvim_create_autocmd("CmdlineLeave", {
+	callback = function(ctx)
+		if not ctx.match == ":" then return end
+		local lineJump = vim.fn.histget(":", -1):match("^%d+$")
+		if lineJump then vim.fn.histdel(":", -1) end
+	end,
+})
 
 --------------------------------------------------------------------------------
 -- INVISIBLE CHARS
