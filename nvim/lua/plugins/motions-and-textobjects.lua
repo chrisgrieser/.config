@@ -100,6 +100,8 @@ return {
 		"chrisgrieser/nvim-various-textobjs",
 		keys = {
 			-- stylua: ignore start
+			{ "pp", "<cmd>lua require('various-textobjs.charwise-textobjs').lastPaste()<CR>", mode = {"x", "o"}, desc = "󱡔 last paste" },
+
 			{ "<Space>", "<cmd>lua require('various-textobjs').subword('inner')<CR>", mode = "o", desc = "󱡔 inner subword" },
 			{ "a<Space>", "<cmd>lua require('various-textobjs').subword('outer')<CR>", mode = { "o", "x" }, desc = "󱡔 outer subword" },
 
@@ -156,7 +158,7 @@ return {
 			{ "as", "<cmd>lua require('various-textobjs').cssSelector('outer')<CR>", mode = { "x", "o" }, ft = "css", desc = "󱡔 outer selector" },
 
 			-- shell
-			{ "p", "<cmd>lua require('various-textobjs').shellPipe('inner')<CR>", mode = "o", ft = "sh", desc = "󱡔 inner pipe" },
+			{ "pi", "<cmd>lua require('various-textobjs').shellPipe('inner')<CR>", mode = "o", ft = "sh", desc = "󱡔 inner pipe" },
 			-- stylua: ignore end
 
 			{ -- delete surrounding indentation
