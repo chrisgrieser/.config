@@ -93,7 +93,7 @@ rules:
     - true
     - ignore:
         - custom-properties
-  lightness-notation: percentage
+  lightness-notation: null # PENDING support from stylelint-lsp
   media-feature-name-no-vendor-prefix: true
   media-feature-range-notation: context
   number-max-precision: 4

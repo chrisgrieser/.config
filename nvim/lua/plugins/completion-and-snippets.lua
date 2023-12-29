@@ -175,8 +175,12 @@ return {
 		config = function()
 			-- DOCS https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#api-reference
 			require("luasnip").setup {
-				region_check_events = "CursorMoved", -- prevent <Tab> jumping back to a snippet after it has been left early
-				update_events = { "TextChanged", "TextChangedI" }, -- live updating of snippets
+				-- prevent <Tab> jumping back to a snippet after it has been left early
+				region_check_events = "CursorMoved", 
+				-- live updating of snippets
+				update_events = { "TextChanged", "TextChangedI" },
+				-- disable auto-reload, since already done by my own plugin
+				fs_event_providers = { autocmd = false, libuv = false }
 			}
 
 			-- VS-code-style snippets

@@ -30,4 +30,4 @@ yq '.rules = load("stylelint-standard.yml") + .rules' personal-config.yml >compi
 # cleanup temp files
 rm -f recommended.js standard.js stylelint-standard.json
 
-
+echo "Done."
