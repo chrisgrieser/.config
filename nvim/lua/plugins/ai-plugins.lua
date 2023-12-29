@@ -37,6 +37,11 @@ return {
 				silent = true,
 				desc = "󰚩 Accept Suggestion",
 			},
+			{
+				"<leader>oa", function ()
+					vim.g.codeium_enabled = vim.g.codeium_enabled ~= true
+				end
+			}
 		},
 		config = function()
 			u.addToLuaLine("sections", "lualine_x", function()

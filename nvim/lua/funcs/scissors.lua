@@ -43,7 +43,7 @@ local defaultConfig = {
 
 	-- on adding/editing a snippet, reload the snippet file. Currently only
 	-- supports LuaSnip (PRs welcome)
-	reloadOnChange = false,
+	reloadOnChange = true,
 }
 local config = defaultConfig
 
@@ -119,12 +119,14 @@ local function guessFileType(pathOfSnippetFile)
 	local allKnownFts = vim.fn.getcompletion("", "filetype")
 	if vim.tbl_contains(allKnownFts, filename) then return filename end
 
-	-- fallback #2: filename is file extension
+	-- fallback #2: filename is extension
 	local matchedFt = vim.filetype.match { filename = "dummy." .. filename }
 	if matchedFt then return matchedFt end
 
 	return false
 end
+
+--------------------------------------------------------------------------------
 
 ---@param filepath string
 ---@param snippetsInFile snippetObj[]
@@ -206,17 +208,27 @@ local function updateSnippetFile(snip, editedLines)
 	snip.prefix = #prefix == 1 and prefix[1] or prefix
 	snippetsInFile[key] = snip
 
+	-- write & notify
 	local success = writeAndFormatSnippetFile(filepath, snippetsInFile)
-	if success then notify(isNewSnippet and "Snippet created." or "Snippet updated.") end
+	if success then
+		local displayName = #key > 20 and key:sub(1, 20) .. "…" or key
+		local action = isNewSnippet and "created" or "updated"
+		notify(('"%s" %s.'):format(displayName, action))
+	end
 end
 
 ---@param snip snippetObj
 local function deleteSnippet(snip)
+	local key = snip.originalKey
+	assert(key)
 	local snippetsInFile = readAndParseJson(snip.fullPath)
-	snippetsInFile[snip.originalKey] = nil -- = delete
+	snippetsInFile[key] = nil -- = delete
 
 	local success = writeAndFormatSnippetFile(snip.fullPath, snippetsInFile)
-	if success then notify("Snippet deleted.") end
+	if success then
+		local displayName = #key > 20 and key:sub(1, 20) .. "…" or key
+		notify(('"%s" deleted.'):format(displayName))
+	end
 end
 
 ---@param snip snippetObj
@@ -277,14 +289,14 @@ local function editInPopup(snip, mode)
 		local ln = i - 1
 		local label = numOfPrefixes == 1 and "Prefix" or "Prefix #" .. i
 		a.nvim_buf_add_highlight(bufnr, ns, "DiagnosticVirtualTextHint", ln, 0, -1)
-		a.nvim_buf_set_extmark(bufnr, ns, ln, 1, {
+		a.nvim_buf_set_extmark(bufnr, ns, ln, 0, {
 			virt_text = { { label, "Todo" } },
 			virt_text_pos = "right_align",
 		})
 	end
 	-- win separator as virtual line
 	local winWidth = a.nvim_win_get_width(winnr)
-	a.nvim_buf_set_extmark(bufnr, ns, numOfPrefixes - 1, 1, {
+	a.nvim_buf_set_extmark(bufnr, ns, numOfPrefixes - 1, 0, {
 		virt_lines = {
 			{ { ("═"):rep(winWidth), "FloatBorder" } },
 		},

@@ -41,8 +41,9 @@ while pgrep -xq "neovide" || pgrep -xq "nvim"; do
 	fi
 done
 
-# Restart
-sleep 0.15
-open -a "Neovide"
-sleep 0.25
-open -a "Neovide" # 2nd time to ensure focussing
+# Restart (looped to ensure reloading)
+sleep 0.1
+for i in {1..3}; do
+	open -a "Neovide"
+	sleep 0.25
+done

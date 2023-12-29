@@ -134,8 +134,10 @@ opt.history = 400 -- reduce noise for command history search
 vim.api.nvim_create_autocmd("CmdlineLeave", {
 	callback = function(ctx)
 		if not ctx.match == ":" then return end
-		local lineJump = vim.fn.histget(":", -1):match("^%d+$")
-		if lineJump then vim.fn.histdel(":", -1) end
+		vim.defer_fn(function ()
+			local lineJump = vim.fn.histget(":", -1):match("^%d+$")
+			if lineJump then vim.fn.histdel(":", -1) end
+		end, 100)
 	end,
 })
 

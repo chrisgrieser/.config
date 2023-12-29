@@ -12,9 +12,9 @@
   "autocmd (FileType)": {
     "body": [
       "vim.api.nvim_create_autocmd(\"FileType\", {",
-      "\tpattern = \"${2:ft}\",",
+      "\tpattern = \"${1:ft}\",",
       "\tcallback = function()",
-      "\t\t$3",
+      "\t\t$0",
       "\tend,",
       "})"
     ],
