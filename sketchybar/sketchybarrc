@@ -57,6 +57,7 @@ sketchybar \
 	--add item reminders $first_row \
 	--set reminders update_freq=300 \
 	script="$plugin_dir/reminders-count.sh" \
+	--subscribe github_notif front_app_switched \
 	--subscribe reminders system_woke \
 	\
 	--add alias "Stats,CombinedModules" $second_row \
