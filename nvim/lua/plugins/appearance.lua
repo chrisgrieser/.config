@@ -212,7 +212,7 @@ return {
 					if
 						kind == "mason.ui.language-filter"
 						or kind:find("^tinygit")
-						or kind:find("^snippet%-manager")
+						or kind:find("^nvim%-scissors")
 					then
 						return { backend = "telescope" }
 					end

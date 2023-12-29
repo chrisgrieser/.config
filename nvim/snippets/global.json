@@ -1,6 +1,6 @@
 {
   "BUG": {
-    "body": "BUGs, lots of them",
+    "body": "BUG and ants",
     "prefix": "BUG"
   },
   "CAVEAT": {
@@ -77,10 +77,6 @@
   "escape": {
     "body": "⎋",
     "prefix": "escape"
-  },
-  "hi": {
-    "body": [],
-    "prefix": "hi"
   },
   "middle dot": {
     "body": "·",
