@@ -26,6 +26,7 @@ local defaultConfig = {
 			cancel = "q",
 			confirm = "<CR>",
 			delete = "<D-BS>",
+			openInFile = "<C-o>",
 		},
 	},
 	-- `none` has no dependency, but writes a minified json file.
@@ -40,27 +41,27 @@ function M.setup(userConfig) config = vim.tbl_deep_extend("force", defaultConfig
 
 --------------------------------------------------------------------------------
 
----@param filePath string
----@return string? -- content or error message
----@return boolean success
----@nodiscard
-local function readFile(filePath)
-	local file, err = io.open(filePath, "r")
-	if not file then return err, false end
-	local content = file:read("*a")
-	file:close()
-	return content, true
-end
-
----@param path string
----@return table
-local function readAndParseJson(path) return vim.json.decode(readFile(path) or "{}") or {} end
-
 ---@param msg string
 ---@param level? "info"|"warn"|"error"|"debug"|"trace"
 local function notify(msg, level)
 	if not level then level = "info" end
 	vim.notify(msg, vim.log.levels[level:upper()], { title = "Snippet Manager" })
+end
+
+---@param path string
+---@return table
+local function readAndParseJson(path)
+	local name = vim.fs.basename(path)
+	local file, _ = io.open(path, "r")
+	assert(file, name .. " could not be read")
+	local content = file:read("*a")
+	file:close()
+	local ok, json = pcall(vim.json.decode, content) ---@cast json table
+	if not ok then
+		notify("Could not parse " .. name .. "\nSkipping file.", "warn")
+		return {}
+	end
+	return json
 end
 
 ---@return boolean
@@ -112,7 +113,7 @@ local function writeAndFormatSnippetFile(filepath, snippetsInFile)
 			jq = { "jq", "--sort-keys", "--monochrome-output" },
 		}
 		jsonStr = vim.fn.system(cmds[config.jsonFormatter], jsonStr)
-		assert(vim.v.shell_error ~= 0, "JSON formatting exited with error.")
+		assert(vim.v.shell_error == 0, "JSON formatting exited with " .. vim.v.shell_error)
 	end
 
 	local file, _ = io.open(filepath, "w")
@@ -206,7 +207,6 @@ local function editInPopup(snip, mode)
 	local guessedFt = guessFileType(sourceFile:gsub("%.json$", ""))
 	if guessedFt then a.nvim_buf_set_option(bufnr, "filetype", guessedFt) end
 	a.nvim_buf_set_option(bufnr, "buftype", "nofile")
-	if mode == "new" then vim.cmd.startinsert() end
 
 	local winnr = a.nvim_open_win(bufnr, true, {
 		relative = "win",
@@ -221,6 +221,13 @@ local function editInPopup(snip, mode)
 		zindex = 1, -- below nvim-notify floats
 	})
 	a.nvim_win_set_option(winnr, "signcolumn", "no")
+
+	-- move cursor
+	if mode == "new" then
+		vim.cmd.startinsert()
+	elseif mode == "update" then
+		a.nvim_win_set_cursor(0, { #body, 0 })
+	end
 
 	-- highlight cursor positions like `$0` or `${1:foo}`
 	vim.fn.matchadd("DiagnosticVirtualTextInfo", [[\$\d]])
@@ -248,12 +255,13 @@ local function editInPopup(snip, mode)
 		a.nvim_win_close(winnr, true)
 		a.nvim_buf_delete(bufnr, { force = true })
 	end
-	vim.keymap.set("n", conf.keymaps.cancel, close, { buffer = bufnr, nowait = true })
+	local opts = { buffer = bufnr, nowait = true, silent = true }
+	vim.keymap.set("n", conf.keymaps.cancel, close, opts)
 	vim.keymap.set("n", conf.keymaps.confirm, function()
 		local editedLines = a.nvim_buf_get_lines(bufnr, 0, -1, false)
 		updateSnippetFile(snip, editedLines)
 		close()
-	end, { buffer = bufnr, nowait = true })
+	end, opts)
 	vim.keymap.set("n", conf.keymaps.delete, function()
 		if mode == "new" then
 			notify("Cannot snippet that has not been created yet.", "warn")
@@ -261,12 +269,17 @@ local function editInPopup(snip, mode)
 		end
 		deleteSnippet(snip)
 		close()
-	end, { buffer = bufnr, nowait = true })
+	end, opts)
+	vim.keymap.set("n", conf.keymaps.openInFile, function()
+		close()
+		local locationInFile = '"' .. snip.originalKey:gsub(" ", [[\ ]]) .. '":'
+		vim.cmd(("edit +/%s %s"):format(locationInFile, snip.fullPath))
+	end, opts)
 
 	-- FIX/HACK shifting of virtual lines when using `<CR>` on empty buffer
 	vim.keymap.set("i", conf.keymaps.confirm, function()
 		local row, col = unpack(a.nvim_win_get_cursor(0))
-		if row == 0 and col == 0 then return end 
+		if row == 0 and col == 0 then return end
 		return "<CR>"
 	end, { buffer = bufnr, expr = true })
 end

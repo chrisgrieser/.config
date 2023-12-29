@@ -1,1 +1,349 @@
-Error: bad file '-': yaml: found unknown escape character
+{
+  "8-bit ansi color": {
+    "body": "\\e[38;5;${1:color}m",
+    "description": "https://i.stack.imgur.com/KTSQa.png",
+    "prefix": "8-bit ansi color"
+  },
+  "PATH (export)": {
+    "body": "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:\\$PATH",
+    "description": "Extends PATH in a way that homebrew installed CLIs are recognized in ARM and Intel Macs.",
+    "prefix": "PATH (export)"
+  },
+  "ansi": {
+    "body": "\\e[1;38;5;${1:code}m",
+    "prefix": "ansi"
+  },
+  "awk (get field)": {
+    "body": "awk '{ print $${1:1} }'",
+    "description": "Retrieve a field from the piped in string, with whitespace as the default field delimiter. `$n` means that the nth field will be used.",
+    "prefix": "awk (field)"
+  },
+  "black": {
+    "body": "\\e[1;30m",
+    "prefix": "black"
+  },
+  "blue": {
+    "body": "\\e[1;34m",
+    "prefix": "blue"
+  },
+  "check device name": {
+    "body": "scutil --get ComputerName | grep -q \"$0\"",
+    "prefix": "device name"
+  },
+  "check if dark mode (macOS)": {
+    "body": "defaults read -g AppleInterfaceStyle &>/dev/null; && echo 'isDark'",
+    "prefix": "check if dark mode (macOS)"
+  },
+  "check if in git repo": {
+    "body": "if ! git rev-parse --is-inside-work-tree &>/dev/null ; then print \"\\e[1;33mfile is not ins a git repository.\\e[0m\" && return 1 ; fi",
+    "prefix": "check if in git repo"
+  },
+  "check if installed": {
+    "body": "if [[ ! -x \"$(command -v ${1:cli})\" ]]; then print \"\\e[1;33m${1:cli} not installed.\\e[0m\" && return 1; fi\n$0",
+    "description": "https://stackoverflow.com/a/26759734/22114136",
+    "prefix": "check if installed"
+  },
+  "check if process is running": {
+    "body": "pgrep -xq \"${1:process}\" && $0",
+    "prefix": "check if process is running"
+  },
+  "check if sudo user": {
+    "body": "sudo -nv && ${1:some_sudo_action}",
+    "prefix": "check if sudo user"
+  },
+  "cyan": {
+    "body": "\\e[1;36m",
+    "prefix": "cyan"
+  },
+  "default value": {
+    "body": "${${1:var}:-${2:default_value}}",
+    "prefix": "default value"
+  },
+  "directory of script": {
+    "body": "\"$(dirname \"$(readlink -f \"\\$0\")\")\"",
+    "prefix": "directory of this script"
+  },
+  "elseif": {
+    "body": "elif [[ ${1:condition} ]]; then\n\t${0}",
+    "description": "Add an elseif to an if statement.",
+    "prefix": "elseif"
+  },
+  "extension": {
+    "body": "ext=${${1:file_name}##*.}",
+    "prefix": "get extension"
+  },
+  "filename": {
+    "body": "file_name=$(basename \"$${1:file_path}\")",
+    "prefix": "filename"
+  },
+  "filename w/o ext": {
+    "body": "${1:file_name}=${${1:file_name}%.*}",
+    "prefix": "filename w/o ext"
+  },
+  "find & xargs": {
+    "body": "find . -print0 | xargs -0 -I '{}'",
+    "prefix": "find & xargs"
+  },
+  "find -exec": {
+    "body": "find . $0 -exec open '{}' \\;",
+    "prefix": "find -exec"
+  },
+  "for .. in": {
+    "body": "for ${1:VAR} in ${0:LIST}\ndo\n\techo \"\\$${1:VAR}\"\ndone\n",
+    "description": "for loop in list",
+    "prefix": "for .. in"
+  },
+  "for each line (in file)": {
+    "body": [
+      "sed '/^$/d' \"${1:filepath}\" | while read -r ${2:line}; do",
+      "\techo$0 \"$${2:line}\"",
+      "done"
+    ],
+    "prefix": "for each line (in file)"
+  },
+  "function": {
+    "body": "function ${1:name} {\n\t${0}\n}",
+    "prefix": "function"
+  },
+  "global var (shellcheck)": {
+    "body": "\\${${1:global_var}:?}",
+    "description": "shellcheck recommends failing if global variable is undefined (SC2054). Useful for example for Alfred Environment Variables.",
+    "prefix": "global var (shellcheck)"
+  },
+  "goto git root": {
+    "body": "cd \"$(git rev-parse --show-toplevel)\"",
+    "prefix": "goto git root"
+  },
+  "gray": {
+    "body": "\\e[0;38;5;245m",
+    "description": "Gray that is readable in dark and light mode.",
+    "prefix": "gray"
+  },
+  "green": {
+    "body": "\\e[1;32m",
+    "prefix": "green"
+  },
+  "i++": {
+    "body": "${1:i}=$((${1:i} + 1))",
+    "prefix": "i++"
+  },
+  "i--": {
+    "body": "${1:i}=$((${1:i} - 1))",
+    "prefix": "i--"
+  },
+  "if .. then": {
+    "body": "if [[ \"$${1:var}\" ]]; then\n\t$0\nfi",
+    "prefix": "if .. then"
+  },
+  "if .. then .. else": {
+    "body": [
+      "if [[ \"$${1:cond}\" ]]; then",
+      "\t$0",
+      "else",
+      "\t",
+      "fi"
+    ],
+    "prefix": "if .. then .. else"
+  },
+  "input (stdin or $1)": {
+    "body": [
+      "if [[ $# -eq 0 ]]; then",
+      "\tinput=$(< /dev/stdin)",
+      "else",
+      "\tinput=\"$1\"",
+      "fi"
+    ],
+    "description": "reads either from STDIN or $1. stdin may have unescaped newlines, which have to be removed, e.g. via `tr -d '\n'`.",
+    "prefix": "input (stdin or $1)"
+  },
+  "lazy load cli": {
+    "body": [
+      "function ${1:cli} {",
+      "\tunfunction \"\\$0\"",
+      "\t$0",
+      "\t\\$0 \"$@\"",
+      "}"
+    ],
+    "prefix": "lazy load cli"
+  },
+  "magenta": {
+    "body": "\\e[1;35m",
+    "prefix": [
+      "magenta",
+      "purple"
+    ]
+  },
+  "notify (msg)": {
+    "body": "osascript -e 'display notification \"\" with title \"${1:msg}\"'",
+    "prefix": "notify (msg)"
+  },
+  "notify (var)": {
+    "body": "osascript -e \"display notification \\\"\\\" with title \\\"$${1:var}\\\"\"",
+    "prefix": "notify (var)"
+  },
+  "null (pipe)": {
+    "body": "&>/dev/null",
+    "prefix": "null (pipe)"
+  },
+  "osascript applescript (execute)": {
+    "body": "osascript -e '${1:command}'",
+    "prefix": [
+      "applescript (execute)",
+      "osascript -e"
+    ]
+  },
+  "osascript jxa (run script)": {
+    "body": "osascript -l JavaScript \"${1:file}\"",
+    "prefix": [
+      "jxa (run script)",
+      "osascript -l JavaScript"
+    ]
+  },
+  "parent folder": {
+    "body": "$(dirname \"$${1:filepath}\")",
+    "prefix": "parent folder"
+  },
+  "play sound": {
+    "body": "afplay \"/System/Library/Sounds/${1|Basso,Blow,Bottle,Frog,Funk,Glass,Hero,Morse,Ping,Pop,Purr,Sosumi,Submarine,Tink|}.aiff\" &",
+    "description": "Running in the background to not block during sound playing",
+    "prefix": [
+      "play sound",
+      "audio",
+      "afplay"
+    ]
+  },
+  "plist: extract key": {
+    "body": "plutil -extract name.childkey xml1 -o - example.plist | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1",
+    "prefix": "plist: extract key"
+  },
+  "quicklook": {
+    "body": "qlmanage -p \"${1:filepath}\"",
+    "description": "QuickLook the file. MacOS only.",
+    "prefix": "quicklook"
+  },
+  "red": {
+    "body": "\\e[1;31m",
+    "prefix": "red"
+  },
+  "reset color": {
+    "body": "\\e[0m",
+    "prefix": "reset color"
+  },
+  "resolve home": {
+    "body": "${1:path}=\"${${1:path}/#\\~/\\$HOME}\"",
+    "prefix": "resolve home"
+  },
+  "restart app": {
+    "body": [
+      "killall \"${1:app_name}\"",
+      "while pgrep -xq \"${1:app_name}\"; do sleep 0.1; done",
+      "open -a \"${1:app_name}\""
+    ],
+    "description": "safely restart app, avoiding race condition",
+    "prefix": "restart app"
+  },
+  "revert colors": {
+    "body": "\\e[7m",
+    "prefix": "revert colors"
+  },
+  "safe sourcing": {
+    "body": "[[ -f \"${1:filepath}\" ]] && source \"${1:filepath}\"",
+    "description": "Ensures script does not fail when sourced file does not exist.",
+    "prefix": "source (safe)"
+  },
+  "sed": {
+    "body": "sed 's/$0//'",
+    "prefix": "sed"
+  },
+  "shebang": {
+    "body": "#!/usr/bin/env zsh",
+    "prefix": "shebang"
+  },
+  "slice": {
+    "body": "${${1:var}:${2:start}:${3:end}}",
+    "prefix": "slice (expansion)"
+  },
+  "stderr (pipe)": {
+    "body": "2>&1",
+    "prefix": "stderr (pipe)"
+  },
+  "stdin": {
+    "body": "stdin=$(< /dev/stdin)",
+    "description": "$(cat) also works. See https://stackoverflow.com/questions/32363887/in-a-bash-function-how-do-i-get-stdin-into-a-variable",
+    "prefix": "stdin"
+  },
+  "substitute": {
+    "body": "${${1:var}//${2:search}/${3:replace}}",
+    "description": "one slash for single substitution, two for global substitution",
+    "prefix": "substitute (expansion)"
+  },
+  "switch case": {
+    "body": [
+      "case $${bar} in",
+      "\"one\" | \"two\")",
+      "\techo \"foo\"",
+      "\t;;",
+      "\"three\")",
+      "\techo \"bar\"",
+      "\t;;",
+      "*)",
+      "\techo \"default\"",
+      "\t;;",
+      "esac"
+    ],
+    "description": "A case command first expands word, and tries to match it against each pattern in turn.",
+    "prefix": "switch case"
+  },
+  "ternary": {
+    "body": "$([[ \"$${1:cond}\" ]] && echo \"${2:value1}\" || echo \"${3:value2}\")",
+    "prefix": "ternary"
+  },
+  "then": {
+    "body": "then\n\t$0\nfi",
+    "prefix": "then .. fi"
+  },
+  "today (ISO date)": {
+    "body": "${1:now}=$(date +\"%Y-%m-%d %H:%M:%S\")",
+    "prefix": [
+      "today (ISO date)",
+      "now"
+    ]
+  },
+  "trim whitespace": {
+    "body": "${1:text}=$(echo -n \"$${1:text}\" | sed -e 's/^ *//' -e 's/ *$//')",
+    "prefix": "trim whitespace"
+  },
+  "urlEncode": {
+    "body": "osascript -l JavaScript -e \"encodeURIComponent('${1:text}')\"",
+    "prefix": "urlEncode"
+  },
+  "var++": {
+    "body": "=$((${1:i} + 1))",
+    "prefix": "++"
+  },
+  "wait until app running": {
+    "body": "while ! pgrep -xq \"${1:app_name}\"; do sleep 0.1; done",
+    "prefix": "wait until app running"
+  },
+  "wait until app terminated": {
+    "body": "while pgrep -xq \"${1:app_name}\"; do sleep 0.1; done",
+    "prefix": "wait until app terminated"
+  },
+  "while": {
+    "body": "while [[ ${1:condition} ]]; do\n\t${0}\ndone\n",
+    "description": "A while loop by condition.",
+    "prefix": "while"
+  },
+  "white": {
+    "body": "\\e[1;37m",
+    "prefix": "white"
+  },
+  "xargs (for each line)": {
+    "body": "xargs -I {} ${1:some_cmd} '{}'",
+    "prefix": "xargs (for each line)"
+  },
+  "yellow": {
+    "body": "\\e[1;33m",
+    "prefix": "yellow"
+  }
+}
