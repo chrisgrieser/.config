@@ -19,14 +19,14 @@ return {
 	{ -- undo history
 		"mbbill/undotree",
 		keys = {
-			{ "<leader>ut", vim.cmd.UndotreeToggle, desc = "󰕌  Undotree" },
+			{ "<leader>ut", vim.cmd.UndotreeToggle, desc = " Undotree" },
 		},
 		init = function()
 			vim.g.undotree_WindowLayout = 3
 			vim.g.undotree_DiffpanelHeight = 10
 			vim.g.undotree_ShortIndicators = 1
 			vim.g.undotree_SplitWidth = 30
-			vim.g.undotree_DiffAutoOpen = 0
+			vim.g.undotree_DiffAutoOpen = 1
 			vim.g.undotree_SetFocusWhenToggle = 1
 			vim.g.undotree_HelpLine = 1
 
@@ -82,7 +82,7 @@ return {
 					:with_del(function() return false end)
 					:with_move(function(opts) return opts.char == "," end),
 
-				-- git conventional commit with scope auto-append `:`
+				-- git commit with scope auto-append `()` to `:`
 				rule("^%a+%(%)", ":", "gitcommit")
 					:use_regex(true)
 					:with_pair(negLookahead(".+"))
