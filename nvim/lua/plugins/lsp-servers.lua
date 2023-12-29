@@ -350,7 +350,7 @@ end
 return {
 	{ -- configure LSPs
 		"neovim/nvim-lspconfig",
-		event = "VimEnter",
+		lazy = false,
 		dependencies = { -- loading as dependency ensures it's loaded before lua_ls
 			"folke/neodev.nvim",
 			opts = { library = { plugins = false } }, -- too slow with all my plugins
