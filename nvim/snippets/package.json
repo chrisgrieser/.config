@@ -1,8 +1,4 @@
 {
-  "DOCS": [
-    "https://code.visualstudio.com/docs/editor/userdefinedsnippets",
-    "https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#vscode"
-  ],
   "contributes": {
     "snippets": [
       {

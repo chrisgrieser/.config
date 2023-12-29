@@ -58,7 +58,7 @@ local function readAndParseJson(path)
 	file:close()
 	local ok, json = pcall(vim.json.decode, content) ---@cast json table
 	if not ok then
-		notify("Could not parse " .. name .. "\nSkipping file.", "warn")
+		notify("Could not parse " .. name, "warn")
 		return {}
 	end
 	return json
@@ -75,21 +75,33 @@ local function snippetDirExists()
 	return true
 end
 
---------------------------------------------------------------------------------
-
----TODO determine filetype via `package.json`?
----Tries to determine filetype based on input string. If input is neither a
----filetype nor a file extension known to nvim, returns false.
----@param input string
+---@param pathOfSnippetFile string
 ---@return string|false filetype
 ---@nodiscard
-local function guessFileType(input)
-	-- input is filetype
-	local allKnownFts = vim.fn.getcompletion("", "filetype")
-	if vim.tbl_contains(allKnownFts, input) then return input end
+local function guessFileType(pathOfSnippetFile)
+	-- primary: read package.json
+	local relPathOfSnipFile = pathOfSnippetFile:sub(#config.snippetDir + 2)
+	local packageJson = readAndParseJson(config.snippetDir .. "/package.json")
+	local snipFilesInfo = packageJson.contributes.snippets
+	local infoOfFile = vim.tbl_filter(
+		function(info) return info.path:gsub("^%.?/", "") == relPathOfSnipFile end,
+		snipFilesInfo
+	)
+	if infoOfFile[1] then
+		local lang = vim.infoOfFile[1].language
+		if type(lang) == "string" then lang = { lang } end
+		lang = vim.tbl_filter(function (l) return l ~= "global" end, lang)
+		vim.notify("🪚 lang: " .. vim.inspect(lang))
+		return lang[1]
+	end
 
-	-- input is file extension
-	local matchedFt = vim.filetype.match { filename = "dummy." .. input }
+	-- fallback #1: filename is filetype
+	local filename = vim.fs.basename(pathOfSnippetFile):gsub("%.json$", "")
+	local allKnownFts = vim.fn.getcompletion("", "filetype")
+	if vim.tbl_contains(allKnownFts, filename) then return filename end
+
+	-- fallback #2: filename is file extension
+	local matchedFt = vim.filetype.match { filename = "dummy." .. filename }
 	if matchedFt then return matchedFt end
 
 	return false
@@ -100,8 +112,8 @@ end
 ---@return boolean success
 ---@nodiscard
 local function writeAndFormatSnippetFile(filepath, snippetsInFile)
-	local jsonStr = vim.json.encode(snippetsInFile)
-	assert(jsonStr, "Decoding error. No changes made.")
+	local ok, jsonStr = pcall(vim.json.encode, snippetsInFile)
+	assert(ok and jsonStr, "Could not encode JSON.")
 
 	-- INFO formatting via `yq` or `jq` is necessary, since `vim.json.encode`
 	-- does not ensure a stable order of keys in the written JSON.
@@ -117,7 +129,7 @@ local function writeAndFormatSnippetFile(filepath, snippetsInFile)
 	end
 
 	local file, _ = io.open(filepath, "w")
-	if not file then return false end
+	assert(file, "Could not write to " .. filepath)
 	file:write(jsonStr)
 	file:close()
 	return true
@@ -193,18 +205,18 @@ local function editInPopup(snip, mode)
 	local prefix = type(snip.prefix) == "string" and { snip.prefix } or snip.prefix ---@cast prefix string[]
 	local numOfPrefixes = #prefix -- needs to be saved as list_extend mutates `prefix`
 	local snipLines = vim.list_extend(prefix, body)
-	local sourceFile = vim.fs.basename(snip.fullPath)
+	local nameOfSnippetFile = vim.fs.basename(snip.fullPath)
 
 	-- title
 	local displayName = mode == "new" and "New Snippet" or snip.originalKey:sub(1, 25)
-	local title = mode == "new" and (' New Snippet in "%s" '):format(sourceFile)
-		or (" %s [%s] "):format(displayName, sourceFile)
+	local title = mode == "new" and (' New Snippet in "%s" '):format(nameOfSnippetFile)
+		or (" %s [%s] "):format(displayName, nameOfSnippetFile)
 
 	-- create buffer and window
 	local bufnr = a.nvim_create_buf(false, true)
 	a.nvim_buf_set_lines(bufnr, 0, -1, false, snipLines)
 	a.nvim_buf_set_name(bufnr, displayName)
-	local guessedFt = guessFileType(sourceFile:gsub("%.json$", ""))
+	local guessedFt = guessFileType(snip.fullPath)
 	if guessedFt then a.nvim_buf_set_option(bufnr, "filetype", guessedFt) end
 	a.nvim_buf_set_option(bufnr, "buftype", "nofile")
 
@@ -226,7 +238,8 @@ local function editInPopup(snip, mode)
 	if mode == "new" then
 		vim.cmd.startinsert()
 	elseif mode == "update" then
-		a.nvim_win_set_cursor(0, { #body, 0 })
+		local firstLineOfBody = numOfPrefixes + 1
+		a.nvim_win_set_cursor(winnr, { firstLineOfBody, 0 })
 	end
 
 	-- highlight cursor positions like `$0` or `${1:foo}`
@@ -235,10 +248,11 @@ local function editInPopup(snip, mode)
 
 	-- label "prefix #N"
 	local ns = a.nvim_create_namespace("snippet-manager")
-	for i = 1, numOfPrefixes, 1 do
+	for i = 1, numOfPrefixes do
 		local ln = i - 1
+		local label = numOfPrefixes == 1 and "Prefix" or "Prefix #" .. i
 		a.nvim_buf_set_extmark(bufnr, ns, ln, 0, {
-			virt_text = { { ("Prefix #%s"):format(i), "DiagnosticVirtualTextHint" } },
+			virt_text = { { label, "DiagnosticVirtualTextHint" } },
 			virt_text_pos = vim.fn.has("nvim-0.10") == 1 and "inline" or "right_align",
 		})
 	end
