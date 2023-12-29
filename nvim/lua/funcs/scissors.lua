@@ -14,6 +14,7 @@ local M = {}
 ---@field snippetDir string
 ---@field editSnippetPopup { height: number, width: number, border: string, keymaps: popupKeymaps }
 ---@field jsonFormatter "yq"|"jq"|"none"
+---@field reloadOnChange boolean
 
 ---@class (exact) popupKeymaps
 ---@field cancel string
@@ -38,7 +39,11 @@ local defaultConfig = {
 	-- `none` has no dependency, but writes a minified json file.
 	-- `yq` and `jq` ensure formatted & sorted json files, which you might prefer
 	-- for version-controlling your snippets. (Both are also available via Mason.)
-	jsonFormatter = "yq", -- yq|jq|none
+	jsonFormatter = "yq", -- "yq"|"jq"|"none"
+
+	-- on adding/editing a snippet, reload the snippet file. Currently only
+	-- supports LuaSnip (PRs welcome)
+	reloadOnChange = false,
 }
 local config = defaultConfig
 
@@ -51,7 +56,16 @@ function M.setup(userConfig) config = vim.tbl_deep_extend("force", defaultConfig
 ---@param level? "info"|"warn"|"error"|"debug"|"trace"
 local function notify(msg, level)
 	if not level then level = "info" end
-	vim.notify(msg, vim.log.levels[level:upper()], { title = "Snippet Manager" })
+	vim.notify(msg, vim.log.levels[level:upper()], { title = "nvim-scissors" })
+end
+
+---@param path string
+local function reloadSnippetFile(path)
+	if not config.reloadOnChange then return end
+
+	-- LuaSnip https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#loaders
+	local ok, luasnipLoaders = pcall(require, "luasnip.loaders")
+	if ok and luasnipLoaders then luasnipLoaders.reload_file(path) end
 end
 
 ---@param path string
@@ -120,6 +134,7 @@ local function writeAndFormatSnippetFile(filepath, snippetsInFile)
 	local ok, jsonStr = pcall(vim.json.encode, snippetsInFile)
 	assert(ok and jsonStr, "Could not encode JSON.")
 
+	-- FORMAT
 	-- INFO sorting via `yq` or `jq` is necessary, since `vim.json.encode`
 	-- does not ensure a stable order of keys in the written JSON.
 	if config.jsonFormatter ~= "none" then
@@ -133,10 +148,15 @@ local function writeAndFormatSnippetFile(filepath, snippetsInFile)
 		assert(vim.v.shell_error == 0, "JSON formatting exited with " .. vim.v.shell_error)
 	end
 
+	-- WRITE
 	local file, _ = io.open(filepath, "w")
 	assert(file, "Could not write to " .. filepath)
 	file:write(jsonStr)
 	file:close()
+
+	-- RELOAD
+	if config.reloadOnChange then reloadSnippetFile(filepath) end
+
 	return true
 end
 
@@ -252,7 +272,7 @@ local function editInPopup(snip, mode)
 	vim.fn.matchadd("DiagnosticVirtualTextInfo", [[\${\d:.\{-}}]])
 
 	-- highlight prefix lines and add label
-	local ns = a.nvim_create_namespace("snippet-manager")
+	local ns = a.nvim_create_namespace("nvim-scissors")
 	for i = 1, numOfPrefixes do
 		local ln = i - 1
 		local label = numOfPrefixes == 1 and "Prefix" or "Prefix #" .. i
@@ -345,7 +365,7 @@ function M.editSnippet()
 			local filename = vim.fs.basename(item.fullPath):gsub("%.json$", "")
 			return ("%s\t\t[%s]"):format(snipname, filename)
 		end,
-		kind = "snippet-manager.snippetSearch",
+		kind = "nvim-scissors.snippetSearch",
 	}, function(snip)
 		if not snip then return end
 		editInPopup(snip, "update")
@@ -365,7 +385,7 @@ function M.addNewSnippet()
 	vim.ui.select(jsonFiles, {
 		prompt = "Select file for new snippet:",
 		format_item = function(item) return item:gsub("%.json$", "") end,
-		kind = "snippet-manager.fileSelect",
+		kind = "nvim-scissors.fileSelect",
 	}, function(file)
 		if not file then return end
 

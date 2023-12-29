@@ -63,13 +63,13 @@ u.leaderSubkey("n", " Snippets")
 keymap(
 	"n",
 	"<leader>nn",
-	function() require("funcs.snippet-manager").editSnippet() end,
+	function() require("funcs.scissors").editSnippet() end,
 	{ desc = " Edit Snippets" }
 )
 keymap(
 	"n",
 	"<leader>na",
-	function() require("funcs.snippet-manager").addNewSnippet() end,
+	function() require("funcs.scissors").addNewSnippet() end,
 	{ desc = " Add new snippet" }
 )
 
