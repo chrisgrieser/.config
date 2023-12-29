@@ -43,8 +43,8 @@ local function cmpconfig()
 			expand = function(args) require("luasnip").lsp_expand(args.body) end,
 		},
 		window = {
-			completion = { border = require("config.utils").borderStyle, scrolloff = 2 },
-			documentation = { border = require("config.utils").borderStyle, scrolloff = 2 },
+			completion = { border = u.borderStyle, scrolloff = 2 },
+			documentation = { border = u.borderStyle, scrolloff = 2 },
 		},
 		sorting = {
 			comparators = {
