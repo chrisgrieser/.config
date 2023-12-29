@@ -79,7 +79,7 @@ end
 ---@return string|false filetype
 ---@nodiscard
 local function guessFileType(pathOfSnippetFile)
-	-- primary: read package.json
+	-- primary: read `package.json` https://code.visualstudio.com/api/language-extensions/snippet-guide
 	local relPathOfSnipFile = pathOfSnippetFile:sub(#config.snippetDir + 2)
 	local packageJson = readAndParseJson(config.snippetDir .. "/package.json")
 	local snipFilesInfo = packageJson.contributes.snippets
@@ -88,11 +88,10 @@ local function guessFileType(pathOfSnippetFile)
 		snipFilesInfo
 	)
 	if infoOfFile[1] then
-		local lang = vim.infoOfFile[1].language
+		local lang = infoOfFile[1].language
 		if type(lang) == "string" then lang = { lang } end
-		lang = vim.tbl_filter(function (l) return l ~= "global" end, lang)
-		vim.notify("🪚 lang: " .. vim.inspect(lang))
-		return lang[1]
+		lang = vim.tbl_filter(function (l) return l ~= "global" and l ~= "all" end, lang)
+		if lang[1] then return lang[1] end
 	end
 
 	-- fallback #1: filename is filetype
@@ -115,7 +114,7 @@ local function writeAndFormatSnippetFile(filepath, snippetsInFile)
 	local ok, jsonStr = pcall(vim.json.encode, snippetsInFile)
 	assert(ok and jsonStr, "Could not encode JSON.")
 
-	-- INFO formatting via `yq` or `jq` is necessary, since `vim.json.encode`
+	-- INFO sorting via `yq` or `jq` is necessary, since `vim.json.encode`
 	-- does not ensure a stable order of keys in the written JSON.
 	if config.jsonFormatter ~= "none" then
 		local cmds = {
@@ -246,23 +245,17 @@ local function editInPopup(snip, mode)
 	vim.fn.matchadd("DiagnosticVirtualTextInfo", [[\$\d]])
 	vim.fn.matchadd("DiagnosticVirtualTextInfo", [[\${\d:.\{-}}]])
 
-	-- label "prefix #N"
+	-- highlight prefix lines and add label 
 	local ns = a.nvim_create_namespace("snippet-manager")
 	for i = 1, numOfPrefixes do
 		local ln = i - 1
 		local label = numOfPrefixes == 1 and "Prefix" or "Prefix #" .. i
+		a.nvim_buf_add_highlight(bufnr, ns, "DiagnosticVirtualTextHint", ln, 0, -1)
 		a.nvim_buf_set_extmark(bufnr, ns, ln, 0, {
-			virt_text = { { label, "DiagnosticVirtualTextHint" } },
-			virt_text_pos = vim.fn.has("nvim-0.10") == 1 and "inline" or "right_align",
+			virt_text = { { label, "Todo" } },
+			virt_text_pos = "right_align",
 		})
 	end
-	-- separator line
-	local winWidth = a.nvim_win_get_width(winnr)
-	a.nvim_buf_set_extmark(bufnr, ns, numOfPrefixes - 1, 0, {
-		virt_lines = {
-			{ { ("═"):rep(winWidth), "FloatBorder" } },
-		},
-	})
 
 	-- keymaps
 	local function close()
@@ -307,7 +300,7 @@ function M.editSnippet()
 	-- get all snippets
 	local allSnippets = {} ---@type snippetObj[]
 	for name, _ in vim.fs.dir(config.snippetDir, { depth = 3 }) do
-		if name:find("%.json$") and name ~= "package.json" then
+		if name:find("%.jsonc?$") and name ~= "package.json" then
 			local filepath = config.snippetDir .. "/" .. name
 			local snippetsInFileDict = readAndParseJson(filepath)
 

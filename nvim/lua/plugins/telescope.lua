@@ -287,6 +287,13 @@ local function telescopeConfig()
 				show_plug = false, -- do not show mappings with "<Plug>"
 				lhs_filter = function(lhs) return not lhs:find("Þ") end, -- remove which-key mappings
 			},
+			jumplist = {
+				prompt_prefix = "󱋿 ",
+				show_line = false,
+				layout_config = {
+					horizontal = { preview_width = { 0.65, min = 20 } },
+				},
+			},
 			highlights = {
 				prompt_prefix = " ",
 				layout_config = {
@@ -379,6 +386,7 @@ return {
 			{ "g.", function() telescope("resume") end, desc = " Continue" },
 			{ "gs", function() telescope("treesitter") end, desc = " Symbols" },
 			{ "gd", function() telescope("lsp_definitions") end, desc = "󰒕 Definitions" },
+			{ "gj", function() telescope("jumplist") end, desc = "󱋿 Jumplist" },
 			{ "gf", function() telescope("lsp_references") end, desc = "󰒕 References" },
 			-- stylua: ignore
 			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
