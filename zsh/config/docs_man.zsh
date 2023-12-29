@@ -2,8 +2,8 @@
 alias -g H="--help | bat --language=help --style=plain --wrap=character"
 ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
 
-# https://thevaluable.dev/zsh-expansion-guide-example/
 function expansion-help {
+	# https://thevaluable.dev/zsh-expansion-guide-example/
 	print "\e[1;32m!#    \e[0m current command"
 	print "\e[1;32m!!:0  \e[0m first word of last command"
 	print "\e[1;32m!!:1  \e[0m first arg of last command"

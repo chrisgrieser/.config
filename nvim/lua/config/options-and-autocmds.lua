@@ -228,17 +228,18 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		local exists = vim.loop.fs_stat(bufPath) ~= nil
 		if specialBuffer or not exists then return end
 
-		-- rootfile
+		-- rootFile
 		local newRoot
 		local rootFile = fs.find(autoCd.rootFiles, { upward = true, path = bufPath })[1]
 		if rootFile then newRoot = fs.dirname(rootFile) end
 
 		-- childOfDir
-		for parent in fs.parents(bufPath) do
+		for dir in fs.parents(bufPath) do
+			local parent = fs.dirname(dir)
 			local isChildOfDir = vim.tbl_contains(autoCd.childOfDir, fs.basename(parent))
 			local parentIsDeeper = #parent > #(newRoot or "")
 			if isChildOfDir and parentIsDeeper then
-				newRoot = parent
+				newRoot = dir
 				break
 			end
 		end
