@@ -90,7 +90,7 @@ local function guessFileType(pathOfSnippetFile)
 	if infoOfFile[1] then
 		local lang = infoOfFile[1].language
 		if type(lang) == "string" then lang = { lang } end
-		lang = vim.tbl_filter(function (l) return l ~= "global" and l ~= "all" end, lang)
+		lang = vim.tbl_filter(function(l) return l ~= "global" and l ~= "all" end, lang)
 		if lang[1] then return lang[1] end
 	end
 
@@ -245,17 +245,25 @@ local function editInPopup(snip, mode)
 	vim.fn.matchadd("DiagnosticVirtualTextInfo", [[\$\d]])
 	vim.fn.matchadd("DiagnosticVirtualTextInfo", [[\${\d:.\{-}}]])
 
-	-- highlight prefix lines and add label 
+	-- highlight prefix lines and add label
 	local ns = a.nvim_create_namespace("snippet-manager")
 	for i = 1, numOfPrefixes do
 		local ln = i - 1
 		local label = numOfPrefixes == 1 and "Prefix" or "Prefix #" .. i
 		a.nvim_buf_add_highlight(bufnr, ns, "DiagnosticVirtualTextHint", ln, 0, -1)
-		a.nvim_buf_set_extmark(bufnr, ns, ln, 0, {
+		a.nvim_buf_set_extmark(bufnr, ns, ln, 1, {
 			virt_text = { { label, "Todo" } },
 			virt_text_pos = "right_align",
 		})
 	end
+	-- win separator as virtual line
+	local winWidth = a.nvim_win_get_width(winnr)
+	a.nvim_buf_set_extmark(bufnr, ns, numOfPrefixes - 1, 1, {
+		virt_lines = {
+			{ { ("═"):rep(winWidth), "FloatBorder" } },
+		},
+		virt_lines_leftcol = true,
+	})
 
 	-- keymaps
 	local function close()
@@ -271,7 +279,7 @@ local function editInPopup(snip, mode)
 	end, opts)
 	vim.keymap.set("n", conf.keymaps.delete, function()
 		if mode == "new" then
-			notify("Cannot snippet that has not been created yet.", "warn")
+			notify("Cannot delete a snippet that has not been created yet.", "warn")
 			return
 		end
 		deleteSnippet(snip)
@@ -283,12 +291,20 @@ local function editInPopup(snip, mode)
 		vim.cmd(("edit +/%s %s"):format(locationInFile, snip.fullPath))
 	end, opts)
 
-	-- FIX/HACK shifting of virtual lines when using `<CR>` on empty buffer
-	vim.keymap.set("i", conf.keymaps.confirm, function()
-		local row, col = unpack(a.nvim_win_get_cursor(0))
-		if row == 0 and col == 0 then return end
-		return "<CR>"
-	end, { buffer = bufnr, expr = true })
+	-- HACK prevent shifting of extmarks and highlights by disabling keys that
+	-- create new lines. (Cannot find a way to make extmarks fixed.)
+	local disabledKeys = {
+		["O"] = "n",
+		["o"] = "n",
+		["<CR>"] = "i",
+	}
+	for key, vimMode in pairs(disabledKeys) do
+		vim.keymap.set(vimMode, key, function()
+			local row = a.nvim_win_get_cursor(0)[1]
+			if row <= numOfPrefixes then return end
+			return key
+		end, { buffer = bufnr, expr = true })
+	end
 end
 
 --------------------------------------------------------------------------------
