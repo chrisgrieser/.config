@@ -3,6 +3,7 @@
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 if [[ ! -x "$(command -v yq)" ]]; then print "\e[1;33myq not installed.\e[0m" && return 1; fi
 if [[ ! -x "$(command -v node)" ]]; then print "\e[1;33mnode not installed.\e[0m" && return 1; fi
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # download
