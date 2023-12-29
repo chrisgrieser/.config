@@ -14,3 +14,5 @@
 - `vim.snippet`
 	+ <https://www.reddit.com/r/neovim/comments/17cwptz/comment/k5uoswd/?context=3>
 	+ <https://github.com/garymjr/nvim-snippets>
+- check if `lua.vim` ftplugin includes `:---` as comment:
+  <https://github.com/neovim/neovim/blob/master/runtime/ftplugin/lua.vim#L18>

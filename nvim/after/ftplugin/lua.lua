@@ -13,6 +13,8 @@ u.ftAbbr("ree", "return end")
 u.ftAbbr("tree", "then return end")
 
 -- adds luadoc's as potential comment syntax (used for continuation of comment lines)
+-- PENDING neovim update: using new ftplugin for lua file:
+-- https://github.com/neovim/neovim/blob/master/runtime/ftplugin/lua.vim#L18
 vim.opt_local.comments = {
 	"b:---@field", -- fields for `@class`
 	":---",
