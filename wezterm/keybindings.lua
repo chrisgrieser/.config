@@ -106,8 +106,8 @@ return {
 	-- Quick Select (= Hint Mode) -- https://wezfurlong.org/wezterm/quickselect.html
 	{ key = "u", mods = "CMD", action = act.QuickSelect },
 
-	{ -- cmd+s -> copy shell option, e.g. to copy them from a man page
-		key = "s",
+	{ -- cmd+s -> copy [o]ption (e.g. from a man page)
+		key = "o",
 		mods = "CMD",
 		action = act.QuickSelectArgs {
 			patterns = { "--[\\w=-]+", "-\\w" }, -- long option, short option
