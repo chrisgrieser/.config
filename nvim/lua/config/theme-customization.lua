@@ -84,7 +84,7 @@ local function themeModifications()
 		overwriteHl("VertSplit", { fg = "#b29b84" })
 		overwriteHl("Operator", { fg = "#846a52" })
 		for _, v in pairs(vimModes) do
-			updateHl("lualine_y_diff_modified_" .. v, "guifg=#a9810a")
+			updateHl("lualine_y_diff_modified_" .. v, "guifg=#828208")
 		end
 		-- FIX python highlighting issues
 		linkHl("@type.builtin.python", "Typedef")
