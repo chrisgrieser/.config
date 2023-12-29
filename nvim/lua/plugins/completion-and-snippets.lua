@@ -1,3 +1,6 @@
+local u = require("config.utils")
+--------------------------------------------------------------------------------
+
 local defaultSources = {
 	{ name = "luasnip" },
 	{ name = "nvim_lsp" },
@@ -176,15 +179,43 @@ return {
 			-- DOCS https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#api-reference
 			require("luasnip").setup {
 				-- prevent <Tab> jumping back to a snippet after it has been left early
-				region_check_events = "CursorMoved", 
+				region_check_events = "CursorMoved",
 				-- live updating of snippets
 				update_events = { "TextChanged", "TextChangedI" },
 				-- disable auto-reload, since already done by my own plugin
-				fs_event_providers = { autocmd = false, libuv = false }
+				fs_event_providers = { autocmd = false, libuv = false },
 			}
 
 			-- VS-code-style snippets
 			require("luasnip.loaders.from_vscode").lazy_load { paths = "./snippets" }
 		end,
+	},
+	{ -- snippet management
+		"chrisgrieser/nvim-scissors",
+		init = function() u.leaderSubkey("n", " Snippets") end,
+		keys = {
+			{
+				"<leader>nn",
+				function() require("scissors").editSnippet() end,
+				desc = " Edit snippets",
+			},
+			{
+				"<leader>na",
+				function() require("scissors").addNewSnippet() end,
+				desc = " Add new snippets",
+			},
+		},
+		opts = {
+			editSnippetPopup = {
+				height = 0.4, -- between 0-1
+				width = 0.6,
+				border = u.borderStyle,
+				keymaps = {
+					delete = "<D-BS>",
+					openInFile = "<D-o>",
+				},
+			},
+			jsonFormatter = "yq",
+		},
 	},
 }
