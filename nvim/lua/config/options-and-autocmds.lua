@@ -237,7 +237,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		for dir in fs.parents(bufPath) do
 			local parent = fs.dirname(dir)
 			local isChildOfDir = vim.tbl_contains(autoCd.childOfDir, fs.basename(parent))
-			local parentIsDeeper = #parent > #(newRoot or "")
+			local parentIsDeeper = #dir > #(newRoot or "")
 			if isChildOfDir and parentIsDeeper then
 				newRoot = dir
 				break
