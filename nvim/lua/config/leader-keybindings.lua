@@ -147,10 +147,10 @@ keymap(
 	function() vim.lsp.buf.code_action { filter = codeActionFilter } end,
 	{ desc = "󰒕 Code Action" }
 )
-keymap("n", "<leader>df", function()
+keymap("n", "<leader>dh", function()
 	vim.diagnostic.open_float()
 	vim.diagnostic.open_float() -- 2x = enter float
-end, { desc = "󰒕 Diagnostic under Cursor" })
+end, { desc = "󰒕 Diagnostic Hover" })
 
 keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
 

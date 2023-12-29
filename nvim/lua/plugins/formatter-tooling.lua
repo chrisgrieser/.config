@@ -116,6 +116,7 @@ local function formattingFunc()
 		end
 	end
 
+	-- PENDING https://github.com/stevearc/conform.nvim/issues/255
 	if vim.tbl_contains(autoIndentFt, vim.bo.ft) then u.normal("gg=G``") end
 
 	local useLsp = vim.tbl_contains(lspFormatFt, vim.bo.ft) and "always" or false
