@@ -14,7 +14,7 @@ local M = {}
 ---@field snippetDir string
 ---@field editSnippetPopup { height: number, width: number, border: string, keymaps: popupKeymaps }
 ---@field jsonFormatter "yq"|"jq"|"none"
----@field reloadOnChange boolean
+---@field autoReload boolean
 
 ---@class (exact) popupKeymaps
 ---@field cancel string
@@ -26,24 +26,24 @@ local M = {}
 local defaultConfig = {
 	snippetDir = vim.fn.stdpath("config") .. "/snippets",
 	editSnippetPopup = {
-		height = 0.4, -- 0-1
-		width = 0.9,
+		height = 0.4, -- between 0-1
+		width = 0.6,
 		border = "rounded",
 		keymaps = {
 			cancel = "q",
 			saveChanges = "<CR>",
-			delete = "<D-BS>",
+			delete = "<C-BS>",
 			openInFile = "<C-o>",
 		},
 	},
-	-- `none` has no dependency, but writes a minified json file.
-	-- `yq` and `jq` ensure formatted & sorted json files, which you might prefer
-	-- for version-controlling your snippets. (Both are also available via Mason.)
-	jsonFormatter = "yq", -- "yq"|"jq"|"none"
+	-- `none` writes as a minified json file using `:h vim.encode.json`.
+	-- `yq` and `jq` ensure formatted & sorted json files, which is relevant when
+	-- you are version control your snippets.
+	jsonFormatter = "none", -- "yq"|"jq"|"none"
 
 	-- on adding/editing a snippet, reload the snippet file. Currently only
 	-- supports LuaSnip (PRs welcome)
-	reloadOnChange = true,
+	autoReload = true,
 }
 local config = defaultConfig
 
@@ -61,7 +61,7 @@ end
 
 ---@param path string
 local function reloadSnippetFile(path)
-	if not config.reloadOnChange then return end
+	if not config.autoReload then return end
 
 	-- LuaSnip https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#loaders
 	local ok, luasnipLoaders = pcall(require, "luasnip.loaders")
@@ -157,7 +157,7 @@ local function writeAndFormatSnippetFile(filepath, snippetsInFile)
 	file:close()
 
 	-- RELOAD
-	if config.reloadOnChange then reloadSnippetFile(filepath) end
+	if config.autoReload then reloadSnippetFile(filepath) end
 
 	return true
 end
