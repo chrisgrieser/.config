@@ -55,23 +55,6 @@ keymap(
 )
 
 --------------------------------------------------------------------------------
-
--- https://code.visualstudio.com/docs/editor/userdefinedsnippets
-u.leaderSubkey("n", " Snippets")
-keymap(
-	"n",
-	"<leader>nn",
-	function() require("funcs.scissors").editSnippet() end,
-	{ desc = " Edit Snippets" }
-)
-keymap(
-	"n",
-	"<leader>na",
-	function() require("funcs.scissors").addNewSnippet() end,
-	{ desc = " Add new snippet" }
-)
-
---------------------------------------------------------------------------------
 -- REFACTORING
 local left3x = "<Left><Left><Left>"
 keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰒕 Var Rename" })
