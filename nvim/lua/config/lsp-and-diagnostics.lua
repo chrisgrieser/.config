@@ -10,16 +10,13 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config) ---
 	originalRenameHandler(err, result, ctx, config)
 	if err or not result then return end
 
-	vim.cmd.wall() -- write all
+	vim.cmd.wall()
 
-	-- changes files
-	local changes = result.changes or result.documentChanges
-	local changedFiles = vim.tbl_map(
-		function(file) return "- " .. vim.fs.basename(file) end,
-		vim.tbl_keys(changes or {})
-	)
+	local changes = result.changes or result.documentChanges or {}
+	local changedFiles = vim.tbl_keys(changes)
+	changedFiles = vim.tbl_filter(function(file) return #changes[file] > 0 end, changedFiles)
+	changedFiles = vim.tbl_map(function(file) return "- " .. vim.fs.basename(file) end, changedFiles)
 
-	-- changes
 	local changeCount = 0
 	for _, change in pairs(changes) do
 		changeCount = changeCount + #(change.edits or change)
@@ -111,10 +108,7 @@ vim.diagnostic.config {
 		severity = { min = vim.diagnostic.severity.INFO }, -- leave out hints
 		spacing = 1,
 		format = diagMsgFormat,
-		suffix = function(diag)
-			if diag.source == "editorconfig-checker" then return "" end
-			return diagSourceAsSuffix(diag, "virtual_text")
-		end,
+		suffix = function(diag) return diagSourceAsSuffix(diag, "virtual_text") end,
 	},
 	float = {
 		severity_sort = true,
