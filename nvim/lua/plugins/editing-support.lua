@@ -169,6 +169,13 @@ return {
 	},
 	{ -- split-join lines
 		"Wansmer/treesj",
+		init = function()
+			-- always use `gww` in markdown
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "markdown",
+				callback = function() vim.keymap.set("n", "<leader>s", "gww", { buffer = true }) end,
+			})
+		end,
 		keys = {
 			{ "<leader>s", function() require("treesj").toggle() end, desc = "󰗈 Split-join lines" },
 		},
@@ -182,17 +189,7 @@ return {
 				},
 				comment = { -- comments in any language
 					source = { both = { fallback = function() vim.cmd("normal! gww") end } },
-				},
-				markdown = { -- various types of markdown lines
 					element = { both = { fallback = function() vim.cmd("normal! gww") end } },
-					list_marker_minus = { both = { fallback = function() vim.cmd("normal! gww") end } },
-					list_marker_dot = { both = { fallback = function() vim.cmd("normal! gww") end } },
-				},
-				markdown_inline = {
-					inline = { both = { fallback = function() vim.cmd("normal! gww") end } },
-				},
-				html = {
-					fragment = { both = { fallback = function() vim.cmd("normal! gww") end } },
 				},
 			},
 		},

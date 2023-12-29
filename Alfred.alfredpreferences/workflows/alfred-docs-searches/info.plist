@@ -2951,6 +2951,9 @@ Search more than two dozen developer documentation sites via one of the keywords
 - &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the documentation site.
 - &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy the URL of the documentation site to the clipboard.
 
+## Contribute
+This workflow already supports dozens of documentation sites. Since I cannot possible even more, more docs searches will require more contributors/maintainers. [Adding new docs sites is fairly easy, and requires less than 50 lines of JavaScript, Python, or Ruby.](https://github.com/chrisgrieser/alfred-docs-searches#Contribute)
+
 ## Documentations Searched
 - `css`: MDN
 - `html`: MDN
@@ -3571,35 +3574,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>variable</key>
 			<string>lua_version</string>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>https://man.cx/</string>
-				<key>pairs</key>
-				<array>
-					<array>
-						<string>man.cx</string>
-						<string>https://man.cx/</string>
-					</array>
-					<array>
-						<string>mankier.com</string>
-						<string>https://www.mankier.com/1/</string>
-					</array>
-				</array>
-			</dict>
-			<key>description</key>
-			<string></string>
-			<key>label</key>
-			<string>man page website</string>
-			<key>type</key>
-			<string>popupbutton</string>
-			<key>variable</key>
-			<string>man_page_website</string>
-		</dict>
 	</array>
 	<key>version</key>
-	<string>1.11.8</string>
+	<string>1.11.9</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
