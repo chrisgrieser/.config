@@ -2,16 +2,4 @@
 
 -- NVIM-SCISSORS DEMO
 
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "python",
-	callback = function()
-		print("foobar")
-	end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "javascript",
-	callback = function()
-		print("hello")
-	end,
-})
+vim.keymap.set("n", "lhs", "rhs", { desc = "placeholder"})
