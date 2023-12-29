@@ -51,14 +51,12 @@ end
 -- BASH / ZSH
 
 -- DOCS https://github.com/bash-lsp/bash-language-server/blob/main/server/src/config.ts
+
+-- PENDING https://github.com/bash-lsp/bash-language-server/issues/1064
+-- disable shellcheck via LSP to avoid double-diagnostics
 serverConfigs.bashls = {
 	settings = {
-		bashIde = {
-			includeAllWorkspaceSymbols = true,
-			-- PENDING https://github.com/bash-lsp/bash-language-server/issues/1064
-			-- disable shellcheck via LSP to avoid double-diagnostics
-			shellcheckPath = "",
-		},
+		bashIde = { shellcheckPath = "" },
 	},
 }
 -- WORKAROUND: use efm to use shellcheck with zsh files
@@ -279,7 +277,7 @@ serverConfigs.ltex = {
 				word = vim.fn.expand("<cword>")
 				u.normal("zg") -- regular `zg` to add to spellfile
 			else
-				u.normal('zggv"zy') -- regular `zg` to add to spellfile, reselect 
+				u.normal('zggv"zy') -- regular `zg` to add to spellfile, reselect
 				word = vim.fn.getreg("z")
 			end
 			local ltexSettings = vim.lsp.get_active_clients({ name = "ltex" })[1].config.settings

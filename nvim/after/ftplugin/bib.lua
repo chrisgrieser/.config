@@ -30,7 +30,7 @@ local function checkForDuplicateCitekeys(bufnr)
 	end
 	if duplCitekeys == "" then return end
 
-		
+
 	u.notify("Duplicate Citkeys", duplCitekeys, "warn")
 end
 

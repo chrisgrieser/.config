@@ -2,11 +2,11 @@
 
 # only trigger on deactivation of $TASK_APP
 if [[ "$SENDER" = "front_app_switched" ]]; then
-  [[ -f "/tmp/front_app" ]] && previous_front_app=$(</tmp/front_app)
-  echo -n "$INFO" > /tmp/front_app
-  [[ "$previous_front_app" != "$TASK_APP" ]] && return 0
+	data="/tmp/sketchybar_front_app"
+	[[ -f "$data" ]] && deactivated_app=$(<"$data")
+	echo -n "$INFO" >"$data"
+	[[ "$deactivated_app" != "$TASK_APP" ]] && return 0
 fi
-osascript -e 'beep'
 
 #───────────────────────────────────────────────────────────────────────────────
 
