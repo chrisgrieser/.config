@@ -12,8 +12,14 @@ local M = {}
 
 ---@class (exact) pluginConfig
 ---@field snippetDir string
----@field editSnippetPopup { height: number, width: number, border: string, keymaps: table<string, string> }
+---@field editSnippetPopup { height: number, width: number, border: string, keymaps: popupKeymaps }
 ---@field jsonFormatter "yq"|"jq"|"none"
+
+---@class (exact) popupKeymaps
+---@field cancel string
+---@field saveChanges string
+---@field delete string
+---@field openInFile string
 
 ---@type pluginConfig
 local defaultConfig = {
@@ -24,7 +30,7 @@ local defaultConfig = {
 		border = "rounded",
 		keymaps = {
 			cancel = "q",
-			confirm = "<CR>",
+			saveChanges = "<CR>",
 			delete = "<D-BS>",
 			openInFile = "<C-o>",
 		},
@@ -83,12 +89,12 @@ local function guessFileType(pathOfSnippetFile)
 	local relPathOfSnipFile = pathOfSnippetFile:sub(#config.snippetDir + 2)
 	local packageJson = readAndParseJson(config.snippetDir .. "/package.json")
 	local snipFilesInfo = packageJson.contributes.snippets
-	local infoOfFile = vim.tbl_filter(
+	local fileMetadata = vim.tbl_filter(
 		function(info) return info.path:gsub("^%.?/", "") == relPathOfSnipFile end,
 		snipFilesInfo
 	)
-	if infoOfFile[1] then
-		local lang = infoOfFile[1].language
+	if fileMetadata[1] then
+		local lang = fileMetadata[1].language
 		if type(lang) == "string" then lang = { lang } end
 		lang = vim.tbl_filter(function(l) return l ~= "global" and l ~= "all" end, lang)
 		if lang[1] then return lang[1] end
@@ -272,14 +278,14 @@ local function editInPopup(snip, mode)
 	end
 	local opts = { buffer = bufnr, nowait = true, silent = true }
 	vim.keymap.set("n", conf.keymaps.cancel, close, opts)
-	vim.keymap.set("n", conf.keymaps.confirm, function()
+	vim.keymap.set("n", conf.keymaps.saveChanges, function()
 		local editedLines = a.nvim_buf_get_lines(bufnr, 0, -1, false)
 		updateSnippetFile(snip, editedLines)
 		close()
 	end, opts)
 	vim.keymap.set("n", conf.keymaps.delete, function()
 		if mode == "new" then
-			notify("Cannot delete a snippet that has not been created yet.", "warn")
+			notify("Cannot delete a snippet that has not been saved yet.", "warn")
 			return
 		end
 		deleteSnippet(snip)

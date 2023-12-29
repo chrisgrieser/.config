@@ -46,19 +46,18 @@ sketchybar \
 	--set weather update_freq=1200 \
 	script="$plugin_dir/weather.sh" \
 	icon.y_offset=-1 label.padding_left=3 \
-	background.padding_right=7 \
-	\
-	--add item github_notif $first_row \
-	--set github_notif update_freq=300 \
-	script="$plugin_dir/github_notification_count.sh" \
-	--subscribe github_notif front_app_switched \
-	--subscribe github_notif system_woke \
 	\
 	--add item reminders_count $first_row \
 	--set reminders_count update_freq=300 \
 	script="$plugin_dir/reminders-count.sh" \
 	--subscribe reminders_count front_app_switched \
 	--subscribe reminders_count system_woke \
+	\
+	--add item github_notif $first_row \
+	--set github_notif update_freq=300 \
+	script="$plugin_dir/github_notification_count.sh" \
+	--subscribe github_notif front_app_switched \
+	--subscribe github_notif system_woke \
 	\
 	--add alias "Stats,CombinedModules" $second_row \
 	alias.color="$font_color" \
