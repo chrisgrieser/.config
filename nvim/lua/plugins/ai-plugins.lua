@@ -1,7 +1,7 @@
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
--- potential alternatives: 
+-- potential alternatives:
 -- https://github.com/huggingface/llm-ls
 -- https://docs.sourcegraph.com/cody/overview/install-neovim
 return {
@@ -39,8 +39,11 @@ return {
 			},
 			{
 				"<leader>oa", function ()
-					vim.g.codeium_enabled = vim.g.codeium_enabled ~= true
-				end
+					vim.g.codeium_enabled = vim.g.codeium_enabled == false
+					local status = vim.g.codeium_enabled and "enabled" or "disabled"
+					u.notify("Codium", "󰚩 Suggestions " .. status .. ".")
+				end,
+				desc = "󰚩 Toggle Codium",
 			}
 		},
 		config = function()

@@ -25,7 +25,7 @@
     "prefix": "check if file exists"
   },
   "keymap": {
-    "body": "keymap(\"n\", \"${1:lhs}\", \"${2:rhs}\", { desc = \"${3:desc}\" })",
+    "body": "vim.keymap.set(\"n\", \"${1:lhs}\", \"${2:rhs}\", { desc = \"placeholder\"})",
     "prefix": "keymap"
   },
   "keymap (multi-mode)": {
