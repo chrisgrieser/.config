@@ -57,6 +57,8 @@ keymap(
 --------------------------------------------------------------------------------
 
 -- fd -I ".json" | xargs -I {} yq --inplace --output-format=json "sort_keys(..)" {}
+-- https://code.visualstudio.com/docs/editor/userdefinedsnippets
+-- https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#vscode
 u.leaderSubkey("n", " Snippets")
 keymap(
 	"n",
