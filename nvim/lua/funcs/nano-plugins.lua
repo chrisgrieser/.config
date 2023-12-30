@@ -207,9 +207,7 @@ end
 -- simplified implementation of neogen.nvim
 -- - requires nvim-treesitter-textobjects
 -- - lsp usually provides better prefills for docstrings
-
-
-function M.docstring(aaa)
+function M.docstring()
 	local supportedFts = { "lua", "python", "javascript" }
 	if not vim.tbl_contains(supportedFts, vim.bo.filetype) then
 		notify("", "Unsupported filetype.", "warn")
@@ -235,9 +233,13 @@ function M.docstring(aaa)
 		vim.defer_fn(function()
 			require("cmp").complete()
 			require("cmp").confirm { select = true }
+			vim.defer_fn(vim.api.nvim_del_current_line, 50) -- remove `---comment`
+			local function leaveVisualMode()
+				local escKey = vim.api.nvim_replace_termcodes("<Esc>", false, true, true)
+				vim.api.nvim_feedkeys(escKey, "nx", false)
+			end
+			vim.defer_fn(leaveVisualMode, 100)
 		end, 200)
-		-- delete `---comment`
-		vim.defer_fn( vim.api.nvim_del_current_line, 700)
 	elseif ft == "javascript" then
 		normal("t)") -- go to parameter, since cursor has to be on diagnostic for code action
 		vim.lsp.buf.code_action {
@@ -286,8 +288,20 @@ end
 
 --------------------------------------------------------------------------------
 
----@param direction any
-function M.jumpInBuffer(direction) end
+---@param direction "next"|"prev"
+function M.jumpInBuffer(direction)
+	local jumpList, startJumpIndex = unpack(vim.fn.getjumplist())
+	local bufNr = vim.api.nvim_get_current_buf()
+	local jump
+	repeat
+		local jumpIndex = startJumpIndex + (direction == "next" and 1 or -1)
+		local jump = jumpList[jumpIndex]
+
+		if not jump then return end
+	until jump.bufnr == bufNr
+
+	vim.api.nvim_win_set_cursor(0, { jump.lnum, jump.col })
+end
 
 --------------------------------------------------------------------------------
 return M
