@@ -24,22 +24,26 @@ optl.formatoptions:append("o") -- `o` in normal mode
 
 local function autocontinue(key)
 	local comBefore = optl.comments:get()
-	optl.comments = { "b:*", "b:-", "b:+", "b:1.", "n:>" } -- unordered, ordered, blockquotes
+	optl.comments = {
+		"b:- [ ]", -- tasks
+		"b:- [x]",
+		"b:*", -- unordered list
+		"b:-",
+		"b:+",
+		"b:-",
+		"b:1.", -- ordered list
+		"n:>", -- blockquotes
+	}
 	vim.defer_fn(function() optl.comments = comBefore end, 1) -- deferred to restore only after return
 	return key
 end
 
-vim.keymap.set("n", "o", function() return autocontinue("o") end, { buffer = true, expr = true })
-vim.keymap.set(
-	"i",
-	"<CR>",
-	function() return autocontinue("<CR>") end,
-	{ buffer = true, expr = true }
-)
+keymap("n", "o", function() return autocontinue("o") end, { buffer = true, expr = true })
+keymap("i", "<CR>", function() return autocontinue("<CR>") end, { buffer = true, expr = true })
 
 --------------------------------------------------------------------------------
 -- Markdown Preview (replaces markdown-preview.nvim)
-vim.keymap.set("n", "<D-r>", function()
+keymap("n", "<D-r>", function()
 	local input = vim.api.nvim_buf_get_name(0)
 	local output = "/tmp/markdown-preview.html"
 	local githubCssPath = os.getenv("HOME") .. "/.config/pandoc/css/github-markdown.css"
