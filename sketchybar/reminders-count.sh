@@ -1,12 +1,13 @@
 #!/usr/bin/env zsh
 
-# only trigger on deactivation of $TASK_APP
+# GUARD only trigger on deactivation of $TASK_APP
 if [[ "$SENDER" = "front_app_switched" ]]; then
-	data="/tmp/sketchybar_front_app"
+	data="/tmp/sketchybar_front_app1"
 	[[ -f "$data" ]] && deactivated_app=$(<"$data")
 	echo -n "$INFO" >"$data"
-	[[ "$deactivated_app" != "$TASK_APP" ]] && return 0
 fi
+
+[[ "$deactivated_app" != "$TASK_APP" ]] && return 0
 
 #───────────────────────────────────────────────────────────────────────────────
 
