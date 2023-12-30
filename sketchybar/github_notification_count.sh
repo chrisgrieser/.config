@@ -2,10 +2,21 @@
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 #───────────────────────────────────────────────────────────────────────────────
 
-# GUARD only via interval or when browser becomes frontmost
-[[ -z "$INFO" || "$INFO" == "$BROWSER_APP" ]] || return 0
+# get deactivated_app
+if [[ "$SENDER" = "front_app_switched" ]]; then
+	data="/tmp/sketchybar_front_app2"
+	[[ -f "$data" ]] && deactivated_app=$(<"$data")
+	echo -n "$INFO" >"$data"
+fi
 
-# GUARD
+# GUARD only via interval or when browser (de)activates
+if [[ "$SENDER" == "front_app_switched" && "$INFO" != "$BROWSER_APP" && "$deactivated_app" != "$BROWSER_APP" ]]; then
+	return 0
+else
+	sleep 3 # wait so notification opened is marked as read
+fi
+
+# GUARD dependencies or API key missing
 if ! command -v yq &>/dev/null; then
 	sketchybar --set "$NAME" icon="" label="yq not found"
 	return 1
@@ -16,9 +27,6 @@ elif [[ -z "$GITHUB_TOKEN" ]]; then
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
-
-# wait so notification opened is marked as read
-[[ "$INFO" == "$BROWSER_APP" ]] || sleep 5
 
 # DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28
 notification_count=$(curl -sL \

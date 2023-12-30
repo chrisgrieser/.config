@@ -261,4 +261,20 @@ return {
 			vim.keymap.set("o", "<LeftMouse>", "<Nop>")
 		end,
 	},
+	{
+		"chrisgrieser/nvim-chainsaw",
+		keys = {
+			-- stylua: ignore start
+			{"<leader>lb", function() require("funcs.chainsaw").beepLog() end, desc = "󰸢 beep log" },
+			{"<leader>lm", function() require("funcs.chainsaw").messageLog() end, desc = "󰸢 message log" },
+			{"<leader>l1", function() require("funcs.chainsaw").timeLog() end, desc = "󰸢 time log" },
+			{"<leader>ld", function() require("funcs.chainsaw").debugLog() end, desc = "󰸢 debugger log" },
+			{"<leader>lr", function() require("funcs.chainsaw").removeLogs() end, desc = "󰹝 remove logs" },
+
+			{"<leader>ll", function() require("funcs.chainsaw").variableLog() end, mode = {"n", "x"}, desc = "󰸢 variable log" },
+			{"<leader>lo", function() require("funcs.chainsaw").objectLog() end, mode = {"n", "x"}, desc = "󰸢 object log" },
+			{"<leader>la", function() require("funcs.chainsaw").assertLog() end, mode = {"n", "x"}, desc = "󰸢 assert log" },
+			-- stylua: ignore end
+		},
+	},
 }
