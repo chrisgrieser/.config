@@ -49,7 +49,7 @@ function gc {
 		print "\e[1;36mStaged all changes.\e[0m"
 
 	printf "\e[1;36mCommit: \e[0m" &&
-		git commit -m "$1" || return 1
+		git commit -m "$@" || return 1
 
 	if [[ -n "$(git status --porcelain)" ]]; then
 		print "\e[1;36mPush: \e[0mNot pushing since repo still dirty." &&
