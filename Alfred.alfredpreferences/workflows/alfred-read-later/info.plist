@@ -232,9 +232,9 @@
 - This has several advantages:
 	+ No dependency on any read-later service.
 	+ The reading list is available offline.
-	+ Since Markdown is a widely supported format, you can access your items in many other apps as well, such as [Obsidian](https://obsidian.md/).
+	+ Since Markdown is a widely supported format, you can access your items in many other apps as well, such as [Obsidian](https://obsidian.md/) (Interoperability).
 	+ Easy backup: Just copypaste the file.
-	+ Easy sync: Just save the file in a Cloud Drive like iCloud.
+	+ Easy sync: Just save the file in a cloud drive like iCloud.
 
 
 You can also access the list on mobile with any note-app that supports markdown tasks, when you save it in a Cloud Drive.
