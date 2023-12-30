@@ -57,7 +57,7 @@ keymap(
 --------------------------------------------------------------------------------
 -- REFACTORING
 local left3x = "<Left><Left><Left>"
-keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰒕 Var Rename" })
+keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰒕 LSP Var Rename" })
 keymap("n", "<leader>fs", ":%s /<C-r><C-w>//gI" .. left3x, { desc = " :s cword" })
 keymap("x", "<leader>fs", '"zy:% s/<C-r>z//gI' .. left3x, { desc = " :s for selection" })
 keymap("x", "<leader>fv", ":s ///gI<Left>" .. left3x, { desc = " :s inside visual" })

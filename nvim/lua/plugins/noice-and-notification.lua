@@ -177,7 +177,7 @@ return {
 			top_down = false,
 			max_width = 50, -- commit message max length
 			minimum_width = 15,
-			level = vim.log.levels.TRACE, -- minimum severity level
+			level = trace, -- minimum severity
 			timeout = 6000,
 			stages = "slide", -- slide|fade
 			icons = { DEBUG = "", ERROR = "", INFO = "", TRACE = "", WARN = "" },

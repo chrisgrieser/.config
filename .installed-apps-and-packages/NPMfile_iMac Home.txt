@@ -1,5 +1,1 @@
 npm
-stylelint-config-recess-order
-stylelint-config-standard
-stylelint-order
-stylelint

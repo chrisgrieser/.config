@@ -46,7 +46,8 @@ return {
 			-- stylua: ignore start
 			{"<leader>fi", function() require("refactoring").refactor("Inline Variable") end, mode = {"n", "x"}, desc = "󱗘 Inline Var" },
 			{"<leader>fe", function() require("refactoring").refactor("Extract Variable") end, mode = "x", desc = "󱗘 Extract Var" },
-			{"<leader>fu", function() require("refactoring").refactor("Extract Function") end, mode = "x", desc = "󱗘 Extract Func" },
+			{"<leader>fI", function() require("refactoring").refactor("Inline Function") end, desc = "󱗘 Inline Func" },
+			{"<leader>fE", function() require("refactoring").refactor("Extract Function") end, mode = "x", desc = "󱗘 Extract Func" },
 			-- stylua: ignore end
 		},
 	},
