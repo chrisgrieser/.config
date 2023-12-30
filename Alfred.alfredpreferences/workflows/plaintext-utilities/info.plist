@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>054338EE-32F9-474D-AC80-A933C886D6A7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FDF6DA7A-36B0-47DE-8396-66D12C630E60</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>18CE8879-05A2-49C3-9FFE-91F3884B7F08</key>
 		<array>
 			<dict>
@@ -103,7 +116,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>FDF6DA7A-36B0-47DE-8396-66D12C630E60</string>
+				<string>054338EE-32F9-474D-AC80-A933C886D6A7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -618,6 +631,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>alt="Pasted image .*?" </string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string>alt="Showcase" </string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>054338EE-32F9-474D-AC80-A933C886D6A7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1093,6 +1127,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>905</real>
 		</dict>
+		<key>054338EE-32F9-474D-AC80-A933C886D6A7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>proper alt-text</string>
+			<key>xpos</key>
+			<real>325</real>
+			<key>ypos</key>
+			<real>180</real>
+		</dict>
 		<key>09B69D71-EC20-46C1-835E-5F7AC6DCFBDF</key>
 		<dict>
 			<key>colorindex</key>
@@ -1176,7 +1221,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>note</key>
-			<string>regex</string>
+			<string>md → html</string>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>

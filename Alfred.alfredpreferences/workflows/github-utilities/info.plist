@@ -1438,7 +1438,7 @@ osascript -l JavaScript "./scripts/my-github-repos.js" "$LOCAL_REPOS"</string>
 			<key>xpos</key>
 			<real>840</real>
 			<key>ypos</key>
-			<real>1405</real>
+			<real>1365</real>
 		</dict>
 		<key>08B7842B-16DA-4BFC-8F35-AE680AF1E07B</key>
 		<dict>
@@ -1449,7 +1449,7 @@ osascript -l JavaScript "./scripts/my-github-repos.js" "$LOCAL_REPOS"</string>
 			<key>xpos</key>
 			<real>676</real>
 			<key>ypos</key>
-			<real>1300</real>
+			<real>1260</real>
 		</dict>
 		<key>158FC0D8-5F6E-4AFE-BC6E-9406B6343527</key>
 		<dict>
@@ -1480,7 +1480,7 @@ osascript -l JavaScript "./scripts/my-github-repos.js" "$LOCAL_REPOS"</string>
 			<key>xpos</key>
 			<real>500</real>
 			<key>ypos</key>
-			<real>1355</real>
+			<real>1315</real>
 		</dict>
 		<key>24CFE3CA-F401-498B-8ABC-20D1D4AB3AB3</key>
 		<dict>
@@ -1540,7 +1540,7 @@ osascript -l JavaScript "./scripts/my-github-repos.js" "$LOCAL_REPOS"</string>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>1420</real>
+			<real>1380</real>
 		</dict>
 		<key>4C6743FC-6D60-44F4-9E59-7EE559C99DAB</key>
 		<dict>
@@ -1587,7 +1587,7 @@ osascript -l JavaScript "./scripts/my-github-repos.js" "$LOCAL_REPOS"</string>
 			<key>xpos</key>
 			<real>211</real>
 			<key>ypos</key>
-			<real>1280</real>
+			<real>1240</real>
 		</dict>
 		<key>76991846-250A-4BDC-9CE6-01A8D691D6C1</key>
 		<dict>
@@ -1636,16 +1636,16 @@ osascript -l JavaScript "./scripts/my-github-repos.js" "$LOCAL_REPOS"</string>
 			<key>xpos</key>
 			<real>770</real>
 			<key>ypos</key>
-			<real>1175</real>
+			<real>1135</real>
 		</dict>
 		<key>B04FEC5B-79E4-407B-ACCE-EAA0C5B81AB8</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>6</integer>
+			<integer>9</integer>
 			<key>xpos</key>
-			<real>260</real>
+			<real>185</real>
 			<key>ypos</key>
-			<real>465</real>
+			<real>450</real>
 		</dict>
 		<key>B35052FF-0027-40CC-BC59-EA7D442A57EA</key>
 		<dict>
@@ -1656,7 +1656,7 @@ osascript -l JavaScript "./scripts/my-github-repos.js" "$LOCAL_REPOS"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1355</real>
+			<real>1315</real>
 		</dict>
 		<key>BF79E782-31E9-4840-A0FA-00EE2CB5403A</key>
 		<dict>
@@ -1678,7 +1678,7 @@ osascript -l JavaScript "./scripts/my-github-repos.js" "$LOCAL_REPOS"</string>
 			<key>xpos</key>
 			<real>305</real>
 			<key>ypos</key>
-			<real>1355</real>
+			<real>1315</real>
 		</dict>
 		<key>C27D01B3-A3B9-4661-9D70-8808DC522FD1</key>
 		<dict>
@@ -1743,7 +1743,7 @@ osascript -l JavaScript "./scripts/my-github-repos.js" "$LOCAL_REPOS"</string>
 			<key>xpos</key>
 			<real>655</real>
 			<key>ypos</key>
-			<real>1390</real>
+			<real>1350</real>
 		</dict>
 		<key>FA2DA973-F996-4FDC-8058-22F7CCAE04A6</key>
 		<dict>
@@ -1752,7 +1752,7 @@ osascript -l JavaScript "./scripts/my-github-repos.js" "$LOCAL_REPOS"</string>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>1490</real>
+			<real>1450</real>
 		</dict>
 		<key>FE44448E-7653-4A3C-B7F9-C3A787EE0556</key>
 		<dict>

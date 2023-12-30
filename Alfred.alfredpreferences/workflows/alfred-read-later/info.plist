@@ -220,7 +220,28 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<string>## Usage
+- Use the keyword `rl` to add the current tab of the frontmost browser to your read-later-list.
+- Any item in your reading list also shows up when using the keyword `rl`. Press &lt;kbd&gt;⏎&lt;/kbd&gt; to open the item in your browser and remove it from your read-later-list.
+
+## Items are saved locally
+- The items are saved in a local markdown file on your disk. You can set the location in the [workflow configuration](https://www.alfredapp.com/help/workflows/user-configuration/).
+- The items formatted in the [markdown task syntax](https://simpledev.io/lesson/task-list-md-1/).
+	+ Unread items as open tasks: `- [ ] [title](url)`
+	+ Read items as completed tasks: `- [x] [title](url)`
+- This has several advantages:
+	+ No dependency on any read-later service.
+	+ The reading list is available offline.
+	+ Since Markdown is a widely supported format, you can access your items in many other apps as well, such as [Obsidian](https://obsidian.md/).
+	+ Easy backup: Just copypaste the file.
+	+ Easy sync: Just save the file in a Cloud Drive like iCloud.
+
+
+You can also access the list on mobile with any note-app that supports markdown tasks, when you save it in a Cloud Drive.
+
+---
+
+Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>108AF0CF-D70A-4010-BC05-9C5F5F11B47B</key>
@@ -319,7 +340,7 @@
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.9</string>
+	<string>1.0.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
