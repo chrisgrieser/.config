@@ -35,17 +35,13 @@ function _dump() {
 	local device_name
 	device_name=$(scutil --get ComputerName | cut -d" " -f2-)
 	brew bundle dump --force --file "$dump_path/Brewfile_$device_name.txt"
-	npm list --location=global --parseable | sed "1d" | sed -E "s/.*\///" \
-		>"$dump_path/NPMfile_$device_name.txt"
-	pip3 list --not-required | sed "1,2d" | cut -d" " -f1 \
-		>"$dump_path/Pip3file_$device_name.txt"
 
 	# shellcheck disable=2010
 	ls "$HOME/Library/Application Support/$BROWSER_DEFAULTS_PATH/Default/Extensions/" |
 		grep -v "Temp" | sed "s|^|https://chrome.google.com/webstore/detail/|" \
 		>"$dump_path/browser-extensions.txt"
 
-	echo "Brewfile, NPM-File, Pip-File, and list of browser extensions dumped at \"$dump_path\""
+	echo "Brewfile, and list of browser extensions dumped at \"$dump_path\""
 }
 
 function update() {
@@ -60,18 +56,6 @@ function update() {
 
 	_print-section "MAC APP STORE"
 	mas upgrade
-
-	_print-section "NPM"
-	npm update --location=global
-
-	_print-section "PIP3"
-	# python3 -m pip install --upgrade pip # update pip itself
-	command pip3 list --not-required --outdated | 
-		sed "1,2d" | cut -d" " -f1 | 
-		xargs command pip3 install --upgrade
-
-	_print-section "DUMP INSTALL LISTS"
-	_dump
 
 	_print-section "Restarting Sketchybar"
 	# - sketchybar usually updated and then has to be restarted to give permission
@@ -94,12 +78,6 @@ function listall() {
 
 	_print-section "MAC APP STORE"
 	mas list
-
-	_print-section "NPM"
-	command npm list --location=global
-
-	_print-section "Pip3"
-	command pip3 list --not-required
 
 	_print-section "DUMP INSTALLS"
 	_dump

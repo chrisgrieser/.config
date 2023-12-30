@@ -1,10 +1,32 @@
-alias pu="pip uninstall"
-alias pi="pip install"
-alias pl="pip list --not-required"
+alias pu="python3 -m pip uninstall"
+alias pi="python3 -m pip install"
+alias pl="python3 -m pip list --not-required"
 alias py="python3"
 alias bye="wezterm cli spawn -- bpython"
 
+# Wrapper around pip
+# 1. Prevent accidental installation outside of virtual env
+# 2. alias `pip uninstall` to `pip-autoremove`
+# 3. other commands work as usual
+function pip() {
+	if [[ "$1" == "install" && -z "$VIRTUAL_ENV" ]]; then
+		printf "\033[1;33mAre you sure you want to install outside of a virtual environment? (y/n)\033[0m "
+		read -r answer
+		if [[ "$answer" != "y" ]]; then return 2; fi
+		pip3 "$@"
+	elif [[ "$1" == "uninstall" ]] && [[ -z "$VIRTUAL_ENV" ]]; then
+		if ! command -v pip-autoremove &>/dev/null; then print "\033[1;33mpip-autoremove not installed.\033[0m" && return 1; fi
+		print "\033[1;36mUsing pip-autoremove\033[0m"
+		shift
+		pip-autoremove "$@"
+	else
+		pip3 "$@"
+	fi
+}
+
 #───────────────────────────────────────────────────────────────────────────────
+
+# VIRTUAL_ENV
 
 function _search_venv_path() {
 	local dir_to_check=$PWD
@@ -34,8 +56,6 @@ function _auto_venv() {
 	fi
 }
 
-#───────────────────────────────────────────────────────────────────────────────
-
 # toggle virtual environment
 function v() {
 	if [[ -n "$VIRTUAL_ENV" ]]; then
@@ -50,25 +70,5 @@ function v() {
 		else
 			print "\033[1;33mNo virtual environment found.\033[0m"
 		fi
-	fi
-}
-
-# Wrapper around pip
-# 1. Prevent accidental installation outside of virtual env
-# 2. alias `pip uninstall` to `pip-autoremove`
-# 3. other commands work as usual
-function pip() {
-	if [[ "$1" == "install" && -z "$VIRTUAL_ENV" ]]; then
-		printf "\033[1;33mAre you sure you want to install outside of a virtual environment? (y/n)\033[0m "
-		read -r answer
-		if [[ "$answer" != "y" ]]; then return 2; fi
-		pip3 "$@"
-	elif [[ "$1" == "uninstall" ]] && [[ -z "$VIRTUAL_ENV" ]]; then
-		if ! command -v pip-autoremove &>/dev/null; then print "\033[1;33mpip-autoremove not installed.\033[0m" && return 1; fi
-		print "\033[1;36mUsing pip-autoremove\033[0m"
-		shift
-		pip-autoremove "$@"
-	else
-		pip3 "$@"
 	fi
 }
