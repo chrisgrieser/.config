@@ -16,7 +16,7 @@ local function now() return os.time() end
 M.thresholds = {
 	Slack = 20,
 	[env.mailApp] = 5,
-	[env.todoApp] = 1,
+	[env.todoApp] = 10,
 	Highlights = 90,
 	Discord = 180, 
 	BusyCal = 2,

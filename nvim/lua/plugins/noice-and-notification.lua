@@ -63,7 +63,7 @@ local routes = {
 return {
 	{ -- Message & Command System Overhaul
 		"folke/noice.nvim",
-		event = "VeryLazy",
+		event = "VimEnter", -- earlier to catch notifications on startup
 		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
 		keys = {
 			{ "<Esc>", function() vim.cmd.Noice("dismiss") end, desc = "󰎟 Clear Notifications" },
