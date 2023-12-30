@@ -1,3 +1,8 @@
+local ns = vim.api.nvim_create_namespace("tinygit.test")
+vim.fn.matchadd(
+	"conventionalCommits",
+	[[feat]]
+)
+vim.api.nvim_set_hl(ns, "conventionalCommits", { link = "Title" })
 
-local ns = vim.api.nvim_create_namespace("rebase-extmarks")
-vim.api.nvim_buf_set_extmark(0, ns, 0, 0, { virt_text = { { "REBASE", "Comment" } } })
+-- feat: some words
