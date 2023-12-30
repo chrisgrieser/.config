@@ -606,7 +606,7 @@
 				<key>regexmultiline</key>
 				<false/>
 				<key>replacestring</key>
-				<string>&lt;img src="$2" alt="$1" width=50%&gt;</string>
+				<string>&lt;img alt="$1" width=70% src="$2"&gt;</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.replace</string>
