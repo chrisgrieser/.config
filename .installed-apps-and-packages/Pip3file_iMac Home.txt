@@ -1,4 +1,6 @@
-pip-autoremove
-Pygments
-pyobjc-framework-Cocoa
+future
+macholib
+pip
+setuptools
+six
 wheel

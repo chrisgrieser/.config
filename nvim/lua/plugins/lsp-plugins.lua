@@ -59,7 +59,7 @@ return {
 			{
 				"<leader>di",
 				"<cmd>lua require('rulebook').ignoreRule()<CR>",
-				desc = "󰝟 Ignore Rule",
+				desc = "󰅜 Ignore Rule",
 			},
 		},
 	},
