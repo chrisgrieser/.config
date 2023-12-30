@@ -207,7 +207,9 @@ end
 -- simplified implementation of neogen.nvim
 -- - requires nvim-treesitter-textobjects
 -- - lsp usually provides better prefills for docstrings
-function M.docstring()
+
+
+function M.docstring(aaa)
 	local supportedFts = { "lua", "python", "javascript" }
 	if not vim.tbl_contains(supportedFts, vim.bo.filetype) then
 		notify("", "Unsupported filetype.", "warn")
@@ -234,6 +236,8 @@ function M.docstring()
 			require("cmp").complete()
 			require("cmp").confirm { select = true }
 		end, 200)
+		-- delete `---comment`
+		vim.defer_fn( vim.api.nvim_del_current_line , 700)
 	elseif ft == "javascript" then
 		normal("t)") -- go to parameter, since cursor has to be on diagnostic for code action
 		vim.lsp.buf.code_action {
@@ -270,7 +274,7 @@ function M.tabout()
 		if not nextClosingPairPos then return end
 
 		-- INFO nvim_win_set_cursor does not work in insert mode, therefore
-		-- temporarily switching mode
+		-- temporarily switching to normal mode
 		vim.cmd.stopinsert()
 		vim.defer_fn(function()
 			vim.api.nvim_win_set_cursor(0, { row, nextClosingPairPos })
@@ -279,6 +283,11 @@ function M.tabout()
 		end, 1)
 	end
 end
+
+--------------------------------------------------------------------------------
+
+---@param direction any
+function M.jumpInBuffer(direction) end
 
 --------------------------------------------------------------------------------
 return M

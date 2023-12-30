@@ -1,1 +1,117 @@
-{"FIX":{"prefix":"FIX","body":"FIX"},"opt":{"prefix":["opt","alt"],"body":"⌥"},"space":{"prefix":"space","body":"␣"},"PENDING":{"prefix":"PENDING","body":"PENDING"},"GUARD":{"prefix":"GUARD","body":"GUARD"},"cmd":{"prefix":"cmd","body":"⌘"},"test":{"prefix":"test","body":"test"},"ctrl":{"prefix":["control","ctrl"],"body":"⌃"},"CAVEAT":{"prefix":"CAVEAT","body":"CAVEAT"},"capslock":{"prefix":["capslock","hyper"],"body":"⇪"},"nonbreaking space":{"prefix":"nonbreaking space","body":"&nbsp;"},"Lorem Ipsum Paragraph":{"prefix":"lorem paragraph","body":"Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis."},"BUG":{"prefix":"BUG","body":"BUG and ants"},"middle dot":{"prefix":"middle dot","body":"·"},"INFO":{"prefix":"INFO","body":"INFO"},"Lorem Ipsum Sentence":{"prefix":"lorem sentence","body":"Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat."},"today (ISO date) *insert*":{"prefix":"today (ISO date) *insert*","body":"$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE"},"escape":{"prefix":"escape","body":"⎋"},"shift":{"prefix":"shift","body":"⇧"},"backspace":{"prefix":"backspace","body":"⌫"},"tab":{"prefix":"tab","body":"↹ "},"enter":{"description":"The other return-like symbols either have an accessibility problem (VoiceOver reads them as arrow shape) or are displayed as emoji on GitHub.","prefix":"enter","body":"⏎"},"DOCS":{"prefix":"DOCS","body":"DOCS"},"PERF":{"prefix":"PERF","body":"PERF"},"CONFIG":{"prefix":"CONFIG","body":"CONFIG"},"HACK":{"prefix":"HACK","body":"HACK"},"modeline (vim)":{"description":"this should neither be at the top nor at the bottom of the file, so vim does not try to read the modeline itself.","prefix":"modeline","body":"# vim: filetype=${1:sh}"}}
+{
+  "BUG": {
+    "body": "BUG and ants",
+    "prefix": "BUG"
+  },
+  "CAVEAT": {
+    "body": "CAVEAT",
+    "prefix": "CAVEAT"
+  },
+  "CONFIG": {
+    "body": "CONFIG",
+    "prefix": "CONFIG"
+  },
+  "DOCS": {
+    "body": "DOCS",
+    "prefix": "DOCS"
+  },
+  "FIX": {
+    "body": "FIX",
+    "prefix": "FIX"
+  },
+  "GUARD": {
+    "body": "GUARD",
+    "prefix": "GUARD"
+  },
+  "HACK": {
+    "body": "HACK",
+    "prefix": "HACK"
+  },
+  "INFO": {
+    "body": "INFO",
+    "prefix": "INFO"
+  },
+  "Lorem Ipsum Paragraph": {
+    "body": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+    "prefix": "lorem paragraph"
+  },
+  "Lorem Ipsum Sentence": {
+    "body": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+    "prefix": "lorem sentence"
+  },
+  "PENDING": {
+    "body": "PENDING",
+    "prefix": "PENDING"
+  },
+  "PERF": {
+    "body": "PERF",
+    "prefix": "PERF"
+  },
+  "backspace": {
+    "body": "⌫",
+    "prefix": "backspace"
+  },
+  "capslock": {
+    "body": "⇪",
+    "prefix": [
+      "capslock",
+      "hyper"
+    ]
+  },
+  "cmd": {
+    "body": "⌘",
+    "prefix": "cmd"
+  },
+  "ctrl": {
+    "body": "⌃",
+    "prefix": [
+      "control",
+      "ctrl"
+    ]
+  },
+  "enter": {
+    "body": "⏎",
+    "description": "The other return-like symbols either have an accessibility problem (VoiceOver reads them as arrow shape) or are displayed as emoji on GitHub.",
+    "prefix": "enter"
+  },
+  "escape": {
+    "body": "⎋",
+    "prefix": "escape"
+  },
+  "middle dot": {
+    "body": "·",
+    "prefix": "middle dot"
+  },
+  "modeline (vim)": {
+    "body": "# vim: filetype=${1:sh}",
+    "description": "this should neither be at the top nor at the bottom of the file, so vim does not try to read the modeline itself.",
+    "prefix": "modeline"
+  },
+  "nonbreaking space": {
+    "body": "&nbsp;",
+    "prefix": "nonbreaking space"
+  },
+  "opt": {
+    "body": "⌥",
+    "prefix": [
+      "opt",
+      "alt"
+    ]
+  },
+  "shift": {
+    "body": "⇧",
+    "prefix": "shift"
+  },
+  "space": {
+    "body": "␣",
+    "prefix": "space"
+  },
+  "tab": {
+    "body": "↹ ",
+    "prefix": "tab"
+  },
+  "today (ISO date) *insert*": {
+    "body": "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
+    "prefix": "today (ISO date) *insert*"
+  }
+}
