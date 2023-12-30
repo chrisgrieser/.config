@@ -287,21 +287,4 @@ function M.tabout()
 end
 
 --------------------------------------------------------------------------------
-
----@param direction "next"|"prev"
-function M.jumpInBuffer(direction)
-	local jumpList, startJumpIndex = unpack(vim.fn.getjumplist())
-	local bufNr = vim.api.nvim_get_current_buf()
-	local jump
-	repeat
-		local jumpIndex = startJumpIndex + (direction == "next" and 1 or -1)
-		local jump = jumpList[jumpIndex]
-
-		if not jump then return end
-	until jump.bufnr == bufNr
-
-	vim.api.nvim_win_set_cursor(0, { jump.lnum, jump.col })
-end
-
---------------------------------------------------------------------------------
 return M
