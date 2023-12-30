@@ -11,6 +11,7 @@ alias gi='gh issue list --state=open'
 alias gI='gh issue list --state=closed'
 
 alias unadd='git restore --staged'
+alias restore='git restore'
 alias push='git push'
 alias pull='git pull'
 alias rebase='git rebase --interactive'
