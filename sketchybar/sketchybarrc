@@ -18,7 +18,7 @@ fi
 first_row="left"
 second_row="popup.clock"
 
-icon_font="$CODE_FONT" # requires zsh-shebang to load from .zshenv
+nerd_font="$CODE_FONT" # requires zsh-shebang to load from .zshenv
 system_font="Lucida Grande"
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -31,7 +31,7 @@ sketchybar \
 	padding_left=0 padding_right=0 color="$bg_color" \
 	--default \
 	updates="when_shown" drawing="on" align="left" \
-	icon.font="${icon_font}:Bold:16" icon.color="$font_color" \
+	icon.font="${nerd_font}:Bold:16" icon.color="$font_color" \
 	label.font="${system_font}:Regular:16.5" label.color="$font_color" \
 	background.padding_right=10 label.padding_right=2 \
 	popup.drawing=true popup.horizontal=true popup.topmost=false \
@@ -47,17 +47,17 @@ sketchybar \
 	script="$plugin_dir/weather.sh" \
 	icon.y_offset=-1 label.padding_left=3 \
 	\
-	--add item reminders_count $first_row \
-	--set reminders_count update_freq=300 \
-	script="$plugin_dir/reminders-count.sh" \
-	--subscribe reminders_count front_app_switched \
-	--subscribe reminders_count system_woke \
-	\
 	--add item github_notif $first_row \
 	--set github_notif update_freq=300 \
 	script="$plugin_dir/github_notification_count.sh" \
 	--subscribe github_notif front_app_switched \
 	--subscribe github_notif system_woke \
+	\
+	--add item reminders_count $first_row \
+	--set reminders_count update_freq=300 \
+	script="$plugin_dir/reminders-count.sh" \
+	--subscribe reminders_count front_app_switched \
+	--subscribe reminders_count system_woke \
 	\
 	--add alias "Stats,CombinedModules" $second_row \
 	alias.color="$font_color" \
