@@ -53,7 +53,7 @@ function gc {
 
 	if [[ -n "$(git status --porcelain)" ]]; then
 		print "\e[1;36mPush: \e[0mNot pushing since repo still dirty." &&
-			git status
+			echo && git status
 	else
 		printf "\e[1;36mPull: \e[0m" &&
 			git pull --no-rebase && # --no-rebase prevents "Cannot rebase on multiple branches"
