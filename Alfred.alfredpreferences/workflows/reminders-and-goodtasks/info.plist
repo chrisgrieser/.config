@@ -608,7 +608,7 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>quick append</string>
+			<string>quick add</string>
 			<key>xpos</key>
 			<real>335</real>
 			<key>ypos</key>
@@ -619,7 +619,7 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>Quick/Open Append</string>
+			<string>quick add</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -659,7 +659,7 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>Quick Append</string>
+			<string>quick add</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>

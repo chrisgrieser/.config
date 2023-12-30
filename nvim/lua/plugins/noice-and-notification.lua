@@ -175,7 +175,7 @@ return {
 		opts = {
 			render = "wrapped-compact",
 			top_down = false,
-			max_width = 72, -- commit message max length
+			max_width = 50, -- commit message max length
 			minimum_width = 15,
 			level = vim.log.levels.TRACE, -- minimum severity level
 			timeout = 6000,
