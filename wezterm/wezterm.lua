@@ -3,17 +3,17 @@
 -- INFO the first theme in the list is used
 -- rest are themes I already tried and also like
 local darkThemes = {
-	"ChallengerDeep",
-	"cyberpunk",
 	"Afterglow (Gogh)",
 	"duckbones",
-	"Tinacious Design (Dark)",
-	"Kanagawa (Gogh)",
 	"MaterialDesignColors",
+	"Tinacious Design (Dark)",
+	"cyberpunk",
+	"ChallengerDeep",
+	"Kanagawa (Gogh)",
 }
 local lightThemes = {
-	"Ivory Light (terminal.sexy)",
 	"Cupcake (base16)",
+	"Ivory Light (terminal.sexy)",
 	"Solar Flare Light (base16)",
 	"Google Light (Gogh)",
 	"Atelier Lakeside Light (base16)",
