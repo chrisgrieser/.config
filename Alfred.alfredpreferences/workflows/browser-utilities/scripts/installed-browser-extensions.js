@@ -6,8 +6,8 @@ app.includeStandardAdditions = true;
 /** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
-	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
-	return [clean, camelCaseSeperated, str].join(" ");
+	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
+	return [clean, camelCaseSeparated, str].join(" ");
 }
 
 /** @param {string} path */
@@ -24,7 +24,8 @@ function readFile(path) {
 function run(argv) {
 	const browserDefaultsPath = argv[0];
 	const extensionFolder =
-		app.pathTo("home folder") + `/Library/Application Support/${browserDefaultsPath}/Default/Extensions`;
+		app.pathTo("home folder") +
+		`/Library/Application Support/${browserDefaultsPath}/Default/Extensions`;
 
 	const extensions = app
 		.doShellScript(`find "${extensionFolder}" -name "manifest.json"`)
@@ -39,7 +40,12 @@ function run(argv) {
 			if (name.startsWith("__MSG_") && manifest.short_name) name = manifest.short_name;
 			if (name.startsWith("__MSG_")) {
 				const msg = JSON.parse(readFile(root + "_locales/en/messages.json"));
-				name = msg.extensionName?.message || msg.name?.message || msg.extName?.message || msg.appName?.message || "[name not found]";
+				name =
+					msg.extensionName?.message ||
+					msg.name?.message ||
+					msg.extName?.message ||
+					msg.appName?.message ||
+					"[name not found]";
 			}
 
 			// determine options path

@@ -138,13 +138,11 @@ return {
 				history = {
 					view = "split",
 					filter_opts = { reverse = true }, -- show newest entries first
-					filter = {}, -- empty list = deactivate filter = include everything
 					-- https://github.com/folke/noice.nvim#-formatting
 					opts = { format = { "{title} ", "{cmdline} ", "{message}" } },
 				},
 				last = {
 					view = "popup",
-					filter = {}, -- empty list = deactivate filter = include everything
 					-- https://github.com/folke/noice.nvim#-formatting
 					opts = { format = { "{title} ", "{cmdline} ", "{message}" } },
 				},

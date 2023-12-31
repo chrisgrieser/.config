@@ -390,6 +390,13 @@ return {
 			{ "gf", function() telescope("lsp_references") end, desc = "󰒕 References" },
 			-- stylua: ignore
 			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
+
+			-- info consider a call-tree plugin: 
+			-- * https://github.com/ldelossa/litee-calltree.nvim
+			-- * https://github.com/crusj/hierarchy-tree-go.nvim
+			{ "<leader>c", function() telescope("lsp_incoming_calls") end, desc = " Incoming Calls" },
+			{ "<leader>C", function() telescope("lsp_outgoing_calls") end, desc = " Outgoing Calls" },
+
 			{ "<leader>ph", function() telescope("highlights") end, desc = " Highlights" },
 			{ "<leader>dt", function() telescope("diagnostics") end, desc = " List Diagnostics" },
 			{ "<leader>pc", function() telescope("colorscheme") end, desc = " Colorschemes" },

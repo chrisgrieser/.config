@@ -52,7 +52,7 @@ return {
 			{
 				"<leader>H",
 				function() vim.cmd.TSTextobjectPeekDefinitionCode("@function.outer") end,
-				desc = " Peek Function Def.",
+				desc = " Hover Peek Function",
 			},
 			{
 				"q",

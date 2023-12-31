@@ -60,7 +60,7 @@ require("lazy").setup("plugins", {
 	},
 	diff = { cmd = "browser" }, -- view diffs with "d" in the browser
 	change_detection = { notify = false },
-	readme = { enabled = true },
+	readme = { enabled = false },
 	performance = {
 		rtp = {
 			-- Disable unused builtin plugins from neovim
