@@ -72,19 +72,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>73F9DBDD-A980-4267-95BA-B94A5723353E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>7E3AEF26-FACC-4A6A-A69C-D7CE916F8570</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>9EC4C5E4-FD5F-4585-86AE-47B0A7AFA214</key>
 		<array>
 			<dict>
@@ -316,38 +303,6 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string>~/.config/nvim/mac-helper/Neovide Helper.app</string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>7E3AEF26-FACC-4A6A-A69C-D7CE916F8570</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array/>
-				<key>name</key>
-				<string>Open with Neovide</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>73F9DBDD-A980-4267-95BA-B94A5723353E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -394,24 +349,6 @@ check if path different from PWD</string>
 			<real>370</real>
 			<key>ypos</key>
 			<real>20</real>
-		</dict>
-		<key>73F9DBDD-A980-4267-95BA-B94A5723353E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>315</real>
-		</dict>
-		<key>7E3AEF26-FACC-4A6A-A69C-D7CE916F8570</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>190</real>
-			<key>ypos</key>
-			<real>315</real>
 		</dict>
 		<key>902D4662-2953-4B92-BAE1-BE34CE7A174D</key>
 		<dict>
