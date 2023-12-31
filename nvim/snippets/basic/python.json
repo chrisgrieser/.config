@@ -1,4 +1,15 @@
 {
+  "__main__": {
+    "body": [
+      "if __name__ == \"__main__\":",
+      "\t${1:main()}$0"
+    ],
+    "description": "Create implicitly all the code at the top level using the __name__ special variable.",
+    "prefix": [
+      "__main__",
+      "ifmain"
+    ]
+  },
   "def / function": {
     "body": [
       "def ${1:name}($2) -> ${3|None,str,int,dict|}:",
@@ -44,14 +55,6 @@
     "body": "if ${1:condition}:\n\t${2:pass}$0",
     "prefix": "if"
   },
-  "if __name__ == \"__main__\"": {
-    "body": "if __name__ == \"__main__\":\n\t${1:main()}$0",
-    "description": "Create implicitly all the code at the top level using the __name__ special variable.",
-    "prefix": [
-      "__main__",
-      "ifmain"
-    ]
-  },
   "if/else": {
     "body": [
       "if ${1:condition}:",
@@ -71,10 +74,7 @@
   "list comprehension": {
     "body": "list(${1:value} for ${2:value} in ${3:iterable})$0",
     "description": "List comprehension for creating a list based on existing lists.",
-    "prefix": [
-      "lc",
-      "list comprehension"
-    ]
+    "prefix": "list comprehension"
   },
   "replace (regex)": {
     "body": "re.sub(r\"${1:regex}\", r\"${2:replace}\", ${3:str})$0",
