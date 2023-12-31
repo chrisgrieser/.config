@@ -20,8 +20,7 @@ keymap(
 -- HJKL behaves like hjkl, but bigger distance
 keymap({ "n", "o", "x" }, "H", "0^") -- `0` ensures fully scrolling to the left on long, indented lines
 keymap({ "n", "x" }, "L", "$zv") -- zv: unfold
-
-keymap({ "n", "x" }, "j", "gj")
+keymap({ "n", "x" }, "j", "gj") -- gj to work with wrapped lines as well
 keymap({ "n", "x" }, "k", "gk")
 keymap({ "n", "x" }, "J", "6gj")
 keymap({ "n", "x" }, "K", "6gk")
