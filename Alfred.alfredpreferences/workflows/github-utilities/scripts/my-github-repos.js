@@ -2,12 +2,13 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
+//──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-_.]/g, " ");
-	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
-	return [clean, camelCaseSeperated, str].join(" ") + " ";
+	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
+	return [clean, camelCaseSeparated, str].join(" ") + " ";
 }
 
 /** @param {string} url */
@@ -20,51 +21,56 @@ function httpRequest(url) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @param {string[]} argv */
+/** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
-function run(argv) {
+function run() {
 	// CONFIG
 	const username = $.getenv("github_username");
 	const includeArchived = false;
+	const localRepoFolder = $.getenv("local_repo_folder");
+	const forkOnClone = $.getenv("fork_on_clone");
 
-	// local repos
-	const repoFolder = argv[0]; // local repo path passed from .zshenv
-	const extraFolder = $.getenv("extra_folder_1").replace(/^~/, app.pathTo("home folder"));
-	const locations = `"${repoFolder}" "${extraFolder}"`;
-	app.doShellScript(`mkdir -p ${locations}`);
-
+	// determine local repos
 	const localRepos = {};
-	const localRepoPaths = app.doShellScript(`find ${locations} -type d -maxdepth 2 -name ".git"`).split("\r");
+	app.doShellScript(`mkdir -p "${localRepoFolder}"`);
+	const localRepoPaths = app
+		.doShellScript(`find ${localRepoFolder} -type d -maxdepth 2 -name ".git"`)
+		.split("\r");
 	for (const gitFolderPath of localRepoPaths) {
-		const localRepo = {};
-		localRepo.path = gitFolderPath.replace(/\.git\/?$/, "");
-		const name = localRepo.path.replace(/.*\/(.*)\/$/, "$1");
+		const repo = {};
+		repo.path = gitFolderPath.replace(/\.git\/?$/, "");
+		const name = repo.path.replace(/.*\/(.*)\/$/, "$1");
 		try {
-			localRepo.dirty = app.doShellScript(`cd "${localRepo.path}" && git status --porcelain`) !== "";
+			repo.dirty = app.doShellScript(`cd "${repo.path}" && git status --porcelain`) !== "";
 		} catch (_error) {
 			// error can occur with cloud sync issues
-			localRepo.dirty = undefined;
+			repo.dirty = undefined;
 		}
-		localRepos[name] = localRepo;
+		localRepos[name] = repo;
 	}
 
 	//───────────────────────────────────────────────────────────────────────────
-	// fetch remote repos
+	// FETCH REMOTE REPOS
 
 	// DOCS https://docs.github.com/en/free-pro-team@latest/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
 	const apiURL = `https://api.github.com/users/${username}/repos?per_page=100`;
 	const scriptFilterArr = JSON.parse(httpRequest(apiURL))
 		.filter((/** @type {GithubRepo} */ repo) => includeArchived || !repo.archived)
 		.sort(
-			(/** @type {GithubRepo&{isLocal: boolean}} */ a, /** @type {GithubRepo&{isLocal: boolean}} */ b) => {
+			(
+				/** @type {GithubRepo&{isLocal: boolean}} */ a,
+				/** @type {GithubRepo&{isLocal: boolean}} */ b,
+			) => {
 				a.isLocal = localRepos[a.name];
 				b.isLocal = localRepos[b.name];
 				if (a.isLocal && !b.isLocal) return -1;
-				else if (!a.isLocal && b.isLocal) return 1;
-				else if (a.fork && !b.fork) return 1;
-				else if (!a.fork && b.fork) return -1;
-				else if (a.archived && !b.archived) return 1;
-				else if (!a.archived && b.archived) return -1;
+				if (!a.isLocal && b.isLocal) return 1;
+
+				if (a.fork && !b.fork) return 1;
+				if (!a.fork && b.fork) return -1;
+
+				if (a.archived && !b.archived) return 1;
+				if (!a.archived && b.archived) return -1;
 				return b.stargazers_count - a.stargazers_count;
 			},
 		)
@@ -75,7 +81,9 @@ function run(argv) {
 			// changes when repo is local
 			repo.local = localRepos[repo.name];
 			const mainArg = repo.local?.path || repo.html_url;
-			const terminalActionDesc = repo.local ? "Open in Terminal" : "Shallow Clone to Local Repo Folder";
+			const terminalActionDesc = repo.local
+				? "Open in Terminal"
+				: ("Shallow Clone" + (forkOnClone ? " and Fork" : ""));
 			// open in terminal when local, clone when not
 			const terminalArg = repo.local?.path || repo.html_url;
 			if (repo.local) {
@@ -106,7 +114,8 @@ function run(argv) {
 			if (repo.open_issues > 0) subtitle += `🟢 ${repo.open_issues}  `;
 			if (repo.forks_count > 0) subtitle += `🍴 ${repo.forks_count}  `;
 
-			return {
+			/** @type {AlfredItem} */
+			const alfredItem = {
 				title: `${type}${repo.name}`,
 				subtitle: subtitle,
 				match: matcher,
@@ -135,6 +144,11 @@ function run(argv) {
 					},
 				},
 			};
+			return alfredItem;
 		});
-	return JSON.stringify({ items: scriptFilterArr });
+
+	return JSON.stringify({
+		items: scriptFilterArr,
+		variables: { ownerOfRepo: "1" },
+	});
 }
