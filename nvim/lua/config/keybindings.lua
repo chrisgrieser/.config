@@ -26,11 +26,21 @@ keymap({ "n", "x" }, "k", "gk")
 keymap({ "n", "x" }, "J", "6gj")
 keymap({ "n", "x" }, "K", "6gk")
 
+-- repeat f/t without shift
+keymap({ "n", "x" }, "ä", ";")
+
 -- Jump history
 -- non-unique, since it overwrites nvim default: https://neovim.io/doc/user/vim_diff.html#default-mappings
 keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
 keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
+keymap(
+	"n",
+	"<C-g>",
+	function() require("funcs.nano-plugins").jumpBackInBuffer() end,
+	{ desc = "󱋿 Jump back in buffer" }
+)
 
+-- Changes
 keymap("n", "g,", "g;", { desc = " Goto Last Change" })
 
 -- Search

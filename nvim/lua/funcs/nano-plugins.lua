@@ -190,11 +190,11 @@ function M.selectMake()
 	end)
 end
 
--- Increment or toggle if cursorword is true/false. Simplified-implementation
+-- Increment or toggle if cursorword is true/false. Simplified implementation
 -- of dial.nvim. (requires `expr = true` for the keymap)
 function M.toggleOrIncrement()
 	local cword = vim.fn.expand("<cword>")
-	local bool = { ["true"] = "false", ["True"] = "False" } -- capitaliized for python
+	local bool = { ["true"] = "false", ["True"] = "False" } -- capitalized for python
 	local toggle
 	for word, opposite in pairs(bool) do
 		if cword == word then toggle = opposite end
@@ -284,6 +284,19 @@ function M.tabout()
 			vim.cmd.startinsert { bang = isEndOfLine }
 		end, 1)
 	end
+end
+
+---like `<C-o>` but jumps to last jump position in buffer
+function M.jumpBackInBuffer()
+	local currentBuf = vim.api.nvim_get_current_buf()
+	repeat
+		vim.cmd.execute([["normal \<C-o>"]]) -- SIC must be double-quoted
+		local jumpPos = vim.fn.getjumplist(0)[2]
+		if jumpPos == 0 then
+			vim.cmd("keepjumps buffer " .. tostring(currentBuf)) 
+			return
+		end
+	until currentBuf == vim.api.nvim_get_current_buf()
 end
 
 --------------------------------------------------------------------------------
