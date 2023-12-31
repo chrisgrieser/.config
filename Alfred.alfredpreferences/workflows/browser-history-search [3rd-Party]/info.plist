@@ -21,11 +21,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>7B8EAFBE-1F13-43AC-877B-4E588E0CBBE6</key>
+		<key>7CA0EBD3-ED09-4DA3-BF6F-FCAA7BEB6336</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>431B5DB0-7A04-4CD2-87E8-68938FF6C74B</string>
+				<string>9D0CC888-6C2F-4B2B-AEB1-1ABD004CD5F8</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -96,19 +96,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>DA1E89B6-5228-4635-B4F1-092C9ECE1B68</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>7B8EAFBE-1F13-43AC-877B-4E588E0CBBE6</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>E420908F-C5F5-44DD-AB95-0B375998DC6F</key>
 		<array>
 			<dict>
@@ -137,6 +124,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>0899A9C0-908D-4A32-9061-8DC000FAC6E2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>EF86C06D-C2CE-4E59-8B72-8F544AD73EB0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7CA0EBD3-ED09-4DA3-BF6F-FCAA7BEB6336</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -553,28 +553,7 @@
 			<key>type</key>
 			<string>alfred.workflow.trigger.external</string>
 			<key>uid</key>
-			<string>DA1E89B6-5228-4635-B4F1-092C9ECE1B68</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<true/>
-				<key>skipvarencode</key>
-				<true/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>431B5DB0-7A04-4CD2-87E8-68938FF6C74B</string>
+			<string>EF86C06D-C2CE-4E59-8B72-8F544AD73EB0</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -590,7 +569,7 @@
 # has to be done in Alfred, since Alfred environment variables are needed
 
 # small leeway getting lines 3-6, since line numbers sometimes shift
-echo -n $(./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",')</string>
+./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",'</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -601,9 +580,30 @@ echo -n $(./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",'
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>7B8EAFBE-1F13-43AC-877B-4E588E0CBBE6</string>
+			<string>7CA0EBD3-ED09-4DA3-BF6F-FCAA7BEB6336</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<true/>
+				<key>skipvarencode</key>
+				<true/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{var:url}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>9D0CC888-6C2F-4B2B-AEB1-1ABD004CD5F8</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -660,15 +660,6 @@ Pressing `CMD` to enter `Other Actions...`:
 			<key>ypos</key>
 			<real>190</real>
 		</dict>
-		<key>431B5DB0-7A04-4CD2-87E8-68938FF6C74B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>610</real>
-			<key>ypos</key>
-			<real>500</real>
-		</dict>
 		<key>6B99D187-E195-432C-A079-D4A99D9A9B0D</key>
 		<dict>
 			<key>xpos</key>
@@ -683,14 +674,23 @@ Pressing `CMD` to enter `Other Actions...`:
 			<key>ypos</key>
 			<real>355</real>
 		</dict>
-		<key>7B8EAFBE-1F13-43AC-877B-4E588E0CBBE6</key>
+		<key>7CA0EBD3-ED09-4DA3-BF6F-FCAA7BEB6336</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>450</real>
+			<real>345</real>
 			<key>ypos</key>
-			<real>500</real>
+			<real>600</real>
+		</dict>
+		<key>9D0CC888-6C2F-4B2B-AEB1-1ABD004CD5F8</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>505</real>
+			<key>ypos</key>
+			<real>600</real>
 		</dict>
 		<key>A1F782AE-40F5-47BE-BA57-F230607162D5</key>
 		<dict>
@@ -720,20 +720,6 @@ Pressing `CMD` to enter `Other Actions...`:
 			<key>ypos</key>
 			<real>190</real>
 		</dict>
-		<key>DA1E89B6-5228-4635-B4F1-092C9ECE1B68</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>leader → shift+b via Karabiner
-
-BACKUP
-for when browser history search workflow updates</string>
-			<key>xpos</key>
-			<real>300</real>
-			<key>ypos</key>
-			<real>500</real>
-		</dict>
 		<key>E420908F-C5F5-44DD-AB95-0B375998DC6F</key>
 		<dict>
 			<key>xpos</key>
@@ -747,6 +733,20 @@ for when browser history search workflow updates</string>
 			<real>685</real>
 			<key>ypos</key>
 			<real>75</real>
+		</dict>
+		<key>EF86C06D-C2CE-4E59-8B72-8F544AD73EB0</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>leader → shift+b via Karabiner
+
+BACKUP
+for when browser history search workflow updates</string>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>600</real>
 		</dict>
 		<key>F00B5055-2A7B-4DF4-AFAA-1B57E89B61DB</key>
 		<dict>
@@ -1081,7 +1081,7 @@ for when browser history search workflow updates</string>
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>4.1.3</string>
+	<string>4.1.4</string>
 	<key>webaddress</key>
 	<string>https://github.com/Acidham/chromium-hist-bookmarks</string>
 </dict>
