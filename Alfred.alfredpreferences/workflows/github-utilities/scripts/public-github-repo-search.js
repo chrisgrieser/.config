@@ -102,8 +102,5 @@ function run(argv) {
 			valid: false,
 		});
 	}
-	return JSON.stringify({
-		items: repos,
-		variables: { publicRepo: "true" },
-	});
+	return JSON.stringify({ items: repos });
 }
