@@ -30,7 +30,6 @@
       "for ${1:key}, ${2:value} in enumerate(${3:list}):",
       "\t${3:pass}"
     ],
-    "description": "desc",
     "prefix": "for each (key/value)"
   },
   "for each (list)": {
