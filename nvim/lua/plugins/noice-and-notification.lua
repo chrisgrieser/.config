@@ -181,10 +181,10 @@ return {
 			},
 		},
 		opts = {
-			render = "wrapped-compact",
-			top_down = false,
-			max_width = 50,
+			render = "wrapped-compact", -- best for shorter max_width
+			max_width = 45,
 			minimum_width = 15,
+			top_down = false,
 			level = trace, -- minimum severity
 			timeout = 6000,
 			stages = "slide", -- slide|fade
