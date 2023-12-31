@@ -32,6 +32,13 @@
     "body": "keymap({ \"n\", \"x\" }, \"${1:lhs}\", \"${2:rhs}\", { desc = \"${3:desc}\" })",
     "prefix": "keymap (multi-mode)"
   },
+  "leave visual mode": {
+    "body": [
+      "local escKey = vim.api.nvim_replace_termcodes(\"<Esc>\", false, true, true)",
+      "vim.api.nvim_feedkeys(escKey, \"nx\", false)"
+    ],
+    "prefix": "leave visual mode"
+  },
   "plugin spec (lazy.nvim)": {
     "body": [
       "{",

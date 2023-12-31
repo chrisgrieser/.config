@@ -202,6 +202,7 @@ return {
 			{
 				"<leader>na",
 				function() require("scissors").addNewSnippet() end,
+				mode = { "n", "x" },
 				desc = " Add new snippets",
 			},
 		},
