@@ -26,9 +26,8 @@ function httpRequest(url) {
 function run() {
 	// CONFIG
 	const username = $.getenv("github_username");
-	const includeArchived = false;
 	const localRepoFolder = $.getenv("local_repo_folder");
-	const forkOnClone = $.getenv("fork_on_clone");
+	const includeArchived = false;
 
 	// determine local repos
 	const localRepos = {};
@@ -83,7 +82,7 @@ function run() {
 			const mainArg = repo.local?.path || repo.html_url;
 			const terminalActionDesc = repo.local
 				? "Open in Terminal"
-				: ("Shallow Clone" + (forkOnClone ? " and Fork" : ""));
+				: "Shallow Clone"
 			// open in terminal when local, clone when not
 			const terminalArg = repo.local?.path || repo.html_url;
 			if (repo.local) {

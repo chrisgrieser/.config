@@ -264,6 +264,10 @@
     "description": "leading underscore so the variable is ignored by biome when not used.",
     "prefix": "try .. catch"
   },
+  "type (JSDoc)": {
+    "body": "/** @type {${1:string}} */",
+    "prefix": "type (JSDoc)"
+  },
   "type definition (JSDoc)": {
     "body": [
       "/** @typedef {Object} ${1:name}",
@@ -272,10 +276,7 @@
       "*/"
     ],
     "description": "https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#typedef-callback-and-param",
-    "prefix": [
-      "type definition (JSDoc)",
-      "class definition (JSDoc)"
-    ]
+    "prefix": "class definition (JSDoc)"
   },
   "unique items": {
     "body": "${1:arr} = [...new Set(${2:arr})];",

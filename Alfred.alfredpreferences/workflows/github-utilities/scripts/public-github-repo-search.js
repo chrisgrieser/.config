@@ -61,6 +61,7 @@ function run(argv) {
 		return JSON.stringify({ items: [{ title: "Waiting for query…", valid: false }] });
 	}
 
+	const forkOnClone = $.getenv("fork_on_clone") === "1";
 	const apiURL = `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}`;
 
 	/** @type {AlfredItem[]} */
@@ -81,6 +82,8 @@ function run(argv) {
 				repo.description,
 			].join("  ·  ");
 
+			const cloneSubtitle = "⌃: Shallow Clone" + (forkOnClone ? " & Fork" : "");
+
 			return {
 				title: repo.name,
 				subtitle: subtitle,
@@ -90,6 +93,9 @@ function run(argv) {
 					shift: {
 						subtitle: `⇧: Search Issues (${repo.open_issues} open)`,
 						arg: repo.full_name,
+					},
+					ctrl: {
+						subtitle: cloneSubtitle,
 					},
 				},
 			};

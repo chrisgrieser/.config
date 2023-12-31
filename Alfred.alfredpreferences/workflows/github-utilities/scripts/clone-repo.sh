@@ -19,7 +19,7 @@ echo -n "$local_repo_folder/$reponame"
 #───────────────────────────────────────────────────────────────────────────────
 # FORK ON CLONE (if owner)
 
-if [[ "$ownerOfRepo" == "1" && "$fork_on_clone" == "1" ]]; then
+if [[ "$ownerOfRepo" != "1" && "$fork_on_clone" == "1" ]]; then
 	cd "$reponame" || return 1
 	if [[ ! -x "$(command -v gh)" ]]; then print "\`gh\` not installed." && return 1; fi
 
