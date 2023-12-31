@@ -24,6 +24,19 @@
     "body": "local fileExists = vim.loop.fs_stat(\"${1:filepath}\") ~= nil",
     "prefix": "check if file exists"
   },
+  "dedent": {
+    "body": [
+      "---@param lines string[]",
+      "---@return string[] dedentedLines",
+      "function M.dedent(lines)",
+      "\tlocal indentAmounts = vim.tbl_map(function(line) return #(line:match(\"^%s*\")) end, lines)",
+      "\tlocal smallestIndent = math.min(unpack(indentAmounts))",
+      "\tlocal dedentedLines = vim.tbl_map(function(line) return line:sub(smallestIndent + 1) end, lines)",
+      "\treturn dedentedLines",
+      "end"
+    ],
+    "prefix": "dedent"
+  },
   "keymap": {
     "body": "vim.keymap.set(\"n\", \"${1:lhs}\", \"${2:rhs}\", { desc = \"placeholder\"})",
     "prefix": "keymap"
@@ -34,8 +47,10 @@
   },
   "leave visual mode": {
     "body": [
-      "local escKey = vim.api.nvim_replace_termcodes(\"<Esc>\", false, true, true)",
-      "vim.api.nvim_feedkeys(escKey, \"nx\", false)"
+      "local function leaveVisualMode()",
+      "\tlocal escKey = vim.api.nvim_replace_termcodes(\"<Esc>\", false, true, true)",
+      "\tvim.api.nvim_feedkeys(escKey, \"nx\", false)",
+      "end"
     ],
     "prefix": "leave visual mode"
   },
