@@ -187,9 +187,13 @@ return {
 				vim.api.nvim_win_set_config(win, { border = u.borderStyle })
 				local bufnr = vim.api.nvim_win_get_buf(win)
 
-				-- highlight numbers in error stacktraces
+				-- highlight numbers in error stacktraces & copy line number
 				vim.api.nvim_buf_call(bufnr, function ()
-					vim.fn.matchadd("Warning", [[\w\+.lua:\d\+:]])
+					vim.fn.matchadd("WarningMsg", [[\w\+\.lua:\d\+\ze:]]) -- \ze: lookahead
+					local bufText = table.concat(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false), "\n")
+					-- PENDING copy filename + line number, once telescope PR merged https://github.com/nvim-telescope/telescope.nvim/pull/2791
+					local lineNum = bufText:match("%w+%.lua:(%d+):")
+					vim.fn.setreg("+", lineNum)
 				end)
 			end,
 		},

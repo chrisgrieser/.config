@@ -1,10 +1,8 @@
-local ns = vim.api.nvim_create_namespace("tinygit.test")
-vim.fn.matchadd(
-	"conventionalCommits",
-	[[feat]]
-)
-vim.api.nvim_set_hl(ns, "conventionalCommits", { link = "Title" })
+-- vim.fn.matchadd("WarningMsg", [[\w\+\.lua:\d\+\ze:]]) -- \ze: lookahead
+-- vim.fn.matchadd("WarningMsg", [[\w\+\.lua:\d\+\ze:]]) -- \ze: lookahead
 
-vim.fn.matchadd("Warning", [[\w\+.lua:\d\+:]])
+-- .../nvim-data/lazy/nvim-chainsaw/lua/chainsaw/init.lua:31: attempt to call field 'normal' (a nil value)
 
+vim.notify(".../nvim-chainsaw/lua/chainsaw/init.lua:31: attempt to call field 'normal' (a nil value)")
 
+vim.notify("aaa")

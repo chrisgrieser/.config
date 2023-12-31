@@ -2,6 +2,12 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
+	{
+		"cshuaimin/ssr.nvim",
+		keys = {
+			{ "<leader>S", function() require("ssr").open() end, desc = "SSR" },
+		},
+	},
 	{ -- Multi Cursor
 		"mg979/vim-visual-multi",
 		keys = {
