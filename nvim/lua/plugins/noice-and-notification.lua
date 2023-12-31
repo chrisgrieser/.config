@@ -66,16 +66,9 @@ return {
 		event = "VimEnter", -- earlier to catch notifications on startup
 		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
 		keys = {
-			{ "<Esc>", function() vim.cmd.Noice("dismiss") end, desc = "󰎟 Clear Notifications" },
-			{
-				"<D-0>",
-				function()
-					vim.cmd.Noice("dismiss")
-					vim.cmd.Noice("history")
-				end,
-				mode = { "n", "x", "i" },
-				desc = "󰎟 Noice Log",
-			},
+			{ "<Esc>", vim.cmd.NoiceDismiss, desc = "󰎟 Clear Notifications" },
+			{ "<D-0>", vim.cmd.NoiceHistory, mode = { "n", "x", "i" }, desc = "󰎟 Noice Log" },
+			{ "<D-9>", vim.cmd.NoiceLast, mode = { "n", "x", "i" }, desc = "󰎟 Noice Last" },
 			{
 				"<D-k>",
 				function()
@@ -117,6 +110,7 @@ return {
 					border = { style = u.borderStyle },
 					size = { width = 90, height = 25 },
 					win_options = { scrolloff = 8, wrap = true },
+					close = { keys = { "q", "<D-w>", "<D-9>" } },
 				},
 				split = {
 					enter = true,
@@ -131,16 +125,18 @@ return {
 					view = "split",
 					filter_opts = { reverse = true }, -- show newest entries first
 					filter = {}, -- empty list = deactivate filter = include everything
-					opts = {
-						enter = true,
-						-- https://github.com/folke/noice.nvim#-formatting
-						format = { "{title} ", "{cmdline} ", "{message}" },
-					},
+					-- https://github.com/folke/noice.nvim#-formatting
+					opts = { format = { "{title} ", "{cmdline} ", "{message}" } },
+				},
+				last = {
+					view = "popup",
+					filter = {}, -- empty list = deactivate filter = include everything
+					-- https://github.com/folke/noice.nvim#-formatting
+					opts = { format = { "{title} ", "{cmdline} ", "{message}" } },
 				},
 			},
 
 			-- DISABLE features, since conflicts with existing plugins I prefer to use
-			messages = { view_search = false }, -- replaced by nvim-hlslens
 			lsp = {
 				progress = { enabled = false }, -- replaced with nvim-dr-lsp, since less intrusive
 				signature = { enabled = false }, -- using with lsp_signature.nvim
@@ -175,7 +171,7 @@ return {
 		opts = {
 			render = "wrapped-compact",
 			top_down = false,
-			max_width = 50, -- commit message max length
+			max_width = 50,
 			minimum_width = 15,
 			level = trace, -- minimum severity
 			timeout = 6000,
@@ -188,12 +184,12 @@ return {
 				local bufnr = vim.api.nvim_win_get_buf(win)
 
 				-- highlight numbers in error stacktraces & copy line number
-				vim.api.nvim_buf_call(bufnr, function ()
+				vim.api.nvim_buf_call(bufnr, function()
 					vim.fn.matchadd("WarningMsg", [[\w\+\.lua:\d\+\ze:]]) -- \ze: lookahead
 					local bufText = table.concat(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false), "\n")
 					-- PENDING copy filename + line number, once telescope PR merged https://github.com/nvim-telescope/telescope.nvim/pull/2791
 					local lineNum = bufText:match("%w+%.lua:(%d+):")
-					vim.fn.setreg("+", lineNum)
+					if lineNum then vim.fn.setreg("+", lineNum) end
 				end)
 			end,
 		},
