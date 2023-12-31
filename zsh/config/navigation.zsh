@@ -2,9 +2,10 @@
 # DOCS https://zsh.sourceforge.io/Doc/Release/Options.html#Changing-Directories
 #───────────────────────────────────────────────────────────────────────────────
 
-setopt AUTO_CD     # pure directory = cd into it
+setopt AUTO_CD # pure directory = cd into it
+setopt CD_SILENT
 
-# POST-DIRECTORY-CHANGE-HOOK 
+# POST-DIRECTORY-CHANGE-HOOK
 # (use `cd -q` to suppress this hook)
 function chpwd {
 	_magic_dashboard

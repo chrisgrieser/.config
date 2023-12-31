@@ -30,14 +30,20 @@ keymap({ "n", "x" }, "K", "6gk")
 keymap({ "n", "x" }, "ä", ";")
 
 -- Jump history
+keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
 -- non-unique, since it overwrites nvim default: https://neovim.io/doc/user/vim_diff.html#default-mappings
 keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
-keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
 keymap(
 	"n",
 	"<C-g>",
-	function() require("funcs.nano-plugins").jumpBackInBuffer() end,
-	{ desc = "󱋿 Jump back in buffer" }
+	function() require("funcs.nano-plugins").jumpInBuffer("back") end,
+	{ desc = "󱋿 Jump back (in buffer)" }
+)
+keymap(
+	"n",
+	"<C-ö>",
+	function() require("funcs.nano-plugins").jumpInBuffer("forward") end,
+	{ desc = "󱋿 Jump forward (in buffer)" }
 )
 
 -- Changes

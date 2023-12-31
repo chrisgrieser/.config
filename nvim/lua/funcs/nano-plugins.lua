@@ -286,14 +286,17 @@ function M.tabout()
 	end
 end
 
----like `<C-o>` but jumps to last jump position in buffer
-function M.jumpBackInBuffer()
+---like <C-o>/<C-i>, but restricts jumpts to current buffer
+---@param direction "back"|"forward"
+function M.jumpInBuffer(direction)
 	local currentBuf = vim.api.nvim_get_current_buf()
+	local key = direction == "back" and "<C-o>" or "<C-i>"
+	local jumpListEnd = direction == "back" and 0 or #vim.fn.getjumplist(0)[1]
 	repeat
-		vim.cmd.execute([["normal \<C-o>"]]) -- SIC must be double-quoted
+		vim.cmd.execute(([["normal \%s"]]):format(key)) -- SIC must be double-quoted
 		local jumpPos = vim.fn.getjumplist(0)[2]
-		if jumpPos == 0 then
-			vim.cmd("keepjumps buffer " .. tostring(currentBuf)) 
+		if jumpPos == jumpListEnd then
+			vim.cmd("keepjumps buffer " .. tostring(currentBuf))
 			return
 		end
 	until currentBuf == vim.api.nvim_get_current_buf()
