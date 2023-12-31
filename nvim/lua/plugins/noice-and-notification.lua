@@ -2,10 +2,27 @@ local u = require("config.utils")
 local trace = vim.log.levels.TRACE
 --------------------------------------------------------------------------------
 
+---@param bufnr number
+local function highlightCopyStacktraceLine(bufnr)
+	vim.api.nvim_buf_call(bufnr, function()
+		vim.fn.matchadd("WarningMsg", [[\w\+\.lua:\d\+\ze:]]) -- \ze: lookahead
+	end)
+
+	vim.defer_fn(function()
+		if not vim.api.nvim_buf_is_valid(bufnr) then return end
+		local bufText = table.concat(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false), "\n")
+		-- PENDING copy filename + line number, once telescope PR merged https://github.com/nvim-telescope/telescope.nvim/pull/2791
+		local lineNum = bufText:match("%w+%.lua:(%d+):") -- assumes lua file
+		if lineNum then vim.fn.setreg("+", lineNum) end
+	end, 1)
+end
+
+--------------------------------------------------------------------------------
+
 -- DOCS https://github.com/folke/noice.nvim#-routes
 local routes = {
-	-- redirect to popup when message is longer than 10 lines
-	{ filter = { min_height = 10 }, view = "popup" },
+	-- redirect to popup when message is long
+	{ filter = { min_height = 8 }, view = "popup" },
 
 	-- write/deletion messages
 	{ filter = { event = "msg_show", find = "%d+B written$" }, view = "mini" },
@@ -65,20 +82,16 @@ return {
 		"folke/noice.nvim",
 		event = "VimEnter", -- earlier to catch notifications on startup
 		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
+		init = function ()
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "noice",
+				callback = function(ctx) highlightCopyStacktraceLine(ctx.buf) end,
+			})
+		end,
 		keys = {
 			{ "<Esc>", vim.cmd.NoiceDismiss, desc = "󰎟 Clear Notifications" },
 			{ "<D-0>", vim.cmd.NoiceHistory, mode = { "n", "x", "i" }, desc = "󰎟 Noice Log" },
 			{ "<D-9>", vim.cmd.NoiceLast, mode = { "n", "x", "i" }, desc = "󰎟 Noice Last" },
-			{
-				"<D-k>",
-				function()
-					vim.cmd.close()
-					vim.cmd.Lazy("reload noice.nvim")
-					vim.notify("Noice Log cleared.", trace, { title = "noice.nvim" })
-				end,
-				ft = "noice", -- only work in noice log itself
-				desc = "󰎟 Clear Noice Log",
-			},
 		},
 		opts = {
 			routes = routes,
@@ -100,6 +113,7 @@ return {
 					timeout = 3000,
 					zindex = 10, -- lower, so it does not cover nvim-notify
 					position = { col = -3 }, -- to the left to avoid collision with scrollbar
+					format = { "{title} ", "{cmdline} ", "{message}" }, -- leave out "{level}"
 				},
 				hover = {
 					border = { style = u.borderStyle },
@@ -182,15 +196,7 @@ return {
 				if not vim.api.nvim_win_is_valid(win) then return end
 				vim.api.nvim_win_set_config(win, { border = u.borderStyle })
 				local bufnr = vim.api.nvim_win_get_buf(win)
-
-				-- highlight numbers in error stacktraces & copy line number
-				vim.api.nvim_buf_call(bufnr, function()
-					vim.fn.matchadd("WarningMsg", [[\w\+\.lua:\d\+\ze:]]) -- \ze: lookahead
-					local bufText = table.concat(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false), "\n")
-					-- PENDING copy filename + line number, once telescope PR merged https://github.com/nvim-telescope/telescope.nvim/pull/2791
-					local lineNum = bufText:match("%w+%.lua:(%d+):")
-					if lineNum then vim.fn.setreg("+", lineNum) end
-				end)
+				highlightCopyStacktraceLine(bufnr)
 			end,
 		},
 	},

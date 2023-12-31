@@ -56,7 +56,7 @@ end
 function M.commentHr()
 	local comStr = vim.bo.commentstring
 	if comStr == "" then
-		notify("", "No commentstring for this filetype available.", "warn")
+		notify("Comment HR", "No commentstring for this filetype available.", "warn")
 		return
 	end
 
@@ -205,8 +205,8 @@ function M.toggleOrIncrement()
 end
 
 -- simplified implementation of neogen.nvim
--- - requires nvim-treesitter-textobjects
--- - lsp usually provides better prefills for docstrings
+-- * requires nvim-treesitter-textobjects
+-- * lsp usually provides better prefills for docstrings
 function M.docstring()
 	local supportedFts = { "lua", "python", "javascript" }
 	if not vim.tbl_contains(supportedFts, vim.bo.filetype) then
@@ -271,7 +271,7 @@ function M.tabout()
 	elseif vim.bo.ft == "gitcommit" then
 		vim.cmd.startinsert { bang = true }
 	else
-		local closingPairs = "[%]\"'`)}]"
+		local closingPairs = "[%]\"'`)}>]"
 		local nextClosingPairPos = line:find(closingPairs, col + 1)
 		if not nextClosingPairPos then return end
 

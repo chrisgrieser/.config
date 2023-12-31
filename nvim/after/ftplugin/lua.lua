@@ -17,6 +17,7 @@ u.ftAbbr("tree", "then return end")
 -- https://github.com/neovim/neovim/blob/master/runtime/ftplugin/lua.vim#L18
 vim.opt_local.comments = {
 	"b:---@field", -- fields for `@class`
+	":-- *", -- enumrations in comments (just personal convention)
 	":---",
 	":--",
 }
