@@ -33,6 +33,7 @@ function run() {
 			};
 		});
 
+	const alreadyListed = {}; // some sites are listed multiple times
 	const referenceDocs = app
 		.doShellScript(`curl -s "${referenceDocsURL}"`)
 		.split("\r")
@@ -40,8 +41,10 @@ function run() {
 		.filter((line) => line.includes("a href")) // only links
 		.map((line) => {
 			const url = line.replace(ahrefRegex, "$1");
+			if (!url || alreadyListed[url]) return {};
+
+			alreadyListed[url] = true; // prevent duplicate entries
 			const title = decodeURIComponent(line.replace(ahrefRegex, "$2"));
-			if (!url) return {};
 
 			return {
 				title: title,

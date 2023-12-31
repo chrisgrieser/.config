@@ -243,6 +243,7 @@ return {
 				o = { name = "  Options" },
 				p = { name = " 󰏗 Packages" },
 				d = { name = "  Diagnostics" },
+				c = { name = "  Calls" },
 			}, { prefix = "<leader>" })
 
 			-- leader prefixes normal+visual mode
