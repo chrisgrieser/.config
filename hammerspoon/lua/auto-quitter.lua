@@ -13,12 +13,13 @@ local function now() return os.time() end
 ---CONFIG
 ---times after which apps should quit, in minutes
 ---(Apps not in this list will be ignored and never quit automatically).
-M.thresholds = {
+---@type table<string, integer|nil>
+M.thresholdMins = {
 	Slack = 20,
 	[env.mailApp] = 5,
 	[env.todoApp] = 10,
 	Highlights = 90,
-	Discord = 180, 
+	Discord = 180,
 	BusyCal = 2,
 	["wezterm-gui"] = 45, -- does not work with "WezTerm"
 	["Alfred Preferences"] = 20,
@@ -26,7 +27,7 @@ M.thresholds = {
 	Finder = 20, -- only closes windows when not on projector
 	Obsidian = nil, -- do not autoquit due to omnisearch plugin indexing
 }
-local checkIntervalSecs = 20
+local checkIntervalSecs = 30
 
 --------------------------------------------------------------------------------
 
@@ -54,7 +55,7 @@ end
 M.idleApps = {}
 
 -- fill `idleApps` with all running apps and the current time
-for app, _ in pairs(M.thresholds) do
+for app, _ in pairs(M.thresholdMins) do
 	if u.appRunning(app) then M.idleApps[app] = now() end
 end
 
@@ -76,12 +77,12 @@ M.timer_autoQuitter = hs.timer
 	.doEvery(checkIntervalSecs, function()
 		for app, lastActivation in pairs(M.idleApps) do
 			-- can't do this with guard clause, since lua has no `continue`
-			local appHasThreshold = M.thresholds[app] ~= nil
+			local appHasThreshold = M.thresholdMins[app] ~= nil
 			local appIsRunning = u.appRunning(app)
 
 			if appHasThreshold and appIsRunning then
 				local idleTimeSecs = now() - lastActivation
-				local thresholdSecs = M.thresholds[app] * 60
+				local thresholdSecs = M.thresholdMins[app] * 60
 				if idleTimeSecs > thresholdSecs then quit(app) end
 			end
 		end

@@ -1,17 +1,9 @@
 
 -- INFO only the first theme will be used
 local lightThemes = {
-	-- { "EdenEast/nightfox.nvim", name = "dawnfox" },
-	{
-		"catppuccin/nvim",
-		name = "catppuccin",
-		opts = { integrations = {
-			notify = true,
-		} },
-	},
+	{ "sainnhe/everforest", init = function() vim.g.everforest_background = "hard" end },
+	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
 	-- { "folke/tokyonight.nvim", opts = { style = "day" } },
-	-- { "ribru17/bamboo.nvim" },
-	-- { "sainnhe/everforest", init = function() vim.g.everforest_background = "hard" end },
 	-- {
 	-- 	"marko-cerovac/material.nvim",
 	-- 	init = function() vim.g.material_style = "lighter" end,
