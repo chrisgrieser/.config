@@ -22,4 +22,4 @@
 
 
 
-vim.notify("All parsers are up-to%-date")
+vim.notify("All parsers are up-to-date")
