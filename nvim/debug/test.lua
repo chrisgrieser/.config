@@ -5,4 +5,6 @@ vim.fn.matchadd(
 )
 vim.api.nvim_set_hl(ns, "conventionalCommits", { link = "Title" })
 
--- feat: some words
+vim.fn.matchadd("Warning", [[\w\+.lua:\d\+:]])
+
+
