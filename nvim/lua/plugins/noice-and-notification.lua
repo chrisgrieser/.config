@@ -113,7 +113,7 @@ return {
 					timeout = 3000,
 					zindex = 10, -- lower, so it does not cover nvim-notify
 					position = { col = -3 }, -- to the left to avoid collision with scrollbar
-					format = { "{title} ", "{cmdline} ", "{message}" }, -- leave out "{level}"
+					format = { "{title} ", "{message}" }, -- leave out "{level}"
 				},
 				hover = {
 					border = { style = u.borderStyle },

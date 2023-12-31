@@ -59,7 +59,7 @@
     ]
   },
   "cmd": {
-    "body": "⌘",
+    "body": ["⌘"],
     "prefix": "cmd"
   },
   "ctrl": {
