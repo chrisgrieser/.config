@@ -1,4 +1,5 @@
 #!/usr/bin/env osascript -l JavaScript
+ObjC.import("stdlib");
 
 /** @param {string} str */
 function alfredMatcher(str) {
