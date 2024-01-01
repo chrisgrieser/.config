@@ -15,8 +15,6 @@ alias mkdir='mkdir -pv' # create intermediate directories & verbose
 alias curl='curl --progress-bar'
 alias make='make --silent --warn-undefined-variables'
 alias jless='jless --no-line-numbers'
-alias ls='eza --all --long --time-style=relative --no-user --smart-group \
-	--total-size --no-quotes --git-ignore --sort=newest --hyperlink'
 
 # colorized & showing all
 function which { builtin which -a "$@" | bat --language=sh; }
