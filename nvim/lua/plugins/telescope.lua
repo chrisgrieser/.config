@@ -19,7 +19,7 @@ local keymappings_I = {
 		require("telescope.actions").smart_send_to_qflist(prompt_bufnr) -- sends selected, or if none selected, sends all
 		vim.cmd.cfirst()
 	end,
-	["<D-CR>"] = function(prompt_bufnr)
+	["<M-CR>"] = function(prompt_bufnr) -- consistent with w
 		require("telescope.actions").toggle_selection(prompt_bufnr)
 		require("telescope.actions").move_selection_worse(prompt_bufnr)
 	end,
@@ -112,7 +112,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "TelescopeResults",
 	callback = function(ctx)
 		vim.api.nvim_buf_call(ctx.buf, function()
-			vim.fn.matchadd("TelescopeParent", "\t\t.*$")
+			vim.fn.matchadd("Comment", "\t\t.*$")
 			vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
 		end)
 	end,
@@ -126,7 +126,7 @@ local function filenameFirst(_, path)
 	local tail = vim.fs.basename(path)
 	local parent = vim.fs.dirname(path)
 	if parent == "." then return tail end
-	local parentDisplay = #parent > 20 and vim.fs.basename(parent) or parent
+	local parentDisplay = #parent > 25 and vim.fs.basename(parent) or parent
 	return string.format("%s\t\t%s", tail, parentDisplay) -- parent colored via autocmd above
 end
 
@@ -146,14 +146,13 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = vim.tbl_keys(symbolFilter),
 	callback = function(ctx)
 		local ft = ctx.match
-		local symbol = symbolFilter[ft]
 		vim.keymap.set(
 			"n",
 			"gs",
 			function()
 				require("telescope.builtin").lsp_document_symbols {
 					prompt_title = "Sections",
-					symbols = symbol,
+					symbols = symbolFilter[ft],
 				}
 			end,
 			{ desc = " Sections", buffer = true }
@@ -289,13 +288,6 @@ local function telescopeConfig()
 				show_plug = false, -- do not show mappings with "<Plug>"
 				lhs_filter = function(lhs) return not lhs:find("Þ") end, -- remove which-key mappings
 			},
-			jumplist = {
-				prompt_prefix = "󱋿 ",
-				show_line = false,
-				layout_config = {
-					horizontal = { preview_width = { 0.65, min = 20 } },
-				},
-			},
 			highlights = {
 				prompt_prefix = " ",
 				layout_config = {
@@ -388,7 +380,6 @@ return {
 			{ "g.", function() telescope("resume") end, desc = " Continue" },
 			{ "gs", function() telescope("treesitter") end, desc = " Symbols" },
 			{ "gd", function() telescope("lsp_definitions") end, desc = "󰒕 Definitions" },
-			{ "gj", function() telescope("jumplist") end, desc = "󱋿 Jumplist" },
 			{ "gf", function() telescope("lsp_references") end, desc = "󰒕 References" },
 			-- stylua: ignore
 			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },

@@ -20,6 +20,9 @@ export EZA_ICONS_AUTO=1
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# INFO multi-select: 
+# `ctrl-s` mapped to `alt-enter` via wezterm, so the mapping is
+# consistent with the one for telescope
 export FZF_DEFAULT_COMMAND='fd'
 export FZF_DEFAULT_OPTS='
 	--color=hl:206,header::reverse --pointer=⟐ --prompt="❱ " --scrollbar=▐ --ellipsis=… --marker=" +"
