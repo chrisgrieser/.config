@@ -25,8 +25,6 @@ return {
 			-- stylua: ignore end
 		},
 		config = function()
-			u.addToLuaLine("sections", "lualine_y", require("tinygit.gitblame").statusLine)
-
 			require("tinygit").setup {
 				commitMsg = {
 					conventionalCommits = { enforce = true },
@@ -43,10 +41,11 @@ return {
 					},
 				},
 				blameStatusLine = {
-					ignoreAuthors = { "🤖 automated" },
-					maxMsgLen = 25,
+					-- ignoreAuthors = { "🤖 automated" },
+					maxMsgLen = 30,
 				},
 			}
+			u.addToLuaLine("sections", "lualine_y", require("tinygit.gitblame").statusLine)
 		end,
 	},
 	{ -- git sign gutter & hunk actions

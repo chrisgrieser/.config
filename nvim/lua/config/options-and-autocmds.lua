@@ -116,8 +116,8 @@ opt.makeprg = "make --silent --warn-undefined-variables"
 opt.pumwidth = 15 -- min width
 opt.pumheight = 12 -- max height
 
-opt.sidescrolloff = 13
-opt.scrolloff = 13
+opt.sidescrolloff = 15
+opt.scrolloff = 15
 
 opt.shiftround = true
 opt.smartindent = true
