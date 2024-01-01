@@ -209,12 +209,9 @@ return {
 		opts = {
 			editSnippetPopup = {
 				height = 0.4, -- between 0-1
-				width = 0.6,
+				width = 0.7,
 				border = u.borderStyle,
-				keymaps = {
-					delete = "<D-BS>",
-					openInFile = "<D-o>",
-				},
+				keymaps = { delete = "<D-BS>" },
 			},
 			jsonFormatter = "yq",
 		},

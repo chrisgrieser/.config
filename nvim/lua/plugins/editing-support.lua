@@ -82,8 +82,8 @@ return {
 					:with_del(function() return false end)
 					:with_move(function(opts) return opts.char == "," end),
 
-				-- git commit with scope auto-append `()` to `:`
-				rule("^%a+%(%)", ":", "gitcommit")
+				-- git commit with scope auto-append `(` to `(): `
+				rule("^%a+%(%)", ": ", "gitcommit")
 					:use_regex(true)
 					:with_pair(negLookahead(".+"))
 					:with_pair(isNotNodeType("message"))
