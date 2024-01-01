@@ -9,7 +9,7 @@ export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 # DOCS https://github.com/eza-community/eza/blob/main/man/eza_colors.5.md
 # INFO does also accept specific files via glob, e.g. `README.md=4;33`,
 # `.*=…` affects dotfiles
-grey="38;5;247" 
+grey="38;5;247"
 file_colors=".*=$grey:LICENSE*=$grey:*lock*=$grey"
 export LS_COLORS="di=1;34:ln=3;35:or=7;31:ex=39:$file_colors"
 
@@ -20,16 +20,14 @@ export EZA_ICONS_AUTO=1
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# INFO multi-select: 
-# `ctrl-s` mapped to `alt-enter` via wezterm, so the mapping is
-# consistent with the one for telescope
+# INFO multi-select `alt-enter` mapping consistent with the one for telescope
 export FZF_DEFAULT_COMMAND='fd'
 export FZF_DEFAULT_OPTS='
 	--color=hl:206,header::reverse --pointer=⟐ --prompt="❱ " --scrollbar=▐ --ellipsis=… --marker=" +"
 	--scroll-off=5 --cycle --layout=reverse --height=90% --preview-window=border-left
 	--bind=tab:down,shift-tab:up
 	--bind=page-down:preview-page-down,page-up:preview-page-up
-	--bind=ctrl-s:toggle+down,ctrl-a:toggle-all
+	--bind=alt-enter:toggle+down,ctrl-a:toggle-all
 '
 
 # updates managed via homebrew https://cli.github.com/manual/gh_help_environment

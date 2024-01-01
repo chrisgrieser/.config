@@ -27,13 +27,14 @@ vim.opt.guifont = vim.env.CODE_FONT .. ":h" .. fontSize
 
 --------------------------------------------------------------------------------
 
--- Behavior
-g.neovide_remember_window_size = true
+-- CMD & ALT Keys
 g.neovide_input_use_logo = true -- enable `cmd` key on macOS
-g.neovide_input_macos_alt_is_meta = false -- false, so {@~ etc can be used
-g.neovide_hide_mouse_when_typing = true
+
+-- false, so {@~ etc can be used (<M-CR> still works though)
+g.neovide_input_macos_alt_is_meta = false
 
 -- Appearance
+g.neovide_remember_window_size = true
 g.neovide_transparency = 0.91
 g.neovide_refresh_rate = host:find("Mother") and 30 or 50
 
@@ -51,6 +52,7 @@ vim.opt.guicursor = {
 	"r-cr-o-v:hor10",
 	"a:blinkwait200-blinkoff350-blinkon550",
 }
+g.neovide_hide_mouse_when_typing = true
 
 g.neovide_cursor_animation_length = 0.01
 g.neovide_cursor_trail_size = 0.9
