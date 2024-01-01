@@ -1,4 +1,8 @@
 {
+  "@cast (LuaDoc)": {
+    "body": "---@cast ${1:var} ${2:type}",
+    "prefix": "@cast (LuaDoc)"
+  },
   "autocmd": {
     "body": [
       "vim.api.nvim_create_autocmd(\"${1:event}\", {",

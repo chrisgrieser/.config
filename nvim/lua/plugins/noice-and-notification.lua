@@ -12,7 +12,7 @@ local function highlightCopyStacktraceLine(bufnr)
 		if not vim.api.nvim_buf_is_valid(bufnr) then return end
 		local bufText = table.concat(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false), "\n")
 		-- PENDING copy filename + line number, once telescope PR merged https://github.com/nvim-telescope/telescope.nvim/pull/2791
-		local lineNum = bufText:match("[[^/]+%.lua:(%d+):") -- assumes lua file
+		local lineNum = bufText:match("[^/]+%.lua:(%d+):") -- assumes lua file
 		if lineNum then vim.fn.setreg("+", lineNum) end
 	end, 1)
 end
