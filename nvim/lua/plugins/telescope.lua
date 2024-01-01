@@ -366,6 +366,9 @@ local function telescopeConfig()
 				},
 			},
 		},
+		extensions = {
+			import = { insert_at_top = false }, -- insert at cursor instead, relevant for lua
+		},
 	}
 end
 

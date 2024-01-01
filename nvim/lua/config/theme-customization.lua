@@ -107,6 +107,9 @@ local function themeModifications()
 				updateHl("lualine_a_" .. v, "gui=bold")
 			end
 		end, 100)
+		-- needs foreground, not background
+		local incsearch = u.getHighlightValue("IncSearch", "fg")
+		overwriteHl("HLSearchReversed", { fg = incsearch })
 	elseif theme == "bamboo" and mode == "light" then
 		overwriteHl("@comment", { fg = "#777f76" })
 		updateHl("Todo", "guifg=#ffffff")
