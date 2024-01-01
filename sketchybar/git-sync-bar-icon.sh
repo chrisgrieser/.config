@@ -8,53 +8,39 @@ export GIT_OPTIONAL_LOCKS=0
 
 #───────────────────────────────────────────────────────────────────────────────
 # CHANGES
-
-cd "$HOME/.config" || configError="repo-path wrong"
-dotChanges=$(git status --short | wc -l | tr -d " ")
-
-cd "$VAULT_PATH" || configError="repo-path wrong"
-vaultChanges=$(git status --porcelain | wc -l | tr -d " ")
-
-cd "$PASSWORD_STORE_DIR" || configError="repo-path wrong"
-passChanges=$(git status --porcelain | wc -l | tr -d " ")
-
+dotChanges=$(git -C "$HOME/.config" status --short | wc -l | tr -d " ")
+vaultChanges=$(git -C "$VAULT_PATH" status --porcelain | wc -l | tr -d " ")
+passChanges=$(git -C "$PASSWORD_STORE_DIR" status --porcelain | wc -l | tr -d " ")
 [[ $dotChanges -ne 0 ]] && label="${dotChanges}d "
 [[ $vaultChanges -ne 0 ]] && label="$label${vaultChanges}v "
 [[ $passChanges -ne 0 ]] && label="$label${passChanges}p"
-
-#───────────────────────────────────────────────────────────────────────────────
 
 # INFO set early, since `git fetch` requires time and the icons should update quicker
 # If there are behinds, icons will appear a few seconds later which isn't a
 # problem. But if there are no behinds, the outdated label will disappear quicker.
 
 [[ -n "$label" ]] && icon=""
-sketchybar --set "$NAME" icon="$icon" label="$label$configError"
-
-[[ -n "$configError" ]] && return 1
+sketchybar --set "$NAME" icon="$icon" label="$label"
 
 #───────────────────────────────────────────────────────────────────────────────
 # COMMITS BEHIND
 
-icon=""
-# shellcheck disable=2164
-cd "$HOME/.config"
-git fetch # required to check for commits behind
-dotBehind=$(git status --porcelain --branch | head -n1 | grep "behind" | grep -Eo "\d")
+git "$HOME/.config" fetch # required to check for commits behind
+git "$VAULT_PATH" fetch
+git "$PASSWORD_STORE_DIR" fetch
 
-# shellcheck disable=2164
-cd "$VAULT_PATH"
-git fetch
-vaultBehind=$(git status --porcelain --branch | head -n1 | grep "behind" | grep -Eo "\d")
-
-# shellcheck disable=2164
-cd "$PASSWORD_STORE_DIR"
-git fetch
-passBehind=$(git status --porcelain --branch | head -n1 | grep "behind" | grep -Eo "\d")
+dotBehind=$(git -C "$HOME/.config" -c "status.short=false" status --porcelain --branch | 
+	head -n1 | grep "behind" | grep -Eo "\d")
+vaultBehind=$(git -C "$VAULT_PATH" -c "status.short=false" status --porcelain --branch | 
+	head -n1 | grep "behind" | grep -Eo "\d")
+passBehind=$(git -C "$PASSWORD_STORE_DIR" -c "status.short=false" status --porcelain --branch | 
+	head -n1 | grep "behind" | grep -Eo "\d")
 
 [[ -n "$dotBehind" ]] && label="$label${dotBehind}!d "
 [[ -n "$vaultBehind" ]] && label="$label${vaultBehind}!v "
 [[ -n "$passBehind" ]] && label="$label${passBehind}!p"
 
+icon=""
 [[ -n "$label" ]] && icon=" "
+
 sketchybar --set "$NAME" icon="$icon" label="$label"
