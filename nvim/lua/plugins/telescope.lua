@@ -105,21 +105,20 @@ local normalModeOnly = {
 local keymappings_N = vim.tbl_extend("force", keymappings_I, normalModeOnly)
 
 --------------------------------------------------------------------------------
--- HELPERS
+-- HACK Better listing of files https://github.com/nvim-telescope/telescope.nvim/issues/2014
 
--- HACK color parent as comment
--- CAVEAT interferes with other Telescope Results that display two tabs
+-- color parent as comment
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "TelescopeResults",
-	callback = function()
-		vim.fn.matchadd("TelescopeParent", "\t\t.*$")
-		vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
+	callback = function(ctx)
+		vim.api.nvim_buf_call(ctx.buf, function()
+			vim.fn.matchadd("TelescopeParent", "\t\t.*$")
+			vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
+		end)
 	end,
 })
--- `M` in `:Telescope git_status`
-u.colorschemeMod("TelescopeResultsDiffChange", { link = "diffChanged" })
 
----Requires the autocmd above
+---requires the autocmd above
 ---@param _ table
 ---@param path string
 ---@return string
@@ -165,6 +164,9 @@ vim.api.nvim_create_autocmd("FileType", {
 --------------------------------------------------------------------------------
 
 local function telescopeConfig()
+	-- color the `M` in `:Telescope git_status`
+	u.colorschemeMod("TelescopeResultsDiffChange", { link = "diffChanged" })
+
 	require("telescope").setup {
 		defaults = {
 			path_display = { "tail" },
@@ -391,11 +393,19 @@ return {
 			-- stylua: ignore
 			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
 
-			-- info consider a call-tree plugin: 
+			-- info consider a call-tree plugin:
 			-- * https://github.com/ldelossa/litee-calltree.nvim
 			-- * https://github.com/crusj/hierarchy-tree-go.nvim
-			{ "<leader>ci", function() telescope("lsp_incoming_calls") end, desc = " Incoming Calls" },
-			{ "<leader>co", function() telescope("lsp_outgoing_calls") end, desc = " Outgoing Calls" },
+			{
+				"<leader>ci",
+				function() telescope("lsp_incoming_calls") end,
+				desc = " Incoming Calls",
+			},
+			{
+				"<leader>co",
+				function() telescope("lsp_outgoing_calls") end,
+				desc = " Outgoing Calls",
+			},
 
 			{ "<leader>ph", function() telescope("highlights") end, desc = " Highlights" },
 			{ "<leader>dt", function() telescope("diagnostics") end, desc = " List Diagnostics" },
