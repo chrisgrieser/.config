@@ -228,7 +228,6 @@ local function telescopeConfig()
 				git_icons = { added = "A", changed = "M", copied = "C", deleted = "D", renamed = "R", unmerged = "U", untracked = "?" },
 				initial_mode = "normal",
 				show_untracked = true,
-				previewer = false,
 				layout_config = { horizontal = { height = 0.5, width = 0.6 } },
 				mappings = {
 					n = {
@@ -384,22 +383,13 @@ return {
 			{ "gs", function() telescope("treesitter") end, desc = " Symbols" },
 			{ "gd", function() telescope("lsp_definitions") end, desc = "󰒕 Definitions" },
 			{ "gf", function() telescope("lsp_references") end, desc = "󰒕 References" },
-			-- stylua: ignore
-			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
 
-			-- info consider a call-tree plugin:
-			-- * https://github.com/ldelossa/litee-calltree.nvim
-			-- * https://github.com/crusj/hierarchy-tree-go.nvim
-			{
-				"<leader>ci",
-				function() telescope("lsp_incoming_calls") end,
-				desc = " Incoming Calls",
-			},
-			{
-				"<leader>co",
-				function() telescope("lsp_outgoing_calls") end,
-				desc = " Outgoing Calls",
-			},
+			-- info consider a call-tree plugin: https://github.com/ldelossa/litee-calltree.nvim
+			-- stylua: ignore start
+			{ "<leader>ci", function() telescope("lsp_incoming_calls") end, desc = " Incoming Calls" },
+			{ "<leader>co", function() telescope("lsp_outgoing_calls") end, desc = " Outgoing Calls" },
+			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
+			-- stylua: ignore end
 
 			{ "<leader>ph", function() telescope("highlights") end, desc = " Highlights" },
 			{ "<leader>dt", function() telescope("diagnostics") end, desc = " List Diagnostics" },
