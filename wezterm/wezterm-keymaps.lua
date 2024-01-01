@@ -106,7 +106,7 @@ return {
 	-- Quick Select (= Hint Mode) -- https://wezfurlong.org/wezterm/quickselect.html
 	{ key = "u", mods = "CMD", action = act.QuickSelect },
 
-	{ -- cmd+s -> copy [o]ption (e.g. from a man page)
+	{ -- cmd+o -> copy [o]ption (e.g. from a man page)
 		key = "o",
 		mods = "CMD",
 		action = act.QuickSelectArgs {
