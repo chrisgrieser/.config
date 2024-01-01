@@ -59,6 +59,9 @@ return {
 	-- Grappling-hook
 	{ key = "Enter", mods = "CMD", action = act.SendKey { key = "o", mods = "CTRL" } },
 
+	-- Multi-select in fzf
+	{ key = "Enter", mods = "SHIFT", action = act.SendKey { key = "s", mods = "CTRL" } },
+
 	{ -- enter line-break https://unix.stackexchange.com/a/80820
 		key = "Enter",
 		mods = "SHIFT",
