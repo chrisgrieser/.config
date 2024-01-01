@@ -41,11 +41,11 @@ return {
 					},
 				},
 				blameStatusLine = {
-					-- ignoreAuthors = { "🤖 automated" },
-					maxMsgLen = 30,
+					ignoreAuthors = { "🤖 automated" },
+					maxMsgLen = 50,
 				},
 			}
-			u.addToLuaLine("winline", "lualine_y", require("tinygit.gitblame").statusLine)
+			u.addToLuaLine("winbar", "lualine_x", { require("tinygit.gitblame").statusLine })
 		end,
 	},
 	{ -- git sign gutter & hunk actions
