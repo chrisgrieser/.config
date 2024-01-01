@@ -195,4 +195,6 @@ defaults write com.apple.appstore InAppReviewEnabled -bool false
 
 #───────────────────────────────────────────────────────────────────────────────
 # Trash Archived Files
-defaults write com.apple.appstore InAppReviewEnabled -string '~/.Trash'
+# shellcheck disable=2088
+defaults write com.apple.archiveutility dearchive-move-after -string '~/.Trash'
+defaults write com.apple.archiveutility archive-reveal-after -int 1

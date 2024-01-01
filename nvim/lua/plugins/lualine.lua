@@ -39,6 +39,31 @@ end
 
 --------------------------------------------------------------------------------
 
+vim.api.nvim_create_autocmd("BufEnter", {
+	callback = function()
+		if bo.buftype ~= "" then
+			vim.b["tinygit_blame"] = ""
+			return
+		end
+		-- local ignoreAuthors = { "chrisgrieser", "Chris Grieser", "🤖 automated" }
+		local ignoreAuthors = {}
+		local bufPath = vim.api.nvim_buf_get_name(0)
+		local blame = vim.fn.system { "git", "log", "--format=%an;;%cr;;%s", "--max-count=1", "--", bufPath }
+		local author, date, message = vim.split(blame, "\t")
+
+		if vim.tbl_contains(ignoreAuthors, author) then
+			vim.b["tinygit_blame"] = ""
+			return
+		end
+		vim.b["tinygit_blame"] = (" %s (%s)"):format(message, date)
+		-- vim.b["tinygit_blame"] = blame
+	end,
+})
+
+local function gitBlameWholeFile() return vim.b["tinygit_blame"] end
+
+--------------------------------------------------------------------------------
+
 local lualineConfig = {
 	sections = {
 		lualine_a = {
@@ -83,6 +108,7 @@ local lualineConfig = {
 		},
 		lualine_y = {
 			{ "diff" },
+			{ gitBlameWholeFile },
 		},
 		lualine_z = {
 			{ "selectioncount", fmt = function(str) return str ~= "" and "礪" .. str or "" end },
