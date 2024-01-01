@@ -190,10 +190,11 @@ local function telescopeConfig()
 				vertical = {
 					prompt_position = "top",
 					mirror = true,
-					height = 0.8,
-					width = 0.8,
-					preview_cutoff = 10,
-					preview_height = 0.5,
+					height = 0.9,
+					width = 0.7,
+					preview_cutoff = 12,
+					preview_height = { 0.4, min = 10 },
+					anchor = "S",
 				},
 			},
 			-- stylua: ignore
@@ -243,7 +244,7 @@ local function telescopeConfig()
 						["<S-Tab>"] = "move_selection_better",
 						["<M-CR>"] = "git_staging_toggle",
 					},
-					},
+				},
 				layout_strategy = "vertical",
 				previewer = require("telescope.previewers").new_termopen_previewer {
 					get_command = function(_, status)

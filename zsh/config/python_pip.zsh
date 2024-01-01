@@ -1,3 +1,4 @@
+alias pip="python3 -m pip"
 alias pu="python3 -m pip uninstall"
 alias pl="python3 -m pip list --not-required"
 alias py="python3"
