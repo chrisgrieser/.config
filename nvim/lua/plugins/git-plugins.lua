@@ -45,7 +45,7 @@ return {
 					maxMsgLen = 30,
 				},
 			}
-			u.addToLuaLine("sections", "lualine_y", require("tinygit.gitblame").statusLine)
+			u.addToLuaLine("winline", "lualine_y", require("tinygit.gitblame").statusLine)
 		end,
 	},
 	{ -- git sign gutter & hunk actions

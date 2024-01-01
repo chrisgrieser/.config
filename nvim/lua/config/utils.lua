@@ -59,16 +59,20 @@ end
 
 ---Adds a component to the lualine after lualine was already set up. Useful for
 ---lazyloading.
----@param bar "tabline"|"sections" tabline = top, sections = bottom
+---@param bar "tabline"|"winbar"|"sections"
 ---@param section "lualine_a"|"lualine_b"|"lualine_c"|"lualine_x"|"lualine_y"|"lualine_z"
 ---@param component function|table the component forming the lualine
-function M.addToLuaLine(bar, section, component)
+---@param whereInComponent "before"|"after"
+function M.addToLuaLine(bar, section, component, whereInComponent)
 	local ok, lualine = pcall(require, "lualine")
 	if not ok then return end
 	local sectionConfig = lualine.get_config()[bar][section] or {}
 
 	local componentObj = type(component) == "table" and component or { component }
-	table.insert(sectionConfig, componentObj)
+	if whereInComponent == "before" then
+	else
+		table.insert(sectionConfig, componentObj)
+	end
 	lualine.setup { [bar] = { [section] = sectionConfig } }
 
 	-- Theming needs to be re-applied, since the lualine-styling can change
