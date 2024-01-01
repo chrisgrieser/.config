@@ -4,7 +4,7 @@ local u = require("config.utils")
 return {
 	{ -- lightweight git client
 		"chrisgrieser/nvim-tinygit",
-		dependencies = "stevearc/dressing.nvim",
+		event = "VeryLazy", -- for status line component
 		ft = "gitrebase", -- so ftplugin is loaded
 		keys = {
 			-- stylua: ignore start
@@ -24,22 +24,30 @@ return {
 			{ "<leader>g#", function() require("tinygit").openIssueUnderCursor() end, desc = " Open Issue under Cursor" },
 			-- stylua: ignore end
 		},
-		opts = {
-			commitMsg = {
-				conventionalCommits = { enforce = true },
-				emptyFillIn = false,
-				spellcheck = true,
-				openReferencedIssue = true,
-			},
-			historySearch = {
-				autoUnshallowIfNeeded = true,
-				diffPopup = {
-					width = 0.9,
-					height = 0.9,
-					border = u.borderStyle,
+		config = function()
+			u.addToLuaLine("sections", "lualine_y", require("tinygit.gitblame").statusLine)
+
+			require("tinygit").setup {
+				commitMsg = {
+					conventionalCommits = { enforce = true },
+					emptyFillIn = false,
+					spellcheck = true,
+					openReferencedIssue = true,
 				},
-			},
-		},
+				historySearch = {
+					autoUnshallowIfNeeded = true,
+					diffPopup = {
+						width = 0.9,
+						height = 0.9,
+						border = u.borderStyle,
+					},
+				},
+				blameStatusLine = {
+					ignoreAuthors = { "🤖 automated" },
+					maxMsgLen = 25,
+				},
+			}
+		end,
 	},
 	{ -- git sign gutter & hunk actions
 		"lewis6991/gitsigns.nvim",
