@@ -204,7 +204,7 @@ return {
 					local indentationFound = vim.fn.mode():find("V")
 					if not indentationFound then return end
 					u.normal("V") -- leave visual mode so <> marks are set
-					vim.api.nvim_win_set_cursor(0, startPos) -- restore cursor position
+					vim.api.nvim_win_set_cursor(0, startPos) -- restore (= sticky)
 
 					-- copy them into the + register
 					local startLn = vim.api.nvim_buf_get_mark(0, "<")[1] - 1
@@ -225,12 +225,25 @@ return {
 				"gx",
 				function()
 					require("various-textobjs").url()
-					local foundURL = vim.fn.mode():find("v") -- when textobj found, switches to visual mode
-					if not foundURL then return end
+					local foundURL = vim.fn.mode():find("v") 
+					if foundURL then
+						u.normal('"zy')
+						local url = vim.fn.getreg("z")
+						vim.fn.system { "open", url }
+					else
+						-- select from all URLs in buffer. Simplified version of urlview.nvim
+						local urlPattern = require("various-textobjs.charwise-textobjs").urlPattern
+						local bufText = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n")
+						local urls = {}
+						for url in bufText:gmatch(urlPattern) do
+							table.insert(urls, url)
+						end
+						if #urls == 0 then return end
 
-					u.normal('"zy')
-					local url = vim.fn.getreg("z")
-					vim.fn.system { "open", url }
+						vim.ui.select(urls, { prompt = "Select URL:" }, function(choice)
+							if choice then vim.fn.system { "open", choice } end
+						end)
+					end
 				end,
 				desc = "󰌹 Smart URL Opener",
 			},

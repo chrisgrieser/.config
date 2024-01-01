@@ -182,7 +182,7 @@ return {
 		},
 		opts = {
 			render = "wrapped-compact", -- best for shorter max_width
-			max_width = 45,
+			max_width = 50,
 			minimum_width = 15,
 			top_down = false,
 			level = trace, -- minimum severity

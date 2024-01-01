@@ -131,22 +131,15 @@ M.wf_appsOnMouseScreen = wf.new({
 	"BetterTouchTool",
 	"Obsidian",
 	"Finder",
-	"ReadKit",
-	"Slack",
-	"IINA",
 	"WezTerm",
 	"Hammerspoon",
 	"System Settings",
 	"Discord",
-	"Neovide",
 	"neovide",
-	"Espanso",
 	"espanso",
 	"BusyCal",
 	"Alfred Preferences",
-	"YouTube",
-	"Netflix",
-	"CrunchyRoll",
+	table.unpack(env.videoAndAudioApps), -- must be last for all items to be unpacked
 }):subscribe(wf.windowCreated, function(newWin)
 	local mouseScreen = hs.mouse.getCurrentScreen()
 	local app = newWin:application()
