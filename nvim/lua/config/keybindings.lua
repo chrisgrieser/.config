@@ -264,6 +264,8 @@ keymap("n", "dd", function()
 	return "dd"
 end, { expr = true })
 
+keymap("n", "<D-p>", '"0p', { desc = " Paste Last Yank" })
+
 -- paste without switching with register
 keymap("x", "p", "P")
 

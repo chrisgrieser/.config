@@ -105,7 +105,7 @@ local normalModeOnly = {
 local keymappings_N = vim.tbl_extend("force", keymappings_I, normalModeOnly)
 
 --------------------------------------------------------------------------------
--- HACK Better listing of files https://github.com/nvim-telescope/telescope.nvim/issues/2014
+-- Better listing of files https://github.com/nvim-telescope/telescope.nvim/issues/2014
 
 -- color parent as comment
 vim.api.nvim_create_autocmd("FileType", {
@@ -161,6 +161,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
+-- git previewer with diffstats
 
 local function telescopeConfig()
 	-- color the `M` in `:Telescope git_status`
@@ -185,6 +186,14 @@ local function telescopeConfig()
 					width = 0.99,
 					preview_cutoff = 70,
 					preview_width = { 0.55, min = 30 },
+				},
+				vertical = {
+					prompt_position = "top",
+					mirror = true,
+					height = 0.8,
+					width = 0.8,
+					preview_cutoff = 10,
+					preview_height = 0.5,
 				},
 			},
 			-- stylua: ignore
@@ -228,13 +237,27 @@ local function telescopeConfig()
 				git_icons = { added = "A", changed = "M", copied = "C", deleted = "D", renamed = "R", unmerged = "U", untracked = "?" },
 				initial_mode = "normal",
 				show_untracked = true,
-				layout_config = { horizontal = { height = 0.5, width = 0.6 } },
 				mappings = {
 					n = {
 						["<Tab>"] = "move_selection_worse",
 						["<S-Tab>"] = "move_selection_better",
-						["<D-CR>"] = "git_staging_toggle",
+						["<M-CR>"] = "git_staging_toggle",
 					},
+					},
+				layout_strategy = "vertical",
+				previewer = require("telescope.previewers").new_termopen_previewer {
+					get_command = function(_, status)
+						local width = vim.api.nvim_win_get_width(status.preview_win)
+						local statArgs = ("%s,%s,25"):format(width, math.floor(width / 2))
+						local cmd = {
+							"git diff ",
+							"--color=always",
+							"--compact-summary",
+							"--stat=" .. statArgs,
+							"| sed -e 's/^ //' -e '$d' ;", -- remove clutter
+						}
+						return table.concat(cmd, " ")
+					end,
 				},
 			},
 			git_commits = {
@@ -354,7 +377,6 @@ local function telescopeConfig()
 			colorscheme = {
 				enable_preview = true,
 				prompt_prefix = " ",
-				layout_strategy = "horizontal",
 				layout_config = {
 					horizontal = {
 						height = 0.4,
