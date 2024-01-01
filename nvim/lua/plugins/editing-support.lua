@@ -161,10 +161,10 @@ return {
 			interline_swaps_without_separator = false,
 		},
 		keys = {
-			-- stylua: ignore
-			{ "ü", function() require("sibling-swap").swap_with_right() end, desc = "󰔰 Move Node Right" },
-			-- stylua: ignore
-			{ "Ü", function() require("sibling-swap").swap_with_left() end, desc = "󰶢 Move Node Left" },
+			-- stylua: ignore start
+			{ "ä", function() require("sibling-swap").swap_with_right() end, desc = "󰔰 Move Node Right" },
+			{ "Ä", function() require("sibling-swap").swap_with_left() end, desc = "󰶢 Move Node Left" },
+			-- stylua: ignore end
 		},
 	},
 	{ -- split-join lines

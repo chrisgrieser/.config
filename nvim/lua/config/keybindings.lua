@@ -26,7 +26,7 @@ keymap({ "n", "x" }, "J", "6gj")
 keymap({ "n", "x" }, "K", "6gk")
 
 -- repeat f/t without shift
-keymap({ "n", "x" }, "ä", ";")
+keymap({ "n", "x" }, "ö", ";")
 
 -- Jump history
 keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
@@ -63,7 +63,7 @@ keymap("n", "gP", "gf", { desc = " Goto Path under cursor" })
 -- quickfix
 keymap("n", "gq", "<cmd>cnext<CR>zv", { desc = " Next Quickfix" })
 keymap("n", "gQ", "<cmd>cprevious<CR>zv", { desc = " Prev Quickfix" })
-keymap("n", "dQ", function() vim.fn.setqflist({}, "r") end, { desc = " Clear Qf List" })
+keymap("n", "dQ", function() vim.fn.setqflist({}, "r") end, { desc = " Clear QuickFix List" })
 
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS
@@ -143,7 +143,7 @@ keymap(
 	function() return require("funcs.nano-plugins").toggleOrIncrement() end,
 	{ desc = " Increment/Toggle", expr = true }
 )
-keymap({ "n", "x" }, "ö", "<C-x>", { desc = " Decrement" })
+keymap({ "n", "x" }, "ü", "<C-x>", { desc = " Decrement" })
 
 -- Undo
 keymap("n", "U", "<cmd>silent redo<CR>")
