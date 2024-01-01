@@ -345,6 +345,15 @@ local function telescopeConfig()
 					horizontal = { preview_width = { 0.7, min = 30 } },
 				},
 			},
+			lsp_type_definitions = {
+				prompt_prefix = "󰈿 ",
+				trim_text = true,
+				show_line = false,
+				initial_mode = "normal",
+				layout_config = {
+					horizontal = { preview_width = { 0.7, min = 30 } },
+				},
+			},
 			-- using treesitter-symbol search over LSP symbol search, as treesitter
 			-- symbol search leaves out anonymous functions
 			treesitter = {
@@ -406,6 +415,7 @@ return {
 			{ "gs", function() telescope("treesitter") end, desc = " Symbols" },
 			{ "gd", function() telescope("lsp_definitions") end, desc = "󰒕 Definitions" },
 			{ "gf", function() telescope("lsp_references") end, desc = "󰒕 References" },
+			{ "gy", function() telescope("lsp_type_definitions") end, desc = "󰒕 Type Definitions" },
 
 			-- info consider a call-tree plugin: https://github.com/ldelossa/litee-calltree.nvim
 			-- stylua: ignore start
@@ -457,6 +467,7 @@ return {
 	},
 	{ -- Icon Picker
 		"nvim-telescope/telescope-symbols.nvim",
+		dependencies = "nvim-telescope/telescope.nvim",
 		keys = {
 			{
 				"<D-ö>",

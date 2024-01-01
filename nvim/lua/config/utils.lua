@@ -62,7 +62,7 @@ end
 ---@param bar "tabline"|"winbar"|"sections"
 ---@param section "lualine_a"|"lualine_b"|"lualine_c"|"lualine_x"|"lualine_y"|"lualine_z"
 ---@param component function|table the component forming the lualine
----@param whereInComponent "before"|"after"
+---@param whereInComponent? "before"|"after"
 function M.addToLuaLine(bar, section, component, whereInComponent)
 	local ok, lualine = pcall(require, "lualine")
 	if not ok then return end
@@ -70,6 +70,7 @@ function M.addToLuaLine(bar, section, component, whereInComponent)
 
 	local componentObj = type(component) == "table" and component or { component }
 	if whereInComponent == "before" then
+		table.insert(sectionConfig, 1, componentObj)
 	else
 		table.insert(sectionConfig, componentObj)
 	end
