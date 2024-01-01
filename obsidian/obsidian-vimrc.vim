@@ -190,7 +190,7 @@ nnoremap ,s gqq
 exmap caseSwitch obcommand obsidian-editor-shortcuts:toggleCase
 nnoremap crt :caseSwitch
 nnoremap cru mzgUiw`z
-nnoremap crl mzgUiw`z
+nnoremap crl mzguiw`z
 
 " do not move to the right on toggling case
 nnoremap ~ ~h
