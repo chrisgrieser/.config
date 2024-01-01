@@ -95,14 +95,18 @@ local function themeModifications()
 		updateHl("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
 		overwriteHl("TSParameter", { fg = "#6f92b3" })
 	elseif theme == "everforest"  then
-		vim.g.everforest_background = "hard"
 		overwriteHl("Red", { fg = "#ce7d7c" })
 		overwriteHl("IblIndent", { fg = "#d2cdad" })
 		overwriteHl("NonText", { fg = "#c7c199" })
-
 		local commentColor = u.getHighlightValue("Comment", "fg")
 		updateHl("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
 		overwriteHl("TSParameter", { fg = "#6f92b3" })
+	elseif theme == "hybrid" then
+		vim.defer_fn(function()
+			for _, v in pairs(vimModes) do
+				updateHl("lualine_a_" .. v, "gui=bold")
+			end
+		end, 100)
 	elseif theme == "bamboo" and mode == "light" then
 		overwriteHl("@comment", { fg = "#777f76" })
 		updateHl("Todo", "guifg=#ffffff")

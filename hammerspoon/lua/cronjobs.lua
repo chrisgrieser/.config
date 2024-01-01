@@ -108,7 +108,7 @@ M.timer_sleepAutoVideoOff = hs.timer
 			if userDidSth then return end
 
 			u.notify("💤 SleepTimer triggered")
-			u.closeTabsContaining("youtu")
+			u.closeTabsContaining(".") -- closes all tabs
 			u.quitApps(env.videoAndAudioApps)
 			for _, win in pairs(hs.window.allWindows()) do
 				if win:isFullScreen() then win:setFullScreen(false) end

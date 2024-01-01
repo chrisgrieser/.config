@@ -1,12 +1,16 @@
 {
-  "class (LuaDoc)": {
+  "@class (LuaDoc)": {
     "body": [
       "---@class (exact) ${1:class_name}",
       "---@field ${2:field_name} string",
       "---@field ${3:field_name} string"
     ],
     "description": "https://github.com/LuaLS/lua-language-server/wiki/Annotations#class",
-    "prefix": "class (LuaDoc)"
+    "prefix": "@class (LuaDoc)"
+  },
+  "@type (LuaDoc)": {
+    "body": "---@type ${1:string}",
+    "prefix": "@type (LuaDoc)"
   },
   "export module": {
     "body": [

@@ -1,4 +1,18 @@
 {
+  "@class (JSDoc)": {
+    "body": [
+      "/** @typedef {Object} ${1:name}",
+      "* @property {${2|string,number,boolean,() => void|}} ${3:prop1}",
+      "* @property {${4|string,number,boolean|}} ${5:prop2}",
+      "*/"
+    ],
+    "description": "https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#typedef-callback-and-param",
+    "prefix": "@class (JSDoc)"
+  },
+  "@type (JSDoc)": {
+    "body": "/** @type {${1:string}} */",
+    "prefix": "@type (JSDoc)"
+  },
   "Set Timeout Function": {
     "body": [
       "setTimeout(() => {",
@@ -23,16 +37,6 @@
     "body": "const argv = process.argv.slice(2);",
     "description": "Arguments from the command line. [0] is the node executable path, [1] the path of the file being executed, making [2] the first positional argument.",
     "prefix": "argv (node)"
-  },
-  "class (JSDoc)": {
-    "body": [
-      "/** @typedef {Object} ${1:name}",
-      "* @property {${2|string,number,boolean,() => void|}} ${3:prop1}",
-      "* @property {${4|string,number,boolean|}} ${5:prop2}",
-      "*/"
-    ],
-    "description": "https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#typedef-callback-and-param",
-    "prefix": "class (JSDoc)"
   },
   "do .. while ..": {
     "body": [
@@ -273,10 +277,6 @@
     ],
     "description": "leading underscore so the variable is ignored by biome when not used.",
     "prefix": "try .. catch"
-  },
-  "type (JSDoc)": {
-    "body": "/** @type {${1:string}} */",
-    "prefix": "type (JSDoc)"
   },
   "unique items": {
     "body": "${1:arr} = [...new Set(${2:arr})];",

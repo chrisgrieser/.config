@@ -186,11 +186,9 @@ nnoremap ,ur 1000<C-r>
 vnoremap ,s gq
 nnoremap ,s gqq
 
-" emulate vim-abolish via Code Editor Shortcuts Plugin
+" case switch via Code Editor Shortcuts Plugin
 exmap caseSwitch obcommand obsidian-editor-shortcuts:toggleCase
-nnoremap crt :caseSwitch
-nnoremap cru mzgUiw`z
-nnoremap crl mzguiw`z
+nnoremap ; :caseSwitch
 
 " do not move to the right on toggling case
 nnoremap ~ ~h
