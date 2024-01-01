@@ -1,6 +1,6 @@
 -- A bunch of commands that are too small to be published as plugins, but too
 -- big to put in the main config, where they would crowd the actual
--- configuration. Every function is self-contained (except the two helper
+-- configuration. Every function is self-contained (except the helper
 -- functions here), and should be binded to a keymap.
 --------------------------------------------------------------------------------
 local M = {}
@@ -14,6 +14,11 @@ local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
 local function notify(title, msg, level)
 	if not level then level = "info" end
 	vim.notify(msg, vim.log.levels[level:upper()], { title = title })
+end
+
+local function leaveVisualMode()
+	local escKey = vim.api.nvim_replace_termcodes("<Esc>", false, true, true)
+	vim.api.nvim_feedkeys(escKey, "nx", false)
 end
 
 --------------------------------------------------------------------------------
@@ -233,13 +238,9 @@ function M.docstring()
 		vim.defer_fn(function()
 			require("cmp").complete()
 			require("cmp").confirm { select = true }
-			vim.defer_fn(vim.api.nvim_del_current_line, 50) -- remove `---comment`
-			local function leaveVisualMode()
-				local escKey = vim.api.nvim_replace_termcodes("<Esc>", false, true, true)
-				vim.api.nvim_feedkeys(escKey, "nx", false)
-			end
-			vim.defer_fn(leaveVisualMode, 100)
 		end, 200)
+		vim.defer_fn(vim.api.nvim_del_current_line, 300) -- remove `---comment`
+		vim.defer_fn(leaveVisualMode, 400)
 	elseif ft == "javascript" then
 		normal("t)") -- go to parameter, since cursor has to be on diagnostic for code action
 		vim.lsp.buf.code_action {

@@ -37,12 +37,12 @@ vim.keymap.set("n", "<leader>m", function()
 
 	-- reload nvim-file
 	local filepath = vim.api.nvim_buf_get_name(0)
-	if filepath:find("nvim/after/ftplugin/") then
+	if vim.fs.basename(filepath) == "test.lua" then
+		vim.cmd.source()
+	elseif filepath:find("nvim/after/ftplugin/") then
 		u.notify("", "ftplugins cannot be reloaded. Just `:edit` buffer again.", "warn")
-		return
 	elseif filepath:find("nvim/lua/.*keymap") or filepath:find("nvim/lua/.*keybinding") then
 		u.notify("", "keymaps cannot be reloaded due to `map-unique`", "warn")
-		return
 	elseif isNvimConfig then
 		-- unload from lua cache (assuming that the pwd is ~/.config/nvim)
 		local packageName = vim.fn.expand("%:r"):gsub("lua/", ""):gsub("/", ".")
