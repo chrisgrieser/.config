@@ -91,6 +91,10 @@ nnoremap gf :gotoFootnote
 " go to last change (HACK, only works to jump to the last location)
 nnoremap g, u<C-r>
 
+" repeat f/t
+nnoremap ö ;
+nnoremap Ö ,
+
 "───────────────────────────────────────────────────────────────────────────────
 " FILE-, TAB- AND WINDOW-NAVIGATION
 
@@ -182,10 +186,11 @@ nnoremap ,ur 1000<C-r>
 vnoremap ,s gq
 nnoremap ,s gqq
 
-" Case Switch via Code Editor Shortcuts Plugin
+" emulate vim-abolish via Code Editor Shortcuts Plugin
 exmap caseSwitch obcommand obsidian-editor-shortcuts:toggleCase
-nnoremap ; :caseSwitch
-vnoremap ; :caseSwitch
+nnoremap crt :caseSwitch
+nnoremap cru mzgUiw`z
+nnoremap crl guiw
 
 " do not move to the right on toggling case
 nnoremap ~ ~h

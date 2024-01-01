@@ -90,11 +90,19 @@ local function themeModifications()
 		linkHl("@type.builtin.python", "Typedef")
 		linkHl("@string.documentation.python", "Typedef")
 		linkHl("@keyword.operator.python", "Operator")
-	elseif theme == "gruvbox-material" or theme == "sonokai" or theme == "everforest" then
+	elseif theme == "gruvbox-material" or theme == "sonokai"then
 		local commentColor = u.getHighlightValue("Comment", "fg")
 		updateHl("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
 		overwriteHl("TSParameter", { fg = "#6f92b3" })
-		if theme == "everforest" then overwriteHl("Red", { fg = "#ce7d7c" }) end
+	elseif theme == "everforest"  then
+		vim.g.everforest_background = "hard"
+		overwriteHl("Red", { fg = "#ce7d7c" })
+		overwriteHl("IblIndent", { fg = "#d2cdad" })
+		overwriteHl("NonText", { fg = "#c7c199" })
+
+		local commentColor = u.getHighlightValue("Comment", "fg")
+		updateHl("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
+		overwriteHl("TSParameter", { fg = "#6f92b3" })
 	elseif theme == "bamboo" and mode == "light" then
 		overwriteHl("@comment", { fg = "#777f76" })
 		updateHl("Todo", "guifg=#ffffff")

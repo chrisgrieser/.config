@@ -38,7 +38,7 @@
     "prefix": "dedent"
   },
   "keymap": {
-    "body": "vim.keymap.set(\"n\", \"${1:lhs}\", \"${2:rhs}\", { desc = \"placeholder\"})",
+    "body": "keymap(\"n\", \"${1:lhs}\", \"${2:rhs}\", { desc = \"${4:desc}\"})",
     "prefix": "keymap"
   },
   "keymap (multi-mode)": {
