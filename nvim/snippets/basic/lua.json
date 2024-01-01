@@ -22,6 +22,15 @@
     ],
     "prefix": "export module"
   },
+  "find all in string": {
+    "body": [
+      "local ${1:matches} = {}",
+      "for match in ${2:str}:gmatch(${3:pattern}) do",
+      "\ttable.insert(${1:matches}, match)",
+      "end"
+    ],
+    "prefix": "find all in string"
+  },
   "for each (list)": {
     "body": [
       "for _, ${1:v} in pairs(${2:table}) do",

@@ -274,8 +274,6 @@ keymap("i", "<D-v>", function()
 	return "<C-g>u<C-r><C-o>+" -- "<C-g>u" adds undopoint before the paste
 end, { desc = " Paste charwise", expr = true })
 
-keymap("n", "P", '"0p', { desc = " Paste last yank" })
-
 --------------------------------------------------------------------------------
 
 -- Open regex in regex101
