@@ -47,6 +47,10 @@
     "body": "PERF",
     "prefix": "PERF"
   },
+  "SOURCE": {
+    "body": "SOURCE",
+    "prefix": "SOURCE"
+  },
   "backspace": {
     "body": "⌫",
     "prefix": "backspace"
