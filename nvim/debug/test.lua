@@ -1,30 +1,17 @@
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- https://github.com/chrisgrieser/gitfred
+-- https://github.com/chrisgrieser/gitfred
+-- https://github.com/chrisgrieser/gitfred
 
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
+local urlPattern = require("various-textobjs.charwise-textobjs").urlPattern
 
--- vim.api.nvim_create_autocmd("FileType", {
--- 	pattern = "noice",
--- 	callback = function(ctx)
--- 		local bufnr = ctx.buf
---
--- 		-- highlight name + line number
--- 		vim.api.nvim_buf_call(bufnr, function()
--- 			vim.fn.matchadd("WarningMsg", [[\w\+\.lua:\d\+\ze:]]) -- \ze: lookahead
--- 		end)
---
--- 		-- copy line number
--- 		vim.defer_fn(function()
--- 			if not vim.api.nvim_buf_is_valid(bufnr) then return end
--- 			local bufText = table.concat(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false), "\n")
--- 			local lineNum = bufText:match("%w+%.lua:(%d+):")
--- 			if lineNum then vim.fn.setreg("+", lineNum) end
--- 		end, 1)
--- 	end,
--- })
+local bufText = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n")
+local urls = {}
+for url in bufText:gmatch(urlPattern) do
+	table.insert(urls, url)
+end
 
-local msg =
-	".../nvim-chainsaw/lua/chainsaw/init.lua:99: attempt to call field 'normal' (a nil value)\n"
-local lineNum = msg:match("[^/]+%.lua:(%d+):") -- assumes lua file
-vim.notify(lineNum)
+vim.ui.select(urls, { prompt = "Select URL:" }, function (choice)
+	if choice then vim.fn.system { "open", choice } end
+end)

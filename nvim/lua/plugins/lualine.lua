@@ -24,14 +24,16 @@ local function quickfixCounter()
 	local qf = vim.fn.getqflist { idx = 0, title = true, items = true }
 	if #qf.items == 0 then return "" end
 
-	local qfBuffers = vim.tbl_map(function (item) return item.bufnr end, qf.items)
+	local qfBuffers = vim.tbl_map(function(item) return item.bufnr end, qf.items)
 	local fileCount = #vim.fn.uniq(qfBuffers) -- qfBuffers already sorted
 	local fileStr = fileCount > 1 and (" 「%s  」"):format(fileCount) or ""
 
-	qf.title = qf.title -- prettify telescope's title output
+	qf.title = qf
+		.title -- prettify telescope's title output
 		:gsub("^Live Grep: .-%((.+)%)", 'rg: "%1"')
 		:gsub("^Find Files: .-%((.+)%)", 'fd: "%1"')
 		:gsub("^Find Word %((.-)%) %(.-%)", 'rg: "%1"')
+		:gsub(" %(%)", "")
 	return (" %s/%s %s"):format(qf.idx, #qf.items, qf.title) .. fileStr
 end
 
