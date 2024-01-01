@@ -19,7 +19,7 @@ local keymappings_I = {
 		require("telescope.actions").smart_send_to_qflist(prompt_bufnr) -- sends selected, or if none selected, sends all
 		vim.cmd.cfirst()
 	end,
-	["<M-CR>"] = function(prompt_bufnr) -- consistent with w
+	["<M-CR>"] = function(prompt_bufnr) -- consistent with wezterm-fzf-multiselect
 		require("telescope.actions").toggle_selection(prompt_bufnr)
 		require("telescope.actions").move_selection_worse(prompt_bufnr)
 	end,
