@@ -134,7 +134,7 @@
 			<key>text</key>
 			<string>NPM Packages: '{query}'</string>
 			<key>url</key>
-			<string>https://pypi.org/search/?q={query}</string>
+			<string>https://www.npmjs.com/search?q={query}</string>
 		</dict>
 	</dict>
 </dict>
