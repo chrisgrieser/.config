@@ -192,3 +192,7 @@ defaults write com.apple.Safari DownloadsPath -string "$WD"              # Downl
 #───────────────────────────────────────────────────────────────────────────────
 # APP STORE
 defaults write com.apple.appstore InAppReviewEnabled -bool false
+
+#───────────────────────────────────────────────────────────────────────────────
+# Trash Archived Files
+defaults write com.apple.appstore InAppReviewEnabled -string '~/.Trash'

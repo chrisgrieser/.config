@@ -39,3 +39,36 @@ function ..d() {
 	trash "$PWD" || return 1
 	cd "$(dirname "$PWD")" || return 1
 }
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# app-id of macOS apps
+function appid() {
+	local id
+	id=$(osascript -e "id of app \"$1\"")
+	print "\e[1;32mCopied appid:\e[0m $id"
+	echo -n "$id" | pbcopy
+}
+
+# read app and macOS system setting changes https://news.ycombinator.com/item?id=36982463
+function prefs() {
+	if [[ "$PREF_BEFORE" -eq 0 ]]; then
+		defaults read >/tmp/before
+		PREF_BEFORE=1
+
+		echo "Saved current \`defaults\` state. "
+		echo "Make changes."
+		echo "Then run \`prefs\` again for a diff of the changes."
+	else
+		defaults read >/tmp/after
+		local changes
+		changes=$(command diff /tmp/before /tmp/after | grep -v "_DKThrottledActivityLast" | grep -E "^(<|>)")
+		PREF_BEFORE=0
+		echo "$changes"
+
+		# show context, so the domain can be identified
+		_separator
+		toGrep=$(echo "$changes" | tail -n1 | sed -e 's/^> *//')
+		grep -B20 "$toGrep" /tmp/after
+	fi
+}
