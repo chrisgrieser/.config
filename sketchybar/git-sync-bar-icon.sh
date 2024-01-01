@@ -29,12 +29,9 @@ git "$HOME/.config" fetch # required to check for commits behind
 git "$VAULT_PATH" fetch
 git "$PASSWORD_STORE_DIR" fetch
 
-dotBehind=$(git -C "$HOME/.config" -c "status.short=false" status --porcelain --branch | 
-	head -n1 | grep "behind" | grep -Eo "\d")
-vaultBehind=$(git -C "$VAULT_PATH" -c "status.short=false" status --porcelain --branch | 
-	head -n1 | grep "behind" | grep -Eo "\d")
-passBehind=$(git -C "$PASSWORD_STORE_DIR" -c "status.short=false" status --porcelain --branch | 
-	head -n1 | grep "behind" | grep -Eo "\d")
+dotBehind=$(git -C "$HOME/.config" branch -v | grep -o "behind \d\+" | cut -d" " -f2)
+vaultBehind=$(git -C "$VAULT_PATH" branch -v | grep -o "behind \d\+" | cut -d" " -f2)
+passBehind=$(git -C "$PASSWORD_STORE_DIR" branch -v | grep -o "behind \d\+" | cut -d" " -f2)
 
 [[ -n "$dotBehind" ]] && label="$label${dotBehind}!d "
 [[ -n "$vaultBehind" ]] && label="$label${vaultBehind}!v "
