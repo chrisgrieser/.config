@@ -1,14 +1,14 @@
-""""""""""""""""""""""
-" Leader
-""""""""""""""""""""""
-" let mapleader=,
+"───────────────────────────────────────────────────────────────────────────────
+" LEADER
+
+" equivalent to let mapleader=,
 " can't set leaders in Obsidian vim, so the key just has to be used consistently.
 " However, it needs to be unmapped, to not trigger default behavior: https://github.com/esm7/obsidian-vimrc-support#some-help-with-binding-space-chords-doom-and-spacemacs-fans
 unmap ,
 
-""""""""""""""""""""""
-" Clipboard
-""""""""""""""""""""""
+"───────────────────────────────────────────────────────────────────────────────
+" CLIPBOARD
+
 " yank to system clipboard
 set clipboard=unnamed
 
@@ -23,9 +23,8 @@ nnoremap x "_dl
 " don't override register
 vnoremap p P
 
-""""""""""""""""""""""
-" Navigation
-""""""""""""""""""""""
+"───────────────────────────────────────────────────────────────────────────────
+" NAVIGATION
 
 " navigate visual lines rather than logical ones
 nnoremap j gj
@@ -34,6 +33,10 @@ vnoremap j gj
 vnoremap k gk
 nnoremap I g0i
 nnoremap A g$a
+
+" sentence navigation
+noremap [ (
+noremap ] )
 
 " HJKL behaves like hjkl, but bigger distance
 noremap H g0
@@ -50,37 +53,16 @@ onoremap J 2j
 nnoremap <C-h> <C-o>
 nnoremap <C-l> <C-i>
 
-" :bnext/bprev
-exmap goBack obcommand app:go-back
-exmap goForward obcommand app:go-forward
-nnoremap <BS> :goBack
-nnoremap <S-BS> :goForward
-
-" sentence navigation
-noremap [ (
-noremap ] )
-
-" spelling list (emulates `z=`)
-exmap contextMenu obcommand editor:context-menu
-nnoremap zl :contextMenu
-
 " next diagnostic
 exmap nextSuggestion obcommand obsidian-languagetool-plugin:ltjump-to-next-suggestion
 nnoremap ge :nextSuggestion
 vnoremap ge :nextSuggestion
 
+" next/prev heading
 exmap nextHeading obcommand obsidian-editor-shortcuts:goToNextHeading
 exmap prevHeading obcommand obsidian-editor-shortcuts:goToPrevHeading
 nnoremap <C-j> :nextHeading
 nnoremap <C-k> :prevHeading
-
-" INFO doesn't work in visual mode
-exmap lineUp obcommand editor:swap-line-up
-exmap lineDown obcommand editor:swap-line-down
-nnoremap <Up> :lineUp
-nnoremap <Down> :lineDown
-nnoremap <Right> dlp
-nnoremap <Left> dlhhp
 
 " [m]atch parenthesis
 nnoremap m %
@@ -101,21 +83,53 @@ nnoremap gX :followNextLinkInNewTab
 nnoremap gp :followNextLink
 nnoremap gd :followNextLink
 
+" [g]oto [f]ootnotes
+" requires Footnotes Shortcut Plugin
+exmap gotoFootnote obcommand obsidian-footnotes:insert-autonumbered-footnote
+nnoremap gf :gotoFootnote
+
+" go to last change (HACK, only works to jump to the last location)
+nnoremap g, u<C-r>
+
+"───────────────────────────────────────────────────────────────────────────────
+" FILE-, TAB- AND WINDOW-NAVIGATION
+
 " [g]oto [o]pen file (= Quick Switcher)
 exmap quickSwitcher obcommand obsidian-another-quick-switcher:search-command_recent-search
 nnoremap go :quickSwitcher
 nnoremap gr :quickSwitcher
 
-" go to last change (HACK, only works to jump to the last location)
-nnoremap g; u<C-r>
+" :bnext/bprev
+exmap goBack obcommand app:go-back
+exmap goForward obcommand app:go-forward
+nnoremap <BS> :goBack
+nnoremap <S-BS> :goForward
 
-" increment quicker
-nnoremap + <C-a>
-nnoremap ö <C-x>
+" Close
+exmap closeWindow obcommand workspace:close-window
+nnoremap ZZ :closeWindow
 
-""""""""""""""""""""""
-" Search
-""""""""""""""""""""""
+" Splits
+exmap splitVertical obcommand workspace:split-vertical
+nnoremap <C-w>v :splitVertical
+
+" Split Switching
+exmap nextSplit obcomamnd cycle-through-panes:cycle-through-panes
+nnoremap <C-CR> :nextSplit
+
+" Tabs
+exmap nextTab obcommand workspace:next-tab
+exmap prevTab obcommand workspace:previous-tab
+nnoremap gt :nextTab
+nnoremap gT :prevTab
+
+" Alt Buffer (emulates `:buffer #`)
+exmap altBuffer obcommand grappling-hook:alternate-note
+nnoremap <CR> :altBuffer
+
+"───────────────────────────────────────────────────────────────────────────────
+" SEARCH
+
 " Find Mode (by mirroring American keyboard layout on German keyboard layout)
 nnoremap - /
 
@@ -130,10 +144,33 @@ nnoremap gl :liveGrep
 " Obsidian builtin Search & replace
 exmap searchReplace obcommand editor:open-search-replace
 nnoremap ,ff :searchReplace
+nnoremap ,fs :searchReplace
 
-""""""""""""""""""""""
-" Editing
-""""""""""""""""""""""
+"───────────────────────────────────────────────────────────────────────────────
+" EDITING
+
+" Indentation
+" <Tab> as indentation is already implemented in Obsidian
+
+" Movement lines (doesn't work in visual mode)
+exmap lineUp obcommand editor:swap-line-up
+exmap lineDown obcommand editor:swap-line-down
+nnoremap <Up> :lineUp
+nnoremap <Down> :lineDown
+nnoremap <Right> dlp
+nnoremap <Left> dlhhp
+
+" Move words (equivalent to sibling-swap.nvim)
+nnoremap ä "zdawel"zph
+nnoremap Ä "zdawbh"zph
+
+" spelling list (emulates `z=`)
+exmap contextMenu obcommand editor:context-menu
+nnoremap zl :contextMenu
+
+" increment quicker
+nnoremap + <C-a>
+nnoremap ü <C-x>
 
 " undo/redo consistently on one key
 nnoremap U <C-r>
@@ -147,15 +184,11 @@ nnoremap ,s gqq
 
 " Case Switch via Code Editor Shortcuts Plugin
 exmap caseSwitch obcommand obsidian-editor-shortcuts:toggleCase
-nnoremap ä :caseSwitch
-vnoremap ä :caseSwitch
+nnoremap ; :caseSwitch
+vnoremap ; :caseSwitch
 
 " do not move to the right on toggling case
 nnoremap ~ ~h
-
-" Move words (equivalent to sibling-swap.nvim)
-nnoremap ü "zdawel"zph
-nnoremap Ü "zdawbh"zph
 
 " Change Word/Selection
 nnoremap <Space> "_ciw
@@ -184,16 +217,21 @@ nmap o &b&i
 nnoremap = mzO<Esc>`z
 nnoremap _ mzo<Esc>`z
 
-" Dial
+" Increment/Decrement
 nnoremap + <C-a>
-nnoremap ö <C-x>
+nnoremap ü <C-x>
 
-""""""""""""""""""""""""""""
-" Leader Mappings
-""""""""""""""""""""""""""""
+" basically ts-comment-string, i.e. using the appropriate comment syntax when in
+" a code block
+exmap contextualComment obcommand contextual-comments:advanced-comments
+nnoremap qq :contextualComment
+
+"───────────────────────────────────────────────────────────────────────────────
+" LEADER MAPPINGS
 
 exmap fileRecovery obcommand file-recovery:open
 nnoremap ,ut :fileRecovery
+nnoremap ,gd :fileRecovery
 
 exmap toggleDevtools obcommand obsidian-theme-design-utilities:toggle-devtools
 nnoremap ,b :toggleDevtools
@@ -201,56 +239,21 @@ vnoremap ,b :toggleDevtools
 
 " pseudo-code-action: enhance URL with title
 exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-title
-nnoremap ,c :enhanceUrlWithTitle
+nnoremap ,dd :enhanceUrlWithTitle
 
 exmap toggleAiCompletion obcommand obsidian-textgenerator-plugin:auto-suggest
 nnoremap ,g :toggleAiCompletion
 
-""""""""""""""""""""""""""""
-" Markdown/Obsidian specific
-""""""""""""""""""""""""""""
-
-" [l]og commands in console
-nnoremap ,l :obcommand
-
-" [g]oto [f]ootnotes
-" requires Footnotes Shortcut Plugin
-exmap gotoFootnote obcommand obsidian-footnotes:insert-autonumbered-footnote
-nnoremap gf :gotoFootnote
-
-" Blockquote
-exmap toggleBlockquote obcommand editor:toggle-blockquote
-nnoremap ,< :toggleBlockquote
-nnoremap ,> :toggleBlockquote
-
-" list
-exmap toggleList obcommand editor:toggle-bullet-list
-nnoremap ,- :toggleList
-
-" markdown tasks
-exmap checkList obcommand editor:toggle-checklist-status
-nnoremap ,x :checkList
-
-""""""""""""""""""""""
-" Critic Markup
-""""""""""""""""""""""
-" accept all
+" Critic Markup: accept all
 exmap acceptAll obcommand commentator:commentator-accept-all-suggestions
 nnoremap ,a :acceptAll
 
-" reject all
+" Critic Markup: reject all
 exmap rejectAll obcommand commentator:commentator-reject-all-suggestions
 nnoremap ,A :rejectAll
 
-
-""""""""""""""""""""""
-" Indentation
-""""""""""""""""""""""
-" <Tab> as indentation is already implemented in Obsidian
-
-""""""""""""""""""""""
-" Visual Mode
-""""""""""""""""""""""
+"───────────────────────────────────────────────────────────────────────────────
+" VISUAL MODE
 
 " so repeated "V" selects more lines
 vnoremap V gj
@@ -258,9 +261,8 @@ vnoremap V gj
 " so 2x v goes to visual block mode
 vnoremap v <C-v>
 
-""""""""""""""""""""""
-" Text Objects
-""""""""""""""""""""""
+"───────────────────────────────────────────────────────────────────────────────
+" TEXT OBJECTS
 
 " quicker access to [m]assive word, [q]uote, [z]ingle quote, inline cod[e],
 " [r]ectangular bracket, and [c]urly braces
@@ -306,9 +308,8 @@ vnoremap w t"
 onoremap k i"
 onoremap K a"
 
-""""""""""""""""""""""
-" Substitute
-""""""""""""""""""""""
+"───────────────────────────────────────────────────────────────────────────────
+" SUBSTITUTE
 
 " poor man's substitute.nvim and duplicate.nvim:
 " brut-forcing all possible text objects 💀
@@ -373,43 +374,9 @@ nnoremap wac ya}p
 nnoremap wrg yGp
 nnoremap wrp y}p
 
-""""""""""""""""""""""
-" Tabs, Splits & Alt-file
-""""""""""""""""""""""
+"───────────────────────────────────────────────────────────────────────────────
+" FOLDING
 
-" Close
-exmap closeWindow obcommand workspace:close-window
-nnoremap ZZ :closeWindow
-
-" Splits
-exmap splitVertical obcommand workspace:split-vertical
-nnoremap <C-w>v :splitVertical
-
-" Split Switching
-exmap nextSplit obcomamnd cycle-through-panes:cycle-through-panes
-nnoremap <C-CR> :nextSplit
-
-" Tabs
-exmap nextTab obcommand workspace:next-tab
-exmap prevTab obcommand workspace:previous-tab
-nnoremap gt :nextTab
-nnoremap gT :prevTab
-
-" Alt Buffer (emulates `:buffer #`)
-exmap altBuffer obcommand grappling-hook:alternate-note
-nnoremap <CR> :altBuffer
-
-""""""""""""""""""""""
-" Comments
-""""""""""""""""""""""
-" basically ts-comment-string, i.e. using the appropriate comment syntax when in
-" a code block
-exmap contextualComment obcommand contextual-comments:advanced-comments
-nnoremap qq :contextualComment
-
-""""""""""""""""""""""
-" Folding
-""""""""""""""""""""""
 " Emulate vim folding command
 exmap togglefold obcommand editor:toggle-fold
 nnoremap za :togglefold
@@ -422,9 +389,8 @@ exmap foldall obcommand editor:fold-all
 nnoremap zm :foldall
 nnoremap zr :unfoldall
 
-""""""""""""""""""""""
-" Option Toggling
-""""""""""""""""""""""
+"───────────────────────────────────────────────────────────────────────────────
+" OPTION TOGGLING
 
 " [O]ption: [s]pellcheck
 exmap spellcheck obcommand editor:toggle-spellcheck

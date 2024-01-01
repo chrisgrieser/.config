@@ -8,15 +8,6 @@
     "description": "https://github.com/LuaLS/lua-language-server/wiki/Annotations#class",
     "prefix": "class (LuaDoc)"
   },
-  "class (luadoc)": {
-    "body": [
-      "---@class (exact) ${1:class_name}",
-      "---@field ${2:field_name} string",
-      "---@field ${3:field_name} string"
-    ],
-    "description": "https://github.com/LuaLS/lua-language-server/wiki/Annotations#class",
-    "prefix": "class (luadoc)"
-  },
   "export module": {
     "body": [
       "local M = {}",

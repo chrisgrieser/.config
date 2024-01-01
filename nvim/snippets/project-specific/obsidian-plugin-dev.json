@@ -130,12 +130,11 @@
     "body": "await this.app.vault.read(${1:TFile});",
     "prefix": "read note content"
   },
-  "recent files": {
+  "recent files + last opened files": {
     "body": "const recentFiles = this.app.workspace.getLastOpenFiles();",
     "description": "Obsidian: Get the 10 most recent files, as an array of file-path strings. (The 10 most recent files are the ones visible in the Quick Switcher, when there no input yet.)",
     "prefix": [
       "recent files",
-      "Quick Switcher: recent files",
       "last opened files"
     ]
   },

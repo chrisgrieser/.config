@@ -1,5 +1,4 @@
 local u = require("config.utils")
-
 --------------------------------------------------------------------------------
 
 return {
@@ -103,8 +102,8 @@ return {
 	{ -- color previews & color picker
 		"uga-rosa/ccc.nvim",
 		keys = {
-			{ "<D-p>", vim.cmd.CccPick, desc = " Color Picker" },
-			-- INFO textobj is not forward-seeking
+			{ "g#", vim.cmd.CccPick, desc = " Color Picker" },
+			-- INFO this textobj is not forward-seeking
 			{ "#", "<Plug>(ccc-select-color)", mode = "o", desc = "󱡔 color textobj" },
 		},
 		ft = { "css", "scss", "sh", "lua" },
@@ -178,7 +177,7 @@ return {
 				border = u.borderStyle,
 				relative = "editor",
 				title_pos = "left",
-				min_width = { 0.4, 72 }, -- 72 = git commit msg length
+				min_width = { 0.4, 65 }, -- 72 = git commit msg length
 				mappings = { n = { ["q"] = "Close" } },
 			},
 			select = {
@@ -204,9 +203,7 @@ return {
 					if not kind then return end
 
 					-- code actions: show at cursor
-					if kind == "codeaction" or kind == "atCursor" then
-						return { builtin = { relative = "cursor" } }
-					end
+					if kind == "codeaction" then return { builtin = { relative = "cursor" } } end
 
 					-- complex selectors: use telescope
 					if
