@@ -180,9 +180,9 @@ function M.docstring()
 		vim.defer_fn(function()
 			require("cmp").complete()
 			require("cmp").confirm { select = true }
-		end, 200)
-		vim.defer_fn(vim.api.nvim_del_current_line, 300) -- remove `---comment`
-		vim.defer_fn(leaveVisualMode, 400)
+		end, 150)
+		vim.defer_fn(vim.api.nvim_del_current_line, 900) -- remove `---comment`
+		vim.defer_fn(leaveVisualMode, 950)
 	elseif ft == "javascript" then
 		normal("t)") -- go to parameter, since cursor has to be on diagnostic for code action
 		vim.lsp.buf.code_action {
