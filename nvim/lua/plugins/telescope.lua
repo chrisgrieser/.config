@@ -161,7 +161,6 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
--- git previewer with diffstats
 
 local function telescopeConfig()
 	-- color the `M` in `:Telescope git_status`
@@ -203,6 +202,14 @@ local function telescopeConfig()
 				"%.png$", "%.gif$", "%.jpe?g$", "%.icns$",
 				"%.pdf$", "%.zip$", "%.plist$",
 			},
+			vimgrep_arguments = {
+				"rg",
+				"--vimgrep",
+				"--smart-case",
+				"--trim",
+				-- inherit global ignore file from `fd`
+				("--ignore-file=" .. os.getenv("HOME") .. "/.config/fd/ignore"),
+			},
 		},
 		pickers = {
 			find_files = {
@@ -225,12 +232,12 @@ local function telescopeConfig()
 			live_grep = {
 				prompt_prefix = " ",
 				disable_coordinates = true,
-				additional_args = { "--trim", "--hidden", "--glob=!.git" },
+				layout_config = { horizontal = { preview_width = 0.7 } },
 			},
 			grep_string = {
 				prompt_prefix = " ",
 				disable_coordinates = true,
-				additional_args = { "--trim", "--hidden", "--glob=!.git" },
+				layout_config = { horizontal = { preview_width = 0.7 } },
 			},
 			git_status = {
 				prompt_prefix = "󰊢 ",
@@ -265,6 +272,9 @@ local function telescopeConfig()
 				prompt_prefix = "󰊢 ",
 				initial_mode = "normal",
 				prompt_title = "Git Log",
+				layout_config = { horizontal = { preview_width = 0.5 } },
+				-- add commit time (%cr) & `--all`, double `\t` for highlighting
+				git_command = { "git", "log", "--all", "--pretty=%h %s\t\t%cr", "--", "." },
 				previewer = require("telescope.previewers").new_termopen_previewer {
 					dyn_title = function(_, entry) return entry.value end, -- use hash as title
 					get_command = function(entry, status)
@@ -286,11 +296,6 @@ local function telescopeConfig()
 						return table.concat(cmd, " ")
 					end,
 				},
-				layout_config = {
-					horizontal = { preview_width = 0.5 },
-				},
-				-- add commit time (%cr) & `--all`, double `\t` for highlighting
-				git_command = { "git", "log", "--all", "--pretty=%h %s\t\t%cr", "--", "." },
 			},
 			git_branches = {
 				prompt_prefix = " ",
