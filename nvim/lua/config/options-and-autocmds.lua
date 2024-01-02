@@ -126,8 +126,34 @@ opt.tabstop = 3
 opt.shiftwidth = 3
 
 --------------------------------------------------------------------------------
+-- TABLINE
 
-vim.opt.tabline = "%t"
+-- opt.tabline = "%!MyTabLine()"
+-- -- example, modified to add `:t`. https://neovim.io/doc/user/tabpage.html#setting-tabline
+-- vim.cmd[[
+-- 	function MyTabLine()
+-- 		let s = ''
+-- 		for i in range(tabpagenr('$'))
+-- 			if i + 1 == tabpagenr() " select the highlighting
+-- 				let s ..= '%#TabLineSel#'
+-- 			else
+-- 				let s ..= '%#TabLine#'
+-- 			endif
+-- 			let s ..= '%' .. (i + 1) .. 'T' " set the tab page number (for mouse clicks)
+-- 			let s ..= ' %{MyTabLabel(' .. (i + 1) .. ')} ' " the label is made by MyTabLabel()
+-- 		endfor
+-- 		let s ..= '%#TabLineFill#%T' " after the last tab fill with TabLineFill and reset tab page nr
+-- 		if tabpagenr('$') > 1 " right-align the label to close the current tab page
+-- 			let s ..= '%=%#TabLine#%999Xclose'
+-- 		endif
+-- 		return s
+-- 	endfunction
+-- 	function MyTabLabel(n)
+-- 		let buflist = tabpagebuflist(a:n)
+-- 		let winnr = tabpagewinnr(a:n)
+-- 		return fnamemodify(bufname(buflist[winnr - 1]), ':t')
+-- 	endfunction
+-- ]]
 
 --------------------------------------------------------------------------------
 -- CMDLINE
@@ -138,7 +164,7 @@ opt.history = 400 -- reduce noise for command history search
 vim.api.nvim_create_autocmd("CmdlineLeave", {
 	callback = function(ctx)
 		if not ctx.match == ":" then return end
-		vim.defer_fn(function ()
+		vim.defer_fn(function()
 			local lineJump = vim.fn.histget(":", -1):match("^%d+$")
 			if lineJump then vim.fn.histdel(":", -1) end
 		end, 100)

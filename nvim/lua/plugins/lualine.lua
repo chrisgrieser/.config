@@ -40,6 +40,29 @@ end
 --------------------------------------------------------------------------------
 
 local lualineConfig = {
+	tabline = {
+		lualine_a = {
+			{
+				"datetime",
+				style = "%H:%M",
+				cond = function() return vim.o.columns > 110 and vim.o.lines > 25 end,
+				-- make the `:` blink
+				fmt = function(time) return os.time() % 2 == 0 and time or time:gsub(":", " ") end,
+			},
+		},
+		lualine_b = {
+			{
+				function() return "󱥒 " .. vim.fs.basename(vim.env.VIRTUAL_ENV) end,
+				cond = function() return vim.env.VIRTUAL_ENV and vim.bo.ft == "python" end,
+			},
+			{
+				"tabs",
+				mode = 1,
+				max_length = vim.o.columns * 0.6,
+				cond = function() return fn.tabpagenr("$") > 1 end,
+			},
+		},
+	},
 	sections = {
 		lualine_a = {
 			{
