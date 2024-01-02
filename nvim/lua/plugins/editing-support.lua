@@ -2,18 +2,38 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{ -- comment
-		"numToStr/Comment.nvim",
-		keys = {
-			{ "q", mode = { "n", "x" }, desc = " Comment Operator" },
-			{ "Q", desc = " Append Comment at EoL" },
-			{ "qo", desc = " Comment below" },
-			{ "qO", desc = " Comment above" },
-		},
+	-- { -- comment
+	-- 	"numToStr/Comment.nvim",
+	-- 	keys = {
+	-- 		{ "q", mode = { "n", "x" }, desc = " Comment Operator" },
+	-- 		{ "Q", desc = " Append Comment at EoL" },
+	-- 	},
+	-- 	opts = {
+	-- 		opleader = { line = "q", block = "<Nop>" },
+	-- 		toggler = { line = "qq", block = "<Nop>" },
+	-- 		extra = { eol = "Q", above = "qO", below = "qo" },
+	-- 	},
+	-- },
+	{
+		"echasnovski/mini.comment",
 		opts = {
-			opleader = { line = "q", block = "<Nop>" },
-			toggler = { line = "qq", block = "<Nop>" },
-			extra = { eol = "Q", above = "qO", below = "qo" },
+			options = {
+				start_of_line = false, -- Whether to recognize as comment only lines without indent
+				pad_comment_parts = true, -- Whether to ensure single space pad for comment parts
+			},
+			keys = {
+				{ "q", mode = { "n", "x" }, desc = " Comment Operator" },
+				{ "Q", function ()
+					vim.bo.commentstring = ("%s"):format(hhhhhh)
+				end, desc = " Append Comment at EoL" },
+			},
+			mappings = { -- Use `''` (empty string) to disable one.
+				-- Toggle comment (like `gcip` - comment inner paragraph) for both
+				comment = "q",
+				comment_line = "qq",
+				comment_visual = "q",
+				textobject = "",
+			},
 		},
 	},
 	{ -- undo history
