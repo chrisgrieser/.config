@@ -46,6 +46,7 @@ return {
 				},
 			}
 			u.addToLuaLine("winbar", "lualine_x", { require("tinygit.gitblame").statusLine })
+			u.addToLuaLine("inactive_winbar", "lualine_x", { require("tinygit.gitblame").statusLine })
 		end,
 	},
 	{ -- git sign gutter & hunk actions

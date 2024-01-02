@@ -59,7 +59,7 @@ end
 
 ---Adds a component to the lualine after lualine was already set up. Useful for
 ---lazyloading.
----@param bar "tabline"|"winbar"|"sections"
+---@param bar "tabline"|"winbar"|"inactive_winbar"|"sections"
 ---@param section "lualine_a"|"lualine_b"|"lualine_c"|"lualine_x"|"lualine_y"|"lualine_z"
 ---@param component function|table the component forming the lualine
 ---@param whereInComponent? "before"|"after"
