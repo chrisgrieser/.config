@@ -4,7 +4,7 @@ local u = require("config.utils")
 return {
 	{ -- lightweight git client
 		"chrisgrieser/nvim-tinygit",
-		event = "VeryLazy", -- for status line component
+		event = "VeryLazy", -- delay loading status line component a bit
 		ft = "gitrebase", -- so ftplugin is loaded
 		keys = {
 			-- stylua: ignore start
@@ -42,7 +42,7 @@ return {
 				},
 				blameStatusLine = {
 					ignoreAuthors = { "🤖 automated" },
-					maxMsgLen = 50,
+					maxMsgLen = 72,
 				},
 			}
 			u.addToLuaLine("winbar", "lualine_x", { require("tinygit.gitblame").statusLine })
