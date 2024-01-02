@@ -22,7 +22,7 @@ elif [[ -z "$GITHUB_TOKEN" ]]; then
 	return 1
 fi
 
-# wait so notification opened is marked as read
+# when triggered due to opening in browser, wait so notification opened is marked as read
 [[ "$SENDER" == "front_app_switched" && "$INFO" == "$BROWSER_APP" ]] && sleep 5
 
 #───────────────────────────────────────────────────────────────────────────────
