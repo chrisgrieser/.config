@@ -1,6 +1,9 @@
 # DOCS https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
 #───────────────────────────────────────────────────────────────────────────────
 
+# inherit global ignore file from `fd`
+--ignore-file=/Users/chrisgrieser/.config/fd/ignore
+
 # shorten long lines
 --max-columns=120
 --max-columns-preview

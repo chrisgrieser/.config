@@ -41,6 +41,7 @@ return {
 					},
 				},
 				blameStatusLine = {
+					hideAuthorNames = { "Chris Grieser", "pseudometa", "chrisgrieser" },
 					ignoreAuthors = { "🤖 automated" },
 					maxMsgLen = 72,
 				},
