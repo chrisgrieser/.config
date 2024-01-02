@@ -1,8 +1,3 @@
 
-local a, b, c
-
-c = "c"
-b = "bb"
-
-local out = a or b or c
-vim.notify("🪚 out: " .. tostring(out))
+aut
+	local authorInitials = author:find("%s") and author:sub(1, 1) .. author:match("%s(%S)") or author:sub(1, 2)
