@@ -119,7 +119,6 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 ---requires the autocmd above
----@param _ table
 ---@param path string
 ---@return string
 local function filenameFirst(_, path)
@@ -403,7 +402,8 @@ local function telescopeConfig()
 			},
 		},
 		extensions = {
-			import = { insert_at_top = false }, -- insert at cursor instead, relevant for lua
+			-- insert at cursor instead, relevant for lua
+			import = { insert_at_top = false },
 		},
 	}
 end
@@ -496,11 +496,11 @@ return {
 				function()
 					-- add syntax highlighting
 					-- PENDING https://github.com/piersolenski/telescope-import.nvim/pull/19
-					local currentFiletye = vim.bo.filetype
+					local currentFt = vim.bo.filetype
 					vim.api.nvim_create_autocmd("FileType", {
 						pattern = "TelescopeResults",
 						once = true, -- do not affect other Telescope windows
-						callback = function() vim.bo.filetype = currentFiletye end,
+						callback = function(ctx) vim.bo[ctx.buf].ft = currentFt end,
 					})
 					telescope("import")
 				end,
