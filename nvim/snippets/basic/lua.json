@@ -63,6 +63,7 @@
       "\t$0",
       "end"
     ],
+    "filetype": "lua",
     "prefix": "if .. then .. else"
   },
   "ignore (stylua)": {
@@ -128,6 +129,7 @@
       "\ttable.insert(acc, part)",
       "end"
     ],
+    "filetype": "lua",
     "prefix": "split (gmatch)"
   },
   "ternary": {
