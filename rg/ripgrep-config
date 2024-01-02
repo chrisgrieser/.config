@@ -18,7 +18,7 @@
 
 # shortened display
 --no-line-number
---trim
+# --trim
 
 # colors
 --colors=match:fg:yellow

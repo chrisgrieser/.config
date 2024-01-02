@@ -1,4 +1,5 @@
 # vim: filetype=gitignore
+# INFO this file is also used by `rg` via `--ignore-file=`
 #───────────────────────────────────────────────────────────────────────────────
 
 # Mac Stuff
@@ -18,6 +19,7 @@
 # IGNORE PROJECT BOILERPLATE
 
 # general
+.github
 LICENSE
 .editorconfig
 
