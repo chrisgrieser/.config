@@ -63,9 +63,13 @@ end
 
 function M.appendAtEoL()
 	if vim.bo.commentstring == "" then return end
+
 	local line = vim.api.nvim_get_current_line():gsub("%s+$", "")
-	local comStr = " " .. vim.bo.commentstring:format("")
-	vim.api.nvim_set_current_line(line .. comStr)
+	local isBlankLine = line == ""
+	local comStr = vim.bo.commentstring:format("")
+	local pad = isBlankLine and "" or " "
+
+	vim.api.nvim_set_current_line(line .. pad .. comStr)
 	vim.cmd.startinsert{ bang = true }
 end
 

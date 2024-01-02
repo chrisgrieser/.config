@@ -1,22 +1,28 @@
-alias pip="python3 -m pip"
-alias pu="python3 -m pip uninstall"
-alias pl="python3 -m pip list --not-required"
+# 1. Prevent accidental installation outside of virtual env
+# 2. use `python3 -m pip` instead of `pip3`
+function pip {
+	if [[ "$1" == "install" && -z "$VIRTUAL_ENV" ]] ; then
+		printf "\033[1;33mNot in a virtual environment. Aborting.\033[0m "
+		return
+	fi
+	python3 -m pip "$@"
+}
+
+alias pu="pip uninstall" # these use the function above and there
+alias pi="pip install"
+alias pl="pip list --not-required"
 alias py="python3"
 alias bye="wezterm cli spawn -- bpython"
 
-# Prevent accidental installation outside of virtual env
-function pi() {
-	if [[ -z "$VIRTUAL_ENV" ]]; then
-		printf "\033[1;33mAre you sure you want to install outside of a virtual environment? (y/n)\033[0m "
-		read -r answer
-		if [[ "$answer" != "y" ]]; then return 2; fi
-	fi
-	python3 -m pip install "$@"
-}
-
 #───────────────────────────────────────────────────────────────────────────────
-
 # VIRTUAL_ENV
+
+function new_venv {
+	[[ -d ./.venv ]] && rm -vrf ./.venv
+	# shellcheck disable=1091
+	python3 -m venv ./.venv && source ./.venv/bin/activate
+	./.venv/bin/python3 -m pip install --upgrade pip # disables upgrade nag
+}
 
 function _search_venv_path() {
 	local dir_to_check=$PWD
