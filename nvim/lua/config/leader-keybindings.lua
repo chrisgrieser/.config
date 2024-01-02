@@ -174,7 +174,7 @@ keymap(
 	"n",
 	"<leader>ol",
 	function ()
-		u.notify("", "Restarting LSP", "trace")
+		u.notify("LSP", "Restarting…", "trace")
 		vim.cmd.LspRestart()
 	end,
 	{ desc = "󰒕 LspRestart" }
