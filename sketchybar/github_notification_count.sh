@@ -10,11 +10,7 @@ if [[ "$SENDER" = "front_app_switched" ]]; then
 fi
 
 # GUARD only via interval or when browser (de)activates
-if [[ "$SENDER" == "front_app_switched" && "$INFO" != "$BROWSER_APP" && "$deactivated_app" != "$BROWSER_APP" ]]; then
-	return 0
-else
-	sleep 3 # wait so notification opened is marked as read
-fi
+[[ "$SENDER" == "front_app_switched" && "$INFO" != "$BROWSER_APP" && "$deactivated_app" != "$BROWSER_APP" ]] && return 0
 
 # GUARD dependencies or API key missing
 if ! command -v yq &>/dev/null; then
@@ -25,6 +21,9 @@ elif [[ -z "$GITHUB_TOKEN" ]]; then
 	sketchybar --set "$NAME" icon="" label="GITHUB_TOKEN not set"
 	return 1
 fi
+
+# wait so notification opened is marked as read
+[[ "$SENDER" == "front_app_switched" && "$INFO" == "$BROWSER_APP" ]] && sleep 5
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -45,4 +44,5 @@ else
 	label="$notification_count"
 	pad=15
 fi
+
 sketchybar --set "$NAME" icon="$icon" label="$label" background.padding_right=$pad
