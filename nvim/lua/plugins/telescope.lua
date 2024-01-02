@@ -320,6 +320,18 @@ local function telescopeConfig()
 				layout_config = {
 					horizontal = { preview_width = { 0.7, min = 20 } },
 				},
+				mappings = {
+					i = {
+						-- copy value of highlight instead of sending a message
+						["<CR>"] = function(prompt_bufnr)
+							local highlightName =
+								require("telescope.actions.state").get_selected_entry().value
+							require("telescope.actions").close(prompt_bufnr)
+							vim.fn.setreg("+", highlightName)
+							u.notify("Copied", highlightName)
+						end,
+					},
+				},
 			},
 			diagnostics = {
 				prompt_prefix = " ",
