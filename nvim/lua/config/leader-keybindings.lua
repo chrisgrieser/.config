@@ -170,7 +170,15 @@ keymap(
 
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line Numbers" })
 keymap("n", "<leader>ow", "<cmd>set wrap!<CR>", { desc = "󰖶 Wrap" })
-keymap("n", "<leader>ol", vim.cmd.LspRestart, { desc = "󰒕 LspRestart" })
+keymap(
+	"n",
+	"<leader>ol",
+	function ()
+		u.notify("", "Restarting LSP", "trace")
+		vim.cmd.LspRestart()
+	end,
+	{ desc = "󰒕 LspRestart" }
+)
 
 keymap("n", "<leader>od", function()
 	local change = vim.diagnostic.is_disabled(0) and "enable" or "disable"
