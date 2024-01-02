@@ -23,6 +23,7 @@ local lspFormatFt = {
 	"python",
 	"css",
 }
+
 -- use auto-indenting as poor man's formatter
 local autoIndentFt = {
 	"query",
@@ -69,29 +70,19 @@ end
 
 --------------------------------------------------------------------------------
 
-local function formatterConfig()
-	-- FIX silence injected formatter
-	require("conform.formatters.injected").options.ignore_errors = true
-
-	require("conform").setup {
-		formatters_by_ft = formatters,
-		formatters = {
-			markdownlint = {
-				prepend_args = { "--config=" .. linterConfig .. "/markdownlint.yaml" },
-			},
-
-			-- PENDING using biome via LSP (nvim 0.10)
-			biome = {
-				stdin = false,
-				args = { "format", "--write", "$FILENAME" },
-			},
+local formatterConfig = {
+	formatters_by_ft = formatters,
+	formatters = {
+		markdownlint = {
+			prepend_args = { "--config=" .. linterConfig .. "/markdownlint.yaml" },
+		},
 
 		-- stylua: ignore
 		["bibtex-tidy"] = {
 			prepend_args = {
 				"--tab", "--curly", "--strip-enclosing-braces", "--no-align", "--no-wrap",
 				"--enclosing-braces=title,journal,booktitle", "--drop-all-caps",
-				"--numeric", "--months", "--encode-urls",
+				"end", "--months", "--encode-urls",
 				"--duplicates", "--sort-fields", "--remove-empty-fields", "--omit=month,issn,abstract",
 			},
 			condition = function(self, ctx) ---@diagnostic disable-line: unused-local
@@ -103,9 +94,8 @@ local function formatterConfig()
 				return true
 			end,
 		},
-		},
-	}
-end
+	},
+}
 
 local function formattingFunc()
 	-- HACK since `fixAll` is not part of ruff-lsp formatting capabilities
@@ -129,7 +119,12 @@ return {
 	{ -- Formatter integration
 		"stevearc/conform.nvim",
 		cmd = "ConformInfo",
-		config = formatterConfig,
+		config = function()
+			-- FIX silence injected formatter
+			require("conform.formatters.injected").options.ignore_errors = true
+
+			require("conform").setup(formatterConfig)
+		end,
 		keys = {
 			{ "<D-s>", formattingFunc, desc = "󰒕 Format & Save", mode = { "n", "x" } },
 		},

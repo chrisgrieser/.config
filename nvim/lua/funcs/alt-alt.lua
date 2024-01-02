@@ -11,8 +11,9 @@ local function hasAltFile(altBufnr)
 
 	-- FIX sometimes current and alt buffer point to the same file
 	local moreThanOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) > 1
+	local currentBufNotAlt = vim.api.nvim_get_current_buf() ~= altBufnr -- fixes weird rare vim bug
 
-	return valid and nonSpecial and moreThanOneBuffer
+	return valid and nonSpecial and moreThanOneBuffer and currentBufNotAlt
 end
 
 ---get the alternate oldfile, accounting for non-existing files
