@@ -44,12 +44,13 @@
 [core]
 	# auto-select light/dark mode on macOS -- https://github.com/dandavison/delta/issues/447#issuecomment-1239398586
 	pager = delta "$(defaults read -g AppleInterfaceStyle &> /dev/null && echo --dark || echo --light)"
+[diff]
+	colorMoved = default
+   colorMovedws = allow-indentation-change # moved lines colored different than added/removed
 [interactive]
 	diffFilter = delta --color-only
 [merge]
 	conflictstyle = diff3
-[diff]
-	colorMoved = default
 [delta]
 	tabs = 3 # tabwidth
 	navigate = true # use n and N to move between diff sections
