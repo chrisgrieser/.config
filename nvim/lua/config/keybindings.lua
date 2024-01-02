@@ -95,14 +95,20 @@ keymap("n", "X", "mz<cmd>normal!$x`z<CR>", { desc = "󱎘 Delete char at EoL" })
 -- COMMENTS
 keymap(
 	"n",
+	"Q",
+	function() require("funcs.comment").appendAtEoL() end,
+	{ desc = " Append Comment at EoL" }
+)
+keymap(
+	"n",
 	"qw",
-	function() require("funcs.nano-plugins").commentHr() end,
+	function() require("funcs.comment").commentHr() end,
 	{ desc = " Horizontal Divider" }
 )
 keymap(
 	"n",
 	"wq",
-	function() require("funcs.nano-plugins").duplicateLineAsComment() end,
+	function() require("funcs.comment").duplicateLineAsComment() end,
 	{ desc = " Duplicate Line as Comment" }
 )
 
