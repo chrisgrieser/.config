@@ -1,5 +1,5 @@
 # 1. Prevent accidental installation outside of virtual env
-# 2. use `python3 -m pip` instead of `pip3`
+# 2. Use `python3 -m pip` instead of `pip3`
 function pip {
 	if [[ "$1" == "install" && -z "$VIRTUAL_ENV" ]] ; then
 		printf "\033[1;33mNot in a virtual environment. Aborting.\033[0m "
@@ -8,14 +8,16 @@ function pip {
 	python3 -m pip "$@"
 }
 
-alias pu="pip uninstall" # these use the function above and there
+alias pu="pip uninstall" 
 alias pi="pip install"
 alias pl="pip list --not-required"
 alias py="python3"
 alias bye="wezterm cli spawn -- bpython"
+alias bye="wezterm cli spawn -- bpython"
 
 #───────────────────────────────────────────────────────────────────────────────
-# VIRTUAL_ENV
+
+alias v="togggle_venv"
 
 function new_venv {
 	[[ -d ./.venv ]] && rm -vrf ./.venv
@@ -24,7 +26,7 @@ function new_venv {
 	./.venv/bin/python3 -m pip install --upgrade pip # disables upgrade nag
 }
 
-function _search_venv_path() {
+function _search_venv_path {
 	local dir_to_check=$PWD
 	while true; do
 		if [[ -d "$dir_to_check/.venv" ]]; then
@@ -40,7 +42,7 @@ function _search_venv_path() {
 
 # Utility function, intended for terminal movement commands. Automatically enables
 # venv if current dir or a parent has a `.venv` dir. Disables venv if not.
-function _auto_venv() {
+function _auto_venv {
 	local venv_path
 	venv_path=$(_search_venv_path)
 
@@ -52,8 +54,7 @@ function _auto_venv() {
 	fi
 }
 
-# toggle virtual environment
-function v() {
+function togggle_venv {
 	if [[ -n "$VIRTUAL_ENV" ]]; then
 		deactivate
 		return
