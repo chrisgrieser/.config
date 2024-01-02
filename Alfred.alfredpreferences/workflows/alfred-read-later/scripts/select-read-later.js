@@ -15,11 +15,20 @@ function readFile(path) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
+	/** @type {AlfredItem[]} */
 	const readLaterItems = readFile($.getenv("read_later_file"))
 		.trim()
 		.split("\n")
 		.filter((line) => line.startsWith("- [ ] "))
 		.map((line) => {
+			const valid = line.includes("](");
+			if (!valid) {
+				return {
+					title: "Line does not have valid markdown task syntax:",
+					valid: false,
+					subtitle: line,
+				};
+			}
 			const title = line.split("](")[0].slice(7);
 			const url = line.split("](")[1].slice(0, -1);
 			return {
@@ -29,20 +38,8 @@ function run() {
 			};
 		});
 
-	// GUARD
-	if (readLaterItems.length === 0) {
-		readLaterItems.push({
-			title: "Reading List empty.",
-			subtitle: "Press ↵ to open Feedreader.",
-			arg: $.getenv("feedreaderURL"),
-		})
-	} else {
-		readLaterItems.unshift({
-			title: "🔖 Add current browser tab",
-			subtitle: "",
-			arg: "add",
-		})
-	} 
+	// "Add current browser tab" item
+	readLaterItems.unshift({ title: "🔖 Add current browser tab", arg: "add" });
 
 	return JSON.stringify({ items: readLaterItems });
 }

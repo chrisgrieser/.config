@@ -126,6 +126,10 @@ opt.tabstop = 3
 opt.shiftwidth = 3
 
 --------------------------------------------------------------------------------
+
+vim.opt.tabline = "%t"
+
+--------------------------------------------------------------------------------
 -- CMDLINE
 opt.cmdheight = 0 -- also auto-set by noice
 opt.history = 400 -- reduce noise for command history search
@@ -310,7 +314,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function(ctx)
 		vim.defer_fn(function()
 			local fileStats = vim.loop.fs_stat(ctx.file)
-			local specialBuffer = vim.bo[ctx.buf].buftype ~= ""
+			local specialBuffer = vim.api.nvim_buf_get_option(ctx.buf, "buftype") ~= ""
 			if specialBuffer or not fileStats then return end
 
 			local ft = ctx.match

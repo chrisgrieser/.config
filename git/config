@@ -36,6 +36,9 @@
 [advice]
 	detachedHead = false
 	addEmptyPathspec = false
+[diff]
+	colorMoved = true # moved lines colored different than added/removed
+   colorMovedWS = ignore-all-space
 
 #───────────────────────────────────────────────────────────────────────────────
 # SETUP FOR DELTA
@@ -44,9 +47,6 @@
 [core]
 	# auto-select light/dark mode on macOS -- https://github.com/dandavison/delta/issues/447#issuecomment-1239398586
 	pager = delta "$(defaults read -g AppleInterfaceStyle &> /dev/null && echo --dark || echo --light)"
-[diff]
-	colorMoved = default
-   colorMovedws = allow-indentation-change # moved lines colored different than added/removed
 [interactive]
 	diffFilter = delta --color-only
 [merge]
