@@ -1,6 +1,3 @@
-local u = require("config.utils")
---------------------------------------------------------------------------------
-
 local tsConfig = {
 	-- easier than keeping track of new "special parsers", which are not
 	-- auto-installed on entering a buffer (e.g., regex, luadocs, comments)
@@ -48,7 +45,7 @@ local tsConfig = {
 		},
 		lsp_interop = {
 			enable = true,
-			border = u.borderStyle,
+			border = vim.g.myBorderStyle,
 			floating_preview_opts = {},
 		},
 	},

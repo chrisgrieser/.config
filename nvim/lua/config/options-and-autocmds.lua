@@ -89,7 +89,7 @@ opt.showmatch = true -- when closing a bracket, briefly flash the matching one
 opt.matchtime = 1 -- deci-seconds
 
 opt.spell = false
-opt.spellfile = { u.linterConfigFolder .. "/spellfile-vim-ltex.add" } -- has to be `.add`
+opt.spellfile = { vim.g.linterConfigFolder .. "/spellfile-vim-ltex.add" } -- has to be `.add`
 opt.spelllang = "en_us" -- even with spellcheck disabled, still relevant for `z=`
 
 opt.splitright = true -- vsplit right instead of left

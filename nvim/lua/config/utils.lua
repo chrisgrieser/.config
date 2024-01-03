@@ -94,28 +94,6 @@ end
 
 --------------------------------------------------------------------------------
 
----Sets the global BorderStyle variable and the matching BorderChars Variable.
----See also https://neovim.io/doc/user/api.html#nvim_open_win()
----(BorderChars used for Telescope, borderHorizontal used for whichkey and Glance)
-
-M.borderStyle = "rounded" ---@type "single"|"double"|"rounded"|"solid"
-
-if M.borderStyle == "single" then
-	M.borderChars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
-	M.borderHorizontal = "─"
-elseif M.borderStyle == "double" then
-	M.borderChars = { "═", "║", "═", "║", "╔", "╗", "╝", "╚" }
-	M.borderHorizontal = "═"
-elseif M.borderStyle == "rounded" then
-	M.borderChars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
-	M.borderHorizontal = "─"
-elseif M.borderStyle == "solid" then
-	M.borderChars = { "▄", "█", "▀", "█", "█", "█", "█", "█" }
-	M.borderHorizontal = "▄"
-end
-
---------------------------------------------------------------------------------
-
 M.textobjRemaps = {
 	c = "}", -- [c]urly brace
 	r = "]", -- [r]ectangular bracket
@@ -131,8 +109,6 @@ M.textobjMaps = {
 	call = "l", -- cal[l]
 	wikilink = "R", -- two [R]ectangular brackets
 }
-
-M.linterConfigFolder = os.getenv("HOME") .. "/.config/+ linter-configs/"
 
 --------------------------------------------------------------------------------
 return M

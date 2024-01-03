@@ -49,7 +49,7 @@ require("lazy").setup("plugins", {
 	install = { colorscheme = { "tokyonight", "dawnfox", "habamax" } },
 	ui = {
 		wrap = true,
-		border = u.borderStyle,
+		border = vim.g.myBorderStyle,
 		pills = false,
 		size = { width = 1, height = 0.93 }, -- not full height, so search is visible
 	},

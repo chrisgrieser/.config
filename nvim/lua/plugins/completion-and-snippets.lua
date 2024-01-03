@@ -43,8 +43,8 @@ local function cmpconfig()
 			expand = function(args) require("luasnip").lsp_expand(args.body) end,
 		},
 		window = {
-			completion = { border = u.borderStyle, scrolloff = 2 },
-			documentation = { border = u.borderStyle, scrolloff = 2 },
+			completion = { border = vim.g.myBorderStyle, scrolloff = 2 },
+			documentation = { border = vim.g.myBorderStyle, scrolloff = 2 },
 		},
 		sorting = {
 			comparators = {
@@ -210,7 +210,7 @@ return {
 			editSnippetPopup = {
 				height = 0.4, -- between 0-1
 				width = 0.7,
-				border = u.borderStyle,
+				border = vim.g.myBorderStyle,
 				keymaps = { delete = "<D-BS>" },
 			},
 			jsonFormatter = "yq",

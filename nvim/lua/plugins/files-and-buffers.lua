@@ -1,16 +1,4 @@
-local u = require("config.utils")
---------------------------------------------------------------------------------
-
 return {
-	{ -- automatically set correct indent for file
-		"nmac427/guess-indent.nvim",
-		event = "BufReadPre",
-		opts = {
-			override_editorconfig = false, -- = respect editorconfig
-			-- due to code blocks and bullets often having spaces or tabs
-			filetype_exclude = { "markdown" },
-		},
-	},
 	{ -- auto-close inactive buffers
 		"chrisgrieser/nvim-early-retirement",
 		event = "VeryLazy",
@@ -24,8 +12,8 @@ return {
 	{ -- :bnext & :bprevious get visual overview of buffers
 		"ghillb/cybu.nvim",
 		keys = {
-			{ "<BS>", function() require("cybu").cycle("next") end, desc = "󰽙 Next Buffer" },
-			{ "<S-BS>", function() require("cybu").cycle("prev") end, desc = "󰽙 Previous Buffer" },
+			{ "<BS>", function() require("cybu").cycle("prev") end, desc = "󰽙 Previous Buffer" },
+			{ "<S-BS>", function() require("cybu").cycle("next") end, desc = "󰽙 Next Buffer" },
 		},
 		dependencies = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim" },
 		opts = {
@@ -36,7 +24,7 @@ return {
 				vertical_offset = 3,
 			},
 			style = {
-				border = u.borderStyle,
+				border = vim.g.myBorderStyle,
 				padding = 7,
 				path = "tail",
 				hide_buffer_id = false,

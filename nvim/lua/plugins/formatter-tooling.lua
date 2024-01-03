@@ -1,5 +1,4 @@
 local u = require("config.utils")
-local linterConfig = require("config.utils").linterConfigFolder
 --------------------------------------------------------------------------------
 
 -- use formatting from conform.nvim
@@ -74,7 +73,7 @@ local formatterConfig = {
 	formatters_by_ft = formatters,
 	formatters = {
 		markdownlint = {
-			prepend_args = { "--config=" .. linterConfig .. "/markdownlint.yaml" },
+			prepend_args = { "--config=" .. vim.g.linterConfigFolder .. "/markdownlint.yaml" },
 		},
 
 		-- stylua: ignore
@@ -141,7 +140,7 @@ return {
 				"github:mason-org/mason-registry",
 			},
 			ui = {
-				border = u.borderStyle,
+				border = vim.g.myBorderStyle,
 				height = 0.8, -- so statusline is still visible
 				width = 0.8,
 				icons = {

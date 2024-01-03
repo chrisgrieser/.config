@@ -111,7 +111,7 @@ return {
 			vim.opt.termguicolors = true
 			local ccc = require("ccc")
 			ccc.setup {
-				win_opts = { border = u.borderStyle },
+				win_opts = { border = vim.g.myBorderStyle },
 				highlighter = {
 					auto_enable = true,
 					max_byte = 1.5 * 1024 * 1024, -- 1.5 Mb
@@ -174,7 +174,7 @@ return {
 		opts = {
 			input = {
 				insert_only = false, -- = enable normal mode
-				border = u.borderStyle,
+				border = vim.g.myBorderStyle,
 				relative = "editor",
 				title_pos = "left",
 				min_width = { 0.4, 65 }, -- 72 = git commit msg length
@@ -186,7 +186,7 @@ return {
 				builtin = {
 					mappings = { ["q"] = "Close" },
 					show_numbers = false,
-					border = u.borderStyle,
+					border = vim.g.myBorderStyle,
 					relative = "editor",
 					max_width = 80,
 					min_width = 20,

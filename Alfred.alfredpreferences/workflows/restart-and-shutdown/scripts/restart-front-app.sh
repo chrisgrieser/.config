@@ -35,7 +35,7 @@ i=0
 while pgrep -xq "neovide" || pgrep -xq "nvim"; do
 	sleep 0.1
 	i=$((i + 1))
-	if [[ $i -gt 10 ]]; then
+	if [[ $i -gt 15 ]]; then
 		echo -n "Could not quit neovide." # Alfred notification
 		return 1
 	fi
