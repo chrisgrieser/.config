@@ -7,13 +7,10 @@ return {
 		event = "CursorMoved",
 		opts = true,
 	},
-	{
-		"sunjon/Shade.nvim",
-		event = "VeryLazy",
-		opts = {
-			overlay_opacity = 50,
-			opacity_step = 1,
-		},
+	{ -- dim unused windows
+		"miversen33/sunglasses.nvim",
+		event = "UIEnter",
+		opts = { filter_type = "NOSYNTAX", filter_percent = 0.5 },
 	},
 	{ -- context lines
 		"nvim-treesitter/nvim-treesitter-context",
