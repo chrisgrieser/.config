@@ -8,8 +8,8 @@ app.includeStandardAdditions = true;
 /** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-_./]/g, " ");
-	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
-	return [clean, camelCaseSeperated, str].join(" ") + " ";
+	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
+	return [clean, camelCaseSeparated, str].join(" ") + " ";
 }
 
 /** @param {string} url */
@@ -72,22 +72,22 @@ function writeToFile(filepath, text) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-// INFO Not searching awesome neovim, since neovimscraft already scraps them
-// TODO search dotfyles, when their collection is more thorough
+// INFO Searching awesome-neovim instead of neovimcraft or dotfyle, since the
+// the latter two only scrape awesome-neovim anyway
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	// UPDATE CACHE IF OUTDATED OR IF PLUGINS WERE INSTALLED/UNINSTALLED
 	const pluginInstallPath = $.getenv("plugin_installation_path");
-	const cachePath = $.getenv("alfred_workflow_cache") + "/neovimcraftPlugins.json";
-	if (!cacheIsOutdated(cachePath) && olderThan(pluginInstallPath, cachePath))
-		return readFile(cachePath);
+	// const cachePath = $.getenv("alfred_workflow_cache") + "/neovimcraftPlugins.json";
+	// if (!cacheIsOutdated(cachePath) && olderThan(pluginInstallPath, cachePath))
+	// 	return readFile(cachePath);
 
 	//───────────────────────────────────────────────────────────────────────────
 	// REQUEST NEOVIMCRAFT
 
-	const neovimcraftURL = "https://nvim.sh/s";
+	const awesomeNeovimList = "https://raw.githubusercontent.com/rockerBOO/awesome-neovim/main/README.md";
 	const installedPlugins = app
 		.doShellScript(
 			`cd "${pluginInstallPath}" && grep --only-matching --no-filename --max-count=1 "http.*" ./*/.git/config`,
@@ -98,26 +98,14 @@ function run() {
 			return ownerAndName;
 		});
 
-	const pluginsArr = httpRequest(neovimcraftURL)
+	const pluginsArr = httpRequest(awesomeNeovimList)
 		.split("\n")
-		.slice(2)
 		.map((/** @type {string} */ line) => {
-			const parts = line.split(/ {2,}/);
-			const repo = parts[0];
-			const name = repo.split("/")[1];
+			if (!line.startsWith("- ")) return {};
 
-			// subtitles
-			const stars = parts[1];
-			const openIssues = parts[2];
-			const daysAgo = Math.ceil((+new Date() - +new Date(parts[3])) / 1000 / 3600 / 24);
-			let updated =
-				daysAgo < 31
-					? daysAgo.toString() + " days ago"
-					: Math.ceil(daysAgo / 30).toString() + " months ago";
-			if (updated.startsWith("1 ")) updated = updated.replace("s ago", " ago"); // remove plural "s"
-			const desc = parts[4] || "";
-			let subtitle = `★ ${stars} – ${updated}`;
-			if (desc) subtitle += " – " + desc;
+			const mdLinkRegex = /\[([^\]]+)]\(([^)]+)\)/;
+			const [_, repo, url, desc] = mdLinkRegex.match(line);
+			const [author, name] = repo.split("/");
 
 			// install icon
 			const installedIcon = installedPlugins.includes(repo) ? " ✅" : "";
@@ -126,11 +114,11 @@ function run() {
 				title: name + installedIcon,
 				match: alfredMatcher(repo),
 				subtitle: subtitle,
-				arg: "https://github.com/" + repo,
+				arg: url,
 				uid: repo,
 				mods: {
 					shift: {
-						subtitle: `⇧: Search Issues (${openIssues} open)`,
+						subtitle: "⇧: Search Issues",
 						arg: "",
 						variables: { repoID: repo },
 					},
@@ -139,6 +127,6 @@ function run() {
 		});
 
 	const alfredResponse = JSON.stringify({ items: pluginsArr });
-	writeToFile(cachePath, alfredResponse);
+	// writeToFile(cachePath, alfredResponse);
 	return alfredResponse;
 }

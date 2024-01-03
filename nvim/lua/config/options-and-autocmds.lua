@@ -339,6 +339,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = vim.tbl_keys(skeletons),
 	callback = function(ctx)
 		vim.defer_fn(function()
+			if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
 			local fileStats = vim.loop.fs_stat(ctx.file)
 			local specialBuffer = vim.api.nvim_buf_get_option(ctx.buf, "buftype") ~= ""
 			if specialBuffer or not fileStats then return end
