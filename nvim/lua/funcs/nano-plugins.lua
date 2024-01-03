@@ -16,11 +16,6 @@ local function notify(title, msg, level)
 	vim.notify(msg, vim.log.levels[level:upper()], { title = title })
 end
 
-local function leaveVisualMode()
-	local escKey = vim.api.nvim_replace_termcodes("<Esc>", false, true, true)
-	vim.api.nvim_feedkeys(escKey, "nx", false)
-end
-
 --------------------------------------------------------------------------------
 
 ---Convenience wrapper around `:cdo`, replaces nvim-spectre
@@ -154,6 +149,11 @@ end
 -- * requires nvim-treesitter-textobjects
 -- * lsp usually provides better prefills for docstrings
 function M.docstring()
+	local function leaveVisualMode()
+		local escKey = vim.api.nvim_replace_termcodes("<Esc>", false, true, true)
+		vim.api.nvim_feedkeys(escKey, "nx", false)
+	end
+
 	local supportedFts = { "lua", "python", "javascript" }
 	if not vim.tbl_contains(supportedFts, vim.bo.filetype) then
 		notify("", "Unsupported filetype.", "warn")
@@ -196,25 +196,16 @@ function M.docstring()
 	end
 end
 
-function M.improvedTilde()
-	local toggleSigns = {
-		["="] = "!",
-		["|"] = "&",
-		[","] = ";",
-		["'"] = '"',
-		["^"] = "$",
-		["/"] = "*",
-		["+"] = "-",
-		["("] = ")",
-		["["] = "]",
-		["{"] = "}",
-		["<"] = ">",
-	}
+-- 1. in addition to toggling case of letters, also toggls some common characters
+-- 2. does not mvoe the cursor to the left, useful for vertical changes
+function M.betterTilde()
+	local toggleSigns =
+		{ ["'"] = '"', ["+"] = "-", ["("] = ")", ["["] = "]", ["{"] = "}", ["<"] = ">" }
 	local col = vim.fn.col(".") -- fn.col correctly considers tab-indentation
 	local charUnderCursor = vim.api.nvim_get_current_line():sub(col, col)
 	local isLetter = charUnderCursor:lower() ~= charUnderCursor:upper() -- so it works with diacritics
 	if isLetter then
-		normal("v~")
+		normal("v~") -- (`v~` instead of `~h` so dot-repetition also doesn't move the cursor)
 	else
 		for left, right in pairs(toggleSigns) do
 			if charUnderCursor == left then normal("r" .. right) end

@@ -226,7 +226,7 @@
 
 ## Items are saved locally
 - The items are saved in a local markdown file on your disk. You can set the location in the [workflow configuration](https://www.alfredapp.com/help/workflows/user-configuration/).
-- The items formatted in the [markdown task syntax](https://simpledev.io/lesson/task-list-md-1/).
+- The items are formatted in the [markdown task syntax](https://simpledev.io/lesson/task-list-md-1/).
 	+ Unread items as open tasks: `- [ ] [title](url)`
 	+ Read items as completed tasks: `- [x] [title](url)`
 - This has several advantages:
@@ -238,6 +238,9 @@
 
 
 You can also access the list on mobile with any note-app that supports markdown tasks, when you save it in a Cloud Drive.
+
+&gt; [!NOTE]
+&gt; [Unfortunately, Firefox is not and cannot be supported.](https://www.alfredforum.com/topic/16748-how-to-do-x-in-firefox-from-alfred/)
 
 ---
 
@@ -340,7 +343,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.1</string>
+	<string>1.0.3</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
