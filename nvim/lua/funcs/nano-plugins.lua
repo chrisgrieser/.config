@@ -33,7 +33,7 @@ function M.cdoSubstitute()
 		return
 	end
 
-	vim.cmd("copen 15") -- to preview results
+	vim.cmd("copen 15") -- to preview locations
 	local cmd = (":cdo s/%s//I"):format(quickfixQuery) -- prefill
 	vim.api.nvim_feedkeys(cmd, "i", true)
 	-- position cursor in cmdline

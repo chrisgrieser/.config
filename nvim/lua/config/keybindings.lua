@@ -157,8 +157,8 @@ keymap(
 )
 
 --------------------------------------------------------------------------------
-
 -- COMMENTS
+
 keymap(
 	"n",
 	"Q",
@@ -181,7 +181,7 @@ keymap(
 	"n",
 	"qn",
 	function() require("funcs.comment").insertDoublePercentComment() end,
-	{ desc = " Insert Double Percent Comment" }
+	{ desc = " %% Comment" }
 )
 
 --------------------------------------------------------------------------------

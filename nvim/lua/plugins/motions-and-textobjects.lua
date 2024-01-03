@@ -66,6 +66,18 @@ return {
 				desc = " Sticky Delete Comment",
 			},
 			{
+				"cq",
+				function ()
+					vim.cmd.TSTextobjectSelect("@comment.outer")
+					u.normal("d")
+					local comStr = vim.bo.commentstring:format("")
+					local line = vim.api.nvim_get_current_line():gsub("%s+$", "")
+					vim.api.nvim_set_current_line(line .. " " .. comStr)
+					vim.cmd.startinsert{ bang = true }
+				end,
+				desc = " Change Comment",
+			},
+			{
 				"<C-j>",
 				"<cmd>TSTextobjectGotoNextStart @function.outer<CR>zv",
 				desc = " Goto Next Function",
@@ -150,10 +162,9 @@ return {
 			{ "ge", "<cmd>lua require('various-textobjs').diagnostic()<CR>", mode = { "x", "o" }, desc = "󱡔 diagnostic" },
 			{ "L", "<cmd>lua require('various-textobjs').url()<CR>", mode = "o", desc = "󱡔 link" },
 			{ "o", "<cmd>lua require('various-textobjs').column()<CR>", mode = "o", desc = "󱡔 column" },
-			-- using the textobj from mini.comment
-			-- { "u", "<cmd>lua require('various-textobjs').multiCommentedLines()<CR>", mode = "o", desc = "󱡔 multi-line-comment" },
-			{ "in", "<cmd>lua require('various-textobjs').number('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner number" },
-			{ "an", "<cmd>lua require('various-textobjs').number('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer number" },
+
+			{ "in", "<cmd>lua require('various-textobjs').notebookCell('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner notebookCell" },
+			{ "an", "<cmd>lua require('various-textobjs').notebookCell('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer notebookCell" },
 
 			{ "ii", "<cmd>lua require('various-textobjs').indentation('inner', 'inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner indent" },
 			{ "ai", "<cmd>lua require('various-textobjs').indentation('outer', 'outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer indent" },

@@ -15,26 +15,36 @@ function M.commentHr()
 	end
 
 	local wasOnBlank = vim.api.nvim_get_current_line() == ""
-	local indent = vim.fn.indent(".") ---@diagnostic disable-line: param-type-mismatch
+	local startRow = vim.api.nvim_win_get_cursor(0)[1]
+
+	local row = startRow
+	local line, indent
+	repeat
+		line = vim.api.nvim_get_current_line()
+		indent = line:match("^%s*")
+		row = row - 1
+	until vim.fn.getline(row) ~= "" or row == 1
+
 	local comStrLength = #(comStr:gsub(" ?%%s ?", ""))
-	local commentHrChar = comStr:find("%-") and "-" or "─"
+	local indentLength = vim.bo.expandtab and #indent or #indent * vim.bo.tabstop
 	local textwidth = vim.o.textwidth > 0 and vim.o.textwidth or 80
-	local hrLength = textwidth - indent - comStrLength
+	local hrLength = textwidth - (indentLength + comStrLength)
 
 	-- the common formatters (black and stylelint) demand extra spaces
-	local fullLine
+	local hrChar = comStr:find("%-") and "-" or "─"
+	local hr
 	if vim.bo.ft == "css" then
-		fullLine = " " .. commentHrChar:rep(hrLength - 2) .. " "
+		hr = " " .. hrChar:rep(hrLength - 2) .. " "
 	elseif vim.bo.ft == "python" then
-		fullLine = " " .. commentHrChar:rep(hrLength - 1)
+		hr = " " .. hrChar:rep(hrLength - 1)
 	else
-		fullLine = commentHrChar:rep(hrLength)
+		hr = hrChar:rep(hrLength)
 	end
+	local fullLine = comStr:gsub(" ?%%s ?", hr)
+	if vim.bo.ft == "markdown" then fullLine = "---" end
 
-	-- set HR
-	local hr = vim.bo.ft == "markdown" and "---" or comStr:gsub(" ?%%s ?", fullLine)
-	local linesToAppend = wasOnBlank and { hr, "" } or { "", hr, "" }
-
+	-- append Lines
+	local linesToAppend = wasOnBlank and { fullLine, "" } or { "", fullLine, "" }
 	vim.fn.append(".", linesToAppend) ---@diagnostic disable-line: param-type-mismatch
 
 	-- shorten if it was on blank line, since fn.indent() does not return indent
@@ -45,7 +55,7 @@ function M.commentHr()
 
 		-- cannot use simply :sub, since it assumes one-byte-size chars
 		local hrLine = vim.api.nvim_get_current_line()
-		hrLine = hrLine:gsub(commentHrChar, "", hrIndent)
+		hrLine = hrLine:gsub(hrChar, "", hrIndent)
 		vim.api.nvim_set_current_line(hrLine)
 	else
 		normal("jj==")
@@ -77,8 +87,9 @@ end
 function M.insertDoublePercentComment()
 	if vim.bo.commentstring == "" then return end
 	local doublePercentCom = vim.bo.commentstring:format("%%")
+	local indent = vim.api.nvim_get_current_line():match("^%s*")
 	local ln = vim.api.nvim_win_get_cursor(0)[1]
-	vim.api.nvim_buf_set_lines(0, ln, ln, false, { doublePercentCom })
+	vim.api.nvim_buf_set_lines(0, ln, ln, false, { indent .. doublePercentCom })
 end
 
 --------------------------------------------------------------------------------
