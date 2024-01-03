@@ -433,11 +433,6 @@ return {
 			{ "gd", function() telescope("lsp_definitions") end, desc = "󰒕 Definitions" },
 			{ "gf", function() telescope("lsp_references") end, desc = "󰒕 References" },
 			{ "gy", function() telescope("lsp_type_definitions") end, desc = "󰒕 Type Definitions" },
-
-			-- info consider a call-tree plugin: https://github.com/ldelossa/litee-calltree.nvim
-			-- stylua: ignore start
-			{ "<leader>ci", function() telescope("lsp_incoming_calls") end, desc = " Incoming Calls" },
-			{ "<leader>co", function() telescope("lsp_outgoing_calls") end, desc = " Outgoing Calls" },
 			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
 			-- stylua: ignore end
 

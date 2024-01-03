@@ -47,6 +47,7 @@ vim.opt.showtabline = 0
 local lualineConfig = {
 	winbar = {
 		lualine_b = {
+			-- using lualine's tabbar, cause it looks much better than vim's
 			{ "tabs", mode = 1, cond = function() return vim.fn.tabpagenr("$") > 1 end },
 		},
 	},
