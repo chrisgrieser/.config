@@ -44,10 +44,10 @@ function browserTab() {
 		// @ts-ignore
 		title = frontmostApp.documents[0].name();
 	} else {
-		app.displayNotification("", {
-			withTitle: "You need a supported browser as your frontmost app",
-			subtitle: "",
-		});
+		const msg = frontmostAppName.startsWith("Firefox")
+			? "Unfortunately, Firefox is not and cannot be supported."
+			: "You need a supported browser as your frontmost app";
+		app.displayNotification("", { withTitle: msg, subtitle: "" });
 		return;
 	}
 	return { url: url, title: title };
@@ -63,7 +63,7 @@ function run() {
 
 	// append
 	const filepath = $.getenv("read_later_file");
-	const currentFile = readFile(filepath)
+	const currentFile = readFile(filepath);
 	const newFile = currentFile.trim() + "\n" + mdLinkTask;
 	writeToFile(filepath, newFile);
 

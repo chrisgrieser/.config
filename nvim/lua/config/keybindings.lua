@@ -90,6 +90,8 @@ keymap("n", "crt", "mzguiwgUl`z", { desc = "󰬴 Titlecase" })
 keymap("n", "cru", "mzgUiw`z", { desc = "󰬴 lowercase" })
 keymap("n", "crl", "mzguiw`z", { desc = "󰬴 UPPERCASE" })
 
+keymap("n", "~", '<cmd>lua require("funcs.nano-plugins").betterTilde()<CR>', { desc = "better ~" })
+
 -- Delete trailing stuff
 -- (wrapping in normal avoids temporarily scrolling to the side)
 keymap("n", "X", "mz<cmd>normal!$x`z<CR>", { desc = "󱎘 Delete char at EoL" })
@@ -121,10 +123,6 @@ keymap(
 
 -- Spelling (works even with `spell=false`)
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
-
--- ~ without moving don't move cursor, useful for vertical changes
--- (`v~` instead of `~h` so dot-repetition also doesn't move the cursor)
-keymap("n", "~", "v~")
 
 -- Merging
 keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
