@@ -13,7 +13,8 @@ end, 1)
 
 vim.g.mapleader = ","
 vim.g.maplocalleader = ";"
-vim.g.myBorderStyle = "rounded" ---@type "single"|"double"|"rounded"|"solid"
+
+vim.g.myBorderStyle = "rounded" ---@type "single"|"double"|"rounded"|"solid"|"none"
 
 vim.g.linterConfigFolder = os.getenv("HOME") .. "/.config/+ linter-configs/"
 
@@ -44,6 +45,4 @@ safeRequire("config.spellfixes")
 
 --------------------------------------------------------------------------------
 
-if vim.version().major == 0 and vim.version().minor >= 10 then
-	vim.notify("TODO version 0.10.md")
-end
+if vim.version().minor >= 10 then vim.notify("TODO version 0.10.md") end

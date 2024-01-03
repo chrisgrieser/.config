@@ -1,4 +1,3 @@
-local u = require("config.utils")
 local trace = vim.log.levels.TRACE
 --------------------------------------------------------------------------------
 

@@ -30,11 +30,11 @@ local function quickfixCounter()
 
 	qf.title = qf
 		.title -- prettify telescope's title output
-		:gsub("^Live Grep: .-%((.+)%)", 'rg: "%1"')
-		:gsub("^Find Files: .-%((.+)%)", 'fd: "%1"')
-		:gsub("^Find Word %((.-)%) %(.-%)", 'rg: "%1"')
+		:gsub("^Live Grep: .-%((.+)%)", "%1")
+		:gsub("^Find Files: .-%((.+)%)", "%1")
+		:gsub("^Find Word %((.-)%) %(.-%)", "%1")
 		:gsub(" %(%)", "")
-	return (" %s/%s %s"):format(qf.idx, #qf.items, qf.title) .. fileStr
+	return (' %s/%s "%s"'):format(qf.idx, #qf.items, qf.title) .. fileStr
 end
 
 --------------------------------------------------------------------------------
