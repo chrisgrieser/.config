@@ -76,4 +76,6 @@ duti -s "$editorID" lua all
 duti -s "$editorID" json all
 duti -s "$editorID" public.yaml all
 
+#───────────────────────────────────────────────────────────────────────────────
+
 brew uninstall duti
