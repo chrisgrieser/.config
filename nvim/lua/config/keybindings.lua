@@ -1,8 +1,10 @@
 local api = vim.api
 local cmd = vim.cmd
 local fn = vim.fn
+
 local u = require("config.utils")
 local keymap = require("config.utils").uniqueKeymap
+
 --------------------------------------------------------------------------------
 -- META
 
@@ -26,8 +28,8 @@ keymap({ "n", "x" }, "J", "6gj")
 keymap({ "n", "x" }, "K", "6gk")
 
 -- repeat f/t
--- keymap({ "n", "x" }, "ö", ";")
--- keymap({ "n", "x" }, "Ö", ",")
+keymap({ "n", "x" }, "ö", ";")
+keymap({ "n", "x" }, "Ö", ",")
 
 -- Jump history
 keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
