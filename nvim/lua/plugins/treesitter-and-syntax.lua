@@ -24,7 +24,7 @@ local tsConfig = {
 	matchup = {
 		enable = true,
 		enable_quotes = true,
-		disable_virtual_text = true,
+		disable_virtual_text = false,
 	},
 
 	endwise = { enable = true },
