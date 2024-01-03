@@ -1,65 +1,46 @@
 local M = {}
-
----@param cmd string
-local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
-
 --------------------------------------------------------------------------------
 
 -- appends a horizontal line, with the language's comment syntax,
 -- correctly indented and padded
 function M.commentHr()
 	local comStr = vim.bo.commentstring
-	if comStr == "" then
-		vim.notify("No commentstring for this filetype available.", vim.log.levels.WARN)
-		return
-	end
+	if comStr == "" then return end
 
-	local wasOnBlank = vim.api.nvim_get_current_line() == ""
-	local startRow = vim.api.nvim_win_get_cursor(0)[1]
+	local isOnBlank = vim.api.nvim_get_current_line() == ""
+	local startLn = vim.api.nvim_win_get_cursor(0)[1]
 
-	local row = startRow
+	-- determine indent
+	local ln = startLn
 	local line, indent
 	repeat
-		line = vim.api.nvim_get_current_line()
+		line = vim.api.nvim_buf_get_lines(0, ln - 1, ln, true)[1]
 		indent = line:match("^%s*")
-		row = row - 1
-	until vim.fn.getline(row) ~= "" or row == 1
+		ln = ln - 1
+	until line ~= "" or ln == 0
 
-	local comStrLength = #(comStr:gsub(" ?%%s ?", ""))
+	-- determine hrLength
 	local indentLength = vim.bo.expandtab and #indent or #indent * vim.bo.tabstop
+	local comStrLength = #(comStr:format(""))
 	local textwidth = vim.o.textwidth > 0 and vim.o.textwidth or 80
 	local hrLength = textwidth - (indentLength + comStrLength)
 
-	-- the common formatters (black and stylelint) demand extra spaces
+	-- construct hr
 	local hrChar = comStr:find("%-") and "-" or "─"
-	local hr
-	if vim.bo.ft == "css" then
-		hr = " " .. hrChar:rep(hrLength - 2) .. " "
-	elseif vim.bo.ft == "python" then
-		hr = " " .. hrChar:rep(hrLength - 1)
-	else
-		hr = hrChar:rep(hrLength)
+	local hr = hrChar:rep(hrLength)
+	local hrWithComment = comStr:format(hr)
+
+	local formattersWantsSpaces = { "css", "scss", "python" }
+	if not vim.tbl_contains(formattersWantsSpaces, vim.bo.ft) then
+		hrWithComment = hrWithComment:gsub(" ", hrChar)
 	end
-	local fullLine = comStr:gsub(" ?%%s ?", hr)
+	local fullLine = indent .. hrWithComment
 	if vim.bo.ft == "markdown" then fullLine = "---" end
 
-	-- append Lines
-	local linesToAppend = wasOnBlank and { fullLine, "" } or { "", fullLine, "" }
-	vim.fn.append(".", linesToAppend) ---@diagnostic disable-line: param-type-mismatch
-
-	-- shorten if it was on blank line, since fn.indent() does not return indent
-	-- line would have if it has content
-	if wasOnBlank then
-		normal("j==")
-		local hrIndent = vim.fn.indent(".") ---@diagnostic disable-line: param-type-mismatch
-
-		-- cannot use simply :sub, since it assumes one-byte-size chars
-		local hrLine = vim.api.nvim_get_current_line()
-		hrLine = hrLine:gsub(hrChar, "", hrIndent)
-		vim.api.nvim_set_current_line(hrLine)
-	else
-		normal("jj==")
-	end
+	-- append Lines & move
+	local linesToAppend = isOnBlank and { fullLine, "" } or { "", fullLine, "" }
+	vim.api.nvim_buf_set_lines(0, startLn, startLn, true, linesToAppend)
+	vim.api.nvim_win_set_cursor(0, { startLn + #linesToAppend - 1, #indent })
 end
 
 function M.duplicateLineAsComment()
@@ -86,10 +67,28 @@ end
 -- https://jupytext.readthedocs.io/en/latest/formats-scripts.html#the-percent-format
 function M.insertDoublePercentComment()
 	if vim.bo.commentstring == "" then return end
+
 	local doublePercentCom = vim.bo.commentstring:format("%%")
 	local indent = vim.api.nvim_get_current_line():match("^%s*")
 	local ln = vim.api.nvim_win_get_cursor(0)[1]
 	vim.api.nvim_buf_set_lines(0, ln, ln, false, { indent .. doublePercentCom })
+
+	vim.api.nvim_buf_add_highlight(0, 0, "DiagnosticVirtualTextHint", ln, 0, -1)
+end
+
+function M.removeDoublePercentComment()
+	if vim.bo.commentstring == "" then return end
+	local numOfLinesBefore = vim.api.nvim_buf_line_count(0)
+
+	local doublePercentCom = vim.bo.commentstring:format("%%")
+
+	vim.cmd(("silent global/%s/delete"):format(doublePercentCom))
+	vim.cmd.nohlsearch()
+
+	local linesRemoved = numOfLinesBefore - vim.api.nvim_buf_line_count(0)
+	local msg = ("Removed %s lines."):format(linesRemoved)
+	if linesRemoved == 1 then msg = msg:sub(1, -3) .. "." end -- 1 = singular
+	vim.notify(msg, vim.log.levels.INFO, { title = "Chainsaw" })
 end
 
 --------------------------------------------------------------------------------
