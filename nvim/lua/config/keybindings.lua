@@ -94,26 +94,6 @@ keymap("n", "crl", "mzguiw`z", { desc = "󰬴 UPPERCASE" })
 -- (wrapping in normal avoids temporarily scrolling to the side)
 keymap("n", "X", "mz<cmd>normal!$x`z<CR>", { desc = "󱎘 Delete char at EoL" })
 
--- COMMENTS
-keymap(
-	"n",
-	"Q",
-	function() require("funcs.comment").appendAtEoL() end,
-	{ desc = " Append Comment at EoL" }
-)
-keymap(
-	"n",
-	"qw",
-	function() require("funcs.comment").commentHr() end,
-	{ desc = " Horizontal Divider" }
-)
-keymap(
-	"n",
-	"wq",
-	function() require("funcs.comment").duplicateLineAsComment() end,
-	{ desc = " Duplicate Line as Comment" }
-)
-
 -- WHITESPACE & INDENTATION
 keymap("n", "=", "mzO<Esc>`z", { desc = "  blank above" })
 keymap("n", "_", "mzo<Esc>`z", { desc = "  blank below" })
@@ -174,6 +154,34 @@ keymap(
 	"qf",
 	function() require("funcs.nano-plugins").docstring() end,
 	{ desc = " Function Docstring" }
+)
+
+--------------------------------------------------------------------------------
+
+-- COMMENTS
+keymap(
+	"n",
+	"Q",
+	function() require("funcs.comment").appendAtEoL() end,
+	{ desc = " Append Comment at EoL" }
+)
+keymap(
+	"n",
+	"qw",
+	function() require("funcs.comment").commentHr() end,
+	{ desc = " Horizontal Divider" }
+)
+keymap(
+	"n",
+	"wq",
+	function() require("funcs.comment").duplicateLineAsComment() end,
+	{ desc = " Duplicate Line as Comment" }
+)
+keymap(
+	"n",
+	"qn",
+	function() require("funcs.comment").insertDoublePercentComment() end,
+	{ desc = " Insert Double Percent Comment" }
 )
 
 --------------------------------------------------------------------------------
