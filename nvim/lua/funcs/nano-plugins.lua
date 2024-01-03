@@ -27,10 +27,9 @@ end
 function M.cdoSubstitute()
 	-- GUARD
 	local qf = vim.fn.getqflist { items = true, title = true }
-	local quickfixQuery = qf.title:match("%((..-)%)")
-	if not quickfixQuery or #qf.items == 0 then
-		local msg = #qf.items == 0 and "List empty." or "Query could not be determined."
-		notify("Quickfix", msg, "warn")
+	local quickfixQuery = qf.title:match("%((..-)%)") or ""
+	if #qf.items == 0 then
+		notify("Quickfix", "List empty.", "warn")
 		return
 	end
 

@@ -32,11 +32,11 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config) ---
 end
 
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-	border = u.borderStyle,
+	border = vim.g.myBorderStyle,
 })
 -- INFO this needs to be disabled for noice.nvim
 -- vim.lsp.handlers["textDocument/hover"] =
--- vim.lsp.with(vim.lsp.handlers.hover, { border = u.borderStyle })
+-- vim.lsp.with(vim.lsp.handlers.hover, { border = vim.g.myBorderStyle })
 
 --------------------------------------------------------------------------------
 
@@ -112,7 +112,7 @@ vim.diagnostic.config {
 	},
 	float = {
 		severity_sort = true,
-		border = u.borderStyle,
+		border = vim.g.myBorderStyle,
 		max_width = 70,
 		header = false,
 		prefix = function(_, _, total)

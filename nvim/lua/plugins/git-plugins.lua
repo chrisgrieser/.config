@@ -37,7 +37,7 @@ return {
 					diffPopup = {
 						width = 0.9,
 						height = 0.9,
-						border = u.borderStyle,
+						border = vim.g.myBorderStyle,
 					},
 				},
 				blameStatusLine = {

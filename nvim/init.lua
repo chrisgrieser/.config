@@ -9,8 +9,13 @@ vim.defer_fn(function()
 	end
 end, 1)
 
+--------------------------------------------------------------------------------
+
 vim.g.mapleader = ","
 vim.g.maplocalleader = ";"
+vim.g.myBorderStyle = "rounded" ---@type "single"|"double"|"rounded"|"solid"
+
+vim.g.linterConfigFolder = os.getenv("HOME") .. "/.config/+ linter-configs/"
 
 --------------------------------------------------------------------------------
 

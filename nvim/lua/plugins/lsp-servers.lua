@@ -1,5 +1,4 @@
 local u = require("config.utils")
-local linterConfig = require("config.utils").linterConfigFolder
 --------------------------------------------------------------------------------
 
 ---since nvim-lspconfig and mason.nvim use different package names
@@ -63,7 +62,7 @@ serverConfigs.bashls = {
 
 -- EFM: Markdown & Shell
 serverConfigs.efm = {
-	cmd = { "efm-langserver", "-c", linterConfig .. "/efm.yaml" },
+	cmd = { "efm-langserver", "-c", vim.g.linterConfigFolder .. "/efm.yaml" },
 	filetypes = { "sh", "markdown" }, -- limit to filestypes needed
 }
 
@@ -232,7 +231,7 @@ serverConfigs.jsonls = {
 
 -- since reading external file with the method described in docs does not work
 local function getDictWords()
-	local dictfile = linterConfig .. "/spellfile-vim-ltex.add"
+	local dictfile = vim.g.linterConfigFolder .. "/spellfile-vim-ltex.add"
 	local fileDoesNotExist = vim.loop.fs_stat(dictfile) == nil
 	if fileDoesNotExist then return {} end
 	local words = {}
@@ -310,7 +309,7 @@ serverConfigs.vale_ls = {
 }
 
 -- FIX https://github.com/errata-ai/vale-ls/issues/4
-vim.env.VALE_CONFIG_PATH = linterConfig .. "/vale/vale.ini"
+vim.env.VALE_CONFIG_PATH = vim.g.linterConfigFolder .. "/vale/vale.ini"
 
 --------------------------------------------------------------------------------
 
@@ -357,7 +356,7 @@ return {
 		},
 		config = function()
 			setupAllLsps()
-			require("lspconfig.ui.windows").default_options.border = u.borderStyle
+			require("lspconfig.ui.windows").default_options.border = vim.g.myBorderStyle
 		end,
 	},
 }

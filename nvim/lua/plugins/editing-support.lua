@@ -221,8 +221,7 @@ return {
 					["<Esc>"] = "⎋",
 				},
 				window = {
-					-- only horizontal border to save space
-					border = { "", require("config.utils").borderHorizontal, "", "" },
+					border = { "", "─", "", "" }, -- only horizontal border to save space
 					padding = { 0, 0, 0, 0 },
 					margin = { 0, 0, 0, 0 },
 				},
