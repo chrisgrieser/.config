@@ -64,7 +64,7 @@ keymap("n", "gP", "gf", { desc = " Goto Path under cursor" })
 -- quickfix
 keymap("n", "gq", "<cmd>cnext<CR>zv", { desc = " Next Quickfix" })
 keymap("n", "gQ", "<cmd>cprevious<CR>zv", { desc = " Prev Quickfix" })
-keymap("n", "dQ", function() vim.fn.setqflist({}, "r") end, { desc = " Clear QuickFix List" })
+keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Clear QuickFix List" })
 
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS
@@ -84,9 +84,9 @@ keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
 -- EDITING
 
 -- emulate vim-abolish
-keymap("n", "crt", "mzguiwgUl`z", { desc = "󰬴 Titlecase"})
-keymap("n", "cru", "mzgUiw`z", { desc = "󰬴 lowercase"})
-keymap("n", "crl", "mzguiw`z", { desc = "󰬴 UPPERCASE"})
+keymap("n", "crt", "mzguiwgUl`z", { desc = "󰬴 Titlecase" })
+keymap("n", "cru", "mzgUiw`z", { desc = "󰬴 lowercase" })
+keymap("n", "crl", "mzguiw`z", { desc = "󰬴 UPPERCASE" })
 
 -- Delete trailing stuff
 -- (wrapping in normal avoids temporarily scrolling to the side)
