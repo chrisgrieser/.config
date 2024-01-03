@@ -159,30 +159,13 @@ keymap(
 --------------------------------------------------------------------------------
 -- COMMENTS
 
-keymap(
-	"n",
-	"Q",
-	function() require("funcs.comment").appendAtEoL() end,
-	{ desc = " Append Comment at EoL" }
-)
-keymap(
-	"n",
-	"qw",
-	function() require("funcs.comment").commentHr() end,
-	{ desc = " Horizontal Divider" }
-)
-keymap(
-	"n",
-	"wq",
-	function() require("funcs.comment").duplicateLineAsComment() end,
-	{ desc = " Duplicate Line as Comment" }
-)
-keymap(
-	"n",
-	"qn",
-	function() require("funcs.comment").insertDoublePercentComment() end,
-	{ desc = " %% Comment" }
-)
+-- stylua: ignore start
+keymap("n", "Q", function() require("funcs.comment").appendCommentAtEoL() end, { desc = " Append Comment at EoL" })
+keymap("n", "qw", function() require("funcs.comment").commentHr() end, { desc = " Horizontal Divider" })
+keymap("n", "wq", function() require("funcs.comment").duplicateLineAsComment() end, { desc = " Duplicate Line as Comment" })
+keymap("n", "qn", function() require("funcs.comment").insertDoublePercentCom() end, { desc = " Insert %% Comment" })
+keymap("n", "dN", function() require("funcs.comment").removeDoublePercentCom() end, { desc = " Remove %% Comment" })
+-- stylua: ignore end
 
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
