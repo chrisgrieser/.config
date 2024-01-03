@@ -7,6 +7,14 @@ return {
 		event = "CursorMoved",
 		opts = true,
 	},
+	{
+		"sunjon/Shade.nvim",
+		event = "VeryLazy",
+		opts = {
+			overlay_opacity = 50,
+			opacity_step = 1,
+		},
+	},
 	{ -- context lines
 		"nvim-treesitter/nvim-treesitter-context",
 		dependencies = "nvim-treesitter/nvim-treesitter",
