@@ -16,29 +16,8 @@ keymap(
 	{ desc = "⌨️ Edit " .. vim.fs.basename(pathOfThisFile) }
 )
 
--- Copy Last Command
-keymap("n", "<leader>lc", function()
-	local lastCommand = fn.getreg(":"):gsub("^lua[ =]*", "")
-	fn.setreg("+", lastCommand)
-	u.notify("Copied", lastCommand)
-end, { desc = "󰘳 Copy last command" })
-
--- [l]ast command a[g]ain
-keymap("n", "<leader>lg", ":<Up><CR>", { desc = "󰘳 Last command again", silent = true })
-
--- inspect
-keymap("n", "<leader>li", cmd.Inspect, { desc = " :Inspect" })
-keymap("n", "<leader>lf", function()
-	local out = {
-		"filetype: " .. bo.filetype,
-		"buftype: " .. bo.buftype,
-		"cwd: " .. (vim.loop.cwd() or "n/a"),
-		("indent: %s (%s)"):format(bo.expandtab and "spaces" or "tabs", bo.tabstop),
-	}
-	local ok, node = pcall(vim.treesitter.get_node)
-	if ok and node then table.insert(out, "node: " .. node:type()) end
-	u.notify("Buffer Information", table.concat(out, "\n"), "trace")
-end, { desc = " Buffer Info" })
+-- Repeat Last Command
+keymap("n", "<leader>r", ":<Up><CR>", { desc = "󰘳 Repeat last cmd", silent = true })
 
 -- view internal directories
 keymap(
@@ -53,6 +32,22 @@ keymap(
 	function() vim.fn.system { "open", vim.fn.stdpath("data") } end,
 	{ desc = " Package Dirs" }
 )
+
+--------------------------------------------------------------------------------
+
+-- inspect
+keymap("n", "<leader>ii", cmd.Inspect, { desc = " :Inspect" })
+keymap("n", "<leader>ib", function()
+	local out = {
+		"filetype: " .. bo.filetype,
+		"buftype: " .. bo.buftype,
+		"cwd: " .. (vim.loop.cwd() or "n/a"),
+		("indent: %s (%s)"):format(bo.expandtab and "spaces" or "tabs", bo.tabstop),
+	}
+	local ok, node = pcall(vim.treesitter.get_node)
+	if ok and node then table.insert(out, "node: " .. node:type()) end
+	u.notify("Buffer Information", table.concat(out, "\n"), "trace")
+end, { desc = " Inspect Buffer" })
 
 --------------------------------------------------------------------------------
 -- REFACTORING
@@ -138,7 +133,7 @@ end
 
 keymap(
 	{ "n", "x" },
-	"<leader>dd",
+	"<leader>cc",
 	function() vim.lsp.buf.code_action { filter = codeActionFilter } end,
 	{ desc = "󰒕 Code Action" }
 )
@@ -170,15 +165,10 @@ keymap(
 
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line Numbers" })
 keymap("n", "<leader>ow", "<cmd>set wrap!<CR>", { desc = "󰖶 Wrap" })
-keymap(
-	"n",
-	"<leader>ol",
-	function ()
-		u.notify("LSP", "Restarting…", "trace")
-		vim.cmd.LspRestart()
-	end,
-	{ desc = "󰒕 LspRestart" }
-)
+keymap("n", "<leader>ol", function()
+	u.notify("LSP", "Restarting…", "trace")
+	vim.cmd.LspRestart()
+end, { desc = "󰒕 LspRestart" })
 
 keymap("n", "<leader>od", function()
 	local change = vim.diagnostic.is_disabled(0) and "enable" or "disable"
@@ -192,7 +182,7 @@ end, { desc = "󰒕 LSP Inlay Hints" })
 keymap(
 	"n",
 	"<leader>oc",
-	function() vim.opt_local.conceallevel = vim.opt_local.conceallevel:get() == 0 and 1 or 0 end,
+	function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 1 or 0 end,
 	{ desc = "󰈉 Conceal" }
 )
 

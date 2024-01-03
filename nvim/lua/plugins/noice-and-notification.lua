@@ -161,7 +161,7 @@ return {
 		"rcarriga/nvim-notify",
 		keys = {
 			{
-				"<leader>ln",
+				"<leader>in",
 				function()
 					local history = require("notify").history()
 					if #history == 0 then
@@ -170,7 +170,7 @@ return {
 					end
 					local msg = history[#history].message
 					vim.fn.setreg("+", msg)
-					vim.notify("Last Notification copied.", trace, { title = "nvim-notify" })
+					vim.notify(msg, trace, { title = "Copied" })
 				end,
 				desc = "󰎟 Copy Last Notification",
 			},

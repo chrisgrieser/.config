@@ -333,14 +333,6 @@ local function telescopeConfig()
 					},
 				},
 			},
-			diagnostics = {
-				prompt_prefix = " ",
-				initial_mode = "normal",
-				disable_coordinates = true,
-				layout_config = {
-					horizontal = { preview_width = 0.3 },
-				},
-			},
 			lsp_references = {
 				prompt_prefix = "󰈿 ",
 				trim_text = true,
@@ -353,15 +345,6 @@ local function telescopeConfig()
 				},
 			},
 			lsp_definitions = {
-				prompt_prefix = "󰈿 ",
-				trim_text = true,
-				show_line = false,
-				initial_mode = "normal",
-				layout_config = {
-					horizontal = { preview_width = { 0.7, min = 30 } },
-				},
-			},
-			lsp_type_definitions = {
 				prompt_prefix = "󰈿 ",
 				trim_text = true,
 				show_line = false,
@@ -432,15 +415,13 @@ return {
 			{ "gs", function() telescope("treesitter") end, desc = " Symbols" },
 			{ "gd", function() telescope("lsp_definitions") end, desc = "󰒕 Definitions" },
 			{ "gf", function() telescope("lsp_references") end, desc = "󰒕 References" },
-			{ "gy", function() telescope("lsp_type_definitions") end, desc = "󰒕 Type Definitions" },
 			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
 			-- stylua: ignore end
 
 			{ "<leader>ph", function() telescope("highlights") end, desc = " Highlights" },
-			{ "<leader>dt", function() telescope("diagnostics") end, desc = " List Diagnostics" },
 			{ "<leader>pc", function() telescope("colorscheme") end, desc = " Colorschemes" },
 			{ "<leader>gs", function() telescope("git_status") end, desc = " Status" },
-			{ "<leader>gl", function() telescope("git_commits") end, desc = " Log/Commits" },
+			{ "<leader>gl", function() telescope("git_commits") end, desc = " Log" },
 			{ "<leader>gb", function() telescope("git_branches") end, desc = " Branches" },
 			{ "zl", function() telescope("spell_suggest") end, desc = "󰓆 Spell Suggest" },
 			{
@@ -499,7 +480,7 @@ return {
 		dependencies = "nvim-telescope/telescope.nvim",
 		keys = {
 			{
-				"<leader>i",
+				"<leader>ci",
 				function()
 					-- add syntax highlighting
 					-- PENDING https://github.com/piersolenski/telescope-import.nvim/pull/19
