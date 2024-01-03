@@ -231,18 +231,18 @@ nnoremap qq :contextualComment
 
 "───────────────────────────────────────────────────────────────────────────────
 " LEADER MAPPINGS
+" the weird mappings are due to an attempts to somewhat imitate my nvim-mappings
 
 exmap fileRecovery obcommand file-recovery:open
 nnoremap ,ut :fileRecovery
 nnoremap ,gd :fileRecovery
 
 exmap toggleDevtools obcommand obsidian-theme-design-utilities:toggle-devtools
-nnoremap ,b :toggleDevtools
-vnoremap ,b :toggleDevtools
+nnoremap ,d :toggleDevtools
 
 " pseudo-code-action: enhance URL with title
 exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-title
-nnoremap ,dd :enhanceUrlWithTitle
+nnoremap ,cc :enhanceUrlWithTitle
 
 exmap toggleAiCompletion obcommand obsidian-textgenerator-plugin:auto-suggest
 nnoremap ,g :toggleAiCompletion
@@ -315,7 +315,7 @@ onoremap K a"
 " SUBSTITUTE
 
 " poor man's substitute.nvim and duplicate.nvim:
-" brut-forcing all possible text objects 💀
+" HACK brut-forcing all possible text objects 💀
 nunmap s
 nnoremap ss VP
 nnoremap S vg$P
