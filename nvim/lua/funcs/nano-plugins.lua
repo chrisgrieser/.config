@@ -196,6 +196,33 @@ function M.docstring()
 	end
 end
 
+function M.improvedTilde()
+	local toggleSigns = {
+		["="] = "!",
+		["|"] = "&",
+		[","] = ";",
+		["'"] = '"',
+		["^"] = "$",
+		["/"] = "*",
+		["+"] = "-",
+		["("] = ")",
+		["["] = "]",
+		["{"] = "}",
+		["<"] = ">",
+	}
+	local col = vim.fn.col(".") -- fn.col correctly considers tab-indentation
+	local charUnderCursor = vim.api.nvim_get_current_line():sub(col, col)
+	local isLetter = charUnderCursor:lower() ~= charUnderCursor:upper() -- so it works with diacritics
+	if isLetter then
+		normal("v~")
+	else
+		for left, right in pairs(toggleSigns) do
+			if charUnderCursor == left then normal("r" .. right) end
+			if charUnderCursor == right then normal("r" .. left) end
+		end
+	end
+end
+
 ---simplified implementation of tabout.nvim
 ---(should be mapped in insert-mode to `<Tab>`)
 function M.tabout()

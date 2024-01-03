@@ -52,43 +52,42 @@ function M.duplicateLineAsComment()
 	vim.api.nvim_win_set_cursor(0, { ln + 1, col })
 end
 
-function M.appendAtEoL()
+function M.appendCommentAtEoL()
 	if vim.bo.commentstring == "" then return end
 
 	local line = vim.api.nvim_get_current_line():gsub("%s+$", "")
-	local isBlankLine = line == ""
 	local comStr = vim.bo.commentstring:format("")
-	local pad = isBlankLine and "" or " "
+	local pad = line == "" and "" or " "
 
 	vim.api.nvim_set_current_line(line .. pad .. comStr)
 	vim.cmd.startinsert { bang = true }
 end
 
 -- https://jupytext.readthedocs.io/en/latest/formats-scripts.html#the-percent-format
-function M.insertDoublePercentComment()
+function M.insertDoublePercentCom()
 	if vim.bo.commentstring == "" then return end
 
+	local curLine = vim.api.nvim_get_current_line()
 	local doublePercentCom = vim.bo.commentstring:format("%%")
-	local indent = vim.api.nvim_get_current_line():match("^%s*")
 	local ln = vim.api.nvim_win_get_cursor(0)[1]
-	vim.api.nvim_buf_set_lines(0, ln, ln, false, { indent .. doublePercentCom })
+	if curLine == "" then
+		vim.api.nvim_set_current_line(doublePercentCom)
+		ln = ln - 1
+	else
+		vim.api.nvim_buf_set_lines(0, ln, ln, false, { doublePercentCom })
+	end
 
 	vim.api.nvim_buf_add_highlight(0, 0, "DiagnosticVirtualTextHint", ln, 0, -1)
 end
 
-function M.removeDoublePercentComment()
+function M.removeDoublePercentCom()
 	if vim.bo.commentstring == "" then return end
-	local numOfLinesBefore = vim.api.nvim_buf_line_count(0)
-
+	local cursorBefore = vim.api.nvim_win_get_cursor(0)
 	local doublePercentCom = vim.bo.commentstring:format("%%")
 
-	vim.cmd(("silent global/%s/delete"):format(doublePercentCom))
-	vim.cmd.nohlsearch()
+	vim.cmd("% substitute/" .. doublePercentCom .. "//")
 
-	local linesRemoved = numOfLinesBefore - vim.api.nvim_buf_line_count(0)
-	local msg = ("Removed %s lines."):format(linesRemoved)
-	if linesRemoved == 1 then msg = msg:sub(1, -3) .. "." end -- 1 = singular
-	vim.notify(msg, vim.log.levels.INFO, { title = "Chainsaw" })
+	vim.api.nvim_win_set_cursor(0, cursorBefore)
 end
 
 --------------------------------------------------------------------------------
