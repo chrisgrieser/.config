@@ -70,7 +70,15 @@ function M.appendAtEoL()
 	local pad = isBlankLine and "" or " "
 
 	vim.api.nvim_set_current_line(line .. pad .. comStr)
-	vim.cmd.startinsert{ bang = true }
+	vim.cmd.startinsert { bang = true }
+end
+
+-- https://jupytext.readthedocs.io/en/latest/formats-scripts.html#the-percent-format
+function M.insertDoublePercentComment()
+	if vim.bo.commentstring == "" then return end
+	local doublePercentCom = vim.bo.commentstring:format("%%")
+	local ln = vim.api.nvim_win_get_cursor(0)[1]
+	vim.api.nvim_buf_set_lines(0, ln, ln, false, { doublePercentCom })
 end
 
 --------------------------------------------------------------------------------
