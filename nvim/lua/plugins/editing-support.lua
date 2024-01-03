@@ -245,14 +245,13 @@ return {
 				u = { name = " 󰕌 Undo" },
 				o = { name = "  Options" },
 				p = { name = " 󰏗 Packages" },
-				d = { name = "  Diagnostics" },
-				c = { name = "  Calls" },
+				c = { name = "  Code Action" },
+				i = { name = " 󱡴 Inspect" },
 			}, { prefix = "<leader>" })
 
 			-- leader prefixes normal+visual mode
 			require("which-key").register({
 				f = { name = " 󱗘 Refactor" },
-				l = { name = "  Log / Cmdline" },
 				g = { name = " 󰊢 Git" },
 			}, { prefix = "<leader>", mode = { "x", "n" } })
 
@@ -267,11 +266,12 @@ return {
 	},
 	{
 		"chrisgrieser/nvim-chainsaw",
+		init = function() u.leaderSubkey("l", " Log") end,
 		keys = {
 			-- stylua: ignore start
 			{"<leader>lb", function() require("chainsaw").beepLog() end, desc = "󰸢 beep log" },
 			{"<leader>lm", function() require("chainsaw").messageLog() end, desc = "󰸢 message log" },
-			{"<leader>l1", function() require("chainsaw").timeLog() end, desc = "󰸢 time log" },
+			{"<leader>lt", function() require("chainsaw").timeLog() end, desc = "󰸢 time log" },
 			{"<leader>ld", function() require("chainsaw").debugLog() end, desc = "󰸢 debugger log" },
 			{"<leader>lr", function() require("chainsaw").removeLogs() end, desc = "󰹝 remove logs" },
 

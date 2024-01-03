@@ -52,12 +52,12 @@ return {
 		"chrisgrieser/nvim-rulebook",
 		keys = {
 			{
-				"<leader>dl",
+				"<leader>cl",
 				"<cmd>lua require('rulebook').lookupRule()<CR>",
 				desc = " Lookup Rule",
 			},
 			{
-				"<leader>di",
+				"<leader>ci",
 				"<cmd>lua require('rulebook').ignoreRule()<CR>",
 				desc = "󰅜 Ignore Rule",
 			},
