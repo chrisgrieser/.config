@@ -24,12 +24,12 @@ vim.g.linterConfigFolder = os.getenv("HOME") .. "/.config/+ linter-configs/"
 ---loaded, but do notify if there was an error.
 ---@param module string module to load
 local function safeRequire(module)
-	local success, result = pcall(require, module)
-	if success then return end
-	vim.defer_fn( -- defer so notification plugins are loaded before
-		function() vim.notify(("Error loading %s\n%s"):format(module, result), vim.log.levels.ERROR) end,
-		1
-	)
+	local success, errMsg = pcall(require, module)
+	if not success then
+		local msg = ("Error loading %s\n%s"):format(module, errMsg)
+		-- defer so notification plugins are loaded before
+		vim.defer_fn(function() vim.notify(msg, vim.log.levels.ERROR) end, 1)
+	end
 end
 
 safeRequire("config.lazy")

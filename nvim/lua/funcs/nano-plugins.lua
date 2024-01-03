@@ -46,7 +46,7 @@ function M.cdoSubstitute()
 			vim.defer_fn(function()
 				vim.cmd.cclose()
 				vim.cmd.cfirst() -- move cursor back
-				vim.fn.setqflist({}, "r") -- clear quickfix
+				vim.cmd.cexpr("[]") -- clear quickfix
 				vim.cmd.cfdo("silent update")
 			end, 1)
 		end,
