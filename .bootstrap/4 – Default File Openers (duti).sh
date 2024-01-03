@@ -10,10 +10,24 @@ open "$HOME/.config/obsidian/Obsidian Helper.app"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# Obsidian
-obsiOpenerID="com.apple.automator.Obsidian-Helper"
-duti -s "$obsiOpenerID" md all
-duti -s "$obsiOpenerID" canvas all
+# General
+duti -s "com.apple.automator.Obsidian-Helper" md all
+duti -s "net.highlightsapp.universal" pdf all
+duti -s "org.m0k.transmission" torrent all
+duti -s "org.m0k.transmission" magnet
+duti -s "com.busymac.busycal3" ics all
+duti -s "com.apple.archiveutility" zip all
+
+# Browser & Mail
+browserID=$(osascript -e "id of app \"$BROWSER_APP\"") # set in zshenv
+duti -s "$browserID" svg all
+duti -s "$browserID" chrome-extension
+duti -s "$browserID" chrome
+duti -s "$browserID" webloc all # link files
+duti -s "$browserID" url all    # link files
+
+mailID=$(osascript -e "id of app \"$MAIL_APP\"") # set in zshenv
+duti -s "$mailID" mailto                         # = default mail client
 
 # video & mp3
 videoplayerID="com.colliderli.iina"
@@ -61,23 +75,5 @@ duti -s "$editorID" applescript all
 duti -s "$editorID" lua all
 duti -s "$editorID" json all
 duti -s "$editorID" public.yaml all
-
-# Browser & Mail
-browserID=$(osascript -e "id of app \"$BROWSER_APP\"") # set in zshenv
-duti -s "$browserID" svg all
-duti -s "$browserID" chrome-extension
-duti -s "$browserID" chrome
-duti -s "$browserID" webloc all # link files
-duti -s "$browserID" url all    # link files
-
-mailID=$(osascript -e "id of app \"$MAIL_APP\"") # set in zshenv
-duti -s "$mailID" mailto                         # = default mail client
-
-# Misc
-duti -s "net.highlightsapp.universal" pdf all
-duti -s "org.m0k.transmission" torrent all
-duti -s "org.m0k.transmission" magnet
-duti -s "com.busymac.busycal3" ics all
-duti -s "com.apple.archiveutility" zip all
 
 brew uninstall duti

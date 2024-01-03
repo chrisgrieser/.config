@@ -26,8 +26,8 @@ keymap({ "n", "x" }, "J", "6gj")
 keymap({ "n", "x" }, "K", "6gk")
 
 -- repeat f/t
-keymap({ "n", "x" }, "ö", ";")
-keymap({ "n", "x" }, "Ö", ",")
+-- keymap({ "n", "x" }, "ö", ";")
+-- keymap({ "n", "x" }, "Ö", ",")
 
 -- Jump history
 keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
@@ -62,8 +62,8 @@ keymap({ "n", "v", "i" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 Si
 keymap("n", "gP", "gf", { desc = " Goto Path under cursor" })
 
 -- quickfix
-keymap("n", "gq", "<cmd>cnext<CR>zv", { desc = " Next Quickfix" })
-keymap("n", "gQ", "<cmd>cprevious<CR>zv", { desc = " Prev Quickfix" })
+keymap("n", "gq", vim.cmd.cnext, { desc = " Next Quickfix" })
+keymap("n", "gQ", vim.cmd.cprevious, { desc = " Prev Quickfix" })
 keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Clear QuickFix List" })
 
 --------------------------------------------------------------------------------
