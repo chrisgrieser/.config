@@ -155,22 +155,6 @@ return {
 	},
 	{ -- Notifications
 		"rcarriga/nvim-notify",
-		keys = {
-			{
-				"<leader>in",
-				function()
-					local history = require("notify").history()
-					if #history == 0 then
-						vim.notify("No Notification in this session.", trace, { title = "nvim-notify" })
-						return
-					end
-					local msg = history[#history].message
-					vim.fn.setreg("+", msg)
-					vim.notify(msg, trace, { title = "Copied" })
-				end,
-				desc = "󰎟 Copy Last Notification",
-			},
-		},
 		opts = {
 			render = "wrapped-compact", -- best for shorter max_width
 			max_width = 50,
