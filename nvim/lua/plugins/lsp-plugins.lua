@@ -5,7 +5,7 @@ local kind = vim.lsp.protocol.SymbolKind
 return {
 	{ -- virtual text showing usage count of functions
 		"Wansmer/symbol-usage.nvim",
-		event = "BufReadPre", -- TODO need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
+		event = (vim.fn.has("nvim-0.10.0") == 1 and "LspAttach" or "BufReadPre"),
 		opts = {
 			hl = { link = "NonText" },
 			vt_position = "end_of_line",
@@ -34,7 +34,7 @@ return {
 	},
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",
-		event = "BufReadPre", -- TODO need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
+		event = (vim.fn.has("nvim-0.10.0") == 1 and "LspAttach" or "BufReadPre"),
 		dependencies = "folke/noice.nvim",
 		opts = {
 			noice = true, -- render via noice.nvim
