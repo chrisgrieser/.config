@@ -1,9 +1,20 @@
+local u = require("config.utils")
+--------------------------------------------------------------------------------
+
 return {
-	{
+	{ -- harpoon with better UI
 		"otavioschwanck/arrow.nvim",
-		opts = {
-			show_icons = true,
-			leader_key = ";", -- Recommended to be a single key
+		event = "VeryLazy", -- for status line component
+		config = function()
+			u.addToLuaLine("sections", "lualine_a", require("arrow.statusline").is_on_arrow_file)
+			require("arrow").setup {
+				show_icons = true,
+				leader_key = "<D-d>",
+			}
+		end,
+		keys = {
+			"<D-d>",
+			{ "<D-CR>", function() require("arrow.persist").next() end, desc = "󱡁 Next arrow" },
 		},
 	},
 	{ -- auto-close inactive buffers
