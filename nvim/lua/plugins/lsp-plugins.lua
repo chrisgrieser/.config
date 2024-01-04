@@ -57,7 +57,7 @@ return {
 				desc = " Lookup Rule",
 			},
 			{
-				"<leader>ci",
+				"<leader>cg",
 				"<cmd>lua require('rulebook').ignoreRule()<CR>",
 				desc = "󰅜 Ignore Rule",
 			},
