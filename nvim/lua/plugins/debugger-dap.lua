@@ -13,10 +13,11 @@ local function dapConfig()
 	sign("DapBreakpointRejected", { text = "", texthl = "DiagnosticError" })
 
 	-- hooks
-	local listener = require("dap").listeners
-	listener.after.event_initialized["dapui_config"] = function() require("dapui").open() end
-	listener.before.event_terminated["dapui_config"] = terminateCallback
-	listener.before.event_exited["dapui_config"] = terminateCallback
+	local listener = require("dap").listeners.before
+	listener.attach.dapui_config = function() require("dapui").open() end
+	listener.launch.dapui_config = function() require("dapui").open() end
+	listener.event_terminated.dapui_config = terminateCallback
+	listener.event_exited.dapui_config = terminateCallback
 
 	-- lualine components
 	local breakpointHl = vim.fn.sign_getdefined("DapBreakpoint")[1].texthl
