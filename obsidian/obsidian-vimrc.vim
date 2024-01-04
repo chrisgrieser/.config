@@ -229,6 +229,10 @@ nnoremap ü <C-x>
 exmap contextualComment obcommand contextual-comments:advanced-comments
 nnoremap qq :contextualComment
 
+" markdown tasks
+exmap checkList obcommand editor:toggle-checklist-status
+nnoremap ,x :checkList
+
 "───────────────────────────────────────────────────────────────────────────────
 " LEADER MAPPINGS
 " the weird mappings are due to an attempts to somewhat imitate my nvim-mappings

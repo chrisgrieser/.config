@@ -7,13 +7,6 @@ local keymap = require("config.utils").uniqueKeymap
 
 --------------------------------------------------------------------------------
 -- META
-local pathOfThisFile = debug.getinfo(1).source:sub(2)
-keymap(
-	"n",
-	"<D-;>",
-	function() vim.cmd.edit(pathOfThisFile) end,
-	{ desc = "⌨️ Edit " .. vim.fs.basename(pathOfThisFile) }
-)
 
 -- Repeat Last Command
 keymap("n", "<leader>r", ":<Up><CR>", { desc = "󰘳 Repeat last cmd", silent = true })
