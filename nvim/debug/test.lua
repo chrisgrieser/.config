@@ -1,4 +1,8 @@
+-- %%
+local undos = vim.fn.undotree().entries
+local ifOfLastUndo = undos[#undos].seq
 
-local author = "Chris Grieser fsfsf"
-local authorInitials = author:find("%s") and author:sub(1, 1) .. author:match("%s(%S)") or author:sub(1, 2)
-vim.notify("🪚 authorInitials: " .. tostring(authorInitials))
+local undoFile = vim.fn.undofile(vim.api.nvim_buf_get_name(0))
+
+local undoContent = vim.cmd.rundo(undoFile)
+vim.notify("🪚 undoContent: " .. tostring(undoContent))
