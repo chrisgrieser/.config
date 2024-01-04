@@ -62,6 +62,9 @@ function update() {
 	# - also updates the homebrew status counter
 	brew services restart sketchybar
 
+	_print-section "DUMP INSTALLS"
+	_dump
+
 	osascript -e 'display notification "" with title "🍺 Homebrew finished." sound name "Blow"'
 }
 
