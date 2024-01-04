@@ -27,8 +27,8 @@ osascript -e '
 '
 
 #───────────────────────────────────────────────────────────────────────────────
+# install dependencies
 
-# install only "production", since the dev-dependencies are on my machine globally
-# installed and only listed in the package.json for documentation purposes
 cd "./shimmering-focus/" || return 1
-npm install --omit=dev
+export npm_config_strict_ssl=false # fix hanging at "sill: idealTree build"
+npm install

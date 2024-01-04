@@ -81,10 +81,6 @@ autocmd("TextYankPost", {
 opt.startofline = true -- motions like "G" also move to the first char
 opt.virtualedit = "block" -- visual-block mode can select beyond end of line
 
-opt.ignorecase = true
-opt.smartcase = true
-opt.inccommand = "split" -- preview incremental commands
-
 opt.showmatch = true -- when closing a bracket, briefly flash the matching one
 opt.matchtime = 1 -- deci-seconds
 
@@ -99,7 +95,7 @@ opt.cursorline = true
 opt.signcolumn = "yes:1"
 
 opt.textwidth = 80 -- mostly set by .editorconfig, therefore only fallback
-opt.colorcolumn = "+1"
+opt.colorcolumn = "+1" -- one more than textwidth
 opt.wrap = false
 
 opt.shortmess:append("sSI") -- reduce info in :messages
@@ -124,6 +120,21 @@ opt.smartindent = true
 opt.expandtab = false -- mostly set by .editorconfig, therefore only fallback
 opt.tabstop = 3
 opt.shiftwidth = 3
+
+--------------------------------------------------------------------------------
+-- SEARCH & SUBSTITUTION
+
+opt.ignorecase = true
+opt.smartcase = true
+opt.inccommand = "split" -- preview incremental commands
+
+-- make `:substitute` also notify how many changes were made
+autocmd("CmdlineLeave", {
+	callback = function()
+		local cmdline = vim.fn.getcmdline()
+		if cmdline:find("s ?/.-/.*/") then vim.cmd(cmdline .. "n") end
+	end,
+})
 
 --------------------------------------------------------------------------------
 -- CMDLINE
