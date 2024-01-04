@@ -66,7 +66,7 @@
 			<key>keyword</key>
 			<string>tt</string>
 			<key>text</key>
-			<string>Lingue: {query}</string>
+			<string>Linguee: {query}</string>
 			<key>url</key>
 			<string>https://www.linguee.com/english-german/search?query={query}</string>
 		</dict>

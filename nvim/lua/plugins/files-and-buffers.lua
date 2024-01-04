@@ -15,19 +15,19 @@ return {
 			require("arrow").setup {
 				show_icons = true,
 				leader_key = "<D-D>", -- cmd+shift+d
-				save_key = vim.loop.cwd,
-				-- saved for syncing purposes
+				-- saved in dotfiles folder for syncing purposes
 				save_path = function() return vim.fn.stdpath("config") .. "/bookmarks" end,
+				save_key = function() return (vim.loop.cwd() or "") .. ".txt" end,
 			}
 		end,
 		keys = {
+			"<D-D>",
 			{ "<D-CR>", function() require("arrow.persist").next() end, desc = "󱡁 Next arrow" },
 			{
 				"<D-d>", -- cmd+d
 				function() require("arrow.persist").toggle() end,
 				desc = "󱡁 Mark/Unmark as arrow",
 			},
-			"<D-D>", 
 		},
 	},
 	{ -- auto-close inactive buffers

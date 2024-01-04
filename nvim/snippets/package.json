@@ -1,126 +1,84 @@
 {
-  "DOCS": [
-    "https://code.visualstudio.com/api/language-extensions/snippet-guide",
-    "https://code.visualstudio.com/docs/editor/userdefinedsnippets",
-    "https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#vs-code"
-  ],
-  "contributes": {
-    "snippets": [
-      {
-        "language": [
-          "all",
-          "plaintext"
-        ],
-        "path": "./global.json"
-      },
-      {
-        "language": [
-          "make"
-        ],
-        "path": "./basic/makefile.json"
-      },
-      {
-        "language": [
-          "markdown"
-        ],
-        "path": "./basic/markdown.json"
-      },
-      {
-        "language": [
-          "python"
-        ],
-        "path": "./basic/python.json"
-      },
-      {
-        "language": [
-          "css",
-          "scss"
-        ],
-        "path": "./basic/css.json"
-      },
-      {
-        "language": [
-          "bash",
-          "zsh",
-          "fish",
-          "sh"
-        ],
-        "path": "./basic/shell.json"
-      },
-      {
-        "language": [
-          "lua"
-        ],
-        "path": "./basic/lua.json"
-      },
-      {
-        "language": [
-          "applescript"
-        ],
-        "path": "./basic/applescript.json"
-      },
-      {
-        "language": [
-          "bib"
-        ],
-        "path": "./basic/bibtex.json"
-      },
-      {
-        "language": [
-          "javascript",
-          "typescript"
-        ],
-        "path": "./basic/javascript.json"
-      },
-      {
-        "language": [
-          "javascript"
-        ],
-        "path": "./basic/jxa.json"
-      },
-      {
-        "language": [
-          "yaml"
-        ],
-        "path": "./basic/yaml.json"
-      },
-      {
-        "language": [
-          "yaml"
-        ],
-        "path": "./project-specific/karabiner-modifications.json"
-      },
-      {
-        "language": [
-          "toml"
-        ],
-        "path": "./project-specific/typos-toml.json"
-      },
-      {
-        "language": [
-          "lua"
-        ],
-        "path": "./project-specific/nvim-lua.json"
-      },
-      {
-        "language": [
-          "typescript"
-        ],
-        "path": "./project-specific/obsidian-plugin-dev.json"
-      },
-      {
-        "language": [
-          "javascript"
-        ],
-        "path": "./project-specific/alfred-jxa.json"
-      },
-      {
-        "language": [
-          "applescript"
-        ],
-        "path": "./project-specific/alfred-applescript.json"
-      }
-    ]
-  },
-  "name": "my-snippets"
+	"DOCS": [
+		"https://code.visualstudio.com/api/language-extensions/snippet-guide",
+		"https://code.visualstudio.com/docs/editor/userdefinedsnippets",
+		"https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#vs-code"
+	],
+	"contributes": {
+		"snippets": [
+			{
+				"language": ["all", "plaintext"],
+				"path": "./global.json"
+			},
+			{
+				"language": ["make"],
+				"path": "./basic/makefile.json"
+			},
+			{
+				"language": ["markdown"],
+				"path": "./basic/markdown.json"
+			},
+			{
+				"language": ["python"],
+				"path": "./basic/python.json"
+			},
+			{
+				"language": ["css", "scss"],
+				"path": "./basic/css.json"
+			},
+			{
+				"language": ["bash", "zsh", "fish", "sh"],
+				"path": "./basic/shell.json"
+			},
+			{
+				"language": ["lua"],
+				"path": "./basic/lua.json"
+			},
+			{
+				"language": ["applescript"],
+				"path": "./basic/applescript.json"
+			},
+			{
+				"language": ["bib"],
+				"path": "./basic/bibtex.json"
+			},
+			{
+				"language": ["javascript", "typescript"],
+				"path": "./basic/javascript.json"
+			},
+			{
+				"language": ["javascript"],
+				"path": "./basic/jxa.json"
+			},
+			{
+				"language": ["yaml"],
+				"path": "./basic/yaml.json"
+			},
+			{
+				"language": ["yaml"],
+				"path": "./project-specific/karabiner-modifications.json"
+			},
+			{
+				"language": ["toml"],
+				"path": "./project-specific/typos-toml.json"
+			},
+			{
+				"language": ["lua"],
+				"path": "./project-specific/nvim-lua.json"
+			},
+			{
+				"language": ["typescript"],
+				"path": "./project-specific/obsidian-plugin-dev.json"
+			},
+			{
+				"language": ["javascript"],
+				"path": "./project-specific/alfred-jxa.json"
+			},
+			{
+				"language": ["applescript"],
+				"path": "./project-specific/alfred-applescript.json"
+			}
+		]
+	},
+	"name": "my-snippets"
 }
