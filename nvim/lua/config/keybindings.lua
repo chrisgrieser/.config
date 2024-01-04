@@ -7,7 +7,6 @@ local keymap = require("config.utils").uniqueKeymap
 
 --------------------------------------------------------------------------------
 -- META
--- test test test
 
 local pathOfThisFile = debug.getinfo(1).source:sub(2)
 keymap(
