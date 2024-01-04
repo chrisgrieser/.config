@@ -1,7 +1,6 @@
 local autocmd = vim.api.nvim_create_autocmd
 local bo = vim.bo
 local cmd = vim.cmd
-local fn = vim.fn
 
 local u = require("config.utils")
 local keymap = require("config.utils").uniqueKeymap
@@ -47,7 +46,7 @@ keymap("n", "<leader>ib", function()
 	local ok, node = pcall(vim.treesitter.get_node)
 	if ok and node then table.insert(out, "node: " .. node:type()) end
 	u.notify("Buffer Information", table.concat(out, "\n"), "trace")
-end, { desc = " Inspect Buffer" })
+end, { desc = "󰽙 Inspect Buffer" })
 
 --------------------------------------------------------------------------------
 -- REFACTORING

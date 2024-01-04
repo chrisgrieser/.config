@@ -14,14 +14,20 @@ return {
 			)
 			require("arrow").setup {
 				show_icons = true,
-				leader_key = "<D-D>",
-				save_key = function() return vim.loop.cwd() end,
-				hide_handbook = true, -- hides cheatsheet
+				leader_key = "<D-D>", -- cmd+shift+d
+				save_key = vim.loop.cwd,
+				-- saved for syncing purposes
+				save_path = function() return vim.fn.stdpath("config") .. "/bookmarks" end,
 			}
 		end,
 		keys = {
 			{ "<D-CR>", function() require("arrow.persist").next() end, desc = "󱡁 Next arrow" },
-			{ "<D-d>", function() require("arrow.persist").toggle() end, desc = "󱡁 Mark/Unmark as arrow" },
+			{
+				"<D-d>", -- cmd+d
+				function() require("arrow.persist").toggle() end,
+				desc = "󱡁 Mark/Unmark as arrow",
+			},
+			"<D-D>", 
 		},
 	},
 	{ -- auto-close inactive buffers
