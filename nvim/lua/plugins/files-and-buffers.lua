@@ -6,15 +6,22 @@ return {
 		"otavioschwanck/arrow.nvim",
 		event = "VeryLazy", -- for status line component
 		config = function()
-			u.addToLuaLine("sections", "lualine_a", require("arrow.statusline").is_on_arrow_file)
+			u.addToLuaLine(
+				"sections",
+				"lualine_a",
+				require("arrow.statusline").text_for_statusline_with_icons,
+				"before"
+			)
 			require("arrow").setup {
 				show_icons = true,
-				leader_key = "<D-d>",
+				leader_key = "<D-D>",
+				save_key = function() return vim.loop.cwd() end,
+				hide_handbook = true, -- hides cheatsheet
 			}
 		end,
 		keys = {
-			"<D-d>",
 			{ "<D-CR>", function() require("arrow.persist").next() end, desc = "󱡁 Next arrow" },
+			{ "<D-d>", function() require("arrow.persist").toggle() end, desc = "󱡁 Mark/Unmark as arrow" },
 		},
 	},
 	{ -- auto-close inactive buffers
