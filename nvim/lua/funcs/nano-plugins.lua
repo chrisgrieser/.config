@@ -29,11 +29,11 @@ function M.cdoSubstitute()
 	end
 
 	vim.cmd("copen 15") -- to preview locations
-	local cmd = (":cdo s/%s//I"):format(quickfixQuery) -- prefill
+	local cmd = (":cdo s/%s//Ig"):format(quickfixQuery) -- prefill
 	vim.api.nvim_feedkeys(cmd, "i", true)
 	-- position cursor in cmdline
-	local left2x = vim.api.nvim_replace_termcodes("<Left><Left>", true, false, true)
-	vim.defer_fn(function() vim.api.nvim_feedkeys(left2x, "i", false) end, 100)
+	local left3x = vim.api.nvim_replace_termcodes("<Left><Left><Left>", true, false, true)
+	vim.defer_fn(function() vim.api.nvim_feedkeys(left3x, "i", false) end, 100)
 
 	vim.api.nvim_create_autocmd("CmdlineLeave", {
 		once = true,
