@@ -132,7 +132,7 @@ opt.inccommand = "split" -- preview incremental commands
 autocmd("CmdlineLeave", {
 	callback = function()
 		local cmdline = vim.fn.getcmdline()
-		if cmdline:find("s ?/.-/.*/") then vim.cmd(cmdline .. "n") end
+		if cmdline:find("s ?/.-/.*/%a*") then vim.cmd(cmdline .. "n") end
 	end,
 })
 

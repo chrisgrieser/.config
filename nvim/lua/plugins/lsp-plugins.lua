@@ -1,4 +1,5 @@
 local u = require("config.utils")
+local kind = vim.lsp.protocol.SymbolKind
 --------------------------------------------------------------------------------
 
 return {
@@ -12,12 +13,8 @@ return {
 			references = { enabled = true, include_declaration = false },
 			definition = { enabled = false },
 			implementation = { enabled = false },
-			kinds = {
-				-- available symbolkinds: https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#symbolKind
-				vim.lsp.protocol.SymbolKind.Function,
-				vim.lsp.protocol.SymbolKind.Method,
-				vim.lsp.protocol.SymbolKind.Object,
-			},
+			-- available symbolkinds: https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#symbolKind
+			kinds = { kind.Function, kind.Method, kind.Object },
 			text_format = function(symbol)
 				if symbol.references == 0 then return "" end
 				return " 󰈿 " .. symbol.references
