@@ -219,14 +219,16 @@ function M.betterTilde()
 		{ ["'"] = '"', ["+"] = "-", ["("] = ")", ["["] = "]", ["{"] = "}", ["<"] = ">" }
 	local col = vim.fn.col(".") -- fn.col correctly considers tab-indentation
 	local charUnderCursor = vim.api.nvim_get_current_line():sub(col, col)
-	local isLetter = charUnderCursor:lower() ~= charUnderCursor:upper() -- so it works with diacritics
-	if isLetter then
-		normal("v~") -- (`v~` instead of `~h` so dot-repetition also doesn't move the cursor)
+
+	local changeTo
+	for left, right in pairs(toggleSigns) do
+		if charUnderCursor == left then changeTo = right end
+		if charUnderCursor == right then changeTo = left end
+	end
+	if changeTo then
+		normal("r" .. changeTo)
 	else
-		for left, right in pairs(toggleSigns) do
-			if charUnderCursor == left then normal("r" .. right) end
-			if charUnderCursor == right then normal("r" .. left) end
-		end
+		normal("v~") -- (`v~` instead of `~h` so dot-repetition also doesn't move the cursor)
 	end
 end
 

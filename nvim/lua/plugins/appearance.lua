@@ -48,7 +48,7 @@ return {
 		opts = {
 			winblend = 10, -- little transparency, hard to see in many themes otherwise
 			handlers = {
-				cursor = { enable = false },
+				cursor = { enable = true },
 				marks = { enable = false }, -- FIX mark-related error message
 				quickfix = { enable = true, signs = { "·", ":", "󰇙" } },
 			},
