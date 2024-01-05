@@ -4,7 +4,7 @@ local u = require("config.utils")
 return {
 	{ -- lightweight git client
 		"chrisgrieser/nvim-tinygit",
-		event = "VeryLazy", -- delay loading status line component a bit
+		event = "VeryLazy", -- load for status line component
 		ft = "gitrebase", -- so ftplugin is loaded
 		keys = {
 			-- stylua: ignore start
