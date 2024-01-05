@@ -37,6 +37,12 @@ local function quickfixCounter()
 	return (' %s/%s "%s"'):format(qf.idx, #qf.items, qf.title) .. fileStr
 end
 
+local function bufferLinesOfCode()
+	local lineCount = vim.api.nvim_buf_line_count(0)
+	if lineCount < 100 then return "" end
+	return lineCount .. " "
+end
+
 --------------------------------------------------------------------------------
 
 -- Never show tabline, since we are showing it ourself on the winbar
@@ -49,6 +55,17 @@ local lualineConfig = {
 		lualine_b = {
 			-- using lualine's tabbar, cause it looks much better than vim's
 			{ "tabs", mode = 1, cond = function() return vim.fn.tabpagenr("$") > 1 end },
+		},
+		lualine_c = {
+			{ -- clock if fullscreen (longer than 110 columns)
+				"datetime",
+				style = "%H:%M",
+				cond = function() return vim.o.columns > 110 end,
+				fmt = function(time)
+					local timeWithBlinkingColon = os.time() % 2 == 0 and time or time:gsub(":", " ")
+					return "󰅐 " .. timeWithBlinkingColon
+				end,
+			},
 		},
 	},
 	sections = {
@@ -94,19 +111,11 @@ local lualineConfig = {
 		},
 		lualine_y = {
 			{ "diff" },
+			{ bufferLinesOfCode },
 		},
 		lualine_z = {
 			{ "selectioncount", fmt = function(str) return str ~= "" and "礪" .. str or "" end },
 			{ "location" },
-			{
-				"datetime",
-				style = "%H:%M",
-				cond = function() return vim.o.columns > 110 end,
-				fmt = function(time)
-					local timeWithBlinkingColon = os.time() % 2 == 0 and time or time:gsub(":", " ")
-					return "󰅐 " .. timeWithBlinkingColon
-				end,
-			},
 			{
 				function() return "" end,
 				cond = function() return vim.fn.has("gui_running") == 1 end, -- glyph not supported by wezterm yet

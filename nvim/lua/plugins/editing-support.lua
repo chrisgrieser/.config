@@ -163,6 +163,16 @@ return {
 			allow_interline_swaps = true,
 			interline_swaps_without_separator = false,
 		},
+		init = function ()
+			-- in markdown, move words
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "markdown",
+				callback = function()
+					vim.keymap.set("n", "ä", '"zdawel"zph', { buffer = true })
+					vim.keymap.set("n", "Ä", '"zdawbh"zph', { buffer = true })
+				end,
+			})
+		end,
 		keys = {
 			-- stylua: ignore start
 			{ "ä", function() require("sibling-swap").swap_with_right() end, desc = "󰔰 Move Node Right" },
