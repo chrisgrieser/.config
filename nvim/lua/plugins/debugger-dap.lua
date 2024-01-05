@@ -8,11 +8,12 @@ local function dapConfig()
 	local sign = vim.fn.sign_define
 	local hintBg = u.getHighlightValue("DiagnosticVirtualTextHint", "bg")
 	vim.api.nvim_set_hl(0, "DapBreak", { bg = hintBg })
+
 	sign("DapStopped", { text = "", texthl = "DiagnosticHint", linehl = "DapBreak" })
 	sign("DapBreakpoint", { text = "", texthl = "DiagnosticInfo" })
 	sign("DapBreakpointRejected", { text = "", texthl = "DiagnosticError" })
 
-	-- hooks
+	-- auto-open/close the dap-ui
 	local listener = require("dap").listeners.before
 	listener.attach.dapui_config = function() require("dapui").open() end
 	listener.launch.dapui_config = function() require("dapui").open() end
