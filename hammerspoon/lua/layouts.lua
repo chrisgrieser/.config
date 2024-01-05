@@ -5,8 +5,9 @@ local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local visuals = require("lua.visuals")
 local wu = require("lua.window-utils")
-local wf = hs.window.filter
 local privatCloser = require("lua.private").closer
+
+local wf = hs.window.filter
 
 --------------------------------------------------------------------------------
 -- HELPERS
@@ -146,10 +147,10 @@ M.wf_appsOnMouseScreen = wf.new({
 	local screenOfWindow = newWin:screen()
 	if not (mouseScreen and env.isProjector() and app) then return end
 
-	u.runWithDelays({ 0, 0.3 }, function()
+	u.runWithDelays({ 0, 0.2 }, function()
 		if mouseScreen:name() == screenOfWindow:name() then return end
 		newWin:moveToScreen(mouseScreen)
-		wu.moveResize(newWin, wu.maximized)
+		if app:name() ~= env.todoApp then wu.moveResize(newWin, wu.maximized) end
 	end)
 end)
 
