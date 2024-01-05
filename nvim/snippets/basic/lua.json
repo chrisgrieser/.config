@@ -6,6 +6,7 @@
       "---@field ${3:field_name} string"
     ],
     "description": "https://github.com/LuaLS/lua-language-server/wiki/Annotations#class",
+    "filetype": "lua",
     "prefix": "@class (LuaDoc)"
   },
   "@type (LuaDoc)": {
@@ -29,6 +30,7 @@
       "\ttable.insert(${1:matches}, match)",
       "end"
     ],
+    "filetype": "lua",
     "prefix": "find all in string"
   },
   "for each (list)": {
@@ -112,6 +114,7 @@
       "\treturn content, true",
       "end"
     ],
+    "filetype": "lua",
     "prefix": "read file"
   },
   "safe require": {
