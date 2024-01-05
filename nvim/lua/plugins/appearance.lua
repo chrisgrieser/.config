@@ -206,11 +206,7 @@ return {
 					if kind == "codeaction" then return { builtin = { relative = "cursor" } } end
 
 					-- complex selectors: use telescope
-					if
-						kind == "mason.ui.language-filter"
-						or kind:find("^tinygit")
-						or kind:find("^nvim%-scissors")
-					then
+					if kind == "mason.ui.language-filter" or kind:find("^tinygit") then
 						return { backend = "telescope" }
 					end
 				end,

@@ -214,7 +214,6 @@ return {
 				keymaps = { delete = "<D-BS>" },
 			},
 			jsonFormatter = "yq",
-			picker = "telescope",
 		},
 	},
 }
