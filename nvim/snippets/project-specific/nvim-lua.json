@@ -13,17 +13,6 @@
     ],
     "prefix": "autocmd"
   },
-  "autocmd (FileType)": {
-    "body": [
-      "vim.api.nvim_create_autocmd(\"FileType\", {",
-      "\tpattern = \"${1:ft}\",",
-      "\tcallback = function()",
-      "\t\t$0",
-      "\tend,",
-      "})"
-    ],
-    "prefix": "autocmd (FileType)"
-  },
   "check if file exists": {
     "body": "local fileExists = vim.loop.fs_stat(\"${1:filepath}\") ~= nil",
     "prefix": "check if file exists"
