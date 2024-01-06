@@ -55,6 +55,7 @@
   },
   "home": {
     "body": "os.getenv(\"HOME\")",
+    "filetype": "lua",
     "prefix": "home"
   },
   "if .. then .. else": {
