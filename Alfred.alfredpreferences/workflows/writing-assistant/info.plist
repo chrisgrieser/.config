@@ -534,7 +534,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>note</key>
-			<string>call openAI (requires node)</string>
+			<string>OpenAI API Call</string>
 			<key>xpos</key>
 			<real>345</real>
 			<key>ypos</key>
