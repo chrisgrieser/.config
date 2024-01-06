@@ -36,9 +36,10 @@ local function dapConfig()
 			return breakpointIcon .. tostring(breakpointSum)
 		end,
 	})
-	u.addToLuaLine("sections", "lualine_x", function()
+	u.addToLuaLine("winbar", "lualine_z", function()
 		local dapStatus = require("dap").status()
-		return dapStatus ~= "" and "  " .. dapStatus or ""
+		if dapStatus == "" then return "" end
+		return "  " .. dapStatus
 	end)
 	require("config.theme-customization").reloadTheming()
 end

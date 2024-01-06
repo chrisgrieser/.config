@@ -129,10 +129,11 @@ opt.smartcase = true
 opt.inccommand = "split" -- preview incremental commands
 
 -- make `:substitute` also notify how many changes were made
+-- works, as `CmdlineLeave` is triggered before the execution of the command
 autocmd("CmdlineLeave", {
 	callback = function()
 		local cmdline = vim.fn.getcmdline()
-		if cmdline:find("s ?/.-/.*/%a*") then vim.cmd(cmdline .. "n") end
+		if cmdline:find("s ?/.-/.*/%a*$") then vim.cmd(cmdline .. "n") end
 	end,
 })
 

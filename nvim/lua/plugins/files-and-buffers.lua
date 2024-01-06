@@ -35,6 +35,7 @@ return {
 		event = "VeryLazy",
 		opts = {
 			retirementAgeMins = 10,
+			minimumBufferNum = 4, -- 3 or fewer never closed
 			ignoreUnsavedChangesBufs = false,
 			notificationOnAutoClose = true,
 			deleteBufferWhenFileDeleted = true,
