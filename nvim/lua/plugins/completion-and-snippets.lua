@@ -158,7 +158,7 @@ return {
 		event = { "InsertEnter", "CmdlineEnter" },
 		config = cmpconfig,
 		dependencies = {
-			{ "chrisgrieser/cmp-emoji", branch = "dev" }, -- PENDING https://github.com/hrsh7th/cmp-emoji/pull/9
+			"chrisgrieser/cmp-emoji", -- fork, has fix for suggestions after quote char
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
 			"tamago324/cmp-zsh", -- some shell completions

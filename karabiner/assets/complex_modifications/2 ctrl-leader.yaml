@@ -305,7 +305,7 @@ rules:
         from: { key_code: t }
         conditions: [*leader-active]
         to:
-          - shell_command: open 'https://web.telegram.org/a/'
+          - shell_command: open 'https://web.telegram.org/'
           - *deactivate-leader
           - *remove-notice
       # m[e]ssenger

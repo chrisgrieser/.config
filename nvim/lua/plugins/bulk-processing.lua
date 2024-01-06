@@ -48,6 +48,7 @@ return {
 			{"<leader>fe", function() require("refactoring").refactor("Extract Variable") end, mode = "x", desc = "󱗘 Extract Var" },
 			{"<leader>fI", function() require("refactoring").refactor("Inline Function") end, desc = "󱗘 Inline Func" },
 			{"<leader>fE", function() require("refactoring").refactor("Extract Function") end, mode = "x", desc = "󱗘 Extract Func" },
+			{"<leader>fF", function() require("refactoring").refactor("Extract Function To File") end, mode = "x", desc = "󱗘 Extract Func to File" },
 			-- stylua: ignore end
 		},
 	},
