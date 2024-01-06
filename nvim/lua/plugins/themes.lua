@@ -11,7 +11,7 @@ local lightThemes = {
 }
 
 local darkThemes = {
-	-- "HoNamDuong/hybrid.nvim",
+	"HoNamDuong/hybrid.nvim",
 	-- "rebelot/kanagawa.nvim",
 	-- "fynnfluegge/monet.nvim",
 	-- { "navarasu/onedark.nvim", opts = { style = "warm" } },
