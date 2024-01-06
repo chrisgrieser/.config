@@ -74,7 +74,7 @@ return {
 				dapSharedKeymaps = true,
 				performanceOpts = { countThreshold = 10 },
 			}
-			u.addToLuaLine("sections", "lualine_c", require("recorder").recordingStatus)
+			u.addToLuaLine("winbar", "lualine_z", require("recorder").recordingStatus)
 			u.addToLuaLine("sections", "lualine_y", require("recorder").displaySlots)
 		end,
 	},

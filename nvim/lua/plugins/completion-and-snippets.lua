@@ -24,7 +24,6 @@ local defaultSources = {
 local sourceIcons = {
 	buffer = "󰽙",
 	cmdline = "󰘳",
-	cmdline_history = "󰋚",
 	emoji = "󰞅",
 	luasnip = "",
 	nvim_lsp = "󰒕",
@@ -140,7 +139,6 @@ local function cmpconfig()
 		sources = cmp.config.sources {
 			{ name = "path" },
 			{ name = "cmdline" },
-			{ name = "cmdline_history" },
 		},
 	})
 
@@ -148,7 +146,6 @@ local function cmpconfig()
 		mapping = cmp.mapping.preset.cmdline(),
 		sources = {
 			{ name = "buffer", max_item_count = 2, keyword_length = 2 },
-			{ name = "cmdline_history", max_item_count = 2, keyword_length = 2 },
 		},
 	})
 end
@@ -164,7 +161,6 @@ return {
 			{ "chrisgrieser/cmp-emoji", branch = "dev" }, -- PENDING https://github.com/hrsh7th/cmp-emoji/pull/9
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
-			"dmitmel/cmp-cmdline-history",
 			"tamago324/cmp-zsh", -- some shell completions
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-nvim-lsp", -- LSP input
