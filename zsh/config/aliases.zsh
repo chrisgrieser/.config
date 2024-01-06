@@ -16,6 +16,15 @@ alias curl='curl --progress-bar'
 alias make='make --silent --warn-undefined-variables'
 alias jless='jless --no-line-numbers'
 
+function tokei {
+	cmd tokei --compact --exclude="*.txt" "$@" |
+		sed -e 's/=/─/g' \
+			-e 's/Lua   /  Lua/' \
+			-e 's/Markdown   /  Markdown/' \
+			-e 's/Markdown   /  Markdown/' \
+
+}
+
 # colorized & showing all
 function which { builtin which -a "$@" | bat --language=sh; }
 
