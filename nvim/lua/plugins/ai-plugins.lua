@@ -43,7 +43,7 @@ return {
 					local status = vim.g.codeium_enabled and "enabled" or "disabled"
 					u.notify("Codium", "󰚩 Suggestions " .. status .. ".")
 				end,
-				desc = "󰚩 Toggle Codium",
+				desc = "󰚩 Codium Suggestions",
 			}
 		},
 		config = function()
