@@ -174,7 +174,8 @@ local function telescopeConfig()
 			dynamic_preview_title = true,
 			preview = { timeout = 400, filesize_limit = 1 }, -- ms & Mb
 			borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-			-- { "═", "║", "═", "║", "╔", "╗", "╝", "╚" }, { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+			-- { "═", "║", "═", "║", "╔", "╗", "╝", "╚" }
+			-- { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
 			default_mappings = { i = keymappings_I, n = keymappings_N },
 			sorting_strategy = "ascending", -- so layout is consistent with prompt_position "top"
 			layout_strategy = "horizontal",
