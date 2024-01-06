@@ -21,7 +21,10 @@ function tokei {
 		sed -e 's/=/─/g' \
 			-e 's/Lua   /  Lua/' \
 			-e 's/Markdown   /  Markdown/' \
-			-e 's/Markdown   /  Markdown/' \
+			-e 's/JavaScript   /󰌞  JavaScript/' \
+			-e 's/TypeScript   /  TypeScript/' \
+			-e 's/Python   /  Python/' \
+			-e 's/Shell   /  Shell/' \
 
 }
 
