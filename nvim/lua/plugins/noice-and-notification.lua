@@ -13,7 +13,7 @@ end
 -- DOCS https://github.com/folke/noice.nvim#-routes
 local routes = {
 	-- redirect to popup when message is long
-	{ filter = { min_height = 8 }, view = "popup" },
+	{ filter = { min_height = 10 }, view = "popup" },
 
 	-- write/deletion messages
 	{ filter = { event = "msg_show", find = "%d+B written$" }, view = "mini" },
@@ -41,7 +41,7 @@ local routes = {
 	{ -- nvim-early-retirement
 		filter = {
 			event = "notify",
-			cond = function(msg) return msg.opts and msg.opts.title == "Auto-Closing Buffer" end,
+			cond = function(msg) return msg.opts and msg.opts.title == "nvim-early-retirement" end,
 		},
 		view = "mini",
 	},

@@ -1,4 +1,4 @@
-# INFO leading space to ignore it in history due to HIST_IGNORE_SPACE
+# INFO leading space to ignore it in history due to `HIST_IGNORE_SPACE`
 alias r=' exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
 alias q=' exit'
 alias cmd='command'
@@ -16,16 +16,17 @@ alias curl='curl --progress-bar'
 alias make='make --silent --warn-undefined-variables'
 alias jless='jless --no-line-numbers'
 
+# add nerdfont icons and default settings
 function tokei {
 	cmd tokei --compact --exclude="*.txt" "$@" |
 		sed -e 's/=/─/g' \
 			-e 's/Lua   /  Lua/' \
 			-e 's/Markdown   /  Markdown/' \
+			-e 's/JSON   /  JSON/' \
 			-e 's/JavaScript   /󰌞  JavaScript/' \
 			-e 's/TypeScript   /  TypeScript/' \
 			-e 's/Python   /  Python/' \
-			-e 's/Shell   /  Shell/' \
-
+			-e 's/Shell   /  Shell/'
 }
 
 # colorized & showing all
@@ -38,7 +39,7 @@ function bat {
 	command bat --theme="$theme" "$@"
 }
 
-# misc
+# utils
 alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
 alias prose='ssh nanotipsforvim@prose.sh'
 alias bkp='zsh "$HOME/.config/+ utility-scripts/full-backup.sh"'
@@ -50,11 +51,11 @@ alias bkp-repos='zsh "$HOME/.config/+ utility-scripts/backup-my-repos.sh"'
 # GLOBAL ALIAS (to be used at the end, mostly)
 alias -g G='| rg'
 alias -g B='| bat'
-alias -g C='| pbcopy ; echo "Copied."' # copy
-alias -g N='| wc -l | tr -d " "'       # count lines
+alias -g N='| wc -l | tr -d " "' # count lines
 alias -g L='| less'
 alias -g J='| jless'
-alias P='pbpaste'
+alias -g C='| pbcopy ; echo "Copied."' # copy
+alias P='pbpaste'                      # paste
 
 # highlights for them
 ZSH_HIGHLIGHT_REGEXP+=(' G($| )' 'fg=magenta,bold')

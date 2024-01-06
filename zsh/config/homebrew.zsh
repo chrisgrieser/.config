@@ -41,7 +41,7 @@ function _dump() {
 		grep -v "Temp" | sed "s|^|https://chrome.google.com/webstore/detail/|" \
 		>"$dump_path/browser-extensions.txt"
 
-	echo "Brewfile, and list of browser extensions dumped at \"$dump_path\""
+	echo "Brewfile & browser-extensions-list dumped at \"$dump_path\""
 }
 
 function update() {
