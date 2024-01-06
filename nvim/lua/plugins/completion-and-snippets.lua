@@ -7,6 +7,7 @@ local defaultSources = {
 	{
 		name = "buffer",
 		option = {
+			-- use all buffers, instead of just the current one
 			get_bufnrs = function()
 				local allBufs = vim.fn.getbufinfo { buflisted = 1 }
 				local allBufNums = vim.tbl_map(function(buf) return buf.bufnr end, allBufs)
@@ -111,7 +112,7 @@ local function cmpconfig()
 	-----------------------------------------------------------------------------
 
 	-- LUA
-	-- disable annoying --#region suggestions
+	-- disable annoying `--#region` suggestions
 	cmp.setup.filetype("lua", {
 		enabled = function()
 			local line = vim.api.nvim_get_current_line()
@@ -125,7 +126,7 @@ local function cmpconfig()
 	table.insert(defaultPlusZsh, { name = "zsh" })
 	cmp.setup.filetype({ "sh", "make" }, {
 		sources = cmp.config.sources(defaultPlusZsh),
-		-- disable useless `\[` suggestions at end of line
+		-- disable `\[` suggestions at EoL
 		enabled = function()
 			local col = vim.fn.col(".") - 1
 			local charBefore = vim.api.nvim_get_current_line():sub(col, col)
@@ -145,7 +146,7 @@ local function cmpconfig()
 	cmp.setup.cmdline({ "/", "?" }, {
 		mapping = cmp.mapping.preset.cmdline(),
 		sources = {
-			{ name = "buffer", max_item_count = 2, keyword_length = 2 },
+			{ name = "buffer", max_item_count = 3, keyword_length = 2 },
 		},
 	})
 end
@@ -204,8 +205,8 @@ return {
 		},
 		opts = {
 			editSnippetPopup = {
-				height = 0.4, -- between 0-1
-				width = 0.9,
+				height = 0.45, -- between 0-1
+				width = 0.7,
 				border = vim.g.myBorderStyle,
 				keymaps = { delete = "<D-BS>" },
 			},
