@@ -1,6 +1,5 @@
 local u = require("config.utils")
 local textobj = require("config.utils").textobjMaps
-
 --------------------------------------------------------------------------------
 
 return {
@@ -67,13 +66,13 @@ return {
 			},
 			{
 				"cq",
-				function ()
+				function()
 					vim.cmd.TSTextobjectSelect("@comment.outer")
 					u.normal("d")
 					local comStr = vim.bo.commentstring:format("")
 					local line = vim.api.nvim_get_current_line():gsub("%s+$", "")
 					vim.api.nvim_set_current_line(line .. " " .. comStr)
-					vim.cmd.startinsert{ bang = true }
+					vim.cmd.startinsert { bang = true }
 				end,
 				desc = " Change Comment",
 			},
