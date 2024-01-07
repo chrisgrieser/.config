@@ -40,7 +40,7 @@ M.timer_hourlyNotice = hs.timer
 		local isFullHour = os.date("%M") == "00"
 		if isFullHour and u.screenIsUnlocked() and u.betweenTime(8, 23) and not env.isProjector() then
 			local hour = tostring(os.date("%H:%M"))
-			hs.alert(hour, 0.5)
+			hs.alert(hour, 1)
 		end
 	end)
 	:start()
@@ -97,7 +97,7 @@ M.timer_sleepAutoVideoOff = hs.timer
 		if not (isNight and isIdle and u.screenIsUnlocked()) then return end
 
 		local alertMsg = ("💤 Will sleep in %ss if idle."):format(config.timeToReactSecs)
-		hs.alert(alertMsg, nil, nil, 4)
+		hs.alert(alertMsg, 4)
 		u.runWithDelays(config.timeToReactSecs, function()
 			-- GUARD
 			local userDidSth = hs.host.idleTime() < config.timeToReactSecs

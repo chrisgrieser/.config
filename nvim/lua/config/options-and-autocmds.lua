@@ -133,7 +133,9 @@ opt.inccommand = "split" -- preview incremental commands
 autocmd("CmdlineLeave", {
 	callback = function()
 		local cmdline = vim.fn.getcmdline()
-		if cmdline:find("s ?/.-/.*/%a*$") then vim.cmd(cmdline .. "n") end
+		local isSubstitution = cmdline:find("s ?/.-/.*/%a*$")
+		local isMultiFileCmd = cmdline:find("^cdo") or cmdline:find("^bufdo !")
+		if isSubstitution and not isMultiFileCmd then vim.cmd(cmdline .. "n") end
 	end,
 })
 
