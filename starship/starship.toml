@@ -14,7 +14,7 @@ $character\
 
 right_format = """\
 $cmd_duration\
-${custom.lines_of_code}\
+${custom.tokei_loc}\
 ${custom.alfred}$python$nodejs\
 """
 
@@ -123,8 +123,8 @@ format = '(\([(+$added)]($added_style)/[(-$deleted)]($deleted_style)\)) '
 #───────────────────────────────────────────────────────────────────────────────
 # RIGHT SIDE
 
-[custom.lines_of_code]
-description = "Number of lines of code in the current project using tokei"
+[custom.tokei_loc]
+description = "Number of lines of code in the current project using tokei (for performance)."
 command = "tokei --compact --exclude='*.txt' --num-format='commas' | tail -n2 | awk 'NR==1 {print $3}'"
 when = "[[ -f Makefile ]] || [[ -f info.plist ]] || [[ -d .git ]]"
 format = '  [$output ]($style)'
