@@ -2,6 +2,11 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
+	{ -- automatically set correct indent for file
+		"nmac427/guess-indent.nvim",
+		event = "BufReadPre",
+		opts = { override_editorconfig = false },
+	},
 	{ -- Comments
 		"echasnovski/mini.comment",
 		-- works better with treesitter than "numToStr/Comment.nvim"
@@ -15,7 +20,7 @@ return {
 				comment = "q",
 				comment_line = "qq",
 				comment_visual = "q",
-				textobject = "u", -- multi-line multi-line
+				textobject = "u", -- multi-line comment
 			},
 		},
 	},
