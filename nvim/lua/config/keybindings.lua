@@ -330,6 +330,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
+-- GIT-MODE
 
 ---HACK using replace-mode as a fake-git-mode since (simplified version of hydra.nvim)
 ---@param key string
