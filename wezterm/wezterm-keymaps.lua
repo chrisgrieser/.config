@@ -37,7 +37,7 @@ return {
 	{
 		key = "PageDown",
 		action = wt.action_callback(function(win, pane)
-			if pane:is_alt_screen_active() then
+			if pane:is_alt_screen_active() then -- TUI
 				win:perform_action(wt.action.SendKey { key = "PageDown" }, pane)
 			else
 				win:perform_action(wt.action.ScrollByPage(0.8), pane)
@@ -115,10 +115,17 @@ return {
 			label = "Copy Shell Option",
 		},
 	},
-	-- cmd+, -> open this config file
-	{
+	{ -- cmd+, -> open the config file
 		key = ",",
 		mods = "CMD",
 		action = actFun(function() wt.open_with(wt.config_file) end),
+	},
+	{ -- cmd+shift+, -> open the keybindings file (this file)
+		key = ";",
+		mods = "CMD|SHIFT",
+		action = actFun(function()
+			local configDir = wt.config_file:gsub("wezterm%.lua$", "")
+			wt.open_with(configDir .. "wezterm-keymaps.lua")
+		end),
 	},
 }

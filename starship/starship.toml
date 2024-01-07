@@ -122,6 +122,12 @@ format = '(\([(+$added)]($added_style)/[(-$deleted)]($deleted_style)\)) '
 #───────────────────────────────────────────────────────────────────────────────
 # RIGHT SIDE
 
+[custom.lines_of_code]
+description = "Number of lines of code in the current working directory"
+command = "find . -mindepth 1 -maxdepth 1 -not -name '.git' -not -name '.DS_Store' -not -name 'Icon?' | xargs wc -l | sed 's/^ *//'"
+when = "[[ -f .luarc.json ]] || [[ -f ../info.plist ]]"
+symbol = " "
+
 [cmd_duration]
 min_time = 2000
 format = "[󰔟  $duration](bold cyan)"

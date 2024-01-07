@@ -25,7 +25,7 @@ local function quickfixCounter()
 	if #qf.items == 0 then return "" end
 
 	local qfBuffers = vim.tbl_map(function(item) return item.bufnr end, qf.items)
-	local fileCount = #vim.fn.uniq(qfBuffers) -- qfBuffers already sorted
+	local fileCount = #vim.fn.uniq(qfBuffers) -- qf-Buffers are already sorted
 	local fileStr = fileCount > 1 and (" 「%s  」"):format(fileCount) or ""
 
 	qf.title = qf
@@ -142,6 +142,6 @@ local lualineConfig = {
 return {
 	"nvim-lualine/lualine.nvim",
 	event = "UIEnter",
-	dependencies = { "nvim-tree/nvim-web-devicons" },
+	dependencies = "nvim-tree/nvim-web-devicons",
 	opts = lualineConfig,
 }
