@@ -41,7 +41,7 @@ local routes = {
 	{ -- nvim-early-retirement
 		filter = {
 			event = "notify",
-			cond = function(msg) return msg.opts and msg.opts.title == "nvim-early-retirement" end,
+			cond = function(msg) return msg.opts and msg.opts.title == "early-retirement" end,
 		},
 		view = "mini",
 	},
