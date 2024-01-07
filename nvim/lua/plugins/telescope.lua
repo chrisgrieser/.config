@@ -490,7 +490,12 @@ return {
 					vim.api.nvim_create_autocmd("FileType", {
 						pattern = "TelescopeResults",
 						once = true, -- do not affect other Telescope windows
-						callback = function(ctx) vim.bo[ctx.buf].ft = currentFt end,
+						callback = function(ctx)
+							vim.bo[ctx.buf].ft = currentFt
+							local ns = vim.api.nvim_create_namespace("telescope-import")
+							vim.api.nvim_win_set_hl_ns(0, ns)
+							vim.api.nvim_set_hl(ns, "TelescopeMatching", { reverse = true })
+						end,
 					})
 					telescope("import")
 				end,
