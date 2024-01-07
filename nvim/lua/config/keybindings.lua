@@ -293,7 +293,6 @@ keymap(
 	function() require("funcs.nano-plugins").openAtRegex101() end,
 	{ desc = " Open in regex101" }
 )
-
 ------------------------------------------------------------------------------
 -- MAC-SPECIFIC-KEYBINDINGS
 
@@ -350,11 +349,9 @@ local function gitModeMap(key, action)
 end
 
 gitModeMap("a", function() vim.cmd.Gitsigns("stage_hunk") end)
-gitModeMap("u", function() vim.cmd.Gitsigns("undo_stage_hunk") end)
-gitModeMap("r", function() vim.cmd.Gitsigns("reset_hunk") end)
+gitModeMap("A", function() vim.cmd.Gitsigns("undo_stage_hunk") end)
+gitModeMap("u", function() vim.cmd.Gitsigns("reset_hunk") end)
 gitModeMap("n", function() require("gitsigns").next_hunk { foldopen = true } end)
 gitModeMap("N", function() require("gitsigns").prev_hunk { foldopen = true } end)
-gitModeMap("c", function() require("tinygit").smartCommit { pushIfClean = true } end)
-gitModeMap("C", function() require("tinygit").smartCommit { pushIfClean = false } end)
-gitModeMap("i", function() require("tinygit").issuesAndPrs { state = "open" } end)
-gitModeMap("m", function() require("tinygit").amendNoEdit { forcePushIfDiverged = true } end)
+gitModeMap("c", function() require("tinygit").smartCommit { pushIfClean = false } end)
+gitModeMap("p", function() require("tinygit").push { pullBefore = true } end)

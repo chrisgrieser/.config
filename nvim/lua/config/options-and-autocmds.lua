@@ -239,7 +239,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function(ctx)
 		-- GUARD
 		local bufPath = ctx.file
-		local specialBuffer = vim.bo[ctx.buf].buftype ~= ""
+		local specialBuffer = vim.api.nvim_buf_get_option(ctx.buf, "buftype") ~= ""
 		local exists = vim.loop.fs_stat(bufPath) ~= nil
 		if specialBuffer or not exists then return end
 

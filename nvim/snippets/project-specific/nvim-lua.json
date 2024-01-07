@@ -42,6 +42,15 @@
     ],
     "prefix": "dedent"
   },
+  "defer": {
+    "body": [
+      "vim.defer_fn(function ()",
+      "\t$1",
+      "end, ${2:1})"
+    ],
+    "filetype": "lua",
+    "prefix": "defer"
+  },
   "keymap": {
     "body": "keymap(\"n\", \"${1:lhs}\", \"${2:rhs}\", { desc = \"${3:description}\" })",
     "filetype": "lua",

@@ -82,12 +82,20 @@ local function cmpconfig()
 					fallback()
 				end
 			end, { "i", "s" }),
-			-- Jumping to next location
+			-- cmd+j: Jump to next location
 			["<D-j>"] = cmp.mapping(function(_)
 				if require("luasnip").locally_jumpable(1) then
 					require("luasnip").jump(1)
 				else
-					vim.notify("No more jumps.", vim.log.levels.WARN, { title = "Luasnip" })
+					u.notify("Luasnip", "No more jumps.", "warn")
+				end
+			end, { "i", "s" }),
+			-- cmd+shift+j: prev location
+			["<D-J>"] = cmp.mapping(function(_)
+				if require("luasnip").locally_jumpable(-1) then
+					require("luasnip").jump(-1)
+				else
+					u.notify("Luasnip", "No more jumps.", "warn")
 				end
 			end, { "i", "s" }),
 		},
@@ -208,7 +216,11 @@ return {
 				height = 0.45, -- between 0-1
 				width = 0.7,
 				border = vim.g.myBorderStyle,
-				keymaps = { delete = "<D-BS>" },
+				keymaps = {
+					delete = "<D-BS>",
+					openInFile = "<D-o>",
+					insertNextToken = "<D-t>",
+				},
 			},
 			jsonFormatter = "yq",
 		},
