@@ -53,6 +53,7 @@ return {
 	{ -- git sign gutter & hunk actions
 		"lewis6991/gitsigns.nvim",
 		event = "VeryLazy",
+		cmd = "Gitsigns",
 		keys = {
 			{ "ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 Stage Hunk" },
 			{

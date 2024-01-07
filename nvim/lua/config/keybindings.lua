@@ -331,25 +331,29 @@ vim.api.nvim_create_autocmd("FileType", {
 
 --------------------------------------------------------------------------------
 
----HACK using replace-mode as a fake-git-mode since
+---HACK using replace-mode as a fake-git-mode since (simplified version of hydra.nvim)
 ---@param key string
----@param gitsignsAction string
-local function gitModeWrapper(key, gitsignsAction)
+---@param action function
+local function gitModeMap(key, action)
+	-- needs to check for `R` in `mode()` since there is no `rmap`
 	vim.keymap.set("i", key, function()
-		if vim.fn.mode() == "R" then
-			vim.cmd.stopinsert()
-			vim.defer_fn(function ()
-				vim.cmd.Gitsigns(gitsignsAction)
-				vim.cmd.startreplace()
-			end, 100)
-		else
-			return key
-		end
+		if vim.fn.mode() ~= "R" then return key end
+
+		-- temporarily pause replace mode, since functions do not work here
+		vim.cmd.stopinsert() -- also stops replace mode
+		vim.defer_fn(function()
+			action()
+			vim.cmd.startreplace()
+		end, 1)
 	end, { expr = true })
 end
 
-gitModeWrapper("a", "stage_hunk")
-gitModeWrapper("u", "undo_stage_hunk")
-gitModeWrapper("r", "reset_hunk")
-gitModeWrapper("n", "next_hunk")
-gitModeWrapper("N", "prev_hunk")
+gitModeMap("a", function() vim.cmd.Gitsigns("stage_hunk") end)
+gitModeMap("u", function() vim.cmd.Gitsigns("undo_stage_hunk") end)
+gitModeMap("r", function() vim.cmd.Gitsigns("reset_hunk") end)
+gitModeMap("n", function() require("gitsigns").next_hunk { foldopen = true } end)
+gitModeMap("N", function() require("gitsigns").prev_hunk { foldopen = true } end)
+gitModeMap("c", function() require("tinygit").smartCommit { pushIfClean = true } end)
+gitModeMap("C", function() require("tinygit").smartCommit { pushIfClean = false } end)
+gitModeMap("i", function() require("tinygit").issuesAndPrs { state = "open" } end)
+gitModeMap("m", function() require("tinygit").amendNoEdit { forcePushIfDiverged = true } end)
