@@ -114,3 +114,12 @@ _lc() {
 	compadd "${expl[@]}" -Q -l -d _last_cmds -a _values
 }
 compdef _lc lc
+
+#───────────────────────────────────────────────────────────────────────────────
+
+function loc {
+	find . -type f -not -path '*/.*' -not -path './doc/*' -not -path '*.app/*' -print0 |
+		xargs -0 wc -l |                        # line count
+		tail -1 | grep --only-matching '\d\+' | # only total
+		sed -E 's/([0-9])([0-9]{3})$/\1,\2/'    # thousand separators
+}
