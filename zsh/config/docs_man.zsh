@@ -100,7 +100,7 @@ function ai() {
 # CHEAT.SH
 # aggregates stackoverflow, tl;dr and many other help pages
 # DOCS https://cht.sh/:help
-function h() {
+function cht() {
 	if ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then echo "Not using WezTerm." && return 1; fi
 
 	local style pane_id
@@ -114,4 +114,4 @@ function h() {
 	pane_id=$(wezterm cli spawn -- less "/tmp/$query")
 	wezterm cli set-tab-title --pane-id="$pane_id" "cheat: $query"
 }
-compdef _cht h
+compdef _cht cht
