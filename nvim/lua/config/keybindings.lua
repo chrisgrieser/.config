@@ -247,7 +247,7 @@ end, { desc = "󰅍 Sticky yank", expr = true, unique = false })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
-		-- do not trigger for `d` or yanks to helper-register `z`
+		-- do not trigger for `d` or yanks to temp-register `z`
 		if vim.v.event.operator ~= "y" or vim.v.event.regname == "z" then return end
 		-- FIX for vim-visual-multi
 		if vim.b["VM_Selection"] and vim.b["VM_Selection"].Regions then return end
