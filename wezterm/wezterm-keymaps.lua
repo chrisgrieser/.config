@@ -14,6 +14,7 @@ return {
 	{ key = "t", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
 	{ key = "n", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
 	{ key = "c", mods = "CMD", action = act.CopyTo("ClipboardAndPrimarySelection") },
+	{ key = "h", mods = "CMD", action = act.HideApplication }, -- only macOS
 	{ key = "+", mods = "CMD", action = act.IncreaseFontSize },
 	{ key = "-", mods = "CMD", action = act.DecreaseFontSize },
 	{ key = "0", mods = "CMD", action = act.ResetFontSize },
