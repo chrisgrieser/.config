@@ -12,9 +12,9 @@ local darkThemes = {
 	"Kanagawa (Gogh)",
 }
 local lightThemes = {
+	"Solar Flare Light (base16)",
 	"Cupcake (base16)",
 	"Ivory Light (terminal.sexy)",
-	"Solar Flare Light (base16)",
 	"Google Light (Gogh)",
 	"Atelier Lakeside Light (base16)",
 	"Edge Light (base16)",
@@ -178,4 +178,5 @@ return {
 	disable_default_key_bindings = true,
 	send_composed_key_when_left_alt_is_pressed = true, -- fix @{}~ etc. on German keyboard
 	send_composed_key_when_right_alt_is_pressed = true,
+	use_dead_keys = false, -- do not expect another key after `^~`
 }
