@@ -16,19 +16,6 @@ alias curl='curl --progress-bar'
 alias make='make --silent --warn-undefined-variables'
 alias jless='jless --no-line-numbers'
 
-# add nerdfont icons and default settings
-function tokei {
-	cmd tokei --compact --exclude="*.txt" "$@" |
-		sed -e 's/=/─/g' \
-			-e 's/Lua   /  Lua/' \
-			-e 's/Markdown   /  Markdown/' \
-			-e 's/JSON   /  JSON/' \
-			-e 's/JavaScript   /󰌞  JavaScript/' \
-			-e 's/TypeScript   /  TypeScript/' \
-			-e 's/Python   /  Python/' \
-			-e 's/Shell   /  Shell/'
-}
-
 # colorized & showing all
 function which { builtin which -a "$@" | bat --language=sh; }
 
