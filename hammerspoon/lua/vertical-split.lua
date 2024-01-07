@@ -24,7 +24,7 @@ local function verticalSplit()
 	if not frontApp:findMenuItem { "Window", "Tile Window to Right of Screen" } then
 		local msg = frontApp:name()
 			.. " does not support window options. \n\nStart the split from the other app."
-		hs.alert.show(msg, nil, nil, 4)
+		hs.alert(msg, nil, nil, 4)
 		return
 	end
 

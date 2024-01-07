@@ -26,25 +26,21 @@ end):start()
 -- on Mondays shortly before 10:00, open #fg-organisation Slack Channel
 M.timer_JourFixe = hs.timer
 	.doAt("09:59", "01d", function()
-		if not (os.date("%a") == "Mon" and u.screenIsUnlocked()) then return end
+		if not (os.date("%a:%H:%M") == "Mon:09:59" and u.screenIsUnlocked()) then return end
 
-		hs.alert.show("Jour Fixe")
+		hs.alert("Jour Fixe")
 		local fgOrganisationChannel = "slack://channel?team=T010A5PEMBQ&id=CV95T641Y"
 		hs.urlevent.openURL(fgOrganisationChannel)
 	end)
 	:start()
 
--- every full hour, play a sound
-M.timer_hourlySound = hs.timer
+-- notify every full hour
+M.timer_hourlyNotice = hs.timer
 	.doEvery(60, function()
 		local isFullHour = os.date("%M") == "00"
 		if isFullHour and u.screenIsUnlocked() and u.betweenTime(8, 23) and not env.isProjector() then
-			local soundPath =
-				"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/media_paused.caf"
-			local sound = hs.sound.getByFile(soundPath)
-			if not sound then return end
-			sound:volume(0.8) -- 0-1
-			sound:play()
+			local hour = tostring(os.date("%H:%M"))
+			hs.alert(hour, 0.5)
 		end
 	end)
 	:start()
@@ -101,7 +97,7 @@ M.timer_sleepAutoVideoOff = hs.timer
 		if not (isNight and isIdle and u.screenIsUnlocked()) then return end
 
 		local alertMsg = ("💤 Will sleep in %ss if idle."):format(config.timeToReactSecs)
-		hs.alert.show(alertMsg, 5)
+		hs.alert(alertMsg, nil, nil, 4)
 		u.runWithDelays(config.timeToReactSecs, function()
 			-- GUARD
 			local userDidSth = hs.host.idleTime() < config.timeToReactSecs
