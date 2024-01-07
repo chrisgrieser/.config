@@ -330,3 +330,26 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
+
+---HACK using replace-mode as a fake-git-mode since
+---@param key string
+---@param gitsignsAction string
+local function gitModeWrapper(key, gitsignsAction)
+	vim.keymap.set("i", key, function()
+		if vim.fn.mode() == "R" then
+			vim.cmd.stopinsert()
+			vim.defer_fn(function ()
+				vim.cmd.Gitsigns(gitsignsAction)
+				vim.cmd.startreplace()
+			end, 100)
+		else
+			return key
+		end
+	end, { expr = true })
+end
+
+gitModeWrapper("a", "stage_hunk")
+gitModeWrapper("u", "undo_stage_hunk")
+gitModeWrapper("r", "reset_hunk")
+gitModeWrapper("n", "next_hunk")
+gitModeWrapper("N", "prev_hunk")

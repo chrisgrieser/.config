@@ -35,7 +35,7 @@
   "nvim-dap-python": { "branch": "master", "commit": "091e4ae00a12085f9ed4200a3cd04af7179b8a23" },
   "nvim-dap-ui": { "branch": "master", "commit": "7e5e16427aaf814dc2d58e1b219def9ef2fa2435" },
   "nvim-dr-lsp": { "branch": "main", "commit": "4fd0f68ea15c548f482818612a0738ba41ca8593" },
-  "nvim-early-retirement": { "branch": "main", "commit": "26386e98768ec8f5b0943161562e4d23abf6da68" },
+  "nvim-early-retirement": { "branch": "main", "commit": "00bdb5aa5ef0a679e04b04652929500799edd140" },
   "nvim-genghis": { "branch": "main", "commit": "46a851c92b3fb25e0d46d96a42f106b15525f149" },
   "nvim-hlslens": { "branch": "main", "commit": "8ffc64bb6b624612cf762982b92633f283f7a715" },
   "nvim-lspconfig": { "branch": "master", "commit": "796394fd19fb878e8dbc4fd1e9c9c186ed07a5f4" },
