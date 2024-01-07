@@ -33,7 +33,6 @@ package-lock.json
 versions.json
 manifest.json
 tsconfig.json
-jsconfig.json
 esbuild.config.mjs
 biome.json
 
@@ -45,7 +44,7 @@ requirements.txt
 # Alfred workflows
 info.plist
 prefs.plist
-OneUpdater.sh
+jsconfig.json
 alfred.d.ts
 jxa-globals.d.ts
 # images using UUIDs

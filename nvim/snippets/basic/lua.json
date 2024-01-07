@@ -121,9 +121,10 @@
   "safe require": {
     "body": [
       "local ok, ${1:module} = require(\"${1:module}\")",
-      "if not ok then return end",
-      "${1:module}"
+      "if not (ok and ${1:module}) then return end",
+      "${1:module}.$0"
     ],
+    "filetype": "lua",
     "prefix": "safe require"
   },
   "split (gmatch)": {
