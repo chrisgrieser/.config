@@ -271,7 +271,8 @@ function M.jumpInBuffer(direction)
 	local key = direction == "back" and "<C-o>" or "<C-i>"
 	local jumpListEnd = direction == "back" and 0 or #vim.fn.getjumplist(0)[1]
 	repeat
-		vim.cmd.execute(([["normal \%s"]]):format(key)) -- SIC must be double-quoted
+		local cmd = ([["normal \%s"]]):format(key)-- SIC must be double-quoted
+		pcall(vim.cmd.execute, cmd)
 		local jumpPos = vim.fn.getjumplist(0)[2]
 		if jumpPos == jumpListEnd then
 			vim.cmd("keepjumps buffer " .. tostring(currentBuf))
