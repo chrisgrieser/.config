@@ -1,7 +1,12 @@
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
 title: ⇪ Hyper
-rules:
+anchors: 
+  - from: 
+      modifiers:
+        &hyper
+        mandatory: [command, control, option] 
   #─────────────────────────────────────────────────────────────────────────────
+rules:
   - description: "*️⃣ ⇪ Capslock → Hyper/Esc"
     manipulators:
       - type: basic
@@ -23,9 +28,10 @@ rules:
         # is done in finder-vim-alfred-addon.yaml
         conditions:
           - { type: frontmost_application_unless, bundle_identifiers: [^com\.apple\.finder$] }
+  #─────────────────────────────────────────────────────────────────────────────
       # Restart Alfred & Alfred Preferences
       - type: basic
-        from: { key_code: "5", modifiers: { mandatory: [command, control, option] } }
+        from: { key_code: "5", modifiers: *hyper }
         to:
           - shell_command: |
               osascript -e 'display notification "" with title "Restarting Alfred…"'
@@ -41,34 +47,34 @@ rules:
     manipulators:
       # Movement
       - type: basic
-        from: { key_code: h, modifiers: { mandatory: [option, command, control] } }
+        from: { key_code: h, modifiers: *hyper }
         to:
           - key_code: left_arrow
       - type: basic
-        from: { key_code: j, modifiers: { mandatory: [option, command, control] } }
+        from: { key_code: j, modifiers: *hyper }
         to:
           - key_code: down_arrow
       - type: basic
-        from: { key_code: k, modifiers: { mandatory: [option, command, control] } }
+        from: { key_code: k, modifiers: *hyper }
         to:
           - key_code: up_arrow
       - type: basic
-        from: { key_code: l, modifiers: { mandatory: [option, command, control] } }
+        from: { key_code: l, modifiers: *hyper }
         to:
           - key_code: right_arrow
       # word to the left
       - type: basic
-        from: { key_code: b, modifiers: { mandatory: [option, command, control] } }
+        from: { key_code: i, modifiers: *hyper }
         to:
           - { key_code: left_arrow, modifiers: [option] }
       # word to the right
       - type: basic
-        from: { key_code: e, modifiers: { mandatory: [option, command, control] } }
+        from: { key_code: o, modifiers: *hyper }
         to:
           - { key_code: right_arrow, modifiers: [option] }
       # delete word (use ⌘J from utility hotkeys for changing a word)
       - type: basic
-        from: { key_code: spacebar, modifiers: { mandatory: [option, command, control] } }
+        from: { key_code: spacebar, modifiers: *hyper }
         to:
           - { key_code: right_arrow, modifiers: [option] } # to the right end of the word
           - { key_code: delete_or_backspace, modifiers: [option] } # delete word

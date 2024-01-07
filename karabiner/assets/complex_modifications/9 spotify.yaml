@@ -1,6 +1,5 @@
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
 #───────────────────────────────────────────────────────────────────────────────
-# --------------------
 title: Spotify Control
 rules:
   - description: Spotify Media Controls

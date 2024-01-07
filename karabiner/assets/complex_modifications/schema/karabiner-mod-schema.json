@@ -50,6 +50,12 @@
 						"$ref": "#/definitions/AnchorTo"
 					}
 				},
+				"from": {
+					"type": "object",
+					"items": {
+						"$ref": "#/definitions/PurpleFrom"
+					}
+				},
 				"description": {
 					"type": "string"
 				},
