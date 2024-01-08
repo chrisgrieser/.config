@@ -1,11 +1,9 @@
 <!-- LTeX: enabled=false -->
-
 - nvim new default theme -> light theme?
 - `satellite.nvim` can now be updated.
 	+ checkout whether the updated version works with neovide's multi-grid
-- `biome` and `yaml-ls` now support formatting without needing to enable it in
+- `yaml-ls` perhaps now supports formatting without needing to enable it in
   `lspconfig`
-	+ can now format via lsp <https://github.com/neovim/nvim-lspconfig/issues/2807>
 - `vim.system` instead of `vim.fn.system`
 - `vim.uv` instead of `vim.loop`
 - ftAbbr & abbreviations.lua: `vim.keymap.set('ia', lhs, rhs, { buffer = true })`

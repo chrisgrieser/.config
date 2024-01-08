@@ -40,10 +40,10 @@ require("lazy").setup(plugins)
 
 --------------------------------------------------------------------------------
 
--- basic appearance settings to not make me crazy
+-- basic appearance settings to not be annoyed
 vim.opt.swapfile = false -- disable prompt when things crash
 vim.cmd.colorscheme("habamax")
-vim.opt.guifont = vim.env.CODE_FONT .. ":h25.2"
+vim.opt.guifont = vim.env.CODE_FONT .. ":h24.5"
 vim.opt.signcolumn = "yes:1"
 
 --------------------------------------------------------------------------------
