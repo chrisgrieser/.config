@@ -101,23 +101,29 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
+                "document-css": {
+                    "type": "boolean"
+                },
                 "fontsize": {
                     "type": "string"
                 },
+                "mainfont": {
+                    "type": "string"
+                },
+                "linestretch": {
+                    "type": "number"
+                },
                 "margin-left": {
-                    "type": "integer"
+                    "type": ["string", "integer"]
                 },
                 "margin-right": {
-                    "type": "integer"
+                    "type": ["string", "integer"]
                 },
                 "margin-top": {
-                    "type": "integer"
+                    "type": ["string", "integer"]
                 },
                 "margin-bottom": {
-                    "type": "integer"
-                },
-                "papersize": {
-                    "type": "string"
+                    "type": ["string", "integer"]
                 }
             },
             "title": "Variables"
