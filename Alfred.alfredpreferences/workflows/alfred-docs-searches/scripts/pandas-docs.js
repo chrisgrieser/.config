@@ -23,7 +23,7 @@ function run() {
 	const docsUrl = "https://api.github.com/repos/pandas-dev/pandas/git/trees/main?recursive=1";
 	const baseUrl = "https://pandas.pydata.org/docs";
 
-	const idRegex = new RegExp("doc/source/(.*)\\.rst$");
+	const idRegex = /doc\/source\/(.*)\.rst$/;
 
 	const workArray = JSON.parse(app.doShellScript(`curl -s "${docsUrl}"`))
 		.tree.filter((/** @type {{ path: string; }} */ file) => {
