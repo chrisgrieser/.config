@@ -23,6 +23,7 @@ export EDITOR="nvim"
 export CODE_FONT="JetBrainsMonoNL NF"
 
 #───────────────────────────────────────────────────────────────────────────────
+export npm_config_strict_ssl=false # fix hanging at "sill: idealTree build"
 
 # Save API keys outside the dotfile repo
 # shellcheck disable=1091
