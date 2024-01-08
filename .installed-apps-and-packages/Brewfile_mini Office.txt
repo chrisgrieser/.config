@@ -24,11 +24,11 @@ brew "node"
 brew "openjdk"
 brew "pandoc"
 brew "pass"
-brew "pdfgrep"
 brew "pinentry-mac"
 brew "ripgrep"
 brew "starship"
 brew "tesseract"
+brew "tokei"
 brew "yq"
 brew "zsh-autocomplete"
 brew "zsh-autopair"
@@ -60,7 +60,6 @@ cask "monitorcontrol"
 cask "neovide"
 cask "obsidian"
 cask "replacicon"
-cask "shortcat"
 cask "slack"
 cask "stats"
 cask "wezterm"
@@ -72,4 +71,3 @@ mas "Ivory", id: 6444602274
 mas "lo-rain", id: 6446921886
 mas "Peek", id: 1554235898
 mas "Pixelmator Pro", id: 1289583905
-mas "ReadKit", id: 1615798039

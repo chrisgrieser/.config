@@ -182,8 +182,6 @@ return {
 			-- markdown
 			{ "iE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock('inner')<CR>", mode = { "x", "o" }, ft = "markdown", desc = "󱡔 inner CodeBlock" },
 			{ "aE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock('outer')<CR>", mode = { "x", "o" }, ft = "markdown", desc = "󱡔 outer CodeBlock" },
-			{ "ih", "<cmd>lua require('various-textobjs').mdEmphasis('inner')<CR>", mode = { "x", "o" }, ft = "markdown", desc = "󱡔 inner emphasis" },
-			{ "ah", "<cmd>lua require('various-textobjs').mdEmphasis('outer')<CR>", mode = { "x", "o" }, ft = "markdown", desc = "󱡔 outer emphasis" },
 
 			-- css
 			{ "is", "<cmd>lua require('various-textobjs').cssSelector('inner')<CR>", mode = { "x", "o" }, ft = "css", desc = "󱡔 inner selector" },
