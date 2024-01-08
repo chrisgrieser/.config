@@ -12,7 +12,7 @@ local function scrollUp()
 	-- after quitting, it takes a few seconds until Twitter is fully quit,
 	-- therefore also checking for the main window existence
 	-- when browsing twitter itself, to not change tabs
-	local app = u.app(env.tickerApp)
+	local app = u.app("Ivory")
 	if not (app and app:mainWindow() and u.screenIsUnlocked()) then return end
 	if app:isFrontmost() then return end
 
@@ -29,7 +29,7 @@ local function scrollUp()
 end
 
 local function closeMediaWindow()
-	local app = u.app(env.tickerApp)
+	local app = u.app("Ivory")
 	if not app then return end
 	local mediaWin = app:findWindow("Media") or app:findWindow("Ivory")
 	if not mediaWin then return end
@@ -44,25 +44,25 @@ end
 
 -- move the ticker-app window to the left side of the screen
 local function winToTheSide()
-	local app = u.app(env.tickerApp)
+	local app = u.app("Ivory")
 	if not app or u.isFront("Alfred") then return end
 
 	if app:isHidden() then app:unhide() end
 
 	-- not using mainWindow to not unintentionally move Media or new-tweet window
 	-- Twitter's window is called "Twitter", Ivory's "Home"
-	local win = env.tickerApp == "Twitter" and app:findWindow("Twitter") or app:findWindow("Home")
-	if not win then return end
-
-	win:setFrame(wu.toTheSide)
-	win:raise()
+	local win = app:findWindow("Home")
+	if win then
+		win:setFrame(wu.toTheSide)
+		win:raise()
+	end
 end
 
 -- SHOW if referenceWin is pseudo-maximized or centered
 -- HIDE referenceWin belongs to app with transparent background is maximized
 ---@param referenceWin hs.window
 local function showHideTickerApp(referenceWin)
-	local app = u.app(env.tickerApp)
+	local app = u.app("Ivory")
 	if not app or not referenceWin or u.isFront("CleanShot X") then return end
 
 	if wu.CheckSize(referenceWin, wu.pseudoMax) or wu.CheckSize(referenceWin, wu.centerHalf) then
@@ -90,11 +90,11 @@ u.hotkey({}, "home", scrollUp)
 
 M.aw_tickerWatcher = aw.new(function(appName, event)
 	if appName == "CleanShot X" or appName == "Alfred" then return end
-	local app = u.app(env.tickerApp)
+	local app = u.app("Ivory")
 
 	-- move twitter and scroll up
-	if appName == env.tickerApp and (event == aw.launched or event == aw.activated) then
-		u.whenAppWinAvailable(env.tickerApp, function()
+	if appName == "Ivory" and (event == aw.launched or event == aw.activated) then
+		u.whenAppWinAvailable("Ivory", function()
 			winToTheSide()
 			scrollUp()
 			wu.bringAllWinsToFront()
@@ -108,13 +108,13 @@ M.aw_tickerWatcher = aw.new(function(appName, event)
 		end)
 
 		-- auto-close media windows and scroll up when deactivating
-	elseif appName == env.tickerApp and event == aw.deactivated then
+	elseif appName == "Ivory" and event == aw.deactivated then
 		if u.isFront("CleanShot X") then return end
 		closeMediaWindow()
 		u.runWithDelays(1.5, scrollUp) -- deferred, so multiple links can be clicked
 
 		-- raise twitter when switching window to other app
-	elseif (event == aw.activated or event == aw.launched) and appName ~= env.tickerApp then
+	elseif (event == aw.activated or event == aw.launched) and appName ~= "Ivory" then
 		showHideTickerApp(hs.window.focusedWindow())
 	end
 end):start()

@@ -60,6 +60,10 @@ export NODE_REPL_HISTORY=""
 # environment variables https://docs.npmjs.com/cli/v9/using-npm/config#environment-variables
 export npm_config_fund=false # disable funding reminder, has to be lowercase
 
+# fix hanging at "sill: idealTree build"
+# INFO reinstalling brew package `openssl@3` also seems to fix this
+# export npm_config_strict_ssl=false
+
 #───────────────────────────────────────────────────────────────────────────────
 # LESS
 export PAGER="less" # needs to be set explicitly, so the homebrew version is used

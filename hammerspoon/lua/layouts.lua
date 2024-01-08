@@ -72,7 +72,7 @@ local function workLayout()
 	end
 
 	-- open
-	local appsToOpen = { "Discord", env.browserApp, env.mailApp, env.tickerApp, "Obsidian" }
+	local appsToOpen = { "Discord", env.browserApp, "Mimestream", "Obsidian" }
 	if not isWeekend() then table.insert(appsToOpen, "Slack") end
 	u.openApps(appsToOpen)
 	for _, appName in pairs(appsToOpen) do
@@ -81,10 +81,11 @@ local function workLayout()
 			wu.moveResize(win, wu.pseudoMax)
 		end)
 	end
+	u.openApps("Ivory")
 	u.restartApp("AltTab") -- FIX duplicate items
 
 	-- finish
-	u.whenAppWinAvailable("Discord", function() u.app(env.mailApp):activate() end)
+	u.whenAppWinAvailable("Discord", function() u.app("Mimestream"):activate() end)
 	print("🔲 Loaded WorkLayout")
 end
 
@@ -106,9 +107,9 @@ local function movieLayout()
 		"Obsidian",
 		"lo-rain",
 		"WezTerm",
-		env.mailApp,
-		env.tickerApp,
-		env.todoApp,
+		"Mimestream",
+		"Ivory",
+		"GoodTask",
 	}
 	print("🔲 Loaded MovieModeLayout")
 end
@@ -127,8 +128,8 @@ end
 -- Open Apps always at Mouse Screen
 M.wf_appsOnMouseScreen = wf.new({
 	env.browserApp,
-	env.mailApp,
-	env.todoApp,
+	"Mimestream",
+	"GoodTask",
 	"BetterTouchTool",
 	"Obsidian",
 	"Finder",
@@ -150,7 +151,7 @@ M.wf_appsOnMouseScreen = wf.new({
 	u.runWithDelays({ 0, 0.2 }, function()
 		if mouseScreen:name() == screenOfWindow:name() then return end
 		newWin:moveToScreen(mouseScreen)
-		if app:name() ~= env.todoApp then wu.moveResize(newWin, wu.maximized) end
+		if app:name() ~= "GoodTask" then wu.moveResize(newWin, wu.maximized) end
 	end)
 end)
 

@@ -167,7 +167,7 @@ M.aw_fallthrough = aw.new(function(appName, event)
 	if event ~= aw.terminated then return end
 
 	-- CONFIG
-	local fallThroughApps = { "Transmission", env.tickerApp, env.todoApp }
+	local fallThroughApps = { "Transmission", "Ivory", "GoodTask" }
 	u.runWithDelays({ 0.1, 0.2 }, function()
 		if not u.isFront(fallThroughApps) then return end
 		local visibleWins = hs.window:orderedWindows()

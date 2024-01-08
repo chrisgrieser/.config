@@ -16,8 +16,8 @@ local function now() return os.time() end
 ---@type table<string, integer|nil>
 M.thresholdMins = {
 	Slack = 20,
-	[env.mailApp] = 5,
-	[env.todoApp] = 10,
+	Mimestream = 5,
+	GoodTask = 10,
 	Highlights = 90,
 	Discord = 180,
 	BusyCal = 2,

@@ -28,13 +28,12 @@ function run() {
 			htmlTag = htmlTag.replaceAll("\r", "");
 			const [_, name, levelStr] = htmlTag.match(/id="(.*?)"\s*class="(.*?)"/);
 			const url = `${pandocDocsUrl}#${name}`;
+
 			let displayName = name
 				.replace(/-\d$/, "")
-				.replace(/^extension-/, "Extension: ")
-				.replace(/^Option--/, "--")
-				.replaceAll("-", " ")
+				.replace(/^extension-/, "")
+				.replace(/^option--/, "--")
 				.replace(/\[$/, ""); // FIX brackets leftover in pandoc html
-			displayName = displayName.charAt(0).toUpperCase() + displayName.slice(1); // capitalize
 
 			// construct breadcrumbs based on order of appearenace of headings
 			const lvl = levelStr.match(/\d/) ? parseInt(levelStr.match(/\d/)[0]) : null;
@@ -47,6 +46,11 @@ function run() {
 				.slice(0, -1) // remove last element, since it's the name
 				.join(" > ") // separator
 				.replace(/ > $/, ""); // trailing separator appears when heading levels are skipped in the html
+
+			if (parentsBreadcrumbs !== "extensions" && parentsBreadcrumbs !== "options") {
+				displayName = displayName.replaceAll("-", " ");
+				displayName = displayName.charAt(0).toUpperCase() + displayName.slice(1); // capitalize
+			}
 
 			return {
 				title: displayName,

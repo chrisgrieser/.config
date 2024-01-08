@@ -23,7 +23,7 @@ local config = {
 		"IINA",
 		"zoom.us",
 		"CleanShot X",
-		env.tickerApp,
+		"Ivory",
 		"Alfred",
 		"Shottr",
 	},
