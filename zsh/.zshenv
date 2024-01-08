@@ -23,15 +23,18 @@ export EDITOR="nvim"
 export CODE_FONT="JetBrainsMonoNL NF"
 
 #───────────────────────────────────────────────────────────────────────────────
-export npm_config_strict_ssl=false # fix hanging at "sill: idealTree build"
 
 # Save API keys outside the dotfile repo
 # shellcheck disable=1091
 [[ -f "$DATA_DIR/private dotfiles/api-keys.sh" ]] && source "$DATA_DIR/private dotfiles/api-keys.sh"
 
 # NEOVIM
-# so linters managed by mason are generally available
+# so packages managed by mason are generally available
 export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
+
+# INFO instead of writing npm config to ~/.npmrc, they can also be defined as shell
+# environment variables https://docs.npmjs.com/cli/v9/using-npm/config#environment-variables
+export npm_config_strict_ssl=false # fix hanging at "sill: idealTree build"
 
 # PANDOC
 # HACK since pandoc does not allow default data-dirs

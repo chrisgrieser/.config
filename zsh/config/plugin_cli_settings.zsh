@@ -59,7 +59,6 @@ export NODE_REPL_HISTORY=""
 # INFO instead of writing npm config to ~/.npmrc, they can also be defined as shell
 # environment variables https://docs.npmjs.com/cli/v9/using-npm/config#environment-variables
 export npm_config_fund=false # disable funding reminder, has to be lowercase
-export npm_config_strict_ssl=false       # fix hanging at "sill: idealTree build"
 
 #───────────────────────────────────────────────────────────────────────────────
 # LESS
