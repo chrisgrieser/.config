@@ -14,10 +14,10 @@ alias pl="pip list --not-required"
 alias py="python3"
 alias bye="wezterm cli spawn -- bpython"
 alias bye="wezterm cli spawn -- bpython"
+alias v="toggle_venv"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-alias v="togggle_venv"
 
 function new_venv {
 	[[ -d ./.venv ]] && rm -vrf ./.venv
@@ -54,7 +54,7 @@ function _auto_venv {
 	fi
 }
 
-function togggle_venv {
+function toggle_venv {
 	if [[ -n "$VIRTUAL_ENV" ]]; then
 		deactivate
 		return
