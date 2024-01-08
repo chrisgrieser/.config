@@ -9,8 +9,8 @@ app.includeStandardAdditions = true;
 /** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
-	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
-	return [clean, camelCaseSeperated, str].join(" ") + " ";
+	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
+	return [clean, camelCaseSeparated, str].join(" ") + " ";
 }
 
 /** @param {string} path */
@@ -32,7 +32,7 @@ function run() {
 
 	const categoryArr = JSON.parse(readFile(hammerspoonDocsJson));
 
-	categoryArr.forEach((/** @type {{ items: any[]; name: string; desc: string; }} */ category) => {
+	for (/** @type {{ name: string; desc: string; }} */ const category of categoryArr) {
 		const children = category.items.length;
 		// categories
 		sites.push({
@@ -44,7 +44,7 @@ function run() {
 		});
 
 		// category items
-		category.items.forEach((catItem) => {
+		for (/** @type {{ name: string; def: string; desc: string; }} */ const catItem of category.items) {
 			const shortdef = catItem.def.split("->")[0].trim();
 			sites.push({
 				title: catItem.def,
@@ -53,8 +53,8 @@ function run() {
 				arg: `https://www.hammerspoon.org/docs/${category.name}.html#${catItem.name}`,
 				uid: `${category.name}_${catItem.name}`,
 			});
-		});
-	});
+		}
+	}
 	sites.push({
 		title: "Getting Started",
 		match: "getting started examples",
