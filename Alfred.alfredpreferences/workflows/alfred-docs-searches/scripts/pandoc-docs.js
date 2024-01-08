@@ -45,6 +45,7 @@ function run() {
 			const parentsBreadcrumbs = breadcrumbs
 				.slice(0, -1) // remove last element, since it's the name
 				.join(" > ") // separator
+				.replaceAll("-", " ")
 				.replace(/ > $/, ""); // trailing separator appears when heading levels are skipped in the html
 
 			if (parentsBreadcrumbs !== "extensions" && parentsBreadcrumbs !== "options") {

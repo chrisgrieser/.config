@@ -101,6 +101,9 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
+                "fontsize": {
+                    "type": "string"
+                },
                 "margin-left": {
                     "type": "integer"
                 },
@@ -117,13 +120,6 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "margin-bottom",
-                "margin-left",
-                "margin-right",
-                "margin-top",
-                "papersize"
-            ],
             "title": "Variables"
         }
     }
