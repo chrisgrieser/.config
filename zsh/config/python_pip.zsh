@@ -23,9 +23,10 @@ alias v="toggle_venv"
 #───────────────────────────────────────────────────────────────────────────────
 
 function new_venv {
-	[[ -d ./.venv ]] && rm -vrf ./.venv
+	[[ -d ./.venv ]] && rm -rf ./.venv
 	python3 -m venv ./.venv
 	source ./.venv/bin/activate
+	python3 -m pip install --upgrade pip # to remove update nagging
 	inspect_venv
 }
 
@@ -53,10 +54,10 @@ function _auto_venv {
 
 	if [[ -n "$VIRTUAL_ENV" && -z "$venv_path" ]]; then
 		deactivate
-		inspect_venv
+		echo && inspect_venv
 	elif [[ -z "$VIRTUAL_ENV" && -n "$venv_path" ]]; then
 		source "$venv_path/bin/activate"
-		inspect_venv
+		echo && inspect_venv
 	fi
 }
 
