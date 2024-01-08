@@ -36,7 +36,7 @@ function run() {
 				.replace(/\[$/, ""); // FIX brackets leftover in pandoc html
 
 			// construct breadcrumbs based on order of appearenace of headings
-			const lvl = levelStr.match(/\d/) ? parseInt(levelStr.match(/\d/)[0]) : null;
+			const lvl = levelStr.match(/\d/) ? Number.parseInt(levelStr.match(/\d/)[0]) : null;
 			if (lvl) {
 				// options do not get a section level
 				breadcrumbs[lvl - 1] = displayName; // set current level

@@ -196,8 +196,8 @@ serverConfigs.tsserver = {
 		},
 
 		-- INFO "cannot redeclare block-scoped variable" -> not useful for JXA.
-		-- Biome works on single-file-mode and therefore can be used to check for
-		-- unintended re-declaring
+		-- (Biome works on single-file-mode and therefore can be used to check for
+		-- unintended re-declaring.)
 		diagnostics = { ignoredCodes = { 2451 } },
 		typescript = configForBoth,
 		javascript = configForBoth,
@@ -206,14 +206,6 @@ serverConfigs.tsserver = {
 	on_attach = function(client)
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
-	end,
-}
-
--- SIC needs to be enabled
-serverConfigs.biome = {
-	on_attach = function(client)
-		client.server_capabilities.documentFormattingProvider = true
-		client.server_capabilities.documentRangeFormattingProvider = true
 	end,
 }
 

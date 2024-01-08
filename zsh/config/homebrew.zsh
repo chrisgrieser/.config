@@ -1,4 +1,5 @@
 # DOCS https://docs.brew.sh/Manpage#environment
+#───────────────────────────────────────────────────────────────────────────────
 
 # install/update
 export HOMEBREW_CASK_OPTS="--no-quarantine"
@@ -69,6 +70,7 @@ function update() {
 }
 
 function listall() {
+	brew update
 	_print-section "HOMEBREW"
 	_print-section "Taps"
 	brew tap
