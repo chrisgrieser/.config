@@ -1,30 +1,35 @@
+# shellcheck disable=1091
+#───────────────────────────────────────────────────────────────────────────────
+
 # 1. Prevent accidental installation outside of virtual env
 # 2. Use `python3 -m pip` instead of `pip3`
 function pip {
-	if [[ "$1" == "install" && -z "$VIRTUAL_ENV" ]] ; then
-		printf "\033[1;33mNot in a virtual environment. Aborting.\033[0m "
-		return
+	if [[ "$1" == "install" ]]; then
+		if [[ ! "$(cmd which python3)" =~ /\.venv/ || -z "$VIRTUAL_ENV" ]]; then
+			printf "\033[1;33mNot in a virtual environment. Aborting.\033[0m "
+			return
+		fi
 	fi
 	python3 -m pip "$@"
 }
 
-alias pu="pip uninstall" 
+alias pu="pip uninstall"
 alias pi="pip install"
 alias pl="pip list --not-required"
 alias py="python3"
-alias bye="wezterm cli spawn -- bpython"
 alias bye="wezterm cli spawn -- bpython"
 alias v="toggle_venv"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-
 function new_venv {
 	[[ -d ./.venv ]] && rm -vrf ./.venv
-	# shellcheck disable=1091
-	python3 -m venv ./.venv && source ./.venv/bin/activate
-	./.venv/bin/python3 -m pip install --upgrade pip # disables upgrade nag
+	python3 -m venv ./.venv
+	source ./.venv/bin/activate
+	inspect_venv
 }
+
+function inspect_venv { printf "\n\e[1;33mNow using: \e[1;36m%s\e[0m\n" "$(cmd which python3)"; }
 
 function _search_venv_path {
 	local dir_to_check=$PWD
@@ -48,22 +53,24 @@ function _auto_venv {
 
 	if [[ -n "$VIRTUAL_ENV" && -z "$venv_path" ]]; then
 		deactivate
+		inspect_venv
 	elif [[ -z "$VIRTUAL_ENV" && -n "$venv_path" ]]; then
-		# shellcheck disable=1091
 		source "$venv_path/bin/activate"
+		inspect_venv
 	fi
 }
 
 function toggle_venv {
 	if [[ -n "$VIRTUAL_ENV" ]]; then
 		deactivate
-		return
+		inspect_venv
 	else
 		local venv_path
 		venv_path=$(_search_venv_path)
 		if [[ -n "$venv_path" ]]; then
 			# shellcheck disable=1091
 			source ./.venv/bin/activate
+			inspect_venv
 		else
 			print "\033[1;33mNo virtual environment found.\033[0m"
 		fi

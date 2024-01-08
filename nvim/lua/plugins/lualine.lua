@@ -76,7 +76,7 @@ local lualineConfig = {
 				end,
 			},
 			{ -- VENV indicator
-				function() return "󱥒 " .. vim.fs.basename(vim.env.VIRTUAL_ENV) end,
+				function() return "󱥒 " end,
 				cond = function() return vim.env.VIRTUAL_ENV and vim.bo.ft == "python" end,
 			},
 			{
