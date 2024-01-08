@@ -58,7 +58,8 @@ function M.pasteFromNumberReg()
 		prompt = "󰅍 Select register",
 		format_item = function(reg)
 			local firstLine = vim.split(vim.fn.getreg(reg), "\n")[1]
-			return vim.trim(firstLine):sub(1, 40)
+			local trimmed = vim.trim(firstLine):sub(1, 40)
+			return ("[%s] "):format(reg) .. trimmed
 		end,
 	}, function(reg)
 		if not reg then return end
@@ -78,18 +79,6 @@ function M.openAlfredPref()
 	-- in case the right workflow is already open, Alfred is not focused.
 	-- Therefore manually focusing in addition to that here as well.
 	vim.fn.system { "open", "-a", "Alfred Preferences" }
-end
-
-function M.openNewScope()
-	local line = vim.api.nvim_get_current_line()
-	local trailChar = line:match(",? *$")
-	line = line:gsub(" *,? *$", "") .. " {" -- edit current line
-	vim.api.nvim_set_current_line(line)
-	local ln = vim.api.nvim_win_get_cursor(0)[1]
-	local indent = line:match("^%s*")
-	vim.api.nvim_buf_set_lines(0, ln, ln, false, { indent .. "\t", indent .. "}" .. trailChar })
-	vim.api.nvim_win_set_cursor(0, { ln + 1, 1 }) -- go line down
-	vim.cmd.startinsert { bang = true }
 end
 
 --- open the next regex at https://regex101.com/

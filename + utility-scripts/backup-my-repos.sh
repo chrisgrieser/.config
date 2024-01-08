@@ -1,7 +1,7 @@
 # INFO
-# - Backup all PUBLIC NON-FORK repos owned by the specified github user as zip archive. 
+# - Backup all PUBLIC NON-FORK repos owned by the specified github user as zip archive.
 # - For speed and disk space, only shallow clones are saved (depth 2).
-# - Requires `yq` being installed. 
+# - Requires `yq` being installed.
 # - Due to github API restrictions, only a maximum of 100 repos are downloaded.
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -21,15 +21,22 @@ cd "$backup_location/temp" || return 1
 
 # download repos
 apiURL="https://api.github.com/users/${github_username}/repos?per_page=100"
-curl -s "$apiURL" | 
+repos=$(curl -s "$apiURL" |
 	yq "filter(.fork == false) | filter(.archived == false) | filter(.name != \"$repo_to_ignore\") | map(.full_name)" --prettyPrint |
-	cut -c3- |
-	xargs -I {} git clone 'git@github.com:{}.git'
+	cut -c3-)
+repos_count=$(echo "$repos" | wc -l | tr -d " ")
+
+i=0
+echo "$repos" | while read -r repo; do
+	i=$((i + 1))
+	print "\e[1;34m$repo ($i/$repos_count)\e[0m"
+	git clone "git@github.com:$repo.git"
+	echo
+done
 
 # archive them
 date_stamp=$(date +%Y-%m-%d_%H-%M-%S)
-repos_count=$(find . -mindepth 1 -maxdepth 1 -type d | wc -l | tr -d " ")
-if [[ repos_count -ge 100 ]]; then	
+if [[ repos_count -ge 100 ]]; then
 	print "\033[1;33mGitHub API only allows up to 100 repos to be downloaded, backup is therefore incomplete\033[0m"
 fi
 archive_name="${repos_count} Repos – ${date_stamp}.zip"
@@ -41,4 +48,3 @@ print "\033[1;32mArchived $repos_count repos.\033[0m"
 open -R "$backup_location/$archive_name"
 cd ..
 rm -rf "$backup_location/temp"
-
