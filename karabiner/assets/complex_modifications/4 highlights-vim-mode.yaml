@@ -105,9 +105,9 @@ rules:
         to:
           - { key_code: down_arrow, modifiers: [command] }
         conditions: [*highlights-app, *highlights-normal-mode]
-      # h/l: back/forth in jump history
+      # C-h/C-l: back/forth in jump history
       - type: basic
-        from: { key_code: h }
+        from: { key_code: h, modifiers: { mandatory: [control] } }
         to:
           - shell_command: |
               osascript -e '
@@ -119,7 +119,7 @@ rules:
                 end tell'
         conditions: [*highlights-app, *highlights-normal-mode]
       - type: basic
-        from: { key_code: l }
+        from: { key_code: l, modifiers: { mandatory: [control] } }
         to:
           - shell_command: |
               osascript -e '

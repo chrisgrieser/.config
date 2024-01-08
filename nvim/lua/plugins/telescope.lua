@@ -167,7 +167,7 @@ local function telescopeConfig()
 
 	require("telescope").setup {
 		defaults = {
-			path_display = { "tail" },
+			path_display = "tail",
 			selection_caret = "󰜋 ",
 			multi_icon = "󰒆 ",
 			results_title = false,
@@ -417,7 +417,11 @@ return {
 			{ "gs", function() telescope("treesitter") end, desc = " Symbols" },
 			{ "gd", function() telescope("lsp_definitions") end, desc = "󰒕 Definitions" },
 			{ "gf", function() telescope("lsp_references") end, desc = "󰒕 References" },
-			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
+			{
+				"gw",
+				function() telescope("lsp_workspace_symbols") end,
+				desc = "󰒕 Workspace Symbols",
+			},
 			-- stylua: ignore end
 
 			{ "<leader>ph", function() telescope("highlights") end, desc = " Highlights" },
