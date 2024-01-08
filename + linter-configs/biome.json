@@ -1,7 +1,7 @@
 {
-	"$schema": "https://raw.githubusercontent.com/biomejs/biome/main/editors/vscode/configuration_schema.json",
+	"$schema": "https://raw.githubusercontent.com/biomejs/biome/main/packages/%40biomejs/biome/configuration_schema.json",
 	"formatter": {
-		"lineWidth": 105,
+		"lineWidth": 100,
 		"indentStyle": "tab",
 		"indentWidth": 3,
 		"formatWithErrors": true
