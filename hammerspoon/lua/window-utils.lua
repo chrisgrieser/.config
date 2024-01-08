@@ -12,16 +12,11 @@ M.smallCenter = { x = 0.3, y = 0.15, w = 0.4, h = 0.7 }
 
 -- negative x to hide useless sidebar
 if env.isAtMother then
-	M.toTheSide = hs.geometry.rect(-70, 54, 380, 890)
+	M.toTheSide = hs.geometry.rect(-82, 54, 392, 890)
 elseif env.isAtOffice then
-	M.toTheSide = hs.geometry.rect(-75, 54, 450, 1100)
+	M.toTheSide = hs.geometry.rect(-87, 54, 462, 1100)
 else
-	M.toTheSide = hs.geometry.rect(-70, 54, 425, 1026)
-end
-
-if env.tickerApp == "Ivory" then
-	M.toTheSide.x = M.toTheSide.x - 12
-	M.toTheSide.w = M.toTheSide.w + 12
+	M.toTheSide = hs.geometry.rect(-82, 54, 437, 1026)
 end
 
 --------------------------------------------------------------------------------
@@ -53,7 +48,7 @@ end
 ---@param pos hs.geometry
 function M.moveResize(win, pos)
 	-- GUARD
-	local appsToIgnore = { "Transmission", "Hammerspoon", env.tickerApp }
+	local appsToIgnore = { "Transmission", "Hammerspoon", "Ivory" }
 	if
 		not win
 		or not (win:application())
@@ -184,7 +179,7 @@ local function controlSpaceAction()
 	local curWin = hs.window.focusedWindow()
 
 	local pos
-	if u.isFront { "Reminders", env.todoApp } then
+	if u.isFront { "Reminders", "GoodTask" } then
 		pos = M.CheckSize(curWin, M.smallCenter) and M.centerHalf or M.smallCenter
 	elseif u.isFront { "Finder", "Script Editor" } then
 		pos = M.CheckSize(curWin, M.centerHalf) and M.maximized or M.centerHalf

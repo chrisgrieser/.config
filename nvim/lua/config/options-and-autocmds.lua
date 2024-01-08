@@ -134,7 +134,7 @@ autocmd("CmdlineLeave", {
 	callback = function()
 		local cmdline = vim.fn.getcmdline()
 		local isSubstitution = cmdline:find("s ?/.-/.*/%a*$")
-		local isMultiFileCmd = cmdline:find("^cdo") or cmdline:find("^bufdo !")
+		local isMultiFileCmd = cmdline:find("^%l%l?%l?do ") -- cdo, bufdo, etc.
 		if isSubstitution and not isMultiFileCmd then vim.cmd(cmdline .. "n") end
 	end,
 })
