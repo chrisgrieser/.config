@@ -5,38 +5,43 @@
 # DOCS https://pandoc.org/MANUAL.html#defaults-files
 #───────────────────────────────────────────────────────────────────────────────
 
+# CONFIG
+table-of-contents: false
+number-sections: true
+
+#───────────────────────────────────────────────────────────────────────────────
+
 # PDF-WRITER
 writer: pdf
 
-# DOCS
-pdf-engine: weasyprint
+pdf-engine: weasyprint # `wkhtmltopdf` is deprecated, `prince` adds watermark
 pdf-engine-opts: ["--quiet"] # so pandoc verbosity can be set to WARNING
+
 # https://pandoc.org/MANUAL.html#variables-for-html
 variables:
   mainfont: Palatino
   margin-left: 0
   margin-right: 0
+  fontsize: 3rem # does not seem to work
   linestretch: 1.4 # = line-height
 
 #───────────────────────────────────────────────────────────────────────────────
 
 # GENERAL
 verbosity: WARNING
-fail-if-warnings: false
-table-of-contents: false
+fail-if-warnings: true
+
 toc-depth: 3
+
 resource-path:
   - .
   - ./attachments
-  - ${VAULT_PATH} # Vault path for images, value in .zshenv
+  - ${VAULT_PATH} 
 
-# MARKDOWN-READER
-# DOCS https://pandoc.org/MANUAL.html#extensions
-# DOCS https://pandoc.org/MANUAL.html#markdown-variants
+# MARKDOWN-READER https://pandoc.org/MANUAL.html#extensions
 reader: |
   markdown+lists_without_preceding_blankline+mark+wikilinks_title_after_pipe+rebase_relative_paths
-number-sections: true
 
+# h1 -> title
 # h2 -> h1
-# h1 -> h1
 shift-heading-level-by: -1
