@@ -10,16 +10,14 @@ writer: pdf
 template: empty
 
 # DOCS
-# https://pandoc.org/MANUAL.html#variables-for-wkhtmltopdf
-# https://pandoc.org/MANUAL.html#variables-for-html
-pdf-engine: wkhtmltopdf
-pdf-engine-opts: ["--log-level", "warn"] # so pandoc verbosity can be set to WARNING
-css: ${USERDATA}/css/nice-pandoc.css # html-based PDF engine only
-variables:
+pdf-engine: weasyprint
+pdf-engine-opts: ["--quiet"] # so pandoc verbosity can be set to WARNING
+variables: # https://pandoc.org/MANUAL.html#variables-for-html
+  fontsize: 21px
   margin-left: 0
   margin-right: 0
-  margin-top: 20
-  margin-bottom: 20
+  margin-top: 0
+  margin-bottom: 0
   papersize: A4
 
 # FIX suppress irrelevant warning about missing title if file has no h1
@@ -42,5 +40,5 @@ resource-path:
 # DOCS https://pandoc.org/MANUAL.html#markdown-variants
 reader: |
   markdown+lists_without_preceding_blankline+mark+wikilinks_title_after_pipe+rebase_relative_paths
-number-sections: false
-shift-heading-level-by: -1 # h2 -> h1
+number-sections: true
+# shift-heading-level-by: -1 # h2 -> h1

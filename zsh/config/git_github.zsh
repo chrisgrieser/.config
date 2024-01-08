@@ -216,9 +216,9 @@ function gdf {
 
 	# decision on how to act on file
 	choices="restore file
-checkout commit
 copy to clipboard
-show file (bat)"
+show file (bat)
+checkout commit"
 	decision=$(echo "$choices" |
 		fzf --bind="j:down,k:up" --no-sort --no-info --height="6" \
 			--layout=reverse-list --header="j:↓  k:↑")
