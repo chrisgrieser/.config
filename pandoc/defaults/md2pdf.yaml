@@ -7,21 +7,16 @@
 
 # PDF-WRITER
 writer: pdf
-template: empty
 
 # DOCS
 pdf-engine: weasyprint
 pdf-engine-opts: ["--quiet"] # so pandoc verbosity can be set to WARNING
-variables: # https://pandoc.org/MANUAL.html#variables-for-html
-  fontsize: 21px
+# https://pandoc.org/MANUAL.html#variables-for-html
+variables:
+  mainfont: Palatino
   margin-left: 0
   margin-right: 0
-  margin-top: 0
-  margin-bottom: 0
-  papersize: A4
-
-# FIX suppress irrelevant warning about missing title if file has no h1
-metadata: { title: "foobar" }
+  linestretch: 1.4 # = line-height
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -41,4 +36,7 @@ resource-path:
 reader: |
   markdown+lists_without_preceding_blankline+mark+wikilinks_title_after_pipe+rebase_relative_paths
 number-sections: true
-# shift-heading-level-by: -1 # h2 -> h1
+
+# h2 -> h1
+# h1 -> h1
+shift-heading-level-by: -1
