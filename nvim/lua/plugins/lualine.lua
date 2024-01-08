@@ -54,10 +54,10 @@ local lualineConfig = {
 			},
 		},
 		lualine_c = {
-			{ -- clock if fullscreen (longer than 110 columns)
+			{ -- clock if wide window
 				"datetime",
 				style = "%H:%M",
-				cond = function() return vim.o.columns > 110 end,
+				cond = function() return vim.o.columns > 120 end,
 				fmt = function(time)
 					local timeWithBlinkingColon = os.time() % 2 == 0 and time or time:gsub(":", " ")
 					return "󰅐 " .. timeWithBlinkingColon

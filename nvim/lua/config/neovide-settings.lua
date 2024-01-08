@@ -1,27 +1,29 @@
--- GUARD
-if not vim.g.neovide then return end
-
 -- DOCS https://neovide.dev/configuration.html
+--------------------------------------------------------------------------------
+if not vim.g.neovide then return end -- GUARD
+
 local g = vim.g
+local host = vim.fn.hostname()
+local isAtOffice = (host:find("mini") or host:find("eduroam") or host:find("fak1")) ~= nil
+local isAtMother = host:find("Mother")
 --------------------------------------------------------------------------------
 
 -- SIZE & FONT
-
-local host = vim.fn.hostname()
-local isAtOffice = (host:find("mini") or host:find("eduroam") or host:find("fak1")) ~= nil
 local fontSize
-if host:find("Mother") then
+if isAtMother then
 	fontSize = 23
 	g.neovide_padding_top = 0
+	g.neovide_padding_left = 4
 elseif isAtOffice then
-	fontSize = 26
+	fontSize = 25.5
 	g.neovide_padding_top = 0
+	g.neovide_padding_left = 4
 else
 	fontSize = 24.5
 	g.neovide_padding_top = 15
+	g.neovide_padding_left = 7
 end
 
-g.neovide_padding_left = 7
 vim.opt.linespace = -2 -- less line height
 vim.opt.guifont = vim.env.CODE_FONT .. ":h" .. fontSize
 
@@ -36,7 +38,7 @@ g.neovide_input_macos_alt_is_meta = false
 -- Appearance
 g.neovide_remember_window_size = true
 g.neovide_transparency = 0.91
-g.neovide_refresh_rate = host:find("Mother") and 30 or 50
+g.neovide_refresh_rate = isAtMother and 30 or 50
 
 -- These have no effect with multi-grid turned off, and multi-grid has problems
 -- with satellite.nvim currently.
