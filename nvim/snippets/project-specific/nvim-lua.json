@@ -22,7 +22,6 @@
       "\tend,",
       "})"
     ],
-    "filetype": "lua",
     "prefix": "autocmd (Filetype)"
   },
   "check if file exists": {
