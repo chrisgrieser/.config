@@ -1,26 +1,23 @@
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
 title: Special Characters
 rules:
-  - description: "Bugfix: < and ^ key switched when on German Keyboard layout in Keychrone K3"
+  # FIX < and ^ key switched when on German layout with Keychron K3V2
+  - description: "< and ^ key switch"
     manipulators:
-      # caret ^
       - type: basic
-        from: { key_code: non_us_backslash }
+        from: { key_code: non_us_backslash, modifiers: { optional: [shift] } }
         to:
-          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ }
-          - { key_code: vk_none, hold_down_milliseconds: 50 }
-          - { key_code: "6", modifiers: [shift] }
-        to_after_key_up:
-          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
+          - key_code: grave_accent_and_tilde
         conditions:
           - { type: input_source_if, input_sources: [language: ^de$] }
-          - { type: frontmost_application_unless, file_paths: [wezterm-gui$] }
+          - { type: device_if, identifiers: [{ product_id: 592 }] }
   #─────────────────────────────────────────────────────────────────────────────
+  # DEAD KEYS FIX
   - description: "Avoid dead keys (prevent expecting another key): ^~`"
     manipulators:
       # caret ^
       - type: basic
-        from: { key_code: non_us_backslash }
+        from: { key_code: grave_accent_and_tilde } # BUG(Keychron), actually, it's non_us_backslash
         to:
           - select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ }
           - { key_code: vk_none, hold_down_milliseconds: 50 }
@@ -40,7 +37,7 @@ rules:
         to_after_key_up:
           - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
         conditions:
-          - { type: input_source_if, input_sources: [{language: ^de$}] }
+          - { type: input_source_if, input_sources: [{ language: ^de$ }] }
           # INFO wezterm already has a setting to disable dead keys, so it's not needed there
           - { type: frontmost_application_unless, file_paths: [wezterm-gui$] }
       # tilde ~
@@ -56,6 +53,7 @@ rules:
         to_after_key_up:
           - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
   #─────────────────────────────────────────────────────────────────────────────
+  # REMAPPING
   - description: "Remap to make them available without alt+shift: \\[]"
     manipulators:
       # § -> |
@@ -67,7 +65,8 @@ rules:
           - { key_code: "7", modifiers: [option] }
       # ° → \
       - type: basic
-        from: { key_code: non_us_backslash, modifiers: { mandatory: [shift] } }
+        # BUG(Keychron), actually, it's non_us_backslash
+        from: { key_code: grave_accent_and_tilde, modifiers: { mandatory: [shift] } }
         conditions:
           - type: input_source_if
             input_sources: [{ language: ^de$ }]
