@@ -5,7 +5,7 @@ local kind = vim.lsp.protocol.SymbolKind
 return {
 	{ -- virtual text showing usage count of functions
 		"Wansmer/symbol-usage.nvim",
-		event = (vim.fn.has("nvim-0.10.0") == 1 and "LspAttach" or "BufReadPre"),
+		event = (vim.fn.has("nvim-0.10.0") == 1 and "LspAttach" or "BufReadPre"), -- TODO
 		opts = {
 			hl = { link = "NonText" },
 			vt_position = "end_of_line",
@@ -50,12 +50,12 @@ return {
 		keys = {
 			{
 				"<leader>cl",
-				"<cmd>lua require('rulebook').lookupRule()<CR>",
+				function() require("rulebook").lookupRule() end,
 				desc = " Lookup Rule",
 			},
 			{
 				"<leader>cg",
-				"<cmd>lua require('rulebook').ignoreRule()<CR>",
+				function() require("rulebook").ignoreRule() end,
 				desc = "󰅜 Ignore Rule",
 			},
 		},
