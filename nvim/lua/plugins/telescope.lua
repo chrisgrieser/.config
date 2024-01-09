@@ -167,7 +167,7 @@ local function telescopeConfig()
 
 	require("telescope").setup {
 		defaults = {
-			path_display = "tail",
+			path_display = { "tail" },
 			selection_caret = "󰜋 ",
 			multi_icon = "󰒆 ",
 			results_title = false,
