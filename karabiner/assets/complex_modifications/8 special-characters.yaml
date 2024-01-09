@@ -1,89 +1,49 @@
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
 title: Special Characters
 rules:
-  - description: "{}^ German to US layout for vim"
+  - description: "Bugfix: < and ^ key switched when on German Keyboard layout in Keychrone K3"
     manipulators:
-      # Curly Brace {
-      - type: basic
-        from: { key_code: "8", modifiers: { mandatory: [option] } }
-        conditions:
-          - { type: input_source_if, input_sources: [language: ^de$] }
-          - { type: frontmost_application_if, file_paths: [^/Applications/Obsidian\.app, "[Nn]eovide"] }
-        to:
-          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ }
-          - { key_code: vk_none, hold_down_milliseconds: 20 }
-          - { key_code: open_bracket, modifiers: [shift] }
-        to_after_key_up:
-          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
-      # Curly Brace }
-      - type: basic
-        from: { key_code: "9", modifiers: { mandatory: [option] } }
-        conditions:
-          - { type: input_source_if, input_sources: [language: ^de$] }
-          - type: frontmost_application_if
-          - { type: frontmost_application_if, file_paths: [^/Applications/Obsidian\.app, "[Nn]eovide"] }
-        to:
-          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ }
-          - { key_code: vk_none, hold_down_milliseconds: 20 }
-          - { key_code: close_bracket, modifiers: [shift] }
-        to_after_key_up:
-          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
       # caret ^
       - type: basic
         from: { key_code: non_us_backslash }
-        conditions:
-          - { type: input_source_if, input_sources: [language: ^de$] }
         to:
           - select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ }
-          - { key_code: vk_none, hold_down_milliseconds: 20 }
+          - { key_code: vk_none, hold_down_milliseconds: 50 }
           - { key_code: "6", modifiers: [shift] }
         to_after_key_up:
           - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
+        conditions:
+          - { type: input_source_if, input_sources: [language: ^de$] }
+          - { type: frontmost_application_unless, file_paths: [wezterm-gui$] }
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "Special Characters: |\\~[]"
+  - description: "Avoid dead keys (prevent expecting another key): ^~`"
     manipulators:
+      # caret ^
       - type: basic
-        from: { key_code: "3", modifiers: { mandatory: [shift] } }
-        conditions:
-          - { type: input_source_if, input_sources: [{ language: ^de$ }] }
-        to:
-          - { key_code: "7", modifiers: [option] }
-        # "🔘 ° → \\ (+ US Layout); ⌥^ for ° Symbol"
-      - type: basic
-        from: { key_code: non_us_backslash, modifiers: { mandatory: [shift] } }
-        conditions:
-          - type: input_source_if
-            input_sources: [{ language: ^de$ }]
+        from: { key_code: non_us_backslash }
         to:
           - select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ }
-          - { key_code: vk_none, hold_down_milliseconds: 20 }
-          - key_code: non_us_pound
+          - { key_code: vk_none, hold_down_milliseconds: 50 }
+          - { key_code: "6", modifiers: [shift] }
         to_after_key_up:
           - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
-      - type: basic
-        from: { key_code: non_us_backslash, modifiers: { mandatory: [option] } }
         conditions:
-          - type: input_source_if
-            input_sources: [{ language: ^de$ }]
-        to:
-          - { key_code: non_us_backslash, modifiers: [shift] }
-      - type: basic
-        from: { key_code: non_us_backslash, modifiers: { mandatory: [command] } }
-        conditions:
-          - type: input_source_if
-            input_sources: [{ language: ^de$ }]
-        to:
-          - { key_code: "6", modifiers: [command] }
-      # One Stroke backtick `
+          - { type: input_source_if, input_sources: [language: ^de$] }
+          - { type: frontmost_application_unless, file_paths: [wezterm-gui$] }
+      # backtick `
       - type: basic
         from: { key_code: equal_sign, modifiers: { mandatory: [shift] } }
         to:
-          - { key_code: equal_sign, modifiers: [shift] }
-          - key_code: spacebar
+          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ }
+          - { key_code: vk_none, hold_down_milliseconds: 50 }
+          - key_code: grave_accent_and_tilde
+        to_after_key_up:
+          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
         conditions:
-          - type: input_source_if
-            input_sources: [{ language: ^de$ }]
-      # one stroke tilde ~
+          - { type: input_source_if, input_sources: [{language: ^de$}] }
+          # INFO wezterm already has a setting to disable dead keys, so it's not needed there
+          - { type: frontmost_application_unless, file_paths: [wezterm-gui$] }
+      # tilde ~
       - type: basic
         from: { key_code: "n", modifiers: { mandatory: [option] } }
         conditions:
@@ -91,12 +51,28 @@ rules:
           - { type: frontmost_application_unless, file_paths: [wezterm-gui$] }
         to:
           - select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ }
-          - { key_code: vk_none, hold_down_milliseconds: 20 }
+          - { key_code: vk_none, hold_down_milliseconds: 50 }
           - { key_code: grave_accent_and_tilde, modifiers: [shift] }
         to_after_key_up:
           - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
-      #─────────────────────────────────────────────────────────────────────────────
-      # ⚒️ ß´ → [] (+ German to US Layout), ⌥+ß → ß
+  #─────────────────────────────────────────────────────────────────────────────
+  - description: "Remap to make them available without alt+shift: \\[]"
+    manipulators:
+      # § -> |
+      - type: basic
+        from: { key_code: "3", modifiers: { mandatory: [shift] } }
+        conditions:
+          - { type: input_source_if, input_sources: [{ language: ^de$ }] }
+        to:
+          - { key_code: "7", modifiers: [option] }
+      # ° → \
+      - type: basic
+        from: { key_code: non_us_backslash, modifiers: { mandatory: [shift] } }
+        conditions:
+          - type: input_source_if
+            input_sources: [{ language: ^de$ }]
+        to:
+          - { key_code: "7", modifiers: [option, shift] }
       # ß to [
       - type: basic
         from: { key_code: hyphen }
@@ -109,28 +85,19 @@ rules:
               - ^net\.highlightsapp\.universal$
               - ^com\.mimestream\.Mimestream$
         to:
-          - { select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ } }
-          - { key_code: vk_none, hold_down_milliseconds: 20 }
-          - key_code: open_bracket
-        to_after_key_up:
-          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
-      # ⌥ß → ß
+          - { key_code: "5", modifiers: [option] }
+      # replacement: ⌥ß → ß
       - type: basic
         from: { key_code: hyphen, modifiers: { mandatory: [option] } }
         conditions:
           - { type: input_source_if, input_sources: [language: ^de$] }
         to:
           - key_code: hyphen
-
       # forward tick to ]
       - type: basic
         from: { key_code: equal_sign }
         conditions:
           - { type: input_source_if, input_sources: [language: ^de$] }
         to:
-          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ }
-          - { key_code: vk_none, hold_down_milliseconds: 20 }
-          - key_code: close_bracket
-        to_after_key_up:
-          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
+          - { key_code: "6", modifiers: [option] }
 #───────────────────────────────────────────────────────────────────────────────

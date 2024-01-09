@@ -14,7 +14,6 @@ keymap(
 	function() vim.cmd.edit(pathOfThisFile) end,
 	{ desc = "⌨️ Edit " .. vim.fs.basename(pathOfThisFile) }
 )
-
 --------------------------------------------------------------------------------
 -- NAVIGATION
 
