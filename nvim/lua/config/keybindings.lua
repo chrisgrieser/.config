@@ -220,7 +220,7 @@ keymap({ "n", "x", "i" }, "<D-w>", function()
 	local onlyOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) == 1
 	if onlyOneBuffer then return end
 	lastClosed = vim.api.nvim_buf_get_name(0)
-	vim.cmd.bdelete() -- close buffer
+	vim.cmd.bdelete()
 end, { desc = "󰽙 :close / :bdelete" })
 
 keymap({ "n", "x", "i" }, "<D-T>", function()
