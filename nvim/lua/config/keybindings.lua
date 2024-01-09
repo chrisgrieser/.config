@@ -4,7 +4,6 @@ local fn = vim.fn
 
 local u = require("config.utils")
 local keymap = require("config.utils").uniqueKeymap
-
 --------------------------------------------------------------------------------
 -- META
 
@@ -85,7 +84,7 @@ keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
 --------------------------------------------------------------------------------
 -- EDITING
 
--- emulate vim-abolish
+-- emulate some basic commands from `vim-abolish`
 keymap("n", "crt", "mzguiwgUl`z", { desc = "󰬴 Titlecase" })
 keymap("n", "cru", "mzgUiw`z", { desc = "󰬴 lowercase" })
 keymap("n", "crl", "mzguiw`z", { desc = "󰬴 UPPERCASE" })
