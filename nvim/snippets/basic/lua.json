@@ -82,6 +82,7 @@
   },
   "import module": {
     "body": "local ${1:name} = require(\"${2:module}.${1:name}\")",
+    "filetype": "lua",
     "prefix": "import module"
   },
   "nodiscard": {
