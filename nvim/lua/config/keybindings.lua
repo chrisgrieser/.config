@@ -64,7 +64,7 @@ keymap("n", "gP", "gf", { desc = " Goto Path under cursor" })
 -- quickfix
 keymap("n", "gq", vim.cmd.cnext, { desc = " Next Quickfix" })
 keymap("n", "gQ", vim.cmd.cprevious, { desc = " Prev Quickfix" })
-keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Clear QuickFix List" })
+keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Clear Quickfix List" })
 
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS
