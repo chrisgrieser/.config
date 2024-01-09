@@ -190,6 +190,9 @@
 			"properties": {
 				"vendor_id": {
 					"type": "integer"
+				},
+				"product_id": {
+					"type": "integer"
 				}
 			},
 			"required": [],
@@ -491,6 +494,9 @@
 						"additionalProperties": false,
 						"properties": {
 							"vendor_id": {
+								"type": "integer"
+							},
+							"product_id": {
 								"type": "integer"
 							}
 						}
