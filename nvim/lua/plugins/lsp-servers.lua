@@ -5,7 +5,8 @@ local u = require("config.utils")
 ---mappings from https://github.com/williamboman/mason-lspconfig.nvim/blob/main/lua/mason-lspconfig/mappings/server.lua
 ---@type table<string, string>
 vim.g.lspToMasonMap = {
-	autotools_ls = "autotools-language-server", -- Makefiles
+	-- buggy, try again later
+	-- autotools_ls = "autotools-language-server", -- Makefiles lsp
 	bashls = "bash-language-server",
 	biome = "biome", -- ts/js/json linter/formatter
 	cssls = "css-lsp",
@@ -19,8 +20,8 @@ vim.g.lspToMasonMap = {
 	pyright = "pyright", -- python lsp
 	ruff_lsp = "ruff-lsp", -- python linter
 	stylelint_lsp = "stylelint-lsp", -- css linter
-	taplo = "taplo", -- toml
-	tsserver = "typescript-language-server", -- js/ts
+	taplo = "taplo", -- toml lsp
+	tsserver = "typescript-language-server", -- js/ts lsp
 	typos_lsp = "typos-lsp", -- spellchecker for code
 	vale_ls = "vale-ls", -- natural language linter
 	yamlls = "yaml-language-server",
@@ -248,7 +249,6 @@ serverConfigs.ltex = {
 					"EN_QUOTES", -- don't expect smart quotes
 					"WHITESPACE_RULE", -- too many false positives
 					"PUNCTUATION_PARAGRAPH_END", -- too many false positives
-					"CURRENCY",
 				},
 			},
 			diagnosticSeverity = {
