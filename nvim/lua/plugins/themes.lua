@@ -3,14 +3,14 @@
 
 -- INFO only the first theme will be used
 local lightThemes = {
-	"sainnhe/everforest",
-	-- { "folke/tokyonight.nvim", opts = { style = "day" } },
+	{ "folke/tokyonight.nvim", opts = { style = "day" } },
+	-- "sainnhe/everforest",
+	-- { "EdenEast/nightfox.nvim", name = "dawnfox" },
 	-- {
 	-- 	"marko-cerovac/material.nvim",
 	-- 	init = function() vim.g.material_style = "lighter" end,
 	-- 	opts = { lualine_style = "stealth", high_visibility = { lighter = false } },
 	-- },
-	-- { "EdenEast/nightfox.nvim", name = "dawnfox" },
 }
 
 local darkThemes = {
