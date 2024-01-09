@@ -40,13 +40,15 @@ vim.api.nvim_create_autocmd("FileType", {
 require("lazy").setup("plugins", {
 	defaults = { lazy = true },
 	lockfile = vim.fn.stdpath("config") .. "/.lazy-lock.json", -- make file hidden
-	dev = { -- for repos with <pattern>, use local repos if one exists in <path>
+
+	-- for repos with <pattern>, use local repos if one exists in <path>
+	dev = {
 		path = os.getenv("HOME") .. "/Repos",
 		patterns = { "chrisgrieser" }, -- set `dev = true` for all matching repos
 		fallback = true,
 	},
 	-- colorschemes to use during installation
-	install = { colorscheme = { "tokyonight", "dawnfox", "habamax" } },
+	install = { colorscheme = { "tokyonight", "nightfox", "habamax" } },
 	ui = {
 		wrap = true,
 		border = vim.g.myBorderStyle,
