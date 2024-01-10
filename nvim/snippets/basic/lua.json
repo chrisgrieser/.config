@@ -30,7 +30,6 @@
       "\ttable.insert(${1:matches}, match)",
       "end"
     ],
-    "filetype": "lua",
     "prefix": "find all in string"
   },
   "for each (list)": {
@@ -54,7 +53,6 @@
   },
   "home": {
     "body": "os.getenv(\"HOME\")",
-    "filetype": "lua",
     "prefix": "home"
   },
   "if .. then .. else": {
@@ -115,7 +113,6 @@
       "\treturn content, true",
       "end"
     ],
-    "filetype": "lua",
     "prefix": "read file"
   },
   "safe require": {
@@ -124,7 +121,6 @@
       "if not (ok and ${1:module}) then return end",
       "${1:module}.$0"
     ],
-    "filetype": "lua",
     "prefix": "safe require"
   },
   "split (gmatch)": {
