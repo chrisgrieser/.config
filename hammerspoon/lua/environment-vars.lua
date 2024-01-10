@@ -30,17 +30,14 @@ M.codeFont = readZshEnv("CODE_FONT")
 M.videoAndAudioApps = {
 	"IINA",
 	"YouTube",
-	"Youtube", -- PWA sometimes cased differently
 	"zoom.us",
 	"FaceTime",
 	"Twitch",
-	"Twitch.tv",
 	"Netflix",
 	"Prime Video",
 	"Freevee",
 	"Tageschau",
-	"CrunchyRoll",
-	"Crunchyroll", -- PWA sometimes cased differently
+	"Crunchyroll", 
 }
 
 --------------------------------------------------------------------------------
@@ -51,8 +48,7 @@ M.isAtOffice = (deviceName:find("[Mm]ini") or deviceName:find("eduroam")) ~= nil
 M.isAtHome = (deviceName:find("iMac") and deviceName:find("Home")) ~= nil
 M.isAtMother = deviceName:find("Mother") ~= nil
 
----not using static variable, since projector connection can change during
----runtime
+---not static variable, since projector connection can change during runtime
 ---@nodiscard
 ---@return boolean
 function M.isProjector()
