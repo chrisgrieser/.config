@@ -1,11 +1,11 @@
 #!/usr/bin/env zsh
 
-# GUARD only trigger on deactivation of $TASK_APP
+# GUARD only trigger on deactivation of of GoodTask
 if [[ "$SENDER" = "front_app_switched" ]]; then
 	data="/tmp/sketchybar_front_app1"
 	[[ -f "$data" ]] && deactivated_app=$(<"$data")
 	echo -n "$INFO" >"$data"
-	[[ "$deactivated_app" != "GoodTasks" ]] && return 0
+	[[ "$deactivated_app" != "GoodTask" ]] && return 0
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
