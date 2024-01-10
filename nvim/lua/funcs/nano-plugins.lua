@@ -242,14 +242,7 @@ function M.tabout()
 		local nextClosingPairPos = line:find(closingPairs, col + 1)
 		if not nextClosingPairPos then return end
 
-		-- INFO nvim_win_set_cursor does not work in insert mode, therefore
-		-- temporarily switching to normal mode
-		vim.cmd.stopinsert()
-		vim.defer_fn(function()
-			vim.api.nvim_win_set_cursor(0, { row, nextClosingPairPos })
-			local isEndOfLine = nextClosingPairPos == #line
-			vim.cmd.startinsert { bang = isEndOfLine }
-		end, 1)
+		vim.api.nvim_win_set_cursor(0, { row, nextClosingPairPos })
 	end
 end
 
