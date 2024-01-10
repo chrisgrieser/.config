@@ -3,9 +3,9 @@
 
 -- INFO only the first theme will be used
 local lightThemes = {
-	{ "folke/tokyonight.nvim", opts = { style = "day" } },
+	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
+	-- { "folke/tokyonight.nvim", opts = { style = "day" } },
 	-- "sainnhe/everforest",
-	-- { "EdenEast/nightfox.nvim", name = "dawnfox" },
 	-- {
 	-- 	"marko-cerovac/material.nvim",
 	-- 	init = function() vim.g.material_style = "lighter" end,
