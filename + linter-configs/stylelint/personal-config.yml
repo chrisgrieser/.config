@@ -23,5 +23,3 @@ rules:
   declaration-empty-line-before: never
   custom-property-empty-line-before: never
   max-nesting-depth: 3
-
-  lightness-notation: null # PENDING support from stylelint-lsp

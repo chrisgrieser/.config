@@ -17,7 +17,7 @@ curl "https://raw.githubusercontent.com/stylelint/stylelint-config-recommended/m
 node --experimental-detect-module --eval '
 	import * as recommended from "./recommended.js"
 	import * as standard from "./standard.js"
-	const merged = Object.assign({}, recommended.default.rules, standard.default.rules) 
+	const merged = Object.assign({}, recommended.default.rules, standard.default.rules)
 	console.log(JSON.stringify(merged));
 ' >stylelint-standard.json
 
@@ -26,6 +26,9 @@ yq --output-format="yaml" stylelint-standard.json >stylelint-standard.yml
 
 # merge with existing config, giving to values from the personal config
 yq '.rules = load("stylelint-standard.yml") + .rules' personal-config.yml >compiled.yml
+
+# PENDING stylelint-lsp upgrade
+yq --inplace 'del(.rules.lightness-notation)' compiled.yml
 
 # cleanup temp files
 rm -f recommended.js standard.js stylelint-standard.json
