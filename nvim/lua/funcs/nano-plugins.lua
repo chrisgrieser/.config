@@ -104,11 +104,11 @@ function M.openAtRegex101()
 	end
 
 	-- DOCS https://github.com/firasdib/Regex101/wiki/FAQ#how-to-prefill-the-fields-on-the-interface-via-url
-	local url = ("https://regex101.com/?regex=%s&subst=%s&flags=%s&flavor=%s"):format(
+	local url = ("https://regex101.com/?regex=%s&flags=%s&flavor=%s%s"):format(
 		pattern,
-		(replace and "&subst=" .. replace or ""),
 		flags,
-		lang
+		lang,
+		(replace and "&subst=" .. replace or "")
 	)
 	vim.fn.system { "open", url }
 end
@@ -253,7 +253,7 @@ function M.jumpInBuffer(direction)
 	local key = direction == "back" and "<C-o>" or "<C-i>"
 	local jumpListEnd = direction == "back" and 0 or #vim.fn.getjumplist(0)[1]
 	repeat
-		local cmd = ([["normal \%s"]]):format(key)-- SIC must be double-quoted
+		local cmd = ([["normal \%s"]]):format(key) -- SIC must be double-quoted
 		pcall(vim.cmd.execute, cmd)
 		local jumpPos = vim.fn.getjumplist(0)[2]
 		if jumpPos == jumpListEnd then
