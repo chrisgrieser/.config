@@ -30,7 +30,7 @@ response=$(curl --silent https://api.openai.com/v1/chat/completions \
 
 #───────────────────────────────────────────────────────────────────────────────
 
-if [[ "$output_flavor" == "response" ]]; then
+if [[ "$output_type" == "plain" ]]; then
 	echo -n "$response"
 	exit 0
 fi
@@ -42,10 +42,10 @@ echo "$response" >"$cache/rephrased.txt"
 diff=$(git diff --word-diff "$cache/selection.txt" "$cache/rephrased.txt" |
 	sed -e "1,5d")
 
-if [[ "$output_flavor" == "markdown" ]]; then
+if [[ "$output_type" == "markdown" ]]; then
 	output=$(echo "$diff" |
 	sed -e 's/\[-/~~/g' -e 's/-\]/~~/g' -e 's/{+/==/g' -e 's/+}/==/g')
-elif [[ "$output_flavor" == "critic-markup" ]]; then
+elif [[ "$output_type" == "critic-markup" ]]; then
 	output=$(echo "$diff" |
 	sed -e 's/\[-/{--/g' -e 's/-\]/--}/g' -e 's/{+/{++/g' -e 's/+}/++}/g')
 fi
