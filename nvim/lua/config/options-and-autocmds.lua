@@ -102,7 +102,7 @@ opt.shortmess:append("sSI") -- reduce info in :messages
 opt.report = 9001 -- disable "x more/fewer lines" messages
 
 opt.iskeyword:append("-") -- don't treat "-" as word boundary, e.g. for kebab-case variables
-opt.nrformats = { "unsigned" } -- make <C-a>/<C-x> ignore negative numbers
+opt.nrformats = {} -- make <C-a>/<C-x> ignore octal and hex
 
 opt.updatetime = 250 -- also affects cursorword symbols and lsp-hints
 opt.timeoutlen = 666 -- also affects duration until which-key is shown
