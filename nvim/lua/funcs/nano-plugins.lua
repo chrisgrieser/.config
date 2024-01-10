@@ -82,6 +82,8 @@ function M.openAlfredPref()
 end
 
 --- open the next regex at https://regex101.com/
+
+
 function M.openAtRegex101()
 	local lang = vim.bo.filetype
 	local text, pattern, replace, flags
