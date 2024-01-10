@@ -293,6 +293,7 @@ serverConfigs.typos_lsp = {
 -- DOCS https://vale.sh/docs/topics/config#search-process
 serverConfigs.vale_ls = {
 	init_options = {
+		configPath = vim.g.linterConfigFolder .. "/vale/vale.ini",
 		installVale = true, -- needs to be set, since false by default
 		syncOnStartup = false,
 	},
@@ -301,7 +302,7 @@ serverConfigs.vale_ls = {
 }
 
 -- FIX https://github.com/errata-ai/vale-ls/issues/4
-vim.env.VALE_CONFIG_PATH = vim.g.linterConfigFolder .. "/vale/vale.ini"
+-- vim.env.VALE_CONFIG_PATH = vim.g.linterConfigFolder .. "/vale/vale.ini"
 
 --------------------------------------------------------------------------------
 
