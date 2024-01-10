@@ -1751,6 +1751,27 @@
 			<key>variable</key>
 			<string>fork_on_clone</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>2</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Depth of the clone (`--shallow={n}`)</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>cloning_depth</string>
+		</dict>
 	</array>
 	<key>version</key>
 	<string>0.9.4</string>
