@@ -110,6 +110,7 @@ local function movieLayout()
 		"Mimestream",
 		"Ivory",
 		"GoodTask",
+		"Reminders",
 	}
 	print("🔲 Loaded MovieModeLayout")
 end
