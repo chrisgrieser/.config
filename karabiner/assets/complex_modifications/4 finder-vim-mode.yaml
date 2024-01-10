@@ -1343,6 +1343,6 @@ rules:
               PATH_IN_REPO=$(osascript -l JavaScript -e "encodeURIComponent('$PATH_IN_REPO')")
 
               URL="$REMOTE_URL/blob/$BRANCH/$PATH_IN_REPO"
-              echo "$URL" | pbcopy
+              echo -n "$URL" | pbcopy
               open "$URL"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
