@@ -40,7 +40,7 @@ M.timer_hourlyNotice = hs.timer
 		local isFullHour = os.date("%M") == "00"
 		if isFullHour and u.screenIsUnlocked() and u.betweenTime(8, 23) and not env.isProjector() then
 			local hour = tostring(os.date("%H:%M"))
-			hs.alert(hour, 1)
+			hs.alert(hour, 1.5)
 		end
 	end)
 	:start()
