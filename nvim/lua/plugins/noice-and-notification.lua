@@ -38,13 +38,10 @@ local routes = {
 	{ filter = { event = "msg_show", find = "^%(%d+ of %d+%):" }, skip = true },
 
 	-----------------------------------------------------------------------------
-	{ -- nvim-early-retirement
-		filter = {
-			event = "notify",
-			cond = function(msg) return msg.opts and msg.opts.title == "early-retirement" end,
-		},
-		view = "mini",
-	},
+	-- nvim-early-retirement
+	{ filter = { event = "notify", find = "^Auto%-closing " }, view = "mini" },
+	-- E211 no longer needed, since early-retirement closes deleted buffers
+	{ filter = { event = "msg_show", find = "E211: File .* no longer available" }, skip = true },
 
 	-- nvim-treesitter
 	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
@@ -73,7 +70,7 @@ return {
 		"folke/noice.nvim",
 		event = "VimEnter", -- earlier to catch notifications on startup
 		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
-		init = function ()
+		init = function()
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "noice",
 				callback = function(ctx) highlightCopyStacktraceLine(ctx.buf) end,
