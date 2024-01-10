@@ -50,15 +50,14 @@ local function customHighlights()
 end
 
 local function themeModifications()
-	local mode = vim.opt.background:get()
+	local mode = vim.o.background
 	local theme = g.colors_name
 	-- some themes do not set g.colors_name
 	if not theme then theme = mode == "light" and g.lightTheme or g.darkTheme end
 	local vimModes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
 
 	if theme == "tokyonight" then
-		local statuslineYellow = mode == "dark" and "#b8b042" or "#b8b042"
-		local gitsignYellow = mode == "dark" and "#acaa62" or "#acaa62"
+		local statuslineYellow = mode == "dark" and "#b8b042" or "#e8e05e"
 		vim.defer_fn(function()
 			for _, vimMode in pairs(vimModes) do
 				updateHl("lualine_y_diff_modified_" .. vimMode, "guifg=" .. statuslineYellow)
@@ -66,7 +65,7 @@ local function themeModifications()
 				updateHl("lualine_a_" .. vimMode, "gui=bold")
 			end
 		end, 100)
-		updateHl("GitSignsChange", "guifg=" .. gitsignYellow)
+		updateHl("GitSignsChange", "guifg=#acaa62")
 		updateHl("GitSignsAdd", "guifg=#369a96")
 	elseif theme == "monet" then
 		overwriteHl("NonText", { fg = "#717ca7" }) -- more distinguishable from comments
