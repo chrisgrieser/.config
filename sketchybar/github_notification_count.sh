@@ -11,7 +11,7 @@ fi
 
 # GUARD only via interval or when browser (de)activates
 if [[ "$SENDER" == "front_app_switched" ]]; then
-	[[ "$INFO" == "$BROWSER_APP" && "$deactivated_app" == "$BROWSER_APP" ]] || return 0
+	[[ "$INFO" == "$BROWSER_APP" || "$deactivated_app" == "$BROWSER_APP" ]] || return 0
 fi
 
 # GUARD dependencies or API key missing

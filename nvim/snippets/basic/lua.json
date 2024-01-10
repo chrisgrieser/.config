@@ -39,7 +39,6 @@
       "\t$0",
       "end"
     ],
-    "filetype": "lua",
     "prefix": "for each (list)"
   },
   "for each line (of file)": {
