@@ -7,6 +7,9 @@ file_path="$1"
 if [[ ! -f "$file_path" ]]; then
 	echo "No file selected."
 	return 1
+elif [[ "$file_path" =~ "," ]]; then
+	echo "Filenames may not contain commas. Please remove commas and try again."
+	return 1
 elif [[ $# -gt 1 ]]; then
 	echo "Only one file can be processed at a time."
 	return 1
