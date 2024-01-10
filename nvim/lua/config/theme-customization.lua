@@ -57,14 +57,16 @@ local function themeModifications()
 	local vimModes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
 
 	if theme == "tokyonight" then
+		local statuslineYellow = mode == "dark" and "#b8b042" or "#b8b042"
+		local gitsignYellow = mode == "dark" and "#acaa62" or "#acaa62"
 		vim.defer_fn(function()
 			for _, vimMode in pairs(vimModes) do
-				updateHl("lualine_y_diff_modified_" .. vimMode, "guifg=#b8b042")
+				updateHl("lualine_y_diff_modified_" .. vimMode, "guifg=" .. statuslineYellow)
 				updateHl("lualine_y_diff_added_" .. vimMode, "guifg=#369a96")
 				updateHl("lualine_a_" .. vimMode, "gui=bold")
 			end
 		end, 100)
-		updateHl("GitSignsChange", "guifg=#acaa62")
+		updateHl("GitSignsChange", "guifg=" .. gitsignYellow)
 		updateHl("GitSignsAdd", "guifg=#369a96")
 	elseif theme == "monet" then
 		overwriteHl("NonText", { fg = "#717ca7" }) -- more distinguishable from comments
