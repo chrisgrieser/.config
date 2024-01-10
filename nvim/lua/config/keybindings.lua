@@ -214,12 +214,12 @@ keymap(
 local lastClosed
 keymap({ "n", "x", "i" }, "<D-w>", function()
 	vim.cmd("silent! update")
-	local closed = pcall(vim.cmd.close) -- close win
-	if closed then return end
-	local onlyOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) == 1
-	if onlyOneBuffer then return end
-	lastClosed = vim.api.nvim_buf_get_name(0)
-	vim.cmd.bdelete()
+	local winClosed = pcall(vim.cmd.close)
+	local moreThanOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) == 1
+	if not winClosed and moreThanOneBuffer then
+		lastClosed = vim.api.nvim_buf_get_name(0)
+		vim.cmd.bdelete()
+	end
 end, { desc = "󰽙 :close / :bdelete" })
 
 keymap({ "n", "x", "i" }, "<D-T>", function()
