@@ -16,7 +16,7 @@ local defaultSources = {
 			max_indexed_line_length = 120, -- no long lines (e.g. base64-encoded things)
 		},
 		keyword_length = 3,
-		max_item_count = 5, -- since searching all buffers results in many results
+		max_item_count = 4, -- since searching all buffers results in many results
 	},
 	{ name = "path" },
 	{ name = "emoji" },
@@ -197,6 +197,7 @@ return {
 	},
 	{ -- snippet management
 		"chrisgrieser/nvim-scissors",
+		dependencies = "nvim-telescope/telescope.nvim",
 		init = function() u.leaderSubkey("n", " Snippets") end,
 		keys = {
 			{
@@ -212,6 +213,7 @@ return {
 			},
 		},
 		opts = {
+			jsonFormatter = "yq",
 			editSnippetPopup = {
 				height = 0.45, -- between 0-1
 				width = 0.7,
@@ -220,9 +222,9 @@ return {
 					delete = "<D-BS>",
 					openInFile = "<D-o>",
 					insertNextToken = "<D-t>",
+					jumpBetweenBodyAndPrefix = "<D-j>", 
 				},
 			},
-			jsonFormatter = "yq",
 		},
 	},
 }
