@@ -10,7 +10,9 @@ if [[ "$SENDER" = "front_app_switched" ]]; then
 fi
 
 # GUARD only via interval or when browser (de)activates
-[[ "$SENDER" == "front_app_switched" && "$INFO" != "$BROWSER_APP" && "$deactivated_app" != "$BROWSER_APP" ]] && return 0
+if [[ "$SENDER" == "front_app_switched" ]]; then
+	[[ "$INFO" == "$BROWSER_APP" && "$deactivated_app" == "$BROWSER_APP" ]] || return 0
+fi
 
 # GUARD dependencies or API key missing
 if ! command -v yq &>/dev/null; then

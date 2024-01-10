@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>cloning_depth</key>
+	<key>clone_depth</key>
 	<string>10</string>
 	<key>fork_on_clone</key>
 	<true/>

@@ -1770,11 +1770,11 @@
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
-			<string>cloning_depth</string>
+			<string>clone_depth</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.9.4</string>
+	<string>0.10.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
