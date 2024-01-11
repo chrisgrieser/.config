@@ -28,7 +28,7 @@ fi
 # SPECIAL RESTART FOR NEOVIDE/NVIM
 
 # kill
-nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>try|wqall|endtry<CR>"
+nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>wqall<CR>"
 
 # wait until dead
 i=0

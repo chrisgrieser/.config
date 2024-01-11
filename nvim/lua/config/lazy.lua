@@ -66,7 +66,8 @@ require("lazy").setup("plugins", {
 	performance = {
 		rtp = {
 			-- Disable unused builtin plugins from neovim
-			-- INFO do not disable `rplugin`, as it breaks plugins like magma.nvim
+			-- INFO do not disable `rplugin`, as it is requires by plugins like 
+			-- magma.nvim or semshi
 			disabled_plugins = {
 				"matchparen",
 				"matchit",
