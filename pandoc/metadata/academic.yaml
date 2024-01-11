@@ -19,5 +19,5 @@ author:
   - Technical University of Berlin (Germany)
   - christopher.grieser@tu-berlin.de
 
-link-citations: true
+link-citations: false # damit Markus weniger leidet
 link-bibliography: true
