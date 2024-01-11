@@ -1,35 +1,4 @@
-local u = require("config.utils")
---------------------------------------------------------------------------------
-
 return {
-	{ -- harpoon with better UI
-		"otavioschwanck/arrow.nvim",
-		event = "VeryLazy", -- for status line component
-		config = function()
-			u.addToLuaLine(
-				"sections",
-				"lualine_a",
-				require("arrow.statusline").text_for_statusline_with_icons,
-				"before"
-			)
-			require("arrow").setup {
-				show_icons = true,
-				leader_key = "<D-D>", -- cmd+shift+d
-				-- saved in dotfiles folder for syncing purposes
-				save_path = function() return vim.fn.stdpath("config") .. "/bookmarks" end,
-				save_key = function() return (vim.loop.cwd() or "") .. ".txt" end,
-			}
-		end,
-		keys = {
-			"<D-D>",
-			{ "<D-CR>", function() require("arrow.persist").next() end, desc = "󱡁 Next arrow" },
-			{
-				"<D-d>", -- cmd+d
-				function() require("arrow.persist").toggle() end,
-				desc = "󱡁 Mark/Unmark as arrow",
-			},
-		},
-	},
 	{ -- auto-close inactive buffers
 		"chrisgrieser/nvim-early-retirement",
 		event = "VeryLazy",

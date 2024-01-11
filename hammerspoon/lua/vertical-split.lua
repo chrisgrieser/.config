@@ -25,9 +25,7 @@ local function verticalSplit()
 		local msg
 		if frontApp:findMenuItem { "Window", "Move Window to Right Side of Screen" } then
 			msg = {
-				"Tiling not available with the current settings.",
-				"Enable them via:",
-				"",
+				"Tiling not available with the current settings. Enable them via:",
 				"1. System Settings → Desktop & Dock → Mission Control",
 				'2. Enable "Displays have separate Spaces"',
 				"3. Log out and log in again.",
@@ -35,7 +33,6 @@ local function verticalSplit()
 		else
 			msg = {
 				frontApp:name() .. "does not support window options.",
-				"",
 				"Start the split from the other app.",
 			}
 		end
