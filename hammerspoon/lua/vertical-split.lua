@@ -30,7 +30,7 @@ local function verticalSplit()
 				"",
 				"1. System Settings → Desktop & Dock → Mission Control",
 				'2. Enable "Displays have separate Spaces"',
-				"3. Log out and log in again",
+				"3. Log out and log in again.",
 			}
 		else
 			msg = {
