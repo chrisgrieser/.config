@@ -35,12 +35,12 @@ M.timer_JourFixe = hs.timer
 	:start()
 
 -- notify every full hour
-M.timer_hourlyNotice = hs.timer
+M.timer_clock = hs.timer
 	.doEvery(60, function()
 		local isFullHour = os.date("%M") == "00"
 		if isFullHour and u.screenIsUnlocked() and u.betweenTime(8, 23) and not env.isProjector() then
 			local hour = tostring(os.date("%H:%M"))
-			hs.alert(hour, 1.5)
+			hs.alert(hour, 2)
 		end
 	end)
 	:start()
