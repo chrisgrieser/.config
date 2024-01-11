@@ -4,7 +4,7 @@ To avoid a dependency on
 (and in turn it's dependencies) just for a ~100 lines of code, [this
 script](create_stylelint_config.sh) is used to fetch the
 `stylelint-config-standard` and `stylelint-config-recommended` and merge them
-with my personal config.
+with the personal config.
 
 This also makes the stylelint config more portable, for example for the
 stylelint LSP.
