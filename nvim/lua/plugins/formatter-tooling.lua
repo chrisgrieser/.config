@@ -130,6 +130,10 @@ return {
 	},
 	{ -- package manager
 		"williamboman/mason.nvim",
+		init = function()
+			-- system python is on 3.9, but some programs require 3.12 (e.g. autotools-ls)
+			vim.g.python3_host_prog = vim.env.HOMEBREW_PREFIX .. "/bin/python3.12"
+		end,
 		keys = {
 			{ "<leader>pm", vim.cmd.Mason, desc = " Mason" },
 		},

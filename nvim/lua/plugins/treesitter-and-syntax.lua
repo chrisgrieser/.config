@@ -72,8 +72,8 @@ return {
 		init = function()
 			-- use `pynvim` installed with mason
 			-- (not using `require("mason-registry")` to avoid loading mason)
-			vim.g.python3_host_prog = vim.fn.stdpath("data")
-				.. "/mason/packages/pynvim/venv/bin/python3"
+			-- vim.g.python3_host_prog = vim.fn.stdpath("data")
+			-- 	.. "/mason/packages/pynvim/venv/bin/python3"
 
 			-- better provided by LSP
 			vim.g["semshi#error_sign"] = false

@@ -15,7 +15,6 @@ vim.g.mapleader = ","
 vim.g.maplocalleader = ";"
 vim.g.myBorderStyle = "single" ---@type "single"|"double"|"rounded"|"solid"|"none"
 vim.g.linterConfigFolder = os.getenv("HOME") .. "/.config/+ linter-configs/"
-vim.g.python3_host_prog = "/opt/homebrew/bin/python3.12" -- system python on 3.9
 
 --------------------------------------------------------------------------------
 
