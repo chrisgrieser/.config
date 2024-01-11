@@ -133,8 +133,8 @@ keymap(
 keymap({ "n", "x" }, "ü", "<C-x>", { desc = " Decrement" })
 
 -- Undo
+keymap("n", "u", "<cmd>silent undo<CR>") -- to silence it
 keymap("n", "U", "<cmd>silent redo<CR>")
-keymap("n", "u", "<cmd>silent undo<CR>")
 
 -- cmd+E: inline code
 keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = " Inline Code" }) -- no selection = word under cursor
