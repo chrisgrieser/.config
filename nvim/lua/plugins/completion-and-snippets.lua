@@ -84,6 +84,7 @@ local function cmpconfig()
 			end, { "i", "s" }),
 			-- cmd+j: Jump to next location
 			["<D-j>"] = cmp.mapping(function(_)
+				-- DOCS https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#api-2
 				if require("luasnip").locally_jumpable(1) then
 					require("luasnip").jump(1)
 				else
@@ -213,18 +214,21 @@ return {
 			},
 		},
 		opts = {
-			jsonFormatter = "yq",
 			editSnippetPopup = {
 				height = 0.45, -- between 0-1
 				width = 0.7,
 				border = vim.g.myBorderStyle,
 				keymaps = {
-					delete = "<D-BS>",
+					deleteSnippet = "<D-BS>",
 					openInFile = "<D-o>",
 					insertNextToken = "<D-t>",
-					jumpBetweenBodyAndPrefix = "<D-j>", 
+					jumpBetweenBodyAndPrefix = "<D-j>",
 				},
 			},
+			telescope = {
+				queryAlsoSearchesBody = true,
+			},
+			jsonFormatter = "yq",
 		},
 	},
 }
