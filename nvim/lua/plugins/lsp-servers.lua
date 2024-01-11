@@ -5,8 +5,7 @@ local u = require("config.utils")
 ---mappings from https://github.com/williamboman/mason-lspconfig.nvim/blob/main/lua/mason-lspconfig/mappings/server.lua
 ---@type table<string, string>
 vim.g.lspToMasonMap = {
-	-- buggy, try again later
-	-- autotools_ls = "autotools-language-server", -- Makefiles lsp
+	autotools_ls = "autotools-language-server", -- Makefiles lsp
 	bashls = "bash-language-server",
 	biome = "biome", -- ts/js/json linter/formatter
 	cssls = "css-lsp",
