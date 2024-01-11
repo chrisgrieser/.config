@@ -22,9 +22,24 @@ local function verticalSplit()
 	-- GUARD
 	local frontApp = hs.application.frontmostApplication()
 	if not frontApp:findMenuItem { "Window", "Tile Window to Right of Screen" } then
-		local msg = frontApp:name()
-			.. " does not support window options. \n\nStart the split from the other app."
-		hs.alert(msg, 3)
+		local msg
+		if frontApp:findMenuItem { "Window", "Move Window to Right Side of Screen" } then
+			msg = {
+				"Tiling not available with the current settings.",
+				"Enable them via:",
+				"",
+				"1. System Settings → Desktop & Dock → Mission Control",
+				'2. Enable "Displays have separate Spaces"',
+				"3. Log out and log in again",
+			}
+		else
+			msg = {
+				frontApp:name() .. "does not support window options.",
+				"",
+				"Start the split from the other app.",
+			}
+		end
+		hs.alert(table.concat(msg, "\n"), 3)
 		return
 	end
 
@@ -55,6 +70,4 @@ end
 
 hs.hotkey.bind(require("lua.utils").hyper, "V", verticalSplit)
 
---------------------------------------------------------------------------------
-
-return M -- catch this after requiring to persist from garbage collector
+return M -- save this after requiring to persist from garbage collector
