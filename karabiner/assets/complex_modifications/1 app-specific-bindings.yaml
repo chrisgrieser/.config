@@ -230,7 +230,7 @@ rules:
         to:
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-              nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>try|wqall|endtry<CR>"
+              nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>wqall<CR>"
               sleep 0.5
               if pgrep -xq "neovide" || pgrep -xq "nvim"; then
                 osascript -e 'display notification "" with title "⚔️ Force killing nvim…"'
