@@ -83,7 +83,6 @@ end
 
 --- open the next regex at https://regex101.com/
 
-
 function M.openAtRegex101()
 	local lang = vim.bo.filetype
 	local text, pattern, replace, flags
@@ -139,10 +138,13 @@ function M.selectMake()
 end
 
 -- Increment or toggle if cursorword is true/false. Simplified implementation
--- of dial.nvim. (requires `expr = true` for the keymap)
+-- of dial.nvim. (Requires `expr = true` for the keymap.)
 function M.toggleOrIncrement()
 	local cword = vim.fn.expand("<cword>")
-	local bool = { ["true"] = "false", ["True"] = "False" } -- capitalized for python
+	local bool = {
+		["true"] = "false",
+		["True"] = "False", -- capitalized for python
+	}
 	local toggle
 	for word, opposite in pairs(bool) do
 		if cword == word then toggle = opposite end
