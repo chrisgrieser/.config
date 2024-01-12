@@ -66,7 +66,9 @@ function run() {
 				repo,
 				comments.toString(),
 				`(${humanRelativeDate(item.created_at)})`,
-			].filter(Boolean).join("   ");
+			]
+				.filter(Boolean)
+				.join("   ");
 
 			return {
 				title: draftIcon + title,

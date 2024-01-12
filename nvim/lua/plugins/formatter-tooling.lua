@@ -35,7 +35,7 @@ local dependencies = {
 	"debugpy", -- nvim-dap-python
 	"shellcheck", -- bash-lsp/efm, PENDING https://github.com/bash-lsp/bash-language-server/issues/663
 	"markdownlint", -- efm
-	"pynvim", -- semshi
+	"yq", -- nvim-scissors
 }
 
 -- not real formatters, but pseudo-formatters from conform.nvim
@@ -130,17 +130,15 @@ return {
 	},
 	{ -- package manager
 		"williamboman/mason.nvim",
-		-- system python is on 3.9, but some programs require 3.12 (e.g. autotools-ls)
-		init = function() vim.g.python3_host_prog = vim.env.HOMEBREW_PREFIX .. "/bin/python3.12" end,
+		init = function()
+			-- system python is on 3.9, but some programs require 3.12 (e.g. autotools-ls)
+			-- NOTE this has the drawback that `pynvim` cannot be installed anymore
+			vim.g.python3_host_prog = vim.env.HOMEBREW_PREFIX .. "/bin/python3.12"
+		end,
 		keys = {
 			{ "<leader>pm", vim.cmd.Mason, desc = " Mason" },
 		},
 		opts = {
-			-- PENDING https://github.com/mason-org/mason-registry/pull/3926
-			registries = {
-				"github:chrisgrieser/mason-registry", -- only has pynvim
-				"github:mason-org/mason-registry",
-			},
 			ui = {
 				border = vim.g.myBorderStyle,
 				height = 0.8, -- so statusline is still visible

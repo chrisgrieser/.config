@@ -61,40 +61,6 @@ return {
 		main = "nvim-treesitter.configs",
 		opts = tsConfig,
 	},
-	{ -- CSS Highlighting FIX https://github.com/tree-sitter/tree-sitter-css/issues/34
-		"hail2u/vim-css3-syntax",
-		ft = "css",
-	},
-	{ -- Python Highlighting
-		"wookayin/semshi", -- maintained fork
-		ft = "python",
-		build = ":UpdateRemotePlugins", -- don't disable `rplugin` in lazy.nvim for this
-		init = function()
-			-- use `pynvim` installed with mason
-			-- (not using `require("mason-registry")` to avoid loading mason)
-			-- vim.g.python3_host_prog = vim.fn.stdpath("data")
-			-- 	.. "/mason/packages/pynvim/venv/bin/python3"
-
-			-- better provided by LSP
-			vim.g["semshi#error_sign"] = false
-			vim.g["semshi#simplify_markup"] = false
-			vim.g["semshi#mark_selected_nodes"] = false
-			vim.g["semshi#update_delay_factor"] = 0.001
-
-			vim.api.nvim_create_autocmd({ "VimEnter", "ColorScheme" }, {
-				callback = function()
-					local function linkHl(from, to) vim.api.nvim_set_hl(0, from, { link = to }) end
-					linkHl("semshiGlobal", "Italic")
-					linkHl("semshiImported", "@lsp.type.namespace")
-					linkHl("semshiParameter", "@lsp.type.parameter")
-					linkHl("semshiParameterUnused", "DiagnosticUnnecessary")
-					linkHl("semshiBuiltin", "@function.builtin")
-					linkHl("semshiAttribute", "@field")
-					linkHl("semshiSelf", "@lsp.type.selfKeyword")
-					linkHl("semshiUnresolved", "DiagnosticUnnecessary")
-					linkHl("semshiFree", "NonText")
-				end,
-			})
-		end,
-	},
+	-- CSS Highlighting FIX https://github.com/tree-sitter/tree-sitter-css/issues/34
+	{ "hail2u/vim-css3-syntax", ft = "css" },
 }
