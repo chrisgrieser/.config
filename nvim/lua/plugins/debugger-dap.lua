@@ -108,7 +108,7 @@ return {
 			},
 		},
 	},
-	{
+	{ -- debugger for nvim-lua
 		"jbyuki/one-small-step-for-vimkind",
 		dependencies = "mfussenegger/nvim-dap",
 		config = function()
@@ -131,6 +131,7 @@ return {
 	},
 	{ -- debugger preconfig for python
 		"mfussenegger/nvim-dap-python",
+		extra_dependencies = "debugpy",
 		ft = "python",
 		config = function()
 			-- 1. use the debugypy installation by mason
