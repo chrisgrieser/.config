@@ -1,7 +1,8 @@
 local tsConfig = {
-	-- easier than keeping track of new "special parsers", which are not
-	-- auto-installed on entering a buffer (e.g., regex, luadocs, comments)
-	ensure_installed = "all",
+	-- check from time to time if there are new injection-only parsers like that
+	-- aren't auto-installed like `regex` or `luadoc`.
+	ensure_installed = {},
+	auto_install = true,
 
 	highlight = {
 		enable = true,

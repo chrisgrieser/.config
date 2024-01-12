@@ -67,7 +67,7 @@ serverConfigs.efm = {
 }
 
 local efmDependencies = {
-	"shellcheck",
+	"shellcheck", -- PENDING https://github.com/bash-lsp/bash-language-server/issues/663
 	"markdownlint",
 }
 
