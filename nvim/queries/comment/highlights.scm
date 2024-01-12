@@ -11,7 +11,7 @@
 ; FOOBAR TEST ERROR
 ; NOTE XXX PERF DOCS
 ; BUG TODO HACK
-; BUG: foobar
+; BUG: foobaz
 
 ;───────────────────────────────────────────────────────────────────────────────
 
