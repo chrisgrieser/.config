@@ -29,8 +29,6 @@ local sourceIcons = {
 	luasnip = "",
 	nvim_lsp = "󰒕",
 	path = "",
-	zsh = "",
-	otter = "🦦",
 }
 
 --------------------------------------------------------------------------------
@@ -121,12 +119,20 @@ local function cmpconfig()
 
 	-----------------------------------------------------------------------------
 
-	-- LUA
-	-- disable annoying `--#region` suggestions
+	-- LUA: disable annoying `--#region` suggestions
 	cmp.setup.filetype("lua", {
 		enabled = function()
 			local line = vim.api.nvim_get_current_line()
 			return not (line:find("%s%-%-?$") or line:find("^%-%-?$"))
+		end,
+	})
+
+	-- SHELL: disable `\[` suggestions at EoL
+	cmp.setup.filetype("sh", {
+		enabled = function() 
+			local col = vim.fn.col(".") - 1
+			local charBefore = vim.api.nvim_get_current_line():sub(col, col)
+			return charBefore ~= "\\"
 		end,
 	})
 
@@ -164,47 +170,9 @@ return {
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 		},
 	},
-	{ -- some shell completions
-		"tamago324/cmp-zsh",
-		dependencies = "hrsh7th/nvim-cmp",
-		ft = "sh",
-		config = function()
-			local defaultPlusZsh = vim.deepcopy(defaultSources)
-			table.insert(defaultPlusZsh, { name = "zsh" })
-
-			-- add as source to sh filetype
-			require("cmp").setup.filetype("sh", {
-				sources = require("cmp").config.sources(defaultPlusZsh),
-				enabled = function() -- disable `\[` suggestions at EoL
-					local col = vim.fn.col(".") - 1
-					local charBefore = vim.api.nvim_get_current_line():sub(col, col)
-					return charBefore ~= "\\"
-				end,
-			})
-		end,
-	},
-	{ -- completions in markdown code blocks
-		"jmbuhr/otter.nvim",
-		dependencies = "hrsh7th/nvim-cmp",
-		ft = "markdown",
-		config = function()
-			-- activate -- https://github.com/jmbuhr/otter.nvim#activate-otter
-			local filestypes = { "python", "lua", "javascript", "bash" }
-			require("otter").activate(filestypes)
-
-			-- add as source to markdown
-			vim.defer_fn(function()
-				local defaultPlusMd = vim.deepcopy(defaultSources)
-				table.insert(defaultPlusMd, { name = "otter" })
-				require("cmp").setup.filetype("markdown", {
-					sources = require("cmp").config.sources(defaultPlusMd),
-				})
-			end, 1)
-		end,
-	},
 	{ -- Snippet Engine
 		"L3MON4D3/LuaSnip",
-		event = "InsertEnter",
+		event = { "InsertEnter", "CmdlineEnter" },
 		config = function()
 			-- DOCS https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#api-reference
 			require("luasnip").setup {

@@ -29,7 +29,7 @@ function M.globalSubstitute()
 		-- search
 		local ignoreCaseBefore = vim.o.ignorecase
 		vim.o.ignorecase = false
-		vim.cmd(("silent vimgrep /%s/ **/*"):format(input)) -- vimgrep = internal search = no dependency
+		vim.cmd(("silent! vimgrep /%s/g **/*"):format(input)) -- vimgrep = internal search = no dependency
 
 		-- replace
 		vim.defer_fn(function()
@@ -51,21 +51,21 @@ function M.globalSubstitute()
 			vim.api.nvim_feedkeys(cmd, "i", true)
 			local left = vim.api.nvim_replace_termcodes("<Left>", true, false, true)
 			vim.defer_fn(function() vim.api.nvim_feedkeys(left, "i", false) end, 100)
-		end, 1)
 
-		-- leave cmdline
-		vim.api.nvim_create_autocmd("CmdlineLeave", {
-			once = true,
-			callback = function()
-				vim.defer_fn(function()
-					vim.cmd.cclose()
-					vim.cmd.cfirst() -- move cursor back
-					vim.cmd.cexpr("[]") -- clear quickfix
-					vim.cmd.cfdo("silent update")
-					vim.o.ignorecase = ignoreCaseBefore
-				end, 1)
-			end,
-		})
+			-- leave cmdline
+			vim.api.nvim_create_autocmd("CmdlineLeave", {
+				once = true,
+				callback = function()
+					vim.defer_fn(function()
+						vim.cmd.cclose()
+						vim.cmd.cfirst() -- move cursor back
+						vim.cmd.cexpr("[]") -- clear quickfix
+						vim.cmd.cfdo("silent update")
+						vim.o.ignorecase = ignoreCaseBefore
+					end, 1)
+				end,
+			})
+		end, 1)
 	end)
 end
 

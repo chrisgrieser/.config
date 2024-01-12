@@ -54,7 +54,6 @@ end, { desc = "󰽙 Buffer Info" })
 --------------------------------------------------------------------------------
 -- REFACTORING
 local left3x = "<Left><Left><Left>"
-keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰒕 LSP Var Rename" })
 keymap("n", "<leader>fs", ":%s /<C-r><C-w>//gI" .. left3x, { desc = " :s cword" })
 keymap("x", "<leader>fs", '"zy:% s/<C-r>z//gI' .. left3x, { desc = " :s for selection" })
 keymap("x", "<leader>fv", ":s ///gI<Left>" .. left3x, { desc = " :s inside visual" })
@@ -65,6 +64,19 @@ keymap(
 	function() require("funcs.nano-plugins").globalSubstitute() end,
 	{ desc = " global substitute" }
 )
+
+-- LSP Rename: cursorword pre-selected
+keymap("n", "<leader>ff", function()
+	vim.lsp.buf.rename(vim.fn.expand("<cword>"))
+	vim.api.nvim_create_autocmd("FileType", {
+		once = true,
+		pattern = "DressingInput",
+		callback = function()
+			vim.cmd.normal { "gh", bang = true }
+			vim.api.nvim_win_set_cursor(0, { 1, 0 })
+		end,
+	})
+end, { desc = "󰒕 LSP Var Rename" })
 
 keymap("n", "<leader>fy", function()
 	-- cannot use `:g // y` because it yanks lines one after the other
