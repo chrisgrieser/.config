@@ -174,6 +174,7 @@ return {
 		opts = {
 			input = {
 				insert_only = false, -- = enable normal mode
+				trim_prompt = true,
 				border = vim.g.myBorderStyle,
 				relative = "editor",
 				title_pos = "left",
