@@ -70,7 +70,7 @@ keymap("n", "<leader>fy", function()
 	-- cannot use `:g // y` because it yanks lines one after the other
 	vim.ui.input({ prompt = "󰅍 yank lines matching:" }, function(input)
 		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-		local matchLines = vim.tbl_filter(function(line) return line:find(input, 1, true) end, lines)
+		local matchLines = vim.tbl_filter(function(l) return l:find(input, 1, true) end, lines)
 		vim.fn.setreg("+", table.concat(matchLines, "\n"))
 		u.notify("Copied", tostring(#matchLines) .. " lines")
 	end)
