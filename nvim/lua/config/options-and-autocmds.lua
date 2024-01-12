@@ -196,32 +196,32 @@ autocmd({ "BufNew", "BufReadPost" }, {
 --------------------------------------------------------------------------------
 -- AUTO-SAVE
 opt.autowriteall = true
-autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
-	callback = function(ctx)
-		local bufnr = ctx.buf
-		local bo = vim.bo[bufnr]
-		local b = vim.b[bufnr]
-		if
-			(b.saveQueued and ctx.event ~= "FocusLost")
-			or bo.buftype ~= ""
-			or bo.ft == "gitcommit"
-			or bo.readonly
-		then
-			return
-		end
-
-		local debounce = ctx.event == "FocusLost" and 0 or 2000 -- save at once on focus loss
-		b.saveQueued = true
-		vim.defer_fn(function()
-			if not vim.api.nvim_buf_is_valid(bufnr) then return end
-			vim.api.nvim_buf_call(bufnr, function() vim.cmd("silent! noautocmd lockmarks update!") end)
-			b.saveQueued = false
-		end, debounce)
-	end,
-})
+-- autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
+-- 	callback = function(ctx)
+-- 		local bufnr = ctx.buf
+-- 		local bo = vim.bo[bufnr]
+-- 		local b = vim.b[bufnr]
+-- 		if
+-- 			(b.saveQueued and ctx.event ~= "FocusLost")
+-- 			or bo.buftype ~= ""
+-- 			or bo.ft == "gitcommit"
+-- 			or bo.readonly
+-- 		then
+-- 			return
+-- 		end
+--
+-- 		local debounce = ctx.event == "FocusLost" and 0 or 2000 -- save at once on focus loss
+-- 		b.saveQueued = true
+-- 		vim.defer_fn(function()
+-- 			if not vim.api.nvim_buf_is_valid(bufnr) then return end
+-- 			vim.api.nvim_buf_call(bufnr, function() vim.cmd("silent! noautocmd lockmarks update!") end)
+-- 			b.saveQueued = false
+-- 		end, debounce)
+-- 	end,
+-- })
 
 --------------------------------------------------------------------------------
--- AUTO-CD TO PROJECT ROOT 
+-- AUTO-CD TO PROJECT ROOT
 -- (simplified version of project.nvim lite)
 local autoCd = {
 	rootFiles = {
