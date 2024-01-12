@@ -30,6 +30,7 @@ local sourceIcons = {
 	nvim_lsp = "󰒕",
 	path = "",
 	zsh = "",
+	otter = "🦦",
 }
 
 --------------------------------------------------------------------------------
@@ -129,8 +130,7 @@ local function cmpconfig()
 		end,
 	})
 
-	-- ZSH
-	-- add cmp-zsh source
+	-- ZSH: add cmp-zsh source
 	local defaultPlusZsh = vim.deepcopy(defaultSources)
 	table.insert(defaultPlusZsh, { name = "zsh" })
 	cmp.setup.filetype({ "sh", "make" }, {
@@ -141,6 +141,13 @@ local function cmpconfig()
 			local charBefore = vim.api.nvim_get_current_line():sub(col, col)
 			return charBefore ~= "\\"
 		end,
+	})
+
+	-- MARKDOWN: add otter as source
+	local defaultPlusMd = vim.deepcopy(defaultSources)
+	table.insert(defaultPlusMd, { name = "otter" })
+	cmp.setup.filetype("markdown", {
+		sources = cmp.config.sources(defaultPlusMd),
 	})
 
 	-- COMMANDLINE
@@ -177,6 +184,16 @@ return {
 			"L3MON4D3/LuaSnip", -- snippet engine
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 		},
+	},
+	{ -- completions in markdown code blocks
+		"jmbuhr/otter.nvim",
+		dependencies = "hrsh7th/nvim-cmp",
+		ft = "markdown",
+		-- https://github.com/jmbuhr/otter.nvim#activate-otter
+		config = function()
+			local filestypes = { "python", "lua", "javascript", "bash" }
+			require("otter").activate(filestypes)
+		end,
 	},
 	{ -- Snippet Engine
 		"L3MON4D3/LuaSnip",

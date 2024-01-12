@@ -119,7 +119,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
----requires the autocmd above
 ---@param path string
 ---@return string
 local function filenameFirst(_, path)
