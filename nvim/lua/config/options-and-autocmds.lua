@@ -221,7 +221,8 @@ autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
 })
 
 --------------------------------------------------------------------------------
--- AUTO-CD TO PROJECT ROOT (PROJECT.NVIM LITE)
+-- AUTO-CD TO PROJECT ROOT 
+-- (simplified version of project.nvim lite)
 local autoCd = {
 	rootFiles = {
 		"info.plist", -- Alfred workflows

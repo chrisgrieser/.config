@@ -1,8 +1,8 @@
 local tsConfig = {
 	-- easier than keeping track of new "special parsers", which are not
 	-- auto-installed on entering a buffer (e.g., regex, luadocs, comments)
+	-- PENDING https://github.com/nvim-treesitter/nvim-treesitter/issues/5888
 	ensure_installed = "all",
-	auto_install = true,
 
 	highlight = {
 		enable = true,
