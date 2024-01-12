@@ -74,6 +74,7 @@ function run() {
 		.map((/** @type {GithubRepo&{local: {path: string}}} */ repo) => {
 			let matcher = alfredMatcher(repo.name);
 			let type = "";
+			let subtitle = "";
 
 			// changes when repo is local
 			repo.local = localRepos[repo.name];
@@ -88,11 +89,10 @@ function run() {
 			}
 
 			// extra info
-			if (repo.fork) { type += "🍴 "; }
-			if (repo.fork) { matcher += "fork "; }
-			if (repo.is_template) { type += "📄 "; }
-			if (repo.is_template) { matcher += "template "; }
-			let subtitle = "";
+			if (repo.fork) type += "🍴 ";
+			if (repo.fork) matcher += "fork ";
+			if (repo.is_template) type += "📄 ";
+			if (repo.is_template) matcher += "template ";
 			if (repo.stargazers_count > 0) subtitle += `⭐ ${repo.stargazers_count}  `;
 			if (repo.open_issues > 0) subtitle += `🟢 ${repo.open_issues}  `;
 			if (repo.forks_count > 0) subtitle += `🍴 ${repo.forks_count}  `;
@@ -109,7 +109,7 @@ function run() {
 						valid: Boolean(repo.local),
 					},
 					ctrl: {
-						subtitle: `⌃: ${terminalActionDesc}`,
+						subtitle: "⌃: " + terminalActionDesc,
 						arg: terminalArg,
 					},
 					alt: {
