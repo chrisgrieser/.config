@@ -19,7 +19,7 @@ local keymappings_I = {
 		require("telescope.actions").smart_send_to_qflist(prompt_bufnr) -- sends selected, or if none selected, sends all
 		vim.cmd.cfirst()
 	end,
-	["<M-CR>"] = function(prompt_bufnr) -- consistent with fzf-multi-select
+	["<M-CR>"] = function(prompt_bufnr) -- mapping consistent with fzf-multi-select
 		require("telescope.actions").toggle_selection(prompt_bufnr)
 		require("telescope.actions").move_selection_worse(prompt_bufnr)
 	end,
@@ -50,14 +50,14 @@ local keymappings_I = {
 }
 
 -- mappings for `:Telescope find_files`
-local hiddenIgnoreActive = false
+local hiddenIgnoreActive = {}
 local findFileMappings = {
 	-- toggle `--hidden` & `--no-ignore`
 	["<C-h>"] = function(prompt_bufnr)
 		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
 		-- cwd is only set if passed as telescope option
 		local cwd = current_picker.cwd and tostring(current_picker.cwd) or vim.loop.cwd()
-		hiddenIgnoreActive = not hiddenIgnoreActive
+		hiddenIgnoreActive[prompt_bufnr] = not hiddenIgnoreActive[prompt_bufnr]
 		local title = vim.fs.basename(cwd)
 		if hiddenIgnoreActive then title = title .. " (--hidden --no-ignore)" end
 
@@ -79,6 +79,7 @@ local findFileMappings = {
 	-- search directory up
 	["<D-up>"] = function(prompt_bufnr)
 		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+		vim.notify("🪚 current_picker: " .. vim.inspect(current_picker))
 		-- cwd is only set if passed as telescope option
 		local cwd = current_picker.cwd and tostring(current_picker.cwd) or vim.loop.cwd()
 		local parent_dir = vim.fs.dirname(cwd)
