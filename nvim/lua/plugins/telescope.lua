@@ -15,10 +15,11 @@ local keymappings_I = {
 	["<Up>"] = "cycle_history_prev",
 	["<Down>"] = "cycle_history_next",
 	["<D-a>"] = "toggle_all",
-	["<D-s>"] = function(prompt_bufnr)
-		require("telescope.actions").smart_send_to_qflist(prompt_bufnr) -- sends selected, or if none selected, sends all
+	["<D-s>"] = function(prompt_bufnr) -- sends selected, or if none selected, sends all
+		require("telescope.actions").smart_send_to_qflist(prompt_bufnr)
 		vim.cmd.cfirst()
 	end,
+	["<D-S>"] = "add_selected_to_qflist", -- appends to quickfix list
 	["<M-CR>"] = function(prompt_bufnr) -- mapping consistent with fzf-multi-select
 		require("telescope.actions").toggle_selection(prompt_bufnr)
 		require("telescope.actions").move_selection_worse(prompt_bufnr)
@@ -393,8 +394,12 @@ local function telescopeConfig()
 			},
 			quickfix = {
 				prompt_prefix = " ",
-				t
-			}
+				trim_text = true,
+				show_line = false,
+				layout_config = {
+					horizontal = { preview_width = { 0.7, min = 30 } },
+				},
+			},
 		},
 		extensions = {
 			-- insert at cursor instead, relevant for lua
@@ -423,6 +428,7 @@ return {
 			-- stylua: ignore end
 
 			{ "<leader>ph", function() telescope("highlights") end, desc = " Highlights" },
+			{ "<leader>q", function() telescope("quickfix") end, desc = " Quickfix" },
 			{ "<leader>pc", function() telescope("colorscheme") end, desc = " Colorschemes" },
 			{ "<leader>gs", function() telescope("git_status") end, desc = " Status" },
 			{ "<leader>gl", function() telescope("git_commits") end, desc = " Log" },
