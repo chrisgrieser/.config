@@ -18,53 +18,62 @@ end
 
 --------------------------------------------------------------------------------
 
----Convenience wrapper around `cdoSubstitute` and quickfixing , simplified nvim-spectre
+---Convenience wrapper around `:cdo` (simplified nvim-spectre)
 function M.globalSubstitute()
+	vim.bo.grepprg = "rg --hidden --vimgrep --case-sensitive"
 	vim.ui.input({
-		prompt = "Globally Search: ",
+		prompt = " Search Globally:",
 		default = vim.fn.expand("<cword>"),
 	}, function(input)
 		if not input then return end
-		input = 
-		vim.bo.grepprg = "rg --hidden --vimgrep --smart-case"
 		vim.cmd("silent grep " .. input:gsub(" ", [[\ ]]))
-		M.cdoSubstitute(input)
+		vim.fn.setqflist({}, "a", { title = input })
+
+		-- GUARD
+		local qf = vim.fn.getqflist { items = true }
+		if #qf.items == 0 then
+			notify("Quickfix", "List empty.", "warn")
+			return
+		end
+
+		-- preview search results
+		local height = math.min(20, #qf.items + 1)
+		vim.cmd("copen " .. tostring(height))
+
+		-- prefill & position cursor in cmdline
+		local cmd = (":cdo s/%s//Ic"):format(input) -- no g-flag, as rg returns one entry per match, even in same line
+		vim.api.nvim_feedkeys(cmd, "i", true)
+		local left = vim.api.nvim_replace_termcodes("<Left><Left><Left>", true, false, true)
+		vim.defer_fn(function() vim.api.nvim_feedkeys(left, "i", false) end, 100)
+
+		vim.api.nvim_create_autocmd("CmdlineLeave", {
+			once = true,
+			callback = function()
+				vim.defer_fn(function()
+					vim.cmd.cclose()
+					vim.cmd.cfirst() -- move cursor back
+					vim.cmd.cexpr("[]") -- clear quickfix
+					vim.cmd.cfdo("silent update")
+				end, 1)
+			end,
+		})
 	end)
 end
 
--- foobar
-
----Convenience wrapper around `:cdo`
-
----@param query? string
-function M.cdoSubstitute(query)
-	-- GUARD
-	local qf = vim.fn.getqflist { items = true, title = true }
-	if #qf.items == 0 then
-		notify("Quickfix", "List empty.", "warn")
+--------------------------------------------------------------------------------
+-- very simplified version of harpoon.nvim / other.nvim
+function M.gotoMainFile()
+	local mainFiles = {
+		"init.lua",
+		"main.py",
+		"main.ts",
+	}
+	local mainFile = vim.fs.find(mainFiles, { upward = true, path = vim.loop.cwd(), type = "file" })
+	if not mainFile then
+		notify("", "No main file found.", "warn")
 		return
 	end
-
-	vim.cmd("copen 15") 
-
-	-- prefill & position cursor in cmdline
-	local quickfixQuery = query or qf.title:match("%((..-)%)") or ""
-	local cmd = (":cdo s/%s//I"):format(quickfixQuery) -- no g-flag, as rg returns one entry per match, even in same line
-	vim.api.nvim_feedkeys(cmd, "i", true)
-	local left2x = vim.api.nvim_replace_termcodes("<Left><Left>", true, false, true)
-	vim.defer_fn(function() vim.api.nvim_feedkeys(left2x, "i", false) end, 100)
-
-	vim.api.nvim_create_autocmd("CmdlineLeave", {
-		once = true,
-		callback = function()
-			vim.defer_fn(function()
-				vim.cmd.cclose()
-				vim.cmd.cfirst() -- move cursor back
-				vim.cmd.cexpr("[]") -- clear quickfix
-				vim.cmd.cfdo("silent update")
-			end, 1)
-		end,
-	})
+	vim.cmd.edit(mainFile[1])
 end
 
 --------------------------------------------------------------------------------
