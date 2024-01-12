@@ -199,6 +199,7 @@ return {
 	{ -- snippet management
 		"chrisgrieser/nvim-scissors",
 		dependencies = "nvim-telescope/telescope.nvim",
+		extra_dependencies = "yq",
 		init = function() u.leaderSubkey("n", " Snippets") end,
 		keys = {
 			{

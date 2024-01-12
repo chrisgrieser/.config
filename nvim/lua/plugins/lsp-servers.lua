@@ -66,6 +66,11 @@ serverConfigs.efm = {
 	filetypes = { "sh", "markdown" }, -- limit to filestypes needed
 }
 
+local efmDependencies = {
+	"shellcheck",
+	"markdownlint",
+}
+
 --------------------------------------------------------------------------------
 -- LUA
 
@@ -342,6 +347,7 @@ return {
 	{ -- configure LSPs
 		"neovim/nvim-lspconfig",
 		lazy = false,
+		extra_dependencies = efmDependencies,
 		dependencies = { -- loading as dependency ensures it's loaded before lua_ls
 			"folke/neodev.nvim",
 			opts = { library = { plugins = false } }, -- too slow with all my plugins
