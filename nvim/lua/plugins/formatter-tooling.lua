@@ -2,7 +2,7 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 -- use formatting from conform.nvim
-local formatters = {
+local ftToFormatter = {
 	applescript = { "trim_whitespace", "trim_newlines", "squeeze_blanks" },
 	lua = { "stylua" },
 	markdown = { "markdown-toc", "markdownlint", "injected" },
@@ -31,66 +31,50 @@ local autoIndentFt = {
 
 --------------------------------------------------------------------------------
 
-local dependencies = {
-	"debugpy", -- nvim-dap-python
-	"shellcheck", -- bash-lsp/efm, PENDING https://github.com/bash-lsp/bash-language-server/issues/663
-	"markdownlint", -- efm
-	"yq", -- nvim-scissors
-}
-
--- not real formatters, but pseudo-formatters from conform.nvim
-local dontInstall = {
-	"trim_whitespace",
-	"trim_newlines",
-	"squeeze_blanks",
-	"injected",
-}
-
 ---list of all tools that need to be auto-installed
 ---@param myFormatters object[]
----@param extraTools string[]
----@param ignoreTools string[]
 ---@return string[] tools
 ---@nodiscard
-local function toolsToAutoinstall(myFormatters, myLsps, extraTools, ignoreTools)
-	-- get all lsps, formatters, & extra tools and merge them into one list
-	local formatterList = vim.tbl_flatten(vim.tbl_values(myFormatters))
-	local tools = vim.list_extend(myLsps, formatterList)
+local function toolsToAutoinstall(myFormatters, myLsps)
+	-- formatters
+	local notClis = { "trim_whitespace", "trim_newlines", "squeeze_blanks", "injected" }
+	local formatters = vim.tbl_flatten(vim.tbl_values(myFormatters))
+	formatters = vim.tbl_filter(function(f) return not vim.tbl_contains(notClis, f) end, formatters)
 
-	-- only unique tools
+	-- extra dependencies -- PENDING https://github.com/folke/lazy.nvim/issues/1264
+	local plugins = require("lazy").plugins() 
+	local extras = vim.tbl_map(function(plugin) return plugin.extra_dependencies end, plugins)
+	extras = vim.tbl_flatten(vim.tbl_values(extras))
+
+	-- compile list
+	local tools = vim.list_extend(myLsps, formatters)
+	tools = vim.list_extend(tools, extras)
 	table.sort(tools)
 	tools = vim.fn.uniq(tools)
-
-	-- exceptions & extras
-	tools = vim.tbl_filter(function(tool) return not vim.tbl_contains(ignoreTools, tool) end, tools)
-	vim.list_extend(tools, extraTools)
 	return tools
 end
 
 --------------------------------------------------------------------------------
 
 local formatterConfig = {
-	formatters_by_ft = formatters,
+	formatters_by_ft = ftToFormatter,
 	formatters = {
 		markdownlint = {
 			prepend_args = { "--config=" .. vim.g.linterConfigFolder .. "/markdownlint.yaml" },
 		},
 
-		-- stylua: ignore
 		["bibtex-tidy"] = {
+			-- stylua: ignore
 			prepend_args = {
 				"--tab", "--curly", "--strip-enclosing-braces", "--no-align", "--no-wrap",
 				"--enclosing-braces=title,journal,booktitle", "--drop-all-caps",
-				"end", "--months", "--encode-urls",
+				"---@diagnostic disable-line: unused-local", "--months", "--encode-urls",
 				"--duplicates", "--sort-fields", "--remove-empty-fields", "--omit=month,issn,abstract",
 			},
-			condition = function(self, ctx) ---@diagnostic disable-line: unused-local
-				local biggerThan500Kb = vim.loop.fs_stat(ctx.filename).size > 500 * 1024;
-				if biggerThan500Kb then
-					u.notify("conform.nvim", "Not formatting (file > 500kb).")
-					return false
-				end
-				return true
+			condition = function(_, ctx)
+				local biggerThan500Kb = vim.loop.fs_stat(ctx.filename).size > 500 * 1024
+				if biggerThan500Kb then u.notify("conform.nvim", "Not formatting (file > 500kb).") end
+				return not biggerThan500Kb
 			end,
 		},
 	},
@@ -119,9 +103,7 @@ return {
 		"stevearc/conform.nvim",
 		cmd = "ConformInfo",
 		config = function()
-			-- FIX silence injected formatter
 			require("conform.formatters.injected").options.ignore_errors = true
-
 			require("conform").setup(formatterConfig)
 		end,
 		keys = {
@@ -162,7 +144,7 @@ return {
 		dependencies = "williamboman/mason.nvim",
 		config = function()
 			local lsps = vim.tbl_values(vim.g.lspToMasonMap)
-			local myTools = toolsToAutoinstall(formatters, lsps, dependencies, dontInstall)
+			local myTools = toolsToAutoinstall(ftToFormatter, lsps)
 
 			require("mason-tool-installer").setup {
 				ensure_installed = myTools,
