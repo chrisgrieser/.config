@@ -77,7 +77,7 @@ function M.gotoMainFile()
 		"main.py",
 		"main.ts",
 	}
-	local mainFile = vim.fs.find(mainFiles, { upward = true, path = vim.loop.cwd(), type = "file" })
+	local mainFile = vim.fs.find(mainFiles, { path = vim.loop.cwd(), type = "file" })
 	if not mainFile then
 		notify("", "No main file found.", "warn")
 		return
