@@ -20,32 +20,40 @@ end
 
 ---Convenience wrapper around `:cdo` (simplified nvim-spectre)
 function M.globalSubstitute()
-	vim.bo.grepprg = "rg --hidden --vimgrep --case-sensitive"
 	vim.ui.input({
 		prompt = " Search Globally:",
 		default = vim.fn.expand("<cword>"),
 	}, function(input)
 		if not input then return end
-		vim.cmd("silent grep " .. input:gsub(" ", [[\ ]]))
-		vim.fn.setqflist({}, "a", { title = input })
 
-		-- GUARD
-		local qf = vim.fn.getqflist { items = true }
-		if #qf.items == 0 then
-			notify("Quickfix", "List empty.", "warn")
-			return
-		end
+		-- search
+		local ignoreCaseBefore = vim.o.ignorecase
+		vim.o.ignorecase = false
+		vim.cmd(("silent vimgrep /%s/ **/*"):format(input)) -- vimgrep = internal search = no dependency
 
-		-- preview search results
-		local height = math.min(20, #qf.items + 1)
-		vim.cmd("copen " .. tostring(height))
+		-- replace
+		vim.defer_fn(function()
+			vim.fn.setqflist({}, "a", { title = input })
 
-		-- prefill & position cursor in cmdline
-		local cmd = (":cdo s/%s//Ic"):format(input) -- no g-flag, as rg returns one entry per match, even in same line
-		vim.api.nvim_feedkeys(cmd, "i", true)
-		local left = vim.api.nvim_replace_termcodes("<Left><Left><Left>", true, false, true)
-		vim.defer_fn(function() vim.api.nvim_feedkeys(left, "i", false) end, 100)
+			-- GUARD
+			local qf = vim.fn.getqflist { items = true }
+			if #qf.items == 0 then
+				notify("Global Search", ("No match found for %q"):format(input), "warn")
+				return
+			end
 
+			-- preview search results
+			local height = math.min(20, #qf.items + 1)
+			vim.cmd("copen " .. tostring(height))
+
+			-- prefill & position cursor in cmdline
+			local cmd = (":cdo s/%s//"):format(input)
+			vim.api.nvim_feedkeys(cmd, "i", true)
+			local left = vim.api.nvim_replace_termcodes("<Left>", true, false, true)
+			vim.defer_fn(function() vim.api.nvim_feedkeys(left, "i", false) end, 100)
+		end, 1)
+
+		-- leave cmdline
 		vim.api.nvim_create_autocmd("CmdlineLeave", {
 			once = true,
 			callback = function()
@@ -54,6 +62,7 @@ function M.globalSubstitute()
 					vim.cmd.cfirst() -- move cursor back
 					vim.cmd.cexpr("[]") -- clear quickfix
 					vim.cmd.cfdo("silent update")
+					vim.o.ignorecase = ignoreCaseBefore
 				end, 1)
 			end,
 		})

@@ -391,6 +391,10 @@ local function telescopeConfig()
 					},
 				},
 			},
+			quickfix = {
+				prompt_prefix = " ",
+				t
+			}
 		},
 		extensions = {
 			-- insert at cursor instead, relevant for lua
