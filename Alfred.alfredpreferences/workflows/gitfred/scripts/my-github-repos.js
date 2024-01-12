@@ -15,7 +15,10 @@ function alfredMatcher(str) {
 function httpRequest(url) {
 	const queryURL = $.NSURL.URLWithString(url);
 	const requestData = $.NSData.dataWithContentsOfURL(queryURL);
-	const requestString = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
+	const requestString = $.NSString.alloc.initWithDataEncoding(
+		requestData,
+		$.NSUTF8StringEncoding,
+	).js;
 	return requestString;
 }
 
@@ -27,7 +30,6 @@ function run() {
 	// CONFIG
 	const username = $.getenv("github_username");
 	const localRepoFolder = $.getenv("local_repo_folder");
-	const includeArchived = false;
 
 	// determine local repos
 	const localRepos = {};
@@ -54,7 +56,7 @@ function run() {
 	// DOCS https://docs.github.com/en/free-pro-team@latest/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
 	const apiURL = `https://api.github.com/users/${username}/repos?per_page=100`;
 	const scriptFilterArr = JSON.parse(httpRequest(apiURL))
-		.filter((/** @type {GithubRepo} */ repo) => includeArchived || !repo.archived)
+		.filter((/** @type {GithubRepo} */ repo) => !repo.archived)
 		.sort(
 			(
 				/** @type {GithubRepo&{isLocal: boolean}} */ a,
@@ -64,12 +66,8 @@ function run() {
 				b.isLocal = localRepos[b.name];
 				if (a.isLocal && !b.isLocal) return -1;
 				if (!a.isLocal && b.isLocal) return 1;
-
 				if (a.fork && !b.fork) return 1;
 				if (!a.fork && b.fork) return -1;
-
-				if (a.archived && !b.archived) return 1;
-				if (!a.archived && b.archived) return -1;
 				return b.stargazers_count - a.stargazers_count;
 			},
 		)
@@ -80,9 +78,7 @@ function run() {
 			// changes when repo is local
 			repo.local = localRepos[repo.name];
 			const mainArg = repo.local?.path || repo.html_url;
-			const terminalActionDesc = repo.local
-				? "Open in Terminal"
-				: "Shallow Clone"
+			const terminalActionDesc = repo.local ? "Open in Terminal" : "Shallow Clone";
 			// open in terminal when local, clone when not
 			const terminalArg = repo.local?.path || repo.html_url;
 			if (repo.local) {
@@ -92,22 +88,10 @@ function run() {
 			}
 
 			// extra info
-			if (repo.archived) {
-				type += "🗄 ";
-				matcher += "archived ";
-			}
-			if (repo.fork) {
-				type += "🍴 ";
-				matcher += "fork ";
-			}
-			if (repo.is_template) {
-				type += "📄 ";
-				matcher += "template ";
-			}
-			if (repo.private) {
-				type += "🔒 ";
-				matcher += "private ";
-			}
+			if (repo.fork) { type += "🍴 "; }
+			if (repo.fork) { matcher += "fork "; }
+			if (repo.is_template) { type += "📄 "; }
+			if (repo.is_template) { matcher += "template "; }
 			let subtitle = "";
 			if (repo.stargazers_count > 0) subtitle += `⭐ ${repo.stargazers_count}  `;
 			if (repo.open_issues > 0) subtitle += `🟢 ${repo.open_issues}  `;
