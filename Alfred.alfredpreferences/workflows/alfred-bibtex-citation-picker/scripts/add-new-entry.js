@@ -70,6 +70,7 @@ function generateCitekey(authors, year) {
 	const authorStr = (lastNameArr.length < 3 ? lastNameArr.join("") : lastNameArr[0] + "EtAl")
 		// strip diacritics https://stackoverflow.com/a/37511463
 		.normalize("NFD")
+		// biome-ignore lint/nursery/noMisleadingCharacterClass: unclear
 		.replace(/[\u0300-\u036f]/g, "")
 		// no hyphens
 		.replaceAll("-", "");
@@ -102,16 +103,23 @@ function inputToEntryJson(input) {
 			`curl -sL -H "Accept: application/vnd.citationstyles.csl+json" "${doiURL}"`,
 		);
 		if (!response) return { error: "No response by doi.org" };
-		if (response.startsWith("<!DOCTYPE html>") || response.toLowerCase().includes("doi not found"))
+		if (
+			response.startsWith("<!DOCTYPE html>") ||
+			response.toLowerCase().includes("doi not found")
+		)
 			return { error: "DOI not found" };
 
 		const data = JSON.parse(response);
 
 		entry.publisher = data.publisher;
 		entry.author = (data.authors || data.author || [])
-			.map((/** @type {{ given: any; family: any; }} */ author) => `${author.given} ${author.family}`)
+			.map(
+				(/** @type {{ given: any; family: any; }} */ author) =>
+					`${author.given} ${author.family}`,
+			)
 			.join(" and ");
-		const published = data["published-print"] || data["published-online"] || data.published || null;
+		const published =
+			data["published-print"] || data["published-online"] || data.published || null;
 		entry.year = published ? published["date-parts"][0][0] : "NY";
 		entry.doi = doi[0];
 		entry.url = data.URL || doiURL;
@@ -147,7 +155,9 @@ function inputToEntryJson(input) {
 			entry.type = "book";
 			entry.publisher = data.publishers.join(" and ");
 			entry.title = data.title;
-			entry.year = parseInt(data.publish_date.split(",")[1].trim());
+			entry.year = data.publish_date
+				? Number.parseInt(data.publish_date.match(/\d{4}/)[0])
+				: "NY";
 			entry.author = (data.authors || data.author || [])
 				.map((/** @type {{ name: string; }} */ author) => author.name)
 				.join(" and ");
@@ -173,7 +183,7 @@ function inputToEntryJson(input) {
 
 			const data = fullData.items[0].volumeInfo;
 			entry.type = "book";
-			entry.year = parseInt(data.publishedDate.split("-")[0]);
+			entry.year = Number.parseInt(data.publishedDate.split("-")[0]);
 			entry.author = (data.authors || data.author || []).join(" and ");
 			entry.isbn = isbn;
 			entry.publisher = data.publisher;

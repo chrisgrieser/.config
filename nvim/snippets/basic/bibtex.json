@@ -10,5 +10,20 @@
       "$0"
     ],
     "prefix": "new entry"
+  },
+  "number (key) + issue (key)": {
+    "body": "number = {$0},",
+    "prefix": [
+      "number (key)",
+      "issue (key)"
+    ]
+  },
+  "pages (key)": {
+    "body": "pages = {$1--$0},",
+    "prefix": "pages (key)"
+  },
+  "volume (key)": {
+    "body": "volume = {$0},",
+    "prefix": "volume (key)"
   }
 }
