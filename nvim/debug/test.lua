@@ -1,3 +1,6 @@
-local plugins = require("lazy").plugins()
-local extra_dependencies = vim.tbl_map(function(plugin) return plugin.extra_dependencies end, plugins)
-extra_dependencies = vim.tbl_flatten(vim.tbl_values(extra_dependencies))
+
+require("dressing").setup { input = { trim_prompt = true } }
+vim.ui.input({ prompt = "Input: " }, function () end)
+
+require("dressing").setup { input = { trim_prompt = false } }
+vim.ui.input({ prompt = "Input: " }, function () end)
