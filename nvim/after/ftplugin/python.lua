@@ -14,13 +14,10 @@ vim.opt_local.listchars:append { multispace = " " }
 --------------------------------------------------------------------------------
 -- VIRTUAL ENVIRONMENT
 
--- set virtual environment for other plugins to use
+-- set virtual environment for other plugins to use, if it exists
 vim.defer_fn(function()
-	local venv = vim.loop.cwd() .. "/.venv" -- cwd set by projects.nvim
-	if not vim.loop.fs_stat(venv) then return end
-	vim.env.VIRTUAL_ENV = venv
-	if not vim.env.VIRTUAL_ENV then return end
-	vim.g.python3_host_prog = vim.env.VIRTUAL_ENV .. "/bin/python"
+	local venv = vim.loop.cwd() .. "/.venv"
+	if vim.loop.fs_stat(venv) then vim.env.VIRTUAL_ENV = venv end
 end, 1)
 
 --------------------------------------------------------------------------------
