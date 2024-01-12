@@ -3,6 +3,7 @@ local tsConfig = {
 	-- auto-installed on entering a buffer (e.g., regex, luadocs, comments)
 	-- PENDING https://github.com/nvim-treesitter/nvim-treesitter/issues/5888
 	ensure_installed = "all",
+	ignore_install = { "smali", "scfg" }, -- `https://git.sr.ht/` unreliable host
 
 	highlight = {
 		enable = true,

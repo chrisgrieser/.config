@@ -226,6 +226,13 @@ keymap({ "n", "x", "i" }, "<D-T>", function()
 	if lastClosed then vim.cmd.edit(lastClosed) end
 end, { desc = "󰽙 Reopen Last Closed Buffer" })
 
+keymap(
+	"n",
+	"<D-CR>",
+	function() require("funcs.nano-plugins").gotoMainFile() end,
+	{ desc = "󰽙 Goto Main File" }
+)
+
 --------------------------------------------------------------------------------
 -- CLIPBOARD
 

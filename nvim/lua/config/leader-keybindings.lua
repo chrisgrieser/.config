@@ -58,33 +58,21 @@ keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰒕 LSP Var Rename" })
 keymap("n", "<leader>fs", ":%s /<C-r><C-w>//gI" .. left3x, { desc = " :s cword" })
 keymap("x", "<leader>fs", '"zy:% s/<C-r>z//gI' .. left3x, { desc = " :s for selection" })
 keymap("x", "<leader>fv", ":s ///gI<Left>" .. left3x, { desc = " :s inside visual" })
-keymap("n", "<leader>fd", ":g // d" .. left3x, { desc = " delete matching lines" })
-keymap(
-	"n",
-	"<leader>fq",
-	function() require("funcs.nano-plugins").cdoSubstitute() end,
-	{ desc = " :s quickfix" }
-)
+keymap("n", "<leader>fd", ":global // d" .. left3x, { desc = " delete matching lines" })
 keymap(
 	"n",
 	"<leader>fg",
 	function() require("funcs.nano-plugins").globalSubstitute() end,
-	{ desc = " global search & replace" }
+	{ desc = " global substitute" }
 )
-
--- foobar
-
 
 keymap("n", "<leader>fy", function()
 	-- cannot use `:g // y` because it yanks lines one after the other
-	vim.ui.input({ prompt = "yank lines matching:" }, function(input)
+	vim.ui.input({ prompt = "󰅍 yank lines matching:" }, function(input)
 		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-		local matchedLines = vim.tbl_filter(
-			function(line) return line:find(input, 1, true) end,
-			lines
-		)
-		vim.fn.setreg("+", table.concat(matchedLines, "\n"))
-		u.notify("Copied", tostring(#matchedLines) .. " lines")
+		local matchLines = vim.tbl_filter(function(line) return line:find(input, 1, true) end, lines)
+		vim.fn.setreg("+", table.concat(matchLines, "\n"))
+		u.notify("Copied", tostring(#matchLines) .. " lines")
 	end)
 end, { desc = "󰅍 yank matching lines" })
 
