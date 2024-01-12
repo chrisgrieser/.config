@@ -65,6 +65,16 @@ keymap(
 	function() require("funcs.nano-plugins").cdoSubstitute() end,
 	{ desc = " :s quickfix" }
 )
+keymap(
+	"n",
+	"<leader>fg",
+	function() require("funcs.nano-plugins").globalSubstitute() end,
+	{ desc = " global search & replace" }
+)
+
+-- foobar
+
+
 keymap("n", "<leader>fy", function()
 	-- cannot use `:g // y` because it yanks lines one after the other
 	vim.ui.input({ prompt = "yank lines matching:" }, function(input)
