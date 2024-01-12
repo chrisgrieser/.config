@@ -19,10 +19,6 @@
 └── templates # skeleton files
 ```
 
-```lua
-require()
-```
-
 The tree was generated using <https://tree.nathanfriend.io/>
 
 ## All Installed Plugins

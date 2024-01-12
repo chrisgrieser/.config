@@ -130,19 +130,6 @@ local function cmpconfig()
 		end,
 	})
 
-	-- ZSH: add cmp-zsh source
-	local defaultPlusZsh = vim.deepcopy(defaultSources)
-	table.insert(defaultPlusZsh, { name = "zsh" })
-	cmp.setup.filetype({ "sh", "make" }, {
-		sources = cmp.config.sources(defaultPlusZsh),
-		-- disable `\[` suggestions at EoL
-		enabled = function()
-			local col = vim.fn.col(".") - 1
-			local charBefore = vim.api.nvim_get_current_line():sub(col, col)
-			return charBefore ~= "\\"
-		end,
-	})
-
 	-- MARKDOWN: add otter as source
 	local defaultPlusMd = vim.deepcopy(defaultSources)
 	table.insert(defaultPlusMd, { name = "otter" })
@@ -178,12 +165,28 @@ return {
 			"chrisgrieser/cmp-emoji", -- fork, has fix for suggestions after quote char
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
-			"tamago324/cmp-zsh", -- some shell completions
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-nvim-lsp", -- LSP input
 			"L3MON4D3/LuaSnip", -- snippet engine
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 		},
+	},
+	{ -- some shell completions
+		"tamago324/cmp-zsh",
+		ft = "sh",
+		config = function()
+			local cmp = require("cmp")
+			local defaultPlusZsh = vim.list_extend({ name = "zsh" }, defaultSources)
+			cmp.setup.filetype({ "sh", "make" }, {
+				sources = cmp.config.sources(defaultPlusZsh),
+				-- disable `\[` suggestions at EoL
+				enabled = function()
+					local col = vim.fn.col(".") - 1
+					local charBefore = vim.api.nvim_get_current_line():sub(col, col)
+					return charBefore ~= "\\"
+				end,
+			})
+		end,
 	},
 	{ -- completions in markdown code blocks
 		"jmbuhr/otter.nvim",
@@ -193,6 +196,17 @@ return {
 		config = function()
 			local filestypes = { "python", "lua", "javascript", "bash" }
 			require("otter").activate(filestypes)
+
+			-- trigger write for otter diagnostics to show up
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "markdown",
+				callback = function(ctx)
+					vim.api.nvim_create_autocmd("InsertLeave", {
+						buffer = ctx.buf,
+						callback = function() vim.cmd.write() end,
+					})
+				end,
+			})
 		end,
 	},
 	{ -- Snippet Engine
