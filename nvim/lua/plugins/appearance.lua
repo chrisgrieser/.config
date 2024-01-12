@@ -207,7 +207,11 @@ return {
 					if kind == "codeaction" then return { builtin = { relative = "cursor" } } end
 
 					-- complex selectors: use telescope
-					if kind == "mason.ui.language-filter" or kind:find("^tinygit") then
+					if
+						kind == "mason.ui.language-filter"
+						or kind:find("^tinygit")
+						or kind == "bibtex.citekey-search"
+					then
 						return { backend = "telescope" }
 					end
 				end,

@@ -30,7 +30,7 @@ local sourceIcons = {
 	nvim_lsp = "󰒕",
 	path = "",
 	zsh = "",
-	otter = "",
+	otter = "🦦",
 }
 
 --------------------------------------------------------------------------------
@@ -188,6 +188,7 @@ return {
 		dependencies = "hrsh7th/nvim-cmp",
 		ft = "markdown",
 		config = function()
+
 			-- activate -- https://github.com/jmbuhr/otter.nvim#activate-otter
 			local filestypes = { "python", "lua", "javascript", "bash" }
 			require("otter").activate(filestypes)
@@ -206,15 +207,12 @@ return {
 		config = function()
 			-- DOCS https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#api-reference
 			require("luasnip").setup {
-				-- prevent <Tab> jumping back to a snippet after it has been left early
-				region_check_events = "CursorMoved",
 				-- live updating of snippets
 				update_events = { "TextChanged", "TextChangedI" },
 				-- disable auto-reload, since already done by my own plugin
 				fs_event_providers = { autocmd = false, libuv = false },
 			}
-
-			-- VS-code-style snippets
+			-- load VSCode-style snippets
 			require("luasnip.loaders.from_vscode").lazy_load { paths = "./snippets" }
 		end,
 	},
