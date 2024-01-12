@@ -188,17 +188,18 @@ return {
 		dependencies = "hrsh7th/nvim-cmp",
 		ft = "markdown",
 		config = function()
-
 			-- activate -- https://github.com/jmbuhr/otter.nvim#activate-otter
 			local filestypes = { "python", "lua", "javascript", "bash" }
 			require("otter").activate(filestypes)
 
 			-- add as source to markdown
-			local defaultPlusMd = vim.deepcopy(defaultSources)
-			table.insert(defaultPlusMd, { name = "otter" })
-			require("cmp").setup.filetype("markdown", {
-				sources = require("cmp").config.sources(defaultPlusMd),
-			})
+			vim.defer_fn(function()
+				local defaultPlusMd = vim.deepcopy(defaultSources)
+				table.insert(defaultPlusMd, { name = "otter" })
+				require("cmp").setup.filetype("markdown", {
+					sources = require("cmp").config.sources(defaultPlusMd),
+				})
+			end, 1)
 		end,
 	},
 	{ -- Snippet Engine

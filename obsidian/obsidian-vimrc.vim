@@ -241,15 +241,18 @@ exmap fileRecovery obcommand file-recovery:open
 nnoremap ,ut :fileRecovery
 nnoremap ,gd :fileRecovery
 
+" Copy command IDs
 exmap toggleDevtools obcommand obsidian-theme-design-utilities:toggle-devtools
-nnoremap ,d :toggleDevtools
+nmap &c& :obcommand
+nmap &d& :toggleDevtools
+nmap ,l &c&&d&
+
+exmap repeatLastCommand obcommand repeat-last-commands:repeat-command
+nnoremap ,r :repeatLastCommand
 
 " pseudo-code-action: enhance URL with title
 exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-title
 nnoremap ,cc :enhanceUrlWithTitle
-
-exmap toggleAiCompletion obcommand obsidian-textgenerator-plugin:auto-suggest
-nnoremap ,g :toggleAiCompletion
 
 " Critic Markup: accept all
 exmap acceptAll obcommand commentator:commentator-accept-all-suggestions
@@ -402,6 +405,9 @@ nnoremap zr :unfoldall
 " [O]ption: [s]pellcheck
 exmap spellcheck obcommand editor:toggle-spellcheck
 nnoremap ,os :spellcheck
+
+exmap toggleAiCompletion obcommand obsidian-textgenerator-plugin:auto-suggest
+nnoremap ,oa :toggleAiCompletion
 
 " [O]ption: [d]iagnostics
 exmap enableDiagnostics obcommand obsidian-languagetool-plugin:ltcheck-text
