@@ -7,7 +7,7 @@
 ```bash
 ├── lua
 │  ├── config # keybindings, options, …
-│  ├── funcs # utility functions / private plugins
+│  ├── funcs # utility functions & personal plugins
 │  └── plugins # plugins & their configs
 ├── after
 │  └── ftplugin # filetype-specific configs

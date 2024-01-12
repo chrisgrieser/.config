@@ -30,7 +30,7 @@ local sourceIcons = {
 	nvim_lsp = "󰒕",
 	path = "",
 	zsh = "",
-	otter = "🦦",
+	otter = "",
 }
 
 --------------------------------------------------------------------------------
@@ -130,13 +130,6 @@ local function cmpconfig()
 		end,
 	})
 
-	-- MARKDOWN: add otter as source
-	local defaultPlusMd = vim.deepcopy(defaultSources)
-	table.insert(defaultPlusMd, { name = "otter" })
-	cmp.setup.filetype("markdown", {
-		sources = cmp.config.sources(defaultPlusMd),
-	})
-
 	-- COMMANDLINE
 	cmp.setup.cmdline(":", {
 		mapping = cmp.mapping.preset.cmdline(),
@@ -173,14 +166,16 @@ return {
 	},
 	{ -- some shell completions
 		"tamago324/cmp-zsh",
+		dependencies = "hrsh7th/nvim-cmp",
 		ft = "sh",
 		config = function()
-			local cmp = require("cmp")
-			local defaultPlusZsh = vim.list_extend({ name = "zsh" }, defaultSources)
-			cmp.setup.filetype({ "sh", "make" }, {
-				sources = cmp.config.sources(defaultPlusZsh),
-				-- disable `\[` suggestions at EoL
-				enabled = function()
+			local defaultPlusZsh = vim.deepcopy(defaultSources)
+			table.insert(defaultPlusZsh, { name = "zsh" })
+
+			-- add as source to sh filetype
+			require("cmp").setup.filetype("sh", {
+				sources = require("cmp").config.sources(defaultPlusZsh),
+				enabled = function() -- disable `\[` suggestions at EoL
 					local col = vim.fn.col(".") - 1
 					local charBefore = vim.api.nvim_get_current_line():sub(col, col)
 					return charBefore ~= "\\"
@@ -192,20 +187,16 @@ return {
 		"jmbuhr/otter.nvim",
 		dependencies = "hrsh7th/nvim-cmp",
 		ft = "markdown",
-		-- https://github.com/jmbuhr/otter.nvim#activate-otter
 		config = function()
+			-- activate -- https://github.com/jmbuhr/otter.nvim#activate-otter
 			local filestypes = { "python", "lua", "javascript", "bash" }
 			require("otter").activate(filestypes)
 
-			-- trigger write for otter diagnostics to show up
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "markdown",
-				callback = function(ctx)
-					vim.api.nvim_create_autocmd("InsertLeave", {
-						buffer = ctx.buf,
-						callback = function() vim.cmd.write() end,
-					})
-				end,
+			-- add as source to markdown
+			local defaultPlusMd = vim.deepcopy(defaultSources)
+			table.insert(defaultPlusMd, { name = "otter" })
+			require("cmp").setup.filetype("markdown", {
+				sources = require("cmp").config.sources(defaultPlusMd),
 			})
 		end,
 	},
