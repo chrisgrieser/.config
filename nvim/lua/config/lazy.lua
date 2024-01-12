@@ -25,12 +25,8 @@ require("lazy.view.config").keys.details = "<Tab>"
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "lazy",
 	callback = function()
-		vim.keymap.set(
-			"n",
-			"gi",
-			[[/#<CR>o``]],
-			{ buffer = true, remap = true, desc = "󰒲 Open next issue" }
-		)
+		local opts = { buffer = true, remap = true, desc = "󰒲 Open next issue" }
+		vim.keymap.set("n", "gi", [[/#<CR>o``]], opts)
 	end,
 })
 
@@ -66,9 +62,8 @@ require("lazy").setup("plugins", {
 	performance = {
 		rtp = {
 			-- Disable unused builtin plugins from neovim
-			-- INFO do not disable `rplugin`, as it is requires by plugins like 
-			-- magma.nvim or semshi
 			disabled_plugins = {
+				"rplugin", -- comment out for `:UpdateRemotePlugins` (e.g. magma.nvim)
 				"matchparen",
 				"matchit",
 				"netrwPlugin",

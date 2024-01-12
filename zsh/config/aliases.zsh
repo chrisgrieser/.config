@@ -7,7 +7,7 @@ alias cmd='command'
 alias mv='mv -vi'
 alias ln='ln -vwi'
 alias cp='cp -vi'
-alias rm='rm -vI'
+alias rm='rm -I'
 
 # defaults
 alias grep='grep --color'
