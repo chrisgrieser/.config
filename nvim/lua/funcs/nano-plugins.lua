@@ -18,21 +18,39 @@ end
 
 --------------------------------------------------------------------------------
 
----Convenience wrapper around `:cdo`, replaces nvim-spectre
-function M.cdoSubstitute()
+---Convenience wrapper around `cdoSubstitute` and quickfixing , simplified nvim-spectre
+function M.globalSubstitute()
+	vim.ui.input({
+		prompt = "Globally Search: ",
+		default = vim.fn.expand("<cword>"),
+	}, function(input)
+		if not input then return end
+		input = 
+		vim.bo.grepprg = "rg --hidden --vimgrep --smart-case"
+		vim.cmd("silent grep " .. input:gsub(" ", [[\ ]]))
+		M.cdoSubstitute(input)
+	end)
+end
+
+-- foobar
+
+---Convenience wrapper around `:cdo`
+
+---@param query? string
+function M.cdoSubstitute(query)
 	-- GUARD
 	local qf = vim.fn.getqflist { items = true, title = true }
-	local quickfixQuery = qf.title:match("%((..-)%)") or ""
 	if #qf.items == 0 then
 		notify("Quickfix", "List empty.", "warn")
 		return
 	end
-	vim.cmd("copen 15") -- to preview locations
 
-	-- no g-flag, as rg returns one entry per match, even in same line
-	local cmd = (":cdo s/%s//I"):format(quickfixQuery) -- prefill
+	vim.cmd("copen 15") 
+
+	-- prefill & position cursor in cmdline
+	local quickfixQuery = query or qf.title:match("%((..-)%)") or ""
+	local cmd = (":cdo s/%s//I"):format(quickfixQuery) -- no g-flag, as rg returns one entry per match, even in same line
 	vim.api.nvim_feedkeys(cmd, "i", true)
-	-- position cursor in cmdline
 	local left2x = vim.api.nvim_replace_termcodes("<Left><Left>", true, false, true)
 	vim.defer_fn(function() vim.api.nvim_feedkeys(left2x, "i", false) end, 100)
 
