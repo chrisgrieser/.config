@@ -68,18 +68,12 @@ local findFileMappings = {
 			no_ignore = hiddenIgnoreActive,
 			cwd = cwd,
 			-- prevent these becoming visible through `--no-ignore`
-			file_ignore_patterns = {
-				"node_modules",
-				".venv",
-				"%.DS_Store$",
-				"%.git/",
-			},
+			file_ignore_patterns = { "node_modules", ".venv", "%.DS_Store$", "%.git/" },
 		}
 	end,
 	-- search directory up
 	["<D-up>"] = function(prompt_bufnr)
 		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-		vim.notify("🪚 current_picker: " .. vim.inspect(current_picker))
 		-- cwd is only set if passed as telescope option
 		local cwd = current_picker.cwd and tostring(current_picker.cwd) or vim.loop.cwd()
 		local parent_dir = vim.fs.dirname(cwd)
