@@ -24,24 +24,24 @@ local keymappings_I = {
 		require("telescope.actions").toggle_selection(prompt_bufnr)
 		require("telescope.actions").move_selection_worse(prompt_bufnr)
 	end,
+	-- Reveal File in macOS Finder
 	["<D-l>"] = function(prompt_bufnr)
-		-- Reveal File in macOS Finder
 		local path = require("telescope.actions.state").get_selected_entry().value
 		require("telescope.actions").close(prompt_bufnr)
 		vim.fn.system { "open", "-R", path }
 	end,
+	-- Copy path of file -- https://github.com/nvim-telescope/telescope-file-browser.nvim/issues/191
 	["<C-p>"] = function(prompt_bufnr)
-		-- Copy path of file -- https://github.com/nvim-telescope/telescope-file-browser.nvim/issues/191
 		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-		local cwd = current_picker.cwd and tostring(current_picker.cwd) or vim.loop.cwd()
+		local cwd = tostring(current_picker.cwd or vim.loop.cwd()) -- cwd only set if passed as opt
 		local path = require("telescope.actions.state").get_selected_entry().value
 		local fullpath = cwd .. "/" .. path
 		require("telescope.actions").close(prompt_bufnr)
 		vim.fn.setreg("+", fullpath)
 		u.notify("Copied", fullpath)
 	end,
+	-- Copy name of file
 	["<C-n>"] = function(prompt_bufnr)
-		-- Copy name of file -- https://github.com/nvim-telescope/telescope-file-browser.nvim/issues/191
 		local path = require("telescope.actions.state").get_selected_entry().value
 		local name = vim.fs.basename(path)
 		require("telescope.actions").close(prompt_bufnr)
@@ -55,9 +55,14 @@ local ignoreHidden
 local findFileMappings = {
 	-- toggle `--hidden` & `--no-ignore`
 	["<C-h>"] = function(prompt_bufnr)
+		local query = vim.api.nvim_get_current_line()
+		vim.api.nvim_create_autocmd("FileType", {
+			once = true,
+			pattern = "TelescopePrompt",
+			callback = function() vim.api.nvim_set_current_line(query) end,
+		})
 		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-		-- cwd is only set if passed as telescope option
-		local cwd = current_picker.cwd and tostring(current_picker.cwd) or vim.loop.cwd()
+		local cwd = tostring(current_picker.cwd or vim.loop.cwd()) -- cwd only set if passed as opt
 		ignoreHidden = not ignoreHidden
 		local title = vim.fs.basename(cwd)
 		if ignoreHidden then title = title .. " (--hidden --no-ignore)" end
@@ -70,19 +75,6 @@ local findFileMappings = {
 			cwd = cwd,
 			-- prevent these becoming visible through `--no-ignore`
 			file_ignore_patterns = { "node_modules", ".venv", "%.DS_Store$", "%.git/" },
-		}
-	end,
-	-- search directory up
-	["<D-up>"] = function(prompt_bufnr)
-		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-		-- cwd is only set if passed as telescope option
-		local cwd = current_picker.cwd and tostring(current_picker.cwd) or vim.loop.cwd()
-		local parent_dir = vim.fs.dirname(cwd)
-
-		require("telescope.actions").close(prompt_bufnr)
-		require("telescope.builtin").find_files {
-			prompt_title = vim.fs.basename(parent_dir),
-			cwd = parent_dir,
 		}
 	end,
 }
@@ -143,12 +135,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set(
 			"n",
 			"gs",
-			function()
-				require("telescope.builtin").lsp_document_symbols {
-					prompt_title = "Sections",
-					symbols = symbolFilter[ft],
-				}
-			end,
+			function() require("telescope.builtin").lsp_document_symbols { symbols = symbolFilter[ft] } end,
 			{ desc = " Sections", buffer = true }
 		)
 	end,
@@ -171,7 +158,7 @@ local function telescopeConfig()
 			borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
 			-- { "═", "║", "═", "║", "╔", "╗", "╝", "╚" }
 			-- { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
-			default_mappings = { i = keymappings_I, n = keymappings_N },
+			default_mappings = { ["i"] = keymappings_I, ["n"] = keymappings_N },
 			sorting_strategy = "ascending", -- so layout is consistent with prompt_position "top"
 			layout_strategy = "horizontal",
 			layout_config = {
@@ -275,18 +262,15 @@ local function telescopeConfig()
 					dyn_title = function(_, entry) return entry.value end, -- use hash as title
 					get_command = function(entry, status)
 						local hash = entry.value
-						local previewWinWidth = vim.api.nvim_win_get_width(status.preview_win)
-						local statArgs = ("%s,%s,25"):format(
-							previewWinWidth,
-							math.floor(previewWinWidth / 2)
-						)
+						local previewWidth = vim.api.nvim_win_get_width(status.preview_win)
+						local statArgs = ("%s,%s,25"):format(previewWidth, math.floor(previewWidth / 2))
 						local previewFormat =
 							"%C(bold)%C(magenta)%s %n%C(reset)%C(cyan)%D%C(reset)%b %n%C(blue)%an %C(yellow)(%ch) %C(reset)"
 						local cmd = {
 							"git show " .. hash,
 							"--color=always",
 							"--stat=" .. statArgs,
-							"--format='" .. previewFormat .. "'",
+							("--format=%q"):format(previewFormat),
 							"| sed -e 's/^ //' -e '$d' ;", -- remove clutter
 						}
 						return table.concat(cmd, " ")
@@ -448,6 +432,7 @@ return {
 			{
 				"go",
 				function()
+					ignoreHidden = false
 					require("telescope.builtin").find_files {
 						prompt_title = "Find Files: " .. vim.fs.basename(vim.loop.cwd() or ""),
 					}
