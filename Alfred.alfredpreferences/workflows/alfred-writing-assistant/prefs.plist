@@ -4,7 +4,5 @@
 <dict>
 	<key>delay_ms</key>
 	<string>120</string>
-	<key>static_prompt</key>
-	<string>Please make suggestions how to improve readability, grammar, and language of the following text. Do not change anything about the content, and refrain from doing any changes when the writing is already sufficiently clear and concise. Thanks you. The text is:</string>
 </dict>
 </plist>
