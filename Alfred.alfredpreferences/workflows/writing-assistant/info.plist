@@ -181,7 +181,7 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string></string>
+	<string>Spellfixing and Synonyms for the word under the cursor. Rephrasing of the selected text. All with one key press.</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>

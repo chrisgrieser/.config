@@ -45,4 +45,4 @@ safeRequire("config.spellfixes")
 
 --------------------------------------------------------------------------------
 
-if vim.version().minor >= 10 then vim.notify("TODO version 0.10.md") end
+if vim.fn.has("nvim-0.10") == 1 then vim.notify("TODO version 0.10.md") end
