@@ -306,7 +306,7 @@ serverConfigs.vale_ls = {
 }
 
 -- FIX https://github.com/errata-ai/vale-ls/issues/4
--- vim.env.VALE_CONFIG_PATH = vim.g.linterConfigFolder .. "/vale/vale.ini"
+vim.env.VALE_CONFIG_PATH = vim.g.linterConfigFolder .. "/vale/vale.ini"
 
 --------------------------------------------------------------------------------
 
@@ -322,7 +322,6 @@ serverConfigs.yamlls = {
 		},
 	},
 	-- SIC needs enabling via setting *and* via capabilities to work
-	-- TODO probably due to missing dynamic formatting in nvim?
 	on_attach = function(client) client.server_capabilities.documentFormattingProvider = true end,
 }
 

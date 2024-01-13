@@ -555,7 +555,19 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>---
+	<string>## Usage
+The workflow offers four [hotkeys](https://www.alfredapp.com/help/workflows/triggers/hotkey/):
+
+1. Autocorrect the word under the cursor.
+2. Suggest synonyms for the word under the cursor.
+3. Rephrase the selected text via ChatGPT, improving its language (requires
+   OpenAI API key).
+4. Same as 3, but use Markdown markup to show the changes:
+	+ Additions are displayed as `==highlights==`.
+	+ Deletions are displayed as `~~strikethroughs~~`.
+	+ There is a workflow configuration to alternatively format the changes as [Critic Markup](https://github.com/CriticMarkup/CriticMarkup-toolkit).
+
+---
 
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
