@@ -1,9 +1,9 @@
 """B."""
 
+var1 = 7
+var2 = 8
+print(var1 + var2)
 
-print("Hello World")
-print("Hello World 2")
 
 
-pri nt("Hello World 3")
 
