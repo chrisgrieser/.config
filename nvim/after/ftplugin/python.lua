@@ -16,7 +16,7 @@ vim.opt_local.listchars:append { multispace = " " }
 
 -- set virtual environment for other plugins to use, if it exists
 vim.defer_fn(function()
-	local venv = vim.loop.cwd() .. "/.venv"
+	local venv = (vim.loop.cwd() or "") .. "/.venv"
 	if vim.loop.fs_stat(venv) then vim.env.VIRTUAL_ENV = venv end
 end, 1)
 

@@ -31,29 +31,16 @@ local autoIndentFt = {
 
 --------------------------------------------------------------------------------
 
----list of all tools that need to be auto-installed
----@param myFormatters object[]
----@return string[] tools
+---@param formattersByFt object[]
+---@return string[]
 ---@nodiscard
-local function toolsToAutoinstall(myFormatters)
-	-- formatters
+local function listConformFormatters(formattersByFt)
 	local notClis = { "trim_whitespace", "trim_newlines", "squeeze_blanks", "injected" }
-	local formatters = vim.tbl_flatten(vim.tbl_values(myFormatters))
+	local formatters = vim.tbl_flatten(vim.tbl_values(formattersByFt))
 	formatters = vim.tbl_filter(function(f) return not vim.tbl_contains(notClis, f) end, formatters)
-
-	-- dependencies of plugins (via lazy.nvim) -- PENDING https://github.com/folke/lazy.nvim/issues/1264
-	local plugins = require("lazy").plugins() 
-	local depsOfPlugins = vim.tbl_map(function(plugin) return plugin.extra_dependencies end, plugins)
-	depsOfPlugins = vim.tbl_flatten(vim.tbl_values(depsOfPlugins))
-
-	-- compile list
-	local tools = vim.list_extend(depsOfPlugins, formatters)
-	table.sort(tools)
-	tools = vim.fn.uniq(tools)
-	return tools
+	table.sort(formatters)
+	return vim.fn.uniq(formatters)
 end
-
---------------------------------------------------------------------------------
 
 local formatterConfig = {
 	formatters_by_ft = ftToFormatter,
@@ -98,56 +85,15 @@ end
 --------------------------------------------------------------------------------
 
 return {
-	{ -- Formatter integration
-		"stevearc/conform.nvim",
-		cmd = "ConformInfo",
-		config = function()
-			require("conform.formatters.injected").options.ignore_errors = true
-			require("conform").setup(formatterConfig)
-		end,
-		keys = {
-			{ "<D-s>", formattingFunc, desc = "󰒕 Format & Save", mode = { "n", "x" } },
-		},
-	},
-	{ -- package manager
-		"williamboman/mason.nvim",
-		init = function()
-			-- system python is on 3.9, but some programs require 3.12 (e.g. autotools-ls)
-			-- NOTE this has the drawback that `pynvim` cannot be installed anymore
-			vim.g.python3_host_prog = vim.env.HOMEBREW_PREFIX .. "/bin/python3.12"
-		end,
-		keys = {
-			{ "<leader>pm", vim.cmd.Mason, desc = " Mason" },
-		},
-		opts = {
-			ui = {
-				border = vim.g.myBorderStyle,
-				height = 0.8, -- so statusline is still visible
-				width = 0.8,
-				icons = {
-					package_installed = "✓",
-					package_pending = "󰔟",
-					package_uninstalled = "✗",
-				},
-				keymaps = { -- consistent with keymaps for lazy.nvim
-					uninstall_package = "x",
-					toggle_help = "?",
-					toggle_package_expand = "<Tab>",
-				},
-			},
-		},
-	},
-	{ -- auto-install lsps & formatters
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		event = "VeryLazy",
-		dependencies = "williamboman/mason.nvim",
-		config = function()
-			require("mason-tool-installer").setup {
-				ensure_installed = toolsToAutoinstall(ftToFormatter),
-				run_on_start = false, -- manually, since otherwise not working with lazy-loading
-			}
-			vim.defer_fn(vim.cmd.MasonToolsInstall, 500)
-			vim.defer_fn(vim.cmd.MasonToolsClean, 1000) -- delayed, so noice.nvim is loaded before
-		end,
+	-- Formatter integration
+	"stevearc/conform.nvim",
+	cmd = "ConformInfo",
+	extra_dependencies = listConformFormatters(ftToFormatter),
+	config = function()
+		require("conform.formatters.injected").options.ignore_errors = true
+		require("conform").setup(formatterConfig)
+	end,
+	keys = {
+		{ "<D-s>", formattingFunc, desc = "󰒕 Format & Save", mode = { "n", "x" } },
 	},
 }
