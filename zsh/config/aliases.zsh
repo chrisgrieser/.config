@@ -9,18 +9,18 @@ alias ln='ln -vwi'
 alias cp='cp -vi'
 alias rm='rm -I'
 
+# shorthands
+alias spotify="spotify_player playback"
+
 # defaults
 alias grep='grep --color'
 alias mkdir='mkdir -pv' # create intermediate directories & verbose
 alias curl='curl --progress-bar'
 alias make='make --silent --warn-undefined-variables'
 alias jless='jless --no-line-numbers'
+function which { builtin which -a "$@" | bat --language=sh; } # colorized & showing all
 
-# colorized & showing all
-function which { builtin which -a "$@" | bat --language=sh; }
-
-# bat: dark-mode aware
-function bat {
+function bat { # dark-mode aware
 	local theme # list themes via `bat --list-themes`
 	theme="$(defaults read -g AppleInterfaceStyle &>/dev/null && echo "Dracula" || echo "GitHub")"
 	command bat --theme="$theme" "$@"
@@ -50,7 +50,7 @@ ZSH_HIGHLIGHT_REGEXP+=(' C$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' B$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' N$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' L$' 'fg=magenta,bold')
-ZSH_HIGHLIGHT_REGEXP+=(' J?$' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=(' J$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=('^P ' 'fg=magenta,bold')
 
 #───────────────────────────────────────────────────────────────────────────────

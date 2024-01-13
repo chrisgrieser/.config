@@ -1,6 +1,3 @@
-local trace = vim.log.levels.TRACE
---------------------------------------------------------------------------------
-
 ---@param bufnr number
 local function highlightCopyStacktraceLine(bufnr)
 	vim.api.nvim_buf_call(bufnr, function()
@@ -118,7 +115,7 @@ return {
 					enter = true,
 					size = "50%",
 					close = { keys = { "q", "<D-w>", "<D-0>" } },
-					win_options = { scrolloff = 3 },
+					win_options = { scrolloff = 6 },
 				},
 			},
 			commands = {
@@ -139,7 +136,7 @@ return {
 			-- DISABLE features, since conflicts with existing plugins I prefer to use
 			lsp = {
 				progress = { enabled = false }, -- replaced with nvim-dr-lsp, since less intrusive
-				signature = { enabled = false }, -- using with lsp_signature.nvim
+				signature = { enabled = false }, -- replaced with lsp_signature.nvim
 
 				-- ENABLE features
 				override = {
@@ -157,10 +154,10 @@ return {
 			max_width = 50,
 			minimum_width = 15,
 			top_down = false,
-			level = trace, -- minimum severity
+			level = vim.log.levels.TRACE, -- minimum severity
 			timeout = 6000,
 			stages = "slide", -- slide|fade
-			icons = { DEBUG = "", ERROR = "", INFO = "", TRACE = "", WARN = "" },
+			icons = { ERROR = "", WARN = "", INFO = "", TRACE = "", DEBUG = "" },
 			on_open = function(win)
 				-- set borderstyle
 				if not vim.api.nvim_win_is_valid(win) then return end

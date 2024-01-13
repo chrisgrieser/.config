@@ -21,7 +21,7 @@ function o() {
 			--expect="ctrl-p,ctrl-n,ctrl-d" \
 			--preview-window="55%" \
 			--preview '[[ $(file --mime {}) =~ text ]] && bat --color=always --wrap=never --style=header-filesize,header-filename,grid {} || file {} | fold -w $FZF_PREVIEW_COLUMNS' \
-			--height="100%" #required for wezterm's pane:is_alt_screen_active()
+			--height="100%" #required for wezterm's `pane:is_alt_screen_active()`
 	)
 	[[ -z "$selected" ]] && return 0 # aborted
 
@@ -44,8 +44,7 @@ function o() {
 function _tree {
 	eza --tree --level="$1" --color=always --icons=always --git-ignore \
 		--no-quotes --hyperlink |
-		sed '1d' |
-		fzf --ansi --no-sort
+		sed '1d' | less
 }
 alias tree='_tree 2'
 alias treee='_tree 3'

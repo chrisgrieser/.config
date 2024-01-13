@@ -232,7 +232,8 @@ local function telescopeConfig()
 					n = {
 						["<Tab>"] = "move_selection_worse",
 						["<S-Tab>"] = "move_selection_better",
-						["<M-CR>"] = "git_staging_toggle",
+						["<CR>"] = "git_staging_toggle",
+						["<D-CR>"] = "select_default",
 					},
 				},
 				layout_strategy = "vertical",

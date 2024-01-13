@@ -23,6 +23,7 @@ alias v="toggle_venv"
 #───────────────────────────────────────────────────────────────────────────────
 
 function new_venv {
+	if [[ ! -x "$(command -v python3.12)" ]]; then echo "python3.12 required. (\`brew install python@3.12\`)" && return 1; fi
 	[[ -d ./.venv ]] && rm -rf ./.venv
 	python3.12 -m venv ./.venv
 	source ./.venv/bin/activate
@@ -30,7 +31,7 @@ function new_venv {
 	inspect_venv
 }
 
-function inspect_venv { printf "\n\e[1;33mNow using: \e[1;36m%s\e[0m\n" "$(cmd which python3)"; }
+function inspect_venv { printf "\nNow using: \e[1;36m%s\e[0m\n" "$(cmd which python3)"; }
 
 function _search_venv_path {
 	local dir_to_check=$PWD
