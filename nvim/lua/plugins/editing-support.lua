@@ -168,7 +168,7 @@ return {
 			allow_interline_swaps = true,
 			interline_swaps_without_separator = false,
 		},
-		init = function ()
+		init = function()
 			-- in markdown, move words
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "markdown",
@@ -215,47 +215,47 @@ return {
 	{ -- which-key
 		"folke/which-key.nvim",
 		event = "VeryLazy",
-		config = function()
-			require("which-key").setup {
-				-- FIX very weird bug where insert mode undo points (<C-g>u),
-				-- as well as vim-matchup's `<C-G>%` binding insert extra `1`s
-				-- after wrapping to the next line in insert mode. The `G` needs
-				-- to be uppercased to affect the right mapping.
-				triggers_blacklist = { i = { "<C-G>" } },
+		opts = {
+			-- FIX very weird bug where insert mode undo points (<C-g>u),
+			-- as well as vim-matchup's `<C-G>%` binding insert extra `1`s
+			-- after wrapping to the next line in insert mode. The `G` needs
+			-- to be uppercased to affect the right mapping.
+			triggers_blacklist = { i = { "<C-G>" } },
 
-				plugins = {
-					presets = { motions = false, g = false, z = false },
-					spelling = { enabled = false },
-				},
-				hidden = { "<Plug>", "^:lua ", "<cmd>" },
-				key_labels = {
-					["<CR>"] = "↵",
-					["<BS>"] = "⌫",
-					["<space>"] = "󱁐",
-					["<Tab>"] = "󰌒",
-					["<Esc>"] = "⎋",
-				},
-				window = {
-					border = { "", "─", "", "" }, -- only horizontal border to save space
-					padding = { 0, 0, 0, 0 },
-					margin = { 0, 0, 0, 0 },
-				},
-				popup_mappings = {
-					scroll_down = "<PageDown>",
-					scroll_up = "<PageUp>",
-				},
-				layout = { -- of the columns
-					height = { min = 5, max = 15 },
-					width = { min = 31, max = 34 },
-					spacing = 1,
-					align = "center",
-				},
-			}
-
-			-----------------------------------------------------------------------
+			plugins = {
+				presets = { motions = false, g = false, z = false },
+				spelling = { enabled = false },
+			},
+			hidden = { "<Plug>", "^:lua ", "<cmd>" },
+			key_labels = {
+				["<CR>"] = "↵",
+				["<BS>"] = "⌫",
+				["<space>"] = "󱁐",
+				["<Tab>"] = "󰌒",
+				["<Esc>"] = "⎋",
+			},
+			window = {
+				border = { "", "─", "", "" }, -- only horizontal border to save space
+				padding = { 0, 0, 0, 0 },
+				margin = { 0, 0, 0, 0 },
+			},
+			popup_mappings = {
+				scroll_down = "<PageDown>",
+				scroll_up = "<PageUp>",
+			},
+			layout = { -- of the columns
+				height = { min = 5, max = 15 },
+				width = { min = 31, max = 34 },
+				spacing = 1,
+				align = "center",
+			},
+		},
+		config = function(_, opts)
+			local wk = require("which-key")
+			wk.setup(opts)
 
 			-- leader prefixes normal mode
-			require("which-key").register({
+			wk.register({
 				u = { name = " 󰕌 Undo" },
 				o = { name = "  Options" },
 				p = { name = " 󰏗 Packages" },
@@ -264,13 +264,13 @@ return {
 			}, { prefix = "<leader>" })
 
 			-- leader prefixes normal+visual mode
-			require("which-key").register({
+			wk.register({
 				f = { name = " 󱗘 Refactor" },
 				g = { name = " 󰊢 Git" },
 			}, { prefix = "<leader>", mode = { "x", "n" } })
 
 			-- needed so localleader prefixes work with whichkey
-			require("which-key").register {
+			wk.register {
 				["<localleader>"] = { name = "filetype-specific", mode = { "n", "x" } },
 			}
 

@@ -393,7 +393,7 @@ local function telescopeConfig()
 				},
 			},
 			quickfix = {
-				prompt_prefix = " ",
+				prompt_prefix = " ",
 				trim_text = true,
 				show_line = false,
 				layout_config = {
@@ -428,7 +428,7 @@ return {
 			-- stylua: ignore end
 
 			{ "<leader>ph", function() telescope("highlights") end, desc = " Highlights" },
-			{ "<leader>q", function() telescope("quickfix") end, desc = " Quickfix" },
+			{ "<leader>q", function() telescope("quickfix") end, desc = " Quickfix" },
 			{ "<leader>pc", function() telescope("colorscheme") end, desc = " Colorschemes" },
 			{ "<leader>gs", function() telescope("git_status") end, desc = " Status" },
 			{ "<leader>gl", function() telescope("git_commits") end, desc = " Log" },

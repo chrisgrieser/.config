@@ -1,8 +1,9 @@
-local function surroundConfig()
-	local u = require("config.utils")
-	local textobjectRemaps = require("config.utils").textobjRemaps
-	local maps = require("config.utils").textobjMaps
+local notify = require("config.utils").notify
+local textobjectRemaps = require("config.utils").textobjRemaps
+local maps = require("config.utils").textobjMaps
+--------------------------------------------------------------------------------
 
+local function surroundConfig()
 	-- https://github.com/kylechui/nvim-surround/blob/main/doc/nvim-surround.txt#L483
 	local config = require("nvim-surround.config")
 	require("nvim-surround").setup {
@@ -50,7 +51,7 @@ local function surroundConfig()
 					then
 						patt = "^(.-function.-%b() ?{)().*(})()$"
 					else
-						u.notify("Surround", "No function-surround defined for " .. ft)
+						notify("Surround", "No function-surround defined for " .. ft)
 						patt = "()()()()"
 					end
 					return config.get_selections {
@@ -73,7 +74,7 @@ local function surroundConfig()
 					elseif ft == "javascript" or ft == "typescript" then
 						patt = "^(if %b() ?{?)().-( ?}?)()$"
 					else
-						u.notify("Surround", "No conditional-surround defined for " .. ft)
+						notify("Surround", "No conditional-surround defined for " .. ft)
 						patt = "()()()()"
 					end
 					return config.get_selections {
@@ -94,7 +95,7 @@ local function surroundConfig()
 							{ "", "}" },
 						}
 					end
-					u.notify("Surround", "No if-surround defined for " .. ft)
+					notify("Surround", "No if-surround defined for " .. ft)
 					return { { "" }, { "" } }
 				end,
 			},
