@@ -1,4 +1,5 @@
-local u = require("config.utils")
+local keymap = require("config.utils").uniqueKeymap
+local notify = require("config.utils").notify
 --------------------------------------------------------------------------------
 
 -- Bootstrap Lazy.nvim plugin manager https://github.com/folke/lazy.nvim#-installation
@@ -80,19 +81,55 @@ require("lazy").setup("plugins", {
 })
 
 --------------------------------------------------------------------------------
--- KEYMAPS
 
-local keymap = u.uniqueKeymap
 keymap("n", "<leader>pp", require("lazy").sync, { desc = "󰒲 Lazy Sync" })
 keymap("n", "<leader>pl", require("lazy").home, { desc = "󰒲 Lazy" })
 keymap("n", "<leader>pi", require("lazy").install, { desc = "󰒲 Lazy Install" })
 
--- 5s after startup, notify if there many plugin updates
-vim.defer_fn(function()
+--------------------------------------------------------------------------------
+
+local function checkForPluginUpdates()
 	if not require("lazy.status").has_updates() then return end
-	local threshold = 15
+	local threshold = 20
 	local numberOfUpdates = tonumber(require("lazy.status").updates():match("%d+"))
 	if numberOfUpdates < threshold then return end
-	local msg = ("󱧕 %s plugin updates"):format(numberOfUpdates)
-	u.notify("Lazy", msg)
-end, 5000)
+	notify("Lazy", ("󱧕 %s plugin updates"):format(numberOfUpdates))
+end
+
+local function checkForDuplicateKeys()
+	local modes = { "n", "x", "o", "i" }
+
+	---@param map {mode?: string|table}
+	---@param mode string
+	---@return boolean
+	local function isMode(map, mode)
+		if not map.mode then return mode == "n" end
+		if type(map.mode) == "string" then return map.mode == mode end
+		if type(map.mode) == "table" then return vim.tbl_contains(map.mode, mode) end ---@diagnostic disable-line: param-type-mismatch
+		return false
+	end
+
+	local allKeys = {}
+	for _, mode in ipairs(modes) do
+		allKeys[mode] = {}
+	end
+	for _, plugin in ipairs(require("lazy").plugins()) do
+		local globalKeys = vim.tbl_filter(function(map) return map.ft == nil end, plugin.keys or {})
+
+		for _, map in ipairs(globalKeys) do
+			for _, mode in ipairs(modes) do
+				local lhs = map[1] or map
+				if isMode(map, mode) then
+					if vim.tbl_contains(allKeys[mode], lhs) then
+						notify("Lazy", ("duplicate key in %s-mode: "):format(mode) .. lhs, "warn")
+					else
+						table.insert(allKeys[mode], lhs)
+					end
+				end
+			end
+		end
+	end
+end
+
+vim.defer_fn(checkForPluginUpdates, 5000)
+vim.defer_fn(checkForDuplicateKeys, 5000)
