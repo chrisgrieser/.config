@@ -26,6 +26,7 @@ function new_venv {
 	[[ -d ./.venv ]] && rm -rf ./.venv
 	python3.12 -m venv ./.venv
 	source ./.venv/bin/activate
+	python3.12 -m pip install --upgrade pip # stop pip unpdate nagging
 	inspect_venv
 }
 
