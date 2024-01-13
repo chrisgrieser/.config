@@ -87,6 +87,10 @@
     "description": "Luadoc Annotation that a function's return value should not be discarded. https://github.com/LuaLS/lua-language-server/wiki/Annotations#nodiscard",
     "prefix": "nodiscard"
   },
+  "path of this file": {
+    "body": "local pathOfThisFile = debug.getinfo(1).source:sub(2)",
+    "prefix": "path of this file"
+  },
   "pcall": {
     "body": [
       "local success = pcall(${1:func})",

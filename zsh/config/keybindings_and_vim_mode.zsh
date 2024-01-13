@@ -12,8 +12,6 @@ function zvm_config {
 	ZVM_VISUAL_LINE_MODE_CURSOR=$ZVM_CURSOR_BLINKING_UNDERLINE
 }
 
-#───────────────────────────────────────────────────────────────────────────────
-
 # INFO has to run *after* zvm_config, but *before* zvm_after_lazy_keybindings
 # shellcheck disable=1091
 source "$HOMEBREW_PREFIX/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
@@ -47,7 +45,7 @@ function _copy_location {
 zle -N _copy_location
 
 #───────────────────────────────────────────────────────────────────────────────
-# DEFINE KEYBINDINGS
+# KEYBINDINGS
 
 # INFO
 # - use `ctrl-v` and then a key combination to get the shell binding
@@ -58,6 +56,7 @@ zle -N _copy_location
 function zvm_after_init {
 	bindkey -M viins '^P' _copy_location
 	bindkey -M viins '^U' _cut_buffer
+	bindkey -M vicmd '^U' _cut_buffer
 	bindkey -M viins '…' insert-last-word
 	bindkey -M viins '^Z' undo # remapped to `cmd+z` via wezterm
 

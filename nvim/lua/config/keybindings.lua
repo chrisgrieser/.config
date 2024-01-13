@@ -14,6 +14,7 @@ keymap(
 	function() vim.cmd.edit(pathOfThisFile) end,
 	{ desc = "⌨️ Edit " .. vim.fs.basename(pathOfThisFile) }
 )
+
 --------------------------------------------------------------------------------
 -- NAVIGATION
 
@@ -340,7 +341,6 @@ local function gitModeMap(key, action)
 	-- needs to check for `R` in `mode()` since there is no `rmap`
 	vim.keymap.set("i", key, function()
 		if vim.fn.mode() ~= "R" then return key end
-
 		-- temporarily pause replace mode, since functions do not work here
 		vim.cmd.stopinsert() -- also stops replace mode
 		vim.defer_fn(function()
@@ -355,5 +355,3 @@ gitModeMap("A", function() vim.cmd.Gitsigns("undo_stage_hunk") end)
 gitModeMap("u", function() vim.cmd.Gitsigns("reset_hunk") end)
 gitModeMap("n", function() require("gitsigns").next_hunk { foldopen = true } end)
 gitModeMap("N", function() require("gitsigns").prev_hunk { foldopen = true } end)
-gitModeMap("c", function() require("tinygit").smartCommit { pushIfClean = false } end)
-gitModeMap("p", function() require("tinygit").push { pullBefore = true } end)
