@@ -35,20 +35,19 @@ local autoIndentFt = {
 ---@param myFormatters object[]
 ---@return string[] tools
 ---@nodiscard
-local function toolsToAutoinstall(myFormatters, myLsps)
+local function toolsToAutoinstall(myFormatters)
 	-- formatters
 	local notClis = { "trim_whitespace", "trim_newlines", "squeeze_blanks", "injected" }
 	local formatters = vim.tbl_flatten(vim.tbl_values(myFormatters))
 	formatters = vim.tbl_filter(function(f) return not vim.tbl_contains(notClis, f) end, formatters)
 
-	-- extra dependencies -- PENDING https://github.com/folke/lazy.nvim/issues/1264
+	-- dependencies of plugins (via lazy.nvim) -- PENDING https://github.com/folke/lazy.nvim/issues/1264
 	local plugins = require("lazy").plugins() 
-	local extras = vim.tbl_map(function(plugin) return plugin.extra_dependencies end, plugins)
-	extras = vim.tbl_flatten(vim.tbl_values(extras))
+	local depsOfPlugins = vim.tbl_map(function(plugin) return plugin.extra_dependencies end, plugins)
+	depsOfPlugins = vim.tbl_flatten(vim.tbl_values(depsOfPlugins))
 
 	-- compile list
-	local tools = vim.list_extend(myLsps, formatters)
-	tools = vim.list_extend(tools, extras)
+	local tools = vim.list_extend(depsOfPlugins, formatters)
 	table.sort(tools)
 	tools = vim.fn.uniq(tools)
 	return tools
@@ -143,11 +142,8 @@ return {
 		event = "VeryLazy",
 		dependencies = "williamboman/mason.nvim",
 		config = function()
-			local lsps = vim.tbl_values(vim.g.lspToMasonMap)
-			local myTools = toolsToAutoinstall(ftToFormatter, lsps)
-
 			require("mason-tool-installer").setup {
-				ensure_installed = myTools,
+				ensure_installed = toolsToAutoinstall(ftToFormatter),
 				run_on_start = false, -- manually, since otherwise not working with lazy-loading
 			}
 			vim.defer_fn(vim.cmd.MasonToolsInstall, 500)
