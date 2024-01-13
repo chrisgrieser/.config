@@ -181,7 +181,7 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>Spellfixing and Synonyms for the word under the cursor. Rephrasing of the selected text. All with one key press.</string>
+	<string>Autocorrection and synonym suggestions for the word under the cursor. Rephrasing of the selected text. All with one key press.</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -583,7 +583,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>note</key>
-			<string>get synonym for word under cursor
+			<string>Suggests synonyms for word under cursor
 
 DOUBLE CLICK TO EDIT</string>
 			<key>xpos</key>
@@ -684,7 +684,7 @@ DOUBLE CLICK TO EDIT</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>Auto-Correct word unser cursor
+			<string>Autocorrect word unser cursor
 
 DOUBLE CLICK TO EDIT</string>
 			<key>xpos</key>
