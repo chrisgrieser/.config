@@ -67,7 +67,7 @@ keymap(
 
 -- LSP Rename: cursorword pre-selected
 keymap("n", "<leader>ff", function()
-	vim.lsp.buf.rename(vim.fn.expand("<cword>"))
+	vim.lsp.buf.rename()
 	vim.api.nvim_create_autocmd("FileType", {
 		once = true,
 		pattern = "DressingInput",

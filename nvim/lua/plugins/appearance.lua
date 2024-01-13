@@ -2,6 +2,11 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
+	{ -- dim unused windows
+		"miversen33/sunglasses.nvim",
+		event = "UIEnter",
+		opts = { filter_type = "NOSYNTAX", filter_percent = 0.5 },
+	},
 	{ -- fixes scrolloff at end of file
 		"Aasim-A/scrollEOF.nvim",
 		event = "CursorMoved",
