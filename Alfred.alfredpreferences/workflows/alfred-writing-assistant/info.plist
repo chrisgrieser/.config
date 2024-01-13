@@ -742,7 +742,7 @@ DOUBLE CLICK TO EDIT</string>
 			<key>description</key>
 			<string>Delay in ms. Adjust if results are not replaced correctly.</string>
 			<key>label</key>
-			<string>Spell Fixer / Synonymer</string>
+			<string>Autocorrection &amp; Synonyms</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -763,7 +763,7 @@ DOUBLE CLICK TO EDIT</string>
 			<key>description</key>
 			<string>OpenAI API Key. If empty, will look through `.zshenv` for a variable `$OPENAI_API_KEY`.</string>
 			<key>label</key>
-			<string>Rephraser</string>
+			<string>Rephrasing</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -815,13 +815,13 @@ DOUBLE CLICK TO EDIT</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>Please make suggestions how to improve readability, grammar, and language of the following text. Do not change anything about the content, and refrain from doing any changes when the writing is already sufficiently clear and concise. Thanks you. The text is:</string>
+				<string>Please make suggestions how to improve readability, grammar, and language of the following text. Do not change anything about the content, and refrain from doing any changes when the writing is already sufficiently clear and concise. Output only the changed text. The text is:</string>
 				<key>required</key>
 				<true/>
 				<key>trim</key>
 				<true/>
 				<key>verticalsize</key>
-				<integer>6</integer>
+				<integer>9</integer>
 			</dict>
 			<key>description</key>
 			<string>Prompt that is prefixed to the selected text.</string>
@@ -860,7 +860,7 @@ DOUBLE CLICK TO EDIT</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.9</string>
+	<string>1.0.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
