@@ -4,7 +4,7 @@ local u = require("config.utils")
 ---since nvim-lspconfig and mason.nvim use different package names
 ---mappings from https://github.com/williamboman/mason-lspconfig.nvim/blob/main/lua/mason-lspconfig/mappings/server.lua
 ---@type table<string, string>
-vim.g.lspToMasonMap = {
+local lspToMasonMap = {
 	autotools_ls = "autotools-language-server", -- Makefiles lsp
 	bashls = "bash-language-server",
 	biome = "biome", -- ts/js/json linter/formatter
@@ -42,7 +42,7 @@ vim.g.lspToMasonMap = {
 
 ---@type table<string, lspConfiguration>
 local serverConfigs = {}
-for lspName, _ in pairs(vim.g.lspToMasonMap) do
+for lspName, _ in pairs(lspToMasonMap) do
 	serverConfigs[lspName] = {}
 end
 
@@ -347,7 +347,7 @@ return {
 	{ -- configure LSPs
 		"neovim/nvim-lspconfig",
 		lazy = false,
-		extra_dependencies = efmDependencies,
+		extra_dependencies = vim.list_extend(efmDependencies, vim.tbl_values(lspToMasonMap)),
 		dependencies = { -- loading as dependency ensures it's loaded before lua_ls
 			"folke/neodev.nvim",
 			opts = { library = { plugins = false } }, -- too slow with all my plugins
