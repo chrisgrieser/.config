@@ -140,7 +140,9 @@ local function codeActionFilter(action)
 			or title:find( "^Disable .+ rule inline: ")) ~= nil,
 		markdown = title == "Create a Table of Contents",
 	}
-	return ignore[vim.bo.ft] == false -- not `nil`, so unset filetypes all pass
+	local configuredToIgnore = ignore[vim.bo.ft] == true
+	local noIgnoresForFiletype = ignore[vim.bo.ft] == nil
+	return noIgnoresForFiletype or not configuredToIgnore
 end
 
 keymap(

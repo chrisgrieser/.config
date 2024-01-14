@@ -87,8 +87,6 @@ end
 --------------------------------------------------------------------------------
 -- TRIGGERS
 
-u.hotkey({}, "home", scrollUp)
-
 M.aw_tickerWatcher = aw.new(function(appName, event, app)
 	if appName == "CleanShot X" or appName == "Alfred" then return end
 
