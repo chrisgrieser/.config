@@ -119,6 +119,13 @@
     "description": "Gray that is readable in dark and light mode.",
     "prefix": "gray"
   },
+  "gray + grey": {
+    "body": "\\e[1;38;5;247m",
+    "prefix": [
+      "gray",
+      "grey"
+    ]
+  },
   "green": {
     "body": "\\e[1;32m",
     "prefix": "green"

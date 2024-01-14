@@ -21,7 +21,7 @@ alias bh='brew home'
 alias bl='brew list'
 alias bi='brew install'
 alias br='brew reinstall'
-alias bu='brew uninstall --zap' 
+alias bu='brew uninstall --zap'
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -42,28 +42,26 @@ function _dump() {
 		grep -v "Temp" | sed "s|^|https://chrome.google.com/webstore/detail/|" \
 		>"$dump_path/browser-extensions.txt"
 
-	echo "Brewfile & browser-extensions-list dumped at \"$dump_path\""
+	print "\e[1;38;5;247mBrewfile & browser-extensions-list dumped at \"$dump_path\" \e[0m"
 }
 
 function update() {
-	_print-section "HOMEBREW"
+	_print-section "Homebrew Updates"
 	brew update
 	brew upgrade
 	brew cleanup
 
 	# manually update, cause brew won't update as it is in theory self-upgrading
-	_print-section "Obsidian Installer"
+	echo "Obsidian Installer"
 	brew upgrade obsidian
 
-	_print-section "MAC APP STORE"
+	_print-section "Mac App Store"
 	mas upgrade
 
-	_print-section "Restarting Sketchybar"
+	print "\e[1;38;5;247mRestarting sketchybar…\e[0m"
 	# - sketchybar usually updated and then has to be restarted to give permission
 	# - also updates the homebrew status counter
 	brew services restart sketchybar
-
-	_print-section "DUMP INSTALLS"
 	_dump
 
 	osascript -e 'display notification "" with title "🍺 Homebrew finished." sound name "Blow"'
@@ -71,19 +69,17 @@ function update() {
 
 function listall() {
 	brew update
-	_print-section "HOMEBREW"
-	_print-section "Taps"
-	brew tap
-	_print-section "Leaves"
-	brew leaves
-	_print-section "Casks"
+	_print-section "brew taps"
+	brew tap | rs
+	_print-section "brew leaves"
+	brew leaves | rs
+	_print-section "brew casks"
 	brew list --casks
-	_print-section "Doctor"
+	_print-section "brew doctor"
 	brew doctor
 
-	_print-section "MAC APP STORE"
-	mas list
+	_print-section "Mac App Store"
+	mas list | rs
 
-	_print-section "DUMP INSTALLS"
-	_dump
+	echo && _dump
 }
