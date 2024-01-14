@@ -9,6 +9,9 @@ end
 
 -- DOCS https://github.com/folke/noice.nvim#-routes
 local routes = {
+	-- FIX jedi bug https://github.com/pappasam/jedi-language-server/issues/296
+	{ filter = { event = "msg_show", find = "^}$" }, skip = true },
+
 	-- redirect to popup when message is long
 	{ filter = { min_height = 10 }, view = "popup" },
 

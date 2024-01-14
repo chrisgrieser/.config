@@ -28,21 +28,20 @@ tools:
       - "stdin:%l %m"
       - "stdin:%l:%c %m"
 
-  woke: &woke
-    lint-source: woke
+  oxlint: &oxlint
+    lint-source: oxlint
     lint-command: |
-      woke --output=simple --no-ignore --config="$HOME/.config/+ linter-configs/woke.yaml"
-    lint-stdin: false # somehow stdin does not work
-    lint-offset-columns: 1
+      oxlint --output=simple --no-ignore --config="$HOME/.config/+ linter-configs/woke.yaml"
+    lint-stdin: true
     lint-formats:
       - "%f:%l:%c: [%tarning] %m"
-      - "%f:%l:%c: [%trror] %m"
-      - "%f:%l:%c: [%tnfo] %m"
 
 languages:
   sh:
     - <<: *shellcheck
   markdown:
     - <<: *markdownlint
-  lua:
-    - <<: *woke
+  javascript:
+    - <<: *oxlint
+  typescript:
+    - <<: *oxlint
