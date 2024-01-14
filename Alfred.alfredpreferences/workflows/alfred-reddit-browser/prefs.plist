@@ -11,7 +11,7 @@
 	<key>custom_subreddit_icons</key>
 	<string>~/.config/Alfred.alfredpreferences/subreddit_icons</string>
 	<key>hackernews_frontend_url</key>
-	<string>https://hw.leftium.com/#/item/</string>
+	<string>https://www.hckrnws.com/stories/</string>
 	<key>hide_stickied</key>
 	<true/>
 	<key>min_upvotes</key>
