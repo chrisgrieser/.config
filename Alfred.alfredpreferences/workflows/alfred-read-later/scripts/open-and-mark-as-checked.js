@@ -1,6 +1,5 @@
 #!/usr/bin/env osascript -l JavaScript
 
-function run (argv) {
 	ObjC.import("stdlib");
 	ObjC.import("Foundation");
 	const app = Application.currentApplication();
@@ -18,6 +17,7 @@ function run (argv) {
 		const str = $.NSString.alloc.initWithUTF8String(text);
 		str.writeToFileAtomicallyEncodingError(file, true, $.NSUTF8StringEncoding, null);
 	}
+function run (argv) {
 
 	const url = argv.join("");
 

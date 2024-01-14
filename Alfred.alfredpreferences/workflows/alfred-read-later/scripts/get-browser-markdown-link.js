@@ -59,7 +59,12 @@ function browserTab() {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const { title, url } = browserTab();
-	const mdLinkTask = `- [ ] [${title}](${url})`;
+
+	const dateSignifier = "📆"; // https://publish.obsidian.md/tasks/Getting+Started/Dates
+	const isoDate = new Date().toISOString().slice(0, 10);
+	const date = $.getenv("add_date") === "iso8601" ? dateSignifier + isoDate : "";
+
+	const mdLinkTask = `- [ ] [${title}](${url}) ${date}`;
 
 	// append
 	const filepath = $.getenv("read_later_file");

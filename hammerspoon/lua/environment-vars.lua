@@ -36,9 +36,8 @@ M.videoAndAudioApps = {
 	"Twitch",
 	"Netflix",
 	"Prime Video",
-	"Freevee",
 	"Tageschau",
-	"Crunchyroll", 
+	"Crunchyroll",
 }
 
 M.mastodonApp = "Mona"

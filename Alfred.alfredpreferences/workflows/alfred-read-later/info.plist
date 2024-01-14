@@ -341,6 +341,32 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>variable</key>
 			<string>read_later_file</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>none</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>no</string>
+						<string>none</string>
+					</array>
+					<array>
+						<string>yes</string>
+						<string>iso8601</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>when saving new entries</string>
+			<key>label</key>
+			<string>Add Date</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>add_date</string>
+		</dict>
 	</array>
 	<key>version</key>
 	<string>1.0.3</string>

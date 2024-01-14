@@ -81,10 +81,10 @@ rules:
           - type: input_source_if
             input_sources: [{ language: ^de$ }]
         to:
-          - shell_command: open -a "Ivory"
+          - shell_command: open -a "Ivory" || open -a "Mona"
           - *deactivate-leader
           - *remove-notice
-      # [Ö] (looks like tweetbot): Mastodon Website
+      # [Ö]: Mastodon Website
       - type: basic
         from: { key_code: semicolon, modifiers: { mandatory: [shift] } } # ö on German keyboard
         conditions:
