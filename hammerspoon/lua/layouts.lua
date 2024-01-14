@@ -81,7 +81,7 @@ local function workLayout()
 			wu.moveResize(win, wu.pseudoMax)
 		end)
 	end
-	u.openApps("Ivory")
+	u.openApps(env.mastodonApp)
 	u.restartApp("AltTab") -- FIX duplicate items
 
 	-- finish
@@ -108,7 +108,7 @@ local function movieLayout()
 		"lo-rain",
 		"WezTerm",
 		"Mimestream",
-		"Ivory",
+		env.mastodonApp,
 		"GoodTask",
 		"Reminders",
 	}

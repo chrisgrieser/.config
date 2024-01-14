@@ -23,7 +23,7 @@ local config = {
 		"IINA",
 		"zoom.us",
 		"CleanShot X",
-		"Ivory",
+		env.mastodonApp,
 		"Alfred",
 		"Shottr",
 	},

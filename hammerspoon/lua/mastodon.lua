@@ -18,7 +18,11 @@ local function scrollUp()
 
 	u.keystroke({ "cmd" }, "left", 1, app) -- go back
 	u.keystroke({ "cmd" }, "1", 1, app) -- go to home tab
-	u.keystroke({ "shift", "cmd" }, "R", 1, app) -- reload
+	if env.mastodonApp == "Mona" then
+		u.keystroke({ "cmd" }, "R", 1, app) -- refresh
+	elseif env.mastodonApp == "Ivory" then
+		u.keystroke({ "shift", "cmd" }, "R", 1, app) -- reload
+	end
 
 	-- needs delays to wait for tweets loading
 	u.runWithDelays({ 0.5, 1.5 }, function()
@@ -31,14 +35,12 @@ end
 local function closeMediaWindow()
 	local app = u.app(env.mastodonApp)
 	if not app then return end
-	local mediaWin = app:findWindow("Media") or app:findWindow(env.mastodonApp)
+	local mediaWin = app:findWindow("Media") or app:findWindow("Image")
 	if not mediaWin then return end
 
-	-- HACK using keystroke, since closing the window does not
-	-- seem to work reliably
+	-- HACK using keystroke, too, since closing the window does not work reliably
 	mediaWin:raise()
 	u.keystroke({ "cmd" }, "w", 1, app)
-
 	if mediaWin then mediaWin:close() end
 end
 
@@ -50,8 +52,8 @@ local function winToTheSide()
 	if app:isHidden() then app:unhide() end
 
 	-- not using mainWindow to not unintentionally move Media or new-tweet window
-	-- Twitter's window is called "Twitter", Ivory's "Home"
-	local win = app:findWindow("Home")
+	-- Twitter's window is called "Twitter", Ivory's "Home", Mona's the username
+	local win = app:findWindow("Home") or app:findWindow("pseudometa")
 	if win then
 		win:setFrame(wu.toTheSide)
 		win:raise()
@@ -85,35 +87,29 @@ end
 --------------------------------------------------------------------------------
 -- TRIGGERS
 
--- toggle mute when Zoom is running, otherwise scroll up
 u.hotkey({}, "home", scrollUp)
 
-M.aw_tickerWatcher = aw.new(function(appName, event)
+M.aw_tickerWatcher = aw.new(function(appName, event, app)
 	if appName == "CleanShot X" or appName == "Alfred" then return end
-	local app = u.app(env.mastodonApp)
 
-	-- move twitter and scroll up
+	-- move scroll up
 	if appName == env.mastodonApp and (event == aw.launched or event == aw.activated) then
 		u.whenAppWinAvailable(env.mastodonApp, function()
 			winToTheSide()
 			scrollUp()
 			wu.bringAllWinsToFront()
 
-			-- focus new tweet / media window if there is one
-			if not app then return end
-			local newTweetWindow = app:findWindow("Tweet")
-			if newTweetWindow then newTweetWindow:focus() end
+			-- focus media window if there is one
 			local mediaWindow = app:findWindow("Media") or app:findWindow(env.mastodonApp)
 			if mediaWindow then mediaWindow:focus() end
 		end)
 
 		-- auto-close media windows and scroll up when deactivating
 	elseif appName == env.mastodonApp and event == aw.deactivated then
-		if u.isFront("CleanShot X") then return end
 		closeMediaWindow()
 		u.runWithDelays(1.5, scrollUp) -- deferred, so multiple links can be clicked
 
-		-- raise twitter when switching window to other app
+		-- raise when switching window to other app
 	elseif (event == aw.activated or event == aw.launched) and appName ~= env.mastodonApp then
 		showHideTickerApp(hs.window.focusedWindow())
 	end

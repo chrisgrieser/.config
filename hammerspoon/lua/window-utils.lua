@@ -19,6 +19,12 @@ else
 	M.toTheSide = hs.geometry.rect(-82, 54, 437, 1026)
 end
 
+-- Mona allows you to hide the sidebar, but restrict the window width too much
+if env.mastodonApp == "Mona" then
+	M.toTheSide.x = M.toTheSide.x - 10
+	M.toTheSide.w = M.toTheSide.w + 8
+end
+
 --------------------------------------------------------------------------------
 -- WINDOW MOVEMENT
 
@@ -48,7 +54,7 @@ end
 ---@param pos hs.geometry
 function M.moveResize(win, pos)
 	-- GUARD
-	local appsToIgnore = { "Transmission", "Hammerspoon", "Ivory" }
+	local appsToIgnore = { "Transmission", "Hammerspoon", env.mastodonApp }
 	if
 		not win
 		or not (win:application())
