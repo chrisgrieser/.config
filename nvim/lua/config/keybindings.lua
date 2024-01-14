@@ -274,7 +274,7 @@ keymap(
 	"n",
 	"<D-p>",
 	function() require("funcs.nano-plugins").pasteFromNumberReg() end,
-	{ desc = " Paste Number Register" }
+	{ desc = " Paste Number Reg" }
 )
 
 -- paste without switching with register
