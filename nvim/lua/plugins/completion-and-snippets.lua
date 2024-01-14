@@ -211,7 +211,6 @@ return {
 				keymaps = {
 					deleteSnippet = "<D-BS>",
 					openInFile = "<D-o>",
-					insertNextToken = "<D-t>",
 					jumpBetweenBodyAndPrefix = "<D-j>",
 				},
 			},

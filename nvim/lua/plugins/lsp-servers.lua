@@ -24,6 +24,7 @@ local lspToMasonMap = {
 	typos_lsp = "typos-lsp", -- spellchecker for code
 	vale_ls = "vale-ls", -- natural language linter
 	yamlls = "yaml-language-server",
+	jedi_language_server = "jedi-language-server", -- python lsp (with better hovers)
 }
 
 --------------------------------------------------------------------------------
@@ -109,7 +110,6 @@ serverConfigs.ruff_lsp = {
 			codeAction = { disableRuleComment = { enable = false } }, -- using nvim-rulebook instead
 		},
 	},
-	-- Disable hover in favor of pyright
 	on_attach = function(ruff) ruff.server_capabilities.hoverProvider = false end,
 }
 
@@ -118,14 +118,35 @@ serverConfigs.ruff_lsp = {
 -- https://microsoft.github.io/pyright/#/settings
 serverConfigs.pyright = {
 	on_attach = function(pyright)
+		pyright.server_capabilities.hoverProvider = false
+
 		-- Automatically set python_path virtual env
-		if not vim.env.VIRTUAL_ENV then return end
+		local hasPyrightConfig = vim.loop.fs_stat("pyrightconfig.json") ~= nil
+		if not vim.env.VIRTUAL_ENV or hasPyrightConfig then return end
 		pyright.config.settings.python.pythonPath = vim.env.VIRTUAL_ENV .. "/bin/python"
 		vim.lsp.buf_notify(
 			0,
 			"workspace/didChangeConfiguration",
 			{ settings = pyright.config.settings }
 		)
+	end,
+}
+
+-- DOCS https://github.com/pappasam/jedi-language-server#configuration
+serverConfigs.jedi_language_server = {
+	init_options = {
+		diagnostics = { enable = true },
+		codeAction = { nameExtractVariable = "extracted_var", nameExtractFunction = "extracted_func" },
+	},
+	-- HACK since init_options cannot be changed during runtime, we need to use
+	-- `on_new_config` to set it.
+	on_new_config = function(config, root_dir)
+		-- Since `vim.env.VIRTUAL_ENV` is not set in time, we need to hardcode the
+		-- identification of the venv-dir here
+		local venv_python = root_dir .. "/.venv/bin/python"
+		local fileExists = vim.loop.fs_stat(venv_python) ~= nil
+		if not fileExists then return end
+		config.init_options.workspace = { environmentPath = venv_python }
 	end,
 }
 
@@ -211,6 +232,14 @@ serverConfigs.tsserver = {
 	on_attach = function(client)
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
+
+		-- use tsserver instead of refactoring.nvim for inlining
+		vim.keymap.set("n", "<leader>fi", function()
+			vim.lsp.buf.code_action {
+				filter = function(action) return action.title == "Inline variable" end,
+				apply = true,
+			}
+		end, { buffer = true, desc = "󰒕 Inline Var" })
 	end,
 }
 
