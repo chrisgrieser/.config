@@ -22,7 +22,7 @@ end
 -- Mona allows you to hide the sidebar, but restrict the window width too much
 if env.mastodonApp == "Mona" then
 	M.toTheSide.x = M.toTheSide.x - 10
-	M.toTheSide.w = M.toTheSide.w + 8
+	M.toTheSide.w = M.toTheSide.w + 9
 end
 
 --------------------------------------------------------------------------------
