@@ -12,6 +12,7 @@ local lspToMasonMap = {
 	efm = "efm", -- linter integration, only used for shellcheck in zsh files
 	emmet_language_server = "emmet-language-server", -- css/html completion
 	html = "html-lsp",
+	jedi_language_server = "jedi-language-server", -- python lsp (with better hovers)
 	jsonls = "json-lsp",
 	ltex = "ltex-ls", -- languagetool (natural language linter)
 	lua_ls = "lua-language-server",
@@ -24,7 +25,6 @@ local lspToMasonMap = {
 	typos_lsp = "typos-lsp", -- spellchecker for code
 	vale_ls = "vale-ls", -- natural language linter
 	yamlls = "yaml-language-server",
-	jedi_language_server = "jedi-language-server", -- python lsp (with better hovers)
 }
 
 --------------------------------------------------------------------------------
@@ -45,6 +45,19 @@ local lspToMasonMap = {
 local serverConfigs = {}
 for lspName, _ in pairs(lspToMasonMap) do
 	serverConfigs[lspName] = {}
+end
+
+---Creates code-action-keymap on attachting lsp to buffer
+---@param lhs string
+---@param codeActionTitle string used by string.find
+---@param keymapDesc string
+local function codeActionKeymap(lhs, codeActionTitle, keymapDesc)
+	vim.keymap.set("n", lhs, function()
+		vim.lsp.buf.code_action {
+			filter = function(action) return action.title:find(codeActionTitle) end,
+			apply = true,
+		}
+	end, { buffer = true, desc = keymapDesc })
 end
 
 --------------------------------------------------------------------------------
@@ -110,6 +123,7 @@ serverConfigs.ruff_lsp = {
 			codeAction = { disableRuleComment = { enable = false } }, -- using nvim-rulebook instead
 		},
 	},
+	-- disable in favor of jedi
 	on_attach = function(ruff) ruff.server_capabilities.hoverProvider = false end,
 }
 
@@ -118,6 +132,7 @@ serverConfigs.ruff_lsp = {
 -- https://microsoft.github.io/pyright/#/settings
 serverConfigs.pyright = {
 	on_attach = function(pyright)
+		-- disable in favor of jedi
 		pyright.server_capabilities.hoverProvider = false
 
 		-- Automatically set python_path virtual env
@@ -147,6 +162,11 @@ serverConfigs.jedi_language_server = {
 		local fileExists = vim.loop.fs_stat(venv_python) ~= nil
 		if not fileExists then return end
 		config.init_options.workspace = { environmentPath = venv_python }
+	end,
+	on_attach = function()
+		-- use jedi instead of refactoring.nvim
+		codeActionKeymap("<leader>fe", "^Extract expression into variable", " Extract Var")
+		codeActionKeymap("<leader>fE", "^Extract expression into function", " Extract Func")
 	end,
 }
 
@@ -228,18 +248,13 @@ serverConfigs.tsserver = {
 		typescript = configForBoth,
 		javascript = configForBoth,
 	},
-	-- Disable formatting in favor of biome
 	on_attach = function(client)
+		-- Disable formatting in favor of biome
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
 
-		-- use tsserver instead of refactoring.nvim for inlining
-		vim.keymap.set("n", "<leader>fi", function()
-			vim.lsp.buf.code_action {
-				filter = function(action) return action.title == "Inline variable" end,
-				apply = true,
-			}
-		end, { buffer = true, desc = "󰒕 Inline Var" })
+		-- use tsserver instead of refactoring.nvim
+		codeActionKeymap("<leader>fE", "^Inline variable$", "󰛦 Inline Var")
 	end,
 }
 
