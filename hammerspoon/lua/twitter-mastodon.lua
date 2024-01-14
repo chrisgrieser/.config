@@ -12,7 +12,7 @@ local function scrollUp()
 	-- after quitting, it takes a few seconds until Twitter is fully quit,
 	-- therefore also checking for the main window existence
 	-- when browsing twitter itself, to not change tabs
-	local app = u.app("Ivory")
+	local app = u.app(env.mastodonApp)
 	if not (app and app:mainWindow() and u.screenIsUnlocked()) then return end
 	if app:isFrontmost() then return end
 
@@ -29,9 +29,9 @@ local function scrollUp()
 end
 
 local function closeMediaWindow()
-	local app = u.app("Ivory")
+	local app = u.app(env.mastodonApp)
 	if not app then return end
-	local mediaWin = app:findWindow("Media") or app:findWindow("Ivory")
+	local mediaWin = app:findWindow("Media") or app:findWindow(env.mastodonApp)
 	if not mediaWin then return end
 
 	-- HACK using keystroke, since closing the window does not
@@ -44,7 +44,7 @@ end
 
 -- move the ticker-app window to the left side of the screen
 local function winToTheSide()
-	local app = u.app("Ivory")
+	local app = u.app(env.mastodonApp)
 	if not app or u.isFront("Alfred") then return end
 
 	if app:isHidden() then app:unhide() end
@@ -62,7 +62,7 @@ end
 -- HIDE referenceWin belongs to app with transparent background is maximized
 ---@param referenceWin hs.window
 local function showHideTickerApp(referenceWin)
-	local app = u.app("Ivory")
+	local app = u.app(env.mastodonApp)
 	if not app or not referenceWin or u.isFront("CleanShot X") then return end
 
 	if wu.CheckSize(referenceWin, wu.pseudoMax) or wu.CheckSize(referenceWin, wu.centerHalf) then
@@ -90,11 +90,11 @@ u.hotkey({}, "home", scrollUp)
 
 M.aw_tickerWatcher = aw.new(function(appName, event)
 	if appName == "CleanShot X" or appName == "Alfred" then return end
-	local app = u.app("Ivory")
+	local app = u.app(env.mastodonApp)
 
 	-- move twitter and scroll up
-	if appName == "Ivory" and (event == aw.launched or event == aw.activated) then
-		u.whenAppWinAvailable("Ivory", function()
+	if appName == env.mastodonApp and (event == aw.launched or event == aw.activated) then
+		u.whenAppWinAvailable(env.mastodonApp, function()
 			winToTheSide()
 			scrollUp()
 			wu.bringAllWinsToFront()
@@ -103,18 +103,18 @@ M.aw_tickerWatcher = aw.new(function(appName, event)
 			if not app then return end
 			local newTweetWindow = app:findWindow("Tweet")
 			if newTweetWindow then newTweetWindow:focus() end
-			local mediaWindow = app:findWindow("Media") or app:findWindow("Ivory")
+			local mediaWindow = app:findWindow("Media") or app:findWindow(env.mastodonApp)
 			if mediaWindow then mediaWindow:focus() end
 		end)
 
 		-- auto-close media windows and scroll up when deactivating
-	elseif appName == "Ivory" and event == aw.deactivated then
+	elseif appName == env.mastodonApp and event == aw.deactivated then
 		if u.isFront("CleanShot X") then return end
 		closeMediaWindow()
 		u.runWithDelays(1.5, scrollUp) -- deferred, so multiple links can be clicked
 
 		-- raise twitter when switching window to other app
-	elseif (event == aw.activated or event == aw.launched) and appName ~= "Ivory" then
+	elseif (event == aw.activated or event == aw.launched) and appName ~= env.mastodonApp then
 		showHideTickerApp(hs.window.focusedWindow())
 	end
 end):start()
