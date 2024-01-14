@@ -14,9 +14,8 @@ local lightThemes = {
 }
 
 local darkThemes = {
-	"EdenEast/nightfox.nvim",
+	{ "folke/tokyonight.nvim", opts = { style = "moon" } },
 	-- { "EdenEast/nightfox.nvim", name = "duskfox" },
-	-- { "folke/tokyonight.nvim", opts = { style = "moon" } },
 	-- "rebelot/kanagawa.nvim",
 	-- "fynnfluegge/monet.nvim",
 	-- { "navarasu/onedark.nvim", opts = { style = "warm" } },

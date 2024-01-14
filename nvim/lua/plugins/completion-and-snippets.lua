@@ -194,13 +194,13 @@ return {
 			{
 				"<leader>nn",
 				function() require("scissors").editSnippet() end,
-				desc = " Edit snippets",
+				desc = " Edit snippet",
 			},
 			{
 				"<leader>na",
 				function() require("scissors").addNewSnippet() end,
 				mode = { "n", "x" },
-				desc = " Add new snippets",
+				desc = " Add new snippet",
 			},
 		},
 		opts = {
@@ -216,7 +216,7 @@ return {
 				},
 			},
 			telescope = {
-				queryAlsoSearchesBody = true,
+				alsoSearchSnippetBody = true,
 			},
 			jsonFormatter = "yq",
 		},
