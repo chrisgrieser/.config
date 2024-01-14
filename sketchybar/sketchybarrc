@@ -71,7 +71,7 @@ sketchybar \
 	--subscribe sync-indicator system_woke \
 	\
 	--add item package-updates $second_row \
-	--set package-updates update_freq=43200 \
+	--set package-updates update_freq=86400 \
 	script="$plugin_dir/homebrew-update-tracker.sh" \
 	\
 	--update # needs to run at the end of config and should not be run in an item script
