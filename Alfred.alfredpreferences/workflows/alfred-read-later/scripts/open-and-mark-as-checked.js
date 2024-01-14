@@ -1,41 +1,40 @@
 #!/usr/bin/env osascript -l JavaScript
+ObjC.import("stdlib");
+const app = Application.currentApplication();
+app.includeStandardAdditions = true;
+//──────────────────────────────────────────────────────────────────────────────
 
-	ObjC.import("stdlib");
-	ObjC.import("Foundation");
-	const app = Application.currentApplication();
-	app.includeStandardAdditions = true;
+/** @param {string} path */
+function readFile(path) {
+	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
+	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
+	return ObjC.unwrap(str);
+}
 
-	function readFile (path, encoding) {
-		if (!encoding) encoding = $.NSUTF8StringEncoding;
-		const fm = $.NSFileManager.defaultManager;
-		const data = fm.contentsAtPath(path);
-		const str = $.NSString.alloc.initWithDataEncoding(data, encoding);
-		return ObjC.unwrap(str);
-	}
+/** @param {string} filepath @param {string} text */
+function writeToFile(filepath, text) {
+	const str = $.NSString.alloc.initWithUTF8String(text);
+	str.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);
+}
 
-	function writeToFile(text, file) {
-		const str = $.NSString.alloc.initWithUTF8String(text);
-		str.writeToFileAtomicallyEncodingError(file, true, $.NSUTF8StringEncoding, null);
-	}
-function run (argv) {
+//──────────────────────────────────────────────────────────────────────────────
 
-	const url = argv.join("");
+/** @type {AlfredRun} */
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
+function run(argv) {
+	const readLaterFile = $.getenv("read_later_file");
+	const items = readFile(readLaterFile).trim().split("\n");
 
-	// check item as read
-	const readLaterFile = $.getenv("read_later_file").replace(/^~/, app.pathTo("home folder"));
-	const items = readFile(readLaterFile)
-		.trim()
-		.split("\n");
-	const listWithoutClicked = items.filter (line => !line.includes (url));
-	const updateClicked = items
-		.filter (line => line.includes (url))[0]
-		.replace("- [ ] ", "- [x] ");
+	const lineNo = Number.parseInt(argv[0]);
+	const selectedLine = items[lineNo - 1];
 
-	const updatedList = listWithoutClicked
-		.concat(updateClicked)
-		.join("\n");
-	writeToFile(updatedList, readLaterFile);
+	// mark item as read
+	items[lineNo - 1] = selectedLine.replace("- [ ] ", "- [x] ");
+	writeToFile(readLaterFile, items.join("\n"));
 
 	// open URL
-	app.openLocation (url);
+	const url = selectedLine.split("](")[1].split(")")[0];
+	app.openLocation(url);
+
+	return null;
 }

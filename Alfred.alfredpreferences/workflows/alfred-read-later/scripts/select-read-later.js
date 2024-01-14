@@ -2,6 +2,7 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
+//──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} path */
 function readFile(path) {
@@ -15,31 +16,32 @@ function readFile(path) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	/** @type {AlfredItem[]} */
+	let lineNo = 0;
+
 	const readLaterItems = readFile($.getenv("read_later_file"))
 		.trim()
 		.split("\n")
-		.filter((line) => line.startsWith("- [ ] "))
 		.map((line) => {
-			const valid = line.includes("](");
-			if (!valid) {
-				return {
-					title: "Line does not have valid markdown task syntax:",
-					valid: false,
-					subtitle: line,
-				};
-			}
-			const title = line.split("](")[0].slice(7);
-			const url = line.split("](")[1].slice(0, -1);
+			lineNo++;
+
+			// GUARD
+			const unreadItem = line.startsWith("- [ ] ");
+			const validItem = line.includes("](");
+			if (!unreadItem || !validItem) return {};
+
+			const [_, title, url, date] = line.match(
+				/- \[ \] \[([^\]]*)\]\((.*?)\) ?(\p{Extended_Pictographic} .*)?/u,
+			);
+			const dateStr = date ? `${date}  ·  ` : "";
 			return {
 				title: title,
-				subtitle: url,
-				arg: url,
+				subtitle: dateStr + url,
+				arg: lineNo,
 			};
 		});
 
 	// "Add current browser tab" item
-	readLaterItems.unshift({ title: "🔖 Add current browser tab", arg: "add" });
+	readLaterItems.unshift({ title: "🔖 Add current browser tab", arg: -1, subtitle: "" });
 
 	return JSON.stringify({ items: readLaterItems });
 }

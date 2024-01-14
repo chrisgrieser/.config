@@ -62,9 +62,9 @@ function run() {
 
 	const dateSignifier = "📆"; // https://publish.obsidian.md/tasks/Getting+Started/Dates
 	const isoDate = new Date().toISOString().slice(0, 10);
-	const date = $.getenv("add_date") === "iso8601" ? dateSignifier + isoDate : "";
+	const date = $.getenv("add_date") === "iso8601" ? ` ${dateSignifier} ${isoDate}` : "";
 
-	const mdLinkTask = `- [ ] [${title}](${url}) ${date}`;
+	const mdLinkTask = `- [ ] [${title}](${url})${date}`;
 
 	// append
 	const filepath = $.getenv("read_later_file");

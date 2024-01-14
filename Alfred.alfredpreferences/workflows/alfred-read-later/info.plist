@@ -199,7 +199,7 @@
 						<key>matchmode</key>
 						<integer>0</integer>
 						<key>matchstring</key>
-						<string>add</string>
+						<string>-1</string>
 						<key>outputlabel</key>
 						<string>add</string>
 						<key>uid</key>
@@ -369,7 +369,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.3</string>
+	<string>1.1.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
