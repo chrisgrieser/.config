@@ -343,10 +343,8 @@ local function gitModeMap(key, action)
 		if vim.fn.mode() ~= "R" then return key end
 		-- temporarily pause replace mode, since functions do not work here
 		vim.cmd.stopinsert() -- also stops replace mode
-		vim.defer_fn(function()
-			action()
-			vim.cmd.startreplace()
-		end, 1)
+		vim.defer_fn(action, 1)
+		vim.defer_fn(vim.cmd.startreplace, 2)
 	end, { expr = true })
 end
 
