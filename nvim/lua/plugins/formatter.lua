@@ -42,7 +42,7 @@ local function listConformFormatters(formattersByFt)
 	return vim.fn.uniq(formatters)
 end
 
-local formatterConfig = {
+local conformOpts = {
 	formatters_by_ft = ftToFormatter,
 	formatters = {
 		markdownlint = {
@@ -91,7 +91,7 @@ return {
 	extra_dependencies = listConformFormatters(ftToFormatter),
 	config = function()
 		require("conform.formatters.injected").options.ignore_errors = true
-		require("conform").setup(formatterConfig)
+		require("conform").setup(conformOpts)
 	end,
 	keys = {
 		{ "<D-s>", formattingFunc, desc = "󰒕 Format & Save", mode = { "n", "x" } },
