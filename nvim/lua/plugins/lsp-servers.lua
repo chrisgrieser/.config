@@ -48,11 +48,12 @@ for lspName, _ in pairs(lspToMasonMap) do
 end
 
 ---Creates code-action-keymap on attachting lsp to buffer
+---@param mode string|string[]
 ---@param lhs string
 ---@param codeActionTitle string used by string.find
 ---@param keymapDesc string
-local function codeActionKeymap(lhs, codeActionTitle, keymapDesc)
-	vim.keymap.set("n", lhs, function()
+local function codeActionKeymap(mode, lhs, codeActionTitle, keymapDesc)
+	vim.keymap.set(mode, lhs, function()
 		vim.lsp.buf.code_action {
 			filter = function(action) return action.title:find(codeActionTitle) end,
 			apply = true,
@@ -165,8 +166,10 @@ serverConfigs.jedi_language_server = {
 	end,
 	on_attach = function()
 		-- use jedi instead of refactoring.nvim
-		codeActionKeymap("<leader>fe", "^Extract expression into variable", " Extract Var")
-		codeActionKeymap("<leader>fE", "^Extract expression into function", " Extract Func")
+		-- stylua: ignore start
+		codeActionKeymap({ "n", "x" }, "<leader>fe", "^Extract expression into variable", " Extract Var")
+		codeActionKeymap({ "n", "x" }, "<leader>fE", "^Extract expression into function", " Extract Func")
+		-- stylua: ignore end
 	end,
 }
 
@@ -254,7 +257,7 @@ serverConfigs.tsserver = {
 		client.server_capabilities.documentRangeFormattingProvider = false
 
 		-- use tsserver instead of refactoring.nvim
-		codeActionKeymap("<leader>fE", "^Inline variable$", "󰛦 Inline Var")
+		codeActionKeymap("n", "<leader>fE", "^Inline variable$", "󰛦 Inline Var")
 	end,
 }
 
