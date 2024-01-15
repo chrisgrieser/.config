@@ -281,17 +281,18 @@ return {
 	{
 		"chrisgrieser/nvim-chainsaw",
 		init = function() u.leaderSubkey("l", " Log") end,
+		opts = { marker ="👽" },
 		keys = {
 			-- stylua: ignore start
 			{"<leader>lb", function() require("chainsaw").beepLog() end, desc = "󰸢 beep log" },
 			{"<leader>lm", function() require("chainsaw").messageLog() end, desc = "󰸢 message log" },
 			{"<leader>lt", function() require("chainsaw").timeLog() end, desc = "󰸢 time log" },
 			{"<leader>ld", function() require("chainsaw").debugLog() end, desc = "󰸢 debugger log" },
-			{"<leader>lr", function() require("chainsaw").removeLogs() end, desc = "󰹝 remove logs" },
-
 			{"<leader>ll", function() require("chainsaw").variableLog() end, mode = {"n", "x"}, desc = "󰸢 variable log" },
 			{"<leader>lo", function() require("chainsaw").objectLog() end, mode = {"n", "x"}, desc = "󰸢 object log" },
 			{"<leader>la", function() require("chainsaw").assertLog() end, mode = {"n", "x"}, desc = "󰸢 assert log" },
+
+			{"<leader>lr", function() require("chainsaw").removeLogs() end, desc = "󰹝 remove logs" },
 			-- stylua: ignore end
 		},
 	},
