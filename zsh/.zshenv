@@ -13,7 +13,7 @@ export LOCAL_REPOS="$HOME/repos"
 
 # for my configs
 export BROWSER_DEFAULTS_PATH="BraveSoftware/Brave-Browser"
-export BROWSER_APP="Brave Browser" # not using "$BROWSER" since it's a reserved variable
+export BROWSER_APP="Brave Browser" # not using "$BROWSER" since reserved variable
 
 # settings
 export EDITOR="nvim"
