@@ -234,6 +234,13 @@ keymap(
 	{ desc = "󰽙 Goto Main File" }
 )
 
+keymap(
+	"n",
+	"gp",
+	function() require("funcs.nano-plugins").gotoProject() end,
+	{ desc = " Goto Project" }
+)
+
 --------------------------------------------------------------------------------
 -- CLIPBOARD
 
