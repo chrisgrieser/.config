@@ -20,7 +20,7 @@ dns_address_2="1.0.0.1"
 
 # set DNS on every network
 networksetup -listallnetworkservices |
-	sed '1d' | 
+	sed '1d' |
 	tr -d "*" | # remove "*" marking disabled services
 	xargs -I {} networksetup -setdnsservers {} "$dns_address_1" "$dns_address_2"
 
@@ -35,7 +35,7 @@ defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Libr
 defaults write com.apple.finder FXEnableExtensionChangeWarning -int 0
 defaults write com.apple.finder WarnOnEmptyTrash -int 0
 # defaults write com.apple.finder QuitMenuItem -bool true # make finder quittable
-defaults write com.apple.finder CreateDesktop false     # disable desktop icons & make desktop unfocussable
+defaults write com.apple.finder CreateDesktop false # disable desktop icons & make desktop unfocussable
 
 # Automatically open a new Finder window when a volume is mounted
 defaults read com.apple.frameworks.diskimages auto-open-ro-root -bool true
@@ -146,7 +146,6 @@ defaults -currentHost write -g NSWindowResizeTime -float 0.05
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 2
 defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
 defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1 # Download newly available updates in background
-defaults write com.apple.commerce AutoUpdate -bool true          # Turn on app auto-update
 
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true # Prevent Photos from opening automatically when devices are plugged in
 defaults write com.apple.CrashReporter DialogType -string "none"             # Disable the crash reporter
@@ -165,15 +164,7 @@ defaults write org.gpgtools.common DisableKeychain -bool yes
 # DOCK
 # INFO Dock settings do not need to be saved, since the Dock-Switcher setup also
 # saves them, and therefore syncs them across devices already as soon as
-# Hammerspoon is up. Lines here are only kept for reference.
-# defaults write com.apple.dock minimize-to-application -int 1
-
-# HOT CORNERS
-# defaults write com.apple.dock wvous-tr-corner -int 12 Top right → Notification Center
-# defaults write com.apple.dock wvous-br-corner -int 0
-# defaults write com.apple.dock wvous-tl-corner -int 0
-# defaults write com.apple.dock wvous-bl-corner -int 0
-# killall Dock
+# Dock-switcher is run.
 
 #───────────────────────────────────────────────────────────────────────────────
 # TIME MACHINE
@@ -190,8 +181,13 @@ defaults write com.apple.Safari HomePage -string "about:blank"           # faste
 defaults write com.apple.Safari DownloadsPath -string "$WD"              # Download path
 
 #───────────────────────────────────────────────────────────────────────────────
+# enable "displays have separated spaces" (required for tiling apps)
+defaults write com.apple.spaces spans-displays -int 0
+
+#───────────────────────────────────────────────────────────────────────────────
 # APP STORE
 defaults write com.apple.appstore InAppReviewEnabled -bool false
+defaults write com.apple.commerce AutoUpdate -bool false
 
 #───────────────────────────────────────────────────────────────────────────────
 # Trash Archived Files

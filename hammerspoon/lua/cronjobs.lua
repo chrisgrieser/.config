@@ -57,22 +57,33 @@ M.timer_nightlyMaintenance = hs.timer
 		local isSunTueThuSat = os.date("%w") % 2 == 0
 		if isSunTueThuSat then return end
 
-		-- stylua: ignore start
-		M.task_bookmarksBackup = hs.task.new("./helpers/bookmark-bkp.sh", function(exitCode, _, stdErr)
-			local msg = exitCode == 0 and "✅ Bookmark Backup successful" or "⚠️ Bookmark Backup failed: " .. stdErr
-			u.notify(msg)
-		end):start()
-		M.task_dotfileBackup = hs.task.new("./helpers/dotfile-bkp.sh", function(exitCode, _, stdErr)
-			local msg = exitCode == 0 and "✅ Dotfile Backup successful" or "⚠️ Dotfile Backup failed: " .. stdErr
-			u.notify(msg)
-		end):start()
+		M.task_bookmarksBackup = hs.task
+			.new("./helpers/bookmark-bkp.sh", function(exitCode, _, stdErr)
+				local msg = exitCode == 0 and "✅ Bookmark Backup successful"
+					or "⚠️ Bookmark Backup failed: " .. stdErr
+				u.notify(msg)
+			end)
+			:start()
+		M.task_dotfileBackup = hs.task
+			.new("./helpers/dotfile-bkp.sh", function(exitCode, _, stdErr)
+				local msg = exitCode == 0 and "✅ Dotfile Backup successful"
+					or "⚠️ Dotfile Backup failed: " .. stdErr
+				u.notify(msg)
+			end)
+			:start()
 		print("Reminder Backup starting…")
-		M.task_reminderBackup = hs.task.new("./helpers/reminders-bkp.js", function(exitCode, _, stdErr)
-			local msg = exitCode == 0 and "✅ Reminder Backup successful" or "⚠️ Reminder Backup failed: " .. stdErr
-			u.notify(msg)
-		end):start()
-		u.applescript([[tell application id "com.runningwithcrayons.Alfred" to run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"]])
-		-- stylua: ignore end
+		M.task_reminderBackup = hs.task
+			.new("./helpers/reminders-bkp.js", function(exitCode, _, stdErr)
+				local msg = exitCode == 0 and "✅ Reminder Backup successful"
+					or "⚠️ Reminder Backup failed: " .. stdErr
+				u.notify(msg)
+			end)
+			:start()
+		u.applescript(
+			[[tell application id "com.runningwithcrayons.Alfred" to run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"]]
+		)
+		-- save macOS preferences via `mackup`
+		hs.execute(u.exportPath .. "mackup backup --force && mackup uninstall --force", true)
 	end, true)
 	:start()
 

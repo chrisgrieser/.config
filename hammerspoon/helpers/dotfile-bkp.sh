@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # CONFIG
-max_number_of_bkps=5
+max_number_of_bkps=10
 bkp_destination="$DATA_DIR/Backups/dotfile bkp" # DATA_DIR defined in zshenv
 dotfile_location="$HOME/.config"
 
