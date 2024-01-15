@@ -19,7 +19,7 @@ defaults write com.apple.finder CreateDesktop false     # disable desktop icons 
 defaults write com.apple.finder QuitMenuItem -bool true # Finder quitable
 defaults write org.hammerspoon.Hammerspoon MJConfigFile "$HOME/.config/hammerspoon/init.lua"
 
-zsh "$HOME/.config/hammerspoon/dock-switching/dock-switcher.sh" --load home
+zsh "$HOME/.config/hammerspoon/dock-switching/dock-switcher.sh" --load work
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -52,15 +52,13 @@ git clone git@github.com:chrisgrieser/.config.git
 git clone git@github.com:chrisgrieser/main-vault.git
 git clone git@github.com:chrisgrieser/.password-store.git
 
+# zsh (ZDOTDIR set in .zshenv for the remaining config)
+ln -sf "$HOME/.config/zsh/.zshenv" ~
+
 #───────────────────────────────────────────────────────────────────────────────
 # LOAD CONFIGS (MACKUP)
 
 ln -sf "$HOME/.config/mackup/mackup.cfg" ~/.mackup.cfg
 ln -sf "$HOME/.config/mackup/custom-app-configs" ~/.mackup
 brew install mackup
-
-
-mackup restore --force && mackup uninstall --force 
-
-# zsh (ZDOTDIR set in .zshenv for the remaining config)
-ln -sf "$HOME/.config/zsh/.zshenv" ~
+mackup restore --force && mackup uninstall --force # sets symlinks, and then writes full files

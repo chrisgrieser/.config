@@ -57,8 +57,8 @@ function prefs() {
 		PREF_BEFORE=1
 
 		echo "Saved current \`defaults\` state. "
-		echo "Make changes."
-		echo "Then run \`prefs\` again for a diff of the changes."
+		echo "1. Make changes."
+		echo "2. Then run \`prefs\` again for a diff of the changes."
 	else
 		defaults read >/tmp/after
 		local changes
@@ -69,6 +69,6 @@ function prefs() {
 		# show context, so the domain can be identified
 		_separator
 		toGrep=$(echo "$changes" | tail -n1 | sed -e 's/^> *//')
-		grep -B20 "$toGrep" /tmp/after
+		grep -C20 "$toGrep" /tmp/after
 	fi
 }
