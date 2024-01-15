@@ -131,8 +131,8 @@ local function codeActionFilter(action)
 	---@type table<string, boolean>
 	local ignore = {
 		-- stylua: ignore
-		lua = (title:find("in this file") or title:find("in the workspace")
-			or title:find("defined global") or title:find("Change to parameter")) ~= nil,
+		lua = title:find("in the workspace") or title:find("defined global") 
+			or title:find("Change to parameter") ~= nil,
 		javascript = (title == "Move to a new file"),
 		typescript = (title == "Move to a new file"),
 		-- stylua: ignore
