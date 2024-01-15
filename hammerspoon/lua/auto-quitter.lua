@@ -4,9 +4,7 @@ local env = require("lua.environment-vars")
 local u = require("lua.utils")
 
 local aw = hs.application.watcher
-
----@return integer
-local function now() return os.time() end
+local now = os.time
 
 --------------------------------------------------------------------------------
 
@@ -17,15 +15,14 @@ local function now() return os.time() end
 M.thresholdMins = {
 	Slack = 20,
 	Mimestream = 5,
-	GoodTask = 10,
 	Highlights = 90,
+	Obsidian = 90,
 	Discord = 180,
 	BusyCal = 2,
 	["wezterm-gui"] = 45, -- does not work with "WezTerm"
 	["Alfred Preferences"] = 20,
 	["System Settings"] = 2,
 	Finder = 20, -- only closes windows when not on projector
-	Obsidian = nil, -- do not autoquit due to omnisearch plugin indexing
 }
 local checkIntervalSecs = 30
 

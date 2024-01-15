@@ -7,21 +7,16 @@ return {
 		event = "BufReadPre",
 		opts = { override_editorconfig = false },
 	},
-	{ -- Comments
-		"echasnovski/mini.comment",
-		-- works better with treesitter than "numToStr/Comment.nvim"
-		-- has multiline-comment textobj, but no append-comment-at-EoL
+	{ -- comment
+		"numToStr/Comment.nvim",
 		keys = {
 			{ "q", mode = { "n", "x" }, desc = " Comment Operator" },
-			{ "u", mode = "o", desc = "󱡔 multiline comment" },
+			{ "Q", desc = " Append Comment at EoL" },
 		},
 		opts = {
-			mappings = {
-				comment = "q",
-				comment_line = "qq",
-				comment_visual = "q",
-				textobject = "u", -- multi-line comment
-			},
+			opleader = { line = "q", block = "<Nop>" },
+			toggler = { line = "qq", block = "<Nop>" },
+			extra = { eol = "Q", above = "qO", below = "qo" },
 		},
 	},
 	{ -- undo history

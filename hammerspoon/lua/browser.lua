@@ -3,6 +3,7 @@ local M = {} -- persist from garbage collector
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
+
 local aw = hs.application.watcher
 local wf = hs.window.filter
 
@@ -15,7 +16,6 @@ M.wf_browser = wf.new(env.browserApp)
 			"^Task Manager$",
 			"^Developer Tools", -- when inspecting websites
 			"^DevTools",
-			"^$", -- when inspecting Vivaldi UI, devtools are titled "^$" on creation
 		},
 		allowRoles = "AXStandardWindow",
 		hasTitlebar = true,
@@ -59,11 +59,11 @@ local function hideCurAndPassThrough(key)
 	hs.mouse.setRelativePosition(bottomLeftPos, screen)
 
 	-- pass through the key pressed
-	u.keystroke({}, key, 1)
+	hs.eventtap.keyStroke({}, key, 1)
 end
 
-M.hotkey_jHidesCursor = u.hotkey({}, "j", function() hideCurAndPassThrough("j") end):disable()
-M.hotkey_kHidesCursor = u.hotkey({}, "k", function() hideCurAndPassThrough("k") end):disable()
+M.hotkey_jHidesCursor = hs.hotkey.bind({}, "j", function() hideCurAndPassThrough("j") end):disable()
+M.hotkey_kHidesCursor = hs.hotkey.bind({}, "k", function() hideCurAndPassThrough("k") end):disable()
 
 -- watches browser, enables when hotkeys when browser is activated
 M.aw_jkHotkeys = aw.new(function(appName, eventType)
@@ -88,23 +88,26 @@ local config = {
 	sourceBookmarks = appSupport .. env.browserDefaultsPath .. "/Default/Bookmarks",
 	chromeProfile = appSupport .. "Google/Chrome/",
 }
-M.pathw_bookmarks = hs.pathwatcher.new(config.sourceBookmarks, function()
-	-- Bookmarks
-	local bookmarks = hs.json.read(config.sourceBookmarks)
-	if not bookmarks then return end
-	hs.execute(("mkdir -p '%s'"):format(config.chromeProfile))
-	local success = hs.json.write(bookmarks, config.chromeProfile .. "/Default/Bookmarks", false, true)
-	if not success then
-		u.notify("🔖⚠️ Bookmarks not correctly synced.")
-		return
-	end
+M.pathw_bookmarks = hs.pathwatcher
+	.new(config.sourceBookmarks, function()
+		-- Bookmarks
+		local bookmarks = hs.json.read(config.sourceBookmarks)
+		if not bookmarks then return end
+		hs.execute(("mkdir -p '%s'"):format(config.chromeProfile))
+		local success =
+			hs.json.write(bookmarks, config.chromeProfile .. "/Default/Bookmarks", false, true)
+		if not success then
+			u.notify("🔖⚠️ Bookmarks not correctly synced.")
+			return
+		end
 
-	-- Local State (also required for Alfred to pick up the Bookmarks)
-	local content = u.readFile(config.sourceProfile .. "/Local State")
-	if not content then return end
-	u.writeToFile(config.chromeProfile .. "/Local State", content, false)
+		-- Local State (also required for Alfred to pick up the Bookmarks)
+		local content = u.readFile(config.sourceProfile .. "/Local State")
+		if not content then return end
+		u.writeToFile(config.chromeProfile .. "/Local State", content, false)
 
-	print("🔖 Bookmarks synced to Chrome Bookmarks")
-end):start()
+		print("🔖 Bookmarks synced to Chrome Bookmarks")
+	end)
+	:start()
 --------------------------------------------------------------------------------
 return M

@@ -72,24 +72,20 @@ end
 --------------------------------------------------------------------------------
 -- very simplified version of harpoon.nvim / other.nvim
 function M.gotoMainFile()
-	local mainFiles = {
-		"init.lua",
-		"main.py",
-		"main.ts",
-	}
-	local mainFile = vim.fs.find(mainFiles, { path = vim.loop.cwd(), type = "file" })
-	if not mainFile then
+	local mainFiles = { "init.lua", "main.py", "main.ts" }
+	local foundFile = vim.fs.find(mainFiles, { type = "file" })
+	if foundFile then
+		vim.cmd.edit(foundFile[1])
+	else
 		notify("", "No main file found.", "warn")
-		return
 	end
-	vim.cmd.edit(mainFile[1])
 end
 
 --------------------------------------------------------------------------------
 
 -- simplified yank history
 function M.pasteFromNumberReg()
-	local regs = { "+", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }
+	local regs = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }
 	vim.ui.select(regs, {
 		prompt = "󰅍 Select register",
 		format_item = function(reg)
@@ -289,27 +285,9 @@ function M.tabout()
 	end
 end
 
----like <C-o>/<C-i>, but restricts jumpts to current buffer
----@param direction "back"|"forward"
-function M.jumpInBuffer(direction)
-	local currentBuf = vim.api.nvim_get_current_buf()
-	local key = direction == "back" and "<C-o>" or "<C-i>"
-	local jumpListEnd = direction == "back" and 0 or #vim.fn.getjumplist(0)[1]
-	repeat
-		local cmd = ([["normal \%s"]]):format(key) -- SIC must be double-quoted
-		pcall(vim.cmd.execute, cmd)
-		local jumpPos = vim.fn.getjumplist(0)[2]
-		if jumpPos == jumpListEnd then
-			vim.cmd("keepjumps buffer " .. tostring(currentBuf))
-			return
-		end
-	until currentBuf == vim.api.nvim_get_current_buf()
-end
-
 function M.gotoProject()
 	-- CONFIG
 	local projectFolder = vim.env.LOCAL_REPOS
-	-----------------------------------------------------------------------------
 
 	---@param folder string
 	local function browseProject(folder)

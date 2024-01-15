@@ -86,7 +86,10 @@ end
 --------------------------------------------------------------------------------
 -- TRIGGERS
 
-u.hotkey({}, "home", scrollUp)
+-- scroll
+hs.hotkey.bind({}, "home", scrollUp)
+
+if mastodonApp == "Mona" then M.timer_regularScroll = hs.timer.doEvery(5 * 60, scrollUp):start() end
 
 M.aw_tickerWatcher = aw.new(function(appName, event, app)
 	if appName == "CleanShot X" or appName == "Alfred" then return end

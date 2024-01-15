@@ -34,18 +34,6 @@ keymap({ "n", "x" }, "Ö", ",")
 keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
 -- non-unique, since it overwrites nvim default: https://neovim.io/doc/user/vim_diff.html#default-mappings
 keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
-keymap(
-	"n",
-	"<C-g>",
-	function() require("funcs.nano-plugins").jumpInBuffer("back") end,
-	{ desc = "󱋿 Jump back (in buffer)" }
-)
-keymap(
-	"n",
-	"<C-ö>",
-	function() require("funcs.nano-plugins").jumpInBuffer("forward") end,
-	{ desc = "󱋿 Jump forward (in buffer)" }
-)
 
 -- Changes
 keymap("n", "g,", "g;", { desc = " Goto Last Change" })
@@ -121,8 +109,8 @@ keymap("i", "<D-o>", "{<CR>", { desc = " Open new scope", remap = true })
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
 
 -- Merging
-keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
-keymap({ "n", "x" }, "gm", "ddpkJ", { desc = "󰗈 Merge line down" })
+keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge up" })
+keymap({ "n", "x" }, "gm", '"zdd"zpkJ', { desc = "󰗈 Merge down" })
 
 -- Increment/Decrement + Toggle if true/false
 keymap(
@@ -154,11 +142,10 @@ keymap(
 -- COMMENTS
 
 -- stylua: ignore start
-keymap("n", "Q", function() require("funcs.comment").appendCommentAtEoL() end, { desc = " Append Comment at EoL" })
 keymap("n", "qw", function() require("funcs.comment").commentHr() end, { desc = " Horizontal Divider" })
 keymap("n", "wq", function() require("funcs.comment").duplicateLineAsComment() end, { desc = " Duplicate Line as Comment" })
 keymap("n", "qn", function() require("funcs.comment").insertDoublePercentCom() end, { desc = " Insert %% Comment" })
-keymap("n", "dN", function() require("funcs.comment").removeDoublePercentCom() end, { desc = " Remove %% Comment" })
+keymap("n", "dN", function() require("funcs.comment").removeDoublePercentComs() end, { desc = " Remove %% Comments" })
 -- stylua: ignore end
 
 --------------------------------------------------------------------------------

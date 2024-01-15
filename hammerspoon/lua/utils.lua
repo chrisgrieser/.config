@@ -4,8 +4,6 @@ local env = require("lua.environment-vars")
 --------------------------------------------------------------------------------
 
 -- shorthands
-M.hotkey = hs.hotkey.bind
-M.keystroke = hs.eventtap.keyStroke
 M.applescript = hs.osascript.applescript
 M.urischeme = hs.urlevent.bind
 M.tbl_contains = hs.fnutils.contains
@@ -67,7 +65,7 @@ end
 
 -- CAVEAT: won't work with Chromium browsers due to bug, but works for URI schemes
 ---@param url string
-function M.openLinkInBg(url) hs.execute('open -g "' .. url .. '"') end
+function M.openLinkInBg(url) hs.execute(("open -g %q"):format(url)) end
 
 ---write to file (overwriting)
 ---@param filePath string
@@ -144,7 +142,8 @@ function M.notify(...)
 		local safeArg = (type(arg) == "table") and hs.inspect(arg) or tostring(arg)
 		return safeArg
 	end)
-	local out = table.concat(args, " ") ---@diagnostic disable-line: param-type-mismatch
+	if not args then return end
+	local out = table.concat(args, " ")
 	hs.notify.show("Hammerspoon", "", out)
 	print("💬 " .. out)
 end
@@ -213,17 +212,6 @@ function M.whenAppWinAvailable(appName, callbackFn)
 		local windowAvailable = app and app:mainWindow()
 		return windowAvailable
 	end, callbackFn, 0.1)
-end
-
----@async
----@param appName string
----@param callbackFn function function to execute when the app is available
-function M.whenAppRuns(appName, callbackFn)
-	M[appName .. "AppRun"] = hs.timer.waitUntil(
-		function() return M.app(appName) ~= nil end,
-		callbackFn,
-		0.1
-	)
 end
 
 ---@param appNames string|string[]
