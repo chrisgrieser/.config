@@ -51,7 +51,6 @@ local keymappings_I = {
 }
 
 -- mappings for `:Telescope find_files`
-local ignoreHidden
 local findFileMappings = {
 	-- toggle `--hidden` & `--no-ignore`
 	["<C-h>"] = function(prompt_bufnr)
@@ -63,7 +62,9 @@ local findFileMappings = {
 		})
 		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
 		local cwd = tostring(current_picker.cwd or vim.loop.cwd()) -- cwd only set if passed as opt
-		ignoreHidden = not ignoreHidden
+		local prevTitle = current_picker.prompt_title -- hidden status not stored, but title is
+		local ignoreHidden = not prevTitle:find("hidden")
+
 		local title = vim.fs.basename(cwd)
 		if ignoreHidden then title = title .. " (--hidden --no-ignore)" end
 
@@ -433,7 +434,6 @@ return {
 			{
 				"go",
 				function()
-					ignoreHidden = false
 					require("telescope.builtin").find_files {
 						prompt_title = "Find Files: " .. vim.fs.basename(vim.loop.cwd() or ""),
 					}

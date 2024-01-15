@@ -83,5 +83,20 @@
       "},"
     ],
     "prefix": "plugin spec (lazy.nvim)"
+  },
+  "select + vim.ui.select": {
+    "body": [
+      "vim.ui.select(items, {",
+      "\tprompt = \"${1:prompt_text}\",",
+      "\tformat_item = function(item) return ${2:item} end,",
+      "}, function (selection)",
+      "\tif not selection then return end",
+      "\t$0",
+      "end)"
+    ],
+    "prefix": [
+      "select",
+      "vim.ui.select"
+    ]
   }
 }
