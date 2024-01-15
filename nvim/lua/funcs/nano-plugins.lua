@@ -302,5 +302,21 @@ function M.jumpInBuffer(direction)
 	until currentBuf == vim.api.nvim_get_current_buf()
 end
 
+function M.gotoProject()
+	local projectFolder = os.getenv("HOME") .. "/repos" 
+	local handler = vim.loop.fs_scandir(projectFolder)
+	if not handler then return end
+	local folders = {}
+	repeat
+		local name, type = vim.loop.fs_scandir_next(handler)
+		if type == "directory" then table.insert(folders, name) end
+	until not name
+
+	vim.ui.select(folders, { prompt = "Select project:" }, function (selection)
+		if not selection then return end
+		local absPath = projectFolder .. "/" .. selection
+	end)
+end
+
 --------------------------------------------------------------------------------
 return M
