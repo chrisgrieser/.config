@@ -1,6 +1,3 @@
-local u = require("lua.utils")
---------------------------------------------------------------------------------
-
 -- INFO
 -- - overwrite pagedown & pageup to scroll a certain amount instead. This ensures
 --   that they do not move a full viewport, effectively creating a scroll offset.
@@ -59,9 +56,9 @@ local function scrollUp() scroll("up") end
 
 --------------------------------------------------------------------------------
 -- HOTKEYS
+local hotkey = hs.hotkey.bind
+hotkey({ "alt" }, "J", scrollDown, nil, scrollDown)
+hotkey({}, "pagedown", scrollDown, nil, scrollDown)
 
-u.hotkey({ "alt" }, "J", scrollDown, nil, scrollDown)
-u.hotkey({}, "pagedown", scrollDown, nil, scrollDown)
-
-u.hotkey({ "alt" }, "K", scrollUp, nil, scrollUp)
-u.hotkey({}, "pageup", scrollUp, nil, scrollUp)
+hotkey({ "alt" }, "K", scrollUp, nil, scrollUp)
+hotkey({}, "pageup", scrollUp, nil, scrollUp)

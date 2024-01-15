@@ -45,7 +45,7 @@ end
 
 -- MANUAL TOGGLING OF DARK MODE
 -- `del` key on Keychron Keyboard
-u.hotkey({}, "f13", function()
+hs.hotkey.bind({}, "f13", function()
 	M.setDarkMode("toggle")
 
 	-- notify on brightness level

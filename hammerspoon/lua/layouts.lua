@@ -8,6 +8,7 @@ local wu = require("lua.window-utils")
 local privatCloser = require("lua.private").closer
 
 local wf = hs.window.filter
+local hotkey = hs.hotkey.bind
 
 --------------------------------------------------------------------------------
 -- HELPERS
@@ -82,7 +83,7 @@ local function workLayout()
 		end)
 	end
 	u.openApps(env.mastodonApp)
-	u.restartApp("AltTab") -- FIX duplicate items
+	-- u.restartApp("AltTab") -- FIX duplicate items
 
 	-- finish
 	u.whenAppWinAvailable("Discord", function() u.app("Mimestream"):activate() end)
@@ -171,7 +172,7 @@ M.caff_displayCount = hs.screen.watcher
 	:start()
 
 -- 2. Hotkey
-u.hotkey(u.hyper, "home", selectLayout)
+hotkey(u.hyper, "home", selectLayout)
 
 -- 3. Systemstart
 if u.isSystemStart() then selectLayout() end

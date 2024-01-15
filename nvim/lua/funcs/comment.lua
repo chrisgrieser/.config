@@ -53,17 +53,6 @@ function M.duplicateLineAsComment()
 	vim.api.nvim_win_set_cursor(0, { ln + 1, col })
 end
 
-function M.appendCommentAtEoL()
-	if vim.bo.commentstring == "" then return end
-
-	local line = vim.api.nvim_get_current_line():gsub("%s+$", "")
-	local comStr = vim.bo.commentstring:format("")
-	local pad = line == "" and "" or " "
-
-	vim.api.nvim_set_current_line(line .. pad .. comStr)
-	vim.cmd.startinsert { bang = true }
-end
-
 -- https://jupytext.readthedocs.io/en/latest/formats-scripts.html#the-percent-format
 function M.insertDoublePercentCom()
 	if vim.bo.commentstring == "" then return end
@@ -81,7 +70,7 @@ function M.insertDoublePercentCom()
 	vim.api.nvim_buf_add_highlight(0, 0, "DiagnosticVirtualTextHint", ln, 0, -1)
 end
 
-function M.removeDoublePercentCom()
+function M.removeDoublePercentComs()
 	if vim.bo.commentstring == "" then return end
 	local cursorBefore = vim.api.nvim_win_get_cursor(0)
 	local doublePercentCom = vim.bo.commentstring:format("%%")
