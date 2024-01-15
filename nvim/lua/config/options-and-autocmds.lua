@@ -266,14 +266,14 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 --------------------------------------------------------------------------------
 
--- Formatting `vim.opt.formatoptions:remove{"o"}` would not work, since it's
--- overwritten by ftplugins having the `o` option (which most do). Therefore
+-- Formatting `vim.opt.formatoptions:remove("o")` would not work, since it's
+-- overwritten by ftplugins having the `o` option (which many do). Therefore
 -- needs to be set via autocommand.
 autocmd("FileType", {
 	callback = function(ctx)
 		if ctx.match == "markdown" then return end
-		opt_local.formatoptions:remove("o")
-		opt_local.formatoptions:remove("t")
+		-- opt_local.formatoptions:remove("o")
+		-- opt_local.formatoptions:remove("t")
 	end,
 })
 
