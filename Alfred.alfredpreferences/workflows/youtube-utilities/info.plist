@@ -76,31 +76,10 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>wl</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>🕔 Watch Later</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>548C7E00-D279-4BFE-B4CB-4F94C970637F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<true/>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>0</integer>
 				<key>script</key>
 				<string></string>
 				<key>scriptargtype</key>
@@ -125,6 +104,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>wl</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>🕔 Watch Later</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>548C7E00-D279-4BFE-B4CB-4F94C970637F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -140,27 +140,6 @@
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>C7716DBE-2C15-46FC-A1E7-1A722EA60267</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>ydl</string>
-				<key>subtext</key>
-				<string>Browser tab</string>
-				<key>text</key>
-				<string>⬇️ Download with youtube-dl</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>7EC8C18F-E353-4A93-9F40-FDB4C9531D57</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -191,6 +170,27 @@
 			<string>F30AA24D-259D-4D2C-80C9-06B5EA576F7C</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>ydl</string>
+				<key>subtext</key>
+				<string>Browser tab</string>
+				<key>text</key>
+				<string>⬇️ Download with youtube-dl</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>7EC8C18F-E353-4A93-9F40-FDB4C9531D57</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>

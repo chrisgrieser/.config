@@ -70,7 +70,7 @@ function update() {
 function listall() {
 	brew update
 	_print-section "brew taps"
-	brew tap | rs
+	brew tap
 	_print-section "brew leaves"
 	brew leaves | rs
 	_print-section "brew casks"
@@ -79,7 +79,7 @@ function listall() {
 	brew doctor
 
 	_print-section "Mac App Store"
-	mas list | rs
+	mas list
 
 	echo && _dump
 }

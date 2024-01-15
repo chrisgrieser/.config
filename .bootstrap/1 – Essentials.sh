@@ -58,7 +58,9 @@ git clone git@github.com:chrisgrieser/.password-store.git
 ln -sf "$HOME/.config/mackup/mackup.cfg" ~/.mackup.cfg
 ln -sf "$HOME/.config/mackup/custom-app-configs" ~/.mackup
 brew install mackup
-mackup restore --force && mackup uninstall --force # sets symlinks, and then writes full files
+
+
+mackup restore --force && mackup uninstall --force 
 
 # zsh (ZDOTDIR set in .zshenv for the remaining config)
 ln -sf "$HOME/.config/zsh/.zshenv" ~
