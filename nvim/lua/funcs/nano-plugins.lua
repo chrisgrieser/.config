@@ -304,7 +304,7 @@ end
 
 function M.gotoProject()
 	-- CONFIG
-	local projectFolder = os.getenv("HOME") .. "/repos"
+	local projectFolder = vim.env.LOCAL_REPOS
 	-----------------------------------------------------------------------------
 
 	---@param folder string
