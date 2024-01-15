@@ -1,3 +1,7 @@
+vim.bo.commentstring = "/* %s */" -- formatters usually expect spaces
+
+--------------------------------------------------------------------------------
+
 -- toggle !important (useful for debugging selectors)
 vim.keymap.set("n", "<leader>i", function()
 	local line = vim.api.nvim_get_current_line()

@@ -30,8 +30,10 @@ function M.commentHr()
 	local hr = hrChar:rep(hrLength)
 	local hrWithComment = comStr:format(hr)
 
-	local formattersWantsSpaces = vim.bo.ft == "python"
-	if not formattersWantsSpaces then hrWithComment = hrWithComment:gsub(" ", hrChar) end
+	local formatterWantPadding = { "python", "css", "scss" }
+	if not vim.tbl_contains(formatterWantPadding, vim.bo.ft) then
+		hrWithComment = hrWithComment:gsub(" ", hrChar)
+	end
 
 	local fullLine = indent .. hrWithComment
 	if vim.bo.ft == "markdown" then fullLine = "---" end

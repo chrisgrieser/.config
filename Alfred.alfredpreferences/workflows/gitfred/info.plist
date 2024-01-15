@@ -1257,7 +1257,7 @@
 				<array>
 					<dict>
 						<key>inputstring</key>
-						<string>{query}</string>
+						<string>{var:mode}</string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
@@ -1774,7 +1774,7 @@
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.10.0</string>
+	<string>0.10.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

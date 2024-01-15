@@ -5,9 +5,9 @@ ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
 function expansion-help {
 	# https://thevaluable.dev/zsh-expansion-guide-example/
 	print "\e[1;32m!#    \e[0m current command"
-	print "\e[1;32m!!:0  \e[0m first word of last command"
-	print "\e[1;32m!!:1  \e[0m first arg of last command"
-	print "\e[1;32m!!:*  \e[0m all arg of last command"
+	print "\e[1;32m!:0  \e[0m first word of last command"
+	print "\e[1;32m!:1  \e[0m first arg of last command"
+	print "\e[1;32m!*  \e[0m all arg of last command"
 	print "\e[1;32m!-2   \e[0m 2nd most recent command"
 	print "\e[1;32m*(.)  \e[0m all plain files"
 	print "\e[1;32m*(/)  \e[0m all directories"
@@ -69,7 +69,6 @@ function man() {
 # CHATGPT
 
 function ai() {
-	if ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then echo "Not using WezTerm." && return 1; fi
 	if ! command -v yq &>/dev/null; then echo "yq not installed." && return 1; fi
 	if ! command -v bat &>/dev/null; then echo "bat not installed." && return 1; fi
 	if [[ -z "$OPENAI_API_KEY" ]]; then echo "\$OPENAI_API_KEY not found." && return 1; fi
@@ -87,12 +86,8 @@ function ai() {
 			\"messages\": [{\"role\": \"user\", \"content\": \"$the_prompt\"}],
 			\"temperature\": 0
 		}" |
-		yq -r '.choices[].message.content' > /tmp/chatgpt.md
-		
-	pane_id=$(wezterm cli spawn -- \
-		bat --style=plain --wrap=auto "/tmp/chatgpt.md"
-	)
-	wezterm cli set-tab-title --pane-id="$pane_id" "ChatGPT"
+		yq -r '.choices[].message.content' |
+		bat --style=plain --wrap=auto
 }
 
 #───────────────────────────────────────────────────────────────────────────────

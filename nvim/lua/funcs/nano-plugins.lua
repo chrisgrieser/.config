@@ -139,6 +139,10 @@ function M.openAtRegex101()
 		return
 	end
 
+	-- `+` is the only character regex101 does not escape on its own. But for it
+	-- to work, `\` needs to be escaped as well (SIC)
+	pattern = pattern:gsub("%+", "%%2B"):gsub("\\", "%%5C")
+
 	-- DOCS https://github.com/firasdib/Regex101/wiki/FAQ#how-to-prefill-the-fields-on-the-interface-via-url
 	local url = ("https://regex101.com/?regex=%s&flags=%s&flavor=%s%s"):format(
 		pattern,
