@@ -24,11 +24,10 @@ local function scrollUp()
 	local modifiers = mastodonApp == "Mona" and { "cmd" } or { "cmd", "shift" }
 	keystroke(modifiers, "R", 1, app) -- refresh/reload
 
-	-- needs delays to wait for tweets loading
-	u.runWithDelays(1.5, function()
+	-- wait for tweets to load
+	u.runWithDelays({ 1, 4 }, function()
 		if app:isFrontmost() then return end
-		if mastodonApp == "Ivory" then keystroke({ "cmd" }, "1", 1, app) end -- scroll up
-		keystroke({ "cmd" }, "up", 1, app) -- goto top
+		keystroke({ "cmd" }, "up", 1, app) -- scroll up
 	end)
 end
 
