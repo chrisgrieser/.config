@@ -20,16 +20,14 @@ local function scrollUp()
 
 	keystroke({ "cmd" }, "left", 1, app) -- go back
 	keystroke({ "cmd" }, "1", 1, app) -- go to home tab
-	if mastodonApp == "Mona" then
-		keystroke({ "cmd" }, "R", 1, app) -- refresh
-	elseif mastodonApp == "Ivory" then
-		keystroke({ "shift", "cmd" }, "R", 1, app) -- reload
-	end
+
+	local modifiers = mastodonApp == "Mona" and { "cmd" } or { "cmd", "shift" }
+	keystroke(modifiers, "R", 1, app) -- refresh/reload
 
 	-- needs delays to wait for tweets loading
-	u.runWithDelays({ 0.5, 1.5 }, function()
+	u.runWithDelays(1.5, function()
 		if app:isFrontmost() then return end
-		keystroke({ "cmd" }, "1", 1, app) -- scroll up
+		if mastodonApp == "Ivory" then keystroke({ "cmd" }, "1", 1, app) end -- scroll up
 		keystroke({ "cmd" }, "up", 1, app) -- goto top
 	end)
 end
@@ -54,7 +52,7 @@ local function winToTheSide()
 	if app:isHidden() then app:unhide() end
 
 	-- not using mainWindow to not unintentionally move Media or new-tweet window
-	-- Twitter's window is called "Twitter", Ivory's "Home", Mona's the username
+	-- Ivory's main window is called "Home", Mona's the username
 	local win = app:findWindow("Home") or app:findWindow("pseudometa")
 	if win then
 		win:setFrame(wu.toTheSide)
