@@ -272,8 +272,8 @@ vim.api.nvim_create_autocmd("BufEnter", {
 autocmd("FileType", {
 	callback = function(ctx)
 		if ctx.match == "markdown" then return end
-		-- opt_local.formatoptions:remove("o")
-		-- opt_local.formatoptions:remove("t")
+		opt_local.formatoptions:remove("o")
+		opt_local.formatoptions:remove("t")
 	end,
 })
 
