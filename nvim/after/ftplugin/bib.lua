@@ -1,14 +1,56 @@
--- Vim filetype plugin file
--- Language: BibTeX (ft=bib)
--- Author: Chris Grieser <grieser.chris@gmail.com>
--- Latest Revision: 2024-01-15
+local u = require("config.utils")
+--------------------------------------------------------------------------------
 
-if vim.b.did_ftplugin == 1 then
-	return
+-- `%` not actually a comment character, just convention of some programs
+-- https://tex.stackexchange.com/questions/261261/are-comments-discouraged-in-a-bibtex-file
+vim.bo.commentstring = '% %s'
+vim.opt_local.formatoptions:append { r = true }
+
+--------------------------------------------------------------------------------
+
+-- since treesitter has not symbol support for bibtex, we just use a small
+-- function to search the buffer for citekeys
+vim.keymap.set("n", "gs", function()
+	local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+	local citekeyLines = vim.tbl_filter(function(line) return line:find("^@") end, lines)
+	local citekeys = vim.tbl_map(function(line) return line:match("^@.*{(.*),") end, citekeyLines)
+	vim.ui.select(citekeys, {
+		prompt = "Select citekey:",
+		format_item = function(citekey) return "@" .. citekey end,
+		kind = "bibtex.citekey-search",
+	}, function(citekey)
+		if not citekey then return end
+		vim.fn.search(citekey .. ",")
+	end)
+end, { buffer = true })
+
+--------------------------------------------------------------------------------
+
+---checks a .bib file for duplicate citekeys and reports them via `vim.notify`
+---when any are found. Does nothing, if there are no duplicate citekeys.
+---@param bufnr? number when not provided, uses the current buffer
+local function checkForDuplicateCitekeys(bufnr)
+	if not bufnr then bufnr = 0 end
+
+	local duplCitekeys = ""
+	local citekeyCount = {}
+	local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, true)
+
+	for _, line in pairs(lines) do
+		local citekey = line:match("^@.-{(.*),")
+		if citekey then
+			if not citekeyCount[citekey] then
+				citekeyCount[citekey] = 1
+			else
+				duplCitekeys = duplCitekeys .. "\n" .. "- " .. citekey
+			end
+		end
+	end
+	if duplCitekeys == "" then return end
+
+	u.notify("Duplicate Citkeys", duplCitekeys, "warn")
 end
-vim.b.did_ftplugin = 1 ---@diagnostic disable-line: inject-field
-vim.b.undo_ftplugin = "setlocal comments< commentstring< formatoptions<" ---@diagnostic disable-line: inject-field
 
-vim.bo.commentstring = "% %s"
-vim.bo.comments = ":%"
-vim.opt_local.formatoptions:append { r = true, o = true }
+-- run on entering a bibtex buffer
+-- deferred, to ensure nvim-notify is loaded
+vim.defer_fn(checkForDuplicateCitekeys, 1000)
