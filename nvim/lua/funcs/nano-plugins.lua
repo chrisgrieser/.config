@@ -303,18 +303,32 @@ function M.jumpInBuffer(direction)
 end
 
 function M.gotoProject()
-	local projectFolder = os.getenv("HOME") .. "/repos" 
+	-- CONFIG
+	local projectFolder = os.getenv("HOME") .. "/repos"
+	local extraProjects = {
+		vim.fn.stdpath("config"),
+		vim.fs.normalize("~/.config/hammerspoon")
+	}
+	-----------------------------------------------------------------------------
+
 	local handler = vim.loop.fs_scandir(projectFolder)
 	if not handler then return end
-	local folders = {}
+	local folders = extraProjects
 	repeat
-		local name, type = vim.loop.fs_scandir_next(handler)
-		if type == "directory" then table.insert(folders, name) end
-	until not name
+		local file, type = vim.loop.fs_scandir_next(handler)
+		if type == "directory" then table.insert(folders, projectFolder .. "/" .. file) end
+	until not file
 
-	vim.ui.select(folders, { prompt = "Select project:" }, function (selection)
+	vim.ui.select(folders, {
+		prompt = " Select project:",
+		kind = "projectSelector",
+		format_item = function(folder) return vim.fs.basename(folder) end,
+	}, function(selection)
 		if not selection then return end
-		local absPath = projectFolder .. "/" .. selection
+		require("telescope.builtin").find_files {
+			prompt_title = "Project: " .. vim.fs.basename(selection),
+			cwd = selection,
+		}
 	end)
 end
 
