@@ -10,7 +10,7 @@ function run() {
 
 	/** @type AlfredItem[] */
 	const volumes = app
-		.doShellScript("df -h")
+		.doShellScript("df -hY") // -h: human readable sizes, -Y: show filesystem format
 		.split("\r")
 		.filter((/** @type {string} */ line) => line.includes(" /Volumes/"))
 		.map((/** @type {string} */ vol) => {
@@ -21,15 +21,15 @@ function run() {
 				return value.replaceAll("unavailable", "…").replaceAll("Gi", "Gb").replaceAll("Ti", "Tb");
 			});
 
-			const [,total, used, available, share] = info;
-			const path = info.slice(8).join(" ");
+			const [_, format, total, used, available, share] = info;
+			const path = info.slice(9).join(" ");
 			const name = path.replace("/Volumes/", "");
 
-			const spaceInfo = `Total: ${total}   Available: ${available}   Used: ${used} (${share})`;
+			const subtitle = `[Format: ${format}]    Total: ${total}   Available: ${available}   Used: ${used} (${share})`;
 			return {
 				title: name,
 				uid: path, // during rerun remembers selection, but does not affect sorting
-				subtitle: spaceInfo,
+				subtitle: subtitle,
 				arg: path,
 			};
 		});

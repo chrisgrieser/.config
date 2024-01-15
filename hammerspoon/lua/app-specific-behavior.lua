@@ -220,10 +220,9 @@ M.wf_scripteditor = wf
 -- MIMESTREAM
 
 -- move new window
-M.wf_mimestream = wf.new("Mimestream"):subscribe(
-	wf.windowCreated,
-	function(newWin) wu.moveResize(newWin, wu.pseudoMax) end
-)
+M.wf_mimestream = wf.new("Mimestream")
+	:setOverrideFilter({ rejectTitles = { "^Software Update$" } })
+	:subscribe(wf.windowCreated, function(newWin) wu.moveResize(newWin, wu.pseudoMax) end)
 
 --------------------------------------------------------------------------------
 -- NEOVIDE
