@@ -47,6 +47,21 @@ rules:
         to:
           - { key_code: right_command, modifiers: [control, option] }
         conditions: [*highlights-app, *highlights-insert-mode]
+      # leave insert mode when quitting
+      - type: basic
+        from: { key_code: q, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: q, modifiers: [command] }
+          - *remove-notice
+          - *enter-normal-mode
+        conditions: [*highlights-app, *highlights-insert-mode]
+      - type: basic
+        from: { key_code: w, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: w, modifiers: [command] }
+          - *remove-notice
+          - *enter-normal-mode
+        conditions: [*highlights-app, *highlights-insert-mode]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "✏️ Highlights Vim Mode: Actions"
     manipulators:

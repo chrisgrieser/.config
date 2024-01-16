@@ -279,12 +279,12 @@ return {
 		opts = { marker ="👽" },
 		keys = {
 			-- stylua: ignore start
-			{"<leader>lb", function() require("chainsaw").beepLog() end, desc = "󰸢 beep log" },
+			{"<leader>lb", "<cmd>lua require('chainsaw').beepLog()<CR>", desc = "󰸢 beep log" },
+			{"<leader>ll", "<cmd>lua require('chainsaw').variableLog()<CR>", mode = {"n", "x"}, desc = "󰸢 variable log" },
+			{"<leader>lo", "<cmd>lua require('chainsaw').objectLog()<CR>", mode = {"n", "x"}, desc = "󰸢 object log" },
 			{"<leader>lm", function() require("chainsaw").messageLog() end, desc = "󰸢 message log" },
 			{"<leader>lt", function() require("chainsaw").timeLog() end, desc = "󰸢 time log" },
 			{"<leader>ld", function() require("chainsaw").debugLog() end, desc = "󰸢 debugger log" },
-			{"<leader>ll", function() require("chainsaw").variableLog() end, mode = {"n", "x"}, desc = "󰸢 variable log" },
-			{"<leader>lo", function() require("chainsaw").objectLog() end, mode = {"n", "x"}, desc = "󰸢 object log" },
 			{"<leader>la", function() require("chainsaw").assertLog() end, mode = {"n", "x"}, desc = "󰸢 assert log" },
 
 			{"<leader>lr", function() require("chainsaw").removeLogs() end, desc = "󰹝 remove logs" },
