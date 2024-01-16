@@ -6,4 +6,5 @@
 _separator
 fortune -n270 -s
 _separator
+echo
 _magic_dashboard

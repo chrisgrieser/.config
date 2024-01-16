@@ -32,7 +32,7 @@ function _print-section() {
 }
 
 function _dump() {
-	local dump_path="$HOME/.config/.installed-apps-and-packages/"
+	dump_path="$HOME/.config/.installed-apps-and-packages"
 	local device_name
 	device_name=$(scutil --get ComputerName | cut -d" " -f2-)
 	brew bundle dump --force --file "$dump_path/Brewfile_$device_name.txt"
@@ -42,7 +42,7 @@ function _dump() {
 		grep -v "Temp" | sed "s|^|https://chrome.google.com/webstore/detail/|" \
 		>"$dump_path/browser-extensions.txt"
 
-	print "\e[1;38;5;247mBrewfile & browser-extensions-list dumped at \"$dump_path\" \e[0m"
+	print "\e[1;38;5;247mBrewfile & browser-extensions-list saved at \"$(basename "$dump_path")\".\e[0m"
 }
 
 function update() {
