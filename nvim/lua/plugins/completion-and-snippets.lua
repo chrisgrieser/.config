@@ -3,7 +3,12 @@ local u = require("config.utils")
 
 local defaultSources = {
 	{ name = "luasnip" },
-	{ name = "nvim_lsp" },
+	{
+		name = "nvim_lsp",
+		entry_filter = function(entry, _)
+			return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
+		end,
+	},
 	{
 		name = "buffer",
 		option = {
@@ -129,7 +134,7 @@ local function cmpconfig()
 
 	-- SHELL: disable `\[` suggestions at EoL
 	cmp.setup.filetype("sh", {
-		enabled = function() 
+		enabled = function()
 			local col = vim.fn.col(".") - 1
 			local charBefore = vim.api.nvim_get_current_line():sub(col, col)
 			return charBefore ~= "\\"
