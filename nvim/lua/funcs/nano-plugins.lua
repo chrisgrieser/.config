@@ -71,8 +71,18 @@ end
 
 --------------------------------------------------------------------------------
 -- very simplified version of harpoon.nvim / other.nvim
-function M.gotoMainFile()
-	local mainFiles = { "init.lua", "main.py", "main.ts" }
+function M.gotoAnchorFile()
+	local anchorFiles = {
+		{ "init.lua", "main.py", "main.ts" },
+		{ "README.md" },
+	}
+
+	-- determine if currently on an anchorfile
+	local filename = vim.fs.basename(vim.api.nvim_buf_get_name(0))
+	local idx = 1
+	for _, filelist in ipairs(anchorFiles) do
+		idx
+	end
 	local foundFile = vim.fs.find(mainFiles, { type = "file" })
 	if foundFile then
 		vim.cmd.edit(foundFile[1])

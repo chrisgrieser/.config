@@ -190,19 +190,6 @@ function M.appRunning(appNames)
 	return allAreRunning
 end
 
----If app is not running, will simply start the app instead
----@param appName string
----@async
-function M.restartApp(appName)
-	local app = M.app(appName)
-	if app then app:kill() end
-	M[appName .. "Restart"] = hs.timer.waitUntil(
-		function() return M.app(appName) == nil end,
-		function() hs.application.open(appName) end,
-		0.05
-	)
-end
-
 ---@async
 ---@param appName string
 ---@param callbackFn function function to execute when a window of the app is available
