@@ -275,14 +275,6 @@ rules:
               osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "github-notifications" in workflow "de.chris-grieser.github"'
           - *deactivate-leader
           - *remove-notice
-      # [v]ideo: IINA
-      - type: basic
-        from: { key_code: v }
-        conditions: [*leader-active]
-        to:
-          - shell_command: open -a 'IINA'
-          - *deactivate-leader
-          - *remove-notice
       # [Esc] Activity Monitor
       - type: basic
         from: { key_code: escape }
