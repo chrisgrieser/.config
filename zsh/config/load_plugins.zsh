@@ -18,7 +18,7 @@ source "$HOMEBREW_PREFIX/share/zsh-autopair/autopair.zsh"
 source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
-# must be loaded after zsh-syntax-highlighting
+# must be loaded *after* zsh-syntax-highlighting
 source "$HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
 
 #───────────────────────────────────────────────────────────────────────────────
