@@ -26,7 +26,6 @@ end
 
 vim.opt.linespace = -2 -- less line height
 vim.opt.guifont = vim.env.CODE_FONT .. ":h" .. fontSize
-vim.o.guifont = vim.env.CODE_FONT .. ":h25.5"
 
 --------------------------------------------------------------------------------
 
