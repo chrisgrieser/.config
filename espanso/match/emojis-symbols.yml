@@ -2,92 +2,35 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 matches:
-  - trigger: "!yes"
-    replace: "✅ "
-    label: "✅ yes"
-  - trigger: "!no"
-    replace: "❌ "
-    label: ❌ no
-  - trigger: "!wait"
-    replace: "⏳ "
-    label: ⏳ wait
-  - trigger: "!info"
-    replace: "ℹ️ "
-    label: ℹ️ info
-  - trigger: "!new"
-    replace: "🆕 "
-    label: 🆕 new
-  - triggers: ["!clip", "!copy"]
-    replace: "📋 "
-    label: 📋 clip
-  - trigger: "!warn"
-    replace: "⚠️ " # is actually an emoji outside of nvim
-    label: ⚠️ warn
-  - trigger: "!star"
-    replace: "⭐ "
-    label: ⭐ star
-  - trigger: "!blush"
-    replace: "😊 "
-    label: 😊 blush
-  - trigger: "!sweat"
-    replace: "😅 "
-    label: 😅 sweat
-  - trigger: "!think"
-    replace: "🤔 "
-    label: 🤔 think
-  - trigger: " mm"
-    replace: " 🙈"
-    label: 🙈 monkey
+  - { trigger: "!yes", replace: "✅ ", label: "✅ yes" }
+  - { trigger: "!no", replace: "❌ ", label: ❌ no }
+  - { trigger: "!wait", replace: "⏳ ", label: ⏳ wait }
+  - { trigger: "!info", replace: "ℹ️ ", label: ℹ️ info }
+  - { triggers: ["!clip" , "!copy"], replace: "📋 ", label: 📋 clip }
+  - { trigger: "!warn", replace: "⚠️ ", label: ⚠️ warn } # is actually an emoji outside of nvim
+  - { trigger: " mm", replace: " 🙈", label: 🙈 monkey }
   #─────────────────────────────────────────────────────────────────────────
   # compound emojis
-  - trigger: "!ampel"
-    replace: 🔴🟡🟢
-    label: 🔴🟡🟢 ampel
-  - trigger: "!eyes"
-    replace: 👁️👄👁️
-    label: 👁️👄👁️ eyes
-  - trigger: "!shrug"
-    replace: ¯\_(ツ)_/¯
-    label: ¯\_(ツ)_/¯ shrug
-  - trigger: "!gimme" # codespell-ignore
-    replace: ༼つ ◕_◕ ༽つ
-    label: ༼つ ◕_◕ ༽つ gimme # codespell-ignore
-  - trigger: "!flip"
-    replace: (╯°□°）╯︵ ┻━┻
-    label: (╯°□°）╯︵ ┻━┻ tableflip
+  - { trigger: "!eyes", replace: 👁️👄👁️, label: 👁️👄👁️ eyes }
+  - { trigger: "!shrug", replace: ¯\_(ツ)_/¯, label: ¯\_(ツ)_/¯ shrug }
+  - { trigger: "!gimme", replace: ༼つ ◕_◕ ༽つ, label: ༼つ ◕_◕ ༽つ gimme } 
+  - { trigger: "!flip", replace: (╯°□°）╯︵ ┻━┻, label: (╯°□°）╯︵ ┻━┻ tableflip }
   #─────────────────────────────────────────────────────────────────────────
   # others
-  - trigger: "->>"
-    replace: ➡️ # is actually an emoji outside of nvim
-  - trigger: "!dot"
-    replace: "·"
-    label: utf middle dot ·
-  - trigger: "->"
-    replace: → # unicode arrow
-    word: true
-  - trigger: "<->"
-    replace: ↔ # unicode arrow
+  - { trigger: "->>", replace: ➡️ } # is actually an emoji outside of nvim
+  - { trigger: "!dot", replace: "·", label: middle dot · }
+  - { trigger: "->", replace: →, word: true } # unicode arrow
   #─────────────────────────────────────────────────────────────────────────────
   # macOS symbols
-  - triggers: ["!ctrl", "!control"]
-    replace: ⌃
-  - trigger: "!space"
-    replace: ␣
-  - trigger: "!shift"
-    replace: ⇧
-  - trigger: "!cmd"
-    replace: ⌘
-  - triggers: ["!alt", "!opt"]
-    replace: ⌥
-  - triggers: ["!caps", "!hyper"]
-    replace: ⇪
-  - trigger: "!esc"
-    replace: ⎋
-  - trigger: "!tab"
-    replace: ↹
-  - trigger: "!backspace"
-    replace: ⌫
+  - { triggers: ["!ctrl" , "!control"], replace: ⌃ }
+  - { trigger: "!space", replace: ␣ }
+  - { trigger: "!shift", replace: ⇧ }
+  - { trigger: "!cmd", replace: ⌘ }
+  - { triggers: ["!alt" , "!opt"], replace: ⌥ }
+  - { triggers: ["!caps" , "!hyper"], replace: ⇪ }
+  - { trigger: "!esc", replace: ⎋ }
+  - { trigger: "!tab", replace: ↹ }
+  - { trigger: "!backspace", replace: ⌫ }
   # INFO The other return-like symbols either have an accessibility problem 
   # (VoiceOver reads them as arrow shape) or are displayed as emoji on GitHub.
-  - triggers: ["!return", "!enter"]
-    replace: ⏎
+  - { triggers: ["!return" , "!enter"], replace: ⏎ }

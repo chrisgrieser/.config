@@ -51,8 +51,8 @@ function update() {
 
 	_print-section "Mac App Store"
 
-	# PENDING https://github.com/mas-cli/mas/pull/496
-	mas outdated | grep -v Highlights | xargs mas upgrade
+	# HACK -> PENDING https://github.com/mas-cli/mas/pull/496
+	mas outdated | grep -v "Highlights" | cut -f1 -d" " | xargs mas upgrade
 	# mas upgrade
 
 	echo
