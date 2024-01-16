@@ -22,7 +22,7 @@ alias bu='brew uninstall --zap'
 
 function _print-section() {
 	echo
-	echo "$*"
+	print "\e[1;34m$1\e[0m"
 	_separator
 }
 
@@ -41,18 +41,19 @@ function _dump() {
 }
 
 function update() {
-	_print-section "Homebrew Updates"
+	_print-section "Homebrew"
 	brew update
 	brew upgrade
 	brew cleanup
 
 	# manually update, cause brew won't update as it is in theory self-upgrading
-	echo
-	echo "Obsidian Installer"
 	brew upgrade obsidian
 
 	_print-section "Mac App Store"
-	mas upgrade
+
+	# PENDING https://github.com/mas-cli/mas/pull/496
+	mas outdated | grep -v Highlights | xargs mas upgrade
+	# mas upgrade
 
 	echo
 	# - sketchybar usually updated and then has to be restarted to give permission
@@ -68,7 +69,7 @@ function listall() {
 	brew tap
 	_print-section "brew leaves"
 	brew leaves | rs
-	_print-section "brew casks"
+	_print-section "brew list --casks"
 	brew list --casks
 	_print-section "brew doctor"
 	brew doctor

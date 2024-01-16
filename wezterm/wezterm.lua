@@ -38,10 +38,20 @@ local act = wt.action
 local host = wt.hostname()
 local isAtOffice = host:find("mini") or host:find("eduroam") or host:find("fak1")
 local isAtMother = host:find("Mother")
+local isAtHome = host:find("iMac")
 
-local fontSize = 28
-if isAtMother then fontSize = 26 end
-if isAtOffice then fontSize = 29 end
+local fontSize
+local cellWidth
+if isAtHome then
+	fontSize = 28
+	cellWidth = 1
+elseif isAtMother then
+	fontSize = 26
+	cellWidth = 0.9
+elseif isAtOffice then
+	fontSize = 29
+	cellWidth = 0.9
+end
 
 --------------------------------------------------------------------------------
 -- SET WINDOW POSITION ON STARTUP
@@ -121,7 +131,7 @@ return {
 		weight = "Medium",
 		harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
 	},
-	cell_width = 0.9, -- effectively like letter-spacing
+	cell_width = cellWidth, -- effectively like letter-spacing
 	font_size = fontSize,
 	command_palette_font_size = fontSize,
 	char_select_font_size = fontSize, -- emoji picker
@@ -149,7 +159,7 @@ return {
 	enable_scroll_bar = true,
 	window_padding = {
 		left = "0.5cell",
-		right = "1.1cell", -- if scrollbar enabled, "rights" controls scrollbar width
+		right = "1.1cell", -- if scrollbar enabled, "right" controls scrollbar width
 		top = "0.8cell", -- extra height to account for macOS traffic lights
 		bottom = "0.3cell",
 	},
@@ -158,7 +168,7 @@ return {
 
 	-- Tabs
 	enable_tab_bar = true,
-	tab_max_width = 40, -- I have few tabs, therefore enough space for more width
+	tab_max_width = 45, -- I have few tabs, therefore enough space for more width
 	use_fancy_tab_bar = false, -- `false` makes the tabs bigger and more in terminal style
 	show_tabs_in_tab_bar = true, -- can show a status line in the tab bar, too
 	show_new_tab_button_in_tab_bar = false,
