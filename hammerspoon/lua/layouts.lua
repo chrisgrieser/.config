@@ -83,7 +83,6 @@ local function workLayout()
 		end)
 	end
 	u.openApps(env.mastodonApp)
-	-- u.restartApp("AltTab") -- FIX duplicate items
 
 	-- finish
 	u.whenAppWinAvailable("Discord", function() u.app("Mimestream"):activate() end)

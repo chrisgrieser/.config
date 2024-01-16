@@ -217,7 +217,7 @@ end, { desc = "󰽙 Reopen Last Closed Buffer" })
 keymap(
 	"n",
 	"<D-CR>",
-	function() require("funcs.nano-plugins").gotoMainFile() end,
+	function() require("funcs.nano-plugins").gotoAnchorFile() end,
 	{ desc = "󰽙 Goto Main File" }
 )
 
