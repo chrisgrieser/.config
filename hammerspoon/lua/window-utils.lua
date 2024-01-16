@@ -16,7 +16,7 @@ M.smallCenter = { x = 0.3, y = 0.15, w = 0.4, h = 0.7 }
 if env.isAtMother then
 	M.toTheSide = hs.geometry.rect(-82, 54, 392, 890)
 elseif env.isAtOffice then
-	M.toTheSide = hs.geometry.rect(-87, 54, 462, 1100)
+	M.toTheSide = hs.geometry.rect(-84, 54, 462, 1100)
 else
 	M.toTheSide = hs.geometry.rect(-82, 54, 437, 1026)
 end

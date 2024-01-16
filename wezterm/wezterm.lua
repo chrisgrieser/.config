@@ -41,7 +41,7 @@ local isAtMother = host:find("Mother")
 
 local fontSize = 28
 if isAtMother then fontSize = 26 end
-if isAtOffice then fontSize = 30 end
+if isAtOffice then fontSize = 29 end
 
 --------------------------------------------------------------------------------
 -- SET WINDOW POSITION ON STARTUP
@@ -121,6 +121,7 @@ return {
 		weight = "Medium",
 		harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
 	},
+	cell_width = 0.9, -- effectively like letter-spacing
 	font_size = fontSize,
 	command_palette_font_size = fontSize,
 	char_select_font_size = fontSize, -- emoji picker

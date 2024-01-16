@@ -52,18 +52,20 @@ function update() {
 	brew cleanup
 
 	# manually update, cause brew won't update as it is in theory self-upgrading
+	echo
 	echo "Obsidian Installer"
 	brew upgrade obsidian
 
 	_print-section "Mac App Store"
 	mas upgrade
 
-	print "\e[1;38;5;247mRestarting sketchybar…\e[0m"
+	echo
 	# - sketchybar usually updated and then has to be restarted to give permission
 	# - also updates the homebrew status counter
 	brew services restart sketchybar
-	_dump
 
+	echo
+	_dump
 	osascript -e 'display notification "" with title "🍺 Homebrew finished." sound name "Blow"'
 }
 
