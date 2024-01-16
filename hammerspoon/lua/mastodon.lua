@@ -1,9 +1,9 @@
 local M = {} -- persist from garbage collector
 
 local mastodonApp = require("lua.environment-vars").mastodonApp
+local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
-local env = require("lua.environment-vars")
 
 local aw = hs.application.watcher
 local wf = hs.window.filter
@@ -11,6 +11,8 @@ local keystroke = hs.eventtap.keyStroke
 --------------------------------------------------------------------------------
 
 -- simply scroll up without the mouse and without focusing the app
+-- necessary as auto-refreshing has subtle bugs in pretty much any app I tried
+-- (not correctly scrolling up, etc.)
 local function scrollUp()
 	local app = u.app(mastodonApp)
 	if not app or not u.screenIsUnlocked() or app:isFrontmost() then return end
@@ -22,7 +24,7 @@ local function scrollUp()
 	keystroke(modifiers, "R", 1, app) -- refresh/reload
 
 	-- wait for posts to load
-	u.runWithDelays(2, function()
+	u.runWithDelays({ 2, 7, 15 }, function()
 		if app:isFrontmost() then return end
 		keystroke({ "cmd" }, "up", 1, app) -- scroll up
 	end)
