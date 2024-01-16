@@ -79,11 +79,17 @@ function M.gotoAnchorFile()
 
 	-- determine if currently on an anchorfile
 	local filename = vim.fs.basename(vim.api.nvim_buf_get_name(0))
-	local idx = 1
-	for _, filelist in ipairs(anchorFiles) do
-		idx
+	local idx
+	for i = 1, #anchorFiles do
+		if vim.tbl_contains(anchorFiles[i], filename) then
+			idx = i
+			break
+		end
 	end
-	local foundFile = vim.fs.find(mainFiles, { type = "file" })
+	-- first or next position in anchorFileList, modulus to cycle to start of list
+	idx = math.fmod((idx or 0), #anchorFiles) + 1 
+
+	local foundFile = vim.fs.find(anchorFiles[idx], { type = "file" })
 	if foundFile then
 		vim.cmd.edit(foundFile[1])
 	else

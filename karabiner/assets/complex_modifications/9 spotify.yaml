@@ -28,6 +28,11 @@ rules:
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
               spotify_player playback play-pause
+              if [ $? -eq 1 ]; then
+                # BUG https://github.com/aome510/spotify-player/issues/338
+                spotify_player connect --name "Wohnzimmer Echo"
+                spotify_player playback play-pause
+              fi
       - type: basic
         from: { key_code: f9 }
         to:
