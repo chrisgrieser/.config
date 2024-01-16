@@ -4,6 +4,8 @@
 <dict>
 	<key>bundleid</key>
 	<string>com.alfredapp.vitor.googlescholarsuggest</string>
+	<key>category</key>
+	<string>⬇️</string>
 	<key>connections</key>
 	<dict>
 		<key>63F60794-BB56-4415-9372-BAF974C3A7E1</key>

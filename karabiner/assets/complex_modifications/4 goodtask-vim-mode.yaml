@@ -102,6 +102,14 @@ rules:
           - *remove-notice
           - *enter-normal-mode
         conditions: [*goodtask-app, *goodtask-insert-mode]
+      # cmd+q
+      - type: basic
+        from: { key_code: q, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: q, modifiers: [command] }
+          - *remove-notice
+          - *enter-normal-mode
+        conditions: [*goodtask-app, *goodtask-insert-mode]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "✏️ GoodTask Vim Mode: Actions"
     manipulators:

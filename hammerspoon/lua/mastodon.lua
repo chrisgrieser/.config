@@ -3,6 +3,7 @@ local M = {} -- persist from garbage collector
 local mastodonApp = require("lua.environment-vars").mastodonApp
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
+local env = require("lua.environment-vars")
 
 local aw = hs.application.watcher
 local wf = hs.window.filter
@@ -11,12 +12,8 @@ local keystroke = hs.eventtap.keyStroke
 
 -- simply scroll up without the mouse and without focusing the app
 local function scrollUp()
-	-- after quitting, it takes a few seconds until Twitter is fully quit,
-	-- therefore also checking for the main window existence
-	-- when browsing twitter itself, to not change tabs
 	local app = u.app(mastodonApp)
-	if not (app and app:mainWindow() and u.screenIsUnlocked()) then return end
-	if app:isFrontmost() then return end
+	if not app or not u.screenIsUnlocked() or app:isFrontmost() then return end
 
 	keystroke({ "cmd" }, "left", 1, app) -- go back
 	keystroke({ "cmd" }, "1", 1, app) -- go to home tab
@@ -24,8 +21,8 @@ local function scrollUp()
 	local modifiers = mastodonApp == "Mona" and { "cmd" } or { "cmd", "shift" }
 	keystroke(modifiers, "R", 1, app) -- refresh/reload
 
-	-- wait for tweets to load
-	u.runWithDelays({ 1, 4 }, function()
+	-- wait for posts to load
+	u.runWithDelays(2, function()
 		if app:isFrontmost() then return end
 		keystroke({ "cmd" }, "up", 1, app) -- scroll up
 	end)
@@ -60,7 +57,7 @@ local function winToTheSide()
 end
 
 -- SHOW if referenceWin is pseudo-maximized or centered
--- HIDE referenceWin belongs to app with transparent background is maximized
+-- HIDE referenceWin belonging to app with transparent background is maximized
 ---@param referenceWin hs.window
 local function showHideTickerApp(referenceWin)
 	local app = u.app(mastodonApp)
@@ -71,9 +68,8 @@ local function showHideTickerApp(referenceWin)
 		return
 	end
 
-	local transBgApps = { "neovide", "Obsidian", "wezterm-gui", "WezTerm" }
 	local appWithTransBgWasMaximized = wu.CheckSize(referenceWin, wu.maximized)
-		and u.tbl_contains(transBgApps, referenceWin:title())
+		and u.tbl_contains(env.transBgApps, referenceWin:title())
 
 	if appWithTransBgWasMaximized then
 		local loginWin = referenceWin:title() == "Login"
@@ -125,7 +121,7 @@ M.caff_TickerWake = c.new(function(event)
 	end
 end):start()
 
--- show/hide twitter when other wins move
+-- show/hide app when other wins move
 M.wf_someWindowActivity = wf.new(true)
 	:setOverrideFilter({ allowRoles = "AXStandardWindow", hasTitlebar = true })
 	:subscribe(wf.windowMoved, function(movedWin) showHideTickerApp(movedWin) end)

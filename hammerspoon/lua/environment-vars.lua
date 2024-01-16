@@ -28,6 +28,13 @@ M.codeFont = readZshEnv("CODE_FONT")
 M.browserApp = readZshEnv("BROWSER_APP")
 M.browserDefaultsPath = readZshEnv("BROWSER_DEFAULTS_PATH")
 
+M.transBgApps = {
+	"Neovide",
+	"Obsidian",
+	"wezterm-gui",
+	"WezTerm",
+}
+
 M.videoAndAudioApps = {
 	"IINA",
 	"YouTube",

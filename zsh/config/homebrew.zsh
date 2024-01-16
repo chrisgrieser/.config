@@ -1,21 +1,16 @@
 # DOCS https://docs.brew.sh/Manpage#environment
 #───────────────────────────────────────────────────────────────────────────────
 
-# install/update
 export HOMEBREW_CASK_OPTS="--no-quarantine"
 export HOMEBREW_DISPLAY_INSTALL_TIMES=1
 export HOMEBREW_AUTO_UPDATE_SECS=86400 # only once per day
 
-# cleanup
 export HOMEBREW_AUTOREMOVE=1
 export HOMEBREW_CLEANUP_MAX_AGE_DAYS=60
 export HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=30
 
-# misc
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
-
-#───────────────────────────────────────────────────────────────────────────────
 
 alias bh='brew home'
 alias bl='brew list'
@@ -64,13 +59,11 @@ function update() {
 	# - also updates the homebrew status counter
 	brew services restart sketchybar
 
-	echo
-	_dump
+	echo && _dump
 	osascript -e 'display notification "" with title "🍺 Homebrew finished." sound name "Blow"'
 }
 
 function listall() {
-	brew update
 	_print-section "brew taps"
 	brew tap
 	_print-section "brew leaves"
