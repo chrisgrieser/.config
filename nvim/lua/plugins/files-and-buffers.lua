@@ -25,7 +25,7 @@ return {
 				vertical_offset = 3,
 			},
 			style = {
-				border = vim.g.myBorderStyle,
+				border = vim.g.borderStyle,
 				padding = 7,
 				path = "tail",
 				hide_buffer_id = false,

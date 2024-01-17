@@ -92,7 +92,7 @@ return {
 			-- DOCS https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua
 			views = {
 				cmdline_popup = {
-					border = { style = vim.g.myBorderStyle },
+					border = { style = vim.g.borderStyle },
 				},
 				mini = {
 					timeout = 3000,
@@ -101,12 +101,12 @@ return {
 					format = { "{title} ", "{message}" }, -- leave out "{level}"
 				},
 				hover = {
-					border = { style = vim.g.myBorderStyle },
+					border = { style = vim.g.borderStyle },
 					size = { max_width = 80 },
 					win_options = { scrolloff = 4, wrap = true },
 				},
 				popup = {
-					border = { style = vim.g.myBorderStyle },
+					border = { style = vim.g.borderStyle },
 					size = { width = 90, height = 25 },
 					win_options = { scrolloff = 8, wrap = true },
 					close = { keys = { "q", "<D-w>", "<D-9>" } },
@@ -161,7 +161,7 @@ return {
 			on_open = function(win)
 				-- set borderstyle
 				if not vim.api.nvim_win_is_valid(win) then return end
-				vim.api.nvim_win_set_config(win, { border = vim.g.myBorderStyle })
+				vim.api.nvim_win_set_config(win, { border = vim.g.borderStyle })
 				local bufnr = vim.api.nvim_win_get_buf(win)
 				highlightCopyStacktraceLine(bufnr)
 			end,

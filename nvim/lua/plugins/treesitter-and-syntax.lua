@@ -47,7 +47,7 @@ local tsConfig = {
 		},
 		lsp_interop = {
 			enable = true,
-			border = vim.g.myBorderStyle,
+			border = vim.g.borderStyle,
 			floating_preview_opts = {},
 		},
 	},

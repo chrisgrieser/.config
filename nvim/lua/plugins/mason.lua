@@ -11,7 +11,7 @@ return {
 		},
 		opts = {
 			ui = {
-				border = vim.g.myBorderStyle,
+				border = vim.g.borderStyle,
 				height = 0.8, -- so statusline is still visible
 				width = 0.8,
 				icons = {

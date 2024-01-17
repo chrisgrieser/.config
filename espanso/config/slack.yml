@@ -1,9 +1,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/ajmarkow/espanso-schema-json/master/schemas/Espanso_Config_File_Schema.json
 #───────────────────────────────────────────────────────────────────────────────
+# DOCS https://espanso.org/docs/configuration/app-specific-configurations/
 
-# https://espanso.org/docs/configuration/app-specific-configurations/
-filter_class: "com.hnc.Discord"
+filter_class: "com.tinyspeck.slackmacgap"
 
 extra_includes:
-  - "../match/_discord.yml"
   - "../match/_emoji-reacts.yml"

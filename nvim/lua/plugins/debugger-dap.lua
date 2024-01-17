@@ -92,7 +92,7 @@ return {
 				open = "<CR>",
 			},
 			floating = {
-				border = vim.g.myBorderStyle,
+				border = vim.g.borderStyle,
 				mappings = { close = { "q", "<Esc>", "<D-w>" } },
 			},
 			layouts = {

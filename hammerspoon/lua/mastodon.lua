@@ -23,7 +23,7 @@ local function scrollUp()
 	local modifiers = mastodonApp == "Mona" and { "cmd" } or { "cmd", "shift" }
 	keystroke(modifiers, "R", 1, app) -- refresh/reload
 
-	u.runWithDelays({ 0.5, 2 }, function() -- wait for posts to load
+	u.runWithDelays({ 0.5, 1, 2 }, function() -- wait for posts to load
 		if app:isFrontmost() then return end -- do not interrupt when currently reading
 		keystroke({ "cmd" }, "up", 1, app) -- scroll up
 	end)
@@ -122,7 +122,7 @@ M.caff_TickerWake = c.new(function(event)
 	end
 end):start()
 
--- show/hide app when other wins move
+-- show/hide app when any other wins move
 M.wf_someWindowActivity = wf.new(true)
 	:setOverrideFilter({ allowRoles = "AXStandardWindow", hasTitlebar = true })
 	:subscribe(wf.windowMoved, function(movedWin) showHideTickerApp(movedWin) end)
