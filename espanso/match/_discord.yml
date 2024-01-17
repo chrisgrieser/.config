@@ -22,5 +22,11 @@ matches:
   - trigger: "sss"
     replace: "s/$|$/"
   # send silent (no ping) messages
-  - triggers: ["zzz"]
+  - trigger: "zzz"
     replace: "@silent "
+  # emoji reaction
+  - trigger: "eee"
+    replace: "+:"
+  # multi-emoji reaction
+  - trigger: "12345"
+    replace: "+:one:\n+:two:\n+:three:\n+:four:\n+:five:\n"
