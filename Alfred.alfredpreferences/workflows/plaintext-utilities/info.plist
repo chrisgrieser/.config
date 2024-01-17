@@ -12,7 +12,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>FDF6DA7A-36B0-47DE-8396-66D12C630E60</string>
+				<string>3EDC737C-4EB4-4914-A367-23A824DD4442</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -78,6 +78,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>E99A3FBF-B036-4D0F-8E6C-90DDAA444F97</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>3EDC737C-4EB4-4914-A367-23A824DD4442</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FDF6DA7A-36B0-47DE-8396-66D12C630E60</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -178,7 +191,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>FDF6DA7A-36B0-47DE-8396-66D12C630E60</string>
+				<string>3EDC737C-4EB4-4914-A367-23A824DD4442</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -256,7 +269,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>FDF6DA7A-36B0-47DE-8396-66D12C630E60</string>
+				<string>3EDC737C-4EB4-4914-A367-23A824DD4442</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -621,6 +634,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>FDF6DA7A-36B0-47DE-8396-66D12C630E60</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>matchmode</key>
 				<integer>1</integer>
 				<key>matchstring</key>
@@ -640,23 +672,12 @@
 			<integer>2</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
+			<string>alfred.workflow.utility.hidealfred</string>
 			<key>uid</key>
-			<string>FDF6DA7A-36B0-47DE-8396-66D12C630E60</string>
+			<string>3EDC737C-4EB4-4914-A367-23A824DD4442</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -954,6 +975,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>385</real>
 		</dict>
+		<key>3EDC737C-4EB4-4914-A367-23A824DD4442</key>
+		<dict>
+			<key>xpos</key>
+			<real>440</real>
+			<key>ypos</key>
+			<real>370</real>
+		</dict>
 		<key>47024990-837B-4095-9F25-9905FDB9E7BB</key>
 		<dict>
 			<key>colorindex</key>
@@ -1110,9 +1138,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>paste</string>
 			<key>xpos</key>
-			<real>530</real>
+			<real>510</real>
 			<key>ypos</key>
-			<real>355</real>
+			<real>340</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
