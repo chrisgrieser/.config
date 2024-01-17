@@ -43,6 +43,7 @@ The tree was generated using <https://tree.nathanfriend.io/>
 - [chrisgrieser/nvim-puppeteer](https://github.com/chrisgrieser/nvim-puppeteer)
 - [chrisgrieser/nvim-recorder](https://github.com/chrisgrieser/nvim-recorder)
 - [chrisgrieser/nvim-rulebook](https://github.com/chrisgrieser/nvim-rulebook)
+- [chrisgrieser/nvim-scissors](https://github.com/chrisgrieser/nvim-scissors)
 - [chrisgrieser/nvim-spider](https://github.com/chrisgrieser/nvim-spider)
 - [chrisgrieser/nvim-tinygit](https://github.com/chrisgrieser/nvim-tinygit)
 - [chrisgrieser/nvim-various-textobjs](https://github.com/chrisgrieser/nvim-various-textobjs)

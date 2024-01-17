@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/ajmarkow/espanso-schema-json/master/schemas/Espanso_Matches_File_Schema.json
 #───────────────────────────────────────────────────────────────────────────────
 
+# INFO emojis need to be in textual form to work in Slack as well as Discord
 matches:
   # emoji selection
   - trigger: "eee"
@@ -11,6 +12,9 @@ matches:
   # this
   - trigger: "ttt"
     replace: "+:this:\n"
+  # thumbs-up
+  - trigger: "yyy"
+    replace: "+:+1:\n"
   # multi-emoji
   - trigger: "12345"
     replace: "+:one:\n+:two:\n+:three:\n+:four:\n+:five:\n"

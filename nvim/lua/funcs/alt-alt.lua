@@ -8,12 +8,11 @@ local function hasAltFile(altBufnr)
 	if altBufnr < 0 then return false end
 	local valid = a.nvim_buf_is_valid(altBufnr)
 	local nonSpecial = a.nvim_buf_get_option(altBufnr, "buftype") == ""
-
-	-- FIX sometimes current and alt buffer point to the same file
 	local moreThanOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) > 1
 	local currentBufNotAlt = vim.api.nvim_get_current_buf() ~= altBufnr -- fixes weird rare vim bug
+	local altFileExists = vim.loop.fs_stat(a.nvim_buf_get_name(altBufnr)) ~= nil
 
-	return valid and nonSpecial and moreThanOneBuffer and currentBufNotAlt
+	return valid and nonSpecial and moreThanOneBuffer and currentBufNotAlt and altFileExists
 end
 
 ---get the alternate oldfile, accounting for non-existing files
