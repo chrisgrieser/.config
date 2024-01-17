@@ -192,7 +192,8 @@ function M.openAtRegex101()
 	elseif lang == "python" then
 		normal('"zyi"vi"') -- yank & reselect inside quotes
 		pattern = vim.fn.getreg("z")
-		flags = "gm" -- TODO retrieve flags in a smarter way
+		local flagInLine = vim.api.nvim_get_current_line():match("re%.([MIDSUA])")
+		flags = flagInLine and "g" .. flagInLine:gsub("D", "S"):lower() or "g"
 	else
 		notify("", "Unsupported filetype.", "warn")
 		return
