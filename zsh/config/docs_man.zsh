@@ -8,7 +8,6 @@ function expansion-help {
 	print "\e[1;32m!:0  \e[0m first word of last command"
 	print "\e[1;32m!:1  \e[0m first arg of last command"
 	print "\e[1;32m!*  \e[0m all arg of last command"
-	print "\e[1;32m!-2   \e[0m 2nd most recent command"
 	print "\e[1;32m*(.)  \e[0m all plain files"
 	print "\e[1;32m*(/)  \e[0m all directories"
 	print "\e[1;32m(a|b)*\e[0m files beginning with 'a' or 'b' (zsh)"
@@ -70,11 +69,9 @@ function man() {
 
 function ai() {
 	if ! command -v yq &>/dev/null; then echo "yq not installed." && return 1; fi
-	if ! command -v bat &>/dev/null; then echo "bat not installed." && return 1; fi
 	if [[ -z "$OPENAI_API_KEY" ]]; then echo "\$OPENAI_API_KEY not found." && return 1; fi
 
-	local query="$*"
-	local the_prompt="The following request is concerned with shell scripting. If your response includes codeblocks, do add 'bash' as language label to it. Here is the request: $query"
+	local the_prompt="The following request is concerned with shell scripting. Here is the request: $*"
 	print "\e[1;34mAsking ChatGPT…\e[0m"
 
 	# https://platform.openai.com/docs/api-reference/making-requests
@@ -86,8 +83,7 @@ function ai() {
 			\"messages\": [{\"role\": \"user\", \"content\": \"$the_prompt\"}],
 			\"temperature\": 0
 		}" |
-		yq -r '.choices[].message.content' |
-		bat --style=plain --wrap=auto
+		yq -r '.choices[].message.content'
 }
 
 #───────────────────────────────────────────────────────────────────────────────
