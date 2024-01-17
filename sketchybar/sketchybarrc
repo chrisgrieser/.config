@@ -54,7 +54,7 @@ sketchybar \
 	--subscribe github_notif system_woke \
 	\
 	--add item reminders_count $first_row \
-	--set reminders_count update_freq=300 \
+	--set reminders_count update_freq=900 \
 	script="$plugin_dir/reminders-count.sh" \
 	--subscribe reminders_count front_app_switched \
 	--subscribe reminders_count system_woke \
