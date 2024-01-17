@@ -13,12 +13,13 @@ local now = os.time
 ---(Apps not in this list will be ignored and never quit automatically).
 ---@type table<string, integer|nil>
 M.thresholdMins = {
+	GoodTask = 5,
 	Slack = 20,
 	Mimestream = 5,
 	Highlights = 90,
 	Obsidian = 90,
 	Discord = 180,
-	BusyCal = 2,
+	BusyCal = 5,
 	["wezterm-gui"] = 45, -- does not work with "WezTerm"
 	["Alfred Preferences"] = 20,
 	["System Settings"] = 2,
