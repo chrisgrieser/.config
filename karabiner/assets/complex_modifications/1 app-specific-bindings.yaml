@@ -400,16 +400,6 @@ rules:
           - { key_code: vk_none, hold_down_milliseconds: 50 }
           - shell_command: pbpaste -pboard ruler | pbcopy
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$] }]
-      # emoji reaction to msg above
-      - type: basic
-        from: { key_code: o, modifiers: { mandatory: [command] } }
-        to:
-          - key_code: tab
-          - { key_code: vk_none, hold_down_milliseconds: 50 }
-          - key_code: up_arrow
-          - { key_code: vk_none, hold_down_milliseconds: 70 }
-          - key_code: close_bracket
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$] }]
       # go 3 up [t]
       - type: basic
         from: { key_code: t, modifiers: { mandatory: [command] } }
