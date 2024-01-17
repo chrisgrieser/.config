@@ -400,7 +400,7 @@ return {
 		},
 		config = function()
 			setupAllLsps()
-			require("lspconfig.ui.windows").default_options.border = vim.g.myBorderStyle
+			require("lspconfig.ui.windows").default_options.border = vim.g.borderStyle
 		end,
 	},
 }

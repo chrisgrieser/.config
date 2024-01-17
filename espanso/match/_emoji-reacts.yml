@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/ajmarkow/espanso-schema-json/master/schemas/Espanso_Matches_File_Schema.json
+#───────────────────────────────────────────────────────────────────────────────
+
+matches:
+  # emoji selection
+  - trigger: "eee"
+    replace: "+:"
+  # heart
+  - trigger: "hhh"
+    replace: "+:blue_heart:\n"
+  # this
+  - trigger: "ttt"
+    replace: "+:this:\n"
+  # multi-emoji
+  - trigger: "12345"
+    replace: "+:one:\n+:two:\n+:three:\n+:four:\n+:five:\n"

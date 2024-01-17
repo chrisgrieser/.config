@@ -130,7 +130,7 @@ keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = " Inline Code" }) -- no sel
 keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = " Inline Code" })
 keymap("i", "<D-e>", "``<Left>", { desc = " Inline Code" })
 
--- DocString (simplified version of neogen.nvim)
+-- DocString
 keymap(
 	"n",
 	"qf",
