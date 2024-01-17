@@ -379,6 +379,21 @@ rules:
         to:
           - { key_code: down_arrow, modifiers: [command, shift, option] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$] }]
+      # [o]pen url in above message
+      - type: basic
+        from: { key_code: o, modifiers: { mandatory: [command] } }
+        to:
+          - key_code: tab
+          - { key_code: vk_none, hold_down_milliseconds: 80 }
+          - key_code: up_arrow
+          - { key_code: vk_none, hold_down_milliseconds: 80 }
+          - key_code: tab
+          - { key_code: vk_none, hold_down_milliseconds: 80 }
+          - key_code: spacebar
+          - key_code: down_arrow
+          - { key_code: vk_none, hold_down_milliseconds: 30 }
+          - key_code: escape
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$] }]
       # [r]eply to msg above
       - type: basic
         from: { key_code: r, modifiers: { mandatory: [command] } }
@@ -407,7 +422,9 @@ rules:
           - key_code: tab
           - { key_code: vk_none, hold_down_milliseconds: 40 }
           - key_code: up_arrow
+          - { key_code: vk_none, hold_down_milliseconds: 40 }
           - key_code: up_arrow
+          - { key_code: vk_none, hold_down_milliseconds: 40 }
           - key_code: up_arrow
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$] }]
       # scroll to bottom (mnenonic: vim's G)
