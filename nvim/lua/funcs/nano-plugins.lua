@@ -115,17 +115,52 @@ end
 -- simplified yank history
 function M.pasteFromNumberReg()
 	local regs = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }
-	vim.ui.select(regs, {
-		prompt = "󰅍 Select register",
-		format_item = function(reg)
-			local firstLine = vim.split(vim.fn.getreg(reg), "\n")[1]
-			local trimmed = vim.trim(firstLine):sub(1, 40)
-			return ("[%s] "):format(reg) .. trimmed
-		end,
-	}, function(reg)
-		if not reg then return end
-		normal('"' .. reg .. "p")
-	end)
+	local pickers = require("telescope.pickers")
+	local telescopeConf = require("telescope.config").values
+	local actionState = require("telescope.actions.state")
+	local actions = require("telescope.actions")
+	local finders = require("telescope.finders")
+	local previewers = require("telescope.previewers")
+	local currentFt = vim.bo.filetype
+
+	pickers
+		.new({}, {
+			prompt_title = "󰅍 Select Register",
+			sorter = telescopeConf.generic_sorter {},
+			finder = finders.new_table {
+				results = regs,
+				entry_maker = function(reg)
+					local firstLine = vim.split(vim.fn.getreg(reg), "\n")[1]
+					local trimmed = vim.trim(firstLine):sub(1, 40)
+					local display = ("[%s] "):format(reg) .. trimmed
+					return {
+						value = reg,
+						ordinal = reg,
+						display = display,
+					}
+				end,
+			},
+
+			previewer = previewers.new_buffer_previewer {
+				define_preview = function(self, entry)
+					local reg = entry.value
+					local lines = vim.split(vim.fn.getreg(reg), "\n")
+					local bufnr = self.state.bufnr
+					vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
+					vim.api.nvim_buf_set_option(bufnr, "filetype", currentFt)
+				end,
+			},
+
+			attach_mappings = function(prompt_bufnr, _)
+				actions.select_default:replace(function()
+					local reg = actionState.get_selected_entry().value
+					actions.close(prompt_bufnr)
+					normal('"' .. reg .. "p")
+				end)
+				return true
+			end,
+		})
+		:find()
 end
 
 function M.openAlfredPref()

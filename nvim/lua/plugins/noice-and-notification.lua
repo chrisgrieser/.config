@@ -47,9 +47,6 @@ local routes = {
 	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
 	{ filter = { event = "notify", find = "All parsers are up%-to%-date" }, view = "mini" },
 
-	-- LSP
-	{ filter = { event = "notify", find = "Restarting…" }, view = "mini" },
-
 	-- Mason
 	{ filter = { event = "notify", find = "%[mason%-tool%-installer%]" }, view = "mini" },
 	{

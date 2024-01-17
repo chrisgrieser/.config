@@ -58,7 +58,7 @@ end
 
 wt.on("gui-startup", function(cmd)
 	-- on start, move window to the side ("pseudomaximized")
-	local pos = { x = 710, y = 0, w = 3135 }
+	local pos = { x = 708, y = 0, w = 3135 }
 	if isAtOffice then
 		pos = { x = 375, y = -100, w = 1675 }
 	elseif isAtMother then

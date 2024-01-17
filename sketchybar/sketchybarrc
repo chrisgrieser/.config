@@ -58,6 +58,8 @@ sketchybar \
 	script="$plugin_dir/reminders-count.sh" \
 	--subscribe reminders_count front_app_switched \
 	--subscribe reminders_count system_woke \
+	--add event update_reminder_count \
+	--subscribe reminders_count update_reminder_count \
 	\
 	--add alias "Stats,CombinedModules" $second_row \
 	alias.color="$font_color" \
