@@ -114,7 +114,10 @@ end
 
 -- simplified yank history
 function M.pasteFromNumberReg()
-	local regs = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }
+	local regs = {}
+	for i = 0, 9 do
+		table.insert(regs, { number = i, content = vim.fn.getreg(i) })
+	end
 	local pickers = require("telescope.pickers")
 	local telescopeConf = require("telescope.config").values
 	local actionState = require("telescope.actions.state")
@@ -130,12 +133,12 @@ function M.pasteFromNumberReg()
 			finder = finders.new_table {
 				results = regs,
 				entry_maker = function(reg)
-					local firstLine = vim.split(vim.fn.getreg(reg), "\n")[1]
+					local firstLine = vim.split(reg.content, "\n")[1]
 					local trimmed = vim.trim(firstLine):sub(1, 40)
-					local display = ("[%s] "):format(reg) .. trimmed
+					local display = reg.number .. ". " .. trimmed
 					return {
 						value = reg,
-						ordinal = reg,
+						ordinal = reg.content,
 						display = display,
 					}
 				end,
@@ -143,8 +146,8 @@ function M.pasteFromNumberReg()
 
 			previewer = previewers.new_buffer_previewer {
 				define_preview = function(self, entry)
-					local reg = entry.value
-					local lines = vim.split(vim.fn.getreg(reg), "\n")
+					local regContent = entry.value.content
+					local lines = vim.split(regContent, "\n")
 					local bufnr = self.state.bufnr
 					vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
 					vim.api.nvim_buf_set_option(bufnr, "filetype", currentFt)
@@ -153,7 +156,7 @@ function M.pasteFromNumberReg()
 
 			attach_mappings = function(prompt_bufnr, _)
 				actions.select_default:replace(function()
-					local reg = actionState.get_selected_entry().value
+					local reg = actionState.get_selected_entry().value.number
 					actions.close(prompt_bufnr)
 					normal('"' .. reg .. "p")
 				end)
