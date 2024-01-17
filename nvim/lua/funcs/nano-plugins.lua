@@ -136,11 +136,7 @@ function M.pasteFromNumberReg()
 					local firstLine = vim.split(reg.content, "\n")[1]
 					local trimmed = vim.trim(firstLine):sub(1, 40)
 					local display = reg.number .. ". " .. trimmed
-					return {
-						value = reg,
-						ordinal = reg.content,
-						display = display,
-					}
+					return { value = reg, ordinal = reg.content, display = display }
 				end,
 			},
 
