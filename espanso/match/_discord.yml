@@ -27,6 +27,15 @@ matches:
   # emoji reaction
   - trigger: "eee"
     replace: "+:"
+  # heart reaction
+  - trigger: "hhh"
+    replace: "+:blue_heart:\n"
+  # this reaction
+  - trigger: "ttt"
+    replace: "+:this:\n"
+  # gif
+  - trigger: "ggg"
+    replace: "/gif "
   # multi-emoji reaction
   - trigger: "12345"
     replace: "+:one:\n+:two:\n+:three:\n+:four:\n+:five:\n"
