@@ -17,16 +17,18 @@ return {
 			vim.g.VM_maps = {
 				-- Enter Visual-Multi-Mode
 				["Find Under"] = "<D-j>", -- select word under cursor
-				["Reselect Last"] = "gV",
 				["Visual Add"] = "<D-j>",
+				["Reselect Last"] = "gV",
 				["Select All"] = "<D-a>",
 				["Visual All"] = "<D-a>",
 
 				-- Visual-Multi-Mode Mappings
 				["Find Next"] = "<D-j>",
+				["Find Prev"] = "<D-J>",
 				["Skip Region"] = "n", -- [n]o & find next
 				["Remove Region"] = "N", -- [N]o & goto prev
 				["Find Operator"] = "s", -- operator, selects all regions found in textobj
+
 				["Motion $"] = "L", -- consistent with my mappings
 				["Motion ^"] = "H",
 			}
@@ -59,22 +61,23 @@ return {
 			{ "9", desc = "/ Continue/Play" },
 			{ "8", desc = "/ Breakpoint" },
 		},
-		config = function()
-			require("recorder").setup {
-				clear = true,
-				logLevel = vim.log.levels.TRACE,
-				mapping = {
-					startStopRecording = "0",
-					playMacro = "9",
-					switchSlot = "<C-0>",
-					editMacro = "c0",
-					yankMacro = "y0",
-					deleteAllMacros = "d0",
-					addBreakPoint = "8",
-				},
-				dapSharedKeymaps = true,
-				performanceOpts = { countThreshold = 10 },
-			}
+		opts = {
+			clear = true,
+			logLevel = vim.log.levels.TRACE,
+			mapping = {
+				startStopRecording = "0",
+				playMacro = "9",
+				switchSlot = "<C-0>",
+				editMacro = "c0",
+				yankMacro = "y0",
+				deleteAllMacros = "d0",
+				addBreakPoint = "8",
+			},
+			dapSharedKeymaps = true,
+			performanceOpts = { countThreshold = 10 },
+		},
+		config = function(_, opts)
+			require("recorder").setup(opts)
 			u.addToLuaLine("winbar", "lualine_z", require("recorder").recordingStatus)
 			u.addToLuaLine("sections", "lualine_y", require("recorder").displaySlots)
 		end,

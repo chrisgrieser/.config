@@ -54,7 +54,7 @@ return {
 			-- stylua: ignore start
 			{ "<leader>dd", function() require("dap").clear_breakpoints() end, desc = " Remove All Breakpoints" },
 			{ "<leader>dr", function() require("dap").restart() end, desc = " Restart" },
-			{ "<leader>dt", function() require("dap").terminate({}, {}, terminateCallback) end, desc = " Terminate" },
+			{ "<leader>dt", function() require("dap").terminate() end, desc = " Terminate" },
 			-- stylua: ignore end
 		},
 		init = function() u.leaderSubkey("d", " Debugger") end,

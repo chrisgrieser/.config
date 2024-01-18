@@ -130,12 +130,12 @@ keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = " Inline Code" }) -- no sel
 keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = " Inline Code" })
 keymap("i", "<D-e>", "``<Left>", { desc = " Inline Code" })
 
--- DocString
+-- Open regex in regex101
 keymap(
 	"n",
-	"qf",
-	function() require("funcs.nano-plugins").docstring() end,
-	{ desc = " Function Docstring" }
+	"g/",
+	function() require("funcs.nano-plugins").openAtRegex101() end,
+	{ desc = " Open in regex101" }
 )
 
 --------------------------------------------------------------------------------
@@ -147,6 +147,14 @@ keymap("n", "wq", function() require("funcs.comment").duplicateLineAsComment() e
 keymap("n", "qn", function() require("funcs.comment").insertDoublePercentCom() end, { desc = " Insert %% Comment" })
 keymap("n", "dN", function() require("funcs.comment").removeDoublePercentComs() end, { desc = " Remove %% Comments" })
 -- stylua: ignore end
+
+-- DocString
+keymap(
+	"n",
+	"qf",
+	function() require("funcs.nano-plugins").docstring() end,
+	{ desc = " Function Docstring" }
+)
 
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
@@ -281,15 +289,6 @@ keymap("i", "<D-v>", function()
 	return "<C-g>u<C-r><C-o>+" -- "<C-g>u" adds undopoint before the paste
 end, { desc = " Paste charwise", expr = true })
 
---------------------------------------------------------------------------------
-
--- Open regex in regex101
-keymap(
-	"n",
-	"g/",
-	function() require("funcs.nano-plugins").openAtRegex101() end,
-	{ desc = " Open in regex101" }
-)
 ------------------------------------------------------------------------------
 -- MAC-SPECIFIC-KEYBINDINGS
 
@@ -324,26 +323,3 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set("n", "q", cmd.cquit, { buffer = true, nowait = true, desc = "Abort" })
 	end,
 })
-
---------------------------------------------------------------------------------
--- GIT-MODE
-
----HACK using replace-mode as a fake-git-mode since (simplified version of hydra.nvim)
----@param key string
----@param action function
-local function gitModeMap(key, action)
-	-- needs to check for `R` in `mode()` since there is no `rmap`
-	vim.keymap.set("i", key, function()
-		if vim.fn.mode() ~= "R" then return key end
-		-- temporarily pause replace mode, since functions do not work here
-		vim.cmd.stopinsert() -- also stops replace mode
-		vim.defer_fn(action, 1)
-		vim.defer_fn(vim.cmd.startreplace, 2)
-	end, { expr = true })
-end
-
-gitModeMap("a", function() vim.cmd.Gitsigns("stage_hunk") end)
-gitModeMap("A", function() vim.cmd.Gitsigns("undo_stage_hunk") end)
-gitModeMap("u", function() vim.cmd.Gitsigns("reset_hunk") end)
-gitModeMap("n", function() require("gitsigns").next_hunk { foldopen = true } end)
-gitModeMap("N", function() require("gitsigns").prev_hunk { foldopen = true } end)
