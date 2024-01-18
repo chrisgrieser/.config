@@ -1,4 +1,8 @@
 {
+  "keywords (key)": {
+    "body": "keywords = {$0},",
+    "prefix": "keywords (key)"
+  },
   "new entry template": {
     "body": [
       "@${1:article}{${2:citekey},",
