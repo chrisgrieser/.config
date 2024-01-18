@@ -52,16 +52,11 @@ local conformOpts = {
 		["bibtex-tidy"] = {
 			-- stylua: ignore
 			prepend_args = {
-				"--tab", "--curly", "--strip-enclosing-braces", "--no-align", "--no-wrap",
+				"--tab", "--curly", "--no-align", "--no-wrap", "--no-escape",
 				"--enclosing-braces=title,journal,booktitle", "--drop-all-caps",
-				"---@diagnostic disable-line: unused-local", "--months", "--encode-urls",
+				 "--encode-urls", "--numeric", "--trailing-commas",
 				"--duplicates", "--sort-fields", "--remove-empty-fields", "--omit=month,issn,abstract",
 			},
-			condition = function(_, ctx)
-				local biggerThan500Kb = vim.loop.fs_stat(ctx.filename).size > 500 * 1024
-				if biggerThan500Kb then u.notify("conform.nvim", "Not formatting (file > 500kb).") end
-				return not biggerThan500Kb
-			end,
 		},
 	},
 }
