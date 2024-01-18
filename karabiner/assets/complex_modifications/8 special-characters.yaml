@@ -11,6 +11,15 @@ rules:
         conditions:
           - { type: input_source_if, input_sources: [language: ^de$] }
           - { type: device_if, identifiers: [{ product_id: 592 }] }
+  # FIX cmd+^ in Obsidian
+      - type: basic
+        from: { key_code: non_us_backslash, modifiers: { optional: [command] } }
+        to:
+          - key_code: grave_accent_and_tilde
+        conditions:
+          - { type: input_source_if, input_sources: [language: ^de$] }
+          - { type: device_if, identifiers: [{ product_id: 592 }] }
+          - { type: frontmost_application_if, bundle_identifiers: [ ^md.obsidian$ ] }
   #─────────────────────────────────────────────────────────────────────────────
   # DEAD KEYS FIX
   - description: "Avoid dead keys (prevent expecting another key): ^~`"
