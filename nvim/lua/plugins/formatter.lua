@@ -53,9 +53,9 @@ local conformOpts = {
 			-- stylua: ignore
 			prepend_args = {
 				-- BUG (do not use these options)
-				-- `--no-encode-urls`: still encodes urls
-				-- `--escape`: escapes `_`, making it invalid https://github.com/FlamingTempura/bibtex-tidy/issues/415
-				-- `--enclosing-braces`: has issues with double-braces
+				-- *not* using `--no-escape` https://github.com/FlamingTempura/bibtex-tidy/issues/415
+				-- `--no-encode-urls`: https://github.com/FlamingTempura/bibtex-tidy/issues/422
+				-- `--enclosing-braces` https://github.com/FlamingTempura/bibtex-tidy/issues/423
 				"--tab", "--curly", "--no-align", "--no-wrap", "--drop-all-caps", 
 				"--numeric", "--trailing-commas", "--no-escape", 
 				"--duplicates", "--sort-fields", "--remove-empty-fields", 
