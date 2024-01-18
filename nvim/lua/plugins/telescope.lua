@@ -279,6 +279,12 @@ local function telescopeConfig()
 					end,
 				},
 			},
+			git_bcommits = {
+				prompt_prefix = "󰊢 ",
+				initial_mode = "normal",
+				layout_config = { horizontal = { height = 0.99 } },
+				git_command = { "git", "log", "--pretty=%h %s\t%cr" }, -- add commit time (%cr)
+			},
 			git_branches = {
 				prompt_prefix = " ",
 				show_remote_tracking_branches = true,
@@ -418,6 +424,7 @@ return {
 			{ "<leader>pc", function() telescope("colorscheme") end, desc = " Colorschemes" },
 			{ "<leader>gs", function() telescope("git_status") end, desc = " Status" },
 			{ "<leader>gl", function() telescope("git_commits") end, desc = " Log" },
+			{ "<leader>gL", function() telescope("git_bcommits") end, desc = " Buffer Commits" },
 			{ "<leader>gb", function() telescope("git_branches") end, desc = " Branches" },
 			{ "zl", function() telescope("spell_suggest") end, desc = "󰓆 Spell Suggest" },
 			{
