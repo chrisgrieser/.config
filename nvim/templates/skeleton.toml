@@ -1,0 +1,5 @@
+[files]
+extend-exclude = ["*filename"] # * due to conform.nvim temp file
+
+[default.extend-words]
+word = "word"

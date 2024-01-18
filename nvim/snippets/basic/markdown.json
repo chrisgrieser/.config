@@ -20,6 +20,10 @@
       "```"
     ]
   },
+  "Misc": {
+    "body": "Miscellaneous",
+    "prefix": "Misc"
+  },
   "caution (callout)": {
     "body": [
       "> [!CAUTION]",

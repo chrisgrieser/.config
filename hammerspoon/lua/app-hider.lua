@@ -108,12 +108,14 @@ end):start()
 
 -- prevent maximized window from covering sketchybar if they are unfocused
 M.wf_maxWindows = wf.new(true):subscribe(wf.windowUnfocused, function(win)
+	local app = win:application()
 	if
 		not (env.isProjector())
 		and wu.CheckSize(win, wu.maximized)
 		and not (u.isFront(config.dontTriggerHidingOtherApps))
+		and app
 	then
-		win:application():hide()
+		app:hide()
 	end
 end)
 

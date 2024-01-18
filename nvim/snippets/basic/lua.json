@@ -13,6 +13,13 @@
     "body": "---@type ${1:string}",
     "prefix": "@type (LuaDoc)"
   },
+  "continue": {
+    "body": [
+      "goto continue",
+      "::continue::"
+    ],
+    "prefix": "continue"
+  },
   "export module": {
     "body": [
       "local M = {}",

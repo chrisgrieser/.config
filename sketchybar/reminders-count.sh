@@ -8,6 +8,9 @@ if [[ "$SENDER" = "front_app_switched" ]]; then
 	[[ "$deactivated_app" != "GoodTask" ]] && return 0
 fi
 
+# wait for sync of reminders
+[[ "$SENDER" == "system_woke" ]] && sleep 5
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # https://leancrew.com/all-this/2017/08/my-jxa-problem/

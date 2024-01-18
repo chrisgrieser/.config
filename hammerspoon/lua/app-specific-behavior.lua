@@ -26,11 +26,8 @@ M.aw_spotify = aw.new(function(appName, eventType)
 		return
 	end
 
-	if eventType == aw.launched then
-		spotifyDo("pause")
-	elseif eventType == aw.terminated then
-		spotifyDo("play")
-	end
+	local action = eventType == aw.launched and "pause" or "play"
+	spotifyDo(action)
 end):start()
 
 --------------------------------------------------------------------------------
