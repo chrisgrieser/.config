@@ -151,10 +151,7 @@ for _, key in pairs(trailChars) do
 end
 
 -- MAKE
-keymap("n", "<leader>m", function()
-	vim.cmd("silent! update")
-	vim.cmd.lmake()
-end, { desc = " Make" })
+keymap("n", "<leader>m", "<cmd>silent update | lmake<CR>", { desc = " Make" })
 keymap(
 	"n",
 	"<leader>M",

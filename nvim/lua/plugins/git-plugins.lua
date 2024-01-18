@@ -24,28 +24,29 @@ return {
 			{ "<leader>g#", function() require("tinygit").openIssueUnderCursor() end, desc = " Open Issue under Cursor" },
 			-- stylua: ignore end
 		},
-		config = function()
-			require("tinygit").setup {
-				commitMsg = {
-					conventionalCommits = { enforce = true },
-					emptyFillIn = false,
-					spellcheck = true,
-					openReferencedIssue = true,
+		opts = {
+			commitMsg = {
+				conventionalCommits = { enforce = true },
+				emptyFillIn = false,
+				spellcheck = true,
+				openReferencedIssue = true,
+			},
+			historySearch = {
+				autoUnshallowIfNeeded = true,
+				diffPopup = {
+					width = 0.9,
+					height = 0.9,
+					border = vim.g.borderStyle,
 				},
-				historySearch = {
-					autoUnshallowIfNeeded = true,
-					diffPopup = {
-						width = 0.9,
-						height = 0.9,
-						border = vim.g.borderStyle,
-					},
-				},
-				blameStatusLine = {
-					hideAuthorNames = { "Chris Grieser", "pseudometa", "chrisgrieser" },
-					ignoreAuthors = { "🤖 automated" },
-					maxMsgLen = 72,
-				},
-			}
+			},
+			blameStatusLine = {
+				hideAuthorNames = { "Chris Grieser", "pseudometa", "chrisgrieser" },
+				ignoreAuthors = { "🤖 automated" },
+				maxMsgLen = 72,
+			},
+		},
+		config = function(_, opts)
+			require("tinygit").setup(opts)
 			u.addToLuaLine("winbar", "lualine_x", { require("tinygit.gitblame").statusLine })
 			u.addToLuaLine("inactive_winbar", "lualine_x", { require("tinygit.gitblame").statusLine })
 		end,
@@ -53,26 +54,19 @@ return {
 	{ -- git sign gutter & hunk actions
 		"lewis6991/gitsigns.nvim",
 		event = "VeryLazy",
-		cmd = "Gitsigns",
 		keys = {
-			{ "ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 Stage Hunk" },
-			{
-				"ga",
-				":Gitsigns stage_hunk<CR>",
-				mode = "x",
-				silent = true,
-				desc = "󰊢 Stage Selection",
-			},
-			{ "gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Add Buffer" },
-			{ "<leader>gv", "<cmd>Gitsigns toggle_deleted<CR>", desc = "󰊢 View Deletions Inline" },
-			{ "<leader>ua", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "󰊢 Unstage Last Stage" },
-			{ "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", desc = "󰊢 Reset Hunk" },
-			{ "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", desc = "󰊢 Reset Buffer" },
 			-- stylua: ignore start
+			{ "ga", function() require("gitsigns").stage_hunk() end, desc = "󰊢 Stage Hunk" },
+			{ "ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 Stage Selection" },
+			{ "gA", function() require("gitsigns").stage_buffer() end, desc = "󰊢 Add Buffer" },
+			{ "<leader>gv", function() require("gitsigns").toggle_deleted() end, desc = "󰊢 View Deletions Inline" },
+			{ "<leader>ua", function() require("gitsigns").undo_stage_hunk() end, desc = "󰊢 Unstage Last Stage" },
+			{ "<leader>uh", function() require("gitsigns").reset_hunk() end, desc = "󰊢 Reset Hunk" },
+			{ "<leader>ub", function() require("gitsigns").reset_buffer() end, desc = "󰊢 Reset Buffer" },
 			{ "<leader>g?", function() require("gitsigns").blame_line { full = true } end, desc = "󰊢 Blame Line"},
 			{ "gh", function() require("gitsigns").next_hunk { foldopen = true } end, desc = "󰊢 Next Hunk" },
 			{ "gH", function() require("gitsigns").prev_hunk { foldopen = true } end, desc = "󰊢 Previous Hunk" },
-			{ "gh", "<cmd>Gitsigns select_hunk<CR>", mode = { "o", "x" }, desc = "󱡔 󰊢 Hunk textobj" },
+			{ "gh", function() require("gitsigns").select_hunk() end, mode = { "o", "x" }, desc = "󱡔 󰊢 Hunk textobj" }, -- stylua: ignore end
 			-- stylua: ignore end
 		},
 		opts = {
@@ -87,5 +81,28 @@ return {
 				changedelete = { show_count = true },
 			},
 		},
+		config = function(_, opts)
+			require("gitsigns").setup(opts)
+
+			---HACK using replace-mode as a fake-git-mode since (simplified version of hydra.nvim)
+			---@param key string
+			---@param action function
+			local function gitModeMap(key, action)
+				-- needs to check for `R` in `mode()` since there is no `rmap`
+				vim.keymap.set("i", key, function()
+					if vim.fn.mode() ~= "R" then return key end
+					-- temporarily pause replace mode, since functions do not work here
+					vim.cmd.stopinsert() -- also stops replace mode
+					vim.defer_fn(action, 1)
+					vim.defer_fn(vim.cmd.startreplace, 2)
+				end, { expr = true })
+			end
+
+			gitModeMap("a", function() require("gitsigns").stage_hunk() end)
+			gitModeMap("A", function() require("gitsigns").undo_stage_hunk() end)
+			gitModeMap("u", function() require("gitsigns").reset_hunk() end)
+			gitModeMap("n", function() require("gitsigns").next_hunk { foldopen = true } end)
+			gitModeMap("N", function() require("gitsigns").prev_hunk { foldopen = true } end)
+		end,
 	},
 }
