@@ -22,9 +22,12 @@ while true; do
 		return 1
 	fi
 done
-print "\033[1;34mBacking up to $VOLUME_NAME…\033[0m"
+print "\033[1;34mBackup Volume: $VOLUME_NAME\033[0m"
 
-# determine backup destination
+#───────────────────────────────────────────────────────────────────────────────
+# DETERMINE BACKUP DESTINATION
+
+# determine backup folder at destination
 DEVICE_NAME="$(scutil --get ComputerName)"
 BACKUP_DEST="$VOLUME_NAME/Backup_$DEVICE_NAME"
 mkdir -p "$BACKUP_DEST"
@@ -34,17 +37,16 @@ cd "$BACKUP_DEST" || return 1
 echo -n "Backup: $(date '+%Y-%m-%d %H:%M'), $VOLUME_NAME -- " >>"$LOG_LOCATION"
 
 #───────────────────────────────────────────────────────────────────────────────
+# HELPER FUNCTION
 
-# Helper function
 errors="" # accumulator for errors
 function backup() {
 	local bkp_from="$1"
 	local bkp_to="$2"
 	[[ ! -d "$bkp_from" ]] && errors="$errors\n$bkp_from does not exist."
 	echo
-	print "\033[1;34m─────────────────────────────────────────────────────────────────────────────"
-	echo "Backing up: $bkp_from"
-	print "─────────────────────────────────────────────────────────────────────────────\033[0m"
+	print "\e[1;38;5;247m─────────────────────────────────────────────────────────────────────────────"
+	print "\e[1;34mBacking up: $bkp_from\e[0m"
 	mkdir -p "$bkp_to"
 	# --delete-during the fastest deletion method, --archive already implies --recursive
 	rsync --archive --delete-during --progress --human-readable \
@@ -67,15 +69,26 @@ backup "$HOME/RomComs/" ./Homefolder/RomComs
 backup "$HOME/Library/Mobile Documents/com~apple~CloudDocs/" ./iCloud-Folder
 
 #───────────────────────────────────────────────────────────────────────────────
+# BACKUP COMPLETED MESSAGE
+
 echo
 print "\033[1;34m─────────────────────────────────────────────────────────────────────────────\033[0m"
 echo
-[[ -n "$errors" ]] && print "\033[1;31m$errors\033[0m"
+if [[ -z "$errors" ]] ; then
+	print "\033[1;32mBackup on $VOLUME_NAME completed.\033[0m"
+else
+	print "\033[1;31m$errors\033[0m"
+fi
 
-# Log (on Mac)
+osascript -e 'display notification "" with title "Backup finished." sound name "Blow"'
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# LOG BACKUP ACTIVITY
+# on Mac
 echo "completed: $(date '+%H:%M')" >>"$LOG_LOCATION"
 
-# Log (at Backup Destination)
+# at Backup Destination
 echo "Backup: $(date '+%Y-%m-%d %H:%M')" >>last_backup.log
 
 # Reminder for Next Backup in 14 days (idempotent, due to multiple backup disks)
@@ -92,8 +105,3 @@ osascript -e '
 	end tell 
 	count of backupReminders
 ' &>/dev/null
-
-# Notify on Completion
-osascript -e 'display notification "" with title "Backup finished." sound name "Blow"'
-
-#───────────────────────────────────────────────────────────────────────────────
