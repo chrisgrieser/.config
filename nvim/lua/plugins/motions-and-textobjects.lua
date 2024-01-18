@@ -176,6 +176,7 @@ return {
 			{ "a.", "<cmd>lua require('various-textobjs').chainMember('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer indent" },
 
 			{ "u", "<cmd>lua require('various-textobjs').multiCommentedLines()<CR>", mode = "o", desc = "󱡔 multi-line-comment" },
+			{ "guu", "guu" }, -- do not use `u` as textobject when using `guu`
 
 			-- python
 			{ "iy", "<cmd>lua require('various-textobjs').pyTripleQuotes('inner')<CR>", ft = "python", mode = { "x", "o" }, desc = "󱡔 inner tripleQuotes" },
@@ -248,24 +249,10 @@ return {
 				function()
 					require("various-textobjs").url()
 					local foundURL = vim.fn.mode():find("v")
-					if foundURL then
-						u.normal('"zy')
-						local url = vim.fn.getreg("z")
-						vim.fn.system { "open", url }
-					else
-						-- select from all URLs in buffer. Simplified version of urlview.nvim
-						local urlPattern = require("various-textobjs.charwise-textobjs").urlPattern
-						local bufText = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n")
-						local urls = {}
-						for url in bufText:gmatch(urlPattern) do
-							table.insert(urls, url)
-						end
-						if #urls == 0 then return end
-
-						vim.ui.select(urls, { prompt = "Select URL:" }, function(choice)
-							if choice then vim.fn.system { "open", choice } end
-						end)
-					end
+					if not foundURL then return end
+					u.normal('"zy')
+					local url = vim.fn.getreg("z")
+					vim.fn.system { "open", url }
 				end,
 				desc = "󰌹 Smart URL Opener",
 			},

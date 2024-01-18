@@ -246,11 +246,10 @@ return {
 			},
 		},
 		config = function(_, opts)
-			local wk = require("which-key")
-			wk.setup(opts)
+			require("which-key").setup(opts)
 
 			-- leader prefixes normal mode
-			wk.register({
+			require("which-key").register({
 				u = { name = " 󰕌 Undo" },
 				o = { name = "  Options" },
 				p = { name = " 󰏗 Packages" },
@@ -259,13 +258,13 @@ return {
 			}, { prefix = "<leader>" })
 
 			-- leader prefixes normal+visual mode
-			wk.register({
+			require("which-key").register({
 				f = { name = " 󱗘 Refactor" },
 				g = { name = " 󰊢 Git" },
 			}, { prefix = "<leader>", mode = { "x", "n" } })
 
 			-- needed so localleader prefixes work with whichkey
-			wk.register {
+			require("which-key").register {
 				["<localleader>"] = { name = "filetype-specific", mode = { "n", "x" } },
 			}
 

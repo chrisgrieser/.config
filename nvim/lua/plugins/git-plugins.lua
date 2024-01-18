@@ -55,9 +55,9 @@ return {
 		"lewis6991/gitsigns.nvim",
 		event = "VeryLazy",
 		keys = {
+			{ "ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 Stage Hunk" },
+			{ "ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 Stage Sel" },
 			-- stylua: ignore start
-			{ "ga", function() require("gitsigns").stage_hunk() end, desc = "󰊢 Stage Hunk" },
-			{ "ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 Stage Selection" },
 			{ "gA", function() require("gitsigns").stage_buffer() end, desc = "󰊢 Add Buffer" },
 			{ "<leader>gv", function() require("gitsigns").toggle_deleted() end, desc = "󰊢 View Deletions Inline" },
 			{ "<leader>ua", function() require("gitsigns").undo_stage_hunk() end, desc = "󰊢 Unstage Last Stage" },

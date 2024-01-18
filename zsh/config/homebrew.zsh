@@ -17,6 +17,7 @@ alias bl='brew list'
 alias bi='brew install'
 alias br='brew reinstall'
 alias bu='brew uninstall --zap'
+alias depending_on='brew uses --installed --recursive'
 
 #───────────────────────────────────────────────────────────────────────────────
 
