@@ -1,17 +1,11 @@
 #!/usr/bin/env osascript -l JavaScript
 
-//──────────────────────────────────────────────────────────────────────────────
-
 // JXA & Alfred specific
 ObjC.import("stdlib");
-ObjC.import("Foundation");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
-/**
- * @param {string} text
- * @param {string} absPath
- */
+/** @param {string} text @param {string} absPath */
 function appendToFile(text, absPath) {
 	const clean = text.replaceAll("'", "`"); // ' in text string breaks echo writing method
 	app.doShellScript(`echo '${clean}' >> '${absPath}'`); // use single quotes to prevent running of input such as "$(rm -rf /)"
@@ -212,16 +206,15 @@ function json2bibtex(entryJson, citekey) {
 		let value = entryJson[key];
 		if (!value) continue; // missing value
 		if (typeof value === "string") {
-			// escape bibtex values, but do not double-enclose the author key, since
-			// it results in the author key being interpreted literal author name
-			value = "{" + value + "}";
-			if (value.match(/[A-Z]/) && key !== "author") value = "{" + value + "}";
+			// double-escape bibtex values to preserve capitalization, but not
+			// author key, since it results in the author key being interpreted as
+			// literal author name
+			const hasCapitalLetter = value.match(/[A-Z]/);
+			value = (hasCapitalLetter && key !== "author") ? `{${value}}` : `{{${value}}}`;
 		}
 		propertyLines.push(`\t${key} = ${value},`);
 	}
 	propertyLines.sort(); // sorts alphabetically by key
-	// remove comma from last entry
-	propertyLines[propertyLines.length - 1] = propertyLines[propertyLines.length - 1].slice(0, -1);
 	const newEntryAsBibTex = [firstLine, keywordsLine, ...propertyLines, lastLine].join("\n");
 	return newEntryAsBibTex;
 }

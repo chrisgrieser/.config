@@ -52,10 +52,10 @@ local conformOpts = {
 		["bibtex-tidy"] = {
 			-- stylua: ignore
 			prepend_args = {
-				"--tab", "--curly", "--no-align", "--no-wrap", "--no-escape",
-				"--enclosing-braces=title,journal,booktitle", "--drop-all-caps",
-				 "--encode-urls", "--numeric", "--trailing-commas",
-				"--duplicates", "--sort-fields", "--remove-empty-fields", "--omit=month,issn,abstract",
+				"--tab", "--curly", "--no-align", "--no-wrap", "--drop-all-caps", 
+				"--numeric", "--trailing-commas",
+				"--duplicates", "--sort-fields", "--remove-empty-fields", 
+				"--omit=month,issn,abstract",
 			},
 		},
 	},
