@@ -28,12 +28,12 @@ local function safeRequire(module)
 	if not success then
 		local msg = ("Error loading %s\n%s"):format(module, errMsg)
 		-- defer so notification plugins are loaded before
-		vim.defer_fn(function() vim.notify(msg, vim.log.levels.ERROR) end, 1)
+		vim.defer_fn(function() vim.notify(msg, vim.log.levels.ERROR) end, 1000)
 	end
 end
 
 safeRequire("config.lazy")
-safeRequire("config.neovide-settings")
+safeRequire("config.neovide-gui-settings")
 safeRequire("config.theme-customization")
 safeRequire("config.options-and-autocmds")
 
