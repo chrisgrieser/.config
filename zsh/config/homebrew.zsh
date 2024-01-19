@@ -66,6 +66,8 @@ function update() {
 }
 
 function listall() {
+	_print-section "brew info"
+	brew info
 	_print-section "brew taps"
 	brew tap
 	_print-section "brew leaves"
