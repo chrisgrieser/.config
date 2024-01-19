@@ -146,15 +146,8 @@ keymap("n", "qw", function() require("funcs.comment").commentHr() end, { desc = 
 keymap("n", "wq", function() require("funcs.comment").duplicateLineAsComment() end, { desc = " Duplicate Line as Comment" })
 keymap("n", "qn", function() require("funcs.comment").insertDoublePercentCom() end, { desc = " Insert %% Comment" })
 keymap("n", "dN", function() require("funcs.comment").removeDoublePercentComs() end, { desc = " Remove %% Comments" })
+keymap("n", "qf", function() require("funcs.comment").docstring() end, { desc = " Function Docstring" })
 -- stylua: ignore end
-
--- DocString
-keymap(
-	"n",
-	"qf",
-	function() require("funcs.nano-plugins").docstring() end,
-	{ desc = " Function Docstring" }
-)
 
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
@@ -244,11 +237,11 @@ local cursorPreYank
 keymap({ "n", "x" }, "y", function()
 	cursorPreYank = vim.api.nvim_win_get_cursor(0)
 	return "y"
-end, { desc = "󰅍 Sticky yank", expr = true })
+end, { desc = "󰅍 Sticky Yank", expr = true })
 keymap("n", "Y", function()
 	cursorPreYank = vim.api.nvim_win_get_cursor(0)
 	return "y$"
-end, { desc = "󰅍 Sticky yank", expr = true, unique = false })
+end, { desc = "󰅍 Sticky Yank", expr = true, unique = false })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()

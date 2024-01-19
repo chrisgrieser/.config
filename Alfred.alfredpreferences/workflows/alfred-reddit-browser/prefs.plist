@@ -9,7 +9,7 @@
 	<key>custom_subreddit_icons</key>
 	<string>~/.config/Alfred.alfredpreferences/subreddit_icons</string>
 	<key>hackernews_frontend_url</key>
-	<string>https://www.hckrnws.com/stories/</string>
+	<string>https://dstill.ai/hackernews/item/</string>
 	<key>hide_stickied</key>
 	<true/>
 	<key>min_upvotes</key>

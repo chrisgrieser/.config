@@ -302,25 +302,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{var:selected}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>F9A997A6-3B0F-4810-BBDC-F039EF142A5E</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -373,27 +354,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{var:selected}</string>
-				<key>title</key>
-				<string>✅ Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>09B69D71-EC20-46C1-835E-5F7AC6DCFBDF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>acceptsfiles</key>
 				<false/>
 				<key>acceptsmulti</key>
@@ -409,6 +369,46 @@
 			<string>alfred.workflow.trigger.universalaction</string>
 			<key>uid</key>
 			<string>B64C69B3-7302-462C-881C-17EAA8A63214</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{var:selected}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>F9A997A6-3B0F-4810-BBDC-F039EF142A5E</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{var:selected}</string>
+				<key>title</key>
+				<string>✅ Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>09B69D71-EC20-46C1-835E-5F7AC6DCFBDF</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -585,21 +585,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>tasksettings</key>
-				<dict/>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/macOS/app.current</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>7C373ABF-2DA6-4ABC-B9B9-88EC0F0A01E7</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -623,21 +608,15 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
-				<true/>
-				<key>name</key>
-				<string>Encode URL</string>
+				<key>tasksettings</key>
+				<dict/>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/macOS/app.current</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
+			<string>alfred.workflow.automation.task</string>
 			<key>uid</key>
-			<string>64CBE3CE-C747-46CB-8D59-78A5B788E7D5</string>
+			<string>7C373ABF-2DA6-4ABC-B9B9-88EC0F0A01E7</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -667,10 +646,23 @@
 			<integer>2</integer>
 		</dict>
 		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<true/>
+				<key>name</key>
+				<string>Encode URL</string>
+			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
+			<string>alfred.workflow.trigger.universalaction</string>
 			<key>uid</key>
-			<string>D60A0ABA-E10A-4B8D-8363-BC2DCA228200</string>
+			<string>64CBE3CE-C747-46CB-8D59-78A5B788E7D5</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -696,6 +688,35 @@
 			<integer>2</integer>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>D60A0ABA-E10A-4B8D-8363-BC2DCA228200</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<true/>
+				<key>name</key>
+				<string>Decode URL</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>ACEFCAB6-39BB-471F-BAC1-324B1B72BC1C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
 				<key>concurrently</key>
@@ -719,27 +740,6 @@
 			<string>3D363FE9-8085-4930-B367-E0EFC46EB62E</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
-				<true/>
-				<key>name</key>
-				<string>Decode URL</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>ACEFCAB6-39BB-471F-BAC1-324B1B72BC1C</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -856,7 +856,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>305</real>
 			<key>ypos</key>
-			<real>405</real>
+			<real>245</real>
 		</dict>
 		<key>06EAC267-0AB1-438B-8BAC-D258752286BB</key>
 		<dict>
@@ -865,7 +865,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>560</real>
 			<key>ypos</key>
-			<real>680</real>
+			<real>520</real>
 		</dict>
 		<key>09B69D71-EC20-46C1-835E-5F7AC6DCFBDF</key>
 		<dict>
@@ -883,7 +883,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>375</real>
+			<real>215</real>
 		</dict>
 		<key>1F032CD4-31A5-47D1-ACE7-4BA1694F8570</key>
 		<dict>
@@ -903,7 +903,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>735</real>
+			<real>575</real>
 		</dict>
 		<key>2B038DCA-913D-4FDE-8197-A1F469016950</key>
 		<dict>
@@ -921,7 +921,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>610</real>
+			<real>450</real>
 		</dict>
 		<key>47024990-837B-4095-9F25-9905FDB9E7BB</key>
 		<dict>
@@ -932,7 +932,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>405</real>
+			<real>245</real>
 		</dict>
 		<key>59EA681A-3183-4B9D-9A93-32C8131AC999</key>
 		<dict>
@@ -943,7 +943,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>660</real>
 			<key>ypos</key>
-			<real>650</real>
+			<real>490</real>
 		</dict>
 		<key>64CBE3CE-C747-46CB-8D59-78A5B788E7D5</key>
 		<dict>
@@ -952,7 +952,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>495</real>
+			<real>335</real>
 		</dict>
 		<key>74FC629B-C07E-49AC-9A18-82A5844CC79F</key>
 		<dict>
@@ -961,18 +961,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>495</real>
+			<real>335</real>
 		</dict>
 		<key>7C373ABF-2DA6-4ABC-B9B9-88EC0F0A01E7</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>FIX Alfred loosing focus on when using universal actions</string>
+			<string>FIX Alfred loosing focus on when using universal actions with Compatibility mode</string>
 			<key>xpos</key>
 			<real>535</real>
 			<key>ypos</key>
-			<real>450</real>
+			<real>290</real>
 		</dict>
 		<key>86B56DB2-6454-4FCF-837F-1FBDF47108D0</key>
 		<dict>
@@ -1001,7 +1001,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>735</real>
+			<real>575</real>
 		</dict>
 		<key>ACEFCAB6-39BB-471F-BAC1-324B1B72BC1C</key>
 		<dict>
@@ -1010,7 +1010,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>610</real>
+			<real>450</real>
 		</dict>
 		<key>B259D744-0386-43A6-9407-025B46325EF5</key>
 		<dict>
@@ -1021,7 +1021,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>680</real>
 			<key>ypos</key>
-			<real>450</real>
+			<real>290</real>
 		</dict>
 		<key>B64C69B3-7302-462C-881C-17EAA8A63214</key>
 		<dict>
@@ -1050,7 +1050,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>455</real>
 			<key>ypos</key>
-			<real>575</real>
+			<real>415</real>
 		</dict>
 		<key>DA29F8C2-B81A-4569-A119-43832B08EFD7</key>
 		<dict>
@@ -1072,7 +1072,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>345</real>
 			<key>ypos</key>
-			<real>575</real>
+			<real>415</real>
 		</dict>
 		<key>F9A997A6-3B0F-4810-BBDC-F039EF142A5E</key>
 		<dict>
