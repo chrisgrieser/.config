@@ -72,36 +72,35 @@ end
 --------------------------------------------------------------------------------
 -- very simplified version of harpoon.nvim / other.nvim
 function M.gotoAnchorFile()
-	local anchorFiles = {
-		{ "init.lua", "main.py", "main.ts" },
-		{ "README.md" },
+	local anchorFiles = { -- CONFIG
+		"init.lua",
+		"nano-plugins.lua",
+		"main.py",
+		"main.ts",
+		"README.md",
 	}
+	-----------------------------------------------------------------------------
 
-	-- determine if currently on an anchorfile
-	local filename = vim.fs.basename(vim.api.nvim_buf_get_name(0))
-	local idx = 0
-	for i = 1, #anchorFiles do
-		if vim.tbl_contains(anchorFiles[i], filename) then
-			idx = i
-			break
+	local currentFile = vim.fs.basename(vim.api.nvim_buf_get_name(0))
+
+	-- reorder list of anchorsFiles so that currentFile is first
+	if vim.tbl_contains(anchorFiles, currentFile) then
+		local front = {}
+		local back = {}
+		local anchorFound = false
+		for _, anchorFile in ipairs(front) do
+			if anchorFile == currentFile then
+				anchorFound = true
+			else
+				local whereToInsert = anchorFound and front or back
+				table.insert(whereToInsert, anchorFile)
+			end
 		end
+		anchorFiles = vim.list_extend(front, back)
+		vim.notify("👽 anchorFiles: " .. vim.inspect(anchorFiles))
 	end
-	local startIdx = idx
 
-	-- find next anchorfile, skipping lists if they are not found in cwd
-	local foundFile, checkedAllLists
-	local listsChecked = 0
-	repeat
-		idx = math.fmod(idx, #anchorFiles) + 1
-		if idx == startIdx then break end
-		foundFile = vim.fs.find(anchorFiles[idx], { type = "file" })[1]
-		if foundFile then
-			vim.cmd.edit(foundFile)
-			return
-		end
-		listsChecked = listsChecked + 1
-		checkedAllLists = listsChecked == #anchorFiles
-	until foundFile or checkedAllLists
+	local foundFile = vim.fs.find(anchorFiles, { type = "file" })[1]
 
 	if foundFile then
 		vim.cmd.edit(foundFile)
@@ -111,56 +110,6 @@ function M.gotoAnchorFile()
 end
 
 --------------------------------------------------------------------------------
-
--- simplified yank history
-function M.pasteFromNumberReg()
-	local regs = {}
-	for i = 0, 9 do
-		table.insert(regs, { number = i, content = vim.fn.getreg(i) })
-	end
-	local pickers = require("telescope.pickers")
-	local telescopeConf = require("telescope.config").values
-	local actionState = require("telescope.actions.state")
-	local actions = require("telescope.actions")
-	local finders = require("telescope.finders")
-	local previewers = require("telescope.previewers")
-	local currentFt = vim.bo.filetype
-
-	pickers
-		.new({}, {
-			prompt_title = "󰅍 Select Register",
-			sorter = telescopeConf.generic_sorter {},
-			finder = finders.new_table {
-				results = regs,
-				entry_maker = function(reg)
-					local firstLine = vim.split(reg.content, "\n")[1]
-					local trimmed = vim.trim(firstLine):sub(1, 40)
-					local display = reg.number .. ". " .. trimmed
-					return { value = reg, ordinal = reg.content, display = display }
-				end,
-			},
-
-			previewer = previewers.new_buffer_previewer {
-				define_preview = function(self, entry)
-					local regContent = entry.value.content
-					local lines = vim.split(regContent, "\n")
-					local bufnr = self.state.bufnr
-					vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
-					vim.api.nvim_buf_set_option(bufnr, "filetype", currentFt)
-				end,
-			},
-
-			attach_mappings = function(prompt_bufnr, _)
-				actions.select_default:replace(function()
-					local reg = actionState.get_selected_entry().value.number
-					actions.close(prompt_bufnr)
-					normal('"' .. reg .. "p")
-				end)
-				return true
-			end,
-		})
-		:find()
-end
 
 function M.openAlfredPref()
 	local parentFolder = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
