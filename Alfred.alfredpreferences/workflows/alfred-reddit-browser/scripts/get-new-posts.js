@@ -4,13 +4,13 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
 function getSettings() {
-	const minUpvotesSetting = parseInt($.getenv("min_upvotes")) ?? 0;
+	const minUpvotesSetting = Number.parseInt($.getenv("min_upvotes")) || 0;
 	return {
 		minUpvotes: Math.max(minUpvotesSetting, 0), // minimum of 0
 		useOldReddit: $.getenv("use_old_reddit") === "1" ? "old" : "www",
 		hnFrontendUrl: $.getenv("hackernews_frontend_url"),
-		iconFolder: $.getenv("custom_subreddit_icons") ?? $.getenv("alfred_workflow_data"),
-		sortType: $.getenv("sort_type") ?? "hot",
+		iconFolder: $.getenv("custom_subreddit_icons") || $.getenv("alfred_workflow_data"),
+		sortType: $.getenv("sort_type") || "hot",
 		hideStickied: $.getenv("hide_stickied") === "1",
 	};
 }

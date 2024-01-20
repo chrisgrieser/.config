@@ -43,7 +43,7 @@ function ensureCacheFolderExists() {
  * @param {string} iconPath
  * @param {string} subredditName
  */
-function cacheSubredditIcon(iconPath, subredditName) {
+function cacheAndReturnSubIcon(iconPath, subredditName) {
 	// HACK reddit API does not like curl (lol)
 	const redditApiCall = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/about.json"`;
 	const subredditInfo = JSON.parse(app.doShellScript(redditApiCall));
@@ -63,7 +63,7 @@ function cacheSubredditIcon(iconPath, subredditName) {
 }
 
 /** @param {string} subredditName */
-function cacheSubscriberCount(subredditName) {
+function cacheAndReturnSubCount(subredditName) {
 	const redditApiCall = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/about.json"`;
 	const subredditInfo = JSON.parse(app.doShellScript(redditApiCall));
 	if (subredditInfo.error) {
@@ -72,12 +72,17 @@ function cacheSubscriberCount(subredditName) {
 	}
 
 	ensureCacheFolderExists();
-	const subscriberCount = subredditInfo.data.subscribers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+	const subscriberCount = subredditInfo.data.subscribers
+		.toString()
+		.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 	const subscriberData = JSON.parse(
 		readFile($.getenv("alfred_workflow_cache") + "/subscriberCount.json") || "{}",
 	);
 	subscriberData[subredditName] = subscriberCount;
-	writeToFile(`${$.getenv("alfred_workflow_cache")}/subscriberCount.json`, JSON.stringify(subscriberData));
+	writeToFile(
+		`${$.getenv("alfred_workflow_cache")}/subscriberCount.json`,
+		JSON.stringify(subscriberData),
+	);
 	return subscriberCount; // = no error
 }
 
@@ -89,47 +94,42 @@ function run() {
 	const subredditConfig = $.getenv("subreddits");
 
 	// GUARD misconfiguration
-	if (subredditConfig) {
-
+	if (subredditConfig.match(/^r\//m)) {
+		const msg = "Config error: subreddit names must not start with 'r/'";
+		return JSON.stringify({ items: [{ title: msg, valid: false }] });
 	}
 
+	//───────────────────────────────────────────────────────────────────────────
 
-	const subreddits = subredditConfig
-		.split("\n")
-		.map((subredditName) => {
-			let subtitle = "";
+	const subreddits = subredditConfig.split("\n").map((subredditName) => {
+		let subtitle = "";
 
-			// cache subreddit image
-			let iconPath = `${iconFolder}/${subredditName}.png`;
-			if (!fileExists(iconPath)) {
-				const success = cacheSubredditIcon(iconPath, subredditName);
+		// cache subreddit image
+		let iconPath = `${iconFolder}/${subredditName}.png`;
+		if (!fileExists(iconPath)) {
+			const success = cacheAndReturnSubIcon(iconPath, subredditName);
+			if (!fileExists(iconPath)) iconPath = "icon.png"; // if icon cannot be cached, use default
+			if (!success) subtitle += "⚠️ subreddit icon error ";
+		}
 
-				// if icon cannot be cached, use default icon
-				if (!fileExists(iconPath)) iconPath = "icon.png";
+		// subscriber count
+		const subscriberData = JSON.parse(
+			readFile($.getenv("alfred_workflow_cache") + "/subscriberCount.json") || "{}",
+		);
+		const subscriberCount =
+			subscriberData[subredditName] || cacheAndReturnSubCount(subredditName);
+		if (!subscriberCount) subtitle += "⚠️ subscriber count error ";
+		subtitle += `👥 ${subscriberCount}`;
 
-				if (!success) subtitle = "⚠️ error or subreddit not found (see debugging log) ";
-			}
-
-			// subscriber count
-			const subscriberData = JSON.parse(
-				readFile($.getenv("alfred_workflow_cache") + "/subscriberCount.json") || "{}",
-			);
-			let subscriberCount = subscriberData[subredditName];
-			if (!subscriberCount) {
-				subscriberCount = cacheSubscriberCount(subredditName);
-				if (!subscriberCount) subtitle = "⚠️ error or subreddit not found (see debugging log) ";
-			} 
-			subtitle += `👥 ${subscriberCount}`;
-
-			/** @type AlfredItem */
-			const alfredItem = {
-				title: `r/${subredditName}`,
-				subtitle: subtitle,
-				arg: subredditName,
-				icon: { path: iconPath },
-			};
-			return alfredItem;
-		});
+		/** @type AlfredItem */
+		const alfredItem = {
+			title: `r/${subredditName}`,
+			subtitle: subtitle,
+			arg: subredditName,
+			icon: { path: iconPath },
+		};
+		return alfredItem;
+	});
 
 	// add hackernews as pseudo-subreddit
 	const addHackernews = $.getenv("add_hackernews") === "1";
