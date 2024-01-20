@@ -74,7 +74,7 @@ end
 function M.gotoAnchorFile()
 	local anchorFiles = { -- CONFIG
 		"init.lua",
-		"nano-plugins.lua",
+		"utils.lua",
 		"main.py",
 		"main.ts",
 		"README.md",
@@ -83,12 +83,13 @@ function M.gotoAnchorFile()
 
 	local currentFile = vim.fs.basename(vim.api.nvim_buf_get_name(0))
 
-	-- reorder list of anchorsFiles so that currentFile is first
+	-- Reorder list of anchorsFiles so anchors after the current anchor come
+	-- first. Also filters the current file from the list.
 	if vim.tbl_contains(anchorFiles, currentFile) then
 		local front = {}
 		local back = {}
 		local anchorFound = false
-		for _, anchorFile in ipairs(front) do
+		for _, anchorFile in ipairs(anchorFiles) do
 			if anchorFile == currentFile then
 				anchorFound = true
 			else
@@ -97,16 +98,19 @@ function M.gotoAnchorFile()
 			end
 		end
 		anchorFiles = vim.list_extend(front, back)
-		vim.notify("👽 anchorFiles: " .. vim.inspect(anchorFiles))
 	end
 
-	local foundFile = vim.fs.find(anchorFiles, { type = "file" })[1]
-
-	if foundFile then
-		vim.cmd.edit(foundFile)
-	else
-		notify("Goto Anchor File", "No next anchor file found.", "info")
+	-- search for anchor files in cwd, open the first which appears in anchorFileList
+	local anchorFilesInCwd = vim.fs.find(anchorFiles, { type = "file", limit = math.huge })
+	for _, anchor in ipairs(anchorFiles or {}) do
+		for _, cwdAnchor in ipairs(anchorFilesInCwd) do
+			if vim.fs.basename(cwdAnchor) == anchor then
+				vim.cmd.edit(cwdAnchor)
+				return
+			end
+		end
 	end
+	notify("", "No next anchor file found.", "info")
 end
 
 --------------------------------------------------------------------------------
