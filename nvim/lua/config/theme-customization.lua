@@ -49,7 +49,9 @@ local function customHighlights()
 	end
 
 	-- PENDING themes updating support https://www.reddit.com/r/neovim/comments/19aratu/comment/kimudud/?context=3
-	local hasNoUpdatedTreesitterHls = vim.tbl_isempty(vim.api.nvim_get_hl(0, { name = "@comment.todo" }))
+	linkHl("@comment.note", "@comment.hint")
+	local hasNoUpdatedTreesitterHls =
+		vim.tbl_isempty(vim.api.nvim_get_hl(0, { name = "@comment.todo" }))
 	if hasNoUpdatedTreesitterHls then
 		linkHl("@comment.error", "@text.danger")
 		linkHl("@comment.warning", "@text.warning")
@@ -71,17 +73,16 @@ local function themeModifications()
 
 	if theme == "tokyonight" then
 		local statuslineYellow = mode == "dark" and "#b8b042" or "#e8e05e"
-		vim.defer_fn(function()
-			for _, vimMode in pairs(vimModes) do
-				updateHl("lualine_y_diff_modified_" .. vimMode, "guifg=" .. statuslineYellow)
-				updateHl("lualine_y_diff_added_" .. vimMode, "guifg=#369a96")
-				updateHl("lualine_a_" .. vimMode, "gui=bold")
-			end
-		end, 100)
+		for _, vimMode in pairs(vimModes) do
+			updateHl("lualine_y_diff_modified_" .. vimMode, "guifg=" .. statuslineYellow)
+			updateHl("lualine_y_diff_added_" .. vimMode, "guifg=#369a96")
+		end
 		updateHl("GitSignsChange", "guifg=#acaa62")
 		updateHl("GitSignsAdd", "guifg=#369a96")
-		linkHl("@comment.note", "@comment.hint")
+
 		for _, type in pairs(todoComments) do
+			local fg = u.getHighlightValue("@comment." .. type, "fg")
+			if fg ~= "#000000" then overwriteHl("@comment." .. type, { bg = fg, fg = "#000000" }) end
 		end
 	elseif theme == "monet" then
 		overwriteHl("NonText", { fg = "#717ca7" }) -- more distinguishable from comments
