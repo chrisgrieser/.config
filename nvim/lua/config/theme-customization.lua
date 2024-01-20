@@ -47,6 +47,16 @@ local function customHighlights()
 	for _, type in pairs { "Bad", "Cap", "Rare", "Local" } do
 		updateHl("Spell" .. type, "gui=underdotted cterm=underline")
 	end
+
+	-- PENDING themes updating support
+	-- https://github.com/nvim-treesitter/nvim-treesitter/commit/1ae9b0e4558fe7868f8cda2db65239cfb14836d0
+	linkHl("@comment.error", "@text.danger")
+	linkHl("@comment.warning", "@text.warning")
+	linkHl("@comment.info", "@text.note")
+	linkHl("@comment.hint", "@text.note")
+	linkHl("@comment.todo", "@text.todo")
+	linkHl("@markup.link.url", "@text.uri")
+	linkHl("@variable.parameter", "@parameter")
 end
 
 local function themeModifications()
@@ -91,11 +101,11 @@ local function themeModifications()
 		linkHl("@type.builtin.python", "Typedef")
 		linkHl("@string.documentation.python", "Typedef")
 		linkHl("@keyword.operator.python", "Operator")
-	elseif theme == "gruvbox-material" or theme == "sonokai"then
+	elseif theme == "gruvbox-material" or theme == "sonokai" then
 		local commentColor = u.getHighlightValue("Comment", "fg")
 		updateHl("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
 		overwriteHl("TSParameter", { fg = "#6f92b3" })
-	elseif theme == "everforest"  then
+	elseif theme == "everforest" then
 		overwriteHl("Red", { fg = "#ce7d7c" })
 		overwriteHl("IblIndent", { fg = "#d2cdad" })
 		overwriteHl("NonText", { fg = "#c7c199" })

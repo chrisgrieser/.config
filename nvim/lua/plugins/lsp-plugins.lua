@@ -39,7 +39,7 @@ return {
 		opts = {
 			noice = true, -- render via noice.nvim
 			hint_prefix = "󰏪 ",
-			hint_scheme = "@parameter", -- highlight group
+			hint_scheme = "@variable.parameter", -- highlight group
 			hint_inline = function() return vim.lsp.inlay_hint ~= nil end,
 			floating_window = false,
 			always_trigger = true,

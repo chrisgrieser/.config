@@ -87,107 +87,64 @@ end
 --------------------------------------------------------------------------------
 -- filetype-specific multiply-transformations
 
-local multiplyFuncs = {}
-
----@param lines string[]
----@return string[]
-function multiplyFuncs.css(lines)
-	if #lines ~= 1 then return lines end
-	local line = lines[1]
-
-	if line:find("top:") then
-		line = line:gsub("top:", "bottom:")
-	elseif line:find("bottom:") then
-		line = line:gsub("bottom:", "top:")
+---@param ft string
+---@param line string
+---@return string
+local function lineTransform(ft, line)
+	if ft == "css" then
+		if line:find("top:") then
+			line = line:gsub("top:", "bottom:")
+		elseif line:find("bottom:") then
+			line = line:gsub("bottom:", "top:")
+		end
+		if line:find("right:") then
+			line = line:gsub("right:", "left:")
+		elseif line:find("left:") then
+			line = line:gsub("left:", "right:")
+		end
+		if line:find("dark:") then
+			line = line:gsub("dark:", "light:")
+		elseif line:find("light:") then
+			line = line:gsub("light:", "dark:")
+		end
+		-- %s condition to avoid matching line-height, border-width, etc
+		if line:find("%sheight:") then
+			line = line:gsub("height:", "width:")
+		elseif line:find("%swidth:") then
+			line = line:gsub("width:", "height:")
+		end
+		if line:find("margin:") then
+			line = line:gsub("margin:", "padding:")
+		elseif line:find("padding:") then
+			line = line:gsub("padding:", "margin:")
+		end
+	elseif ft == "javascript" or ft == "typescript" then
+		if line:find("^%s*if.+{$") then line = line:gsub("^(%s*)if", "%1} else if") end
+	elseif ft == "lua" then
+		if line:find("^%s*if.+then%s*$") then line = line:gsub("^(%s*)if", "%1elseif") end
+	elseif ft == "sh" then
+		if line:find("^%s*if.+then$") then line = line:gsub("^(%s*)if", "%1elif") end
+	elseif ft == "python" then
+		if line:find("^%s*if.+:$") then line = line:gsub("^(%s*)if", "%1elif") end
 	end
-	if line:find("right:") then
-		line = line:gsub("right:", "left:")
-	elseif line:find("left:") then
-		line = line:gsub("left:", "right:")
-	end
-	if line:find("dark:") then
-		line = line:gsub("dark:", "light:")
-	elseif line:find("light:") then
-		line = line:gsub("light:", "dark:")
-	end
-	-- %s condition to avoid matching line-height, border-width, etc
-	if line:find("%sheight:") then
-		line = line:gsub("height:", "width:")
-	elseif line:find("%swidth:") then
-		line = line:gsub("width:", "height:")
-	end
-	if line:find("margin:") then
-		line = line:gsub("margin:", "padding:")
-	elseif line:find("padding:") then
-		line = line:gsub("padding:", "margin:")
-	end
 
-	return { line }
+	return line
 end
-
----@param lines string[]
----@return string[]
-function multiplyFuncs.lua(lines)
-	if #lines ~= 1 then return lines end
-	local line = lines[1]
-
-	if line:find("^%s*if.+then%s*$") then line = line:gsub("^(%s*)if", "%1elseif") end
-
-	return { line }
-end
-
----@param lines string[]
----@return string[]
-function multiplyFuncs.sh(lines)
-	if #lines ~= 1 then return lines end
-	local line = lines[1]
-
-	if line:find("^%s*if.+then$") then line = line:gsub("^(%s*)if", "%1elif") end
-
-	return { line }
-end
-
----@param lines string[]
----@return string[]
-function multiplyFuncs.javascript(lines)
-	if #lines ~= 1 then return lines end
-	local line = lines[1]
-
-	if line:find("^%s*if.+{$") then line = line:gsub("^(%s*)if", "%1} else if") end
-
-	return { line }
-end
-
----@param lines string[]
----@return string[]
-function multiplyFuncs.python(lines)
-	if #lines ~= 1 then return lines end
-	local line = lines[1]
-
-	if line:find("^%s*if.+:$") then line = line:gsub("^(%s*)if", "%1elif") end
-
-	return { line }
-end
-
----@param lines string[]
----@return string[]
-function multiplyFuncs.typescript(lines) return multiplyFuncs.javascript(lines) end
 
 local function filetypeSpecificMultiply()
 	autocmd("FileType", {
-		pattern = vim.tbl_keys(multiplyFuncs),
+		pattern = { "css", "javascript", "typescript", "lua", "sh", "python" },
 		callback = function(ctx)
 			local ft = ctx.match
 
-			local conf = {
+			vim.b["minioperators_config"] = {
 				multiply = {
-					func = function(content) return multiplyFuncs[ft](content.lines) end,
+					func = function(content)
+						content.lines[1] = lineTransform(ft, content.lines[1])
+						return content.lines
+					end,
 				},
 			}
-			---@diagnostic disable-next-line: inject-field
-			vim.b.minioperators_config = vim.b.minioperators_config
-					and vim.tbl_deep_extend("force", conf, vim.b.minioperators_config)
-				or conf
 		end,
 	})
 end
