@@ -3,6 +3,7 @@
 
 -- INFO only the first theme will be used
 local lightThemes = {
+	"ramojus/mellifluous.nvim",
 	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
 	-- { "folke/tokyonight.nvim", opts = { style = "day" } },
 	-- "sainnhe/everforest",
@@ -14,6 +15,7 @@ local lightThemes = {
 }
 
 local darkThemes = {
+	"ramojus/mellifluous.nvim",
 	{ "folke/tokyonight.nvim", opts = { style = "moon" } },
 	-- { "EdenEast/nightfox.nvim", name = "duskfox" },
 	-- "rebelot/kanagawa.nvim",

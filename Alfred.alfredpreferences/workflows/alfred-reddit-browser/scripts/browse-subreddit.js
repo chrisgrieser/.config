@@ -37,7 +37,7 @@ function ensureCacheFolderExists() {
 
 /** @param {string} path */
 function cacheIsOutdated(path) {
-	let cacheAgeThresholdMins = parseInt($.getenv("cache_age_threshold")) || 15;
+	let cacheAgeThresholdMins = Number.parseInt($.getenv("cache_age_threshold")) || 15;
 	if (cacheAgeThresholdMins < 1) cacheAgeThresholdMins = 1; // prevent 0 or negative numbers
 	const cacheObj = Application("System Events").aliases[path];
 	if (!cacheObj.exists()) return true;
@@ -62,14 +62,25 @@ function olderThan(firstPath, secondPath) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const timelogStart = +new Date();
+	const subredditConfig = $.getenv("subreddits");
+
+	// GUARD misconfiguration
+	if (subredditConfig.match(/^r\//m)) {
+		const msg = "Config error: subreddit names must not start with 'r/'";
+		return JSON.stringify({ items: [{ title: msg, valid: false }] });
+	}
+
+	//───────────────────────────────────────────────────────────────────────────
 
 	// determine subreddit
 	const prevRunSubreddit = readFile($.getenv("alfred_workflow_cache") + "/current_subreddit");
-	const selectedWithAlfred = $.NSProcessInfo.processInfo.environment.objectForKey("selected_subreddit").js;
-	const firstSubredditInConfig = $.getenv("subreddits").split("\n")[0]; // only needed for first run
+	const selectedWithAlfred =
+		$.NSProcessInfo.processInfo.environment.objectForKey("selected_subreddit").js;
+	const firstSubredditInConfig = subredditConfig.split("\n")[0]; // only needed for first run
 	const subredditName = selectedWithAlfred || prevRunSubreddit || firstSubredditInConfig;
-	const pathOfThisWorkflow = `${$.getenv("alfred_preferences")}/workflows/${$.getenv("alfred_workflow_uid")}`;
+	const pathOfThisWorkflow = `${$.getenv("alfred_preferences")}/workflows/${$.getenv(
+		"alfred_workflow_uid",
+	)}`;
 
 	ensureCacheFolderExists();
 	writeToFile($.getenv("alfred_workflow_cache") + "/current_subreddit", subredditName);
@@ -78,7 +89,10 @@ function run() {
 	const subredditCache = `${$.getenv("alfred_workflow_cache")}/${subredditName}.json`;
 
 	let posts;
-	if (!cacheIsOutdated(subredditCache) && olderThan(`${pathOfThisWorkflow}/prefs.plist`, subredditCache)) {
+	if (
+		!cacheIsOutdated(subredditCache) &&
+		olderThan(`${pathOfThisWorkflow}/prefs.plist`, subredditCache)
+	) {
 		posts = JSON.parse(readFile(subredditCache));
 		return JSON.stringify({
 			variables: { cacheWasUpdated: "false" }, // Alfred vars always strings
@@ -88,7 +102,7 @@ function run() {
 	}
 
 	// IMPORT SUBREDDIT-LOADING-FUNCTIONS
-	// HACK read + eval, since JXA knows no import keyword
+	// biome-ignore lint/nursery/noGlobalEval: JXA import HACK
 	eval(readFile(`${pathOfThisWorkflow}/scripts/get-new-posts.js`));
 
 	// marker for old posts
@@ -108,15 +122,12 @@ function run() {
 	// GUARD no API response or no posts left after filtering for min upvote count
 	if (!posts) {
 		return JSON.stringify({ items: [{ title: "Error", subtitle: "No response from API." }] });
-	} 
+	}
 	if (posts.length === 0) {
-		return JSON.stringify({ items: [{ title: "No Posts higher than minimum upvote count" }] });
+		return JSON.stringify({ items: [{ title: "No Posts higher than minimum upvote count." }] });
 	}
 
 	writeToFile(subredditCache, JSON.stringify(posts));
-
-	const durationSecs = (+new Date() - timelogStart) / 1000;
-	console.log("Total", durationSecs, "s");
 
 	return JSON.stringify({
 		variables: { cacheWasUpdated: "true" }, // Alfred vars always strings
