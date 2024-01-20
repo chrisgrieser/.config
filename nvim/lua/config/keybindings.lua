@@ -265,13 +265,6 @@ keymap("n", "dd", function()
 	return "dd"
 end, { expr = true })
 
-keymap(
-	"n",
-	"<D-p>",
-	function() require("funcs.nano-plugins").pasteFromNumberReg() end,
-	{ desc = " Paste Number Reg" }
-)
-
 -- paste without switching with register
 keymap("x", "p", "P")
 
