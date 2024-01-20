@@ -33,7 +33,7 @@ local function customHighlights()
 
 	-- better url look
 	local commentColor = u.getHighlightValue("Comment", "fg")
-	overwriteHl("@text.uri", { fg = commentColor, underline = true })
+	overwriteHl("@string.special.url.comment", { fg = commentColor, underline = true })
 
 	-- make `MatchParen` stand out more
 	overwriteHl("MatchParen", { reverse = true })

@@ -3,12 +3,8 @@ local tsConfig = {
 	-- auto-installed on entering a buffer (e.g., regex, luadocs, comments)
 	-- PENDING https://github.com/nvim-treesitter/nvim-treesitter/issues/5888
 	ensure_installed = "all",
-	ignore_install = { "smali", "scfg" }, -- `https://git.sr.ht/` unreliable host
 
-	highlight = {
-		enable = true,
-		disable = { "css" }, -- PENDING https://github.com/tree-sitter/tree-sitter-css/issues/34
-	},
+	highlight = { enable = true },
 	indent = {
 		enable = true,
 		disable = {
@@ -63,6 +59,4 @@ return {
 		main = "nvim-treesitter.configs",
 		opts = tsConfig,
 	},
-	-- CSS Highlighting FIX https://github.com/tree-sitter/tree-sitter-css/issues/34
-	{ "hail2u/vim-css3-syntax", ft = "css" },
 }
