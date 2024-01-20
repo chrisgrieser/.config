@@ -123,10 +123,6 @@ local function themeModifications()
 		overwriteHl("HLSearchReversed", { fg = incsearch })
 	elseif theme == "bamboo" and mode == "light" then
 		overwriteHl("@comment", { fg = "#777f76" })
-		updateHl("Todo", "guifg=#ffffff")
-		updateHl("@text.note", "guifg=#ffffff")
-		updateHl("@text.warning", "guifg=#ffffff")
-		updateHl("@text.danger", "guifg=#ffffff")
 	elseif theme == "material" and mode == "light" then
 		updateHl("@property", "guifg=#6c9798")
 		updateHl("@field", "guifg=#6c9798")
@@ -134,7 +130,6 @@ local function themeModifications()
 		updateHl("NonText", "guifg=#9cb4b5")
 		updateHl("NotifyINFOTitle", "guifg=#4eb400")
 		updateHl("NotifyINFOIcon", "guifg=#4eb400")
-		linkHl("@text.warning.comment", "WarningMsg")
 
 		-- fix cursor being partially overwritten by the theme
 		updateCursor("r-cr-o-v:hor10")
@@ -144,9 +139,6 @@ local function themeModifications()
 			updateHl("DiagnosticUnderline" .. type, "gui=underdouble cterm=underline")
 		end
 	elseif theme == "bluloco" then
-		linkHl("@text.note.comment", "@text.todo.comment")
-		linkHl("@text.warning.comment", "@text.todo.comment")
-		linkHl("@text.danger.comment", "@text.todo.comment")
 		updateCursor("i-ci-c:ver25")
 		updateCursor("o-v:hor10")
 		if mode == "dark" then updateHl("ColorColumn", "guibg=#2e3742") end
