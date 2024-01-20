@@ -10,23 +10,19 @@
 ; original tags:
 ; FOOBAR TEST ERROR
 ; NOTE XXX PERF DOCS
-; BUG TODO HACK INFO
+; BUG TODO HACK
 ; BUG: foobaz
 
 ;───────────────────────────────────────────────────────────────────────────────
 
-("text" @text.todo (#any-of? @text.todo "PENDING" "GUARD" "TODO" "WIP"))
-((tag (name) @text.todo ":" @punctuation.delimiter)
- (#any-of? @text.todo "PENDING" "GUARD" "TODO" "WIP"))
+("text" @comment.todo (#any-of? @comment.todo "PENDING" "GUARD"))
+((tag (name) @comment.todo ":" @punctuation.delimiter)
+ (#any-of? @comment.todo "PENDING" "GUARD"))
 
-("text" @text.note (#any-of? @text.note "CONFIG" "SOURCE" "DATA" "DOCS" "INFO" "PERF" "NOTE"))
-((tag (name) @text.note ":" @punctuation.delimiter)
- (#any-of? @text.note "CONFIG" "SOURCE" "DATA" "DOCS" "INFO" "PERF" "NOTE"))
+("text" @comment.info (#any-of? @comment.info "CONFIG" "SOURCE" "DATA"))
+((tag (name) @comment.info ":" @punctuation.delimiter)
+ (#any-of? @comment.info "CONFIG" "SOURCE" "DATA"))
 
-("text" @text.warning (#any-of? @text.warning "SIC" "CAVEAT" "WARN" "HACK" "FIX" "BUG"))
-((tag (name) @text.warning ":" @punctuation.delimiter)
- (#any-of? @text.warning "SIC" "CAVEAT" "WARN" "HACK" "FIX" "ERROR"))
-
-("text" @text.danger (#any-of? @text.danger "ERROR" "BUG"))
-((tag (name) @text.danger ":" @punctuation.delimiter)
- (#any-of? @text.danger "ERROR" "BUG"))
+("text" @comment.warning (#any-of? @comment.warning "SIC" "CAVEAT"))
+((tag (name) @comment.warning ":" @punctuation.delimiter)
+ (#any-of? @comment.warning "SIC" "CAVEAT"))
