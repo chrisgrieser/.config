@@ -18,7 +18,6 @@
 	<true/>
 	<key>subreddits</key>
 	<string>neovim
-macapps
-ProgrammerHumor</string>
+macapps</string>
 </dict>
 </plist>
