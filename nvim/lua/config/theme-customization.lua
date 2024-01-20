@@ -48,15 +48,17 @@ local function customHighlights()
 		updateHl("Spell" .. type, "gui=underdotted cterm=underline")
 	end
 
-	-- PENDING themes updating support
-	-- https://github.com/nvim-treesitter/nvim-treesitter/commit/1ae9b0e4558fe7868f8cda2db65239cfb14836d0
-	linkHl("@comment.error", "@text.danger")
-	linkHl("@comment.warning", "@text.warning")
-	linkHl("@comment.info", "@text.note")
-	linkHl("@comment.hint", "@text.note")
-	linkHl("@comment.todo", "@text.todo")
-	linkHl("@markup.link.url", "@text.uri")
-	linkHl("@variable.parameter", "@parameter")
+	-- PENDING themes updating support https://www.reddit.com/r/neovim/comments/19aratu/comment/kimudud/?context=3
+	local hasNoUpdatedTreesitterHls = vim.tbl_isempty(vim.api.nvim_get_hl(0, { name = "@comment.todo" }))
+	if hasNoUpdatedTreesitterHls then
+		linkHl("@comment.error", "@text.danger")
+		linkHl("@comment.warning", "@text.warning")
+		linkHl("@comment.info", "@text.note")
+		linkHl("@comment.hint", "@text.note")
+		linkHl("@comment.todo", "@text.todo")
+		linkHl("@markup.link.url", "@text.uri")
+		linkHl("@variable.parameter", "@parameter")
+	end
 end
 
 local function themeModifications()
@@ -65,6 +67,7 @@ local function themeModifications()
 	-- some themes do not set g.colors_name
 	if not theme then theme = mode == "light" and g.lightTheme or g.darkTheme end
 	local vimModes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
+	local todoComments = { "todo", "error", "warning", "info", "hint" }
 
 	if theme == "tokyonight" then
 		local statuslineYellow = mode == "dark" and "#b8b042" or "#e8e05e"
@@ -77,6 +80,9 @@ local function themeModifications()
 		end, 100)
 		updateHl("GitSignsChange", "guifg=#acaa62")
 		updateHl("GitSignsAdd", "guifg=#369a96")
+		linkHl("@comment.note", "@comment.hint")
+		for _, type in pairs(todoComments) do
+		end
 	elseif theme == "monet" then
 		overwriteHl("NonText", { fg = "#717ca7" }) -- more distinguishable from comments
 		overwriteHl("Folded", { bg = "#313548" })
