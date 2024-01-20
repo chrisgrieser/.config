@@ -310,20 +310,20 @@ On supported web browsers, the email inbox will open in a background tab and the
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>guerrillamail.com</string>
+				<string>sharklasers.com</string>
 				<key>pairs</key>
 				<array>
 					<array>
-						<string>Guerilla Mail</string>
-						<string>guerrillamail.com</string>
+						<string>Maildrop</string>
+						<string>maildrop.cc</string>
 					</array>
 					<array>
 						<string>Harakirimail</string>
 						<string>harakirimail.com</string>
 					</array>
 					<array>
-						<string>Maildrop</string>
-						<string>maildrop.cc</string>
+						<string>Shark Lasers</string>
+						<string>sharklasers.com</string>
 					</array>
 				</array>
 			</dict>
@@ -338,7 +338,7 @@ On supported web browsers, the email inbox will open in a background tab and the
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2023.4</string>
+	<string>2024.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/vitorgalvao/temporary-email-workflow/</string>
 </dict>

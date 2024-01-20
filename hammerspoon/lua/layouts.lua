@@ -74,7 +74,7 @@ local function workLayout()
 
 	-- open
 	u.openApps(env.mastodonApp)
-	local appsToOpen = { "Discord", env.browserApp, "Mimestream", "Obsidian" }
+	local appsToOpen = { "Discord", env.browserApp, "Mimestream",  }
 	if not isWeekend() then table.insert(appsToOpen, "Slack") end
 	u.openApps(appsToOpen)
 	for _, appName in pairs(appsToOpen) do
