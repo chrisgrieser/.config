@@ -54,7 +54,7 @@ function cacheAndReturnSubIcon(iconPath, subredditName) {
 
 	// for some subreddits saved as icon_img, for others as community_icon
 	let onlineIcon = subredditInfo.data.icon_img || subredditInfo.data.community_icon;
-	if (!onlineIcon) return; // has no icon
+	if (!onlineIcon) return true; // has no icon
 	onlineIcon = onlineIcon.replace(/\?.*$/, ""); // clean url for curl
 
 	// cache icon
