@@ -32,7 +32,7 @@ return {
 		event = "VeryLazy",
 		dependencies = "williamboman/mason.nvim",
 		config = function()
-			-- dependencies of plugins (via lazy.nvim) -- PENDING https://github.com/folke/lazy.nvim/issues/1264
+			-- dependencies of plugins (via lazy.nvim)
 			local plugins = require("lazy").plugins()
 			local deps = vim.tbl_map(function(plugin) return plugin.extra_dependencies end, plugins)
 			deps = vim.tbl_flatten(vim.tbl_values(deps))

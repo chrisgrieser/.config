@@ -19,9 +19,9 @@
 ((tag (name) @comment.todo ":" @punctuation.delimiter)
  (#any-of? @comment.todo "PENDING" "GUARD"))
 
-("text" @comment.info (#any-of? @comment.info "CONFIG" "SOURCE" "DATA"))
-((tag (name) @comment.info ":" @punctuation.delimiter)
- (#any-of? @comment.info "CONFIG" "SOURCE" "DATA"))
+("text" @comment.note (#any-of? @comment.note "CONFIG" "SOURCE" "DATA"))
+((tag (name) @comment.note ":" @punctuation.delimiter)
+ (#any-of? @comment.note "CONFIG" "SOURCE" "DATA"))
 
 ("text" @comment.warning (#any-of? @comment.warning "SIC" "CAVEAT"))
 ((tag (name) @comment.warning ":" @punctuation.delimiter)
