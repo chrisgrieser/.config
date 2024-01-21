@@ -349,7 +349,10 @@ local function telescopeConfig()
 				show_line = false,
 				prompt_title = "Symbols",
 				symbols = { "function", "class", "method" },
-				symbol_highlights = { ["function"] = "Function" },
+				symbol_highlights = {
+					["function"] = "Function",
+					["string"] = "Comment",
+				},
 			},
 			lsp_document_symbols = {
 				prompt_prefix = "󰒕 ",
@@ -458,8 +461,16 @@ return {
 			},
 			{ "gL", function() telescope("grep_string") end, desc = " Grep cword" },
 		},
-		dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
-		config = telescopeConfig,
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons",
+			"natecraddock/telescope-zf-native.nvim", 
+		},
+		config = function ()
+			telescopeConfig()
+			-- prioritizes filename matches over filepath matches
+			require("telescope").load_extension("zf-native")
+		end,
 	},
 	{ -- Icon Picker
 		"nvim-telescope/telescope-symbols.nvim",

@@ -29,4 +29,5 @@ function run(argv) {
 
 	// press `Esc` to leave settings menu potentially open
 	if (obsiRunningAlready) Application("System Events").keyCode(53);
+	return null;
 }
