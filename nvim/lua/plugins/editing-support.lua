@@ -191,6 +191,7 @@ return {
 		end,
 		keys = {
 			{ "<leader>s", function() require("treesj").toggle() end, desc = "󰗈 Split-join lines" },
+			{ "<leader>s", "gww", ft = "markdown", desc = "󰗈 Split-join lines" },
 		},
 		opts = {
 			use_default_keymaps = false,
