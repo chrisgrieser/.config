@@ -1,10 +1,15 @@
 return {
 	{ -- mason
 		"williamboman/mason.nvim",
-		init = function()
-			-- system python is on 3.9, but some programs require 3.12 (e.g. autotools-ls)
-			-- NOTE this has the drawback that `pynvim` cannot be installed anymore
-			vim.g.python3_host_prog = "python3.12"
+		build = function()
+			-- System python is on 3.9, but some packages require 3.12, so we are
+			-- are creating a symlink, so mason picks up homebrew's python, which
+			-- isn't picked up by default, since it uses `python3.12` instead of
+			-- `python3` as binary name.
+			local symLinkFrom = vim.env.HOMEBREW_PREFIX .. "/bin/python3.12"
+			local symLinkTo = vim.env.HOMEBREW_PREFIX .. "/bin/python3"
+			local symlinkExists = vim.loop.fs_stat(symLinkTo) ~= nil
+			if not symlinkExists then vim.loop.fs_symlink(symLinkFrom, symLinkTo) end
 		end,
 		keys = {
 			{ "<leader>pm", vim.cmd.Mason, desc = " Mason" },
