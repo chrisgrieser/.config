@@ -22,7 +22,7 @@ setopt INC_APPEND_HISTORY # write immediately to history file
 setopt HIST_NO_STORE      # ignore history command itself for the history
 setopt HIST_IGNORE_SPACE  # cmds with leading space are not added to the history
 
-export HISTSIZE=5000
+export HISTSIZE=20000
 export SAVEHIST=$HISTSIZE
 export HISTFILE="$DATA_DIR/zsh_history.zsh" # don't save in ZDOTDIR as it's in (public) dotfile repo
 
