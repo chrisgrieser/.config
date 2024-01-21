@@ -1,11 +1,7 @@
-local bo = vim.bo
-local u = require("config.utils")
---------------------------------------------------------------------------------
-
 -- python standard
-bo.expandtab = true
-bo.shiftwidth = 4
-bo.tabstop = 4
+vim.bo.expandtab = true
+vim.bo.shiftwidth = 4
+vim.bo.tabstop = 4
 
 --------------------------------------------------------------------------------
 -- VIRTUAL ENVIRONMENT
@@ -17,12 +13,13 @@ vim.defer_fn(function()
 end, 1)
 
 --------------------------------------------------------------------------------
-
 -- fix habits
-u.ftAbbr("true", "True")
-u.ftAbbr("false", "False")
-u.ftAbbr("//", "#")
-u.ftAbbr("--", "#")
-u.ftAbbr("null", "None")
-u.ftAbbr("nil", "None")
-u.ftAbbr("none", "None")
+
+local ftAbbr = require("config.utils").ftAbbr
+ftAbbr("true", "True")
+ftAbbr("false", "False")
+ftAbbr("//", "#")
+ftAbbr("--", "#")
+ftAbbr("null", "None")
+ftAbbr("nil", "None")
+ftAbbr("none", "None")
