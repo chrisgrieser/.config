@@ -112,7 +112,7 @@ keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
 keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge up" })
 keymap({ "n", "x" }, "gm", '"zdd"zpkJ', { desc = "󰗈 Merge down" })
 
--- Increment/Decrement + Toggle if true/false
+-- Increment/Decrement, or toggle true/false
 keymap(
 	{ "n", "x" },
 	"+",
