@@ -163,35 +163,20 @@ return {
 			allow_interline_swaps = true,
 			interline_swaps_without_separator = false,
 		},
-		init = function()
-			-- in markdown, move words
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "markdown",
-				callback = function()
-					vim.keymap.set("n", "ä", '"zdawel"zph', { buffer = true })
-					vim.keymap.set("n", "Ä", '"zdawbh"zph', { buffer = true })
-				end,
-			})
-		end,
 		keys = {
 			-- stylua: ignore start
 			{ "ä", function() require("sibling-swap").swap_with_right() end, desc = "󰔰 Move Node Right" },
 			{ "Ä", function() require("sibling-swap").swap_with_left() end, desc = "󰶢 Move Node Left" },
 			-- stylua: ignore end
+			{ "ä", '"zdawel"zph', ft = "markdown", desc = "󰶢 Move Word Right" },
+			{ "Ä", '"zdawbh"zph', ft = "markdown", desc = "󰶢 Move Word Left" },
 		},
 	},
 	{ -- split-join lines
 		"Wansmer/treesj",
-		init = function()
-			-- always use `gww` in markdown
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "markdown",
-				callback = function() vim.keymap.set("n", "<leader>s", "gww", { buffer = true }) end,
-			})
-		end,
 		keys = {
 			{ "<leader>s", function() require("treesj").toggle() end, desc = "󰗈 Split-join lines" },
-			{ "<leader>s", "gww", ft = "markdown", desc = "󰗈 Split-join lines" },
+			{ "<leader>s", "gww", ft = "markdown", desc = "󰗈 Split line" },
 		},
 		opts = {
 			use_default_keymaps = false,
@@ -276,7 +261,7 @@ return {
 	{
 		"chrisgrieser/nvim-chainsaw",
 		init = function() u.leaderSubkey("l", " Log") end,
-		opts = { marker ="👽" },
+		opts = { marker = "👽" },
 		keys = {
 			-- stylua: ignore start
 			{"<leader>lb", "<cmd>lua require('chainsaw').beepLog()<CR>", desc = "󰸢 beep log" },

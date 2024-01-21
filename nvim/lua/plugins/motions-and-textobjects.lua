@@ -109,27 +109,6 @@ return {
 	},
 	{ -- pattern-based textobjs
 		"chrisgrieser/nvim-various-textobjs",
-		init = function()
-			-- cannot use lazy.nvim's key-setting since `il` / `al` is also mapped
-			-- for the call-textobj PENDING https://github.com/folke/lazy.nvim/issues/1241
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "markdown",
-				callback = function()
-					vim.keymap.set(
-						{ "o", "x" },
-						"il",
-						"<cmd>lua require('various-textobjs').mdlink('inner')<CR>",
-						{ desc = "󱡔 inner md link", buffer = true }
-					)
-					vim.keymap.set(
-						{ "o", "x" },
-						"al",
-						"<cmd>lua require('various-textobjs').mdlink('outer')<CR>",
-						{ desc = "󱡔 outer md link", buffer = true }
-					)
-				end,
-			})
-		end,
 		keys = {
 			-- stylua: ignore start
 			{ "<Space>", "<cmd>lua require('various-textobjs').subword('inner')<CR>", mode = "o", desc = "󱡔 inner subword" },
@@ -185,6 +164,8 @@ return {
 			-- markdown
 			{ "iE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock('inner')<CR>", mode = { "x", "o" }, ft = "markdown", desc = "󱡔 inner CodeBlock" },
 			{ "aE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock('outer')<CR>", mode = { "x", "o" }, ft = "markdown", desc = "󱡔 outer CodeBlock" },
+			{ "il", "<cmd>lua require('various-textobjs').mdLink('inner')<CR>", mode = { "x", "o" }, ft = "markdown", desc = "󱡔 inner md link" },
+			{ "al", "<cmd>lua require('various-textobjs').mdLink('outer')<CR>", mode = { "x", "o" }, ft = "markdown", desc = "󱡔 outer md link" },
 
 			-- css
 			{ "is", "<cmd>lua require('various-textobjs').cssSelector('inner')<CR>", mode = { "x", "o" }, ft = "css", desc = "󱡔 inner selector" },
@@ -249,10 +230,11 @@ return {
 				function()
 					require("various-textobjs").url()
 					local foundURL = vim.fn.mode():find("v")
-					if not foundURL then return end
-					u.normal('"zy')
-					local url = vim.fn.getreg("z")
-					vim.fn.system { "open", url }
+					if foundURL then
+						u.normal('"zy')
+						local url = vim.fn.getreg("z")
+						vim.fn.system { "open", url }
+					end
 				end,
 				desc = "󰌹 Smart URL Opener",
 			},
