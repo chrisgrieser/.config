@@ -149,9 +149,9 @@ function clone {
 	# turn http into SSH remotes
 	[[ "$url" =~ http ]] && url="$(echo "$1" | sed -E 's/https?:\/\/github.com\//git@github.com:/').git"
 
-	# WARN depth=2 ensures that amending a shallow commit does not result in a
+	# WARN depth > 1 ensures that amending a shallow commit does not result in a
 	# new commit without parent, effectively destroying git history (!!)
-	git clone --depth=2 "$url" --no-single-branch --no-tags # get branches, but not tags
+	git clone --depth=10 "$url" --no-single-branch --no-tags # get branches, but not tags
 
 	# shellcheck disable=SC2012
 	cd "$(command ls -1 -t | head -n1)" || return 1

@@ -22,7 +22,7 @@ return {
 			local bin_path = os.getenv("HOME") .. "/.codeium/bin"
 			local oldBinaries =
 				vim.fs.find("language_server_macos_arm", { limit = math.huge, path = bin_path })
-			table.remove(oldBinaries) -- remove last item (= most up to date binary) from list
+			table.remove(oldBinaries) -- remove last item (= current binary) from list to keep it
 			for _, binaryPath in pairs(oldBinaries) do
 				os.remove(binaryPath)
 				os.remove(vim.fs.dirname(binaryPath))
