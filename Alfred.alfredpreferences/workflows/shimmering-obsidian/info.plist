@@ -2343,13 +2343,7 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
-				<string>path="{query}";
-
-urlscheme = "obsidian://open?path=" + encodeURIComponent(path);
-
-app = Application.currentApplication();
-app.includeStandardAdditions = true;
-app.openLocation(urlscheme);</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
