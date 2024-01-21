@@ -7,6 +7,7 @@ declare class MacAppObj {
 	includeStandardAdditions: boolean;
 	openLocation(url: string): string;
 	open(path: string): void;
+	read(path: string): string;
 	id(): number;
 	name(): string;
 	running(): boolean;
@@ -15,8 +16,43 @@ declare class MacAppObj {
 	quit(): void;
 	launch(): void;
 	properties(): object; // inspect all properties
-	theClipboard(): string;
 	beep(): void;
+
+	doShellScript(script: string): string; // DOCS https://developer.apple.com/library/archive/technotes/tn2065/_index.html
+	pathTo(what: "home folder"): string;
+
+	setTheClipboardTo(str: string): void;
+	theClipboard(): string;
+
+	displayNotification(textToShow: string, options: { withTitle: string; subtitle?: string }): void;
+	displayAlert(
+		textToShow: string,
+		options?: {
+			message?: string;
+			defaultAnswer?: string;
+			buttons?: string[];
+			defaultButton?: string;
+			withIcon?: string;
+			gaveUp?: boolean;
+		},
+	): {
+		textReturned: string;
+		buttonReturned: string;
+	};
+	displayDialog(
+		textToShow: string,
+		options?: {
+			message?: string;
+			defaultAnswer?: string;
+			buttons?: string[];
+			defaultButton?: string;
+			withIcon?: string;
+			gaveUp?: boolean;
+		},
+	): {
+		textReturned: string;
+		buttonReturned: string;
+	};
 
 	menuBars: {
 		menuBarItems: {
@@ -93,45 +129,10 @@ declare type ReminderObj = {
 };
 
 declare const Application: {
-	currentApplication: () => {
-		doShellScript(script: string): string; // DOCS https://developer.apple.com/library/archive/technotes/tn2065/_index.html
-		includeStandardAdditions: boolean;
-		openLocation(url: string): void;
-		pathTo(what: "home folder"): string;
-		read(path: string): string;
-		setTheClipboardTo(str: string): void;
-		theClipboard(): string;
-		displayNotification(textToShow: string, options: { withTitle: string; subtitle?: string }): void;
-		displayAlert(
-			textToShow: string,
-			options?: {
-				message?: string;
-				defaultAnswer?: string;
-				buttons?: string[];
-				defaultButton?: string;
-				withIcon?: string;
-				gaveUp?: boolean;
-			},
-		): {
-			textReturned: string;
-			buttonReturned: string;
-		};
-		displayDialog(
-			textToShow: string,
-			options?: {
-				message?: string;
-				defaultAnswer?: string;
-				buttons?: string[];
-				defaultButton?: string;
-				withIcon?: string;
-				gaveUp?: boolean;
-			},
-		): {
-			textReturned: string;
-			buttonReturned: string;
-		};
-	};
-	(name: "System Events"): MacAppObj & {
+	currentApplication: () => MacAppObj;
+	(
+		name: "System Events",
+	): MacAppObj & {
 		aliases: FinderItem[]; // hashmap of all paths, e.g. .aliases["/some/path/file.txt"]
 		keystroke(key: string, modifiers?: { using: string[] });
 		keyCode(keycode: number, modifiers?: { using: string[] });
@@ -140,7 +141,7 @@ declare const Application: {
 		// biome-ignore lint/suspicious/noExplicitAny: later
 		processes: any;
 	};
-	(name: "Reminders"): MacAppObj & {
+	( name: "Reminders"): MacAppObj & {
 		defaultList(): ReminderList;
 		lists: {
 			byName(name: string): ReminderList;
@@ -148,7 +149,9 @@ declare const Application: {
 		// biome-ignore lint/style/useNamingConvention: not set by me
 		Reminder(options: ReminderProperties): ReminderObj;
 	};
-	(name: "Finder"): MacAppObj & {
+	(
+		name: "Finder",
+	): MacAppObj & {
 		// PathObj and finderItems are not the same, but are apparently both accepted
 		exists(path: PathObj): boolean;
 		open(path: PathObj): void;
@@ -165,12 +168,16 @@ declare const Application: {
 			withProperties: { name: string };
 		}): FinderItem;
 	};
-	(name: "Alfred" | "com.runningwithcrayons.Alfred"): MacAppObj & {
+	(
+		name: "Alfred" | "com.runningwithcrayons.Alfred",
+	): MacAppObj & {
 		// biome-ignore lint/complexity/noBannedTypes: <explanation>
 		setConfiguration(envVar: string, options: Object): void;
 		revealWorkflow(workflowId: string): void; // workflow id = name of workflow folder
 	};
-	(name: "Safari" | "Webkit"): MacAppObj & {
+	(
+		name: "Safari" | "Webkit",
+	): MacAppObj & {
 		documents: { url(): string; name(): string }[];
 	};
 	(

@@ -679,6 +679,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>128F4E9D-FB3F-475D-9000-21AE4B38569D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>506E519A-3B07-43B8-91CF-46161EB47E5E</key>
 		<array>
@@ -1109,18 +1119,7 @@
 		<key>76BE7619-FDB9-4324-81C7-6570B534A123</key>
 		<array/>
 		<key>76EF97C3-981D-466E-BA90-47D34129BE96</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>EFF86C73-648C-4149-8A4C-AE21C797808B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>7954C22E-D0FB-4539-87D1-D62DF328DBB2</key>
 		<array>
 			<dict>
@@ -2391,14 +2390,6 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.hidealfred</string>
-			<key>uid</key>
-			<string>EFF86C73-648C-4149-8A4C-AE21C797808B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
 			<key>config</key>
 			<dict>
 				<key>externaltriggerid</key>
@@ -2446,6 +2437,14 @@ tesseract "$temp_image" stdout -l $ocr_languages 2&gt;&amp;1</string>
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>B5F538F8-D47B-47E8-A7C8-5C9C149A58CC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.hidealfred</string>
+			<key>uid</key>
+			<string>128F4E9D-FB3F-475D-9000-21AE4B38569D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -6630,11 +6629,7 @@ fi</string>
 ---
 
 ## 📙 Recent Changes
-- Prioritization of recent or bookmarked notes in the search results.
-- Fixed some headings being ignored in certain situations.
-- Vault paths are now configured via the setting to the right instead. 
-- You can now use vaults even if the config folder is not placed in `.obsidian`.
-- `oe` [Search all external links in your entire vault.](https://github.com/chrisgrieser/shimmering-obsidian/blob/main/docs/Note-related%20Features.md#search-all-external-links-in-the-entire-vault)
+- Fix: note not being opened when Obsidian isn't running at the time `o` is triggered
 
 ---
 
@@ -6807,6 +6802,15 @@ fi</string>
 			<real>245</real>
 			<key>ypos</key>
 			<real>6480</real>
+		</dict>
+		<key>128F4E9D-FB3F-475D-9000-21AE4B38569D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>1685</real>
+			<key>ypos</key>
+			<real>180</real>
 		</dict>
 		<key>152229B2-B1D8-44E8-9EF7-98B39FE56FD4</key>
 		<dict>
@@ -8406,15 +8410,6 @@ DOUBLE CLICK THIS to set Hotkey. Suggested Hotkey: cmd + shift + 1</string>
 			<key>ypos</key>
 			<real>210</real>
 		</dict>
-		<key>EFF86C73-648C-4149-8A4C-AE21C797808B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>1840</real>
-			<key>ypos</key>
-			<real>65</real>
-		</dict>
 		<key>F117FF8C-E6E5-4B0E-9FCE-DDB0A6476CAB</key>
 		<dict>
 			<key>colorindex</key>
@@ -9048,7 +9043,7 @@ DOUBLE CLICK THIS to set Hotkey. Suggested Hotkey: cmd + shift + 1</string>
 		<string>▉</string>
 	</dict>
 	<key>version</key>
-	<string>4.2.7</string>
+	<string>4.2.8</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
