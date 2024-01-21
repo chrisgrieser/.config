@@ -17,10 +17,10 @@ M.thresholdMins = {
 	Slack = 20,
 	Mimestream = 5,
 	Highlights = 90,
-	Obsidian = 90,
+	Obsidian = 120,
 	Discord = 180,
 	BusyCal = 5,
-	["wezterm-gui"] = 45, -- does not work with "WezTerm"
+	["WezTerm"] = 45,
 	["Alfred Preferences"] = 20,
 	["System Settings"] = 2,
 	Finder = 20, -- only closes windows when not on projector
@@ -61,7 +61,8 @@ end
 
 ---Watch app (de)activation & update `idleApps`
 M.aw_appDeactivation = aw.new(function(appName, event)
-	if not appName or appName == "" then return end -- empty string as safeguard for special apps
+	-- GUARD ignore apps not included in configuration
+	if M.thresholdMins[appName] == nil then return end
 
 	if event == aw.deactivated then
 		M.idleApps[appName] = now()

@@ -21,7 +21,8 @@ alias jless='jless --no-line-numbers'
 alias tokei='tokei --compact'
 function which { builtin which -a "$@" | bat --language=sh; } # colorized & showing all
 
-function bat { # dark-mode aware
+# dark-mode aware
+function bat {
 	local theme # list themes via `bat --list-themes`
 	theme="$(defaults read -g AppleInterfaceStyle &>/dev/null && echo "Dracula" || echo "GitHub")"
 	command bat --theme="$theme" "$@"
