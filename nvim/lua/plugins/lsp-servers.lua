@@ -257,7 +257,7 @@ serverConfigs.tsserver = {
 		client.server_capabilities.documentRangeFormattingProvider = false
 
 		-- use tsserver instead of refactoring.nvim
-		codeActionKeymap("n", "<leader>fE", "^Inline variable$", "󰛦 Inline Var")
+		codeActionKeymap("n", "<leader>fi", "^Inline variable$", "󰛦 Inline Var")
 	end,
 }
 
