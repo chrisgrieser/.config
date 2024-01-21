@@ -48,7 +48,6 @@ return {
 		opts = {
 			winblend = 10, -- little transparency, hard to see in many themes otherwise
 			handlers = {
-				cursor = { enable = true },
 				marks = { enable = false }, -- FIX mark-related error message
 				quickfix = { enable = true, signs = { "·", ":", "󰇙" } },
 			},
@@ -161,16 +160,11 @@ return {
 				require("lazy").load { plugins = { "dressing.nvim" } }
 				return vim.ui.input(...)
 			end
-
-			-- extra keybindings PENDING https://github.com/folke/lazy.nvim/issues/1241
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "DressingSelect",
-				callback = function()
-					vim.keymap.set("n", "<Tab>", "j", { buffer = true })
-					vim.keymap.set("n", "<S-Tab>", "k", { buffer = true })
-				end,
-			})
 		end,
+		keys = {
+			{ "<Tab>", "j", ft = "DressingSelect" },
+			{ "<S-Tab>", "k", ft = "DressingSelect" },
+		},
 		opts = {
 			input = {
 				insert_only = false, -- = enable normal mode
@@ -178,7 +172,7 @@ return {
 				border = vim.g.borderStyle,
 				relative = "editor",
 				title_pos = "left",
-				min_width = { 0.4, 65 }, -- 72 = git commit msg length
+				min_width = { 0.4, 65 },
 				mappings = { n = { ["q"] = "Close" } },
 			},
 			select = {

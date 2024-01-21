@@ -4,6 +4,7 @@
 	+ checkout whether the updated version works with neovide's multi-grid
 - `yaml-ls` perhaps now supports formatting without needing to enable it in
   `lspconfig`
+- lua ft: b.comments
 - `vim.system` instead of `vim.fn.system`
 - `vim.uv` instead of `vim.loop`
 - ftAbbr & abbreviations.lua: `vim.keymap.set('ia', lhs, rhs, { buffer = true })`
