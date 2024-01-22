@@ -65,7 +65,7 @@ local findFileMappings = {
 		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
 		local cwd = tostring(current_picker.cwd or vim.loop.cwd()) -- cwd only set if passed as opt
 		-- hidden status not stored, but title is, so we determine the previous state via title
-		local prevTitle = current_picker.prompt_title 
+		local prevTitle = current_picker.prompt_title
 		local ignoreHidden = not prevTitle:find("hidden")
 		local title = vim.fs.basename(cwd)
 		if ignoreHidden then title = title .. " (--hidden --no-ignore)" end
@@ -102,10 +102,7 @@ local keymappings_N = vim.tbl_extend("force", keymappings_I, normalModeOnly)
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "TelescopeResults",
 	callback = function(ctx)
-		vim.api.nvim_buf_call(ctx.buf, function()
-			vim.fn.matchadd("Comment", "\t\t.*$")
-			vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
-		end)
+		vim.api.nvim_buf_call(ctx.buf, function() vim.fn.matchadd("Comment", "\t\t.*$") end)
 	end,
 })
 
