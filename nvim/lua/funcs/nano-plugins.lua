@@ -195,7 +195,8 @@ function M.toggleOrIncrement()
 	local cword = vim.fn.expand("<cword>")
 	local bool = {
 		["true"] = "false",
-		["True"] = "False", -- capitalized for python
+		["True"] = "False", -- python
+		["const"] = "let", -- js/ts
 	}
 	local toggle
 	for word, opposite in pairs(bool) do
@@ -209,8 +210,15 @@ end
 -- 1. in addition to toggling case of letters, also toggls some common characters
 -- 2. does not mvoe the cursor to the left, useful for vertical changes
 function M.betterTilde()
-	local toggleSigns =
-		{ ["'"] = '"', ["+"] = "-", ["("] = ")", ["["] = "]", ["{"] = "}", ["<"] = ">" }
+	local toggleSigns = {
+		["'"] = '"',
+		["+"] = "-",
+		["!"] = "=", -- for != and ==
+		["("] = ")",
+		["["] = "]",
+		["{"] = "}",
+		["<"] = ">",
+	}
 	local col = vim.fn.col(".") -- fn.col correctly considers tab-indentation
 	local charUnderCursor = vim.api.nvim_get_current_line():sub(col, col)
 
@@ -252,8 +260,7 @@ function M.tabout()
 end
 
 function M.gotoProject()
-	-- CONFIG
-	local projectFolder = vim.env.LOCAL_REPOS
+	local projectFolder = vim.env.LOCAL_REPOS -- CONFIG
 
 	---@param folder string
 	local function browseProject(folder)
