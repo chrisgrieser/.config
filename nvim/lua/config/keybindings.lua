@@ -56,20 +56,6 @@ keymap("n", "gQ", vim.cmd.cprevious, { desc = " Prev Quickfix" })
 keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Clear Quickfix List" })
 
 --------------------------------------------------------------------------------
--- TEXTOBJECTS
-
--- remapping of builtin text objects
-for remap, original in pairs(u.textobjRemaps) do
-	keymap({ "o", "x" }, "i" .. remap, "i" .. original, { desc = "󱡔 inner " .. original })
-	keymap({ "o", "x" }, "a" .. remap, "a" .. original, { desc = "󱡔 outer " .. original })
-end
-
--- special remaps
-keymap("o", "J", "2j") -- dd = 1 line, dj = 2 lines, dJ = 3 lines
-keymap("n", "<Space>", '"_ciw', { desc = "󱡔 change word" })
-keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
-
---------------------------------------------------------------------------------
 -- EDITING
 
 -- emulate some basic commands from `vim-abolish`
@@ -138,7 +124,23 @@ keymap(
 	{ desc = " Open in regex101" }
 )
 
+--------------------------------------------------------------------------------
+-- TEXTOBJECTS
+
+-- remapping of builtin text objects
+for remap, original in pairs(u.textobjRemaps) do
+	keymap({ "o", "x" }, "i" .. remap, "i" .. original, { desc = "󱡔 inner " .. original })
+	keymap({ "o", "x" }, "a" .. remap, "a" .. original, { desc = "󱡔 outer " .. original })
+end
+
+-- special remaps
+keymap("o", "J", "2j") -- dd = 1 line, dj = 2 lines, dJ = 3 lines
+keymap("n", "<Space>", '"_ciw', { desc = "󱡔 change word" })
+keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
+
+--------------------------------------------------------------------------------
 -- COMMENTS
+
 -- stylua: ignore start
 keymap("n", "qw", function() require("funcs.comment").commentHr() end, { desc = " Horizontal Divider" })
 keymap("n", "wq", function() require("funcs.comment").duplicateLineAsComment() end, { desc = " Duplicate Line as Comment" })
@@ -227,6 +229,21 @@ keymap(
 	{ desc = " Goto Project" }
 )
 
+-- mac-specific
+keymap(
+	{ "n", "x" },
+	"<D-l>",
+	function() fn.system { "open", "-R", vim.api.nvim_buf_get_name(0) } end,
+	{ desc = "󰀶 Reveal in Finder" }
+)
+
+keymap(
+	{ "n", "x" },
+	"<D-L>",
+	function() require("funcs.nano-plugins").openAlfredPref() end,
+	{ desc = "󰮤 Reveal in Alfred" }
+)
+
 --------------------------------------------------------------------------------
 -- CLIPBOARD
 
@@ -273,22 +290,6 @@ keymap("i", "<D-v>", function()
 	return "<C-g>u<C-r><C-o>+" -- "<C-g>u" adds undopoint before the paste
 end, { desc = " Paste charwise", expr = true })
 
-------------------------------------------------------------------------------
--- MAC-SPECIFIC-KEYBINDINGS
-
-keymap(
-	{ "n", "x" },
-	"<D-l>",
-	function() fn.system { "open", "-R", vim.api.nvim_buf_get_name(0) } end,
-	{ desc = "󰀶 Reveal in Finder" }
-)
-keymap(
-	{ "n", "x" },
-	"<D-L>",
-	function() require("funcs.nano-plugins").openAlfredPref() end,
-	{ desc = "󰮤 Reveal in Alfred" }
-)
-
 --------------------------------------------------------------------------------
 -- QUITTING
 keymap({ "n", "x" }, "<MiddleMouse>", vim.cmd.wqall, { desc = "Quit App" })
@@ -303,7 +304,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "gitcommit", "gitrebase" },
 	callback = function()
 		if vim.bo.buftype == "nofile" then return end -- do not trigger in DressingInput
-		-- INFO cquit exists non-zero, aborting the commit/rebase
+		-- INFO `cquit` exists non-zero, thus aborting the commit/rebase
 		vim.keymap.set("n", "q", cmd.cquit, { buffer = true, nowait = true, desc = "Abort" })
 	end,
 })
