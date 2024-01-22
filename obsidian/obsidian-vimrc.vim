@@ -198,10 +198,8 @@ nnoremap ~ ~h
 
 " Change Word/Selection
 nnoremap <Space> "_ciw
+vnoremap <Space> "_c
 onoremap <Space> iw
-onoremap a<Space> iW
-
-" Delete Word/Selection
 nnoremap <S-Space> "_daw
 
 " [M]erge Lines
