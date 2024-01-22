@@ -3,18 +3,9 @@
 
 # INFO emojis need to be in textual form to work in Slack as well as Discord
 matches:
-  # emoji selection
-  - trigger: "eee"
-    replace: "+:"
-  # heart
-  - trigger: "hhh"
-    replace: "+:blue_heart:\n"
-  # this
-  - trigger: "ttt"
-    replace: "+:this:\n"
-  # thumbs-up
-  - trigger: "yyy"
-    replace: "+:+1:\n"
-  # multi-emoji
-  - trigger: "12345"
-    replace: "+:one:\n+:two:\n+:three:\n+:four:\n+:five:\n"
+  - { trigger: "eee", replace: "+:" } # emoji selection
+  - { trigger: "hhh", replace: "+:blue_heart:\n" }
+  - { trigger: "ttt", replace: "+:this:\n" } # discord only
+  - { trigger: "ddd", replace: "+:dolan:\n" } # slack only
+  - { trigger: "yyy", replace: "+:+1:\n" } # thumbs up
+  - { trigger: "12345", replace: "+:one:\n+:two:\n+:three:\n+:four:\n+:five:\n" }

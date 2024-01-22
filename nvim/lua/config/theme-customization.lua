@@ -50,17 +50,13 @@ local function customHighlights()
 
 	-----------------------------------------------------------------------------
 	-- PENDING theme updates
-	local hasNoUpdatedTreesitterHls =
-		vim.tbl_isempty(vim.api.nvim_get_hl(0, { name = "@comment.todo" }))
-	if hasNoUpdatedTreesitterHls then
-		linkHl("@comment.error", "@text.danger")
-		linkHl("@comment.warning", "@text.warning")
-		linkHl("@comment.info", "@text.note")
-		linkHl("@comment.hint", "@text.note")
-		linkHl("@comment.todo", "@text.todo")
-		linkHl("@markup.link.url", "@text.uri")
-		linkHl("@variable.parameter", "@parameter")
-	end
+	linkHl("@comment.error", "@text.danger")
+	linkHl("@comment.warning", "@text.warning")
+	linkHl("@comment.info", "@text.note")
+	linkHl("@comment.hint", "@text.note")
+	linkHl("@comment.todo", "@text.todo")
+	linkHl("@markup.link.url", "@text.uri")
+	linkHl("@variable.parameter", "@parameter")
 end
 
 local function themeModifications()
