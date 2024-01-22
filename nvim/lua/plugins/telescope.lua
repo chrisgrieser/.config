@@ -50,21 +50,24 @@ local keymappings_I = {
 	end,
 }
 
--- mappings for `:Telescope find_files`
+-- toggle `--hidden` & `--no-ignore`
 local findFileMappings = {
-	-- toggle `--hidden` & `--no-ignore`
 	["<C-h>"] = function(prompt_bufnr)
+		-- preserve query
 		local query = vim.api.nvim_get_current_line()
 		vim.api.nvim_create_autocmd("FileType", {
 			once = true,
 			pattern = "TelescopePrompt",
 			callback = function() vim.api.nvim_set_current_line(query) end,
 		})
+
+		-- toggle ignore/hidden
 		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
 		local cwd = tostring(current_picker.cwd or vim.loop.cwd()) -- cwd only set if passed as opt
 		local prevTitle = current_picker.prompt_title -- hidden status not stored, but title is
 		local ignoreHidden = not prevTitle:find("hidden")
 
+		-- adapt title
 		local title = vim.fs.basename(cwd)
 		if ignoreHidden then title = title .. " (--hidden --no-ignore)" end
 
