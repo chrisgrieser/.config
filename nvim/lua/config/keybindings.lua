@@ -138,9 +138,7 @@ keymap(
 	{ desc = " Open in regex101" }
 )
 
---------------------------------------------------------------------------------
 -- COMMENTS
-
 -- stylua: ignore start
 keymap("n", "qw", function() require("funcs.comment").commentHr() end, { desc = " Horizontal Divider" })
 keymap("n", "wq", function() require("funcs.comment").duplicateLineAsComment() end, { desc = " Duplicate Line as Comment" })
