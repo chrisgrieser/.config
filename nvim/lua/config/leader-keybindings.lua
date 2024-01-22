@@ -34,8 +34,8 @@ keymap(
 )
 
 --------------------------------------------------------------------------------
+-- INSPECT
 
--- inspect
 keymap("n", "<leader>ih", cmd.Inspect, { desc = " Highlights under Cursor" })
 keymap("n", "<leader>it", cmd.InspectTree, { desc = " :InspectTree" })
 keymap("n", "<leader>il", cmd.LspInfo, { desc = "󰒕 :LspInfo" })

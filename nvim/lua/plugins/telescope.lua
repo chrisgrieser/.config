@@ -64,10 +64,9 @@ local findFileMappings = {
 		-- toggle ignore/hidden
 		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
 		local cwd = tostring(current_picker.cwd or vim.loop.cwd()) -- cwd only set if passed as opt
-		local prevTitle = current_picker.prompt_title -- hidden status not stored, but title is
+		-- hidden status not stored, but title is, so we determine the previous state via title
+		local prevTitle = current_picker.prompt_title 
 		local ignoreHidden = not prevTitle:find("hidden")
-
-		-- adapt title
 		local title = vim.fs.basename(cwd)
 		if ignoreHidden then title = title .. " (--hidden --no-ignore)" end
 
