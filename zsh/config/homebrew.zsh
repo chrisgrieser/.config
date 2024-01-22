@@ -48,6 +48,7 @@ function update() {
 	brew cleanup
 
 	# manually update, cause brew won't update as it is in theory self-upgrading
+	echo
 	brew upgrade obsidian
 
 	_print-section "Mac App Store"
@@ -56,7 +57,7 @@ function update() {
 	mas outdated | grep -v "Highlights" | cut -f1 -d" " | xargs mas upgrade
 	# mas upgrade
 
-	echo
+	_print-section "Finish up"
 	# - sketchybar usually updated and then has to be restarted to give permission
 	# - also updates the homebrew status counter
 	brew services restart sketchybar
