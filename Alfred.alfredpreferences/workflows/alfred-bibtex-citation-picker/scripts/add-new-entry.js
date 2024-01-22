@@ -205,12 +205,12 @@ function json2bibtex(entryJson, citekey) {
 		if (key === "type") continue; // already inserted in first line
 		let value = entryJson[key];
 		if (!value) continue; // missing value
-		if (typeof value === "string") {
+		if (typeof value === "string" && !value.match(/^\d+$/)) {
 			// double-escape bibtex values to preserve capitalization, but not
 			// author key, since it results in the author key being interpreted as
 			// literal author name
 			const hasCapitalLetter = value.match(/[A-Z]/);
-			value = (hasCapitalLetter && key !== "author") ? `{${value}}` : `{{${value}}}`;
+			value = (hasCapitalLetter && key !== "author") ? `{{${value}}}` : `{${value}}`;
 		}
 		propertyLines.push(`\t${key} = ${value},`);
 	}
