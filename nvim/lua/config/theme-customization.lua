@@ -48,8 +48,8 @@ local function customHighlights()
 		updateHl("Spell" .. type, "gui=underdotted cterm=underline")
 	end
 
-	-- PENDING themes updating support https://www.reddit.com/r/neovim/comments/19aratu/comment/kimudud/?context=3
-	linkHl("@comment.note", "@comment.hint")
+	-----------------------------------------------------------------------------
+	-- PENDING theme updates
 	local hasNoUpdatedTreesitterHls =
 		vim.tbl_isempty(vim.api.nvim_get_hl(0, { name = "@comment.todo" }))
 	if hasNoUpdatedTreesitterHls then
