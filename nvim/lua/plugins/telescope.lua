@@ -352,6 +352,7 @@ local function telescopeConfig()
 				prompt_title = "Symbols",
 				show_line = false,
 				symbols = { "function", "class", "method" },
+				symbol_highlights = { ["function"] = "Function" },
 			},
 			lsp_document_symbols = {
 				prompt_prefix = "󰒕 ",
@@ -412,11 +413,7 @@ return {
 		keys = {
 			{ "?", function() telescope("keymaps") end, desc = "⌨️ Search Keymaps" },
 			{ "g.", function() telescope("resume") end, desc = " Continue" },
-
-			-- PENDING https://github.com/nvim-telescope/telescope.nvim/issues/2883
-			-- { "gs", function() telescope("treesitter") end, desc = " Symbols" },
-			{ "gs", function() telescope("lsp_document_symbols") end, desc = "󰒕 Symbols" },
-
+			{ "gs", function() telescope("treesitter") end, desc = " Symbols" },
 			{ "gd", function() telescope("lsp_definitions") end, desc = "󰒕 Definitions" },
 			{ "gf", function() telescope("lsp_references") end, desc = "󰒕 References" },
 			{

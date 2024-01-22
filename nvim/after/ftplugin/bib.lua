@@ -1,6 +1,3 @@
-local u = require("config.utils")
---------------------------------------------------------------------------------
-
 -- `%` not actually a comment character, just convention of some programs
 -- https://tex.stackexchange.com/questions/261261/are-comments-discouraged-in-a-bibtex-file
 vim.bo.commentstring = '% %s'
@@ -48,7 +45,7 @@ local function checkForDuplicateCitekeys(bufnr)
 	end
 	if duplCitekeys == "" then return end
 
-	u.notify("Duplicate Citkeys", duplCitekeys, "warn")
+	vim.notify(duplCitekeys, vim.log.levels.WARN, { title = "Duplicate Citekeys" })
 end
 
 -- run on entering a bibtex buffer
