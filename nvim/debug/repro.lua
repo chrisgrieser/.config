@@ -6,19 +6,13 @@ end
 
 local plugins = {
 	{
-		"stevearc/conform.nvim",
-		keys = {
-			{ "<D-s>", function() require("conform").format() end },
-		},
-		opts = {
-			formatters_by_ft = { lua = { "typos" } },
-			formatters = {
-				typos = {
-					stdin = false,
-					args = { "--write-changes", "--force-exclude", "$FILENAME" },
-				},
-			},
-		},
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		main = "nvim-treesitter.configs",
+	},
+	{
+		"nvim-telescope/telescope.nvim",
+		dependencies = "nvim-lua/plenary.nvim",
 	},
 }
 
