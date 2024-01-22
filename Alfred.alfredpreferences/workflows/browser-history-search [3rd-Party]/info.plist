@@ -569,7 +569,7 @@
 # has to be done in Alfred, since Alfred environment variables are needed
 
 # small leeway getting lines 3-6, since line numbers sometimes shift
-./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",'</string>
+echo -n "$(./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",')"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>

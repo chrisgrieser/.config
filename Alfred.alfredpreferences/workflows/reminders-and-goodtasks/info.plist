@@ -750,9 +750,9 @@ sketchybar --trigger update_reminder_count</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>425</real>
+			<real>420</real>
 			<key>ypos</key>
-			<real>615</real>
+			<real>590</real>
 		</dict>
 		<key>8610EFE4-6BCC-4C55-A92F-A1ACAF175489</key>
 		<dict>
@@ -770,27 +770,27 @@ sketchybar --trigger update_reminder_count</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>185</real>
 			<key>ypos</key>
-			<real>620</real>
+			<real>595</real>
 		</dict>
 		<key>AB6C212F-70C4-4291-963F-B7D6DFD63435</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>280</real>
+			<real>275</real>
 			<key>ypos</key>
-			<real>615</real>
+			<real>590</real>
 		</dict>
 		<key>C0706453-E9D1-4D41-9BC9-2BF209CBDFA8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>185</real>
 			<key>ypos</key>
-			<real>680</real>
+			<real>655</real>
 		</dict>
 		<key>E206A8A9-ADE8-4A8D-AA62-AC94A971FBB3</key>
 		<dict>
@@ -799,9 +799,9 @@ sketchybar --trigger update_reminder_count</string>
 			<key>note</key>
 			<string>add to shopping list</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>615</real>
+			<real>590</real>
 		</dict>
 		<key>E22F442B-BF76-46E0-AB6A-EF06F7657F9E</key>
 		<dict>
