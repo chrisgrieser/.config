@@ -346,21 +346,20 @@ local function telescopeConfig()
 			-- symbol search leaves out anonymous functions
 			treesitter = {
 				prompt_prefix = " ",
-				show_line = false,
 				prompt_title = "Symbols",
+				show_line = false,
 				symbols = { "function", "class", "method" },
-				symbol_highlights = {
-					["function"] = "Function",
-					["string"] = "Comment",
-				},
+				symbol_highlights = { ["function"] = "Function" },
 			},
 			lsp_document_symbols = {
 				prompt_prefix = "󰒕 ",
+				prompt_title = "Symbols",
 				symbols = { "function", "class", "method" },
 				symbol_highlights = {
 					["module"] = "Comment",
 					["array"] = "Comment",
 					["object"] = "Comment",
+					["string"] = "Comment",
 				},
 			},
 			lsp_workspace_symbols = { -- workspace symbols are not working correctly in lua
@@ -412,7 +411,11 @@ return {
 		keys = {
 			{ "?", function() telescope("keymaps") end, desc = "⌨️ Search Keymaps" },
 			{ "g.", function() telescope("resume") end, desc = " Continue" },
-			{ "gs", function() telescope("treesitter") end, desc = " Symbols" },
+
+			-- PENDING 
+			-- { "gs", function() telescope("treesitter") end, desc = " Symbols" },
+			{ "gs", function() telescope("lsp_document_symbols") end, desc = "󰒕 Symbols" },
+
 			{ "gd", function() telescope("lsp_definitions") end, desc = "󰒕 Definitions" },
 			{ "gf", function() telescope("lsp_references") end, desc = "󰒕 References" },
 			{
@@ -420,8 +423,6 @@ return {
 				function() telescope("lsp_workspace_symbols") end,
 				desc = "󰒕 Workspace Symbols",
 			},
-			-- stylua: ignore end
-
 			{ "<leader>ph", function() telescope("highlights") end, desc = " Highlights" },
 			{ "<leader>q", function() telescope("quickfix") end, desc = " Quickfix" },
 			{ "<leader>pc", function() telescope("colorscheme") end, desc = " Colorschemes" },
@@ -464,9 +465,9 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
-			"natecraddock/telescope-zf-native.nvim", 
+			"natecraddock/telescope-zf-native.nvim",
 		},
-		config = function ()
+		config = function()
 			telescopeConfig()
 			-- prioritizes filename matches over filepath matches
 			require("telescope").load_extension("zf-native")
