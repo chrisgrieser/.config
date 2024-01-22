@@ -55,8 +55,11 @@ nnoremap <C-l> <C-i>
 
 " next diagnostic
 exmap nextSuggestion obcommand obsidian-languagetool-plugin:ltjump-to-next-suggestion
+exmap acceptSuggestion obcommand obsidian-languagetool-plugin:ltaccept-suggestion-1
 nnoremap ge :nextSuggestion
 vnoremap ge :nextSuggestion
+nnoremap ga :acceptSuggestion
+vnoremap ga :acceptSuggestion
 
 " next/prev heading
 exmap nextHeading obcommand obsidian-editor-shortcuts:goToNextHeading
