@@ -14,7 +14,7 @@ local now = os.time
 ---@type table<string, integer|nil>
 M.thresholdMins = {
 	GoodTask = 5,
-	Slack = 20,
+	Slack = 25,
 	Mimestream = 5,
 	Highlights = 90,
 	Obsidian = 120,

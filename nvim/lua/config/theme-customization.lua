@@ -112,7 +112,7 @@ local function themeModifications()
 		updateHl("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
 		overwriteHl("TSParameter", { fg = "#6f92b3" })
 	elseif theme == "everforest" then
-		overwriteHl("Red", { fg = "#ce7d7c" })
+		overwriteHl("Red", { fg = "#cf7e7d" })
 		overwriteHl("IblIndent", { fg = "#d2cdad" })
 		overwriteHl("NonText", { fg = "#c7c199" })
 		local commentColor = u.getHighlightValue("Comment", "fg")

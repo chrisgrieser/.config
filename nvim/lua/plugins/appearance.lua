@@ -55,6 +55,7 @@ return {
 	},
 	{ -- when searching, search count is shown next to the cursor
 		"kevinhwang91/nvim-hlslens",
+		-- loaded by snippet in opts-and-autocmds.lua
 		init = function()
 			-- cannot use my utility, as the value of IncSearch needs to be retrieved dynamically
 			vim.api.nvim_create_autocmd("ColorScheme", {
@@ -71,7 +72,7 @@ return {
 				local lnum, col = unpack(posList[idx])
 				local text = ("%d/%d"):format(idx, #posList)
 				local chunks = {
-					{ " ", "Ignore" }, -- = padding
+					{ " ", "Padding (Ignore)" },
 					{ "", "HLSearchReversed" },
 					{ text, "HlSearchLensNear" },
 					{ "", "HLSearchReversed" },
@@ -89,7 +90,7 @@ return {
 	},
 	{ -- emphasized headers & code blocks in markdown
 		"lukas-reineke/headlines.nvim",
-		ft = { "markdown", "yaml" },
+		ft = "markdown",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		opts = {
 			markdown = {
@@ -130,11 +131,6 @@ return {
 					ccc.output.css_hsl,
 					ccc.output.css_rgb,
 					ccc.output.hex,
-				},
-				convert = {
-					{ ccc.picker.hex, ccc.output.css_hsl },
-					{ ccc.picker.css_rgb, ccc.output.css_hsl },
-					{ ccc.picker.css_hsl, ccc.output.hex },
 				},
 				mappings = {
 					["<Esc>"] = ccc.mapping.quit,
