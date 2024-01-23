@@ -150,31 +150,30 @@ local function filetypeSpecificMultiply()
 end
 
 --------------------------------------------------------------------------------
+
 return {
-	{
-		"echasnovski/mini.operators",
-		keys = {
-			{ "s", mode = { "n", "x" }, desc = "󰅪 Substitute Operator" },
-			{ "w", mode = { "n", "x" }, desc = "󰅪 Multiply Operator" },
-			{ "#", mode = { "n", "x" }, desc = "󰅪 Evaluate Operator" },
-			{ "sy", mode = { "n", "x" }, desc = "󰅪 Sort Operator" },
-			{ "sx", mode = { "n", "x" }, desc = "󰅪 Exchange Operator" },
-			{ "S", "s$", desc = "󰅪 Substitute to EoL", remap = true },
-			{ "W", "w$", desc = "󰅪 Multiply to EoL", remap = true },
-			{ "'", "#$", desc = "󰅪 Evaluate to EoL", remap = true },
-			{ "sX", "sx$", desc = "󰅪 Exchange to EoL", remap = true },
-			{ "sY", "sy$", desc = "󰅪 Sort to EoL", remap = true },
-		},
-		opts = {
-			replace = { prefix = "s", reindent_linewise = true },
-			multiply = { prefix = "w" },
-			exchange = { prefix = "sx", reindent_linewise = true },
-			sort = { prefix = "sy" },
-			evaluate = { prefix = "#", func = luaEval },
-		},
-		init = function()
-			filetypeSpecificMultiply()
-			filetypeSpecificEval()
-		end,
+	"echasnovski/mini.operators",
+	keys = {
+		{ "s", mode = { "n", "x" }, desc = "󰅪 Substitute Operator" },
+		{ "w", mode = { "n", "x" }, desc = "󰅪 Multiply Operator" },
+		{ "#", mode = { "n", "x" }, desc = "󰅪 Evaluate Operator" },
+		{ "sy", mode = { "n", "x" }, desc = "󰅪 Sort Operator" },
+		{ "sx", mode = { "n", "x" }, desc = "󰅪 Exchange Operator" },
+		{ "S", "s$", desc = "󰅪 Substitute to EoL", remap = true },
+		{ "W", "w$", desc = "󰅪 Multiply to EoL", remap = true },
+		{ "'", "#$", desc = "󰅪 Evaluate to EoL", remap = true },
+		{ "sX", "sx$", desc = "󰅪 Exchange to EoL", remap = true },
+		{ "sY", "sy$", desc = "󰅪 Sort to EoL", remap = true },
 	},
+	opts = {
+		replace = { prefix = "s", reindent_linewise = true },
+		multiply = { prefix = "w" },
+		exchange = { prefix = "sx", reindent_linewise = true },
+		sort = { prefix = "sy" },
+		evaluate = { prefix = "#", func = luaEval },
+	},
+	init = function()
+		filetypeSpecificMultiply()
+		filetypeSpecificEval()
+	end,
 }

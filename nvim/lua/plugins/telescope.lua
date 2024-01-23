@@ -260,7 +260,10 @@ local function telescopeConfig()
 				-- add commit time (%cr) & `--all`, double `\t` for highlighting
 				git_command = { "git", "log", "--all", "--pretty=%h %s\t\t%cr", "--", "." },
 				previewer = require("telescope.previewers").new_termopen_previewer {
-					dyn_title = function(_, entry) return entry.value end, -- use hash as title
+					dyn_title = function(_, entry)
+						local hash = entry.value
+						return hash
+					end,
 					get_command = function(entry, status)
 						local hash = entry.value
 						local previewWidth = vim.api.nvim_win_get_width(status.preview_win)
@@ -412,11 +415,8 @@ return {
 			{ "gs", function() telescope("treesitter") end, desc = " Symbols" },
 			{ "gd", function() telescope("lsp_definitions") end, desc = "󰒕 Definitions" },
 			{ "gf", function() telescope("lsp_references") end, desc = "󰒕 References" },
-			{
-				"gw",
-				function() telescope("lsp_workspace_symbols") end,
-				desc = "󰒕 Workspace Symbols",
-			},
+			-- stylua: ignore
+			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
 			{ "<leader>ph", function() telescope("highlights") end, desc = " Highlights" },
 			{ "<leader>q", function() telescope("quickfix") end, desc = " Quickfix" },
 			{ "<leader>pc", function() telescope("colorscheme") end, desc = " Colorschemes" },
