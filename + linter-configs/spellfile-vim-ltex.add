@@ -88,7 +88,6 @@ fixups
 textobj
 longform
 outdention
-perf
 neovim
 nerdfont
 Nerdfont
@@ -141,7 +140,6 @@ CLIs
 winbar
 tabline
 json
-dir
 linter
 TypeScriptReact
 emojis
