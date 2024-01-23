@@ -1,8 +1,10 @@
 ---@param bufnr number
 local function highlightCopyStacktraceLine(bufnr)
-	vim.api.nvim_buf_call(bufnr, function()
-		vim.fn.matchadd("WarningMsg", [[[^/]\+\.lua:\d\+\ze:]]) -- \ze: lookahead
-	end)
+	vim.defer_fn(function()
+		vim.api.nvim_buf_call(bufnr, function()
+			vim.fn.matchadd("WarningMsg", [[[^/]\+\.lua:\d\+\ze:]]) -- \ze: lookahead
+		end)
+	end, 1)
 end
 
 --------------------------------------------------------------------------------
