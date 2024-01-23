@@ -409,6 +409,7 @@ return {
 	{ -- fuzzy finder
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
+		external_dependencies = { "fd", "rg" },
 		keys = {
 			{ "?", function() telescope("keymaps") end, desc = "⌨️ Search Keymaps" },
 			{ "g.", function() telescope("resume") end, desc = " Continue" },

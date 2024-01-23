@@ -131,7 +131,7 @@ return {
 	},
 	{ -- debugger preconfig for python
 		"mfussenegger/nvim-dap-python",
-		extra_dependencies = "debugpy",
+		mason_dependencies = "debugpy",
 		ft = "python",
 		config = function()
 			-- 1. use the debugypy installation by mason

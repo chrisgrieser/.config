@@ -40,6 +40,7 @@ return {
 	},
 	{ -- convenience file operations
 		"chrisgrieser/nvim-genghis",
+		external_dependencies = "macos-trash",
 		dependencies = "stevearc/dressing.nvim",
 		init = function() vim.g.genghis_disable_commands = true end,
 		keys = {

@@ -1,6 +1,7 @@
 return {
 	{ -- mason
 		"williamboman/mason.nvim",
+		external_dependencies = { "node", "python3" },
 		build = function()
 			-- System python is on 3.9, but some packages require 3.12, so we are
 			-- are creating a symlink, so mason picks up homebrew's python, which
@@ -39,7 +40,7 @@ return {
 		config = function()
 			-- dependencies of plugins (via lazy.nvim)
 			local plugins = require("lazy").plugins()
-			local deps = vim.tbl_map(function(plugin) return plugin.extra_dependencies end, plugins)
+			local deps = vim.tbl_map(function(plugin) return plugin.mason_dependencies end, plugins)
 			deps = vim.tbl_flatten(vim.tbl_values(deps))
 			table.sort(deps)
 			deps = vim.fn.uniq(deps)
