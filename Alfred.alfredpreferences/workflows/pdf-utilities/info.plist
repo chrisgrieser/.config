@@ -739,14 +739,14 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>note</key>
 			<string>md/docx → pdf</string>
 			<key>xpos</key>
-			<real>50</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>295</real>
 		</dict>
 		<key>20C2A007-08E6-4B1E-ABCD-B5EA1F7B0BEB</key>
 		<dict>
 			<key>xpos</key>
-			<real>190</real>
+			<real>170</real>
 			<key>ypos</key>
 			<real>300</real>
 		</dict>
@@ -755,7 +755,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>285</real>
+			<real>265</real>
 			<key>ypos</key>
 			<real>435</real>
 		</dict>
@@ -764,7 +764,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>400</real>
+			<real>380</real>
 			<key>ypos</key>
 			<real>265</real>
 		</dict>
@@ -784,7 +784,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>note</key>
 			<string>md → docx</string>
 			<key>xpos</key>
-			<real>50</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -793,7 +793,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>colorindex</key>
 			<integer>4</integer>
 			<key>xpos</key>
-			<real>290</real>
+			<real>270</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -804,7 +804,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>note</key>
 			<string>md → pdf</string>
 			<key>xpos</key>
-			<real>50</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>145</real>
 		</dict>
@@ -815,7 +815,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>note</key>
 			<string>docx → pdf</string>
 			<key>xpos</key>
-			<real>55</real>
+			<real>35</real>
 			<key>ypos</key>
 			<real>435</real>
 		</dict>
@@ -844,7 +844,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>285</real>
+			<real>265</real>
 			<key>ypos</key>
 			<real>630</real>
 		</dict>
@@ -853,7 +853,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>495</real>
+			<real>475</real>
 			<key>ypos</key>
 			<real>435</real>
 		</dict>
@@ -862,7 +862,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>55</real>
+			<real>35</real>
 			<key>ypos</key>
 			<real>695</real>
 		</dict>
@@ -871,7 +871,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>55</real>
+			<real>35</real>
 			<key>ypos</key>
 			<real>580</real>
 		</dict>
@@ -880,7 +880,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>290</real>
+			<real>270</real>
 			<key>ypos</key>
 			<real>145</real>
 		</dict>
@@ -891,7 +891,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>note</key>
 			<string>copy error</string>
 			<key>xpos</key>
-			<real>575</real>
+			<real>555</real>
 			<key>ypos</key>
 			<real>125</real>
 		</dict>
@@ -909,7 +909,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>485</real>
+			<real>465</real>
 			<key>ypos</key>
 			<real>265</real>
 		</dict>
@@ -920,7 +920,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>note</key>
 			<string>show error messages</string>
 			<key>xpos</key>
-			<real>575</real>
+			<real>555</real>
 			<key>ypos</key>
 			<real>255</real>
 		</dict>
