@@ -72,7 +72,7 @@ return {
 				local lnum, col = unpack(posList[idx])
 				local text = ("%d/%d"):format(idx, #posList)
 				local chunks = {
-					{ " ", "Padding (Ignore)" },
+					{ " ", "Padding-Ignore" },
 					{ "", "HLSearchReversed" },
 					{ text, "HlSearchLensNear" },
 					{ "", "HLSearchReversed" },
