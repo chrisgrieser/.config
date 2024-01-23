@@ -318,9 +318,9 @@ serverConfigs.ltex = {
 			local word
 			if vim.fn.mode() == "n" then
 				word = vim.fn.expand("<cword>")
-				u.normal("zg") -- regular `zg` to add to spellfile
+				u.normal("zg") 
 			else
-				u.normal('zggv"zy') -- regular `zg` to add to spellfile, reselect
+				u.normal('zggv"zy') 
 				word = vim.fn.getreg("z")
 			end
 			local ltexSettings = vim.lsp.get_active_clients({ name = "ltex" })[1].config.settings
