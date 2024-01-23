@@ -87,7 +87,7 @@ return {
 	-- Formatter integration
 	"stevearc/conform.nvim",
 	cmd = "ConformInfo",
-	extra_dependencies = listConformFormatters(ftToFormatter),
+	mason_dependencies = listConformFormatters(ftToFormatter),
 	config = function()
 		require("conform.formatters.injected").options.ignore_errors = true
 		require("conform").setup(conformOpts)

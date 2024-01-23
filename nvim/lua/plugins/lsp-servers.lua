@@ -318,9 +318,9 @@ serverConfigs.ltex = {
 			local word
 			if vim.fn.mode() == "n" then
 				word = vim.fn.expand("<cword>")
-				u.normal("zg") 
+				u.normal("zg")
 			else
-				u.normal('zggv"zy') 
+				u.normal('zggv"zy')
 				word = vim.fn.getreg("z")
 			end
 			local ltexSettings = vim.lsp.get_active_clients({ name = "ltex" })[1].config.settings
@@ -370,7 +370,8 @@ serverConfigs.yamlls = {
 			},
 		},
 	},
-	-- SIC needs enabling via setting *and* via capabilities to work
+	-- SIC needs enabling via setting *and* via capabilities to work. Probably
+	-- fixed with nvim 0.10
 	on_attach = function(client) client.server_capabilities.documentFormattingProvider = true end,
 }
 
@@ -379,7 +380,8 @@ serverConfigs.yamlls = {
 return {
 	"neovim/nvim-lspconfig",
 	lazy = false,
-	extra_dependencies = vim.list_extend(efmDependencies, vim.tbl_values(lspToMasonMap)),
+	mason_dependencies = vim.list_extend(efmDependencies, vim.tbl_values(lspToMasonMap)),
+	external_dependencies = "openjdk", -- PENDING https://github.com/williamboman/mason.nvim/issues/1531
 	dependencies = { -- loading as dependency ensures it's loaded before lua_ls
 		"folke/neodev.nvim",
 		opts = { library = { plugins = false } }, -- too slow with all my plugins

@@ -39,8 +39,8 @@ end
 
 --------------------------------------------------------------------------------
 
--- Never show tabline, since we are showing it ourself on the winbar
--- cannot place the component in the tabline, since when empty, vim places its
+-- Never show tabline, since we are showing it ourself on the winbar.
+-- Cannot place the component in the tabline, since when empty, vim places its
 -- ugly tabline there instead.
 vim.opt.showtabline = 0
 
@@ -144,5 +144,6 @@ return {
 	"nvim-lualine/lualine.nvim",
 	event = "UIEnter",
 	dependencies = "nvim-tree/nvim-web-devicons",
+	external_dependencies = "git",
 	opts = lualineConfig,
 }

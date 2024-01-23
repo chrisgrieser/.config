@@ -193,7 +193,7 @@ return {
 	{ -- snippet management
 		"chrisgrieser/nvim-scissors",
 		dependencies = "nvim-telescope/telescope.nvim",
-		extra_dependencies = "yq",
+		mason_dependencies = "yq",
 		init = function() u.leaderSubkey("n", " Snippets") end,
 		keys = {
 			{
@@ -220,9 +220,7 @@ return {
 					insertNextToken = "<D-t>",
 				},
 			},
-			telescope = {
-				alsoSearchSnippetBody = true,
-			},
+			telescope = { alsoSearchSnippetBody = true },
 			jsonFormatter = "yq",
 		},
 	},
