@@ -131,3 +131,4 @@ matches:
   - { trigger: cleint, replace: client, propagate_case: true, word: true }
   - { trigger: aaaaaaaaaa, replace: bbb, propagate_case: true, word: true }
   - { trigger: maisl, replace: mails, propagate_case: true, word: true }
+  - { trigger: whcih, replace: which, propagate_case: true, word: true }

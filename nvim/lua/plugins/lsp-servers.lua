@@ -313,7 +313,7 @@ serverConfigs.ltex = {
 		},
 	},
 	on_attach = function()
-		-- have `zg` update ltex as well
+		-- have `zg` update ltex dictionary file as well as vim's spellfile
 		vim.keymap.set({ "n", "x" }, "zg", function()
 			local word
 			if vim.fn.mode() == "n" then
@@ -328,7 +328,7 @@ serverConfigs.ltex = {
 			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = ltexSettings })
 		end, { desc = "󰓆 Add Word", buffer = true })
 
-		-- Disable in Obsidian
+		-- Disable ltex in Obsidian vault
 		vim.defer_fn(function()
 			if vim.loop.cwd() == vim.env.VAULT_PATH then vim.cmd.LspStop("ltex") end
 		end, 500)
