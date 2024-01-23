@@ -34,6 +34,13 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config) ---
 	})
 end
 
+-- `vim.lsp.buf.definition` jumps to first definition
+-- https://www.reddit.com/r/neovim/comments/19cvgtp/comment/kj1yevl/
+vim.lsp.handlers["textDocument/definition"] = function(err, result, ctx, config)
+	if type(result) == "table" then result = { result[1] } end
+	vim.lsp.handlers["textDocument/definition"](err, result, ctx, config)
+end
+
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 	border = vim.g.borderStyle,
 })

@@ -6,15 +6,15 @@ return {
 	opts = {
 		-- easier than keeping track of new "special parsers", which are not
 		-- auto-installed on entering a buffer (e.g., regex, luadocs, comments)
-		-- PENDING https://github.com/nvim-treesitter/nvim-treesitter/issues/5888
 		ensure_installed = "all",
 
-		highlight = { enable = true },
+		highlight = {
+			enable = true,
+		},
 		indent = {
 			enable = true,
 			disable = { "markdown" }, -- indentation at bullet points is worse
 		},
-
 		--------------------------------------------------------------------------
 		-- TREESITTER PLUGINS
 		matchup = {
@@ -22,9 +22,9 @@ return {
 			enable_quotes = true,
 			disable_virtual_text = false,
 		},
-
-		endwise = { enable = true },
-
+		endwise = {
+			enable = true,
+		},
 		textobjects = {
 			move = { -- move to next function
 				enable = true,

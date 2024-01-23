@@ -34,6 +34,7 @@ local lspToMasonMap = {
 ---@field capabilities? table <string, string|table|boolean|function>
 ---@field cmd? string[]
 ---@field filetypes? string[]
+---@field handlers? table <string, function>
 ---@field init_options? table <string, string|table|boolean>
 ---@field on_attach? function(client, bufnr)
 ---@field on_new_config? function(new_config, root_dir)
@@ -340,6 +341,7 @@ serverConfigs.typos_lsp = {
 	init_options = { diagnosticSeverity = "information" },
 }
 
+-- VALE
 -- DOCS https://vale.sh/docs/integrations/guide/#vale-ls
 -- DOCS https://vale.sh/docs/topics/config#search-process
 serverConfigs.vale_ls = {
@@ -374,33 +376,26 @@ serverConfigs.yamlls = {
 
 --------------------------------------------------------------------------------
 
-local function setupAllLsps()
-	-- Enable snippets-completion (nvim_cmp) and folding (nvim-ufo)
-	local lspCapabilities = vim.lsp.protocol.make_client_capabilities()
-	lspCapabilities.textDocument.completion.completionItem.snippetSupport = true
-	lspCapabilities.textDocument.foldingRange =
-		{ dynamicRegistration = false, lineFoldingOnly = true }
-
-	for lsp, serverConfig in pairs(serverConfigs) do
-		serverConfig.capabilities = lspCapabilities
-		require("lspconfig")[lsp].setup(serverConfig)
-	end
-end
-
---------------------------------------------------------------------------------
-
 return {
-	{ -- configure LSPs
-		"neovim/nvim-lspconfig",
-		lazy = false,
-		extra_dependencies = vim.list_extend(efmDependencies, vim.tbl_values(lspToMasonMap)),
-		dependencies = { -- loading as dependency ensures it's loaded before lua_ls
-			"folke/neodev.nvim",
-			opts = { library = { plugins = false } }, -- too slow with all my plugins
-		},
-		config = function()
-			setupAllLsps()
-			require("lspconfig.ui.windows").default_options.border = vim.g.borderStyle
-		end,
+	"neovim/nvim-lspconfig",
+	lazy = false,
+	extra_dependencies = vim.list_extend(efmDependencies, vim.tbl_values(lspToMasonMap)),
+	dependencies = { -- loading as dependency ensures it's loaded before lua_ls
+		"folke/neodev.nvim",
+		opts = { library = { plugins = false } }, -- too slow with all my plugins
 	},
+	config = function()
+		require("lspconfig.ui.windows").default_options.border = vim.g.borderStyle
+
+		-- Enable snippets-completion (nvim_cmp) and folding (nvim-ufo)
+		local lspCapabilities = vim.lsp.protocol.make_client_capabilities()
+		lspCapabilities.textDocument.completion.completionItem.snippetSupport = true
+		lspCapabilities.textDocument.foldingRange =
+			{ dynamicRegistration = false, lineFoldingOnly = true }
+
+		for lsp, serverConfig in pairs(serverConfigs) do
+			serverConfig.capabilities = lspCapabilities
+			require("lspconfig")[lsp].setup(serverConfig)
+		end
+	end,
 }
