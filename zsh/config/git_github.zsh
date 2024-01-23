@@ -1,3 +1,4 @@
+alias g='git'
 alias gs='git status'
 alias ga='git add'
 alias gA='git add --all'

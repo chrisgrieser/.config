@@ -17,8 +17,8 @@ return {
 		opts = {
 			ui = {
 				border = vim.g.borderStyle,
-				height = 0.8, -- so statusline is still visible
-				width = 0.8,
+				height = 1,
+				width = 0.9,
 				icons = {
 					package_installed = "✓",
 					package_pending = "󰔟",
