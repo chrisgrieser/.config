@@ -123,7 +123,8 @@ function M.openAlfredPref()
 	end
 	-- URI seems more reliable than JXA when called via nvim https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
 	local workflowId = parentFolder:match("Alfred%.alfredpreferences/workflows/([^/]+)")
-	vim.fn.system { "open", "alfredpreferences://navigateto/workflows>workflow>" .. workflowId }
+	local uri = "alfredpreferences://navigateto/workflows>workflow>" .. workflowId
+	vim.fn.system { "open", uri }
 	-- in case the right workflow is already open, Alfred is not focused.
 	-- Therefore manually focusing in addition to that here as well.
 	vim.fn.system { "open", "-a", "Alfred Preferences" }
