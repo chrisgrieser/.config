@@ -68,7 +68,6 @@ local function themeModifications()
 	-- some themes do not set g.colors_name
 	if not theme then theme = mode == "light" and g.lightTheme or g.darkTheme end
 	local vimModes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
-	local todoComments = { "todo", "error", "warning", "info", "hint" }
 
 	if theme == "tokyonight" then
 		local statuslineYellow = mode == "dark" and "#b8b042" or "#e8e05e"
@@ -79,7 +78,8 @@ local function themeModifications()
 		updateHl("GitSignsChange", "guifg=#acaa62")
 		updateHl("GitSignsAdd", "guifg=#369a96")
 
-		for _, type in pairs(todoComments) do
+		-- todo comments have emphasized background, not foreground
+		for _, type in pairs({ "todo", "error", "warning", "note" }) do
 			local fg = u.getHighlightValue("@comment." .. type, "fg")
 			if fg ~= "#000000" then overwriteHl("@comment." .. type, { bg = fg, fg = "#000000" }) end
 		end
