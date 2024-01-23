@@ -1,9 +1,10 @@
 "───────────────────────────────────────────────────────────────────────────────
 " LEADER
 
-" equivalent to let mapleader=,
+" equivalent to `let mapleader = ,`
 " can't set leaders in Obsidian vim, so the key just has to be used consistently.
-" However, it needs to be unmapped, to not trigger default behavior: https://github.com/esm7/obsidian-vimrc-support#some-help-with-binding-space-chords-doom-and-spacemacs-fans
+" However, it needs to be unmapped, to not trigger default behavior: 
+" https://github.com/esm7/obsidian-vimrc-support#some-help-with-binding-space-chords-doom-and-spacemacs-fans
 unmap ,
 
 "───────────────────────────────────────────────────────────────────────────────
@@ -70,7 +71,7 @@ nnoremap <C-k> :prevHeading
 " [m]atch parenthesis
 nnoremap m %
 
-" [g]oto [s]ymbol via "Another Quick Switcher" Plugin
+" [g]oto [s]ymbol (via "Another Quick Switcher" Plugin)
 exmap gotoHeading obcommand obsidian-another-quick-switcher:header-floating-search-in-file
 nnoremap gs :gotoHeading
 
@@ -83,7 +84,6 @@ exmap followNextLink obcommand shukuchi:open-link
 exmap followNextLinkInNewTab obcommand shukuchi:open-link-in-new-tab
 nnoremap gx :followNextLink
 nnoremap gX :followNextLinkInNewTab
-nnoremap gp :followNextLink
 nnoremap gd :followNextLink
 
 " [g]oto [f]ootnotes
@@ -233,6 +233,11 @@ nnoremap qq :contextualComment
 " markdown tasks
 exmap checkList obcommand editor:toggle-checklist-status
 nnoremap ,x :checkList
+
+" blockquote
+exmap toggleBlockquote obcommand editor:toggle-blockquote
+nnoremap ,< :toggleBlockquote
+nnoremap ,> :toggleBlockquote
 
 "───────────────────────────────────────────────────────────────────────────────
 " LEADER MAPPINGS
