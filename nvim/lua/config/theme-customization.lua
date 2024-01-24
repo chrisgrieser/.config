@@ -59,8 +59,14 @@ local function customHighlights()
 		linkHl("@markup.link.url", "@text.uri")
 		linkHl("@variable.parameter", "@parameter")
 	end
+
+	-- PENDING https://github.com/EdenEast/nightfox.nvim/issues/407
+	if g.colors_name:find("fox$") then
+		overwriteHl("@comment.note", { bg = "#295e73", fg = "#ffffff" })
+	end
 end
 
+-- NOTE BUG WARN TODO
 local function themeModifications()
 	local mode = vim.o.background
 	local theme = g.colors_name
@@ -78,7 +84,7 @@ local function themeModifications()
 		updateHl("GitSignsAdd", "guifg=#369a96")
 
 		-- todo comments have emphasized background, not foreground
-		for _, type in pairs({ "todo", "error", "warning", "note" }) do
+		for _, type in pairs { "todo", "error", "warning", "note" } do
 			local fg = u.getHighlightValue("@comment." .. type, "fg")
 			if fg ~= "#000000" then overwriteHl("@comment." .. type, { bg = fg, fg = "#000000" }) end
 		end

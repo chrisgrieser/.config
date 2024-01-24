@@ -9,11 +9,12 @@ local plugins = {
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		main = "nvim-treesitter.configs",
+		opts = {
+			ensure_installed = { "lua", "comment" },
+			highlight = { enable = true },
+		},
 	},
-	{
-		"nvim-telescope/telescope.nvim",
-		dependencies = "nvim-lua/plenary.nvim",
-	},
+	{ "EdenEast/nightfox.nvim" },
 }
 
 --------------------------------------------------------------------------------
@@ -36,7 +37,7 @@ require("lazy").setup(plugins)
 
 -- basic appearance settings to not be annoyed
 vim.opt.swapfile = false -- disable prompt when things crash
-vim.cmd.colorscheme("habamax")
+vim.cmd.colorscheme("dawnfox")
 vim.opt.guifont = vim.env.CODE_FONT .. ":h24.5"
 vim.opt.signcolumn = "yes:1"
 
