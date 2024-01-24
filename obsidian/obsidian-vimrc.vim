@@ -174,6 +174,7 @@ nnoremap Ä "zdawbh"zph
 " spelling list (emulates `z=`)
 exmap contextMenu obcommand editor:context-menu
 nnoremap zl :contextMenu
+vnoremap zl :contextMenu
 
 " increment quicker
 nnoremap + <C-a>
