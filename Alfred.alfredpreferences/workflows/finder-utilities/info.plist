@@ -374,6 +374,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>BAE121DB-A4DB-45C3-9C13-DBB7886D8933</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>D32D490E-F78B-4733-A0EC-0672CD8A6E30</key>
 		<array>
@@ -935,6 +945,27 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<string>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>ℹ️ No Finder Window open</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>BAE121DB-A4DB-45C3-9C13-DBB7886D8933</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1907,6 +1938,15 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>115</real>
+		</dict>
+		<key>BAE121DB-A4DB-45C3-9C13-DBB7886D8933</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>1035</real>
+			<key>ypos</key>
+			<real>555</real>
 		</dict>
 		<key>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</key>
 		<dict>
