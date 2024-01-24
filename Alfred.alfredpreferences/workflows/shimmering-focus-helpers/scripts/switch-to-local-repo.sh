@@ -15,7 +15,7 @@ cd "$LOCAL_REPOS" || return 1
 
 # WARN depth=2 ensures that amending a shallow commit does not result in a
 # new commit without parent, effectively destroying git history (!!)
-git clone --depth=2 --filter="blob:none" "$remote_ssh"
+git clone --depth=5 --filter="blob:none" "$remote_ssh"
 
 # switch symlink
 ln -sf "$LOCAL_REPOS/shimmering-focus/theme.css" "$theme_folder/theme.css"
