@@ -60,17 +60,15 @@ local function workLayout()
 	setHigherBrightnessDuringDay()
 
 	-- close all the stuff
-	u.quitApps(env.videoAndAudioApps)
-	privatCloser()
-	local finder = hs.application("Finder")
-	if finder then
-		for _, win in pairs(finder:allWindows()) do
-			win:close()
-		end
+	local finderWins = hs.application("Finder") and hs.application("Finder"):allWindows() or {}
+	for _, win in pairs(finderWins) do
+		win:close()
 	end
 	for _, win in pairs(hs.window.allWindows()) do
 		if win:isFullScreen() then win:setFullScreen(false) end
 	end
+	u.quitApps(env.videoAndAudioApps)
+	privatCloser()
 
 	-- open
 	u.openApps(env.mastodonApp)

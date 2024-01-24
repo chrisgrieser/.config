@@ -49,7 +49,6 @@ local function customHighlights()
 	end
 
 	-----------------------------------------------------------------------------
-	-- PENDING theme updates
 	local hasNoUpdatedTreesitterHls =
 		vim.tbl_isempty(vim.api.nvim_get_hl(0, { name = "@comment.todo" }))
 	if hasNoUpdatedTreesitterHls then
