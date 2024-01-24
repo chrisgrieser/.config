@@ -18,8 +18,8 @@ return {
 		opts = {
 			ui = {
 				border = vim.g.borderStyle,
-				height = 1,
-				width = 0.9,
+				height = 0.9,
+				width = 0.8,
 				icons = {
 					package_installed = "✓",
 					package_pending = "󰔟",
