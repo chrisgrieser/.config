@@ -266,7 +266,7 @@ nnoremap ,a :acceptAll
 
 " Critic Markup: reject all
 exmap rejectAll obcommand commentator:commentator-reject-all-suggestions
-nnoremap ,A :rejectAll
+nnoremap ,r :rejectAll
 
 "───────────────────────────────────────────────────────────────────────────────
 " VISUAL MODE
