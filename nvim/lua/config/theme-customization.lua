@@ -59,14 +59,8 @@ local function customHighlights()
 		linkHl("@markup.link.url", "@text.uri")
 		linkHl("@variable.parameter", "@parameter")
 	end
-
-	-- PENDING https://github.com/EdenEast/nightfox.nvim/issues/407
-	if g.colors_name:find("fox$") then
-		overwriteHl("@comment.note", { bg = "#295e73", fg = "#ffffff" })
-	end
 end
 
--- NOTE BUG WARN TODO
 local function themeModifications()
 	local mode = vim.o.background
 	local theme = g.colors_name
