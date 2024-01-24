@@ -560,9 +560,8 @@ The workflow offers four [hotkeys](https://www.alfredapp.com/help/workflows/trig
 
 1. Autocorrect the word under the cursor.
 2. Suggest synonyms for the word under the cursor.
-3. Rephrase the selected text via ChatGPT, improving its language (requires
-   OpenAI API key).
-4. Same as 3, but use Markdown markup to show the changes:
+3. Rephrase the selected text via ChatGPT, improving its language (requires OpenAI API key).
+4. Same as 3, but uses Markdown markup to show the changes:
 	+ Additions are displayed as `==highlights==`.
 	+ Deletions are displayed as `~~strikethroughs~~`.
 	+ There is a workflow configuration to alternatively format the changes as [Critic Markup](https://github.com/CriticMarkup/CriticMarkup-toolkit).
@@ -761,7 +760,7 @@ DOUBLE CLICK TO EDIT</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>OpenAI API Key. If empty, will look through `.zshenv` for a variable `$OPENAI_API_KEY`.</string>
+			<string>OpenAI API Key. If empty, will use $OPENAI_API_KEY exported in .zshenv.</string>
 			<key>label</key>
 			<string>Rephrasing</string>
 			<key>type</key>
