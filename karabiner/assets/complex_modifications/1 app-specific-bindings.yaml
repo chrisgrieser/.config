@@ -384,15 +384,21 @@ rules:
         from: { key_code: o, modifiers: { mandatory: [command] } }
         to:
           - key_code: tab
-          - { key_code: vk_none, hold_down_milliseconds: 80 }
+          - { key_code: vk_none, hold_down_milliseconds: 50 }
           - key_code: up_arrow
-          - { key_code: vk_none, hold_down_milliseconds: 80 }
+          - { key_code: vk_none, hold_down_milliseconds: 50 }
           - key_code: tab
+          - key_code: tab
+          - key_code: tab
+          - { key_code: vk_none, hold_down_milliseconds: 50 }
+          - key_code: return_or_enter
+          # go back to insertion field at discord
           - { key_code: vk_none, hold_down_milliseconds: 80 }
-          - key_code: spacebar
+          - { key_code: tab, modifiers: [command] }
+          - { key_code: vk_none, hold_down_milliseconds: 80 }
           - key_code: down_arrow
-          - { key_code: vk_none, hold_down_milliseconds: 30 }
           - key_code: escape
+          - { key_code: tab, modifiers: [command] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$] }]
       # [r]eply to msg above
       - type: basic
