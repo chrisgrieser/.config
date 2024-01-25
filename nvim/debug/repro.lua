@@ -10,7 +10,7 @@ local plugins = {
 		build = ":TSUpdate",
 		main = "nvim-treesitter.configs",
 		opts = {
-			ensure_installed = { "lua", "comment" },
+			ensure_installed = { "lua" },
 			highlight = { enable = true },
 		},
 	},

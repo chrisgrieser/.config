@@ -14,6 +14,9 @@ local routes = {
 	-- FIX jedi bug https://github.com/pappasam/jedi-language-server/issues/296
 	{ filter = { event = "msg_show", find = "^}$" }, skip = true },
 
+	-- FIX lsp signature bug
+	{ filter = { event = "msg_show", find = "lsp_signature? handler RPC" }, skip = true },
+
 	-- redirect to popup when message is long
 	{ filter = { min_height = 10 }, view = "popup" },
 
@@ -150,7 +153,8 @@ return {
 		},
 	},
 	{ -- Notifications
-		"rcarriga/nvim-notify",
+		"chrisgrieser/nvim-notify",
+		branch = "dev",
 		opts = {
 			render = "wrapped-compact", -- best for shorter max_width
 			max_width = 50,

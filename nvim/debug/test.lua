@@ -1,3 +1,1 @@
--- NOTE
--- TODO
--- ERROR
+vim.notify("[foobar] hello world")
