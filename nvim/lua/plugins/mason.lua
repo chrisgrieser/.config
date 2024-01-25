@@ -1,19 +1,11 @@
 return {
 	{
 		"williamboman/mason.nvim",
+
 		-- PENDING https://github.com/williamboman/mason.nvim/pull/1608
-		branch = "eat/more-python-candidates",
-		external_dependencies = { "node", "python3" },
-		-- build = function()
-		-- 	-- INFO System python is on 3.9, but some packages require 3.12, so we are
-		-- 	-- are creating a symlink, so mason picks up homebrew's python, which
-		-- 	-- isn't picked up by default, since it uses `python3.12` instead of
-		-- 	-- `python3` as binary name.
-		-- 	local symLinkFrom = vim.env.HOMEBREW_PREFIX .. "/bin/python3.12"
-		-- 	local symLinkTo = vim.env.HOMEBREW_PREFIX .. "/bin/python3"
-		-- 	local symlinkExists = vim.loop.fs_stat(symLinkTo) ~= nil
-		-- 	if not symlinkExists then vim.loop.fs_symlink(symLinkFrom, symLinkTo) end
-		-- end,
+		branch = "feat/more-python-candidates",
+
+		external_dependencies = { "node", "python3.12" },
 		keys = {
 			{ "<leader>pm", vim.cmd.Mason, desc = " Mason" },
 		},

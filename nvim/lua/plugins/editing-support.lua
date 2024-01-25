@@ -36,6 +36,7 @@ return {
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "undotree",
 				callback = function()
+					vim.opt_local.list = false
 					vim.defer_fn(function()
 						vim.keymap.set("n", "J", "6j", { buffer = true })
 						vim.keymap.set("n", "K", "6k", { buffer = true })

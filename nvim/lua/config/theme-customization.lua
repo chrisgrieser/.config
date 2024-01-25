@@ -48,6 +48,9 @@ local function customHighlights()
 		updateHl("Spell" .. type, "gui=underdotted cterm=underline")
 	end
 
+	-- trailing spaces more visible
+	linkHl("Whitespace", "NonText")
+
 	-----------------------------------------------------------------------------
 	local hasNoUpdatedTreesitterHls =
 		vim.tbl_isempty(vim.api.nvim_get_hl(0, { name = "@comment.todo" }))

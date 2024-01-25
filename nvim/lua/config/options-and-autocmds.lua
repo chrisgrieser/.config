@@ -184,17 +184,6 @@ opt.listchars = {
 	trail = " ",
 }
 
--- no list chars in special buffers
-autocmd({ "BufNew", "BufReadPost" }, {
-	callback = function()
-		vim.defer_fn(function()
-			if vim.bo.buftype ~= "" and vim.bo.ft ~= "query" then
-				-- opt_local.list = false
-			end
-		end, 1)
-	end,
-})
-
 --------------------------------------------------------------------------------
 -- AUTO-SAVE
 opt.autowriteall = true
@@ -319,6 +308,7 @@ local skeletons = {
 	javascript = "js",
 	make = "make",
 	sh = "zsh",
+	toml = "toml",
 }
 
 vim.api.nvim_create_autocmd("FileType", {
