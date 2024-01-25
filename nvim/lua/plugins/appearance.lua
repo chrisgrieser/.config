@@ -23,6 +23,10 @@ return {
 			max_lines = 4,
 			multiline_threshold = 1, -- only show 1 line per context
 		},
+		init = function()
+			-- adds grey undeerline
+			u.colorschemeMod("TreesitterContextBottom", { underline = true, special = "#808080" })
+		end,
 	},
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",

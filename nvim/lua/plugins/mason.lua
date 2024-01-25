@@ -1,10 +1,6 @@
 return {
 	{
 		"williamboman/mason.nvim",
-
-		-- PENDING https://github.com/williamboman/mason.nvim/pull/1608
-		branch = "feat/more-python-candidates",
-
 		external_dependencies = { "node", "python3.12" },
 		keys = {
 			{ "<leader>pm", vim.cmd.Mason, desc = " Mason" },
