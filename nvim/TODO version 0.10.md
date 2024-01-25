@@ -4,9 +4,10 @@
 	+ checkout whether the updated version works with neovide's multi-grid
 - `yaml-ls` perhaps now supports formatting without needing to enable it in
   `lspconfig`
+- `vim.lsp.get_clients` -> `vim.lsp.get_active_clients`
 - lua ft: b.comments
-- `vim.system` instead of `vim.fn.system`
-- `vim.uv` instead of `vim.loop`
+- `vim.system` -> `vim.fn.system`
+- `vim.uv` -> `vim.loop`
 - ftAbbr & abbreviations.lua: `vim.keymap.set('ia', lhs, rhs, { buffer = true })`
 - inlay hints setup: <https://www.reddit.com/r/neovim/comments/16tmzkh/comment/k2gpy16/?context=3>
 - change lsp-signature to inlay hint

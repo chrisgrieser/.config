@@ -55,8 +55,7 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 -- no arg: all LSPs attached to current buffer
 -- one arg: name of the LSP
 vim.api.nvim_create_user_command("LspCapabilities", function(ctx)
-	local filter = ctx.args == "" and { bufnr = vim.api.nvim_get_current_buf() }
-		or { name = ctx.args }
+	local filter = ctx.args == "" and { bufnr = 0 } or { name = ctx.args }
 	local clients = vim.lsp.get_active_clients(filter)
 	local clientInfo = vim.tbl_map(
 		function(client) return client.name .. "\n" .. vim.inspect(client) end,
