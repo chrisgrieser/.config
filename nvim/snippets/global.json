@@ -4,7 +4,7 @@
     "prefix": "BUG"
   },
   "CAVEAT": {
-    "body": "CAVEAT",
+    "body": "$LINE_COMMENT CAVEAT",
     "prefix": "CAVEAT"
   },
   "CONFIG": {
@@ -44,7 +44,7 @@
     "prefix": "PERF"
   },
   "SOURCE": {
-    "body": "SOURCE",
+    "body": "$LINE_COMMENT SOURCE",
     "prefix": "SOURCE"
   },
   "backspace": {
