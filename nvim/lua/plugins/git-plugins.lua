@@ -82,6 +82,7 @@ return {
 				topdelete = { show_count = true },
 				changedelete = { show_count = true },
 			},
+			attach_to_untracked = true,
 		},
 		config = function(_, opts)
 			require("gitsigns").setup(opts)
