@@ -28,7 +28,7 @@ function M.getHighlightValue(name, key)
 	local hl = vim.api.nvim_get_hl( 0, { name = name })
 	local value = hl[key]
 	if not value then return end
-	return string.format("#%06x", value)
+	return ("#%06x"):format(value)
 end
 
 --------------------------------------------------------------------------------

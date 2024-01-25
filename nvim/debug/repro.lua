@@ -10,7 +10,7 @@ local plugins = {
 		build = ":TSUpdate",
 		main = "nvim-treesitter.configs",
 		opts = {
-			ensure_installed = { "lua" },
+			ensure_installed = { "markdown", "markdown_inline" },
 			highlight = { enable = true },
 		},
 	},
