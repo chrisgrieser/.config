@@ -138,6 +138,8 @@ local lualineConfig = {
 	},
 }
 
+-- always use winbar
+lualineConfig.inactive_winbar = lualineConfig.winbar
 --------------------------------------------------------------------------------
 
 return {
