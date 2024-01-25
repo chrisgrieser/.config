@@ -315,11 +315,15 @@ local function telescopeConfig()
 					i = {
 						-- copy value of highlight instead of sending a message
 						["<CR>"] = function(prompt_bufnr)
-							local highlightName =
-								require("telescope.actions.state").get_selected_entry().value
+							local hlName = require("telescope.actions.state").get_selected_entry().value
 							require("telescope.actions").close(prompt_bufnr)
-							vim.fn.setreg("+", highlightName)
-							u.notify("Copied", highlightName)
+							local value = vim.api.nvim_get_hl(0, { name = hlName })
+							local out = { hlName }
+							if value.fg then table.insert(out, ("#%06x"):format(value.fg)) end
+							if value.bg then table.insert(out, ("#%06x"):format(value.bg)) end
+							local str = table.concat(out, "\n")
+							vim.fn.setreg("+", str)
+							u.notify("Copied", str)
 						end,
 					},
 				},
