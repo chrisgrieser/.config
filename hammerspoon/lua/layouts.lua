@@ -60,19 +60,15 @@ local function workLayout()
 	setHigherBrightnessDuringDay()
 
 	-- close all the stuff
-	local finderWins = hs.application("Finder") and hs.application("Finder"):allWindows() or {}
-	for _, win in pairs(finderWins) do
-		win:close()
-	end
 	for _, win in pairs(hs.window.allWindows()) do
 		if win:isFullScreen() then win:setFullScreen(false) end
 	end
-	u.quitApps(env.videoAndAudioApps)
 	privatCloser()
+	u.quitApps{"Finder", table.unpack(env.videoAndAudioApps)} -- unpack must be last
 
 	-- open
 	u.openApps(env.mastodonApp)
-	local appsToOpen = { "Discord", env.browserApp, "Mimestream",  }
+	local appsToOpen = { "Discord", env.browserApp, "Mimestream" }
 	if not isWeekend() then table.insert(appsToOpen, "Slack") end
 	u.openApps(appsToOpen)
 	for _, appName in pairs(appsToOpen) do
@@ -80,6 +76,16 @@ local function workLayout()
 			local win = u.app(appName):mainWindow()
 			wu.moveResize(win, wu.pseudoMax)
 		end)
+	end
+
+	-- restart AltTab
+	if u.app("AltTab") then
+		u.app("AltTab"):kill()
+		M.altTabRestart = hs.timer.waitUntil(
+			function() return u.app("AltTab") == nil end,
+			function() hs.application.open("AltTab") end,
+			0.1
+		)
 	end
 
 	-- finish
