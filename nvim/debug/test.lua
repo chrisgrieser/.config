@@ -1,1 +1,1 @@
-vim.api.nvim_get_hl( 0, { name = "Comment" })
+vim.notify("[foobar] hello world")
