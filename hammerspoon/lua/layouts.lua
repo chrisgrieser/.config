@@ -6,6 +6,7 @@ local u = require("lua.utils")
 local visuals = require("lua.visuals")
 local wu = require("lua.window-utils")
 local privatCloser = require("lua.private").closer
+local app = require("lua.utils").app
 
 local wf = hs.window.filter
 local hotkey = hs.hotkey.bind
@@ -60,6 +61,10 @@ local function workLayout()
 	setHigherBrightnessDuringDay()
 
 	-- close all the stuff
+	local finderWins = app("Finder") and app("Finder"):allWindows() or {}
+	for _, win in pairs(finderWins) do
+		win:close()
+	end
 	for _, win in pairs(hs.window.allWindows()) do
 		if win:isFullScreen() then win:setFullScreen(false) end
 	end
@@ -73,23 +78,23 @@ local function workLayout()
 	u.openApps(appsToOpen)
 	for _, appName in pairs(appsToOpen) do
 		u.whenAppWinAvailable(appName, function()
-			local win = u.app(appName):mainWindow()
+			local win = app(appName):mainWindow()
 			wu.moveResize(win, wu.pseudoMax)
 		end)
 	end
 
-	-- restart AltTab
-	if u.app("AltTab") then
-		u.app("AltTab"):kill()
+	-- restart AltTab (FIX missing windows)
+	if app("AltTab") then
+		app("AltTab"):kill()
 		M.altTabRestart = hs.timer.waitUntil(
-			function() return u.app("AltTab") == nil end,
+			function() return app("AltTab") == nil end,
 			function() hs.application.open("AltTab") end,
 			0.1
 		)
 	end
 
 	-- finish
-	u.whenAppWinAvailable("Discord", function() u.app("Mimestream"):activate() end)
+	u.whenAppWinAvailable("Discord", function() app("Mimestream"):activate() end)
 	print("🔲 Loaded WorkLayout")
 end
 
@@ -149,14 +154,14 @@ M.wf_appsOnMouseScreen = wf.new({
 	table.unpack(env.videoAndAudioApps), -- must be last for all items to be unpacked
 }):subscribe(wf.windowCreated, function(newWin)
 	local mouseScreen = hs.mouse.getCurrentScreen()
-	local app = newWin:application()
+	local appOfWinName = newWin:application():name()
 	local screenOfWindow = newWin:screen()
 	if not (mouseScreen and env.isProjector() and app) then return end
 
 	u.runWithDelays({ 0, 0.2 }, function()
 		if mouseScreen:name() == screenOfWindow:name() then return end
 		newWin:moveToScreen(mouseScreen)
-		if app:name() ~= "GoodTask" then wu.moveResize(newWin, wu.maximized) end
+		if appOfWinName ~= "GoodTask" then wu.moveResize(newWin, wu.maximized) end
 	end)
 end)
 

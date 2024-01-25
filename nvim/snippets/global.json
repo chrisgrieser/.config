@@ -1,6 +1,6 @@
 {
   "BUG": {
-    "body": "BUG",
+    "body": "$LINE_COMMENT BUG",
     "prefix": "BUG"
   },
   "CAVEAT": {
@@ -12,23 +12,23 @@
     "prefix": "CONFIG"
   },
   "DOCS": {
-    "body": "DOCS",
+    "body": "$LINE_COMMENT DOCS",
     "prefix": "DOCS"
   },
   "FIX": {
-    "body": "FIX",
+    "body": "$LINE_COMMENT FIX",
     "prefix": "FIX"
   },
   "GUARD": {
-    "body": "GUARD",
+    "body": "$LINE_COMMENT GUARD",
     "prefix": "GUARD"
   },
   "HACK": {
-    "body": "HACK",
+    "body": "$LINE_COMMENT HACK",
     "prefix": "HACK"
   },
   "INFO": {
-    "body": "INFO",
+    "body": "$LINE_COMMENT INFO",
     "prefix": "INFO"
   },
   "Lorem Ipsum Sentence": {
@@ -36,11 +36,11 @@
     "prefix": "lorem sentence"
   },
   "PENDING": {
-    "body": "PENDING",
+    "body": "$LINE_COMMENT PENDING",
     "prefix": "PENDING"
   },
   "PERF": {
-    "body": "PERF",
+    "body": "$LINE_COMMENT PERF",
     "prefix": "PERF"
   },
   "SOURCE": {
