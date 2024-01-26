@@ -231,12 +231,7 @@ function M.quitApps(appNames)
 end
 
 function M.closeAllTheThings()
-	-- close fullscreen, redundancy to make it more reliable
-	for _, screen in pairs(hs.spaces.allSpaces() or {}) do
-		for _, spaceId in pairs(screen) do
-			if hs.spaces.spaceType(spaceId) == "fullscreen" then hs.spaces.removeSpace(spaceId) end
-		end
-	end
+	-- close fullscreen
 	for _, win in pairs(hs.window.allWindows()) do
 		if win:isFullScreen() then win:setFullScreen(false) end
 	end
@@ -248,7 +243,7 @@ function M.closeAllTheThings()
 	end
 
 	-- close browser tabs and various apps
-	M.closeTabsContaining(".") -- closes all tabs, since all URLs include `.` 
+	M.closeTabsContaining(".") -- closes all tabs, since all URLs include `.`
 	M.quitApps (env.videoAndAudioApps)
 	require("lua.private").closer()
 end
