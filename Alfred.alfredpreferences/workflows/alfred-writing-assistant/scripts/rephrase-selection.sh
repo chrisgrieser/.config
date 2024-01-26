@@ -34,7 +34,7 @@ if grep -q '"error"' ; then
 	# doing this avoids jq dependency
 	text="ERROR: $(echo "$response" | grep '"message"' | cut -d'"' -f4)"
 else
-	text=$(echo "$response" | grep '"content"' | cut -d'"' -f4)
+	text=$(echo "$response " | grep '"content"' | cut -d'"' -f4)
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
