@@ -24,8 +24,14 @@ return {
 			multiline_threshold = 1, -- only show 1 line per context
 		},
 		init = function()
-			-- adds grey undeerline
-			u.colorschemeMod("TreesitterContextBottom", { underline = true, special = "#808080" })
+			-- cannot use my utility, as the value needs to be retrieved dynamically
+			vim.api.nvim_create_autocmd("ColorScheme", {
+				callback = function()
+					-- adds grey underline
+					local grey = u.getHighlightValue("Comment", "fg")
+					vim.api.nvim_set_hl(0, "TreesitterContextBottom", { special = grey, underdouble = true })
+				end,
+			})
 		end,
 	},
 	{ -- indentation guides

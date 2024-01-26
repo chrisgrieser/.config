@@ -1,13 +1,14 @@
 local u = require("config.utils")
 --------------------------------------------------------------------------------
-
--- potential alternatives:
+-- INFO potential alternatives:
 -- https://github.com/huggingface/llm-ls
 -- https://docs.sourcegraph.com/cody/overview/install-neovim
+--------------------------------------------------------------------------------
 
 return {
 	-- AI Ghost-Text Suggestions
 	"Exafunction/codeium.vim",
+	commit = "a1c3d6b", -- PENDING https://github.com/Exafunction/codeium.vim/issues/308
 	event = "InsertEnter",
 	build = function()
 		-- symlink to enable syncing of API key
@@ -41,8 +42,8 @@ return {
 		{
 			"<leader>oa", function ()
 				vim.g.codeium_enabled = vim.g.codeium_enabled == false
-				local status = vim.g.codeium_enabled and "enabled" or "disabled"
-				u.notify("Codium", "󰚩 Suggestions " .. status .. ".")
+				local newState = vim.g.codeium_enabled and "enabled" or "disabled"
+				u.notify("Codium", "󰚩 Suggestions " .. newState .. ".")
 			end,
 			desc = "󰚩 Codium Suggestions",
 		}
@@ -57,7 +58,7 @@ return {
 
 		vim.g.codeium_filetypes = {
 			TelescopePrompt = false,
-			DressingInput = false,
+			-- DressingInput = false,
 		}
 		vim.g.codeium_disable_bindings = 1
 	end,

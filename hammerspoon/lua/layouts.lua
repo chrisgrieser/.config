@@ -5,7 +5,6 @@ local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local visuals = require("lua.visuals")
 local wu = require("lua.window-utils")
-local privatCloser = require("lua.private").closer
 local app = require("lua.utils").app
 
 local wf = hs.window.filter
@@ -59,17 +58,7 @@ local function workLayout()
 	visuals.updateHoleCover()
 	dockSwitcher("work")
 	setHigherBrightnessDuringDay()
-
-	-- close all the stuff
-	local finderWins = app("Finder") and app("Finder"):allWindows() or {}
-	for _, win in pairs(finderWins) do
-		win:close()
-	end
-	for _, win in pairs(hs.window.allWindows()) do
-		if win:isFullScreen() then win:setFullScreen(false) end
-	end
-	privatCloser()
-	u.quitApps{"Finder", table.unpack(env.videoAndAudioApps)} -- unpack must be last
+	u.closeAllTheThings()
 
 	-- open
 	u.openApps(env.mastodonApp)
@@ -175,7 +164,10 @@ M.caff_displayCount = hs.screen.watcher
 
 		-- If at night switching back to one display, put iMac display to sleep
 		-- (this triggers when the projector is turned off before going to sleep)
-		if u.betweenTime(21, 7) and not env.isProjector() then hs.caffeinate.systemSleep() end
+		if u.betweenTime(21, 7) and not env.isProjector() then
+			u.closeAllTheThings()
+			u.runWithDelays(15, hs.caffeinate.systemSleep)
+		end
 	end)
 	:start()
 
