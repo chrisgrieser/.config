@@ -45,32 +45,7 @@ rules:
               # which also works
         to_if_held_down:
           - shell_command: open "cleanshot://open-history"
-
-      #─────────────────────────────────────────────────────────────────────────
-      #─────────────────────────────────────────────────────────────────────────
-
-      #─────────────────────────────────────────────────────────────────────────
-      # abort Alfred Clipboard
-      - type: basic
-        from: { key_code: escape }
-        to_if_alone:
-          - key_code: f18
-          - set_variable:
-              name: FINDER_INSERT_MODE
-              value: false
-          - set_variable:
-              name: FINDER_ALFRED_ACTIVE
-              value: false
-              # INFO no idea why, but setting a conditions here breaks this rule.
-              # Maybe due to recursion. But by placing this rule last, it only
-              # gets triggered if the other one does not get triggered before,
-              # which also works
-        to_if_held_down:
-          - shell_command: open "cleanshot://open-history"
-
   #─────────────────────────────────────────────────────────────────────────────
-  #─────────────────────────────────────────────────────────────────────────────
-
   - description: "Finder Vim Extra keys"
     manipulators:
       # B: Signature ( append "_CG")
@@ -136,3 +111,29 @@ rules:
             value: true
           - type: input_source_if
             input_sources: [language: ^de$]
+      # ctrl-m: send file as attachment via Mimestream
+      - type: basic
+        from: { key_code: m, modifiers: { mandatory: [control] } }
+        to:
+          - shell_command: |
+              osascript -e '
+                tell application "System Events"
+                  tell process "Finder" to click menu item "Share…" of menu "File" of menu bar 1
+                  delay 0.1
+                  key code 48 # tab
+                  key code 48
+                  delay 0.05
+                  key code 48
+                  delay 0.05
+                  key code 49 # spacebar
+                end tell
+              '
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers: [^com\.apple\.finder$]
+          - type: variable_unless
+            name: FINDER_FIND_MODE
+            value: true
+          - type: variable_unless
+            name: FINDER_INSERT_MODE
+            value: true

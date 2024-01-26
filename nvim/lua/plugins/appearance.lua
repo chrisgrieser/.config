@@ -17,14 +17,12 @@ return {
 				function() require("treesitter-context").go_to_context() end,
 				desc = " Goto Context",
 			},
-			{ "<leader>ot", vim.cmd.TSContextToggle, desc = " Treesitter Context" },
 		},
 		opts = {
 			max_lines = 4,
 			multiline_threshold = 1, -- only show 1 line per context
 		},
 		init = function()
-			-- cannot use my utility, as the value needs to be retrieved dynamically
 			vim.api.nvim_create_autocmd("ColorScheme", {
 				callback = function()
 					-- adds grey underline
