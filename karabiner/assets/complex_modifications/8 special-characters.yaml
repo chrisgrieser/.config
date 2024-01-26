@@ -11,7 +11,7 @@ rules:
         conditions:
           - { type: input_source_if, input_sources: [language: ^de$] }
           - { type: device_if, identifiers: [{ product_id: 592 }] } # Keychron K3V2
-          - { type: frontmost_application_unless, file_paths: [wezterm-gui$] }
+          # - { type: frontmost_application_unless, file_paths: [wezterm-gui$] }
       # FIX cmd+^ in Obsidian
       - type: basic
         from: { key_code: grave_accent_and_tilde, modifiers: { mandatory: [command] } }
@@ -19,7 +19,7 @@ rules:
           - { key_code: "6", modifiers: [command] }
         conditions:
           - { type: input_source_if, input_sources: [language: ^de$] }
-          - { type: device_if, identifiers: [{ product_id: 592 }] }
+          - { type: device_if, identifiers: [{ product_id: 592 }] } # Keychron K3V2
           - { type: frontmost_application_if, bundle_identifiers: [^md.obsidian$] }
   #─────────────────────────────────────────────────────────────────────────────
   # DEAD KEYS FIX
