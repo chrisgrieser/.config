@@ -8,6 +8,19 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
+		<key>197CBF3E-ACE7-46FC-B02C-FA08363B1BA7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B34DBBCE-C220-4020-BDB7-DFAB47719F7A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>322E5C7E-0088-48C7-8510-ABB6F13FAF6B</key>
 		<array>
 			<dict>
@@ -142,7 +155,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>B34DBBCE-C220-4020-BDB7-DFAB47719F7A</string>
+				<string>197CBF3E-ACE7-46FC-B02C-FA08363B1BA7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -504,6 +517,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>matchstring</key>
+				<string>'</string>
+				<key>replacestring</key>
+				<string>'</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>197CBF3E-ACE7-46FC-B02C-FA08363B1BA7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -571,6 +601,17 @@ The workflow offers four [hotkeys](https://www.alfredapp.com/help/workflows/trig
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>197CBF3E-ACE7-46FC-B02C-FA08363B1BA7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>note</key>
+			<string>single quotes back to double quotes</string>
+			<key>xpos</key>
+			<real>625</real>
+			<key>ypos</key>
+			<real>405</real>
+		</dict>
 		<key>322E5C7E-0088-48C7-8510-ABB6F13FAF6B</key>
 		<dict>
 			<key>colorindex</key>
