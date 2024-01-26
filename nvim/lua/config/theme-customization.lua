@@ -97,9 +97,6 @@ local function themeModifications()
 		end
 		updateHl("GitSignsChange", "guifg=#acaa62")
 	elseif theme == "dawnfox" then
-		-- PENDING https://github.com/EdenEast/nightfox.nvim/issues/412
-		overwriteHl("@markup.raw.markdown_inline", { bg = "#e6d9cb", fg = "#295e75" })
-
 		overwriteHl("IblIndent", { fg = "#e0cfbd" })
 		overwriteHl("ColorColumn", { bg = "#e9dfd2" })
 		overwriteHl("TreesitterContext", { bg = "#e6d9cb" })

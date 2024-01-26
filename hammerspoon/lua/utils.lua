@@ -230,5 +230,28 @@ function M.quitApps(appNames)
 	end
 end
 
+function M.closeAllTheThings()
+	-- close fullscreen, redundancy to make it more reliable
+	for _, screen in pairs(hs.spaces.allSpaces() or {}) do
+		for _, spaceId in pairs(screen) do
+			if hs.spaces.spaceType(spaceId) == "fullscreen" then hs.spaces.removeSpace(spaceId) end
+		end
+	end
+	for _, win in pairs(hs.window.allWindows()) do
+		if win:isFullScreen() then win:setFullScreen(false) end
+	end
+
+	-- close finder wins
+	local finderWins = M.app("Finder") and M.app("Finder"):allWindows() or {}
+	for _, win in pairs(finderWins) do
+		win:close()
+	end
+
+	-- close browser tabs and various apps
+	M.closeTabsContaining(".") -- closes all tabs, since all URLs include `.` 
+	M.quitApps (env.videoAndAudioApps)
+	require("lua.private").closer()
+end
+
 --------------------------------------------------------------------------------
 return M
