@@ -608,7 +608,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>single quotes back to double quotes</string>
 			<key>xpos</key>
-			<real>625</real>
+			<real>615</real>
 			<key>ypos</key>
 			<real>405</real>
 		</dict>
@@ -617,7 +617,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>170</real>
+			<real>180</real>
 			<key>ypos</key>
 			<real>195</real>
 		</dict>
@@ -626,7 +626,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>415</real>
+			<real>445</real>
 			<key>ypos</key>
 			<real>195</real>
 		</dict>
@@ -663,7 +663,7 @@ DOUBLE CLICK TO EDIT</string>
 			<key>note</key>
 			<string>remove \n</string>
 			<key>xpos</key>
-			<real>330</real>
+			<real>335</real>
 			<key>ypos</key>
 			<real>60</real>
 		</dict>
@@ -672,7 +672,7 @@ DOUBLE CLICK TO EDIT</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>170</real>
+			<real>180</real>
 			<key>ypos</key>
 			<real>30</real>
 		</dict>
@@ -683,7 +683,7 @@ DOUBLE CLICK TO EDIT</string>
 			<key>note</key>
 			<string>remove \n</string>
 			<key>xpos</key>
-			<real>330</real>
+			<real>335</real>
 			<key>ypos</key>
 			<real>225</real>
 		</dict>
@@ -705,7 +705,7 @@ DOUBLE CLICK TO EDIT</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>200</real>
+			<real>180</real>
 			<key>ypos</key>
 			<real>375</real>
 		</dict>
@@ -716,7 +716,7 @@ DOUBLE CLICK TO EDIT</string>
 			<key>note</key>
 			<string>set mode</string>
 			<key>xpos</key>
-			<real>365</real>
+			<real>335</real>
 			<key>ypos</key>
 			<real>405</real>
 		</dict>
@@ -727,7 +727,7 @@ DOUBLE CLICK TO EDIT</string>
 			<key>note</key>
 			<string>OpenAI API Call</string>
 			<key>xpos</key>
-			<real>460</real>
+			<real>445</real>
 			<key>ypos</key>
 			<real>375</real>
 		</dict>
@@ -751,7 +751,7 @@ DOUBLE CLICK TO EDIT</string>
 			<key>note</key>
 			<string>paste</string>
 			<key>xpos</key>
-			<real>680</real>
+			<real>740</real>
 			<key>ypos</key>
 			<real>195</real>
 		</dict>
@@ -760,7 +760,7 @@ DOUBLE CLICK TO EDIT</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>200</real>
+			<real>180</real>
 			<key>ypos</key>
 			<real>535</real>
 		</dict>
