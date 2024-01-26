@@ -8,7 +8,6 @@ local u = require("config.utils")
 return {
 	-- AI Ghost-Text Suggestions
 	"Exafunction/codeium.vim",
-	commit = "a1c3d6b", -- PENDING https://github.com/Exafunction/codeium.vim/issues/308
 	event = "InsertEnter",
 	build = function()
 		-- symlink to enable syncing of API key
