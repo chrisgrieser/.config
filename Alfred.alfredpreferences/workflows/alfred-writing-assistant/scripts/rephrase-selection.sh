@@ -3,7 +3,6 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 selection="$*"
-the_prompt="$static_prompt$selection" # WARN `$prompt` is reserved variable in zsh
 cache="$alfred_workflow_cache"
 mkdir -p "$cache"
 model="gpt-3.5-turbo" # https://platform.openai.com/docs/models/gpt-3
@@ -20,23 +19,33 @@ if [[ -z "$apikey" ]]; then
 	return 1
 fi
 
+# WARN `$prompt` is reserved variable in zsh
+# escape quotes in prompt for JSON
+the_prompt=$(echo "$static_prompt $selection" | sed -e "s/\"/'/g")
+
 # OPENAI API CALL
 # DOCS https://platform.openai.com/docs/api-reference/making-requests
 response=$(curl --silent https://api.openai.com/v1/chat/completions \
 	-H "Content-Type: application/json" \
 	-H "Authorization: Bearer $apikey" \
-	-d "{ \"model\": \"$model\", \"messages\": [{\"role\": \"user\", \"content\": \"$the_prompt\"}], \"temperature\": $temperature }" |
-	grep '"content"' | cut -d'"' -f4) # doing this avoids jq dependency
+	-d "{ \"model\": \"$model\", \"messages\": [{\"role\": \"user\", \"content\": \"$the_prompt\"}], \"temperature\": $temperature }")
+
+if grep -q '"error"' ; then
+	# doing this avoids jq dependency
+	text="ERROR: $(echo "$response" | grep '"message"' | cut -d'"' -f4)"
+else
+	text=$(echo "$response" | grep '"content"' | cut -d'"' -f4)
+fi
 
 #───────────────────────────────────────────────────────────────────────────────
 
 if [[ "$output_type" == "plain" ]]; then
-	echo -n "$response"
+	echo -n "$text"
 	exit 0
 fi
 
 echo "$selection" >"$cache/selection.txt"
-echo "$response" >"$cache/rephrased.txt"
+echo "$text" >"$cache/rephrased.txt"
 
 # https://unix.stackexchange.com/questions/677764/show-differences-in-strings
 diff=$(git diff --word-diff "$cache/selection.txt" "$cache/rephrased.txt" |
