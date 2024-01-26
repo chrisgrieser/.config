@@ -11,7 +11,7 @@
   "codeium.vim": { "branch": "main", "commit": "a1c3d6b369a18514d656dac149de807becacbdf7" },
   "conform.nvim": { "branch": "master", "commit": "d99b75b4aedf0e912f41c5740a7267de739cddac" },
   "cybu.nvim": { "branch": "main", "commit": "c0866ef6735a85f85d4cf77ed6d9bc92046b5a99" },
-  "dawnfox": { "branch": "main", "commit": "2b1fd88b1828f980100b16fcb4fd3b1d7c2ab641" },
+  "dawnfox": { "branch": "main", "commit": "9aef9ff0e41c43fe9d9dbb3cd5f1ce20e0d18cfa" },
   "dressing.nvim": { "branch": "master", "commit": "0e88293ce3459f4bb310125f3366304af6dc7990" },
   "eyeliner.nvim": { "branch": "main", "commit": "c540d58bf52aa979d4cca639c60387ae0c0ccf88" },
   "gitsigns.nvim": { "branch": "main", "commit": "0a2a93f687ec051292943a4d139366332ac93688" },
