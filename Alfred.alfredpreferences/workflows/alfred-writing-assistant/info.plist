@@ -522,7 +522,7 @@
 				<key>matchstring</key>
 				<string>'</string>
 				<key>replacestring</key>
-				<string>'</string>
+				<string>"</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.replace</string>
@@ -900,7 +900,7 @@ DOUBLE CLICK TO EDIT</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.1</string>
+	<string>1.0.2</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
