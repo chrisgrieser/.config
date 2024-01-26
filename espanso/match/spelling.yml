@@ -134,3 +134,4 @@ matches:
   - { trigger: whcih, replace: which, propagate_case: true, word: true }
   - { trigger: amchen, replace: machen, propagate_case: true, word: true }
   - { trigger: gti, replace: git, propagate_case: true, word: true }
+  - { trigger: resaerch, replace: research, propagate_case: true, word: true }
