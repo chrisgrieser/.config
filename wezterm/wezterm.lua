@@ -3,15 +3,16 @@
 -- INFO the first theme in the list is used
 -- rest are themes I already tried and also like
 local darkThemes = {
+	"MaterialDesignColors",
 	"ChallengerDeep",
 	"cyberpunk",
 	"Afterglow (Gogh)",
 	"duckbones",
-	"MaterialDesignColors",
 	"Tinacious Design (Dark)",
 	"Kanagawa (Gogh)",
 }
 local lightThemes = {
+	"BlulocoLight (Gogh)",
 	"Solar Flare Light (base16)",
 	"Cupcake (base16)",
 	"Ivory Light (terminal.sexy)",
@@ -21,7 +22,6 @@ local lightThemes = {
 	"Silk Light (base16)",
 	"seoulbones_light",
 	"Paraiso (light) (terminal.sexy)",
-	"BlulocoLight (Gogh)",
 	"OneHalfLight",
 }
 

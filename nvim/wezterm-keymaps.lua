@@ -60,7 +60,7 @@ return {
 	-- Grappling-hook
 	{ key = "Enter", mods = "CMD", action = act.SendKey { key = "o", mods = "CTRL" } },
 
-	{ -- insert line-break https://unix.stackexchange.com/a/80820
+	{ -- enter line-break https://unix.stackexchange.com/a/80820
 		key = "Enter",
 		mods = "SHIFT",
 		action = act.Multiple {
@@ -76,7 +76,7 @@ return {
 	-- FIX works with `send_composed_key_when_right_alt_is_pressed = true`
 	-- but expects another character, so this mapping fixes it
 	{ key = "n", mods = "ALT", action = act.SendString("~") },
-	-- FIX keychron K3V2 bug
+	-- FIX Keychron keyboard bug
 	{ key = "<", action = act.SendString("^") },
 	{ key = "^", action = act.SendString("<") },
 
@@ -127,10 +127,8 @@ return {
 		key = ";",
 		mods = "CMD|SHIFT",
 		action = actFun(function()
-			local thisFile = wt.config_file:gsub("wezterm%.lua$", "wezterm-keymaps.lua")
-			local pathOfThisFile = debug.getinfo(1).source:sub(2)
-			window:toast_notification("Color scheme", pathOfThisFile, nil, 4000)
-			wt.open_with(thisFile)
+			local configDir = wt.config_file:gsub("wezterm%.lua$", "")
+			wt.open_with(configDir .. "wezterm-keymaps.lua")
 		end),
 	},
 }
