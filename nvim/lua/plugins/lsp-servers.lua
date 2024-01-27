@@ -247,7 +247,7 @@ serverConfigs.tsserver = {
 
 		-- INFO "cannot redeclare block-scoped variable" -> not useful for JXA.
 		-- (Biome works on single-file-mode and therefore can be used to check for
-		-- unintended re-declaring.)
+		-- unintended re-declarations.)
 		diagnostics = { ignoredCodes = { 2451 } },
 		typescript = configForBoth,
 		javascript = configForBoth,
