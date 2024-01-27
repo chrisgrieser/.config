@@ -213,6 +213,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>B2BCC7F4-6732-493D-9789-2719BB7752D9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0AF7121A-89F5-460A-97D1-1061C6819D85</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E99EAF40-8819-42A3-BBED-A3BC465A0D66</key>
 		<array>
 			<dict>
@@ -292,19 +305,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>com.apple.addressbook.person</string>
-				</array>
-				<key>name</key>
-				<string>Call</string>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>sync</string>
+				<key>subtext</key>
+				<string>Dotfiles, Vault &amp; Password-Store</string>
+				<key>text</key>
+				<string>🔁 Sync Repos</string>
+				<key>withspace</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>3D0B8081-9BD2-40C0-9521-EDF82FFE8C23</string>
+			<string>E9FF31BC-709C-4387-975A-0B1410418161</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -334,21 +349,19 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>sync</string>
-				<key>subtext</key>
-				<string>Dotfiles, Vault &amp; Password-Store</string>
-				<key>text</key>
-				<string>🔁 Sync Repos</string>
-				<key>withspace</key>
-				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>com.apple.addressbook.person</string>
+				</array>
+				<key>name</key>
+				<string>Call</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.trigger.action</string>
 			<key>uid</key>
-			<string>E9FF31BC-709C-4387-975A-0B1410418161</string>
+			<string>3D0B8081-9BD2-40C0-9521-EDF82FFE8C23</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -420,27 +433,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>rain</string>
-				<key>subtext</key>
-				<string>lo-rain</string>
-				<key>text</key>
-				<string>Toggle Rain</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>A495CCCB-F21B-41F1-B7AA-E4A511EC63C4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -468,21 +460,21 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>rain</string>
+				<key>subtext</key>
+				<string>lo-rain</string>
+				<key>text</key>
+				<string>Toggle Rain</string>
+				<key>withspace</key>
 				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>busycalevent://new/{query}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>9F084A08-61CC-4FFE-B826-D1C94F206A5A</string>
+			<string>A495CCCB-F21B-41F1-B7AA-E4A511EC63C4</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -504,6 +496,27 @@ fi</string>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>5C877087-012F-4C14-9B4D-369466813350</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>busycalevent://new/{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>9F084A08-61CC-4FFE-B826-D1C94F206A5A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -568,6 +581,46 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>xattr -d com.apple.quarantine "${@}"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>0AF7121A-89F5-460A-97D1-1061C6819D85</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>1</integer>
+				<key>filetypes</key>
+				<array/>
+				<key>name</key>
+				<string>Remove quarantine</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>B2BCC7F4-6732-493D-9789-2719BB7752D9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>acceptsfiles</key>
 				<false/>
 				<key>acceptsmulti</key>
@@ -625,37 +678,6 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>Application("System Events")
-  .applicationProcesses.byName("NotificationCenter")
-  .windows[0]
-  .groups[0]
-  .scrollAreas[0]
-  .uiElements[0]
-  .groups()
-  .map(banner =&gt; banner.actions().slice(-1)[0])
-  .forEach(banner =&gt; banner.perform())</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>7</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>25653873-BA08-495C-9634-85EDC4DE03F5</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -687,17 +709,33 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string>/System/Applications/TextEdit.app</string>
-				<key>sourcefile</key>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>Application("System Events")
+  .applicationProcesses.byName("NotificationCenter")
+  .windows[0]
+  .groups[0]
+  .scrollAreas[0]
+  .uiElements[0]
+  .groups()
+  .map(banner =&gt; banner.actions().slice(-1)[0])
+  .forEach(banner =&gt; banner.perform())</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
 				<string></string>
+				<key>type</key>
+				<integer>7</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>94945DE5-0241-4967-9508-58E218F31B67</string>
+			<string>25653873-BA08-495C-9634-85EDC4DE03F5</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -715,6 +753,21 @@ fi</string>
 			<string>53E5054B-1A54-48FA-B642-7B674813E725</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string>/System/Applications/TextEdit.app</string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>94945DE5-0241-4967-9508-58E218F31B67</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -970,6 +1023,13 @@ fi</string>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>0AF7121A-89F5-460A-97D1-1061C6819D85</key>
+		<dict>
+			<key>xpos</key>
+			<real>945</real>
+			<key>ypos</key>
+			<real>295</real>
+		</dict>
 		<key>0DF397E6-7179-4A9B-A07A-B32165613998</key>
 		<dict>
 			<key>colorindex</key>
@@ -1156,6 +1216,13 @@ fi</string>
 			<real>190</real>
 			<key>ypos</key>
 			<real>160</real>
+		</dict>
+		<key>B2BCC7F4-6732-493D-9789-2719BB7752D9</key>
+		<dict>
+			<key>xpos</key>
+			<real>795</real>
+			<key>ypos</key>
+			<real>295</real>
 		</dict>
 		<key>C120F733-C46F-44AC-ADAA-504E11D52028</key>
 		<dict>
