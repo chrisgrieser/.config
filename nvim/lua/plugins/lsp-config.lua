@@ -287,8 +287,11 @@ local function getDictWords()
 end
 
 -- FIX ltex not being able to automatically detect bundles java runtime engine
--- due to masion's symlinking
-vim.env.JAVA_HOME = vim.fn.stdpath("data") .. "/mason/packages/ltex-ls/ltex-ls-16.0.0/jdk-11.0.12+7"
+-- due to mason's symlinking
+vim.env.JAVA_HOME = vim.fs.find(
+	function (name) return vim.startswith(name, "jdk-") end,
+	{ path = vim.fn.stdpath("data") .. "/mason/packages/ltex-ls/", type = "directory" }
+)[1]
 
 -- DOCS https://valentjn.github.io/ltex/settings.html
 serverConfigs.ltex = {

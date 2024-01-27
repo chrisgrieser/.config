@@ -168,8 +168,7 @@ keymap("c", "<D-v>", "<C-r>+", { desc = " Paste" })
 keymap({ "i", "c" }, "<C-a>", "<Home>")
 keymap({ "i", "c" }, "<C-e>", "<End>")
 keymap("c", "<BS>", function()
-	if vim.fn.getcmdline() == "" then return end
-	return "<BS>"
+	if vim.fn.getcmdline() ~= "" then return "<BS>" end
 end, { desc = "Restricted <BS>", expr = true })
 
 -- indent properly when entering insert mode on empty lines
