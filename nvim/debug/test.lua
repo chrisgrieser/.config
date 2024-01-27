@@ -1,4 +1,3 @@
 
-
-
-vim.notify("[nvim-treesitter] [4/4] Treesitter parser for angular has been installed")
+local fixed = vim.fn.spellsuggest("teh", 1)[1]
+vim.notify("👽 fixed: " .. tostring(fixed))

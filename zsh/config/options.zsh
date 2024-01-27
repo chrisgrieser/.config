@@ -6,6 +6,7 @@
 setopt INTERACTIVE_COMMENTS # comments in interactive mode, useful for copypasting
 setopt GLOB_DOTS            # glob includes dotfiles
 setopt PIPE_FAIL            # tracability: exit if pipeline failed
+setopt NO_BANG_HIST         # don't expand `!`
 
 # colorized
 function command_not_found_handler() {
