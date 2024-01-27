@@ -286,8 +286,8 @@ local function getDictWords()
 	return words
 end
 
--- FIX, PENDING https://github.com/williamboman/mason.nvim/issues/1531
--- vim.env.JAVA_HOME = vim.env.HOMEBREW_PREFIX .. "/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
+-- FIX ltex not being able to automatically detect bundles java runtime engine
+-- due to masion's symlinking
 vim.env.JAVA_HOME = vim.fn.stdpath("data") .. "/mason/packages/ltex-ls/ltex-ls-16.0.0/jdk-11.0.12+7"
 
 -- DOCS https://valentjn.github.io/ltex/settings.html
@@ -382,7 +382,6 @@ return {
 	"neovim/nvim-lspconfig",
 	lazy = false,
 	mason_dependencies = vim.list_extend(efmDependencies, vim.tbl_values(lspToMasonMap)),
-	external_dependencies = "openjdk", -- PENDING https://github.com/williamboman/mason.nvim/issues/1531
 	dependencies = { -- loading as dependency ensures it's loaded before lua_ls
 		"folke/neodev.nvim",
 		opts = { library = { plugins = false } }, -- too slow with all my plugins
