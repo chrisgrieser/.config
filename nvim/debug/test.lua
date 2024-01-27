@@ -1,5 +1,4 @@
-local javaHome = vim.fs.find(
-	function (name) return vim.startswith(name, "jdk-") end,
-	{ path = vim.fn.stdpath("data") .. "/mason/packages/ltex-ls/", type = "directory" }
-)[1]
-vim.notify("👽 javaHome: " .. tostring(javaHome))
+
+
+
+vim.notify("[nvim-treesitter] [4/4] Treesitter parser for angular has been installed")
