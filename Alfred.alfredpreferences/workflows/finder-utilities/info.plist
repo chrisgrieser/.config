@@ -211,6 +211,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>39626B7E-002F-45AD-863D-ECAF15AF9D9A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>AC2DA066-2DF2-4E8C-8A7E-A5C94D3BE62B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>47245CFC-B3E9-4FD6-A021-06D0B87D637C</key>
 		<array/>
 		<key>49E040C0-C3F2-4056-9AF1-41106F027943</key>
@@ -1204,6 +1217,64 @@ mv -f "$file" "$HOME/.Trash/"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
+				<string>./scripts/share-via-mimestream.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>AC2DA066-2DF2-4E8C-8A7E-A5C94D3BE62B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>39</integer>
+				<key>hotmod</key>
+				<integer>1048576</integer>
+				<key>hotstring</key>
+				<string>Ä</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.apple.finder</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>39626B7E-002F-45AD-863D-ECAF15AF9D9A</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
 				<string>./scripts/create-link-file.js</string>
 				<key>type</key>
 				<integer>8</integer>
@@ -1760,6 +1831,17 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>ypos</key>
 			<real>1365</real>
 		</dict>
+		<key>39626B7E-002F-45AD-863D-ECAF15AF9D9A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>Send File as attachment via MimeStream</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>865</real>
+		</dict>
 		<key>47245CFC-B3E9-4FD6-A021-06D0B87D637C</key>
 		<dict>
 			<key>colorindex</key>
@@ -1783,7 +1865,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>455</real>
 			<key>ypos</key>
-			<real>710</real>
+			<real>725</real>
 		</dict>
 		<key>51903BB3-AE69-45A7-8492-CC712BB612A4</key>
 		<dict>
@@ -1914,6 +1996,8 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
+			<key>note</key>
+			<string>Move</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -1926,7 +2010,16 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>610</real>
 			<key>ypos</key>
-			<real>710</real>
+			<real>725</real>
+		</dict>
+		<key>AC2DA066-2DF2-4E8C-8A7E-A5C94D3BE62B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>200</real>
+			<key>ypos</key>
+			<real>865</real>
 		</dict>
 		<key>B4D4D74C-56BC-4F3B-9840-A3CD979D396C</key>
 		<dict>

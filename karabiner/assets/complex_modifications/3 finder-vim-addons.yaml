@@ -111,29 +111,3 @@ rules:
             value: true
           - type: input_source_if
             input_sources: [language: ^de$]
-      # ctrl-m: send file as attachment via Mimestream
-      - type: basic
-        from: { key_code: m, modifiers: { mandatory: [control] } }
-        to:
-          - shell_command: |
-              osascript -e '
-                tell application "System Events"
-                  tell process "Finder" to click menu item "Share…" of menu "File" of menu bar 1
-                  delay 0.1
-                  key code 48 # tab
-                  key code 48
-                  delay 0.05
-                  key code 48
-                  delay 0.05
-                  key code 49 # spacebar
-                end tell
-              '
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [^com\.apple\.finder$]
-          - type: variable_unless
-            name: FINDER_FIND_MODE
-            value: true
-          - type: variable_unless
-            name: FINDER_INSERT_MODE
-            value: true

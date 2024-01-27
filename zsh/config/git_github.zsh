@@ -1,4 +1,3 @@
-alias g='git'
 alias gs='git status'
 alias ga='git add'
 alias gA='git add --all'
@@ -13,6 +12,7 @@ alias gI='gh issue list --state=closed'
 
 alias unadd='git restore --staged'
 alias restore='git restore'
+alias reset='git reset'
 alias push='git push'
 alias pull='git pull'
 alias rebase='git rebase --interactive'
