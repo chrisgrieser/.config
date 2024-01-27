@@ -309,3 +309,9 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
+require("mason").setup {
+	registries = {
+		"github:chrisgrieser/mason-registry", -- only has ltex-fix
+		"github:mason-org/mason-registry",
+	},
+}

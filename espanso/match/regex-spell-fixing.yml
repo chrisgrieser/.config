@@ -18,3 +18,7 @@ matches:
   # (but not for words like "sign" or "ignore", where it is actually correct)
   - regex: "(?P<letter>[a-rt-z])ign"
     replace: "{{letter}}ing"
+  - regex: "n[#Ä]t "
+    replace: "n't "
+  - regex: "\\Bsich "
+    replace: "isch " 

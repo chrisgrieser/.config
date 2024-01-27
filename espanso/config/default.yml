@@ -7,7 +7,7 @@ search_shortcut: META+ALT+CTRL+X # = Hyper+X
 
 show_icon: false
 show_notifications: true
-auto_restart: true
+auto_restart: false # reloading via makefile instead
 
 undo_backspace: false # backspace undos expansion
 backend: Auto
