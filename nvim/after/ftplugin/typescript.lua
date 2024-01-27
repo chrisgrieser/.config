@@ -6,4 +6,7 @@ u.ftAbbr("cosnt", "const")
 u.ftAbbr("local", "const") 
 u.ftAbbr("--", "//") 
 
+-- most obsidian plugins
+vim.opt_local.makeprg = "npm run build"
+
 --------------------------------------------------------------------------------

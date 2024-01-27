@@ -71,6 +71,7 @@ duti -s "$editorID" js all
 duti -s "$editorID" ts all
 duti -s "$editorID" css all
 duti -s "$editorID" scss all
+duti -s "$editorID" svelte all
 duti -s "$editorID" applescript all
 duti -s "$editorID" lua all
 duti -s "$editorID" json all
