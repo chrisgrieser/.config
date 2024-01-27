@@ -10,7 +10,7 @@ local lspToMasonMap = {
 	biome = "biome", -- ts/js/json linter/formatter
 	cssls = "css-lsp",
 	efm = "efm", -- linter integration, only used for shellcheck in zsh files
-	emmet_language_server = "emmet-language-server", -- css/html completion
+	emmet_ls = "emmet-ls", -- css/html completion
 	html = "html-lsp",
 	jedi_language_server = "jedi-language-server", -- python lsp (with better hovers)
 	jsonls = "json-lsp",
@@ -178,7 +178,7 @@ serverConfigs.jedi_language_server = {
 -- CSS
 
 -- don't pollute completions for js/ts with stuff I don't need
-serverConfigs.emmet_language_server = {
+serverConfigs.emmet_ls = {
 	filetypes = { "html", "css", "scss" },
 }
 

@@ -1,25 +1,27 @@
 local M = {}
 --------------------------------------------------------------------------------
 
-local function endSplit()
-	-- un-fullscreening the split windows effectively stops the split
-	local splitWins = M.wf_vsplit:getWindows()
-	for _, win in pairs(splitWins) do
-		win:setFullScreen(false)
-	end
-	M.wf_vsplit:unsubscribeAll()
-	M.wf_vsplit = nil
-	M.splitActive = false
+---@return integer
+local function countFullScreenWins()
+	local fullScreenWins = hs.fnutils.filter(
+		hs.window.allWindows(),
+		function(win) return win:isFullScreen() end
+	)
+	return #fullScreenWins
 end
 
-local function verticalSplit()
-	-- END SPLIT
-	if M.splitActive then
-		endSplit()
-		return
+local function endSplit()
+	-- un-fullscreening the split windows effectively stops the split
+	local splitWins = M.vsplitWins:getWindows()
+	for _, win in pairs(splitWins) do
+		if win:isFullScreen() then win:setFullScreen(false) end
 	end
+	M.vsplitWins:unsubscribeAll()
+	M.vsplitWins = nil
+end
 
-	-- GUARD
+local function startSplit()
+	-- 1. GUARD Tiling disabled or not available for the app
 	local frontApp = hs.application.frontmostApplication()
 	if not frontApp:findMenuItem { "Window", "Tile Window to Right of Screen" } then
 		local msg
@@ -32,39 +34,56 @@ local function verticalSplit()
 			}
 		else
 			msg = {
-				frontApp:name() .. "does not support window options.",
+				frontApp:name() .. " does not support window options.",
 				"Start the split from the other app.",
 			}
 		end
-		hs.alert(table.concat(msg, "\n"), 3)
+		hs.alert(table.concat(msg, "\n"), 4)
 		return
 	end
 
-	-- START SPLIT
-	-- unhide all windows, so they are displayed as selection for the second window
+	-- 2. unhide & unfullscreen all wins, so they are available as selection for the 2nd win
 	for _, win in pairs(hs.window.allWindows()) do
 		local app = win:application()
 		if app and app:isHidden() then app:unhide() end
+		if win:isFullScreen() then win:setFullScreen(false) end
 	end
 
+	-- 3. start mission control selection
 	M.delay_timer = hs.timer
-		.doAfter(0.2, function() -- wait for unhiding
+		.doAfter(0.2, function() -- wait for unhiding/unfullscreen
 			frontApp:selectMenuItem { "Window", "Tile Window to Right of Screen" }
 		end)
 		:start()
 
-	M.splitActive = true
-
-	-- end split when one of the two windows is destroyed/unfullscreened
-	M.wf_vsplit = hs.window.filter
-		.new(true)
-		:setOverrideFilter({ currentSpace = true, fullscreen = true })
-		:subscribe(hs.window.filter.windowDestroyed, endSplit)
-		:subscribe(hs.window.filter.windowUnfullscreened, endSplit)
+	-- 4. wait until user made decision on 2nd window, then setup SplitWinFilter
+	local function userDecision()
+		-- during the Mission-control-like selection, only 1 win is fullscreen
+		local fullScreenWins = countFullScreenWins()
+		local aborted = fullScreenWins == 0
+		local secondWinSelected = fullScreenWins == 2
+		return aborted or secondWinSelected
+	end
+	local function setupSplitWinFilter()
+		if countFullScreenWins() ~= 2 then return end -- aborted by user
+		-- end split when one of the two windows is destroyed/unfullscreened
+		M.vsplitWins = hs.window.filter
+			.new(true)
+			:setOverrideFilter({ currentSpace = true, fullscreen = true })
+			:subscribe(hs.window.filter.windowDestroyed, endSplit)
+			:subscribe(hs.window.filter.windowUnfullscreened, endSplit)
+	end
+	M.waitForDecision = hs.timer.waitUntil(userDecision, setupSplitWinFilter):start()
 end
 
 --------------------------------------------------------------------------------
 
-hs.hotkey.bind(require("lua.utils").hyper, "V", verticalSplit)
+hs.hotkey.bind(require("lua.utils").hyper, "V", function()
+	if M.vsplitWins then
+		endSplit()
+	else
+		startSplit()
+	end
+end)
 
 return M -- save this after requiring to persist from garbage collector

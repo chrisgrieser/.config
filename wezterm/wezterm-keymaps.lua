@@ -128,8 +128,6 @@ return {
 		mods = "CMD|SHIFT",
 		action = actFun(function()
 			local thisFile = wt.config_file:gsub("wezterm%.lua$", "wezterm-keymaps.lua")
-			local pathOfThisFile = debug.getinfo(1).source:sub(2)
-			window:toast_notification("Color scheme", pathOfThisFile, nil, 4000)
 			wt.open_with(thisFile)
 		end),
 	},
