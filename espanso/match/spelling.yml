@@ -107,7 +107,7 @@ matches:
   - { trigger: suer, replace: user, propagate_case: true }
   - { trigger: taks, replace: task, propagate_case: true, word: true }
   - { trigger: technsich, replace: technisch, propagate_case: true }
-  - { trigger: teh, replace: the, word: true }
+  - { trigger: teh, replace: the, word: true, propagate_case: true }
   - { trigger: tehme, replace: theme, propagate_case: true, word: true }
   - { trigger: tempalte, replace: template }
   - { trigger: thansk, replace: thanks, propagate_case: true }

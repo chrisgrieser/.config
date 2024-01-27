@@ -1,5 +1,5 @@
 .PHONY: reload
 
 reload:
-	zsh ./release.sh
+	espanso restart
 
