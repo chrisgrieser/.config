@@ -287,7 +287,8 @@ local function getDictWords()
 end
 
 -- FIX, PENDING https://github.com/williamboman/mason.nvim/issues/1531
-vim.env.JAVA_HOME = vim.env.HOMEBREW_PREFIX .. "/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
+-- vim.env.JAVA_HOME = vim.env.HOMEBREW_PREFIX .. "/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
+vim.env.JAVA_HOME = vim.fn.stdpath("data") .. "/mason/packages/ltex-ls/ltex-ls-16.0.0/jdk-11.0.12+7"
 
 -- DOCS https://valentjn.github.io/ltex/settings.html
 serverConfigs.ltex = {
