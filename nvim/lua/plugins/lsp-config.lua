@@ -286,13 +286,6 @@ local function getDictWords()
 	return words
 end
 
--- FIX ltex not being able to automatically detect bundles java runtime engine
--- due to mason's symlinking
-vim.env.JAVA_HOME = vim.fs.find(
-	function (name) return vim.startswith(name, "jdk-") end,
-	{ path = vim.fn.stdpath("data") .. "/mason/packages/ltex-ls/", type = "directory" }
-)[1]
-
 -- DOCS https://valentjn.github.io/ltex/settings.html
 serverConfigs.ltex = {
 	filetypes = { "gitcommit", "markdown" }, -- disable for bibtex and text files
@@ -312,11 +305,18 @@ serverConfigs.ltex = {
 				MORFOLOGIK_RULE_EN_US = "hint", -- spelling
 			},
 			additionalRules = { enablePickyRules = true },
-			completionEnabled = false, -- already taken care of by cmp-buffer
+			completionEnabled = true, -- also care of by cmp-buffer
 			markdown = { nodes = { Link = "dummy" } }, -- ignore links https://valentjn.github.io/ltex/settings.html#ltexmarkdownnodes
 		},
 	},
 	on_attach = function()
+		-- FIX ltex not being able to automatically detect bundles java runtime engine
+		-- due to mason's symlinking
+		vim.env.JAVA_HOME = vim.fs.find(
+			function(name) return vim.startswith(name, "jdk-") end,
+			{ path = vim.fn.stdpath("data") .. "/mason/packages/ltex-ls/", type = "directory" }
+		)[1]
+
 		-- have `zg` update ltex dictionary file as well as vim's spellfile
 		vim.keymap.set({ "n", "x" }, "zg", function()
 			local word
