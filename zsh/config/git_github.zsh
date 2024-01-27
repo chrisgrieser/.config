@@ -17,7 +17,6 @@ alias push='git push'
 alias pull='git pull'
 alias rebase='git rebase --interactive'
 alias unlock='rm -v "$(git rev-parse --git-dir)/index.lock"'
-alias unshallow='git fetch --unshallow' # https://stackoverflow.com/a/17937889/22114136
 
 alias pr='gh pr create --web --fill'
 alias rel='make --silent release' # personal convention to have `make release`
@@ -85,6 +84,13 @@ compdef _gc gc
 compdef _gc gC
 
 #───────────────────────────────────────────────────────────────────────────────
+
+function unshallow {
+	git fetch --unshallow
+	# undo `--single-branch` https://stackoverflow.com/a/17937889/22114136
+	git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+	git fetch origin
+}
 
 # select a recent commit to fixup *and* autosquash (not marked for next rebase!)
 function gf {
