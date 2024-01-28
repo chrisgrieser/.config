@@ -6,7 +6,6 @@ local wu = require("lua.window-utils")
 
 local aw = hs.application.watcher
 local wf = hs.window.filter
-
 --------------------------------------------------------------------------------
 
 M.wf_browser = wf.new(env.browserApp)
@@ -90,7 +89,6 @@ local config = {
 }
 M.pathw_bookmarks = hs.pathwatcher
 	.new(config.sourceBookmarks, function()
-		-- Bookmarks
 		local bookmarks = hs.json.read(config.sourceBookmarks)
 		if not bookmarks then return end
 		hs.execute(("mkdir -p '%s'"):format(config.chromeProfile))
@@ -101,10 +99,9 @@ M.pathw_bookmarks = hs.pathwatcher
 			return
 		end
 
-		-- Local State (also required for Alfred to pick up the Bookmarks)
-		local content = u.readFile(config.sourceProfile .. "/Local State")
-		if not content then return end
-		u.writeToFile(config.chromeProfile .. "/Local State", content, false)
+		local localState = u.readFile(config.sourceProfile .. "/Local State")
+		if not localState then return end
+		u.writeToFile(config.chromeProfile .. "/Local State", localState, false)
 
 		print("🔖 Bookmarks synced to Chrome Bookmarks")
 	end)

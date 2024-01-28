@@ -64,12 +64,12 @@ local function showHideTickerApp(referenceWin)
 	local app = u.app(mastodonApp)
 	if not app or not referenceWin or u.isFront("CleanShot X") then return end
 
-	if wu.CheckSize(referenceWin, wu.pseudoMax) or wu.CheckSize(referenceWin, wu.centerHalf) then
+	if wu.checkSize(referenceWin, wu.pseudoMax) or wu.checkSize(referenceWin, wu.centerHalf) then
 		winToTheSide()
 		return
 	end
 
-	local appWithTransBgWasMaximized = wu.CheckSize(referenceWin, wu.maximized)
+	local appWithTransBgWasMaximized = wu.checkSize(referenceWin, wu.maximized)
 		and u.tbl_contains(env.transBgApps, referenceWin:title())
 
 	if appWithTransBgWasMaximized then

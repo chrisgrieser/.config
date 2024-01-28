@@ -5,29 +5,20 @@ local u = require("lua.utils")
 local wu = require("lua.window-utils")
 local aw = hs.application.watcher
 local wf = hs.window.filter
-
 --------------------------------------------------------------------------------
 
----@async
----@param action "play"|"pause"
-local function spotifyDo(action)
-	local binary = "/opt/homebrew/bin/spotify_player"
-	M.spotify_player_task = hs.task.new(binary, nil, { "playback", action }):start()
-end
-
 -- auto-pause/resume Spotify on launch/quit of apps with sound
+---@async
 M.aw_spotify = aw.new(function(appName, eventType)
 	if
-		not u.screenIsUnlocked()
-		or env.isAtOffice
-		or env.isProjector()
-		or not (u.tbl_contains(env.videoAndAudioApps, appName))
+		u.screenIsUnlocked()
+		and not (env.isAtOffice or env.isProjector())
+		and u.tbl_contains(env.videoAndAudioApps, appName)
 	then
-		return
+		local action = eventType == aw.launched and "pause" or "play"
+		local binary = "/opt/homebrew/bin/spotify_player"
+		M.spotify_player_task = hs.task.new(binary, nil, { "playback", action }):start()
 	end
-
-	local action = eventType == aw.launched and "pause" or "play"
-	spotifyDo(action)
 end):start()
 
 --------------------------------------------------------------------------------
@@ -73,7 +64,7 @@ M.wf_finder = wf
 			u.runWithDelays(0.05, function() wu.autoTile(M.wf_finder) end)
 		end
 	end)
-	-- no conditions, since destroyed windows do not have properties
+	-- no condition checks needed, since destroyed windows do not have properties
 	:subscribe(
 		wf.windowDestroyed,
 		function() wu.autoTile(M.wf_finder) end
@@ -90,8 +81,8 @@ M.aw_finder = aw.new(function(appName, eventType, finder)
 end):start()
 
 --------------------------------------------------------------------------------
-
 -- ZOOM
+
 -- close first window, when second is open
 -- don't leave browser tab behind when opening zoom
 M.wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function()
@@ -109,7 +100,8 @@ end)
 
 --------------------------------------------------------------------------------
 -- SHOTTR
--- Close if prompt to purchase app
+
+-- Auto-close prompt to purchase app
 M.wf_shottr = wf.new("Shottr"):subscribe(wf.windowCreated, function(win)
 	u.runWithDelays(0.1, function()
 		if win:size().w == 600 and win:size().h == 428 then win:close() end
@@ -117,8 +109,8 @@ M.wf_shottr = wf.new("Shottr"):subscribe(wf.windowCreated, function(win)
 end)
 
 --------------------------------------------------------------------------------
-
 -- HIGHLIGHTS / PDF READER
+
 -- - Sync Dark & Light Mode
 -- - Start with Highlight Tool enabled
 M.aw_highlights = aw.new(function(appName, eventType, highlights)
@@ -141,24 +133,10 @@ M.wf_pdfReader = wf.new({ "Preview", "Highlights" }):subscribe(
 )
 
 ------------------------------------------------------------------------------
-
--- FIX window position not being remembered
-M.aw_readkit = aw.new(function(appName, event, readkit)
-	if appName == "ReadKit" and event == aw.activated then
-		u.runWithDelays({ 0, 0.2 }, function()
-			local win = readkit:mainWindow()
-			if win then wu.moveResize(win, wu.pseudoMax) end
-			readkit:selectMenuItem { "View", "Hide Sidebar" }
-		end)
-	end
-end):start()
-
-------------------------------------------------------------------------------
-
 -- TRANSMISSION / MASTODON / TODOAPP
+
 -- Fallthrough: prevent unintended focusing after qutting another app or closing
 -- last window
-
 M.aw_fallthrough = aw.new(function(appName, event)
 	if appName == "Reminders" then return end -- Reminders often opening in the background
 	if event ~= aw.terminated then return end
@@ -184,6 +162,7 @@ end):start()
 
 --------------------------------------------------------------------------------
 -- SCRIPT EDITOR
+
 M.wf_scripteditor = wf
 	.new("Script Editor")
 	:subscribe(wf.windowCreated, function(newWin)
@@ -222,16 +201,8 @@ M.wf_mimestream = wf.new("Mimestream")
 	:subscribe(wf.windowCreated, function(newWin) wu.moveResize(newWin, wu.pseudoMax) end)
 
 --------------------------------------------------------------------------------
--- NEOVIDE
-
-M.wf_neovide = wf.new("neovide"):subscribe(wf.windowCreated, function(newWin)
-	local size = env.isProjector() and wu.maximized or wu.pseudoMax
-	wu.moveResize(newWin, size)
-end)
-
---------------------------------------------------------------------------------
-
 -- DISCORD
+
 -- when focused, enclose URL in clipboard with <>
 -- when unfocused, removes <> from URL in clipboard
 -- on launch, open #off-topic in OMG Discord-server

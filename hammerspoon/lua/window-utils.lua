@@ -4,6 +4,7 @@ local env = require("lua.environment-vars")
 local u = require("lua.utils")
 
 local hotkey = hs.hotkey.bind
+local wf = hs.window.filter
 --------------------------------------------------------------------------------
 
 M.iMacDisplay = hs.screen("Built%-in")
@@ -34,7 +35,7 @@ end
 ---@param relSize hs.geometry
 ---@nodiscard
 ---@return boolean|nil nil if no win
-function M.CheckSize(win, relSize)
+function M.checkSize(win, relSize)
 	if not win then return end
 	local maxf = win:screen():frame()
 	local winf = win:frame()
@@ -69,7 +70,7 @@ function M.moveResize(win, pos)
 
 	-- resize with safety redundancy
 	u.runWithDelays({ 0, 0.45, 0.9 }, function()
-		if M.CheckSize(win, pos) then return end
+		if M.checkSize(win, pos) then return end
 		win:moveToUnit(pos)
 	end)
 end
@@ -169,7 +170,7 @@ function M.autoTile(winSrc)
 	for _, position in pairs(pos) do
 		local thisPositionExists = false
 		for _, win in pairs(wins) do
-			if not thisPositionExists and M.CheckSize(win, position) then thisPositionExists = true end
+			if not thisPositionExists and M.checkSize(win, position) then thisPositionExists = true end
 		end
 		if thisPositionExists then existingPositions = existingPositions + 1 end
 	end
@@ -181,6 +182,37 @@ function M.autoTile(winSrc)
 end
 
 --------------------------------------------------------------------------------
+
+-- Open Apps always at Mouse Screen
+M.wf_appsOnMouseScreen = wf.new({
+	"Mimestream",
+	"GoodTask",
+	"Obsidian",
+	"Finder",
+	"WezTerm",
+	"Hammerspoon",
+	"System Settings",
+	"Discord",
+	"neovide",
+	"espanso",
+	"BusyCal",
+	"Alfred Preferences",
+	env.browserApp,
+	table.unpack(env.videoAndAudioApps), -- must be last for all items to be unpacked
+}):subscribe(wf.windowCreated, function(newWin)
+	local mouseScreen = hs.mouse.getCurrentScreen()
+	local appNameOfWin = newWin:application():name()
+	local winScreenName = newWin:screen():name()
+	if not (mouseScreen and env.isProjector()) then return end
+	if mouseScreen:name() == winScreenName then return end
+
+	newWin:moveToScreen(mouseScreen)
+	u.runWithDelays(0.1, function()
+		if appNameOfWin ~= "GoodTask" then M.moveResize(newWin, M.maximized) end
+	end)
+end)
+
+--------------------------------------------------------------------------------
 -- HOTKEY ACTIONS
 
 local function controlSpaceAction()
@@ -188,11 +220,11 @@ local function controlSpaceAction()
 
 	local pos
 	if u.isFront { "Reminders", "GoodTask" } then
-		pos = M.CheckSize(curWin, M.smallCenter) and M.centerHalf or M.smallCenter
+		pos = M.checkSize(curWin, M.smallCenter) and M.centerHalf or M.smallCenter
 	elseif u.isFront { "Finder", "Script Editor" } then
-		pos = M.CheckSize(curWin, M.centerHalf) and M.maximized or M.centerHalf
+		pos = M.checkSize(curWin, M.centerHalf) and M.maximized or M.centerHalf
 	else
-		pos = M.CheckSize(curWin, M.pseudoMax) and M.maximized or M.pseudoMax
+		pos = M.checkSize(curWin, M.pseudoMax) and M.maximized or M.pseudoMax
 	end
 
 	M.moveResize(curWin, pos)
@@ -205,11 +237,10 @@ local function moveWinToNextDisplay()
 	local targetScreen = win:screen():next()
 	win:moveToScreen(targetScreen, true)
 
+	local frame = win:frame()
 	u.runWithDelays({ 0.1, 0.4 }, function()
-		-- workaround to ensure proper resizing
 		win = hs.window.focusedWindow()
-		if not win then return end
-		win:setFrameInScreenBounds(win:frame())
+		if win then win:setFrameInScreenBounds(frame) end
 	end)
 end
 

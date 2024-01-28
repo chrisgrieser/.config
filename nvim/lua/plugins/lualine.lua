@@ -56,11 +56,11 @@ local lualineConfig = {
 		lualine_c = {
 			{ -- clock if wide window
 				"datetime",
-				style = "%H:%M",
+				style = "%H:%M:%S",
 				cond = function() return vim.o.columns > 120 end,
 				fmt = function(time)
 					local timeWithBlinkingColon = os.time() % 2 == 0 and time or time:gsub(":", " ")
-					return "󰅐 " .. timeWithBlinkingColon
+					return timeWithBlinkingColon
 				end,
 			},
 		},
