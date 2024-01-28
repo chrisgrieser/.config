@@ -206,11 +206,13 @@ function M.openApps(appNames)
 	if type(appNames) == "string" then appNames = { appNames } end
 	for _, name in pairs(appNames) do
 		local runs = M.app(name) ~= nil
-		if not runs and name == "Discord" then
-			-- Open in `#off-topic` (using the `launched` app watcher trigger is too slow)
-			M.openLinkInBg("discord://discord.com/channels/686053708261228577/700466324840775831")
-		elseif not runs then
-			hs.application.open(name)
+		if not runs then
+			if name == "Discord" then
+				-- Open in `#off-topic` (using the `launched` app watcher trigger is too slow)
+				M.openLinkInBg("discord://discord.com/channels/686053708261228577/700466324840775831")
+			else
+				hs.application.open(name)
+			end
 		end
 	end
 end
@@ -244,7 +246,7 @@ function M.closeAllTheThings()
 
 	-- close browser tabs and various apps
 	M.closeTabsContaining(".") -- closes all tabs, since all URLs include `.`
-	M.quitApps (env.videoAndAudioApps)
+	M.quitApps(env.videoAndAudioApps)
 	require("lua.private").closer()
 end
 

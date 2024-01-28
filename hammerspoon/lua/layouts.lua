@@ -7,7 +7,6 @@ local visuals = require("lua.visuals")
 local wu = require("lua.window-utils")
 local app = require("lua.utils").app
 
-local wf = hs.window.filter
 local hotkey = hs.hotkey.bind
 
 --------------------------------------------------------------------------------
@@ -123,36 +122,6 @@ local function selectLayout()
 end
 
 --------------------------------------------------------------------------------
-
--- Open Apps always at Mouse Screen
-M.wf_appsOnMouseScreen = wf.new({
-	env.browserApp,
-	"Mimestream",
-	"GoodTask",
-	"BetterTouchTool",
-	"Obsidian",
-	"Finder",
-	"WezTerm",
-	"Hammerspoon",
-	"System Settings",
-	"Discord",
-	"neovide",
-	"espanso",
-	"BusyCal",
-	"Alfred Preferences",
-	table.unpack(env.videoAndAudioApps), -- must be last for all items to be unpacked
-}):subscribe(wf.windowCreated, function(newWin)
-	local mouseScreen = hs.mouse.getCurrentScreen()
-	local appOfWinName = newWin:application():name()
-	local screenOfWindow = newWin:screen()
-	if not (mouseScreen and env.isProjector() and app) then return end
-
-	u.runWithDelays({ 0, 0.2 }, function()
-		if mouseScreen:name() == screenOfWindow:name() then return end
-		newWin:moveToScreen(mouseScreen)
-		if appOfWinName ~= "GoodTask" then wu.moveResize(newWin, wu.maximized) end
-	end)
-end)
 
 --------------------------------------------------------------------------------
 -- WHEN TO SET LAYOUT
