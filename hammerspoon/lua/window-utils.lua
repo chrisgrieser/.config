@@ -205,8 +205,8 @@ local function moveWinToNextDisplay()
 	local targetScreen = win:screen():next()
 	win:moveToScreen(targetScreen, true)
 
-	u.runWithDelays({ 0.1, 0.4, 0.7 }, function()
-		-- workaround for ensuring proper resizing
+	u.runWithDelays({ 0.1, 0.4 }, function()
+		-- workaround to ensure proper resizing
 		win = hs.window.focusedWindow()
 		if not win then return end
 		win:setFrameInScreenBounds(win:frame())
