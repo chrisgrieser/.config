@@ -35,15 +35,12 @@ i=0
 while pgrep -xq "neovide" || pgrep -xq "nvim"; do
 	sleep 0.1
 	i=$((i + 1))
-	if [[ $i -gt 15 ]]; then
+	if [[ $i -eq 15 ]]; then
 		echo -n "Could not quit neovide." # Alfred notification
 		return 1
 	fi
 done
 
-# Restart (looped to ensure it becomes frontmost)
+# Restart
 sleep 0.1
-for i in {1..3}; do
-	open -a "Neovide"
-	sleep 0.25
-done
+open -a "Neovide Helper" # via helper ensures `--title-hidden`

@@ -29,7 +29,7 @@ M.browserApp = readZshEnv("BROWSER_APP")
 M.browserDefaultsPath = readZshEnv("BROWSER_DEFAULTS_PATH")
 
 M.transBgApps = {
-	"Neovide",
+	"neovide",
 	"Obsidian",
 	"wezterm-gui",
 	"WezTerm",

@@ -52,7 +52,7 @@ local function cmpconfig()
 		},
 		sorting = {
 			comparators = {
-				-- Original order: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L57
+				-- Original order: https://github.com/hrsh7th/nvim-cmp/blob/538e37ba87284942c1d76ed38dd497e54e65b891/lua/cmp/config/default.lua#L65-L74
 				-- Definitions of compare function https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/compare.lua
 				compare.offset,
 				compare.recently_used, -- higher
@@ -114,8 +114,11 @@ local function cmpconfig()
 
 				-- distinguish emmet snippets
 				local ft = vim.bo[entry.context.bufnr].filetype
-				local isEmmet = entry.source.name == "nvim_lsp" and item.kind == "Snippet" and ft == "css"
+				local isEmmet = entry.source.name == "nvim_lsp"
+					and item.kind == "Snippet"
+					and ft == "css"
 
+				-- set icons
 				-- stylua: ignore
 				local kindIcons = { Text = "", Method = "󰆧", Function = "󰊕", Constructor = "", Field = "󰇽", Variable = "󰂡", Class = "󰠱", Interface = "", Module = "", Property = "󰜢", Unit = "", Value = "󰎠", Enum = "", Keyword = "󰌋", Snippet = "󰅱", Color = "󰏘", File = "󰈙", Reference = "", Folder = "󰉋", EnumMember = "", Constant = "󰏿", Struct = "", Event = "", Operator = "󰆕", TypeParameter = "󰅲" }
 				item.kind = entry.source.name == "nvim_lsp" and kindIcons[item.kind] or ""
@@ -175,7 +178,7 @@ return {
 		event = { "InsertEnter", "CmdlineEnter" },
 		config = cmpconfig,
 		dependencies = {
-			"chrisgrieser/cmp-emoji", -- fork, has fix for suggestions after quote char
+			"chrisgrieser/cmp-emoji", -- fork (has fix for suggestions after quote char)
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-buffer",
@@ -186,16 +189,15 @@ return {
 	},
 	{ -- Snippet Engine
 		"L3MON4D3/LuaSnip",
-		event = { "InsertEnter", "CmdlineEnter" },
-		config = function()
-			-- DOCS https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#api-reference
-			require("luasnip").setup {
-				-- live updating of snippets
-				update_events = { "TextChanged", "TextChangedI" },
-				-- disable auto-reload, since already done by my own plugin
-				fs_event_providers = { autocmd = false, libuv = false },
-			}
-			-- load VSCode-style snippets
+		opts = {
+			-- live updating of snippets
+			update_events = { "TextChanged", "TextChangedI" },
+			-- disable auto-reload, since already done by my own plugin
+			fs_event_providers = { autocmd = false, libuv = false },
+		},
+		config = function(_, opts)
+			require("luasnip").setup(opts)
+			-- DOCS https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#vs-code
 			require("luasnip.loaders.from_vscode").lazy_load { paths = "./snippets" }
 		end,
 	},

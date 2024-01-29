@@ -134,9 +134,12 @@ rules:
         conditions: [*leader-active]
         to:
           - shell_command: |
-              open -a "Neovide"
-              sleep 0.25
-              open -a "Neovide" # 2nd time to ensure focussing
+              if pgrep -xq "neovide" ; then
+                osascript -e 'tell application "Neovide" to activate'
+              else
+                # opening via Helper, since this passes `--title-hidden`
+                open -a "Neovide Helper"
+              fi
           - *deactivate-leader
           - *remove-notice
       # [S]lack
