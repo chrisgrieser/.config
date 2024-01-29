@@ -277,6 +277,14 @@ serverConfigs.jsonls = {
 	},
 }
 
+-- SIC needs to be enabled, can be removed with nvim 0.10 support for dynamic config
+serverConfigs.biome = {
+	on_attach = function(client)
+		client.server_capabilities.documentFormattingProvider = true
+		client.server_capabilities.documentRangeFormattingProvider = true
+	end,
+}
+
 --------------------------------------------------------------------------------
 -- LTEX (LanguageTool LSP)
 
