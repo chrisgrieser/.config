@@ -58,6 +58,7 @@ return {
 		vim.g.codeium_filetypes = {
 			TelescopePrompt = false,
 			DressingInput = false,
+			text = false, -- `pass` passwords are plaintext and should not be sent
 		}
 		vim.g.codeium_disable_bindings = 1
 	end,
