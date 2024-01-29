@@ -139,7 +139,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>1E6D758F-172E-4E35-AD9C-3226C9D252C3</string>
+				<string>D2367F46-8E60-4205-A0EA-E66B7F3ADF69</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -274,16 +274,6 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>675BC202-E848-49B6-BF14-05C9DF722958</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Open URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -423,6 +413,27 @@
 			<string>FEBD93EE-FAF9-4E4E-8627-84BEC380B964</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>✅ Password inserted.</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>09192EC9-2C76-4174-868D-22699F041C5D</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -622,27 +633,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>✅ Password inserted.</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>09192EC9-2C76-4174-868D-22699F041C5D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>matchmode</key>
 				<integer>1</integer>
 				<key>matchstring</key>
@@ -803,27 +793,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>675BC202-E848-49B6-BF14-05C9DF722958</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>path</key>
 				<string></string>
 			</dict>
@@ -943,6 +912,7 @@
 	</array>
 	<key>readme</key>
 	<string># Alfred Client for the Pass-CLI
+## Setup
 1. Setup `pass` with an GPG key. See the [Pass-Website](https://www.passwordstore.org/) for more information.
 2. Setup `pinentry-mac` as your `pinentry-program`:
 
@@ -957,6 +927,16 @@ For information on the available environment variables, see the [pass man page](
 
 If you are using a custom password-store directory, you **must** export your `PASSWORD_STORE_DIR` in your `~/.zshenv` for this workflow to work.
 
+## Usage
+- Search your passwords via the keyword `pw`.
+- &lt;kbd&gt;⏎&lt;/kbd&gt;: Copy password to the clipboard. 
+- &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Edit entry in your Terminal, using [the Terminal configured in your Alfred settings](https://www.alfredapp.com/help/features/terminal/) and your `$EDITOR`.
+- &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Reveal `.gpg` file of the entry in Finder.
+- &lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Delete the entry.
+- &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Show details of the entry. Select any one of them to copy the value to your clipboard.
+- Use `pw new` to create a new entry. You are then prompted for a folder to place the new entry in. The password of the new entry is auto-generated based on your `pass` settings, or can be inserted from your clipboard.
+
+
 ## Credits
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
@@ -966,9 +946,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>1010</real>
+			<real>1055</real>
 			<key>ypos</key>
-			<real>165</real>
+			<real>15</real>
 		</dict>
 		<key>0F6DB773-7447-4D7C-900E-59F3E9C69B19</key>
 		<dict>
@@ -989,7 +969,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<string>copy as transient 
 (= avoids clipboard history)</string>
 			<key>xpos</key>
-			<real>595</real>
+			<real>630</real>
 			<key>ypos</key>
 			<real>285</real>
 		</dict>
@@ -1033,15 +1013,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>315</real>
 		</dict>
-		<key>675BC202-E848-49B6-BF14-05C9DF722958</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>445</real>
-			<key>ypos</key>
-			<real>440</real>
-		</dict>
 		<key>6B581416-D12E-4AC2-B604-895443940F98</key>
 		<dict>
 			<key>colorindex</key>
@@ -1051,7 +1022,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>290</real>
 			<key>ypos</key>
-			<real>905</real>
+			<real>745</real>
 		</dict>
 		<key>73A29959-E695-4840-B351-8B6A1822639C</key>
 		<dict>
@@ -1071,7 +1042,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>440</real>
 			<key>ypos</key>
-			<real>765</real>
+			<real>610</real>
 		</dict>
 		<key>83941436-919A-42A2-BCCA-4EB78802E09E</key>
 		<dict>
@@ -1111,7 +1082,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>440</real>
 			<key>ypos</key>
-			<real>905</real>
+			<real>745</real>
 		</dict>
 		<key>A5A50E6D-235D-44F3-ACFA-B80578EA0558</key>
 		<dict>
@@ -1154,13 +1125,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>D2367F46-8E60-4205-A0EA-E66B7F3ADF69</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>3</integer>
 			<key>note</key>
 			<string>remove \n</string>
 			<key>xpos</key>
-			<real>470</real>
+			<real>500</real>
 			<key>ypos</key>
-			<real>180</real>
+			<real>235</real>
 		</dict>
 		<key>E28BAD26-7C03-414A-A567-4F44432F9FD7</key>
 		<dict>
@@ -1169,7 +1140,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>295</real>
 			<key>ypos</key>
-			<real>540</real>
+			<real>420</real>
 		</dict>
 		<key>F19DCDE8-CB71-48BC-AFD8-EB381C71E346</key>
 		<dict>
@@ -1178,9 +1149,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>auto-push</string>
 			<key>xpos</key>
-			<real>331</real>
+			<real>326</real>
 			<key>ypos</key>
-			<real>705</real>
+			<real>565</real>
 		</dict>
 		<key>F46688E5-F719-4EE2-89C5-FB26A5D6977F</key>
 		<dict>
@@ -1191,7 +1162,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>440</real>
 			<key>ypos</key>
-			<real>630</real>
+			<real>475</real>
 		</dict>
 		<key>FEBD93EE-FAF9-4E4E-8627-84BEC380B964</key>
 		<dict>
@@ -1226,7 +1197,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.4.2</string>
+	<string>2.0.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
