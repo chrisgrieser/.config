@@ -38,12 +38,11 @@ function run() {
 				arg: id,
 				uid: id,
 				mods: {
-					// move id to variable for Alfred Script Filter
+					alt: { arg: path }, // reveal in finder directly uses path
 					shift: {
-						variables: { entry: id },
 						arg: "",
+						variables: { entry: id },
 					},
-					alt: { arg: path },
 				},
 			};
 		});
