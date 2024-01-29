@@ -30,20 +30,17 @@ response=$(curl --silent https://api.openai.com/v1/chat/completions \
 	-H "Authorization: Bearer $apikey" \
 	-d "{ \"model\": \"$model\", \"messages\": [{\"role\": \"user\", \"content\": \"$the_prompt\"}], \"temperature\": $temperature }")
 
-if grep -q '"error"' ; then
+if grep -q '"error"'; then
 	# doing this avoids jq dependency
 	text="ERROR: $(echo "$response" | grep '"message"' | cut -d'"' -f4)"
 else
 	text=$(echo "$response" | grep '"content"' | cut -d'"' -f4)
-	# ensure output has same amount of leading/trailing spaces
-	[[ "$selection" =~ \ $ ]] && text="$text "
-	[[ "$selection" =~ ^\  ]] && text=" $text"
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
 
 if [[ "$output_type" == "plain" ]]; then
-	echo "$text"
+	echo -n "$text"
 	exit 0
 fi
 
@@ -56,11 +53,15 @@ diff=$(git diff --word-diff "$cache/selection.txt" "$cache/rephrased.txt" |
 
 if [[ "$output_type" == "markdown" ]]; then
 	output=$(echo "$diff" |
-	sed -e 's/\[-/~~/g' -e 's/-\]/~~/g' -e 's/{+/==/g' -e 's/+}/==/g')
+		sed -e 's/\[-/~~/g' -e 's/-\]/~~/g' -e 's/{+/==/g' -e 's/+}/==/g')
 elif [[ "$output_type" == "critic-markup" ]]; then
 	output=$(echo "$diff" |
-	sed -e 's/\[-/{--/g' -e 's/-\]/--}/g' -e 's/{+/{++/g' -e 's/+}/++}/g')
+		sed -e 's/\[-/{--/g' -e 's/-\]/--}/g' -e 's/{+/{++/g' -e 's/+}/++}/g')
 fi
 
+# ensure output has same amount of leading/trailing spaces
+[[ "$selection" =~ \ $ ]] && output="$output "
+[[ "$selection" =~ ^\  ]] && output=" $output"
+
 # paste via Alfred
-echo -n "$output"
+echo "$output"
