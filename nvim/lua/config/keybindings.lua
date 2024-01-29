@@ -67,7 +67,10 @@ keymap("n", "~", '<cmd>lua require("funcs.nano-plugins").betterTilde()<CR>', { d
 
 -- Delete trailing stuff
 -- (wrapping in normal avoids temporarily scrolling to the side)
-keymap("n", "X", "mz<cmd>normal!$x`z<CR>", { desc = "󱎘 Delete char at EoL" })
+keymap("n", "X", function()
+	local line = api.nvim_get_current_line()
+	api.nvim_set_current_line(line:sub(1, -2))
+end, { desc = "󱎘 Delete char at EoL" })
 
 -- WHITESPACE & INDENTATION
 keymap("n", "=", "mzO<Esc>`z", { desc = "  blank above" })

@@ -2,7 +2,7 @@ local M = {}
 --------------------------------------------------------------------------------
 
 ---@return integer
-local function countFullScreenWins()
+local function fullScreenWinCount()
 	local fullScreenWins = hs.fnutils.filter(
 		hs.window.allWindows(),
 		function(win) return win:isFullScreen() end
@@ -59,13 +59,13 @@ local function startSplit()
 	-- 4. wait until user made decision on 2nd window, then setup SplitWinFilter
 	local function userDecision()
 		-- during the Mission-control-like selection, only 1 win is fullscreen
-		local fullScreenWins = countFullScreenWins()
+		local fullScreenWins = fullScreenWinCount()
 		local aborted = fullScreenWins == 0
 		local secondWinSelected = fullScreenWins == 2
 		return aborted or secondWinSelected
 	end
 	local function setupSplitWinFilter()
-		if countFullScreenWins() ~= 2 then return end -- aborted by user
+		if fullScreenWinCount() ~= 2 then return end -- aborted by user
 		-- end split when one of the two windows is destroyed/unfullscreened
 		M.vsplitWins = hs.window.filter
 			.new(true)
