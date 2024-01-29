@@ -549,7 +549,7 @@ to set the hotkey for the annotation extraction</string>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>description</key>
 			<string>The .bib file containing your library. A library file is required for automatic page number identification and for prepending a YAML header with bibliographic information.</string>
@@ -573,7 +573,7 @@ to set the hotkey for the annotation extraction</string>
 				<false/>
 			</dict>
 			<key>description</key>
-			<string>If a citekey can be found in the library, this is location where the extracted annotations are saved. If left empty or if extracting without citekey, the annotations are saved in the same flder as the PDF file. If the output folder is inside an Obsidian vault, will also open the file in Obsidian after extraction.</string>
+			<string>If a citekey can be found in the library, this is the location where the extracted annotations are saved. If left empty or if extracting without citekey, the annotations are saved in the same folder as the PDF file. If the output folder is inside an Obsidian vault, will also open the file in Obsidian after extraction.</string>
 			<key>label</key>
 			<string>Output Path</string>
 			<key>type</key>
