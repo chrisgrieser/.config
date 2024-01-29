@@ -5,18 +5,16 @@ app.includeStandardAdditions = true;
 
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @param {string[]} argv */
+/** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
-function run(argv) {
-	let passwordStore = argv[0];
-	if (passwordStore === "") passwordStore = app.pathTo("home folder") + "/.password-store";
+function run() {
 	const entryId = $.getenv("entry");
 
 	/** @type{AlfredItem[]} */
 	const properties = app.doShellScript(`pass show "${entryId}"`)
 		.split("\r")
 		.slice(1) // first entry is password which can can already be direct accessed
-		.filter(line => line !== "")
+		.filter(line => line.trim() !== "")
 		.map(property => {
 			const valid = property.includes(":");
 			const key = valid ? property.split(":")[0].trim() : "";
