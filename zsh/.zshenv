@@ -18,6 +18,7 @@ export BROWSER_APP="Brave Browser" # not using "$BROWSER" since reserved variabl
 # settings
 export EDITOR="nvim"
 export CODE_FONT="JetBrainsMonoNL NF"
+export NEOVIDE_TITLE_HIDDEN=1
 
 #───────────────────────────────────────────────────────────────────────────────
 
