@@ -7,7 +7,7 @@
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 if pgrep -xq "neovide"; then
-	# DOCS # https://neovim.io/doc/user/remote.html
+	# DOCS https://neovim.io/doc/user/remote.html
 	nvim --server "/tmp/nvim_server.pipe" --remote "$@"
 
 	# $LINE is set via `open --env=LINE=n` by the caller
@@ -17,6 +17,6 @@ if pgrep -xq "neovide"; then
 else
 	[[ -z "$LINE" ]] && linearg="+$LINE"
 	# shellcheck disable=2086
-	nohup neovide --no-tabs $linearg "$@" &
+	nohup neovide --no-tabs --title-hidden $linearg "$@" &
 	disown # https://stackoverflow.com/a/20338584/22114136
 fi

@@ -160,19 +160,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>B616131D-288D-4C96-B586-C024DA33C276</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>E3A971CD-7DC4-4FDF-9FEB-C73F0A3A8BD7</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>B676CE46-BEC5-4201-9170-768499351B3D</key>
 		<array>
 			<dict>
@@ -230,19 +217,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>FC350FC9-C6D2-45FA-BC34-7B415C787DE3</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>E3A971CD-7DC4-4FDF-9FEB-C73F0A3A8BD7</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A5B116EC-8220-4ABE-8376-976F243A9EF3</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -340,23 +314,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string>sketchybar reload</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>74016E1F-4C66-4A71-A468-9E03AD56BE1C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -372,6 +329,23 @@
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>A5B116EC-8220-4ABE-8376-976F243A9EF3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>sketchybar reload</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>74016E1F-4C66-4A71-A468-9E03AD56BE1C</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -477,98 +451,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/neovim-hard-restart.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>E3A971CD-7DC4-4FDF-9FEB-C73F0A3A8BD7</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<true/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>45</integer>
-				<key>hotmod</key>
-				<integer>1835008</integer>
-				<key>hotstring</key>
-				<string>N</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>B616131D-288D-4C96-B586-C024DA33C276</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>espanso restart</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>❗Restart Espanso</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>B676CE46-BEC5-4201-9170-768499351B3D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>espanso</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>C5467250-ED54-4905-BDBB-5B6EA35BC1F1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>command</key>
 				<integer>8</integer>
 				<key>confirm</key>
@@ -663,6 +545,65 @@
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
+				<string>espanso restart</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>❗Restart Espanso</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>B676CE46-BEC5-4201-9170-768499351B3D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>espanso</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>C5467250-ED54-4905-BDBB-5B6EA35BC1F1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>⚠️ Sync Issue</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>DE7F6025-CE45-4501-953B-1EE1F498066D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
 				<string>hs restart</string>
 				<key>subtext</key>
 				<string></string>
@@ -692,27 +633,6 @@
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>26ABDCE2-3900-4463-AD5F-1EE785422A03</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>⚠️ Sync Issue</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>DE7F6025-CE45-4501-953B-1EE1F498066D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -748,7 +668,7 @@
 			<key>xpos</key>
 			<real>330</real>
 			<key>ypos</key>
-			<real>350</real>
+			<real>190</real>
 		</dict>
 		<key>5956591A-FB95-4AD5-BE0A-008DB41E2F0B</key>
 		<dict>
@@ -775,7 +695,7 @@
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>330</real>
+			<real>170</real>
 		</dict>
 		<key>74016E1F-4C66-4A71-A468-9E03AD56BE1C</key>
 		<dict>
@@ -822,27 +742,16 @@
 			<key>xpos</key>
 			<real>440</real>
 			<key>ypos</key>
-			<real>325</real>
+			<real>165</real>
 		</dict>
 		<key>A5B116EC-8220-4ABE-8376-976F243A9EF3</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>375</real>
+			<real>350</real>
 			<key>ypos</key>
-			<real>80</real>
-		</dict>
-		<key>B616131D-288D-4C96-B586-C024DA33C276</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>neovim hard restart</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>175</real>
+			<real>20</real>
 		</dict>
 		<key>B676CE46-BEC5-4201-9170-768499351B3D</key>
 		<dict>
@@ -880,7 +789,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>330</real>
+			<real>170</real>
 		</dict>
 		<key>D133933A-08B7-4B72-A53E-B49EEFA0C063</key>
 		<dict>
@@ -900,16 +809,7 @@
 			<key>xpos</key>
 			<real>440</real>
 			<key>ypos</key>
-			<real>460</real>
-		</dict>
-		<key>E3A971CD-7DC4-4FDF-9FEB-C73F0A3A8BD7</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>190</real>
-			<key>ypos</key>
-			<real>175</real>
+			<real>300</real>
 		</dict>
 		<key>FC350FC9-C6D2-45FA-BC34-7B415C787DE3</key>
 		<dict>

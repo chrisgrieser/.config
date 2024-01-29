@@ -1,5 +1,8 @@
-# DOCS https://neovide.dev/config-file.html?highlight=frame#available-settings
-#───────────────────────────────────────────────────────────────────────────────
+# DOCS https://neovide.dev/config-file.html#available-settings
 
-frame = "transparent" # https://neovide.dev/command-line-reference.html#frame
-no-multigrid = true  # fixes transparency issues for scrollbar
+# INFO setting frame to "none" fixes title appearing, but has some bugs with
+# nvim ---remote, so using "buttonless" instead https://neovide.dev/command-line-reference.html#frame
+frame = "buttonless"
+
+# FIX transparency issues for scrollbar
+no-multigrid = true

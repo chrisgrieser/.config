@@ -1197,95 +1197,75 @@ rules:
       # NUMBER KEYS: TOGGLE TAGS
       # https://support.apple.com/guide/mac-help/tag-files-and-folders-mchlp15236/mac
       - type: basic
-        from: { key_code: "1" } # ! used as mark
+        from: { key_code: "1" }
         to:
           - { key_code: "1", modifiers: [control] }
-          - shell_command:
-              afplay
-              '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf'
-              &
+          - shell_command: |
+              afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "2" }
         to:
           - { key_code: "2", modifiers: [control] }
-          - shell_command:
-              afplay
-              '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf'
-              &
+          - shell_command: |
+              afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "3" }
         to:
           - { key_code: "3", modifiers: [control] }
-          - shell_command:
-              afplay
-              '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf'
-              &
+          - shell_command: |
+              afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "4" }
         to:
           - { key_code: "4", modifiers: [control] }
-          - shell_command:
-              afplay
-              '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf'
-              &
+          - shell_command: |
+              afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "5" }
         to:
           - { key_code: "5", modifiers: [control] }
-          - shell_command:
-              afplay
-              '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf'
-              &
+          - shell_command: |
+              afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "6" }
         to:
           - { key_code: "6", modifiers: [control] }
-          - shell_command:
-              afplay
-              '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf'
-              &
+          - shell_command: |
+              afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "7" }
         to:
           - { key_code: "7", modifiers: [control] }
-          - shell_command:
-              afplay
-              '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf'
-              &
+          - shell_command: |
+              afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "8" }
         to:
           - { key_code: "8", modifiers: [control] }
-          - shell_command:
-              afplay
-              '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf'
-              &
+          - shell_command: |
+              afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: "9" }
         to:
           - { key_code: "9", modifiers: [control] }
-          - shell_command:
-              afplay
-              '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf'
-              &
+          - shell_command: |
+              afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # remove all tags
       - type: basic
         from: { key_code: "0" }
         to:
           - { key_code: "0", modifiers: [control] }
-          - shell_command:
-              afplay
-              '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf'
-              &
+          - shell_command: |
+              afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       #─────────────────────────────────────────────────────────────────────────
@@ -1299,20 +1279,20 @@ rules:
               afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/screen_sharing_started.caf" &
               killall bird
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # ctrl-p: copy path
+      # ctrl-p: copy filepath
       - type: basic
         from: { key_code: p, modifiers: { mandatory: [control] } }
         to:
           - { key_code: "c", modifiers: [option, command] }
           - shell_command: osascript -e 'display notification "✅ Filepath copied" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # ctrl-n: copy name
+      # ctrl-n: copy filename
       - type: basic
         from: { key_code: n, modifiers: { mandatory: [control] } }
         to:
           - key_code: return_or_enter
           - { key_code: "c", modifiers: [command] }
-          - key_code: return_or_enter
+          - key_code: escape
           - shell_command: osascript -e 'display notification "✅ Filename copied" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # ctrl-g: open at github

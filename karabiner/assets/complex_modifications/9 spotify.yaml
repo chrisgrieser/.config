@@ -28,7 +28,7 @@ rules:
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
               spotify_player playback play-pause
-              if [[ $? -nq 0 ]]; then
+              if [[ $? -ne 0 ]]; then
                 spotify_player connect --name "Wohnzimmer Echo"
                 spotify_player playback play
               fi
@@ -38,3 +38,7 @@ rules:
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
               spotify_player playback next
+              if [[ $? -ne 0 ]]; then
+                spotify_player connect --name "Wohnzimmer Echo"
+                spotify_player playback play
+              fi
