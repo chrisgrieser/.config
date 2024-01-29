@@ -5,7 +5,7 @@ local u = require("config.utils")
 ---mappings from https://github.com/williamboman/mason-lspconfig.nvim/blob/main/lua/mason-lspconfig/mappings/server.lua
 ---@type table<string, string>
 local lspToMasonMap = {
-	autotools_ls = "autotools-language-server", -- Makefiles lsp
+	autotools_ls = "autotools-language-server", -- Makefile lsp
 	bashls = "bash-language-server",
 	biome = "biome", -- ts/js/json linter/formatter
 	cssls = "css-lsp",
@@ -48,10 +48,10 @@ for lspName, _ in pairs(lspToMasonMap) do
 	serverConfigs[lspName] = {}
 end
 
----Creates code-action-keymap on attachting lsp to buffer
+---Creates code-action keymap on attaching lsp to buffer
 ---@param mode string|string[]
 ---@param lhs string
----@param codeActionTitle string used by string.find
+---@param codeActionTitle string used by `string.find`
 ---@param keymapDesc string
 local function codeActionKeymap(mode, lhs, codeActionTitle, keymapDesc)
 	vim.keymap.set(mode, lhs, function()
@@ -74,8 +74,8 @@ serverConfigs.bashls = {
 		bashIde = { shellcheckPath = "" },
 	},
 }
--- WORKAROUND: use efm to use shellcheck with zsh files
 
+-- HACK use efm to use shellcheck with zsh files
 -- EFM: Markdown & Shell
 serverConfigs.efm = {
 	cmd = { "efm-langserver", "-c", vim.g.linterConfigFolder .. "/efm.yaml" },
@@ -110,6 +110,7 @@ serverConfigs.lua_ls = {
 				arrayIndex = "Disable",
 			},
 			workspace = { checkThirdParty = "Disable" }, -- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
+			telemetry = { enable = false },
 		},
 	},
 }
@@ -251,7 +252,7 @@ serverConfigs.tsserver = {
 		},
 
 		-- INFO "cannot redeclare block-scoped variable" -> not useful for JXA.
-		-- (Biome works on single-file-mode and therefore can be used to check for
+		-- (Biome works only on single and therefore can be used to check for
 		-- unintended re-declarations.)
 		diagnostics = { ignoredCodes = { 2451 } },
 		typescript = configForBoth,
@@ -380,7 +381,7 @@ serverConfigs.yamlls = {
 		},
 	},
 	-- SIC needs enabling via setting *and* via capabilities to work. Probably
-	-- fixed with nvim 0.10
+	-- fixed with nvim 0.10 supporting dynamic config changes
 	on_attach = function(client) client.server_capabilities.documentFormattingProvider = true end,
 }
 

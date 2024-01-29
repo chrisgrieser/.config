@@ -57,7 +57,7 @@ return {
 
 		vim.g.codeium_filetypes = {
 			TelescopePrompt = false,
-			-- DressingInput = false,
+			DressingInput = false,
 		}
 		vim.g.codeium_disable_bindings = 1
 	end,
