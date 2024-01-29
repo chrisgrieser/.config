@@ -16,8 +16,8 @@ keymap(
 	{ desc = "⌨️ Edit " .. vim.fs.basename(pathOfThisFile) }
 )
 
--- Repeat Last Command
-keymap("n", "<leader>r", ":<Up><CR>", { desc = "󰘳 Repeat last cmd", silent = true })
+-- Run Last [a]gain
+keymap("n", "<leader>a", ":<Up><CR>", { desc = "󰘳 last cmd again", silent = true })
 
 -- view internal directories
 keymap(
