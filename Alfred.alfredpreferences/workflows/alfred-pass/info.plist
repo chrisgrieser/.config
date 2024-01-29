@@ -254,6 +254,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>675BC202-E848-49B6-BF14-05C9DF722958</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Open URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>D1151344-66AB-453F-8468-097748113645</key>
 		<array/>
@@ -491,7 +501,7 @@ osascript -l JavaScript ./scripts/select-folder-for-new-pw.js "$PASSWORD_STORE_D
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
-				<false/>
+				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>2</integer>
 				<key>argumenttreatemptyqueryasnil</key>
@@ -515,19 +525,17 @@ osascript -l JavaScript ./scripts/select-folder-for-new-pw.js "$PASSWORD_STORE_D
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string># "$PASSWORD_STORE_DIR" from zshenv can be passed to JavaScript
-source ~/.zshenv
-osascript -l JavaScript ./scripts/pass-cli-search.js "$PASSWORD_STORE_DIR" "$*"</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>./scripts/pass-cli-search.js</string>
 				<key>subtext</key>
 				<string>Loading...</string>
 				<key>title</key>
 				<string>Search Passwords in Pass</string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>8</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -755,6 +763,27 @@ osascript -l JavaScript ./scripts/show-properties.js "$PASSWORD_STORE_DIR"</stri
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>675BC202-E848-49B6-BF14-05C9DF722958</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>path</key>
 				<string></string>
 			</dict>
@@ -771,7 +800,7 @@ osascript -l JavaScript ./scripts/show-properties.js "$PASSWORD_STORE_DIR"</stri
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
-				<string>pass edit "{query}" &amp;&amp; sleep 0.5 &amp;&amp; pass git push</string>
+				<string>pass edit "{query}" &amp;&amp; sleep 0.5 ; pass git push</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.terminalcommand</string>
@@ -975,6 +1004,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>295</real>
 		</dict>
+		<key>675BC202-E848-49B6-BF14-05C9DF722958</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>445</real>
+			<key>ypos</key>
+			<real>420</real>
+		</dict>
 		<key>6B581416-D12E-4AC2-B604-895443940F98</key>
 		<dict>
 			<key>colorindex</key>
@@ -982,9 +1020,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>delete pw</string>
 			<key>xpos</key>
-			<real>295</real>
+			<real>290</real>
 			<key>ypos</key>
-			<real>800</real>
+			<real>885</real>
 		</dict>
 		<key>73A29959-E695-4840-B351-8B6A1822639C</key>
 		<dict>
@@ -1002,9 +1040,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>edit</string>
 			<key>xpos</key>
-			<real>445</real>
+			<real>440</real>
 			<key>ypos</key>
-			<real>660</real>
+			<real>745</real>
 		</dict>
 		<key>8DFAB981-4135-40F5-BA81-DEDA35D0F632</key>
 		<dict>
@@ -1033,9 +1071,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>445</real>
+			<real>440</real>
 			<key>ypos</key>
-			<real>800</real>
+			<real>885</real>
 		</dict>
 		<key>A5A50E6D-235D-44F3-ACFA-B80578EA0558</key>
 		<dict>
@@ -1082,9 +1120,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>300</real>
+			<real>295</real>
 			<key>ypos</key>
-			<real>435</real>
+			<real>520</real>
 		</dict>
 		<key>F19DCDE8-CB71-48BC-AFD8-EB381C71E346</key>
 		<dict>
@@ -1093,20 +1131,20 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>auto-push</string>
 			<key>xpos</key>
-			<real>336</real>
+			<real>331</real>
 			<key>ypos</key>
-			<real>600</real>
+			<real>685</real>
 		</dict>
 		<key>F46688E5-F719-4EE2-89C5-FB26A5D6977F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>edit</string>
+			<string>edit &amp; push</string>
 			<key>xpos</key>
-			<real>445</real>
+			<real>440</real>
 			<key>ypos</key>
-			<real>525</real>
+			<real>610</real>
 		</dict>
 		<key>FEBD93EE-FAF9-4E4E-8627-84BEC380B964</key>
 		<dict>
