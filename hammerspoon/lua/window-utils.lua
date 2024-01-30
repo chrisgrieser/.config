@@ -61,7 +61,7 @@ function M.moveResize(win, pos)
 	if
 		not win
 		or not (win:application())
-		or u.tbl_contains(appsToIgnore, win:application():name()) ---@diagnostic disable-line: undefined-field
+		or hs.fnutils.contains(appsToIgnore, win:application():name()) ---@diagnostic disable-line: undefined-field
 		or not win:isMaximizable()
 		or not win:isStandard()
 	then
@@ -109,7 +109,7 @@ function M.autoTile(winSrc)
 	wins = hs.fnutils.filter(wins, function(win)
 		local rejectTitles = { "Move", "Copy", "Delete", "Finder Settings" }
 		return win:isStandard()
-			and not u.tbl_contains(rejectTitles, win:title())
+			and not hs.fnutils.contains(rejectTitles, win:title())
 			and not win:title():find(" Info$")
 	end)
 	if not wins then return end
@@ -201,14 +201,13 @@ M.wf_appsOnMouseScreen = wf.new({
 	table.unpack(env.videoAndAudioApps), -- must be last for all items to be unpacked
 }):subscribe(wf.windowCreated, function(newWin)
 	local mouseScreen = hs.mouse.getCurrentScreen()
-	local appNameOfWin = newWin:application():name()
-	local winScreenName = newWin:screen():name()
-	if not (mouseScreen and env.isProjector()) then return end
-	if mouseScreen:name() == winScreenName then return end
+	if not mouseScreen or not env.isProjector() then return end
+	local alreadyOnMouseScreen = newWin:screen():name() == mouseScreen:name()
+	if alreadyOnMouseScreen then return end
 
 	newWin:moveToScreen(mouseScreen)
 	u.runWithDelays(0.1, function()
-		if appNameOfWin ~= "GoodTask" then M.moveResize(newWin, M.maximized) end
+		if newWin:application():name() ~= "GoodTask" then M.moveResize(newWin, M.maximized) end
 	end)
 end)
 
@@ -269,7 +268,7 @@ hotkey(u.hyper, "up", function() M.moveResize(hs.window.focusedWindow(), { x = 0
 -- stylua: ignore end
 
 -- for adding to Shortcuts.app
-u.urischeme("move-all-wins-to-projector", moveAllWinsToProjectorScreen)
+hs.urlevent.bind("move-all-wins-to-projector", moveAllWinsToProjectorScreen)
 
 --------------------------------------------------------------------------------
 return M

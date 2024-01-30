@@ -62,7 +62,7 @@ local function hideOthers(appObj)
 		if
 			app
 			and not (app:findWindow("Picture in Picture"))
-			and not (u.tbl_contains(config.appsNotToHide, app:name()))
+			and not (hs.fnutils.contains(config.appsNotToHide, app:name()))
 			and not (app:name() == thisAppName)
 			and not (app:isHidden())
 		then
@@ -80,7 +80,7 @@ M.transBgAppWatcher = aw.new(function(appName, event, appObj)
 	if event == aw.terminated then
 		if appName == "Reminders" then return end -- Reminders often opening in the background
 		unHideAll()
-	elseif event == aw.activated and u.tbl_contains(config.transBgApps, appName) then
+	elseif event == aw.activated and hs.fnutils.contains(config.transBgApps, appName) then
 		u.whenAppWinAvailable(appName, function() hideOthers(appObj) end)
 	end
 end):start()
@@ -95,7 +95,7 @@ M.autoTileAppWatcher = aw.new(function(appName, eventType, appObj)
 	local autoTileApps = { "Finder", env.browserApp }
 	if
 		eventType == aw.deactivated
-		and u.tbl_contains(autoTileApps, appName)
+		and hs.fnutils.contains(autoTileApps, appName)
 		and #(appObj:allWindows()) > 1
 		and not (appObj:findWindow("Picture in Picture"))
 		and not (appObj:findWindow("^$")) -- special windows?

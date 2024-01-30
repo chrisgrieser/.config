@@ -79,7 +79,7 @@ M.timer_nightlyMaintenance = hs.timer
 				u.notify(msg)
 			end)
 			:start()
-		u.applescript(
+		hs.osascript.applescript(
 			[[tell application id "com.runningwithcrayons.Alfred" to run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"]]
 		)
 		-- save macOS preferences via `mackup`

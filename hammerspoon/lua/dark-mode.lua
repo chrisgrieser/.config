@@ -17,7 +17,7 @@ function M.setDarkMode(toMode)
 
 	-- System
 	local bool = toMode == "light" and "false" or "true"
-	u.applescript(
+	hs.osascript.applescript(
 		'tell application "System Events" to tell appearance preferences to set dark mode to ' .. bool
 	)
 

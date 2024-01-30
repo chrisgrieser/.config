@@ -13,7 +13,7 @@ M.aw_spotify = aw.new(function(appName, eventType)
 	if
 		u.screenIsUnlocked()
 		and not (env.isAtOffice or env.isProjector())
-		and u.tbl_contains(env.videoAndAudioApps, appName)
+		and hs.fnutils.contains(env.videoAndAudioApps, appName)
 	then
 		local action = eventType == aw.launched and "pause" or "play"
 		local binary = "/opt/homebrew/bin/spotify_player"
@@ -150,7 +150,7 @@ M.aw_fallthrough = aw.new(function(appName, event)
 		for _, win in pairs(visibleWins) do
 			if not win:application() then return end
 			local name = win:application():name() ---@diagnostic disable-line: undefined-field
-			if not (u.tbl_contains(fallThroughApps, name)) then
+			if not (hs.fnutils.contains(fallThroughApps, name)) then
 				nextWin = win
 				break
 			end
@@ -168,7 +168,7 @@ M.wf_scripteditor = wf
 	:subscribe(wf.windowCreated, function(newWin)
 		-- skip new file creation dialog
 		if newWin:title() == "Open" then
-			u.applescript('tell application "Script Editor" to make new document')
+			hs.osascript.applescript('tell application "Script Editor" to make new document')
 
 		-- auto-paste and lint content; resize window
 		elseif newWin:title() == "Untitled" then

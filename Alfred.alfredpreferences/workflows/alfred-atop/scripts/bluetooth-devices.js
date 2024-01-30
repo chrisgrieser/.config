@@ -3,7 +3,7 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
-let rerunSecs = parseFloat($.getenv("rerun_s_bluetooth")) || 2.5;
+let rerunSecs = Number.parseFloat($.getenv("rerun_s_bluetooth")) || 2.5;
 if (rerunSecs < 0.1) rerunSecs = 0.1;
 else if (rerunSecs > 5) rerunSecs = 5;
 
@@ -73,7 +73,7 @@ function run() {
 	deviceArr = deviceArr.map((device) => {
 		const batteryLevel =
 			applePeriphery[device.device_address]?.BatteryPercent ||
-			parseInt(device.device_batteryLevelMain) ||
+			Number.parseInt(device.device_batteryLevelMain) ||
 			-1;
 		const batteryLow = batteryLevel < 20 ? "⚠️" : "";
 		const battery = batteryLevel > -1 ? `${batteryLow}${batteryLevel}%` : "";

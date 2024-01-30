@@ -3,11 +3,6 @@ local M = {} -- persist from garbage collector
 local env = require("lua.environment-vars")
 --------------------------------------------------------------------------------
 
--- shorthands
-M.applescript = hs.osascript.applescript
-M.urischeme = hs.urlevent.bind
-M.tbl_contains = hs.fnutils.contains
-
 -- bound to capslock via Karabiner elements
 M.hyper = { "cmd", "alt", "ctrl" }
 

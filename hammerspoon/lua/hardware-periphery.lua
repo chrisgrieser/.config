@@ -15,7 +15,7 @@ M.usb_externalDrive = hs.usb.watcher
 			"CHERRY Wireless Device", -- Mouse at mother
 			"SP 150", -- RICOH printer
 		}
-		if u.tbl_contains(ignore, name) or device.eventType ~= "added" then return end
+		if hs.fnutils.contains(ignore, name) or device.eventType ~= "added" then return end
 
 		u.notify("Mounted: " .. name)
 
@@ -25,7 +25,7 @@ M.usb_externalDrive = hs.usb.watcher
 			"Elements 2621", -- Externe C
 		}
 
-		if u.tbl_contains(harddriveNames, name) then
+		if hs.fnutils.contains(harddriveNames, name) then
 			hs.application.open("WezTerm")
 		else
 			-- search for mounted volumes, since the usb-watcher does not report it to us
@@ -43,27 +43,40 @@ M.usb_externalDrive = hs.usb.watcher
 --------------------------------------------------------------------------------
 -- BLUETOOTH/BATTERY
 
+local output, success = hs.execute(
+	"ioreg -rak BatteryPercent | sed 's/data>/string>/' | plutil -convert json - -o -"
+)
+if not success then return end
+local devices = hs.json.decode(output) or {}
+for _, device in pairs(devices) do
+	local percent = device.BatteryPercent
+	local name = device.Product
+	local msg = ("🔋 %s Battery low (%s)"):format(name, percent)
+end
+
 M.timer_dailyBatteryCheck = hs.timer
 	.doAt("14:30", "01d", function()
-		local warnBelowPercent = 20
+		local warnBelowPercent = 20 -- CONFIG
 
-		-- `privateBluetoothBatteryInfo()` apparently retrieves battery info only
-		-- once on the first load and not dynamically on every call. Thus, so we
-		-- need to unload and reload the module to force a refresh of the
-		-- percentage values
-		package.loaded["hs.battery"] = nil
-
-		local devices = hs.battery.privateBluetoothBatteryInfo()
-		if not devices then return end
+		-- get battery info
+		-- `privateBluetoothBatteryInfo()` is not reliable, therefore retrieving
+		-- battery status directly from the system
+		local output, success = hs.execute(
+			"ioreg -rak BatteryPercent | sed 's/data>/string>/' | plutil -convert json - -o -"
+		)
+		if not success then return end
+		local devices = hs.json.decode(output) or {}
 
 		for _, device in pairs(devices) do
-			local percent = tonumber(device.batteryPercentSingle)
+			local percent = device.BatteryPercent
+			local name = device.Product
+			local msg = ("🔋 %s Battery low (%s)"):format(name, percent)
 			-- battery info incorrect for non-Apple devices
-			if percent < warnBelowPercent and device.isApple == "YES" then
-				local msg = ("🔋 %s Battery low (%s)"):format(device.name, percent)
-				u.notify("⚠️", msg)
+			if percent < warnBelowPercent then
+				local msg = ("🔋 %s Battery low (%s)"):format(name, percent)
 
-				-- new Reminder
+				-- notification & Reminder
+				u.notify("⚠️", msg)
 				hs.osascript.javascript(([[
 					const rem = Application("Reminders");
 					const today = new Date();

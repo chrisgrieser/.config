@@ -74,7 +74,7 @@ local function luaEval(content)
 	if parentDir:find("hammerspoon") then
 		local lines = table.concat(content.lines, "\n"):gsub('"', '\\"')
 		-- stylua: ignore
-		local hsApplescript = ('tell application "Hammerspoon" to execute lua code "hs.alert(%s)"'):format(lines)
+		local hsApplescript = ('tell application "Hammerspoon" to execute lua code "hs.alert(hs.inspect(%s))"'):format(lines)
 		vim.fn.system { "osascript", "-e", hsApplescript }
 	else
 		local output = MiniOperators.default_evaluate_func(content)
