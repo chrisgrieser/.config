@@ -121,11 +121,9 @@ local function themeModifications()
 		updateHl("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
 		overwriteHl("TSParameter", { fg = "#6f92b3" })
 	elseif theme == "hybrid" then
-		vim.defer_fn(function()
-			for _, v in pairs(vimModes) do
-				updateHl("lualine_a_" .. v, "gui=bold")
-			end
-		end, 100)
+		for _, v in pairs(vimModes) do
+			updateHl("lualine_a_" .. v, "gui=bold")
+		end
 		-- needs foreground, not background
 		local incsearch = u.getHighlightValue("IncSearch", "fg")
 		overwriteHl("HLSearchReversed", { fg = incsearch })
@@ -152,17 +150,16 @@ local function themeModifications()
 		if mode == "dark" then updateHl("ColorColumn", "guibg=#2e3742") end
 	elseif theme == "kanagawa" then
 		overwriteHl("TreesitterContext", { bg = "#363648" })
+
 		-- transparent sign column
 		clearHl("SignColumn")
 		updateHl("GitSignsAdd", "guibg=none")
 		updateHl("GitSignsChange", "guibg=none")
 		updateHl("GitSignsDelete", "guibg=none")
 
-		vim.defer_fn(function()
-			for _, v in pairs(vimModes) do
-				updateHl("lualine_a_" .. v, "gui=bold")
-			end
-		end, 100)
+		for _, v in pairs(vimModes) do
+			updateHl("lualine_a_" .. v, "gui=bold")
+		end
 		for _, type in pairs { "Hint", "Info", "Warn", "Error" } do
 			updateHl("DiagnosticSign" .. type, "guibg=none")
 		end
@@ -174,7 +171,7 @@ end
 vim.api.nvim_create_autocmd("ColorScheme", {
 	callback = function()
 		themeModifications()
-		customHighlights()
+		vim.defer_fn(function() customHighlights() end, 1)
 	end,
 })
 
