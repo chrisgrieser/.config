@@ -58,7 +58,7 @@ local function syncInProgress()
 		local isStillSyncing = M.task_sync[repo.name] and M.task_sync[repo.name]:isRunning()
 		table.insert(isSyncing, isStillSyncing)
 	end
-	return u.tbl_contains(isSyncing, true)
+	return hs.fnutils.contains(isSyncing, true)
 end
 
 ---@async
@@ -101,7 +101,7 @@ M.timer_repoSync = hs.timer
 	:start()
 
 -- 3. manually via Alfred: `hammerspoon://sync-repos`
-u.urischeme("sync-repos", function() syncAllGitRepos(true) end)
+hs.urlevent.bind("sync-repos", function() syncAllGitRepos(true) end)
 
 -- 4. when going to sleep or when unlocking
 local c = hs.caffeinate.watcher

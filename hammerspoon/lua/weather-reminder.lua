@@ -18,7 +18,7 @@ local config = {
 
 -- only run in the summer  & at home
 local curMonth = tostring(os.date("%b"))
-if not u.tbl_contains(config.activeInMonths, curMonth) or not env.isAtHome then return end
+if not hs.fnutils.contains(config.activeInMonths, curMonth) or not env.isAtHome then return end
 
 --------------------------------------------------------------------------------
 

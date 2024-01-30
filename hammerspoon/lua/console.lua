@@ -2,6 +2,7 @@ local M = {} -- persist from garbage collector
 
 local u = require("lua.utils")
 local env = require("lua.environment-vars")
+
 local cons = hs.console
 local wf = hs.window.filter
 --------------------------------------------------------------------------------
@@ -23,6 +24,9 @@ cons.titleVisibility("hidden")
 cons.toolbar(nil)
 cons.consoleFont(baseFont)
 hs.consoleOnTop(false)
+
+-- quicker console usage
+I = hs.inspect
 
 --------------------------------------------------------------------------------
 

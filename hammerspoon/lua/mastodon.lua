@@ -70,7 +70,7 @@ local function showHideTickerApp(referenceWin)
 	end
 
 	local appWithTransBgWasMaximized = wu.checkSize(referenceWin, wu.maximized)
-		and u.tbl_contains(env.transBgApps, referenceWin:title())
+		and hs.fnutils.contains(env.transBgApps, referenceWin:title())
 
 	if appWithTransBgWasMaximized then
 		local loginWin = referenceWin:title() == "Login"
