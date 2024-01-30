@@ -23,7 +23,7 @@ local function scrollUp()
 	local modifiers = mastodonApp == "Mona" and { "cmd" } or { "cmd", "shift" }
 	keystroke(modifiers, "R", 1, app) -- refresh/reload
 
-	u.runWithDelays({ 0.5, 1, 2 }, function() -- wait for posts to load
+	u.runWithDelays({ 1, 5 }, function() -- wait for posts to load
 		if app:isFrontmost() then return end -- do not interrupt when currently reading
 		keystroke({ "cmd" }, "up", 1, app) -- scroll up
 	end)
