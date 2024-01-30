@@ -88,7 +88,7 @@ return {
 		key = "l",
 		mods = "CMD",
 		action = actFun(function(_, pane)
-			local cwd = pane:get_current_working_dir()
+			local cwd = pane:get_current_working_dir().file_path
 			wt.open_with(cwd, "Finder")
 		end),
 	},
