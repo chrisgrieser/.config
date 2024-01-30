@@ -180,18 +180,10 @@ return {
 	{ -- auto-convert string and f/template string
 		"chrisgrieser/nvim-puppeteer",
 		ft = { "python", "javascript", "typescript", "lua" },
+		cmd = "PuppeteerToggle",
 		init = function() vim.g.puppeteer_lua_format_string = true end,
 		keys = {
-			{ -- Toggle string formatting in lua
-				"<leader>op",
-				function()
-					vim.g.puppeteer_lua_format_string = not vim.g.puppeteer_lua_format_string
-					local status = vim.g.puppeteer_lua_format_string and "enabled" or "disabled"
-					u.notify("Puppeteer", "Lua string formatting " .. status)
-				end,
-				ft = "lua",
-				desc = "󰅳 Lua string formatting",
-			},
+			{ "<leader>op", vim.cmd.PuppeteerToggle, desc = "󰅳 PuppeteerToggle" },
 		},
 	},
 	{ -- swapping of sibling nodes

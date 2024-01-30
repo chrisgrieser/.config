@@ -2,7 +2,6 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
-
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} str */
@@ -13,18 +12,15 @@ function alfredMatcher(str) {
 }
 
 //──────────────────────────────────────────────────────────────────────────────
+
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const luaVersion = $.getenv("lua_version");
 	const luaManualBaseURL = `https://lua.org/manual/${luaVersion}/`;
-	const luaWikiBaseURL = "http://lua-users.org";
 
+	const rawHTML = app.doShellScript(`curl -sL '${luaManualBaseURL}'`) 
 	const ahrefRegex = /.*?href="(.*?)">(.*?)<.*/i;
-
-	const rawHTML =
-		app.doShellScript(`curl -sL '${luaManualBaseURL}'`) +
-		app.doShellScript(`curl -sL '${luaWikiBaseURL}/wiki/LuaDirectory'`);
 
 	const sites = rawHTML
 		.split("\r")
@@ -33,18 +29,12 @@ function run() {
 		)
 		.map((line) => {
 			const subsite = line.replace(ahrefRegex, "$1");
-			const isWiki = subsite.includes("wiki");
+			const url = luaManualBaseURL + subsite;
 			let title = line.replace(ahrefRegex, "$2").replaceAll("&ndash; ", "");
 			if (title.includes(">")) return {};
 
-			let type = "manual";
-			if (isWiki) type = "wiki";
-			else if (title.match(/\d/)) type = "manual (chapter)";
-
+			const type = title.match(/\d/) ? "manual (chapter)" : "manual"
 			title = title.replace(/^[.0-9]+ /, "");
-
-			let url = isWiki ? luaWikiBaseURL : luaManualBaseURL;
-			url += subsite;
 
 			return {
 				title: title,
