@@ -43,24 +43,24 @@ M.usb_externalDrive = hs.usb.watcher
 --------------------------------------------------------------------------------
 -- BLUETOOTH/BATTERY
 
-local output, success = hs.execute(
-	"ioreg -rak BatteryPercent | sed 's/data>/string>/' | plutil -convert json - -o -"
-)
-if not success then return end
-local devices = hs.json.decode(output) or {}
-for _, device in pairs(devices) do
-	local percent = device.BatteryPercent
-	local name = device.Product
-	local msg = ("🔋 %s Battery low (%s)"):format(name, percent)
+---@param msg string
+local function createReminder(msg)
+	hs.osascript.javascript(([[
+		const rem = Application("Reminders");
+		const today = new Date();
+		const newReminder = rem.Reminder({ name: "%s", alldayDueDate: today });
+		rem.defaultList().reminders.push(newReminder);
+		rem.quit();
+	]]):format(msg))
 end
 
 M.timer_dailyBatteryCheck = hs.timer
 	.doAt("14:30", "01d", function()
 		local warnBelowPercent = 20 -- CONFIG
 
-		-- get battery info
-		-- `privateBluetoothBatteryInfo()` is not reliable, therefore retrieving
-		-- battery status directly from the system
+		-- INFO `privateBluetoothBatteryInfo()` is not reliable, therefore retrieving
+		-- battery status directly from the system.
+		-- CAVEAT `ioreg` only works for Apple devices
 		local output, success = hs.execute(
 			"ioreg -rak BatteryPercent | sed 's/data>/string>/' | plutil -convert json - -o -"
 		)
@@ -70,20 +70,12 @@ M.timer_dailyBatteryCheck = hs.timer
 		for _, device in pairs(devices) do
 			local percent = device.BatteryPercent
 			local name = device.Product
-			local msg = ("🔋 %s Battery low (%s)"):format(name, percent)
+
 			-- battery info incorrect for non-Apple devices
 			if percent < warnBelowPercent then
 				local msg = ("🔋 %s Battery low (%s)"):format(name, percent)
-
-				-- notification & Reminder
-				u.notify("⚠️", msg)
-				hs.osascript.javascript(([[
-					const rem = Application("Reminders");
-					const today = new Date();
-					const newReminder = rem.Reminder({ name: "%s", alldayDueDate: today });
-					rem.defaultList().reminders.push(newReminder);
-					rem.quit();
-				]]):format(msg))
+				u.notify(msg)
+				createReminder(msg)
 			end
 		end
 	end, true)
