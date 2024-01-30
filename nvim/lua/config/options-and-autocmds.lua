@@ -13,7 +13,7 @@ vim.filetype.add {
 		sh = "sh", -- force sh-files with zsh-shebang to still get sh as filetype
 	},
 	filename = {
-		[".ignore"] = "gitignore", -- fd ignore files
+		[".ignore"] = "gitignore", -- ignore files for fd/rg
 	},
 }
 
@@ -219,6 +219,7 @@ local autoCd = {
 		"info.plist", -- Alfred workflows
 		"Makefile",
 		".git",
+		".project-root", -- manual marker file
 	},
 	childOfDir = {
 		".config", -- my dotfiles
