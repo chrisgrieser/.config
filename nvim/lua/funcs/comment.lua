@@ -8,7 +8,10 @@ local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
 -- correctly indented and padded
 function M.commentHr()
 	local comStr = vim.bo.commentstring
-	if comStr == "" then return end
+	if comStr == "" then
+		vim.notify("Commentstring not set.", vim.log.levels.WARN)
+		return
+	end
 
 	local isOnBlank = vim.api.nvim_get_current_line() == ""
 	local startLn = vim.api.nvim_win_get_cursor(0)[1]

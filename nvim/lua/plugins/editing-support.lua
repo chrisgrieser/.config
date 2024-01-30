@@ -218,7 +218,7 @@ return {
 		"Wansmer/treesj",
 		keys = {
 			{ "<leader>s", function() require("treesj").toggle() end, desc = "󰗈 Split-join lines" },
-			{ "<leader>s", "gww", ft = "markdown", desc = "󰗈 Split line" },
+			{ "<leader>s", "gww", ft = { "markdown", "applescript" }, desc = "󰗈 Split line" },
 		},
 		opts = {
 			use_default_keymaps = false,
