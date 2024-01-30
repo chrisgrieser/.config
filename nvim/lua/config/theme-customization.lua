@@ -171,7 +171,7 @@ end
 vim.api.nvim_create_autocmd("ColorScheme", {
 	callback = function()
 		themeModifications()
-		vim.defer_fn(function() customHighlights() end, 1)
+		customHighlights()
 	end,
 })
 

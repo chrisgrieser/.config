@@ -1,5 +1,4 @@
 local u = require("config.utils")
-local textobj = require("config.utils").textobjMaps
 --------------------------------------------------------------------------------
 
 return {
@@ -56,8 +55,8 @@ return {
 			{
 				"q",
 				function() vim.cmd.TSTextobjectSelect("@comment.outer") end,
-				mode = "o", -- mapped manually to only set operator pending mode
-				desc = "󱡔  comment textobj",
+				mode = "o", -- only operator-pending to not conflict with commenting selection
+				desc = "󱡔  single comment textobj",
 			},
 			{
 				"dq",
@@ -98,12 +97,12 @@ return {
 			{ "ia", "<cmd>TSTextobjectSelect @parameter.inner<CR>", mode = { "x", "o" }, desc = "󱡔 inner parameter" },
 			{ "iu", "<cmd>TSTextobjectSelect @loop.inner<CR>", mode = { "x", "o" }, desc = "󱡔 inner loop" },
 			{ "au", "<cmd>TSTextobjectSelect @loop.outer<CR>", mode = { "x", "o" }, desc = "󱡔 outer loop" },
-			{ "a" .. textobj.func, "<cmd>TSTextobjectSelect @function.outer<CR>", mode = {"x","o"},desc = "󱡔 outer function" },
-			{ "i" .. textobj.func, "<cmd>TSTextobjectSelect @function.inner<CR>", mode = {"x","o"},desc = "󱡔 inner function" },
-			{ "a" .. textobj.cond, "<cmd>TSTextobjectSelect @conditional.outer<CR>", mode = {"x","o"},desc = "󱡔 outer cond." },
-			{ "i" .. textobj.cond, "<cmd>TSTextobjectSelect @conditional.inner<CR>", mode = {"x","o"},desc = "󱡔 inner cond." },
-			{ "a" .. textobj.call, "<cmd>TSTextobjectSelect @call.outer<CR>", mode = {"x","o"},desc = "󱡔 outer call" },
-			{ "i" .. textobj.call, "<cmd>TSTextobjectSelect @call.inner<CR>", mode = {"x","o"},desc = "󱡔 inner call" },
+			{ "af", "<cmd>TSTextobjectSelect @function.outer<CR>", mode = {"x","o"},desc = "󱡔 outer function" },
+			{ "if", "<cmd>TSTextobjectSelect @function.inner<CR>", mode = {"x","o"},desc = "󱡔 inner function" },
+			{ "ao", "<cmd>TSTextobjectSelect @conditional.outer<CR>", mode = {"x","o"},desc = "󱡔 outer cond." },
+			{ "io", "<cmd>TSTextobjectSelect @conditional.inner<CR>", mode = {"x","o"},desc = "󱡔 inner cond." },
+			{ "al", "<cmd>TSTextobjectSelect @call.outer<CR>", mode = {"x","o"},desc = "󱡔 outer call" },
+			{ "il", "<cmd>TSTextobjectSelect @call.inner<CR>", mode = {"x","o"},desc = "󱡔 inner call" },
 			-- stylua: ignore end
 		},
 	},
@@ -129,8 +128,8 @@ return {
 			{ "B", "<cmd>lua require('various-textobjs').anyBracket('outer')<CR>", mode = "o", desc = "󱡔 outer anyBracket" },
 			{ "k", "<cmd>lua require('various-textobjs').anyQuote('inner')<CR>", mode = "o", desc = "󱡔 inner anyQuote" },
 			{ "K", "<cmd>lua require('various-textobjs').anyQuote('outer')<CR>", mode = "o", desc = "󱡔 outer anyQuote" },
-			{ "i" .. textobj.wikilink, "<cmd>lua require('various-textobjs').doubleSquareBrackets('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner wikilink" },
-			{ "a" .. textobj.wikilink, "<cmd>lua require('various-textobjs').doubleSquareBrackets('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer wikilink" },
+			{ "iR", "<cmd>lua require('various-textobjs').doubleSquareBrackets('inner')<CR>", mode = { "x", "o" }, desc = "󱡔 inner wikilink" },
+			{ "aR", "<cmd>lua require('various-textobjs').doubleSquareBrackets('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer wikilink" },
 
 			-- INFO not setting in visual mode, to keep visual block mode replace
 			{ "rv", "<cmd>lua require('various-textobjs').restOfWindow()<CR>", mode = "o", desc = "󱡔 rest of viewport" },
@@ -190,15 +189,6 @@ return {
 				end,
 				desc = " Delete surrounding indent",
 			},
-			{ -- indent last paste
-				"P",
-				function()
-					require("various-textobjs").lastChange()
-					local changeFound = vim.fn.mode():find("v")
-					if changeFound then u.normal(">") end
-				end,
-				desc = " Indent Last Paste",
-			},
 			{ -- yank surrounding inner indentation
 				"ysii", -- `ysi` would conflict with `ysib` and other textobs
 				function()
@@ -224,6 +214,15 @@ return {
 					vim.defer_fn(function() vim.api.nvim_buf_clear_namespace(0, ns, 0, -1) end, 1000)
 				end,
 				desc = "󰅍 Yank surrounding indent",
+			},
+			{ -- indent last paste
+				"P",
+				function()
+					require("various-textobjs").lastChange()
+					local changeFound = vim.fn.mode():find("v")
+					if changeFound then u.normal(">") end
+				end,
+				desc = " Indent Last Paste",
 			},
 			{ -- open URL (forward seeking)
 				"gx",

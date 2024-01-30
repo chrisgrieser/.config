@@ -19,6 +19,47 @@ return {
 			extra = { eol = "Q", above = "qO", below = "qo" },
 		},
 	},
+	{ -- surround
+		"kylechui/nvim-surround",
+		keys = {
+			{ "ys", desc = "󰅪 Add Surround Operator" },
+			{ "S", mode = "x", desc = "󰅪 Add Surround Operator" },
+			{ "yS", "ys$", desc = "󰅪 Surround to EoL", remap = true },
+			{ "ds", desc = "󰅪 Delete Surround Operator" },
+			{ "cs", desc = "󰅪 Change Surround Operator" },
+		},
+		opts = {
+			move_cursor = false,
+			aliases = u.textobjRemaps,
+			keymaps = {
+				visual = "S",
+				normal_line = false,
+				normal_cur_line = false,
+				visual_line = false,
+				insert_line = false,
+				insert = false,
+			},
+			surrounds = {
+				invalid_key_behavior = { add = false, find = false, delete = false, change = false },
+				["R"] = {
+					find = "%[%[.-%]%]",
+					add = { "[[", "]]" },
+					delete = "(%[%[)().-(%]%])()",
+					change = {
+						target = "(%[%[)().-(%]%])()",
+					},
+				},
+				["/"] = {
+					find = "/.-/",
+					add = { "/", "/" },
+					delete = "(/)().-(/)()",
+					change = {
+						target = "(/)().-(/)()",
+					},
+				},
+			},
+		},
+	},
 	{ -- undo history
 		"mbbill/undotree",
 		keys = {
@@ -131,6 +172,11 @@ return {
 			}
 		end,
 	},
+	{ -- autopair, but for keywords
+		"RRethy/nvim-treesitter-endwise",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		event = "InsertEnter",
+	},
 	{ -- auto-convert string and f/template string
 		"chrisgrieser/nvim-puppeteer",
 		ft = { "python", "javascript", "typescript", "lua" },
@@ -147,11 +193,6 @@ return {
 				desc = "󰅳 Lua string formatting",
 			},
 		},
-	},
-	{ -- autopair, but for keywords
-		"RRethy/nvim-treesitter-endwise",
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		event = "InsertEnter",
 	},
 	{ -- swapping of sibling nodes
 		"Wansmer/sibling-swap.nvim",
@@ -233,10 +274,11 @@ return {
 			},
 		},
 		config = function(_, opts)
-			require("which-key").setup(opts)
+			local whichkey = require("which-key")
+			whichkey.setup(opts)
 
 			-- leader prefixes normal mode
-			require("which-key").register({
+			whichkey.register({
 				u = { name = " 󰕌 Undo" },
 				o = { name = "  Options" },
 				p = { name = " 󰏗 Packages" },
@@ -245,13 +287,13 @@ return {
 			}, { prefix = "<leader>" })
 
 			-- leader prefixes normal+visual mode
-			require("which-key").register({
+			whichkey.register({
 				f = { name = " 󱗘 Refactor" },
 				g = { name = " 󰊢 Git" },
 			}, { prefix = "<leader>", mode = { "x", "n" } })
 
 			-- needed so localleader prefixes work with whichkey
-			require("which-key").register {
+			whichkey.register {
 				["<localleader>"] = { name = "filetype-specific", mode = { "n", "x" } },
 			}
 

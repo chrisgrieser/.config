@@ -102,12 +102,5 @@ M.textobjRemaps = {
 	e = "`", -- t[e]mplate string / inline cod[e]
 }
 
-M.textobjMaps = {
-	func = "f", -- [f]unction
-	cond = "o", -- c[o]nditional
-	call = "l", -- cal[l]
-	wikilink = "R", -- two [R]ectangular brackets
-}
-
 --------------------------------------------------------------------------------
 return M
