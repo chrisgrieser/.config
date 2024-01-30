@@ -20,7 +20,7 @@
     "prefix": "FIX"
   },
   "GUARD": {
-    "body": "$LINE_COMMENT GUARD",
+    "body": "$LINE_COMMENT GUARD ",
     "prefix": "GUARD"
   },
   "HACK": {
@@ -42,6 +42,10 @@
   "PERF": {
     "body": "$LINE_COMMENT PERF",
     "prefix": "PERF"
+  },
+  "REQUIRED": {
+    "body": "$LINE_COMMENT REQUIRED ",
+    "prefix": "REQUIRED"
   },
   "SOURCE": {
     "body": "$LINE_COMMENT SOURCE",
