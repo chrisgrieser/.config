@@ -71,8 +71,8 @@ function listall() {
 	brew info
 	_print-section "brew taps"
 	brew tap
-	_print-section "brew leaves"
-	brew leaves | rs
+	_print-section "brew leaves --installed-on-request"
+	brew leaves --installed-on-request | rs
 	_print-section "brew list --casks"
 	brew list --casks
 	_print-section "brew doctor"
