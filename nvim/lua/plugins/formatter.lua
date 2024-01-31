@@ -16,6 +16,7 @@ local lspFormatFt = {
 	"javascript",
 	"typescript",
 	"json",
+	"jsonc",
 	"toml",
 	"yaml",
 	"html",
