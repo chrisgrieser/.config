@@ -166,20 +166,28 @@ keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "⬅ Move Selection left" })
 
 --------------------------------------------------------------------------------
 
--- COMMAND & INSERT MODE
+-- COMMAND MODE
 keymap("c", "<C-u>", "<C-e><C-u>") -- kill whole line
 keymap("c", "<D-v>", "<C-r>+", { desc = " Paste" })
-keymap({ "i", "c" }, "<C-a>", "<Home>")
-keymap({ "i", "c" }, "<C-e>", "<End>")
 keymap("c", "<BS>", function()
 	if vim.fn.getcmdline() ~= "" then return "<BS>" end
 end, { desc = "Restricted <BS>", expr = true })
 
--- indent properly when entering insert mode on empty lines
+vim.api.nvim_create_autocmd("CmdWinEnter", {
+	callback = function()
+		vim.bo.ft = "lua"
+		vim.keymap.set("n", "q", cmd.close, { buffer = true, nowait = true, desc = "Close" })
+		vim.keymap.set("n", "<CR>", "<CR>", { buffer = true, desc = "Confirm Cmdline under cursor" })
+	end,
+})
+
+-- INSERT MODE
+keymap({ "i", "c" }, "<C-a>", "<Home>")
+keymap({ "i", "c" }, "<C-e>", "<End>")
 keymap("n", "i", function()
 	if api.nvim_get_current_line():find("^%s*$") then return [["_cc]] end
 	return "i"
-end, { desc = "indented i", expr = true })
+end, { desc = "correctly indented i", expr = true })
 
 -- VISUAL MODE
 keymap("x", "V", "j", { desc = "repeated V selects more lines" })
@@ -200,7 +208,7 @@ keymap(
 	{ "n", "x" },
 	"<CR>",
 	function() require("funcs.alt-alt").gotoAltBuffer() end,
-	{ desc = "󰽙 Alt Buffer" }
+	{ desc = "󰽙 Alt Buffer", expr = true }
 )
 
 local lastClosed
