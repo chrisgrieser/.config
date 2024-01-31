@@ -17,6 +17,20 @@ function alfredMatcher(str) {
 	return [clean, squeezed, str].join(" ") + " ";
 }
 
+/**
+ * @param {string} encoded
+ * @returns {string}
+ */
+function htmlDecode(encoded) {
+	return encoded
+		.replace(/<strong>(.*?)<\/strong>/g, "$1")
+		.replace(/<em>(.*?)<\/em>/g, "<$1>")
+		.replace(/&lt;/g, "<")
+		.replace(/&gt;/g, ">")
+		.replace(/&amp;/g, "&")
+		.replace(/<.*?>/g, ""); // leftover html tags
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -47,15 +61,10 @@ function run() {
 		(/** @type {{ anchor: string; description: string; url: string; }} */ anchor) => {
 			// format anchors for Alfred
 			// anchors look like this: <strong>--changed-before</strong> <em>date|duration</em>
-			const title = anchor.anchor
-				.replace(/<strong>(.*?)<\/strong>/g, "$1")
-				.replace(/<em>(.*?)<\/em>/g, "<$1>")
-				.replace(/&lt;/g, "<")
-				.replace(/&gt;/g, ">")
-				.replace(/&amp;/g, "&");
+			const title = htmlDecode(anchor.anchor);
 
 			// remove html
-			const desc = anchor.description.replace(/<\w*?>(.*?)<\/\w*?>/g, "$1");
+			const desc = htmlDecode(anchor.description.replace(/<\w*?>(.*?)<\/\w*?>/g, "$1"));
 
 			return {
 				title: title,
