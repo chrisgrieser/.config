@@ -3,15 +3,15 @@
 #command
 
 # ^W enables wrapping of search: https://unix.stackexchange.com/a/621514
--	forw-search ^W
+- forw-search ^W
 
 # toggle line numbers
-on	toggle-option N^J
+on toggle-option N^J
 
 # grep certain lines
-f	filter
-?	help
+f filter
 
-J	forw-scroll
-K	back-scroll
+? help
+J forw-scroll
+K back-scroll
 
