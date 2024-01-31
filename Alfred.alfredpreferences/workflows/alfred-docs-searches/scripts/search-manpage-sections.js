@@ -7,8 +7,7 @@ app.includeStandardAdditions = true;
 function httpRequest(url) {
 	const queryURL = $.NSURL.URLWithString(url);
 	const requestData = $.NSData.dataWithContentsOfURL(queryURL);
-	const requestString = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
-	return requestString;
+	return $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
 }
 
 /** @param {string} str */
@@ -24,7 +23,9 @@ function alfredMatcher(str) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	// DOCS https://www.mankier.com/api
-	const sectionApiUrl = `https://www.mankier.com/api/v2/mans/${$.getenv("cmd")}.${$.getenv("section")}`;
+	const cmd = $.getenv("cmd");
+	const section = $.getenv("section");
+	const sectionApiUrl = `https://www.mankier.com/api/v2/mans/${cmd}.${section}`;
 
 	const manpageObj = JSON.parse(httpRequest(sectionApiUrl));
 
@@ -38,7 +39,9 @@ function run() {
 			arg: section.url,
 			uid: section,
 		}))
-		.filter((/** @type {{ title: string; }} */ section) => !sectionToIgnore.includes(section.title));
+		.filter(
+			(/** @type {{ title: string; }} */ section) => !sectionToIgnore.includes(section.title),
+		);
 
 	const anchors = (manpageObj.anchors || []).map(
 		(/** @type {{ anchor: string; description: string; url: string; }} */ anchor) => {
@@ -48,7 +51,8 @@ function run() {
 				.replace(/<strong>(.*?)<\/strong>/g, "$1")
 				.replace(/<em>(.*?)<\/em>/g, "<$1>")
 				.replace(/&lt;/g, "<")
-				.replace(/&gt;/g, ">");
+				.replace(/&gt;/g, ">")
+				.replace(/&amp;/g, "&");
 
 			// remove html
 			const desc = anchor.description.replace(/<\w*?>(.*?)<\/\w*?>/g, "$1");
