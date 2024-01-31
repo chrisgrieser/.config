@@ -116,6 +116,17 @@ local function filenameFirst(_, path)
 	return string.format("%s\t\t%s", tail, parentDisplay) -- parent colored via autocmd above
 end
 
+-- prioritize certain filetypes instead of the length of the path
+local function prioritzeScriptFiles(a, b)
+	local priorityExt = { "lua", "js", "ts", "py", "sh" }
+	a.ext = a.ordinal:match("%w+$")
+	b.ext = b.ordinal:match("%w+$")
+	a.hasPrio = vim.tbl_contains(priorityExt, a.ext)
+	b.hasPrio = vim.tbl_contains(priorityExt, b.ext)
+	if a.hasPrio and not b.hasPrio then return true end
+	return false
+end
+
 --------------------------------------------------------------------------------
 
 -- Setup filetype-specific symbol-filters for symbol-search
@@ -197,6 +208,7 @@ local function telescopeConfig()
 		pickers = {
 			find_files = {
 				path_display = filenameFirst,
+				tiebreak = prioritzeScriptFiles,
 				prompt_prefix = "󰝰 ",
 				-- FIX using the default fd command from telescope is somewhat buggy,
 				-- e.g. not respecting `~/.config/fd/ignore`
@@ -206,6 +218,7 @@ local function telescopeConfig()
 			},
 			oldfiles = {
 				path_display = filenameFirst,
+				tiebreak = prioritzeScriptFiles,
 				prompt_prefix = "󰋚 ",
 				previewer = false,
 				layout_config = {
@@ -444,6 +457,14 @@ return {
 			{
 				"go",
 				function()
+					-- HACK add space as initial query value. has not filtering effect,
+					-- but triggers the sorting via `tiebreak`
+					-- PENDING
+					vim.api.nvim_create_autocmd("FileType", {
+						once = true,
+						pattern = "TelescopePrompt",
+						callback = function() vim.api.nvim_feedkeys(" ", "n", true) end,
+					})
 					require("telescope.builtin").find_files {
 						prompt_title = "Find Files: " .. vim.fs.basename(vim.loop.cwd() or ""),
 					}
