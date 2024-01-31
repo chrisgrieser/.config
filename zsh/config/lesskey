@@ -12,6 +12,8 @@ on toggle-option N
 f filter
 
 ? help
+h left-scroll
+l right-scroll
 J forw-scroll
 K back-scroll
 

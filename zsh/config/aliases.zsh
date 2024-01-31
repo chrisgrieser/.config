@@ -24,7 +24,7 @@ function which { builtin which -a "$@" | bat --language=sh; } # colorized & show
 # dark-mode aware
 function bat {
 	local theme # list themes via `bat --list-themes`
-	theme="$(defaults read -g AppleInterfaceStyle &>/dev/null && echo "Dracula" || echo "GitHub")"
+	theme="$(defaults read -g AppleInterfaceStyle &>/dev/null && echo "Dracula" || echo "Monokai Extended Light")"
 	command bat --theme="$theme" "$@"
 }
 
