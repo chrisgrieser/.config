@@ -75,9 +75,9 @@ nnoremap m %
 exmap gotoHeading obcommand obsidian-another-quick-switcher:header-floating-search-in-file
 nnoremap gs :gotoHeading
 
-" [g]oto [w]riting chapters
+" [g]oto [p]roject chapters
 exmap gotoScene obcommand longform:longform-jump-to-scene
-nnoremap gw :gotoScene
+nnoremap gp :gotoScene
 
 " [g]oto definition / link (shukuchi makes it forward-seeking)
 exmap followNextLink obcommand shukuchi:open-link
