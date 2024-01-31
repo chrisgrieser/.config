@@ -459,7 +459,7 @@ return {
 				function()
 					-- HACK add space as initial query value. has not filtering effect,
 					-- but triggers the sorting via `tiebreak`
-					-- PENDING
+					-- PENDING https://github.com/nvim-telescope/telescope.nvim/issues/2905
 					vim.api.nvim_create_autocmd("FileType", {
 						once = true,
 						pattern = "TelescopePrompt",
