@@ -8,7 +8,9 @@ local theme = require("theme-utils")
 
 --------------------------------------------------------------------------------
 
-return {
+local M = {}
+
+M.keys = {
 	{ key = "q", mods = "CMD", action = act.QuitApplication },
 	{ key = "w", mods = "CMD", action = act.CloseCurrentTab { confirm = false } },
 	{ key = "t", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
@@ -133,3 +135,23 @@ return {
 		end),
 	},
 }
+
+--------------------------------------------------------------------------------
+-- COPYMODE
+-- DOCS https://wezfurlong.org/wezterm/config/lua/wezterm.gui/default_key_tables.html
+M.copymodeKeys = wt.gui.default_key_tables().copy_mode
+
+-- HJKL like hjkl, but bigger distance
+local myCopyModeKeys = {
+	{ key = "l", mods = "SHIFT", action = act.CopyMode("MoveToEndOfLineContent") },
+	{ key = "h", mods = "SHIFT", action = act.CopyMode("MoveToStartOfLineContent") },
+	{ key = "j", mods = "SHIFT", action = act.CopyMode { MoveByPage = 0.33 } },
+	{ key = "k", mods = "SHIFT", action = act.CopyMode { MoveByPage = -0.33 } },
+}
+
+for _, key in ipairs(myCopyModeKeys) do
+	table.insert(M.copymodeKeys, key)
+end
+
+--------------------------------------------------------------------------------
+return M

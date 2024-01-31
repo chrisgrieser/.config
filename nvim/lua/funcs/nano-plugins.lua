@@ -235,31 +235,6 @@ function M.betterTilde()
 	end
 end
 
----simplified implementation of tabout.nvim
----(should be mapped in insert-mode to `<Tab>`)
-function M.tabout()
-	local line = vim.api.nvim_get_current_line()
-	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-	local charsBefore = line:sub(1, col)
-	local onlyWhitespaceBeforeCursor = charsBefore:match("^%s*$")
-	local frontOfMarkdownList = vim.bo.ft == "markdown" and charsBefore:match("^[%s-*+]*$")
-
-	if onlyWhitespaceBeforeCursor or frontOfMarkdownList then
-		-- using feedkeys instead of `expr = true`, since the cmp mapping
-		-- does not work with `expr = true`
-		local keyCode = vim.api.nvim_replace_termcodes("<C-t>", true, false, true)
-		vim.api.nvim_feedkeys(keyCode, "i", false)
-	elseif vim.bo.ft == "gitcommit" then
-		vim.cmd.startinsert { bang = true }
-	else
-		local closingPairs = "[%]\"'`)}>]"
-		local nextClosingPairPos = line:find(closingPairs, col + 1)
-		if not nextClosingPairPos then return end
-
-		vim.api.nvim_win_set_cursor(0, { row, nextClosingPairPos })
-	end
-end
-
 function M.gotoProject()
 	local projectFolder = vim.env.LOCAL_REPOS -- CONFIG
 

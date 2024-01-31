@@ -81,7 +81,7 @@ keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent selection" })
 keymap("n", "<Tab>", ">>", { desc = "󰉶 indent line" })
 keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent line" })
 keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent line" })
-keymap("i", "<Tab>", function() require("funcs.nano-plugins").tabout() end, { desc = " Tabout" })
+keymap("i", "<Tab>", "<C-t>", { desc = "󰉵 indent line" })
 
 keymap("n", "[", "<", { desc = "󰉵 outdent" })
 keymap("n", "]", ">", { desc = "󰉶 indent" })
