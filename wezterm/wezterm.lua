@@ -26,6 +26,7 @@ local darkOpacity = 0.91
 --------------------------------------------------------------------------------
 -- BASE
 
+local keymaps = require("wezterm-keymaps")
 local theme = require("theme-utils")
 local wt = require("wezterm")
 local act = wt.action
@@ -77,8 +78,7 @@ wt.on("format-tab-title", function(tab)
 
 	local icon
 	if title == "zsh" or title == "wezterm" then
-		local pwdBasefolder =
-			tab.active_pane.current_working_dir:gsub(".*/(.*)/$", "%1"):gsub("%%20", " ")
+		local pwdBasefolder = tab.active_pane.current_working_dir.file_path:gsub("^.*/(.*)/$", "%1")
 		title = pwdBasefolder
 		icon = "  "
 	elseif title:find("^docs") then
@@ -88,13 +88,6 @@ wt.on("format-tab-title", function(tab)
 	end
 
 	return " " .. icon .. title .. " "
-end)
-
--- set to pwd basename
--- https://wezfurlong.org/wezterm/config/lua/window-events/format-window-title
-wt.on("format-window-title", function(_, pane)
-	local pwd = pane.current_working_dir:gsub("^file://[^/]+", ""):gsub("%%20", " ")
-	return pwd
 end)
 
 --------------------------------------------------------------------------------
@@ -180,7 +173,8 @@ return {
 	},
 
 	-- Keybindings
-	keys = require("wezterm-keymaps"),
+	keys = keymaps.keys,
+	key_tables = { copy_mode = keymaps.copymodeKeys },
 	disable_default_key_bindings = true,
 	send_composed_key_when_left_alt_is_pressed = true, -- fix @{}~ etc. on German keyboard
 	send_composed_key_when_right_alt_is_pressed = true,
