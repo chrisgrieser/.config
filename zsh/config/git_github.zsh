@@ -45,9 +45,8 @@ ZSH_HIGHLIGHT_REGEXP+=(
 # - if there are no staged changes, stage all changes (`git add -A`) and then commit
 # - if the is clean after committing, pull-push
 function gc {
-	git diff --staged --quiet && # if no staged changes
-		git add --all &&
-		print "\e[1;36mStaged all changes.\e[0m"
+	# if no staged changes
+	git diff --staged --quiet && git add --all && print "\e[1;36mStaged all changes.\e[0m"
 
 	printf "\e[1;36mCommit: \e[0m" &&
 		git commit -m "$@" || return 1
@@ -64,9 +63,8 @@ function gc {
 }
 
 function gC {
-	git diff --staged --quiet &&
-		git add --all &&
-		print "\e[1;36mStaged all Changes.\e[0m"
+	# if no staged changes
+	git diff --staged --quiet && git add --all && print "\e[1;36mStaged all changes.\e[0m"
 
 	printf "\e[1;36mCommit: \e[0m" &&
 		git commit -m "$1" || return 1
@@ -97,6 +95,10 @@ function gf {
 	local target
 	target=$(_gitlog --no-graph -n 15 | fzf --ansi --no-sort --no-info | cut -d" " -f1)
 	[[ -z "$target" ]] && return 0
+
+	# if no staged changes
+	git diff --staged --quiet && git add --all && print "\e[1;36mStaged all changes.\e[0m"
+
 	git commit --fixup="$target"
 
 	# HACK ":" is no-op-editor https://www.reddit.com/r/git/comments/uzh2no/what_is_the_utility_of_noninteractive_rebase/
@@ -107,7 +109,9 @@ function gf {
 
 # amend-no-edit
 function gm {
-	git diff --staged --quiet && git add --all # if no staged changes, stage all
+	# if no staged changes
+	git diff --staged --quiet && git add --all && print "\e[1;36mStaged all changes.\e[0m"
+
 	git commit --amend --no-edit
 	git status
 }
