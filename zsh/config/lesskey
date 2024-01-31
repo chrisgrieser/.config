@@ -6,7 +6,7 @@
 - forw-search ^W
 
 # toggle line numbers
-on toggle-option N^J
+on toggle-option N
 
 # grep certain lines
 f filter
