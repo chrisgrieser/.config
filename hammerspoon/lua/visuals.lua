@@ -8,7 +8,7 @@ local wu = require("lua.window-utils")
 -- https://www.hammerspoon.org/Spoons/RoundedCorners.html
 local roundedCorner = hs.loadSpoon("RoundedCorners")
 if roundedCorner then
-	roundedCorner.radius = 8
+	roundedCorner.radius = 9
 	roundedCorner:start()
 end
 
