@@ -22,7 +22,11 @@ M.keys = {
 	{ key = "0", mods = "CMD", action = act.ResetFontSize },
 	{ key = "p", mods = "CMD", action = act.ActivateCommandPalette },
 	{ key = "ö", mods = "CMD", action = act.CharSelect },
-	{ key = "k", mods = "CMD", action = act.ClearScrollback("ScrollbackAndViewport") },
+
+	-- using `ctrl-L` instead of wezterm's scrollback-clearing preserves the
+	-- abilite to scroll back
+	{ key = "k", mods = "CMD", action = act.SendKey { key = "l", mods = "CTRL" } },
+
 	{ key = "Enter", mods = "CTRL", action = act.ActivateTabRelative(1) },
 	{ key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
 	{
@@ -108,7 +112,6 @@ M.keys = {
 
 	-- Copy Mode (= Caret Mode) -- https://wezfurlong.org/wezterm/copymode.html
 	{ key = "y", mods = "CMD", action = act.ActivateCopyMode },
-	{ key = "L", action = act.ActivateCopyMode },
 
 	-- Quick Select (= Hint Mode) -- https://wezfurlong.org/wezterm/quickselect.html
 	{ key = "u", mods = "CMD", action = act.QuickSelect },
