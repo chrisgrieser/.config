@@ -75,8 +75,7 @@ export LESS_TERMCAP_me=$'\E[0m'    # reset bold/blink
 export LESS_TERMCAP_us=$'\E[1;36m' # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'    # reset underline
 
-# INFO --ignore-case is actually smart case
-export LESS='--RAW-CONTROL-CHARS --incsearch --ignore-case --window=-4 --no-init --tilde --long-prompt --quit-if-one-screen'
+export LESS='--RAW-CONTROL-CHARS --line-num-width=3 --chop-long-lines --incsearch --ignore-case --window=-4 --no-init --tilde --long-prompt --quit-if-one-screen'
 export LESSHISTFILE=- # don't clutter home directory with useless `.lesshst` file
 
 # INFO Keybindings

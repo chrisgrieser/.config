@@ -106,6 +106,7 @@ return {
 
 	-- Copy Mode (= Caret Mode) -- https://wezfurlong.org/wezterm/copymode.html
 	{ key = "y", mods = "CMD", action = act.ActivateCopyMode },
+	{ key = "L", action = act.ActivateCopyMode },
 
 	-- Quick Select (= Hint Mode) -- https://wezfurlong.org/wezterm/quickselect.html
 	{ key = "u", mods = "CMD", action = act.QuickSelect },
