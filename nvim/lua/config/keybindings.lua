@@ -208,7 +208,7 @@ keymap(
 	{ "n", "x" },
 	"<CR>",
 	function() require("funcs.alt-alt").gotoAltBuffer() end,
-	{ desc = "󰽙 Alt Buffer", expr = true }
+	{ desc = "󰽙 Alt Buffer" }
 )
 
 local lastClosed

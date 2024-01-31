@@ -51,6 +51,7 @@ zle -N _copy_location
 # - use `ctrl-v` and then a key combination to get the shell binding
 # - `bindkey -M main` to show existing keybinds
 # - some bindings with '^' are reserved (^M=enter, ^I=tab)
+# - all docs can be found here: https://zsh.sourceforge.io/Doc/Release/Zsh-Line-Editor.html#Standard-Widgets
 
 # needs to be put into `zvm_after_init` to not be overwritten by zsh-vi-mode
 function zvm_after_init {
@@ -59,6 +60,9 @@ function zvm_after_init {
 	bindkey -M vicmd '^U' _cut_buffer
 	bindkey -M viins '…' insert-last-word
 	bindkey -M viins '^Z' undo # remapped to `cmd+z` via wezterm
+
+	autoload -U edit-command-line && zle -N edit-command-line
+	bindkey -M viins '^F' edit-command-line
 
 	bindkey '^[[A' history-substring-search-up
 	bindkey '^[[B' history-substring-search-down
