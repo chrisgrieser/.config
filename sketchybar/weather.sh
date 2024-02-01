@@ -3,6 +3,7 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 #───────────────────────────────────────────────────────────────────────────────
 # WEATHER USING BRIGHTSKY API
 # DOCS: https://brightsky.dev/docs/#get-/current_weather
+# alternative API: https://open-meteo.com/
 #───────────────────────────────────────────────────────────────────────────────
 
 # LOCATION
