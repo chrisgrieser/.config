@@ -76,8 +76,8 @@
     "body": [
       "/** @param {string} str */",
       "function camelCaseMatch(str) {",
-      "\tconst clean = str.replace(/[-()_.:#/\\\\\\;,[\\]]/g, \" \");",
-      "\tconst camelCaseSeparated = str.replace(/([A-Z])/g, \" \\$1\");",
+      "\tconst clean = str.replace(/[-()_.:#/\\\\;,[\\]]/g, \" \");",
+      "\tconst camelCaseSeparated = str.replace(/([A-Z])/g, \" \");",
       "\treturn [clean, camelCaseSeparated, str].join(\" \") + \" \";",
       "}"
     ],
@@ -88,7 +88,7 @@
     "body": [
       "/** @param {string} str */",
       "function alfredMatcher(str) {",
-      "\tconst clean = str.replace(/[-()_.:#/\\\\\\;,[\\]]/g, \" \");",
+      "\tconst clean = str.replace(/[-()_.:#/\\\\;,[\\]]/g, \" \");",
       "\treturn [clean, str].join(\" \") + \" \";",
       "}"
     ],
