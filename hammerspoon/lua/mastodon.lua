@@ -1,9 +1,10 @@
 local M = {} -- persist from garbage collector
 
-local mastodonApp = require("lua.environment-vars").mastodonApp
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
+local app = require("lua.utils").app
+local mastodonApp = require("lua.environment-vars").mastodonApp
 
 local aw = hs.application.watcher
 local wf = hs.window.filter
@@ -14,43 +15,43 @@ local keystroke = hs.eventtap.keyStroke
 -- necessary as auto-refreshing has subtle bugs in pretty much any app I tried
 -- (not correctly scrolling up, etc.)
 local function scrollUp()
-	local app = u.app(mastodonApp)
-	if not app or not u.screenIsUnlocked() or app:isFrontmost() then return end
+	local masto = app(mastodonApp)
+	if not masto or not u.screenIsUnlocked() or masto:isFrontmost() then return end
 
-	keystroke({ "cmd" }, "left", 1, app) -- go back
-	keystroke({ "cmd" }, "1", 1, app) -- go to home tab
+	keystroke({ "cmd" }, "left", 1, masto) -- go back
+	keystroke({ "cmd" }, "1", 1, masto) -- go to home tab
 
 	local modifiers = mastodonApp == "Mona" and { "cmd" } or { "cmd", "shift" }
-	keystroke(modifiers, "R", 1, app) -- refresh/reload
+	keystroke(modifiers, "R", 1, masto) -- refresh/reload
 
 	u.runWithDelays({ 1, 5 }, function() -- wait for posts to load
-		if app:isFrontmost() then return end -- do not interrupt when currently reading
-		keystroke({ "cmd" }, "up", 1, app) -- scroll up
+		if masto:isFrontmost() then return end -- do not interrupt when currently reading
+		keystroke({ "cmd" }, "up", 1, masto) -- scroll up
 	end)
 end
 
 local function closeMediaWindow()
-	local app = u.app(mastodonApp)
-	if not app then return end
-	local mediaWin = app:findWindow("Media") or app:findWindow("Image")
+	local masto = app(mastodonApp)
+	if not masto then return end
+	local mediaWin = masto:findWindow("Media") or masto:findWindow("Image")
 	if not mediaWin then return end
 
 	-- HACK using keystroke, too, since closing the window does not work reliably
 	mediaWin:raise()
-	keystroke({ "cmd" }, "w", 1, app)
+	keystroke({ "cmd" }, "w", 1, masto)
 	if mediaWin then mediaWin:close() end
 end
 
 -- move the ticker-app window to the left side of the screen
 local function winToTheSide()
-	local app = u.app(mastodonApp)
-	if not app or u.isFront("Alfred") then return end
+	local masto = app(mastodonApp)
+	if not masto or u.isFront("Alfred") then return end
 
-	if app:isHidden() then app:unhide() end
+	if masto:isHidden() then masto:unhide() end
 
 	-- not using mainWindow to not unintentionally move Media or new-tweet window
 	-- Ivory's main window is called "Home", Mona's the username
-	local win = app:findWindow("Home") or app:findWindow("pseudometa")
+	local win = masto:findWindow("Home") or masto:findWindow("pseudometa")
 	if win then
 		win:setFrame(wu.toTheSide)
 		win:raise()
@@ -61,8 +62,8 @@ end
 -- HIDE referenceWin belonging to app with transparent background is maximized
 ---@param referenceWin hs.window
 local function showHideTickerApp(referenceWin)
-	local app = u.app(mastodonApp)
-	if not app or not referenceWin or u.isFront("CleanShot X") then return end
+	local masto = app(mastodonApp)
+	if not masto or not referenceWin or u.isFront("CleanShot X") then return end
 
 	if wu.checkSize(referenceWin, wu.pseudoMax) or wu.checkSize(referenceWin, wu.centerHalf) then
 		winToTheSide()
@@ -76,7 +77,7 @@ local function showHideTickerApp(referenceWin)
 		local loginWin = referenceWin:title() == "Login"
 		local screenshotOverlay = referenceWin:title() == ""
 		if loginWin or screenshotOverlay then return end
-		app:hide()
+		masto:hide()
 	end
 end
 
@@ -86,9 +87,19 @@ end
 -- scroll
 hs.hotkey.bind({}, "home", scrollUp)
 
-if mastodonApp == "Mona" then M.timer_regularScroll = hs.timer.doEvery(5 * 60, scrollUp):start() end
+-- Mona's autoscroll does not work reliably, therefore scrolling ourselves.
+-- Only scrolling when not idle, to not prevent the machine going to sleep.
+if mastodonApp == "Mona" then
+	local scrollEveryMins = 5
+	M.timer_regularScroll = hs.timer
+		.doEvery(scrollEveryMins * 60, function()
+			local notIdle = (hs.host.idleTime() / 60) < (scrollEveryMins - 1) * 60
+			if notIdle then scrollUp() end
+		end)
+		:start()
+end
 
-M.aw_tickerWatcher = aw.new(function(appName, event, app)
+M.aw_tickerWatcher = aw.new(function(appName, event, masto)
 	if appName == "CleanShot X" or appName == "Alfred" then return end
 
 	-- move scroll up
@@ -99,7 +110,7 @@ M.aw_tickerWatcher = aw.new(function(appName, event, app)
 			wu.bringAllWinsToFront()
 
 			-- focus media window if there is one
-			local mediaWindow = app:findWindow("Media") or app:findWindow(mastodonApp)
+			local mediaWindow = masto:findWindow("Media") or masto:findWindow(mastodonApp)
 			if mediaWindow then mediaWindow:focus() end
 		end)
 

@@ -8,7 +8,7 @@
     "prefix": "CAVEAT"
   },
   "CONFIG": {
-    "body": "CONFIG",
+    "body": "$LINE_COMMENT CONFIG ",
     "prefix": "CONFIG"
   },
   "DOCS": {
