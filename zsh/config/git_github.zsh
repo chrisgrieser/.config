@@ -159,7 +159,7 @@ function gli {
 	if [[ ! -x "$(command -v delta)" ]]; then print "\e[1;33mdelta not installed (\`brew install git-delta\`)\e[0m" && return 1; fi
 
 	local hash key_pressed selected style
-	local preview_format="%C(yellow)%h %C(red)%D %n%C(blue)%an %C(green)(%ch)%C(reset) %n%n%C(bold)%C(magenta)%s %C(cyan)%b%C(reset)"
+	local preview_format="%C(yellow)%h %C(red)%D %n%C(blue)%an %C(green)(%ch)%C(reset) %n%n%C(bold)%C(magenta)%s %C(cyan)%n%b%C(reset)"
 	defaults read -g AppleInterfaceStyle &>/dev/null && style="--dark" || style="--light"
 
 	selected=$(

@@ -120,6 +120,8 @@ local function prioritzeScriptFiles(a, b)
 	return #a.ordinal < #b.ordinal
 end
 
+local function project() return vim.fs.basename(vim.loop.cwd() or "") end
+
 --------------------------------------------------------------------------------
 
 -- Setup filetype-specific symbol-filters for symbol-search
@@ -226,11 +228,6 @@ local function telescopeConfig()
 				disable_coordinates = true,
 				layout_config = { horizontal = { preview_width = 0.7 } },
 			},
-			grep_string = {
-				prompt_prefix = " ",
-				disable_coordinates = true,
-				layout_config = { horizontal = { preview_width = 0.7 } },
-			},
 			git_status = {
 				prompt_prefix = "󰊢 ",
 			-- stylua: ignore
@@ -275,7 +272,7 @@ local function telescopeConfig()
 						local previewWidth = vim.api.nvim_win_get_width(status.preview_win)
 						local statArgs = ("%s,%s,25"):format(previewWidth, math.floor(previewWidth / 2))
 						local previewFormat =
-							"%C(bold)%C(magenta)%s %n%C(reset)%C(cyan)%D%C(reset)%b %n%C(blue)%an %C(yellow)(%ch) %C(reset)"
+							"%C(bold)%C(magenta)%s %n%C(reset)%C(cyan)%D%C(reset)%n%b%n%C(blue)%an %C(yellow)(%ch) %C(reset)"
 						local cmd = {
 							"git show " .. hash,
 							"--color=always",
@@ -285,6 +282,17 @@ local function telescopeConfig()
 						}
 						return table.concat(cmd, " ")
 					end,
+				},
+				mappings = {
+					i = {
+						["<C-r>"] = "git_reset_soft",
+						["<C-h>"] = function(prompt_bufnr)
+							local hash = require("telescope.actions.state").get_selected_entry().value
+							require("telescope.actions").close(prompt_bufnr)
+							vim.fn.setreg("+", hash)
+							u.notify("Hash Copied", hash)
+						end,
+					},
 				},
 			},
 			git_bcommits = {
@@ -450,22 +458,27 @@ return {
 			{
 				"go",
 				function()
-					require("telescope.builtin").find_files {
-						prompt_title = "Find Files: " .. vim.fs.basename(vim.loop.cwd() or ""),
-					}
+					require("telescope.builtin").find_files { prompt_title = "Find Files: " .. project() }
 				end,
 				desc = " Open File",
 			},
 			{
 				"gl",
 				function()
-					require("telescope.builtin").live_grep {
-						prompt_title = "Live Grep: " .. vim.fs.basename(vim.loop.cwd() or ""),
-					}
+					require("telescope.builtin").live_grep { prompt_title = "Live Grep: " .. project() }
 				end,
 				desc = " Live-Grep",
 			},
-			{ "gL", function() telescope("grep_string") end, desc = " Grep cword" },
+			{
+				"gL",
+				function()
+					require("telescope.builtin").live_grep {
+						default_text = vim.fn.expand("<cword>"),
+						prompt_title = "Live Grep: " .. project(),
+					}
+				end,
+				desc = " Grep cword",
+			},
 		},
 	},
 	{ -- Icon Picker
