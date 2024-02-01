@@ -197,7 +197,8 @@ local telescopeOpts = {
 	pickers = {
 		find_files = {
 			-- HACK add space as initial query value. has not filtering effect,
-			-- but triggers the sorting via `tiebreak`
+			-- but triggers the sorting via `tiebreak` 
+			-- (see https://github.com/nvim-telescope/telescope.nvim/issues/2905)
 			default_text = " ",
 			tiebreak = prioritzeScriptFiles,
 
@@ -398,14 +399,6 @@ local telescopeOpts = {
 				},
 			},
 		},
-		quickfix = {
-			prompt_prefix = " ",
-			trim_text = true,
-			show_line = false,
-			layout_config = {
-				horizontal = { preview_width = { 0.7, min = 30 } },
-			},
-		},
 	},
 	extensions = {
 		-- insert at cursor instead, relevant for lua
@@ -438,7 +431,6 @@ return {
 			-- stylua: ignore
 			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
 			{ "<leader>ph", function() telescope("highlights") end, desc = " Highlights" },
-			{ "<leader>q", function() telescope("quickfix") end, desc = " Quickfix" },
 			{ "<leader>pc", function() telescope("colorscheme") end, desc = " Colorschemes" },
 			{ "<leader>gs", function() telescope("git_status") end, desc = " Status" },
 			{ "<leader>gl", function() telescope("git_commits") end, desc = " Log" },
