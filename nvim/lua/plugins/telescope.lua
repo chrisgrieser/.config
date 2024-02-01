@@ -110,14 +110,14 @@ local function filenameFirst(_, path)
 end
 
 -- prioritize certain filetypes
-local function prioritzeScriptFiles(current_entry, existing_entry, prompt)
+local function prioritzeScriptFiles(a, b, _)
 	local priorityExt = { "lua", "js", "ts", "py" }
-	current_entry.ext = current_entry.ordinal:match("%w+$")
-	existing_entry.ext = existing_entry.ordinal:match("%w+$")
-	current_entry.hasPrio = vim.tbl_contains(priorityExt, current_entry.ext)
-	existing_entry.hasPrio = vim.tbl_contains(priorityExt, existing_entry.ext)
-	if current_entry.hasPrio and not existing_entry.hasPrio then return true end
-	return #current_entry.ordinal < #existing_entry.ordinal
+	a.ext = a.ordinal:match("%w+$")
+	b.ext = b.ordinal:match("%w+$")
+	a.hasPrio = vim.tbl_contains(priorityExt, a.ext)
+	b.hasPrio = vim.tbl_contains(priorityExt, b.ext)
+	if a.hasPrio and not b.hasPrio then return true end
+	return #a.ordinal < #b.ordinal
 end
 
 local function project() return vim.fs.basename(vim.loop.cwd() or "") end
@@ -216,8 +216,8 @@ local function telescopeConfig()
 				follow = false,
 			},
 			oldfiles = {
-				path_display = filenameFirst,
 				tiebreak = prioritzeScriptFiles,
+				path_display = filenameFirst,
 				prompt_prefix = "󰋚 ",
 				previewer = false,
 				layout_config = {
@@ -448,10 +448,11 @@ return {
 			{
 				"gr",
 				function()
-					-- add buffers to oldfiles
+					-- HACK add buffers to oldfiles
 					local listedBufs = vim.fn.getbufinfo { buflisted = 1 }
 					local bufPaths = vim.tbl_map(function(buf) return buf.name end, listedBufs)
 					vim.list_extend(vim.v.oldfiles, bufPaths)
+
 					telescope("oldfiles")
 				end,
 				desc = " Recent Files",
