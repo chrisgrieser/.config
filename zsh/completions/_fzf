@@ -1,0 +1,544 @@
+#compdef fzf
+
+# SOURCE https://github.com/lmburns/dotfiles/blob/36651e0045db4bfe9c40dd9b1f92028cfcea58b6/.config/zsh/completions/_fzf
+
+setopt extendedglob
+
+_fzf_arg_preview_window() {
+  _values -s , 'preview-window' \
+    up down left right \
+    'SIZE%' \
+    border-rounded    border-sharp    border-bold border-double \
+    border-horizontal border-vertical border-top  border-up \
+    border-bottom     border-down     border-left border-right border-none \
+    wrap   nowrap   \
+    follow nofollow \
+    cycle  nocycle  \
+    hidden nohidden \
+    '+SCROLL' \
+    '~HEADER_LINES' \
+    default \
+    '<SIZE_THRESHOLD'
+
+}
+
+_fzf_arg_tiebreak() {
+  declare -a tiebreak; tiebreak=(
+    length':Prefers line with shorter length'
+    chunk:'Prefers line with shorter matched chunk (delimited by whitespaces)'
+    begin':Prefers line with matched substring closer to the beginning'
+    end':Prefers line with matched substring closer to the end'
+    index':Prefers line that appeared earlier in the input stream'
+  )
+  _describe "tiebreak" tiebreak
+
+  # _values -s , 'tiebreak' \
+  #   'length:[Prefers line with shorter length]:len:' \
+  #   'chunk:Prefers line with shorter matched chunk (delimited by whitespaces)'
+  #   'begin:[Prefers line with matched substring closer to the beginning]' \
+  #   'end:[Prefers line with matched substring closer to the end]' \
+  #   'index:[Prefers line that appeared earlier in the input stream]'
+}
+
+_fzf_arg_scheme() {
+  declare -a scheme; scheme=(
+    default':Generic scheme designed to work well with any type of input'
+    path':Scoring scheme for paths (bonus point after path separator)'
+    history':Scoring scheme for command history (no additional bonus points)'
+  )
+  _describe "scheme" scheme
+}
+
+_fzf_arg_algo() {
+  declare -a algo; algo=(
+    v1':Faster but not guaranteed to find the optimal result (performance)'
+    v2':Optimal scoring algorithm (quality)'
+  )
+  _describe "algo" algo
+}
+
+_fzf_arg_layout() {
+  declare -a layout; layout=(
+    default':Display from the bottom of the screen'
+    reverse':Display from the top of the screen'
+    reverse-list':Display from the top of the screen, prompt at the bottom'
+  )
+  _describe "layout" layout
+}
+
+_fzf_arg_info() {
+  declare -a info; info=(
+    default':Display on the next line to the prompt'
+    inline':Display on the same line with " < ". Or give own sep'
+    hidden':Do not display finder info'
+  )
+  _describe "info" info
+}
+
+_fzf_arg_border() {
+  declare -a border; border=(
+    rounded':Border with rounded corners (default)'
+    sharp':Border with sharp corners'
+    bold':Border with bold lines'
+    double':Border with double lines'
+    horizontal':Horizontal lines above and below the finder'
+    vertical':Vertical lines on each side of the finder'
+    top':Same as up'
+    up':Same as same'
+    bottom':Same as down'
+    down':Same as bottom'
+    left
+    right
+    none
+  )
+  _describe "border" border
+}
+
+_fzf_arg_border_label() {
+  declare -a label; label=(
+    rounded
+    sharp
+    bold
+    double
+    horizontal
+    top
+    up
+    bottom
+    down
+  )
+  _describe "label" label
+}
+
+_fzf_arg_bind() {
+  declare -a bind; bind=(
+    'abort:abort FZF'
+    'accept:accept result'
+    'accept-non-empty:same as accept except that it prevents fzf from exiting without selection'
+    'backward-char:move backwards a char'
+    'backward-delete-char:del char backwards'
+    'backward-delete-char/eof:same as backward-delete-char except aborts fzf if query is empty'
+    backward-kill-word
+    backward-word
+    'become(...):replace fzf process with the specified command'
+    beginning-of-line
+    'cancel:clear query string if not empty, abort fzf otherwise'
+    'change-border-label(...):change --border-label to the given string'
+    'change-preview(...):change --preview option'
+    'change-preview-label(...):change --preview-label to the given string'
+    'change-preview-window(...):change --preview-window option; rotate through the multiple option sets separated  by "|"'
+    'change-prompt(...):change prompt to the given string'
+    'change-query(...):change query string to the given string'
+    'clear-screen:ctrl-l'
+    'clear-selection:(clear multi-selection)'
+    'close:close preview window if open, abort fzf otherwise'
+    'clear-query:clear query string'
+    'delete-char:del'
+    'delete-char/eof:ctrl-d (same as delete-char except aborts fzf if query is empty)'
+    deselect
+    'deselect-all:deselect all matches'
+    'disable-search:disable search functionality'
+    'down:ctrl-j  ctrl-n  down'
+    'enable-search:enable search functionality'
+    'end-of-line:ctrl-e  end'
+    'execute(...):see below for the details'
+    'execute-silent(...):see below for the details'
+    'first:move to the first match; same as pos(1)'
+    'forward-char:ctrl-f  right'
+    'forward-word:alt-f   shift-right'
+    ignore
+    'jump:EasyMotion-like 2-keystroke movement'
+    'jump-accept:jump and accept'
+    kill-line
+    'kill-word:alt-d'
+    'last:move to the last match; same as pos(-1)'
+    'next-history:ctrl-n on --history'
+    'next-selected:move to the next selected item'
+    'page-down:pgdn'
+    'page-up:pgup'
+    half-page-down
+    half-page-up
+    hide-preview
+    'pos(...):move cursor to the numeric position; negative number to count from the end'
+    'prev-history:ctrl-p on --history'
+    'prev-selected:move to the previous selected item'
+    'preview(...):see below for the details'
+    'preview-down:shift-down'
+    'preview-up:shift-up'
+    preview-page-down
+    preview-page-up
+    preview-half-page-down
+    preview-half-page-up
+    preview-bottom
+    preview-top
+    'print-query:print query and exit'
+    'put:put the character to the prompt'
+    'put(...):put the given string to the prompt'
+    refresh-preview
+    'rebind(...):rebind bindings after unbind'
+    'reload(...):see below for the details'
+    'reload-sync(...):see below for the details'
+    'replace-query:replace query string with the current selection'
+    select
+    'select-all:select all matches'
+    show-preview
+    'toggle:right-click'
+    'toggle-all:toggle all matches'
+    'toggle+down:ctrl-i  (tab)'
+    'toggle-in:--layout=reverse* ? toggle+up : toggle+down'
+    'toggle-out:--layout=reverse* ? toggle+down : toggle+up'
+    toggle-preview
+    toggle-preview-wrap
+    'toggle-search:toggle search functionality'
+    toggle-sort
+    'toggle+up:btab    (shift-tab)'
+    'transform-border-label(...):transform border label using an external command'
+    'transform-preview-label(...):transform preview label using an external command'
+    'transform-prompt(...):transform prompt string using an external command'
+    'transform-query(...):transform query string using an external command'
+    'unbind(...):unbind bindings'
+    'unix-line-discard:ctrl-u'
+    'unix-word-rubout:ctrl-w'
+    'up:ctrl-k  ctrl-p  up'
+    'yank:ctrl-y'
+  )
+  _describe "bind" bind
+}
+
+_fzf() {
+  local -a arguments expl state_descr
+  local curcontext="$curcontext" state line context
+  integer ret=1
+
+  local -a _color_base _ansi _ansi_insert _ansi_attrs
+  _color_base=(
+    'fg:normal text'
+    'bg:normal background'
+    'hl:highlighted substrings'
+    'fg+:current line text'
+    'bg+:current line background'
+    'hl+:current line highlighted substrings'
+    'preview-fg:preview window text'
+    'preview-bg:preview window background'
+    'gutter:gutter on the left'
+    'query:query string'
+    'disabled:query string when search is disabled (--disabled)'
+    'info:info line (match counters)'
+    'border:border around the window (--border and --preview)'
+    'separator:horizontal separator on info line'
+    'scrollbar:scrollbar'
+    'label:border label (--border-label & --preview-label)'
+    'preview-label:border label of the preview window (--preview-label)'
+    'prompt:prompt'
+    'pointer:pointer to the current line'
+    'marker:multi-select marker'
+    'spinner:streaming input indicator'
+    'header:header'
+  )
+  _ansi=(
+     '-1:default color'
+     'black:ANSI 0'
+     'red:ANSI 1'
+     'green:ANSI 2'
+     'yellow:ANSI 3'
+     'blue::ANSI 4'
+     'magenta:ANSI 5'
+     'cyan:ANSI 6'
+     'white:ANSI 7'
+     'grey:ANSI 8'
+     'bright-black:ANSI 8'
+     'bright-red:ANSI 9'
+     'bright-green:ANSI 10'
+     'bright-yellow:ANSI 11'
+     'bright-blue:ANSI 12'
+     'bright-magenta:ANSI 13'
+     'bright-cyan:ANSI 14'
+     'bright-white:ANSI 15'
+     '1-255:ANSI 256 colors'
+     '#rrggbb:24-bit colors'
+  )
+  _ansi_insert=(
+     '-1'
+     '0'
+     '1'
+     '2'
+     '3'
+     '4'
+     '5'
+     '6'
+     '7'
+     '8'
+     '8'
+     '9'
+     '10'
+     '11'
+     '12'
+     '13'
+     '14'
+     '15'
+     ''
+     '#'
+  )
+
+  # Only applies to FG
+  _ansi_attrs=(
+    'regular:clears previously set attributes; should precede the other ones'
+    bold
+    underline
+    reverse
+    dim
+    italic
+    strikethrough
+  )
+
+  arguments=(
+    # Search
+    + '(extended)'
+    '(no-extended)'{-x,--extended}'[extended-search mode]'
+    + '(no-extended)'
+    '(extended)'{\+x,--no-extended}'[disable extended-search mode]'
+
+    + '(exact)'
+    {-e,--exact}'[enable exact-match]'
+
+    + '(case-sensitivity)'
+    '-i[case-insensitive match (default: smart-case match)]'
+    '+i[case-sensitive match]'
+
+    + '(scheme)'
+    '--scheme=[choose scoring scheme for different inputs]:scheme:_fzf_arg_scheme'
+
+    + '(algo)'
+    '--algo=[fuzzy matching algorithm]:algorithm type:_fzf_arg_algo'
+
+    + '(literal)'
+    '--literal[do not normalize latin script letters before matching]'
+
+    + '(nth)'
+    {-n,--nth}'[comma-sep. list of field index expr. to limit search scope]:N[,..]:'
+
+    + '(with-nth)'
+    '--with-nth=[transform presentation of each line using field index expr.]:N[,..]:'
+
+    # TODO: requires --nth or --with-nth
+    + '(delimiter)'
+    {-d,--delimiter}'[field delimiter regex (default: AWK-style)]:delimiter:'
+
+    + '(disable)'
+    "(extended no-extended exact case-sensitivity scheme algo literal nth with-nth delimiter)--disabled[do not perform search]"
+
+    # Search results
+    + '(sort)'
+    '(no-sort)'{-s,--sort}'[sort the result]'
+
+    + '(no-sort)'
+    '(sort)'{\+s,--no-sort}'[do not sort the result]'
+
+    + tac
+    '--tac[reverse the order of the input]'
+
+    + tiebreak
+    '--tiebreak=[comma-separated list of sort criteria to apply when tied]:criteria:_fzf_arg_tiebreak'
+
+    # Interface
+    + '(multi)'
+    '(no-multi)--multi[enable multi-select with tab/shift-tab]::max:'
+    '(no-multi)-m[enable multi-select with tab/shift-tab]'
+    + '(multi)'
+    '(multi)'{\+m,--no-multi}'[disable multi-select]' \
+
+    + no-mouse
+    '--no-mouse[disable mouse]'
+
+    + bind
+    '*--bind=[custom key bindings. Refer to the man page]:keybind:_fzf_arg_bind'
+
+    + '(cycle)'
+    '--cycle[enable cyclic scroll]'
+    + '(keep-right)'
+    '--keep-right[keep the right end of the line visible on overflow]'
+
+    + '(scroll-off)'
+    '--scroll-off=[number of screen lines to keep above/below when scrolling to top/bottom]:lines:'
+    + '(no-hscroll)'
+    '--no-hscroll[disable horizontal scroll]'
+    + '(hscroll-off)'
+    '--hscroll-off=[number of screen columns to keep to the right of the]:columns:'
+
+    + '(filepath-word)'
+    '--filepath-word[make word-wise movements respect path separators]'
+    + '(jump-labels)'
+    '--jump-labels=[label characters for jump and jump-accept]:characters:'
+
+    # Layout
+    + '(height)'
+    '--height=[display fzf window below the cursor with the given]:[~]height[%:'
+    + '(min-height)'
+    '--min-height=[minimum height when --height is given in percent]:~]height[%:'
+
+    + '(layout)'
+    '--layout=[choose layout]: :_fzf_arg_layout'
+    '--reverse[a synonym for --layout=reverse]'
+
+    + '(border)'
+    '--border=[draw border around the finder]:border:_fzf_arg_border:'
+
+    # TODO: requires --border
+    + '(border-label)'
+    '--border-label=[label to print on the horizontal border line]:border label:_fzf_arg_border_label:'
+
+    # TODO: requires --border-label
+    + '(border-label-pos)'
+    '--border-label-pos=[position of the border label on the border]:=N[\:top|bottom]:'
+
+    + '(no-unicode)'
+    '--no-unicode[use ASCII characters instead of Unicode box drawing characters to draw border]'
+    + '(margin)'
+    '--margin=[screen margin (TRBL|TB,RL|T,RL,B|T,R,B,L)]:TRBL|TB,RL|T,RL,B|T,R,B,L:'
+    + '(padding)'
+    '--padding=[padding inside border (TRBL|TB,RL|T,RL,B|T,R,B,L)]:TRBL|TB,RL|T,RL,B|T,R,B,L:'
+
+    + '(info)'
+    '(no-info)--info=[finder info style]: :_fzf_arg_info'
+    + '(no-info)'
+    '(info)--no-info[A synonym for --info=hidden]'
+
+    + '(prompt)'
+    '--prompt=[input prompt (default: "> ")]:prompt:'
+    + '(pointer)'
+    '--pointer=[pointer to the current line (default: ">")]:pointer:'
+    + '(marker)'
+    '--marker=[multi-select marker (default: ">)]:"marker:'
+
+    + '(header)'
+    '--header=[string to print as header]:header:'
+    # TODO: requires --header
+    + '(header-lines)'
+    '--header-lines=[the first N lines of the input are treated as header]:N:'
+    # TODO: requires --header
+    + '(header-first)'
+    '--header-first[print header before prompt line]'
+
+    + '(ellipsis)'
+    '--ellipses=[ellipsis to show when line is truncated (default: "..")]:ellipsis:'
+
+    # Display
+    + '(ansi)'
+    '--ansi[enable processing of ANSI color codes]'
+    + '(tabstop)'
+    '--tabstop=[number of spaces for a tab character (default: 8)]:spaces:'
+    + color
+    '*--color=[base scheme (dark|light|16|bw) and/or custom colors]:[BASE_SCHEME][,COLOR_NAME[\:ANSI_COLOR][\:ANSI_ATTRIBUTES]]:->color'
+
+    + '(no-bold)'
+    '--no-bold[do not use bold text]'
+    + '(black)'
+    '--black[use black background]'
+
+    # History
+    + '(history)'
+    '--history=[history file]:file:_files'
+    # TODO: requires --history
+    + '(history-size)'
+    '--history-size=[maximum number of history entries (default: 1000)]:N:'
+
+    # Preview
+    + '(preview)'
+    '--preview=[command to preview highlighted line ({})]:command:'
+    # TODO: requires --preview
+    + '(preview-label)'
+    '--preview-label=[label  to  print  on  the  horizontal border line of the preview window]:label:'
+    # TODO: requires --preview
+    + '(preview-label-pos)'
+    '--preview-label-pos=[position of the border label on the border line of the preview window]:=N[\:top|bottom]:'
+    # TODO: requires --preview
+    + '(preview-window)'
+    '--preview-window=[preview window layout (default: right:50%)]:preview window:_fzf_arg_preview_window'
+
+    # Scripting
+    + '(query)'
+    {-q,--query=}'[start the finder with the given query]:query:'
+    # TODO: requires --query
+    + '(select-1)'
+    {-1,--select-1}'[automatically select the only match]'
+    # TODO: requires --query
+    + '(exit-0)'
+    {-0,--exit-0}'[exit immediately when theres no match]'
+    + '(filter)'
+    {-f,--filter=}'[filter mode. Do not start interactive finder]:filter:'
+    + '(print-query)'
+    '--print-query[print query as the first line]'
+    + '(expect)'
+    '--expect=[comma-separated list of keys to complete fzf]'
+    + '(listen)'
+    '--listen=[start HTTP server on the given port.]:port:'
+    + '(read0)'
+    '--read0[read input delimited by ASCII NUL characters]'
+    + '(print0)'
+    '--print0[print output delimited by ASCII NUL characters]'
+    + '(sync)'
+    '--sync[synchronous search for multi-staged filtering]'
+
+    + '(about)' # about flags
+    '(: * -)'{-h,--help}'[display help message]'
+    '(: * -)'{-V,--version}'[display version information]'
+
+    '*:filename:_files'
+  )
+
+  _arguments -s -S -C $arguments
+
+  # TODO: Finish
+  case $state in
+    (color)
+      # words=($line[1] "${words[@]}")
+      # local -a qwords
+      # qwords=( ${words//(#m)[\[\]()\\*?#<>~\^\|]/\\$MATCH} )
+
+      (( CURRENT++ ))
+
+      # dunstify "words: $words"
+      # dunstify "line: $line"
+      # dunstify "qwords: $qwords"
+
+      # [BASE_SCHEME][,COLOR_NAME[\:ANSI_COLOR][\:ANSI_ATTRIBUTES]]
+
+      # local -a color_desc; color_desc=( "${(@)_color_base##*:}" )
+
+      # _description colors expl 'base scheme'
+      # _description color_base expl "$state_descr"
+
+      # _sequence -s ',' _wanted color expl 'base scheme' \
+      #   compadd -l -d _color_base - "${(@)_color_base%%:*}" && \
+      #       ret=0
+
+      # _sequence -s ',' _wanted color expl 'base scheme' \
+      #   compadd -ld _color_base -a _color_base && \
+      #       ret=0
+
+
+      # _describe 'base scheme' _color_base -qS ':'
+      # _describe 'base scheme' _color_base -S ':'
+
+      # _wanted color expl color \
+      #   compadd -qS, -ld _ansi -a _ansi_insert && \
+      #   ret=0
+
+
+      # _values -s ',' -S ':' 'colors' \
+      #   ': : _describe "base scheme" _color_base' \
+      #   ': : _wanted color expl color compadd -qS, -ld _ansi -a _ansi_insert' \
+      #   ': : compadd -qS, -ld _ansi -a _ansi_insert'
+
+
+      # case $line[1] in
+      #   (help|man)
+      #     _arguments "${_arguments_options[@]}" \
+      #       {-h,--help}'[Display help about the subcommand]' \
+      #       ":: :_stig_topics" \
+      #       && ret=0
+      #   ;;
+      # esac
+  esac
+}
+
+_fzf "$@"

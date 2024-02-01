@@ -48,7 +48,7 @@
     "prefix": "REQUIRED"
   },
   "SOURCE": {
-    "body": "$LINE_COMMENT SOURCE",
+    "body": "$LINE_COMMENT SOURCE ",
     "prefix": "SOURCE"
   },
   "TODO": {
