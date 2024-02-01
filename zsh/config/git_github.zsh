@@ -1,7 +1,6 @@
 alias gs='git status'
 alias ga='git add'
-alias gA='git add --all'
-
+alias gaa='git add --all'
 alias co='git checkout'
 alias gd='git diff'
 alias grh='git reset --hard'
@@ -42,31 +41,33 @@ ZSH_HIGHLIGHT_REGEXP+=(
 
 #───────────────────────────────────────────────────────────────────────────────
 # SMART COMMIT
+
+function stageAllIfNoStagedChanges {
+	git diff --staged --quiet && git add --all && print "\e[1;34mStaged all changes.\e[0m"
+}
+
 # - if there are no staged changes, stage all changes (`git add -A`) and then commit
 # - if the is clean after committing, pull-push
 function gc {
-	# if no staged changes
-	git diff --staged --quiet && git add --all && print "\e[1;36mStaged all changes.\e[0m"
+	stageAllIfNoStagedChanges
 
-	printf "\e[1;36mCommit: \e[0m" &&
+	printf "\e[1;34mCommit: \e[0m" &&
 		git commit -m "$@" || return 1
 
 	if [[ -n "$(git status --porcelain)" ]]; then
-		print "\e[1;36mPush: \e[0mNot pushing since repo still dirty." &&
+		print "\e[1;34mPush: \e[0mNot pushing since repo still dirty." &&
 			echo && git status
 	else
-		printf "\e[1;36mPull: \e[0m" &&
+		printf "\e[1;34mPull: \e[0m" &&
 			git pull --no-rebase && # --no-rebase prevents "Cannot rebase on multiple branches"
-			printf "\e[1;36mPush: \e[0m" &&
+			printf "\e[1;34mPush: \e[0m" &&
 			git push
 	fi
 }
 
 function gC {
-	# if no staged changes
-	git diff --staged --quiet && git add --all && print "\e[1;36mStaged all changes.\e[0m"
-
-	printf "\e[1;36mCommit: \e[0m" &&
+	stageAllIfNoStagedChanges
+	printf "\e[1;34mCommit: \e[0m" &&
 		git commit -m "$1" || return 1
 }
 
@@ -83,22 +84,13 @@ compdef _gc gC
 
 #───────────────────────────────────────────────────────────────────────────────
 
-function unshallow {
-	git fetch --unshallow
-	# undo `--single-branch` https://stackoverflow.com/a/17937889/22114136
-	git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
-	git fetch origin
-}
-
 # select a recent commit to fixup *and* autosquash (not marked for next rebase!)
 function gf {
 	local target
 	target=$(_gitlog --no-graph -n 15 | fzf --ansi --no-sort --no-info | cut -d" " -f1)
 	[[ -z "$target" ]] && return 0
 
-	# if no staged changes
-	git diff --staged --quiet && git add --all && print "\e[1;36mStaged all changes.\e[0m"
-
+	stageAllIfNoStagedChanges
 	git commit --fixup="$target"
 
 	# HACK ":" is no-op-editor https://www.reddit.com/r/git/comments/uzh2no/what_is_the_utility_of_noninteractive_rebase/
@@ -109,9 +101,7 @@ function gf {
 
 # amend-no-edit
 function gm {
-	# if no staged changes
-	git diff --staged --quiet && git add --all && print "\e[1;36mStaged all changes.\e[0m"
-
+	stageAllIfNoStagedChanges
 	git commit --amend --no-edit
 	git status
 }
@@ -119,7 +109,7 @@ function gm {
 # amend message only
 function gM {
 	if ! git diff --staged --quiet; then
-		print "\e[1;33mStaged changes detected.\e[0m"
+		print "\e[1;33mStaged changes found.\e[0m"
 		return 1
 	fi
 	git commit --amend
@@ -128,8 +118,14 @@ function gM {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# remote info
-function gri {
+function unshallow {
+	git fetch --unshallow
+	# undo `--single-branch` https://stackoverflow.com/a/17937889/22114136
+	git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+	git fetch origin
+}
+
+function remote_info {
 	git branch --all --verbose --verbose # 2x verbose shows tracked remote branches
 	echo
 	git remote --verbose
