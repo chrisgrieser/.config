@@ -2,6 +2,7 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
+//──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} url */
 function httpRequest(url) {
@@ -12,7 +13,7 @@ function httpRequest(url) {
 
 /** @param {string} str */
 function alfredMatcher(str) {
-	const clean = str.replace(/[<>-_;()]/g, " ");
+	const clean = str.replace(/[-<>_;()]/g, " ");
 	const squeezed = str.replace(/[-_;]/g, "");
 	return [clean, squeezed, str].join(" ") + " ";
 }

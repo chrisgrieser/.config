@@ -8,7 +8,8 @@ function o() {
 		return 0
 	fi
 
-	# --delimiter and --nth options ensure only file name and parent folder are displayed
+	# `--delimiter="/" --nth=-1` ensures only the filename is searched
+	# PENDING https://github.com/junegunn/fzf/issues/3608
 	local selected
 	selected=$(
 		# shellcheck disable=2016
@@ -16,7 +17,8 @@ function o() {
 			--select-1 --ansi --query="$input" --info=inline --header-first \
 			--header="^H: --hidden --no-ignore  ^P: Copy Path  ^N: Copy Name  ^D: Goto Parent" \
 			--keep-right \
-			--with-nth=-2.. --delimiter="/" \
+			--scheme="path" \
+			--delimiter="/" --with-nth=-2.. --nth=-1 \
 			--bind="ctrl-h:reload(fd --hidden --no-ignore --exclude='/.git/' --exclude='.DS_Store' --type=file --type=symlink --color=always)" \
 			--expect="ctrl-p,ctrl-n,ctrl-d" \
 			--preview-window="55%" \
