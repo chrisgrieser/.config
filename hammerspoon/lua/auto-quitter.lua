@@ -13,7 +13,6 @@ local now = os.time
 ---(Apps not in this list will be ignored and never quit automatically).
 ---@type table<string, integer|nil>
 M.thresholdMins = {
-	GoodTask = 5,
 	Slack = 25,
 	Mimestream = 5,
 	Highlights = 90,
@@ -21,6 +20,7 @@ M.thresholdMins = {
 	Discord = 180,
 	BusyCal = 5,
 	["WezTerm"] = 45,
+	["wezterm-gui"] = 45,
 	["Alfred Preferences"] = 20,
 	["System Settings"] = 2,
 	Finder = 20, -- only closes windows when not on projector
