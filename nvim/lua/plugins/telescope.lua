@@ -51,36 +51,28 @@ local keymappings_I = {
 }
 
 -- toggle `--hidden` & `--no-ignore`
-local findFileMappings = {
-	["<C-h>"] = function(prompt_bufnr)
-		-- preserve query
-		local query = vim.api.nvim_get_current_line()
-		vim.api.nvim_create_autocmd("FileType", {
-			once = true,
-			pattern = "TelescopePrompt",
-			callback = function() vim.api.nvim_set_current_line(query) end,
-		})
+local function toggleHiddenAndIgnore(prompt_bufnr)
+	local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+	local cwd = tostring(current_picker.cwd or vim.loop.cwd()) -- cwd only set if passed as opt
+	-- hidden status not stored, but title is, so we determine the previous state via title
+	local prevTitle = current_picker.prompt_title
 
-		-- toggle ignore/hidden
-		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-		local cwd = tostring(current_picker.cwd or vim.loop.cwd()) -- cwd only set if passed as opt
-		-- hidden status not stored, but title is, so we determine the previous state via title
-		local prevTitle = current_picker.prompt_title
-		local ignoreHidden = not prevTitle:find("hidden")
-		local title = vim.fs.basename(cwd)
-		if ignoreHidden then title = title .. " (--hidden --no-ignore)" end
+	local ignoreHidden = not prevTitle:find("hidden")
+	local title = vim.fs.basename(cwd)
+	if ignoreHidden then title = title .. " (--hidden --no-ignore)" end
+	local currentQuery = require("telescope.actions.state").get_current_line()
 
-		require("telescope.actions").close(prompt_bufnr)
-		require("telescope.builtin").find_files {
-			prompt_title = title,
-			hidden = ignoreHidden,
-			no_ignore = ignoreHidden,
-			cwd = cwd,
-			-- prevent these becoming visible through `--no-ignore`
-			file_ignore_patterns = { "node_modules", ".venv", "%.DS_Store$", "%.git/" },
-		}
-	end,
-}
+	require("telescope.actions").close(prompt_bufnr)
+	require("telescope.builtin").find_files {
+		default_text = currentQuery,
+		prompt_title = title,
+		hidden = ignoreHidden,
+		no_ignore = ignoreHidden,
+		cwd = cwd,
+		-- prevent these becoming visible through `--no-ignore`
+		file_ignore_patterns = { "node_modules", ".venv", "%.DS_Store$", "%.git/" },
+	}
+end
 
 -- add j/k/q to mappings if normal mode
 local normalModeOnly = {
@@ -116,15 +108,15 @@ local function filenameFirst(_, path)
 	return string.format("%s\t\t%s", tail, parentDisplay) -- parent colored via autocmd above
 end
 
--- prioritize certain filetypes instead of the length of the path
+-- prioritize certain filetypes
 local function prioritzeScriptFiles(a, b)
-	local priorityExt = { "lua", "js", "ts", "py", "sh" }
+	local priorityExt = { "lua", "js", "ts", "py" }
 	a.ext = a.ordinal:match("%w+$")
 	b.ext = b.ordinal:match("%w+$")
 	a.hasPrio = vim.tbl_contains(priorityExt, a.ext)
 	b.hasPrio = vim.tbl_contains(priorityExt, b.ext)
 	if a.hasPrio and not b.hasPrio then return true end
-	return false
+	return #a.ordinal < #b.ordinal
 end
 
 --------------------------------------------------------------------------------
@@ -207,13 +199,16 @@ local function telescopeConfig()
 		},
 		pickers = {
 			find_files = {
+				-- HACK add space as initial query value. has not filtering effect,
+				-- but triggers the sorting via `tiebreak`
+				default_text = " ",
 				path_display = filenameFirst,
 				tiebreak = prioritzeScriptFiles,
 				prompt_prefix = "󰝰 ",
 				-- FIX using the default fd command from telescope is somewhat buggy,
 				-- e.g. not respecting `~/.config/fd/ignore`
 				find_command = { "fd", "--type=file", "--type=symlink" },
-				mappings = { i = findFileMappings },
+				mappings = { i = {["<C-h>"] = toggleHiddenAndIgnore} },
 				follow = false,
 			},
 			oldfiles = {
@@ -457,14 +452,6 @@ return {
 			{
 				"go",
 				function()
-					-- HACK add space as initial query value. has not filtering effect,
-					-- but triggers the sorting via `tiebreak`
-					-- PENDING https://github.com/nvim-telescope/telescope.nvim/issues/2905
-					vim.api.nvim_create_autocmd("FileType", {
-						once = true,
-						pattern = "TelescopePrompt",
-						callback = function() vim.api.nvim_feedkeys(" ", "n", true) end,
-					})
 					require("telescope.builtin").find_files {
 						prompt_title = "Find Files: " .. vim.fs.basename(vim.loop.cwd() or ""),
 					}

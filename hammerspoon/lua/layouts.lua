@@ -122,8 +122,6 @@ local function selectLayout()
 end
 
 --------------------------------------------------------------------------------
-
---------------------------------------------------------------------------------
 -- WHEN TO SET LAYOUT
 
 -- 1. Change of screen numbers
@@ -153,10 +151,9 @@ M.caff_unlock = hs.caffeinate.watcher
 			or event == hs.caffeinate.watcher.systemDidWake
 			or event == hs.caffeinate.watcher.screensDidUnlock
 
-		if hasWoken then u.runWithDelays(0.5, selectLayout) end -- delay for recognizing screens
+		if hasWoken and not env.isAtOffice then u.runWithDelays(0.5, selectLayout) end 
 	end)
 	:start()
-
 
 --------------------------------------------------------------------------------
 return M
