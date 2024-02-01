@@ -5,11 +5,11 @@ app.includeStandardAdditions = true;
 
 /** @param {string} str */
 function alfredMatcher(str) {
-	const clean = str.replace(/[-()_.:#;,/\\[\]]/g, " ");
-	const squeezed = str.replace(/[-_.]/g, "");
+	const clean = str.replace(/[-()_/[\]]/g, " ");
+	const squeezed = str.replace(/[-_]/g, "");
 	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
-	const kebabCase = str.replace(/[ _]/g, "-")
-	const snakeCase = str.replace(/[ -]/g, "_")
+	const kebabCase = str.replace(/[ _]/g, "-");
+	const snakeCase = str.replace(/[ -]/g, "_");
 	return [clean, camelCaseSeparated, squeezed, str, kebabCase, snakeCase].join(" ");
 }
 
@@ -18,8 +18,6 @@ function alfredMatcher(str) {
 // biome-ignore lint/correctness/noUnusedVariables: alfred run
 function run() {
 	const dotfileFolder = $.getenv("dotfile_folder");
-
-	// FILES
 	const dirtyFiles = app
 		.doShellScript(`cd "${dotfileFolder}" && git status --porcelain`)
 		.split("\r")
@@ -30,26 +28,24 @@ function run() {
 		.doShellScript(
 			// INFO using `fd` over `find` for speed and gitignoring
 			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; cd "${dotfileFolder}" ;
-			fd --type=file --hidden --absolute-path -E "*.png"`,
+			fd --type=file --hidden --absolute-path --exclude "*.png"`,
 		)
 		.split("\r")
 		.map((/** @type {string} */ absPath) => {
 			const name = absPath.split("/").pop();
 			if (!name) return;
 
-			let icon = "";
 			const relPath = absPath.slice(dotfileFolder.length + 1);
 			const relativeParentFolder = relPath.slice(0, -name.length - 1) || "/";
-			let matcher = alfredMatcher(`${name} ${relativeParentFolder}`);
+			const matcher = alfredMatcher(`${name} ${relativeParentFolder}`);
 
-			// dirty?
-			if( dirtyFiles.includes(relPath)) {
-				icon += " ✴️";
-			}
+			// emoji
+			let emoji = "";
+			if (dirtyFiles.includes(relPath)) emoji += " ✴️";
+			if (relPath.includes("hammerspoon")) emoji += " 🟡";
+			else if (relPath.includes("nvim")) emoji += " 🔳";
 
-			matcher += " dirty";
-
-			// type determination
+			// type-icon
 			let type = "";
 			if (name.startsWith(".z")) type = "zsh"; // .zshenv, .zshrc, .zprofile
 			else if (name.endsWith("akefile")) type = "make";
@@ -58,33 +54,26 @@ function run() {
 			else if (name === "obsidian-vimrc.vim") type = "obsidian";
 			else type = name.split(".").pop() || ""; // default: extension
 
-			// icon determination
 			let iconObj = { path: "./custom-filetype-icons/" };
 			switch (type) {
-				// use filetype image
 				case "webloc":
 				case "url":
-				case "folder":
 				case "ini":
 				case "mjs":
 					iconObj = { type: "fileicon", path: absPath };
 					break;
 				case "zsh":
 					// biome-ignore lint/suspicious/noFallthroughSwitchClause: intentional fallthrough
-					type = "sh"
+					type = "sh";
 				case "yml":
 					// biome-ignore lint/suspicious/noFallthroughSwitchClause: intentional fallthrough
-					type = "yaml"
+					type = "yaml";
 				default:
 					iconObj.path += type + ".png"; // use {extension}.png located in icon folder
 			}
 
-			// icons to distinguish all these lua files I have…
-			if (relPath.includes("hammerspoon")) icon += " 🟡";
-			else if (relPath.includes("nvim")) icon += " 🔳";
-
 			return {
-				title: name + dirtyIcon + icon,
+				title: name + emoji,
 				match: matcher,
 				subtitle: "▸ " + relativeParentFolder,
 				icon: iconObj,
@@ -93,8 +82,6 @@ function run() {
 				arg: absPath,
 			};
 		});
-
-	//──────────────────────────────────────────────────────────────────────────────
 
 	/** @type{AlfredItem[]} */
 	const folderArray = app
@@ -120,33 +107,16 @@ function run() {
 			};
 		});
 
-	//──────────────────────────────────────────────────────────────────────────────
+	const pwPath = app.doShellScript('source $HOME/.zshenv && echo "$PASSWORD_STORE_DIR"');
+	/** @type{AlfredItem} */
+	const passwordStore = {
+		title: ".password-store",
+		match: alfredMatcher(pwPath) + " folder",
+		icon: { type: "fileicon", path: pwPath },
+		type: "file:skipcheck",
+		uid: pwPath,
+		arg: pwPath,
+	};
 
-	// password-store (pass-cli)
-	const pwPath = app.pathTo("home folder") + "/.password-store";
-	const repoPath = app.doShellScript('source $HOME/.zshenv && echo "$LOCAL_REPOS"');
-	/** @type{AlfredItem[]} */
-	const extraFolders = [
-		{
-			title: ".password-store",
-			match: alfredMatcher(pwPath) + " folder",
-			icon: { type: "fileicon", path: pwPath },
-			type: "file:skipcheck",
-			uid: pwPath,
-			arg: pwPath,
-		},
-		{
-			title: "Repos",
-			match: alfredMatcher(repoPath) + " folder",
-			icon: { type: "fileicon", path: repoPath },
-			type: "file:skipcheck",
-			uid: repoPath,
-			arg: repoPath,
-		},
-	];
-
-	//──────────────────────────────────────────────────────────────────────────────
-
-	const jsonArray = [...fileArray, ...folderArray, ...extraFolders];
-	return JSON.stringify({ items: jsonArray });
+	return JSON.stringify({ items: [...fileArray, ...folderArray, passwordStore] });
 }
