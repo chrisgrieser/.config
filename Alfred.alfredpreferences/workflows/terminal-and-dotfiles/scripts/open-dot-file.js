@@ -18,16 +18,12 @@ function alfredMatcher(str) {
 // biome-ignore lint/correctness/noUnusedVariables: alfred run
 function run() {
 	const dotfileFolder = $.getenv("dotfile_folder");
-	const dirtyFiles = app
-		.doShellScript(`cd "${dotfileFolder}" && git status --porcelain`)
-		.split("\r")
-		.map((/** @type {string} */ file) => file.replace(/^(\?\? | M | R .*? -> )/, ""));
+	const dirtyFiles = app.doShellScript(`git -C "${dotfileFolder}" diff --name-only`).split("\r");
 
 	/** @type{AlfredItem[]} */
 	const fileArray = [];
 	const fileList = app
 		.doShellScript(
-			// INFO using `fd` over `find` for speed and gitignoring
 			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; cd "${dotfileFolder}" ;
 			fd --type=file --hidden --absolute-path --exclude "*.png"`,
 		)
@@ -35,8 +31,6 @@ function run() {
 
 	for (const absPath of fileList) {
 		const name = absPath.split("/").pop();
-		if (!name) return;
-
 		const relPath = absPath.slice(dotfileFolder.length + 1);
 		const relativeParentFolder = relPath.slice(0, -name.length - 1) || "/";
 		const matcher = alfredMatcher(`${name} ${relativeParentFolder}`);
@@ -58,16 +52,13 @@ function run() {
 		else type = name.split(".").pop() || ""; // default: extension
 
 		const iconObj = {};
-		switch (type) {
-			case "webloc":
-			case "url":
-			case "ini":
-			case "mjs":
-				iconObj.type = "fileicon";
-				iconObj.path = absPath;
-				break;
-			default:
-				iconObj.path = `./custom-filetype-icons/${type}.png`; // use {extension}.png located in icon folder
+		const useFileicon = ["webloc", "url", "ini", "mjs"].includes(type);
+		if (useFileicon) {
+			iconObj.type = "fileicon";
+			iconObj.path = absPath;
+		} else {
+			// use {extension}.png located in icon folder
+			iconObj.path = `./custom-filetype-icons/${type}.png`;
 		}
 
 		/** @type {AlfredItem} */
@@ -110,7 +101,7 @@ function run() {
 			};
 		});
 
-	const pwPath = app.doShellScript('source $HOME/.zshenv && echo "$PASSWORD_STORE_DIR"');
+	const pwPath = app.doShellScript('source "$HOME/.zshenv" && echo "$PASSWORD_STORE_DIR"');
 	/** @type{AlfredItem} */
 	const passwordStore = {
 		title: ".password-store",

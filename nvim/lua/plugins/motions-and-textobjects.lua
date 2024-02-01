@@ -65,7 +65,7 @@ return {
 			},
 			{
 				"dq",
-				"mzd<cmd>TSTextobjectSelect @comment.outer<CR>`zzH",
+				"mzd<cmd>TSTextobjectSelect @comment.outer<CR>`zze",
 				desc = " Sticky Delete Comment",
 			},
 			{
