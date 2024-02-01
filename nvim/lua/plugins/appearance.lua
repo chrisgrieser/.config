@@ -35,7 +35,7 @@ return {
 					vim.api.nvim_set_hl(
 						0,
 						"TreesitterContextBottom",
-						{ special = grey, underdouble = true }
+						{ special = grey, underline = true }
 					)
 				end,
 			})
