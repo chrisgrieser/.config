@@ -106,7 +106,6 @@ return {
 			local isNodeType = require("nvim-autopairs.ts-conds").is_ts_node
 			local isNotNodeType = require("nvim-autopairs.ts-conds").is_not_ts_node
 			local negLookahead = require("nvim-autopairs.conds").not_after_regex
-			local notBefore = require("nvim-autopairs.conds").not_before_text
 
 			require("nvim-autopairs").add_rules {
 				rule("<", ">", "lua"):with_pair(isNodeType { "string", "string_content" }),
@@ -122,7 +121,6 @@ return {
 				rule([[^%s*[:=%w]$]], ",", { "javascript", "typescript", "lua", "python" })
 					:use_regex(true)
 					:with_pair(negLookahead(".+")) -- neg. cond has to come first
-					:with_pair(notBefore(vim.bo.commentstring))
 					:with_pair(isNodeType { "table_constructor", "field", "object", "dictionary" })
 					:with_del(function() return false end)
 					:with_move(function(opts) return opts.char == "," end),
