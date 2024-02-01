@@ -12,7 +12,12 @@ return {
 		end,
 	},
 	{ -- better % (highlighting, matches across lines, match quotes)
-		"andymass/vim-matchup",
+
+		-- PENDING https://github.com/andymass/vim-matchup/issues/335
+		-- "andymass/vim-matchup",
+		"amaanq/vim-matchup",
+		branch = "ecma",
+
 		event = "VimEnter", -- cannot load on keys due to highlights
 		keys = {
 			{ "m", "<Plug>(matchup-%)", desc = "Goto Matching Bracket" },
@@ -60,7 +65,7 @@ return {
 			},
 			{
 				"dq",
-				"mzd<cmd>TSTextobjectSelect @comment.outer<CR>`z",
+				"mzd<cmd>TSTextobjectSelect @comment.outer<CR>`zzH",
 				desc = " Sticky Delete Comment",
 			},
 			{

@@ -1,8 +1,5 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	-- PENDING https://github.com/andymass/vim-matchup/issues/335
-	commit = "364b86e",
-
 	event = "VeryLazy",
 	build = ":TSUpdate",
 	main = "nvim-treesitter.configs",

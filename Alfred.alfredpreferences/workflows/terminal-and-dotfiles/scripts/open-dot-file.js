@@ -24,64 +24,67 @@ function run() {
 		.map((/** @type {string} */ file) => file.replace(/^(\?\? | M | R .*? -> )/, ""));
 
 	/** @type{AlfredItem[]} */
-	const fileArray = app
+	const fileArray = [];
+	const fileList = app
 		.doShellScript(
 			// INFO using `fd` over `find` for speed and gitignoring
 			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; cd "${dotfileFolder}" ;
 			fd --type=file --hidden --absolute-path --exclude "*.png"`,
 		)
-		.split("\r")
-		.map((/** @type {string} */ absPath) => {
-			const name = absPath.split("/").pop();
-			if (!name) return;
+		.split("\r");
 
-			const relPath = absPath.slice(dotfileFolder.length + 1);
-			const relativeParentFolder = relPath.slice(0, -name.length - 1) || "/";
-			const matcher = alfredMatcher(`${name} ${relativeParentFolder}`);
+	for (const absPath of fileList) {
+		const name = absPath.split("/").pop();
+		if (!name) return;
 
-			// emoji
-			let emoji = "";
-			if (dirtyFiles.includes(relPath)) emoji += " ✴️";
-			if (relPath.includes("hammerspoon")) emoji += " 🟡";
-			else if (relPath.includes("nvim")) emoji += " 🔳";
+		const relPath = absPath.slice(dotfileFolder.length + 1);
+		const relativeParentFolder = relPath.slice(0, -name.length - 1) || "/";
+		const matcher = alfredMatcher(`${name} ${relativeParentFolder}`);
+		const isDirty = dirtyFiles.includes(relPath);
 
-			// type-icon
-			let type = "";
-			if (name.startsWith(".z")) type = "zsh"; // .zshenv, .zshrc, .zprofile
-			else if (name.endsWith("akefile")) type = "make";
-			else if (name.startsWith(".")) type = "cfg";
-			else if (!name.includes(".")) type = "blank";
-			else if (name === "obsidian-vimrc.vim") type = "obsidian";
-			else type = name.split(".").pop() || ""; // default: extension
+		// emoji
+		let emoji = "";
+		if (isDirty) emoji += " ✴️";
+		if (relPath.includes("hammerspoon")) emoji += " 🟡";
+		else if (relPath.includes("nvim")) emoji += " 🔳";
 
-			let iconObj = { path: "./custom-filetype-icons/" };
-			switch (type) {
-				case "webloc":
-				case "url":
-				case "ini":
-				case "mjs":
-					iconObj = { type: "fileicon", path: absPath };
-					break;
-				case "zsh":
-					// biome-ignore lint/suspicious/noFallthroughSwitchClause: intentional fallthrough
-					type = "sh";
-				case "yml":
-					// biome-ignore lint/suspicious/noFallthroughSwitchClause: intentional fallthrough
-					type = "yaml";
-				default:
-					iconObj.path += type + ".png"; // use {extension}.png located in icon folder
-			}
+		// type-icon
+		let type = "";
+		if (name.startsWith(".z")) type = "zsh"; // .zshenv, .zshrc, .zprofile
+		else if (name.endsWith("akefile")) type = "make";
+		else if (name.startsWith(".")) type = "cfg";
+		else if (!name.includes(".")) type = "blank";
+		else if (name === "obsidian-vimrc.vim") type = "obsidian";
+		else type = name.split(".").pop() || ""; // default: extension
 
-			return {
-				title: name + emoji,
-				match: matcher,
-				subtitle: "▸ " + relativeParentFolder,
-				icon: iconObj,
-				type: "file:skipcheck",
-				uid: absPath,
-				arg: absPath,
-			};
-		});
+		const iconObj = {};
+		switch (type) {
+			case "webloc":
+			case "url":
+			case "ini":
+			case "mjs":
+				iconObj.type = "fileicon";
+				iconObj.path = absPath;
+				break;
+			default:
+				iconObj.path = `./custom-filetype-icons/${type}.png`; // use {extension}.png located in icon folder
+		}
+
+		/** @type {AlfredItem} */
+		const item = {
+			title: name + emoji,
+			match: matcher,
+			subtitle: "▸ " + relativeParentFolder,
+			icon: iconObj,
+			type: "file:skipcheck",
+			uid: absPath,
+			arg: absPath,
+		};
+
+		// if dirty, insert in front of array
+		const insertAt = isDirty ? "unshift" : "push";
+		fileArray[insertAt](item);
+	}
 
 	/** @type{AlfredItem[]} */
 	const folderArray = app
