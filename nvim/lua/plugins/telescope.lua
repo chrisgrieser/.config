@@ -50,14 +50,28 @@ local keymappings_I = {
 	end,
 }
 
--- toggle `--hidden` & `--no-ignore`
+-- add j/k/q to mappings if normal mode
+local normalModeOnly = {
+	["j"] = "move_selection_worse",
+	["k"] = "move_selection_better",
+	["q"] = {
+		-- extra stuff needed to be able to set `nowait` for `q`
+		function(prompt_bufnr) require("telescope.actions").close(prompt_bufnr) end,
+		type = "action",
+		opts = { nowait = true },
+	},
+}
+local keymappings_N = vim.tbl_extend("force", keymappings_I, normalModeOnly)
+
+-- toggle `--hidden` & `--no-ignore` for the `find_files` picker
 local function toggleHiddenAndIgnore(prompt_bufnr)
 	local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
 	local cwd = tostring(current_picker.cwd or vim.loop.cwd()) -- cwd only set if passed as opt
+
 	-- hidden status not stored, but title is, so we determine the previous state via title
 	local prevTitle = current_picker.prompt_title
-
 	local ignoreHidden = not prevTitle:find("hidden")
+
 	local title = vim.fs.basename(cwd)
 	if ignoreHidden then title = title .. " (--hidden --no-ignore)" end
 	local currentQuery = require("telescope.actions.state").get_current_line()
@@ -73,19 +87,6 @@ local function toggleHiddenAndIgnore(prompt_bufnr)
 		file_ignore_patterns = { "node_modules", ".venv", "%.DS_Store$", "%.git/" },
 	}
 end
-
--- add j/k/q to mappings if normal mode
-local normalModeOnly = {
-	["j"] = "move_selection_worse",
-	["k"] = "move_selection_better",
-	["q"] = {
-		-- extra stuff needed to be able to set `nowait` for `q`
-		function(prompt_bufnr) require("telescope.actions").close(prompt_bufnr) end,
-		type = "action",
-		opts = { nowait = true },
-	},
-}
-local keymappings_N = vim.tbl_extend("force", keymappings_I, normalModeOnly)
 
 --------------------------------------------------------------------------------
 -- Better listing of files https://github.com/nvim-telescope/telescope.nvim/issues/2014
@@ -146,106 +147,104 @@ vim.api.nvim_create_autocmd("FileType", {
 
 --------------------------------------------------------------------------------
 
-local function telescopeConfig()
-	-- color the `M` in `:Telescope git_status`
-	u.colorschemeMod("TelescopeResultsDiffChange", { link = "diffChanged" })
-
-	require("telescope").setup {
-		defaults = {
-			path_display = { "tail" },
-			selection_caret = "󰜋 ",
-			multi_icon = "󰒆 ",
-			results_title = false,
-			dynamic_preview_title = true,
-			preview = { timeout = 400, filesize_limit = 1 }, -- ms & Mb
-			borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-			-- { "═", "║", "═", "║", "╔", "╗", "╝", "╚" }
-			-- { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
-			default_mappings = { ["i"] = keymappings_I, ["n"] = keymappings_N },
-			sorting_strategy = "ascending", -- so layout is consistent with prompt_position "top"
-			layout_strategy = "horizontal",
-			layout_config = {
-				horizontal = {
-					prompt_position = "top",
-					height = { 0.75, min = 13 },
-					width = 0.99,
-					preview_cutoff = 70,
-					preview_width = { 0.55, min = 30 },
-				},
-				vertical = {
-					prompt_position = "top",
-					mirror = true,
-					height = 0.9,
-					width = 0.7,
-					preview_cutoff = 12,
-					preview_height = { 0.4, min = 10 },
-					anchor = "S",
-				},
+local telescopeOpts = {
+	defaults = {
+		path_display = { "tail" },
+		selection_caret = "󰜋 ",
+		multi_icon = "󰒆 ",
+		results_title = false,
+		dynamic_preview_title = true,
+		preview = { timeout = 400, filesize_limit = 1 }, -- ms & Mb
+		borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+		-- { "═", "║", "═", "║", "╔", "╗", "╝", "╚" }
+		-- { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+		default_mappings = { ["i"] = keymappings_I, ["n"] = keymappings_N },
+		sorting_strategy = "ascending", -- so layout is consistent with prompt_position "top"
+		layout_strategy = "horizontal",
+		layout_config = {
+			horizontal = {
+				prompt_position = "top",
+				height = { 0.75, min = 13 },
+				width = 0.99,
+				preview_cutoff = 70,
+				preview_width = { 0.55, min = 30 },
 			},
-			-- stylua: ignore
-			-- other ignores are defined via .gitignore, .ignore, /fd/ignore, or /git/ignore
-			file_ignore_patterns = {
-				"%.png$", "%.gif$", "%.jpe?g$", "%.icns$",
-				"%.pdf$", "%.zip$", "%.plist$",
-			},
-			vimgrep_arguments = {
-				"rg",
-				"--vimgrep",
-				"--smart-case",
-				"--trim",
-				-- inherit global ignore file from `fd`
-				("--ignore-file=" .. os.getenv("HOME") .. "/.config/fd/ignore"),
+			vertical = {
+				prompt_position = "top",
+				mirror = true,
+				height = 0.9,
+				width = 0.7,
+				preview_cutoff = 12,
+				preview_height = { 0.4, min = 10 },
+				anchor = "S",
 			},
 		},
-		pickers = {
-			find_files = {
-				-- HACK add space as initial query value. has not filtering effect,
-				-- but triggers the sorting via `tiebreak`
-				default_text = " ",
-				path_display = filenameFirst,
-				tiebreak = prioritzeScriptFiles,
-				prompt_prefix = "󰝰 ",
-				-- FIX using the default fd command from telescope is somewhat buggy,
-				-- e.g. not respecting `~/.config/fd/ignore`
-				find_command = { "fd", "--type=file", "--type=symlink" },
-				mappings = { i = {["<C-h>"] = toggleHiddenAndIgnore} },
-				follow = false,
+		-- stylua: ignore
+		-- other ignores are defined via .gitignore, .ignore, /fd/ignore, or /git/ignore
+		file_ignore_patterns = {
+			"%.png$", "%.gif$", "%.jpe?g$", "%.icns$",
+			"%.pdf$", "%.zip$", "%.plist$",
+		},
+		vimgrep_arguments = {
+			"rg",
+			"--vimgrep",
+			"--smart-case",
+			"--trim",
+			-- inherit global ignore file from `fd`
+			("--ignore-file=" .. os.getenv("HOME") .. "/.config/fd/ignore"),
+		},
+	},
+	pickers = {
+		find_files = {
+			-- HACK add space as initial query value. has not filtering effect,
+			-- but triggers the sorting via `tiebreak`
+			default_text = " ",
+			tiebreak = prioritzeScriptFiles,
+
+			path_display = filenameFirst,
+			prompt_prefix = "󰝰 ",
+			-- FIX using the default fd command from telescope is somewhat buggy,
+			-- e.g. not respecting `~/.config/fd/ignore`
+			find_command = { "fd", "--type=file", "--type=symlink" },
+			mappings = { i = { ["<C-h>"] = toggleHiddenAndIgnore } },
+			follow = false,
+		},
+		oldfiles = {
+			path_display = filenameFirst,
+			tiebreak = prioritzeScriptFiles,
+			prompt_prefix = "󰋚 ",
+			previewer = false,
+			layout_config = {
+				horizontal = { anchor = "W", width = 0.5, height = 0.55 },
 			},
-			oldfiles = {
-				path_display = filenameFirst,
-				tiebreak = prioritzeScriptFiles,
-				prompt_prefix = "󰋚 ",
-				previewer = false,
-				layout_config = {
-					horizontal = { anchor = "W", width = 0.5, height = 0.55 },
+		},
+		live_grep = {
+			prompt_prefix = " ",
+			disable_coordinates = true,
+			layout_config = { horizontal = { preview_width = 0.7 } },
+		},
+		grep_string = {
+			prompt_prefix = " ",
+			disable_coordinates = true,
+			layout_config = { horizontal = { preview_width = 0.7 } },
+		},
+		git_status = {
+			prompt_prefix = "󰊢 ",
+			-- stylua: ignore
+			git_icons = { added = "A", changed = "M", copied = "C", deleted = "D", renamed = "R", unmerged = "U", untracked = "?" },
+			initial_mode = "normal",
+			show_untracked = true,
+			mappings = {
+				n = {
+					["<Tab>"] = "move_selection_worse",
+					["<S-Tab>"] = "move_selection_better",
+					["<CR>"] = "git_staging_toggle",
+					["<D-CR>"] = "select_default", -- opens file
 				},
 			},
-			live_grep = {
-				prompt_prefix = " ",
-				disable_coordinates = true,
-				layout_config = { horizontal = { preview_width = 0.7 } },
-			},
-			grep_string = {
-				prompt_prefix = " ",
-				disable_coordinates = true,
-				layout_config = { horizontal = { preview_width = 0.7 } },
-			},
-			git_status = {
-				prompt_prefix = "󰊢 ",
-				-- stylua: ignore
-				git_icons = { added = "A", changed = "M", copied = "C", deleted = "D", renamed = "R", unmerged = "U", untracked = "?" },
-				initial_mode = "normal",
-				show_untracked = true,
-				mappings = {
-					n = {
-						["<Tab>"] = "move_selection_worse",
-						["<S-Tab>"] = "move_selection_better",
-						["<CR>"] = "git_staging_toggle",
-						["<D-CR>"] = "select_default",
-					},
-				},
-				layout_strategy = "vertical",
-				previewer = require("telescope.previewers").new_termopen_previewer {
+			layout_strategy = "vertical",
+			previewer = function()
+				return require("telescope.previewers").new_termopen_previewer {
 					get_command = function(_, status)
 						local width = vim.api.nvim_win_get_width(status.preview_win)
 						local statArgs = ("%s,%s,25"):format(width, math.floor(width / 2))
@@ -258,20 +257,19 @@ local function telescopeConfig()
 						}
 						return table.concat(cmd, " ")
 					end,
-				},
-			},
-			git_commits = {
-				prompt_prefix = "󰊢 ",
-				initial_mode = "normal",
-				prompt_title = "Git Log",
-				layout_config = { horizontal = { preview_width = 0.5 } },
-				-- add commit time (%cr) & `--all`, double `\t` for highlighting
-				git_command = { "git", "log", "--all", "--pretty=%h %s\t\t%cr", "--", "." },
-				previewer = require("telescope.previewers").new_termopen_previewer {
-					dyn_title = function(_, entry)
-						local hash = entry.value
-						return hash
-					end,
+				}
+			end,
+		},
+		git_commits = {
+			prompt_prefix = "󰊢 ",
+			initial_mode = "normal",
+			prompt_title = "Git Log",
+			layout_config = { horizontal = { preview_width = 0.5 } },
+			-- add commit time (%cr) & `--all`, double `\t` for highlighting
+			git_command = { "git", "log", "--all", "--pretty=%h %s\t\t%cr", "--", "." },
+			previewer = function()
+				return require("telescope.previewers").new_termopen_previewer {
+					dyn_title = function(_, entry) return entry.value end, -- hash as title
 					get_command = function(entry, status)
 						local hash = entry.value
 						local previewWidth = vim.api.nvim_win_get_width(status.preview_win)
@@ -287,133 +285,133 @@ local function telescopeConfig()
 						}
 						return table.concat(cmd, " ")
 					end,
-				},
-			},
-			git_bcommits = {
-				prompt_prefix = "󰊢 ",
-				initial_mode = "normal",
-				layout_config = { horizontal = { height = 0.99 } },
-				git_command = { "git", "log", "--pretty=%h %s\t%cr" }, -- add commit time (%cr)
-			},
-			git_branches = {
-				prompt_prefix = " ",
-				show_remote_tracking_branches = true,
-				initial_mode = "normal",
-				previewer = false,
-				layout_config = { horizontal = { height = 0.4, width = 0.6 } },
-				mappings = {
-					n = {
-						["<D-n>"] = "git_create_branch",
-						["<C-r>"] = "git_rename_branch",
-					},
-				},
-			},
-			keymaps = {
-				prompt_prefix = " ",
-				modes = { "n", "i", "c", "x", "o", "t" },
-				show_plug = false, -- do not show mappings with "<Plug>"
-				lhs_filter = function(lhs) return not lhs:find("Þ") end, -- remove which-key mappings
-			},
-			highlights = {
-				prompt_prefix = " ",
-				layout_config = {
-					horizontal = { preview_width = { 0.7, min = 20 } },
-				},
-				mappings = {
-					i = {
-						-- copy value of highlight instead of sending a message
-						["<CR>"] = function(prompt_bufnr)
-							local hlName = require("telescope.actions.state").get_selected_entry().value
-							require("telescope.actions").close(prompt_bufnr)
-							local value = vim.api.nvim_get_hl(0, { name = hlName })
-							local out = { hlName }
-							if value.fg then table.insert(out, ("#%06x"):format(value.fg)) end
-							if value.bg then table.insert(out, ("#%06x"):format(value.bg)) end
-							local str = table.concat(out, "\n")
-							vim.fn.setreg("+", str)
-							u.notify("Copied", str)
-						end,
-					},
-				},
-			},
-			lsp_references = {
-				prompt_prefix = "󰈿 ",
-				trim_text = true,
-				show_line = false,
-				include_declaration = false,
-				include_current_line = false,
-				initial_mode = "normal",
-				layout_config = {
-					horizontal = { preview_width = { 0.7, min = 30 } },
-				},
-			},
-			lsp_definitions = {
-				prompt_prefix = "󰈿 ",
-				trim_text = true,
-				show_line = false,
-				initial_mode = "normal",
-				layout_config = {
-					horizontal = { preview_width = { 0.7, min = 30 } },
-				},
-			},
-			-- using treesitter-symbol search over LSP symbol search, as treesitter
-			-- symbol search leaves out anonymous functions
-			treesitter = {
-				prompt_prefix = " ",
-				prompt_title = "Symbols",
-				show_line = false,
-				symbols = { "function", "class", "method" },
-				symbol_highlights = { ["function"] = "Function" },
-			},
-			lsp_document_symbols = {
-				prompt_prefix = "󰒕 ",
-				symbols = { "function", "class", "method" },
-				symbol_highlights = {
-					["module"] = "Comment",
-					["array"] = "Comment",
-					["object"] = "Comment",
-					["string"] = "Comment",
-				},
-			},
-			lsp_workspace_symbols = { -- workspace symbols are not working correctly in lua
-				prompt_prefix = "󰒕 ",
-				fname_width = 12,
-				symbols = { "function", "class", "method" },
-			},
-			spell_suggest = {
-				initial_mode = "normal",
-				prompt_prefix = "󰓆",
-				previewer = false,
-				theme = "cursor",
-				layout_config = { cursor = { width = 0.3 } },
-			},
-			colorscheme = {
-				enable_preview = true,
-				prompt_prefix = " ",
-				layout_config = {
-					horizontal = {
-						height = 0.4,
-						width = 0.3,
-						anchor = "SE",
-						preview_width = 1, -- needs preview for live preview of the theme
-					},
-				},
-			},
-			quickfix = {
-				prompt_prefix = " ",
-				trim_text = true,
-				show_line = false,
-				layout_config = {
-					horizontal = { preview_width = { 0.7, min = 30 } },
+				}
+			end,
+		},
+		git_bcommits = {
+			prompt_prefix = "󰊢 ",
+			initial_mode = "normal",
+			layout_config = { horizontal = { height = 0.99 } },
+			git_command = { "git", "log", "--pretty=%h %s\t%cr" }, -- add commit time (%cr)
+		},
+		git_branches = {
+			prompt_prefix = " ",
+			show_remote_tracking_branches = true,
+			initial_mode = "normal",
+			previewer = false,
+			layout_config = { horizontal = { height = 0.4, width = 0.7 } },
+			mappings = {
+				n = {
+					["<D-n>"] = "git_create_branch",
+					["<C-r>"] = "git_rename_branch",
 				},
 			},
 		},
-		extensions = {
-			-- insert at cursor instead, relevant for lua
-			import = { insert_at_top = false },
+		keymaps = {
+			prompt_prefix = " ",
+			modes = { "n", "i", "c", "x", "o", "t" },
+			show_plug = false, -- do not show mappings with "<Plug>"
+			lhs_filter = function(lhs) return not lhs:find("Þ") end, -- remove which-key mappings
 		},
-	}
-end
+		highlights = {
+			prompt_prefix = " ",
+			layout_config = {
+				horizontal = { preview_width = { 0.7, min = 20 } },
+			},
+			mappings = {
+				i = {
+					-- copy value of highlight instead of sending a message
+					["<CR>"] = function(prompt_bufnr)
+						local hlName = require("telescope.actions.state").get_selected_entry().value
+						require("telescope.actions").close(prompt_bufnr)
+						local value = vim.api.nvim_get_hl(0, { name = hlName })
+						local out = { hlName }
+						if value.fg then table.insert(out, ("#%06x"):format(value.fg)) end
+						if value.bg then table.insert(out, ("#%06x"):format(value.bg)) end
+						local str = table.concat(out, "\n")
+						vim.fn.setreg("+", str)
+						u.notify("Copied", str)
+					end,
+				},
+			},
+		},
+		lsp_references = {
+			prompt_prefix = "󰈿 ",
+			trim_text = true,
+			show_line = false,
+			include_declaration = false,
+			include_current_line = false,
+			initial_mode = "normal",
+			layout_config = {
+				horizontal = { preview_width = { 0.7, min = 30 } },
+			},
+		},
+		lsp_definitions = {
+			prompt_prefix = "󰈿 ",
+			trim_text = true,
+			show_line = false,
+			initial_mode = "normal",
+			layout_config = {
+				horizontal = { preview_width = { 0.7, min = 30 } },
+			},
+		},
+		-- using treesitter-symbol search over LSP symbol search, as treesitter
+		-- symbol search leaves out anonymous functions
+		treesitter = {
+			prompt_prefix = " ",
+			prompt_title = "Symbols",
+			show_line = false,
+			symbols = { "function", "class", "method" },
+			symbol_highlights = { ["function"] = "Function" },
+		},
+		lsp_document_symbols = {
+			prompt_prefix = "󰒕 ",
+			symbols = { "function", "class", "method" },
+			symbol_highlights = {
+				["module"] = "Comment",
+				["array"] = "Comment",
+				["object"] = "Comment",
+				["string"] = "Comment",
+			},
+		},
+		lsp_workspace_symbols = { -- workspace symbols are not working correctly in lua
+			prompt_prefix = "󰒕 ",
+			fname_width = 12,
+			symbols = { "function", "class", "method" },
+		},
+		spell_suggest = {
+			initial_mode = "normal",
+			prompt_prefix = "󰓆",
+			previewer = false,
+			theme = "cursor",
+			layout_config = { cursor = { width = 0.3 } },
+		},
+		colorscheme = {
+			enable_preview = true,
+			prompt_prefix = " ",
+			layout_config = {
+				horizontal = {
+					height = 0.4,
+					width = 0.3,
+					anchor = "SE",
+					preview_width = 1, -- needs preview for live preview of the theme
+				},
+			},
+		},
+		quickfix = {
+			prompt_prefix = " ",
+			trim_text = true,
+			show_line = false,
+			layout_config = {
+				horizontal = { preview_width = { 0.7, min = 30 } },
+			},
+		},
+	},
+	extensions = {
+		-- insert at cursor instead, relevant for lua
+		import = { insert_at_top = false },
+	},
+}
 
 --------------------------------------------------------------------------------
 
@@ -422,6 +420,15 @@ return {
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
 		external_dependencies = { "fd", "rg" },
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons",
+			{
+				"natecraddock/telescope-zf-native.nvim",
+				config = function() require("telescope").load_extension("zf-native") end,
+			},
+		},
+		opts = telescopeOpts,
 		keys = {
 			{ "?", function() telescope("keymaps") end, desc = "⌨️ Search Keymaps" },
 			{ "g.", function() telescope("resume") end, desc = " Continue" },
@@ -469,16 +476,6 @@ return {
 			},
 			{ "gL", function() telescope("grep_string") end, desc = " Grep cword" },
 		},
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons",
-			"natecraddock/telescope-zf-native.nvim",
-		},
-		config = function()
-			telescopeConfig()
-			-- prioritizes filename matches over filepath matches
-			require("telescope").load_extension("zf-native")
-		end,
 	},
 	{ -- Icon Picker
 		"nvim-telescope/telescope-symbols.nvim",
