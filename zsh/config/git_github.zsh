@@ -251,17 +251,3 @@ checkout commit"
 			git show "$last_commit:$deleted_path" | bat # unknown extension
 	fi
 }
-
-#───────────────────────────────────────────────────────────────────────────────
-
-# SOURCE https://github.com/junegunn/fzf/issues/3349#issuecomment-1621827200
-function code {
-	gh search code "$*" \
-		--json repository,path \
-		--jq '.[] | [.repository.nameWithOwner, .path] | @tsv' |
-		fzf --delimiter '\t' --with-nth 1 \
-			--preview 'gh api --cache 10m repos/{1}/contents/{2} \
-			--jq .content | base64 --decode | bat --style=numbers --color=always' \
-			--preview-window 'nohidden:right:wrap:75%' \
-			--bind 'ctrl-b:execute-silent:gh browse --repo {1} {2}'
-}
