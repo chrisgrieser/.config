@@ -21,14 +21,14 @@ vim.filetype.add {
 -- DIRECTORIES
 
 -- move to custom location where they are synced independently from the dotfiles repo
-local vimDataDir = vim.env.DATA_DIR .. "/vim-data/" -- vim.env reads from .zshenv
-opt.undodir = vimDataDir .. "undo"
-opt.viewdir = vimDataDir .. "view"
-opt.shadafile = vimDataDir .. "main.shada"
+
+opt.undodir = vim.env.DATA_DIR .. "/vim-data/undo"
+opt.viewdir = vim.env.DATA_DIR .. "/vim-data/view"
+opt.shadafile = vim.env.DATA_DIR .. "/vim-data/main.shada"
 opt.swapfile = false -- doesn't help and only creates useless files and notifications
 
 -- automatically cleanup dirs to prevent bloating
--- once a week, on first FocusLost, files older than 30 days
+-- once a week, on first FocusLost, delete files older than 30/60 days
 autocmd("FocusLost", {
 	once = true,
 	callback = function()
@@ -48,7 +48,7 @@ for _, char in pairs { ".", ",", ";", '"', ":", "'", "<Space>" } do
 	vim.keymap.set("i", char, function()
 		if vim.bo.buftype ~= "" then return char end
 		return char .. "<C-g>u"
-		-- WARN requires `remap = true`, otherwise prevents abbrev. with those chars
+		-- WARN requires `remap = true`, otherwise prevents abbreviations with them
 	end, { desc = "󰕌 Extra undopoint", remap = true, expr = true })
 end
 
@@ -70,7 +70,6 @@ end
 -- CLIPBOARD
 opt.clipboard = "unnamedplus"
 
--- post-yank-highlight
 autocmd("TextYankPost", {
 	callback = function() vim.highlight.on_yank { timeout = 1000 } end,
 })

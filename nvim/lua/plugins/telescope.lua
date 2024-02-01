@@ -110,14 +110,14 @@ local function filenameFirst(_, path)
 end
 
 -- prioritize certain filetypes
-local function prioritzeScriptFiles(a, b)
+local function prioritzeScriptFiles(current_entry, existing_entry, prompt)
 	local priorityExt = { "lua", "js", "ts", "py" }
-	a.ext = a.ordinal:match("%w+$")
-	b.ext = b.ordinal:match("%w+$")
-	a.hasPrio = vim.tbl_contains(priorityExt, a.ext)
-	b.hasPrio = vim.tbl_contains(priorityExt, b.ext)
-	if a.hasPrio and not b.hasPrio then return true end
-	return #a.ordinal < #b.ordinal
+	current_entry.ext = current_entry.ordinal:match("%w+$")
+	existing_entry.ext = existing_entry.ordinal:match("%w+$")
+	current_entry.hasPrio = vim.tbl_contains(priorityExt, current_entry.ext)
+	existing_entry.hasPrio = vim.tbl_contains(priorityExt, existing_entry.ext)
+	if current_entry.hasPrio and not existing_entry.hasPrio then return true end
+	return #current_entry.ordinal < #existing_entry.ordinal
 end
 
 local function project() return vim.fs.basename(vim.loop.cwd() or "") end
@@ -153,9 +153,7 @@ local function telescopeConfig()
 	require("telescope").setup {
 		defaults = {
 			path_display = { "tail" },
-			history = {
-				path = vim.fn.stdpath "data" .. "/telescope_history.sqlite3",
-			},
+			history = { path = vim.env.DATA_DIR .. "/vim-data/telescope_history" },
 			selection_caret = "󰜋 ",
 			multi_icon = "󰒆 ",
 			results_title = false,
