@@ -69,7 +69,7 @@ function run() {
 			return {
 				title: title,
 				subtitle: desc,
-				match: alfredMatcher(title),
+				match: alfredMatcher(title) + alfredMatcher(desc),
 				arg: anchor.url,
 				uid: title,
 			};

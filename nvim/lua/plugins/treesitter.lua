@@ -1,5 +1,8 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
+	-- PENDING https://github.com/andymass/vim-matchup/issues/335
+	commit = "364b86e",
+
 	event = "VeryLazy",
 	build = ":TSUpdate",
 	main = "nvim-treesitter.configs",
@@ -16,7 +19,7 @@ return {
 			disable = {
 				"markdown",-- indentation at bullet points is worse
 				"javascript", -- some wrong indentation when using `o`
-			}, 
+			},
 		},
 		--------------------------------------------------------------------------
 		-- TREESITTER PLUGINS

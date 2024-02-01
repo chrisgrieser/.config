@@ -198,7 +198,8 @@ local telescopeOpts = {
 		find_files = {
 			-- HACK add space as initial query value. has not filtering effect,
 			-- but triggers the sorting via `tiebreak` 
-			-- (see https://github.com/nvim-telescope/telescope.nvim/issues/2905)
+			-- https://github.com/natecraddock/telescope-zf-native.nvim/issues/12
+			-- https://github.com/nvim-telescope/telescope.nvim/issues/2905
 			default_text = " ",
 			tiebreak = prioritzeScriptFiles,
 
