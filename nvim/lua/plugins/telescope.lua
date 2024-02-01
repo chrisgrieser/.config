@@ -153,6 +153,9 @@ local function telescopeConfig()
 	require("telescope").setup {
 		defaults = {
 			path_display = { "tail" },
+			history = {
+				path = vim.fn.stdpath "data" .. "/telescope_history.sqlite3",
+			},
 			selection_caret = "󰜋 ",
 			multi_icon = "󰒆 ",
 			results_title = false,

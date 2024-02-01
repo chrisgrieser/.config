@@ -23,70 +23,63 @@ function run() {
 	const dirtyFiles = app
 		.doShellScript(`cd "${dotfileFolder}" && git status --porcelain`)
 		.split("\r")
-		.map((/** @type {string} */ file) => file.replace(/^[ MD?]* /i, ""));
+		.map((/** @type {string} */ file) => file.replace(/^(\?\? | M | R .*? -> )/, ""));
 
 	/** @type{AlfredItem[]} */
 	const fileArray = app
 		.doShellScript(
 			// INFO using `fd` over `find` for speed and gitignoring
 			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; cd "${dotfileFolder}" ;
-			fd --type=file --type=symlink --hidden --absolute-path -E "*.png"`,
+			fd --type=file --hidden --absolute-path -E "*.png"`,
 		)
 		.split("\r")
 		.map((/** @type {string} */ absPath) => {
 			const name = absPath.split("/").pop();
 			if (!name) return;
-			const relPath = absPath.slice(dotfileFolder.length);
-			const relativeParentFolder = relPath.slice(1, -name.length - 1) || "/";
+
+			let icon = "";
+			const relPath = absPath.slice(dotfileFolder.length + 1);
+			const relativeParentFolder = relPath.slice(0, -name.length - 1) || "/";
+			let matcher = alfredMatcher(`${name} ${relativeParentFolder}`);
 
 			// dirty?
-			const fileIsDirty = dirtyFiles.includes(relPath);
-			const dirtyIcon = fileIsDirty ? " ✴️" : "";
-			let matcher = alfredMatcher(`${name} ${relativeParentFolder}`);
-			if (fileIsDirty) matcher += " dirty";
+			if( dirtyFiles.includes(relPath)) {
+				icon += " ✴️";
+			}
+
+			matcher += " dirty";
 
 			// type determination
 			let type = "";
-			if (name.startsWith(".z")) type = "sh";
+			if (name.startsWith(".z")) type = "zsh"; // .zshenv, .zshrc, .zprofile
 			else if (name.endsWith("akefile")) type = "make";
-			else if (name.startsWith(".")) type = "config";
+			else if (name.startsWith(".")) type = "cfg";
 			else if (!name.includes(".")) type = "blank";
 			else if (name === "obsidian-vimrc.vim") type = "obsidian";
 			else type = name.split(".").pop() || ""; // default: extension
 
-			if (type === "yml") type = "yaml";
-			else if (type === "mjs" || type === "jxa") type = "js";
-			else if (type === "zsh") type = "sh";
-			else if (type === "conf" || type === "cfg" || type === "ini") type = "config";
-			else if (type.endsWith("-bkp")) type = "other";
-
 			// icon determination
 			let iconObj = { path: "./custom-filetype-icons/" };
 			switch (type) {
-				// use image preview
-				case "icns":
-				case "png":
-				case "gif":
-				case "jpg":
-					iconObj.path = absPath;
-					break;
 				// use filetype image
-				case "bttpreset":
-				case "opml":
-				case "other":
 				case "webloc":
 				case "url":
-				case "html":
 				case "folder":
+				case "ini":
+				case "mjs":
 					iconObj = { type: "fileicon", path: absPath };
 					break;
-				// use {extension}.png located in icon folder
+				case "zsh":
+					// biome-ignore lint/suspicious/noFallthroughSwitchClause: intentional fallthrough
+					type = "sh"
+				case "yml":
+					// biome-ignore lint/suspicious/noFallthroughSwitchClause: intentional fallthrough
+					type = "yaml"
 				default:
-					iconObj.path += type + ".png";
+					iconObj.path += type + ".png"; // use {extension}.png located in icon folder
 			}
 
-			// icons to distinguish all these lua files 🙈
-			let icon = "";
+			// icons to distinguish all these lua files I have…
 			if (relPath.includes("hammerspoon")) icon += " 🟡";
 			else if (relPath.includes("nvim")) icon += " 🔳";
 
@@ -131,9 +124,9 @@ function run() {
 
 	// password-store (pass-cli)
 	const pwPath = app.pathTo("home folder") + "/.password-store";
-	const repoPath = app.pathTo("home folder") + "/Repos";
+	const repoPath = app.doShellScript('source $HOME/.zshenv && echo "$LOCAL_REPOS"');
 	/** @type{AlfredItem[]} */
-	const extraFolder = [
+	const extraFolders = [
 		{
 			title: ".password-store",
 			match: alfredMatcher(pwPath) + " folder",
@@ -154,6 +147,6 @@ function run() {
 
 	//──────────────────────────────────────────────────────────────────────────────
 
-	const jsonArray = [...fileArray, ...folderArray, ...extraFolder];
+	const jsonArray = [...fileArray, ...folderArray, ...extraFolders];
 	return JSON.stringify({ items: jsonArray });
 }
