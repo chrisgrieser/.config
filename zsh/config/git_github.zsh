@@ -68,7 +68,7 @@ function gc {
 function gC {
 	stageAllIfNoStagedChanges
 	printf "\e[1;34mCommit: \e[0m" &&
-		git commit -m "$1" || return 1
+		git commit -m "$@" || return 1
 }
 
 # completions for them
@@ -140,6 +140,8 @@ function gu {
 	open "$url"
 }
 
+#───────────────────────────────────────────────────────────────────────────────
+
 # git log
 function gl {
 	if [[ -z "$1" ]]; then
@@ -150,6 +152,41 @@ function gl {
 		_gitlog "$@"
 	fi
 }
+
+# interactive
+function gli {
+	if [[ ! -x "$(command -v fzf)" ]]; then print "\e[1;33mfzf not installed.\e[0m" && return 1; fi
+	if [[ ! -x "$(command -v delta)" ]]; then print "\e[1;33mdelta not installed (\`brew install git-delta\`)\e[0m" && return 1; fi
+
+	local hash key_pressed selected style
+	local preview_format="%C(yellow)%h %C(red)%D %n%C(blue)%an %C(green)(%ch)%C(reset) %n%n%C(bold)%C(magenta)%s %C(cyan)%b%C(reset)"
+	defaults read -g AppleInterfaceStyle &>/dev/null && style="--dark" || style="--light"
+
+	selected=$(
+		_gitlog --no-graph --color=always |
+			fzf --ansi --no-sort --track \
+				--header-first --header="↵ : Checkout    ^H: Copy Hash    ^R: Rebase" \
+				--expect="ctrl-h,ctrl-r" --with-nth=2.. --preview-window=55% \
+				--preview="git show {1} --stat=,30,30 --color=always --format='$preview_format' | sed '\$d' ; git diff {1}^! | delta $style --hunk-header-decoration-style='blue ol' --file-style=omit" \
+				--height="100%" #required for wezterm's pane:is_alt_screen_active()
+	)
+	[[ -z "$selected" ]] && return 0 # abort
+
+	key_pressed=$(echo "$selected" | head -n1)
+	hash=$(echo "$selected" | sed '1d' | cut -d' ' -f1)
+
+	if [[ "$key_pressed" == "ctrl-h" ]]; then
+		echo -n "$hash" | pbcopy
+		print "\e[1;33m$hash\e[0m copied."
+	elif [[ "$key_pressed" == "ctrl-r" ]]; then
+		git rebase -i "$hash^"
+		_separator && _gitlog "$hash^..HEAD" # confirm result
+	else
+		git checkout "$hash"
+	fi
+}
+
+#───────────────────────────────────────────────────────────────────────────────
 
 function clone {
 	url="$1"
