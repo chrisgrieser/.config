@@ -78,12 +78,17 @@ end
 M.transBgAppWatcher = aw.new(function(appName, event, appObj)
 	if env.isProjector() then return end
 	if event == aw.terminated then
-		if appName == "Reminders" then return end -- Reminders often opening in the background
+		if appName == "Reminders" then return end -- Reminders opening in bg for scripts
 		unHideAll()
 	elseif event == aw.activated and hs.fnutils.contains(config.transBgApps, appName) then
 		u.whenAppWinAvailable(appName, function() hideOthers(appObj) end)
 	end
 end):start()
+
+-- FIX that Hammerspoon console does not trigger application-deactivated
+M.wf_hsConsoleHider = wf.new("Hammerspoon"):subscribe(wf.windowUnfocused, function(win)
+	if win:title() == "Hammerspoon Console" then hs.application("Hammerspoon"):hide() end
+end)
 
 -- also trigger on minimization and on window reszing
 M.transBgAppWindowFilter = wf.new(config.transBgApps)
