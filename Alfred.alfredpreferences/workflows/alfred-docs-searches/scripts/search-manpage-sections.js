@@ -29,6 +29,7 @@ function htmlDecode(encoded) {
 		.replace(/&lt;/g, "<")
 		.replace(/&gt;/g, ">")
 		.replace(/&amp;/g, "&")
+		.replace(/&nbsp;/g, " ")
 		.replace(/<.*?>/g, ""); // leftover html tags
 }
 
