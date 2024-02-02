@@ -23,10 +23,14 @@ local libraryPath = home .. "/.config/pandoc/main-bibliography.bib"
 --------------------------------------------------------------------------------
 
 M.pathw_fileHub = pathw(env.fileHub, function(paths, _)
-	if not u.screenIsUnlocked() then return end
 	for _, filep in pairs(paths) do
 		local fileName = filep:gsub(".*/", "")
 		local ext = fileName:gsub(".*%.", "")
+
+		-- FIX Brave downloads being hidden https://community.brave.com/t/all-downloads-are-showing-as-hidden-on-mac/508032
+		if not fileName:find("^%.") then
+			hs.execute(("ls -lO %q | grep -q 'hidden' && chflags nohidden %q"):format(filep, filep))
+		end
 
 		-- auto-remove ALFREDWORKFLOWS & ICAL
 		if (ext == "alfredworkflow" or ext == "ics") and fileIsDownloaded(filep) then

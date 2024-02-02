@@ -1,7 +1,7 @@
 local M = {} -- persist from garbage collector
 
-local u = require("lua.utils")
 local env = require("lua.environment-vars")
+local u = require("lua.utils")
 
 local cons = hs.console
 local wf = hs.window.filter
@@ -61,7 +61,12 @@ local function cleanupConsole()
 			color = isDark and lightGrey or darkGrey
 		elseif line:lower():find("error") or line:lower():find("fatal") then
 			color = isDark and lightRed or darkRed
-		elseif line:lower():find("warning") or line:find("stack traceback") or line:find("fail") or line:lower():find("abort") then
+		elseif
+			line:lower():find("warning")
+			or line:find("stack traceback")
+			or line:find("fail")
+			or line:lower():find("abort")
+		then
 			color = isDark and lightYellow or darkYellow
 		else
 			color = isDark and white or black
@@ -77,7 +82,7 @@ end
 -- hide console as soon as unfocused
 M.wf_hsConsole = wf.new("Hammerspoon")
 	:subscribe(wf.windowUnfocused, function(win)
-		if win:title() == "Hammerspoon Console" then hs.closeConsole() end
+		if win:title() == "Hammerspoon Console" then hs.application("Hammerspoon"):hide() end
 	end)
 	:subscribe(wf.windowFocused, function(win)
 		if win:title() == "Hammerspoon Console" then u.runWithDelays({ 0, 0.1 }, cleanupConsole) end

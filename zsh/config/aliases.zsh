@@ -19,7 +19,7 @@ alias curl='curl --progress-bar'
 alias make='make --silent --warn-undefined-variables'
 alias jless='jless --no-line-numbers'
 alias tokei='tokei --compact'
-function which { builtin which -a "$@" | bat --language=sh; } # colorized & showing all
+function which { builtin which -a "$@" | bat --language=sh --wrap=character; } # colorized & showing all
 
 # dark-mode aware
 function bat {
