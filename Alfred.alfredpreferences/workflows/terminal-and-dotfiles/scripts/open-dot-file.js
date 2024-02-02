@@ -38,9 +38,9 @@ function run() {
 
 		// emoji
 		let emoji = "";
-		if (isDirty) emoji += " ✴️";
 		if (relPath.includes("hammerspoon")) emoji += " 🟡";
 		else if (relPath.includes("nvim")) emoji += " 🔳";
+		if (isDirty) emoji += "  ✴️";
 
 		// type-icon
 		let type = "";

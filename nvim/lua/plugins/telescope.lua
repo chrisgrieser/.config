@@ -415,6 +415,13 @@ local function telescopeConfig()
 		extensions = {
 			-- insert at cursor instead, relevant for lua
 			import = { insert_at_top = false },
+			frecency = {
+				db_safe_mode = false, -- also fixes recursion issue with dressing.nvim
+				db_root = vim.env.DATA_DIR .. "/vim-data",
+				ignore_patterns = {
+					".git/",
+				}
+			},
 		},
 	}
 end
@@ -505,28 +512,22 @@ return {
 			},
 		},
 	},
-	{ -- Add imports (requires `rg`)
+	{ -- Add imports
 		"piersolenski/telescope-import.nvim",
 		dependencies = "nvim-telescope/telescope.nvim",
+		external_dependencies = { "rg" },
 		keys = {
 			{ "<leader>ci", function() telescope("import") end, desc = "󰋺 Add Import" },
 		},
 		config = function() require("telescope").load_extension("import") end,
 	},
 	{
-		"danielfalk/smart-open.nvim",
+		"teocns/telescope-frecency.nvim",
+		config = function() require("telescope").load_extension("frecency") end,
+		dependencies = "nvim-telescope/telescope.nvim",
+		external_dependencies = { "rg", "fd" },
 		keys = {
-			{
-				"gO",
-				function()
-					require("telescope").extensions.smart_open.smart_open {
-						cwd_only = true,
-						filename_first = true,
-					}
-				end,
-			},
+			{ "gO", function() telescope("frecency") end, desc = " Frecency" },
 		},
-		config = function() require("telescope").load_extension("smart_open") end,
-		dependencies = "kkharji/sqlite.lua",
 	},
 }
