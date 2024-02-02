@@ -15,10 +15,10 @@ function o() {
 		# shellcheck disable=2016
 		fd --type=file --type=symlink --color=always | fzf \
 			--select-1 --ansi --query="$input" --info=inline --header-first \
-			--header="^H: --hidden --no-ignore  ^P: Copy Path  ^N: Copy Name  ^D: Goto Parent" \
+			--header="^H: --hidden  ^P: Copy Path  ^N: Copy Name  ^D: Goto Parent" \
 			--keep-right \
-			--scheme="path" \
-			--delimiter="/" --with-nth=-2.. --nth=-1 \
+			--scheme=path --tiebreak=end,length \
+			--delimiter="/" --with-nth=-2.. --nth=-2.. \
 			--bind="ctrl-h:reload(fd --hidden --no-ignore --exclude='/.git/' --exclude='.DS_Store' --type=file --type=symlink --color=always)" \
 			--expect="ctrl-p,ctrl-n,ctrl-d" \
 			--preview-window="55%" \
