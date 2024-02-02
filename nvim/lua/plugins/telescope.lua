@@ -412,6 +412,7 @@ local function telescopeConfig()
 
 				path_display = filenameFirst,
 				tiebreak = prioritzeScriptFiles,
+				prompt_title = "Frecent Files",
 				prompt_prefix = "󰋚 ",
 				previewer = false,
 				layout_config = {
@@ -508,11 +509,11 @@ return {
 	{ -- better recent files
 		-- using fork PENDING https://github.com/nvim-telescope/telescope-frecency.nvim/issues/48
 		"teocns/telescope-frecency.nvim",
-		config = function() require("telescope").load_extension("frecency") end,
 		dependencies = "nvim-telescope/telescope.nvim",
 		external_dependencies = "fd",
 		keys = {
 			{ "gr", function() telescope("frecency") end, desc = " Frecent Files" },
 		},
+		config = function() require("telescope").load_extension("frecency") end,
 	},
 }
