@@ -8,24 +8,28 @@ local now = os.time
 
 --------------------------------------------------------------------------------
 
----CONFIG
 ---times after which apps should quit, in minutes
 ---(Apps not in this list will be ignored and never quit automatically).
----@type table<string, integer|nil>
-M.thresholdMins = {
-	Slack = 25,
-	Mimestream = 5,
-	Highlights = 90,
-	Obsidian = 120,
-	Discord = 180,
-	BusyCal = 5,
-	["WezTerm"] = 45,
-	["wezterm-gui"] = 45,
-	["Alfred Preferences"] = 20,
-	["System Settings"] = 2,
-	Finder = 20, -- only closes windows when not on projector
+---@class (exact) autoQuitterConfig
+---@field thresholdMins table<string, integer>
+---@field checkIntervalSecs integer
+local config = {
+	checkIntervalSecs = 30,
+	thresholdMins = {
+		Finder = 20, -- only closes windows (and only when not on projector)
+		Hammerspoon = 5, -- only console window
+		BusyCal = 5,
+		Mimestream = 5,
+		Slack = 25,
+		Highlights = 90,
+		Obsidian = 120,
+		Discord = 180,
+		["WezTerm"] = 45,
+		["wezterm-gui"] = 45,
+		["Alfred Preferences"] = 20,
+		["System Settings"] = 3,
+	},
 }
-local checkIntervalSecs = 30
 
 --------------------------------------------------------------------------------
 
@@ -38,6 +42,8 @@ local function quit(appName)
 		for _, win in pairs(finderWins) do
 			win:close()
 		end
+	elseif appName == "Hammerspoon" then
+		hs.closeConsole()
 	else
 		u.quitApps(appName)
 	end
@@ -53,7 +59,7 @@ end
 M.idleApps = {}
 
 -- fill `idleApps` with all running apps and the current time
-for app, _ in pairs(M.thresholdMins) do
+for app, _ in pairs(config.thresholdMins) do
 	if u.appRunning(app) then M.idleApps[app] = now() end
 end
 
@@ -62,7 +68,7 @@ end
 ---Watch app (de)activation & update `idleApps`
 M.aw_appDeactivation = aw.new(function(appName, event)
 	-- GUARD ignore apps not included in configuration
-	if M.thresholdMins[appName] == nil then return end
+	if config.thresholdMins[appName] == nil then return end
 
 	if event == aw.deactivated then
 		M.idleApps[appName] = now()
@@ -73,15 +79,15 @@ end):start()
 
 ---Check apps regularly & quit if idle
 M.timer_autoQuitter = hs.timer
-	.doEvery(checkIntervalSecs, function()
+	.doEvery(config.checkIntervalSecs, function()
 		for app, lastActivation in pairs(M.idleApps) do
 			-- can't do this with guard clause, since lua has no `continue`
-			local appHasThreshold = M.thresholdMins[app] ~= nil
+			local appHasThreshold = config.thresholdMins[app] ~= nil
 			local appIsRunning = u.appRunning(app)
 
 			if appHasThreshold and appIsRunning then
 				local idleTimeSecs = now() - lastActivation
-				local thresholdSecs = M.thresholdMins[app] * 60
+				local thresholdSecs = config.thresholdMins[app] * 60
 				if idleTimeSecs > thresholdSecs then quit(app) end
 			end
 		end

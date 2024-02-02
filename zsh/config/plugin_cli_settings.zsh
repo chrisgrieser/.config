@@ -18,7 +18,7 @@ export EZA_STRICT=1
 export EZA_ICONS_AUTO=1
 [[ "$TERM_PROGRAM" == "WezTerm" ]] && export EZA_ICON_SPACING=2
 
-alias l='eza --all --long --time-style=relative --no-user --smart-group \
+alias l='eza --all --long --flags --time-style=relative --no-user --smart-group \
 	--total-size --no-quotes --git-ignore --sort=newest --hyperlink'
 
 #───────────────────────────────────────────────────────────────────────────────
