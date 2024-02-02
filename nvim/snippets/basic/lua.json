@@ -20,6 +20,10 @@
     ],
     "prefix": "continue"
   },
+  "count occurences in string": {
+    "body": "local count = select(2, ${1:str}:gsub(\"${2:find}\", \"\"))",
+    "prefix": "count occurences in string"
+  },
   "export module": {
     "body": [
       "local M = {}",

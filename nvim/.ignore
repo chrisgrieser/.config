@@ -4,3 +4,6 @@ after/**/log.vim
 
 # snippets files (already using nvim-scissors for that)
 snippets/**
+
+# skeletions rarely touched
+templates/**

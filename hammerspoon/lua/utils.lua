@@ -228,15 +228,16 @@ function M.quitApps(appNames)
 end
 
 function M.closeAllTheThings()
-	-- close fullscreen
+	-- close fullscreen wins
 	for _, win in pairs(hs.window.allWindows()) do
 		if win:isFullScreen() then win:setFullScreen(false) end
 	end
 
 	-- close finder wins
-	local finderWins = M.app("Finder") and M.app("Finder"):allWindows() or {}
-	for _, win in pairs(finderWins) do
-		win:close()
+	if hs.application("Finder") then
+		for _, win in pairs(hs.application("Finder"):allWindows()) do
+			win:close()
+		end
 	end
 
 	-- close browser tabs and various apps

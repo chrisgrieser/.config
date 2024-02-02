@@ -74,11 +74,7 @@ local function workLayout()
 	-- restart AltTab (FIX missing windows)
 	if app("AltTab") then
 		app("AltTab"):kill()
-		M.altTabRestart = hs.timer.waitUntil(
-			function() return app("AltTab") == nil end,
-			function() hs.application.open("AltTab") end,
-			0.1
-		)
+		u.runWithDelays(3, function () hs.application.open("AltTab") end)
 	end
 
 	-- finish
