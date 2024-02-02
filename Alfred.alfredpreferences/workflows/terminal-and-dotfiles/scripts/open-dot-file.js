@@ -40,7 +40,7 @@ function run() {
 		let emoji = "";
 		if (relPath.includes("hammerspoon")) emoji += " 🟡";
 		else if (relPath.includes("nvim")) emoji += " 🔳";
-		if (isDirty) emoji += "  ✴️";
+		if (isDirty) emoji += " Ⓜ️";
 
 		// type-icon
 		let type = "";

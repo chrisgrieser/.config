@@ -220,15 +220,6 @@ local function telescopeConfig()
 				mappings = { i = { ["<C-h>"] = toggleHiddenAndIgnore } },
 				follow = false,
 			},
-			oldfiles = {
-				tiebreak = prioritzeScriptFiles,
-				path_display = filenameFirst,
-				prompt_prefix = "󰋚 ",
-				previewer = false,
-				layout_config = {
-					horizontal = { anchor = "W", width = 0.5, height = 0.55 },
-				},
-			},
 			live_grep = {
 				prompt_prefix = " ",
 				disable_coordinates = true,
@@ -390,7 +381,6 @@ local function telescopeConfig()
 			lsp_workspace_symbols = { -- workspace symbols are not working correctly in lua
 				prompt_prefix = "󰒕 ",
 				fname_width = 12,
-				symbols = { "function", "class", "method" },
 			},
 			spell_suggest = {
 				initial_mode = "normal",
@@ -418,9 +408,11 @@ local function telescopeConfig()
 			frecency = {
 				db_safe_mode = false, -- also fixes recursion issue with dressing.nvim
 				db_root = vim.env.DATA_DIR .. "/vim-data",
-				ignore_patterns = {
-					".git/",
-				}
+				ignore_patterns = { "*.git/*", "term://*", "*/tmp/*" },
+				show_filter_column = false,
+
+				path_display = filenameFirst,
+				tiebreak = prioritzeScriptFiles,
 			},
 		},
 	}
@@ -457,25 +449,13 @@ return {
 			{ "<leader>gL", function() telescope("git_bcommits") end, desc = " Buffer Commits" },
 			{ "<leader>gb", function() telescope("git_branches") end, desc = " Branches" },
 			{ "zl", function() telescope("spell_suggest") end, desc = "󰓆 Spell Suggest" },
-			{
-				"gr",
-				function()
-					-- HACK add buffers to oldfiles
-					local listedBufs = vim.fn.getbufinfo { buflisted = 1 }
-					local bufPaths = vim.tbl_map(function(buf) return buf.name end, listedBufs)
-					vim.list_extend(vim.v.oldfiles, bufPaths)
-
-					telescope("oldfiles")
-				end,
-				desc = " Recent Files",
-			},
-			{
-				"go",
-				function()
-					require("telescope.builtin").find_files { prompt_title = "Find Files: " .. project() }
-				end,
-				desc = " Open File",
-			},
+			-- {
+			-- 	"go",
+			-- 	function()
+			-- 		require("telescope.builtin").find_files { prompt_title = "Find Files: " .. project() }
+			-- 	end,
+			-- 	desc = " Open File",
+			-- },
 			{
 				"gl",
 				function()
@@ -515,7 +495,7 @@ return {
 	{ -- Add imports
 		"piersolenski/telescope-import.nvim",
 		dependencies = "nvim-telescope/telescope.nvim",
-		external_dependencies = { "rg" },
+		external_dependencies = "rg",
 		keys = {
 			{ "<leader>ci", function() telescope("import") end, desc = "󰋺 Add Import" },
 		},
@@ -525,9 +505,10 @@ return {
 		"teocns/telescope-frecency.nvim",
 		config = function() require("telescope").load_extension("frecency") end,
 		dependencies = "nvim-telescope/telescope.nvim",
-		external_dependencies = { "rg", "fd" },
+		external_dependencies = "fd",
 		keys = {
-			{ "gO", function() telescope("frecency") end, desc = " Frecency" },
+			{ "gr", function() telescope("frecency") end, desc = " Frecent Files" },
+			{ "go", function() vim.cmd.Telescope() end, desc = " Open File" },
 		},
 	},
 }
