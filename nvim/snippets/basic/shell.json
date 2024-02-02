@@ -236,6 +236,10 @@
     "body": "\\e[1;31m",
     "prefix": "red"
   },
+  "redirect to stderr": {
+    "body": ">&2",
+    "prefix": "redirect to stderr"
+  },
   "reset color": {
     "body": "\\e[0m",
     "prefix": "reset color"
@@ -274,9 +278,9 @@
     "body": "${${1:var}:${2:start}:${3:end}}",
     "prefix": "slice (expansion)"
   },
-  "stderr (pipe)": {
+  "stderr (merge with stdout)": {
     "body": "2>&1",
-    "prefix": "stderr (pipe)"
+    "prefix": "stderr (merge with stdout)"
   },
   "stdin": {
     "body": "stdin=$(< /dev/stdin)",
