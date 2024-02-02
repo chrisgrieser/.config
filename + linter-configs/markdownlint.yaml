@@ -5,17 +5,12 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 # MODIFIED SETTINGS
-blanks-around-headings:
-  lines_below: 0 # space waster
+blanks-around-headings: { lines_below: 0 } # rule of proximity
 ul-style: { style: sublist }
 
-# not autofixable
-ol-prefix: { style: ordered } 
-line-length:
-  tables: false
-  code_blocks: false
-no-inline-html:
-  allowed_elements: [img, details, summary, kbd, a, br]
+ol-prefix: { style: ordered }
+line-length: { tables: false, code_blocks: false }
+no-inline-html: { allowed_elements: [img , details , summary , kbd , a , br] }
 
 #─────────────────────────────────────────────────────────────────────────────
 # DISABLED

@@ -109,20 +109,20 @@ local function filenameFirst(_, path)
 	return string.format("%s\t\t%s", tail, parentDisplay) -- parent colored via autocmd above
 end
 
--- prioritize certain filetypes
+-- prioritize by 1. filetypes, 2. depth
 local function prioritzeScriptFiles(a, b, _)
-	local priorityExt = { "lua", "js", "ts", "py" }
-	local a_ext = a.ordinal:match("%w+$")
-	local b_ext = b.ordinal:match("%w+$")
+	local priorityExt = { "lua", "js", "ts", "py" } -- CONFIG
+	local a_path, b_path = a.ordinal, b.ordinal
+
+	local a_ext = a_path:match("%w+$")
+	local b_ext = b_path:match("%w+$")
 	local a_isPrioExt = vim.tbl_contains(priorityExt, a_ext)
 	local b_isPrioExt = vim.tbl_contains(priorityExt, b_ext)
-	local a_depth = a.ordinal:match("^.*/") or 0
-	local b_depth = b.ordinal:match("^.*/") or 0
-
-
 	if a_isPrioExt and not b_isPrioExt then return true end
-	if a_isPrioExt and not b_isPrioExt then return true end
-	return #a.ordinal < #b.ordinal
+
+	local a_depth = select(2, a_path:gsub("/", ""))
+	local b_depth = select(2, b_path:gsub("/", ""))
+	return a_depth < b_depth
 end
 
 local function project() return vim.fs.basename(vim.loop.cwd() or "") end
