@@ -20,6 +20,7 @@ local config = {
 		Hammerspoon = 5, -- only console window
 		BusyCal = 5,
 		Mimestream = 5,
+		GoodTask = 10,
 		Slack = 25,
 		Highlights = 90,
 		Obsidian = 120,
