@@ -28,9 +28,11 @@ M.pathw_fileHub = pathw(env.fileHub, function(paths, _)
 		local fileName = filep:gsub(".*/", "")
 		local ext = fileName:gsub(".*%.", "")
 
-		-- ALFREDWORKFLOWS, ICAL, & BIB
+		-- auto-remove ALFREDWORKFLOWS & ICAL
 		if (ext == "alfredworkflow" or ext == "ics") and fileIsDownloaded(filep) then
 			u.runWithDelays(3, function() os.remove(filep) end)
+
+		-- auto-add bibtex entries to library
 		elseif ext == "bib" and fileIsDownloaded(filep) then
 			local bibEntry = u.readFile(filep)
 			if not bibEntry then return end
@@ -38,10 +40,6 @@ M.pathw_fileHub = pathw(env.fileHub, function(paths, _)
 			u.writeToFile(libraryPath, bibEntry, true)
 			hs.open(libraryPath)
 			os.remove(filep)
-
-		-- STATS UPDATE
-		elseif fileName == "Stats.dmg" then
-			u.runWithDelays(6, function() os.remove(filep) end)
 
 		-- VARIOUS BROWSER SETTINGS
 		elseif fileName == "violentmonkey" then

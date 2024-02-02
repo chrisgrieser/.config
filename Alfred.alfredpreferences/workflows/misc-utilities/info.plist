@@ -1026,7 +1026,7 @@ fi</string>
 		<key>0AF7121A-89F5-460A-97D1-1061C6819D85</key>
 		<dict>
 			<key>xpos</key>
-			<real>945</real>
+			<real>1165</real>
 			<key>ypos</key>
 			<real>295</real>
 		</dict>
@@ -1035,7 +1035,7 @@ fi</string>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>540</real>
+			<real>760</real>
 			<key>ypos</key>
 			<real>715</real>
 		</dict>
@@ -1044,7 +1044,7 @@ fi</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>300</real>
+			<real>220</real>
 			<key>ypos</key>
 			<real>935</real>
 		</dict>
@@ -1055,19 +1055,19 @@ fi</string>
 			<key>xpos</key>
 			<real>170</real>
 			<key>ypos</key>
-			<real>830</real>
+			<real>825</real>
 		</dict>
 		<key>1ED11A83-B032-49DD-A27E-82281010DEC8</key>
 		<dict>
 			<key>xpos</key>
-			<real>365</real>
+			<real>585</real>
 			<key>ypos</key>
 			<real>130</real>
 		</dict>
 		<key>25653873-BA08-495C-9634-85EDC4DE03F5</key>
 		<dict>
 			<key>xpos</key>
-			<real>615</real>
+			<real>835</real>
 			<key>ypos</key>
 			<real>505</real>
 		</dict>
@@ -1085,7 +1085,7 @@ fi</string>
 		<key>3D0B8081-9BD2-40C0-9521-EDF82FFE8C23</key>
 		<dict>
 			<key>xpos</key>
-			<real>355</real>
+			<real>585</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -1094,14 +1094,14 @@ fi</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>445</real>
+			<real>365</real>
 			<key>ypos</key>
 			<real>965</real>
 		</dict>
 		<key>429CEC89-9C82-432F-900F-A22DDDF7964A</key>
 		<dict>
 			<key>xpos</key>
-			<real>560</real>
+			<real>780</real>
 			<key>ypos</key>
 			<real>130</real>
 		</dict>
@@ -1128,7 +1128,7 @@ fi</string>
 			<key>note</key>
 			<string>Close Notification</string>
 			<key>xpos</key>
-			<real>370</real>
+			<real>590</real>
 			<key>ypos</key>
 			<real>505</real>
 		</dict>
@@ -1137,7 +1137,7 @@ fi</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>365</real>
+			<real>585</real>
 			<key>ypos</key>
 			<real>265</real>
 		</dict>
@@ -1182,7 +1182,7 @@ fi</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>540</real>
+			<real>760</real>
 			<key>ypos</key>
 			<real>265</real>
 		</dict>
@@ -1193,7 +1193,7 @@ fi</string>
 			<key>note</key>
 			<string>Add Spelling correction to espanso</string>
 			<key>xpos</key>
-			<real>370</real>
+			<real>590</real>
 			<key>ypos</key>
 			<real>640</real>
 		</dict>
@@ -1220,7 +1220,7 @@ fi</string>
 		<key>B2BCC7F4-6732-493D-9789-2719BB7752D9</key>
 		<dict>
 			<key>xpos</key>
-			<real>805</real>
+			<real>1025</real>
 			<key>ypos</key>
 			<real>295</real>
 		</dict>
@@ -1229,7 +1229,7 @@ fi</string>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>620</real>
+			<real>840</real>
 			<key>ypos</key>
 			<real>640</real>
 		</dict>
@@ -1238,7 +1238,7 @@ fi</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>625</real>
+			<real>845</real>
 			<key>ypos</key>
 			<real>790</real>
 		</dict>
@@ -1254,7 +1254,7 @@ fi</string>
 		<key>E1F1F193-4BF3-42D0-A30E-784AC487FDA7</key>
 		<dict>
 			<key>xpos</key>
-			<real>720</real>
+			<real>940</real>
 			<key>ypos</key>
 			<real>130</real>
 		</dict>
@@ -1263,7 +1263,7 @@ fi</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>375</real>
+			<real>595</real>
 			<key>ypos</key>
 			<real>790</real>
 		</dict>
@@ -1283,7 +1283,7 @@ fi</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>365</real>
+			<real>585</real>
 			<key>ypos</key>
 			<real>390</real>
 		</dict>
@@ -1292,7 +1292,7 @@ fi</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>520</real>
+			<real>440</real>
 			<key>ypos</key>
 			<real>935</real>
 		</dict>

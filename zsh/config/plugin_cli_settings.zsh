@@ -11,7 +11,7 @@ export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 # `.*=…` affects dotfiles
 grey="38;5;247"
 file_colors=".*=$grey:LICENSE*=$grey:*lock*=$grey"
-export LS_COLORS="di=1;34:ln=3;35:or=7;31:ex=39:$file_colors"
+export LS_COLORS="di=1;34:ln=3;35:or=7;31:$file_colors"
 
 export EZA_COLORS="gm=1;38;5;208" # `modified` with same orange as in starship
 export EZA_STRICT=1

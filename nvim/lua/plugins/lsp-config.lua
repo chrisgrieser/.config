@@ -98,6 +98,7 @@ serverConfigs.lua_ls = {
 				callSnippet = "Replace",
 				keywordSnippet = "Replace",
 				showWord = "Disable", -- don't suggest common words as fallback
+				workspaceWord = false, -- already done by cmp-buffer
 				postfix = ".", -- useful for `table.insert` and the like
 			},
 			diagnostics = {
@@ -109,8 +110,12 @@ serverConfigs.lua_ls = {
 				setType = true,
 				arrayIndex = "Disable",
 			},
-			workspace = { checkThirdParty = "Disable" }, -- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
-			telemetry = { enable = false },
+			workspace = {
+				checkThirdParty = "Disable", -- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
+				-- increase loading of workspace
+				preloadFileSize = 1500,
+				maxPreload = 6000,
+			},
 		},
 	},
 }
