@@ -112,11 +112,16 @@ end
 -- prioritize certain filetypes
 local function prioritzeScriptFiles(a, b, _)
 	local priorityExt = { "lua", "js", "ts", "py" }
-	a.ext = a.ordinal:match("%w+$")
-	b.ext = b.ordinal:match("%w+$")
-	a.hasPrio = vim.tbl_contains(priorityExt, a.ext)
-	b.hasPrio = vim.tbl_contains(priorityExt, b.ext)
-	if a.hasPrio and not b.hasPrio then return true end
+	local a_ext = a.ordinal:match("%w+$")
+	local b_ext = b.ordinal:match("%w+$")
+	local a_isPrioExt = vim.tbl_contains(priorityExt, a_ext)
+	local b_isPrioExt = vim.tbl_contains(priorityExt, b_ext)
+	local a_depth = a.ordinal:match("^.*/") or 0
+	local b_depth = b.ordinal:match("^.*/") or 0
+
+
+	if a_isPrioExt and not b_isPrioExt then return true end
+	if a_isPrioExt and not b_isPrioExt then return true end
 	return #a.ordinal < #b.ordinal
 end
 
