@@ -158,7 +158,7 @@ local function telescopeConfig()
 	require("telescope").setup {
 		defaults = {
 			path_display = { "tail" },
-			history = { path = vim.env.DATA_DIR .. "/vim-data/telescope_history" },
+			history = { path = vim.g.syncedData .. "/telescope_history" },
 			selection_caret = "󰜋 ",
 			multi_icon = "󰒆 ",
 			results_title = false,
@@ -407,12 +407,16 @@ local function telescopeConfig()
 			import = { insert_at_top = false },
 			frecency = {
 				db_safe_mode = false, -- also fixes recursion issue with dressing.nvim
-				db_root = vim.env.DATA_DIR .. "/vim-data",
+				db_root = vim.g.syncedData,
 				ignore_patterns = { "*.git/*", "term://*", "*/tmp/*" },
-				show_filter_column = false,
 
 				path_display = filenameFirst,
 				tiebreak = prioritzeScriptFiles,
+				prompt_prefix = "󰋚 ",
+				previewer = false,
+				layout_config = {
+					horizontal = { anchor = "W", width = 0.5, height = 0.55 },
+				},
 			},
 		},
 	}
@@ -449,13 +453,13 @@ return {
 			{ "<leader>gL", function() telescope("git_bcommits") end, desc = " Buffer Commits" },
 			{ "<leader>gb", function() telescope("git_branches") end, desc = " Branches" },
 			{ "zl", function() telescope("spell_suggest") end, desc = "󰓆 Spell Suggest" },
-			-- {
-			-- 	"go",
-			-- 	function()
-			-- 		require("telescope.builtin").find_files { prompt_title = "Find Files: " .. project() }
-			-- 	end,
-			-- 	desc = " Open File",
-			-- },
+			{
+				"go",
+				function()
+					require("telescope.builtin").find_files { prompt_title = "Find Files: " .. project() }
+				end,
+				desc = " Open File",
+			},
 			{
 				"gl",
 				function()
@@ -501,14 +505,14 @@ return {
 		},
 		config = function() require("telescope").load_extension("import") end,
 	},
-	{
+	{ -- better recent files
+		-- using fork PENDING https://github.com/nvim-telescope/telescope-frecency.nvim/issues/48
 		"teocns/telescope-frecency.nvim",
 		config = function() require("telescope").load_extension("frecency") end,
 		dependencies = "nvim-telescope/telescope.nvim",
 		external_dependencies = "fd",
 		keys = {
 			{ "gr", function() telescope("frecency") end, desc = " Frecent Files" },
-			{ "go", function() vim.cmd.Telescope() end, desc = " Open File" },
 		},
 	},
 }

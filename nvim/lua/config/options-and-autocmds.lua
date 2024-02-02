@@ -22,9 +22,9 @@ vim.filetype.add {
 
 -- move to custom location where they are synced independently from the dotfiles repo
 
-opt.undodir = vim.env.DATA_DIR .. "/vim-data/undo"
-opt.viewdir = vim.env.DATA_DIR .. "/vim-data/view"
-opt.shadafile = vim.env.DATA_DIR .. "/vim-data/main.shada"
+opt.undodir = vim.g.syncedData .. "/undo"
+opt.viewdir = vim.g.syncedData .. "/view"
+opt.shadafile = vim.g.syncedData .. "/main.shada"
 opt.swapfile = false -- doesn't help and only creates useless files and notifications
 
 -- automatically cleanup dirs to prevent bloating

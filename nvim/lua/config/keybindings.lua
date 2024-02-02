@@ -47,9 +47,6 @@ keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
 keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
 keymap({ "n", "v", "i" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 Signature" })
 
--- needs remapping since `gf` is used for LSP-references
-keymap("n", "gP", "gf", { desc = " Goto Path under cursor" })
-
 -- quickfix
 keymap("n", "gq", vim.cmd.cnext, { desc = " Next Quickfix" })
 keymap("n", "gQ", vim.cmd.cprevious, { desc = " Prev Quickfix" })
