@@ -150,16 +150,6 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>34B6D4A2-9F97-4DD8-842B-82C7E82125B0</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 		<key>A79508C6-9D50-47FC-8E75-B8142611461C</key>
 		<array>
@@ -514,35 +504,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>largetypetext</key>
-				<string>{var:response}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>34B6D4A2-9F97-4DD8-842B-82C7E82125B0</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -618,13 +579,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>180</real>
 			<key>ypos</key>
 			<real>195</real>
-		</dict>
-		<key>34B6D4A2-9F97-4DD8-842B-82C7E82125B0</key>
-		<dict>
-			<key>xpos</key>
-			<real>890</real>
-			<key>ypos</key>
-			<real>510</real>
 		</dict>
 		<key>3D656B72-508C-472A-89A5-17C81D76BE04</key>
 		<dict>
@@ -905,7 +859,7 @@ DOUBLE CLICK TO EDIT</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.2</string>
+	<string>1.0.4</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
