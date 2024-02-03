@@ -34,12 +34,6 @@ M.timer_clock = hs.timer
 	end)
 	:start()
 
-M.timer_teethBrush = hs.timer
-	.doAt("23:00", "01d", function()
-		if u.screenIsUnlocked() then u.notify("🪥🦷 Brush Teeth") end
-	end)
-	:start()
-
 --------------------------------------------------------------------------------
 -- BACKUP / MAINTENANCE
 

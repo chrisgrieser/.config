@@ -70,7 +70,7 @@
   "telescope.nvim": { "branch": "master", "commit": "7b5c5f56a21e82fdcfe5b250278b8dfc4b1cbab4" },
   "tokyonight.nvim": { "branch": "main", "commit": "610179f7f12db3d08540b6cc61434db2eaecbcff" },
   "treesj": { "branch": "main", "commit": "14808da3cddd62fc86ede53a5ea1fd1635897e75" },
-  "undotree": { "branch": "master", "commit": "a1758ba9990b7189f601a3a5acdfc8ca3907a700" },
+  "undotree": { "branch": "master", "commit": "7df3be7a261ea31b528aa442b494fcb458f3d968" },
   "vim-matchup": { "branch": "master", "commit": "7f81ae12542b2a35819f0324895df9bd8626c8ba" },
   "vim-visual-multi": { "branch": "master", "commit": "e67f7fa011c98fc5426352d3bb06362a0f70af3c" },
   "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" }

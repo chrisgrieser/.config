@@ -60,7 +60,12 @@ return {
 			},
 			{
 				"dq",
-				"mzd<cmd>TSTextobjectSelect @comment.outer<CR>`zze",
+				function()
+					local cursor = vim.api.nvim_win_get_cursor(0)
+					vim.cmd.TSTextobjectSelect("@comment.outer")
+					u.normal("d")
+					vim.api.nvim_win_set_cursor(0, cursor)
+				end,
 				desc = " Sticky Delete Comment",
 			},
 			{
