@@ -120,8 +120,6 @@ return {
 		"uga-rosa/ccc.nvim",
 		keys = {
 			{ "g#", vim.cmd.CccPick, desc = " Color Picker" },
-			-- INFO this textobj is not forward-seeking
-			{ "#", "<Plug>(ccc-select-color)", mode = "o", desc = "󱡔 color textobj" },
 		},
 		ft = { "css", "scss", "sh", "lua" },
 		config = function()
@@ -189,7 +187,7 @@ return {
 				mappings = { n = { ["q"] = "Close" } },
 			},
 			select = {
-				backend = { "builtin" },
+				backend = { "telescope", "builtin" },
 				trim_prompt = true,
 				builtin = {
 					mappings = { ["q"] = "Close" },
@@ -206,20 +204,13 @@ return {
 						horizontal = { width = { 0.8, max = 75 }, height = 0.55 },
 					},
 				},
+				-- for simple selections, use builtin selector instead of telescope
 				get_config = function(opts)
-					local kind = opts.kind
-					if not kind then return end
-
-					-- code actions: show at cursor
-					if kind == "codeaction" then return { builtin = { relative = "cursor" } } end
-
-					-- complex selectors: use telescope
-					if
-						kind == "mason.ui.language-filter"
-						or kind:find("^tinygit")
-						or kind == "bibtex.citekey-search"
-					then
-						return { backend = "telescope" }
+					if opts.kind == "codeaction" or opts.kind == "make-selector" then
+						return {
+							backend = { "builtin" },
+							builtin = { relative = "cursor" },
+						}
 					end
 				end,
 			},
