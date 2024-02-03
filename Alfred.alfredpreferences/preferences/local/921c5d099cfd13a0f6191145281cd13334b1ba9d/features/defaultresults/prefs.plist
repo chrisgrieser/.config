@@ -6,7 +6,12 @@
 	<array>
 		<string>~/Applications</string>
 		<string>~/Downloads</string>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs</string>
+		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Academia</string>
+		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dokumente</string>
+		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder</string>
+		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Downloads</string>
+		<string>~/Library/Mobile Documents/com~apple~CloudDocs/File Hub</string>
+		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Images/Selbstbilder - Eigene Bilder - Avatare</string>
 	</array>
 </dict>
 </plist>

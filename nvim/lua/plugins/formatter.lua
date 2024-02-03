@@ -47,7 +47,7 @@ local conformOpts = {
 	formatters_by_ft = ftToFormatter,
 	formatters = {
 		markdownlint = {
-			prepend_args = { "--config=" .. vim.g.linterConfigFolder .. "/markdownlint.yaml" },
+			prepend_args = { "--config=" .. vim.g.linterConfigs .. "/markdownlint.yaml" },
 		},
 
 		["bibtex-tidy"] = {
@@ -57,9 +57,9 @@ local conformOpts = {
 				-- *not* using `--no-escape` https://github.com/FlamingTempura/bibtex-tidy/issues/415
 				-- `--no-encode-urls`: https://github.com/FlamingTempura/bibtex-tidy/issues/422
 				-- `--enclosing-braces` https://github.com/FlamingTempura/bibtex-tidy/issues/423
-				"--tab", "--curly", "--no-align", "--no-wrap", "--drop-all-caps", 
-				"--numeric", "--trailing-commas", "--no-escape", 
-				"--duplicates", "--sort-fields", "--remove-empty-fields", 
+				"--tab", "--curly", "--no-align", "--no-wrap", "--drop-all-caps",
+				"--numeric", "--trailing-commas", "--no-escape",
+				"--duplicates", "--sort-fields", "--remove-empty-fields",
 				"--omit=month,issn,abstract",
 			},
 		},
