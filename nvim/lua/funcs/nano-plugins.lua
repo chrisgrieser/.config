@@ -183,7 +183,10 @@ function M.selectMake()
 		if recipe then table.insert(recipes, recipe) end
 	end
 
-	vim.ui.select(recipes, { prompt = " make" }, function(selection)
+	vim.ui.select(recipes, {
+		prompt = " make",
+		kind = "make-selector",
+	}, function(selection)
 		if not selection then return end
 		vim.cmd("silent! update")
 		vim.cmd.lmake(selection)
