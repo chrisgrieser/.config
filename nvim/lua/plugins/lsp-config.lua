@@ -398,6 +398,7 @@ serverConfigs.yamlls = {
 
 return {
 	"neovim/nvim-lspconfig",
+	commit = "716dbc0",
 	lazy = false,
 	mason_dependencies = vim.list_extend(efmDependencies, vim.tbl_values(lspToMasonMap)),
 	dependencies = {
