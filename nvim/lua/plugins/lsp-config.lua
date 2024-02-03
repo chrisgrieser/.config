@@ -110,12 +110,8 @@ serverConfigs.lua_ls = {
 				setType = true,
 				arrayIndex = "Disable",
 			},
-			workspace = {
-				checkThirdParty = "Disable", -- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
-				-- increase loading of workspace
-				preloadFileSize = 1500,
-				maxPreload = 6000,
-			},
+			-- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
+			workspace = { checkThirdParty = "Disable" },
 		},
 	},
 }
@@ -404,8 +400,8 @@ return {
 	"neovim/nvim-lspconfig",
 	lazy = false,
 	mason_dependencies = vim.list_extend(efmDependencies, vim.tbl_values(lspToMasonMap)),
-	dependencies = { -- loading as dependency ensures it's loaded before lua_ls
-		"folke/neodev.nvim",
+	dependencies = {
+		"folke/neodev.nvim", -- loading as dependency ensures it's loaded before lua_ls
 		opts = { library = { plugins = false } }, -- too slow with all my plugins
 	},
 	config = function()

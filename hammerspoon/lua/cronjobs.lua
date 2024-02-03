@@ -23,17 +23,6 @@ M.caff_projectorScreensaver = c.new(function(event)
 	end
 end):start()
 
--- on Mondays shortly before 10:00, open #fg-organisation Slack Channel
-M.timer_JourFixe = hs.timer
-	.doAt("09:59", "01d", function()
-		if not (os.date("%a:%H:%M") == "Mon:09:59" and u.screenIsUnlocked()) then return end
-
-		hs.alert("Jour Fixe")
-		local fgOrganisationChannel = "slack://channel?team=T010A5PEMBQ&id=CV95T641Y"
-		hs.urlevent.openURL(fgOrganisationChannel)
-	end)
-	:start()
-
 -- notify every full hour
 M.timer_clock = hs.timer
 	.doEvery(60, function()
@@ -42,6 +31,12 @@ M.timer_clock = hs.timer
 			local hour = tostring(os.date("%H:%M"))
 			hs.alert(hour, 2)
 		end
+	end)
+	:start()
+
+M.timer_teethbrush = hs.timer
+	.doAt("23:00", "01d", function()
+		if u.screenIsUnlocked() then u.notify("🪥🦷 Brush Teeth") end
 	end)
 	:start()
 
