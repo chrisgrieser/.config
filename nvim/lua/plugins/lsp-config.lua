@@ -78,7 +78,7 @@ serverConfigs.bashls = {
 -- HACK use efm to use shellcheck with zsh files
 -- EFM: Markdown & Shell
 serverConfigs.efm = {
-	cmd = { "efm-langserver", "-c", vim.g.linterConfigFolder .. "/efm.yaml" },
+	cmd = { "efm-langserver", "-c", vim.g.linterConfigs .. "/efm.yaml" },
 	filetypes = { "sh", "markdown" }, -- limit to filestypes needed
 }
 
@@ -291,7 +291,7 @@ serverConfigs.biome = {
 
 -- since reading external file with the method described in docs does not work
 local function getDictWords()
-	local dictfile = vim.g.linterConfigFolder .. "/spellfile-vim-ltex.add"
+	local dictfile = vim.g.linterConfigs .. "/spellfile-vim-ltex.add"
 	local fileDoesNotExist = vim.loop.fs_stat(dictfile) == nil
 	if fileDoesNotExist then return {} end
 	local words = {}
@@ -365,7 +365,7 @@ serverConfigs.typos_lsp = {
 -- DOCS https://vale.sh/docs/topics/config#search-process
 serverConfigs.vale_ls = {
 	init_options = {
-		configPath = vim.g.linterConfigFolder .. "/vale/vale.ini",
+		configPath = vim.g.linterConfigs .. "/vale/vale.ini",
 		installVale = true,
 		syncOnStartup = false,
 	},
@@ -374,7 +374,7 @@ serverConfigs.vale_ls = {
 	root_dir = function() return os.getenv("HOME") end,
 
 	-- FIX https://github.com/errata-ai/vale-ls/issues/4
-	on_attach = function() vim.env.VALE_CONFIG_PATH = vim.g.linterConfigFolder .. "/vale/vale.ini" end,
+	on_attach = function() vim.env.VALE_CONFIG_PATH = vim.g.linterConfigs .. "/vale/vale.ini" end,
 }
 
 --------------------------------------------------------------------------------
