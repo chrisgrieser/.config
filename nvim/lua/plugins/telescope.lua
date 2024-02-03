@@ -110,7 +110,7 @@ local function filenameFirst(_, path)
 end
 
 -- prioritize by 1. filetypes, 2. depth
-local function prioritzeScriptFiles(a, b, _)
+local function tiebreaker(a, b, _)
 	local priorityExt = { "lua", "js", "ts", "py" } -- CONFIG
 	local a_path, b_path = a.ordinal, b.ordinal
 
@@ -210,7 +210,7 @@ local function telescopeConfig()
 				-- https://github.com/natecraddock/telescope-zf-native.nvim/issues/12
 				-- https://github.com/nvim-telescope/telescope.nvim/issues/2905
 				default_text = " ",
-				tiebreak = prioritzeScriptFiles,
+				tiebreak = tiebreaker,
 
 				path_display = filenameFirst,
 				prompt_prefix = "󰝰 ",
@@ -220,6 +220,15 @@ local function telescopeConfig()
 				mappings = { i = { ["<C-h>"] = toggleHiddenAndIgnore } },
 				follow = false,
 			},
+			oldfiles = {
+				tiebreak = tiebreaker,
+				path_display = filenameFirst,
+				prompt_prefix = "󰋚 ",
+				previewer = false,
+				layout_config = {
+					horizontal = { anchor = "W", width = 0.5, height = 0.55 },
+				},
+			},
 			live_grep = {
 				prompt_prefix = " ",
 				disable_coordinates = true,
@@ -227,8 +236,8 @@ local function telescopeConfig()
 			},
 			git_status = {
 				prompt_prefix = "󰊢 ",
-			-- stylua: ignore
-			git_icons = { added = "A", changed = "M", copied = "C", deleted = "D", renamed = "R", unmerged = "U", untracked = "?" },
+				-- stylua: ignore
+				git_icons = { added = "A", changed = "M", copied = "C", deleted = "D", renamed = "R", unmerged = "U", untracked = "?" },
 				initial_mode = "normal",
 				show_untracked = true,
 				mappings = {
@@ -411,7 +420,7 @@ local function telescopeConfig()
 				ignore_patterns = { "*.git/*", "term://*", "*/tmp/*" },
 
 				path_display = filenameFirst,
-				tiebreak = prioritzeScriptFiles,
+				tiebreak = tiebreaker,
 				prompt_title = "Frecent Files",
 				prompt_prefix = "󰋚 ",
 				previewer = false,
@@ -462,6 +471,18 @@ return {
 				desc = " Open File",
 			},
 			{
+				"gr",
+				function()
+					-- HACK add buffers to oldfiles
+					local listedBufs = vim.fn.getbufinfo { buflisted = 1 }
+					local bufPaths = vim.tbl_map(function(buf) return buf.name end, listedBufs)
+					vim.list_extend(vim.v.oldfiles, bufPaths)
+
+					telescope("oldfiles")
+				end,
+				desc = " Recent Files",
+			},
+			{
 				"gl",
 				function()
 					require("telescope.builtin").live_grep { prompt_title = "Live Grep: " .. project() }
@@ -505,15 +526,5 @@ return {
 			{ "<leader>ci", function() telescope("import") end, desc = "󰋺 Add Import" },
 		},
 		config = function() require("telescope").load_extension("import") end,
-	},
-	{ -- better recent files
-		-- using fork PENDING https://github.com/nvim-telescope/telescope-frecency.nvim/issues/48
-		"teocns/telescope-frecency.nvim",
-		dependencies = "nvim-telescope/telescope.nvim",
-		external_dependencies = "fd",
-		keys = {
-			{ "gr", function() telescope("frecency") end, desc = " Frecent Files" },
-		},
-		config = function() require("telescope").load_extension("frecency") end,
 	},
 }

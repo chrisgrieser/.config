@@ -64,7 +64,6 @@
   "scrollEOF.nvim": { "branch": "master", "commit": "75a471d8dab322947a28a7a810ab6ffc0dd051cf" },
   "sibling-swap.nvim": { "branch": "main", "commit": "a9a0fbb734a8f767cd7cf4c99a78cb27aebe2f88" },
   "symbol-usage.nvim": { "branch": "main", "commit": "d9578780b760ca22cbe7dd618cc880b155b0e84a" },
-  "telescope-frecency.nvim": { "branch": "master", "commit": "db3e8db3129ea7c9f1b61e98216d6815289f4062" },
   "telescope-import.nvim": { "branch": "main", "commit": "08e31708451b43d1ef766d370d5ef17e9f0c24ae" },
   "telescope-symbols.nvim": { "branch": "master", "commit": "a6d0127a53d39b9fc2af75bd169d288166118aec" },
   "telescope-zf-native.nvim": { "branch": "master", "commit": "beb34b6c48154ec117930180f257a5592606d48f" },
