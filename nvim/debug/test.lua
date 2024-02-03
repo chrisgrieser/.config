@@ -1,5 +1,9 @@
 
 
-local path = "/Users/chrisgrieser/.config/nvim/debug/test.lua"
-local _, count = path:gsub("z", "")
-vim.notify("👽 count: " .. tostring(count))
+local subfoldersOfCwd = vim.fs.find(
+	function(name, path) return not (vim.startswith(name, ".") or path:find("%.app/")) end,
+	{ type = "directory", limit = math.huge }
+)
+
+vim.notify("👽 subfoldersOfCwd: " .. vim.inspect(subfoldersOfCwd))
+
