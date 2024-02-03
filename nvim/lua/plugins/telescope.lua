@@ -84,7 +84,7 @@ local function toggleHiddenAndIgnore(prompt_bufnr)
 		no_ignore = ignoreHidden,
 		cwd = cwd,
 		-- prevent these becoming visible through `--no-ignore`
-		file_ignore_patterns = { "node_modules", ".venv", "%.DS_Store$", "%.git/" },
+		file_ignore_patterns = { "node_modules", ".venv", "%.DS_Store$", "%.git/", "%.app/" },
 	}
 end
 
@@ -217,7 +217,16 @@ local function telescopeConfig()
 				-- FIX using the default fd command from telescope is somewhat buggy,
 				-- e.g. not respecting `~/.config/fd/ignore`
 				find_command = { "fd", "--type=file", "--type=symlink" },
-				mappings = { i = { ["<C-h>"] = toggleHiddenAndIgnore } },
+				mappings = {
+					i = {
+						["<C-h>"] = toggleHiddenAndIgnore,
+						-- automatically toggle hidden files when entering `.`
+						["."] = function(prompt_bufnr)
+							vim.api.nvim_feedkeys(".", "n", true)
+							toggleHiddenAndIgnore(prompt_bufnr)
+						end,
+					},
+				},
 				follow = false,
 			},
 			oldfiles = {
@@ -414,20 +423,6 @@ local function telescopeConfig()
 		extensions = {
 			-- insert at cursor instead, relevant for lua
 			import = { insert_at_top = false },
-			frecency = {
-				db_safe_mode = false, -- also fixes recursion issue with dressing.nvim
-				db_root = vim.g.syncedData,
-				ignore_patterns = { "*.git/*", "term://*", "*/tmp/*" },
-
-				path_display = filenameFirst,
-				tiebreak = tiebreaker,
-				prompt_title = "Frecent Files",
-				prompt_prefix = "󰋚 ",
-				previewer = false,
-				layout_config = {
-					horizontal = { anchor = "W", width = 0.5, height = 0.55 },
-				},
-			},
 		},
 	}
 end
