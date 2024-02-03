@@ -22,12 +22,11 @@ vim.g.syncedData = vim.env.DATA_DIR .. "/vim-data/"
 
 ---Try to require the module, and do not error out when one of them cannot be
 ---loaded, but do notify if there was an error.
----@param module string module to load
+---@param module string
 local function safeRequire(module)
 	local success, errMsg = pcall(require, module)
 	if not success then
 		local msg = ("Error loading %s\n%s"):format(module, errMsg)
-		-- defer so notification plugins are loaded before
 		vim.defer_fn(function() vim.notify(msg, vim.log.levels.ERROR) end, 1000)
 	end
 end
@@ -41,8 +40,9 @@ safeRequire("config.keybindings")
 safeRequire("config.leader-keybindings")
 
 safeRequire("config.lsp-and-diagnostics")
-safeRequire("config.spellfixes")
 
---------------------------------------------------------------------------------
-
-if vim.fn.has("nvim-0.10") == 1 then vim.notify("TODO version 0.10.md") end
+-- lazy-load spellfixes
+vim.api.nvim_create_autocmd("InsertEnter", {
+	once = true,
+	callback = function() safeRequire("config.spellfixes") end,
+})
