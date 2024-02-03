@@ -35,10 +35,8 @@ safeRequire("config.lazy")
 safeRequire("config.neovide-gui-settings")
 safeRequire("config.theme-customization")
 safeRequire("config.options-and-autocmds")
-
 safeRequire("config.keybindings")
 safeRequire("config.leader-keybindings")
-
 safeRequire("config.lsp-and-diagnostics")
 
 -- lazy-load spellfixes
