@@ -204,13 +204,12 @@ return {
 						horizontal = { width = { 0.8, max = 75 }, height = 0.55 },
 					},
 				},
-				-- for simple selections, use builtin selector instead of telescope
 				get_config = function(opts)
-					if opts.kind == "codeaction" or opts.kind == "make-selector" then
-						return {
-							backend = { "builtin" },
-							builtin = { relative = "cursor" },
-						}
+					-- for simple selections, use builtin selector instead of telescope
+					if opts.kind == "codeaction" then
+						return { backend = { "builtin" }, builtin = { relative = "cursor" } }
+					elseif opts.kind == "make-selector" then
+						return { backend = { "builtin" } }
 					end
 				end,
 			},
