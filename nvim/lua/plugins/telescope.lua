@@ -89,7 +89,7 @@ local function toggleHiddenAndIgnore(prompt_bufnr)
 end
 
 --------------------------------------------------------------------------------
--- Better listing of files https://github.com/nvim-telescope/telescope.nvim/issues/2014
+-- Nicer Display of file paths https://github.com/nvim-telescope/telescope.nvim/issues/2014
 
 -- color parent as comment
 vim.api.nvim_create_autocmd("FileType", {
@@ -109,19 +109,11 @@ local function filenameFirst(_, path)
 	return string.format("%s\t\t%s", tail, parentDisplay) -- parent colored via autocmd above
 end
 
--- prioritize by 1. filetypes, 2. depth
-local function tiebreaker(a, b, _)
-	local priorityExt = { "lua", "js", "ts", "py" } -- CONFIG
-	local a_path, b_path = a.ordinal, b.ordinal
+--------------------------------------------------------------------------------
 
-	local a_ext = a_path:match("%w+$")
-	local b_ext = b_path:match("%w+$")
-	local a_isPrioExt = vim.tbl_contains(priorityExt, a_ext)
-	local b_isPrioExt = vim.tbl_contains(priorityExt, b_ext)
-	if a_isPrioExt and not b_isPrioExt then return true end
-
-	local a_depth = select(2, a_path:gsub("/", ""))
-	local b_depth = select(2, b_path:gsub("/", ""))
+local function prioFilepathDepth(a, b, _)
+	local a_depth = select(2, a.ordinal:gsub("/", ""))
+	local b_depth = select(2, b.ordinal:gsub("/", ""))
 	return a_depth < b_depth
 end
 
@@ -188,12 +180,6 @@ local function telescopeConfig()
 					anchor = "S",
 				},
 			},
-		-- stylua: ignore
-		-- other ignores are defined via .gitignore, .ignore, /fd/ignore, or /git/ignore
-		file_ignore_patterns = {
-			"%.png$", "%.gif$", "%.jpe?g$", "%.icns$",
-			"%.pdf$", "%.zip$", "%.plist$",
-		},
 			vimgrep_arguments = {
 				"rg",
 				"--vimgrep",
@@ -205,15 +191,9 @@ local function telescopeConfig()
 		},
 		pickers = {
 			find_files = {
-				-- HACK add space as initial query value. has not filtering effect,
-				-- but triggers the sorting via `tiebreak`
-				-- https://github.com/natecraddock/telescope-zf-native.nvim/issues/12
-				-- https://github.com/nvim-telescope/telescope.nvim/issues/2905
-				default_text = " ",
-				tiebreak = tiebreaker,
-
-				path_display = filenameFirst,
 				prompt_prefix = "󰝰 ",
+				path_display = filenameFirst,
+				tiebreak = prioFilepathDepth,
 				-- FIX using the default fd command from telescope is somewhat buggy,
 				-- e.g. not respecting `~/.config/fd/ignore`
 				find_command = { "fd", "--type=file", "--type=symlink" },
@@ -230,9 +210,9 @@ local function telescopeConfig()
 				follow = false,
 			},
 			oldfiles = {
-				tiebreak = tiebreaker,
-				path_display = filenameFirst,
 				prompt_prefix = "󰋚 ",
+				path_display = filenameFirst,
+				tiebreak = prioFilepathDepth,
 				previewer = false,
 				layout_config = {
 					horizontal = { anchor = "W", width = 0.5, height = 0.55 },
@@ -421,14 +401,36 @@ local function telescopeConfig()
 			},
 		},
 		extensions = {
-			-- insert at cursor instead, relevant for lua
-			import = { insert_at_top = false },
+			import = {
+				-- insert at cursor instead, relevant for lua
+				insert_at_top = false,
+			},
+
+			["zf-native"] = {
+				file = {
+					-- DOCS https://github.com/natecraddock/telescope-zf-native.nvim/tree/#example-initial_sort-function
+					initial_sort = function(path)
+						local extensionPrios = { -- 0-1 (0 is highest priority)
+							lua = 0,
+							py = 0.1,
+							js = 0.1,
+							ts = 0.1,
+							sh = 0.5,
+							md = 0.9,
+						}
+						local ext = path:match("%w+$")
+						for ft, prio in pairs(extensionPrios) do
+							if ext == ft then return prio end
+						end
+						return 1
+					end,
+				},
+			},
 		},
 	}
 end
 
 --------------------------------------------------------------------------------
-
 return {
 	{ -- fuzzy finder
 		"nvim-telescope/telescope.nvim",
@@ -437,12 +439,14 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
-			{
-				"natecraddock/telescope-zf-native.nvim",
-				config = function() require("telescope").load_extension("zf-native") end,
-			},
+			-- "natecraddock/telescope-zf-native.nvim",
+			-- PENDING https://github.com/natecraddock/telescope-zf-native.nvim/issues/12
+			{ "natecraddock/telescope-zf-native.nvim", branch = "initial-sort" },
 		},
-		config = telescopeConfig,
+		config = function ()
+			telescopeConfig()
+			require("telescope").load_extension("zf-native")
+		end,
 		keys = {
 			{ "?", function() telescope("keymaps") end, desc = "⌨️ Search Keymaps" },
 			{ "g.", function() telescope("resume") end, desc = " Continue" },
@@ -472,7 +476,6 @@ return {
 					local listedBufs = vim.fn.getbufinfo { buflisted = 1 }
 					local bufPaths = vim.tbl_map(function(buf) return buf.name end, listedBufs)
 					vim.list_extend(vim.v.oldfiles, bufPaths)
-
 					telescope("oldfiles")
 				end,
 				desc = " Recent Files",
