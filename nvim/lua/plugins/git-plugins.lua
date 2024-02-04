@@ -30,7 +30,6 @@ return {
 				conventionalCommits = { enforce = true },
 				emptyFillIn = false,
 				spellcheck = true,
-				openReferencedIssue = true,
 			},
 			historySearch = {
 				autoUnshallowIfNeeded = true,

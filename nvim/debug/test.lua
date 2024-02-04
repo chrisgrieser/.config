@@ -1,9 +1,6 @@
+local pattern = "{.-[^%d,%s].-}"
 
-
-local pattern = "(hsl%()[%%%d,/deg ]+(%))"
-
-local sample = "hsl(123%, 123, 123 / 0)"
+local sample = "bla {t} fsf"
 
 local match = sample:match(pattern)
 vim.notify("👽 match: " .. vim.inspect(match))
-
