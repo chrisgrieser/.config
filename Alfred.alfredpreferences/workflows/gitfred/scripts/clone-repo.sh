@@ -13,16 +13,29 @@ cd "$local_repo_folder" || return 1
 # WARN depth=2 ensures that amending a shallow commit does not result in a
 # new commit without parent, effectively destroying git history (!!)
 [[ $clone_depth =~ ^[0-9]+$ && $clone_depth -ge 2 ]] || clone_depth=2
+
 git clone --depth="$clone_depth" "$url" --no-single-branch --no-tags # get branches, but not tags
 
 # Open in terminal via Alfred
 echo -n "$local_repo_folder/$reponame"
 
 #───────────────────────────────────────────────────────────────────────────────
+# RESTORE MTIME 
+
+cd "$reponame" || return 1
+
+# https://stackoverflow.com/a/36243002/22114136
+if [[ "$restore_mtime" == "1" ]]; then
+	for file in $(git ls-tree -r -t --full-name --name-only HEAD); do
+		timestamp=$(git log --pretty=format:%cd --date=format:%Y%m%d%H%M.%S -1 HEAD -- "$file")
+		touch -t "$timestamp" "$file"
+	done
+fi
+
+#───────────────────────────────────────────────────────────────────────────────
 # FORK ON CLONE (if owner)
 
 if [[ "$ownerOfRepo" != "1" && "$fork_on_clone" == "1" ]]; then
-	cd "$reponame" || return 1
 	if [[ ! -x "$(command -v gh)" ]]; then print "\`gh\` not installed." && return 1; fi
 
 	gh repo fork --remote=false
