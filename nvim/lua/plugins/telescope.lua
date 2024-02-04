@@ -213,6 +213,7 @@ local function telescopeConfig()
 				prompt_prefix = "󰋚 ",
 				path_display = filenameFirst,
 				tiebreak = prioritizeLowerFilepathDepth,
+				file_ignore_patterns = { "%.log", "%.plist$" },
 				previewer = false,
 				layout_config = {
 					horizontal = { anchor = "W", width = 0.5, height = 0.55 },

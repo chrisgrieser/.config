@@ -215,7 +215,7 @@ keymap({ "n", "x", "i" }, "<D-w>", function()
 	local moreThanOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) > 1
 	if not winClosed and moreThanOneBuffer then
 		lastClosed = vim.api.nvim_buf_get_name(0)
-		vim.cmd.bdelete()
+		vim.api.nvim_buf_delete(0, {})
 	end
 end, { desc = "󰽙 :close / :bdelete" })
 

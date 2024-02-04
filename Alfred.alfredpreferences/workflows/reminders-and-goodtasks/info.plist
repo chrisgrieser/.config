@@ -752,7 +752,7 @@ sketchybar --trigger update_reminder_count</string>
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
-			<real>590</real>
+			<real>560</real>
 		</dict>
 		<key>8610EFE4-6BCC-4C55-A92F-A1ACAF175489</key>
 		<dict>
@@ -772,7 +772,7 @@ sketchybar --trigger update_reminder_count</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>595</real>
+			<real>565</real>
 		</dict>
 		<key>AB6C212F-70C4-4291-963F-B7D6DFD63435</key>
 		<dict>
@@ -781,7 +781,7 @@ sketchybar --trigger update_reminder_count</string>
 			<key>xpos</key>
 			<real>275</real>
 			<key>ypos</key>
-			<real>590</real>
+			<real>560</real>
 		</dict>
 		<key>C0706453-E9D1-4D41-9BC9-2BF209CBDFA8</key>
 		<dict>
@@ -790,7 +790,7 @@ sketchybar --trigger update_reminder_count</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>655</real>
+			<real>625</real>
 		</dict>
 		<key>E206A8A9-ADE8-4A8D-AA62-AC94A971FBB3</key>
 		<dict>
@@ -801,7 +801,7 @@ sketchybar --trigger update_reminder_count</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>590</real>
+			<real>560</real>
 		</dict>
 		<key>E22F442B-BF76-46E0-AB6A-EF06F7657F9E</key>
 		<dict>
