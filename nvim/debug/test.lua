@@ -1,5 +1,4 @@
 
 
-local variab = {}
-
-variab.fieldTwo.fieldThree = 11
+local myVariable = {}
+myVariable.myField = "foobar"
