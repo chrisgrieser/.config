@@ -34,16 +34,16 @@ local keymappings_I = {
 	["<C-p>"] = function(prompt_bufnr)
 		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
 		local cwd = tostring(current_picker.cwd or vim.loop.cwd()) -- cwd only set if passed as opt
-		local path = require("telescope.actions.state").get_selected_entry().value
-		local fullpath = cwd .. "/" .. path
+		local relPath = require("telescope.actions.state").get_selected_entry().value
+		local fullpath = cwd .. "/" .. relPath
 		require("telescope.actions").close(prompt_bufnr)
 		vim.fn.setreg("+", fullpath)
 		u.notify("Copied", fullpath)
 	end,
 	-- Copy name of file
 	["<C-n>"] = function(prompt_bufnr)
-		local path = require("telescope.actions.state").get_selected_entry().value
-		local name = vim.fs.basename(path)
+		local relPath = require("telescope.actions.state").get_selected_entry().value
+		local name = vim.fs.basename(relPath)
 		require("telescope.actions").close(prompt_bufnr)
 		vim.fn.setreg("+", name)
 		u.notify("Copied", name)
@@ -112,7 +112,7 @@ end
 --------------------------------------------------------------------------------
 
 local function prioFilepathDepth(a, b, _)
-	local a_depth = select(2, a.ordinal:gsub("/", ""))
+	local a_depth = select(2, a.ordinal:gsub("/", "")) -- counts number of "/" in string
 	local b_depth = select(2, b.ordinal:gsub("/", ""))
 	return a_depth < b_depth
 end
@@ -159,9 +159,9 @@ local function telescopeConfig()
 			borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
 			-- { "═", "║", "═", "║", "╔", "╗", "╝", "╚" }
 			-- { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
-			default_mappings = { ["i"] = keymappings_I, ["n"] = keymappings_N },
-			sorting_strategy = "ascending", -- so layout is consistent with prompt_position "top"
+			default_mappings = { i = keymappings_I, n = keymappings_N },
 			layout_strategy = "horizontal",
+			sorting_strategy = "ascending", -- so layout is consistent with prompt_position "top"
 			layout_config = {
 				horizontal = {
 					prompt_position = "top",
