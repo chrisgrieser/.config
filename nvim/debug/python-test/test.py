@@ -1,14 +1,4 @@
-"""B."""
+"""This is a test script."""
 
-var1 = 7
-var2 = 8
-print(var1 + var2)
-
-
-def bla() -> None:
-    """Insert docstring."""
-    # ──────────────────────────────────────────────────────────────────────────
-
-    a = 12222
-    extracted_var = 1111 + a
-    print(extracted_var)
+var1 = {}
+var1["field2"] = 222
