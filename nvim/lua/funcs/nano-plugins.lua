@@ -196,12 +196,14 @@ end
 -- Increment or toggle if cursorword is true/false. Simplified implementation
 -- of dial.nvim. (Requires `expr = true` for the keymap.)
 function M.toggleOrIncrement()
-	local cword = vim.fn.expand("<cword>")
+	-- CONFIG 
 	local bool = {
 		["true"] = "false",
 		["True"] = "False", -- python
 		["const"] = "let", -- js/ts
 	}
+
+	local cword = vim.fn.expand("<cword>")
 	local toggle
 	for word, opposite in pairs(bool) do
 		if cword == word then toggle = opposite end
@@ -239,7 +241,8 @@ function M.betterTilde()
 end
 
 function M.gotoProject()
-	local projectFolder = vim.env.LOCAL_REPOS -- CONFIG
+	-- CONFIG
+	local projectFolder = vim.env.LOCAL_REPOS 
 
 	---@param folder string
 	local function browseProject(folder)

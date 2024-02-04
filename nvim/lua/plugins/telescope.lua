@@ -408,22 +408,18 @@ local function telescopeConfig()
 
 			["zf-native"] = {
 				file = {
-					-- DOCS https://github.com/natecraddock/telescope-zf-native.nvim#example-initial_sort-function
-					initial_sort = function(path)-- 0-1 (0 is highest priority)
-						local age = vim.loop.fs_stat(vim.api.nvim_buf_get_name(0)).mtime.sec
-						-- local extensionPrios = { 
-						-- 	lua = 0,
-						-- 	py = 0.1,
-						-- 	js = 0.1,
-						-- 	ts = 0.1,
-						-- 	sh = 0.5,
-						-- 	md = 0.9,
-						-- }
-						-- local ext = path:match("%w+$")
-						-- for ft, prio in pairs(extensionPrios) do
-						-- 	if ext == ft then return prio end
-						-- end
-						-- return 1
+					---Initially sort by mtime of file.
+					---@param relPath string
+					---@return number 0-1 (0 is highest priority)
+					initial_sort = function(relPath)
+						-- GUARD when called from dir other than cwd, file does not exist
+						local fileStat = vim.loop.fs_stat(relPath)
+						if not fileStat then return 1 end
+
+						local mtime = fileStat.mtime.sec
+						local now = os.time()
+						local ageYears = (now - mtime) / 60 / 60 / 24 / 365
+						return math.min(ageYears, 1) -- does not accept higher than 1
 					end,
 				},
 			},
