@@ -8,7 +8,6 @@ local wu = require("lua.window-utils")
 local app = require("lua.utils").app
 
 local hotkey = hs.hotkey.bind
-
 --------------------------------------------------------------------------------
 -- HELPERS
 
@@ -71,15 +70,14 @@ local function workLayout()
 		end)
 	end
 
-	-- restart AltTab (FIX missing windows)
-	if app("AltTab") then
-		app("AltTab"):kill()
-		u.runWithDelays(3, function () hs.application.open("AltTab") end)
-	end
-
 	-- finish
-	u.whenAppWinAvailable("Discord", function() app("Mimestream"):activate() end)
-	print("🔲 Loaded WorkLayout")
+	u.whenAppWinAvailable("Discord", function()
+		app("Mimestream"):activate()
+		-- restart AltTab (FIX missing windows)
+		pcall(function() app("AltTab"):kill() end)
+		u.runWithDelays(0.5, function () hs.application.open("AltTab") end)
+		print("🔲 Loaded WorkLayout")
+	end)
 end
 
 local function movieLayout()
@@ -129,7 +127,7 @@ M.caff_displayCount = hs.screen.watcher
 		-- (this triggers when the projector is turned off before going to sleep)
 		if u.betweenTime(21, 7) and not env.isProjector() then
 			u.closeAllTheThings()
-			u.runWithDelays(15, hs.caffeinate.systemSleep)
+			u.runWithDelays(8, hs.caffeinate.systemSleep)
 		end
 	end)
 	:start()
@@ -140,7 +138,7 @@ hotkey(u.hyper, "home", selectLayout)
 -- 3. Systemstart
 if u.isSystemStart() then selectLayout() end
 
--- 4. Waking
+-- 4. Waking when not in the office
 M.caff_unlock = hs.caffeinate.watcher
 	.new(function(event)
 		local hasWoken = event == hs.caffeinate.watcher.screensDidWake
