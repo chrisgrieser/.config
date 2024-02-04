@@ -3,11 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>clone_depth</key>
-	<string>10</string>
+	<string>15</string>
 	<key>fork_on_clone</key>
 	<true/>
 	<key>github_username</key>
 	<string>chrisgrieser</string>
+	<key>restore_mtime</key>
+	<true/>
 	<key>results_number</key>
 	<string>35</string>
 </dict>
