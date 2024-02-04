@@ -2,4 +2,4 @@
 
 local variab = {}
 
-variab.fieldTwo = 11
+variab.fieldTwo.fieldThree = 11
