@@ -475,21 +475,20 @@ return {
 					local curBufRelPath = vim.api.nvim_buf_get_name(0):sub(#vim.loop.cwd() + 2)
 
 					---@param prompt string
-					---@param relPath string
+					---@param relPath string the ordinal from telescope
 					---@return number score number from 1 to 0. lower the number the better. -1 will filter out the entry though.
 					function my_fzf:scoring_function(prompt, relPath)
-						-- GUARD only modify score when prompt is empty
+						-- GUARD
+						-- only modify score when prompt is empty
 						if prompt ~= "" then return scorer.scoring_function(self, prompt, relPath) end
-
 						-- filter out current buffer
 						if relPath == curBufRelPath then return -1 end
 
-						-- GUARD when called from dir other than cwd, file does not exist
-						local fileStat = vim.loop.fs_stat(relPath)
-						if not fileStat then return 1 end
-
+						-- prioritze recently modified
+						local stat = vim.loop.fs_stat(relPath)
+						if not stat then return 1 end
 						local now = os.time()
-						local ageYears = (now - fileStat.mtime.sec) / 60 / 60 / 24 / 365
+						local ageYears = (now - stat.mtime.sec) / 60 / 60 / 24 / 365
 						return math.min(ageYears, 1)
 					end
 
