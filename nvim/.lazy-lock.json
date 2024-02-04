@@ -66,7 +66,7 @@
   "symbol-usage.nvim": { "branch": "main", "commit": "d9578780b760ca22cbe7dd618cc880b155b0e84a" },
   "telescope-import.nvim": { "branch": "main", "commit": "08e31708451b43d1ef766d370d5ef17e9f0c24ae" },
   "telescope-symbols.nvim": { "branch": "master", "commit": "a6d0127a53d39b9fc2af75bd169d288166118aec" },
-  "telescope-zf-native.nvim": { "branch": "initial-sort", "commit": "fe2621bf10d60b3fed932e8a79d923b11af15c66" },
+  "telescope-zf-native.nvim": { "branch": "master", "commit": "fe2621bf10d60b3fed932e8a79d923b11af15c66" },
   "telescope.nvim": { "branch": "master", "commit": "7b5c5f56a21e82fdcfe5b250278b8dfc4b1cbab4" },
   "tokyonight.nvim": { "branch": "main", "commit": "610179f7f12db3d08540b6cc61434db2eaecbcff" },
   "treesj": { "branch": "main", "commit": "14808da3cddd62fc86ede53a5ea1fd1635897e75" },

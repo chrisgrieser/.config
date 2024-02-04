@@ -439,9 +439,7 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
-			-- "natecraddock/telescope-zf-native.nvim",
-			-- PENDING https://github.com/natecraddock/telescope-zf-native.nvim/issues/12
-			{ "natecraddock/telescope-zf-native.nvim", branch = "initial-sort" },
+			"natecraddock/telescope-zf-native.nvim",
 		},
 		config = function ()
 			telescopeConfig()
