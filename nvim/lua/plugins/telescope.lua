@@ -111,7 +111,7 @@ end
 
 --------------------------------------------------------------------------------
 
-local function prioFilepathDepth(a, b, _)
+local function prioritizeLowerFilepathDepth(a, b, _)
 	local a_depth = select(2, a.ordinal:gsub("/", "")) -- counts number of "/" in string
 	local b_depth = select(2, b.ordinal:gsub("/", ""))
 	return a_depth < b_depth
@@ -193,7 +193,7 @@ local function telescopeConfig()
 			find_files = {
 				prompt_prefix = "󰝰 ",
 				path_display = filenameFirst,
-				tiebreak = prioFilepathDepth,
+				tiebreak = prioritizeLowerFilepathDepth,
 				-- FIX using the default fd command from telescope is somewhat buggy,
 				-- e.g. not respecting `~/.config/fd/ignore`
 				find_command = { "fd", "--type=file", "--type=symlink" },
@@ -212,7 +212,7 @@ local function telescopeConfig()
 			oldfiles = {
 				prompt_prefix = "󰋚 ",
 				path_display = filenameFirst,
-				tiebreak = prioFilepathDepth,
+				tiebreak = prioritizeLowerFilepathDepth,
 				previewer = false,
 				layout_config = {
 					horizontal = { anchor = "W", width = 0.5, height = 0.55 },
@@ -376,7 +376,8 @@ local function telescopeConfig()
 					["string"] = "Comment",
 				},
 			},
-			lsp_workspace_symbols = { -- workspace symbols are not working correctly in lua
+			lsp_workspace_symbols = {
+				-- INFO workspace symbols are not working correctly in lua
 				prompt_prefix = "󰒕 ",
 				fname_width = 12,
 			},
@@ -402,16 +403,21 @@ local function telescopeConfig()
 		},
 		extensions = {
 			import = {
-				-- insert at cursor instead, relevant for lua
+				-- insert at cursor instead (relevant for lua)
 				insert_at_top = false,
 			},
 
 			["zf-native"] = {
 				file = {
-					---Initially sort by mtime of file.
+					---Sort by mtime
 					---@param relPath string
 					---@return number 0-1 (0 is highest priority)
 					initial_sort = function(relPath)
+						-- deprioritize buffers already open
+						for _, buf in ipairs(vim.fn.getbufinfo { buflisted = 1 }) do
+							if vim.endswith(buf.name, relPath) then return 1 end
+						end
+
 						-- GUARD when called from dir other than cwd, file does not exist
 						local fileStat = vim.loop.fs_stat(relPath)
 						if not fileStat then return 1 end
