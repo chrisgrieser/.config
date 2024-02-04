@@ -111,10 +111,11 @@ end
 
 --------------------------------------------------------------------------------
 
-local function prioritizeLowerFilepathDepth(a, b, _)
-	local a_depth = select(2, a.ordinal:gsub("/", "")) -- counts number of "/" in string
-	local b_depth = select(2, b.ordinal:gsub("/", ""))
-	return a_depth < b_depth
+local function prioritizeRecentlyModified(a, b, _)
+	local a_stats = vim.loop.fs_stat(a.ordinal)
+	local b_stats = vim.loop.fs_stat(b.ordinal)
+	if not (a_stats and b_stats) then return false end
+	return a_stats.mtime.sec > b_stats.mtime.sec
 end
 
 local function project() return vim.fs.basename(vim.loop.cwd() or "") end
@@ -193,7 +194,7 @@ local function telescopeConfig()
 			find_files = {
 				prompt_prefix = "󰝰 ",
 				path_display = filenameFirst,
-				tiebreak = prioritizeLowerFilepathDepth,
+				tiebreak = prioritizeRecentlyModified,
 				-- FIX using the default fd command from telescope is somewhat buggy,
 				-- e.g. not respecting `~/.config/fd/ignore`
 				find_command = { "fd", "--type=file", "--type=symlink" },
@@ -212,7 +213,7 @@ local function telescopeConfig()
 			oldfiles = {
 				prompt_prefix = "󰋚 ",
 				path_display = filenameFirst,
-				tiebreak = prioritizeLowerFilepathDepth,
+				tiebreak = prioritizeRecentlyModified,
 				file_ignore_patterns = { "%.log", "%.plist$" },
 				previewer = false,
 				layout_config = {
@@ -408,28 +409,28 @@ local function telescopeConfig()
 				insert_at_top = false,
 			},
 
-			["zf-native"] = {
-				file = {
-					---Sort by mtime
-					---@param relPath string
-					---@return number 0-1 (0 is highest priority)
-					initial_sort = function(relPath)
-						-- deprioritize buffers already open
-						for _, buf in ipairs(vim.fn.getbufinfo { buflisted = 1 }) do
-							if vim.endswith(buf.name, relPath) then return 1 end
-						end
-
-						-- GUARD when called from dir other than cwd, file does not exist
-						local fileStat = vim.loop.fs_stat(relPath)
-						if not fileStat then return 1 end
-
-						local mtime = fileStat.mtime.sec
-						local now = os.time()
-						local ageYears = (now - mtime) / 60 / 60 / 24 / 365
-						return math.min(ageYears, 1) -- does not accept higher than 1
-					end,
-				},
-			},
+			-- ["zf-native"] = {
+			-- 	file = {
+			-- 		---Sort by mtime
+			-- 		---@param relPath string
+			-- 		---@return number 0-1 (0 is highest priority)
+			-- 		initial_sort = function(relPath)
+			-- 			-- deprioritize buffers already open
+			-- 			for _, buf in ipairs(vim.fn.getbufinfo { buflisted = 1 }) do
+			-- 				if vim.endswith(buf.name, relPath) then return 1 end
+			-- 			end
+			--
+			-- 			-- GUARD when called from dir other than cwd, file does not exist
+			-- 			local fileStat = vim.loop.fs_stat(relPath)
+			-- 			if not fileStat then return 1 end
+			--
+			-- 			local mtime = fileStat.mtime.sec
+			-- 			local now = os.time()
+			-- 			local ageYears = (now - mtime) / 60 / 60 / 24 / 365
+			-- 			return math.min(ageYears, 1) -- does not accept higher than 1
+			-- 		end,
+			-- 	},
+			-- },
 		},
 	}
 end
@@ -467,7 +468,27 @@ return {
 			{
 				"go",
 				function()
-					require("telescope.builtin").find_files { prompt_title = "Find Files: " .. project() }
+					-- require("telescope.builtin").find_files { prompt_title = "Find Files: " .. project() }
+					local zf = require("telescope").extensions["zf-native"].native_zf_scorer()
+					local my_fzf = {}
+					setmetatable(my_fzf, { __index = zf })
+
+					---@param prompt string
+					---@param line string
+					---@return number score number from 1 to 0. lower the number the better. -1 will filter out the entry though.
+					function my_fzf:scoring_function(prompt, line)
+						local score = zf.scoring_function(self, prompt, line)
+						-- modify score when prompt is empty
+						if prompt == "" then
+							if line:find("Makefile$") then score = 0 end
+						end
+						return score
+					end
+
+					require("telescope.builtin").find_files {
+						prompt_title = "Find Files: " .. project(),
+						sorter = my_fzf,
+					}
 				end,
 				desc = " Open File",
 			},
