@@ -408,21 +408,22 @@ local function telescopeConfig()
 
 			["zf-native"] = {
 				file = {
-					-- DOCS https://github.com/natecraddock/telescope-zf-native.nvim/tree/#example-initial_sort-function
-					initial_sort = function(path)
-						local extensionPrios = { -- 0-1 (0 is highest priority)
-							lua = 0,
-							py = 0.1,
-							js = 0.1,
-							ts = 0.1,
-							sh = 0.5,
-							md = 0.9,
-						}
-						local ext = path:match("%w+$")
-						for ft, prio in pairs(extensionPrios) do
-							if ext == ft then return prio end
-						end
-						return 1
+					-- DOCS https://github.com/natecraddock/telescope-zf-native.nvim#example-initial_sort-function
+					initial_sort = function(path)-- 0-1 (0 is highest priority)
+						local age = vim.loop.fs_stat(vim.api.nvim_buf_get_name(0)).mtime.sec
+						-- local extensionPrios = { 
+						-- 	lua = 0,
+						-- 	py = 0.1,
+						-- 	js = 0.1,
+						-- 	ts = 0.1,
+						-- 	sh = 0.5,
+						-- 	md = 0.9,
+						-- }
+						-- local ext = path:match("%w+$")
+						-- for ft, prio in pairs(extensionPrios) do
+						-- 	if ext == ft then return prio end
+						-- end
+						-- return 1
 					end,
 				},
 			},
@@ -441,7 +442,7 @@ return {
 			"nvim-tree/nvim-web-devicons",
 			"natecraddock/telescope-zf-native.nvim",
 		},
-		config = function ()
+		config = function()
 			telescopeConfig()
 			require("telescope").load_extension("zf-native")
 		end,
