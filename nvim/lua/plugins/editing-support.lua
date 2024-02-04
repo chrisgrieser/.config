@@ -179,7 +179,7 @@ return {
 		"chrisgrieser/nvim-puppeteer",
 		ft = { "python", "javascript", "typescript", "lua" },
 		cmd = "PuppeteerToggle",
-		init = function() vim.g.puppeteer_lua_format_string = true end,
+		init = function() vim.g.puppeteer_disable_filetypes = {} end,
 		keys = {
 			{ "<leader>op", vim.cmd.PuppeteerToggle, desc = "󰅳 PuppeteerToggle" },
 		},
