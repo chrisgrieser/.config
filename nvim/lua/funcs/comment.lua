@@ -92,11 +92,6 @@ end
 -- * requires nvim-treesitter-textobjects
 -- * lsp usually provides better prefills for docstrings
 function M.docstring()
-	local function leaveVisualMode()
-		local escKey = vim.api.nvim_replace_termcodes("<Esc>", false, true, true)
-		vim.api.nvim_feedkeys(escKey, "nx", false)
-	end
-
 	local supportedFts = { "lua", "python", "javascript" }
 	if not vim.tbl_contains(supportedFts, vim.bo.filetype) then
 		vim.notify("Unsupported filetype.", vim.log.levels.WARN)
@@ -123,8 +118,7 @@ function M.docstring()
 			require("cmp").complete()
 			require("cmp").confirm { select = true }
 		end, 150)
-		vim.defer_fn(vim.api.nvim_del_current_line, 900) -- remove `---comment`
-		vim.defer_fn(leaveVisualMode, 1200)
+		vim.defer_fn(vim.api.nvim_del_current_line, 600) -- remove `---comment`
 	elseif ft == "javascript" then
 		normal("t)") -- go to parameter, since cursor has to be on diagnostic for code action
 		vim.lsp.buf.code_action {
