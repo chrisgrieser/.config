@@ -53,8 +53,12 @@ function run() {
 
 		const iconObj = {};
 		const useFileicon = ["webloc", "url", "ini", "mjs"].includes(type);
+		const isImageFile = ["png", "icns"].includes(type);
 		if (useFileicon) {
 			iconObj.type = "fileicon";
+			iconObj.path = absPath;
+		} else if (isImageFile) {
+			// use image itself
 			iconObj.path = absPath;
 		} else {
 			// use {extension}.png located in icon folder

@@ -27,7 +27,7 @@
 				"path": "./basic/css.json"
 			},
 			{
-				"language": ["bash", "zsh", "fish", "sh"],
+				"language": ["bash", "zsh", "fish", "sh", "make"],
 				"path": "./basic/shell.json"
 			},
 			{
