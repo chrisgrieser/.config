@@ -17,7 +17,7 @@ function o() {
 			--select-1 --ansi --query="$input" --info=inline --header-first \
 			--header="^H: --hidden  ^P: Copy Path  ^N: Copy Name  ^D: Goto Parent" \
 			--keep-right \
-			--scheme=path --tiebreak=end,length \
+			--scheme=path --tiebreak=length,end \
 			--delimiter="/" --with-nth=-2.. --nth=-2.. \
 			--bind="ctrl-h:reload(fd --hidden --no-ignore --exclude='/.git/' --exclude='.DS_Store' --type=file --type=symlink --color=always)" \
 			--expect="ctrl-p,ctrl-n,ctrl-d" \
