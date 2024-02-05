@@ -294,7 +294,6 @@ local function telescopeConfig()
 			},
 			git_bcommits = {
 				prompt_prefix = "󰊢 ",
-				initial_mode = "normal",
 				layout_config = { horizontal = { height = 0.99 } },
 				git_command = { "git", "log", "--pretty=%h %s\t%cr" }, -- add commit time (%cr)
 			},
@@ -404,33 +403,8 @@ local function telescopeConfig()
 			},
 		},
 		extensions = {
-			import = {
-				-- insert at cursor instead (relevant for lua)
-				insert_at_top = false,
-			},
-
-			-- ["zf-native"] = {
-			-- 	file = {
-			-- 		---Sort by mtime
-			-- 		---@param relPath string
-			-- 		---@return number 0-1 (0 is highest priority)
-			-- 		initial_sort = function(relPath)
-			-- 			-- deprioritize buffers already open
-			-- 			for _, buf in ipairs(vim.fn.getbufinfo { buflisted = 1 }) do
-			-- 				if vim.endswith(buf.name, relPath) then return 1 end
-			-- 			end
-			--
-			-- 			-- GUARD when called from dir other than cwd, file does not exist
-			-- 			local fileStat = vim.loop.fs_stat(relPath)
-			-- 			if not fileStat then return 1 end
-			--
-			-- 			local mtime = fileStat.mtime.sec
-			-- 			local now = os.time()
-			-- 			local ageYears = (now - mtime) / 60 / 60 / 24 / 365
-			-- 			return math.min(ageYears, 1) -- does not accept higher than 1
-			-- 		end,
-			-- 	},
-			-- },
+			-- insert at cursor instead (relevant for lua)
+			import = { insert_at_top = false },
 		},
 	}
 end
@@ -482,7 +456,7 @@ return {
 						-- only modify score when prompt is empty
 						if prompt ~= "" then return scorer.scoring_function(self, prompt, relPath) end
 						-- filter out current buffer
-						if relPath == curBufRelPath then return -1 end
+						if relPath == curBufRelPath then return 1 end
 
 						-- prioritze recently modified
 						local stat = vim.loop.fs_stat(relPath)
