@@ -90,11 +90,10 @@ hs.hotkey.bind({}, "home", scrollUp)
 -- Mona's autoscroll does not work reliably, therefore scrolling ourselves.
 -- Only scrolling when not idle, to not prevent the machine going to sleep.
 if mastodonApp == "Mona" then
-	local scrollEveryMins = 5
+	local scrollEveryMins = 5 -- CONFIG
 	M.timer_regularScroll = hs.timer
 		.doEvery(scrollEveryMins * 60, function()
-			local notIdle = (hs.host.idleTime() / 60) < (scrollEveryMins - 1) * 60
-			if notIdle then scrollUp() end
+			if hs.host.idleTime() < 120 then scrollUp() end
 		end)
 		:start()
 end
