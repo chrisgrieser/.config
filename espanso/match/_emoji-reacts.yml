@@ -3,15 +3,16 @@
 
 # INFO emojis need to be in textual form to work in Slack as well as Discord
 matches:
-  # emoji selection
-  - { trigger: "eee", replace: "+:" }
+  # double space: emoji-react selection
+  - { trigger: "  ", replace: "+:" }
 
   - { trigger: "hhh", replace: "+:blue_heart:\n" } # 💙
   - { trigger: "mmm", replace: "+:see_no_evil:\n" } # 🙈
   - { trigger: "yyy", replace: "+:+1:\n" } # 👍
+  - { trigger: "eee", replace: "+:eyes:\n" } # 👀
 
-  # discord only
+  # OMG discord server only
   - { trigger: "ttt", replace: "+:this:\n" }
 
-  # slack only
+  # SOS slack workspace only
   - { trigger: "ddd", replace: "+:dolan:\n" }
