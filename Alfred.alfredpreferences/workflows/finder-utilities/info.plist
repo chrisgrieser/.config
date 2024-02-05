@@ -1584,11 +1584,11 @@ mv -f "$file" "$HOME/.Trash/"</string>
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>6</integer>
+				<integer>19</integer>
 				<key>hotmod</key>
 				<integer>1835008</integer>
 				<key>hotstring</key>
-				<string>Y</string>
+				<string>2</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
