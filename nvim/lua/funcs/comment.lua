@@ -92,12 +92,6 @@ end
 -- * requires nvim-treesitter-textobjects
 -- * lsp usually provides better prefills for docstrings
 function M.docstring()
-	local supportedFts = { "lua", "python", "javascript" }
-	if not vim.tbl_contains(supportedFts, vim.bo.filetype) then
-		vim.notify("Unsupported filetype.", vim.log.levels.WARN)
-		return
-	end
-
 	local ft = vim.bo.filetype
 	vim.cmd.TSTextobjectGotoPreviousStart("@function.outer")
 
@@ -130,6 +124,8 @@ function M.docstring()
 			vim.api.nvim_win_set_cursor(0, { ln + 1, 0 })
 			normal("t}")
 		end, 100)
+	else
+		vim.notify("Unsupported filetype.", vim.log.levels.WARN)
 	end
 end
 --------------------------------------------------------------------------------
