@@ -30,8 +30,11 @@ local function autocontinue(key)
 		"b:*", -- unordered list
 		"b:-",
 		"b:+",
-		"b:-",
+		"b:\t*", -- indented unordered list
+		"b:\t-",
+		"b:\t+",
 		"b:1.", -- ordered list
+		"b:\t1.", -- indented ordered list
 		"n:>", -- blockquotes
 	}
 	vim.defer_fn(function() optl.comments = comBefore end, 1) -- deferred to restore only after return
