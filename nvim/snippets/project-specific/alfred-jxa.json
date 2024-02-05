@@ -76,8 +76,8 @@
     "body": [
       "/** @param {string} str */",
       "function camelCaseMatch(str) {",
-      "\tconst clean = str.replace(/[-()_.:#/\\\\;,[\\]]/g, \" \");",
-      "\tconst camelCaseSeparated = str.replace(/([A-Z])/g, \" \");",
+      "\tconst clean = str.replace(/[-_.]/g, \" \");",
+      "\tconst camelCaseSeparated = str.replace(/([A-Z])/g, \" \\$1\");",
       "\treturn [clean, camelCaseSeparated, str].join(\" \") + \" \";",
       "}"
     ],

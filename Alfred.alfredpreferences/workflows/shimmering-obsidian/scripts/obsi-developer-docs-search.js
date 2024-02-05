@@ -2,8 +2,14 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
+//──────────────────────────────────────────────────────────────────────────────
 
-const alfredMatcher = (/** @type {string} */ str) => str.replace(/[-()_/.]/g, " ") + " " + str + " ";
+/** @param {string} str */
+function camelCasePathMatch(str) {
+	const clean = str.replace(/[-_./]/g, " ");
+	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
+	return [clean, camelCaseSeparated, str].join(" ") + " ";
+}
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -16,7 +22,8 @@ function run() {
 
 	const workArray = JSON.parse(app.doShellScript(`curl -sL ${sourceURL}`))
 		.tree.filter(
-			(/** @type {{ path: string; }} */ file) => file.path.startsWith("en/") && file.path.endsWith(".md"),
+			(/** @type {{ path: string; }} */ file) =>
+				file.path.startsWith("en/") && file.path.endsWith(".md"),
 		)
 		.map((/** @type {{ path: string }} */ file) => {
 			const subsitePath = file.path.slice(3, -3);
@@ -32,7 +39,7 @@ function run() {
 			return {
 				title: displayTitle,
 				subtitle: category,
-				match: alfredMatcher(subsitePath),
+				match: camelCasePathMatch(subsitePath),
 				arg: `${baseURL}/${subsiteURL}`,
 				uid: subsitePath,
 			};
