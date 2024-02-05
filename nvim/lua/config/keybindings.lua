@@ -282,6 +282,8 @@ keymap({ "n", "x" }, "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
 keymap("n", "C", '"_C')
 
+keymap("n", "<D-p>", '"0p', { desc = " Paste Last Yank" })
+
 -- do not clutter the register if blank line is deleted
 keymap("n", "dd", function()
 	if vim.api.nvim_get_current_line():find("^%s*$") then return '"_dd' end

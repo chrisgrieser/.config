@@ -67,19 +67,26 @@ local conformOpts = {
 }
 
 local function formattingFunc()
-	-- HACK since `fixAll` is not part of ruff-lsp formatting capabilities
-	-- PENDING https://github.com/astral-sh/ruff-lsp/issues/335
-	local function pythonRuffFixall()
-		if vim.bo.ft == "python" then
-			vim.lsp.buf.code_action { apply = true, context = { only = { "source.fixAll.ruff" } } }
-		end
-	end
-
 	-- PENDING https://github.com/stevearc/conform.nvim/issues/255
 	if vim.tbl_contains(autoIndentFt, vim.bo.ft) then u.normal("gg=G``") end
 
 	local useLsp = vim.tbl_contains(lspFormatFt, vim.bo.ft) and "always" or false
-	require("conform").format({ lsp_fallback = useLsp }, pythonRuffFixall)
+	require("conform").format({ lsp_fallback = useLsp }, function()
+		-- add fixAll & organizeImports to formatting callback
+		if vim.bo.ft == "python" then
+			-- PENDING https://github.com/astral-sh/ruff-lsp/issues/335
+			vim.lsp.buf.code_action {
+				context = { only = { "source.fixAll.ruff" } },
+				apply = true,
+			}
+		elseif vim.bo.ft == "javascript" or vim.bo.ft == "typescript" then
+			-- "No code actions available" msg silenced with noice.nvim
+			vim.lsp.buf.code_action {
+				context = { only = { "source.organizeImports.biome" } },
+				apply = true,
+			}
+		end
+	end)
 end
 
 --------------------------------------------------------------------------------

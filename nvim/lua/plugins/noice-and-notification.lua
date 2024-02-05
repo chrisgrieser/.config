@@ -38,6 +38,9 @@ local routes = {
 		view = "mini",
 	},
 
+	-- code actions
+	{ filter = { event = "notify", find = "No code actions available" }, skip = true },
+
 	-- :make
 	{ filter = { event = "msg_show", find = "^:!make" }, skip = true },
 	{ filter = { event = "msg_show", find = "^%(%d+ of %d+%):" }, skip = true },
