@@ -33,6 +33,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>0C28AAE6-A080-48A7-A6F0-0BB05070161D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5AF52A7B-9FA9-4D8B-9784-4864B0A9AF06</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>17D804EC-6AFE-403E-A6CC-8F536D379033</key>
 		<array>
 			<dict>
@@ -444,6 +457,16 @@
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>⌥: Copy URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>0C28AAE6-A080-48A7-A6F0-0BB05070161D</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Open Releases / Changelog</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -943,6 +966,14 @@
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>0C28AAE6-A080-48A7-A6F0-0BB05070161D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
@@ -1332,6 +1363,7 @@
 	<string>## Usage
 - Search all public GitHub repositories via the keyword `gh`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the repo's GitHub page.
+	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the repo's releases page (often have changelogs).
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the repo URL.
 	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Shallow clone the repo to a local folder and open in the Terminal. Optionally, creates a fork on GitHub with the `gh` cli and prepares the repo for a PR.
 	+ &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Search the last 100 issues, use &lt;kbd&gt;⏎&lt;/kbd&gt; to open the issue in the browser.
@@ -1380,6 +1412,15 @@
 			<real>671</real>
 			<key>ypos</key>
 			<real>1145</real>
+		</dict>
+		<key>0C28AAE6-A080-48A7-A6F0-0BB05070161D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>205</real>
+			<key>ypos</key>
+			<real>730</real>
 		</dict>
 		<key>158FC0D8-5F6E-4AFE-BC6E-9406B6343527</key>
 		<dict>
@@ -1635,9 +1676,9 @@
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<real>985</real>
+			<real>1035</real>
 			<key>ypos</key>
-			<real>235</real>
+			<real>200</real>
 		</dict>
 		<key>F99C6054-D3E9-4D1C-960A-8E9EC9FA5CB3</key>
 		<dict>
@@ -1793,7 +1834,7 @@
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.11.0</string>
+	<string>0.11.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
