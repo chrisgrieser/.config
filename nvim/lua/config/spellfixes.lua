@@ -36,6 +36,7 @@ local spellfixes = {
 	onyl = "only",
 	ot = "to",
 	choer = "chore",
+	remtoe = "remote",
 	reponse = "response",
 	retrun = "return",
 	retunr = "return",
