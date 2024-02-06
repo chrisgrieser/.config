@@ -110,22 +110,6 @@
       "current"
     ]
   },
-  "get selection (edit mode)": {
-    "body": "const selection = editor.getSelection();",
-    "description": "Obsidian: Get the selection in Live Preview / Source mode.",
-    "prefix": [
-      "selection",
-      "selected text"
-    ]
-  },
-  "get selection (reading mode)": {
-    "body": "const selection = activeWindow.getSelection().toString();",
-    "description": "Obsidian: Get the selection in Reading Mode. (Note that this will retrieve plain text without formatting.)",
-    "prefix": [
-      "selection",
-      "selected text"
-    ]
-  },
   "read note content": {
     "body": "await this.app.vault.read(${1:TFile});",
     "prefix": "read note content"
