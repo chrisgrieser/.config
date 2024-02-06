@@ -7,3 +7,6 @@ snippets/**
 
 # skeletions rarely touched
 templates/**
+
+# lazy.nvim
+.lazy-lock.json
