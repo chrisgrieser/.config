@@ -102,7 +102,7 @@ function run() {
 				arg: mainArg,
 				mods: {
 					fn: {
-						subtitle: "fn: Delete Local Repo",
+						subtitle: repo.local ? "fn: Delete Local Repo" : "fn: 🚫 Cannot delete remote repo",
 						valid: Boolean(repo.local),
 					},
 					ctrl: {
