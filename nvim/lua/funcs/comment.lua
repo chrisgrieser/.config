@@ -104,7 +104,7 @@ function M.docstring()
 		vim.api.nvim_win_set_cursor(0, { ln + 1, #indent + 3 })
 		vim.cmd.startinsert()
 	elseif ft == "lua" then
-		vim.api.nvim_buf_set_lines(0, ln - 1, ln - 1, false, { "---" })
+		vim.api.nvim_buf_set_lines(0, ln - 1, ln - 1, false, { indent .. "---" })
 		vim.api.nvim_win_set_cursor(0, { ln, 0 })
 		vim.cmd.startinsert { bang = true }
 		-- HACK to trigger the `@param;@return` luadoc completion from lua-ls
@@ -124,6 +124,10 @@ function M.docstring()
 			vim.api.nvim_win_set_cursor(0, { ln + 1, 0 })
 			normal("t}")
 		end, 100)
+	elseif ft == "typescript" then
+		vim.api.nvim_buf_set_lines(0, ln - 1, ln - 1, false, { indent .. "/**  */" })
+		vim.api.nvim_win_set_cursor(0, { ln, #indent + 4 })
+		vim.cmd.startinsert()
 	else
 		vim.notify("Unsupported filetype.", vim.log.levels.WARN)
 	end
