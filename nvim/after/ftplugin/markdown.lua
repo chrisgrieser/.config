@@ -65,8 +65,8 @@ end, { desc = " Preview", buffer = true })
 -- MARKDOWN-SPECIFIC KEYMAPS
 
 -- Jump to next/prev heading
-keymap({ "n", "x" }, "<C-j>", [[/^#\+ .*<CR>]], { desc = " Next Heading", buffer = true })
-keymap({ "n", "x" }, "<C-k>", [[?^#\+ .*<CR>]], { desc = " Prev Heading", buffer = true })
+keymap({ "n", "x" }, "<C-j>", [[/^#\+ .*<CR>]], { desc = " Next Heading", buffer = true, silent = true })
+keymap({ "n", "x" }, "<C-k>", [[?^#\+ .*<CR>]], { desc = " Prev Heading", buffer = true, silent = true })
 
 keymap("n", "<leader>x", "mzI- [ ] <Esc>`z", { desc = " Add Task", buffer = true })
 keymap("n", "<D-4>", "mzI- <Esc>`z", { desc = " Add List", buffer = true })
