@@ -59,6 +59,10 @@
     "body": "⌫",
     "prefix": "backspace"
   },
+  "bar (middle block)": {
+    "body": "🬋",
+    "prefix": "bar (middle block)"
+  },
   "capslock": {
     "body": "⇪",
     "prefix": [
