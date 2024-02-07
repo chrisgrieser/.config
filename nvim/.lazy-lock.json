@@ -47,7 +47,7 @@
   "nvim-scissors": { "branch": "main", "commit": "8e892591583f775f272d826295f959867ae0aa6c" },
   "nvim-spider": { "branch": "main", "commit": "dc371a116041c49ae6d3813f6e1722c2dcdabdcf" },
   "nvim-surround": { "branch": "main", "commit": "f81bbef3da28bd2a7d5a736575c71f3f953d49f9" },
-  "nvim-tinygit": { "branch": "main", "commit": "e61308f5ef50030d75d50580ecd686578bc45b9d" },
+  "nvim-tinygit": { "branch": "main", "commit": "0022431ba809c765dc02711141c682e3e46edd19" },
   "nvim-treesitter": { "branch": "master", "commit": "5973b617a9a48212e40c5c0a0727ad7c91b27484" },
   "nvim-treesitter-context": { "branch": "master", "commit": "9c06b115abc57c99cf0aa81dc29490f5001f57a1" },
   "nvim-treesitter-endwise": { "branch": "master", "commit": "4c344ffc8d54d7e1ba2cefaaa2c10ea93aa1cc2d" },
