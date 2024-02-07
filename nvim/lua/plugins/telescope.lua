@@ -189,6 +189,7 @@ local function telescopeConfig()
 				-- inherit global ignore file from `fd`
 				("--ignore-file=" .. os.getenv("HOME") .. "/.config/fd/ignore"),
 			},
+			file_ignore_patterns = { "%.png$" },
 		},
 		pickers = {
 			find_files = {
