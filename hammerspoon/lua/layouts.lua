@@ -57,6 +57,7 @@ local function workLayout()
 	dockSwitcher("work")
 	setHigherBrightnessDuringDay()
 	u.closeAllTheThings()
+	app("AltTab"):kill() -- FIX missing windows
 
 	-- open
 	u.openApps(env.mastodonApp)
@@ -73,11 +74,8 @@ local function workLayout()
 	-- finish
 	u.whenAppWinAvailable("Discord", function()
 		app("Mimestream"):activate()
-		-- restart AltTab (FIX missing windows)
-		u.runWithDelays(2, function ()
-			pcall(function() app("AltTab"):kill() end)
-			u.runWithDelays(0.5, function () hs.application.open("AltTab") end)
-		end)
+		-- FIX missing windows
+		u.runWithDelays(2, function () hs.application.open("AltTab") end)
 		print("🔲 Loaded WorkLayout")
 	end)
 end
