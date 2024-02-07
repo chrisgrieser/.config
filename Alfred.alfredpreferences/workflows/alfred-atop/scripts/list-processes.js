@@ -39,9 +39,7 @@ const appFilePaths = {
 	"Alfred Preferences": "/Applications/Alfred 5.app/Contents/Preferences/Alfred Preferences.app",
 };
 
-const hasParentIcon = "↖";
-const isParentIcon = "(Parent)";
-
+const separator = "    ";
 //──────────────────────────────────────────────────────────────────────────────
 
 let rerunSecs = Number.parseFloat($.getenv("rerun_s_processes")) || 2.5;
@@ -79,14 +77,18 @@ function run() {
 
 			// parent process
 			const ppid = info[1];
-			let parentName = parentProcs[ppid];
-			if (!parentName) {
-				parentProcs[ppid] = app.doShellScript(`ps -p ${ppid} -co 'command=' || true`);
-				parentName = parentProcs[ppid];
+			const parentInfo = parentProcs[ppid];
+			let parentName;
+			if (!parentInfo) {
+				parentName = app.doShellScript(`ps -p ${ppid} -co 'command=' || true`);
+				parentProcs[ppid] = { name: parentName, childrenCount: 1 };
+			} else {
+				parentName = parentInfo.name;
+				parentProcs[ppid].childrenCount++;
 			}
-			const parentIsObvious = processName.startsWith(parentName) && processName !== parentName;
-			if (parentName === "launchd" || parentIsObvious) parentName = "";
-			if (parentName) parentName = `${hasParentIcon} ${parentName}`;
+			// don't display parent if the name is obvious
+			const parentIsObvious = processName.startsWith(parentName) || parentName === "launchd";
+			if (parentIsObvious) parentName = "";
 
 			// Memory, CPU & root
 			let memory = (Number.parseInt(info[3]) / 1024).toFixed(0).toString(); // real memory
@@ -96,12 +98,13 @@ function run() {
 			const isRootUser = info[4] === "root" ? " ⭕" : "";
 
 			// display & icon
+			if (parentName) parentName = "↖ " + parentName;
 			const appName = processAppName[processName] || processName;
 			const displayTitle =
 				appName !== processName && !processName.includes("Helper")
 					? `${processName} [${appName}]`
 					: processName;
-			const subtitle = [memory, cpu, parentName].filter((t) => t !== "").join("   ");
+			const subtitle = [memory, cpu, parentName].filter((t) => t !== "").join(separator);
 			const isApp = apps.includes(`${appName}.app`) || appFilePaths[appName];
 			let icon = {};
 			if (isApp) {
@@ -135,12 +138,9 @@ function run() {
 		.map((item) => {
 			const isParent = Object.keys(parentProcs).includes(item.uid);
 			if (isParent) {
-				item.subtitle = isParentIcon + " " + item.subtitle;
+				const children = parentProcs[item.uid].childrenCount;
+				item.subtitle = `${children}⇣` + separator + item.subtitle;
 				item.match += " parent";
-			} 
-			const isChild = true;
-			if (isChild) {
-				item.match += " child";
 			}
 			return item;
 		});

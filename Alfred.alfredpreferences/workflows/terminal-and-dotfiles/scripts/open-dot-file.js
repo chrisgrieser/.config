@@ -25,7 +25,8 @@ function run() {
 	const fileList = app
 		.doShellScript(
 			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; cd "${dotfileFolder}" ;
-			fd --type=file --hidden --absolute-path`,
+			fd --type=file --hidden --absolute-path \
+			--exclude="**/Alfred.alfredpreferences/workflows/**/*.png"`,
 		)
 		.split("\r");
 
