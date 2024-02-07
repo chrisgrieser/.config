@@ -87,7 +87,7 @@ opt.spell = false
 opt.spellfile = { vim.g.linterConfigs .. "/spellfile-vim-ltex.add" } -- has to be `.add`
 opt.spelllang = "en_us" -- even with spellcheck disabled, still relevant for `z=`
 
-opt.splitright = true -- vsplit right instead of left
+opt.splitright = false -- vsplit right instead of left
 opt.splitbelow = true -- split down instead of up
 
 opt.cursorline = true
