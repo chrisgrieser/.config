@@ -61,7 +61,7 @@
     ]
   },
   "filter ( => )": {
-    "body": ".filter(${1:item} => ${1:item}$0)",
+    "body": "filter(${1:item} => ${1:item}$0)",
     "prefix": "filter ( => )"
   },
   "for (i++)": {
@@ -167,7 +167,7 @@
   },
   "map ( () => {} )": {
     "body": [
-      ".map(${1:item} => {",
+      "map(${1:item} => {",
       "\t$0",
       "\treturn ${1:item};",
       "})"
@@ -175,7 +175,7 @@
     "prefix": "map ( () => {} )"
   },
   "map ( => )": {
-    "body": ".map(${1:item} => ${1:item}$0)",
+    "body": "map(${1:item} => ${1:item}$0)",
     "prefix": "map ( => )"
   },
   "reduce()": {
