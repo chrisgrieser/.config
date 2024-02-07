@@ -51,6 +51,9 @@ local function customHighlights()
 	-- trailing spaces more visible
 	linkHl("Whitespace", "NonText")
 
+	-- FIX themes missing italics in markdown
+	linkHl("@markup.italic.markdown_inline", "Italic")
+
 	-----------------------------------------------------------------------------
 	local hasNoUpdatedTreesitterHls =
 		vim.tbl_isempty(vim.api.nvim_get_hl(0, { name = "@comment.todo" }))
