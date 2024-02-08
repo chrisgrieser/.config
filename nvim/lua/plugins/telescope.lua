@@ -404,8 +404,7 @@ local function telescopeConfig()
 			},
 		},
 		extensions = {
-			-- insert at cursor instead (relevant for lua)
-			import = { insert_at_top = false },
+			import = { insert_at_top = true },
 		},
 	}
 end
