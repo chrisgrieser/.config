@@ -10,7 +10,7 @@ local u = require("config.utils")
 vim.filetype.add {
 	extension = {
 		zsh = "sh",
-		sh = "sh", -- force sh-files with zsh-shebang to still get sh as filetype
+		sh = "sh", -- force sh-files with zsh-shebang to still get `sh` as filetype
 	},
 	filename = {
 		[".ignore"] = "gitignore", -- ignore files for fd/rg
