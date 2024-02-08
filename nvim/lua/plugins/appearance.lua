@@ -112,6 +112,7 @@ return {
 		opts = {
 			markdown = {
 				fat_headlines = false,
+				bullets = false,
 				dash_string = "─",
 			},
 		},
