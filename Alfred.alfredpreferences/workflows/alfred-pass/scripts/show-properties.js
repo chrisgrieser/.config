@@ -13,7 +13,7 @@ function run() {
 	const properties = app
 		.doShellScript(`pass show "${entryId}"`)
 		.split("\r")
-		.slice(1) // first entry is password which can can already be direct accessed
+		.slice(1) // first entry is password which can can already be accessed directly
 		.filter((line) => line.trim() !== "")
 		.map((property) => {
 			const valid = property.includes(":");
@@ -21,19 +21,19 @@ function run() {
 			const value = valid
 				? property.slice(property.indexOf(":") + 1).trim()
 				: property.toUpperCase();
-			const isUrl = key.toLowerCase() === "url";
+			const isUrl = key.toLowerCase() === "url" || value.startsWith("https?://");
 
 			return {
 				title: value,
 				match: property,
-				subtitle: isUrl ? value : key,
+				subtitle: isUrl ? key + "   (⌘: Open URL in Browser)" : key,
 				arg: value,
 				valid: valid,
 				mods: {
 					cmd: {
 						valid: isUrl,
 						subtitle: isUrl ? "⌘: Open URL in Browser" : "⌘: 🚫 Not a URL",
-					}
+					},
 				},
 			};
 		});
