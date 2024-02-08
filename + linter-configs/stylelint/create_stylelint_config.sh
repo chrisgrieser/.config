@@ -1,10 +1,11 @@
 #!/usr/bin/env zsh
-
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 if [[ ! -x "$(command -v yq)" ]]; then print "\e[1;33myq not installed.\e[0m" && return 1; fi
 if [[ ! -x "$(command -v node)" ]]; then print "\e[1;33mnode not installed.\e[0m" && return 1; fi
 
 set -e
+
+output_file="stylelintrc (compiled).yml"
 #───────────────────────────────────────────────────────────────────────────────
 
 # download
@@ -25,12 +26,12 @@ node --experimental-detect-module --eval '
 yq --output-format="yaml" stylelint-standard.json >stylelint-standard.yml
 
 # merge with existing config, giving to values from the personal config
-yq '.rules = load("stylelint-standard.yml") + .rules' personal-config.yml >compiled.yml
+yq '.rules = load("stylelint-standard.yml") + .rules' personal-config.yml >"$output_file"
 
 # PENDING stylelint-lsp upgrade
-yq --inplace 'del(.rules.lightness-notation)' compiled.yml
+yq --inplace 'del(.rules.lightness-notation)' "$output_file"
 
 # cleanup temp files
-rm -f recommended.js standard.js stylelint-standard.json
+rm -f recommended.js standard.js stylelint-standard.json stylelint-standard.yml
 
 echo "Done."
