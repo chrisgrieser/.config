@@ -1,9 +1,12 @@
 # DOCS https://blog.meain.io/2023/navigating-around-in-shell/
 # DOCS https://zsh.sourceforge.io/Doc/Release/Options.html#Changing-Directories
 #───────────────────────────────────────────────────────────────────────────────
+# OPTIONS
 
 setopt AUTO_CD # pure directory = cd into it
 setopt CD_SILENT
+setopt CHASE_LINKS # follow symlinks when they are cd target
+export CDPATH="$LOCAL_REPOS:$WD"
 
 # POST-DIRECTORY-CHANGE-HOOK
 # (use `cd -q` to suppress this hook)
@@ -32,14 +35,6 @@ function cake { mkdir -p "$1" && cd "$1"; } # change-make dir
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
 alias gr=" cdr"
-
-#───────────────────────────────────────────────────────────────────────────────
-
-# BOOKMARKS
-setopt CHASE_LINKS # follow symlinks when they are cd target
-
-bookmark_path="$ZDOTDIR/cdpath_bookmarks" # folder with symlinks to directories
-export CDPATH="$bookmark_path:$LOCAL_REPOS:$WD"
 
 #───────────────────────────────────────────────────────────────────────────────
 # CYCLE THROUGH DIRECTORIES
