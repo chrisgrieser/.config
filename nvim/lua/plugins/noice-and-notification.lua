@@ -1,6 +1,7 @@
 ---@param bufnr number
 local function highlightCopyStacktraceLine(bufnr)
 	vim.defer_fn(function()
+		if not vim.api.nvim_buf_is_valid(bufnr) then return end
 		vim.api.nvim_buf_call(bufnr, function()
 			vim.fn.matchadd("WarningMsg", [[[^/]\+\.lua:\d\+\ze:]]) -- \ze: lookahead
 		end)

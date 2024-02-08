@@ -83,28 +83,5 @@ return {
 			},
 			attach_to_untracked = true,
 		},
-		config = function(_, opts)
-			require("gitsigns").setup(opts)
-
-			---HACK using replace-mode as a fake-git-mode since (simplified version of hydra.nvim)
-			---@param key string
-			---@param action function
-			local function gitModeMap(key, action)
-				-- needs to check for `R` in `mode()` since there is no `rmap`
-				vim.keymap.set("i", key, function()
-					if vim.fn.mode() ~= "R" then return key end
-					-- temporarily pause replace mode, since functions do not work here
-					vim.cmd.stopinsert() -- also stops replace mode
-					vim.defer_fn(action, 1)
-					vim.defer_fn(vim.cmd.startreplace, 2)
-				end, { expr = true })
-			end
-
-			gitModeMap("a", function() require("gitsigns").stage_hunk() end)
-			gitModeMap("A", function() require("gitsigns").undo_stage_hunk() end)
-			gitModeMap("u", function() require("gitsigns").reset_hunk() end)
-			gitModeMap("n", function() require("gitsigns").next_hunk { foldopen = true } end)
-			gitModeMap("N", function() require("gitsigns").prev_hunk { foldopen = true } end)
-		end,
 	},
 }
