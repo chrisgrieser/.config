@@ -2,7 +2,6 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
-
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -11,23 +10,33 @@ function run() {
 	const entryId = $.getenv("entry");
 
 	/** @type{AlfredItem[]} */
-	const properties = app.doShellScript(`pass show "${entryId}"`)
+	const properties = app
+		.doShellScript(`pass show "${entryId}"`)
 		.split("\r")
 		.slice(1) // first entry is password which can can already be direct accessed
-		.filter(line => line.trim() !== "")
-		.map(property => {
+		.filter((line) => line.trim() !== "")
+		.map((property) => {
 			const valid = property.includes(":");
 			const key = valid ? property.split(":")[0].trim() : "";
-			const value = valid ? property.slice(property.indexOf(":") + 1).trim() : property.toUpperCase();
+			const value = valid
+				? property.slice(property.indexOf(":") + 1).trim()
+				: property.toUpperCase();
+			const isUrl = key.toLowerCase() === "url";
+
 			return {
 				title: value,
 				match: property,
-				subtitle: key,
+				subtitle: isUrl ? value : key,
 				arg: value,
 				valid: valid,
+				mods: {
+					cmd: {
+						valid: isUrl,
+						subtitle: isUrl ? "⌘: Open URL in Browser" : "⌘: 🚫 Not a URL",
+					}
+				},
 			};
-		})
-	
+		});
 
 	return JSON.stringify({ items: properties });
 }
