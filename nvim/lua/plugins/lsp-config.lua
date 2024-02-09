@@ -21,7 +21,7 @@ local lspToMasonMap = {
 	ruff_lsp = "ruff-lsp", -- python linter
 	stylelint_lsp = "stylelint-lsp", -- css linter
 	taplo = "taplo", -- toml lsp
-	tsserver = "typescript-language-server", -- js/ts lsp
+	-- tsserver = "typescript-language-server", -- disabled since using typescript-tools.nvim
 	typos_lsp = "typos-lsp", -- spellchecker for code
 	vale_ls = "vale-ls", -- natural language linter
 	yamlls = "yaml-language-server",
@@ -202,28 +202,8 @@ serverConfigs.stylelint_lsp = {
 --------------------------------------------------------------------------------
 -- JS/TS
 
-local configForBoth = {
-	inlayHints = {
-		includeInlayEnumMemberValueHints = true,
-		includeInlayFunctionLikeReturnTypeHints = true,
-		includeInlayFunctionParameterTypeHints = true,
-		includeInlayParameterNameHints = "all",
-		includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-		includeInlayPropertyDeclarationTypeHints = true,
-		includeInlayVariableTypeHints = true,
-		includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-	},
-	-- not entirely clear whats these below do, cannot find documentation
-	suggest = {
-		completeFunctionCalls = true,
-		completeJSDocs = true,
-		jsdoc = { generateReturns = true },
-	},
-	preferGoToSourceDefinition = true,
-}
-
 -- DOCS https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
-serverConfigs.tsserver = {
+local tsserverConfig = {
 	settings = {
 		-- enable checking javascript without a `jsconfig.json`
 		implicitProjectConfiguration = { -- DOCS https://www.typescriptlang.org/tsconfig
@@ -235,8 +215,25 @@ serverConfigs.tsserver = {
 		-- (Biome works only on single and therefore can be used to check for
 		-- unintended re-declarations.)
 		diagnostics = { ignoredCodes = { 2451 } },
-		typescript = configForBoth,
-		javascript = configForBoth,
+		typescript = {
+			inlayHints = {
+				includeInlayEnumMemberValueHints = true,
+				includeInlayFunctionLikeReturnTypeHints = true,
+				includeInlayFunctionParameterTypeHints = true,
+				includeInlayParameterNameHints = "all",
+				includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+				includeInlayPropertyDeclarationTypeHints = true,
+				includeInlayVariableTypeHints = true,
+				includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+			},
+			-- not entirely clear whats these below do, cannot find documentation
+			suggest = {
+				completeFunctionCalls = true,
+				completeJSDocs = true,
+				jsdoc = { generateReturns = true },
+			},
+			preferGoToSourceDefinition = true,
+		},
 	},
 	on_attach = function(client)
 		-- Disable formatting in favor of biome
@@ -244,6 +241,19 @@ serverConfigs.tsserver = {
 		client.server_capabilities.documentRangeFormattingProvider = false
 	end,
 }
+tsserverConfig.settings.javascript = tsserverConfig.settings.typescript
+-- disabled, since using typescript-tools.nvim
+-- serverConfigs.tsserver = tsserverConfig
+
+-- SIC needs to be enabled, can be removed with nvim 0.10 support for dynamic config
+serverConfigs.biome = {
+	on_attach = function(client)
+		client.server_capabilities.documentFormattingProvider = true
+		client.server_capabilities.documentRangeFormattingProvider = true
+	end,
+}
+
+--------------------------------------------------------------------------------
 
 -- DOCS https://github.com/Microsoft/vscode/tree/main/extensions/json-language-features/server#configuration
 -- Disable formatting in favor of biome
@@ -252,14 +262,6 @@ serverConfigs.jsonls = {
 		provideFormatter = false,
 		documentRangeFormattingProvider = false,
 	},
-}
-
--- SIC needs to be enabled, can be removed with nvim 0.10 support for dynamic config
-serverConfigs.biome = {
-	on_attach = function(client)
-		client.server_capabilities.documentFormattingProvider = true
-		client.server_capabilities.documentRangeFormattingProvider = true
-	end,
 }
 
 --------------------------------------------------------------------------------
@@ -374,26 +376,34 @@ serverConfigs.yamlls = {
 --------------------------------------------------------------------------------
 
 return {
-	"neovim/nvim-lspconfig",
-	commit = "716dbc0",
-	lazy = false,
-	mason_dependencies = vim.list_extend(efmDependencies, vim.tbl_values(lspToMasonMap)),
-	dependencies = {
-		"folke/neodev.nvim", -- loading as dependency ensures it's loaded before lua_ls
-		opts = { library = { plugins = false } }, -- too slow with all my plugins
+	{
+		"neovim/nvim-lspconfig",
+		lazy = false,
+		mason_dependencies = vim.list_extend(efmDependencies, vim.tbl_values(lspToMasonMap)),
+		dependencies = {
+			"folke/neodev.nvim", -- loading as dependency ensures it's loaded before lua_ls
+			opts = { library = { plugins = false } }, -- too slow with all my plugins
+		},
+		config = function()
+			require("lspconfig.ui.windows").default_options.border = vim.g.borderStyle
+
+			-- Enable snippets-completion (nvim-cmp) and folding (nvim-ufo)
+			local lspCapabilities = vim.lsp.protocol.make_client_capabilities()
+			lspCapabilities.textDocument.completion.completionItem.snippetSupport = true
+			lspCapabilities.textDocument.foldingRange =
+				{ dynamicRegistration = false, lineFoldingOnly = true }
+
+			for lsp, serverConfig in pairs(serverConfigs) do
+				serverConfig.capabilities = lspCapabilities
+				require("lspconfig")[lsp].setup(serverConfig)
+			end
+		end,
 	},
-	config = function()
-		require("lspconfig.ui.windows").default_options.border = vim.g.borderStyle
-
-		-- Enable snippets-completion (nvim_cmp) and folding (nvim-ufo)
-		local lspCapabilities = vim.lsp.protocol.make_client_capabilities()
-		lspCapabilities.textDocument.completion.completionItem.snippetSupport = true
-		lspCapabilities.textDocument.foldingRange =
-			{ dynamicRegistration = false, lineFoldingOnly = true }
-
-		for lsp, serverConfig in pairs(serverConfigs) do
-			serverConfig.capabilities = lspCapabilities
-			require("lspconfig")[lsp].setup(serverConfig)
-		end
-	end,
+	{ -- better TS support
+		"pmizio/typescript-tools.nvim",
+		ft = { "typescript", "javascript" },
+		mason_dependencies = "typescript-language-server",
+		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		opts = tsserverConfig,
+	},
 }
