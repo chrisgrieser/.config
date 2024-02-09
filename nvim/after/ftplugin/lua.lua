@@ -7,6 +7,7 @@ u.ftAbbr("const", "local")
 u.ftAbbr("fi", "end")
 u.ftAbbr("!=", "~=")
 u.ftAbbr("!==", "~=")
+u.ftAbbr("===", "==")
 
 -- shorthands
 u.ftAbbr("ree", "return end")
