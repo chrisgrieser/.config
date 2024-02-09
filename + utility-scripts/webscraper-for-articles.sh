@@ -1,25 +1,23 @@
 # shellcheck disable=SC2028,SC2248,SC2030,SC2031,SC2002
 #───────────────────────────────────────────────────────────────────────────────
 
-# check presence of dependencies
+# GUARD dependencies
 if ! command -v postlight-parser &>/dev/null; then
 	echo "postlight-parser not installed."
 	echo "install: npm install @postlight/parser"
-fi
-if ! command -v turndown-cli &>/dev/null; then
+	return 1
+elif ! command -v turndown-cli &>/dev/null; then
 	echo "turndown-cli not installed."
 	echo "install: npm install turndown-cli"
-fi
-if ! command -v yq &>/dev/null; then
+	return 1
+elif ! command -v yq &>/dev/null; then
 	echo "yq not installed."
 	echo "install: brew install yq"
-fi
-if ! command -v readable &>/dev/null; then
+	return 1
+elif ! command -v readable &>/dev/null; then
 	echo "readability-cli not installed."
 	echo "install: npm install readability-cli"
-fi
-if ! command -v readable &>/dev/null || ! command -v postlight-parser &>/dev/null || ! command -v turndown-cli &>/dev/null || ! command -v yq &>/dev/null; then
-	exit 1
+	return 1
 fi
 
 # Report file
