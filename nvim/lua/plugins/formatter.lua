@@ -75,16 +75,13 @@ local function formattingFunc()
 		-- add fixAll & organizeImports to formatting callback
 		if vim.bo.ft == "python" then
 			-- PENDING https://github.com/astral-sh/ruff-lsp/issues/335
-			vim.lsp.buf.code_action {
-				context = { only = { "source.fixAll.ruff" } },
-				apply = true,
-			}
+			vim.lsp.buf.code_action { context = { only = { "source.fixAll.ruff" } }, apply = true }
 		elseif vim.bo.ft == "javascript" or vim.bo.ft == "typescript" then
-			-- "No code actions available" msg silenced with noice.nvim
-			vim.lsp.buf.code_action {
-				context = { only = { "source.organizeImports.biome" } },
-				apply = true,
-			}
+			vim.cmd.TSToolsFixAll()
+			vim.cmd.TSToolsRemoveUnused()
+			-- as opposed to biome's `source.organizeImports.biome`, this also
+			-- removes unused imports
+			vim.cmd.TSToolsOrganizeImports()
 		end
 	end)
 end

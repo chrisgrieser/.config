@@ -21,7 +21,6 @@ local lspToMasonMap = {
 	ruff_lsp = "ruff-lsp", -- python linter
 	stylelint_lsp = "stylelint-lsp", -- css linter
 	taplo = "taplo", -- toml lsp
-	-- tsserver = "typescript-language-server", -- disabled since using typescript-tools.nvim
 	typos_lsp = "typos-lsp", -- spellchecker for code
 	vale_ls = "vale-ls", -- natural language linter
 	yamlls = "yaml-language-server",
@@ -205,6 +204,13 @@ serverConfigs.stylelint_lsp = {
 -- DOCS https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
 local tsserverConfig = {
 	settings = {
+		-- specific to typescript-tools.nvim
+		complete_function_calls = true,
+		tsserver_file_preferences = {
+			displayPartsForJSDoc = true,
+			generateReturnInDocTemplate = true,
+		},
+
 		-- enable checking javascript without a `jsconfig.json`
 		implicitProjectConfiguration = { -- DOCS https://www.typescriptlang.org/tsconfig
 			checkJs = true,
@@ -226,13 +232,6 @@ local tsserverConfig = {
 				includeInlayVariableTypeHints = true,
 				includeInlayVariableTypeHintsWhenTypeMatchesName = true,
 			},
-			-- not entirely clear whats these below do, cannot find documentation
-			suggest = {
-				completeFunctionCalls = true,
-				completeJSDocs = true,
-				jsdoc = { generateReturns = true },
-			},
-			preferGoToSourceDefinition = true,
 		},
 	},
 	on_attach = function(client)
@@ -242,8 +241,6 @@ local tsserverConfig = {
 	end,
 }
 tsserverConfig.settings.javascript = tsserverConfig.settings.typescript
--- disabled, since using typescript-tools.nvim
--- serverConfigs.tsserver = tsserverConfig
 
 -- SIC needs to be enabled, can be removed with nvim 0.10 support for dynamic config
 serverConfigs.biome = {
@@ -402,6 +399,14 @@ return {
 	{ -- better TS support
 		"pmizio/typescript-tools.nvim",
 		ft = { "typescript", "javascript" },
+		keys = {
+			{
+				"<leader>ci",
+				vim.cmd.TSToolsAddMissingImports,
+				ft = { "typescript", "javascript" },
+				{ desc = "󰛦 Add Missing Imports" },
+			},
+		},
 		mason_dependencies = "typescript-language-server",
 		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 		opts = tsserverConfig,
