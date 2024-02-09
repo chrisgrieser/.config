@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-# WARN do not embed this file into the js file, otherwise it does revtrieve the
+# WARN do not embed this file into the js file, otherwise it does retrieve the
 # proper oldfiles, since it then lacks information on the location of the shada
 # file for some reason
 temp=/tmp/oldfiles.txt
