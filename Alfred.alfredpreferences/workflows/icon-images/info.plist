@@ -8,6 +8,19 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
+		<key>29630D52-716B-4795-A054-F42CB35CD9E1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>71718F0B-0AC8-4F2E-AA29-85C863F1AE69</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>3014658F-1912-4945-BE42-94D7C52E614B</key>
 		<array>
 			<dict>
@@ -377,6 +390,48 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://lucide.dev/icons/?focus=&amp;search={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>71718F0B-0AC8-4F2E-AA29-85C863F1AE69</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>icon</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Lucide Icons: '{query}'</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>29630D52-716B-4795-A054-F42CB35CD9E1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -465,6 +520,15 @@
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>29630D52-716B-4795-A054-F42CB35CD9E1</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>12</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>375</real>
+		</dict>
 		<key>3014658F-1912-4945-BE42-94D7C52E614B</key>
 		<dict>
 			<key>colorindex</key>
@@ -491,6 +555,15 @@
 			<real>700</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>71718F0B-0AC8-4F2E-AA29-85C863F1AE69</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>12</integer>
+			<key>xpos</key>
+			<real>200</real>
+			<key>ypos</key>
+			<real>375</real>
 		</dict>
 		<key>762A6849-97F7-453B-9037-80139ADE2754</key>
 		<dict>
@@ -519,7 +592,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>400</real>
+			<real>525</real>
 		</dict>
 		<key>9B781278-00BF-4A9E-BF99-D6E0F72074F4</key>
 		<dict>
@@ -591,7 +664,7 @@
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>400</real>
+			<real>525</real>
 		</dict>
 		<key>F03A86F4-1AD4-408D-B232-2B8569EDE9A7</key>
 		<dict>
@@ -600,7 +673,7 @@
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>680</real>
 		</dict>
 		<key>FF1B8F7A-4E33-4A50-A895-F3B34197EB14</key>
 		<dict>
@@ -611,7 +684,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>680</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
