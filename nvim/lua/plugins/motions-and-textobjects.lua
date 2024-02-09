@@ -40,7 +40,8 @@ return {
 	{ -- treesitter-based textobjs
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		cmd = "TSTextobjectSelect",
+		-- commands need to be defined, since used in various utility functions
+		cmd = { "TSTextobjectSelect", "TSTextobjectGotoPreviousStart" },
 		keys = {
 			{
 				"<leader>H",
