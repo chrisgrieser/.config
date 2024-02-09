@@ -409,16 +409,18 @@ return {
 		ft = { "typescript", "javascript" },
 		keys = {
 			{
-				"<leader>ci",
-				vim.cmd.TSToolsAddMissingImports,
+				"<leader>fr",
+				vim.cmd.TSToolsRemoveUnused,
 				ft = { "typescript", "javascript" },
-				{ desc = "󰛦 Add Missing Imports" },
+				{ desc = "󰛦 Remove Unused Statements" },
 			},
 		},
 		mason_dependencies = "typescript-language-server",
 		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 		config = function()
-			-- PENDING https://github.com/pmizio/typescript-tools.nvim/issues/233
+			-- typescript-tools does not accept `settings.diagnostics.ignoreCode`
+			-- https://github.com/pmizio/typescript-tools.nvim/issues/233
+
 			local api = require("typescript-tools.api")
 			tsserverConfig.handlers = {
 				-- "Cannot redeclare block-scoped variable" -> not useful for single-file-JXA
