@@ -2,44 +2,43 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
+//──────────────────────────────────────────────────────────────────────────────
 
-function alfredMatcher(str) {
-	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
-	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
-	return [clean, camelCaseSeperated, str].join(" ");
+/** @param {string} str */
+function camelCaseMatch(str) {
+	const clean = str.replace(/[-_.]/g, " ");
+	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
+	return [clean, camelCaseSeparated, str].join(" ") + " ";
 }
 
-function readFile(path) {
-	const fm = $.NSFileManager.defaultManager;
-	const data = fm.contentsAtPath(path);
-	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
-	return ObjC.unwrap(str);
-}
-
-const fileExists = filePath => Application("Finder").exists(Path(filePath));
+const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
 //──────────────────────────────────────────────────────────────────────────────
 
-// generate recent files list
-const oldfiles = JSON.parse(app.doShellScript("zsh ./scripts/get-oldfiles.sh"))
-	.filter(file => {
-		return file.startsWith("/") && !file.endsWith("COMMIT_EDITMSG") && fileExists(file);
-	})
-	.map(filepath => {
-		const fileName = filepath.split("/").pop();
-		const twoParents = filepath.replace(/.*\/(.*\/.*)\/.*$/, "$1");
+/** @type {AlfredRun} */
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
+function run() {
+	const oldfilesRaw = app
+		.doShellScript("zsh ./scripts/get-oldfiles.sh")
+		.replace(/''|"/g, "") // term buffers with quotes (SIC shada escaped single quotes escaped by doubling them)
+		.replaceAll("'", '"'); // single quotes illegal in JSON
+	const oldfiles = JSON.parse(oldfilesRaw)
+		.filter((/** @type {string} */ file) => {
+			return file.startsWith("/") && !file.endsWith("COMMIT_EDITMSG") && fileExists(file);
+		})
+		.map((/** @type {string} */ filepath) => {
+			const fileName = filepath.split("/").pop();
+			const twoParents = filepath.replace(/.*\/(.*\/.*)\/.*$/, "$1");
 
-		return {
-			title: fileName,
-			match: alfredMatcher(fileName),
-			subtitle: "▸ " + twoParents,
-			type: "file:skipcheck",
-			icon: {
-				type: "fileicon",
-				path: filepath,
-			},
-			arg: filepath,
-		};
-	});
+			return {
+				title: fileName,
+				match: camelCaseMatch(fileName),
+				subtitle: "▸ " + twoParents,
+				type: "file:skipcheck",
+				icon: { type: "fileicon", path: filepath },
+				arg: filepath,
+			};
+		});
 
-JSON.stringify({ items: oldfiles });
+	return JSON.stringify({ items: oldfiles });
+}
