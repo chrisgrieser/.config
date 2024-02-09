@@ -121,7 +121,7 @@ exmap splitVertical obcommand workspace:split-vertical
 nnoremap <C-w>v :splitVertical
 
 " Split Switching
-exmap nextSplit obcomamnd cycle-through-panes:cycle-through-panes
+exmap nextSplit obcommand cycle-through-panes:cycle-through-panes
 nnoremap <C-CR> :nextSplit
 
 " Tabs
