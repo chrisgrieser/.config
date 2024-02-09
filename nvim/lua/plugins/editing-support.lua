@@ -110,12 +110,10 @@ return {
 			require("nvim-autopairs").add_rules {
 				rule("<", ">", "lua"):with_pair(isNodeType { "string", "string_content" }),
 				rule("<", ">", { "vim", "html", "xml" }), -- keymaps & tags
-				rule("*", "*", "markdown"), -- italics
-				rule("![", "]()", "markdown"):set_end_pair_length(1), -- images
 
 				-- css: auto-add trailing semicolon, but only for declarations
 				-- (which are at the end of the line and have no text afterwards)
-				rule(":", ";", "css"):with_pair(negLookahead(".+")),
+				rule(":", ";", "css"):with_pair(negLookahead(".", 1)),
 
 				-- auto-add trailing comma inside objects/arrays
 				rule([[^%s*[:=%w]$]], ",", { "javascript", "typescript", "lua", "python" })
@@ -161,12 +159,6 @@ return {
 					:with_del(function() return false end)
 					:with_cr(function() return false end)
 					:use_key(":"),
-
-				-- quicker template string
-				rule("$", "{}", { "javascript", "typescript" })
-					:with_pair(negLookahead("{", 1))
-					:with_pair(isNodeType { "string", "template_string", "string_fragment" })
-					:set_end_pair_length(1),
 			}
 		end,
 	},
