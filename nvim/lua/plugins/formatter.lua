@@ -77,11 +77,13 @@ local function formattingFunc()
 			-- PENDING https://github.com/astral-sh/ruff-lsp/issues/335
 			vim.lsp.buf.code_action { context = { only = { "source.fixAll.ruff" } }, apply = true }
 		elseif vim.bo.ft == "javascript" or vim.bo.ft == "typescript" then
-			vim.cmd.TSToolsFixAll()
-			vim.cmd.TSToolsRemoveUnused()
 			-- as opposed to biome's `source.organizeImports.biome`, this also
 			-- removes unused imports
 			vim.cmd.TSToolsOrganizeImports()
+			vim.cmd.TSToolsAddMissingImports()
+
+			vim.cmd.TSToolsFixAll()
+			-- vim.cmd.TSToolsRemoveUnused() -- removes statements, not only imports
 		end
 	end)
 end
