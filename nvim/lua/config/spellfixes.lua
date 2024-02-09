@@ -47,6 +47,7 @@ local spellfixes = {
 	teh = "the",
 	ti = "it",
 	tiem = "item",
+	tempalte = "template",
 	treu = "true",
 	ture = "true",
 	verison = "version",

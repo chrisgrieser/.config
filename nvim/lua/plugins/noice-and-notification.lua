@@ -40,7 +40,7 @@ local routes = {
 	},
 
 	-- code actions
-	{ filter = { event = "notify", find = "No code actions available" }, skip = true },
+	{ filter = { event = "notify", find = "No code actions available" }, view = "mini" },
 
 	-- :make
 	{ filter = { event = "msg_show", find = "^:!make" }, skip = true },

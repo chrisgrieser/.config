@@ -116,6 +116,11 @@ keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = " Inline Code" }) -- no sel
 keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = " Inline Code" })
 keymap("i", "<D-e>", "``<Left>", { desc = " Inline Code" })
 
+-- cmd+T: template string
+keymap("n", "<D-t>", "bi${<Esc>ea}<Esc>", { desc = "$󰘦 Template String" })
+keymap("x", "<D-t>", "<Esc>`<i${<Esc>`>la}<Esc>", { desc = "$󰘦 Template String" })
+keymap("i", "<D-t>", "${}<Left>", { desc = "$󰘦 Template String" })
+
 -- regex
 keymap(
 	"n",
