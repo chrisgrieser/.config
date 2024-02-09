@@ -104,6 +104,7 @@ function M.docstring()
 		vim.api.nvim_win_set_cursor(0, { ln + 1, #indent + 3 })
 		vim.cmd.startinsert()
 	elseif ft == "lua" then
+		-- PENDING https://github.com/LuaLS/lua-language-server/issues/2517
 		vim.api.nvim_buf_set_lines(0, ln - 1, ln - 1, false, { indent .. "---" })
 		vim.api.nvim_win_set_cursor(0, { ln, 0 })
 		vim.cmd.startinsert { bang = true }

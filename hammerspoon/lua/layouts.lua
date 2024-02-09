@@ -74,8 +74,8 @@ local function workLayout()
 	-- finish
 	u.whenAppWinAvailable("Discord", function()
 		app("Mimestream"):activate()
-		-- FIX missing windows
-		u.runWithDelays(2, function () hs.application.open("AltTab") end)
+		-- FIX missing windows by restarting AltTab
+		u.runWithDelays(3, function () hs.application.open("AltTab") end)
 		print("🔲 Loaded WorkLayout")
 	end)
 end
