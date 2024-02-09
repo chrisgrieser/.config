@@ -55,6 +55,10 @@
     "body": "$LINE_COMMENT TODO ",
     "prefix": "TODO"
   },
+  "VALIDATE": {
+    "body": "$LINE_COMMENT VALIDATE",
+    "prefix": "VALIDATE"
+  },
   "backspace": {
     "body": "⌫",
     "prefix": "backspace"
