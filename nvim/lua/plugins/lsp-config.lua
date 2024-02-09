@@ -217,11 +217,24 @@ local tsserverConfig = {
 			target = "ES2022", -- JXA is compliant with most of ECMAScript: https://github.com/JXA-Cookbook/JXA-Cookbook/wiki/ES6-Features-in-JXA
 		},
 
+		-- PENDING https://github.com/pmizio/typescript-tools.nvim/issues/233
 		-- INFO "cannot redeclare block-scoped variable" -> not useful for JXA.
-		-- (Biome works only on single and therefore can be used to check for
+		-- (Biome works only on single-file and therefore can be used to check for
 		-- unintended re-declarations.)
 		diagnostics = { ignoredCodes = { 2451 } },
 		typescript = {
+			inlayHints = {
+				includeInlayEnumMemberValueHints = true,
+				includeInlayFunctionLikeReturnTypeHints = true,
+				includeInlayFunctionParameterTypeHints = true,
+				includeInlayParameterNameHints = "all",
+				includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+				includeInlayPropertyDeclarationTypeHints = true,
+				includeInlayVariableTypeHints = true,
+				includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+			},
+		},
+		javascript = {
 			inlayHints = {
 				includeInlayEnumMemberValueHints = true,
 				includeInlayFunctionLikeReturnTypeHints = true,
@@ -409,6 +422,14 @@ return {
 		},
 		mason_dependencies = "typescript-language-server",
 		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-		opts = tsserverConfig,
+		config = function()
+			local api = require("typescript-tools.api")
+			require("typescript-tools").setup {
+				handlers = {
+					-- Ignore 'This may be converted to an async function' diagnostics.
+					["textDocument/publishDiagnostics"] = api.filter_diagnostics { 80006 },
+				},
+			}
+		end,
 	},
 }
