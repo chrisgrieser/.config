@@ -30,7 +30,10 @@ function new_venv {
 	inspect_venv
 }
 
-function inspect_venv { printf "\nNow using: \e[1;36m%s\e[0m\n" "$(cmd which python3)"; }
+function inspect_venv {
+	py_path="$(cmd which python3 | sed 's|^/Users/chrisgrieser/|~/|')"
+	printf "\nNow using: \e[1;36m%s\e[0m\n" "$py_path"
+}
 
 function _search_venv_path {
 	local dir_to_check=$PWD

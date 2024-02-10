@@ -15,7 +15,9 @@ $character\
 right_format = """\
 $cmd_duration\
 ${custom.tokei_loc}\
-${custom.alfred}${custom.venv}$python$nodejs\
+${custom.alfred}\
+${custom.venv_on}${custom.venv_off}\
+$python$nodejs\
 """
 
 add_newline = false
@@ -144,11 +146,17 @@ version_format = "$major.$minor"
 symbol = "  "
 style = "bold yellow"
 
-[custom.venv] # custom venv indicator, so the name of the venv is not added
-format = '[ $output ]($style)'    # extra space for proper nerdfont sizing
+[custom.venv_on]
+format = '[ $output ]($style)'   # extra space for proper nerdfont sizing
 when = '[[ -n "$VIRTUAL_ENV" ]]'
-command = 'echo "󱥒"'             # output trimmed, so spaces must be added at `format`
+command = 'echo "󱥒"'             # output is trimmed, so spaces must be added at `format`
 style = "bold yellow"
+
+[custom.venv_off]
+format = '[ $output ]($style)'
+when = '[[ -z "$VIRTUAL_ENV" ]] && [[ -d ".venv" ]]'
+command = 'echo "󱥓"'
+style = "bold red"
 
 [nodejs]
 style = "bold yellow"

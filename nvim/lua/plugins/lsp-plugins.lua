@@ -3,7 +3,7 @@ local kind = vim.lsp.protocol.SymbolKind
 --------------------------------------------------------------------------------
 
 return {
-	{ -- virtual text showing usage count of functions
+	{ -- CodeLens, but also for languages not supporting it
 		"Wansmer/symbol-usage.nvim",
 		event = (vim.fn.has("nvim-0.10.0") == 1 and "LspAttach" or "BufReadPre"), -- TODO
 		opts = {

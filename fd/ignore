@@ -40,6 +40,7 @@ biome.json
 __init__.py
 pyproject.toml
 requirements.txt
+pyrightconfig.json
 
 # Alfred workflows
 info.plist
