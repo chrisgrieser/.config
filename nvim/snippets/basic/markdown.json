@@ -1,14 +1,5 @@
 {
-  "<kbd>": {
-    "body": "<kbd>$0</kbd>",
-    "description": "HTML tag for keys",
-    "prefix": [
-      "kbd",
-      "<kbd>",
-      "key"
-    ]
-  },
-  "Markdown Codeblock": {
+  ",, + Codeblock": {
     "body": [
       "```${1:lang}",
       "$0",
@@ -16,8 +7,16 @@
     ],
     "prefix": [
       ",,",
-      "Codeblock",
-      "```"
+      "Codeblock"
+    ]
+  },
+  "<kbd>": {
+    "body": "<kbd>$0</kbd>",
+    "description": "HTML tag for keys",
+    "prefix": [
+      "kbd",
+      "<kbd>",
+      "key"
     ]
   },
   "Misc": {
