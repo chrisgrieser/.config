@@ -57,12 +57,15 @@ export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-a
 export NODE_REPL_HISTORY=""
 
 # INFO instead of writing npm config to ~/.npmrc, they can also be defined as shell
-# environment variables https://docs.npmjs.com/cli/v9/using-npm/config#environment-variables
-export npm_config_fund=false # disable funding reminder, has to be lowercase
+# environment variables. has to be lower-case though.
+# https://docs.npmjs.com/cli/v9/using-npm/config#environment-variables
+export npm_logs_dir="$HOME/.local/npm/logs" # don't clutter home directory
+export npm_cache="$HOME/.cache/npm"
+export npm_config_fund=false
+export npm_update_notifier=false # updating via homebrew instead
 
-# fix hanging at "sill: idealTree build"
 # INFO reinstalling brew package `openssl@3` also seems to fix this
-# export npm_config_strict_ssl=false
+# export npm_config_strict_ssl=false # fix hanging at "sill: idealTree build"
 
 #───────────────────────────────────────────────────────────────────────────────
 # LESS
