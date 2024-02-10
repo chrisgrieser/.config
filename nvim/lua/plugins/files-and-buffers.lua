@@ -45,7 +45,7 @@ return {
 		init = function() vim.g.genghis_disable_commands = true end,
 		keys = {
 			-- stylua: ignore start
-			{"<C-p>", function() require("genghis").copyFilepath() end, desc = " Copy filepath" },
+			{"<C-p>", function() require("genghis").copyFilepathWithTilde() end, desc = " Copy path (with ~)" },
 			{"<C-t>", function() require("genghis").copyRelativePath() end, desc = " Copy relative path" },
 			{"<C-n>", function() require("genghis").copyFilename() end, desc = " Copy filename" },
 			{"<C-r>", function() require("genghis").renameFile() end, desc = " Rename file" },
