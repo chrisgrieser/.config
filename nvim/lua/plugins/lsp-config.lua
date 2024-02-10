@@ -205,7 +205,7 @@ serverConfigs.stylelint_lsp = {
 local tsserverConfig = {
 	settings = {
 		-- specific to typescript-tools.nvim
-		complete_function_calls = false,
+		complete_function_calls = true,
 		tsserver_file_preferences = {
 			displayPartsForJSDoc = true,
 			generateReturnInDocTemplate = true,
