@@ -28,8 +28,8 @@ return {
 		opts = {
 			commitMsg = {
 				conventionalCommits = { enforce = true },
-				emptyFillIn = false,
 				spellcheck = true,
+				keepAbortedMsgSecs = 300,
 			},
 			historySearch = {
 				autoUnshallowIfNeeded = true,
