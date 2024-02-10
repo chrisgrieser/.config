@@ -291,8 +291,14 @@ serverConfigs.ltex = {
 				MORFOLOGIK_RULE_EN_US = "hint", -- spelling
 			},
 			additionalRules = { enablePickyRules = true },
-			completionEnabled = true, -- also care of by cmp-buffer
-			markdown = { nodes = { Link = "dummy" } }, -- ignore links https://valentjn.github.io/ltex/settings.html#ltexmarkdownnodes
+			markdown = {
+				nodes = {
+					Link = "dummy",
+					HtmlInline = "ignore",
+					HtmlBlock = "ignore",
+					AutoLink = "ignore",
+				},
+			},
 		},
 	},
 	on_attach = function()
