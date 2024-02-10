@@ -49,10 +49,13 @@ keymap("i", "<CR>", function() return autocontinue("<CR>") end, { buffer = true,
 keymap("n", "<D-r>", function()
 	local input = vim.api.nvim_buf_get_name(0)
 	local output = "/tmp/markdown-preview.html"
+	pcall(os.remove, output)
+
 	local githubCssPath = os.getenv("HOME") .. "/.config/pandoc/css/github-markdown.css"
 	vim.fn.system {
 		"pandoc",
-		"--from=gfm", -- gfm = GitHub Flavored Markdown
+		-- rebasing paths, so images are available at /tmp
+		"--from=markdown_github+rebase_relative_paths", 
 		input,
 		"--output=" .. output,
 		"--standalone",
@@ -91,15 +94,6 @@ end, { desc = "  MD image to <img>", buffer = true })
 
 -- cmd+u: markdown bullet
 keymap("n", "<D-u>", "mzI- <Esc>`z", { desc = " Bullet List", buffer = true })
-
--- cmd+c: CodeBlock
-keymap("n", "<D-c>", function()
-	local ln = vim.api.nvim_win_get_cursor(0)[1]
-	vim.api.nvim_buf_set_lines(0, ln, ln, false, { "```", "```", "" })
-	-- insert mode at language block
-	vim.api.nvim_win_set_cursor(0, { ln + 1, 0 })
-	vim.cmd.startinsert { bang = true }
-end, { desc = " Code Block", buffer = true })
 
 -- cmd+k: markdown link
 keymap("n", "<D-k>", "bi[<Esc>ea]()<Esc>hp", { desc = "  Link", buffer = true })

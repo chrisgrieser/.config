@@ -85,6 +85,7 @@ exmap followNextLinkInNewTab obcommand shukuchi:open-link-in-new-tab
 nnoremap gx :followNextLink
 nnoremap gX :followNextLinkInNewTab
 nnoremap gd :followNextLink
+nnoremap gD :followNextLinkInNewTab
 
 " [g]oto [f]ootnotes
 " requires Footnotes Shortcut Plugin
