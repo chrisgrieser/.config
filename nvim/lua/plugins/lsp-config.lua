@@ -205,7 +205,7 @@ serverConfigs.stylelint_lsp = {
 local tsserverConfig = {
 	settings = {
 		-- specific to typescript-tools.nvim
-		complete_function_calls = true,
+		complete_function_calls = false,
 		tsserver_file_preferences = {
 			displayPartsForJSDoc = true,
 			generateReturnInDocTemplate = true,
@@ -218,18 +218,6 @@ local tsserverConfig = {
 		},
 
 		typescript = {
-			inlayHints = {
-				includeInlayEnumMemberValueHints = true,
-				includeInlayFunctionLikeReturnTypeHints = true,
-				includeInlayFunctionParameterTypeHints = true,
-				includeInlayParameterNameHints = "all",
-				includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-				includeInlayPropertyDeclarationTypeHints = true,
-				includeInlayVariableTypeHints = true,
-				includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-			},
-		},
-		javascript = {
 			inlayHints = {
 				includeInlayEnumMemberValueHints = true,
 				includeInlayFunctionLikeReturnTypeHints = true,
@@ -420,7 +408,6 @@ return {
 		config = function()
 			-- typescript-tools does not accept `settings.diagnostics.ignoreCode`
 			-- https://github.com/pmizio/typescript-tools.nvim/issues/233
-
 			local api = require("typescript-tools.api")
 			tsserverConfig.handlers = {
 				-- "Cannot redeclare block-scoped variable" -> not useful for single-file-JXA
