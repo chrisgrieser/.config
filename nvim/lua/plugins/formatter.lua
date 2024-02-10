@@ -53,10 +53,10 @@ local conformOpts = {
 		["bibtex-tidy"] = {
 			-- stylua: ignore
 			prepend_args = {
-				-- BUG (do not use these options)
-				-- *not* using `--no-escape` https://github.com/FlamingTempura/bibtex-tidy/issues/415
-				-- `--no-encode-urls`: https://github.com/FlamingTempura/bibtex-tidy/issues/422
-				-- `--enclosing-braces` https://github.com/FlamingTempura/bibtex-tidy/issues/423
+				-- BUG when
+				-- using `--no-encode-urls`: https://github.com/FlamingTempura/bibtex-tidy/issues/422
+				-- using `--enclosing-braces`: https://github.com/FlamingTempura/bibtex-tidy/issues/423
+				-- *not* using `--no-escape`: https://github.com/FlamingTempura/bibtex-tidy/issues/415
 				"--tab", "--curly", "--no-align", "--no-wrap", "--drop-all-caps",
 				"--numeric", "--trailing-commas", "--no-escape",
 				"--duplicates", "--sort-fields", "--remove-empty-fields",
@@ -72,18 +72,18 @@ local function formattingFunc()
 
 	local useLsp = vim.tbl_contains(lspFormatFt, vim.bo.ft) and "always" or false
 	require("conform").format({ lsp_fallback = useLsp }, function()
-		-- add fixAll & organizeImports to formatting callback
 		if vim.bo.ft == "python" then
 			-- PENDING https://github.com/astral-sh/ruff-lsp/issues/335
-			vim.lsp.buf.code_action { context = { only = { "source.fixAll.ruff" } }, apply = true }
+			vim.lsp.buf.code_action {
+				context = { only = { "source.fixAll.ruff" } },
+				apply = true,
+			}
 		elseif vim.bo.ft == "javascript" or vim.bo.ft == "typescript" then
 			-- as opposed to biome's `source.organizeImports.biome`, this also
 			-- removes unused imports
 			vim.cmd.TSToolsOrganizeImports()
 			vim.cmd.TSToolsAddMissingImports()
-
 			vim.cmd.TSToolsFixAll()
-			-- vim.cmd.TSToolsRemoveUnused() -- removes statements, not only imports
 		end
 	end)
 end
