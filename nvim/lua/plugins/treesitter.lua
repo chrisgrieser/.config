@@ -19,8 +19,6 @@ return {
 				"typescript",
 			},
 		},
-		--------------------------------------------------------------------------
-		-- TREESITTER PLUGINS
 		matchup = {
 			enable = true,
 			enable_quotes = true,
