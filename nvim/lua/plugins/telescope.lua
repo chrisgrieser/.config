@@ -84,7 +84,9 @@ local function toggleHiddenAndIgnore(prompt_bufnr)
 		no_ignore = ignoreHidden,
 		cwd = cwd,
 		-- prevent these becoming visible through `--no-ignore`
-		file_ignore_patterns = { "node_modules", ".venv", "%.DS_Store$", "%.git/", "%.app/" },
+		file_ignore_patterns = ignoreHidden
+				and { "node_modules", ".venv", "%.DS_Store$", "%.git/", "%.app/", "%.png", "%.svg" }
+			or nil,
 	}
 end
 
@@ -189,7 +191,7 @@ local function telescopeConfig()
 				-- inherit global ignore file from `fd`
 				("--ignore-file=" .. os.getenv("HOME") .. "/.config/fd/ignore"),
 			},
-			file_ignore_patterns = { "%.png$" },
+			file_ignore_patterns = { "%.png$", "%.svg" },
 		},
 		pickers = {
 			find_files = {

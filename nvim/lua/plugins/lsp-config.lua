@@ -292,12 +292,7 @@ serverConfigs.ltex = {
 			},
 			additionalRules = { enablePickyRules = true },
 			markdown = {
-				nodes = {
-					Link = "dummy",
-					HtmlInline = "ignore",
-					HtmlBlock = "ignore",
-					AutoLink = "ignore",
-				},
+				nodes = { Link = "dummy" },
 			},
 		},
 	},
