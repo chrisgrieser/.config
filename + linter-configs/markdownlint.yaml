@@ -10,7 +10,7 @@ ul-style: { style: sublist }
 
 ol-prefix: { style: ordered }
 line-length: { tables: false, code_blocks: false }
-no-inline-html: { allowed_elements: [img , details , summary , kbd , a , br] }
+no-inline-html: { allowed_elements: [img, details, summary, kbd, a, br, svg, circle, path] }
 
 #─────────────────────────────────────────────────────────────────────────────
 # DISABLED
