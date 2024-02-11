@@ -27,6 +27,8 @@ local function autocontinue(key)
 	optl.comments = {
 		"b:- [ ]", -- tasks
 		"b:- [x]",
+		"b:\t* [ ]",
+		"b:\t* [x]",
 		"b:*", -- unordered list
 		"b:-",
 		"b:+",
@@ -47,29 +49,52 @@ keymap("i", "<CR>", function() return autocontinue("<CR>") end, { buffer = true,
 --------------------------------------------------------------------------------
 -- Markdown Preview (replaces markdown-preview.nvim)
 keymap("n", "<D-r>", function()
+	-- create github-html via pandoc
 	local input = vim.api.nvim_buf_get_name(0)
-	local output = "/tmp/markdown-preview.html"
-	pcall(os.remove, output)
-
-	local githubCssPath = os.getenv("HOME") .. "/.config/pandoc/css/github-markdown.css"
+	local outputPath = "/tmp/markdown-preview.html"
 	vim.fn.system {
 		"pandoc",
-		-- rebasing paths, so images are available at /tmp
-		"--from=markdown_github+rebase_relative_paths", 
+		-- rebasing paths, so images are available at output location
+		"--from=markdown_github+rebase_relative_paths",
 		input,
-		"--output=" .. output,
+		"--output=" .. outputPath,
 		"--standalone",
-		"--css=" .. githubCssPath,
+		"--css=" .. vim.fn.stdpath("config") .. "/after/ftplugin/github-markdown.css",
 	}
-	vim.fn.system { "open", output } -- macOS open command
+
+	-- determine heading to scroll to
+	local currentHeading = ""
+	local bufLines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+	local linesBeforeCur = vim.list_slice(bufLines, 0, vim.api.nvim_win_get_cursor(0)[1])
+	for i = 1, 10, 1 do
+		
+	end
+	for _, line in ipairs(bufLines) do
+	end
+	local anchor = "#" .. currentHeading:gsub("^#+ ", ""):lower():gsub(" ", "-")
+
+	-- macOS-specific part: open file and refresh
+	vim.fn.system { "open", outputPath .. anchor }
+	local applescript = 'tell application "System Events" to keystroke "r" using {command down}'
+	vim.fn.system { "osascript", "-e", applescript }
 end, { desc = " Preview", buffer = true })
 
 --------------------------------------------------------------------------------
 -- MARKDOWN-SPECIFIC KEYMAPS
 
 -- Jump to next/prev heading
-keymap({ "n", "x" }, "<C-j>", [[/^#\+ .*<CR>]], { desc = " Next Heading", buffer = true, silent = true })
-keymap({ "n", "x" }, "<C-k>", [[?^#\+ .*<CR>]], { desc = " Prev Heading", buffer = true, silent = true })
+keymap(
+	{ "n", "x" },
+	"<C-j>",
+	[[/^#\+ .*<CR>]],
+	{ desc = " Next Heading", buffer = true, silent = true }
+)
+keymap(
+	{ "n", "x" },
+	"<C-k>",
+	[[?^#\+ .*<CR>]],
+	{ desc = " Prev Heading", buffer = true, silent = true }
+)
 
 keymap("n", "<leader>x", "mzI- [ ] <Esc>`z", { desc = " Add Task", buffer = true })
 keymap("n", "<D-4>", "mzI- <Esc>`z", { desc = " Add List", buffer = true })
