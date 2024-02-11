@@ -15,8 +15,7 @@ if vim.bo.buftype == "" then optl.signcolumn = "yes:3" end
 
 --------------------------------------------------------------------------------
 
--- make bullets auto-continue
--- replaces bullets.vim https://www.reddit.com/r/vim/comments/otpr29/how_do_you_get_vim_to_automatically_continue_a/
+-- make bullets auto-continue (replaces bullets.vim)
 -- INFO cannot set opt.comments permanently, since it disturbs the
 -- correctly indented continuation of bullet lists when hitting opt.textwidth
 optl.formatoptions:append("r") -- `<CR>` in insert mode
@@ -52,6 +51,7 @@ keymap("n", "<D-r>", function()
 	-- CONFIG
 	local outputPath = "/tmp/markdown-preview.html"
 	local browser = "Brave Browser"
+	local css = vim.fn.stdpath("config") .. "/after/ftplugin/github-markdown.css"
 
 	-- create github-html via pandoc
 	vim.cmd("silent! update")
@@ -63,10 +63,10 @@ keymap("n", "<D-r>", function()
 		input,
 		"--output=" .. outputPath,
 		"--standalone",
-		"--css=" .. vim.fn.stdpath("config") .. "/after/ftplugin/github-markdown.css",
+		"--css=" .. css,
 	}
 
-	-- determine heading above cursor to scroll to
+	-- determine the heading above cursor, to scroll to it
 	local heading
 	local curLine = vim.api.nvim_win_get_cursor(0)[1]
 	for i = curLine - 1, 1, -1 do
@@ -78,14 +78,19 @@ keymap("n", "<D-r>", function()
 	local url = "file://" .. outputPath .. anchor
 
 	-- macOS-specific part: open file and refresh
-	-- (cannot use shell's `open` as it does not work with anchors)
+	-- * cannot use shell's `open` as it does not work with anchors
+	-- * closing tab to ensure it's correctly refreshed
 	local applescript = ([[
 		tell application %q 
+			if (front window exists) then
+				repeat with the_tab in (every tab in front window)
+					set the_url to the url of the_tab
+					if the_url contains (%q) then close the_tab
+				end repeat
+			end if
 			open location %q
-			delay 0.3
-			tell active tab of first window to reload
 		end tell
-	]]):format(browser, url)
+	]]):format(browser, outputPath, url)
 	vim.fn.system { "osascript", "-e", applescript }
 end, { desc = " Preview", buffer = true })
 
