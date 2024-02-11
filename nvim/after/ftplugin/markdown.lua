@@ -49,9 +49,13 @@ keymap("i", "<CR>", function() return autocontinue("<CR>") end, { buffer = true,
 --------------------------------------------------------------------------------
 -- Markdown Preview (replaces markdown-preview.nvim)
 keymap("n", "<D-r>", function()
-	-- create github-html via pandoc
-	local input = vim.api.nvim_buf_get_name(0)
+	-- CONFIG
 	local outputPath = "/tmp/markdown-preview.html"
+	local browser = "Brave Browser"
+
+	-- create github-html via pandoc
+	vim.cmd("silent! update")
+	local input = vim.api.nvim_buf_get_name(0)
 	vim.fn.system {
 		"pandoc",
 		-- rebasing paths, so images are available at output location
@@ -62,20 +66,26 @@ keymap("n", "<D-r>", function()
 		"--css=" .. vim.fn.stdpath("config") .. "/after/ftplugin/github-markdown.css",
 	}
 
-	-- determine heading to scroll to
-	local currentHeading = ""
-	local bufLines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-	local linesBeforeCur = vim.list_slice(bufLines, 0, vim.api.nvim_win_get_cursor(0)[1])
-	for i = 1, 10, 1 do
-		
+	-- determine heading above cursor to scroll to
+	local heading
+	local curLine = vim.api.nvim_win_get_cursor(0)[1]
+	for i = curLine - 1, 1, -1 do
+		local line = vim.api.nvim_buf_get_lines(0, i, i + 1, false)[1]
+		heading = line:match("^#+ (.*)")
+		if heading then break end
 	end
-	for _, line in ipairs(bufLines) do
-	end
-	local anchor = "#" .. currentHeading:gsub("^#+ ", ""):lower():gsub(" ", "-")
+	local anchor = heading and "#" .. heading:lower():gsub(" ", "-") or ""
+	local url = "file://" .. outputPath .. anchor
 
 	-- macOS-specific part: open file and refresh
-	vim.fn.system { "open", outputPath .. anchor }
-	local applescript = 'tell application "System Events" to keystroke "r" using {command down}'
+	-- (cannot use shell's `open` as it does not work with anchors)
+	local applescript = ([[
+		tell application %q 
+			open location %q
+			delay 0.3
+			tell active tab of first window to reload
+		end tell
+	]]):format(browser, url)
 	vim.fn.system { "osascript", "-e", applescript }
 end, { desc = " Preview", buffer = true })
 

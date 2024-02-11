@@ -1,2 +1,7 @@
-local match = vim.filetype.match { buf = 0 }
-vim.notify("👽 match: " .. tostring(match))
+local url = "file:///tmp/markdown-preview.html#for-obsidian-users"
+vim.fn.system {
+	"open",
+	"-a",
+	"Brave Browser",
+	url,
+}
