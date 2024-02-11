@@ -229,8 +229,8 @@ nnoremap ü <C-x>
 
 " basically ts-comment-string, i.e. using the appropriate comment syntax when in
 " a code block
-exmap contextualComment obcommand contextual-comments:advanced-comments
-nnoremap qq :contextualComment
+" exmap contextualComment obcommand contextual-comments:advanced-comments
+" nnoremap qq :contextualComment
 
 " markdown tasks
 exmap checkList obcommand editor:toggle-checklist-status
