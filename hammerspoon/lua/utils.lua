@@ -107,13 +107,13 @@ end
 ---@param urlPart string
 function M.closeTabsContaining(urlPart)
 	local applescript = ([[
-		tell application "%s"
+		tell application %q
 			set window_list to every window
 			repeat with the_window in window_list
 				set tab_list to every tab in the_window
 				repeat with the_tab in tab_list
 					set the_url to the url of the_tab
-					if the_url contains ("%s") then close the_tab
+					if the_url contains (%q) then close the_tab
 				end repeat
 			end repeat
 		end tell
