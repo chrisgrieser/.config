@@ -185,7 +185,9 @@ return {
 				border = vim.g.borderStyle,
 				relative = "editor",
 				title_pos = "left",
-				min_width = { 0.4, 65 },
+				prefer_width = 73, -- commit width + 1 for padding
+				min_width = 0.4,
+				max_width = 0.9,
 				mappings = { n = { ["q"] = "Close" } },
 			},
 			select = {
