@@ -195,7 +195,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Do not open file afterwards</string>
+				<string>⌘: Open file afterwards</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -823,7 +823,7 @@ fi</string>
 				<key>variables</key>
 				<dict>
 					<key>open</key>
-					<string>false</string>
+					<string>true</string>
 				</dict>
 			</dict>
 			<key>type</key>
