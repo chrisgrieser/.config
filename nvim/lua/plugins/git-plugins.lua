@@ -39,7 +39,7 @@ return {
 					border = vim.g.borderStyle,
 				},
 			},
-			statusLine = {
+			statusline = {
 				blame = {
 					hideAuthorNames = { "Chris Grieser", "pseudometa", "chrisgrieser" },
 					ignoreAuthors = { "🤖 automated" },
@@ -49,14 +49,17 @@ return {
 		},
 		config = function(_, opts)
 			require("tinygit").setup(opts)
-			u.addToLuaLine("winbar", "lualine_x", { require("tinygit.statusline").blame })
-			u.addToLuaLine("inactive_winbar", "lualine_x", { require("tinygit.statusline").blame })
-			-- u.addToLuaLine(
-			-- 	"sections",
-			-- 	"lualine_y",
-			-- 	{ require("tinygit.statusline.branch-state").getBranchState },
-			-- 	"before"
-			-- )
+			u.addToLuaLine("winbar", "lualine_x", require("tinygit.statusline").blame)
+			u.addToLuaLine("inactive_winbar", "lualine_x", require("tinygit.statusline").blame)
+			u.addToLuaLine(
+				"sections",
+				"lualine_y",
+				{
+					require("tinygit.statusline").branchState,
+					padding = { left = 1, right = 0 },
+				},
+				"before"
+			)
 		end,
 	},
 	{ -- git sign gutter & hunk actions
