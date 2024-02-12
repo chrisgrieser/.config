@@ -39,7 +39,11 @@ end
 
 --------------------------------------------------------------------------------
 
-local function updateGitState()
+local function updateBranchState()
+	if vim.bo.buftype ~= "" then
+		vim.b["tinygit_gitState"] = ""
+		return
+	end
 	local stateInfo = vim.fn.system {
 		"git",
 		"-C",
@@ -55,14 +59,16 @@ local function updateGitState()
 	local behind = stateInfo:match("behind (%d+)")
 	if ahead then ahead = "󰶣" .. ahead end
 	if behind then behind = "󰶡" .. behind end
-	vim.b["tinygit_gitState"] = table.concat({ ahead, behind }, " ")
+	local text = table.concat({ ahead, behind }, " ")
+	if ahead and behind then text = "󰃻 " .. text end
+	vim.b["tinygit_gitState"] = text
 end
 vim.api.nvim_create_autocmd("BufEnter", {
-	callback = updateGitState,
+	callback = updateBranchState,
 })
-vim.defer_fn(updateGitState, 1) -- initialize
+vim.defer_fn(updateBranchState, 1) -- initialize
 
-local function getGitState() return vim.b.tinygit_gitState end
+local function getBranchState() return vim.b.tinygit_gitState end
 
 --------------------------------------------------------------------------------
 
@@ -136,7 +142,7 @@ local lualineConfig = {
 		},
 		lualine_y = {
 			{ "diff" },
-			{ getGitState },
+			{ getBranchState },
 			{ -- line count
 				function() return vim.api.nvim_buf_line_count(0) .. " " end,
 				cond = function() return vim.api.nvim_buf_line_count(0) > 50 end,
