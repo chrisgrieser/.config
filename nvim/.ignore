@@ -10,3 +10,4 @@ templates/**
 
 # lazy.nvim
 .lazy-lock.json
+dotfyle.json
