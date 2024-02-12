@@ -106,6 +106,14 @@
     ],
     "prefix": "forEach =>"
   },
+  "function": {
+    "body": [
+      "function ${1:name}() {",
+      "\t$0",
+      "}"
+    ],
+    "prefix": "function"
+  },
   "human-readable relative date (func)": {
     "body": [
       "function humanRelativeDate(isoDateStr) {",
