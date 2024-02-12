@@ -111,7 +111,6 @@ local lualineConfig = {
 		},
 		lualine_y = {
 			{ "diff" },
-			{ getBranchState },
 			{ -- line count
 				function() return vim.api.nvim_buf_line_count(0) .. " " end,
 				cond = function() return vim.api.nvim_buf_line_count(0) > 50 end,
