@@ -37,6 +37,25 @@ local function quickfixCounter()
 	return (' %s/%s "%s"'):format(qf.idx, #qf.items, qf.title) .. fileStr
 end
 
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	callback = function()
+		local behind = vim.fn.system {
+			git
+			-C
+			path,
+			branch
+			-v
+		}
+		local icons = "󰶣󰶡"
+		vim.b["tinygit_gitState"] = ""
+	end,
+})
+
+local function gitState()
+	return vim.b.tinygit_gitState
+end
+
 --------------------------------------------------------------------------------
 
 -- Never show tabline, since we are showing it ourself on the winbar.
@@ -109,6 +128,7 @@ local lualineConfig = {
 		},
 		lualine_y = {
 			{ "diff" },
+			{ gitState },
 			{ -- line count
 				function() return vim.api.nvim_buf_line_count(0) .. " " end,
 				cond = function() return vim.api.nvim_buf_line_count(0) > 50 end,
