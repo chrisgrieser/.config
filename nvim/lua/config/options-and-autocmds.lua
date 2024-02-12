@@ -44,7 +44,7 @@ autocmd("FocusLost", {
 opt.undofile = true -- enables persistent undo history
 
 -- extra undo-points (= more fine-grained undos)
-for _, char in pairs { ",", ";", '"', "'", "<Space>" } do
+for _, char in pairs { ";", '"', "'", "<Space>" } do
 	vim.keymap.set("i", char, function()
 		if vim.bo.buftype ~= "" then return char end
 		return char .. "<C-g>u"
