@@ -74,10 +74,11 @@ end
 function M.gotoAnchorFile()
 	local anchorFiles = { -- CONFIG
 		"init.lua",
-		"utils.lua",
-		"utils.lua",
 		"main.py",
 		"main.ts",
+		"utils.lua",
+		"utils.ts",
+		"utils.py",
 		"README.md",
 	}
 	-----------------------------------------------------------------------------
