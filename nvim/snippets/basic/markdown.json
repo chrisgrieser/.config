@@ -44,6 +44,19 @@
       "details & summary"
     ]
   },
+  "directory tree": {
+    "body": [
+      "```txt",
+      "├── one",
+      "│   ├── one-one",
+      "│   └── two-two",
+      "├── two",
+      "│   └── two-one",
+      "└── three",
+      "```"
+    ],
+    "prefix": "directory tree"
+  },
   "filetree": {
     "body": [
       "```txt",
