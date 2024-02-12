@@ -1,7 +1,4 @@
-local url = "file:///tmp/markdown-preview.html#for-obsidian-users"
-vim.fn.system {
-	"open",
-	"-a",
-	"Brave Browser",
-	url,
-}
+local ahead
+local behind
+local text = table.concat({ ahead, behind }, " ")
+vim.notify("👽 text: a" .. tostring(text) .. "a")

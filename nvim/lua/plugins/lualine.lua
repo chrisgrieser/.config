@@ -39,37 +39,6 @@ end
 
 --------------------------------------------------------------------------------
 
-local function updateBranchState()
-	if vim.bo.buftype ~= "" then
-		vim.b["tinygit_gitState"] = ""
-		return
-	end
-	local stateInfo = vim.fn.system {
-		"git",
-		"-C",
-		vim.loop.cwd(),
-		"branch",
-		"--verbose",
-	}
-	if vim.v.shell_error ~= 0 then
-		vim.b["tinygit_gitState"] = ""
-		return
-	end
-	local ahead = stateInfo:match("ahead (%d+)")
-	local behind = stateInfo:match("behind (%d+)")
-	if ahead then ahead = "󰶣" .. ahead end
-	if behind then behind = "󰶡" .. behind end
-	local text = table.concat({ ahead, behind }, " ")
-	if ahead and behind then text = "󰃻 " .. text end
-	vim.b["tinygit_gitState"] = text
-end
-vim.api.nvim_create_autocmd("BufEnter", {
-	callback = updateBranchState,
-})
-vim.defer_fn(updateBranchState, 1) -- initialize
-
-local function getBranchState() return vim.b.tinygit_gitState end
-
 --------------------------------------------------------------------------------
 
 -- Never show tabline, since we are showing it ourself on the winbar.
