@@ -18,7 +18,7 @@ case "$app" in
 	open -a "$app"
 	;;
 "espanso")
-	espanso restart
+	espanso restart || open -a "Espanso"
 	;;
 esac
 
