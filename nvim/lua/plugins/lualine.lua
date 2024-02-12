@@ -41,11 +41,11 @@ end
 vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function()
 		local behind = vim.fn.system {
-			git
-			-C
-			path,
-			branch
-			-v
+			"git",
+			"-C",
+			gitRoot,
+			"branch",
+			"--verbose",
 		}
 		local icons = "󰶣󰶡"
 		vim.b["tinygit_gitState"] = ""
