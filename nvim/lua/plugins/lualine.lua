@@ -37,24 +37,32 @@ local function quickfixCounter()
 	return (' %s/%s "%s"'):format(qf.idx, #qf.items, qf.title) .. fileStr
 end
 
+--------------------------------------------------------------------------------
 
-vim.api.nvim_create_autocmd("BufEnter", {
-	callback = function()
-		local behind = vim.fn.system {
-			"git",
-			"-C",
-			gitRoot,
-			"branch",
-			"--verbose",
-		}
-		local icons = "󰶣󰶡"
+local function updateGitState()
+	local stateInfo = vim.fn.system {
+		"git",
+		"-C",
+		vim.loop.cwd(),
+		"branch",
+		"--verbose",
+	}
+	if vim.v.shell_error ~= 0 then
 		vim.b["tinygit_gitState"] = ""
-	end,
-})
-
-local function gitState()
-	return vim.b.tinygit_gitState
+		return
+	end
+	local ahead = stateInfo:match("ahead (%d+)")
+	local behind = stateInfo:match("behind (%d+)")
+	if ahead then ahead = "󰶣" .. ahead end
+	if behind then behind = "󰶡" .. behind end
+	vim.b["tinygit_gitState"] = table.concat({ ahead, behind }, " ")
 end
+vim.api.nvim_create_autocmd("BufEnter", {
+	callback = updateGitState,
+})
+vim.defer_fn(updateGitState, 1) -- initialize
+
+local function getGitState() return vim.b.tinygit_gitState end
 
 --------------------------------------------------------------------------------
 
@@ -128,7 +136,7 @@ local lualineConfig = {
 		},
 		lualine_y = {
 			{ "diff" },
-			{ gitState },
+			{ getGitState },
 			{ -- line count
 				function() return vim.api.nvim_buf_line_count(0) .. " " end,
 				cond = function() return vim.api.nvim_buf_line_count(0) > 50 end,
