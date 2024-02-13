@@ -75,7 +75,9 @@ local function workLayout()
 	u.whenAppWinAvailable("Discord", function()
 		app("Mimestream"):activate()
 		-- FIX missing windows by restarting AltTab
-		u.runWithDelays(3, function () hs.application.open("AltTab") end)
+		u.runWithDelays({ 3, 6, 9 }, function()
+			if not app("AltTab") then hs.application.open("AltTab") end
+		end)
 		print("🔲 Loaded WorkLayout")
 	end)
 end
@@ -145,7 +147,7 @@ M.caff_unlock = hs.caffeinate.watcher
 			or event == hs.caffeinate.watcher.systemDidWake
 			or event == hs.caffeinate.watcher.screensDidUnlock
 
-		if hasWoken and not env.isAtOffice then u.runWithDelays(0.5, selectLayout) end 
+		if hasWoken and not env.isAtOffice then u.runWithDelays(0.5, selectLayout) end
 	end)
 	:start()
 
