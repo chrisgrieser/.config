@@ -73,12 +73,11 @@
   },
   "editor + active file": {
     "body": [
-      "const view = app.workspace.getActiveViewOfType(MarkdownView);",
-      "if (!view) {",
+      "const editor = app.workspace.getActiveViewOfType(MarkdownView)?.editor;",
+      "if (!editor) {",
       "\tnew Notice(\"No active editor.\");",
       "\treturn;",
-      "}",
-      "const editor = view.editor;"
+      "}"
     ],
     "description": "Obsidian: Get the editor of the currently active note.",
     "prefix": [
