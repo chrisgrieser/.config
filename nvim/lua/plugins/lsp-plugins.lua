@@ -58,6 +58,11 @@ return {
 				function() require("rulebook").ignoreRule() end,
 				desc = "󰅜 Ignore Rule",
 			},
+			{
+				"<leader>cy",
+				function() require("rulebook").yankDiagnosticCode() end,
+				desc = "󰅍 Yank Diagnostic Code",
+			},
 		},
 	},
 }

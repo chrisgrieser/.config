@@ -5,6 +5,16 @@
 # CONFIG
 plugin_dir="$(dirname "$0")" # plugins in same folder as this rc file
 
+# open Stats
+i=0
+pgrep -xq "Stats" || open -a "Stats"
+while ! pgrep -xq "Stats"; do
+	sleep 0.3
+	i=$((i + 1))
+	[[ $i -gt 20 ]] && break
+done
+
+# switch colors depending on dark mode
 if defaults read -g AppleInterfaceStyle | grep -q "Dark"; then
 	bg_color="0xff333333"
 	font_color="0xffffffff"
@@ -18,7 +28,7 @@ fi
 first_row="left"
 second_row="popup.clock"
 
-nerd_font="$CODE_FONT" # requires zsh-shebang to load from .zshenv
+nerd_font="$CODE_FONT" 
 system_font="Lucida Grande"
 
 #───────────────────────────────────────────────────────────────────────────────
