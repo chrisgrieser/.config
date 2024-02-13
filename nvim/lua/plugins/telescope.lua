@@ -385,7 +385,7 @@ local function telescopeConfig()
 				prompt_prefix = "󰒕 ",
 				fname_width = 12,
 				symbol_width = 15,
-				-- ignore_symbols = { "variable", "constant", "property" },
+				ignore_symbols = { "variable", "constant", "property" },
 			},
 			spell_suggest = {
 				initial_mode = "normal",
