@@ -247,6 +247,10 @@ serverConfigs.biome = {
 	end,
 }
 
+serverConfigs.quick_lint_js = {
+	filetypes = { "javascript", "typescript" },
+}
+
 --------------------------------------------------------------------------------
 
 -- DOCS https://github.com/Microsoft/vscode/tree/main/extensions/json-language-features/server#configuration
