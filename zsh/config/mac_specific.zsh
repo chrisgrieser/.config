@@ -51,7 +51,7 @@ function appid() {
 }
 
 # read app and macOS system setting changes https://news.ycombinator.com/item?id=36982463
-function prefs() {
+function defaults_diff() {
 	if [[ "$PREF_BEFORE" -eq 0 ]]; then
 		defaults read >/tmp/before
 		PREF_BEFORE=1
@@ -63,6 +63,10 @@ function prefs() {
 		defaults read >/tmp/after
 		local changes
 		changes=$(command diff /tmp/before /tmp/after | grep -v "_DKThrottledActivityLast" | grep -E "^(<|>)")
+		if [[ -z "$changes" ]]; then
+			echo "No changes found."
+			return 1
+		fi
 		PREF_BEFORE=0
 		echo "$changes"
 

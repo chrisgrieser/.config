@@ -50,6 +50,11 @@ function stageAllIfNoStagedChanges {
 # - if the is clean after committing, pull-push
 function gc {
 	stageAllIfNoStagedChanges
+	if [[ -n "$(git status --porcelain)" ]]; then
+		print "\e[1;34mCommit: \e[0mNot committing since repo still dirty." &&
+			echo && git status
+		return 1
+	fi
 
 	printf "\e[1;34mCommit: \e[0m" &&
 		git commit -m "$@" || return 1
