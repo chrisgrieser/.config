@@ -82,6 +82,14 @@
     ],
     "prefix": "for (i--)"
   },
+  "for (key, value)": {
+    "body": [
+      "for (const [key, value] of Object.entries(${1:dict})) {",
+      "\t$0",
+      "}"
+    ],
+    "prefix": "for (key, value)"
+  },
   "for .. in (object-key)": {
     "body": [
       "for (const ${1:key} in ${2:object}) {",
