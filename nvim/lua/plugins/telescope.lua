@@ -384,6 +384,8 @@ local function telescopeConfig()
 				-- INFO workspace symbols are not working correctly in lua
 				prompt_prefix = "󰒕 ",
 				fname_width = 12,
+				symbol_width = 15,
+				-- ignore_symbols = { "variable", "constant", "property" },
 			},
 			spell_suggest = {
 				initial_mode = "normal",

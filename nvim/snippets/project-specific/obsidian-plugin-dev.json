@@ -71,7 +71,7 @@
     "body": "await this.app.vault.append(${1:TFile}, ${2:textToAppend});",
     "prefix": "append to note"
   },
-  "editor + active file": {
+  "editor": {
     "body": [
       "const editor = app.workspace.getActiveViewOfType(MarkdownView)?.editor;",
       "if (!editor) {",
@@ -80,10 +80,7 @@
       "}"
     ],
     "description": "Obsidian: Get the editor of the currently active note.",
-    "prefix": [
-      "editor",
-      "active file"
-    ]
+    "prefix": "editor"
   },
   "get TFile from path": {
     "body": "this.app.vault.getAbstractFileByPath(${1:filepath});",
