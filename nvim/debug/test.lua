@@ -1,2 +1,3 @@
 
-vim.notify("👽 text: " .. tostring(require("tinygit.statusline.branch-state").getBranchState()))
+local str = "[masontoolinstaller] quick-lint-js: successfully installed"
+vim.notify(str)

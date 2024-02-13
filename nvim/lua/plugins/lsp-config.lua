@@ -24,6 +24,7 @@ local lspToMasonMap = {
 	typos_lsp = "typos-lsp", -- spellchecker for code
 	vale_ls = "vale-ls", -- natural language linter
 	yamlls = "yaml-language-server",
+	quick_lint_js = "quick-lint-js",
 }
 
 --------------------------------------------------------------------------------

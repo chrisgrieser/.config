@@ -4,7 +4,7 @@
 # INFO emojis need to be in textual form to work in Slack as well as Discord
 matches:
   # double space: emoji-react selection
-  - { trigger: "  ", replace: "+:" }
+  - { trigger: "   ", replace: "+:" }
 
   - { trigger: "hhh", replace: "+:blue_heart:\n" } # 💙
   - { trigger: "mmm", replace: "+:see_no_evil:\n" } # 🙈

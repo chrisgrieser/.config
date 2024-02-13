@@ -157,8 +157,11 @@ return {
 		},
 	},
 	{ -- Notifications
+
+		-- PENDING
 		"chrisgrieser/nvim-notify",
-		branch = "dev",
+		branch = "dev", 
+
 		opts = {
 			render = "wrapped-compact", -- best for shorter max_width
 			max_width = 50,
