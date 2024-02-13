@@ -57,13 +57,10 @@ local routes = {
 	{ filter = { event = "notify", find = "All parsers are up%-to%-date" }, view = "mini" },
 
 	-- Mason
-	{ filter = { event = "notify", find = "%[mason%-tool%-installer%]" }, view = "mini" },
 	{
 		filter = {
 			event = "notify",
-			cond = function(msg)
-				return msg.opts and msg.opts.title and msg.opts.title:find("mason.*.nvim")
-			end,
+			cond = function(msg) return msg.opts and (msg.opts.title or ""):find("mason") end,
 		},
 		view = "mini",
 	},
@@ -158,9 +155,9 @@ return {
 	},
 	{ -- Notifications
 
-		-- PENDING
+		-- PENDING https://github.com/rcarriga/nvim-notify/pull/245
 		"chrisgrieser/nvim-notify",
-		branch = "dev", 
+		branch = "dev",
 
 		opts = {
 			render = "wrapped-compact", -- best for shorter max_width
