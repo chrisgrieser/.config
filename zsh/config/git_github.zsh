@@ -42,14 +42,14 @@ ZSH_HIGHLIGHT_REGEXP+=(
 #───────────────────────────────────────────────────────────────────────────────
 # SMART COMMIT
 
-function stageAllIfNoStagedChanges {
+function _stageAllIfNoStagedChanges {
 	git diff --staged --quiet && git add --all && print "\e[1;34mStaged all changes.\e[0m"
 }
 
 # - if there are no staged changes, stage all changes (`git add -A`) and then commit
 # - if the is clean after committing, pull-push
 function gc {
-	stageAllIfNoStagedChanges
+	_stageAllIfNoStagedChanges
 
 	# without arg, just open in editor
 	if [[ -z "$1" ]]; then
@@ -72,7 +72,7 @@ function gc {
 }
 
 function gC {
-	stageAllIfNoStagedChanges
+	_stageAllIfNoStagedChanges
 	printf "\e[1;34mCommit: \e[0m" &&
 		git commit -m "$@" || return 1
 }
@@ -96,7 +96,7 @@ function gf {
 	target=$(_gitlog --no-graph -n 15 | fzf --ansi --no-sort --no-info | cut -d" " -f1)
 	[[ -z "$target" ]] && return 0
 
-	stageAllIfNoStagedChanges
+	_stageAllIfNoStagedChanges
 	git commit --fixup="$target"
 
 	# HACK ":" is no-op-editor https://www.reddit.com/r/git/comments/uzh2no/what_is_the_utility_of_noninteractive_rebase/
@@ -107,7 +107,7 @@ function gf {
 
 # amend-no-edit
 function gm {
-	stageAllIfNoStagedChanges
+	_stageAllIfNoStagedChanges
 	git commit --amend --no-edit
 	git status
 }
