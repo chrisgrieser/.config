@@ -18,13 +18,13 @@ local lspToMasonMap = {
 	lua_ls = "lua-language-server",
 	marksman = "marksman", -- markdown lsp
 	pyright = "pyright", -- python lsp
+	quick_lint_js = "quick-lint-js",
 	ruff_lsp = "ruff-lsp", -- python linter
 	stylelint_lsp = "stylelint-lsp", -- css linter
 	taplo = "taplo", -- toml lsp
 	typos_lsp = "typos-lsp", -- spellchecker for code
 	vale_ls = "vale-ls", -- natural language linter
 	yamlls = "yaml-language-server",
-	quick_lint_js = "quick-lint-js",
 }
 
 --------------------------------------------------------------------------------
@@ -213,10 +213,8 @@ local tsserverConfig = {
 		},
 
 		-- enable checking javascript without a `jsconfig.json`
-		implicitProjectConfiguration = { -- DOCS https://www.typescriptlang.org/tsconfig
-			checkJs = true,
-			target = "ES2022", -- JXA is compliant with most of ECMAScript: https://github.com/JXA-Cookbook/JXA-Cookbook/wiki/ES6-Features-in-JXA
-		},
+		-- DOCS https://www.typescriptlang.org/tsconfig
+		implicitProjectConfiguration = { checkJs = true, target = "ES2022" },
 
 		typescript = {
 			inlayHints = {
@@ -245,10 +243,6 @@ serverConfigs.biome = {
 		client.server_capabilities.documentFormattingProvider = true
 		client.server_capabilities.documentRangeFormattingProvider = true
 	end,
-}
-
-serverConfigs.quick_lint_js = {
-	filetypes = { "javascript", "typescript" },
 }
 
 --------------------------------------------------------------------------------
@@ -327,12 +321,12 @@ serverConfigs.ltex = {
 		-- Disable ltex in Obsidian vault
 		vim.defer_fn(function()
 			if vim.loop.cwd() == vim.env.VAULT_PATH then vim.cmd.LspStop("ltex") end
-		end, 500)
+		end, 300)
 	end,
 }
 
 -- TYPOS
--- DOCS https://github.com/tekumara/typos-vscode#settings
+-- DOCS https://github.com/tekumara/typos-lsp#settings
 serverConfigs.typos_lsp = {
 	init_options = { diagnosticSeverity = "information" },
 }
@@ -367,8 +361,8 @@ serverConfigs.yamlls = {
 			},
 		},
 	},
-	-- SIC needs enabling via setting *and* via capabilities to work. Probably
-	-- fixed with nvim 0.10 supporting dynamic config changes
+	-- SIC needs enabling via setting *and* via capabilities to work. 
+	-- Probably fixed with nvim 0.10 supporting dynamic config changes
 	on_attach = function(client) client.server_capabilities.documentFormattingProvider = true end,
 }
 
