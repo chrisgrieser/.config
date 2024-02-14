@@ -202,7 +202,7 @@ serverConfigs.stylelint_lsp = {
 --------------------------------------------------------------------------------
 -- JS/TS
 
--- DOCS https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration
+-- DOCS https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md
 local tsserverConfig = {
 	settings = {
 		-- specific to typescript-tools.nvim
@@ -361,7 +361,7 @@ serverConfigs.yamlls = {
 			},
 		},
 	},
-	-- SIC needs enabling via setting *and* via capabilities to work. 
+	-- SIC needs enabling via setting *and* via capabilities to work.
 	-- Probably fixed with nvim 0.10 supporting dynamic config changes
 	on_attach = function(client) client.server_capabilities.documentFormattingProvider = true end,
 }
