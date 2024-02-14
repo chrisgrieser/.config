@@ -17,7 +17,7 @@ readonly longitude=13
 
 # GUARD 
 if ! command -v yq &>/dev/null; then
-	sketchybar --set "$NAME" icon="" label="yq not found"
+	sketchybar --set "$NAME" icon=" " label="yq not found"
 	return 1
 fi
 

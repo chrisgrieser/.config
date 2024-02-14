@@ -28,7 +28,7 @@ export NEOVIDE_TITLE_HIDDEN=1
 
 # NEOVIM
 # so packages managed by mason are generally available
-# export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
+export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
 
 # PANDOC
 # HACK since pandoc does not allow default data-dirs
