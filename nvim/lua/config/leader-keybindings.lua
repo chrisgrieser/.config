@@ -17,7 +17,7 @@ keymap(
 )
 
 -- Run Last [a]gain
-keymap("n", "<leader>a", ":<Up><CR>", { desc = "󰘳 last cmd again", silent = true })
+keymap("n", "<leader>a", ":<Up><CR>", { desc = "󰘳 Last cmd again", silent = true })
 
 -- view internal directories
 keymap(

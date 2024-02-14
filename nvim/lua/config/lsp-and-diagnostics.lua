@@ -37,6 +37,9 @@ end
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 	border = vim.g.borderStyle,
 })
+
+--------------------------------------------------------------------------------
+
 -- INFO this needs to be disabled for noice.nvim
 -- vim.lsp.handlers["textDocument/hover"] =
 -- vim.lsp.with(vim.lsp.handlers.hover, { border = vim.g.myBorderStyle })
