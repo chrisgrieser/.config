@@ -44,31 +44,6 @@
       "details & summary"
     ]
   },
-  "directory tree": {
-    "body": [
-      "```txt",
-      "├── one",
-      "│   ├── one-one",
-      "│   └── two-two",
-      "├── two",
-      "│   └── two-one",
-      "└── three",
-      "```"
-    ],
-    "prefix": "directory tree"
-  },
-  "filetree": {
-    "body": [
-      "```txt",
-      ".",
-      "├── file1",
-      "├── folder1",
-      "│    └── file2",
-      "└── file3",
-      "```"
-    ],
-    "prefix": "filetree"
-  },
   "image": {
     "body": "<img src=\"${1:image_path}\" alt=\"${2:alt text}\" width=\"${3:50%}\">",
     "description": "HTML syntax for images used to display images with reduced size",
@@ -113,6 +88,20 @@
     ],
     "description": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts",
     "prefix": "tip (callout)"
+  },
+  "tree": {
+    "body": [
+      "```txt",
+      ".",
+      "├── 📂 one",
+      "│   ├── 📄 one-one",
+      "│   └── 📄 two-two",
+      "├── 📂 two",
+      "│   └── 📄 two-one",
+      "└── 📄 three",
+      "```"
+    ],
+    "prefix": "tree"
   },
   "warning (callout)": {
     "body": [
