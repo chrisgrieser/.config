@@ -40,6 +40,7 @@ keymap("n", "g,", "g;", { desc = " Goto Last Change" })
 
 -- Search
 keymap("n", "-", "/")
+
 keymap("x", "-", "<Esc>/\\%V", { desc = "Search IN sel" })
 
 -- Diagnostics
