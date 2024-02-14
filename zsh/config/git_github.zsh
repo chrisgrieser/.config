@@ -109,6 +109,7 @@ function gf {
 function gm {
 	_stageAllIfNoStagedChanges
 	git commit --amend --no-edit
+	echo
 	git status
 }
 
@@ -118,7 +119,7 @@ function gM {
 		print "\e[1;33mStaged changes found.\e[0m"
 		return 1
 	fi
-	git commit --amend
+	git commit --amend --no-verify
 	git status
 }
 
