@@ -1,5 +1,5 @@
 .PHONY: reload
 
 reload:
-	espanso restart &>/dev/null
+	espanso restart || open -a "Espanso"
 
