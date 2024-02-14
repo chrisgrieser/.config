@@ -233,17 +233,19 @@ function M.closeAllTheThings()
 		if win:isFullScreen() then win:setFullScreen(false) end
 	end
 
-	-- close finder wins
-	if hs.application("Finder") then
-		for _, win in pairs(hs.application("Finder"):allWindows()) do
-			win:close()
-		end
-	end
-
 	-- close browser tabs and various apps
 	M.closeTabsContaining(".") -- closes all tabs, since all URLs include `.`
 	M.quitApps(env.videoAndAudioApps)
 	require("lua.private").closer()
+
+	-- close finder wins
+	M.runWithDelays({ 0, 1 }, function()
+		if hs.application("Finder") then
+			for _, win in pairs(hs.application("Finder"):allWindows()) do
+				win:close()
+			end
+		end
+	end)
 end
 
 --------------------------------------------------------------------------------
