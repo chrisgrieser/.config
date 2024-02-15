@@ -273,10 +273,10 @@ end
 
 -- DOCS https://valentjn.github.io/ltex/settings.html
 serverConfigs.ltex = {
-	filetypes = { "gitcommit", "markdown" }, -- disable for bibtex and text files
+	filetypes = { "markdown" },
 	settings = {
 		ltex = {
-			language = "en-US", -- de-DE; default language, can be set per-file via markdown yaml header
+			language = "en-US", -- can also be set per file via markdown yaml header (e.g. `de-DE`)
 			dictionary = { ["en-US"] = getDictWords() },
 			disabledRules = {
 				["en-US"] = {
@@ -289,7 +289,10 @@ serverConfigs.ltex = {
 				default = "info",
 				MORFOLOGIK_RULE_EN_US = "hint", -- spelling
 			},
-			additionalRules = { enablePickyRules = true },
+			additionalRules = {
+				enablePickyRules = true,
+				mothersTongue = "de-DE",
+			},
 			markdown = {
 				nodes = { Link = "dummy" },
 			},
@@ -318,7 +321,7 @@ serverConfigs.ltex = {
 			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = ltexSettings })
 		end, { desc = "󰓆 Add Word", buffer = true })
 
-		-- Disable ltex in Obsidian vault
+		-- Disable ltex in Obsidian vault, as there is no `.ltexignore` https://github.com/valentjn/vscode-ltex/issues/576
 		vim.defer_fn(function()
 			if vim.loop.cwd() == vim.env.VAULT_PATH then vim.cmd.LspStop("ltex") end
 		end, 300)

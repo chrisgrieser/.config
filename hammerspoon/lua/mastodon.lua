@@ -65,7 +65,7 @@ local function showHideTickerApp(referenceWin)
 	local masto = app(mastodonApp)
 	if not masto or not referenceWin or u.isFront("CleanShot X") then return end
 
-	if wu.checkSize(referenceWin, wu.pseudoMax) or wu.checkSize(referenceWin, wu.centerHalf) then
+	if wu.checkSize(referenceWin, wu.pseudoMax) or wu.checkSize(referenceWin, wu.center) then
 		winToTheSide()
 		return
 	end

@@ -59,6 +59,11 @@ local function workLayout()
 	u.closeAllTheThings()
 	app("AltTab"):kill() -- FIX missing windows
 
+	-- FIX enforce reminders sync
+	hs.application.open("Reminders")
+	u.runWithDelays(0.5, function() app("Reminders"):hide() end)
+	u.runWithDelays(3, function() app("Reminders"):kill() end)
+
 	-- open
 	u.openApps(env.mastodonApp)
 	local appsToOpen = { "Discord", env.browserApp, "Mimestream" }
@@ -73,11 +78,11 @@ local function workLayout()
 
 	-- finish
 	u.whenAppWinAvailable("Discord", function()
-		app("Mimestream"):activate()
 		-- FIX missing windows by restarting AltTab
-		u.runWithDelays({ 3, 6, 9 }, function()
+		u.runWithDelays({ 2, 5 }, function()
 			if not app("AltTab") then hs.application.open("AltTab") end
 		end)
+		app("Mimestream"):activate()
 		print("🔲 Loaded WorkLayout")
 	end)
 end
