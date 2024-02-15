@@ -11,16 +11,24 @@ function camelCasePathMatch(str) {
 	return [clean, camelCaseSeparated, str].join(" ") + " ";
 }
 
+/** @param {string} url */
+function httpRequest(url) {
+	const queryURL = $.NSURL.URLWithString(url);
+	const data = $.NSData.dataWithContentsOfURL(queryURL);
+	const requestStr = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
+	return requestStr;
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const sourceURL =
+	const obsiDocsSource =
 		"https://api.github.com/repos/obsidianmd/obsidian-developer-docs/git/trees/main?recursive=1";
-	const baseURL = "https://docs.obsidian.md";
+	const obsiDocsBaseURL = "https://docs.obsidian.md";
 
-	const workArray = JSON.parse(app.doShellScript(`curl -sL ${sourceURL}`))
+	const obsiDocs = JSON.parse(httpRequest(obsiDocsSource))
 		.tree.filter(
 			(/** @type {{ path: string; }} */ file) =>
 				file.path.startsWith("en/") && file.path.endsWith(".md"),
@@ -40,10 +48,14 @@ function run() {
 				title: displayTitle,
 				subtitle: category,
 				match: camelCasePathMatch(subsitePath),
-				arg: `${baseURL}/${subsiteURL}`,
+				arg: `${obsiDocsBaseURL}/${subsiteURL}`,
 				uid: subsitePath,
 			};
 		});
+	//───────────────────────────────────────────────────────────────────────────
+	const codeMirrorDocsSource = "https://codemirror.net/docs/ref/"
 
-	return JSON.stringify({ items: workArray });
+	const codeMirrorDocs = httpRequest(codeMirrorDocsSource)
+
+	return JSON.stringify({ items: obsiDocs });
 }

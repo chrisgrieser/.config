@@ -466,7 +466,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Open Releases / Changelog</string>
+				<string>⌘: Open Homepage (or Releases)</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1363,7 +1363,7 @@
 	<string>## Usage
 - Search all public GitHub repositories via the keyword `gh`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the repo's GitHub page.
-	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the repo's releases page (often have changelogs).
+	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the repo's homepage. If it has none, opens the releases page instead.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the repo URL.
 	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Shallow clone the repo to a local folder and open in the Terminal. Optionally, creates a fork on GitHub with the `gh` cli and prepares the repo for a PR.
 	+ &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Search the last 100 issues, use &lt;kbd&gt;⏎&lt;/kbd&gt; to open the issue in the browser.
@@ -1834,7 +1834,7 @@
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.11.1</string>
+	<string>0.11.2</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
