@@ -383,8 +383,8 @@ local function telescopeConfig()
 			lsp_workspace_symbols = {
 				-- INFO workspace symbols are not working correctly in lua
 				prompt_prefix = "󰒕 ",
-				fname_width = 12,
-				symbol_width = 15,
+				fname_width = 0,
+				symbol_width = 25,
 				ignore_symbols = { "variable", "constant", "property" },
 				ignore_folders = {
 					"node_modules", -- ts/js
