@@ -102,7 +102,7 @@
   },
   "http-request": {
     "body": [
-      "/** @param {string} url */",
+      "/** @param {string} url @return {string} */",
       "function httpRequest(url) {",
       "\tconst queryURL = $.NSURL.URLWithString(url);",
       "\tconst data = $.NSData.dataWithContentsOfURL(queryURL);",
