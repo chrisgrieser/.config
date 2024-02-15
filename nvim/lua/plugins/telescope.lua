@@ -383,7 +383,7 @@ local function telescopeConfig()
 			lsp_workspace_symbols = {
 				-- INFO workspace symbols are not working correctly in lua
 				prompt_prefix = "󰒕 ",
-				fname_width = 0,
+				fname_width = 0, -- can see filename in preview title
 				symbol_width = 25,
 				ignore_symbols = { "variable", "constant", "property" },
 				ignore_folders = {
