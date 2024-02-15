@@ -79,6 +79,8 @@ export LESS_TERMCAP_us=$'\E[1;36m' # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'    # reset underline
 
 export LESS='--RAW-CONTROL-CHARS --line-num-width=3 --chop-long-lines --incsearch --ignore-case --window=-4 --no-init --tilde --long-prompt --quit-if-one-screen'
+export GIT_PAGER="less -S"
+
 export LESSHISTFILE=- # don't clutter home directory with useless `.lesshst` file
 
 # INFO Keybindings

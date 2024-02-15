@@ -508,8 +508,9 @@ return {
 			{ -- using my patch of workspace symbols that filters folders
 				"gw",
 				function()
-					local opts = require("telescope.config").pickers.lsp_workspace_symbols
-					require("funcs.workspace-symbols-filtered").workspace_symbols(opts)
+					require("telescope.builtin").lsp_workspace_symbols {
+						ignore_folders = { "node_modules" },
+					}
 				end,
 				desc = "󰒕 Workspace Symbols",
 			},
