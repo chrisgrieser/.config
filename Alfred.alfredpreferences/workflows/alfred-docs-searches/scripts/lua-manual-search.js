@@ -5,10 +5,10 @@ app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} str */
-function alfredMatcher(str) {
-	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
+function camelCaseMatch(str) {
+	const clean = str.replace(/[-_.]/g, " ");
 	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
-	return [clean, camelCaseSeparated, str].join(" ");
+	return [clean, camelCaseSeparated, str].join(" ") + " ";
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -27,16 +27,17 @@ function run() {
 		.slice(40) // remove html header
 		.filter((line) => line.includes("HREF"))
 		.map((line) => {
-			const subsite = line.replace(ahrefRegex, "$1");
-			const url = luaManualBaseURL + subsite;
-			const title = line
+			let [, subsite, title] = line.match(ahrefRegex) || [];
+			if (!subsite) return {};
+			title = title
 				.replace(ahrefRegex, "$2")
 				.replace(/^[.0-9]+ &ndash; /, "");
 			if (title.includes(">")) return {};
+			const url = luaManualBaseURL + subsite;
 
 			return {
 				title: title,
-				match: alfredMatcher(title),
+				match: camelCaseMatch(title),
 				arg: url,
 				uid: url,
 			};
