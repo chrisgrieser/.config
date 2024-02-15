@@ -386,7 +386,12 @@ local function telescopeConfig()
 				fname_width = 12,
 				symbol_width = 15,
 				ignore_symbols = { "variable", "constant", "property" },
-				ignore_folders = { "node_modules", ".local", "homebrew" },
+				ignore_folders = {
+					"node_modules", -- ts/js
+					".local", -- neodev.nvim
+					"homebrew", -- nvim runtime
+					"EmmyLua.spoon" -- Hammerspoon
+				},
 			},
 			spell_suggest = {
 				initial_mode = "normal",
@@ -506,11 +511,11 @@ return {
 				desc = " Grep cword",
 			},
 			{ -- using my patch of workspace symbols that filters folders
+				-- PENDING https://github.com/nvim-telescope/telescope.nvim/pull/2923
 				"gw",
 				function()
-					require("telescope.builtin").lsp_workspace_symbols {
-						ignore_folders = { "node_modules" },
-					}
+					local opts = require("telescope.config").pickers.lsp_workspace_symbols
+					require("funcs.workspace-symbols-filtered").workspace_symbols(opts)
 				end,
 				desc = "󰒕 Workspace Symbols",
 			},

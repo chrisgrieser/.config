@@ -1,7 +1,7 @@
 -- INFO `:Telescope lsp_workspace_symbols`, patched to be able to filter certain folders
 -- implementing: https://github.com/nvim-telescope/telescope.nvim/issues/2920
 -- SOURCE https://github.com/nvim-telescope/telescope.nvim/blob/fac5da839e23e7a4c17a332a640541cd59ebfbd5/lua/telescope/builtin/__lsp.lua#L327-L368
--- PENDING my PR: 
+-- PENDING my PR: https://github.com/nvim-telescope/telescope.nvim/pull/2923
 --------------------------------------------------------------------------------
 
 local M = {}

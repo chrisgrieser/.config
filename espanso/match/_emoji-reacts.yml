@@ -7,7 +7,7 @@ matches:
   - { trigger: "   ", replace: "+:" }
 
   - { trigger: "hhh", replace: "+:blue_heart:\n" } # 💙
-  - { trigger: "mmm", replace: "+:see_no_evil:\n" } # 🙈
+  - { trigger: "<3", replace: "💙" } # use blue heart instead of red heart
   - { trigger: "yyy", replace: "+:+1:\n" } # 👍
   - { trigger: "eee", replace: "+:eyes:\n" } # 👀
 

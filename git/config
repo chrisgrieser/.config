@@ -11,9 +11,9 @@
 	autocrlf = input
 
 	# 1. Motivation: version control & sync of hooks across devices
-	# 2. by setting them in the global git config, there is no more need to run
+	# 2. By setting them in the global git config, there is no more need to run
 	# `git config core.hooksPath .git-hooks` after every `git clone`
-	# 3. CAVEAT this trick only works on repos solely managed by the user of
+	# 3. This trick only works on repos solely managed by the user of
 	# this dotfile-repo, it does not work to enforce hooks on other people's clones
 	hooksPath = .git-hooks
 [status]
@@ -42,6 +42,14 @@
 [diff]
 	colorMoved = true # moved lines colored different than added/removed
    colorMovedWS = ignore-all-space
+
+#───────────────────────────────────────────────────────────────────────────────
+# DOCS https://neovim.io/doc/user/diff.html#dp
+# SOURCE https://smittie.de/posts/git-mergetool/
+[merge]
+	tool = nvim
+[mergetool "nvim"]
+	cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
 
 #───────────────────────────────────────────────────────────────────────────────
 # SETUP FOR DELTA
