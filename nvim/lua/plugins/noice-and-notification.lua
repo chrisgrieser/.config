@@ -1,5 +1,5 @@
 ---@param bufnr number
-local function highlightCopyStacktraceLine(bufnr)
+local function highlightsInStacktrace(bufnr)
 	vim.defer_fn(function()
 		if not vim.api.nvim_buf_is_valid(bufnr) then return end
 		vim.api.nvim_buf_call(bufnr, function()
@@ -76,7 +76,7 @@ return {
 		init = function()
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "noice",
-				callback = function(ctx) highlightCopyStacktraceLine(ctx.buf) end,
+				callback = function(ctx) highlightsInStacktrace(ctx.buf) end,
 			})
 		end,
 		keys = {
@@ -154,11 +154,7 @@ return {
 		},
 	},
 	{ -- Notifications
-
-		-- PENDING https://github.com/rcarriga/nvim-notify/pull/245
-		"chrisgrieser/nvim-notify",
-		branch = "dev",
-
+		"rcarriga/nvim-notify",
 		opts = {
 			render = "wrapped-compact", -- best for shorter max_width
 			max_width = 50,
@@ -174,7 +170,7 @@ return {
 				vim.api.nvim_win_set_config(win, { border = vim.g.borderStyle })
 
 				local bufnr = vim.api.nvim_win_get_buf(win)
-				highlightCopyStacktraceLine(bufnr)
+				highlightsInStacktrace(bufnr)
 			end,
 		},
 	},
