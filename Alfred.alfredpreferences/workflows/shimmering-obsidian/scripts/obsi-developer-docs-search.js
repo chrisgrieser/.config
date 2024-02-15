@@ -5,13 +5,13 @@ app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} str */
-function camelCasePathMatch(str) {
+function camelCaseMatcher(str) {
 	const clean = str.replace(/[-_./]/g, " ");
 	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
 	return [clean, camelCaseSeparated, str].join(" ") + " ";
 }
 
-/** @param {string} url */
+/** @param {string} url @return {string} */
 function httpRequest(url) {
 	const queryURL = $.NSURL.URLWithString(url);
 	const data = $.NSData.dataWithContentsOfURL(queryURL);
@@ -47,15 +47,35 @@ function run() {
 			return {
 				title: displayTitle,
 				subtitle: category,
-				match: camelCasePathMatch(subsitePath),
+				match: camelCaseMatcher(subsitePath),
 				arg: `${obsiDocsBaseURL}/${subsiteURL}`,
 				uid: subsitePath,
 			};
 		});
 	//───────────────────────────────────────────────────────────────────────────
-	const codeMirrorDocsSource = "https://codemirror.net/docs/ref/"
+	const codeMirrorDocsSource = "https://codemirror.net/docs/ref/";
+	const ahrefRegex = /<a href="(#.*?)"/i;
 
 	const codeMirrorDocs = httpRequest(codeMirrorDocsSource)
+		.split("\n")
+		.filter((line) => line.includes('a href="#'))
+		.map((line) => {
+			const hasMatch = line.match(ahrefRegex);
+			if (!hasMatch) return {};
+			const anchor = hasMatch[1];
+			const url = codeMirrorDocsSource + anchor;
+			const anchorData = decodeURIComponent(anchor).slice(1);
 
-	return JSON.stringify({ items: obsiDocs });
+			const [_, category, displayTitle] = anchorData.match(/^(.*?)[.^](.*?)/) || [];
+
+			return {
+				title: displayTitle,
+				subtitle: category,
+				match: camelCaseMatcher(displayTitle),
+				arg: url,
+				uid: url,
+			};
+		});
+
+	return JSON.stringify({ items: [...codeMirrorDocs] });
 }
