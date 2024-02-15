@@ -10,7 +10,8 @@ local wf = hs.window.filter
 M.iMacDisplay = hs.screen("Built%-in")
 M.maximized = hs.layout.maximized
 M.pseudoMax = { x = 0.184, y = 0, w = 0.817, h = 1 }
-M.centerHalf = { x = 0.184, y = 0, w = 0.6, h = 1 }
+M.center = { x = 0.184, y = 0, w = 0.6, h = 1 }
+M.centerThird = { x = 0.34, y = 0, w = 0.66, h = 1 }
 M.smallCenter = { x = 0.3, y = 0.15, w = 0.4, h = 0.7 }
 
 -- negative x to hide useless sidebar
@@ -133,7 +134,7 @@ function M.autoTile(winSrc)
 		if env.isProjector() then
 			pos[1] = M.maximized
 		elseif u.isFront("Finder") then
-			pos[1] = M.centerHalf
+			pos[1] = M.center
 		else
 			pos[1] = M.pseudoMax
 		end
@@ -219,9 +220,11 @@ local function controlSpaceAction()
 
 	local pos
 	if u.isFront { "Reminders", "GoodTask" } then
-		pos = M.checkSize(curWin, M.smallCenter) and M.centerHalf or M.smallCenter
+		pos = M.checkSize(curWin, M.smallCenter) and M.center or M.smallCenter
 	elseif u.isFront { "Finder", "Script Editor" } then
-		pos = M.checkSize(curWin, M.centerHalf) and M.maximized or M.centerHalf
+		pos = M.checkSize(curWin, M.center) and M.maximized or M.center
+	elseif u.isFront("System Settings") then
+		pos = M.centerThird
 	else
 		pos = M.checkSize(curWin, M.pseudoMax) and M.maximized or M.pseudoMax
 	end
