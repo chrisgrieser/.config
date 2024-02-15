@@ -2,6 +2,7 @@
 # - `bat --list-themes` to list all available themes
 # - only themes that work in dark and light mode are `ansi` and `default` though
 # - alternatively, the theme can be set dynamically: https://github.com/sharkdp/bat#dark-mode
+#───────────────────────────────────────────────────────────────────────────────
 
 # Possible values: *default*, full, auto, plain, changes, header,
 # header-filename, header-filesize, grid, rule, numbers, snip. Can combined via

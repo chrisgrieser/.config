@@ -54,6 +54,7 @@ declare class GithubRepo {
 
 	// biome-ignore lint/style/useNamingConvention: not_by_me
 	html_url: string;
+	homepage: string;
 
 	fork: boolean;
 	archived: boolean;

@@ -72,8 +72,6 @@ function run(argv) {
 	const repos = JSON.parse(httpRequest(apiURL))
 		.items.filter((/** @type {GithubRepo} */ repo) => !(repo.fork || repo.archived))
 		.map((/** @type {GithubRepo} */ repo) => {
-			console.log("🪚 " + repo.full_name);
-
 			// calculate relative date
 			// INFO pushed_at refers to commits only https://github.com/orgs/community/discussions/24442
 			// CAVEAT pushed_at apparently also includes pushes via PR :(
@@ -88,6 +86,8 @@ function run(argv) {
 
 			const cloneSubtitle = "⌃: Shallow Clone" + (forkOnClone ? " & Fork" : "");
 
+			const secondUrl = repo.homepage || repo.html_url + "/releases";
+
 			return {
 				title: repo.name,
 				subtitle: subtitle,
@@ -99,7 +99,8 @@ function run(argv) {
 						arg: repo.full_name,
 					},
 					cmd: {
-						arg: repo.html_url + "/releases",
+						arg: secondUrl,
+						subtitle: `⌘: Open  "${secondUrl}"`
 					},
 					ctrl: {
 						subtitle: cloneSubtitle,
