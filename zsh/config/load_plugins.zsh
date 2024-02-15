@@ -21,8 +21,6 @@ source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # must be loaded *after* zsh-syntax-highlighting
 source "$HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
 
-#───────────────────────────────────────────────────────────────────────────────
-
 source "$ZDOTDIR/plugins/magic_dashboard.zsh"
 
 eval "$(starship init zsh)"
