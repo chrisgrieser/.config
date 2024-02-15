@@ -386,6 +386,7 @@ local function telescopeConfig()
 				fname_width = 12,
 				symbol_width = 15,
 				ignore_symbols = { "variable", "constant", "property" },
+				ignore_folders = { "node_modules", ".local", "homebrew" },
 			},
 			spell_suggest = {
 				initial_mode = "normal",
@@ -435,8 +436,6 @@ return {
 			{ "gs", function() telescope("treesitter") end, desc = " Symbols" },
 			{ "gd", function() telescope("lsp_definitions") end, desc = "󰒕 Definitions" },
 			{ "gf", function() telescope("lsp_references") end, desc = "󰒕 References" },
-			-- stylua: ignore
-			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
 			{ "<leader>ph", function() telescope("highlights") end, desc = " Highlights" },
 			{ "<leader>pc", function() telescope("colorscheme") end, desc = " Colorschemes" },
 			{ "<leader>gs", function() telescope("git_status") end, desc = " Status" },
@@ -505,6 +504,14 @@ return {
 					}
 				end,
 				desc = " Grep cword",
+			},
+			{ -- using my patch of workspace symbols that filters folders
+				"gw",
+				function()
+					local opts = require("telescope.config").pickers.lsp_workspace_symbols
+					require("funcs.workspace-symbols-filtered").workspace_symbols(opts)
+				end,
+				desc = "󰒕 Workspace Symbols",
 			},
 		},
 	},

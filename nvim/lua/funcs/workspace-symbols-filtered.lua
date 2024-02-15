@@ -1,3 +1,9 @@
+-- INFO `:Telescope lsp_workspace_symbols`, patched to be able to filter certain folders
+-- implementing: https://github.com/nvim-telescope/telescope.nvim/issues/2920
+-- SOURCE https://github.com/nvim-telescope/telescope.nvim/blob/fac5da839e23e7a4c17a332a640541cd59ebfbd5/lua/telescope/builtin/__lsp.lua#L327-L368
+-- PENDING my PR: 
+--------------------------------------------------------------------------------
+
 local M = {}
 
 local conf = require("telescope.config").values
@@ -42,7 +48,7 @@ M.workspace_symbols = function(opts)
 
 		local locations = vim.lsp.util.symbols_to_items(server_result or {}, opts.bufnr) or {}
 
-		-- this section is new
+		---INFO this section is new-----------------
 		locations = vim.tbl_filter(function(l)
 			local dir = vim.fs.dirname(l.filename)
 			local parent_folders = vim.split(dir, "/")
@@ -51,6 +57,7 @@ M.workspace_symbols = function(opts)
 			end
 			return true
 		end, locations)
+		-------------------------------------------
 
 		locations = utils.filter_symbols(locations, opts, symbols_sorter)
 		if locations == nil then
@@ -87,4 +94,4 @@ M.workspace_symbols = function(opts)
 end
 
 --------------------------------------------------------------------------------
-M.workspace_symbols { ignore_folders = { "node_modules", ".local" } }
+return M
