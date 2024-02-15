@@ -27,7 +27,7 @@ function _gitlog {
 	# INFO inserting ansi colors via sed requires leading $
 	local the_log
 	the_log=$(
-		git log --all --color $graph \
+		git --no-pager log --all --color $graph \
 			--format="%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)%an%C(reset)" "$@" |
 			sed -e 's/ seconds* ago)/s)/' \
 				-e 's/ minutes* ago)/m)/' \
