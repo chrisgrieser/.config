@@ -52,7 +52,9 @@ function run() {
 				uid: subsitePath,
 			};
 		});
+
 	//───────────────────────────────────────────────────────────────────────────
+
 	const codeMirrorDocsSource = "https://codemirror.net/docs/ref/";
 	const ahrefRegex = /<a href="(#.*?)"/i;
 
@@ -60,18 +62,18 @@ function run() {
 		.split("\n")
 		.filter((line) => line.includes('a href="#'))
 		.map((line) => {
-			const hasMatch = line.match(ahrefRegex);
-			if (!hasMatch) return {};
-			const anchor = hasMatch[1];
+			const [_, anchor] = line.match(ahrefRegex) || [null, null];
+			if (!anchor) return {};
 			const url = codeMirrorDocsSource + anchor;
-			const anchorData = decodeURIComponent(anchor).slice(1);
+			const data = decodeURIComponent(anchor).slice(1);
 
-			const [_, category, displayTitle] = anchorData.match(/^(.*?)[.^](.*?)/) || [];
+			const [__, category, title] = data.match(/(.*)[.^](.*)/) || [null, "@codemirror", data];
 
 			return {
-				title: displayTitle,
+				title: title,
 				subtitle: category,
-				match: camelCaseMatcher(displayTitle),
+				match: camelCaseMatcher(title) + camelCaseMatcher(category),
+				icon: { path: "icons/codemirror-logo.png" },
 				arg: url,
 				uid: url,
 			};

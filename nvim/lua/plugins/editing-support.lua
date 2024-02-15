@@ -41,7 +41,13 @@ return {
 			},
 			surrounds = {
 				invalid_key_behavior = { add = false, find = false, delete = false, change = false },
-				["R"] = {
+				-- `dsl` -> delete surrounding call 
+				-- (includes : for lua methods and css pseudo-classes)
+				["l"] = {
+					find = "[%w.:]+%b()",
+					delete = "([%w.:]+%()().-(%))()",
+				},
+				["R"] = { -- wikilink
 					find = "%[%[.-%]%]",
 					add = { "[[", "]]" },
 					delete = "(%[%[)().-(%]%])()",
@@ -49,7 +55,7 @@ return {
 						target = "(%[%[)().-(%]%])()",
 					},
 				},
-				["/"] = {
+				["/"] = { -- regex
 					find = "/.-/",
 					add = { "/", "/" },
 					delete = "(/)().-(/)()",
@@ -178,14 +184,6 @@ return {
 	{ -- swapping of sibling nodes
 		"Wansmer/sibling-swap.nvim",
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		opts = {
-			use_default_keymaps = false,
-			allowed_separators = { "..", "*" }, -- add multiplication & lua string concatenation
-			highlight_node_at_cursor = true,
-			ignore_injected_langs = true,
-			allow_interline_swaps = true,
-			interline_swaps_without_separator = false,
-		},
 		keys = {
 			-- stylua: ignore start
 			{ "ä", function() require("sibling-swap").swap_with_right() end, desc = "󰔰 Move Node Right" },
@@ -193,6 +191,14 @@ return {
 			-- stylua: ignore end
 			{ "ä", '"zdawel"zph', ft = "markdown", desc = "󰶢 Move Word Right" },
 			{ "Ä", '"zdawbh"zph', ft = "markdown", desc = "󰶢 Move Word Left" },
+		},
+		opts = {
+			use_default_keymaps = false,
+			allowed_separators = { "..", "*" }, -- add multiplication & lua string concatenation
+			highlight_node_at_cursor = true,
+			ignore_injected_langs = true,
+			allow_interline_swaps = true,
+			interline_swaps_without_separator = false,
 		},
 	},
 	{ -- split-join lines
