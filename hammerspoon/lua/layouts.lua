@@ -61,7 +61,6 @@ local function workLayout()
 
 	-- FIX enforce reminders sync
 	hs.application.open("Reminders")
-	u.runWithDelays(0.5, function() app("Reminders"):hide() end)
 	u.runWithDelays(3, function() app("Reminders"):kill() end)
 
 	-- open
