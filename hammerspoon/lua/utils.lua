@@ -38,8 +38,8 @@ end
 
 ---Whether the current time is between startHour & endHour. Also works for
 ---ranges that go beyond midnight, e.g. 23 to 6.
----@param startHour number, time between 0 and 24. also accepts floats e.g. 13.5 for 13:30
----@param endHour number, time between 0 and 24
+---@param startHour integer, time between 0 and 24. also accepts floats e.g. 13.5 for 13:30
+---@param endHour integer, time between 0 and 24
 ---@nodiscard
 ---@return boolean|nil isInBetween nil for invalid time ranges (e.g., 2 to 66)
 function M.betweenTime(startHour, endHour)
@@ -228,6 +228,15 @@ function M.quitApps(appNames)
 end
 
 function M.closeAllTheThings()
+	-- close finder wins
+	M.runWithDelays({ 0, 3, 5 }, function()
+		local finder = hs.application("Finder")
+		if not finder then return end
+		for _, win in ipairs(finder:allWindows()) do
+			win:close()
+		end
+	end)
+
 	-- close fullscreen wins
 	for _, win in pairs(hs.window.allWindows()) do
 		if win:isFullScreen() then win:setFullScreen(false) end
@@ -237,15 +246,6 @@ function M.closeAllTheThings()
 	M.closeTabsContaining(".") -- closes all tabs, since all URLs include `.`
 	M.quitApps(env.videoAndAudioApps)
 	require("lua.private").closer()
-
-	-- close finder wins
-	M.runWithDelays({ 0, 1 }, function()
-		if hs.application("Finder") then
-			for _, win in pairs(hs.application("Finder"):allWindows()) do
-				win:close()
-			end
-		end
-	end)
 end
 
 --------------------------------------------------------------------------------
