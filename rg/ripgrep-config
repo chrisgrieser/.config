@@ -17,11 +17,11 @@
 --hyperlink-format=default
 
 # shortened display
---no-line-number
+# --no-line-number
 --trim
 
 # colors
 --colors=match:fg:yellow
---colors=match:style:nobold
+--colors=match:style:bold
 --colors=path:fg:blue
 --colors=path:style:bold

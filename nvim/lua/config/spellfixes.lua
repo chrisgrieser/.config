@@ -42,6 +42,7 @@ local spellfixes = {
 	retunr = "return",
 	seperate = "separate",
 	seperator = "separator",
+	seperators = "separators",
 	shwo = "show",
 	sicne = "since",
 	teh = "the",
