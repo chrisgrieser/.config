@@ -5,7 +5,7 @@ if [[ "$SENDER" = "front_app_switched" ]]; then
 	data="/tmp/sketchybar_front_app1"
 	[[ -f "$data" ]] && deactivated_app=$(<"$data")
 	echo -n "$INFO" >"$data"
-	[[ "$deactivated_app" == "GoodTask" || "$deactivated_app" == "Reminders" ]] || return 0
+	[[ "$deactivated_app" != "GoodTask" ]] && return 0
 fi
 
 # wait for sync of reminders
