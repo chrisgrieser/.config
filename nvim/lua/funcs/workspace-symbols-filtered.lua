@@ -51,7 +51,8 @@ M.workspace_symbols = function(opts)
 		---INFO this section is new-----------------
 		locations = vim.tbl_filter(function(l)
 			local dir = vim.fs.dirname(l.filename)
-			local parent_folders = vim.split(dir, "/")
+			local osPathSep = package.config:sub(1, 1)
+			local parent_folders = vim.split(dir, osPathSep)
 			for _, folder in ipairs(parent_folders) do
 				if vim.tbl_contains(opts.ignore_folders or {}, folder) then return false end
 			end

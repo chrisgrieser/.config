@@ -102,6 +102,10 @@
     "body": "local pathOfThisFile = debug.getinfo(1).source:sub(2)",
     "prefix": "path of this file"
   },
+  "path separator (os-independent)": {
+    "body": "local osPathSep = package.config:sub(1, 1)",
+    "prefix": "path separator (os-independent)"
+  },
   "pcall": {
     "body": [
       "local success = pcall(${1:func})",
