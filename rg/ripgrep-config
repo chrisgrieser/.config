@@ -8,6 +8,10 @@
 --max-columns=85
 --max-columns-preview
 
+# shortened display
+# --no-line-number
+--trim
+
 # include hidden files, but not the git directory
 --hidden
 --glob=!.git/*
@@ -15,10 +19,6 @@
 # behavior
 --smart-case
 --hyperlink-format=default
-
-# shortened display
-# --no-line-number
---trim
 
 # colors
 --colors=match:fg:yellow
