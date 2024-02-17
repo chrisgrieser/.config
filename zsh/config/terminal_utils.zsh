@@ -42,6 +42,21 @@ function o() {
 	fi
 }
 
+function s {
+	local input="$*"
+	local selected file_path ln
+	selected=$(
+		rg "$input" --color=always --no-messages --no-config --line-number | fzf \
+			--select-1 --ansi --preview-window="55%" \
+			--delimiter=":" --nth=1,3 \
+			--preview 'bat {1}' \
+			--height="100%" #required for wezterm's `pane:is_alt_screen_active()`
+	)
+	file_path=$(echo "$selected" | cut -d':' -f1)
+	ln=$(echo "$selected" | cut -d':' -f2)
+	open "$file_path" --env=LINE="$ln"
+}
+
 # nicer & explorable tree view
 function _tree {
 	eza --tree --level="$1" --color=always --icons=always --git-ignore \
