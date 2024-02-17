@@ -381,12 +381,11 @@ local function telescopeConfig()
 				},
 			},
 			lsp_workspace_symbols = {
-				-- INFO workspace symbols are not working correctly in lua
 				prompt_prefix = "󰒕 ",
-				fname_width = 0, -- can see filename in preview title
+				fname_width = 0, -- can see name in preview title
 				symbol_width = 25,
 				ignore_symbols = { "variable", "constant", "property" },
-				ignore_folders = {
+				file_ignore_patterns = {
 					"node_modules", -- ts/js
 					".local", -- neodev.nvim
 					"homebrew", -- nvim runtime
@@ -439,6 +438,8 @@ return {
 			{ "?", function() telescope("keymaps") end, desc = "⌨️ Search Keymaps" },
 			{ "g.", function() telescope("resume") end, desc = " Continue" },
 			{ "gs", function() telescope("treesitter") end, desc = " Symbols" },
+			-- stylua: ignore
+			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
 			{ "gd", function() telescope("lsp_definitions") end, desc = "󰒕 Definitions" },
 			{ "gf", function() telescope("lsp_references") end, desc = "󰒕 References" },
 			{ "<leader>ph", function() telescope("highlights") end, desc = " Highlights" },
@@ -509,15 +510,6 @@ return {
 					}
 				end,
 				desc = " Grep cword",
-			},
-			{ -- using my patch of workspace symbols that filters folders
-				-- PENDING https://github.com/nvim-telescope/telescope.nvim/pull/2923
-				"gw",
-				function()
-					local opts = require("telescope.config").pickers.lsp_workspace_symbols
-					require("funcs.workspace-symbols-filtered").workspace_symbols(opts)
-				end,
-				desc = "󰒕 Workspace Symbols",
 			},
 		},
 	},

@@ -191,12 +191,9 @@ serverConfigs.stylelint_lsp = {
 -- DOCS https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md
 local tsserverConfig = {
 	settings = {
-		-- specific to typescript-tools.nvim
+		-- [typescript-tools.nvim]
 		complete_function_calls = true,
-		tsserver_file_preferences = {
-			importModuleSpecifierPreference = "project",
-		},
-		-- relevant without formatting, as it also applied to organizeImports
+		-- [typescript-tools.nvim] relevant, as also applied to organizeImports
 		tsserver_format_options = { convertTabsToSpaces = false },
 
 		-- enable checking javascript without a `jsconfig.json`
