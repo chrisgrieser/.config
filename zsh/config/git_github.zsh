@@ -133,6 +133,7 @@ function unshallow {
 }
 
 function remote_info {
+	caller
 	git branch --all --verbose --verbose # 2x verbose shows tracked remote branches
 	echo
 	git remote --verbose
