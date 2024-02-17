@@ -70,16 +70,6 @@ local function formattingFunc()
 	-- PENDING https://github.com/stevearc/conform.nvim/issues/255
 	if vim.tbl_contains(autoIndentFt, vim.bo.ft) then u.normal("gg=G``") end
 
-	if vim.bo.ft == "javascript" or vim.bo.ft == "typescript" then
-		-- as opposed to biome's `source.organizeImports.biome`, this also
-		-- removes unused imports.
-		-- CAVEAT typescript seems to always format with spaces, therefore needs
-		-- to run before lsp-formatting from biome
-		vim.cmd.TSToolsOrganizeImports()
-		vim.cmd.TSToolsAddMissingImports()
-		vim.cmd.TSToolsFixAll()
-	end
-
 	local useLsp = vim.tbl_contains(lspFormatFt, vim.bo.ft) and "always" or false
 	require("conform").format({ lsp_fallback = useLsp }, function()
 		if vim.bo.ft == "python" then
@@ -88,6 +78,12 @@ local function formattingFunc()
 				context = { only = { "source.fixAll.ruff" } },
 				apply = true,
 			}
+		elseif vim.bo.ft == "javascript" or vim.bo.ft == "typescript" then
+			-- as opposed to biome's `source.organizeImports.biome`, this also
+			-- removes unused imports.
+			vim.cmd.TSToolsOrganizeImports()
+			vim.cmd.TSToolsAddMissingImports()
+			vim.cmd.TSToolsFixAll()
 		end
 	end)
 end
