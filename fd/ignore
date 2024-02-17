@@ -41,6 +41,7 @@ __init__.py
 pyproject.toml
 requirements.txt
 pyrightconfig.json
+typings/**/*.pyi
 
 # Alfred workflows
 info.plist
