@@ -1,12 +1,12 @@
-# DOCS https://microsoft.github.io/pyright/#/configuration?id=type-check-diagnostics-settings
+# DOCS https://microsoft.github.io/pyright/#/configuration
 [tool.pyright]
 venvPath = "."
 venv = ".venv"
 strict = ["."]
-strictListInference = true
-strictDictionaryInference = true
-strictSetInference = true
-useLibraryCodeForTypes = true
+typeCheckingMode = "strict"
+
+[tool.python.analysis]
+diagnosticMode = "workspace"
 
 #───────────────────────────────────────────────────────────────────────────────
 
