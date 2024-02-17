@@ -60,6 +60,14 @@
       "exclude (TypeScript)"
     ]
   },
+  "ef (export function)": {
+    "body": [
+      "export function ${1:name}($2) {",
+      "\t$0",
+      "}"
+    ],
+    "prefix": "ef (export function)"
+  },
   "filter ( => )": {
     "body": "filter(${1:item} => ${1:item}$0)",
     "prefix": "filter ( => )"
