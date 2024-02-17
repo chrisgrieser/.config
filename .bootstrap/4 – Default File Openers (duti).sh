@@ -42,6 +42,8 @@ duti -s "$videoplayerID" m4a all
 
 # code
 editorID="com.apple.automator.Neovide-Helper"
+duti -s "$editorID" pyi all
+duti -s "$editorID" py all
 duti -s "$editorID" config all # quick-lint-js.config
 duti -s "$editorID" cff all # citation file format
 duti -s "$editorID" diff all
@@ -67,7 +69,6 @@ duti -s "$editorID" sh all
 duti -s "$editorID" zsh all
 duti -s "$editorID" bib all
 duti -s "$editorID" rb all
-duti -s "$editorID" py all
 duti -s "$editorID" js all
 duti -s "$editorID" ts all
 duti -s "$editorID" css all

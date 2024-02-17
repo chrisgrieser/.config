@@ -12,7 +12,6 @@ local lspToMasonMap = {
 	efm = "efm", -- linter integration, only used for shellcheck in zsh files
 	emmet_language_server = "emmet-language-server", -- css/html completions
 	html = "html-lsp",
-	jedi_language_server = "jedi-language-server", -- python lsp (with better hovers)
 	jsonls = "json-lsp",
 	ltex = "ltex-ls", -- languagetool (natural language linter)
 	lua_ls = "lua-language-server",
@@ -113,32 +112,7 @@ serverConfigs.ruff_lsp = {
 			codeAction = { disableRuleComment = { enable = false } }, -- using nvim-rulebook instead
 		},
 	},
-	-- disable in favor of jedi
 	on_attach = function(ruff) ruff.server_capabilities.hoverProvider = false end,
-}
-
-serverConfigs.pyright = {
-	-- INFO most pyright settings done in `pyproject.toml` for portability
-	-- disable in favor of jedi
-	on_attach = function(pyright) pyright.server_capabilities.hoverProvider = false end,
-}
-
--- DOCS https://github.com/pappasam/jedi-language-server#configuration
-serverConfigs.jedi_language_server = {
-	init_options = {
-		diagnostics = { enable = true },
-		codeAction = { nameExtractVariable = "extracted_var", nameExtractFunction = "extracted_func" },
-	},
-	-- HACK since init_options cannot be changed during runtime, we need to use
-	-- `on_new_config` to set it.
-	on_new_config = function(config, root_dir)
-		-- Since `vim.env.VIRTUAL_ENV` is not set in time, we need to hardcode the
-		-- identification of the venv-dir here
-		local venv_python = root_dir .. "/.venv/bin/python"
-		local fileExists = vim.loop.fs_stat(venv_python) ~= nil
-		if not fileExists then return end
-		config.init_options.workspace = { environmentPath = venv_python }
-	end,
 }
 
 --------------------------------------------------------------------------------

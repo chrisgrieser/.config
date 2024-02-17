@@ -142,6 +142,11 @@ keymap(
 
 keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
 
+keymap("n", "<leader>ch", function()
+	vim.diagnostic.open_float()
+	vim.diagnostic.open_float() -- 2x = enter float
+end, { desc = "󰒕 Diagnostic Hover" })
+
 --------------------------------------------------------------------------------
 
 -- Append to / delete from EoL
