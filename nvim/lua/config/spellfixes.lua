@@ -16,6 +16,7 @@ local spellfixes = {
 	dont = "don't",
 	dwon = "down",
 	esle = "else",
+	awiat = "await",
 	fales = "false",
 	fiel = "file",
 	flase = "false",
