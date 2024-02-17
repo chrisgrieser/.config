@@ -48,11 +48,10 @@ function s {
 	selected=$(
 		rg "$input" --color=always --colors=path:fg:blue --no-messages --line-number \
 			--no-config --ignore-file="$HOME/.config/fd/ignore" |
-			cut -d':' -f1,2 |
 			fzf \
-				--ansi --preview-window="55%" \
-				--delimiter=":" --with-nth=1 --nth=1 \
-				--preview 'bat {1} --color=always --style=header --highlight-line={2}' \
+				--ansi --preview-window="65%" \
+				--delimiter=":" --nth=1,3 \
+				--preview 'bat {1} --color=always --style=header --highlight-line={2} --wrap=never' \
 				--height="100%" #required for wezterm's `pane:is_alt_screen_active()`
 	)
 	[[ -z "$selected" ]] && return 0 # aborted
