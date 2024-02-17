@@ -46,15 +46,20 @@ function s {
 	local input="$*"
 	local selected file_path ln
 	selected=$(
-		rg "$input" --color=always --no-messages --no-config --line-number | fzf \
-			--select-1 --ansi --preview-window="55%" \
-			--delimiter=":" --nth=1,3 \
-			--preview 'bat {1}' \
-			--height="100%" #required for wezterm's `pane:is_alt_screen_active()`
+		rg "$input" --color=always --colors=path:fg:blue --no-messages --line-number \
+			--no-config --ignore-file="$HOME/.config/fd/ignore" |
+			cut -d':' -f1,2 |
+			fzf \
+				--ansi --preview-window="55%" \
+				--delimiter=":" --with-nth=1 --nth=1 \
+				--preview 'bat {1} --color=always --style=header --highlight-line={2}' \
+				--height="100%" #required for wezterm's `pane:is_alt_screen_active()`
 	)
+	[[ -z "$selected" ]] && return 0 # aborted
+
 	file_path=$(echo "$selected" | cut -d':' -f1)
 	ln=$(echo "$selected" | cut -d':' -f2)
-	open "$file_path" --env=LINE="$ln"
+	open "$file_path" --env=LINE="$ln" # this is the only macOS-specific part
 }
 
 # nicer & explorable tree view

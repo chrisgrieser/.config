@@ -48,9 +48,9 @@ function run() {
 		if (name.startsWith(".z")) type = "zsh"; // .zshenv, .zshrc, .zprofile
 		else if (name.endsWith("akefile")) type = "make";
 		else if (name.startsWith(".")) type = "cfg";
+		else if (name === "quick-lint-js.config") type = "cfg";
 		else if (!name.includes(".")) type = "blank";
 		else if (name === "obsidian-vimrc.vim") type = "obsidian";
-		else if (name === ".vim") type = "obsidian";
 		else type = name.split(".").pop() || ""; // default: extension
 
 		const iconObj = {};
