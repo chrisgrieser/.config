@@ -121,19 +121,29 @@ serverConfigs.ruff_lsp = {
 -- https://github.com/microsoft/pyright/blob/main/docs/settings.md
 -- https://microsoft.github.io/pyright/#/settings
 serverConfigs.pyright = {
+	settings = {
+		python = {
+			analysis = {
+				autoSearchPaths = true,
+				diagnosticMode = "workspace",
+				useLibraryCodeForTypes = true,
+				reportDuplicateImport = true,
+			},
+		},
+	},
 	on_attach = function(pyright)
 		-- disable in favor of jedi
 		pyright.server_capabilities.hoverProvider = false
 
 		-- Automatically set python_path virtual env
-		local hasPyrightConfig = vim.loop.fs_stat("pyrightconfig.json") ~= nil
-		if not vim.env.VIRTUAL_ENV or hasPyrightConfig then return end
-		pyright.config.settings.python.pythonPath = vim.env.VIRTUAL_ENV .. "/bin/python"
-		vim.lsp.buf_notify(
-			0,
-			"workspace/didChangeConfiguration",
-			{ settings = pyright.config.settings }
-		)
+		-- local hasPyrightConfig = vim.loop.fs_stat("pyrightconfig.json") ~= nil
+		-- if not vim.env.VIRTUAL_ENV or hasPyrightConfig then return end
+		-- pyright.config.settings.python.pythonPath = vim.env.VIRTUAL_ENV .. "/bin/python"
+		-- vim.lsp.buf_notify(
+		-- 	0,
+		-- 	"workspace/didChangeConfiguration",
+		-- 	{ settings = pyright.config.settings }
+		-- )
 	end,
 }
 
