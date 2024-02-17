@@ -208,28 +208,21 @@ function clone {
 	cd "$(command ls -1 -t | head -n1)" || return 1
 }
 
-# select a fork or multiple forks to delete
-function deletefork {
+function delete_fork_with_no_prs {
 	if [[ ! -x "$(command -v fzf)" ]]; then print "\e[1;33mfzf not installed.\e[0m" && return 1; fi
 	if [[ ! -x "$(command -v gh)" ]]; then print "\e[1;33mgh not installed.\e[0m" && return 1; fi
 
-	local to_delete my_prs my_forks
+	local my_prs my_forks
 	my_prs=$(gh search prs --author="@me" --state=open --json="repository" --jq=".[].repository.name")
 	my_forks=$(gh repo list --fork | cut -f1)
+	while read -r pr; do
+		my_forks=$(echo "$my_forks" | grep -v "$pr")
+	done <<<"$my_prs"
 
-
-	to_delete=$(gh repo list --fork | fzf --multi --with-nth=1 --info=inline | cut -f1)
-	[[ -z "$to_delete" ]] && return 0 # aborted
-
-	if [[ $(echo "$to_delete" | wc -l) -eq 1 ]]; then
-		gh repo delete "$to_delete"
-	else
-		# INFO `gh repo delete` disallows multiple deletions at once
-		# shellcheck disable=2001
-		cmd=$(echo "$to_delete" | sed 's/^/gh repo delete /')
-		echo "Copied command to batch deleted forks."
-		echo "$cmd" | pbcopy
-	fi
+	forks_with_no_prs="$my_forks"
+	[[ -z "$forks_with_no_prs" ]] && print "\e[1;33mNo forks to delete.\e[0m" && return 0
+	# shellcheck disable=2001
+	print -z "$(echo "$forks_with_no_prs" | sed 's/^/gh repo delete /')"
 }
 #───────────────────────────────────────────────────────────────────────────────
 
