@@ -118,9 +118,7 @@ serverConfigs.ruff_lsp = {
 --------------------------------------------------------------------------------
 -- CSS
 
--- DOCS
--- https://github.com/olrtg/emmet-language-server?tab=readme-ov-file#neovim
--- https://docs.emmet.io/customization/preferences/
+-- DOCS https://github.com/olrtg/emmet-language-server#neovim
 serverConfigs.emmet_language_server = {
 	filetypes = { "html", "css", "scss" },
 	init_options = {
@@ -137,9 +135,9 @@ serverConfigs.cssls = {
 			format = {
 				enable = true,
 				-- BUG this config is being ignored. Leaving in case of css-lsp-update
-				preserveNewLines = true,
-				maxPreserveNewLines = 2,
-				spaceAroundSelectorSeparator = true,
+				-- preserveNewLines = true,
+				-- maxPreserveNewLines = 2,
+				-- spaceAroundSelectorSeparator = true,
 			},
 			lint = {
 				vendorPrefix = "ignore", -- needed for scrollbars
@@ -167,12 +165,8 @@ local tsserverConfig = {
 	settings = {
 		-- [typescript-tools.nvim]
 		complete_function_calls = true,
-		-- [typescript-tools.nvim] relevant, as also applied to organizeImports
+		-- [typescript-tools.nvim] relevant even if not formatting, since used by `organizeImports`
 		tsserver_format_options = { convertTabsToSpaces = false },
-
-		-- enable checking javascript without a `jsconfig.json`
-		-- DOCS https://www.typescriptlang.org/tsconfig
-		implicitProjectConfiguration = { checkJs = true, target = "ES2022" },
 
 		typescript = {
 			inlayHints = {
@@ -186,6 +180,10 @@ local tsserverConfig = {
 				includeInlayVariableTypeHintsWhenTypeMatchesName = true,
 			},
 		},
+
+		-- enable checking javascript without a `jsconfig.json`
+		-- DOCS https://www.typescriptlang.org/tsconfig
+		implicitProjectConfiguration = { checkJs = true, target = "ES2022" },
 	},
 	on_attach = function(client)
 		-- Disable formatting in favor of biome
