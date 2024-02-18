@@ -181,7 +181,7 @@ function M.selectMake()
 
 	local recipes = {}
 	for line in io.lines(makefile) do
-		local recipe = line:match("^[%w_]+")
+		local recipe = line:match("^[%w_-]+")
 		if recipe then table.insert(recipes, recipe) end
 	end
 

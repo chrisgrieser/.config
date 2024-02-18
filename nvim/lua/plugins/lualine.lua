@@ -111,10 +111,8 @@ local lualineConfig = {
 		},
 		lualine_y = {
 			{ "diff" },
-			{ -- line count
-				function() return vim.api.nvim_buf_line_count(0) .. " " end,
-				cond = function() return vim.api.nvim_buf_line_count(0) > 50 end,
-			},
+			-- line count
+			{ function() return vim.api.nvim_buf_line_count(0) .. " " end },
 		},
 		lualine_z = {
 			{ "selectioncount", fmt = function(str) return str ~= "" and "礪" .. str or "" end },
