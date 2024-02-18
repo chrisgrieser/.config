@@ -54,13 +54,23 @@ onoremap J 2j
 nnoremap <C-h> <C-o>
 nnoremap <C-l> <C-i>
 
-" next diagnostic
+" Language tools: next/prev/accept suggestion
 exmap nextSuggestion obcommand obsidian-languagetool-plugin:ltjump-to-next-suggestion
-exmap acceptSuggestion obcommand obsidian-languagetool-plugin:ltaccept-suggestion-1
 nnoremap ge :nextSuggestion
 vnoremap ge :nextSuggestion
+
+exmap prevSuggestion obcommand obsidian-languagetool-plugin:ltjump-to-previous-suggestion
+nnoremap gE :prevSuggestion
+vnoremap gE :prevSuggestion
+
+exmap acceptSuggestion obcommand obsidian-languagetool-plugin:ltaccept-suggestion-1
 nnoremap ga :acceptSuggestion
 vnoremap ga :acceptSuggestion
+
+" PENDING https://github.com/Clemens-E/obsidian-languagetool-plugin/issues/123
+" exmap acceptSuggestion obcommand obsidian-languagetool-plugin:ignore-suggestion
+" nnoremap gi :ignoreSuggestion
+" vnoremap gi :ignoreSuggestion
 
 " next/prev heading
 exmap nextHeading obcommand obsidian-editor-shortcuts:goToNextHeading
