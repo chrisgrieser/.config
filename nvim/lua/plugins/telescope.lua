@@ -383,7 +383,7 @@ local function telescopeConfig()
 			lsp_workspace_symbols = {
 				prompt_prefix = "󰒕 ",
 				fname_width = 0, -- can see name in preview title
-				symbol_width = 25,
+				symbol_width = 30,
 				ignore_symbols = { "variable", "constant", "property" },
 				file_ignore_patterns = {
 					"node_modules", -- ts/js
