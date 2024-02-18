@@ -35,10 +35,6 @@ vnoremap k gk
 nnoremap I g0i
 nnoremap A g$a
 
-" sentence navigation
-noremap [ (
-noremap ] )
-
 " HJKL behaves like hjkl, but bigger distance
 noremap H g0
 noremap L g$
