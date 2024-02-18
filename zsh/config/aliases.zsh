@@ -11,6 +11,7 @@ alias rm='rm -I'
 
 # shorthands
 alias spotify="spotify_player playback"
+alias m="make"
 
 # defaults
 alias grep='grep --color'
