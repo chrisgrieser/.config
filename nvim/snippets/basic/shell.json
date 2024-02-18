@@ -51,6 +51,21 @@
     "body": "sudo -nv && ${1:some_sudo_action}",
     "prefix": "check if sudo user"
   },
+  "colored print": {
+    "body": [
+      "# print color if stdout is a terminal",
+      "function colored_print {",
+      "\tlocal color=\\${2:-\\\\033[1;35m}",
+      "\tlocal msg=\"\\$1\"",
+      "\tif [[ -t true ]]; then",
+      "\t\tprint \"\\$color\\$msg\\033[0m\"",
+      "\telse",
+      "\t\tprint \"\\$msg\"",
+      "\tfi",
+      "}"
+    ],
+    "prefix": "colored print"
+  },
   "cyan": {
     "body": "\\e[1;36m",
     "prefix": "cyan"
