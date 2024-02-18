@@ -103,6 +103,10 @@
     "description": "Get a configuration value from the core Obsidian settings.",
     "prefix": "get config"
   },
+  "open file (in current leaf)": {
+    "body": "this.app.workspace.getLeaf().openFile($0);",
+    "prefix": "open file (in current leaf)"
+  },
   "read note content": {
     "body": "await this.app.vault.read(${1:TFile});",
     "prefix": "read note content"
