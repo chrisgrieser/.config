@@ -27,7 +27,7 @@ add_newline = false
 [character]
 success_symbol = "[▓▒░](fg:black)"
 error_symbol = "[▓▒░](fg:red)"
-vimcmd_symbol = "[▓▒░](fg:blue)"
+vimcmd_symbol = "[▓▒░](fg:blue)" # not working while using snippet to change cursor shape
 
 [status] # exit code
 disabled = false
