@@ -85,8 +85,11 @@ function p {
 		qlmanage -p "$file"
 		;;
 	"gif" | "png" | "jpg" | "jpeg" | "webp" | "tiff")
-		image_viewer=$([[ "$TERM_PROGRAM" == "WezTerm" ]] && echo "wezterm imgcat" || echo "qlmanage -p")
-		$image_viewer "$file"
+		if [[ "$TERM_PROGRAM" == "WezTerm" ]] ; then
+			wezterm imgcat "$file"
+		else
+			qlmanage -p "$file"
+		fi
 		;;
 	*)
 		bat "$file"

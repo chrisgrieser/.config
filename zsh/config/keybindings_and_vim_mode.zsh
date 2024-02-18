@@ -22,8 +22,6 @@ bindkey -M viins '^P' _copy_location
 bindkey -M viins '^U' _cut_buffer
 bindkey -M vicmd '^U' _cut_buffer
 
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
 bindkey -M viins '…' insert-last-word
 bindkey -M viins '^Z' undo # remapped to `cmd+z` via wezterm
 
@@ -34,33 +32,34 @@ bindkey -M viins '^F' edit-command-line
 bindkey -M viins "^[[1;3D" backward-word
 bindkey -M viins "^[[1;3C" forward-word
 
+bindkey -M viins "^A" beginning-of-line
+bindkey -M viins "^E" end-of-line
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
 #───────────────────────────────────────────────────────────────────────────────
 # VI MODE
 bindkey -v
 export KEYTIMEOUT=1 # no delay when pressing <Esc>
+bindkey -M viins '^?' backward-delete-char # FIX backspace
 
-# Change cursor shape for different vi modes.
+# CURSOR SHAPE # https://unix.stackexchange.com/a/614203
 function zle-keymap-select {
-	if [[ ${KEYMAP} == vicmd ]] ||
-		[[ $1 = 'block' ]]; then
+	if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
 		echo -ne '\e[1 q'
-	elif [[ ${KEYMAP} == main ]] ||
-		[[ ${KEYMAP} == viins ]] ||
-		[[ ${KEYMAP} = '' ]] ||
-		[[ $1 = 'beam' ]]; then
+	elif [[ ${KEYMAP} == main ]] || [[ ${KEYMAP} == viins ]] ||
+		[[ ${KEYMAP} = '' ]] || [[ $1 = 'beam' ]]; then
 		echo -ne '\e[5 q'
 	fi
 }
 zle -N zle-keymap-select
 
-zle-line-init() { echo -ne "\e[5 q"; }
-zle -N zle-line-init
-
 _fix_cursor() { echo -ne '\e[5 q'; }
 precmd_functions+=(_fix_cursor)
 
-#───────────────────────────────────────────────────────────────────────────────
-# VI MODE BINDINGS
+# VIM BINDINGS
+
 bindkey -M vicmd 'k' up-line # disable accidentally searching history
 
 bindkey -M vicmd 'L' vi-end-of-line
@@ -70,8 +69,8 @@ bindkey -M vicmd -s ' ' 'ciw' # -s flag sends direct keystrokes and therefore al
 bindkey -M vicmd 'U' redo
 bindkey -M vicmd 'M' vi-join
 
-# yank/delete to the (macOS) system clipboard
-
+# YANK/DELETE to (macOS) system clipboard
+bindkey -M viins '^?' backward-delete-char # FIX backspace
 function _vi_yank_pbcopy {
 	echo "$CUTBUFFER" | pbcopy
 	zle vi-yank # still perform vim-yank for pasting via `p`
