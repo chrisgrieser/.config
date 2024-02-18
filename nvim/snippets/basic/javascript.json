@@ -15,18 +15,6 @@
     "body": "/** @type {${1:string}} */",
     "prefix": "@type (JSDoc)"
   },
-  "Set Timeout Function": {
-    "body": [
-      "setTimeout(() => {",
-      "\t$0",
-      "}, ${1:timeoutMs});"
-    ],
-    "prefix": [
-      "settimeout",
-      "timeout",
-      "delay"
-    ]
-  },
   "While ..": {
     "body": [
       "while (${1:condition}) {",
@@ -307,6 +295,17 @@
     "body": "replace(/\\B(?=(\\d{3})+(?!\\d))/g, \" \");",
     "description": "insert thousand separator into a digit string",
     "prefix": "thousand separator"
+  },
+  "timeout + delay": {
+    "body": [
+      "setTimeout(() => {",
+      "\t$0",
+      "}, ${1:timeoutMs});"
+    ],
+    "prefix": [
+      "timeout",
+      "delay"
+    ]
   },
   "today as ISO 8601 string": {
     "body": "new Date().toISOString().slice(0, 10);",
