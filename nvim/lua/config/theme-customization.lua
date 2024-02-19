@@ -86,7 +86,7 @@ local function themeModifications()
 		updateHl("GitSignsChange", "guifg=#acaa62")
 		updateHl("GitSignsAdd", "guifg=#369a96")
 
-		updateHl("@keyword.return", "guifg=#e34771")
+		updateHl("@keyword.return", "guifg=#fd4283")
 
 		-- todo comments have emphasized background, not foreground
 		for _, type in pairs { "todo", "error", "warning", "note" } do
