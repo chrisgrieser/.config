@@ -1,8 +1,6 @@
 #!/usr/bin/env zsh
 
-#───────────────────────────────────────────────────────────────────────────────
-
-# INFO LOCAL_REPOS and VAULT_PATH are set in .zshenv
+# INFO $LOCAL_REPOS and $VAULT_PATH are set in .zshenv
 
 # CONFIG
 theme_folder="$VAULT_PATH/.obsidian/themes/Shimmering Focus/"
@@ -15,10 +13,11 @@ cd "$LOCAL_REPOS" || return 1
 
 # WARN depth=2 ensures that amending a shallow commit does not result in a
 # new commit without parent, effectively destroying git history (!!)
-git clone --depth=5 --filter="blob:none" "$remote_ssh"
+git clone --depth=2 --filter="blob:none" "$remote_ssh"
 
 # switch symlink
-ln -sf "$LOCAL_REPOS/shimmering-focus/theme.css" "$theme_folder/theme.css"
+theme_folder="$VAULT_PATH/.obsidian/themes/Shimmering Focus/"
+ln -f "$LOCAL_REPOS/shimmering-focus/theme.css" "$theme_folder/theme.css"
 
 # loop back to open file
 # (dependencies only needed later and therefore installed afterwards)
@@ -26,9 +25,5 @@ osascript -e '
 	tell application id "com.runningwithcrayons.Alfred" to run trigger "loop" in workflow "de.chris-grieser.shimmering-focus"
 '
 
-#───────────────────────────────────────────────────────────────────────────────
 # install dependencies
-
-cd "./shimmering-focus/" || return 1
-export npm_config_strict_ssl=false # fix hanging at "sill: idealTree build"
-npm install
+cd "./shimmering-focus/" && npm install
