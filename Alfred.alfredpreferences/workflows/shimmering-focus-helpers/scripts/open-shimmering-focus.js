@@ -17,10 +17,10 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 
 //───────────────────────────────────────────────────────────────────────────
 
-/** @param {string[]} argv */
-// biome-ignore lint/correctness/noUnusedVariables: <explanation>
-function run(argv) {
-	const localRepos = argv[0];
+/** @type {AlfredRun} */
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
+function run() {
+	const localRepos = app.doShellScript('source "$HOME/.zshenv" && echo "$LOCAL_REPOS"');
 	const sfPath = localRepos + "/shimmering-focus/theme.css";
 
 	// GUARD Repo needs to be cloned

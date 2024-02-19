@@ -1,4 +1,4 @@
-vim.bo.commentstring = "/* %s */" -- PENDING https://github.com/neovim/neovim/pull/27043
+vim.bo.commentstring = "/* %s */"
 
 --------------------------------------------------------------------------------
 
