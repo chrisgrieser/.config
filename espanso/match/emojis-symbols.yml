@@ -9,6 +9,7 @@ matches:
   - { triggers: ["!clip" , "!copy"], replace: "📋 ", label: 📋 clip }
   - { trigger: "!warn", replace: "⚠️ ", label: ⚠️ warn } # is actually an emoji outside of nvim
   - { trigger: " mm", replace: " 🙈", label: 🙈 monkey }
+  - { trigger: "<3", replace: "💙" } # use blue heart instead of red heart
   #─────────────────────────────────────────────────────────────────────────
   # compound emojis
   - { trigger: "!eyes", replace: 👁️👄👁️, label: 👁️👄👁️ eyes }
