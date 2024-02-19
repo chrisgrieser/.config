@@ -15,7 +15,7 @@ cd "$LOCAL_REPOS" || return 1
 # new commit without parent, effectively destroying git history (!!)
 git clone --depth=2 --filter="blob:none" "$remote_ssh"
 
-# switch symlink
+# switch to symlink
 ln -sf "$LOCAL_REPOS/shimmering-focus/theme.css" "$theme_folder/theme.css"
 
 # loop back to open file

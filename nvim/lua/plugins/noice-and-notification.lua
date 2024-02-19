@@ -16,7 +16,7 @@ local routes = {
 	{ filter = { event = "msg_show", find = "lsp_signature? handler RPC" }, skip = true },
 
 	-- redirect to popup when message is long
-	{ filter = { min_height = 10 }, view = "popup" },
+	{ filter = { min_height = 8 }, view = "popup" },
 
 	-- write/deletion messages
 	{ filter = { event = "msg_show", find = "%d+B written$" }, view = "mini" },
@@ -65,6 +65,10 @@ return {
 				pattern = "noice",
 				callback = function(ctx) highlightsInStacktrace(ctx.buf) end,
 			})
+			local u = require("config.utils")
+
+			-- slightly darker cmdline
+			u.colorschemeMod("NoiceCmdline", { link = "NormalFloat" })
 		end,
 		keys = {
 			{ "<Esc>", vim.cmd.NoiceDismiss, desc = "󰎟 Clear Notifications" },
