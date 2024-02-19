@@ -55,7 +55,7 @@ local function customHighlights()
 	linkHl("@markup.italic.markdown_inline", "Italic")
 
 	-- emphasize returns
-	overwriteHl("@keyword.return", { bold = true })
+	updateHl("@keyword.return", "gui=bold")
 
 	-----------------------------------------------------------------------------
 	local hasNoUpdatedTreesitterHls =
