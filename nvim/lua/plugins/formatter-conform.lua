@@ -67,9 +67,8 @@ local conformOpts = {
 }
 
 local function formattingFunc()
-	if vim.bo.buftype ~= "" then
-		return
-	end
+	-- GUARD
+	if vim.bo.buftype ~= "" then return end
 
 	-- PENDING https://github.com/stevearc/conform.nvim/issues/255
 	if vim.tbl_contains(autoIndentFt, vim.bo.ft) then u.normal("gg=G``") end
@@ -77,7 +76,6 @@ local function formattingFunc()
 	local useLsp = vim.tbl_contains(lspFormatFt, vim.bo.ft) and "always" or false
 	require("conform").format({ lsp_fallback = useLsp }, function()
 		if vim.bo.ft == "python" then
-			-- PENDING https://github.com/astral-sh/ruff-lsp/issues/335
 			vim.lsp.buf.code_action {
 				context = { only = { "source.fixAll.ruff" } },
 				apply = true,
