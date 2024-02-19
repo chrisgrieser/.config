@@ -17,7 +17,6 @@ local lspToMasonMap = {
 	lua_ls = "lua-language-server",
 	marksman = "marksman", -- markdown lsp
 	pyright = "pyright", -- python lsp
-	quick_lint_js = "quick-lint-js",
 	ruff_lsp = "ruff-lsp", -- python linter
 	stylelint_lsp = "stylelint-lsp", -- css linter
 	taplo = "taplo", -- toml lsp

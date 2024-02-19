@@ -54,6 +54,9 @@ local function customHighlights()
 	-- FIX themes missing italics in markdown
 	linkHl("@markup.italic.markdown_inline", "Italic")
 
+	-- emphasize returns
+	overwriteHl("@keyword.return", { bold = true })
+
 	-----------------------------------------------------------------------------
 	local hasNoUpdatedTreesitterHls =
 		vim.tbl_isempty(vim.api.nvim_get_hl(0, { name = "@comment.todo" }))
@@ -82,6 +85,8 @@ local function themeModifications()
 		end
 		updateHl("GitSignsChange", "guifg=#acaa62")
 		updateHl("GitSignsAdd", "guifg=#369a96")
+
+		updateHl("@keyword.return", "guifg=#e34771")
 
 		-- todo comments have emphasized background, not foreground
 		for _, type in pairs { "todo", "error", "warning", "note" } do
