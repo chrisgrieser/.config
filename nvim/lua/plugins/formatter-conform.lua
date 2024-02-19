@@ -53,10 +53,10 @@ local conformOpts = {
 		["bibtex-tidy"] = {
 			-- stylua: ignore
 			prepend_args = {
-				-- BUG when
-				-- using `--no-encode-urls`: https://github.com/FlamingTempura/bibtex-tidy/issues/422
-				-- using `--enclosing-braces`: https://github.com/FlamingTempura/bibtex-tidy/issues/423
-				-- *not* using `--no-escape`: https://github.com/FlamingTempura/bibtex-tidy/issues/415
+				-- BUG when…
+				-- * using `--no-encode-urls`: https://github.com/FlamingTempura/bibtex-tidy/issues/422
+				-- * using `--enclosing-braces`: https://github.com/FlamingTempura/bibtex-tidy/issues/423
+				-- * *not* using `--no-escape`: https://github.com/FlamingTempura/bibtex-tidy/issues/415
 				"--tab", "--curly", "--no-align", "--no-wrap", "--drop-all-caps",
 				"--numeric", "--trailing-commas", "--no-escape",
 				"--duplicates", "--sort-fields", "--remove-empty-fields",
@@ -68,7 +68,8 @@ local conformOpts = {
 
 local function formattingFunc()
 	-- GUARD
-	if vim.bo.buftype ~= "" then return end
+	local fileExists = vim.loop.fs_stat(vim.api.nvim_buf_get_name(0)) ~= nil
+	if vim.bo.buftype ~= "" or not fileExists then return end
 
 	-- PENDING https://github.com/stevearc/conform.nvim/issues/255
 	if vim.tbl_contains(autoIndentFt, vim.bo.ft) then u.normal("gg=G``") end

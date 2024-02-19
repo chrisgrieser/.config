@@ -1,3 +1,5 @@
+local u = require("config.utils")
+
 ---@param bufnr number
 local function highlightsInStacktrace(bufnr)
 	vim.defer_fn(function()
@@ -65,7 +67,6 @@ return {
 				pattern = "noice",
 				callback = function(ctx) highlightsInStacktrace(ctx.buf) end,
 			})
-			local u = require("config.utils")
 
 			-- slightly darker cmdline
 			u.colorschemeMod("NoiceCmdline", { link = "NormalFloat" })
