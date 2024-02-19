@@ -144,19 +144,17 @@
 				<key>runningsubtext</key>
 				<string>loading…</string>
 				<key>script</key>
-				<string># $LOCAL_REPOS" from zshenv passed to JavaScript
-source ~/.zshenv
-osascript -l JavaScript ./scripts/open-shimmering-focus.js "$LOCAL_REPOS"</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>./scripts/open-shimmering-focus.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
 				<string>🔍 Open Shimmering Focus</string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>8</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
