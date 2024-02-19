@@ -291,7 +291,16 @@ return {
 	{
 		"chrisgrieser/nvim-chainsaw",
 		init = function() u.leaderSubkey("l", " Log") end,
-		opts = { marker = "👽" },
+		opts = {
+			marker = "👽",
+
+			logStatements = {
+				objectLog = {
+					-- Obsidian API
+					typescript = 'new Notice ("%s %s:" + %s.toString())',
+				},
+			},
+		},
 		keys = {
 			-- stylua: ignore start
 			{"<leader>lb", function() require("chainsaw").beepLog() end, desc = "󰸢 beep log" },
