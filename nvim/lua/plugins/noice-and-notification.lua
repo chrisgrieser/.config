@@ -12,9 +12,6 @@ end
 
 -- DOCS https://github.com/folke/noice.nvim#-routes
 local routes = {
-	-- FIX jedi bug https://github.com/pappasam/jedi-language-server/issues/296
-	{ filter = { event = "msg_show", find = "^}$" }, skip = true },
-
 	-- FIX lsp signature bug
 	{ filter = { event = "msg_show", find = "lsp_signature? handler RPC" }, skip = true },
 
@@ -33,15 +30,6 @@ local routes = {
 	-- Word added to spellfile via `zg`
 	{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
 
-	-- Diagnostics
-	{
-		filter = { event = "msg_show", find = "No more valid diagnostics to move to" },
-		view = "mini",
-	},
-
-	-- code actions
-	{ filter = { event = "notify", find = "No code actions available" }, view = "mini" },
-
 	-- :make
 	{ filter = { event = "msg_show", find = "^:!make" }, skip = true },
 	{ filter = { event = "msg_show", find = "^%(%d+ of %d+%):" }, skip = true },
@@ -54,7 +42,6 @@ local routes = {
 
 	-- nvim-treesitter
 	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
-	{ filter = { event = "notify", find = "All parsers are up%-to%-date" }, view = "mini" },
 
 	-- Mason
 	{
