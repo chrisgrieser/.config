@@ -12,7 +12,7 @@ return {
 			enable = true,
 		},
 		indent = {
-			enable = true,
+			enable = false,
 			disable = {
 				"markdown", -- indentation at bullet points is worse
 				"javascript", -- some wrong indentation when using `o`

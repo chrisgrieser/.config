@@ -67,6 +67,10 @@ local conformOpts = {
 }
 
 local function formattingFunc()
+	if vim.bo.buftype ~= "" then
+		return
+	end
+
 	-- PENDING https://github.com/stevearc/conform.nvim/issues/255
 	if vim.tbl_contains(autoIndentFt, vim.bo.ft) then u.normal("gg=G``") end
 
@@ -98,6 +102,10 @@ return {
 	config = function()
 		require("conform.formatters.injected").options.ignore_errors = true
 		require("conform").setup(conformOpts)
+
+		vim.api.nvim_create_autocmd("BufLeave", {
+			callback = formattingFunc,
+		})
 	end,
 	keys = {
 		{ "<D-s>", formattingFunc, desc = "󰒕 Format & Save", mode = { "n", "x" } },
