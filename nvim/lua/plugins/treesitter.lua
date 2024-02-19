@@ -17,6 +17,7 @@ return {
 				"markdown", -- indentation at bullet points is worse
 				"javascript", -- some wrong indentation when using `o`
 				"typescript",
+				"gitrebase",
 			},
 		},
 		matchup = {
