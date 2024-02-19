@@ -16,7 +16,7 @@ cd "$LOCAL_REPOS" || return 1
 git clone --depth=2 --filter="blob:none" "$remote_ssh"
 
 # switch symlink
-ln -f "$LOCAL_REPOS/shimmering-focus/theme.css" "$theme_folder/theme.css"
+ln -sf "$LOCAL_REPOS/shimmering-focus/theme.css" "$theme_folder/theme.css"
 
 # loop back to open file
 # (dependencies only needed later and therefore installed afterwards)

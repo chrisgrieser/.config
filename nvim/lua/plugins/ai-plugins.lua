@@ -22,7 +22,7 @@ return {
 		-- FIX accumulated leftover binaries https://github.com/Exafunction/codeium.vim/issues/200
 		local bin_path = os.getenv("HOME") .. "/.codeium/bin"
 		local oldBinaries =
-		vim.fs.find("language_server_macos_arm", { limit = math.huge, path = bin_path })
+			vim.fs.find("language_server_macos_arm", { limit = math.huge, path = bin_path })
 		table.remove(oldBinaries) -- remove last item (= current binary) from list to keep it
 		for _, binaryPath in pairs(oldBinaries) do
 			os.remove(binaryPath)
@@ -39,13 +39,14 @@ return {
 			desc = "󰚩 Accept Suggestion",
 		},
 		{
-			"<leader>oa", function ()
+			"<leader>oa",
+			function()
 				vim.g.codeium_enabled = vim.g.codeium_enabled == false
 				local newState = vim.g.codeium_enabled and "enabled" or "disabled"
 				u.notify("Codium", "󰚩 Suggestions " .. newState .. ".")
 			end,
 			desc = "󰚩 Codium Suggestions",
-		}
+		},
 	},
 	config = function()
 		u.addToLuaLine("sections", "lualine_x", function()

@@ -75,6 +75,7 @@ local function toggleHiddenAndIgnore(prompt_bufnr)
 	local title = vim.fs.basename(cwd)
 	if ignoreHidden then title = title .. " (--hidden --no-ignore)" end
 	local currentQuery = require("telescope.actions.state").get_current_line()
+	local existingFileIgnores = require("telescope.config").values.file_ignore_patterns or {}
 
 	require("telescope.actions").close(prompt_bufnr)
 	require("telescope.builtin").find_files {
@@ -84,9 +85,14 @@ local function toggleHiddenAndIgnore(prompt_bufnr)
 		no_ignore = ignoreHidden,
 		cwd = cwd,
 		-- prevent these becoming visible through `--no-ignore`
-		file_ignore_patterns = ignoreHidden
-				and { "node_modules", ".venv", "%.DS_Store$", "%.git/", "%.app/", "%.png", "%.svg" }
-			or nil,
+		file_ignore_patterns = {
+			"node_modules",
+			".venv",
+			"%.DS_Store$",
+			"%.git/",
+			"%.app/",
+			unpack(existingFileIgnores), -- must be last for all items to be unpacked
+		},
 	}
 end
 
@@ -191,7 +197,7 @@ local function telescopeConfig()
 				-- inherit global ignore file from `fd`
 				("--ignore-file=" .. os.getenv("HOME") .. "/.config/fd/ignore"),
 			},
-			file_ignore_patterns = { "%.png$", "%.svg" },
+			file_ignore_patterns = { "%.png$", "%.svg", "%.gif", "%.zip" },
 		},
 		pickers = {
 			find_files = {
@@ -389,7 +395,7 @@ local function telescopeConfig()
 					"node_modules", -- ts/js
 					".local", -- neodev.nvim
 					"homebrew", -- nvim runtime
-					"EmmyLua.spoon" -- Hammerspoon
+					"EmmyLua.spoon", -- Hammerspoon
 				},
 			},
 			spell_suggest = {
