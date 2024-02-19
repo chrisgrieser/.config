@@ -44,7 +44,10 @@ autocmd("FocusLost", {
 opt.undofile = true -- enables persistent undo history
 
 -- extra undo-points (= more fine-grained undos)
-for _, char in pairs { ";", '"', "'", "<Space>" } do
+-- WARN insert mode mappings with `.` or `,` cause problems with `typescript-tools.nvim`
+local triggerChars = { ";", '"', "'", "<Space>" }
+
+for _, char in pairs (triggerChars) do
 	vim.keymap.set("i", char, function()
 		if vim.bo.buftype ~= "" then return char end
 		return char .. "<C-g>u"
@@ -204,6 +207,7 @@ autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
 		b.saveQueued = true
 		vim.defer_fn(function()
 			if not vim.api.nvim_buf_is_valid(bufnr) then return end
+			-- INFO removing `noautocmd` results in weird cursor movement
 			vim.api.nvim_buf_call(bufnr, function() vim.cmd("silent! noautocmd lockmarks update!") end)
 			b.saveQueued = false
 		end, debounce)
