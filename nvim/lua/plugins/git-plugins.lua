@@ -51,7 +51,12 @@ return {
 			require("tinygit").setup(opts)
 			u.addToLuaLine("winbar", "lualine_x", require("tinygit.statusline").blame)
 			u.addToLuaLine("inactive_winbar", "lualine_x", require("tinygit.statusline").blame)
-			u.addToLuaLine("sections", "lualine_y", require("tinygit.statusline").branchState, "before")
+			u.addToLuaLine(
+				"sections",
+				"lualine_y",
+				require("tinygit.statusline").branchState,
+				"before"
+			)
 		end,
 	},
 	{ -- git sign gutter & hunk actions
