@@ -1,0 +1,109 @@
+{
+  "name" : "Script Filter & URL",
+  "data" : {
+    "items" : [
+      {
+        "workflowobjecttype" : "alfred.workflow.input.scriptfilter",
+        "uid" : "736A4AD0-8321-4674-AC0B-64B3EE145FDA",
+        "note" : "",
+        "workflowobjectconfig" : {
+          "argumenttrimmode" : 0,
+          "scriptargtype" : 1,
+          "escaping" : 0,
+          "queuedelayimmediatelyinitially" : true,
+          "argumenttype" : 1,
+          "queuedelaymode" : 0,
+          "type" : 8,
+          "script" : "",
+          "title" : "{const:alfred_workflow_name}",
+          "runningsubtext" : "loading…",
+          "queuemode" : 1,
+          "argumenttreatemptyqueryasnil" : true,
+          "subtext" : "",
+          "alfredfiltersresultsmatchmode" : 2,
+          "scriptfile" : "search.js",
+          "alfredfiltersresults" : true,
+          "queuedelaycustom" : 3,
+          "withspace" : true
+        },
+        "colorindex" : 0,
+        "ypos" : 65,
+        "xpos" : 20
+      },
+      {
+        "workflowobjecttype" : "alfred.workflow.action.openurl",
+        "uid" : "1F9DE80F-EADB-45C4-9330-4CF3C7303B1A",
+        "note" : "",
+        "workflowobjectconfig" : {
+          "skipqueryencode" : false,
+          "browser" : "",
+          "spaces" : "",
+          "url" : "",
+          "skipvarencode" : false
+        },
+        "colorindex" : 0,
+        "ypos" : 5,
+        "xpos" : 265
+      },
+      {
+        "workflowobjecttype" : "alfred.workflow.output.clipboard",
+        "uid" : "0B36E439-3149-4BE3-986A-CE4912F167E2",
+        "note" : "",
+        "workflowobjectconfig" : {
+          "ignoredynamicplaceholders" : false,
+          "transient" : false,
+          "clipboardtext" : "{query}",
+          "autopaste" : false
+        },
+        "colorindex" : 0,
+        "ypos" : 120,
+        "xpos" : 265
+      },
+      {
+        "workflowobjecttype" : "alfred.workflow.output.notification",
+        "uid" : "4822D031-44C8-45D3-B41C-480AB71A6A4D",
+        "note" : "",
+        "workflowobjectconfig" : {
+          "onlyshowifquerypopulated" : true,
+          "title" : "📋 Copied",
+          "lastpathcomponent" : false,
+          "removeextension" : false,
+          "text" : "{query}"
+        },
+        "colorindex" : 0,
+        "ypos" : 120,
+        "xpos" : 415
+      }
+    ],
+    "connections" : [
+      {
+        "sourceuid" : "736A4AD0-8321-4674-AC0B-64B3EE145FDA",
+        "config" : {
+          "destinationuid" : "0B36E439-3149-4BE3-986A-CE4912F167E2",
+          "modifiers" : 524288,
+          "modifiersubtext" : "⌥: Copy URL",
+          "vitoclose" : false
+        }
+      },
+      {
+        "sourceuid" : "0B36E439-3149-4BE3-986A-CE4912F167E2",
+        "config" : {
+          "destinationuid" : "4822D031-44C8-45D3-B41C-480AB71A6A4D",
+          "modifiers" : 0,
+          "modifiersubtext" : "",
+          "vitoclose" : false
+        }
+      },
+      {
+        "sourceuid" : "736A4AD0-8321-4674-AC0B-64B3EE145FDA",
+        "config" : {
+          "destinationuid" : "1F9DE80F-EADB-45C4-9330-4CF3C7303B1A",
+          "modifiers" : 0,
+          "modifiersubtext" : "",
+          "vitoclose" : false
+        }
+      }
+    ]
+  },
+  "description" : ""
+}

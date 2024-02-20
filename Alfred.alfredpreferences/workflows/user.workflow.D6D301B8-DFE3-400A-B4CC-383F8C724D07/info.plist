@@ -22,11 +22,70 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>FA14F551-D161-4AA2-BE1A-45EFA5EB75F4</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: Watch Trailer</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>8AABF91D-1E70-4809-955F-8DBAE86E3107</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Copy Japanese Title</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>FAD5BFBE-DE0B-4191-8F0C-F10688EF05B4</string>
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>⌥: Copy URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>8AABF91D-1E70-4809-955F-8DBAE86E3107</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7E098A04-2A6D-4C5A-9968-3A4364A36654</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>FA14F551-D161-4AA2-BE1A-45EFA5EB75F4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E5C2943F-3313-4303-A60B-1DE042AB5EDE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>FAD5BFBE-DE0B-4191-8F0C-F10688EF05B4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F57F5F81-E2EF-48FF-B6AB-4871917B9FE9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -60,6 +119,54 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>E5C2943F-3313-4303-A60B-1DE042AB5EDE</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>FA14F551-D161-4AA2-BE1A-45EFA5EB75F4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>8AABF91D-1E70-4809-955F-8DBAE86E3107</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>📋 Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>7E098A04-2A6D-4C5A-9968-3A4364A36654</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -131,6 +238,27 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>📋 Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>F57F5F81-E2EF-48FF-B6AB-4871917B9FE9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>---
@@ -141,23 +269,59 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>1CD7085D-65B2-4B4F-835E-C2DB96C708F1</key>
 		<dict>
 			<key>xpos</key>
-			<real>55</real>
+			<real>45</real>
 			<key>ypos</key>
-			<real>145</real>
+			<real>215</real>
+		</dict>
+		<key>7E098A04-2A6D-4C5A-9968-3A4364A36654</key>
+		<dict>
+			<key>xpos</key>
+			<real>470</real>
+			<key>ypos</key>
+			<real>215</real>
+		</dict>
+		<key>8AABF91D-1E70-4809-955F-8DBAE86E3107</key>
+		<dict>
+			<key>note</key>
+			<string>copy Japanese title</string>
+			<key>xpos</key>
+			<real>305</real>
+			<key>ypos</key>
+			<real>215</real>
 		</dict>
 		<key>E5C2943F-3313-4303-A60B-1DE042AB5EDE</key>
 		<dict>
+			<key>note</key>
+			<string>open MAL URL</string>
 			<key>xpos</key>
-			<real>300</real>
+			<real>305</real>
 			<key>ypos</key>
 			<real>85</real>
 		</dict>
-		<key>FAD5BFBE-DE0B-4191-8F0C-F10688EF05B4</key>
+		<key>F57F5F81-E2EF-48FF-B6AB-4871917B9FE9</key>
 		<dict>
 			<key>xpos</key>
-			<real>300</real>
+			<real>470</real>
 			<key>ypos</key>
-			<real>200</real>
+			<real>355</real>
+		</dict>
+		<key>FA14F551-D161-4AA2-BE1A-45EFA5EB75F4</key>
+		<dict>
+			<key>note</key>
+			<string>Trailer</string>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>115</real>
+		</dict>
+		<key>FAD5BFBE-DE0B-4191-8F0C-F10688EF05B4</key>
+		<dict>
+			<key>note</key>
+			<string>copy MAL URL</string>
+			<key>xpos</key>
+			<real>305</real>
+			<key>ypos</key>
+			<real>355</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
