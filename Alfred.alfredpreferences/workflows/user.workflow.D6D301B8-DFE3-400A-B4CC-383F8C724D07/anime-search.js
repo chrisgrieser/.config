@@ -43,12 +43,12 @@ function run(argv) {
 
 	/** @type AlfredItem[] */
 	const animeTitles = response.data.map((anime) => {
-		const titleEng = shortenSeason(anime.title_english || anime.title)
+		const titleEng = shortenSeason(anime.title_english || anime.title);
 		const yearInfo = anime.year && !titleEng.match(/\d{4}/) ? `(${anime.year})` : "";
 		const airingIcon = anime.airing ? " 🎙️" : "";
 		const displayText = [titleEng, yearInfo, airingIcon].filter(Boolean).join(" ");
 
-		const titleJap = shortenSeason(anime.title_english ? anime.title : anime.title_synonyms[0])
+		const titleJap = shortenSeason(anime.title_english ? anime.title : anime.title_synonyms[0]);
 		const episodesInfo = anime.episodes ? `${anime.episodes}●` : "";
 		const score = anime.score ? `${anime.score.toFixed(1)}★` : "";
 		const subtitle = [episodesInfo, score, titleJap].filter(Boolean).join("   ");

@@ -4,11 +4,11 @@
 # INFO emojis need to be in textual form to work in Slack as well as Discord
 matches:
   # emoji-react selection
-  - { trigger: "rrr", replace: "+:" }
+  - { trigger: "eee", replace: "+:" }
 
   - { trigger: "hhh", replace: "+:blue_heart:\n" } # 💙
   - { trigger: "yyy", replace: "+:+1:\n" } # 👍
-  - { trigger: "eee", replace: "+:eyes:\n" } # 👀
+  - { trigger: "lll", replace: "+:eyes:\n" } # 👀
 
   # OMG discord server only
   - { trigger: "ttt", replace: "+:this:\n" }
