@@ -47,6 +47,10 @@
 				"path": "./basic/javascript.json"
 			},
 			{
+				"language": ["javascript", "typescript"],
+				"path": "./basic/node-js.json"
+			},
+			{
 				"language": ["javascript"],
 				"path": "./basic/jxa.json"
 			},
