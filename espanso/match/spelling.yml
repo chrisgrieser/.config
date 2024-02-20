@@ -133,3 +133,5 @@ matches:
   - { triggers: [isntead , instread], replace: instead, propagate_case: true, word: true }
   - { trigger: muhc, replace: much, propagate_case: true, word: true }
   - { trigger: einfahc, replace: einfach, propagate_case: true, word: true }
+  - { trigger: sowei, replace: sowie, propagate_case: true, word: true }
+  - { trigger: auhc, replace: auch, propagate_case: true, word: true }

@@ -24,7 +24,9 @@ return {
 
 			-- disable in markdown, PENDING https://github.com/nvim-treesitter/nvim-treesitter-context/issues/289
 			on_attach = function()
-				if vim.bo.filetype == "markdown" then return false end
+				vim.defer_fn(function()
+					if vim.bo.filetype == "markdown" then return false end
+				end, 1)
 			end,
 		},
 		init = function()
