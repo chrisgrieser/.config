@@ -41,7 +41,7 @@ return {
 			},
 			surrounds = {
 				invalid_key_behavior = { add = false, find = false, delete = false, change = false },
-				-- `dsl` -> delete surrounding call 
+				-- `dsl` -> delete surrounding call
 				-- (includes : for lua methods and css pseudo-classes)
 				["l"] = {
 					find = "[%w.:]+%b()",
@@ -218,6 +218,9 @@ return {
 				comment = { -- comments in any language
 					source = { both = { fallback = function() vim.cmd("normal! gww") end } },
 					element = { both = { fallback = function() vim.cmd("normal! gww") end } },
+				},
+				jsdoc = {
+					source = { both = { fallback = function() vim.cmd("normal! gww") end } },
 				},
 			},
 		},
