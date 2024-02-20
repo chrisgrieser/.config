@@ -1,0 +1,10 @@
+{
+  "home dir": {
+    "body": "os.homedir()",
+    "prefix": "home dir"
+  },
+  "os (module)": {
+    "body": "import * as os from \"os\";",
+    "prefix": "os (module)"
+  }
+}
