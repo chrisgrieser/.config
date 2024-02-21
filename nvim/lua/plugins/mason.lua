@@ -6,11 +6,6 @@ return {
 			{ "<leader>pm", vim.cmd.Mason, desc = " Mason" },
 		},
 		opts = {
-			-- PENDING https://github.com/mason-org/mason-registry/pull/4311
-			registries = {
-				"github:chrisgrieser/mason-registry", -- only has ltex-fix
-				"github:mason-org/mason-registry",
-			},
 			ui = {
 				border = vim.g.borderStyle,
 				height = 0.85,

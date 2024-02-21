@@ -254,13 +254,6 @@ serverConfigs.ltex = {
 		},
 	},
 	on_attach = function()
-		-- FIX ltex not being able to automatically detect bundles java runtime engine
-		-- due to mason's symlinking
-		vim.env.JAVA_HOME = vim.fs.find(
-			function(name) return vim.startswith(name, "jdk-") end,
-			{ path = vim.fn.stdpath("data") .. "/mason/packages/ltex-ls/", type = "directory" }
-		)[1]
-
 		-- have `zg` update ltex dictionary file as well as vim's spellfile
 		vim.keymap.set({ "n", "x" }, "zg", function()
 			local word
