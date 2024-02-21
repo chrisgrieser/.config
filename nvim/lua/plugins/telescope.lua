@@ -249,6 +249,7 @@ local function telescopeConfig()
 					},
 				},
 				layout_strategy = "vertical",
+				preview_title = "Unstaged Files",
 				previewer = require("telescope.previewers").new_termopen_previewer {
 					get_command = function(_, status)
 						local width = vim.api.nvim_win_get_width(status.preview_win)
