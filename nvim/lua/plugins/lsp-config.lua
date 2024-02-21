@@ -307,7 +307,7 @@ serverConfigs.yamlls = {
 		yaml = {
 			format = {
 				enable = true,
-				printWidth = 120,
+				printWidth = 105,
 				proseWrap = "always",
 			},
 		},
