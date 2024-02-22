@@ -35,7 +35,12 @@ return {
 			show_icons = true,
 			leader_key = "<D-D>", -- cmd+shift+d
 			save_path = function() return vim.g.syncedData .. "/arrow-nvim-bookmarks" end,
-			window = { border = vim.g.borderStyle },
+			window = {
+				border = vim.g.borderStyle,
+			},
+			mappings = {
+				clear_all_items = "c",
+			},
 		},
 		config = function(_, opts)
 			require("arrow").setup(opts)
