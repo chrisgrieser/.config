@@ -1,6 +1,8 @@
 tap "felixkratz/formulae"
 tap "homebrew/bundle"
+tap "homebrew/cask"
 tap "homebrew/cask-fonts"
+tap "homebrew/core"
 tap "homebrew/services"
 tap "mgmeyers/pdfannots2json"
 brew "openssl@3"
