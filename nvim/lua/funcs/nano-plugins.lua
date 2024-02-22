@@ -70,52 +70,6 @@ function M.globalSubstitute()
 end
 
 --------------------------------------------------------------------------------
--- very simplified version of harpoon.nvim / other.nvim
-function M.gotoAnchorFile()
-	local anchorFiles = { -- CONFIG
-		"init.lua",
-		"main.py",
-		"main.ts",
-		"utils.lua",
-		"utils.ts",
-		"utils.py",
-		"README.md",
-	}
-	-----------------------------------------------------------------------------
-
-	local currentFile = vim.fs.basename(vim.api.nvim_buf_get_name(0))
-
-	-- Reorder list of anchorsFiles so anchors after the current anchor come
-	-- first. Also filters the current file from the list.
-	if vim.tbl_contains(anchorFiles, currentFile) then
-		local front = {}
-		local back = {}
-		local anchorFound = false
-		for _, anchorFile in ipairs(anchorFiles) do
-			if anchorFile == currentFile then
-				anchorFound = true
-			else
-				local whereToInsert = anchorFound and front or back
-				table.insert(whereToInsert, anchorFile)
-			end
-		end
-		anchorFiles = vim.list_extend(front, back)
-	end
-
-	-- search for anchor files in cwd, open the first which appears in anchorFileList
-	local anchorFilesInCwd = vim.fs.find(anchorFiles, { type = "file", limit = math.huge })
-	for _, anchor in ipairs(anchorFiles or {}) do
-		for _, cwdAnchor in ipairs(anchorFilesInCwd) do
-			if vim.fs.basename(cwdAnchor) == anchor then
-				vim.cmd.edit(cwdAnchor)
-				return
-			end
-		end
-	end
-	notify("", "No next anchor file found.", "info")
-end
-
---------------------------------------------------------------------------------
 
 function M.openAlfredPref()
 	local parentFolder = vim.fs.dirname(vim.api.nvim_buf_get_name(0))

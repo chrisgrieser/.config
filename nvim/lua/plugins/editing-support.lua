@@ -282,11 +282,6 @@ return {
 				g = { name = " 󰊢 Git" },
 			}, { prefix = "<leader>", mode = { "x", "n" } })
 
-			-- needed so localleader prefixes work with whichkey
-			whichkey.register {
-				["<localleader>"] = { name = "filetype-specific", mode = { "n", "x" } },
-			}
-
 			-- set by some plugins and unnecessarily clobbers whichkey
 			vim.keymap.set("o", "<LeftMouse>", "<Nop>")
 		end,

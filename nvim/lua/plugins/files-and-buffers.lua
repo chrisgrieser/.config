@@ -58,4 +58,34 @@ return {
 			-- stylua: ignore end
 		},
 	},
+	{ -- harpoon with better UI
+		"otavioschwanck/arrow.nvim",
+		event = "VeryLazy", -- for status line component
+		keys = {
+			";", -- leader-key
+			{ "<D-CR>", function() require("arrow.persist").next() end, desc = "󱡁 Next arrow" },
+			{
+				"<D-d>", -- cmd+d
+				function() require("arrow.persist").toggle() end,
+				desc = "󱡁 (Un-)Mark as arrow",
+			},
+		},
+		opts = {
+			show_icons = true,
+			leader_key = ";", -- cmd+shift+d
+			index_keys = "jkluiop",
+			save_path = function() return vim.g.syncedData .. "/arrow-nvim-bookmarks" end,
+			window = { border = vim.g.borderStyle },
+		},
+		config = function(_, opts)
+			require("arrow").setup(opts)
+
+			require("config.utils").addToLuaLine(
+				"sections",
+				"lualine_a",
+				require("arrow.statusline").text_for_statusline_with_icons,
+				"before"
+			)
+		end,
+	},
 }

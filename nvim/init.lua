@@ -12,7 +12,6 @@ end, 1)
 --------------------------------------------------------------------------------
 
 vim.g.mapleader = ","
-vim.g.maplocalleader = ";"
 vim.g.borderStyle = "single" ---@type "single"|"double"|"rounded"|"solid"|"none"
 
 vim.g.linterConfigs = os.getenv("HOME") .. "/.config/+ linter-configs/"

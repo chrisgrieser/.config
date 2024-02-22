@@ -117,13 +117,13 @@ keymap("n", "<D-4>", "mzI- <Esc>`z", { desc = " Add List", buffer = true })
 -- Format Table
 keymap(
 	"n",
-	"<localleader>f",
+	"<leader>ft",
 	"vip:!pandoc -t commonmark_x<CR>",
 	{ desc = " Format Table under Cursor", buffer = true, silent = true }
 )
 
 -- convert md image to html image
-keymap("n", "<localleader>i", function()
+keymap("n", "<leader>fi", function()
 	local line = vim.api.nvim_get_current_line()
 	local htmlImage = line:gsub("!%[(.-)%]%((.-)%)", '<img src="%2" alt="%1" width=70%%>')
 	vim.api.nvim_set_current_line(htmlImage)
