@@ -368,6 +368,15 @@ local function telescopeConfig()
 					horizontal = { preview_width = { 0.7, min = 30 } },
 				},
 			},
+			lsp_type_definitions = {
+				prompt_prefix = "󰈿 ",
+				trim_text = true,
+				show_line = false,
+				initial_mode = "normal",
+				layout_config = {
+					horizontal = { preview_width = { 0.7, min = 30 } },
+				},
+			},
 			-- using treesitter-symbol search over LSP symbol search, as treesitter
 			-- symbol search leaves out anonymous functions
 			treesitter = {
@@ -448,6 +457,7 @@ return {
 			-- stylua: ignore
 			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
 			{ "gd", function() telescope("lsp_definitions") end, desc = "󰒕 Definitions" },
+			{ "gD", function() telescope("lsp_type_definitions") end, desc = "󰒕 Type Definitions" },
 			{ "gf", function() telescope("lsp_references") end, desc = "󰒕 References" },
 			{ "<leader>ph", function() telescope("highlights") end, desc = " Highlights" },
 			{ "<leader>pc", function() telescope("colorscheme") end, desc = " Colorschemes" },
