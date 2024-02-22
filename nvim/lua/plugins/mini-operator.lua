@@ -45,7 +45,10 @@ local function filetypeSpecificEval()
 					table.insert(inputLines, lastLine)
 				end
 
-				local lines = table.concat(inputLines, "\n")
+				local lines = vim.trim(table.concat(inputLines, "\n"))
+				-- trailing ; makes console.log invalid
+				if ft == "javascript" or ft == "typescript" then lines = lines:gsub(";$", "") end
+
 				local shellCmd = repl .. ' "' .. lines:gsub('"', '\\"') .. '"'
 				local evaluatedOut = vim.fn.system(shellCmd):gsub("\n$", "")
 				u.notify("Eval", evaluatedOut)

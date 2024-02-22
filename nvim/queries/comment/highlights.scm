@@ -26,3 +26,9 @@
 ("text" @comment.warning (#any-of? @comment.warning "SIC" "CAVEAT"))
 ((tag (name) @comment.warning ":" @punctuation.delimiter)
  (#any-of? @comment.warning "SIC" "CAVEAT"))
+
+;──────────────────────────────────────────────────────────────────────────────
+
+("text" @markup.raw.markdown_inline
+ (#match? @markup.raw.markdown_inline "`.+`"))
+; TODO #23232 ffsfsf `ObjCfsfsf` `fsfsffff` 
