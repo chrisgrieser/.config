@@ -9,6 +9,7 @@ alias gT='git stash pop'
 alias gi='gh issue list --state=open'
 alias gI='gh issue list --state=closed'
 
+alias mergetool="git mergetool"
 alias unadd='git restore --staged'
 alias restore='git restore'
 alias reset='git reset'
