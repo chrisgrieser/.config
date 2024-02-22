@@ -29,6 +29,7 @@
 
 ;──────────────────────────────────────────────────────────────────────────────
 
+; not working with special characters in `here`, 
+; see https://github.com/stsewd/tree-sitter-comment/issues/34
 ("text" @markup.raw.markdown_inline
  (#match? @markup.raw.markdown_inline "`.+`"))
-; TODO #23232 ffsfsf `ObjCfsfsf` `fsfsffff` 
