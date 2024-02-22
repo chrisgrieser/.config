@@ -9,7 +9,7 @@ correct=$(echo "$*" | cut -d" " -f2)
 new_line="  - { trigger: $wrong, replace: $correct, propagate_case: true, word: true }"
 echo "$new_line" >>"$spell_config"
 
-espanso restart # required due to `auto_restart = false`
+# espanso restart # required if `auto_restart = false`
 
 # shellcheck disable=2154
 if [[ "$open" == "true" ]]; then
