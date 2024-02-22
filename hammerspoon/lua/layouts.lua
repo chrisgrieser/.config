@@ -59,13 +59,9 @@ local function workLayout()
 	u.closeAllTheThings()
 	app("AltTab"):kill() -- FIX missing windows
 
-	-- FIX enforce reminders sync
-	hs.application.open("Reminders")
-	u.runWithDelays(3, function() app("Reminders"):kill() end)
-
 	-- open
 	u.openApps(env.mastodonApp)
-	local appsToOpen = { "Discord", env.browserApp, "Mimestream" }
+	local appsToOpen = { "Discord", env.browserApp, "Mimestream", "GoodTask" }
 	if not isWeekend() then table.insert(appsToOpen, "Slack") end
 	u.openApps(appsToOpen)
 	for _, appName in pairs(appsToOpen) do
