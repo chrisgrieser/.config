@@ -25,6 +25,7 @@ M.codeFont = readZshEnv("CODE_FONT")
 --------------------------------------------------------------------------------
 -- Apps
 
+M.mastodonApp = "Mona"
 M.browserApp = readZshEnv("BROWSER_APP")
 M.browserDefaultsPath = readZshEnv("BROWSER_DEFAULTS_PATH")
 
@@ -46,8 +47,6 @@ M.videoAndAudioApps = {
 	"Tageschau",
 	"Crunchyroll",
 }
-
-M.mastodonApp = "Mona"
 
 --------------------------------------------------------------------------------
 -- DEVICE
