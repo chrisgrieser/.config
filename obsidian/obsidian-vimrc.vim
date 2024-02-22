@@ -199,7 +199,7 @@ nnoremap ,s gqq
 
 " case switch via Code Editor Shortcuts Plugin
 exmap caseSwitch obcommand obsidian-editor-shortcuts:toggleCase
-nnoremap ; :caseSwitch
+nnoremap < :caseSwitch
 
 " do not move to the right on toggling case
 nnoremap ~ ~h
