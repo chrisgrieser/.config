@@ -1,8 +1,5 @@
-local function test()
-	if true then
-		vim.notify("👽 beep 🔵")
-		vim.notify("👽 beep 🔵")
-	end
-end
 
-test()
+
+local str = "`ObjC.fsfsf`"
+local match = str:match("`.*%.?.*`")
+vim.notify("👽 match: " .. tostring(match))
