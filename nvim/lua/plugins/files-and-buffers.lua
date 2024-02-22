@@ -1,43 +1,4 @@
 return {
-	{ -- auto-close inactive buffers
-		"chrisgrieser/nvim-early-retirement",
-		event = "VeryLazy",
-		opts = {
-			retirementAgeMins = 10,
-			minimumBufferNum = 4, -- 3 or fewer never closed
-			ignoreUnsavedChangesBufs = false,
-			notificationOnAutoClose = true,
-			deleteBufferWhenFileDeleted = true,
-		},
-	},
-	{ -- :bnext & :bprevious get visual overview of buffers
-		"ghillb/cybu.nvim",
-		keys = {
-			{ "<BS>", function() require("cybu").cycle("prev") end, desc = "󰽙 Previous Buffer" },
-			{ "<S-BS>", function() require("cybu").cycle("next") end, desc = "󰽙 Next Buffer" },
-		},
-		dependencies = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim" },
-		opts = {
-			display_time = 1000,
-			position = {
-				anchor = "bottomcenter",
-				max_win_height = 12,
-				vertical_offset = 3,
-			},
-			style = {
-				border = vim.g.borderStyle,
-				padding = 7,
-				path = "tail",
-				hide_buffer_id = false,
-				highlights = { current_buffer = "CursorLine", adjacent_buffers = "Normal" },
-			},
-			behavior = {
-				mode = {
-					default = { switch = "immediate", view = "paging" },
-				},
-			},
-		},
-	},
 	{ -- convenience file operations
 		"chrisgrieser/nvim-genghis",
 		external_dependencies = "macos-trash",
@@ -65,7 +26,7 @@ return {
 			";", -- leader-key
 			{ "<D-CR>", function() require("arrow.persist").next() end, desc = "󱡁 Next arrow" },
 			{
-				"<D-d>", -- cmd+d
+				"<D-d>", -- cmd+d (like bookmarking in the browser)
 				function() require("arrow.persist").toggle() end,
 				desc = "󱡁 (Un-)Mark as arrow",
 			},
