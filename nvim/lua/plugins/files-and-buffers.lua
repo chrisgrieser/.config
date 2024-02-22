@@ -23,7 +23,7 @@ return {
 		"otavioschwanck/arrow.nvim",
 		event = "VeryLazy", -- for status line component
 		keys = {
-			";", -- leader-key
+			"<D-D>",
 			{ "<D-CR>", function() require("arrow.persist").next() end, desc = "󱡁 Next arrow" },
 			{
 				"<D-d>", -- cmd+d (like bookmarking in the browser)
@@ -33,8 +33,7 @@ return {
 		},
 		opts = {
 			show_icons = true,
-			leader_key = ";", -- cmd+shift+d
-			index_keys = "jkluiop",
+			leader_key = "<D-D>", -- cmd+shift+d
 			save_path = function() return vim.g.syncedData .. "/arrow-nvim-bookmarks" end,
 			window = { border = vim.g.borderStyle },
 		},
