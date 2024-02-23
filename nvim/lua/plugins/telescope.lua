@@ -223,7 +223,7 @@ local function telescopeConfig()
 				prompt_prefix = "󰋚 ",
 				path_display = filenameFirst,
 				tiebreak = prioritizeRecentlyModified,
-				file_ignore_patterns = { "%.log", "%.plist$" },
+				file_ignore_patterns = { "%.log", "%.plist$", "COMMIT_EDITMSG" },
 				previewer = false,
 				layout_config = {
 					horizontal = { anchor = "W", width = 0.5, height = 0.55 },

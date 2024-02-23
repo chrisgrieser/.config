@@ -11,7 +11,3 @@
                ( string content:  
                         (string_content) @injection.content 
                         (#set! injection.language "bash"))))
-
-;markdown in comments
-(comment
-  (comment_content) @injection.content (#set! injection.language "markdown"))

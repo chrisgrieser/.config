@@ -37,8 +37,12 @@ keymap(
 -- INSPECT
 
 keymap("n", "<leader>ih", cmd.Inspect, { desc = " Highlights under Cursor" })
-keymap("n", "<leader>it", cmd.InspectTree, { desc = " :InspectTree" })
 keymap("n", "<leader>il", cmd.LspInfo, { desc = "󰒕 :LspInfo" })
+
+keymap("n", "<leader>it", function ()
+	vim.treesitter.inspect_tree{ command = "60vnew" }
+end, { desc = " :InspectTree" })
+
 keymap("n", "<leader>ib", function()
 	local out = {
 		"filetype: " .. bo.filetype,
