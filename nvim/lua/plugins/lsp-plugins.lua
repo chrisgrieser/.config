@@ -1,5 +1,4 @@
 local u = require("config.utils")
-local kind = vim.lsp.protocol.SymbolKind
 --------------------------------------------------------------------------------
 
 return {
@@ -37,14 +36,17 @@ return {
 		"Wansmer/symbol-usage.nvim",
 		event = "BufReadPre",
 		opts = {
-			hl = { link = "NonText" },
+			hl = { link = "Comment" },
 			vt_position = "end_of_line",
 			request_pending_text = false, -- no "Loading…" PENDING https://github.com/Wansmer/symbol-usage.nvim/issues/24
 			references = { enabled = true, include_declaration = false },
 			definition = { enabled = false },
 			implementation = { enabled = false },
-			-- available symbolkinds: https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#symbolKind
-			kinds = { kind.Function, kind.Method, kind.Object },
+			kinds = { -- available kinds: https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#symbolKind
+				vim.lsp.protocol.SymbolKind.Function,
+				vim.lsp.protocol.SymbolKind.Method,
+				vim.lsp.protocol.SymbolKind.Object,
+			},
 			text_format = function(symbol)
 				if symbol.references == 0 then return "" end
 				return " 󰈿 " .. symbol.references
@@ -64,7 +66,7 @@ return {
 	},
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",
-		event = (vim.fn.has("nvim-0.10.0") == 1 and "LspAttach" or "BufReadPre"),
+		event = "BufReadPre",
 		dependencies = "folke/noice.nvim",
 		opts = {
 			noice = true, -- render via noice.nvim

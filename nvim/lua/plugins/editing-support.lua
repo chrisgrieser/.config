@@ -218,13 +218,35 @@ return {
 				-- remove curly brackets in js, see https://github.com/Wansmer/treesj/issues/150
 				statement_block = {
 					join = {
-						format_resulted_lines = function(lines)
-							if #lines ~= 3 or lines[1] ~= "{" then return lines end
-							local curlyBracketsRemoved = vim.trim(lines[2])
-							return { curlyBracketsRemoved }
+						format_tree = function(tsj)
+							if tsj:tsnode():parent():type() == "if_statement" then
+								tsj:remove_child { left = "{", right = "}" }
+							else
+								local stmt_join_fb =
+									require("treesj.langs.javascript").statement_block.join.fallback
+								stmt_join_fb(tsj)
+							end
 						end,
 					},
 				},
+				expression_statement = {
+					join = {
+						enable = false,
+					},
+					split = {
+						enable = function(tsn) return tsn:parent():type() == "if_statement" end,
+						format_tree = function(tsj) tsj:wrap { left = "{", right = "}" } end,
+					},
+				},
+				-- statement_block = {
+				-- 	join = {
+				-- 		format_resulted_lines = function(lines)
+				-- 			if #lines ~= 3 or lines[1] ~= "{" then return lines end
+				-- 			local curlyBracketsRemoved = vim.trim(lines[2])
+				-- 			return { curlyBracketsRemoved }
+				-- 		end,
+				-- 	},
+				-- },
 			}
 			opts.langs = {
 				python = { string_content = gww }, -- python docstrings
