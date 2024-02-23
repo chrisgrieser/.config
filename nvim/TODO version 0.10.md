@@ -17,3 +17,5 @@
 - check if `lua.vim` ftplugin includes `:---` as comment:
   <https://github.com/neovim/neovim/blob/master/runtime/ftplugin/lua.vim#L18>
 - `vim.fn.getregion()`
+- uninstall `lsp-inlayhints.nvim`
+- load `symbol-usage.nvim` only on LspAttach
