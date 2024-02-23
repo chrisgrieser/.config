@@ -215,38 +215,39 @@ return {
 		config = function(_, opts)
 			local gww = { both = { fallback = function() vim.cmd("normal! gww") end } }
 			local curleyLessIfStatementJoin = {
-				-- remove curly brackets in js, see https://github.com/Wansmer/treesj/issues/150
+				-- remove curly brackets in js when joining if statements
+				-- SOURCE https://github.com/Wansmer/treesj/issues/150
+				-- remove curly brackets in js, see
 				statement_block = {
 					join = {
 						format_tree = function(tsj)
+							for i = 0, 2 do
+								local child = tsj:tsnode():child(i)
+								local text = vim.treesitter.get_node_text(child, 0)
+								vim.notify(("child %d: %q"):format(i, text))
+							end
 							if tsj:tsnode():parent():type() == "if_statement" then
 								tsj:remove_child { left = "{", right = "}" }
 							else
-								local stmt_join_fb =
-									require("treesj.langs.javascript").statement_block.join.fallback
-								stmt_join_fb(tsj)
+								require("treesj.langs.javascript").statement_block.join.fallback(tsj)
 							end
 						end,
+						-- format_resulted_lines = function(lines)
+						-- 	if #lines ~= 3 or lines[1] ~= "{" then return lines end
+						-- 	local curlyBracketsRemoved = vim.trim(lines[2])
+						-- 	return { curlyBracketsRemoved }
+						-- end,
 					},
 				},
+				-- one-line-if-statement can be split into curly-enclosed multi-line
+				-- SOURCE https://github.com/Wansmer/treesj/issues/150
 				expression_statement = {
-					join = {
-						enable = false,
-					},
+					join = { enable = false },
 					split = {
 						enable = function(tsn) return tsn:parent():type() == "if_statement" end,
 						format_tree = function(tsj) tsj:wrap { left = "{", right = "}" } end,
 					},
 				},
-				-- statement_block = {
-				-- 	join = {
-				-- 		format_resulted_lines = function(lines)
-				-- 			if #lines ~= 3 or lines[1] ~= "{" then return lines end
-				-- 			local curlyBracketsRemoved = vim.trim(lines[2])
-				-- 			return { curlyBracketsRemoved }
-				-- 		end,
-				-- 	},
-				-- },
 			}
 			opts.langs = {
 				python = { string_content = gww }, -- python docstrings
