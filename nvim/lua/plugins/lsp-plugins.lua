@@ -67,6 +67,14 @@ return {
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",
 		event = "BufReadPre",
+		keys = {
+			{ -- better signature view
+				"<D-g>",
+				function() require("lsp_signature").toggle_float_win() end,
+				mode = { "i", "n", "v" },
+				desc = "󰏪 LSP Signature",
+			},
+		},
 		dependencies = "folke/noice.nvim",
 		opts = {
 			noice = true, -- render via noice.nvim
@@ -75,6 +83,8 @@ return {
 			hint_inline = function() return vim.lsp.inlay_hint ~= nil end,
 			floating_window = false,
 			always_trigger = true,
+			bind = true, -- This is mandatory, otherwise border config won't get registered.
+			handler_opts = { border = vim.g.borderStyle },
 		},
 	},
 	{ -- add ignore-comments & lookup rules
