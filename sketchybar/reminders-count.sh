@@ -1,12 +1,13 @@
 #!/usr/bin/env zsh
 
-# GUARD only trigger on deactivation of of GoodTask/Reminders
+# GUARD only trigger on deactivation of of GoodTask/Reminders, if only one display
 if [[ "$SENDER" = "front_app_switched" ]]; then
 	data="/tmp/sketchybar_front_app1"
 	[[ -f "$data" ]] && deactivated_app=$(<"$data")
 	echo -n "$INFO" >"$data"
 	[[ "$deactivated_app" != "GoodTask" ]] && return 0
 fi
+[[ $(system_profiler SPDisplaysDataType | grep -c "Resolution:") -eq 2 ]] && return  0
 
 # wait for sync of reminders
 [[ "$SENDER" == "system_woke" ]] && sleep 5
