@@ -60,7 +60,7 @@ local function workLayout()
 
 	-- open
 	u.openApps(env.mastodonApp)
-	local appsToOpen = { "Discord", env.browserApp, "Mimestream", "GoodTask" }
+	local appsToOpen = { "Discord", env.browserApp, "Mimestream" }
 	if not isWeekend() then table.insert(appsToOpen, "Slack") end
 	u.openApps(appsToOpen)
 	for _, appName in pairs(appsToOpen) do
@@ -69,6 +69,7 @@ local function workLayout()
 			wu.moveResize(win, wu.pseudoMax)
 		end)
 	end
+	hs.application.open("GoodTask", 1)
 
 	-- finish
 	u.whenAppWinAvailable("Discord", function()
