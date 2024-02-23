@@ -215,32 +215,19 @@ return {
 		config = function(_, opts)
 			local gww = { both = { fallback = function() vim.cmd("normal! gww") end } }
 			local curleyLessIfStatementJoin = {
-				-- remove curly brackets in js when joining if statements
-				-- SOURCE https://github.com/Wansmer/treesj/issues/150
-				-- remove curly brackets in js, see
+				-- remove curly brackets in js when joining if statements https://github.com/Wansmer/treesj/issues/150
 				statement_block = {
 					join = {
 						format_tree = function(tsj)
-							for i = 0, 2 do
-								local child = tsj:tsnode():child(i)
-								local text = vim.treesitter.get_node_text(child, 0)
-								vim.notify(("child %d: %q"):format(i, text))
-							end
 							if tsj:tsnode():parent():type() == "if_statement" then
-								tsj:remove_child { left = "{", right = "}" }
+								tsj:remove_child { "{", "}" }
 							else
 								require("treesj.langs.javascript").statement_block.join.fallback(tsj)
 							end
 						end,
-						-- format_resulted_lines = function(lines)
-						-- 	if #lines ~= 3 or lines[1] ~= "{" then return lines end
-						-- 	local curlyBracketsRemoved = vim.trim(lines[2])
-						-- 	return { curlyBracketsRemoved }
-						-- end,
 					},
 				},
-				-- one-line-if-statement can be split into curly-enclosed multi-line
-				-- SOURCE https://github.com/Wansmer/treesj/issues/150
+				-- one-line-if-statement can be split into multi-line https://github.com/Wansmer/treesj/issues/150
 				expression_statement = {
 					join = { enable = false },
 					split = {
