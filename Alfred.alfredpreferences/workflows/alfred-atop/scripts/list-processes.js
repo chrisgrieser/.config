@@ -66,17 +66,16 @@ function run() {
 	const processes = app
 		// command should come last, so it is not truncated and also fully
 		// identifiable by space delimitation even with spaces in the process name
+		// (command name can contain spaces, therefore last)
 		.doShellScript(`ps ${sort}cAo 'pid=,ppid=,%cpu=,rss=,ruser=,command='`)
 		.split("\r")
 		.map((/** @type {string} */ processInfo) => {
 			// PID & name
-			const info = processInfo.trim().split(/ +/);
-			const processName = info.slice(5).join(" "); // command name can contain spaces, therefore last
+			const [pid, ppid, cpuStr, memoryStr, isRoot, ...rest] = processInfo.trim().split(/ +/);
+			const processName = rest.join(" ");
 			if (processName === "<defunct>") return {};
-			const pid = info[0];
 
 			// parent process
-			const ppid = info[1];
 			const parentInfo = parentProcs[ppid];
 			let parentName;
 			if (!parentInfo) {
@@ -91,11 +90,10 @@ function run() {
 			if (parentIsObvious) parentName = "";
 
 			// Memory, CPU & root
-			let memory = (Number.parseInt(info[3]) / 1024).toFixed(0).toString(); // real memory
+			let memory = (Number.parseInt(memoryStr) / 1024).toFixed(0).toString(); // real memory
 			memory = Number.parseInt(memory) > memoryThresholdMb ? memory + "Mb" : "";
-			let cpu = info[2];
-			cpu = Number.parseFloat(cpu) > cpuThresholdPercent ? cpu + "%" : "";
-			const isRootUser = info[4] === "root" ? " ⭕" : "";
+			const cpu = Number.parseFloat(cpuStr) > cpuThresholdPercent ? cpuStr + "%" : "";
+			const isRootUser = isRoot === "root" ? " ⭕" : "";
 
 			// display & icon
 			if (parentName) parentName = "↖ " + parentName;

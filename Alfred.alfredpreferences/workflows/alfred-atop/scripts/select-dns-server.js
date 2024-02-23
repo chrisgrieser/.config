@@ -22,6 +22,12 @@ function run() {
 			arg: ["1.1.1.1", "1.0.0.1"],
 			variables: { server_name: "Cloudflare" },
 		},
+		{
+			title: "AliDNS",
+			subtitle: "223.5.5.5  &  223.6.6.6",
+			arg: ["223.5.5.5", "223.6.6.6"],
+			variables: { server_name: "AliDNS" },
+		},
 	];
 
 	// get current DNS
@@ -34,6 +40,7 @@ function run() {
 		.split("\r")[0]
 	if (currentDns === "8.8.8.8") selectableDns[0].title = "✅ Google";
 	else if (currentDns === "1.1.1.1") selectableDns[1].title = "✅ Cloudflare";
+	else if (currentDns === "223.5.5.5") selectableDns[2].title = "✅ AliDNS";
 
 	return JSON.stringify({ items: selectableDns });
 }
