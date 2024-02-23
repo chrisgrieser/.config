@@ -192,7 +192,7 @@ function M.betterTilde()
 	if changeTo then
 		normal("r" .. changeTo)
 	else
-		normal("v~") -- (`v~` instead of `~h` so dot-repetition also doesn't move the cursor)
+		normal("v~") -- (`v~` instead of `~h` so dot-repetition doesn't move cursor)
 	end
 end
 

@@ -7,6 +7,7 @@ max_file_size_mb=10
 #───────────────────────────────────────────────────────────────────────────────
 
 # safeguard against accidental pushing of large files
+# INFO excluding "better dictionary", since it has large files
 large_files=$(find . -not -path "**/.git/**" -size +${max_file_size_mb}M)
 if [[ -n "$large_files" ]]; then
 	echo "Large file(s) found. Aborting commit."
