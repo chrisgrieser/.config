@@ -11,10 +11,6 @@
 open "obsidian://advanced-uri?commandid=longform%253Alongform-compile-current"
 sleep 0.5
 
-# 2. REVEAL IN FINDER
-open "obsidian://advanced-uri?commandid=open-with-default-app%253Ashow"
-sleep 0.1
-
 # 3. RUN PANDOC
 md_file=$(osascript -e 'tell application "Finder"
 	set sel to (item 1 of (get selection) as text)
