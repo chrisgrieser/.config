@@ -222,17 +222,8 @@ return {
 				jsdoc = {
 					source = { both = { fallback = function() vim.cmd("normal! gww") end } },
 				},
-				typescript = {
-					if_statement = {
-						join = {
-							format_resulted_lines = function(lines)
-								vim.notify("beep 🔵")
-								local curlyLess = lines[1]:gsub("[{}]", "")
-								return { curlyLess }
-							end,
-						},
-					},
-				},
+				-- see https://github.com/Wansmer/treesj/issues/150
+				java,
 			},
 		},
 	},
