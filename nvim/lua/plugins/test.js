@@ -3,4 +3,4 @@
 //──────────────────────────────────────────────────────────────────────────────
 
 const foobar = true;
-if (foobar) { console.log("foo"); }
+if (foobar) console.log("foo");
