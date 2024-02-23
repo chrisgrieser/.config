@@ -222,6 +222,17 @@ return {
 				jsdoc = {
 					source = { both = { fallback = function() vim.cmd("normal! gww") end } },
 				},
+				typescript = {
+					if_statement = {
+						join = {
+							format_resulted_lines = function(lines)
+								vim.notify("beep 🔵")
+								local curlyLess = lines[1]:gsub("[{}]", "")
+								return { curlyLess }
+							end,
+						},
+					},
+				},
 			},
 		},
 	},
@@ -290,8 +301,7 @@ return {
 		"chrisgrieser/nvim-chainsaw",
 		init = function() u.leaderSubkey("l", " Log") end,
 		opts = {
-			marker = "👽",
-
+			marker = "🔹",
 			logStatements = {
 				objectLog = {
 					-- Obsidian API
