@@ -47,7 +47,7 @@ opt.undofile = true -- enables persistent undo history
 -- WARN insert mode mappings with `.` or `,` cause problems with `typescript-tools.nvim`
 local triggerChars = { ";", '"', "'", "<Space>" }
 
-for _, char in pairs (triggerChars) do
+for _, char in pairs(triggerChars) do
 	vim.keymap.set("i", char, function()
 		if vim.bo.buftype ~= "" then return char end
 		return char .. "<C-g>u"

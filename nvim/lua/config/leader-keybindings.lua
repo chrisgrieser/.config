@@ -39,8 +39,9 @@ keymap(
 keymap("n", "<leader>ih", cmd.Inspect, { desc = " Highlights under Cursor" })
 keymap("n", "<leader>il", cmd.LspInfo, { desc = "󰒕 :LspInfo" })
 
-keymap("n", "<leader>it", function ()
-	vim.treesitter.inspect_tree{ command = "60vnew" }
+keymap("n", "<leader>it", function()
+	-- setting command to always open in the right, regardless of `splitright`
+	vim.treesitter.inspect_tree { command = "vertical botright new" }
 end, { desc = " :InspectTree" })
 
 keymap("n", "<leader>ib", function()
