@@ -69,7 +69,7 @@ function run() {
 		// (command name can contain spaces, therefore last)
 		.doShellScript(`ps ${sort}cAo 'pid=,ppid=,%cpu=,rss=,ruser=,command='`)
 		.split("\r")
-		.map((/** @type {string} */ processInfo) => {
+		.map((processInfo) => {
 			// PID & name
 			const [pid, ppid, cpuStr, memoryStr, isRoot, ...rest] = processInfo.trim().split(/ +/);
 			const processName = rest.join(" ");

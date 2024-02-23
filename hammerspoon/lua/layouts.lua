@@ -7,7 +7,6 @@ local visuals = require("lua.visuals")
 local wu = require("lua.window-utils")
 local app = require("lua.utils").app
 
-local hotkey = hs.hotkey.bind
 --------------------------------------------------------------------------------
 -- HELPERS
 
@@ -135,7 +134,7 @@ M.caff_displayCount = hs.screen.watcher
 	:start()
 
 -- 2. Hotkey
-hotkey(u.hyper, "home", selectLayout)
+hs.hotkey.bind(u.hyper, "home", selectLayout)
 
 -- 3. Systemstart
 if u.isSystemStart() then selectLayout() end

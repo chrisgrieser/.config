@@ -10,6 +10,10 @@ else if (rerunSecs > 5) rerunSecs = 5;
 const excludedDevices = ($.getenv("excluded_devices") || "").split(",").map((t) => t.trim());
 
 //──────────────────────────────────────────────────────────────────────────────
+// TODO assess whether `ObjC.import("IOBluetooth")` is useful
+// https://github.com/bosha/alfred-blueman-workflow/blob/master/src/bt_manager.jxa
+
+//──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
