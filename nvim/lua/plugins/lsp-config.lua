@@ -253,7 +253,7 @@ serverConfigs.ltex = {
 			},
 		},
 	},
-	on_attach = function()
+	on_attach = function(_, bufnr)
 		-- have `zg` update ltex dictionary file as well as vim's spellfile
 		vim.keymap.set({ "n", "x" }, "zg", function()
 			local word
@@ -267,7 +267,7 @@ serverConfigs.ltex = {
 			local ltexSettings = vim.lsp.get_active_clients({ name = "ltex" })[1].config.settings
 			table.insert(ltexSettings.ltex.dictionary["en-US"], word)
 			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = ltexSettings })
-		end, { desc = "󰓆 Add Word", buffer = true })
+		end, { desc = "󰓆 Add Word", buffer = bufnr })
 
 		-- Disable ltex in Obsidian vault, as there is no `.ltexignore` https://github.com/valentjn/vscode-ltex/issues/576
 		vim.defer_fn(function()

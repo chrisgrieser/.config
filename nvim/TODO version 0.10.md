@@ -18,4 +18,4 @@
   <https://github.com/neovim/neovim/blob/master/runtime/ftplugin/lua.vim#L18>
 - `vim.fn.getregion()`
 - uninstall `lsp-inlayhints.nvim`
-- load `symbol-usage.nvim` only on LspAttach
+- load `symbol-usage.nvim` and `ray-x/lsp_signature.nvim` only on `LspAttach`
