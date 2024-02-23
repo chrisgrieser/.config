@@ -222,7 +222,7 @@ return {
 							if tsj:tsnode():parent():type() == "if_statement" then
 								tsj:remove_child { "{", "}" }
 							else
-								require("treesj.langs.javascript").statement_block.join.fallback(tsj)
+								require("treesj.langs.javascript").statement_block.join.format_tree(tsj)
 							end
 						end,
 					},
