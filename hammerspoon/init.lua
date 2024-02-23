@@ -30,10 +30,10 @@ safeRequire("lua.visuals")
 safeRequire("lua.dark-mode")
 
 -- window management
--- safeRequire("lua.window-utils")
+safeRequire("lua.window-utils")
 safeRequire("lua.layouts")
--- safeRequire("lua.app-hider")
--- safeRequire("lua.auto-quitter")
+safeRequire("lua.app-hider")
+safeRequire("lua.auto-quitter")
 
 -- system
 safeRequire("lua.console")
@@ -46,7 +46,7 @@ safeRequire("lua.weather-reminder")
 safeRequire("lua.vertical-split")
 
 -- app-specific
--- safeRequire("lua.app-specific-behavior")
+safeRequire("lua.app-specific-behavior")
 safeRequire("lua.browser")
 safeRequire("lua.mastodon")
 
