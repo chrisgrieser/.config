@@ -117,15 +117,6 @@ local function filenameFirst(_, path)
 	return string.format("%s\t\t%s", tail, parentDisplay) -- parent colored via autocmd above
 end
 
---------------------------------------------------------------------------------
-
-local function prioritizeRecentlyModified(a, b, _)
-	local a_stats = vim.loop.fs_stat(a.ordinal)
-	local b_stats = vim.loop.fs_stat(b.ordinal)
-	if not (a_stats and b_stats) then return false end
-	return a_stats.mtime.sec > b_stats.mtime.sec
-end
-
 local function project() return vim.fs.basename(vim.loop.cwd() or "") end
 
 --------------------------------------------------------------------------------
@@ -203,7 +194,13 @@ local function telescopeConfig()
 			find_files = {
 				prompt_prefix = "󰝰 ",
 				path_display = filenameFirst,
-				tiebreak = prioritizeRecentlyModified,
+				-- prioritze recently modified
+				tiebreak = function(a, b, _)
+					local a_stats = vim.loop.fs_stat(a.ordinal)
+					local b_stats = vim.loop.fs_stat(b.ordinal)
+					if not (a_stats and b_stats) then return false end
+					return a_stats.mtime.sec > b_stats.mtime.sec
+				end,
 				-- FIX using the default fd command from telescope is somewhat buggy,
 				-- e.g. not respecting `~/.config/fd/ignore`
 				find_command = { "fd", "--type=file", "--type=symlink" },
@@ -222,7 +219,6 @@ local function telescopeConfig()
 			oldfiles = {
 				prompt_prefix = "󰋚 ",
 				path_display = filenameFirst,
-				tiebreak = prioritizeRecentlyModified,
 				file_ignore_patterns = { "%.log", "%.plist$", "COMMIT_EDITMSG" },
 				previewer = false,
 				layout_config = {
@@ -236,8 +232,6 @@ local function telescopeConfig()
 			},
 			git_status = {
 				prompt_prefix = "󰊢 ",
-				-- stylua: ignore
-				git_icons = { added = "A", changed = "M", copied = "C", deleted = "D", renamed = "R", unmerged = "U", untracked = "?" },
 				initial_mode = "normal",
 				show_untracked = true,
 				mappings = {
