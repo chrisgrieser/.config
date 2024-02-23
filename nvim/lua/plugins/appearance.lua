@@ -49,14 +49,12 @@ return {
 		main = "ibl",
 		opts = {
 			scope = {
-				highlight = "Comment",
+				highlight = "Function",
 				show_start = false,
 				show_end = false,
+				show_exact_scope = true,
 			},
-			indent = {
-				char = "│", -- spaces
-				tab_char = "│", -- tabs
-			},
+			indent = { char = "│", tab_char = "│" },
 			exclude = { filetypes = { "undotree" } },
 		},
 	},
@@ -214,7 +212,7 @@ return {
 					-- for simple selections, use builtin selector instead of telescope
 					if opts.kind == "codeaction" or opts.kind == "rule_selection" then
 						return { backend = { "builtin" }, builtin = { relative = "cursor" } }
-					elseif opts.kind == "make-selector" then
+					elseif opts.kind == "make-selector" or opts.kind == "project-selector" then
 						return { backend = { "builtin" } }
 					end
 				end,
