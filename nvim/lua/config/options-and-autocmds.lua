@@ -161,7 +161,6 @@ vim.api.nvim_create_autocmd("CmdlineLeave", {
 -- INVISIBLE CHARS
 
 opt.list = true
-opt.conceallevel = 1
 
 opt.fillchars:append {
 	eob = " ",

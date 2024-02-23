@@ -225,6 +225,7 @@ function M.gotoProject()
 		vim.ui.select(folders, {
 			prompt = " Select project:",
 			format_item = function(folder) return vim.fs.basename(folder) end,
+			kind = "project-selector",
 		}, function(selection)
 			if selection then browseProject(selection) end
 		end)
