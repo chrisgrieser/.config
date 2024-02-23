@@ -211,21 +211,30 @@ return {
 			use_default_keymaps = false,
 			cursor_behavior = "start",
 			max_join_length = 160,
-			langs = {
-				python = { -- python docstrings
-					string_content = { both = { fallback = function() vim.cmd("normal! gww") end } },
-				},
-				comment = { -- comments in any language
-					source = { both = { fallback = function() vim.cmd("normal! gww") end } },
-					element = { both = { fallback = function() vim.cmd("normal! gww") end } },
-				},
-				jsdoc = {
-					source = { both = { fallback = function() vim.cmd("normal! gww") end } },
-				},
-				-- see https://github.com/Wansmer/treesj/issues/150
-				java,
-			},
 		},
+		config = function(_, opts)
+			local gww = { both = { fallback = function() vim.cmd("normal! gww") end } }
+			local curleyLessIfStatementJoin = {
+				-- remove curly brackets in js, see https://github.com/Wansmer/treesj/issues/150
+				statement_block = {
+					join = {
+						format_resulted_lines = function(lines)
+							if #lines ~= 3 or lines[1] ~= "{" then return lines end
+							local curlyBracketsRemoved = vim.trim(lines[2])
+							return { curlyBracketsRemoved }
+						end,
+					},
+				},
+			}
+			opts.langs = {
+				python = { string_content = gww }, -- python docstrings
+				comment = { source = gww, element = gww }, -- comments in any language
+				jsdoc = { source = gww },
+				javascript = curleyLessIfStatementJoin,
+				typescript = curleyLessIfStatementJoin,
+			}
+			require("treesj").setup(opts)
+		end,
 	},
 	{ -- which-key
 		"folke/which-key.nvim",
