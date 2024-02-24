@@ -289,9 +289,9 @@
     "body": "#!/usr/bin/env zsh",
     "prefix": "shebang"
   },
-  "slice": {
-    "body": "${${1:var}:${2:start}:${3:end}}",
-    "prefix": "slice (expansion)"
+  "slice-1": {
+    "body": "${1:var}=\"${${1:var}:${2:from}:${3:to}}\"",
+    "prefix": "slice"
   },
   "stderr (merge with stdout)": {
     "body": "2>&1",
