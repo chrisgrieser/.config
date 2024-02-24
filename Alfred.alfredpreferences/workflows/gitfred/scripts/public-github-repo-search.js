@@ -66,6 +66,7 @@ function run(argv) {
 	}
 
 	const forkOnClone = $.getenv("fork_on_clone") === "1";
+	const depthInfo = $.getenv("clone_depth") ? ` (depth ${$.getenv("clone_depth")})` : "";
 	const apiURL = `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}`;
 
 	/** @type {AlfredItem[]} */
@@ -84,8 +85,7 @@ function run(argv) {
 				repo.description,
 			].join("  ·  ");
 
-			const cloneSubtitle = "⌃: Shallow Clone" + (forkOnClone ? " & Fork" : "");
-
+			const cloneSubtitle = "⌃: Shallow Clone " + depthInfo + (forkOnClone ? " & Fork" : "");
 			const secondUrl = repo.homepage || repo.html_url + "/releases";
 
 			return {

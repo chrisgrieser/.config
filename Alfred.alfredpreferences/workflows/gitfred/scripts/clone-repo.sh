@@ -9,18 +9,24 @@ url="git@github.com:$source_repo.git" # use SSH instead of https
 [[ ! -e "$local_repo_folder" ]] && mkdir -p "$local_repo_folder"
 cd "$local_repo_folder" || return 1
 
+#───────────────────────────────────────────────────────────────────────────────
+# CLONE
 # validate depth, minimum 2
 # WARN depth=2 ensures that amending a shallow commit does not result in a
 # new commit without parent, effectively destroying git history (!!)
 [[ $clone_depth =~ ^[0-9]+$ && $clone_depth -ge 2 ]] || clone_depth=2
 
-git clone --depth="$clone_depth" "$url" --no-single-branch --no-tags # get branches, but not tags
+if [[ $clone_depth -eq 0 ]]; then
+	git clone "$url" --no-single-branch --no-tags # get branches, but not tags
+else
+	git clone "$url" --depth="$clone_depth" --no-single-branch --no-tags
+fi
 
 # Open in terminal via Alfred
 echo -n "$local_repo_folder/$reponame"
 
 #───────────────────────────────────────────────────────────────────────────────
-# RESTORE MTIME 
+# RESTORE MTIME
 
 cd "$reponame" || return 1
 

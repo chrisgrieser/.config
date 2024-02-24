@@ -27,6 +27,7 @@ function run() {
 	// CONFIG
 	const username = $.getenv("github_username");
 	const localRepoFolder = $.getenv("local_repo_folder");
+	const depthInfo = $.getenv("clone_depth") ? ` (depth ${$.getenv("clone_depth")})` : "";
 
 	// determine local repos
 	const localRepos = {};
@@ -76,7 +77,7 @@ function run() {
 			// changes when repo is local
 			repo.local = localRepos[repo.name];
 			const mainArg = repo.local?.path || repo.html_url;
-			const terminalActionDesc = repo.local ? "Open in Terminal" : "Shallow Clone";
+			const terminalActionDesc = repo.local ? "Open in Terminal" : "Shallow Clone" + depthInfo;
 			// open in terminal when local, clone when not
 			const terminalArg = repo.local?.path || repo.html_url;
 			if (repo.local) {

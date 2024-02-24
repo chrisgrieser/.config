@@ -1805,7 +1805,7 @@
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Depth of the clone (`--shallow={n}`)</string>
+			<string>Depth of the clone (`--shallow={n}`). Leave empty to not perform shallow clone.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
