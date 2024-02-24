@@ -363,6 +363,11 @@ return {
 	{
 		"yioneko/nvim-vtsls",
 		ft = { "typescript", "javascript" },
-		mason_dependencies = "typescript-language-server",
-	}
+		mason_dependencies = "vtsls",
+		dependencies = "neovim/nvim-lspconfig",
+		config = function()
+			require("lspconfig.configs").vtsls = require("vtsls").lspconfig
+			require("lspconfig").vtsls.setup(tsserverConfig)
+		end,
+	},
 }
