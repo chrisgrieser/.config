@@ -15,17 +15,6 @@
 			<key>url</key>
 			<string>https://sentencestack.com/q/{query}</string>
 		</dict>
-		<key>435F672D-1AA7-4095-8BC6-AE50A9F7943A</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>ai</string>
-			<key>text</key>
-			<string>Perplexity: {query}</string>
-			<key>url</key>
-			<string>https://www.perplexity.ai/search?s=o&amp;q={query}</string>
-		</dict>
 		<key>5EEA999D-F78D-4F89-BB24-9557712FEE77</key>
 		<dict>
 			<key>enabled</key>
@@ -36,17 +25,6 @@
 			<string>🖥 Steam (App)</string>
 			<key>url</key>
 			<string>steam://openurl/https://store.steampowered.com/search/?term={query}</string>
-		</dict>
-		<key>732093CA-5118-4281-8122-235ECF53BE0A</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>ai</string>
-			<key>text</key>
-			<string>Consensus: {query}</string>
-			<key>url</key>
-			<string>https://consensus.app/results/?q={query}</string>
 		</dict>
 		<key>8C706788-4EB2-4B38-A8C8-D03C7DEA8A1F</key>
 		<dict>

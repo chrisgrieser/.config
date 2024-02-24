@@ -106,6 +106,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>C45CBCBC-55EE-43A1-BE2A-924504328AE2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>66E04C3F-CFB0-402B-BA1C-F0C2A2A03C39</key>
 		<array>
@@ -244,7 +254,7 @@
 				<key>keyword</key>
 				<string>rs</string>
 				<key>subtext</key>
-				<string>Google Scholar, Scite_, Semantic Scholar, Elicit, Inciteful</string>
+				<string>Google Scholar, Scite_, Semantic Scholar, Elicit, Inciteful, Perplexity</string>
 				<key>text</key>
 				<string>Academic Searches: {query}</string>
 				<key>withspace</key>
@@ -382,6 +392,27 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>6442AC22-6F2F-49B6-ACBA-D5FD8F7F78E7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://consensus.app/results/?q={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>C45CBCBC-55EE-43A1-BE2A-924504328AE2</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -565,6 +596,15 @@
 			<real>615</real>
 			<key>ypos</key>
 			<real>625</real>
+		</dict>
+		<key>C45CBCBC-55EE-43A1-BE2A-924504328AE2</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>255</real>
+			<key>ypos</key>
+			<real>600</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
