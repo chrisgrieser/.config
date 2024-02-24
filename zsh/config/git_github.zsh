@@ -41,18 +41,39 @@ ZSH_HIGHLIGHT_REGEXP+=(
 # STAGING
 alias gaa='git add --all'
 
+# without argument, run interactively via fzf to toggle staged/unstaged
+# with argument, stage the file(s). Modified completions allow for quicker selection.
 function ga {
-	local check_staged='if git diff --cached --name-only | grep -q "^"{2..}"$" ;'
+	if [[ -n "$1" ]]; then
+		git add "$@"
+		return 0
+	fi
+
+	local check_staged='if git diff --cached --name-only | grep -q "^"{2..}"$" ; '
 	local add_or_unadd='then git restore --stage -- {2..} ; else git add -- {2..} ; fi'
-	local style="$(defaults read -g AppleInterfaceStyle &> /dev/null && echo --dark || echo --light)"
+	local file_diff='{ git diff --color=always -- {2..} ; git diff --staged --color=always -- {2..} }'
+	local style
+	style=$(defaults read -g AppleInterfaceStyle &>/dev/null && echo --dark || echo --light)
 	selection=$(
-		git -c "status.color=always" status --short | fzf \
+		git -c "status.color=always" status --short | sort | fzf \
 			--ansi --nth=2.. \
-			--preview="git diff --color=always -- {2..} | delta "$(defaults read -g AppleInterfaceStyle &> /dev/null && echo --dark || echo --light) --file-style=omit" \
-			--bind="enter:reload($check_staged $add_or_unadd ; git -c status.color=always status --short)"
+			--preview="$file_diff | delta $style --file-style=omit" \
+			--bind="enter:reload($check_staged $add_or_unadd ; git -c status.color=always status --short | sort)"
 	)
 	return 0
 }
+
+# completions for running `ga` with argument
+_ga() {
+	local -a _changed_files=()
+	while IFS='' read -r file; do # turn lines into array
+		_changed_files+=("$file")
+	done < <(git diff --name-only)
+
+	local expl && _description -V git-changed-files expl 'Changed Files'
+	compadd "${expl[@]}" -- "${_changed_files[@]}"
+}
+compdef _ga ga
 
 #───────────────────────────────────────────────────────────────────────────────
 # SMART COMMIT
@@ -142,6 +163,7 @@ function gM {
 
 function unshallow {
 	git fetch --unshallow
+	git pull --tags # undo --no-tags
 	# undo `--single-branch` https://stackoverflow.com/a/17937889/22114136
 	git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 	git fetch origin
@@ -216,15 +238,14 @@ function clone {
 	# turn http into SSH remotes
 	[[ "$url" =~ http ]] && url="$(echo "$1" | sed -E 's/https?:\/\/github.com\//git@github.com:/').git"
 
-	# WARN depth > 1 ensures that amending a shallow commit does not result in a
+	# WARN depth < 2 ensures that amending a shallow commit does not result in a
 	# new commit without parent, effectively destroying git history (!!)
 	git clone --depth=10 "$url" --no-single-branch --no-tags # get branches, but not tags
 
-	# shellcheck disable=SC2012
 	cd "$(command ls -1 -t | head -n1)" || return 1
 }
 
-function delete_fork_with_no_prs {
+function delete_forks_with_no_open_prs {
 	if [[ ! -x "$(command -v fzf)" ]]; then print "\e[1;33mfzf not installed.\e[0m" && return 1; fi
 	if [[ ! -x "$(command -v gh)" ]]; then print "\e[1;33mgh not installed.\e[0m" && return 1; fi
 

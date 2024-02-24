@@ -85,7 +85,7 @@ function p {
 		qlmanage -p "$file"
 		;;
 	"gif" | "png" | "jpg" | "jpeg" | "webp" | "tiff")
-		if [[ "$TERM_PROGRAM" == "WezTerm" ]] ; then
+		if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
 			wezterm imgcat "$file"
 		else
 			qlmanage -p "$file"
@@ -126,9 +126,8 @@ function lc() {
 
 # completions for it
 _lc() {
-	# turn lines into array
 	local -a _last_cmds=()
-	while IFS='' read -r value; do
+	while IFS='' read -r value; do # turn lines into array
 		_last_cmds+=("$value")
 	done < <(history -rn -10)
 
