@@ -343,21 +343,26 @@ return {
 			end
 		end,
 	},
-	{ -- better TS support
-		"pmizio/typescript-tools.nvim",
+	-- { -- better TS support
+	-- 	"pmizio/typescript-tools.nvim",
+	-- 	ft = { "typescript", "javascript" },
+	-- 	mason_dependencies = "typescript-language-server",
+	-- 	dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+	-- 	config = function()
+	-- 		-- typescript-tools does not accept `settings.diagnostics.ignoreCode`
+	-- 		-- https://github.com/pmizio/typescript-tools.nvim/issues/233
+	-- 		local api = require("typescript-tools.api")
+	-- 		tsserverConfig.handlers = {
+	-- 			-- "Cannot redeclare block-scoped variable" -> not useful for single-file-JXA
+	-- 			-- (Biome works only on single-file and so already check for unintended re-declarations.)
+	-- 			["textDocument/publishDiagnostics"] = api.filter_diagnostics { 2451 },
+	-- 		}
+	-- 		require("typescript-tools").setup(tsserverConfig)
+	-- 	end,
+	-- },
+	{
+		"yioneko/nvim-vtsls",
 		ft = { "typescript", "javascript" },
 		mason_dependencies = "typescript-language-server",
-		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-		config = function()
-			-- typescript-tools does not accept `settings.diagnostics.ignoreCode`
-			-- https://github.com/pmizio/typescript-tools.nvim/issues/233
-			local api = require("typescript-tools.api")
-			tsserverConfig.handlers = {
-				-- "Cannot redeclare block-scoped variable" -> not useful for single-file-JXA
-				-- (Biome works only on single-file and so already check for unintended re-declarations.)
-				["textDocument/publishDiagnostics"] = api.filter_diagnostics { 2451 },
-			}
-			require("typescript-tools").setup(tsserverConfig)
-		end,
-	},
+	}
 }
