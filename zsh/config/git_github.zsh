@@ -40,19 +40,18 @@ ZSH_HIGHLIGHT_REGEXP+=(
 #───────────────────────────────────────────────────────────────────────────────
 # STAGING
 alias gaa='git add --all'
-alias unadd='git restore --staged'
-# alias ga='git add'
 
 function ga {
-	local add_or_unadd="git diff --cached --name-only | grep -q {2..} && git add -- {2..}"
+	local check_staged='if git diff --cached --name-only | grep -q "^"{2..}"$" ;'
+	local add_or_unadd='then git restore --stage -- {2..} ; else git add -- {2..} ; fi'
+	local style="$(defaults read -g AppleInterfaceStyle &> /dev/null && echo --dark || echo --light)"
 	selection=$(
 		git -c "status.color=always" status --short | fzf \
 			--ansi --nth=2.. \
-			--bind="enter:reload($add_or_unadd ; git -c status.color=always status --short)"
+			--preview="git diff --color=always -- {2..} | delta "$(defaults read -g AppleInterfaceStyle &> /dev/null && echo --dark || echo --light) --file-style=omit" \
+			--bind="enter:reload($check_staged $add_or_unadd ; git -c status.color=always status --short)"
 	)
-	[[ -z "$selection" ]] && return 0
-	selection="${selection:3}" # remove prefix
-	echo "$selection"
+	return 0
 }
 
 #───────────────────────────────────────────────────────────────────────────────
