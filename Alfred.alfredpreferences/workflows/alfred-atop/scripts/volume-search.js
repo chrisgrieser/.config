@@ -12,20 +12,20 @@ function run() {
 	const volumes = app
 		.doShellScript("df -hY") // -h: human readable sizes, -Y: show filesystem format
 		.split("\r")
-		.filter((/** @type {string} */ line) => line.includes(" /Volumes/"))
-		.map((/** @type {string} */ vol) => {
+		.filter((line) => line.includes(" /Volumes/"))
+		.map((vol) => {
 			// quicker reruns when volume stats unavailable
 			if (vol.includes("unavailable")) rerunSecs = 0.5;
 
-			const info = vol.split(/\s+/).map((value) => {
-				return value.replaceAll("unavailable", "…").replaceAll("Gi", "Gb").replaceAll("Ti", "Tb");
-			});
+			const info = vol
+				.split(/\s+/)
+				.map((value) => value.replaceAll("unavailable", "…").replace(/([GT])i/, "$1B"));
 
 			const [_, format, total, used, available, share] = info;
 			const path = info.slice(9).join(" ");
 			const name = path.replace("/Volumes/", "");
 
-			const subtitle = `[Format: ${format}]    Total: ${total}   Available: ${available}   Used: ${used} (${share})`;
+			const subtitle = `『${format}』   Total: ${total}   Available: ${available}   Used: ${used} (${share})`;
 			return {
 				title: name,
 				uid: path, // during rerun remembers selection, but does not affect sorting
@@ -38,7 +38,7 @@ function run() {
 	if (volumes.length === 0) {
 		rerunSecs = 1; // quicker reruns when no volume found
 
-		// simple spinner, which just selects does by random
+		// simple spinner, which just selects by random
 		const spinnerAll = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
 		const spinner = spinnerAll[Math.floor(Math.random() * spinnerAll.length)];
 
