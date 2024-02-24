@@ -1777,26 +1777,7 @@
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<false/>
-				<key>required</key>
-				<false/>
-				<key>text</key>
-				<string>fork when not owner</string>
-			</dict>
-			<key>description</key>
-			<string>When cloning a repository that you do not own, also create a fork an prepare the repo for e PR. (Requires the `gh` cli.)</string>
-			<key>label</key>
-			<string></string>
-			<key>type</key>
-			<string>checkbox</string>
-			<key>variable</key>
-			<string>fork_on_clone</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>5</string>
+				<string>10</string>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>
@@ -1821,10 +1802,29 @@
 				<key>required</key>
 				<false/>
 				<key>text</key>
+				<string>fork when not owner</string>
+			</dict>
+			<key>description</key>
+			<string>When cloning a repository that you do not own, also create a fork an prepare the repo for e PR. (Requires the `gh` cli.)</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>fork_on_clone</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
 				<string>restore mtime</string>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>`git clone` normally erases modification time of files. It can be restored from the commit log, though. However, this the modification time then only goes as far back as the oldest commit, so you might want to increase clone depth.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -1834,7 +1834,7 @@
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.11.2</string>
+	<string>0.11.3</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
