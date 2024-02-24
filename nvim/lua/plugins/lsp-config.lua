@@ -162,10 +162,10 @@ serverConfigs.stylelint_lsp = {
 -- DOCS https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md
 local tsserverConfig = {
 	settings = {
-		-- [typescript-tools.nvim]
-		complete_function_calls = true,
-		-- [typescript-tools.nvim] relevant even if not formatting, since used by `organizeImports`
-		tsserver_format_options = { convertTabsToSpaces = false },
+
+		-- "Cannot redeclare block-scoped variable" -> not useful for single-file-JXA
+		-- (Biome works only on single-file and so already check for unintended re-declarations.)
+		diagnostics = { ignoredCodes = { 2451 } },
 
 		typescript = {
 			inlayHints = {
@@ -177,6 +177,9 @@ local tsserverConfig = {
 				includeInlayPropertyDeclarationTypeHints = true,
 				includeInlayVariableTypeHints = true,
 				includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+			},
+			format = {
+				convertTabsToSpaces = false,
 			},
 		},
 
@@ -349,12 +352,17 @@ return {
 	-- 	mason_dependencies = "typescript-language-server",
 	-- 	dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 	-- 	config = function()
+	-- 		-- extra setting only for typescript-tools
+	-- 		tsserverConfig.settings.complete_function_calls = true
+				-- typescript-tools does not use `settings.[language].format`
+	-- 		-- relevant even if not formatting, since used by `organizeImports`
+	-- 		tsserverConfig.settings.tsserver_format_options = { convertTabsToSpaces = false }
+	--
 	-- 		-- typescript-tools does not accept `settings.diagnostics.ignoreCode`
 	-- 		-- https://github.com/pmizio/typescript-tools.nvim/issues/233
+	-- 		tsserverConfig.settings.diagnostics = nil
 	-- 		local api = require("typescript-tools.api")
 	-- 		tsserverConfig.handlers = {
-	-- 			-- "Cannot redeclare block-scoped variable" -> not useful for single-file-JXA
-	-- 			-- (Biome works only on single-file and so already check for unintended re-declarations.)
 	-- 			["textDocument/publishDiagnostics"] = api.filter_diagnostics { 2451 },
 	-- 		}
 	-- 		require("typescript-tools").setup(tsserverConfig)
@@ -362,12 +370,24 @@ return {
 	-- },
 	{
 		"yioneko/nvim-vtsls",
-		ft = { "typescript", "javascript" },
+		-- ft = { "typescript", "javascript" },
+		lazy = false,
 		mason_dependencies = "vtsls",
 		dependencies = "neovim/nvim-lspconfig",
 		config = function()
 			require("lspconfig.configs").vtsls = require("vtsls").lspconfig
-			require("lspconfig").vtsls.setup(tsserverConfig)
+			require("lspconfig").vtsls.setup({
+				settings = {
+					diagnostics = {
+						ignoredCodes = { 2451 },
+					},
+					typescript = {
+						format = {
+							convertTabsToSpaces = true,
+						},
+					}
+				},
+			})
 		end,
 	},
 }
