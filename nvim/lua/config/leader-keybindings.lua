@@ -195,11 +195,6 @@ keymap(
 )
 
 -- FIX for buggy scrolloff
-keymap(
-	"n",
-	"<leader>of",
-	function() vim.opt.scrolloff = 13 end,
-	{ desc = "⇓ Fix Scrolloff & Reload File" }
-)
+keymap("n", "<leader>of", function() vim.opt.scrolloff = 13 end, { desc = "⇓ Fix Scrolloff" })
 
 --------------------------------------------------------------------------------

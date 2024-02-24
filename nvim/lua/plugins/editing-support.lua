@@ -178,7 +178,7 @@ return {
 		cmd = "PuppeteerToggle",
 		init = function() vim.g.puppeteer_disable_filetypes = {} end,
 		keys = {
-			{ "<leader>op", vim.cmd.PuppeteerToggle, desc = "󰅳 PuppeteerToggle" },
+			{ "<leader>op", vim.cmd.PuppeteerToggle, desc = "󰅳 Puppeteer" },
 		},
 	},
 	{ -- swapping of sibling nodes
