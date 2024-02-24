@@ -1,10 +1,8 @@
 # Quick Open File
 function o() {
-	local input="$*"
-
 	# skip `fzf` if file is fully named, e.g. through tab completion
-	if [[ -f "$input" ]]; then
-		open "$input"
+	if [[ -f "$1" ]]; then
+		open "$1"
 		return 0
 	fi
 
@@ -14,7 +12,7 @@ function o() {
 	selected=$(
 		# shellcheck disable=2016
 		fd --type=file --type=symlink --color=always | fzf \
-			--select-1 --ansi --query="$input" --info=inline --header-first \
+			--select-1 --ansi --query="$1" --info=inline --header-first \
 			--header="^H: --hidden  ^P: Copy Path  ^N: Copy Name  ^D: Goto Parent" \
 			--keep-right \
 			--scheme=path --tiebreak=length,end \
@@ -42,14 +40,30 @@ function o() {
 	fi
 }
 
+# completions for it
+_o() {
+	local -a paths=()
+	local -a names=()
+	while IFS='' read -r file; do # turn lines into array
+		paths+=("$file")
+		names+=("$(basename "$file")")
+	done < <(fd --max-depth=3 --type=file --type=symlink)
+
+	local expl && _description -V files-in-pwd expl 'Files in PWD'
+	compadd "${expl[@]}" -d names -a paths
+}
+compdef _o o
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# search pwd via `rg`, open selection in the editor at the line
 function s {
 	local input="$*"
 	local selected file_path ln
 	selected=$(
 		rg "$input" --color=always --colors=path:fg:blue --no-messages --line-number --trim \
 			--no-config --ignore-file="$HOME/.config/fd/ignore" |
-			fzf \
-				--ansi --preview-window="65%" \
+			fzf --ansi --preview-window="65%" \
 				--delimiter=":" --nth=1,3 \
 				--preview 'bat {1} --color=always --style=header --highlight-line={2} --line-range={2}: --wrap=never' \
 				--height="100%" #required for wezterm's `pane:is_alt_screen_active()`
@@ -70,6 +84,7 @@ function _tree {
 alias tree='_tree 2'
 alias treee='_tree 3'
 alias treeee='_tree 4'
+alias treeeee='_tree 5'
 
 #───────────────────────────────────────────────────────────────────────────────
 # fzf history search
@@ -77,14 +92,18 @@ alias treeee='_tree 4'
 
 function hs() {
 	local selected
-	selected=$(fc -rl 1 | cut -d" " -f3- | fzf --height=40% --info=inline --query="$1" --scheme=history)
+	selected=$(
+		fc -rl 1 | cut -c8- | fzf \
+			--height=40% --info=inline --multi --query="$1" --scheme=history --bind="change:first" \
+			--bind 'ctrl-y:execute-silent(echo -n {} | pbcopy)+abort' # copy
+	)
 	[[ -z "$selected" ]] && return 0
 	print -z "$selected"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# previewer
+# file previewer
 function p {
 	file="$1"
 	ext=${file##*.}
@@ -137,13 +156,13 @@ function lc() {
 
 # completions for it
 _lc() {
-	local -a _last_cmds=()
+	local -a last_cmds=()
 	while IFS='' read -r value; do # turn lines into array
-		_last_cmds+=("$value")
+		last_cmds+=("$value")
 	done < <(history -rn -10)
 
 	local _values=({1..10})
 	local expl && _description -V last-commands expl 'Last Commands'
-	compadd "${expl[@]}" -Q -l -d _last_cmds -a _values
+	compadd "${expl[@]}" -Q -l -d last_cmds -a _values
 }
 compdef _lc lc
