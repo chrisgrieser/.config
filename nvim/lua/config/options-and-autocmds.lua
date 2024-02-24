@@ -215,7 +215,7 @@ autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
 
 --------------------------------------------------------------------------------
 -- AUTO-CLOSE BUFFERS whose files do not exist anymore
-vim.api.nvim_create_autocmd("BufEnter", {
+vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	callback = function(ctx)
 		local bufnr = ctx.buf
 		vim.defer_fn(function()

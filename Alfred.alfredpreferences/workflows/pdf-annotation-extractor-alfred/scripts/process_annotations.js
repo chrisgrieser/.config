@@ -75,7 +75,7 @@ function adapterForInput(nonStandardizedAnnos, usePdfAnnots) {
 			if (a.type === "text") a.type = "Free Comment";
 
 			// in case the page numbers have names like "image 1" instead of integers
-			if (typeof a.page === "string") a.page = parseInt(a.page.match(/\d+/)[0]);
+			if (typeof a.page === "string") a.page = Number.parseInt(a.page.match(/\d+/)[0]);
 			return a;
 		});
 	} else {
@@ -84,7 +84,7 @@ function adapterForInput(nonStandardizedAnnos, usePdfAnnots) {
 			a.quote = a.annotatedText;
 
 			// in case the page numbers have names like "image 1" instead of integers
-			if (typeof a.page === "string") a.page = parseInt(a.page.match(/\d+/)[0]);
+			if (typeof a.page === "string") a.page = Number.parseInt(a.page.match(/\d+/)[0]);
 
 			const typeMap = {
 				text: "Free Comment",
@@ -428,13 +428,13 @@ function extractMetadata(citekey, rawEntry) {
 			data.ptype = property.replace(/@(.*)\{.*/, "$1");
 		} else if (property.match(/pages *=/)) {
 			const pages = property.match(/\d+/g);
-			if (pages) data.firstPage = parseInt(pages[0]);
+			if (pages) data.firstPage = Number.parseInt(pages[0]);
 		} else if (property.match(/year *=/)) {
 			const year = property.match(/\d{4}/g);
-			if (year) data.year = parseInt(year[0]);
+			if (year) data.year = Number.parseInt(year[0]);
 		} else if (property.match(/date *=/)) {
 			const year = property.match(/\d{4}/g);
-			if (year) data.year = parseInt(year[0]);
+			if (year) data.year = Number.parseInt(year[0]);
 		} else if (property.match(/author *=/)) {
 			data.author = extract(property);
 		} else if (property.match(/keywords *=/)) {
@@ -460,7 +460,7 @@ function extractMetadata(citekey, rawEntry) {
 			if (response.buttonReturned === "Cancel") return;
 			validInput = response.textReturned.match(/^-?\d+$/);
 		} while (!validInput);
-		data.firstPage = parseInt(response.textReturned) + 1;
+		data.firstPage = Number.parseInt(response.textReturned) + 1;
 	}
 
 	return data;
@@ -519,7 +519,7 @@ function writeNote(annos, metad, outputPath, filename) {
 	// yaml frontmatter
 	const yamlKeys = [
 		`aliaseses: "${metad.title}"`,
-		`tags: [literature-note, ${metad.tagsForYaml}]`,
+		`tags: [${metad.tagsForYaml}]`,
 		"cssclasses: pdf-annotations",
 		`citekey: ${metad.citekey}`,
 		`year: ${metad.year.toString()}`,

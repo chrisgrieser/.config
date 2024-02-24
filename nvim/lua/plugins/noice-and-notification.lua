@@ -14,8 +14,8 @@ end
 
 -- DOCS https://github.com/folke/noice.nvim#-routes
 local routes = {
-	-- FIX lsp signature bug
-	{ filter = { event = "msg_show", find = "lsp_signature? handler RPC" }, skip = true },
+	-- FIX lsp signature bug?
+	-- { filter = { event = "msg_show", find = "lsp_signature? handler RPC" }, skip = true },
 
 	-- redirect to popup when message is long
 	{ filter = { min_height = 8 }, view = "popup" },
@@ -39,9 +39,6 @@ local routes = {
 	-----------------------------------------------------------------------------
 	-- E211 no longer needed, since auto-closing deleted buffers
 	{ filter = { event = "msg_show", find = "E211: File .* no longer available" }, skip = true },
-
-	-- nvim-treesitter
-	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
 
 	-- Mason
 	{
