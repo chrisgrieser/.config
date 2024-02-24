@@ -72,6 +72,17 @@ alias treee='_tree 3'
 alias treeee='_tree 4'
 
 #───────────────────────────────────────────────────────────────────────────────
+# fzf history search
+# simplified version of https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh
+
+function hs() {
+	local selected
+	selected=$(fc -rl 1 | cut -d" " -f3- | fzf --height=40% --info=inline --query="$1" --scheme=history)
+	[[ -z "$selected" ]] && return 0
+	print -z "$selected"
+}
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # previewer
 function p {
