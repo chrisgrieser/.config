@@ -48,17 +48,6 @@
 			<key>url</key>
 			<string>https://www.linguee.com/english-german/search?query={query}</string>
 		</dict>
-		<key>A5C50548-F731-446B-9CFA-165DE57558F6</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>ai</string>
-			<key>text</key>
-			<string>Phind: {query}</string>
-			<key>url</key>
-			<string>https://www.phind.com/search?q={query}</string>
-		</dict>
 		<key>CB53E08B-32B8-4062-98CC-5A36E97438A4</key>
 		<dict>
 			<key>enabled</key>
@@ -115,5 +104,7 @@
 			<string>https://www.npmjs.com/search?q={query}</string>
 		</dict>
 	</dict>
+	<key>onlyShowEnabledInPrefs</key>
+	<true/>
 </dict>
 </plist>
