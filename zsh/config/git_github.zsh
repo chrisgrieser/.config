@@ -1,6 +1,4 @@
 alias gs='git status'
-alias ga='git add'
-alias gaa='git add --all'
 alias co='git checkout'
 alias gd='git diff'
 alias grh='git reset --hard'
@@ -10,7 +8,6 @@ alias gi='gh issue list --state=open'
 alias gI='gh issue list --state=closed'
 
 alias mergetool="git mergetool"
-alias unadd='git restore --staged'
 alias restore='git restore'
 alias reset='git reset'
 alias push='git push'
@@ -39,6 +36,16 @@ ZSH_HIGHLIGHT_REGEXP+=(
 	'(feat|fix|test|perf|build|ci|revert|refactor|chore|docs|break|style|improv)(\(.+\))?(\\?\!)?:'
 	'fg=magenta,bold'
 )
+
+#───────────────────────────────────────────────────────────────────────────────
+# STAGING
+alias gaa='git add --all'
+alias unadd='git restore --staged'
+# alias ga='git add'
+
+function ga {
+	ff
+}
 
 #───────────────────────────────────────────────────────────────────────────────
 # SMART COMMIT
