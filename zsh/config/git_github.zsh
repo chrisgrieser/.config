@@ -41,10 +41,16 @@ ZSH_HIGHLIGHT_REGEXP+=(
 # STAGING
 alias gaa='git add --all'
 alias unadd='git restore --staged'
-# alias ga='git add'
 
 function ga {
-	ff
+	selection=$(
+		git -c "status.color=always" status --short | fzf \
+			--ansi --nth=2.. --header="^H: --hidden  ^P: Copy Path  ^N: Copy Nam" \
+			--bind="enter:reload(git add {2..} ; git -c status.color=always status --short)" \
+	)
+	[[ -z "$selection" ]] && return 0
+	selection="${selection:3}" # remove prefix
+	echo "$selection"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
