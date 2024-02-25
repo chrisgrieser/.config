@@ -1,0 +1,17 @@
+[{
+  "workflowUID" : "*",
+  "alignment" : {
+    "horizontal" : {"placement" : "right", "width" : 300, "minHeight" : 400}}
+}, {
+  "workflowUID" : "*",
+  "alignment" : {
+    "horizontal" : {"placement" : "left", "width" : 300, "minHeight" : 400}}
+}, {
+  "workflowUID" : "*",
+  "alignment" : {
+    "vertical" : {"placement" : "top", "height" : 100}}
+}, {
+  "workflowUID" : "*",
+  "alignment" : {
+    "vertical" : {"placement" : "bottom", "height" : 200}}
+}]
