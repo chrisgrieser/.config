@@ -2,6 +2,36 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
+	{ -- display inlay hints from LSP
+		"lvimuser/lsp-inlayhints.nvim",
+		init = function()
+			vim.api.nvim_create_autocmd("LspAttach", {
+				callback = function(args)
+					if not (args.data and args.data.client_id) then return end
+					local bufnr = args.buf
+					local client = vim.lsp.get_client_by_id(args.data.client_id)
+					require("lsp-inlayhints").on_attach(client, bufnr)
+				end,
+			})
+		end,
+		opts = {
+			inlay_hints = {
+				labels_separator = "",
+				only_current_line = false,
+				-- highlight = "NonText",
+				parameter_hints = {
+					prefix = " 󰁍 ",
+					remove_colon_start = true,
+					remove_colon_end = true,
+				},
+				type_hints = {
+					-- prefix = " ",
+					remove_colon_start = true,
+					remove_colon_end = true,
+				},
+			},
+		},
+	},
 	{ -- CodeLens, but also for languages not supporting it
 		"Wansmer/symbol-usage.nvim",
 		event = "BufReadPre",
