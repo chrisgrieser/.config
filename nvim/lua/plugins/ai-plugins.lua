@@ -6,7 +6,7 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{ -- 
+	{ -- AI context chat
 		"Bryley/neoai.nvim",
 		dependencies = "MunifTanjim/nui.nvim",
 		cmd = { "NeoAIContext" },
