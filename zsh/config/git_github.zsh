@@ -55,10 +55,10 @@ function ga {
 	local style
 	style=$(defaults read -g AppleInterfaceStyle &>/dev/null && echo --dark || echo --light)
 	selection=$(
-		git -c "status.color=always" status --short --untracked-files | sort | fzf \
+		git -c core.quotePath=false -c status.color=always status --short --untracked-files | fzf \
 			--ansi --nth=2.. --track \
 			--preview="$file_diff | delta $style --file-style=omit" \
-			--bind="enter:reload($check_staged $add_or_unadd ; git -c status.color=always status --short --untracked-files | sort)"
+			--bind="enter:reload($check_staged $add_or_unadd ; git -c core.quotePath=false -c status.color=always status --short --untracked-files)"
 	)
 	return 0 # prevent exiting 130
 }
