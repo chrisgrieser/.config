@@ -183,7 +183,7 @@ return {
 		event = { "InsertEnter", "CmdlineEnter" },
 		config = cmpconfig,
 		dependencies = {
-			"chrisgrieser/cmp-emoji", -- fork (has fix for suggestions after quote char)
+			{ "Allaman/emoji.nvim", opts = { enable_cmp_integration = true } },
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-buffer",

@@ -67,9 +67,9 @@ local conformOpts = {
 }
 
 local function formattingFunc(bufnr)
-	if not vim.api.nvim_buf_is_valid(bufnr) then return end
 	-- GUARD
-	local bufname = vim.api.nvim_buf_get_name(0)
+	if not bufnr then bufnr = 0 end
+	local bufname = vim.api.nvim_buf_get_name(bufnr)
 	local fileExists = vim.loop.fs_stat(bufname) ~= nil
 	if vim.bo.buftype ~= "" or not fileExists then return end
 
@@ -90,6 +90,7 @@ local function formattingFunc(bufnr)
 				apply = true,
 			}
 			-- stylua: ignore
+			-- deferred, so it does not conflict with `addMissingImports`
 			vim.defer_fn( function()
 				vim.lsp.buf.execute_command {
 					command = "_typescript.organizeImports",
@@ -112,7 +113,7 @@ return {
 		require("conform").setup(conformOpts)
 
 		vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
-			callback = formattingFunc,
+			callback = function(ctx) formattingFunc(ctx.buf) end,
 		})
 	end,
 	keys = {
