@@ -1,0 +1,10 @@
+#compdef make
+
+# only suggest recipes as completions for make
+local -a recipes=()
+while IFS='' read -r recipe; do # turn lines into array
+	recipes+=("$recipe")
+done < <(grep --only-matching --extended-regexp "^[A-Za-z0-9_-]+" "Makefile")
+
+local expl && _description -V git-changed-files expl 'Make Recipes'
+compadd "${expl[@]}" -- "${recipes[@]}"

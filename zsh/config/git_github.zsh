@@ -56,11 +56,11 @@ function ga {
 	style=$(defaults read -g AppleInterfaceStyle &>/dev/null && echo --dark || echo --light)
 	selection=$(
 		git -c "status.color=always" status --short --untracked-files | sort | fzf \
-			--ansi --nth=2.. \
+			--ansi --nth=2.. --track \
 			--preview="$file_diff | delta $style --file-style=omit" \
-			--bind="enter:reload($check_staged $add_or_unadd ; git -c status.color=always status --short | sort)"
+			--bind="enter:reload($check_staged $add_or_unadd ; git -c status.color=always status --short --untracked-files | sort)"
 	)
-	return 0
+	return 0 # prevent exiting 130
 }
 
 # completions for running `ga` with argument
@@ -125,7 +125,7 @@ compdef _gc gc
 compdef _gc gC
 
 #───────────────────────────────────────────────────────────────────────────────
-
+# SMART AMEND & FIXUP
 # select a recent commit to fixup *and* autosquash (not marked for next rebase!)
 function gf {
 	local target
@@ -161,6 +161,7 @@ function gM {
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# undo shallow clones
 function unshallow {
 	git fetch --unshallow
 	git pull --tags # undo --no-tags
@@ -170,7 +171,6 @@ function unshallow {
 }
 
 function remote_info {
-	caller
 	git branch --all --verbose --verbose # 2x verbose shows tracked remote branches
 	echo
 	git remote --verbose
@@ -186,8 +186,9 @@ function gu {
 }
 
 #───────────────────────────────────────────────────────────────────────────────
+# GIT LOG
+# uses `_gitlog` from magic-dashboard.zsh
 
-# git log
 function gl {
 	if [[ -z "$1" ]]; then
 		_gitlog --max-count=15
@@ -205,7 +206,7 @@ function gli {
 
 	local hash key_pressed selected style
 	local preview_format="%C(yellow)%h %C(red)%D %n%C(blue)%an %C(green)(%ch)%C(reset) %n%n%C(bold)%C(magenta)%s %C(cyan)%n%b%C(reset)"
-	defaults read -g AppleInterfaceStyle &>/dev/null && style="--dark" || style="--light"
+	style=$(defaults read -g AppleInterfaceStyle &>/dev/null && echo --dark || echo --light)
 
 	selected=$(
 		_gitlog --no-graph --color=always |
