@@ -27,7 +27,14 @@ return {
 		},
 		opts = {
 			commitMsg = {
-				conventionalCommits = { enforce = true },
+				conventionalCommits = {
+					enforce = true,
+					-- stylua: ignore
+					keywords = {
+						"fix", "feat", "chore", "docs", "refactor", "build", "test",
+						"perf", "style", "revert", "ci", "break", "improv", "aider"
+					},
+				},
 				spellcheck = true,
 				keepAbortedMsgSecs = 300,
 			},

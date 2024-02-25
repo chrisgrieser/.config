@@ -1,6 +1,11 @@
 # shellcheck disable=1091
 #───────────────────────────────────────────────────────────────────────────────
 
+# Add `pipx` installs
+export PATH="$PATH:/Users/chrisgrieser/.local/bin"
+
+#───────────────────────────────────────────────────────────────────────────────
+
 # 1. Prevent accidental installation outside of virtual env
 # 2. Use `python3 -m pip` instead of `pip3`
 function pip {
