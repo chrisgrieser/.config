@@ -83,11 +83,12 @@ local function formattingFunc()
 			}
 		elseif vim.bo.ft == "javascript" or vim.bo.ft == "typescript" then
 			-- Biome's `source.organizeImports.biome`, does not remove unused imports
-			pcall(function()
-				vim.cmd.TSToolsOrganizeImports()
-				vim.cmd.TSToolsAddMissingImports()
-				vim.cmd.TSToolsFixAll()
-			end)
+			-- pcall(function()
+			-- 	vim.cmd.TSToolsOrganizeImports()
+			-- 	vim.cmd.TSToolsAddMissingImports()
+			-- 	vim.cmd.TSToolsFixAll()
+			-- end)
+			
 		end
 	end)
 end

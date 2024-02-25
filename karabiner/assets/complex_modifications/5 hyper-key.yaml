@@ -41,6 +41,7 @@ rules:
               sleep 0.1
               open -a "Alfred 5"
               open -a "Alfred Preferences"
+              open -a "AlfredExtraPane"
               osascript -e 'tell application id "com.runningwithcrayons.Alfred" to search'
   #─────────────────────────────────────────────────────────────────────────────
   - description: "Insert Mode Vim: ⇪ Hyper Movements"
