@@ -2,8 +2,6 @@ local keymap = vim.keymap.set
 local optl = vim.opt_local
 --------------------------------------------------------------------------------
 
-optl.conceallevel = 1
-
 optl.expandtab = false
 optl.tabstop = 4 -- less nesting in md
 

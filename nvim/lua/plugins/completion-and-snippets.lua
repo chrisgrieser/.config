@@ -12,13 +12,18 @@ local defaultSources = {
 	{
 		name = "buffer",
 		option = {
-			-- use all buffers, instead of just the current one
+			-- show completions from all buffers used within the last x minutes
 			get_bufnrs = function()
+				local usedWithinMins = 10 -- CONFIG
 				local allBufs = vim.fn.getbufinfo { buflisted = 1 }
-				local allBufNums = vim.tbl_map(function(buf) return buf.bufnr end, allBufs)
-				return allBufNums
+				local recentBufs = vim.tbl_filter(
+					function(buf) return os.time() - buf.lastused < usedWithinMins * 60 end,
+					allBufs
+				)
+				local bufnrs = vim.tbl_map(function(buf) return buf.bufnr end, recentBufs)
+				return bufnrs
 			end,
-			max_indexed_line_length = 120, -- no long lines (e.g. base64-encoded things)
+			max_indexed_line_length = 100, -- no long lines (e.g. base64-encoded things)
 		},
 		keyword_length = 3,
 		max_item_count = 4, -- since searching all buffers results in many results
