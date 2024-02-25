@@ -40,6 +40,9 @@ local routes = {
 	-- E211 no longer needed, since auto-closing deleted buffers
 	{ filter = { event = "msg_show", find = "E211: File .* no longer available" }, skip = true },
 
+	-- nvim-treesitter
+	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
+
 	-- Mason
 	{
 		filter = {
