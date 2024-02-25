@@ -82,8 +82,7 @@ local function formattingFunc()
 				apply = true,
 			}
 		elseif vim.bo.ft == "javascript" or vim.bo.ft == "typescript" then
-			-- as opposed to biome's `source.organizeImports.biome`, this also
-			-- removes unused imports.
+			-- Biome's `source.organizeImports.biome`, does not remove unused imports
 			pcall(function()
 				vim.cmd.TSToolsOrganizeImports()
 				vim.cmd.TSToolsAddMissingImports()
@@ -104,7 +103,7 @@ return {
 		require("conform.formatters.injected").options.ignore_errors = true
 		require("conform").setup(conformOpts)
 
-		vim.api.nvim_create_autocmd("BufLeave", {
+		vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
 			callback = formattingFunc,
 		})
 	end,

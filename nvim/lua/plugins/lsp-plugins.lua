@@ -16,22 +16,18 @@ return {
 				if symbol.references == 0 then return "" end
 				return " 󰈿 " .. symbol.references
 			end,
-		},
-		config = function(_, opts)
 			-- available kinds: https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#symbolKind
-			local k = vim.lsp.protocol.SymbolKind
-			opts.kinds = {
-				k.Module,
-				k.Package,
-				k.Function,
-				k.Class,
-				k.Constructor,
-				k.Method,
-				k.Interface,
-				k.Object,
-			}
-			require("symbol-usage").setup(opts)
-		end,
+			kinds = { 
+				vim.lsp.protocol.SymbolKind.Module,
+				vim.lsp.protocol.SymbolKind.Package,
+				vim.lsp.protocol.SymbolKind.Function,
+				vim.lsp.protocol.SymbolKind.Class,
+				vim.lsp.protocol.SymbolKind.Constructor,
+				vim.lsp.protocol.SymbolKind.Method,
+				vim.lsp.protocol.SymbolKind.Interface,
+				vim.lsp.protocol.SymbolKind.Object,
+			},
+		},
 	},
 	{ -- lsp definitions & references count in the status line
 		"chrisgrieser/nvim-dr-lsp",
