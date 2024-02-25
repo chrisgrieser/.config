@@ -6,23 +6,20 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{
+	{ -- 
 		"Bryley/neoai.nvim",
 		dependencies = "MunifTanjim/nui.nvim",
-		cmd = {
-			"NeoAI",
-			"NeoAIOpen",
-			"NeoAIClose",
-			"NeoAIToggle",
-			"NeoAIContext",
-			"NeoAIContextOpen",
-			"NeoAIContextClose",
-			"NeoAIInject",
-			"NeoAIInjectCode",
-			"NeoAIInjectContext",
-			"NeoAIInjectContextCode",
+		cmd = { "NeoAIContext" },
+		keys = {
+			{ "<leader>a", ":NeoAIContext ", mode = "x", desc = "󰚩 NeoAIContext" },
+			{ "q", vim.cmd.NeoAIClose, ft = { "neoai-output", "neoai-input" }, nowait = true },
 		},
-		opts = {},
+		-- add syntax highlighting to output field
+		init = function() vim.treesitter.language.register("markdown", "neoai-output") end,
+		opts = {
+			ui = { width = 40 },
+			shortcuts = {}, -- disable those bindings
+		},
 	},
 	{
 		-- AI Ghost-Text Suggestions

@@ -318,5 +318,3 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set("n", "q", cmd.cquit, { buffer = true, nowait = true, desc = "Abort" })
 	end,
 })
-
---------------------------------------------------------------------------------
