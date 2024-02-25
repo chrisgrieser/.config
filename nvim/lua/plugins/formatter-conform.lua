@@ -66,9 +66,11 @@ local conformOpts = {
 	},
 }
 
-local function formattingFunc()
+local function formattingFunc(bufnr)
+	if not vim.api.nvim_buf_is_valid(bufnr) then return end
 	-- GUARD
-	local fileExists = vim.loop.fs_stat(vim.api.nvim_buf_get_name(0)) ~= nil
+	local bufname = vim.api.nvim_buf_get_name(0)
+	local fileExists = vim.loop.fs_stat(bufname) ~= nil
 	if vim.bo.buftype ~= "" or not fileExists then return end
 
 	-- PENDING https://github.com/stevearc/conform.nvim/issues/255
@@ -81,14 +83,19 @@ local function formattingFunc()
 				context = { only = { "source.fixAll.ruff" } },
 				apply = true,
 			}
-		elseif vim.bo.ft == "javascript" or vim.bo.ft == "typescript" then
-			-- Biome's `source.organizeImports.biome`, does not remove unused imports
-			-- pcall(function()
-			-- 	vim.cmd.TSToolsOrganizeImports()
-			-- 	vim.cmd.TSToolsAddMissingImports()
-			-- 	vim.cmd.TSToolsFixAll()
-			-- end)
-			
+		elseif vim.bo.ft == "typescript" then
+			-- Biome's `source.organizeImports.biome` code action doesn't remove unused imports
+			vim.lsp.buf.code_action {
+				context = { only = { "source.addMissingImports.ts" } },
+				apply = true,
+			}
+			-- stylua: ignore
+			vim.defer_fn( function()
+				vim.lsp.buf.execute_command {
+					command = "_typescript.organizeImports",
+					arguments = { bufname },
+				}
+			end, 50)
 		end
 	end)
 end
