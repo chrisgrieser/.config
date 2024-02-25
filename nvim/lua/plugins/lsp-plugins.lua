@@ -17,7 +17,7 @@ return {
 				return " 󰈿 " .. symbol.references
 			end,
 			-- available kinds: https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#symbolKind
-			kinds = { 
+			kinds = {
 				vim.lsp.protocol.SymbolKind.Module,
 				vim.lsp.protocol.SymbolKind.Package,
 				vim.lsp.protocol.SymbolKind.Function,
