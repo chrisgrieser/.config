@@ -126,6 +126,11 @@ function M.docstring()
 			normal("t}")
 		end, 100)
 	elseif ft == "typescript" then
+		vim.lsp.buf.code_action {
+			filter = function(action) return action.title == "Infer function return type" end,
+			apply = true,
+		}
+		-- add TSDoc
 		vim.api.nvim_buf_set_lines(0, ln - 1, ln - 1, false, { indent .. "/**  */" })
 		vim.api.nvim_win_set_cursor(0, { ln, #indent + 4 })
 		vim.cmd.startinsert()
