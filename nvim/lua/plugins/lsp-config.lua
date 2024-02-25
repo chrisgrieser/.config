@@ -23,6 +23,7 @@ local lspToMasonMap = {
 	typos_lsp = "typos-lsp", -- spellchecker for code
 	vale_ls = "vale-ls", -- natural language linter
 	yamlls = "yaml-language-server",
+	tsserver = "typescript-language-server",
 }
 
 --------------------------------------------------------------------------------
@@ -191,9 +192,22 @@ local tsserverConfig = {
 		-- Disable formatting in favor of biome
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
+		vim.notify("🔹 beep 🔵")
+
+		local function organizeImports()
+			local params = {
+				command = "_typescript.organizeImports",
+				arguments = { vim.api.nvim_buf_get_name(0) },
+				title = "",
+			}
+			vim.lsp.buf.execute_command(params)
+		end
+		vim.api.nvim_create_user_command("OrganizeImports", organizeImports, {})
 	end,
 }
 tsserverConfig.settings.javascript = tsserverConfig.settings.typescript
+
+serverConfigs.tsserver = tsserverConfig
 
 -- SIC needs to be enabled, can be removed with nvim 0.10 support for dynamic config
 serverConfigs.biome = {
@@ -346,26 +360,26 @@ return {
 			end
 		end,
 	},
-	{ -- better TS support (alternative: nvim-vtsls is buggy)
-		"pmizio/typescript-tools.nvim",
-		ft = { "typescript", "javascript" },
-		mason_dependencies = "typescript-language-server",
-		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-		config = function()
-			-- extra setting only for typescript-tools
-			tsserverConfig.settings.complete_function_calls = true
-			-- typescript-tools does not use `settings.[language].format`
-			-- relevant even if not formatting, since used by `organizeImports`
-			tsserverConfig.settings.tsserver_format_options = { convertTabsToSpaces = false }
-
-			-- typescript-tools does not accept `settings.diagnostics.ignoreCode`
-			-- https://github.com/pmizio/typescript-tools.nvim/issues/233
-			tsserverConfig.settings.diagnostics = nil
-			local api = require("typescript-tools.api")
-			tsserverConfig.handlers = {
-				["textDocument/publishDiagnostics"] = api.filter_diagnostics { 2451 },
-			}
-			require("typescript-tools").setup(tsserverConfig)
-		end,
-	},
+	-- { -- better TS support (alternative: nvim-vtsls is buggy)
+	-- 	"pmizio/typescript-tools.nvim",
+	-- 	ft = { "typescript", "javascript" },
+	-- 	mason_dependencies = "typescript-language-server",
+	-- 	dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+	-- 	config = function()
+	-- 		-- extra setting only for typescript-tools
+	-- 		tsserverConfig.settings.complete_function_calls = true
+	-- 		-- typescript-tools does not use `settings.[language].format`
+	-- 		-- relevant even if not formatting, since used by `organizeImports`
+	-- 		tsserverConfig.settings.tsserver_format_options = { convertTabsToSpaces = false }
+	--
+	-- 		-- typescript-tools does not accept `settings.diagnostics.ignoreCode`
+	-- 		-- https://github.com/pmizio/typescript-tools.nvim/issues/233
+	-- 		tsserverConfig.settings.diagnostics = nil
+	-- 		local api = require("typescript-tools.api")
+	-- 		tsserverConfig.handlers = {
+	-- 			["textDocument/publishDiagnostics"] = api.filter_diagnostics { 2451 },
+	-- 		}
+	-- 		require("typescript-tools").setup(tsserverConfig)
+	-- 	end,
+	-- },
 }
