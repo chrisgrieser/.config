@@ -1,7 +1,6 @@
 # INFO leading space to ignore it in history due to `HIST_IGNORE_SPACE`
 alias r=' exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
 alias q=' exit'
-alias cmd='command'
 
 # added verbosity / safety
 alias mv='mv -vi'
@@ -10,23 +9,12 @@ alias cp='cp -vi'
 alias rm='rm -I'
 
 # shorthands
+alias cmd='command'
 alias spotify="spotify_player playback"
 
 # make
 alias m="make"
 alias make='make --silent --warn-undefined-variables'
-
-# completions for running `ga` with argument
-_make() {
-	local -a recipes=()
-	while IFS='' read -r recipe; do # turn lines into array
-		recipes+=("$recipe")
-	done < <(grep "^[\w-_]+" "Makefile")
-
-	local expl && _description -V git-changed-files expl 'Make Recipes'
-	compadd "${expl[@]}" -- "${recipes[@]}"
-}
-compdef _make make
 
 # defaults
 alias grep='grep --color'
@@ -50,9 +38,7 @@ alias bkp='zsh "$HOME/.config/+ utility-scripts/full-backup.sh"'
 alias bkp-repos='zsh "$HOME/.config/+ utility-scripts/backup-my-repos.sh"'
 
 #───────────────────────────────────────────────────────────────────────────────
-# https://www.thorsten-hans.com/5-types-of-zsh-aliases
-
-# GLOBAL ALIAS (to be used at the end, mostly)
+# GLOBAL ALIAS (to be used at the end of the buffer, mostly)
 alias -g G='| rg'
 alias -g B='| bat'
 alias -g N='| wc -l | tr -d " "' # count lines
