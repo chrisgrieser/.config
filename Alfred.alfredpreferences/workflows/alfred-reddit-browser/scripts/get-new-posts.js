@@ -159,11 +159,9 @@ function getRedditPosts(subredditName, oldItems) {
 			const commentUrl = `https://${opts.useOldReddit}.reddit.com${item.permalink}`;
 			const isOnReddit = item.domain.includes("redd.it") || item.domain.startsWith("self.");
 			const externalUrl = isOnReddit ? "" : item.url;
-			const imageUrl = item.preview?.images[0]?.source?.url;
 			let postTypeIcon = "";
-			if (imageUrl) postTypeIcon = "📷 ";
-			else if (!isOnReddit) postTypeIcon = "🔗 ";
-			const quicklookUrl = imageUrl || externalUrl || commentUrl;
+			if (!isOnReddit) postTypeIcon = "🔗 ";
+			const quicklookUrl = externalUrl || commentUrl;
 
 			// age & visited icon
 			const postIsOld = oldUrls.includes(commentUrl);
