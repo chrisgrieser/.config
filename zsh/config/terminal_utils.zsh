@@ -95,10 +95,18 @@ function hs() {
 	selected=$(
 		fc -rl 1 | cut -c8- | fzf \
 			--height=40% --info=inline --multi --query="$1" --scheme=history --bind="change:first" \
-			--bind 'ctrl-y:execute-silent(echo -n {} | pbcopy)+abort' # copy
+			--expect="ctrl-y"
 	)
 	[[ -z "$selected" ]] && return 0
-	print -z "$selected"
+	key_pressed=$(echo "$selected" | head -n1)
+	item="$(echo "$selected" | tail -n1)"
+
+	if [[ "$key_pressed" == "ctrl-y" ]]; then
+		echo -n "$item" | pbcopy
+		print "\e[1;32mCopied:\e[0m $item"
+	else
+		print -z "$item"
+	fi
 }
 
 #───────────────────────────────────────────────────────────────────────────────

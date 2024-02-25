@@ -190,7 +190,7 @@ defaults write com.apple.appstore InAppReviewEnabled -bool false
 defaults write com.apple.commerce AutoUpdate -bool false
 
 #───────────────────────────────────────────────────────────────────────────────
-# Trash Archived Files
+# Archive Utility
 # shellcheck disable=2088
 defaults write com.apple.archiveutility dearchive-move-after -string '~/.Trash'
 defaults write com.apple.archiveutility archive-reveal-after -int 1
