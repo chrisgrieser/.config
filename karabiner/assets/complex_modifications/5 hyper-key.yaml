@@ -1,10 +1,9 @@
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
 title: ⇪ Hyper
-anchors: 
-  - from: 
-      modifiers:
-        &hyper
-        mandatory: [command, control, option] 
+anchors:
+  - from:
+      modifiers: &hyper
+        mandatory: [command, control, option]
   #─────────────────────────────────────────────────────────────────────────────
 rules:
   - description: "*️⃣ ⇪ Capslock → Hyper/Esc"
@@ -28,15 +27,16 @@ rules:
         # is done in finder-vim-alfred-addon.yaml
         conditions:
           - { type: frontmost_application_unless, bundle_identifiers: [^com\.apple\.finder$] }
-  #─────────────────────────────────────────────────────────────────────────────
+      #─────────────────────────────────────────────────────────────────────────────
       # Restart Alfred & Alfred Preferences
+      # INFO needs to be done via Karabiner, since Alfred cannot restart itself
       - type: basic
         from: { key_code: "5", modifiers: *hyper }
         to:
           - shell_command: |
               osascript -e 'display notification "" with title "Restarting Alfred…"'
               killall -9 "Alfred"
-              killall "Alfred Preferences"
+              killall "Alfred Preferences" "AlfredExtraPane"
               while pgrep -xq "Alfred"; do sleep 0.1; done
               sleep 0.1
               open -a "Alfred 5"
