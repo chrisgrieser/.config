@@ -25,7 +25,7 @@ end
 ---@nodiscard
 ---@return string|nil the value, or nil if hlgroup or key is not available
 function M.getHighlightValue(name, key)
-	local hl = vim.api.nvim_get_hl( 0, { name = name })
+	local hl = vim.api.nvim_get_hl(0, { name = name })
 	local value = hl[key]
 	if not value then return end
 	return ("#%06x"):format(value)
