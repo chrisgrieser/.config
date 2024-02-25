@@ -342,5 +342,9 @@
   "unique items": {
     "body": "${1:arr} = [...new Set(${2:arr})];",
     "prefix": "unique items"
+  },
+  "uuid": {
+    "body": "crypto.randomUUID();",
+    "prefix": "uuid"
   }
 }
