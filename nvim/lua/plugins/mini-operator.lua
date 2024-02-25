@@ -38,6 +38,11 @@ local function filetypeSpecificEval()
 
 				if printer then
 					local lastLine = table.remove(inputLines)
+					-- trailing ; makes console.log invalid
+					if ft == "javascript" or ft == "typescript" then
+						lastLine = vim.trim(lastLine):gsub(";$", "")
+					end
+
 					local printCmd = printer:match("^%w+")
 					if not (vim.startswith(lastLine, printCmd)) then
 						lastLine = printer:format(lastLine)
@@ -45,10 +50,7 @@ local function filetypeSpecificEval()
 					table.insert(inputLines, lastLine)
 				end
 
-				local lines = vim.trim(table.concat(inputLines, "\n"))
-				-- trailing ; makes console.log invalid
-				if ft == "javascript" or ft == "typescript" then lines = lines:gsub(";$", "") end
-
+				local lines = table.concat(inputLines, "\n")
 				local shellCmd = repl .. ' "' .. lines:gsub('"', '\\"') .. '"'
 				local evaluatedOut = vim.fn.system(shellCmd):gsub("\n$", "")
 				u.notify("Eval", evaluatedOut)
