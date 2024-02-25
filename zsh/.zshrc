@@ -28,4 +28,3 @@ done
 
 # remove last login message that some terminals leave https://stackoverflow.com/a/69915614
 [[ "$TERM_PROGRAM" == "WezTerm" ]] || printf '\33c\e[3J'
-

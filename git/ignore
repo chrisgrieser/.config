@@ -5,6 +5,8 @@
 # Icon must end with two \r (`^M` in vim)
 Icon
 
+# Aider
+.aider*
 #───────────────────────────────────────────────────────────────────────────────
 
 # production stuff / builds
