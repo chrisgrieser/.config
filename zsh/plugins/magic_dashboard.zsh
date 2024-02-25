@@ -42,7 +42,7 @@ function _gitlog {
 				-e 's/tag: /  /g' \
 				-e 's/ -> /   /' \
 				-e 's/\* /· /' \
-				-Ee $'s/ (fix|refactor|build|ci|docs|feat|style|test|perf|chore|revert|break|improv|aider)(\\(.+\\)|!)?:/ \033[1;35m\\1\033[1;36m\\2\033[0;38;5;245m:\033[0m/' \
+				-Ee $'s/ (fix|refactor|build|ci|docs|feat|style|test|perf|chore|revert|break|improv|aider)(\\(.+\\))?(!?):/ \033[1;35m\\1\033[1;36m\\2\033[7;31m\\3\033[0;38;5;245m:\033[0m/' \
 				-Ee $'s/ (fixup|squash)!/\033[1;32m&\033[0m/g' \
 				-Ee $'s/`[^`]*`/\033[1;36m&\033[0m/g' \
 				-Ee $'s/#[0-9]+/\033[1;31m&\033[0m/g'
