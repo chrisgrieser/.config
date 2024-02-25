@@ -55,7 +55,7 @@ function ga {
 	local style
 	style=$(defaults read -g AppleInterfaceStyle &>/dev/null && echo --dark || echo --light)
 	selection=$(
-		git -c "status.color=always" status --short | sort | fzf \
+		git -c "status.color=always" status --short --untracked-files | sort | fzf \
 			--ansi --nth=2.. \
 			--preview="$file_diff | delta $style --file-style=omit" \
 			--bind="enter:reload($check_staged $add_or_unadd ; git -c status.color=always status --short | sort)"
@@ -65,13 +65,13 @@ function ga {
 
 # completions for running `ga` with argument
 _ga() {
-	local -a _changed_files=()
+	local -a changed_files=()
 	while IFS='' read -r file; do # turn lines into array
-		_changed_files+=("$file")
-	done < <(git diff --name-only)
+		changed_files+=("$file")
+	done < <(git -c status.relativePaths=true status --porcelain --untracked-files | cut -c4-)
 
-	local expl && _description -V git-changed-files expl 'Changed Files'
-	compadd "${expl[@]}" -- "${_changed_files[@]}"
+	local expl && _description -V git-changed-files expl 'Changed & Untracked Files'
+	compadd "${expl[@]}" -- "${changed_files[@]}"
 }
 compdef _ga ga
 

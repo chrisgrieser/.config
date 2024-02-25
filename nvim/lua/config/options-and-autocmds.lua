@@ -161,6 +161,7 @@ vim.api.nvim_create_autocmd("CmdlineLeave", {
 -- INVISIBLE CHARS
 
 opt.list = true
+opt.conceallevel = 1
 
 opt.fillchars:append {
 	eob = " ",
@@ -215,7 +216,8 @@ autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
 
 --------------------------------------------------------------------------------
 -- AUTO-CLOSE BUFFERS whose files do not exist anymore
-vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
+vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "QuickFixCmdPost" }, {
+	-- INFO also trigger on `QuickFixCmdPost`, in case a make command deletes file
 	callback = function(ctx)
 		local bufnr = ctx.buf
 		vim.defer_fn(function()

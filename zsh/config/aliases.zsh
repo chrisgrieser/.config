@@ -11,13 +11,27 @@ alias rm='rm -I'
 
 # shorthands
 alias spotify="spotify_player playback"
+
+# make
 alias m="make"
+alias make='make --silent --warn-undefined-variables'
+
+# completions for running `ga` with argument
+_make() {
+	local -a recipes=()
+	while IFS='' read -r recipe; do # turn lines into array
+		recipes+=("$recipe")
+	done < <(grep "^[\w-_]+" "Makefile")
+
+	local expl && _description -V git-changed-files expl 'Make Recipes'
+	compadd "${expl[@]}" -- "${recipes[@]}"
+}
+compdef _make make
 
 # defaults
 alias grep='grep --color'
 alias mkdir='mkdir -pv' # create intermediate directories & verbose
 alias curl='curl --progress-bar'
-alias make='make --silent --warn-undefined-variables'
 alias jless='jless --no-line-numbers'
 alias tokei='tokei --compact'
 function which { builtin which -a "$@" | bat --language=sh --wrap=character; } # colorized & showing all
