@@ -50,10 +50,17 @@ const cpuThresholdPercent = Number.parseFloat($.getenv("cpu_threshold_percent"))
 const memoryThresholdMb = Number.parseFloat($.getenv("memory_threshold_mb")) || 10;
 const sort = $.getenv("sort_key") === "Memory" ? "m" : "r";
 
-const apps = app
+const installedApps = app
 	.doShellScript("ls /Applications/")
 	.split("\r")
 	.filter((line) => line.endsWith(".app"));
+
+/** @param {string} str */
+function camelCaseMatch(str) {
+	const clean = str.replace(/[-_.]/g, " ");
+	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
+	return [clean, camelCaseSeparated, str].join(" ") + " ";
+}
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -103,7 +110,7 @@ function run() {
 					? `${processName} [${appName}]`
 					: processName;
 			const subtitle = [memory, cpu, parentName].filter((t) => t !== "").join(separator);
-			const isApp = apps.includes(`${appName}.app`) || appFilePaths[appName];
+			const isApp = installedApps.includes(`${appName}.app`) || appFilePaths[appName];
 			let icon = {};
 			if (isApp) {
 				const path = appFilePaths[appName] || `/Applications/${appName}.app`;
@@ -116,7 +123,7 @@ function run() {
 				icon: icon,
 				arg: pid,
 				uid: pid, // during rerun remembers selection, but does not affect sorting
-				match: [processName, parentName, appName].join(" "),
+				match: camelCaseMatch(processName + parentName + appName),
 				mods: {
 					ctrl: { variables: { mode: "killall" } },
 					cmd: { variables: { mode: "force kill" } },

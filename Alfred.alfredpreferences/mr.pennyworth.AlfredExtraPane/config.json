@@ -1,8 +1,0 @@
-[
-	{
-		"workflowUID": "*",
-		"alignment": {
-			"horizontal": { "placement": "left", "width": 420, "minHeight": 600 }
-		}
-	}
-]
