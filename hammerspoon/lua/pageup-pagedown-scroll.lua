@@ -15,6 +15,7 @@ local perAppSettings = {
 	Discord = false, -- not working in Discord
 	neovide = false, -- uses pageup/pagedown for mappings
 	WezTerm = false, -- uses pageup/pagedown for mappings
+	Alfred = false, -- uses pageup/pagedown grid view
 }
 
 --------------------------------------------------------------------------------

@@ -50,6 +50,22 @@
 			"title": "Reading Environment Variables",
 			"subtitle": "in a script",
 			"arg": "https://www.alfredapp.com/help/kb/reading-environment-variables/"
+		},
+		{
+			"title": "PDF View",
+			"arg": "https://www.alfredapp.com/help/workflows/user-interface/pdf/"
+		},
+		{
+			"title": "Grid View",
+			"arg": "https://www.alfredapp.com/help/workflows/user-interface/grid/"
+		},
+		{
+			"title": "Image View",
+			"arg": "https://www.alfredapp.com/help/workflows/user-interface/image/"
+		},
+		{
+			"title": "Text View",
+			"arg": "https://www.alfredapp.com/help/workflows/user-interface/text/"
 		}
 	]
 }
