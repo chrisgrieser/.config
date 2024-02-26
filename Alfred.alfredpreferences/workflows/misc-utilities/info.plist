@@ -976,7 +976,8 @@ fi</string>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>xattr -d com.apple.quarantine "${@}" &amp;&amp; echo "✅ Removed Quarantine" || echo "⚠️ Could not remove Quarantine"</string>
+				<string>xattr -d com.apple.quarantine "${@}" 2&gt;&amp;1
+ &amp;&amp; echo "✅ Removed Quarantine" || echo "⚠️ Could not remove Quarantine"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1060,7 +1061,7 @@ fi</string>
 		<key>0AF7121A-89F5-460A-97D1-1061C6819D85</key>
 		<dict>
 			<key>xpos</key>
-			<real>815</real>
+			<real>810</real>
 			<key>ypos</key>
 			<real>935</real>
 		</dict>
