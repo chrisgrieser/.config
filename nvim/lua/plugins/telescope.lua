@@ -473,11 +473,10 @@ return {
 					---@param relPath string the ordinal from telescope
 					---@return number score number from 1 to 0. lower the number the better. -1 will filter out the entry though.
 					function my_fzf:scoring_function(prompt, relPath)
-						-- GUARD
 						-- only modify score when prompt is empty
 						if prompt ~= "" then return scorer.scoring_function(self, prompt, relPath) end
 						-- filter out current buffer
-						if relPath == curBufRelPath then return 1 end
+						if relPath == curBufRelPath then return -1 end
 
 						-- prioritze recently modified
 						local stat = vim.loop.fs_stat(relPath)

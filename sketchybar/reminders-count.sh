@@ -7,7 +7,7 @@ if [[ "$SENDER" = "front_app_switched" ]]; then
 	echo -n "$INFO" >"$data"
 	[[ "$deactivated_app" != "GoodTask" ]] && return 0
 fi
-[[ $(system_profiler SPDisplaysDataType | grep -c "Resolution:") -eq 2 ]] && return  0
+[[ $(system_profiler SPDisplaysDataType | grep -c "Resolution:") -eq 2 ]] && return 0
 
 # wait for sync of reminders
 [[ "$SENDER" == "system_woke" ]] && sleep 5
