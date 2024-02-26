@@ -111,16 +111,20 @@ function run() {
 	const installedThemes = app.doShellScript(
 		`find '${vaultPath}/${configFolder}/themes/' -name '*.css' || true`,
 	);
-	const currentTheme = JSON.parse(readFile(`${vaultPath}/${configFolder}/appearance.json`))?.cssTheme;
+	const currentTheme = JSON.parse(
+		readFile(`${vaultPath}/${configFolder}/appearance.json`),
+	)?.cssTheme;
 
 	const depre = JSON.parse(readFile("./data/deprecated-plugins.json"));
-	const deprecatedPlugins = [ ...depre.sherlocked, ...depre.dysfunct, ...depre.deprecated ];
+	const deprecatedPlugins = [...depre.sherlocked, ...depre.dysfunct, ...depre.deprecated];
 
 	//───────────────────────────────────────────────────────────────────────────
 
 	// add PLUGINS to the JSON
 	const plugins = pluginJSON.map(
-		(/** @type {{ id: any; name: any; description: string; author: any; repo: any; }} */ plugin) => {
+		(
+			/** @type {{ id: any; name: any; description: string; author: any; repo: any; }} */ plugin,
+		) => {
 			const id = plugin.id;
 			const name = plugin.name;
 			const description = plugin.description
