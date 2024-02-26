@@ -8,6 +8,29 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
+		<key>0BCB75C6-A09E-462A-A007-48C1F6C7C745</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0BC39168-BBF8-4DE1-B3E3-B1C43DD9378D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>6507DD0C-2ACA-408E-B861-51456E49433F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>3764B13D-1474-467B-9A8F-3766DADEDFB9</key>
 		<array>
 			<dict>
@@ -96,7 +119,7 @@
 				<key>subtext</key>
 				<string>ChatGPT &amp; Perplexity</string>
 				<key>text</key>
-				<string>General AI</string>
+				<string>General AI: {query}</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -131,6 +154,19 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>text</key>
+				<string>General AIs: {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.fallback</string>
+			<key>uid</key>
+			<string>0BCB75C6-A09E-462A-A007-48C1F6C7C745</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -159,7 +195,7 @@
 				<key>subtext</key>
 				<string>Phind &amp; ChatBot</string>
 				<key>text</key>
-				<string>Coding AI</string>
+				<string>Coding AI: {query}</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -205,10 +241,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>80</real>
 		</dict>
+		<key>0BCB75C6-A09E-462A-A007-48C1F6C7C745</key>
+		<dict>
+			<key>xpos</key>
+			<real>70</real>
+			<key>ypos</key>
+			<real>260</real>
+		</dict>
 		<key>3764B13D-1474-467B-9A8F-3766DADEDFB9</key>
 		<dict>
 			<key>xpos</key>
-			<real>75</real>
+			<real>70</real>
 			<key>ypos</key>
 			<real>145</real>
 		</dict>

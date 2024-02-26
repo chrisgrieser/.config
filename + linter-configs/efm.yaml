@@ -4,7 +4,6 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 root-markers: [.git/]
-lint-debounce: 1s
 
 tools:
   shellcheck: &shellcheck
@@ -28,6 +27,8 @@ tools:
     lint-stdin: true 
     lint-severity: 2 # 2 = warning
     lint-formats:
+      - "stdin:%l %m" # needed, otherwise some rules are not reported
+      - "stdin:%l:%c %m"
       - "%f:%l %m"
       - "%f:%l:%c %m"
       - "%f: %l: %m"

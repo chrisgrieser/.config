@@ -46,6 +46,9 @@ return {
 				if symbol.references == 0 then return "" end
 				return " 󰈿 " .. symbol.references
 			end,
+			disable = {
+				filetypes = { "css", "scss" },
+			},
 			-- available kinds: https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#symbolKind
 			kinds = {
 				vim.lsp.protocol.SymbolKind.Module,
