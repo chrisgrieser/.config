@@ -183,13 +183,16 @@ return {
 		event = { "InsertEnter", "CmdlineEnter" },
 		config = cmpconfig,
 		dependencies = {
-			{ "Allaman/emoji.nvim", opts = { enable_cmp_integration = true } },
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-nvim-lsp", -- LSP input
 			"L3MON4D3/LuaSnip", -- snippet engine
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
+
+			-- PENDING https://github.com/Allaman/emoji.nvim/issues/5
+			-- { "Allaman/emoji.nvim", opts = { enable_cmp_integration = true } },
+			"hrsh7th/cmp-emoji",
 		},
 	},
 	{ -- Snippet Engine

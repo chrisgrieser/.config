@@ -161,7 +161,7 @@ serverConfigs.stylelint_lsp = {
 -- JS/TS
 
 -- DOCS https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md
-local tsserverConfig = {
+serverConfigs.tsserver = {
 	settings = {
 
 		-- "Cannot redeclare block-scoped variable" -> not useful for single-file-JXA
@@ -193,9 +193,7 @@ local tsserverConfig = {
 		client.server_capabilities.documentRangeFormattingProvider = false
 	end,
 }
-tsserverConfig.settings.javascript = tsserverConfig.settings.typescript
-
-serverConfigs.tsserver = tsserverConfig
+serverConfigs.tsserver.settings.javascript = serverConfigs.tsserver.settings.typescript
 
 -- SIC needs to be enabled, can be removed with nvim 0.10 support for dynamic config
 serverConfigs.biome = {
