@@ -1,7 +1,6 @@
 alias gs='git status'
 alias co='git checkout'
 alias gd='git diff'
-alias grh='git reset --hard'
 alias gt='git stash push && git stash show 0'
 alias gT='git stash pop'
 alias gi='gh issue list --state=open'
@@ -17,6 +16,11 @@ alias unlock='rm -v "$(git rev-parse --git-dir)/index.lock"'
 
 alias pr='gh pr create --web --fill'
 alias rel='make --silent release' # personal convention to have `make release`
+
+function grh {
+	git reset --hard # undo changes
+	git clean -df    # remove untracked files
+}
 
 #───────────────────────────────────────────────────────────────────────────────
 
