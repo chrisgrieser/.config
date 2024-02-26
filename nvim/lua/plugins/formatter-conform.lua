@@ -72,7 +72,9 @@ local function formattingFunc(bufnr)
 	local bufname = vim.api.nvim_buf_get_name(bufnr)
 	local fileExists = vim.loop.fs_stat(bufname) ~= nil
 	local valid = vim.api.nvim_buf_is_valid(bufnr)
-	if vim.bo[bufnr].buftype ~= "" or not fileExists or not valid then return end
+	local specialBuffer = vim.bo[bufnr].buftype ~= ""
+	if specialBuffer or not fileExists or not valid then return end
+
 	local ft = vim.bo[bufnr].filetype
 
 	-- PENDING https://github.com/stevearc/conform.nvim/issues/255
