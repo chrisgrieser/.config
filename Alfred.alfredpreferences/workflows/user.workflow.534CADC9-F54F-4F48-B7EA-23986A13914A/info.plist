@@ -184,7 +184,7 @@
 				<key>columncount</key>
 				<integer>4</integer>
 				<key>filterable</key>
-				<true/>
+				<false/>
 				<key>imageaspect</key>
 				<integer>0</integer>
 				<key>inputfile</key>
@@ -200,7 +200,7 @@
 				<key>subtitlesinfooter</key>
 				<true/>
 				<key>titlesinfooter</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.userinterface.grid</string>
@@ -270,6 +270,91 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>button1</key>
+				<string>Ok</string>
+				<key>button2</key>
+				<string>Cancel</string>
+				<key>button3</key>
+				<string></string>
+				<key>description</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.dialog</string>
+			<key>uid</key>
+			<string>7F34E628-45FC-4C8E-AA16-2B912BD211B4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/files-and-folders/directory.children.sort.added.leading.1</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>6A178721-0406-44DE-96F2-567BD5970D05</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<true/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>091B2699-9292-4CE6-8CD8-2449E1767996</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string></string>
+						<key>outputlabel</key>
+						<string></string>
+						<key>uid</key>
+						<string>13F344EC-66E3-4C54-B5BE-1C14EEB0EF59</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>else</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>B3E0443C-1444-4764-B54F-1D12B8A65C0E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>---
@@ -277,6 +362,13 @@
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>091B2699-9292-4CE6-8CD8-2449E1767996</key>
+		<dict>
+			<key>xpos</key>
+			<real>575</real>
+			<key>ypos</key>
+			<real>405</real>
+		</dict>
 		<key>16114BB4-BE21-4621-A09B-F3C515EFF753</key>
 		<dict>
 			<key>xpos</key>
@@ -291,6 +383,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>6A178721-0406-44DE-96F2-567BD5970D05</key>
+		<dict>
+			<key>xpos</key>
+			<real>185</real>
+			<key>ypos</key>
+			<real>315</real>
+		</dict>
 		<key>6B006EE5-0906-41A6-A0A6-31E0E5207046</key>
 		<dict>
 			<key>xpos</key>
@@ -304,6 +403,20 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>190</real>
 			<key>ypos</key>
 			<real>150</real>
+		</dict>
+		<key>7F34E628-45FC-4C8E-AA16-2B912BD211B4</key>
+		<dict>
+			<key>xpos</key>
+			<real>1085</real>
+			<key>ypos</key>
+			<real>270</real>
+		</dict>
+		<key>B3E0443C-1444-4764-B54F-1D12B8A65C0E</key>
+		<dict>
+			<key>xpos</key>
+			<real>405</real>
+			<key>ypos</key>
+			<real>570</real>
 		</dict>
 		<key>CF21E556-BA1E-4934-A741-082B9F2A6B86</key>
 		<dict>

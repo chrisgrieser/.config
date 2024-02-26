@@ -96,9 +96,9 @@ local function formattingFunc(bufnr)
 			-- stylua: ignore
 			-- deferred, so it does not conflict with `addMissingImports`
 			vim.defer_fn( function()
-				vim.lsp.buf.execute_command {
-					command = "_typescript.organizeImports",
-					arguments = { bufname },
+				vim.lsp.buf.code_action {
+					context = { only = { "source.organizeImports.ts" } },
+					apply = true,
 				}
 			end, 50)
 		end

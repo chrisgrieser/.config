@@ -29,7 +29,7 @@ declare class AlfredItem {
 	variables?: Object;
 	icon?: {
 		type?: "fileicon" | "filetype" | "";
-		path?: string;
+		path: string;
 	};
 	mods?: {
 		cmd?: AlfredModifierKey;
@@ -43,6 +43,10 @@ declare class AlfredItem {
 	text?: {
 		copy?: string;
 		largetype?: string;
+	};
+	cache?: {
+		seconds: number;
+		loosereload?: boolean;
 	};
 }
 
