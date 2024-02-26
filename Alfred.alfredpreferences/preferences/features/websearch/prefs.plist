@@ -15,6 +15,17 @@
 			<key>url</key>
 			<string>https://sentencestack.com/q/{query}</string>
 		</dict>
+		<key>3C0737F9-12F8-416B-B85E-84617699AF0F</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>ma</string>
+			<key>text</key>
+			<string>Marginalia: {query}</string>
+			<key>url</key>
+			<string>https://search.marginalia.nu/search?query=apple</string>
+		</dict>
 		<key>5EEA999D-F78D-4F89-BB24-9557712FEE77</key>
 		<dict>
 			<key>enabled</key>

@@ -65,11 +65,10 @@ serverConfigs.bashls = {
 serverConfigs.efm = {
 	cmd = { "efm-langserver", "-c", vim.g.linterConfigs .. "/efm.yaml" },
 	filetypes = { "sh", "markdown" }, -- limit to filestypes needed
-	on_attach = function(_, bufnr)
-		-- Disable in Obsidian vault, as `.markdownlintignore` does not work well
-		-- with efm
+	on_attach = function(client)
+		-- Disable in Obsidian vault, as `.markdownlintignore` does not work well with efm
 		if vim.startswith(vim.api.nvim_buf_get_name(0), vim.env.VAULT_PATH) then
-			vim.cmd.LspStop("")
+			vim.cmd.LspStop(client.id)
 		end
 	end,
 }
@@ -263,7 +262,7 @@ serverConfigs.ltex = {
 			},
 		},
 	},
-	on_attach = function(_, bufnr)
+	on_attach = function(client, bufnr)
 		-- have `zg` update ltex dictionary file as well as vim's spellfile
 		vim.keymap.set({ "n", "x" }, "zg", function()
 			local word
@@ -281,7 +280,7 @@ serverConfigs.ltex = {
 
 		-- Disable ltex in Obsidian vault, as there is no `.ltexignore` https://github.com/valentjn/vscode-ltex/issues/576
 		if vim.startswith(vim.api.nvim_buf_get_name(0), vim.env.VAULT_PATH) then
-			vim.cmd.LspStop("ltex")
+			vim.cmd.LspStop(client.id)
 		end
 	end,
 }

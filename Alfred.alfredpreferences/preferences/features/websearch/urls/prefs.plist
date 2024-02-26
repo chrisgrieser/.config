@@ -6,5 +6,7 @@
 	<false/>
 	<key>historyExpiry</key>
 	<integer>0</integer>
+	<key>schemesEnabled</key>
+	<true/>
 </dict>
 </plist>
