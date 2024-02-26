@@ -72,19 +72,20 @@ local function formattingFunc(bufnr)
 	local bufname = vim.api.nvim_buf_get_name(bufnr)
 	local fileExists = vim.loop.fs_stat(bufname) ~= nil
 	local valid = vim.api.nvim_buf_is_valid(bufnr)
-	if vim.bo.buftype ~= "" or not fileExists or not valid then return end
+	if vim.bo[bufnr].buftype ~= "" or not fileExists or not valid then return end
+	local ft = vim.bo[bufnr].filetype
 
 	-- PENDING https://github.com/stevearc/conform.nvim/issues/255
-	if vim.tbl_contains(autoIndentFt, vim.bo.ft) then u.normal("gg=G``") end
+	if vim.tbl_contains(autoIndentFt, ft) then u.normal("gg=G``") end
 
-	local useLsp = vim.tbl_contains(lspFormatFt, vim.bo.ft) and "always" or false
+	local useLsp = vim.tbl_contains(lspFormatFt, ft) and "always" or false
 	require("conform").format({ lsp_fallback = useLsp }, function()
-		if vim.bo.ft == "python" then
+		if ft == "python" then
 			vim.lsp.buf.code_action {
 				context = { only = { "source.fixAll.ruff" } },
 				apply = true,
 			}
-		elseif vim.bo.ft == "typescript" then
+		elseif ft == "typescript" then
 			-- Biome's `source.organizeImports.biome` code action doesn't remove unused imports
 			vim.lsp.buf.code_action {
 				context = { only = { "source.addMissingImports.ts" } },
