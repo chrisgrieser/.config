@@ -9,7 +9,7 @@ let rerunSecs = parseFloat($.getenv("rerun_s_network")) || 2.5;
 if (rerunSecs < 0.1) rerunSecs = 0.1;
 else if (rerunSecs > 5) rerunSecs = 5;
 
-const apps = app
+const installedApps = app
 	.doShellScript("ls /Applications/")
 	.split("\r")
 	.filter((line) => line.endsWith(".app"));
@@ -34,7 +34,7 @@ function run() {
 			const down = downKb > 1024 ? `${(downKb / 1024).toFixed(1)}M` : `${downKb.toFixed(0)}K`;
 			const up = upKb > 1024 ? `${(upKb / 1024).toFixed(1)}M` : `${upKb.toFixed(0)}K`;
 
-			const isApp = apps.includes(`${name}.app`);
+			const isApp = installedApps.includes(`${name}.app`);
 			const icon = isApp ? { type: "fileicon", path: `/Applications/${name}.app` } : {};
 
 			return {
