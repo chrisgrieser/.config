@@ -71,7 +71,8 @@ local function formattingFunc(bufnr)
 	if not bufnr then bufnr = 0 end
 	local bufname = vim.api.nvim_buf_get_name(bufnr)
 	local fileExists = vim.loop.fs_stat(bufname) ~= nil
-	if vim.bo.buftype ~= "" or not fileExists then return end
+	local valid = vim.api.nvim_buf_is_valid(bufnr)
+	if vim.bo.buftype ~= "" or not fileExists or not valid then return end
 
 	-- PENDING https://github.com/stevearc/conform.nvim/issues/255
 	if vim.tbl_contains(autoIndentFt, vim.bo.ft) then u.normal("gg=G``") end
