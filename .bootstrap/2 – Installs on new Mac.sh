@@ -12,8 +12,3 @@ open '/System/Applications/App Store.app'
 
 brew bundle install --no-quarantine --verbose --no-lock --file "$HOME/Desktop/Brewfile"
 brew services start felixkratz/formulae/sketchybar
-
-# symlink for Alfred Extra Panes
-mkdir -p "$HOME/Library/Application Support/mr.pennyworth.AlfredExtraPane"
-ln -sf "$HOME/.config/Alfred.alfredpreferences/AlfredExtraPane-config.json" \
-	"$HOME/Library/Application Support/mr.pennyworth.AlfredExtraPane/config.json"

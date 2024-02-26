@@ -16,23 +16,33 @@ md_file=$(osascript -e 'tell application "Finder"
 	set sel to (item 1 of (get selection) as text)
 	return POSIX path of sel
 end tell')
+if [[ ! -e "$md_file" ]]; then
+	echo "⚠️ File not recognized."
+	return 1
+fi
+
 input_no_ext=${md_file%\.md}
 date="$(date +%Y-%m-%d)"
 word_file="${input_no_ext}_${date}_CG.docx"
 
-pandoc "$md_file" --output="$word_file" --data-dir="$HOME/.config/pandoc" --defaults="md2docx" 2>&1 || return 1
+# cd, so --resource-path is set
+cd "$(dirname "$md_file")" || return 1
+
+pandoc "$md_file" --output="$word_file" --defaults="md2docx" 2>&1 || return 1
 open -R "$word_file"
 
 # 3. INSERT LINE BREAKS IN TABLES
 # `^l` is the manual line break token in MS Word
 [[ ! -e "$word_file" ]] && return 1
 open "$word_file"
-sleep 0.1
 
 osascript -e '
 	tell application "Microsoft Word" 
+		set i to 0
 		repeat until active document exists 
 			delay 0.1 
+			set i to i + 1
+			if i > 120 then return
 		end repeat 
 		activate 
 		

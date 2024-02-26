@@ -8,6 +8,19 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
+		<key>0AF7121A-89F5-460A-97D1-1061C6819D85</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A04AB8ED-EA57-4E0F-A24F-669DBB086D08</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>0DF397E6-7179-4A9B-A07A-B32165613998</key>
 		<array>
 			<dict>
@@ -581,46 +594,6 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>xattr -d com.apple.quarantine "${@}"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>11</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>0AF7121A-89F5-460A-97D1-1061C6819D85</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>1</integer>
-				<key>filetypes</key>
-				<array/>
-				<key>name</key>
-				<string>Remove quarantine</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>B2BCC7F4-6732-493D-9789-2719BB7752D9</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>acceptsfiles</key>
 				<false/>
 				<key>acceptsmulti</key>
@@ -927,6 +900,27 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>A04AB8ED-EA57-4E0F-A24F-669DBB086D08</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -980,6 +974,29 @@ fi</string>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>xattr -d com.apple.quarantine "${@}" &amp;&amp; echo "✅ Removed Quarantine" || echo "⚠️ Could not remove Quarantine"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>0AF7121A-89F5-460A-97D1-1061C6819D85</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
 				<string></string>
@@ -996,6 +1013,23 @@ fi</string>
 			<string>144D7958-617D-45F3-8140-CDD8105D98DD</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>1</integer>
+				<key>filetypes</key>
+				<array/>
+				<key>name</key>
+				<string>Remove quarantine</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>B2BCC7F4-6732-493D-9789-2719BB7752D9</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1026,18 +1060,18 @@ fi</string>
 		<key>0AF7121A-89F5-460A-97D1-1061C6819D85</key>
 		<dict>
 			<key>xpos</key>
-			<real>1165</real>
+			<real>815</real>
 			<key>ypos</key>
-			<real>295</real>
+			<real>935</real>
 		</dict>
 		<key>0DF397E6-7179-4A9B-A07A-B32165613998</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>760</real>
+			<real>740</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>710</real>
 		</dict>
 		<key>144D7958-617D-45F3-8140-CDD8105D98DD</key>
 		<dict>
@@ -1067,7 +1101,7 @@ fi</string>
 		<key>25653873-BA08-495C-9634-85EDC4DE03F5</key>
 		<dict>
 			<key>xpos</key>
-			<real>835</real>
+			<real>805</real>
 			<key>ypos</key>
 			<real>505</real>
 		</dict>
@@ -1186,6 +1220,13 @@ fi</string>
 			<key>ypos</key>
 			<real>265</real>
 		</dict>
+		<key>A04AB8ED-EA57-4E0F-A24F-669DBB086D08</key>
+		<dict>
+			<key>xpos</key>
+			<real>985</real>
+			<key>ypos</key>
+			<real>935</real>
+		</dict>
 		<key>A2960A81-02AB-485E-AF91-AEF7B502D533</key>
 		<dict>
 			<key>colorindex</key>
@@ -1220,16 +1261,16 @@ fi</string>
 		<key>B2BCC7F4-6732-493D-9789-2719BB7752D9</key>
 		<dict>
 			<key>xpos</key>
-			<real>1025</real>
+			<real>595</real>
 			<key>ypos</key>
-			<real>295</real>
+			<real>935</real>
 		</dict>
 		<key>C120F733-C46F-44AC-ADAA-504E11D52028</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>840</real>
+			<real>810</real>
 			<key>ypos</key>
 			<real>640</real>
 		</dict>
@@ -1238,7 +1279,7 @@ fi</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>840</real>
+			<real>810</real>
 			<key>ypos</key>
 			<real>790</real>
 		</dict>

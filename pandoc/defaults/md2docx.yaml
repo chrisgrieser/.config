@@ -6,8 +6,8 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 # Reports
-verbosity: INFO
-fail-if-warnings: true # turn on to abort if citekeys are missing
+verbosity: WARNING
+fail-if-warnings: true # turn this on to abort if citekeys are missing
 
 # headings
 table-of-contents: false
