@@ -189,10 +189,7 @@ return {
 			"hrsh7th/cmp-nvim-lsp", -- LSP input
 			"L3MON4D3/LuaSnip", -- snippet engine
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
-
-			-- PENDING https://github.com/Allaman/emoji.nvim/issues/5
-			-- { "Allaman/emoji.nvim", opts = { enable_cmp_integration = true } },
-			"hrsh7th/cmp-emoji",
+			{ "Allaman/emoji.nvim", opts = { enable_cmp_integration = true } },
 		},
 	},
 	{ -- Snippet Engine
