@@ -9,7 +9,7 @@
 
 # 1. COMPILE LONGFORM
 open "obsidian://advanced-uri?commandid=longform%253Alongform-compile-current"
-sleep 0.3
+sleep 0.5
 
 # 2. RUN PANDOC
 md_file=$(osascript -e 'tell application "Finder"
@@ -20,11 +20,12 @@ input_no_ext=${md_file%\.md}
 date="$(date +%Y-%m-%d)"
 word_file="${input_no_ext}_${date}_CG.docx"
 
-pandoc "$md_file" --output="$word_file" --defaults="md2docx" 2>&1 || return 1
+pandoc "$md_file" --output="$word_file" --data-dir="$HOME/.config/pandoc" --defaults="md2docx" 2>&1 || return 1
 open -R "$word_file"
 
 # 3. INSERT LINE BREAKS IN TABLES
 # `^l` is the manual line break token in MS Word
+[[ ! -e "$word_file" ]] && return 1
 open "$word_file"
 sleep 0.1
 

@@ -6,7 +6,7 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 # Reports
-verbosity: WARNING
+verbosity: INFO
 fail-if-warnings: true # turn on to abort if citekeys are missing
 
 # headings
