@@ -65,6 +65,13 @@ serverConfigs.bashls = {
 serverConfigs.efm = {
 	cmd = { "efm-langserver", "-c", vim.g.linterConfigs .. "/efm.yaml" },
 	filetypes = { "sh", "markdown" }, -- limit to filestypes needed
+	on_attach = function(_, bufnr)
+		-- Disable in Obsidian vault, as `.markdownlintignore` does not work well
+		-- with efm
+		if vim.startswith(vim.api.nvim_buf_get_name(0), vim.env.VAULT_PATH) then
+			vim.cmd.LspStop("")
+		end
+	end,
 }
 
 local efmDependencies = {
@@ -273,9 +280,9 @@ serverConfigs.ltex = {
 		end, { desc = "󰓆 Add Word", buffer = bufnr })
 
 		-- Disable ltex in Obsidian vault, as there is no `.ltexignore` https://github.com/valentjn/vscode-ltex/issues/576
-		vim.defer_fn(function()
-			if vim.loop.cwd() == vim.env.VAULT_PATH then vim.cmd.LspStop("ltex") end
-		end, 300)
+		if vim.startswith(vim.api.nvim_buf_get_name(0), vim.env.VAULT_PATH) then
+			vim.cmd.LspStop("ltex")
+		end
 	end,
 }
 

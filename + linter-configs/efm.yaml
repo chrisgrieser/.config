@@ -4,11 +4,12 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 root-markers: [.git/]
+lint-debounce: 1s
 
 tools:
   shellcheck: &shellcheck
     lint-source: shellcheck
-    lint-command: |
+    lint-command: >-
       shellcheck --format=gcc --external-sources --shell=bash -
     lint-stdin: true
     lint-formats:
@@ -18,16 +19,18 @@ tools:
 
   markdownlint: &markdownlint
     lint-source: markdownlint
-    lint-command: >
-      markdownlint --config="$HOME/.config/+ linter-configs/markdownlint.yaml"
+    # 1. these rules are not disabled in the config, so they work for formatting
+    # 2. `>-` needed, otherwise won't work
+    lint-command: >- 
+      markdownlint --stdin --config="$HOME/.config/+ linter-configs/markdownlint.yaml"
       --disable=no-trailing-spaces --disable=no-multiple-blanks --disable=blanks-around-fences
-    # these rules are not disabled in the config, so they work for formatting
-    lint-stdin: false # `.markdownlintignore` does not work with stdin
+    # `.markdownlintignore` does not work with stdin, but without stdin, lints aren't live
+    lint-stdin: true 
     lint-severity: 2 # 2 = warning
-    # lint-formats:
-    #   - "%m"
-      # - "%f:%l:%c %m"
-      # - "%f: %l: %m"
+    lint-formats:
+      - "%f:%l %m"
+      - "%f:%l:%c %m"
+      - "%f: %l: %m"
 
 languages:
   sh:

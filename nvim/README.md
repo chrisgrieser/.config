@@ -4,7 +4,7 @@
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img alt="badge 2" src="https://dotfyle.com/chrisgrieser/config-nvim/badges/leaderkey?style=flat"/></a>
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img alt="badge 3" src="https://dotfyle.com/chrisgrieser/config-nvim/badges/plugin-manager?style=flat"/></a>
 
-```
+```bash
 ├── lua
 │  ├── config # keybindings, options, …
 │  ├── funcs # utility functions & personal plugins
