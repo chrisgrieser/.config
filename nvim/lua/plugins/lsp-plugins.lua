@@ -2,22 +2,11 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{
-		"OlegGulevskyy/better-ts-errors.nvim",
-		dependencies = "MunifTanjim/nui.nvim",
+	{ -- nicher typescript errors
+		"dmmulroy/ts-error-translator.nvim",
 		ft = { "typescript", "javascript" },
-		opts = {
-			keymaps = {
-				toggle = "<leader>ct",
-				go_to_definition = "<leader>cd",
-			},
-		},
+		opts = true,
 	},
-	-- { -- nicher typescript errors
-	-- 	"dmmulroy/ts-error-translator.nvim",
-	-- 	ft = { "typescript", "javascript" },
-	-- 	opts = true,
-	-- },
 	{ -- display inlay hints from LSP
 		"lvimuser/lsp-inlayhints.nvim",
 		init = function()
