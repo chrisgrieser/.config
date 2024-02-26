@@ -21,11 +21,12 @@ fi
 
 # CREATE ICON FILE
 youtube_id=$(echo "$url" | cut -d "=" -f2)
-title=$(curl -s "$url" | 
-	grep -o "<title>[^<]*" | 
-	cut -d'>' -f2- |
-	tr "/:" "--" | 
-	sed -e 's/ - YouTube//' -e 's/amp;//g'
+title=$(
+	curl -s "$url" |
+		grep -o "<title>[^<]*" |
+		cut -d'>' -f2- |
+		tr "/:" "--" |
+		sed -e 's/ - YouTube//' -e 's/amp;//g'
 )
 
 destination="$youtube_link_folder/$title.url"
