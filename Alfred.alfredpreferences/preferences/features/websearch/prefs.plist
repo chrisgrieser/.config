@@ -24,7 +24,7 @@
 			<key>text</key>
 			<string>Marginalia: {query}</string>
 			<key>url</key>
-			<string>https://search.marginalia.nu/search?query=apple</string>
+			<string>https://search.marginalia.nu/search?query={query}</string>
 		</dict>
 		<key>5EEA999D-F78D-4F89-BB24-9557712FEE77</key>
 		<dict>

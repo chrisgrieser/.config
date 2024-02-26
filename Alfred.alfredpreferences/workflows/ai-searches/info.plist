@@ -193,7 +193,7 @@
 				<key>keyword</key>
 				<string>ai</string>
 				<key>subtext</key>
-				<string>Phind &amp; ChatBot</string>
+				<string>Phind &amp; CodeMate</string>
 				<key>text</key>
 				<string>Coding AI: {query}</string>
 				<key>withspace</key>
