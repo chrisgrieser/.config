@@ -14,8 +14,12 @@ end
 
 -- DOCS https://github.com/folke/noice.nvim#-routes
 local routes = {
-	-- FIX lsp signature bug?
+	-- FIX LSP bugs?
 	{ filter = { event = "msg_show", find = "lsp_signature? handler RPC" }, skip = true },
+	{
+		filter = { event = "msg_show", find = "^%s*at process.processTicksAndRejections" },
+		skip = true,
+	},
 
 	-- code actions
 	{ filter = { event = "notify", find = "No code actions available" }, skip = true },
