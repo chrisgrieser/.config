@@ -205,8 +205,8 @@ keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = " Esc (Terminal Mode)" })
 -- BUFFERS & WINDOWS & FILES
 
 keymap({ "n", "x", "i" }, "<C-CR>", "<C-w>w", { desc = " Next Window" })
-keymap({ "n", "x" }, "<BS>", vim.cmd.bprevious, { desc = "󰽙 Prev Buffer" })
-keymap({ "n", "x" }, "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next Buffer" })
+keymap("n", "<BS>", vim.cmd.bprevious, { desc = "󰽙 Prev Buffer" })
+keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next Buffer" })
 
 keymap(
 	{ "n", "x" },
@@ -320,4 +320,3 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
-

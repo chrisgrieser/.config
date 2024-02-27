@@ -2,7 +2,8 @@
 .DS_Store
 *.icloud
 
-# Icon must end with two \r (`^M` in vim)
+# Icon must end with two \r (`^M` /  in vim)
+# (note that these are removed with certain formatting actions)
 Icon
 
 #───────────────────────────────────────────────────────────────────────────────
