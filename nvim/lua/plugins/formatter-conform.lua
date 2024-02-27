@@ -89,18 +89,23 @@ local function formattingFunc(bufnr)
 			}
 		elseif ft == "typescript" then
 			-- Biome's `source.organizeImports.biome` code action doesn't remove unused imports
-			vim.lsp.buf.code_action {
-				context = { only = { "source.addMissingImports.ts" } },
-				apply = true,
+			local actions = {
+				"source.addMissingImports.ts",
+				"source.removeUnusedImports.ts",
+				"source.organizeImports.ts",
 			}
-			-- stylua: ignore
 			-- deferred, so it does not conflict with `addMissingImports`
-			vim.defer_fn( function()
-				vim.lsp.buf.code_action {
-					context = { only = { "source.organizeImports.ts" } },
-					apply = true,
-				}
-			end, 50)
+			for i = 1, #actions do
+				vim.defer_fn(
+					function()
+						vim.lsp.buf.code_action {
+							context = { only = { actions[i] } },
+							apply = true,
+						}
+					end,
+					(i - 1) * 50
+				)
+			end
 		end
 	end)
 end

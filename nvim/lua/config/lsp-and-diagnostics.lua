@@ -66,6 +66,7 @@ end, {
 			vim.lsp.get_active_clients()
 		)
 		table.sort(clients)
+		vim.fn.uniq(clients)
 		return clients
 	end,
 })
