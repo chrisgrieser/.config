@@ -14,16 +14,14 @@ end
 
 -- DOCS https://github.com/folke/noice.nvim#-routes
 local routes = {
-	-- Stage & Commit Preview TODO.md                        │  3 -
 	-- redirect to popup when message is long
 	{
 		filter = {
 			min_height = 8,
-			-- tinygit
 			["not"] = {
 				cond = function(msg)
-					local title = msg.opts and msg.opts.title 
-					return msg.opts and (msg.opts.title or ""):find("Commit Preview")
+					local title = (msg.opts and msg.opts.title) or ""
+					return title:find("Commit Preview") or title:find("tinygit")
 				end,
 			},
 		},
