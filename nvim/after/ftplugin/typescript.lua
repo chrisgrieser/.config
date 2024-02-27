@@ -9,3 +9,7 @@ u.ftAbbr("==", "===")
 u.ftAbbr("~=", "!==")
 u.ftAbbr("elseif", "else if")
 
+
+
+vim.cmd.compiler("tsc")
+vim.bo.makeprg = "npx tsc --noEmit --skipLibCheck --strict"
