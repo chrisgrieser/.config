@@ -19,11 +19,13 @@ local routes = {
 	{
 		filter = {
 			min_height = 8,
-			["not"] = { find = "Commit Preview" }, -- tinygit
+			-- tinygit
+			["not"] = {
+				cond = function(msg) return msg.opts and (msg.opts.title or ""):find("Commit Preview") end,
+			},
 		},
 		view = "popup",
 	},
-
 
 	-- FIX LSP bugs?
 	{ filter = { event = "msg_show", find = "lsp_signature? handler RPC" }, skip = true },
