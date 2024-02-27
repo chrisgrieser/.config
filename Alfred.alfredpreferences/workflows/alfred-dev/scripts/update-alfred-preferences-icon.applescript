@@ -3,7 +3,7 @@
 -- http://codefromabove.com/2015/03/programmatically-adding-an-icon-to-a-folder-or-file/
 --------------------------------------------------------------------------------
 
-set the clipboard to POSIX file "./Alfred Preferences.icns"
+set the clipboard to POSIX file "Alfred Preferences.icns"
 set prefsPath to "/Applications/Alfred 5.app/Contents/Preferences/Alfred Preferences.app"
 
 set alfredPrefs to (POSIX file prefsPath) as alias
