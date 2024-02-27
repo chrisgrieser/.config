@@ -38,7 +38,9 @@ function _dump() {
 		grep -v "Temp" | sed "s|^|https://chrome.google.com/webstore/detail/|" \
 		>"$dump_path/browser-extensions.txt"
 
-	print "\e[1;38;5;247mBrewfile & browser-extensions-list saved at \"$(basename "$dump_path")\".\e[0m"
+	pipx list --short >"$dump_path/pipx-file"
+
+	print "\e[1;38;5;247mBrewfile, pipx & browser-extensions-list saved at \"$(basename "$dump_path")\".\e[0m"
 }
 
 function update() {
@@ -56,6 +58,9 @@ function update() {
 	# HACK -> PENDING https://github.com/mas-cli/mas/pull/496
 	mas outdated | grep -v "Highlights" | cut -f1 -d" " | xargs mas upgrade
 	# mas upgrade
+
+	_print-section "pipx"
+	pipx upgrade-all
 
 	_print-section "Finish up"
 	# - sketchybar usually updated and then has to be restarted to give permission
@@ -77,6 +82,9 @@ function listall() {
 	brew list --casks
 	_print-section "brew doctor"
 	brew doctor
+
+	_print-section "pipx list --short"
+	pipx list --short
 
 	_print-section "Mac App Store"
 	mas list

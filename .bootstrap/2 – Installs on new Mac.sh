@@ -10,5 +10,9 @@ open -a "Appcleaner" "Numbers.app" "Pages.app" "Keynote.app" \
 # ➞ sign in manually to start download
 open '/System/Applications/App Store.app'
 
+# Homebrew & MAS
 brew bundle install --no-quarantine --verbose --no-lock --file "$HOME/Desktop/Brewfile"
 brew services start felixkratz/formulae/sketchybar
+
+# pipx
+cut -d' ' -f2 "$HOME/Desktop/pipx-file" | xargs pipx install
