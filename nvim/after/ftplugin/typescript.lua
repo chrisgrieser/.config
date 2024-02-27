@@ -9,7 +9,9 @@ u.ftAbbr("==", "===")
 u.ftAbbr("~=", "!==")
 u.ftAbbr("elseif", "else if")
 
+--------------------------------------------------------------------------------
 
-
+-- set errorformat to tsc, but keep `make` as makeprg
+local maker = vim.o.makeprg
 vim.cmd.compiler("tsc")
-vim.bo.makeprg = "npx tsc --noEmit --skipLibCheck --strict"
+vim.o.makeprg = maker

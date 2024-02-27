@@ -33,7 +33,8 @@ local function quickfixCounter()
 		:gsub("^Live Grep: .-%((.+)%)", "%1")
 		:gsub("^Find Files: .-%((.+)%)", "%1")
 		:gsub("^Find Word %((.-)%) %(.-%)", "%1")
-		:gsub(" %(%)", "")
+		:gsub(" %(%)", "") -- empty brackets
+		:gsub("%-%-[%w-_]+ ?", "") -- remove flags from `makeprg`
 	return (' %s/%s "%s"'):format(qf.idx, #qf.items, qf.title) .. fileStr
 end
 
@@ -112,7 +113,7 @@ local lualineConfig = {
 		lualine_y = {
 			{ "diff" },
 			-- line count
-			{ 
+			{
 				function() return vim.api.nvim_buf_line_count(0) .. " " end,
 				cond = function() return vim.bo.buftype == "" end,
 			},

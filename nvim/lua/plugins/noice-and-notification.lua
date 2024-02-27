@@ -21,7 +21,10 @@ local routes = {
 			min_height = 8,
 			-- tinygit
 			["not"] = {
-				cond = function(msg) return msg.opts and (msg.opts.title or ""):find("Commit Preview") end,
+				cond = function(msg)
+					local title = msg.opts and msg.opts.title 
+					return msg.opts and (msg.opts.title or ""):find("Commit Preview")
+				end,
 			},
 		},
 		view = "popup",
