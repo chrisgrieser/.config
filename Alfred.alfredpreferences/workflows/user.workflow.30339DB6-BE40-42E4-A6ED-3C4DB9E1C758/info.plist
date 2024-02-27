@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>de.chris-grieser.scratchpad</string>
+	<key>category</key>
+	<string>❇️</string>
+	<key>connections</key>
+	<dict/>
+	<key>createdby</key>
+	<string>Chris Grieser</string>
+	<key>description</key>
+	<string></string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Scratchpad</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>behaviour</key>
+				<integer>1</integer>
+				<key>fontmode</key>
+				<integer>1</integer>
+				<key>footertext</key>
+				<string></string>
+				<key>inputfile</key>
+				<string>{var:scratchpad_path}</string>
+				<key>inputtype</key>
+				<integer>2</integer>
+				<key>loadingtext</key>
+				<string></string>
+				<key>outputmode</key>
+				<integer>0</integer>
+				<key>scriptinput</key>
+				<integer>0</integer>
+				<key>stackview</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.userinterface.text</string>
+			<key>uid</key>
+			<string>D17DCEA5-CF82-4BA2-A9F8-CBD9F27A23CF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>---
+
+Created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<key>uidata</key>
+	<dict>
+		<key>D17DCEA5-CF82-4BA2-A9F8-CBD9F27A23CF</key>
+		<dict>
+			<key>xpos</key>
+			<real>335</real>
+			<key>ypos</key>
+			<real>200</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>filtermode</key>
+				<integer>2</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>scratchpad_path</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string></string>
+	<key>webaddress</key>
+	<string>https://chris-grieser.de/</string>
+</dict>
+</plist>
