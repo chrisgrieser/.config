@@ -92,11 +92,15 @@
   },
   "matcher (CamelCase)": {
     "body": [
-      "/** @param {string} str */",
-      "function camelCaseMatch(str) {",
-      "\tconst clean = str.replace(/[-_.]/g, \" \");",
-      "\tconst camelCaseSeparated = str.replace(/([A-Z])/g, \" \\$1\");",
-      "\treturn [clean, camelCaseSeparated, str].join(\" \") + \" \";",
+      "/** @param {string|string[]} item */",
+      "function camelCaseMatch(item) {",
+      "\tif (typeof item === \"string\") item = [item];",
+      "\treturn item.map((str) => {",
+      "\t\tconst subwords = str.replace(/[-_.]/g, \" \");",
+      "\t\tconst fullword = str.replace(/[-_.]/g, \"\");",
+      "\t\tconst camelCaseSeparated = str.replace(/([A-Z])/g, \" $1\");",
+      "\t\treturn [subwords, camelCaseSeparated, fullword, str].join(\" \") + \" \";",
+      "\t}).join(\" \");",
       "}"
     ],
     "description": "Make Alfred Match CamelCase Results. https://www.alfredapp.com/help/workflows/inputs/script-filter/json/",

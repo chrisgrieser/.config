@@ -215,7 +215,7 @@
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>4</string>
+				<string>ss</string>
 				<key>skipuniversalaction</key>
 				<true/>
 				<key>subtext</key>
