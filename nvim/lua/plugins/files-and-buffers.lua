@@ -33,6 +33,7 @@ return {
 		},
 		opts = {
 			show_icons = true,
+			always_show_path = true,
 			leader_key = "<D-D>", -- cmd+shift+d
 			save_path = function() return vim.g.syncedData .. "/arrow-nvim-bookmarks" end,
 			window = {
