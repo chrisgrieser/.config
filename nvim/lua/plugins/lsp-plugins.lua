@@ -2,11 +2,6 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{ -- nicher typescript errors
-		"dmmulroy/ts-error-translator.nvim",
-		ft = { "typescript", "javascript" },
-		opts = true,
-	},
 	{ -- display inlay hints from LSP
 		"lvimuser/lsp-inlayhints.nvim",
 		init = function()

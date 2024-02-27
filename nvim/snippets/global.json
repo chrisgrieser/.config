@@ -12,7 +12,7 @@
     "prefix": "CONFIG"
   },
   "DOCS": {
-    "body": "$LINE_COMMENT DOCS",
+    "body": "$LINE_COMMENT DOCS ",
     "prefix": "DOCS"
   },
   "FIX": {
