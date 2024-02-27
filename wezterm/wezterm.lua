@@ -77,7 +77,7 @@ wt.on("format-tab-title", function(tab)
 	if not title or title == "" then title = tab.active_pane.title end
 
 	local icon
-	if title == "zsh" or title == "wezterm" then
+	if title == "zsh" or title == "wezterm" or title:find("/") then
 		local pwdBasefolder = tab.active_pane.current_working_dir.file_path:gsub("^.*/(.*)/$", "%1")
 		title = pwdBasefolder
 		icon = "  "
