@@ -1,5 +1,5 @@
 {
-  "blacklist": "",
+  "blacklist": "*://*.shecodes.io/*",
   "blockColor": "default",
   "blockWholeSite": true,
   "dialogTheme": "default",
@@ -36,8 +36,8 @@
   "syncAppearance": true,
   "syncBlocklist": true,
   "syncGeneral": true,
-  "syncInterval": 15,
+  "syncInterval": 120,
   "syncSubscriptions": true,
   "updateInterval": 1440,
-  "version": "8.3.3"
+  "version": "8.5.0"
 }
