@@ -139,10 +139,25 @@ function M.selectMake()
 		if recipe then table.insert(recipes, recipe) end
 	end
 
-	vim.ui.select(recipes, { prompt = " make", kind = "make-selector" }, function(selection)
+	-- release script require version number input, which does only work in the terminal
+	recipes = vim.tbl_filter(function(rec) return rec ~= "release" end, recipes)
+
+	vim.ui.select(recipes, {
+		prompt = " make",
+		kind = "make-selector",
+		format_item = function(recipe)
+			if recipe:find("tsc") then recipe = recipe .. " (↪ quickfix)" end
+			return recipe
+		end,
+	}, function(selection)
 		if not selection then return end
 		vim.cmd.update()
-		vim.cmd.lmake(selection)
+		if selection:find("tsc") then
+			vim.cmd.make(selection) -- populate global quickfix list if check with `tsc`
+			pcall(vim.cmd.cfirst)
+		else
+			vim.cmd.lmake(selection)
+		end
 	end)
 end
 
