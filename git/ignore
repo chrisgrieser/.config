@@ -3,11 +3,11 @@
 *.icloud
 
 # Icon must end with two \r (`^M` in vim)
-Icon
+Icon
 
+#───────────────────────────────────────────────────────────────────────────────
 # Aider
 .aider*
-#───────────────────────────────────────────────────────────────────────────────
 
 # production stuff / builds
 node_modules
@@ -15,11 +15,6 @@ node_modules
 __pycache__
 *.alfredworkflow
 *.dmg
-
-# jupyter notebooks
-.ipynb_checkpoints
-.virtual_documents
-.jupyter
 
 # Microsoft Office temporary files
 ~$*.docx
@@ -31,8 +26,6 @@ __pycache__
 *.kdbx
 *.pfx
 *.key
-pw.txt
-pw.md
 .zsh_history
 .bash_history
 

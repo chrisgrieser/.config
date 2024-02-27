@@ -10,7 +10,7 @@ alias mergetool="git mergetool"
 alias restore='git restore'
 alias reset='git reset'
 alias push='git push'
-alias pull='git pull'
+alias pull='git pull --tags'
 alias rebase='git rebase --interactive'
 alias unlock='rm -v "$(git rev-parse --git-dir)/index.lock"'
 

@@ -98,12 +98,13 @@ local function formattingFunc(bufnr)
 			for i = 1, #actions do
 				vim.defer_fn(
 					function()
+						vim.cmd.undojoin()
 						vim.lsp.buf.code_action {
 							context = { only = { actions[i] } },
 							apply = true,
 						}
 					end,
-					(i - 1) * 50
+					(i - 1) * 40
 				)
 			end
 		end
