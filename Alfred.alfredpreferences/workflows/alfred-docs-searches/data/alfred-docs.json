@@ -66,6 +66,10 @@
 		{
 			"title": "Text View",
 			"arg": "https://www.alfredapp.com/help/workflows/user-interface/text/"
+		},
+		{
+			"title": "Text View JSON Format",
+			"arg": "https://www.alfredapp.com/help/workflows/user-interface/text/json/"
 		}
 	]
 }

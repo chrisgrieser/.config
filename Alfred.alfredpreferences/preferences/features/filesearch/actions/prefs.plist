@@ -22,8 +22,6 @@
 		<true/>
 		<key>alfred.action.openwith</key>
 		<true/>
-		<key>alfred.action.recent</key>
-		<true/>
 		<key>alfred.action.showaslargetype</key>
 		<true/>
 		<key>alfred.action.text.copyasplaintext</key>
