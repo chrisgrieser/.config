@@ -75,6 +75,10 @@
       "notification"
     ]
   },
+  "pwd": {
+    "body": "set pwd to POSIX path of ((path to me as text) & \"::\")",
+    "prefix": "pwd"
+  },
   "resolve home": {
     "body": [
       "set unresolved_path to \"~/Documents\"",
