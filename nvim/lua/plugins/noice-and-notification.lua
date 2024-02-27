@@ -14,6 +14,17 @@ end
 
 -- DOCS https://github.com/folke/noice.nvim#-routes
 local routes = {
+	-- Stage & Commit Preview TODO.md                        │  3 -
+	-- redirect to popup when message is long
+	{
+		filter = {
+			min_height = 8,
+			["not"] = { find = "Commit Preview" }, -- tinygit
+		},
+		view = "popup",
+	},
+
+
 	-- FIX LSP bugs?
 	{ filter = { event = "msg_show", find = "lsp_signature? handler RPC" }, skip = true },
 	{
@@ -23,9 +34,6 @@ local routes = {
 
 	-- code actions
 	{ filter = { event = "notify", find = "No code actions available" }, skip = true },
-
-	-- redirect to popup when message is long
-	{ filter = { min_height = 8 }, view = "popup" },
 
 	-- write/deletion messages
 	{ filter = { event = "msg_show", find = "%d+B written$" }, view = "mini" },
