@@ -2,6 +2,7 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
+//──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} str */
 function alfredMatcher(str) {
@@ -22,17 +23,17 @@ function readFile(path) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const jsonArray = []
-
 	const cacheFile = $.getenv("alfred_workflow_data") + "/url-list.txt";
+	// GUARD
 	if (!fileExists(cacheFile)) {
-		jsonArray.push({ title: "Index missing. Create via ':nvim'", valid: false });
-		return JSON.stringify({ items: jsonArray });
+		return JSON.stringify({
+			items: [{ title: "Index missing. Create via ':nvim'", valid: false }],
+		});
 	}
 
-	readFile(cacheFile)
+	const items = readFile(cacheFile)
 		.split("\n")
-		.forEach(url => {
+		.map((url) => {
 			const site = url.split("/").pop().split(".").shift();
 			let name = url.split("#").pop().replaceAll("%3A", ":").replaceAll("'", "");
 			let synonyms = "";
@@ -53,14 +54,21 @@ function run() {
 			if (name.startsWith("vim.")) matcher += " " + name.slice(4);
 			if (site === "builtin") matcher += " fn";
 
-			jsonArray.push({
+			return {
 				title: name + synonyms,
 				match: matcher,
 				subtitle: site,
 				arg: url,
+				quicklookurl: url,
 				uid: url,
-			});
+			};
 		});
 
-	return JSON.stringify({ items: jsonArray });
+	return JSON.stringify({
+		items: items,
+		cache: {
+			seconds: 3600 * 24 * 7 * 4, // can take long, cache refreshed with other cache
+			loosereload: true,
+		},
+	});
 }

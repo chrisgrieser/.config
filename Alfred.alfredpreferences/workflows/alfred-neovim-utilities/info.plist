@@ -91,7 +91,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>8A1F6028-B56D-4223-8008-F364B73183A5</string>
+				<string>E9F4076D-8FEE-46EB-A3B8-3BEBFFE07559</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -267,6 +267,19 @@
 		</array>
 		<key>D818D50E-55A9-45FB-AC92-10FCF4BC8B60</key>
 		<array/>
+		<key>E9F4076D-8FEE-46EB-A3B8-3BEBFFE07559</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8A1F6028-B56D-4223-8008-F364B73183A5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>F178F3ED-E855-4DC9-A178-D839E9C2C48D</key>
 		<array/>
 		<key>F5BC25CE-C34C-4EF9-B428-71EDB9170948</key>
@@ -325,6 +338,31 @@
 			<string>71D977C5-6C8A-47D2-A625-4E3E79D785D2</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>on run 
+	tell application id "com.runningwithcrayons.Alfred" to reload workflow (system attribute "alfred_workflow_bundleid") 
+end run</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E9F4076D-8FEE-46EB-A3B8-3BEBFFE07559</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -913,8 +951,10 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
+			<key>note</key>
+			<string>Re-Create Index</string>
 			<key>xpos</key>
-			<real>820</real>
+			<real>720</real>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
@@ -954,7 +994,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>recent files</string>
 			<key>xpos</key>
-			<real>45</real>
+			<real>35</real>
 			<key>ypos</key>
 			<real>255</real>
 		</dict>
@@ -976,7 +1016,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>(re)create index</string>
 			<key>xpos</key>
-			<real>660</real>
+			<real>560</real>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
@@ -996,16 +1036,16 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>825</real>
+			<real>725</real>
 			<key>ypos</key>
-			<real>140</real>
+			<real>165</real>
 		</dict>
 		<key>8A1F6028-B56D-4223-8008-F364B73183A5</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>965</real>
+			<real>1005</real>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
@@ -1014,7 +1054,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>1105</real>
+			<real>1145</real>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
@@ -1050,6 +1090,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>340</real>
 			<key>ypos</key>
 			<real>885</real>
+		</dict>
+		<key>E9F4076D-8FEE-46EB-A3B8-3BEBFFE07559</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>note</key>
+			<string>Reload Workflow Cache</string>
+			<key>xpos</key>
+			<real>860</real>
+			<key>ypos</key>
+			<real>20</real>
 		</dict>
 		<key>F178F3ED-E855-4DC9-A178-D839E9C2C48D</key>
 		<dict>
@@ -1253,7 +1304,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.8.1</string>
+	<string>1.9.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

@@ -16,7 +16,10 @@ function alfredMatcher(str) {
 function httpRequest(url) {
 	const queryURL = $.NSURL.URLWithString(url);
 	const requestData = $.NSData.dataWithContentsOfURL(queryURL);
-	const requestString = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
+	const requestString = $.NSString.alloc.initWithDataEncoding(
+		requestData,
+		$.NSUTF8StringEncoding,
+	).js;
 	return requestString;
 }
 
@@ -41,7 +44,8 @@ function run() {
 		});
 
 	// awesome-neovim list
-	const awesomeNeovimList = "https://raw.githubusercontent.com/rockerBOO/awesome-neovim/main/README.md";
+	const awesomeNeovimList =
+		"https://raw.githubusercontent.com/rockerBOO/awesome-neovim/main/README.md";
 
 	/** @type {AlfredItem[]} */
 	const pluginsArr = httpRequest(awesomeNeovimList)
@@ -59,6 +63,7 @@ function run() {
 				match: alfredMatcher(repo),
 				subtitle: author + "  ·  " + desc,
 				arg: url,
+				quicklookurl: url,
 				uid: repo,
 				mods: {
 					shift: {
@@ -70,5 +75,11 @@ function run() {
 			};
 		});
 
-	return JSON.stringify({ items: pluginsArr });
+	return JSON.stringify({
+		items: pluginsArr,
+		cache: {
+			seconds: 300, // faster, to update install icons
+			loosereload: true,
+		},
+	});
 }

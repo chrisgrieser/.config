@@ -12,6 +12,7 @@ function httpRequest(url) {
 	return requestStr;
 }
 
+/** @param {string} title */
 function shortenSeason(title) {
 	if (!title) return "";
 	return title.replace(/ Season (\d+)$/, " S$1");
@@ -57,6 +58,7 @@ function run(argv) {
 			title: displayText,
 			subtitle: subtitle,
 			arg: anime.url,
+			quicklookurl: anime.url,
 			mods: {
 				cmd: {
 					arg: titleJap,

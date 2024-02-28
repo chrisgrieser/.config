@@ -2,6 +2,7 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
+//──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} str */
 function alfredMatcher(str) {
@@ -53,7 +54,7 @@ function run() {
 		else if (name === "obsidian-vimrc.vim") type = "obsidian";
 		else type = name.split(".").pop() || ""; // default: extension
 
-		const iconObj = {};
+		const iconObj = { path: "" };
 		const useFileicon = ["webloc", "url", "ini", "mjs"].includes(type);
 		const isImageFile = ["png", "icns"].includes(type);
 		if (useFileicon) {

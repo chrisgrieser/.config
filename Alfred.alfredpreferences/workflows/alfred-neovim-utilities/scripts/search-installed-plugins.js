@@ -1,9 +1,7 @@
 #!/usr/bin/env osascript -l JavaScript
-
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
-
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} str */
@@ -31,7 +29,6 @@ function run() {
 	const masonLocation = $.getenv("mason_installation_path");
 	let pluginArray = [];
 	let masonArray = [];
-	//───────────────────────────────────────────────────────────────────────────
 
 	if (pluginLocation && fileExists(pluginLocation)) {
 		pluginArray = app
@@ -44,12 +41,14 @@ function run() {
 				const name = remote.split("/")[4].slice(0, -4); // remove ".git"
 				const repo = `${owner}/${name}`;
 				const installPath = $.getenv("plugin_installation_path") + "/" + name;
+				const url = "https://github.com/" + repo;
 
 				return {
 					title: name,
 					subtitle: owner,
 					match: alfredMatcher(repo) + "plugin",
-					arg: "https://github.com/" + repo,
+					arg: url,
+					quicklookurl: url,
 					mods: {
 						cmd: { arg: repo },
 						fn: { arg: installPath },
@@ -63,7 +62,9 @@ function run() {
 		const masonRegistryPath =
 			masonLocation + "/registries/github/mason-org/mason-registry/registry.json";
 		const masonRegistry = JSON.parse(readFile(masonRegistryPath));
-		const installedTools = app.doShellScript(`cd "${masonLocation}/packages" && ls -1`).split("\r");
+		const installedTools = app
+			.doShellScript(`cd "${masonLocation}/packages" && ls -1`)
+			.split("\r");
 		const masonIcon = "./mason-logo.png";
 
 		masonArray = masonRegistry
@@ -81,6 +82,7 @@ function run() {
 					match: alfredMatcher(tool.name) + categoryList,
 					icon: { path: masonIcon },
 					arg: tool.homepage,
+					quicklookurl: tool.homepage,
 					uid: tool.name,
 					mods: {
 						cmd: { valid: false, subtitle: "🚫 Not for Mason Tool" },
@@ -91,5 +93,11 @@ function run() {
 			});
 	}
 
-	return JSON.stringify({ items: [...masonArray, ...pluginArray] });
+	return JSON.stringify({
+		items: [...masonArray, ...pluginArray],
+		cache: {
+			seconds: 15, // faster, since installs can change
+			loosereload: true,
+		},
+	});
 }

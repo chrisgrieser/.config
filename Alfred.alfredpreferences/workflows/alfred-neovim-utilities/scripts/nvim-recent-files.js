@@ -40,5 +40,11 @@ function run() {
 			};
 		});
 
-	return JSON.stringify({ items: oldfiles });
+	return JSON.stringify({
+		items: oldfiles,
+		cache: {
+			seconds: 60, // quick, since often updated
+			loosereload: true,
+		},
+	});
 }
