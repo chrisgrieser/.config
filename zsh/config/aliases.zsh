@@ -34,7 +34,7 @@ function bat {
 function aider {
 	local style
 	style="$(defaults read -g AppleInterfaceStyle &>/dev/null && echo "dark" || echo "light")"
-	command aider --"$style"--mode
+	command aider --"$style"-mode "$@"
 }
 
 # utils
