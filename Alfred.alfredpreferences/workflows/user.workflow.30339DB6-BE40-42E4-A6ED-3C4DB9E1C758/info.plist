@@ -86,11 +86,11 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string></string>
+	<string>Simple Scratchpad</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Scratchpad</string>
+	<string>QuickPad</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -116,7 +116,7 @@
 				<key>footertext</key>
 				<string>⌘⏎: Save    ⇧⏎: Preview Markdown     ⎋: Abort</string>
 				<key>inputfile</key>
-				<string>{var:scratchpad_path}</string>
+				<string>{var:pad_path}/{var:pad_name}.md</string>
 				<key>inputtype</key>
 				<integer>2</integer>
 				<key>loadingtext</key>
@@ -143,9 +143,9 @@
 				<key>allowemptyfiles</key>
 				<true/>
 				<key>createintermediatefolders</key>
-				<false/>
+				<true/>
 				<key>filename</key>
-				<string>{var:scratchpad_path}</string>
+				<string>{var:pad_path}/{var:pad_name}.md</string>
 				<key>filetext</key>
 				<string>{query}</string>
 				<key>ignoredynamicplaceholders</key>
@@ -277,7 +277,9 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>---
+	<string>Requires Alfred 5.5
+
+---
 
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
@@ -340,9 +342,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string></string>
+				<string>~/Desktop</string>
 				<key>filtermode</key>
-				<integer>2</integer>
+				<integer>1</integer>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>
@@ -351,15 +353,36 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>description</key>
 			<string></string>
 			<key>label</key>
-			<string></string>
+			<string>Folder</string>
 			<key>type</key>
 			<string>filepicker</string>
 			<key>variable</key>
-			<string>scratchpad_path</string>
+			<string>pad_path</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>quickpad</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>without file extension</string>
+			<key>label</key>
+			<string>Filename</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>pad_name</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string></string>
+	<string>0.9</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

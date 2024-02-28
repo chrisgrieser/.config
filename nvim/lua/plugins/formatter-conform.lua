@@ -98,7 +98,6 @@ local function formattingFunc(bufnr)
 			for i = 1, #actions do
 				vim.defer_fn(
 					function()
-						vim.cmd.undojoin()
 						vim.lsp.buf.code_action {
 							context = { only = { actions[i] } },
 							apply = true,
