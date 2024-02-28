@@ -52,7 +52,8 @@ function run() {
 
 	//───────────────────────────────────────────────────────────────────────────
 
-	const masonRegistryPath = masonLocation + "/registries/github/mason-org/mason-registry/registry.json";
+	const masonRegistryPath =
+		masonLocation + "/registries/github/mason-org/mason-registry/registry.json";
 	const masonRegistry = JSON.parse(readFile(masonRegistryPath));
 	const installedTools = app.doShellScript(`cd "${masonLocation}/packages" && ls -1`).split("\r");
 	const masonIcon = "./mason-logo.png";
@@ -70,8 +71,15 @@ function run() {
 			subtitle: subtitle,
 			match: alfredMatcher(tool.name) + categoryList + " " + languages,
 			arg: tool.homepage,
+			quicklookurl: tool.homepage,
 			icon: { path: masonIcon },
 		};
 	});
-	return JSON.stringify({ items: availableTools });
+	return JSON.stringify({
+		items: availableTools,
+		cache: {
+			seconds: 300, // faster, to update install icons
+			loosereload: true,
+		},
+	});
 }
