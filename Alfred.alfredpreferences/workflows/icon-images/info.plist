@@ -21,19 +21,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>2FADC333-4C32-41FF-A920-B2329D6C4DC2</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>4C0FB49A-F1F8-4F3C-9A14-7D9D74366618</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>3014658F-1912-4945-BE42-94D7C52E614B</key>
 		<array>
 			<dict>
@@ -52,19 +39,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>C8B8FDDD-C5E0-4FAB-9460-6DE156051CF5</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>5CD7018E-424D-4EAB-BA4A-E7D868C11230</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2FADC333-4C32-41FF-A920-B2329D6C4DC2</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -310,46 +284,43 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>anno</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Annotate last screenshot</string>
-				<key>withspace</key>
-				<true/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>public.jpeg</string>
+					<string>public.png</string>
+				</array>
+				<key>name</key>
+				<string>OCR Text from Image</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.trigger.action</string>
 			<key>uid</key>
-			<string>5CD7018E-424D-4EAB-BA4A-E7D868C11230</string>
+			<string>3014658F-1912-4945-BE42-94D7C52E614B</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
+				<key>browser</key>
 				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>last-screenshot.sh</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>cleanshot://capture-text?filepath={query}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>2FADC333-4C32-41FF-A920-B2329D6C4DC2</string>
+			<string>E4B297D7-3D56-4C37-8D5B-C64BBF44747E</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -396,41 +367,36 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>public.jpeg</string>
-					<string>public.png</string>
-				</array>
-				<key>name</key>
-				<string>OCR Text from Image</string>
+				<key>openwith</key>
+				<string>/System/Volumes/Data/Applications/Pixelmator Pro.app</string>
+				<key>sourcefile</key>
+				<string></string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
+			<string>alfred.workflow.action.openfile</string>
 			<key>uid</key>
-			<string>3014658F-1912-4945-BE42-94D7C52E614B</string>
+			<string>B63198BC-AC4C-4C91-9010-DE88095682EF</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>cleanshot://capture-text?filepath={query}</string>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>com.apple.icns</string>
+					<string>public.jpeg</string>
+					<string>public.png</string>
+				</array>
+				<key>name</key>
+				<string>Open with Pixelmator</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.trigger.action</string>
 			<key>uid</key>
-			<string>E4B297D7-3D56-4C37-8D5B-C64BBF44747E</string>
+			<string>9B781278-00BF-4A9E-BF99-D6E0F72074F4</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -473,42 +439,6 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>71718F0B-0AC8-4F2E-AA29-85C863F1AE69</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string>/System/Volumes/Data/Applications/Pixelmator Pro.app</string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>B63198BC-AC4C-4C91-9010-DE88095682EF</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>com.apple.icns</string>
-					<string>public.jpeg</string>
-					<string>public.png</string>
-				</array>
-				<key>name</key>
-				<string>Open with Pixelmator</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>9B781278-00BF-4A9E-BF99-D6E0F72074F4</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -654,23 +584,14 @@
 			<key>ypos</key>
 			<real>375</real>
 		</dict>
-		<key>2FADC333-4C32-41FF-A920-B2329D6C4DC2</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>670</real>
-			<key>ypos</key>
-			<real>145</real>
-		</dict>
 		<key>3014658F-1912-4945-BE42-94D7C52E614B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>520</real>
+			<real>515</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>155</real>
 		</dict>
 		<key>3F8BF243-EE01-4E69-8573-2960822A3915</key>
 		<dict>
@@ -686,18 +607,9 @@
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>860</real>
+			<real>695</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>5CD7018E-424D-4EAB-BA4A-E7D868C11230</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>515</real>
-			<key>ypos</key>
-			<real>145</real>
 		</dict>
 		<key>682D1225-A622-4061-9B75-41FC1037A341</key>
 		<dict>
@@ -751,9 +663,9 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>510</real>
+			<real>520</real>
 			<key>ypos</key>
-			<real>460</real>
+			<real>295</real>
 		</dict>
 		<key>A069BE51-DA62-4835-8048-AF3A608C97D0</key>
 		<dict>
@@ -778,9 +690,9 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>685</real>
+			<real>695</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>290</real>
 		</dict>
 		<key>BCDE5A63-BF29-4CD2-B482-D2A56CD510A1</key>
 		<dict>
@@ -814,9 +726,9 @@
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>700</real>
+			<real>695</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>155</real>
 		</dict>
 		<key>F0335C72-7DC6-4793-ADCD-3909E4CDE001</key>
 		<dict>
