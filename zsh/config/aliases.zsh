@@ -31,12 +31,6 @@ function bat {
 	command bat --theme="$theme" "$@"
 }
 
-function aider {
-	local style
-	style="$(defaults read -g AppleInterfaceStyle &>/dev/null && echo "dark" || echo "light")"
-	command aider --"$style"-mode "$@"
-}
-
 # utils
 alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
 alias prose='ssh nanotipsforvim@prose.sh'
