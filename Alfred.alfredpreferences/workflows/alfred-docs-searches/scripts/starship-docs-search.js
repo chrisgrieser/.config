@@ -14,7 +14,8 @@ function alfredMatcher(str) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const baseURL = "https://raw.githubusercontent.com/starship/starship/master/docs/config/README.md";
+	const baseURL =
+		"https://raw.githubusercontent.com/starship/starship/master/docs/config/README.md";
 	const docsURL = "https://starship.rs/config/#";
 
 	const workArray = app
@@ -33,5 +34,8 @@ function run() {
 			};
 		});
 
-	return JSON.stringify({ items: workArray });
+	return JSON.stringify({
+		items: workArray,
+		cache: { seconds: 3600 * 24 * 7 },
+	});
 }

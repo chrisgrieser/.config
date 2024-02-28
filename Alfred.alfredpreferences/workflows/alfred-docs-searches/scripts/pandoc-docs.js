@@ -62,5 +62,8 @@ function run() {
 			};
 		});
 
-	return JSON.stringify({ items: sectionsArr });
+	return JSON.stringify({
+		items: sectionsArr,
+		cache: { seconds: 1800 },
+	});
 }

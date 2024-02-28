@@ -29,9 +29,7 @@ function run() {
 		.map((line) => {
 			let [, subsite, title] = line.match(ahrefRegex) || [];
 			if (!subsite) return {};
-			title = title
-				.replace(ahrefRegex, "$2")
-				.replace(/^[.0-9]+ &ndash; /, "");
+			title = title.replace(ahrefRegex, "$2").replace(/^[.0-9]+ &ndash; /, "");
 			if (title.includes(">")) return {};
 			const url = luaManualBaseURL + subsite;
 
@@ -43,5 +41,8 @@ function run() {
 			};
 		});
 
-	return JSON.stringify({ items: sites });
+	return JSON.stringify({
+		items: sites,
+		cache: { seconds: 1800 },
+	});
 }

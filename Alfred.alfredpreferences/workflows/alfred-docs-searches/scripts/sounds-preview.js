@@ -21,5 +21,8 @@ function run() {
 				arg: path,
 			};
 		});
-	return JSON.stringify({ items: soundsArr });
+	return JSON.stringify({
+		items: soundsArr,
+		cache: { seconds: 36000 },
+	});
 }

@@ -62,5 +62,8 @@ function run() {
 		uid: "getting-started",
 	});
 
-	return JSON.stringify({ items: sites });
+	return JSON.stringify({
+		items: sites,
+		cache: { seconds: 3600 * 24 * 7 },
+	});
 }

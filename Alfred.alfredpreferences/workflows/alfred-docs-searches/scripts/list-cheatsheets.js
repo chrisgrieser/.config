@@ -6,7 +6,8 @@ app.includeStandardAdditions = true;
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const alfredMatcher = (/** @type {string} */ str) => str.replace(/[-()/_.:]/g, " ") + " " + str + " ";
+const alfredMatcher = (/** @type {string} */ str) =>
+	str.replace(/[-()/_.:]/g, " ") + " " + str + " ";
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -27,5 +28,8 @@ function run() {
 			};
 		});
 
-	return JSON.stringify({ items: jsonArray });
+	return JSON.stringify({
+		items: jsonArray,
+		cache: { seconds: 3600 * 24 },
+	});
 }

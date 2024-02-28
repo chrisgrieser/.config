@@ -35,5 +35,8 @@ function run() {
 			};
 		});
 
-	return JSON.stringify({ items: jsonArr });
+	return JSON.stringify({
+		items: jsonArr,
+		cache: { seconds: 3600 * 24 * 7 },
+	});
 }
