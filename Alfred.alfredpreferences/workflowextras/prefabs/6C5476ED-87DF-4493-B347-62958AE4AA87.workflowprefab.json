@@ -22,7 +22,7 @@
         "uid" : "14C8CAEE-9B36-494B-8F0B-ECCF215CBD44",
         "note" : "",
         "workflowobjectconfig" : {
-          "script" : "on run\n\ntell application id \"com.runningwithcrayons.Alfred\" to reload workflow (system attribute \"alfred_workflow_uid\")\nreturn \"aaa\"\n\nend run",
+          "script" : "on run\n\ntell application id \"com.runningwithcrayons.Alfred\" to reload workflow (system attribute \"alfred_workflow_bundleid\")\nreturn \"aaa\"\n\nend run",
           "scriptfile" : "",
           "escaping" : 102,
           "scriptargtype" : 1,
@@ -70,5 +70,5 @@
       }
     ]
   },
-  "description" : "by reloading the workflow"
+  "description" : ""
 }

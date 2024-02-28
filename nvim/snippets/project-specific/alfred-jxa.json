@@ -98,7 +98,7 @@
       "\treturn item.map((str) => {",
       "\t\tconst subwords = str.replace(/[-_.]/g, \" \");",
       "\t\tconst fullword = str.replace(/[-_.]/g, \"\");",
-      "\t\tconst camelCaseSeparated = str.replace(/([A-Z])/g, \" $1\");",
+      "\t\tconst camelCaseSeparated = str.replace(/([A-Z])/g, \" \\$1\");",
       "\t\treturn [subwords, camelCaseSeparated, fullword, str].join(\" \") + \" \";",
       "\t}).join(\" \");",
       "}"
@@ -115,5 +115,9 @@
       "}"
     ],
     "prefix": "matcher (simple)"
+  },
+  "reload Alfred workflow": {
+    "body": "Application(\"com.runningwithcrayons.Alfred\").reloadWorkflow($.getenv(\"alfred_workflow_bundleid\"))",
+    "prefix": "reload Alfred workflow"
   }
 }
