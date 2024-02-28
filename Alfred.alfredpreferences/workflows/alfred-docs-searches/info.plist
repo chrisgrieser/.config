@@ -2428,7 +2428,7 @@ window_name</string>
 				<key>script</key>
 				<string>on run
 
-tell application id "com.runningwithcrayons.Alfred" to reload workflow (system attribute "alfred_workflow_uid")
+tell application id "com.runningwithcrayons.Alfred" to reload workflow (system attribute "alfred_workflow_bundleid")
 return "aaa"
 
 end run</string>

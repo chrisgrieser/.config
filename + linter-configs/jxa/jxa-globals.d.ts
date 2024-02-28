@@ -141,7 +141,9 @@ declare const Application: {
 		// biome-ignore lint/suspicious/noExplicitAny: later
 		processes: any;
 	};
-	( name: "Reminders"): MacAppObj & {
+	(
+		name: "Reminders",
+	): MacAppObj & {
 		defaultList(): ReminderList;
 		lists: {
 			byName(name: string): ReminderList;
@@ -173,7 +175,9 @@ declare const Application: {
 	): MacAppObj & {
 		// biome-ignore lint/complexity/noBannedTypes: <explanation>
 		setConfiguration(envVar: string, options: Object): void;
-		revealWorkflow(workflowId: string): void; // workflow id = name of workflow folder
+		// workflowId: workflow uid (name of workflow folder) || workflow bundle id
+		revealWorkflow(workflowId: string): void;
+		reloadWorkflow(workflowId: string): void;
 	};
 	(
 		name: "Safari" | "Webkit",
