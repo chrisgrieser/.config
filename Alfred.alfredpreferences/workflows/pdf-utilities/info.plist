@@ -111,6 +111,19 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>A1BEE9DE-BFDD-4169-8C37-DB9EC93877A5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A1BEE9DE-BFDD-4169-8C37-DB9EC93877A5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
 				<string>2D2FDAAD-9FAB-40CF-80BD-CECE6BC224E5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -466,21 +479,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string>/System/Applications/Preview.app</string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>7A3622A0-DE0C-4DCE-92F3-C4ADD2279EBB</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>acceptsmulti</key>
 				<integer>1</integer>
 				<key>filetypes</key>
@@ -501,6 +499,21 @@
 			<key>config</key>
 			<dict>
 				<key>openwith</key>
+				<string>/System/Applications/Preview.app</string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>7A3622A0-DE0C-4DCE-92F3-C4ADD2279EBB</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
 				<string></string>
 				<key>sourcefile</key>
 				<string></string>
@@ -511,6 +524,19 @@
 			<string>2D2FDAAD-9FAB-40CF-80BD-CECE6BC224E5</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>stackview</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.userinterface.pdf</string>
+			<key>uid</key>
+			<string>A1BEE9DE-BFDD-4169-8C37-DB9EC93877A5</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -622,7 +648,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>210</real>
+			<real>365</real>
 			<key>ypos</key>
 			<real>705</real>
 		</dict>
@@ -672,6 +698,15 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<real>305</real>
 			<key>ypos</key>
 			<real>275</real>
+		</dict>
+		<key>A1BEE9DE-BFDD-4169-8C37-DB9EC93877A5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>205</real>
+			<key>ypos</key>
+			<real>705</real>
 		</dict>
 		<key>AD5BE9DA-AEFF-4FF1-89B2-2D712F9BC487</key>
 		<dict>
