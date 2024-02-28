@@ -21,7 +21,7 @@ alias grep='grep --color'
 alias mkdir='mkdir -pv' # create intermediate directories & verbose
 alias curl='curl --progress-bar'
 alias jless='jless --no-line-numbers'
-alias tokei='tokei --compact'
+alias tokei="tokei --compact --exclude='*.txt' --exclude='*.json' --num-format=underscores"
 function which { builtin which -a "$@" | bat --language=sh --wrap=character; } # colorized & showing all
 
 # dark-mode aware
