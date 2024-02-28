@@ -131,5 +131,9 @@ function run() {
 	return JSON.stringify({
 		items: scriptFilterArr,
 		variables: { ownerOfRepo: "1" },
+		cache: {
+			seconds: 15, // short, since cloned repos should be available immediately
+			loosereload: true,
+		},
 	});
 }

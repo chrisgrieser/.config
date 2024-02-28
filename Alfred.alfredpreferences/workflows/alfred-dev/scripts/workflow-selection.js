@@ -8,7 +8,7 @@ app.includeStandardAdditions = true;
 function run() {
 	/** @type AlfredItem[] */
 	const items = app
-		.doShellScript("cd .. && ls")
+		.doShellScript("cd .. && ls -t")
 		.split("\r")
 		.map((workflowUid) => {
 			return {
