@@ -116,7 +116,7 @@
 				<key>footertext</key>
 				<string>⌘⏎: Save    ⇧⏎: Preview Markdown     ⎋: Abort</string>
 				<key>inputfile</key>
-				<string>{var:pad_path}/{var:pad_name}.md</string>
+				<string>{var:pad_path}</string>
 				<key>inputtype</key>
 				<integer>2</integer>
 				<key>loadingtext</key>
@@ -145,7 +145,7 @@
 				<key>createintermediatefolders</key>
 				<true/>
 				<key>filename</key>
-				<string>{var:pad_path}/{var:pad_name}.md</string>
+				<string>{var:pad_path}</string>
 				<key>filetext</key>
 				<string>{query}</string>
 				<key>ignoredynamicplaceholders</key>
@@ -342,18 +342,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>~/Desktop</string>
+				<string>~/Desktop/QuickPad.md</string>
 				<key>filtermode</key>
-				<integer>1</integer>
+				<integer>2</integer>
 				<key>placeholder</key>
-				<string></string>
+				<string>QuickPad.md</string>
 				<key>required</key>
 				<true/>
 			</dict>
 			<key>description</key>
 			<string></string>
 			<key>label</key>
-			<string>Folder</string>
+			<string>Path of QuickPad</string>
 			<key>type</key>
 			<string>filepicker</string>
 			<key>variable</key>
@@ -362,23 +362,27 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>default</key>
-				<string>quickpad</string>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
+				<key>defaultvalue</key>
+				<integer>5</integer>
+				<key>markercount</key>
+				<integer>5</integer>
+				<key>maxvalue</key>
+				<integer>10</integer>
+				<key>minvalue</key>
+				<integer>0</integer>
+				<key>onlystoponmarkers</key>
 				<true/>
-				<key>trim</key>
+				<key>showmarkers</key>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>without file extension</string>
+			<string></string>
 			<key>label</key>
-			<string>Filename</string>
+			<string></string>
 			<key>type</key>
-			<string>textfield</string>
+			<string>slider</string>
 			<key>variable</key>
-			<string>pad_name</string>
+			<string>test</string>
 		</dict>
 	</array>
 	<key>version</key>

@@ -12,6 +12,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>771F46DF-C1A0-4933-842D-9FD63DB0D1B0</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>9C73225B-1D01-43D2-8072-FD5B2B517112</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -24,9 +34,9 @@
 				<key>destinationuid</key>
 				<string>985C673E-3A2A-4AC4-BEF3-5FE62B26EF89</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Preview</string>
+				<string>⇧: Preview</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -36,6 +46,29 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>5B12407A-89B9-4C89-ADDD-D98F9E818361</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>985C673E-3A2A-4AC4-BEF3-5FE62B26EF89</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>771F46DF-C1A0-4933-842D-9FD63DB0D1B0</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Reveal in Finder</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>9C73225B-1D01-43D2-8072-FD5B2B517112</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -84,21 +117,13 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
+				<key>path</key>
 				<string></string>
-				<key>title</key>
-				<string>✅ Meme copied to clipboard</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.action.revealfile</string>
 			<key>uid</key>
-			<string>34F19C54-7DC2-42F1-A9AE-00DD0B1500BD</string>
+			<string>771F46DF-C1A0-4933-842D-9FD63DB0D1B0</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -127,6 +152,21 @@
 			<key>config</key>
 			<dict>
 				<key>tasksettings</key>
+				<dict/>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/macOS/clipboard.set.image.data</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>9C73225B-1D01-43D2-8072-FD5B2B517112</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
 				<dict>
 					<key>target_path</key>
 					<string>{var:meme_folder}</string>
@@ -144,8 +184,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>✅ Meme copied to clipboard</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>34F19C54-7DC2-42F1-A9AE-00DD0B1500BD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>columncount</key>
-				<integer>5</integer>
+				<integer>4</integer>
 				<key>filterable</key>
 				<true/>
 				<key>imageaspect</key>
@@ -175,21 +236,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>tasksettings</key>
-				<dict/>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/macOS/clipboard.set.image.data</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>9C73225B-1D01-43D2-8072-FD5B2B517112</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>imageresizemode</key>
 				<integer>0</integer>
 				<key>stackview</key>
@@ -212,44 +258,51 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>34F19C54-7DC2-42F1-A9AE-00DD0B1500BD</key>
 		<dict>
 			<key>xpos</key>
-			<real>720</real>
+			<real>895</real>
 			<key>ypos</key>
-			<real>110</real>
+			<real>195</real>
 		</dict>
 		<key>5B12407A-89B9-4C89-ADDD-D98F9E818361</key>
 		<dict>
 			<key>xpos</key>
-			<real>390</real>
+			<real>385</real>
 			<key>ypos</key>
-			<real>110</real>
+			<real>195</real>
+		</dict>
+		<key>771F46DF-C1A0-4933-842D-9FD63DB0D1B0</key>
+		<dict>
+			<key>xpos</key>
+			<real>750</real>
+			<key>ypos</key>
+			<real>40</real>
 		</dict>
 		<key>80009692-2016-4BC7-8950-0B9A68D3BC11</key>
 		<dict>
 			<key>xpos</key>
-			<real>225</real>
+			<real>220</real>
 			<key>ypos</key>
-			<real>110</real>
+			<real>195</real>
 		</dict>
 		<key>985C673E-3A2A-4AC4-BEF3-5FE62B26EF89</key>
 		<dict>
 			<key>xpos</key>
-			<real>560</real>
+			<real>550</real>
 			<key>ypos</key>
-			<real>240</real>
+			<real>280</real>
 		</dict>
 		<key>9C73225B-1D01-43D2-8072-FD5B2B517112</key>
 		<dict>
 			<key>xpos</key>
-			<real>560</real>
+			<real>735</real>
 			<key>ypos</key>
-			<real>110</real>
+			<real>195</real>
 		</dict>
 		<key>AA64FF24-5662-41EE-82E9-FE2C6C17CB33</key>
 		<dict>
 			<key>xpos</key>
-			<real>50</real>
+			<real>45</real>
 			<key>ypos</key>
-			<real>110</real>
+			<real>195</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

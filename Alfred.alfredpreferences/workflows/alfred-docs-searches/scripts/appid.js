@@ -2,7 +2,6 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
-
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -30,5 +29,8 @@ function run() {
 			};
 		});
 
-	return JSON.stringify({ items: apps });
+	return JSON.stringify({
+		items: apps,
+		cache: { seconds: 1800 },
+	});
 }
