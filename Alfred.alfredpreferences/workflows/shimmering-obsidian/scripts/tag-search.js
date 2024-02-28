@@ -1,9 +1,8 @@
 #!/usr/bin/env osascript -l JavaScript
-
 ObjC.import("stdlib");
-ObjC.import("Foundation");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
+//──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} path */
 function readFile(path) {
@@ -14,11 +13,17 @@ function readFile(path) {
 
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
-/** @param {string} str */
-function alfredMatcher(str) {
-	const clean = str.replace(/[-_.#]/g, " ");
-	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
-	return [clean, camelCaseSeparated, str].join(" ") + " ";
+/** @param {string|string[]} item */
+function camelCaseMatch(item) {
+	if (typeof item === "string") item = [item];
+	return item
+		.map((str) => {
+			const subwords = str.replace(/[-_.]/g, " ");
+			const fullword = str.replace(/[-_.]/g, "");
+			const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
+			return [subwords, camelCaseSeparated, fullword, str].join(" ") + " ";
+		})
+		.join(" ");
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -33,8 +38,6 @@ function run() {
 	const tagsJSON = `${vaultPath}/${configFolder}/plugins/metadata-extractor/tags.json`;
 	const mergeNestedTags = $.getenv("merge_nested_tags") === "1";
 	const superIconFile = $.getenv("supercharged_icon_file");
-
-	const jsonArray = [];
 
 	let superIconList = [];
 	if (superIconFile && fileExists(superIconFile)) {
@@ -87,7 +90,7 @@ function run() {
 		tagsArray = mergedTags;
 	}
 
-	tagsArray.forEach(
+	tagsArray = tagsArray.map(
 		(/** @type {{ tag: string; merged: boolean; tagCount: number; }} */ tagData) => {
 			const tagName = tagData.tag;
 			const tagQuery =
@@ -116,18 +119,26 @@ function run() {
 				});
 			}
 
-			jsonArray.push({
+			const tagCountStr = tagData.tagCount ? `${tagData.tagCount}x` : "";
+
+			return {
 				title: superchargedIcon + "#" + tagName + superchargedIcon2,
-				subtitle: tagData.tagCount + "x" + mergeInfo,
-				match: alfredMatcher("#" + tagName) + extraMatcher,
+				subtitle: tagCountStr + mergeInfo,
+				match: camelCaseMatch("#" + tagName) + extraMatcher,
 				uid: tagName,
 				mods: { cmd: { arg: tagQuery } },
 				// passed to next script filter
 				arg: "",
 				variables: { selectedTag: tagName },
-			});
+			};
 		},
 	);
 
-	return JSON.stringify({ items: jsonArray });
+	return JSON.stringify({
+		items: tagsArray,
+		cache: {
+			seconds: 600,
+			loosereload: true,
+		},
+	});
 }

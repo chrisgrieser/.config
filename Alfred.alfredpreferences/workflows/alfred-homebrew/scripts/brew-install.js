@@ -2,7 +2,6 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
-
 //──────────────────────────────────────────────────────────────────────────────
 
 const alfredMatcher = (/** @type {string} */ str) => str.replaceAll("-", " ") + " " + str + " ";
@@ -47,12 +46,12 @@ function cacheIsOutdated(path) {
 	return cacheAgeDays > cacheAgeThresholdDays;
 }
 
-/** @param {string} url */
+/** @param {string} url @return {string} */
 function httpRequest(url) {
 	const queryURL = $.NSURL.URLWithString(url);
-	const requestData = $.NSData.dataWithContentsOfURL(queryURL);
-	const requestString = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
-	return requestString;
+	const data = $.NSData.dataWithContentsOfURL(queryURL);
+	const requestStr = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
+	return requestStr;
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -140,8 +139,9 @@ function run() {
 		return {
 			title: name + icons,
 			match: alfredMatcher(name) + desc,
-			subtitle: [caskIcon, downloads, sep, desc ].join(""),
+			subtitle: [caskIcon, downloads, sep, desc].join(""),
 			arg: `--cask ${name}`,
+			quicklookurl: cask.homepage,
 			mods: {
 				// PERF quicker to pass here than to call `brew home` on brew-id
 				cmd: {
@@ -175,6 +175,7 @@ function run() {
 			match: alfredMatcher(name) + desc,
 			subtitle: [formulaIcon, caveats, downloads, sep, desc].join(""),
 			arg: `--formula ${name}`,
+			quicklookurl: formula.homepage,
 			text: {
 				largetype: caveatText,
 				copy: caveatText,
@@ -200,5 +201,11 @@ function run() {
 	// PERF merging via spread operator performs slightly faster than
 	// concatenation with the number array elements cp.
 	// https://javascript.plainenglish.io/efficiently-merging-arrays-in-javascript-32993788a8b2
-	return JSON.stringify({ items: [...casks, ...formulas] });
+	return JSON.stringify({
+		items: [...casks, ...formulas],
+		cache: {
+			seconds: 3600 * 3,
+			loosereload: true,
+		},
+	});
 }
