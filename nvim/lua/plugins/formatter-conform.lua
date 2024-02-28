@@ -103,7 +103,7 @@ local function formattingFunc(bufnr)
 							apply = true,
 						}
 					end,
-					(i - 1) * 40
+					(i - 1) * 50
 				)
 			end
 		end
@@ -121,7 +121,7 @@ return {
 		require("conform.formatters.injected").options.ignore_errors = true
 		require("conform").setup(conformOpts)
 
-		vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
+		vim.api.nvim_create_autocmd("FocusLost", {
 			callback = function(ctx) formattingFunc(ctx.buf) end,
 		})
 	end,
