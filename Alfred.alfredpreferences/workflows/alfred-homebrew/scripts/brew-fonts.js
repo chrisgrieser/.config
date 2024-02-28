@@ -2,6 +2,7 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
+//──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} str */
 function alfredMatcher(str) {
@@ -9,12 +10,12 @@ function alfredMatcher(str) {
 	return clean + " " + str;
 }
 
-/** @param {string} url */
+/** @param {string} url @return {string} */
 function httpRequest(url) {
 	const queryURL = $.NSURL.URLWithString(url);
-	const requestData = $.NSData.dataWithContentsOfURL(queryURL);
-	const requestString = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
-	return requestString;
+	const data = $.NSData.dataWithContentsOfURL(queryURL);
+	const requestStr = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
+	return requestStr;
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -51,5 +52,11 @@ function run() {
 			};
 		});
 
-	return JSON.stringify({ items: fonts });
+	return JSON.stringify({
+		items: fonts,
+		cache: {
+			seconds: 3600 * 12,
+			loosereload: true,
+		},
+	});
 }

@@ -2426,11 +2426,10 @@ window_name</string>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>on run
-
-tell application id "com.runningwithcrayons.Alfred" to reload workflow (system attribute "alfred_workflow_bundleid")
-return "aaa"
-
+				<string>on run argv 
+	set id to (system attribute "alfred_workflow_bundleid") 
+	tell application id "com.runningwithcrayons.Alfred" to reload workflow id
+	return id 
 end run</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -2519,27 +2518,6 @@ end run</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -2555,6 +2533,27 @@ end run</string>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>6836847D-31EB-4678-86AD-60D91852740C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2744,19 +2743,6 @@ end run</string>
 			<string>642DC21D-E907-412F-8F6F-7E24FE991B23</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>BEDEB4B7-69BC-435F-9AC1-4D7C4744F72F</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -3149,7 +3135,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>590</real>
 			<key>ypos</key>
-			<real>1925</real>
+			<real>1980</real>
 		</dict>
 		<key>14C8CAEE-9B36-494B-8F0B-ECCF215CBD44</key>
 		<dict>
@@ -3158,7 +3144,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>860</real>
 			<key>ypos</key>
-			<real>1740</real>
+			<real>1745</real>
 		</dict>
 		<key>1708D3C1-D2AD-4E95-8F06-EB02D580A1B7</key>
 		<dict>
@@ -3334,7 +3320,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>860</real>
 			<key>ypos</key>
-			<real>1860</real>
+			<real>1865</real>
 		</dict>
 		<key>6F2F3DFC-73BE-447A-9163-8ABC23D08E7A</key>
 		<dict>
@@ -3352,7 +3338,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>440</real>
 			<key>ypos</key>
-			<real>1925</real>
+			<real>1980</real>
 		</dict>
 		<key>71F9A459-55CC-41D5-A1FA-4424B696D4E3</key>
 		<dict>
@@ -3424,7 +3410,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>440</real>
 			<key>ypos</key>
-			<real>1815</real>
+			<real>1870</real>
 		</dict>
 		<key>A89D07AD-BB4E-4D63-B7B7-DDB763334AEC</key>
 		<dict>
@@ -3472,13 +3458,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>2650</real>
-		</dict>
-		<key>BEDEB4B7-69BC-435F-9AC1-4D7C4744F72F</key>
-		<dict>
-			<key>xpos</key>
-			<real>410</real>
-			<key>ypos</key>
-			<real>2245</real>
 		</dict>
 		<key>C4E99850-BA50-4D06-A11F-D09AEC8481A0</key>
 		<dict>
@@ -3605,9 +3584,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>refresh cache by reloading workflow</string>
 			<key>xpos</key>
-			<real>680</real>
+			<real>690</real>
 			<key>ypos</key>
-			<real>1780</real>
+			<real>1785</real>
 		</dict>
 		<key>F244FBB2-D206-4A08-9404-12E9A2DB8944</key>
 		<dict>
@@ -3723,7 +3702,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.12.0</string>
+	<string>1.12.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

@@ -188,7 +188,8 @@ local function telescopeConfig()
 				-- inherit global ignore file from `fd`
 				("--ignore-file=" .. os.getenv("HOME") .. "/.config/fd/ignore"),
 			},
-			file_ignore_patterns = { "%.png$", "%.svg", "%.gif", "%.zip" },
+			-- stylua: ignore
+			file_ignore_patterns = { "%.png$", "%.svg", "%.gif", "%.zip", "%.pdf", "%.icns", "%.jpe?g" },
 		},
 		pickers = {
 			find_files = {
