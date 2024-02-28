@@ -115,7 +115,8 @@ rules:
           - key_code: down_arrow # assuming hidden menubar, otherwise only 1x arrow down
           - key_code: down_arrow
           - key_code: return_or_enter
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
       # Back & Forward
       - type: basic
         from: { key_code: h, modifiers: { mandatory: [control] } }
@@ -128,7 +129,8 @@ rules:
                     click menu item "Back" of menu "Go" of menu bar 1
                   end tell
                 end tell'
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
       - type: basic
         from: { key_code: l, modifiers: { mandatory: [control] } }
         to:
@@ -140,27 +142,32 @@ rules:
                     click menu item "Forward" of menu "Go" of menu bar 1
                   end tell
                 end tell'
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
       # Right Sidebar
       - type: basic
         from: { key_code: "0", modifiers: { mandatory: [command] } }
         to:
           - key_code: "2"
             modifiers: [command]
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
       # Toolbar
       - type: basic
         from: { key_code: "9", modifiers: { mandatory: [command] } }
         to: [{ key_code: t, modifiers: [command, option] }]
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
       # Image Tool
       - type: basic
         from: { key_code: i, modifiers: { mandatory: [command] } }
         to:
           - { key_code: i, modifiers: [command, control] }
           - { key_code: "7", modifiers: [command, control] } # purple borders
-          - shell_command: "osascript -e 'display notification \"Tool\" with title \"Image \U0001F5BC️\"'"
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
+          - shell_command:
+              "osascript -e 'display notification \"Tool\" with title \"Image \U0001F5BC️\"'"
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
       # Red Underline Tool
       - type: basic
         from: { key_code: u, modifiers: { mandatory: [command] } }
@@ -169,8 +176,10 @@ rules:
             modifiers: [command, control]
           - key_code: "1"
             modifiers: [command, control]
-          - shell_command: "osascript -e 'display notification \"Tool\" with title \"Underline \U0001F58D️\"'"
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
+          - shell_command:
+              "osascript -e 'display notification \"Tool\" with title \"Underline \U0001F58D️\"'"
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
       # Comment Tool
       - type: basic
         from: { key_code: k, modifiers: { mandatory: [command] } }
@@ -179,16 +188,20 @@ rules:
             modifiers: [command, control]
           - key_code: "3" # yellow
             modifiers: [command, control]
-          - shell_command: "osascript -e 'display notification \"Tool\" with title \"Comment \U0001F5E3️\"'"
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
+          - shell_command:
+              "osascript -e 'display notification \"Tool\" with title \"Comment \U0001F5E3️\"'"
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
       # Yellow Highlight Tool
       - type: basic
         from: { key_code: z, modifiers: { mandatory: [command] } } # z and y switched on German keyboard
         to:
           - { key_code: h, modifiers: [command, control] }
           - { key_code: "3", modifiers: [command, control] }
-          - shell_command: "osascript -e 'display notification \"Tool\" with title \"Yellow Highlight \U0001F7E8\"'"
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
+          - shell_command:
+              "osascript -e 'display notification \"Tool\" with title \"Yellow Highlight \U0001F7E8\"'"
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
       # Rename
       - type: basic
         from: { key_code: r, modifiers: { mandatory: [control] } }
@@ -212,14 +225,20 @@ rules:
         to:
           - { key_code: l, modifiers: [command] }
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^com\.hahainteractive\.GoodTask3Mac$] }
+          - {
+              type: frontmost_application_if,
+              bundle_identifiers: [^com\.hahainteractive\.GoodTask3Mac$],
+            }
       # FIX wrong keybinding for inserting line break
       - type: basic
         from: { key_code: return_or_enter, modifiers: { mandatory: [shift] } }
         to:
           - { key_code: return_or_enter, modifiers: [control] }
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^com\.hahainteractive\.GoodTask3Mac$] }
+          - {
+              type: frontmost_application_if,
+              bundle_identifiers: [^com\.hahainteractive\.GoodTask3Mac$],
+            }
   #─────────────────────────────────────────────────────────────────────
   - description: "(Apps) Neovide"
     manipulators:
@@ -315,35 +334,40 @@ rules:
         to:
           - key_code: down_arrow
             modifiers: [option, shift]
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$] }]
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$] }]
       # back in history
       - type: basic
         from: { key_code: h, modifiers: { mandatory: [control] } }
         to:
           - key_code: semicolon
             modifiers: [command]
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$] }]
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$] }]
       # forward in history
       - type: basic
         from: { key_code: l, modifiers: { mandatory: [control] } }
         to:
           - key_code: quote
             modifiers: [command]
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$] }]
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$] }]
       # next channel
       - type: basic
         from: { key_code: j, modifiers: { mandatory: [control] } }
         to:
           - key_code: down_arrow
             modifiers: [option]
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$] }]
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$] }]
       # prev channel
       - type: basic
         from: { key_code: k, modifiers: { mandatory: [control] } }
         to:
           - key_code: up_arrow
             modifiers: [option]
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$] }]
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Alfred: Select with <Tab>"
     manipulators:
@@ -352,12 +376,14 @@ rules:
         from: { key_code: tab }
         to:
           - { key_code: n, modifiers: [control] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.runningwithcrayons\.Alfred$] }]
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^com\.runningwithcrayons\.Alfred$] }]
       - type: basic
         from: { key_code: tab, modifiers: { mandatory: [shift] } }
         to:
           - { key_code: p, modifiers: [control] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.runningwithcrayons\.Alfred$] }]
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^com\.runningwithcrayons\.Alfred$] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Discord"
     manipulators:
@@ -496,31 +522,37 @@ rules:
         from: { key_code: "9", modifiers: { mandatory: [command] } }
         to:
           - { key_code: t, modifiers: [command, option] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]
       - type: basic
         from: { key_code: "1", modifiers: { mandatory: [command] } }
         to:
           - { key_code: s, modifiers: [command, control] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]
       # Open in Gmail
       - type: basic
         from: { key_code: g, modifiers: { mandatory: [control] } }
         to:
           - { key_code: g, modifiers: [command, control] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Cleanshot"
     manipulators:
       # INFO https://cleanshot.com/docs/api
-      # ⌘⇧4 (screenshot button): tap to screenshot, hold for OCR
+      # ⌘⇧4 (screenshot button): tap to screenshot, hold to annotate last screenshot
       - type: basic
         from: { key_code: "4", modifiers: { mandatory: [shift, command] } }
         to_if_alone:
           - shell_command: open -g "cleanshot://capture-area"
         to_if_held_down:
           - shell_command: |
-              osascript -e 'display notification "" with title "OCR Screenshot"'
-              open -g "cleanshot://capture-text"
+              # SOURCE https://stackoverflow.com/a/9052878/22114136
+              screenshot_location="$HOME/Library/Application Support/CleanShot/media"
+              last_screenshot=$(find "$screenshot_location" -type f -name "*.png" -print0 | 
+                  xargs -0 stat -f "%B %N" | sort -rn | head -n1 | cut -d" " -f2-)
+              open "cleanshot://open-annotate?filepath=$last_screenshot"
   # INFO using Shottr at mother device, since no 3rd license for CleanShot
   # make hotkeys consistent with CleanShot though (cmd+s -> cmd+shift+c)
   - description: "(Apps) Shottr"
