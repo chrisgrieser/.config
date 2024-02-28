@@ -36,5 +36,8 @@ function run() {
 			};
 		});
 
-	return JSON.stringify({ items: workArray });
+	return JSON.stringify({
+		items: workArray,
+		cache: { seconds: 1800 },
+	});
 }

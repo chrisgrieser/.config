@@ -54,5 +54,8 @@ function run() {
 			};
 		});
 
-	return JSON.stringify({ items: [...referenceDocs, ...progitBookPages] });
+	return JSON.stringify({
+		items: [...referenceDocs, ...progitBookPages],
+		cache: { seconds: 3600 * 24 * 7 },
+	});
 }

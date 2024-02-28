@@ -5,16 +5,21 @@ app.includeStandardAdditions = true;
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const alfredMatcher = (/** @type {string} */ str) => str.replace(/[-()_./]/g, " ") + " " + str + " ";
+const alfredMatcher = (/** @type {string} */ str) =>
+	str.replace(/[-()_./]/g, " ") + " " + str + " ";
 
 //──────────────────────────────────────────────────────────────────────────────
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	// SIC the docs are in their own branch
-	const gitHubURL = "https://api.github.com/repos/felixkratz/SketchyBar/git/trees/documentation?recursive=1";
-	const workArray = JSON.parse(app.doShellScript(`curl -s "${gitHubURL}"`)).tree
-		.filter( (/** @type {{ path: string; }} */ file) => file.path.startsWith("docs/") && file.path.endsWith(".md"))
+	const gitHubURL =
+		"https://api.github.com/repos/felixkratz/SketchyBar/git/trees/documentation?recursive=1";
+	const workArray = JSON.parse(app.doShellScript(`curl -s "${gitHubURL}"`))
+		.tree.filter(
+			(/** @type {{ path: string; }} */ file) =>
+				file.path.startsWith("docs/") && file.path.endsWith(".md"),
+		)
 		.map((/** @type {{ path: string }} */ file) => {
 			const site = file.path.slice(5, -3); // remove "docs/" and ".md"
 			const parts = site.split("/");
@@ -31,5 +36,8 @@ function run() {
 			};
 		});
 
-	return JSON.stringify({ items: workArray });
+	return JSON.stringify({
+		items: workArray,
+		cache: { seconds: 3600 * 24 * 7 },
+	});
 }

@@ -808,9 +808,9 @@
 				<key>scriptfile</key>
 				<string>scripts/open_citation_picker.sh</string>
 				<key>subtext</key>
-				<string></string>
-				<key>title</key>
 				<string>Search BibTeX Library for...</string>
+				<key>title</key>
+				<string>{const:alfred_workflow_name}</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -1280,7 +1280,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Supercharged Citation Picker</string>
+				<string>{const:alfred_workflow_name}</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -1474,6 +1474,11 @@
 			<integer>2</integer>
 		</dict>
 		<dict>
+			<key>config</key>
+			<dict>
+				<key>unstackview</key>
+				<false/>
+			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.hidealfred</string>
 			<key>uid</key>

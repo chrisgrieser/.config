@@ -21,12 +21,15 @@ function run() {
 
 	const siteArr = JSON.parse(app.doShellScript(`curl -s "${githubApi}"`))
 		.tree.filter(
-			(/** @type {{ path: string; }} */ file) => ruleRegex.test(file.path) || userGuideRegex.test(file.path),
+			(/** @type {{ path: string; }} */ file) =>
+				ruleRegex.test(file.path) || userGuideRegex.test(file.path),
 		)
 		.map((/** @type {{ path: string; }} */ entry) => {
 			const path = entry.path;
 			const isRule = path.startsWith("lib");
-			const subsite = isRule ? path.replace(ruleRegex, "$1") : path.replace(userGuideRegex, "$1");
+			const subsite = isRule
+				? path.replace(ruleRegex, "$1")
+				: path.replace(userGuideRegex, "$1");
 			const category = isRule ? "rules" : "user guide";
 			const url = isRule ? `${baseUrlRules}/rules/${subsite}` : `${baseUrlRules}/${subsite}/`;
 			let displayTitle = subsite;
@@ -44,5 +47,8 @@ function run() {
 			};
 		});
 
-	return JSON.stringify({ items: siteArr });
+	return JSON.stringify({
+		items: siteArr,
+		cache: { seconds: 3600 * 24 * 7 },
+	});
 }

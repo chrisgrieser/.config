@@ -3,7 +3,8 @@ ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 
-const alfredMatcher = (/** @type {string} */ str) => str.replace(/[-()_./]/g, " ") + " " + str + " ";
+const alfredMatcher = (/** @type {string} */ str) =>
+	str.replace(/[-()_./]/g, " ") + " " + str + " ";
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -11,7 +12,9 @@ const alfredMatcher = (/** @type {string} */ str) => str.replace(/[-()_./]/g, " 
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const workArray = JSON.parse(
-		app.doShellScript('curl -s "https://api.github.com/repos/espanso/website/git/trees/main?recursive=1"'),
+		app.doShellScript(
+			'curl -s "https://api.github.com/repos/espanso/website/git/trees/main?recursive=1"',
+		),
 	)
 		.tree.filter(
 			(/** @type {{ path: string}} */ file) =>
@@ -35,5 +38,8 @@ function run() {
 			};
 		});
 
-	return JSON.stringify({ items: workArray });
+	return JSON.stringify({
+		cache: { seconds: 3600 },
+		items: workArray,
+	});
 }

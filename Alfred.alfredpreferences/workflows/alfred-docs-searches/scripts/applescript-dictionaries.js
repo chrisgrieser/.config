@@ -29,5 +29,8 @@ function run() {
 				arg: sdefPath,
 			};
 		});
-	return JSON.stringify({ items: appsWithDict });
+	return JSON.stringify({
+		items: appsWithDict,
+		cache: { seconds: 1800 },
+	});
 }

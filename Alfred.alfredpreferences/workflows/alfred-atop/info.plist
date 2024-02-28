@@ -825,9 +825,9 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>subtext</key>
-				<string>System Activity Monitor</string>
+				<string>loading…</string>
 				<key>title</key>
-				<string>atop</string>
+				<string>{const:alfred_workflow_name}</string>
 				<key>withspace</key>
 				<true/>
 			</dict>

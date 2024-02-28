@@ -44,5 +44,8 @@ function run() {
 			};
 		});
 
-	return JSON.stringify({ items: workArray });
+	return JSON.stringify({
+		items: workArray,
+		cache: { seconds: 3600 * 24 },
+	});
 }

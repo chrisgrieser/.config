@@ -836,7 +836,7 @@
 				<key>keyword</key>
 				<string>:alfred preference</string>
 				<key>subtext</key>
-				<string></string>
+				<string>{const:alfred_workflow_name}</string>
 				<key>text</key>
 				<string>⚙️ Update Alfred Preference Icon</string>
 				<key>withspace</key>

@@ -32,5 +32,8 @@ function run() {
 			};
 		});
 
-	return JSON.stringify({ items: uriSchemes });
+	return JSON.stringify({
+		items: uriSchemes,
+		cache: { seconds: 3600 },
+	});
 }

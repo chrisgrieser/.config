@@ -24,7 +24,7 @@ function run() {
 			// GUARD
 			const translatedDocs = entry.path.includes("/zh-cn/") || entry.path.includes("/ja/");
 			const isDocsSite = docPathRegex.test(entry.path) && !entry.path.endsWith("404.md");
-			if (translatedDocs || !isDocsSite) return {}; 
+			if (translatedDocs || !isDocsSite) return {};
 
 			const subsite = entry.path.replace(docPathRegex, "$1");
 			const parts = subsite.split("/");
@@ -54,5 +54,8 @@ function run() {
 		},
 	);
 
-	return JSON.stringify({ items: workArray });
+	return JSON.stringify({
+		items: workArray,
+		cache: { seconds: 3600 * 24 },
+	});
 }
