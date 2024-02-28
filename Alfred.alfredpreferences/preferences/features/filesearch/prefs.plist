@@ -2,9 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>ignoreBookmarks</key>
-	<false/>
+	<key>ignoreImages</key>
+	<true/>
 	<key>ignoreMusic</key>
+	<true/>
+	<key>ignorePlist</key>
+	<true/>
+	<key>ignoreSource</key>
 	<true/>
 	<key>limit</key>
 	<integer>1</integer>

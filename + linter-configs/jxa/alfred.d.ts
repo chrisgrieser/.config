@@ -1,4 +1,4 @@
-// https://www.alfredapp.com/help/workflows/inputs/script-filter/json/
+// DOCS https://www.alfredapp.com/help/workflows/inputs/script-filter/json/
 //──────────────────────────────────────────────────────────────────────────────
 
 // "run" function used by Alfred
@@ -11,6 +11,10 @@ declare class AlfredScriptFilter {
 	// biome-ignore lint/complexity/noBannedTypes: <explanation>
 	variables?: Object;
 	skipknowledge?: boolean;
+	cache?: {
+		seconds: number;
+		loosereload?: boolean;
+	};
 }
 
 declare class AlfredItem {
@@ -43,10 +47,6 @@ declare class AlfredItem {
 	text?: {
 		copy?: string;
 		largetype?: string;
-	};
-	cache?: {
-		seconds: number;
-		loosereload?: boolean;
 	};
 }
 
