@@ -419,7 +419,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>4C6743FC-6D60-44F4-9E59-7EE559C99DAB</string>
+				<string>F2C6A594-EB3E-45FD-B32A-0C8AA204551D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -507,6 +507,8 @@
 				<false/>
 			</dict>
 		</array>
+		<key>F2C6A594-EB3E-45FD-B32A-0C8AA204551D</key>
+		<array/>
 		<key>F99C6054-D3E9-4D1C-960A-8E9EC9FA5CB3</key>
 		<array>
 			<dict>
@@ -677,6 +679,11 @@
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>config</key>
+			<dict>
+				<key>unstackview</key>
+				<false/>
+			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.hidealfred</string>
 			<key>uid</key>
@@ -754,25 +761,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>32D387DE-B4F9-41E5-8F1C-A71E3C5644AA</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -790,6 +778,25 @@
 			<string>504CECC9-A64D-4F2A-A0E5-664B355EB529</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>32D387DE-B4F9-41E5-8F1C-A71E3C5644AA</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -897,19 +904,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>externaltriggerid</key>
-				<string>repo-search-loop</string>
-				<key>passinputasargument</key>
+				<key>lastpathcomponent</key>
 				<false/>
-				<key>passvariables</key>
+				<key>onlyshowifquerypopulated</key>
 				<false/>
-				<key>workflowbundleid</key>
-				<string>self</string>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>4C6743FC-6D60-44F4-9E59-7EE559C99DAB</string>
+			<string>C27D01B3-A3B9-4661-9D70-8808DC522FD1</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -939,25 +948,34 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>concurrently</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>on run 
+	tell application id "com.runningwithcrayons.Alfred" to reload workflow (system attribute "alfred_workflow_bundleid") 
+end run</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
 				<string></string>
-				<key>title</key>
-				<string>{query}</string>
+				<key>type</key>
+				<integer>6</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>C27D01B3-A3B9-4661-9D70-8808DC522FD1</string>
+			<string>F2C6A594-EB3E-45FD-B32A-0C8AA204551D</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
+			<key>config</key>
+			<dict>
+				<key>unstackview</key>
+				<false/>
+			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.hidealfred</string>
 			<key>uid</key>
@@ -1025,6 +1043,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>⏳Cloning…</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>E6DBBBE7-CEB7-477C-AC88-395FF2B34092</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1048,25 +1087,9 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>unstackview</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>⏳Cloning…</string>
 			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>E6DBBBE7-CEB7-477C-AC88-395FF2B34092</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.hidealfred</string>
 			<key>uid</key>
@@ -1205,6 +1228,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/resolve-notification.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>BFABA717-A81E-4D69-A8C2-4ED2042B4588</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1257,29 +1303,6 @@
 			<string>B35052FF-0027-40CC-BC59-EA7D442A57EA</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/resolve-notification.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>BFABA717-A81E-4D69-A8C2-4ED2042B4588</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1343,6 +1366,11 @@
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>config</key>
+			<dict>
+				<key>unstackview</key>
+				<false/>
+			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.hidealfred</string>
 			<key>uid</key>
@@ -1513,15 +1541,6 @@
 			<key>ypos</key>
 			<real>1230</real>
 		</dict>
-		<key>4C6743FC-6D60-44F4-9E59-7EE559C99DAB</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>xpos</key>
-			<real>825</real>
-			<key>ypos</key>
-			<real>675</real>
-		</dict>
 		<key>4DC9B99A-333B-4BC6-B2A3-13EC4B319487</key>
 		<dict>
 			<key>colorindex</key>
@@ -1680,6 +1699,17 @@
 			<key>ypos</key>
 			<real>200</real>
 		</dict>
+		<key>F2C6A594-EB3E-45FD-B32A-0C8AA204551D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>note</key>
+			<string>reload workflow cache (so deleted repo does not show up as locally available)</string>
+			<key>xpos</key>
+			<real>875</real>
+			<key>ypos</key>
+			<real>675</real>
+		</dict>
 		<key>F99C6054-D3E9-4D1C-960A-8E9EC9FA5CB3</key>
 		<dict>
 			<key>colorindex</key>
@@ -1834,7 +1864,7 @@
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.11.3</string>
+	<string>0.13.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

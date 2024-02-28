@@ -33,11 +33,15 @@ function run() {
 				/- \[ \] \[([^\]]*)\]\((.*?)\) ?(\p{Extended_Pictographic} .*)?/u,
 			);
 			const dateStr = date ? `${date}  ·  ` : "";
-			return {
+
+			/** @type {AlfredItem} */
+			const item = {
 				title: title,
 				subtitle: dateStr + url,
 				arg: lineNo,
+				quicklookurl: url,
 			};
+			return item;
 		});
 
 	// "Add current browser tab" item

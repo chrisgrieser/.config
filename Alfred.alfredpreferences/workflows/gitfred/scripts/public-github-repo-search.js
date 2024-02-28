@@ -93,6 +93,7 @@ function run(argv) {
 				subtitle: subtitle,
 				match: alfredMatcher(repo.name),
 				arg: repo.html_url,
+				quicklookurl: repo.html_url,
 				mods: {
 					shift: {
 						subtitle: `⇧: Search Issues (${repo.open_issues} open)`,
@@ -100,7 +101,7 @@ function run(argv) {
 					},
 					cmd: {
 						arg: secondUrl,
-						subtitle: `⌘: Open  "${secondUrl}"`
+						subtitle: `⌘: Open  "${secondUrl}"`,
 					},
 					ctrl: {
 						subtitle: cloneSubtitle,

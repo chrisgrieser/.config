@@ -221,26 +221,37 @@
 	</array>
 	<key>readme</key>
 	<string>## Usage
-- Use the keyword `rl` to add the current tab of the frontmost browser to your read-later-list.
-- Any item in your reading list also shows up when using the keyword `rl`. Press &lt;kbd&gt;⏎&lt;/kbd&gt; to open the item in your browser and remove it from your read-later-list.
+- Use the keyword `rl` to add the current tab of the frontmost browser to your
+  read-later-list.
+- Any item in your reading list also shows up when using the keyword `rl`. Press
+  &lt;kbd&gt;⏎&lt;/kbd&gt; to open the item in your browser and remove it from your
+  read-later-list.
+
+&gt; [!NOTE]
+&gt; [Unfortunately, Firefox is not and cannot be supported.](https://www.alfredforum.com/topic/16748-how-to-do-x-in-firefox-from-alfred/)
+
+## Item Previews
+Install [AlfredExtraPane](https://github.com/mr-pennyworth/alfred-extra-pane)
+for previews of the items.
 
 ## Items are saved locally
-- The items are saved in a local markdown file on your disk. You can set the location in the [workflow configuration](https://www.alfredapp.com/help/workflows/user-configuration/).
+- The items are saved in a local markdown file on your disk. You can set the
+  location in the [workflow
+  configuration](https://www.alfredapp.com/help/workflows/user-configuration/).
 - The items are formatted in the [markdown task syntax](https://simpledev.io/lesson/task-list-md-1/).
 	+ Unread items as open tasks: `- [ ] [title](url)`
 	+ Read items as completed tasks: `- [x] [title](url)`
 - This has several advantages:
 	+ No dependency on any read-later service.
 	+ The reading list is available offline.
-	+ Since Markdown is a widely supported format, you can access your items in many other apps as well, such as [Obsidian](https://obsidian.md/). (Interoperability)
+	+ Since Markdown is a widely supported format, you can access your items in
+	  many other apps as well, such as [Obsidian](https://obsidian.md/).
+	  (Interoperability)
 	+ Easy backup: Just copypaste the file.
 	+ Easy sync: Just save the file in a cloud drive like iCloud.
+	+ By saving in a cloud drive, you can also access the reading list on mobile
+	  with any editor app that supports Markdown tasks.
 
-
-By saving in a cloud drive, you can also access the reading list on mobile with any editor app that supports Markdown tasks.
-
-&gt; [!NOTE]
-&gt; [Unfortunately, Firefox is not and cannot be supported.](https://www.alfredforum.com/topic/16748-how-to-do-x-in-firefox-from-alfred/)
 
 ---
 
@@ -369,7 +380,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.1.1</string>
+	<string>1.2.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
