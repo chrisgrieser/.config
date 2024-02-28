@@ -650,9 +650,9 @@
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string>🔁 Workflow reloaded</string>
-				<key>title</key>
 				<string>{query}</string>
+				<key>title</key>
+				<string>🔁 Workflow reloaded</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -1162,7 +1162,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>set icon for Alfred prefs</string>
 			<key>xpos</key>
-			<real>740</real>
+			<real>735</real>
 			<key>ypos</key>
 			<real>450</real>
 		</dict>

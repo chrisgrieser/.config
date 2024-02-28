@@ -1989,12 +1989,12 @@ Press the [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) in
 - &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;C&lt;/kbd&gt;: Copy the URL to the clipboard.
 - In both cases, if the entry has a DOI but not a URL, the citation picker uses the DOI-URL (`https://doi.org/…`) instead.
 
-## Dozens of More Features
+## Many more Features
 For all the features this workflow has to offer, refer to the [README](https://github.com/chrisgrieser/alfred-bibtex-citation-picker#table-of-contents).
 
 ---
 
-## Cite This Software Project
+## Cite this Software Project
 
 If you want to mention this software project in an academic publication, please cite it as:
 
@@ -2839,7 +2839,7 @@ to set a hotkey for adding DOI/ISBN</string>
 		<string></string>
 	</dict>
 	<key>version</key>
-	<string>11.12.2</string>
+	<string>11.13.0</string>
 	<key>webaddress</key>
 	<string>https://github.com/chrisgrieser/alfred-bibtex-citation-picker</string>
 </dict>
