@@ -8,15 +8,6 @@
       "multiple selections"
     ]
   },
-  "Notification": {
-    "body": "new Notice (\"${1:msg}\");",
-    "description": "Obsidian: Create notification",
-    "prefix": [
-      "notice",
-      "notify",
-      "notification"
-    ]
-  },
   "Run Command": {
     "body": "this.app.commands.executeCommandById(${1:cmd-id});",
     "description": "Run a command from another plugin or from Obsidian core.",
@@ -102,6 +93,11 @@
     "body": "const ${1:config-name} = this.app.vault.getConfig(\"${1:config-name}\");",
     "description": "Get a configuration value from the core Obsidian settings.",
     "prefix": "get config"
+  },
+  "new Notice (Obsidian)": {
+    "body": "new Notice (\"${1:msg}\", ${2:2000});",
+    "description": "Obsidian: Create notification",
+    "prefix": "new Notice (Obsidian)"
   },
   "open file (in current leaf)": {
     "body": "this.app.workspace.getLeaf().openFile($0);",
