@@ -350,6 +350,15 @@ return {
 				serverConfig.capabilities = lspCapabilities
 				require("lspconfig")[lsp].setup(serverConfig)
 			end
+
+
+			local symLinkFrom = vim.env.DATA_DIR .. "/private dotfiles/codium-api-key.json"
+			local symLinkTo = os.getenv("HOME") .. "/.codeium/config.json"
+			local fileExists = vim.loop.fs_stat(symLinkTo) ~= nil
+			if not fileExists then
+				pcall(vim.fn.mkdir, vim.fs.dirname(symLinkTo))
+				vim.loop.fs_symlink(symLinkFrom, symLinkTo)
+			end
 		end,
 	},
 }
