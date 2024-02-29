@@ -1,4 +1,5 @@
-# Mac
+# MAC
+
 .DS_Store
 *.icloud
 
@@ -7,8 +8,15 @@
 Icon
 
 #───────────────────────────────────────────────────────────────────────────────
-# Aider
+# TOOLS
+
+# aider cli
 .aider*
+
+# conform.nvim
+.conform.*
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # production stuff / builds
 node_modules
