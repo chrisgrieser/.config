@@ -22,21 +22,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>9C73225B-1D01-43D2-8072-FD5B2B517112</string>
+				<string>985C673E-3A2A-4AC4-BEF3-5FE62B26EF89</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>985C673E-3A2A-4AC4-BEF3-5FE62B26EF89</string>
-				<key>modifiers</key>
-				<integer>131072</integer>
-				<key>modifiersubtext</key>
-				<string>⇧: Preview</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -151,6 +141,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>imageresizemode</key>
+				<integer>0</integer>
+				<key>stackview</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.userinterface.image</string>
+			<key>uid</key>
+			<string>985C673E-3A2A-4AC4-BEF3-5FE62B26EF89</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>tasksettings</key>
 				<dict/>
 				<key>taskuid</key>
@@ -233,21 +238,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>imageresizemode</key>
-				<integer>0</integer>
-				<key>stackview</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.userinterface.image</string>
-			<key>uid</key>
-			<string>985C673E-3A2A-4AC4-BEF3-5FE62B26EF89</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>---
@@ -272,9 +262,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>771F46DF-C1A0-4933-842D-9FD63DB0D1B0</key>
 		<dict>
 			<key>xpos</key>
-			<real>750</real>
+			<real>730</real>
 			<key>ypos</key>
-			<real>40</real>
+			<real>30</real>
 		</dict>
 		<key>80009692-2016-4BC7-8950-0B9A68D3BC11</key>
 		<dict>
@@ -286,9 +276,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>985C673E-3A2A-4AC4-BEF3-5FE62B26EF89</key>
 		<dict>
 			<key>xpos</key>
-			<real>550</real>
+			<real>565</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>195</real>
 		</dict>
 		<key>9C73225B-1D01-43D2-8072-FD5B2B517112</key>
 		<dict>
