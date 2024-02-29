@@ -4,11 +4,17 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @param {string} str */
-function camelCaseMatch(str) {
-	const clean = str.replace(/[-_.]/g, " ");
-	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
-	return [clean, camelCaseSeparated, str].join(" ") + " ";
+/** @param {string|string[]} item */
+function camelCaseMatch(item) {
+	if (typeof item === "string") item = [item];
+	return item
+		.map((str) => {
+			const subwords = str.replace(/[-_.]/g, " ");
+			const fullword = str.replace(/[-_.]/g, "");
+			const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
+			return [subwords, camelCaseSeparated, fullword, str].join(" ") + " ";
+		})
+		.join(" ");
 }
 
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
