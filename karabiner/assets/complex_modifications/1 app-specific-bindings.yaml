@@ -549,18 +549,13 @@ rules:
         to_if_alone:
           - shell_command: open -g "cleanshot://capture-area"
         to_if_held_down:
-          - shell_command: |
-              # SOURCE https://stackoverflow.com/a/9052878/22114136
-              screenshot_location="$HOME/Library/Application Support/CleanShot/media"
-              last_screenshot=$(find "$screenshot_location" -type f -name "*.png" -print0 | 
-                  xargs -0 stat -f "%B %N" | sort -rn | head -n1 | cut -d" " -f2-)
-              open "cleanshot://open-annotate?filepath=$last_screenshot"
+          - shell_command: open -g "cleanshot://record-screen"
   # INFO using Shottr at mother device, since no 3rd license for CleanShot
   # make hotkeys consistent with CleanShot though (cmd+s -> cmd+shift+c)
   - description: "(Apps) Shottr"
     manipulators:
       - type: basic
-        from: { key_code: c, modifiers: { mandatory: [command] } }
+        from: { key_code: s, modifiers: { mandatory: [command] } }
         to:
           - { key_code: c, modifiers: [command, shift] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^cc\.ffitch\.shottr$] }]
