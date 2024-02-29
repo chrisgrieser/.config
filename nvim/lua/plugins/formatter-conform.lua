@@ -103,7 +103,7 @@ local function formattingFunc(bufnr)
 							apply = true,
 						}
 					end,
-					i * 100
+					i * 60
 				)
 			end
 		end
