@@ -37,7 +37,7 @@ g.neovide_input_macos_alt_is_meta = false
 
 -- Appearance
 g.neovide_remember_window_size = true
-g.neovide_transparency = 0.91
+g.neovide_transparency = 0.89
 g.neovide_refresh_rate = isAtMother and 30 or 50
 
 -- These have no effect with multi-grid turned off, and multi-grid has problems

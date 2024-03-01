@@ -15,6 +15,10 @@
     "body": "$LINE_COMMENT DOCS ",
     "prefix": "DOCS"
   },
+  "EXAMPLE": {
+    "body": "$LINE_COMMENT EXAMPLE ",
+    "prefix": "EXAMPLE"
+  },
   "FIX": {
     "body": "$LINE_COMMENT FIX",
     "prefix": "FIX"
