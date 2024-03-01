@@ -179,10 +179,6 @@ keymap("n", "<leader>od", function()
 	local change = vim.diagnostic.is_disabled(0) and "enable" or "disable"
 	vim.diagnostic[change](0)
 end, { desc = " Diagnostics" })
-keymap("n", "<leader>oh", function()
-	local enabled = vim.lsp.inlay_hint.is_enabled(0)
-	vim.lsp.inlay_hint.enabled(0, not enabled)
-end, { desc = "󰒕 LSP Inlay Hints" })
 
 keymap(
 	"n",
