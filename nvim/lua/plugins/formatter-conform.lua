@@ -88,11 +88,10 @@ local function formattingFunc(bufnr)
 				apply = true,
 			}
 		elseif ft == "typescript" then
-			-- Biome's `source.organizeImports.biome` code action doesn't remove unused imports
 			local actions = {
 				"source.addMissingImports.ts",
 				"source.removeUnusedImports.ts",
-				"source.organizeImports.ts",
+				"source.organizeImports.biome", -- again, since import order changes m(
 			}
 			-- deferred, so it does not conflict with `addMissingImports`
 			for i = 1, #actions do
