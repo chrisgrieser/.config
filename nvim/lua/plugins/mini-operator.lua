@@ -159,7 +159,7 @@ end
 return {
 	"echasnovski/mini.operators",
 	keys = {
-		{ "s", mode = { "n", "x" }, desc = "󰅪 Substitute Operator" },
+		{ "s", desc = "󰅪 Substitute Operator" }, -- in visual mode, `s` surrounds
 		{ "w", mode = { "n", "x" }, desc = "󰅪 Multiply Operator" },
 		{ "#", mode = { "n", "x" }, desc = "󰅪 Evaluate Operator" },
 		{ "sy", mode = { "n", "x" }, desc = "󰅪 Sort Operator" },
@@ -171,14 +171,21 @@ return {
 		{ "sY", "sy$", desc = "󰅪 Sort to EoL", remap = true },
 	},
 	opts = {
-		replace = { prefix = "s", reindent_linewise = true },
-		multiply = { prefix = "w" },
+		replace = { prefix = "", reindent_linewise = true }, -- substitute
+		multiply = { prefix = "w" }, -- duplicate
 		exchange = { prefix = "sx", reindent_linewise = true },
 		sort = { prefix = "sy" },
 		evaluate = { prefix = "#", func = luaEval },
 	},
-	init = function()
+	config = function(_, opts)
 		filetypeSpecificMultiply()
 		filetypeSpecificEval()
+		require("mini.operators").setup(opts)
+
+		-- do not set `substitute` mapping for visual mode
+		require("mini.operators").make_mappings(
+			"replace",
+			{ textobject = "s", line = "ss", selection = "" }
+		)
 	end,
 }

@@ -23,7 +23,7 @@ return {
 		"kylechui/nvim-surround",
 		keys = {
 			{ "ys", desc = "󰅪 Add Surround Operator" },
-			{ "S", mode = "x", desc = "󰅪 Add Surround Operator" },
+			{ "s", mode = "x", desc = "󰅪 Add Surround Operator" },
 			{ "yS", "ys$", desc = "󰅪 Surround to EoL", remap = true },
 			{ "ds", desc = "󰅪 Delete Surround Operator" },
 			{ "cs", desc = "󰅪 Change Surround Operator" },
@@ -32,7 +32,7 @@ return {
 			move_cursor = false,
 			aliases = u.textobjRemaps,
 			keymaps = {
-				visual = "S",
+				visual = "s",
 				normal_line = false,
 				normal_cur_line = false,
 				visual_line = false,
