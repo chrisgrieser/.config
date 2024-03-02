@@ -66,10 +66,7 @@ function run(argv) {
 	}
 
 	// DOCS https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-repositories
-	// PERF using only 9, since that's the maximum Alfred displays
-	const apiURL = `https://api.github.com/search/repositories?q=${encodeURIComponent(
-		query,
-	)}&per_page=9`;
+	const apiURL = `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}`;
 	const response = JSON.parse(httpRequest(apiURL));
 
 	const forkOnClone = $.getenv("fork_on_clone") === "1";
