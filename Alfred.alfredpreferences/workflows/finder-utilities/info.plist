@@ -1294,6 +1294,27 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>link</string>
+				<key>subtext</key>
+				<string>from current Browser Tab</string>
+				<key>text</key>
+				<string>Create Link File</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>51903BB3-AE69-45A7-8492-CC712BB612A4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1348,27 +1369,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<string>EE44CF5E-3896-4D8B-89C9-B1686A03E42E</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>link</string>
-				<key>subtext</key>
-				<string>from current Browser Tab</string>
-				<key>text</key>
-				<string>Create Link File</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>51903BB3-AE69-45A7-8492-CC712BB612A4</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1975,7 +1975,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>995</real>
+			<real>1010</real>
 		</dict>
 		<key>942D4032-DF12-435D-AF6E-B89AEBF9791E</key>
 		<dict>
@@ -2113,7 +2113,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>995</real>
+			<real>1010</real>
 		</dict>
 		<key>EF11B1CF-FE50-4578-AE30-F89D6BD8390D</key>
 		<dict>
