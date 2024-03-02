@@ -3001,7 +3001,7 @@ end run</string>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
@@ -3015,17 +3015,17 @@ end run</string>
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string></string>
+				<string>loading…</string>
 				<key>script</key>
 				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>./scripts/devterms.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string></string>
+				<string>Lookup devterm…</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -3053,7 +3053,7 @@ This workflow already supports dozens of documentation sites. Since I cannot pos
 - `html`: MDN
 - `js`: MDN
 - `jxa`: JavaScript for Automation Cookbook
-- `lua`
+- `lua`: lua manual
 - `eslint`
 - `style`: stylelint rules
 - `bio`: biome docs ([rome successor](https://biomejs.dev/blog/annoucing-biome))
@@ -3064,7 +3064,7 @@ This workflow already supports dozens of documentation sites. Since I cannot pos
 - `ruff`: ruff rules
 - `pd`: pandas docs
 - `cht`: cheat.sh
-- `man`: man pages (mankier.com)
+- `man`: man pages at [mankier.com](https://www.mankier.com/)
 - `hs`: Hammerspoon reference
 - `sb`: sketchybar docs
 - `ke`: Karabiner Elements docs
@@ -3072,7 +3072,7 @@ This workflow already supports dozens of documentation sites. Since I cannot pos
 - `ep`: espanso docs
 - `wt`: WezTerm docs
 - `yq`*
-- `dt`: Search for developer terms at devterms.io
+- `dt`: Lookup term at [devterms.io](https://devterms.io/)
 
 
  * These documentation searches do not cover all sub-sites. Contributions to improve them are welcome.
@@ -3664,20 +3664,37 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>3.11</string>
-				<key>placeholder</key>
-				<string>3.10</string>
-				<key>required</key>
-				<true/>
-				<key>trim</key>
-				<true/>
+				<string>3.12</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>3.12</string>
+						<string>3.12</string>
+					</array>
+					<array>
+						<string>3.11</string>
+						<string>3.11</string>
+					</array>
+					<array>
+						<string>3.10</string>
+						<string>3.10</string>
+					</array>
+					<array>
+						<string>3.9</string>
+						<string>3.9</string>
+					</array>
+					<array>
+						<string>3.8</string>
+						<string>3.8</string>
+					</array>
+				</array>
 			</dict>
 			<key>description</key>
 			<string></string>
 			<key>label</key>
 			<string>Python Version</string>
 			<key>type</key>
-			<string>textfield</string>
+			<string>popupbutton</string>
 			<key>variable</key>
 			<string>python_version</string>
 		</dict>
@@ -3686,25 +3703,38 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<dict>
 				<key>default</key>
 				<string>5.4</string>
-				<key>placeholder</key>
-				<string>5.3</string>
-				<key>required</key>
-				<true/>
-				<key>trim</key>
-				<true/>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>5.4</string>
+						<string>5.4</string>
+					</array>
+					<array>
+						<string>5.3</string>
+						<string>5.3</string>
+					</array>
+					<array>
+						<string>5.2</string>
+						<string>5.2</string>
+					</array>
+					<array>
+						<string>5.1</string>
+						<string>5.1</string>
+					</array>
+				</array>
 			</dict>
 			<key>description</key>
 			<string></string>
 			<key>label</key>
 			<string>Lua Version</string>
 			<key>type</key>
-			<string>textfield</string>
+			<string>popupbutton</string>
 			<key>variable</key>
 			<string>lua_version</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.12.1</string>
+	<string>1.13.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
