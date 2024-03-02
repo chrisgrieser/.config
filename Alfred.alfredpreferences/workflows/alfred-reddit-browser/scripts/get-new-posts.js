@@ -5,6 +5,7 @@ app.includeStandardAdditions = true;
 
 function getSettings() {
 	const minUpvotesSetting = Number.parseInt($.getenv("min_upvotes")) || 0;
+	const pagesToRequest = Number.parseInt($.getenv("pages_to_request")) || 25;
 	return {
 		minUpvotes: Math.max(minUpvotesSetting, 0), // minimum of 0
 		useOldReddit: $.getenv("use_old_reddit") === "1" ? "old" : "www",
@@ -12,6 +13,7 @@ function getSettings() {
 		iconFolder: $.getenv("custom_subreddit_icons") || $.getenv("alfred_workflow_data"),
 		sortType: $.getenv("sort_type") || "hot",
 		hideStickied: $.getenv("hide_stickied") === "1",
+		pagesToRequest: Math.min(Math.max(pagesToRequest, 5), 100),
 	};
 }
 
@@ -32,16 +34,16 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 /** @param {AlfredItem[]} oldItems */
 // biome-ignore lint/correctness/noUnusedVariables: JXA import HACK
 function getHackernewsPosts(oldItems) {
-	// INFO https://hn.algolia.com/api/
+	const opts = getSettings();
+
+	// DOCS https://hn.algolia.com/api
 	// alternative "https://hacker-news.firebaseio.com/v0/topstories.json";
-	const hitsToRequest = 25;
-	const url = `https://hn.algolia.com/api/v1/search_by_date?tags=front_page&hitsPerPage=${hitsToRequest}`;
+	const url = `https://hn.algolia.com/api/v1/search_by_date?tags=front_page&hitsPerPage=${opts.pagesToRequest}`;
 	const response = app.doShellScript(`curl -sL "${url}"`);
 	if (!response) {
 		console.log(`Error: No response from ${url}`);
 		return;
 	}
-	const opts = getSettings();
 
 	const oldUrls = oldItems.map((item) => item.arg);
 	const oldTitles = oldItems.map((item) => item.title);
@@ -80,12 +82,16 @@ function getHackernewsPosts(oldItems) {
 				title: visitationIcon + item.title,
 				subtitle: subtitle,
 				arg: commentUrl,
+				quicklookurl: externalUrl || commentUrl,
 				icon: { path: "hackernews.png" },
 				mods: {
 					cmd: { arg: "next" },
-					// biome-ignore lint/complexity/useLiteralKeys: false positive
-					["cmd+shift"]: { arg: "prev" },
-					shift: { arg: externalUrl },
+					"cmd+shift": { arg: "prev" },
+					shift: {
+						arg: externalUrl,
+						valid: Boolean(externalUrl),
+						subtitle: externalUrl ? "⇧: Open External URL" : "⇧: ⛔ No External URL",
+					},
 				},
 			};
 			acc.push(post);
@@ -132,11 +138,9 @@ function getRedditPosts(subredditName, oldItems) {
 	const opts = getSettings();
 
 	// DOCS https://www.reddit.com/dev/api#GET_new
-	const numOfResults = 25; // PERF higher affects performance negatively
-	const sortType = opts.sortType; // new|hot|top|controversial
 	// HACK changing user agent because reddit API does not like curl (lol)
 	const curlCommand = `curl -sL -H "User-Agent: Chrome/115.0.0.0" \\
-		"https://www.reddit.com/r/${subredditName}/${sortType}.json?limit=${numOfResults}"`;
+		"https://www.reddit.com/r/${subredditName}/${opts.sortType}.json?limit=${opts.pagesToRequest}"`;
 	const response = JSON.parse(app.doShellScript(curlCommand));
 	if (response.error) {
 		console.log(`Error ${response.error}: ${response.message}`);
@@ -193,12 +197,11 @@ function getRedditPosts(subredditName, oldItems) {
 				quicklookurl: quicklookUrl,
 				mods: {
 					cmd: { arg: "next" },
-					// biome-ignore lint/complexity/useLiteralKeys: false positive
-					["cmd+shift"]: { arg: "prev" },
+					"cmd+shift": { arg: "prev" },
 					shift: {
 						valid: !isOnReddit,
 						arg: externalUrl,
-						subtitle: isOnReddit ? "No external link" : "⇧: Open external link",
+						subtitle: isOnReddit ? "⇧: ⛔ No External URL" : "⇧: Open External URL",
 					},
 				},
 			};

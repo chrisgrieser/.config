@@ -10,6 +10,8 @@
 	<string>~/.config/Alfred.alfredpreferences/subreddit_icons</string>
 	<key>hide_stickied</key>
 	<true/>
+	<key>pages_to_request</key>
+	<string>40</string>
 	<key>save_scroll_position</key>
 	<true/>
 	<key>subreddits</key>
