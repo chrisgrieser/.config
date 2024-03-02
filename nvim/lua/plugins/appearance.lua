@@ -7,6 +7,18 @@ return {
 		event = "CursorMoved",
 		opts = true,
 	},
+	{
+		"code-biscuits/nvim-biscuits",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		event = "BufReadPost",
+		opts = {
+			cursor_line_only = true,
+			default_config = {
+				min_distance = 8,
+				prefix_string = "↩ ",
+			},
+		},
+	},
 	{ -- context lines
 		"nvim-treesitter/nvim-treesitter-context",
 		dependencies = "nvim-treesitter/nvim-treesitter",
