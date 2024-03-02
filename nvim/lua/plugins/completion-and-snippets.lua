@@ -197,6 +197,13 @@ return {
 		keys = {
 			{ "<BS>", mode = "x" },
 		},
+		init = function()
+			-- copy system clipboard to regular register, required for VSCode
+			-- snippets with `$CLIPBOARD`
+			vim.api.nvim_create_autocmd("FocusGained", {
+				callback = function() vim.fn.setreg('"', vim.fn.getreg("+")) end,
+			})
+		end,
 		opts = {
 			-- live updating of snippets
 			update_events = { "TextChanged", "TextChangedI" },
