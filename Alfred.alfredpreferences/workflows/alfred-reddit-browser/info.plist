@@ -461,7 +461,7 @@
 	- &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Switch to next subreddit.
 	- &lt;kbd&gt;⇧⌘⏎&lt;/kbd&gt;: Switch to previous subreddit.
 	- &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy URL of post to clipboard.
-	- &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Open URL (if external link).
+	- &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Open external URL (if there is one).
 	- &lt;kbd&gt;⇧&lt;/kbd&gt; or &lt;kbd&gt;⌘Y&lt;/kbd&gt;: Preview the result. You can use the arrow keys to preview to the next result. Mostly useful for images. 
 
 
@@ -640,13 +640,34 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				</array>
 			</dict>
 			<key>description</key>
-			<string>How the results are sorted. Note that "top" filters out a lot of posts.</string>
+			<string>How the results are sorted. (Note that "top" filters out a lot of posts.)</string>
 			<key>label</key>
 			<string>Sorting</string>
 			<key>type</key>
 			<string>popupbutton</string>
 			<key>variable</key>
 			<string>sort_type</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>25</string>
+				<key>placeholder</key>
+				<string>25</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Between 5 - 100.</string>
+			<key>label</key>
+			<string>Number of Pages</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>pages_to_request</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -748,7 +769,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<string>Use old reddit</string>
 			</dict>
 			<key>description</key>
-			<string>Redirect to old.reddit.com as reddit frontend</string>
+			<string>Redirect to old.reddit.com as reddit frontend.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -857,7 +878,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.3.6</string>
+	<string>1.4.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
