@@ -57,6 +57,9 @@ local function customHighlights()
 	-- emphasize returns
 	updateHl("@keyword.return", "gui=bold")
 
+	-- de-emphasize commit messaages between 50 and 72 chars
+	linkHl("@comment.warning.gitcommit", "WarningMsg")
+
 	-----------------------------------------------------------------------------
 	local hasNoUpdatedTreesitterHls =
 		vim.tbl_isempty(vim.api.nvim_get_hl(0, { name = "@comment.todo" }))
