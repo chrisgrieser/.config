@@ -182,7 +182,8 @@ return {
 		filetypeSpecificEval()
 		require("mini.operators").setup(opts)
 
-		-- do not set `substitute` mapping for visual mode
+		-- Do not set `substitute` mapping for visual mode, since we use `s` for
+		-- `surround` there.
 		require("mini.operators").make_mappings(
 			"replace",
 			{ textobject = "s", line = "ss", selection = "" }
