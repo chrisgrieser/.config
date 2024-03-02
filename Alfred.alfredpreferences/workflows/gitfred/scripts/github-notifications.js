@@ -80,7 +80,8 @@ function run() {
 		});
 	}
 
-	// CALL GITHUB API https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#list-notifications-for-the-authenticated-user
+	// CALL GITHUB API 
+	// DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#list-notifications-for-the-authenticated-user
 	const parameter = showReadNotifs ? "?all=true" : "";
 	const response = httpRequestWithHeaders("https://api.github.com/notifications" + parameter, [
 		"Accept: application/vnd.github.v3+json",

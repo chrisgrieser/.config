@@ -494,6 +494,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>E6060F1A-83C9-464E-AE8E-8CFD3038EC59</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5AF52A7B-9FA9-4D8B-9784-4864B0A9AF06</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E6DBBBE7-CEB7-477C-AC88-395FF2B34092</key>
 		<array>
 			<dict>
@@ -1145,6 +1158,55 @@ end run</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>gs</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/github-starred-repos.js</string>
+				<key>subtext</key>
+				<string>100 most recently starred repos</string>
+				<key>title</key>
+				<string>⭐️ GitHub Starred Repos</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>E6060F1A-83C9-464E-AE8E-8CFD3038EC59</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>externaltriggerid</key>
 				<string>github-notifications</string>
 				<key>passinputasargument</key>
@@ -1395,6 +1457,8 @@ end run</string>
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the repo URL.
 	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Shallow clone the repo to a local folder and open in the Terminal. Optionally, creates a fork on GitHub with the `gh` cli and prepares the repo for a PR.
 	+ &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Search the last 100 issues, use &lt;kbd&gt;⏎&lt;/kbd&gt; to open the issue in the browser.
+- Search your 100 most recently starred repos via the keyword `gs`.
+	+ The same modifiers apply as for the public repo search.
 - Quick access the repositories you own via `gg`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: If the repo is available locally on your device, open it in Finder. Otherwise, open the repo's GitHub page.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the repo's GitHub page.
@@ -1428,7 +1492,7 @@ end run</string>
 			<key>xpos</key>
 			<real>840</real>
 			<key>ypos</key>
-			<real>1290</real>
+			<real>1340</real>
 		</dict>
 		<key>08B7842B-16DA-4BFC-8F35-AE680AF1E07B</key>
 		<dict>
@@ -1439,7 +1503,7 @@ end run</string>
 			<key>xpos</key>
 			<real>671</real>
 			<key>ypos</key>
-			<real>1145</real>
+			<real>1195</real>
 		</dict>
 		<key>0C28AAE6-A080-48A7-A6F0-0BB05070161D</key>
 		<dict>
@@ -1479,7 +1543,7 @@ end run</string>
 			<key>xpos</key>
 			<real>500</real>
 			<key>ypos</key>
-			<real>1165</real>
+			<real>1215</real>
 		</dict>
 		<key>24CFE3CA-F401-498B-8ABC-20D1D4AB3AB3</key>
 		<dict>
@@ -1539,7 +1603,7 @@ end run</string>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>1230</real>
+			<real>1280</real>
 		</dict>
 		<key>4DC9B99A-333B-4BC6-B2A3-13EC4B319487</key>
 		<dict>
@@ -1577,7 +1641,7 @@ end run</string>
 			<key>xpos</key>
 			<real>211</real>
 			<key>ypos</key>
-			<real>1090</real>
+			<real>1140</real>
 		</dict>
 		<key>76991846-250A-4BDC-9CE6-01A8D691D6C1</key>
 		<dict>
@@ -1608,7 +1672,7 @@ end run</string>
 			<key>xpos</key>
 			<real>770</real>
 			<key>ypos</key>
-			<real>1055</real>
+			<real>1105</real>
 		</dict>
 		<key>B04FEC5B-79E4-407B-ACCE-EAA0C5B81AB8</key>
 		<dict>
@@ -1628,7 +1692,7 @@ end run</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1165</real>
+			<real>1215</real>
 		</dict>
 		<key>BF79E782-31E9-4840-A0FA-00EE2CB5403A</key>
 		<dict>
@@ -1650,7 +1714,7 @@ end run</string>
 			<key>xpos</key>
 			<real>305</real>
 			<key>ypos</key>
-			<real>1165</real>
+			<real>1215</real>
 		</dict>
 		<key>C27D01B3-A3B9-4661-9D70-8808DC522FD1</key>
 		<dict>
@@ -1680,6 +1744,17 @@ end run</string>
 			<real>450</real>
 			<key>ypos</key>
 			<real>705</real>
+		</dict>
+		<key>E6060F1A-83C9-464E-AE8E-8CFD3038EC59</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>note</key>
+			<string>personal starred repos</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>960</real>
 		</dict>
 		<key>E6DBBBE7-CEB7-477C-AC88-395FF2B34092</key>
 		<dict>
@@ -1717,7 +1792,7 @@ end run</string>
 			<key>xpos</key>
 			<real>635</real>
 			<key>ypos</key>
-			<real>1240</real>
+			<real>1290</real>
 		</dict>
 		<key>FA2DA973-F996-4FDC-8058-22F7CCAE04A6</key>
 		<dict>
@@ -1726,7 +1801,7 @@ end run</string>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>1300</real>
+			<real>1350</real>
 		</dict>
 		<key>FE44448E-7653-4A3C-B7F9-C3A787EE0556</key>
 		<dict>

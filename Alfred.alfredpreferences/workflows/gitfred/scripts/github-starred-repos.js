@@ -1,20 +1,22 @@
 #!/usr/bin/env osascript -l JavaScript
 ObjC.import("stdlib");
+const app = Application.currentApplication();
+app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
+
+/** @param {string} url @return {string} */
+function httpRequest(url) {
+	const queryURL = $.NSURL.URLWithString(url);
+	const data = $.NSData.dataWithContentsOfURL(queryURL);
+	const requestStr = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
+	return requestStr;
+}
 
 /** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-_.]/g, " ");
 	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
 	return [clean, camelCaseSeparated, str].join(" ") + " ";
-}
-
-/** @param {string} url */
-function httpRequest(url) {
-	const queryURL = $.NSURL.URLWithString(url);
-	const requestData = $.NSData.dataWithContentsOfURL(queryURL);
-	const requestStr = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
-	return requestStr;
 }
 
 /**
@@ -57,80 +59,56 @@ function humanRelativeDate(isoDateStr) {
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
-function run(argv) {
-	const query = argv[0];
+function run() {
+	const username = $.getenv("github_username");
 
-	// GUARD
-	if (!query) {
-		return JSON.stringify({ items: [{ title: "Waiting for query…", valid: false }] });
-	}
-
-	// DOCS https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-repositories
-	// PERF using only 9, since that's the maximum Alfred displays
-	const apiURL = `https://api.github.com/search/repositories?q=${encodeURIComponent(
-		query,
-	)}&per_page=9`;
+	// DOCS https://docs.github.com/en/rest/activity/starring?apiVersion=2022-11-28#list-repositories-starred-by-a-user
+	const apiURL = `https://api.github.com/users/${username}/starred?per_page=100`;
 	const response = JSON.parse(httpRequest(apiURL));
 
 	const forkOnClone = $.getenv("fork_on_clone") === "1";
 	const depthInfo = $.getenv("clone_depth") ? ` (depth ${$.getenv("clone_depth")})` : "";
 
-	/** @type {AlfredItem[]} */
-	const repos = response.items
-		.filter((/** @type {GithubRepo} */ repo) => !(repo.fork || repo.archived))
-		.map((/** @type {GithubRepo} */ repo) => {
-			// calculate relative date
-			// INFO pushed_at refers to commits only https://github.com/orgs/community/discussions/24442
-			// CAVEAT pushed_at apparently also includes pushes via PR :(
-			const lastUpdated = repo.pushed_at ? humanRelativeDate(repo.pushed_at) : "";
+	/** @type AlfredItem[] */
+	const repos = response.map((/** @type {GithubRepo} */ repo) => {
+		const lastUpdated = repo.pushed_at ? humanRelativeDate(repo.pushed_at) : "";
 
-			const subtitle = [
-				repo.owner.login,
-				"★ " + repo.stargazers_count,
-				lastUpdated,
-				repo.description,
-			]
-				.filter(Boolean)
-				.join("  ·  ");
+		const subtitle = [
+			repo.owner.login,
+			"★ " + repo.stargazers_count,
+			lastUpdated,
+			repo.description,
+		]
+			.filter(Boolean)
+			.join("  ·  ");
 
-			const cloneSubtitle = "⌃: Shallow Clone " + depthInfo + (forkOnClone ? " & Fork" : "");
-			const secondUrl = repo.homepage || repo.html_url + "/releases";
+		const cloneSubtitle = "⌃: Shallow Clone " + depthInfo + (forkOnClone ? " & Fork" : "");
+		const secondUrl = repo.homepage || repo.html_url + "/releases";
 
-			return {
-				title: repo.name,
-				subtitle: subtitle,
-				match: alfredMatcher(repo.name),
-				arg: repo.html_url,
-				quicklookurl: repo.html_url,
-				mods: {
-					shift: {
-						subtitle: `⇧: Search Issues (${repo.open_issues} open)`,
-						arg: repo.full_name,
-					},
-					cmd: {
-						arg: secondUrl,
-						subtitle: `⌘: Open  "${secondUrl}"`,
-					},
-					ctrl: {
-						subtitle: cloneSubtitle,
-					},
-				},
-			};
-		});
-
-	// GUARD no results
-	if (repos.length === 0) {
-		repos.push({
-			title: "🚫 No results",
-			subtitle: `No results found for '${query}'`,
-			valid: false,
+		return {
+			title: repo.name,
+			subtitle: subtitle,
+			match: alfredMatcher(repo.name),
+			arg: repo.html_url,
+			quicklookurl: repo.html_url,
 			mods: {
-				shift: { valid: false },
-				cmd: { valid: false },
-				alt: { valid: false },
-				ctrl: { valid: false },
+				shift: {
+					subtitle: `⇧: Search Issues (${repo.open_issues} open)`,
+					arg: repo.full_name,
+				},
+				cmd: {
+					arg: secondUrl,
+					subtitle: `⌘: Open  "${secondUrl}"`,
+				},
+				ctrl: {
+					subtitle: cloneSubtitle,
+				},
 			},
-		});
-	}
-	return JSON.stringify({ items: repos });
+		};
+	});
+
+	return JSON.stringify({
+		items: repos,
+		cache: { seconds: 1800 },
+	});
 }
