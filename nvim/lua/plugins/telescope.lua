@@ -235,6 +235,7 @@ local function telescopeConfig()
 				prompt_prefix = "󰊢 ",
 				initial_mode = "normal",
 				show_untracked = true,
+				file_ignore_patterns = {}, -- do not ignore images etc here
 				mappings = {
 					n = {
 						["<Tab>"] = "move_selection_worse",
