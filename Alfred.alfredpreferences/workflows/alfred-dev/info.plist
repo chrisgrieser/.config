@@ -696,7 +696,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>reload-workflow.applescript</string>
+				<string>./scripts/reload-workflow.applescript</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -1227,9 +1227,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>1025</real>
+			<real>1030</real>
 			<key>ypos</key>
-			<real>750</real>
+			<real>755</real>
 		</dict>
 		<key>4D3E285F-7A6E-48E9-B895-F861C8E1FDF2</key>
 		<dict>
@@ -1462,9 +1462,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>1060</real>
+			<real>1075</real>
 			<key>ypos</key>
-			<real>375</real>
+			<real>380</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
