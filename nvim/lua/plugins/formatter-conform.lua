@@ -105,6 +105,8 @@ local function formattingFunc(bufnr)
 					i * 60
 				)
 			end
+			-- to trigger closing the opened import folds
+			vim.defer_fn(function() vim.cmd("1 foldclose") end, (#actions * 60) + 300)
 		end
 	end)
 end
