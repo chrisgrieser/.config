@@ -3,8 +3,9 @@ vim.bo.expandtab = true
 vim.bo.shiftwidth = 4
 vim.bo.tabstop = 4
 
--- formatters prescribe comments being seperated by two spaces
+-- formatters prescribe comments being separated by two spaces
 vim.opt_local.listchars:append { multispace = " " }
+vim.opt_local.formatoptions:append("r") -- `<CR>` in insert mode
 
 --------------------------------------------------------------------------------
 -- VIRTUAL ENVIRONMENT

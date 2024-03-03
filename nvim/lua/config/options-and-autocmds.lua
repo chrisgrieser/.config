@@ -21,7 +21,6 @@ vim.filetype.add {
 -- DIRECTORIES
 
 -- move to custom location where they are synced independently from the dotfiles repo
-
 opt.undodir = vim.g.syncedData .. "/undo"
 opt.viewdir = vim.g.syncedData .. "/view"
 opt.shadafile = vim.g.syncedData .. "/main.shada"
@@ -32,9 +31,10 @@ opt.swapfile = false -- doesn't help and only creates useless files and notifica
 autocmd("FocusLost", {
 	once = true,
 	callback = function()
-		if not os.date("%a") == "Mon" then return end
-		vim.fn.system { "find", opt.viewdir:get(), "-mtime", "+60d", "-delete" }
-		vim.fn.system { "find", opt.undodir:get()[1], "-mtime", "+30d", "-delete" }
+		if os.date("%a") == "Mon" then
+			vim.fn.system { "find", opt.viewdir:get(), "-mtime", "+60d", "-delete" }
+			vim.fn.system { "find", opt.undodir:get()[1], "-mtime", "+30d", "-delete" }
+		end
 	end,
 })
 
@@ -44,7 +44,7 @@ autocmd("FocusLost", {
 opt.undofile = true -- enables persistent undo history
 
 -- extra undo-points (= more fine-grained undos)
--- WARN insert mode mappings with `.` or `,` cause problems with `typescript-tools.nvim`
+-- WARN insert mode mappings with `.` or `,` cause problems with typescript
 local triggerChars = { ";", '"', "'", "<Space>" }
 
 for _, char in pairs(triggerChars) do
@@ -58,7 +58,7 @@ end
 --------------------------------------------------------------------------------
 -- AUTOMATION (external control)
 
--- read cwd (via window title)
+-- enable reading cwd via window title
 opt.title = true
 opt.titlelen = 0 -- 0 = do not shorten title
 opt.titlestring = "%{getcwd()}"
@@ -84,7 +84,7 @@ opt.startofline = true -- motions like "G" also move to the first char
 opt.virtualedit = "block" -- visual-block mode can select beyond end of line
 
 opt.showmatch = true -- when closing a bracket, briefly flash the matching one
-opt.matchtime = 1 -- deci-seconds
+opt.matchtime = 1 -- duration of that flashing n deci-seconds
 
 opt.spell = false
 opt.spellfile = { vim.g.dictionaryPath }
@@ -117,18 +117,20 @@ opt.pumheight = 12 -- max height
 opt.sidescrolloff = 15
 opt.scrolloff = 15
 
-opt.shiftround = true
-opt.smartindent = true
-opt.expandtab = false -- mostly set by .editorconfig, therefore only fallback
+-- mostly set by .editorconfig, therefore only fallback
+opt.expandtab = false 
 opt.tabstop = 3
 opt.shiftwidth = 3
+
+opt.shiftround = true
+opt.smartindent = true
 
 --------------------------------------------------------------------------------
 -- SEARCH & SUBSTITUTION
 
 opt.ignorecase = true
 opt.smartcase = true
-opt.inccommand = "split" -- preview incremental commands
+opt.inccommand = "split" -- preview incremental commands like `:substitute`
 
 -- make `:substitute` also notify how many changes were made
 -- works, as `CmdlineLeave` is triggered before the execution of the command
@@ -228,25 +230,24 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "QuickFixCmdPost" }, {
 			local fileExists = vim.loop.fs_stat(bufname) ~= nil
 			local isNewBuffer = bufname == ""
 			-- prevent the temporary buffers from conform.nvim's "injected"
-			-- formatter to be closed by this. (filename is like "README.md.5.lua")
+			-- formatter to be closed by this (filename is like "README.md.5.lua")
 			local conformTempBuf = bufname:find("%.md%.%d+%.%l+$")
-
 			if fileExists or isSpecialBuffer or isNewBuffer or conformTempBuf then return end
 
 			vim.notify(("%q does not exist anymore. Closing."):format(vim.fs.basename(bufname)))
 			vim.api.nvim_buf_delete(bufnr, { force = false, unload = false })
-		end, 100)
+		end, 150)
 	end,
 })
 
 --------------------------------------------------------------------------------
 -- AUTO-CD TO PROJECT ROOT
--- (simplified version of project.nvim lite)
+-- (simplified version of project.nvim)
 local autoCd = {
 	rootFiles = {
-		"info.plist", -- Alfred workflows
 		"Makefile",
 		".git",
+		"info.plist", -- Alfred workflows
 		".project-root", -- manual marker file
 	},
 	childOfDir = {
