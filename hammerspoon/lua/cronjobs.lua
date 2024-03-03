@@ -27,7 +27,7 @@ end):start()
 M.timer_clock = hs.timer
 	.doEvery(60, function()
 		local isFullHour = os.date("%M") == "00"
-		if isFullHour and u.screenIsUnlocked() and u.betweenTime(8, 23) and not env.isProjector() then
+		if isFullHour and u.screenIsUnlocked() then
 			local hour = tostring(os.date("%H:%M"))
 			hs.alert(hour, 2)
 		end

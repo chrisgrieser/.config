@@ -66,6 +66,7 @@ backup "$VAULT_PATH/" ./Homefolder/main-vault
 backup "$PASSWORD_STORE_DIR/" ./Homefolder/password-store
 backup "$HOME/RomComs/" ./Homefolder/RomComs
 
+# full iCloud
 backup "$HOME/Library/Mobile Documents/com~apple~CloudDocs/" ./iCloud-Folder
 
 #───────────────────────────────────────────────────────────────────────────────
