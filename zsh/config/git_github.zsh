@@ -7,7 +7,6 @@ alias gi='gh issue list --state=open'
 alias gI='gh issue list --state=closed'
 
 alias mergetool="git mergetool"
-alias restore='git restore'
 alias reset='git reset'
 alias push='git push'
 alias pull='git pull --tags'
@@ -44,6 +43,8 @@ ZSH_HIGHLIGHT_REGEXP+=(
 #───────────────────────────────────────────────────────────────────────────────
 # STAGING
 alias gaa='git add --all'
+alias restore='git restore'
+alias unadd='git restore --staged'
 
 # without argument, run interactively via fzf to toggle staged/unstaged
 # with argument, stage the file(s). Modified completions allow for quicker selection.
@@ -68,7 +69,7 @@ function ga {
 }
 
 # completions for running `ga` with argument
-_ga() {
+_change_git_files() {
 	local -a changed_files=()
 	while IFS='' read -r file; do # turn lines into array
 		changed_files+=("$file")
@@ -77,7 +78,9 @@ _ga() {
 	local expl && _description -V git-changed-files expl 'Changed & Untracked Files'
 	compadd "${expl[@]}" -- "${changed_files[@]}"
 }
-compdef _ga ga
+compdef _change_git_files ga
+compdef _change_git_files unadd
+compdef _change_git_files restore
 
 #───────────────────────────────────────────────────────────────────────────────
 # SMART COMMIT

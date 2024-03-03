@@ -75,38 +75,39 @@ local function formattingFunc(bufnr)
 	local specialBuffer = vim.bo[bufnr].buftype ~= ""
 	if specialBuffer or not fileExists or not valid then return end
 
+	-- parameters
 	local ft = vim.bo[bufnr].filetype
+	local useLsp = vim.tbl_contains(lspFormatFt, ft) and "always" or false
 
 	-- PENDING https://github.com/stevearc/conform.nvim/issues/255
 	if vim.tbl_contains(autoIndentFt, ft) then u.normal("gg=G``") end
 
-	local useLsp = vim.tbl_contains(lspFormatFt, ft) and "always" or false
+	if ft == "typescript" then
+		vim.lsp.buf.code_action {
+			context = { only = { "source.addMissingImports.ts" } },
+			apply = true,
+		}
+		vim.defer_fn(
+			function()
+				vim.lsp.buf.code_action {
+					context = { only = { "source.removeUnusedImports.ts" } },
+					apply = true,
+				}
+			end,
+			60
+		)
+		vim.defer_fn(function() require("conform").format { lsp_fallback = useLsp } end, 1)
+		-- close imports opened before
+		vim.defer_fn(function() vim.cmd("1 foldclose") end, 600)
+		return
+	end
+
 	require("conform").format({ lsp_fallback = useLsp }, function()
 		if ft == "python" then
 			vim.lsp.buf.code_action {
 				context = { only = { "source.fixAll.ruff" } },
 				apply = true,
 			}
-		elseif ft == "typescript" then
-			local actions = {
-				"source.addMissingImports.ts",
-				"source.removeUnusedImports.ts",
-				"source.organizeImports.biome", -- again, since import order changes m(
-			}
-			-- deferred, so it does not conflict with `addMissingImports`
-			for i = 1, #actions do
-				vim.defer_fn(
-					function()
-						vim.lsp.buf.code_action {
-							context = { only = { actions[i] } },
-							apply = true,
-						}
-					end,
-					i * 60
-				)
-			end
-			-- to trigger closing the opened import folds
-			vim.defer_fn(function() vim.cmd("1 foldclose") end, (#actions * 60) + 300)
 		end
 	end)
 end
