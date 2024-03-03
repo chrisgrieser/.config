@@ -11,7 +11,6 @@ local lspToMasonMap = {
 	cssls = "css-lsp",
 	efm = "efm", -- linter integration, only used for shellcheck in zsh files
 	emmet_language_server = "emmet-language-server", -- css/html completions
-	html = "html-lsp",
 	jsonls = "json-lsp",
 	ltex = "ltex-ls", -- languagetool (natural language linter)
 	lua_ls = "lua-language-server",
