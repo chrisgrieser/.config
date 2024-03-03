@@ -1,10 +1,8 @@
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
-local function terminateCallback() require("dapui").close() end
-
 local function dapConfig()
-	-- Sign-Icons
+	--[[ Sign-Icons & Highlights ]]
 	local sign = vim.fn.sign_define
 	local hintBg = u.getHighlightValue("DiagnosticVirtualTextHint", "bg")
 	vim.api.nvim_set_hl(0, "DapBreak", { bg = hintBg })
@@ -13,14 +11,14 @@ local function dapConfig()
 	sign("DapBreakpoint", { text = "", texthl = "DiagnosticInfo" })
 	sign("DapBreakpointRejected", { text = "", texthl = "DiagnosticError" })
 
-	-- auto-open/close the dap-ui
+	--[[ auto-open/close the dap-ui ]]
 	local listener = require("dap").listeners.before
 	listener.attach.dapui_config = function() require("dapui").open() end
 	listener.launch.dapui_config = function() require("dapui").open() end
-	listener.event_terminated.dapui_config = terminateCallback
-	listener.event_exited.dapui_config = terminateCallback
+	listener.event_terminated.dapui_config = function() require("dapui").close() end
+	listener.event_exited.dapui_config = function() require("dapui").close() end
 
-	-- lualine components
+	--[[ lualine components ]]
 	local breakpointHl = vim.fn.sign_getdefined("DapBreakpoint")[1].texthl
 	local breakpointFg = u.getHighlightValue(breakpointHl, "fg")
 	u.addToLuaLine("sections", "lualine_y", {
@@ -57,7 +55,7 @@ return {
 			{ "<leader>dt", function() require("dap").terminate() end, desc = " Terminate" },
 			-- stylua: ignore end
 		},
-		init = function() u.leaderSubkey("d", " Debugger") end,
+		init = function() u.leaderSubkey("d", " Debugger", { "n", "x" }) end,
 		config = dapConfig,
 	},
 	{

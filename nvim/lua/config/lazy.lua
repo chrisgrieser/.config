@@ -6,14 +6,8 @@ local notify = require("config.utils").notify
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 local lazyIsInstalled = vim.loop.fs_stat(lazypath) ~= nil
 if not lazyIsInstalled then
-	vim.fn.system {
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable",
-		lazypath,
-	}
+	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+	vim.fn.system { "git", "clone", "--filter=blob:none", lazyrepo, "--branch=stable", lazypath }
 end
 vim.opt.runtimepath:prepend(lazypath)
 

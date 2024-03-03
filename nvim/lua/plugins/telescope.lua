@@ -392,7 +392,7 @@ local function telescopeConfig()
 					["string"] = "Comment",
 				},
 			},
-			lsp_workspace_symbols = {
+			lsp_dynamic_workspace_symbols = {
 				prompt_prefix = "󰒕 ",
 				fname_width = 0, -- can see name in preview title
 				symbol_width = 30,
@@ -423,6 +423,10 @@ local function telescopeConfig()
 					},
 				},
 			},
+			current_buffer_fuzzy_find = {
+				enable_preview = false,
+				prompt_prefix = " ",
+			},
 		},
 		extensions = {
 			-- insert at cursor instead (relevant for lua)
@@ -451,7 +455,7 @@ return {
 			{ "g.", function() telescope("resume") end, desc = " Continue" },
 			{ "gs", function() telescope("treesitter") end, desc = " Symbols" },
 			-- stylua: ignore
-			{ "gw", function() telescope("lsp_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
+			{ "gw", function() telescope("lsp_dynamic_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
 			{ "gd", function() telescope("lsp_definitions") end, desc = "󰒕 Definitions" },
 			{ "gD", function() telescope("lsp_type_definitions") end, desc = "󰒕 Type Definitions" },
 			{ "gf", function() telescope("lsp_references") end, desc = "󰒕 References" },
@@ -462,6 +466,7 @@ return {
 			{ "<leader>gL", function() telescope("git_bcommits") end, desc = " Buffer Commits" },
 			{ "<leader>gb", function() telescope("git_branches") end, desc = " Branches" },
 			{ "zl", function() telescope("spell_suggest") end, desc = "󰓆 Spell Suggest" },
+			{ "g-", function() telescope("current_buffer_fuzzy_find") end, desc = " Find in Buffer" },
 			{
 				"go",
 				function()
