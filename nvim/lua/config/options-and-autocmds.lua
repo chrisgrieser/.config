@@ -87,7 +87,7 @@ opt.showmatch = true -- when closing a bracket, briefly flash the matching one
 opt.matchtime = 1 -- deci-seconds
 
 opt.spell = false
-opt.spellfile = { vim.g.linterConfigs .. "/spellfile-vim-ltex.add" } -- has to be `.add`
+opt.spellfile = { vim.g.dictionaryPath }
 opt.spelllang = "en_us" -- even with spellcheck disabled, still relevant for `z=`
 
 opt.splitright = false -- vsplit right instead of left
@@ -104,7 +104,7 @@ opt.shortmess:append("sSI") -- reduce info in :messages
 opt.report = 9001 -- disable "x more/fewer lines" messages
 
 opt.iskeyword:append("-") -- don't treat "-" as word boundary, e.g. for kebab-case variables
-opt.nrformats = {} -- make <C-a>/<C-x> ignore octal and hex
+opt.nrformats = {} -- remove octal and hex from <C-a>/<C-x>
 
 opt.updatetime = 250 -- also affects cursorword symbols and lsp-hints
 opt.timeoutlen = 666 -- also affects duration until which-key is shown

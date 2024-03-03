@@ -238,9 +238,9 @@ return {
 			}
 			opts.langs = {
 				python = { string_content = gww }, -- python docstrings
-				rst = { paragraph = gww }, -- python docstrings ()
+				rst = { paragraph = gww }, -- python docstrings (when rsg is injected)
 				comment = { source = gww, element = gww }, -- comments in any language
-				jsdoc = { source = gww, descriptin = gww },
+				jsdoc = { source = gww, description = gww },
 				javascript = curleyLessIfStatementJoin,
 				typescript = curleyLessIfStatementJoin,
 			}

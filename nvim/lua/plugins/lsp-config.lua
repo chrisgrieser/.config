@@ -23,6 +23,7 @@ local lspToMasonMap = {
 	vale_ls = "vale-ls", -- natural language linter
 	yamlls = "yaml-language-server",
 	tsserver = "typescript-language-server",
+	-- harper_ls = "harper-ls", PENDING https://github.com/mason-org/mason-registry/pull/4690
 }
 
 --------------------------------------------------------------------------------
@@ -225,7 +226,7 @@ serverConfigs.jsonls = {
 
 -- since reading external file with the method described in docs does not work
 local function getDictWords()
-	local dictfile = vim.g.linterConfigs .. "/spellfile-vim-ltex.add"
+	local dictfile = vim.g.dictionaryPath
 	local fileDoesNotExist = vim.loop.fs_stat(dictfile) == nil
 	if fileDoesNotExist then return {} end
 	local words = {}
@@ -246,7 +247,6 @@ serverConfigs.ltex = {
 				["en-US"] = {
 					"EN_QUOTES", -- don't expect smart quotes
 					"WHITESPACE_RULE", -- too many false positives
-					"PUNCTUATION_PARAGRAPH_END", -- too many false positives
 				},
 			},
 			diagnosticSeverity = {
@@ -290,6 +290,15 @@ serverConfigs.ltex = {
 serverConfigs.typos_lsp = {
 	init_options = { diagnosticSeverity = "information" },
 }
+
+-- PENDING https://github.com/mason-org/mason-registry/pull/4690
+-- serverConfigs.harper_ls {
+-- 	settings = {
+-- 		["harper-ls"] = {
+-- 			userDictPath = vim.g.dictionaryPath,
+-- 		},
+-- 	},
+-- }
 
 -- VALE
 -- DOCS https://vale.sh/docs/integrations/guide/#vale-ls
@@ -350,7 +359,6 @@ return {
 				serverConfig.capabilities = lspCapabilities
 				require("lspconfig")[lsp].setup(serverConfig)
 			end
-
 
 			local symLinkFrom = vim.env.DATA_DIR .. "/private dotfiles/codium-api-key.json"
 			local symLinkTo = os.getenv("HOME") .. "/.codeium/config.json"
