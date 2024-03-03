@@ -305,12 +305,12 @@ return {
 				u = { name = " 󰕌 Undo" },
 				o = { name = "  Options" },
 				p = { name = " 󰏗 Packages" },
-				c = { name = "  Code Action" },
 				i = { name = " 󱡴 Inspect" },
 			}, { prefix = "<leader>" })
 
 			-- leader prefixes normal+visual mode
 			whichkey.register({
+				c = { name = "  Code Action" },
 				f = { name = " 󱗘 Refactor" },
 				g = { name = " 󰊢 Git" },
 			}, { prefix = "<leader>", mode = { "x", "n" } })
@@ -321,25 +321,19 @@ return {
 	},
 	{
 		"chrisgrieser/nvim-chainsaw",
-		init = function() u.leaderSubkey("l", " Log") end,
+		init = function() u.leaderSubkey("l", " Log", { "n", "x" }) end,
 		opts = {
-			marker = "🔹",
-			logStatements = {
-				objectLog = {
-					-- Obsidian API
-					typescript = 'new Notice ("%s %s:" + %s.toString())',
-				},
-			},
+			marker = "❗",
 		},
 		keys = {
 			-- stylua: ignore start
-			{"<leader>lb", function() require("chainsaw").beepLog() end, desc = "󰸢 beep log" },
-			{"<leader>ll", function() require("chainsaw").variableLog() end, mode = {"n", "x"}, desc = "󰸢 variable log" },
-			{"<leader>lo", function() require("chainsaw").objectLog() end, mode = {"n", "x"}, desc = "󰸢 object log" },
-			{"<leader>lm", function() require("chainsaw").messageLog() end, desc = "󰸢 message log" },
-			{"<leader>lt", function() require("chainsaw").timeLog() end, desc = "󰸢 time log" },
-			{"<leader>ld", function() require("chainsaw").debugLog() end, desc = "󰸢 debugger log" },
-			{"<leader>la", function() require("chainsaw").assertLog() end, mode = {"n", "x"}, desc = "󰸢 assert log" },
+			{"<leader>lb", function() require("chainsaw").beepLog() end, desc = "󰸢 beep" },
+			{"<leader>ll", function() require("chainsaw").variableLog() end, mode = {"n", "x"}, desc = "󰸢 variable" },
+			{"<leader>lo", function() require("chainsaw").objectLog() end, mode = {"n", "x"}, desc = "󰸢 object" },
+			{"<leader>lm", function() require("chainsaw").messageLog() end, desc = "󰸢 message" },
+			{"<leader>lt", function() require("chainsaw").timeLog() end, desc = "󰸢 time" },
+			{"<leader>ld", function() require("chainsaw").debugLog() end, desc = "󰸢 debugger" },
+			{"<leader>la", function() require("chainsaw").assertLog() end, mode = {"n", "x"}, desc = "󰸢 assert" },
 
 			{"<leader>lr", function() require("chainsaw").removeLogs() end, desc = "󰹝 remove logs" },
 			-- stylua: ignore end

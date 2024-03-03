@@ -224,7 +224,7 @@ return {
 		"chrisgrieser/nvim-scissors",
 		dependencies = "nvim-telescope/telescope.nvim",
 		mason_dependencies = "yq",
-		init = function() u.leaderSubkey("n", " Snippets") end,
+		init = function() u.leaderSubkey("n", " Snippets", { "n", "x" }) end,
 		keys = {
 			{
 				"<leader>nn",

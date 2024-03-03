@@ -45,15 +45,21 @@ function M.colorschemeMod(hlgroup, modification)
 	})
 end
 
+---@alias vimMode "n"|"v"|"x"|"i"|"o"|"c"|"t"
+
 ---set up subkey for the <leader> key (if whichkey is loaded)
 ---@param key string
 ---@param label string
-function M.leaderSubkey(key, label)
-	local ok, whichKey = pcall(require, "which-key")
-	if not ok then return end
-	whichKey.register {
-		["<leader>" .. key] = { name = " " .. label },
-	}
+---@param modes? vimMode|vimMode[]
+function M.leaderSubkey(key, label, modes)
+	vim.defer_fn(function()
+		local ok, whichkey = pcall(require, "which-key")
+		if not ok then return end
+		whichkey.register(
+			{ [key] = { name = " " .. label } },
+			{ prefix = "<leader>", mode = modes or "n" }
+		)
+	end, 2000)
 end
 
 ---Adds a component to the lualine after lualine was already set up. Useful for
@@ -80,7 +86,6 @@ function M.addToLuaLine(bar, section, component, whereInComponent)
 end
 
 ---ensures unique keymaps https://www.reddit.com/r/neovim/comments/16h2lla/can_you_make_neovim_warn_you_if_your_config_maps/
----@alias vimMode "n"|"v"|"x"|"i"|"o"|"c"|"t"
 ---@param modes vimMode|vimMode[]
 ---@param lhs string
 ---@param rhs string|function
