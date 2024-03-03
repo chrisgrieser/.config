@@ -39,6 +39,7 @@ return {
 			for i = 1, #deps do
 				if deps[i] == "typos-lsp" then
 					deps[i] ={ "typos-lsp", version = "v0.1.13" } 
+					break
 				end
 			end
 
