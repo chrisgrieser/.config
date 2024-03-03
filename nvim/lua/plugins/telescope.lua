@@ -424,8 +424,8 @@ local function telescopeConfig()
 				},
 			},
 			current_buffer_fuzzy_find = {
-				enable_preview = false,
-				prompt_prefix = " ",
+				previewer = false,
+				prompt_prefix = " ",
 			},
 		},
 		extensions = {
@@ -539,7 +539,7 @@ return {
 				mode = { "n", "i" },
 				function()
 					require("telescope.builtin").symbols {
-						sources = { "nerd", "math" },
+						sources = { "nerd", "math", "emoji" },
 						layout_config = { horizontal = { width = 0.35, height = 0.55 } },
 					}
 				end,
