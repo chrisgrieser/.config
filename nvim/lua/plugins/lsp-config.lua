@@ -289,7 +289,6 @@ serverConfigs.ltex = {
 -- DOCS https://github.com/tekumara/typos-lsp#settings
 serverConfigs.typos_lsp = {
 	init_options = { diagnosticSeverity = "information" },
-	-- cmd_env = { RUST_LOG = "debug" }
 }
 
 -- VALE
