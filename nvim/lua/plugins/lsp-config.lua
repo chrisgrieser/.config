@@ -39,6 +39,7 @@ local lspToMasonMap = {
 ---@field root_dir? function(filename, bufnr)
 ---@field settings? table <string, table>
 ---@field single_file_support? boolean
+---@field cmd_env? table<string, string>
 
 ---@type table<string, lspConfiguration>
 local serverConfigs = {}
@@ -288,6 +289,7 @@ serverConfigs.ltex = {
 -- DOCS https://github.com/tekumara/typos-lsp#settings
 serverConfigs.typos_lsp = {
 	init_options = { diagnosticSeverity = "information" },
+	-- cmd_env = { RUST_LOG = "debug" }
 }
 
 -- VALE
@@ -304,7 +306,7 @@ serverConfigs.vale_ls = {
 	root_dir = function() return os.getenv("HOME") end,
 
 	-- FIX https://github.com/errata-ai/vale-ls/issues/4
-	on_attach = function() vim.env.VALE_CONFIG_PATH = vim.g.linterConfigs .. "/vale/vale.ini" end,
+	cmd_env = { VALE_CONFIG_PATH = vim.g.linterConfigs .. "/vale/vale.ini" },
 }
 
 --------------------------------------------------------------------------------
