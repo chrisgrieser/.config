@@ -238,6 +238,7 @@ return {
 			}
 			opts.langs = {
 				python = { string_content = gww }, -- python docstrings
+				rst = { paragraph = gww }, -- python docstrings ()
 				comment = { source = gww, element = gww }, -- comments in any language
 				jsdoc = { source = gww, descriptin = gww },
 				javascript = curleyLessIfStatementJoin,
