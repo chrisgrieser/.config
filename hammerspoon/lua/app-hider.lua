@@ -42,6 +42,7 @@ end
 -- hide other apps, except twitter, Zoom, or PiP apps
 ---@param appObj hs.application the app not to hide
 local function hideOthers(appObj)
+	-- GUARD current app having no window
 	if
 		not appObj
 		or not appObj:mainWindow()
@@ -50,21 +51,19 @@ local function hideOthers(appObj)
 		return
 	end
 	local thisWin = appObj:mainWindow()
-	local thisAppName = appObj:name()
 
-	-- only hide when bigger window
+	-- GUARD current window not being big enough
 	if not (wu.checkSize(thisWin, wu.pseudoMax) or wu.checkSize(thisWin, wu.maximized)) then
 		return
 	end
 
 	for _, w in pairs(thisWin:otherWindowsSameScreen()) do
 		local app = w:application()
+		-- GUARD exclude some apps and PiP windows
 		if
 			app
 			and not (app:findWindow("Picture in Picture"))
 			and not (hs.fnutils.contains(config.appsNotToHide, app:name()))
-			and not (app:name() == thisAppName)
-			and not (app:isHidden())
 		then
 			app:hide()
 		end

@@ -59,6 +59,7 @@ return {
 				vim.lsp.protocol.SymbolKind.Method,
 				vim.lsp.protocol.SymbolKind.Interface,
 				vim.lsp.protocol.SymbolKind.Object,
+				vim.lsp.protocol.SymbolKind.Key,
 			},
 		},
 	},
