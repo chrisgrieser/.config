@@ -95,7 +95,11 @@
     "prefix": "table (2x2)"
   },
   "insert toc": {
-    "body": "<!-- toc -->",
+    "body": [
+      "## Table of Content",
+      "",
+      "<!-- toc -->"
+    ],
     "description": "https://github.com/jonschlinkert/markdown-toc#tocinsert",
     "prefix": "insert toc"
   },
