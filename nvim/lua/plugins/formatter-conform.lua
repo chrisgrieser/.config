@@ -82,23 +82,29 @@ local function formattingFunc(bufnr)
 	-- PENDING https://github.com/stevearc/conform.nvim/issues/255
 	if vim.tbl_contains(autoIndentFt, ft) then u.normal("gg=G``") end
 
+	-- typescript: organize imports before
 	if ft == "typescript" then
-		vim.lsp.buf.code_action {
-			context = { only = { "source.addMissingImports.ts" } },
-			apply = true,
+		local actions = {
+			"source.addMissingImports.ts",
+			"source.removeUnusedImports.ts",
+			"source.organizeImports.biome",
 		}
+		-- deferred, so it does not conflict with `addMissingImports`
+		for i = 1, #actions do
+			vim.defer_fn(
+				function()
+					vim.lsp.buf.code_action {
+						context = { only = { actions[i] } },
+						apply = true,
+					}
+				end,
+				i * 60
+			)
+		end
 		vim.defer_fn(
-			function()
-				vim.lsp.buf.code_action {
-					context = { only = { "source.removeUnusedImports.ts" } },
-					apply = true,
-				}
-			end,
-			60
+			function() require("conform").format { lsp_fallback = useLsp } end,
+			(#actions + 1) * 60
 		)
-		vim.defer_fn(function() require("conform").format { lsp_fallback = useLsp } end, 1)
-		-- close imports opened before
-		vim.defer_fn(function() vim.cmd("1 foldclose") end, 600)
 		return
 	end
 

@@ -35,6 +35,13 @@ return {
 			table.sort(deps)
 			deps = vim.fn.uniq(deps)
 
+			-- PENDING https://github.com/tekumara/typos-lsp/issues/39
+			for i = 1, #deps do
+				if deps[i] == "typos-lsp" then
+					deps[i] ={ "typos-lsp", version = "v0.1.13" } 
+				end
+			end
+
 			require("mason-tool-installer").setup {
 				ensure_installed = deps,
 				run_on_start = false, -- manually, since otherwise not working with lazy-loading
