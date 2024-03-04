@@ -133,6 +133,7 @@ end):start()
 -- scrollup on wake
 M.caff_TickerWake = c.new(function(event)
 	if event == c.screensDidSleep then
+		print("❗ beep 🟩")
 		M.isSleeping = true
 	elseif event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock then
 		M.isSleeping = false
