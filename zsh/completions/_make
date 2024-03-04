@@ -1,6 +1,7 @@
 #compdef make
-
+# INFO my overwrite of the `make` completions.
 # only suggest recipes as completions for make
+
 local -a recipes=()
 while IFS='' read -r recipe; do # turn lines into array
 	recipes+=("$recipe")
