@@ -106,7 +106,7 @@ return {
 				desc = " Lookup Rule",
 			},
 			{
-				"<leader>cg",
+				"<leader>ci",
 				function() require("rulebook").ignoreRule() end,
 				desc = "󰅜 Ignore Rule",
 			},

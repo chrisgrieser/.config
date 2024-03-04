@@ -379,7 +379,7 @@ local function telescopeConfig()
 				prompt_prefix = " ",
 				prompt_title = "Symbols",
 				show_line = false,
-				symbols = { "function", "class", "method" },
+				symbols = { "function", "class", "method", "type" },
 				symbol_highlights = { ["function"] = "Function" },
 			},
 			lsp_document_symbols = {
@@ -423,14 +423,6 @@ local function telescopeConfig()
 					},
 				},
 			},
-			current_buffer_fuzzy_find = {
-				previewer = false,
-				prompt_prefix = " ",
-			},
-		},
-		extensions = {
-			-- insert at cursor instead (relevant for lua)
-			import = { insert_at_top = false },
 		},
 	}
 end
@@ -454,8 +446,11 @@ return {
 			{ "?", function() telescope("keymaps") end, desc = "⌨️ Search Keymaps" },
 			{ "g.", function() telescope("resume") end, desc = " Continue" },
 			{ "gs", function() telescope("treesitter") end, desc = " Symbols" },
-			-- stylua: ignore
-			{ "gw", function() telescope("lsp_dynamic_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
+			{
+				"gw",
+				function() telescope("lsp_dynamic_workspace_symbols") end,
+				desc = "󰒕 Workspace Symbols",
+			},
 			{ "gd", function() telescope("lsp_definitions") end, desc = "󰒕 Definitions" },
 			{ "gD", function() telescope("lsp_type_definitions") end, desc = "󰒕 Type Definitions" },
 			{ "gf", function() telescope("lsp_references") end, desc = "󰒕 References" },
@@ -466,7 +461,6 @@ return {
 			{ "<leader>gL", function() telescope("git_bcommits") end, desc = " Buffer Commits" },
 			{ "<leader>gb", function() telescope("git_branches") end, desc = " Branches" },
 			{ "zl", function() telescope("spell_suggest") end, desc = "󰓆 Spell Suggest" },
-			{ "g-", function() telescope("current_buffer_fuzzy_find") end, desc = " Find in Buffer" },
 			{
 				"go",
 				function()
@@ -546,14 +540,5 @@ return {
 				desc = " Icon Picker",
 			},
 		},
-	},
-	{ -- Add imports
-		"piersolenski/telescope-import.nvim",
-		dependencies = "nvim-telescope/telescope.nvim",
-		external_dependencies = "rg",
-		keys = {
-			{ "<leader>ci", function() telescope("import") end, desc = "󰋺 Add Import" },
-		},
-		config = function() require("telescope").load_extension("import") end,
 	},
 }

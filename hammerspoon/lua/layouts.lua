@@ -6,6 +6,7 @@ local u = require("lua.utils")
 local visuals = require("lua.visuals")
 local wu = require("lua.window-utils")
 local app = require("lua.utils").app
+local c = hs.caffeinate.watcher
 
 --------------------------------------------------------------------------------
 -- HELPERS
@@ -141,15 +142,11 @@ hs.hotkey.bind(u.hyper, "home", selectLayout)
 if u.isSystemStart() then selectLayout() end
 
 -- 4. Waking when not in the office
-M.caff_unlock = hs.caffeinate.watcher
-	.new(function(event)
-		local hasWoken = event == hs.caffeinate.watcher.screensDidWake
-			or event == hs.caffeinate.watcher.systemDidWake
-			or event == hs.caffeinate.watcher.screensDidUnlock
-
-		if hasWoken and not env.isAtOffice then u.runWithDelays(0.5, selectLayout) end
-	end)
-	:start()
+M.caff_unlock = c.new(function(event)
+	if event == c.systemDidWake or (event == c.screensDidUnlock and not env.isAtOffice) then
+		u.runWithDelays(0.5, selectLayout)
+	end
+end):start()
 
 --------------------------------------------------------------------------------
 return M
