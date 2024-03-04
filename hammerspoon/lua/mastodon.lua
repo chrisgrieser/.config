@@ -9,6 +9,7 @@ local mastodonApp = require("lua.environment-vars").mastodonApp
 local aw = hs.application.watcher
 local wf = hs.window.filter
 local keystroke = hs.eventtap.keyStroke
+local c = hs.caffeinate.watcher
 --------------------------------------------------------------------------------
 
 -- simply scroll up without the mouse and without focusing the app
@@ -17,6 +18,10 @@ local keystroke = hs.eventtap.keyStroke
 local function scrollUp()
 	local masto = app(mastodonApp)
 	if not masto or not u.screenIsUnlocked() or masto:isFrontmost() then return end
+
+	-- GUARD ensure scrolling up is not triggered when system is asleep, which prevents
+	-- the system from ever going to sleep
+	if M.isSleeping then return end
 
 	keystroke({ "cmd" }, "left", 1, masto) -- go back
 	keystroke({ "cmd" }, "1", 1, masto) -- go to home tab
@@ -87,6 +92,17 @@ end
 -- scroll
 hs.hotkey.bind({}, "home", scrollUp)
 
+-- Mona's autoscroll does not work reliably, therefore scrolling ourselves.
+-- Only scrolling when not idle, to not prevent the machine going to sleep.
+if mastodonApp == "Mona" then
+	local scrollEveryMins = 5 -- CONFIG
+	M.timer_regularScroll = hs.timer
+		.doEvery(scrollEveryMins * 60, function()
+			if hs.host.idleTime() < 120 then scrollUp() end
+		end)
+		:start()
+end
+
 M.aw_tickerWatcher = aw.new(function(appName, event, masto)
 	if appName == "CleanShot X" or appName == "Alfred" then return end
 
@@ -94,6 +110,7 @@ M.aw_tickerWatcher = aw.new(function(appName, event, masto)
 	if appName == mastodonApp and (event == aw.launched or event == aw.activated) then
 		u.whenAppWinAvailable(mastodonApp, function()
 			winToTheSide()
+			scrollUp()
 			wu.bringAllWinsToFront()
 
 			-- focus media window if there is one
@@ -109,6 +126,16 @@ M.aw_tickerWatcher = aw.new(function(appName, event, masto)
 		-- raise when switching window to other app
 	elseif (event == aw.activated or event == aw.launched) and appName ~= mastodonApp then
 		showHideTickerApp(hs.window.focusedWindow())
+	end
+end):start()
+
+-- scrollup on wake
+M.caff_TickerWake = c.new(function(event)
+	if event == c.screensDidSleep then
+		M.isSleeping = true
+	elseif event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock then
+		M.isSleeping = false
+		scrollUp()
 	end
 end):start()
 
