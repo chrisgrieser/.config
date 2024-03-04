@@ -121,7 +121,7 @@ local function project() return vim.fs.basename(vim.loop.cwd() or "") end
 
 --------------------------------------------------------------------------------
 
--- Setup filetype-specific symbol-filters for symbol-search
+-- FILETYPE-SPECIFIC SYMBOL-SEARCH
 -- (mostly for filetypes that do not know functions)
 -- Also, we are using document symbols here since Treesitter apparently does not
 -- support symbols for these filetypes.
@@ -145,6 +145,29 @@ vim.api.nvim_create_autocmd("FileType", {
 				}
 			end,
 			{ desc = " Sections", buffer = true }
+		)
+	end,
+})
+
+-- in lua, use treesitter, since it skips anonymous functions
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "lua",
+	callback = function()
+		vim.keymap.set(
+			"n",
+			"gs",
+			function()
+				require("telescope.builtin").treesitter {
+					show_line = false,
+					prompt_prefix = " ",
+					symbols = { "function", "method", "class", "struct" },
+					symbol_highlights = {
+						["function"] = "Function",
+						["method"] = "@method",
+					}
+				}
+			end,
+			{ desc = " Symbols", buffer = true }
 		)
 	end,
 })
@@ -379,8 +402,19 @@ local function telescopeConfig()
 				},
 			},
 			lsp_document_symbols = {
-				ignore_symbols = { "constant", "string", "interface", "class", "type" },
 				prompt_prefix = "󰒕 ",
+				ignore_symbols = {
+					"variable",
+					"constant",
+					"number",
+					"package",
+					"string",
+					"object",
+					"array",
+					"boolean",
+					"property",
+				},
+				-- apparently currently not working
 				symbol_highlights = {
 					["module"] = "Comment",
 					["array"] = "Comment",
@@ -394,10 +428,10 @@ local function telescopeConfig()
 				symbol_width = 30,
 				ignore_symbols = { "variable", "constant", "property" },
 				file_ignore_patterns = {
-					-- "node_modules", -- ts/js
-					-- ".local", -- neodev.nvim
-					-- "homebrew", -- nvim runtime
-					-- "EmmyLua.spoon", -- Hammerspoon
+					"node_modules", -- ts/js
+					".local", -- neodev.nvim
+					"homebrew", -- nvim runtime
+					"EmmyLua.spoon", -- Hammerspoon
 				},
 			},
 			spell_suggest = {
