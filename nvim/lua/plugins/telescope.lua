@@ -6,6 +6,7 @@ local telescope = vim.cmd.Telescope
 
 -- default mappings: https://github.com/nvim-telescope/telescope.nvim/blob/942fe5faef47b21241e970551eba407bc10d9547/lua/telescope/mappings.lua#L133
 local keymappings_I = {
+	["?"] = "which_key",
 	["<Tab>"] = "move_selection_worse",
 	["<S-Tab>"] = "move_selection_better",
 	["<CR>"] = "select_default",
@@ -258,6 +259,9 @@ local function telescopeConfig()
 				prompt_prefix = " ",
 				disable_coordinates = true,
 				layout_config = { horizontal = { preview_width = 0.7 } },
+				mappings = {
+					i = { ["<D-f>"] = "to_fuzzy_refine" },
+				},
 			},
 			git_status = {
 				prompt_prefix = "󰊢 ",
@@ -431,6 +435,9 @@ local function telescopeConfig()
 					".local", -- neodev.nvim
 					"homebrew", -- nvim runtime
 					"EmmyLua.spoon", -- Hammerspoon
+				},
+				mappings = {
+					i = { ["<D-f>"] = "to_fuzzy_refine" },
 				},
 			},
 			spell_suggest = {
