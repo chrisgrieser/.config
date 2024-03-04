@@ -224,8 +224,8 @@ local function telescopeConfig()
 			find_files = {
 				prompt_prefix = "󰝰 ",
 				path_display = filenameFirst,
-				-- prioritze recently modified
 				tiebreak = function(a, b, _)
+					-- prioritze recently modified files
 					local a_stats = vim.loop.fs_stat(a.ordinal)
 					local b_stats = vim.loop.fs_stat(b.ordinal)
 					if not (a_stats and b_stats) then return false end
@@ -234,17 +234,10 @@ local function telescopeConfig()
 				-- FIX using the default fd command from telescope is somewhat buggy,
 				-- e.g. not respecting `~/.config/fd/ignore`
 				find_command = { "fd", "--type=file", "--type=symlink" },
-				mappings = {
-					i = {
-						["<C-h>"] = toggleHiddenAndIgnore,
-						-- automatically toggle hidden files when entering `.`
-						["."] = function(prompt_bufnr)
-							vim.api.nvim_feedkeys(".", "n", true)
-							toggleHiddenAndIgnore(prompt_bufnr)
-						end,
-					},
-				},
 				follow = false,
+				mappings = {
+					i = { ["<C-h>"] = toggleHiddenAndIgnore },
+				},
 			},
 			oldfiles = {
 				prompt_prefix = "󰋚 ",
