@@ -31,7 +31,7 @@ safeRequire("lua.dark-mode")
 
 -- window management
 safeRequire("lua.window-utils")
-safeRequire("lua.layouts")
+-- safeRequire("lua.layouts")
 safeRequire("lua.app-hider")
 safeRequire("lua.auto-quitter")
 
@@ -48,7 +48,7 @@ safeRequire("lua.vertical-split")
 -- app-specific
 safeRequire("lua.app-specific-behavior")
 safeRequire("lua.browser")
--- safeRequire("lua.mastodon")
+safeRequire("lua.mastodon")
 
 -- reload function (should come last)
 safeRequire("lua.reload")
