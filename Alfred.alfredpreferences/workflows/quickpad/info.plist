@@ -113,6 +113,8 @@
 				<integer>1</integer>
 				<key>fontmode</key>
 				<integer>1</integer>
+				<key>fontsizing</key>
+				<integer>0</integer>
 				<key>footertext</key>
 				<string>⌘⏎: Save    ⇧⏎: Preview Markdown     ⎋: Abort</string>
 				<key>inputfile</key>
@@ -125,6 +127,8 @@
 				<integer>0</integer>
 				<key>scriptinput</key>
 				<integer>0</integer>
+				<key>spellchecking</key>
+				<integer>1</integer>
 				<key>stackview</key>
 				<false/>
 			</dict>
@@ -253,6 +257,8 @@
 				<integer>2</integer>
 				<key>fontmode</key>
 				<integer>0</integer>
+				<key>fontsizing</key>
+				<integer>0</integer>
 				<key>footertext</key>
 				<string>⎋: Back</string>
 				<key>inputfile</key>
@@ -264,6 +270,8 @@
 				<key>outputmode</key>
 				<integer>0</integer>
 				<key>scriptinput</key>
+				<integer>0</integer>
+				<key>spellchecking</key>
 				<integer>0</integer>
 				<key>stackview</key>
 				<true/>

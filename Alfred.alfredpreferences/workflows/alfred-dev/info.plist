@@ -967,6 +967,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>7792FA5D-64AB-40EB-AE6C-EE433C5FC0CA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -1017,27 +1038,6 @@
 			<string>alfred.workflow.output.dispatchkeycombo</string>
 			<key>uid</key>
 			<string>44FFE9B4-3CB4-46D3-8742-B7656E370346</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>7792FA5D-64AB-40EB-AE6C-EE433C5FC0CA</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1229,7 +1229,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>1030</real>
 			<key>ypos</key>
-			<real>755</real>
+			<real>705</real>
 		</dict>
 		<key>4D3E285F-7A6E-48E9-B895-F861C8E1FDF2</key>
 		<dict>
@@ -1238,7 +1238,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>885</real>
 			<key>ypos</key>
-			<real>755</real>
+			<real>705</real>
 		</dict>
 		<key>54C6EE1A-837D-4418-893C-4A301235A660</key>
 		<dict>
@@ -1247,7 +1247,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>735</real>
 			<key>ypos</key>
-			<real>685</real>
+			<real>635</real>
 		</dict>
 		<key>580C5543-C952-4624-BDA5-0C86C9BB400C</key>
 		<dict>
@@ -1296,7 +1296,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>885</real>
 			<key>ypos</key>
-			<real>630</real>
+			<real>580</real>
 		</dict>
 		<key>7883C8E0-1C85-4882-95A8-90ED858F92AE</key>
 		<dict>

@@ -1,1 +1,7 @@
-local foldingRange = { startLine = 1, endLine = 1 }
+local function one()
+	
+end
+
+local function one()
+	two()
+end
