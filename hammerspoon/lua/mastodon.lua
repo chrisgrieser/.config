@@ -31,6 +31,7 @@ local function scrollUp()
 
 	u.runWithDelays({ 1, 5 }, function() -- wait for posts to load
 		if not masto:isFrontmost() then -- do not interrupt when currently reading
+			print("❗ M.isSleeping: ", M.isSleeping)
 			keystroke({ "cmd" }, "up", 1, masto) -- scroll up
 		end
 	end)
