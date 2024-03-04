@@ -11,14 +11,23 @@ local wf = hs.window.filter
 ---@async
 M.aw_spotify = aw.new(function(appName, eventType)
 	if
-		u.screenIsUnlocked()
-		and not (env.isAtOffice or env.isProjector())
-		and hs.fnutils.contains(env.videoAndAudioApps, appName)
+		not u.screenIsUnlocked()
+		or (env.isAtOffice or env.isProjector())
+		or not (hs.fnutils.contains(env.videoAndAudioApps, appName))
 	then
-		local action = eventType == aw.launched and "pause" or "play"
-		local binary = "/opt/homebrew/bin/spotify_player"
-		M.spotify_player_task = hs.task.new(binary, nil, { "playback", action }):start()
+		return
 	end
+
+	local action
+	if eventType == aw.launched then
+		action = "pause"
+	elseif eventType == aw.terminated then
+		action = "play"
+	end
+	if not action then return end
+
+	local binary = "/opt/homebrew/bin/spotify_player"
+	M.spotify_player_task = hs.task.new(binary, nil, { "playback", action }):start()
 end):start()
 
 --------------------------------------------------------------------------------
