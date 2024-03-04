@@ -16,6 +16,8 @@ local c = hs.caffeinate.watcher
 -- necessary as auto-refreshing has subtle bugs in pretty much any app I tried
 -- (not fully scrolling up, etc.)
 local function scrollUp()
+	if true then return end
+
 	local masto = app(mastodonApp)
 	if not masto or not u.screenIsUnlocked() or masto:isFrontmost() then return end
 
@@ -31,7 +33,6 @@ local function scrollUp()
 
 	u.runWithDelays({ 1, 5 }, function() -- wait for posts to load
 		if not masto:isFrontmost() then -- do not interrupt when currently reading
-			print("❗ M.isSleeping: ", M.isSleeping)
 			keystroke({ "cmd" }, "up", 1, masto) -- scroll up
 		end
 	end)
@@ -133,7 +134,6 @@ end):start()
 -- scrollup on wake
 M.caff_TickerWake = c.new(function(event)
 	if event == c.screensDidSleep then
-		print("❗ beep 🟩")
 		M.isSleeping = true
 	elseif event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock then
 		M.isSleeping = false
