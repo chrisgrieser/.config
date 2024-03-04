@@ -40,7 +40,6 @@ M.wf_browserAll = wf.new(env.browserApp)
 	end)
 
 --------------------------------------------------------------------------------
-
 -- VIMIUM CURSOR HIDER
 -- Companion for Vimium-like browser extensions which are not able to hide the
 -- cursor properly
@@ -87,24 +86,28 @@ local config = {
 	sourceBookmarks = appSupport .. env.browserDefaultsPath .. "/Default/Bookmarks",
 	chromeProfile = appSupport .. "Google/Chrome/",
 }
-M.pathw_bookmarks = hs.pathwatcher
-	.new(config.sourceBookmarks, function()
-		local bookmarks = hs.json.read(config.sourceBookmarks)
-		if not bookmarks then return end
-		hs.execute(("mkdir -p '%s'"):format(config.chromeProfile))
-		local success =
-			hs.json.write(bookmarks, config.chromeProfile .. "/Default/Bookmarks", false, true)
-		if not success then
-			u.notify("🔖⚠️ Bookmarks not correctly synced.")
-			return
-		end
 
-		local localState = u.readFile(config.sourceProfile .. "/Local State")
-		if not localState then return end
-		u.writeToFile(config.chromeProfile .. "/Local State", localState, false)
+local function syncBookmarks()
+	local bookmarks = hs.json.read(config.sourceBookmarks)
+	if not bookmarks then return end
+	hs.execute(("mkdir -p '%s'"):format(config.chromeProfile))
+	local success =
+		hs.json.write(bookmarks, config.chromeProfile .. "/Default/Bookmarks", false, true)
+	if not success then
+		u.notify("🔖⚠️ Bookmarks not correctly synced.")
+		return
+	end
 
-		print("🔖 Bookmarks synced to Chrome Bookmarks")
-	end)
-	:start()
+	local localState = u.readFile(config.sourceProfile .. "/Local State")
+	if not localState then return end
+	u.writeToFile(config.chromeProfile .. "/Local State", localState, false)
+
+	print("🔖 Bookmarks synced to Chrome Bookmarks")
+end
+
+-- sync on system start & when bookmarks are changed
+if u.isSystemStart() then syncBookmarks() end
+M.pathw_bookmarks = hs.pathwatcher.new(config.sourceBookmarks, syncBookmarks()):start()
+
 --------------------------------------------------------------------------------
 return M
