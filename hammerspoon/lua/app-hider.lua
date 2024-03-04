@@ -6,11 +6,10 @@ local wu = require("lua.window-utils")
 
 local aw = hs.application.watcher
 local wf = hs.window.filter
-
 --------------------------------------------------------------------------------
 
 -- INFO - REASONS FOR ALL THIS APP HIDING
--- 1) My workflow where I only have one display and one space, but
+-- 1) My workflow where I only have one display and one Space, but
 -- still want to enjoy wallpapers visible through transparent apps.
 -- 2) Apps should not cover up the sketchybar that I only have in the top right
 -- corner.
