@@ -79,7 +79,6 @@ end
 --------------------------------------------------------------------------------
 
 -- clean up console as soon as it is opened
--- hide console as soon as unfocused
 M.wf_hsConsole = wf.new("Hammerspoon"):subscribe(wf.windowFocused, function(win)
 	if win:title() == "Hammerspoon Console" then u.runWithDelays({ 0, 0.1 }, cleanupConsole) end
 end)

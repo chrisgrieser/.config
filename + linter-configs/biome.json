@@ -5,31 +5,25 @@
 		"clientKind": "git",
 		"useIgnoreFile": true
 	},
-	"formatter": {
-		"lineWidth": 100,
-		"indentStyle": "tab",
-		"indentWidth": 3,
-		"formatWithErrors": true
-	},
 	"json": {
 		"parser": { "allowComments": true }
 	},
 	"javascript": {
 		"globals": ["ObjC", "Application", "delay", "Path", "$"]
 	},
+	"formatter": {
+		"lineWidth": 100,
+		"indentStyle": "tab",
+		"formatWithErrors": true
+	},
 	"linter": {
 		"rules": {
 			"all": true,
-			"suspicious": { "noConsoleLog": "off" },
 			"complexity": { "noExcessiveCognitiveComplexity": "off" },
 			"style": {
 				"useTemplate": "off",
 				"noParameterAssign": "off",
-				"useSingleVarDeclarator": "off",
-				"useNamingConvention": {
-					"level": "warn",
-					"options": { "strictCase": false }
-				}
+				"useNamingConvention": { "level": "warn", "options": { "strictCase": false } }
 			}
 		}
 	}

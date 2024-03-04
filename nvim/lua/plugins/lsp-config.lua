@@ -101,6 +101,7 @@ serverConfigs.lua_ls = {
 				enable = true,
 				setType = true,
 				arrayIndex = "Disable",
+				semicolon = "Disable",
 			},
 			-- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
 			workspace = { checkThirdParty = "Disable" },
@@ -142,9 +143,9 @@ serverConfigs.cssls = {
 			format = {
 				enable = true,
 				-- BUG this config is being ignored. Leaving in case of css-lsp-update
-				-- preserveNewLines = true,
-				-- maxPreserveNewLines = 2,
-				-- spaceAroundSelectorSeparator = true,
+				preserveNewLines = true,
+				maxPreserveNewLines = 2,
+				spaceAroundSelectorSeparator = true,
 			},
 			lint = {
 				vendorPrefix = "ignore", -- needed for scrollbars

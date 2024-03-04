@@ -107,7 +107,7 @@ end
 
 -- sync on system start & when bookmarks are changed
 if u.isSystemStart() then syncBookmarks() end
-M.pathw_bookmarks = hs.pathwatcher.new(config.sourceBookmarks, syncBookmarks()):start()
+M.pathw_bookmarks = hs.pathwatcher.new(config.sourceBookmarks, syncBookmarks):start()
 
 --------------------------------------------------------------------------------
 return M

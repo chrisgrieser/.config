@@ -21,6 +21,7 @@ M.vaultLocation = readZshEnv("VAULT_PATH")
 M.fileHub = readZshEnv("WD")
 
 M.codeFont = readZshEnv("CODE_FONT")
+M.homebrewPrefix = M.isAtMother and "/usr/local" or "/opt/homebrew"
 
 --------------------------------------------------------------------------------
 -- Apps
