@@ -16,8 +16,6 @@ local c = hs.caffeinate.watcher
 -- necessary as auto-refreshing has subtle bugs in pretty much any app I tried
 -- (not fully scrolling up, etc.)
 local function scrollUp()
-	if true then return end
-
 	local masto = app(mastodonApp)
 	if not masto or not u.screenIsUnlocked() or masto:isFrontmost() then return end
 
