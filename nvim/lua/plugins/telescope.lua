@@ -138,7 +138,12 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set(
 			"n",
 			"gs",
-			function() require("telescope.builtin").lsp_document_symbols { symbols = symbolFilter[ft] } end,
+			function()
+				require("telescope.builtin").lsp_document_symbols {
+					symbols = symbolFilter[ft],
+					ignore_symbols = nil,
+				}
+			end,
 			{ desc = " Sections", buffer = true }
 		)
 	end,
@@ -373,18 +378,9 @@ local function telescopeConfig()
 					horizontal = { preview_width = { 0.7, min = 30 } },
 				},
 			},
-			-- using treesitter-symbol search over LSP symbol search, as treesitter
-			-- symbol search leaves out anonymous functions
-			treesitter = {
-				prompt_prefix = " ",
-				prompt_title = "Symbols",
-				show_line = false,
-				symbols = { "function", "class", "method", "type" },
-				symbol_highlights = { ["function"] = "Function" },
-			},
 			lsp_document_symbols = {
+				ignore_symbols = { "constant", "string", "interface", "class", "type" },
 				prompt_prefix = "󰒕 ",
-				symbols = { "function", "class", "method" },
 				symbol_highlights = {
 					["module"] = "Comment",
 					["array"] = "Comment",
@@ -398,10 +394,10 @@ local function telescopeConfig()
 				symbol_width = 30,
 				ignore_symbols = { "variable", "constant", "property" },
 				file_ignore_patterns = {
-					"node_modules", -- ts/js
-					".local", -- neodev.nvim
-					"homebrew", -- nvim runtime
-					"EmmyLua.spoon", -- Hammerspoon
+					-- "node_modules", -- ts/js
+					-- ".local", -- neodev.nvim
+					-- "homebrew", -- nvim runtime
+					-- "EmmyLua.spoon", -- Hammerspoon
 				},
 			},
 			spell_suggest = {
@@ -445,7 +441,7 @@ return {
 		keys = {
 			{ "?", function() telescope("keymaps") end, desc = "⌨️ Search Keymaps" },
 			{ "g.", function() telescope("resume") end, desc = " Continue" },
-			{ "gs", function() telescope("treesitter") end, desc = " Symbols" },
+			{ "gs", function() telescope("lsp_document_symbols") end, desc = " Symbols" },
 			{
 				"gw",
 				function() telescope("lsp_dynamic_workspace_symbols") end,
