@@ -31,7 +31,7 @@ safeRequire("lua.dark-mode")
 
 -- window management
 safeRequire("lua.window-utils")
--- safeRequire("lua.layouts")
+safeRequire("lua.layouts")
 safeRequire("lua.app-hider")
 safeRequire("lua.auto-quitter")
 
