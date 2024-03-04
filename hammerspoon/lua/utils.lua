@@ -227,8 +227,7 @@ function M.quitApps(appNames)
 	end
 end
 
-function M.closeAllTheThings()
-	-- close finder wins
+function M.closeFinderWins()
 	M.runWithDelays({ 0, 3, 5 }, function()
 		local finder = hs.application("Finder")
 		if not finder then return end
@@ -236,6 +235,10 @@ function M.closeAllTheThings()
 			win:close()
 		end
 	end)
+end
+
+function M.closeAllTheThings()
+	M.closeFinderWins()
 
 	-- close fullscreen wins
 	for _, win in pairs(hs.window.allWindows()) do

@@ -75,7 +75,7 @@ local function workLayout()
 	-- finish
 	u.whenAppWinAvailable("Discord", function()
 		-- FIX missing windows by restarting AltTab
-		u.runWithDelays({ 3, 6 }, function()
+		u.runWithDelays({ 2, 5 }, function()
 			if not app("AltTab") then hs.application.open("AltTab") end
 		end)
 		app("Mimestream"):activate()
@@ -90,13 +90,13 @@ local function movieLayout()
 	visuals.updateHoleCover()
 
 	u.openApps { "YouTube", "BetterTouchTool" }
+	u.closeFinderWins()
 	u.quitApps {
 		"neovide",
 		"Slack",
 		"Discord",
 		"BusyCal",
 		"Alfred Preferences",
-		"Finder",
 		"Highlights",
 		"Obsidian",
 		"lo-rain",

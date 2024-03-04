@@ -101,7 +101,7 @@ serverConfigs.lua_ls = {
 				enable = true,
 				setType = true,
 				arrayIndex = "Disable",
-				semicolon = "Disable",
+				semicolon = "Disable", -- mostly display incorrectly on invalid code
 			},
 			-- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
 			workspace = { checkThirdParty = "Disable" },
@@ -122,7 +122,6 @@ serverConfigs.ruff_lsp = {
 	},
 	on_attach = function(ruff) ruff.server_capabilities.hoverProvider = false end,
 }
-
 --------------------------------------------------------------------------------
 -- CSS
 
@@ -171,7 +170,6 @@ serverConfigs.stylelint_lsp = {
 -- DOCS https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md
 serverConfigs.tsserver = {
 	settings = {
-
 		-- "Cannot redeclare block-scoped variable" -> not useful for single-file-JXA
 		-- (Biome works only on single-file and so already check for unintended re-declarations.)
 		diagnostics = { ignoredCodes = { 2451 } },
@@ -343,10 +341,10 @@ return {
 		"neovim/nvim-lspconfig",
 		lazy = false,
 		mason_dependencies = vim.list_extend(efmDependencies, vim.tbl_values(lspToMasonMap)),
-		dependencies = {
-			"folke/neodev.nvim", -- loading as dependency ensures it's loaded before lua_ls
-			opts = { library = { plugins = false } }, -- too slow with all my plugins
-		},
+		-- dependencies = {
+		-- 	"folke/neodev.nvim", -- loading as dependency ensures it's loaded before lua_ls
+		-- 	opts = { library = { plugins = false } }, -- too slow with all my plugins
+		-- },
 		config = function()
 			require("lspconfig.ui.windows").default_options.border = vim.g.borderStyle
 

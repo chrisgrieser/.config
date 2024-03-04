@@ -33,6 +33,13 @@ keymap(
 --------------------------------------------------------------------------------
 -- INSPECT
 
+-- Copy Last Command
+keymap("n", "<leader>lc", function()
+	local lastCommand = vim.fn.getreg(":"):gsub("^lua[ =]*", "")
+	vim.fn.setreg("+", lastCommand)
+	u.notify("Copied", lastCommand)
+end, { desc = "󰘳 Copy last command" })
+
 keymap("n", "<leader>ih", cmd.Inspect, { desc = " Highlights under Cursor" })
 keymap("n", "<leader>il", cmd.LspInfo, { desc = "󰒕 :LspInfo" })
 
