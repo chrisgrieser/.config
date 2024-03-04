@@ -51,6 +51,7 @@ local function hideOthers(appObj)
 		return
 	end
 	local thisWin = appObj:mainWindow()
+	local thisAppName = appObj:name()
 
 	-- GUARD current window not being big enough
 	if not (wu.checkSize(thisWin, wu.pseudoMax) or wu.checkSize(thisWin, wu.maximized)) then
@@ -59,11 +60,12 @@ local function hideOthers(appObj)
 
 	for _, w in pairs(thisWin:otherWindowsSameScreen()) do
 		local app = w:application()
-		-- GUARD exclude some apps and PiP windows
+		-- GUARD exclude some apps, PiP windows, and other windows of the same app
 		if
 			app
 			and not (app:findWindow("Picture in Picture"))
 			and not (hs.fnutils.contains(config.appsNotToHide, app:name()))
+			and not (app:name() == thisAppName)
 		then
 			app:hide()
 		end

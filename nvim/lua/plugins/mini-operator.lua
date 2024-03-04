@@ -177,9 +177,12 @@ return {
 		sort = { prefix = "sy" },
 		evaluate = { prefix = "#", func = luaEval },
 	},
-	config = function(_, opts)
+	init = function ()
+		-- in `init`, so autocmds are set up before the plugin is loaded
 		filetypeSpecificMultiply()
 		filetypeSpecificEval()
+	end,
+	config = function(_, opts)
 		require("mini.operators").setup(opts)
 
 		-- Do not set `substitute` mapping for visual mode, since we use `s` for
