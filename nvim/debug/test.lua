@@ -1,7 +1,10 @@
 local function one()
-	
+	vim.notify(debug.traceback("!!"))
 end
 
-local function one()
-	two()
+local function two()
+	one()
 end
+
+two()
+

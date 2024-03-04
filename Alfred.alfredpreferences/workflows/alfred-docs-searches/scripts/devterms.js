@@ -6,6 +6,7 @@ app.includeStandardAdditions = true;
 
 /** @param {string} url @return {string} */
 function httpRequest(url) {
+	console.log(stackTrace, new Error().stack);
 	const queryURL = $.NSURL.URLWithString(url);
 	const data = $.NSData.dataWithContentsOfURL(queryURL);
 	const requestStr = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
@@ -30,11 +31,13 @@ function run(argv) {
 
 	/** @type AlfredItem[] */
 	const terms = response.hits.map(
-		(/** @type {{ term: string; definition: string; example: string; id: string; url: string }} */ hit) => {
+		(
+			/** @type {{ term: string; definition: string; example: string; id: string; url: string }} */ hit,
+		) => {
 			return {
 				title: hit.term,
 				subtitle: `${hit.definition} · ${hit.example}`,
-				arg: hit.url, 
+				arg: hit.url,
 				uid: hit.id,
 			};
 		},
