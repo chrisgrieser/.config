@@ -422,11 +422,10 @@ local function telescopeConfig()
 					["string"] = "Comment",
 				},
 			},
-			lsp_dynamic_workspace_symbols = {
+			lsp_dynamic_workspace_symbols = { -- dynamic = updates results on typing
 				prompt_prefix = "󰒕 ",
 				fname_width = 0, -- can see name in preview title
 				symbol_width = 30,
-				ignore_symbols = { "variable", "constant", "property" },
 				file_ignore_patterns = {
 					"node_modules", -- ts/js
 					".local", -- neodev.nvim
