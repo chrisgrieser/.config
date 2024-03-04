@@ -37,7 +37,7 @@ safeRequire("lua.auto-quitter")
 
 -- system
 safeRequire("lua.console")
--- safeRequire("lua.cronjobs")
+safeRequire("lua.cronjobs")
 safeRequire("lua.filesystem-watchers")
 safeRequire("lua.repo-auto-sync")
 safeRequire("lua.hardware-periphery")
