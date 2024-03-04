@@ -70,8 +70,7 @@ local function cmpconfig()
 			},
 		},
 		mapping = cmp.mapping.preset.insert {
-			-- behavior: "Replace" removes adjacent text to the right
-			["<CR>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true },
+			["<CR>"] = cmp.mapping.confirm { select = true },
 			["<PageUp>"] = cmp.mapping.scroll_docs(-4),
 			["<PageDown>"] = cmp.mapping.scroll_docs(4),
 			["<C-e>"] = cmp.mapping.abort(),
