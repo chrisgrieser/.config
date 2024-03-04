@@ -3,7 +3,8 @@
 
 -- INFO only the first theme will be used
 local lightThemes = {
-	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
+	{ "rose-pine/neovim", name = "rose-pine-dawn" },
+	-- { "EdenEast/nightfox.nvim", name = "dawnfox" },
 	-- { "folke/tokyonight.nvim", opts = { style = "day" } },
 	-- "sainnhe/everforest",
 	-- {
@@ -14,11 +15,11 @@ local lightThemes = {
 }
 
 local darkThemes = {
-	{ "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
-	-- "Karidus-423/sainte-adresse.nvim",
+	"fynnfluegge/monet.nvim",
+	-- { "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
+	-- { "rose-pine/neovim", name = "rose-pine-moon" },
 	-- { "EdenEast/nightfox.nvim", name = "duskfox" },
 	-- "rebelot/kanagawa.nvim",
-	-- "fynnfluegge/monet.nvim",
 	-- { "navarasu/onedark.nvim", opts = { style = "warm" } },
 	-- "sainnhe/gruvbox-material",
 	-- { "sainnhe/sonokai", init = function() vim.g.sonokai_style = "shusia" end },
