@@ -12,7 +12,7 @@ end)
 --------------------------------------------------------------------------------
 
 if u.isSystemStart() then
-	hs.notify.show("Hammerspoon", "", "✅ Hammerspoon loading")
+	hs.notify.show("Hammerspoon", "", "✅ Finished loading")
 else
 	-- is reloading
 	print("\n--------------------------- 🔨 HAMMERSPOON RELOAD -------------------------------\n")
