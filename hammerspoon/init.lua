@@ -32,13 +32,13 @@ safeRequire("lua.dark-mode")
 -- window management
 safeRequire("lua.window-utils")
 safeRequire("lua.layouts")
--- safeRequire("lua.app-hider")
+safeRequire("lua.app-hider")
 safeRequire("lua.auto-quitter")
 
 -- system
 safeRequire("lua.console")
 safeRequire("lua.cronjobs")
--- safeRequire("lua.filesystem-watchers")
+safeRequire("lua.filesystem-watchers")
 safeRequire("lua.repo-auto-sync")
 safeRequire("lua.hardware-periphery")
 safeRequire("lua.pageup-pagedown-scroll")
