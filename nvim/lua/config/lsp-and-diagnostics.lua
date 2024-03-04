@@ -74,6 +74,17 @@ end, {
 --------------------------------------------------------------------------------
 -- DIAGNOSTICS
 
+-- change severity level of biome's `no-console-log`
+vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx, config) ---@diagnostic disable-line: duplicate-set-field
+	result.diagnostics = vim.tbl_map(function(diag)
+		if diag.source == "biome" and diag.code == "noConsoleLog" then
+			diag.severity = vim.diagnostic.severity.HINT
+		end
+		return diag
+	end, result.diagnostics)
+	vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
+end
+
 local diagnosticTypes = { Error = "", Warn = "▲", Info = "●", Hint = "" }
 for type, icon in pairs(diagnosticTypes) do
 	local hl = "DiagnosticSign" .. type
