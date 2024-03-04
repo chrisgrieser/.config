@@ -6,22 +6,23 @@ function o() {
 		return 0
 	fi
 
-	# `--delimiter="/" --nth=-1` ensures only the filename is searched
-	# PENDING https://github.com/junegunn/fzf/issues/3608
+	# reloads one ctrl-h (`--bind=ctrl-h`) or as soon as there is no result found (`--bind=zero`)
+	local reload="reload(fd --hidden --no-ignore --exclude='/.git/' --exclude='.DS_Store' --type=file --type=symlink --color=always)"
+
 	local selected
 	selected=$(
 		# shellcheck disable=2016
 		fd --type=file --type=symlink --color=always | fzf \
 			--select-1 --ansi --query="$1" --info=inline --header-first \
 			--header="^H: --hidden  ^P: Copy Path  ^N: Copy Name  ^D: Goto Parent" \
-			--keep-right \
-			--scheme=path --tiebreak=length,end \
+			--keep-right --scheme=path --tiebreak=length,end \
 			--delimiter="/" --with-nth=-2.. --nth=-2.. \
-			--bind="ctrl-h:reload(fd --hidden --no-ignore --exclude='/.git/' --exclude='.DS_Store' --type=file --type=symlink --color=always)" \
+			--bind="ctrl-h:$reload" --bind="zero:$reload" \
 			--expect="ctrl-p,ctrl-n,ctrl-d" \
 			--preview-window="55%" \
 			--preview '[[ $(file --mime {}) =~ text ]] && bat --color=always --wrap=never --style=header-filesize,header-filename,grid {} || file {} | fold -w $FZF_PREVIEW_COLUMNS' \
-			--height="100%" #required for wezterm's `pane:is_alt_screen_active()`
+			--height="100%"
+		# height of 100% required for wezterm's `pane:is_alt_screen_active()`
 	)
 	[[ -z "$selected" ]] && return 0 # aborted
 
