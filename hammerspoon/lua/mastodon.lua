@@ -125,12 +125,12 @@ M.aw_tickerWatcher = aw.new(function(appName, event, masto)
 end):start()
 
 -- scrollup on wake
-local c = hs.caffeinate.watcher
-M.caff_TickerWake = c.new(function(event)
-	if event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock then
-		scrollUp()
-	end
-end):start()
+-- local c = hs.caffeinate.watcher
+-- M.caff_TickerWake = c.new(function(event)
+-- 	if event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock then
+-- 		scrollUp()
+-- 	end
+-- end):start()
 
 -- show/hide app when any other wins move
 M.wf_someWindowActivity = wf.new(true)
