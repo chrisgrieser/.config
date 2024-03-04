@@ -9,14 +9,25 @@ local mastodonApp = require("lua.environment-vars").mastodonApp
 local aw = hs.application.watcher
 local wf = hs.window.filter
 local keystroke = hs.eventtap.keyStroke
+local c = hs.caffeinate.watcher
 --------------------------------------------------------------------------------
+
+-- ensure scrolling up is not triggered when system is asleep, which prevents
+-- the system from ever going to sleep
+M.caff_TickerWake = c.new(function(event)
+	if event == c.screensDidSleep then
+		M.isSleeping = true
+	elseif event == c.screensDidWake then
+		M.isSleeping = false
+	end
+end):start()
 
 -- simply scroll up without the mouse and without focusing the app
 -- necessary as auto-refreshing has subtle bugs in pretty much any app I tried
--- (not correctly scrolling up, etc.)
+-- (not fully scrolling up, etc.)
 local function scrollUp()
 	local masto = app(mastodonApp)
-	if not masto or not u.screenIsUnlocked() or masto:isFrontmost() then return end
+	if not masto or not u.screenIsUnlocked() or masto:isFrontmost() or M.isSleeping then return end
 
 	keystroke({ "cmd" }, "left", 1, masto) -- go back
 	keystroke({ "cmd" }, "1", 1, masto) -- go to home tab
@@ -25,8 +36,9 @@ local function scrollUp()
 	keystroke(modifiers, "R", 1, masto) -- refresh/reload
 
 	u.runWithDelays({ 1, 5 }, function() -- wait for posts to load
-		if masto:isFrontmost() or not u.screenIsUnlocked() then return end -- do not interrupt when currently reading
-		keystroke({ "cmd" }, "up", 1, masto) -- scroll up
+		if not masto:isFrontmost() then -- do not interrupt when currently reading
+			keystroke({ "cmd" }, "up", 1, masto) -- scroll up
+		end
 	end)
 end
 
@@ -36,10 +48,9 @@ local function closeMediaWindow()
 	local mediaWin = masto:findWindow("Media") or masto:findWindow("Image")
 	if not mediaWin then return end
 
-	-- HACK using keystroke, too, since closing the window does not work reliably
-	mediaWin:raise()
+	-- using keystroke, too, since closing the window does not work reliably
 	keystroke({ "cmd" }, "w", 1, masto)
-	if mediaWin then mediaWin:close() end
+	mediaWin:close()
 end
 
 -- move the ticker-app window to the left side of the screen
@@ -125,7 +136,6 @@ M.aw_tickerWatcher = aw.new(function(appName, event, masto)
 end):start()
 
 -- scrollup on wake
-local c = hs.caffeinate.watcher
 M.caff_TickerWake = c.new(function(event)
 	if event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock then
 		scrollUp()

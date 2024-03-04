@@ -37,18 +37,6 @@ M.timer_clock = hs.timer
 --------------------------------------------------------------------------------
 -- BACKUP / MAINTENANCE
 
-local function bookmarkSync()
-	M.task_bookmarksBackup = hs.task
-		.new("./helpers/bookmark-bkp.sh", function(exitCode, _, stdErr)
-			local msg = exitCode == 0 and "✅ Bookmark Backup successful"
-				or "⚠️ Bookmark Backup failed: " .. stdErr
-			u.notify(msg)
-		end)
-		:start()
-end
-
-if u.isSystemStart() then bookmarkSync() end
-
 -- Backup Vault, Dotfiles, Bookmarks
 M.timer_nightlyMaintenance = hs.timer
 	.doAt("01:00", "01d", function()
@@ -58,7 +46,13 @@ M.timer_nightlyMaintenance = hs.timer
 		local isSunTueThuSat = os.date("%w") % 2 == 0
 		if isSunTueThuSat then return end
 
-		bookmarkSync()
+		M.task_bookmarksBackup = hs.task
+			.new("./helpers/bookmark-bkp.sh", function(exitCode, _, stdErr)
+				local msg = exitCode == 0 and "✅ Bookmark Backup successful"
+					or "⚠️ Bookmark Backup failed: " .. stdErr
+				u.notify(msg)
+			end)
+			:start()
 		M.task_dotfileBackup = hs.task
 			.new("./helpers/dotfile-bkp.sh", function(exitCode, _, stdErr)
 				local msg = exitCode == 0 and "✅ Dotfile Backup successful"
