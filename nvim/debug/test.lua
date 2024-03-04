@@ -1,10 +1,5 @@
-local function one()
-	vim.notify(debug.traceback("!!"))
+local function myFunc()
+	local info = debug.getinfo(1, "n").name
+	print(info)
 end
-
-local function two()
-	one()
-end
-
-two()
-
+myFunc()
