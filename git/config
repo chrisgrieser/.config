@@ -8,7 +8,6 @@
 	email = 73286100+chrisgrieser@users.noreply.github.com
 [core]
 	editor = nvim
-	autocrlf = input
 
 	# 1. Motivation: version control & sync of hooks across devices
 	# 2. By setting them in the global git config, there is no more need to run
@@ -27,7 +26,7 @@
 	rebase = true # rebase changes instead of merging
 	# Alternative: --ff-only https://blog.sffc.xyz/post/185195398930/why-you-should-use-git-pull-ff-only
 [push]
-	autoSetupRemote = true
+	autoSetupRemote = true # 
 [rebase]
 	autoSquash = true
 	autoStash = true
@@ -42,11 +41,11 @@
 [diff]
 	colorMoved = true # moved lines colored different than added/removed
    colorMovedWS = ignore-all-space
-
-#───────────────────────────────────────────────────────────────────────────────
-# DOCS https://neovim.io/doc/user/diff.html#dp
-# SOURCE https://smittie.de/posts/git-mergetool/
 [merge]
+	conflictStyle = zdiff3 # sshows original version in mittle # https://ductile.systems/zdiff3/
+
+	# SOURCE https://smittie.de/posts/git-mergetool/
+	# DOCS https://neovim.io/doc/user/diff.html#dp
 	tool = nvim
 [mergetool "nvim"]
 	cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
