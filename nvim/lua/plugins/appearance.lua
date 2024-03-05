@@ -17,6 +17,9 @@ return {
 				min_distance = 8,
 				prefix_string = "↩ ",
 			},
+			language_config = {
+				css = { disabled = true },
+			},
 		},
 	},
 	{ -- context lines

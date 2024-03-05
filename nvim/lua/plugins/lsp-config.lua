@@ -23,7 +23,6 @@ local lspToMasonMap = {
 	vale_ls = "vale-ls", -- natural language linter
 	yamlls = "yaml-language-server",
 	tsserver = "typescript-language-server",
-	css_variables = "css-variables-language-server",
 }
 
 --------------------------------------------------------------------------------
