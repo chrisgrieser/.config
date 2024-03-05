@@ -70,7 +70,8 @@ function run(argv) {
 	const response = JSON.parse(httpRequest(apiURL));
 
 	const forkOnClone = $.getenv("fork_on_clone") === "1";
-	const depthInfo = $.getenv("clone_depth") ? ` (depth ${$.getenv("clone_depth")})` : "";
+	const cloneDepth = $.getenv("clone_depth");
+	const shallowClone = cloneDepth !== "" && cloneDepth !== "0";
 
 	/** @type {AlfredItem[]} */
 	const repos = response.items
@@ -90,7 +91,9 @@ function run(argv) {
 				.filter(Boolean)
 				.join("  ·  ");
 
-			const cloneSubtitle = "⌃: Shallow Clone " + depthInfo + (forkOnClone ? " & Fork" : "");
+			let cloneSubtitle = shallowClone ? `⌃: Shallow Clone (depth ${cloneDepth})` : "⌃: Clone";
+			if (forkOnClone) cloneSubtitle += " & Fork";
+
 			const secondUrl = repo.homepage || repo.html_url + "/releases";
 
 			return {

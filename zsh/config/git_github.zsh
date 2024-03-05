@@ -181,13 +181,13 @@ function remote_info {
 	git branch --all --verbose --verbose # 2x verbose shows tracked remote branches
 	echo
 	git remote --verbose
+	echo
 	printf "\e[1;34mgh default repo:\e[0m " && gh repo set-default --view
 }
 
 # Github Url: open & copy url
 function gu {
-	url=$(git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 |
-		sed -e 's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//')
+	url=$(git remote --verbose | head -n1 | cut -f2 | cut -d' ' -f1 | sed -E 's|git@github.com:(.*)(\.git)?|https://github.com/\1|')
 	echo "$url" | pbcopy
 	open "$url"
 }
@@ -242,15 +242,10 @@ function gli {
 #───────────────────────────────────────────────────────────────────────────────
 
 function clone {
-	url="$1"
-	# turn http into SSH remotes
-	[[ "$url" =~ http ]] && url="$(echo "$1" | sed -E 's/https?:\/\/github.com\//git@github.com:/').git"
-
 	# WARN depth < 2 ensures that amending a shallow commit does not result in a
 	# new commit without parent, effectively destroying git history (!!)
-	git clone --depth=10 "$url" --no-single-branch --no-tags # get branches, but not tags
-
-	cd "$(command ls -1 -t | head -n1)" || return 1
+	git clone --depth=15 "$1" --no-single-branch --no-tags # get branches, but not tags
+	cd "$(basename "$1" .git)" || return 1
 }
 
 function delete_forks_with_no_open_prs {

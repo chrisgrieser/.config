@@ -30,11 +30,11 @@
 
 [init]
 	defaultBranch = main
+[url "git@github.com:"]
+	insteadOf = "https://github.com/" # automatically use SSH instead of HTTPS on clone
 [pull]
 	rebase = true # rebase changes instead of merging
-	# Alternative: --ff-only https://blog.sffc.xyz/post/185195398930/why-you-should-use-git-pull-ff-only
-[url "git@github.com:"]
-	insteadOf = "https://github.com/"
+	# ff = only # https://blog.sffc.xyz/post/185195398930/why-you-should-use-git-pull-ff-only
 [push]
 	autoSetupRemote = true # create remote branch, if it doesn't exist
 [rebase]
