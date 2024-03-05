@@ -136,3 +136,4 @@ matches:
   - { trigger: sowei, replace: sowie, propagate_case: true, word: true }
   - { trigger: auhc, replace: auch, propagate_case: true, word: true }
   - { triggers: ["supress", "surpress", "surppress"], replace: suppress, propagate_case: true }
+  - { trigger: iwr, replace: wir, propagate_case: true, word: true }
