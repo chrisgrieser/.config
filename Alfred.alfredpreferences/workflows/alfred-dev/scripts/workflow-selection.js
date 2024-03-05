@@ -14,6 +14,7 @@ function run() {
 			return {
 				title: workflowUid,
 				arg: workflowUid,
+				uid: workflowUid,
 			};
 		});
 
