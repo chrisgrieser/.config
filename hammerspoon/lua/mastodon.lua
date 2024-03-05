@@ -19,10 +19,6 @@ local function scrollUp()
 	local masto = app(mastodonApp)
 	if not masto or not u.screenIsUnlocked() or masto:isFrontmost() then return end
 
-	-- GUARD ensure scrolling up is not triggered when system is asleep, which prevents
-	-- the system from ever going to sleep
-	if M.isSleeping then return end
-
 	keystroke({ "cmd" }, "left", 1, masto) -- go back
 	keystroke({ "cmd" }, "1", 1, masto) -- go to home tab
 
@@ -131,10 +127,7 @@ end):start()
 
 -- scrollup on wake
 M.caff_TickerWake = c.new(function(event)
-	if event == c.screensDidSleep then
-		M.isSleeping = true
-	elseif event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock then
-		M.isSleeping = false
+	if event == c.screensDidWake or event == c.systemDidWake or event == c.screensDidUnlock then
 		scrollUp()
 	end
 end):start()
