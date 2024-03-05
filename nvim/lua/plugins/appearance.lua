@@ -9,6 +9,7 @@ return {
 	},
 	{
 		"code-biscuits/nvim-biscuits",
+		enable = false,
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		event = "BufReadPost",
 		opts = {
@@ -21,6 +22,7 @@ return {
 	},
 	{ -- context lines
 		"nvim-treesitter/nvim-treesitter-context",
+		enable = false,
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		event = "VeryLazy",
 		keys = {
@@ -58,6 +60,7 @@ return {
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",
 		event = "UIEnter",
+		enable = false,
 		main = "ibl",
 		opts = {
 			scope = {
@@ -72,6 +75,7 @@ return {
 	},
 	{ -- scrollbar with information
 		"lewis6991/satellite.nvim",
+		enable = false,
 		commit = "5d33376", -- TODO following versions require nvim 0.10
 		event = "VeryLazy",
 		opts = {
@@ -85,6 +89,7 @@ return {
 	},
 	{ -- when searching, search count is shown next to the cursor
 		"kevinhwang91/nvim-hlslens",
+		enable = false,
 		-- loaded by snippet in opts-and-autocmds.lua
 		init = function()
 			-- cannot use my utility, as the value of IncSearch needs to be retrieved dynamically
@@ -113,6 +118,7 @@ return {
 	},
 	{ -- rainbow brackets
 		"hiphish/rainbow-delimiters.nvim",
+		enable = false,
 		event = "BufReadPost", -- later does not load on first buffer
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		main = "rainbow-delimiters.setup",
