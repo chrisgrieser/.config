@@ -96,19 +96,6 @@ local function themeModifications()
 			local fg = u.getHighlightValue("@comment." .. type, "fg")
 			if fg ~= "#000000" then overwriteHl("@comment." .. type, { bg = fg, fg = "#000000" }) end
 		end
-	elseif theme == "monet" then
-		overwriteHl("NonText", { fg = "#717ca7" }) -- more distinguishable from comments
-		overwriteHl("Folded", { bg = "#313548" })
-		updateHl("String", "gui=none") -- no italics
-		overwriteHl("Visual", { bg = "#2a454e" }) -- no bold
-		updateHl("TelescopeSelection", "gui=none") -- no bold
-		overwriteHl("@keyword.return", { fg = "#1c79d6", bold = true }) -- darker
-		for _, v in pairs(vimModes) do
-			updateHl("lualine_y_diff_modified_" .. v, "guifg=#cfc53a")
-		end
-		updateHl("GitSignsChange", "guifg=#acaa62")
-	elseif theme == "rose-pine" and mode == "light" then
-		overwriteHl("@ibl.indent.char.1", { fg = "#dbc7b3" })
 	elseif theme == "dawnfox" then
 		overwriteHl("IblIndent", { fg = "#e0cfbd" })
 		overwriteHl("ColorColumn", { bg = "#e9dfd2" })
@@ -126,22 +113,6 @@ local function themeModifications()
 		local commentColor = u.getHighlightValue("Comment", "fg")
 		updateHl("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
 		overwriteHl("TSParameter", { fg = "#6f92b3" })
-	elseif theme == "everforest" then
-		overwriteHl("Red", { fg = "#cf7e7d" })
-		overwriteHl("IblIndent", { fg = "#d2cdad" })
-		overwriteHl("NonText", { fg = "#c7c199" })
-		local commentColor = u.getHighlightValue("Comment", "fg")
-		updateHl("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
-		overwriteHl("TSParameter", { fg = "#6f92b3" })
-	elseif theme == "hybrid" then
-		for _, v in pairs(vimModes) do
-			updateHl("lualine_a_" .. v, "gui=bold")
-		end
-		-- needs foreground, not background
-		local incsearch = u.getHighlightValue("IncSearch", "fg")
-		overwriteHl("HLSearchReversed", { fg = incsearch })
-	elseif theme == "bamboo" and mode == "light" then
-		overwriteHl("@comment", { fg = "#777f76" })
 	elseif theme == "material" and mode == "light" then
 		updateHl("@property", "guifg=#6c9798")
 		updateHl("@field", "guifg=#6c9798")
@@ -161,21 +132,6 @@ local function themeModifications()
 		updateCursor("i-ci-c:ver25")
 		updateCursor("o-v:hor10")
 		if mode == "dark" then updateHl("ColorColumn", "guibg=#2e3742") end
-	elseif theme == "kanagawa" then
-		overwriteHl("TreesitterContext", { bg = "#363648" })
-
-		-- transparent sign column
-		clearHl("SignColumn")
-		updateHl("GitSignsAdd", "guibg=none")
-		updateHl("GitSignsChange", "guibg=none")
-		updateHl("GitSignsDelete", "guibg=none")
-
-		for _, v in pairs(vimModes) do
-			updateHl("lualine_a_" .. v, "gui=bold")
-		end
-		for _, type in pairs { "Hint", "Info", "Warn", "Error" } do
-			updateHl("DiagnosticSign" .. type, "guibg=none")
-		end
 	end
 end
 
