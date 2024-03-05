@@ -23,7 +23,7 @@ local lspToMasonMap = {
 	vale_ls = "vale-ls", -- natural language linter
 	yamlls = "yaml-language-server",
 	tsserver = "typescript-language-server",
-	-- harper_ls = "harper-ls", PENDING https://github.com/mason-org/mason-registry/pull/4690
+	css_variables = "css-variables-language-server",
 }
 
 --------------------------------------------------------------------------------
@@ -289,15 +289,6 @@ serverConfigs.ltex = {
 serverConfigs.typos_lsp = {
 	init_options = { diagnosticSeverity = "information" },
 }
-
--- PENDING https://github.com/mason-org/mason-registry/pull/4690
--- serverConfigs.harper_ls {
--- 	settings = {
--- 		["harper-ls"] = {
--- 			userDictPath = vim.g.dictionaryPath,
--- 		},
--- 	},
--- }
 
 -- VALE
 -- DOCS https://vale.sh/docs/integrations/guide/#vale-ls
