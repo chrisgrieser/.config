@@ -1,11 +1,16 @@
 # vim: commentstring=#\ %s
 #───────────────────────────────────────────────────────────────────────────────
 
-[init]
-	defaultBranch = main
 [user]
 	name = Chris Grieser
 	email = 73286100+chrisgrieser@users.noreply.github.com
+
+# conditionally change author https://git-scm.com/docs/git-config#_conditional_includes
+# [includeIf "gitdir:~/.config/.git"]
+# 	path = "~/.config/.gitconfig" 
+
+#───────────────────────────────────────────────────────────────────────────────
+
 [core]
 	editor = nvim
 
@@ -22,14 +27,20 @@
 	relativePaths = false # false = show path relative to git root, not relative to cwd
 [stash]
 	showIncludeUntracked = true
+
+[init]
+	defaultBranch = main
 [pull]
 	rebase = true # rebase changes instead of merging
 	# Alternative: --ff-only https://blog.sffc.xyz/post/185195398930/why-you-should-use-git-pull-ff-only
+[url "git@github.com:"]
+	insteadOf = "https://github.com/"
 [push]
-	autoSetupRemote = true # 
+	autoSetupRemote = true # create remote branch, if it doesn't exist
 [rebase]
 	autoSquash = true
 	autoStash = true
+
 [log]
 	abbrevCommit = true
 	follow = true
@@ -38,9 +49,13 @@
 [advice]
 	detachedHead = false
 	addEmptyPathspec = false
+[help]
+	autoCorrect = prompt # prompt whether to run auto-correction
+
 [diff]
 	colorMoved = true # moved lines colored different than added/removed
    colorMovedWS = ignore-all-space
+	algorithm = histogram # https://luppeng.wordpress.com/2020/10/10/when-to-use-each-of-the-git-diff-algorithms/
 [merge]
 	conflictStyle = zdiff3 # sshows original version in mittle # https://ductile.systems/zdiff3/
 
