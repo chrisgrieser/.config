@@ -7,7 +7,7 @@
 
 # conditionally change author https://git-scm.com/docs/git-config#_conditional_includes
 # [includeIf "gitdir:~/.config/.git"]
-# 	path = "~/.config/.gitconfig" 
+	# path = "~/.config/.gitconfig" 
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -22,7 +22,7 @@
 	hooksPath = .git-hooks
 [status]
 	showUntrackedFiles = all
-	short = true
+	short = false
 	showStash = true
 	relativePaths = false # false = show path relative to git root, not relative to cwd
 [stash]
@@ -31,27 +31,39 @@
 [init]
 	defaultBranch = main
 [url "git@github.com:"]
-	insteadOf = "https://github.com/" # automatically use SSH instead of HTTPS on clone
+	insteadOf = "https://github.com/" # automatically use SSH instead of HTTPS for remotes
+
 [pull]
 	rebase = true # rebase changes instead of merging
 	# ff = only # https://blog.sffc.xyz/post/185195398930/why-you-should-use-git-pull-ff-only
+[fetch]
+	prune = true # automatically delete remote tracking branches that have been deleted
+	prunetags = true
 [push]
 	autoSetupRemote = true # create remote branch, if it doesn't exist
-[rebase]
-	autoSquash = true
-	autoStash = true
+	followtags = true # push new tags along with commits being pushed
+
+[branch]
+	sort = -committerdate # sort by recency, not by name
+[tag]
+	sort = -committerdate
 
 [log]
 	abbrevCommit = true
 	follow = true
 [format]
 	pretty = %C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)%an%C(reset)
+
 [advice]
 	detachedHead = false
 	addEmptyPathspec = false
 [help]
 	autoCorrect = prompt # prompt whether to run auto-correction
 
+[rebase]
+	autoSquash = true
+	autoStash = true
+	missingCommitsCheck = error # commits must be removed with `drop`, not by deleting a line
 [diff]
 	colorMoved = true # moved lines colored different than added/removed
    colorMovedWS = ignore-all-space
@@ -59,23 +71,25 @@
 [merge]
 	conflictStyle = zdiff3 # sshows original version in mittle # https://ductile.systems/zdiff3/
 
-	# SOURCE https://smittie.de/posts/git-mergetool/
-	# DOCS https://neovim.io/doc/user/diff.html#dp
+#───────────────────────────────────────────────────────────────────────────────
+
+# MERGE TOOL
+# SOURCE https://smittie.de/posts/git-mergetool/
+# DOCS https://neovim.io/doc/user/diff.html#dp
+[merge]
+	conflictStyle = zdiff3 # sshows original version in mittle # https://ductile.systems/zdiff3/
 	tool = nvim
 [mergetool "nvim"]
 	cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
 
 #───────────────────────────────────────────────────────────────────────────────
 # SETUP FOR DELTA
-# (`brew install git-delta`)
 
 [core]
 	# auto-select light/dark mode on macOS -- https://github.com/dandavison/delta/issues/447#issuecomment-1239398586
 	pager = delta "$(defaults read -g AppleInterfaceStyle &> /dev/null && echo --dark || echo --light)"
 [interactive]
 	diffFilter = delta --color-only
-[merge]
-	conflictstyle = diff3
 [delta]
 	tabs = 3 # tabwidth
 	navigate = true # use n and N to move between diff sections

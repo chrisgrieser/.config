@@ -4,7 +4,7 @@
 
 source_repo=$(echo "$*" | cut -c20-)
 reponame=$(echo "$*" | sed -E 's|.*/||')
-url="git@github.com:$source_repo.git" # use SSH instead of https
+url="git@github.com:$source_repo" # use SSH instead of https
 
 [[ ! -e "$local_repo_folder" ]] && mkdir -p "$local_repo_folder"
 cd "$local_repo_folder" || return 1
