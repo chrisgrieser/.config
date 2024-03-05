@@ -38,7 +38,6 @@
 	# ff = only # https://blog.sffc.xyz/post/185195398930/why-you-should-use-git-pull-ff-only
 [fetch]
 	prune = true # automatically delete remote tracking branches that have been deleted
-	prunetags = true
 [push]
 	autoSetupRemote = true # create remote branch, if it doesn't exist
 	followtags = true # push new tags along with commits being pushed
