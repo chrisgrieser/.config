@@ -107,6 +107,8 @@ local function themeModifications()
 			updateHl("lualine_y_diff_modified_" .. v, "guifg=#cfc53a")
 		end
 		updateHl("GitSignsChange", "guifg=#acaa62")
+	elseif theme == "rose-pine" and mode == "light" then
+		overwriteHl("@ibl.indent.char.1", { fg = "#dbc7b3" })
 	elseif theme == "dawnfox" then
 		overwriteHl("IblIndent", { fg = "#e0cfbd" })
 		overwriteHl("ColorColumn", { bg = "#e9dfd2" })

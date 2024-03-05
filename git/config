@@ -22,7 +22,7 @@
 	hooksPath = .git-hooks
 [status]
 	showUntrackedFiles = all
-	short = false
+	short = true
 	showStash = true
 	relativePaths = false # false = show path relative to git root, not relative to cwd
 [stash]

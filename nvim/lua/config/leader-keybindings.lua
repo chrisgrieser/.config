@@ -128,13 +128,15 @@ local function codeActionFilter(action)
 	---@type table<string, boolean>
 	local ignore = {
 		-- stylua: ignore
-		lua = (title:find("in this workspace") or title:find("defined global")
-			or title:find("Change to parameter")) ~= nil,
+		lua = (title:find("in the workspace") or title:find("on this line")
+			or title:find("defined global") or title:find("Change to parameter")) ~= nil,
 		css = (
 			title:find("^Disable .+ for entire file: ") or title:find("^Disable .+ rule inline: ")
 		) ~= nil,
 		markdown = title == "Create a Table of Contents",
 		python = title == "Ruff: Fix All", -- done via formatting
+		typescript = title == "Move to a new file", -- annoyance since always moved to top
+		javascript = title == "Move to a new file",
 	}
 	local configuredToIgnore = ignore[vim.bo.ft] == true
 	local noIgnoresForFiletype = ignore[vim.bo.ft] == nil
