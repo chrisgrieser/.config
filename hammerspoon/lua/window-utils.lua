@@ -16,17 +16,11 @@ M.smallCenter = { x = 0.3, y = 0.15, w = 0.4, h = 0.7 }
 
 -- negative x to hide useless sidebar
 if env.isAtMother then
-	M.toTheSide = hs.geometry.rect(-82, 54, 392, 890)
+	M.toTheSide = hs.geometry.rect(-75, 54, 385, 890)
 elseif env.isAtOffice then
-	M.toTheSide = hs.geometry.rect(-84, 54, 462, 1100)
+	M.toTheSide = hs.geometry.rect(-94, 54, 471, 1100)
 else
-	M.toTheSide = hs.geometry.rect(-82, 54, 437, 1026)
-end
-
--- Mona allows you to hide the sidebar, but restrict the window width too much
-if env.mastodonApp == "Mona" then
-	M.toTheSide.x = M.toTheSide.x - 10
-	M.toTheSide.w = M.toTheSide.w + 9
+	M.toTheSide = hs.geometry.rect(-92, 54, 446, 1026)
 end
 
 --------------------------------------------------------------------------------
