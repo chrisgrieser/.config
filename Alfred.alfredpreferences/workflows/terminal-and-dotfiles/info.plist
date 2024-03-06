@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>02B76AB1-1681-455F-93FF-7399A17A1683</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>13E9CC1C-2703-45B4-B289-8589A710A651</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>04D132BD-9B0E-4566-AA46-B176F22688E5</key>
 		<array>
 			<dict>
@@ -303,6 +316,42 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<true/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<false/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Open in Neovide</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>02B76AB1-1681-455F-93FF-7399A17A1683</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string>/System/Volumes/Data/Applications/neovide.app</string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>13E9CC1C-2703-45B4-B289-8589A710A651</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -319,6 +368,15 @@
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
+		<key>02B76AB1-1681-455F-93FF-7399A17A1683</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>340</real>
+		</dict>
 		<key>04D132BD-9B0E-4566-AA46-B176F22688E5</key>
 		<dict>
 			<key>colorindex</key>
@@ -327,6 +385,15 @@
 			<real>520</real>
 			<key>ypos</key>
 			<real>40</real>
+		</dict>
+		<key>13E9CC1C-2703-45B4-B289-8589A710A651</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>340</real>
 		</dict>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<dict>

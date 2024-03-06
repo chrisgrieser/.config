@@ -37,7 +37,7 @@ function _dump() {
 		grep -v "Temp" | sed "s|^|https://chrome.google.com/webstore/detail/|" \
 		>"$dump_path/browser-extensions.txt"
 
-	print "\e[1;38;5;247mBrewfile, pipx & browser-extensions-list saved at \"$(basename "$dump_path")\".\e[0m"
+	print "\e[1;38;5;247mBrewfile & browser-extensions-list saved at \"$(basename "$dump_path")\".\e[0m"
 }
 
 function update() {
