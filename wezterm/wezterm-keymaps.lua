@@ -82,9 +82,6 @@ M.keys = {
 	-- FIX works with `send_composed_key_when_right_alt_is_pressed = true`
 	-- but expects another character, so this mapping fixes it
 	{ key = "n", mods = "ALT", action = act.SendString("~") },
-	-- FIX keychron K3V2 bug
-	{ key = "<", action = act.SendString("^") },
-	{ key = "^", action = act.SendString("<") },
 
 	-- Emulates macOS' cmd-right & cmd-left
 	{ key = "LeftArrow", mods = "CMD", action = act.SendKey { key = "A", mods = "CTRL" } },
