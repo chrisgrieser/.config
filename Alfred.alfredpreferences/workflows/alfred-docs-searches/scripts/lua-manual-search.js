@@ -37,6 +37,7 @@ function run() {
 				title: title,
 				match: camelCaseMatch(title),
 				arg: url,
+				quicklookurl: url,
 				uid: url,
 			};
 		});

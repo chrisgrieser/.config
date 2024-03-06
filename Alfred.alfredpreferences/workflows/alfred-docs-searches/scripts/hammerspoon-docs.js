@@ -46,11 +46,13 @@ function run() {
 		// category items
 		for (/** @type {{ name: string; def: string; desc: string; }} */ const catItem of category.items) {
 			const shortdef = catItem.def.split("->")[0].trim();
+			const url = `https://www.hammerspoon.org/docs/${category.name}.html#${catItem.name}`;
 			sites.push({
 				title: catItem.def,
 				subtitle: catItem.desc,
 				match: alfredMatcher(shortdef),
-				arg: `https://www.hammerspoon.org/docs/${category.name}.html#${catItem.name}`,
+				arg: url,
+				quicklookurl: url,
 				uid: `${category.name}_${catItem.name}`,
 			});
 		}

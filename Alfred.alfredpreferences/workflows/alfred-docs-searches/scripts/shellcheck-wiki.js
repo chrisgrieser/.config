@@ -31,6 +31,7 @@ function run() {
 				subtitle: desc,
 				match: matcher,
 				arg: url,
+				quicklookurl: url,
 				uid: url,
 			};
 		});

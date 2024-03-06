@@ -287,6 +287,11 @@
 	<key>readme</key>
 	<string>Requires Alfred 5.5
 
+Press the `hotkey` to show the QuickPad. 
+- Press the `hotkey` again or &lt;kbd&gt;esc&lt;/kbd&gt; to close the pad without saving.
+- &lt;kbd&gt;⌘⏎&lt;/kbd&gt; to save changes.
+- &lt;kbd&gt;⇧⏎&lt;/kbd&gt; to preview as markdown.
+
 ---
 
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -367,32 +372,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>variable</key>
 			<string>pad_path</string>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>defaultvalue</key>
-				<integer>5</integer>
-				<key>markercount</key>
-				<integer>5</integer>
-				<key>maxvalue</key>
-				<integer>10</integer>
-				<key>minvalue</key>
-				<integer>0</integer>
-				<key>onlystoponmarkers</key>
-				<true/>
-				<key>showmarkers</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string></string>
-			<key>label</key>
-			<string></string>
-			<key>type</key>
-			<string>slider</string>
-			<key>variable</key>
-			<string>test</string>
-		</dict>
 	</array>
+	<key>variablesdontexport</key>
+	<array/>
 	<key>version</key>
 	<string>0.9</string>
 	<key>webaddress</key>

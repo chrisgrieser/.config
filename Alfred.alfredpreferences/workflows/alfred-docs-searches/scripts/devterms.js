@@ -37,6 +37,7 @@ function run(argv) {
 				title: hit.term,
 				subtitle: `${hit.definition} · ${hit.example}`,
 				arg: hit.url,
+				quicklookurl: hit.url,
 				uid: hit.id,
 			};
 		},
