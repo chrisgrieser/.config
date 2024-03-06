@@ -27,38 +27,50 @@ function httpRequest(url) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
-	const lang = argv[0];
-	const query = argv.slice(1).join("");
+	const scriptFilterKeyword = $.getenv("alfred_workflow_keyword") || "";
+	const keywordLangMap = {
+		html: "HTML",
+		css: "CSS",
+		js: "JavaScript",
+	};
+	const lang = keywordLangMap[scriptFilterKeyword];
+	const query = argv[0].trim();
 
 	const baseURL = "https://developer.mozilla.org";
 	const searchAPI = "https://developer.mozilla.org/api/v1/search?q=";
-	const output = [];
+	let results = JSON.parse(httpRequest(searchAPI + encodeURIComponent(query)));
 
-	const resultsArr = JSON.parse(
-		httpRequest(searchAPI + encodeURIComponent(query)),
-	).documents.filter((/** @type {{ mdn_url: string; }} */ result) =>
-		result.mdn_url.includes(lang),
-	);
-
-	if (resultsArr.length === 0) {
-		output.push({
-			title: "No MDN documents found.",
-			subtitle: "MDN search sometimes requires longer queries before results are shown.",
-			valid: false,
-			arg: "no",
-		});
-	} else {
-		for (const item of resultsArr) {
-			const url = baseURL + item.mdn_url;
-			output.push({
-				title: item.title,
-				match: alfredMatcher(item.title),
-				subtitle: item.summary,
-				arg: url,
-				uid: url,
-			});
-		}
+	// FEAT use suggestion if there are no results
+	if (results.documents.length === 0 && results.suggestions.length > 0) {
+		const suggestion = results.suggestions[0].text;
+		results = JSON.parse(httpRequest(searchAPI + encodeURIComponent(suggestion)));
 	}
 
-	return JSON.stringify({ items: output });
+	const docs = results.documents
+		.filter((/** @type {{ mdn_url: string; }} */ doc) => doc.mdn_url.includes(lang))
+		.map((/** @type {{ mdn_url: string; title: string; summary: string; }} */ doc) => {
+			const url = baseURL + doc.mdn_url;
+			return {
+				title: doc.title,
+				match: alfredMatcher(doc.title),
+				subtitle: doc.summary,
+				arg: url,
+				uid: url,
+			};
+		});
+
+	// GUARD no results
+	if (docs.length === 0) {
+		return JSON.stringify({
+			items: [
+				{
+					title: "No MDN documents found.",
+					subtitle: "MDN search sometimes requires longer queries before results are shown.",
+					valid: false,
+				},
+			],
+		});
+	}
+
+	return JSON.stringify({ items: docs });
 }
