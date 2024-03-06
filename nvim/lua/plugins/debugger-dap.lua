@@ -42,16 +42,18 @@ local function dapConfig()
 	require("config.theme-customization").reloadTheming()
 end
 
-local function gotoNextBreakpoint()
+---PENDING https://github.com/mfussenegger/nvim-dap/issues/792
+---@param dir "next"|"prev"
+local function gotoBreakpoint(dir)
 	local breakpoints = require("dap.breakpoints").get()
 	if #breakpoints == 0 then
 		vim.notify("No breakpoints set", vim.log.levels.WARN)
 		return
 	end
 	local points = {}
-	for _, bufnr in pairs(require("dap.breakpoints").get()) do
-		for bufnr_, point in ipairs(bufnr) do
-			table.insert(points, { bufnr = bufnr_, line = point.line })
+	for bufnr, buffer in pairs(breakpoints) do
+		for _, point in ipairs(buffer) do
+			table.insert(points, { bufnr = bufnr, line = point.line })
 		end
 	end
 
@@ -62,15 +64,16 @@ local function gotoNextBreakpoint()
 
 	local nextPoint
 	for i = 1, #points do
-		if points[i].bufnr == current.bufnr and points[i].line == current.line then
-			local next = math.fmod(i, #points) + 1 -- fmod = modulo in lua
-			vim.notify("❗ next: " .. tostring(next))
-			nextPoint = points[next]
+		local isAtBreakpointI = points[i].bufnr == current.bufnr and points[i].line == current.line
+		if isAtBreakpointI then
+			local nextIdx = dir == "next" and i + 1 or i - 1
+			if nextIdx > #points then nextIdx = 1 end
+			if nextIdx == 0 then nextIdx = #points end
+			nextPoint = points[nextIdx]
 			break
 		end
 	end
 	if not nextPoint then nextPoint = points[1] end
-	vim.notify("❗ nextPoint: " .. vim.inspect(nextPoint))
 
 	vim.cmd(("buffer +%s %s"):format(nextPoint.line, nextPoint.bufnr))
 end
@@ -83,10 +86,11 @@ return {
 		keys = {
 			-- INFO toggling breakpoints and "Continue" command done via nvim-recorder
 			-- stylua: ignore
-			{ "<leader>dd", function() require("dap").clear_breakpoints() end, desc = " Remove All Breakpoints" },
+			{ "<leader>dc", function() require("dap").clear_breakpoints() end, desc = " Clear All Breakpoints" },
 			{ "<leader>dr", function() require("dap").restart() end, desc = " Restart" },
 			{ "<leader>dt", function() require("dap").terminate() end, desc = " Terminate" },
-			{ "gb", function() gotoNextBreakpoint() end, desc = " Goto 1st Breakpoint" },
+			{ "gb", function() gotoBreakpoint("next") end, desc = " Next Breakpoint" },
+			{ "gB", function() gotoBreakpoint("prev") end, desc = " Previous Breakpoint" },
 		},
 		init = function() u.leaderSubkey("d", " Debugger", { "n", "x" }) end,
 		config = dapConfig,
@@ -132,7 +136,7 @@ return {
 					size = 40, -- width
 					elements = {
 						{ id = "scopes", size = 0.8 }, -- Variables
-						{ id = "stacks", size = 0.2 },
+						{ id = "stacks", size = 0.2 }, -- stracktracing
 						-- { id = "watches", size = 0.15 }, -- Expressions
 					},
 				},
@@ -157,7 +161,12 @@ return {
 		keys = {
 			-- INFO is the only one that needs manual starting, other debuggers
 			-- start with `continue` by themselves
-			{ "<leader>dn", function() require("osv").run_this() end, desc = " nvim-lua debugger" },
+			{
+				"<leader>dn",
+				function() require("osv").run_this() end,
+				ft = "lua",
+				desc = " nvim-lua debugger",
+			},
 		},
 	},
 	{ -- debugger preconfig for python
