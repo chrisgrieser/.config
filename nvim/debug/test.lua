@@ -1,5 +1,1 @@
-local function myFunc()
-	local info = debug.getinfo(1, "n").name
-	print(info)
-end
-myFunc()
+local next = math.fmod(3, 3)
