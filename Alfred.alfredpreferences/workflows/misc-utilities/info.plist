@@ -849,7 +849,7 @@ fi</string>
 				<key>acceptsurls</key>
 				<false/>
 				<key>name</key>
-				<string>Open in AppCleaner</string>
+				<string>Uninstall with AppCleaner</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.universalaction</string>
@@ -1131,7 +1131,7 @@ fi</string>
 		<key>A0A81E9B-5271-49A6-8A0C-4DE3F26CEDA9</key>
 		<dict>
 			<key>xpos</key>
-			<real>600</real>
+			<real>595</real>
 			<key>ypos</key>
 			<real>800</real>
 		</dict>

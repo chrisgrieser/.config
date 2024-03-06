@@ -4,10 +4,10 @@ tap "homebrew/cask-fonts"
 tap "homebrew/services"
 brew "bat"
 brew "python-certifi"
+brew "python@3.12"
 brew "six"
 brew "bpython"
 brew "cairo"
-brew "python@3.11"
 brew "ddgr"
 brew "eza"
 brew "fd"
@@ -30,6 +30,7 @@ brew "openssl@1.1"
 brew "pandoc"
 brew "pass"
 brew "pinentry-mac"
+brew "python@3.11"
 brew "ripgrep"
 brew "spotify_player"
 brew "starship"
@@ -69,6 +70,5 @@ cask "wezterm"
 cask "zoom"
 mas "GoodTask", id: 1143437985
 mas "Highlights", id: 1498912833
-mas "Ivory", id: 6444602274
+mas "Mona", id: 1659154653
 mas "Peek", id: 1554235898
-mas "ReadKit", id: 1615798039
