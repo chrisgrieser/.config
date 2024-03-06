@@ -30,15 +30,18 @@ K back-scroll
 #env
 
 # options
-LESS=--RAW-CONTROL-CHARS
-LESS+=--line-num-width=3
-LESS+=--chop-long-lines
-LESS+=--incsearch
-LESS+=--ignore-case
-LESS+=--no-init
-LESS+=--tilde
-LESS+=--long-prompt
-LESS+=--quit-if-one-screen
+# (`lesskey` does not accepts quotes, and unescaped leading spaces are ignored)
+LESS=
+LESS+=\ --RAW-CONTROL-CHARS
+LESS+=\ --line-num-width=3
+LESS+=\ --incsearch
+LESS+=\ --ignore-case
+LESS+=\ --no-init
+LESS+=\ --tilde
+LESS+=\ --long-prompt
+LESS+=\ --quit-if-one-screen
+LESS+=\ --chop-long-lines
+LESS+=\ --shift=.2
 
 # don't clutter home directory with useless `.lesshst` file
 LESSHISTFILE=-

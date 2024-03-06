@@ -8,13 +8,6 @@ export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 export LESSKEYIN="$ZDOTDIR/lesskey"
 export PAGER="less" # needs to be set explicitly, so the homebrew version is used
 
-# colorize man pages
-# export LESS_TERMCAP_mb=$'\e[1;31m'
-# export LESS_TERMCAP_md=$'\e[1;33m'
-# export LESS_TERMCAP_me=$'\e[0m'
-# export LESS_TERMCAP_us=$'\e[1;36m'
-# export LESS_TERMCAP_ue=$'\e[0m'
-
 #───────────────────────────────────────────────────────────────────────────────
 
 # Affects filetype-coloring in eza, fd, and completion menus
