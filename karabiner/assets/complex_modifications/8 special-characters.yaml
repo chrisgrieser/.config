@@ -1,33 +1,33 @@
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
 title: Special Characters
 rules:
-  # FIX < and ^ key switched when on German layout with Keychron K3V2
-  - description: "< and ^ key switch"
-    manipulators:
-      - type: basic
-        from: { key_code: non_us_backslash, modifiers: { optional: [shift] } }
-        to:
-          - key_code: grave_accent_and_tilde
-        conditions:
-          - { type: input_source_if, input_sources: [language: ^de$] }
-          - { type: device_if, identifiers: [{ product_id: 592 }] } # Keychron K3V2
-          # - { type: frontmost_application_unless, file_paths: [wezterm-gui$] }
-      # FIX cmd+^ in Obsidian
-      - type: basic
-        from: { key_code: grave_accent_and_tilde, modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: "6", modifiers: [command] }
-        conditions:
-          - { type: input_source_if, input_sources: [language: ^de$] }
-          - { type: device_if, identifiers: [{ product_id: 592 }] } # Keychron K3V2
-          - { type: frontmost_application_if, bundle_identifiers: [^md.obsidian$] }
+  # # FIX < and ^ key switched when on German layout with Keychron K3V2
+  # - description: "< and ^ key switch"
+  #   manipulators:
+  #     - type: basic
+  #       from: { key_code: non_us_backslash, modifiers: { optional: [shift] } }
+  #       to:
+  #         - key_code: grave_accent_and_tilde
+  #       conditions:
+  #         - { type: input_source_if, input_sources: [language: ^de$] }
+  #         - { type: device_if, identifiers: [{ product_id: 592 }] } # Keychron K3V2
+  #         # - { type: frontmost_application_unless, file_paths: [wezterm-gui$] }
+  #     # FIX cmd+^ in Obsidian
+  #     - type: basic
+  #       from: { key_code: grave_accent_and_tilde, modifiers: { mandatory: [command] } }
+  #       to:
+  #         - { key_code: "6", modifiers: [command] }
+  #       conditions:
+  #         - { type: input_source_if, input_sources: [language: ^de$] }
+  #         - { type: device_if, identifiers: [{ product_id: 592 }] } # Keychron K3V2
+  #         - { type: frontmost_application_if, bundle_identifiers: [^md.obsidian$] }
   #─────────────────────────────────────────────────────────────────────────────
   # DEAD KEYS FIX
   - description: "Avoid dead keys (prevent expecting another key): ^~`"
     manipulators:
       # caret ^
       - type: basic
-        from: { key_code: grave_accent_and_tilde } # BUG(Keychron), actually, it's non_us_backslash
+        from: { key_code: non_us_backslash } 
         to:
           - select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ }
           - { key_code: vk_none, hold_down_milliseconds: 50 }
@@ -75,8 +75,7 @@ rules:
           - { key_code: "7", modifiers: [option] }
       # ° → \
       - type: basic
-        # BUG(Keychron), actually, it's non_us_backslash
-        from: { key_code: grave_accent_and_tilde, modifiers: { mandatory: [shift] } }
+        from: { key_code: non_us_backslash, modifiers: { mandatory: [shift] } }
         conditions:
           - type: input_source_if
             input_sources: [{ language: ^de$ }]
