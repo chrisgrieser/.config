@@ -23,7 +23,7 @@ matches:
               awk "NF {p=1} p" | 
               python3 -c "import textwrap,sys; print(textwrap.dedent(sys.stdin.read()))"
   - trigger: LLL
-    replace: '[$|$]({{url}})'
+    replace: "[$|$]({{url}})"
     label: Markdown Link
     vars:
       - name: url
@@ -32,12 +32,12 @@ matches:
           # only pastes clipboard content if it's a URL
           cmd: '[[ "$(pbpaste)" =~ ^http.* ]] && pbpaste || echo ""'
   #─────────────────────────────────────────────────────────────────────────────
-  - trigger: '!table'
+  - trigger: "!table"
     replace: |
       ::: {custom-style="Table Caption"}
       Table $|$:
       :::
     label: Pandoc Table Caption
-  - trigger: '!img'
+  - trigger: "!img"
     replace: '<img width=60% alt="" src="$|$">'
     label: HTML Image
