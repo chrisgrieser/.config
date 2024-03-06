@@ -2,6 +2,19 @@
 export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgrep-config"
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 
+# macOS currently ships less v.581, which lacks the ability to read lesskey
+# source files. Therefore for this to work, the version of less provided by
+# homebrew is needed (v.633).
+export LESSKEYIN="$ZDOTDIR/lesskey"
+export PAGER="less" # needs to be set explicitly, so the homebrew version is used
+
+# colorize man pages
+# export LESS_TERMCAP_mb=$'\e[1;31m'
+# export LESS_TERMCAP_md=$'\e[1;33m'
+# export LESS_TERMCAP_me=$'\e[0m'
+# export LESS_TERMCAP_us=$'\e[1;36m'
+# export LESS_TERMCAP_ue=$'\e[0m'
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # Affects filetype-coloring in eza, fd, and completion menus
@@ -67,29 +80,3 @@ export npm_update_notifier=false # updating via homebrew instead
 
 # INFO reinstalling brew package `openssl@3` also seems to fix this
 # export npm_config_strict_ssl=false # fix hanging at "sill: idealTree build"
-
-#───────────────────────────────────────────────────────────────────────────────
-# LESS
-export PAGER="less" # needs to be set explicitly, so the homebrew version is used
-
-# have `less` colorize man pages
-export LESS_TERMCAP_mb=$'\E[1;31m' # begin bold
-export LESS_TERMCAP_md=$'\E[1;33m' # begin blink
-export LESS_TERMCAP_me=$'\E[0m'    # reset bold/blink
-export LESS_TERMCAP_us=$'\E[1;36m' # begin underline
-export LESS_TERMCAP_ue=$'\E[0m'    # reset underline
-
-LESS='--RAW-CONTROL-CHARS --line-num-width=3 --chop-long-lines --incsearch'
-LESS+=' --ignore-case --no-init --tilde --long-prompt --quit-if-one-screen'
-export LESS
-
-export LESSHISTFILE=- # don't clutter home directory with useless `.lesshst` file
-
-# INFO
-# macOS currently ships less v.581, which lacks the ability to read lesskey
-# source files. Therefore for this to work, the version of less provided by
-# homebrew is needed (v.633).
-export LESSKEYIN="$ZDOTDIR/lesskey"
-
-# FIX display nerdfont correctly https://github.com/ryanoasis/nerd-fonts/issues/1337
-export LESSUTFCHARDEF=23fb-23fe:p,2665:p,26a1:p,2b58:p,e000-e00a:p,e0a0-e0a2:p,e0a3:p,e0b0-e0b3:p,e0b4-e0c8:p,e0ca:p,e0cc-e0d4:p,e200-e2a9:p,e300-e3e3:p,e5fa-e6a6:p,e700-e7c5:p,ea60-ebeb:p,f000-f2e0:p,f300-f32f:p,f400-f532:p,f500-fd46:p,f0001-f1af0:p
