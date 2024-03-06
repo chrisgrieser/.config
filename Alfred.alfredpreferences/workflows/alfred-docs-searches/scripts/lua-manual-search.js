@@ -16,7 +16,7 @@ function camelCaseMatch(str) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const luaVersion = $.getenv("lua_version");
+	const luaVersion = "5.4";
 	const luaManualBaseURL = `https://lua.org/manual/${luaVersion}/`;
 
 	const rawHTML = app.doShellScript(`curl -sL '${luaManualBaseURL}'`);
@@ -43,6 +43,6 @@ function run() {
 
 	return JSON.stringify({
 		items: sites,
-		cache: { seconds: 1800 },
+		cache: { seconds: 3600 * 24 * 7 }, // 1 week
 	});
 }

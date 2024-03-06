@@ -3060,7 +3060,7 @@ This workflow already supports dozens of documentation sites. Since I cannot pos
 - `sc`: shellcheck Wiki
 - `pandoc`: Pandoc User Manual
 - `git`: official docs &amp; the "pro-git" book
-- `py`: python official docs*
+- `py`: python official docs
 - `ruff`: ruff rules
 - `pd`: pandas docs
 - `cht`: cheat.sh
@@ -3659,80 +3659,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>3.12</string>
-				<key>pairs</key>
-				<array>
-					<array>
-						<string>3.12</string>
-						<string>3.12</string>
-					</array>
-					<array>
-						<string>3.11</string>
-						<string>3.11</string>
-					</array>
-					<array>
-						<string>3.10</string>
-						<string>3.10</string>
-					</array>
-					<array>
-						<string>3.9</string>
-						<string>3.9</string>
-					</array>
-					<array>
-						<string>3.8</string>
-						<string>3.8</string>
-					</array>
-				</array>
-			</dict>
-			<key>description</key>
-			<string></string>
-			<key>label</key>
-			<string>Python Version</string>
-			<key>type</key>
-			<string>popupbutton</string>
-			<key>variable</key>
-			<string>python_version</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>5.4</string>
-				<key>pairs</key>
-				<array>
-					<array>
-						<string>5.4</string>
-						<string>5.4</string>
-					</array>
-					<array>
-						<string>5.3</string>
-						<string>5.3</string>
-					</array>
-					<array>
-						<string>5.2</string>
-						<string>5.2</string>
-					</array>
-					<array>
-						<string>5.1</string>
-						<string>5.1</string>
-					</array>
-				</array>
-			</dict>
-			<key>description</key>
-			<string></string>
-			<key>label</key>
-			<string>Lua Version</string>
-			<key>type</key>
-			<string>popupbutton</string>
-			<key>variable</key>
-			<string>lua_version</string>
-		</dict>
-	</array>
+	<array/>
 	<key>version</key>
 	<string>1.13.1</string>
 	<key>webaddress</key>
