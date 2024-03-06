@@ -34,7 +34,7 @@ local act = wt.action
 local host = wt.hostname()
 local isAtOffice = host:find("mini") or host:find("eduroam") or host:find("fak1")
 local isAtMother = host:find("Mother")
-local isAtHome = host:find("iMac")
+local isAtHome = not isAtOffice and not isAtMother
 
 local fontSize
 local cellWidth
@@ -43,7 +43,7 @@ if isAtHome then
 	cellWidth = 1
 elseif isAtMother then
 	fontSize = 26
-	cellWidth = 0.9
+	cellWidth = 1
 elseif isAtOffice then
 	fontSize = 29
 	cellWidth = 0.9
@@ -53,9 +53,11 @@ end
 -- SET WINDOW POSITION ON STARTUP
 
 wt.on("gui-startup", function(cmd)
-	-- on start, move window to the side ("pseudomaximized")
-	local pos = { x = 708, y = 0, w = 3135 }
-	if isAtOffice then
+	-- on start, move window to the side ("pseudo-maximized")
+	local pos
+	if isAtHome then
+		pos = { x = 708, y = 0, w = 3135 }
+	elseif isAtOffice then
 		pos = { x = 375, y = -100, w = 1675 }
 	elseif isAtMother then
 		pos = { x = 620, y = 0, w = 2745 }
@@ -71,23 +73,22 @@ end)
 
 -- https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
 wt.on("format-tab-title", function(tab)
-	-- prefers the title that was set via `tab:set_title()` or `wezterm cli
-	-- set-tab-title`
-	local title = tab.tab_title
-	if not title or title == "" then title = tab.active_pane.title end
-
+	-- prefer title that was set via `tab:set_title()` or `wezterm cli set-tab-title`
+	local title = tab.tab_title or tab.active_pane.title
+	local cwd = tab.active_pane.current_working_dir
 	local icon
-	if title == "zsh" or title == "wezterm" or title:find("/") then
-		local pwdBasefolder = tab.active_pane.current_working_dir.file_path:gsub("^.*/(.*)/$", "%1")
+
+	if cwd and (title == "zsh" or title == "wezterm" or title:find("/")) then
+		local pwdBasefolder = cwd.file_path:gsub("^.*/(.*)/$", "%1")
 		title = pwdBasefolder
-		icon = "  "
+		icon = " "
 	elseif title:find("^docs") then
-		icon = "  "
+		icon = " "
 	else
-		icon = "  "
+		icon = " "
 	end
 
-	return " " .. icon .. title .. " "
+	return (" %s %s "):format(icon, title)
 end)
 
 --------------------------------------------------------------------------------

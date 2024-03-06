@@ -11,12 +11,12 @@ local isAtMother = host:find("Mother")
 -- SIZE & FONT
 local fontSize
 if isAtMother then
-	fontSize = 23
-	g.neovide_padding_top = 0
-	g.neovide_padding_left = 4
+	fontSize = 22.3
+	g.neovide_padding_top = 4
+	g.neovide_padding_left = 6
 elseif isAtOffice then
 	fontSize = 25.5
-	g.neovide_padding_top = 0
+	g.neovide_padding_top = 5
 	g.neovide_padding_left = 4
 else
 	fontSize = 24.5

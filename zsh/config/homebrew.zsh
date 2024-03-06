@@ -27,7 +27,7 @@ function _print-section() {
 }
 
 function _dump() {
-	dump_path="$HOME/.config/.installed-apps-and-packages"
+	local dump_path="$HOME/.config/.installed-apps-and-packages"
 	local device_name
 	device_name=$(scutil --get ComputerName | cut -d" " -f2-)
 	brew bundle dump --force --file "$dump_path/Brewfile_$device_name.txt"
@@ -61,7 +61,9 @@ function update() {
 	# - also updates the homebrew status counter
 	brew services restart sketchybar
 
-	echo && _dump
+	echo 
+	_dump
+	echo
 	osascript -e 'display notification "" with title "🍺 Homebrew finished." sound name "Blow"'
 }
 
