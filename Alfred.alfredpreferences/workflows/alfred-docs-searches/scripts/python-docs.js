@@ -2,6 +2,7 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
+//──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} str */
 function alfredMatcher(str) {
@@ -10,34 +11,37 @@ function alfredMatcher(str) {
 	return [clean, camelCaseSeparated, str].join(" ");
 }
 
+/** @param {string} path */
+function readFile(path) {
+	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
+	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
+	return ObjC.unwrap(str);
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const pythonVersion = $.getenv("python_version");
-	const docsUrl = "https://api.github.com/repos/python/cpython/git/trees/main?recursive=1";
-	const baseUrl = `https://docs.python.org/${pythonVersion}`;
+	const pythonVersion = "3.12";
+	const baseUrl = `https://docs.python.org/${pythonVersion}/library/`;
 
-	const workArray = JSON.parse(app.doShellScript(`curl -s "${docsUrl}"`))
-		.tree.filter((/** @type {{ path: string; }} */ file) => /^Doc\/.*\.rst$/.test(file.path))
-		.map((/** @type {{ path: string }} */ entry) => {
-			const subsite = entry.path.slice(4, -4);
-			const category = subsite.split("/")[0];
-			const displayTitle = subsite.split("/")[1];
-			const url = `${baseUrl}/${subsite}.html`;
+	const searchIndexFile =
+		"/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/File Hub/python-3.12.2-docs-html/searchindex.json";
+	const searchIndex = JSON.parse(readFile(searchIndexFile));
 
-			return {
-				title: displayTitle,
-				subtitle: category,
-				match: alfredMatcher(subsite),
-				arg: url,
-				uid: subsite,
-			};
+	const sites = [];
+	for (const [title, entry] of Object.entries(searchIndex.indexentries)) {
+		const [docId, documentTitle] = entry[0];
+		const doc = searchIndex.documents[docId];
+		sites.push({
+			title: title,
+			subtitle: documentTitle + " - " + docId,
 		});
+	}
 
 	return JSON.stringify({
-		items: workArray,
-		cache: { seconds: 1800 },
+		items: sites,
+		// cache: { seconds: 3600 * 24 * 7 * 4 },
 	});
 }
