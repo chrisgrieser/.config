@@ -9,7 +9,7 @@ return {
 		ft = "gitrebase", -- so ftplugin is loaded
 		keys = {
 			-- stylua: ignore start
-			-- { "gc", function() require("tinygit").smartCommit { pushIfClean = true } end, desc = "󰊢 Smart-Commit & Push" },
+			{ "gc", function() require("tinygit").smartCommit { pushIfClean = true } end, desc = "󰊢 Smart-Commit & Push" },
 			{ "gC", function() require("tinygit").smartCommit { pushIfClean = false } end, desc = "󰊢 Smart-Commit" },
 			{ "<leader>gp", function() require("tinygit").push { pullBefore = true } end, desc = "󰊢 Pull & Push" },
 			{ "<leader>gP", function() require("tinygit").push { createGitHubPr = true } end, desc = " Push & PR" },
@@ -27,14 +27,7 @@ return {
 		},
 		opts = {
 			commitMsg = {
-				conventionalCommits = {
-					enforce = true,
-					-- stylua: ignore
-					keywords = {
-						"fix", "feat", "chore", "docs", "refactor", "build", "test",
-						"perf", "style", "revert", "ci", "break", "improv", "aider"
-					},
-				},
+				conventionalCommits = { enforce = true },
 				spellcheck = true,
 				keepAbortedMsgSecs = 300,
 			},
@@ -48,7 +41,7 @@ return {
 			},
 			statusline = {
 				blame = {
-					hideAuthorNames = { "Chris Grieser", "pseudometa", "chrisgrieser" },
+					hideAuthorNames = { "Chris Grieser", "chrisgrieser" },
 					ignoreAuthors = { "🤖 automated" },
 					maxMsgLen = 72,
 				},
