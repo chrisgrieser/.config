@@ -12,4 +12,3 @@
 --terminal-width="-1"
 --italic-text="always"
 --tabs="2"
---pager="less --RAW-CONTROL-CHARS --quit-if-one-screen --chop-long-lines"

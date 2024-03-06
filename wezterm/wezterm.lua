@@ -74,7 +74,7 @@ end)
 -- https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
 wt.on("format-tab-title", function(tab)
 	-- prefer title that was set via `tab:set_title()` or `wezterm cli set-tab-title`
-	local title = tab.tab_title or tab.active_pane.title
+	local title = tab.tab_title ~= "" and tab.tab_title or tab.active_pane.title
 	local cwd = tab.active_pane.current_working_dir
 	local icon
 

@@ -8,7 +8,7 @@
 #command
 
 # ^W enables wrapping of search: https://unix.stackexchange.com/a/621514
-- forw-search ^W
+- forw-search
 
 # toggle line numbers
 on toggle-option N
@@ -32,16 +32,34 @@ K back-scroll
 # options
 # (`lesskey` does not accepts quotes, and unescaped leading spaces are ignored)
 LESS=
+# process colors correctly
 LESS+=\ --RAW-CONTROL-CHARS
+
+# line number column width
 LESS+=\ --line-num-width=3
-LESS+=\ --incsearch
+
+# smart-case & incremental search
 LESS+=\ --ignore-case
-LESS+=\ --no-init
+LESS+=\ --incsearch
+
+# not tile at start of line
 LESS+=\ --tilde
+
+# more informative prompt
 LESS+=\ --long-prompt
+
+# quicker leaving
 LESS+=\ --quit-if-one-screen
+LESS+=\ --no-init
+
+# wrap lines
 LESS+=\ --chop-long-lines
+
+# amount of side-scrolling
 LESS+=\ --shift=.2
+
+# wrap around all searches
+LESS+=\ --search-option=W
 
 # don't clutter home directory with useless `.lesshst` file
 LESSHISTFILE=-
