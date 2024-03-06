@@ -21,9 +21,6 @@
 		"rules": {
 			"all": true,
 			"complexity": { "noExcessiveCognitiveComplexity": "off" },
-			"suspicious": {
-				"noConsoleLog": { "level": "" }
-			},
 			"style": {
 				"useTemplate": "off",
 				"noParameterAssign": "off",
