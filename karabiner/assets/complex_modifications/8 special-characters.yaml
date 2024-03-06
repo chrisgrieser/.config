@@ -1,33 +1,13 @@
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
 title: Special Characters
 rules:
-  # # FIX < and ^ key switched when on German layout with Keychron K3V2
-  # - description: "< and ^ key switch"
-  #   manipulators:
-  #     - type: basic
-  #       from: { key_code: non_us_backslash, modifiers: { optional: [shift] } }
-  #       to:
-  #         - key_code: grave_accent_and_tilde
-  #       conditions:
-  #         - { type: input_source_if, input_sources: [language: ^de$] }
-  #         - { type: device_if, identifiers: [{ product_id: 592 }] } # Keychron K3V2
-  #         # - { type: frontmost_application_unless, file_paths: [wezterm-gui$] }
-  #     # FIX cmd+^ in Obsidian
-  #     - type: basic
-  #       from: { key_code: grave_accent_and_tilde, modifiers: { mandatory: [command] } }
-  #       to:
-  #         - { key_code: "6", modifiers: [command] }
-  #       conditions:
-  #         - { type: input_source_if, input_sources: [language: ^de$] }
-  #         - { type: device_if, identifiers: [{ product_id: 592 }] } # Keychron K3V2
-  #         - { type: frontmost_application_if, bundle_identifiers: [^md.obsidian$] }
-  #─────────────────────────────────────────────────────────────────────────────
-  # DEAD KEYS FIX
+#───────────────────────────────────────────────────────────────────────────────
+  # DEAD KEYS
   - description: "Avoid dead keys (prevent expecting another key): ^~`"
     manipulators:
       # caret ^
       - type: basic
-        from: { key_code: non_us_backslash } 
+        from: { key_code: non_us_backslash }
         to:
           - select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ }
           - { key_code: vk_none, hold_down_milliseconds: 50 }
@@ -36,7 +16,6 @@ rules:
           - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
         conditions:
           - { type: input_source_if, input_sources: [language: ^de$] }
-          - { type: frontmost_application_unless, file_paths: [wezterm-gui$] }
       # backtick `
       - type: basic
         from: { key_code: equal_sign, modifiers: { mandatory: [shift] } }
@@ -48,20 +27,20 @@ rules:
           - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
         conditions:
           - { type: input_source_if, input_sources: [{ language: ^de$ }] }
-          # INFO wezterm already has a setting to disable dead keys, so it's not needed there
-          - { type: frontmost_application_unless, file_paths: [wezterm-gui$] }
       # tilde ~
       - type: basic
         from: { key_code: "n", modifiers: { mandatory: [option] } }
-        conditions:
-          - { type: input_source_if, input_sources: [language: ^de$] }
-          - { type: frontmost_application_unless, file_paths: [wezterm-gui$] }
         to:
           - select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ }
           - { key_code: vk_none, hold_down_milliseconds: 50 }
           - { key_code: grave_accent_and_tilde, modifiers: [shift] }
         to_after_key_up:
           - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
+        conditions:
+          - { type: input_source_if, input_sources: [language: ^de$] }
+          # INFO for some reason, `~` is the only dead key wezterm can manage
+          # fine on its own…
+          - { type: frontmost_application_unless, file_paths: [wezterm-gui$] }
   #─────────────────────────────────────────────────────────────────────────────
   # REMAPPING
   - description: "Remap to make them available without alt+shift: \\[]"
