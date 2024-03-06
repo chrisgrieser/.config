@@ -49,11 +49,21 @@ return {
 		"mfussenegger/nvim-dap",
 		keys = {
 			-- INFO toggling breakpoints and "Continue" command done via nvim-recorder
-			-- stylua: ignore start
+			-- stylua: ignore
 			{ "<leader>dd", function() require("dap").clear_breakpoints() end, desc = " Remove All Breakpoints" },
 			{ "<leader>dr", function() require("dap").restart() end, desc = " Restart" },
 			{ "<leader>dt", function() require("dap").terminate() end, desc = " Terminate" },
-			-- stylua: ignore end
+			{
+				"gb",
+				function()
+					local breakpoints = require("dap.breakpoints").get()
+					local firstBufferWithBreakpoint = vim.tbl_keys(breakpoints)[1]
+					local firstBreakpoint = breakpoints[firstBufferWithBreakpoint][1]
+
+					vim.cmd.buffer(firstBufferWithBreakpoint)
+				end,
+				desc = " Goto 1st Breakpoint",
+			},
 		},
 		init = function() u.leaderSubkey("d", " Debugger", { "n", "x" }) end,
 		config = dapConfig,
