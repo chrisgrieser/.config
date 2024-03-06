@@ -13,7 +13,7 @@ grey="38;5;247"
 file_colors=".*=$grey:LICENSE*=$grey:*lock*=$grey"
 export LS_COLORS="di=1;34:ln=3;35:or=7;31:$file_colors"
 
-export EZA_COLORS="gm=1;38;5;208" # `modified` with same orange as in starship
+export EZA_COLORS="gm=1;38;5;208" # git `modified` with same orange as in starship
 export EZA_STRICT=1
 export EZA_ICONS_AUTO=1
 [[ "$TERM_PROGRAM" == "WezTerm" ]] && export EZA_ICON_SPACING=2
@@ -26,7 +26,8 @@ alias l='eza --all --long --flags --time-style=relative --no-user --smart-group 
 # INFO multi-select `alt-enter` mapping consistent with the one for telescope
 export FZF_DEFAULT_COMMAND='fd'
 export FZF_DEFAULT_OPTS='
-	--color=hl:206,header::reverse --pointer=⟐ --prompt="❱ " --scrollbar=▐ --ellipsis=… --marker=" +"
+	--pointer=⟐ --prompt="❱ " --scrollbar=▐ --ellipsis=… --marker=" +"
+	--color=hl:206,header::reverse
 	--scroll-off=5 --cycle --layout=reverse --height=90% --preview-window=border-left
 	--bind=tab:down,shift-tab:up
 	--bind=page-down:preview-page-down,page-up:preview-page-up
@@ -78,15 +79,16 @@ export LESS_TERMCAP_me=$'\E[0m'    # reset bold/blink
 export LESS_TERMCAP_us=$'\E[1;36m' # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'    # reset underline
 
-export LESS='--RAW-CONTROL-CHARS --line-num-width=3 --incsearch --ignore-case --window=-4 --no-init --tilde --long-prompt --quit-if-one-screen'
+LESS='--RAW-CONTROL-CHARS --line-num-width=3 --chop-long-lines --incsearch'
+LESS+=' --ignore-case --no-init --tilde --long-prompt --quit-if-one-screen'
+export LESS
 
 export LESSHISTFILE=- # don't clutter home directory with useless `.lesshst` file
 
-# INFO Keybindings
-# - macOS currently ships less v.581, which lacks the ability to read lesskey
-#   source files. Therefore for this to work, the version of less provided by
-#   homebrew is needed (v.633)
-# - keybinding for search includes a setting that makes `n` and `N` wrap
+# INFO
+# macOS currently ships less v.581, which lacks the ability to read lesskey
+# source files. Therefore for this to work, the version of less provided by
+# homebrew is needed (v.633).
 export LESSKEYIN="$ZDOTDIR/lesskey"
 
 # FIX display nerdfont correctly https://github.com/ryanoasis/nerd-fonts/issues/1337

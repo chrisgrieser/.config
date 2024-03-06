@@ -8,6 +8,9 @@
 # toggle line numbers
 on toggle-option N
 
+# toggle wrap
+ow toggle-option S
+
 # grep certain lines
 f filter
 
