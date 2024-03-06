@@ -42,6 +42,39 @@ local function dapConfig()
 	require("config.theme-customization").reloadTheming()
 end
 
+local function gotoNextBreakpoint()
+	local breakpoints = require("dap.breakpoints").get()
+	if #breakpoints == 0 then
+		vim.notify("No breakpoints set", vim.log.levels.WARN)
+		return
+	end
+	local points = {}
+	for _, bufnr in pairs(require("dap.breakpoints").get()) do
+		for bufnr_, point in ipairs(bufnr) do
+			table.insert(points, { bufnr = bufnr_, line = point.line })
+		end
+	end
+
+	local current = {
+		bufnr = vim.api.nvim_get_current_buf(),
+		line = vim.api.nvim_win_get_cursor(0)[1],
+	}
+
+	local nextPoint
+	for i = 1, #points do
+		if points[i].bufnr == current.bufnr and points[i].line == current.line then
+			local next = math.fmod(i, #points) + 1 -- fmod = modulo in lua
+			vim.notify("❗ next: " .. tostring(next))
+			nextPoint = points[next]
+			break
+		end
+	end
+	if not nextPoint then nextPoint = points[1] end
+	vim.notify("❗ nextPoint: " .. vim.inspect(nextPoint))
+
+	vim.cmd(("buffer +%s %s"):format(nextPoint.line, nextPoint.bufnr))
+end
+
 --------------------------------------------------------------------------------
 
 return {
@@ -53,17 +86,7 @@ return {
 			{ "<leader>dd", function() require("dap").clear_breakpoints() end, desc = " Remove All Breakpoints" },
 			{ "<leader>dr", function() require("dap").restart() end, desc = " Restart" },
 			{ "<leader>dt", function() require("dap").terminate() end, desc = " Terminate" },
-			{
-				"gb",
-				function()
-					local breakpoints = require("dap.breakpoints").get()
-					local firstBufferWithBreakpoint = vim.tbl_keys(breakpoints)[1]
-					local firstBreakpoint = breakpoints[firstBufferWithBreakpoint][1]
-
-					vim.cmd.buffer(firstBufferWithBreakpoint)
-				end,
-				desc = " Goto 1st Breakpoint",
-			},
+			{ "gb", function() gotoNextBreakpoint() end, desc = " Goto 1st Breakpoint" },
 		},
 		init = function() u.leaderSubkey("d", " Debugger", { "n", "x" }) end,
 		config = dapConfig,
