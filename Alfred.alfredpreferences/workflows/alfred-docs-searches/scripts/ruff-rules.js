@@ -35,6 +35,7 @@ function run() {
 				subtitle: id,
 				match: alfredMatcher(id) + alfredMatcher(name),
 				arg: url,
+				quicklookurl: url,
 				uid: url,
 			};
 			return item;

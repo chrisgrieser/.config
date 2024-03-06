@@ -46,6 +46,7 @@ function run() {
 			match: matcher,
 			subtitle: area,
 			arg: url,
+			quicklookurl: url,
 			uid: url,
 		});
 	}

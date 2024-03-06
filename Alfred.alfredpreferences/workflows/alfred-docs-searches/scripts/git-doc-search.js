@@ -50,6 +50,7 @@ function run() {
 				title: title,
 				subtitle: "Reference",
 				arg: `https://git-scm.com${url}`,
+				quicklookurl: `https://git-scm.com${url}`,
 				uid: url,
 			};
 		});

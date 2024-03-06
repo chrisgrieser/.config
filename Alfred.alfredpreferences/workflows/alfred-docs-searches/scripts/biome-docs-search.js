@@ -49,6 +49,7 @@ function run() {
 				subtitle: category,
 				match: alfredMatcher(subsite),
 				arg: url,
+				quicklookurl: url,
 				uid: subsite,
 			};
 		},

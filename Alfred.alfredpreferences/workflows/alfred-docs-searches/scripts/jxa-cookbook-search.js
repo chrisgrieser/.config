@@ -40,6 +40,7 @@ function run() {
 				subtitle: category,
 				match: alfredMatcher(subsite) + " " + alfredMatcher(category),
 				arg: url,
+				quicklookurl: url,
 				uid: subsite,
 			};
 		});

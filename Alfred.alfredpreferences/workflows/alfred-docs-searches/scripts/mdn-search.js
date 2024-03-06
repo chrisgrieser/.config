@@ -55,6 +55,7 @@ function run(argv) {
 				match: alfredMatcher(doc.title),
 				subtitle: doc.summary,
 				arg: url,
+				quicklookurl: url,
 				uid: url,
 			};
 		});

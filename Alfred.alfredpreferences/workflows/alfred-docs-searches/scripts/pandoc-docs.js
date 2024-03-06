@@ -58,6 +58,7 @@ function run() {
 				subtitle: parentsBreadcrumbs,
 				match: alfredMatcher(displayName) + alfredMatcher(parentsBreadcrumbs),
 				arg: url,
+				quicklookurl: url,
 				uid: url,
 			};
 		});

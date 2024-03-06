@@ -20,10 +20,12 @@ function run() {
 		.filter((line) => !line.endsWith(":list") && !line.endsWith("/") && !line.startsWith(":"))
 		.concat([":intro", ":styles-demo", ":styles", ":vim", ":random"])
 		.map((item) => {
+			const url = "https://cheat.sh/" + item;
 			return {
 				title: item,
 				match: alfredMatcher(item),
-				arg: "https://cheat.sh/" + item,
+				arg: url,
+				quicklookurl: url,
 				uid: item,
 			};
 		});
