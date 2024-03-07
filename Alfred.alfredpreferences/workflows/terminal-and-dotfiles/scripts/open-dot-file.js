@@ -6,6 +6,7 @@ app.includeStandardAdditions = true;
 
 /** @param {string} str */
 function alfredMatcher(str) {
+	// try out all the different casings
 	const clean = str.replace(/[-()_/[\]]/g, " ");
 	const squeezed = str.replace(/[-_]/g, "");
 	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
@@ -29,6 +30,7 @@ function run() {
 			--exclude="**/Alfred.alfredpreferences/workflows/**/*.png"`,
 		)
 		.split("\r")
+		.reverse() // since often used files in `zsh` or `nvim` or further down the alphabet
 		.map((absPath) => {
 			const name = absPath.split("/").pop();
 			const relPath = absPath.slice(dotfileFolder.length + 1);
@@ -85,6 +87,7 @@ function run() {
 			fd --absolute-path --type=directory --hidden`,
 		)
 		.split("\r")
+		.reverse() // since often used files in `zsh` or `nvim` or further down the alphabet
 		.map((/** @type {string} */ absPath) => {
 			const name = absPath.slice(0, -1).split("/").pop();
 			if (!name) return;
