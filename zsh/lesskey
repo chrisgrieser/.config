@@ -7,7 +7,7 @@
 
 #command
 
-# ^W enables wrapping of search: https://unix.stackexchange.com/a/621514
+# search via `-` (= allows quickly typing `---option` to search for `--option`)
 - forw-search
 
 # map `esc` to `nohlsearch`
@@ -29,7 +29,7 @@ l right-scroll
 J forw-scroll
 K back-scroll
 
-# mark with one keystroke
+# use mark with one keystroke
 M set-mark m
 m goto-mark m
 
@@ -58,7 +58,7 @@ LESS+=\ --tilde
 
 # shows how far we are into the file in pages and total pages (if known)
 LESS+=\ --long-prompt
-LESS+=\ --prompt=mpage %dm?B/%D. line %lm$
+LESS+=\ --prompt=mpage %dm?B/%D.?Pm (%Pm\\%).$
 
 # highlight lines with a mark
 LESS+=\ --status-line
