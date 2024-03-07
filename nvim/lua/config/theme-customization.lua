@@ -108,7 +108,7 @@ local function themeModifications()
 			updateHl("lualine_a_" .. v, "gui=bold")
 		end
 	elseif theme == "dawnfox" then
-		overwriteHl("IblIndent", { fg = "#e0cfbd" })
+		overwriteHl("@ibl.indent.char.1", { fg = "#e0cfbd" })
 		overwriteHl("ColorColumn", { bg = "#e9dfd2" })
 		overwriteHl("TreesitterContext", { bg = "#e6d9cb" })
 		overwriteHl("VertSplit", { fg = "#b29b84" })
@@ -154,10 +154,8 @@ end
 
 vim.api.nvim_create_autocmd("ColorScheme", {
 	callback = function()
-		vim.defer_fn(function()
-			themeModifications()
-			customHighlights()
-		end, 100)
+		customHighlights()
+		vim.defer_fn(themeModifications, 100)
 	end,
 })
 
