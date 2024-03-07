@@ -12,20 +12,15 @@ fi
 # wait for sync of reminders
 [[ "$SENDER" == "system_woke" ]] && sleep 5
 
+# GUARD
+if ! command -v reminders &>/dev/null; then
+	sketchybar --set "$NAME" icon=" " label="reminders-cli not found"
+	return 1
+fi
+
 #───────────────────────────────────────────────────────────────────────────────
 
-# https://leancrew.com/all-this/2017/08/my-jxa-problem/
-# https://developer.apple.com/library/archive/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html#//apple_ref/doc/uid/TP40014508-CH109-SW10
-remindersToday=$(osascript -l JavaScript -e '
-	const endOfToday = new Date();
-	endOfToday.setHours(23, 59, 59, 0); // to include reminders in the afternoon
-	const remindersToday = Application("Reminders").defaultList().reminders.whose({
-		dueDate: { _lessThan: endOfToday },
-		completed: false,
-	});
-	remindersToday.length;
-')
-
+remindersToday=$(reminders show Default --due-date="$(date +"%Y-%m-%d")" | grep -c "^\d\+: ")
 if [[ $remindersToday -eq 0 ]]; then
 	remindersToday=""
 	icon=""
