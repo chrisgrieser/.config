@@ -43,6 +43,9 @@ keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
 -- non-unique, since it overwrites nvim default: https://neovim.io/doc/user/vim_diff.html#default-mappings
 keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
 
+-- Changelist
+keymap("n", "<C-g>", "g;", { desc = "󱋿 Goto last change" })
+
 -- Search
 keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = "Search IN sel" })
