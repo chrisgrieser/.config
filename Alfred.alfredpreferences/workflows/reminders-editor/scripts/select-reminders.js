@@ -7,7 +7,8 @@ app.includeStandardAdditions = true;
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const list = $.getenv("reminder_list");
-	const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
+	const urlRegex =
+		/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
 
 	/** @type AlfredItem[] */
 	const reminders = JSON.parse(
@@ -18,7 +19,7 @@ function run() {
 		const displayBody = body.trim().replace(/\n+/g, " · ");
 		const content = title + "\n" + body;
 		const [url] = content.match(urlRegex) || [];
-		const urlSubtitle = url ? `⌘: Open ${url} and mark as complete` : "⛔ ⌘: No URL";
+		const urlSubtitle = url ? "⌘: Open URL and mark as complete  ·  " + url : "⛔ ⌘: No URL";
 		return {
 			title: title,
 			subtitle: displayBody,
