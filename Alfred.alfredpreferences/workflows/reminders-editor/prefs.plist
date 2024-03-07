@@ -8,5 +8,7 @@
 	<string>Default</string>
 	<key>select_reminder_keyword</key>
 	<string>,,</string>
+	<key>sketchybar_trigger_name</key>
+	<string>update_reminder_count</string>
 </dict>
 </plist>
