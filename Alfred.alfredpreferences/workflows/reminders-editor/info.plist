@@ -5,7 +5,7 @@
 	<key>bundleid</key>
 	<string>de.chris-grieser.reminders-editor</string>
 	<key>category</key>
-	<string>❇️</string>
+	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
 		<key>0F93036F-D158-49BB-97AF-DE600B8A3300</key>
@@ -82,8 +82,43 @@
 				<false/>
 			</dict>
 		</array>
+		<key>3D40B34B-8C4C-4C22-B14E-BC5D7B92F072</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3D08F342-404B-4C70-8AC6-5473E7CB855B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>5EA9009D-31E5-463D-8A4D-86312F760D0C</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>45E222F3-9910-4038-AA60-1ABC01E95D81</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>45E222F3-9910-4038-AA60-1ABC01E95D81</key>
 		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E9FBABB7-D7D0-4EF6-A0F8-BC9B2124CB77</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: Snooze Reminder</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>1F28B1D0-95DD-4F7F-BB2A-018A98C5743B</string>
@@ -131,6 +166,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>AD688E18-558B-4606-827E-E20EECF63045</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3D40B34B-8C4C-4C22-B14E-BC5D7B92F072</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>AE66EC2F-3383-4BB5-8AB3-0C28C6ACCC11</key>
 		<array>
 			<dict>
@@ -157,6 +205,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>E9FBABB7-D7D0-4EF6-A0F8-BC9B2124CB77</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -171,6 +232,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/snooze-reminder.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E9FBABB7-D7D0-4EF6-A0F8-BC9B2124CB77</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -180,7 +264,28 @@
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>✅ Marked as complete</string>
+				<string>💤 Snoozed to tomorrow</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>☑️ Completed</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -209,6 +314,50 @@
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>1F28B1D0-95DD-4F7F-BB2A-018A98C5743B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>unstackview</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.hidealfred</string>
+			<key>uid</key>
+			<string>3D08F342-404B-4C70-8AC6-5473E7CB855B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<true/>
+				<key>focusedappvariablename</key>
+				<string>focusedapp</string>
+				<key>hotkey</key>
+				<integer>-1</integer>
+				<key>hotmod</key>
+				<integer>262144</integer>
+				<key>hotstring</key>
+				<string>double tap</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>AD688E18-558B-4606-827E-E20EECF63045</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -264,6 +413,61 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:focusedapp}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>com.runningwithcrayons.Alfred</string>
+						<key>outputlabel</key>
+						<string>Alfred</string>
+						<key>uid</key>
+						<string>5EA9009D-31E5-463D-8A4D-86312F760D0C</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>other</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>3D40B34B-8C4C-4C22-B14E-BC5D7B92F072</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/sketchybar-update.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>DA53DB8C-C97B-4594-A26E-0875AB96D262</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -292,7 +496,7 @@
 				<key>fontmode</key>
 				<integer>0</integer>
 				<key>fontsizing</key>
-				<integer>4</integer>
+				<integer>0</integer>
 				<key>footertext</key>
 				<string>⎋: Cancel   ⌘⏎: Save Changes</string>
 				<key>inputfile</key>
@@ -329,56 +533,12 @@
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>✅ Reminder saved</string>
+				<string>💾 Reminder saved</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>233B90F3-D8E0-48FC-A81A-89764B3AAC09</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/sketchybar-update.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>DA53DB8C-C97B-4594-A26E-0875AB96D262</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Added todo</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>5FF59D05-FE74-43DD-9589-1CFF471C8A6A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -408,21 +568,52 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
+				<key>action</key>
 				<integer>0</integer>
-				<key>keyword</key>
-				<string>{var:quickadd_reminder_keyword}</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Add Reminder: {query}</string>
-				<key>withspace</key>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
 				<true/>
+				<key>focusedappvariablename</key>
+				<string>focusedapp</string>
+				<key>hotkey</key>
+				<integer>1</integer>
+				<key>hotmod</key>
+				<integer>1835008</integer>
+				<key>hotstring</key>
+				<string>S</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>BD7716E2-05C1-4CD2-9B1C-5FD044289103</string>
+			<string>63FD13B2-4520-4BF7-B444-C84531F947E1</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Added todo</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>5FF59D05-FE74-43DD-9589-1CFF471C8A6A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -461,6 +652,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:quickadd_reminder_keyword}</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Add Reminder: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>BD7716E2-05C1-4CD2-9B1C-5FD044289103</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -479,37 +691,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<true/>
-				<key>focusedappvariablename</key>
-				<string>focusedapp</string>
-				<key>hotkey</key>
-				<integer>1</integer>
-				<key>hotmod</key>
-				<integer>1835008</integer>
-				<key>hotstring</key>
-				<string>S</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>63FD13B2-4520-4BF7-B444-C84531F947E1</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Edit the your tasks from Reminders.app using Alfred 5.5's Text View.
@@ -523,75 +704,85 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<dict>
 		<key>0F93036F-D158-49BB-97AF-DE600B8A3300</key>
 		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
 			<key>note</key>
 			<string>quick add</string>
 			<key>xpos</key>
-			<real>200</real>
+			<real>505</real>
 			<key>ypos</key>
-			<real>365</real>
+			<real>540</real>
 		</dict>
 		<key>1A97EC3B-9181-4DED-8694-6AC9B3CD04E7</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>450</real>
+			<real>875</real>
 			<key>ypos</key>
-			<real>485</real>
+			<real>670</real>
 		</dict>
 		<key>1F28B1D0-95DD-4F7F-BB2A-018A98C5743B</key>
 		<dict>
 			<key>note</key>
 			<string>Mark as completed</string>
 			<key>xpos</key>
-			<real>410</real>
+			<real>680</real>
 			<key>ypos</key>
-			<real>25</real>
+			<real>190</real>
 		</dict>
 		<key>233B90F3-D8E0-48FC-A81A-89764B3AAC09</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>500</real>
+			<real>875</real>
 			<key>ypos</key>
-			<real>170</real>
+			<real>420</real>
 		</dict>
 		<key>30829801-BAFD-447E-BA3D-5D6AB864A2F7</key>
 		<dict>
 			<key>xpos</key>
-			<real>180</real>
+			<real>505</real>
 			<key>ypos</key>
-			<real>170</real>
+			<real>345</real>
 		</dict>
 		<key>3C4A820D-7CF3-4098-9406-6DD4CA028F3D</key>
 		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
 			<key>xpos</key>
-			<real>355</real>
+			<real>680</real>
 			<key>ypos</key>
-			<real>385</real>
+			<real>560</real>
+		</dict>
+		<key>3D08F342-404B-4C70-8AC6-5473E7CB855B</key>
+		<dict>
+			<key>xpos</key>
+			<real>290</real>
+			<key>ypos</key>
+			<real>200</real>
+		</dict>
+		<key>3D40B34B-8C4C-4C22-B14E-BC5D7B92F072</key>
+		<dict>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>285</real>
 		</dict>
 		<key>45E222F3-9910-4038-AA60-1ABC01E95D81</key>
 		<dict>
 			<key>note</key>
 			<string>select reminder</string>
 			<key>xpos</key>
-			<real>45</real>
+			<real>300</real>
 			<key>ypos</key>
-			<real>25</real>
+			<real>275</real>
 		</dict>
 		<key>5FF59D05-FE74-43DD-9589-1CFF471C8A6A</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>450</real>
+			<real>875</real>
 			<key>ypos</key>
-			<real>360</real>
+			<real>545</real>
 		</dict>
 		<key>63FD13B2-4520-4BF7-B444-C84531F947E1</key>
 		<dict>
@@ -600,38 +791,56 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>quick add</string>
 			<key>xpos</key>
-			<real>45</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>540</real>
 		</dict>
 		<key>6DBE7C33-DE4C-4B1D-8831-E8F02E6FB3D6</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>650</real>
+			<real>875</real>
 			<key>ypos</key>
-			<real>25</real>
+			<real>140</real>
+		</dict>
+		<key>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>875</real>
+			<key>ypos</key>
+			<real>15</real>
+		</dict>
+		<key>AD688E18-558B-4606-827E-E20EECF63045</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>toggle tasks</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>265</real>
 		</dict>
 		<key>AE66EC2F-3383-4BB5-8AB3-0C28C6ACCC11</key>
 		<dict>
 			<key>note</key>
 			<string>edit reminder</string>
 			<key>xpos</key>
-			<real>355</real>
+			<real>680</real>
 			<key>ypos</key>
-			<real>170</real>
+			<real>345</real>
 		</dict>
 		<key>BD7716E2-05C1-4CD2-9B1C-5FD044289103</key>
 		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
 			<key>note</key>
 			<string>quick add</string>
 			<key>xpos</key>
-			<real>45</real>
+			<real>310</real>
 			<key>ypos</key>
-			<real>365</real>
+			<real>635</real>
 		</dict>
 		<key>DA53DB8C-C97B-4594-A26E-0875AB96D262</key>
 		<dict>
@@ -640,9 +849,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>update sketchybar reminders count</string>
 			<key>xpos</key>
-			<real>795</real>
+			<real>1095</real>
 			<key>ypos</key>
-			<real>235</real>
+			<real>335</real>
+		</dict>
+		<key>E9FBABB7-D7D0-4EF6-A0F8-BC9B2124CB77</key>
+		<dict>
+			<key>note</key>
+			<string>Snooze</string>
+			<key>xpos</key>
+			<real>510</real>
+			<key>ypos</key>
+			<real>15</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

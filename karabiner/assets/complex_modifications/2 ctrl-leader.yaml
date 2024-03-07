@@ -38,22 +38,20 @@ rules:
           - key_code: left_control
         conditions:
           - *leader-inactive
-          - { type: frontmost_application_unless, bundle_identifiers: [^com.runningwithcrayons\.Alfred$] }
+          - {
+              type: frontmost_application_unless,
+              bundle_identifiers: [^com.runningwithcrayons\.Alfred$],
+            }
         to_if_alone:
           - *activate-leader
           - *set-notice
-      # 2x L-Ctrl: Task App
+      # 2x L-Ctrl: Pass through (for Alfred)
       - type: basic
         from: { key_code: left_control }
         conditions: [*leader-active]
         to_if_alone:
-          - shell_command: |
-              osascript -e "
-                if (application \"GoodTask\" is frontmost) then
-                  tell application \"System Events\" to tell process \"GoodTask\" to set visible to false
-                else
-                  tell application \"GoodTask\" to activate
-                end if"
+          - key_code: left_control
+          - key_code: left_control
           - *deactivate-leader
           - *remove-notice
       # Cancel (Hyper/Esc)

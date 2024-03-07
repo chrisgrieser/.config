@@ -6,21 +6,24 @@ app.includeStandardAdditions = true;
 
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const today = new Date().toISOString().slice(0, 10);
 	const list = $.getenv("reminder_list");
 
 	/** @type AlfredItem[] */
 	const reminders = JSON.parse(
-		app.doShellScript(`reminders show "${list}" --due-date="${today}" --format="json"`),
+		app.doShellScript(`reminders show "${list}" --due-date="today" --format="json"`),
 	).map((/** @type {{ title: string; notes: string; externalId: string; }} */ rem) => {
 		const { title, notes, externalId } = rem;
+		const displayBody = (notes || "").trim().replace(/\n+/g, " · ");
 		return {
 			title: title,
-			subtitle: (notes || "").trim(),
-			variables: { id: externalId },
-			arg: title, // complete
+			subtitle: displayBody,
+			variables: {
+				id: externalId,
+				title: title,
+				notes: notes,
+			},
+			// edit
 			mods: {
-				// edit
 				cmd: { arg: title + "\n" + notes },
 			},
 		};
