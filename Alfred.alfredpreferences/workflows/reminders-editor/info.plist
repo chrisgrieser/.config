@@ -8,6 +8,19 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
+		<key>0BBC3335-0007-45FE-99A5-9C0E94E3B38C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>AE66EC2F-3383-4BB5-8AB3-0C28C6ACCC11</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>0F93036F-D158-49BB-97AF-DE600B8A3300</key>
 		<array>
 			<dict>
@@ -66,6 +79,16 @@
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>⌥: Save</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>0BBC3335-0007-45FE-99A5-9C0E94E3B38C</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Save</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -255,6 +278,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>💤 Snoozed to tomorrow</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -274,27 +318,6 @@
 			<string>E9FBABB7-D7D0-4EF6-A0F8-BC9B2124CB77</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>💤 Snoozed to tomorrow</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -594,6 +617,14 @@
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>0BBC3335-0007-45FE-99A5-9C0E94E3B38C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
 				<key>concurrently</key>
@@ -753,6 +784,13 @@ Requires the [reminders-cli](https://github.com/keith/reminders-cli): `brew inst
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>0BBC3335-0007-45FE-99A5-9C0E94E3B38C</key>
+		<dict>
+			<key>xpos</key>
+			<real>645</real>
+			<key>ypos</key>
+			<real>425</real>
+		</dict>
 		<key>0F93036F-D158-49BB-97AF-DE600B8A3300</key>
 		<dict>
 			<key>note</key>
@@ -776,7 +814,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>Mark as completed</string>
 			<key>xpos</key>
-			<real>680</real>
+			<real>725</real>
 			<key>ypos</key>
 			<real>190</real>
 		</dict>
@@ -799,7 +837,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>30829801-BAFD-447E-BA3D-5D6AB864A2F7</key>
 		<dict>
 			<key>xpos</key>
-			<real>505</real>
+			<real>480</real>
 			<key>ypos</key>
 			<real>345</real>
 		</dict>
@@ -887,7 +925,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>edit reminder</string>
 			<key>xpos</key>
-			<real>680</real>
+			<real>725</real>
 			<key>ypos</key>
 			<real>345</real>
 		</dict>
