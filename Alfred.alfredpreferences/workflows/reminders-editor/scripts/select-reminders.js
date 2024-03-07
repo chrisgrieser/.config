@@ -9,14 +9,22 @@ function run() {
 	const today = new Date().toISOString().slice(0, 10);
 	const list = $.getenv("reminder_list");
 
+	// index for usage with the reminder CLI not saved in the json
+	let index = 0;
+
 	/** @type AlfredItem[] */
 	const reminders = JSON.parse(
 		app.doShellScript(`reminders show "${list}" --due-date="${today}" --format="json"`),
-	).map((/** @type {{ title: string; body: string; externalId: string; }} */ rem) => {
+	).map((/** @type {{ title: string; notes: string; externalId: string; }} */ rem) => {
+		index++;
+		const { title, notes } = rem;
 		return {
-			title: rem.title,
-			subtitle: rem.body,
-			arg: rem.externalId,
+			title: title,
+			subtitle: notes.trim(),
+			arg: title + notes,
+			mods: {
+				cmd: { arg: index }, // complete
+			},
 		};
 	});
 

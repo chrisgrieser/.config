@@ -20,7 +20,9 @@ fi
 
 #───────────────────────────────────────────────────────────────────────────────
 
-remindersToday=$(reminders show Default --due-date="$(date +"%Y-%m-%d")" | grep -c "^\d\+: ")
+list_name="Default" # CONFIG
+
+remindersToday=$(reminders show "$list_name" --due-date="$(date +"%Y-%m-%d")" | grep -c "^\d\+: ")
 if [[ $remindersToday -eq 0 ]]; then
 	remindersToday=""
 	icon=""
