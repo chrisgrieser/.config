@@ -16,6 +16,8 @@ return {
 			prefix = " 󱞷",
 			min_rows = 6,
 			disable_ft = { "markdown", "yaml", "css" },
+			min_rows_ft = { python = 12 },
+			disable_virtual_lines = false,
 		},
 	},
 	{ -- context lines

@@ -10,9 +10,9 @@
       "ifmain"
     ]
   },
-  "def / function": {
+  "def + function": {
     "body": [
-      "def ${1:name}($2) -> ${3|None,str,int,dict|}:",
+      "def ${1:name}($2) -> ${3:None}:",
       "\t\"\"\"${4:Insert docstring.}\"\"\"",
       "$0"
     ],
