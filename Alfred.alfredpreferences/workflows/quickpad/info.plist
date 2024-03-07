@@ -197,7 +197,7 @@
 				<key>focusedappvariable</key>
 				<true/>
 				<key>focusedappvariablename</key>
-				<string>frontapp</string>
+				<string>focusedapp</string>
 				<key>hotkey</key>
 				<integer>2</integer>
 				<key>hotmod</key>
@@ -225,7 +225,7 @@
 				<array>
 					<dict>
 						<key>inputstring</key>
-						<string>{var:frontapp}</string>
+						<string>{var:focusedapp}</string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
