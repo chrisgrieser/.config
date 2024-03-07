@@ -115,7 +115,7 @@
 				<key>modifiers</key>
 				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Snooze Reminder</string>
+				<string>⇧: Snooze to tomorrow</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -232,6 +232,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>💤 Snoozed to tomorrow</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -251,27 +272,6 @@
 			<string>E9FBABB7-D7D0-4EF6-A0F8-BC9B2124CB77</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>💤 Snoozed to tomorrow</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -395,13 +395,20 @@
 				<key>scriptfile</key>
 				<string>./scripts/select-reminders.js</string>
 				<key>subtext</key>
-				<string></string>
+				<string>Reminders today</string>
 				<key>title</key>
 				<string>{const:alfred_workflow_name}</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
 				<true/>
+			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>reminder-today</string>
+				<key>inputmode</key>
+				<integer>1</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
@@ -545,29 +552,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/quick-add-reminder.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>0F93036F-D158-49BB-97AF-DE600B8A3300</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -599,6 +583,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/quick-add-reminder.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>0F93036F-D158-49BB-97AF-DE600B8A3300</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -608,7 +615,7 @@
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>✅ Added todo</string>
+				<string>✅ Added Reminder</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -789,7 +796,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>quick add</string>
+			<string>quick add selection or browser tab</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
@@ -818,7 +825,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>toggle tasks</string>
+			<string>show reminders today</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
