@@ -1,3 +1,5 @@
 completions/*
+!completions/README.md
+
 plugins/*
 !plugins/magic_dashboard.zsh

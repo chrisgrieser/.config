@@ -23,17 +23,18 @@ ow toggle-option S
 f filter
 
 # use mark with one keystroke
-M set-mark m
+8 set-mark m
 m goto-mark m
 
-
-# mor
+# more vim-like movements
 h left-scroll
 l right-scroll
 J forw-scroll
 K back-scroll
 
+# :help
 ? help
+
 #───────────────────────────────────────────────────────────────────────────────
 
 #env

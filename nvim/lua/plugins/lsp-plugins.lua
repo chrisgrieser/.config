@@ -17,15 +17,12 @@ return {
 		opts = {
 			inlay_hints = {
 				labels_separator = "",
-				only_current_line = false,
-				-- highlight = "NonText",
 				parameter_hints = {
 					prefix = " 󰁍 ",
 					remove_colon_start = true,
 					remove_colon_end = true,
 				},
 				type_hints = {
-					-- prefix = " ",
 					remove_colon_start = true,
 					remove_colon_end = true,
 				},

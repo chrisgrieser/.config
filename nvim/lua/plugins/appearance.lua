@@ -12,6 +12,7 @@ return {
 		event = "VeryLazy",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		opts = {
+			highlight = "LspInlayHint",
 			prefix = " 󱞷",
 			min_rows = 6,
 			disable_ft = { "markdown", "yaml", "css" },
