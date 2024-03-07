@@ -77,9 +77,7 @@ local function toggleHiddenAndIgnore(prompt_bufnr)
 	if ignoreHidden then title = title .. " (--hidden --no-ignore)" end
 	local currentQuery = require("telescope.actions.state").get_current_line()
 	local existingFileIgnores = require("telescope.config").values.file_ignore_patterns or {}
-
-	require("telescope.actions").close(prompt_bufnr)
-	require("telescope.builtin").find_files {
+	local newOpts = {
 		default_text = currentQuery,
 		prompt_title = title,
 		hidden = ignoreHidden,
@@ -95,7 +93,22 @@ local function toggleHiddenAndIgnore(prompt_bufnr)
 			unpack(existingFileIgnores), -- must be last for all items to be unpacked
 		},
 	}
+
+	current_picker:refresh(current_picker.finder, newOpts)
+
+	require("telescope.actions").close(prompt_bufnr)
+	require("telescope.builtin").find_files { newOpts, }
 end
+
+-- local current_picker = action_state.get_current_picker(prompt_bufnr)
+-- local finder = current_picker.finder
+-- finder.path = vim.loop.os_homedir()
+--
+-- fb_utils.redraw_border_title(current_picker)
+-- current_picker:refresh(
+--   finder,
+--   { new_prefix = fb_utils.relative_path_prefix(finder), reset_prompt = true, multi = current_picker._multi }
+-- )
 
 --------------------------------------------------------------------------------
 -- Nicer Display of file paths https://github.com/nvim-telescope/telescope.nvim/issues/2014
@@ -165,7 +178,7 @@ vim.api.nvim_create_autocmd("FileType", {
 					symbol_highlights = {
 						["function"] = "Function",
 						["method"] = "@method",
-					}
+					},
 				}
 			end,
 			{ desc = " Symbols", buffer = true }
@@ -495,14 +508,14 @@ return {
 				function()
 					-- SOURCE https://github.com/nvim-telescope/telescope.nvim/issues/2905
 					local scorer = require("telescope").extensions["zf-native"].native_zf_scorer()
-					local my_fzf = {}
-					setmetatable(my_fzf, { __index = scorer })
+					local mySorter = {}
+					setmetatable(mySorter, { __index = scorer })
 					local curBufRelPath = vim.api.nvim_buf_get_name(0):sub(#vim.loop.cwd() + 2)
 
 					---@param prompt string
 					---@param relPath string the ordinal from telescope
 					---@return number score number from 1 to 0. lower the number the better. -1 will filter out the entry though.
-					function my_fzf:scoring_function(prompt, relPath)
+					function mySorter:scoring_function(prompt, relPath)
 						-- only modify score when prompt is empty
 						if prompt ~= "" then return scorer.scoring_function(self, prompt, relPath) end
 						-- filter out current buffer
@@ -518,7 +531,7 @@ return {
 
 					require("telescope.builtin").find_files {
 						prompt_title = "Find Files: " .. project(),
-						sorter = my_fzf,
+						sorter = mySorter,
 					}
 				end,
 				desc = " Open File",

@@ -13,7 +13,6 @@ return {
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		opts = {
 			prefix = " 󱞷",
-			-- highlight = "NonText",
 			min_rows = 6,
 			disable_ft = { "markdown", "yaml", "css" },
 		},
@@ -60,7 +59,7 @@ return {
 		main = "ibl",
 		opts = {
 			scope = {
-				highlight = "Function",
+				highlight = "Comment",
 				show_start = false,
 				show_end = false,
 				show_exact_scope = true,

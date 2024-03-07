@@ -54,9 +54,6 @@ local function customHighlights()
 	-- FIX themes missing italics in markdown
 	linkHl("@markup.italic.markdown_inline", "Italic")
 
-	-- emphasize returns
-	updateHl("@keyword.return", "gui=bold")
-
 	-- de-emphasize commit messaages between 50 and 72 chars
 	linkHl("@comment.warning.gitcommit", "WarningMsg")
 
@@ -96,6 +93,20 @@ local function themeModifications()
 			local fg = u.getHighlightValue("@comment." .. type, "fg")
 			if fg ~= "#000000" then overwriteHl("@comment." .. type, { bg = fg, fg = "#000000" }) end
 		end
+	elseif theme == "dracula" then
+		clearHl("Constant")
+		overwriteHl("@keyword.return", { fg = "#5e9fff", bold = true })
+
+		-- todo comments have emphasized background, not foreground
+		for _, type in pairs { "todo", "error", "warning", "note" } do
+			local fg = u.getHighlightValue("@comment." .. type, "fg")
+			if fg ~= "#000000" then overwriteHl("@comment." .. type, { bg = fg, fg = "#000000" }) end
+		end
+
+		-- bold lualine a
+		for _, v in pairs(vimModes) do
+			updateHl("lualine_a_" .. v, "gui=bold")
+		end
 	elseif theme == "dawnfox" then
 		overwriteHl("IblIndent", { fg = "#e0cfbd" })
 		overwriteHl("ColorColumn", { bg = "#e9dfd2" })
@@ -105,6 +116,10 @@ local function themeModifications()
 		for _, v in pairs(vimModes) do
 			updateHl("lualine_y_diff_modified_" .. v, "guifg=#828208")
 		end
+
+		-- emphasize returns
+		updateHl("@keyword.return", "gui=bold")
+
 		-- FIX python highlighting issues
 		linkHl("@type.builtin.python", "Typedef")
 		linkHl("@string.documentation.python", "Typedef")
@@ -139,8 +154,10 @@ end
 
 vim.api.nvim_create_autocmd("ColorScheme", {
 	callback = function()
-		customHighlights()
-		vim.defer_fn(themeModifications, 100)
+		vim.defer_fn(function()
+			themeModifications()
+			customHighlights()
+		end, 100)
 	end,
 })
 
