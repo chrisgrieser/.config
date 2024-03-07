@@ -14,9 +14,8 @@ local lightThemes = {
 }
 
 local darkThemes = {
-	"nyoom-engineering/oxocarbon.nvim",
+	"binhtran432k/dracula.nvim",
 	{ "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
-	-- "binhtran432k/dracula.nvim",
 	-- { "rose-pine/neovim", name = "rose-pine-moon" },
 	-- "fynnfluegge/monet.nvim",
 	-- { "EdenEast/nightfox.nvim", name = "duskfox" },

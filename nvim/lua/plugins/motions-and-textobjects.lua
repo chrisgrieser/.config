@@ -33,10 +33,7 @@ return {
 		init = function()
 			-- if not using biscuits.nvim or nvim_context_vt, use this for context
 			vim.g.matchup_matchparen_offscreen = {}
-
-			-- always highlight surrounding matches
-			vim.g.matchup_matchparen_hi_surround_always = 1
-			vim.g.matchup_matchparen_deferred = 1
+			vim.g.matchup_matchparen_deferred = 1 --improves performance a bit
 		end,
 	},
 	{ -- CamelCase Motion plus
