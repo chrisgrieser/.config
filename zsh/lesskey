@@ -10,13 +10,16 @@
 # ^W enables wrapping of search: https://unix.stackexchange.com/a/621514
 - forw-search
 
+# map `esc` to `nohlsearch`
+\e undo-hilite
+
 # toggle line numbers
 on toggle-option N
 
 # toggle line wrap
 ow toggle-option S
 
-# grep certain lines
+# grep lines for a pattern
 f filter
 
 ? help
@@ -26,8 +29,9 @@ l right-scroll
 J forw-scroll
 K back-scroll
 
-m set-mark m
-M goto-mark m
+# mark with one keystroke
+M set-mark m
+m goto-mark m
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -35,23 +39,26 @@ M goto-mark m
 
 # options
 # (`lesskey` does not accepts quotes, and unescaped leading spaces are ignored)
+
+# initialize variable
 LESS=
+
 # process colors correctly
 LESS+=\ --RAW-CONTROL-CHARS
 
 # line number column width
-LESS+=\ --line-num-width=3
+LESS+=\ --line-num-width=4
 
-# smart-case & incremental search
+# ignore-case is actually like smart-case in other tools
 LESS+=\ --ignore-case
 LESS+=\ --incsearch
 
-# not tile at start of line
+# no tilde at start of line at the end of file
 LESS+=\ --tilde
 
-# shows  information on how far we are in the prompt
+# shows how far we are into the file in pages and total pages (if known)
 LESS+=\ --long-prompt
-LESS+=\ --prompt=mpage %dm/%D$
+LESS+=\ --prompt=mpage %dm?B/%D. line %lm$
 
 # highlight lines with a mark
 LESS+=\ --status-line
@@ -66,7 +73,7 @@ LESS+=\ --chop-long-lines
 # amount of side-scrolling (percentage of screen width)
 LESS+=\ --shift=.2
 
-# wrap around searches
+# wrap searches
 LESS+=\ --search-option=W
 
 # don't clutter home directory with useless `.lesshst` file
