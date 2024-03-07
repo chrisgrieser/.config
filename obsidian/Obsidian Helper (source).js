@@ -36,7 +36,9 @@ function run(argv) {
 
 	// CONDITIONS FOR DECIDING WHERE TO OPEN
 	const firstFile = pathArray[0];
-	const isFileInObsidianVault = Object.values(vaults).some((vault) => firstFile.startsWith(vault.path));
+	const isFileInObsidianVault = Object.values(vaults).some((vault) =>
+		firstFile.startsWith(vault.path),
+	);
 	const obsidianIsFrontmost = Application("Obsidian").frontmost();
 	const isInHiddenFolder = firstFile.includes("/.");
 

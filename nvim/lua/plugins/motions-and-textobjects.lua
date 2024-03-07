@@ -2,18 +2,6 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{ -- changelist, but across buffers
-		"bloznelis/before.nvim",
-		event = "VeryLazy", -- needs to load before keystroke to record edits
-		opts = { history_size = 25 },
-		keys = {
-			{
-				"<C-g>",
-				function() require("before").jump_to_last_edit() end,
-				desc = "󱋿 Goto Last Change",
-			},
-		},
-	},
 	{ -- highlights for ftFT
 		"jinh0/eyeliner.nvim",
 		keys = { "f", "F", "t", "T" },
