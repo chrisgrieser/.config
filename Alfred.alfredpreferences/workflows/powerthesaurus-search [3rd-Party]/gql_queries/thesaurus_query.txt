@@ -1,0 +1,39 @@
+query THESAURUSES_QUERY($after: String, $first: Int, $before: String, $last: Int, $termID: ID!, $list: List!, $sort: ThesaurusSorting!, $tagID: Int, $posID: Int, $syllables: Int) {
+  thesauruses(termId: $termID, sort: $sort, list: $list, after: $after, first: $first, before: $before, last: $last, tagId: $tagID, partOfSpeechId: $posID, syllables: $syllables) {
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+      __typename
+    }
+    edges {
+      node {
+        _type
+        id
+        isPinned
+        targetTerm {
+          id
+          name
+          slug
+          counters
+          isFavorite
+          __typename
+          }
+        relations
+        rating
+        vote {
+          voteType
+          id
+          __typename
+          }
+        votes
+        __typename
+      }
+      cursor
+      __typename
+      }
+    __typename
+  }
+}
