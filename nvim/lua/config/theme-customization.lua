@@ -143,6 +143,21 @@ local function themeModifications()
 		for _, type in pairs { "Hint", "Info", "Warn", "Error" } do
 			updateHl("DiagnosticUnderline" .. type, "gui=underdouble cterm=underline")
 		end
+	elseif theme == "kanagawa" then
+		overwriteHl("TreesitterContext", { bg = "#363648" })
+
+		-- transparent sign column
+		clearHl("SignColumn")
+		updateHl("GitSignsAdd", "guibg=none")
+		updateHl("GitSignsChange", "guibg=none")
+		updateHl("GitSignsDelete", "guibg=none")
+
+		for _, v in pairs(vimModes) do
+			updateHl("lualine_a_" .. v, "gui=bold")
+		end
+		for _, type in pairs { "Hint", "Info", "Warn", "Error" } do
+			updateHl("DiagnosticSign" .. type, "guibg=none")
+		end
 	elseif theme == "bluloco" then
 		updateCursor("i-ci-c:ver25")
 		updateCursor("o-v:hor10")
