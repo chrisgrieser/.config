@@ -16,7 +16,7 @@ M.smallCenter = { x = 0.3, y = 0.15, w = 0.4, h = 0.7 }
 
 -- negative x to hide useless sidebar
 if env.isAtMother then
-	M.toTheSide = hs.geometry.rect(-75, 54, 385, 890)
+	M.toTheSide = hs.geometry.rect(-78, 54, 387, 890)
 elseif env.isAtOffice then
 	M.toTheSide = hs.geometry.rect(-94, 54, 471, 1100)
 else

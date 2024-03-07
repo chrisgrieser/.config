@@ -7,19 +7,15 @@ return {
 		event = "CursorMoved",
 		opts = true,
 	},
-	{ -- slows down big files
-		"code-biscuits/nvim-biscuits",
+	{ -- virtual text context at the end of a scope
+		"haringsrob/nvim_context_vt",
+		event = "VeryLazy",
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		event = "BufReadPost",
 		opts = {
-			cursor_line_only = true,
-			default_config = {
-				min_distance = 8,
-				prefix_string = "↩ ",
-			},
-			language_config = {
-				css = { disabled = true },
-			},
+			prefix = " 󱞷",
+			-- highlight = "NonText",
+			min_rows = 6,
+			disable_ft = { "markdown", "yaml", "css" },
 		},
 	},
 	{ -- context lines

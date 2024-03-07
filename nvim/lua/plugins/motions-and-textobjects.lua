@@ -8,7 +8,7 @@ return {
 		opts = { history_size = 25 },
 		keys = {
 			{
-				"g,",
+				"<C-g>",
 				function() require("before").jump_to_last_edit() end,
 				desc = "󱋿 Goto Last Change",
 			},
@@ -30,6 +30,14 @@ return {
 			{ "m", "<Plug>(matchup-%)", desc = "Goto Matching Bracket" },
 		},
 		dependencies = "nvim-treesitter/nvim-treesitter",
+		init = function()
+			-- if not using biscuits.nvim or nvim_context_vt, use this for context
+			vim.g.matchup_matchparen_offscreen = {}
+
+			-- always highlight surrounding matches
+			vim.g.matchup_matchparen_hi_surround_always = 1
+			vim.g.matchup_matchparen_deferred = 1
+		end,
 	},
 	{ -- CamelCase Motion plus
 		"chrisgrieser/nvim-spider",

@@ -25,7 +25,6 @@ return {
 		matchup = {
 			enable = true,
 			enable_quotes = true,
-			disable_virtual_text = false,
 		},
 		endwise = {
 			enable = true,
