@@ -36,9 +36,8 @@ function man() {
 
 		# using bat, since it adds some syntax highlighting to the builtin pages,
 		# which man/less does not
-		# INFO `` makes less wrap the search (since less version 582)
 		if [[ -n "$search_term" ]]; then
-			pane_id=$(wezterm cli spawn -- bat --style=plain --language=man --pattern="$search_term" /usr/share/zsh/*/help/"$command")
+			pane_id=$(wezterm cli spawn -- bat --style=plain --language=man --pattern="$search_term" /usr/share/zsh/*/help/"$command")
 		else
 			pane_id=$(wezterm cli spawn -- bat --style=plain --language=man /usr/share/zsh/*/help/"$command")
 		fi
@@ -51,7 +50,7 @@ function man() {
 			fi
 		fi
 		if [[ -n "$search_term" ]]; then
-			pane_id=$(wezterm cli spawn -- command man -P "less --pattern=$search_term" "$command")
+			pane_id=$(wezterm cli spawn -- command man -P "less --pattern=$search_term" "$command")
 		else
 			pane_id=$(wezterm cli spawn -- command man "$command")
 		fi

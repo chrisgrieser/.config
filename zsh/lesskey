@@ -20,10 +20,14 @@ ow toggle-option S
 f filter
 
 ? help
+
 h left-scroll
 l right-scroll
 J forw-scroll
 K back-scroll
+
+m set-mark m
+M goto-mark m
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -45,20 +49,24 @@ LESS+=\ --incsearch
 # not tile at start of line
 LESS+=\ --tilde
 
-# more informative prompt
+# shows  information on how far we are in the prompt
 LESS+=\ --long-prompt
+LESS+=\ --prompt=mpage %dm/%D$
 
-# quicker leaving
+# highlight lines with a mark
+LESS+=\ --status-line
+
+# quicker leaving & do not clear the screen when doing so
 LESS+=\ --quit-if-one-screen
 LESS+=\ --no-init
 
 # wrap lines
 LESS+=\ --chop-long-lines
 
-# amount of side-scrolling
+# amount of side-scrolling (percentage of screen width)
 LESS+=\ --shift=.2
 
-# wrap around all searches
+# wrap around searches
 LESS+=\ --search-option=W
 
 # don't clutter home directory with useless `.lesshst` file
