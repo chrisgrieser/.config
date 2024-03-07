@@ -245,4 +245,25 @@ function M.gotoProject()
 end
 
 --------------------------------------------------------------------------------
+
+function M.gotoPluginConfig()
+	local plugins = vim.tbl_map(
+		function(p) return { id = p[1], module = p._.module } end,
+		require("lazy").plugins()
+	)
+	require("lazy").plugins()
+	vim.ui.select(plugins, {
+		prompt = "󰣖 Select Plugin:",
+		format_item = function(plugin) return vim.fs.basename(plugin.id) end,
+		kind = "plugin-selector",
+	}, function(selection)
+		if not selection then return end
+		local pluginFile = selection.module:gsub("%.", "/")
+		local filepath = vim.fn.stdpath("config") .. "/lua/" .. pluginFile .. ".lua"
+		local pluginId = selection.id
+		vim.cmd(("edit +/%s %s"):format(pluginId, filepath))
+	end)
+end
+
+--------------------------------------------------------------------------------
 return M

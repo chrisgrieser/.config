@@ -15,6 +15,13 @@ keymap(
 	{ desc = "⌨️ Edit " .. vim.fs.basename(pathOfThisFile) }
 )
 
+keymap(
+	"n",
+	"g,",
+	function() return require("funcs.nano-plugins").gotoPluginConfig() end,
+	{ desc = "󰣖 Goto Plugin Config" }
+)
+
 --------------------------------------------------------------------------------
 -- NAVIGATION
 
