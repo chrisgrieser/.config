@@ -44,15 +44,28 @@
 				<false/>
 			</dict>
 		</array>
+		<key>23ED3685-8AA0-4314-A16F-F7D8A0D01A70</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1F28B1D0-95DD-4F7F-BB2A-018A98C5743B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>30829801-BAFD-447E-BA3D-5D6AB864A2F7</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>AE66EC2F-3383-4BB5-8AB3-0C28C6ACCC11</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Save</string>
+				<string>⌥: Save</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -121,6 +134,16 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>23ED3685-8AA0-4314-A16F-F7D8A0D01A70</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>1F28B1D0-95DD-4F7F-BB2A-018A98C5743B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -133,9 +156,9 @@
 				<key>destinationuid</key>
 				<string>30829801-BAFD-447E-BA3D-5D6AB864A2F7</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Edit Reminder</string>
+				<string>⌥: Edit Reminder</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -232,6 +255,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/snooze-reminder.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E9FBABB7-D7D0-4EF6-A0F8-BC9B2124CB77</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -253,25 +299,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
+				<key>browser</key>
 				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/snooze-reminder.sh</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>E9FBABB7-D7D0-4EF6-A0F8-BC9B2124CB77</string>
+			<string>23ED3685-8AA0-4314-A16F-F7D8A0D01A70</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -501,11 +545,11 @@
 				<key>behaviour</key>
 				<integer>1</integer>
 				<key>fontmode</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>fontsizing</key>
 				<integer>0</integer>
 				<key>footertext</key>
-				<string>⎋: Cancel   ⌘⏎: Save Changes</string>
+				<string>⎋: Cancel   ⌥⏎: Save Changes</string>
 				<key>inputfile</key>
 				<string></string>
 				<key>inputtype</key>
@@ -552,6 +596,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/quick-add-reminder.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>0F93036F-D158-49BB-97AF-DE600B8A3300</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -577,29 +644,6 @@
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>63FD13B2-4520-4BF7-B444-C84531F947E1</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/quick-add-reminder.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>0F93036F-D158-49BB-97AF-DE600B8A3300</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -745,6 +789,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>420</real>
 		</dict>
+		<key>23ED3685-8AA0-4314-A16F-F7D8A0D01A70</key>
+		<dict>
+			<key>xpos</key>
+			<real>495</real>
+			<key>ypos</key>
+			<real>135</real>
+		</dict>
 		<key>30829801-BAFD-447E-BA3D-5D6AB864A2F7</key>
 		<dict>
 			<key>xpos</key>
@@ -865,7 +916,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>Snooze</string>
 			<key>xpos</key>
-			<real>510</real>
+			<real>375</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -901,7 +952,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<key>placeholder</key>
 				<string>re</string>
 				<key>required</key>
-				<true/>
+				<false/>
 				<key>trim</key>
 				<true/>
 			</dict>
@@ -922,7 +973,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<key>placeholder</key>
 				<string>qq</string>
 				<key>required</key>
-				<true/>
+				<false/>
 				<key>trim</key>
 				<true/>
 			</dict>
@@ -948,7 +999,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Sketchybar Users: name of the trigger to update a menubar component.</string>
+			<string>sketchybar users: name of the trigger to update a menubar component.</string>
 			<key>label</key>
 			<string>Sketchybar Trigger Name</string>
 			<key>type</key>
