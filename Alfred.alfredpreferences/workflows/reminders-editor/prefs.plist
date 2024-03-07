@@ -3,6 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>reminder_keyword</key>
-	<string>,,</string>
+	<string>rem</string>
+	<key>reminder_list</key>
+	<string>Default</string>
 </dict>
 </plist>

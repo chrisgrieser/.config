@@ -212,6 +212,27 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>variable</key>
 			<string>reminder_keyword</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string>MyList</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>List to Use</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>reminder_list</string>
+		</dict>
 	</array>
 	<key>version</key>
 	<string>0.9</string>
