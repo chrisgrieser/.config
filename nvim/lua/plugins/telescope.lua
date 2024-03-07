@@ -77,7 +77,9 @@ local function toggleHiddenAndIgnore(prompt_bufnr)
 	if ignoreHidden then title = title .. " (--hidden --no-ignore)" end
 	local currentQuery = require("telescope.actions.state").get_current_line()
 	local existingFileIgnores = require("telescope.config").values.file_ignore_patterns or {}
-	local newOpts = {
+
+	require("telescope.actions").close(prompt_bufnr)
+	require("telescope.builtin").find_files({
 		default_text = currentQuery,
 		prompt_title = title,
 		hidden = ignoreHidden,
@@ -92,23 +94,8 @@ local function toggleHiddenAndIgnore(prompt_bufnr)
 			"%.app/",
 			unpack(existingFileIgnores), -- must be last for all items to be unpacked
 		},
-	}
-
-	current_picker:refresh(current_picker.finder, newOpts)
-
-	require("telescope.actions").close(prompt_bufnr)
-	require("telescope.builtin").find_files { newOpts, }
+	})
 end
-
--- local current_picker = action_state.get_current_picker(prompt_bufnr)
--- local finder = current_picker.finder
--- finder.path = vim.loop.os_homedir()
---
--- fb_utils.redraw_border_title(current_picker)
--- current_picker:refresh(
---   finder,
---   { new_prefix = fb_utils.relative_path_prefix(finder), reset_prompt = true, multi = current_picker._multi }
--- )
 
 --------------------------------------------------------------------------------
 -- Nicer Display of file paths https://github.com/nvim-telescope/telescope.nvim/issues/2014
