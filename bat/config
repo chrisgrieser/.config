@@ -6,7 +6,7 @@
 
 # Possible values: *default*, full, auto, plain, changes, header,
 # header-filename, header-filesize, grid, rule, numbers, snip. Can combined via
-# comma-enumration
+# comma-enumeration
 --style="plain"
 
 --terminal-width="-1"

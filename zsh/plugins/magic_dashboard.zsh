@@ -47,12 +47,7 @@ function _gitlog {
 				-Ee $'s/`[^`]*`/\033[1;36m&\033[0m/g' \
 				-Ee $'s/#[0-9]+/\033[1;31m&\033[0m/g'
 	)
-
-	if [[ "$MAGIC_DASHBOARD_USE_HYPERLINKS" != "0" ]]; then
-		echo "$the_log" | delta --hyperlinks
-	else
-		echo "$the_log"
-	fi
+	echo "$the_log"
 }
 
 function _list_files_here {
@@ -60,8 +55,6 @@ function _list_files_here {
 
 	local eza_output
 	local max_files_lines=${MAGIC_DASHBOARD_FILES_LINES:-6}
-	# local use_hyperlinks
-	# use_hyperlinks=$([[ "$MAGIC_DASHBOARD_USE_HYPERLINKS" != "0" ]] && echo "--hyperlink" || echo "")
 	eza_output=$(
 		eza --width="$COLUMNS" --all --grid --color=always --icons \
 			--git-ignore --ignore-glob=".DS_Store|Icon?|.localized" \

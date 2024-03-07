@@ -22,17 +22,18 @@ ow toggle-option S
 # grep lines for a pattern
 f filter
 
-? help
+# use mark with one keystroke
+M set-mark m
+m goto-mark m
 
+
+# mor
 h left-scroll
 l right-scroll
 J forw-scroll
 K back-scroll
 
-# use mark with one keystroke
-M set-mark m
-m goto-mark m
-
+? help
 #───────────────────────────────────────────────────────────────────────────────
 
 #env

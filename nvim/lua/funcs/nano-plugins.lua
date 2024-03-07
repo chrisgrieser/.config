@@ -260,8 +260,8 @@ function M.gotoPluginConfig()
 		if not selection then return end
 		local pluginFile = selection.module:gsub("%.", "/")
 		local filepath = vim.fn.stdpath("config") .. "/lua/" .. pluginFile .. ".lua"
-		local pluginId = selection.id
-		vim.cmd(("edit +/%s %s"):format(pluginId, filepath))
+		local pluginId = selection.id:gsub("/", "\\/")
+		vim.cmd(("edit +/%q %s"):format(pluginId, filepath))
 	end)
 end
 
