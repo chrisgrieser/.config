@@ -2,26 +2,11 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 -- INFO potential alternatives:
 -- https://github.com/huggingface/llm-ls
--- https://docs.sourcegraph.com/cody/overview/install-neovim
 -- https://github.com/sourcegraph/sg.nvim
+-- https://github.com/Bryley/neoai.nvim
 --------------------------------------------------------------------------------
 
 return {
-	{ -- AI context chat
-		"Bryley/neoai.nvim",
-		dependencies = "MunifTanjim/nui.nvim",
-		cmd = { "NeoAIContext" },
-		keys = {
-			{ "<leader>a", ":NeoAIContext ", mode = "x", desc = "󰚩 NeoAIContext" },
-			{ "q", vim.cmd.NeoAIClose, ft = { "neoai-output", "neoai-input" }, nowait = true },
-		},
-		-- add syntax highlighting to output field
-		init = function() vim.treesitter.language.register("markdown", "neoai-output") end,
-		opts = {
-			ui = { width = 40 },
-			shortcuts = {}, -- disable those bindings
-		},
-	},
 	{
 		-- AI Ghost-Text Suggestions
 		"Exafunction/codeium.vim",
