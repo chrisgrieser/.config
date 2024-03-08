@@ -28,7 +28,7 @@ fi
 first_row="left"
 second_row="popup.clock"
 
-nerd_font="$CODE_FONT" 
+nerd_font="$CODE_FONT"
 system_font="Lucida Grande"
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -64,9 +64,8 @@ sketchybar \
 	--subscribe github_notif system_woke \
 	\
 	--add item reminders_count $first_row \
-	--set reminders_count update_freq=900 \
+	--set reminders_count update_freq=3600 \
 	script="$plugin_dir/reminders-count.sh" \
-	--subscribe reminders_count front_app_switched \
 	--subscribe reminders_count system_woke \
 	--add event update_reminder_count \
 	--subscribe reminders_count update_reminder_count \
