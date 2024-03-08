@@ -79,7 +79,7 @@ local function toggleHiddenAndIgnore(prompt_bufnr)
 	local existingFileIgnores = require("telescope.config").values.file_ignore_patterns or {}
 
 	require("telescope.actions").close(prompt_bufnr)
-	require("telescope.builtin").find_files({
+	require("telescope.builtin").find_files {
 		default_text = currentQuery,
 		prompt_title = title,
 		hidden = ignoreHidden,
@@ -94,7 +94,7 @@ local function toggleHiddenAndIgnore(prompt_bufnr)
 			"%.app/",
 			unpack(existingFileIgnores), -- must be last for all items to be unpacked
 		},
-	})
+	}
 end
 
 --------------------------------------------------------------------------------
@@ -252,9 +252,6 @@ local function telescopeConfig()
 				prompt_prefix = " ",
 				disable_coordinates = true,
 				layout_config = { horizontal = { preview_width = 0.7 } },
-				mappings = {
-					i = { ["<D-f>"] = "to_fuzzy_refine" },
-				},
 			},
 			git_status = {
 				prompt_prefix = "󰊢 ",
@@ -428,9 +425,6 @@ local function telescopeConfig()
 					".local", -- neodev.nvim
 					"homebrew", -- nvim runtime
 					"EmmyLua.spoon", -- Hammerspoon
-				},
-				mappings = {
-					i = { ["<D-f>"] = "to_fuzzy_refine" },
 				},
 			},
 			spell_suggest = {

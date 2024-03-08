@@ -250,6 +250,7 @@ function M.gotoChangedFiles()
 	local funcName = "Goto Changed File"
 	local currentFile = vim.api.nvim_buf_get_name(0)
 	local gitroot = vim.trim(vim.fn.system { "git", "rev-parse", "--show-toplevel" })
+	local pwd = vim.loop.cwd() or ""
 
 	-- Calculate numstat (`--intent-to-add` so new files show up in `--numstat`)
 	vim.fn.system("git ls-files --others --exclude-standard | xargs git add --intent-to-add")
@@ -270,9 +271,14 @@ function M.gotoChangedFiles()
 	local changedFiles = {}
 	for _, line in pairs(numstatLines) do
 		local added, deleted, filename = line:match("(%d+)%s+(%d+)%s+(.+)")
+		if added and deleted and filename then
 		local changes = tonumber(added) + tonumber(deleted)
 		local filepath = vim.fs.normalize(gitroot .. "/" .. filename)
-		table.insert(changedFiles, { filepath = filepath, changes = changes })
+
+		-- only add if in pwd, useful for monorepos
+		if vim.startswith(filepath, pwd) then
+			table.insert(changedFiles, { filepath = filepath, changes = changes })
+		end
 	end
 	table.sort(changedFiles, function(a, b) return a.changes > b.changes end)
 
@@ -310,7 +316,7 @@ function M.gotoPluginConfig()
 		if not plugin then return end
 		local module = plugin._.module:gsub("%.", "/")
 		local filepath = vim.fn.stdpath("config") .. "/lua/" .. module .. ".lua"
-		local repo = plugin[1]:gsub("/", "\\/")
+		local repo = plugin[1]:gsub("/", "\\/") -- escape for `:edit`
 		vim.cmd(("edit +/%q %s"):format(repo, filepath))
 	end)
 end

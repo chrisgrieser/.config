@@ -42,7 +42,7 @@ function browserTab() {
 			withTitle: "Frontmost app is not a supported browser.",
 			subtitle: "",
 		});
-		return;
+		return { url: "", title: "" };
 	}
 	return { url: url, title: title };
 }
@@ -70,7 +70,9 @@ function run(argv) {
 	if (!input && !isBrowser) return "";
 
 	// url + selection if from browser
-	const body = isBrowser && !keywordUsed ? browserTab()?.url : "";
+	const { url, title } = browserTab();
+	const body = isBrowser && !keywordUsed ? url : "";
+	if (!input && isBrowser) input = title;
 
 	// ADD REMINDER FOR TODAY
 	const rem = Application("Reminders");
