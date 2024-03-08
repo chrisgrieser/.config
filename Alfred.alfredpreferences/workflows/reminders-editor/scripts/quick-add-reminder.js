@@ -38,10 +38,6 @@ function browserTab() {
 		// @ts-ignore
 		title = frontmostApp.documents[0].name();
 	} else {
-		app.displayNotification("", {
-			withTitle: "Frontmost app is not a supported browser.",
-			subtitle: "",
-		});
 		return { url: "", title: "" };
 	}
 	return { url: url, title: title };
