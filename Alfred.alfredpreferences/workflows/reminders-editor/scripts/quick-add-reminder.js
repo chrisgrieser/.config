@@ -2,7 +2,6 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
-
 //──────────────────────────────────────────────────────────────────────────────
 
 function getFrontAppName() {
@@ -56,23 +55,22 @@ function run(argv) {
 	const isBrowser = frontBrowser() !== "no browser";
 
 	const keywordUsed = Boolean(argv[0]);
-	let input;
+	let input = "";
 	if (keywordUsed) {
-		input = argv[0];
+		input = argv[0] || "";
 	} else {
 		// get selected text
 		app.setTheClipboardTo(""); // empty clipboard in case of no selection
 		Application("System Events").keystroke("c", { using: ["command down"] });
-		delay(0.05);
+		delay(0.1);
 		input = app.theClipboard().toString();
 	}
 
 	// GUARD
 	if (!input && !isBrowser) return "";
 
-	const notes = isBrowser && !keywordUsed ? browserTab().title : "";
-	const tomorrow = new Date();
-	tomorrow.setDate(tomorrow.getDate() + 1);
+	// url + selection if from browser
+	const body = isBrowser && !keywordUsed ? browserTab()?.url : "";
 
 	// ADD REMINDER FOR TODAY
 	const rem = Application("Reminders");
@@ -86,7 +84,7 @@ function run(argv) {
 	const today = new Date();
 	const newReminder = rem.Reminder({
 		name: input.trim(),
-		notes: notes,
+		body: body,
 		alldayDueDate: today,
 	});
 	rem.lists.byName(list).reminders.push(newReminder);

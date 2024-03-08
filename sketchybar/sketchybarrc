@@ -66,6 +66,7 @@ sketchybar \
 	--add item reminders_count $first_row \
 	--set reminders_count update_freq=3600 \
 	script="$plugin_dir/reminders-count.sh" \
+	--subscribe reminders_count front_app_switched \
 	--subscribe reminders_count system_woke \
 	--add event update_reminder_count \
 	--subscribe reminders_count update_reminder_count \

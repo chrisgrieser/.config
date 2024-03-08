@@ -79,6 +79,7 @@ _change_git_files() {
 	compadd "${expl[@]}" -- "${changed_files[@]}"
 }
 compdef _change_git_files ga
+compdef _change_git_files gd
 compdef _change_git_files unadd
 compdef _change_git_files restore
 
