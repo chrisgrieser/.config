@@ -214,6 +214,32 @@
 		</array>
 		<key>6DBE7C33-DE4C-4B1D-8831-E8F02E6FB3D6</key>
 		<array/>
+		<key>83927C8F-D55B-4E36-B93D-23927B1808D5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DA53DB8C-C97B-4594-A26E-0875AB96D262</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>91C4C097-7401-4742-A061-9BF771AD2D00</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CD1F34B1-A599-4F46-928B-198B877B88A8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>AC986ADB-B43D-4F75-BFCB-7C27B55C983B</key>
 		<array>
 			<dict>
@@ -268,6 +294,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>0F93036F-D158-49BB-97AF-DE600B8A3300</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>CD1F34B1-A599-4F46-928B-198B877B88A8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>83927C8F-D55B-4E36-B93D-23927B1808D5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -742,7 +781,7 @@
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>✅ Added Reminder</string>
+				<string>✅ Added Reminder (today)</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -791,7 +830,7 @@
 				<key>keyword</key>
 				<string>{var:quickadd_reminder_keyword}</string>
 				<key>subtext</key>
-				<string></string>
+				<string>today</string>
 				<key>text</key>
 				<string>➕ Add Reminder: {query}</string>
 				<key>withspace</key>
@@ -825,6 +864,99 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:timed_reminder_keyword}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/select-reminder-time.js</string>
+				<key>subtext</key>
+				<string>at selected date</string>
+				<key>title</key>
+				<string>🕑 Add Reminder: {query}</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>91C4C097-7401-4742-A061-9BF771AD2D00</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/add-reminder-at-date.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>CD1F34B1-A599-4F46-928B-198B877B88A8</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Added Reminder ({var:selectedDueDate})</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>83927C8F-D55B-4E36-B93D-23927B1808D5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Edit the your tasks from Reminders.app using Alfred 5.5's Text View.
@@ -835,7 +967,7 @@ Requires the [reminders-cli](https://github.com/keith/reminders-cli): `brew inst
 
 Icon by [Emoopo-Design](https://macosicons.com/#/u/Emoopo-Design)
 
-Created by [Chris Grieser](https://chris-grieser.de/).</string>
+Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>0BBC3335-0007-45FE-99A5-9C0E94E3B38C</key>
@@ -859,7 +991,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>875</real>
+			<real>870</real>
 			<key>ypos</key>
 			<real>790</real>
 		</dict>
@@ -963,6 +1095,24 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>140</real>
 		</dict>
+		<key>83927C8F-D55B-4E36-B93D-23927B1808D5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>875</real>
+			<key>ypos</key>
+			<real>910</real>
+		</dict>
+		<key>91C4C097-7401-4742-A061-9BF771AD2D00</key>
+		<dict>
+			<key>note</key>
+			<string>add specific time</string>
+			<key>xpos</key>
+			<real>305</real>
+			<key>ypos</key>
+			<real>910</real>
+		</dict>
 		<key>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</key>
 		<dict>
 			<key>colorindex</key>
@@ -1007,6 +1157,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>305</real>
 			<key>ypos</key>
 			<real>755</real>
+		</dict>
+		<key>CD1F34B1-A599-4F46-928B-198B877B88A8</key>
+		<dict>
+			<key>note</key>
+			<string>timed add in background</string>
+			<key>xpos</key>
+			<real>505</real>
+			<key>ypos</key>
+			<real>910</real>
 		</dict>
 		<key>DA53DB8C-C97B-4594-A26E-0875AB96D262</key>
 		<dict>
@@ -1056,7 +1215,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>re</string>
+				<string></string>
 				<key>placeholder</key>
 				<string>re</string>
 				<key>required</key>
@@ -1067,7 +1226,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>description</key>
 			<string>for selecting a reminder</string>
 			<key>label</key>
-			<string>Keyword</string>
+			<string>Keywords</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -1088,11 +1247,32 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>description</key>
 			<string>for selecting adding a new reminder due today reminder</string>
 			<key>label</key>
-			<string>Keyword</string>
+			<string></string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>quickadd_reminder_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>qqq</string>
+				<key>placeholder</key>
+				<string>qqq</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>for adding a reminder due a specifc day</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>timed_reminder_keyword</string>
 		</dict>
 		<dict>
 			<key>config</key>

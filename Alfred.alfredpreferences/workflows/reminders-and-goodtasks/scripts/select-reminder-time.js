@@ -15,37 +15,37 @@ function run(argv) {
 	const jsonArray = [
 		{
 			title: "Tomorrow",
-			variables: { selectedDueDate: "Tomorrow" }, // label for notification
+			variables: { selection: "Tomorrow" }, // label for notification
 			arg: 1,
 		},
 		{
 			title: "In 2 Days",
-			variables: { selectedDueDate: "In 2 Days" },
+			variables: { selection: "In 2 Days" },
 			arg: 2,
 		},
 		{
 			title: "In 7 days",
-			variables: { selectedDueDate: "In 7 days" },
+			variables: { selection: "In 7 days" },
 			arg: 7,
 		},
 		{
 			title: "Next Monday",
-			variables: { selectedDueDate: "Next Monday" },
+			variables: { selection: "Next Monday" },
 			arg: daysUntilMonday,
 		},
 		{
 			title: "Next Wednesday",
-			variables: { selectedDueDate: "Next Wednesday" },
+			variables: { selection: "Next Wednesday" },
 			arg: daysUntilWedday,
 		},
 		{
 			title: "Next Sunday",
-			variables: { selectedDueDate: "Next Sunday" },
+			variables: { selection: "Next Sunday" },
 			arg: daysUntilSunday,
 		},
 		{
 			title: "In 2 weeks",
-			variables: { selectedDueDate: "In 2 weeks" },
+			variables: { selection: "In 2 weeks" },
 			arg: 14,
 		},
 	];
