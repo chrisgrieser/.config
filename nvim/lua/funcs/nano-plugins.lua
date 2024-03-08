@@ -247,7 +247,7 @@ end
 --------------------------------------------------------------------------------
 
 function M.gotoChangedFiles()
-	local funcName = "Goto Changed File"
+	local funcName = "Changed Files"
 	local currentFile = vim.api.nvim_buf_get_name(0)
 	local gitroot = vim.trim(vim.fn.system { "git", "rev-parse", "--show-toplevel" })
 	local pwd = vim.loop.cwd() or ""
@@ -302,23 +302,30 @@ function M.gotoChangedFiles()
 			break
 		end
 	end
-	local nextFile = changedFiles[nextFileIndex or 1]
+	if not nextFileIndex then nextFileIndex = 1 end
+
+	local nextFile = changedFiles[nextFileIndex]
 	vim.cmd.edit(nextFile.absPath)
 
 	-- notification
 	if not package.loaded["notify"] then return end
+	local icon = "" -- CONFIG
 	local listOfChangedFiles = {}
 	for i = 1, #changedFiles do
-		local prefix = i == nextFileIndex and " " or "- "
+		local prefix = (i == nextFileIndex and icon or "·") .. " "
 		local path = changedFiles[i].relPath
 		table.insert(listOfChangedFiles, prefix .. path)
 	end
+	local msg = table.concat(listOfChangedFiles, "\n")
 
-	vim.g.changedFilesNotif =
-		vim.notify(table.concat(listOfChangedFiles, "\n"), vim.log.levels.INFO, {
-			title = funcName,
-			replace = vim.g.changedFilesNotif and vim.g.changedFilesNotif.id,
-		})
+	vim.g.changedFilesNotif = vim.notify(msg, vim.log.levels.INFO, {
+		title = funcName,
+		replace = vim.g.changedFilesNotif and vim.g.changedFilesNotif.id,
+		on_open = function(win)
+			local bufnr = vim.api.nvim_win_get_buf(win)
+			vim.api.nvim_buf_call(bufnr, function() vim.fn.matchadd("Title", icon .. ".*") end)
+		end,
+	})
 end
 
 --------------------------------------------------------------------------------
