@@ -33,6 +33,7 @@ function M.globalSubstitute()
 
 		-- replace
 		vim.defer_fn(function()
+			-- add title to quickfix
 			vim.fn.setqflist({}, "a", { title = input })
 
 			-- GUARD
@@ -60,7 +61,7 @@ function M.globalSubstitute()
 						vim.cmd.cclose()
 						vim.cmd.cfirst() -- move cursor back
 						vim.cmd.cexpr("[]") -- clear quickfix
-						vim.cmd.cfdo("silent update")
+						vim.cmd.cfdo("silent update") -- save all changes
 						vim.o.ignorecase = ignoreCaseBefore
 					end, 1)
 				end,
@@ -109,9 +110,8 @@ function M.openAtRegex101()
 		return
 	end
 
-	-- `+` is the only character regex101 does not escape on its own. But for it
-	-- to work, `\` needs to be escaped as well (SIC)
-	pattern = pattern:gsub("%+", "%%2B"):gsub("\\", "%%5C")
+	-- CAVEAT `+` is the only character that does not get escaped correctly
+	pattern = pattern:gsub("%+", "PLUS")
 
 	-- DOCS https://github.com/firasdib/Regex101/wiki/FAQ#how-to-prefill-the-fields-on-the-interface-via-url
 	local url = ("https://regex101.com/?regex=%s&flags=%s&flavor=%s%s"):format(
@@ -251,9 +251,8 @@ function M.gotoChangedFiles()
 	local currentFile = vim.api.nvim_buf_get_name(0)
 	local gitroot = vim.trim(vim.fn.system { "git", "rev-parse", "--show-toplevel" })
 
-	-- so new files show up in --numstat
+	-- Calculate numstat (`--intent-to-add` so new files show up in `--numstat`)
 	vim.fn.system("git ls-files --others --exclude-standard | xargs git add --intent-to-add")
-
 	local numstat = vim.trim(vim.fn.system { "git", "diff", "--numstat" })
 	local numstatLines = vim.split(numstat, "\n")
 	local error = vim.v.shell_error ~= 0
@@ -303,19 +302,16 @@ end
 --------------------------------------------------------------------------------
 
 function M.gotoPluginConfig()
-	local plugins = vim.tbl_map(
-		function(p) return { id = p[1], module = p._.module } end,
-		require("lazy").plugins()
-	)
+	local plugins = require("lazy").plugins()
 	vim.ui.select(plugins, {
 		prompt = "󰣖 Select Plugin:",
-		format_item = function(plugin) return vim.fs.basename(plugin.id) end,
-	}, function(selection)
-		if not selection then return end
-		local pluginFile = selection.module:gsub("%.", "/")
-		local filepath = vim.fn.stdpath("config") .. "/lua/" .. pluginFile .. ".lua"
-		local pluginId = selection.id:gsub("/", "\\/")
-		vim.cmd(("edit +/%q %s"):format(pluginId, filepath))
+		format_item = function(plugin) return vim.fs.basename(plugin[1]) end,
+	}, function(plugin)
+		if not plugin then return end
+		local module = plugin._.module:gsub("%.", "/")
+		local filepath = vim.fn.stdpath("config") .. "/lua/" .. module .. ".lua"
+		local repo = plugin[1]:gsub("/", "\\/")
+		vim.cmd(("edit +/%q %s"):format(repo, filepath))
 	end)
 end
 

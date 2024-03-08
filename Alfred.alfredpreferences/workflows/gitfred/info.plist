@@ -1028,7 +1028,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>gs</string>
+				<string>gst</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -1366,7 +1366,7 @@ end run</string>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>gn</string>
+				<string>ghn</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -1497,9 +1497,9 @@ end run</string>
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the repo URL.
 	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Shallow clone the repo to a local folder and open in the Terminal. Optionally, creates a fork on GitHub with the `gh` cli and prepares the repo for a PR.
 	+ &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Search the last 100 issues, use &lt;kbd&gt;⏎&lt;/kbd&gt; to open the issue in the browser.
-- Search your 100 most recently starred repos via the keyword `gs`.
+- Search your 100 most recently starred repos via the keyword `gst`.
 	+ The same modifiers apply as for the public repo search.
-- Quick access the repositories you own via `gg`.
+- Quick access the repositories you own via `gmy`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: If the repo is available locally on your device, open it in Finder. Otherwise, open the repo's GitHub page.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the repo's GitHub page.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the repo link.
@@ -1511,7 +1511,7 @@ end run</string>
 - Access Pull Requests (PRs) you have opened with the keyword `gpr`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the PR in the browser.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the link to the PR.
-- Directly open your GitHub notification via `gn`. (Requires that you export a `$GITHUB_TOKEN` set in your `.zshenv`.)
+- Directly open your GitHub notification via `gno`. (Requires that you export a `$GITHUB_TOKEN` set in your `.zshenv`.)
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the notification in the browser.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Mark the notification as read.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the URL of the notification target.
@@ -1855,6 +1855,48 @@ end run</string>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>gh</string>
+				<key>placeholder</key>
+				<string>gh</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Public Repo Search</string>
+			<key>label</key>
+			<string>Keywords</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>keyword_public_repos</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>gmy</string>
+				<key>placeholder</key>
+				<string>gmy</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Personal Repo Search</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>keyword_personal_repos</string>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
