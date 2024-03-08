@@ -67,8 +67,8 @@ function run() {
 	const response = JSON.parse(httpRequest(apiURL));
 
 	const forkOnClone = $.getenv("fork_on_clone") === "1";
-	const cloneDepth = $.getenv("clone_depth");
-	const shallowClone = cloneDepth !== "" && cloneDepth !== "0";
+	const cloneDepth = Number.parseInt($.getenv("clone_depth"));
+	const shallowClone = cloneDepth > 0;
 
 	/** @type AlfredItem[] */
 	const repos = response.map((/** @type {GithubRepo} */ repo) => {

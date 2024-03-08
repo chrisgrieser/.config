@@ -15,7 +15,7 @@ function alfredMatcher(str) {
 
 // biome-ignore lint/correctness/noUnusedVariables: alfred_run
 function run() {
-	const resultsNumber = $.getenv("results_number");
+	const resultsNumber = 50; // api allows up to 100
 	const username = $.getenv("github_username");
 	const apiURL = `https://api.github.com/search/issues?q=involves:${username}&per_page=${resultsNumber}`;
 
@@ -27,7 +27,7 @@ function run() {
 			const isPR = Boolean(item.pull_request);
 			const merged = Boolean(item.pull_request?.merged_at);
 			const title = item.title;
-			const repo = item.repository_url.match(/[^/]+$/)[0];
+			const repo = (item.repository_url.match(/[^/]+$/) || "")[0];
 			const comments = item.comments > 0 ? "💬 " + item.comments.toString() : "";
 
 			let icon = authoredByMe ? "🚩 " : "";

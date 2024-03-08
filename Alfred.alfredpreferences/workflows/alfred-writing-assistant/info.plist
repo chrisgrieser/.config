@@ -792,13 +792,17 @@ DOUBLE CLICK TO EDIT</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>default</key>
-				<string>0.3</string>
-				<key>placeholder</key>
-				<string>0.3</string>
-				<key>required</key>
+				<key>defaultvalue</key>
+				<integer>0</integer>
+				<key>markercount</key>
+				<integer>2</integer>
+				<key>maxvalue</key>
+				<integer>1</integer>
+				<key>minvalue</key>
+				<integer>0</integer>
+				<key>onlystoponmarkers</key>
 				<true/>
-				<key>trim</key>
+				<key>showmarkers</key>
 				<true/>
 			</dict>
 			<key>description</key>
@@ -806,7 +810,7 @@ DOUBLE CLICK TO EDIT</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
-			<string>textfield</string>
+			<string>slider</string>
 			<key>variable</key>
 			<string>temperature</string>
 		</dict>

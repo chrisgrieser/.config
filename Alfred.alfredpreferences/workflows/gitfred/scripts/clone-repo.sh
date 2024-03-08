@@ -12,13 +12,13 @@ cd "$local_repo_folder" || return 1
 #───────────────────────────────────────────────────────────────────────────────
 # CLONE
 
-if [[ -z $clone_depth || $clone_depth == "0" ]]; then
+if [[ $clone_depth == "0" ]]; then
 	git clone "$url" --no-single-branch --no-tags # get branches, but not tags
 else
-	# validate depth, minimum 2
 	# WARN depth=2 ensures that amending a shallow commit does not result in a
 	# new commit without parent, effectively destroying git history (!!)
-	[[ $clone_depth =~ ^[0-9]+$ && $clone_depth -ge 2 ]] || clone_depth=2
+	[[ $clone_depth == "1" ]] && clone_depth=2
+
 	git clone "$url" --depth="$clone_depth" --no-single-branch --no-tags
 fi
 
