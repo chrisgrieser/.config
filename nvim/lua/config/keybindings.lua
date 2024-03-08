@@ -225,7 +225,7 @@ keymap(
 keymap(
 	{ "n", "x" },
 	"<D-CR>",
-	function() require("funcs.nano-plugins").gotoFileWithMostChanges() end,
+	function() require("funcs.nano-plugins").gotoChangedFiles() end,
 	{ desc = "󰽙 Goto File with most changes" }
 )
 

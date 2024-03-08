@@ -246,42 +246,58 @@ end
 
 --------------------------------------------------------------------------------
 
-function M.gotoFileWithMostChanges()
-	local funcName = "Goto Most Changed File"
+function M.gotoChangedFiles()
+	local funcName = "Goto Changed File"
+	local currentFile = vim.api.nvim_buf_get_name(0)
+	local gitroot = vim.trim(vim.fn.system { "git", "rev-parse", "--show-toplevel" })
+
+	-- so new files show up in --numstat
+	vim.fn.system("git ls-files --others --exclude-standard | xargs git add --intent-to-add")
+
 	local numstat = vim.trim(vim.fn.system { "git", "diff", "--numstat" })
+	local numstatLines = vim.split(numstat, "\n")
 	local error = vim.v.shell_error ~= 0
+
+	-- GUARD
 	if error then
 		notify(funcName, "No changes found.", "warn")
 		return
 	elseif numstat == "" then
-		notify(, "Not in git repo", "warn")
+		notify(funcName, "Not in git repo", "warn")
 		return
 	end
 
-	local numstatLines = vim.split(numstat, "\n")
-	local mostChangedFile = { changes = 0, filename = "" }
-
+	-- Changed Files, sorted by most changes
+	local changedFiles = {}
 	for _, line in pairs(numstatLines) do
 		local added, deleted, filename = line:match("(%d+)%s+(%d+)%s+(.+)")
 		local changes = tonumber(added) + tonumber(deleted)
-		if changes > mostChangedFile.changes then
-			mostChangedFile.changes = changes
-			mostChangedFile.filename = filename
+		local filepath = vim.fs.normalize(gitroot .. "/" .. filename)
+		table.insert(changedFiles, { filepath = filepath, changes = changes })
+	end
+	table.sort(changedFiles, function(a, b) return a.changes > b.changes end)
+
+	-- GUARD
+	if #changedFiles == 1 and changedFiles[1].filepath == currentFile then
+		notify(funcName, "Already at sole changed file", "info")
+		return
+	end
+
+	-- Select next file
+	local nextFileIndex
+	for i = 1, #changedFiles do
+		if changedFiles[i].filepath == currentFile then
+			nextFileIndex = math.fmod(i, #changedFiles) + 1 -- fmod = lua's modulo
+			break
 		end
 	end
+	local nextFile = changedFiles[nextFileIndex or 1]
 
-	local gitroot = vim.trim(vim.fn.system { "git", "rev-parse", "--show-toplevel" })
-	local filepath = vim.fs.normalize(gitroot .. "/" .. mostChangedFile.filename)
-
-	if filepath == vim.api.nvim_buf_get_name(0) then
-		notify("Goto Most Changed File", "Already at file with most changes.")
-	else
-		vim.cmd.edit(filepath)
-		notify(
-			"Goto Most Changed File",
-			("%s changes in %s"):format(mostChangedFile.changes, vim.fs.basename(filepath))
-		)
-	end
+	vim.cmd.edit(nextFile.filepath)
+	notify(
+		funcName,
+		("%s (%s changes)"):format(vim.fs.basename(nextFile.filepath), nextFile.changes)
+	)
 end
 
 --------------------------------------------------------------------------------
