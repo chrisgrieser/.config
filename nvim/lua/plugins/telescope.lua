@@ -408,6 +408,7 @@ local function telescopeConfig()
 					"boolean",
 					"property",
 				},
+
 				-- apparently currently not working
 				symbol_highlights = {
 					["module"] = "Comment",

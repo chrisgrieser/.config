@@ -270,39 +270,55 @@ function M.gotoChangedFiles()
 	-- Changed Files, sorted by most changes
 	local changedFiles = {}
 	for _, line in pairs(numstatLines) do
-		local added, deleted, filename = line:match("(%d+)%s+(%d+)%s+(.+)")
-		if added and deleted and filename then
-		local changes = tonumber(added) + tonumber(deleted)
-		local filepath = vim.fs.normalize(gitroot .. "/" .. filename)
+		local added, deleted, file = line:match("(%d+)%s+(%d+)%s+(.+)")
+		if added and deleted and file then -- exclude changed binaries
+			local changes = tonumber(added) + tonumber(deleted)
+			local absPath = vim.fs.normalize(gitroot .. "/" .. file)
+			local relPath = absPath:sub(#pwd + 2)
 
-		-- only add if in pwd, useful for monorepos
-		if vim.startswith(filepath, pwd) then
-			table.insert(changedFiles, { filepath = filepath, changes = changes })
+			-- only add if in pwd, useful for monorepos
+			if vim.startswith(absPath, pwd) then
+				table.insert(changedFiles, {
+					relPath = relPath,
+					absPath = absPath,
+					changes = changes,
+				})
+			end
 		end
 	end
 	table.sort(changedFiles, function(a, b) return a.changes > b.changes end)
 
 	-- GUARD
-	if #changedFiles == 1 and changedFiles[1].filepath == currentFile then
-		notify(funcName, "Already at sole changed file", "info")
+	if #changedFiles == 1 and changedFiles[1].absPath == currentFile then
+		notify(funcName, "Already at sole changed file.", "info")
 		return
 	end
 
 	-- Select next file
 	local nextFileIndex
 	for i = 1, #changedFiles do
-		if changedFiles[i].filepath == currentFile then
+		if changedFiles[i].absPath == currentFile then
 			nextFileIndex = math.fmod(i, #changedFiles) + 1 -- fmod = lua's modulo
 			break
 		end
 	end
 	local nextFile = changedFiles[nextFileIndex or 1]
+	vim.cmd.edit(nextFile.absPath)
 
-	vim.cmd.edit(nextFile.filepath)
-	notify(
-		funcName,
-		("%s (%s changes)"):format(vim.fs.basename(nextFile.filepath), nextFile.changes)
-	)
+	-- notification
+	if not package.loaded["notify"] then return end
+	local listOfChangedFiles = {}
+	for i = 1, #changedFiles do
+		local prefix = i == nextFileIndex and " " or "- "
+		local path = changedFiles[i].relPath
+		table.insert(listOfChangedFiles, prefix .. path)
+	end
+
+	vim.g.changedFilesNotif =
+		vim.notify(table.concat(listOfChangedFiles, "\n"), vim.log.levels.INFO, {
+			title = funcName,
+			replace = vim.g.changedFilesNotif and vim.g.changedFilesNotif.id,
+		})
 end
 
 --------------------------------------------------------------------------------

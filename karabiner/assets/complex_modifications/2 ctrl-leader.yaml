@@ -45,12 +45,14 @@ rules:
         to_if_alone:
           - *activate-leader
           - *set-notice
-      # 2x L-Ctrl: pass through for Alfred
+      # 2x L-Ctrl: Pass through (for Alfred)
       - type: basic
         from: { key_code: left_control }
         conditions: [*leader-active]
         to_if_alone:
-          - key_code: f19
+          - key_code: left_control
+          - { key_code: vk_none, hold_down_milliseconds: 50 }
+          - key_code: left_control
           - *deactivate-leader
           - *remove-notice
       # Cancel (Hyper/Esc)
