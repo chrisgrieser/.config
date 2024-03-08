@@ -77,6 +77,18 @@ local function themeModifications()
 	if not theme then theme = mode == "light" and g.lightTheme or g.darkTheme end
 	local vimModes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
 
+	local function boldLualineA()
+		for _, v in pairs(vimModes) do
+			updateHl("lualine_a_" .. v, "gui=bold")
+		end
+	end
+	local function revertedTodoComments()
+		for _, type in pairs { "todo", "error", "warning", "note" } do
+			local fg = u.getHighlightValue("@comment." .. type, "fg")
+			if fg ~= "#000000" then overwriteHl("@comment." .. type, { bg = fg, fg = "#000000" }) end
+		end
+	end
+
 	if theme == "tokyonight" then
 		local statuslineYellow = mode == "dark" and "#b8b042" or "#e8e05e"
 		for _, vimMode in pairs(vimModes) do
@@ -87,26 +99,14 @@ local function themeModifications()
 		updateHl("GitSignsAdd", "guifg=#369a96")
 
 		updateHl("@keyword.return", "guifg=#fd4283")
-
-		-- todo comments have emphasized background, not foreground
-		for _, type in pairs { "todo", "error", "warning", "note" } do
-			local fg = u.getHighlightValue("@comment." .. type, "fg")
-			if fg ~= "#000000" then overwriteHl("@comment." .. type, { bg = fg, fg = "#000000" }) end
-		end
+		revertedTodoComments()
 	elseif theme == "dracula" then
+		boldLualineA()
+		revertedTodoComments()
 		clearHl("Constant")
+		linkHl("Boolean", "Special")
+		linkHl("Number", "@field")
 		overwriteHl("@keyword.return", { fg = "#5e9fff", bold = true })
-
-		-- todo comments have emphasized background, not foreground
-		for _, type in pairs { "todo", "error", "warning", "note" } do
-			local fg = u.getHighlightValue("@comment." .. type, "fg")
-			if fg ~= "#000000" then overwriteHl("@comment." .. type, { bg = fg, fg = "#000000" }) end
-		end
-
-		-- bold lualine a
-		for _, v in pairs(vimModes) do
-			updateHl("lualine_a_" .. v, "gui=bold")
-		end
 	elseif theme == "dawnfox" then
 		overwriteHl("@ibl.indent.char.1", { fg = "#e0cfbd" })
 		overwriteHl("ColorColumn", { bg = "#e9dfd2" })
@@ -144,6 +144,7 @@ local function themeModifications()
 			updateHl("DiagnosticUnderline" .. type, "gui=underdouble cterm=underline")
 		end
 	elseif theme == "kanagawa" then
+		boldLualineA()
 		overwriteHl("TreesitterContext", { bg = "#363648" })
 
 		-- transparent sign column
@@ -152,9 +153,6 @@ local function themeModifications()
 		updateHl("GitSignsChange", "guibg=none")
 		updateHl("GitSignsDelete", "guibg=none")
 
-		for _, v in pairs(vimModes) do
-			updateHl("lualine_a_" .. v, "gui=bold")
-		end
 		for _, type in pairs { "Hint", "Info", "Warn", "Error" } do
 			updateHl("DiagnosticSign" .. type, "guibg=none")
 		end
