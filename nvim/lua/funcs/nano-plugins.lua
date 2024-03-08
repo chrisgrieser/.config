@@ -246,6 +246,46 @@ end
 
 --------------------------------------------------------------------------------
 
+function M.gotoFileWithMostChanges()
+	local funcName = "Goto Most Changed File"
+	local numstat = vim.trim(vim.fn.system { "git", "diff", "--numstat" })
+	local error = vim.v.shell_error ~= 0
+	if error then
+		notify(funcName, "No changes found.", "warn")
+		return
+	elseif numstat == "" then
+		notify(, "Not in git repo", "warn")
+		return
+	end
+
+	local numstatLines = vim.split(numstat, "\n")
+	local mostChangedFile = { changes = 0, filename = "" }
+
+	for _, line in pairs(numstatLines) do
+		local added, deleted, filename = line:match("(%d+)%s+(%d+)%s+(.+)")
+		local changes = tonumber(added) + tonumber(deleted)
+		if changes > mostChangedFile.changes then
+			mostChangedFile.changes = changes
+			mostChangedFile.filename = filename
+		end
+	end
+
+	local gitroot = vim.trim(vim.fn.system { "git", "rev-parse", "--show-toplevel" })
+	local filepath = vim.fs.normalize(gitroot .. "/" .. mostChangedFile.filename)
+
+	if filepath == vim.api.nvim_buf_get_name(0) then
+		notify("Goto Most Changed File", "Already at file with most changes.")
+	else
+		vim.cmd.edit(filepath)
+		notify(
+			"Goto Most Changed File",
+			("%s changes in %s"):format(mostChangedFile.changes, vim.fs.basename(filepath))
+		)
+	end
+end
+
+--------------------------------------------------------------------------------
+
 function M.gotoPluginConfig()
 	local plugins = vim.tbl_map(
 		function(p) return { id = p[1], module = p._.module } end,

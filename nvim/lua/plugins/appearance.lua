@@ -14,9 +14,9 @@ return {
 		opts = {
 			highlight = "LspInlayHint",
 			prefix = " 󱞷",
-			min_rows = 6,
+			min_rows = 8,
 			disable_ft = { "markdown", "yaml", "css" },
-			min_rows_ft = { python = 12 },
+			min_rows_ft = { python = 15 },
 			disable_virtual_lines = false,
 		},
 	},
