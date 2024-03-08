@@ -70,18 +70,27 @@ function run(argv) {
 	// GUARD
 	if (!input && !isBrowser) return "";
 
-	const body = isBrowser && !keywordUsed ? browserTab().title : "";
+	const notes = isBrowser && !keywordUsed ? browserTab().title : "";
+	const tomorrow = new Date();
+	tomorrow.setDate(tomorrow.getDate() + 1);
 
-	// add reminder for today
+	// ADD REMINDER FOR TODAY
+	const rem = Application("Reminders");
 	const list = $.getenv("reminder_list");
-	app.doShellScript(`reminders add "${list}" "${input}" --notes "${body}" --due-date="today"`);
 
-	// JXA method (allows for alldayDueDate)
-	// const rem = Application("Reminders");
-	// const today = new Date();
-	// const newReminder = rem.Reminder({ name: text.trim(), alldayDueDate: today });
-	// rem.defaultList().reminders.push(newReminder);
-	// rem.quit();
+	// PENDING https://github.com/keith/reminders-cli/issues/79
+	// using reminders CLI does not allow for alldayDueDate, therefore using JXA version
+	// const notes = isBrowser && !keywordUsed ? `--notes=${browserTab().title}` : "";
+	// app.doShellScript(`reminders add "${list}" "${input}" --due-date="today" ${notes}`);
+
+	const today = new Date();
+	const newReminder = rem.Reminder({
+		name: input.trim(),
+		notes: notes,
+		alldayDueDate: today,
+	});
+	rem.lists.byName(list).reminders.push(newReminder);
+	rem.quit();
 
 	// Pass for Alfred notification
 	return input;

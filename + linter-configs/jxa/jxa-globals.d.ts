@@ -103,14 +103,13 @@ declare type ReminderList = {
 
 declare type ReminderProperties = {
 	name: string;
+	notes?: string;
 	body?: string;
 	id?: string; // x-apple-reminder:// URI
 	completed?: boolean;
 	flagged?: boolean;
 	priority?: number;
 	remindMeDate?: Date;
-	allDayDueDate?: Date;
-	dueDate?: Date;
 	alldayDueDate?: Date;
 	dueDate?: Date;
 	completionDate?: Date;
