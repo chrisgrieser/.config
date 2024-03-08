@@ -222,6 +222,13 @@ keymap(
 	{ desc = "󰽙 Alt Buffer" }
 )
 
+keymap(
+	{ "n", "x" },
+	"<D-CR>",
+	function() require("funcs.nano-plugins").gotoFileWithMostChanges() end,
+	{ desc = "󰽙 Goto File with most changes" }
+)
+
 keymap({ "n", "x", "i" }, "<D-w>", function()
 	vim.cmd("silent! update")
 	local winClosed = pcall(vim.cmd.close)
