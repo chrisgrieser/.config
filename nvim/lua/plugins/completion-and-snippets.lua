@@ -34,7 +34,7 @@ local defaultSources = {
 
 local sourceIcons = {
 	buffer = "󰽙",
-	cmdline = "󰘳",
+	cmdline = "",
 	emoji = "󰞅",
 	luasnip = "",
 	nvim_lsp = "󰒕",
@@ -74,7 +74,13 @@ local function cmpconfig()
 			["<PageUp>"] = cmp.mapping.scroll_docs(-4),
 			["<PageDown>"] = cmp.mapping.scroll_docs(4),
 			["<C-e>"] = cmp.mapping.abort(),
-			["<D-c>"] = cmp.mapping.complete(), -- manually triggering useful for yaml/json
+
+			-- manually triggering to only include LSP, useful for yaml/json
+			["<D-c>"] = cmp.mapping.complete {
+				config = {
+					sources = { name = "nvim_lsp" },
+				},
+			},
 
 			-- Next item, or trigger completion, or insert normal tab
 			["<Tab>"] = cmp.mapping(function(fallback)

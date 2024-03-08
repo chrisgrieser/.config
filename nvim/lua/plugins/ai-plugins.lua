@@ -3,6 +3,7 @@ local u = require("config.utils")
 -- INFO potential alternatives:
 -- https://github.com/huggingface/llm-ls
 -- https://docs.sourcegraph.com/cody/overview/install-neovim
+-- https://github.com/sourcegraph/sg.nvim
 --------------------------------------------------------------------------------
 
 return {
