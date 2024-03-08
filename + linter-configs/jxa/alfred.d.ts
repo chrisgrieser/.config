@@ -3,7 +3,7 @@
 
 // "run" function used by Alfred
 // when used as Script Filter, the returned value must be a stringified JSON object
-declare type AlfredRun = (argv?: string[]) => string | undefined;
+declare type AlfredRun = (argv: string[]) => string | undefined;
 
 declare class AlfredScriptFilter {
 	items: AlfredItem[];

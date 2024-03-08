@@ -1,5 +1,13 @@
 #!/usr/bin/env zsh
 
+# GUARD only trigger on deactivation of of Reminders
+if [[ "$SENDER" = "front_app_switched" ]]; then
+	data="/tmp/sketchybar_front_app1"
+	[[ -f "$data" ]] && deactivated_app=$(<"$data")
+	echo -n "$INFO" >"$data"
+	[[ "$deactivated_app" != "Reminders" ]] && return 0
+fi
+
 # GUARD
 if ! command -v reminders &>/dev/null; then
 	sketchybar --set "$NAME" icon=" " label="reminders-cli not found"
@@ -25,5 +33,3 @@ else
 fi
 sketchybar --set "$NAME" label="$remindersToday" icon="$icon" icon.padding_right=$padding
 
-#───────────────────────────────────────────────────────────────────────────────
-sleep 1

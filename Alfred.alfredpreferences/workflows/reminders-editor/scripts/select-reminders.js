@@ -18,8 +18,13 @@ function run() {
 		const body = notes || "";
 		const displayBody = body.trim().replace(/\n+/g, " · ");
 		const content = title + "\n" + body;
+
 		const [url] = content.match(urlRegex) || [];
-		const urlSubtitle = url ? "⌘: Open URL and mark as complete  ·  " + url : "⛔ ⌘: No URL";
+		let urlSubtitle = url ? "⌘: Open URL and mark as complete" : "⌘: ⛔ No URL";
+		// only show URL if not already in the title to avoid duplicaation
+		const urlInTitle = title.match(urlRegex);
+		if (url && !urlInTitle) urlSubtitle += "  ·  " + url;
+
 		return {
 			title: title,
 			subtitle: displayBody,

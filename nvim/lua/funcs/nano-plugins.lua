@@ -251,11 +251,9 @@ function M.gotoPluginConfig()
 		function(p) return { id = p[1], module = p._.module } end,
 		require("lazy").plugins()
 	)
-	require("lazy").plugins()
 	vim.ui.select(plugins, {
 		prompt = "󰣖 Select Plugin:",
 		format_item = function(plugin) return vim.fs.basename(plugin.id) end,
-		kind = "plugin-selector",
 	}, function(selection)
 		if not selection then return end
 		local pluginFile = selection.module:gsub("%.", "/")
