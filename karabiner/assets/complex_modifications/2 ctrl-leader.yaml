@@ -51,7 +51,7 @@ rules:
         conditions: [*leader-active]
         to_if_alone:
           - key_code: left_control
-          - { key_code: vk_none, hold_down_milliseconds: 50 }
+          # - { key_code: vk_none, hold_down_milliseconds: 50 }
           - key_code: left_control
           - *deactivate-leader
           - *remove-notice

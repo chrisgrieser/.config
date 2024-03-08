@@ -10,10 +10,13 @@ function run() {
 	const urlRegex =
 		/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
 
-	/** @type AlfredItem[] */
-	const reminders = JSON.parse(
+	/** @type {{ title: string; notes: string; externalId: string; }[]} */
+	const responseJson = JSON.parse(
 		app.doShellScript(`reminders show "${list}" --due-date="today" --format="json"`),
-	).map((/** @type {{ title: string; notes: string; externalId: string; }} */ rem) => {
+	);
+
+	/** @type {AlfredItem[]} */
+	const reminders = responseJson.map((rem) => {
 		const { title, notes, externalId } = rem;
 		const body = notes || "";
 		const displayBody = body.trim().replace(/\n+/g, " · ");
@@ -22,13 +25,15 @@ function run() {
 		const [url] = content.match(urlRegex) || [];
 		const urlSubtitle = url ? "⌘: Open URL and mark as complete" : "⌘: ⛔ No URL";
 
-		return {
+		/** @type {AlfredItem} */
+		const alfredItem = {
 			title: title,
 			subtitle: displayBody,
 			variables: {
 				id: externalId,
 				title: title,
-				notes: body,
+				body: body,
+				remindersLeft: reminders.length - 1, // for deciding whether to loop back
 			},
 			text: { copy: content },
 			mods: {
@@ -40,6 +45,7 @@ function run() {
 				alt: { arg: content }, // edit content
 			},
 		};
+		return alfredItem
 	});
 
 	// GUARD

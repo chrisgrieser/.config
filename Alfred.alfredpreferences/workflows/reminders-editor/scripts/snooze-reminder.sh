@@ -15,7 +15,7 @@ osascript -l JavaScript -e "
 	const rem = Application('Reminders');
 	const newReminder = rem.Reminder({
 		name: '$title',
-		notes: '$body',
+		body: '$body',
 		alldayDueDate: tomorrow,
 	});
 	rem.lists.byName('$reminder_list').reminders.push(newReminder);

@@ -29,8 +29,8 @@ declare class AlfredItem {
 	uid?: string;
 	autocomplete?: string;
 	quicklookurl?: string;
-	// biome-ignore lint/complexity/noBannedTypes: <explanation>
-	variables?: Object;
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	variables?: Record<string, any>;
 	icon?: {
 		type?: "fileicon" | "filetype" | "";
 		path: string;
@@ -51,10 +51,10 @@ declare class AlfredItem {
 }
 
 declare class AlfredModifierKey {
-	title?: string;
-	subtitle?: string;
-	arg?: string | string[];
-	valid?: boolean;
-	// biome-ignore lint/complexity/noBannedTypes: <explanation>
-	variables?: Object;
+	title?: string | undefined;
+	subtitle?: string | undefined;
+	arg?: string | string[] | undefined;
+	valid?: boolean | undefined;
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	variables?: Record<string, any> | undefined;
 }
