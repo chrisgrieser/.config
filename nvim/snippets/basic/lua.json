@@ -142,6 +142,10 @@
     ],
     "prefix": "safe require"
   },
+  "sort (table)": {
+    "body": "table.sort(${1:table}, function(a, b) return ${2:a} > ${3:b} end)",
+    "prefix": "sort (table)"
+  },
   "split (gmatch)": {
     "body": [
       "local acc = {}",

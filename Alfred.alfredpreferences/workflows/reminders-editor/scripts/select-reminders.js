@@ -20,10 +20,7 @@ function run() {
 		const content = title + "\n" + body;
 
 		const [url] = content.match(urlRegex) || [];
-		let urlSubtitle = url ? "⌘: Open URL and mark as complete" : "⌘: ⛔ No URL";
-		// only show URL if not already in the title to avoid duplicaation
-		const urlInTitle = title.match(urlRegex);
-		if (url && !urlInTitle) urlSubtitle += "  ·  " + url;
+		const urlSubtitle = url ? "⌘: Open URL and mark as complete" : "⌘: ⛔ No URL";
 
 		return {
 			title: title,
