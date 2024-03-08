@@ -26,7 +26,8 @@ function browserTab() {
 	const frontmostApp = Application(getFrontAppName());
 	const browserType = frontBrowser();
 
-	let title, url;
+	let title;
+	let url;
 	if (browserType === "chromium") {
 		// @ts-ignore
 		url = frontmostApp.windows[0].activeTab.url();
@@ -69,15 +70,19 @@ function run(argv) {
 	// GUARD
 	if (!input && !isBrowser) return "";
 
-	const text = isBrowser && !keywordUsed ? input + "\n" + browserTab().url : input;
+	const body = isBrowser && !keywordUsed ? browserTab().title : "";
 
 	// add reminder for today
-	const rem = Application("Reminders");
-	const today = new Date();
-	const newReminder = rem.Reminder({ name: text.trim(), alldayDueDate: today });
-	rem.defaultList().reminders.push(newReminder);
-	rem.quit();
+	const list = $.getenv("reminder_list");
+	app.doShellScript(`reminders add "${list}" "${input}" --notes "${body}" --due-date="today"`);
+
+	// JXA method (allows for alldayDueDate)
+	// const rem = Application("Reminders");
+	// const today = new Date();
+	// const newReminder = rem.Reminder({ name: text.trim(), alldayDueDate: today });
+	// rem.defaultList().reminders.push(newReminder);
+	// rem.quit();
 
 	// Pass for Alfred notification
-	return text;
+	return input;
 }
