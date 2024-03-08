@@ -500,8 +500,8 @@ return {
 					function mySorter:scoring_function(prompt, relPath)
 						-- only modify score when prompt is empty
 						if prompt ~= "" then return scorer.scoring_function(self, prompt, relPath) end
-						-- filter out current buffer
-						if relPath == curBufRelPath then return -1 end
+						-- put current buffer to the bottom
+						if relPath == curBufRelPath then return 1 end
 
 						-- prioritze recently modified
 						local stat = vim.loop.fs_stat(relPath)
