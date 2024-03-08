@@ -76,6 +76,8 @@ function s {
 	open "$file_path" --env=LINE="$ln" # this is the only macOS-specific part
 }
 
+#───────────────────────────────────────────────────────────────────────────────
+
 # nicer & explorable tree view
 function _tree {
 	eza --tree --level="$1" --color=always --icons=always --git-ignore \
@@ -86,6 +88,11 @@ alias tree='_tree 2'
 alias treee='_tree 3'
 alias treeee='_tree 4'
 alias treeeee='_tree 5'
+
+# shellcheck disable=2164
+function cake { mkdir -p "$1" && cd "$1"; } # change-make dir
+
+function topen { touch "$1" && open "$1"; }
 
 #───────────────────────────────────────────────────────────────────────────────
 # fzf history search

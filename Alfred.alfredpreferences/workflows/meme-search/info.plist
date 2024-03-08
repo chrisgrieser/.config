@@ -5,7 +5,7 @@
 	<key>bundleid</key>
 	<string>de.chris-grieser.meme-search</string>
 	<key>category</key>
-	<string>⭐️</string>
+	<string>❇️</string>
 	<key>connections</key>
 	<dict>
 		<key>5B12407A-89B9-4C89-ADDD-D98F9E818361</key>
@@ -214,6 +214,8 @@
 				<integer>4</integer>
 				<key>filterable</key>
 				<true/>
+				<key>fixedorder</key>
+				<false/>
 				<key>imageaspect</key>
 				<integer>0</integer>
 				<key>inputfile</key>

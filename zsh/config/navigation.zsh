@@ -23,8 +23,6 @@ alias ..=" cd .."
 alias ...=" cd ../.."
 alias ....=" cd ../../.."
 alias ..g=' cd "$(git rev-parse --show-toplevel)"' # goto git root
-# shellcheck disable=2164
-function cake { mkdir -p "$1" && cd "$1"; } # change-make dir
 
 #───────────────────────────────────────────────────────────────────────────────
 # RECENT DIRS

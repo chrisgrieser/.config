@@ -84,8 +84,8 @@ function run() {
 			const terminalActionDesc = repo.local
 				? "Open in Terminal"
 				: shallowClone
-				  ? `⌃: Shallow Clone (depth ${cloneDepth})`
-				  : "⌃: Clone";
+				  ? `Shallow Clone (depth ${cloneDepth})`
+				  : "Clone";
 
 			// open in terminal when local, clone when not
 			const terminalArg = repo.local?.path || repo.html_url;
