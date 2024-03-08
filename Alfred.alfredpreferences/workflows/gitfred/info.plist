@@ -1851,7 +1851,7 @@ end run</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.14.2</string>
+	<string>1.0.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
