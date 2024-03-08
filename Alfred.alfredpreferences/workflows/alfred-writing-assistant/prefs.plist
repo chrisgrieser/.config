@@ -4,7 +4,5 @@
 <dict>
 	<key>delay_ms</key>
 	<string>120</string>
-	<key>output_type</key>
-	<string>critic-markup</string>
 </dict>
 </plist>

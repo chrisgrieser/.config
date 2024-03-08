@@ -2,14 +2,6 @@
 alias -g H="--help | bat --language=help --style=plain --wrap=character"
 ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
 
-function expansion-help {
-	# https://thevaluable.dev/zsh-expansion-guide-example/
-	# INFO `!` is not expanded due to `NO_BANG_HIST`
-	print "\e[1;32m*(.)  \e[0m all plain files"
-	print "\e[1;32m*(/)  \e[0m all directories"
-	print "\e[1;32m(a|b)*\e[0m files beginning with 'a' or 'b' (zsh)"
-}
-
 #───────────────────────────────────────────────────────────────────────────────
 
 # MAN PAGES
@@ -97,7 +89,7 @@ function cht() {
 
 	query=${query// /-} # dash as separator for subcommands, e.g. git-rebase
 	curl -s "https://cht.sh/$query?style=$style" >"/tmp/$query"
-	pane_id=$(wezterm cli spawn -- less "/tmp/$query")
+	# `+--quit-if-one-screen` to override the option if set in less config
+	pane_id=$(wezterm cli spawn -- less +--quit-if-one-screen "/tmp/$query")
 	wezterm cli set-tab-title --pane-id="$pane_id" "cheat: $query"
 }
-compdef _cht cht

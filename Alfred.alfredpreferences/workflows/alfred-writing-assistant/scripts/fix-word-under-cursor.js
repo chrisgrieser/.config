@@ -1,19 +1,20 @@
 #!/usr/bin/env osascript -l JavaScript
 ObjC.import("stdlib");
+//──────────────────────────────────────────────────────────────────────────────
 
-/** @param {string} url */
+/** @param {string} url @return {string} */
 function httpRequest(url) {
 	const queryURL = $.NSURL.URLWithString(url);
-	const requestData = $.NSData.dataWithContentsOfURL(queryURL);
-	const requestString = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
-	return requestString;
+	const data = $.NSData.dataWithContentsOfURL(queryURL);
+	const requestStr = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
+	return requestStr;
 }
 
 //──────────────────────────────────────────────────────────────────────────────
 
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const delaySecs = parseInt($.getenv("delay_ms")) / 1000;
+	const delaySecs = Number.parseInt($.getenv("delay_ms")) / 1000;
 	const se = Application("System Events");
 	se.includeStandardAdditions = true;
 

@@ -2,10 +2,14 @@
 # shellcheck disable=2154
 #───────────────────────────────────────────────────────────────────────────────
 
+# CONFIG
+model="gpt-3.5-turbo" # https://platform.openai.com/docs/models/gpt-3
+
+#───────────────────────────────────────────────────────────────────────────────
+
 selection="$*"
 cache="$alfred_workflow_cache"
 mkdir -p "$cache"
-model="gpt-3.5-turbo" # https://platform.openai.com/docs/models/gpt-3
 
 # use Alfred definition of API key, or use the OPENAI_API_KEY
 # environment variable from .zshenv
@@ -19,15 +23,20 @@ if [[ -z "$apikey" ]]; then
 fi
 
 # WARN `$prompt` is reserved variable in zsh
-# escape quotes in prompt for JSON
+# also, escape quotes in prompt for JSON
 the_prompt=$(echo "$static_prompt $selection" | sed -e 's/"/\\"/g')
+
+# workaround, as oepnAI requires temp between 0 and 1, but ALfred's number
+# slider only allows full integers
+temp=$(echo "scale = 1; $temperature / 10" | bc)
+[[ $temp -lt 1 ]] && temp="0$temp" # add leading zero required by OpenAI API
 
 # OPENAI API CALL
 # DOCS https://platform.openai.com/docs/api-reference/making-requests
 response=$(curl --silent --max-time 15 https://api.openai.com/v1/chat/completions \
 	-H "Content-Type: application/json" \
 	-H "Authorization: Bearer $apikey" \
-	-d "{ \"model\": \"$model\", \"messages\": [{\"role\": \"user\", \"content\": \"$the_prompt\"}], \"temperature\": $temperature }")
+	-d "{ \"model\": \"$model\", \"messages\": [{\"role\": \"user\", \"content\": \"$the_prompt\"}], \"temperature\": $temp }")
 
 # log the response to stderr (= visible in Alfred debug log, but not elsewhere)
 echo "$response" >&2
