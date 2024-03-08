@@ -84,19 +84,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>24CFE3CA-F401-498B-8ABC-20D1D4AB3AB3</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>BF79E782-31E9-4840-A0FA-00EE2CB5403A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>32D387DE-B4F9-41E5-8F1C-A71E3C5644AA</key>
 		<array>
 			<dict>
@@ -154,16 +141,6 @@
 				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>24CFE3CA-F401-498B-8ABC-20D1D4AB3AB3</string>
-				<key>modifiers</key>
-				<integer>131072</integer>
-				<key>modifiersubtext</key>
-				<string>⇧: Search Issues</string>
-				<key>vitoclose</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -379,29 +356,6 @@
 				<true/>
 			</dict>
 		</array>
-		<key>BF79E782-31E9-4840-A0FA-00EE2CB5403A</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>5AF52A7B-9FA9-4D8B-9784-4864B0A9AF06</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>32D387DE-B4F9-41E5-8F1C-A71E3C5644AA</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>⌥: Copy issue URL</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>BFABA717-A81E-4D69-A8C2-4ED2042B4588</key>
 		<array>
 			<dict>
@@ -449,16 +403,6 @@
 				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>24CFE3CA-F401-498B-8ABC-20D1D4AB3AB3</string>
-				<key>modifiers</key>
-				<integer>131072</integer>
-				<key>modifiersubtext</key>
-				<string>⇧: Search Issues</string>
-				<key>vitoclose</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -515,16 +459,6 @@
 				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>24CFE3CA-F401-498B-8ABC-20D1D4AB3AB3</string>
-				<key>modifiers</key>
-				<integer>131072</integer>
-				<key>modifiersubtext</key>
-				<string>⇧: Search Issues</string>
-				<key>vitoclose</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -768,53 +702,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>Loading...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/public-issue-search.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Search for Issues on GitHub</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>BF79E782-31E9-4840-A0FA-00EE2CB5403A</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>autopaste</key>
 				<false/>
 				<key>clipboardtext</key>
@@ -830,26 +717,6 @@
 			<string>32D387DE-B4F9-41E5-8F1C-A71E3C5644AA</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>repoID</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>24CFE3CA-F401-498B-8ABC-20D1D4AB3AB3</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -882,7 +749,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>gh</string>
+				<string>{var:keyword_public_repos}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -1122,7 +989,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>gg</string>
+				<string>{var:keyword_personal_repos}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -1511,7 +1378,7 @@ end run</string>
 - Access Pull Requests (PRs) you have opened with the keyword `gpr`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the PR in the browser.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the link to the PR.
-- Directly open your GitHub notification via `gno`. (Requires that you export a `$GITHUB_TOKEN` set in your `.zshenv`.)
+- Directly open your GitHub notification via `ghn`. (Requires that you export a `$GITHUB_TOKEN` set in your `.zshenv`.)
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the notification in the browser.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Mark the notification as read.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the URL of the notification target.
@@ -1584,15 +1451,6 @@ end run</string>
 			<real>500</real>
 			<key>ypos</key>
 			<real>1110</real>
-		</dict>
-		<key>24CFE3CA-F401-498B-8ABC-20D1D4AB3AB3</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>180</real>
-			<key>ypos</key>
-			<real>270</real>
 		</dict>
 		<key>32D387DE-B4F9-41E5-8F1C-A71E3C5644AA</key>
 		<dict>
@@ -1733,17 +1591,6 @@ end run</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>1110</real>
-		</dict>
-		<key>BF79E782-31E9-4840-A0FA-00EE2CB5403A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>issues search</string>
-			<key>xpos</key>
-			<real>255</real>
-			<key>ypos</key>
-			<real>240</real>
 		</dict>
 		<key>BFABA717-A81E-4D69-A8C2-4ED2042B4588</key>
 		<dict>
@@ -1922,27 +1769,6 @@ end run</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>25</string>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>Number of results. (Maximum 100, a high number takes longer to load.)</string>
-			<key>label</key>
-			<string>Issue Search</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>results_number</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
 				<string>~/repos</string>
 				<key>filtermode</key>
 				<integer>1</integer>
@@ -1963,21 +1789,25 @@ end run</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>default</key>
-				<string>10</string>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
+				<key>defaultvalue</key>
+				<integer>5</integer>
+				<key>markercount</key>
+				<integer>10</integer>
+				<key>maxvalue</key>
+				<integer>50</integer>
+				<key>minvalue</key>
+				<integer>0</integer>
+				<key>onlystoponmarkers</key>
 				<false/>
-				<key>trim</key>
+				<key>showmarkers</key>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Depth of the clone (`--shallow={n}`). Leave empty to not perform shallow clone.</string>
+			<string>Depth of the clone (`--shallow={n}`). Set to 0 to not perform shallow cloning.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
-			<string>textfield</string>
+			<string>slider</string>
 			<key>variable</key>
 			<string>clone_depth</string>
 		</dict>

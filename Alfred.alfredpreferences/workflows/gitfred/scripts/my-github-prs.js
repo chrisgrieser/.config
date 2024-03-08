@@ -51,14 +51,14 @@ function humanRelativeDate(isoDateStr) {
 
 // biome-ignore lint/correctness/noUnusedVariables: alfred_run
 function run() {
-	const resultsNumber = $.getenv("results_number");
+	const numberOfPrs = 100; // 100 is the maximum of API
 	const username = $.getenv("github_username");
-	const apiURL = `https://api.github.com/search/issues?q=author:${username}+is:pr+is:open&per_page=${resultsNumber}`;
+	const apiURL = `https://api.github.com/search/issues?q=author:${username}+is:pr+is:open&per_page=${numberOfPrs}`;
 
 	const openPrs = JSON.parse(app.doShellScript(`curl -sL "${apiURL}"`)).items.map(
 		(/** @type {GithubIssue} */ item) => {
 			const title = item.title;
-			const repo = item.repository_url.match(/[^/]+$/)[0];
+			const repo = (item.repository_url.match(/[^/]+$/) || "")[0];
 			const comments = item.comments > 0 ? "💬 " + item.comments.toString() : "";
 			const draftIcon = item.draft ? "📝 " : "";
 			const subtitle = [

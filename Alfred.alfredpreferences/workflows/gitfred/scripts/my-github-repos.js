@@ -27,15 +27,19 @@ function run() {
 	// CONFIG
 	const username = $.getenv("github_username");
 	const localRepoFolder = $.getenv("local_repo_folder");
-	const depthInfo = $.getenv("clone_depth") ? ` (depth ${$.getenv("clone_depth")})` : "";
+	const cloneDepth = Number.parseInt($.getenv("clone_depth"));
+	const shallowClone = cloneDepth > 0;
 
 	// determine local repos
+	/** @type {Record<string, {path: string; dirty: boolean|undefined}>} */
 	const localRepos = {};
 	app.doShellScript(`mkdir -p "${localRepoFolder}"`);
 	const localRepoPaths = app
 		.doShellScript(`find ${localRepoFolder} -type d -maxdepth 2 -name ".git"`)
 		.split("\r");
+
 	for (const gitFolderPath of localRepoPaths) {
+		/** @type {{path: string; dirty: boolean|undefined}} */
 		const repo = {};
 		repo.path = gitFolderPath.replace(/\.git\/?$/, "");
 		const name = repo.path.replace(/.*\/(.*)\/$/, "$1");
@@ -60,8 +64,8 @@ function run() {
 				/** @type {GithubRepo&{isLocal: boolean}} */ a,
 				/** @type {GithubRepo&{isLocal: boolean}} */ b,
 			) => {
-				a.isLocal = localRepos[a.name];
-				b.isLocal = localRepos[b.name];
+				a.isLocal = Boolean(localRepos[a.name]);
+				b.isLocal = Boolean(localRepos[b.name]);
 				if (a.isLocal && !b.isLocal) return -1;
 				if (!a.isLocal && b.isLocal) return 1;
 				if (a.fork && !b.fork) return 1;
@@ -69,7 +73,7 @@ function run() {
 				return b.stargazers_count - a.stargazers_count;
 			},
 		)
-		.map((/** @type {GithubRepo&{local: {path: string}}} */ repo) => {
+		.map((/** @type {GithubRepo&{local: {path: string}|undefined}} */ repo) => {
 			let matcher = alfredMatcher(repo.name);
 			let type = "";
 			let subtitle = "";
@@ -77,11 +81,16 @@ function run() {
 			// changes when repo is local
 			repo.local = localRepos[repo.name];
 			const mainArg = repo.local?.path || repo.html_url;
-			const terminalActionDesc = repo.local ? "Open in Terminal" : "Shallow Clone" + depthInfo;
+			const terminalActionDesc = repo.local
+				? "Open in Terminal"
+				: shallowClone
+				  ? `⌃: Shallow Clone (depth ${cloneDepth})`
+				  : "⌃: Clone";
+
 			// open in terminal when local, clone when not
 			const terminalArg = repo.local?.path || repo.html_url;
 			if (repo.local) {
-				if (localRepos[repo.name].dirty) type += "✴️ ";
+				if (localRepos[repo.name]?.dirty) type += "✴️ ";
 				type += "📂 ";
 				matcher += "local ";
 			}

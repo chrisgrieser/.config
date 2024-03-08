@@ -3,14 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>clone_depth</key>
-	<string>15</string>
+	<integer>15</integer>
 	<key>fork_on_clone</key>
 	<true/>
 	<key>github_username</key>
 	<string>chrisgrieser</string>
+	<key>keyword_personal_repos</key>
+	<string>gg</string>
 	<key>restore_mtime</key>
 	<true/>
-	<key>results_number</key>
-	<string>35</string>
 </dict>
 </plist>
