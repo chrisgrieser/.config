@@ -12,8 +12,7 @@ repos_to_update=$(gh repo list --limit=100 --no-archived --source --json="name" 
 commit_msg="build: improved release action"
 
 function replacements_todo {
-	rm -v ./.github/workflows/build-and-release.yml
-	cp -v "$WD/alfred-workflow-release.yml" ./.github/workflows
+	echo "placeholder"
 }
 
 #───────────────────────────────────────────────────────────────────────────────

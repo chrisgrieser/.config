@@ -7,7 +7,7 @@ function o() {
 	fi
 
 	# reloads one ctrl-h (`--bind=ctrl-h`) or as soon as there is no result found (`--bind=zero`)
-	local reload="reload(fd --hidden --no-ignore --exclude='/.git/' --exclude='.DS_Store' --type=file --type=symlink --color=always)"
+	local reload="reload(fd --hidden --no-ignore --exclude='/.git/' --exclude='node_modules' --exclude='.DS_Store' --type=file --type=symlink --color=always)"
 
 	local selected
 	selected=$(
