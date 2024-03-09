@@ -22,7 +22,7 @@ function run() {
 	const dotfileFolder = $.getenv("dotfile_folder");
 	const dirtyFiles = app.doShellScript(`git -C "${dotfileFolder}" diff --name-only`).split("\r");
 
-	/** @type{AlfredItem[]} */
+	/** @type{AlfredItem|{}[]} */
 	const fileArray = app
 		.doShellScript(
 			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; cd "${dotfileFolder}" ;
@@ -33,6 +33,7 @@ function run() {
 		.reverse() // since often used files in `zsh` or `nvim` or further down the alphabet
 		.map((absPath) => {
 			const name = absPath.split("/").pop();
+			if (!name) return {};
 			const relPath = absPath.slice(dotfileFolder.length + 1);
 			const relativeParentFolder = relPath.slice(0, -name.length - 1) || "/";
 			const matcher = alfredMatcher(`${name} ${relativeParentFolder}`);
@@ -53,7 +54,8 @@ function run() {
 			else if (name === "obsidian-vimrc.vim") type = "obsidian";
 			else type = name.split(".").pop() || ""; // default: extension
 
-			const iconObj = { path: "" };
+			/** @type {{type: "" | "fileicon"; path: string}} */
+			const iconObj = { type: "", path: "" };
 			const useFileicon = ["webloc", "url", "ini", "mjs"].includes(type);
 			const isImageFile = ["png", "icns"].includes(type);
 			if (useFileicon) {
@@ -80,7 +82,7 @@ function run() {
 			return item;
 		});
 
-	/** @type{AlfredItem[]} */
+	/** @type{AlfredItem|{}[]} */
 	const folderArray = app
 		.doShellScript(
 			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; cd "${dotfileFolder}" ;
@@ -90,7 +92,7 @@ function run() {
 		.reverse() // since often used files in `zsh` or `nvim` or further down the alphabet
 		.map((/** @type {string} */ absPath) => {
 			const name = absPath.slice(0, -1).split("/").pop();
-			if (!name) return;
+			if (!name) return {};
 			const relPath = absPath.slice(dotfileFolder.length);
 			const relativeParentFolder = relPath.slice(1, -name.length - 2) || "/";
 
@@ -116,5 +118,8 @@ function run() {
 		arg: pwPath,
 	};
 
-	return JSON.stringify({ items: [...fileArray, ...folderArray, passwordStore] });
+	return JSON.stringify({
+		items: [...fileArray, ...folderArray, passwordStore],
+		cache: { seconds: 120 }, // quick for newly created files
+	});
 }

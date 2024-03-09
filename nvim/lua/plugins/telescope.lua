@@ -479,7 +479,6 @@ return {
 			{ "gD", function() telescope("lsp_type_definitions") end, desc = "󰒕 Type Definitions" },
 			{ "gf", function() telescope("lsp_references") end, desc = "󰒕 References" },
 			{ "<leader>ph", function() telescope("highlights") end, desc = " Highlights" },
-			{ "<leader>pc", function() telescope("colorscheme") end, desc = " Colorschemes" },
 			{ "<leader>gs", function() telescope("git_status") end, desc = " Status" },
 			{ "<leader>gl", function() telescope("git_commits") end, desc = " Log" },
 			{ "<leader>gL", function() telescope("git_bcommits") end, desc = " Buffer Commits" },
@@ -545,6 +544,29 @@ return {
 					}
 				end,
 				desc = " Grep cword",
+			},
+			{
+				"<leader>pc",
+				function()
+					-- stylua: ignore
+					local builtins = {
+						"zellner", "torte", "slate", "shine", "ron", "quiet", "peachpuff",
+						"pablo", "murphy", "lunaperche", "koehler", "industry", "evening",
+						"elflord", "desert", "delek", "default", "darkblue", "blue",
+					}
+					local original = vim.fn.getcompletion
+
+					---@diagnostic disable-next-line: duplicate-set-field
+					vim.fn.getcompletion = function()
+						return vim.tbl_filter(
+							function(color) return not vim.tbl_contains(builtins, color) end,
+							original("", "color")
+						)
+					end
+					telescope("colorscheme")
+					vim.fn.getcompletion = original
+				end,
+				desc = " Colorschemes",
 			},
 		},
 	},
