@@ -1,7 +1,3 @@
-# COLORIZED HELP
-alias -g H="--help | bat --language=help --style=plain --wrap=character"
-ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
-
 #───────────────────────────────────────────────────────────────────────────────
 
 # MAN PAGES
@@ -93,3 +89,12 @@ function cht() {
 	pane_id=$(wezterm cli spawn -- less +--quit-if-one-screen "/tmp/$query")
 	wezterm cli set-tab-title --pane-id="$pane_id" "cheat: $query"
 }
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# COLORIZED HELP
+alias -g H="--help | bat --language=help --style=plain --wrap=character"
+ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
+
+#───────────────────────────────────────────────────────────────────────────────
+
