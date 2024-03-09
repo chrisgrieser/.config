@@ -21,6 +21,7 @@ M.keys = {
 	{ key = "0", mods = "CMD", action = act.ResetFontSize },
 	{ key = "p", mods = "CMD", action = act.ActivateCommandPalette },
 	{ key = "ö", mods = "CMD", action = act.CharSelect },
+	{ key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
 
 	-- using `ctrl-L` instead of wezterm's scrollback-clearing preserves the
 	-- ability to scroll back
@@ -34,7 +35,6 @@ M.keys = {
 		mods = "CTRL",
 		action = wt.action_callback(function (win, pane)
 			local paneCount = #pane:tab():panes()
-			print("❗ paneCount: ", paneCount)
 			if paneCount > 1 then
 				win:perform_action(act.ActivatePaneDirection("Next"), pane)
 			else
@@ -42,7 +42,17 @@ M.keys = {
 			end
 		end),
 	},
-	{ key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
+	{ -- close *other* pane (HACK)
+		key = "w",
+		mods = "CMD|SHIFT",
+		action = wt.action_callback(function (win, pane)
+			local paneCount = #pane:tab():panes()
+			if paneCount > 1 then
+				win:perform_action(act.ActivatePaneDirection("Next"), pane)
+				win:perform_action(act.CloseCurrentPane { confirm = false }, pane)
+			end
+		end),
+	},
 	{
 		key = "PageUp",
 		action = wt.action_callback(function(win, pane)

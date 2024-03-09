@@ -62,6 +62,9 @@ LESS+=\ --tilde
 LESS+=\ --long-prompt
 LESS+=\ --prompt=mpage %dm?B/%D.?Pm (%Pm\\%).$
 
+# if using short prompt, make it completely invisible
+LESS+=\ --prompt=s$
+
 # highlight lines with a mark
 LESS+=\ --status-line
 
