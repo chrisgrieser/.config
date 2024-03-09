@@ -2,6 +2,7 @@ return {
 	{
 		"williamboman/mason.nvim",
 		external_dependencies = { "node", "python3.12" },
+		mason_dependencies = "yq",
 		keys = {
 			{ "<leader>pm", vim.cmd.Mason, desc = " Mason" },
 		},

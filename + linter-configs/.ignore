@@ -8,4 +8,5 @@ vale/styles
 # here I actually change sometimes
 !pyproject.toml
 !biome.json
+!biome.jsonc
 !jxa/**

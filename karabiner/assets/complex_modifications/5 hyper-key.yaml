@@ -3,6 +3,8 @@ title: ⇪ Hyper
 anchors:
   - from:
       modifiers: &hyper
+        # INFO not using cmd+opt+ctrl+shift to avoid triggering system
+        # diagnosis via cmd+opt+ctrl+shift+.
         mandatory: [command, control, option]
   #─────────────────────────────────────────────────────────────────────────────
 rules:
@@ -13,8 +15,6 @@ rules:
         to_if_alone:
           - key_code: escape
         to:
-          # INFO not using cmd+opt+ctrl+shift to avoid triggering system
-          # diagnosis via cmd+opt+ctrl+shift+.
           - { key_code: right_command, modifiers: [control, option] }
       # Map Esc to F18 (clipboard / screenshot history)
       - type: basic
@@ -27,19 +27,6 @@ rules:
         # is done in finder-vim-alfred-addon.yaml
         conditions:
           - { type: frontmost_application_unless, bundle_identifiers: [^com\.apple\.finder$] }
-      #─────────────────────────────────────────────────────────────────────────────
-      # Restart Alfred & Alfred Preferences
-      # INFO needs to be done via Karabiner, since Alfred cannot restart itself
-      - type: basic
-        from: { key_code: "5", modifiers: *hyper }
-        to:
-          - shell_command: |
-              osascript -e 'display notification "" with title "Restarting Alfred…"'
-              killall -9 "Alfred"
-              while pgrep -xq "Alfred"; do sleep 0.1; done
-              sleep 0.1
-              open -a "Alfred 5"
-              osascript -e 'tell application id "com.runningwithcrayons.Alfred" to search'
   #─────────────────────────────────────────────────────────────────────────────
   - description: "Insert Mode Vim: ⇪ Hyper Movements"
     manipulators:

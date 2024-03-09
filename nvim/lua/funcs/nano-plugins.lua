@@ -329,20 +329,4 @@ function M.gotoChangedFiles()
 end
 
 --------------------------------------------------------------------------------
-
-function M.gotoPluginConfig()
-	local plugins = require("lazy").plugins()
-	vim.ui.select(plugins, {
-		prompt = "󰣖 Select Plugin:",
-		format_item = function(plugin) return vim.fs.basename(plugin[1]) end,
-	}, function(plugin)
-		if not plugin then return end
-		local module = plugin._.module:gsub("%.", "/")
-		local filepath = vim.fn.stdpath("config") .. "/lua/" .. module .. ".lua"
-		local repo = plugin[1]:gsub("/", "\\/") -- escape for `:edit`
-		vim.cmd(("edit +/%q %s"):format(repo, filepath))
-	end)
-end
-
---------------------------------------------------------------------------------
 return M

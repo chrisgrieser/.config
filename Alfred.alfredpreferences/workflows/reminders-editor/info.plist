@@ -788,29 +788,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/quick-add-reminder.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>0F93036F-D158-49BB-97AF-DE600B8A3300</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -836,6 +813,29 @@
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>63FD13B2-4520-4BF7-B444-C84531F947E1</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/quick-add-reminder.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>0F93036F-D158-49BB-97AF-DE600B8A3300</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -937,27 +937,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Added Reminder ({var:selectedDueDate})</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>83927C8F-D55B-4E36-B93D-23927B1808D5</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1007,6 +986,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Added Reminder ({var:selectedDueDate})</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>83927C8F-D55B-4E36-B93D-23927B1808D5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1042,6 +1042,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<dict>
 		<key>0BBC3335-0007-45FE-99A5-9C0E94E3B38C</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>630</real>
 			<key>ypos</key>
@@ -1049,12 +1051,14 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>0F93036F-D158-49BB-97AF-DE600B8A3300</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>note</key>
 			<string>quick add</string>
 			<key>xpos</key>
 			<real>500</real>
 			<key>ypos</key>
-			<real>660</real>
+			<real>640</real>
 		</dict>
 		<key>1A97EC3B-9181-4DED-8694-6AC9B3CD04E7</key>
 		<dict>
@@ -1063,10 +1067,12 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>870</real>
 			<key>ypos</key>
-			<real>790</real>
+			<real>770</real>
 		</dict>
 		<key>1F28B1D0-95DD-4F7F-BB2A-018A98C5743B</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>note</key>
 			<string>Mark as completed</string>
 			<key>xpos</key>
@@ -1077,7 +1083,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>233B90F3-D8E0-48FC-A81A-89764B3AAC09</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>6</integer>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>870</real>
 			<key>ypos</key>
@@ -1085,6 +1091,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>23ED3685-8AA0-4314-A16F-F7D8A0D01A70</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>510</real>
 			<key>ypos</key>
@@ -1092,6 +1100,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>30829801-BAFD-447E-BA3D-5D6AB864A2F7</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>465</real>
 			<key>ypos</key>
@@ -1099,13 +1109,17 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>3C4A820D-7CF3-4098-9406-6DD4CA028F3D</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>675</real>
 			<key>ypos</key>
-			<real>680</real>
+			<real>660</real>
 		</dict>
 		<key>3D08F342-404B-4C70-8AC6-5473E7CB855B</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>290</real>
 			<key>ypos</key>
@@ -1113,6 +1127,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>3D40B34B-8C4C-4C22-B14E-BC5D7B92F072</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
@@ -1120,6 +1136,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>45E222F3-9910-4038-AA60-1ABC01E95D81</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>note</key>
 			<string>select reminder</string>
 			<key>xpos</key>
@@ -1132,34 +1150,34 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>1080</real>
+			<real>1075</real>
 			<key>ypos</key>
 			<real>290</real>
 		</dict>
 		<key>5FF59D05-FE74-43DD-9589-1CFF471C8A6A</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>6</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>870</real>
 			<key>ypos</key>
-			<real>665</real>
+			<real>645</real>
 		</dict>
 		<key>63FD13B2-4520-4BF7-B444-C84531F947E1</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>quick add selection or browser tab</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>660</real>
+			<real>550</real>
 		</dict>
 		<key>6DBE7C33-DE4C-4B1D-8831-E8F02E6FB3D6</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>6</integer>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>875</real>
 			<key>ypos</key>
@@ -1167,6 +1185,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>76767F1C-52B8-425C-8621-F7E67C523434</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -1175,25 +1195,27 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>83927C8F-D55B-4E36-B93D-23927B1808D5</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>6</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>870</real>
 			<key>ypos</key>
-			<real>910</real>
+			<real>890</real>
 		</dict>
 		<key>91C4C097-7401-4742-A061-9BF771AD2D00</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>note</key>
 			<string>add specific time</string>
 			<key>xpos</key>
-			<real>305</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>910</real>
+			<real>855</real>
 		</dict>
 		<key>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>6</integer>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>875</real>
 			<key>ypos</key>
@@ -1204,12 +1226,14 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>1080</real>
+			<real>1075</real>
 			<key>ypos</key>
 			<real>235</real>
 		</dict>
 		<key>AC986ADB-B43D-4F75-BFCB-7C27B55C983B</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>xpos</key>
 			<real>650</real>
 			<key>ypos</key>
@@ -1217,6 +1241,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>AE66EC2F-3383-4BB5-8AB3-0C28C6ACCC11</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>note</key>
 			<string>edit reminder</string>
 			<key>xpos</key>
@@ -1231,27 +1257,31 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>reminders left</string>
 			<key>xpos</key>
-			<real>997</real>
+			<real>992</real>
 			<key>ypos</key>
 			<real>295</real>
 		</dict>
 		<key>BD7716E2-05C1-4CD2-9B1C-5FD044289103</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>note</key>
 			<string>quick add</string>
 			<key>xpos</key>
-			<real>305</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>755</real>
+			<real>700</real>
 		</dict>
 		<key>CD1F34B1-A599-4F46-928B-198B877B88A8</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>note</key>
 			<string>timed add in background</string>
 			<key>xpos</key>
 			<real>505</real>
 			<key>ypos</key>
-			<real>910</real>
+			<real>890</real>
 		</dict>
 		<key>DA53DB8C-C97B-4594-A26E-0875AB96D262</key>
 		<dict>
@@ -1266,6 +1296,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>E9FBABB7-D7D0-4EF6-A0F8-BC9B2124CB77</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
 			<key>note</key>
 			<string>Snooze</string>
 			<key>xpos</key>

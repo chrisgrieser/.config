@@ -365,7 +365,11 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<string>Requires `ddgr`.
+
+---
+
+Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>0AD1A926-80B8-4274-9DFF-10183BF36867</key>
@@ -404,7 +408,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>360</real>
+			<real>335</real>
 		</dict>
 		<key>D43E8A7B-48B4-4004-A798-0C9D544EAD7F</key>
 		<dict>
@@ -413,7 +417,7 @@
 			<key>xpos</key>
 			<real>390</real>
 			<key>ypos</key>
-			<real>610</real>
+			<real>585</real>
 		</dict>
 		<key>DD75F164-F04B-4A1C-84BD-49B4068C8E88</key>
 		<dict>
@@ -431,7 +435,7 @@
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>360</real>
+			<real>335</real>
 		</dict>
 		<key>E6BFAD6E-029F-480F-AD49-21705DD25C3D</key>
 		<dict>
@@ -464,7 +468,7 @@
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>475</real>
+			<real>450</real>
 		</dict>
 		<key>FEEDB102-49DB-4F54-88FA-D54C378729DA</key>
 		<dict>
@@ -475,7 +479,7 @@
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>610</real>
+			<real>585</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

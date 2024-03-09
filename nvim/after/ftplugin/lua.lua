@@ -10,7 +10,6 @@ u.ftAbbr("!==", "~=")
 u.ftAbbr("===", "==")
 
 -- shorthands
-u.ftAbbr("ree", "return end")
 u.ftAbbr("tree", "then return end")
 
 vim.opt_local.comments = {

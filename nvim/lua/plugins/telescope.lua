@@ -574,7 +574,7 @@ return {
 				mode = { "n", "i" },
 				function()
 					require("telescope.builtin").symbols {
-						sources = { "nerd", "math", "emoji" },
+						sources = { "nerd", "math" },
 						layout_config = { horizontal = { width = 0.35, height = 0.55 } },
 					}
 				end,

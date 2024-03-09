@@ -104,16 +104,6 @@ M.wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function()
 end)
 
 --------------------------------------------------------------------------------
--- SHOTTR
-
--- Auto-close prompt to purchase app
-M.wf_shottr = wf.new("Shottr"):subscribe(wf.windowCreated, function(win)
-	u.runWithDelays(0.1, function()
-		if win:size().w == 600 and win:size().h == 428 then win:close() end
-	end)
-end)
-
---------------------------------------------------------------------------------
 -- HIGHLIGHTS / PDF READER
 
 -- - Sync Dark & Light Mode
@@ -138,16 +128,16 @@ M.wf_pdfReader = wf.new({ "Preview", "Highlights" }):subscribe(
 )
 
 ------------------------------------------------------------------------------
--- TRANSMISSION / MASTODON / TODOAPP
+-- TRANSMISSION / MASTODON
 
 -- Fallthrough: prevent unintended focusing after qutting another app or closing
 -- last window
-M.aw_fallthrough = aw.new(function(_, event)
+M.aw_fallthrough = aw.new(function(appName, event)
+	if appName == "Reminders" then return end -- Reminders often opening in the background
 	if event ~= aw.terminated then return end
 
 	-- CONFIG
-	local fallThroughApps = { "Transmission", env.mastodonApp, "GoodTask" }
-
+	local fallThroughApps = { "Transmission", env.mastodonApp }
 	u.runWithDelays({ 0.1, 0.2 }, function()
 		if not u.isFront(fallThroughApps) then return end
 		local visibleWins = hs.window:orderedWindows()

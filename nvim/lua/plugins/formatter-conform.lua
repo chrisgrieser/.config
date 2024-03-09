@@ -8,7 +8,7 @@ local ftToFormatter = {
 	markdown = { "markdown-toc", "markdownlint", "injected" },
 	sh = { "shellcheck", "shfmt" },
 	bib = { "trim_whitespace", "bibtex-tidy" },
-	css = { "squeeze_blanks" }, -- since the css formatter does not support that
+	-- css = { "squeeze_blanks" }, -- since the css formatter does not support that
 	["*"] = { "typos" },
 }
 -- use formatting from the LSP

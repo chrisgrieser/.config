@@ -12,7 +12,6 @@ M.maximized = hs.layout.maximized
 M.pseudoMax = { x = 0.184, y = 0, w = 0.817, h = 1 }
 M.center = { x = 0.184, y = 0, w = 0.6, h = 1 }
 M.centerThird = { x = 0.34, y = 0, w = 0.66, h = 1 }
-M.smallCenter = { x = 0.3, y = 0.15, w = 0.4, h = 0.7 }
 
 -- negative x to hide useless sidebar
 if env.isAtMother then
@@ -181,7 +180,6 @@ end
 -- Open Apps always at Mouse Screen
 M.wf_appsOnMouseScreen = wf.new({
 	"Mimestream",
-	"GoodTask",
 	"Obsidian",
 	"Finder",
 	"WezTerm",
@@ -198,12 +196,7 @@ M.wf_appsOnMouseScreen = wf.new({
 	local mouseScreen = hs.mouse.getCurrentScreen()
 	if not mouseScreen or not env.isProjector() then return end
 	local alreadyOnMouseScreen = newWin:screen():name() == mouseScreen:name()
-	if alreadyOnMouseScreen then return end
-
-	newWin:moveToScreen(mouseScreen)
-	u.runWithDelays(0.1, function()
-		if newWin:application():name() ~= "GoodTask" then M.moveResize(newWin, M.maximized) end
-	end)
+	if not alreadyOnMouseScreen then newWin:moveToScreen(mouseScreen) end
 end)
 
 --------------------------------------------------------------------------------
@@ -213,9 +206,7 @@ local function controlSpaceAction()
 	local curWin = hs.window.focusedWindow()
 
 	local pos
-	if u.isFront { "Reminders", "GoodTask" } then
-		pos = M.checkSize(curWin, M.smallCenter) and M.center or M.smallCenter
-	elseif u.isFront { "Finder", "Script Editor" } then
+	if u.isFront { "Finder", "Script Editor", "Reminders" } then
 		pos = M.checkSize(curWin, M.center) and M.maximized or M.center
 	elseif u.isFront("System Settings") then
 		pos = M.centerThird

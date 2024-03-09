@@ -70,7 +70,6 @@ local function workLayout()
 			wu.moveResize(win, wu.pseudoMax)
 		end)
 	end
-	hs.application.open("GoodTask", 1)
 
 	-- finish
 	u.whenAppWinAvailable("Discord", function()
@@ -103,7 +102,6 @@ local function movieLayout()
 		"WezTerm",
 		"Mimestream",
 		env.mastodonApp,
-		"GoodTask",
 		"Reminders",
 	}
 	print("🔲 Loaded MovieModeLayout")

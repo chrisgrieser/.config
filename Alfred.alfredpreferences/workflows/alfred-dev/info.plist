@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>296B867C-9788-4374-A10A-AF0EF487EF83</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6552DA50-7058-4101-A2EF-78E87D7C5FF9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>2DADFA85-C59F-4D17-A85F-5BC10246EA83</key>
 		<array/>
 		<key>2E405C4A-C768-4D8D-A9BB-A94379AB7484</key>
@@ -1130,6 +1143,53 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>restart alfred</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>❗Restart Alfred</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>296B867C-9788-4374-A10A-AF0EF487EF83</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string># disown, since this script is a process from Alfred itself
+
+nohup ./scripts/restart-alfred.sh
+disown</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>6552DA50-7058-4101-A2EF-78E87D7C5FF9</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Requires at least Alfred 5.1.
@@ -1165,6 +1225,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>555</real>
 			<key>ypos</key>
 			<real>455</real>
+		</dict>
+		<key>296B867C-9788-4374-A10A-AF0EF487EF83</key>
+		<dict>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>775</real>
 		</dict>
 		<key>2DADFA85-C59F-4D17-A85F-5BC10246EA83</key>
 		<dict>
@@ -1244,6 +1311,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
+			<key>note</key>
+			<string>search Alfred docs</string>
 			<key>xpos</key>
 			<real>735</real>
 			<key>ypos</key>
@@ -1268,6 +1337,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>35</real>
 			<key>ypos</key>
 			<real>455</real>
+		</dict>
+		<key>6552DA50-7058-4101-A2EF-78E87D7C5FF9</key>
+		<dict>
+			<key>xpos</key>
+			<real>180</real>
+			<key>ypos</key>
+			<real>775</real>
 		</dict>
 		<key>6BDF9BC1-F567-4559-B71A-9A52226DF7A5</key>
 		<dict>
