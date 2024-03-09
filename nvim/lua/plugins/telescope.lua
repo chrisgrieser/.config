@@ -545,14 +545,14 @@ return {
 				end,
 				desc = " Grep cword",
 			},
-			{
+			{ -- colorschemes without builtins
 				"<leader>pc",
 				function()
 					-- stylua: ignore
 					local builtins = {
 						"zellner", "torte", "slate", "shine", "ron", "quiet", "peachpuff",
 						"pablo", "murphy", "lunaperche", "koehler", "industry", "evening",
-						"elflord", "desert", "delek", "default", "darkblue", "blue",
+						"elflord", "desert", "delek", "default", "darkblue", "blue", "morning", 
 					}
 					local original = vim.fn.getcompletion
 
