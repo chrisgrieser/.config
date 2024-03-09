@@ -18,7 +18,7 @@
 └── templates # skeleton files
 ```
 
-The treee was *generated* using <https://tree.nathanfriend.io/>
+The tree was *generated* using <https://tree.nathanfriend.io/>
 
 ## All Installed Plugins
 - [Aasim-A/scrollEOF.nvim](https://github.com/Aasim-A/scrollEOF.nvim)

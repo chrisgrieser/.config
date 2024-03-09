@@ -39,13 +39,15 @@ tools:
       actionlint -no-color -oneline -
     lint-stdin: true
     lint-formats:
-      - "%f:%l:%c: %.%#: SC%n:%trror:%m"
-      - "%f:%l:%c: %.%#: SC%n:%tarning:%m"
-      - "%f:%l:%c: %.%#: SC%n:%tnfo:%m"
-      - "%f:%l:%c: %m"
-    # only in .github directories
+      # actionlint integrates shellcheck, which are the first three
+      - "<stdin>:%l:%c: %.%#: SC%n:%trror:%m"
+      - "<stdin>:%l:%c: %.%#: SC%n:%tarning:%m"
+      - "<stdin>:%l:%c: %.%#: SC%n:%tnfo:%m"
+      - "<stdin>:%l:%c: %m"
     require-marker: true
     root-markers: [".github/"]
+
+#───────────────────────────────────────────────────────────────────────────────
 
 languages:
   sh:
