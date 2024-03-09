@@ -87,19 +87,16 @@ compdef _change_git_files restore
 # SMART COMMIT
 
 function _stageAllIfNoStagedChanges {
-	git diff --staged --quiet && git add --all && print "\e[1;34mStaged all changes.\e[0m"
+	git diff --staged --quiet && 
+		git add --all && 
+		print "\e[1;34mStaged all changes.\e[0m"
 }
 
 # - if there are no staged changes, stage all changes (`git add -A`) and then commit
 # - if the is clean after committing, pull-push
 function gc {
 	_stageAllIfNoStagedChanges
-
-	# without arg, just open in editor
-	if [[ -z "$1" ]]; then
-		git commit
-		return
-	fi
+	if [[ -z "$1" ]]; then git commit; return; fi # without arg, just open in editor
 
 	printf "\e[1;34mCommit: \e[0m"
 	git commit -m "$@" || return 1
@@ -109,21 +106,14 @@ function gc {
 		echo
 		git status
 	else
-		printf "\e[1;34mPull: \e[0m" &&
-			git pull --no-rebase && # --no-rebase prevents "Cannot rebase on multiple branches"
-			printf "\e[1;34mPush: \e[0m" &&
-			git push
+		printf "\e[1;34mPull: \e[0m" && git pull --no-rebase && # --no-rebase prevents "Cannot rebase on multiple branches"
+			printf "\e[1;34mPush: \e[0m" && git push
 	fi
 }
 
 function gC {
 	_stageAllIfNoStagedChanges
-
-	# without arg, just open in editor
-	if [[ -z "$1" ]]; then
-		git commit
-		return
-	fi
+	if [[ -z "$1" ]]; then git commit; return; fi # without arg, just open in editor
 
 	printf "\e[1;34mCommit: \e[0m"
 	git commit -m "$@" || return 1
