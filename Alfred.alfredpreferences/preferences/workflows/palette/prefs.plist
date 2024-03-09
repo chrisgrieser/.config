@@ -4,7 +4,7 @@
 <dict>
 	<key>favourites</key>
 	<array>
-		<string>Image View</string>
+		<string>Running Apps</string>
 		<string>Junction</string>
 		<string>Universal Action</string>
 		<string>Copy to Clipboard</string>
@@ -15,7 +15,6 @@
 		<string>Open URL</string>
 		<string>Script Filter</string>
 		<string>Open File</string>
-		<string>Speak</string>
 		<string>Split Arg</string>
 		<string>External</string>
 		<string>Keyword</string>
@@ -27,8 +26,8 @@
 		<string>Call External Trigger</string>
 		<string>Run Script</string>
 		<string>PDF View</string>
+		<string>Image View</string>
 		<string>Dispatch Key Combo</string>
-		<string>Running Apps</string>
 	</array>
 </dict>
 </plist>

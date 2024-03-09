@@ -75,6 +75,7 @@ serverConfigs.efm = {
 local efmDependencies = {
 	"shellcheck", -- PENDING https://github.com/bash-lsp/bash-language-server/issues/663
 	"markdownlint",
+	"actionlint",
 }
 
 --------------------------------------------------------------------------------
@@ -205,6 +206,11 @@ serverConfigs.biome = {
 		client.server_capabilities.documentFormattingProvider = true
 		client.server_capabilities.documentRangeFormattingProvider = true
 	end,
+	-- PENDING https://github.com/neovim/nvim-lspconfig/pull/3061
+	root_dir = function()
+		local root_file = vim.fs.find({ "biome.json", "biome.jsonc" }, { upward = true })[1]
+		return vim.fs.dirname(root_file)
+	end,
 }
 
 --------------------------------------------------------------------------------
@@ -259,7 +265,7 @@ serverConfigs.ltex = {
 			},
 		},
 	},
-	on_attach = function(client, bufnr)
+	on_attach = function(ltex, bufnr)
 		-- have `zg` update ltex dictionary file as well as vim's spellfile
 		vim.keymap.set({ "n", "x" }, "zg", function()
 			local word
@@ -270,14 +276,14 @@ serverConfigs.ltex = {
 				u.normal('zggv"zy')
 				word = vim.fn.getreg("z")
 			end
-			local ltexSettings = vim.lsp.get_active_clients({ name = "ltex" })[1].config.settings
-			table.insert(ltexSettings.ltex.dictionary["en-US"], word)
+			local ltexSettings = ltex.config.settings
+			table.insert(ltex.config.settings.ltex.dictionary["en-US"], word)
 			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = ltexSettings })
 		end, { desc = "󰓆 Add Word", buffer = bufnr })
 
 		-- Disable ltex in Obsidian vault, as there is no `.ltexignore` https://github.com/valentjn/vscode-ltex/issues/576
 		if vim.startswith(vim.api.nvim_buf_get_name(0), vim.env.VAULT_PATH) then
-			vim.cmd.LspStop(client.id)
+			vim.cmd.LspStop(ltex.id)
 		end
 	end,
 }

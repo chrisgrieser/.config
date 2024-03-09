@@ -4,13 +4,10 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 app="$*"
 
 case "$app" in
-"sketchybar reload")
+"sketchybar")
 	sketchybar --reload
 	echo -n "🔁 Reloaded sketchybar" # Alfred notification
 	return 0
-	;;
-"sketchybar")
-	brew services restart "$app"
 	;;
 "AltTab" | "Hammerspoon")
 	killall "$app"

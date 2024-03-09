@@ -5,10 +5,12 @@ local function dapConfig()
 	--[[ Sign-Icons & Highlights ]]
 	local sign = vim.fn.sign_define
 	local hintBg = u.getHighlightValue("DiagnosticVirtualTextHint", "bg")
-	vim.api.nvim_set_hl(0, "DapBreak", { bg = hintBg })
+	vim.api.nvim_set_hl(0, "DapPause", { bg = hintBg })
+	local infoBg = u.getHighlightValue("DiagnosticVirtualTextInfo", "bg")
+	vim.api.nvim_set_hl(0, "DapBreak", { bg = infoBg })
 
-	sign("DapStopped", { text = "", texthl = "DiagnosticHint", linehl = "DapBreak" })
-	sign("DapBreakpoint", { text = "", texthl = "DiagnosticInfo" })
+	sign("DapStopped", { text = "", texthl = "DiagnosticHint", linehl = "DapPause" })
+	sign("DapBreakpoint", { text = "", texthl = "DiagnosticInfo", linehl = "DapBreak" })
 	sign("DapBreakpointRejected", { text = "", texthl = "DiagnosticError" })
 
 	--[[ auto-open/close the dap-ui ]]

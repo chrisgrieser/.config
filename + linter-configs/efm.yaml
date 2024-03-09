@@ -20,11 +20,11 @@ tools:
     lint-source: markdownlint
     # 1. these rules are not disabled in the config, so they work for formatting
     # 2. `>-` needed, otherwise won't work
-    lint-command: >- 
+    lint-command: >-
       markdownlint --stdin --config="$HOME/.config/+ linter-configs/markdownlint.yaml"
       --disable=no-trailing-spaces --disable=no-multiple-blanks --disable=blanks-around-fences
     # `.markdownlintignore` does not work with stdin, but without stdin, lints aren't live
-    lint-stdin: true 
+    lint-stdin: true
     lint-severity: 2 # 2 = warning
     lint-formats:
       - "stdin:%l %m" # needed, otherwise some rules are not reported
@@ -33,8 +33,24 @@ tools:
       - "%f:%l:%c %m"
       - "%f: %l: %m"
 
+  actionlint: &actionlint
+    lint-source: actionlint
+    lint-command: >-
+      actionlint -no-color -oneline -
+    lint-stdin: true
+    lint-formats:
+      - "%f:%l:%c: %.%#: SC%n:%trror:%m"
+      - "%f:%l:%c: %.%#: SC%n:%tarning:%m"
+      - "%f:%l:%c: %.%#: SC%n:%tnfo:%m"
+      - "%f:%l:%c: %m"
+    # only in .github directories
+    require-marker: true
+    root-markers: [".github/"]
+
 languages:
   sh:
     - <<: *shellcheck
   markdown:
     - <<: *markdownlint
+  yaml:
+    - <<: *actionlint

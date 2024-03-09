@@ -21,7 +21,7 @@ local routes = {
 			["not"] = {
 				cond = function(msg)
 					local title = (msg.opts and msg.opts.title) or ""
-					return title:find("Commit Preview") or title:find("tinygit")
+					return title:find("Commit Preview") or title:find("tinygit") or title:find("Changed Files")
 				end,
 			},
 		},

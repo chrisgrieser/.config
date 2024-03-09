@@ -25,7 +25,7 @@ if [[ "$FRONT_APP" != "neovide" ]]; then
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
-# SPECIAL RESTART FOR NEOVIDE/NVIM
+# SPECIAL RESTART FOR NEOVIDE
 
 # kill
 nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>wqall<CR>"

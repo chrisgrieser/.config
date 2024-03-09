@@ -80,6 +80,20 @@ keymap("n", "<leader>pp", require("lazy").sync, { desc = "󰒲 Lazy Sync" })
 keymap("n", "<leader>pl", require("lazy").home, { desc = "󰒲 Lazy" })
 keymap("n", "<leader>pi", require("lazy").install, { desc = "󰒲 Lazy Install" })
 
+keymap("n", "g,", function ()
+	local plugins = require("lazy").plugins()
+	vim.ui.select(plugins, {
+		prompt = "󰣖 Select Plugin:",
+		format_item = function(plugin) return vim.fs.basename(plugin[1]) end,
+	}, function(plugin)
+		if not plugin then return end
+		local module = plugin._.module:gsub("%.", "/")
+		local filepath = vim.fn.stdpath("config") .. "/lua/" .. module .. ".lua"
+		local repo = plugin[1]:gsub("/", "\\/") -- escape for `:edit`
+		vim.cmd(("edit +/%q %s"):format(repo, filepath))
+	end)
+end, { desc = "󰣖 Goto Plugin Config" })
+
 --------------------------------------------------------------------------------
 
 local function checkForPluginUpdates()
@@ -125,5 +139,5 @@ local function checkForDuplicateKeys()
 	end
 end
 
-vim.defer_fn(checkForPluginUpdates, 5000)
-vim.defer_fn(checkForDuplicateKeys, 3000)
+vim.defer_fn(checkForPluginUpdates, 10000)
+vim.defer_fn(checkForDuplicateKeys, 5000)

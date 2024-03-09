@@ -42,6 +42,8 @@ duti -s "$videoplayerID" m4a all
 
 # code
 editorID="com.apple.automator.Neovide-Helper"
+duti -s "$editorID" json all
+duti -s "$editorID" jsonc all
 duti -s "$editorID" pyi all
 duti -s "$editorID" py all
 duti -s "$editorID" config all # quick-lint-js.config
@@ -76,7 +78,6 @@ duti -s "$editorID" scss all
 duti -s "$editorID" svelte all
 duti -s "$editorID" applescript all
 duti -s "$editorID" lua all
-duti -s "$editorID" json all
 duti -s "$editorID" public.yaml all
 
 #───────────────────────────────────────────────────────────────────────────────

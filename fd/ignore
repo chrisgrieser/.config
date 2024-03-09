@@ -35,6 +35,7 @@ manifest.json
 tsconfig.json
 esbuild.config.mjs
 biome.json
+biome.jsonc
 
 # python
 __init__.py

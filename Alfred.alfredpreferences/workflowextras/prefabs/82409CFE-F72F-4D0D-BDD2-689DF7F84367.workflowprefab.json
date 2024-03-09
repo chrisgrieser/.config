@@ -1,14 +1,14 @@
 {
-  "name" : "Run JavaScript",
+  "name" : "Run External Script",
   "data" : {
     "items" : [
       {
         "workflowobjecttype" : "alfred.workflow.action.script",
-        "uid" : "11CD2255-4E07-4648-8E5C-A59346A63EC0",
+        "uid" : "F4C1E426-3C58-48D1-B177-AECCEFCF848E",
         "note" : "",
         "workflowobjectconfig" : {
           "script" : "",
-          "scriptfile" : ".js",
+          "scriptfile" : ".\/scripts\/",
           "escaping" : 0,
           "scriptargtype" : 1,
           "type" : 8,
@@ -23,5 +23,5 @@
 
     ]
   },
-  "description" : "external"
+  "description" : ""
 }

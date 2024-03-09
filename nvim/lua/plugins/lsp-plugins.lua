@@ -38,10 +38,10 @@ return {
 			request_pending_text = false, -- no "Loading…" PENDING https://github.com/Wansmer/symbol-usage.nvim/issues/24
 			references = { enabled = true, include_declaration = false },
 			definition = { enabled = false },
-			implementation = { enabled = false },
+			implementation = { enabled = true },
 			text_format = function(symbol)
-				if symbol.references == 0 then return "" end
-				return " 󰈿 " .. symbol.references
+				local refs = symbol.references > 0 and (" 󰈿 %s"):format(symbol.references) or ""
+				return refs
 			end,
 			disable = {
 				filetypes = { "css", "scss" },

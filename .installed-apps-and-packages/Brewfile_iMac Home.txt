@@ -1,9 +1,8 @@
 tap "felixkratz/formulae"
 tap "homebrew/bundle"
-tap "homebrew/cask"
 tap "homebrew/cask-fonts"
-tap "homebrew/core"
 tap "homebrew/services"
+tap "keith/formulae"
 tap "mgmeyers/pdfannots2json"
 brew "openssl@3"
 brew "bat"
@@ -47,6 +46,7 @@ brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
 brew "felixkratz/formulae/sketchybar"
+brew "keith/formulae/reminders-cli"
 brew "mgmeyers/pdfannots2json/pdfannots2json"
 cask "alfred"
 cask "alt-tab"
@@ -76,7 +76,6 @@ cask "steam"
 cask "transmission"
 cask "wezterm"
 cask "zoom"
-mas "GoodTask", id: 1143437985
 mas "Highlights", id: 1498912833
 mas "lo-rain", id: 6446921886
 mas "Mona", id: 1659154653
