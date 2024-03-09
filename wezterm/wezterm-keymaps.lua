@@ -30,33 +30,39 @@ M.keys = {
 	-- closes panes, then tabs, then windows
 	{ key = "w", mods = "CMD", action = act.CloseCurrentPane { confirm = false } },
 
-	{ -- cycles panes, then tabs
+	{ -- cycles panes, then tabs, then windows
 		key = "Enter",
 		mods = "CTRL",
-		action = wt.action_callback(function (win, pane)
+		action = wt.action_callback(function(win, pane)
 			local paneCount = #pane:tab():panes()
+			local tabCount = #win:mux_window():tabs()
 			if paneCount > 1 then
 				win:perform_action(act.ActivatePaneDirection("Next"), pane)
+			elseif tabCount > 1 then
+				win:perform_action(act.ActivateTabRelative(1), pane)
 			else
 				win:perform_action(act.ActivateTabRelative(1), pane)
 			end
 		end),
 	},
-	{ -- close *other* pane (HACK)
+	{ -- HACK close next pane
 		key = "w",
 		mods = "CMD|SHIFT",
-		action = wt.action_callback(function (win, pane)
+		action = wt.action_callback(function(win, pane)
 			local paneCount = #pane:tab():panes()
 			if paneCount > 1 then
 				win:perform_action(act.ActivatePaneDirection("Next"), pane)
 				win:perform_action(act.CloseCurrentPane { confirm = false }, pane)
+			else
+				win:toast_notification("WezTerm", "No other panes.", nil, 3000)
 			end
 		end),
 	},
 	{
 		key = "PageUp",
 		action = wt.action_callback(function(win, pane)
-			-- if TUI, send key to TUI, else scroll by page https://github.com/wez/wezterm/discussions/4101
+			-- if TUI (such as fullscreen fzf), send key to TUI, 
+			-- otherwise scroll by page https://github.com/wez/wezterm/discussions/4101
 			if pane:is_alt_screen_active() then
 				win:perform_action(act.SendKey { key = "PageUp" }, pane)
 			else
@@ -67,7 +73,7 @@ M.keys = {
 	{
 		key = "PageDown",
 		action = wt.action_callback(function(win, pane)
-			if pane:is_alt_screen_active() then -- TUI
+			if pane:is_alt_screen_active() then 
 				win:perform_action(act.SendKey { key = "PageDown" }, pane)
 			else
 				win:perform_action(act.ScrollByPage(0.8), pane)
