@@ -154,22 +154,15 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "lua",
 	callback = function()
-		vim.keymap.set(
-			"n",
-			"gs",
-			function()
-				require("telescope.builtin").treesitter {
-					show_line = false,
-					prompt_prefix = " ",
-					symbols = { "function", "method", "class", "struct" },
-					symbol_highlights = {
-						["function"] = "Function",
-						["method"] = "@method",
-					},
-				}
-			end,
-			{ desc = " Symbols", buffer = true }
-		)
+		local function treesitterSymbol()
+			require("telescope.builtin").treesitter {
+				show_line = false,
+				prompt_prefix = " ",
+				symbols = { "function", "method", "class", "struct" },
+				symbol_highlights = { ["function"] = "Function", ["method"] = "@method" },
+			}
+		end
+		vim.keymap.set("n", "gs", treesitterSymbol, { desc = " Symbols", buffer = true })
 	end,
 })
 
@@ -236,7 +229,9 @@ local function telescopeConfig()
 				find_command = { "fd", "--type=file", "--type=symlink" },
 				follow = false,
 				mappings = {
-					i = { ["<C-h>"] = toggleHiddenAndIgnore },
+					i = {
+						["<C-h>"] = toggleHiddenAndIgnore,
+					},
 				},
 			},
 			oldfiles = {
@@ -469,15 +464,15 @@ return {
 		keys = {
 			{ "?", function() telescope("keymaps") end, desc = "⌨️ Search Keymaps" },
 			{ "g.", function() telescope("resume") end, desc = " Continue" },
-			{ "gs", function() telescope("lsp_document_symbols") end, desc = " Symbols" },
+			{ "gs", function() telescope("lsp_document_symbols") end, desc = "󰒕 Symbols" },
 			{
 				"gw",
 				function() telescope("lsp_dynamic_workspace_symbols") end,
 				desc = "󰒕 Workspace Symbols",
 			},
-			{ "gd", function() telescope("lsp_definitions") end, desc = "󰒕 Definitions" },
-			{ "gD", function() telescope("lsp_type_definitions") end, desc = "󰒕 Type Definitions" },
-			{ "gf", function() telescope("lsp_references") end, desc = "󰒕 References" },
+			{ "gd", function() telescope("lsp_definitions") end, desc = "󰈿 Definitions" },
+			{ "gD", function() telescope("lsp_type_definitions") end, desc = "󰈿 Type Definitions" },
+			{ "gf", function() telescope("lsp_references") end, desc = "󰈿 References" },
 			{ "<leader>ph", function() telescope("highlights") end, desc = " Highlights" },
 			{ "<leader>gs", function() telescope("git_status") end, desc = " Status" },
 			{ "<leader>gl", function() telescope("git_commits") end, desc = " Log" },
@@ -520,7 +515,7 @@ return {
 			{
 				"gr",
 				function()
-					-- HACK add buffers to oldfiles
+					-- HACK add open buffers to oldfiles
 					local listedBufs = vim.fn.getbufinfo { buflisted = 1 }
 					local bufPaths = vim.tbl_map(function(buf) return buf.name end, listedBufs)
 					vim.list_extend(vim.v.oldfiles, bufPaths)
@@ -545,7 +540,7 @@ return {
 				end,
 				desc = " Grep cword",
 			},
-			{ -- colorschemes without builtins
+			{ -- HACK colorschemes without builtins
 				"<leader>pc",
 				function()
 					-- stylua: ignore
