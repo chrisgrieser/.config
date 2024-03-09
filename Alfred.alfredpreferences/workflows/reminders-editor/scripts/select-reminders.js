@@ -33,7 +33,7 @@ function run() {
 				id: externalId,
 				title: title,
 				body: body,
-				remindersLeft: reminders.length - 1, // for deciding whether to loop back
+				remindersLeft: responseJson.length - 1, // for deciding whether to loop back
 			},
 			text: { copy: content },
 			mods: {
@@ -45,7 +45,7 @@ function run() {
 				alt: { arg: content }, // edit content
 			},
 		};
-		return alfredItem
+		return alfredItem;
 	});
 
 	// GUARD

@@ -101,12 +101,13 @@ function gc {
 		return
 	fi
 
-	printf "\e[1;34mCommit: \e[0m" &&
-		git commit -m "$@" || return 1
+	printf "\e[1;34mCommit: \e[0m"
+	git commit -m "$@" || return 1
 
 	if [[ -n "$(git status --porcelain)" ]]; then
-		print "\e[1;34mPush: \e[0mNot pushing since repo still dirty." &&
-			echo && git status
+		print "\e[1;34mPush: \e[0mNot pushing since repo still dirty."
+		echo
+		git status
 	else
 		printf "\e[1;34mPull: \e[0m" &&
 			git pull --no-rebase && # --no-rebase prevents "Cannot rebase on multiple branches"
@@ -117,8 +118,15 @@ function gc {
 
 function gC {
 	_stageAllIfNoStagedChanges
-	printf "\e[1;34mCommit: \e[0m" &&
-		git commit -m "$@" || return 1
+
+	# without arg, just open in editor
+	if [[ -z "$1" ]]; then
+		git commit
+		return
+	fi
+
+	printf "\e[1;34mCommit: \e[0m"
+	git commit -m "$@" || return 1
 }
 
 # completions for them
