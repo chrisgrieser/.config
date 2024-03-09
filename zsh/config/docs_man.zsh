@@ -85,9 +85,8 @@ function cht() {
 
 	query=${query// /-} # dash as separator for subcommands, e.g. git-rebase
 	curl -s "https://cht.sh/$query?style=$style" >"/tmp/$query"
-	# `+--quit-if-one-screen` to override the option if set in less config
-	pane_id=$(wezterm cli spawn -- less +--quit-if-one-screen "/tmp/$query")
-	wezterm cli set-tab-title --pane-id="$pane_id" "cheat: $query"
+	# -+S = override `--chop-long-lines` from default less config
+	wezterm cli split-pane --right -- less -+S +--quit-if-one-screen "/tmp/$query" &>/dev/null
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -97,4 +96,3 @@ alias -g H="--help | bat --language=help --style=plain --wrap=character"
 ZSH_HIGHLIGHT_REGEXP+=(' H$' 'fg=magenta,bold')
 
 #───────────────────────────────────────────────────────────────────────────────
-

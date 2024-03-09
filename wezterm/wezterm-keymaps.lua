@@ -12,7 +12,6 @@ local M = {}
 
 M.keys = {
 	{ key = "q", mods = "CMD", action = act.QuitApplication },
-	{ key = "w", mods = "CMD", action = act.CloseCurrentPane { confirm = false } },
 	{ key = "t", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
 	{ key = "n", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
 	{ key = "c", mods = "CMD", action = act.CopyTo("ClipboardAndPrimarySelection") },
@@ -24,19 +23,34 @@ M.keys = {
 	{ key = "ö", mods = "CMD", action = act.CharSelect },
 
 	-- using `ctrl-L` instead of wezterm's scrollback-clearing preserves the
-	-- abilite to scroll back
+	-- ability to scroll back
 	{ key = "k", mods = "CMD", action = act.SendKey { key = "l", mods = "CTRL" } },
 
-	{ key = "Enter", mods = "CTRL", action = act.ActivateTabRelative(1) },
+	-- closes panes, then tabs, then windows
+	{ key = "w", mods = "CMD", action = act.CloseCurrentPane { confirm = false } },
+
+	{ -- cycles panes, then tabs
+		key = "Enter",
+		mods = "CTRL",
+		action = wt.action_callback(function (win, pane)
+			local paneCount = #pane:tab():panes()
+			print("❗ paneCount: ", paneCount)
+			if paneCount > 1 then
+				win:perform_action(act.ActivatePaneDirection("Next"), pane)
+			else
+				win:perform_action(act.ActivateTabRelative(1), pane)
+			end
+		end),
+	},
 	{ key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
 	{
 		key = "PageUp",
 		action = wt.action_callback(function(win, pane)
 			-- if TUI, send key to TUI, else scroll by page https://github.com/wez/wezterm/discussions/4101
 			if pane:is_alt_screen_active() then
-				win:perform_action(wt.action.SendKey { key = "PageUp" }, pane)
+				win:perform_action(act.SendKey { key = "PageUp" }, pane)
 			else
-				win:perform_action(wt.action.ScrollByPage(-0.8), pane)
+				win:perform_action(act.ScrollByPage(-0.8), pane)
 			end
 		end),
 	},
@@ -44,9 +58,9 @@ M.keys = {
 		key = "PageDown",
 		action = wt.action_callback(function(win, pane)
 			if pane:is_alt_screen_active() then -- TUI
-				win:perform_action(wt.action.SendKey { key = "PageDown" }, pane)
+				win:perform_action(act.SendKey { key = "PageDown" }, pane)
 			else
-				win:perform_action(wt.action.ScrollByPage(0.8), pane)
+				win:perform_action(act.ScrollByPage(0.8), pane)
 			end
 		end),
 	},
