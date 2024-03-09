@@ -85,8 +85,14 @@ function cht() {
 
 	query=${query// /-} # dash as separator for subcommands, e.g. git-rebase
 	curl -s "https://cht.sh/$query?style=$style" >"/tmp/$query"
+
 	# -+S = override `--chop-long-lines` from default less config
-	wezterm cli split-pane --right -- less -+S +--quit-if-one-screen "/tmp/$query" &>/dev/null
+	# -+F = override `--quit-if-one-screen`
+	# -+m = override `--long-prompt`
+	wezterm cli split-pane --right --percent=35 -- \
+		less -+F -+S -+m "/tmp/$query" \
+		&>/dev/null
+	wezterm cli activate-pane-direction Left # keep focus on original pane
 }
 
 #───────────────────────────────────────────────────────────────────────────────
