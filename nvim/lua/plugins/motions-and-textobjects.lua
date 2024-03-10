@@ -235,7 +235,7 @@ return {
 				desc = " Indent Last Paste",
 			},
 			{ -- open URL (forward seeking)
-				"gy",
+				"gx",
 				function()
 					require("various-textobjs").url()
 					local foundURL = vim.fn.mode():find("v")

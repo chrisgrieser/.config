@@ -16,10 +16,8 @@ alias unlock='rm -v "$(git rev-parse --git-dir)/index.lock"'
 alias pr='gh pr create --web --fill'
 alias rel='make --silent release' # personal convention to have `make release`
 
-function grh {
-	git reset --hard # undo changes
-	git clean -df    # remove untracked files
-}
+# remove untracked files & undo all changes
+alias grh='git clean -df && git reset --hard'
 
 #───────────────────────────────────────────────────────────────────────────────
 

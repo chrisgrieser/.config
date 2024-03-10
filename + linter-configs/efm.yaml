@@ -36,14 +36,14 @@ tools:
   actionlint: &actionlint
     lint-source: actionlint
     lint-command: >-
-      actionlint -no-color -oneline -
+      [[ ${INPUT} ~= "ISSUE_TEMPLATE" ]] || actionlint -no-color -oneline -stdin-filename ${INPUT} -
     lint-stdin: true
     lint-formats:
       # actionlint integrates shellcheck, which are the first three
-      - "<stdin>:%l:%c: %.%#: SC%n:%trror:%m"
-      - "<stdin>:%l:%c: %.%#: SC%n:%tarning:%m"
-      - "<stdin>:%l:%c: %.%#: SC%n:%tnfo:%m"
-      - "<stdin>:%l:%c: %m"
+      - "%f:%l:%c: %.%#: SC%n:%trror:%m"
+      - "%f:%l:%c: %.%#: SC%n:%tarning:%m"
+      - "%f:%l:%c: %.%#: SC%n:%tnfo:%m"
+      - "%f:%l:%c: %m"
     require-marker: true
     root-markers: [".github/"]
 

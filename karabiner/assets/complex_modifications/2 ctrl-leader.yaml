@@ -51,7 +51,6 @@ rules:
         conditions: [*leader-active]
         to_if_alone:
           - key_code: left_control
-          # - { key_code: vk_none, hold_down_milliseconds: 50 }
           - key_code: left_control
           - *deactivate-leader
           - *remove-notice
@@ -332,6 +331,8 @@ rules:
         from: { key_code: period }
         conditions: [*leader-active]
         to:
+          # INFO delay to avoid sending double-ctrl, which triggers Alfred
+          - { key_code: vk_none, hold_down_milliseconds: 200 }
           - { key_code: spacebar, modifiers: [control, command] }
           - *deactivate-leader
           - *remove-notice
