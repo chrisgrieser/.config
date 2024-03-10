@@ -26,6 +26,10 @@
     "body": "\\e[1;34m",
     "prefix": "blue"
   },
+  "blue print": {
+    "body": "print \"\\e[1;34m$0\\e[0m\"",
+    "prefix": "blue print"
+  },
   "check device name": {
     "body": "scutil --get ComputerName | grep -q \"$0\"",
     "prefix": "device name"
