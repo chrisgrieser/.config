@@ -5,6 +5,7 @@
 
 declare class MacAppObj {
 	includeStandardAdditions: boolean;
+	/** only URLs, not files on device */
 	openLocation(url: string): string;
 	open(path: string): void;
 	read(path: string): string;

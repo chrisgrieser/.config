@@ -132,6 +132,10 @@
       "displayNotification"
     ]
   },
+  "open file": {
+    "body": "const openFile = (/** @type {string} */ path) => Application(\"Finder\").open(Path(path));",
+    "prefix": "open file"
+  },
   "open location (url)": {
     "body": "app.openLocation(\"${1:url}\");",
     "prefix": "open location (url)"
