@@ -22,16 +22,6 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>79F25308-2C64-400B-AC1D-C1FD5FC840DF</string>
-				<key>modifiers</key>
-				<integer>131072</integer>
-				<key>modifiersubtext</key>
-				<string>⇧: Search issues</string>
-				<key>vitoclose</key>
-				<true/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>D6E5E105-38E3-4BC1-90E3-52BEE556349D</string>
 				<key>modifiers</key>
 				<integer>524288</integer>
@@ -144,16 +134,6 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>79F25308-2C64-400B-AC1D-C1FD5FC840DF</string>
-				<key>modifiers</key>
-				<integer>131072</integer>
-				<key>modifiersubtext</key>
-				<string>⇧: Search issues</string>
-				<key>vitoclose</key>
-				<true/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>D6E5E105-38E3-4BC1-90E3-52BEE556349D</string>
 				<key>modifiers</key>
 				<integer>524288</integer>
@@ -202,29 +182,6 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>79F25308-2C64-400B-AC1D-C1FD5FC840DF</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>6BBC3DF6-1094-4623-B790-2B5EF7C16EEE</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>D6E5E105-38E3-4BC1-90E3-52BEE556349D</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>⌥: Copy GitHub URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -622,72 +579,6 @@ end run</string>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>Loading...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/issue-search.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Search for Issues on GitHub</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>79F25308-2C64-400B-AC1D-C1FD5FC840DF</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>D6E5E105-38E3-4BC1-90E3-52BEE556349D</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
 				<integer>2</integer>
 				<key>argumenttreatemptyqueryasnil</key>
 				<true/>
@@ -730,50 +621,6 @@ end run</string>
 			<string>02145BDB-6F80-437E-A4FE-880FDA77AC47</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>⚠️ {query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>F5BC25CE-C34C-4EF9-B428-71EDB9170948</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/open-help.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>26EB4BCF-56A8-43E4-AED6-0C121B00D55E</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -821,6 +668,25 @@ end run</string>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>C906BF1E-7CF4-4407-9B97-53532876DCC0</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>D6E5E105-38E3-4BC1-90E3-52BEE556349D</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -876,6 +742,50 @@ end run</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⚠️ {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>F5BC25CE-C34C-4EF9-B428-71EDB9170948</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/open-help.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>26EB4BCF-56A8-43E4-AED6-0C121B00D55E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>openwith</key>
 				<string></string>
 				<key>sourcefile</key>
@@ -901,12 +811,10 @@ Run `:nvim` once to create the local cache for the `:h` search.
 	- &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the GitHub repo.
 	- &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the `:help` in the browser (vimdoc converted to html).
 	- &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the GitHub URL to the clipboard.
-	- &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Search GitHub issues of the plugin.
 - `mason`: Search for tools available via [mason.nvim](https://github.com/williamboman/mason.nvim).
 - `ip`: Search for plugins (and mason tools) installed locally on your device. Mnemonic: `[i]installed [p]lugins`. The modifiers (&lt;kbd&gt;⌘⌥⌃⇧&lt;/kbd&gt;) from the plugin-search also apply for this command. In addition:
 	- &lt;kbd&gt;fn⏎&lt;/kbd&gt;: Open the local directory of the plugin in Finder.
 - `:old`: Displays and searches your `:oldfiles`. Opens them in the system's default editor for the respective filetype. (To open them directly in neovim, you need a neovim GUI with `Open With…` capability though.)
-- `:nvim`: Creates the local cache for the online :help search. Run it once in a while, when there have been updates to the online docs.
 
 ## Bug reports, feature requests or just leave a star?
 ➡️ [GitHub Repo](https://github.com/chrisgrieser/alfred-neovim-utilities/)
@@ -939,7 +847,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>400</real>
 		</dict>
 		<key>14ECFC26-C670-4D39-9A5C-C24B452554F2</key>
 		<dict>
@@ -979,9 +887,9 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>open help page</string>
 			<key>xpos</key>
-			<real>340</real>
+			<real>310</real>
 			<key>ypos</key>
-			<real>710</real>
+			<real>705</real>
 		</dict>
 		<key>38E62E4E-8B37-483B-BBE3-257C2DD7EA30</key>
 		<dict>
@@ -997,9 +905,9 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>485</real>
+			<real>455</real>
 			<key>ypos</key>
-			<real>405</real>
+			<real>400</real>
 		</dict>
 		<key>6EBCF2CC-4936-48C4-BCD8-42A7B39BDEDC</key>
 		<dict>
@@ -1021,7 +929,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>890</real>
+			<real>705</real>
 		</dict>
 		<key>71D977C5-6C8A-47D2-A625-4E3E79D785D2</key>
 		<dict>
@@ -1033,17 +941,6 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>560</real>
 			<key>ypos</key>
 			<real>40</real>
-		</dict>
-		<key>79F25308-2C64-400B-AC1D-C1FD5FC840DF</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>issue search GitHub</string>
-			<key>xpos</key>
-			<real>220</real>
-			<key>ypos</key>
-			<real>405</real>
 		</dict>
 		<key>7AA41F32-E0D9-4117-8B57-8F7C942E07D7</key>
 		<dict>
@@ -1081,7 +978,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>725</real>
+			<real>540</real>
 		</dict>
 		<key>D6E5E105-38E3-4BC1-90E3-52BEE556349D</key>
 		<dict>
@@ -1090,9 +987,9 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>copy url</string>
 			<key>xpos</key>
-			<real>485</real>
+			<real>455</real>
 			<key>ypos</key>
-			<real>550</real>
+			<real>545</real>
 		</dict>
 		<key>D818D50E-55A9-45FB-AC92-10FCF4BC8B60</key>
 		<dict>
@@ -1101,9 +998,9 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>open local folder</string>
 			<key>xpos</key>
-			<real>340</real>
+			<real>310</real>
 			<key>ypos</key>
-			<real>890</real>
+			<real>855</real>
 		</dict>
 		<key>F178F3ED-E855-4DC9-A178-D839E9C2C48D</key>
 		<dict>
@@ -1121,9 +1018,9 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>no default branch</string>
 			<key>xpos</key>
-			<real>490</real>
+			<real>460</real>
 			<key>ypos</key>
-			<real>710</real>
+			<real>705</real>
 		</dict>
 		<key>FB617FEA-F94F-4A13-8327-5EC723FD66AB</key>
 		<dict>
@@ -1307,7 +1204,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.9.0</string>
+	<string>2.0.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

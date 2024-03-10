@@ -27,6 +27,8 @@ function readFile(path) {
 function run() {
 	const pluginLocation = $.getenv("plugin_installation_path");
 	const masonLocation = $.getenv("mason_installation_path");
+
+	/** @type {AlfredItem|{}[]} */
 	let pluginArray = [];
 	let masonArray = [];
 
@@ -37,11 +39,10 @@ function run() {
 			)
 			.split("\r")
 			.map((remote) => {
-				const owner = remote.split("/")[3];
-				const name = remote.split("/")[4].slice(0, -4); // remove ".git"
-				const repo = `${owner}/${name}`;
+				const url = remote.replace(/\.git$/, "");
+				const repo = url.replace(/https?:\/\/github.com\//, "");
+				const [owner, name] = repo.split("/");
 				const installPath = $.getenv("plugin_installation_path") + "/" + name;
-				const url = "https://github.com/" + repo;
 
 				return {
 					title: name,
@@ -52,7 +53,6 @@ function run() {
 					mods: {
 						cmd: { arg: repo },
 						fn: { arg: installPath },
-						shift: { arg: "", variables: { repoID: repo } },
 					},
 					uid: repo,
 				};
@@ -62,9 +62,7 @@ function run() {
 		const masonRegistryPath =
 			masonLocation + "/registries/github/mason-org/mason-registry/registry.json";
 		const masonRegistry = JSON.parse(readFile(masonRegistryPath));
-		const installedTools = app
-			.doShellScript(`cd "${masonLocation}/packages" && ls -1`)
-			.split("\r");
+		const installedTools = app.doShellScript(`cd "${masonLocation}/packages" && ls -1`).split("\r");
 		const masonIcon = "./mason-logo.png";
 
 		masonArray = masonRegistry
@@ -94,7 +92,7 @@ function run() {
 	}
 
 	return JSON.stringify({
-		items: [...masonArray, ...pluginArray],
+		items: [...pluginArray, ...masonArray],
 		cache: {
 			seconds: 15, // faster, since installs can change
 			loosereload: true,
