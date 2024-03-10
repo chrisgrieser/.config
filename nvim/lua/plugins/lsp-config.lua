@@ -217,7 +217,6 @@ serverConfigs.jsonls = {
 		provideFormatter = false,
 		documentRangeFormattingProvider = false,
 	},
-	on_attach = function(client) client.server_capabilities.documentLinkProvider = true end,
 }
 
 -- DOCS https://github.com/redhat-developer/yaml-language-server/tree/main#language-server-settings
@@ -235,7 +234,6 @@ serverConfigs.yamlls = {
 	-- Probably fixed with nvim 0.10 supporting dynamic config changes
 	on_attach = function(client)
 		client.server_capabilities.documentFormattingProvider = true
-		client.server_capabilities.documentLinkProvider = true
 	end,
 }
 
