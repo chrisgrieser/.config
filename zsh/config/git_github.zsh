@@ -54,18 +54,23 @@ function ga {
 		return 0
 	fi
 
+	local dir="$PWD"
+	cd "$(git rev-parse --show-toplevel)" || return 1
+
+	local git_status_cmd="git -c core.quotePath=false -c status.color=always status --short --untracked-files"
 	local check_staged='if git diff --cached --name-only | grep -q "^"{2..}"$" ; '
 	local add_or_unadd='then git restore --stage -- {2..} ; else git add -- {2..} ; fi'
 	local file_diff='{ git diff --color=always -- {2..} ; git diff --staged --color=always -- {2..} }'
 	local style
 	style=$(defaults read -g AppleInterfaceStyle &>/dev/null && echo --dark || echo --light)
 	selection=$(
-		git -c core.quotePath=false -c status.color=always status --short --untracked-files | fzf \
+		eval "$git_status_cmd" | fzf \
 			--ansi --nth=2.. --track \
 			--preview="$file_diff | delta $style --file-style=omit" \
-			--bind="enter:reload($check_staged $add_or_unadd ; git -c core.quotePath=false -c status.color=always status --short --untracked-files)"
+			--bind="enter:reload($check_staged $add_or_unadd ; $git_status_cmd)"
 	)
-	return 0 # prevent exiting 130
+	cd "$dir" || return 1
+	return 0 # no exiting 130
 }
 
 # completions for running `ga` with argument
