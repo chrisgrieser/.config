@@ -174,6 +174,12 @@ serverConfigs.tsserver = {
 		diagnostics = { ignoredCodes = { 2451 } },
 
 		typescript = {
+			-- nor supported by vanilla tsserver, consider using typescript tools
+			-- (needed for strict biome config)
+			-- preferences = {
+			-- 	preferTypeOnlyAutoImports = true,
+			-- 	importModuleSpecifierPreference = "relative",
+			-- },
 			inlayHints = {
 				includeInlayEnumMemberValueHints = true,
 				includeInlayFunctionLikeReturnTypeHints = true,
@@ -232,9 +238,7 @@ serverConfigs.yamlls = {
 	},
 	-- SIC needs enabling via setting *and* via capabilities to work.
 	-- Probably fixed with nvim 0.10 supporting dynamic config changes
-	on_attach = function(client)
-		client.server_capabilities.documentFormattingProvider = true
-	end,
+	on_attach = function(client) client.server_capabilities.documentFormattingProvider = true end,
 }
 
 --------------------------------------------------------------------------------
