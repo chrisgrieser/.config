@@ -69,6 +69,8 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>sourceoutputuid</key>
+				<string>0FC40472-5309-400D-937A-A779E5B73B20</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -91,8 +93,6 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
-				<key>sourceoutputuid</key>
-				<string>0FC40472-5309-400D-937A-A779E5B73B20</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -791,7 +791,7 @@
 				<array>
 					<dict>
 						<key>inputstring</key>
-						<string>{var:noRemindersNow}</string>
+						<string>{var:remindersLeftNow}</string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
@@ -799,13 +799,13 @@
 						<key>matchstring</key>
 						<string>true</string>
 						<key>outputlabel</key>
-						<string>no-tasks-left</string>
+						<string>tasks-left-today</string>
 						<key>uid</key>
 						<string>0FC40472-5309-400D-937A-A779E5B73B20</string>
 					</dict>
 				</array>
 				<key>elselabel</key>
-				<string>tasks-left-today</string>
+				<string>no-tasks-left</string>
 				<key>hideelse</key>
 				<false/>
 			</dict>
@@ -1302,7 +1302,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>545</real>
+			<real>505</real>
 			<key>ypos</key>
 			<real>300</real>
 		</dict>

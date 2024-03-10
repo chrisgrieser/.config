@@ -51,6 +51,7 @@ function run() {
 				mode: isCompleted ? "uncomplete" : "complete",
 				notificationTitle: isCompleted ? "🔲 Uncompleted" : "☑️ Completed",
 				remindersLeftLater: responseJson.length - 1, // for deciding whether to loop back
+				remindersLeftNow: "true",
 			},
 			// copy via cmd+c
 			text: { copy: content },
@@ -86,7 +87,7 @@ function run() {
 					title: "No reminders for today.",
 					subtitle: "⏎: Show completed tasks.",
 					variables: {
-						noRemindersNow: "true",
+						remindersLeftNow: "false",
 						showCompleted: "true",
 					},
 					mods: { cmd: invalid, shift: invalid, alt: invalid },
