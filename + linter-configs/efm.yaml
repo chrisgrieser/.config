@@ -35,8 +35,9 @@ tools:
 
   actionlint: &actionlint
     lint-source: actionlint
+    # conditional ensures that issue templates are not linted
     lint-command: >-
-      [[ ${INPUT} ~= "ISSUE_TEMPLATE" ]] || actionlint -no-color -oneline -stdin-filename ${INPUT} -
+      [[ ${INPUT} =~ ".github/workflows/" ]] && actionlint -no-color -oneline -stdin-filename ${INPUT} -
     lint-stdin: true
     lint-formats:
       # actionlint integrates shellcheck, which are the first three

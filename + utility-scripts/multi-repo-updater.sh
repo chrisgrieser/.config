@@ -13,6 +13,8 @@ commit_msg="build: improved release action"
 
 function replacements_todo {
 	echo "placeholder"
+	# rm -v ./.github/workflows/build-and-release.yml
+	# cp -v "$WD/alfred-workflow-release.yml" ./.github/workflows
 }
 
 #───────────────────────────────────────────────────────────────────────────────

@@ -2,12 +2,12 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
+//──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} str */
 function alfredMatcher(str) {
-	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
 	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
-	return [clean, camelCaseSeparated, str].join(" ") + " ";
+	return [camelCaseSeparated, str].join(" ") + " ";
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -21,31 +21,35 @@ function run() {
 
 	const workArray = JSON.parse(app.doShellScript(`curl -sL "${docsUrl}"`)).tree.map(
 		(/** @type {{ path: string; }} */ entry) => {
+			const path = entry.path;
 			// GUARD
-			const translatedDocs = entry.path.includes("/zh-cn/") || entry.path.includes("/ja/");
-			const isDocsSite = docPathRegex.test(entry.path) && !entry.path.endsWith("404.md");
+			const translatedDocs = path.includes("/zh-cn/") || path.includes("/ja/") || path.includes("/pt-br/");
+			const isDocsSite = docPathRegex.test(path) && !path.endsWith("404.md");
 			if (translatedDocs || !isDocsSite) return {};
 
-			const subsite = entry.path.replace(docPathRegex, "$1");
+			const subsite = path.replace(docPathRegex, "$1");
 			const parts = subsite.split("/");
-			let displayTitle = parts.pop();
+			let title = parts.pop() || "??";
 			let category = parts.join("/");
 			let url = `${baseUrl}/${subsite}`;
 
 			if (subsite.endsWith("index")) {
-				displayTitle = category;
+				title = category;
 				category = "";
-				url = `${baseUrl}/${subsite.slice(0, -5)}`;
+				url = `${baseUrl}/${subsite.slice(0, -5)}/`;
 			}
 
-			// prettier display
-			if (!category.endsWith("rules")) {
-				displayTitle = displayTitle.replaceAll("-", " ");
-				displayTitle = displayTitle.charAt(0).toUpperCase() + displayTitle.slice(1); // capitalize
+			if (category.endsWith("rules")) {
+				// camelCase to conform to rule-casing the user expects
+				title = title.replace(/-\w/g, (match) => match.slice(-1).toUpperCase());
+			} else {
+				// capitalize
+				title = title.replaceAll("-", " ");
+				title = title.charAt(0).toUpperCase() + title.slice(1); // capitalize
 			}
 
 			return {
-				title: displayTitle,
+				title: title,
 				subtitle: category,
 				match: alfredMatcher(subsite),
 				arg: url,
