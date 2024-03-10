@@ -2,30 +2,26 @@
 
 baseHelpURL="https://neovim.io/doc/user/"
 baseRawURL="https://raw.githubusercontent.com/neovim/neovim/master/runtime/doc/"
-dataLocation="./data"
 #───────────────────────────────────────────────────────────────────────────────
 
-[[ -d "$dataLocation" ]] || mkdir -p "$dataLocation/neovim-help"
-cd "$dataLocation" || return 1
+workflow_location="$PWD"
+mkdir -p "/tmp/neovim-help"
+cd "/tmp/" || return 1
 
 # DOWNLOAD
-
-echo "Downloading doc files…"
-curl -s 'https://api.github.com/repos/neovim/neovim/git/trees/master?recursive=1' |
+curl -sL 'https://api.github.com/repos/neovim/neovim/git/trees/master?recursive=1' |
 	grep -Eo "runtime/doc/.*.txt" |
 	cut -d/ -f3 |
 	while read -r file; do
 		echo -n "#"
-		curl -s "$baseRawURL$file" >"./neovim-help/$file"
+		curl -sL "$baseRawURL$file" >"./neovim-help/$file"
 	done
 
 #───────────────────────────────────────────────────────────────────────────────
 
 cd "./neovim-help" || return 1
-echo "Parsing doc files…"
 
 # OPTIONS
-echo "Options…"
 vimoptions=$(grep -Eo "\*'[.A-Za-z-]{2,}'\*(.*'.*')?" options.txt |
 	tr -d "*'" |
 	while read -r line; do
@@ -39,7 +35,6 @@ vimoptions=$(grep -Eo "\*'[.A-Za-z-]{2,}'\*(.*'.*')?" options.txt |
 	done)
 
 # ANCHORS
-echo "Anchors…"
 anchors=$(grep -REo "\*([()_.:A-Za-z-]+|[0-9E]+)\*(.*\*.*\*)?" |
 	tr -d "*" |
 	sed 's/txt:/html#/' |
@@ -55,7 +50,6 @@ anchors=$(grep -REo "\*([()_.:A-Za-z-]+|[0-9E]+)\*(.*\*.*\*)?" |
 	done)
 
 # SECTIONS
-echo "Sections…"
 sections=$(grep -Eo "\|[.0-9]*\|.*" usr_toc.txt |
 	tr -d "|" |
 	while read -r line; do
@@ -66,12 +60,9 @@ sections=$(grep -Eo "\|[.0-9]*\|.*" usr_toc.txt |
 
 #───────────────────────────────────────────────────────────────────────────────
 
-echo "Writing Index & cleaning up…"
-cd .. # back to `$dataLocation`
+cd "$workflow_location" || return 1
 
-echo "$vimoptions" >"url-list.txt"
-echo "$anchors" >>"url-list.txt"
-echo "$sections" >>"url-list.txt"
-
-echo "$(wc -l "url-list.txt" | tr -d ' ') entries."
-rm -r "./neovim-help"
+mkdir -p "./data"
+echo "$vimoptions" >"./data/neovim-help-index-urls.txt"
+echo "$anchors" >>"./data/neovim-help-index-urls.txt"
+echo "$sections" >>"./data/neovim-help-index-urls.txt"
