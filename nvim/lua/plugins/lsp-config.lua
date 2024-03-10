@@ -206,11 +206,6 @@ serverConfigs.biome = {
 		client.server_capabilities.documentFormattingProvider = true
 		client.server_capabilities.documentRangeFormattingProvider = true
 	end,
-	-- PENDING https://github.com/neovim/nvim-lspconfig/pull/3061
-	root_dir = function()
-		local root_file = vim.fs.find({ "biome.json", "biome.jsonc" }, { upward = true })[1]
-		return vim.fs.dirname(root_file)
-	end,
 }
 
 --------------------------------------------------------------------------------
