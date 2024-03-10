@@ -47,7 +47,8 @@ function run() {
 				id: externalId,
 				title: title,
 				body: body,
-				isCompleted: isCompleted,
+				mode: isCompleted ? "uncomplete" : "complete",
+				notificationTitle: isCompleted ? "🔲 Uncompleted" : "☑️ Completed",
 				remindersLeft: responseJson.length - 1, // for deciding whether to loop back
 			},
 			text: { copy: content },
