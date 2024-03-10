@@ -3,7 +3,7 @@
 
 # delete existing reminder
 msg=$(reminders delete "$reminder_list" "$id")
-echo "❗ $msg" >&2 # log msg in Alfred console
+echo "$msg" >&2 # log msg in Alfred console
 
 # create new reminder for tomorrow
 # using reminders CLI does not allow for alldayDueDate, therefore using JXA version
