@@ -60,7 +60,6 @@ M.timer_nightlyMaintenance = hs.timer
 				u.notify(msg)
 			end)
 			:start()
-		print("Reminder Backup starting…")
 		M.task_reminderBackup = hs.task
 			.new("./helpers/reminders-bkp.sh", function(exitCode, _, stdErr)
 				local msg = exitCode == 0 and "✅ Reminder Backup successful"

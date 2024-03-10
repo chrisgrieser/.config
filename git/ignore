@@ -17,12 +17,14 @@ Icon
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# Logs
 *.log
 
 # production stuff / builds
 node_modules
 .venv
 __pycache__
+*.pyc
 *.alfredworkflow
 *.dmg
 
