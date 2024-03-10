@@ -101,9 +101,9 @@ function topen { touch "$1" && open "$1"; }
 function hs() {
 	local selected
 	selected=$(
-		fc -rl 1 | cut -c8- | fzf \
+		fc -rl 1 | cut -c8- | command bat --color=always --language=zsh | fzf --ansi \
 			--height=40% --info=inline --multi --query="$1" --scheme=history --bind="change:first" \
-			--expect="ctrl-y"
+			--expect="ctrl-y" --header-first --header="↵ : Put into buffer    ^Y: Copy"
 	)
 	[[ -z "$selected" ]] && return 0
 	key_pressed=$(echo "$selected" | head -n1)

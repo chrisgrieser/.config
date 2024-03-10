@@ -57,9 +57,9 @@ function update() {
 	# mas upgrade
 
 	_print-section "Finish up"
-	# - sketchybar usually updated and then has to be restarted to give permission
-	# - also updates the homebrew status counter
-	brew services restart sketchybar
+	# sketchybar needs restart for new persmission
+	sketchybar_was_updated=$(find "$HOMEBREW_PREFIX/bin/sketchybar" -mtime -1h)
+	[[ -n "$sketchybar_was_updated" ]] && brew services restart sketchybar
 
 	echo
 	_dump
