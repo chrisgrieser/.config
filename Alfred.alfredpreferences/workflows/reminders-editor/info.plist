@@ -177,16 +177,6 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>30829801-BAFD-447E-BA3D-5D6AB864A2F7</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>⌥: Edit Reminder</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>519B050E-E040-4E66-ADFC-D2784865F13B</string>
 				<key>modifiers</key>
 				<integer>262144</integer>
@@ -195,12 +185,35 @@
 				<key>vitoclose</key>
 				<true/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>30829801-BAFD-447E-BA3D-5D6AB864A2F7</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Edit Reminder</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>46B8AE9A-FEEC-4F11-BEEC-1695841A4549</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5E6BB902-56B8-4291-8181-8D015E7F0A0D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>519B050E-E040-4E66-ADFC-D2784865F13B</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>FC529E4D-A763-418C-9FCC-A440C89A1E4B</string>
+				<string>5E6BB902-56B8-4291-8181-8D015E7F0A0D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -316,7 +329,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A78C646D-79C5-477B-965A-11872AC60D39</string>
+				<string>E0980533-D7F3-4E31-94E7-3AF042478577</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -328,7 +341,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E0980533-D7F3-4E31-94E7-3AF042478577</string>
+				<string>A78C646D-79C5-477B-965A-11872AC60D39</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -367,7 +380,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>5E6BB902-56B8-4291-8181-8D015E7F0A0D</string>
+				<string>46B8AE9A-FEEC-4F11-BEEC-1695841A4549</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -456,7 +469,7 @@
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>☑️ Completed</string>
+				<string>{var:notificationTitle}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -519,19 +532,6 @@
 			<string>alfred.workflow.utility.hidealfred</string>
 			<key>uid</key>
 			<string>3D08F342-404B-4C70-8AC6-5473E7CB855B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>unstackview</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.hidealfred</string>
-			<key>uid</key>
-			<string>A78C646D-79C5-477B-965A-11872AC60D39</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -625,6 +625,39 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>seconds</key>
+				<string>.1</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.delay</string>
+			<key>uid</key>
+			<string>E0980533-D7F3-4E31-94E7-3AF042478577</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>show_completed</key>
+					<string>false</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>46B8AE9A-FEEC-4F11-BEEC-1695841A4549</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
@@ -657,25 +690,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>externaltriggerid</key>
-				<string>reminder-today</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>self</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>5E6BB902-56B8-4291-8181-8D015E7F0A0D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
@@ -684,17 +698,17 @@
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
-						<integer>0</integer>
+						<integer>1</integer>
 						<key>matchstring</key>
 						<string>0</string>
 						<key>outputlabel</key>
-						<string>0</string>
+						<string>&gt; 0</string>
 						<key>uid</key>
 						<string>478E95B7-88CA-4DFE-BB8F-2F13E8C97F30</string>
 					</dict>
 				</array>
 				<key>elselabel</key>
-				<string>&gt; 0</string>
+				<string>0</string>
 				<key>hideelse</key>
 				<false/>
 			</dict>
@@ -716,13 +730,52 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>seconds</key>
-				<string>.2</string>
+				<key>unstackview</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.delay</string>
+			<string>alfred.workflow.utility.hidealfred</string>
 			<key>uid</key>
-			<string>E0980533-D7F3-4E31-94E7-3AF042478577</string>
+			<string>A78C646D-79C5-477B-965A-11872AC60D39</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>reminder-today</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>5E6BB902-56B8-4291-8181-8D015E7F0A0D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>show_completed</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>519B050E-E040-4E66-ADFC-D2784865F13B</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -804,6 +857,14 @@
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>0BBC3335-0007-45FE-99A5-9C0E94E3B38C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
 				<key>concurrently</key>
@@ -825,74 +886,6 @@
 			<string>DA53DB8C-C97B-4594-A26E-0875AB96D262</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>0BBC3335-0007-45FE-99A5-9C0E94E3B38C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>externaltriggerid</key>
-				<string>reminder-today</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>self</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>FC529E4D-A763-418C-9FCC-A440C89A1E4B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>show_completed</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>519B050E-E040-4E66-ADFC-D2784865F13B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Added Reminder (today)</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>5FF59D05-FE74-43DD-9589-1CFF471C8A6A</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -928,6 +921,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Added Reminder (today)</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>5FF59D05-FE74-43DD-9589-1CFF471C8A6A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -947,6 +961,27 @@
 			<string>0F93036F-D158-49BB-97AF-DE600B8A3300</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:quickadd_reminder_keyword}</string>
+				<key>subtext</key>
+				<string>today</string>
+				<key>text</key>
+				<string>➕ Add Reminder: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>BD7716E2-05C1-4CD2-9B1C-5FD044289103</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1004,27 +1039,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>{var:quickadd_reminder_keyword}</string>
-				<key>subtext</key>
-				<string>today</string>
-				<key>text</key>
-				<string>➕ Add Reminder: {query}</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>BD7716E2-05C1-4CD2-9B1C-5FD044289103</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -1042,29 +1056,6 @@
 			<string>83927C8F-D55B-4E36-B93D-23927B1808D5</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/add-reminder-at-date.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>CD1F34B1-A599-4F46-928B-198B877B88A8</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1115,6 +1106,29 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/add-reminder-at-date.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>CD1F34B1-A599-4F46-928B-198B877B88A8</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Edit the your tasks from Reminders.app using Alfred 5.5's Text View.
@@ -1133,9 +1147,9 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>630</real>
+			<real>635</real>
 			<key>ypos</key>
-			<real>465</real>
+			<real>580</real>
 		</dict>
 		<key>0F93036F-D158-49BB-97AF-DE600B8A3300</key>
 		<dict>
@@ -1164,36 +1178,36 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>Toggle completed status</string>
 			<key>xpos</key>
-			<real>725</real>
+			<real>710</real>
 			<key>ypos</key>
-			<real>190</real>
+			<real>140</real>
 		</dict>
 		<key>233B90F3-D8E0-48FC-A81A-89764B3AAC09</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>865</real>
+			<real>870</real>
 			<key>ypos</key>
-			<real>385</real>
+			<real>500</real>
 		</dict>
 		<key>23ED3685-8AA0-4314-A16F-F7D8A0D01A70</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>510</real>
+			<real>530</real>
 			<key>ypos</key>
-			<real>190</real>
+			<real>140</real>
 		</dict>
 		<key>30829801-BAFD-447E-BA3D-5D6AB864A2F7</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>465</real>
+			<real>470</real>
 			<key>ypos</key>
-			<real>385</real>
+			<real>500</real>
 		</dict>
 		<key>3C4A820D-7CF3-4098-9406-6DD4CA028F3D</key>
 		<dict>
@@ -1233,25 +1247,36 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>280</real>
 		</dict>
+		<key>46B8AE9A-FEEC-4F11-BEEC-1695841A4549</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>enable showCompleted</string>
+			<key>xpos</key>
+			<real>880</real>
+			<key>ypos</key>
+			<real>285</real>
+		</dict>
 		<key>519B050E-E040-4E66-ADFC-D2784865F13B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>toggle var</string>
+			<string>toggle showCompleted</string>
 			<key>xpos</key>
-			<real>425</real>
+			<real>505</real>
 			<key>ypos</key>
-			<real>595</real>
+			<real>395</real>
 		</dict>
 		<key>5E6BB902-56B8-4291-8181-8D015E7F0A0D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>1185</real>
+			<real>1145</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>370</real>
 		</dict>
 		<key>5FF59D05-FE74-43DD-9589-1CFF471C8A6A</key>
 		<dict>
@@ -1271,16 +1296,16 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>665</real>
+			<real>610</real>
 		</dict>
 		<key>6DBE7C33-DE4C-4B1D-8831-E8F02E6FB3D6</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>875</real>
+			<real>935</real>
 			<key>ypos</key>
-			<real>140</real>
+			<real>130</real>
 		</dict>
 		<key>76767F1C-52B8-425C-8621-F7E67C523434</key>
 		<dict>
@@ -1309,34 +1334,34 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>970</real>
+			<real>890</real>
 		</dict>
 		<key>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>875</real>
+			<real>935</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
 		<key>A78C646D-79C5-477B-965A-11872AC60D39</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>11</integer>
+			<integer>7</integer>
 			<key>xpos</key>
-			<real>1135</real>
+			<real>795</real>
 			<key>ypos</key>
-			<real>235</real>
+			<real>335</real>
 		</dict>
 		<key>AC986ADB-B43D-4F75-BFCB-7C27B55C983B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>650</real>
+			<real>600</real>
 			<key>ypos</key>
-			<real>305</real>
+			<real>310</real>
 		</dict>
 		<key>AE66EC2F-3383-4BB5-8AB3-0C28C6ACCC11</key>
 		<dict>
@@ -1345,20 +1370,20 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>edit reminder</string>
 			<key>xpos</key>
-			<real>710</real>
+			<real>715</real>
 			<key>ypos</key>
-			<real>385</real>
+			<real>500</real>
 		</dict>
 		<key>B1F02C82-A01B-454C-BA1C-075E68FEB824</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>11</integer>
+			<integer>7</integer>
 			<key>note</key>
 			<string>reminders left</string>
 			<key>xpos</key>
-			<real>1052</real>
+			<real>707</real>
 			<key>ypos</key>
-			<real>295</real>
+			<real>300</real>
 		</dict>
 		<key>BD7716E2-05C1-4CD2-9B1C-5FD044289103</key>
 		<dict>
@@ -1369,7 +1394,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>815</real>
+			<real>755</real>
 		</dict>
 		<key>CD1F34B1-A599-4F46-928B-198B877B88A8</key>
 		<dict>
@@ -1389,18 +1414,18 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>update sketchybar reminders count</string>
 			<key>xpos</key>
-			<real>1185</real>
+			<real>1145</real>
 			<key>ypos</key>
-			<real>425</real>
+			<real>605</real>
 		</dict>
 		<key>E0980533-D7F3-4E31-94E7-3AF042478577</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>11</integer>
+			<integer>7</integer>
 			<key>xpos</key>
-			<real>1125</real>
+			<real>795</real>
 			<key>ypos</key>
-			<real>320</real>
+			<real>285</real>
 		</dict>
 		<key>E9FBABB7-D7D0-4EF6-A0F8-BC9B2124CB77</key>
 		<dict>
@@ -1412,15 +1437,6 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>375</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>FC529E4D-A763-418C-9FCC-A440C89A1E4B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>495</real>
-			<key>ypos</key>
-			<real>565</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

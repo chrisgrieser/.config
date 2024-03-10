@@ -171,13 +171,13 @@ return {
 		{ "sY", "sy$", desc = "󰅪 Sort to EoL", remap = true },
 	},
 	opts = {
-		replace = { prefix = "", reindent_linewise = true }, -- substitute
+		replace = { prefix = "", reindent_linewise = false }, -- substitute
 		multiply = { prefix = "w" }, -- duplicate
-		exchange = { prefix = "sx", reindent_linewise = true },
+		exchange = { prefix = "sx", reindent_linewise = false },
 		sort = { prefix = "sy" },
 		evaluate = { prefix = "#", func = luaEval },
 	},
-	init = function ()
+	init = function()
 		-- in `init`, so autocmds are set up before the plugin is loaded
 		filetypeSpecificMultiply()
 		filetypeSpecificEval()
