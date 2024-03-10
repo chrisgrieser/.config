@@ -540,13 +540,15 @@ rules:
         from: { key_code: z } # y = z in German Keyboard
         to_if_alone:
           - { key_code: c, modifiers: [command] }
-          - shell_command: osascript -e 'display notification "✅ File(s) copied" with title "Finder Vim Mode"'
+          - shell_command:
+              osascript -e 'display notification "✅ File(s) copied" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *is-German-keyboard]
       - type: basic
         from: { key_code: "y" }
         to:
           - { key_code: c, modifiers: [command] }
-          - shell_command: osascript -e 'display notification "✅ File(s) copied" with title "Finder Vim Mode"'
+          - shell_command:
+              osascript -e 'display notification "✅ File(s) copied" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *not-German-keyboard]
       # Y = yank (copy) file *content*
       - type: basic
@@ -865,14 +867,16 @@ rules:
         to_if_alone:
           - key_code: left_arrow
           - shell_command: afplay
-              "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_mute.caf" & # codespell-ignore
+              "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_mute.caf"
+              & # codespell-ignore
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: c, modifiers: { mandatory: [shift] } }
         to_if_alone:
           - { key_code: left_arrow, modifiers: [option] }
           - shell_command: afplay
-              "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_mute.caf" & # codespell-ignore
+              "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_mute.caf"
+              & # codespell-ignore
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # <C-h> = History Back
       - type: basic
@@ -1124,7 +1128,8 @@ rules:
             modifiers: [command]
           - *end-move
           - *remove-move-notice
-          - shell_command: osascript -e 'display notification "✅ File(s) copied" with title "Finder Vim Mode"'
+          - shell_command:
+              osascript -e 'display notification "✅ File(s) copied" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *move-active, *not-German-keyboard]
       - type: basic
         from: { key_code: z } # y and z switched on German keyboard
@@ -1284,7 +1289,8 @@ rules:
         from: { key_code: p, modifiers: { mandatory: [control] } }
         to:
           - { key_code: "c", modifiers: [option, command] }
-          - shell_command: osascript -e 'display notification "✅ Filepath copied" with title "Finder Vim Mode"'
+          - shell_command:
+              osascript -e 'display notification "✅ Filepath copied" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # ctrl-n: copy filename
       - type: basic
@@ -1293,7 +1299,8 @@ rules:
           - key_code: return_or_enter
           - { key_code: "c", modifiers: [command] }
           - key_code: escape
-          - shell_command: osascript -e 'display notification "✅ Filename copied" with title "Finder Vim Mode"'
+          - shell_command:
+              osascript -e 'display notification "✅ Filename copied" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # ctrl-g: open at github
       - type: basic

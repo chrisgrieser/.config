@@ -66,9 +66,6 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-		</array>
-		<key>9C73225B-1D01-43D2-8072-FD5B2B517112</key>
-		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>34F19C54-7DC2-42F1-A9AE-00DD0B1500BD</string>
@@ -80,6 +77,8 @@
 				<false/>
 			</dict>
 		</array>
+		<key>9C73225B-1D01-43D2-8072-FD5B2B517112</key>
+		<array/>
 		<key>AA64FF24-5662-41EE-82E9-FE2C6C17CB33</key>
 		<array>
 			<dict>
@@ -90,7 +89,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 	</dict>
@@ -189,27 +188,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>✅ Meme copied to clipboard</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>34F19C54-7DC2-42F1-A9AE-00DD0B1500BD</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>columncount</key>
 				<integer>4</integer>
 				<key>filterable</key>
@@ -240,6 +218,27 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<true/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<true/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Meme copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>34F19C54-7DC2-42F1-A9AE-00DD0B1500BD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>---
@@ -250,9 +249,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>34F19C54-7DC2-42F1-A9AE-00DD0B1500BD</key>
 		<dict>
 			<key>xpos</key>
-			<real>895</real>
+			<real>810</real>
 			<key>ypos</key>
-			<real>195</real>
+			<real>330</real>
 		</dict>
 		<key>5B12407A-89B9-4C89-ADDD-D98F9E818361</key>
 		<dict>
@@ -264,9 +263,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>771F46DF-C1A0-4933-842D-9FD63DB0D1B0</key>
 		<dict>
 			<key>xpos</key>
-			<real>730</real>
+			<real>805</real>
 			<key>ypos</key>
-			<real>30</real>
+			<real>50</real>
 		</dict>
 		<key>80009692-2016-4BC7-8950-0B9A68D3BC11</key>
 		<dict>
@@ -285,7 +284,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>9C73225B-1D01-43D2-8072-FD5B2B517112</key>
 		<dict>
 			<key>xpos</key>
-			<real>735</real>
+			<real>805</real>
 			<key>ypos</key>
 			<real>195</real>
 		</dict>

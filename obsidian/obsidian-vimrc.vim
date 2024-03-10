@@ -420,7 +420,7 @@ nnoremap zr :unfoldall
 exmap spellcheck obcommand editor:toggle-spellcheck
 nnoremap ,os :spellcheck
 
-exmap toggleAiCompletion obcommand obsidian-textgenerator-plugin:auto-suggest
+exmap toggleAiCompletion obcommand copilot-auto-completion:toggle
 nnoremap ,oa :toggleAiCompletion
 
 " [O]ption: [d]iagnostics
@@ -429,3 +429,6 @@ nnoremap ,od :enableDiagnostics
 
 exmap disableDiagnostics obcommand obsidian-languagetool-plugin:ltclear
 nnoremap ,oD :disableDiagnostics
+
+
+"───────────────────────────────────────────────────────────────────────────────
