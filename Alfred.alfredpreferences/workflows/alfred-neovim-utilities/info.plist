@@ -46,7 +46,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Open :help at GitHub</string>
+				<string>⌘: Open the :help in the browser (vimdoc converted to html)</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -168,7 +168,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Open :help at GitHub</string>
+				<string>⌘: Open the :help in the browser (vimdoc converted to html)</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -827,21 +827,6 @@ end run</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>D818D50E-55A9-45FB-AC92-10FCF4BC8B60</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -888,6 +873,21 @@ end run</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>D818D50E-55A9-45FB-AC92-10FCF4BC8B60</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Setup
@@ -899,7 +899,7 @@ Run `:nvim` once to create the local cache for the `:h` search.
 	- &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the help URL to the clipboard.
 - `vp`: Searches [neovimcraft](https://neovimcraft.com/) for neovim plugins. Mnemonic: `[v]im [p]lugins`.
 	- &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the GitHub repo.
-	- &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the `:help` page of the plugin at GitHub.
+	- &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the `:help` in the browser (vimdoc converted to html).
 	- &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the GitHub URL to the clipboard.
 	- &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Search GitHub issues of the plugin.
 - `mason`: Search for tools available via [mason.nvim](https://github.com/williamboman/mason.nvim).
@@ -913,7 +913,9 @@ Run `:nvim` once to create the local cache for the `:h` search.
 
 ---
 
-Created by [Chris Grieser](https://chris-grieser.de/).</string>
+Vimdoc to html conversion by [xaizek](https://github.com/xaizek/vimdoc2html).
+
+Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>02026FD8-1825-41C8-96F3-25FA1235B8B7</key>
@@ -1101,7 +1103,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>340</real>
 			<key>ypos</key>
-			<real>885</real>
+			<real>890</real>
 		</dict>
 		<key>F178F3ED-E855-4DC9-A178-D839E9C2C48D</key>
 		<dict>
