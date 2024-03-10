@@ -65,8 +65,8 @@ function s {
 		rg "$input" --color=always --colors=path:fg:blue --no-messages --line-number --trim \
 			--no-config --ignore-file="$HOME/.config/fd/ignore" |
 			fzf --ansi --preview-window="65%" \
-				--delimiter=":" --nth=1,3 \
-				--preview 'bat {1} --color=always --style=header --highlight-line={2} --line-range={2}: --wrap=never' \
+				--delimiter=":" --nth=1,3 --with-nth=1,2 \
+				--preview 'bat {1} --color=always --style=header,numbers --highlight-line={2} --line-range={2}: ' \
 				--height="100%" #required for wezterm's `pane:is_alt_screen_active()`
 	)
 	[[ -z "$selected" ]] && return 0 # aborted
