@@ -1,10 +1,10 @@
 #!/usr/bin/env osascript -l JavaScript
-
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
+//──────────────────────────────────────────────────────────────────────────────
 
-const onlineJSON = (/** @type {string} */ url) => JSON.parse(app.doShellScript(`curl -s "${url}"`));
+const onlineJSON = (/** @type {string} */ url) => JSON.parse(app.doShellScript(`curl -sL "${url}"`));
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -38,4 +38,5 @@ function run(argv) {
 	const firstDocfile = docFiles[0].path
 	const docURL = `https://github.com/${repo}/blob/${branch}/${firstDocfile}`;
 	app.openLocation(docURL);
+	return ""
 }

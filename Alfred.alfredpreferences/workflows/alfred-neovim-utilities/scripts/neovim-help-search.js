@@ -19,15 +19,29 @@ function readFile(path) {
 	return ObjC.unwrap(str);
 }
 
+/** @param {string} path */
+function cacheIsOutdated(path) {
+	const cacheObj = Application("System Events").aliases[path];
+	if (!cacheObj.exists()) return true;
+	const cacheAgeMonths = (+new Date() - cacheObj.creationDate()) / 1000 / 60 / 60 / 24 / 30;
+	return cacheAgeMonths > 12;
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const cacheFile = $.getenv("alfred_workflow_data") + "/url-list.txt";
+	const cacheFile = "./data/url-list.txt";
+
 	// GUARD
 	if (!fileExists(cacheFile)) {
 		return JSON.stringify({
 			items: [{ title: "Index missing. Create via ':nvim'", valid: false }],
+		});
+	}
+	if (cacheIsOutdated(cacheFile)) {
+		return JSON.stringify({
+			items: [{ title: "Index outdated. Update via ':nvim'", valid: false }],
 		});
 	}
 

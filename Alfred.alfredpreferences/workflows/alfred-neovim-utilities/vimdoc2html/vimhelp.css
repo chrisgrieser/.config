@@ -1,0 +1,52 @@
+// Based on https://github.com/c4rlo/vimhelp/blob/master/static/vimhelp.css
+// by Carlo Teubner <(first name) dot (last name) at gmail dot com>.
+
+body { font-family: georgia, palatino, serif }
+
+pre { font-size: 11pt }
+
+#d1 { position: relative; display: table; margin: 0 auto }
+#d2 { position: absolute; top: inherit }
+
+#sp { visibility: hidden; height: 1px; margin: 0 }
+
+#footer { font-size: 85%; padding-top: 1em }
+
+/* hidden links */
+a.d:link, a.d:visited { color: rgb(0,0,0); text-decoration: none; }
+a.d:active, a.d:hover { color: rgb(0,0,0); text-decoration: underline; }
+
+/* standard links */
+a.l:link { color: rgb(0,137,139); }
+a.l:visited { color: rgb(0,100,100); }
+a.l:active, a.l:hover { color: rgb(0,200,200); }
+
+/* title */
+.i { color: rgb(0, 137, 139); }
+
+/* tag */
+.t { color: rgb(250,0,250); }
+
+/* header */
+.h { color: rgb(164, 32, 246); }
+
+/* keystroke */
+.k { color: rgb(106, 89, 205); }
+
+/* example */
+.e { color: rgb(0, 0, 255); }
+
+/* special (used for various) */
+.s { color: rgb(106, 89, 205); }
+
+/* note */
+.n { color: blue; background-color: yellow; }
+
+/* option */
+.o { color: rgb(46, 139, 87); font-weight: bold; }
+
+/* section */
+.c { color: rgb(165, 42, 42); font-weight: bold; }
+
+/* external url */
+.u { color: rgb(250,0,250); }
