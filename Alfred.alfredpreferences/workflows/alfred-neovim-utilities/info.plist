@@ -91,7 +91,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E9F4076D-8FEE-46EB-A3B8-3BEBFFE07559</string>
+				<string>8A1F6028-B56D-4223-8008-F364B73183A5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -242,6 +242,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>8D7A806A-C89F-4527-87FB-F6D2B578A43A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>02026FD8-1825-41C8-96F3-25FA1235B8B7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>C906BF1E-7CF4-4407-9B97-53532876DCC0</key>
 		<array>
 			<dict>
@@ -267,19 +280,6 @@
 		</array>
 		<key>D818D50E-55A9-45FB-AC92-10FCF4BC8B60</key>
 		<array/>
-		<key>E9F4076D-8FEE-46EB-A3B8-3BEBFFE07559</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>8A1F6028-B56D-4223-8008-F364B73183A5</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>F178F3ED-E855-4DC9-A178-D839E9C2C48D</key>
 		<array/>
 		<key>F5BC25CE-C34C-4EF9-B428-71EDB9170948</key>
@@ -295,75 +295,6 @@
 	<string>Neovim Utilities</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/neovim-docs-index-creation.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>22C3A292-BE41-47F8-9B47-543D7C9E4AC1</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>:nvim</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Re-Create Neovim :help Index</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>71D977C5-6C8A-47D2-A625-4E3E79D785D2</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>on run 
-	tell application id "com.runningwithcrayons.Alfred" to reload workflow (system attribute "alfred_workflow_bundleid") 
-end run</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>E9F4076D-8FEE-46EB-A3B8-3BEBFFE07559</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -433,6 +364,75 @@ end run</string>
 			<string>FB617FEA-F94F-4A13-8327-5EC723FD66AB</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<true/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/neovim-docs-index-creation.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>22C3A292-BE41-47F8-9B47-543D7C9E4AC1</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>:nvim</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Re-Create Neovim :help Index</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>71D977C5-6C8A-47D2-A625-4E3E79D785D2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>on run 
+	tell application id "com.runningwithcrayons.Alfred" to reload workflow (system attribute "alfred_workflow_bundleid") 
+end run</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>02026FD8-1825-41C8-96F3-25FA1235B8B7</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -520,7 +520,7 @@ end run</string>
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string>This may take up to a minute.</string>
+				<string>This may take a few minutes</string>
 				<key>title</key>
 				<string>⏳Re-Creating Index</string>
 			</dict>
@@ -916,6 +916,18 @@ Run `:nvim` once to create the local cache for the `:h` search.
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>02026FD8-1825-41C8-96F3-25FA1235B8B7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>note</key>
+			<string>reload workflow cache
+(has to come last, otherwise it interferes with this workflow itself)</string>
+			<key>xpos</key>
+			<real>1170</real>
+			<key>ypos</key>
+			<real>40</real>
+		</dict>
 		<key>02145BDB-6F80-437E-A4FE-880FDA77AC47</key>
 		<dict>
 			<key>colorindex</key>
@@ -956,7 +968,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>720</real>
 			<key>ypos</key>
-			<real>20</real>
+			<real>40</real>
 		</dict>
 		<key>26EB4BCF-56A8-43E4-AED6-0C121B00D55E</key>
 		<dict>
@@ -1018,7 +1030,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>560</real>
 			<key>ypos</key>
-			<real>20</real>
+			<real>40</real>
 		</dict>
 		<key>79F25308-2C64-400B-AC1D-C1FD5FC840DF</key>
 		<dict>
@@ -1038,25 +1050,25 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>725</real>
 			<key>ypos</key>
-			<real>165</real>
+			<real>185</real>
 		</dict>
 		<key>8A1F6028-B56D-4223-8008-F364B73183A5</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>1005</real>
+			<real>875</real>
 			<key>ypos</key>
-			<real>20</real>
+			<real>40</real>
 		</dict>
 		<key>8D7A806A-C89F-4527-87FB-F6D2B578A43A</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>1145</real>
+			<real>1025</real>
 			<key>ypos</key>
-			<real>20</real>
+			<real>40</real>
 		</dict>
 		<key>C906BF1E-7CF4-4407-9B97-53532876DCC0</key>
 		<dict>
@@ -1090,17 +1102,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>340</real>
 			<key>ypos</key>
 			<real>885</real>
-		</dict>
-		<key>E9F4076D-8FEE-46EB-A3B8-3BEBFFE07559</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>note</key>
-			<string>Reload Workflow Cache</string>
-			<key>xpos</key>
-			<real>860</real>
-			<key>ypos</key>
-			<real>20</real>
 		</dict>
 		<key>F178F3ED-E855-4DC9-A178-D839E9C2C48D</key>
 		<dict>

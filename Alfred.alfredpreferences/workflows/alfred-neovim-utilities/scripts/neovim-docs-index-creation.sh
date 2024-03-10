@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+# shellcheck disable=2154
 
 baseHelpURL="https://neovim.io/doc/user/"
 baseRawURL="https://raw.githubusercontent.com/neovim/neovim/master/runtime/doc/"
@@ -9,6 +10,7 @@ mkdir -p "/tmp/neovim-help"
 cd "/tmp/" || return 1
 
 # DOWNLOAD
+# echo "Downloading…" >&2
 curl -sL 'https://api.github.com/repos/neovim/neovim/git/trees/master?recursive=1' |
 	grep -Eo "runtime/doc/.*.txt" |
 	cut -d/ -f3 |
@@ -22,6 +24,7 @@ curl -sL 'https://api.github.com/repos/neovim/neovim/git/trees/master?recursive=
 cd "./neovim-help" || return 1
 
 # OPTIONS
+echo "Options…" >&2
 vimoptions=$(grep -Eo "\*'[.A-Za-z-]{2,}'\*(.*'.*')?" options.txt |
 	tr -d "*'" |
 	while read -r line; do
@@ -35,6 +38,7 @@ vimoptions=$(grep -Eo "\*'[.A-Za-z-]{2,}'\*(.*'.*')?" options.txt |
 	done)
 
 # ANCHORS
+echo "Anchors…" >&2
 anchors=$(grep -REo "\*([()_.:A-Za-z-]+|[0-9E]+)\*(.*\*.*\*)?" |
 	tr -d "*" |
 	sed 's/txt:/html#/' |
@@ -50,6 +54,7 @@ anchors=$(grep -REo "\*([()_.:A-Za-z-]+|[0-9E]+)\*(.*\*.*\*)?" |
 	done)
 
 # SECTIONS
+echo "Sections…" >&2
 sections=$(grep -Eo "\|[.0-9]*\|.*" usr_toc.txt |
 	tr -d "|" |
 	while read -r line; do
@@ -62,6 +67,7 @@ sections=$(grep -Eo "\|[.0-9]*\|.*" usr_toc.txt |
 
 cd "$workflow_location" || return 1
 
+echo "Writing index…" >&2
 mkdir -p "./data"
 echo "$vimoptions" >"./data/neovim-help-index-urls.txt"
 echo "$anchors" >>"./data/neovim-help-index-urls.txt"
