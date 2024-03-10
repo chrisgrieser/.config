@@ -20,7 +20,7 @@ function run() {
 	const urlRegex =
 		/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
 	const showCompleted =
-		$.NSProcessInfo.processInfo.environment.objectForKey("show_completed").js === "true";
+		$.NSProcessInfo.processInfo.environment.objectForKey("showCompleted").js === "true";
 
 	// run cmd
 	const completedArg = showCompleted ? "--include-completed" : "";
@@ -36,7 +36,8 @@ function run() {
 		const content = title + "\n" + body;
 
 		const [url] = content.match(urlRegex) || [];
-		const urlSubtitle = url ? "⌘: Open URL and mark as complete" : "⌘: ⛔ No URL";
+		let urlSubtitle = url ? "⌘: Open URL" : "⌘: ⛔ No URL";
+		if (url && !isCompleted) urlSubtitle += " and mark as completed";
 		const emoji = isCompleted ? "☑️ " : "";
 
 		/** @type {AlfredItem} */
@@ -49,20 +50,27 @@ function run() {
 				body: body,
 				mode: isCompleted ? "uncomplete" : "complete",
 				notificationTitle: isCompleted ? "🔲 Uncompleted" : "☑️ Completed",
-				remindersLeft: responseJson.length - 1, // for deciding whether to loop back
+				remindersLeftLater: responseJson.length - 1, // for deciding whether to loop back
 			},
+			// copy via cmd+c
 			text: { copy: content },
 			mods: {
+				// open URL
 				cmd: {
-					// open URL
 					arg: url,
 					subtitle: urlSubtitle,
 					valid: Boolean(url),
+					variables: {
+						isCompleted: isCompleted ? "true" : "false",
+					},
 				},
-				alt: { arg: content }, // edit content
+				// edit content
+				alt: { arg: content },
+				// toggle completed
 				ctrl: {
-					// toggle completed
-					arg: showCompleted ? "false" : "true",
+					variables: {
+						showCompleted: showCompleted ? "false" : "true",
+					},
 				},
 			},
 		};
@@ -71,15 +79,17 @@ function run() {
 
 	// GUARD
 	if (reminders.length === 0) {
+		const invalid = { valid: false, subtitle: "⛔ No reminders" };
 		return JSON.stringify({
 			items: [
 				{
 					title: "No reminders for today.",
 					subtitle: "⏎: Show completed tasks.",
 					variables: {
-						tasksLeft: "false",
+						noRemindersNow: "true",
 						showCompleted: "true",
 					},
+					mods: { cmd: invalid, shift: invalid, alt: invalid },
 				},
 			],
 		});
