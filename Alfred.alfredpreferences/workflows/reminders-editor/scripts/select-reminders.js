@@ -11,7 +11,7 @@ app.includeStandardAdditions = true;
  * @property {boolean} isCompleted
  */
 
- //───────────────────────────────────────────────────────────────────────────
+//───────────────────────────────────────────────────────────────────────────
 
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
@@ -71,7 +71,18 @@ function run() {
 
 	// GUARD
 	if (reminders.length === 0) {
-		return JSON.stringify({ items: [{ title: "No reminders for today.", valid: false }] });
+		return JSON.stringify({
+			items: [
+				{
+					title: "No reminders for today.",
+					subtitle: "⏎: Show completed tasks.",
+					variables: {
+						tasksLeft: "false",
+						showCompleted: "true",
+					},
+				},
+			],
+		});
 	}
 
 	return JSON.stringify({ items: reminders });

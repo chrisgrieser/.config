@@ -70,6 +70,33 @@
 				<false/>
 			</dict>
 		</array>
+		<key>24171BD8-30B6-4DB8-B641-21B03AAE49EA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1F28B1D0-95DD-4F7F-BB2A-018A98C5743B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>0FC40472-5309-400D-937A-A779E5B73B20</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>B1F02C82-A01B-454C-BA1C-075E68FEB824</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>0FC40472-5309-400D-937A-A779E5B73B20</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>30829801-BAFD-447E-BA3D-5D6AB864A2F7</key>
 		<array>
 			<dict>
@@ -167,13 +194,13 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>AC986ADB-B43D-4F75-BFCB-7C27B55C983B</string>
+				<string>24171BD8-30B6-4DB8-B641-21B03AAE49EA</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<true/>
+				<false/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -281,29 +308,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>CD1F34B1-A599-4F46-928B-198B877B88A8</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>AC986ADB-B43D-4F75-BFCB-7C27B55C983B</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>1F28B1D0-95DD-4F7F-BB2A-018A98C5743B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>B1F02C82-A01B-454C-BA1C-075E68FEB824</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -625,6 +629,38 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:focusedapp}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>com.runningwithcrayons.Alfred</string>
+						<key>outputlabel</key>
+						<string>Alfred</string>
+						<key>uid</key>
+						<string>5EA9009D-31E5-463D-8A4D-86312F760D0C</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>other</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>3D40B34B-8C4C-4C22-B14E-BC5D7B92F072</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>seconds</key>
 				<string>.1</string>
 			</dict>
@@ -662,38 +698,6 @@
 				<array>
 					<dict>
 						<key>inputstring</key>
-						<string>{var:focusedapp}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>com.runningwithcrayons.Alfred</string>
-						<key>outputlabel</key>
-						<string>Alfred</string>
-						<key>uid</key>
-						<string>5EA9009D-31E5-463D-8A4D-86312F760D0C</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>other</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>3D40B34B-8C4C-4C22-B14E-BC5D7B92F072</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
 						<string>{var:remindersLeft}</string>
 						<key>matchcasesensitive</key>
 						<false/>
@@ -720,10 +724,34 @@
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:tasksLeft}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>1</integer>
+						<key>matchstring</key>
+						<string>false</string>
+						<key>outputlabel</key>
+						<string>tasks-left-today</string>
+						<key>uid</key>
+						<string>0FC40472-5309-400D-937A-A779E5B73B20</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>no-tasks-left</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
+			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>AC986ADB-B43D-4F75-BFCB-7C27B55C983B</string>
+			<string>24171BD8-30B6-4DB8-B641-21B03AAE49EA</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1200,6 +1228,15 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>140</real>
 		</dict>
+		<key>24171BD8-30B6-4DB8-B641-21B03AAE49EA</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>515</real>
+			<key>ypos</key>
+			<real>325</real>
+		</dict>
 		<key>30829801-BAFD-447E-BA3D-5D6AB864A2F7</key>
 		<dict>
 			<key>colorindex</key>
@@ -1252,11 +1289,11 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>enable showCompleted</string>
+			<string>disable showCompleted</string>
 			<key>xpos</key>
 			<real>880</real>
 			<key>ypos</key>
-			<real>285</real>
+			<real>290</real>
 		</dict>
 		<key>519B050E-E040-4E66-ADFC-D2784865F13B</key>
 		<dict>
@@ -1265,9 +1302,9 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>toggle showCompleted</string>
 			<key>xpos</key>
-			<real>505</real>
+			<real>555</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>425</real>
 		</dict>
 		<key>5E6BB902-56B8-4291-8181-8D015E7F0A0D</key>
 		<dict>
@@ -1276,7 +1313,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>1145</real>
 			<key>ypos</key>
-			<real>370</real>
+			<real>395</real>
 		</dict>
 		<key>5FF59D05-FE74-43DD-9589-1CFF471C8A6A</key>
 		<dict>
@@ -1350,18 +1387,9 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>795</real>
+			<real>790</real>
 			<key>ypos</key>
-			<real>335</real>
-		</dict>
-		<key>AC986ADB-B43D-4F75-BFCB-7C27B55C983B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>600</real>
-			<key>ypos</key>
-			<real>310</real>
+			<real>340</real>
 		</dict>
 		<key>AE66EC2F-3383-4BB5-8AB3-0C28C6ACCC11</key>
 		<dict>
@@ -1381,9 +1409,9 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>reminders left</string>
 			<key>xpos</key>
-			<real>707</real>
+			<real>702</real>
 			<key>ypos</key>
-			<real>300</real>
+			<real>305</real>
 		</dict>
 		<key>BD7716E2-05C1-4CD2-9B1C-5FD044289103</key>
 		<dict>
@@ -1423,9 +1451,9 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>795</real>
+			<real>790</real>
 			<key>ypos</key>
-			<real>285</real>
+			<real>290</real>
 		</dict>
 		<key>E9FBABB7-D7D0-4EF6-A0F8-BC9B2124CB77</key>
 		<dict>

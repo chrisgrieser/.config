@@ -2,7 +2,6 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
-
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} str */
@@ -12,15 +11,12 @@ function alfredMatcher(str) {
 	return [clean, camelCaseSeparated, str].join(" ") + " ";
 }
 
-/** @param {string} url */
+/** @param {string} url @return {string} */
 function httpRequest(url) {
 	const queryURL = $.NSURL.URLWithString(url);
-	const requestData = $.NSData.dataWithContentsOfURL(queryURL);
-	const requestString = $.NSString.alloc.initWithDataEncoding(
-		requestData,
-		$.NSUTF8StringEncoding,
-	).js;
-	return requestString;
+	const data = $.NSData.dataWithContentsOfURL(queryURL);
+	const requestStr = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
+	return requestStr;
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -47,32 +43,28 @@ function run() {
 	const awesomeNeovimList =
 		"https://raw.githubusercontent.com/rockerBOO/awesome-neovim/main/README.md";
 
-	/** @type {AlfredItem[]} */
+	/** @type {AlfredItem|{}[]} */
 	const pluginsArr = httpRequest(awesomeNeovimList)
 		.split("\n")
 		.map((/** @type {string} */ line) => {
 			if (!line.startsWith("- [") || !line.includes("/")) return {};
 
 			const mdLinkRegex = /\[(.+?)\]\((.+?)\) - (.*)/;
-			const [_, repo, url, desc] = line.match(mdLinkRegex);
-			const [author, name] = repo.split("/");
+			const [_, repo, url, desc] = line.match(mdLinkRegex) || [];
+			if (!repo || !url) return {};
+			const [author, name] = repo.split("/") || [];
 			const installedIcon = installedPlugins.includes(repo) ? " ✅" : "";
 
-			return {
+			/** @type {AlfredItem} */
+			const alfredItem = {
 				title: name + installedIcon,
 				match: alfredMatcher(repo),
 				subtitle: author + "  ·  " + desc,
 				arg: url,
 				quicklookurl: url,
 				uid: repo,
-				mods: {
-					shift: {
-						subtitle: "⇧: Search Issues",
-						arg: "",
-						variables: { repoID: repo },
-					},
-				},
 			};
+			return alfredItem;
 		});
 
 	return JSON.stringify({
