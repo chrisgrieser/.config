@@ -69,6 +69,7 @@ function ga {
 			--preview="$file_diff | delta $style --file-style=omit" \
 			--bind="enter:reload($check_staged $add_or_unadd ; $git_status_cmd)"
 	)
+
 	cd "$dir" || return 1
 	return 0 # no exiting 130
 }
@@ -92,8 +93,8 @@ compdef _change_git_files restore
 # SMART COMMIT
 
 function _stageAllIfNoStagedChanges {
-	git diff --staged --quiet && 
-		git add --all && 
+	git diff --staged --quiet &&
+		git add --all &&
 		print "\e[1;34mStaged all changes.\e[0m"
 }
 
@@ -101,7 +102,10 @@ function _stageAllIfNoStagedChanges {
 # - if the is clean after committing, pull-push
 function gc {
 	_stageAllIfNoStagedChanges
-	if [[ -z "$1" ]]; then git commit; return; fi # without arg, just open in editor
+	if [[ -z "$1" ]]; then
+		git commit
+		return
+	fi # without arg, just open in editor
 
 	printf "\e[1;34mCommit: \e[0m"
 	git commit -m "$@" || return 1
@@ -118,7 +122,10 @@ function gc {
 
 function gC {
 	_stageAllIfNoStagedChanges
-	if [[ -z "$1" ]]; then git commit; return; fi # without arg, just open in editor
+	if [[ -z "$1" ]]; then
+		git commit
+		return
+	fi # without arg, just open in editor
 
 	printf "\e[1;34mCommit: \e[0m"
 	git commit -m "$@" || return 1
