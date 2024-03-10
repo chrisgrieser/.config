@@ -52,7 +52,7 @@ function update() {
 
 	_print-section "Mac App Store"
 
-	# HACK -> PENDING https://github.com/mas-cli/mas/pull/496
+	# HACK -> PENDING https://github.com/mas-cli/mas/issues/512
 	mas outdated | grep -v "Highlights" | cut -f1 -d" " | xargs mas upgrade
 	# mas upgrade
 
@@ -61,10 +61,10 @@ function update() {
 	# - also updates the homebrew status counter
 	brew services restart sketchybar
 
-	echo 
+	echo
 	_dump
 	echo
-	osascript -e 'display notification "" with title "🍺 Homebrew finished." sound name "Blow"'
+	osascript -e 'display notification "Finished Update." with title "🍺 Homebrew" sound name "Blow"'
 }
 
 function listall() {
