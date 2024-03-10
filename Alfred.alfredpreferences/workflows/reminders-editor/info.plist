@@ -954,6 +954,14 @@
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>0BBC3335-0007-45FE-99A5-9C0E94E3B38C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
 				<key>action</key>
@@ -983,14 +991,6 @@
 			<string>63FD13B2-4520-4BF7-B444-C84531F947E1</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>0BBC3335-0007-45FE-99A5-9C0E94E3B38C</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1246,7 +1246,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>640</real>
 			<key>ypos</key>
-			<real>610</real>
+			<real>590</real>
 		</dict>
 		<key>0F93036F-D158-49BB-97AF-DE600B8A3300</key>
 		<dict>
@@ -1286,7 +1286,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>875</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>510</real>
 		</dict>
 		<key>23ED3685-8AA0-4314-A16F-F7D8A0D01A70</key>
 		<dict>
@@ -1313,7 +1313,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>475</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>510</real>
 		</dict>
 		<key>3C4A820D-7CF3-4098-9406-6DD4CA028F3D</key>
 		<dict>
@@ -1382,7 +1382,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>545</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>450</real>
 		</dict>
 		<key>5E6BB902-56B8-4291-8181-8D015E7F0A0D</key>
 		<dict>
@@ -1467,7 +1467,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>935</real>
+			<real>940</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -1489,7 +1489,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>720</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>510</real>
 		</dict>
 		<key>B1F02C82-A01B-454C-BA1C-075E68FEB824</key>
 		<dict>

@@ -4,6 +4,8 @@
 <dict>
 	<key>bundleid</key>
 	<string>com.alfredapp.vitor.simplediff</string>
+	<key>category</key>
+	<string>⬇️</string>
 	<key>connections</key>
 	<dict>
 		<key>16060929-C13B-4EAB-9EE1-0049E833CE26</key>
@@ -290,6 +292,8 @@
 				<integer>0</integer>
 				<key>fontmode</key>
 				<integer>0</integer>
+				<key>fontsizing</key>
+				<integer>0</integer>
 				<key>footertext</key>
 				<string></string>
 				<key>inputfile</key>
@@ -301,6 +305,8 @@
 				<key>outputmode</key>
 				<integer>0</integer>
 				<key>scriptinput</key>
+				<integer>0</integer>
+				<key>spellchecking</key>
 				<integer>0</integer>
 				<key>stackview</key>
 				<false/>
