@@ -420,6 +420,7 @@ nnoremap zr :unfoldall
 exmap spellcheck obcommand editor:toggle-spellcheck
 nnoremap ,os :spellcheck
 
+" [O]ption: [a]completion
 exmap toggleAiCompletion obcommand copilot-auto-completion:toggle
 nnoremap ,oa :toggleAiCompletion
 
@@ -432,3 +433,12 @@ nnoremap ,oD :disableDiagnostics
 
 
 "───────────────────────────────────────────────────────────────────────────────
+
+" insert mode: accept suggestion
+" normal mode: format
+" `<C-s>` remapped to `<D-s>` (cmd-s)
+exmap acceptGhostText obcommand copilot-auto-completion:accept
+inoremap <C-s> :acceptGhostText
+
+exmap lint obcommand obsidian-linter:lint-file
+nnoremap <C-s> :lint 
