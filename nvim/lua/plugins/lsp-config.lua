@@ -217,6 +217,26 @@ serverConfigs.jsonls = {
 		provideFormatter = false,
 		documentRangeFormattingProvider = false,
 	},
+	on_attach = function(client) client.server_capabilities.documentLinkProvider = true end,
+}
+
+-- DOCS https://github.com/redhat-developer/yaml-language-server/tree/main#language-server-settings
+serverConfigs.yamlls = {
+	settings = {
+		yaml = {
+			format = {
+				enable = true,
+				printWidth = 105,
+				proseWrap = "always",
+			},
+		},
+	},
+	-- SIC needs enabling via setting *and* via capabilities to work.
+	-- Probably fixed with nvim 0.10 supporting dynamic config changes
+	on_attach = function(client)
+		client.server_capabilities.documentFormattingProvider = true
+		client.server_capabilities.documentLinkProvider = true
+	end,
 }
 
 --------------------------------------------------------------------------------
@@ -304,24 +324,6 @@ serverConfigs.vale_ls = {
 
 	-- FIX https://github.com/errata-ai/vale-ls/issues/4
 	cmd_env = { VALE_CONFIG_PATH = vim.g.linterConfigs .. "/vale/vale.ini" },
-}
-
---------------------------------------------------------------------------------
-
--- DOCS https://github.com/redhat-developer/yaml-language-server/tree/main#language-server-settings
-serverConfigs.yamlls = {
-	settings = {
-		yaml = {
-			format = {
-				enable = true,
-				printWidth = 105,
-				proseWrap = "always",
-			},
-		},
-	},
-	-- SIC needs enabling via setting *and* via capabilities to work.
-	-- Probably fixed with nvim 0.10 supporting dynamic config changes
-	on_attach = function(client) client.server_capabilities.documentFormattingProvider = true end,
 }
 
 --------------------------------------------------------------------------------

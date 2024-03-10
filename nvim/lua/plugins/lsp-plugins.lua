@@ -2,6 +2,14 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
+	{
+		"chrisgrieser/lsplinks.nvim",
+		branch = "bwc-open-cmd",
+		opts = {},
+		keys = {
+			{ "gx" },
+		},
+	},
 	{ -- display inlay hints from LSP
 		"lvimuser/lsp-inlayhints.nvim",
 		init = function()
