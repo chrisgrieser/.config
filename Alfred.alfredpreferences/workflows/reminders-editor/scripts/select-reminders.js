@@ -40,6 +40,8 @@ function run() {
 		if (url && !isCompleted) urlSubtitle += " and mark as completed";
 		const emoji = isCompleted ? "☑️ " : "";
 
+		// INFO the boolean are all stringified, so they are available as "true"
+		// and "false" after stringification, instead of the less clear "1" and "0"
 		/** @type {AlfredItem} */
 		const alfredItem = {
 			title: emoji + title,
@@ -48,10 +50,11 @@ function run() {
 				id: externalId,
 				title: title,
 				body: body,
-				mode: isCompleted ? "uncomplete" : "complete",
 				notificationTitle: isCompleted ? "🔲 Uncompleted" : "☑️ Completed",
-				remindersLeftLater: responseJson.length - 1, // for deciding whether to loop back
+				mode: isCompleted ? "uncomplete" : "complete",
+				isCompleted: isCompleted.toString(), // only used for cmd action
 				remindersLeftNow: true.toString(),
+				remindersLeftLater: responseJson.length - 1, // for deciding whether to loop back
 			},
 			// copy via cmd+c
 			text: { copy: content },
@@ -61,16 +64,13 @@ function run() {
 					arg: url,
 					subtitle: urlSubtitle,
 					valid: Boolean(url),
-					variables: {
-						isCompleted: isCompleted.toString(), // stringy for Alfred
-					},
 				},
 				// edit content
 				alt: { arg: content },
 				// toggle completed
 				ctrl: {
 					variables: {
-						showCompleted: (!showCompleted).toString(), // stringy for Alfred
+						showCompleted: (!showCompleted).toString(),
 					},
 				},
 			},
