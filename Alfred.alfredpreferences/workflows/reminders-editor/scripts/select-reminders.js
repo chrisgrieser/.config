@@ -51,7 +51,7 @@ function run() {
 				mode: isCompleted ? "uncomplete" : "complete",
 				notificationTitle: isCompleted ? "🔲 Uncompleted" : "☑️ Completed",
 				remindersLeftLater: responseJson.length - 1, // for deciding whether to loop back
-				remindersLeftNow: "true",
+				remindersLeftNow: true.toString(),
 			},
 			// copy via cmd+c
 			text: { copy: content },
@@ -62,7 +62,7 @@ function run() {
 					subtitle: urlSubtitle,
 					valid: Boolean(url),
 					variables: {
-						isCompleted: isCompleted ? "true" : "false",
+						isCompleted: isCompleted.toString(), // stringy for Alfred
 					},
 				},
 				// edit content
@@ -70,7 +70,7 @@ function run() {
 				// toggle completed
 				ctrl: {
 					variables: {
-						showCompleted: showCompleted ? "false" : "true",
+						showCompleted: (!showCompleted).toString(), // stringy for Alfred
 					},
 				},
 			},
@@ -87,8 +87,8 @@ function run() {
 					title: "No reminders for today.",
 					subtitle: "⏎: Show completed tasks.",
 					variables: {
-						remindersLeftNow: "false",
-						showCompleted: "true",
+						remindersLeftNow: false.toString(),
+						showCompleted: true.toString(),
 					},
 					mods: { cmd: invalid, shift: invalid, alt: invalid },
 				},
