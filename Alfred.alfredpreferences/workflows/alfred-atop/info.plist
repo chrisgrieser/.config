@@ -1299,6 +1299,11 @@ Display processes directly via `top`. Append "parent" to the query to display on
 - &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: If the process belongs to a regular app, restart the app.  
 - &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy the PID.  
 
+**Meaning of the icons**  
+- `⭕` indicates that the process is owned by root.
+- `n⇣` means that the process is a parent of `n` child processes.
+- `↖ foobar` indicates that the process is a child of `foobar`.
+
 ### Bluetooth Devices
 Display paired Bluetooth devices directly via `blue`.  
 - &lt;kbd&gt;⏎&lt;/kbd&gt;: If `blueutil` is installed, toggle the connection state. Otherwise, open the bluetooth preferences.  
