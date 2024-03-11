@@ -543,6 +543,7 @@ return {
 			{ -- HACK colorschemes without builtins
 				"<leader>pc",
 				function()
+					/opt/homebrew/Cellar/neovim/0.9.5/share/nvim/runtime/colors
 					-- stylua: ignore
 					local builtins = {
 						"zellner", "torte", "slate", "shine", "ron", "quiet", "peachpuff",

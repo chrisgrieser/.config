@@ -1,8 +1,8 @@
 #!/usr/bin/env osascript -l JavaScript
-
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
+//──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} str */
 function alfredMatcher(str) {
@@ -10,16 +10,12 @@ function alfredMatcher(str) {
 	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
 	return [clean, camelCaseSeparated, str].join(" ") + " ";
 }
-
-/** @param {string} url */
+/** @param {string} url @return {string} */
 function httpRequest(url) {
 	const queryURL = $.NSURL.URLWithString(url);
-	const requestData = $.NSData.dataWithContentsOfURL(queryURL);
-	const requestString = $.NSString.alloc.initWithDataEncoding(
-		requestData,
-		$.NSUTF8StringEncoding,
-	).js;
-	return requestString;
+	const data = $.NSData.dataWithContentsOfURL(queryURL);
+	const requestStr = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
+	return requestStr;
 }
 
 //───────────────────────────────────────────────────────────────────────────
@@ -27,15 +23,17 @@ function httpRequest(url) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
+	/** @type {Record<string, string>} */
+	const keywordLangMap = { html: "HTML", css: "CSS", js: "JavaScript" };
 	const scriptFilterKeyword = $.getenv("alfred_workflow_keyword") || "";
-	const keywordLangMap = {
-		html: "HTML",
-		css: "CSS",
-		js: "JavaScript",
-	};
 	const lang = keywordLangMap[scriptFilterKeyword];
-	const query = argv[0].trim();
+	if (!lang) {
+		// biome-ignore lint/suspicious/noConsoleLog: intentional
+		console.log("Invalid keyword");
+		return
+	}
 
+	const query = (argv[0] || "").trim();
 	const baseURL = "https://developer.mozilla.org";
 	const searchAPI = "https://developer.mozilla.org/api/v1/search?q=";
 	let results = JSON.parse(httpRequest(searchAPI + encodeURIComponent(query)));
