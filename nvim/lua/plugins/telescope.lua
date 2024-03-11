@@ -16,39 +16,50 @@ local keymappings_I = {
 	["<Up>"] = "cycle_history_prev",
 	["<Down>"] = "cycle_history_next",
 	["<D-a>"] = "toggle_all",
-	["<D-s>"] = function(prompt_bufnr) -- sends selected, or if none selected, sends all
-		require("telescope.actions").smart_send_to_qflist(prompt_bufnr)
-		vim.cmd.cfirst()
-	end,
-	["<D-S>"] = "add_selected_to_qflist", -- appends to quickfix list
-	["<M-CR>"] = function(prompt_bufnr) -- mapping consistent with fzf-multi-select
-		require("telescope.actions").toggle_selection(prompt_bufnr)
-		require("telescope.actions").move_selection_worse(prompt_bufnr)
-	end,
-	-- Reveal File in macOS Finder
-	["<D-l>"] = function(prompt_bufnr)
-		local path = require("telescope.actions.state").get_selected_entry().value
-		require("telescope.actions").close(prompt_bufnr)
-		vim.fn.system { "open", "-R", path }
-	end,
-	-- Copy path of file -- https://github.com/nvim-telescope/telescope-file-browser.nvim/issues/191
-	["<C-p>"] = function(prompt_bufnr)
-		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-		local cwd = tostring(current_picker.cwd or vim.loop.cwd()) -- cwd only set if passed as opt
-		local relPath = require("telescope.actions.state").get_selected_entry().value
-		local fullpath = cwd .. "/" .. relPath
-		require("telescope.actions").close(prompt_bufnr)
-		vim.fn.setreg("+", fullpath)
-		u.notify("Copied", fullpath)
-	end,
-	-- Copy name of file
-	["<C-n>"] = function(prompt_bufnr)
-		local relPath = require("telescope.actions.state").get_selected_entry().value
-		local name = vim.fs.basename(relPath)
-		require("telescope.actions").close(prompt_bufnr)
-		vim.fn.setreg("+", name)
-		u.notify("Copied", name)
-	end,
+	["<D-s>"] = {
+		function(prompt_bufnr)
+			require("telescope.actions").smart_send_to_qflist(prompt_bufnr)
+			vim.cmd.cfirst()
+		end,
+		opts = { desc = " Send to Quickfix" },
+	},
+	["<M-CR>"] = { -- mapping consistent with fzf-multi-select
+		function(prompt_bufnr)
+			require("telescope.actions").toggle_selection(prompt_bufnr)
+			require("telescope.actions").move_selection_worse(prompt_bufnr)
+		end,
+		opts = { desc = "󰒆 Multi-Select" },
+	},
+	["<D-l>"] = {
+		function(prompt_bufnr)
+			local path = require("telescope.actions.state").get_selected_entry().value
+			require("telescope.actions").close(prompt_bufnr)
+			vim.fn.system { "open", "-R", path }
+		end,
+		opts = { desc = "󰀶 Reveal File" },
+	},
+	["<C-p>"] = {
+		function(prompt_bufnr)
+			local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+			local cwd = tostring(current_picker.cwd or vim.loop.cwd()) -- cwd only set if passed as opt
+			local relPath = require("telescope.actions.state").get_selected_entry().value
+			local fullpath = cwd .. "/" .. relPath
+			require("telescope.actions").close(prompt_bufnr)
+			vim.fn.setreg("+", fullpath)
+			u.notify("Copied", fullpath)
+		end,
+		opts = { desc = "󰅍 Copy name of path" },
+	},
+	["<C-n>"] = {
+		function(prompt_bufnr)
+			local relPath = require("telescope.actions.state").get_selected_entry().value
+			local name = vim.fs.basename(relPath)
+			require("telescope.actions").close(prompt_bufnr)
+			vim.fn.setreg("+", name)
+			u.notify("Copied", name)
+		end,
+		opts = { desc = "󰅍 Copy name of file" },
+	},
 }
 
 -- add j/k/q to mappings if normal mode
@@ -59,7 +70,7 @@ local normalModeOnly = {
 		-- extra stuff needed to be able to set `nowait` for `q`
 		function(prompt_bufnr) require("telescope.actions").close(prompt_bufnr) end,
 		type = "action",
-		opts = { nowait = true },
+		opts = { nowait = true, desc = "close" },
 	},
 }
 local keymappings_N = vim.tbl_extend("force", keymappings_I, normalModeOnly)
@@ -540,15 +551,15 @@ return {
 				end,
 				desc = " Grep cword",
 			},
-			{ -- HACK colorschemes without builtins
+			{
 				"<leader>pc",
 				function()
-					/opt/homebrew/Cellar/neovim/0.9.5/share/nvim/runtime/colors
+					-- HACK remove built-in colorschemes from selection
 					-- stylua: ignore
 					local builtins = {
 						"zellner", "torte", "slate", "shine", "ron", "quiet", "peachpuff",
 						"pablo", "murphy", "lunaperche", "koehler", "industry", "evening",
-						"elflord", "desert", "delek", "default", "darkblue", "blue", "morning", 
+						"elflord", "desert", "delek", "default", "darkblue", "blue", "morning",
 					}
 					local original = vim.fn.getcompletion
 
@@ -559,8 +570,8 @@ return {
 							original("", "color")
 						)
 					end
+
 					telescope("colorscheme")
-					vim.fn.getcompletion = original
 				end,
 				desc = " Colorschemes",
 			},
