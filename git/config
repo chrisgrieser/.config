@@ -40,7 +40,6 @@
 	prune = true # automatically delete remote tracking branches that have been deleted
 [push]
 	autoSetupRemote = true # create remote branch, if it doesn't exist
-	followtags = true # push new tags along with commits being pushed
 
 [branch]
 	sort = -committerdate # sort by recency, not by name
@@ -68,7 +67,7 @@
    colorMovedWS = ignore-all-space
 	algorithm = histogram # https://luppeng.wordpress.com/2020/10/10/when-to-use-each-of-the-git-diff-algorithms/
 [merge]
-	conflictStyle = zdiff3 # sshows original version in mittle # https://ductile.systems/zdiff3/
+	conflictStyle = zdiff3 # shows original version in middle # https://ductile.systems/zdiff3/
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -76,7 +75,6 @@
 # SOURCE https://smittie.de/posts/git-mergetool/
 # DOCS https://neovim.io/doc/user/diff.html#dp
 [merge]
-	conflictStyle = zdiff3 # sshows original version in mittle # https://ductile.systems/zdiff3/
 	tool = nvim
 [mergetool "nvim"]
 	cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
