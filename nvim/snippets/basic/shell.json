@@ -246,6 +246,15 @@
     "body": "plutil -extract name.childkey xml1 -o - example.plist | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1",
     "prefix": "plist: extract key"
   },
+  "progress bar": {
+    "body": [
+      "for _ in {1..100}; do",
+      "\tprintf \"🬋\"",
+      "\tsleep 0.5",
+      "done"
+    ],
+    "prefix": "progress bar"
+  },
   "quicklook": {
     "body": "qlmanage -p \"${1:filepath}\"",
     "description": "QuickLook the file. MacOS only.",

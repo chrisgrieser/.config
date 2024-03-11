@@ -7,7 +7,6 @@ log_location="$DATA_DIR/Backups/backups-to-external-drives.log"
 echo "Searching for Volume… "
 for _ in {1..100}; do
 	printf "🬋"
-
 	volume_name="$(df -h | grep -io "\s/Volumes/.*" | cut -c2-)"
 	if [[ $(echo "$volume_name" | wc -l) -gt 1 ]]; then
 		print "\033[1;33mMore than one volume connected.\033[0m"
@@ -15,7 +14,6 @@ for _ in {1..100}; do
 	elif [[ -n "$volume_name" ]]; then
 		break
 	fi
-
 	sleep 0.5
 done
 
@@ -86,15 +84,16 @@ fi
 osascript -e 'display notification "" with title "Backup finished." sound name "Blow"'
 
 #───────────────────────────────────────────────────────────────────────────────
-
 # LOG BACKUP ACTIVITY
+
 # on Mac
 echo "completed: $(date '+%H:%M')" >>"$log_location"
 
-# at Backup Destination
+# at backup destination
 echo "Backup: $(date '+%Y-%m-%d %H:%M')" >>last_backup.log
 
-# Reminder for Next Backup in 14 days (idempotent, due to multiple backup disks)
+# Reminders.app for next backup in 14 days
+# (idempotent, due to multiple backup disks)
 osascript -e '
 	set today to (current date)
 	set inTwoWeeks to today + 14 * (60 * 60 * 24)
@@ -106,5 +105,4 @@ osascript -e '
 		end if
 		quit
 	end tell
-	count of backupReminders
 ' &>/dev/null
