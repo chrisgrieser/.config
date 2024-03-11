@@ -217,28 +217,6 @@ rules:
             bundle_identifiers:
               - ^net\.highlightsapp\.universal$
               - ^com\.apple\.Preview$
-  #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) GoodTask"
-    manipulators:
-      - type: basic
-        from: { key_code: "1", modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: l, modifiers: [command] }
-        conditions:
-          - {
-              type: frontmost_application_if,
-              bundle_identifiers: [^com\.hahainteractive\.GoodTask3Mac$],
-            }
-      # FIX wrong keybinding for inserting line break
-      - type: basic
-        from: { key_code: return_or_enter, modifiers: { mandatory: [shift] } }
-        to:
-          - { key_code: return_or_enter, modifiers: [control] }
-        conditions:
-          - {
-              type: frontmost_application_if,
-              bundle_identifiers: [^com\.hahainteractive\.GoodTask3Mac$],
-            }
   #─────────────────────────────────────────────────────────────────────
   - description: "(Apps) Neovide"
     manipulators:
