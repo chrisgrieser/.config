@@ -14,8 +14,11 @@ rules:
         to:
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-              afplay --volume 0.5 "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/media_handoff.caf" &
               spotify_player like
+              info=$(spotify_player get key playback)
+              artist=$(echo $info | yq ".item.artists[0].name")
+              song=$(echo $info | yq ".item.name")
+              osascript -e "display notification \"$artist – $song\" with title \"Spotify\""
       - type: basic
         from: { key_code: f7 }
         to:
