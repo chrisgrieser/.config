@@ -22,7 +22,7 @@ function ensure_sync {
 ensure_sync "$HOME/.config" "🔵 Dotfiles"
 ensure_sync "$VAULT_PATH" "🟪 Vault"
 ensure_sync "$PASSWORD_STORE_DIR" "🔑 Password Store"
-ensure_sync "$PHD_DATA_VAULT" "📊 PhD Data"
+ensure_sync "$PHD_DATA_VAULT" "📗 PhD Data"
 
 # for Alfred conditional to prompt shutdown
 echo -n "success"

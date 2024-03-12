@@ -1,2 +1,2 @@
-const str = "aaaaaaaa";
+const str = "aaaaaaaaffaaaaaaaaa";
 console.log("❗ str:", str);

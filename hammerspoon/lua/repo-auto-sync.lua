@@ -25,7 +25,7 @@ local config = {
 		},
 		{
 			name = "PhD Data",
-			icon = "📊",
+			icon = "📗",
 			location = readZshEnv("PHD_DATA_VAULT"),
 		},
 	},
