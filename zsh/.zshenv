@@ -11,6 +11,8 @@ export WD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub"
 export DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder"
 export LOCAL_REPOS="$HOME/repos"
 
+export PHD_DATA_VAULT="$HOME/phd-data-analysis"
+
 # for my configs
 export BROWSER_DEFAULTS_PATH="BraveSoftware/Brave-Browser"
 export BROWSER_APP="Brave Browser" # not using "$BROWSER" since reserved variable
