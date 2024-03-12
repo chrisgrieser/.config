@@ -1,18 +1,20 @@
-for _, name in ipairs { "config", "data", "state", "cache" } do
-	vim.env[("XDG_%s_HOME"):format(name:upper())] = "/tmp/nvim-debug/" .. name
-end
-
---------------------------------------------------------------------------------
-
----@class (exact) class_name
----@field field_name string
----@field field_name string
-
 local plugins = {
-	{ "echasnovski/mini.operators", opts = true },
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		main = "nvim-treesitter.configs",
+		opts = {
+			ensure_installed = { "javascript", "python", "lua" },
+		},
+	},
+	{ "chrisgrieser/nvim-puppeteer" },
 }
 
 --------------------------------------------------------------------------------
+
+for _, name in ipairs { "config", "data", "state", "cache" } do
+	vim.env[("XDG_%s_HOME"):format(name:upper())] = "/tmp/nvim-debug/" .. name
+end
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -29,5 +31,3 @@ vim.opt.swapfile = false -- disable prompt when things crash
 vim.cmd.colorscheme("habamax")
 vim.opt.guifont = vim.env.CODE_FONT .. ":h26"
 vim.opt.signcolumn = "yes:1"
-
---------------------------------------------------------------------------------
