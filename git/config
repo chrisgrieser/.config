@@ -72,11 +72,11 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 # MERGE TOOL
-# SOURCE https://smittie.de/posts/git-mergetool/
-# DOCS https://neovim.io/doc/user/diff.html#dp
 [merge]
+	# DOCS https://neovim.io/doc/user/diff.html#dp
 	tool = nvim
 [mergetool "nvim"]
+	# SOURCE https://smittie.de/posts/git-mergetool/
 	cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
 
 #───────────────────────────────────────────────────────────────────────────────
