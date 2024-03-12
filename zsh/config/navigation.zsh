@@ -42,13 +42,17 @@ function _grappling_hook {
 		"$WD"
 		"$HOME/.config"
 		"$VAULT_PATH"
+		"$PHD_DATA_VAULT"
 	)
 	local to_open="${locations[1]}"
-	if [[ "$PWD" == "${locations[1]}" ]]; then
-		to_open="${locations[2]}"
-	elif [[ "$PWD" == "${locations[2]}" ]]; then
-		to_open="${locations[3]}"
-	fi
+	locations_count=${#locations[@]}
+	locations_count=$((locations_count - 1)) # first location already set as fallback
+	for i in {1..$locations_count}; do
+		if [[ "$PWD" == "${locations[$i]}" ]] ; then
+			break
+			to_open="${locations[$((i + 1))]}"
+		fi
+	done
 	cd -q "$to_open" || return 1
 	zle reset-prompt
 
