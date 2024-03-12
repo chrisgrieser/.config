@@ -54,10 +54,6 @@ local routes = {
 	{ filter = { event = "msg_show", find = "^:!make" }, skip = true },
 	{ filter = { event = "msg_show", find = "^%(%d+ of %d+%):" }, skip = true },
 
-	-----------------------------------------------------------------------------
-	-- E211 no longer needed, since auto-closing deleted buffers
-	{ filter = { event = "msg_show", find = "E211: File .* no longer available" }, skip = true },
-
 	-- nvim-treesitter
 	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
 
@@ -169,7 +165,7 @@ return {
 			minimum_width = 15,
 			top_down = false,
 			level = vim.log.levels.TRACE, -- minimum severity
-			timeout = 6000,
+			timeout = 4000,
 			stages = "slide", -- slide|fade
 			icons = { ERROR = "", WARN = "", INFO = "", TRACE = "", DEBUG = "" },
 			on_open = function(win)
