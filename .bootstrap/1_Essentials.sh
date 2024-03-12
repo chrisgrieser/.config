@@ -1,3 +1,7 @@
+# INFO 
+# this file assumes that the iCloud folder is already in place
+#───────────────────────────────────────────────────────────────────────────────
+
 # ask for credentials upfront
 sudo -v
 setopt INTERACTIVE_COMMENTS
@@ -58,13 +62,6 @@ ln -sf "$HOME/.config/zsh/.zshenv" ~
 # shellcheck disable=1091
 source "$HOME/.config/zsh/.zshrc"
 
-# DOCK
+# load base configs
 zsh "$HOME/.config/hammerspoon/dock-switching/dock-switcher.sh" --load work
-
-# LOAD CONFIGS (MACKUP)
-# sets symlinks, and then writes full files
-
-ln -sf "$HOME/.config/mackup/mackup.cfg" ~/.mackup.cfg
-ln -sf "$HOME/.config/mackup/custom-app-configs" ~/.mackup
-brew install mackup
-mackup restore --force && mackup uninstall --force
+loadprefs # via mackup

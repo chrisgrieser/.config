@@ -1,23 +1,16 @@
 # MACKUP SYNC
 # INFO since symlinks of preferences are buggy since macOS Sonoma, this
 # workaround will simply copy the preferences without symlinks
-function saveprefs {
+function _mackup {
 	ln -sf "$HOME/.config/mackup/mackup.cfg" "$HOME/.mackup.cfg"
 	ln -sf "$HOME/.config/mackup/custom-app-configs" "$HOME/.mackup"
 
-	mackup backup --force && mackup uninstall --force
+	mackup "$1" --force && mackup uninstall --force
 
 	rm "$HOME/.mackup" "$HOME/.mackup.cfg"
 }
-
-function loadprefs {
-	ln -sf "$HOME/.config/mackup/mackup.cfg" "$HOME/.mackup.cfg"
-	ln -sf "$HOME/.config/mackup/custom-app-configs" "$HOME/.mackup"
-
-	mackup restore --force && mackup uninstall --force
-
-	rm "$HOME/.mackup" "$HOME/.mackup.cfg"
-}
+function saveprefs { _mackup backup; }
+function loadprefs { _mackup restore; }
 
 #───────────────────────────────────────────────────────────────────────────────
 
