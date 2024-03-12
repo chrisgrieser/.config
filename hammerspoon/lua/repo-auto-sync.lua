@@ -10,17 +10,17 @@ local config = {
 		{
 			name = "Dotfiles",
 			icon = "🔵",
-			scriptPath = env.dotfilesFolder .. "/.git-dotfile-sync.sh",
+			location = env.dotfilesFolder,
 		},
 		{
 			name = "Vault",
 			icon = "🟪",
-			scriptPath = env.vaultLocation .. "/.git-vault-sync.sh",
+			location = env.vaultLocation,
 		},
 		{
 			name = "Passwords",
 			icon = "🔑",
-			scriptPath = env.passwordStore .. "/.pass-sync.sh",
+			location = env.passwordStore,
 		},
 	},
 }
@@ -35,10 +35,11 @@ M.syncedRepos = {}
 M.task_sync = {}
 
 ---@async
----@param repo { name: string, icon: string, scriptPath: string }
+---@param repo { name: string, icon: string, location: string }
 local function repoSync(repo)
+	local syncScriptPath = repo.location .. "/.sync-this-repo.sh"
 	M.task_sync[repo.name] = hs.task
-		.new(repo.scriptPath, function(exitCode, _, stdErr)
+		.new(syncScriptPath, function(exitCode, _, stdErr)
 			if exitCode == 0 then
 				table.insert(M.syncedRepos, repo)
 			else

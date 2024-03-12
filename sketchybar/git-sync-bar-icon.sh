@@ -1,45 +1,47 @@
 #!/usr/bin/env zsh
 export GIT_OPTIONAL_LOCKS=0
-
 #───────────────────────────────────────────────────────────────────────────────
-# CHANGES
-function get_changes {
-	local repo_path="$1"
+
+function commits_ahead {
+	local letter="$1"
+	local repo_path="$2"
 	changes=$(git -C "$repo_path" status --porcelain | wc -l | tr -d " ")
+	[[ $changes -ne 0 ]] && all_changes="$all_changes$changes$letter "
 }
 
+function commits_behind {
+	local letter="$1"
+	local repo_path="$2"
 
-dotChanges=$(git -C "$HOME/.config" status --porcelain | wc -l | tr -d " ")
-vaultChanges=$(git -C "$VAULT_PATH" status --porcelain | wc -l | tr -d " ")
-passChanges=$(git -C "$PASSWORD_STORE_DIR" status --porcelain | wc -l | tr -d " ")
-[[ $dotChanges -ne 0 ]] && label="${dotChanges}d "
-[[ $vaultChanges -ne 0 ]] && label="$label${vaultChanges}v "
-[[ $passChanges -ne 0 ]] && label="$label${passChanges}p"
-# ensure_sync "$PHD_DATA_VAULT" "📊 PhD Data" ".phd-data-sync.sh"
+	git -C "$repo_path" fetch
+	behind=$(git -C "$HOME/.config" branch --verbose | grep -o "behind \d\+" | cut -d" " -f2)
+	[[ -n "$behind" ]] && all_changes="$all_changes$changes!$letter "
+}
+
+function set_sketchybar {
+	all_changes="$1"
+	icon=""
+	[[ -n "$all_changes" ]] && icon=""
+	sketchybar --set "$NAME" icon="$icon" label="$all_changes"
+}
+
+#───────────────────────────────────────────────────────────────────────────────
+
+all_changes=""
+
+commits_ahead "d" "$HOME/.config"
+commits_ahead "v" "$VAULT_PATH"
+commits_ahead "p" "$PASSWORD_STORE_DIR"
+commits_ahead "a" "$PHD_DATA_VAULT"
 
 # INFO set early, since `git fetch` requires time and the icons should update quicker
 # If there are behinds, icons will appear a few seconds later which isn't a
 # problem. But if there are no behinds, the outdated label will disappear quicker.
+set_sketchybar "$all_changes"
 
-[[ -n "$label" ]] && icon=""
-sketchybar --set "$NAME" icon="$icon" label="$label"
+commits_behind "d" "$HOME/.config"
+commits_behind "v" "$VAULT_PATH"
+commits_behind "p" "$PASSWORD_STORE_DIR"
+commits_behind "a" "$PHD_DATA_VAULT"
 
-#───────────────────────────────────────────────────────────────────────────────
-# COMMITS BEHIND
-
-git "$HOME/.config" fetch # required to check for commits behind
-git "$VAULT_PATH" fetch
-git "$PASSWORD_STORE_DIR" fetch
-
-dotBehind=$(git -C "$HOME/.config" branch -v | grep -o "behind \d\+" | cut -d" " -f2)
-vaultBehind=$(git -C "$VAULT_PATH" branch -v | grep -o "behind \d\+" | cut -d" " -f2)
-passBehind=$(git -C "$PASSWORD_STORE_DIR" branch -v | grep -o "behind \d\+" | cut -d" " -f2)
-
-[[ -n "$dotBehind" ]] && label="$label${dotBehind}!d "
-[[ -n "$vaultBehind" ]] && label="$label${vaultBehind}!v "
-[[ -n "$passBehind" ]] && label="$label${passBehind}!p"
-
-icon=""
-[[ -n "$label" ]] && icon=" "
-
-sketchybar --set "$NAME" icon="$icon" label="$label"
+set_sketchybar "$all_changes"
