@@ -102,7 +102,7 @@ function run() {
 	}
 
 	// IMPORT SUBREDDIT-LOADING-FUNCTIONS
-	// biome-ignore lint/nursery/noGlobalEval: JXA import HACK
+	// biome-ignore lint/security/noGlobalEval: JXA import HACK
 	eval(readFile(`${pathOfThisWorkflow}/scripts/get-new-posts.js`));
 
 	// marker for old posts
