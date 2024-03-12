@@ -1291,7 +1291,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>quick add</string>
 			<key>xpos</key>
-			<real>315</real>
+			<real>225</real>
 			<key>ypos</key>
 			<real>820</real>
 		</dict>
@@ -1300,7 +1300,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>600</real>
+			<real>490</real>
 			<key>ypos</key>
 			<real>835</real>
 		</dict>
@@ -1356,7 +1356,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>490</real>
+			<real>380</real>
 			<key>ypos</key>
 			<real>840</real>
 		</dict>
@@ -1443,7 +1443,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>600</real>
+			<real>490</real>
 			<key>ypos</key>
 			<real>710</real>
 		</dict>
@@ -1454,7 +1454,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>quick add selection or browser tab</string>
 			<key>xpos</key>
-			<real>55</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>675</real>
 		</dict>
@@ -1481,7 +1481,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>600</real>
+			<real>490</real>
 			<key>ypos</key>
 			<real>955</real>
 		</dict>
@@ -1492,7 +1492,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>add specific time</string>
 			<key>xpos</key>
-			<real>55</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>955</real>
 		</dict>
@@ -1543,7 +1543,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>quick add</string>
 			<key>xpos</key>
-			<real>55</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>820</real>
 		</dict>
@@ -1554,7 +1554,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>timed add in background</string>
 			<key>xpos</key>
-			<real>320</real>
+			<real>225</real>
 			<key>ypos</key>
 			<real>955</real>
 		</dict>
