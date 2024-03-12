@@ -1,15 +1,15 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.6.0/schema.json",
+	"$schema": "https://biomejs.dev/schemas/1.6.1/schema.json",
 	"vcs": {
 		"enabled": true,
 		"clientKind": "git",
 		"useIgnoreFile": true
 	},
 	"json": {
-		"parser": { "allowComments": true }
+		"parser": { "allowComments": true } // for `tsconfig.json`
 	},
 	"javascript": {
-		"globals": ["ObjC", "Application", "delay", "Path", "$"]
+		"globals": ["ObjC", "Application", "delay", "Path", "$"] // JXA variables
 	},
 	"formatter": {
 		"lineWidth": 100,
@@ -23,14 +23,15 @@
 				"all": true,
 				"noConsole": "off"
 			},
-			"complexity": {
-				"noExcessiveCognitiveComplexity": "off"
-			},
+			// JXA does not allow `console.info`, so we need `console.log`
 			"suspicious": {
 				"noConsoleLog": "off"
 			},
+			"complexity": {
+				"noExcessiveCognitiveComplexity": "off"
+			},
 			"style": {
-				"useTemplate": "off",
+				"useTemplate": "off", // too strict, simple concatenation are fine
 				"noParameterAssign": "off",
 				"useNamingConvention": { "level": "warn", "options": { "strictCase": false } }
 			}

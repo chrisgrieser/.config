@@ -28,9 +28,8 @@ function run(argv) {
 	const scriptFilterKeyword = $.getenv("alfred_workflow_keyword") || "";
 	const lang = keywordLangMap[scriptFilterKeyword];
 	if (!lang) {
-		// biome-ignore lint/suspicious/noConsoleLog: intentional
 		console.log("Invalid keyword");
-		return
+		return;
 	}
 
 	const query = (argv[0] || "").trim();

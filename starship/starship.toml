@@ -61,6 +61,7 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 [directory.substitutions]
 ".config" = " "
 "main-vault" = "󱉽 "
+"phd-data-analysis" = "󰆼 "
 "~/Library/Mobile Documents/com~apple~CloudDocs/File Hub" = "/󰀶 "
 "~/Library/Mobile Documents/com~apple~CloudDocs" = "/ "
 
