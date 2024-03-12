@@ -5,6 +5,7 @@ local plugins = {
 		main = "nvim-treesitter.configs",
 		opts = {
 			ensure_installed = { "javascript" },
+			highlight = { enable = true },
 		},
 	},
 	{
