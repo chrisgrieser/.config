@@ -4,7 +4,8 @@ local plugins = {
 		build = ":TSUpdate",
 		main = "nvim-treesitter.configs",
 		opts = {
-			ensure_installed = { "javascript", "python", "lua" },
+			ensure_installed = { "javascript", "python", "lua", "regex", "jsdoc" },
+			highlight = { enable = true },
 		},
 	},
 	{ "chrisgrieser/nvim-puppeteer" },
