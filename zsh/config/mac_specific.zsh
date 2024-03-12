@@ -1,8 +1,23 @@
-# mackup sync
-# INFO since symlinks of preferences are buggy since Sonoma, this workaround
-# will simply copy the preferences without symlinks
-alias saveprefs="mackup backup --force && mackup uninstall --force"
-alias loadprefs="mackup restore --force && mackup uninstall --force"
+# MACKUP SYNC
+# INFO since symlinks of preferences are buggy since macOS Sonoma, this
+# workaround will simply copy the preferences without symlinks
+function saveprefs {
+	ln -sf "$HOME/.config/mackup/mackup.cfg" "$HOME/.mackup.cfg"
+	ln -sf "$HOME/.config/mackup/custom-app-configs" "$HOME/.mackup"
+
+	mackup backup --force && mackup uninstall --force
+
+	rm "$HOME/.mackup" "$HOME/.mackup.cfg"
+}
+
+function loadprefs {
+	ln -sf "$HOME/.config/mackup/mackup.cfg" "$HOME/.mackup.cfg"
+	ln -sf "$HOME/.config/mackup/custom-app-configs" "$HOME/.mackup"
+
+	mackup restore --force && mackup uninstall --force
+
+	rm "$HOME/.mackup" "$HOME/.mackup.cfg"
+}
 
 #───────────────────────────────────────────────────────────────────────────────
 
