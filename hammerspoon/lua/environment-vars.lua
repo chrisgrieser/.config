@@ -1,13 +1,12 @@
 local M = {}
 --------------------------------------------------------------------------------
 
-
 -- RETRIEVE ENVIRONMENT VARS FROM ZSHENV
 -- HACK cannot be done via `os.getenv()`, since often it does not load properly on
 -- system startup, so the values have to be read manually.
 ---@param varname string
 ---@return string
-local function readZshEnv(varname)
+function M.readZshEnv(varname)
 	local value, success = hs.execute("source $HOME/.zshenv && echo $" .. varname)
 	if not success then hs.notify.show("Hammerspoon", "", "⚠️ Could not source .zshenv") end
 	if not value then return "" end
@@ -15,20 +14,17 @@ local function readZshEnv(varname)
 	return value
 end
 
-M.dotfilesFolder = os.getenv("HOME") .. "/.config/"
-M.passwordStore = readZshEnv("PASSWORD_STORE_DIR")
-M.vaultLocation = readZshEnv("VAULT_PATH")
-M.fileHub = readZshEnv("WD")
+M.fileHub = M.readZshEnv("WD")
 
-M.codeFont = readZshEnv("CODE_FONT")
+M.codeFont = M.readZshEnv("CODE_FONT")
 M.homebrewPrefix = M.isAtMother and "/usr/local" or "/opt/homebrew"
 
 --------------------------------------------------------------------------------
 -- Apps
 
 M.mastodonApp = "Mona"
-M.browserApp = readZshEnv("BROWSER_APP")
-M.browserDefaultsPath = readZshEnv("BROWSER_DEFAULTS_PATH")
+M.browserApp = M.readZshEnv("BROWSER_APP")
+M.browserDefaultsPath = M.readZshEnv("BROWSER_DEFAULTS_PATH")
 
 M.transBgApps = {
 	"neovide",

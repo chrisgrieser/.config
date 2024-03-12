@@ -2,6 +2,7 @@ local M = {} -- persist from garbage collector
 
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
+local readZshEnv = require("lua.environment-vars").readZshEnv
 --------------------------------------------------------------------------------
 
 local config = {
@@ -10,17 +11,22 @@ local config = {
 		{
 			name = "Dotfiles",
 			icon = "🔵",
-			location = env.dotfilesFolder,
+			location = os.getenv("HOME") .. "/.config",
 		},
 		{
 			name = "Vault",
 			icon = "🟪",
-			location = env.vaultLocation,
+			location = readZshEnv("VAULT_PATH"),
 		},
 		{
 			name = "Passwords",
 			icon = "🔑",
-			location = env.passwordStore,
+			location = readZshEnv("PASSWORD_STORE_DIR"),
+		},
+		{
+			name = "PhD Data",
+			icon = "📊",
+			location = readZshEnv("PHD_DATA_VAULT"),
 		},
 	},
 }
