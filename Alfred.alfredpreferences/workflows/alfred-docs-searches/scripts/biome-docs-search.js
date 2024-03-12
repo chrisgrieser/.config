@@ -51,7 +51,7 @@ function run() {
 			return {
 				title: title,
 				subtitle: category,
-				match: alfredMatcher(subsite),
+				match: alfredMatcher(title),
 				arg: url,
 				quicklookurl: url,
 				uid: subsite,
