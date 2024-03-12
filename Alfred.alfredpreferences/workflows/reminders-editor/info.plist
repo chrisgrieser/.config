@@ -47,6 +47,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>233B90F3-D8E0-48FC-A81A-89764B3AAC09</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>57404C61-B021-4FA0-B8BE-E462CE7EF374</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>23ED3685-8AA0-4314-A16F-F7D8A0D01A70</key>
 		<array>
 			<dict>
@@ -292,6 +305,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>57404C61-B021-4FA0-B8BE-E462CE7EF374</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>DA53DB8C-C97B-4594-A26E-0875AB96D262</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -342,6 +365,16 @@
 		</array>
 		<key>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</key>
 		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>57404C61-B021-4FA0-B8BE-E462CE7EF374</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>DA53DB8C-C97B-4594-A26E-0875AB96D262</string>
@@ -576,6 +609,21 @@
 			<string>alfred.workflow.utility.hidealfred</string>
 			<key>uid</key>
 			<string>3D08F342-404B-4C70-8AC6-5473E7CB855B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>soundname</key>
+				<string>Tink</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>57404C61-B021-4FA0-B8BE-E462CE7EF374</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1372,6 +1420,15 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>175</real>
 		</dict>
+		<key>57404C61-B021-4FA0-B8BE-E462CE7EF374</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>1275</real>
+			<key>ypos</key>
+			<real>180</real>
+		</dict>
 		<key>5E6BB902-56B8-4291-8181-8D015E7F0A0D</key>
 		<dict>
 			<key>colorindex</key>
@@ -1444,7 +1501,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>920</real>
+			<real>925</real>
 			<key>ypos</key>
 			<real>550</real>
 		</dict>

@@ -44,6 +44,11 @@ M.task_sync = {}
 ---@param repo { name: string, icon: string, location: string }
 local function repoSync(repo)
 	local syncScriptPath = repo.location .. "/.sync-this-repo.sh"
+	local syncScriptExists = hs.fs.attributes(syncScriptPath) ~= nil
+	if not syncScriptExists then
+		notify(("⚠️️ %s %s: missing .sync-this-repo.sh"):format(repo.icon, repo.name))
+		return
+	end
 	M.task_sync[repo.name] = hs.task
 		.new(syncScriptPath, function(exitCode, _, stdErr)
 			if exitCode == 0 then
