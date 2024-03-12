@@ -36,9 +36,6 @@ keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
 -- non-unique, since it overwrites nvim default: https://neovim.io/doc/user/vim_diff.html#default-mappings
 keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
 
--- Changelist
-keymap("n", "<C-g>", "g;", { desc = "󱋿 Goto last change" })
-
 -- Search
 keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = "Search IN sel" })
@@ -62,10 +59,9 @@ keymap("n", "crl", "mzguiw`z", { desc = "󰬴 UPPERCASE" })
 
 keymap("n", "~", '<cmd>lua require("funcs.nano-plugins").betterTilde()<CR>', { desc = "better ~" })
 
--- Delete trailing stuff
--- (wrapping in normal avoids temporarily scrolling to the side)
+-- Delete trailing character
 keymap("n", "X", function()
-	local line = api.nvim_get_current_line()
+	local line = api.nvim_get_current_line():gsub("%s+$", "")
 	api.nvim_set_current_line(line:sub(1, -2))
 end, { desc = "󱎘 Delete char at EoL" })
 

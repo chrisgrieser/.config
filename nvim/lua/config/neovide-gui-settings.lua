@@ -16,7 +16,7 @@ if isAtMother then
 	g.neovide_padding_left = 6
 elseif isAtOffice then
 	fontSize = 25.5
-	g.neovide_padding_top = 5
+	g.neovide_padding_top = 0
 	g.neovide_padding_left = 4
 else
 	fontSize = 24.5

@@ -240,7 +240,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F6E26710-0524-49EA-AA3F-9137424B66B4</string>
+				<string>1F28B1D0-95DD-4F7F-BB2A-018A98C5743B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -432,19 +432,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>F6E26710-0524-49EA-AA3F-9137424B66B4</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>1F28B1D0-95DD-4F7F-BB2A-018A98C5743B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -497,23 +484,6 @@
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>'{query}', {variables}</string>
-				<key>cleardebuggertext</key>
-				<false/>
-				<key>processoutputs</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.debug</string>
-			<key>uid</key>
-			<string>F6E26710-0524-49EA-AA3F-9137424B66B4</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1419,7 +1389,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>1100</real>
+			<real>1105</real>
 			<key>ypos</key>
 			<real>420</real>
 		</dict>
@@ -1584,13 +1554,6 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>375</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>F6E26710-0524-49EA-AA3F-9137424B66B4</key>
-		<dict>
-			<key>xpos</key>
-			<real>705</real>
-			<key>ypos</key>
-			<real>105</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
