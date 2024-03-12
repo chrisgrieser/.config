@@ -1,36 +1,29 @@
 #!/usr/bin/env zsh
+set -e
+#───────────────────────────────────────────────────────────────────────────────
 
-cd "$HOME/.config" || return 1
-if [[ -n "$(git status --porcelain)" ]]; then
-	osascript -e 'display notification "🔵 Dotfiles" with title "🔁 Syncing…"'
-	zsh ".git-dotfile-sync.sh" &>/dev/null
-fi
-if [[ -n "$(git status --porcelain)" ]]; then
-	echo "⚠️🔵 not synced."
-	return 1
-fi
+function ensure_sync {
+	local repo_path="$1"
+	local name="$2"
+	local syncfile="$3"
 
-cd "$VAULT_PATH" || return 1
-if [[ -n "$(git status --porcelain)" ]]; then
-	osascript -e 'display notification "🟪 Vault" with title "🔁 Syncing…"'
-	zsh ".git-vault-sync.sh" &>/dev/null
-fi
-if [[ -n "$(git status --porcelain)" ]]; then
-	echo "⚠️🟪 Vault not synced."
-	return 1
-fi
-
-cd "$PASSWORD_STORE_DIR" || return 1
-if [[ -n "$(git status --porcelain)" ]]; then
-	osascript -e 'display notification "🔑 Password Store" with title "🔁 Syncing…"'
-	zsh ".pass-sync.sh" &>/dev/null
-fi
-if [[ -n "$(git status --porcelain)" ]]; then
-	echo "⚠️🔑 Password store not synced."
-	return 1
-fi
+	cd "$repo_path"
+	if [[ -n "$(git status --porcelain)" ]]; then
+		osascript -e "display notification \"$name\" with title \"🔁 Syncing…\""
+		zsh "$syncfile" &>/dev/null
+	fi
+	if [[ -n "$(git status --porcelain)" ]]; then
+		echo "⚠️ $name not synced."
+		return 1
+	fi
+}
 
 #───────────────────────────────────────────────────────────────────────────────
+
+ensure_sync "$HOME/.config" "🔵 Dotfiles" ".git-dotfile-sync.sh"
+ensure_sync "$VAULT_PATH" "🟪 Vault" ".git-vault-sync.sh"
+ensure_sync "$PASSWORD_STORE_DIR" "🔑 Password Store" ".pass-sync.sh"
+# ensure_sync "$PHD_DATA_VAULT" "📊 PhD Data" ".phd-data-sync.sh"
 
 # for Alfred conditional to prompt shutdown
 echo -n "success" 
