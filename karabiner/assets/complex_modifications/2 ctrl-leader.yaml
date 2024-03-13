@@ -143,14 +143,6 @@ rules:
               fi
           - *deactivate-leader
           - *remove-notice
-      # [t]erminal
-      - type: basic
-        from: { key_code: t }
-        conditions: [*leader-active]
-        to:
-          - shell_command: open -a 'WezTerm'
-          - *deactivate-leader
-          - *remove-notice
       # [S]lack
       - type: basic
         from: { key_code: s }
@@ -304,9 +296,9 @@ rules:
           - shell_command: open 'https://web.whatsapp.com/'
           - *deactivate-leader
           - *remove-notice
-      # te[l]egram
+      # [t]elegram
       - type: basic
-        from: { key_code: l }
+        from: { key_code: t }
         conditions: [*leader-active]
         to:
           - shell_command: open 'https://web.telegram.org/'
@@ -320,7 +312,7 @@ rules:
           - shell_command: open 'https://www.messenger.com/'
           - *deactivate-leader
           - *remove-notice
-      # [r]eddit
+      # reddit
       - type: basic
         from: { key_code: r }
         conditions: [*leader-active]
@@ -329,7 +321,7 @@ rules:
               osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "browse" in workflow "de.chris-grieser.reddit-browser"'
           - *deactivate-leader
           - *remove-notice
-      # [T]ransmission (shift)
+      # [T]ransmission
       - type: basic
         from: { key_code: t, modifiers: { mandatory: [shift] } }
         conditions: [*leader-active]

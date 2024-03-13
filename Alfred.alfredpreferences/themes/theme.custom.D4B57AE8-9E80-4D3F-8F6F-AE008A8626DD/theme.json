@@ -51,7 +51,7 @@
       "paddingVertical" : 12
     },
     "credit" : "pseudometa",
-    "visualEffectMode" : 2,
+    "visualEffectMode" : 1,
     "separator" : {
       "color" : "#628DB372",
       "thickness" : 2
