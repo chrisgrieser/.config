@@ -8,15 +8,24 @@ app.includeStandardAdditions = true;
 function run() {
 	/** @type AlfredItem[] */
 	const items = app
-		.doShellScript("cd .. && ls -t")
+		.doShellScript("ls -t ..") // workflow folders, sorted by recency
 		.split("\r")
 		.map((workflowUid) => {
+			// workflowUid == name of workflow folder
+			const workflowName = app.doShellScript(
+				`plutil -extract "name" raw -o - "../${workflowUid}/info.plist"`,
+			);
+
 			return {
-				title: workflowUid,
+				title: workflowName,
 				arg: workflowUid,
 				uid: workflowUid,
+				icon: { path: `../${workflowUid}/icon.png` },
 			};
 		});
 
-	return JSON.stringify({ items: items });
+	return JSON.stringify({
+		items: items,
+		cache: { seconds: 1800, loosereload: true },
+	});
 }
