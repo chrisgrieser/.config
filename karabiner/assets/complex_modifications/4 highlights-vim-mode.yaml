@@ -41,9 +41,9 @@ rules:
       - type: basic
         from: { key_code: caps_lock }
         to_if_alone:
-          - key_code: escape
           - *remove-notice
           - *enter-normal-mode
+          - key_code: escape
         to:
           - { key_code: right_command, modifiers: [control, option] }
         conditions: [*highlights-app, *highlights-insert-mode]
