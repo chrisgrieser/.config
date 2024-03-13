@@ -28,12 +28,7 @@ alias ..g=' cd "$(git rev-parse --show-toplevel)"' # goto git root
 
 # FINDER window
 function ..f {
-	finder_dir=$(osascript -e '
-		tell application "Finder"
-			if ((count Finder windows) is 0) then return
-			return POSIX path of (insertion location as alias)
-		end tell
-	')
+	finder_dir=$(osascript -e 'tell application "Finder" to return POSIX path of (insertion location as alias)' 2>/dev/null)
 	if [[ ! -d "$finder_dir" ]] ; then
 		print "\e[1;33mNo Finder window found.\e[0m"
 		return 1
