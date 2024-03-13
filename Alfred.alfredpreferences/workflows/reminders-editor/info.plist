@@ -616,7 +616,7 @@
 			<key>config</key>
 			<dict>
 				<key>soundname</key>
-				<string>Tink</string>
+				<string>Purr</string>
 				<key>systemsound</key>
 				<true/>
 			</dict>
@@ -1300,7 +1300,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>490</real>
+			<real>480</real>
 			<key>ypos</key>
 			<real>835</real>
 		</dict>
@@ -1329,7 +1329,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>475</real>
+			<real>480</real>
 			<key>ypos</key>
 			<real>400</real>
 		</dict>
@@ -1347,7 +1347,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>530</real>
+			<real>480</real>
 			<key>ypos</key>
 			<real>30</real>
 		</dict>
@@ -1443,7 +1443,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>490</real>
+			<real>480</real>
 			<key>ypos</key>
 			<real>710</real>
 		</dict>
@@ -1481,7 +1481,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>490</real>
+			<real>480</real>
 			<key>ypos</key>
 			<real>955</real>
 		</dict>
@@ -1585,7 +1585,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>Snooze</string>
 			<key>xpos</key>
-			<real>465</real>
+			<real>480</real>
 			<key>ypos</key>
 			<real>550</real>
 		</dict>
