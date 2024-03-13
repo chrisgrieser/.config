@@ -32,8 +32,9 @@ alias ..g=' cd "$(git rev-parse --show-toplevel)"' # goto git root
 #   completions are not searched, which is why we are using this setup of our own
 
 function gr {
-	local goto="$1"
-	[[ -z "$1" ]] && goto=$(dirs -p | sed '1d') # no arg: goto last
+	local goto="$*"
+	[[ -z "$*" ]] && goto=$(dirs -p | sed '1d') # no arg: goto last
+	goto="${goto/#\~/$HOME}" # resolve ~
 	cd "$goto" || return 1
 }
 _gr() {

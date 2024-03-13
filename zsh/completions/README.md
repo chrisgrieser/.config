@@ -13,4 +13,4 @@ Source: <https://github.com/junegunn/fzf/issues/3349#issuecomment-1619425209>
 - <https://github.com/zsh-users/zsh-completions/tree/master/src>
 
 ## Code Search via GitHub
-Search for something like, e.g., <https://github.com/search?type=code&q=path%3A_pipx>
+Search for something like, such as <https://github.com/search?q=path%3A%2F_pdfgrep%24%2F&type=code>
