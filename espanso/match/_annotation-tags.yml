@@ -1,19 +1,19 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/ajmarkow/espanso-schema-json/master/schemas/Espanso_Matches_File_Schema.json
 #───────────────────────────────────────────────────────────────────────────────
 matches:
-  - { trigger: "###", replace: "#question ", label: ❓ question }
-  - { trigger: "###", replace: "#gap ", label: 🕳️ gap }
-  - { trigger: "###", replace: "#critique ", label: ☝️ critique }
-  - { trigger: "###", replace: "#agree ", label: 🟩 agree }
-  - { trigger: "###", replace: "#disagree ", label: 🟥 disagree }
-  - { trigger: "###", replace: "#important ", label: ✴️ important }
-  - { trigger: "###", replace: "#epistemic-break ", label: ⚡ epistemic-break }
-  - { trigger: "###", replace: "#idea ", label: 🤔 idea }
-  - { trigger: "###", replace: "#definition ", label: 💡 definition }
-  - { trigger: "###", replace: "#example ", label: ⚛️ example }
-  - { trigger: "###", replace: "#main ", label: Ⓜ️ main }
-  - { trigger: "###", replace: "#method ", label: 🔬 method }
-  - { trigger: "###", replace: "#data ", label: 🔢 data }
-  - { trigger: "###", replace: "#sidenote ", label: 📔 sidenote }
-  - { trigger: "###", replace: "#quote ", label: 💬 quote }
-  - { trigger: "###", replace: "#litreview ", label: 📚 litreview }
+  - { trigger: ttt, replace: "#question ", label: ❓ question }
+  - { trigger: ttt, replace: "#gap ", label: 🕳️ gap }
+  - { trigger: ttt, replace: "#critique ", label: ☝️ critique }
+  - { trigger: ttt, replace: "#agree ", label: 🟩 agree }
+  - { trigger: ttt, replace: "#disagree ", label: 🟥 disagree }
+  - { trigger: ttt, replace: "#important ", label: ✴️ important }
+  - { trigger: ttt, replace: "#epistemic-break ", label: ⚡ epistemic-break }
+  - { trigger: ttt, replace: "#idea ", label: 🤔 idea }
+  - { trigger: ttt, replace: "#definition ", label: 💡 definition }
+  - { trigger: ttt, replace: "#example ", label: ⚛️ example }
+  - { trigger: ttt, replace: "#main ", label: Ⓜ️ main }
+  - { trigger: ttt, replace: "#method ", label: 🔬 method }
+  - { trigger: ttt, replace: "#data ", label: 🔢 data }
+  - { trigger: ttt, replace: "#sidenote ", label: 📔 sidenote }
+  - { trigger: ttt, replace: "#quote ", label: 💬 quote }
+  - { trigger: ttt, replace: "#litreview ", label: 📚 litreview }
