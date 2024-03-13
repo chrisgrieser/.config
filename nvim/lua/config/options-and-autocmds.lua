@@ -117,7 +117,7 @@ opt.sidescrolloff = 15
 opt.scrolloff = 15
 
 -- mostly set by .editorconfig, therefore only fallback
-opt.expandtab = false 
+opt.expandtab = false
 opt.tabstop = 3
 opt.shiftwidth = 3
 
@@ -197,6 +197,12 @@ opt.listchars = {
 	lead = " ",
 	trail = " ",
 }
+
+--------------------------------------------------------------------------------
+-- keep split evenly sized on window resize
+vim.api.nvim_create_autocmd("WinResized", {
+	callback = function() vim.cmd.wincmd("=") end,
+})
 
 --------------------------------------------------------------------------------
 -- AUTO-SAVE

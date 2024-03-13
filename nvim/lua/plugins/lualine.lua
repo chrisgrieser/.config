@@ -50,17 +50,22 @@ vim.opt.showtabline = 0
 local lualineConfig = {
 	winbar = {
 		lualine_b = {
-			{ -- using lualine's tabbar, cause it looks much better than vim's
+			{ -- using lualine's tab display, cause it looks much better than vim's
 				"tabs",
 				mode = 1,
 				cond = function() return vim.fn.tabpagenr("$") > 1 end,
 			},
 		},
 		lualine_c = {
-			{ -- clock if wide window
+			{ -- clock if window is maximized
 				"datetime",
 				style = " %H:%M:%S",
-				cond = function() return vim.o.columns > 120 end,
+				cond = function()
+					local maximized = vim.o.columns > 120
+					local x, y = unpack(vim.api.nvim_win_get_position(0))
+					local isTopLeftWin = x == 0 and y == 0
+					return maximized and isTopLeftWin
+				end,
 				fmt = function(time)
 					local timeWithBlinkingColon = os.time() % 2 == 0 and time or time:gsub(":", " ")
 					return timeWithBlinkingColon

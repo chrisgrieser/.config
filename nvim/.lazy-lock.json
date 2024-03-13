@@ -40,7 +40,7 @@
   "nvim-hlslens": { "branch": "main", "commit": "e4c811a401b06f86a7bb042b1d64a5cba21729a9" },
   "nvim-lspconfig": { "branch": "master", "commit": "4bdd3800b4148f670c6cf55ef65f490148eeb550" },
   "nvim-notify": { "branch": "master", "commit": "5371f4bfc1f6d3adf4fe9d62cd3a9d44356bfd15" },
-  "nvim-origami": { "branch": "main", "commit": "8615cdc4c97aaeb8c7723a49f48e9c44d749034a" },
+  "nvim-origami": { "branch": "main", "commit": "6b6e0df88de109906ca147e1dcf85fbb454d619e" },
   "nvim-puppeteer": { "branch": "main", "commit": "ea340595967919222f3ba5c6c6def0787a336c82" },
   "nvim-recorder": { "branch": "main", "commit": "f37f8e80b32c2a5dca2bd8f6d9dce278b3f5e434" },
   "nvim-rulebook": { "branch": "main", "commit": "5502f021d1d381eb73bc9ee515056fb86a49fcdd" },
