@@ -58,6 +58,7 @@ zle -N zle-keymap-select
 _fix_cursor() { echo -ne '\e[5 q'; }
 precmd_functions+=(_fix_cursor)
 
+#───────────────────────────────────────────────────────────────────────────────
 # VIM BINDINGS
 
 bindkey -M vicmd 'k' up-line # disable accidentally searching history
@@ -69,17 +70,20 @@ bindkey -M vicmd -s ' ' 'ciw' # -s flag sends direct keystrokes and therefore al
 bindkey -M vicmd 'U' redo
 bindkey -M vicmd 'M' vi-join
 
-# YANK/DELETE to (macOS) system clipboard
 bindkey -M viins '^?' backward-delete-char # FIX backspace
+
+#───────────────────────────────────────────────────────────────────────────────
+# YANK/DELETE to (macOS) system clipboard
+
 function _vi_yank_pbcopy {
-	echo "$CUTBUFFER" | pbcopy
-	zle vi-yank # still perform vim-yank for pasting via `p`
+	zle vi-yank
+	print -n "$CUTBUFFER" | pbcopy
 }
 zle -N _vi_yank_pbcopy
 
 function _vi_delete_pbcopy {
-	echo "$CUTBUFFER" | pbcopy
 	zle vi-delete
+	print -n "$CUTBUFFER" | pbcopy
 }
 zle -N _vi_delete_pbcopy
 
