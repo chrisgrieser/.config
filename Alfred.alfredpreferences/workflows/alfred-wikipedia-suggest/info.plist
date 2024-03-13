@@ -134,7 +134,7 @@
 	</array>
 	<key>readme</key>
 	<string>## Usage
-Get in-line suggestions from Wikipedia via the `w` keyword.
+Get in-line suggestions from Wikipedia via the `wiki` keyword.
 - Press &lt;kbd&gt;⏎&lt;/kbd&gt; to open the page in the browser.
 - Press &lt;kbd&gt;⌥⏎&lt;/kbd&gt; to copy the page URL to the clipboard.
 
@@ -174,7 +174,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>w</string>
+				<string>wiki</string>
 				<key>placeholder</key>
 				<string>wiki</string>
 				<key>required</key>
@@ -233,7 +233,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.1</string>
+	<string>1.0.2</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

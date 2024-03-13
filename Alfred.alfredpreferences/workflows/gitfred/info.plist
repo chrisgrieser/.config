@@ -719,6 +719,14 @@
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>0C28AAE6-A080-48A7-A6F0-0BB05070161D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
 				<key>openwith</key>
@@ -811,14 +819,6 @@
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>B04FEC5B-79E4-407B-ACCE-EAA0C5B81AB8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>0C28AAE6-A080-48A7-A6F0-0BB05070161D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1413,9 +1413,9 @@ end run</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>335</real>
+			<real>230</real>
 			<key>ypos</key>
-			<real>485</real>
+			<real>365</real>
 		</dict>
 		<key>158FC0D8-5F6E-4AFE-BC6E-9406B6343527</key>
 		<dict>
@@ -1847,7 +1847,7 @@ end run</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.1</string>
+	<string>1.0.2</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
