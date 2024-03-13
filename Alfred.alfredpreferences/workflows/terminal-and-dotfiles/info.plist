@@ -8,49 +8,11 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
-		<key>022D7D2B-3AAA-4479-88EA-37950B786C70</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>9EC4C5E4-FD5F-4585-86AE-47B0A7AFA214</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>02B76AB1-1681-455F-93FF-7399A17A1683</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>13E9CC1C-2703-45B4-B289-8589A710A651</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>04D132BD-9B0E-4566-AA46-B176F22688E5</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F146B53A-B75E-4B95-8AC5-9AB4944913F4</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>F9DE5490-95C5-401F-A240-3D40BEA75F11</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>902D4662-2953-4B92-BAE1-BE34CE7A174D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -72,32 +34,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>707FB3E6-329A-4494-A074-D4CD436A44AD</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>04D132BD-9B0E-4566-AA46-B176F22688E5</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>9EC4C5E4-FD5F-4585-86AE-47B0A7AFA214</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>707FB3E6-329A-4494-A074-D4CD436A44AD</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -106,152 +42,9 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Terminal &amp; Dotfiles</string>
+	<string>Personal Dotfiles</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>paths</key>
-				<array>
-					<string>/System/Volumes/Data/Applications/WezTerm.app</string>
-				</array>
-				<key>toggle</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.launchfiles</string>
-			<key>uid</key>
-			<string>F146B53A-B75E-4B95-8AC5-9AB4944913F4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<true/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>17</integer>
-				<key>hotmod</key>
-				<integer>1835008</integer>
-				<key>hotstring</key>
-				<string>T</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.runningwithcrayons.Alfred-Preferences</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>2</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>022D7D2B-3AAA-4479-88EA-37950B786C70</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<true/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/path-different-from-wezterm-pwd.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>707FB3E6-329A-4494-A074-D4CD436A44AD</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<true/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/get-finder-or-neovide-path.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>9EC4C5E4-FD5F-4585-86AE-47B0A7AFA214</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>just activate terminal</string>
-						<key>outputlabel</key>
-						<string>activate</string>
-						<key>uid</key>
-						<string>F9DE5490-95C5-401F-A240-3D40BEA75F11</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>cd to path</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>04D132BD-9B0E-4566-AA46-B176F22688E5</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>path</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.browseinterminal</string>
-			<key>uid</key>
-			<string>902D4662-2953-4B92-BAE1-BE34CE7A174D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -357,17 +150,6 @@
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>022D7D2B-3AAA-4479-88EA-37950B786C70</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>Open Terminal from everywhere</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>20</real>
-		</dict>
 		<key>02B76AB1-1681-455F-93FF-7399A17A1683</key>
 		<dict>
 			<key>colorindex</key>
@@ -375,16 +157,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>330</real>
-		</dict>
-		<key>04D132BD-9B0E-4566-AA46-B176F22688E5</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>520</real>
-			<key>ypos</key>
-			<real>40</real>
+			<real>180</real>
 		</dict>
 		<key>13E9CC1C-2703-45B4-B289-8589A710A651</key>
 		<dict>
@@ -393,7 +166,7 @@
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>330</real>
+			<real>180</real>
 		</dict>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<dict>
@@ -402,56 +175,14 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>175</real>
-		</dict>
-		<key>707FB3E6-329A-4494-A074-D4CD436A44AD</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>TERMINAL_SPECIFIC
-
-check if path different from PWD</string>
-			<key>xpos</key>
-			<real>370</real>
-			<key>ypos</key>
-			<real>20</real>
-		</dict>
-		<key>902D4662-2953-4B92-BAE1-BE34CE7A174D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>645</real>
-			<key>ypos</key>
-			<real>130</real>
+			<real>25</real>
 		</dict>
 		<key>9AD22EA9-7218-4E8E-B508-601B4250BA47</key>
 		<dict>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>175</real>
-		</dict>
-		<key>9EC4C5E4-FD5F-4585-86AE-47B0A7AFA214</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>get Finder / neovide Path</string>
-			<key>xpos</key>
-			<real>190</real>
-			<key>ypos</key>
-			<real>20</real>
-		</dict>
-		<key>F146B53A-B75E-4B95-8AC5-9AB4944913F4</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>645</real>
-			<key>ypos</key>
-			<real>15</real>
+			<real>25</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

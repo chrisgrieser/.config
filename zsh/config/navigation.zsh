@@ -2,7 +2,6 @@
 # DOCS https://zsh.sourceforge.io/Doc/Release/Options.html#Changing-Directories
 #───────────────────────────────────────────────────────────────────────────────
 # OPTIONS
-
 setopt AUTO_CD # pure directory = cd into it
 setopt CD_SILENT
 setopt CHASE_LINKS # follow symlinks when they are cd target
@@ -23,6 +22,31 @@ alias ..=" cd .."
 alias ...=" cd ../.."
 alias ....=" cd ../../.."
 alias ..g=' cd "$(git rev-parse --show-toplevel)"' # goto git root
+
+#───────────────────────────────────────────────────────────────────────────────
+# GOTO active location of various apps (all mac-only)
+
+# FINDER window
+function ..f {
+	finder_dir=$(osascript -e 'tell application "Finder" to return POSIX path of (target of window 1 as alias)' | sed -E 's|/$||')
+	cd "$finder_dir" || return 1
+}
+
+# NVIM cwd
+function ..n {
+	# INFO requires `vim.opt.titlestring = "%{getcwd()}"` in nvim config
+	nvim_cwd=$(osascript -e 'tell application "System Events" to tell process "neovide" to return name of front window')
+	cd "$nvim_cwd" || return 1
+}
+
+# ALFRED workflow
+function ..a {
+	# https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
+	workflow_id=$(sed -n "4p" "$HOME/Library/Application Support/Alfred/history.json" | cut -d'"' -f2)
+	prefs_location=$(grep "current" "$HOME/Library/Application Support/Alfred/prefs.json" | cut -d'"' -f4 | sed -e 's|\\/|/|g' -e "s|^~|$HOME|")
+	workflow_folder_path="$prefs_location/workflows/$workflow_id"
+	cd "$workflow_folder_path" || return 1
+}
 
 #───────────────────────────────────────────────────────────────────────────────
 # RECENT DIRS

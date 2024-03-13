@@ -6,10 +6,9 @@ current_workflow_uid=$(sed -n "4p" "$HOME/Library/Application Support/Alfred/his
 current_workflow_bundleid=$(grep -A1 "<key>bundleid</key>" "../$current_workflow_uid/info.plist" |
 	tail -1 | cut -d">" -f2 | cut -d"<" -f1)
 
-which_one="$*"
-
-if [[ "$which_one" == "cache" ]]; then
+# shellcheck disable=2154
+if [[ "$mode" == "cache" ]]; then
 	open "$cache_folder/$current_workflow_bundleid" || open "$cache_folder"
-elif [[ "$which_one" == "data" ]]; then
+elif [[ "$mode" == "data" ]]; then
 	open "$data_folder/$current_workflow_bundleid" || open "$data_folder"
 fi
