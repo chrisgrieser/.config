@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>de.chris-grieser.alfred-tweaks</string>
+	<string>de.chris-grieser.alfred-workflow-development</string>
 	<key>category</key>
 	<string>⭐️</string>
 	<key>connections</key>
@@ -21,52 +21,13 @@
 				<false/>
 			</dict>
 		</array>
-		<key>296B867C-9788-4374-A10A-AF0EF487EF83</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>6552DA50-7058-4101-A2EF-78E87D7C5FF9</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>2DADFA85-C59F-4D17-A85F-5BC10246EA83</key>
 		<array/>
-		<key>2E405C4A-C768-4D8D-A9BB-A94379AB7484</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>3C662734-6A51-42F9-A328-CC888EC278AC</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>33A07916-23BF-4B16-A845-62D0B6C7DB14</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>1ED0BF1E-0B7B-44CA-9800-02C3A363F8D2</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>3C662734-6A51-42F9-A328-CC888EC278AC</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2DADFA85-C59F-4D17-A85F-5BC10246EA83</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -113,50 +74,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>580C5543-C952-4624-BDA5-0C86C9BB400C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2DADFA85-C59F-4D17-A85F-5BC10246EA83</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>6496340C-2FAA-42F9-B626-A6E48D173091</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>7B265954-3202-4ECE-A9CC-FE23D2ADB407</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>71716052-FA50-41EB-8F4A-FAD8889FE116</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>44FFE9B4-3CB4-46D3-8742-B7656E370346</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>7883C8E0-1C85-4882-95A8-90ED858F92AE</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>EE7577FB-3FA8-4A9E-9C4B-A607FA02D44A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -191,6 +113,81 @@
 				<false/>
 			</dict>
 		</array>
+		<key>8CE91420-4683-4D16-BD51-2D1D510E744C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6552DA50-7058-4101-A2EF-78E87D7C5FF9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>DA58ABD9-7183-427F-9B26-59162319F6CC</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>54C6EE1A-837D-4418-893C-4A301235A660</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>CFBC65E1-93EA-4B01-A39E-DD9C5A01054B</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>43143E26-0CD1-43FB-B13D-74E8AB0411EF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>CC9A1F0A-5BDD-4DAA-B890-20E80DDECB00</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>2DADFA85-C59F-4D17-A85F-5BC10246EA83</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>AAEBAC1A-4C1F-49C4-BA9C-175DFF9F7687</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>2DADFA85-C59F-4D17-A85F-5BC10246EA83</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>13258927-20D2-4FDB-9ABF-FFF2263309D2</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E29BB51E-40F3-4126-ABEA-920CAD0068A7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>E2BFA86A-4D3B-4347-8FA7-CBCD88E0B1D1</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A586AF1E-8A0F-4B14-886F-07F7EA4AFDBA</key>
 		<array>
 			<dict>
@@ -204,11 +201,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>A783D4B7-9D4B-44E0-A748-49FDAE0A01AA</key>
+		<key>ABC4A242-56CA-4276-BDA3-3E4E3EB64347</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>580C5543-C952-4624-BDA5-0C86C9BB400C</string>
+				<string>8CE91420-4683-4D16-BD51-2D1D510E744C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -217,30 +214,17 @@
 				<false/>
 			</dict>
 		</array>
-		<key>AC7C9D3D-E394-4C9B-B5EE-57E5370DBCA3</key>
+		<key>AD4DAB43-9C3C-4491-8512-21EA61650C8F</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>43143E26-0CD1-43FB-B13D-74E8AB0411EF</string>
+				<string>ABC4A242-56CA-4276-BDA3-3E4E3EB64347</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>C324E172-125B-402B-930D-F7D52CD82CD6</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>078DA54D-95D6-4C48-A1B2-5A16F2F70987</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 		<key>CC2CBA46-235A-476F-851B-0E956CD05CBC</key>
@@ -308,48 +292,281 @@
 				<false/>
 			</dict>
 		</array>
-		<key>EE7577FB-3FA8-4A9E-9C4B-A607FA02D44A</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C324E172-125B-402B-930D-F7D52CD82CD6</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>Small Utilities for Alfred Workflow Developers</string>
+	<string>Various Utilities for Alfred Workflow Developers</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Alfred Workflow Dev Shortcuts</string>
+	<string>Alfred Workflow Development</string>
 	<key>objects</key>
 	<array>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string># disown, since this script is a process from Alfred itself
+
+nohup ./scripts/restart-alfred.sh
+disown</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>6552DA50-7058-4101-A2EF-78E87D7C5FF9</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>7792FA5D-64AB-40EB-AE6C-EE433C5FC0CA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
 				<integer>2</integer>
-				<key>keyword</key>
-				<string>acache</string>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
+				<string>cat ./data/alfred-docs.json</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
 				<key>subtext</key>
-				<string>of current workflow</string>
-				<key>text</key>
-				<string>📂 Alfred Workflow Cache</string>
+				<string></string>
+				<key>title</key>
+				<string>Alfred Workflow Docs</string>
+				<key>type</key>
+				<integer>11</integer>
 				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>54C6EE1A-837D-4418-893C-4A301235A660</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:mode}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>restart</string>
+						<key>outputlabel</key>
+						<string>restart</string>
+						<key>uid</key>
+						<string>DA58ABD9-7183-427F-9B26-59162319F6CC</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:mode}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>docs_search</string>
+						<key>outputlabel</key>
+						<string>docs_search</string>
+						<key>uid</key>
+						<string>CFBC65E1-93EA-4B01-A39E-DD9C5A01054B</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:mode}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>pref_icon</string>
+						<key>outputlabel</key>
+						<string>pref_icon</string>
+						<key>uid</key>
+						<string>CC9A1F0A-5BDD-4DAA-B890-20E80DDECB00</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:mode}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>data_folder</string>
+						<key>outputlabel</key>
+						<string>data_folder</string>
+						<key>uid</key>
+						<string>AAEBAC1A-4C1F-49C4-BA9C-175DFF9F7687</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:mode}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>cache_folder</string>
+						<key>outputlabel</key>
+						<string>cache_folder</string>
+						<key>uid</key>
+						<string>13258927-20D2-4FDB-9ABF-FFF2263309D2</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:mode}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>reload_workflow</string>
+						<key>outputlabel</key>
+						<string>reload_workflow</string>
+						<key>uid</key>
+						<string>E2BFA86A-4D3B-4347-8FA7-CBCD88E0B1D1</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>else</string>
+				<key>hideelse</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>8CE91420-4683-4D16-BD51-2D1D510E744C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>4A3A8C19-51DD-4007-9302-1B8EA64BE9A6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
 				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>2E405C4A-C768-4D8D-A9BB-A94379AB7484</string>
+			<string>4D3E285F-7A6E-48E9-B895-F861C8E1FDF2</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>fixedorder</key>
+				<false/>
+				<key>items</key>
+				<string>[{"title":"📖 Workflow Docs","arg":"docs_search"},{"title":"📊 Data Folder","arg":"data_folder"},{"title":"🧹 Cache Folder","arg":"cache_folder"},{"title":"⚙️ Update Alfred Preference Icon","arg":"pref_icon"},{"title":"🔁 Reload Workflow","arg":"reload_workflow"},{"title":"❗️ Restart Alfred","arg":"restart"}]</string>
+				<key>keyword</key>
+				<string>{var:alfred_keyword}</string>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>{const:alfred_workflow_name}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.listfilter</string>
+			<key>uid</key>
+			<string>AD4DAB43-9C3C-4491-8512-21EA61650C8F</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -365,64 +582,14 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/get-workflow-path.js</string>
+				<string>./scripts/update-alfred-preferences-icon.applescript</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>1C54A9EF-33FF-4391-A2AA-B1A21ABA6BE7</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>E596A969-3C93-41FA-B182-71849E89E62A</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>37</integer>
-				<key>hotmod</key>
-				<integer>1048576</integer>
-				<key>hotstring</key>
-				<string>L</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.runningwithcrayons.Alfred-Preferences</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>A586AF1E-8A0F-4B14-886F-07F7EA4AFDBA</string>
+			<string>43143E26-0CD1-43FB-B13D-74E8AB0411EF</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -430,39 +597,21 @@
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string>cache</string>
+				<string></string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
-				<dict/>
+				<dict>
+					<key>mode</key>
+					<string>{query}</string>
+				</dict>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
-			<string>3C662734-6A51-42F9-A328-CC888EC278AC</string>
+			<string>ABC4A242-56CA-4276-BDA3-3E4E3EB64347</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>\n$</string>
-				<key>regexcaseinsensitive</key>
-				<false/>
-				<key>regexmultiline</key>
-				<false/>
-				<key>replacestring</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
-			<key>uid</key>
-			<string>D614A191-BB33-4C78-A471-BC471BD46506</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -490,136 +639,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>adata</string>
-				<key>subtext</key>
-				<string>of current workflow</string>
-				<key>text</key>
-				<string>📂 Alfred Workflow Data</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>A783D4B7-9D4B-44E0-A748-49FDAE0A01AA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>17</integer>
-				<key>hotmod</key>
-				<integer>1835008</integer>
-				<key>hotstring</key>
-				<string>T</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.runningwithcrayons.Alfred-Preferences</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>7883C8E0-1C85-4882-95A8-90ED858F92AE</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>path</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.browseinterminal</string>
-			<key>uid</key>
-			<string>078DA54D-95D6-4C48-A1B2-5A16F2F70987</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/get-workflow-path.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>EE7577FB-3FA8-4A9E-9C4B-A607FA02D44A</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>data</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>580C5543-C952-4624-BDA5-0C86C9BB400C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>\n$</string>
-				<key>regexcaseinsensitive</key>
-				<false/>
-				<key>regexmultiline</key>
-				<false/>
-				<key>replacestring</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
-			<key>uid</key>
-			<string>C324E172-125B-402B-930D-F7D52CD82CD6</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -632,8 +651,6 @@
 				<integer>1</integer>
 				<key>escaping</key>
 				<integer>0</integer>
-				<key>keyword</key>
-				<string>areload</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -713,6 +730,100 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/get-workflow-path.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>1C54A9EF-33FF-4391-A2AA-B1A21ABA6BE7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>E596A969-3C93-41FA-B182-71849E89E62A</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>37</integer>
+				<key>hotmod</key>
+				<integer>1048576</integer>
+				<key>hotstring</key>
+				<string>L</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.runningwithcrayons.Alfred-Preferences</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>A586AF1E-8A0F-4B14-886F-07F7EA4AFDBA</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>\n$</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>D614A191-BB33-4C78-A471-BC471BD46506</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -786,50 +897,6 @@
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>7F55AD62-8636-4D88-8A53-E61A24FC96E4</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>:alfred preference</string>
-				<key>subtext</key>
-				<string>{const:alfred_workflow_name}</string>
-				<key>text</key>
-				<string>⚙️ Update Alfred Preference Icon</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>AC7C9D3D-E394-4C9B-B5EE-57E5370DBCA3</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/update-alfred-preferences-icon.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>43143E26-0CD1-43FB-B13D-74E8AB0411EF</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -952,565 +1019,271 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>7792FA5D-64AB-40EB-AE6C-EE433C5FC0CA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>29</integer>
-				<key>hotmod</key>
-				<integer>1048576</integer>
-				<key>hotstring</key>
-				<string>0</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.runningwithcrayons.Alfred-Preferences</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>71716052-FA50-41EB-8F4A-FAD8889FE116</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>9</string>
-				<key>keycode</key>
-				<integer>-1</integer>
-				<key>keymod</key>
-				<integer>1048576</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>44FFE9B4-3CB4-46D3-8742-B7656E370346</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>adocs</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading...</string>
-				<key>script</key>
-				<string>cat ./data/alfred-docs.json</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Alfred Workflow Docs</string>
-				<key>type</key>
-				<integer>11</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>54C6EE1A-837D-4418-893C-4A301235A660</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>4A3A8C19-51DD-4007-9302-1B8EA64BE9A6</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>4D3E285F-7A6E-48E9-B895-F861C8E1FDF2</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>restart alfred</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>❗Restart Alfred</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>296B867C-9788-4374-A10A-AF0EF487EF83</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string># disown, since this script is a process from Alfred itself
-
-nohup ./scripts/restart-alfred.sh
-disown</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>11</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>6552DA50-7058-4101-A2EF-78E87D7C5FF9</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
-	<string>Requires at least Alfred 5.1.
-
-Created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>078DA54D-95D6-4C48-A1B2-5A16F2F70987</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>410</real>
-			<key>ypos</key>
-			<real>165</real>
-		</dict>
 		<key>1C54A9EF-33FF-4391-A2AA-B1A21ABA6BE7</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>get workflow path</string>
 			<key>xpos</key>
-			<real>180</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>585</real>
 		</dict>
 		<key>1ED0BF1E-0B7B-44CA-9800-02C3A363F8D2</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>555</real>
+			<real>575</real>
 			<key>ypos</key>
-			<real>455</real>
-		</dict>
-		<key>296B867C-9788-4374-A10A-AF0EF487EF83</key>
-		<dict>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>775</real>
+			<real>875</real>
 		</dict>
 		<key>2DADFA85-C59F-4D17-A85F-5BC10246EA83</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>985</real>
+			<real>430</real>
 			<key>ypos</key>
-			<real>65</real>
-		</dict>
-		<key>2E405C4A-C768-4D8D-A9BB-A94379AB7484</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>open workflow cache</string>
-			<key>xpos</key>
-			<real>735</real>
-			<key>ypos</key>
-			<real>15</real>
+			<real>355</real>
 		</dict>
 		<key>33A07916-23BF-4B16-A845-62D0B6C7DB14</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>410</real>
+			<real>430</real>
 			<key>ypos</key>
-			<real>455</real>
-		</dict>
-		<key>3C662734-6A51-42F9-A328-CC888EC278AC</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>900</real>
-			<key>ypos</key>
-			<real>45</real>
+			<real>875</real>
 		</dict>
 		<key>43143E26-0CD1-43FB-B13D-74E8AB0411EF</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>885</real>
+			<real>430</real>
 			<key>ypos</key>
-			<real>450</real>
-		</dict>
-		<key>44FFE9B4-3CB4-46D3-8742-B7656E370346</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>xpos</key>
-			<real>180</real>
-			<key>ypos</key>
-			<real>605</real>
+			<real>235</real>
 		</dict>
 		<key>4A3A8C19-51DD-4007-9302-1B8EA64BE9A6</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>1030</real>
+			<real>760</real>
 			<key>ypos</key>
-			<real>705</real>
+			<real>200</real>
 		</dict>
 		<key>4D3E285F-7A6E-48E9-B895-F861C8E1FDF2</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>885</real>
+			<real>615</real>
 			<key>ypos</key>
-			<real>705</real>
+			<real>200</real>
 		</dict>
 		<key>54C6EE1A-837D-4418-893C-4A301235A660</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
-			<key>note</key>
-			<string>search Alfred docs</string>
 			<key>xpos</key>
-			<real>735</real>
+			<real>430</real>
 			<key>ypos</key>
-			<real>635</real>
-		</dict>
-		<key>580C5543-C952-4624-BDA5-0C86C9BB400C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>900</real>
-			<key>ypos</key>
-			<real>170</real>
+			<real>125</real>
 		</dict>
 		<key>6496340C-2FAA-42F9-B626-A6E48D173091</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>copy workflow path</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>875</real>
 		</dict>
 		<key>6552DA50-7058-4101-A2EF-78E87D7C5FF9</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
 			<key>xpos</key>
-			<real>180</real>
+			<real>430</real>
 			<key>ypos</key>
-			<real>775</real>
+			<real>15</real>
 		</dict>
 		<key>6BDF9BC1-F567-4559-B71A-9A52226DF7A5</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>1050</real>
+			<real>745</real>
 			<key>ypos</key>
-			<real>285</real>
-		</dict>
-		<key>71716052-FA50-41EB-8F4A-FAD8889FE116</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>note</key>
-			<string>toggle sidebar w/ different hotkey</string>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>605</real>
+			<real>470</real>
 		</dict>
 		<key>7792FA5D-64AB-40EB-AE6C-EE433C5FC0CA</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>885</real>
+			<real>615</real>
 			<key>ypos</key>
-			<real>580</real>
-		</dict>
-		<key>7883C8E0-1C85-4882-95A8-90ED858F92AE</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>Workflow: Alfred Prefs → Terminal</string>
-			<key>xpos</key>
-			<real>35</real>
-			<key>ypos</key>
-			<real>165</real>
+			<real>85</real>
 		</dict>
 		<key>7B265954-3202-4ECE-A9CC-FE23D2ADB407</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>get workflow path</string>
 			<key>xpos</key>
-			<real>180</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>875</real>
 		</dict>
 		<key>7F55AD62-8636-4D88-8A53-E61A24FC96E4</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>180</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>310</real>
+			<real>730</real>
+		</dict>
+		<key>8CE91420-4683-4D16-BD51-2D1D510E744C</key>
+		<dict>
+			<key>xpos</key>
+			<real>255</real>
+			<key>ypos</key>
+			<real>185</real>
 		</dict>
 		<key>A1E33BB2-038D-4375-B0D8-FD9D71095631</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>msg when not in Alfred directory</string>
 			<key>xpos</key>
-			<real>410</real>
+			<real>430</real>
 			<key>ypos</key>
-			<real>310</real>
+			<real>730</real>
 		</dict>
 		<key>A586AF1E-8A0F-4B14-886F-07F7EA4AFDBA</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>Workflow: Alfred Prefs → Finder</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>585</real>
 		</dict>
-		<key>A783D4B7-9D4B-44E0-A748-49FDAE0A01AA</key>
+		<key>ABC4A242-56CA-4276-BDA3-3E4E3EB64347</key>
 		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>open workflow data</string>
 			<key>xpos</key>
-			<real>735</real>
+			<real>185</real>
 			<key>ypos</key>
-			<real>140</real>
+			<real>255</real>
 		</dict>
-		<key>AC7C9D3D-E394-4C9B-B5EE-57E5370DBCA3</key>
+		<key>AD4DAB43-9C3C-4491-8512-21EA61650C8F</key>
 		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>note</key>
-			<string>set icon for Alfred prefs</string>
 			<key>xpos</key>
-			<real>735</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>450</real>
-		</dict>
-		<key>C324E172-125B-402B-930D-F7D52CD82CD6</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>remove \n</string>
-			<key>xpos</key>
-			<real>335</real>
-			<key>ypos</key>
-			<real>195</real>
+			<real>225</real>
 		</dict>
 		<key>CC2CBA46-235A-476F-851B-0E956CD05CBC</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>remove \n</string>
 			<key>xpos</key>
-			<real>335</real>
+			<real>355</real>
 			<key>ypos</key>
-			<real>485</real>
+			<real>905</real>
 		</dict>
 		<key>D08B3C11-6C2B-492A-ABE0-9ECC93D911C1</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>Workflow: Finder → Alfred Prefs</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>310</real>
+			<real>730</real>
 		</dict>
 		<key>D614A191-BB33-4C78-A471-BC471BD46506</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>remove \n</string>
 			<key>xpos</key>
-			<real>335</real>
+			<real>355</real>
 			<key>ypos</key>
-			<real>45</real>
+			<real>615</real>
 		</dict>
 		<key>E0702454-559E-4671-A5A8-A5C5560B9268</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>890</real>
+			<real>585</real>
 			<key>ypos</key>
-			<real>285</real>
+			<real>470</real>
 		</dict>
 		<key>E29BB51E-40F3-4126-ABEA-920CAD0068A7</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
-			<key>note</key>
-			<string>reload specific workflows</string>
 			<key>xpos</key>
-			<real>735</real>
+			<real>430</real>
 			<key>ypos</key>
-			<real>285</real>
+			<real>470</real>
 		</dict>
 		<key>E596A969-3C93-41FA-B182-71849E89E62A</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>410</real>
+			<real>430</real>
 			<key>ypos</key>
-			<real>15</real>
-		</dict>
-		<key>EE7577FB-3FA8-4A9E-9C4B-A607FA02D44A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>get workflow path</string>
-			<key>xpos</key>
-			<real>180</real>
-			<key>ypos</key>
-			<real>165</real>
+			<real>585</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>awd</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>alfred_keyword</string>
+		</dict>
+	</array>
 	<key>version</key>
 	<string>0.9</string>
 	<key>webaddress</key>
