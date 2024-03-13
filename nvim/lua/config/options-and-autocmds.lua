@@ -46,7 +46,6 @@ opt.undofile = true -- enables persistent undo history
 -- extra undo-points (= more fine-grained undos)
 -- WARN insert mode mappings with `.` or `,` cause problems with typescript
 local triggerChars = { ";", '"', "'", "<Space>" }
-
 for _, char in pairs(triggerChars) do
 	vim.keymap.set("i", char, function()
 		if vim.bo.buftype ~= "" then return char end

@@ -19,6 +19,7 @@ function chpwd {
 # SHORTHANDS
 
 # INFO leading space to ignore it in history due to HIST_IGNORE_SPACE
+alias -=" cd -"
 alias ..=" cd .."
 alias ...=" cd ../.."
 alias ....=" cd ../../.."
@@ -27,12 +28,21 @@ alias ..g=' cd "$(git rev-parse --show-toplevel)"' # goto git root
 #───────────────────────────────────────────────────────────────────────────────
 # RECENT DIRS
 # DOCS https://zsh.sourceforge.io/Doc/Release/User-Contributions.html#Recent-Directories
-# INFO cannot use `zstyle ':chpwd:*' recent-dirs-prune`, since zsh-autocomplete
-# overrides it
+# autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+# add-zsh-hook chpwd chpwd_recent_dirs
+# alias gr=" cdr"
 
-autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
-add-zsh-hook chpwd chpwd_recent_dirs
-alias gr=" cdr"
+function gr {
+	cd "$@" || return 1
+}
+
+_gr() {
+	local -a folders=()
+	while IFS='' read -r dir; do folders+=("$dir"); done < <(dirs -p) # turn lines into array
+	local expl && _description -V recent-folders expl 'Recent Folders'
+	compadd "${expl[@]}" -- "${folders[@]}"
+}
+compdef _gr gr
 
 #───────────────────────────────────────────────────────────────────────────────
 # CYCLE THROUGH DIRECTORIES

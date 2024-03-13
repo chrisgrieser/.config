@@ -44,13 +44,14 @@
       "color" : "#454545FF",
       "paddingHorizontal" : 12,
       "width" : 1024,
-      "borderPadding" : 6,
+      "borderPadding" : 0,
       "borderColor" : "#4141417F",
       "blur" : 0,
       "roundness" : 16,
       "paddingVertical" : 12
     },
     "credit" : "pseudometa",
+    "visualEffectMode" : 2,
     "separator" : {
       "color" : "#628DB372",
       "thickness" : 2
