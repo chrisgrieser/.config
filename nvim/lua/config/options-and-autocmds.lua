@@ -124,6 +124,17 @@ opt.shiftwidth = 3
 opt.shiftround = true
 opt.smartindent = true
 
+-- Formatting `vim.opt.formatoptions:remove("o")` would not work, since it's
+-- overwritten by ftplugins having the `o` option (which many do). Therefore
+-- needs to be set via autocommand.
+autocmd("FileType", {
+	callback = function(ctx)
+		if ctx.match == "markdown" then return end
+		opt_local.formatoptions:remove("o")
+		opt_local.formatoptions:remove("t")
+	end,
+})
+
 --------------------------------------------------------------------------------
 -- SEARCH & SUBSTITUTION
 
@@ -262,14 +273,26 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 --------------------------------------------------------------------------------
 
--- Formatting `vim.opt.formatoptions:remove("o")` would not work, since it's
--- overwritten by ftplugins having the `o` option (which many do). Therefore
--- needs to be set via autocommand.
-autocmd("FileType", {
+-- AUTO-CLOSE BUFFERS whose files do not exist anymore
+vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "QuickFixCmdPost" }, {
+	-- INFO also trigger on `QuickFixCmdPost`, in case a make command deletes file
 	callback = function(ctx)
-		if ctx.match == "markdown" then return end
-		opt_local.formatoptions:remove("o")
-		opt_local.formatoptions:remove("t")
+		local bufnr = ctx.buf
+		vim.defer_fn(function()
+			if not vim.api.nvim_buf_is_valid(bufnr) then return end
+
+			local bufname = vim.api.nvim_buf_get_name(bufnr)
+			local isSpecialBuffer = vim.bo[bufnr].buftype ~= ""
+			local fileExists = vim.loop.fs_stat(bufname) ~= nil
+			local isNewBuffer = bufname == ""
+			-- prevent the temporary buffers from conform.nvim's "injected"
+			-- formatter to be closed by this (filename is like "README.md.5.lua")
+			local conformTempBuf = bufname:find("%.md%.%d+%.%l+$")
+			if fileExists or isSpecialBuffer or isNewBuffer or conformTempBuf then return end
+
+			vim.notify(("%q does not exist anymore. Closing."):format(vim.fs.basename(bufname)))
+			vim.api.nvim_buf_delete(bufnr, { force = false, unload = false })
+		end, 150)
 	end,
 })
 
