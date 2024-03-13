@@ -375,7 +375,7 @@ rules:
         to:
           - { key_code: "9", modifiers: [command] }
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^com\.runningwithcrayons\.Alfred$] }]
+          [{ type: frontmost_application_if, bundle_identifiers: [^com\.runningwithcrayons\.Alfred-Preferences$] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Discord"
     manipulators:

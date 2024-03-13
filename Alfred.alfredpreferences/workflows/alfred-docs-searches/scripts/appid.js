@@ -15,6 +15,7 @@ function run() {
 			"$HOME/Applications" \
 			"/System/Applications" \
 			"/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" \
+			"/Applications/Alfred 5.app/Contents/Preferences/Alfred Preferences.app" \
 			"/System/Library/CoreServices/Finder.app" \
 			-name '*.app' -maxdepth 1 -type d
 		`)
