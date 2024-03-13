@@ -616,9 +616,9 @@
 			<key>config</key>
 			<dict>
 				<key>soundname</key>
-				<string>Purr</string>
+				<string>acknowledgment_sent.caf</string>
 				<key>systemsound</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.playsound</string>
