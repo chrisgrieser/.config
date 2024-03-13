@@ -62,12 +62,13 @@ end, { desc = "󰽙 Buffer Info" })
 
 --------------------------------------------------------------------------------
 -- REFACTORING
+local function left(num) return ("<Left>"):rep(num) end
+
 keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰒕 LSP Var Rename" })
-local left3x = "<Left><Left><Left>"
-keymap("n", "<leader>fs", ":%s /<C-r><C-w>//gI" .. left3x, { desc = " :s cword" })
-keymap("x", "<leader>fs", '"zy:% s/<C-r>z//gI' .. left3x, { desc = " :s for selection" })
-keymap("x", "<leader>fv", ":s ///gI<Left>" .. left3x, { desc = " :s inside visual" })
-keymap("n", "<leader>fd", ":global // d" .. left3x, { desc = " delete matching lines" })
+keymap("n", "<leader>fs", ":%s /<C-r><C-w>//gI" .. left(3), { desc = " :s cword" })
+keymap("x", "<leader>fs", '"zy:% s/<C-r>z//gI' .. left(3), { desc = " :s for selection" })
+keymap("x", "<leader>fv", ":s ///gI" .. left(4), { desc = " :s inside visual" })
+keymap("n", "<leader>fd", ":global // d _" .. left(5), { desc = " delete matching lines" })
 keymap(
 	"n",
 	"<leader>fg",
