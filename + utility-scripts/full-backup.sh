@@ -63,6 +63,7 @@ function backup() {
 backup "$HOME/Applications/" ./Homefolder/Applications # user applications have PWAs
 backup "$HOME/.config/" ./Homefolder/config
 backup "$VAULT_PATH/" ./Homefolder/main-vault
+backup "$PHD_DATA_VAULT/" ./Homefolder/phd-data-analysis
 backup "$PASSWORD_STORE_DIR/" ./Homefolder/password-store
 backup "$HOME/RomComs/" ./Homefolder/RomComs
 

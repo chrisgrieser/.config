@@ -28,12 +28,25 @@ alias ..g=' cd "$(git rev-parse --show-toplevel)"' # goto git root
 
 # FINDER window
 function ..f {
-	finder_dir=$(osascript -e 'tell application "Finder" to return POSIX path of (target of window 1 as alias)' | sed -E 's|/$||')
+	finder_dir=$(osascript -e '
+		tell application "Finder"
+			if ((count Finder windows) is 0) then return
+			return POSIX path of (insertion location as alias)
+		end tell
+	')
+	if [[ ! -d "$finder_dir" ]] ; then
+		print "\e[1;33mNo Finder window found.\e[0m"
+		return 1
+	fi
 	cd "$finder_dir" || return 1
 }
 
 # NVIM cwd
 function ..n {
+	if ! pgrep -qx "neovide" ; then
+		print "\e[1;33mNeovide not running.\e[0m"
+		return 1
+	fi
 	# INFO requires `vim.opt.titlestring = "%{getcwd()}"` in nvim config
 	nvim_cwd=$(osascript -e 'tell application "System Events" to tell process "neovide" to return name of front window')
 	cd "$nvim_cwd" || return 1
@@ -58,7 +71,7 @@ function ..a {
 function gr {
 	local goto="$*"
 	[[ -z "$*" ]] && goto=$(dirs -p | sed '1d') # no arg: goto last
-	goto="${goto/#\~/$HOME}" # resolve ~
+	goto="${goto/#\~/$HOME}"                    # resolve ~
 	cd "$goto" || return 1
 }
 _gr() {
