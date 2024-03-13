@@ -86,6 +86,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>875E9AB6-32D5-463E-AB90-22CD418F2664</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CBC8C303-5FE2-435C-A20C-0BFF5C8F5040</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>95CF671F-9E2F-4CE9-92A0-BACEF07C97C8</key>
 		<array>
 			<dict>
@@ -158,6 +171,8 @@
 				<false/>
 			</dict>
 		</array>
+		<key>CBC8C303-5FE2-435C-A20C-0BFF5C8F5040</key>
+		<array/>
 		<key>E61BAA5C-B8EC-4B90-BE73-0E4711326107</key>
 		<array>
 			<dict>
@@ -739,6 +754,48 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>cleanshot://open-from-clipboard</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>CBC8C303-5FE2-435C-A20C-0BFF5C8F5040</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>annotate||cleanshot</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Annotate Clipboard</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>875E9AB6-32D5-463E-AB90-22CD418F2664</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -845,6 +902,17 @@
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>875E9AB6-32D5-463E-AB90-22CD418F2664</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>note</key>
+			<string>annotate clipboard</string>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>840</real>
+		</dict>
 		<key>95CF671F-9E2F-4CE9-92A0-BACEF07C97C8</key>
 		<dict>
 			<key>colorindex</key>
@@ -936,6 +1004,15 @@
 			<real>200</real>
 			<key>ypos</key>
 			<real>245</real>
+		</dict>
+		<key>CBC8C303-5FE2-435C-A20C-0BFF5C8F5040</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>840</real>
 		</dict>
 		<key>E61BAA5C-B8EC-4B90-BE73-0E4711326107</key>
 		<dict>

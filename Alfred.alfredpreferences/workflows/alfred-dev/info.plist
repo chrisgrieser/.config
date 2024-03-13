@@ -294,16 +294,6 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>EF366EC9-2514-4055-BFC1-E2CCAA023B02</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 		<key>E29BB51E-40F3-4126-ABEA-920CAD0068A7</key>
 		<array>
@@ -630,27 +620,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>🔁 Workflow reloaded</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>6BDF9BC1-F567-4559-B71A-9A52226DF7A5</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -730,6 +699,27 @@
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>🔁 Workflow reloaded</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>6BDF9BC1-F567-4559-B71A-9A52226DF7A5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
 				<string></string>
 				<key>title</key>
 				<string>{query}</string>
@@ -798,21 +788,6 @@
 			<string>7F55AD62-8636-4D88-8A53-E61A24FC96E4</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>leftcursor</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.showalfred</string>
-			<key>uid</key>
-			<string>EF366EC9-2514-4055-BFC1-E2CCAA023B02</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1350,9 +1325,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>1055</real>
+			<real>1050</real>
 			<key>ypos</key>
-			<real>245</real>
+			<real>285</real>
 		</dict>
 		<key>71716052-FA50-41EB-8F4A-FAD8889FE116</key>
 		<dict>
@@ -1532,15 +1507,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>180</real>
 			<key>ypos</key>
 			<real>165</real>
-		</dict>
-		<key>EF366EC9-2514-4055-BFC1-E2CCAA023B02</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>1075</real>
-			<key>ypos</key>
-			<real>380</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
