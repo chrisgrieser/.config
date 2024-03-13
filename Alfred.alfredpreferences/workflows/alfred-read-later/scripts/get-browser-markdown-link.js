@@ -17,48 +17,13 @@ function readFile(path) {
 	return ObjC.unwrap(str);
 }
 
-function browserTab() {
-	const frontmostAppName = Application("System Events")
-		.applicationProcesses.where({ frontmost: true })
-		.name()[0];
-	const frontmostApp = Application(frontmostAppName);
-	const chromiumVariants = [
-		"Google Chrome",
-		"Chromium",
-		"Opera",
-		"Vivaldi",
-		"Brave Browser",
-		"Microsoft Edge",
-		"Arc",
-	];
-	const webkitVariants = ["Safari", "Webkit"];
-	let title, url;
-	if (chromiumVariants.some((appName) => frontmostAppName.startsWith(appName))) {
-		// @ts-ignore
-		url = frontmostApp.windows[0].activeTab.url();
-		// @ts-ignore
-		title = frontmostApp.windows[0].activeTab.name();
-	} else if (webkitVariants.some((appName) => frontmostAppName.startsWith(appName))) {
-		// @ts-ignore
-		url = frontmostApp.documents[0].url();
-		// @ts-ignore
-		title = frontmostApp.documents[0].name();
-	} else {
-		const msg = frontmostAppName.startsWith("Firefox")
-			? "Unfortunately, Firefox is not and cannot be supported."
-			: "You need a supported browser as your frontmost app";
-		app.displayNotification("", { withTitle: msg, subtitle: "" });
-		return;
-	}
-	return { url: url, title: title };
-}
-
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
-function run() {
-	const { title, url } = browserTab();
+function run(argv) {
+	if (!argv[0]) return "No open window";
+	const [title, url] = argv[0].split("\t");
 
 	const dateSignifier = "📆"; // https://publish.obsidian.md/tasks/Getting+Started/Dates
 	const isoDate = new Date().toISOString().slice(0, 10);
