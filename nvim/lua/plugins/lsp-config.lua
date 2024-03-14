@@ -297,11 +297,6 @@ serverConfigs.ltex = {
 			table.insert(ltex.config.settings.ltex.dictionary["en-US"], word)
 			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = ltexSettings })
 		end, { desc = "󰓆 Add Word", buffer = bufnr })
-
-		-- Disable ltex in Obsidian vault, as there is no `.ltexignore` https://github.com/valentjn/vscode-ltex/issues/576
-		if vim.startswith(vim.api.nvim_buf_get_name(0), vim.env.VAULT_PATH) then
-			vim.cmd.LspStop(ltex.id)
-		end
 	end,
 }
 

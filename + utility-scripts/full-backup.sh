@@ -58,17 +58,16 @@ function backup() {
 
 # - WARN each command has to sync to individual folders, since otherwise the
 # `--delete` option will override the previous contents
-# - WARN All source paths needs to end with a slash to sync folder contents
-# - locations defined in zshenv
+# - WARN paths NEEDS TO END WITH A SLASH to sync folder contents
 backup "$HOME/Applications/" ./Homefolder/Applications # user applications have PWAs
-backup "$HOME/.config/" ./Homefolder/config
-backup "$VAULT_PATH/" ./Homefolder/main-vault
-backup "$PHD_DATA_VAULT/" ./Homefolder/phd-data-analysis
-backup "$PASSWORD_STORE_DIR/" ./Homefolder/password-store
 backup "$HOME/RomComs/" ./Homefolder/RomComs
-
-# full iCloud
 backup "$HOME/Library/Mobile Documents/com~apple~CloudDocs/" ./iCloud-Folder
+
+while read -r line; do
+	repo_path=$(echo "$line" | cut -d, -f2 | sed "s|^~|$HOME|")
+	basename="$(basename "$repo_path")"
+	backup "$repo_path/" "./Homefolder/$basename"
+done <"$HOME/.config/perma-repos.csv"
 
 #───────────────────────────────────────────────────────────────────────────────
 # BACKUP COMPLETED MESSAGE
