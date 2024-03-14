@@ -85,26 +85,24 @@ local function formattingFunc(bufnr)
 	-- typescript: organize imports before
 	if ft == "typescript" then
 		local actions = {
+			"source.fixAll.ts",
 			"source.addMissingImports.ts",
 			"source.removeUnusedImports.ts",
 			"source.organizeImports.biome",
 		}
 		-- deferred, so it does not conflict with `addMissingImports`
-		for i = 1, #actions do
-			vim.defer_fn(
-				function()
+		for i = 0, #actions do
+			vim.defer_fn(function()
+				if i < #actions then
 					vim.lsp.buf.code_action {
 						context = { only = { actions[i] } },
 						apply = true,
 					}
-				end,
-				i * 60
-			)
+				else
+					require("conform").format { lsp_fallback = useLsp }
+				end
+			end, i * 60)
 		end
-		vim.defer_fn(
-			function() require("conform").format { lsp_fallback = useLsp } end,
-			(#actions + 1) * 60
-		)
 		return
 	end
 
