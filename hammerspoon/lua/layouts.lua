@@ -18,8 +18,8 @@ end
 
 ---@param targetMode string
 local function dockSwitcher(targetMode)
-	local script = "../../Alfred.alfredpreferences/workflows/dock-switcher/scripts/dock_switcher.sh"
-	local layoutDir = "../../+ dock-layouts"
+	local script = "../Alfred.alfredpreferences/workflows/dock-switcher/scripts/dock_switcher.sh"
+	local layoutDir = "../+ dock-layouts"
 	M.task_dockSwitching = hs.task.new(script, nil, { "--load", targetMode, layoutDir }):start()
 end
 
@@ -124,7 +124,7 @@ M.caff_displayCount = hs.screen.watcher
 	.new(function()
 		u.runWithDelays(0.5, selectLayout) -- delay for recognizing screens
 
-		u.runWithDelays(4, u.closeAllTheThing)
+		u.runWithDelays(4, u.closeAllTheThings)
 		-- If at night switching back to one display, put iMac display to sleep
 		-- (this triggers when the projector is turned off before going to sleep)
 		u.runWithDelays(8, function()
