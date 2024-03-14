@@ -37,7 +37,6 @@ M.timer_clock = hs.timer
 --------------------------------------------------------------------------------
 -- BACKUP / MAINTENANCE
 
--- Backup Vault, Dotfiles, Bookmarks
 M.timer_nightlyMaintenance = hs.timer
 	.doAt("01:00", "01d", function()
 		if os.date("%a") == "Sun" then hs.loadSpoon("EmmyLua") end
@@ -53,13 +52,6 @@ M.timer_nightlyMaintenance = hs.timer
 				u.notify(msg)
 			end)
 			:start()
-		M.task_dotfileBackup = hs.task
-			.new("./helpers/dotfile-bkp.sh", function(exitCode, _, stdErr)
-				local msg = exitCode == 0 and "✅ Dotfile Backup successful"
-					or "⚠️ Dotfile Backup failed: " .. stdErr
-				u.notify(msg)
-			end)
-			:start()
 		M.task_reminderBackup = hs.task
 			.new("./helpers/reminders-bkp.sh", function(exitCode, _, stdErr)
 				local msg = exitCode == 0 and "✅ Reminder Backup successful"
@@ -67,9 +59,6 @@ M.timer_nightlyMaintenance = hs.timer
 				u.notify(msg)
 			end)
 			:start()
-		hs.osascript.applescript(
-			[[tell application id "com.runningwithcrayons.Alfred" to run trigger "backup-obsidian" in workflow "de.chris-grieser.shimmering-obsidian" with argument "no sound"]]
-		)
 		-- save macOS preferences via `mackup`
 		hs.execute(u.exportPath .. "mackup backup --force && mackup uninstall --force", true)
 	end, true)

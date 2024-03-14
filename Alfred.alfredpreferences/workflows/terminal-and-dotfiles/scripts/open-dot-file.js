@@ -107,19 +107,8 @@ function run() {
 			};
 		});
 
-	const pwPath = app.doShellScript('source "$HOME/.zshenv" && echo "$PASSWORD_STORE_DIR"');
-	/** @type{AlfredItem} */
-	const passwordStore = {
-		title: ".password-store",
-		match: alfredMatcher(pwPath) + " folder",
-		icon: { type: "fileicon", path: pwPath },
-		type: "file:skipcheck",
-		uid: pwPath,
-		arg: pwPath,
-	};
-
 	return JSON.stringify({
-		items: [...fileArray, ...folderArray, passwordStore],
+		items: [...fileArray, ...folderArray],
 		cache: { seconds: 120 }, // quick for newly created files
 	});
 }

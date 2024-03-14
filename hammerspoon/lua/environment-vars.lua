@@ -30,12 +30,14 @@ M.transBgApps = {
 
 M.videoAndAudioApps = {
 	"IINA",
+	"TikTok",
 	"YouTube",
 	"zoom.us",
 	"FaceTime",
 	"Twitch",
 	"Netflix",
 	"Prime Video",
+	"Jellyfin",
 	"Tageschau",
 	"Crunchyroll",
 }

@@ -248,7 +248,6 @@ function M.closeAllTheThings()
 	-- close browser tabs and various apps
 	M.closeTabsContaining(".") -- closes all tabs, since all URLs include `.`
 	M.quitApps(env.videoAndAudioApps)
-	require("lua.private").closer()
 end
 
 --------------------------------------------------------------------------------
