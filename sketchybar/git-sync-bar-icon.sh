@@ -14,8 +14,8 @@ function commits_behind {
 	local repo_path="$2"
 
 	git -C "$repo_path" fetch
-	behind=$(git -C "$HOME/.config" branch --verbose | grep -o "behind \d\+" | cut -d" " -f2)
-	[[ -n "$behind" ]] && all_changes="$all_changes$changes!$letter "
+	behind=$(git -C "$repo_path" branch --verbose | grep -o "behind \d\+" | cut -d" " -f2)
+	[[ $behind -ne 0 ]] && all_changes="$all_changes$changes!$letter "
 }
 
 function set_sketchybar {

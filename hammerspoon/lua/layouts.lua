@@ -124,12 +124,12 @@ M.caff_displayCount = hs.screen.watcher
 	.new(function()
 		u.runWithDelays(0.5, selectLayout) -- delay for recognizing screens
 
+		u.runWithDelays(4, u.closeAllTheThing)
 		-- If at night switching back to one display, put iMac display to sleep
 		-- (this triggers when the projector is turned off before going to sleep)
 		u.runWithDelays(8, function()
 			if u.betweenTime(21, 7) and not env.isProjector() then
 				hs.caffeinate.systemSleep()
-				u.closeAllTheThings()
 			end
 		end)
 	end)
