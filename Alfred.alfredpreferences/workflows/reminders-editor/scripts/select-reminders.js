@@ -53,6 +53,7 @@ function run() {
 				notificationTitle: isCompleted ? "🔲 Uncompleted" : "☑️ Completed",
 				mode: isCompleted ? "uncomplete" : "complete",
 				isCompleted: isCompleted.toString(), // only used for cmd action
+				showCompleted: showCompleted.toString(),
 				remindersLeftNow: true.toString(),
 				remindersLeftLater: responseJson.length - 1, // for deciding whether to loop back
 			},

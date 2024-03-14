@@ -313,6 +313,12 @@ return {
 		init = function() u.leaderSubkey("l", " Log", { "n", "x" }) end,
 		opts = {
 			marker = "❗",
+			logStatements = {
+				objectLog = {
+					-- repurposing objectLog for debugging via AppleScript notification
+					sh = [[osascript -e "display notification \"%s %s\" with title \"$%s\""]],
+				},
+			},
 		},
 		keys = {
 			-- stylua: ignore start
