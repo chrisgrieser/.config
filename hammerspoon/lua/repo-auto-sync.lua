@@ -11,7 +11,7 @@ local config = {
 	repos = {},
 }
 for line in io.lines(config.permaReposPath) do
-	local name, location, icon = line:match("(.-),(.-),(.-)")
+	local name, location, icon = line:match("^(.-),(.-),(.-),(.-)$")
 	if not (name and location and icon) then return end
 	table.insert(config.repos, {
 		name = name,
