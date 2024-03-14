@@ -86,7 +86,7 @@ compdef _gr gr
 
 function _grappling_hook {
 	locations=$(cut -d, -f2 "$HOME/.config/perma-repos.csv" | sed "s|^~|$HOME|")
-	locations=$(echo "$locations" | sed 's| |\\ |g')
+	locations=$(echo "$locations" | grep -v "passwords")
 	locations=(
 		"$WD"
 		"$HOME/.config"
