@@ -29,7 +29,7 @@ alias ..g=' cd "$(git rev-parse --show-toplevel)"' # goto git root
 # FINDER window
 function ..f {
 	finder_dir=$(osascript -e 'tell application "Finder" to return POSIX path of (insertion location as alias)' 2>/dev/null)
-	if [[ ! -d "$finder_dir" ]] ; then
+	if [[ ! -d "$finder_dir" ]]; then
 		print "\e[1;33mNo Finder window found.\e[0m"
 		return 1
 	fi
@@ -38,7 +38,7 @@ function ..f {
 
 # NVIM cwd
 function ..n {
-	if ! pgrep -qx "neovide" ; then
+	if ! pgrep -qx "neovide"; then
 		print "\e[1;33mNeovide not running.\e[0m"
 		return 1
 	fi
@@ -85,6 +85,8 @@ compdef _gr gr
 # CYCLE THROUGH DIRECTORIES
 
 function _grappling_hook {
+	locations=$(cut -d, -f2 "$HOME/.config/perma-repos.csv" | sed "s|^~|$HOME|")
+	locations=$(echo "$locations" | sed 's| |\\ |g')
 	locations=(
 		"$WD"
 		"$HOME/.config"

@@ -245,7 +245,6 @@ local autoCd = {
 	childOfDir = {
 		".config", -- my dotfiles
 		"com~apple~CloudDocs", -- iCloud
-		fs.basename(vim.env.VAULT_PATH), -- Obsidian vault
 	},
 }
 
