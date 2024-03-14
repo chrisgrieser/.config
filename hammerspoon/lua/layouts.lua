@@ -74,7 +74,7 @@ local function workLayout()
 	-- finish
 	u.whenAppWinAvailable("Discord", function()
 		-- FIX missing windows by restarting AltTab
-		u.runWithDelays({ 2, 5 }, function()
+		u.runWithDelays({ 3, 6 }, function()
 			if not app("AltTab") then hs.application.open("AltTab") end
 		end)
 		app("Mimestream"):activate()
@@ -126,10 +126,12 @@ M.caff_displayCount = hs.screen.watcher
 
 		-- If at night switching back to one display, put iMac display to sleep
 		-- (this triggers when the projector is turned off before going to sleep)
-		if u.betweenTime(21, 7) and not env.isProjector() then
-			u.closeAllTheThings()
-			u.runWithDelays(8, hs.caffeinate.systemSleep)
-		end
+		u.runWithDelays(8, function()
+			if u.betweenTime(21, 7) and not env.isProjector() then
+				hs.caffeinate.systemSleep()
+				u.closeAllTheThings()
+			end
+		end)
 	end)
 	:start()
 

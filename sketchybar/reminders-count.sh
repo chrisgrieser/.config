@@ -32,4 +32,3 @@ else
 	padding=3
 fi
 sketchybar --set "$NAME" label="$remindersToday" icon="$icon" icon.padding_right=$padding
-
