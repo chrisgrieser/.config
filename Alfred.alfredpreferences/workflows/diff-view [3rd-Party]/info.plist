@@ -291,9 +291,7 @@
 				<key>behaviour</key>
 				<integer>0</integer>
 				<key>fontmode</key>
-				<integer>0</integer>
-				<key>fontsizing</key>
-				<integer>0</integer>
+				<integer>2</integer>
 				<key>footertext</key>
 				<string></string>
 				<key>inputfile</key>
@@ -305,8 +303,6 @@
 				<key>outputmode</key>
 				<integer>0</integer>
 				<key>scriptinput</key>
-				<integer>0</integer>
-				<key>spellchecking</key>
 				<integer>0</integer>
 				<key>stackview</key>
 				<false/>
@@ -666,7 +662,7 @@ Compare two files or folders via the [Universal Action](https://www.alfredapp.co
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>2024.1</string>
+	<string>2024.2</string>
 	<key>webaddress</key>
 	<string>https://github.com/alfredapp/simple-diff-workflow/</string>
 </dict>
