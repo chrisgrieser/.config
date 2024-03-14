@@ -5,4 +5,4 @@ reload_karabiner:
 
 show_leader_keys:
 	yq '.rules[1].manipulators[].description' \
-		"./assets/complex_modifications/2 ctrl-leader.yaml"
+		"./assets/complex_modifications/2 ctrl-leader.yaml" | sort -f
