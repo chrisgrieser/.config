@@ -1,33 +1,40 @@
 #!/usr/bin/env zsh
 mode="$1"
 layout="$2"
-dock_plist="$HOME/Library/Preferences/com.apple.dock.plist"
 
-# shellcheck disable=2154
-dock_config="$dock_layout_storage/$layout.plist"
+# either get Alfred config if set, or use $3
+dock_layout_storage=${dock_layout_storage:-$3}
+
+# GUARD
+if [[ ! -d "$dock_layout_storage" ]]; then
+	echo "⚠️ Layout storage directory does not exist."
+	return 1
+elif [[ -z "$layout" ]]; then
+	echo "⚠️ No layout to save given."
+	return 1
+elif [[ "$mode" != "--load" && "$mode" != "--save" ]]; then
+	echo "⚠️ Not a valid option."
+	return 1
+fi
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# location where macOS stores the current layout
+dock_plist="$HOME/Library/Preferences/com.apple.dock.plist"
+
+layout_file="$dock_layout_storage/$layout.plist"
 if [[ "$mode" == "--load" ]]; then
-	if [[ -z "$layout" ]]; then
-		echo "Layout to load is missing."
-	elif [[ ! -f "$dock_config" ]]; then
-		echo "Layout '$layout' does not exist."
-	else
-		rm "$dock_plist" || return 1
-		cp -a "$dock_config" "$dock_plist"
-		defaults import com.apple.dock "$dock_plist"
-		sleep 0.1
-		killall Dock
-		echo "✅ Loaded layout '$layout'"
+	if [[ ! -f "$layout_file" ]]; then
+		echo "⚠️ Layout \"$layout\" does not exist."
+		return 1
 	fi
+	rm "$dock_plist" || return 1
+	cp -a "$layout_file" "$dock_plist"
+	defaults import com.apple.dock "$dock_plist"
+	sleep 0.1
+	killall Dock
+	echo "✅ Loaded layout \"$layout\""
 elif [[ "$mode" == "--save" ]]; then
-	if [[ -z "$layout" ]]; then
-		echo "⚠️ Layout to save is missing."
-	else
-		cp -f "$dock_plist" "$dock_config"
-		echo "✅ Saved as '$layout'"
-	fi
-else
-	echo "⚠️ Not a valid option."
+	cp -f "$dock_plist" "$layout_file"
+	echo "✅ Saved as \"$layout\""
 fi
