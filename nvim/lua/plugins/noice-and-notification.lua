@@ -54,6 +54,10 @@ local routes = {
 	{ filter = { event = "msg_show", find = "^:!make" }, skip = true },
 	{ filter = { event = "msg_show", find = "^%(%d+ of %d+%):" }, skip = true },
 
+	-----------------------------------------------------------------------------
+	-- E211 no longer needed, since auto-closing deleted buffers
+	{ filter = { event = "msg_show", find = "E211: File .* no longer available" }, skip = true },
+
 	-- nvim-treesitter
 	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
 
