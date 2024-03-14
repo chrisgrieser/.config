@@ -180,7 +180,7 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
-      - description: "[m]ail"
+      - description: "[m]ail: Mimestream"
         type: basic
         from: { key_code: m }
         conditions: [*leader-active]
