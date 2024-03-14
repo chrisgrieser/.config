@@ -2,34 +2,24 @@ local M = {} -- persist from garbage collector
 
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
-local readZshEnv = require("lua.environment-vars").readZshEnv
 --------------------------------------------------------------------------------
 
+-- CONFIG
 local config = {
 	syncIntervalMins = 30,
-	repos = {
-		{
-			name = "Dotfiles",
-			icon = "🔵",
-			location = os.getenv("HOME") .. "/.config",
-		},
-		{
-			name = "Vault",
-			icon = "🟪",
-			location = readZshEnv("VAULT_PATH"),
-		},
-		{
-			name = "Passwords",
-			icon = "🔑",
-			location = readZshEnv("PASSWORD_STORE_DIR"),
-		},
-		{
-			name = "PhD Data",
-			icon = "📗",
-			location = readZshEnv("PHD_DATA_VAULT"),
-		},
-	},
+	permaReposPath = os.getenv("HOME") .. "/.config/perma-repos.csv",
+	repos = {},
 }
+for line in io.lines(config.permaReposPath) do
+	local name, location, icon = line:match("(.-),(.-),(.-)")
+	if not (name and location and icon) then return end
+	table.insert(config.repos, {
+		name = name,
+		location = location,
+		icon = icon,
+	})
+end
+
 
 --------------------------------------------------------------------------------
 -- REPO SYNC JOBS

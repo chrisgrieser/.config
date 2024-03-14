@@ -5,10 +5,6 @@ export ZDOTDIR="$HOME/.config/zsh"
 #───────────────────────────────────────────────────────────────────────────────
 
 # Directories
-export VAULT_PATH="$HOME/main-vault"
-export PASSWORD_STORE_DIR="$HOME/.password-store" # default value still needed for some scripts
-export PHD_DATA_VAULT="$HOME/phd-data-analysis"
-
 export WD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub"
 export DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder"
 export LOCAL_REPOS="$HOME/repos"

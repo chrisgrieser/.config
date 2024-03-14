@@ -6,7 +6,7 @@ local M = {}
 -- system startup, so the values have to be read manually.
 ---@param varname string
 ---@return string
-function M.readZshEnv(varname)
+local function readZshEnv(varname)
 	local value, success = hs.execute("source $HOME/.zshenv && echo $" .. varname)
 	if not success then hs.notify.show("Hammerspoon", "", "⚠️ Could not source .zshenv") end
 	if not value then return "" end
@@ -14,17 +14,12 @@ function M.readZshEnv(varname)
 	return value
 end
 
-M.fileHub = M.readZshEnv("WD")
-
-M.codeFont = M.readZshEnv("CODE_FONT")
-M.homebrewPrefix = M.isAtMother and "/usr/local" or "/opt/homebrew"
-
 --------------------------------------------------------------------------------
 -- Apps
 
 M.mastodonApp = "Mona"
-M.browserApp = M.readZshEnv("BROWSER_APP")
-M.browserDefaultsPath = M.readZshEnv("BROWSER_DEFAULTS_PATH")
+M.browserApp = readZshEnv("BROWSER_APP")
+M.browserDefaultsPath = readZshEnv("BROWSER_DEFAULTS_PATH")
 
 M.transBgApps = {
 	"neovide",
@@ -62,6 +57,12 @@ function M.isProjector()
 	local tvLeuthinger = mainDisplayName == "TV_MONITOR"
 	return projectorHelmholtz or tvLeuthinger
 end
+
+--------------------------------------------------------------------------------
+
+M.fileHub = readZshEnv("WD")
+M.codeFont = readZshEnv("CODE_FONT")
+M.homebrewPrefix = M.isAtMother and "/usr/local" or "/opt/homebrew"
 
 --------------------------------------------------------------------------------
 return M
