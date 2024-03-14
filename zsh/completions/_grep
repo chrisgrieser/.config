@@ -1,5 +1,10 @@
 #compdef grep egrep fgrep bsdgrep rgrep zgrep zegrep zfgrep ggrep gegrep gfgrep gzgrep gzegrep gzfgrep bzgrep bzegrep bzfgrep -value-,GREP_OPTIONS,-default-
 
+# SOURCE https://github.com/zsh-users/zsh/blob/45b0a838aa6e05131523dee291c561cf86f04771/Completion/Unix/Command/_grep
+# INFO only changed in this file is to comment out line after 
+# "# remove long option", so long options are suggested
+#───────────────────────────────────────────────────────────────────────────────
+
 local command variant
 local -a arguments matchers
 
@@ -135,7 +140,7 @@ case $variant:$OSTYPE in
   ;;
   *)
     # remove long options and GNU specific short opts, this is right for solaris
-    arguments=( ${arguments:#((#s)|*\))(\*|)-[aABCdDfGHILmorVy-]*} )
+    # arguments=( ${arguments:#((#s)|*\))(\*|)-[aABCdDfGHILmorVy-]*} )
   ;;
 esac
 
