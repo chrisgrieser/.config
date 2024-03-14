@@ -4,14 +4,13 @@ local env = require("lua.environment-vars")
 local u = require("lua.utils")
 --------------------------------------------------------------------------------
 
--- CONFIG
 local config = {
 	syncIntervalMins = 30,
 	permaReposPath = os.getenv("HOME") .. "/.config/perma-repos.csv",
 	repos = {},
 }
 for line in io.lines(config.permaReposPath) do
-	local name, location, icon = line:match("^(.-),(.-),(.-),(.-)$")
+	local name, location, icon, _ = line:match("^(.-),(.-),(.-),(.-)$")
 	if not (name and location and icon) then return end
 	table.insert(config.repos, {
 		name = name,
