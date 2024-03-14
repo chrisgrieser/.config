@@ -76,7 +76,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>zsh "$dock_switcher_path" --load "$1"</string>
+				<string>zsh "./scripts/dock_switcher.sh" --load "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -103,7 +103,7 @@
 				<key>text</key>
 				<string></string>
 				<key>title</key>
-				<string>✅ {query}</string>
+				<string>{query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -144,7 +144,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>load-dock-layout.js</string>
+				<string>./scripts/load-dock-layout.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -169,7 +169,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>zsh "$dock_switcher_path" --save "$1"</string>
+				<string>zsh "./scripts/dock_switcher.sh" --save "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -234,22 +234,22 @@
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>~/dotfiles/hammerspoon/helpers/dock-switching/dock-switcher.sh</string>
+				<string>~/.config/dock-layouts</string>
 				<key>filtermode</key>
-				<integer>2</integer>
+				<integer>1</integer>
 				<key>placeholder</key>
 				<string>/path/dock-switcher.sh</string>
 				<key>required</key>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>Folder where dock layouts should be stored. Put in a cloud drive for syncing.</string>
 			<key>label</key>
-			<string>dock switcher script path</string>
+			<string>Dock layout location</string>
 			<key>type</key>
 			<string>filepicker</string>
 			<key>variable</key>
-			<string>dock_switcher_path</string>
+			<string>dock_layout_storage</string>
 		</dict>
 	</array>
 	<key>version</key>

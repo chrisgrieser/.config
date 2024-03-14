@@ -43,15 +43,14 @@
     "window" : {
       "color" : "#454545FF",
       "paddingHorizontal" : 12,
-      "width" : 1024,
-      "borderPadding" : 0,
+      "width" : 1020,
+      "borderPadding" : 7,
       "borderColor" : "#4141417F",
       "blur" : 0,
-      "roundness" : 16,
-      "paddingVertical" : 12
+      "roundness" : 13,
+      "paddingVertical" : 14
     },
     "credit" : "pseudometa",
-    "visualEffectMode" : 1,
     "separator" : {
       "color" : "#628DB372",
       "thickness" : 2

@@ -63,6 +63,7 @@ backup "$HOME/Applications/" ./Homefolder/Applications # user applications have 
 backup "$HOME/RomComs/" ./Homefolder/RomComs
 backup "$HOME/Library/Mobile Documents/com~apple~CloudDocs/" ./iCloud-Folder
 
+# also backup all perma-repos
 while read -r line; do
 	repo_path=$(echo "$line" | cut -d, -f2 | sed "s|^~|$HOME|")
 	basename="$(basename "$repo_path")"
