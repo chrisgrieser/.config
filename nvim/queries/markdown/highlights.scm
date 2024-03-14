@@ -1,6 +1,6 @@
 ; INFO This file is a copy of the treesitter markdown highlights, with the only
-; change that conceal has been disabled for codeblocks. Instead of using
-; `;extends`, this file fully overrides the original `highlights.scm`. This is
+; change that conceal has been disabled for codeblocks. By not using `;extends`,
+; this file fully overrides the original `highlights.scm`. This is
 ; necessary because there is currently no method of disabling only some conceals. 
 ; https://www.reddit.com/r/neovim/comments/18luuzc/comment/ke3yd0o/
 
@@ -62,7 +62,7 @@
 ((fenced_code_block) @markup.raw.block
   (#set! "priority" 90))
 
-; NOTE: The following has been commented out due to issues with spaces in the
+; NOTE this part commented out by me
 ; (fenced_code_block
 ;   (fenced_code_block_delimiter) @markup.raw.block
 ;   (#set! conceal ""))
