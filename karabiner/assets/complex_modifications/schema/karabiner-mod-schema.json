@@ -420,6 +420,9 @@
 			"type": "object",
 			"additionalProperties": false,
 			"properties": {
+				"description": {
+					"type": "string"
+				},
 				"type": {
 					"$ref": "#/definitions/ManipulatorType"
 				},
