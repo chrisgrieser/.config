@@ -1300,9 +1300,9 @@ Display processes directly via `top`. Append "parent" to the query to display on
 - &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy the PID.  
 
 **Meaning of the icons**  
-- `⭕` indicates that the process is owned by root.
-- `n⇣` means that the process is a parent of `n` child processes.
-- `↖ foobar` indicates that the process is a child of `foobar`.
+- `⭕`: process is owned by root.
+- `n⇣`: process is a parent of `n` child processes.
+- `↖ foobar`: process is a child of `foobar`.
 
 ### Bluetooth Devices
 Display paired Bluetooth devices directly via `blue`.  

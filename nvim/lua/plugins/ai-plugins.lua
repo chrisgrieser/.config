@@ -18,7 +18,7 @@ return {
 		-- add syntax highlighting to output field
 		init = function() vim.treesitter.language.register("markdown", "neoai-output") end,
 		opts = {
-			ui = { width = 40 },
+			ui = { width = 45 },
 			shortcuts = {}, -- disable those bindings
 		},
 	},

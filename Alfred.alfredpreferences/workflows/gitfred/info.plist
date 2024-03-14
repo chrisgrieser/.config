@@ -1837,7 +1837,7 @@ end run</string>
 				<string>restore mtime</string>
 			</dict>
 			<key>description</key>
-			<string>`git clone` normally erases modification time of files. It can be restored from the commit log, though. However, this the modification time then only goes as far back as the oldest commit, so you might want to increase clone depth.</string>
+			<string>git normally erases the modification time of all cloned. Enabling this will restore the mtime from the commit log. (However, the modification time only goes as far back as the oldest commit, so you might want to increase clone depth.)</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
