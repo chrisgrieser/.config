@@ -46,6 +46,11 @@ for lspName, _ in pairs(lspToMasonMap) do
 	serverConfigs[lspName] = {}
 end
 
+local function disableClientInObsidianVault(client)
+	local obsiDir = vim.fs.find(".obsidian", { upward = true, type = "directory" })
+	if not vim.tbl_isempty(obsiDir) then vim.cmd.LspStop(client.id) end
+end
+
 --------------------------------------------------------------------------------
 -- BASH / ZSH
 
@@ -65,10 +70,8 @@ serverConfigs.efm = {
 	cmd = { "efm-langserver", "-c", vim.g.linterConfigs .. "/efm.yaml" },
 	filetypes = { "sh", "markdown", "yaml" }, -- limit to filestypes needed
 	on_attach = function(client)
-		-- Disable in Obsidian vault, as `.markdownlintignore` does not work well with efm
-		if vim.startswith(vim.api.nvim_buf_get_name(0), vim.env.VAULT_PATH) then
-			vim.cmd.LspStop(client.id)
-		end
+		-- as `.markdownlintignore` does not work well with efm, since it requires non-stdin
+		disableClientInObsidianVault(client)
 	end,
 }
 
@@ -297,6 +300,9 @@ serverConfigs.ltex = {
 			table.insert(ltex.config.settings.ltex.dictionary["en-US"], word)
 			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = ltexSettings })
 		end, { desc = "󰓆 Add Word", buffer = bufnr })
+
+		-- as `.markdownlintignore` does not work well with efm, since it requires non-stdin
+		disableClientInObsidianVault(ltex)
 	end,
 }
 

@@ -84,19 +84,24 @@ compdef _gr gr
 #───────────────────────────────────────────────────────────────────────────────
 # CYCLE THROUGH DIRECTORIES
 
+function get_nth_line_from {
+	to_open="$(echo "$2" | sed -n "${1}p")"
+}
+
 function _grappling_hook {
+	# CONFIG one location per line
+	# 1. read from csv, 2. remove .password-store, add WD
+	local locations
 	locations=$(cut -d, -f2 "$HOME/.config/perma-repos.csv" | sed "s|^~|$HOME|")
-	locations=$(echo "$locations" | grep -v "passwords")
-	locations=(
-		"$WD"
-		"$HOME/.config"
-		"$VAULT_PATH"
-		"$PHD_DATA_VAULT"
-	)
-	local to_open="${locations[1]}"
-	local locations_count=${#locations[@]}
+	locations="$WD"$'\n'"$(echo "$locations" | grep -v ".password-store")"
+
+	local to_open locations_count dir
+	to_open=$(echo "$locations" | sed -n "1p")
+	locations_count=$(echo "$locations" | wc -l)
+
 	for ((i = 1; i <= locations_count - 1; i++)); do
-		[[ "$PWD" == "${locations[$i]}" ]] && to_open="${locations[$((i + 1))]}"
+		dir=$(echo "$locations" | sed -n "${i}p")
+		[[ "$PWD" == "$dir" ]] && to_open=$(echo "$locations" | sed -n "$((i + 1))p")
 	done
 	cd -q "$to_open" || return 1
 	zle reset-prompt

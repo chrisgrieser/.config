@@ -26,16 +26,14 @@ metadata: { title: "foobar" } # suppress irrelevant warning if file has no h1
 #───────────────────────────────────────────────────────────────────────────────
 # GENERAL
 
-# headings
+# Headings
 number-sections: true
 table-of-contents: false
 toc-depth: 3
 shift-heading-level-by: -1 # h1 -> title, h2 -> h1
 
-resource-path:
-  - .
-  - ./attachments
-  - ${VAULT_PATH} 
+# Images
+resource-path: [., ./attachments]
 
 # MARKDOWN-READER https://pandoc.org/MANUAL.html#extensions
 reader: |

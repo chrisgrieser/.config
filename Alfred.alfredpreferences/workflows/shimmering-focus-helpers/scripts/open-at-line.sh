@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
 
-# INFO vault path set in zshenv
-sf_path="$VAULT_PATH/.obsidian/themes/Shimmering Focus/theme.css"
-lineNo="$*"
+# INFO LOCAL_REPOS set in zshenv
+sf_path="$LOCAL_REPOS/shimmering-focus/theme.css"
 
 # workaround for https://github.com/neovide/neovide/issues/1604
+lineNo="$*"
 open "$sf_path" --env=LINE="$lineNo"

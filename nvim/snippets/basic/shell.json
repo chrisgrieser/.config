@@ -124,6 +124,10 @@
     "body": "function ${1:name} {\n\t${0}\n}",
     "prefix": "function"
   },
+  "get nth line from string": {
+    "body": "line=$(echo \"\\$${1:str}\" | sed -n \"${2:n}p\")",
+    "prefix": "get nth line from string"
+  },
   "global var (shellcheck)": {
     "body": "\\${${1:global_var}:?}",
     "description": "shellcheck recommends failing if global variable is undefined (SC2054). Useful for example for Alfred Environment Variables.",
