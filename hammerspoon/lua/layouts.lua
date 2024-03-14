@@ -18,9 +18,9 @@ end
 
 ---@param targetMode string
 local function dockSwitcher(targetMode)
-	M.task_dockSwitching = hs.task
-		.new("./helpers/dock-switching/dock-switcher.sh", nil, { "--load", targetMode })
-		:start()
+	local script = "../../Alfred.alfredpreferences/workflows/dock-switcher/scripts/dock_switcher.sh"
+	local layoutDir = "../../+ dock-layouts"
+	M.task_dockSwitching = hs.task.new(script, nil, { "--load", targetMode, layoutDir }):start()
 end
 
 local function setHigherBrightnessDuringDay()
@@ -128,9 +128,7 @@ M.caff_displayCount = hs.screen.watcher
 		-- If at night switching back to one display, put iMac display to sleep
 		-- (this triggers when the projector is turned off before going to sleep)
 		u.runWithDelays(8, function()
-			if u.betweenTime(21, 7) and not env.isProjector() then
-				hs.caffeinate.systemSleep()
-			end
+			if u.betweenTime(21, 7) and not env.isProjector() then hs.caffeinate.systemSleep() end
 		end)
 	end)
 	:start()
