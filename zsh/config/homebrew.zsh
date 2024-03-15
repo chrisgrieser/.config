@@ -40,6 +40,10 @@ function _dump() {
 	print "\e[1;38;5;247mBrewfile & browser-extensions-list saved at \"$(basename "$dump_path")\".\e[0m"
 }
 
+#───────────────────────────────────────────────────────────────────────────────
+
+alias update_commandline_tools='softwareupdate --install "Command Line Tools for Xcode"'
+
 function update() {
 	_print-section "Homebrew"
 	brew update
@@ -83,3 +87,5 @@ function listall() {
 
 	echo && _dump
 }
+
+

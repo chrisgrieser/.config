@@ -123,13 +123,13 @@ return {
 					border = { style = vim.g.borderStyle },
 					size = { width = 90, height = 25 },
 					win_options = { scrolloff = 8, wrap = true },
-					close = { keys = { "q", "<D-w>", "<D-9>" } },
+					close = { keys = { "q", "<D-w>", "<D-9>", "<D-0>" } },
 				},
 				split = {
 					enter = true,
 					size = "50%",
-					close = { keys = { "q", "<D-w>", "<D-0>" } },
 					win_options = { scrolloff = 6 },
+					close = { keys = { "q", "<D-w>", "<D-9>", "<D-0>" } },
 				},
 			},
 			commands = {
