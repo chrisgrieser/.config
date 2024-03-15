@@ -1,2 +1,3 @@
-local found = vim.fs.find(".obsidian", { upward = true, type = "directory" })
-vim.notify("❗ found: " .. vim.inspect(found))
+
+local out = require("notify").instance()
+vim.notify("❗ out: " .. vim.inspect(out))
