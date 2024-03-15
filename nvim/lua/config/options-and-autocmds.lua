@@ -98,6 +98,7 @@ opt.signcolumn = "yes:1"
 opt.textwidth = 80 -- mostly set by .editorconfig, therefore only fallback
 opt.colorcolumn = "+1" -- one more than textwidth
 opt.wrap = false
+opt.breakindent = true -- indent wrapped lines
 
 opt.shortmess:append("sSI") -- reduce info in :messages
 opt.report = 9001 -- disable "x more/fewer lines" messages

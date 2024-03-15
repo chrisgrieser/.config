@@ -6,6 +6,7 @@ local defaultSources = {
 	{
 		name = "nvim_lsp",
 		entry_filter = function(entry, _)
+			-- using cmp-buffer for that
 			return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
 		end,
 	},
@@ -34,7 +35,7 @@ local defaultSources = {
 
 local sourceIcons = {
 	buffer = "󰽙",
-	cmdline = "",
+	cmdline = "󰘳",
 	emoji = "󰞅",
 	luasnip = "",
 	nvim_lsp = "󰒕",
@@ -77,11 +78,7 @@ local function cmpconfig()
 
 			-- manually triggering to only include LSP, useful for typed yaml/json
 			["<D-c>"] = cmp.mapping.complete {
-				config = {
-					sources = cmp.config.sources {
-						{ name = "nvim_lsp" },
-					},
-				},
+				config = { sources = cmp.config.sources { { name = "nvim_lsp" } } },
 			},
 
 			-- Next item, or trigger completion, or insert normal tab
@@ -194,10 +191,10 @@ return {
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-emoji",
 			"hrsh7th/cmp-nvim-lsp", -- LSP input
 			"L3MON4D3/LuaSnip", -- snippet engine
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
-			{ "Allaman/emoji.nvim", opts = { enable_cmp_integration = true } },
 		},
 	},
 	{ -- Snippet Engine
