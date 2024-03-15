@@ -152,11 +152,6 @@ return {
 				},
 			},
 
-			popupmenu = {
-				enabled = true, -- enables the Noice popupmenu UI
-				backend = "nui",
-			},
-
 			-- DISABLE features, since conflicts with existing plugins I prefer to use
 			lsp = {
 				progress = { enabled = false }, -- replaced with nvim-dr-lsp, since less intrusive
