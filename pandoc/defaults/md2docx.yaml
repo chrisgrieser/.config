@@ -35,7 +35,7 @@ filters: [set-date-metadata.lua] # auto-sets date, if there is none in the metad
 
 # Academic
 citeproc: true
-bibliography: ${USERDATA}/main-bibliography.bib
+# bibliography: ${USERDATA}/main-bibliography.bib
 
 # needs to be set in metadata-file so it is overwritten by metadata in the
 # document yaml. (setting them here makes them override the document yaml.)
