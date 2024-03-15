@@ -244,7 +244,7 @@ local autoCd = {
 		".project-root", -- manual marker file
 	},
 	siblingOfRoot = {
-		".obsidian"
+		".obsidian",
 	},
 	parentOfRoot = {
 		".config", -- my dotfiles
@@ -261,28 +261,32 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		if specialBuffer or not exists then return end
 
 		-- 1. childOfRoot
-		local root
+		local roots = {}
 		local childOfRoot = fs.find(autoCd.childOfRoot, { upward = true, path = bufPath })[1]
-		if childOfRoot then root = fs.dirname(childOfRoot) end
+		if childOfRoot then table.insert(roots, fs.dirname(childOfRoot)) end
 
 		-- 2. siblingOfRoot
 		local siblingOfRoot = fs.find(autoCd.siblingOfRoot, { upward = true, path = bufPath })[1]
 		if siblingOfRoot then
 			local parentOfRoot = fs.dirname(siblingOfRoot)
+			local rootBase = bufPath:sub(#parentOfRoot + 1, -1):match("^(/.-)/")
+			table.insert(roots, parentOfRoot .. rootBase)
 		end
 
 		-- 3. parentOfRoot
 		for dir in fs.parents(bufPath) do
 			local parent = fs.dirname(dir)
 			local isParentOfRoot = vim.tbl_contains(autoCd.parentOfRoot, fs.basename(parent))
-			local parentIsDeeper = #dir > #(root or "")
-			if isParentOfRoot and parentIsDeeper then
-				root = dir
+			if isParentOfRoot then
+				table.insert(roots, dir)
 				break
 			end
 		end
 
-		if root and vim.loop.cwd() ~= root then vim.loop.chdir(root) end
+		-- get deepest of all matches
+		table.sort(roots, function(a, b) return #a > #b end)
+
+		if #roots > 0 and vim.loop.cwd() ~= roots[1] then vim.loop.chdir(roots[1]) end
 	end,
 })
 
