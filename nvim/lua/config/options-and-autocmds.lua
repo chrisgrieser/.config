@@ -319,7 +319,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "QuickFixCmdPost" }, {
 					return
 				end
 			end
-		end, 150)
+		end, 500)
 	end,
 })
 

@@ -166,11 +166,11 @@ return {
 			},
 		},
 	},
-	{ -- Notifications
+	{
 		"rcarriga/nvim-notify",
 		opts = {
 			render = "wrapped-compact", -- best for shorter max_width
-			-- max_width = 60,
+			max_width = math.floor(vim.o.columns * 0.4),
 			minimum_width = 15,
 			top_down = false,
 			level = vim.log.levels.TRACE, -- minimum severity
