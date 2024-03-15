@@ -13,6 +13,7 @@ theme_folders=$(grep --ignore-case "vault" "$HOME/.config/perma-repos.csv" |
 #───────────────────────────────────────────────────────────────────────────────
 
 [[ ! -d "$LOCAL_REPOS" ]] && mkdir -p "$LOCAL_REPOS"
+cd "$LOCAL_REPOS" || return 1
 
 # WARN depth=2 ensures that amending a shallow commit does not result in a
 # new commit without parent, effectively destroying git history
