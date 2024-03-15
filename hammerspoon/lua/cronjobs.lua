@@ -4,7 +4,6 @@ local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
 local c = hs.caffeinate.watcher
-
 --------------------------------------------------------------------------------
 
 -- keep the iMac display brightness low when projector is connected
@@ -45,6 +44,9 @@ M.timer_nightlyMaintenance = hs.timer
 		local isSunTueThuSat = os.date("%w") % 2 == 0
 		if isSunTueThuSat then return end
 
+		-- save macOS preferences via `mackup`
+		hs.execute(u.exportPath .. "mackup backup --force && mackup uninstall --force", true)
+
 		M.task_bookmarksBackup = hs.task
 			.new("./helpers/bookmark-bkp.sh", function(exitCode, _, stdErr)
 				local msg = exitCode == 0 and "✅ Bookmark Backup successful"
@@ -52,6 +54,7 @@ M.timer_nightlyMaintenance = hs.timer
 				u.notify(msg)
 			end)
 			:start()
+
 		M.task_reminderBackup = hs.task
 			.new("./helpers/reminders-bkp.sh", function(exitCode, _, stdErr)
 				local msg = exitCode == 0 and "✅ Reminder Backup successful"
@@ -59,8 +62,6 @@ M.timer_nightlyMaintenance = hs.timer
 				u.notify(msg)
 			end)
 			:start()
-		-- save macOS preferences via `mackup`
-		hs.execute(u.exportPath .. "mackup backup --force && mackup uninstall --force", true)
 	end, true)
 	:start()
 
@@ -69,7 +70,7 @@ M.timer_nightlyMaintenance = hs.timer
 
 -- Between 0:00 and 7:00, check every 10 min if device has been idle for 30
 -- minutes. If so, alert and wait for another minute. If still idle then, quit
--- video apps.
+-- all video apps.
 local config = {
 	betweenHours = { 0, 7 },
 	checkIntervalMins = 10,
