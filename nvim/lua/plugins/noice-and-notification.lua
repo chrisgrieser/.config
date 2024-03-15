@@ -170,7 +170,7 @@ return {
 		"rcarriga/nvim-notify",
 		opts = {
 			render = "wrapped-compact", -- best for shorter max_width
-			max_width = 50,
+			-- max_width = 60,
 			minimum_width = 15,
 			top_down = false,
 			level = vim.log.levels.TRACE, -- minimum severity
