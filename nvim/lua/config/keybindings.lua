@@ -170,7 +170,7 @@ end, { desc = "Restricted <BS>", expr = true })
 
 vim.api.nvim_create_autocmd("CmdWinEnter", {
 	callback = function()
-		vim.bo.ft = "lua"
+		vim.bo.ft = "lua" -- syntax highlighting
 		vim.keymap.set("n", "q", cmd.close, { buffer = true, nowait = true, desc = "Close" })
 		vim.keymap.set("n", "<CR>", "<CR>", { buffer = true, desc = "Confirm Cmdline under cursor" })
 	end,
