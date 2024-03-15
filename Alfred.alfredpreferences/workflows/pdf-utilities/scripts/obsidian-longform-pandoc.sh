@@ -2,7 +2,6 @@
 
 # REQUIRED
 # - Longform Plugin
-# - Custom compile step replacing <br> with `¶` (pandoc removes <br> in table cells)
 # - pandoc
 # - Obsidian Advanced URI plugin
 #───────────────────────────────────────────────────────────────────────────────
@@ -47,7 +46,7 @@ osascript -e '
 		activate 
 		
 		set myFind to find object of text object of active document 
-		execute find myFind find text "¶" replace with "^l" replace replace all 
+		execute find myFind find text "<br>" replace with "^l" replace replace all 
 
 		save active document
 	end tell 
