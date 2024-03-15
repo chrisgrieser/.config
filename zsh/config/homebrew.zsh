@@ -42,7 +42,9 @@ function _dump() {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-alias update_commandline_tools='softwareupdate --install "Command Line Tools for Xcode"'
+function update_commandline_tools {
+	softwareupdate --install "Command Line Tools for Xcode"
+}
 
 function update() {
 	_print-section "Homebrew"

@@ -14,19 +14,47 @@ end
 
 -- DOCS https://github.com/folke/noice.nvim#-routes
 local routes = {
-	-- redirect to popup when message is long
-	{
+	{ -- REDIRECT TO POPUP
 		filter = {
 			min_height = 8,
 			["not"] = {
 				cond = function(msg)
 					local title = (msg.opts and msg.opts.title) or ""
-					return title:find("Commit Preview") or title:find("tinygit") or title:find("Changed Files")
+					return title:find("Commit Preview")
+						or title:find("tinygit")
+						or title:find("Changed Files")
 				end,
 			},
 		},
 		view = "popup",
 	},
+
+	-----------------------------------------------------------------------------
+	-- REDIRECT TO MINI
+
+	-- write/deletion messages
+	{ filter = { event = "msg_show", find = "%d+B written$" }, view = "mini" },
+	{ filter = { event = "msg_show", find = "%d+L, %d+B$" }, view = "mini" },
+	{ filter = { event = "msg_show", find = "%-%-No lines in buffer%-%-" }, view = "mini" },
+
+	-- unneeded info on search patterns
+	{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
+
+	-- Word added to spellfile via `zg`
+	{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
+
+	-- nvim-treesitter
+	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
+
+	{ -- Mason
+		filter = {
+			event = "notify",
+			cond = function(msg) return msg.opts and (msg.opts.title or ""):find("mason") end,
+		},
+		view = "mini",
+	},
+	-----------------------------------------------------------------------------
+	-- SKIP
 
 	-- FIX LSP bugs?
 	{ filter = { event = "msg_show", find = "lsp_signature? handler RPC" }, skip = true },
@@ -38,37 +66,15 @@ local routes = {
 	-- code actions
 	{ filter = { event = "notify", find = "No code actions available" }, skip = true },
 
-	-- write/deletion messages
-	{ filter = { event = "msg_show", find = "%d+B written$" }, view = "mini" },
-	{ filter = { event = "msg_show", find = "%d+L, %d+B$" }, view = "mini" },
-	{ filter = { event = "msg_show", find = "%-%-No lines in buffer%-%-" }, view = "mini" },
-
 	-- unneeded info on search patterns
 	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
-	{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
-
-	-- Word added to spellfile via `zg`
-	{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
 
 	-- :make
 	{ filter = { event = "msg_show", find = "^:!make" }, skip = true },
 	{ filter = { event = "msg_show", find = "^%(%d+ of %d+%):" }, skip = true },
 
-	-----------------------------------------------------------------------------
 	-- E211 no longer needed, since auto-closing deleted buffers
 	{ filter = { event = "msg_show", find = "E211: File .* no longer available" }, skip = true },
-
-	-- nvim-treesitter
-	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
-
-	-- Mason
-	{
-		filter = {
-			event = "notify",
-			cond = function(msg) return msg.opts and (msg.opts.title or ""):find("mason") end,
-		},
-		view = "mini",
-	},
 }
 
 --------------------------------------------------------------------------------
@@ -133,7 +139,6 @@ return {
 				},
 			},
 			commands = {
-				-- options for `:Noice history`
 				history = {
 					view = "split",
 					filter_opts = { reverse = true }, -- show newest entries first
@@ -145,6 +150,11 @@ return {
 					-- https://github.com/folke/noice.nvim#-formatting
 					opts = { format = { "{title} ", "{cmdline} ", "{message}" } },
 				},
+			},
+
+			popupmenu = {
+				enabled = true, -- enables the Noice popupmenu UI
+				backend = "nui",
 			},
 
 			-- DISABLE features, since conflicts with existing plugins I prefer to use
