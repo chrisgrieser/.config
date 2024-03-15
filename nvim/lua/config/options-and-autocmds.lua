@@ -237,13 +237,16 @@ autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
 -- AUTO-CD TO PROJECT ROOT
 -- (simplified version of project.nvim)
 local autoCd = {
-	rootFiles = {
+	childOfRoot = {
 		"Makefile",
 		".git",
 		"info.plist", -- Alfred workflows
 		".project-root", -- manual marker file
 	},
-	childOfDir = {
+	siblingOfRoot = {
+		".obsidian"
+	},
+	parentOfRoot = {
 		".config", -- my dotfiles
 		"com~apple~CloudDocs", -- iCloud
 	},
@@ -257,23 +260,29 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		local exists = vim.loop.fs_stat(bufPath) ~= nil
 		if specialBuffer or not exists then return end
 
-		-- rootFile
-		local newRoot
-		local rootFile = fs.find(autoCd.rootFiles, { upward = true, path = bufPath })[1]
-		if rootFile then newRoot = fs.dirname(rootFile) end
+		-- 1. childOfRoot
+		local root
+		local childOfRoot = fs.find(autoCd.childOfRoot, { upward = true, path = bufPath })[1]
+		if childOfRoot then root = fs.dirname(childOfRoot) end
 
-		-- childOfDir
+		-- 2. siblingOfRoot
+		local siblingOfRoot = fs.find(autoCd.siblingOfRoot, { upward = true, path = bufPath })[1]
+		if siblingOfRoot then
+			local parentOfRoot = fs.dirname(siblingOfRoot)
+		end
+
+		-- 3. parentOfRoot
 		for dir in fs.parents(bufPath) do
 			local parent = fs.dirname(dir)
-			local isChildOfDir = vim.tbl_contains(autoCd.childOfDir, fs.basename(parent))
-			local parentIsDeeper = #dir > #(newRoot or "")
-			if isChildOfDir and parentIsDeeper then
-				newRoot = dir
+			local isParentOfRoot = vim.tbl_contains(autoCd.parentOfRoot, fs.basename(parent))
+			local parentIsDeeper = #dir > #(root or "")
+			if isParentOfRoot and parentIsDeeper then
+				root = dir
 				break
 			end
 		end
 
-		if newRoot and vim.loop.cwd() ~= newRoot then vim.loop.chdir(newRoot) end
+		if root and vim.loop.cwd() ~= root then vim.loop.chdir(root) end
 	end,
 })
 
