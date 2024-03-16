@@ -69,8 +69,8 @@ export NODE_REPL_HISTORY=""
 export npm_config_fund=false
 export npm_update_notifier=false # updating via homebrew
 
-function npm_fix {
+function npm_ssl_fix {
 	# FIX hanging at "sill: idealTree build"
-	# (reinstalling brew package `openssl@3` also seems to fix this, sometimes)
+	# (reinstalling brew package `openssl@3` sometimes also seems to fix this)
 	export npm_config_strict_ssl=false
 }
