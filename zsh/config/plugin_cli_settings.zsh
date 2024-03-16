@@ -25,7 +25,7 @@ export EZA_ICONS_AUTO=1
 [[ "$TERM_PROGRAM" == "WezTerm" ]] && export EZA_ICON_SPACING=2
 
 alias l='eza --all --long --flags --time-style=relative --no-user --smart-group \
-	--total-size --no-quotes --git-ignore --sort=newest --hyperlink'
+	--total-size --no-quotes --git-ignore --sort=newest'
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -54,7 +54,7 @@ export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)" # ignores long history items
 export ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=30
 
-# do not accept autosuggestion when using vim `A`
+# do not accept autosuggestion when using vim's `A`
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}")
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -64,12 +64,13 @@ export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-a
 export NODE_REPL_HISTORY=""
 
 # INFO instead of writing npm config to ~/.npmrc, they can also be defined as shell
-# environment variables. has to be lower-case though.
+# environment variables. Has to be lower-case though.
 # https://docs.npmjs.com/cli/v9/using-npm/config#environment-variables
-export npm_logs_dir="$HOME/.local/npm/logs" # don't clutter home directory
-export npm_cache="$HOME/.cache/npm"
 export npm_config_fund=false
-export npm_update_notifier=false # updating via homebrew instead
+export npm_update_notifier=false # updating via homebrew
 
-# INFO reinstalling brew package `openssl@3` also seems to fix this
-# export npm_config_strict_ssl=false # fix hanging at "sill: idealTree build"
+function npm_fix {
+	# FIX hanging at "sill: idealTree build"
+	# (reinstalling brew package `openssl@3` also seems to fix this, sometimes)
+	export npm_config_strict_ssl=false
+}
