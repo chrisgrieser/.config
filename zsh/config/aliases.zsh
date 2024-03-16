@@ -4,7 +4,7 @@ alias q=' exit'
 
 # added verbosity / safety
 alias mv='mv -vi'
-alias ln='ln -vwi'
+alias ln='ln -vwis'
 alias cp='cp -vi'
 alias rm='rm -I'
 
@@ -18,7 +18,7 @@ alias make='make --silent --warn-undefined-variables'
 
 # defaults
 alias grep='grep --color'
-alias mkdir='mkdir -pv' # create intermediate directories & verbose
+alias mkdir='mkdir -p' # create intermediate directories
 alias curl='curl --progress-bar'
 alias jless='jless --no-line-numbers'
 alias tokei="tokei --compact --exclude='*.txt' --exclude='*.json' --num-format=underscores"
