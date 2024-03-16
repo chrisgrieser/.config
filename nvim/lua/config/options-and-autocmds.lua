@@ -1,80 +1,7 @@
-local opt_local = vim.opt_local
 local opt = vim.opt
 local fs = vim.fs
 local autocmd = vim.api.nvim_create_autocmd
 local u = require("config.utils")
-
---------------------------------------------------------------------------------
--- FILETYPES
-
-vim.filetype.add {
-	extension = {
-		zsh = "sh",
-		sh = "sh", -- force sh-files with zsh-shebang to still get `sh` as filetype
-	},
-	filename = {
-		[".ignore"] = "gitignore", -- ignore files for fd/rg
-	},
-}
-
---------------------------------------------------------------------------------
--- DIRECTORIES
-
--- move to custom location where they are synced independently from the dotfiles repo
-opt.undodir = vim.g.syncedData .. "/undo"
-opt.viewdir = vim.g.syncedData .. "/view"
-opt.shadafile = vim.g.syncedData .. "/main.shada"
-opt.swapfile = false -- doesn't help and only creates useless files and notifications
-
--- automatically cleanup dirs to prevent bloating.
--- once a week, on first FocusLost, delete files older than 30/60 days.
-autocmd("FocusLost", {
-	once = true,
-	callback = function()
-		if os.date("%a") == "Mon" then
-			vim.fn.system { "find", opt.viewdir:get(), "-mtime", "+60d", "-delete" }
-			vim.fn.system { "find", opt.undodir:get()[1], "-mtime", "+30d", "-delete" }
-		end
-	end,
-})
-
---------------------------------------------------------------------------------
--- UNDO
-
-opt.undofile = true -- enables persistent undo history
-
--- extra undo-points (= more fine-grained undos)
--- WARN insert mode mappings with `.` or `,` cause problems with typescript
-local triggerChars = { ";", '"', "'", "<Space>" }
-for _, char in pairs(triggerChars) do
-	vim.keymap.set("i", char, function()
-		if vim.bo.buftype ~= "" then return char end
-		return char .. "<C-g>u"
-		-- WARN requires `remap = true`, otherwise prevents abbreviations with them
-	end, { desc = "󰕌 Extra undopoint", remap = true, expr = true })
-end
-
---------------------------------------------------------------------------------
--- AUTOMATION (external control)
-
--- enable reading cwd via window title
-opt.title = true
-opt.titlelen = 0 -- 0 = do not shorten title
-opt.titlestring = "%{getcwd()}"
-
--- issue commands (via nvim server https://neovim.io/doc/user/remote.html)
-if vim.g.neovide then
-	pcall(os.remove, "/tmp/nvim_server.pipe") -- FIX server sometimes not properly shut down
-	vim.defer_fn(function() vim.fn.serverstart("/tmp/nvim_server.pipe") end, 400)
-end
-
---------------------------------------------------------------------------------
--- CLIPBOARD
-opt.clipboard = "unnamedplus"
-
-autocmd("TextYankPost", {
-	callback = function() vim.highlight.on_yank { timeout = 1000 } end,
-})
 
 --------------------------------------------------------------------------------
 -- GENERAL
@@ -131,10 +58,82 @@ opt.smartindent = true
 autocmd("FileType", {
 	callback = function(ctx)
 		if ctx.match ~= "markdown" then
-			opt_local.formatoptions:remove("o")
-			opt_local.formatoptions:remove("t")
+			vim.opt_local.formatoptions:remove("o")
+			vim.opt_local.formatoptions:remove("t")
 		end
 	end,
+})
+
+--------------------------------------------------------------------------------
+-- FILETYPES
+
+vim.filetype.add {
+	extension = {
+		zsh = "sh",
+		sh = "sh", -- force sh-files with zsh-shebang to still get `sh` as filetype
+	},
+	filename = {
+		[".ignore"] = "gitignore", -- ignore files for fd/rg
+	},
+}
+
+--------------------------------------------------------------------------------
+-- DIRECTORIES
+
+-- move to custom location where they are synced independently from the dotfiles repo
+opt.undodir = vim.g.syncedData .. "/undo"
+opt.viewdir = vim.g.syncedData .. "/view"
+opt.shadafile = vim.g.syncedData .. "/main.shada"
+opt.swapfile = false -- don't help and only create useless files and notifications
+
+-- automatically cleanup dirs to prevent bloating.
+-- once a week, on first FocusLost, delete files older than 30/60 days.
+autocmd("FocusLost", {
+	once = true,
+	callback = function()
+		if os.date("%a") == "Mon" then
+			vim.fn.system { "find", opt.viewdir:get(), "-mtime", "+60d", "-delete" }
+			vim.fn.system { "find", opt.undodir:get()[1], "-mtime", "+30d", "-delete" }
+		end
+	end,
+})
+
+--------------------------------------------------------------------------------
+-- UNDO
+
+opt.undofile = true -- enables persistent undo history
+
+-- extra undo-points (= more fine-grained undos)
+-- WARN insert mode mappings with `.` or `,` cause problems with typescript
+local triggerChars = { ";", '"', "'", "<Space>" }
+for _, char in pairs(triggerChars) do
+	vim.keymap.set("i", char, function()
+		if vim.bo.buftype ~= "" then return char end
+		return char .. "<C-g>u"
+		-- WARN requires `remap = true`, otherwise prevents abbreviations with them
+	end, { desc = "󰕌 Extra undopoint", remap = true, expr = true })
+end
+
+--------------------------------------------------------------------------------
+-- AUTOMATION (external control)
+
+-- enable reading cwd via window title
+opt.title = true
+opt.titlelen = 0 -- 0 = do not shorten title
+opt.titlestring = "%{getcwd()}"
+
+-- issue commands (via nvim server https://neovim.io/doc/user/remote.html)
+if vim.g.neovide then
+	pcall(os.remove, "/tmp/nvim_server.pipe") -- FIX server sometimes not properly shut down
+	vim.defer_fn(function() vim.fn.serverstart("/tmp/nvim_server.pipe") end, 400)
+end
+
+--------------------------------------------------------------------------------
+-- CLIPBOARD
+opt.clipboard = "unnamedplus"
+
+autocmd("TextYankPost", {
+	callback = function() vim.highlight.on_yank { timeout = 1000 } end,
 })
 
 --------------------------------------------------------------------------------
@@ -376,7 +375,7 @@ vim.api.nvim_create_autocmd("FileType", {
 			local fileStats = vim.loop.fs_stat(ctx.file)
 			local specialBuffer = vim.api.nvim_buf_get_option(ctx.buf, "buftype") ~= ""
 			local terminalBufEditedInNvim = ctx.file:find("^/private/tmp/.*.zsh")
-			if specialBuffer or not fileStats then return end
+			if specialBuffer or terminalBufEditedInNvim or not fileStats then return end
 
 			local ft = ctx.match
 			local ext = skeletons[ft]
