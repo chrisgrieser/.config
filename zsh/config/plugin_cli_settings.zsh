@@ -14,9 +14,8 @@ export PAGER="less" # needs to be set explicitly, so the homebrew version is use
 # Can generate via: https://github.com/sharkdp/vivid
 # DOCS https://github.com/eza-community/eza/blob/main/man/eza_colors.5.md
 # INFO does also accept specific files via glob, e.g. `README.md=4;33`,
-# `.*=…` affects dotfiles
 grey="38;5;247"
-file_colors=".*=$grey:LICENSE*=$grey:*lock*=$grey"
+file_colors=".*=$grey:LICENSE*=$grey:*lock*=$grey" # `.*=` affects dotfiles
 export LS_COLORS="di=1;34:ln=3;35:or=7;31:$file_colors"
 
 export EZA_COLORS="gm=1;38;5;208" # git `modified` with same orange as in starship
@@ -71,13 +70,13 @@ export npm_update_notifier=false # updating via homebrew
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# temporary FIX for hanging at "sill: idealTree build"
-function npm_ssl_fix {
+# temporary fix for hanging at "sill: idealTree build"
+function npm_temp_ssl_fix {
 	export npm_config_strict_ssl=false
 }
-# PROPER FIXES:
+# PROPER FIX
 # 1. reinstalling brew package `openssl@3`
-# 2. fix broken symlink from homebrew install: 
+# 2. fix broken symlink from homebrew install:
 # ln -s /private/etc/ssl/cert.pem $HOMEBREW_PREFIX/etc/openssl@3/cert.pem
 # location of correct certificate file to be determined directories mentioned
 # in `brew info openssl@3`
