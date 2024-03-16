@@ -93,7 +93,7 @@ opt.splitright = false -- vsplit right instead of left
 opt.splitbelow = true -- split down instead of up
 
 opt.cursorline = true
-opt.signcolumn = "yes:1"
+opt.signcolumn = "yes:1" -- static width
 
 opt.textwidth = 80 -- mostly set by .editorconfig, therefore only fallback
 opt.colorcolumn = "+1" -- one more than textwidth
@@ -103,7 +103,7 @@ opt.breakindent = true -- indent wrapped lines
 opt.shortmess:append("sSI") -- reduce info in :messages
 opt.report = 9001 -- disable "x more/fewer lines" messages
 
-opt.iskeyword:append("-") -- don't treat "-" as word boundary, e.g. for kebab-case variables
+opt.iskeyword:append("-") -- treat "-" word character, useful for kebab-case variables
 opt.nrformats = {} -- remove octal and hex from <C-a>/<C-x>
 
 opt.updatetime = 250 -- also affects cursorword symbols and lsp-hints
@@ -114,7 +114,7 @@ opt.makeprg = "make --silent --warn-undefined-variables"
 opt.pumwidth = 15 -- min width
 opt.pumheight = 12 -- max height
 
-opt.sidescrolloff = 15
+opt.sidescrolloff = 20
 opt.scrolloff = 15
 
 -- mostly set by .editorconfig, therefore only fallback
@@ -130,9 +130,10 @@ opt.smartindent = true
 -- needs to be set via autocommand.
 autocmd("FileType", {
 	callback = function(ctx)
-		if ctx.match == "markdown" then return end
-		opt_local.formatoptions:remove("o")
-		opt_local.formatoptions:remove("t")
+		if ctx.match ~= "markdown" then
+			opt_local.formatoptions:remove("o")
+			opt_local.formatoptions:remove("t")
+		end
 	end,
 })
 
@@ -146,11 +147,11 @@ opt.inccommand = "split" -- preview incremental commands like `:substitute`
 -- make `:substitute` also notify how many changes were made
 -- works, as `CmdlineLeave` is triggered before the execution of the command
 autocmd("CmdlineLeave", {
-	callback = function()
+	callback = function(ctx)
+		if not ctx.match == ":" then return end
 		local cmdline = vim.fn.getcmdline()
-		local isSubstitution = cmdline:find("s ?/.-/.*/%a*$")
-		local isMultiFileCmd = cmdline:find("^%l%l?%l?do ") -- cdo, bufdo, etc.
-		if isSubstitution and not isMultiFileCmd then vim.cmd(cmdline .. "n") end
+		local isSubstitution = cmdline:find("s ?/.+/.-/%a*$")
+		if isSubstitution then vim.cmd(cmdline .. "ne") end
 	end,
 })
 
@@ -375,9 +376,8 @@ vim.api.nvim_create_autocmd("FileType", {
 			local fileStats = vim.loop.fs_stat(ctx.file)
 			local specialBuffer = vim.api.nvim_buf_get_option(ctx.buf, "buftype") ~= ""
 			if specialBuffer or not fileStats then return end
-
-			-- GUARD terminal buffer edited in nvim
-			if ctx.file:find("^/private/tmp/.*.zsh") then return end
+			local terminalBufEditedInNvim = ctx.file:find("^/private/tmp/.*.zsh")
+			if ctx.file:find("^/private/") then return end -- GUARD terminal buffer edited in nvim
 
 			local ft = ctx.match
 			local ext = skeletons[ft]
