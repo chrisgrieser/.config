@@ -1,48 +1,45 @@
-# vim: commentstring=#\ %s
-#───────────────────────────────────────────────────────────────────────────────
-
 [user]
 	name = Chris Grieser
 	email = 73286100+chrisgrieser@users.noreply.github.com
 
-# conditionally change author https://git-scm.com/docs/git-config#_conditional_includes
-# [includeIf "gitdir:~/.config/.git"]
-	# path = "~/.config/.gitconfig" 
+; conditionally change author https://git-scm.com/docs/git-config;_conditional_includes
+; [includeIf "gitdir:~/.config/.git"]
+	; path = "~/.config/.gitconfig" 
 
-#───────────────────────────────────────────────────────────────────────────────
+;───────────────────────────────────────────────────────────────────────────────
 
 [core]
 	editor = nvim
 
-	# 1. Motivation: version control & sync of hooks across devices
-	# 2. By setting them in the global git config, there is no more need to run
-	# `git config core.hooksPath .git-hooks` after every `git clone`
-	# 3. This trick only works on repos solely managed by the user of
-	# this dotfile-repo, it does not work to enforce hooks on other people's clones
+	; 1. Motivation: version control & sync of hooks across devices
+	; 2. By setting them in the global git config, there is no more need to run
+	; `git config core.hooksPath .git-hooks` after every `git clone`
+	; 3. This trick only works on repos solely managed by the user of
+	; this dotfile-repo, it does not work to enforce hooks on other people's clones
 	hooksPath = .git-hooks
 [status]
 	showUntrackedFiles = all
 	short = true
 	showStash = true
-	relativePaths = false # false = show path relative to git root, not relative to cwd
+	relativePaths = false ; false = show path relative to git root, not relative to cwd
 [stash]
 	showIncludeUntracked = true
 
 [init]
 	defaultBranch = main
 [url "git@github.com:"]
-	insteadOf = "https://github.com/" # automatically use SSH instead of HTTPS for remotes
+	insteadOf = "https://github.com/" ; automatically use SSH instead of HTTPS for remotes
 
 [pull]
-	rebase = true # rebase changes instead of merging
-	# ff = only # https://blog.sffc.xyz/post/185195398930/why-you-should-use-git-pull-ff-only
+	rebase = true ; rebase changes instead of merging
+	; ff = only ; https://blog.sffc.xyz/post/185195398930/why-you-should-use-git-pull-ff-only
 [fetch]
-	prune = true # automatically delete remote tracking branches that have been deleted
+	prune = true ; automatically delete remote tracking branches that have been deleted
 [push]
-	autoSetupRemote = true # create remote branch, if it doesn't exist
+	autoSetupRemote = true ; create remote branch, if it doesn't exist
 
 [branch]
-	sort = -committerdate # sort by recency, not by name
+	sort = -committerdate ; sort by recency, not by name
 [tag]
 	sort = -committerdate
 
@@ -56,40 +53,39 @@
 	detachedHead = false
 	addEmptyPathspec = false
 [help]
-	autoCorrect = prompt # prompt whether to run auto-correction
+	autoCorrect = prompt ; prompt whether to run auto-correction
 
 [rebase]
 	autoSquash = true
 	autoStash = true
-	missingCommitsCheck = error # commits must be removed with `drop`, not by deleting a line
+	missingCommitsCheck = error ; commits must be removed with `drop`, not by deleting a line
 [diff]
-	colorMoved = true # moved lines colored different than added/removed
+	colorMoved = true ; moved lines colored different than added/removed
    colorMovedWS = ignore-all-space
-	algorithm = histogram # https://luppeng.wordpress.com/2020/10/10/when-to-use-each-of-the-git-diff-algorithms/
+	algorithm = histogram ; https://luppeng.wordpress.com/2020/10/10/when-to-use-each-of-the-git-diff-algorithms/
 [merge]
-	conflictStyle = zdiff3 # shows original version in middle # https://ductile.systems/zdiff3/
+	conflictStyle = zdiff3 ; shows original version in middle ; https://ductile.systems/zdiff3/
 
-#───────────────────────────────────────────────────────────────────────────────
+;───────────────────────────────────────────────────────────────────────────────
 
-# MERGE TOOL
+; MERGE TOOL
 [merge]
-	# DOCS https://neovim.io/doc/user/diff.html#dp
+	; DOCS https://neovim.io/doc/user/diff.html;dp
 	tool = nvim
 [mergetool "nvim"]
-	# SOURCE https://smittie.de/posts/git-mergetool/
+	; SOURCE https://smittie.de/posts/git-mergetool/
 	cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
 
-#───────────────────────────────────────────────────────────────────────────────
-# SETUP FOR DELTA
+;───────────────────────────────────────────────────────────────────────────────
+; SETUP FOR DELTA
 
 [core]
-	# auto-select light/dark mode on macOS -- https://github.com/dandavison/delta/issues/447#issuecomment-1239398586
-	pager = delta "$(defaults read -g AppleInterfaceStyle &> /dev/null && echo --dark || echo --light)"
+	pager = delta
 [interactive]
 	diffFilter = delta --color-only
 [delta]
-	tabs = 3 # tabwidth
-	navigate = true # use n and N to move between diff sections
+	tabs = 3 ; tabwidth
+	navigate = true ; use n and N to move between diff sections
 	hyperlinks = true
 
-#────────────────────────────────────────────────────────────────────────────
+;────────────────────────────────────────────────────────────────────────────
