@@ -32,7 +32,7 @@ alias l='eza --all --long --flags --time-style=relative --no-user --smart-group 
 export FZF_DEFAULT_COMMAND='fd'
 export FZF_DEFAULT_OPTS='
 	--pointer=⟐ --prompt="❱ " --scrollbar=▐ --ellipsis=… --marker=" +"
-	--color=hl:206,header::reverse
+	--color=hl:206
 	--scroll-off=5 --cycle --layout=reverse --height=90% --preview-window=border-left
 	--bind=tab:down,shift-tab:up
 	--bind=page-down:preview-page-down,page-up:preview-page-up
@@ -73,10 +73,11 @@ export npm_update_notifier=false # updating via homebrew
 # temporary fix for hanging at "sill: idealTree build"
 function npm_temp_ssl_fix {
 	export npm_config_strict_ssl=false
+	echo "Proper Fix"
+	echo "reinstalling brew package \`openssl@3\` *and* \`ca-certificates\`."
+	echo "the latter adds the symlink target for the openssl certificate"
 }
-# PROPER FIX
-# 1. reinstalling brew package `openssl@3`
-# 2. fix broken symlink from homebrew install:
+# fix broken symlink from homebrew install manually
 # ln -s /private/etc/ssl/cert.pem $HOMEBREW_PREFIX/etc/openssl@3/cert.pem
 # location of correct certificate file to be determined directories mentioned
 # in `brew info openssl@3`

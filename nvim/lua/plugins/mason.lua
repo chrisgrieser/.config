@@ -6,15 +6,12 @@ return {
 		keys = {
 			{ "<leader>pm", vim.cmd.Mason, desc = " Mason" },
 		},
-		-- temporary FIX if npm package installs are hanging. 
-		-- for permanent fix, investigate local `openssl` installation
-		-- init = function () vim.env.npm_config_strict_ssl=false end, 
 		opts = {
 			-- add my own local registry: https://github.com/mason-org/mason-registry/pull/3671#issuecomment-1851976705
-			-- registries = {
-			-- 	"file:" .. vim.fn.stdpath("config") .. "/personal-mason-registry", -- needs to come first
-			-- 	"github:mason-org/mason-registry",
-			-- },
+			registries = {
+				"file:" .. vim.fn.stdpath("config") .. "/personal-mason-registry", -- needs to come first
+				"github:mason-org/mason-registry",
+			},
 			ui = {
 				border = vim.g.borderStyle,
 				height = 0.85,

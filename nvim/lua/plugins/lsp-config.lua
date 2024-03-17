@@ -14,7 +14,8 @@ local lspToMasonMap = {
 	ltex = "ltex-ls", -- languagetool (natural language linter)
 	lua_ls = "lua-language-server",
 	marksman = "marksman", -- markdown lsp
-	pyright = "pyright", -- python lsp
+	-- pyright = "pyright", -- python lsp
+	basedpyright = "basedpyright", -- python lsp
 	ruff_lsp = "ruff-lsp", -- python linter
 	stylelint_lsp = "stylelint-lsp", -- css linter
 	taplo = "taplo", -- toml lsp
@@ -124,6 +125,7 @@ serverConfigs.ruff_lsp = {
 	},
 	on_attach = function(ruff) ruff.server_capabilities.hoverProvider = false end,
 }
+
 --------------------------------------------------------------------------------
 -- CSS
 

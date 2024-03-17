@@ -99,12 +99,12 @@ function topen { touch "$1" && open "$1"; }
 # simplified version of https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh
 
 function hs() {
-	local selected
+	local selected item key_pressed
 	selected=$(
 		fc -rl 1 | cut -c8- | bat --color=always --theme=ansi --language=zsh |
 			fzf --ansi --multi --query="$1" --scheme=history \
 				--bind="change:first" \
-				--height=40% --info=inline \
+				--height=50% --info=inline \
 				--expect="ctrl-y" --header-first --header="↵ : Put into buffer    ^Y: Copy"
 	)
 	[[ -z "$selected" ]] && return 0
