@@ -15,7 +15,7 @@ local lspToMasonMap = {
 	lua_ls = "lua-language-server",
 	marksman = "marksman", -- markdown lsp
 	pyright = "pyright", -- python lsp
-	basedpyright = "basedpyright", -- python lsp
+	-- basedpyright = "basedpyright", -- python lsp (fork of pyright)
 	ruff_lsp = "ruff-lsp", -- python linter
 	stylelint_lsp = "stylelint-lsp", -- css linter
 	taplo = "taplo", -- toml lsp
@@ -51,9 +51,6 @@ local function disableClientInObsidianVault(client)
 	local obsiDir = vim.fs.find(".obsidian", { upward = true, type = "directory" })
 	if not vim.tbl_isempty(obsiDir) then vim.cmd.LspStop(client.id) end
 end
-
--- serverConfigs.basedpyright = nil
-serverConfigs.pyright = nil
 
 --------------------------------------------------------------------------------
 -- BASH / ZSH
@@ -357,14 +354,6 @@ return {
 			for lsp, serverConfig in pairs(serverConfigs) do
 				serverConfig.capabilities = lspCapabilities
 				require("lspconfig")[lsp].setup(serverConfig)
-			end
-
-			local symLinkFrom = vim.env.DATA_DIR .. "/private dotfiles/codium-api-key.json"
-			local symLinkTo = os.getenv("HOME") .. "/.codeium/config.json"
-			local fileExists = vim.loop.fs_stat(symLinkTo) ~= nil
-			if not fileExists then
-				pcall(vim.fn.mkdir, vim.fs.dirname(symLinkTo))
-				vim.loop.fs_symlink(symLinkFrom, symLinkTo)
 			end
 		end,
 	},

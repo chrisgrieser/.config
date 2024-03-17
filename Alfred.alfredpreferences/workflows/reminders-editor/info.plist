@@ -798,17 +798,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>soundname</key>
-				<string>acknowledgment_sent.caf</string>
-				<key>systemsound</key>
+				<key>concurrently</key>
 				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf" &amp;</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.playsound</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>6AF6B99B-5890-4B45-A5F3-BD79885C420E</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1409,6 +1417,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
+			<key>note</key>
+			<string>sound</string>
 			<key>xpos</key>
 			<real>1170</real>
 			<key>ypos</key>
