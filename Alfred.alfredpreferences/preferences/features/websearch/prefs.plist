@@ -26,6 +26,17 @@
 			<key>url</key>
 			<string>https://search.marginalia.nu/search?query={query}</string>
 		</dict>
+		<key>4D6D1B09-18D7-48A8-AE60-25F748E25BE0</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>to</string>
+			<key>text</key>
+			<string>nyaa.land: {query}</string>
+			<key>url</key>
+			<string>https://nyaa.land/?f=0&amp;c=1_0&amp;q={query}</string>
+		</dict>
 		<key>5EEA999D-F78D-4F89-BB24-9557712FEE77</key>
 		<dict>
 			<key>enabled</key>
