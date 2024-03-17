@@ -14,7 +14,7 @@ local lspToMasonMap = {
 	ltex = "ltex-ls", -- languagetool (natural language linter)
 	lua_ls = "lua-language-server",
 	marksman = "marksman", -- markdown lsp
-	-- pyright = "pyright", -- python lsp
+	pyright = "pyright", -- python lsp
 	basedpyright = "basedpyright", -- python lsp
 	ruff_lsp = "ruff-lsp", -- python linter
 	stylelint_lsp = "stylelint-lsp", -- css linter
@@ -51,6 +51,9 @@ local function disableClientInObsidianVault(client)
 	local obsiDir = vim.fs.find(".obsidian", { upward = true, type = "directory" })
 	if not vim.tbl_isempty(obsiDir) then vim.cmd.LspStop(client.id) end
 end
+
+serverConfigs.basedpyright = nil
+-- serverConfigs.pyright = nil
 
 --------------------------------------------------------------------------------
 -- BASH / ZSH
@@ -104,7 +107,7 @@ serverConfigs.lua_ls = {
 				enable = true,
 				setType = true,
 				arrayIndex = "Disable",
-				semicolon = "Disable", -- mostly display incorrectly on invalid code
+				semicolon = "Disable", -- mostly wrong on invalid code
 			},
 			-- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
 			workspace = { checkThirdParty = "Disable" },
