@@ -4,10 +4,9 @@ venvPath = "."
 venv = ".venv"
 typeCheckingMode = "strict"
 
-[tool.basedpyright]
-venvPath = "."
-venv = ".venv"
-typeCheckingMode = "all" # better: "all"
+# PENDING https://github.com/DetachHead/basedpyright/issues/158
+# [tool.basedpyright]
+# typeCheckingMode = "all" # better: "all"
 
 [tool.python.analysis]
 diagnosticMode = "workspace"
@@ -17,10 +16,7 @@ diagnosticMode = "workspace"
 # DOCS https://beta.ruff.rs/docs/rules/
 [tool.ruff]
 line-length = 100
-exclude = [
-	".venv",
-	"typings/*.pyi"
-]
+exclude = [".venv", "typings/*.pyi"]
 select = ["ALL"]
 ignore = [
 	"T201",   # print statements
