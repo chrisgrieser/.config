@@ -22,18 +22,7 @@
 			</dict>
 		</array>
 		<key>2DADFA85-C59F-4D17-A85F-5BC10246EA83</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>64B81825-4968-44AB-A35D-B343D433A6AA</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>33A07916-23BF-4B16-A845-62D0B6C7DB14</key>
 		<array>
 			<dict>
@@ -650,19 +639,6 @@ disown</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>unstackview</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.hidealfred</string>
-			<key>uid</key>
-			<string>64B81825-4968-44AB-A35D-B343D433A6AA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1132,13 +1108,6 @@ disown</string>
 			<real>35</real>
 			<key>ypos</key>
 			<real>875</real>
-		</dict>
-		<key>64B81825-4968-44AB-A35D-B343D433A6AA</key>
-		<dict>
-			<key>xpos</key>
-			<real>605</real>
-			<key>ypos</key>
-			<real>375</real>
 		</dict>
 		<key>6552DA50-7058-4101-A2EF-78E87D7C5FF9</key>
 		<dict>
