@@ -23,6 +23,7 @@ local keymappings_I = {
 			require("telescope.actions").smart_send_to_qflist(prompt_bufnr)
 			vim.cmd.cfirst()
 		end,
+		type = "action",
 		opts = { desc = " Send to Quickfix" },
 	},
 	["<M-CR>"] = { -- mapping consistent with fzf-multi-select
@@ -30,6 +31,7 @@ local keymappings_I = {
 			require("telescope.actions").toggle_selection(prompt_bufnr)
 			require("telescope.actions").move_selection_worse(prompt_bufnr)
 		end,
+		type = "action",
 		opts = { desc = "󰒆 Multi-Select" },
 	},
 	["<D-l>"] = {
@@ -38,6 +40,7 @@ local keymappings_I = {
 			require("telescope.actions").close(prompt_bufnr)
 			vim.fn.system { "open", "-R", path }
 		end,
+		type = "action",
 		opts = { desc = "󰀶 Reveal File" },
 	},
 	["<C-p>"] = {
@@ -50,6 +53,7 @@ local keymappings_I = {
 			vim.fn.setreg("+", fullpath)
 			u.notify("Copied", fullpath)
 		end,
+		type = "action",
 		opts = { desc = "󰅍 Copy name of path" },
 	},
 	["<C-n>"] = {
@@ -60,6 +64,7 @@ local keymappings_I = {
 			vim.fn.setreg("+", name)
 			u.notify("Copied", name)
 		end,
+		type = "action",
 		opts = { desc = "󰅍 Copy name of file" },
 	},
 }
@@ -102,6 +107,7 @@ local function toggleHiddenAndIgnore(prompt_bufnr)
 		file_ignore_patterns = {
 			"node_modules",
 			".venv",
+			"typings",
 			"%.DS_Store$",
 			"%.git/",
 			"%.app/",
@@ -433,6 +439,8 @@ local function telescopeConfig()
 					"node_modules", -- ts/js
 					".local", -- neodev.nvim
 					"homebrew", -- nvim runtime
+					"typings", -- pyright types
+					".venv", -- python
 					"EmmyLua.spoon", -- Hammerspoon
 				},
 			},

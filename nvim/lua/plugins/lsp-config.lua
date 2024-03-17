@@ -52,8 +52,8 @@ local function disableClientInObsidianVault(client)
 	if not vim.tbl_isempty(obsiDir) then vim.cmd.LspStop(client.id) end
 end
 
-serverConfigs.basedpyright = nil
--- serverConfigs.pyright = nil
+-- serverConfigs.basedpyright = nil
+serverConfigs.pyright = nil
 
 --------------------------------------------------------------------------------
 -- BASH / ZSH
