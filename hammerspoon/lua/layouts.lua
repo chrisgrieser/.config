@@ -91,7 +91,6 @@ local function movieLayout()
 	u.openApps { "YouTube", "BetterTouchTool" }
 	u.closeFinderWins()
 	u.quitApps {
-		"neovide",
 		"Slack",
 		"Discord",
 		"BusyCal",
