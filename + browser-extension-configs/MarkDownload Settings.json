@@ -3,7 +3,7 @@
   "bulletListMarker": "-",
   "codeBlockStyle": "fenced",
   "contextMenus": false,
-  "disallowedChars": "[]#^",
+  "disallowedChars": "[]#^‘'",
   "downloadImages": false,
   "downloadMode": "downloadsApi",
   "emDelimiter": "*",
