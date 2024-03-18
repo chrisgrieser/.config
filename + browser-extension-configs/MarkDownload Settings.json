@@ -8,7 +8,7 @@
   "downloadMode": "downloadsApi",
   "emDelimiter": "*",
   "fence": "```",
-  "frontmatter": "---\npublication: {hostname}\nauthor: {byline}\nkeywords: {keywords}\ndata type: online article\nurl: {baseURI}\ndownload date: {date:YYYY-MM-DD}\n---\n",
+  "frontmatter": "---\ntitle: {pageTitle}\nauthor: {byline}\npublication: {hostname}\nkeywords: {keywords}\npublication-date:\ndata-type: online article\nurl: {baseURI}\ndownload-date: {date:YYYY-MM-DD}\n---\n",
   "headingStyle": "atx",
   "hr": "---",
   "imagePrefix": "{pageTitle}/",
