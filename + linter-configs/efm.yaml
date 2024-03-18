@@ -3,7 +3,9 @@
 # DOCS https://github.com/mattn/efm-langserver/blob/master/schema.md
 #───────────────────────────────────────────────────────────────────────────────
 
-root-markers: [.git/]
+root-markers:
+  - .git/
+  - node_modules/
 
 tools:
   shellcheck: &shellcheck
