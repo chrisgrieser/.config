@@ -28,6 +28,7 @@ CITATION.cff
 CITATION.bib
 
 # js/ts
+node_modules
 package.json
 package-lock.json
 versions.json
