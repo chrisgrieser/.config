@@ -298,10 +298,10 @@ function gdf {
 	deleted_path=$(git log --diff-filter=D --name-only --format="" | grep -i "$*")
 
 	if [[ -z "$deleted_path" ]]; then
-		print "\e[1;31m No deleted file found with \e[1;33m$*\\e[0m"
+		print "\e[1;31mNo deleted file found with \e[1;33m$*\\e[0m"
 		return 1
 	elif [[ $(echo "$deleted_path" | wc -l) -gt 1 ]]; then
-		print "\e[1;34m Multiple files found.\e[0m"
+		print "\e[1;34mMultiple files found.\e[0m"
 		selection=$(echo "$deleted_path" | fzf --height=60%)
 		[[ -z "$selection" ]] && return 0
 		deleted_path="$selection"
