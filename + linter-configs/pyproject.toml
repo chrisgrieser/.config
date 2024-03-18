@@ -16,7 +16,10 @@ diagnosticMode = "workspace"
 # DOCS https://beta.ruff.rs/docs/rules/
 [tool.ruff]
 line-length = 100
-exclude = [".venv", "typings/*.pyi"]
+exclude = [
+	".venv",
+	"typings/*.pyi"
+]
 select = ["ALL"]
 ignore = [
 	"T201",   # print statements

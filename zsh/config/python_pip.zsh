@@ -32,7 +32,7 @@ function new_venv {
 
 function inspect_venv {
 	py_path="$(cmd which python3 | sed 's|^/Users/chrisgrieser/|~/|')"
-	printf "\nNow using: \e[1;36m%s\e[0m\n" "$py_path"
+	print "Now using: \e[1;36m%s\e[0m" "$py_path"
 }
 
 function _search_venv_path {
