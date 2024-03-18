@@ -114,9 +114,9 @@
   },
   "for each line (in file)": {
     "body": [
-      "sed '/^$/d' \"${1:filepath}\" | while read -r ${2:line}; do",
-      "\techo$0 \"$${2:line}\"",
-      "done"
+      "while read -r line; do",
+      "\techo \"$line\"",
+      "done <\"$input_file\""
     ],
     "prefix": "for each line (in file)"
   },

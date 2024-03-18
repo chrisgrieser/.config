@@ -8,7 +8,7 @@
   "downloadMode": "downloadsApi",
   "emDelimiter": "*",
   "fence": "```",
-  "frontmatter": "---\ntitle: {pageTitle}\nauthor: {byline}\npublication: {hostname}\nyear: \ndata-type: online article\nabstract: {excerpt}\nurl: {baseURI}\ndownload-date: {date:YYYY-MM-DD}\nmdate: {date:YYYY-MM-DDTHH:mm}\n---\n",
+  "frontmatter": "---\ntitle: \"{pageTitle}\"\nauthor: \"{byline}\"\npublication: {hostname}\nyear: \ndata-type: online article\nabstract: \"{excerpt}\"\nurl: {baseURI}\ndownload-date: {date:YYYY-MM-DD}\n---\n",
   "headingStyle": "atx",
   "hr": "---",
   "imagePrefix": "{pageTitle}/",
