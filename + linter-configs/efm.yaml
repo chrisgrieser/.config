@@ -6,6 +6,7 @@
 root-markers:
   - .git/
   - node_modules/
+  - .venv/
 
 tools:
   shellcheck: &shellcheck
