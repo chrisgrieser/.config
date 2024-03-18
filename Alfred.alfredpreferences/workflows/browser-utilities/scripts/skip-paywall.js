@@ -48,6 +48,7 @@ function run() {
 
 	// Try various Paywall skippers
 	frontmostApp.openLocation("https://www.spaywall.com/search/" + url);
+	frontmostApp.openLocation("https://archive.is/" + url);
 
 	// Reader Mode, if supported
 	frontmostApp.menuBars[0].menuBarItems.byName("View").menus[0].menuItems.byName("Enter Reader Mode").click();
