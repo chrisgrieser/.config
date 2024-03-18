@@ -328,6 +328,10 @@
     "description": "one slash for single substitution, two for global substitution",
     "prefix": "substitute (expansion)"
   },
+  "suppress stderr": {
+    "body": "2>/dev/null",
+    "prefix": "suppress stderr"
+  },
   "switch case": {
     "body": [
       "case $${bar} in",
