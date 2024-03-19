@@ -91,13 +91,7 @@ function cacheAndReturnSubCount(subredditName) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const subredditConfig = $.getenv("subreddits");
-
-	// GUARD misconfiguration
-	if (subredditConfig.match(/^r\//m)) {
-		const msg = "Config error: subreddit names must not start with 'r/'";
-		return JSON.stringify({ items: [{ title: msg, valid: false }] });
-	}
+	const subredditConfig = $.getenv("subreddits").trim().replace(/^r\//gm, "");
 
 	//───────────────────────────────────────────────────────────────────────────
 
@@ -116,8 +110,7 @@ function run() {
 		const subscriberData = JSON.parse(
 			readFile($.getenv("alfred_workflow_cache") + "/subscriberCount.json") || "{}",
 		);
-		const subscriberCount =
-			subscriberData[subredditName] || cacheAndReturnSubCount(subredditName);
+		const subscriberCount = subscriberData[subredditName] || cacheAndReturnSubCount(subredditName);
 		if (!subscriberCount) subtitle += "⚠️ subscriber count error ";
 		subtitle += `👥 ${subscriberCount}`;
 

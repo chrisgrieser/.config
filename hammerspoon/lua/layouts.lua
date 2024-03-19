@@ -136,7 +136,12 @@ M.caff_displayCount = hs.screen.watcher
 hs.hotkey.bind(u.hyper, "home", selectLayout)
 
 -- 3. Systemstart
-if u.isSystemStart() then selectLayout() end
+if u.isSystemStart() then
+	-- sync reminders
+	hs.application.open("Reminders")
+	u.runWithDelays(6, function() u.quitApps("Reminders") end)
+	selectLayout()
+end
 
 -- 4. Waking when not in the office
 M.caff_unlock = c.new(function(event)
