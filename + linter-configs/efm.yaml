@@ -4,9 +4,9 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 root-markers:
-  - .git/
-  - node_modules/
-  - .venv/
+  - ".git/"
+  - "node_modules/"
+  - ".venv/"
 
 tools:
   shellcheck: &shellcheck
@@ -14,6 +14,7 @@ tools:
     lint-command: >-
       shellcheck --format=gcc --external-sources --shell=bash -
     lint-stdin: true
+    require-marker: false
     lint-formats:
       - "-:%l:%c: %trror: %m [SC%n]"
       - "-:%l:%c: %tarning: %m [SC%n]"
