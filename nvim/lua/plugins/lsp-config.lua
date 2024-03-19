@@ -72,7 +72,7 @@ serverConfigs.bashls = {
 -- EFM: Markdown & Shell
 serverConfigs.efm = {
 	cmd = { "efm-langserver", "-c", vim.g.linterConfigs .. "/efm.yaml" },
-	filetypes = { "sh", "markdown", "yaml" }, -- limit to filestypes needed
+	filetypes = { "zsh", "sh", "markdown", "yaml" }, -- limit to filestypes needed
 	on_attach = function(client)
 		-- as `.markdownlintignore` does not work well with efm, since it requires non-stdin
 		disableClientInObsidianVault(client)
