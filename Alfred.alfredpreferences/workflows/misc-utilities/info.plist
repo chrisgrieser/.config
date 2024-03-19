@@ -359,7 +359,7 @@
 				<key>keyword</key>
 				<string>sync</string>
 				<key>subtext</key>
-				<string>Dotfiles, Vault &amp; Password-Store</string>
+				<string>all perma-repos</string>
 				<key>text</key>
 				<string>🔁 Sync Repos</string>
 				<key>withspace</key>
