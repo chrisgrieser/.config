@@ -37,6 +37,7 @@ function _dump() {
 		grep -v "Temp" | sed "s|^|https://chrome.google.com/webstore/detail/|" \
 		>"$dump_path/browser-extensions.txt"
 
+	echo
 	print "\e[1;38;5;247mBrewfile & browser-extensions-list saved at \"$(basename "$dump_path")\".\e[0m"
 }
 
@@ -71,9 +72,7 @@ function update() {
 	sketchybar_was_updated=$(find "$HOMEBREW_PREFIX/bin/sketchybar" -mtime -1h)
 	[[ -n "$sketchybar_was_updated" ]] && brew services restart sketchybar
 
-	echo
 	_dump
-	echo
 	osascript -e 'display notification "Finished Update." with title "🍺 Homebrew" sound name "Blow"'
 }
 
@@ -91,5 +90,5 @@ function listall() {
 	_print-section "Mac App Store"
 	mas list
 
-	echo && _dump
+	_dump
 }
