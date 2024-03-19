@@ -42,8 +42,12 @@ function _dump() {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-function update_commandline_tools {
-	softwareupdate --install "Command Line Tools for Xcode"
+function update_cmdline_tools {
+	local update
+	update=$(softwareupdate --list |
+		grep --only-matching --extended-regexp='Command Line Tools-.*$' |
+		head -n1)
+	softwareupdate --install "$update"
 }
 
 function update() {
@@ -89,5 +93,3 @@ function listall() {
 
 	echo && _dump
 }
-
-
