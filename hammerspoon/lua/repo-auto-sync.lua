@@ -64,6 +64,7 @@ end
 ---@async
 ---@param notifyOnSuccess boolean set to false for regularly occurring syncs
 local function syncAllGitRepos(notifyOnSuccess)
+	print("❗ beep 🔵")
 	local reposStillSyncing = repoSyncsInProgress()
 	if #reposStillSyncing > 0 then
 		u.notify("🔁 Sync still in progress: " .. table.concat(reposStillSyncing))
