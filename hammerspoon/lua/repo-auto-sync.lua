@@ -75,7 +75,7 @@ local function syncAllGitRepos(notifyOnSuccess)
 	end
 
 	M.timer_AllSyncs = hs.timer
-		.waitUntil(function() return repoSyncsInProgress() == 0 end, function()
+		.waitUntil(function() return #(repoSyncsInProgress()) == 0 end, function()
 			if #M.syncedRepos > 0 then
 				local syncedIcons = hs.fnutils.map(M.syncedRepos, function(r) return r.icon end) or {}
 				local msg = "🔁 Sync done: " .. table.concat(syncedIcons)
