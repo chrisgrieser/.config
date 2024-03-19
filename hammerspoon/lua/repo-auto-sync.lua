@@ -19,7 +19,6 @@ for line in io.lines(config.permaReposPath) do
 	})
 end
 
-
 --------------------------------------------------------------------------------
 -- REPO SYNC JOBS
 
@@ -52,21 +51,22 @@ local function repoSync(repo)
 end
 
 ---@nodiscard
----@return boolean
-local function syncInProgress()
-	local isSyncing = {}
+---@return string[] reposStillSyncing
+local function repoSyncsInProgress()
+	local reposStillSyncing = {}
 	for _, repo in pairs(config.repos) do
 		local isStillSyncing = M.task_sync[repo.name] and M.task_sync[repo.name]:isRunning()
-		table.insert(isSyncing, isStillSyncing)
+		if isStillSyncing then table.insert(reposStillSyncing, repo.icon) end
 	end
-	return hs.fnutils.contains(isSyncing, true)
+	return reposStillSyncing
 end
 
 ---@async
 ---@param notifyOnSuccess boolean set to false for regularly occurring syncs
 local function syncAllGitRepos(notifyOnSuccess)
-	if syncInProgress() then
-		u.notify("🔁 Sync already in progress.")
+	local reposStillSyncing = repoSyncsInProgress()
+	if #reposStillSyncing > 0 then
+		u.notify("🔁 Sync still in progress: " .. table.concat(reposStillSyncing))
 		return
 	end
 
@@ -75,7 +75,7 @@ local function syncAllGitRepos(notifyOnSuccess)
 	end
 
 	M.timer_AllSyncs = hs.timer
-		.waitUntil(function() return not syncInProgress() end, function()
+		.waitUntil(function() return not repoSyncsInProgress() end, function()
 			if #M.syncedRepos > 0 then
 				local syncedIcons = hs.fnutils.map(M.syncedRepos, function(r) return r.icon end) or {}
 				local msg = "🔁 Sync done: " .. table.concat(syncedIcons)

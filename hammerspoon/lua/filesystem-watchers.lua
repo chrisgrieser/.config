@@ -23,6 +23,9 @@ local libraryPath = home .. "/.config/pandoc/main-bibliography.bib"
 --------------------------------------------------------------------------------
 
 M.pathw_fileHub = pathw(env.fileHub, function(paths, _)
+	-- prevent triggering due to iCloud sync to device in standby
+	if not u.screenIsUnlocked() then return end 
+
 	for _, filep in pairs(paths) do
 		local fileName = filep:gsub(".*/", "")
 		local ext = fileName:gsub(".*%.", "")
