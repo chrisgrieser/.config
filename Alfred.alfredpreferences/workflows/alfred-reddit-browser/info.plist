@@ -606,7 +606,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<integer>9</integer>
 			</dict>
 			<key>description</key>
-			<string>List of subreddits, one per line (without the "r/" in front).</string>
+			<string>List of subreddits, one per line</string>
 			<key>label</key>
 			<string>subreddits</string>
 			<key>type</key>
@@ -878,7 +878,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.4.0</string>
+	<string>1.4.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

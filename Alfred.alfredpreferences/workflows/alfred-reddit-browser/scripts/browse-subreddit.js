@@ -62,13 +62,7 @@ function olderThan(firstPath, secondPath) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const subredditConfig = $.getenv("subreddits");
-
-	// GUARD misconfiguration
-	if (subredditConfig.match(/^r\//m)) {
-		const msg = "Config error: subreddit names must not start with 'r/'";
-		return JSON.stringify({ items: [{ title: msg, valid: false }] });
-	}
+	const subredditConfig = $.getenv("subreddits").trim().replace(/^r\//gm, "");
 
 	//───────────────────────────────────────────────────────────────────────────
 
@@ -124,7 +118,7 @@ function run() {
 		return JSON.stringify({ items: [{ title: "Error", subtitle: "No response from API." }] });
 	}
 	if (posts.length === 0) {
-		return JSON.stringify({ items: [{ title: "No Posts higher than minimum upvote count." }] });
+		return JSON.stringify({ items: [{ title: "No posts higher than minimum upvote count." }] });
 	}
 
 	writeToFile(subredditCache, JSON.stringify(posts));
