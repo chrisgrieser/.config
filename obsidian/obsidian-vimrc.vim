@@ -166,11 +166,13 @@ nnoremap ,fs :searchReplace
 " Indentation
 " <Tab> as indentation is already implemented in Obsidian
 
-" Movement lines (doesn't work in visual mode)
+" Move lines (doesn't work in visual mode)
 exmap lineUp obcommand editor:swap-line-up
 exmap lineDown obcommand editor:swap-line-down
 nnoremap <Up> :lineUp
 nnoremap <Down> :lineDown
+
+" Move character under cursor
 nnoremap <Right> dlp
 nnoremap <Left> dlhhp
 
@@ -178,14 +180,10 @@ nnoremap <Left> dlhhp
 nnoremap ä "zdawel"zph
 nnoremap Ä "zdawbh"zph
 
-" spelling list (emulates `z=`)
+" spelling suggestions (emulates `z=`)
 exmap contextMenu obcommand editor:context-menu
 nnoremap zl :contextMenu
 vnoremap zl :contextMenu
-
-" increment quicker
-nnoremap + <C-a>
-nnoremap ü <C-x>
 
 " undo/redo consistently on one key
 nnoremap U <C-r>
@@ -249,7 +247,7 @@ nnoremap ,> :toggleBlockquote
 
 "───────────────────────────────────────────────────────────────────────────────
 " LEADER MAPPINGS
-" the weird mappings are due to an attempts to somewhat imitate my nvim-mappings
+" (the weird mappings are to mirror my nvim-mappings)
 
 exmap fileRecovery obcommand file-recovery:open
 nnoremap ,ut :fileRecovery
@@ -260,9 +258,6 @@ exmap toggleDevtools obcommand obsidian-theme-design-utilities:toggle-devtools
 nmap &c& :obcommand
 nmap &d& :toggleDevtools
 nmap ,l &c&&d&
-
-exmap repeatLastCommand obcommand repeat-last-commands:repeat-command
-nnoremap ,r :repeatLastCommand
 
 " pseudo-code-action: enhance URL with title
 exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-title
@@ -303,10 +298,6 @@ onoremap ar a[
 onoremap ac a{
 onoremap ic i{
 
-nnoremap ygg ggyG
-nnoremap dgg ggdG
-nnoremap cgg ggcG
-
 vnoremap am aW
 vnoremap im iW
 vnoremap aq a"
@@ -321,6 +312,10 @@ vnoremap ac a{
 vnoremap ic i{
 
 " emulate some text objects from nvim-various-textobjs
+nnoremap ygg ggyG
+nnoremap dgg ggdG
+nnoremap cgg ggcG
+
 onoremap rg G
 vnoremap rg G
 onoremap rp }
