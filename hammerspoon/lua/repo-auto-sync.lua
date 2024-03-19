@@ -64,7 +64,6 @@ end
 ---@async
 ---@param notifyOnSuccess boolean set to false for regularly occurring syncs
 local function syncAllGitRepos(notifyOnSuccess)
-	print("❗ beep 🔵")
 	local reposStillSyncing = repoSyncsInProgress()
 	if #reposStillSyncing > 0 then
 		u.notify("🔁 Sync still in progress: " .. table.concat(reposStillSyncing))
@@ -76,7 +75,7 @@ local function syncAllGitRepos(notifyOnSuccess)
 	end
 
 	M.timer_AllSyncs = hs.timer
-		.waitUntil(function() return not repoSyncsInProgress() end, function()
+		.waitUntil(function() return repoSyncsInProgress() == 0 end, function()
 			if #M.syncedRepos > 0 then
 				local syncedIcons = hs.fnutils.map(M.syncedRepos, function(r) return r.icon end) or {}
 				local msg = "🔁 Sync done: " .. table.concat(syncedIcons)
