@@ -22,13 +22,19 @@ fi
 # CONFIG
 list_name="Default"
 
-remindersToday=$(reminders show "$list_name" --due-date="today" | grep -c "^\d\+: ")
-if [[ $remindersToday -eq 0 ]]; then
-	remindersToday=""
+# include open reminders yesterday for reminders carrying over
+reminders_today=$(reminders show "$list_name" --due-date="today")
+reminders_yesterday=$(reminders show "$list_name" --due-date="yesterday")
+reminder_count=$({
+	echo "$reminders_today"
+	echo "$reminders_yesterday"
+} | grep --count "^\d\+: ")
+if [[ $reminder_count -eq 0 ]]; then
+	reminder_count=""
 	icon=""
 	padding=0
 else
 	icon=" "
 	padding=3
 fi
-sketchybar --set "$NAME" label="$remindersToday" icon="$icon" icon.padding_right=$padding
+sketchybar --set "$NAME" label="$reminder_count" icon="$icon" icon.padding_right=$padding
