@@ -13,7 +13,7 @@ rules:
         from: { key_code: f4 }
         to:
           - shell_command: |
-              export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+              source $HOME/.zshenv # to import yq-path
               spotify_player like
               info=$(spotify_player get key playback)
               artist=$(echo $info | yq ".item.artists[0].name")
