@@ -107,7 +107,7 @@ function run() {
 		return JSON.stringify({
 			items: [
 				{
-					title: "No reminders for today.",
+					title: "No open tasks for today.",
 					subtitle: "⏎: Show completed tasks.",
 					variables: {
 						remindersLeftNow: false.toString(),
