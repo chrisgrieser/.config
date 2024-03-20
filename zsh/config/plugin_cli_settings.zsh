@@ -68,8 +68,6 @@ export NODE_REPL_HISTORY=""
 export npm_config_fund=false
 export npm_update_notifier=false # updating via homebrew
 
-#───────────────────────────────────────────────────────────────────────────────
-
 # temporary fix for hanging at "sill: idealTree build"
 function npm_temp_ssl_fix {
 	export npm_config_strict_ssl=false
@@ -81,3 +79,9 @@ function npm_temp_ssl_fix {
 # ln -s /private/etc/ssl/cert.pem $HOMEBREW_PREFIX/etc/openssl@3/cert.pem
 # location of correct certificate file to be determined directories mentioned
 # in `brew info openssl@3`
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# DOCS https://fx.wtf/configuration
+export FX_SHOW_SIZE=true
+export FX_THEME=6
