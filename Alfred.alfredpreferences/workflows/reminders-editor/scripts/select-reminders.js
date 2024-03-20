@@ -40,66 +40,65 @@ function run() {
 	const shellCmd = `reminders show "${list}" ${completedArg} --format="json"`;
 	/** @type {reminderObj[]} */
 	const responseJson = JSON.parse(app.doShellScript(shellCmd));
+	const remindersFiltered = responseJson.filter((rem) => {
+		const dueDate = new Date(rem.dueDate);
+		const today = new Date();
+		today.setHours(23, 59, 0, 0); // to include reminders later that day
+		const openAndDueBeforeToday = !rem.isCompleted && dueDate < today;
+		const completedAndDueToday = rem.isCompleted && isToday(dueDate);
+		return openAndDueBeforeToday || completedAndDueToday;
+	});
 
 	/** @type {AlfredItem[]} */
-	const reminders = responseJson
-		.filter((rem) => {
-			const dueDate = new Date(rem.dueDate);
-			const today = new Date();
-			today.setHours(23, 59, 0, 0); // to include reminders later that day
-			const openAndDueBeforeToday = !rem.isCompleted && dueDate < today;
-			const completedAndDueToday = rem.isCompleted && isToday(dueDate);
-			return openAndDueBeforeToday || completedAndDueToday;
-		})
-		.map((rem) => {
-			const { title, notes, externalId, isCompleted } = rem;
-			const body = notes || "";
-			const displayBody = body.trim().replace(/\n+/g, " · ");
-			const content = title + "\n" + body;
+	const reminders = remindersFiltered.map((rem) => {
+		const { title, notes, externalId, isCompleted } = rem;
+		const body = notes || "";
+		const displayBody = body.trim().replace(/\n+/g, " · ");
+		const content = title + "\n" + body;
 
-			const [url] = content.match(urlRegex) || [];
-			let urlSubtitle = url ? "⌘: Open URL" : "⌘: ⛔ No URL";
-			if (url && !isCompleted) urlSubtitle += " and mark as completed";
-			const emoji = isCompleted ? "☑️ " : "";
+		const [url] = content.match(urlRegex) || [];
+		let urlSubtitle = url ? "⌘: Open URL" : "⌘: ⛔ No URL";
+		if (url && !isCompleted) urlSubtitle += " and mark as completed";
+		const emoji = isCompleted ? "☑️ " : "";
 
-			// INFO the boolean are all stringified, so they are available as "true"
-			// and "false" after stringification, instead of the less clear "1" and "0"
-			/** @type {AlfredItem} */
-			const alfredItem = {
-				title: emoji + title,
-				subtitle: displayBody,
-				variables: {
-					id: externalId,
-					title: title,
-					body: body,
-					notificationTitle: isCompleted ? "🔲 Uncompleted" : "☑️ Completed",
-					mode: isCompleted ? "uncomplete" : "complete",
-					isCompleted: isCompleted.toString(), // only used for cmd action
-					showCompleted: showCompleted.toString(),
-					remindersLeftNow: true.toString(),
-					remindersLeftLater: responseJson.length - 1, // for deciding whether to loop back
+		// INFO the boolean are all stringified, so they are available as "true"
+		// and "false" after stringification, instead of the less clear "1" and "0"
+		/** @type {AlfredItem} */
+		const alfredItem = {
+			title: emoji + title,
+			subtitle: displayBody,
+			variables: {
+				id: externalId,
+				title: title,
+				body: body,
+				notificationTitle: isCompleted ? "🔲 Uncompleted" : "☑️ Completed",
+				mode: isCompleted ? "uncomplete" : "complete",
+				isCompleted: isCompleted.toString(), // only used for cmd action
+				showCompleted: showCompleted.toString(),
+				remindersLeftNow: true.toString(),
+				remindersLeftLater: remindersFiltered.length - 1, // for deciding whether to loop back
+			},
+			// copy via cmd+c
+			text: { copy: content },
+			mods: {
+				// open URL
+				cmd: {
+					arg: url,
+					subtitle: urlSubtitle,
+					valid: Boolean(url),
 				},
-				// copy via cmd+c
-				text: { copy: content },
-				mods: {
-					// open URL
-					cmd: {
-						arg: url,
-						subtitle: urlSubtitle,
-						valid: Boolean(url),
-					},
-					// edit content
-					alt: { arg: content },
-					// toggle completed
-					ctrl: {
-						variables: {
-							showCompleted: (!showCompleted).toString(),
-						},
+				// edit content
+				alt: { arg: content },
+				// toggle completed
+				ctrl: {
+					variables: {
+						showCompleted: (!showCompleted).toString(),
 					},
 				},
-			};
-			return alfredItem;
-		});
+			},
+		};
+		return alfredItem;
+	});
 
 	// GUARD
 	if (reminders.length === 0) {
