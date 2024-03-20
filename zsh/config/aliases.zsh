@@ -20,7 +20,6 @@ alias make='make --silent --warn-undefined-variables'
 alias grep='grep --color'
 alias mkdir='mkdir -p' # create intermediate directories
 alias curl='curl --progress-bar'
-alias jless='jless --no-line-numbers'
 alias tokei="tokei --compact --exclude='*.txt' --exclude='*.json' --num-format=underscores"
 function which { builtin which -a "$@" | bat --language=sh --wrap=character; } # colorized & showing all
 
@@ -43,7 +42,7 @@ alias -g G='| rg'
 alias -g B='| bat'
 alias -g N='| wc -l | tr -d " "' # count lines
 alias -g L='| less'
-alias -g J='| jless'
+alias -g J='| fx'
 alias -g C='| pbcopy ; echo "Copied."' # copy
 alias P='pbpaste'                      # paste
 

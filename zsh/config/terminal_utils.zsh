@@ -127,7 +127,7 @@ function p {
 	ext=${file##*.}
 	case $ext in
 	"json" | "yml" | "yaml")
-		jless "$file"
+		fx "$file"
 		;;
 	"pdf" | "html")
 		qlmanage -p "$file"
