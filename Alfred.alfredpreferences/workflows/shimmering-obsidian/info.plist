@@ -854,9 +854,9 @@
 				<key>modifiers</key>
 				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string></string>
+				<string>⇧: Browse Links in Note</string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 		<key>60A87101-8D59-46BF-BCAE-A9195D6A034E</key>
@@ -1588,9 +1588,9 @@
 				<key>modifiers</key>
 				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Browse Links of Note</string>
+				<string>⇧: Browse Links in Note</string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 		<key>B5F538F8-D47B-47E8-A7C8-5C9C149A58CC</key>
