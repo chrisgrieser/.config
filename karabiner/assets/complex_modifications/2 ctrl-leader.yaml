@@ -62,7 +62,7 @@ rules:
     manipulators:
       - description: "[?] Help"
         type: basic
-        from: { key_code: hyphen, modifiers: { mandatory: [shift] } }
+        from: { key_code: hyphen, modifiers: { optional: [shift] } }
         conditions: [*leader-active]
         to:
           # generate cheatsheet and open it
