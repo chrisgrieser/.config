@@ -4,6 +4,14 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
+function noObsiWinOpen() {
+	return (
+		Application("System Events").applicationProcesses.byName("Obsidian").windows().length === 0
+	);
+}
+
+//──────────────────────────────────────────────────────────────────────────────
+
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
@@ -15,22 +23,32 @@ function run(argv) {
 	const heading = input.split("#")[1];
 	const lineNum = input.split(":")[1]; // used by `oe` external link search to open at line
 
-	// construct URI scheme, preferring Obsidian's own URI since it works without
-	// Obsidian being open; advanced-URI only needed for opening by file or line
+	// construct URI scheme
 	// https://help.obsidian.md/Extending+Obsidian/Obsidian+URI
 	// https://vinzent03.github.io/obsidian-advanced-uri/actions/navigation
-	const useAdvancedUri = heading || lineNum;
-	const urlSchemeBase = useAdvancedUri
-		? `obsidian://vault=${vaultNameEnc}&file=`
-		: `obsidian://advanced-uri?vault=${vaultNameEnc}&filepath=`;
 	const urlScheme =
-		urlSchemeBase +
-		encodeURIComponent(relativePath) +
+		"obsidian://advanced-uri?" +
+		`vault=${vaultNameEnc}` +
+		`&filepath=${encodeURIComponent(relativePath)}` +
 		(heading ? "&heading=" + encodeURIComponent(heading) : "") +
 		(lineNum ? "&line=" + encodeURIComponent(lineNum) : "");
 	console.log("❗ urlScheme:", urlScheme);
 
 	// OPEN FILE
+	// delay opening URI scheme until Obsidian is running, URIs do not open
+	// reliably when vault is not open. (also applies to Obsidian core's URIs)
+	// cannot use "window exists" condition as check, since windows already exist
+	// before Obsidian is able to accept URIs
+	const vaultStartUpDelay = 2; // CONFIG
+	if (!Application("Obsidian").running()) {
+		Application("Obsidian").launch();
+		delay(vaultStartUpDelay);
+	} else if (noObsiWinOpen()) {
+		// open correct vault first
+		app.openLocation("obsidian://open?vault=" + vaultNameEnc);
+		// less delay, since Obsidian process is already running
+		delay(vaultStartUpDelay - 0.5);
+	}
 	app.openLocation(urlScheme);
 	return;
 }
