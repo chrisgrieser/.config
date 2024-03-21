@@ -145,44 +145,74 @@ local function project() return vim.fs.basename(vim.loop.cwd() or "") end
 -- (mostly for filetypes that do not know functions)
 -- Also, we are using document symbols here since Treesitter apparently does not
 -- support symbols for these filetypes.
-local symbolFilter = {
-	yaml = { "object", "array" },
-	json = "module",
-	toml = "object",
-	markdown = "string", -- = headings
-}
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = vim.tbl_keys(symbolFilter),
 	callback = function(ctx)
 		local ft = ctx.match
-		vim.keymap.set(
-			"n",
-			"gs",
-			function()
-				require("telescope.builtin").lsp_document_symbols {
-					symbols = symbolFilter[ft],
-					ignore_symbols = nil,
-				}
-			end,
-			{ desc = " Sections", buffer = true }
-		)
+		local symbolFilter = {
+			yaml = { "object", "array" },
+			json = "module",
+			toml = "object",
+		}
+		local filter = symbolFilter[ft]
+		local desc
+		local symbolSearch
+
+		if filter then
+			
+			vim.keymap.set(
+				"n",
+				"gs",
+				function()
+					require("telescope.builtin").lsp_document_symbols {
+						symbols = symbolFilter[ft],
+					}
+				end,
+				{ desc = " Sections", buffer = true }
+			)
+		elseif ft == "lua" then
+			-- in lua, use treesitter, since it skips anonymous functions
+			vim.keymap.set(
+				"n",
+				"gs",
+				function()
+					require("telescope.builtin").treesitter {
+						show_line = false,
+						prompt_prefix = " ",
+						symbols = { "function", "method", "class", "struct" },
+						symbol_highlights = { ["function"] = "Function", ["method"] = "@method" },
+					}
+				end,
+				{ desc = " Symbols", buffer = true }
+			)
+		else
+			vim.keymap.set(
+				"n",
+				"gs",
+				function()
+					require("telescope.builtin").lsp_document_symbols {
+						prompt_prefix = "󰒕 ",
+						ignore_symbols = {
+							"variable",
+							"constant",
+							"number",
+							"package",
+							"string",
+							"object",
+							"array",
+							"boolean",
+							"property",
+						},
+					}
+				end,
+				{ desc = " Symbols", buffer = true }
+			)
+		end
 	end,
 })
 
--- in lua, use treesitter, since it skips anonymous functions
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "lua",
-	callback = function()
-		local function treesitterSymbol()
-			require("telescope.builtin").treesitter {
-				show_line = false,
-				prompt_prefix = " ",
-				symbols = { "function", "method", "class", "struct" },
-				symbol_highlights = { ["function"] = "Function", ["method"] = "@method" },
-			}
-		end
-		vim.keymap.set("n", "gs", treesitterSymbol, { desc = " Symbols", buffer = true })
-	end,
+	callback = function() end,
 })
 
 --------------------------------------------------------------------------------
@@ -407,28 +437,6 @@ local function telescopeConfig()
 				initial_mode = "normal",
 				layout_config = {
 					horizontal = { preview_width = { 0.7, min = 30 } },
-				},
-			},
-			lsp_document_symbols = {
-				prompt_prefix = "󰒕 ",
-				ignore_symbols = {
-					"variable",
-					"constant",
-					"number",
-					"package",
-					"string",
-					"object",
-					"array",
-					"boolean",
-					"property",
-				},
-
-				-- apparently currently not working
-				symbol_highlights = {
-					["module"] = "Comment",
-					["array"] = "Comment",
-					["object"] = "Comment",
-					["string"] = "Comment",
 				},
 			},
 			lsp_dynamic_workspace_symbols = { -- dynamic = updates results on typing
