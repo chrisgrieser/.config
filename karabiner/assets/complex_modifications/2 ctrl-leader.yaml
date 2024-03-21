@@ -60,6 +60,23 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "🔺 App Switcher Actions"
     manipulators:
+      - description: "[?] Help"
+        type: basic
+        from: { key_code: hyphen, modifiers: { mandatory: [shift] } }
+        conditions: [*leader-active]
+        to:
+          # generate cheatsheet and open it
+          - shell_command: |
+              source "$HOME/.zshenv" # PATH additons for yq
+              cd "$HOME/.config/karabiner/assets" || return 1
+              yq '.rules[1].manipulators[].description' \
+                "./complex_modifications/2 ctrl-leader.yaml" |
+                sort -f |
+                sed 's/.*/- &/' >ctrl-leader.md
+              qlmanage -p "ctrl-leader.md" &
+          - *deactivate-leader
+          - *remove-notice
+
       - description: "[c]alendar (BusyCal)"
         type: basic
         from: { key_code: c }
@@ -163,7 +180,8 @@ rules:
         to:
           - shell_command: |
               if pgrep -xq "neovide" ; then
-                osascript -e 'tell application "Neovide" to activate'
+                # activating via `NeovideFocus` more reliable than via AppleScript or `open`
+                nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>NeovideFocus<CR>"
               else
                 # opening via Helper, since this passes `--title-hidden`
                 open -a "Neovide Helper"

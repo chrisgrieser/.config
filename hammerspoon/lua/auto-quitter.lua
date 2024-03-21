@@ -5,7 +5,6 @@ local u = require("lua.utils")
 
 local aw = hs.application.watcher
 local now = os.time
-
 --------------------------------------------------------------------------------
 
 ---times after which apps should quit, in minutes
@@ -68,7 +67,7 @@ end
 
 ---Watch app (de)activation & update `idleApps`
 M.aw_appDeactivation = aw.new(function(appName, event)
-	-- GUARD ignore apps not included in configuration
+	-- ignore apps not included in configuration
 	if config.thresholdMins[appName] == nil then return end
 
 	if event == aw.deactivated then
