@@ -20,18 +20,15 @@ function run(argv) {
 		`obsidian://advanced-uri?vault=${vaultNameEnc}&filepath=` + encodeURIComponent(relativePath);
 	if (heading) urlScheme += "&heading=" + encodeURIComponent(heading);
 	else if (lineNum) urlScheme += "&line=" + encodeURIComponent(lineNum);
+	console.log("❗ urlScheme:", urlScheme);
 
 	// open note
-	if (Application("Obsidian").running()) {
-		app.openLocation(urlScheme);
-		// press `Esc` to leave settings menu potentially open
-		Application("System Events").keyCode(53);
-	} else {
+	if (!Application("Obsidian").running()) {
+		Application("Obsidian").launch();
 		// delay opening URI scheme until Obsidian is running, since Advanced URI
 		// plugin needs to be loaded before the URI scheme can be opened
-		Application("Obsidian").launch();
-		delay(1); // hard-coded, since Obsidian is registered as running before Advanced URI plugin loads
-		app.openLocation(urlScheme);
+		delay(2);
 	}
+	app.openLocation(urlScheme);
 	return null;
 }
