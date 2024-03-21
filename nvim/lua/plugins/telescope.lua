@@ -148,6 +148,7 @@ local function project() return vim.fs.basename(vim.loop.cwd() or "") end
 vim.api.nvim_create_autocmd("FileType", {
 	callback = function(ctx)
 		local ft = ctx.match
+		if ft == "markdown" then return end
 		local symbolFilter = {
 			yaml = { "object", "array" },
 			json = "module",
@@ -158,61 +159,39 @@ vim.api.nvim_create_autocmd("FileType", {
 		local symbolSearch
 
 		if filter then
-			
-			vim.keymap.set(
-				"n",
-				"gs",
-				function()
-					require("telescope.builtin").lsp_document_symbols {
-						symbols = symbolFilter[ft],
-					}
-				end,
-				{ desc = " Sections", buffer = true }
-			)
+			symbolSearch = function()
+				require("telescope.builtin").lsp_document_symbols {
+					prompt_prefix = "󰒕 ",
+					symbols = filter,
+				}
+			end
+			desc = " Sections"
 		elseif ft == "lua" then
 			-- in lua, use treesitter, since it skips anonymous functions
-			vim.keymap.set(
-				"n",
-				"gs",
-				function()
-					require("telescope.builtin").treesitter {
-						show_line = false,
-						prompt_prefix = " ",
-						symbols = { "function", "method", "class", "struct" },
-						symbol_highlights = { ["function"] = "Function", ["method"] = "@method" },
-					}
-				end,
-				{ desc = " Symbols", buffer = true }
-			)
+			symbolSearch = function()
+				require("telescope.builtin").treesitter {
+					show_line = false,
+					prompt_prefix = " ",
+					symbols = { "function", "method", "class", "struct" },
+					symbol_highlights = { ["function"] = "Function", ["method"] = "@method" },
+				}
+			end
+			desc = " Symbols"
 		else
-			vim.keymap.set(
-				"n",
-				"gs",
-				function()
-					require("telescope.builtin").lsp_document_symbols {
-						prompt_prefix = "󰒕 ",
-						ignore_symbols = {
-							"variable",
-							"constant",
-							"number",
-							"package",
-							"string",
-							"object",
-							"array",
-							"boolean",
-							"property",
-						},
-					}
-				end,
-				{ desc = " Symbols", buffer = true }
-			)
+			symbolSearch = function()
+				require("telescope.builtin").lsp_document_symbols {
+					prompt_prefix = "󰒕 ",
+					-- stylua: ignore
+					ignore_symbols = {
+						"variable", "constant", "number", "package", "string",
+						"object", "array", "boolean", "property",
+					},
+				}
+			end
+			desc = "󰒕 Symbols"
 		end
+		vim.keymap.set("n", "gs", symbolSearch, { desc = desc, buffer = ctx.buf })
 	end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "lua",
-	callback = function() end,
 })
 
 --------------------------------------------------------------------------------
@@ -493,7 +472,6 @@ return {
 		keys = {
 			{ "?", function() telescope("keymaps") end, desc = "⌨️ Search Keymaps" },
 			{ "g.", function() telescope("resume") end, desc = " Continue" },
-			{ "gs", function() telescope("lsp_document_symbols") end, desc = "󰒕 Symbols" },
 			{
 				"gw",
 				function() telescope("lsp_dynamic_workspace_symbols") end,
