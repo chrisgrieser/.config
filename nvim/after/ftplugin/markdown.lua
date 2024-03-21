@@ -81,7 +81,7 @@ keymap("n", "<D-r>", function()
 	-- * cannot use shell's `open` as it does not work with anchors
 	-- * closing tab to ensure it's correctly refreshed
 	local applescript = ([[
-		tell application %q 
+		tell application %q
 			if (front window exists) then
 				repeat with the_tab in (every tab in front window)
 					set the_url to the url of the_tab
@@ -95,11 +95,25 @@ keymap("n", "<D-r>", function()
 end, { desc = " Preview", buffer = true })
 
 --------------------------------------------------------------------------------
--- MARKDOWN-SPECIFIC KEYMAPS
+-- HEADINGS
 
 -- Jump to next/prev heading
 keymap("n", "<C-j>", [[/^#\+ .*<CR>]], { desc = " Next Heading", buffer = true, silent = true })
 keymap("n", "<C-k>", [[?^#\+ .*<CR>]], { desc = " Prev Heading", buffer = true, silent = true })
+
+keymap("n", "gs", function()
+	local headings = vim.tbl_filter(
+		function(line) return line:find("^#+ ") end,
+		vim.api.nvim_buf_get_lines(0, 0, -1, false)
+	)
+	vim.ui.select(headings, { prompt = " Select Heading:" }, function(heading)
+		if not heading then return end
+		vim.fn.search(heading, "w")
+	end)
+end, { desc = " Headings", buffer = true })
+
+--------------------------------------------------------------------------------
+-- MARKDOWN-SPECIFIC KEYMAPS
 
 keymap("n", "<leader>x", "mzI- [ ] <Esc>`z", { desc = " Add Task", buffer = true })
 keymap("n", "<D-4>", "mzI- <Esc>`z", { desc = " Add List", buffer = true })
