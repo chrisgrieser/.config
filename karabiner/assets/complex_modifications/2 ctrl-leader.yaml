@@ -147,6 +147,15 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
+      - description: "rem[i]nders"
+        type: basic
+        from: { key_code: i }
+        conditions: [*leader-active]
+        to:
+          - shell_command: open -a 'Reminders'
+          - *deactivate-leader
+          - *remove-notice
+
       - description: "[n]eovide"
         type: basic
         from: { key_code: "n" }
