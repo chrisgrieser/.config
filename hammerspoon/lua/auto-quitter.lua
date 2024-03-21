@@ -19,6 +19,7 @@ local config = {
 		Finder = 10, -- only closes windows (and only when not on projector)
 		Hammerspoon = 3, -- only console window
 		BusyCal = 5,
+		Reminders = 5,
 		Mimestream = 5,
 		Slack = 25,
 		Highlights = 90,
