@@ -32,7 +32,7 @@ alias l='eza --all --long --flags --time-style=relative --no-user --smart-group 
 export FZF_DEFAULT_COMMAND='fd'
 export FZF_DEFAULT_OPTS='
 	--pointer=⟐ --prompt="❱ " --scrollbar=▐ --ellipsis=… --marker=" +"
-	--color=hl:206
+	--color=hl:206,header::reverse
 	--scroll-off=5 --cycle --layout=reverse --height=90% --preview-window=border-left
 	--bind=tab:down,shift-tab:up
 	--bind=page-down:preview-page-down,page-up:preview-page-up
