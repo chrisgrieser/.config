@@ -433,7 +433,3 @@ inoremap <C-ü> :acceptGhostText
 
 exmap lint obcommand obsidian-linter:lint-file
 nnoremap <C-ü> :lint 
-
-" cmd-c = <M-c>
-exmap suggestGhostText obcommand copilot-auto-completion:predict
-inoremap <M-c> :suggestGhostText
