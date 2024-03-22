@@ -10,7 +10,6 @@
 -- * false to ignore app
 local perAppSettings = {
 	defaultScrollDistance = 30,
-	Obsidian = 20,
 	Highlights = 50,
 	Discord = false, -- not working in Discord
 	neovide = false, -- uses pageup/pagedown for mappings
