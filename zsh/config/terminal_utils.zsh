@@ -156,15 +156,16 @@ function iq {
 		file="$1"
 	fi
 
-	final_query=$(
+	selection=$(
 		yq --colors --output-format=yaml "." "$file" | fzf \
-			--query="." --prompt="yq > " --ansi --no-separator --inline-info --disabled \
+			--query="." --ansi --no-separator --inline-info --disabled \
+			--header-first --header=" ↵ Copy-print query    ⌥ ↵ Copy-print line" \
 			--bind="change:reload(yq --colors --output-format=yaml {q} '$file')" \
-			--bind="esc:print-query,enter:"
+			--bind="enter:print-query,alt-enter:accept"
 	)
-	[[ -z "$final_query" ]] && return 0
-	echo -n "$final_query" | pbcopy
-	print "\e[1;32mQuery copied:\e[0m $final_query"
+	[[ -z "$selection" ]] && return 0
+	echo -n "$selection" | pbcopy
+	print "\e[1;32mCopied:\e[0m $selection"
 }
 
 #───────────────────────────────────────────────────────────────────────────────

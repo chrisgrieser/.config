@@ -12,6 +12,7 @@ local keymappings_I = {
 	["<D-down>"] = "move_to_bottom",
 	["<S-Tab>"] = "move_selection_better",
 	["<CR>"] = "select_default",
+	["<C-v>"] = "select_vertical",
 	["<Esc>"] = "close",
 	["<PageDown>"] = "preview_scrolling_down",
 	["<PageUp>"] = "preview_scrolling_up",
@@ -54,7 +55,7 @@ local keymappings_I = {
 			u.notify("Copied", fullpath)
 		end,
 		type = "action",
-		opts = { desc = "󰅍 Copy name of path" },
+		opts = { desc = "󰅍 Copy path" },
 	},
 	["<C-n>"] = {
 		function(prompt_bufnr)
@@ -65,7 +66,7 @@ local keymappings_I = {
 			u.notify("Copied", name)
 		end,
 		type = "action",
-		opts = { desc = "󰅍 Copy name of file" },
+		opts = { desc = "󰅍 Copy name" },
 	},
 }
 
@@ -258,7 +259,7 @@ local function telescopeConfig()
 				follow = false,
 				mappings = {
 					i = {
-						["<C-h>"] = toggleHiddenAndIgnore,
+						["<C-h>"] = { toggleHiddenAndIgnore, type = "action" },
 					},
 				},
 			},
