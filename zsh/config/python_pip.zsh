@@ -5,7 +5,7 @@
 # 2. Use `python3 -m pip` instead of `pip3`
 function pip {
 	if [[ "$1" == "install" ]]; then
-		if [[ ! "$(cmd which python3)" =~ /\.venv/ || -z "$VIRTUAL_ENV" ]]; then
+		if [[ ! "$(command which python3)" =~ /\.venv/ || -z "$VIRTUAL_ENV" ]]; then
 			printf "\033[1;33mNot in a virtual environment. Aborting.\033[0m "
 			return
 		fi
@@ -31,7 +31,7 @@ function new_venv {
 }
 
 function inspect_venv {
-	py_path="$(cmd which python3 | sed 's|^/Users/chrisgrieser/|~/|')"
+	py_path="$(command which python3 | sed 's|^/Users/chrisgrieser/|~/|')"
 	print "Now using: \e[1;36m$py_path\e[0m"
 }
 
