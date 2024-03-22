@@ -74,7 +74,7 @@ local function workLayout()
 	-- finish
 	u.whenAppWinAvailable("Discord", function()
 		-- FIX missing windows by restarting AltTab
-		u.runWithDelays({ 3, 6 }, function()
+		u.runWithDelays({ 3.5, 6 }, function()
 			if not app("AltTab") then hs.application.open("AltTab") end
 		end)
 		app("Mimestream"):activate()
@@ -137,10 +137,11 @@ hs.hotkey.bind(u.hyper, "home", selectLayout)
 
 -- 3. Systemstart
 if u.isSystemStart() then
+	selectLayout()
+
 	-- sync reminders
 	hs.application.open("Reminders")
 	u.runWithDelays(6, function() u.quitApps("Reminders") end)
-	selectLayout()
 end
 
 -- 4. Waking when not in the office
