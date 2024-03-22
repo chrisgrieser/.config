@@ -7,14 +7,8 @@ local visuals = require("lua.visuals")
 local wu = require("lua.window-utils")
 local app = require("lua.utils").app
 local c = hs.caffeinate.watcher
-
 --------------------------------------------------------------------------------
 -- HELPERS
-
-local function isWeekend()
-	local weekday = tostring(os.date("%a"))
-	return weekday == "Sat" or weekday == "Sun"
-end
 
 ---@param targetMode string
 local function dockSwitcher(targetMode)
@@ -55,14 +49,15 @@ local function workLayout()
 	darkmode.autoSwitch()
 	visuals.updateHoleCover()
 	dockSwitcher("work")
+
 	setHigherBrightnessDuringDay()
 	u.closeAllTheThings()
 	app("AltTab"):kill() -- FIX missing windows
 
-	-- open
 	u.openApps(env.mastodonApp)
-	local appsToOpen = { "Discord", env.browserApp, "Mimestream" }
-	if not isWeekend() then table.insert(appsToOpen, "Slack") end
+
+	-- open & pseudo-maximize
+	local appsToOpen = { "Discord", env.browserApp, "Mimestream", "Slack" }
 	u.openApps(appsToOpen)
 	for _, appName in pairs(appsToOpen) do
 		u.whenAppWinAvailable(appName, function()

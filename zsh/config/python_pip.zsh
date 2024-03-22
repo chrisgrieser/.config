@@ -17,7 +17,7 @@ alias pu="pip uninstall"
 alias pi="pip install"
 alias pl="pip list --not-required"
 alias py="python3"
-alias bye="wezterm cli spawn -- bpython"
+alias bye="wezterm cli spawn -- bpython &>/dev/null"
 alias v="toggle_venv"
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -32,7 +32,7 @@ function new_venv {
 
 function inspect_venv {
 	py_path="$(cmd which python3 | sed 's|^/Users/chrisgrieser/|~/|')"
-	print "Now using: \e[1;36m%s\e[0m" "$py_path"
+	print "Now using: \e[1;36m$py_path\e[0m"
 }
 
 function _search_venv_path {
