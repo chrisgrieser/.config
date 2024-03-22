@@ -428,11 +428,12 @@ nnoremap ,oD :disableDiagnostics
 
 
 "───────────────────────────────────────────────────────────────────────────────
+" AI SUGGESTIONS
 
 " insert mode: accept suggestion
 " normal mode: format
 " HACK `<C-ü>` remapped to cmd-s via Karabiner, since cmd-s (<M-s>) does not
-" trigger reliably, in normal mode.
+" trigger reliably in normal mode.
 " INFO not mapping via Obsidian hotkeys, so we have have the distinction between
 " normal and insert mode, like in nvim
 exmap acceptGhostText obcommand copilot-auto-completion:accept
@@ -440,3 +441,7 @@ inoremap <C-ü> :acceptGhostText
 
 exmap lint obcommand obsidian-linter:lint-file
 nnoremap <C-ü> :lint 
+
+" cmd-c = <M-c>
+exmap suggestGhostText obcommand copilot-auto-completion:predict
+inoremap <M-c> :suggestGhostText
