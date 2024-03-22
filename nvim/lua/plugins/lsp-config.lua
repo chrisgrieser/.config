@@ -14,8 +14,8 @@ local lspToMasonMap = {
 	ltex = "ltex-ls", -- languagetool (natural language linter)
 	lua_ls = "lua-language-server",
 	marksman = "marksman", -- markdown lsp
-	pyright = "pyright", -- python lsp
-	-- basedpyright = "basedpyright", -- python lsp (fork of pyright)
+	-- pyright = "pyright", -- python lsp
+	basedpyright = "basedpyright", -- python lsp (fork of pyright)
 	ruff_lsp = "ruff-lsp", -- python linter
 	stylelint_lsp = "stylelint-lsp", -- css linter
 	taplo = "taplo", -- toml lsp
@@ -51,9 +51,6 @@ local function disableClientInObsidianVault(client)
 	local obsiDir = vim.fs.find(".obsidian", { upward = true, type = "directory" })
 	if not vim.tbl_isempty(obsiDir) then vim.cmd.LspStop(client.id) end
 end
-
--- serverConfigs.basedpyright = {}
--- serverConfigs.pyright = nil
 
 --------------------------------------------------------------------------------
 -- BASH / ZSH

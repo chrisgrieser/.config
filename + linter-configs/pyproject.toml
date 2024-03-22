@@ -1,12 +1,8 @@
 # DOCS https://microsoft.github.io/pyright/#/configuration
-[tool.pyright]
+[tool.pyright] # also used by basedpyright
 venvPath = "."
 venv = ".venv"
 typeCheckingMode = "strict"
-
-# PENDING https://github.com/DetachHead/basedpyright/issues/158
-# [tool.basedpyright]
-# typeCheckingMode = "all" # better: "all"
 
 [tool.python.analysis]
 diagnosticMode = "workspace"
