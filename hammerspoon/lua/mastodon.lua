@@ -64,21 +64,19 @@ end
 ---@param referenceWin hs.window
 local function showHideTickerApp(referenceWin)
 	local masto = app(mastodonApp)
-	if not masto or not referenceWin or u.isFront("CleanShot X") then return end
+	-- GUARD
+	local loginWin = referenceWin:title() == "Login"
+	local screenshotOverlay = referenceWin:title() == "" or u.isFront("CleanShot X")
+	if not masto or not referenceWin or loginWin or screenshotOverlay then return end
 
 	if wu.checkSize(referenceWin, wu.pseudoMax) or wu.checkSize(referenceWin, wu.center) then
 		winToTheSide()
-		return
-	end
-
-	local appWithTransBgWasMaximized = wu.checkSize(referenceWin, wu.maximized)
-		and hs.fnutils.contains(env.transBgApps, referenceWin:title())
-
-	if appWithTransBgWasMaximized then
-		local loginWin = referenceWin:title() == "Login"
-		local screenshotOverlay = referenceWin:title() == ""
-		if loginWin or screenshotOverlay then return end
-		masto:hide()
+	else
+		local theApp = referenceWin:application()
+		local appName = theApp and theApp:name() or ""
+		local appWithTransBgWasMaximized = wu.checkSize(referenceWin, wu.maximized)
+			and hs.fnutils.contains(env.transBgApps, appName)
+		if appWithTransBgWasMaximized then masto:hide() end
 	end
 end
 
