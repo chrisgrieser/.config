@@ -147,6 +147,16 @@ function p {
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# json/yaml explorer
+function jx {
+	stdin=$(</dev/stdin)
+	echo "" | fzf --query="." --print-query --preview-window="bottom" \
+		--bind "tab:replace-query" \
+		--preview="yq --colors --output-format=yaml {q} '$1'"
+}
+
+#───────────────────────────────────────────────────────────────────────────────
+
 # copy result of last command
 function lr() {
 	to_copy=$(eval "$(history -n -1)")

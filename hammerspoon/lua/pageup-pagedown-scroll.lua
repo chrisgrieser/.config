@@ -21,6 +21,7 @@ local perAppSettings = {
 
 ---@param direction "up" | "down
 local function scroll(direction)
+
 	local frontApp = hs.application.frontmostApplication()
 	if not frontApp:mainWindow() then return end
 	local ignoreApp = perAppSettings[frontApp:name()] == false
