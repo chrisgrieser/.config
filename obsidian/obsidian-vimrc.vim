@@ -63,11 +63,6 @@ exmap acceptSuggestion obcommand obsidian-languagetool-plugin:ltaccept-suggestio
 nnoremap ga :acceptSuggestion
 vnoremap ga :acceptSuggestion
 
-" PENDING https://github.com/Clemens-E/obsidian-languagetool-plugin/issues/123
-" exmap acceptSuggestion obcommand obsidian-languagetool-plugin:ignore-suggestion
-" nnoremap gi :ignoreSuggestion
-" vnoremap gi :ignoreSuggestion
-
 " next/prev heading
 exmap nextHeading obcommand obsidian-editor-shortcuts:goToNextHeading
 exmap prevHeading obcommand obsidian-editor-shortcuts:goToPrevHeading
@@ -126,10 +121,7 @@ nnoremap ZZ :closeWindow
 " Splits
 exmap splitVertical obcommand workspace:split-vertical
 nnoremap <C-w>v :splitVertical
-
-" Split Switching
-exmap nextSplit obcommand cycle-through-panes:cycle-through-panes
-nnoremap <C-CR> :nextSplit
+nnoremap <C-v> :splitVertical
 
 " Tabs
 exmap nextTab obcommand workspace:next-tab
