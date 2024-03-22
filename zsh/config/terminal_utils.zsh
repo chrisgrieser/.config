@@ -147,22 +147,24 @@ function p {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# json/yaml explorer
-function jx {
+# interactive yq
+function iq {
 	# Read stdin into a temp file if data is provided via stdin
-	if ! [[ -t 0 ]]; then
-		file="$(mktemp)"
-		trap 'rm -f "$file"' EXIT
-		cat >"$file"
+	if [[ ! -t 0 ]]; then
+		cat >"$(mktemp)"
 	else
 		file="$1"
 	fi
 
-	yq --colors --output-format=yaml "." "$file" |
-		fzf --ansi --query="." --prompt="yq > " \
-			--no-sort --track --no-separator --no-info --disabled \
+	final_query=$(
+		yq --colors --output-format=yaml "." "$file" | fzf \
+			--query="." --prompt="yq > " --ansi --no-separator --inline-info --disabled \
 			--bind="change:reload(yq --colors --output-format=yaml {q} '$file')" \
-			--bind="enter:print-query,escape:print-query"
+			--bind="esc:print-query,enter:"
+	)
+	[[ -z "$final_query" ]] && return 0
+	echo -n "$final_query" | pbcopy
+	print "\e[1;32mQuery copied:\e[0m $final_query"
 }
 
 #───────────────────────────────────────────────────────────────────────────────

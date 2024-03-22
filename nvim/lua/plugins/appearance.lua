@@ -7,6 +7,23 @@ return {
 		event = "CursorMoved",
 		opts = true,
 	},
+	{ -- highlighted undo/redos
+		"tzachar/highlight-undo.nvim",
+		keys = { "u", "U" },
+		opts = {
+			duration = 1000,
+			undo = {
+				lhs = "u",
+				map = "silent undo",
+				opts = { desc = "󰕌 Undo" },
+			},
+			redo = {
+				lhs = "U",
+				map = "silent redo",
+				opts = { desc = "󰑎 Redo" },
+			},
+		},
+	},
 	{ -- virtual text context at the end of a scope
 		"haringsrob/nvim_context_vt",
 		event = "VeryLazy",
