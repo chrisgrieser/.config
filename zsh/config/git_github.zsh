@@ -60,7 +60,7 @@ function ga {
 	local add_or_unadd='then git restore --stage -- {2..} ; else git add -- {2..} ; fi'
 	local file_diff='{ git diff --color=always -- {2..} ; git diff --staged --color=always -- {2..} }'
 	local style
-	style=$(defaults read -g AppleInterfaceStyle &>/dev/null && echo --dark || echo --light)
+	style=$(defaults read -g AppleInterfaceStyle &>/dev/null && echo "--dark" || echo "--light")
 	selection=$(
 		eval "$git_status_cmd" | fzf \
 			--ansi --nth=2.. --track \

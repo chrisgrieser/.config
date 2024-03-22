@@ -149,10 +149,20 @@ function p {
 
 # json/yaml explorer
 function jx {
-	stdin=$(</dev/stdin)
-	echo "" | fzf --query="." --print-query --preview-window="bottom" \
-		--bind "tab:replace-query" \
-		--preview="yq --colors --output-format=yaml {q} '$1'"
+	# Read stdin into a temp file if data is provided via stdin
+	if ! [[ -t 0 ]]; then
+		file="$(mktemp)"
+		trap 'rm -f "$file"' EXIT
+		cat >"$file"
+	else
+		file="$1"
+	fi
+
+	yq --colors --output-format=yaml "." "$file" |
+		fzf --ansi --query="." --prompt="yq > " \
+			--no-sort --track --no-separator --no-info --disabled \
+			--bind="change:reload(yq --colors --output-format=yaml {q} '$file')" \
+			--bind="enter:print-query,escape:print-query"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
