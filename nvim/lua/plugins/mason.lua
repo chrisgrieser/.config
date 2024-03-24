@@ -1,8 +1,11 @@
 return {
 	{
 		"williamboman/mason.nvim",
-		external_dependencies = { "node", "python3.12" },
-		mason_dependencies = "yq", -- only needed when using local registry
+		external_dependencies = {
+			"node",
+			"python3.12",
+			"yq", -- only needed when using local registry
+		},
 		keys = {
 			{ "<leader>pm", vim.cmd.Mason, desc = " Mason" },
 		},
