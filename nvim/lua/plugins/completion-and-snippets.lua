@@ -212,11 +212,8 @@ return {
 		opts = {
 			-- live updating of snippets
 			update_events = { "TextChanged", "TextChangedI" },
-			-- disable auto-reload, since already done by my own plugin
+			-- disable auto-reload, since already done by scissors
 			fs_event_providers = { autocmd = false, libuv = false },
-			-- store visual selection, inserted on next snippet with
-			-- `$TM_SELECTED_TEXT` (VSCode Syntax) or `LS_SELECT_RAW` (Luasnip Syntax)
-			store_selection_keys = "<BS>",
 		},
 		config = function(_, opts)
 			require("luasnip").setup(opts)
@@ -227,7 +224,7 @@ return {
 	{ -- snippet management
 		"chrisgrieser/nvim-scissors",
 		dependencies = "nvim-telescope/telescope.nvim",
-		mason_dependencies = "yq",
+		external_dependencies = "yq",
 		init = function() u.leaderSubkey("n", " Snippets", { "n", "x" }) end,
 		keys = {
 			{
