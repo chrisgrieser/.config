@@ -11,7 +11,7 @@ return {
 		"tzachar/highlight-undo.nvim",
 		keys = { "u", "U" },
 		opts = {
-			duration = 1000,
+			duration = 700,
 			undo = {
 				lhs = "u",
 				map = "silent undo",

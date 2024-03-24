@@ -351,9 +351,6 @@ return {
 			capabilities.textDocument.foldingRange =
 				{ dynamicRegistration = false, lineFoldingOnly = true }
 
-			-- true by default in nvim 0.10
-			capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
-
 			for lsp, serverConfig in pairs(serverConfigs) do
 				serverConfig.capabilities = capabilities
 				require("lspconfig")[lsp].setup(serverConfig)
