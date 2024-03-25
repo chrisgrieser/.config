@@ -7,5 +7,5 @@ u.ftAbbr("--", "#")
 u.ftAbbr("delay", "sleep")
 u.ftAbbr("const", "local")
 
--- FIX some shell-filetypes override makeprg
+-- FIX some shell-filetypes like zsh override makeprg
 vim.opt_local.makeprg = "make --silent --warn-undefined-variables"
