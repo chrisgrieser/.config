@@ -19,29 +19,6 @@ rules:
               - ^org\.chromium\.Chromium$
               - ^com\.brave\.Browser$
               - ^com\.apple\.Safari$
-      # RSS Reader
-      - type: basic
-        from: { pointing_button: button2 }
-        to_if_held_down: [pointing_button: button2]
-        to_if_alone:
-          - pointing_button: button1
-          - { key_code: vk_none, hold_down_milliseconds: 600 } # readkit is slow :(
-          - { key_code: h, modifiers: [command] }
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^app\.readkit\.universal$] }
-      # Mimestream: Open link and delete mail (mostly github links)
-      - type: basic
-        from: { pointing_button: button2 }
-        to_if_held_down: [pointing_button: button2]
-        to_if_alone:
-          - pointing_button: button1
-          - { key_code: vk_none, hold_down_milliseconds: 200 }
-          - { key_code: tab, modifiers: [command] }
-          - { key_code: vk_none, hold_down_milliseconds: 100 }
-          - key_code: non_us_pound
-          - { key_code: h, modifiers: [command] }
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 3: Quit app"
     manipulators:
