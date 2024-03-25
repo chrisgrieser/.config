@@ -1,11 +1,11 @@
 {
 	"name": "Vimium C",
-	"@time": "31/12/2023, 15:51:56",
-	"time": 1704034316324,
+	"@time": "3/25/2024, 4:06:07 PM",
+	"time": 1711379167795,
 	"environment": {
 		"extension": "1.99.994",
 		"platform": "mac",
-		"chromium": 120
+		"chromium": 123
 	},
 	"allBrowserUrls": true,
 	"exclusionListenHash": false,
@@ -41,6 +41,14 @@
 		{
 			"passKeys": "",
 			"pattern": ":https://excalidraw.com/"
+		},
+		{
+			"passKeys": "s ",
+			"pattern": ":https://www.mankier.com/"
+		},
+		{
+			"passKeys": "",
+			"pattern": ":https://haxplore.com/"
 		}
 	],
 	"extAllowList": [
@@ -159,10 +167,12 @@
 		"map yy copyCurrentUrl",
 		"\" copy github part of an url",
 		"map yg copyCurrentUrl sed=\"s=https?://github.com/(.+?/.[^/?]+).*=$1=\"",
-		"\" copy links of all tabs",
-		"map yw copyWindowInfo format=\"${url}\"",
 		"\" copy as markdown link",
 		"map ym copyCurrentUrl format=\"[${title}](${url})\"",
+		"",
+		"\" copy links of all tabs",
+		"map yw copyWindowInfo format=\"${url}\"",
+		"map ya copyWindowInfo format=\"${title}_${url}\"",
 		"",
 		"\" Help",
 		"map ? showHelp",
