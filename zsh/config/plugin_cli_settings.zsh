@@ -5,8 +5,8 @@ export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 # macOS currently ships less v.581, which lacks the ability to read lesskey
 # source files. Therefore for this to work, the version of less provided by
 # homebrew is needed (v.633).
+export PAGER="$HOMEBREW_PREFIX/bin/less"
 export LESSKEYIN="$ZDOTDIR/lesskey"
-export PAGER="less" # needs to be set explicitly, so the homebrew version is used
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -42,6 +42,12 @@ export FZF_DEFAULT_OPTS='
 # updates managed via homebrew https://cli.github.com/manual/gh_help_environment
 export GH_NO_UPDATE_NOTIFIER=1
 
+# DOCS https://fx.wtf/configuration
+export FX_SHOW_SIZE=true
+export FX_THEME=6
+
+#───────────────────────────────────────────────────────────────────────────────
+
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets regexp)
 
 # DOCS https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/regexp.md
@@ -55,10 +61,6 @@ export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=30
 
 # do not accept autosuggestion when using vim's `A`
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}")
-
-# DOCS https://fx.wtf/configuration
-export FX_SHOW_SIZE=true
-export FX_THEME=6
 
 #───────────────────────────────────────────────────────────────────────────────
 # NPM
@@ -79,9 +81,5 @@ function npm_temp_ssl_fix {
 	echo "reinstalling brew package \`openssl@3\` *and* \`ca-certificates\`."
 	echo "the latter adds the symlink target for the openssl certificate"
 }
-# fix broken symlink from homebrew install manually
-# ln -s /private/etc/ssl/cert.pem $HOMEBREW_PREFIX/etc/openssl@3/cert.pem
-# location of correct certificate file to be determined directories mentioned
-# in `brew info openssl@3`
 
 #───────────────────────────────────────────────────────────────────────────────
