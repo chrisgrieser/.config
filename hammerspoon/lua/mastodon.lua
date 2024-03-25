@@ -61,13 +61,14 @@ end
 
 -- SHOW if referenceWin is pseudo-maximized or centered
 -- HIDE referenceWin belonging to app with transparent background is maximized
----@param referenceWin hs.window
+---@param referenceWin hs.window|nil
 local function showHideTickerApp(referenceWin)
-	local masto = app(mastodonApp)
 	-- GUARD
+	local masto = app(mastodonApp)
+	if not masto or not referenceWin then return end
 	local loginWin = referenceWin:title() == "Login"
 	local screenshotOverlay = referenceWin:title() == "" or u.isFront("CleanShot X")
-	if not masto or not referenceWin or loginWin or screenshotOverlay then return end
+	if loginWin or screenshotOverlay then return end
 
 	if wu.checkSize(referenceWin, wu.pseudoMax) or wu.checkSize(referenceWin, wu.center) then
 		winToTheSide()
