@@ -4,7 +4,6 @@ local u = require("config.utils")
 return {
 	{ -- lightweight git client
 		"chrisgrieser/nvim-tinygit",
-		external_dependencies = "git",
 		event = "VeryLazy", -- load for status line component
 		ft = "gitrebase", -- so ftplugin is loaded
 		keys = {
@@ -61,7 +60,6 @@ return {
 	},
 	{ -- git sign gutter & hunk actions
 		"lewis6991/gitsigns.nvim",
-		external_dependencies = "git",
 		event = "VeryLazy",
 		keys = {
 			{ "ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 Stage Hunk" },
@@ -81,7 +79,7 @@ return {
 		opts = {
 			max_file_length = 12000, -- lines
 			-- deletions greater than one line will show a count to assess the size
-			-- digits are actually nerdfont numbers to achieve smaller size
+			-- (digits are actually nerdfont numbers to achieve smaller size)
 			-- stylua: ignore
 			count_chars = { "", "󰬻", "󰬼", "󰬽", "󰬾", "󰬿", "󰭀", "󰭁", "󰭂", ["+"] = "󰿮" },
 			signs = {

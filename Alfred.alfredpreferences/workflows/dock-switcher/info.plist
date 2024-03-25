@@ -243,7 +243,7 @@
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Folder where dock layouts should be stored. Put in a cloud drive for syncing.</string>
+			<string>Folder where dock layouts should be stored. Select a folder in a cloud drive for syncing.</string>
 			<key>label</key>
 			<string>Dock layout location</string>
 			<key>type</key>

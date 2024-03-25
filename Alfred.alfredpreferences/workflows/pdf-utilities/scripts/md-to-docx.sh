@@ -14,6 +14,7 @@ word_file="${input_no_ext}_${date}_CG.docx"
 cd "$(dirname "$md_file")" || return 1
 
 pandoc "$md_file" --output="$word_file" --defaults="md2docx" 2>&1 || return 1
+rm "$word_file"
 
 #───────────────────────────────────────────────────────────────────────────────
 # `^l` is the manual line break token in MS Word
