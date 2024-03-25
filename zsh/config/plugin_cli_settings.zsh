@@ -56,6 +56,10 @@ export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=30
 # do not accept autosuggestion when using vim's `A`
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}")
 
+# DOCS https://fx.wtf/configuration
+export FX_SHOW_SIZE=true
+export FX_THEME=6
+
 #───────────────────────────────────────────────────────────────────────────────
 # NPM
 # Don't clutter home directory with useless `.node_repl_history`
@@ -81,7 +85,3 @@ function npm_temp_ssl_fix {
 # in `brew info openssl@3`
 
 #───────────────────────────────────────────────────────────────────────────────
-
-# DOCS https://fx.wtf/configuration
-export FX_SHOW_SIZE=true
-export FX_THEME=6

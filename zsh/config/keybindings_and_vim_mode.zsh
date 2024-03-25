@@ -69,6 +69,7 @@ bindkey -M vicmd 'H' vi-first-non-blank
 bindkey -M vicmd -s ' ' 'ciw' # -s flag sends direct keystrokes and therefore allows for remappings
 bindkey -M vicmd 'U' redo
 bindkey -M vicmd 'M' vi-join
+bindkey -M vicmd -s 'Y' 'y$'
 
 bindkey -M viins '^?' backward-delete-char # FIX backspace
 
