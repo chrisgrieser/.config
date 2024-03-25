@@ -413,21 +413,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string>brew reinstall {query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.terminalcommand</string>
-			<key>uid</key>
-			<string>A98EAA76-0074-4CAD-9A09-48949FC126DB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -473,6 +458,21 @@
 			<string>CE590292-EEA5-4025-A89B-42AE38188503</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>brew reinstall {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.terminalcommand</string>
+			<key>uid</key>
+			<string>A98EAA76-0074-4CAD-9A09-48949FC126DB</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -597,7 +597,7 @@
 	+ &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Open the package's homepage (`brew home`).
 	+ &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy the package's homepage to the clipboard.
 	+ &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Show package information (`brew info`) in Large Text.
-	+ The downloads counts refer to the number of downloads per 90 days.
+	+ The download counts refer to the number of downloads per 90 days.
 - Reinstall a package already installed on your system via the `br` keyword (`brew reinstall`).
 - Uninstall a package via the `bu` keyword (`brew uninstall`). Optionally use the `--zap` option for a clean uninstallation.
 - Search and install fonts available in the [Homebrew font tap](https://github.com/Homebrew/homebrew-cask-fonts) via the `bf` keyword (`brew install font-…`).

@@ -28,10 +28,11 @@ word_file="${input_no_ext}_${date}_CG.docx"
 cd "$(dirname "$md_file")" || return 1
 
 pandoc "$md_file" --output="$word_file" --defaults="md2docx" 2>&1 || return 1
-open -R "$word_file"
+rm "$word_file"
 
 # 3. INSERT LINE BREAKS IN TABLES
 # `^l` is the manual line break token in MS Word
+open -R "$word_file"
 [[ ! -e "$word_file" ]] && return 1
 open "$word_file"
 
@@ -51,6 +52,3 @@ osascript -e '
 		save active document
 	end tell 
 '
-
-# 4. CLEAN-UP
-rm "$md_file"
