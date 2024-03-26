@@ -28,7 +28,8 @@
 				"noConsoleLog": "off"
 			},
 			"complexity": {
-				"noExcessiveCognitiveComplexity": "off"
+				"noExcessiveCognitiveComplexity": "off",
+				"useSimplifiedLogicExpression": "off" // complains about negated and-conditions
 			},
 			"style": {
 				"useBlockStatements": "off",
