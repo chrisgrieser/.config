@@ -11,6 +11,12 @@ function readFile(path) {
 	return ObjC.unwrap(str);
 }
 
+/** @param {string} str */
+function alfredMatcher(str) {
+	const clean = str.replace(/[-()_.:#/\;,[\]]/g, " ");
+	return [clean, str].join(" ") + " ";
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -27,19 +33,20 @@ function run() {
 			// GUARD
 			const unreadItem = line.startsWith("- [ ] ");
 			const validItem = line.includes("](");
-			if (!unreadItem || !validItem) return {};
+			if (!(unreadItem && validItem)) return {};
 
 			const [_, title, url, date] = line.match(
 				/- \[ \] \[([^\]]*)\]\((.*?)\) ?(\p{Extended_Pictographic} .*)?/u,
-			);
+			) || ["", "", "", ""];
 			const dateStr = date ? `${date}  ·  ` : "";
 
 			/** @type {AlfredItem} */
 			const item = {
-				title: title,
+				title: title || "",
+				match: alfredMatcher(title || "") + alfredMatcher(url || ""),
 				subtitle: dateStr + url,
 				arg: lineNo,
-				quicklookurl: url,
+				quicklookurl: url || "",
 			};
 			return item;
 		});
