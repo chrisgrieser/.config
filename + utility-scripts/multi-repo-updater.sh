@@ -5,10 +5,7 @@ set -e # safe mode
 
 # CONFIG
 github_username="chrisgrieser"
-
-repos_to_update=$(gh repo list --limit=100 --no-archived --source --json="name" --jq=".[].name" |
-	grep -E "alfred|shimmering-obsidian")
-
+repo_names="alfred|shimmering-obsidian|gitfred"
 commit_msg="build: improved release action"
 
 function actions_in_repo {
@@ -18,6 +15,10 @@ function actions_in_repo {
 }
 
 #───────────────────────────────────────────────────────────────────────────────
+
+repos_to_update=$(gh repo list --limit=100 --no-archived --source --json="name" \
+	--jq=".[].name | select(test(\"$repo_names\"))")
+
 # confirmation that everything is correct
 print "\e[1;34mCommit Message:\e[0m"
 echo "$commit_msg"
