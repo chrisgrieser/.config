@@ -244,7 +244,7 @@ local autoCd = {
 		".project-root", -- manual marker file
 	},
 	siblingOfRoot = {
-		".obsidian",
+	-- 	".obsidian",
 	},
 	parentOfRoot = {
 		".config", -- my dotfiles
