@@ -334,7 +334,7 @@
   },
   "switch case": {
     "body": [
-      "case $${bar} in",
+      "case $${1:var} in",
       "\"one\" | \"two\")",
       "\techo \"foo\"",
       "\t;;",
