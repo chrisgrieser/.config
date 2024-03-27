@@ -3,7 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>de.chris-grieser.</string>
+	<string>de.chris-grieser.weekly-date-inserter</string>
+	<key>category</key>
+	<string>❇️</string>
 	<key>connections</key>
 	<dict>
 		<key>247D4217-E1F0-4DF9-847A-76A55F9845C1</key>
@@ -81,7 +83,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 	</dict>
@@ -195,7 +197,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/weekly-date-generator.js</string>
+				<string>./weekly-date-generator.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -260,54 +262,54 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>add week</string>
 			<key>xpos</key>
-			<real>95</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>400</real>
+			<real>190</real>
 		</dict>
 		<key>43CF6B56-876A-44D2-A784-A0436358FBE1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>245</real>
+			<real>225</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>80</real>
 		</dict>
 		<key>6BDF0B2A-2532-4C36-BF5A-E87C6F7905FC</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>300</real>
+			<real>280</real>
 			<key>ypos</key>
-			<real>400</real>
+			<real>190</real>
 		</dict>
 		<key>9D592180-57A5-4FAB-A040-D2D4D3C32B07</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>445</real>
+			<real>425</real>
 			<key>ypos</key>
-			<real>430</real>
+			<real>220</real>
 		</dict>
 		<key>A2CDDB17-3209-4948-988A-349E07499E8A</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>305</real>
+			<real>285</real>
 			<key>ypos</key>
-			<real>260</real>
+			<real>50</real>
 		</dict>
 		<key>B80A70FF-2A85-4481-A0DE-DF67BBA82247</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>520</real>
+			<real>500</real>
 			<key>ypos</key>
-			<real>400</real>
+			<real>190</real>
 		</dict>
 		<key>D9582554-568A-4CA1-A0FA-61F84CB298A0</key>
 		<dict>
@@ -316,13 +318,102 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>weekly date generator</string>
 			<key>xpos</key>
-			<real>95</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>260</real>
+			<real>50</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>en-US</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>en-US</string>
+						<string>en-US</string>
+					</array>
+					<array>
+						<string>de-DE</string>
+						<string>de-DE</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>language</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>language</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>enclose date in brackets</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>in_brackets</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>add line break</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>line_break_after</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>be</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>Berlin</string>
+						<string>be</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>for holidays</string>
+			<key>label</key>
+			<string>German Bundesland</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>bundesland_feiertage</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string></string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
