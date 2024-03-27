@@ -65,7 +65,7 @@ function run(argv) {
 		if (!fileExists(cacheDir + "/weekCounter")) return "No Starting Date found."; 
 
 		startDate = new Date(readFile(cacheDir + "/startDate"));
-		weekCounter = 1 + parseInt(readFile(cacheDir + "/weekCounter"));
+		weekCounter = 1 + Number.parseInt(readFile(cacheDir + "/weekCounter"));
 		writeToFile(cacheDir + "/weekCounter", weekCounter.toString());
 	}
 
@@ -82,7 +82,7 @@ function run(argv) {
 	if (bundesland) {
 		const url = `https://feiertage-api.de/api/?jahr=${nextWeek.getFullYear()}&nur_land=${bundesland}`;
 		const feiertageJSON = JSON.parse(app.doShellScript(`curl -s "${url}"`));
-		const feiertage = Object.keys(feiertageJSON).map(function (tag) {
+		const feiertage = Object.keys(feiertageJSON).map((tag) => {
 			const isoDate = feiertageJSON[tag].datum;
 			const desc = tag + " " + feiertageJSON[tag].hinweis;
 			return [isoDate, desc];

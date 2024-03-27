@@ -135,7 +135,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 		<key>53E5054B-1A54-48FA-B642-7B674813E725</key>
@@ -1162,7 +1162,7 @@ fi</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>220</real>
+			<real>235</real>
 			<key>ypos</key>
 			<real>865</real>
 		</dict>
@@ -1171,7 +1171,7 @@ fi</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>170</real>
+			<real>180</real>
 			<key>ypos</key>
 			<real>755</real>
 		</dict>
@@ -1212,7 +1212,7 @@ fi</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>365</real>
+			<real>380</real>
 			<key>ypos</key>
 			<real>895</real>
 		</dict>
@@ -1430,7 +1430,7 @@ fi</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>440</real>
+			<real>455</real>
 			<key>ypos</key>
 			<real>865</real>
 		</dict>
@@ -1446,7 +1446,7 @@ fi</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>225</real>
+			<real>240</real>
 			<key>ypos</key>
 			<real>725</real>
 		</dict>
