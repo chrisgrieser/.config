@@ -1,5 +1,5 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.6.1/schema.json",
+	"$schema": "https://biomejs.dev/schemas/1.6.3/schema.json",
 	"vcs": {
 		"enabled": true,
 		"clientKind": "git",
@@ -9,7 +9,14 @@
 		"parser": { "allowComments": true } // for `tsconfig.json`
 	},
 	"javascript": {
-		"globals": ["ObjC", "Application", "delay", "Path", "$"] // JXA variables
+		"globals": [
+			"ObjC", // JXA variables
+			"Application",
+			"delay",
+			"Path",
+			"$",
+			"dv" // dataview
+		]
 	},
 	"formatter": {
 		"lineWidth": 100,
