@@ -39,7 +39,7 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
-	const language = $.getenv("language");
+	const language = $.getenv("date_locale");
 	const resultInBrackets = $.getenv("in_brackets") === "1";
 	const addLineBreak = $.getenv("line_break_after") === "1";
 	const bundesland = $.getenv("bundesland_feiertage");
