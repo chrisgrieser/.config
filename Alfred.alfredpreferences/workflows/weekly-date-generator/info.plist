@@ -345,11 +345,11 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>description</key>
 			<string></string>
 			<key>label</key>
-			<string>language</string>
+			<string>date locale</string>
 			<key>type</key>
 			<string>popupbutton</string>
 			<key>variable</key>
-			<string>language</string>
+			<string>date_locale</string>
 		</dict>
 		<dict>
 			<key>config</key>

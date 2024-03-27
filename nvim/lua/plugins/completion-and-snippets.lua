@@ -199,9 +199,6 @@ return {
 	},
 	{ -- Snippet Engine
 		"L3MON4D3/LuaSnip",
-		keys = {
-			{ "<BS>", mode = "x" },
-		},
 		init = function()
 			-- copy system clipboard to regular register, required for VSCode
 			-- snippets with `$CLIPBOARD`
@@ -247,7 +244,6 @@ return {
 				keymaps = {
 					deleteSnippet = "<D-BS>",
 					openInFile = "<D-o>",
-					jumpBetweenBodyAndPrefix = "<S-CR>",
 					insertNextToken = "<D-t>",
 				},
 			},
