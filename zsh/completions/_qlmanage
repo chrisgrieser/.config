@@ -1,0 +1,25 @@
+#compdef qlmanage
+
+local arguments
+
+arguments=(
+    '-h[Display this help]'
+    '-r[Force reloading Generators list]'
+    '-r[Reset thumbnail disk cache]'
+    '-m[...\] Display statistics about quicklookd. Stats names:]'
+    '-d[Integer between 1-4]'
+    '-p[Compute previews of the documents]'
+    '-t[Compute thumbnails of the documents]'
+    '-x[Use quicklookd (remote computation)]'
+    '-i[Compute thumbnail in icon mode]'
+    '-s[Size for the thumbnail]'
+    '-f[Scale factor for the thumbnail]'
+    '-F[Scale factor for the thumbnail, draw downscaled and compare to 1x]'
+    '-z[Display generation performance info (do not display thumbnails)]'
+    '-o[Output result in dir (do not display thumbnails or previews)]'
+    '-c[Force the content type used for the documents]'
+    '-g[Force the generator to use]'
+    '*:filename:_files'
+)
+
+_arguments -s $arguments

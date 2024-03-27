@@ -23,11 +23,9 @@ browserID=$(osascript -e "id of app \"$BROWSER_APP\"") # set in zshenv
 duti -s "$browserID" svg all
 duti -s "$browserID" chrome-extension
 duti -s "$browserID" chrome
-duti -s "$browserID" webloc all # link files
-duti -s "$browserID" url all    # link files
-
-mailID=$(osascript -e "id of app \"$MAIL_APP\"") # set in zshenv
-duti -s "$mailID" mailto                         # = default mail client
+duti -s "$browserID" webloc all            # link files
+duti -s "$browserID" url all               # link files
+duti -s "com.mimestream.Mimestream" mailto # = default mail client
 
 # video & mp3
 videoplayerID="com.colliderli.iina"
@@ -47,7 +45,7 @@ duti -s "$editorID" jsonc all
 duti -s "$editorID" pyi all
 duti -s "$editorID" py all
 duti -s "$editorID" config all # quick-lint-js.config
-duti -s "$editorID" cff all # citation file format
+duti -s "$editorID" cff all    # citation file format
 duti -s "$editorID" diff all
 duti -s "$editorID" public.unix-executable all
 duti -s "$editorID" scm all # treesitter

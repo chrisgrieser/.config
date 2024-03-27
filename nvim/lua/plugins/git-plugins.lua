@@ -1,6 +1,6 @@
 local u = require("config.utils")
 --------------------------------------------------------------------------------
-
+-- some comment here
 return {
 	{ -- lightweight git client
 		"chrisgrieser/nvim-tinygit",
