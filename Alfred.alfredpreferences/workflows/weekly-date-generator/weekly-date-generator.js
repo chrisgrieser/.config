@@ -80,7 +80,6 @@ function run(argv) {
 
 	// consider state-specific German holidays
 	if (bundesland) {
-		// DOCS https://feiertage-api.de/
 		const url = `https://feiertage-api.de/api/?jahr=${nextWeek.getFullYear()}&nur_land=${bundesland}`;
 		const feiertageJSON = JSON.parse(app.doShellScript(`curl -s "${url}"`));
 		const feiertage = Object.keys(feiertageJSON).map((tag) => {
