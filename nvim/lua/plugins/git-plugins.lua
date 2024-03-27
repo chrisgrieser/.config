@@ -19,9 +19,10 @@ return {
 			{ "<leader>gI", function() require("tinygit").issuesAndPrs { state = "closed" } end, desc = " Closed Issues" },
 			{ "<leader>gd", function() require("tinygit").searchFileHistory() end, desc = "󰢷 File History" },
 			{ "<leader>gD", function() require("tinygit").functionHistory() end, desc = "󰢷 Function History" },
-			{ "<leader>gu", function() require("tinygit").githubUrl() end, mode = { "n", "x" }, desc = " GitHub Link" },
-			{ "<leader>gU", function() require("tinygit").githubUrl("repo") end, desc = " Goto Repo" },
+			{ "<leader>gu", function() require("tinygit").githubUrl() end, mode = { "n", "x" }, desc = " GitHub URL" },
+			{ "<leader>gU", function() require("tinygit").githubUrl("repo") end, desc = " Repo URL" },
 			{ "<leader>g#", function() require("tinygit").openIssueUnderCursor() end, desc = " Open Issue under Cursor" },
+			{ "<leader>uc", function() require("tinygit").undoLastCommit() end, desc = "󰊢 Undo Last Commit" },
 			-- stylua: ignore end
 		},
 		opts = {
