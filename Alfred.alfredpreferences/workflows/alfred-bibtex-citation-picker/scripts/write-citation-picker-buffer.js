@@ -20,7 +20,9 @@ function fileExists(/** @type {string} */ filePath) {
 
 class BibtexEntry {
 	constructor() {
+		/** @type {string[]} */
 		this.author = []; // last names only
+		/** @type {string[]} */
 		this.editor = [];
 		this.icon = "";
 		this.citekey = ""; // without "@"
@@ -33,6 +35,7 @@ class BibtexEntry {
 		this.volume = "";
 		this.issue = "";
 		this.abstract = "";
+		/** @type {string[]} */
 		this.keywords = [];
 		this.attachment = "";
 	}
@@ -144,8 +147,8 @@ function bibtexDecode(encodedStr) {
 	const decodePair = [...germanChars, ...frenchChars, ...otherChars, ...specialChars];
 	let decodedStr = encodedStr;
 	for (const pair of decodePair) {
-		const half = pair.split(";");
-		decodedStr = decodedStr.replaceAll(half[0], half[1]);
+		const [first, second] = pair.split(";") || [];
+		decodedStr = decodedStr.replaceAll(first, second);
 	}
 	return decodedStr;
 }
@@ -166,9 +169,10 @@ function bibtexParse(rawBibtexStr) {
 		return nameString
 			.split(bibtexNameValueDelimiter) // array-fy
 			.map((name) => {
-				// only last name
-				if (name.includes(",")) return name.split(",")[0]; // when last name — first name
-				return name.split(" ").pop(); // when first name — last name
+				const lastname = name.includes(",")
+					? name.split(",")[0] // when last name — first name
+					: name.split(" ").pop(); // when first name — last name
+				return lastname || "";
 			});
 	}
 
@@ -183,8 +187,9 @@ function bibtexParse(rawBibtexStr) {
 			const entry = new BibtexEntry();
 
 			// parse first line (separate since different formatting)
-			const entryCategory = lines[0].split("{")[0].toLowerCase().trim();
-			entry.citekey = lines[0].split("{")[1]?.trim();
+			const firstLine = lines[0] || "";
+			const entryCategory = firstLine.split("{")[0]?.toLowerCase().trim() || "ERROR";
+			entry.citekey = firstLine.split("{")[1]?.trim() || "ERROR";
 			lines.shift();
 
 			// INFO will use icons saved as as `./icons/{entry.icon}.png` in the
@@ -200,30 +205,34 @@ function bibtexParse(rawBibtexStr) {
 			// parse remaining lines
 			for (const line of lines) {
 				if (!line.includes("=")) continue; // catch erroneous BibTeX formatting
-				const field = line.split("=")[0].trim().toLowerCase();
-				const value = line
-					.split("=")[1]
-					.replace(/{|}|,$/g, "") // remove TeX escaping
-					.trim();
+				const field = line.split("=")[0]?.trim().toLowerCase() || "ERROR";
+				const value =
+					line
+						.split("=")[1]
+						?.replace(/{|}|,$/g, "") // remove TeX escaping
+						.trim() || "ERROR";
 
 				switch (field) {
 					case "author":
-					case "editor":
+					case "editor": {
 						entry[field] = toLastNameArray(value);
 						break;
+					}
 					case "date":
 					case "year": {
 						const yearDigits = value.match(/\d{4}/);
 						if (yearDigits) entry.year = yearDigits[0]; // edge case of BibTeX files with wrong years
 						break;
 					}
-					case "keywords":
+					case "keywords": {
 						entry.keywords = value.split(bibtexKeywordValueDelimiter).map((t) => t.trim());
 						break;
+					}
 					case "file":
-					case "attachment":
+					case "attachment": {
 						entry.attachment = value;
 						break;
+					}
 					default:
 						entry[field] = value;
 				}
@@ -270,7 +279,9 @@ function run() {
 
 	//──────────────────────────────────────────────────────────────────────────────
 
+	/** @type {string[]} */
 	let litNoteArray = [];
+	/** @type {string[]} */
 	let pdfArray = [];
 
 	if (litNoteFolderCorrect) {
@@ -302,6 +313,8 @@ function run() {
 		const emojis = [];
 		// biome-ignore format: too long
 		const { title, url, citekey, keywords, icon, journal, volume, issue, booktitle, author, editor, year, abstract, primaryNamesEtAlString, primaryNames, attachment } = entry;
+		// @ts-ignore
+		const isFirstLibrary = Boolean(this.isFirstlibrary);
 
 		// Shorten Title (for display in Alfred)
 		let shorterTitle = title;
@@ -356,6 +369,7 @@ function run() {
 		}
 
 		// Matching behavior
+		/** @type {string[]} */
 		let keywordMatches = [];
 		if (keywords.length) keywordMatches = keywords.map((/** @type {string} */ tag) => "#" + tag);
 		let authorMatches = [...author, ...editor];
@@ -383,7 +397,7 @@ function run() {
 		if (keywords.length) largeTypeInfo += "\n\nkeywords: " + keywords.join(", ");
 
 		// // Indicate 2nd library (this set via .map thisAry)
-		const libraryIndicator = !this.isFirstLibrary ? secondLibraryIcon : "";
+		const libraryIndicator = isFirstLibrary ? "" : secondLibraryIcon;
 
 		return {
 			title: libraryIndicator + shorterTitle,
@@ -406,14 +420,14 @@ function run() {
 				},
 				// opening in second library not implemented yet
 				shift: {
-					valid: this.isFirstLibrary,
-					subtitle: this.isFirstLibrary
+					valid: isFirstLibrary,
+					subtitle: isFirstLibrary
 						? `⇧: Open in ${openEntriesIn}`
 						: "⛔: Opening entries in 2nd library not yet implemented.",
 				},
 				"fn+cmd": {
-					valid: this.isFirstLibrary,
-					subtitle: this.isFirstLibrary
+					valid: isFirstLibrary,
+					subtitle: isFirstLibrary
 						? "⌘+fn: Delete entry from BibTeX file (⚠️ irreversible)."
 						: "⛔: Deleting entries in 2nd library not yet implemented.",
 				},
