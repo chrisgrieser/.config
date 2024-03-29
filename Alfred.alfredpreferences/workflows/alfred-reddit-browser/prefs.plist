@@ -13,7 +13,8 @@
 	<key>save_scroll_position</key>
 	<true/>
 	<key>subreddits</key>
-	<string>neovim
-macapps</string>
+	<string>r/neovim
+r/macapps
+anime</string>
 </dict>
 </plist>
