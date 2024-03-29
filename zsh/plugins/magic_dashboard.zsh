@@ -75,6 +75,8 @@ function _gitstatus {
 	git ls-files --others --exclude-standard | xargs git add --intent-to-add &>/dev/null
 
 	if [[ -n "$(git status --porcelain)" ]]; then
+		local max_gitstatus_lines=${MAGIC_DASHBOARD_GITSTATUS_LINES:-12}
+
 		local unstaged staged
 		unstaged=$(git diff --color="always" --compact-summary --stat=$COLUMNS | sed -e '$d')
 		staged=$(git diff --staged --color="always" --compact-summary --stat=$COLUMNS | sed -e '$d' \
@@ -87,16 +89,16 @@ function _gitstatus {
 		elif [[ -n "$staged" ]]; then
 			diffs="$staged"
 		fi
-		print "$diffs" | sed \
-			-e 's/ => / ⟹  /' \
-			-e $'s/\\(gone\\)/\033[1;31mD     \033[0m/' \
-			-e $'s/\\(new\\)/\033[1;32mN    \033[0m/' \
-			-e $'s/(\\(new .*\\))/\033[1;34m\\1\033[0m/' \
-			-e 's/ Bin /    /' \
-			-e $'s/ \\| Unmerged /  \033[1;31m  \033[0m /' \
-			-Ee $'s|([^/+]*)(/)|\033[1;36m\\1\033[1;33m\\2\033[0m|g' \
-			-e $'s/^\\+/\033[1;35m \033[0m /' \
-			-e $'s/ \\|/ \033[1;30m│\033[0m/'
+		print "$diffs" | head -n"$max_gitstatus_lines" |
+			sed -e 's/ => / ⟹  /' \
+				-e $'s/\\(gone\\)/\033[1;31mD     \033[0m/' \
+				-e $'s/\\(new\\)/\033[1;32mN    \033[0m/' \
+				-e $'s/(\\(new .*\\))/\033[1;34m\\1\033[0m/' \
+				-e 's/ Bin /    /' \
+				-e $'s/ \\| Unmerged /  \033[1;31m  \033[0m /' \
+				-Ee $'s|([^/+]*)(/)|\033[1;36m\\1\033[1;33m\\2\033[0m|g' \
+				-e $'s/^\\+/\033[1;35m \033[0m /' \
+				-e $'s/ \\|/ \033[1;30m│\033[0m/'
 		_separator
 	fi
 }
