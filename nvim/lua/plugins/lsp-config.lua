@@ -14,7 +14,6 @@ local lspToMasonMap = {
 	ltex = "ltex-ls", -- languagetool (natural language linter)
 	lua_ls = "lua-language-server",
 	marksman = "marksman", -- markdown lsp
-	-- pyright = "pyright", -- python lsp
 	basedpyright = "basedpyright", -- python lsp (fork of pyright)
 	ruff_lsp = "ruff-lsp", -- python linter
 	stylelint_lsp = "stylelint-lsp", -- css linter
