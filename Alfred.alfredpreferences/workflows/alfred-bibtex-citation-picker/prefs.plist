@@ -18,7 +18,5 @@
 	<string>default app for .bib files</string>
 	<key>pdf_folder</key>
 	<string>~/Library/Mobile Documents/com~apple~CloudDocs/PDFs</string>
-	<key>secondary_library_path</key>
-	<string>~/Library/Mobile Documents/com~apple~CloudDocs/Academia/Publikationen &amp; Vorträge/2020 - Algorithmen als Rankings mit Simon/Literaturangaben Simon.bib</string>
 </dict>
 </plist>

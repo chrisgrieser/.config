@@ -228,6 +228,7 @@ function bibtexParse(rawBibtexStr) {
 					}
 					case "file":
 					case "attachment": {
+						// see https://github.com/chrisgrieser/alfred-bibtex-citation-picker/issues/45
 						const multipleAttachments = value.includes(";/Users/");
 						entry.attachment = multipleAttachments ? value.split(";/Users/")[0] : value;
 						break;
@@ -315,7 +316,10 @@ function run() {
 	function convertToAlfredItems(entry, whichLibrary) {
 		const emojis = [];
 		// biome-ignore format: too long
-		const { title, url, citekey, keywords, icon, journal, volume, issue, booktitle, author, editor, year, abstract, primaryNamesEtAlString, primaryNames, attachment } = entry;
+		const { 
+			title, url, citekey, keywords, icon, journal, volume, issue, booktitle, 
+			author, editor, year, abstract, primaryNamesEtAlString, primaryNames, attachment
+		} = entry;
 		const isFirstLibrary = whichLibrary === "first";
 
 		// Shorten Title (for display in Alfred)
@@ -447,12 +451,12 @@ function run() {
 	const firstBibtex = readFile(libraryPath);
 	const firstBibtexEntryArray = bibtexParse(firstBibtex)
 		.reverse() // reverse, so recent entries come first
-		.map(item => convertToAlfredItems(item, "first"))
+		.map((item) => convertToAlfredItems(item, "first"));
 
 	const secondBibtex = fileExists(secondaryLibraryPath) ? readFile(secondaryLibraryPath) : "";
 	const secondBibtexEntryArray = bibtexParse(secondBibtex)
 		.reverse()
-		.map(convertToAlfredItems, { isFirstLibrary: false });
+		.map((item) => convertToAlfredItems(item, "second"));
 
 	return JSON.stringify({ items: [...firstBibtexEntryArray, ...secondBibtexEntryArray] });
 }
