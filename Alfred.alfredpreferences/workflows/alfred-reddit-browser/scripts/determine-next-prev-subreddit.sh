@@ -3,7 +3,7 @@
 
 direction="$1"
 cur_subreddit=$(cat "$alfred_workflow_cache/current_subreddit")
-list_of_subreddits=${subreddits//^r\//}
+list_of_subreddits=${subreddits//r\//}
 
 if [[ "$direction" == "next" ]]; then
 	next_subreddit=$(echo "$list_of_subreddits" | grep -A1 "$cur_subreddit" | tail -n1)

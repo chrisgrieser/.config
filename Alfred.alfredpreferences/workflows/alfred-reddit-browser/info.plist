@@ -392,9 +392,9 @@
 				<key>externaltriggerid</key>
 				<string>browse</string>
 				<key>passinputasargument</key>
-				<true/>
+				<false/>
 				<key>passvariables</key>
-				<true/>
+				<false/>
 				<key>workflowbundleid</key>
 				<string>self</string>
 			</dict>
@@ -499,7 +499,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>760</real>
+			<real>765</real>
 			<key>ypos</key>
 			<real>280</real>
 		</dict>
