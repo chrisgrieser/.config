@@ -8,19 +8,6 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
-		<key>0BBC3335-0007-45FE-99A5-9C0E94E3B38C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>AE66EC2F-3383-4BB5-8AB3-0C28C6ACCC11</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>0F93036F-D158-49BB-97AF-DE600B8A3300</key>
 		<array>
 			<dict>
@@ -112,21 +99,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>0BBC3335-0007-45FE-99A5-9C0E94E3B38C</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Save</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>AE66EC2F-3383-4BB5-8AB3-0C28C6ACCC11</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Save</string>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -475,14 +452,6 @@
 	<key>objects</key>
 	<array>
 		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>0BBC3335-0007-45FE-99A5-9C0E94E3B38C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
 			<key>config</key>
 			<dict>
 				<key>lastpathcomponent</key>
@@ -536,7 +505,7 @@
 				<key>fontsizing</key>
 				<integer>0</integer>
 				<key>footertext</key>
-				<string>⎋: Cancel   ⌥⏎: Save Changes</string>
+				<string>⎋: Cancel   ⏎: Save Changes   ⇧⏎: Insert Line Break</string>
 				<key>inputfile</key>
 				<string></string>
 				<key>inputtype</key>
@@ -1250,15 +1219,6 @@ Icon by [Emoopo-Design](https://macosicons.com/#/u/Emoopo-Design)
 Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>0BBC3335-0007-45FE-99A5-9C0E94E3B38C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>695</real>
-			<key>ypos</key>
-			<real>15</real>
-		</dict>
 		<key>0F93036F-D158-49BB-97AF-DE600B8A3300</key>
 		<dict>
 			<key>colorindex</key>

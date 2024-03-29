@@ -2,10 +2,7 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
-
 //──────────────────────────────────────────────────────────────────────────────
-
-const iconFolder = $.getenv("custom_subreddit_icons") || $.getenv("alfred_workflow_data");
 
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
@@ -91,9 +88,8 @@ function cacheAndReturnSubCount(subredditName) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
+	const iconFolder = $.getenv("custom_subreddit_icons") || $.getenv("alfred_workflow_data");
 	const subredditConfig = $.getenv("subreddits").trim().replace(/^r\//gm, "");
-
-	//───────────────────────────────────────────────────────────────────────────
 
 	const subreddits = subredditConfig.split("\n").map((subredditName) => {
 		let subtitle = "";
