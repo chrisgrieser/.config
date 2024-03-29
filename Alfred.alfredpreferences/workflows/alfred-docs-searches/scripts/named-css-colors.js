@@ -34,6 +34,8 @@ function run() {
 
 	return JSON.stringify({
 		items: items,
-		c,
+		cache: {
+			seconds: 36000,
+		},
 	});
 }
