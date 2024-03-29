@@ -2,7 +2,8 @@ local keymap = require("config.utils").uniqueKeymap
 local notify = require("config.utils").notify
 --------------------------------------------------------------------------------
 
--- Bootstrap Lazy.nvim plugin manager https://github.com/folke/lazy.nvim#-installation
+-- BOOTSTRAP LAZY.NVIM
+-- https://github.com/folke/lazy.nvim#-installation
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 local lazyIsInstalled = vim.loop.fs_stat(lazypath) ~= nil
 if not lazyIsInstalled then
@@ -10,20 +11,6 @@ if not lazyIsInstalled then
 	vim.fn.system { "git", "clone", "--filter=blob:none", lazyrepo, "--branch=stable", lazypath }
 end
 vim.opt.runtimepath:prepend(lazypath)
-
---------------------------------------------------------------------------------
-
--- change keymaps for the UI https://github.com/folke/lazy.nvim/blob/main/lua/lazy/view/config.lua
-require("lazy.view.config").keys.hover = "o"
-require("lazy.view.config").keys.details = "<Tab>"
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "lazy",
-	callback = function()
-		local opts = { buffer = true, remap = true, desc = "󰒲 Open next issue" }
-		vim.keymap.set("n", "gi", [[/#<CR>o``]], opts)
-	end,
-})
 
 --------------------------------------------------------------------------------
 
@@ -55,6 +42,10 @@ require("lazy").setup("plugins", {
 	diff = { cmd = "browser" }, -- view diffs with "d" in the browser
 	change_detection = { notify = false },
 	readme = { enabled = false },
+	custom_keys = {
+		["<localleader>l"] = false,
+		["<localleader>t"] = false,
+	},
 	performance = {
 		rtp = {
 			-- Disable unused builtin plugins from neovim
@@ -75,14 +66,31 @@ require("lazy").setup("plugins", {
 	},
 })
 
---------------------------------------------------------------------------------
+-- KEYMAPS FOR LAZY UI
+-- https://github.com/folke/lazy.nvim/blob/main/lua/lazy/view/config.lua
+require("lazy.view.config").keys.hover = "o"
+require("lazy.view.config").keys.details = "<Tab>"
 
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "lazy",
+	callback = function()
+		local opts = { buffer = true, remap = true, desc = "󰒲 Open next issue" }
+		vim.keymap.set("n", "gi", [[/#<CR>o``]], opts)
+	end,
+})
+
+--------------------------------------------------------------------------------
+-- KEYMAPS
 keymap("n", "<leader>pp", require("lazy").sync, { desc = "󰒲 Lazy Sync" })
 keymap("n", "<leader>pl", require("lazy").home, { desc = "󰒲 Lazy" })
 keymap("n", "<leader>pi", require("lazy").install, { desc = "󰒲 Lazy Install" })
 
-keymap("n", "g,", function ()
-	local plugins = require("lazy").plugins()
+-- goto plugin config, replaces telescope-lazy-plugins.nvim
+keymap("n", "g,", function()
+	local plugins = vim.tbl_filter(
+		function(plugin) return vim.fs.basename(plugin[1]) ~= "lazy.nvim" end,
+		require("lazy").plugins()
+	)
 	vim.ui.select(plugins, {
 		prompt = "󰣖 Select Plugin:",
 		format_item = function(plugin) return vim.fs.basename(plugin[1]) end,
@@ -90,13 +98,13 @@ keymap("n", "g,", function ()
 		if not plugin then return end
 		local module = plugin._.module:gsub("%.", "/")
 		local filepath = vim.fn.stdpath("config") .. "/lua/" .. module .. ".lua"
-		local repo = plugin[1]:gsub("/", "\\/") -- escape for `:edit`
+		local repo = plugin[1]:gsub("/", "\\/") -- escape slashes for `:edit`
 		vim.cmd(("edit +/%q %s"):format(repo, filepath))
 	end)
 end, { desc = "󰣖 Goto Plugin Config" })
 
 --------------------------------------------------------------------------------
-
+-- CHECK FOR UPDATES AND DUPLICATE KEYS
 local function checkForPluginUpdates()
 	if not require("lazy.status").has_updates() then return end
 	local threshold = 20
