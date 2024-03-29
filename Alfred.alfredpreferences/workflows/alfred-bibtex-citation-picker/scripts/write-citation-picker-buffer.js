@@ -79,76 +79,75 @@ class BibtexEntry {
  * @return {string} decodedStr
  */
 function bibtexDecode(encodedStr) {
-	const germanChars = [
-		'{\\"u};ü',
-		'{\\"a};ä',
-		'{\\"o};ö',
-		'{\\"U};Ü',
-		'{\\"A};Ä',
-		'{\\"O};Ö',
-		'\\"u;ü',
-		'\\"a;ä',
-		'\\"o;ö',
-		'\\"U;Ü',
-		'\\"A;Ä',
-		'\\"O;Ö',
-		"\\ss;ß",
-		"{\\ss};ß",
-
-		// Bookends
-		"\\''A;Ä",
-		"\\''O;Ö",
-		"\\''U;Ü",
-		"\\''a;ä",
-		"\\''o;ö",
-		"\\''u;ü",
+	const decodePairs = {
+		'{\\"u}': "ü",
+		'{\\"a}': "ä",
+		'{\\"o}': "ö",
+		'{\\"U}': "Ü",
+		'{\\"A}': "Ä",
+		'{\\"O}': "Ö",
+		'\\"u': "ü",
+		'\\"a': "ä",
+		'\\"o': "ö",
+		'\\"U': "Ü",
+		'\\"A': "Ä",
+		'\\"O': "Ö",
+		"\\ss": "ß",
+		"{\\ss}": "ß",
 
 		// bibtex-tidy
-		'\\"{O};Ö',
-		'\\"{o};ö',
-		'\\"{A};Ä',
-		'\\"{a};ä',
-		'\\"{u};ü',
-		'\\"{U};Ü',
-	];
-	const frenchChars = [
-		"{\\'a};a",
-		"{\\'o};ó",
-		"{\\'e};e",
-		"{\\`{e}};e",
-		"{\\`e};e",
-		"\\'E;É",
-		"\\c{c};c",
-		'\\"{i};i',
-	];
-	const otherChars = [
-		"{\\~n};n",
-		"\\~a;ã",
-		"{\\v c};c",
-		"\\o{};ø",
-		"{\\o};ø",
-		"{\\O};Ø",
-		"\\^{i};i",
-		"\\'\\i;í",
-		"{\\'c};c",
-		'\\"e;e',
-	];
-	const specialChars = [
-		"{\\ldots};…",
-		"\\&;&",
-		'``;"',
-		',,;"',
-		"`;'",
-		"\\textendash{};—",
-		"---;—",
-		"--;—",
-		"{	extquotesingle};'",
-	];
-	const decodePair = [...germanChars, ...frenchChars, ...otherChars, ...specialChars];
+		'\\"{O}': "Ö",
+		'\\"{o}': "ö",
+		'\\"{A}': "Ä",
+		'\\"{a}': "ä",
+		'\\"{u}': "ü",
+		'\\"{U}': "Ü",
+
+		// Bookends
+		"\\''A": "Ä",
+		"\\''O": "Ö",
+		"\\''U": "Ü",
+		"\\''a": "ä",
+		"\\''o": "ö",
+		"\\''u": "ü",
+
+		// frech chars
+		"{\\'a}": "a",
+		"{\\'o}": "ó",
+		"{\\'e}": "e",
+		"{\\`{e}}": "e",
+		"{\\`e}": "e",
+		"\\'E": "É",
+		"\\c{c}": "c",
+		'\\"{i}': "i",
+
+		// other chars
+		"{\\~n}": "n",
+		"\\~a": "ã",
+		"{\\v c}": "c",
+		"\\o{}": "ø",
+		"{\\o}": "ø",
+		"{\\O}": "Ø",
+		"\\^{i}": "i",
+		"\\'\\i": "í",
+		"{\\'c}": "c",
+
+		// special chars
+		"{\\ldots}": "…",
+		"\\&": "&",
+		"``": '"',
+		",,": '"',
+		"`": "'",
+		"\\textendash{}": "—",
+		"---": "—",
+		"--": "—",
+		"{extquotesingle}": "'",
+		'\\"e': "e",
+	};
+
 	let decodedStr = encodedStr;
-	for (const pair of decodePair) {
-		const [first, second] = pair.split(";") || [];
-		decodedStr = decodedStr.replaceAll(first, second);
+	for (const [key, value] of Object.entries(decodePairs)) {
+		decodedStr = decodedStr.replaceAll(key, value);
 	}
 	return decodedStr;
 }
@@ -172,7 +171,7 @@ function bibtexParse(rawBibtexStr) {
 				const lastname = name.includes(",")
 					? name.split(",")[0] // when last name — first name
 					: name.split(" ").pop(); // when first name — last name
-				return lastname || "";
+				return lastname || "ERROR";
 			});
 	}
 
@@ -188,8 +187,8 @@ function bibtexParse(rawBibtexStr) {
 
 			// parse first line (separate since different formatting)
 			const firstLine = lines[0] || "";
-			const entryCategory = firstLine.split("{")[0]?.toLowerCase().trim() || "ERROR";
-			entry.citekey = firstLine.split("{")[1]?.trim() || "ERROR";
+			const entryCategory = firstLine.split("{")[0].toLowerCase().trim();
+			entry.citekey = firstLine.split("{")[1].trim();
 			lines.shift();
 
 			// INFO will use icons saved as as `./icons/{entry.icon}.png` in the
@@ -205,12 +204,11 @@ function bibtexParse(rawBibtexStr) {
 			// parse remaining lines
 			for (const line of lines) {
 				if (!line.includes("=")) continue; // catch erroneous BibTeX formatting
-				const field = line.split("=")[0]?.trim().toLowerCase() || "ERROR";
-				const value =
-					line
-						.split("=")[1]
-						?.replace(/{|}|,$/g, "") // remove TeX escaping
-						.trim() || "ERROR";
+				const field = line.split("=")[0].trim().toLowerCase();
+				const value = line
+					.split("=")[1]
+					.replace(/{|}|,$/g, "") // remove TeX escaping
+					.trim();
 
 				switch (field) {
 					case "author":
@@ -230,7 +228,8 @@ function bibtexParse(rawBibtexStr) {
 					}
 					case "file":
 					case "attachment": {
-						entry.attachment = value;
+						const multipleAttachments = value.includes(";/Users/");
+						entry.attachment = multipleAttachments ? value.split(";/Users/")[0] : value;
 						break;
 					}
 					default:
@@ -261,9 +260,9 @@ function run() {
 	const secondLibraryIcon = "2️⃣ ";
 	const litNoteFilterStr = "*";
 	const pdfFilterStr = "pdf";
-	const alfredBarWidth = Number.parseInt(
-		$.NSProcessInfo.processInfo.environment.objectForKey("alfred_bar_width").js || 60,
-	);
+	const alfredBarWidth = $.getenv("alfred_bar_width")
+		? Number.parseInt($.getenv("alfred_bar_width"))
+		: 60;
 
 	const matchAuthorsInEtAl = $.getenv("match_authors_in_etal") === "1";
 	const matchShortYears = $.getenv("match_year_type").includes("short");
@@ -309,13 +308,15 @@ function run() {
 
 	//──────────────────────────────────────────────────────────────────────────────
 
-	/** @param {BibtexEntry} entry */
-	function convertToAlfredItems(entry) {
+	/**
+	 * @param {BibtexEntry} entry
+	 * @param {"first"|"second"} whichLibrary
+	 */
+	function convertToAlfredItems(entry, whichLibrary) {
 		const emojis = [];
 		// biome-ignore format: too long
 		const { title, url, citekey, keywords, icon, journal, volume, issue, booktitle, author, editor, year, abstract, primaryNamesEtAlString, primaryNames, attachment } = entry;
-		// @ts-ignore
-		const isFirstLibrary = Boolean(this.isFirstlibrary);
+		const isFirstLibrary = whichLibrary === "first";
 
 		// Shorten Title (for display in Alfred)
 		let shorterTitle = title;
@@ -446,7 +447,7 @@ function run() {
 	const firstBibtex = readFile(libraryPath);
 	const firstBibtexEntryArray = bibtexParse(firstBibtex)
 		.reverse() // reverse, so recent entries come first
-		.map(convertToAlfredItems, { isFirstLibrary: true });
+		.map(item => convertToAlfredItems(item, "first"))
 
 	const secondBibtex = fileExists(secondaryLibraryPath) ? readFile(secondaryLibraryPath) : "";
 	const secondBibtexEntryArray = bibtexParse(secondBibtex)

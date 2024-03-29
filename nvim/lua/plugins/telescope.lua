@@ -240,7 +240,7 @@ local function telescopeConfig()
 				("--ignore-file=" .. os.getenv("HOME") .. "/.config/fd/ignore"),
 			},
 			-- stylua: ignore
-			file_ignore_patterns = { "%.png$", "%.gif", "%.zip", "%.pdf", "%.icns", "%.jpe?g" },
+			file_ignore_patterns = { "%.png$", "%.svg", "%.gif", "%.zip", "%.pdf", "%.icns", "%.jpe?g" },
 		},
 		pickers = {
 			find_files = {
