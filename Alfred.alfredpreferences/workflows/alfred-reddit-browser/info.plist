@@ -25,6 +25,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>26F00E99-5D45-4FCE-AF6F-EA4A468CDBB9</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Open subreddit in browser</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>09B3D6D5-85DC-4788-B940-EDFB8EC74EE4</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -199,6 +209,55 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>sub</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/select-subreddit.js</string>
+				<key>subtext</key>
+				<string>Loading subreddit icons…</string>
+				<key>title</key>
+				<string>{const:alfred_workflow_name}</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>5852A551-EFDF-47BB-A256-13A0D3975AA5</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -317,55 +376,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>sub</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/select-subreddit.js</string>
-				<key>subtext</key>
-				<string>Loading subreddit icons…</string>
-				<key>title</key>
-				<string>{const:alfred_workflow_name}</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>5852A551-EFDF-47BB-A256-13A0D3975AA5</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -456,13 +466,16 @@
 	<key>readme</key>
 	<string>## Usage
 - `sub`: Select subreddit to browse.
+	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Browse subreddit in Alfred.
+	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open subreddit in browser. 
 - `rr`: Browse the current subreddit.
-	- &lt;kbd&gt;⏎&lt;/kbd&gt;: Open Post on reddit.
-	- &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Switch to next subreddit.
-	- &lt;kbd&gt;⇧⌘⏎&lt;/kbd&gt;: Switch to previous subreddit.
-	- &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy URL of post to clipboard.
-	- &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Open external URL (if there is one).
-	- &lt;kbd&gt;⇧&lt;/kbd&gt; or &lt;kbd&gt;⌘Y&lt;/kbd&gt;: Preview the result. You can use the arrow keys to preview to the next result. Mostly useful for images. 
+	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open Post on reddit.
+	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Switch to next subreddit.
+	+ &lt;kbd&gt;⇧⌘⏎&lt;/kbd&gt;: Switch to previous subreddit.
+	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy URL of post to clipboard.
+	+ &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Open external URL (if there is one).
+	+ &lt;kbd&gt;⇧&lt;/kbd&gt; or &lt;kbd&gt;⌘Y&lt;/kbd&gt;: Preview the result. Works with [Alfred Extra
+	  Pane](https://github.com/mr-pennyworth/alfred-extra-pane).
 
 
 ## Info
@@ -508,9 +521,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>45</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>15</real>
 		</dict>
 		<key>6887CA13-E491-46B2-9AA3-D36BEC604521</key>
 		<dict>
@@ -526,7 +539,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>475</real>
+			<real>520</real>
 			<key>ypos</key>
 			<real>155</real>
 		</dict>
@@ -575,7 +588,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>390</real>
+			<real>435</real>
 			<key>ypos</key>
 			<real>155</real>
 		</dict>
@@ -878,7 +891,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.4.1</string>
+	<string>1.5.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
