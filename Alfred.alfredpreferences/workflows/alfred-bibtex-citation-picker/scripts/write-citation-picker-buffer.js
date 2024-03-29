@@ -234,6 +234,7 @@ function bibtexParse(rawBibtexStr) {
 						break;
 					}
 					default:
+						// @ts-ignore
 						entry[field] = value;
 				}
 			}
