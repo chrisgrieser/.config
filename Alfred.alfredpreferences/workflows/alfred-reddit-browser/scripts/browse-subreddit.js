@@ -63,24 +63,22 @@ function olderThan(firstPath, secondPath) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const subredditConfig = $.getenv("subreddits").trim().replace(/^r\//gm, "");
-
-	//───────────────────────────────────────────────────────────────────────────
+	const cachePath = $.getenv("alfred_workflow_cache");
 
 	// determine subreddit
-	const prevRunSubreddit = readFile($.getenv("alfred_workflow_cache") + "/current_subreddit");
+	const prevRunSubreddit = readFile(cachePath + "/current_subreddit");
 	const selectedWithAlfred =
 		$.NSProcessInfo.processInfo.environment.objectForKey("selected_subreddit").js;
 	const firstSubredditInConfig = subredditConfig.split("\n")[0]; // only needed for first run
 	const subredditName = selectedWithAlfred || prevRunSubreddit || firstSubredditInConfig;
-	const pathOfThisWorkflow = `${$.getenv("alfred_preferences")}/workflows/${$.getenv(
-		"alfred_workflow_uid",
-	)}`;
+	const alfredPrefsPath = $.getenv("alfred_preferences");
+	const pathOfThisWorkflow = `${alfredPrefsPath}/workflows/${$.getenv("alfred_workflow_uid")}`;
 
 	ensureCacheFolderExists();
-	writeToFile($.getenv("alfred_workflow_cache") + "/current_subreddit", subredditName);
+	writeToFile(cachePath + "/current_subreddit", subredditName);
 
 	// read posts from cache
-	const subredditCache = `${$.getenv("alfred_workflow_cache")}/${subredditName}.json`;
+	const subredditCache = `${cachePath}/${subredditName}.json`;
 
 	let posts;
 	if (
@@ -95,8 +93,8 @@ function run() {
 		});
 	}
 
-	// IMPORT SUBREDDIT-LOADING-FUNCTIONS
-	// biome-ignore lint/security/noGlobalEval: JXA import HACK
+	// HACK IMPORT SUBREDDIT-LOADING-FUNCTIONS
+	// biome-ignore lint/security/noGlobalEval: JXA import hack
 	eval(readFile(`${pathOfThisWorkflow}/scripts/get-new-posts.js`));
 
 	// marker for old posts

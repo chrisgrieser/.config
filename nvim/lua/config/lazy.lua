@@ -44,7 +44,8 @@ require("lazy").setup("plugins", {
 		wrap = true,
 		border = vim.g.borderStyle,
 		pills = false,
-		size = { width = 1, height = 0.93 }, -- not full height, so search is visible
+		size = { width = 0.85, height = 0.85 },
+		backdrop = 70, -- 0-100 opacity
 	},
 	checker = {
 		enabled = true, -- automatically check for plugin updates
