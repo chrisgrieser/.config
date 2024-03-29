@@ -3137,10 +3137,10 @@ This workflow already supports dozens of documentation sites. Since I cannot pos
 - `dt`: Lookup term at [devterms.io](https://devterms.io/)
 
 
- * These documentation searches do not cover all sub-sites. Contributions to improve them are welcome.
-
+\* These documentation searches do not cover all sub-sites. Contributions to improve them are welcome.
 
 ## Extra Utilities
+- `col`: named CSS colors
 - `coco`: conventional commit keywords
 - `keycode`: macOS keycodes
 - `appid`: app-id of installed macOS apps
@@ -3734,7 +3734,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>userconfigurationconfig</key>
 	<array/>
 	<key>version</key>
-	<string>1.15.2</string>
+	<string>1.16.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

@@ -19,23 +19,23 @@ function run() {
 		$.getenv("alfred_preferences") +
 		"/workflows/" +
 		$.getenv("alfred_workflow_uid") +
-		"/data/named-css-colors.json";
-	const colors = JSON.parse(readFile(jsonPath));
+		"/data/named-css-colors.csv";
 
-	/** @type AlfredItem[] */
-	const items = [];
-	for (const [name, hex] of Object.entries(colors)) {
-		items.push({
-			title: name,
-			subtitle: hex,
-			arg: name,
+	const colors = readFile(jsonPath)
+		.split("\n")
+		.map((/** @type {string} */ line) => {
+			const [name, hex] = line.split(",");
+
+			// so searching for a base color name also matches the color
+			const baseColor = (name || "").match(/blue|green|red|yellow|orange|white|gr[ae]y|black|white/) || ""
+			return {
+				title: name,
+				subtitle: hex,
+				arg: name,
+				match: name + " " + baseColor,
+				icon: { path: `data/color-svgs/${name}.svg` },
+			};
 		});
-	}
 
-	return JSON.stringify({
-		items: items,
-		cache: {
-			seconds: 36000,
-		},
-	});
+	return JSON.stringify({ items: colors });
 }
