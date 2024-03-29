@@ -2,7 +2,6 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
-
 //──────────────────────────────────────────────────────────────────────────────
 
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
@@ -39,6 +38,7 @@ function ensureCacheFolderExists() {
 function cacheIsOutdated(path) {
 	let cacheAgeThresholdMins = Number.parseInt($.getenv("cache_age_threshold")) || 15;
 	if (cacheAgeThresholdMins < 1) cacheAgeThresholdMins = 1; // prevent 0 or negative numbers
+	// @ts-ignore
 	const cacheObj = Application("System Events").aliases[path];
 	if (!cacheObj.exists()) return true;
 	const cacheAgeMins = (+new Date() - cacheObj.creationDate()) / 1000 / 60;
@@ -51,7 +51,9 @@ function cacheIsOutdated(path) {
  * @returns {boolean} firstPathOlderThanSecond
  */
 function olderThan(firstPath, secondPath) {
+	// @ts-ignore
 	const firstMdate = +Application("System Events").aliases[firstPath].modificationDate();
+	// @ts-ignore
 	const secondMdate = +Application("System Events").aliases[secondPath].modificationDate();
 	const firstPathOlderThanSecond = firstMdate - secondMdate < 0;
 	return firstPathOlderThanSecond;
@@ -71,8 +73,8 @@ function run() {
 		$.NSProcessInfo.processInfo.environment.objectForKey("selected_subreddit").js;
 	const firstSubredditInConfig = subredditConfig.split("\n")[0]; // only needed for first run
 	const subredditName = selectedWithAlfred || prevRunSubreddit || firstSubredditInConfig;
-	const alfredPrefsPath = $.getenv("alfred_preferences");
-	const pathOfThisWorkflow = `${alfredPrefsPath}/workflows/${$.getenv("alfred_workflow_uid")}`;
+	const pathOfThisWorkflow =
+		$.getenv("alfred_preferences") + "/workflows/" + $.getenv("alfred_workflow_uid");
 
 	ensureCacheFolderExists();
 	writeToFile(cachePath + "/current_subreddit", subredditName);

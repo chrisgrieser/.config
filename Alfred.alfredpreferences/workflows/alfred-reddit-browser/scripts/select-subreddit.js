@@ -120,6 +120,11 @@ function run() {
 			subtitle: subtitle,
 			arg: subredditName,
 			icon: { path: iconPath },
+			mods: {
+				cmd: {
+					arg: `https://www.reddit.com/r/${subredditName}/`,
+				},
+			},
 		};
 		return alfredItem;
 	});
@@ -131,6 +136,11 @@ function run() {
 			title: "Hackernews",
 			arg: "hackernews",
 			icon: { path: "hackernews.png" },
+			mods: {
+				cmd: {
+					arg: "https://news.ycombinator.com/",
+				},
+			},
 		});
 	}
 
