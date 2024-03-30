@@ -55,12 +55,15 @@ end
 -- BASH / ZSH
 
 -- DOCS https://github.com/bash-lsp/bash-language-server/blob/main/server/src/config.ts
-
--- PENDING https://github.com/bash-lsp/bash-language-server/issues/1064
--- disable shellcheck via LSP to avoid double-diagnostics
 serverConfigs.bashls = {
 	settings = {
-		bashIde = { shellcheckPath = "" },
+		bashIde = {
+			shellcheckArguments = "--shell=bash",
+
+			-- PENDING https://github.com/bash-lsp/bash-language-server/issues/1064
+			-- disable shellcheck via LSP to avoid double-diagnostics
+			shellcheckPath = "",
+		},
 	},
 }
 

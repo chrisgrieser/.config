@@ -7,6 +7,7 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config) ---
 	originalRenameHandler(err, result, ctx, config)
 	if err or not result then return end
 
+	-- save all
 	vim.cmd.wall()
 
 	local changes = result.changes or result.documentChanges or {}
@@ -75,9 +76,13 @@ end, {
 -- DIAGNOSTICS
 
 -- change severity level
+-- PENDING https://github.com/biomejs/biome/discussions/2242
 vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx, config) ---@diagnostic disable-line: duplicate-set-field
 	result.diagnostics = vim.tbl_map(function(diag)
-		if diag.source == "biome" and diag.code == "lint/suspicious/noConsoleLog" then
+		if
+			(diag.source == "biome" and diag.code == "lint/suspicious/noConsoleLog")
+			or (diag.source == "stylelintplus" and diag.code == "declaration-no-important")
+		then
 			diag.severity = vim.diagnostic.severity.HINT
 		end
 		return diag
