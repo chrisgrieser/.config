@@ -26,7 +26,7 @@ function run(argv) {
 	const query = argv[0];
 	if (!query) {
 		return JSON.stringify({
-			items: [{ title: "Search for an anime", subtitle: "Enter the name of the anime" }],
+			items: [{ title: "Search for an anime", subtitle: "Enter name of anime…" }],
 		});
 	}
 
@@ -36,10 +36,10 @@ function run(argv) {
 	const response = JSON.parse(httpRequest(apiURL + encodeURIComponent(query)));
 	if (!response.data) {
 		console.log(JSON.stringify(response));
-		return JSON.stringify({ items: [{ title: "ERROR. See Console" }] });
+		return JSON.stringify({ items: [{ title: "ERROR. See debugging log." }] });
 	}
 	if (response.data.length === 0) {
-		return JSON.stringify({ items: [{ title: "No results found" }] });
+		return JSON.stringify({ items: [{ title: "No results found." }] });
 	}
 
 	/** @type AlfredItem[] */
@@ -59,11 +59,11 @@ function run(argv) {
 		let stream = "";
 		if (streamingResponse) {
 			const streaming = JSON.parse(streamingResponse).data.map(
-				(/** @type {{ name: string; }} */ a) => a.name,
+				(/** @type {{ name: string; }} */ a) => a.name.toLowerCase(),
 			);
-			if (streaming.includes("Crunchyroll")) stream += "C";
-			if (streaming.includes("Netflix")) stream += "N";
-			if (streaming.includes("HiDive")) stream += "H";
+			if (streaming.includes("crunchyroll")) stream += "C";
+			if (streaming.includes("netflix")) stream += "N";
+			if (streaming.includes("hidive")) stream += "H";
 			if (stream) stream += " 🛜";
 		}
 
