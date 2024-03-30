@@ -67,13 +67,13 @@ rules:
         to:
           # generate cheatsheet and open it
           - shell_command: |
-              source "$HOME/.zshenv" # PATH additons for yq
+              export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
               cd "$HOME/.config/karabiner/assets" || return 1
               yq '.rules[1].manipulators[].description' \
                 "./complex_modifications/2 ctrl-leader.yaml" |
                 sort -f |
-                sed 's/.*/- &/' >ctrl-leader.md
-              qlmanage -p "ctrl-leader.md" &
+                sed 's/.*/- &/' >"/tmp/ctrl-leader.md"
+              qlmanage -p "/tmp/ctrl-leader.md" &
           - *deactivate-leader
           - *remove-notice
 
@@ -155,7 +155,7 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
-      - description: "termina[l]"
+      - description: "[l] termina[l]"
         type: basic
         from: { key_code: l } # l is quicker to reach for the right hand than t
         conditions: [*leader-active]
@@ -164,7 +164,7 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
-      - description: "rem[i]nders"
+      - description: "[i] rem[i]nders"
         type: basic
         from: { key_code: i }
         conditions: [*leader-active]
@@ -357,7 +357,7 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
-      - description: "m[e]ssenger"
+      - description: "[e] m[e]ssenger"
         type: basic
         from: { key_code: e }
         conditions: [*leader-active]
