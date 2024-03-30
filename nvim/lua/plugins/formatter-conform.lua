@@ -89,10 +89,9 @@ local function formattingFunc(bufnr)
 			"source.removeUnusedImports.ts",
 			"source.organizeImports.biome",
 		}
-		-- deferred, so it does not conflict with `addMissingImports`
-		for i = 0, #actions do
+		for i = 1, #actions + 1 do
 			vim.defer_fn(function()
-				if i < #actions then
+				if i <= #actions then
 					vim.lsp.buf.code_action {
 						context = { only = { actions[i] } },
 						apply = true,
