@@ -43,37 +43,52 @@ function run(argv) {
 	}
 
 	/** @type AlfredItem[] */
-	const animeTitles = response.data.map(
-		(
-			/** @type {{ title_english: any; title: string; year: any; airing: any; title_synonyms: string[]; episodes: any; score: number; url: any; trailer: { url: any; }; }} */ anime,
-		) => {
-			const titleEng = shortenSeason(anime.title_english || anime.title);
-			const yearInfo = anime.year && !titleEng.match(/\d{4}/) ? `(${anime.year})` : "";
-			const airingIcon = anime.airing ? " 🎙️" : "";
-			const displayText = [titleEng, yearInfo, airingIcon].filter(Boolean).join(" ");
+	// @ts-ignore
+	const animeTitles = response.data.map((anime) => {
+		const titleEng = shortenSeason(anime.title_english || anime.title);
+		const yearInfo = anime.year && !titleEng.match(/\d{4}/) ? `(${anime.year})` : "";
 
-			const titleJap = shortenSeason(anime.title_english ? anime.title : anime.title_synonyms[0]);
-			const episodesInfo = anime.episodes ? `${anime.episodes}●` : "";
-			const score = anime.score ? `${anime.score.toFixed(1)}★` : "";
-			const subtitle = [episodesInfo, score, titleJap].filter(Boolean).join("   ");
+		let emoji = "";
+		if (anime.status === "Currently Airing") emoji += "🎙️";
+		else if (anime.status === "Not yet aired") emoji += "🗓️";
 
-			return {
-				title: displayText,
-				subtitle: subtitle,
-				arg: anime.url,
-				quicklookurl: anime.url,
-				mods: {
-					cmd: {
-						arg: titleJap,
-						valid: Boolean(titleJap),
-					},
-					shift: {
-						arg: anime.trailer?.url,
-						valid: Boolean(anime.trailer?.url),
-					},
+		const streamingResponse = httpRequest(
+			`https://api.jikan.moe/v4/anime/${anime.mal_id}/streaming`,
+		);
+		let stream = "";
+		if (streamingResponse) {
+			const streaming = JSON.parse(streamingResponse).data.map(
+				(/** @type {{ name: string; }} */ a) => a.name,
+			);
+			if (streaming.includes("Crunchyroll")) stream += "C";
+			if (streaming.includes("Netflix")) stream += "N";
+			if (streaming.includes("HiDive")) stream += "H";
+			if (stream) stream = "📺 " + stream
+		}
+
+		const displayText = [emoji, titleEng, yearInfo].filter(Boolean).join(" ");
+
+		const titleJap = shortenSeason(anime.title_english ? anime.title : anime.title_synonyms[0]);
+		const episodesInfo = anime.episodes ? `${anime.episodes} 📺` : "";
+		const score = anime.score ? `${anime.score.toFixed(1)} ⭐` : "";
+		const subtitle = [stream, episodesInfo, score, titleJap].filter(Boolean).join("   ");
+
+		return {
+			title: displayText,
+			subtitle: subtitle,
+			arg: anime.url,
+			quicklookurl: anime.url,
+			mods: {
+				cmd: {
+					arg: titleJap,
+					valid: Boolean(titleJap),
 				},
-			};
-		},
-	);
+				shift: {
+					arg: anime.trailer?.url,
+					valid: Boolean(anime.trailer?.url),
+				},
+			},
+		};
+	});
 	return JSON.stringify({ items: animeTitles });
 }
