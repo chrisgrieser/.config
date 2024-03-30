@@ -52,6 +52,7 @@ function run(argv) {
 		if (anime.status === "Currently Airing") emoji += "🎙️";
 		else if (anime.status === "Not yet aired") emoji += "🗓️";
 
+		// stream info not available via search API
 		const streamingResponse = httpRequest(
 			`https://api.jikan.moe/v4/anime/${anime.mal_id}/streaming`,
 		);
@@ -63,7 +64,7 @@ function run(argv) {
 			if (streaming.includes("Crunchyroll")) stream += "C";
 			if (streaming.includes("Netflix")) stream += "N";
 			if (streaming.includes("HiDive")) stream += "H";
-			if (stream) stream = "📺 " + stream
+			if (stream) stream += " 🛜";
 		}
 
 		const displayText = [emoji, titleEng, yearInfo].filter(Boolean).join(" ");
