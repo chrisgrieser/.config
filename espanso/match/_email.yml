@@ -8,7 +8,7 @@ matches:
       Viele Grüße
       Chris
   # Greetings
-  - trigger: "!mail"
+  - triggers: ["!mail", "!sm"]
     replace: "Dear sir or madam,\n\n"
   - triggers: ["!mail", "!dh"]
     replace: |
