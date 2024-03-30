@@ -46,11 +46,6 @@ for lspName, _ in pairs(lspToMasonMap) do
 	serverConfigs[lspName] = {}
 end
 
-local function disableClientInObsidianVault(client)
-	local obsiDir = vim.fs.find(".obsidian", { upward = true, type = "directory" })
-	if not vim.tbl_isempty(obsiDir) then vim.cmd.LspStop(client.id) end
-end
-
 --------------------------------------------------------------------------------
 -- BASH / ZSH
 
@@ -68,20 +63,14 @@ serverConfigs.bashls = {
 }
 
 -- HACK use efm to use shellcheck with zsh files
--- EFM: Markdown & Shell
+-- EFM: Shell
 serverConfigs.efm = {
 	cmd = { "efm-langserver", "-c", vim.g.linterConfigs .. "/efm.yaml" },
-	filetypes = { "zsh", "sh", "markdown", "yaml" }, -- limit to filestypes needed
-	on_attach = function(client, bufnr)
-		-- as `.markdownlintignore` does not work well with efm, since it requires non-stdin
-		if vim.bo[bufnr].ft == "markdown" then disableClientInObsidianVault(client) end
-	end,
+	filetypes = { "zsh", "sh" }, -- limit to filestypes needed
 }
 
 local efmDependencies = {
 	"shellcheck", -- PENDING https://github.com/bash-lsp/bash-language-server/issues/663
-	"markdownlint",
-	"actionlint",
 }
 
 --------------------------------------------------------------------------------
@@ -181,12 +170,6 @@ serverConfigs.tsserver = {
 		diagnostics = { ignoredCodes = { 2451 } },
 
 		typescript = {
-			-- nor supported by vanilla tsserver, consider using typescript tools
-			-- (needed for strict biome config)
-			-- preferences = {
-			-- 	preferTypeOnlyAutoImports = true,
-			-- 	importModuleSpecifierPreference = "relative",
-			-- },
 			inlayHints = {
 				includeInlayEnumMemberValueHints = true,
 				includeInlayFunctionLikeReturnTypeHints = true,
@@ -285,7 +268,7 @@ serverConfigs.ltex = {
 				mothersTongue = "de-DE",
 			},
 			markdown = {
-				nodes = { Link = "dummy" },
+				nodes = { Link = "dummy" }, -- don't spellcheck link text
 			},
 		},
 	},
@@ -305,8 +288,9 @@ serverConfigs.ltex = {
 			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = ltexSettings })
 		end, { desc = "󰓆 Add Word", buffer = bufnr })
 
-		-- as `.markdownlintignore` does not work well with efm, since it requires non-stdin
-		disableClientInObsidianVault(ltex)
+		-- Disable in Obsidian, as there is not .ltexignore
+		local obsiDir = vim.fs.find(".obsidian", { upward = true, type = "directory" })
+		if not vim.tbl_isempty(obsiDir) then vim.cmd.LspStop(ltex.id) end
 	end,
 }
 
