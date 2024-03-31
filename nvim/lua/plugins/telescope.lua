@@ -7,26 +7,21 @@ local telescope = vim.cmd.Telescope
 -- default mappings: https://github.com/nvim-telescope/telescope.nvim/blob/942fe5faef47b21241e970551eba407bc10d9547/lua/telescope/mappings.lua#L133
 local keymappings_I = {
 	["?"] = "which_key",
+
 	["<Tab>"] = "move_selection_worse",
 	["<D-up>"] = "move_to_top",
 	["<D-down>"] = "move_to_bottom",
 	["<S-Tab>"] = "move_selection_better",
 	["<CR>"] = "select_default",
-	["<C-v>"] = "select_vertical",
 	["<Esc>"] = "close",
+
+	["<C-v>"] = "select_vertical",
 	["<PageDown>"] = "preview_scrolling_down",
 	["<PageUp>"] = "preview_scrolling_up",
 	["<Up>"] = "cycle_history_prev",
 	["<Down>"] = "cycle_history_next",
+
 	["<D-a>"] = "toggle_all",
-	["<D-s>"] = {
-		function(prompt_bufnr)
-			require("telescope.actions").smart_send_to_qflist(prompt_bufnr)
-			vim.cmd.cfirst()
-		end,
-		type = "action",
-		opts = { desc = " Send to Quickfix" },
-	},
 	["<M-CR>"] = { -- mapping consistent with fzf-multi-select
 		function(prompt_bufnr)
 			require("telescope.actions").toggle_selection(prompt_bufnr)
@@ -35,6 +30,15 @@ local keymappings_I = {
 		type = "action",
 		opts = { desc = "󰒆 Multi-Select" },
 	},
+	["<D-s>"] = {
+		function(prompt_bufnr)
+			require("telescope.actions").smart_send_to_qflist(prompt_bufnr)
+			vim.cmd.cfirst()
+		end,
+		type = "action",
+		opts = { desc = " Send to Quickfix" },
+	},
+
 	["<D-l>"] = {
 		function(prompt_bufnr)
 			local path = require("telescope.actions.state").get_selected_entry().value
@@ -462,9 +466,9 @@ return {
 		cmd = "Telescope",
 		external_dependencies = { "fd", "rg" },
 		dependencies = {
-			"nvim-telescope/telescope-fzf-native.nvim",
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
+			{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 		},
 		config = function()
 			telescopeConfig()
