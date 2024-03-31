@@ -462,13 +462,13 @@ return {
 		cmd = "Telescope",
 		external_dependencies = { "fd", "rg" },
 		dependencies = {
+			"nvim-telescope/telescope-fzf-native.nvim",
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
-			"natecraddock/telescope-zf-native.nvim",
 		},
 		config = function()
 			telescopeConfig()
-			require("telescope").load_extension("zf-native")
+			require("telescope").load_extension("fzf")
 		end,
 		keys = {
 			{ "?", function() telescope("keymaps") end, desc = "⌨️ Search Keymaps" },
@@ -491,7 +491,7 @@ return {
 				"go",
 				function()
 					-- SOURCE https://github.com/nvim-telescope/telescope.nvim/issues/2905
-					local scorer = require("telescope").extensions["zf-native"].native_zf_scorer()
+					local scorer = require("telescope").extensions["fzf"].native_fzf_sorter()
 					local mySorter = {}
 					setmetatable(mySorter, { __index = scorer })
 					local curBufRelPath = vim.api.nvim_buf_get_name(0):sub(#vim.loop.cwd() + 2)

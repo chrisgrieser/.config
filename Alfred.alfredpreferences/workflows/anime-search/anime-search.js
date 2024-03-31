@@ -24,6 +24,7 @@ function shortenSeason(title) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const query = argv[0];
+	// GUARD
 	if (!query) {
 		return JSON.stringify({
 			items: [{ title: "Search for an anime", subtitle: "Enter name of anime…" }],
@@ -31,8 +32,7 @@ function run(argv) {
 	}
 
 	// DOCS https://docs.api.jikan.moe/#tag/anime/operation/getAnimeSearch
-	const alfredDisplayLimit = 9;
-	const apiURL = `https://api.jikan.moe/v4/anime?limit=${alfredDisplayLimit}&q=`;
+	const apiURL = `https://api.jikan.moe/v4/anime?limit=${$.getenv("result_number")}&q=`;
 	const response = JSON.parse(httpRequest(apiURL + encodeURIComponent(query)));
 	if (!response.data) {
 		console.log(JSON.stringify(response));
@@ -70,9 +70,9 @@ function run(argv) {
 		const displayText = [emoji, titleEng, yearInfo].filter(Boolean).join(" ");
 
 		const titleJap = shortenSeason(anime.title_english ? anime.title : anime.title_synonyms[0]);
-		const episodesInfo = anime.episodes ? `${anime.episodes} 📺` : "";
+		const episodesCount = anime.episodes ? `${anime.episodes} 📺` : "";
 		const score = anime.score ? `${anime.score.toFixed(1)} ⭐` : "";
-		const subtitle = [stream, episodesInfo, score, titleJap].filter(Boolean).join("   ");
+		const subtitle = [stream, episodesCount, score, titleJap].filter(Boolean).join("   ");
 
 		return {
 			title: displayText,
