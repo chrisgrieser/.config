@@ -4,17 +4,6 @@
 <dict>
 	<key>customSites</key>
 	<dict>
-		<key>247D826F-9C0B-4405-A61B-AA64E1C4F8A6</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>tt</string>
-			<key>text</key>
-			<string>Sentence Stack: {query}</string>
-			<key>url</key>
-			<string>https://sentencestack.com/q/{query}</string>
-		</dict>
 		<key>4D6D1B09-18D7-48A8-AE60-25F748E25BE0</key>
 		<dict>
 			<key>enabled</key>

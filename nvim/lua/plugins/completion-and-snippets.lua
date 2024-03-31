@@ -50,7 +50,11 @@ local function cmpconfig()
 
 	cmp.setup {
 		snippet = {
+			-- expand = function (args) vim.snippet.expand(args.body) end,
 			expand = function(args) require("luasnip").lsp_expand(args.body) end,
+		},
+		view = {
+			entries = { follow_cursor = true },
 		},
 		window = {
 			completion = { border = vim.g.borderStyle, scrolloff = 2 },
