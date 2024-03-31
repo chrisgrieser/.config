@@ -22,34 +22,33 @@ function alfredMatcher(str) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	let lineNo = 0;
+	const randomItemOrder = $.getenv("read_later_file") === "1";
 
 	const readLaterItems = readFile($.getenv("read_later_file"))
 		.trim()
 		.split("\n")
-		.map((line) => {
-			lineNo++;
-
+		.map((line, lineNo) => {
 			// GUARD
 			const unreadItem = line.startsWith("- [ ] ");
 			const validItem = line.includes("](");
 			if (!(unreadItem && validItem)) return {};
 
-			const [_, title, url, date] = line.match(
-				/- \[ \] \[([^\]]*)\]\((.*?)\) ?(\p{Extended_Pictographic} .*)?/u,
-			) || ["", "", "", ""];
+			const [_, title, url, date] =
+				line.match(/- \[ \] \[([^\]]*)\]\((.*?)\) ?(\p{Extended_Pictographic} .*)?/u) || [];
 			const dateStr = date ? `${date}  ·  ` : "";
 
 			/** @type {AlfredItem} */
 			const item = {
-				title: title || "",
-				match: alfredMatcher(title || "") + alfredMatcher(url || ""),
+				title: title,
+				match: alfredMatcher(title) + alfredMatcher(url),
 				subtitle: dateStr + url,
-				arg: lineNo,
-				quicklookurl: url || "",
+				arg: lineNo + 1,
+				quicklookurl: url,
 			};
 			return item;
 		});
+
+	if (randomItemOrder) readLaterItems.sort(() => 0.5 - Math.random());
 
 	// "Add current browser tab" item
 	readLaterItems.unshift({ title: "🔖 Add current browser tab", arg: -1, subtitle: "" });

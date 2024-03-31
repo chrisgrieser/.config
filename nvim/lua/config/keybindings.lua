@@ -300,13 +300,5 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set("n", "q", cmd.close, { buffer = true, nowait = true, desc = "Close" })
 	end,
 })
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "gitcommit", "gitrebase" },
-	callback = function()
-		if vim.bo.buftype == "nofile" then return end -- do not trigger in DressingInput
-		-- INFO `cquit` exists non-zero, thus aborting the commit/rebase
-		vim.keymap.set("n", "q", cmd.cquit, { buffer = true, nowait = true, desc = "Abort" })
-	end,
-})
 
 --------------------------------------------------------------------------------
