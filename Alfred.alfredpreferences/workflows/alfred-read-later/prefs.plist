@@ -2,8 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>add_date</key>
-	<string>iso8601</string>
+	<key>randomize_item_order</key>
+	<true/>
 	<key>read_later_file</key>
 	<string>~/main-vault/Meta/📚 Read Later.md</string>
 </dict>

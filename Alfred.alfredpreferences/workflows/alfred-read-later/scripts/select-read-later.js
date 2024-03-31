@@ -22,7 +22,7 @@ function alfredMatcher(str) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const randomItemOrder = $.getenv("read_later_file") === "1";
+	const randomItemOrder = $.getenv("randomize_item_order") === "1";
 
 	const readLaterItems = readFile($.getenv("read_later_file"))
 		.trim()
