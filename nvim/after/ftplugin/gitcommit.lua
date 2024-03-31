@@ -1,8 +1,14 @@
 vim.opt_local.listchars:remove("multispace")
+vim.opt_local.spell = true
 
--- use Tab to go to EoL
+--------------------------------------------------------------------------------
+
 vim.keymap.set("i", "<Tab>", "<End>", { buffer = true })
 
-vim.opt_local.spell = true
 vim.keymap.set("n", "ge", "]s", { buffer = true })
 vim.keymap.set("n", "gE", "[s", { buffer = true })
+
+vim.keymap.set("n", "<CR>", vim.cmd.wq, { buffer = true, desc = "Confirm" })
+
+-- quting with error code = aborting commit
+vim.keymap.set("n", "q", vim.cmd.cquit, { buffer = true, nowait = true })
