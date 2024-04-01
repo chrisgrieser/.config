@@ -52,6 +52,10 @@ keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Clear Quickf
 --------------------------------------------------------------------------------
 -- EDITING
 
+-- Undo
+keymap("n", "u", "<cmd>silent undo<CR>zv") -- just to silence it
+keymap("n", "U", "<cmd>silent redo<CR>zv")
+
 -- emulate some basic commands from `vim-abolish`
 keymap("n", "crt", "mzguiwgUl`z", { desc = "󰬴 Titlecase" })
 keymap("n", "cru", "mzgUiw`z", { desc = "󰬴 lowercase" })
@@ -146,6 +150,7 @@ keymap("n", "qf", function() require("funcs.comment").docstring() end, { desc = 
 
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
+
 keymap("n", "<Down>", [[<cmd>. move +1<CR>==]], { desc = "󰜮 Move Line Down" })
 keymap("n", "<Up>", [[<cmd>. move -2<CR>==]], { desc = "󰜷 Move Line Up" })
 keymap("n", "<Right>", [["zx"zp]], { desc = "➡️ Move Char Right" })
@@ -191,10 +196,18 @@ keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste (Terminal Mode)" })
 keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = " Esc (Terminal Mode)" })
 
 --------------------------------------------------------------------------------
--- BUFFERS & WINDOWS & FILES
-
+-- WINDOWS
 keymap({ "n", "x", "i" }, "<C-CR>", "<C-w>w", { desc = " Next Window" })
 keymap({ "n", "x", "i" }, "<C-v>", "<cmd>vertical split<CR>", { desc = " Vertical Split" })
+keymap({ "n", "x", "i" }, "<C-s>", "<cmd>horizontal split<CR>", { desc = " Horizontal Split" })
+
+local delta = 5
+keymap("n", "<C-up>", "<C-w>" .. delta .. "-")
+keymap("n", "<C-down>", "<C-w>" .. delta .. "+")
+keymap("n", "<C-left>", "<C-w>" .. delta .. "<")
+keymap("n", "<C-right>", "<C-w>" .. delta .. ">")
+
+-- BUFFERS & FILES
 keymap("n", "<BS>", vim.cmd.bprevious, { desc = "󰽙 Prev Buffer" })
 keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next Buffer" })
 keymap("n", "<D-r>", vim.cmd.edit, { desc = "󰽙 Reload Buffer" })
