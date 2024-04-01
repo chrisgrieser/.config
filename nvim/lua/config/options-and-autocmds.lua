@@ -179,7 +179,6 @@ opt.conceallevel = 1
 opt.fillchars:append {
 	eob = " ",
 	fold = " ",
-
 	-- solid window separators
 	horiz = "▄",
 	vert = "█",
