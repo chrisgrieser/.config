@@ -1,5 +1,10 @@
 #!/usr/bin/env zsh
 
+# CONFIG
+list_name="Tasks"
+
+#───────────────────────────────────────────────────────────────────────────────
+
 # GUARD only trigger on deactivation of of Reminders
 if [[ "$SENDER" = "front_app_switched" ]]; then
 	data="/tmp/sketchybar_front_app1"
@@ -18,9 +23,6 @@ fi
 
 # wait for sync of reminders
 [[ "$SENDER" == "system_woke" ]] && sleep 5
-
-# CONFIG
-list_name="Default"
 
 # include open reminders yesterday for reminders carrying over
 reminders_today=$(reminders show "$list_name" --due-date="today")
