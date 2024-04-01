@@ -200,12 +200,6 @@ opt.listchars = {
 }
 
 --------------------------------------------------------------------------------
--- keep split evenly sized on window resize
-vim.api.nvim_create_autocmd("WinResized", {
-	callback = function() vim.cmd.wincmd("=") end,
-})
-
---------------------------------------------------------------------------------
 -- AUTO-SAVE
 opt.autowriteall = true
 autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
