@@ -24,6 +24,10 @@ nnoremap x "_dl
 " don't override register
 vnoremap p P
 
+" Paste link into selection/cword
+vnoremap ,cp :pasteinto
+nnoremap ,cp :pasteinto
+
 "───────────────────────────────────────────────────────────────────────────────
 " NAVIGATION
 
@@ -398,6 +402,7 @@ nnoremap ^ :togglefold
 exmap unfoldall obcommand editor:unfold-all
 exmap foldall obcommand editor:fold-all
 nnoremap zm :foldall
+nnoremap zz :foldall
 nnoremap zr :unfoldall
 
 "───────────────────────────────────────────────────────────────────────────────
