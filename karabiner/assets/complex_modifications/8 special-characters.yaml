@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
 title: Special Characters
 rules:
-#───────────────────────────────────────────────────────────────────────────────
+  #─────────────────────────────────────────────────────────────────────────────
   # DEAD KEYS
   - description: "Avoid dead keys (prevent expecting another key): ^~`"
     manipulators:
