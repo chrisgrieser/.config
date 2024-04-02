@@ -413,6 +413,9 @@ nnoremap h :origamiH
 exmap origamiL jsfile Meta/vimrc-jscommands.js { origamiL() }
 nnoremap l :origamiL
 
+exmap addYamlKey jsfile Meta/vimrc-jscommands.js { addYamlKey("read", true) }
+nnoremap ,r :addYamlKey
+
 "───────────────────────────────────────────────────────────────────────────────
 " OPTION TOGGLING
 
