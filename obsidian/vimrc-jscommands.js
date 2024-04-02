@@ -6,9 +6,8 @@
 function origamiH() {
 	// biome-ignore lint/correctness/noUndeclaredVariables: passed by vimrc plugin
 	const editor = view.editor;
-	const col = editor.getCursor().ch;
-	// DOCS https://docs.obsidian.md/Reference/TypeScript+API/EditorCommandName
-	const action = col > 0 ? "goLeft" : "toggleFold";
+	const isAtBoL = editor.getCursor().ch === 0;
+	const action = isAtBoL ? "toggleFold" : "goLeft";
 	editor.exec(action);
 }
 
@@ -19,13 +18,10 @@ function origamiL() {
 
 	const currentLn = editor.getCursor().line;
 	const folds = editor.getFoldOffsets();
-	const foldedLines = [...folds].map((offset) => {
-		return editor.offsetToPos(offset).line;
-	});
-	const isOnFoldedLine = foldedLines.includes(currentLn);
+	const foldedLines = [...folds].map((offset) => editor.offsetToPos(offset).line);
 
-	const action = isOnFoldedLine ? "toggleFold" : "goRight";
-	editor.exec(action);
+	if (foldedLines.includes(currentLn)) editor.exec("toggleFold");
+	editor.exec("goRight");
 }
 
 // biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
