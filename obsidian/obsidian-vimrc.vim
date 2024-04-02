@@ -406,6 +406,7 @@ nnoremap zz :foldall
 nnoremap zr :unfoldall
 
 " emulate nvim-origami's https://github.com/chrisgrieser/nvim-origami?tab=readme-ov-file#features
+" DOCS https://github.com/esm7/obsidian-vimrc-support/blob/master/JsSnippets.md
 " INFO needs to insert the vault-relative path to the jscommands file
 exmap origamiH jsfile Meta/vimrc-jscommands.js { origamiH() }
 nnoremap h :origamiH
