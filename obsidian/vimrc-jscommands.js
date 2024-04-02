@@ -20,14 +20,32 @@ function origamiL() {
 	const folds = editor.getFoldOffsets();
 	const foldedLines = [...folds].map((offset) => editor.offsetToPos(offset).line);
 
-	if (foldedLines.includes(currentLn)) editor.exec("toggleFold");
-	editor.exec("goRight");
+	const action = foldedLines.includes(currentLn) ? "toggleFold" : "goRight";
+	editor.exec(action);
 }
 
 //──────────────────────────────────────────────────────────────────────────────
 
-function addStatusRead() {
-	const
+// biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
+function addYamlKey(key, value) {
+	// biome-ignore lint/correctness/noUndeclaredVariables: passed by vimrc plugin
+	const editor = view.editor;
+	const /** @type {string[]} */ lines = editor.getValue().split("\n");
+	const frontmatterEnd = lines.slice(1).findIndex((line) => line === "---");
+	if (!frontmatterEnd) return;
+
+	const stringifiedValue = typeof value === "string" ? `"${value}"` : value.toString();
+	const yamlLine = key + ": " + stringifiedValue;
+
+	const keyLnum = lines
+		.slice(0, frontmatterEnd) // only check frontmatter
+		.findIndex((line) => line.startsWith(key + ":"));
+	if (keyLnum === -1) {
+		lines.splice(frontmatterEnd, 0, yamlLine);
+	} else {
+		lines[keyLnum + frontmatterEnd] = yamlLine
+	}
+	editor.setValue(lines.join("\n"));
 }
 
 //──────────────────────────────────────────────────────────────────────────────
