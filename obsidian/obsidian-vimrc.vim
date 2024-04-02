@@ -405,6 +405,9 @@ nnoremap zm :foldall
 nnoremap zz :foldall
 nnoremap zr :unfoldall
 
+exmap origamiH jsfile .vimrc-jscommands.js {jumpHeading(true)}
+nmap ]] :nextHeading
+
 "───────────────────────────────────────────────────────────────────────────────
 " OPTION TOGGLING
 

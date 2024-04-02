@@ -19,32 +19,12 @@ M.aw_spotify = aw.new(function(appName, eventType)
 		return
 	end
 
-	if M. spotify_task and M.spotify_task:isRunning() then M.spotify_task:terminate() end
+	if M.spotify_task and M.spotify_task:isRunning() then M.spotify_task:terminate() end
 
 	local action = eventType == aw.launched and "pause" or "play"
 	local binary = env.homebrewPrefix .. "/bin/spotify_player"
 	M.spotify_task = hs.task.new(binary, nil, { "playback", action }):start()
 end):start()
-
---------------------------------------------------------------------------------
--- OBSIDIAN
-
----half -> hide right sidebar
----pseudo-maximized -> show right sidebar
----max -> hide right sidebars (assuming split)
----requires: Obsidian Advanced URI plugin with `eval` being enabled
----@param obsiWin hs.window
-local function autoToggleObsidianSidebar(obsiWin)
-	local relObsiWinWidth = obsiWin:size().w / obsiWin:screen():frame().w
-	local modeRight = (relObsiWinWidth > 0.6 and relObsiWinWidth < 0.99) and "expand" or "collapse"
-	u.openLinkInBg(
-		"obsidian://advanced-uri?eval=this.app.workspace.rightSplit." .. modeRight .. "%28%29"
-	)
-end
-
-M.wf_obsidanMoved = wf.new("Obsidian")
-	:subscribe(wf.windowMoved, autoToggleObsidianSidebar)
-	:subscribe(wf.windowCreated, autoToggleObsidianSidebar) -- for Obsidian restarts
 
 --------------------------------------------------------------------------------
 -- FINDER
