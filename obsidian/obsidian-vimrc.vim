@@ -406,6 +406,7 @@ nnoremap zz :foldall
 nnoremap zr :unfoldall
 
 " emulate nvim-origami's https://github.com/chrisgrieser/nvim-origami?tab=readme-ov-file#features
+" INFO needs to insert the vault-relative path to the jscommands file
 exmap origamiH jsfile Meta/vimrc-jscommands.js { origamiH() }
 nnoremap h :origamiH
 exmap origamiL jsfile Meta/vimrc-jscommands.js { origamiL() }
@@ -418,9 +419,8 @@ nnoremap l :origamiL
 exmap spellcheck obcommand editor:toggle-spellcheck
 nnoremap ,os :spellcheck
 
-" [O]ption: [a]completion
-exmap toggleAiCompletion obcommand copilot-auto-completion:toggle
-nnoremap ,oa :toggleAiCompletion
+exmap toggleLineNumbers jsfile Meta/vimrc-jscommands.js { toggleLineNumbers() }
+nnoremap ,on :toggleLineNumbers
 
 " [O]ption: [d]iagnostics
 exmap enableDiagnostics obcommand obsidian-languagetool-plugin:ltcheck-text
@@ -429,6 +429,9 @@ nnoremap ,od :enableDiagnostics
 exmap disableDiagnostics obcommand obsidian-languagetool-plugin:ltclear
 nnoremap ,oD :disableDiagnostics
 
+" [O]ption: [a]completion
+exmap toggleAiCompletion obcommand copilot-auto-completion:toggle
+nnoremap ,oa :toggleAiCompletion
 
 "───────────────────────────────────────────────────────────────────────────────
 " AI SUGGESTIONS

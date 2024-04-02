@@ -2,9 +2,9 @@
 // DOCS https://github.com/esm7/obsidian-vimrc-support/blob/master/JsSnippets.md
 //──────────────────────────────────────────────────────────────────────────────
 
-// biome-ignore lint/correctness/noUnusedVariables: <explanation>
+// biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
 function origamiH() {
-	// biome-ignore lint/correctness/noUndeclaredVariables: <explanation>
+	// biome-ignore lint/correctness/noUndeclaredVariables: passed by vimrc plugin
 	const editor = view.editor;
 	const col = editor.getCursor().ch;
 	// DOCS https://docs.obsidian.md/Reference/TypeScript+API/EditorCommandName
@@ -12,9 +12,9 @@ function origamiH() {
 	editor.exec(action);
 }
 
-// biome-ignore lint/correctness/noUnusedVariables: <explanation>
+// biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
 function origamiL() {
-	// biome-ignore lint/correctness/noUndeclaredVariables: <explanation>
+	// biome-ignore lint/correctness/noUndeclaredVariables: passed by vimrc plugin
 	const editor = view.editor;
 
 	const currentLn = editor.getCursor().line;
@@ -26,4 +26,11 @@ function origamiL() {
 
 	const action = isOnFoldedLine ? "toggleFold" : "goRight";
 	editor.exec(action);
+}
+
+// biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
+function toggleLineNumbers() {
+	// biome-ignore lint/correctness/noUndeclaredVariables: passed by vimrc plugin
+	const vault = view.app.vault;
+	vault.setConfig("showLineNumber", !vault.getConfig("showLineNumber"));
 }
