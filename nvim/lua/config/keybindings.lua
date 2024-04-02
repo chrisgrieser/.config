@@ -291,7 +291,7 @@ keymap("n", "<D-p>", '"0p', { desc = " Paste Last Yank" })
 keymap("n", "dd", function()
 	if vim.api.nvim_get_current_line():find("^%s*$") then return '"_dd' end
 	return "dd"
-end, { expr = true })
+end, { expr = true, desc = "dd" })
 
 -- paste without switching with register
 keymap("x", "p", "P")

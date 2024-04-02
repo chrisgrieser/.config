@@ -32,8 +32,10 @@ while read -r line; do
 	repo_path=$(echo "$line" | cut -d, -f2 | sed "s|^~|$HOME|")
 
 	git -C "$repo_path" fetch
-	behind=$(git -C "$repo_path" branch --verbose | grep -o "behind \d\+" | cut -d" " -f2)
-	[[ $behind -ne 0 ]] && all_changes="$all_changes$changes!$letter "
+	behind=$(git -C "$repo_path" branch --verbose |
+		grep --only-matching "behind \d\+" |
+		cut -d" " -f2)
+	[[ -n $behind ]] && all_changes="$all_changes$behind!$letter "
 done <"$perma_repos_path"
 
 set_sketchybar
