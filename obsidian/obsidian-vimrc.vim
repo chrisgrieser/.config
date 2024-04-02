@@ -405,8 +405,11 @@ nnoremap zm :foldall
 nnoremap zz :foldall
 nnoremap zr :unfoldall
 
-exmap origamiH jsfile .vimrc-jscommands.js {jumpHeading(true)}
-nmap ]] :nextHeading
+" emulate nvim-origami's https://github.com/chrisgrieser/nvim-origami?tab=readme-ov-file#features
+exmap origamiH jsfile Meta/vimrc-jscommands.js { origamiH() }
+nnoremap h :origamiH
+exmap origamiL jsfile Meta/vimrc-jscommands.js { origamiL() }
+nnoremap l :origamiL
 
 "───────────────────────────────────────────────────────────────────────────────
 " OPTION TOGGLING
