@@ -24,6 +24,14 @@ function origamiL() {
 	editor.exec("goRight");
 }
 
+//──────────────────────────────────────────────────────────────────────────────
+
+function addStatusRead() {
+	const
+}
+
+//──────────────────────────────────────────────────────────────────────────────
+
 // biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
 function toggleLineNumbers() {
 	// biome-ignore lint/correctness/noUndeclaredVariables: passed by vimrc plugin
