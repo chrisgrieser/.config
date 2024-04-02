@@ -20,3 +20,4 @@
 - uninstall `lsp-inlayhints.nvim`
 - load `symbol-usage.nvim` and `ray-x/lsp_signature.nvim` only on `LspAttach`
 - checkout whether `lsp_workspace_symbols` now finally works in lua
+- <https://github.com/monkoose/neocodeium>
