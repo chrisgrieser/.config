@@ -32,7 +32,7 @@ function addYamlKey(key, value) {
 	const editor = view.editor;
 	const /** @type {string[]} */ lines = editor.getValue().split("\n");
 	const frontmatterEnd = lines.slice(1).findIndex((line) => line === "---");
-	if (!frontmatterEnd) return;
+	if (frontmatterEnd === -1) return;
 
 	const stringifiedValue = typeof value === "string" ? `"${value}"` : value.toString();
 	const yamlLine = key + ": " + stringifiedValue;
@@ -41,9 +41,9 @@ function addYamlKey(key, value) {
 		.slice(0, frontmatterEnd) // only check frontmatter
 		.findIndex((line) => line.startsWith(key + ":"));
 	if (keyLnum === -1) {
-		lines.splice(frontmatterEnd, 0, yamlLine);
+		lines.splice(frontmatterEnd + 1, 0, yamlLine); // insert at frontmatter
 	} else {
-		lines[keyLnum + frontmatterEnd] = yamlLine
+		lines[keyLnum] = yamlLine; // update existing key
 	}
 	editor.setValue(lines.join("\n"));
 }
