@@ -41,7 +41,6 @@ archive_name="${repos_count} Repos – ${date_stamp}.zip"
 zip -r --quiet "../$archive_name" . || return 1
 
 # confirm and remove leftover folders
-echo
 print "\e[1;32mArchived $repos_count repos.\e[0m"
 open -R "$backup_location/$archive_name"
 cd ..
