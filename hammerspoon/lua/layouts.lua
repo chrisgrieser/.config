@@ -92,7 +92,6 @@ local function movieLayout()
 		"Alfred Preferences",
 		"Highlights",
 		"Obsidian",
-		"lo-rain",
 		"WezTerm",
 		"Mimestream",
 		env.mastodonApp,
