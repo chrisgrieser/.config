@@ -1,14 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/ajmarkow/espanso-schema-json/master/schemas/Espanso_Matches_File_Schema.json
 #───────────────────────────────────────────────────────────────────────────────
 
-# editorconfig-checker-disable
 matches:
-  - trigger: "!front"
-    replace: |
-      if frontmost of application "$|$" then
-
-      end if
-    label: 🍏 Check whether App is frontmost
   - trigger: "!menu"
     replace: |
       tell application "System Events" to tell process "$|$"
@@ -26,9 +19,3 @@ matches:
   - trigger: "!key"
     replace: tell application "System Events" to keystroke "$|$" using {command down}
     label: 🍏 Keystroke
-  - trigger: "!quit"
-    replace: tell application "Twitterrific$|$" to if it is running then quit
-    label: 🍏 Quit App
-  - trigger: "!shortcut"
-    replace: tell application "Shortcuts" to run shortcut "$|$"
-    label: 🍏 Run Shortcut
