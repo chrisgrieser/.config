@@ -1,8 +1,10 @@
 # INFO
 # - Backup all PUBLIC NON-FORK repos owned by the specified github user as zip archive.
-# - For speed and disk space, only shallow clones are saved (depth 2).
-# - Requires `yq` being installed.
+# - Requires `yq`.
 # - Due to github API restrictions, only a maximum of 100 repos are downloaded.
+#   (TODO use `gh` instead to work around restrictions & `yq` dependency?)
+#───────────────────────────────────────────────────────────────────────────────
+
 
 # CONFIG
 github_username="chrisgrieser"
@@ -35,7 +37,7 @@ done
 # archive them
 date_stamp=$(date +%Y-%m-%d_%H-%M-%S)
 if [[ repos_count -ge 100 ]]; then
-	print "\e[1;33mGitHub API only allows up to 100 repos to be downloaded, backup is therefore incomplete\e[0m"
+	print "\e[1;33mGitHub API only allows up to 100 repos to be downloaded, backup is therefore incomplete.\e[0m"
 fi
 archive_name="${repos_count} Repos – ${date_stamp}.zip"
 zip -r --quiet "../$archive_name" . || return 1
