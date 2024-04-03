@@ -1,10 +1,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/ajmarkow/espanso-schema-json/master/schemas/Espanso_Config_File_Schema.json
+# DOCS https://espanso.org/docs/configuration/app-specific-configurations/#advanced-use-cases-for-filter_title
 #───────────────────────────────────────────────────────────────────────────────
 
-# DOCS https://espanso.org/docs/configuration/app-specific-configurations/#advanced-use-cases-for-filter_title
-# only activates code snippets when a file of the right language is open
-
-filter_exec: Alfred
+filter_class: com.runningwithcrayons.Alfred-Preferences
 
 extra_includes:
   - "../match/_alfred.yml"
