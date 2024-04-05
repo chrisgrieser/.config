@@ -59,7 +59,21 @@ function toggleLineNumbers() {
 
 //──────────────────────────────────────────────────────────────────────────────
 
+// biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
 function obsidianUriMdLink() {
-	
-}
+	// biome-ignore lint/correctness/noUndeclaredVariables: passed by vimrc plugin
+	const app = view.app;
+	const activeFile = app.workspace.getActiveFile();
+	if (!activeFile) return;
+	const filePathEnc = encodeURIComponent(activeFile.path);
+	const basename = activeFile.basename;
+	const vaultName = app.vault.getName();
+	const vaultNameEnc = encodeURIComponent(vaultName);
 
+	const obsidianUri = `obsidian://open?vault=${vaultNameEnc}&file=${filePathEnc}`;
+	const mdLink = `[${basename} (${vaultName})](${obsidianUri})`;
+
+	// biome-ignore lint/correctness/noUndeclaredVariables: available via Obsidian API
+	new Notice(`Copied Link to "${basename}"`);
+	navigator.clipboard.writeText(mdLink);
+}
