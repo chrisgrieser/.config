@@ -56,3 +56,10 @@ function toggleLineNumbers() {
 	const vault = view.app.vault;
 	vault.setConfig("showLineNumber", !vault.getConfig("showLineNumber"));
 }
+
+//──────────────────────────────────────────────────────────────────────────────
+
+function obsidianUriMdLink() {
+	
+}
+
