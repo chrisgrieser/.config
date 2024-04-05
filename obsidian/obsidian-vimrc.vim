@@ -34,8 +34,6 @@ nnoremap ,cp :pasteinto
 " navigate visual lines rather than logical ones
 nnoremap j gj
 nnoremap k gk
-vnoremap j gj
-vnoremap k gk
 nnoremap I g0i
 nnoremap A g$a
 
