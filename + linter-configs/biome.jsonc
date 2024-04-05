@@ -6,7 +6,7 @@
 		"useIgnoreFile": true
 	},
 	"json": {
-		"parser": { "allowComments": true } // for `tsconfig.json`
+		"parser": { "allowComments": true } // for `[jt]sconfig.json`
 	},
 	"javascript": {
 		"globals": [
@@ -30,9 +30,8 @@
 				"all": true,
 				"noConsole": "off"
 			},
-			// JXA does not allow `console.info`, so we need `console.log`
 			"suspicious": {
-				"noConsoleLog": "off"
+				"noConsoleLog": "off" // JXA does not allow `console.info`, so we need `console.log`
 			},
 			"complexity": {
 				"noExcessiveCognitiveComplexity": "off",
