@@ -28,6 +28,10 @@ vnoremap p P
 vnoremap ,cp :pasteinto
 nnoremap ,cp :pasteinto
 
+exmap obsidianUriMdLink jsfile Meta/vimrc-jscommands.js { obsidianUriMdLink() }
+noremap <C-o> :obsidianUriMdLink
+inoremap <C-o> :obsidianUriMdLink
+
 "───────────────────────────────────────────────────────────────────────────────
 " NAVIGATION
 
@@ -247,11 +251,9 @@ exmap fileRecovery obcommand file-recovery:open
 nnoremap ,ut :fileRecovery
 nnoremap ,gd :fileRecovery
 
-" Copy command IDs
+" Open Console
 exmap toggleDevtools obcommand obsidian-theme-design-utilities:toggle-devtools
-nmap &c& :obcommand
-nmap &d& :toggleDevtools
-nmap ,l &c&&d&
+nmap ,l :toggleDevtools
 
 " pseudo-code-action: enhance URL with title
 exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-title
@@ -406,7 +408,8 @@ nnoremap zr :unfoldall
 " emulate nvim-origami's https://github.com/chrisgrieser/nvim-origami?tab=readme-ov-file#features
 " DOCS https://github.com/esm7/obsidian-vimrc-support/blob/master/JsSnippets.md
 " INFO needs to insert the vault-relative path to the jscommands file
-nnoremap h jsfile Meta/vimrc-jscommands.js { origamiH() }
+exmap origamiH jsfile Meta/vimrc-jscommands.js { origamiH() }
+nnoremap h :origamiH
 exmap origamiL jsfile Meta/vimrc-jscommands.js { origamiL() }
 nnoremap l :origamiL
 
