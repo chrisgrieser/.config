@@ -85,8 +85,8 @@ function run(argv) {
 					valid: Boolean(titleJap),
 				},
 				shift: {
-					arg: anime.trailer?.url,
-					valid: Boolean(anime.trailer?.url),
+					arg: anime.synopsis,
+					valid: Boolean(anime.synopsis),
 				},
 			},
 		};
