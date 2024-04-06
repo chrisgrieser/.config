@@ -34,10 +34,6 @@ bindkey -M menuselect '\r' .accept-line            # <CR> select & execute
 bindkey -M menuselect '^P' vi-backward-blank-word  # prev group
 bindkey -M menuselect '^N' vi-forward-blank-word   # next group
 
-# FIX for zsh-autocomplete, to be able to still cycle upwards
-bindkey -M viins '^[[A' up-line-or-history
-bindkey -M viins '^[[B' down-line-or-history
-
 #───────────────────────────────────────────────────────────────────────────────
 # SORT
 

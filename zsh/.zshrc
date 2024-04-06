@@ -1,6 +1,6 @@
 # vim: filetype=sh
 CONFIG_FILES=(
-	keybindings_and_vim_mode # must be loaded starship, so vi-prompt is set correctly
+	keybindings_and_vim_mode # must be loaded before starship, so vi-prompt is set correctly
 	load_plugins
 	plugin_cli_settings
 
