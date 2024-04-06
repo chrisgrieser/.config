@@ -23,6 +23,8 @@ source "$HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substrin
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
+#───────────────────────────────────────────────────────────────────────────────
+
 source "$ZDOTDIR/plugins/magic_dashboard.zsh"
 
 eval "$(starship init zsh)"
