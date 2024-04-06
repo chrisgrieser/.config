@@ -20,6 +20,8 @@ source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # must be loaded *after* zsh-syntax-highlighting
 source "$HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 source "$ZDOTDIR/plugins/magic_dashboard.zsh"
 

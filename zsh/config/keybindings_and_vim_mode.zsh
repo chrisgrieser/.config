@@ -35,9 +35,6 @@ bindkey -M viins "^[[1;3C" forward-word
 bindkey -M viins "^A" beginning-of-line
 bindkey -M viins "^E" end-of-line
 
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-
 #───────────────────────────────────────────────────────────────────────────────
 # VI MODE
 bindkey -v
