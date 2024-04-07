@@ -78,7 +78,6 @@ cask "transmission"
 cask "wezterm"
 cask "zoom"
 mas "Highlights", id: 1498912833
-mas "lo-rain", id: 6446921886
 mas "Mona", id: 1659154653
 mas "Peek", id: 1554235898
 mas "Pixelmator Pro", id: 1289583905

@@ -12,7 +12,6 @@ export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
 
 alias bh='brew home'
-alias bl='brew list'
 alias bi='brew install'
 alias br='brew reinstall'
 alias bu='brew uninstall --zap'
@@ -77,15 +76,16 @@ function update() {
 }
 
 function listall() {
+	_print-section "brew info & doctor"
 	brew info
+	brew doctor
+
 	_print-section "brew taps"
 	brew tap | rs
 	_print-section "brew leaves --installed-on-request"
 	brew leaves --installed-on-request | rs
 	_print-section "brew list --casks"
 	brew list --casks
-	_print-section "brew doctor"
-	brew doctor
 
 	_print-section "Mac App Store"
 	mas list
