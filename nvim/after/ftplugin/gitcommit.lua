@@ -11,7 +11,7 @@ vim.keymap.set("n", "gE", "[s", { buffer = true })
 -- condition ensures this isn't a DressingBuffer
 if vim.bo.buftype ~= "nofile" then
 	vim.keymap.set("n", "<CR>", vim.cmd.wq, { buffer = true, desc = "Confirm" })
+	-- quting with error code = aborting commit
+	vim.keymap.set("n", "q", vim.cmd.cquit, { buffer = true, nowait = true, desc = "Abort" })
 end
 
--- quting with error code = aborting commit
-vim.keymap.set("n", "q", vim.cmd.cquit, { buffer = true, nowait = true, desc = "Abort" })
