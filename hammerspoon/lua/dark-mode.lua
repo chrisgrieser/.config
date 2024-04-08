@@ -3,6 +3,7 @@ local M = {}
 local console = require("lua.console")
 local u = require("lua.utils")
 local visuals = require("lua.visuals")
+local env = require("lua.environment-vars")
 --------------------------------------------------------------------------------
 
 -- INFO done manually to include app-specific toggling for:
@@ -61,6 +62,7 @@ end)
 -- If device has brightness sensor, uses a threshold to determine whether to
 -- change. Otherwise, changes based on the time of day.
 function M.autoSwitch()
+	if env.isProjector() then return end
 	local brightness = hs.brightness.ambient()
 	local hasBrightnessSensor = brightness > -1
 	local targetMode
