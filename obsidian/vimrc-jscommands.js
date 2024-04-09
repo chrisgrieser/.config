@@ -32,7 +32,11 @@ function addYamlKey(key, value) {
 	const editor = view.editor;
 	const /** @type {string[]} */ lines = editor.getValue().split("\n");
 	const frontmatterEnd = lines.slice(1).findIndex((line) => line === "---");
-	if (frontmatterEnd === -1) return;
+	if (frontmatterEnd === -1) {
+		// biome-ignore lint/correctness/noUndeclaredVariables: available via Obsidian API
+		new Notice("No frontmatter found.");
+		return 
+	};
 
 	const stringifiedValue = typeof value === "string" ? `"${value}"` : value.toString();
 	const yamlLine = key + ": " + stringifiedValue;
@@ -46,6 +50,9 @@ function addYamlKey(key, value) {
 		lines[keyLnum] = yamlLine; // update existing key
 	}
 	editor.setValue(lines.join("\n"));
+
+	// biome-ignore lint/correctness/noUndeclaredVariables: available via Obsidian API
+	new Notice(`Set property "${key}" to "${value}"`);
 }
 
 //──────────────────────────────────────────────────────────────────────────────
