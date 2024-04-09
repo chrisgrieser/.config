@@ -175,8 +175,11 @@ nnoremap <Right> dlp
 nnoremap <Left> dlhhp
 
 " Move words (equivalent to sibling-swap.nvim)
-nnoremap ä "zdawel"zph
-nnoremap Ä "zdawbh"zph
+" nnoremap ä "zdawel"zph
+" nnoremap Ä "zdawbh"zph
+" above is for single words, below does not trip on ', etc.
+nnoremap ä "zdawB"zPB
+nnoremap Ä "zdawEl"zpB
 
 " spelling suggestions (emulates `z=`)
 exmap contextMenu obcommand editor:context-menu
