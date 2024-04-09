@@ -12,6 +12,7 @@ M.usb_externalDrive = hs.usb.watcher
 		local ignore = {
 			"Integrated RGB Camera", -- Docking Station in the office
 			"USB 10/100/1000 LAN", -- Docking Station in the office
+			"T27hv-20", -- Docking Station in the office
 			"CHERRY Wireless Device", -- Mouse at mother
 			"SP 150", -- RICOH printer
 		}
