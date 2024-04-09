@@ -72,7 +72,7 @@ export NODE_REPL_HISTORY=""
 # environment variables. Has to be lower-case though.
 # https://docs.npmjs.com/cli/v9/using-npm/config#environment-variables
 export npm_config_fund=false
-export npm_update_notifier=false # updating via homebrew
+export npm_config_update_notifier=false # updating via homebrew
 
 # temporary fix for hanging at "sill: idealTree build"
 function npm_temp_ssl_fix {
