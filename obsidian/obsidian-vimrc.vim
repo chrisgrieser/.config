@@ -246,6 +246,9 @@ exmap toggleBlockquote obcommand editor:toggle-blockquote
 nnoremap ,< :toggleBlockquote
 nnoremap ,> :toggleBlockquote
 
+exmap insertHr jsfile Meta/vimrc-jscommands.js { insertHr() }
+nnoremap qw :insertHr
+
 "───────────────────────────────────────────────────────────────────────────────
 " LEADER MAPPINGS
 " (the weird mappings are to mirror my nvim-mappings)
