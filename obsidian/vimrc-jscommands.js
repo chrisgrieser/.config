@@ -44,13 +44,13 @@ function addYamlKey(key, value) {
 	const keyLnum = lines
 		.slice(0, frontmatterEnd + 1) // only check frontmatter
 		.findIndex((line) => line.startsWith(key + ":"));
-	let msg
+	let msg;
 	if (keyLnum === -1) {
 		lines.splice(frontmatterEnd, 0, yamlLine); // insert at frontmatter
-		msg = `Added property "${key}" with value "${value}"`
+		msg = `Added property "${key}" with value "${value}"`;
 	} else {
 		lines[keyLnum] = yamlLine; // update existing key
-		msg = `Added property "${key}" with value "${value}"`
+		msg = `Set property "${key}" to "${value}"`;
 	}
 	editor.setValue(lines.join("\n"));
 
