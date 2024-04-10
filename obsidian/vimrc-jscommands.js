@@ -47,7 +47,7 @@ function addYamlKey(key, value) {
 	let msg
 	if (keyLnum === -1) {
 		lines.splice(frontmatterEnd, 0, yamlLine); // insert at frontmatter
-		msg = `Set property "${key}" to "${value}"`
+		msg = `Added property "${key}" with  "${value}"`
 	} else {
 		lines[keyLnum] = yamlLine; // update existing key
 	}
