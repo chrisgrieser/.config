@@ -50,6 +50,7 @@ function addYamlKey(key, value) {
 		msg = `Added property "${key}" with value "${value}"`
 	} else {
 		lines[keyLnum] = yamlLine; // update existing key
+		msg = `Added property "${key}" with value "${value}"`
 	}
 	editor.setValue(lines.join("\n"));
 
