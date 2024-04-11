@@ -11,7 +11,8 @@ rules:
   - description: "*️⃣ ⇪ Capslock → Hyper/Esc"
     manipulators:
       - type: basic
-        from: { key_code: caps_lock }
+        # optional modifiers, so accidental `shift+caps` does not trigger actual capslock
+        from: { key_code: caps_lock, modifiers: { optional: [shift, control, option, command] } }
         to_if_alone:
           - key_code: escape
         to:
@@ -23,8 +24,8 @@ rules:
           - key_code: f18
         to_if_held_down:
           - shell_command: open "cleanshot://open-history"
-        # INFO condition to avoid conflict with finder-vim-mode; mapping to f18
-        # is done in finder-vim-alfred-addon.yaml
+        # INFO condition to avoid conflict with finder-vim-mode; 
+            # mapping to f18 in Finder is done in `finder-vim-alfred-addon.yaml`
         conditions:
           - { type: frontmost_application_unless, bundle_identifiers: [^com\.apple\.finder$] }
   #─────────────────────────────────────────────────────────────────────────────
