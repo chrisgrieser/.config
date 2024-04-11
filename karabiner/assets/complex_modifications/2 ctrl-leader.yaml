@@ -180,8 +180,8 @@ rules:
         to:
           - shell_command: |
               if pgrep -xq "neovide" ; then
-                # activating via `NeovideFocus` more reliable than via AppleScript or `open`
-                nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>NeovideFocus<CR>"
+                # nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>NeovideFocus<CR>"
+                osascript -e 'tell application "Neovide" to activate'
               else
                 # opening via Helper, since this passes `--title-hidden`
                 open -a "Neovide Helper"
