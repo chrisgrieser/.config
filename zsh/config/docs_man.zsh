@@ -1,5 +1,3 @@
-#───────────────────────────────────────────────────────────────────────────────
-
 # MAN PAGES
 # - searches directly for $2 in the manpage of $1
 # - works for builtin commands as well
@@ -45,28 +43,6 @@ function man() {
 	fi
 	# https://wezfurlong.org/wezterm/cli/cli/set-tab-title.html
 	wezterm cli set-tab-title --pane-id="$pane_id" "docs: $command"
-}
-
-#───────────────────────────────────────────────────────────────────────────────
-# CHATGPT
-
-function ai() {
-	if ! command -v yq &>/dev/null; then echo "yq not installed." && return 1; fi
-	if [[ -z "$OPENAI_API_KEY" ]]; then echo "\$OPENAI_API_KEY not found." && return 1; fi
-
-	local the_prompt="The following request is concerned with shell scripting. Here is the request: $*"
-	print "\e[1;34mAsking ChatGPT…\e[0m"
-
-	# https://platform.openai.com/docs/api-reference/making-requests
-	curl -s "https://api.openai.com/v1/chat/completions" \
-		-H "Content-Type: application/json" \
-		-H "Authorization: Bearer $OPENAI_API_KEY" \
-		-d "{
-			\"model\": \"gpt-3.5-turbo\",
-			\"messages\": [{\"role\": \"user\", \"content\": \"$the_prompt\"}],
-			\"temperature\": 0
-		}" |
-		yq -r '.choices[].message.content'
 }
 
 #───────────────────────────────────────────────────────────────────────────────
