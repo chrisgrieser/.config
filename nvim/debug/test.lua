@@ -1,3 +1,1 @@
-
-local out = require("lazy").plugins()
-vim.notify("❗ out: " .. vim.inspect(out))
+vim.cmd.cnoreabbrev("W w")
