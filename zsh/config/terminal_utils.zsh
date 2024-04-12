@@ -125,19 +125,13 @@ function hs() {
 function p {
 	file="$1"
 	ext=${file##*.}
+
 	case $ext in
 	"json" | "yml" | "yaml")
 		fx "$file"
 		;;
-	"pdf" | "html")
+	"gif" | "png" | "jpg" | "jpeg" | "webp" | "tiff" | "pdf" | "html")
 		qlmanage -p "$file"
-		;;
-	"gif" | "png" | "jpg" | "jpeg" | "webp" | "tiff")
-		if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
-			wezterm imgcat "$file"
-		else
-			qlmanage -p "$file"
-		fi
 		;;
 	*)
 		bat "$file"
