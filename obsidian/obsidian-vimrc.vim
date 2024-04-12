@@ -135,6 +135,9 @@ exmap prevTab obcommand workspace:previous-tab
 nnoremap gt :nextTab
 nnoremap gT :prevTab
 
+exmap closeOthers obcommand workspace:close-others
+nnoremap <C-w>o :closeOthers
+
 " Alt Buffer (emulates `:buffer #`)
 exmap altBuffer obcommand grappling-hook:alternate-note
 nnoremap <CR> :altBuffer
@@ -271,7 +274,7 @@ nnoremap ,a :acceptAll
 
 " Critic Markup: reject all
 exmap rejectAll obcommand commentator:commentator-reject-all-suggestions
-nnoremap ,r :rejectAll
+nnoremap ,A :rejectAll
 
 " required Advanced URI plugin
 exmap updatePlugins jsfile Meta/vimrc-jscommands.js { updatePlugins() }
