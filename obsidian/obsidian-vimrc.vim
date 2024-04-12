@@ -339,9 +339,9 @@ onoremap K a"
 "───────────────────────────────────────────────────────────────────────────────
 " SUBSTITUTE
 
-" poor man's substitute.nvim and duplicate.nvim:
-" HACK brut-forcing all possible text objects 💀
+" HACK poor man's substitute.nvim: brut-forcing all possible text objects 💀
 nunmap s
+
 nnoremap ss VP
 nnoremap S vg$P
 nnoremap sj VjP
@@ -370,9 +370,14 @@ nnoremap sac va}P
 nnoremap srg vGP
 nnoremap srp v}P
 nnoremap sgg vggGP
+nnoremap sm vt]P
 
+"───────────────────────────────────────────────────────────────────────────────
+
+" HACK poor man's duplicate.nvim: brut-forcing all possible text objects 💀
 unmap w
 nunmap w
+
 exmap duplicate obcommand obsidian-editor-shortcuts:duplicateLine
 nnoremap ww :duplicate
 
@@ -384,8 +389,8 @@ nnoremap wiw yiwp
 nnoremap waw yawp
 nnoremap wis yisp
 nnoremap was yasp
-nnoremap wip yipp
-nnoremap wap yapp
+nnoremap wip yipP
+nnoremap wap yapP
 nnoremap wib yi)p
 nnoremap waq ya"p
 nnoremap wiq yi"p
@@ -401,6 +406,7 @@ nnoremap wic yi}p
 nnoremap wac ya}p
 nnoremap wrg yGp
 nnoremap wrp y}p
+nnoremap wm yt]p
 
 "───────────────────────────────────────────────────────────────────────────────
 " FOLDING
@@ -410,7 +416,6 @@ exmap togglefold obcommand editor:toggle-fold
 nnoremap za :togglefold
 nnoremap zo :togglefold
 nnoremap zc :togglefold
-nnoremap ^ :togglefold
 
 exmap unfoldall obcommand editor:unfold-all
 exmap foldall obcommand editor:fold-all
