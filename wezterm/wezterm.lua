@@ -31,40 +31,44 @@ local theme = require("theme-utils")
 local wt = require("wezterm")
 local act = wt.action
 
+--------------------------------------------------------------------------------
+-- device specific config
 local host = wt.hostname()
-local isAtOffice = host:find("mini") or host:find("eduroam") or host:find("fak1")
-local isAtMother = host:find("Mother")
-local isAtHome = not isAtOffice and not isAtMother
+local device = "home"
+if host:find("mini") or host:find("eduroam") or host:find("fak1") then device = "office" end
+if host:find("Mother") then device = "office" end
 
-local fontSize
-local cellWidth
-if isAtHome then
-	fontSize = 28
-	cellWidth = 1
-elseif isAtMother then
-	fontSize = 26
-	cellWidth = 1
-elseif isAtOffice then
-	fontSize = 29
-	cellWidth = 0.9
-end
+local deviceConfig = {
+	home = {
+		fontSize = 28,
+		cellWidth = 1,
+		maxFps = 60,
+		winPos = { x = 708, y = 0, w = 3135 },
+	},
+	mother = {
+		fontSize = 26,
+		cellWidth = 1,
+		maxFps = 40,
+		winPos = { x = 375, y = -100, w = 1675 },
+	},
+	office = {
+		fontSize = 29,
+		cellWidth = 0.9,
+		maxFps = 60,
+		winPos = { x = 620, y = 0, w = 2745 },
+	},
+}
 
 --------------------------------------------------------------------------------
 -- SET WINDOW POSITION ON STARTUP
 
 wt.on("gui-startup", function(cmd)
 	-- on start, move window to the side ("pseudo-maximized")
-	local pos
-	if isAtHome then
-		pos = { x = 708, y = 0, w = 3135 }
-	elseif isAtOffice then
-		pos = { x = 375, y = -100, w = 1675 }
-	elseif isAtMother then
-		pos = { x = 620, y = 0, w = 2745 }
-	end
-	local height = 3000 -- automatically truncated to maximum
+	local pos = deviceConfig[device].winPos
 	local _, _, window = wt.mux.spawn_window(cmd or {})
+
 	window:gui_window():set_position(pos.x, pos.y)
+	local height = 3000 -- automatically truncated to maximum
 	window:gui_window():set_inner_size(pos.w, height)
 end)
 
@@ -120,23 +124,17 @@ return {
 		weight = "Medium",
 		harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
 	},
-	cell_width = cellWidth, -- effectively like letter-spacing
-	font_size = fontSize,
-	command_palette_font_size = fontSize,
-	char_select_font_size = fontSize, -- emoji picker
+	cell_width = deviceConfig[device].cellWidth, -- effectively like letter-spacing
+	font_size = deviceConfig[device].fontSize,
+	command_palette_font_size = deviceConfig[device].fontSize,
+	char_select_font_size = deviceConfig[device].fontSize, -- emoji picker
 	adjust_window_size_when_changing_font_size = false,
 
 	-- Appearance
-	audible_bell = "Disabled", -- SystemBeep|Disabled
-	visual_bell = { -- briefly flash cursor on visual bell
-		fade_in_duration_ms = 500,
-		fade_out_duration_ms = 500,
-		target = "CursorColor",
-	},
 	color_scheme = theme.autoScheme(darkThemes[1], lightThemes[1]),
 	window_background_opacity = theme.autoOpacity(darkOpacity, lightOpacity),
 	bold_brightens_ansi_colors = "BrightAndBold",
-	max_fps = isAtMother and 40 or 60,
+	max_fps = deviceConfig[device].maxFps,
 
 	-- remove titlebar, but keep macOS traffic lights. Doing so enables
 	-- some macOS window bar window-related functionality, like split commands
@@ -171,6 +169,14 @@ return {
 			mods = "",
 			action = act.CompleteSelectionOrOpenLinkAtMouseCursor("Clipboard"),
 		},
+	},
+
+	-- Bell
+	audible_bell = "Disabled",
+	visual_bell = { -- briefly flash cursor on visual bell
+		fade_in_duration_ms = 500,
+		fade_out_duration_ms = 500,
+		target = "CursorColor",
 	},
 
 	-- Keybindings

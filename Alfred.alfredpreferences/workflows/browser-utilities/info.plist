@@ -142,6 +142,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>89B6D1A7-37A6-4B3A-B78C-3BE6FE8E7CD4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D57C54BB-2021-4A29-9242-12710A08D569</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>9377EF23-556F-4273-A2A5-3714CA46B546</key>
 		<array>
 			<dict>
@@ -212,6 +225,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>1809AA65-C45E-4D01-976D-F2A765BF6019</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D57C54BB-2021-4A29-9242-12710A08D569</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>70CC6BAC-E608-471D-8D1F-AA16352ACAA0</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -813,6 +839,66 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>slurp</string>
+				<key>subtext</key>
+				<string>Into Obsidian</string>
+				<key>text</key>
+				<string>Slurp current browser tab</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>89B6D1A7-37A6-4B3A-B78C-3BE6FE8E7CD4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>allow_empty</key>
+					<true/>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>D57C54BB-2021-4A29-9242-12710A08D569</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>obsidian://slurp?url={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>70CC6BAC-E608-471D-8D1F-AA16352ACAA0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>availableviaurlhandler</key>
 				<false/>
 				<key>triggerid</key>
@@ -883,9 +969,9 @@ echo -n "$(./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>255</real>
+			<real>585</real>
 			<key>ypos</key>
-			<real>880</real>
+			<real>1025</real>
 		</dict>
 		<key>1B7FE114-DCC5-4243-8C64-D1D8DC1C0193</key>
 		<dict>
@@ -980,6 +1066,15 @@ echo -n "$(./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",
 			<key>ypos</key>
 			<real>455</real>
 		</dict>
+		<key>70CC6BAC-E608-471D-8D1F-AA16352ACAA0</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>360</real>
+			<key>ypos</key>
+			<real>840</real>
+		</dict>
 		<key>73794C72-64EA-441F-BE9A-67FB5F1A885C</key>
 		<dict>
 			<key>colorindex</key>
@@ -997,6 +1092,17 @@ echo -n "$(./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",
 			<real>305</real>
 			<key>ypos</key>
 			<real>555</real>
+		</dict>
+		<key>89B6D1A7-37A6-4B3A-B78C-3BE6FE8E7CD4</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>note</key>
+			<string>add rss feed to inoreader</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>840</real>
 		</dict>
 		<key>9377EF23-556F-4273-A2A5-3714CA46B546</key>
 		<dict>
@@ -1023,9 +1129,9 @@ echo -n "$(./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>415</real>
+			<real>745</real>
 			<key>ypos</key>
-			<real>880</real>
+			<real>1025</real>
 		</dict>
 		<key>AADFC524-047E-4638-ABAA-646CEC90599D</key>
 		<dict>
@@ -1108,9 +1214,18 @@ echo -n "$(./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",
 BACKUP
 for when browser history search workflow updates</string>
 			<key>xpos</key>
-			<real>105</real>
+			<real>435</real>
 			<key>ypos</key>
-			<real>880</real>
+			<real>1025</real>
+		</dict>
+		<key>D57C54BB-2021-4A29-9242-12710A08D569</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>200</real>
+			<key>ypos</key>
+			<real>840</real>
 		</dict>
 		<key>D909DE7E-1D08-42B3-B048-039BDE823F44</key>
 		<dict>
