@@ -1881,7 +1881,7 @@
 				<key>destinationuid</key>
 				<string>2BB4DFA9-6E15-4EE5-8E69-7E1AE14AA2EC</string>
 				<key>modifiers</key>
-				<integer>0</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
