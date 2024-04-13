@@ -20,7 +20,7 @@ alias make='make --silent --warn-undefined-variables'
 alias grep='grep --color'
 alias mkdir='mkdir -p' # create intermediate directories
 alias curl='curl --progress-bar'
-alias tokei="tokei --compact --exclude='*.txt' --exclude='*.json' --num-format=underscores"
+alias tokei="tokei --compact --exclude='*.txt' --exclude='*.json'"
 function which { builtin which -a "$@" | bat --language=sh --wrap=character; } # colorized & showing all
 
 # dark-mode aware
