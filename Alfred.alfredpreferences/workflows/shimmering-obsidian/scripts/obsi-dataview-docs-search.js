@@ -53,9 +53,6 @@ function run() {
 
 	return JSON.stringify({
 		items: dvDocs,
-		cache: {
-			// seconds: 3600 * 24 * 7,
-			loosereload: true,
-		},
+		cache: { seconds: 3600 * 24, loosereload: true },
 	});
 }
