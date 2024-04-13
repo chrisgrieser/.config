@@ -145,8 +145,7 @@ local function codeActionFilter(action)
 		) ~= nil,
 		markdown = title == "Create a Table of Contents",
 		python = title == "Ruff: Fix All", -- done via formatting
-		typescript = title == "Move to a new file", -- annoyance since always moved to top
-		javascript = title == "Move to a new file",
+		javascript = title == "Move to a new file", -- annoyance since always moved to top
 	}
 	local configuredToIgnore = ignore[vim.bo.ft] == true
 	local noIgnoresForFiletype = ignore[vim.bo.ft] == nil
