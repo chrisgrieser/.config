@@ -143,9 +143,8 @@ keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
 -- stylua: ignore start
 keymap("n", "qw", function() require("funcs.comment").commentHr() end, { desc = " Horizontal Divider" })
 keymap("n", "wq", function() require("funcs.comment").duplicateLineAsComment() end, { desc = " Duplicate Line as Comment" })
-keymap("n", "qn", function() require("funcs.comment").insertDoublePercentCom() end, { desc = " Insert %% Comment" })
-keymap("n", "dN", function() require("funcs.comment").removeDoublePercentComs() end, { desc = " Remove %% Comments" })
 keymap("n", "qf", function() require("funcs.comment").docstring() end, { desc = " Function Docstring" })
+keymap("n", "Q", function() require("funcs.comment").appendCommentAtEoL() end, { desc = " Append Comment" })
 -- stylua: ignore end
 
 --------------------------------------------------------------------------------

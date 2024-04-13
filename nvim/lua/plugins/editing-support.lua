@@ -11,12 +11,11 @@ return {
 		"numToStr/Comment.nvim",
 		keys = {
 			{ "q", mode = { "n", "x" }, desc = " Comment Operator" },
-			{ "Q", desc = " Append Comment at EoL" },
 		},
 		opts = {
 			opleader = { line = "q", block = "<Nop>" },
 			toggler = { line = "qq", block = "<Nop>" },
-			extra = { eol = "Q", above = "qO", below = "qo" },
+			extra = { eol = "<Nop>", above = "<Nop>", below = "<Nop>" },
 		},
 	},
 	{ -- surround
