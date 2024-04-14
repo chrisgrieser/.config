@@ -11,9 +11,9 @@
 			<key>keyword</key>
 			<string>to</string>
 			<key>text</key>
-			<string>nyaa.land: {query}</string>
+			<string>nyaa: {query}</string>
 			<key>url</key>
-			<string>https://nyaa.land/?f=0&amp;c=1_0&amp;s=seeders&amp;o=desc&amp;q={query}</string>
+			<string>https://nyaa.si/?f=0&amp;c=1_0&amp;s=seeders&amp;o=desc&amp;q={query}</string>
 		</dict>
 		<key>5EEA999D-F78D-4F89-BB24-9557712FEE77</key>
 		<dict>
