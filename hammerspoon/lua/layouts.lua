@@ -54,12 +54,23 @@ local function workLayout()
 	app("AltTab"):kill() -- FIX missing windows
 	u.closeAllTheThings()
 
-	u.openApps(env.mastodonApp)
+	-- CONFIG
+	local toOpen = {
+		env.mastodonApp,
+		"AlfredExtraPane",
+		"Discord",
+		"Mimestream",
+		"Slack",
+	}
+	local resize = {
+		"Discord",
+		"Mimestream",
+		"Slack",
+	}
 
 	-- open & pseudo-maximize
-	local appsToOpen = { "Discord", env.browserApp, "Mimestream", "Slack" }
-	u.openApps(appsToOpen)
-	for _, appName in pairs(appsToOpen) do
+	u.openApps(toOpen)
+	for _, appName in pairs(resize) do
 		u.whenAppWinAvailable(appName, function()
 			local win = app(appName):mainWindow()
 			wu.moveResize(win, wu.pseudoMax)

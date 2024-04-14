@@ -2,6 +2,7 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
+//──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} str */
 function alfredMatcher(str) {
@@ -50,9 +51,12 @@ function run(argv) {
 
 			// determine options path
 			const optionsPath = manifest.options_ui?.page || manifest.options_page || "";
-			const optionsUrl = `chrome-extension://${id}/${optionsPath}`;
 			const webstoreUrl = `https://chrome.google.com/webstore/detail/${id}`;
 			const localFolder = extensionFolder + "/" + id;
+			const optionsUrl = `chrome-extension://${id}/${optionsPath}`;
+
+			// SPECIAL anchor for AdGuard, directly go to user rules
+			const anchor = name === "AdGuard AdBlocker" ? "#user-filter" : "";
 
 			// emoji/icon
 			const emoji = optionsPath ? "" : " 🚫"; // indicate no options available
@@ -64,7 +68,7 @@ function run(argv) {
 				match: alfredMatcher(name),
 				icon: { path: iconPath },
 				valid: optionsPath !== "",
-				arg: optionsUrl,
+				arg: optionsUrl + anchor,
 				uid: id,
 				mods: {
 					alt: { arg: webstoreUrl },
