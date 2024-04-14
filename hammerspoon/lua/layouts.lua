@@ -94,6 +94,7 @@ local function movieLayout()
 		"Obsidian",
 		"WezTerm",
 		"Mimestream",
+		"Neovide",
 		env.mastodonApp,
 		"Reminders",
 	}
