@@ -280,6 +280,9 @@ nnoremap ,A :rejectAll
 exmap updatePlugins jsfile Meta/vimrc-jscommands.js { updatePlugins() }
 nnoremap ,pp :updatePlugins
 
+exmap openPluginDirectory jsfile Meta/vimrc-jscommands.js { openPluginDirectory() }
+nnoremap ,pd :openPluginDirectory
+
 "───────────────────────────────────────────────────────────────────────────────
 " VISUAL MODE
 

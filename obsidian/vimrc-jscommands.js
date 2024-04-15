@@ -97,11 +97,17 @@ function obsidianUriMdLink() {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-
 // biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
 function updatePlugins() {
 	// biome-ignore lint/correctness/noUndeclaredVariables: passed by vimrc plugin
 	const app = view.app;
 	const vaultNameEnc = encodeURIComponent(app.vault.getName());
 	window.open(`obsidian://advanced-uri?vault=${vaultNameEnc}&updateplugins=true`);
+}
+
+// biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
+function openPluginDirectory() {
+	// biome-ignore lint/correctness/noUndeclaredVariables: passed by vimrc plugin
+	const app = view.app;
+	app.openWithDefaultApp(app.vault.configDir + "/plugins");
 }
