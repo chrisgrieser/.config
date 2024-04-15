@@ -91,7 +91,7 @@ function obsidianUriMdLink() {
 	const mdLink = `[${basename} (${vaultName})](${obsidianUri})`;
 
 	// biome-ignore lint/correctness/noUndeclaredVariables: available via Obsidian API
-	new Notice(`Copied Link to "${basename}"`);
+	new Notice(`Copied Obsidian URI to "${basename}"`);
 	navigator.clipboard.writeText(mdLink);
 }
 
