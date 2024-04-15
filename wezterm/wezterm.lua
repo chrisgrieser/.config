@@ -36,7 +36,7 @@ local act = wt.action
 local host = wt.hostname()
 local device = "home"
 if host:find("mini") or host:find("eduroam") or host:find("fak1") then device = "office" end
-if host:find("Mother") then device = "office" end
+if host:find("Mother") then device = "mother" end
 
 local deviceConfig = {
 	home = {
@@ -49,13 +49,13 @@ local deviceConfig = {
 		fontSize = 26,
 		cellWidth = 1,
 		maxFps = 40,
-		winPos = { x = 375, y = -100, w = 1675 },
+		winPos = { x = 620, y = 0, w = 2745 },
 	},
 	office = {
 		fontSize = 29,
 		cellWidth = 0.9,
 		maxFps = 60,
-		winPos = { x = 620, y = 0, w = 2745 },
+		winPos = { x = 375, y = -100, w = 1675 },
 	},
 }
 
