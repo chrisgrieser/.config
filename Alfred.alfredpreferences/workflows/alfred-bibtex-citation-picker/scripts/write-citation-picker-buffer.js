@@ -155,25 +155,24 @@ function bibtexDecode(encodedStr) {
  * @return {BibtexEntry[]}
  */
 function bibtexParse(rawBibtexStr) {
-	// last comma of a field, see: https://regex101.com/r/1dvpfC/1
-	const bibtexPropertyDelimiter = /,(?=\s*[\w-]+\s*=)/;
-
 	const bibtexEntryArray = bibtexDecode(rawBibtexStr)
 		.split(/^@/m) // split by `@` from citekeys
 		.slice(1) // first element is other stuff before first entry
-		.map((rawEntryStr) => {
-			const [category, citekey, propertyStr] = rawEntryStr.match(/../m);
-			const properties = propertyStr.split(bibtexPropertyDelimiter);
-			const entry = new BibtexEntry();
+		.reduce((/** @type {BibtexEntry[]} */ acc, rawEntryStr) => {
+			const [_, category, citekey, propertyStr] =
+				rawEntryStr.trim().match(/^(.*?){(.*?),(.*)}$/s) || [];
+			if (!category || !citekey || !propertyStr) return acc;
 
-			// parse first line (separate since different formatting)
+			const entry = new BibtexEntry();
 			entry.citekey = citekey.trim();
 			// INFO will use icons saved as as `./icons/{entry.icon}.png` in the
 			// workflow folder. This means adding icons does not require any extra
 			// code, just an addition of the an icon file named like the category
 			entry.icon = category.toLowerCase().trim();
 
-			// parse remaining lines
+			// last comma of a field as delimiter https://regex101.com/r/1dvpfC/1
+			const properties = propertyStr.trim().split(/,(?=\s*[\w-]+\s*=)/);
+
 			for (const line of properties) {
 				// GUARD erroneous BibTeX formatting, empty lines, etc.
 				if (!line.includes("=")) continue;
@@ -220,15 +219,14 @@ function bibtexParse(rawBibtexStr) {
 			}
 
 			if (!entry.url && entry.doi) entry.url = "https://doi.org/" + entry.doi;
-			return entry;
-		});
+			return acc.concat(entry);
+		}, []);
 
 	return bibtexEntryArray;
 }
 
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const urlEmoji = "🌐";
