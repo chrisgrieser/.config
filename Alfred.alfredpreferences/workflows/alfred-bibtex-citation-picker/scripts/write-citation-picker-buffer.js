@@ -159,16 +159,14 @@ function bibtexParse(rawBibtexStr) {
 	const bibtexPropertyDelimiter = /,(?=\s*[\w-]+\s*=)/;
 
 	const bibtexEntryArray = bibtexDecode(rawBibtexStr)
-		.replace(/^%.*$/gm, "") // remove comments
 		.split(/^@/m) // split by `@` from citekeys
 		.slice(1) // first element is other stuff before first entry
-		.map((bibEntry) => {
-			const lines = bibEntry.split(bibtexPropertyDelimiter);
+		.map((rawEntryStr) => {
+			const [category, citekey, propertyStr] = rawEntryStr.match(/../m);
+			const properties = propertyStr.split(bibtexPropertyDelimiter);
 			const entry = new BibtexEntry();
 
 			// parse first line (separate since different formatting)
-			const [category, citekey] = lines[0].split("{");
-			lines.shift();
 			entry.citekey = citekey.trim();
 			// INFO will use icons saved as as `./icons/{entry.icon}.png` in the
 			// workflow folder. This means adding icons does not require any extra
@@ -176,8 +174,10 @@ function bibtexParse(rawBibtexStr) {
 			entry.icon = category.toLowerCase().trim();
 
 			// parse remaining lines
-			for (const line of lines) {
-				if (!line.includes("=")) continue; // catch erroneous BibTeX formatting
+			for (const line of properties) {
+				// GUARD erroneous BibTeX formatting, empty lines, etc.
+				if (!line.includes("=")) continue;
+
 				const field = line.split("=")[0].trim().toLowerCase();
 				const value = line
 					.split("=")[1]
