@@ -31,7 +31,7 @@ function M.cycle(window, _)
 	local darkSchemes = {}
 	local lightSchemes = {}
 	for name, scheme in pairs(allSchemes) do
-		if scheme.background then
+		if scheme.background then -- FIX https://github.com/wez/wezterm/discussions/3426#discussioncomment-9127923
 			local bg = wt.color.parse(scheme.background) -- parse into a color object
 			local h, s, l, a = bg:hsla() ---@diagnostic disable-line: unused-local
 			if l < 0.45 then
