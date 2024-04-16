@@ -12,12 +12,12 @@ local darkThemes = {
 	"Tinacious Design (Dark)",
 }
 local lightThemes = {
-	"Silk Light (base16)",
-	"Atelier Lakeside Light (base16)",
 	"Ivory Light (terminal.sexy)",
+	"Solar Flare Light (base16)",
+	"Atelier Lakeside Light (base16)",
+	"Silk Light (base16)",
 	"Paraiso (light) (terminal.sexy)",
 	"seoulbones_light",
-	"Solar Flare Light (base16)",
 }
 
 local lightOpacity = 0.94
