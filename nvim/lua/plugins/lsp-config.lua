@@ -23,7 +23,7 @@ local lspToMasonMap = {
 	yamlls = "yaml-language-server",
 	tsserver = "typescript-language-server",
 
-	pylyzer = "pylyzer",
+	pylyzer = "pylyzer_alt",
 }
 
 --------------------------------------------------------------------------------
