@@ -117,13 +117,12 @@ local lualineConfig = {
 		},
 		lualine_y = {
 			{ "diff" },
-			-- line count
-			{
-				function() return vim.api.nvim_buf_line_count(0) .. " " end,
-				cond = function() return vim.bo.buftype == "" end,
-			},
 		},
 		lualine_z = {
+			{ -- line count
+				function() return vim.api.nvim_buf_line_count(0) .. "" end,
+				cond = function() return vim.bo.buftype == "" end,
+			},
 			{ "selectioncount", fmt = function(str) return str ~= "" and "礪" .. str or "" end },
 			{ "location" },
 			{ -- neovim icon
