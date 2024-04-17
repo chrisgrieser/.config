@@ -93,8 +93,9 @@ return {
 		config = function(_, opts)
 			require("gitsigns").setup(opts)
 
+			-- add hunk-count to lualine
 			u.addToLuaLine("sections", "lualine_y", {
-				function() return ("(%sH)"):format(#require("gitsigns").get_hunks()) end,
+				function() return ("%sH"):format(#require("gitsigns").get_hunks()) end,
 				cond = function()
 					local hunks = require("gitsigns").get_hunks()
 					return hunks and #hunks > 0
