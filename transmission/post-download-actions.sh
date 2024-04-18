@@ -1,4 +1,4 @@
-export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+#!/usr/bin/env zsh
 # DOCS https://github.com/transmission/transmission/blob/main/docs/Scripts.md#scripts
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -9,9 +9,7 @@ cd "$download_folder" || return 1
 #───────────────────────────────────────────────────────────────────────────────
 
 # delete clutter
-find -E . -regex ".*\.(nfo|md|jpe?g|png|exe)$" -delete
-find . \( -name '*.txt' -or -name '*.nfo' -or -name '*.exe' -or -name '*.md' \
-	-or -name '*.jpg' -or -name '*.png' \) -delete
+find -E . -regex ".*\.(nfo|md|jpe?g|png|exe|txt)$" -delete
 find . -type d -name "Sample" -exec rm -r {} + # Folders do not accept `-delete`
 
 # if single file, unnest it
@@ -26,6 +24,7 @@ fi
 #───────────────────────────────────────────────────────────────────────────────
 
 # quit Transmission, if no other active torrents
+export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 if [[ ! -x "$(command -v transmission-remote)" ]]; then
 	touch "./transmission-cli not installed (brew install transmission-cli)"
 	return 1
