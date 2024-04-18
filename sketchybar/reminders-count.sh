@@ -19,10 +19,11 @@ if ! command -v reminders &>/dev/null; then
 	return 1
 fi
 
-#───────────────────────────────────────────────────────────────────────────────
 
 # wait for sync of reminders
 [[ "$SENDER" == "system_woke" ]] && sleep 5
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # include open reminders yesterday for reminders carrying over
 reminders_today=$(reminders show "$list_name" --due-date="today")
