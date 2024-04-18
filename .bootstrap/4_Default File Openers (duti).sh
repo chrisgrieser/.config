@@ -5,7 +5,7 @@
 [[ -x "$(command -v duti)" ]] || brew install duti
 
 # open once to initialize the apps
-open "$HOME/.config/nvim/mac-helper/Neovide Helper.app"
+open "$HOME/.config/neovide/mac-helper/Neovide Helper.app"
 open "$HOME/.config/obsidian/Obsidian Helper.app"
 
 #───────────────────────────────────────────────────────────────────────────────
