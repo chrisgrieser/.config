@@ -111,3 +111,7 @@ function openPluginDirectory() {
 	const app = view.app;
 	app.openWithDefaultApp(app.vault.configDir + "/plugins");
 }
+
+function openSett() {
+	
+}
