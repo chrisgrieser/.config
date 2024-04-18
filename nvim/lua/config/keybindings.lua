@@ -166,12 +166,14 @@ keymap("c", "<C-u>", "<C-e><C-u>") -- kill whole line
 keymap("c", "<D-v>", "<C-r>+", { desc = " Paste" })
 keymap("c", "<BS>", function()
 	if vim.fn.getcmdline() ~= "" then return "<BS>" end
-end, { desc = "Restricted <BS>", expr = true })
+end, { desc = "<BS> does not leave cmdline", expr = true })
 
+-- CMDWIN (`:q` or `<C-f>` in cmdline)
 vim.api.nvim_create_autocmd("CmdWinEnter", {
 	callback = function()
 		vim.bo.ft = "lua" -- syntax highlighting
 		vim.keymap.set("n", "q", cmd.close, { buffer = true, nowait = true, desc = "Close" })
+		-- overwrite the global `<CR>` overwrite
 		vim.keymap.set("n", "<CR>", "<CR>", { buffer = true, desc = "Confirm Cmdline under cursor" })
 	end,
 })
