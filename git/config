@@ -85,7 +85,7 @@
 	diffFilter = delta --color-only
 [delta]
 	tabs = 3 ; tabwidth
-	navigate = true ; use n and N to move between diff sections
+	navigate = true ; use n and N to move between diff sections (requires LESSHISTFILE)
 	hyperlinks = true
 
 ;────────────────────────────────────────────────────────────────────────────

@@ -81,8 +81,8 @@ LESS+=\ --shift=.2
 # wrap searches
 LESS+=\ --search-option=W
 
-# don't clutter home directory with useless `.lesshst` file
-LESSHISTFILE=-
+# (cannot disable it, since it's needed for delta's `navigate` feature)
+# LESSHISTFILE=/tmp/lesshst
 
 # colorize man pages
 # (`;` needs to be escaped to prevent shfmt from formatting this)
