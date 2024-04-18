@@ -5,7 +5,6 @@
 # ask for credentials upfront
 sudo -v
 setopt INTERACTIVE_COMMENTS
-
 DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder"
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -50,9 +49,9 @@ sudo chmod -R 700 ~/.ssh/id_ed25519
 
 cd ~ || return 1
 [[ -e ~/.config ]] && rm -rfv ~/.config
-git clone git@github.com:chrisgrieser/.config.git
-git clone git@github.com:chrisgrieser/main-vault.git
-git clone git@github.com:chrisgrieser/.password-store.git
+git clone git@github.com:chrisgrieser/.config
+git clone git@github.com:chrisgrieser/main-vault
+git clone git@github.com:chrisgrieser/.password-store
 
 #───────────────────────────────────────────────────────────────────────────────
 
