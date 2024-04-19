@@ -34,6 +34,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>22CB563E-BB60-4576-932A-949771E94EAC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D57C54BB-2021-4A29-9242-12710A08D569</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>4DF1744A-10ED-4573-9F3C-69E0889CDA12</key>
 		<array>
 			<dict>
@@ -134,19 +147,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>4DF1744A-10ED-4573-9F3C-69E0889CDA12</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>89B6D1A7-37A6-4B3A-B78C-3BE6FE8E7CD4</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>D57C54BB-2021-4A29-9242-12710A08D569</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -839,27 +839,6 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>slurp</string>
-				<key>subtext</key>
-				<string>Into Obsidian</string>
-				<key>text</key>
-				<string>Slurp current browser tab</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>89B6D1A7-37A6-4B3A-B78C-3BE6FE8E7CD4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>tasksettings</key>
 				<dict>
 					<key>allow_empty</key>
@@ -874,6 +853,42 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 			<string>D57C54BB-2021-4A29-9242-12710A08D569</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>31</integer>
+				<key>hotmod</key>
+				<integer>1048576</integer>
+				<key>hotstring</key>
+				<string>O</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.brave.Browser</string>
+					<string>com.apple.Safari</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>22CB563E-BB60-4576-932A-949771E94EAC</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -995,6 +1010,17 @@ echo -n "$(./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",
 			<key>ypos</key>
 			<real>455</real>
 		</dict>
+		<key>22CB563E-BB60-4576-932A-949771E94EAC</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>note</key>
+			<string>Slurp</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>840</real>
+		</dict>
 		<key>3F6D1856-6639-4F2D-B0F7-35E5ED4CE866</key>
 		<dict>
 			<key>colorindex</key>
@@ -1092,17 +1118,6 @@ echo -n "$(./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",
 			<real>305</real>
 			<key>ypos</key>
 			<real>555</real>
-		</dict>
-		<key>89B6D1A7-37A6-4B3A-B78C-3BE6FE8E7CD4</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>add rss feed to inoreader</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>840</real>
 		</dict>
 		<key>9377EF23-556F-4273-A2A5-3714CA46B546</key>
 		<dict>

@@ -117,14 +117,19 @@ local lualineConfig = {
 		},
 		lualine_y = {
 			{ "diff" },
-		},
-		lualine_z = {
 			{ -- line count
-				function() return vim.api.nvim_buf_line_count(0) .. "" end,
+				function() return vim.api.nvim_buf_line_count(0) .. " " end,
 				cond = function() return vim.bo.buftype == "" end,
 			},
+		},
+		lualine_z = {
 			{ "selectioncount", fmt = function(str) return str ~= "" and "礪" .. str or "" end },
 			{ "location" },
+			{ -- neovim icon
+				function() return "" end,
+				cond = function() return vim.fn.has("gui_running") == 1 end, -- glyph not supported by wezterm yet
+				padding = { left = 0, right = 1 },
+			},
 		},
 	},
 	options = {
