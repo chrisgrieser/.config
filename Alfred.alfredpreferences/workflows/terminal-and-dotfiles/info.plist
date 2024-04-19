@@ -134,7 +134,7 @@
 			<key>config</key>
 			<dict>
 				<key>openwith</key>
-				<string>/System/Volumes/Data/Applications/neovide.app</string>
+				<string>~/.config/neovide/mac-helper/Neovide Helper.app</string>
 				<key>sourcefile</key>
 				<string></string>
 			</dict>
