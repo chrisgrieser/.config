@@ -703,6 +703,19 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>seconds</key>
+				<string>.2</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.delay</string>
+			<key>uid</key>
+			<string>582FCFA2-1B38-4ED9-9AB5-7C2B77C96405</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>acceptsmulti</key>
 				<integer>0</integer>
 				<key>filetypes</key>
@@ -738,19 +751,6 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>31B039D3-0038-4232-A04C-E67C8EF2598B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>seconds</key>
-				<string>.2</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.delay</string>
-			<key>uid</key>
-			<string>582FCFA2-1B38-4ED9-9AB5-7C2B77C96405</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -833,9 +833,9 @@
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>400</real>
+			<real>405</real>
 			<key>ypos</key>
-			<real>685</real>
+			<real>625</real>
 		</dict>
 		<key>5252159C-2A4F-4203-BA5A-DC1967230383</key>
 		<dict>
@@ -851,9 +851,9 @@
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>335</real>
+			<real>340</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>655</real>
 		</dict>
 		<key>5C88B596-E2CF-48B0-B410-DADF9807C0C3</key>
 		<dict>
@@ -871,9 +871,9 @@
 			<key>note</key>
 			<string>open screenshot history</string>
 			<key>xpos</key>
-			<real>195</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>685</real>
+			<real>625</real>
 		</dict>
 		<key>682D1225-A622-4061-9B75-41FC1037A341</key>
 		<dict>
@@ -911,7 +911,7 @@
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>840</real>
+			<real>780</real>
 		</dict>
 		<key>95CF671F-9E2F-4CE9-92A0-BACEF07C97C8</key>
 		<dict>
@@ -1010,9 +1010,9 @@
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>195</real>
 			<key>ypos</key>
-			<real>840</real>
+			<real>780</real>
 		</dict>
 		<key>E61BAA5C-B8EC-4B90-BE73-0E4711326107</key>
 		<dict>
@@ -1021,9 +1021,9 @@
 			<key>note</key>
 			<string>edit last screenshot</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>685</real>
+			<real>625</real>
 		</dict>
 		<key>F0335C72-7DC6-4793-ADCD-3909E4CDE001</key>
 		<dict>
