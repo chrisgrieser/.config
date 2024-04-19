@@ -77,41 +77,20 @@ function insertHr() {
 //──────────────────────────────────────────────────────────────────────────────
 
 // biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
-function obsidianUriMdLink() {
-	// biome-ignore lint/correctness/noUndeclaredVariables: passed by vimrc plugin
-	const app = view.app;
-	const activeFile = app.workspace.getActiveFile();
-	if (!activeFile) return;
-	const filePathEnc = encodeURIComponent(activeFile.path);
-	const basename = activeFile.basename;
-	const vaultName = app.vault.getName();
-	const vaultNameEnc = encodeURIComponent(vaultName);
-
-	const obsidianUri = `obsidian://open?vault=${vaultNameEnc}&file=${filePathEnc}`;
-	const mdLink = `[${basename} (${vaultName})](${obsidianUri})`;
-
-	// biome-ignore lint/correctness/noUndeclaredVariables: available via Obsidian API
-	new Notice(`Copied Obsidian URI to "${basename}"`);
-	navigator.clipboard.writeText(mdLink);
-}
-
-//──────────────────────────────────────────────────────────────────────────────
-
-// biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
 async function updatePlugins() {
 	// biome-ignore lint/correctness/noUndeclaredVariables: passed by vimrc plugin
 	const app = view.app;
-	app.setting.open();
-	app.setting.openTabById("community-plugins");
+	// biome-ignore lint/correctness/noUndeclaredVariables: passed by vimrc plugin
+	new Notice("Checking for updates…");
+	await app.plugins.checkForUpdates();
 
-	// Click "Check for Updates" Button
-	app.setting.activeTab.containerEl.findAll(".mod-cta").last().click();
-
-	// Click "Update All" Button after 10s
-	setTimeout(
-		() => app.setting.activeTab.containerEl.findAll(".mod-cta").last().click(),
-		10 * 1000,
-	);
+	// Click "Update All" Button
+	const updateCount = Object.keys(app.plugins.updates).length;
+	if (updateCount > 0) {
+		app.setting.open();
+		app.setting.openTabById("community-plugins");
+		app.setting.activeTab.containerEl.findAll(".mod-cta").last().click();
+	}
 }
 
 // biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin

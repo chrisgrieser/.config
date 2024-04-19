@@ -28,10 +28,6 @@ vnoremap p P
 vnoremap ,cp :pasteinto
 nnoremap ,cp :pasteinto
 
-exmap obsidianUriMdLink jsfile Meta/vimrc-jscommands.js { obsidianUriMdLink() }
-noremap <C-o> :obsidianUriMdLink
-inoremap <C-o> :obsidianUriMdLink
-
 "───────────────────────────────────────────────────────────────────────────────
 " NAVIGATION
 

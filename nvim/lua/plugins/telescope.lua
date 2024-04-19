@@ -142,7 +142,7 @@ local function filenameFirst(_, path)
 	return string.format("%s\t\t%s", tail, parentDisplay) -- parent colored via autocmd above
 end
 
-local function project() return vim.fs.basename(vim.loop.cwd() or "") end
+local function projectName() return vim.fs.basename(vim.loop.cwd() or "") end
 
 --------------------------------------------------------------------------------
 
@@ -468,7 +468,7 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
-			{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		},
 		config = function()
 			telescopeConfig()
@@ -518,7 +518,7 @@ return {
 					end
 
 					require("telescope.builtin").find_files {
-						prompt_title = "Find Files: " .. project(),
+						prompt_title = "Find Files: " .. projectName(),
 						sorter = mySorter,
 					}
 				end,
@@ -538,16 +538,25 @@ return {
 			{
 				"gl",
 				function()
-					require("telescope.builtin").live_grep { prompt_title = "Live Grep: " .. project() }
+					require("telescope.builtin").live_grep {
+						prompt_title = "Live Grep: " .. projectName(),
+					}
 				end,
 				desc = " Live-Grep",
 			},
 			{
 				"gL",
 				function()
+					local word
+					if vim.fn.mode() == "n" then
+						word = vim.fn.expand("<cword>")
+					else
+						u.normal('"zy')
+						word = vim.trim(vim.fn.getreg("z"))
+					end
 					require("telescope.builtin").live_grep {
-						default_text = vim.fn.expand("<cword>"),
-						prompt_title = "Live Grep: " .. project(),
+						default_text = word,
+						prompt_title = "Live Grep: " .. projectName(),
 					}
 				end,
 				desc = " Grep cword",
