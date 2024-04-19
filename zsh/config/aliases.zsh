@@ -32,7 +32,6 @@ function bat {
 
 # utils
 alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
-alias prose='ssh nanotipsforvim@prose.sh'
 alias bkp='zsh "$HOME/.config/+ utility-scripts/full-backup.sh"'
 alias bkp-repos='zsh "$HOME/.config/+ utility-scripts/backup-my-repos.sh"'
 

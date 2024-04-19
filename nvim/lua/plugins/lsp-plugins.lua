@@ -31,6 +31,7 @@ return {
 	},
 	{ -- CodeLens, but also for languages not supporting it
 		"Wansmer/symbol-usage.nvim",
+		commit = "4c79eff", -- TODO
 		event = "BufReadPre",
 		opts = {
 			hl = { link = "Comment" },
