@@ -40,8 +40,6 @@ end
 
 --------------------------------------------------------------------------------
 
---------------------------------------------------------------------------------
-
 -- Never show tabline, since we are showing it ourself on the winbar.
 -- Cannot place the component in the tabline, since when empty, vim places its
 -- ugly tabline there instead.
