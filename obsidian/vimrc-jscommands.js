@@ -98,11 +98,20 @@ function obsidianUriMdLink() {
 //──────────────────────────────────────────────────────────────────────────────
 
 // biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
-function updatePlugins() {
+async function updatePlugins() {
 	// biome-ignore lint/correctness/noUndeclaredVariables: passed by vimrc plugin
 	const app = view.app;
-	const vaultNameEnc = encodeURIComponent(app.vault.getName());
-	window.open(`obsidian://advanced-uri?vault=${vaultNameEnc}&updateplugins=true`);
+	app.setting.open();
+	app.setting.openTabById("community-plugins");
+
+	// Click "Check for Updates" Button
+	app.setting.activeTab.containerEl.findAll(".mod-cta").last().click();
+
+	// Click "Update All" Button after 10s
+	setTimeout(
+		() => app.setting.activeTab.containerEl.findAll(".mod-cta").last().click(),
+		10 * 1000,
+	);
 }
 
 // biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
