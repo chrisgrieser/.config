@@ -90,17 +90,5 @@ return {
 			},
 			attach_to_untracked = true,
 		},
-		config = function(_, opts)
-			require("gitsigns").setup(opts)
-
-			-- add hunk-count to lualine
-			u.addToLuaLine("sections", "lualine_y", {
-				function() return ("%s"):format(#require("gitsigns").get_hunks()) end,
-				cond = function()
-					local hunks = require("gitsigns").get_hunks()
-					return hunks and #hunks > 0
-				end,
-			})
-		end,
 	},
 }
