@@ -77,19 +77,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>22C3A292-BE41-47F8-9B47-543D7C9E4AC1</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>8A1F6028-B56D-4223-8008-F364B73183A5</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>26EB4BCF-56A8-43E4-AED6-0C121B00D55E</key>
 		<array>
 			<dict>
@@ -159,55 +146,6 @@
 				<integer>8388608</integer>
 				<key>modifiersubtext</key>
 				<string>fn: Open Repo in Finder</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>71D977C5-6C8A-47D2-A625-4E3E79D785D2</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>22C3A292-BE41-47F8-9B47-543D7C9E4AC1</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>7AA41F32-E0D9-4117-8B57-8F7C942E07D7</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>8A1F6028-B56D-4223-8008-F364B73183A5</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>8D7A806A-C89F-4527-87FB-F6D2B578A43A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>8D7A806A-C89F-4527-87FB-F6D2B578A43A</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>02026FD8-1825-41C8-96F3-25FA1235B8B7</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -325,111 +263,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<true/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/neovim-docs-index-creation.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>22C3A292-BE41-47F8-9B47-543D7C9E4AC1</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>:nvim</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Re-Create Neovim :help Index</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>71D977C5-6C8A-47D2-A625-4E3E79D785D2</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>on run 
-	tell application id "com.runningwithcrayons.Alfred" to reload workflow (system attribute "alfred_workflow_bundleid") 
-end run</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>02026FD8-1825-41C8-96F3-25FA1235B8B7</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>soundname</key>
-				<string>Blow</string>
-				<key>systemsound</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.playsound</string>
-			<key>uid</key>
-			<string>8D7A806A-C89F-4527-87FB-F6D2B578A43A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>✅ Index created</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>8A1F6028-B56D-4223-8008-F364B73183A5</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>autopaste</key>
 				<false/>
 				<key>clipboardtext</key>
@@ -464,27 +297,6 @@ end run</string>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>38E62E4E-8B37-483B-BBE3-257C2DD7EA30</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>This may take a few minutes</string>
-				<key>title</key>
-				<string>⏳Re-Creating Index</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>7AA41F32-E0D9-4117-8B57-8F7C942E07D7</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -826,18 +638,6 @@ Vimdoc to html conversion by [xaizek](https://github.com/xaizek/vimdoc2html).
 Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>02026FD8-1825-41C8-96F3-25FA1235B8B7</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>note</key>
-			<string>reload workflow cache
-(has to come last, otherwise it interferes with this workflow itself)</string>
-			<key>xpos</key>
-			<real>1170</real>
-			<key>ypos</key>
-			<real>40</real>
-		</dict>
 		<key>02145BDB-6F80-437E-A4FE-880FDA77AC47</key>
 		<dict>
 			<key>colorindex</key>
@@ -868,17 +668,6 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>220</real>
 			<key>ypos</key>
 			<real>135</real>
-		</dict>
-		<key>22C3A292-BE41-47F8-9B47-543D7C9E4AC1</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>note</key>
-			<string>Re-Create Index</string>
-			<key>xpos</key>
-			<real>720</real>
-			<key>ypos</key>
-			<real>40</real>
 		</dict>
 		<key>26EB4BCF-56A8-43E4-AED6-0C121B00D55E</key>
 		<dict>
@@ -930,44 +719,6 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>35</real>
 			<key>ypos</key>
 			<real>705</real>
-		</dict>
-		<key>71D977C5-6C8A-47D2-A625-4E3E79D785D2</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>note</key>
-			<string>(re)create index</string>
-			<key>xpos</key>
-			<real>560</real>
-			<key>ypos</key>
-			<real>40</real>
-		</dict>
-		<key>7AA41F32-E0D9-4117-8B57-8F7C942E07D7</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>725</real>
-			<key>ypos</key>
-			<real>185</real>
-		</dict>
-		<key>8A1F6028-B56D-4223-8008-F364B73183A5</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>875</real>
-			<key>ypos</key>
-			<real>40</real>
-		</dict>
-		<key>8D7A806A-C89F-4527-87FB-F6D2B578A43A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>1025</real>
-			<key>ypos</key>
-			<real>40</real>
 		</dict>
 		<key>C906BF1E-7CF4-4407-9B97-53532876DCC0</key>
 		<dict>
