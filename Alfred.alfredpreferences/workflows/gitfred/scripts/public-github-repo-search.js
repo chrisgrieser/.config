@@ -103,10 +103,6 @@ function run(argv) {
 				arg: repo.html_url,
 				quicklookurl: repo.html_url,
 				mods: {
-					shift: {
-						subtitle: `⇧: Search Issues (${repo.open_issues} open)`,
-						arg: repo.full_name,
-					},
 					cmd: {
 						arg: secondUrl,
 						subtitle: `⌘: Open  "${secondUrl}"`,

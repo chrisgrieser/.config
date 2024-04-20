@@ -375,7 +375,12 @@ rules:
         to:
           - { key_code: "9", modifiers: [command] }
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^com\.runningwithcrayons\.Alfred-Preferences$] }]
+          [
+            {
+              type: frontmost_application_if,
+              bundle_identifiers: [^com\.runningwithcrayons\.Alfred-Preferences$],
+            },
+          ]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Discord"
     manipulators:
@@ -540,15 +545,14 @@ rules:
           - shell_command: open -g "cleanshot://capture-area"
         to_if_held_down:
           - shell_command: open -g "cleanshot://record-screen"
-  # INFO using Shottr at mother device, since no 3rd license for CleanShot
-  # make hotkeys consistent with CleanShot though (cmd+s -> cmd+shift+c)
-  - description: "(Apps) Shottr"
-    manipulators:
+        conditions:
+          - { type: device_unless, identifiers: [{ product_id: 615 }] } # = Apple Keyboard
       - type: basic
-        from: { key_code: s, modifiers: { mandatory: [command] } }
+        from: { key_code: "4", modifiers: { mandatory: [shift, command] } }
         to:
-          - { key_code: c, modifiers: [command, shift] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^cc\.ffitch\.shottr$] }]
+          - shell_command: open -g "cleanshot://capture-area"
+        conditions:
+          - { type: device_if, identifiers: [{ product_id: 615 }] } # = Apple Keyboard
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Pixelmator/Preview: Export"
     manipulators:
