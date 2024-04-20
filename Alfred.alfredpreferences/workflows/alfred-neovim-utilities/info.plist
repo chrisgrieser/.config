@@ -263,25 +263,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>15317DBA-B342-4CB9-9F08-0CBA70D39C07</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -299,6 +280,25 @@
 			<string>38E62E4E-8B37-483B-BBE3-257C2DD7EA30</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>15317DBA-B342-4CB9-9F08-0CBA70D39C07</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -723,13 +723,13 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>C906BF1E-7CF4-4407-9B97-53532876DCC0</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>6</integer>
+			<integer>11</integer>
 			<key>note</key>
 			<string>installed plugins and mason tools search</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>540</real>
+			<real>545</real>
 		</dict>
 		<key>D6E5E105-38E3-4BC1-90E3-52BEE556349D</key>
 		<dict>
@@ -819,7 +819,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>using Neovimcraft</string>
+			<string>using Awesome Neovim</string>
 			<key>label</key>
 			<string>Keyword – Plugin Search</string>
 			<key>type</key>
@@ -852,27 +852,6 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>nvr</string>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>For latest posts in the neovim subreddit.</string>
-			<key>label</key>
-			<string>Keyword –neovim subreddit</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>neovim_subreddit_search</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
 				<string>ip</string>
 				<key>placeholder</key>
 				<string></string>
@@ -884,7 +863,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>description</key>
 			<string>For searching installed plugins &amp; mason tools.</string>
 			<key>label</key>
-			<string>Keyword – nstalled plugins</string>
+			<string>Keyword – installed plugins</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -955,7 +934,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.0.0</string>
+	<string>2.1.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
