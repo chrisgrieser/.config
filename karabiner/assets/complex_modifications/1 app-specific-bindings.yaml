@@ -542,17 +542,16 @@ rules:
       - type: basic
         from: { key_code: "4", modifiers: { mandatory: [shift, command] } }
         to_if_alone:
-          - shell_command: open -g "cleanshot://capture-area"
+          - shell_command: |
+              # if cleanshot is installed, use it, otherwise fallback to macOS'
+              # builtin screenshot
+              if mdfind "kMDItemKind == 'Application'" | grep -q "CleanShot" ; then
+                open -g "cleanshot://capture-area"
+              else
+                screencapture -ic # capture area to clipboard
+              fi
         to_if_held_down:
           - shell_command: open -g "cleanshot://record-screen"
-        conditions:
-          - { type: device_unless, identifiers: [{ product_id: 615 }] } # = Apple Keyboard
-      - type: basic
-        from: { key_code: "4", modifiers: { mandatory: [shift, command] } }
-        to:
-          - shell_command: open -g "cleanshot://capture-area"
-        conditions:
-          - { type: device_if, identifiers: [{ product_id: 615 }] } # = Apple Keyboard
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Pixelmator/Preview: Export"
     manipulators:

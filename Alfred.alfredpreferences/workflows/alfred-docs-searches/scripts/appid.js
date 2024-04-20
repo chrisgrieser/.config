@@ -7,21 +7,16 @@ app.includeStandardAdditions = true;
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	/** @type AlfredItem[] */
 	const apps = app
-		.doShellScript(`find \
-			"/Applications" \
-			"/Applications/Utilities" \
-			"$HOME/Applications" \
-			"/System/Applications" \
-			"/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" \
-			"/Applications/Alfred 5.app/Contents/Preferences/Alfred Preferences.app" \
-			"/System/Library/CoreServices/Finder.app" \
-			-name '*.app' -maxdepth 1 -type d
-		`)
+		.doShellScript("mdfind \"kMDItemKind == 'Application'\"")
 		.split("\r")
 		.map((path) => {
-			const appName = path.split("/").pop().slice(0, -4);
+			if (
+				!path.endsWith(".app") ||
+				(path.startsWith("/System/Library/CoreServices/") && !path.endsWith("Finder.app"))
+			)
+				return {};
+			const appName = (path.split("/").pop() || "").slice(0, -4);
 			return {
 				title: appName,
 				type: "file:skipcheck",
