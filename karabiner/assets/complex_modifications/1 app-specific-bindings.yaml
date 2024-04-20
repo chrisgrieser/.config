@@ -521,12 +521,12 @@ rules:
           - { key_code: t, modifiers: [command, option] }
         conditions:
           [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]
-      # - type: basic
-      #   from: { key_code: "1", modifiers: { mandatory: [command] } }
-      #   to:
-      #     - { key_code: s, modifiers: [command, control] }
-      #   conditions:
-      #     [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]
+      - type: basic
+        from: { key_code: "1", modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: s, modifiers: [command, control] }
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]
       # Open in Gmail
       - type: basic
         from: { key_code: g, modifiers: { mandatory: [control] } }
@@ -544,8 +544,8 @@ rules:
         to_if_alone:
           - shell_command: |
               # if cleanshot is installed, use it, otherwise fallback to macOS'
-              # builtin screenshot
-              if mdfind "kMDItemKind == 'Application'" | grep -q "CleanShot" ; then
+              # builtin screenshot app
+              if mdfind "kMDItemKind == 'Application'" | grep -q "CleanShot X" ; then
                 open -g "cleanshot://capture-area"
               else
                 screencapture -ic # capture area to clipboard
