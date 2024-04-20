@@ -616,7 +616,8 @@
 				"input_source_if",
 				"frontmost_application_if",
 				"frontmost_application_unless",
-				"device_if"
+				"device_if",
+				"device_unless"
 			],
 			"title": "ConditionType"
 		},
