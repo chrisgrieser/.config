@@ -17,17 +17,12 @@ function parentFolder(filePath) {
 	return filePath.split("/").slice(0, -1).join("/");
 }
 
-/** @param {string|string[]} item */
-function camelCaseMatch(item) {
-	if (typeof item === "string") item = [item];
-	return item
-		.map((str) => {
-			const subwords = str.replace(/[-_.]/g, " ");
-			const fullword = str.replace(/[-_.]/g, "");
-			const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
-			return [subwords, camelCaseSeparated, fullword, str].join(" ") + " ";
-		})
-		.join(" ");
+/** @param {string} str */
+function camelCaseMatch(str) {
+	const subwords = str.replace(/[-_./]/g, " ");
+	const fullword = str.replace(/[-_./]/g, "");
+	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
+	return [subwords, camelCaseSeparated, fullword, str].join(" ") + " ";
 }
 
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
@@ -48,6 +43,10 @@ function run() {
 	const bookmarkJSON = `${vaultConfig}/bookmarks.json`;
 	const excludeFilterJSON = `${vaultConfig}/app.json`;
 	const superIconFile = $.getenv("supercharged_icon_file");
+	const removeEmojis = $.getenv("remove_emojis") === "1";
+	// exclude cssclass: private
+	const censorChar = $.getenv("censor_char");
+	const privacyModeOn = $.getenv("privacy_mode") === "1";
 
 	let recentJSON = `${vaultConfig}/workspace.json`;
 	if (!fileExists(recentJSON)) recentJSON = recentJSON.slice(0, -5); // Obsidian 0.16 uses workspace.json → https://discord.com/channels/686053708261228577/716028884885307432/1013906018578743478
@@ -175,10 +174,6 @@ function run() {
 		headingIgnore[i] = shouldIgnore;
 	}
 
-	// exclude cssclass: private
-	const censorChar = $.getenv("censor_char");
-	const privacyModeOn = $.getenv("privacy_mode") === "1";
-
 	//──────────────────────────────────────────────────────────────────────────────
 	// CONSTRUCTION OF JSON FOR ALFRED
 	const resultsArr = [];
@@ -207,7 +202,7 @@ function run() {
 		if (isBookmarked) emoji += "🔖 ";
 		if (isRecent) emoji += "🕑 ";
 		if (filename.toLowerCase().includes("kanban")) iconpath = "icons/kanban.png";
-		if ($.getenv("remove_emojis") === "1") emoji = "";
+		if (removeEmojis) emoji = "";
 
 		let superchargedIcon = "";
 		let superchargedIcon2 = "";
@@ -274,9 +269,7 @@ function run() {
 				icon: { path: headingIconpath },
 				mods: {
 					alt: { arg: relativePath },
-					shift: {
-						arg: relativePath,
-					},
+					shift: { arg: relativePath },
 				},
 			});
 		}
@@ -286,7 +279,6 @@ function run() {
 	for (const canvas of canvasArray) {
 		const name = canvas.basename;
 		const relativePath = canvas.relativePath;
-		const denyForCanvas = { valid: false, subtitle: "⛔ Cannot do that with a canvas." };
 		const isBookmarked = starsAndBookmarks.includes(relativePath);
 		const isRecent = recentFiles.includes(relativePath);
 
@@ -308,8 +300,8 @@ function run() {
 			icon: { path: "icons/canvas.png" },
 			uid: relativePath,
 			mods: {
-				shift: denyForCanvas,
-				fn: denyForCanvas,
+				shift: { valid: false, subtitle: "⛔ Cannot do that with a canvas." },
+				fn: { valid: false, subtitle: "⛔ Cannot do that with a canvas." },
 			},
 		});
 	}
@@ -368,9 +360,6 @@ function run() {
 
 	return JSON.stringify({
 		items: resultsArr,
-		cache: {
-			seconds: 600,
-			loosereload: true,
-		},
+		cache: { seconds: 600, loosereload: true },
 	});
 }
