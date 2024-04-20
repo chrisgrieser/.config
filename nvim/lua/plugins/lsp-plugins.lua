@@ -31,6 +31,7 @@ return {
 	},
 	{ -- CodeLens, but also for languages not supporting it
 		"Wansmer/symbol-usage.nvim",
+		commit = "4c79eff", -- PENDING https://github.com/Wansmer/symbol-usage.nvim/issues/48
 		event = "BufReadPre",
 		opts = {
 			hl = { link = "Comment" },

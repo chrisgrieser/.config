@@ -59,7 +59,7 @@ function M.leaderSubkey(key, label, modes)
 			{ [key] = { name = " " .. label } },
 			{ prefix = "<leader>", mode = modes or "n" }
 		)
-	end, 2000)
+	end, 1500)
 end
 
 ---Adds a component to the lualine after lualine was already set up. Useful for
