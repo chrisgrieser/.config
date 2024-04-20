@@ -100,18 +100,17 @@
     "body": "app.pathTo(\"home folder\")",
     "prefix": "home (JXA)"
   },
-  "http-request": {
+  "httpRequest": {
     "body": [
       "/** @param {string} url @return {string} */",
       "function httpRequest(url) {",
       "\tconst queryURL = $.NSURL.URLWithString(url);",
       "\tconst data = $.NSData.dataWithContentsOfURL(queryURL);",
-      "\tconst requestStr = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;",
-      "\treturn requestStr;",
+      "\treturn $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;",
       "}"
     ],
     "description": "http request via c-bridge",
-    "prefix": "http-request"
+    "prefix": "httpRequest"
   },
   "keystroke": {
     "body": "Application(\"System Events\").keystroke(\"${1:key}\", {using: [\"${2:command} down\"]});",
