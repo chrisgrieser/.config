@@ -127,11 +127,6 @@ function run() {
 						subtitle: "⌘: Open at GitHub",
 						arg: repo.html_url,
 					},
-					shift: {
-						subtitle: `⇧: Search Issues (${repo.open_issues} open)`,
-						arg: repo.full_name,
-						valid: repo.open_issues > 0,
-					},
 				},
 			};
 			return alfredItem;
