@@ -17,12 +17,17 @@ function parentFolder(filePath) {
 	return filePath.split("/").slice(0, -1).join("/");
 }
 
-/** @param {string} str */
-function camelCaseMatch(str) {
-	const subwords = str.replace(/[-_./]/g, " ");
-	const fullword = str.replace(/[-_./]/g, "");
-	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
-	return [subwords, camelCaseSeparated, fullword, str].join(" ") + " ";
+/** @param {string|string[]} item */
+function camelCaseMatch(item) {
+	if (typeof item === "string") item = [item];
+	return item
+		.map((str) => {
+			const subwords = str.replace(/[-_.]/g, " ");
+			const fullword = str.replace(/[-_.]/g, "");
+			const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
+			return [subwords, camelCaseSeparated, fullword, str].join(" ") + " ";
+		})
+		.join(" ");
 }
 
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
@@ -52,10 +57,6 @@ function run() {
 		: [];
 	const recentFiles = fileExists(recentJSON) ? JSON.parse(readFile(recentJSON)).lastOpenFiles : [];
 	let canvasArray = fileExists(canvasJSON) ? JSON.parse(readFile(canvasJSON)) : [];
-
-	// exclude cssclass: private
-	const censorChar = $.getenv("censor_char");
-	const privacyModeOn = $.getenv("privacy_mode") === "1";
 
 	//───────────────────────────────────────────────────────────────────────────
 	// Main Metadata
@@ -174,6 +175,10 @@ function run() {
 		headingIgnore[i] = shouldIgnore;
 	}
 
+	// exclude cssclass: private
+	const censorChar = $.getenv("censor_char");
+	const privacyModeOn = $.getenv("privacy_mode") === "1";
+
 	//──────────────────────────────────────────────────────────────────────────────
 	// CONSTRUCTION OF JSON FOR ALFRED
 	const resultsArr = [];
@@ -269,7 +274,9 @@ function run() {
 				icon: { path: headingIconpath },
 				mods: {
 					alt: { arg: relativePath },
-					shift: { arg: relativePath },
+					shift: {
+						arg: relativePath,
+					},
 				},
 			});
 		}
