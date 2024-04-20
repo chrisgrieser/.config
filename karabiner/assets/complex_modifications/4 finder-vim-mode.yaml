@@ -1302,6 +1302,28 @@ rules:
           - shell_command:
               osascript -e 'display notification "✅ Filename copied" with title "Finder Vim Mode"'
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      # ctrl-t: copy git-relative path
+      - type: basic
+        from: { key_code: t, modifiers: { mandatory: [control] } }
+        to:
+          - shell_command: |
+              GIT_OPTIONAL_LOCKS=0
+              SEL=$(osascript -e 'tell application "Finder"
+                set sel to (item 1 of (get selection) as text)
+                return POSIX path of sel
+              end tell')
+              cd "$(dirname "$SEL")" || exit 1
+              if ! git rev-parse --is-inside-work-tree &>/dev/null ; then
+                osascript -e 'display notification "⚠️ Not in a git repo." with title "Finder Vim Mode"'
+                exit 1
+              fi
+              root=$(git rev-parse --show-toplevel)
+              root_length=${#root}
+              rel_path=$(echo "$SEL" | cut -c$((root_length + 2))-)
+
+              echo "$rel_path" | pbcopy
+              osascript -e "display notification \"$rel_path\" with title \"✅ Copied\""
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # ctrl-g: open at github
       - type: basic
         from: { key_code: g, modifiers: { mandatory: [control] } }
