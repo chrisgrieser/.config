@@ -92,6 +92,17 @@
 			<key>url</key>
 			<string>https://thepiratebay.org/search.php?q={query}</string>
 		</dict>
+		<key>EC5F4CCF-649C-4315-A860-F35489FA94F1</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>code</string>
+			<key>text</key>
+			<string>GitHub Code Search</string>
+			<key>url</key>
+			<string>https://github.com/search?type=code&amp;q={query}</string>
+		</dict>
 		<key>F7035B09-71AB-47A4-A8DE-F2CFA62686D4</key>
 		<dict>
 			<key>enabled</key>
