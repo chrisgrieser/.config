@@ -3,6 +3,28 @@
 <plist version="1.0">
 <dict>
 	<key>keyword_1</key>
-	<string>angular</string>
+	<string>js</string>
+	<key>keyword_10</key>
+	<string>bash</string>
+	<key>keyword_11</key>
+	<string>jsdoc</string>
+	<key>keyword_12</key>
+	<string>ts</string>
+	<key>keyword_2</key>
+	<string>py</string>
+	<key>keyword_3</key>
+	<string>hs</string>
+	<key>keyword_4</key>
+	<string>css</string>
+	<key>keyword_5</key>
+	<string>lua</string>
+	<key>keyword_6</key>
+	<string>html</string>
+	<key>keyword_7</key>
+	<string>md</string>
+	<key>keyword_8</key>
+	<string>git</string>
+	<key>keyword_9</key>
+	<string>jq</string>
 </dict>
 </plist>

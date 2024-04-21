@@ -9,8 +9,7 @@ const shortHands = {
 	typescript: "ts",
 	python: "py",
 	hammerspoon: "hs",
-	// biome-ignore lint/style/useNamingConvention: input formatted like this
-	gnu_make: "make",
+	markdown: "md",
 };
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -20,7 +19,7 @@ async function main() {
 
 	// convert to hashmap to remove duplicates
 	const allLangs = {};
-	const noneItem = "<array> <string>none</string> <string></string> </array>";
+	const noneItem = "<array> <string>[none]</string> <string></string> </array>";
 	const infoPlistPopup = [noneItem];
 	for (const lang of await response.json()) {
 		// langs json
@@ -41,10 +40,11 @@ async function main() {
 	/** @type {string[]} */
 	const xmlLines = fs.readFileSync("../info.plist", "utf8").split("\n");
 
-	// create 9 new popups
+	// create multiple popups to select in Alfred config
+	const popupNumber = 20;
 	let newXmlLines = [];
-	for (let i = 1; i <= 9; i++) {
-		const label = i === 1 ? "Select devdoc" : "";
+	for (let i = 1; i <= popupNumber; i++) {
+		const label = i === 1 ? "Enabled devdoc" : "";
 		newXmlLines = newXmlLines.concat([
 			"<dict> <key>config</key> <dict> <key>default</key> <string></string> <key>pairs</key> <array>",
 			...infoPlistPopup,
