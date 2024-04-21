@@ -459,7 +459,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>{var:devdocs_keyword_1}</string>
+				<string>{var:keyword_1}||{var:keyword_2}||{var:keyword_3}||{var:keyword_4}||{var:keyword_5}||{var:keyword_6}||{var:keyword_7}||{var:keyword_8}||{var:keyword_9}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -477,9 +477,9 @@
 				<key>scriptfile</key>
 				<string>scripts/dev-docs-search.js</string>
 				<key>subtext</key>
-				<string></string>
+				<string>{var:keyword_1}, {var:keyword_2}, {var:keyword_3}, {var:keyword_4}, {var:keyword_5}, …</string>
 				<key>title</key>
-				<string>DevDocs: {var:devdocs_keyword_1}</string>
+				<string>DevDocs</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -1964,7 +1964,28 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
-			<string>devdocs_keyword_1</string>
+			<string>keyword_1</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>dev docs site</string>
+			<key>label</key>
+			<string>Keyword 2</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>keyword_2</string>
 		</dict>
 	</array>
 	<key>version</key>
