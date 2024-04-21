@@ -39,14 +39,17 @@ function readFile(path) {
 	return ObjC.unwrap(str);
 }
 
+const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
+
 //──────────────────────────────────────────────────────────────────────────────
 
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const keyword = $.getenv("alfred_workflow_keyword");
-	const keywordLanguageMap = JSON.parse(readFile("./devdocs/keyword-lang-map.json"));
+	const keywordLanguageMap = JSON.parse(readFile("./devdocs/keyword-slug-map.json"));
 	const language = keywordLanguageMap[keyword];
 	const iconpath = `./devdocs/icons/${keyword}.png`;
+	const iconExists = fileExists(iconpath);
 
 	const indexUrl = `https://documents.devdocs.io/${language}/index.json`;
 	/** @type {DevDocsIndex} */
@@ -60,10 +63,13 @@ function run() {
 			title: entry.name,
 			subtitle: entry.type,
 			match: camelCaseMatch(entry.name),
-			icon: { path: iconpath },
 			arg: url,
 			uid: url,
 		};
+
+		// icon defaults to devdocs icon
+		if (iconExists) item.icon = { path: iconpath };
+
 		return item;
 	});
 
