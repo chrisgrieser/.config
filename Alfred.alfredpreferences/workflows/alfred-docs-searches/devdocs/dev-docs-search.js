@@ -30,13 +30,6 @@ function camelCaseMatch(str) {
 	return [subwords, camelCaseSeparated, fullword, str].join(" ") + " ";
 }
 
-/** @param {string} path */
-function readFile(path) {
-	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
-	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
-	return ObjC.unwrap(str);
-}
-
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -44,8 +37,11 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const keyword = $.getenv("alfred_workflow_keyword");
-	const keywordLanguageMap = JSON.parse(readFile("./devdocs/keyword-slug-map.json"));
+	const mapUrl =
+		"https://raw.githubusercontent.com/chrisgrieser/alfred-docs-searches/main/.github/keyword-slug-map.json";
+	const keywordLanguageMap = JSON.parse(httpRequest(mapUrl));
 	const language = keywordLanguageMap[keyword];
+
 	const iconpath = `./devdocs/icons/${keyword}.png`;
 	const iconExists = fileExists(iconpath);
 

@@ -1757,7 +1757,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>window information</string>
 			<key>xpos</key>
-			<real>735</real>
+			<real>730</real>
 			<key>ypos</key>
 			<real>905</real>
 		</dict>
@@ -1945,7 +1945,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>refresh cache by reloading workflow</string>
 			<key>xpos</key>
-			<real>745</real>
+			<real>730</real>
 			<key>ypos</key>
 			<real>1210</real>
 		</dict>
@@ -19692,7 +19692,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.0.3</string>
+	<string>2.0.4</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

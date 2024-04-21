@@ -40,8 +40,8 @@ return {
 			definition = { enabled = false },
 			implementation = { enabled = true },
 			text_format = function(symbol)
-				local refs = symbol.references > 0 and (" 󰈿 %s"):format(symbol.references) or ""
-				return refs
+				if not (symbol.references and symbol.references > 0) then return "" end
+				return (" 󰈿 %s"):format(symbol.references)
 			end,
 			disable = {
 				filetypes = { "css", "scss" },
