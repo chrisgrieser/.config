@@ -13,29 +13,6 @@ const shortHands = {
 	gnu_make: "make",
 };
 
-// <dict>
-// 	<key>config</key>
-// 	<dict>
-// 		<key>default</key>
-// 		<string></string>
-// 		<key>pairs</key>
-// 		<array>
-// 			<array>
-// 				<string>none</string>
-// 				<string></string>
-// 			</array>
-// 			<array>
-// 				<string>js (javascript)</string>
-// 				<string>js</string>
-// 			</array>
-// 		</array>
-// 	</dict>
-// 	<key>type</key>
-// 	<string>popupbutton</string>
-// 	<key>variable</key>
-// 	<string>keyword_2</string>
-// </dict>
-
 //──────────────────────────────────────────────────────────────────────────────
 
 async function main() {
@@ -43,34 +20,42 @@ async function main() {
 
 	// convert to hashmap to remove duplicates
 	const allLangs = {};
-	const newXmlLines = [];
+	const noneItem = "<array> <string>none</string> <string></string> </array>";
+	const infoPlistPopup = [noneItem];
 	for (const lang of await response.json()) {
-		const { name, slug } = lang;
 		// langs json
-		if (allLangs[name]) continue; // do not add old versions of the same language
-		const cleanName = slug.replace(/~.*/g, "");
-		const alfredKeyword = shortHands[cleanName] || cleanName;
-		allLangs[alfredKeyword] = slug;
+		const id = lang.slug.replace(/~.*/, "");
+		const keyword = shortHands[id] || id;
+		if (allLangs[keyword]) continue; // do not add old versions of the same language
+		allLangs[keyword] = lang.slug;
 
 		// xml
-		const line = `<array> <string>${alfredKeyword} (${name})</string> <string>${slug}</string> </array>`;
-		newXmlLines.push(line);
+		const keywordInfo = keyword !== id ? ` (keyword: ${keyword})` : "";
+		const line = `<array> <string>${id}${keywordInfo}</string> <string>${keyword}</string> </array>`;
+		infoPlistPopup.push(line);
 	}
 
-	const xmlLines = [
-		"<dict> <key>config</key> <dict> <key>default</key> <string></string> <key>pairs</key> <array>",
-		...newXmlLines,
-		"</array> </dict> <key>description</key> <string></string> <key>label</key> <string>Select languages</string> <key>type</key> <string>popupbutton</string> <key>variable</key> <string>keyword_1</string> </dict>",
-	];
+	fs.writeFileSync("keyword-slug-map.json", JSON.stringify(allLangs));
 
-	fs.writeFileSync("keyword-lang-map.json", JSON.stringify(allLangs));
-
+	// update `info.plist` to insert all languages as options
 	/** @type {string[]} */
-	const lines = fs.readFileSync("../info.plist", "utf8").split("\n");
-	const start = lines.indexOf("\t<key>userconfigurationconfig</key>") + 2;
-	const end = lines.indexOf("\t</array>", start);
-	lines.splice(start, end - start, ...xmlLines);
-	fs.writeFileSync("../info.plist", lines.join("\n"));
+	const xmlLines = fs.readFileSync("../info.plist", "utf8").split("\n");
+
+	// create 9 new popups
+	let newXmlLines = [];
+	for (let i = 1; i <= 9; i++) {
+		const label = i === 1 ? "Select devdoc" : "";
+		newXmlLines = newXmlLines.concat([
+			"<dict> <key>config</key> <dict> <key>default</key> <string></string> <key>pairs</key> <array>",
+			...infoPlistPopup,
+			`</array> </dict> <key>description</key> <string></string> <key>label</key> <string>${label}</string> <key>type</key> <string>popupbutton</string> <key>variable</key> <string>keyword_${i}</string> </dict>`,
+		]);
+	}
+
+	const start = xmlLines.indexOf("\t<key>userconfigurationconfig</key>") + 2;
+	const end = xmlLines.indexOf("\t</array>", start);
+	xmlLines.splice(start, end - start, ...newXmlLines);
+	fs.writeFileSync("../info.plist", xmlLines.join("\n"));
 }
 
 await main();
