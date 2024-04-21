@@ -3134,10 +3134,11 @@ This workflow already supports dozens of documentation sites. Since I cannot pos
 - `ep`: espanso docs
 - `wt`: WezTerm docs
 - `yq`*
-- `dt`: Lookup term at [devterms.io](https://devterms.io/)
+- `dt`: Lookup terms at [devterms.io](https://devterms.io/)
+- `sod`: [Stack Overflow Developer-Survey](https://survey.stackoverflow.co/2023/)
 
 
-\* These documentation searches do not cover all sub-sites. Contributions to improve them are welcome.
+\* Does not cover all sub-sites. Contributions to fix are welcome.
 
 ## Extra Utilities
 - `col`: named CSS colors
@@ -3414,7 +3415,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>807968C5-83D0-4F80-8188-636A8D536DBE</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>11</integer>
+			<integer>6</integer>
 			<key>note</key>
 			<string>named CSS colors</string>
 			<key>xpos</key>
@@ -3634,8 +3635,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
-			<key>note</key>
-			<string>window information</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>

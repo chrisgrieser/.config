@@ -22,9 +22,7 @@ function run() {
 		.map((ruleInfo) => {
 			let [id, name] = ruleInfo.split("\r");
 			id = id.match(/id="(.*?)"/)[1];
-			name = name.includes("href")
-				? name.match(/href="(.*?)\/"/)[1]
-				: name.match(/>(.*?)<.*/)[1];
+			name = name.includes("href") ? name.match(/href="(.*?)\/"/)[1] : name.match(/>(.*?)<.*/)[1];
 			const displayName = name.replace(/-/g, " ");
 
 			const url = ruffRulesUrl + name + "/";
