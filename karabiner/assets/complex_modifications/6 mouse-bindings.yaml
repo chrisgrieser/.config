@@ -33,24 +33,9 @@ rules:
               - Hammerspoon
               - "[Nn]eovide"
               - "[Ff]actorio"
-      # prevent accidental quitting
-      - type: basic
-        from: { pointing_button: button3 }
-        to:
-          - { key_code: w, modifiers: [command] }
-        conditions:
-          - type: frontmost_application_if
-            file_paths: [BetterTouchTool, Hammerspoon]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 4 (bottom)"
     manipulators:
-      # Obsidian: Back (like browser)
-      - type: basic
-        from: { pointing_button: button4 }
-        to:
-          - { key_code: left_arrow, modifiers: [command, option] }
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^md\.obsidian$] }
       # Mimestream: Delete
       - type: basic
         from: { pointing_button: button4 }
@@ -83,42 +68,15 @@ rules:
                 end tell'
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com\.apple\.finder$] }
+      # Fallback: back
+      - type: basic
+        from: { pointing_button: button4 }
+        to:
+          - { key_code: left_arrow, modifiers: [command, option] }
   #─────────────────────────────────────────────────────────────────────────────
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 5 (top)"
     manipulators:
-      # held-down: universal-search
-      - type: basic
-        from: { pointing_button: button5 }
-        to_if_alone:
-          - pointing_button: button5
-        conditions:
-          - type: frontmost_application_unless
-            bundle_identifiers:
-              - ^com\.brave\.Browser$
-              - ^com\.apple\.Safari$
-              - ^com\.apple\.finder$
-              - ^com\.mimestream\.Mimestream$
-              - ^net\.highlightsapp\.universal$
-              - ^org\.hammerspoon\.Hammerspoon$
-              - ^md\.obsidian$
-        to_if_held_down:
-          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.ddgr"'
-      # Browser & Finder & Hammerspoon: Close Window
-      - type: basic
-        from: { pointing_button: button5 }
-        to_if_alone:
-          - { key_code: w, modifiers: [command] }
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.brave\.Browser$
-              - ^com\.apple\.Safari$
-              - ^com\.apple\.finder$
-              - ^org\.hammerspoon\.Hammerspoon$
-              - ^md\.obsidian$
-        to_if_held_down:
-          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.ddgr"'
       # Highlights: Yellow Highlight
       - type: basic
         from: { pointing_button: button5 }
@@ -126,17 +84,24 @@ rules:
           - { key_code: h, modifiers: [command, control] }
           - { key_code: "3", modifiers: [command, control] }
           - shell_command: "osascript -e 'display notification \"Tool\" with title \"Yellow Highlight \U0001F7E8\"'"
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }
         to_if_held_down:
           - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.ddgr"'
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }
       # Archive in Mimestream
       - type: basic
         from: { pointing_button: button5 }
         to_if_alone:
           - key_code: e
+        to_if_held_down:
+          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.ddgr"'
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }
+      # Fallback behavior: Close Window
+      - type: basic
+        from: { pointing_button: button5 }
+        to_if_alone:
+          - { key_code: w, modifiers: [command] }
         to_if_held_down:
           - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.ddgr"'
   #─────────────────────────────────────────────────────────────────────
