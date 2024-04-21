@@ -15,16 +15,6 @@ app.includeStandardAdditions = true;
  * @property {{name: string, count: number, slug: string}[]} types
  */
 
-/** @type {Record<string, string>} */
-const keywordLanguageMap = {
-	js: "javascript",
-	ts: "typescript",
-	py: "python~3.12",
-	lua: "lua~5.4",
-	hs: "hammerspoon",
-	make: "gnu_make",
-};
-
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} url @return {string} */
@@ -42,19 +32,28 @@ function camelCaseMatch(str) {
 	return [subwords, camelCaseSeparated, fullword, str].join(" ") + " ";
 }
 
+/** @param {string} path */
+function readFile(path) {
+	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
+	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
+	return ObjC.unwrap(str);
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const keyword = $.getenv("alfred_workflow_keyword");
-	const language = keywordLanguageMap[keyword] || keyword;
-	const indexUrl = `https://documents.devdocs.io/${language}/index.json`;
+	const keywordLanguageMap = JSON.parse(readFile("./devdocs/keyword-lang-map.json"));
+	const language = keywordLanguageMap[keyword];
+	const iconpath = `./devdocs/icons/${keyword}.png`;
 
+	const indexUrl = `https://documents.devdocs.io/${language}/index.json`;
 	/** @type {DevDocsIndex} */
 	const response = JSON.parse(httpRequest(indexUrl));
+
 	const items = response.entries.map((entry) => {
 		const url = `https://devdocs.io/${language}/${entry.path}`;
-		const iconpath = `./icons-for-devdocs-langs/${keyword}.png`;
 
 		/** @type{AlfredItem} */
 		const item = {
@@ -68,8 +67,6 @@ function run() {
 		return item;
 	});
 
-	return JSON.stringify({
-		items: items,
-		// cache: { seconds: 60 * 60 * 24, loosereload: true }, TODO
-	});
+	// CAVEAT cannot use Alfred cache, since it would cache results for different keywords
+	return JSON.stringify({ items: items });
 }
