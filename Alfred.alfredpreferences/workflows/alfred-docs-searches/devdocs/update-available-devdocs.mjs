@@ -1,8 +1,6 @@
 #!/usr/bin/env node
-
 // @ts-nocheck
 import fs from "node:fs";
-
 //──────────────────────────────────────────────────────────────────────────────
 
 const shortHands = {
@@ -10,25 +8,25 @@ const shortHands = {
 	typescript: "ts",
 	python: "py",
 	hammerspoon: "hs",
-	markdown: "md",
 };
 
 // to be run from repo root
 const paths = {
 	infoPlist: "./info.plist",
-	keywordSlugMap: "./devdocs/keyword-slug-map.json",
+	keywordSlugMap: "./.github/keyword-slug-map.json",
 };
 
 //──────────────────────────────────────────────────────────────────────────────
 
-async function main() {
+async function run() {
 	const response = await fetch("https://devdocs.io/docs.json");
+	const json = await response.json();
 
 	// convert to hashmap to remove duplicates
 	const allLangs = {};
 	const noneItem = "<array> <string>-----</string> <string></string> </array>";
 	const infoPlistPopup = [noneItem];
-	for (const lang of await response.json()) {
+	for (const lang of json) {
 		// langs json
 		const id = lang.slug.replace(/~.*/, "");
 		const keyword = shortHands[id] || id;
@@ -65,4 +63,4 @@ async function main() {
 	fs.writeFileSync(paths.infoPlist, xmlLines.join("\n"));
 }
 
-await main();
+await run();
