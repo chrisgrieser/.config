@@ -8,12 +8,22 @@ app.includeStandardAdditions = true;
 // All available languages: https://devdocs.io/docs.json
 // Search Index: https://documents.devdocs.io/javascript/index.json
 // Data: https://documents.devdocs.io/javascript/db.json
-// (source: https://github.com/luckasRanarison/nvim-devdocs)
+// However, all these seem undocumented. (source: https://github.com/luckasRanarison/nvim-devdocs)
 
 /** @typedef {Object} DevDocsIndex
  * @property {{name: string, path: string, type: string}[]} entries
  * @property {{name: string, count: number, slug: string}[]} types
  */
+
+/** @type {Record<string, string>} */
+const keywordLanguageMap = {
+	js: "javascript",
+	ts: "typescript",
+	py: "python~3.12",
+	lua: "lua~5.4",
+	hs: "hammerspoon",
+	make: "gnu_make",
+};
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -23,14 +33,6 @@ function httpRequest(url) {
 	const data = $.NSData.dataWithContentsOfURL(queryURL);
 	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
 }
-
-/** @type {Record<string, string>} */
-const keywordLanguageMap = {
-	js: "javascript",
-	ts: "typescript",
-	py: "python~3.12",
-	lua: "lua~5.4",
-};
 
 /** @param {string} str */
 function camelCaseMatch(str) {
@@ -52,12 +54,14 @@ function run() {
 	const response = JSON.parse(httpRequest(indexUrl));
 	const items = response.entries.map((entry) => {
 		const url = `https://devdocs.io/${language}/${entry.path}`;
+		const iconpath = `./icons-for-devdocs-langs/${keyword}.png`;
 
 		/** @type{AlfredItem} */
 		const item = {
 			title: entry.name,
 			subtitle: entry.type,
 			match: camelCaseMatch(entry.name),
+			icon: { path: iconpath },
 			arg: url,
 			uid: url,
 		};
