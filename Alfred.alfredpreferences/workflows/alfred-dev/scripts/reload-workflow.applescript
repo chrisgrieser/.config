@@ -6,6 +6,7 @@ on run argv
 
 	# reopen last keyword
 	tell application id "com.runningwithcrayons.Alfred" to search
+	delay 0.3
 	tell application "System Events" to key code 126 # up
 
 	return workflowUid # pass back for notification

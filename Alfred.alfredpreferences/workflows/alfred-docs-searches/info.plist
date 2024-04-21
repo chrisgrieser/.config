@@ -475,7 +475,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/dev-docs-search.js</string>
+				<string>devdocs/dev-docs-search.js</string>
 				<key>subtext</key>
 				<string>{var:keyword_1}, {var:keyword_2}, {var:keyword_3}, {var:keyword_4}, {var:keyword_5}, …</string>
 				<key>title</key>
@@ -1641,9 +1641,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>205</real>
+			<real>915</real>
 			<key>ypos</key>
-			<real>1045</real>
+			<real>1170</real>
 		</dict>
 		<key>2A6112DC-2A8A-447E-AE39-41898C4C5F8F</key>
 		<dict>
@@ -1750,9 +1750,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>205</real>
+			<real>915</real>
 			<key>ypos</key>
-			<real>1165</real>
+			<real>1290</real>
 		</dict>
 		<key>70C4F79D-D608-41A7-B2FF-723F59D79DDF</key>
 		<dict>
@@ -1920,9 +1920,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>refresh cache by reloading workflow</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>745</real>
 			<key>ypos</key>
-			<real>1085</real>
+			<real>1210</real>
 		</dict>
 		<key>F912A4EE-E269-4F06-87C3-7A08275A3D4F</key>
 		<dict>

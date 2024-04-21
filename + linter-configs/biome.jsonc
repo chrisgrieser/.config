@@ -25,7 +25,8 @@
 			"all": true,
 			"nursery": {
 				"all": true,
-				"noConsole": "off"
+				"noConsole": "off",
+				"noNodejsModules": "off"
 			},
 			"suspicious": {
 				"noConsoleLog": "off" // JXA does not allow `console.info`, so we need `console.log`
