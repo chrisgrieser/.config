@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 // @ts-nocheck
 import fs from "node:fs";
 
@@ -12,6 +13,12 @@ const shortHands = {
 	markdown: "md",
 };
 
+// to be run from repo root
+const paths = {
+	infoPlist: "./info.plist",
+	keywordSlugMap: "./devdocs/keyword-slug-map.json",
+};
+
 //──────────────────────────────────────────────────────────────────────────────
 
 async function main() {
@@ -19,7 +26,7 @@ async function main() {
 
 	// convert to hashmap to remove duplicates
 	const allLangs = {};
-	const noneItem = "<array> <string>[none]</string> <string></string> </array>";
+	const noneItem = "<array> <string>-----</string> <string></string> </array>";
 	const infoPlistPopup = [noneItem];
 	for (const lang of await response.json()) {
 		// langs json
@@ -34,17 +41,17 @@ async function main() {
 		infoPlistPopup.push(line);
 	}
 
-	fs.writeFileSync("keyword-slug-map.json", JSON.stringify(allLangs));
+	fs.writeFileSync(paths.keywordSlugMap, JSON.stringify(allLangs));
 
 	// update `info.plist` to insert all languages as options
 	/** @type {string[]} */
-	const xmlLines = fs.readFileSync("../info.plist", "utf8").split("\n");
+	const xmlLines = fs.readFileSync(paths.infoPlist, "utf8").split("\n");
 
 	// create multiple popups to select in Alfred config
 	const popupNumber = 20;
 	let newXmlLines = [];
 	for (let i = 1; i <= popupNumber; i++) {
-		const label = i === 1 ? "Enabled devdoc" : "";
+		const label = i === 1 ? "Enabled devdocs" : "";
 		newXmlLines = newXmlLines.concat([
 			"<dict> <key>config</key> <dict> <key>default</key> <string></string> <key>pairs</key> <array>",
 			...infoPlistPopup,
@@ -55,7 +62,7 @@ async function main() {
 	const start = xmlLines.indexOf("\t<key>userconfigurationconfig</key>") + 2;
 	const end = xmlLines.indexOf("\t</array>", start);
 	xmlLines.splice(start, end - start, ...newXmlLines);
-	fs.writeFileSync("../info.plist", xmlLines.join("\n"));
+	fs.writeFileSync(paths.infoPlist, xmlLines.join("\n"));
 }
 
 await main();

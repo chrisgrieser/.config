@@ -15,8 +15,6 @@ app.includeStandardAdditions = true;
  * @property {{name: string, count: number, slug: string}[]} types
  */
 
-//──────────────────────────────────────────────────────────────────────────────
-
 /** @param {string} url @return {string} */
 function httpRequest(url) {
 	const queryURL = $.NSURL.URLWithString(url);
@@ -63,6 +61,7 @@ function run() {
 			title: entry.name,
 			subtitle: entry.type,
 			match: camelCaseMatch(entry.name),
+			quicklookurl: url,
 			arg: url,
 			uid: url,
 		};
