@@ -1539,9 +1539,9 @@ end run</string>
 				<key>keyword</key>
 				<string>:docs-reload</string>
 				<key>subtext</key>
-				<string>Reload caches</string>
-				<key>text</key>
 				<string>{const:alfred_workflow_name}</string>
+				<key>text</key>
+				<string>Reload caches</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -1586,15 +1586,16 @@ A handful of documentation sites that are not included in DevDocs are made avail
 ---
 
 ## DevDocs
-In the configuration to the left, select the devdocs you'd like to search. The
+Enabled the devdocs you want to use in the workflow configuration. The
 enabled devdocs are searched by using the name as keyword, for example `angular
-foobar` to search the Angular DevDocs for "foobar".
+foobar` to search the Angular DevDocs for "foobar."
 
 A few common languages have short-hands noted in the popup selection, such as
 `js` for JavaScript. In this case, you use `js foobar` to search instead.
 
-For offline availability, [install the documentations as explained at the
-DevDocs](https://devdocs.io/offline).
+**Usage**
+- &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the documentation site.
+- &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy the URL of the documentation site to the clipboard.
 
 **Usage**
 - &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the documentation site.
@@ -1620,8 +1621,11 @@ DevDocs](https://devdocs.io/offline).
 - `sound`: Preview (pre-listen, technically) macOS System Sounds
 - Get the Uniform Type Identifier (UTI) of a selected file via the [Universal Action](https://www.alfredapp.com/help/workflows/triggers/universal-actions/)
 
-### Reload caches
-The search indexes that are *not* from DevDocs are cached. In case of a recent change to a documentation site, you can manually trigger refreshing the cache via the Alfred keyword `:docs-reload`.
+### Reload Caches
+The search indexes that are *not* from DevDocs are cached. In case of a recent
+change to a documentation site, you can manually trigger refreshing the cache
+via the Alfred keyword `:docs-reload`.
+
 
 ---
 
@@ -19688,7 +19692,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.0.0</string>
+	<string>2.0.3</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

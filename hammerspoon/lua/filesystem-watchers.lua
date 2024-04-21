@@ -71,6 +71,9 @@ M.pathw_fileHub = pathw(env.fileHub, function(paths, _)
 		elseif fileName:find("Inoreader Feeds .*%.xml") then
 			os.rename(filep, browserSettings .. "Inoreader Feeds.opml")
 			print("➡️ Inoreader backup")
+		elseif fileName == "devdocs.json" then
+			os.rename(filep, browserSettings .. "devdocs-settings.json")
+			print("➡️ DevDocs Settings backup")
 		end
 	end
 end):start()
