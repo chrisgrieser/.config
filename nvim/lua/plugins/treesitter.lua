@@ -20,6 +20,7 @@ return {
 				"javascript", -- some wrong indentation when using `o`
 				"typescript",
 				"gitrebase",
+				"yaml", -- wrong indentation in list continuation
 			},
 		},
 		matchup = {
