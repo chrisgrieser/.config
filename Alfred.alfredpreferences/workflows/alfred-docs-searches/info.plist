@@ -477,7 +477,7 @@
 				<key>scriptfile</key>
 				<string>devdocs/dev-docs-search.js</string>
 				<key>subtext</key>
-				<string>{var:keyword_1}, {var:keyword_2}, {var:keyword_3}, {var:keyword_4}, {var:keyword_5}, …</string>
+				<string></string>
 				<key>title</key>
 				<string>DevDocs</string>
 				<key>type</key>
@@ -1945,48 +1945,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string></string>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>dev docs site</string>
-			<key>label</key>
-			<string>Keyword 1</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>keyword_1</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string></string>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>dev docs site</string>
-			<key>label</key>
-			<string>Keyword 2</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>keyword_2</string>
-		</dict>
+<dict> <key>config</key> <dict> <key>default</key> <string></string> <key>pairs</key> <array>
+<array> <string>angular (Angular)</string> <string>angular</string> </array>
+				</array> </dict> <key>description</key> <string></string> <key>label</key> <string>Select languages</string> <key>type</key> <string>popupbutton</string> <key>variable</key> <string>keyword_1</string> </dict>
 	</array>
 	<key>version</key>
 	<string>1.16.0</string>
