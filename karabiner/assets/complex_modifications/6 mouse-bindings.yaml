@@ -49,11 +49,11 @@ rules:
         to_if_alone:
           - { key_code: "n", modifiers: [control, command] }
           - { key_code: "3", modifiers: [control, command] }
-          - shell_command: 'osascript -e ''display notification "Tool" with title "Comment ✏️ "'''
+          - shell_command: osascript -e 'display notification "Tool" with title "Comment ✏️ "'
         to_if_held_down:
           - { key_code: "u", modifiers: [control, command] }
           - { key_code: "1", modifiers: [control, command] }
-          - shell_command: 'osascript -e ''display notification "Tool" with title "Underline 🖍️"'''
+          - shell_command: osascript -e 'display notification "Tool" with title "Underline 🖍️"'
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [^net\.highlightsapp\.universal$]
@@ -68,11 +68,14 @@ rules:
                 end tell'
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com\.apple\.finder$] }
-      # Fallback: back
+      # Obsidian: back
       - type: basic
         from: { pointing_button: button4 }
         to:
           - { key_code: left_arrow, modifiers: [command, option] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [md\.obsidian] }
+      # INFO Fallback: keep button4 (= back button in browsers)
   #─────────────────────────────────────────────────────────────────────────────
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 5 (top)"
@@ -83,9 +86,12 @@ rules:
         to_if_alone:
           - { key_code: h, modifiers: [command, control] }
           - { key_code: "3", modifiers: [command, control] }
-          - shell_command: "osascript -e 'display notification \"Tool\" with title \"Yellow Highlight \U0001F7E8\"'"
+          - shell_command:
+              "osascript -e 'display notification \"Tool\" with title \"Yellow Highlight \U0001F7E8\"'"
         to_if_held_down:
-          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.ddgr"'
+          - shell_command:
+              osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger
+              "search-selection" in workflow "de.chris-grieser.ddgr"'
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }
       # Archive in Mimestream
@@ -94,7 +100,9 @@ rules:
         to_if_alone:
           - key_code: e
         to_if_held_down:
-          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.ddgr"'
+          - shell_command:
+              osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger
+              "search-selection" in workflow "de.chris-grieser.ddgr"'
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }
       # Fallback behavior: Close Window
@@ -103,7 +111,9 @@ rules:
         to_if_alone:
           - { key_code: w, modifiers: [command] }
         to_if_held_down:
-          - shell_command: osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "search-selection" in workflow "de.chris-grieser.ddgr"'
+          - shell_command:
+              osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger
+              "search-selection" in workflow "de.chris-grieser.ddgr"'
   #─────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 1+2 (simultaneously): Dictionary Lookup"
     manipulators:
@@ -124,6 +134,6 @@ rules:
     manipulators:
       - type: basic
         from:
-          simultaneous: [ { pointing_button: button6 } ]
+          simultaneous: [{ pointing_button: button6 }]
         to:
           - { key_code: tab, modifiers: [command] }
