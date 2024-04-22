@@ -249,6 +249,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>FDBFF042-F69F-40B2-81FA-362687A7835C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DCF4EDD9-4527-4C52-AA3F-15E342FF8009</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -831,6 +844,50 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>catch</string>
+				<key>subtext</key>
+				<string>Open Preferences</string>
+				<key>text</key>
+				<string>Catch</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>FDBFF042-F69F-40B2-81FA-362687A7835C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/open-catch-preferences.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>DCF4EDD9-4527-4C52-AA3F-15E342FF8009</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -1029,6 +1086,15 @@
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>DCF4EDD9-4527-4C52-AA3F-15E342FF8009</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>205</real>
+			<key>ypos</key>
+			<real>770</real>
+		</dict>
 		<key>E1F1F193-4BF3-42D0-A30E-784AC487FDA7</key>
 		<dict>
 			<key>xpos</key>
@@ -1073,6 +1139,15 @@
 			<real>840</real>
 			<key>ypos</key>
 			<real>385</real>
+		</dict>
+		<key>FDBFF042-F69F-40B2-81FA-362687A7835C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>770</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
