@@ -59,6 +59,11 @@ function getHackernewsPosts(oldItems) {
 			// filter out jobs
 			if (item._tags.some((tag) => tag === "job")) return acc;
 
+			// prevent app store URLs auto-open `App Store.app`
+			const externalUrlNotAppStore =
+				externalUrl && !externalUrl.startsWith("https://apps.apple.com/");
+			const quicklookUrl = externalUrlNotAppStore ? externalUrl : commentUrl;
+
 			// age & visitation icon
 			const postIsOld = oldUrls.includes(commentUrl);
 			// HACK since visitation status is only stored as icon, the only way to
@@ -82,7 +87,7 @@ function getHackernewsPosts(oldItems) {
 				title: visitationIcon + item.title,
 				subtitle: subtitle,
 				arg: commentUrl,
-				quicklookurl: externalUrl || commentUrl,
+				quicklookurl: quicklookUrl,
 				icon: { path: "hackernews.png" },
 				mods: {
 					cmd: { arg: "next" },
@@ -165,7 +170,11 @@ function getRedditPosts(subredditName, oldItems) {
 			const externalUrl = isOnReddit ? "" : item.url;
 			let postTypeIcon = "";
 			if (!isOnReddit) postTypeIcon = "🔗 ";
-			const quicklookUrl = externalUrl || commentUrl;
+
+			// prevent app store URLs auto-open `App Store.app`
+			const externalUrlNotAppStore =
+				externalUrl && !externalUrl.startsWith("https://apps.apple.com/");
+			const quicklookUrl = externalUrlNotAppStore ? externalUrl : commentUrl;
 
 			// age & visited icon
 			const postIsOld = oldUrls.includes(commentUrl);
