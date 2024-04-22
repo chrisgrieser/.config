@@ -13,12 +13,14 @@
 	<key>min_upvotes</key>
 	<string>5</string>
 	<key>pages_to_request</key>
-	<string>40</string>
+	<string>50</string>
 	<key>save_scroll_position</key>
 	<true/>
 	<key>subreddits</key>
-	<string>r/neovim
-r/macapps
+	<string>neovim
+macapps
 anime</string>
+	<key>use_old_reddit</key>
+	<true/>
 </dict>
 </plist>
