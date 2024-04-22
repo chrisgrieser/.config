@@ -65,7 +65,7 @@ function ..a {
 
 function gr {
 	local goto="$*"
-	[[ -z "$*" ]] && goto=$(dirs -p | head -n1) # no arg: goto last
+	[[ -z "$*" ]] && goto=$(dirs -p | sed -n '2p') # no arg: goto last (1st line = current)
 	goto="${goto/#\~/$HOME}"                    # resolve ~
 	cd "$goto" || return 1
 }
