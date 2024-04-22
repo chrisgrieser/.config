@@ -10,6 +10,12 @@
 	<string>jsdoc</string>
 	<key>keyword_12</key>
 	<string>ts</string>
+	<key>keyword_13</key>
+	<string>npm</string>
+	<key>keyword_14</key>
+	<string>pandas</string>
+	<key>keyword_15</key>
+	<string>node</string>
 	<key>keyword_2</key>
 	<string>py</string>
 	<key>keyword_3</key>
@@ -20,8 +26,6 @@
 	<string>lua</string>
 	<key>keyword_6</key>
 	<string>html</string>
-	<key>keyword_7</key>
-	<string>md</string>
 	<key>keyword_8</key>
 	<string>git</string>
 	<key>keyword_9</key>
