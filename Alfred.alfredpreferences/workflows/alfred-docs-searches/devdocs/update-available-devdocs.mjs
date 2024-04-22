@@ -3,19 +3,19 @@
 import fs from "node:fs";
 //──────────────────────────────────────────────────────────────────────────────
 
+// TODO find a database for this?
 const shortHands = {
 	javascript: "js",
 	typescript: "ts",
-	python: "py",
 	hammerspoon: "hs",
+	python: "py",
+	numpy: "np",
+	pandas: "pd",
+	markdown: "md",
 };
 
-// to be run from repo root
-const paths = {
-	infoPlist: "./info.plist",
-	keywordSlugMap: "./.github/keyword-slug-map.json",
-};
-
+//──────────────────────────────────────────────────────────────────────────────
+// INFO to be run from repo root
 //──────────────────────────────────────────────────────────────────────────────
 
 async function run() {
@@ -39,16 +39,19 @@ async function run() {
 		infoPlistPopup.push(line);
 	}
 
-	fs.writeFileSync(paths.keywordSlugMap, JSON.stringify(allLangs));
+	// create keyword-slug-map
+	if (!fs.existsSync("./.github/")) fs.mkdirSync("./.github/");
+	fs.writeFileSync("./.github/keyword-slug-map.json", JSON.stringify(allLangs));
 
 	// update `info.plist` to insert all languages as options
 	/** @type {string[]} */
-	const xmlLines = fs.readFileSync(paths.infoPlist, "utf8").split("\n");
+	const xmlLines = fs.readFileSync("./info.plist", "utf8").split("\n");
 
 	// create multiple popups to select in Alfred config
-	const popupNumber = 20;
+	const numberOfPopups = 40;
+
 	let newXmlLines = [];
-	for (let i = 1; i <= popupNumber; i++) {
+	for (let i = 1; i <= numberOfPopups; i++) {
 		const label = i === 1 ? "Enabled devdocs" : "";
 		const number = i.toString().padStart(2, "0");
 
@@ -59,11 +62,10 @@ async function run() {
 		]);
 	}
 
-	// {var:keyword_01}||{var:keyword_02}||{var:keyword_03}||{var:keyword_04}||{var:keyword_05}||{var:keyword_06}||{var:keyword_07}||{var:keyword_08}||{var:keyword_09}||{var:keyword_10}||{var:keyword_11}||{var:keyword_12}||{var:keyword_13}||{var:keyword_14}||{var:keyword_15}||{var:keyword_16}||{var:keyword_17}||{var:keyword_18}||{var:keyword_19}||{var:keyword_20}
 	const start = xmlLines.indexOf("\t<key>userconfigurationconfig</key>") + 2;
 	const end = xmlLines.indexOf("\t</array>", start);
 	xmlLines.splice(start, end - start, ...newXmlLines);
-	fs.writeFileSync(paths.infoPlist, xmlLines.join("\n"));
+	fs.writeFileSync("./info.plist", xmlLines.join("\n"));
 }
 
 await run();

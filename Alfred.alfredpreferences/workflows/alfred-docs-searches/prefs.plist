@@ -2,33 +2,31 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>keyword_1</key>
+	<key>keyword_01</key>
 	<string>js</string>
-	<key>keyword_10</key>
-	<string>bash</string>
-	<key>keyword_11</key>
-	<string>jsdoc</string>
-	<key>keyword_12</key>
+	<key>keyword_02</key>
 	<string>ts</string>
-	<key>keyword_13</key>
+	<key>keyword_03</key>
 	<string>npm</string>
-	<key>keyword_14</key>
-	<string>pandas</string>
-	<key>keyword_15</key>
+	<key>keyword_04</key>
 	<string>node</string>
-	<key>keyword_2</key>
-	<string>py</string>
-	<key>keyword_3</key>
-	<string>hs</string>
-	<key>keyword_4</key>
-	<string>css</string>
-	<key>keyword_5</key>
-	<string>lua</string>
-	<key>keyword_6</key>
+	<key>keyword_05</key>
+	<string>jsdoc</string>
+	<key>keyword_06</key>
+	<string>moment</string>
+	<key>keyword_07</key>
 	<string>html</string>
-	<key>keyword_8</key>
+	<key>keyword_08</key>
+	<string>css</string>
+	<key>keyword_12</key>
+	<string>py</string>
+	<key>keyword_13</key>
+	<string>np</string>
+	<key>keyword_14</key>
+	<string>pd</string>
+	<key>keyword_19</key>
 	<string>git</string>
-	<key>keyword_9</key>
-	<string>jq</string>
+	<key>keyword_20</key>
+	<string>lua</string>
 </dict>
 </plist>
