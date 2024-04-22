@@ -16,7 +16,6 @@ rules:
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
-              - ^org\.chromium\.Chromium$
               - ^com\.brave\.Browser$
               - ^com\.apple\.Safari$
   #─────────────────────────────────────────────────────────────────────────────
