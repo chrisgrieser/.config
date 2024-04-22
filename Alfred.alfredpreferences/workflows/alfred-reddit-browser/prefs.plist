@@ -20,7 +20,5 @@
 	<string>neovim
 macapps
 anime</string>
-	<key>use_old_reddit</key>
-	<true/>
 </dict>
 </plist>

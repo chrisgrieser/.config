@@ -4,6 +4,17 @@
 <dict>
 	<key>customSites</key>
 	<dict>
+		<key>3E15C132-29BC-4928-9B38-5755966C1047</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>ai</string>
+			<key>text</key>
+			<string>Perplexity: {query}</string>
+			<key>url</key>
+			<string>https://www.perplexity.ai/search?s=o&amp;q={query}</string>
+		</dict>
 		<key>4D6D1B09-18D7-48A8-AE60-25F748E25BE0</key>
 		<dict>
 			<key>enabled</key>
@@ -26,6 +37,17 @@
 			<key>url</key>
 			<string>steam://openurl/https://store.steampowered.com/search/?term={query}</string>
 		</dict>
+		<key>8B9CDD80-A215-4C45-A4AA-36E352DB90E1</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>ai</string>
+			<key>text</key>
+			<string>Phind: {query}</string>
+			<key>url</key>
+			<string>https://www.phind.com/search?q={query}</string>
+		</dict>
 		<key>8C706788-4EB2-4B38-A8C8-D03C7DEA8A1F</key>
 		<dict>
 			<key>enabled</key>
@@ -36,6 +58,17 @@
 			<string>Kickass Torrents: {query}</string>
 			<key>url</key>
 			<string>https://kickasstorrents.to/usearch/{query}</string>
+		</dict>
+		<key>91472C2C-734F-4060-A84D-17248EC15509</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>ai</string>
+			<key>text</key>
+			<string>ChatGPT: {query}</string>
+			<key>url</key>
+			<string>https://chat.openai.com?q={query}</string>
 		</dict>
 		<key>9A8A5D68-CFCD-4834-A82F-D1866C708FF3</key>
 		<dict>
@@ -58,6 +91,17 @@
 			<string>Chrome Extension Store</string>
 			<key>url</key>
 			<string>https://chrome.google.com/webstore/search/{query}</string>
+		</dict>
+		<key>BD7467C7-4203-4E89-9F2A-D5B2A42CBFFA</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>ai</string>
+			<key>text</key>
+			<string>CodeMate: {query}</string>
+			<key>url</key>
+			<string>https://codemate.bot/?q={query}</string>
 		</dict>
 		<key>CB53E08B-32B8-4062-98CC-5A36E97438A4</key>
 		<dict>
