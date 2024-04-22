@@ -22,7 +22,7 @@ function run() {
 		.split("\r")
 		.map((sdefPath) => {
 			const appPath = sdefPath.replace(/(.*\/.*?\.(?:app|osax))\/.*\.sdef/, "$1");
-			const appName = sdefPath.split("/").pop().slice(0, -5);
+			const appName = (sdefPath.split("/").pop()).slice(0, -5);
 			return {
 				title: appName,
 				subtitle: appPath,
