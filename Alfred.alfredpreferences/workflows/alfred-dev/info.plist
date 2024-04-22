@@ -311,7 +311,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string># disown, since this script is a process from Alfred itself
+				<string># disown, since this script itself is a child process of Alfred
 
 nohup ./scripts/restart-alfred.sh
 disown</string>

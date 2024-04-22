@@ -1,36 +1,32 @@
-# INFO leading space to ignore it in history due to `HIST_IGNORE_SPACE`
+# SHORTHANDS
+alias q=' exit' # INFO leading space to ignore it in history due to `HIST_IGNORE_SPACE`
 alias r=' exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
-alias q=' exit'
+alias cmd='command'
+alias spotify="spotify_player playback"
+alias ydl="yt-dlp"
+alias m="make"
 
-# added verbosity / safety
+# DEFAULTS
 alias mv='mv -vi'
 alias ln='ln -vwis'
 alias cp='cp -vi'
 alias rm='rm -I'
-
-# shorthands
-alias cmd='command'
-alias spotify="spotify_player playback"
-
-# make
-alias m="make"
 alias make='make --silent --warn-undefined-variables'
-
-# defaults
 alias grep='grep --color'
 alias mkdir='mkdir -p' # create intermediate directories
 alias curl='curl --progress-bar'
 alias tokei="tokei --compact --exclude='*.txt' --exclude='*.json'"
-function which { builtin which -a "$@" | bat --language=sh --wrap=character; } # colorized & showing all
 
-# dark-mode aware
-function bat {
+function which { # colorized & showing all
+	builtin which -a "$@" | bat --language=sh --wrap=character
+} 
+function bat { # dark-mode aware
 	local theme # list themes via `bat --list-themes`
 	theme="$(defaults read -g AppleInterfaceStyle &>/dev/null && echo "Dracula" || echo "Monokai Extended Light")"
 	command bat --theme="$theme" "$@"
 }
 
-# utils
+# UTILS
 alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
 alias bkp='zsh "$HOME/.config/+ utility-scripts/full-backup.sh"'
 alias bkp-repos='zsh "$HOME/.config/+ utility-scripts/backup-my-repos.sh"'
@@ -42,8 +38,7 @@ alias -g B='| bat'
 alias -g N='| wc -l | tr -d " "' # count lines
 alias -g L='| less'
 alias -g J='| fx'
-alias -g C='| pbcopy ; echo "Copied."' # copy
-alias P='pbpaste'                      # paste
+alias -g C='| pbcopy ; echo "Copied."' 
 
 # highlights for them
 ZSH_HIGHLIGHT_REGEXP+=(' G($| )' 'fg=magenta,bold')
@@ -52,6 +47,5 @@ ZSH_HIGHLIGHT_REGEXP+=(' B$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' N$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' L$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' J$' 'fg=magenta,bold')
-ZSH_HIGHLIGHT_REGEXP+=('^P ' 'fg=magenta,bold')
 
 #───────────────────────────────────────────────────────────────────────────────
