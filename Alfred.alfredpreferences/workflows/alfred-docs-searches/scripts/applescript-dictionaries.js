@@ -21,7 +21,7 @@ function run() {
 		`)
 		.split("\r")
 		.map((sdefPath) => {
-			const appPath = sdefPath.replace(/(.*\/.*?\.(?:app|osax))\/.*\.sdef/, "$1");
+			const appPath = sdefPath.replace(/(.*\/(.*?)\.(?:app|osax))\/.*\.sdef/, "$1");
 			const appName = app
 			return {
 				title: appName,
