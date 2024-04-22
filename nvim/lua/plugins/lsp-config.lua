@@ -5,7 +5,8 @@ local u = require("config.utils")
 ---mappings from https://github.com/williamboman/mason-lspconfig.nvim/blob/main/lua/mason-lspconfig/mappings/server.lua
 ---@type table<string, string>
 local lspToMasonMap = {
-	bashls = "bash-language-server",
+	autotools_ls = "autotools-language-server", -- LSP for Makefiles
+	bashls = "bash-language-server", -- also used for zsh
 	biome = "biome", -- ts/js/json linter/formatter
 	cssls = "css-lsp",
 	efm = "efm", -- linter integration, only used for shellcheck in zsh files
