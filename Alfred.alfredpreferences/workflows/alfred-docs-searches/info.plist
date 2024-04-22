@@ -1144,6 +1144,46 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>514BC53D-EF72-4C3B-8CEF-84CB3A4097BB</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>55D10DD5-0F5E-48C4-A62C-1DD1393DE0B8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1189,6 +1229,78 @@
 			<string>BE9F5DBB-FD56-4FB5-8D27-682A7E1D3BFA</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>sound</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/sounds-preview.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Preview macOS System Sounds</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>71F9A459-55CC-41D5-A1FA-4424B696D4E3</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<true/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>afplay "$1" &amp;</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>2A6112DC-2A8A-447E-AE39-41898C4C5F8F</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1285,118 +1397,6 @@
 			<string>D10E485C-BB78-4681-A267-D6B57E3E6EA3</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>514BC53D-EF72-4C3B-8CEF-84CB3A4097BB</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>55D10DD5-0F5E-48C4-A62C-1DD1393DE0B8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>sound</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/sounds-preview.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Preview macOS System Sounds</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>71F9A459-55CC-41D5-A1FA-4424B696D4E3</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<true/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>afplay "$1" &amp;</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>2A6112DC-2A8A-447E-AE39-41898C4C5F8F</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1664,7 +1664,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>925</real>
 			<key>ypos</key>
-			<real>1325</real>
+			<real>1155</real>
 		</dict>
 		<key>2A6112DC-2A8A-447E-AE39-41898C4C5F8F</key>
 		<dict>
@@ -1675,7 +1675,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>955</real>
 			<key>ypos</key>
-			<real>925</real>
+			<real>755</real>
 		</dict>
 		<key>321BD266-1E62-4C75-A792-85239F1268B0</key>
 		<dict>
@@ -1733,7 +1733,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>955</real>
 			<key>ypos</key>
-			<real>815</real>
+			<real>645</real>
 		</dict>
 		<key>55D10DD5-0F5E-48C4-A62C-1DD1393DE0B8</key>
 		<dict>
@@ -1742,7 +1742,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>1110</real>
 			<key>ypos</key>
-			<real>815</real>
+			<real>645</real>
 		</dict>
 		<key>582225D7-8F6C-468C-A212-86ACFA5F026C</key>
 		<dict>
@@ -1762,9 +1762,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>window information</string>
 			<key>xpos</key>
-			<real>740</real>
+			<real>730</real>
 			<key>ypos</key>
-			<real>1060</real>
+			<real>890</real>
 		</dict>
 		<key>5D0C789F-E59F-4435-8AB1-84CBA3CF65DC</key>
 		<dict>
@@ -1782,7 +1782,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>925</real>
 			<key>ypos</key>
-			<real>1445</real>
+			<real>1275</real>
 		</dict>
 		<key>70C4F79D-D608-41A7-B2FF-723F59D79DDF</key>
 		<dict>
@@ -1798,9 +1798,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>740</real>
+			<real>730</real>
 			<key>ypos</key>
-			<real>925</real>
+			<real>755</real>
 		</dict>
 		<key>807968C5-83D0-4F80-8188-636A8D536DBE</key>
 		<dict>
@@ -1865,7 +1865,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>1110</real>
 			<key>ypos</key>
-			<real>1060</real>
+			<real>890</real>
 		</dict>
 		<key>BC47E2C7-23EE-41BE-A060-FDA17224E6C0</key>
 		<dict>
@@ -1912,7 +1912,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>955</real>
 			<key>ypos</key>
-			<real>1060</real>
+			<real>890</real>
 		</dict>
 		<key>DD866690-B895-469A-936D-2A018AA4D25E</key>
 		<dict>
@@ -1921,7 +1921,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>1110</real>
 			<key>ypos</key>
-			<real>1185</real>
+			<real>1015</real>
 		</dict>
 		<key>E0497D01-2949-468B-B5C6-D6837344A30B</key>
 		<dict>
@@ -1939,9 +1939,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>refresh cache by reloading workflow</string>
 			<key>xpos</key>
-			<real>740</real>
+			<real>730</real>
 			<key>ypos</key>
-			<real>1365</real>
+			<real>1195</real>
 		</dict>
 		<key>F912A4EE-E269-4F06-87C3-7A08275A3D4F</key>
 		<dict>

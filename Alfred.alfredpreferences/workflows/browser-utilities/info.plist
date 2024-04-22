@@ -8,50 +8,11 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
-		<key>1809AA65-C45E-4D01-976D-F2A765BF6019</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>9C9521AF-BA6F-4442-BDE1-B6E220EAFED3</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>1F170814-90DD-485E-A861-757A4FD92606</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>6F3C1C68-F012-43DA-97ED-530C7CF22733</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>22CB563E-BB60-4576-932A-949771E94EAC</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>D57C54BB-2021-4A29-9242-12710A08D569</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>4DF1744A-10ED-4573-9F3C-69E0889CDA12</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>BFFDBA22-CF65-4C1A-BE4E-FE0B1FFC3E6B</string>
+				<string>C56343EE-3B55-46B4-928B-53277D5E63E8</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -116,37 +77,24 @@
 				<false/>
 			</dict>
 		</array>
-		<key>6F3C1C68-F012-43DA-97ED-530C7CF22733</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>4DF1744A-10ED-4573-9F3C-69E0889CDA12</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>9377EF23-556F-4273-A2A5-3714CA46B546</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>1B7FE114-DCC5-4243-8C64-D1D8DC1C0193</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>B420E59A-1B4A-418D-B29E-35104387F051</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>CE014993-DDE8-4A34-A31A-CEB9AC1C3E62</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C56343EE-3B55-46B4-928B-53277D5E63E8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>BFFDBA22-CF65-4C1A-BE4E-FE0B1FFC3E6B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -191,45 +139,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>D1765CC4-C76F-441D-ADC9-FE46B6582474</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>1809AA65-C45E-4D01-976D-F2A765BF6019</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>D57C54BB-2021-4A29-9242-12710A08D569</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>70CC6BAC-E608-471D-8D1F-AA16352ACAA0</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>DAB9CB52-6F51-4F04-8D44-5A6E614E1D23</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>CEB33852-35D5-460C-9635-820734885B4C</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -255,50 +164,6 @@
 			<string>73794C72-64EA-441F-BE9A-67FB5F1A885C</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>sw</string>
-				<key>subtext</key>
-				<string>Current Browser Tab</string>
-				<key>text</key>
-				<string>Switch to Safari</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>1F170814-90DD-485E-A861-757A4FD92606</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/open-tab-in-safari.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>6F3C1C68-F012-43DA-97ED-530C7CF22733</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -353,6 +218,42 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>tasksettings</key>
+				<dict/>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>C56343EE-3B55-46B4-928B-53277D5E63E8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>sw</string>
+				<key>subtext</key>
+				<string>Current Browser Tab</string>
+				<key>text</key>
+				<string>Switch to Safari</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>1F170814-90DD-485E-A861-757A4FD92606</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string>com.apple.Safari</string>
 				<key>skipqueryencode</key>
@@ -370,27 +271,6 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 			<string>BFFDBA22-CF65-4C1A-BE4E-FE0B1FFC3E6B</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>\n$</string>
-				<key>regexcaseinsensitive</key>
-				<false/>
-				<key>regexmultiline</key>
-				<false/>
-				<key>replacestring</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
-			<key>uid</key>
-			<string>4DF1744A-10ED-4573-9F3C-69E0889CDA12</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -414,60 +294,59 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
+				<key>browser</key>
 				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/bibitnow-trigger.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://archive.is/{query}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>1B7FE114-DCC5-4243-8C64-D1D8DC1C0193</string>
+			<string>31853D4F-3AE9-42E3-B553-89F48EFF2F96</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>paywall</string>
+				<key>subtext</key>
+				<string>Current Browser Tab</string>
+				<key>text</key>
+				<string>Skip Paywall</string>
+				<key>withspace</key>
 				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>0</integer>
-				<key>hotmod</key>
-				<integer>0</integer>
-				<key>hotstring</key>
-				<string></string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.brave.Browser</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>9377EF23-556F-4273-A2A5-3714CA46B546</string>
+			<string>B420E59A-1B4A-418D-B29E-35104387F051</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict/>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>CE014993-DDE8-4A34-A31A-CEB9AC1C3E62</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>type</key>
@@ -559,63 +438,6 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://archive.is/{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>31853D4F-3AE9-42E3-B553-89F48EFF2F96</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>paywall</string>
-				<key>subtext</key>
-				<string>Current Tab</string>
-				<key>text</key>
-				<string>Skip Paywall</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>B420E59A-1B4A-418D-B29E-35104387F051</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict/>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>CE014993-DDE8-4A34-A31A-CEB9AC1C3E62</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
 				<string>https://spaywall.com/search/{query}</string>
 			</dict>
 			<key>type</key>
@@ -625,232 +447,21 @@ osascript -l JavaScript ./scripts/installed-browser-extensions.js "$BROWSER_DEFA
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>ch</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Search Chrome Store: {query}</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>DAB9CB52-6F51-4F04-8D44-5A6E614E1D23</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://chrome.google.com/webstore/search/{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>CEB33852-35D5-460C-9635-820734885B4C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict>
-					<key>allow_empty</key>
-					<true/>
-				</dict>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>D57C54BB-2021-4A29-9242-12710A08D569</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>31</integer>
-				<key>hotmod</key>
-				<integer>1048576</integer>
-				<key>hotstring</key>
-				<string>O</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.brave.Browser</string>
-					<string>com.apple.Safari</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>22CB563E-BB60-4576-932A-949771E94EAC</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>obsidian://slurp?url={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>70CC6BAC-E608-471D-8D1F-AA16352ACAA0</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-				<key>triggerid</key>
-				<string>re-open-last-tab</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>D1765CC4-C76F-441D-ADC9-FE46B6582474</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string># get first URL from JSON
-# has to be done in Alfred, since Alfred environment variables are needed
-
-# small leeway getting lines 3-6, since line numbers sometimes shift
-echo -n "$(./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",')"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>1809AA65-C45E-4D01-976D-F2A765BF6019</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<true/>
-				<key>skipvarencode</key>
-				<true/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{var:url}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>9C9521AF-BA6F-4442-BDE1-B6E220EAFED3</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>1809AA65-C45E-4D01-976D-F2A765BF6019</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>355</real>
-			<key>ypos</key>
-			<real>985</real>
-		</dict>
-		<key>1B7FE114-DCC5-4243-8C64-D1D8DC1C0193</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>note</key>
-			<string>trigger bibItNow download</string>
-			<key>xpos</key>
-			<real>610</real>
-			<key>ypos</key>
-			<real>170</real>
-		</dict>
 		<key>1F170814-90DD-485E-A861-757A4FD92606</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>9</integer>
+			<integer>8</integer>
 			<key>note</key>
 			<string>Switch to Safari</string>
 			<key>xpos</key>
 			<real>455</real>
 			<key>ypos</key>
 			<real>30</real>
-		</dict>
-		<key>22CB563E-BB60-4576-932A-949771E94EAC</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>Slurp</string>
-			<key>xpos</key>
-			<real>465</real>
-			<key>ypos</key>
-			<real>515</real>
 		</dict>
 		<key>2A235ABB-A752-4BA6-8E00-11B868895742</key>
 		<dict>
@@ -859,7 +470,7 @@ echo -n "$(./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",
 			<key>xpos</key>
 			<real>805</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>270</real>
 		</dict>
 		<key>31853D4F-3AE9-42E3-B553-89F48EFF2F96</key>
 		<dict>
@@ -868,7 +479,7 @@ echo -n "$(./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",
 			<key>xpos</key>
 			<real>805</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>155</real>
 		</dict>
 		<key>3F6D1856-6639-4F2D-B0F7-35E5ED4CE866</key>
 		<dict>
@@ -878,17 +489,6 @@ echo -n "$(./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",
 			<real>305</real>
 			<key>ypos</key>
 			<real>270</real>
-		</dict>
-		<key>4DF1744A-10ED-4573-9F3C-69E0889CDA12</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>note</key>
-			<string>remove \n</string>
-			<key>xpos</key>
-			<real>775</real>
-			<key>ypos</key>
-			<real>60</real>
 		</dict>
 		<key>64E7E716-0427-41F0-844C-90D39ACC9152</key>
 		<dict>
@@ -910,24 +510,6 @@ echo -n "$(./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",
 			<key>ypos</key>
 			<real>245</real>
 		</dict>
-		<key>6F3C1C68-F012-43DA-97ED-530C7CF22733</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>xpos</key>
-			<real>610</real>
-			<key>ypos</key>
-			<real>30</real>
-		</dict>
-		<key>70CC6BAC-E608-471D-8D1F-AA16352ACAA0</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>805</real>
-			<key>ypos</key>
-			<real>515</real>
-		</dict>
 		<key>73794C72-64EA-441F-BE9A-67FB5F1A885C</key>
 		<dict>
 			<key>colorindex</key>
@@ -936,26 +518,6 @@ echo -n "$(./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",
 			<real>305</real>
 			<key>ypos</key>
 			<real>30</real>
-		</dict>
-		<key>9377EF23-556F-4273-A2A5-3714CA46B546</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>note</key>
-			<string>Download bibtex for Website</string>
-			<key>xpos</key>
-			<real>455</real>
-			<key>ypos</key>
-			<real>170</real>
-		</dict>
-		<key>9C9521AF-BA6F-4442-BDE1-B6E220EAFED3</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>515</real>
-			<key>ypos</key>
-			<real>985</real>
 		</dict>
 		<key>B420E59A-1B4A-418D-B29E-35104387F051</key>
 		<dict>
@@ -966,7 +528,7 @@ echo -n "$(./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",
 			<key>xpos</key>
 			<real>460</real>
 			<key>ypos</key>
-			<real>335</real>
+			<real>215</real>
 		</dict>
 		<key>B7B82F1A-97F8-490C-B4A4-5589FA869579</key>
 		<dict>
@@ -980,9 +542,18 @@ echo -n "$(./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",
 		<key>BFFDBA22-CF65-4C1A-BE4E-FE0B1FFC3E6B</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>9</integer>
+			<integer>8</integer>
 			<key>xpos</key>
-			<real>870</real>
+			<real>805</real>
+			<key>ypos</key>
+			<real>30</real>
+		</dict>
+		<key>C56343EE-3B55-46B4-928B-53277D5E63E8</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>620</real>
 			<key>ypos</key>
 			<real>30</real>
 		</dict>
@@ -1004,50 +575,7 @@ echo -n "$(./py3.sh chrom_history.py "" | sed 6q | grep -Eo "http.*" | tr -d '",
 			<key>xpos</key>
 			<real>625</real>
 			<key>ypos</key>
-			<real>335</real>
-		</dict>
-		<key>CEB33852-35D5-460C-9635-820734885B4C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>305</real>
-			<key>ypos</key>
-			<real>415</real>
-		</dict>
-		<key>D1765CC4-C76F-441D-ADC9-FE46B6582474</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>leader → shift+b via Karabiner
-
-BACKUP
-for when browser history search workflow updates</string>
-			<key>xpos</key>
-			<real>205</real>
-			<key>ypos</key>
-			<real>985</real>
-		</dict>
-		<key>D57C54BB-2021-4A29-9242-12710A08D569</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>635</real>
-			<key>ypos</key>
-			<real>515</real>
-		</dict>
-		<key>DAB9CB52-6F51-4F04-8D44-5A6E614E1D23</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>search store</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>415</real>
+			<real>215</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

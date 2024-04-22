@@ -232,8 +232,10 @@ rules:
         to:
           - shell_command: |
               osascript -e '
-                tell application id "com.runningwithcrayons.Alfred" to run trigger "re-open-last-tab" in workflow "com.apple.alfred.workflow.chromium-hist"
-              '
+                tell application "System Events" to tell process "Brave Browser" 
+                  set frontmost to true 
+                  click menu item "Reopen Closed Tab" of menu "File" of menu bar 1 
+                end tell'
           - *deactivate-leader
           - *remove-notice
 

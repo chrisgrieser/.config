@@ -5,10 +5,9 @@ tell application "System Events"
 			click
 			click menu item "Preferences…" of menu 1
 		end tell
-	end tell
 
-	-- Add new feed
-	delay 0.1
-	key code 48 -- tab
-	key code 49 -- spacebar
+		-- click "Add Feed" button
+		delay 0.5
+		click button 1 of group 1 of window 1
+	end tell
 end tell

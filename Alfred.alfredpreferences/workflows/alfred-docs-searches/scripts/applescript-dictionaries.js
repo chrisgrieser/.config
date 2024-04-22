@@ -2,10 +2,8 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
-
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	/** @type AlfredItem[] */
@@ -21,8 +19,8 @@ function run() {
 		`)
 		.split("\r")
 		.map((sdefPath) => {
-			const appPath = sdefPath.replace(/(.*\/(.*?)\.(?:app|osax))\/.*\.sdef/, "$1");
-			const appName = app
+			const appPath = sdefPath.replace(/(.*\/.*?\.(?:app|osax))\/.*\.sdef/, "$1");
+			const appName = appPath.replace(/.*\/(.*)\.app/, "$1");
 			return {
 				title: appName,
 				subtitle: appPath,
@@ -32,6 +30,6 @@ function run() {
 		});
 	return JSON.stringify({
 		items: appsWithDict,
-		// cache: { seconds: 1800 },
+		cache: { seconds: 1800, loosereload: true },
 	});
 }
