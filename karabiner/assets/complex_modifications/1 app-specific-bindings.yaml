@@ -239,7 +239,7 @@ rules:
   - description: "(Apps) Brave"
     manipulators:
       # Toggle Vertical Tab Sidebar
-      # Require custom shortcuts set via brave://settings/system/shortcuts?search=vertical
+      # REQUIRED custom shortcuts set via brave://settings/system/shortcuts?search=vertical
       - type: basic
         from: { key_code: "1", modifiers: { mandatory: [command] } }
         to:
@@ -302,7 +302,7 @@ rules:
           - { key_code: c, modifiers: [shift, command] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^md\.obsidian$] }
-      # <D-s> -> <C-ü> remap (see obsidian-vimrc.vim)
+      # <D-s> -> <C-ü> remap (REQUIRED obsidian-vimrc.vim)
       - type: basic
         from: { key_code: s, modifiers: { mandatory: [command] } }
         to:

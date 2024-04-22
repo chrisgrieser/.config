@@ -27,23 +27,23 @@ async function run() {
 	const noneItem = "<array> <string>-----</string> <string></string> </array>";
 	const infoPlistPopup = [noneItem];
 	for (const lang of json) {
-		// langs json
+		// allLangs json -> keyword-slug-map
 		const id = lang.slug.replace(/~.*/, "");
 		const keyword = shortHands[id] || id;
 		if (allLangs[keyword]) continue; // do not add old versions of the same language
 		allLangs[keyword] = lang.slug;
 
-		// xml
+		// xml -> info.plist
 		const keywordInfo = keyword !== id ? ` (keyword: ${keyword})` : "";
 		const line = `<array> <string>${id}${keywordInfo}</string> <string>${keyword}</string> </array>`;
 		infoPlistPopup.push(line);
 	}
 
-	// create keyword-slug-map
+	// keyword-slug-map
 	if (!fs.existsSync("./.github/")) fs.mkdirSync("./.github/");
 	fs.writeFileSync("./.github/keyword-slug-map.json", JSON.stringify(allLangs));
 
-	// update `info.plist` to insert all languages as options
+	// info.plist: update to insert all languages as options
 	/** @type {string[]} */
 	const xmlLines = fs.readFileSync("./info.plist", "utf8").split("\n");
 

@@ -14,16 +14,18 @@
 	<string>jsdoc</string>
 	<key>keyword_06</key>
 	<string>moment</string>
-	<key>keyword_07</key>
-	<string>html</string>
 	<key>keyword_08</key>
 	<string>css</string>
+	<key>keyword_09</key>
+	<string>html</string>
 	<key>keyword_12</key>
 	<string>py</string>
 	<key>keyword_13</key>
 	<string>np</string>
 	<key>keyword_14</key>
 	<string>pd</string>
+	<key>keyword_18</key>
+	<string>jq</string>
 	<key>keyword_19</key>
 	<string>git</string>
 	<key>keyword_20</key>
