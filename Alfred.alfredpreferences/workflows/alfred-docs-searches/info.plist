@@ -95,6 +95,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>44939B35-A816-45E0-9F11-15719C16E886</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>093993C7-7C1F-4DEF-AD8F-D6BE78860096</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>514BC53D-EF72-4C3B-8CEF-84CB3A4097BB</key>
 		<array>
 			<dict>
@@ -148,6 +161,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>44939B35-A816-45E0-9F11-15719C16E886</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy as AppleScript</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>093993C7-7C1F-4DEF-AD8F-D6BE78860096</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -179,16 +202,6 @@
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>⌥: Copy path of sound file</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>E489F965-C095-477B-8922-AC21993EA238</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Copy `afplay` for sound file</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -342,19 +355,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>E489F965-C095-477B-8922-AC21993EA238</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>514BC53D-EF72-4C3B-8CEF-84CB3A4097BB</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -877,6 +877,14 @@
 			<integer>3</integer>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>44939B35-A816-45E0-9F11-15719C16E886</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
 				<key>browser</key>
@@ -1185,63 +1193,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>514BC53D-EF72-4C3B-8CEF-84CB3A4097BB</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>55D10DD5-0F5E-48C4-A62C-1DD1393DE0B8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>afplay "{query}" &amp;</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>E489F965-C095-477B-8922-AC21993EA238</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1334,6 +1285,46 @@
 			<string>D10E485C-BB78-4681-A267-D6B57E3E6EA3</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>514BC53D-EF72-4C3B-8CEF-84CB3A4097BB</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>55D10DD5-0F5E-48C4-A62C-1DD1393DE0B8</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1613,13 +1604,18 @@ A few common languages have short-hands noted in the popup selection, such as
 
 ### Utilities
 - `color`: named CSS colors
-- `keycode`: macOS keycodes
+- `keycode`: macOS keycodes 
+    + &lt;kbd&gt;⏎&lt;/kbd&gt;: Copy keycode
+    + &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy AppleScript
 - `appid`: app-id of installed macOS apps
 - `win`: window information for the frontmost app
 - `http`: HTTP status codes
 - `as`: AppleScript Dictionaries of installed apps
-- `sound`: Preview (pre-listen, technically) macOS System Sounds
-- Get the Uniform Type Identifier (UTI) of a selected file via the [Universal Action](https://www.alfredapp.com/help/workflows/triggers/universal-actions/)
+- `sound`: macOS System Sounds
+    + &lt;kbd&gt;⏎&lt;/kbd&gt;: Preview (technically: Pre-listen)
+    + &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy sound path
+- Get the Uniform Type Identifier (UTI) of a selected file via the [Universal
+  Action](https://www.alfredapp.com/help/workflows/triggers/universal-actions/)
 
 ### Reload Caches
 The search indexes that are *not* from DevDocs are cached. In case of a recent
@@ -1648,9 +1644,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>945</real>
+			<real>955</real>
 			<key>ypos</key>
-			<real>480</real>
+			<real>515</real>
 		</dict>
 		<key>147B74A7-0701-400F-9336-3E942E809AB8</key>
 		<dict>
@@ -1666,9 +1662,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>915</real>
+			<real>925</real>
 			<key>ypos</key>
-			<real>1170</real>
+			<real>1325</real>
 		</dict>
 		<key>2A6112DC-2A8A-447E-AE39-41898C4C5F8F</key>
 		<dict>
@@ -1677,9 +1673,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>afplay</string>
 			<key>xpos</key>
-			<real>945</real>
+			<real>955</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>925</real>
 		</dict>
 		<key>321BD266-1E62-4C75-A792-85239F1268B0</key>
 		<dict>
@@ -1712,6 +1708,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>44939B35-A816-45E0-9F11-15719C16E886</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>890</real>
+			<key>ypos</key>
+			<real>400</real>
+		</dict>
 		<key>49523985-C400-4D02-BB43-7505602D1A31</key>
 		<dict>
 			<key>colorindex</key>
@@ -1726,18 +1731,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>945</real>
+			<real>955</real>
 			<key>ypos</key>
-			<real>660</real>
+			<real>815</real>
 		</dict>
 		<key>55D10DD5-0F5E-48C4-A62C-1DD1393DE0B8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>1100</real>
+			<real>1110</real>
 			<key>ypos</key>
-			<real>660</real>
+			<real>815</real>
 		</dict>
 		<key>582225D7-8F6C-468C-A212-86ACFA5F026C</key>
 		<dict>
@@ -1757,9 +1762,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>window information</string>
 			<key>xpos</key>
-			<real>730</real>
+			<real>740</real>
 			<key>ypos</key>
-			<real>905</real>
+			<real>1060</real>
 		</dict>
 		<key>5D0C789F-E59F-4435-8AB1-84CBA3CF65DC</key>
 		<dict>
@@ -1775,9 +1780,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>915</real>
+			<real>925</real>
 			<key>ypos</key>
-			<real>1290</real>
+			<real>1445</real>
 		</dict>
 		<key>70C4F79D-D608-41A7-B2FF-723F59D79DDF</key>
 		<dict>
@@ -1793,9 +1798,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>730</real>
+			<real>740</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>925</real>
 		</dict>
 		<key>807968C5-83D0-4F80-8188-636A8D536DBE</key>
 		<dict>
@@ -1858,9 +1863,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>1100</real>
+			<real>1110</real>
 			<key>ypos</key>
-			<real>905</real>
+			<real>1060</real>
 		</dict>
 		<key>BC47E2C7-23EE-41BE-A060-FDA17224E6C0</key>
 		<dict>
@@ -1885,9 +1890,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>1095</real>
+			<real>1105</real>
 			<key>ypos</key>
-			<real>480</real>
+			<real>515</real>
 		</dict>
 		<key>D10E485C-BB78-4681-A267-D6B57E3E6EA3</key>
 		<dict>
@@ -1905,18 +1910,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>945</real>
+			<real>955</real>
 			<key>ypos</key>
-			<real>905</real>
+			<real>1060</real>
 		</dict>
 		<key>DD866690-B895-469A-936D-2A018AA4D25E</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>1100</real>
+			<real>1110</real>
 			<key>ypos</key>
-			<real>1030</real>
+			<real>1185</real>
 		</dict>
 		<key>E0497D01-2949-468B-B5C6-D6837344A30B</key>
 		<dict>
@@ -1927,17 +1932,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>415</real>
 		</dict>
-		<key>E489F965-C095-477B-8922-AC21993EA238</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>add `afplay`</string>
-			<key>xpos</key>
-			<real>885</real>
-			<key>ypos</key>
-			<real>690</real>
-		</dict>
 		<key>E9DFFC9E-499D-4967-9AE0-2E91C6CD57B0</key>
 		<dict>
 			<key>colorindex</key>
@@ -1945,9 +1939,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>refresh cache by reloading workflow</string>
 			<key>xpos</key>
-			<real>730</real>
+			<real>740</real>
 			<key>ypos</key>
-			<real>1210</real>
+			<real>1365</real>
 		</dict>
 		<key>F912A4EE-E269-4F06-87C3-7A08275A3D4F</key>
 		<dict>
@@ -37412,7 +37406,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.1.0</string>
+	<string>2.1.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

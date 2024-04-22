@@ -22,15 +22,16 @@ function run() {
 		.split("\r")
 		.map((sdefPath) => {
 			const appPath = sdefPath.replace(/(.*\/.*?\.(?:app|osax))\/.*\.sdef/, "$1");
-			const appName = (sdefPath.split("/").pop() || "").slice(0, -4);
+			const appName = sdefPath.split("/").pop().slice(0, -5);
 			return {
 				title: appName,
+				subtitle: appPath,
 				icon: { path: appPath, type: "fileicon" },
 				arg: sdefPath,
 			};
 		});
 	return JSON.stringify({
 		items: appsWithDict,
-		cache: { seconds: 1800 },
+		// cache: { seconds: 1800 },
 	});
 }
