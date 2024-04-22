@@ -123,20 +123,13 @@ function hs() {
 
 # file previewer
 function p {
-	file="$1"
-	ext=${file##*.}
-
-	case $ext in
-	"json" | "yml" | "yaml")
-		fx "$file"
-		;;
-	"gif" | "png" | "jpg" | "jpeg" | "webp" | "tiff" | "pdf" | "html")
-		qlmanage -p "$file"
-		;;
-	*)
-		bat "$file"
-		;;
-	esac
+	if [[ $(file --mime "$1") =~ text ]] ; then
+		bat "$1"
+	elif [[ $(file --mime "$1") =~ image ]] ; then
+		qlmanage -p "$1" &>/dev/null
+	else
+		file "$1"
+	fi
 }
 
 #───────────────────────────────────────────────────────────────────────────────
