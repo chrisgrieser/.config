@@ -549,7 +549,7 @@ disown</string>
 				<key>fixedorder</key>
 				<false/>
 				<key>items</key>
-				<string>[{"title":"📖 Workflow Docs","arg":"docs_search"},{"title":"📊 Data Folder","arg":"data_folder"},{"title":"🧹 Cache Folder","arg":"cache_folder"},{"title":"⚙️ Update Alfred Preference Icon","arg":"pref_icon"},{"title":"🔁 Reload Workflow","arg":"reload_workflow"},{"title":"❗️ Restart Alfred","arg":"restart"}]</string>
+				<string>[{"title":"📖 Search Workflow Docs","arg":"docs_search"},{"title":"📊 Open Data Folder","arg":"data_folder"},{"title":"🧹 Open Cache Folder","arg":"cache_folder"},{"title":"⚙️ Update \"Alfred Preferences.app\" icon","arg":"pref_icon"},{"title":"🔁 Reload a Workflow (and its cache)","arg":"reload_workflow"},{"title":"❗️ Restart Alfred","arg":"restart"}]</string>
 				<key>keyword</key>
 				<string>{var:alfred_keyword}</string>
 				<key>matchmode</key>
