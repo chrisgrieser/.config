@@ -122,17 +122,28 @@ function M.appendCommentAtEoL()
 	local placeHolderAtEnd = comStr:match("%%s$") ~= nil
 	local line = vim.api.nvim_get_current_line()
 	local emptyLine = line == ""
+	local lnum = vim.api.nvim_win_get_cursor(0)[1]
 	comStr = comStr:format("") -- remove placeholder
-	local padding = emptyLine and "" or " "
-	vim.api.nvim_set_current_line(line .. padding .. comStr)
+
+	-- if empty line, add indent of first non-blank line after cursor
+	local indent = ""
+	if emptyLine then
+		local i = lnum
+		local lastLine = vim.api.nvim_buf_line_count(0)
+		while vim.fn.getline(i) == "" and i < lastLine do
+			i = i + 1
+		end
+		indent = vim.fn.getline(i):match("^%s*")
+	end
+	local newLine = emptyLine and indent or line .. " "
+
+	vim.api.nvim_set_current_line(newLine .. comStr)
 
 	if placeHolderAtEnd then
 		vim.cmd.startinsert { bang = true }
 	else
-		local placeholderPos = vim.bo.commentstring:find("%%s")
-		if emptyLine then placeholderPos = placeholderPos - 1 end
-		local lnum = vim.api.nvim_win_get_cursor(0)[1]
-		local newCursorPos = { lnum, #line + placeholderPos }
+		local placeholderPos = vim.bo.commentstring:find("%%s") - 1
+		local newCursorPos = { lnum, #newLine + placeholderPos }
 		vim.api.nvim_win_set_cursor(0, newCursorPos)
 		vim.cmd.startinsert()
 	end
