@@ -85,12 +85,14 @@ async function updatePlugins() {
 	await app.plugins.checkForUpdates();
 
 	// Click "Update All" Button
-	const updateCount = Object.keys(app.plugins.updates).length;
-	if (updateCount > 0) {
-		app.setting.open();
-		app.setting.openTabById("community-plugins");
-		app.setting.activeTab.containerEl.findAll(".mod-cta").last().click();
-	}
+	setTimeout(() => { // timeout to avoid race condition still happening somehow
+		const updateCount = Object.keys(app.plugins.updates).length;
+		if (updateCount > 0) {
+			app.setting.open();
+			app.setting.openTabById("community-plugins");
+			app.setting.activeTab.containerEl.findAll(".mod-cta").last().click();
+		}
+	}, 500);
 }
 
 // biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin

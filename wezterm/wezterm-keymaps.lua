@@ -50,18 +50,21 @@ M.keys = {
 		mods = "CMD|SHIFT",
 		action = wt.action_callback(function(win, pane)
 			local paneCount = #pane:tab():panes()
+			local tabCount = #win:mux_window():tabs()
 			if paneCount > 1 then
 				win:perform_action(act.ActivatePaneDirection("Next"), pane)
 				win:perform_action(act.CloseCurrentPane { confirm = false }, pane)
-			else
-				win:toast_notification("WezTerm", "No other panes.", nil, 3000)
+			end
+			if tabCount > 1 then
+				win:perform_action(act.ActivateTabRelative(1), pane)
+				win:perform_action(act.CloseCurrentPane { confirm = false }, pane)
 			end
 		end),
 	},
 	{
 		key = "PageUp",
 		action = wt.action_callback(function(win, pane)
-			-- if TUI (such as fullscreen fzf), send key to TUI, 
+			-- if TUI (such as fullscreen fzf), send key to TUI,
 			-- otherwise scroll by page https://github.com/wez/wezterm/discussions/4101
 			if pane:is_alt_screen_active() then
 				win:perform_action(act.SendKey { key = "PageUp" }, pane)
@@ -73,7 +76,7 @@ M.keys = {
 	{
 		key = "PageDown",
 		action = wt.action_callback(function(win, pane)
-			if pane:is_alt_screen_active() then 
+			if pane:is_alt_screen_active() then
 				win:perform_action(act.SendKey { key = "PageDown" }, pane)
 			else
 				win:perform_action(act.ScrollByPage(0.8), pane)
