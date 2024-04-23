@@ -136,7 +136,9 @@ function M.appendCommentAtEoL()
 	end
 	local newLine = emptyLine and indent or line .. " "
 
-	vim.api.nvim_set_current_line(newLine .. comStr:gsub("%%s", ""))
+	comStr = comStr:gsub("%%s", "")
+	if not comStr:find(" $") then comStr = comStr .. " " end
+	vim.api.nvim_set_current_line(newLine .. comStr)
 
 	if placeHolderAtEnd then
 		vim.cmd.startinsert { bang = true }
