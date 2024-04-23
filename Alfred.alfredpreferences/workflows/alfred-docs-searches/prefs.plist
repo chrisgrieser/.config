@@ -30,5 +30,7 @@
 	<string>git</string>
 	<key>keyword_20</key>
 	<string>lua</string>
+	<key>keyword_21</key>
+	<string>hs</string>
 </dict>
 </plist>

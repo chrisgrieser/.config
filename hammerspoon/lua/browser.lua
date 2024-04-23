@@ -87,10 +87,14 @@ local config = {
 	chromeProfile = appSupport .. "Google/Chrome/",
 }
 
-local function syncBookmarks()
+local function syncBookmarks(flags)
+	-- GUARD prevent recursive trigger
+	local firstChange = flags[1].rootChanged
+	if not firstChange then return end
+
 	local bookmarks = hs.json.read(config.sourceBookmarks)
 	if not bookmarks then return end
-	hs.execute(("mkdir -p '%s'"):format(config.chromeProfile))
+	hs.fs.mkdir(config.chromeProfile)
 	local success =
 		hs.json.write(bookmarks, config.chromeProfile .. "/Default/Bookmarks", false, true)
 	if not success then
@@ -107,7 +111,9 @@ end
 
 -- sync on system start & when bookmarks are changed
 if u.isSystemStart() then syncBookmarks() end
-M.pathw_bookmarks = hs.pathwatcher.new(config.sourceBookmarks, syncBookmarks):start()
+M.pathw_bookmarks = hs.pathwatcher
+	.new(config.sourceBookmarks, function(_, flags) syncBookmarks(flags) end)
+	:start()
 
 --------------------------------------------------------------------------------
 return M

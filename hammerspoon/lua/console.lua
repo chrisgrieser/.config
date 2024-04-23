@@ -5,20 +5,33 @@ local u = require("lua.utils")
 
 local cons = hs.console
 local wf = hs.window.filter
+local aw = hs.application.watcher
 --------------------------------------------------------------------------------
 
 -- CONFIG
 -- CONSOLE APPEARANCE
 local baseFont = { name = env.codeFont, size = 22 }
-local darkRed = { red = 0.7, green = 0, blue = 0, alpha = 1 }
-local lightRed = { red = 1, green = 0, blue = 0, alpha = 1 }
-local darkYellow = { red = 0.7, green = 0.5, blue = 0, alpha = 1 }
-local lightYellow = { red = 1, green = 1, blue = 0, alpha = 1 }
-local white = { white = 0.9 }
-local black = { white = 0.1 }
-local darkGrey = { white = 0.45 }
-local lightGrey = { white = 0.55 }
 
+local function red(isDark)
+	if isDark then return { red = 0.7, green = 0, blue = 0 } end
+	return { red = 1, green = 0, blue = 0 }
+end
+local function yellow(isDark)
+	if isDark then return { red = 0.7, green = 0.5, blue = 0 } end
+	return { red = 1, green = 1, blue = 0 }
+end
+local function base(isDark)
+	if isDark then return { white = 0.9 } end
+	return { white = 0.1 }
+end
+local function grey(isDark)
+	if isDark then return { white = 0.45 } end
+	return { white = 0.55 }
+end
+local function blue(isDark)
+	if isDark then return { red = 0, green = 0.7, blue = 1 } end
+	return { red = 0, green = 0.1, blue = 0.5 }
+end
 -- CONSOLE SETTINGS
 cons.titleVisibility("hidden")
 cons.toolbar(nil)
@@ -36,12 +49,13 @@ I = hs.inspect
 local function cleanupConsole()
 	local consoleOutput = tostring(cons.getConsole())
 	cons.clearConsole()
-	local consoleLines = hs.fnutils.split(consoleOutput, "\n+")
-	if not consoleLines then return end
+	local lines = hs.fnutils.split(consoleOutput, "\n+")
+	if not lines then return end
 
-	-- remove some lines
-	local cleanLines = {}
-	for _, line in ipairs(consoleLines) do
+	local isDark = u.isDarkMode()
+
+	for _, line in ipairs(lines) do
+		-- remove some lines
 		local ignore = line:find("Loading extensions?: ")
 			or line:find("Lazy extension loading enabled$")
 			or line:find("Loading Spoon: RoundedCorners$")
@@ -50,36 +64,45 @@ local function cleanupConsole()
 			or line:find("%-%- Done%.$")
 			or line:find("wfilter: .* is STILL not registered") -- FIX https://github.com/Hammerspoon/hammerspoon/issues/3462
 
-		if not ignore then table.insert(cleanLines, line) end
-	end
+		if not ignore then
+			-- colorize
+			local timestamp, msg = line:match("(%d%d%d%d%-%d%d%-%d%d %d%d:%d%d:%d%d: )(.*)")
+			if not msg then msg = line end
+			local lmsg = msg:lower()
 
-	-- colorize certain messages
-	local isDark = u.isDarkMode()
-	for _, line in pairs(cleanLines) do
-		local color
-		if line:find("^> ") then -- user input
-			color = isDark and lightGrey or darkGrey
-		elseif line:lower():find("error") or line:lower():find("fatal") then
-			color = isDark and lightRed or darkRed
-		elseif
-			line:lower():find("warning")
-			or line:find("stack traceback")
-			or line:find("fail")
-			or line:lower():find("abort")
-		then
-			color = isDark and lightYellow or darkYellow
-		else
-			color = isDark and white or black
+			local color
+			if lmsg:find("^> ") then -- user input
+				color = blue(isDark)
+			elseif lmsg:find("error") or lmsg:find("fatal") then
+				color = red(isDark)
+			elseif lmsg:find("warning") or msg:find("stack traceback") or lmsg:find("abort") then
+				color = yellow(isDark)
+			else
+				color = base(isDark)
+			end
+
+			if timestamp then
+				msg = msg:gsub("^%s*", "")
+				local coloredLine = hs.styledtext.new(msg, { color = color, font = baseFont })
+				local time = hs.styledtext.new(timestamp, { color = grey(isDark), font = baseFont })
+				cons.printStyledtext(time, coloredLine)
+			else
+				local coloredLine = hs.styledtext.new(msg, { color = color, font = baseFont })
+				cons.printStyledtext(coloredLine)
+			end
 		end
-		local coloredLine = hs.styledtext.new(line, { color = color, font = baseFont })
-		cons.printStyledtext(coloredLine)
 	end
 end
 
 -- clean up console as soon as it is opened
-M.wf_hsConsole = wf.new("Hammerspoon"):subscribe(wf.windowFocused, function(win)
-	if win:title() == "Hammerspoon Console" then u.runWithDelays({ 0, 0.5 }, cleanupConsole) end
-end)
+M.wf_hsConsole = wf.new("Hammerspoon")
+	:subscribe(wf.windowFocused, function() u.runWithDelays(0.2, cleanupConsole) end)
+
+M.aw_hsConsole = aw.new(function(appName, eventType)
+	if eventType == aw.activated and appName == "Hammerspoon" then
+		u.runWithDelays(0.2, cleanupConsole)
+	end
+end):start()
 
 --------------------------------------------------------------------------------
 
@@ -99,11 +122,8 @@ end)
 M.timer_dailyConsoleSeparator = hs.timer
 	.doAt("00:00", "01d", function()
 		local date = os.date("%a, %d. %b")
-		print(
-			("\n-------------------------------- %s ------------------------------------\n"):format(
-				date
-			)
-		)
+		-- stylua: ignore
+		print(("\n----------------------------- %s ---------------------------------\n"):format(date))
 	end, true)
 	:start()
 
@@ -111,21 +131,15 @@ M.timer_dailyConsoleSeparator = hs.timer
 
 ---@param toMode "dark"|"light"
 function M.setConsoleColors(toMode)
-	if toMode == "dark" then
-		cons.darkMode(true)
-		cons.outputBackgroundColor(black)
-		cons.consolePrintColor(white)
-		cons.consoleCommandColor(lightGrey)
-	else
-		cons.darkMode(false)
-		cons.outputBackgroundColor(white)
-		cons.consolePrintColor(black)
-		cons.consoleCommandColor(darkGrey)
-	end
+	local isDark = toMode == "dark"
+	cons.outputBackgroundColor(base(not isDark))
+	cons.consolePrintColor(base(isDark))
+	cons.consoleCommandColor(blue(isDark))
+	cons.darkMode(isDark)
 end
 
 -- initialize
-if u.isSystemStart() then M.setConsoleColors(u.isDarkMode() and "dark" or "light") end
+M.setConsoleColors(u.isDarkMode() and "dark" or "light")
 
 --------------------------------------------------------------------------------
 return M
