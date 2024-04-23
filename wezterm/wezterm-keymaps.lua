@@ -45,7 +45,8 @@ M.keys = {
 			end
 		end),
 	},
-	{ -- HACK close next pane
+	-- HACK close next pane/tab (CAVEAT: due to race condition, impossible to close all others)
+	{
 		key = "w",
 		mods = "CMD|SHIFT",
 		action = wt.action_callback(function(win, pane)
