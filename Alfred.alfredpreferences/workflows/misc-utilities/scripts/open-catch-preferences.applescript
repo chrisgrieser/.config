@@ -3,7 +3,7 @@ tell application "System Events"
 	tell process "Catch"
 		tell menu bar item 1 of menu bar 1
 			click
-			click menu item "Preferences‚Ä¶" of menu 1
+			click menu item "Preferences…" of menu 1
 		end tell
 
 		-- click "Add Feed" button
