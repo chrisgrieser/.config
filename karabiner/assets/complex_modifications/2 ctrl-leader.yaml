@@ -169,7 +169,13 @@ rules:
         from: { key_code: i }
         conditions: [*leader-active]
         to:
-          - shell_command: open -a 'Reminders'
+          # open Smart List "Today"
+          - shell_command: |
+              osascript -e '
+                tell application "Reminders" to activate
+                tell application "System Events" to tell process "Reminders" 
+                  click menu item "Today" of menu of menu item "Go To" of menu "View" of menu bar 1 
+                end tell'
           - *deactivate-leader
           - *remove-notice
 

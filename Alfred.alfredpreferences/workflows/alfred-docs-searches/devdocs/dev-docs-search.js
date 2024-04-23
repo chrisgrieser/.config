@@ -15,6 +15,8 @@ app.includeStandardAdditions = true;
  * @property {{name: string, count: number, slug: string}[]} types
  */
 
+//──────────────────────────────────────────────────────────────────────────────
+
 /** @param {string} url @return {string} */
 function httpRequest(url) {
 	const queryURL = $.NSURL.URLWithString(url);
@@ -71,7 +73,7 @@ function run() {
 	return JSON.stringify({
 		items: items,
 		// BUG cannot use Alfred cache, since it would cache results for different keywords
-		// PENDING 
+		// PENDING https://www.alfredforum.com/topic/21754-wrong-alfred-55-cache-used-when-using-alternate-keywords-like-foobar/
 		// cache: {
 		// 	seconds: 3600 * 24,
 		// 	loosereload: true,

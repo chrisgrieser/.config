@@ -113,14 +113,29 @@ function M.docstring()
 end
 
 function M.appendCommentAtEoL()
-	if vim.bo.commentstring == "" then return end
+	local comStr = vim.bo.commentstring
+	if comStr == "" then
+		vim.notify("No commentstring for " .. vim.bo.ft, vim.log.levels.WARN)
+		return
+	end
 
-	local line = vim.api.nvim_get_current_line():gsub("%s+$", "")
-	local comStr = vim.bo.commentstring:format("")
-	local pad = line == "" and "" or " "
+	local placeHolderAtEnd = comStr:match("%%s$") ~= nil
+	local line = vim.api.nvim_get_current_line()
+	local emptyLine = line == ""
+	comStr = comStr:format("") -- remove placeholder
+	local padding = emptyLine and "" or " "
+	vim.api.nvim_set_current_line(line .. padding .. comStr)
 
-	vim.api.nvim_set_current_line(line .. pad .. comStr)
-	vim.cmd.startinsert { bang = true }
+	if placeHolderAtEnd then
+		vim.cmd.startinsert { bang = true }
+	else
+		local placeholderPos = vim.bo.commentstring:find("%%s")
+		if emptyLine then placeholderPos = placeholderPos - 1 end
+		local lnum = vim.api.nvim_win_get_cursor(0)[1]
+		local newCursorPos = { lnum, #line + placeholderPos }
+		vim.api.nvim_win_set_cursor(0, newCursorPos)
+		vim.cmd.startinsert()
+	end
 end
 
 --------------------------------------------------------------------------------
