@@ -9,7 +9,7 @@ local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
 function M.commentHr()
 	local comStr = vim.bo.commentstring
 	if comStr == "" then
-		vim.notify("Commentstring not set.", vim.log.levels.WARN)
+		vim.notify("No commentstring for " .. vim.bo.ft, vim.log.levels.WARN)
 		return
 	end
 
@@ -113,7 +113,7 @@ function M.docstring()
 end
 
 function M.appendCommentAtEoL()
-	local comStr = vim.bo.commentstring
+	local comStr = vim.bo.commentstring -- uses `%s` as placeholder for cursor
 	if comStr == "" then
 		vim.notify("No commentstring for " .. vim.bo.ft, vim.log.levels.WARN)
 		return
@@ -123,7 +123,6 @@ function M.appendCommentAtEoL()
 	local line = vim.api.nvim_get_current_line()
 	local emptyLine = line == ""
 	local lnum = vim.api.nvim_win_get_cursor(0)[1]
-	comStr = comStr:format("") -- remove placeholder
 
 	-- if empty line, add indent of first non-blank line after cursor
 	local indent = ""
@@ -137,7 +136,7 @@ function M.appendCommentAtEoL()
 	end
 	local newLine = emptyLine and indent or line .. " "
 
-	vim.api.nvim_set_current_line(newLine .. comStr)
+	vim.api.nvim_set_current_line(newLine .. comStr:gsub("%%s", ""))
 
 	if placeHolderAtEnd then
 		vim.cmd.startinsert { bang = true }

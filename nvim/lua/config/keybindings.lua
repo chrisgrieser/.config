@@ -84,7 +84,7 @@ keymap("i", "<Tab>", "<C-t>", { desc = "󰉵 indent line" })
 keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
 
 -- [O]pen new scope / brace
--- (remap to trigger auto-pairing plugin)
+-- (remap needed to trigger auto-pairing plugin)
 keymap("n", "<D-o>", "a{<CR>", { desc = " Open new scope", remap = true })
 keymap("i", "<D-o>", "{<CR>", { desc = " Open new scope", remap = true })
 
@@ -125,7 +125,7 @@ keymap(
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS
 
--- remapping of builtin text objects
+-- remapping of builtin text objects to use letters instead of punctuation
 for remap, original in pairs(u.textobjRemaps) do
 	keymap({ "o", "x" }, "i" .. remap, "i" .. original, { desc = "󱡔 inner " .. original })
 	keymap({ "o", "x" }, "a" .. remap, "a" .. original, { desc = "󱡔 outer " .. original })
