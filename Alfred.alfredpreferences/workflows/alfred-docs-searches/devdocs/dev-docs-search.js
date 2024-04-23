@@ -68,6 +68,13 @@ function run() {
 		return item;
 	});
 
-	// CAVEAT cannot use Alfred cache, since it would cache results for different keywords
-	return JSON.stringify({ items: items });
+	return JSON.stringify({
+		items: items,
+		// BUG cannot use Alfred cache, since it would cache results for different keywords
+		// PENDING 
+		// cache: {
+		// 	seconds: 3600 * 24,
+		// 	loosereload: true,
+		// },
+	});
 }
