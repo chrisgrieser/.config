@@ -37,7 +37,7 @@
   "nvim-dr-lsp": { "branch": "main", "commit": "ce2c674970785d37e7ddc8896ec9b3a02da69dd1" },
   "nvim-genghis": { "branch": "main", "commit": "01eeb090ea4947df6b6b9d8589b324b9f1aaf851" },
   "nvim-hlslens": { "branch": "main", "commit": "3e8fceb2b030100857ee72741a8f48c9a1d8595e" },
-  "nvim-lspconfig": { "branch": "master", "commit": "198a0c0d7aaa8542700c83986cf64f2a42c3eff5" },
+  "nvim-lspconfig": { "branch": "master", "commit": "f02bd54bf7be450efdbd045f8aab9264b449f222" },
   "nvim-notify": { "branch": "master", "commit": "5371f4bfc1f6d3adf4fe9d62cd3a9d44356bfd15" },
   "nvim-origami": { "branch": "main", "commit": "fc63e4d2900d5f069e6a9f754451f028fda4f6dd" },
   "nvim-puppeteer": { "branch": "main", "commit": "ea340595967919222f3ba5c6c6def0787a336c82" },
