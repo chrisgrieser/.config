@@ -10,11 +10,12 @@ local c = hs.caffeinate.watcher
 --------------------------------------------------------------------------------
 -- HELPERS
 
----@param targetMode string
-local function dockSwitcher(targetMode)
+---@param dockToUse string
+local function dockSwitcher(dockToUse)
 	local script = "../Alfred.alfredpreferences/workflows/dock-switcher/scripts/dock_switcher.sh"
-	local layoutDir = "../+ dock-layouts"
-	M.task_dockSwitching = hs.task.new(script, nil, { "--load", targetMode, layoutDir }):start()
+	hs.osascript.applescript(([[
+		tell application id "com.runningwithcrayons.Alfred" to run trigger "load-dock-layout" in workflow "de.chris-grieser.dock-switcher" with argument "test"	
+	]]):format(dockToUse))
 end
 
 local function setHigherBrightnessDuringDay()

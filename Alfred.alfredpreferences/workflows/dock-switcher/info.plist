@@ -12,21 +12,21 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>1CCD5F8D-0F96-4DBC-9F96-6151F8F1AC83</string>
+				<string>DFFAF151-97DD-46A4-9BBA-121DBBB5F800</string>
 				<key>modifiers</key>
-				<integer>0</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌘: Save layout</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>ED6A3DB9-66DD-4E49-AD25-7BA15024C688</string>
+				<string>C6A030D1-AA68-4B34-A73D-E32764229096</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Save</string>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -44,11 +44,37 @@
 				<false/>
 			</dict>
 		</array>
-		<key>ED6A3DB9-66DD-4E49-AD25-7BA15024C688</key>
+		<key>77B5FCE8-9806-4520-937D-6512E72DC3E8</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>71149DFC-88DE-4E74-9FDA-F9336F759485</string>
+				<string>C6A030D1-AA68-4B34-A73D-E32764229096</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C6A030D1-AA68-4B34-A73D-E32764229096</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1CCD5F8D-0F96-4DBC-9F96-6151F8F1AC83</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>DFFAF151-97DD-46A4-9BBA-121DBBB5F800</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1CCD5F8D-0F96-4DBC-9F96-6151F8F1AC83</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -71,25 +97,43 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>zsh "./scripts/dock_switcher.sh" --load "$1"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
+				<key>argument</key>
 				<string></string>
-				<key>type</key>
-				<integer>5</integer>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>mode</key>
+					<string>save</string>
+				</dict>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
-			<string>1CCD5F8D-0F96-4DBC-9F96-6151F8F1AC83</string>
+			<string>DFFAF151-97DD-46A4-9BBA-121DBBB5F800</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>71149DFC-88DE-4E74-9FDA-F9336F759485</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -123,7 +167,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/load-dock-layout.js</string>
+				<string>./scripts/select-dock-layout.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -143,46 +187,60 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>concurrently</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
 				<string></string>
-				<key>title</key>
-				<string>{query}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/dock_switcher.sh</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>71149DFC-88DE-4E74-9FDA-F9336F759485</string>
+			<string>1CCD5F8D-0F96-4DBC-9F96-6151F8F1AC83</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>mode</key>
+					<string>load</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>C6A030D1-AA68-4B34-A73D-E32764229096</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
+				<key>availableviaurlhandler</key>
 				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>zsh "./scripts/dock_switcher.sh" --save "$1"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
+				<key>triggerid</key>
+				<string>load-dock-layout</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.trigger.external</string>
 			<key>uid</key>
-			<string>ED6A3DB9-66DD-4E49-AD25-7BA15024C688</string>
+			<string>77B5FCE8-9806-4520-937D-6512E72DC3E8</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -198,34 +256,54 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>70</real>
+			<real>180</real>
 		</dict>
 		<key>1CCD5F8D-0F96-4DBC-9F96-6151F8F1AC83</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>220</real>
+			<real>315</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>180</real>
 		</dict>
 		<key>71149DFC-88DE-4E74-9FDA-F9336F759485</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>420</real>
+			<real>465</real>
 			<key>ypos</key>
-			<real>75</real>
+			<real>180</real>
 		</dict>
-		<key>ED6A3DB9-66DD-4E49-AD25-7BA15024C688</key>
+		<key>77B5FCE8-9806-4520-937D-6512E72DC3E8</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>335</real>
+		</dict>
+		<key>C6A030D1-AA68-4B34-A73D-E32764229096</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
+			<key>note</key>
+			<string>load</string>
 			<key>xpos</key>
-			<real>220</real>
+			<real>215</real>
 			<key>ypos</key>
-			<real>135</real>
+			<real>250</real>
+		</dict>
+		<key>DFFAF151-97DD-46A4-9BBA-121DBBB5F800</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>save</string>
+			<key>xpos</key>
+			<real>215</real>
+			<key>ypos</key>
+			<real>170</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
