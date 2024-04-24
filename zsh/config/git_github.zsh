@@ -319,7 +319,7 @@ copy to clipboard
 show file (bat)
 checkout commit"
 	decision=$(echo "$choices" |
-		fzf --bind="j:down,k:up" --no-sort --no-info --height="6" \
+		fzf --bind="j:down,k:up" --no-sort --no-info --height="7" \
 			--layout=reverse-list --header="j:↓  k:↑")
 
 	if [[ -z "$decision" ]]; then

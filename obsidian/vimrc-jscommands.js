@@ -85,7 +85,8 @@ async function updatePlugins() {
 	await app.plugins.checkForUpdates();
 
 	// Click "Update All" Button
-	setTimeout(() => { // timeout to avoid race condition still happening somehow
+	setTimeout(() => {
+		// timeout to avoid race condition still happening somehow
 		const updateCount = Object.keys(app.plugins.updates).length;
 		if (updateCount > 0) {
 			app.setting.open();
@@ -100,4 +101,11 @@ function openPluginDirectory() {
 	// biome-ignore lint/correctness/noUndeclaredVariables: passed by vimrc plugin
 	const app = view.app;
 	app.openWithDefaultApp(app.vault.configDir + "/plugins");
+}
+
+// biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
+function installPluginsFromPluginBrowser() {
+	// biome-ignore lint/correctness/noUndeclaredVariables: passed by vimrc plugin
+	const app = view.app;
+	app.workspace.protocolHandlers.get("show-plugin")({id: " "})
 }

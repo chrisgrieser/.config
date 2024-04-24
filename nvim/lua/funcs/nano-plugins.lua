@@ -162,7 +162,7 @@ function M.selectMake()
 end
 
 -- Increment or toggle if cursorword is true/false. Simplified implementation
--- of dial.nvim. (Requires `expr = true` for the keymap.)
+-- of dial.nvim. (REQUIRED `expr = true` for the keymap.)
 function M.toggleOrIncrement()
 	-- CONFIG
 	local bool = {
@@ -222,10 +222,11 @@ function M.gotoNextLspReferenceInFile()
 			results
 		)
 		if #resultsInFile < 2 then
-			vim.notify("Already at sole reference.", vim.log.levels.WARN)
+			vim.notify("Already at sole reference (in this file).", vim.log.levels.WARN)
 			return
 		end
 
+		---@param result {range: lsp.Range}
 		local function getPositions(result)
 			local line = result.range.start.line + 1
 			local colStart = result.range.start.character
@@ -233,7 +234,7 @@ function M.gotoNextLspReferenceInFile()
 			return line, colStart, colEnd
 		end
 
-		-- determine index of current cursorposition in list of results
+		-- determine index of current cursor-position in list of results
 		local curLine, curCol = unpack(vim.api.nvim_win_get_cursor(0))
 		local idx = 0
 		repeat
@@ -347,7 +348,7 @@ function M.gotoChangedFiles()
 	local nextFile = changedFiles[nextFileIndex]
 	vim.cmd.edit(nextFile.absPath)
 
-	-- notification
+	-- notification,
 	if not package.loaded["notify"] then return end
 	local icon = "" -- CONFIG
 	local listOfChangedFiles = {}
