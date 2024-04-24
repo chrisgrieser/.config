@@ -108,8 +108,7 @@ local function syncBookmarks(flags)
 	if not localState then return end
 	u.writeToFile(config.chromeProfile .. "/Local State", localState, false)
 
-	-- print("🔖 Bookmarks synced to Chrome Bookmarks")
-	u.notify("🔖 Bookmarks synced to Chrome Bookmarks")
+	print("🔖 Bookmarks synced to Chrome Bookmarks")
 end
 
 -- sync on system start & when bookmarks are changed

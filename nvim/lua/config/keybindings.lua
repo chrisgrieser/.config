@@ -39,9 +39,12 @@ keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
 -- Search
 keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = "Search IN sel" })
-keymap("n", "*", function ()
-	require("nano")lspReferencesAsterisk
-end, { desc = "Goto next reference" })
+keymap(
+	"n",
+	"*",
+	function() require("funcs.nano-plugins").lspReferencesAsterisk() end,
+	{ desc = "Goto next reference" }
+)
 
 -- Diagnostics
 keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
