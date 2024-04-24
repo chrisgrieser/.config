@@ -18,7 +18,7 @@ rules:
               info=$(spotify_player get key playback)
               artist=$(echo $info | yq ".item.artists[0].name")
               song=$(echo $info | yq ".item.name")
-              osascript -e "display notification \"$artist – $song\" with title \"Spotify\""
+              osascript -e "display notification \"$artist – $song\" with title \"💚 Liked\""
       - type: basic
         from: { key_code: f7 }
         to:

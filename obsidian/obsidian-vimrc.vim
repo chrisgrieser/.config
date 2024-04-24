@@ -279,6 +279,10 @@ nnoremap ,pp :updatePlugins
 exmap openPluginDirectory jsfile Meta/vimrc-jscommands.js { openPluginDirectory() }
 nnoremap ,pd :openPluginDirectory
 
+" install plugins
+exmap installPluginsFromPluginBrowser jsfile Meta/vimrc-jscommands.js { installPluginsFromPluginBrowser() }
+nnoremap ,pi :installPluginsFromPluginBrowser
+
 "───────────────────────────────────────────────────────────────────────────────
 " VISUAL MODE
 
