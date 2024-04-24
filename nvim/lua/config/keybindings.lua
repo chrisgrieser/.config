@@ -41,9 +41,9 @@ keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = "Search IN sel" })
 keymap(
 	"n",
-	"*",
-	function() require("funcs.nano-plugins").lspReferencesAsterisk() end,
-	{ desc = "Goto next reference" }
+	"Ü",
+	function() require("funcs.nano-plugins").gotoNextLspReferenceInFile() end,
+	{ desc = "󰒕 Goto next reference" }
 )
 
 -- Diagnostics
