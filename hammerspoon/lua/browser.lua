@@ -89,7 +89,7 @@ local config = {
 
 ---@param flags? {rootChanged: boolean}[]
 local function syncBookmarks(flags)
-	-- GUARD prevent recursive trigger
+	-- GUARD prevent recursive trigger when called from file-watcher
 	local noArg = flags == nil
 	local firstChange = flags and flags[1].rootChanged
 	if not firstChange and not noArg then return end
@@ -108,7 +108,10 @@ local function syncBookmarks(flags)
 	if not localState then return end
 	u.writeToFile(config.chromeProfile .. "/Local State", localState, false)
 
-	print("🔖 Bookmarks synced to Chrome Bookmarks")
+	-- TODO recently, it appears that every 10 min the watcher is triggered for
+	-- some reason. To avoid spam in the hammerspoon console, not logging this
+	-- here.
+	-- print("🔖 Bookmarks synced to Chrome Bookmarks")
 end
 
 -- sync on system start & when bookmarks are changed
