@@ -226,7 +226,7 @@ function M.lspReferencesAsterisk()
 		end
 
 		-- determine position in list
-		local function ()
+		local function (result)
 			
 		end
 		local curLine, curCol = unpack(vim.api.nvim_win_get_cursor(0))
