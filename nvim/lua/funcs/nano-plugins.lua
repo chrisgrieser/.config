@@ -182,7 +182,7 @@ function M.toggleOrIncrement()
 end
 
 -- 1. in addition to toggling case of letters, also toggls some common characters
--- 2. does not mvoe the cursor to the left, useful for vertical changes
+-- 2. does not move the cursor to the left, useful for vertical changes
 function M.betterTilde()
 	local toggleSigns = {
 		["'"] = '"',
@@ -207,6 +207,13 @@ function M.betterTilde()
 		normal("v~") -- (`v~` instead of `~h` so dot-repetition doesn't move cursor)
 	end
 end
+
+function M.lspReferencesAsterisk()
+	local params = require("vim.lsp.util").make_position_params()
+	vim.lsp.buf_request(0, "textDocument/references", params, nil)
+end
+
+--------------------------------------------------------------------------------
 
 function M.gotoProject()
 	-- CONFIG
@@ -243,8 +250,6 @@ function M.gotoProject()
 		end)
 	end
 end
-
---------------------------------------------------------------------------------
 
 function M.gotoChangedFiles()
 	local funcName = "Changed Files"
