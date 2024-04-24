@@ -439,7 +439,7 @@
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>440</real>
+			<real>430</real>
 			<key>ypos</key>
 			<real>325</real>
 		</dict>
@@ -448,7 +448,7 @@
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>595</real>
+			<real>615</real>
 			<key>ypos</key>
 			<real>325</real>
 		</dict>
@@ -531,7 +531,7 @@
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>765</real>
+			<real>790</real>
 			<key>ypos</key>
 			<real>395</real>
 		</dict>
@@ -540,7 +540,7 @@
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>765</real>
+			<real>790</real>
 			<key>ypos</key>
 			<real>270</real>
 		</dict>

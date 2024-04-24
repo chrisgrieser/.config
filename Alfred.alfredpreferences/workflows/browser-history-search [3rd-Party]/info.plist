@@ -286,6 +286,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>jumpto</key>
+				<string>alfred.action.url.openin</string>
+				<key>path</key>
+				<string>{var:url}</string>
+				<key>type</key>
+				<integer>2</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.actioninalfred</string>
+			<key>uid</key>
+			<string>27EF6551-081A-4BF3-AE2C-3279905CA7FA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -329,23 +346,6 @@
 			<string>D09358D1-C880-4E62-837E-6648A334152E</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>jumpto</key>
-				<string>alfred.action.url.openin</string>
-				<key>path</key>
-				<string>{var:url}</string>
-				<key>type</key>
-				<integer>2</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.actioninalfred</string>
-			<key>uid</key>
-			<string>27EF6551-081A-4BF3-AE2C-3279905CA7FA</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -430,25 +430,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{var:url}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>6F7CBD9B-C876-48E2-B00E-92F71C1609A5</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -513,6 +494,25 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>E420908F-C5F5-44DD-AB95-0B375998DC6F</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{var:url}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>6F7CBD9B-C876-48E2-B00E-92F71C1609A5</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>

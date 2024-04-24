@@ -1281,6 +1281,8 @@
 		</dict>
 		<key>E1F1F193-4BF3-42D0-A30E-784AC487FDA7</key>
 		<dict>
+			<key>note</key>
+			<string>click "call" button in notification</string>
 			<key>xpos</key>
 			<real>960</real>
 			<key>ypos</key>

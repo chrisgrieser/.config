@@ -44,11 +44,24 @@
 				<false/>
 			</dict>
 		</array>
-		<key>77B5FCE8-9806-4520-937D-6512E72DC3E8</key>
+		<key>67D5112C-3E28-4F59-81D9-8595E6616490</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>C6A030D1-AA68-4B34-A73D-E32764229096</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>77B5FCE8-9806-4520-937D-6512E72DC3E8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>67D5112C-3E28-4F59-81D9-8595E6616490</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -111,27 +124,6 @@
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>DFFAF151-97DD-46A4-9BBA-121DBBB5F800</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>71149DFC-88DE-4E74-9FDA-F9336F759485</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -210,6 +202,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>71149DFC-88DE-4E74-9FDA-F9336F759485</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argument</key>
 				<string></string>
 				<key>passthroughargument</key>
@@ -242,21 +255,53 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>silent</key>
+					<string>true</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>67D5112C-3E28-4F59-81D9-8595E6616490</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
-	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<string>## Usage
+Select a dock layout via the keyword `dock`.
+- &lt;kbd&gt;⏎&lt;/kbd&gt;: Load the layout
+- &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Save the current layout
+
+
+## Automation
+Load a dock layout from another app via this AppleScript:
+
+`tell application id "com.runningwithcrayons.Alfred" to run trigger "load-dock-layout" in workflow "de.chris-grieser.dock-switcher" with argument "NAME_OF_DOCK_LAYOUT"`
+
+
+---
+
+Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>15B1A722-85AB-4042-B9F7-B755D027674F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
-			<key>note</key>
-			<string>save or load dock layout</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>180</real>
+			<real>125</real>
 		</dict>
 		<key>1CCD5F8D-0F96-4DBC-9F96-6151F8F1AC83</key>
 		<dict>
@@ -265,7 +310,18 @@
 			<key>xpos</key>
 			<real>315</real>
 			<key>ypos</key>
+			<real>125</real>
+		</dict>
+		<key>67D5112C-3E28-4F59-81D9-8595E6616490</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>silent</string>
+			<key>xpos</key>
 			<real>180</real>
+			<key>ypos</key>
+			<real>310</real>
 		</dict>
 		<key>71149DFC-88DE-4E74-9FDA-F9336F759485</key>
 		<dict>
@@ -274,14 +330,16 @@
 			<key>xpos</key>
 			<real>465</real>
 			<key>ypos</key>
-			<real>180</real>
+			<real>125</real>
 		</dict>
 		<key>77B5FCE8-9806-4520-937D-6512E72DC3E8</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>335</real>
+			<real>280</real>
 		</dict>
 		<key>C6A030D1-AA68-4B34-A73D-E32764229096</key>
 		<dict>
@@ -292,7 +350,7 @@
 			<key>xpos</key>
 			<real>215</real>
 			<key>ypos</key>
-			<real>250</real>
+			<real>190</real>
 		</dict>
 		<key>DFFAF151-97DD-46A4-9BBA-121DBBB5F800</key>
 		<dict>
@@ -303,7 +361,7 @@
 			<key>xpos</key>
 			<real>215</real>
 			<key>ypos</key>
-			<real>170</real>
+			<real>115</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -331,7 +389,7 @@
 		</dict>
 	</array>
 	<key>version</key>
-	<string></string>
+	<string>0.9</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
