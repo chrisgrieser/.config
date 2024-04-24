@@ -22,6 +22,7 @@ M.aw_spotify = aw.new(function(appName, eventType)
 	if M.spotify_task and M.spotify_task:isRunning() then M.spotify_task:terminate() end
 
 	local action = eventType == aw.launched and "pause" or "play"
+	print("Spotify: " .. action)
 	local binary = env.homebrewPrefix .. "/bin/spotify_player"
 	M.spotify_task = hs.task.new(binary, nil, { "playback", action }):start()
 end):start()
@@ -142,7 +143,7 @@ M.wf_scripteditor = wf
 		if newWin:title() == "Open" then
 			hs.osascript.applescript('tell application "Script Editor" to make new document')
 
-		-- auto-paste and lint content; resize window
+		-- auto-paste and format content; resize window
 		elseif newWin:title() == "Untitled" then
 			wu.moveResize(newWin, wu.center)
 			local clipb = hs.pasteboard.getContents()
@@ -159,9 +160,10 @@ M.wf_scripteditor = wf
 	-- fix copypasting line breaks into other apps
 	:subscribe(wf.windowUnfocused, function()
 		local clipb = hs.pasteboard.getContents()
-		if not clipb then return end
-		clipb = clipb:gsub("\r", " \n")
-		hs.pasteboard.setContents(clipb)
+		if clipb then
+			clipb = clipb:gsub("\r", " \n")
+			hs.pasteboard.setContents(clipb)
+		end
 	end)
 
 --------------------------------------------------------------------------------
