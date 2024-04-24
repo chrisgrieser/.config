@@ -210,7 +210,38 @@ end
 
 function M.lspReferencesAsterisk()
 	local params = require("vim.lsp.util").make_position_params()
-	vim.lsp.buf_request(0, "textDocument/references", params, nil)
+	params.context = { includeDeclaration = true }
+	vim.lsp.buf_request(0, "textDocument/references", params, function(err, results, _, _)
+		if err then
+			vim.notify(err.message, vim.log.levels.WARN)
+			return
+		end
+		local resultsInFile = vim.tbl_filter(
+			function(result) return result.uri == vim.uri_from_bufnr(0) end,
+			results
+		)
+		if #resultsInFile < 2 then
+			vim.notify("Already at only reference.")
+			return
+		end
+
+		-- determine position in list
+		local function ()
+			
+		end
+		local curLine, curCol = unpack(vim.api.nvim_win_get_cursor(0))
+		local nextLine, nextColStart, nextColEnd = -1, -1, -1
+		for i = 1, #resultsInFile do
+			local isAtPos = curLine == nextLine and curCol >= nextColStart and curCol <= nextColEnd
+			nextLine = resultsInFile[i].range.start.line + 1
+			nextColStart = resultsInFile[i].range.start.character
+			nextColEnd = resultsInFile[i].range["end"].character
+			if isAtPos then break end
+		end
+		i = i + 1
+
+		vim.api.nvim_win_set_cursor(0, { nextLine, nextColStart })
+	end)
 end
 
 --------------------------------------------------------------------------------
