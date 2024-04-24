@@ -208,12 +208,13 @@ function M.betterTilde()
 	end
 end
 
-function M.lspReferencesAsterisk()
+function M.gotoNextLspReferenceInFile()
 	local params = require("vim.lsp.util").make_position_params()
 	params.context = { includeDeclaration = true }
+
 	vim.lsp.buf_request(0, "textDocument/references", params, function(err, results, _, _)
 		if err then
-			vim.notify(err.message, vim.log.levels.WARN)
+			vim.notify(err.message, vim.log.levels.ERROR)
 			return
 		end
 		local resultsInFile = vim.tbl_filter(
@@ -221,26 +222,29 @@ function M.lspReferencesAsterisk()
 			results
 		)
 		if #resultsInFile < 2 then
-			vim.notify("Already at only reference.")
+			vim.notify("Already at sole reference.", vim.log.levels.WARN)
 			return
 		end
 
-		-- determine position in list
-		local function (result)
-			
+		local function getPositions(result)
+			local line = result.range.start.line + 1
+			local colStart = result.range.start.character
+			local colEnd = result.range["end"].character
+			return line, colStart, colEnd
 		end
-		local curLine, curCol = unpack(vim.api.nvim_win_get_cursor(0))
-		local nextLine, nextColStart, nextColEnd = -1, -1, -1
-		for i = 1, #resultsInFile do
-			local isAtPos = curLine == nextLine and curCol >= nextColStart and curCol <= nextColEnd
-			nextLine = resultsInFile[i].range.start.line + 1
-			nextColStart = resultsInFile[i].range.start.character
-			nextColEnd = resultsInFile[i].range["end"].character
-			if isAtPos then break end
-		end
-		i = i + 1
 
-		vim.api.nvim_win_set_cursor(0, { nextLine, nextColStart })
+		-- determine index of current cursorposition in list of results
+		local curLine, curCol = unpack(vim.api.nvim_win_get_cursor(0))
+		local idx = 0
+		repeat
+			idx = idx + 1
+			local nextLine, nextColStart, nextColEnd = getPositions(resultsInFile[idx])
+			local isAtPos = curLine == nextLine and curCol >= nextColStart and curCol <= nextColEnd
+		until isAtPos
+
+		local nextIdx = math.fmod(idx, #resultsInFile) + 1 -- fmod = lua's modulo
+		local targetLine, targetCol, _ = getPositions(resultsInFile[nextIdx])
+		vim.api.nvim_win_set_cursor(0, { targetLine, targetCol })
 	end)
 end
 
