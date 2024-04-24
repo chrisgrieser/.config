@@ -12,9 +12,10 @@ local c = hs.caffeinate.watcher
 
 ---@param dockToUse string
 local function dockSwitcher(dockToUse)
-	local script = "../Alfred.alfredpreferences/workflows/dock-switcher/scripts/dock_switcher.sh"
 	hs.osascript.applescript(([[
-		tell application id "com.runningwithcrayons.Alfred" to run trigger "load-dock-layout" in workflow "de.chris-grieser.dock-switcher" with argument "test"	
+		tell application id "com.runningwithcrayons.Alfred"
+			run trigger "load-dock-layout" in workflow "de.chris-grieser.dock-switcher" with argument "%s"	
+		end tell
 	]]):format(dockToUse))
 end
 

@@ -1,15 +1,12 @@
 #!/usr/bin/env zsh
-layout="$1"
+# shellcheck disable=2154
 
-# shellcheck disable=2154 # Alfred var `mode` and `dock_layout_storage`
+layout="$1"
 if [[ ! -d "$dock_layout_storage" ]]; then
 	echo "⚠️ Layout storage directory does not exist."
 	return 1
 elif [[ -z "$layout" ]]; then
 	echo "⚠️ No layout to save given."
-	return 1
-elif [[ "$mode" != "load" && "$mode" != "save" ]]; then
-	echo "⚠️ Not a valid option."
 	return 1
 fi
 
@@ -28,9 +25,9 @@ if [[ "$mode" == "load" ]]; then
 	cp -a "$layout_file" "$dock_plist"
 	defaults import com.apple.dock "$dock_plist"
 	sleep 0.1
-	killall Dock
-	echo "✅ Loaded layout \"$layout\""
+	killall Dock # = reloads Dock
+	[[ -z "$silent" ]] && echo "✅ Loaded layout \"$layout\""
 elif [[ "$mode" == "save" ]]; then
 	cp -f "$dock_plist" "$layout_file"
-	echo "✅ Saved as \"$layout\""
+	[[ -z "$silent" ]] && echo "✅ Saved as \"$layout\""
 fi
