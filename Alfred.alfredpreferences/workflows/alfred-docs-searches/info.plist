@@ -1606,14 +1606,14 @@ A few common languages have short-hands noted in the popup selection, such as
 - `color`: named CSS colors
 - `keycode`: macOS keycodes 
     + &lt;kbd&gt;⏎&lt;/kbd&gt;: Copy keycode
-    + &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy AppleScript
+    + &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy AppleScript
 - `appid`: app-id of installed macOS apps
 - `win`: window information for the frontmost app
 - `http`: HTTP status codes
 - `as`: AppleScript Dictionaries of installed apps
 - `sound`: macOS System Sounds
     + &lt;kbd&gt;⏎&lt;/kbd&gt;: Preview (technically: Pre-listen)
-    + &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy sound path
+    + &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy sound path
 - Get the Uniform Type Identifier (UTI) of a selected file via the [Universal
   Action](https://www.alfredapp.com/help/workflows/triggers/universal-actions/)
 

@@ -39,15 +39,6 @@
     ],
     "prefix": ",,ts (Codeblock)"
   },
-  "<kbd>": {
-    "body": "<kbd>$0</kbd>",
-    "description": "HTML tag for keys",
-    "prefix": [
-      "kbd",
-      "<kbd>",
-      "key"
-    ]
-  },
   "Misc": {
     "body": "Miscellaneous",
     "prefix": "Misc"
@@ -102,6 +93,11 @@
     ],
     "description": "https://github.com/jonschlinkert/markdown-toc#tocinsert",
     "prefix": "insert toc"
+  },
+  "kbd": {
+    "body": "<kbd>$0</kbd>",
+    "description": "HTML tag for keys",
+    "prefix": "kbd"
   },
   "note (GitHub callout)": {
     "body": [
