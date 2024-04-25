@@ -257,7 +257,7 @@ nnoremap ,ut :fileRecovery
 nnoremap ,gd :fileRecovery
 
 " Open Console
-exmap toggleDevtools jscommand { electronWindow.openDevTools(); }
+exmap toggleDevtools jscommand { electronWindow.toggleDevTools(); }
 nmap ,l :toggleDevtools
 
 " pseudo-code-action: enhance URL with title
@@ -275,6 +275,10 @@ nnoremap ,A :rejectAll
 " Add [y]aml property
 exmap addProperty obcommand markdown:add-metadata-property
 nnoremap ,y :addProperty
+
+" add "[r]ead: true" property
+exmap addYamlKey jsfile Meta/vimrc-jscommands.js { addYamlKey("read", true) }
+nnoremap ,r :addYamlKey
 
 "───────────────────────────────────────────────────────────────────────────────
 " Plugin related bindings
@@ -432,17 +436,6 @@ exmap foldall obcommand editor:fold-all
 nnoremap zm :foldall
 nnoremap zz :foldall
 nnoremap zr :unfoldall
-
-" emulate nvim-origami's https://github.com/chrisgrieser/nvim-origami?tab=readme-ov-file#features
-" DOCS https://github.com/esm7/obsidian-vimrc-support/blob/master/JsSnippets.md
-" INFO needs to insert the vault-relative path to the jscommands file
-exmap origamiH jsfile Meta/vimrc-jscommands.js { origamiH() }
-nnoremap h :origamiH
-exmap origamiL jsfile Meta/vimrc-jscommands.js { origamiL() }
-nnoremap l :origamiL
-
-exmap addYamlKey jsfile Meta/vimrc-jscommands.js { addYamlKey("read", true) }
-nnoremap ,r :addYamlKey
 
 "───────────────────────────────────────────────────────────────────────────────
 " OPTION TOGGLING
