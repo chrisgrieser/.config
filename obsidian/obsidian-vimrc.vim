@@ -272,6 +272,12 @@ nnoremap ,a :acceptAll
 exmap rejectAll obcommand commentator:commentator-reject-all-suggestions
 nnoremap ,A :rejectAll
 
+" Add property
+
+
+"───────────────────────────────────────────────────────────────────────────────
+" Plugin related bindings
+
 exmap updatePlugins jsfile Meta/vimrc-jscommands.js { updatePlugins() }
 nnoremap ,pp :updatePlugins
 
