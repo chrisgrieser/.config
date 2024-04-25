@@ -7,8 +7,7 @@
  */
 // biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
 function addYamlKey(key, value) {
-	const editor = view.editor;
-	const /** @type {string[]} */ lines = editor.getValue().split("\n");
+	const lines = editor.getValue().split("\n");
 	const frontmatterEnd = lines.slice(1).findIndex((line) => line === "---") + 1;
 	if (frontmatterEnd === 0) {
 		new Notice("No frontmatter found.");
@@ -47,6 +46,7 @@ function toggleLineNumbers() {
 // biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
 async function updatePlugins() {
 	const app = view.app;
+
 	new Notice("Checking for updates…");
 	await app.plugins.checkForUpdates();
 

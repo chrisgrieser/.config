@@ -32,6 +32,7 @@
 			"$",
 			"dv", // dataview
 			"view", // vimrc jsfile
+			"editor",
 			"Notice" // Obsidian API (used for vimrc jsfile)
 		]
 	},
