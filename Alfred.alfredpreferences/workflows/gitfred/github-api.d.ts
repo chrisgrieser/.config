@@ -22,7 +22,7 @@ declare class GithubNotif {
 
 declare class GithubIssue {
 	title: string;
-	user: { login: string; };
+	user: { login: string };
 	state: string;
 	comments: number;
 	draft: boolean;
@@ -36,7 +36,7 @@ declare class GithubIssue {
 	// biome-ignore lint/style/useNamingConvention: not_by_me
 	repository_url: string;
 	// biome-ignore lint/style/useNamingConvention: not_by_me
-	pull_request: { merged_at?: string; };
+	pull_request: { merged_at?: string };
 	// biome-ignore lint/style/useNamingConvention: not_by_me
 	created_at: string;
 	// biome-ignore lint/style/useNamingConvention: not_by_me

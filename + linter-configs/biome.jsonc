@@ -1,5 +1,6 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.7.1/schema.json",
+	// use the schema from the local biome package installed via Mason
+	"$schema": "/Users/chrisgrieser/.local/share/nvim/mason/packages/biome/node_modules/@biomejs/biome/configuration_schema.json",
 	"vcs": {
 		"enabled": true,
 		"clientKind": "git",
@@ -12,7 +13,9 @@
 			"delay",
 			"Path",
 			"$",
-			"dv" // dataview
+			"dv", // dataview
+			"view", // vimrc jsfile
+			"Notice" // Obsidian API (used for vimrc jsfile)
 		]
 	},
 	"formatter": {
