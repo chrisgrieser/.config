@@ -245,7 +245,7 @@ exmap toggleBlockquote obcommand editor:toggle-blockquote
 nnoremap ,< :toggleBlockquote
 nnoremap ,> :toggleBlockquote
 
-exmap insertHr jsfile Meta/vimrc-jscommands.js { insertHr() }
+exmap insertHr jscommand { editor.replaceSelection("\n---\n"); }
 nnoremap qw :insertHr
 
 "───────────────────────────────────────────────────────────────────────────────
@@ -257,7 +257,7 @@ nnoremap ,ut :fileRecovery
 nnoremap ,gd :fileRecovery
 
 " Open Console
-exmap toggleDevtools jscommand { electronWindow.openDevTools() }
+exmap toggleDevtools jscommand { electronWindow.openDevTools(); }
 nmap ,l :toggleDevtools
 
 " pseudo-code-action: enhance URL with title
@@ -272,8 +272,9 @@ nnoremap ,a :acceptAll
 exmap rejectAll obcommand commentator:commentator-reject-all-suggestions
 nnoremap ,A :rejectAll
 
-" Add property
-
+" Add [y]aml property
+exmap addProperty obcommand markdown:add-metadata-property
+nnoremap ,y :addProperty
 
 "───────────────────────────────────────────────────────────────────────────────
 " Plugin related bindings

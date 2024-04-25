@@ -64,12 +64,6 @@ function toggleLineNumbers() {
 	vault.setConfig("showLineNumber", !vault.getConfig("showLineNumber"));
 }
 
-// biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
-function insertHr() {
-	const editor = view.editor;
-	editor.replaceSelection("\n---\n");
-}
-
 //──────────────────────────────────────────────────────────────────────────────
 
 // biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
