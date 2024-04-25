@@ -1,6 +1,10 @@
-// @ts-nocheck
 // DOCS https://github.com/esm7/obsidian-vimrc-support/blob/master/JsSnippets.md
 //──────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Universally unique identifier.
+ * @typedef {Object} Views
+ */
 
 // biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
 function origamiH() {
@@ -26,6 +30,10 @@ function origamiL() {
 
 //──────────────────────────────────────────────────────────────────────────────
 
+/**
+ * @param {string} key
+ * @param {any} value
+ */
 // biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
 function addYamlKey(key, value) {
 	// biome-ignore lint/correctness/noUndeclaredVariables: passed by vimrc plugin
@@ -93,7 +101,7 @@ async function updatePlugins() {
 			app.setting.openTabById("community-plugins");
 			app.setting.activeTab.containerEl.findAll(".mod-cta").last().click();
 		}
-	}, 500);
+	}, 1000);
 }
 
 // biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
@@ -107,5 +115,5 @@ function openPluginDirectory() {
 function installPluginsFromPluginBrowser() {
 	// biome-ignore lint/correctness/noUndeclaredVariables: passed by vimrc plugin
 	const app = view.app;
-	app.workspace.protocolHandlers.get("show-plugin")({id: " "})
+	app.workspace.protocolHandlers.get("show-plugin")({ id: " " });
 }

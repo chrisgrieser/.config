@@ -60,15 +60,17 @@ function update() {
 	brew upgrade
 	brew cleanup
 
-	# manually update, cause brew won't update as it is in theory self-upgrading
+	# manually update for installer version, cause brew won't update as the main
+	# app is self-upgrading
 	echo
 	brew upgrade obsidian
 
 	_print-section "Mac App Store"
 
 	# HACK -> PENDING https://github.com/mas-cli/mas/issues/512
-	mas outdated | grep -v "Highlights" | cut -f1 -d" " | xargs mas upgrade
 	# mas upgrade
+	mas_updates=$(mas outdated | grep -v "Highlights" | cut -f1 -d" " | xargs mas upgrade)
+	[[ -z "$mas_updates" ]] && echo "No MAS updates."
 
 	_print-section "Finish up"
 	# sketchybar needs restart for new persmission
