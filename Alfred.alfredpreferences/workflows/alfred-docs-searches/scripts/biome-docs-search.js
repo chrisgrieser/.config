@@ -15,15 +15,17 @@ function alfredMatcher(str) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const docsUrl = "https://api.github.com/repos/biomejs/biome/git/trees/main?recursive=1";
+	const docsUrl = "https://api.github.com/repos/biomejs/website/git/trees/main?recursive=1";
 	const baseUrl = "https://biomejs.dev";
-	const docPathRegex = /^website\/src\/content\/docs\/(.*)\.mdx?$/i;
+	const docPathRegex = /^src\/content\/docs\/(.*)\.mdx?$/i;
 
 	const workArray = JSON.parse(app.doShellScript(`curl -sL "${docsUrl}"`)).tree.map(
 		(/** @type {{ path: string; }} */ entry) => {
 			const path = entry.path;
+
 			// GUARD
-			const translatedDocs = path.includes("/zh-cn/") || path.includes("/ja/") || path.includes("/pt-br/");
+			const translatedDocs =
+				path.includes("/zh-cn/") || path.includes("/ja/") || path.includes("/pt-br/");
 			const isDocsSite = docPathRegex.test(path) && !path.endsWith("404.md");
 			if (translatedDocs || !isDocsSite) return {};
 
@@ -36,7 +38,7 @@ function run() {
 			if (subsite.endsWith("index")) {
 				title = category;
 				category = "";
-				url = `${baseUrl}/${subsite.slice(0, -5)}/`;
+				url = `${baseUrl}/${subsite.slice(0, -5)}`;
 			}
 
 			if (category.endsWith("rules")) {
