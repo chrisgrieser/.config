@@ -306,7 +306,7 @@ return {
 		"chrisgrieser/nvim-chainsaw",
 		init = function() u.leaderSubkey("l", " Log", { "n", "x" }) end,
 		opts = {
-			marker = "❗",
+			marker = "⭕",
 			logStatements = {
 				objectLog = {
 					-- repurposing objectLog for debugging via AppleScript notification
