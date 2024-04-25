@@ -1,28 +1,6 @@
 // DOCS https://github.com/esm7/obsidian-vimrc-support/blob/master/JsSnippets.md
 //──────────────────────────────────────────────────────────────────────────────
 
-// biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
-function origamiH() {
-	const editor = view.editor;
-	const isAtBoL = editor.getCursor().ch === 0;
-	const action = isAtBoL ? "toggleFold" : "goLeft";
-	editor.exec(action);
-}
-
-// biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
-function origamiL() {
-	const editor = view.editor;
-
-	const currentLn = editor.getCursor().line;
-	const folds = editor.getFoldOffsets();
-	const foldedLines = [...folds].map((offset) => editor.offsetToPos(offset).line);
-
-	const action = foldedLines.includes(currentLn) ? "toggleFold" : "goRight";
-	editor.exec(action);
-}
-
-//──────────────────────────────────────────────────────────────────────────────
-
 /**
  * @param {string} key
  * @param {boolean|string|number} value
