@@ -33,8 +33,6 @@ function addYamlKey(key, value) {
 	new Notice(msg);
 }
 
-//──────────────────────────────────────────────────────────────────────────────
-
 // biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
 function toggleLineNumbers() {
 	const vault = view.app.vault;
