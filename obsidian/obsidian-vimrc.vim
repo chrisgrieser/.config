@@ -257,7 +257,7 @@ nnoremap ,ut :fileRecovery
 nnoremap ,gd :fileRecovery
 
 " Open Console
-exmap toggleDevtools jscommand { }
+exmap toggleDevtools jscommand { electronWindow.openDevTools() }
 nmap ,l :toggleDevtools
 
 " pseudo-code-action: enhance URL with title
