@@ -144,7 +144,7 @@ local function cmpconfig()
 
 	-- CSS: FIX weird lag when inserting values
 	cmp.setup.filetype("css", {
-		mapping = {
+		mapping = cmp.mapping.preset.insert {
 			-- Next item, or trigger completion, or insert normal tab
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
