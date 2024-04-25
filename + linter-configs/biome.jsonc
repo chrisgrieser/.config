@@ -1,11 +1,28 @@
 {
-	// use the schema from the local biome package installed via Mason
-	"$schema": "/Users/chrisgrieser/.local/share/nvim/mason/packages/biome/node_modules/@biomejs/biome/configuration_schema.json",
-	"vcs": {
-		"enabled": true,
-		"clientKind": "git",
-		"useIgnoreFile": true
+	"linter": {
+		"rules": {
+			"all": true,
+			"nursery": {
+				"all": true,
+				"noConsole": "off",
+				"noNodejsModules": "off"
+			},
+			"suspicious": {
+				"noConsoleLog": "off" // JXA does not allow `console.info`, so we need `console.log`
+			},
+			"complexity": {
+				"noExcessiveCognitiveComplexity": "off", // sometimes useful
+				"useSimplifiedLogicExpression": "off" // complains about negated and-conditions
+			},
+			"style": {
+				"useBlockStatements": "off", // do not require braces for one-line-if statements
+				"useTemplate": "off", // too strict, simple concatenations are fine
+				"noParameterAssign": "off", // often useful
+				"useNamingConvention": { "level": "warn", "options": { "strictCase": false } }
+			}
+		}
 	},
+
 	"javascript": {
 		"globals": [
 			"ObjC", // JXA variables
@@ -23,27 +40,12 @@
 		"indentStyle": "tab",
 		"formatWithErrors": true
 	},
-	"linter": {
-		"rules": {
-			"all": true,
-			"nursery": {
-				"all": true,
-				"noConsole": "off",
-				"noNodejsModules": "off"
-			},
-			"suspicious": {
-				"noConsoleLog": "off" // JXA does not allow `console.info`, so we need `console.log`
-			},
-			"complexity": {
-				"noExcessiveCognitiveComplexity": "off",
-				"useSimplifiedLogicExpression": "off" // complains about negated and-conditions
-			},
-			"style": {
-				"useBlockStatements": "off",
-				"useTemplate": "off", // too strict, simple concatenations are fine
-				"noParameterAssign": "off",
-				"useNamingConvention": { "level": "warn", "options": { "strictCase": false } }
-			}
-		}
-	}
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+
+	// use the schema from the local biome package installed via Mason
+	"$schema": "/Users/chrisgrieser/.local/share/nvim/mason/packages/biome/node_modules/@biomejs/biome/configuration_schema.json"
 }
