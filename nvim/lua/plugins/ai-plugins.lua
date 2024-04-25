@@ -62,6 +62,7 @@ return {
 				TelescopePrompt = false,
 				DressingInput = false,
 				text = false, -- `pass` passwords are plaintext and should not be sent
+				css = false,
 			}
 			vim.g.codeium_disable_bindings = 1
 		end,
