@@ -257,7 +257,7 @@ nnoremap ,ut :fileRecovery
 nnoremap ,gd :fileRecovery
 
 " Open Console
-exmap toggleDevtools obcommand obsidian-theme-design-utilities:toggle-devtools
+exmap toggleDevtools jscommand { }
 nmap ,l :toggleDevtools
 
 " pseudo-code-action: enhance URL with title
