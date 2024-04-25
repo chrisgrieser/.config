@@ -1,17 +1,21 @@
 // INFO these are globally available in jsfiles used by the Obsidian vimrc plugin
 // see https://github.com/esm7/obsidian-vimrc-support?tab=readme-ov-file#jscommand---jsfunction
 
+declare type Editor = {
+	exec(action: string): void;
+	getCursor(): { ch: number; line: number };
+	getValue(): string;
+	setValue(value: string): void;
+	getFoldOffsets(): number[];
+	getLine(line: number): string;
+	replaceSelection(value: string): void;
+	offsetToPos(offset: number): { ch: number; line: number };
+};
+
+declare const editor: Editor;
+
 declare const view: {
-	editor: {
-		exec(action: string): void;
-		getCursor(): { ch: number; line: number };
-		getValue(): string;
-		setValue(value: string): void;
-		getFoldOffsets(): number[];
-		getLine(line: number): string;
-		replaceSelection(value: string): void;
-		offsetToPos(offset: number): { ch: number; line: number };
-	};
+	editor: Editor;
 	app: {
 		workspace: {
 			protocolHandlers: {
@@ -38,5 +42,5 @@ declare const view: {
 };
 
 declare class Notice {
-	constructor(msg: string);
+	constructor(msg: string, duration?: number);
 }
