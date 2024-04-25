@@ -61,15 +61,6 @@ local function cmpconfig()
 			completion = { border = vim.g.borderStyle, scrolloff = 2 },
 			documentation = { border = vim.g.borderStyle, scrolloff = 2 },
 		},
-		performance = {
-			-- defaults: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L18-L25
-			debounce = 30, -- reduced
-			throttle = 15, -- reduced
-			fetching_timeout = 300, -- reduced
-			confirm_resolve_timeout = 40, -- reduced
-			async_budget = 0.5, -- reduced
-			max_view_entries = 100, -- reduced
-		},
 		sorting = {
 			comparators = {
 				-- defaults: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L67-L78
@@ -90,7 +81,7 @@ local function cmpconfig()
 			["<PageDown>"] = cmp.mapping.scroll_docs(4),
 			["<C-e>"] = cmp.mapping.abort(),
 
-			-- manually triggering to only include LSP, useful for typed yaml/json
+			-- manually triggering to only include LSP, useful for typed yaml/json/css
 			["<D-c>"] = cmp.mapping.complete {
 				config = { sources = cmp.config.sources { { name = "nvim_lsp" } } },
 			},
@@ -149,6 +140,28 @@ local function cmpconfig()
 	}
 
 	-----------------------------------------------------------------------------
+	-- FILETYPE-SPECIFIC SETTINGS
+
+	-- CSS: FIX weird lag when inserting values
+	cmp.setup.filetype("css", {
+		mapping = {
+			-- Next item, or trigger completion, or insert normal tab
+			["<Tab>"] = cmp.mapping(function(fallback)
+				if cmp.visible() then
+					cmp.select_next_item()
+				else
+					fallback()
+				end
+			end, { "i", "s" }),
+			["<S-Tab>"] = cmp.mapping(function(fallback)
+				if cmp.visible() then
+					cmp.select_prev_item()
+				else
+					fallback()
+				end
+			end, { "i", "s" }),
+		}
+	})
 
 	-- LUA: disable annoying `--#region` suggestions
 	cmp.setup.filetype("lua", {
@@ -158,12 +171,11 @@ local function cmpconfig()
 		end,
 	})
 
-	-- SHELL: disable `\[` suggestions at EoL
-	cmp.setup.filetype("sh", {
+	-- LUA: disable annoying `--#region` suggestions
+	cmp.setup.filetype("lua", {
 		enabled = function()
-			local col = vim.fn.col(".") - 1
-			local charBefore = vim.api.nvim_get_current_line():sub(col, col)
-			return charBefore ~= "\\"
+			local line = vim.api.nvim_get_current_line()
+			return not (line:find("%s%-%-?$") or line:find("^%-%-?$"))
 		end,
 	})
 
