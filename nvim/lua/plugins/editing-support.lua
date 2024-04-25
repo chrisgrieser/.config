@@ -166,11 +166,6 @@ return {
 			}
 		end,
 	},
-	{ -- autopair, but for keywords
-		"RRethy/nvim-treesitter-endwise",
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		event = "InsertEnter",
-	},
 	{ -- auto-convert string and f/template string
 		"chrisgrieser/nvim-puppeteer",
 		ft = { "python", "javascript", "typescript", "lua" },
