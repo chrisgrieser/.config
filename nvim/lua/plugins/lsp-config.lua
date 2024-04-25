@@ -145,10 +145,7 @@ serverConfigs.cssls = {
 -- DOCS https://github.com/bmatcuk/stylelint-lsp#settings
 -- INFO still requires LSP installed via npm (not working with stylelint from mason)
 serverConfigs.stylelint_lsp = {
-	filetypes = {
-		-- "css",
-		"scss",
-	}, -- don't enable on js/ts, since I don't need it there
+	filetypes = { "css", "scss" }, -- don't enable on js/ts, since I don't need it there
 	settings = {
 		stylelintplus = { autoFixOnFormat = true },
 	},

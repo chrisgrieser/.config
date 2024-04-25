@@ -6,7 +6,7 @@ local defaultSources = {
 	{
 		name = "nvim_lsp",
 		entry_filter = function(entry, _)
-			-- using cmp-buffer for that
+			-- using cmp-buffer for this
 			return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
 		end,
 	},
@@ -88,15 +88,18 @@ local function cmpconfig()
 
 			-- Next item, or trigger completion, or insert normal tab
 			["<Tab>"] = cmp.mapping(function(fallback)
+				-- FIX lag when using `Insert` in css
+				local behavior = vim.bo.ft == "css" and "Select" or "Insert"
 				if cmp.visible() then
-					cmp.select_next_item()
+					cmp.select_next_item { behavior = cmp.SelectBehavior[behavior] }
 				else
 					fallback()
 				end
 			end, { "i", "s" }),
 			["<S-Tab>"] = cmp.mapping(function(fallback)
+				local behavior = vim.bo.ft == "css" and "Select" or "Insert"
 				if cmp.visible() then
-					cmp.select_prev_item()
+					cmp.select_prev_item { behavior = cmp.SelectBehavior[behavior] }
 				else
 					fallback()
 				end
@@ -140,36 +143,6 @@ local function cmpconfig()
 	}
 
 	-----------------------------------------------------------------------------
-	-- FILETYPE-SPECIFIC SETTINGS
-
-	-- CSS: FIX weird lag when inserting values
-	cmp.setup.filetype("css", {
-		mapping = cmp.mapping.preset.insert {
-			-- Next item, or trigger completion, or insert normal tab
-			["<Tab>"] = cmp.mapping(function(fallback)
-				if cmp.visible() then
-					cmp.select_next_item()
-				else
-					fallback()
-				end
-			end, { "i", "s" }),
-			["<S-Tab>"] = cmp.mapping(function(fallback)
-				if cmp.visible() then
-					cmp.select_prev_item()
-				else
-					fallback()
-				end
-			end, { "i", "s" }),
-		}
-	})
-
-	-- LUA: disable annoying `--#region` suggestions
-	cmp.setup.filetype("lua", {
-		enabled = function()
-			local line = vim.api.nvim_get_current_line()
-			return not (line:find("%s%-%-?$") or line:find("^%-%-?$"))
-		end,
-	})
 
 	-- LUA: disable annoying `--#region` suggestions
 	cmp.setup.filetype("lua", {
