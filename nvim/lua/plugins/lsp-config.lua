@@ -10,7 +10,6 @@ local lspToMasonMap = {
 	biome = "biome", -- ts/js/json linter/formatter
 	cssls = "css-lsp",
 	efm = "efm", -- linter integration, only used for shellcheck in zsh files
-	emmet_language_server = "emmet-language-server", -- css/html completions
 	jsonls = "json-lsp",
 	ltex = "ltex-ls", -- languagetool (natural language linter)
 	lua_ls = "lua-language-server",
@@ -121,14 +120,6 @@ serverConfigs.ruff_lsp = {
 --------------------------------------------------------------------------------
 -- CSS
 
--- DOCS https://github.com/olrtg/emmet-language-server#neovim
-serverConfigs.emmet_language_server = {
-	filetypes = { "html", "css", "scss" },
-	init_options = {
-		showSuggestionsAsSnippets = true, -- so it works with luasnip
-	},
-}
-
 -- DOCS
 -- https://github.com/sublimelsp/LSP-css/blob/master/LSP-css.sublime-settings
 -- https://github.com/microsoft/vscode-css-languageservice/blob/main/src/services/lintRules.ts
@@ -154,7 +145,10 @@ serverConfigs.cssls = {
 -- DOCS https://github.com/bmatcuk/stylelint-lsp#settings
 -- INFO still requires LSP installed via npm (not working with stylelint from mason)
 serverConfigs.stylelint_lsp = {
-	filetypes = { "css", "scss" }, -- don't enable on js/ts, since I don't need it there
+	filetypes = {
+		-- "css",
+		"scss",
+	}, -- don't enable on js/ts, since I don't need it there
 	settings = {
 		stylelintplus = { autoFixOnFormat = true },
 	},

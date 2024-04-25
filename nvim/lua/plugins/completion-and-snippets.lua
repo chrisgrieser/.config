@@ -49,10 +49,11 @@ local function cmpconfig()
 	local compare = require("cmp.config.compare")
 
 	cmp.setup {
+		-- TODO can remove in nvim 0.10
 		snippet = {
-			-- expand = function (args) vim.snippet.expand(args.body) end,
 			expand = function(args) require("luasnip").lsp_expand(args.body) end,
 		},
+
 		view = {
 			entries = { follow_cursor = true },
 		},
@@ -60,10 +61,19 @@ local function cmpconfig()
 			completion = { border = vim.g.borderStyle, scrolloff = 2 },
 			documentation = { border = vim.g.borderStyle, scrolloff = 2 },
 		},
+		performance = {
+			-- defaults: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L18-L25
+			debounce = 30, -- reduced
+			throttle = 15, -- reduced
+			fetching_timeout = 300, -- reduced
+			confirm_resolve_timeout = 40, -- reduced
+			async_budget = 0.5, -- reduced
+			max_view_entries = 100, -- reduced
+		},
 		sorting = {
 			comparators = {
-				-- Original order: https://github.com/hrsh7th/nvim-cmp/blob/538e37ba87284942c1d76ed38dd497e54e65b891/lua/cmp/config/default.lua#L65-L74
-				-- Definitions of compare function https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/compare.lua
+				-- defaults: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L67-L78
+				-- compare function https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/compare.lua
 				compare.offset,
 				compare.recently_used, -- higher
 				compare.score,
@@ -126,22 +136,11 @@ local function cmpconfig()
 				local maxLength = 50
 				if #item.abbr > maxLength then item.abbr = item.abbr:sub(1, maxLength) .. "…" end
 
-				-- distinguish emmet snippets
-				local ft = vim.bo[entry.context.bufnr].filetype
-				local isEmmet = entry.source.name == "nvim_lsp"
-					and item.kind == "Snippet"
-					and ft == "css"
-
 				-- set icons
 				-- stylua: ignore
 				local kindIcons = { Text = "", Method = "󰆧", Function = "󰊕", Constructor = "", Field = "󰇽", Variable = "󰂡", Class = "󰠱", Interface = "", Module = "", Property = "󰜢", Unit = "", Value = "󰎠", Enum = "", Keyword = "󰌋", Snippet = "󰅱", Color = "󰏘", File = "󰈙", Reference = "", Folder = "󰉋", EnumMember = "", Constant = "󰏿", Struct = "", Event = "", Operator = "󰆕", TypeParameter = "󰅲" }
-				if isEmmet then
-					item.menu = ""
-					item.kind = ""
-				else
-					item.kind = entry.source.name == "nvim_lsp" and kindIcons[item.kind] or ""
-					item.menu = sourceIcons[entry.source.name] .. " "
-				end
+				item.kind = entry.source.name == "nvim_lsp" and kindIcons[item.kind] or ""
+				item.menu = sourceIcons[entry.source.name] .. " "
 
 				return item
 			end,
