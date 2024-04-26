@@ -86,6 +86,6 @@ function cycleThemes() {
 	const indexOfNextTheme = (installedThemes.indexOf(currentTheme) + 1) % installedThemes.length;
 	const nextTheme = installedThemes[indexOfNextTheme] || "";
 
-	new Notice("Now using " + nextTheme);
+	new Notice(`Now using ${nextTheme}`
 	app.customCss.setTheme(nextTheme);
 }
