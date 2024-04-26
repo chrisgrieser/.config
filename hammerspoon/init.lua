@@ -22,6 +22,7 @@ hs.window.animationDuration = 0 -- quicker animations
 -- LOAD MODULES
 
 -- appearance
+safeRequire("lua.console")
 safeRequire("lua.visuals")
 safeRequire("lua.dark-mode")
 
@@ -32,7 +33,6 @@ safeRequire("lua.app-hider")
 safeRequire("lua.auto-quitter")
 
 -- system
-safeRequire("lua.console")
 safeRequire("lua.cronjobs")
 safeRequire("lua.filesystem-watchers")
 safeRequire("lua.repo-auto-sync")

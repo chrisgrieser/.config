@@ -13,12 +13,12 @@ local aw = hs.application.watcher
 local baseFont = { name = env.codeFont, size = 22 }
 
 local function red(isDark)
-	if isDark then return { red = 0.7, green = 0, blue = 0 } end
-	return { red = 1, green = 0, blue = 0 }
+	if isDark then return { red = 1, green = 0, blue = 0 } end
+	return { red = 0.7, green = 0, blue = 0 }
 end
 local function yellow(isDark)
-	if isDark then return { red = 0.7, green = 0.5, blue = 0 } end
-	return { red = 1, green = 1, blue = 0 }
+	if isDark then return { red = 1, green = 1, blue = 0 } end
+	return { red = 0.7, green = 0.5, blue = 0 }
 end
 local function base(isDark)
 	if isDark then return { white = 0.9 } end

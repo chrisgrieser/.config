@@ -111,7 +111,7 @@ local function syncBookmarks(flags)
 	-- TODO recently, it appears that every 10 min the watcher is triggered for
 	-- some reason. To avoid spam in the hammerspoon console, not logging this
 	-- here.
-	-- print("🔖 Bookmarks synced to Chrome Bookmarks")
+	print("🔖 Bookmarks synced to Chrome Bookmarks")
 end
 
 -- sync on system start & when bookmarks are changed
