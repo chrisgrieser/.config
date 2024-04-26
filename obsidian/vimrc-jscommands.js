@@ -39,6 +39,16 @@ function toggleLineNumbers() {
 	vault.setConfig("showLineNumber", !vault.getConfig("showLineNumber"));
 }
 
+/** @param {"plus"|"minus"} dir */
+// biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
+function changeFontSize(dir){
+	const vault = view.app.vault;
+	const fontSize = vault.getConfig("baseFontSize");
+	// @ts-expect-error
+	const newFontSize = dir === "plus" ? fontSize + 1 : fontSize - 1;
+	vault.setConfig("baseFontSize", newFontSize);
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 // biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
