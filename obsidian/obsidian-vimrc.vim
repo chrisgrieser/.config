@@ -268,6 +268,9 @@ nmap ,pc :cycleThemes
 exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-title
 nnoremap ,cc :enhanceUrlWithTitle
 
+"───────────────────────────────────────────────────────────────────────────────
+" Obsidian-specific leader bindings
+
 " Critic Markup: accept all
 exmap acceptAll obcommand commentator:commentator-accept-all-suggestions
 nnoremap ,a :acceptAll
@@ -461,13 +464,6 @@ nnoremap ,oD :disableDiagnostics
 " [O]ption: [a]completion
 exmap toggleAiCompletion obcommand copilot-auto-completion:toggle
 nnoremap ,oa :toggleAiCompletion
-
-" Font size (Obsidian commands only offer to change full app zoom)
-exmap fontPlus jsfile Meta/vimrc-jscommands.js { changeFontSize("plus") }
-nnoremap ,o+ :fontPlus
-
-exmap fontMinus jsfile Meta/vimrc-jscommands.js { changeFontSize("minus") }
-nnoremap ,o- :fontMinus
 
 "───────────────────────────────────────────────────────────────────────────────
 " AI SUGGESTIONS

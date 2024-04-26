@@ -1,15 +1,20 @@
 // INFO these are globally available in jsfiles used by the Obsidian vimrc plugin
 // see https://github.com/esm7/obsidian-vimrc-support?tab=readme-ov-file#jscommand---jsfunction
 
+declare type EditorPosition = { ch: number; line: number };
+declare type EditorRange = { from: EditorPosition; to: EditorPosition };
+
 declare type Editor = {
 	exec(action: string): void;
-	getCursor(): { ch: number; line: number };
+	getCursor(): EditorPosition;
+	wordAt(EditorPosition): EditorRange;
 	getValue(): string;
 	setValue(value: string): void;
 	getFoldOffsets(): number[];
 	getLine(line: number): string;
 	replaceSelection(value: string): void;
-	offsetToPos(offset: number): { ch: number; line: number };
+	setSelection(anchor: EditorPosition, head: EditorPosition): void;
+	offsetToPos(offset: number): EditorPosition;
 };
 
 declare const editor: Editor;
@@ -22,7 +27,7 @@ declare const view: {
 			themes: Record<string, string>;
 			oldThemes: string[];
 			setTheme(theme: string): void;
-		}
+		};
 		workspace: {
 			protocolHandlers: {
 				get(protocol: string): ({ id: string }) => void;
@@ -50,3 +55,8 @@ declare const view: {
 declare class Notice {
 	constructor(msg: string, duration?: number);
 }
+
+declare const electronWindow: {
+	// https://www.electronjs.org/docs/latest/api/browser-window#winshowdefinitionforselection-macos
+	showDefinitionForSelection(): void;
+};
