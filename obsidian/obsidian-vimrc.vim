@@ -250,7 +250,7 @@ nnoremap qw :insertHr
 
 "───────────────────────────────────────────────────────────────────────────────
 " LEADER MAPPINGS
-" (the weird mappings are to mirror my nvim-mappings)
+" (the weird mappings are due to mirroring my nvim-mappings)
 
 exmap fileRecovery obcommand file-recovery:open
 nnoremap ,ut :fileRecovery
@@ -264,7 +264,7 @@ nmap ,l :toggleDevtools
 exmap cycleThemes jsfile Meta/vimrc-jscommands.js { cycleThemes() }
 nmap ,pc :cycleThemes
 
-" pseudo-code-action: enhance URL with title
+" Enhance URL with title
 exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-title
 nnoremap ,cc :enhanceUrlWithTitle
 
@@ -283,7 +283,7 @@ nnoremap ,A :rejectAll
 exmap addProperty obcommand markdown:add-metadata-property
 nnoremap ,y :addProperty
 
-" add "[r]ead: true" property
+" set "[r]ead: true" property
 exmap addYamlKey jsfile Meta/vimrc-jscommands.js { addYamlKey("read", true) }
 nnoremap ,r :addYamlKey
 
@@ -297,7 +297,11 @@ nnoremap ,pp :updatePlugins
 exmap openPluginDirectory jsfile Meta/vimrc-jscommands.js { openPluginDirectory() }
 nnoremap ,pd :openPluginDirectory
 
-" install plugins
+" open [s]nippet [d]irectory
+exmap openSnippetDirectory jsfile Meta/vimrc-jscommands.js { openSnippetDirectory() }
+nnoremap ,ps :openSnippetDirectory
+
+" [i] install [p]lugins
 exmap installPluginsFromPluginBrowser jsfile Meta/vimrc-jscommands.js { installPluginsFromPluginBrowser() }
 nnoremap ,pi :installPluginsFromPluginBrowser
 
