@@ -14,10 +14,12 @@
 	<string>jsdoc</string>
 	<key>keyword_06</key>
 	<string>moment</string>
-	<key>keyword_08</key>
-	<string>css</string>
+	<key>keyword_07</key>
+	<string>electron</string>
 	<key>keyword_09</key>
 	<string>html</string>
+	<key>keyword_10</key>
+	<string>css</string>
 	<key>keyword_12</key>
 	<string>py</string>
 	<key>keyword_13</key>
