@@ -2,27 +2,6 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{
-		"Mr-LLLLL/cool-chunk.nvim",
-		event = { "CursorHold", "CursorHoldI" },
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		opts = {
-			chunk = {
-				animate_duration = 50,
-				chars = {
-					right_arrow = "",
-					left_arrow = "",
-					down_arrow = "↓",
-				},
-				hl_group = {
-					chunk = "CursorLineNr",
-					error = "Error",
-				},
-				textobject = "<Nop>",
-			},
-			context = { textobject = "<Nop>" },
-		},
-	},
 	{ -- fixes scrolloff at end of file
 		"Aasim-A/scrollEOF.nvim",
 		event = "CursorMoved",
@@ -70,6 +49,7 @@ return {
 		main = "ibl",
 		opts = {
 			scope = {
+				enabled = false, -- using `cool-chunk` instead
 				highlight = "Comment",
 				show_start = false,
 				show_end = false,
@@ -77,6 +57,29 @@ return {
 			},
 			indent = { char = "│", tab_char = "│" },
 			exclude = { filetypes = { "undotree" } },
+		},
+	},
+	{
+		"Mr-LLLLL/cool-chunk.nvim",
+		event = { "CursorHold", "CursorHoldI" },
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		opts = {
+			chunk = {
+				animate_duration = 150,
+				chars = {
+					right_arrow = "▷",
+					left_arrow = "◁",
+					down_arrow = "▽",
+				},
+				hl_group = {
+					chunk = "Comment",
+					error = "Error",
+				},
+				textobject = "<Nop>",
+			},
+			context = {
+				textobject = "<Nop>",
+			},
 		},
 	},
 	{ -- scrollbar with information
