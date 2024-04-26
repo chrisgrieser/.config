@@ -71,3 +71,21 @@ function installPluginsFromPluginBrowser() {
 	const app = view.app;
 	app.workspace.protocolHandlers.get("show-plugin")({ id: " " });
 }
+
+// biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
+function cycleThemes() {
+	const app = view.app;
+	const currentTheme = app.customCss.theme;
+	const installedThemes = [...Object.keys(app.customCss.themes)];
+	if (installedThemes.length === 0) {
+		new Notice("Cannot cycle themes since no community theme is installed.");
+		return;
+	}
+	installedThemes.push(""); // "" = default theme
+
+	const indexOfNextTheme = (installedThemes.indexOf(currentTheme) + 1) % installedThemes.length;
+	const nextTheme = installedThemes[indexOfNextTheme] || "";
+
+	new Notice("Now using " + nextTheme);
+	app.customCss.setTheme(nextTheme);
+}
