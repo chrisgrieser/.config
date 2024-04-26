@@ -24,17 +24,8 @@
 	},
 
 	"javascript": {
-		"globals": [
-			"ObjC", // JXA variables
-			"Application",
-			"delay",
-			"Path",
-			"$",
-			"dv", // dataview
-			"view", // vimrc jsfile
-			"editor",
-			"Notice" // Obsidian API (used for vimrc jsfile)
-		]
+		// JXA variables
+		"globals": ["ObjC", "Application", "delay", "Path", "$"]
 	},
 	"formatter": {
 		"lineWidth": 100,
