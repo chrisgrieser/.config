@@ -14,13 +14,9 @@ end
 
 hs.autoLaunch(true)
 hs.menuIcon(false)
-hs.allowAppleScript(true) -- allow external control (for control via nvim)
+hs.allowAppleScript(true) -- allow external control (via nvim)
 hs.automaticallyCheckForUpdates(true)
 hs.window.animationDuration = 0 -- quicker animations
-
--- suppress unnecessary log messages
-hs.hotkey.setLogLevel(0) ---@diagnostic disable-line: undefined-field https://github.com/Hammerspoon/hammerspoon/issues/3491
-hs.application.enableSpotlightForNameSearches(false)
 
 --------------------------------------------------------------------------------
 -- LOAD MODULES

@@ -3,7 +3,7 @@
 
 " equivalent to `let mapleader = ,`
 " can't set leaders in Obsidian vim, so the key just has to be used consistently.
-" However, it needs to be unmapped, to not trigger default behavior: 
+" However, it needs to be unmapped, to not trigger default behavior:
 " https://github.com/esm7/obsidian-vimrc-support#some-help-with-binding-space-chords-doom-and-spacemacs-fans
 unmap ,
 
@@ -257,8 +257,12 @@ nnoremap ,ut :fileRecovery
 nnoremap ,gd :fileRecovery
 
 " Open Console
-exmap toggleDevtools jscommand { electronWindow.toggleDevTools(); }
+exmap toggleDevtools jscommand { electronWindow.toggleDevTools() }
 nmap ,l :toggleDevtools
+
+" Cycle Themes
+exmap cycleThemes jsfile Meta/vimrc-jscommands.js { cycleThemes() }
+nmap ,pc :cycleThemes
 
 " pseudo-code-action: enhance URL with title
 exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-title
@@ -471,4 +475,4 @@ exmap acceptGhostText obcommand copilot-auto-completion:accept
 inoremap <C-ü> :acceptGhostText
 
 exmap lint obcommand obsidian-linter:lint-file
-nnoremap <C-ü> :lint 
+nnoremap <C-ü> :lint

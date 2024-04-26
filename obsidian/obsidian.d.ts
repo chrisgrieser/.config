@@ -17,6 +17,12 @@ declare const editor: Editor;
 declare const view: {
 	editor: Editor;
 	app: {
+		customCss: {
+			theme: string;
+			themes: Record<string, string>;
+			oldThemes: string[];
+			setTheme(theme: string): void;
+		}
 		workspace: {
 			protocolHandlers: {
 				get(protocol: string): ({ id: string }) => void;

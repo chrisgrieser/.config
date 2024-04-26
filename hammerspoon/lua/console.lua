@@ -38,8 +38,9 @@ cons.toolbar(nil)
 cons.consoleFont(baseFont)
 hs.consoleOnTop(false)
 
--- quicker console usage
-I = hs.inspect
+-- suppress unnecessary log messages
+hs.hotkey.setLogLevel(0) ---@diagnostic disable-line: undefined-field https://github.com/Hammerspoon/hammerspoon/issues/3491
+hs.application.enableSpotlightForNameSearches(false)
 
 --------------------------------------------------------------------------------
 
@@ -59,19 +60,22 @@ local function cleanupConsole()
 		local ignore = line:find("Loading extensions?: ")
 			or line:find("Lazy extension loading enabled$")
 			or line:find("Loading Spoon: RoundedCorners$")
-			or line:find("Loading /Users/chrisgrieser/.config//?hammerspoon/init.lua$")
+			or line:find("Loading .*/init.lua$")
 			or line:find("hs%.canvas:delete")
 			or line:find("%-%- Done%.$")
 			or line:find("wfilter: .* is STILL not registered") -- FIX https://github.com/Hammerspoon/hammerspoon/issues/3462
 
+		-- colorize timestamp & error levels
 		if not ignore then
-			-- colorize
 			local timestamp, msg = line:match("(%d%d%d%d%-%d%d%-%d%d %d%d:%d%d:%d%d: )(.*)")
-			if not msg then msg = line end
-			local lmsg = msg:lower()
+			if not msg then msg = line end -- msg without timestamp
+			msg = msg
+				:gsub("^%s-%d%d:%d%d:%d%d:? ", "") -- remove duplicate timestamp
+				:gsub("^%s*", "")
 
 			local color
-			if lmsg:find("^> ") then -- user input
+			local lmsg = msg:lower()
+			if msg:find("^> ") then -- user input
 				color = blue(isDark)
 			elseif lmsg:find("error") or lmsg:find("fatal") then
 				color = red(isDark)
@@ -81,13 +85,11 @@ local function cleanupConsole()
 				color = base(isDark)
 			end
 
+			local coloredLine = hs.styledtext.new(msg, { color = color, font = baseFont })
 			if timestamp then
-				msg = msg:gsub("^%s*", "")
-				local coloredLine = hs.styledtext.new(msg, { color = color, font = baseFont })
 				local time = hs.styledtext.new(timestamp, { color = grey(isDark), font = baseFont })
 				cons.printStyledtext(time, coloredLine)
 			else
-				local coloredLine = hs.styledtext.new(msg, { color = color, font = baseFont })
 				cons.printStyledtext(coloredLine)
 			end
 		end
