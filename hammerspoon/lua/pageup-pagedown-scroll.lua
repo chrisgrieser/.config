@@ -3,6 +3,7 @@
 --   that they do not move a full viewport, effectively creating a scroll offset.
 -- * Not implemented via Karabiner, since Karabiner does not allow for scrolling
 -- * This file is somewhat equivalent to https://github.com/dexterleng/KeyboardScroller.docs
+--------------------------------------------------------------------------------
 
 -- CONFIG
 -- * distance to scroll per app. Needed since scrolling translates into
@@ -21,11 +22,11 @@ local perAppSettings = {
 
 ---@param direction "up" | "down
 local function scroll(direction)
-
 	local frontApp = hs.application.frontmostApplication()
 	if not frontApp:mainWindow() then return end
 	local ignoreApp = perAppSettings[frontApp:name()] == false
 	if ignoreApp then
+		-- simply pass through the key
 		hs.eventtap.keyStroke({}, "page" .. direction, 0, frontApp)
 		return
 	end
