@@ -67,6 +67,12 @@ function openPluginDirectory() {
 }
 
 // biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
+function openSnippetDirectory() {
+	const app = view.app;
+	app.openWithDefaultApp(app.vault.configDir + "/snippets");
+}
+
+// biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
 function installPluginsFromPluginBrowser() {
 	const app = view.app;
 	app.workspace.protocolHandlers.get("show-plugin")({ id: " " });
