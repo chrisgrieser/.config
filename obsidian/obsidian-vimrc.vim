@@ -462,6 +462,13 @@ nnoremap ,oD :disableDiagnostics
 exmap toggleAiCompletion obcommand copilot-auto-completion:toggle
 nnoremap ,oa :toggleAiCompletion
 
+" Font size (Obsidian commands only offer to change full app zoom)
+exmap fontPlus jsfile Meta/vimrc-jscommands.js { changeFontSize("plus") }
+nnoremap ,o+ :fontPlus
+
+exmap fontMinus jsfile Meta/vimrc-jscommands.js { changeFontSize("minus") }
+nnoremap ,o- :fontMinus
+
 "───────────────────────────────────────────────────────────────────────────────
 " AI SUGGESTIONS
 

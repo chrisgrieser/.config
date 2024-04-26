@@ -30,8 +30,8 @@ declare const view: {
 		};
 		openWithDefaultApp(path: string): void;
 		vault: {
-			getConfig(key: string): boolean | string;
-			setConfig(key: string, value: boolean | string): void;
+			getConfig(key: string): boolean | string | number;
+			setConfig(key: string, value: boolean | string | number): void;
 			configDir: string;
 		};
 		plugins: {
