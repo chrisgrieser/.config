@@ -303,9 +303,6 @@ return {
 		end,
 	},
 	{
-		"andrewferrier/debugprint.nvim",
-	},
-	{
 		"chrisgrieser/nvim-chainsaw",
 		init = function() u.leaderSubkey("l", " Log", { "n", "x" }) end,
 		opts = {
@@ -322,9 +319,9 @@ return {
 		},
 		keys = {
 			-- stylua: ignore start
-			{"<leader>lb", function() require("chainsaw").beepLog() end, desc = "󰸢 beep" },
-			{"<leader>ll", function() require("chainsaw").variableLog() end, mode = {"n", "x"}, desc = "󰸢 variable" },
+			{"<leader>ll", "<cmd>lua require('chainsaw').variableLog()<CR>", mode = {"n", "x"}, desc = "󰸢 variable" },
 			{"<leader>lo", function() require("chainsaw").objectLog() end, mode = {"n", "x"}, desc = "󰸢 object" },
+			{"<leader>lb", function() require("chainsaw").beepLog() end, desc = "󰸢 beep" },
 			{"<leader>lm", function() require("chainsaw").messageLog() end, desc = "󰸢 message" },
 			{"<leader>lt", function() require("chainsaw").timeLog() end, desc = "󰸢 time" },
 			{"<leader>ld", function() require("chainsaw").debugLog() end, desc = "󰸢 debugger" },
