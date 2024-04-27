@@ -68,10 +68,10 @@ function run(argv) {
 		genres = "📚 " + genres.map((/** @type {{ name: string }}*/ genre) => genre.name).join(", ");
 		themes = "🎨 " + themes.map((/** @type {{ name: string }}*/ theme) => theme.name).join(", ");
 		const studio = "🎦 " + studios[0].name.replace(/(studio|animation|production)s?/gi, "").trim();
+
 		const subtitle = [episodesCount, score, studio, titleJap, themes, genres]
 			.filter((component) => component.match(/\w/)) // not emojiy only
 			.join("  ");
-		demographics = demographics.map((/** @type {{ name: string }}*/ demographic) => demographic.name).join(", ");
 
 		const summary = [genres, themes, studio, synopsis].filter(Boolean).join("\n");
 
