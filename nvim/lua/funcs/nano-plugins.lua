@@ -158,6 +158,7 @@ function M.selectMake()
 		else
 			vim.cmd.lmake(selection)
 		end
+		vim.cmd.checktime() -- reload buffer in case file is formatter
 	end)
 end
 

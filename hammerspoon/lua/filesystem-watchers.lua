@@ -20,26 +20,23 @@ end
 local browserSettings = home .. "/.config/+ browser-extension-configs/"
 local libraryPath = home .. "/.config/pandoc/main-bibliography.bib"
 
---------------------------------------------------------------------------------
-
 M.pathw_fileHub = pathw(env.fileHub, function(paths, _)
-	-- prevent triggering due to iCloud sync to device in standby
-	if not u.screenIsUnlocked() then return end 
+	if not u.screenIsUnlocked() then return end -- prevent iCloud sync triggering in standby
 
 	for _, filep in pairs(paths) do
 		local fileName = filep:gsub(".*/", "")
 		local ext = fileName:gsub(".*%.", "")
 
 		-- FIX Brave downloads being hidden https://community.brave.com/t/all-downloads-are-showing-as-hidden-on-mac/508032
-		if not fileName:find("^%.") then
-			hs.execute(("ls -lO %q | grep -q 'hidden' && chflags nohidden %q"):format(filep, filep))
-		end
+		-- if not fileName:find("^%.") then
+		-- 	hs.execute(("ls -lO %q | grep -q 'hidden' && chflags nohidden %q"):format(filep, filep))
+		-- end
 
-		-- auto-remove ALFREDWORKFLOWS & ICAL
+		-- 1. AUTO-REMOVE ALFREDWORKFLOWS & ICAL
 		if (ext == "alfredworkflow" or ext == "ics") and fileIsDownloaded(filep) then
 			u.runWithDelays(3, function() os.remove(filep) end)
 
-		-- auto-add bibtex entries to library
+		-- 2. AUTO-ADD BIBTEX ENTRIES TO LIBRARY
 		elseif ext == "bib" and fileIsDownloaded(filep) then
 			local bibEntry = u.readFile(filep)
 			if not bibEntry then return end
@@ -48,7 +45,7 @@ M.pathw_fileHub = pathw(env.fileHub, function(paths, _)
 			hs.open(libraryPath)
 			os.remove(filep)
 
-		-- Backup Browser Settings
+		-- 3. BACKUP BROWSER SETTINGS
 		elseif fileName == "violentmonkey" then
 			os.rename(filep, browserSettings .. "violentmonkey")
 			-- needs to be zipped again, since browser auto-opens all zip files
