@@ -59,7 +59,7 @@ keymap("n", "<D-r>", function()
 	vim.fn.system {
 		"pandoc",
 		-- rebasing paths, so images are available at output location
-		"--from=markdown_github+rebase_relative_paths",
+		"--from=gfm+rebase_relative_paths",
 		input,
 		"--output=" .. outputPath,
 		"--standalone",
@@ -122,7 +122,7 @@ keymap("n", "<D-4>", "mzI- <Esc>`z", { desc = " Add List", buffer = true })
 keymap(
 	"n",
 	"<leader>ft",
-	"vip:!pandoc -t commonmark_x<CR>",
+	"vip:!pandoc --to=gfm<CR>",
 	{ desc = " Format Table under Cursor", buffer = true, silent = true }
 )
 
