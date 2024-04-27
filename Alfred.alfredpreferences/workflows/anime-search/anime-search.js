@@ -46,38 +46,43 @@ function run(argv) {
 	/** @type AlfredItem[] */
 	// @ts-expect-error
 	const animeTitles = response.data.map((anime) => {
-		const titleEng = shortenSeason(anime.title_english || anime.title);
-		const yearInfo = anime.year && !titleEng.match(/\d{4}/) ? `(${anime.year})` : "";
+		// biome-ignore format: annoyingly long list
+		let { title, title_english, title_synonyms, year, status, episodes, score, genres, themes, synopsis, url, studios, demographics } = anime;
+
+		const titleEng = shortenSeason(title_english || title);
+		const yearInfo = year && !titleEng.match(/\d{4}/) ? `(${year})` : "";
 
 		let emoji = "";
-		if (anime.status === "Currently Airing") emoji += "🎙️";
-		else if (anime.status === "Not yet aired") emoji += "🗓️";
+		if (status === "Currently Airing") emoji += "🎙️";
+		else if (status === "Not yet aired") emoji += "🗓️";
 
 		const displayText = [emoji, titleEng, yearInfo].filter(Boolean).join(" ");
 
-		const titleJap = shortenSeason(anime.title_english ? anime.title : anime.title_synonyms[0]);
-		const episodesCount = anime.episodes ? `${anime.episodes} 📺` : "";
-		const score = anime.score ? `${anime.score.toFixed(1)} ⭐` : "";
-		const genres = anime.genres
-			.map((/** @type {{ name: string }}*/ genre) => genre.name)
-			.join(", ");
+		const titleJapMax = 40; // CONFIG
+		let titleJap = shortenSeason(title_english ? title : title_synonyms[0]);
+		titleJap =
+			"🇯🇵 " + (titleJap.length > titleJapMax ? titleJap.slice(0, titleJapMax) + "…" : titleJap);
 
-		const subtitle = [episodesCount, score, titleJap, genres].filter(Boolean).join("   ");
+		const episodesCount = "📺 " + episodes.toString();
+		score = "⭐ " + score.toFixed(1).toString();
+		genres = "📚 " + genres.map((/** @type {{ name: string }}*/ genre) => genre.name).join(", ");
+		themes = "🎨 " + themes.map((/** @type {{ name: string }}*/ theme) => theme.name).join(", ");
+		const studio = "🎦 " + studios[0].name.replace(/(studio|animation|production)s?/gi, "").trim();
+		const subtitle = [episodesCount, score, studio, titleJap, themes, genres]
+			.filter((component) => component.match(/\w/)) // not emojiy only
+			.join("  ");
+		demographics = demographics.map((/** @type {{ name: string }}*/ demographic) => demographic.name).join(", ");
+
+		const summary = [genres, themes, studio, synopsis].filter(Boolean).join("\n");
 
 		return {
 			title: displayText,
 			subtitle: subtitle,
-			arg: anime.url,
-			quicklookurl: anime.url,
+			arg: url,
+			quicklookurl: url,
 			mods: {
-				cmd: {
-					arg: titleJap,
-					valid: Boolean(titleJap),
-				},
-				shift: {
-					arg: anime.synopsis,
-					valid: Boolean(anime.synopsis),
-				},
+				cmd: { arg: titleJap, valid: Boolean(titleJap) },
+				shift: { arg: summary },
 			},
 		};
 	});
