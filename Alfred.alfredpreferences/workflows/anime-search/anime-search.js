@@ -32,7 +32,8 @@ function run(argv) {
 	}
 
 	// DOCS https://docs.api.jikan.moe/#tag/anime/operation/getAnimeSearch
-	const apiURL = `https://api.jikan.moe/v4/anime?limit=${$.getenv("result_number")}&q=`;
+	const resultsNumber = 9; // Alfred display maximum
+	const apiURL = `https://api.jikan.moe/v4/anime?limit=${resultsNumber}&q=`;
 	const response = JSON.parse(httpRequest(apiURL + encodeURIComponent(query)));
 	if (!response.data) {
 		console.log(JSON.stringify(response));
@@ -43,7 +44,7 @@ function run(argv) {
 	}
 
 	/** @type AlfredItem[] */
-	// @ts-ignore
+	// @ts-expect-error
 	const animeTitles = response.data.map((anime) => {
 		const titleEng = shortenSeason(anime.title_english || anime.title);
 		const yearInfo = anime.year && !titleEng.match(/\d{4}/) ? `(${anime.year})` : "";
@@ -52,27 +53,16 @@ function run(argv) {
 		if (anime.status === "Currently Airing") emoji += "🎙️";
 		else if (anime.status === "Not yet aired") emoji += "🗓️";
 
-		// stream info not available via search API
-		const streamingResponse = httpRequest(
-			`https://api.jikan.moe/v4/anime/${anime.mal_id}/streaming`,
-		);
-		let stream = "";
-		if (streamingResponse) {
-			const streaming = JSON.parse(streamingResponse).data.map(
-				(/** @type {{ name: string; }} */ a) => a.name.toLowerCase(),
-			);
-			if (streaming.includes("crunchyroll")) stream += "C";
-			if (streaming.includes("netflix")) stream += "N";
-			if (streaming.includes("hidive")) stream += "H";
-			if (stream) stream += " 🛜";
-		}
-
 		const displayText = [emoji, titleEng, yearInfo].filter(Boolean).join(" ");
 
 		const titleJap = shortenSeason(anime.title_english ? anime.title : anime.title_synonyms[0]);
 		const episodesCount = anime.episodes ? `${anime.episodes} 📺` : "";
 		const score = anime.score ? `${anime.score.toFixed(1)} ⭐` : "";
-		const subtitle = [stream, episodesCount, score, titleJap].filter(Boolean).join("   ");
+		const genres = anime.genres
+			.map((/** @type {{ name: string }}*/ genre) => genre.name)
+			.join(", ");
+
+		const subtitle = [episodesCount, score, titleJap, genres].filter(Boolean).join("   ");
 
 		return {
 			title: displayText,
