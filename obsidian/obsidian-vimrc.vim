@@ -288,7 +288,7 @@ exmap addYamlKey jsfile Meta/vimrc-jscommands.js { addYamlKey("read", true) }
 nnoremap ,r :addYamlKey
 
 "───────────────────────────────────────────────────────────────────────────────
-" Plugin related bindings
+" Plugin-related bindings
 
 exmap updatePlugins jsfile Meta/vimrc-jscommands.js { updatePlugins() }
 nnoremap ,pp :updatePlugins
@@ -304,6 +304,10 @@ nnoremap ,ps :openSnippetDirectory
 " [i] install [p]lugins
 exmap installPluginsFromPluginBrowser jsfile Meta/vimrc-jscommands.js { installPluginsFromPluginBrowser() }
 nnoremap ,pi :installPluginsFromPluginBrowser
+
+" settings search
+exmap pluginSettingsSearch jsfile Meta/vimrc-jscommands.js { pluginSettingsSearch() }
+nnoremap g, :pluginSettingsSearch
 
 "───────────────────────────────────────────────────────────────────────────────
 " VISUAL MODE

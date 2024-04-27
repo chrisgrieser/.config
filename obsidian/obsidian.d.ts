@@ -17,6 +17,8 @@ declare type Editor = {
 	offsetToPos(offset: number): EditorPosition;
 };
 
+declare const selection: EditorRange;
+
 declare const editor: Editor;
 
 declare const view: {
@@ -55,8 +57,3 @@ declare const view: {
 declare class Notice {
 	constructor(msg: string, duration?: number);
 }
-
-declare const electronWindow: {
-	// https://www.electronjs.org/docs/latest/api/browser-window#winshowdefinitionforselection-macos
-	showDefinitionForSelection(): void;
-};
