@@ -319,7 +319,7 @@ return {
 		},
 		keys = {
 			-- stylua: ignore start
-			{"<leader>ll", "<cmd>lua require('chainsaw').variableLog()<CR>", mode = {"n", "x"}, desc = "󰸢 variable" },
+			{"<leader>ll", function() require("chainsaw").variableLog() end, mode = {"n", "x"}, desc = "󰸢 variable" },
 			{"<leader>lo", function() require("chainsaw").objectLog() end, mode = {"n", "x"}, desc = "󰸢 object" },
 			{"<leader>lb", function() require("chainsaw").beepLog() end, desc = "󰸢 beep" },
 			{"<leader>lm", function() require("chainsaw").messageLog() end, desc = "󰸢 message" },
