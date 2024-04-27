@@ -65,20 +65,21 @@ function run(argv) {
 			"🇯🇵 " + (titleJap.length > titleJapMax ? titleJap.slice(0, titleJapMax) + "…" : titleJap);
 
 		episodes = "📺 " + episodes.toString();
-		score = "⭐ " + score.toFixed(1).toString();
+		score = score && "⭐ " + score.toFixed(1).toString();
 		genres = "📚 " + genres.map((/** @type {{ name: string }}*/ genre) => genre.name).join(", ");
 		themes = "🎨 " + themes.map((/** @type {{ name: string }}*/ theme) => theme.name).join(", ");
-		studios = "🎦 " + studios[0].name.replace(/(studio|animation|production)s?/gi, "").trim();
+		studios =
+			studios[0] && "🎦 " + studios[0].name.replace(/(studio|animation|production)s?/gi, "").trim();
 		demographics =
-			"👤 " +
-			demographics.map((/** @type {{ name: string }}*/ demographic) => demographic.name).join(", ");
+			demographics[0] &&
+			"👤 " + demographics.map((/** @type {{ name: string }}*/ d) => d.name).join(", ");
 
 		const subtitle = [episodes, score, demographics, studios, titleJap, genres]
-			.filter((component) => component.match(/\w/)) // not emojiy only
+			.filter((component) => component?.match(/\w/)) // not emojiy only
 			.join("  ");
 
 		const summary = [titleEng, titleJap, studios, demographics, genres, themes, "\n", synopsis]
-			.filter((component) => component.match(/\w/)) // not emojiy only
+			.filter((component) => component?.match(/\w/)) // not emojiy only
 			.join("\n");
 
 		return {
