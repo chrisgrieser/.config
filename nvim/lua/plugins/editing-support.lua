@@ -303,6 +303,9 @@ return {
 		end,
 	},
 	{
+		"andrewferrier/debugprint.nvim",
+	},
+	{
 		"chrisgrieser/nvim-chainsaw",
 		init = function() u.leaderSubkey("l", " Log", { "n", "x" }) end,
 		opts = {

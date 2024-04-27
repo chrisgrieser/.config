@@ -31,6 +31,7 @@ function run(argv) {
 		});
 	}
 
+	// INFO rate limit: 60 requests/minute https://docs.api.jikan.moe/#section/Information/Rate-Limiting
 	// DOCS https://docs.api.jikan.moe/#tag/anime/operation/getAnimeSearch
 	const resultsNumber = 9; // Alfred display maximum
 	const apiURL = `https://api.jikan.moe/v4/anime?limit=${resultsNumber}&q=`;
@@ -63,18 +64,22 @@ function run(argv) {
 		titleJap =
 			"🇯🇵 " + (titleJap.length > titleJapMax ? titleJap.slice(0, titleJapMax) + "…" : titleJap);
 
-		const episodesCount = "📺 " + episodes.toString();
+		episodes = "📺 " + episodes.toString();
 		score = "⭐ " + score.toFixed(1).toString();
 		genres = "📚 " + genres.map((/** @type {{ name: string }}*/ genre) => genre.name).join(", ");
 		themes = "🎨 " + themes.map((/** @type {{ name: string }}*/ theme) => theme.name).join(", ");
-		const studio = "🎦 " + studios[0].name.replace(/(studio|animation|production)s?/gi, "").trim();
-		demographics = demographics.map((/** @type {{ name: string }}*/ demographic) => demographic.name).join(", ");
+		studios = "🎦 " + studios[0].name.replace(/(studio|animation|production)s?/gi, "").trim();
+		demographics =
+			"👤 " +
+			demographics.map((/** @type {{ name: string }}*/ demographic) => demographic.name).join(", ");
 
-		const subtitle = [episodesCount, score, studio, titleJap, themes, genres]
+		const subtitle = [episodes, score, demographics, studios, titleJap, genres]
 			.filter((component) => component.match(/\w/)) // not emojiy only
 			.join("  ");
 
-		const summary = [genres, themes, studio, synopsis].filter(Boolean).join("\n");
+		const summary = [titleEng, titleJap, studios, demographics, genres, themes, "\n", synopsis]
+			.filter((component) => component.match(/\w/)) // not emojiy only
+			.join("\n");
 
 		return {
 			title: displayText,
