@@ -64,10 +64,12 @@ function run(argv) {
 		titleJap =
 			"🇯🇵 " + (titleJap.length > titleJapMax ? titleJap.slice(0, titleJapMax) + "…" : titleJap);
 
-		episodes = "📺 " + episodes.toString();
+		episodes = episodes && "📺 " + episodes.toString();
 		score = score && "⭐ " + score.toFixed(1).toString();
-		genres = "📚 " + genres.map((/** @type {{ name: string }}*/ genre) => genre.name).join(", ");
-		themes = "🎨 " + themes.map((/** @type {{ name: string }}*/ theme) => theme.name).join(", ");
+		genres =
+			genres && "📚 " + genres.map((/** @type {{ name: string }}*/ genre) => genre.name).join(", ");
+		themes =
+			themes && "🎨 " + themes.map((/** @type {{ name: string }}*/ theme) => theme.name).join(", ");
 		studios =
 			studios[0] && "🎦 " + studios[0].name.replace(/(studio|animation|production)s?/gi, "").trim();
 		demographics =
