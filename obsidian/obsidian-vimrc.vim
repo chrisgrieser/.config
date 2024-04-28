@@ -144,9 +144,12 @@ nnoremap <CR> :altBuffer
 " Find Mode (by mirroring American keyboard layout on German keyboard layout)
 nnoremap - /
 
-" <Esc> clears highlights
-nnoremap <Esc> :nohl
-exmap closeNotices jscommand { for (const el of activeDocument.body.getElementsByClassName("notice")) el.hide() }
+" <Esc> clears highlights & notices (cannot combine excommands, therefore
+" combining them to a mapping first)
+exmap clearNotices jsfile {}
+nmap &c& :clearNotices
+nmap &n& :nohl
+nmap <Esc> &c&&n&
 
 " Another Quick Switcher ripgrep-search
 " somewhat close to Telescope's livegrep
@@ -287,6 +290,10 @@ nnoremap ,y :addProperty
 " set "[r]ead: true" property
 exmap addYamlKey jsfile Meta/vimrc-jscommands.js { addYamlKey("read", true) }
 nnoremap ,r :addYamlKey
+
+" [i]nspect [w]ord count
+exmap inspectWordCount jsfile Meta/vimrc-jscommands.js { inspectWordCount() }
+nnoremap ,iw :inspectWordCount
 
 "───────────────────────────────────────────────────────────────────────────────
 " Plugin-related bindings

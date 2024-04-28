@@ -13,8 +13,19 @@
 			"selection",
 			// Obsidian
 			"Notice",
-			"electronWindow"
+			// Election
+			"electronWindow",
+			"activeDocument"
 		]
+	},
+
+	// unused functions in vimrc jsfile
+	"linter" : {
+		"rules": {
+			"correctness": {
+				"noUnusedVariables": "off"
+			}
+		}
 	},
 
 	// use the schema from the local biome package installed via Mason
