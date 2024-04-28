@@ -35,8 +35,11 @@ function toggleLineNumbers() {
 }
 
 function clearNotices() {
-	// @ts-expect-error available via vimrc plugin
-	for (const el of activeDocument.body.getElementsByClassName("notice")) el.hide();
+	// @ts-expect-error `activeDocument` available via vimrc plugin
+	const allNotices = activeDocument.body.getElementsByClassName("notice");
+	for (const el of allNotices) {
+		el.hide();
+	}
 }
 
 function inspectWordCount() {
