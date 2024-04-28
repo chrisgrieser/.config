@@ -3,11 +3,24 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>de.chris-grieser.reminders-editor</string>
+	<string>de.chris-grieser.reminders-integration</string>
 	<key>category</key>
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
+		<key>061A8F9E-DB1D-423A-AE6A-323C54D06BF9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CD1F34B1-A599-4F46-928B-198B877B88A8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>0F93036F-D158-49BB-97AF-DE600B8A3300</key>
 		<array>
 			<dict>
@@ -318,7 +331,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>CD1F34B1-A599-4F46-928B-198B877B88A8</string>
+				<string>061A8F9E-DB1D-423A-AE6A-323C54D06BF9</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -448,7 +461,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Reminders for today</string>
+	<string>Reminders Integration</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -633,7 +646,7 @@
 				<key>scriptfile</key>
 				<string>./scripts/select-reminders.js</string>
 				<key>subtext</key>
-				<string>Reminders today</string>
+				<string>Show reminders due today</string>
 				<key>title</key>
 				<string>{const:alfred_workflow_name}</string>
 				<key>type</key>
@@ -975,27 +988,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Added Reminder (today)</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>5FF59D05-FE74-43DD-9589-1CFF471C8A6A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1015,6 +1007,27 @@
 			<string>DA53DB8C-C97B-4594-A26E-0875AB96D262</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Added Reminder (today)</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>5FF59D05-FE74-43DD-9589-1CFF471C8A6A</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1125,7 +1138,7 @@
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>✅ Added Reminder ({var:selectedDueDate})</string>
+				<string>✅ Added Reminder ({var:selectedDate})</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -1138,7 +1151,7 @@
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
-				<false/>
+				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>2</integer>
 				<key>argumenttreatemptyqueryasnil</key>
@@ -1168,9 +1181,9 @@
 				<key>scriptfile</key>
 				<string>scripts/select-reminder-time.js</string>
 				<key>subtext</key>
-				<string>at selected date</string>
+				<string>🗓️ Add Reminder at…</string>
 				<key>title</key>
-				<string>🕑 Add Reminder: {query}</string>
+				<string>{const:alfred_workflow_name}</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -1182,6 +1195,25 @@
 			<string>91C4C097-7401-4742-A061-9BF771AD2D00</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string>🗓️ {var:selectedDate}</string>
+				<key>text</key>
+				<string>New Reminder "{query}"</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>061A8F9E-DB1D-423A-AE6A-323C54D06BF9</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1217,25 +1249,34 @@ Icon by [Emoopo-Design](https://macosicons.com/#/u/Emoopo-Design)
 Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>0F93036F-D158-49BB-97AF-DE600B8A3300</key>
+		<key>061A8F9E-DB1D-423A-AE6A-323C54D06BF9</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>quick add</string>
+			<string>input reminder text</string>
 			<key>xpos</key>
 			<real>225</real>
 			<key>ypos</key>
-			<real>820</real>
+			<real>1000</real>
+		</dict>
+		<key>0F93036F-D158-49BB-97AF-DE600B8A3300</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>225</real>
+			<key>ypos</key>
+			<real>865</real>
 		</dict>
 		<key>1A97EC3B-9181-4DED-8694-6AC9B3CD04E7</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>480</real>
+			<real>605</real>
 			<key>ypos</key>
-			<real>835</real>
+			<real>880</real>
 		</dict>
 		<key>1F28B1D0-95DD-4F7F-BB2A-018A98C5743B</key>
 		<dict>
@@ -1289,9 +1330,9 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>380</real>
+			<real>425</real>
 			<key>ypos</key>
-			<real>840</real>
+			<real>885</real>
 		</dict>
 		<key>3D08F342-404B-4C70-8AC6-5473E7CB855B</key>
 		<dict>
@@ -1356,9 +1397,9 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>480</real>
+			<real>605</real>
 			<key>ypos</key>
-			<real>710</real>
+			<real>755</real>
 		</dict>
 		<key>63FD13B2-4520-4BF7-B444-C84531F947E1</key>
 		<dict>
@@ -1369,7 +1410,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>675</real>
+			<real>720</real>
 		</dict>
 		<key>6AF6B99B-5890-4B45-A5F3-BD79885C420E</key>
 		<dict>
@@ -1405,20 +1446,20 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>480</real>
+			<real>605</real>
 			<key>ypos</key>
-			<real>955</real>
+			<real>1000</real>
 		</dict>
 		<key>91C4C097-7401-4742-A061-9BF771AD2D00</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>add specific time</string>
+			<string>select date</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>955</real>
+			<real>1000</real>
 		</dict>
 		<key>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</key>
 		<dict>
@@ -1469,18 +1510,18 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>820</real>
+			<real>865</real>
 		</dict>
 		<key>CD1F34B1-A599-4F46-928B-198B877B88A8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>timed add in background</string>
+			<string>add reminder</string>
 			<key>xpos</key>
-			<real>225</real>
+			<real>405</real>
 			<key>ypos</key>
-			<real>955</real>
+			<real>1000</real>
 		</dict>
 		<key>DA53DB8C-C97B-4594-A26E-0875AB96D262</key>
 		<dict>

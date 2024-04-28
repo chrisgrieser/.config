@@ -5,25 +5,20 @@ ObjC.import("stdlib");
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
-	const inDays = Number.parseInt(argv[0] || "0");
-	const dueDate = new Date();
-	dueDate.setDate(dueDate.getDate() + inDays);
-
-	const reminderText = $.getenv("reminderText").trim().replace(/^#+ ?/, "");
-	const lines = reminderText.split("\n");
-	const title = lines.shift();
-	const body = lines.join("\n");
-
-	const rem = Application("Reminders");
+	const reminderText = (argv[0] || "").trim();
 	const list = $.getenv("reminder_list");
 
+	const inDays = $.getenv("inDays");
+	const dueDate = new Date();
+	dueDate.setDate(dueDate.getDate() + Number.parseInt(inDays));
+
+	const rem = Application("Reminders");
 	const newReminder = rem.Reminder({
-		name: title || "Untitled",
-		body: body,
+		name: reminderText,
 		alldayDueDate: dueDate,
 	});
 	rem.lists.byName(list).reminders.push(newReminder);
 	rem.quit();
 
-	return title; // Alfred notification
+	return reminderText; // Alfred notification
 }
