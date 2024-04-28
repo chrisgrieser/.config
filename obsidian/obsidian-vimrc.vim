@@ -262,14 +262,14 @@ nnoremap ,gd :fileRecovery
 
 " Open Console
 exmap toggleDevtools jscommand { electronWindow.toggleDevTools() }
-nmap ,l :toggleDevtools
+nnoremap ,l :toggleDevtools
 
 " Enhance URL with title
 exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-title
 nnoremap ,cc :enhanceUrlWithTitle
 
 "───────────────────────────────────────────────────────────────────────────────
-" Obsidian-specific leader bindings
+" OBSIDIAN-SPECIFIC LEADER BINDINGS
 
 " Critic Markup: accept all
 exmap acceptAll obcommand commentator:commentator-accept-all-suggestions
@@ -292,7 +292,7 @@ exmap inspectWordCount jsfile Meta/vimrc-jscommands.js { inspectWordCount() }
 nnoremap ,iw :inspectWordCount
 
 "───────────────────────────────────────────────────────────────────────────────
-" Plugin-related bindings
+" PLUGIN-RELATED BINDINGS
 
 exmap updatePlugins jsfile Meta/vimrc-jscommands.js { updatePlugins() }
 nnoremap ,pp :updatePlugins

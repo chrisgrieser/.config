@@ -71,6 +71,10 @@
 				"path": "./project-specific/nvim-lua.json"
 			},
 			{
+				"language": ["vim"],
+				"path": "./project-specific/obsidian-vimrc.json"
+			},
+			{
 				"language": ["typescript"],
 				"path": "./project-specific/obsidian-plugin-dev.json"
 			},
