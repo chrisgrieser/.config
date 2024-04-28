@@ -1,20 +1,4 @@
 {
-  "@class (JSDoc) + @typedef (JSDoc)": {
-    "body": [
-      "/** @typedef {Object} ${1:name}",
-      " * @property {${2:string}} ${3:prop1}",
-      " */"
-    ],
-    "description": "https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#typedef-callback-and-param",
-    "prefix": [
-      "@class (JSDoc)",
-      "@typedef (JSDoc)"
-    ]
-  },
-  "@type (JSDoc)": {
-    "body": "/** @type {${1:string}} */",
-    "prefix": "@type (JSDoc)"
-  },
   "While ..": {
     "body": [
       "while (${1:condition}) {",
@@ -27,6 +11,18 @@
     "body": "const argv = process.argv.slice(2);",
     "description": "Arguments from the command line. [0] is the node executable path, [1] the path of the file being executed, making [2] the first positional argument.",
     "prefix": "argv (node)"
+  },
+  "class (JSDoc) + typedef (JSDoc)": {
+    "body": [
+      "/** @typedef {Object} ${1:name}",
+      " * @property {${2:string}} ${3:prop1}",
+      " */"
+    ],
+    "description": "https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#typedef-callback-and-param",
+    "prefix": [
+      "class (JSDoc)",
+      "typedef (JSDoc)"
+    ]
   },
   "do .. while ..": {
     "body": [
@@ -338,6 +334,10 @@
     ],
     "description": "leading underscore so the variable is ignored by biome when not used.",
     "prefix": "try .. catch"
+  },
+  "type (JSDoc)": {
+    "body": "/** @type {${1:string}} */",
+    "prefix": "type (JSDoc)"
   },
   "unique items": {
     "body": "${1:arr} = [...new Set(${2:arr})];",
