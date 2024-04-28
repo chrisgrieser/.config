@@ -264,10 +264,6 @@ nnoremap ,gd :fileRecovery
 exmap toggleDevtools jscommand { electronWindow.toggleDevTools() }
 nmap ,l :toggleDevtools
 
-" Cycle Themes
-exmap cycleThemes jsfile Meta/vimrc-jscommands.js { cycleThemes() }
-nmap ,pc :cycleThemes
-
 " Enhance URL with title
 exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-title
 nnoremap ,cc :enhanceUrlWithTitle
@@ -305,7 +301,7 @@ nnoremap ,pp :updatePlugins
 exmap openPluginDirectory jsfile Meta/vimrc-jscommands.js { openPluginDirectory() }
 nnoremap ,pd :openPluginDirectory
 
-" open [s]nippet [d]irectory
+" open [s]nippet directory
 exmap openSnippetDirectory jsfile Meta/vimrc-jscommands.js { openSnippetDirectory() }
 nnoremap ,ps :openSnippetDirectory
 
@@ -313,9 +309,13 @@ nnoremap ,ps :openSnippetDirectory
 exmap installPluginsFromPluginBrowser jsfile Meta/vimrc-jscommands.js { installPluginsFromPluginBrowser() }
 nnoremap ,pi :installPluginsFromPluginBrowser
 
-" settings search
-exmap pluginSettingsSearch jsfile Meta/vimrc-jscommands.js { pluginSettingsSearch() }
-nnoremap g, :pluginSettingsSearch
+" dynamic [h]ighlights settings
+exmap openDynamicHighlightsSettings jsfile Meta/vimrc-jscommands.js { openDynamicHighlightsSettings() }
+nnoremap ,ph :openDynamicHighlightsSettings
+
+" Cycle Themes
+exmap cycleThemes jsfile Meta/vimrc-jscommands.js { cycleThemes() }
+nnoremap ,pc :cycleThemes
 
 "───────────────────────────────────────────────────────────────────────────────
 " VISUAL MODE
