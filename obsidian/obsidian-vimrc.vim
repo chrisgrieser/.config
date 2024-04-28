@@ -146,6 +146,7 @@ nnoremap - /
 
 " <Esc> clears highlights
 nnoremap <Esc> :nohl
+exmap closeNotices jscommand { for (const el of activeDocument.body.getElementsByClassName("notice")) el.hide() }
 
 " Another Quick Switcher ripgrep-search
 " somewhat close to Telescope's livegrep
