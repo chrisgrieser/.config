@@ -3,6 +3,7 @@
 
 declare type EditorPosition = { ch: number; line: number };
 declare type EditorRange = { from: EditorPosition; to: EditorPosition };
+declare type EditorSelection = { head: EditorPosition; anchor: EditorPosition };
 
 declare type Editor = {
 	exec(action: string): void;
@@ -14,10 +15,12 @@ declare type Editor = {
 	getLine(line: number): string;
 	replaceSelection(value: string): void;
 	setSelection(anchor: EditorPosition, head: EditorPosition): void;
+	getSelection(): string;
+	getRange(from: EditorPosition, to: EditorPosition): string;
 	offsetToPos(offset: number): EditorPosition;
 };
 
-declare const selection: EditorRange;
+declare const selection: EditorSelection;
 
 declare const editor: Editor;
 

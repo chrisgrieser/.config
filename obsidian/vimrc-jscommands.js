@@ -1,11 +1,7 @@
 // DOCS https://github.com/esm7/obsidian-vimrc-support/blob/master/JsSnippets.md
 //──────────────────────────────────────────────────────────────────────────────
 
-/**
- * @param {string} key
- * @param {boolean|string|number} value
- */
-// biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
+/** @param {string} key @param {boolean|string|number} value */
 function addYamlKey(key, value) {
 	const lines = editor.getValue().split("\n");
 	const frontmatterEnd = lines.slice(1).findIndex((line) => line === "---") + 1;
@@ -33,16 +29,28 @@ function addYamlKey(key, value) {
 	new Notice(msg);
 }
 
-// biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
 function toggleLineNumbers() {
 	const vault = view.app.vault;
 	vault.setConfig("showLineNumber", !vault.getConfig("showLineNumber"));
 }
 
+function clearNotices() {
+	// @ts-expect-error available via vimrc plugin
+	for (const el of activeDocument.body.getElementsByClassName("notice")) el.hide();
+}
+
+function inspectWordCount() {
+	const text = editor
+		.getValue()
+		.replace(/^---\n.*?\n---\n/s, "") // remove yaml frontmatter
+		.trim();
+	const charCount = text.length;
+	const wordCount = text.split(/\s+/).length;
+	new Notice(`Characters: ${charCount} \nWords: ${wordCount}`);
+}
 
 //──────────────────────────────────────────────────────────────────────────────
 
-// biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
 async function updatePlugins() {
 	const app = view.app;
 
@@ -61,25 +69,21 @@ async function updatePlugins() {
 	}, 1000);
 }
 
-// biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
 function openPluginDirectory() {
 	const app = view.app;
 	app.openWithDefaultApp(app.vault.configDir + "/plugins");
 }
 
-// biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
 function openSnippetDirectory() {
 	const app = view.app;
 	app.openWithDefaultApp(app.vault.configDir + "/snippets");
 }
 
-// biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
 function installPluginsFromPluginBrowser() {
 	const app = view.app;
 	app.workspace.protocolHandlers.get("show-plugin")({ id: " " });
 }
 
-// biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
 function cycleThemes() {
 	const app = view.app;
 	const currentTheme = app.customCss.theme;
