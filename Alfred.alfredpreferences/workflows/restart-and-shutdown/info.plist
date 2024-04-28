@@ -85,6 +85,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>7693423F-370D-4463-A8AF-AE13E70AD95A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>29D763E3-99DA-42EC-A264-3AA565CDC0F6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>C8BAA286-8178-4777-B3D8-B9958B57D2DD</key>
 		<array>
 			<dict>
@@ -148,6 +161,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>A5B116EC-8220-4ABE-8376-976F243A9EF3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -179,44 +213,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>concurrently</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
 				<string></string>
-				<key>title</key>
-				<string>{query}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/restart-background-app.sh</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>A5B116EC-8220-4ABE-8376-976F243A9EF3</string>
+			<string>29D763E3-99DA-42EC-A264-3AA565CDC0F6</string>
 			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>E5141743-4533-4E28-A3EC-2E2A98659185</string>
-			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -252,25 +267,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
+				<key>lastpathcomponent</key>
 				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
 				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/restart-background-app.sh</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>title</key>
+				<string>{query}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>29D763E3-99DA-42EC-A264-3AA565CDC0F6</string>
+			<string>E5141743-4533-4E28-A3EC-2E2A98659185</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -284,6 +297,39 @@
 			<string>alfred.workflow.action.systemcommand</string>
 			<key>uid</key>
 			<string>96BEB152-706D-407E-882B-113E7E4821F5</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>AltTab</string>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>48</integer>
+				<key>hotmod</key>
+				<integer>1835008</integer>
+				<key>hotstring</key>
+				<string>⇥</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>7693423F-370D-4463-A8AF-AE13E70AD95A</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -407,7 +453,7 @@
 			<key>xpos</key>
 			<real>370</real>
 			<key>ypos</key>
-			<real>335</real>
+			<real>470</real>
 		</dict>
 		<key>29D763E3-99DA-42EC-A264-3AA565CDC0F6</key>
 		<dict>
@@ -436,7 +482,18 @@
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>315</real>
+			<real>450</real>
+		</dict>
+		<key>7693423F-370D-4463-A8AF-AE13E70AD95A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>note</key>
+			<string>restart AltTab</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>310</real>
 		</dict>
 		<key>96BEB152-706D-407E-882B-113E7E4821F5</key>
 		<dict>
@@ -467,7 +524,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>315</real>
+			<real>450</real>
 		</dict>
 		<key>DE7F6025-CE45-4501-953B-1EE1F498066D</key>
 		<dict>
@@ -476,7 +533,7 @@
 			<key>xpos</key>
 			<real>510</real>
 			<key>ypos</key>
-			<real>330</real>
+			<real>465</real>
 		</dict>
 		<key>E5141743-4533-4E28-A3EC-2E2A98659185</key>
 		<dict>
@@ -492,7 +549,7 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>various special apps</string>
+			<string>various background apps</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
