@@ -1,76 +1,56 @@
 #!/usr/bin/env osascript -l JavaScript
 
 // CONFIG
+const dateChoices = [
+	{ title: "Tomorrow", inDays: 1 },
+	{ title: "in 2 days", inDays: 2 },
+	{ title: "in 7 days", inDays: 7 },
+	{ title: "next Monday", inDays: "Monday" },
+	{ title: "next Tuesday", inDays: "Tuesday" },
+	{ title: "next Thursday", inDays: "Thursday" },
+	{ title: "in 2 weeks", inDays: 14 },
+];
+
 /** @type {Intl.DateTimeFormatOptions} */
 const format = { weekday: "short", day: "numeric", month: "long" };
 const lang = "en-GB";
 
 //───────────────────────────────────────────────────────────────────────────
 
-/** @param {number} inXDays */
-function getDisplayDate(inXDays) {
-	const date = new Date();
-	date.setDate(date.getDate() + inXDays);
-	return date.toLocaleDateString(lang, format);
-}
-
-/** @param {"Sunday"|"Monday"|"Tuesday"|"Wednesday"|"Thursday"|"Friday"|"Saturday"} weekday */
+/** @param {string} weekday */
 function daysUntilNext(weekday) {
 	const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 	const weekdayNum = weekdays.indexOf(weekday);
 	const weekdayNumToday = new Date().getDay();
-	const daysUntil = (weekdayNum - weekdayNumToday) % 7;
-	return daysUntil === 0 ? 7 : daysUntil;
+	let daysUntil = (weekdayNum - weekdayNumToday) % 7;
+	if (daysUntil < 1) daysUntil += 7;
+	return daysUntil;
 }
-
-//──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
-	const query = argv[0] || "";
+	const query = (argv[0] || "").trim();
 
-	const dateChoices = [
-		{
-			title: "Tomorrow",
-			subtitle: getDisplayDate(1),
-			arg: 1,
+	const alfredArray = dateChoices.map(
+		(/** @type {AlfredItem&{inDays: number|string}} */ choice) => {
+			choice.variables = { selectedDueDate: choice.title }; // label for notification
+			choice.valid = Boolean(query); // only valid with query
+			const inDays =
+				typeof choice.inDays === "number" ? choice.inDays : daysUntilNext(choice.inDays);
+			choice.arg = inDays;
+
+			// display date for subtitle
+			const date = new Date();
+			date.setDate(date.getDate() + inDays);
+			choice.subtitle = date.toLocaleDateString(lang, format);
+
+			return choice;
 		},
-		{
-			title: "in 2 Days",
-			subtitle: getDisplayDate(2),
-			arg: 2,
-		},
-		{
-			title: "in 7 days",
-			subtitle: getDisplayDate(7),
-			arg: 7,
-		},
-		{
-			title: "next Monday",
-			subtitle: getDisplayDate(daysUntilNext("Monday")),
-			arg: daysUntilNext("Monday"),
-		},
-		{
-			title: "next Tuesday",
-			subtitle: getDisplayDate(daysUntilNext("Tuesday")),
-			arg: daysUntilNext("Tuesday"),
-		},
-		{
-			title: "next Thursday",
-			subtitle: getDisplayDate(daysUntilNext("Thursday")),
-			arg: daysUntilNext("Thursday"),
-		},
-		{
-			title: "in 2 weeks",
-			subtitle: getDisplayDate(14),
-			arg: 14,
-		},
-	];
-	
+	);
 
 	return JSON.stringify({
 		variables: { reminderText: query },
-		items: dateChoices,
+		items: alfredArray,
 	});
 }
