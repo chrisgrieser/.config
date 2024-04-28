@@ -7,16 +7,17 @@ local u = require("lua.utils")
 --------------------------------------------------------------------------------
 
 local config = {
+	activeInMonths = { "May", "Jun", "Jul", "Aug", "Sep" },
+	checkIntervalMins = 30,
+
 	-- INFO right-click on a location in Google Maps to get the latitude/longitude
 	-- roughly Berlin-Tegel (no precise location due to pricacy)
 	latitude = 52,
 	longitude = 13,
 	insideTemp = 25,
-	checkIntervalMins = 30,
-	activeInMonths = { "Aug", "Jul", "Sep" },
 }
 
--- only run in the summer  & at home
+-- GUARD only run in the summer & at home
 local curMonth = tostring(os.date("%b"))
 if not hs.fnutils.contains(config.activeInMonths, curMonth) or not env.isAtHome then return end
 
@@ -63,9 +64,10 @@ end
 
 --------------------------------------------------------------------------------
 -- TRIGGERS
-
+-- 1. systemstart
 if u.isSystemStart() then getOutsideTemp() end
 
+-- 2. every 60 minutes
 M.timer_weatherReminder = hs.timer.doEvery(60 * config.checkIntervalMins, getOutsideTemp):start()
 
 --------------------------------------------------------------------------------

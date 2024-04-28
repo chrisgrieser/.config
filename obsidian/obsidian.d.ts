@@ -51,7 +51,8 @@ declare const view: {
 		setting: {
 			open(): void;
 			openTabById(id: string): void;
-			activeTab: { containerEl: HTMLcon };
+			// biome-ignore lint/suspicious/noExplicitAny: too long…
+			activeTab: any;
 		};
 	};
 };

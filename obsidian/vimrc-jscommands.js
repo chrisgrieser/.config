@@ -18,10 +18,12 @@ function addYamlKey(key, value) {
 		.findIndex((line) => line.startsWith(key + ":"));
 	let msg;
 	if (keyLnum === -1) {
-		lines.splice(frontmatterEnd, 0, yamlLine); // insert at frontmatter
+		// insert at frontmatter
+		lines.splice(frontmatterEnd, 0, yamlLine); 
 		msg = `Added property "${key}" with value "${value}"`;
 	} else {
-		lines[keyLnum] = yamlLine; // update existing key
+		// update existing key
+		lines[keyLnum] = yamlLine; 
 		msg = `Set property "${key}" to "${value}"`;
 	}
 	editor.setValue(lines.join("\n"));
@@ -106,8 +108,13 @@ function openDynamicHighlightsSettings() {
 	const setting = view.app.setting;
 	setting.open();
 	setting.openTabById("obsidian-dynamic-highlights");
+
 	// edit first highlight item
 	setting.activeTab.containerEl.find(".highlighter-container").find(".mod-cta").click();
-	// focus query input
-	setting.activeTab.containerEl.find(".query-wrapper").find("input").setSelectionRange(0, 0);
+
+	// focus query input and move cursor to start
+	const input = setting.activeTab.containerEl.find(".query-wrapper").find("input");
+	input.focus();
+	input.scrollLeft = 0; // scroll to start
+	input.setSelectionRange(1, 1); // move cursor to 2nd position
 }
